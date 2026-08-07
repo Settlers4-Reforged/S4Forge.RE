@@ -127,9 +127,13 @@ void  CTrace::TracePrintHeader(void) {
   v9 = std::ostream::operator<<(uTraces);
   std::operator<<<std::char_traits<char>>(v9, "  ");
   if ( this->spType )
+  {
     return std::operator<<<std::char_traits<char>>((int)byte_40329E0, this->spType);
+  }
   else
+  {
     return std::operator<<<std::char_traits<char>>((int)byte_40329E0, "<unknown object type>");
+  }
 }
 
 

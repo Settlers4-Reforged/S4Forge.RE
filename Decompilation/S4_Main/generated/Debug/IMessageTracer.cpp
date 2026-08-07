@@ -42,12 +42,14 @@ void  IMessageTracer::PushStaticText(char const * message) {
 
   NextTraceMsg = IMessageTracer::GetNextTraceMsg(this);
   if ( NextTraceMsg )
+  {
     NextTraceMsg->message = message;
+  }
 }
 
 
 // address=[0x1311dc0]
-// Decompiled from void __thiscall IMessageTracer::PushFormatedInts(  IMessageTracer *this,  const char *message,  DWORD arg1,  DWORD arg2,  DWORD arg3)
+// Decompiled from void __thiscall IMessageTracer::PushFormatedInts(IMessageTracer *this, const char *message, DWORD arg1, DWORD arg2, DWORD arg3)
 void  IMessageTracer::PushFormatedInts(char const * message, int arg1, int arg2, int arg3) {
   
   IMessageTracer::STraceMsg *NextTraceMsg; // [esp+4h] [ebp-4h]
@@ -64,7 +66,7 @@ void  IMessageTracer::PushFormatedInts(char const * message, int arg1, int arg2,
 
 
 // address=[0x1311e20]
-// Decompiled from void __thiscall IMessageTracer::PushFormatedInts(  IMessageTracer *this,  const char *message,  int arg1,  int arg2,  int arg3,  DWORD arg4)
+// Decompiled from void __thiscall IMessageTracer::PushFormatedInts(IMessageTracer *this, const char *message, int arg1, int arg2, int arg3, DWORD arg4)
 void  IMessageTracer::PushFormatedInts(char const * message, int arg1, int arg2, int arg3, int arg4) {
   
   IMessageTracer::STraceMsg *NextTraceMsg; // [esp+4h] [ebp-4h]
@@ -82,7 +84,7 @@ void  IMessageTracer::PushFormatedInts(char const * message, int arg1, int arg2,
 
 
 // address=[0x1311e80]
-// Decompiled from void __thiscall IMessageTracer::PushFormatedInts(  IMessageTracer *this,  const char *message,  DWORD arg,  DWORD arg2,  DWORD arg3,  DWORD arg4,  DWORD arg5)
+// Decompiled from void __thiscall IMessageTracer::PushFormatedInts(IMessageTracer *this, const char *message, DWORD arg, DWORD arg2, DWORD arg3, DWORD arg4, DWORD arg5)
 void  IMessageTracer::PushFormatedInts(char const * message, int arg, int arg2, int arg3, int arg4, int arg5) {
   
   IMessageTracer::STraceMsg *NextTraceMsg; // [esp+4h] [ebp-4h]
@@ -135,9 +137,13 @@ void  IMessageTracer::PrintMessages(unsigned int a2, unsigned int a3) {
   char buffer[1024]; // [esp+2Ch] [ebp-404h] BYREF
 
   if ( this->m_iMaxMessage < 0 )
+  {
     m_iCurrentMessage = this->m_iCurrentMessage;
+  }
   else
+  {
     m_iCurrentMessage = this->m_iMaxMessage;
+  }
   if ( m_iCurrentMessage >= 0 && this->m_aMessages[0].message )
   {
     memset(buffer, 0, sizeof(buffer));
@@ -152,25 +158,23 @@ void  IMessageTracer::PrintMessages(unsigned int a2, unsigned int a3) {
       v5 = 0;
       m_iCurrentMessage = 0;
     }
-    for ( i = 0; i < 2; ++i )
+    for ( i = 0;
+          i < 2;
+          ++i )
     {
       v3 = *(&m_iCurrentMessage + i);
-      for ( j = *(&m_iCurrentMessage + i); j < v3; ++j )
+      for ( j = *(&m_iCurrentMessage + i);
+            j < v3;
+            ++j )
       {
         message = &this->m_aMessages[j];
         if ( message->message )
         {
-          snprintf(
-            buffer,
-            0x3FFu,
-            message->message,
-            message->arg1,
-            message->arg2,
-            message->arg3,
-            message->arg4,
-            message->arg5);
+          snprintf(buffer, 0x3FFu, message->message, message->arg1, message->arg2, message->arg3, message->arg4, message->arg5);
           if ( buffer[0] )
+          {
             BBSupportTracePrint(a2, buffer);
+          }
         }
       }
     }
@@ -195,10 +199,14 @@ bool  IMessageTracer::RemoveCurrentMsgIfEqual(char const * a2, int a3) {
   int v4; // [esp+0h] [ebp-8h]
 
   if ( this->m_iCurrentMessage < 0 )
+  {
     return 0;
+  }
   v4 = ((unsigned __int16)this->m_iCurrentMessage - 1) & 0x3FFF;
   if ( (const char *)this->m_aMessages[v4].message != a2 || (const char *)this->m_aMessages[v4].arg1 != a3 )
+  {
     return 0;
+  }
   this->m_iCurrentMessage = v4;
   return 1;
 }
@@ -212,7 +220,9 @@ struct IMessageTracer::STraceMsg *  IMessageTracer::GetNextTraceMsg(void) {
 
   v2 = 0;
   if ( this->m_iCurrentMessage < 0 )
+  {
     return v2;
+  }
   v2 = &this->m_aMessages[this->m_iCurrentMessage];
   this->m_iCurrentMessage = ((unsigned __int16)this->m_iCurrentMessage + 1) & 0x3FFF;
   return v2;

@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CMayaCatapult::New(std::istream & a1) {
   
   if ( CMayaCatapult::operator new(0xD8u) )
+  {
     return CMayaCatapult::CMayaCatapult(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -89,7 +93,7 @@ unsigned long  CMayaCatapult::ClassID(void)const {
 // [Decompilation failed for static unsigned long CMayaCatapult::m_iClassID]
 
 // address=[0x153ee60]
-// Decompiled from CMayaCatapult *__thiscall CMayaCatapult::CMayaCatapult(  CMayaCatapult *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
+// Decompiled from CMayaCatapult *__thiscall CMayaCatapult::CMayaCatapult(CMayaCatapult *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
  CMayaCatapult::CMayaCatapult(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CCatapult::CCatapult(this, a2, a3, a4, a5, a6, a7, a8);

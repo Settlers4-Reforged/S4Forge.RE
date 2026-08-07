@@ -3,7 +3,7 @@
 // Definitions for class CAIAgentSuicideMissions
 
 // address=[0x1303ee0]
-// Decompiled from unsigned int __thiscall CAIAgentSuicideMissions::Execute(  CAIAgentSuicideMissions *this,  unsigned int a2,  unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentSuicideMissions::Execute(CAIAgentSuicideMissions *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentSuicideMissions::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -22,7 +22,9 @@ unsigned int  CAIAgentSuicideMissions::Execute(unsigned int a2, unsigned int a3)
   {
     v7 = CAINormalSectorAgent::SectorAI(this);
     v8 = CAISectorAI::TaskForceGroup(v7);
-    for ( i = (CUserToolsManager *)CAITaskForceGroup::FirstTaskForce(v8, 2); i; i = TaskForceGroupMemberOfSameClass )
+    for ( i = (CUserToolsManager *)CAITaskForceGroup::FirstTaskForce(v8, 2);
+          i;
+          i = TaskForceGroupMemberOfSameClass )
     {
       TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
       if ( CAITaskForce::Type(i) == 4 )
@@ -36,16 +38,9 @@ unsigned int  CAIAgentSuicideMissions::Execute(unsigned int a2, unsigned int a3)
             v9 = CAINormalSectorAgent::SectorAI(this);
             CAINormalSectorAI::MoveSquadHome(v9, i);
           }
-          else if ( CAITaskForce::Command(i) != 4
-                 || CAITaskForce::CmdGoal(i) != TargetForSuicideMission
-                 || ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(i)) != 0
-                 || a2 >= CAITaskForce::CmdTimeStamp(i) + 1000 )
+          else if ( CAITaskForce::Command(i) != 4 || CAITaskForce::CmdGoal(i) != TargetForSuicideMission || ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(i)) != 0 || a2 >= CAITaskForce::CmdTimeStamp(i) + 1000 )
           {
-            (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)i + 32))(
-              i,
-              4,
-              TargetForSuicideMission,
-              0);
+            (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)i + 32))(i, 4, TargetForSuicideMission, 0);
           }
         }
         else

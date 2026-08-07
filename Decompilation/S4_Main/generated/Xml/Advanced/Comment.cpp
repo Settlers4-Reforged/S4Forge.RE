@@ -64,7 +64,9 @@ class AdvXMLParser::Comment *  AdvXMLParser::Comment::Clone(class AdvXMLParser::
   }
   v8 = -1;
   if ( (v6 & 1) != 0 )
+  {
     std::string::~string(v7);
+  }
   return v4;
 }
 
@@ -127,16 +129,22 @@ class AdvXMLParser::Comment * __cdecl AdvXMLParser::Comment::Parse(class AdvXMLP
   int v11; // [esp+4Ch] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseString(a1, "<!--") )
+  {
     return 0;
+  }
   AdvXMLParser::Bookmark::Bookmark((AdvXMLParser::Bookmark *)v5, a1);
   while ( !AdvXMLParser::Parser::ParseString(a1, "--") )
   {
     Char = AdvXMLParser::Parser::NextChar(a1);
     if ( !AdvXMLParser::IsXmlChar((AdvXMLParser *)Char) )
+    {
       AdvXMLParser::Parser::SyntaxError(a1, 2);
+    }
   }
   if ( !AdvXMLParser::Parser::ParseChar(a1, 62) )
+  {
     AdvXMLParser::Parser::SyntaxError(a1, 23);
+  }
   std::string::string();
   v11 = 0;
   AdvXMLParser::Bookmark::GetSubString(v10, 3);
@@ -144,9 +152,13 @@ class AdvXMLParser::Comment * __cdecl AdvXMLParser::Comment::Parse(class AdvXMLP
   C = v4;
   LOBYTE(v11) = 1;
   if ( v4 )
+  {
     v8 = AdvXMLParser::Comment::Comment(a2, v10);
+  }
   else
+  {
     v8 = 0;
+  }
   v7 = v8;
   v6 = v8;
   v11 = -1;
@@ -156,7 +168,7 @@ class AdvXMLParser::Comment * __cdecl AdvXMLParser::Comment::Parse(class AdvXMLP
 
 
 // address=[0x2f2d190]
-// Decompiled from void __thiscall AdvXMLParser::Comment::GenerateXML(  AdvXMLParser::Comment *this,  struct AdvXMLParser::GenerateContext *a2)
+// Decompiled from void __thiscall AdvXMLParser::Comment::GenerateXML(AdvXMLParser::Comment *this, struct AdvXMLParser::GenerateContext *a2)
 void  AdvXMLParser::Comment::GenerateXML(class AdvXMLParser::GenerateContext & a2)const {
   
   AdvXMLParser::GenerateContext::GenerateStartTagIndentation(a2);

@@ -14,7 +14,7 @@
 
 
 // address=[0x12f9f10]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeAttack::Execute(  CAIAgentDarkTribeAttack *this,  unsigned int a2,  unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeAttack::Execute(CAIAgentDarkTribeAttack *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -49,14 +49,14 @@ unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int a2, unsigned int a3)
       CAIPlayersScriptVars::operator[](v21);
       v15 = CAIPlayerScriptVars::operator[](0);
       if ( v15 <= 0 )
+      {
         return CAIAgent::ExecuteResult(0, 0);
+      }
       CAIPlayersScriptVars::operator[](v21);
       v14 = CAIPlayerScriptVars::operator[](1);
       v13 = IAIEnvironment::MinutesToTicks(v14);
       v17 = IAIEnvironment::TickCounter();
-      if ( (unsigned int)v17 <= *((_DWORD *)v22 + 15)
-        || v17 <= v13
-        || !CAIAgentDarkTribeAttack::ShamanAttackTaskForceAvailable((CAIAgentDarkTribeAttack *)v22) )
+      if ( (unsigned int)v17 <= *((_DWORD *)v22 + 15) || v17 <= v13 || !CAIAgentDarkTribeAttack::ShamanAttackTaskForceAvailable((CAIAgentDarkTribeAttack *)v22) )
       {
         return CAIAgent::ExecuteResult(0, 0);
       }
@@ -66,26 +66,28 @@ unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int a2, unsigned int a3)
     case 1:
       v23 = CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable((CAIAgentDarkTribeAttack *)v22, 0);
       if ( !CAIAgentDarkTribeAttack::ShamanAttackTaskForceAvailable((CAIAgentDarkTribeAttack *)v22) )
+      {
         return CAIAgent::ExecuteResult(0, 0);
+      }
       v6 = CAIDarkTribeSectorAgent::SectorAI((CAIDarkTribeSectorAgent *)v22);
       *((_DWORD *)v22 + 13) = CAISectorAI::BaseX(v6);
       v7 = CAIDarkTribeSectorAgent::SectorAI((CAIDarkTribeSectorAgent *)v22);
       *((_DWORD *)v22 + 14) = CAISectorAI::BaseY(v7);
-      if ( !(**(unsigned __int8 (__thiscall ***)(void *, int, _DWORD, char *, char *, bool))off_3D7A6A8)(
-              off_3D7A6A8,
-              v21,
-              *((_DWORD *)v22 + 11),
-              (char *)v22 + 52,
-              (char *)v22 + 56,
-              v23) )
+      if ( !(**(unsigned __int8 (__thiscall ***)(void *, int, _DWORD, char *, char *, bool))off_3D7A6A8)(off_3D7A6A8, v21, *((_DWORD *)v22 + 11), (char *)v22 + 52, (char *)v22 + 56, v23) )
+      {
         return CAIAgent::ExecuteResult(0, 0);
+      }
       if ( v23 )
       {
         if ( !(unsigned __int8)CAIAgentDarkTribeAttack::CheckIfShamansAreOnBoard(v22) )
+        {
           return CAIAgent::ExecuteResult(0, 0);
+        }
         *((_DWORD *)v22 + 16) = CAIAgentDarkTribeAttack::OrderManakopterToPosition((CAIAgentDarkTribeAttack *)v22, 1);
         if ( *((int *)v22 + 16) <= 0 )
+        {
           return CAIAgent::ExecuteResult(0, 0);
+        }
         CTrace::Print("DarkAttack %i: MK: CHECK -> WAIT", v21);
         *((_DWORD *)v22 + 10) = 2;
         return CAIAgent::ExecuteResult(0, 0);
@@ -105,12 +107,13 @@ unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int a2, unsigned int a3)
         return CAIAgent::ExecuteResult(0, 0);
       }
     case 2:
-      if ( *((int *)v22 + 16) <= 0
-        || !CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable((CAIAgentDarkTribeAttack *)v22, 0) )
+      if ( *((int *)v22 + 16) <= 0 || !CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable((CAIAgentDarkTribeAttack *)v22, 0) )
       {
         v16 = CAIAgentDarkTribeAttack::CheckIfPositionIsReached((CAIAgentDarkTribeAttack *)v22);
         if ( v16 < 0 )
+        {
           return CAIAgent::ExecuteResult(0, 0);
+        }
         if ( v16 > 0 && CAIAgentDarkTribeAttack::OrderShamanTaskForcesToAttackPosition((CAIAgentDarkTribeAttack *)v22) )
         {
           *((_DWORD *)v22 + 10) = 4;
@@ -125,7 +128,9 @@ unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int a2, unsigned int a3)
         return CAIAgent::ExecuteResult(0, 0);
       }
       if ( !CAIAgentDarkTribeAttack::CheckIfManakopterReachedPosition((CAIAgentDarkTribeAttack *)v22) )
+      {
         return CAIAgent::ExecuteResult(0, 0);
+      }
       CAIAgentDarkTribeAttack::OrderManakopterUnload((CAIAgentDarkTribeAttack *)v22, 1);
       *((_DWORD *)v22 + 10) = 3;
       CTrace::Print("DarkAttack %i: MK: WAIT -> INIT_ATTACK", v21);
@@ -136,8 +141,7 @@ unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int a2, unsigned int a3)
       *((_DWORD *)v22 + 10) = 4;
       return CAIAgent::ExecuteResult(0, 0);
     case 4:
-      if ( *((int *)v22 + 16) > 0
-        && CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable((CAIAgentDarkTribeAttack *)v22, 0) )
+      if ( *((int *)v22 + 16) > 0 && CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable((CAIAgentDarkTribeAttack *)v22, 0) )
       {
         if ( CAIAgentDarkTribeAttack::CheckShamanTaskForcesTargets(v22) <= 0 )
         {
@@ -158,7 +162,9 @@ unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int a2, unsigned int a3)
       return CAIAgent::ExecuteResult(0, 0);
     case 5:
       if ( *((int *)v22 + 16) <= 0 || !(unsigned __int8)CAIAgentDarkTribeAttack::CheckIfShamansAreOnBoard(v22) )
+      {
         return CAIAgent::ExecuteResult(0, 0);
+      }
       v8 = CAIDarkTribeSectorAgent::SectorAI((CAIDarkTribeSectorAgent *)v22);
       *((_DWORD *)v22 + 13) = CAISectorAI::BaseX(v8);
       v9 = CAIDarkTribeSectorAgent::SectorAI((CAIDarkTribeSectorAgent *)v22);
@@ -215,13 +221,10 @@ unsigned int  CAIAgentDarkTribeAttack::Execute(unsigned int a2, unsigned int a3)
       }
       return CAIAgent::ExecuteResult(0, 0);
     default:
-      if ( BBSupportDbgReportF(
-             1,
-             "AI\\AI_AgentDarkAttack.cpp",
-             1344,
-             "CAIAgentDarkTribeAttack::Execute(): Invalid state %i!",
-             *((_DWORD *)v22 + 10)) == 1 )
+      if ( BBSupportDbgReportF(1, "AI\\AI_AgentDarkAttack.cpp", 1344, "CAIAgentDarkTribeAttack::Execute(): Invalid state %i!", *((_DWORD *)v22 + 10)) == 1 )
+      {
         __debugbreak();
+      }
       CAIAgentDarkTribeAttack::RemoveMissionBit((CAIAgentDarkTribeAttack *)v22);
       CAIAgentDarkTribeAttack::ResetAttackState((CAIAgentDarkTribeAttack *)v22);
       return CAIAgent::ExecuteResult(0, 0);
@@ -247,9 +250,13 @@ void  CAIAgentDarkTribeAttack::Load(class IS4Chunk & a2) {
   *((_DWORD *)this + 14) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
   *((_DWORD *)this + 16) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
   if ( v3 <= 1 )
+  {
     *((_DWORD *)this + 15) = 0;
+  }
   else
+  {
     *((_DWORD *)this + 15) = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
+  }
   return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1516302335);
 }
 
@@ -280,15 +287,21 @@ void  CAIAgentDarkTribeAttack::AttackWithShamans(int a2, int a3, bool a4) {
   if ( a3 >= 0 )
   {
     if ( !a3 )
+    {
       a3 = 2;
+    }
     if ( !a2 )
+    {
       a2 = 1;
+    }
     if ( !*((_DWORD *)this + 10) && *((_DWORD *)this + 12) < a3 )
     {
       *((_DWORD *)this + 11) = a2;
       *((_DWORD *)this + 12) = a3;
       if ( a4 )
+      {
         CAIAgent::UpdateScheduleTimeIfLess(this, 0);
+      }
       if ( CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable(this, 0) )
       {
         if ( CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(this, 1, 0) )
@@ -372,11 +385,15 @@ bool  CAIAgentDarkTribeAttack::ShamanAttackTaskForceAvailable(void)const {
 
   v1 = CAIDarkTribeSectorAgent::SectorAI(this);
   v2 = CAISectorAI::TaskForceGroup(v1);
-  for ( i = (pairNode *)CAITaskForceGroup::FirstTaskForce(v2, 7); i; i = TaskForceGroupMemberOfSameClass )
+  for ( i = (pairNode *)CAITaskForceGroup::FirstTaskForce(v2, 7);
+        i;
+        i = TaskForceGroupMemberOfSameClass )
   {
     TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
     if ( CAITaskForce::NumberOfEntities(i) > 0 && CAITaskForce::AssociatedTaskForce(i) )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -393,15 +410,21 @@ bool  CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable(bool a2)const {
 
   v2 = CAIDarkTribeSectorAgent::SectorAI(this);
   v3 = CAISectorAI::TaskForceGroup(v2);
-  for ( i = (pairNode *)CAITaskForceGroup::FirstTaskForce(v3, 8); i; i = TaskForceGroupMemberOfSameClass )
+  for ( i = (pairNode *)CAITaskForceGroup::FirstTaskForce(v3, 8);
+        i;
+        i = TaskForceGroupMemberOfSameClass )
   {
     TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
     if ( CAITaskForce::NumberOfEntities(i) > 0 )
     {
       if ( !a2 )
+      {
         return 1;
+      }
       if ( CAITaskForce::Status(i) == 10 )
+      {
         return 1;
+      }
     }
   }
   return 0;
@@ -444,7 +467,9 @@ void  CAIAgentDarkTribeAttack::OrderShamanTaskForcesHome(enum T_AI_TASK_FORCE_CM
   {
     result = CAITaskForceClassWalk::NextTaskForce(v6, a2);
     if ( !(_BYTE)result )
+    {
       break;
+    }
     v8 = CAITaskForceClassWalk::CurrentTaskForce(v6);
     (*(void (__thiscall **)(int, int, int, _DWORD))(*(_DWORD *)v8 + 32))(v8, 7, v7, 0);
   }
@@ -453,7 +478,7 @@ void  CAIAgentDarkTribeAttack::OrderShamanTaskForcesHome(enum T_AI_TASK_FORCE_CM
 
 
 // address=[0x12faa30]
-// Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(  CAIDarkTribeSectorAgent *this,  bool a2,  char a3)
+// Decompiled from int __thiscall CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(CAIDarkTribeSectorAgent *this, bool a2, char a3)
 int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(bool a2, bool a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -501,7 +526,9 @@ int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(bool a2, bool a3
     {
       v5 = (CUserToolsManager *)CAITaskForceClassWalk::CurrentTaskForce(v16);
       if ( (CAITaskForce::Flags(v5) & 0x20000000) != 0 )
+      {
         v33 = (CUserToolsManager *)CAITaskForceClassWalk::CurrentTaskForce(v16);
+      }
     }
   }
   else
@@ -516,7 +543,9 @@ int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(bool a2, bool a3
         {
           v6 = (pairNode *)CAITaskForce::AssociatedTaskForce(v29);
           if ( CAITaskForce::NumberOfEntities(v6) > 0 )
+          {
             v31 += 10;
+          }
         }
       }
       if ( v31 > v25 )
@@ -527,9 +556,13 @@ int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(bool a2, bool a3
     }
   }
   if ( !v33 )
+  {
     return v26;
+  }
   if ( !CAITaskForce::GetPositionOfFirstEntity(v33, &v21, &v22) )
+  {
     return v26;
+  }
   v15 = v22;
   v14 = v21;
   v7 = CAIDarkTribeSectorAgent::SectorAI(v24);
@@ -537,23 +570,22 @@ int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(bool a2, bool a3
   v9 = CAIPlayerAI::PlayerId(v8);
   NearestManakopter = IAIEnvironment::EntityFindNearestManakopter(v9, v14, v15, a2);
   if ( !NearestManakopter )
+  {
     return v26;
+  }
   v34 = 0;
   if ( a3 )
   {
     EntityInfo = IAIEnvironment::EntityGetEntityInfo(NearestManakopter, 0);
     v19 = CAIEntityInfo::TaskForce(EntityInfo);
     if ( CAITaskForce::Status(v19) == 10 && (CAITaskForce::Flags(v33) & 0x20000000) != 0 )
+    {
       v34 = 1;
+    }
   }
   else
   {
-    if ( (CAITaskForce::Flags(v33) & 0x20000000) != 0
-      && BBSupportDbgReport(
-           2,
-           "AI\\AI_AgentDarkAttack.cpp",
-           641,
-           "!(pTaskForce->Flags() & AI_TASK_FORCE_FLAG_ON_MISSION )") == 1 )
+    if ( (CAITaskForce::Flags(v33) & 0x20000000) != 0 && BBSupportDbgReport(2, "AI\\AI_AgentDarkAttack.cpp", 641, "!(pTaskForce->Flags() & AI_TASK_FORCE_FLAG_ON_MISSION )") == 1 )
     {
       __debugbreak();
     }
@@ -561,9 +593,13 @@ int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(bool a2, bool a3
   }
   ManakopterPtr = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, NearestManakopter);
   if ( IFlyingEntity::FlyingFlagBits(ManakopterPtr, 1) )
+  {
     v34 = 0;
+  }
   if ( !v34 )
+  {
     return v26;
+  }
   (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)v33 + 32))(v33, 10, NearestManakopter, 0);
   v32 = (pairNode *)CAITaskForce::AssociatedTaskForce(v33);
   if ( v32 )
@@ -605,7 +641,9 @@ int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToSneakUpPosition(void) {
 
   v8 = this;
   if ( !CAIAgentDarkTribeAttack::CheckShamanAttackPosition(this) )
+  {
     return 0;
+  }
   v5 = IAIEnvironment::PackXYFast(*((_DWORD *)v8 + 13), *((_DWORD *)v8 + 14));
   v7 = 0;
   v2 = CAIDarkTribeSectorAgent::SectorAI(v8);
@@ -618,7 +656,9 @@ int  CAIAgentDarkTribeAttack::OrderShamanTaskForcesToSneakUpPosition(void) {
     {
       (*(void (__thiscall **)(int, int, int, _DWORD))(*(_DWORD *)v6 + 32))(v6, 3, v5, 0);
       if ( ++v7 >= *((_DWORD *)v8 + 12) )
+      {
         return v7;
+      }
     }
   }
   return v7;
@@ -702,11 +742,15 @@ int  CAIAgentDarkTribeAttack::OrderManakopterToPosition(bool a2) {
   IAIEnvironment::GetNearestNoneBlockedPosition((int *)&v30, (int *)&v23);
   v24 = IAIEnvironment::WorldSectorId((int)v30, (int)v23);
   if ( v24 <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentDarkAttack.cpp", 434, "iTargetExSectorId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v19 = 0;
   v2 = CAIDarkTribeSectorAgent::SectorAI(this);
   v3 = CAISectorAI::TaskForceGroup(v2);
-  for ( i = (CAITaskForce *)CAITaskForceGroup::FirstTaskForce(v3, 8); i; i = TaskForceGroupMemberOfSameClass )
+  for ( i = (CAITaskForce *)CAITaskForceGroup::FirstTaskForce(v3, 8);
+        i;
+        i = TaskForceGroupMemberOfSameClass )
   {
     TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
     v29 = 0;
@@ -740,7 +784,9 @@ int  CAIAgentDarkTribeAttack::OrderManakopterToPosition(bool a2) {
           if ( v4 == v24 && (int)ITiling::CatapultSectorId(v20) > 0 && !CWorldManager::FlagBits(v20, 8u) )
           {
             v32 = 1;
-            for ( j = 0; j < 4; ++j )
+            for ( j = 0;
+                  j < 4;
+                  ++j )
             {
               v17 = (int)&v26[v34[j]];
               v18 = (int)&v25[v33[j]];
@@ -749,7 +795,9 @@ int  CAIAgentDarkTribeAttack::OrderManakopterToPosition(bool a2) {
                 v16 = CWorldManager::Index(v17, v18);
                 v5 = CWorldManager::SectorId(v16);
                 if ( v5 != v24 || !ITiling::CatapultSectorId(v16) )
+                {
                   v32 = 0;
+                }
               }
             }
             if ( v32 )
@@ -768,8 +816,7 @@ int  CAIAgentDarkTribeAttack::OrderManakopterToPosition(bool a2) {
         v31 = 2;
         v14 = (struct _Cnd_internal_imp_t *)((char *)v30 - 2);
         v15 = (struct _Cnd_internal_imp_t *)((char *)v30 + 2);
-        if ( !IAIEnvironment::WorldInWorld((char *)v30 - 2, (char *)v30 + 2)
-          || (v6 = IAIEnvironment::WorldSectorId((int)v14, (int)v15), v6 != v24) )
+        if ( !IAIEnvironment::WorldInWorld((char *)v30 - 2, (char *)v30 + 2) || (v6 = IAIEnvironment::WorldSectorId((int)v14, (int)v15), v6 != v24) )
         {
           v29 = 0;
           v31 = 0;
@@ -805,9 +852,13 @@ int  CAIAgentDarkTribeAttack::OrderManakopterUnload(bool a2) {
     ++v7;
     v8 = CAITaskForceClassWalk::CurrentTaskForce(v5);
     if ( a2 )
+    {
       (*(void (__thiscall **)(int, int, _DWORD, _DWORD))(*(_DWORD *)v8 + 32))(v8, 12, 0, 0);
+    }
     else
+    {
       (*(void (__thiscall **)(int, int, _DWORD, _DWORD))(*(_DWORD *)v8 + 32))(v8, 11, 0, 0);
+    }
   }
   return v7;
 }
@@ -845,7 +896,9 @@ int  CAIAgentDarkTribeAttack::OrderShamansToImmediateAttack(void) {
       v4 = CAITaskForceClassWalk::CurrentTaskForce(v6);
       v10 = CAITaskForce::AssociatedTaskForce(v4);
       if ( v10 )
+      {
         (*(void (__thiscall **)(int, int, _DWORD, _DWORD))(*(_DWORD *)v10 + 32))(v10, 6, 0, 0);
+      }
     }
   }
   return v9;
@@ -877,7 +930,9 @@ int  CAIAgentDarkTribeAttack::CheckIfPositionIsReached(void) {
       ++v8;
       v4 = CAITaskForceClassWalk::CurrentTaskForce(v6);
       if ( CAITaskForce::Status(v4) == 2 )
+      {
         return -1;
+      }
     }
   }
   return v8;
@@ -902,7 +957,9 @@ bool  CAIAgentDarkTribeAttack::CheckIfManakopterReachedPosition(void) {
   {
     v5 = CAITaskForceClassWalk::CurrentTaskForce(v4);
     if ( CAITaskForce::Status(v5) != 1 )
+    {
       return 0;
+    }
   }
   return 1;
 }
@@ -933,12 +990,16 @@ bool  CAIAgentDarkTribeAttack::CheckIfShamansAreOnBoard(void) {
     if ( (CAITaskForce::Flags(v11) & 0x20000000) != 0 )
     {
       if ( CAITaskForce::Status(v11) != 8 )
+      {
         return 0;
+      }
       v10 = CAITaskForce::AssociatedTaskForce(v11);
       if ( v10 )
       {
         if ( CAITaskForce::Status(v10) != 8 )
+        {
           return 0;
+        }
       }
     }
   }
@@ -949,7 +1010,9 @@ bool  CAIAgentDarkTribeAttack::CheckIfShamansAreOnBoard(void) {
   {
     v8 = (CUserToolsManager *)CAITaskForceClassWalk::CurrentTaskForce(v7);
     if ( (CAITaskForce::Flags(v8) & 0x20000000) != 0 && CAITaskForce::Status(v8) != 8 )
+    {
       return 0;
+    }
   }
   return 1;
 }
@@ -1008,14 +1071,15 @@ int  CAIAgentDarkTribeAttack::CheckShamanTaskForcesTargets(void) {
   CAITaskForceClassWalk::CAITaskForceClassWalk(v18, v4, 7);
   v35 = 0;
   if ( !(unsigned __int8)CAIAgentDarkTribeAttack::CheckIfReadyForReturn(v37) )
+  {
     goto LABEL_12;
+  }
   if ( *((int *)v37 + 16) > 0 && CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(v37, 0, 1) )
   {
     *((_DWORD *)v37 + 10) = 5;
     return 1;
   }
-  if ( CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable((CAIAgentDarkTribeAttack *)v37, 1)
-    && (unsigned __int8)CAIAgentDarkTribeAttack::CheckIfShamansAreOnBoard(v37) )
+  if ( CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable((CAIAgentDarkTribeAttack *)v37, 1) && (unsigned __int8)CAIAgentDarkTribeAttack::CheckIfShamansAreOnBoard(v37) )
   {
     v6 = CAIDarkTribeSectorAgent::SectorAI((CAIDarkTribeSectorAgent *)v37);
     v7 = CAISectorAI::BaseX(v6);
@@ -1037,21 +1101,27 @@ int  CAIAgentDarkTribeAttack::CheckShamanTaskForcesTargets(void) {
 LABEL_12:
     v29 = 9;
     if ( *((int *)v37 + 16) > 0 )
+    {
       v29 = 14;
+    }
     while ( (unsigned __int8)CAITaskForceClassWalk::NextTaskForce(v18, v29) )
     {
       ++v35;
       v36 = (CDockState *)CAITaskForceClassWalk::CurrentTaskForce(v18);
       PositionOfFirstEntity = CAITaskForce::GetPositionOfFirstEntity(v36, &v24, &v25);
       if ( !PositionOfFirstEntity && BBSupportDbgReport(2, "AI\\AI_AgentDarkAttack.cpp", 951, "bGetPositionOk") == 1 )
+      {
         __debugbreak();
+      }
       v39 = 0;
       if ( CAITaskForce::Status(v36) == 2 || *((_DWORD *)v37 + 16) )
       {
         v10 = CAITaskForce::CmdTimeStamp(v36);
         v11 = IAIEnvironment::Rand(v17);
         if ( v10 + v11 % 0x80 + 185 < v22 )
+        {
           v39 = 1;
+        }
       }
       else
       {
@@ -1063,18 +1133,13 @@ LABEL_12:
         PilePtr = CPileMgr::GetPilePtr(v28);
         if ( PilePtr )
         {
-          if ( (v27 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr), v27 != 20) && v27 != 7
-            || !(unsigned __int8)CPile::GoodAvailable(PilePtr) )
+          if ( (v27 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr), v27 != 20) && v27 != 7 || !(unsigned __int8)CPile::GoodAvailable(PilePtr) )
           {
             v39 = 1;
           }
         }
       }
-      else if ( !(*(int (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)off_3D7A6A8 + 12))(
-                   off_3D7A6A8,
-                   (char *)v37 + 52,
-                   (char *)v37 + 56,
-                   2) )
+      else if ( !(*(int (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)off_3D7A6A8 + 12))(off_3D7A6A8, (char *)v37 + 52, (char *)v37 + 56, 2) )
       {
         v39 = 1;
       }
@@ -1094,11 +1159,7 @@ LABEL_12:
             MostRequiredGood = CManakopterHallRole::GetMostRequiredGood(v20);
             if ( MostRequiredGood )
             {
-              if ( (*(int (__thiscall **)(void *, int *, int *, int))(*(_DWORD *)off_3D7A6A8 + 8))(
-                     off_3D7A6A8,
-                     &v33,
-                     &v34,
-                     MostRequiredGood) )
+              if ( (*(int (__thiscall **)(void *, int *, int *, int))(*(_DWORD *)off_3D7A6A8 + 8))(off_3D7A6A8, &v33, &v34, MostRequiredGood) )
               {
                 v40 = 1;
               }
@@ -1106,12 +1167,9 @@ LABEL_12:
           }
         }
         if ( !v40 )
-          v40 = (*(int (__thiscall **)(void *, int, int, int *, int *))(*(_DWORD *)off_3D7A6A8 + 4))(
-                  off_3D7A6A8,
-                  v30,
-                  32,
-                  &v33,
-                  &v34);
+        {
+          v40 = (*(int (__thiscall **)(void *, int, int, int *, int *))(*(_DWORD *)off_3D7A6A8 + 4))(off_3D7A6A8, v30, 32, &v33, &v34);
+        }
         if ( !v40 )
         {
           v14 = CAITaskForce::CmdGoal(v36);
@@ -1119,27 +1177,27 @@ LABEL_12:
           v15 = CAITaskForce::CmdGoal(v36);
           v34 = IAIEnvironment::UnpackYFast(v15);
           if ( (int)IAIEnvironment::GridDistance(v33 - v24, v34 - v25) > 8 )
-            v40 = (*(int (__thiscall **)(void *, int, int, int *, int *))(*(_DWORD *)off_3D7A6A8 + 4))(
-                    off_3D7A6A8,
-                    v30,
-                    32,
-                    &v33,
-                    &v34);
+          {
+            v40 = (*(int (__thiscall **)(void *, int, int, int *, int *))(*(_DWORD *)off_3D7A6A8 + 4))(off_3D7A6A8, v30, 32, &v33, &v34);
+          }
         }
         if ( v40 )
         {
           v23 = IAIEnvironment::PackXYFast(v33, v34);
           if ( *((_DWORD *)v37 + 16) )
+          {
             (*(void (__thiscall **)(CDockState *, int, int, _DWORD))(*(_DWORD *)v36 + 32))(v36, 14, v23, 0);
+          }
           else
+          {
             (*(void (__thiscall **)(CDockState *, int, int, _DWORD))(*(_DWORD *)v36 + 32))(v36, 9, v23, 0);
+          }
         }
         else
         {
           v16 = CAIDarkTribeSectorAgent::SectorAI((CAIDarkTribeSectorAgent *)v37);
           v19 = CAISectorAI::BasePackedXY(v16);
-          if ( *((int *)v37 + 16) > 0
-            && CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable((CAIAgentDarkTribeAttack *)v37, 0) )
+          if ( *((int *)v37 + 16) > 0 && CAIAgentDarkTribeAttack::ManakopterTaskForceAvailable((CAIAgentDarkTribeAttack *)v37, 0) )
           {
             CAIAgentDarkTribeAttack::OrderShamanTaskForcesToManakopter(v37, 0, 1);
             *((_DWORD *)v37 + 10) = 5;
@@ -1185,7 +1243,9 @@ bool  CAIAgentDarkTribeAttack::CheckIfReadyForReturn(void) {
     {
       v4 = CAITaskForceClassWalk::CurrentTaskForce(v6);
       if ( CAITaskForce::Status(v4) != 10 )
+      {
         return 0;
+      }
     }
   }
   return 1;
@@ -1212,12 +1272,16 @@ void  CAIAgentDarkTribeAttack::SetMissionBit(enum T_AI_TASK_FORCE_CMD a2) {
   {
     result = CAITaskForceClassWalk::NextTaskForce(v6, a2);
     if ( !(_BYTE)result )
+    {
       break;
+    }
     v5 = (CAITaskForce *)CAITaskForceClassWalk::CurrentTaskForce(v6);
     CAITaskForce::SetFlagBit(v5, 0x20000000u);
     v8 = (CAITaskForce *)CAITaskForceClassWalk::CurrentTaskForce(v6);
     if ( v8 )
+    {
       CAITaskForce::SetFlagBit(v8, 0x20000000u);
+    }
   }
   return result;
 }
@@ -1244,13 +1308,17 @@ void  CAIAgentDarkTribeAttack::RemoveMissionBit(void) {
   {
     result = CAITaskForceClassWalk::NextTaskForce((CAITaskForceClassWalk *)v6);
     if ( !result )
+    {
       break;
+    }
     v4 = (CAITaskForce *)CAITaskForceClassWalk::CurrentTaskForce(v6);
     CAITaskForce::ClearFlagBit(v4, 0x20000000u);
     v5 = CAITaskForceClassWalk::CurrentTaskForce(v6);
     v8 = (CAITaskForce *)CAITaskForce::AssociatedTaskForce(v5);
     if ( v8 )
+    {
       CAITaskForce::ClearFlagBit(v8, 0x20000000u);
+    }
   }
   return result;
 }

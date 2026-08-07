@@ -134,7 +134,7 @@ void  CFile::Open(wchar_t const * FileName, unsigned int a3, char * Str, int a5)
 
 
 // address=[0x2f012d0]
-// Decompiled from size_t __thiscall CFile::Read(  struct CFile *this,  void *Buffer,  size_t ElementSize,  size_t ElementCount,  int a5,  int a6)
+// Decompiled from size_t __thiscall CFile::Read(struct CFile *this, void *Buffer, size_t ElementSize, size_t ElementCount, int a5, int a6)
 unsigned int  CFile::Read(void * Buffer, int ElementSize, int ElementCount, char * a5, int a6) {
   
   return j__fread(Buffer, ElementSize, ElementCount, this->m_hFile);
@@ -142,7 +142,7 @@ unsigned int  CFile::Read(void * Buffer, int ElementSize, int ElementCount, char
 
 
 // address=[0x2f01300]
-// Decompiled from unsigned int __thiscall CFile::Write(  struct CFile *this,  const void *Buffer,  int ElementSize,  int ElementCount,  char *a5,  int a6)
+// Decompiled from unsigned int __thiscall CFile::Write(struct CFile *this, const void *Buffer, int ElementSize, int ElementCount, char *a5, int a6)
 unsigned int  CFile::Write(void const * a1, int a2, int a3, char * a4, int a5) {
   
   return j__fwrite(Buffer, ElementSize, ElementCount, this->m_hFile);
@@ -157,7 +157,9 @@ int  CFile::Seek(int Offset, int Origin, char * a4, int a5) {
 
   v6 = j__fseek(this->m_hFile, Offset, Origin);
   if ( Origin == 1 )
+  {
     j__ftell(this->m_hFile);
+  }
   return v6;
 }
 
@@ -209,10 +211,14 @@ int  CFile::Close(char * a2, int a3) {
   void **v4; // [esp+0h] [ebp-Ch]
 
   if ( !this->m_hFile )
+  {
     return 0;
+  }
   v4 = (void **)CFileMgr::CheckValidFilePtr(this->m_hFile, "CFile::Close", a2, a3);
   if ( v4 )
+  {
     CFileMgr::RemoveFromList(v4);
+  }
   result = j__fclose(this->m_hFile);
   this->m_hFile = 0;
   return result;
@@ -242,13 +248,21 @@ struct _iobuf *  CFile::GetFile(void) {
 void  CFile::OpenMaskToCWStr(unsigned int a2, std::wstring & _spFileMode) {
   
   if ( (a2 & CFile_APPEND) != 0 )
+  {
     std::wstring::operator+=(_spFileMode, (wchar_t *)L"a");
+  }
   if ( (a2 & CFile_READ) != 0 )
+  {
     std::wstring::operator+=(_spFileMode, (wchar_t *)L"r");
+  }
   if ( (a2 & CFile_WRITE) != 0 )
+  {
     std::wstring::operator+=(_spFileMode, (wchar_t *)L"w");
+  }
   if ( (a2 & CFile_SPECIAL) != 0 )
+  {
     std::wstring::operator+=(_spFileMode, (wchar_t *)L"+");
+  }
   if ( (a2 & CFile_TEXT) != 0 )
   {
     std::wstring::operator+=(_spFileMode, (wchar_t *)L"t");

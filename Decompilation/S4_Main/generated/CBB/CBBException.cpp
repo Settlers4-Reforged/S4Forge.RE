@@ -4,7 +4,7 @@
 // Definitions for class CBBException
 
 // address=[0x1313e80]
-// Decompiled from CBBException *__thiscall CBBException::CBBException(  CBBException *this,  const struct boost::exception_detail::clone_base *a2)
+// Decompiled from CBBException *__thiscall CBBException::CBBException(CBBException *this, const struct boost::exception_detail::clone_base *a2)
  CBBException::CBBException(class CBBException const & a2) {
   
   *(_DWORD *)this = &CBBException::_vftable_;

@@ -50,8 +50,7 @@ int  CDirCache::Count(void)const {
 // Decompiled from void __thiscall CDirCache::PopBack(CDirCache *this)
 void  CDirCache::PopBack(void) {
   
-  if ( !this->m_iCount
-    && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\AStar.h", 397, string__63) == 1 )
+  if ( !this->m_iCount && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\AStar.h", 397, string__63) == 1 )
   {
     __debugbreak();
   }

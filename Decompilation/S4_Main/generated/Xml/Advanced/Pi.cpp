@@ -54,7 +54,9 @@ class AdvXMLParser::Pi *  AdvXMLParser::Pi::Clone(class AdvXMLParser::NodeContai
   }
   v10 = -1;
   if ( (v8 & 1) != 0 )
+  {
     std::string::~string(v9);
+  }
   return v5;
 }
 
@@ -117,18 +119,24 @@ class AdvXMLParser::Pi * __cdecl AdvXMLParser::Pi::Parse(class AdvXMLParser::Par
   int v11; // [esp+68h] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseString(a1, "<?") )
+  {
     return 0;
+  }
   std::string::string();
   v11 = 0;
   if ( !(unsigned __int8)AdvXMLParser::Pi::ParsePITarget(a1, v9) )
+  {
     AdvXMLParser::Parser::SyntaxError(a1, 24);
+  }
   AdvXMLParser::Parser::ParseSpaces(a1);
   AdvXMLParser::Bookmark::Bookmark((AdvXMLParser::Bookmark *)v4, a1);
   while ( !AdvXMLParser::Parser::ParseString(a1, "?>") )
   {
     Char = AdvXMLParser::Parser::NextChar(a1);
     if ( !AdvXMLParser::IsXmlChar((AdvXMLParser *)Char) )
+    {
       AdvXMLParser::Parser::SyntaxError(a1, 2);
+    }
   }
   std::string::string();
   LOBYTE(v11) = 1;
@@ -136,9 +144,13 @@ class AdvXMLParser::Pi * __cdecl AdvXMLParser::Pi::Parse(class AdvXMLParser::Par
   C = operator new(0x40u);
   LOBYTE(v11) = 2;
   if ( C )
+  {
     v7 = AdvXMLParser::Pi::Pi(C, (int)a2, (int)v9, (int)v10);
+  }
   else
+  {
     v7 = 0;
+  }
   v6 = v7;
   v5 = v7;
   LOBYTE(v11) = 0;
@@ -182,18 +194,28 @@ bool __cdecl AdvXMLParser::Pi::ParsePITarget(class AdvXMLParser::Parser & a1, st
   unsigned __int8 *v5; // eax
 
   if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(a2) )
+  {
     return 0;
+  }
   if ( std::string::length(a2) != 3 )
+  {
     return 1;
+  }
   v3 = (unsigned __int8 *)std::string::operator[](0);
   if ( AdvXMLParser::LowCase((AdvXMLParser *)*v3) != 120 )
+  {
     return 1;
+  }
   v4 = (unsigned __int8 *)std::string::operator[](1);
   if ( AdvXMLParser::LowCase((AdvXMLParser *)*v4) != 109 )
+  {
     return 1;
+  }
   v5 = (unsigned __int8 *)std::string::operator[](2);
   if ( AdvXMLParser::LowCase((AdvXMLParser *)*v5) == 108 )
+  {
     AdvXMLParser::Parser::SyntaxError(a1, 25);
+  }
   return 1;
 }
 

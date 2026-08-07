@@ -10,7 +10,9 @@ void  CNeighborRelIndices::Init(int a2) {
   int v3; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v3 = g_sNeighborPoints[2 * i] + a2 * MEMORY[0x37D8C0C][2 * i];
     *((_DWORD *)this + i) = v3;

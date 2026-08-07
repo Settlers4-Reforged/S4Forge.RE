@@ -47,7 +47,9 @@ int  CShipList::Nearest(int a2) {
   v7 = 10;
   v6 = 10;
   v8 = 0;
-  for ( i = CShipList::NumberOfShips(this); v8 < i; i = CShipList::NumberOfShips(this) )
+  for ( i = CShipList::NumberOfShips(this);
+        v8 < i;
+        i = CShipList::NumberOfShips(this) )
   {
     v3 = CShipList::ShipInfo(this, v8);
     v9 = Y16X16::DistanceFast(a2, *(_DWORD *)v3);
@@ -56,7 +58,9 @@ int  CShipList::Nearest(int a2) {
       if ( v9 >= v7 )
       {
         if ( v9 < v6 )
+        {
           v6 = v9;
+        }
       }
       else
       {
@@ -112,15 +116,21 @@ void  CShipList::PushSquareVW(int a2, int a3, int a4) {
 
   result = (int)CShipMap::ShipListVW(a2, a3);
   v7 = result;
-  for ( i = 0; i < 4; ++i )
+  for ( i = 0;
+        i < 4;
+        ++i )
   {
     result = i;
     if ( !*(_DWORD *)(v7 + 4 * i) )
+    {
       break;
+    }
     v6 = *(Y16X16 **)(v7 + 4 * i);
     result = Y16X16::DistanceFast(v6, a4);
     if ( result <= 18 )
+    {
       result = CShipList::PushShip(this, (int)v6);
+    }
   }
   return result;
 }

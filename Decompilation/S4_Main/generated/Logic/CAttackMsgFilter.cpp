@@ -15,7 +15,9 @@ bool  CAttackMsgFilter::IsInRadius(int a2, int a3) {
 bool  CAttackMsgFilter::Activate(int a2, int a3, int a4) {
   
   if ( *(_BYTE *)this )
+  {
     return 0;
+  }
   *(_BYTE *)this = 1;
   *((_DWORD *)this + 3) = a2 + 420;
   *((_DWORD *)this + 1) = a3;

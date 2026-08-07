@@ -15,7 +15,9 @@ bool  CMissionCD3::IsExtraInstalledEx(void) {
 void  CMissionCD3::EnsureExtraGUI(int a2, bool (__cdecl*)(int,int,int) a3) {
   
   if ( !*((_DWORD *)this + 1) )
+  {
     CExtraCD::LoadMenuData((wchar_t *)L"Menu\\GuiSetXMD3Startscreens.dat");
+  }
   return CExtraCD::EnsureGuiEngineHasGfxFileLoaded(this, 0x28u, *((_DWORD *)this + 1), a2, a3, 0);
 }
 

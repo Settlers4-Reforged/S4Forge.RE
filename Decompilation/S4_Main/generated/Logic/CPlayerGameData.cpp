@@ -69,25 +69,12 @@ void  CPlayerGameData::AddEcoSectorId(int a2) {
   v10 = std::list<unsigned short>::end(&this->m_lEcoSectorId, (int)v3);
   v9 = v2;
   v8 = std::list<unsigned short>::begin(&this->m_lEcoSectorId, (int)v2);
-  v13 = std::find<std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>,int>(
-          (int)v7,
-          v2[0],
-          v2[1],
-          v2[2],
-          v3[0],
-          v3[1],
-          v3[2],
-          (int)v4);
+  v13 = std::find<std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>,int>((int)v7, v2[0], v2[1], v2[2], v3[0], v3[1], v3[2], (int)v4);
   v12 = v13;
   v22 = 1;
   v18 |= 2u;
   v21 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator==(v5);
-  v16 = !v21
-     && BBSupportDbgReport(
-          2,
-          "Logic\\PlayerGameData.cpp",
-          127,
-          "std::find(m_lEcoSectorId.begin(), m_lEcoSectorId.end(), _iESId) == m_lEcoSectorId.end()") == 1;
+  v16 = !v21 && BBSupportDbgReport(2, "Logic\\PlayerGameData.cpp", 127, "std::find(m_lEcoSectorId.begin(), m_lEcoSectorId.end(), _iESId) == m_lEcoSectorId.end()") == 1;
   v20 = v16;
   v22 = 0;
   if ( (v18 & 2) != 0 )
@@ -102,7 +89,9 @@ void  CPlayerGameData::AddEcoSectorId(int a2) {
     std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::~_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v6);
   }
   if ( v20 )
+  {
     __debugbreak();
+  }
   v19 = a2;
   std::list<unsigned short>::push_back(&this->m_lEcoSectorId, (int)&v19);
 }
@@ -131,9 +120,7 @@ void  CPlayerGameData::ResetIterator(void)const {
   v3 = std::list<unsigned short>::begin(&this->m_lEcoSectorId, (int)v1);
   v2 = v3;
   v5 = 0;
-  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator=(
-    &this->m_iEcoSectorIterator,
-    v3);
+  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator=(&this->m_iEcoSectorIterator, v3);
   v5 = -1;
   std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::~_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v1);
 }
@@ -156,12 +143,7 @@ int  CPlayerGameData::GetNextEcoSectorId(void)const {
   int v13; // [esp+48h] [ebp-4h]
 
   v10 = 0;
-  v9 = !std::list<unsigned short>::size(&this->m_lEcoSectorId)
-    || (v8 = (std::_Iterator_base12 *)std::list<unsigned short>::end(v3),
-        v7 = v8,
-        v13 = 0,
-        v10 |= 1u,
-        (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator==(v8));
+  v9 = !std::list<unsigned short>::size(&this->m_lEcoSectorId) || (v8 = (std::_Iterator_base12 *)std::list<unsigned short>::end(v3), v7 = v8, v13 = 0, v10 |= 1u, (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator==(v8));
   v12 = v9;
   v13 = -1;
   if ( (v10 & 1) != 0 )
@@ -174,9 +156,7 @@ int  CPlayerGameData::GetNextEcoSectorId(void)const {
     v6 = std::list<unsigned short>::begin(&this->m_lEcoSectorId, (int)v2);
     v5 = v6;
     v13 = 1;
-    std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator=(
-      &this->m_iEcoSectorIterator,
-      v6);
+    std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator=(&this->m_iEcoSectorIterator, v6);
     v13 = -1;
     std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::~_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v2);
     return 0;
@@ -275,19 +255,25 @@ bool  CPlayerGameData::PlayerLost(void)const {
 
 
 // address=[0x1473760]
-// Decompiled from void __thiscall CPlayerGameData::LoadDataBlock(  CPlayerGameData *this,  struct IS4Chunk *a2,  void *_pData,  unsigned int _uSize)
+// Decompiled from void __thiscall CPlayerGameData::LoadDataBlock(CPlayerGameData *this, struct IS4Chunk *a2, void *_pData, unsigned int _uSize)
 void  CPlayerGameData::LoadDataBlock(class IS4Chunk & a2, void * _pData, unsigned int _uSize) {
   
   unsigned int v4; // [esp+4h] [ebp-4h]
 
   if ( !_pData && BBSupportDbgReport(2, "Logic\\PlayerGameData.cpp", 62, "_pData != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !_uSize && BBSupportDbgReport(2, "Logic\\PlayerGameData.cpp", 63, "_uSize > 0") == 1 )
+  {
     __debugbreak();
+  }
   v4 = a2->LoadUnsigned32(1, _uSize);
   a2->Load(_pData, v4);
   if ( v4 < _uSize )
+  {
     memset((char *)_pData + v4, 0, _uSize - v4);
+  }
 }
 
 
@@ -296,9 +282,13 @@ void  CPlayerGameData::LoadDataBlock(class IS4Chunk & a2, void * _pData, unsigne
 void  CPlayerGameData::SaveDataBlock(class IS4Chunk & a2, void * a3, unsigned int a4) {
   
   if ( !a3 && BBSupportDbgReport(2, "Logic\\PlayerGameData.cpp", 78, "_pData != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !a4 && BBSupportDbgReport(2, "Logic\\PlayerGameData.cpp", 79, "_uSize > 0") == 1 )
+  {
     __debugbreak();
+  }
   a2->SaveUnsigned32(a4);
   a2->Save(a3, a4);
 }

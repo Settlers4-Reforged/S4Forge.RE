@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateLoadType::DynamicCreateFunc(void * a1) {
 
   C = (CStateLoadType *)operator new(4u);
   if ( C )
+  {
     return CStateLoadType::CStateLoadType(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -33,8 +37,7 @@ class CGameState * __cdecl CStateLoadType::DynamicCreateFunc(void * a1) {
  CStateLoadType::~CStateLoadType(void) {
   
   *(_DWORD *)this = &CStateLoadType::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 5)
-    && BBSupportDbgReport(2, "main\\states\\StateLoadType.cpp", 57, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 5) && BBSupportDbgReport(2, "main\\states\\StateLoadType.cpp", 57, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -59,7 +62,9 @@ bool  CStateLoadType::Perform(void) {
   }
   v1 = dword_40306CC + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_40306CC = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -81,7 +86,9 @@ bool  CStateLoadType::OnEvent(class CEvn_Event & a2) {
   {
     case 0xB:
       if ( (unsigned __int16)a2->m_wParam != 27 )
+      {
         goto CStateLoadType__OnEvent___def_18B66E1;
+      }
       v3 = CEvn_Event::CEvn_Event(&v4, 0x5Du, 0, 0, 0);
       v5 = 0;
       IEventEngine::SendAMessage(g_pEvnEngine, v3);

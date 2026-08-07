@@ -21,21 +21,33 @@ int __cdecl CAStar64Catapult::MoveCosts(int a1, int a2) {
 
   v6 = 0;
   if ( a2 >= 7 )
+  {
     return v6 + 16;
-  for ( i = 0; i < 7; ++i )
+  }
+  for ( i = 0;
+        i < 7;
+        ++i )
   {
     v3 = a1 + CWorldManager::SurroundingHexPointRelIndex(i);
     v6 += (unsigned int)(CWorldManager::MapObjectId(v3) - 1) <= 6;
   }
   if ( v6 <= 0 )
+  {
     return v6 + 16;
+  }
   if ( v6 < 3 )
+  {
     v4 = 8 * v6 + 24;
+  }
   else
+  {
     v4 = 48;
+  }
   v6 = v4;
   if ( a2 >= 5 )
+  {
     v6 = v4 - 16;
+  }
   return v6 + 16;
 }
 

@@ -14,21 +14,11 @@ int  CFlyingMgr::GetNumberOfEntities(int a2, int a3) {
 // Decompiled from int __thiscall CFlyingMgr::GetFirstEntityId(CFlyingMgr *this, int a2, int a3)
 int  CFlyingMgr::GetFirstEntityId(int a2, int a3) {
   
-  if ( a2 >= 9
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\FlyingMgr.h",
-         69,
-         "_iPlayer < PLAYER_MAX") == 1 )
+  if ( a2 >= 9 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\FlyingMgr.h", 69, "_iPlayer < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( a3 >= 2
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\FlyingMgr.h",
-         70,
-         "_iEntityType < FLYING_ENTITY_MAX") == 1 )
+  if ( a3 >= 2 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\FlyingMgr.h", 70, "_iEntityType < FLYING_ENTITY_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -54,15 +44,21 @@ bool  CFlyingMgr::AddFlyingEntity(int a2, int a3, int a4, int a5, bool a5) {
 
   FreeSlot = CMapObjectMgr::GetFreeSlot();
   if ( a2 != 1 )
+  {
     return 0;
+  }
   C = (CManakopter *)operator new(0x94u);
   if ( C )
+  {
     CManakopter::CManakopter(C, FreeSlot, a3, a4, a5);
+  }
   *(_DWORD *)this = FreeSlot;
   CFlyingMgr::AttachFlyingEntity(this, a5, 1, FreeSlot);
   ++*((_DWORD *)this + 2 * a5 + 20);
   if ( a6 )
+  {
     (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 20, a5, FreeSlot, 0);
+  }
   return 1;
 }
 
@@ -78,8 +74,7 @@ void  CFlyingMgr::DeleteFlyingEntity(int a2) {
   int v7; // [esp+10h] [ebp-4h]
 
   v2 = CMapObjectMgr::Entity(a2);
-  if ( IEntity::ObjType(v2) != DECO_OBJ
-    && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 271, "g_pMapObjectMgr->Entity(_iId).ObjType() == DECO_OBJ") == 1 )
+  if ( IEntity::ObjType(v2) != DECO_OBJ && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 271, "g_pMapObjectMgr->Entity(_iId).ObjType() == DECO_OBJ") == 1 )
   {
     __debugbreak();
   }
@@ -102,9 +97,13 @@ class IFlyingEntity *  CFlyingMgr::GetEntityPtr(int a2) {
 
   v4 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a2);
   if ( v4 && IEntity::ObjType(v4) == 64 )
+  {
     return v4;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -116,9 +115,13 @@ class CManakopter *  CFlyingMgr::GetManakopterPtr(int a2) {
 
   v4 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a2);
   if ( v4 && IEntity::ObjType(v4) == 64 )
+  {
     return v4;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -132,13 +135,11 @@ void  CFlyingMgr::AttachFlyingEntity(int a2, int a3, int a4) {
   int result; // eax
   int v9; // [esp+4h] [ebp-4h]
 
-  if ( (a2 <= 0 || a2 >= 9)
-    && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 322, "_iOwnerId>0 && _iOwnerId<PLAYER_MAX") == 1 )
+  if ( (a2 <= 0 || a2 >= 9) && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 322, "_iOwnerId>0 && _iOwnerId<PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( a3 != 1
-    && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 323, "_iEntityType>0 && _iEntityType < FLYING_ENTITY_MAX") == 1 )
+  if ( a3 != 1 && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 323, "_iEntityType>0 && _iEntityType < FLYING_ENTITY_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -170,13 +171,11 @@ void  CFlyingMgr::DetachFlyingEntity(int a2, int a3, int a4) {
   int v9; // [esp-4h] [ebp-Ch]
   IAnimatedEntity *v11; // [esp+4h] [ebp-4h]
 
-  if ( (a2 <= 0 || a2 >= 9)
-    && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 349, "_iOwnerId>0 && _iOwnerId<PLAYER_MAX") == 1 )
+  if ( (a2 <= 0 || a2 >= 9) && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 349, "_iOwnerId>0 && _iOwnerId<PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( a3 != 1
-    && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 350, "_iEntityType>0 && _iEntityType<FLYING_ENTITY_MAX") == 1 )
+  if ( a3 != 1 && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 350, "_iEntityType>0 && _iEntityType<FLYING_ENTITY_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -190,12 +189,7 @@ void  CFlyingMgr::DetachFlyingEntity(int a2, int a3, int a4) {
   }
   else
   {
-    if ( *((_DWORD *)this + 2 * a2 + a3 + 1) != a4
-      && BBSupportDbgReport(
-           2,
-           "mapobjects\\FlyingMgr.cpp",
-           363,
-           "m_iFirstEntityIds[_iOwnerId][_iEntityType] == _iEntityId") == 1 )
+    if ( *((_DWORD *)this + 2 * a2 + a3 + 1) != a4 && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 363, "m_iFirstEntityIds[_iOwnerId][_iEntityType] == _iEntityId") == 1 )
     {
       __debugbreak();
     }
@@ -241,28 +235,23 @@ int  CFlyingMgr::GetNearestEntity(int a2, int a3, int a4, int a5, int a6) {
   int i; // [esp+10h] [ebp-8h]
   _DWORD *v14; // [esp+14h] [ebp-4h]
 
-  if ( (a2 <= 0 || a2 > CPlayerManager::LastPlayerId())
-    && BBSupportDbgReport(
-         2,
-         "mapobjects\\FlyingMgr.cpp",
-         398,
-         "_iOwnerId>0 && _iOwnerId <= g_cPlayerMgr.LastPlayerId()") == 1 )
+  if ( (a2 <= 0 || a2 > CPlayerManager::LastPlayerId()) && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 398, "_iOwnerId>0 && _iOwnerId <= g_cPlayerMgr.LastPlayerId()") == 1 )
   {
     __debugbreak();
   }
-  if ( a3 != 1
-    && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 399, "_iEntityType>0 && _iEntityType<FLYING_ENTITY_MAX") == 1 )
+  if ( a3 != 1 && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 399, "_iEntityType>0 && _iEntityType<FLYING_ENTITY_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorld(a4, a5)
-    && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 400, "g_cWorld.InWorld( _iX, _iY)") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a4, a5) && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 400, "g_cWorld.InWorld( _iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   v11 = -1;
   v10 = 0;
-  for ( i = *((_DWORD *)this + 2 * a2 + a3 + 1); i; i = IAnimatedEntity::Next(v14) )
+  for ( i = *((_DWORD *)this + 2 * a2 + a3 + 1);
+        i;
+        i = IAnimatedEntity::Next(v14) )
   {
     v14 = (_DWORD *)CFlyingMgr::operator[](i);
     v8 = a5 - IEntity::Y(v14);
@@ -316,30 +305,50 @@ void  CFlyingMgr::Store(class S4::CMapFile & a2) {
   UsedId = CMapObjectMgr::LastUsedId();
   v13 = UsedId;
   v15 = 0;
-  for ( i = 1; i <= v13; ++i )
+  for ( i = 1;
+        i <= v13;
+        ++i )
   {
     EntityPtr = CFlyingMgr::GetEntityPtr(v17, i);
     v9 = EntityPtr;
     if ( EntityPtr )
+    {
       ++v15;
+    }
   }
   operator^<unsigned int>((struct std::ostream *)v5, &v15);
-  for ( i = 1; i <= v13; ++i )
+  for ( i = 1;
+        i <= v13;
+        ++i )
   {
     v8 = CFlyingMgr::GetEntityPtr(v17, i);
     v14 = v8;
     if ( v8 )
+    {
       (*(void (__thiscall **)(unsigned __int8 *, _DWORD *))(*(_DWORD *)v14 + 4))(v14, v5);
+    }
   }
-  for ( j = 0; j < 9; ++j )
+  for ( j = 0;
+        j < 9;
+        ++j )
   {
-    for ( k = 0; k < 2; ++k )
+    for ( k = 0;
+          k < 2;
+          ++k )
+    {
       operator^<int>((int)v5, (int *)v17 + 2 * j + k + 1);
+    }
   }
-  for ( j = 0; j < 9; ++j )
+  for ( j = 0;
+        j < 9;
+        ++j )
   {
-    for ( m = 0; m < 2; ++m )
+    for ( m = 0;
+          m < 2;
+          ++m )
+    {
       operator^<int>((int)v5, (int *)v17 + 2 * j + m + 19);
+    }
   }
   v22 = 0;
   std::ostrstream::freeze((std::ostrstream *)v5, 1);
@@ -405,7 +414,9 @@ void  CFlyingMgr::Load(class S4::CMapFile & a2) {
     }
     v14 = 0;
     operator^<unsigned int>(v3, &v14);
-    for ( i = 0; i < v14; ++i )
+    for ( i = 0;
+          i < v14;
+          ++i )
     {
       v10 = (unsigned __int8 *)CPersistence::New(v3, v2);
       v20 = (unsigned __int16 *)v10;
@@ -413,7 +424,9 @@ void  CFlyingMgr::Load(class S4::CMapFile & a2) {
       {
         v9 = BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 186, "pFlyingEntity != NULL");
         if ( v9 == 1 )
+        {
           __debugbreak();
+        }
       }
       v8 = IEntity::ID();
       v7 = IEntity::Type(v20);
@@ -422,15 +435,27 @@ void  CFlyingMgr::Load(class S4::CMapFile & a2) {
       v5 = IEntity::ID();
       *(_DWORD *)v19 = v5;
     }
-    for ( i = 0; i < 9; ++i )
+    for ( i = 0;
+          i < 9;
+          ++i )
     {
-      for ( j = 0; j < 2; ++j )
+      for ( j = 0;
+            j < 2;
+            ++j )
+      {
         operator^<int>((int)v3, (int)v19 + 8 * i + 4 * j + 4);
+      }
     }
-    for ( i = 0; i < 9; ++i )
+    for ( i = 0;
+          i < 9;
+          ++i )
     {
-      for ( k = 0; k < 2; ++k )
+      for ( k = 0;
+            k < 2;
+            ++k )
+      {
         operator^<int>((int)v3, (int)v19 + 8 * i + 4 * k + 76);
+      }
     }
     v23 = 0;
     std::ios_base::exceptions((std::ios_base *)((char *)v3 + *(_DWORD *)(v3[0] + 4)), v4);

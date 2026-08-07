@@ -69,7 +69,9 @@ bool  CFindBuildings::NextBuilding(void) {
       EntityIdVW = CWarMapNode::Next(v3);
     }
     if ( (int)this[59] >= CVWList::Size((CVWList *)this) )
+    {
       break;
+    }
     v4 = *(_DWORD *)CVWList::operator[](this[59]);
     v5 = *(_DWORD *)(CVWList::operator[](this[59]) + 4);
     EntityIdVW = CWarMap::FirstEntityIdVW(2, v4, v5);

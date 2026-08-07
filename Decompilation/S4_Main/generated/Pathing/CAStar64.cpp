@@ -51,16 +51,22 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
     if ( (**(unsigned __int8 (__thiscall ***)(CAStar64 *))this)(this) )
     {
       if ( !s_pIsNotBlocked && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 1999, "s_pIsNotBlocked != 0") == 1 )
+      {
         __debugbreak();
+      }
       if ( !s_pMoveCost && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 2000, "s_pMoveCost != 0") == 1 )
+      {
         __debugbreak();
+      }
       v5 = (_DWORD *)TPriorityQueue<COpenListEntry24,8192>::Top(dword_415C788);
       v6 = v5[1];
       v21[0] = *v5;
       v21[1] = v6;
       TPriorityQueue<COpenListEntry24,8192>::Pop(dword_415C788);
       v26 = COpenListEntry24::Index((COpenListEntry24 *)v21);
-      for ( i = 0; i < 6; ++i )
+      for ( i = 0;
+            i < 6;
+            ++i )
       {
         v7 = CY6R1X6::NeighborRelPackedIdx(i);
         v40 = v26 + v7;
@@ -126,8 +132,7 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
               v15 = v29 + v14;
               v16 = s_pMoveCost(v27, v28);
               iNeighborG = v15 + 8 * (v24 + v16);
-              if ( iNeighborG >= 0x100000
-                && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 2111, "iNeighborG < (1 << 20)") == 1 )
+              if ( iNeighborG >= 0x100000 && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 2111, "iNeighborG < (1 << 20)") == 1 )
               {
                 __debugbreak();
               }
@@ -184,9 +189,13 @@ int __cdecl CAStar64::SettlerDisplacementCosts(int a1, int a2) {
   v4 = (IMovingEntity *)CMapObjectMgr::EntityPtr(v2);
   v6 = 1 << IMovingEntity::DisplacementCosts(v4) >> (a2 >> 1);
   if ( v6 <= 256 )
+  {
     return v6;
+  }
   else
+  {
     return 256;
+  }
 }
 
 

@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CWorkshopBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x19Cu) )
+  {
     return CWorkshopBuildingRole::CWorkshopBuildingRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -68,16 +72,22 @@ void  CWorkshopBuildingRole::LogicUpdate(class CBuilding * a2) {
   v23 = this;
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( result )
+  {
     result = (*(int (__thiscall **)(CWorkshopBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v23 + 88))(v23, a2, 1);
+  }
   v21 = *((_BYTE *)v23 + 4);
   switch ( v21 )
   {
     case 1:
       result = (*(int (__thiscall **)(CWorkshopBuildingRole *, struct CBuilding *))(*(_DWORD *)v23 + 120))(v23, a2);
       if ( (_BYTE)result )
+      {
         *((_BYTE *)v23 + 4) = 3;
+      }
       else
+      {
         return IAnimatedEntity::RegisterForLogicUpdate(31);
+      }
       break;
     case 2:
       if ( *((unsigned __int8 *)v23 + 5) > (int)*(unsigned __int8 *)(*((_DWORD *)v23 + 94) + 480) )
@@ -93,10 +103,14 @@ void  CWorkshopBuildingRole::LogicUpdate(class CBuilding * a2) {
       }
     case 3:
       if ( !*((_BYTE *)v23 + 29) || !IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+      {
         return IAnimatedEntity::RegisterForLogicUpdate(31);
+      }
       if ( *((_WORD *)v23 + 191) )
       {
-        for ( i = 0; i < *(char *)(*((_DWORD *)v23 + 94) + 57); ++i )
+        for ( i = 0;
+              i < *(char *)(*((_DWORD *)v23 + 94) + 57);
+              ++i )
         {
           v20 = *(char *)(*((_DWORD *)v23 + 94) + 16 * i + 62);
           v5 = (CVehicle *)CVehicleMgr::operator[](*((unsigned __int16 *)v23 + 191));
@@ -115,19 +129,17 @@ void  CWorkshopBuildingRole::LogicUpdate(class CBuilding * a2) {
               (*(void (__thiscall **)(int, CEntityEvent *))(*(_DWORD *)v19 + 80))(v19, v14);
               v24 = -1;
               CEntityEvent::~CEntityEvent(v12);
-              return (*(int (__thiscall **)(CWorkshopBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v23 + 72))(
-                       v23,
-                       a2,
-                       1);
+              return (*(int (__thiscall **)(CWorkshopBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v23 + 72))(v23, a2, 1);
             }
           }
         }
         v8 = (_DWORD *)CVehicleMgr::operator[](*((unsigned __int16 *)v23 + 191));
         if ( !IEntity::FlagBits(v8, (EntityFlag)&dword_F29144[220079]) )
+        {
           *((_WORD *)v23 + 191) = 0;
+        }
       }
-      else if ( CWorkshopBuildingRole::HaveProductionOrder(v23)
-             && CWorkshopBuildingRole::IsSpaceForVehicleAvailable(v23, a2, *((unsigned __int8 *)v23 + 380)) )
+      else if ( CWorkshopBuildingRole::HaveProductionOrder(v23) && CWorkshopBuildingRole::IsSpaceForVehicleAvailable(v23, a2, *((unsigned __int8 *)v23 + 380)) )
       {
         CWorkshopBuildingRole::GetPositionForNewVehicle(v23, a2, &v16, &v17);
         DirectionForNewVehicle = CWorkshopBuildingRole::GetDirectionForNewVehicle(v23, a2);
@@ -137,7 +149,9 @@ void  CWorkshopBuildingRole::LogicUpdate(class CBuilding * a2) {
         v4 = CVehicleMgr::AddVehicle((CVehicleMgr *)&g_cVehicleMgr, v16, v17, v3, v9, v10, 1);
         *((_WORD *)v23 + 191) = v4;
         if ( *((_WORD *)v23 + 191) )
+        {
           CWorkshopBuildingRole::TakeOrder(v23, *((unsigned __int8 *)v23 + 380), -1);
+        }
       }
       return IAnimatedEntity::RegisterForLogicUpdate(31);
   }
@@ -146,7 +160,7 @@ void  CWorkshopBuildingRole::LogicUpdate(class CBuilding * a2) {
 
 
 // address=[0x152cff0]
-// Decompiled from unsigned int __thiscall CWorkshopBuildingRole::FillGfxInfo(  CWorkshopBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
+// Decompiled from unsigned int __thiscall CWorkshopBuildingRole::FillGfxInfo(CWorkshopBuildingRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
 void  CWorkshopBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
@@ -171,12 +185,7 @@ void  CWorkshopBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObject
   *((_BYTE *)a3 + 715) = CPlayerManager::Color(v4);
   if ( *((_BYTE *)this + 356) )
   {
-    CGfxManager::GetEffectGfxInfo(
-      (CGfxManager *)g_pGfxManager,
-      (struct SGfxObjectInfo *)v16,
-      *((unsigned __int8 *)this + 356),
-      0,
-      *((unsigned __int8 *)this + 359));
+    CGfxManager::GetEffectGfxInfo((CGfxManager *)g_pGfxManager, (struct SGfxObjectInfo *)v16, *((unsigned __int8 *)this + 356), 0, *((unsigned __int8 *)this + 359));
     *((_DWORD *)a3 + 26) = v16[0];
     *((_DWORD *)a3 + 27) = v16[1];
     *((_DWORD *)a3 + 28) = *((__int16 *)this + 180);
@@ -187,16 +196,18 @@ void  CWorkshopBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObject
   if ( *((_BYTE *)this + 29) == 1 )
   {
     v12 = (CSettler *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 4));
-    CSettler::GetPatchGfx(
-      v12,
-      (struct SGfxObjectInfo *)((char *)a3 + 16 * *(char *)(*((_DWORD *)this + 94) + 476) + 200));
+    CSettler::GetPatchGfx(v12, (struct SGfxObjectInfo *)((char *)a3 + 16 * *(char *)(*((_DWORD *)this + 94) + 476) + 200));
   }
   v13 = 0;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = std::vector<unsigned short>::size((char *)this + 388);
     if ( i >= result )
+    {
       break;
+    }
     v7 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 388, i);
     v8 = CPileMgr::operator[](*v7);
     if ( (unsigned __int8)CPile::IsPatchPile(v8) )
@@ -234,23 +245,15 @@ void  CWorkshopBuildingRole::Init(class CBuilding * a2) {
   IBuildingRole::InitCommon((int)a2);
   CWorkshopBuildingRole::Clear(this);
   *((_BYTE *)this + 4) = 1;
-  for ( i = 0; i < *(char *)(*((_DWORD *)this + 94) + 57); ++i )
+  for ( i = 0;
+        i < *(char *)(*((_DWORD *)this + 94) + 57);
+        ++i )
   {
     v2 = IEntity::WorldIdx();
     v14 = *(char *)(*((_DWORD *)this + 94) + 16 * i + 60) + CWorldManager::X(v2);
     v3 = IEntity::WorldIdx();
     v15 = *(char *)(*((_DWORD *)this + 94) + 16 * i + 61) + CWorldManager::Y(v3);
-    v16 = CPileMgr::AddPile(
-            (CPileMgr *)&g_cPileMgr,
-            v14,
-            v15,
-            *(char *)(*((_DWORD *)this + 94) + 16 * i + 62),
-            0,
-            *(char *)(*((_DWORD *)this + 94) + 16 * i + 63),
-            *(char *)(*((_DWORD *)this + 94) + 16 * i + 64),
-            *(char *)(*((_DWORD *)this + 94) + 16 * i + 65),
-            *(_DWORD *)(*((_DWORD *)this + 94) + 16 * i + 68),
-            *(_DWORD *)(*((_DWORD *)this + 94) + 16 * i + 72));
+    v16 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v14, v15, *(char *)(*((_DWORD *)this + 94) + 16 * i + 62), 0, *(char *)(*((_DWORD *)this + 94) + 16 * i + 63), *(char *)(*((_DWORD *)this + 94) + 16 * i + 64), *(char *)(*((_DWORD *)this + 94) + 16 * i + 65), *(_DWORD *)(*((_DWORD *)this + 94) + 16 * i + 68), *(_DWORD *)(*((_DWORD *)this + 94) + 16 * i + 72));
     v11 = *((unsigned __int16 *)this + 3);
     v4 = CPileMgr::operator[](v16);
     CPile::SetBuildingId((CPile *)v4, v11);
@@ -259,12 +262,7 @@ void  CWorkshopBuildingRole::Init(class CBuilding * a2) {
       v5 = CPileMgr::operator[](v16);
       IEntity::ClearFlagBits(v5, ENTITY_FLAG_Visible);
     }
-    if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 63) != 1
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\WorkshopBuildingRole.cpp",
-           302,
-           "m_pBuildingInfo->piles[p].type == IPileRole::PILE_DELIVER") == 1 )
+    if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 63) != 1 && BBSupportDbgReport(2, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 302, "m_pBuildingInfo->piles[p].type == IPileRole::PILE_DELIVER") == 1 )
     {
       __debugbreak();
     }
@@ -275,18 +273,16 @@ void  CWorkshopBuildingRole::Init(class CBuilding * a2) {
   {
     IEntity::ID();
     v6 = IEntity::Type((unsigned __int16 *)a2);
-    if ( BBSupportDbgReportF(
-           2,
-           "MapObjects\\Building\\WorkshopBuildingRole.cpp",
-           311,
-           "No deliverPile for %s nr %u",
-           (const char *)dword_3791D18[2 * v6],
-           (&off_3791D1C)[2 * v6]) == 1 )
+    if ( BBSupportDbgReportF(2, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 311, "No deliverPile for %s nr %u", (const char *)dword_3791D18[2 * v6], (&off_3791D1C)[2 * v6]) == 1 )
+    {
       __debugbreak();
+    }
   }
   IAnimatedEntity::RegisterForLogicUpdate(2);
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     (*(void (__thiscall **)(CWorkshopBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
+  }
   v12 = *(char *)(*((_DWORD *)this + 94) + 43) + IEntity::Y(a2);
   v7 = IEntity::X(a2);
   v13 = Y16X16::PackXYFast(*(char *)(*((_DWORD *)this + 94) + 42) + v7, v12);
@@ -315,17 +311,23 @@ void  CWorkshopBuildingRole::PostLoadInit(class CBuilding * a2) {
   *((_DWORD *)this + 94) = CBuildingInfoMgr::GetBuildingInfo(v2, v7);
   v3 = *((_DWORD *)this + 94);
   if ( !*(_BYTE *)(v3 + 6) )
+  {
     return v3;
+  }
   v8 = *(char *)(*((_DWORD *)this + 94) + 42) + IEntity::X(a2);
   v4 = IEntity::Y(a2);
   v9 = CWorldManager::Index(v8, *(char *)(*((_DWORD *)this + 94) + 43) + v4);
   LOBYTE(v3) = CWaterFlags::IsWater(v9);
   if ( !(_BYTE)v3 )
+  {
     return v3;
+  }
   v5 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
   LOBYTE(v3) = CBuildingMgr::IsShipyardEx(v5);
   if ( (_BYTE)v3 )
+  {
     LOBYTE(v3) = CWaterFlags::SetWaterFlagBitRepelling(v9);
+  }
   return v3;
 }
 
@@ -363,7 +365,9 @@ bool  CWorkshopBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
 
   v28 = this;
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 345, "_iSettlerId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v26 = (CSettler *)CSettlerMgr::operator[](a3);
   if ( !*((_BYTE *)v28 + 29) )
   {
@@ -397,12 +401,7 @@ bool  CWorkshopBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   CSettler::SetOffset(v26, v18, v7);
   if ( *((_WORD *)v28 + 191) )
   {
-    if ( !CVehicleMgr::GetVehiclePtr(*((unsigned __int16 *)v28 + 191))
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\WorkshopBuildingRole.cpp",
-           395,
-           "dynamic_cast<CVehicle*>(g_cVehicleMgr.GetVehiclePtr( m_uProductId ))!=NULL") == 1 )
+    if ( !CVehicleMgr::GetVehiclePtr(*((unsigned __int16 *)v28 + 191)) && BBSupportDbgReport(2, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 395, "dynamic_cast<CVehicle*>(g_cVehicleMgr.GetVehiclePtr( m_uProductId ))!=NULL") == 1 )
     {
       __debugbreak();
     }
@@ -434,12 +433,7 @@ bool  CWorkshopBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
     v15 = (const char *)type_info::name(v10);
     v11 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
     BuildingName = CS4DefineNames::GetBuildingName(v11);
-    BBSupportTracePrintF(
-      2,
-      "WARNING: Building %s (role %s) of race %s has no production delay!",
-      BuildingName,
-      v15,
-      RaceName);
+    BBSupportTracePrintF(2, "WARNING: Building %s (role %s) of race %s has no production delay!", BuildingName, v15, RaceName);
   }
   (*(void (__cdecl **)(struct CBuilding *))(*v28 + 72))(a2);
   return 1;
@@ -454,12 +448,16 @@ int  CWorkshopBuildingRole::GetBuildingNeed(int a2)const {
   unsigned __int8 *v3; // eax
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < std::vector<unsigned short>::size((char *)this + 388); ++i )
+  for ( i = 0;
+        i < std::vector<unsigned short>::size((char *)this + 388);
+        ++i )
   {
     v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
     v3 = CPileMgr::operator[](*v2);
     if ( (*(int (__thiscall **)(unsigned __int8 *, unsigned __int8 *))(*(_DWORD *)v3 + 60))(v3, v3) == a2 )
+    {
       return *(unsigned __int16 *)std::vector<unsigned short>::operator[](i);
+    }
   }
   BBSupportTracePrintF(0, "TROUBLE: illegal goodcheck good %u", a2);
   return 0;
@@ -474,19 +472,21 @@ int  CWorkshopBuildingRole::GetPileIdWithGood(int a2)const {
   unsigned __int8 *v3; // eax
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < std::vector<unsigned short>::size((char *)this + 388); ++i )
+  for ( i = 0;
+        i < std::vector<unsigned short>::size((char *)this + 388);
+        ++i )
   {
     v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
     v3 = CPileMgr::operator[](*v2);
     if ( (*(int (__thiscall **)(unsigned __int8 *, unsigned __int8 *))(*(_DWORD *)v3 + 60))(v3, v3) == a2 )
+    {
       return *(unsigned __int16 *)std::vector<unsigned short>::operator[](i);
+    }
   }
-  if ( BBSupportDbgReport(
-         1,
-         "MapObjects\\Building\\WorkshopBuildingRole.cpp",
-         955,
-         "CWorkshopBuildingRole::GetPileIdWithGood() failed!") == 1 )
+  if ( BBSupportDbgReport(1, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 955, "CWorkshopBuildingRole::GetPileIdWithGood() failed!") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 
@@ -499,12 +499,16 @@ bool  CWorkshopBuildingRole::HasShipAmmo(int a2)const {
   unsigned __int8 *v3; // eax
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < std::vector<unsigned short>::size((char *)this + 388); ++i )
+  for ( i = 0;
+        i < std::vector<unsigned short>::size((char *)this + 388);
+        ++i )
   {
     v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
     v3 = CPileMgr::operator[](*v2);
     if ( (*(int (__thiscall **)(unsigned __int8 *, unsigned __int8 *))(*(_DWORD *)v3 + 60))(v3, v3) == a2 )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -518,19 +522,21 @@ int  CWorkshopBuildingRole::GetPileIdWithNeedForGood(int a2)const {
   unsigned __int8 *v5; // [esp+4h] [ebp-8h]
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < std::vector<unsigned short>::size((char *)this + 388); ++i )
+  for ( i = 0;
+        i < std::vector<unsigned short>::size((char *)this + 388);
+        ++i )
   {
     v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
     v5 = CPileMgr::operator[](*v2);
     if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v5 + 60))(v5) == a2 && CPile::HasSpace((CPile *)v5) )
+    {
       return *(unsigned __int16 *)std::vector<unsigned short>::operator[](i);
+    }
   }
-  if ( BBSupportDbgReport(
-         1,
-         "MapObjects\\Building\\WorkshopBuildingRole.cpp",
-         996,
-         "CWorkshopBuildingRole::GetPileIdWithNeedForGood() failed!") == 1 )
+  if ( BBSupportDbgReport(1, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 996, "CWorkshopBuildingRole::GetPileIdWithNeedForGood() failed!") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 
@@ -549,10 +555,14 @@ bool  CWorkshopBuildingRole::HaveStillOrders(void)const {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
     if ( *((_BYTE *)this + i + 404) )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -564,10 +574,14 @@ bool  CWorkshopBuildingRole::HaveSpecialOrder(int a2)const {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
     if ( a2 == dword_3D8B800[i] && this[i + 404] )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -582,17 +596,25 @@ void  CWorkshopBuildingRole::LockPiles(class CBuilding * a2, bool a3) {
   unsigned __int8 *v5; // eax
   unsigned int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = std::vector<unsigned short>::size((char *)this + 388);
     if ( i >= result )
+    {
       break;
+    }
     v4 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 388, i);
     v5 = CPileMgr::operator[](*v4);
     if ( a3 )
+    {
       IEntity::SetFlagBits(v5, (EntityFlag)0x10u);
+    }
     else
+    {
       IEntity::ClearFlagBits(v5, (EntityFlag)0x10u);
+    }
   }
   return result;
 }
@@ -606,14 +628,20 @@ void  CWorkshopBuildingRole::TakeOrder(int a2, int a3) {
   CWorkshopBuildingRole *i; // [esp+4h] [ebp-8h]
   int v5; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; ; i = (CWorkshopBuildingRole *)((char *)i + 1) )
+  for ( i = 0;
+        ;
+        i = (CWorkshopBuildingRole *)((char *)i + 1) )
   {
     result = i;
     if ( !dword_3D8B7A8[2 * (_DWORD)i] || dword_3D8B7A8[2 * (_DWORD)i] == a2 )
+    {
       break;
+    }
   }
   if ( dword_3D8B7A8[2 * (_DWORD)i] == -1 )
+  {
     return result;
+  }
   if ( a3 )
   {
     if ( a3 == 100 )
@@ -630,7 +658,9 @@ void  CWorkshopBuildingRole::TakeOrder(int a2, int a3) {
       if ( v5 >= 0 )
       {
         if ( v5 >= 100 )
+        {
           LOBYTE(v5) = 99;
+        }
       }
       else
       {
@@ -649,7 +679,7 @@ void  CWorkshopBuildingRole::TakeOrder(int a2, int a3) {
 
 
 // address=[0x152dde0]
-// Decompiled from _DWORD *__thiscall CWorkshopBuildingRole::FillAddVehicleSideBar(  CWorkshopBuildingRole *this,  struct CAddVehicleBarInfo *a2,  bool a3)
+// Decompiled from _DWORD *__thiscall CWorkshopBuildingRole::FillAddVehicleSideBar(CWorkshopBuildingRole *this, struct CAddVehicleBarInfo *a2, bool a3)
 void  CWorkshopBuildingRole::FillAddVehicleSideBar(class CAddVehicleBarInfo * a2, bool a3) {
   
   CBuilding *v3; // eax
@@ -664,15 +694,25 @@ void  CWorkshopBuildingRole::FillAddVehicleSideBar(class CAddVehicleBarInfo * a2
   CEvn_Event v14; // [esp+18h] [ebp-28h] BYREF
   int v15; // [esp+3Ch] [ebp-4h]
 
-  for ( i = 0; i < 3; ++i )
+  for ( i = 0;
+        i < 3;
+        ++i )
   {
     v3 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
     if ( IEntity::Type((IEntity *)v3) == 23 )
+    {
       cVehicleType = dword_3D8B7EC[i];
+    }
     else
+    {
       cVehicleType = dword_3D8B7D8[i];
-    for ( j = 0; dword_3D8B7A8[2 * j] && dword_3D8B7A8[2 * j] != cVehicleType; ++j )
+    }
+    for ( j = 0;
+          dword_3D8B7A8[2 * j] && dword_3D8B7A8[2 * j] != cVehicleType;
+          ++j )
+    {
       ;
+    }
     if ( dword_3D8B7A8[2 * j] != -1 )
     {
       a2->m_aVehicleInfos[i].vehicleType = cVehicleType;
@@ -691,16 +731,19 @@ void  CWorkshopBuildingRole::FillAddVehicleSideBar(class CAddVehicleBarInfo * a2
   a2->m_iUnknown = 17;
   iEventId = 606;
   if ( !a3 )
+  {
     iEventId = 607;
+  }
   CEvn_Event::CEvn_Event(&v14, iEventId, 0, (unsigned int)a2, 0);
   v15 = 0;
-  if ( !g_pEvnEngine
-    && BBSupportDbgReport(2, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 1171, "g_pEvnEngine != NULL") == 1 )
+  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 1171, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
   if ( g_pEvnEngine )
+  {
     IEventEngine::SendAMessage(g_pEvnEngine, &v14);
+  }
   v15 = -1;
   return CEvn_Event::~CEvn_Event(&v14);
 }
@@ -716,36 +759,24 @@ bool  CWorkshopBuildingRole::CancelCurrentProduction(void) {
   int v5; // [esp-10h] [ebp-18h]
   int v6; // [esp+0h] [ebp-8h]
 
-  if ( !*((_WORD *)this + 191)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 1078, "m_uProductId>0") == 1 )
+  if ( !*((_WORD *)this + 191) && BBSupportDbgReport(2, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 1078, "m_uProductId>0") == 1 )
   {
     __debugbreak();
   }
-  if ( !CMapObjectMgr::ValidEntityId(*((unsigned __int16 *)this + 191))
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\WorkshopBuildingRole.cpp",
-         1079,
-         "g_pMapObjectMgr->ValidEntityId( m_uProductId )") == 1 )
+  if ( !CMapObjectMgr::ValidEntityId(*((unsigned __int16 *)this + 191)) && BBSupportDbgReport(2, "MapObjects\\Building\\WorkshopBuildingRole.cpp", 1079, "g_pMapObjectMgr->ValidEntityId( m_uProductId )") == 1 )
   {
     __debugbreak();
   }
   if ( !*((_WORD *)this + 191) )
+  {
     return 0;
+  }
   v6 = CLogic::Effects((DWORD *)g_pLogic);
   v1 = (void *)CVehicleMgr::operator[](*((unsigned __int16 *)this + 191));
   v5 = IEntity::Y(v1);
   v2 = (_DWORD *)CVehicleMgr::operator[](*((unsigned __int16 *)this + 191));
   v3 = IEntity::X(v2);
-  (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v6 + 16))(
-    v6,
-    62,
-    3,
-    v3,
-    v5,
-    0,
-    0,
-    0);
+  (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v6 + 16))(v6, 62, 3, v3, v5, 0, 0, 0);
   CVehicleMgr::DeleteVehicle((CVehicleMgr *)&g_cVehicleMgr, *((unsigned __int16 *)this + 191));
   *((_WORD *)this + 191) = 0;
   CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
@@ -785,14 +816,20 @@ bool  CWorkshopBuildingRole::CancelCurrentProduction(void) {
   operator^<unsigned short>(a2, v7 + 382);
   operator^<unsigned int>(a2, v7 + 384);
   operator^<unsigned int>(a2, &v5);
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
     operator^<unsigned short>(a2, v8);
     std::vector<unsigned short>::push_back(v8);
   }
   operator^<unsigned int>(a2, &v5);
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
+  {
     operator^<unsigned char>(a2, &v7[i + 404]);
+  }
   v9 = -1;
   return v7;
 }
@@ -819,15 +856,21 @@ void  CWorkshopBuildingRole::Store(std::ostream & a2) {
   operator^<unsigned int>(a2, (int *)v6 + 96);
   v5 = std::vector<unsigned short>::size((char *)v6 + 388);
   operator^<unsigned int>(a2, &v5);
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
     v2 = (__int16 *)std::vector<unsigned short>::operator[]((char *)v6 + 388, i);
     operator^<unsigned short>((int)a2, v2);
   }
   v5 = 5;
   result = operator^<unsigned int>(a2, &v5);
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
+  {
     result = operator^<unsigned char>(a2, (int)v6 + i + 404);
+  }
   return result;
 }
 
@@ -871,21 +914,15 @@ bool  CWorkshopBuildingRole::CrushBuilding(void) {
   int v6; // [esp+0h] [ebp-8h]
 
   if ( !*((_WORD *)this + 191) )
+  {
     return 1;
+  }
   v6 = CLogic::Effects((DWORD *)g_pLogic);
   v1 = (void *)CVehicleMgr::operator[](*((unsigned __int16 *)this + 191));
   v5 = IEntity::Y(v1);
   v2 = (_DWORD *)CVehicleMgr::operator[](*((unsigned __int16 *)this + 191));
   v3 = IEntity::X(v2);
-  (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v6 + 16))(
-    v6,
-    62,
-    3,
-    v3,
-    v5,
-    0,
-    0,
-    0);
+  (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v6 + 16))(v6, 62, 3, v3, v5, 0, 0, 0);
   CVehicleMgr::DeleteVehicle((CVehicleMgr *)&g_cVehicleMgr, *((unsigned __int16 *)this + 191));
   *((_WORD *)this + 191) = 0;
   return 1;
@@ -900,12 +937,16 @@ bool  CWorkshopBuildingRole::HaveMaterial(class CBuilding * a2) {
   unsigned __int8 *v3; // eax
   unsigned int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < std::vector<unsigned short>::size(this + 388); ++i )
+  for ( i = 0;
+        i < std::vector<unsigned short>::size(this + 388);
+        ++i )
   {
     v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((void *)(this + 388), i);
     v3 = CPileMgr::operator[](*v2);
     if ( !(unsigned __int8)CPile::GoodAvailable(v3) )
+    {
       return 0;
+    }
   }
   return 1;
 }
@@ -919,7 +960,9 @@ bool  CWorkshopBuildingRole::HaveProductionOrder(void) {
   unsigned int v3; // [esp+Ch] [ebp-4h]
 
   v3 = *((unsigned __int8 *)this + 381) % 5u;
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
     if ( *((_BYTE *)this + v3 + 404) )
     {
@@ -928,7 +971,9 @@ bool  CWorkshopBuildingRole::HaveProductionOrder(void) {
       return 1;
     }
     if ( ++v3 >= 5 )
+    {
       v3 = 0;
+    }
   }
   *((_BYTE *)this + 380) = 0;
   return 0;
@@ -936,7 +981,7 @@ bool  CWorkshopBuildingRole::HaveProductionOrder(void) {
 
 
 // address=[0x152e5c0]
-// Decompiled from int __thiscall CWorkshopBuildingRole::GetPositionForNewVehicle(  CWorkshopBuildingRole *this,  struct CBuilding *a2,  int *a3,  int *a4)
+// Decompiled from int __thiscall CWorkshopBuildingRole::GetPositionForNewVehicle(CWorkshopBuildingRole *this, struct CBuilding *a2, int *a3, int *a4)
 void  CWorkshopBuildingRole::GetPositionForNewVehicle(class CBuilding * a2, int & a3, int & a4) {
   
   int result; // eax
@@ -989,7 +1034,7 @@ int  CWorkshopBuildingRole::GetDirectionForNewVehicle(class CBuilding * a2) {
 
 
 // address=[0x152e6c0]
-// Decompiled from bool __thiscall CWorkshopBuildingRole::IsSpaceForVehicleAvailable(  CWorkshopBuildingRole *this,  struct CBuilding *a2,  int a3)
+// Decompiled from bool __thiscall CWorkshopBuildingRole::IsSpaceForVehicleAvailable(CWorkshopBuildingRole *this, struct CBuilding *a2, int a3)
 bool  CWorkshopBuildingRole::IsSpaceForVehicleAvailable(class CBuilding * a2, int a3) {
   
   int v4; // [esp+0h] [ebp-Ch] BYREF
@@ -998,7 +1043,9 @@ bool  CWorkshopBuildingRole::IsSpaceForVehicleAvailable(class CBuilding * a2, in
 
   v6 = this;
   if ( a3 <= 0 || a3 >= 6 )
+  {
     return 0;
+  }
   CWorkshopBuildingRole::GetPositionForNewVehicle(v6, a2, &v4, &v5);
   return CVehicleMgr::IsPositionFreeForVehicle((CVehicleMgr *)&g_cVehicleMgr, v4, v5, a3);
 }
@@ -1037,8 +1084,12 @@ void  CWorkshopBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E614 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v10, 1u);
   byte_3F1E60E = *((_BYTE *)this + 29);
   if ( *((_BYTE *)this + 29) )
+  {
     byte_3F1E615 = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
-  for ( i = 0; i < std::vector<unsigned short>::size((char *)this + 388); ++i )
+  }
+  for ( i = 0;
+        i < std::vector<unsigned short>::size((char *)this + 388);
+        ++i )
   {
     v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 388, i);
     v13 = CPileMgr::operator[](*v5);
@@ -1055,7 +1106,9 @@ void  CWorkshopBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   }
   v11 = 604;
   if ( !a3 )
+  {
     v11 = 602;
+  }
   CEvn_Event::CEvn_Event(&v16, v11, 0, (unsigned int)&g_cVehicleProductionInfo, 0);
   v17 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v16);
@@ -1078,7 +1131,7 @@ void  CWorkshopBuildingRole::Clear(void) {
 
 
 // address=[0x152f1e0]
-// Decompiled from void __thiscall CWorkshopBuildingRole::ConvertEventIntoGoal(  CWorkshopBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
+// Decompiled from void __thiscall CWorkshopBuildingRole::ConvertEventIntoGoal(CWorkshopBuildingRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CWorkshopBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;

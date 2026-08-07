@@ -3,7 +3,7 @@
 // Definitions for class CMainProblemSolveEvent
 
 // address=[0x2f4dcc0]
-// Decompiled from CMainProblemSolveEvent *__thiscall CMainProblemSolveEvent::CMainProblemSolveEvent(  CMainProblemSolveEvent *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7)
+// Decompiled from CMainProblemSolveEvent *__thiscall CMainProblemSolveEvent::CMainProblemSolveEvent(CMainProblemSolveEvent *this, int a2, int a3, int a4, int a5, int a6, int a7)
  CMainProblemSolveEvent::CMainProblemSolveEvent(int a2, int a3, int a4, int a5, int a6, int a7) {
   
   int i; // [esp+0h] [ebp-8h]
@@ -24,8 +24,12 @@
   *((_DWORD *)this + 25) = 0;
   *((_BYTE *)this + 104) = 0;
   *((_DWORD *)this + 27) = a6;
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
+  {
     *((_DWORD *)this + i + 19) = 0;
+  }
   return this;
 }
 
@@ -36,9 +40,13 @@
   
   *(_DWORD *)this = &CMainProblemSolveEvent::_vftable_;
   if ( *((_DWORD *)this + 17) )
+  {
     (***((void (__thiscall ****)(_DWORD, int))this + 17))(*((_DWORD *)this + 17), 1);
+  }
   if ( *((_DWORD *)this + 25) )
+  {
     delete *((CSiedlerAI **)this + 25);
+  }
   IScheduleEntry::~IScheduleEntry(this);
 }
 
@@ -102,14 +110,20 @@ bool  CMainProblemSolveEvent::action(void) {
   {
     C = (CSiedlerAI *)operator new(0x48u);
     if ( C )
+    {
       v5 = CSiedlerAI::CSiedlerAI(C, *(struct CEcoSectorAI **)(*((_DWORD *)this + 10) + 36), *((_DWORD *)this + 3));
+    }
     else
+    {
       v5 = 0;
+    }
     *((_DWORD *)this + 25) = v5;
     *((_BYTE *)this + 72) = 1;
   }
   CSiedlerAI::GetInvokeBuildingType(*((CSiedlerAI **)this + 25), this, (CMainProblemSolveEvent *)((char *)this + 76));
-  for ( i = 0; *((_DWORD *)this + i + 19); ++i )
+  for ( i = 0;
+        *((_DWORD *)this + i + 19);
+        ++i )
   {
     v8 = (_DWORD *)CSchedule::GetInvokeEvent(*((_DWORD *)this + 10), *((_DWORD *)this + i + 19));
     if ( v8 )
@@ -122,19 +136,27 @@ bool  CMainProblemSolveEvent::action(void) {
           *((_BYTE *)this + 104) = 1;
         }
         if ( !i )
+        {
           v10 = 1;
+        }
       }
     }
     else
     {
       v4 = operator new(0x50u);
       if ( v4 )
+      {
         v3 = (struct IScheduleEntry *)CInvokeEvent::CInvokeEvent(v4, *((_DWORD *)this + i + 19));
+      }
       else
+      {
         v3 = 0;
+      }
       CSchedule::NewSchedEntry(*((CSchedule **)this + 10), v3);
       if ( !i )
+      {
         v10 = 1;
+      }
     }
   }
   if ( v10 )
@@ -146,13 +168,7 @@ bool  CMainProblemSolveEvent::action(void) {
   {
     *(_DWORD *)(*((_DWORD *)this + 25) + 36) = 0;
     BBSupportTracePrintF(0, "MainCall ProbNr:%i von EventNr: %i", *((_DWORD *)this + 15), *((_DWORD *)this + 3));
-    *((_DWORD *)this + 17) = IAI_Module::Problem(
-                               *((IAI_Module **)this + 25),
-                               *((_DWORD *)this + 15),
-                               *((_DWORD *)this + 11),
-                               *((_DWORD *)this + 12),
-                               *((_DWORD *)this + 13),
-                               *((_DWORD *)this + 14));
+    *((_DWORD *)this + 17) = IAI_Module::Problem(*((IAI_Module **)this + 25), *((_DWORD *)this + 15), *((_DWORD *)this + 11), *((_DWORD *)this + 12), *((_DWORD *)this + 13), *((_DWORD *)this + 14));
     if ( *((_DWORD *)this + 17) )
     {
       BBSupportTracePrintF(0, "Main OK ProbNr:%i von EventNr: %i", *((_DWORD *)this + 15), *((_DWORD *)this + 3));
@@ -162,7 +178,9 @@ bool  CMainProblemSolveEvent::action(void) {
       CSchedule::MarkSolvedProblem(*((CSchedule **)this + 10), *((_DWORD *)this + 8), 1);
       *((_DWORD *)this + 5) = 3;
       if ( v8 )
+      {
         v8[5] = 3;
+      }
     }
     else
     {

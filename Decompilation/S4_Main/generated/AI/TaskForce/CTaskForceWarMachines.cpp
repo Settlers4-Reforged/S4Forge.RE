@@ -4,7 +4,7 @@
 // Definitions for class CTaskForceWarMachines
 
 // address=[0x132a200]
-// Decompiled from CTaskForceWarMachines *__thiscall CTaskForceWarMachines::CTaskForceWarMachines(  CTaskForceWarMachines *this,  int a2,  int a3,  int a4)
+// Decompiled from CTaskForceWarMachines *__thiscall CTaskForceWarMachines::CTaskForceWarMachines(CTaskForceWarMachines *this, int a2, int a3, int a4)
  CTaskForceWarMachines::CTaskForceWarMachines(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 4, a3, a4);
@@ -85,10 +85,14 @@ int  CTaskForceWarMachines::CatapultSectorId(void)const {
   v5 = 0;
   Entity = CAITaskForce::FirstEntity(this);
   if ( !Entity )
+  {
     return v5;
+  }
   iEntityId = CAIEntityInfo::EntityId(Entity);
   if ( iEntityId <= 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 2305, "iEntityId > 0") == 1 )
+  {
     __debugbreak();
+  }
   IAIEnvironment::EntityGetPosition(iEntityId, &v2, &v3);
   return IAIEnvironment::WorldCatapultSectorId(v2, v3);
 }
@@ -105,10 +109,14 @@ int  CTaskForceWarMachines::CalculateBuildingDestination(int a2) {
 
   v6 = -1;
   if ( a2 <= 0 )
+  {
     return v6;
+  }
   v7 = CTaskForceWarMachines::CatapultSectorId(this);
   if ( v7 <= 0 )
+  {
     return v6;
+  }
   IAIEnvironment::BuildingGetEnsignPosition(a2, &v3, &v4);
   return IAIEnvironment::FindNearestCatapultSectorPosition(v7, v3, v4, 15);
 }
@@ -124,8 +132,7 @@ void  CTaskForceWarMachines::CheckBuildingDestination(void) {
   int v4; // [esp+4h] [ebp-Ch]
   int iCatapultSectorId; // [esp+8h] [ebp-8h]
 
-  if ( !CAITaskForce::GoalIsEntity(this)
-    && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 2325, "GoalIsEntity()") == 1 )
+  if ( !CAITaskForce::GoalIsEntity(this) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 2325, "GoalIsEntity()") == 1 )
   {
     __debugbreak();
   }
@@ -134,7 +141,9 @@ void  CTaskForceWarMachines::CheckBuildingDestination(void) {
   {
     iCatapultSectorId = CTaskForceWarMachines::CatapultSectorId(this);
     if ( iCatapultSectorId <= 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 2333, "iCatapultSectorId > 0") == 1 )
+    {
       __debugbreak();
+    }
     v4 = 0;
     if ( CAITaskForceEx::DestinationXY(this) > 0 )
     {
@@ -165,12 +174,10 @@ void  CTaskForceWarMachines::Execute(void) {
   {
     if ( v4 >= 10 )
     {
-      if ( BBSupportDbgReport(
-             1,
-             "AI\\AI_TaskForcesEx.cpp",
-             2455,
-             "CTaskForceWarMachines::Execute(): Endless loop detected!") == 1 )
+      if ( BBSupportDbgReport(1, "AI\\AI_TaskForcesEx.cpp", 2455, "CTaskForceWarMachines::Execute(): Endless loop detected!") == 1 )
+      {
         __debugbreak();
+      }
     }
     else
     {
@@ -182,12 +189,18 @@ void  CTaskForceWarMachines::Execute(void) {
         case 101:
           Entity = CAITaskForce::FirstEntity(this);
           if ( !Entity )
+          {
             return;
+          }
           iEntityId = CAIEntityInfo::EntityId(Entity);
           if ( iEntityId <= 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 2388, "iEntityId > 0") == 1 )
+          {
             __debugbreak();
+          }
           if ( IAIEnvironment::MovingEntityWalkingState(iEntityId) >= 64 )
+          {
             return;
+          }
           CAITaskForce::SetState(this, 103);
           goto LABEL_2;
         case 102:
@@ -221,12 +234,10 @@ LABEL_2:
           CTaskForceWarMachines::InitWarMachineWalk(this, 0);
           break;
         default:
-          if ( BBSupportDbgReport(
-                 1,
-                 "AI\\AI_TaskForcesEx.cpp",
-                 2446,
-                 "CTaskForceWarMachines::Execute(): Invalid state!") == 1 )
+          if ( BBSupportDbgReport(1, "AI\\AI_TaskForcesEx.cpp", 2446, "CTaskForceWarMachines::Execute(): Invalid state!") == 1 )
+          {
             __debugbreak();
+          }
           CAITaskForce::SetNewStatusAndState(this, 1, 0, 0);
           return;
       }

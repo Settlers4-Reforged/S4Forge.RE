@@ -10,7 +10,9 @@ bool  CGenericVehicleIterator::Init(int a2, int a3, int a4) {
   if ( CPlayerIterator::Init(this, a2) )
   {
     if ( !a4 )
+    {
       a4 = a3;
+    }
     *((_DWORD *)this + 7) = a3;
     *((_DWORD *)this + 8) = a4;
     return 1;
@@ -38,9 +40,13 @@ int  CGenericVehicleIterator::FirstVehicle(void) {
     v2 = CPlayerIterator::PlayerId(this);
     *((_DWORD *)this + 6) = CVehicleMgr::GetFirstVehicleId((CVehicleMgr *)&g_cVehicleMgr, v2, v3);
     if ( *((_DWORD *)this + 6) )
+    {
       return *((_DWORD *)this + 6);
+    }
     else
+    {
       return CGenericVehicleIterator::NextVehicle(this);
+    }
   }
   else
   {
@@ -70,7 +76,9 @@ int  CGenericVehicleIterator::NextVehicle(void) {
       if ( ++*((_DWORD *)this + 5) > *((_DWORD *)this + 8) )
       {
         if ( !CPlayerIterator::NextPlayer(this) )
+        {
           return 0;
+        }
         *((_DWORD *)this + 5) = *((_DWORD *)this + 7);
       }
       v5 = CVehicleIteratorBase::VehicleType((CGenericVehicleIterator *)((char *)this + 20));
@@ -88,9 +96,13 @@ int  CGenericVehicleIterator::NextVehicle(void) {
 int  CGenericVehicleIterator::NextVehicleIfCurrentIsNotValid(void) {
   
   if ( CVehicleIteratorBase::VehicleValid((CVehicleIteratorBase *)(this + 5), this[6]) )
+  {
     return this[6];
+  }
   else
+  {
     return CGenericVehicleIterator::NextVehicle((CGenericVehicleIterator *)this);
+  }
 }
 
 
@@ -99,9 +111,13 @@ int  CGenericVehicleIterator::NextVehicleIfCurrentIsNotValid(void) {
 int  CGenericVehicleIterator::NextVehicleOrFirstIfCurrentIsEndOfList(void) {
   
   if ( *((_DWORD *)this + 6) )
+  {
     return CGenericVehicleIterator::NextVehicle(this);
+  }
   else
+  {
     return CGenericVehicleIterator::FirstVehicle(this);
+  }
 }
 
 

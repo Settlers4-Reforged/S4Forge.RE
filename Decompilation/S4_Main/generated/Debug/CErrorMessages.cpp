@@ -11,7 +11,9 @@ char const *  CErrorMessages::GetErrorMessage(class CErrorMessageId const & a2)c
 
   Id = CErrorMessageId::GetId(a2);
   if ( Id != 1 )
+  {
     Id = 0;
+  }
   return (char *)s_aErrorMessages[Id].m_uMessage;
 }
 

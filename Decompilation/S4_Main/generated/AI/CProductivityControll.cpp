@@ -16,7 +16,7 @@
 
 
 // address=[0x2f575b0]
-// Decompiled from IScheduleEntry *__thiscall CProductivityControll::CProductivityControll(  IScheduleEntry *this,  int a2,  int a3,  int a4,  int a5,  int a6)
+// Decompiled from IScheduleEntry *__thiscall CProductivityControll::CProductivityControll(IScheduleEntry *this, int a2, int a3, int a4, int a5, int a6)
  CProductivityControll::CProductivityControll(struct SBuildId a2, enum BUILDING_TYPES a3, int a4, int a5) {
   
   _BYTE v7[112]; // [esp+4h] [ebp-80h] BYREF
@@ -128,11 +128,7 @@ bool  CProductivityControll::IsShooting(void) {
   std::vector<SBuildId>::vector<SBuildId>();
   v27 = 0;
   SpecialTask = CSchedule::GetSpecialTask(*((CSchedule **)v16 + 10), 3);
-  if ( *((_DWORD *)v16 + 12) == 1
-    || (v9 = CSchedule::GetEcoSector(*((CSchedule **)v16 + 10)),
-        (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v9 + 304))(
-          v9,
-          *((_DWORD *)v16 + 11))) )
+  if ( *((_DWORD *)v16 + 12) == 1 || (v9 = CSchedule::GetEcoSector(*((CSchedule **)v16 + 10)), (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v9 + 304))(v9, *((_DWORD *)v16 + 11))) )
   {
     if ( (int)--*((_DWORD *)v16 + 27) < 0 )
     {
@@ -141,21 +137,13 @@ bool  CProductivityControll::IsShooting(void) {
         if ( *((_DWORD *)v16 + 12) != 1 )
         {
           EcoSector = CSchedule::GetEcoSector(*((CSchedule **)v16 + 10));
-          if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 84))(
-                  EcoSector,
-                  *((_DWORD *)v16 + 11)) )
+          if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 84))(EcoSector, *((_DWORD *)v16 + 11)) )
           {
             v7 = CSchedule::GetEcoSector(*((CSchedule **)v16 + 10));
-            if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v7 + 56))(
-                   v7,
-                   *((_DWORD *)SpecialTask + 23),
-                   10) > 3 )
+            if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v7 + 56))(v7, *((_DWORD *)SpecialTask + 23), 10) > 3 )
             {
               v6 = CSchedule::GetEcoSector(*((CSchedule **)v16 + 10));
-              if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v6 + 56))(
-                     v6,
-                     *((_DWORD *)SpecialTask + 23),
-                     20) > 3 )
+              if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v6 + 56))(v6, *((_DWORD *)SpecialTask + 23), 20) > 3 )
               {
                 *((_BYTE *)v16 + 101) = 0;
                 *((_DWORD *)v16 + 27) = 60;
@@ -177,27 +165,17 @@ bool  CProductivityControll::IsShooting(void) {
         case 1:
         case 7:
           if ( *((_DWORD *)v16 + 12) == 1 )
+          {
             goto CProductivityControll__IsShooting___def_33579A4;
-          CSchedule::SetBestWorkingAreaPosition(
-            *((CSchedule **)v16 + 10),
-            *((_DWORD *)v16 + 11),
-            *((_DWORD *)v16 + 21),
-            (int)&v14,
-            (int)&v15);
-          ContentOfWorkingArea = CSchedule::GetContentOfWorkingArea(
-                                   *((_DWORD *)v16 + 10),
-                                   *((_DWORD *)v16 + 21),
-                                   v14,
-                                   v15);
+          }
+          CSchedule::SetBestWorkingAreaPosition(*((CSchedule **)v16 + 10), *((_DWORD *)v16 + 11), *((_DWORD *)v16 + 21), (int)&v14, (int)&v15);
+          ContentOfWorkingArea = CSchedule::GetContentOfWorkingArea(*((_DWORD *)v16 + 10), *((_DWORD *)v16 + 21), v14, v15);
           if ( *((_DWORD *)v16 + 21) == 7 )
+          {
             goto CProductivityControll__IsShooting___def_33579A4;
+          }
           CReserveDatabase::UnpackPosition(**((CReserveDatabase ***)v16 + 10), *((_DWORD *)v16 + 17), &v14, &v15);
-          if ( *((_BYTE *)v16 + 89)
-            || CSchedule::ResourceNearAtWork(*((CSchedule **)v16 + 10), *((_DWORD *)v16 + 21), 2, v14, v15, 50)
-            || ContentOfWorkingArea > CProductionDataTab::GetMinWorkLoad(
-                                        *(void **)(*((_DWORD *)v16 + 10) + 40),
-                                        *((_DWORD *)v16 + 21),
-                                        *(_DWORD *)(*((_DWORD *)v16 + 10) + 24)) )
+          if ( *((_BYTE *)v16 + 89) || CSchedule::ResourceNearAtWork(*((CSchedule **)v16 + 10), *((_DWORD *)v16 + 21), 2, v14, v15, 50) || ContentOfWorkingArea > CProductionDataTab::GetMinWorkLoad(*(void **)(*((_DWORD *)v16 + 10) + 40), *((_DWORD *)v16 + 21), *(_DWORD *)(*((_DWORD *)v16 + 10) + 24)) )
           {
             goto CProductivityControll__IsShooting___def_33579A4;
           }
@@ -209,21 +187,13 @@ bool  CProductivityControll::IsShooting(void) {
           if ( *((_DWORD *)v16 + 12) == 3 )
           {
             v13 = CSchedule::GetContentOfWorkingArea(*((_DWORD *)v16 + 10), 1, v14, v15);
-            if ( v13 > CProductionDataTab::GetMaxWorkLoad(
-                         *(void **)(*((_DWORD *)v16 + 10) + 40),
-                         *((_DWORD *)v16 + 21),
-                         *(_DWORD *)(*((_DWORD *)v16 + 10) + 24))
-              && !*((_BYTE *)v16 + 89) )
+            if ( v13 > CProductionDataTab::GetMaxWorkLoad(*(void **)(*((_DWORD *)v16 + 10) + 40), *((_DWORD *)v16 + 21), *(_DWORD *)(*((_DWORD *)v16 + 10) + 24)) && !*((_BYTE *)v16 + 89) )
             {
               *((_BYTE *)v16 + 89) = 1;
               v5 = CSchedule::GetEcoSector(*((CSchedule **)v16 + 10));
               (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v5 + 276))(v5, *((_DWORD *)v16 + 11));
             }
-            if ( v13 < CProductionDataTab::GetMinWorkLoad(
-                         *(void **)(*((_DWORD *)v16 + 10) + 40),
-                         *((_DWORD *)v16 + 21),
-                         *(_DWORD *)(*((_DWORD *)v16 + 10) + 24))
-              && *((_BYTE *)v16 + 89) )
+            if ( v13 < CProductionDataTab::GetMinWorkLoad(*(void **)(*((_DWORD *)v16 + 10) + 40), *((_DWORD *)v16 + 21), *(_DWORD *)(*((_DWORD *)v16 + 10) + 24)) && *((_BYTE *)v16 + 89) )
             {
               *((_BYTE *)v16 + 89) = 0;
               v4 = CSchedule::GetEcoSector(*((CSchedule **)v16 + 10));
@@ -235,26 +205,15 @@ bool  CProductivityControll::IsShooting(void) {
         case 5:
         case 6:
           if ( *((_DWORD *)v16 + 12) == 1 )
+          {
             goto LABEL_19;
-          if ( CSchedule::SetBestWorkingAreaPosition(
-                 *((CSchedule **)v16 + 10),
-                 *((_DWORD *)v16 + 11),
-                 *((_DWORD *)v16 + 21),
-                 (int)&v14,
-                 (int)&v15) )
+          }
+          if ( CSchedule::SetBestWorkingAreaPosition(*((CSchedule **)v16 + 10), *((_DWORD *)v16 + 11), *((_DWORD *)v16 + 21), (int)&v14, (int)&v15) )
           {
             goto CProductivityControll__IsShooting___def_33579A4;
           }
           CReserveDatabase::PackPosition(**((CReserveDatabase ***)v16 + 10), v14, v15);
-          if ( *((_DWORD *)v16 + 12) == 3
-            && (v11 = CSchedule::GetContentOfWorkingArea(
-                        *((CSchedule **)v16 + 10),
-                        *((_DWORD *)v16 + 11),
-                        *((_DWORD *)v16 + 21)),
-                v11 <= CProductionDataTab::GetMinWorkLoad(
-                         *(void **)(*((_DWORD *)v16 + 10) + 40),
-                         *((_DWORD *)v16 + 21),
-                         *(_DWORD *)(*((_DWORD *)v16 + 10) + 24))) )
+          if ( *((_DWORD *)v16 + 12) == 3 && (v11 = CSchedule::GetContentOfWorkingArea(*((CSchedule **)v16 + 10), *((_DWORD *)v16 + 11), *((_DWORD *)v16 + 21)), v11 <= CProductionDataTab::GetMinWorkLoad(*(void **)(*((_DWORD *)v16 + 10) + 40), *((_DWORD *)v16 + 21), *(_DWORD *)(*((_DWORD *)v16 + 10) + 24))) )
           {
             v26 = 1;
             v27 = -1;
@@ -272,9 +231,7 @@ LABEL_19:
           break;
         case 0xA:
         case 0xC:
-          if ( CSchedule::EnoughNumberOfBuildingType(*((void **)v16 + 10), 5)
-            || *((_BYTE *)v16 + 89)
-            || CSchedule::ResourceNearAtWork(*((CSchedule **)v16 + 10), *((_DWORD *)v16 + 21), 5, v14, v15, 150) )
+          if ( CSchedule::EnoughNumberOfBuildingType(*((void **)v16 + 10), 5) || *((_BYTE *)v16 + 89) || CSchedule::ResourceNearAtWork(*((CSchedule **)v16 + 10), *((_DWORD *)v16 + 21), 5, v14, v15, 150) )
           {
             goto CProductivityControll__IsShooting___def_33579A4;
           }
@@ -285,13 +242,9 @@ LABEL_19:
         case 0xB:
         case 0x24:
           if ( *((_DWORD *)v16 + 12) == 3 )
-            CSchedule::SetSpecialWorkingAreaPosition(
-              *((CSchedule **)v16 + 10),
-              *((_DWORD *)v16 + 11),
-              *((_DWORD *)v16 + 21),
-              (int)&v14,
-              (int)&v15,
-              0);
+          {
+            CSchedule::SetSpecialWorkingAreaPosition(*((CSchedule **)v16 + 10), *((_DWORD *)v16 + 11), *((_DWORD *)v16 + 21), (int)&v14, (int)&v15, 0);
+          }
           goto CProductivityControll__IsShooting___def_33579A4;
         case 0xE:
         case 0xF:
@@ -301,11 +254,7 @@ LABEL_19:
           *((_DWORD *)v16 + 24) = 0;
           if ( *((_DWORD *)v16 + 12) != 3 || CProductivityControll::CheckProductivity(v16) )
           {
-            if ( *((_DWORD *)v16 + 12) == 1
-              || CSchedule::GetContentOfWorkingArea(
-                   *((CSchedule **)v16 + 10),
-                   *((_DWORD *)v16 + 11),
-                   *((_DWORD *)v16 + 21)) )
+            if ( *((_DWORD *)v16 + 12) == 1 || CSchedule::GetContentOfWorkingArea(*((CSchedule **)v16 + 10), *((_DWORD *)v16 + 11), *((_DWORD *)v16 + 21)) )
             {
 CProductivityControll__IsShooting___def_33579A4:
               v17 = 0;
@@ -331,9 +280,7 @@ CProductivityControll__IsShooting___def_33579A4:
           }
           break;
         case 0x16:
-          if ( (unsigned __int8)CBuildingManagerTask::IsBuildingAtPlanning(SpecialTask, 24)
-            || *((_BYTE *)v16 + 89)
-            || CSchedule::GetNumberOfBuildingType(*((_DWORD *)v16 + 10), 24) >= 1 )
+          if ( (unsigned __int8)CBuildingManagerTask::IsBuildingAtPlanning(SpecialTask, 24) || *((_BYTE *)v16 + 89) || CSchedule::GetNumberOfBuildingType(*((_DWORD *)v16 + 10), 24) >= 1 )
           {
             goto CProductivityControll__IsShooting___def_33579A4;
           }
@@ -345,31 +292,20 @@ CProductivityControll__IsShooting___def_33579A4:
           if ( *((_DWORD *)v16 + 12) == 3 && !*((_BYTE *)v16 + 89) )
           {
             v3 = CSchedule::GetEcoSector(*((CSchedule **)v16 + 10));
-            (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int, int))(*(_DWORD *)v3 + 272))(
-              v3,
-              *((_DWORD *)v16 + 11),
-              29,
-              2);
+            (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int, int))(*(_DWORD *)v3 + 272))(v3, *((_DWORD *)v16 + 11), 29, 2);
             *((_BYTE *)v16 + 89) = 1;
           }
           goto CProductivityControll__IsShooting___def_33579A4;
         case 0x23:
           if ( *((_DWORD *)v16 + 12) == 3 )
-            CSchedule::SetSpecialWorkingAreaPosition(
-              *((CSchedule **)v16 + 10),
-              *((_DWORD *)v16 + 11),
-              *((_DWORD *)v16 + 21),
-              (int)&v14,
-              (int)&v15,
-              0);
+          {
+            CSchedule::SetSpecialWorkingAreaPosition(*((CSchedule **)v16 + 10), *((_DWORD *)v16 + 11), *((_DWORD *)v16 + 21), (int)&v14, (int)&v15, 0);
+          }
           goto LABEL_57;
         case 0x25:
         case 0x27:
 LABEL_57:
-          if ( (unsigned __int8)CBuildingManagerTask::IsBuildingAtPlanning(SpecialTask, 43)
-            || *((_DWORD *)v16 + 12) == 1
-            || *((_BYTE *)v16 + 89)
-            || CSchedule::GetNumberOfBuildingType(*((_DWORD *)v16 + 10), 43) >= 1 )
+          if ( (unsigned __int8)CBuildingManagerTask::IsBuildingAtPlanning(SpecialTask, 43) || *((_DWORD *)v16 + 12) == 1 || *((_BYTE *)v16 + 89) || CSchedule::GetNumberOfBuildingType(*((_DWORD *)v16 + 10), 43) >= 1 )
           {
             goto CProductivityControll__IsShooting___def_33579A4;
           }
@@ -379,11 +315,7 @@ LABEL_57:
           result = v19;
           break;
         case 0x2B:
-          if ( (unsigned __int8)CBuildingManagerTask::IsBuildingAtPlanning(SpecialTask, 44)
-            || CDebitLevelManager::DebitPreCondition(*(CDebitLevelManager **)(*((_DWORD *)v16 + 10) + 8), 9)
-            || *((_DWORD *)v16 + 12) == 1
-            || *((_BYTE *)v16 + 89)
-            || CSchedule::GetNumberOfBuildingType(*((_DWORD *)v16 + 10), 44) >= 1 )
+          if ( (unsigned __int8)CBuildingManagerTask::IsBuildingAtPlanning(SpecialTask, 44) || CDebitLevelManager::DebitPreCondition(*(CDebitLevelManager **)(*((_DWORD *)v16 + 10) + 8), 9) || *((_DWORD *)v16 + 12) == 1 || *((_BYTE *)v16 + 89) || CSchedule::GetNumberOfBuildingType(*((_DWORD *)v16 + 10), 44) >= 1 )
           {
             goto CProductivityControll__IsShooting___def_33579A4;
           }
@@ -457,9 +389,13 @@ bool  CProductivityControll::action(void) {
       C = operator new(0x70u);
       v23 = 0;
       if ( C )
+      {
         v18 = CMainProblemSolveEvent::CMainProblemSolveEvent((CMainProblemSolveEvent *)C, v22[3], 9, 2, v22[17], 0, 0);
+      }
       else
+      {
         v18 = 0;
+      }
       v23 = -1;
       v1 = (CReserveDatabase **)CSchedule::NewSchedEntry((CSchedule *)v22[10], v18);
       v22[8] = v1;
@@ -470,16 +406,9 @@ bool  CProductivityControll::action(void) {
       goto CProductivityControll__action___def_335801D;
     case 3u:
     case 5u:
-      BBSupportTracePrintF(
-        3,
-        "AI_BuildingEvent::PlayerNr %i destroy %s with ID %i",
-        v22[10][5],
-        (&off_3AC3FBC)[2 * (_DWORD)v22[21]],
-        v22[11]);
+      BBSupportTracePrintF(3, "AI_BuildingEvent::PlayerNr %i destroy %s with ID %i", v22[10][5], (&off_3AC3FBC)[2 * (_DWORD)v22[21]], v22[11]);
       EcoSector = CSchedule::GetEcoSector((CSchedule *)v22[10]);
-      (*(void (__thiscall **)(struct IAIEcoManager *, CReserveDatabase **))(*(_DWORD *)EcoSector + 104))(
-        EcoSector,
-        v22[11]);
+      (*(void (__thiscall **)(struct IAIEcoManager *, CReserveDatabase **))(*(_DWORD *)EcoSector + 104))(EcoSector, v22[11]);
       v22[5] = (CReserveDatabase **)3;
       goto CProductivityControll__action___def_335801D;
     case 9u:
@@ -488,9 +417,13 @@ bool  CProductivityControll::action(void) {
       v16 = operator new(0x70u);
       v23 = 1;
       if ( v16 )
+      {
         v15 = CMainProblemSolveEvent::CMainProblemSolveEvent((CMainProblemSolveEvent *)v16, v22[3], 9, 5, v22[17], 0, 0);
+      }
       else
+      {
         v15 = 0;
+      }
       v23 = -1;
       v3 = (CReserveDatabase **)CSchedule::NewSchedEntry((CSchedule *)v22[10], v15);
       v22[8] = v3;
@@ -505,7 +438,9 @@ bool  CProductivityControll::action(void) {
     case 0x10u:
     case 0x11u:
       if ( v22[24] != (CReserveDatabase **)2 )
+      {
         goto CProductivityControll__action___def_335801D;
+      }
       result = 0;
       break;
     case 0x15u:
@@ -513,16 +448,13 @@ bool  CProductivityControll::action(void) {
       v14 = operator new(0x70u);
       v23 = 2;
       if ( v14 )
-        v13 = CMainProblemSolveEvent::CMainProblemSolveEvent(
-                (CMainProblemSolveEvent *)v14,
-                v22[3],
-                9,
-                24,
-                v22[17],
-                0,
-                0);
+      {
+        v13 = CMainProblemSolveEvent::CMainProblemSolveEvent((CMainProblemSolveEvent *)v14, v22[3], 9, 24, v22[17], 0, 0);
+      }
       else
+      {
         v13 = 0;
+      }
       v23 = -1;
       v4 = (CReserveDatabase **)CSchedule::NewSchedEntry((CSchedule *)v22[10], v13);
       v22[8] = v4;
@@ -538,16 +470,13 @@ bool  CProductivityControll::action(void) {
       v12 = operator new(0x70u);
       v23 = 3;
       if ( v12 )
-        v11 = CMainProblemSolveEvent::CMainProblemSolveEvent(
-                (CMainProblemSolveEvent *)v12,
-                v22[3],
-                9,
-                43,
-                v22[17],
-                0,
-                0);
+      {
+        v11 = CMainProblemSolveEvent::CMainProblemSolveEvent((CMainProblemSolveEvent *)v12, v22[3], 9, 43, v22[17], 0, 0);
+      }
       else
+      {
         v11 = 0;
+      }
       v23 = -1;
       v5 = (CReserveDatabase **)CSchedule::NewSchedEntry((CSchedule *)v22[10], v11);
       v22[8] = v5;
@@ -561,9 +490,13 @@ bool  CProductivityControll::action(void) {
       v10 = operator new(0x70u);
       v23 = 4;
       if ( v10 )
+      {
         v9 = CMainProblemSolveEvent::CMainProblemSolveEvent((CMainProblemSolveEvent *)v10, v22[3], 9, 44, v22[17], 0, 0);
+      }
       else
+      {
         v9 = 0;
+      }
       v23 = -1;
       v6 = (CReserveDatabase **)CSchedule::NewSchedEntry((CSchedule *)v22[10], v9);
       v22[8] = v6;
@@ -588,11 +521,11 @@ bool  CProductivityControll::IsAlive(void) {
   struct IAIEcoManager *EcoSector; // [esp+0h] [ebp-8h]
 
   if ( *((_DWORD *)this + 12) == 1 )
+  {
     return 1;
+  }
   EcoSector = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-  if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 304))(
-         EcoSector,
-         *((_DWORD *)this + 11)) )
+  if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 304))(EcoSector, *((_DWORD *)this + 11)) )
   {
     return 1;
   }
@@ -610,14 +543,18 @@ bool  CProductivityControll::WaitFor(void) {
     *((_DWORD *)this + 8) = 0;
     *((_BYTE *)this + 89) = 0;
     if ( (int)--*((_DWORD *)this + 26) < 1 )
+    {
       return 1;
+    }
   }
   else if ( *((_DWORD *)this + 23) == 2 )
   {
     *((_DWORD *)this + 8) = 0;
     *((_BYTE *)this + 89) = 0;
     if ( (int)--*((_DWORD *)this + 26) < 1 )
+    {
       return 1;
+    }
   }
   else
   {
@@ -645,21 +582,13 @@ int  CProductivityControll::CalcPotentialOutput(void) {
   v8 = 0;
   v9 = *((_DWORD *)this + 21);
   if ( v9 != 1 && (v9 <= 3 || v9 > 6) )
-    return CProductionDataTab::GetNeededFixTicks(
-             *(void **)(*((_DWORD *)v10 + 10) + 40),
-             *((_DWORD *)v10 + 21),
-             *(_DWORD *)(*((_DWORD *)v10 + 10) + 24));
+  {
+    return CProductionDataTab::GetNeededFixTicks(*(void **)(*((_DWORD *)v10 + 10) + 40), *((_DWORD *)v10 + 21), *(_DWORD *)(*((_DWORD *)v10 + 10) + 24));
+  }
   CReserveDatabase::UnpackPosition(**((CReserveDatabase ***)v10 + 10), *((_DWORD *)v10 + 17), &v4, &v5);
   CReserveDatabase::UnpackPosition(**((CReserveDatabase ***)v10 + 10), *((_DWORD *)v10 + 18), &v6, &v7);
-  NeededFixTicks = CProductionDataTab::GetNeededFixTicks(
-                     *(void **)(*((_DWORD *)v10 + 10) + 40),
-                     *((_DWORD *)v10 + 21),
-                     *(_DWORD *)(*((_DWORD *)v10 + 10) + 24));
-  v2 = 2
-     * CProductionDataTab::GetNeededVarTicks(
-         *(void **)(*((_DWORD *)v10 + 10) + 40),
-         *((_DWORD *)v10 + 21),
-         *(_DWORD *)(*((_DWORD *)v10 + 10) + 24));
+  NeededFixTicks = CProductionDataTab::GetNeededFixTicks(*(void **)(*((_DWORD *)v10 + 10) + 40), *((_DWORD *)v10 + 21), *(_DWORD *)(*((_DWORD *)v10 + 10) + 24));
+  v2 = 2 * CProductionDataTab::GetNeededVarTicks(*(void **)(*((_DWORD *)v10 + 10) + 40), *((_DWORD *)v10 + 21), *(_DWORD *)(*((_DWORD *)v10 + 10) + 24));
   return CSchedule::CalcDistance(*((CSchedule **)v10 + 10), v4, v5, v6, v7) * v2 + NeededFixTicks;
 }
 
@@ -690,22 +619,17 @@ bool  CProductivityControll::PileDistribution(void) {
   int j; // [esp+30h] [ebp-10h]
   int i; // [esp+38h] [ebp-8h]
 
-  for ( i = 0; i < 2; ++i )
+  for ( i = 0;
+        i < 2;
+        ++i )
   {
-    InputTypePile = CProductionDataTab::GetInputTypePile(
-                      *(void **)(*((_DWORD *)this + 10) + 40),
-                      *((_DWORD *)this + 21),
-                      i,
-                      *(_DWORD *)(*((_DWORD *)this + 10) + 24));
+    InputTypePile = CProductionDataTab::GetInputTypePile(*(void **)(*((_DWORD *)this + 10) + 40), *((_DWORD *)this + 21), i, *(_DWORD *)(*((_DWORD *)this + 10) + 24));
     if ( CSchedule::SharedPileType(InputTypePile) )
     {
       if ( *((_DWORD *)this + 12) == 3 )
       {
         EcoSector = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-        if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)EcoSector + 56))(
-               EcoSector,
-               *((_DWORD *)this + 11),
-               InputTypePile) < 3 )
+        if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)EcoSector + 56))(EcoSector, *((_DWORD *)this + 11), InputTypePile) < 3 )
         {
           v17 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
           v16 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
@@ -713,10 +637,7 @@ bool  CProductivityControll::PileDistribution(void) {
           v1 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v17 + 128))(v17, 0);
           v2 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v16 + 132))(v16, v1);
           v8 = CReserveDatabase::PackPosition(**((CReserveDatabase ***)this + 10), 5, v2);
-          v3 = CReserveDatabase::PackPosition(
-                 **((CReserveDatabase ***)this + 10),
-                 *((_DWORD *)this + 21),
-                 InputTypePile);
+          v3 = CReserveDatabase::PackPosition(**((CReserveDatabase ***)this + 10), *((_DWORD *)this + 21), InputTypePile);
           (*(void (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v15 + 280))(v15, 5028, v3, v8);
           return 0;
         }
@@ -724,16 +645,19 @@ bool  CProductivityControll::PileDistribution(void) {
     }
   }
   if ( *((_DWORD *)this + 12) != 3 )
-    return 1;
-  if ( !*((_DWORD *)this + 19) )
-    return 1;
-  v14 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-  if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, _DWORD))(*(_DWORD *)v14 + 56))(
-         v14,
-         *((_DWORD *)this + 11),
-         *((_DWORD *)this + 19)) < 3 )
   {
-    for ( j = 0; j < 3; ++j )
+    return 1;
+  }
+  if ( !*((_DWORD *)this + 19) )
+  {
+    return 1;
+  }
+  v14 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
+  if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, _DWORD))(*(_DWORD *)v14 + 56))(v14, *((_DWORD *)this + 11), *((_DWORD *)this + 19)) < 3 )
+  {
+    for ( j = 0;
+          j < 3;
+          ++j )
     {
       if ( j )
       {
@@ -806,17 +730,12 @@ bool  CProductivityControll::CheckProductivity(void) {
   struct IAIEcoManager *EcoSector; // [esp+4h] [ebp-8h]
 
   if ( CSchedule::GetSumResourceAmount(*((_DWORD *)this + 10), *((_DWORD *)this + 21), *((_DWORD *)this + 17), 0, 1) >= 3 )
+  {
     return 1;
-  BBSupportTracePrintF(
-    3,
-    "AI_BuildingEvent::PlayerNr %i destroy %s with ID %i",
-    *(_DWORD *)(*((_DWORD *)this + 10) + 20),
-    (&off_3AC3FBC)[2 * *((_DWORD *)this + 21)],
-    *((_DWORD *)this + 11));
+  }
+  BBSupportTracePrintF(3, "AI_BuildingEvent::PlayerNr %i destroy %s with ID %i", *(_DWORD *)(*((_DWORD *)this + 10) + 20), (&off_3AC3FBC)[2 * *((_DWORD *)this + 21)], *((_DWORD *)this + 11));
   EcoSector = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-  (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 104))(
-    EcoSector,
-    *((_DWORD *)this + 11));
+  (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 104))(EcoSector, *((_DWORD *)this + 11));
   *((_DWORD *)this + 5) = 3;
   return 0;
 }

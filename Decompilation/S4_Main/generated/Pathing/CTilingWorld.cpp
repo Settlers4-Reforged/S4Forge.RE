@@ -15,8 +15,7 @@ int __cdecl CTilingWorld::WorldGroundType(int a1) {
 // Decompiled from BOOL __cdecl CTilingWorld::WorldInInnerWorld16(int a1, int a2)
 bool __cdecl CTilingWorld::WorldInInnerWorld16(int a1, int a2) {
   
-  return a2 - 16 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 32)
-      && a1 - 2 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 16);
+  return a2 - 16 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 32) && a1 - 2 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 16);
 }
 
 
@@ -24,8 +23,7 @@ bool __cdecl CTilingWorld::WorldInInnerWorld16(int a1, int a2) {
 // Decompiled from BOOL __cdecl CTilingWorld::WorldInInnerWorld1(int a1, int a2)
 bool __cdecl CTilingWorld::WorldInInnerWorld1(int a1, int a2) {
   
-  return a2 - 1 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 2)
-      && a1 - 1 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 2);
+  return a2 - 1 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 2) && a1 - 1 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 2);
 }
 
 
@@ -33,8 +31,7 @@ bool __cdecl CTilingWorld::WorldInInnerWorld1(int a1, int a2) {
 // Decompiled from BOOL __cdecl CTilingWorld::WorldInInnerWorld2(int a1, int a2)
 bool __cdecl CTilingWorld::WorldInInnerWorld2(int a1, int a2) {
   
-  return a2 - 2 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 4)
-      && a1 - 2 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 4);
+  return a2 - 2 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 4) && a1 - 2 < (unsigned int)(CTilingWorld::m_uWorldWidthHeight - 4);
 }
 
 
@@ -50,8 +47,7 @@ bool __cdecl CTilingWorld::WorldInWorld(int a1, int a2) {
 // Decompiled from BOOL __cdecl CTilingWorld::WorldInWorldPackedXY(int a1)
 bool __cdecl CTilingWorld::WorldInWorldPackedXY(int a1) {
   
-  return a1 >> 16 < (unsigned int)CTilingWorld::m_uWorldWidthHeight
-      && (unsigned __int16)a1 < (unsigned int)CTilingWorld::m_uWorldWidthHeight;
+  return a1 >> 16 < (unsigned int)CTilingWorld::m_uWorldWidthHeight && (unsigned __int16)a1 < (unsigned int)CTilingWorld::m_uWorldWidthHeight;
 }
 
 
@@ -171,7 +167,7 @@ int __cdecl CTilingWorld::WorldWidthHeight(void) {
 // [Decompilation failed for static int * CTilingWorld::m_iWorldSurroundingRelIndices]
 
 // address=[0x15e75d0]
-// Decompiled from void __cdecl CTilingWorld::WorldInterfaceInit(  int _iWorldWidthHeight,  struct T_GFX_MAP_ELEMENT *_pGfxMapElements,  unsigned __int8 *_pFlagBitsLayer,  unsigned __int8 *_pFogLayer)
+// Decompiled from void __cdecl CTilingWorld::WorldInterfaceInit(int _iWorldWidthHeight, struct T_GFX_MAP_ELEMENT *_pGfxMapElements, unsigned __int8 *_pFlagBitsLayer, unsigned __int8 *_pFogLayer)
 void __cdecl CTilingWorld::WorldInterfaceInit(int _iWorldWidthHeight, struct T_GFX_MAP_ELEMENT * _pGfxMapElements, unsigned char * _pFlagBitsLayer, unsigned char * _pFogLayer) {
   
   int v4; // esi
@@ -179,38 +175,39 @@ void __cdecl CTilingWorld::WorldInterfaceInit(int _iWorldWidthHeight, struct T_G
   int j; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  if ( _iWorldWidthHeight < 16
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 317, "_iWorldWidthHeight >= Squares::SQUARE_WIDTH_HEIGHT") == 1 )
+  if ( _iWorldWidthHeight < 16 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 317, "_iWorldWidthHeight >= Squares::SQUARE_WIDTH_HEIGHT") == 1 )
   {
     __debugbreak();
   }
-  if ( _iWorldWidthHeight > 1024
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         318,
-         "_iWorldWidthHeight <= Squares::SQUARE_MAX_SUPPORTED_MAP_WIDTH_HEIGHT") == 1 )
+  if ( _iWorldWidthHeight > 1024 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 318, "_iWorldWidthHeight <= Squares::SQUARE_MAX_SUPPORTED_MAP_WIDTH_HEIGHT") == 1 )
   {
     __debugbreak();
   }
-  if ( _iWorldWidthHeight % 16
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 319, "(_iWorldWidthHeight % Squares::SQUARE_WIDTH_HEIGHT) == 0") == 1 )
+  if ( _iWorldWidthHeight % 16 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 319, "(_iWorldWidthHeight % Squares::SQUARE_WIDTH_HEIGHT) == 0") == 1 )
   {
     __debugbreak();
   }
   if ( !_pGfxMapElements && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 321, "_pGfxMapElements != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !_pFlagBitsLayer && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 322, "_pFlagBitsLayer != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !_pFogLayer && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 323, "_pFogLayer != 0") == 1 )
+  {
     __debugbreak();
+  }
   CTilingWorld::WorldInterfaceDone();
   CTilingWorld::m_uWorldWidthHeight = _iWorldWidthHeight;
   CTilingWorld::m_uWorldSize = _iWorldWidthHeight * _iWorldWidthHeight;
   m_pWorldGfxMapElements = _pGfxMapElements;
   CTilingWorld::m_pWorldFlagBitsLayer = _pFlagBitsLayer;
   CTilingWorld::m_pWorldFogLayer = _pFogLayer;
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v5 = g_sNeighborPoints[i].x + g_sNeighborPoints[i].y * _iWorldWidthHeight;
     CTilingWorld::m_iWorldNeighborRelIndices[i] = v5;
@@ -222,52 +219,29 @@ void __cdecl CTilingWorld::WorldInterfaceInit(int _iWorldWidthHeight, struct T_G
   CTilingWorld::m_iWorldSortedNeighborRelIndices[3] = 1;
   CTilingWorld::m_iWorldSortedNeighborRelIndices[4] = _iWorldWidthHeight;
   CTilingWorld::m_iWorldSortedNeighborRelIndices[5] = _iWorldWidthHeight + 1;
-  if ( CTilingWorld::m_iWorldSortedNeighborRelIndices[0] >= CTilingWorld::m_iWorldSortedNeighborRelIndices[1]
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         351,
-         "m_iWorldSortedNeighborRelIndices[0] < m_iWorldSortedNeighborRelIndices[1]") == 1 )
+  if ( CTilingWorld::m_iWorldSortedNeighborRelIndices[0] >= CTilingWorld::m_iWorldSortedNeighborRelIndices[1] && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 351, "m_iWorldSortedNeighborRelIndices[0] < m_iWorldSortedNeighborRelIndices[1]") == 1 )
   {
     __debugbreak();
   }
-  if ( CTilingWorld::m_iWorldSortedNeighborRelIndices[1] >= CTilingWorld::m_iWorldSortedNeighborRelIndices[2]
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         352,
-         "m_iWorldSortedNeighborRelIndices[1] < m_iWorldSortedNeighborRelIndices[2]") == 1 )
+  if ( CTilingWorld::m_iWorldSortedNeighborRelIndices[1] >= CTilingWorld::m_iWorldSortedNeighborRelIndices[2] && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 352, "m_iWorldSortedNeighborRelIndices[1] < m_iWorldSortedNeighborRelIndices[2]") == 1 )
   {
     __debugbreak();
   }
-  if ( CTilingWorld::m_iWorldSortedNeighborRelIndices[2] >= CTilingWorld::m_iWorldSortedNeighborRelIndices[3]
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         353,
-         "m_iWorldSortedNeighborRelIndices[2] < m_iWorldSortedNeighborRelIndices[3]") == 1 )
+  if ( CTilingWorld::m_iWorldSortedNeighborRelIndices[2] >= CTilingWorld::m_iWorldSortedNeighborRelIndices[3] && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 353, "m_iWorldSortedNeighborRelIndices[2] < m_iWorldSortedNeighborRelIndices[3]") == 1 )
   {
     __debugbreak();
   }
-  if ( CTilingWorld::m_iWorldSortedNeighborRelIndices[3] >= CTilingWorld::m_iWorldSortedNeighborRelIndices[4]
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         354,
-         "m_iWorldSortedNeighborRelIndices[3] < m_iWorldSortedNeighborRelIndices[4]") == 1 )
+  if ( CTilingWorld::m_iWorldSortedNeighborRelIndices[3] >= CTilingWorld::m_iWorldSortedNeighborRelIndices[4] && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 354, "m_iWorldSortedNeighborRelIndices[3] < m_iWorldSortedNeighborRelIndices[4]") == 1 )
   {
     __debugbreak();
   }
-  if ( CTilingWorld::m_iWorldSortedNeighborRelIndices[4] >= CTilingWorld::m_iWorldSortedNeighborRelIndices[5]
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         355,
-         "m_iWorldSortedNeighborRelIndices[4] < m_iWorldSortedNeighborRelIndices[5]") == 1 )
+  if ( CTilingWorld::m_iWorldSortedNeighborRelIndices[4] >= CTilingWorld::m_iWorldSortedNeighborRelIndices[5] && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 355, "m_iWorldSortedNeighborRelIndices[4] < m_iWorldSortedNeighborRelIndices[5]") == 1 )
   {
     __debugbreak();
   }
-  for ( j = 0; j < 19; ++j )
+  for ( j = 0;
+        j < 19;
+        ++j )
   {
     v4 = CSpiralOffsets::DeltaX(j);
     CTilingWorld::m_iWorldSurroundingRelIndices[j] = _iWorldWidthHeight * CSpiralOffsets::DeltaY(j) + v4;

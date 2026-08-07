@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateEcoStatistic::DynamicCreateFunc(void * a1) {
 
   C = (CStateEcoStatistic *)operator new(4u);
   if ( C )
+  {
     return CStateEcoStatistic::CStateEcoStatistic(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -34,8 +38,7 @@ class CGameState * __cdecl CStateEcoStatistic::DynamicCreateFunc(void * a1) {
  CStateEcoStatistic::~CStateEcoStatistic(void) {
   
   *(_DWORD *)this = &CStateEcoStatistic::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 22)
-    && BBSupportDbgReport(2, "main\\States\\StateEcoStatistic.cpp", 62, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 22) && BBSupportDbgReport(2, "main\\States\\StateEcoStatistic.cpp", 62, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -60,7 +63,9 @@ bool  CStateEcoStatistic::Perform(void) {
   }
   v1 = dword_402CC4C + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_402CC4C = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -84,7 +89,9 @@ bool  CStateEcoStatistic::OnEvent(class CEvn_Event & a2) {
   if ( event == 11 )
   {
     if ( (unsigned __int16)a2->m_wParam != 27 )
+    {
       return CGuiGameState::OnEvent(this, a2);
+    }
     v4 = CEvn_Event::CEvn_Event(&v7, 0x5Du, 0, 0, 0);
     v8 = 0;
     IEventEngine::SendAMessage(g_pEvnEngine, v4);
@@ -95,12 +102,16 @@ bool  CStateEcoStatistic::OnEvent(class CEvn_Event & a2) {
   if ( event != 13 )
   {
     if ( event != 119 )
+    {
       return CGuiGameState::OnEvent(this, a2);
+    }
     CGameStateHandler::Next();
     return 1;
   }
   if ( a2->m_wParam != 27 )
+  {
     return 1;
+  }
   v3 = CEvn_Event::CEvn_Event(&v6, 0x77u, 0, 0, 0);
   v8 = 1;
   IEventEngine::SendAMessage(g_pEvnEngine, v3);

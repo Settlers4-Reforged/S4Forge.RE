@@ -12,9 +12,13 @@ void __cdecl OnlineManager::Create(void) {
   if ( !OnlineManager::m_instance )
   {
     if ( operator new(0x58u) )
+    {
       v0 = OnlineManager::OnlineManager();
+    }
     else
+    {
       v0 = 0;
+    }
     OnlineManager::m_instance = v0;
   }
 }
@@ -114,29 +118,15 @@ void  OnlineManager::CreateSession(class CGameType * a2) {
     v2 = (wchar_t *)std::wstring::c_str((struct CGameType *)((char *)a2 + 704));
     v45 = std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(v2);
     std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::operator=(v45);
-    std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(
-      v33,
-      v34);
-    v44 = std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::rfind(
-            (wchar_t *)L"\\",
-            std::basic_string_wchar_t_std::char_traits_wchar_t__storm::Allocator_wchar_t_1092620295___::npos);
-    v43 = std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::substr(
-            (int)v48,
-            v44 + 1,
-            std::basic_string_wchar_t_std::char_traits_wchar_t__storm::Allocator_wchar_t_1092620295___::npos);
+    std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(v33, v34);
+    v44 = std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::rfind((wchar_t *)L"\\", std::basic_string_wchar_t_std::char_traits_wchar_t__storm::Allocator_wchar_t_1092620295___::npos);
+    v43 = std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::substr((int)v48, v44 + 1, std::basic_string_wchar_t_std::char_traits_wchar_t__storm::Allocator_wchar_t_1092620295___::npos);
     std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::operator=(v43);
-    std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(
-      v33,
-      v34);
+    std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(v33, v34);
     v3 = std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::length(v49);
-    v42 = std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::substr(
-            (int)v47,
-            0,
-            v3 - 4);
+    v42 = std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::substr((int)v47, 0, v3 - 4);
     std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::operator=(v42);
-    std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(
-      v33,
-      v34);
+    std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(v33, v34);
   }
   MPSavegameID = CGameType::GetMPSavegameID(a2);
   v38 = &v25;
@@ -151,85 +141,16 @@ void  OnlineManager::CreateSession(class CGameType * a2) {
   v35 = v40;
   LOBYTE(v50) = 2;
   v5 = std::wstring::c_str(a2);
-  v39 = storm::CStringConvertToUtf8(
-          &v9,
-          (int)v5,
-          v9,
-          v10,
-          v11,
-          v12,
-          v13,
-          v14,
-          v15,
-          v16,
-          v17,
-          v18,
-          v19,
-          v20,
-          v21,
-          v22,
-          v23,
-          v24,
-          v25,
-          v26,
-          v27,
-          v28,
-          v29,
-          v30,
-          v31,
-          MPSavegameID,
-          v33,
-          v34,
-          (int)&v9,
-          v35,
-          (int)v36,
-          v37,
-          (int)v38,
-          v39,
-          v40,
-          v41,
-          v42,
-          v43,
-          v44,
-          v45,
-          (int)v46);
+  v39 = storm::CStringConvertToUtf8(&v9, (int)v5, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, MPSavegameID, v33, v34, (int)&v9, v35, (int)v36, v37, (int)v38, v39, v40, v41, v42, v43, v44, v45, (int)v46);
   v34 = v39;
   LOBYTE(v50) = 3;
   IsPrivate = OnlineManager::IsPrivate(v46);
   v7 = *((_BYTE *)v46 + 80);
   StormManager::GetInstance();
   LOBYTE(v50) = 0;
-  StormManager::CreateSession(
-    v7,
-    IsPrivate,
-    v9,
-    v10,
-    v11,
-    v12,
-    v13,
-    v14,
-    v15,
-    v16,
-    v17,
-    v18,
-    v19,
-    v20,
-    v21,
-    v22,
-    v23,
-    v24,
-    v25,
-    v26,
-    v27,
-    v28,
-    v29,
-    v30,
-    v31,
-    MPSavegameID);
+  StormManager::CreateSession(v7, IsPrivate, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, MPSavegameID);
   v50 = -1;
-  return std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(
-           v33,
-           v34);
+  return std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(v33, v34);
 }
 
 
@@ -320,9 +241,13 @@ void  OnlineManager::LeaveSession(void) {
 void  OnlineManager::JoinSessionSucceeded(void) {
   
   if ( (unsigned __int8)OnlineManager::IsInviteFlow(this) )
+  {
     INetworkEngine::OnJoinedFromInvite((CGameHost **)g_pNetworkEngine);
+  }
   else
+  {
     INetworkEngine::StormJoinSessionSucceeded((INetworkEngine *)g_pNetworkEngine);
+  }
 }
 
 
@@ -407,58 +332,12 @@ void  OnlineManager::UpdateDiscoveredSessions(class std::list<struct SGameInfo,c
   while ( (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<storm::ISimpleMatchmakingStrategy::SessionInfo *>>>::operator!=((std::_Iterator_base12 *)v21) )
   {
     v25 = *(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<storm::ISimpleMatchmakingStrategy::SessionInfo *>>>::operator*(v23);
-    v29 = (CDaoIndexFieldInfo *)j____RTDynamicCast(
-                                  *(void ***)(v25 + 16),
-                                  0,
-                                  &storm::echo::SessionDescriptor__RTTI_Type_Descriptor_,
-                                  &GameSessionDescriptor__RTTI_Type_Descriptor_,
-                                  0);
+    v29 = (CDaoIndexFieldInfo *)j____RTDynamicCast(*(void ***)(v25 + 16), 0, &storm::echo::SessionDescriptor__RTTI_Type_Descriptor_, &GameSessionDescriptor__RTTI_Type_Descriptor_, 0);
     if ( v29 )
     {
       storm::echo::SessionDescriptor::GetSessionName(v29);
       v2 = std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str(v10, v20[0]);
-      storm::CStringConvertToUtf16(
-        v40,
-        v2,
-        v11,
-        v20[0],
-        v20[1],
-        v20[2],
-        v20[3],
-        v21[0],
-        v21[1],
-        v21[2],
-        v22,
-        v23[0],
-        v23[1],
-        v23[2],
-        v24,
-        v25,
-        v26,
-        v27,
-        v28,
-        v29,
-        v30[0],
-        v30[1],
-        v30[2],
-        v30[3],
-        v31[0],
-        v31[1],
-        v31[2],
-        v31[3],
-        v31[4],
-        v31[5],
-        v31[6],
-        v31[7],
-        v31[8],
-        v31[9],
-        v31[10],
-        v31[11],
-        v31[12],
-        v31[13],
-        v31[14],
-        v31[15],
-        Destination[0]);
+      storm::CStringConvertToUtf16(v40, v2, v11, v20[0], v20[1], v20[2], v20[3], v21[0], v21[1], v21[2], v22, v23[0], v23[1], v23[2], v24, v25, v26, v27, v28, v29, v30[0], v30[1], v30[2], v30[3], v31[0], v31[1], v31[2], v31[3], v31[4], v31[5], v31[6], v31[7], v31[8], v31[9], v31[10], v31[11], v31[12], v31[13], v31[14], v31[15], Destination[0]);
       LOBYTE(v43) = 3;
       v3 = std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::c_str(28, v12);
       MyWStrNCopy((int)v31, v3, v8);
@@ -467,25 +346,17 @@ void  OnlineManager::UpdateDiscoveredSessions(class std::list<struct SGameInfo,c
       Destination[132] = v27 - v24;
       Destination[131] = v27;
       TickCount = GameSessionDescriptor::GetTickCount(v29);
-      std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(
-        v13,
-        v20[0]);
+      std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(v13, v20[0]);
       LOBYTE(v43) = 4;
       GameSessionDescriptor::GetMapName(v41);
-      v4 = (const wchar_t *)std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::c_str(
-                              v14,
-                              v20[0]);
+      v4 = (const wchar_t *)std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::c_str(v14, v20[0]);
       wcscpy((wchar_t *)Destination, v4);
-      std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(
-        v15,
-        v20[0]);
+      std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(v15, v20[0]);
       LOBYTE(v43) = 5;
       GameSessionDescriptor::GetSaveFile(v42);
       v26 = (unsigned __int8)std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::empty(v42) == 0;
       v35 = v26;
-      v5 = (const wchar_t *)std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::c_str(
-                              v16,
-                              v20[0]);
+      v5 = (const wchar_t *)std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::c_str(v16, v20[0]);
       wcscpy(v39, v5);
       SaveId = GameSessionDescriptor::GetSaveId(v29);
       v37 = 0;
@@ -494,17 +365,11 @@ void  OnlineManager::UpdateDiscoveredSessions(class std::list<struct SGameInfo,c
       storm::GUID::Get(SessionGUID, &v38);
       std::list<SGameInfo>::push_back(v30);
       LOBYTE(v43) = 4;
-      std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(
-        v17,
-        v20[0]);
+      std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(v17, v20[0]);
       LOBYTE(v43) = 3;
-      std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(
-        v18,
-        v20[0]);
+      std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(v18, v20[0]);
       LOBYTE(v43) = 2;
-      std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(
-        v19,
-        v20[0]);
+      std::basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>::~basic_string<wchar_t,std::char_traits<wchar_t>,storm::Allocator<wchar_t,1092620295>>(v19, v20[0]);
     }
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<storm::ISimpleMatchmakingStrategy::SessionInfo *>>>::operator++(v23);
   }
@@ -513,9 +378,7 @@ void  OnlineManager::UpdateDiscoveredSessions(class std::list<struct SGameInfo,c
   LOBYTE(v43) = 0;
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<storm::ISimpleMatchmakingStrategy::SessionInfo *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<storm::ISimpleMatchmakingStrategy::SessionInfo *>>>(v23);
   v43 = -1;
-  return std::vector<storm::ISimpleMatchmakingStrategy::SessionInfo *,storm::Allocator<storm::ISimpleMatchmakingStrategy::SessionInfo *,1092677632>>::~vector<storm::ISimpleMatchmakingStrategy::SessionInfo *,storm::Allocator<storm::ISimpleMatchmakingStrategy::SessionInfo *,1092677632>>(
-           v10,
-           v20[0]);
+  return std::vector<storm::ISimpleMatchmakingStrategy::SessionInfo *,storm::Allocator<storm::ISimpleMatchmakingStrategy::SessionInfo *,1092677632>>::~vector<storm::ISimpleMatchmakingStrategy::SessionInfo *,storm::Allocator<storm::ISimpleMatchmakingStrategy::SessionInfo *,1092677632>>(v10, v20[0]);
 }
 
 
@@ -566,7 +429,9 @@ void  OnlineManager::OnSessionEnter(void) {
   bool v5; // [esp+Bh] [ebp-1h]
 
   if ( !(unsigned __int8)OnlineManager::IsQuickMatchFlow(this) )
+  {
     return INetworkEngine::StormEnteredSession((INetworkEngine *)g_pNetworkEngine);
+  }
   Instance = StormManager::GetInstance();
   HostPeerId = StormManager::GetHostPeerId(Instance);
   v3 = StormManager::GetInstance();
@@ -605,7 +470,7 @@ void  OnlineManager::OnGameSetup(void) {
 
 
 // address=[0x1616dd0]
-// Decompiled from void __thiscall OnlineManager::GetPlayerData(  OnlineManager *this,  int a2,  bool *a3,  int *a4,  int *a5,  int *a6,  int *a7,  int *a8,  int *a9,  struct String *a10)
+// Decompiled from void __thiscall OnlineManager::GetPlayerData(OnlineManager *this, int a2, bool *a3, int *a4, int *a5, int *a6, int *a7, int *a8, int *a9, struct String *a10)
 void  OnlineManager::GetPlayerData(int a2, bool & a3, int & a4, int & a5, int & a6, int & a7, int & a8, int & a9, class String & a10) {
   
   char *v10; // eax
@@ -682,9 +547,7 @@ void  OnlineManager::SendUnicastGameSetup(int a2, void * Src, unsigned long Size
   Instance = StormManager::GetInstance();
   LocalPeerId = StormManager::GetLocalPeerId(Instance);
   v37 = LocalPeerId;
-  std::_Tree<std::_Tmap_traits<unsigned long,OnlineManager::PlayerMessage,std::less<unsigned long>,storm::Allocator<std::pair<unsigned long const,OnlineManager::PlayerMessage>,1092657155>,0>>::find(
-    v29,
-    &v37);
+  std::_Tree<std::_Tmap_traits<unsigned long,OnlineManager::PlayerMessage,std::less<unsigned long>,storm::Allocator<std::pair<unsigned long const,OnlineManager::PlayerMessage>,1092657155>,0>>::find(v29, &v37);
   v43 = 0;
   v36 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,OnlineManager::PlayerMessage,std::less<unsigned long>,storm::Allocator<std::pair<unsigned long const,OnlineManager::PlayerMessage>,1092657155>,0>>::end(v28);
   v35[1] = v36;
@@ -698,17 +561,7 @@ void  OnlineManager::SendUnicastGameSetup(int a2, void * Src, unsigned long Size
     v41 = std::map<unsigned long,OnlineManager::PlayerMessage,std::less<unsigned long>,storm::Allocator<std::pair<unsigned long const,OnlineManager::PlayerMessage>,1092657155>>::operator[](v35);
     v5 = std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str(v27);
     v6 = (const char *)std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str(v5);
-    OnlineManager::UpdatePlayerData(
-      v39,
-      LocalPeerId,
-      *(_BYTE *)v41,
-      *(_DWORD *)(v41 + 4),
-      *(_DWORD *)(v41 + 8),
-      *(_DWORD *)(v41 + 12),
-      *(_DWORD *)(v41 + 16),
-      *(_DWORD *)(v41 + 20),
-      v6,
-      v26);
+    OnlineManager::UpdatePlayerData(v39, LocalPeerId, *(_BYTE *)v41, *(_DWORD *)(v41 + 4), *(_DWORD *)(v41 + 8), *(_DWORD *)(v41 + 12), *(_DWORD *)(v41 + 16), *(_DWORD *)(v41 + 20), v6, v26);
     storm::StormGameSetupMessage::StormGameSetupMessage((storm::StormGameSetupMessage *)v42);
     LOBYTE(v43) = 2;
     v7 = (char *)std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str(v27);
@@ -726,27 +579,7 @@ void  OnlineManager::SendUnicastGameSetup(int a2, void * Src, unsigned long Size
     v12 = *(_DWORD *)(v41 + 4);
     v11 = *(_BYTE *)v41;
     LOBYTE(v43) = 2;
-    storm::StormGameSetupMessage::SetPlayer(
-      v11,
-      v12,
-      v13,
-      v14,
-      v15,
-      v16,
-      v17,
-      v18,
-      v19,
-      v20,
-      v21,
-      v22,
-      v23,
-      v24[0],
-      v24[1],
-      v24[2],
-      v24[3],
-      v24[4],
-      v25,
-      v26);
+    storm::StormGameSetupMessage::SetPlayer(v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24[0], v24[1], v24[2], v24[3], v24[4], v25, v26);
     storm::StormGameSetupMessage::SetBufferData(Src, Size);
     v26 = v42;
     v25 = a2;
@@ -761,7 +594,7 @@ void  OnlineManager::SendUnicastGameSetup(int a2, void * Src, unsigned long Size
 
 
 // address=[0x1617140]
-// Decompiled from void __thiscall OnlineManager::SendUnicastPlayerMessage(  void *this,  int a2,  char *Str,  const struct storm::StormPlayerMessage *a4)
+// Decompiled from void __thiscall OnlineManager::SendUnicastPlayerMessage(void *this, int a2, char *Str, const struct storm::StormPlayerMessage *a4)
 void  OnlineManager::SendUnicastPlayerMessage(int a2, char const * Str, int a4) {
   
   StormManager *Instance; // eax
@@ -922,7 +755,9 @@ int  OnlineManager::GetLocalPeerId(void)const {
   int Instance; // eax
 
   if ( !OnlineManager::IsInSession(this) )
+  {
     return 0;
+  }
   Instance = StormManager::GetInstance();
   return StormManager::GetLocalPeerId(Instance);
 }
@@ -1057,7 +892,9 @@ void  OnlineManager::OnOnlineError(void) {
 bool  OnlineManager::GetAndClearOnlineError(void) {
   
   if ( !*((_BYTE *)this + 84) )
+  {
     return 0;
+  }
   *((_BYTE *)this + 84) = 0;
   return 1;
 }
@@ -1071,7 +908,9 @@ void  OnlineManager::OnAcceptInvite(void) {
 
   result = (unsigned __int8)CGameStateHandler::CanProcessInvites();
   if ( (_BYTE)result )
+  {
     return CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 18);
+  }
   return result;
 }
 
@@ -1087,7 +926,7 @@ void  OnlineManager::OnAcceptInvite(void) {
 
 
 // address=[0x16176d0]
-// Decompiled from void __thiscall OnlineManager::UpdatePlayerData(  OnlineManager *this,  int a2,  bool a3,  int a4,  int a5,  int a6,  int a7,  int a8,  char *Str,  char *a10)
+// Decompiled from void __thiscall OnlineManager::UpdatePlayerData(OnlineManager *this, int a2, bool a3, int a4, int a5, int a6, int a7, int a8, char *Str, char *a10)
 void  OnlineManager::UpdatePlayerData(int a2, bool a3, int a4, int a5, int a6, int a7, int a8, char const * Str, char const * a10) {
   
   int v10; // [esp+8h] [ebp-64h] BYREF

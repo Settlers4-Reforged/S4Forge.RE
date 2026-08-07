@@ -10,10 +10,14 @@ int  CIntResSquare::Value(void) {
   int i; // [esp+10h] [ebp-4h]
 
   v2 = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( (int)this[i] > 0 )
+    {
       v2 += (int)sqrt<int>(this[i]) + 100;
+    }
   }
   return v2 + 10 * this[18];
 }
@@ -25,8 +29,12 @@ class CIntResSquare &  CIntResSquare::operator+=(class CAIResourceData const & a
   
   int i; // [esp+0h] [ebp-8h]
 
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
+  {
     this[i] += CAIResourceData::ResourceAmount1(a2, i);
+  }
   this[16] |= CAIResourceData::Flags1(a2);
   this[17] |= CAIResourceData::Flags9(a2);
   ++this[18];
@@ -40,10 +48,14 @@ bool  CIntResSquare::operator>=(class CIntResSquare const & a2) {
   
   int i; // [esp+14h] [ebp-4h]
 
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( this[i] < a2[i] )
+    {
       return 0;
+    }
   }
   return this[18] >= a2[18] && (a2[17] & this[17]) == a2[17] && (a2[16] & this[16]) == a2[16];
 }

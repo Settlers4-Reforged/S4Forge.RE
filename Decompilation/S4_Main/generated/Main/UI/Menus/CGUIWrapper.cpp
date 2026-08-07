@@ -7,10 +7,14 @@
 class CGUIWrapper * __cdecl CGUIWrapper::GetInstance(void) {
   
   if ( dword_3EFD61C <= *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
+  {
     return &unk_3EFD618;
+  }
   j___Init_thread_header(&dword_3EFD61C);
   if ( dword_3EFD61C != -1 )
+  {
     return &unk_3EFD618;
+  }
   CGUIWrapper::CGUIWrapper((Replicator *)&unk_3EFD618);
   j___Init_thread_footer(&dword_3EFD61C);
   return &unk_3EFD618;
@@ -30,7 +34,7 @@ void  CGUIWrapper::ReleaseGUIGFXFile(void) {
 
 
 // address=[0x13d8830]
-// Decompiled from char __thiscall CGUIWrapper::RebuildGuiEngineWithGfxFile(  CGUIWrapper *this,  unsigned int a2,  int a3,  int a4,  bool (__cdecl *a5)(int, int, int))
+// Decompiled from char __thiscall CGUIWrapper::RebuildGuiEngineWithGfxFile(CGUIWrapper *this, unsigned int a2, int a3, int a4, bool (__cdecl *a5)(int, int, int))
 bool  CGUIWrapper::RebuildGuiEngineWithGfxFile(unsigned int a2, void * a3, int a4, bool (__cdecl*)(int,int,int) a5) {
   
   int Language; // eax
@@ -41,9 +45,13 @@ bool  CGUIWrapper::RebuildGuiEngineWithGfxFile(unsigned int a2, void * a3, int a
   IGuiEngine *C; // [esp+2Ch] [ebp-18h]
 
   if ( !g_pGfxManager )
+  {
     return 0;
+  }
   if ( !g_pGfxEngine )
+  {
     return 0;
+  }
   DialogsRenderOffsetX = 0;
   DialogsRenderOffsetY = 0;
   *(_QWORD *)&DialogsRenderScaleX = 0LL;
@@ -54,29 +62,36 @@ bool  CGUIWrapper::RebuildGuiEngineWithGfxFile(unsigned int a2, void * a3, int a
     DialogsRenderScaleX = IGuiEngine::GetDialogsRenderScaleX(g_pGUIEngine);
     *(&DialogsRenderScaleX + 1) = IGuiEngine::GetDialogsRenderScaleY(g_pGUIEngine);
     if ( g_pGUIEngine )
+    {
       delete g_pGUIEngine;
+    }
     if ( CGfxManager::IsGfxFileEnabled(g_pGfxManager, *(_DWORD *)this) )
+    {
       CGfxManager::DisableGfxFile(g_pGfxManager, *(_DWORD *)this);
+    }
   }
   CGfxManager::EnableGfxFile(g_pGfxManager, a2, 9, 1, 0xFFFFFFFF);
   C = (IGuiEngine *)operator new(0x10u);
   if ( C )
+  {
     v10 = IGuiEngine::IGuiEngine(C);
+  }
   else
+  {
     v10 = 0;
+  }
   g_pGUIEngine = v10;
   if ( !v10 )
+  {
     return 0;
+  }
   Language = CGameSettings::GetLanguage();
   if ( !IGuiEngine::Init(g_pGUIEngine, g_pGfxEngine, g_pGfxManager, a3, a4, a5, Language) )
+  {
     return 0;
+  }
   IGuiEngine::CloseDialog(g_pGUIEngine, a4);
-  IGuiEngine::SetDialogsRenderOffset(
-    g_pGUIEngine,
-    DialogsRenderOffsetX,
-    DialogsRenderOffsetY,
-    DialogsRenderScaleX,
-    *(&DialogsRenderScaleX + 1));
+  IGuiEngine::SetDialogsRenderOffset(g_pGUIEngine, DialogsRenderOffsetX, DialogsRenderOffsetY, DialogsRenderScaleX, *(&DialogsRenderScaleX + 1));
   *(_DWORD *)this = a2;
   return 1;
 }
@@ -87,7 +102,9 @@ bool  CGUIWrapper::RebuildGuiEngineWithGfxFile(unsigned int a2, void * a3, int a
 unsigned int  CGUIWrapper::GetActiveGUIGFXFile(void) {
   
   if ( g_pGfxManager )
+  {
     return *(_DWORD *)this;
+  }
   *(_DWORD *)this = -1;
   return -1;
 }

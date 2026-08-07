@@ -74,32 +74,50 @@ void  CBasicGrid::initGrid(void) {
   memset(v34, 0, 4 * *((_DWORD *)v37 + 2));
   v33 = operator new[](4 * *((_DWORD *)v37 + 2));
   memset(v33, 0, 4 * *((_DWORD *)v37 + 2));
-  for ( i = 1; i < (unsigned __int8)g_iNumPlayers; ++i )
+  for ( i = 1;
+        i < (unsigned __int8)g_iNumPlayers;
+        ++i )
   {
     v8 = pow<int,int>(v19, 3);
     *((_DWORD *)v34 + v35) = (int)((double)*((int *)v34 + v35) + v8);
     v7 = pow<int,int>(v19, 3);
     *((_DWORD *)v33 + v36) = (int)((double)*((int *)v33 + v36) + v7);
-    for ( j = 1; j < *((_DWORD *)v37 + 2); ++j )
+    for ( j = 1;
+          j < *((_DWORD *)v37 + 2);
+          ++j )
     {
       v24 = (int)pow<int,int>(v19 - j, 3);
       if ( (int)(v35 - j) >= 0 )
+      {
         *((_DWORD *)v34 + v35 - j) += v24;
+      }
       if ( (signed int)(j + v35) < *((_DWORD *)v37 + 2) )
+      {
         *((_DWORD *)v34 + j + v35) += v24;
+      }
       if ( (int)(v36 - j) >= 0 )
+      {
         *((_DWORD *)v33 + v36 - j) += v24;
+      }
       if ( (signed int)(j + v36) < *((_DWORD *)v37 + 2) )
+      {
         *((_DWORD *)v33 + j + v36) += v24;
+      }
     }
     v31 = 0;
     v30 = 0;
-    for ( j = 1; j < *((_DWORD *)v37 + 2); ++j )
+    for ( j = 1;
+          j < *((_DWORD *)v37 + 2);
+          ++j )
     {
       if ( *((_DWORD *)v34 + v31) > *((_DWORD *)v34 + j) )
+      {
         v31 = j;
+      }
       if ( *((_DWORD *)v33 + v30) > *((_DWORD *)v33 + j) )
+      {
         v30 = j;
+      }
     }
     v35 = v31;
     v36 = v30;
@@ -107,13 +125,17 @@ void  CBasicGrid::initGrid(void) {
     v21 = 0;
     v10 = (int)((double)*((int *)v34 + v35) * 0.4);
     v9 = (int)((double)*((int *)v33 + v36) * 0.4);
-    for ( j = 0; j < *((_DWORD *)v37 + 2); ++j )
+    for ( j = 0;
+          j < *((_DWORD *)v37 + 2);
+          ++j )
     {
       if ( j != v35 && v10 + *((_DWORD *)v34 + v35) > *((_DWORD *)v34 + j) )
       {
         v16 = 2 * *((_DWORD *)v37 + 2);
         v27 = 2 * *((_DWORD *)v37 + 2);
-        for ( k = 0; k < i; ++k )
+        for ( k = 0;
+              k < i;
+              ++k )
         {
           v18 = 0;
           v17 = 0;
@@ -121,11 +143,15 @@ void  CBasicGrid::initGrid(void) {
           v1 = j__abs(v18 - v35);
           v28 = j__abs(v17 - v36) + v1;
           if ( v28 < v16 )
+          {
             v16 = v28;
+          }
           v2 = j__abs(v18 - j);
           v28 = j__abs(v17 - v36) + v2;
           if ( v28 < v27 )
+          {
             v27 = v28;
+          }
         }
         if ( v27 > v16 && v27 > v21 )
         {
@@ -135,14 +161,20 @@ void  CBasicGrid::initGrid(void) {
       }
     }
     if ( v31 != v35 )
+    {
       v35 = v31;
-    for ( j = 0; j < *((_DWORD *)v37 + 2); ++j )
+    }
+    for ( j = 0;
+          j < *((_DWORD *)v37 + 2);
+          ++j )
     {
       if ( j != v36 && v9 + *((_DWORD *)v33 + v36) > *((_DWORD *)v33 + j) )
       {
         v13 = 2 * *((_DWORD *)v37 + 2);
         v25 = v13;
-        for ( m = 0; m < i; ++m )
+        for ( m = 0;
+              m < i;
+              ++m )
         {
           v15 = 0;
           v14 = 0;
@@ -150,11 +182,15 @@ void  CBasicGrid::initGrid(void) {
           v3 = j__abs(v15 - v35);
           v26 = j__abs(v14 - v36) + v3;
           if ( v26 < v13 )
+          {
             v13 = v26;
+          }
           v4 = j__abs(v15 - v35);
           v26 = j__abs(v14 - j) + v4;
           if ( v26 < v25 )
+          {
             v25 = v26;
+          }
         }
         if ( v25 > v13 && v25 > v21 )
         {
@@ -164,32 +200,41 @@ void  CBasicGrid::initGrid(void) {
       }
     }
     if ( v30 != v36 )
+    {
       v36 = v30;
+    }
     *(_BYTE *)(*((_DWORD *)v37 + 1) + v35 + *((_DWORD *)v37 + 2) * v36) = 101;
     CPlayerData::setStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * i), v35, v36);
   }
   operator delete[](v34);
   operator delete[](v33);
   v20 = *((_DWORD *)v37 + 2) * *((_DWORD *)v37 + 2);
-  v11 = (int)(float)((float)((float)v20 * (float)((float)*((int *)v37 + 3) / 100.0))
-                   - (float)(unsigned __int8)g_iNumPlayers);
-  for ( n = 0; n < v11; ++n )
+  v11 = (int)(float)((float)((float)v20 * (float)((float)*((int *)v37 + 3) / 100.0)) - (float)(unsigned __int8)g_iNumPlayers);
+  for ( n = 0;
+        n < v11;
+        ++n )
   {
     v5 = CRandom16::Rand((CRandom16 *)g_pRand);
     v29 = v5 % v20;
     while ( *(_BYTE *)(*((_DWORD *)v37 + 1) + v29) )
     {
       if ( ++v29 >= v20 )
+      {
         v29 = 0;
+      }
     }
     *(_BYTE *)(*((_DWORD *)v37 + 1) + v29) = 1;
   }
   result = v11;
   if ( v11 <= v20 )
+  {
     return result;
+  }
   result = BBSupportDbgReport(2, "BasicGrid.cpp", 220, "iLandMass <= iGridSize");
   if ( result == 1 )
+  {
     __debugbreak();
+  }
   return result;
 }
 

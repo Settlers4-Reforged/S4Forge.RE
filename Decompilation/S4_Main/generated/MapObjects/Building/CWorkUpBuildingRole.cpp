@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CWorkUpBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x190u) )
+  {
     return CWorkUpBuildingRole::CWorkUpBuildingRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -82,13 +86,17 @@ void  CWorkUpBuildingRole::LogicUpdate(class CBuilding * a2) {
   v13 = this;
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( result )
+  {
     result = (*(int (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v13 + 88))(v13, a2, 1);
+  }
   v12 = *((_BYTE *)v13 + 4);
   if ( v12 == 1 )
   {
     result = (*(int (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *))(*(_DWORD *)v13 + 120))(v13, a2);
     if ( !(_BYTE)result )
+    {
       return IAnimatedEntity::RegisterForLogicUpdate(31);
+    }
     *((_BYTE *)v13 + 4) = 3;
     return result;
   }
@@ -107,24 +115,24 @@ void  CWorkUpBuildingRole::LogicUpdate(class CBuilding * a2) {
     }
   }
   if ( v12 != 3 )
+  {
     return result;
+  }
   if ( !*((_BYTE *)v13 + 29) )
+  {
     return IAnimatedEntity::RegisterForLogicUpdate(31);
+  }
   if ( !IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+  {
     return IAnimatedEntity::RegisterForLogicUpdate(31);
+  }
   v10 = CPileMgr::operator[](*((unsigned __int16 *)v13 + 191));
-  if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v10 + 40))(v10) >= 8
-    || !CWorkUpBuildingRole::HaveMaterial(v13, a2) )
+  if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v10 + 40))(v10) >= 8 || !CWorkUpBuildingRole::HaveMaterial(v13, a2) )
   {
     return IAnimatedEntity::RegisterForLogicUpdate(31);
   }
   v11 = 0;
-  if ( !*(_BYTE *)std::vector<unsigned char>::operator[](0)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\WorkUpBuilding.cpp",
-         365,
-         "m_pBuildingInfo->vAnimListId[ iWorkList ] != 0") == 1 )
+  if ( !*(_BYTE *)std::vector<unsigned char>::operator[](0) && BBSupportDbgReport(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 365, "m_pBuildingInfo->vAnimListId[ iWorkList ] != 0") == 1 )
   {
     __debugbreak();
   }
@@ -155,7 +163,7 @@ void  CWorkUpBuildingRole::LogicUpdate(class CBuilding * a2) {
 
 
 // address=[0x152f610]
-// Decompiled from unsigned int __thiscall CWorkUpBuildingRole::FillGfxInfo(  CWorkUpBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
+// Decompiled from unsigned int __thiscall CWorkUpBuildingRole::FillGfxInfo(CWorkUpBuildingRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
 void  CWorkUpBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
@@ -182,12 +190,7 @@ void  CWorkUpBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectIn
   *((_BYTE *)a3 + 715) = CPlayerManager::Color(v4);
   if ( *((_BYTE *)this + 356) )
   {
-    CGfxManager::GetEffectGfxInfo(
-      (CGfxManager *)g_pGfxManager,
-      (struct SGfxObjectInfo *)v18,
-      *((unsigned __int8 *)this + 356),
-      0,
-      *((unsigned __int8 *)this + 359));
+    CGfxManager::GetEffectGfxInfo((CGfxManager *)g_pGfxManager, (struct SGfxObjectInfo *)v18, *((unsigned __int8 *)this + 356), 0, *((unsigned __int8 *)this + 359));
     *((_DWORD *)a3 + 26) = v18[0];
     *((_DWORD *)a3 + 27) = v18[1];
     *((_DWORD *)a3 + 28) = *((__int16 *)this + 180);
@@ -208,11 +211,15 @@ void  CWorkUpBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectIn
     CPile::GetPatchGfx((CPile *)v8, (struct SGfxObjectInfo *)((char *)a3 + 536));
     v16 = 1;
   }
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = std::vector<unsigned short>::size((char *)this + 384);
     if ( i >= result )
+    {
       break;
+    }
     v10 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
     v11 = CPileMgr::operator[](*v10);
     if ( (unsigned __int8)CPile::IsPatchPile(v11) )
@@ -247,23 +254,15 @@ void  CWorkUpBuildingRole::Init(class CBuilding * a2) {
   *((_BYTE *)this + 380) = 0;
   *((_WORD *)this + 191) = 0;
   std::vector<unsigned short>::clear();
-  for ( i = 0; i < *(char *)(*((_DWORD *)this + 94) + 57); ++i )
+  for ( i = 0;
+        i < *(char *)(*((_DWORD *)this + 94) + 57);
+        ++i )
   {
     v2 = IEntity::WorldIdx();
     v10 = *(char *)(*((_DWORD *)this + 94) + 16 * i + 60) + CWorldManager::X(v2);
     v3 = IEntity::WorldIdx();
     v4 = CWorldManager::Y(v3);
-    v12 = CPileMgr::AddPile(
-            (CPileMgr *)&g_cPileMgr,
-            v10,
-            *(char *)(*((_DWORD *)this + 94) + 16 * i + 61) + v4,
-            *(char *)(*((_DWORD *)this + 94) + 16 * i + 62),
-            0,
-            *(char *)(*((_DWORD *)this + 94) + 16 * i + 63),
-            *(char *)(*((_DWORD *)this + 94) + 16 * i + 64),
-            *(char *)(*((_DWORD *)this + 94) + 16 * i + 65),
-            *(_DWORD *)(*((_DWORD *)this + 94) + 16 * i + 68),
-            *(_DWORD *)(*((_DWORD *)this + 94) + 16 * i + 72));
+    v12 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v10, *(char *)(*((_DWORD *)this + 94) + 16 * i + 61) + v4, *(char *)(*((_DWORD *)this + 94) + 16 * i + 62), 0, *(char *)(*((_DWORD *)this + 94) + 16 * i + 63), *(char *)(*((_DWORD *)this + 94) + 16 * i + 64), *(char *)(*((_DWORD *)this + 94) + 16 * i + 65), *(_DWORD *)(*((_DWORD *)this + 94) + 16 * i + 68), *(_DWORD *)(*((_DWORD *)this + 94) + 16 * i + 72));
     v9 = IEntity::ID();
     v5 = CPileMgr::operator[](v12);
     CPile::SetBuildingId((CPile *)v5, v9);
@@ -286,25 +285,23 @@ void  CWorkUpBuildingRole::Init(class CBuilding * a2) {
       if ( *((_WORD *)this + 191) )
       {
         v7 = IEntity::Type((unsigned __int16 *)a2);
-        if ( BBSupportDbgReportF(
-               2,
-               "MapObjects\\Building\\WorkUpBuilding.cpp",
-               195,
-               "More than one production pile at %s",
-               (&off_379821C)[2 * v7]) == 1 )
+        if ( BBSupportDbgReportF(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 195, "More than one production pile at %s", (&off_379821C)[2 * v7]) == 1 )
+        {
           __debugbreak();
+        }
       }
       *((_WORD *)this + 191) = v12;
     }
   }
-  if ( !std::vector<unsigned short>::size((char *)this + 384)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 215, "m_vDeliverPileId.size()>0") == 1 )
+  if ( !std::vector<unsigned short>::size((char *)this + 384) && BBSupportDbgReport(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 215, "m_vDeliverPileId.size()>0") == 1 )
   {
     __debugbreak();
   }
   *((_BYTE *)this + 4) = 1;
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     (*(void (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
+  }
   return IAnimatedEntity::RegisterForLogicUpdate(2);
 }
 
@@ -318,10 +315,14 @@ void  CWorkUpBuildingRole::PostLoadInit(class CBuilding * a2) {
   int v4; // [esp-4h] [ebp-8h]
 
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 139, "_pBuilding!= NULL") == 1 )
+  {
     __debugbreak();
+  }
   result = 0;
   if ( !a2 )
+  {
     return result;
+  }
   v4 = IEntity::Type((unsigned __int16 *)a2);
   v3 = IEntity::Race(a2);
   result = CBuildingInfoMgr::GetBuildingInfo(v3, v4);
@@ -360,21 +361,17 @@ bool  CWorkUpBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
 
   v25 = this;
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 240, "_iSettlerId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v24 = (CSettler *)CSettlerMgr::operator[](a3);
-  if ( IEntity::FlagBits(v24, ENTITY_FLAG_Visible)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\WorkUpBuilding.cpp",
-         243,
-         "rSettler.FlagBits(ENTITY_FLAG_VISIBLE)==0") == 1 )
+  if ( IEntity::FlagBits(v24, ENTITY_FLAG_Visible) && BBSupportDbgReport(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 243, "rSettler.FlagBits(ENTITY_FLAG_VISIBLE)==0") == 1 )
   {
     __debugbreak();
   }
   if ( *((_BYTE *)v25 + 29) )
   {
-    if ( *((unsigned __int16 *)v25 + 4) != a3
-      && BBSupportDbgReport(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 266, "m_uSettlerId == _iSettlerId") == 1 )
+    if ( *((unsigned __int16 *)v25 + 4) != a3 && BBSupportDbgReport(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 266, "m_uSettlerId == _iSettlerId") == 1 )
     {
       __debugbreak();
     }
@@ -424,12 +421,7 @@ bool  CWorkUpBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
     v13 = (const char *)type_info::name(v9);
     v10 = CBuilding::BuildingTypeEx(a2);
     BuildingName = CS4DefineNames::GetBuildingName(v10);
-    BBSupportTracePrintF(
-      2,
-      "WARNING: Building %s (role %s) of race %s has no production delay!",
-      BuildingName,
-      v13,
-      RaceName);
+    BBSupportTracePrintF(2, "WARNING: Building %s (role %s) of race %s has no production delay!", BuildingName, v13, RaceName);
   }
   (*(void (__cdecl **)(unsigned __int8 *))(*v25 + 72))(a2);
   return 1;
@@ -444,12 +436,16 @@ int  CWorkUpBuildingRole::GetBuildingNeed(int a2)const {
   unsigned __int8 *v3; // eax
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < std::vector<unsigned short>::size((char *)this + 384); ++i )
+  for ( i = 0;
+        i < std::vector<unsigned short>::size((char *)this + 384);
+        ++i )
   {
     v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
     v3 = CPileMgr::operator[](*v2);
     if ( (*(int (__thiscall **)(unsigned __int8 *, unsigned __int8 *))(*(_DWORD *)v3 + 60))(v3, v3) == a2 )
+    {
       return *(unsigned __int16 *)std::vector<unsigned short>::operator[](i);
+    }
   }
   BBSupportTracePrintF(0, "TROUBLE: illegal goodcheck good %u", a2);
   return 0;
@@ -468,27 +464,29 @@ int  CWorkUpBuildingRole::GetPileIdWithGood(int a2)const {
   unsigned __int8 *v8; // [esp+4h] [ebp-Ch]
   unsigned int i; // [esp+8h] [ebp-8h]
 
-  for ( i = 0; i < std::vector<unsigned short>::size((char *)this + 384); ++i )
+  for ( i = 0;
+        i < std::vector<unsigned short>::size((char *)this + 384);
+        ++i )
   {
     v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
     v8 = CPileMgr::operator[](*v2);
     if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v8 + 60))(v8) == a2 )
+    {
       return *(unsigned __int16 *)std::vector<unsigned short>::operator[](i);
+    }
   }
   v4 = CPileMgr::operator[](*((unsigned __int16 *)this + 191));
   if ( (*(int (__thiscall **)(unsigned __int8 *, unsigned __int8 *))(*(_DWORD *)v4 + 60))(v4, v4) == a2 )
+  {
     return *((unsigned __int16 *)this + 191);
+  }
   v7 = (&off_3797E74)[2 * a2];
   v5 = (unsigned __int16 *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   v6 = IEntity::Type(v5);
-  if ( BBSupportDbgReportF(
-         2,
-         "MapObjects\\Building\\WorkUpBuilding.cpp",
-         534,
-         "Illegal goodcheck: buildingtype: %s, goodtype: %s",
-         (&off_379821C)[2 * v6],
-         v7) == 1 )
+  if ( BBSupportDbgReportF(2, "MapObjects\\Building\\WorkUpBuilding.cpp", 534, "Illegal goodcheck: buildingtype: %s, goodtype: %s", (&off_379821C)[2 * v6], v7) == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 
@@ -510,17 +508,25 @@ void  CWorkUpBuildingRole::LockPiles(class CBuilding * a2, bool a3) {
   unsigned __int8 *v5; // eax
   unsigned int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = std::vector<unsigned short>::size((char *)this + 384);
     if ( i >= result )
+    {
       break;
+    }
     v4 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
     v5 = CPileMgr::operator[](*v4);
     if ( a3 )
+    {
       IEntity::SetFlagBits(v5, (EntityFlag)0x10u);
+    }
     else
+    {
       IEntity::ClearFlagBits(v5, (EntityFlag)0x10u);
+    }
   }
   return result;
 }
@@ -555,7 +561,9 @@ void  CWorkUpBuildingRole::LockPiles(class CBuilding * a2, bool a3) {
     v10[380] = 0;
     operator^<unsigned short>(a2, v10 + 382);
     operator^<unsigned int>(a2, &v4);
-    for ( i = 0; i < v4; ++i )
+    for ( i = 0;
+          i < v4;
+          ++i )
     {
       operator^<unsigned short>(a2, v12);
       std::vector<unsigned short>::push_back(v12);
@@ -573,7 +581,9 @@ void  CWorkUpBuildingRole::LockPiles(class CBuilding * a2, bool a3) {
     operator^<unsigned char>(a2, v10 + 380);
     operator^<unsigned short>(a2, v10 + 382);
     operator^<unsigned int>(a2, &v3);
-    for ( j = 0; j < v3; ++j )
+    for ( j = 0;
+          j < v3;
+          ++j )
     {
       operator^<unsigned short>(a2, v11);
       std::vector<unsigned short>::push_back(v11);
@@ -602,7 +612,9 @@ void  CWorkUpBuildingRole::Store(std::ostream & a2) {
   operator^<unsigned short>((int)a2, (__int16 *)v7 + 191);
   v5 = std::vector<unsigned short>::size((char *)v7 + 384);
   result = operator^<unsigned int>(a2, &v5);
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
     v3 = (__int16 *)std::vector<unsigned short>::operator[]((char *)v7 + 384, i);
     operator^<unsigned short>((int)a2, v3);
@@ -616,7 +628,7 @@ void  CWorkUpBuildingRole::Store(std::ostream & a2) {
 // [Decompilation failed for static unsigned long CWorkUpBuildingRole::m_iClassID]
 
 // address=[0x14e67a0]
-// Decompiled from void __thiscall CWorkUpBuildingRole::ConvertEventIntoGoal(  CWorkUpBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
+// Decompiled from void __thiscall CWorkUpBuildingRole::ConvertEventIntoGoal(CWorkUpBuildingRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CWorkUpBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
@@ -649,12 +661,16 @@ bool  CWorkUpBuildingRole::HaveMaterial(class CBuilding * a2) {
   char v7; // [esp+Bh] [ebp-1h]
 
   v7 = 1;
-  for ( i = 0; i < std::vector<unsigned short>::size((char *)this + 384); ++i )
+  for ( i = 0;
+        i < std::vector<unsigned short>::size((char *)this + 384);
+        ++i )
   {
     v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
     v3 = CPileMgr::operator[](*v2);
     if ( !(unsigned __int8)CPile::GoodAvailable(v3) )
+    {
       v7 = 0;
+    }
   }
   return v7;
 }
@@ -695,8 +711,12 @@ void  CWorkUpBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E50A = -1;
   byte_3F1E506 = *((_BYTE *)this + 29);
   if ( *((_BYTE *)this + 29) )
+  {
     byte_3F1E50D = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
-  for ( i = 0; i < std::vector<unsigned short>::size((char *)this + 384); ++i )
+  }
+  for ( i = 0;
+        i < std::vector<unsigned short>::size((char *)this + 384);
+        ++i )
   {
     v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
     v14 = CPileMgr::operator[](*v5);
@@ -714,7 +734,9 @@ void  CWorkUpBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   }
   v11 = 604;
   if ( !a3 )
+  {
     v11 = 602;
+  }
   CEvn_Event::CEvn_Event(&v17, v11, 0, (unsigned int)&g_cResourceUpgradeInfo, 0);
   v18 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v17);

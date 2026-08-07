@@ -22,7 +22,7 @@
 
 
 // address=[0x2f14cc0]
-// Decompiled from AdvXMLParser::CharRef *__thiscall AdvXMLParser::CharRef::CharRef(  AdvXMLParser::CharRef *this,  struct AdvXMLParser::NodeContainer *a2,  char a3)
+// Decompiled from AdvXMLParser::CharRef *__thiscall AdvXMLParser::CharRef::CharRef(AdvXMLParser::CharRef *this, struct AdvXMLParser::NodeContainer *a2, char a3)
  AdvXMLParser::CharRef::CharRef(class AdvXMLParser::NodeContainer & a2, int a3) {
   
   _BYTE v5[28]; // [esp+8h] [ebp-2Ch] BYREF
@@ -47,9 +47,13 @@ class AdvXMLParser::CharRef *  AdvXMLParser::CharRef::Clone(class AdvXMLParser::
 
   C = (AdvXMLParser::CharRef *)operator new(0x28u);
   if ( C )
+  {
     return AdvXMLParser::CharRef::CharRef(C, a2, *((char *)this + 36));
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -97,35 +101,49 @@ class AdvXMLParser::CharRef * __cdecl AdvXMLParser::CharRef::Parse(class AdvXMLP
   int v7; // [esp+20h] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseString(a1, "&#") )
+  {
     return 0;
+  }
   v5 = 0;
   Char = AdvXMLParser::Parser::NextChar(a1);
   if ( Char == 120 )
   {
     if ( !AdvXMLParser::Parser::ParseHexNumber(a1, &v5) )
+    {
       AdvXMLParser::Parser::SyntaxError(a1, 7);
+    }
   }
   else
   {
     AdvXMLParser::Parser::PreviousChar(a1);
     if ( !AdvXMLParser::Parser::ParseNumber(a1, &v5) )
+    {
       AdvXMLParser::Parser::SyntaxError(a1, 8);
+    }
   }
   if ( !AdvXMLParser::Parser::ParseChar(a1, 59) )
+  {
     AdvXMLParser::Parser::SyntaxError(a1, 6);
+  }
   if ( !AdvXMLParser::IsXmlChar((AdvXMLParser *)(unsigned __int8)v5) )
+  {
     AdvXMLParser::Parser::SyntaxError(a1, 2);
+  }
   C = (AdvXMLParser::CharRef *)operator new(0x28u);
   v7 = 0;
   if ( C )
+  {
     return AdvXMLParser::CharRef::CharRef(C, a2, v5);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x2f2cf80]
-// Decompiled from int __thiscall AdvXMLParser::CharRef::GenerateXML(  AdvXMLParser::CharRef *this,  struct AdvXMLParser::GenerateContext *a2)
+// Decompiled from int __thiscall AdvXMLParser::CharRef::GenerateXML(AdvXMLParser::CharRef *this, struct AdvXMLParser::GenerateContext *a2)
 void  AdvXMLParser::CharRef::GenerateXML(class AdvXMLParser::GenerateContext & a2)const {
   
   char *v2; // eax

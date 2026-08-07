@@ -15,7 +15,9 @@ int __cdecl CAStarCallback::FindPath(int a1, int a2, void (__cdecl*)(int,int) a3
   _BYTE v11[88]; // [esp+20h] [ebp-5Ch] BYREF
 
   if ( (int)CAStarTiling::FindPath(a1, a2, (struct CWaypoints *)v11, a4) <= 0 )
+  {
     return 0;
+  }
   v10 = 1;
   v7 = Y16X16::UnpackXFast(a1);
   v8 = Y16X16::UnpackYFast(a1);

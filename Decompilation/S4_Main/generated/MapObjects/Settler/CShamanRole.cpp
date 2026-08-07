@@ -15,9 +15,13 @@ bool  CShamanRole::IsManaPoolEmpty(void) {
 class CPersistence * __cdecl CShamanRole::New(std::istream & a1) {
   
   if ( operator new(0x74u) )
+  {
     return CShamanRole::CShamanRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -65,13 +69,17 @@ void  CShamanRole::LogicUpdateJob(class CSettler * a2) {
     *((_DWORD *)v20 + 20) = 0;
     (*(void (__thiscall **)(CShamanRole *, struct CSettler *))(*(_DWORD *)v20 + 40))(v20, a2);
     if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Registered) )
+    {
       IAnimatedEntity::RegisterForLogicUpdate(1);
+    }
     return;
   }
   if ( *((int *)v20 + 27) <= 0 )
   {
     if ( *((_DWORD *)v20 + 25) && CShamanRole::CheckForManakopter(v20, a2) == 2 )
+    {
       return;
+    }
   }
   else
   {
@@ -86,16 +94,16 @@ void  CShamanRole::LogicUpdateJob(class CSettler * a2) {
         PilePtr = CPileMgr::GetPilePtr(v17);
         if ( PilePtr )
         {
-          if ( (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == 7
-            || (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == 20 )
+          if ( (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == 7 || (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == 20 )
           {
             if ( (unsigned __int8)CPile::GoodAvailable(PilePtr) )
+            {
               v18 = 7;
+            }
           }
         }
       }
-      if ( !v18
-        && (*(int (__thiscall **)(void *, int *, int *, int))(*(_DWORD *)off_3D7A6A8 + 12))(off_3D7A6A8, &v15, &v16, 2) )
+      if ( !v18 && (*(int (__thiscall **)(void *, int *, int *, int))(*(_DWORD *)off_3D7A6A8 + 12))(off_3D7A6A8, &v15, &v16, 2) )
       {
         v18 = 2;
       }
@@ -138,9 +146,13 @@ void  CShamanRole::LogicUpdateJob(class CSettler * a2) {
     *((_DWORD *)v20 + 27) = v6;
   }
   if ( v21 )
+  {
     v13 = 16;
+  }
   else
+  {
     v13 = 0;
+  }
   if ( (IEntity::Flags(a2) & 0x8000) == 0 )
   {
     TickCounter = CStateGame::GetTickCounter(g_pGame);
@@ -178,20 +190,18 @@ void  CShamanRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WA
 
   v24 = this;
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\ShamanRole.cpp", 352, "_iTargetId > 0") == 1 )
-    __debugbreak();
-  if ( a3 > 0xFFFF && BBSupportDbgReport(2, "MapObjects\\Settler\\ShamanRole.cpp", 353, "_iTargetId <= 0xFFFF") == 1 )
-    __debugbreak();
-  if ( CMapObjectMgr::GetUniqueId(a3) <= 0
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\ShamanRole.cpp", 355, "g_pMapObjectMgr->GetUniqueId(_iTargetId) > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( (CMapObjectMgr::GetUniqueId(a3) & 0x20000000) != 0
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Settler\\ShamanRole.cpp",
-         356,
-         "( g_pMapObjectMgr->GetUniqueId(_iTargetId) & IEntity::UNIQUE_ID_DEAD_ENTITY_BIT ) == 0") == 1 )
+  if ( a3 > 0xFFFF && BBSupportDbgReport(2, "MapObjects\\Settler\\ShamanRole.cpp", 353, "_iTargetId <= 0xFFFF") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( CMapObjectMgr::GetUniqueId(a3) <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\ShamanRole.cpp", 355, "g_pMapObjectMgr->GetUniqueId(_iTargetId) > 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( (CMapObjectMgr::GetUniqueId(a3) & 0x20000000) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\ShamanRole.cpp", 356, "( g_pMapObjectMgr->GetUniqueId(_iTargetId) & IEntity::UNIQUE_ID_DEAD_ENTITY_BIT ) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -207,8 +217,7 @@ void  CShamanRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WA
   v24[8] = v5;
   v25 = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v15);
-  if ( *(_WORD *)(v24[8] + 16)
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\ShamanRole.cpp", 371, "m_pTempEntityTask->m_uEntityID == 0") == 1 )
+  if ( *(_WORD *)(v24[8] + 16) && BBSupportDbgReport(2, "MapObjects\\Settler\\ShamanRole.cpp", 371, "m_pTempEntityTask->m_uEntityID == 0") == 1 )
   {
     __debugbreak();
   }
@@ -217,41 +226,35 @@ void  CShamanRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WA
   *(_WORD *)(v24[8] + 16) = 0;
   UniqueId = CMapObjectMgr::GetUniqueId(a3);
   if ( v24[13] && (result = (_DWORD *)CShamanRole::CheckForManakopter((CShamanRole *)(v24 - 12), v22)) != 0 )
+  {
     return result;
+  }
   result = (_DWORD *)CMapObjectMgr::EntityPtr(a3);
   v23 = result;
   if ( !result )
+  {
     return result;
+  }
   result = (_DWORD *)IEntity::FlagBits(v23, (EntityFlag)&MEMORY[0x4000000]);
   if ( result )
+  {
     return result;
+  }
   v21 = CLogic::FutureEvents(g_pLogic);
   v14 = UniqueId;
   v12 = a3 | (v24[13] << 16);
   v7 = IEntity::EntityId((unsigned __int16 *)a2);
-  result = (_DWORD *)(*(int (__thiscall **)(int, int, int, int, int, int))(*(_DWORD *)v21 + 12))(
-                       v21,
-                       8,
-                       5,
-                       v7,
-                       v12,
-                       v14);
+  result = (_DWORD *)(*(int (__thiscall **)(int, int, int, int, int, int))(*(_DWORD *)v21 + 12))(v21, 8, 5, v7, v12, v14);
   if ( !v23 )
+  {
     return result;
+  }
   v20 = CLogic::Effects((DWORD *)g_pLogic);
   v8 = IEntity::PackedXY(v23);
   v11 = Y16X16::UnpackYFast(v8);
   v9 = IEntity::PackedXY(v23);
   v10 = Y16X16::UnpackXFast(v9);
-  return (_DWORD *)(*(int (__thiscall **)(int, int, int, int, int, int, _DWORD, int))(*(_DWORD *)v20 + 16))(
-                     v20,
-                     76,
-                     84,
-                     v10,
-                     v11,
-                     5,
-                     0,
-                     1);
+  return (_DWORD *)(*(int (__thiscall **)(int, int, int, int, int, int, _DWORD, int))(*(_DWORD *)v20 + 16))(v20, 76, 84, v10, v11, 5, 0, 1);
 }
 
 
@@ -276,7 +279,9 @@ void  CShamanRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
   else
   {
     if ( v6 != 28 )
+    {
       return CSoldierRole::ConvertEventIntoGoal(a2, a3);
+    }
     this[25] = *(_DWORD *)(a3 + 12);
     v7 = (_DWORD *)CMapObjectMgr::EntityPtr(this[25]);
     if ( !v7 || IEntity::FlagBits(v7, (EntityFlag)&MEMORY[0x4000000]) )
@@ -312,7 +317,9 @@ void  CShamanRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
   operator^<unsigned int>(a2, &v3);
   v5 = v3;
   if ( v3 == 1 )
+  {
     return v6;
+  }
   if ( v5 == 2 )
   {
     operator^<unsigned int>(a2, v6 + 25);
@@ -404,7 +411,9 @@ int  CShamanRole::CheckForManakopter(class CSettler * a2) {
 
   ManakopterPtr = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, *((_DWORD *)this + 25));
   if ( ManakopterPtr && IEntity::UniqueId(ManakopterPtr) == *((_DWORD *)this + 26) )
+  {
     return 0;
+  }
   *((_DWORD *)this + 25) = 0;
   *((_DWORD *)this + 26) = 0;
   *((_DWORD *)this + 27) = -1;
@@ -417,7 +426,9 @@ int  CShamanRole::CheckForManakopter(class CSettler * a2) {
     v7 = IEntity::Y(a2);
     v4 = IEntity::X(a2);
     if ( v8 == CWorldManager::SectorId(v4, v7) )
+    {
       return 1;
+    }
   }
   v5 = IEntity::ID();
   CMapObjectMgr::Kill(v5, 0);

@@ -3,7 +3,7 @@
 // Definitions for class GameMessage
 
 // address=[0x161ce80]
-// Decompiled from OnlineManager::GameMessage *__thiscall OnlineManager::GameMessage::GameMessage(  OnlineManager::GameMessage *this,  const struct OnlineManager::GameMessage *a2)
+// Decompiled from OnlineManager::GameMessage *__thiscall OnlineManager::GameMessage::GameMessage(OnlineManager::GameMessage *this, const struct OnlineManager::GameMessage *a2)
  OnlineManager::GameMessage::GameMessage(struct OnlineManager::GameMessage const & a2) {
   
   storm::DataBuffer::DataBuffer(this, a2);

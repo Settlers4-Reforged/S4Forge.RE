@@ -3,15 +3,10 @@
 // Definitions for class CAIEcoSpecialBuildingInfos
 
 // address=[0x133a1d0]
-// Decompiled from CAIEcoSpecialBuildingInfos *__thiscall CAIEcoSpecialBuildingInfos::CAIEcoSpecialBuildingInfos(  CAIEcoSpecialBuildingInfos *this)
+// Decompiled from CAIEcoSpecialBuildingInfos *__thiscall CAIEcoSpecialBuildingInfos::CAIEcoSpecialBuildingInfos(CAIEcoSpecialBuildingInfos *this)
  CAIEcoSpecialBuildingInfos::CAIEcoSpecialBuildingInfos(void) {
   
-  if ( CAIEcoSpecialBuildingInfos::pSingleInstance
-    && BBSupportDbgReport(
-         2,
-         "Ai\\EcoManager\\CAIEcoSpecialBuildingInfos.cpp",
-         40,
-         "!CAIEcoSpecialBuildingInfos::pSingleInstance") == 1 )
+  if ( CAIEcoSpecialBuildingInfos::pSingleInstance && BBSupportDbgReport(2, "Ai\\EcoManager\\CAIEcoSpecialBuildingInfos.cpp", 40, "!CAIEcoSpecialBuildingInfos::pSingleInstance") == 1 )
   {
     __debugbreak();
   }
@@ -38,10 +33,14 @@ class CAIEcoSpecialBuildingInfos * __cdecl CAIEcoSpecialBuildingInfos::TheObject
   CAIEcoSpecialBuildingInfos *C; // [esp+Ch] [ebp-10h]
 
   if ( CAIEcoSpecialBuildingInfos::pSingleInstance )
+  {
     return CAIEcoSpecialBuildingInfos::pSingleInstance;
+  }
   C = (CAIEcoSpecialBuildingInfos *)operator new(0x1038u);
   if ( C )
+  {
     CAIEcoSpecialBuildingInfos::CAIEcoSpecialBuildingInfos(C);
+  }
   return CAIEcoSpecialBuildingInfos::pSingleInstance;
 }
 
@@ -51,9 +50,13 @@ class CAIEcoSpecialBuildingInfos * __cdecl CAIEcoSpecialBuildingInfos::TheObject
 struct SAIESBIBoundingInfos const *  CAIEcoSpecialBuildingInfos::GetBoundingBoxInfo(int a2, enum BUILDING_TYPES a3) {
   
   if ( a2 < 5 )
+  {
     return (int)this + 415 * a2 + 5 * a3;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -62,9 +65,13 @@ struct SAIESBIBoundingInfos const *  CAIEcoSpecialBuildingInfos::GetBoundingBoxI
 int  CAIEcoSpecialBuildingInfos::GetBlockingBitAmount(int a2, enum BUILDING_TYPES a3) {
   
   if ( a2 < 5 )
+  {
     return this[83 * a2 + 1038 + a3];
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -73,9 +80,13 @@ int  CAIEcoSpecialBuildingInfos::GetBlockingBitAmount(int a2, enum BUILDING_TYPE
 int  CAIEcoSpecialBuildingInfos::GetNrNeededBoards(int a2, enum BUILDING_TYPES a3) {
   
   if ( a2 < 5 )
+  {
     return this[83 * a2 + 2906 + a3];
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -84,9 +95,13 @@ int  CAIEcoSpecialBuildingInfos::GetNrNeededBoards(int a2, enum BUILDING_TYPES a
 int  CAIEcoSpecialBuildingInfos::GetNrNeededStones(int a2, enum BUILDING_TYPES a3) {
   
   if ( a2 < 5 )
+  {
     return this[83 * a2 + 3321 + a3];
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -95,9 +110,13 @@ int  CAIEcoSpecialBuildingInfos::GetNrNeededStones(int a2, enum BUILDING_TYPES a
 int  CAIEcoSpecialBuildingInfos::GetNrNeededGold(int a2, enum BUILDING_TYPES a3) {
   
   if ( a2 < 5 )
+  {
     return this[83 * a2 + 3736 + a3];
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -109,9 +128,13 @@ void  CAIEcoSpecialBuildingInfos::InitBoundingBoxes(void) {
   int j; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
-    for ( j = 1; j < 83; ++j )
+    for ( j = 1;
+          j < 83;
+          ++j )
     {
       BuildingInfo = (_BYTE *)CBuildingInfoMgr::GetBuildingInfo(i, j);
       *((_BYTE *)this + 415 * i + 5 * j) = BuildingInfo[52];
@@ -148,9 +171,13 @@ void  CAIEcoSpecialBuildingInfos::InitBlockingBitCount(void) {
   v6 = this;
   std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v5);
   v17 = 0;
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
-    for ( j = 1; j < 83; ++j )
+    for ( j = 1;
+          j < 83;
+          ++j )
     {
       BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(i, j);
       v12 = 0;
@@ -169,14 +196,20 @@ void  CAIEcoSpecialBuildingInfos::InitBlockingBitCount(void) {
         LOBYTE(v17) = 0;
         std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v3);
         if ( !v16 )
+        {
           break;
+        }
         if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v5) )
         {
-          for ( k = 31; k >= 0; --k )
+          for ( k = 31;
+                k >= 0;
+                --k )
           {
             v1 = (_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v5);
             if ( (*v1 & (1 << k)) != 0 )
+            {
               ++v12;
+            }
           }
         }
         std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator++(v5);
@@ -197,9 +230,13 @@ void  CAIEcoSpecialBuildingInfos::InitBuildResources(void) {
   int j; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
-    for ( j = 1; j < 83; ++j )
+    for ( j = 1;
+          j < 83;
+          ++j )
     {
       BuildingInfo = (_BYTE *)CBuildingInfoMgr::GetBuildingInfo(i, j);
       *((_BYTE *)this + 83 * i + j + 2906) = BuildingInfo[3];

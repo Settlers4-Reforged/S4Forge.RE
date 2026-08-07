@@ -27,44 +27,26 @@ int  CMagicSpell::SettlerFlagBitChange(int a2, int a3, int a4, int a5, enum SIV_
       IEntity::SetFlagBits(v14, a4);
       v13 = CLogic::FutureEvents(g_pLogic);
       v6 = IEntity::ID();
-      (*(void (__thiscall **)(int, int, _DWORD, int, _DWORD, EntityFlag))(*(_DWORD *)v13 + 12))(
-        v13,
-        1,
-        v16[6],
-        v6,
-        0,
-        a4);
+      (*(void (__thiscall **)(int, int, _DWORD, int, _DWORD, EntityFlag))(*(_DWORD *)v13 + 12))(v13, 1, v16[6], v6, 0, a4);
       if ( a5 )
       {
         v12 = CLogic::Effects((DWORD *)g_pLogic);
         v9 = CSettlerSpiralWalk::CurrentY(v10);
         v7 = CSettlerSpiralWalk::CurrentX(v10);
-        (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(
-          v12,
-          a5,
-          0,
-          v7,
-          v9,
-          0,
-          0,
-          0);
+        (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(v12, a5, 0, v7, v9, 0, 0, 0);
       }
       if ( ++v15 >= v16[5] )
+      {
         break;
+      }
     }
   }
   if ( v15 <= 0 || !a6 )
+  {
     return v15;
+  }
   v11 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, _DWORD, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v11 + 16))(
-    v11,
-    0,
-    a6,
-    v16[2],
-    v16[3],
-    0,
-    0,
-    0);
+  (*(void (__thiscall **)(int, _DWORD, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v11 + 16))(v11, 0, a6, v16[2], v16[3], 0, 0, 0);
   return v15;
 }
 
@@ -127,7 +109,9 @@ int  CMagicSpell::SpellDivinePresent(void) {
       if ( v22 == 16 || v22 == 64 || v22 == 144 )
       {
         v30 = 1;
-        for ( i = 0; i < 6; ++i )
+        for ( i = 0;
+              i < 6;
+              ++i )
         {
           v1 = CWorldManager::NeighborRelIndex(i);
           v10 = v26 + v1;
@@ -150,11 +134,15 @@ int  CMagicSpell::SpellDivinePresent(void) {
             v2 = CStateGame::Rand(g_pGame);
             v25 = v2 % v25;
           }
-          for ( j = 0; j < 8; ++j )
+          for ( j = 0;
+                j < 8;
+                ++j )
           {
             v3 = (int *)TStaticConfigIntArrayBase<8>::operator[](v17, j);
             if ( v25 < *v3 )
+            {
               break;
+            }
           }
           v21 = *(_DWORD *)TStaticConfigIntArrayBase<8>::operator[](v9, j);
           v16 = v21 > GOOD_NO_GOOD;
@@ -172,9 +160,13 @@ int  CMagicSpell::SpellDivinePresent(void) {
               v29 -= v4 % ((v29 + 2) >> 1);
             }
             if ( v29 > 8 )
+            {
               v29 = 8;
+            }
             if ( v29 < 1 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1253, "iAmount >= 1") == 1 )
+            {
               __debugbreak();
+            }
             v18 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v19, v20, v21, v29, 3u, 0, 0, 0, 0);
             if ( v18 )
             {
@@ -185,15 +177,11 @@ int  CMagicSpell::SpellDivinePresent(void) {
               v14 = CLogic::Effects(g_pLogic);
               v14->AddEffect(v14, EFFECT_RMAGIC_GIFTOFGOD, 0, v19, v20, v13, 0, 0);
               v12 = CLogic::FutureEvents(g_pLogic);
-              (*(void (__thiscall **)(struct IFutureEvents *, int, int, int, _DWORD, int))(*(_DWORD *)v12 + 12))(
-                v12,
-                1,
-                v13 + 4,
-                v18,
-                0,
-                0x80000);
+              (*(void (__thiscall **)(struct IFutureEvents *, int, int, int, _DWORD, int))(*(_DWORD *)v12 + 12))(v12, 1, v13 + 4, v18, 0, 0x80000);
               if ( ++v23 >= v27[5] )
+              {
                 break;
+              }
             }
           }
         }
@@ -232,16 +220,26 @@ int  CMagicSpell::SpellConvertGood(void) {
   v16 = CStaticConfigVarInt::operator int(*(&off_36B70E8 + *((_DWORD *)this + 1)));
   v15 = CStaticConfigVarInt::operator int(*(&off_36B70FC + *((_DWORD *)v19 + 1)));
   if ( !v16 || v16 >= 0x2B || !v15 || v15 >= 0x2B )
+  {
     return v17;
+  }
   if ( *((int *)v19 + 5) < 10 )
+  {
     v13 = 8;
+  }
   else
+  {
     v13 = *((_DWORD *)v19 + 5) - 2;
+  }
   v4 = v13;
   if ( *((int *)v19 + 5) < 8 )
+  {
     v12 = 10;
+  }
   else
+  {
     v12 = *((_DWORD *)v19 + 5) + 2;
+  }
   v6 = v12;
   CSpiralWalk::CSpiralWalk((CSpiralWalk *)v3, *((_DWORD *)v19 + 2), *((_DWORD *)v19 + 3), *((_DWORD *)v19 + 4));
   while ( CSpiralWalk::NextXY(v3, &v9, &v10) )
@@ -256,7 +254,9 @@ int  CMagicSpell::SpellConvertGood(void) {
       {
         v14 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)v18 + 40))(v18);
         if ( v14 < 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1346, "iPileAmount >= 0") == 1 )
+        {
           __debugbreak();
+        }
         if ( v14 + v17 <= v6 )
         {
           if ( (unsigned __int8)CPile::ChangeGoodTypeUnforseen(v18, v15) )
@@ -264,18 +264,12 @@ int  CMagicSpell::SpellConvertGood(void) {
             LOBYTE(v5) = CStateGame::Rand(g_pGame) & 3;
             v5 = (unsigned __int8)v5;
             v8 = CLogic::Effects((DWORD *)g_pLogic);
-            (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v8 + 16))(
-              v8,
-              27,
-              0,
-              v9,
-              v10,
-              v5,
-              0,
-              0);
+            (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v8 + 16))(v8, 27, 0, v9, v10, v5, 0, 0);
             v17 += v14;
             if ( v17 >= v4 )
+            {
               break;
+            }
           }
         }
       }
@@ -315,10 +309,14 @@ int  CMagicSpell::SpellConvertTerrain(void) {
   v6 = *((_DWORD *)v19 + 4);
   v14 = v13 & 0xF0;
   if ( (v13 & 0xF0) == 0 || v13 == v5 )
+  {
     v14 = -1;
+  }
   v15 = *((_DWORD *)v19 + 4) - 2;
   if ( v15 < 0 )
+  {
     v15 = 0;
+  }
   CSpiralWalk::CSpiralWalk((CSpiralWalk *)v2, *((_DWORD *)v19 + 2), *((_DWORD *)v19 + 3), v15);
   while ( CSpiralWalk::NextXY(v2, &v8, &v9) )
   {
@@ -345,20 +343,18 @@ int  CMagicSpell::SpellConvertTerrain(void) {
     }
   }
   if ( v18 == -1 )
+  {
     return v18;
+  }
   v7 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v7 + 16))(
-    v7,
-    30,
-    0,
-    *((_DWORD *)v19 + 2),
-    *((_DWORD *)v19 + 3),
-    0,
-    0,
-    0);
+  (*(void (__thiscall **)(int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v7 + 16))(v7, 30, 0, *((_DWORD *)v19 + 2), *((_DWORD *)v19 + 3), 0, 0, 0);
   v3 = (void *)CLogic::FutureEvents(g_pLogic);
-  for ( i = 0; i <= v6; ++i )
+  for ( i = 0;
+        i <= v6;
+        ++i )
+  {
     IFutureEvents::AddFutureEvent16(v3, 4, i + 1, 0, *((_DWORD *)v19 + 2), *((_DWORD *)v19 + 3), i, v18);
+  }
   return v18;
 }
 
@@ -395,7 +391,9 @@ int  CMagicSpell::SpellFoodMoreFish(void) {
       if ( (v7 & 0xF0) != 0 && v9 || v9 >= 15 )
       {
         if ( !v11 )
+        {
           v11 = 1;
+        }
       }
       else
       {
@@ -403,67 +401,32 @@ int  CMagicSpell::SpellFoodMoreFish(void) {
         v6[1] = v1 & 3;
         v10 = ((unsigned __int8)(v1 & 2) >> 1) + v9 + (v1 & 1) + 1;
         if ( v10 > 15 )
+        {
           v10 = 15;
-        if ( v10 <= v9
-          && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1537, "iNewResourceAmount > iOldResourceAmount") == 1 )
+        }
+        if ( v10 <= v9 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1537, "iNewResourceAmount > iOldResourceAmount") == 1 )
         {
           __debugbreak();
         }
         CWorldManager::SetResource(v8, 0, v10);
         v11 += v10 - v9;
         if ( v11 >= *((_DWORD *)v13 + 5) )
+        {
           break;
+        }
       }
     }
   }
   if ( v11 <= 0 )
+  {
     return v11;
+  }
   v12 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(
-    v12,
-    48,
-    0,
-    *((_DWORD *)v13 + 2),
-    *((_DWORD *)v13 + 3),
-    0,
-    0,
-    0);
-  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(
-    v12,
-    48,
-    0,
-    *((_DWORD *)v13 + 2) - 2,
-    *((_DWORD *)v13 + 3) + 1,
-    3,
-    0,
-    0);
-  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(
-    v12,
-    48,
-    0,
-    *((_DWORD *)v13 + 2) - 1,
-    *((_DWORD *)v13 + 3) - 3,
-    6,
-    0,
-    0);
-  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(
-    v12,
-    48,
-    0,
-    *((_DWORD *)v13 + 2) + 1,
-    *((_DWORD *)v13 + 3) - 1,
-    10,
-    0,
-    0);
-  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(
-    v12,
-    48,
-    0,
-    *((_DWORD *)v13 + 2) + 3,
-    *((_DWORD *)v13 + 3) + 2,
-    13,
-    0,
-    0);
+  (*(void (__thiscall **)(int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(v12, 48, 0, *((_DWORD *)v13 + 2), *((_DWORD *)v13 + 3), 0, 0, 0);
+  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(v12, 48, 0, *((_DWORD *)v13 + 2) - 2, *((_DWORD *)v13 + 3) + 1, 3, 0, 0);
+  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(v12, 48, 0, *((_DWORD *)v13 + 2) - 1, *((_DWORD *)v13 + 3) - 3, 6, 0, 0);
+  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(v12, 48, 0, *((_DWORD *)v13 + 2) + 1, *((_DWORD *)v13 + 3) - 1, 10, 0, 0);
+  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(v12, 48, 0, *((_DWORD *)v13 + 2) + 3, *((_DWORD *)v13 + 3) + 2, 13, 0, 0);
   return v11;
 }
 
@@ -506,29 +469,35 @@ int  CMagicSpell::SpellAttackLightningBolt(void) {
   v11 = CAlliances::PlayerEnemyBits(*(_DWORD *)this);
   v9[8] = 252;
   if ( CStaticConfigVarInt::operator int(&g_iLightningBoltDamageMin) <= 0 )
+  {
     v15 = 1;
+  }
   else
+  {
     v15 = CStaticConfigVarInt::operator int(&g_iLightningBoltDamageMin);
+  }
   v16 = v15;
   if ( CStaticConfigVarInt::operator int(&g_iLightningBoltDamageMax) < v15 )
+  {
     v14 = 1;
+  }
   else
+  {
     v14 = CStaticConfigVarInt::operator int(&g_iLightningBoltDamageMax) - v16 + 1;
+  }
   v13 = v14;
   if ( v14 <= 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1604, "iDamageMod > 0") == 1 )
+  {
     __debugbreak();
+  }
   v17 = 0;
-  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(
-    (CWarriorEntitySpiralWalk *)v9,
-    *((_DWORD *)v18 + 2),
-    *((_DWORD *)v18 + 3),
-    *((_DWORD *)v18 + 4),
-    v11,
-    252);
+  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk((CWarriorEntitySpiralWalk *)v9, *((_DWORD *)v18 + 2), *((_DWORD *)v18 + 3), *((_DWORD *)v18 + 4), v11, 252);
   do
   {
     if ( !CWarriorEntitySpiralWalk::NextEntity((CWarriorEntitySpiralWalk *)v9, &v19) )
+    {
       break;
+    }
     v1 = CStateGame::Rand(g_pGame);
     v10 = v16 + v1 % v13;
     v2 = IEntity::OwnerId((unsigned __int8 *)v19);
@@ -542,15 +511,7 @@ int  CMagicSpell::SpellAttackLightningBolt(void) {
     v12 = CLogic::Effects((DWORD *)g_pLogic);
     v6 = CSettlerSpiralWalk::CurrentY(v9);
     v4 = CSettlerSpiralWalk::CurrentX(v9);
-    (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(
-      v12,
-      54,
-      0,
-      v4,
-      v6,
-      0,
-      0,
-      0);
+    (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(v12, 54, 0, v4, v6, 0, 0, 0);
     ++v17;
   }
   while ( v17 < *((_DWORD *)v18 + 5) );
@@ -586,13 +547,7 @@ int  CMagicSpell::SpellSoldierConvertBarbarians(void) {
   v11 = CAlliances::PlayerEnemyBits(*(_DWORD *)this);
   v8[9] = 60;
   v16 = 0;
-  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(
-    (CWarriorEntitySpiralWalk *)v8,
-    *((_DWORD *)v18 + 2),
-    *((_DWORD *)v18 + 3),
-    *((_DWORD *)v18 + 4),
-    v11,
-    60);
+  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk((CWarriorEntitySpiralWalk *)v8, *((_DWORD *)v18 + 2), *((_DWORD *)v18 + 3), *((_DWORD *)v18 + 4), v11, 60);
   while ( CWarriorEntitySpiralWalk::NextEntity((CWarriorEntitySpiralWalk *)v8, &v19) )
   {
     if ( IEntity::ObjType((unsigned __int8 *)v19) == 1 )
@@ -648,21 +603,17 @@ int  CMagicSpell::SpellSoldierConvertBarbarians(void) {
           v1 = CSettlerSpiralWalk::CurrentX(v8);
           v9 = CSettlerMgr::AddSettler((CSettlerMgr *)g_cSettlerMgr, v1, v4, v6, v7, 2);
           if ( !v9 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1744, "iNewSettlerId != 0") == 1 )
+          {
             __debugbreak();
+          }
           v12 = CLogic::Effects((DWORD *)g_pLogic);
           v5 = CSettlerSpiralWalk::CurrentY(v8);
           v2 = CSettlerSpiralWalk::CurrentX(v8);
-          (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(
-            v12,
-            55,
-            0,
-            v2,
-            v5,
-            0,
-            0,
-            0);
+          (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(v12, 55, 0, v2, v5, 0, 0, 0);
           if ( ++v16 >= *((_DWORD *)v18 + 5) )
+          {
             break;
+          }
         }
       }
     }
@@ -711,16 +662,19 @@ int  CMagicSpell::SpellSpecialMoreResources(void) {
         v1 = v14 + (v14 >> 2);
         v13 = v1 + (CStateGame::Rand(g_pGame) & 3) + 1;
         if ( v13 > 15 )
+        {
           v13 = 15;
-        if ( v13 <= v14
-          && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1810, "iNewResourceAmount > iOldResourceAmount") == 1 )
+        }
+        if ( v13 <= v14 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1810, "iNewResourceAmount > iOldResourceAmount") == 1 )
         {
           __debugbreak();
         }
         CWorldManager::SetResource(v12, v4, v13);
         v15 += v13 - v14;
         if ( v15 >= *((_DWORD *)v17 + 5) )
+        {
           break;
+        }
       }
       else
       {
@@ -730,53 +684,15 @@ int  CMagicSpell::SpellSpecialMoreResources(void) {
     }
   }
   if ( v15 <= 0 )
+  {
     return v15;
+  }
   v16 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(
-    v16,
-    36,
-    0,
-    *((_DWORD *)v17 + 2),
-    *((_DWORD *)v17 + 3),
-    0,
-    0,
-    0);
-  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(
-    v16,
-    36,
-    0,
-    *((_DWORD *)v17 + 2) - 2,
-    *((_DWORD *)v17 + 3) + 1,
-    3,
-    0,
-    0);
-  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(
-    v16,
-    36,
-    0,
-    *((_DWORD *)v17 + 2) - 1,
-    *((_DWORD *)v17 + 3) - 3,
-    6,
-    0,
-    0);
-  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(
-    v16,
-    36,
-    0,
-    *((_DWORD *)v17 + 2) + 1,
-    *((_DWORD *)v17 + 3) - 1,
-    10,
-    0,
-    0);
-  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(
-    v16,
-    36,
-    0,
-    *((_DWORD *)v17 + 2) + 3,
-    *((_DWORD *)v17 + 3) + 2,
-    13,
-    0,
-    0);
+  (*(void (__thiscall **)(int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(v16, 36, 0, *((_DWORD *)v17 + 2), *((_DWORD *)v17 + 3), 0, 0, 0);
+  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(v16, 36, 0, *((_DWORD *)v17 + 2) - 2, *((_DWORD *)v17 + 3) + 1, 3, 0, 0);
+  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(v16, 36, 0, *((_DWORD *)v17 + 2) - 1, *((_DWORD *)v17 + 3) - 3, 6, 0, 0);
+  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(v16, 36, 0, *((_DWORD *)v17 + 2) + 1, *((_DWORD *)v17 + 3) - 1, 10, 0, 0);
+  (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(v16, 36, 0, *((_DWORD *)v17 + 2) + 3, *((_DWORD *)v17 + 3) + 2, 13, 0, 0);
   return v15;
 }
 
@@ -806,13 +722,12 @@ int  CMagicSpell::SpellFoodMoreGame(void) {
   {
     v15 = CWorldManager::Index(x, y);
     v7 = CWorldManager::Ground(v15);
-    if ( (v7 & 0xF0) == 0x10
-      && !(unsigned __int8)CWorldManager::IsBlockedLand(v15)
-      && !CWorldManager::MapObjectId(v15)
-      && !CWorldManager::ObjectId(v15) )
+    if ( (v7 & 0xF0) == 0x10 && !(unsigned __int8)CWorldManager::IsBlockedLand(v15) && !CWorldManager::MapObjectId(v15) && !CWorldManager::ObjectId(v15) )
     {
       v16 = 1;
-      for ( i = 1; i < 19; ++i )
+      for ( i = 1;
+            i < 19;
+            ++i )
       {
         v1 = CWorldManager::SurroundingHexPointRelIndex(i);
         v6 = v15 + v1;
@@ -833,7 +748,9 @@ int  CMagicSpell::SpellFoodMoreGame(void) {
           v8 = CLogic::FutureEvents(g_pLogic);
           (*(void (__thiscall **)(int, int, int, int, _DWORD, int))(*(_DWORD *)v8 + 12))(v8, 1, v4 + 4, v11, 0, 0x80000);
           if ( ++v14 >= this[5] )
+          {
             break;
+          }
         }
       }
     }
@@ -909,15 +826,7 @@ int  CMagicSpell::SpellSpecialThorsHammer(void) {
         if ( CAlliances::PlayerBit(v4 & v1) )
         {
           v9 = CLogic::Effects((DWORD *)g_pLogic);
-          (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, int))(*(_DWORD *)v9 + 16))(
-            v9,
-            23,
-            0,
-            v10,
-            v11,
-            0,
-            0,
-            1);
+          (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, int))(*(_DWORD *)v9 + 16))(v9, 23, 0, v10, v11, 0, 0, 1);
           v7 = CLogic::FutureEvents(g_pLogic);
           (*(void (__thiscall **)(int, int, int, int, int, _DWORD))(*(_DWORD *)v7 + 12))(v7, 2, 25, v8, 300, 0);
           return 1;
@@ -977,17 +886,11 @@ int  CMagicSpell::SpellFoodFasterCrops(void) {
     }
   }
   if ( v13 <= 0 )
+  {
     return v13;
+  }
   v5 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v5 + 16))(
-    v5,
-    37,
-    0,
-    v12[2],
-    v12[3],
-    0,
-    0,
-    0);
+  (*(void (__thiscall **)(int, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v5 + 16))(v5, 37, 0, v12[2], v12[3], 0, 0, 0);
   return v13;
 }
 
@@ -1030,26 +933,20 @@ int  CMagicSpell::SpellDefenceBanFoes(void) {
   v8[4] = 60;
   v24 = 0;
   if ( !*((_DWORD *)v27 + 8) )
+  {
     return v24;
+  }
   v23 = CMapObjectMgr::Entity(*((_DWORD *)v27 + 8));
-  if ( IEntity::WarriorType() != 6
-    && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2121, "rPriest.WarriorType() == WARRIOR_TYPE_PRIEST") == 1 )
+  if ( IEntity::WarriorType() != 6 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2121, "rPriest.WarriorType() == WARRIOR_TYPE_PRIEST") == 1 )
   {
     __debugbreak();
   }
   v21 = IEntity::X(v23);
   v22 = IEntity::Y(v23);
-  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(
-    (CWarriorEntitySpiralWalk *)v7,
-    v21,
-    v22,
-    *((_DWORD *)v27 + 4),
-    v13,
-    60);
+  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk((CWarriorEntitySpiralWalk *)v7, v21, v22, *((_DWORD *)v27 + 4), v13, 60);
   while ( CWarriorEntitySpiralWalk::NextEntity((CWarriorEntitySpiralWalk *)v7, (struct IEntity **)&v28) )
   {
-    if ( !j____RTDynamicCast(v28, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0)
-      && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2132, "dynamic_cast<IMovingEntity*>(pEnemy) != 0") == 1 )
+    if ( !j____RTDynamicCast(v28, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2132, "dynamic_cast<IMovingEntity*>(pEnemy) != 0") == 1 )
     {
       __debugbreak();
     }
@@ -1077,64 +974,34 @@ int  CMagicSpell::SpellDefenceBanFoes(void) {
     {
       v19 = IEntity::X(v28);
       v20 = IEntity::Y(v28);
-      if ( v19 == v25
-        && v20 == v26
-        && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2166, "(iOldEnemyX != iNewEnemyX) || (iOldEnemyY != iNewEnemyY)") == 1 )
+      if ( v19 == v25 && v20 == v26 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2166, "(iOldEnemyX != iNewEnemyX) || (iOldEnemyY != iNewEnemyY)") == 1 )
       {
         __debugbreak();
       }
       LOBYTE(v17) = CStateGame::Rand(g_pGame) & 3;
       v17 = (unsigned __int8)v17;
       v18 = CLogic::Effects((DWORD *)g_pLogic);
-      (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v18 + 16))(
-        v18,
-        55,
-        0,
-        v19,
-        v20,
-        v17,
-        0,
-        0);
+      (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v18 + 16))(v18, 55, 0, v19, v20, v17, 0, 0);
       v16 = CLogic::Effects((DWORD *)g_pLogic);
-      (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(
-        v16,
-        55,
-        0,
-        v25,
-        v26,
-        v17,
-        0,
-        0);
+      (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v16 + 16))(v16, 55, 0, v25, v26, v17, 0, 0);
       v6 = IEntity::Type((unsigned __int16 *)v28);
       v4 = IEntity::OwnerId((unsigned __int8 *)v28);
       CSettlerMgr::AddSettler((CSettlerMgr *)g_cSettlerMgr, v25, v26, v4, v6, 2);
       CMagicSpell::InvisibleKill((struct IEntity *)v28);
       if ( ++v24 >= *((_DWORD *)v27 + 5) )
+      {
         break;
+      }
     }
   }
   if ( v24 <= 0 )
+  {
     return v24;
+  }
   v15 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, _DWORD, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v15 + 16))(
-    v15,
-    0,
-    63,
-    v21,
-    v22,
-    0,
-    0,
-    0);
+  (*(void (__thiscall **)(int, _DWORD, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v15 + 16))(v15, 0, 63, v21, v22, 0, 0, 0);
   v14 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, _DWORD, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v14 + 16))(
-    v14,
-    0,
-    63,
-    *((_DWORD *)v27 + 2),
-    *((_DWORD *)v27 + 3),
-    0,
-    0,
-    0);
+  (*(void (__thiscall **)(int, _DWORD, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v14 + 16))(v14, 0, 63, *((_DWORD *)v27 + 2), *((_DWORD *)v27 + 3), 0, 0, 0);
   return v24;
 }
 
@@ -1159,30 +1026,18 @@ int  CMagicSpell::SpellAttackPunishBowmen(void) {
   v8 = CAlliances::PlayerEnemyBits(*(_DWORD *)this);
   v7[8] = 8;
   v11 = 0;
-  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(
-    (CWarriorEntitySpiralWalk *)v7,
-    *((_DWORD *)v12 + 2),
-    *((_DWORD *)v12 + 3),
-    *((_DWORD *)v12 + 4),
-    v8,
-    8);
+  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk((CWarriorEntitySpiralWalk *)v7, *((_DWORD *)v12 + 2), *((_DWORD *)v12 + 3), *((_DWORD *)v12 + 4), v8, 8);
   do
   {
     if ( !CWarriorEntitySpiralWalk::NextEntity((CWarriorEntitySpiralWalk *)v7, &v10) )
+    {
       break;
+    }
     v9 = CLogic::Effects((DWORD *)g_pLogic);
     v5 = CStateGame::Rand(g_pGame) & 3;
     v4 = IEntity::Y(v10);
     v1 = IEntity::X(v10);
-    (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v9 + 16))(
-      v9,
-      56,
-      0,
-      v1,
-      v4,
-      v5,
-      0,
-      0);
+    (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v9 + 16))(v9, 56, 0, v1, v4, v5, 0, 0);
     CMagicSpell::InvisibleKill(v10);
     v6 = CSettlerSpiralWalk::CurrentY(v7);
     v2 = CSettlerSpiralWalk::CurrentX(v7);
@@ -1220,17 +1075,10 @@ int  CMagicSpell::SpellSoldierRevaluation(void) {
   v10 = CAlliances::PlayerAllyBits(*(_DWORD *)this);
   v8[9] = 28;
   v15 = 0;
-  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(
-    (CWarriorEntitySpiralWalk *)v8,
-    *((_DWORD *)v17 + 2),
-    *((_DWORD *)v17 + 3),
-    *((_DWORD *)v17 + 4),
-    v10,
-    28);
+  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk((CWarriorEntitySpiralWalk *)v8, *((_DWORD *)v17 + 2), *((_DWORD *)v17 + 3), *((_DWORD *)v17 + 4), v10, 28);
   while ( CWarriorEntitySpiralWalk::NextEntity((CWarriorEntitySpiralWalk *)v8, &v16) )
   {
-    if ( IEntity::ObjType((unsigned __int8 *)v16) != 1
-      && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2287, "pEntity->ObjType() == SETTLER_OBJ") == 1 )
+    if ( IEntity::ObjType((unsigned __int8 *)v16) != 1 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2287, "pEntity->ObjType() == SETTLER_OBJ") == 1 )
     {
       __debugbreak();
     }
@@ -1300,7 +1148,9 @@ int  CMagicSpell::SpellSoldierRevaluation(void) {
     if ( v18 )
     {
       if ( v13 == v18 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2393, "iOldSettlerType != iNewSettlerType") == 1 )
+      {
         __debugbreak();
+      }
       v9 = IEntity::OwnerId((unsigned __int8 *)v16);
       CMagicSpell::InvisibleKill(v16);
       v7 = v18;
@@ -1311,31 +1161,19 @@ int  CMagicSpell::SpellSoldierRevaluation(void) {
       v12 = CLogic::Effects((DWORD *)g_pLogic);
       v5 = IEntity::Y(v16);
       v2 = IEntity::X(v16);
-      (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(
-        v12,
-        41,
-        0,
-        v2,
-        v5,
-        0,
-        0,
-        0);
+      (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(v12, 41, 0, v2, v5, 0, 0, 0);
       if ( ++v15 >= *((_DWORD *)v17 + 5) )
+      {
         break;
+      }
     }
   }
   if ( v15 <= 0 )
+  {
     return v15;
+  }
   v11 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, _DWORD, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v11 + 16))(
-    v11,
-    0,
-    81,
-    *((_DWORD *)v17 + 2),
-    *((_DWORD *)v17 + 3),
-    0,
-    0,
-    0);
+  (*(void (__thiscall **)(int, _DWORD, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v11 + 16))(v11, 0, 81, *((_DWORD *)v17 + 2), *((_DWORD *)v17 + 3), 0, 0, 0);
   return v15;
 }
 
@@ -1359,8 +1197,12 @@ int  CMagicSpell::SpellSpecialRainOfStone(void) {
   v9 = 0;
   v8 = CSpiralOffsets::Last(*((_DWORD *)this + 4)) + 1;
   if ( v8 <= 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 2451, "iMaxIdx > 0") == 1 )
+  {
     __debugbreak();
-  for ( i = 0; i < v8; ++i )
+  }
+  for ( i = 0;
+        i < v8;
+        ++i )
   {
     v6 = CStateGame::Rand(g_pGame) % (unsigned int)v8;
     v12 = *((_DWORD *)this + 2) + CSpiralOffsets::DeltaX(v6);
@@ -1380,18 +1222,12 @@ int  CMagicSpell::SpellSpecialRainOfStone(void) {
             {
               v4 = CLogic::Effects((DWORD *)g_pLogic);
               v1 = CStateGame::Rand(g_pGame);
-              (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v4 + 16))(
-                v4,
-                47,
-                0,
-                v12,
-                v13,
-                v1 & 3,
-                0,
-                0);
+              (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v4 + 16))(v4, 47, 0, v12, v13, v1 & 3, 0, 0);
               i += CStateGame::Rand(g_pGame) & 7;
               if ( ++v9 >= *((_DWORD *)this + 5) )
+              {
                 break;
+              }
             }
           }
         }
@@ -1457,39 +1293,46 @@ int  CMagicSpell::SpellTeleportPiles(void) {
   SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, *((_DWORD *)this + 8));
   v13 = IEntity::OwnerId(SettlerPtr);
   if ( !v16 )
+  {
     return v17;
+  }
   if ( !SettlerPtr )
+  {
     return v17;
+  }
   pPile = CPileMgr::GetPilePtr(v16);
   v12 = pPile->GetGoodType();
   v1 = pPile->Amount(pPile);
   v14 = v1 - CPile::AmountLeaving(pPile);
   if ( !pPile )
+  {
     return v17;
+  }
   v2 = CLogic::Effects(g_pLogic);
   v2->AddEffect(v2, EFFECT_2_DMAGIC_TELEPORT, 63, *((_DWORD *)this + 2), *((_DWORD *)this + 3), 0, 0, 0);
   if ( IEntity::FlagBits(pPile, (EntityFlag)16) )
+  {
     return 0;
+  }
   v10 = IEntity::Y(pPile);
   v4 = IEntity::X(pPile);
   v5 = Grid::Distance(v4, v10, 0, 0);
   if ( !CPile::ForceAmountLeaving(pPile, v5, 1) )
+  {
     return 0;
+  }
   v6 = IEntity::ID(SettlerPtr);
   CPile::AttachAndIncAmountLeaving(pPile, v6, v14, 2);
   v7 = IEntity::ID(SettlerPtr);
   CPile::ChangeAmountAndDetach(pPile, v7);
   a1 = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, v13, 80);
   if ( !a1 )
+  {
     return 1;
+  }
   v8 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, a1);
   v9 = (void **)CBuilding::Role(v8);
-  v11 = (CManakopterHallRole *)j____RTDynamicCast(
-                                 v9,
-                                 0,
-                                 &IBuildingRole__RTTI_Type_Descriptor_,
-                                 &CManakopterHallRole__RTTI_Type_Descriptor_,
-                                 0);
+  v11 = (CManakopterHallRole *)j____RTDynamicCast(v9, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CManakopterHallRole__RTTI_Type_Descriptor_, 0);
   CManakopterHallRole::TeleportGoods(v11, v12, v14);
   return 1;
 }
@@ -1510,38 +1353,21 @@ int  CMagicSpell::SpellFoodRestockMines(void) {
   _BYTE v11[248]; // [esp+18h] [ebp-FCh] BYREF
 
   v8 = 0;
-  CFindBuildings::CFindBuildings(
-    (CFindBuildings *)v11,
-    *((_DWORD *)this + 2),
-    *((_DWORD *)this + 3),
-    *((_DWORD *)this + 4));
+  CFindBuildings::CFindBuildings((CFindBuildings *)v11, *((_DWORD *)this + 2), *((_DWORD *)this + 3), *((_DWORD *)this + 4));
   while ( CFindBuildings::NextBuilding((CFindBuildings *)v11) )
   {
     v9 = CFindBuildings::BuildingPtr((CFindBuildings *)v11);
     if ( IEntity::OwnerId((unsigned __int8 *)v9) == *(_DWORD *)this )
     {
       v1 = (void **)CBuilding::Role(v9);
-      v6 = (CMineRole *)j____RTDynamicCast(
-                          v1,
-                          0,
-                          &IBuildingRole__RTTI_Type_Descriptor_,
-                          &CMineRole__RTTI_Type_Descriptor_,
-                          0);
+      v6 = (CMineRole *)j____RTDynamicCast(v1, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CMineRole__RTTI_Type_Descriptor_, 0);
       if ( v6 )
       {
         v7 = CLogic::Effects((DWORD *)g_pLogic);
         v5 = CStateGame::Rand(g_pGame) & 7;
         v4 = IEntity::Y(v9);
         v2 = IEntity::X(v9);
-        (*(void (__thiscall **)(int, int, int, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v7 + 16))(
-          v7,
-          106,
-          59,
-          v2,
-          v4,
-          v5,
-          0,
-          0);
+        (*(void (__thiscall **)(int, int, int, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v7 + 16))(v7, 106, 59, v2, v4, v5, 0, 0);
         CMineRole::RestockFavouriteFood(v6);
         ++v8;
       }
@@ -1565,40 +1391,25 @@ int  CMagicSpell::SpellDefenceFortifyDoors(void) {
   _BYTE v10[248]; // [esp+18h] [ebp-FCh] BYREF
 
   v7 = 0;
-  CFindBuildings::CFindBuildings(
-    (CFindBuildings *)v10,
-    *((_DWORD *)this + 2),
-    *((_DWORD *)this + 3),
-    *((_DWORD *)this + 4));
+  CFindBuildings::CFindBuildings((CFindBuildings *)v10, *((_DWORD *)this + 2), *((_DWORD *)this + 3), *((_DWORD *)this + 4));
   while ( CFindBuildings::NextBuilding((CFindBuildings *)v10) )
   {
     v8 = CFindBuildings::BuildingPtr((CFindBuildings *)v10);
     if ( IEntity::OwnerId((unsigned __int8 *)v8) == *(_DWORD *)this )
     {
       v1 = (void **)CBuilding::Role(v8);
-      v5 = (CMilitaryBuildingRole *)j____RTDynamicCast(
-                                      v1,
-                                      0,
-                                      &IBuildingRole__RTTI_Type_Descriptor_,
-                                      &CMilitaryBuildingRole__RTTI_Type_Descriptor_,
-                                      0);
+      v5 = (CMilitaryBuildingRole *)j____RTDynamicCast(v1, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CMilitaryBuildingRole__RTTI_Type_Descriptor_, 0);
       if ( v5 )
       {
         v6 = CLogic::Effects((DWORD *)g_pLogic);
         v4 = IEntity::Y(v8);
         v2 = IEntity::X(v8);
-        (*(void (__thiscall **)(int, int, int, int, int, int, _DWORD, int))(*(_DWORD *)v6 + 16))(
-          v6,
-          104,
-          98,
-          v2,
-          v4,
-          5,
-          0,
-          1);
+        (*(void (__thiscall **)(int, int, int, int, int, int, _DWORD, int))(*(_DWORD *)v6 + 16))(v6, 104, 98, v2, v4, 5, 0, 1);
         CMilitaryBuildingRole::SetDoorInvincible(v5, *((_DWORD *)this + 6));
         if ( ++v7 >= *((_DWORD *)this + 5) )
+        {
           break;
+        }
       }
     }
   }
@@ -1641,13 +1452,7 @@ int  CMagicSpell::SpellSoldierPacify(void) {
   v12 = 0;
   v6 = CAlliances::PlayerEnemyBits(*(_DWORD *)this);
   v4 = 60;
-  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(
-    (CWarriorEntitySpiralWalk *)v3,
-    *((_DWORD *)v13 + 2),
-    *((_DWORD *)v13 + 3),
-    *((_DWORD *)v13 + 4),
-    v6,
-    60);
+  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk((CWarriorEntitySpiralWalk *)v3, *((_DWORD *)v13 + 2), *((_DWORD *)v13 + 3), *((_DWORD *)v13 + 4), v6, 60);
   while ( CWarriorEntitySpiralWalk::NextEntity((CWarriorEntitySpiralWalk *)v3, &v14) )
   {
     v10 = IEntity::WarriorType();
@@ -1666,15 +1471,7 @@ int  CMagicSpell::SpellSoldierPacify(void) {
       v16 = IEntity::Y(v14);
       v5 = IEntity::OwnerId((unsigned __int8 *)v14);
       v9 = CLogic::Effects((DWORD *)g_pLogic);
-      (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v9 + 16))(
-        v9,
-        55,
-        0,
-        v15,
-        v16,
-        5,
-        0,
-        0);
+      (*(void (__thiscall **)(int, int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v9 + 16))(v9, 55, 0, v15, v16, 5, 0, 0);
       CMagicSpell::InvisibleKill(v14);
       v11 = v10;
       if ( v10 == 2 )
@@ -1708,7 +1505,9 @@ LABEL_11:
       }
       CSettlerMgr::AddSettler((CSettlerMgr *)g_cSettlerMgr, v15, v16, v5, 1, 0);
       if ( ++v12 >= *((_DWORD *)v13 + 5) )
+      {
         return v12;
+      }
     }
   }
   return v12;
@@ -1726,12 +1525,7 @@ int  CMagicSpell::SpellSpecialOracle(void) {
   v4 = *(_DWORD *)this;
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   v2 = (_DWORD *)TStaticConfigIntArrayBase<8>::operator[](7);
-  (*(void (__thiscall **)(void *, _DWORD, _DWORD, int, int))(*(_DWORD *)g_pFogging + 60))(
-    g_pFogging,
-    *((_DWORD *)this + 2),
-    *((_DWORD *)this + 3),
-    *v2 + TickCounter,
-    v4);
+  (*(void (__thiscall **)(void *, _DWORD, _DWORD, int, int))(*(_DWORD *)g_pFogging + 60))(g_pFogging, *((_DWORD *)this + 2), *((_DWORD *)this + 3), *v2 + TickCounter, v4);
   return 1;
 }
 
@@ -1746,13 +1540,11 @@ void __cdecl CMagicSpell::ShowSpellEffect(int a1, int a2, int a3, int a4) {
   int v7; // [esp+Ch] [ebp-8h]
   int v8; // [esp+10h] [ebp-4h]
 
-  if ( !(unsigned __int8)MagicIsValidRace(a1)
-    && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1015, "MagicIsValidRace(_iRace)") == 1 )
+  if ( !(unsigned __int8)MagicIsValidRace(a1) && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1015, "MagicIsValidRace(_iRace)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)MagicIsValidSpellCategory(a2)
-    && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1016, "MagicIsValidSpellCategory(_iSpellCategory)") == 1 )
+  if ( !(unsigned __int8)MagicIsValidSpellCategory(a2) && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1016, "MagicIsValidSpellCategory(_iSpellCategory)") == 1 )
   {
     __debugbreak();
   }
@@ -1760,27 +1552,25 @@ void __cdecl CMagicSpell::ShowSpellEffect(int a1, int a2, int a3, int a4) {
   result = (int *)TStaticConfigIntArrayBase<8>::operator[](a2);
   v7 = *result;
   if ( (v8 <= 0 || v8 >= 86) && (v8 <= 100 || v8 >= 116) )
+  {
     return result;
+  }
   v6 = 0;
   if ( v7 > 0 && v7 < 109 )
+  {
     v6 = *result;
+  }
   if ( !g_pLogic && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1031, "g_pLogic != 0") == 1 )
+  {
     __debugbreak();
+  }
   v5 = CLogic::Effects((DWORD *)g_pLogic);
-  return (int *)(*(int (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v5 + 16))(
-                  v5,
-                  v8,
-                  v6,
-                  a3,
-                  a4,
-                  0,
-                  0,
-                  0);
+  return (int *)(*(int (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v5 + 16))(v5, v8, v6, a3, a4, 0, 0, 0);
 }
 
 
 // address=[0x14704b0]
-// Decompiled from CMagicSpell *__thiscall CMagicSpell::CMagicSpell(  CMagicSpell *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10)
+// Decompiled from CMagicSpell *__thiscall CMagicSpell::CMagicSpell(CMagicSpell *this, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10)
  CMagicSpell::CMagicSpell(int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10) {
   
   *(_DWORD *)this = a2;
@@ -1811,10 +1601,14 @@ void __cdecl CMagicSpell::InvisibleKill(class IEntity * a1) {
   int v2; // [esp+0h] [ebp-4h]
 
   if ( !a1 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 998, "_pEntity != 0") == 1 )
+  {
     __debugbreak();
+  }
   v2 = IEntity::ID();
   if ( v2 <= 0 && BBSupportDbgReport(2, "Logic\\Magic.cpp", 1002, "iEntityId > 0") == 1 )
+  {
     __debugbreak();
+  }
   IEntity::ClearFlagBits(a1, ENTITY_FLAG_Visible);
   return CMapObjectMgr::Kill(v2, 0);
 }

@@ -21,9 +21,13 @@ int __cdecl ITiling::CatapultSectorId(int a1) {
 int __cdecl ITiling::CatapultTileId(int a1) {
   
   if ( ITiling::m_pCatapultTileIds[a1] >= 0x8000u )
+  {
     return 0;
+  }
   else
+  {
     return ITiling::m_pCatapultTileIds[a1];
+  }
 }
 
 

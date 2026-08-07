@@ -14,7 +14,9 @@ int  CClassNetGameIniBuffer::GetIntValue(char const * SubStr, int a3) {
   v6 = a3;
   String = (char *)CClassNetGameIniBuffer::GetStartOfEntry(this, SubStr);
   if ( String )
+  {
     return j__strtol(String, (char **)&EndPtr, 10);
+  }
   return v6;
 }
 
@@ -26,19 +28,25 @@ char const *  CClassNetGameIniBuffer::GetStartOfEntry(char const * SubStr) {
   const char *Str; // [esp+4h] [ebp-4h]
 
   if ( !SubStr || !*SubStr )
+  {
     return 0;
+  }
   Str = j__strstr(this->m_spBuffer, SubStr);
   if ( !Str )
+  {
     return Str;
+  }
   Str = j__strstr(Str, "=");
   if ( Str )
+  {
     ++Str;
+  }
   return Str;
 }
 
 
 // address=[0x15c3880]
-// Decompiled from CClassNetGameIniBuffer *__thiscall CClassNetGameIniBuffer::CClassNetGameIniBuffer(  CClassNetGameIniBuffer *this,  const char *a2,  unsigned int a3)
+// Decompiled from CClassNetGameIniBuffer *__thiscall CClassNetGameIniBuffer::CClassNetGameIniBuffer(CClassNetGameIniBuffer *this, const char *a2, unsigned int a3)
  CClassNetGameIniBuffer::CClassNetGameIniBuffer(char const * a2, unsigned int a3) {
   
   this->m_spBuffer = a2;

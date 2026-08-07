@@ -10,14 +10,18 @@ class CGameState * __cdecl CStateAOCampaignTrojan::DynamicCreateFunc(void * a1) 
 
   C = (CStateAOCampaignTrojan *)operator new(4u);
   if ( C )
+  {
     return CStateAOCampaignTrojan::CStateAOCampaignTrojan(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x14a1040]
-// Decompiled from CStateAOCampaignTrojan *__thiscall CStateAOCampaignTrojan::CStateAOCampaignTrojan(  CStateAOCampaignTrojan *this,  void *a2)
+// Decompiled from CStateAOCampaignTrojan *__thiscall CStateAOCampaignTrojan::CStateAOCampaignTrojan(CStateAOCampaignTrojan *this, void *a2)
  CStateAOCampaignTrojan::CStateAOCampaignTrojan(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
@@ -68,7 +72,9 @@ bool  CStateAOCampaignTrojan::Perform(void) {
     }
     v2 = dword_402C920 + 30;
     if ( v2 >= timeGetTime() )
+    {
       return 1;
+    }
     dword_402C920 = timeGetTime();
     IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
     IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -92,7 +98,9 @@ bool  CStateAOCampaignTrojan::OnEvent(class CEvn_Event & a2) {
   if ( event == 11 )
   {
     if ( (unsigned __int16)a2->m_wParam != 27 )
+    {
       return CGuiGameState::OnEvent(this, a2);
+    }
     v3 = CEvn_Event::CEvn_Event(&v6, 0x1F50u, 0, 0, 0);
     v7 = 0;
     IEventEngine::SendAMessage(g_pEvnEngine, v3);
@@ -103,7 +111,9 @@ bool  CStateAOCampaignTrojan::OnEvent(class CEvn_Event & a2) {
   if ( event != 8015 )
   {
     if ( event != 8016 )
+    {
       return CGuiGameState::OnEvent(this, a2);
+    }
     CGameStateHandler::Switch((int)CStateAOCampaigns::DynamicCreateFunc, 1);
     return 1;
   }
@@ -111,7 +121,9 @@ bool  CStateAOCampaignTrojan::OnEvent(class CEvn_Event & a2) {
   if ( !wparam )
   {
     if ( (unsigned __int8)CGameSettings::GetShowVideos() )
+    {
       CGameStateHandler::Queue((int)CStateVideo::DynamicCreateFunc, 8);
+    }
   }
   CGameStateHandler::Switch((int)CStateAOBriefing::DynamicCreateFunc, (wparam << 16) | 0xF);
   return 1;

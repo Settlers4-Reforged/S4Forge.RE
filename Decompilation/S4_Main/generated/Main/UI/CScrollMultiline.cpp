@@ -11,13 +11,17 @@
 
 
 // address=[0x13da4c0]
-// Decompiled from CScrollMultiline *__thiscall CScrollMultiline::CScrollMultiline(  CScrollMultiline *this,  int a2,  int a3,  int a4,  int a5,  int a6)
+// Decompiled from CScrollMultiline *__thiscall CScrollMultiline::CScrollMultiline(CScrollMultiline *this, int a2, int a3, int a4, int a5, int a6)
  CScrollMultiline::CScrollMultiline(int a2, int a3, int a4, int a5, int a6) {
   
   int i; // [esp+0h] [ebp-8h]
 
-  for ( i = 0; i < 500; ++i )
+  for ( i = 0;
+        i < 500;
+        ++i )
+  {
     *((_DWORD *)this + i) = 0;
+  }
   *((_DWORD *)this + 502) = a2;
   *((_DWORD *)this + 503) = a3;
   *((_DWORD *)this + 504) = a4;
@@ -35,13 +39,11 @@ void  CScrollMultiline::ScrollUp(void) {
 
   result = (char)this;
   if ( *((int *)this + 501) <= 0 )
+  {
     return result;
+  }
   --*((_DWORD *)this + 501);
-  return IGuiEngine::SetText(
-           (void *)g_pGUIEngine,
-           *((_DWORD *)this + 504),
-           *((_DWORD *)this + 505),
-           *((char **)this + *((_DWORD *)this + 501)));
+  return IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 504), *((_DWORD *)this + 505), *((char **)this + *((_DWORD *)this + 501)));
 }
 
 
@@ -53,13 +55,11 @@ void  CScrollMultiline::ScrollDown(void) {
 
   result = (char)this;
   if ( *((_DWORD *)this + 501) > *((_DWORD *)this + 500) - *((_DWORD *)this + 506) )
+  {
     return result;
+  }
   ++*((_DWORD *)this + 501);
-  return IGuiEngine::SetText(
-           (void *)g_pGUIEngine,
-           *((_DWORD *)this + 504),
-           *((_DWORD *)this + 505),
-           *((char **)this + *((_DWORD *)this + 501)));
+  return IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 504), *((_DWORD *)this + 505), *((char **)this + *((_DWORD *)this + 501)));
 }
 
 
@@ -102,7 +102,9 @@ unsigned char *  CScrollMultiline::GetWrapPointer(unsigned char * Str) {
       if ( j___mbsncmp(Ptr, "\n", 1u) && j___mbsncmp(Ptr, " ", 1u) )
       {
         if ( Ptr + 1 < (unsigned __int8 *)v5 && !j___mbsncmp(Ptr, "\n", 1u) )
+        {
           Ptr = j___mbsinc(Ptr);
+        }
         return CScrollMultiline::GetCRLFWrapPointer((CScrollMultiline *)this, (unsigned __int8 *)Str, Ptr);
       }
       else
@@ -129,9 +131,13 @@ unsigned char *  CScrollMultiline::GetWrapPointer(unsigned char * Str) {
       v3 = &Str[strlen(Str)];
       Pos = j___mbsninc((const unsigned __int8 *)Str, Counta);
       if ( !j___mbsncmp(Pos, "\n", 1u) || !j___mbsncmp(Pos, " ", 1u) )
+      {
         goto LABEL_20;
+      }
       if ( Pos + 1 >= (const unsigned __int8 *)v3 )
+      {
         goto LABEL_22;
+      }
       Str1 = j___mbsinc(Pos);
       if ( !j___mbsncmp(Str1, " ", 1u) )
       {
@@ -142,11 +148,17 @@ unsigned char *  CScrollMultiline::GetWrapPointer(unsigned char * Str) {
       {
 LABEL_22:
         while ( Pos > (const unsigned __int8 *)Str && j___mbsncmp(Pos, " ", 1u) )
+        {
           Pos = j___mbsdec((const unsigned __int8 *)Str, Pos);
+        }
         if ( j___mbsncmp(Pos, " ", 1u) )
+        {
           Posa = j___mbsninc((const unsigned __int8 *)Str, Counta);
+        }
         else
+        {
           Posa = j___mbsinc(Pos);
+        }
         return CScrollMultiline::GetCRLFWrapPointer((CScrollMultiline *)this, (unsigned __int8 *)Str, Posa);
       }
       else
@@ -161,15 +173,19 @@ LABEL_20:
 
 
 // address=[0x13da3c0]
-// Decompiled from unsigned __int8 *__thiscall CScrollMultiline::GetCRLFWrapPointer(  CScrollMultiline *this,  unsigned __int8 *a2,  unsigned __int8 *a3)
+// Decompiled from unsigned __int8 *__thiscall CScrollMultiline::GetCRLFWrapPointer(CScrollMultiline *this, unsigned __int8 *a2, unsigned __int8 *a3)
 unsigned char *  CScrollMultiline::GetCRLFWrapPointer(unsigned char * a2, unsigned char * a3) {
   
   unsigned __int8 *v3; // eax
 
   while ( a2 < a3 && j___mbsncmp(a2, "\r", 1u) )
+  {
     a2 = j___mbsinc(a2);
+  }
   if ( j___mbsncmp(a2, "\r", 1u) )
+  {
     return a2;
+  }
   v3 = j___mbsinc(a2);
   return j___mbsinc(v3);
 }
@@ -186,14 +202,18 @@ void  CScrollMultiline::SplitText(void) {
   result = (CScrollMultiline *)this;
   this[500] = 0;
   Str = this[507];
-  for ( i = 0; i < 500; ++i )
+  for ( i = 0;
+        i < 500;
+        ++i )
   {
     ++this[500];
     this[i] = Str;
     result = (CScrollMultiline *)CScrollMultiline::GetWrapPointer(Str);
     Str = (char *)result;
     if ( !result )
+    {
       break;
+    }
     result = (CScrollMultiline *)(i + 1);
   }
   return result;

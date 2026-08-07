@@ -18,19 +18,21 @@
   {
     v3[3 * *((_DWORD *)this + 8002) + 1] = *((_DWORD *)this + 8006);
     v3[3 * *((_DWORD *)this + 8002) + 2] = *((_DWORD *)this + 8007);
-    v3[3 * (*((_DWORD *)this + 8002))++] = 87 * *((_DWORD *)this + 8007) * 87 * *((_DWORD *)this + 8007)
-                                         + (100 * *((_DWORD *)this + 8006) - 50 * *((_DWORD *)this + 8007))
-                                         * (100 * *((_DWORD *)this + 8006) - 50 * *((_DWORD *)this + 8007));
+    v3[3 * (*((_DWORD *)this + 8002))++] = 87 * *((_DWORD *)this + 8007) * 87 * *((_DWORD *)this + 8007) + (100 * *((_DWORD *)this + 8006) - 50 * *((_DWORD *)this + 8007)) * (100 * *((_DWORD *)this + 8006) - 50 * *((_DWORD *)this + 8007));
     if ( ++*((_DWORD *)this + 8007) == *((_DWORD *)this + 8006) )
     {
       *((_DWORD *)this + 8007) = 0;
       ++*((_DWORD *)this + 8006);
     }
   }
-  for ( *((_DWORD *)this + 8002) = 1; *((int *)this + 8002) < 7995; *((_DWORD *)this + 8002) += 6 )
+  for ( *((_DWORD *)this + 8002) = 1;
+        *((int *)this + 8002) < 7995;
+        *((_DWORD *)this + 8002) += 6 )
   {
     *((_DWORD *)this + 8003) = 0x7FFFFFFF;
-    for ( *((_DWORD *)this + 8006) = 0; *((int *)this + 8006) < 2000; ++*((_DWORD *)this + 8006) )
+    for ( *((_DWORD *)this + 8006) = 0;
+          *((int *)this + 8006) < 2000;
+          ++*((_DWORD *)this + 8006) )
     {
       if ( v3[3 * *((_DWORD *)this + 8006)] < *((_DWORD *)this + 8003) )
       {

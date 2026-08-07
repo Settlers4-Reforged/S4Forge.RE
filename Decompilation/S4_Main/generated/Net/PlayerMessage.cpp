@@ -3,7 +3,7 @@
 // Definitions for class PlayerMessage
 
 // address=[0x161cee0]
-// Decompiled from OnlineManager::PlayerMessage *__thiscall OnlineManager::PlayerMessage::PlayerMessage(  OnlineManager::PlayerMessage *this)
+// Decompiled from OnlineManager::PlayerMessage *__thiscall OnlineManager::PlayerMessage::PlayerMessage(OnlineManager::PlayerMessage *this)
  OnlineManager::PlayerMessage::PlayerMessage(void) {
   
   std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>((char *)this + 24);

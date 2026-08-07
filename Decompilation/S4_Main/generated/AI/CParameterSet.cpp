@@ -13,9 +13,13 @@
   *(_DWORD *)this = &CParameterSet::_vftable_;
   C = (CDynList *)operator new(0xCu);
   if ( C )
+  {
     v2 = CDynList::CDynList(C);
+  }
   else
+  {
     v2 = 0;
+  }
   *((_DWORD *)this + 3) = v2;
   return this;
 }
@@ -27,7 +31,9 @@
   
   *this = (CDynList *)&CParameterSet::_vftable_;
   if ( this[3] )
+  {
     delete this[3];
+  }
   CDynListEntry::~CDynListEntry((CDynListEntry *)this);
 }
 
@@ -66,12 +72,18 @@ void  CParameterSet::Ausgabe(void) {
 
   C = (CParam *)operator new(0x1Cu);
   if ( C )
+  {
     CParam::CParam(C);
-  for ( i = 0; ; ++i )
+  }
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = CDynList::size(this[3]);
     if ( i >= result )
+    {
       break;
+    }
     CDynList::elementAt(this[3], i);
   }
   return result;

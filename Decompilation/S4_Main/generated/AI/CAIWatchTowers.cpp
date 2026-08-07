@@ -22,7 +22,9 @@ void  CAIWatchTowers::Init(void) {
   CAIWatchTowers *result; // eax
 
   if ( *((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 363, "!m_bInitialized") == 1 )
+  {
     __debugbreak();
+  }
   v1 = CAIWatchTowers::WatchTower(this, 0);
   CAIWatchTower::Done(v1);
   *((_DWORD *)this + 2) = 0;
@@ -43,7 +45,9 @@ void  CAIWatchTowers::Done(void) {
 
   result = this;
   if ( *((_BYTE *)this + 4) )
+  {
     *((_BYTE *)this + 4) = 0;
+  }
   return result;
 }
 
@@ -56,7 +60,9 @@ int  CAIWatchTowers::AddWatchTower(int a2, int a3, int a4) {
   int v6; // [esp+0h] [ebp-8h]
 
   if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 396, "m_bInitialized") == 1 )
+  {
     __debugbreak();
+  }
   v6 = CAIWatchTowers::PushUndef(this);
   v4 = CAIWatchTowers::WatchTower(this, v6);
   CAIWatchTower::Init(v4, a2, a3, a4);
@@ -69,25 +75,25 @@ int  CAIWatchTowers::AddWatchTower(int a2, int a3, int a4) {
 void  CAIWatchTowers::DelWatchTower(int a2) {
   
   if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 410, "m_bInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( CAIWatchTowers::ValidUsedWatchTower(this, a2) )
   {
     CAIWatchTowers::Remove(this, a2);
   }
   else if ( "DelWatchTower called with invalid or unused watch tower id" )
   {
-    if ( BBSupportDbgReport(
-           2,
-           "AI\\AI_WatchTower.cpp",
-           418,
-           "!\"DelWatchTower called with invalid or unused watch tower id\"") == 1 )
+    if ( BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 418, "!\"DelWatchTower called with invalid or unused watch tower id\"") == 1 )
+    {
       __debugbreak();
+    }
   }
 }
 
 
 // address=[0x132f2c0]
-// Decompiled from void (__cdecl **__thiscall CAIWatchTowers::RegisterCallback(  void (__cdecl **this)(int, int),  void (__cdecl *a2)(int, int)))(int, int)
+// Decompiled from void (__cdecl **__thiscall CAIWatchTowers::RegisterCallback(void (__cdecl **this)(int, int), void (__cdecl *a2)(int, int)))(int, int)
 void  CAIWatchTowers::RegisterCallback(void (__cdecl*)(int,int) a2) {
   
   void (__cdecl **result)(int, int); // eax
@@ -95,13 +101,11 @@ void  CAIWatchTowers::RegisterCallback(void (__cdecl*)(int,int) a2) {
   result = this;
   if ( this[204] != CAIWatchTowers::DefaultCallback )
   {
-    result = (void (__cdecl **)(int, int))BBSupportDbgReport(
-                                            2,
-                                            "AI\\AI_WatchTower.cpp",
-                                            475,
-                                            "m_pCallback == DefaultCallback");
+    result = (void (__cdecl **)(int, int))BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 475, "m_pCallback == DefaultCallback");
     if ( result == (void (__cdecl **)(int, int))1 )
+    {
       __debugbreak();
+    }
   }
   if ( a2 )
   {
@@ -137,7 +141,9 @@ void  CAIWatchTowers::CalculateAndCallback(void) {
   CAIWatchTowerEx *v3; // eax
 
   if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 429, "m_bInitialized") == 1 )
+  {
     __debugbreak();
+  }
   v1 = *((_DWORD *)this + 206) - CAIWatchTowers::Count(this);
   result = (int)this;
   *((_DWORD *)this + 206) = v1;
@@ -148,7 +154,9 @@ void  CAIWatchTowers::CalculateAndCallback(void) {
     v3 = CAIWatchTowers::WatchTower(this, *((_DWORD *)this + 205));
     result = CAIWatchTowerEx::Calculate(v3);
     if ( (result & 2) != 0 )
+    {
       result = (*((int (__cdecl **)(_DWORD, int))this + 204))(*((_DWORD *)this + 205), result);
+    }
   }
   return result;
 }
@@ -163,11 +171,15 @@ void  CAIWatchTowers::CalculateAll(void) {
   CAIWatchTowerEx *v3; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = CAIWatchTowers::First(this); ; ++i )
+  for ( i = CAIWatchTowers::First(this);
+        ;
+        ++i )
   {
     result = CAIWatchTowers::Last(this);
     if ( i > result )
+    {
       break;
+    }
     v2 = CAIWatchTowers::WatchTower(this, i);
     if ( CAIWatchTower::Used(v2) )
     {
@@ -191,19 +203,27 @@ int  CAIWatchTowers::NextUsedWatchTower(int a2) {
   {
     v2 = CAIWatchTowers::WatchTower(this, ++a2);
     if ( CAIWatchTower::Used(v2) )
+    {
       return a2;
+    }
   }
   v6 = CAIWatchTowers::First(this);
   while ( v6 < CAIWatchTowers::Last(this) )
   {
     v4 = CAIWatchTowers::WatchTower(this, ++v6);
     if ( CAIWatchTower::Used(v4) )
+    {
       return v6;
+    }
   }
   if ( !"No used watch tower found" )
+  {
     return 0;
+  }
   if ( BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 293, "!\"No used watch tower found\"") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 
@@ -229,9 +249,13 @@ void  CAIWatchTowers::Remove(int a2) {
 
   result = CAIWatchTowers::ValidIndex(this, a2);
   if ( !result )
+  {
     return result;
+  }
   if ( *((int *)this + 2) <= 0 && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 318, "m_iCount > 0") == 1 )
+  {
     __debugbreak();
+  }
   CAIWatchTower::Done((CAIWatchTowers *)((char *)this + 8 * a2 + 16));
   result = (char)this;
   --*((_DWORD *)this + 2);
@@ -288,10 +312,14 @@ bool  CAIWatchTowers::ValidUsedWatchTower(int a2)const {
 
   v4 = 0;
   if ( !CAIWatchTowers::ValidIndex(this, a2) )
+  {
     return v4;
+  }
   v2 = CAIWatchTowers::WatchTower(this, a2);
   if ( CAIWatchTower::Used(v2) )
+  {
     return 1;
+  }
   return v4;
 }
 

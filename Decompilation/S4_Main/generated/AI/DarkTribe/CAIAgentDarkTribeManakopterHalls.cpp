@@ -3,7 +3,7 @@
 // Definitions for class CAIAgentDarkTribeManakopterHalls
 
 // address=[0x1302dc0]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeManakopterHalls::Execute(  CAIAgentDarkTribeManakopterHalls *this,  unsigned int a2,  unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeManakopterHalls::Execute(CAIAgentDarkTribeManakopterHalls *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentDarkTribeManakopterHalls::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -18,34 +18,38 @@ unsigned int  CAIAgentDarkTribeManakopterHalls::Execute(unsigned int a2, unsigne
   struct CBuilding *Building; // [esp+20h] [ebp-4h]
 
   if ( !a2 )
+  {
     return CAIAgent::ExecuteResult(0, 0);
+  }
   v3 = CAIDarkTribeSectorAgent::SectorAI(this);
   v4 = (pairNode *)CAISectorAI::PlayerAI(v3);
   v13 = CAIPlayerAI::PlayerId(v4);
   Building = (struct CBuilding *)CBuildingMgr::GetBuilding((CBuildingMgr *)g_cBuildingMgr, v13, 80);
   if ( !Building )
+  {
     return CAIAgent::ExecuteResult(0, 0);
+  }
   if ( !IEntity::FlagBits(Building, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  {
     return CAIAgent::ExecuteResult(0, 0);
+  }
   NumberOfEntities = CFlyingMgr::GetNumberOfEntities((CFlyingMgr *)g_cFlyingMgr, v13, 1);
-  if ( CAIPlayersScriptVars::GetValue(g_cAIPlayersScriptVars, v13, 21) != 1
-    && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 907, "iManakopterLimit == 1") == 1 )
+  if ( CAIPlayersScriptVars::GetValue(g_cAIPlayersScriptVars, v13, 21) != 1 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 907, "iManakopterLimit == 1") == 1 )
   {
     __debugbreak();
   }
   if ( NumberOfEntities )
+  {
     return CAIAgent::ExecuteResult(0, 0);
+  }
   v9 = *((_DWORD *)this + 10);
   v8 = CStateGame::GetTickCounter(g_pGame) / 0xEu - v9;
   if ( v8 <= CAIPlayersScriptVars::GetValue(g_cAIPlayersScriptVars, v13, 20) )
+  {
     return CAIAgent::ExecuteResult(0, 0);
+  }
   v5 = (void **)CBuilding::Role(Building);
-  if ( !j____RTDynamicCast(v5, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CManakopterHallRole__RTTI_Type_Descriptor_, 0)
-    && BBSupportDbgReport(
-         2,
-         "AI\\AI_AgentsDark.cpp",
-         928,
-         "dynamic_cast<CManakopterHallRole*>(&(pManakopterHall->Role())) != 0") == 1 )
+  if ( !j____RTDynamicCast(v5, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CManakopterHallRole__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 928, "dynamic_cast<CManakopterHallRole*>(&(pManakopterHall->Role())) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -88,7 +92,7 @@ void  CAIAgentDarkTribeManakopterHalls::Save(class IS4Chunk & a2) {
 
 
 // address=[0x1322da0]
-// Decompiled from CAIAgentDarkTribeManakopterHalls *__thiscall CAIAgentDarkTribeManakopterHalls::CAIAgentDarkTribeManakopterHalls(  CAIAgentDarkTribeManakopterHalls *this)
+// Decompiled from CAIAgentDarkTribeManakopterHalls *__thiscall CAIAgentDarkTribeManakopterHalls::CAIAgentDarkTribeManakopterHalls(CAIAgentDarkTribeManakopterHalls *this)
  CAIAgentDarkTribeManakopterHalls::CAIAgentDarkTribeManakopterHalls(void) {
   
   CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "manakopterhalls");
@@ -99,7 +103,7 @@ void  CAIAgentDarkTribeManakopterHalls::Save(class IS4Chunk & a2) {
 
 
 // address=[0x1322f00]
-// Decompiled from void __thiscall CAIAgentDarkTribeManakopterHalls::~CAIAgentDarkTribeManakopterHalls(  CAIAgentDarkTribeManakopterHalls *this)
+// Decompiled from void __thiscall CAIAgentDarkTribeManakopterHalls::~CAIAgentDarkTribeManakopterHalls(CAIAgentDarkTribeManakopterHalls *this)
  CAIAgentDarkTribeManakopterHalls::~CAIAgentDarkTribeManakopterHalls(void) {
   
   CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(this);

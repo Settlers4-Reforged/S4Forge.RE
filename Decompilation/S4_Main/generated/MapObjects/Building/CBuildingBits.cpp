@@ -12,14 +12,22 @@ void  CBuildingBits::PrintToTraceFile(unsigned int a2) {
   char v5[84]; // [esp+10h] [ebp-58h] BYREF
 
   v5[80] = 0;
-  for ( i = 0; i < 80; ++i )
+  for ( i = 0;
+        i < 80;
+        ++i )
   {
-    for ( j = 0; j < 80; ++j )
+    for ( j = 0;
+          j < 80;
+          ++j )
     {
       if ( this->m_iBits[j][i] == 1 )
+      {
         v5[j] = '1';
+      }
       else
+      {
         v5[j] = '0';
+      }
     }
     BBSupportTracePrintF(a2, "%s", v5);
   }

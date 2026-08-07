@@ -23,9 +23,13 @@ bool  CProductionDataTab::BuildingMustBeControl(enum BUILDING_TYPES a2, int a3) 
 enum PILE_TYPES  CProductionDataTab::GetInputTypePile(enum BUILDING_TYPES a2, int a3, int a4) {
   
   if ( a3 )
+  {
     return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a4) + 28);
+  }
   else
+  {
     return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a4) + 24);
+  }
 }
 
 
@@ -66,7 +70,9 @@ enum PILE_TYPES  CProductionDataTab::GetTool(enum BUILDING_TYPES a2) {
  CProductionDataTab::CProductionDataTab(void) {
   
   if ( CProductionDataTab::m_iNumberOfEntries )
+  {
     return this;
+  }
   memset(&CProductionDataTab::m_aBuildingTypeToTabIndexMap, 0, 0x67Cu);
   CProductionDataTab::m_iNumberOfEntries = 1;
   CProductionDataTab::PDT(this, 5, 1, 70, 20, 8000, 2, 0, 0, 22, 4, 112, 4, 22, 0, 1);
@@ -136,13 +142,19 @@ enum BUILDING_TYPES  CProductionDataTab::GoodTypeProducedBy(enum PILE_TYPES a1, 
 
   v4 = 0;
   if ( !a1 )
+  {
     return 0;
-  for ( i = 1; dword_46878FC[15 * i]; ++i )
+  }
+  for ( i = 1;
+        dword_46878FC[15 * i];
+        ++i )
   {
     if ( dword_4687918[15 * i] == a1 )
     {
       if ( v4 == a2 )
+      {
         return dword_46878FC[15 * i];
+      }
       ++v4;
     }
   }
@@ -157,11 +169,17 @@ enum BUILDING_TYPES  CProductionDataTab::GetBuildingForResource(int a1, int a2) 
   int i; // [esp+4h] [ebp-4h]
 
   if ( a1 == -1 )
+  {
     return 0;
-  for ( i = 1; dword_46878FC[15 * i]; ++i )
+  }
+  for ( i = 1;
+        dword_46878FC[15 * i];
+        ++i )
   {
     if ( dword_4687920[15 * i] == a1 )
+    {
       return dword_46878FC[15 * i];
+    }
   }
   return 0;
 }
@@ -259,7 +277,7 @@ struct CProductionDataTab::SProductionDataEntry const *  CProductionDataTab::Get
 
 
 // address=[0x2f54ad0]
-// Decompiled from int __stdcall CProductionDataTab::PDT(  int a1,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10,  int a11,  int a12,  int a13,  int a14,  int a15)
+// Decompiled from int __stdcall CProductionDataTab::PDT(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11, int a12, int a13, int a14, int a15)
 void  CProductionDataTab::PDT(int a1, enum BUILDING_TYPES a2, int a3, int a4, int a5, int a6, enum PILE_TYPES a7, enum PILE_TYPES a8, enum PILE_TYPES a9, enum PILE_TYPES a10, int a11, enum SETTLER_TYPES a12, int a13, int a14, int a15) {
   
   int result; // eax
@@ -267,8 +285,12 @@ void  CProductionDataTab::PDT(int a1, enum BUILDING_TYPES a2, int a3, int a4, in
 
   if ( a1 == 5 )
   {
-    for ( i = 0; i < 5; ++i )
+    for ( i = 0;
+          i < 5;
+          ++i )
+    {
       CProductionDataTab::m_aBuildingTypeToTabIndexMap[83 * i + a2] = CProductionDataTab::m_iNumberOfEntries;
+    }
   }
   else
   {

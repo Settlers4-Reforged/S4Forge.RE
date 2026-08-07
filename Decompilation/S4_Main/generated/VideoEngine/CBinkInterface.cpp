@@ -35,11 +35,7 @@ bool  CBinkInterface::OpenVideo(char * a2, unsigned int a3, unsigned int a4) {
     }
     else
     {
-      BBSupportTracePrintF(
-        0,
-        "VideoEngine : CBinkInterface::OpenVideo : Wrong video size %dx%d",
-        **(_DWORD **)this,
-        *(_DWORD *)(*(_DWORD *)this + 4));
+      BBSupportTracePrintF(0, "VideoEngine : CBinkInterface::OpenVideo : Wrong video size %dx%d", **(_DWORD **)this, *(_DWORD *)(*(_DWORD *)this + 4));
       return 0;
     }
   }
@@ -57,7 +53,9 @@ bool  CBinkInterface::OpenVideo(char * a2, unsigned int a3, unsigned int a4) {
 void  CBinkInterface::StartPause(void) {
   
   if ( !*(_DWORD *)this && BBSupportDbgReport(2, "VideoEngine\\VideoEngine.cpp", 80, "m_hBink") == 1 )
+  {
     __debugbreak();
+  }
   return BinkPause(*(_DWORD *)this, 1);
 }
 
@@ -67,7 +65,9 @@ void  CBinkInterface::StartPause(void) {
 void  CBinkInterface::StopPause(void) {
   
   if ( !*(_DWORD *)this && BBSupportDbgReport(2, "VideoEngine\\VideoEngine.cpp", 89, "m_hBink") == 1 )
+  {
     __debugbreak();
+  }
   return BinkPause(*(_DWORD *)this, 0);
 }
 
@@ -77,7 +77,9 @@ void  CBinkInterface::StopPause(void) {
 int  CBinkInterface::GetHeight(void) {
   
   if ( !*(_DWORD *)this && BBSupportDbgReport(2, "VideoEngine\\VideoEngine.cpp", 98, "m_hBink") == 1 )
+  {
     __debugbreak();
+  }
   return *(_DWORD *)(*(_DWORD *)this + 4);
 }
 
@@ -87,7 +89,9 @@ int  CBinkInterface::GetHeight(void) {
 int  CBinkInterface::GetWidth(void) {
   
   if ( !*(_DWORD *)this && BBSupportDbgReport(2, "VideoEngine\\VideoEngine.cpp", 107, "m_hBink") == 1 )
+  {
     __debugbreak();
+  }
   return **(_DWORD **)this;
 }
 
@@ -108,7 +112,9 @@ void  CBinkInterface::CloseBink(void) {
 
   result = this;
   if ( !*(_DWORD *)this )
+  {
     return result;
+  }
   BinkClose(*(_DWORD *)this);
   result = this;
   *(_DWORD *)this = 0;
@@ -131,11 +137,15 @@ bool  CBinkInterface::RenderToSurface(unsigned short * a2, unsigned int a3) {
     return 0;
   }
   if ( BinkWait(*(_DWORD *)this) )
+  {
     return 1;
+  }
   BinkDoFrame(*(_DWORD *)this);
   BinkCopyToBuffer(*(_DWORD *)this, a2, a3, *(_DWORD *)(*(_DWORD *)this + 4), 0, 0, *((_DWORD *)this + 1));
   if ( *(_DWORD *)(*(_DWORD *)this + 12) == *(_DWORD *)(*(_DWORD *)this + 8) )
+  {
     return 0;
+  }
   BinkNextFrame(*(_DWORD *)this);
   return 1;
 }

@@ -15,11 +15,7 @@ std::string const &  AdvXMLParser::Node::GetName(void)const {
 // Decompiled from bool __thiscall AdvXMLParser::Node::IsNull(AdvXMLParser::Node *this)
 bool  AdvXMLParser::Node::IsNull(void)const {
   
-  return this == (AdvXMLParser::Node *)&AdvXMLParser::Attribute::null
-      || this == (AdvXMLParser::Node *)&AdvXMLParser::Element::null
-      || this == (AdvXMLParser::Node *)&AdvXMLParser::Comment::null
-      || this == (AdvXMLParser::Node *)&AdvXMLParser::Pi::null
-      || this == (AdvXMLParser::Node *)&AdvXMLParser::CData::null;
+  return this == (AdvXMLParser::Node *)&AdvXMLParser::Attribute::null || this == (AdvXMLParser::Node *)&AdvXMLParser::Element::null || this == (AdvXMLParser::Node *)&AdvXMLParser::Comment::null || this == (AdvXMLParser::Node *)&AdvXMLParser::Pi::null || this == (AdvXMLParser::Node *)&AdvXMLParser::CData::null;
 }
 
 
@@ -47,9 +43,7 @@ bool  AdvXMLParser::Node::IsNull(void)const {
 // Decompiled from int __thiscall AdvXMLParser::Node::Delete(int this)
 void  AdvXMLParser::Node::Delete(void) {
   
-  return AdvXMLParser::NodeContainer::DeleteChild(
-           *(AdvXMLParser::NodeContainer **)(this + 32),
-           (const struct Node *)this);
+  return AdvXMLParser::NodeContainer::DeleteChild(*(AdvXMLParser::NodeContainer **)(this + 32), (const struct Node *)this);
 }
 
 

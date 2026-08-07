@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CCarrierRole::New(std::istream & a1) {
   
   if ( operator new(0x38u) )
+  {
     return CCarrierRole::CCarrierRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -40,10 +44,7 @@ void  CCarrierRole::LogicUpdate(class CSettler * a2) {
   if ( this->m_iTask == 17 )
   {
     ISettlerRole::LogicUpdate(this, a2);
-    if ( (this->m_uSettlerWalk & 8) != 0
-      && IMovingEntity::GetJobPart(a2) != 48
-      && IMovingEntity::GetJobPart(a2) != 49
-      && ++this->m_uTicksSinceLastJob >= (int)this->m_uNextJobTick )
+    if ( (this->m_uSettlerWalk & 8) != 0 && IMovingEntity::GetJobPart(a2) != 48 && IMovingEntity::GetJobPart(a2) != 49 && ++this->m_uTicksSinceLastJob >= (int)this->m_uNextJobTick )
     {
       this->m_uTicksSinceLastJob = 0;
       v2 = CStateGame::Random16(g_pGame);
@@ -123,19 +124,27 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
       if ( this->m_iWalkspeed < v30 )
       {
         if ( !CCarrierRole::NextSettlerType(this) )
+        {
           goto LABEL_91;
+        }
       }
       else
       {
         if ( !CCarrierRole::NextSettlerType(this) || !ISettlerRole::SourcePileId(this) )
+        {
           goto LABEL_91;
+        }
         v23 = ISettlerRole::SourcePileId(this);
         pPile = CPileMgr::GetPilePtr(v23);
         if ( !pPile && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 509, "pPile != 0") == 1 )
+        {
           __debugbreak();
+        }
         this->m_uGood = pPile->GetGoodType();
         if ( !this->m_uGood && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 511, "m_uGood > 0") == 1 )
+        {
           __debugbreak();
+        }
         v24 = IEntity::EntityId(pSettler);
         CPile::ChangeAmountAndDetach(pPile, v24);
         IAnimatedEntity::RegisterForLogicUpdate(pSettler, v30);
@@ -143,7 +152,9 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
       break;
     case 0x15:
       if ( !CCarrierRole::DestinationPileId(this) )
+      {
         goto LABEL_91;
+      }
       v32 = this->m_uCycleFrames / 2;
       this->m_iWalkspeed -= v32;
       if ( this->m_iWalkspeed < v32 )
@@ -166,12 +177,13 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
         v9 = CCarrierRole::DestinationPileId(this);
         pPile = CPileMgr::GetPilePtr(v9);
         if ( !pPile && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 392, "pPile != 0") == 1 )
+        {
           __debugbreak();
+        }
         if ( pPile )
         {
           m_uGood = this->m_uGood;
-          if ( m_uGood != pPile->GetGoodType()
-            && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 397, "m_uGood == pPile->GetGoodType()") == 1 )
+          if ( m_uGood != pPile->GetGoodType() && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 397, "m_uGood == pPile->GetGoodType()") == 1 )
           {
             __debugbreak();
           }
@@ -202,14 +214,20 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
       else
       {
         if ( !ISettlerRole::SourcePileId(this) )
+        {
           goto LABEL_91;
+        }
         v15 = ISettlerRole::SourcePileId(this);
         pPile = CPileMgr::GetPilePtr(v15);
         if ( !pPile && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 447, "pPile != 0") == 1 )
+        {
           __debugbreak();
+        }
         this->m_uGood = pPile->GetGoodType();
         if ( !this->m_uGood && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 449, "m_uGood > 0") == 1 )
+        {
           __debugbreak();
+        }
         if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
         {
           v16 = ISettlerRole::SourcePileId(this);
@@ -220,13 +238,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
           v26 = ((int (__stdcall *)())v29->Amount)();
           v25 = ISettlerRole::SourcePileId(this);
           v19 = IEntity::ID(pSettler);
-          BBSupportTracePrintF(
-            0,
-            "Carrier LU GET_GOOD - Detach settler %u from srcpile %u amount before %u amountleaving before %u",
-            v19,
-            v25,
-            v26,
-            v28);
+          BBSupportTracePrintF(0, "Carrier LU GET_GOOD - Detach settler %u from srcpile %u amount before %u amountleaving before %u", v19, v25, v26, v28);
         }
         v20 = IEntity::EntityId(pSettler);
         CPile::ChangeAmountAndDetach(pPile, v20);
@@ -245,13 +257,7 @@ void  CCarrierRole::LogicUpdateJob(class CSettler * pSettler) {
         if ( IEntity::ObjType(v3) != CATAPULT_OBJ )
         {
           m_uHomeEntityId = CMapObjectMgr::EntityPtr(this->m_uHomeEntityId);
-          if ( IEntity::ObjType(m_uHomeEntityId) != SHIP_OBJ
-            && BBSupportDbgReport(
-                 2,
-                 "MapObjects\\Settler\\CarrierRole.cpp",
-                 345,
-                 "(g_pMapObjectMgr->EntityPtr(m_uHomeEntityId))->ObjType() == CATAPULT_OBJ || (g_pMapObjectMgr->EntityPtr"
-                 "(m_uHomeEntityId))->ObjType() == SHIP_OBJ") == 1 )
+          if ( IEntity::ObjType(m_uHomeEntityId) != SHIP_OBJ && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 345, "(g_pMapObjectMgr->EntityPtr(m_uHomeEntityId))->ObjType() == CATAPULT_OBJ || (g_pMapObjectMgr->EntityPtr(m_uHomeEntityId))->ObjType() == SHIP_OBJ") == 1 )
           {
             __debugbreak();
           }
@@ -288,7 +294,9 @@ LABEL_91:
       break;
     default:
       if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
+      {
         BBSupportTracePrintF(0, "LogicUpdateJob Carrier - unknown task %u", this->m_iTask);
+      }
       break;
   }
 }
@@ -314,9 +322,13 @@ void  CCarrierRole::UpdateJob(class CSettler * a2) {
       if ( v5 >= uLoopFrame )
       {
         if ( uLoopFrame <= 0 )
+        {
           v2 = 0;
+        }
         else
+        {
           v2 = uLoopFrame - 1;
+        }
         LOBYTE(v5) = v2;
       }
       IAnimatedEntity::SetFrame(a2, v5);
@@ -325,9 +337,13 @@ void  CCarrierRole::UpdateJob(class CSettler * a2) {
       v4 = IAnimatedEntity::Frame(a2);
       m_uTick = this->m_uTick;
       if ( v4 <= m_uTick )
+      {
         IAnimatedEntity::SetFrame(a2, 0);
+      }
       else
+      {
         IAnimatedEntity::SetFrame(a2, v4 - m_uTick);
+      }
       break;
     default:
       return;
@@ -365,12 +381,10 @@ void  CCarrierRole::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
       this->m_iSourcePile3 = a3;
       break;
     default:
-      if ( BBSupportDbgReport(
-             1,
-             "MapObjects\\Settler\\CarrierRole.cpp",
-             1642,
-             "CCarrierRole::SetObserverTarget(): Invalid target type!") == 1 )
+      if ( BBSupportDbgReport(1, "MapObjects\\Settler\\CarrierRole.cpp", 1642, "CCarrierRole::SetObserverTarget(): Invalid target type!") == 1 )
+      {
         __debugbreak();
+      }
       break;
   }
 }
@@ -415,9 +429,13 @@ void  CCarrierRole::UpdateCatapultPosition(int a2) {
 
   pSettler = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, this->m_uAttachedSettlerId);
   if ( !pSettler && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1748, "pSettler!=NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( pSettler )
+  {
     ISettlerRole::NewDestination(this, pSettler, a2, 0);
+  }
 }
 
 
@@ -546,8 +564,7 @@ void  CCarrierRole::ChangeToNextType(class CSettler * a2, bool a3, bool a4) {
   struct CEcoSector *v8; // [esp+4h] [ebp-Ch]
   int v9; // [esp+8h] [ebp-8h]
 
-  if ( !CCarrierRole::NextSettlerType(this)
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1724, "NextSettlerType() != 0") == 1 )
+  if ( !CCarrierRole::NextSettlerType(this) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1724, "NextSettlerType() != 0") == 1 )
   {
     __debugbreak();
   }
@@ -558,8 +575,7 @@ void  CCarrierRole::ChangeToNextType(class CSettler * a2, bool a3, bool a4) {
   v8 = CEcoSectorMgr::operator[](g_cESMgr, v9);
   v5 = IEntity::EntityId(a2);
   CEcoSector::ResetCarrierNextSettlerTypeAndDecrementOrder(v8, v5);
-  if ( CCarrierRole::NextSettlerType(this)
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1733, "NextSettlerType() == 0") == 1 )
+  if ( CCarrierRole::NextSettlerType(this) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1733, "NextSettlerType() == 0") == 1 )
   {
     __debugbreak();
   }
@@ -603,9 +619,13 @@ void  CCarrierRole::GetNextJob(class CSettler * a2) {
   
   IMovingEntity::IncToDoListIter(a2);
   if ( IMovingEntity::IsEndIter(a2) )
+  {
     this->SetFree(this, a2, -1);
+  }
   else
+  {
     this->TakeJob(this, a2);
+  }
 }
 
 
@@ -684,9 +704,13 @@ void  CCarrierRole::TakeJob(class CSettler * pSettler) {
       v34 = this->m_iDestinationOffsetY + Y16X16::UnpackYFast(this->m_iDestinationPosition);
       this->m_iDestinationPosition = Y16X16::PackXYFast(v33, v34);
       if ( this->m_iTask == 37 )
+      {
         v41 = 0x2000;
+      }
       else
+      {
         v41 = 0;
+      }
       IMovingEntity::WalkToXY(pSettler, this->m_iDestinationPosition, v41);
       this->m_iTask = 6;
       IMovingEntity::SetDisplacementCosts(pSettler, 5);
@@ -709,7 +733,9 @@ void  CCarrierRole::TakeJob(class CSettler * pSettler) {
         BBSupportTracePrintF(0, "Carier %u TakeJob go to source pile", v7);
       }
       if ( !ISettlerRole::SourcePileId(this) )
+      {
         goto LABEL_27;
+      }
       v8 = ISettlerRole::SourcePileId(this);
       v9 = CMapObjectMgr::EntityPtr(v8);
       v38 = IEntity::PackedXY(v9);
@@ -721,10 +747,14 @@ void  CCarrierRole::TakeJob(class CSettler * pSettler) {
       return;
     case 9:
       if ( !CCarrierRole::DestinationPileId(this) )
+      {
         goto LABEL_27;
+      }
       v10 = CCarrierRole::DestinationPileId(this);
       if ( !CMapObjectMgr::EntityPtr(v10) )
+      {
         goto LABEL_27;
+      }
       v11 = IAnimatedEntity::JobPart(pSettler);
       IAnimatedEntity::SetJobPart(pSettler, this->m_uGood + v11);
       if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
@@ -751,9 +781,13 @@ void  CCarrierRole::TakeJob(class CSettler * pSettler) {
       }
       IMovingEntity::SetDisplacementCosts(pSettler, 10);
       if ( this->m_uCycleFrames )
+      {
         v43 = this->m_uCycleFrames - 1;
+      }
       else
+      {
         v43 = 0;
+      }
       a2 = v43;
       IAnimatedEntity::SetFrame(pSettler, v43);
       IAnimatedEntity::RegisterForLogicUpdate(pSettler, this->m_iWalkspeed / 2);
@@ -779,32 +813,27 @@ LABEL_16:
       return;
     case 14:
       if ( !this->m_uHomeEntityId )
+      {
         return;
+      }
       IMovingEntity::SetDisplacementCosts(pSettler, 10);
       IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_Visible);
-      if ( !g_pMapObjectMgr
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 831, "g_pMapObjectMgr!= NULL") == 1 )
+      if ( !g_pMapObjectMgr && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 831, "g_pMapObjectMgr!= NULL") == 1 )
       {
         __debugbreak();
       }
       pHomeEntity = CMapObjectMgr::EntityPtr(this->m_uHomeEntityId);
       if ( !pHomeEntity && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 833, "pEntity!= NULL") == 1 )
+      {
         __debugbreak();
+      }
       if ( !pHomeEntity )
+      {
         return;
+      }
       if ( IEntity::ObjType(pHomeEntity) == BUILDING_OBJ )
       {
-        if ( !j____RTDynamicCast(
-                (void **)&pHomeEntity->__vftable,
-                0,
-                &IEntity__RTTI_Type_Descriptor_,
-                &CBuilding__RTTI_Type_Descriptor_,
-                0)
-          && BBSupportDbgReport(
-               2,
-               "MapObjects\\Settler\\CarrierRole.cpp",
-               838,
-               "dynamic_cast<CBuilding*>(pEntity)!=NULL") == 1 )
+        if ( !j____RTDynamicCast((void **)&pHomeEntity->__vftable, 0, &IEntity__RTTI_Type_Descriptor_, &CBuilding__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 838, "dynamic_cast<CBuilding*>(pEntity)!=NULL") == 1 )
         {
           __debugbreak();
         }
@@ -813,14 +842,10 @@ LABEL_16:
         CBuilding::SettlerEnter((CBuilding *)pHomeEntity, v16);
       }
       if ( IEntity::ObjType(pHomeEntity) != CATAPULT_OBJ )
+      {
         return;
-      if ( !j____RTDynamicCast(
-              (void **)&pHomeEntity->__vftable,
-              0,
-              &IEntity__RTTI_Type_Descriptor_,
-              &CCart__RTTI_Type_Descriptor_,
-              0)
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 844, "dynamic_cast<CCart*>(pEntity)!=NULL") == 1 )
+      }
+      if ( !j____RTDynamicCast((void **)&pHomeEntity->__vftable, 0, &IEntity__RTTI_Type_Descriptor_, &CCart__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 844, "dynamic_cast<CCart*>(pEntity)!=NULL") == 1 )
       {
         __debugbreak();
       }
@@ -829,20 +854,17 @@ LABEL_16:
       return;
     case 16:
       if ( !CCarrierRole::NextSettlerType(this) )
+      {
         goto LABEL_27;
-      if ( ISettlerRole::HomeEntityId(this)
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 746, "HomeEntityId() == 0") == 1 )
+      }
+      if ( ISettlerRole::HomeEntityId(this) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 746, "HomeEntityId() == 0") == 1 )
       {
         __debugbreak();
       }
       CCarrierRole::ChangeToNextType(this, pSettler, 1, 1);
       break;
     case 28:
-      if ( !CCarrierRole::NextSettlerType(this)
-        || !ISettlerRole::HomeEntityId(this)
-        || !ISettlerRole::SourcePileId(this)
-        || !CCarrierRole::SourcePileId2(this)
-        || !CCarrierRole::SourcePileId3(this) )
+      if ( !CCarrierRole::NextSettlerType(this) || !ISettlerRole::HomeEntityId(this) || !ISettlerRole::SourcePileId(this) || !CCarrierRole::SourcePileId2(this) || !CCarrierRole::SourcePileId3(this) )
       {
         goto LABEL_27;
       }
@@ -882,22 +904,12 @@ LABEL_16:
       if ( CCarrierRole::NextSettlerType(this) && ISettlerRole::HomeEntityId(this) )
       {
         v42 = ISettlerRole::HomeEntityId(this);
-        if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_ATTACHED)
-          && BBSupportDbgReport(
-               2,
-               "MapObjects\\Settler\\CarrierRole.cpp",
-               774,
-               "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
+        if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 774, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
         {
           __debugbreak();
         }
         CCarrierRole::ChangeToNextType(this, pSettler, 1, 0);
-        if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_ATTACHED)
-          && BBSupportDbgReport(
-               2,
-               "MapObjects\\Settler\\CarrierRole.cpp",
-               780,
-               "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
+        if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 780, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
         {
           __debugbreak();
         }
@@ -917,7 +929,9 @@ LABEL_27:
       break;
     default:
       if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
+      {
         BBSupportTracePrint(0, "Carrier TakeJob - unknown job");
+      }
       IAnimatedEntity::RegisterForLogicUpdate(pSettler, 3);
       break;
   }
@@ -936,14 +950,14 @@ void  CCarrierRole::Init(class CSettler * _pSettler) {
   int v7; // [esp+8h] [ebp-8h]
 
   if ( !_pSettler && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 203, "_pSettler!=NULL") == 1 )
-    __debugbreak();
-  if ( IEntity::FlagBits(_pSettler, ENTITY_FLAG_Offered)
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 204, "!_pSettler->FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_uHomeEntityId
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 205, "!m_uHomeEntityId") == 1 )
+  if ( IEntity::FlagBits(_pSettler, ENTITY_FLAG_Offered) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 204, "!_pSettler->FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( this->m_uHomeEntityId && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 205, "!m_uHomeEntityId") == 1 )
   {
     __debugbreak();
   }
@@ -1059,7 +1073,9 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
   {
     case 0:
       if ( ISettlerRole::HomeEntityId(this) != pEvent->m_iDataA )
+      {
         goto LABEL_87;
+      }
       v18 = ISettlerRole::HomeEntityId(this);
       v61 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, v18);
       v19 = CBuilding::DoorPackedXY(v61);
@@ -1078,28 +1094,15 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
       this->SetFree(this, pSettler, m_iDataB);
       goto LABEL_111;
     case 9:
-      if ( ISettlerRole::SourcePileId(this)
-        && ISettlerRole::SourcePileId(this) != pEvent->m_iDataB
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Settler\\CarrierRole.cpp",
-             1236,
-             "(SourcePileId() == 0) || (SourcePileId() == _pEvent->m_iData1)") == 1 )
+      if ( ISettlerRole::SourcePileId(this) && ISettlerRole::SourcePileId(this) != pEvent->m_iDataB && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1236, "(SourcePileId() == 0) || (SourcePileId() == _pEvent->m_iData1)") == 1 )
       {
         __debugbreak();
       }
-      if ( CCarrierRole::DestinationPileId(this)
-        && CCarrierRole::DestinationPileId(this) != pEvent->m_iDataC
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Settler\\CarrierRole.cpp",
-             1237,
-             "(DestinationPileId() == 0) || (DestinationPileId() == _pEvent->m_iData2)") == 1 )
+      if ( CCarrierRole::DestinationPileId(this) && CCarrierRole::DestinationPileId(this) != pEvent->m_iDataC && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1237, "(DestinationPileId() == 0) || (DestinationPileId() == _pEvent->m_iData2)") == 1 )
       {
         __debugbreak();
       }
-      if ( ISettlerRole::SourcePileId(this) != pEvent->m_iDataB
-        && CCarrierRole::DestinationPileId(this) != pEvent->m_iDataC )
+      if ( ISettlerRole::SourcePileId(this) != pEvent->m_iDataB && CCarrierRole::DestinationPileId(this) != pEvent->m_iDataC )
       {
         goto LABEL_87;
       }
@@ -1116,20 +1119,18 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
       iVehicleID = pEvent->m_iDataC;
       iPileID = pEvent->m_iDataB;
       if ( iVehicleID <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1265, "iVehicleID>0") == 1 )
-        __debugbreak();
-      if ( iPileID <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1266, "iPileID>0") == 1 )
-        __debugbreak();
-      if ( !g_pMapObjectMgr
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1267, "g_pMapObjectMgr!=NULL") == 1 )
       {
         __debugbreak();
       }
-      if ( !CMapObjectMgr::ValidEntityId(iVehicleID)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Settler\\CarrierRole.cpp",
-             1268,
-             "g_pMapObjectMgr->ValidEntityId(iVehicleID)") == 1 )
+      if ( iPileID <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1266, "iPileID>0") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( !g_pMapObjectMgr && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1267, "g_pMapObjectMgr!=NULL") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( !CMapObjectMgr::ValidEntityId(iVehicleID) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1268, "g_pMapObjectMgr->ValidEntityId(iVehicleID)") == 1 )
       {
         __debugbreak();
       }
@@ -1152,21 +1153,13 @@ void  CCarrierRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEntit
             {
               v48 = ISettlerRole::SourcePileId(this);
               v10 = IEntity::ID(pSettler);
-              BBSupportTracePrintF(
-                0,
-                "Carrier CONV TRANSPORT_GOOD_TO_VEHICLE - Attach settler %u to srcpile %u",
-                v10,
-                v48);
+              BBSupportTracePrintF(0, "Carrier CONV TRANSPORT_GOOD_TO_VEHICLE - Attach settler %u to srcpile %u", v10, v48);
             }
             if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
             {
               v49 = CCarrierRole::DestinationPileId(this);
               v11 = IEntity::ID(pSettler);
-              BBSupportTracePrintF(
-                0,
-                "Carrier CONV TRANSPORT_GOOD_TO_VEHICLE - Attach settler %u to vehicle %u",
-                v11,
-                v49);
+              BBSupportTracePrintF(0, "Carrier CONV TRANSPORT_GOOD_TO_VEHICLE - Attach settler %u to vehicle %u", v11, v49);
             }
             v12 = rPile->GetGoodType();
             rVehicle->GoodIsComming(rVehicle, v12);
@@ -1206,14 +1199,17 @@ LABEL_111:
       return;
     case 19:
       if ( !CCarrierRole::NextSettlerType(this) )
+      {
         goto LABEL_87;
+      }
       CCarrierRole::ChangeToNextType(this, pSettler, 1, 0);
       goto LABEL_111;
     case 20:
       if ( !CCarrierRole::NextSettlerType(this) || !ISettlerRole::SourcePileId(this) )
+      {
         goto LABEL_87;
-      if ( ISettlerRole::HomeEntityId(this)
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1338, "HomeEntityId() == 0") == 1 )
+      }
+      if ( ISettlerRole::HomeEntityId(this) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1338, "HomeEntityId() == 0") == 1 )
       {
         __debugbreak();
       }
@@ -1222,28 +1218,17 @@ LABEL_111:
       pSettler->NewToDoList(pSettler, (int)v16, 151);
       goto LABEL_111;
     case 21:
-      if ( CCarrierRole::NextSettlerType(this) != pEvent->m_iDataA
-        || ISettlerRole::HomeEntityId(this) != pEvent->m_iDataB )
+      if ( CCarrierRole::NextSettlerType(this) != pEvent->m_iDataA || ISettlerRole::HomeEntityId(this) != pEvent->m_iDataB )
       {
         goto LABEL_87;
       }
       v69 = ISettlerRole::HomeEntityId(this);
-      if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_ATTACHED)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Settler\\CarrierRole.cpp",
-             1366,
-             "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
+      if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1366, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
       {
         __debugbreak();
       }
       CCarrierRole::ChangeToNextType(this, pSettler, 1, 0);
-      if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_ATTACHED)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Settler\\CarrierRole.cpp",
-             1372,
-             "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
+      if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1372, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
       {
         __debugbreak();
       }
@@ -1256,9 +1241,7 @@ LABEL_111:
       CEntityEvent::~CEntityEvent(&v58);
       goto LABEL_111;
     case 22:
-      if ( CCarrierRole::NextSettlerType(this) != pEvent->m_iDataA
-        || ISettlerRole::SourcePileId(this) != pEvent->m_iDataB
-        || ISettlerRole::HomeEntityId(this) != pEvent->m_iDataC )
+      if ( CCarrierRole::NextSettlerType(this) != pEvent->m_iDataA || ISettlerRole::SourcePileId(this) != pEvent->m_iDataB || ISettlerRole::HomeEntityId(this) != pEvent->m_iDataC )
       {
         goto LABEL_87;
       }
@@ -1318,12 +1301,18 @@ LABEL_111:
       v32 = IEntity::WorldIdx(pSettler);
       v66 = CWorldManager::EcoSectorId(v32);
       if ( !v66 )
+      {
         goto LABEL_99;
+      }
       pSector = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v66);
       if ( !pSector && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1542, "pSector!= NULL") == 1 )
+      {
         __debugbreak();
+      }
       if ( !pSector )
+      {
         return;
+      }
       v33 = CEcoSector::Owner(pSector);
       if ( v33 == IEntity::OwnerId(pSettler) )
       {
@@ -1335,14 +1324,12 @@ LABEL_99:
       v35 = Y16X16::UnpackXFast(v73);
       v60 = CWorldManager::OwnerId(v35, v57);
       if ( v60 != IEntity::OwnerId(pSettler) )
+      {
         CSettler::SetFree(pSettler);
+      }
       goto LABEL_111;
     case 25:
-      if ( CCarrierRole::NextSettlerType(this)
-        && ISettlerRole::HomeEntityId(this)
-        && ISettlerRole::SourcePileId(this)
-        && CCarrierRole::SourcePileId2(this)
-        && CCarrierRole::SourcePileId3(this) )
+      if ( CCarrierRole::NextSettlerType(this) && ISettlerRole::HomeEntityId(this) && ISettlerRole::SourcePileId(this) && CCarrierRole::SourcePileId2(this) && CCarrierRole::SourcePileId3(this) )
       {
         v17 = ISettlerRole::HomeEntityId(this);
         v62 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, v17);
@@ -1374,7 +1361,9 @@ LABEL_87:
       if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_Registered) )
       {
         if ( debug && DEBUG_FLAGS[g_iCarrierDebugSlot] )
+        {
           BBSupportTracePrintF(0, "ConvertEventIntoGoal CarrierRole - unknown event %u", pEvent->m_iEvent);
+        }
         IAnimatedEntity::RegisterForLogicUpdate(pSettler, 1);
       }
       goto LABEL_111;
@@ -1403,7 +1392,9 @@ bool  CCarrierRole::SetFree(class CSettler * a2, int a3) {
   v10 = IEntity::OwnerId(a2);
   CEcoSectorMgr::RemoveCarrierFromStrikeSettlers((CEcoSectorMgr *)g_cESMgr, v10, v13);
   if ( v13 <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 983, "iSettlerId > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a3 > 0 )
   {
     v12 = a3;
@@ -1425,8 +1416,7 @@ bool  CCarrierRole::SetFree(class CSettler * a2, int a3) {
   {
     if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) )
     {
-      if ( !this->m_uHomeEntityId
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1004, "m_uHomeEntityId > 0") == 1 )
+      if ( !this->m_uHomeEntityId && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1004, "m_uHomeEntityId > 0") == 1 )
       {
         __debugbreak();
       }
@@ -1438,25 +1428,21 @@ bool  CCarrierRole::SetFree(class CSettler * a2, int a3) {
         v6 = IEntity::EntityId(a2);
         v14->Detach(v14, v6);
       }
-      if ( this->m_uHomeEntityId
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1015, "m_uHomeEntityId == 0") == 1 )
+      if ( this->m_uHomeEntityId && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1015, "m_uHomeEntityId == 0") == 1 )
       {
         __debugbreak();
       }
       this->m_uHomeEntityId = 0;
-      if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Settler\\CarrierRole.cpp",
-             1019,
-             "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
+      if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1019, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
       {
         __debugbreak();
       }
     }
     pES = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v12);
     if ( !pES && BBSupportDbgReport(2, "MapObjects\\Settler\\CarrierRole.cpp", 1026, "pES != 0") == 1 )
+    {
       __debugbreak();
+    }
     if ( pES )
     {
       if ( this->m_uNextSettlerType == 2 || this->m_uNextSettlerType == 3 )
@@ -1471,7 +1457,9 @@ bool  CCarrierRole::SetFree(class CSettler * a2, int a3) {
   }
   this->m_uNextSettlerType = 0;
   if ( !this->m_uHomeEntityId )
+  {
     return ISettlerRole::SetFree(this, a2, a3);
+  }
   v11 = CMapObjectMgr::Entity(this->m_uHomeEntityId);
   v11->Detach(v13);
   return ISettlerRole::SetFree(this, a2, a3);

@@ -258,7 +258,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
     pcbBuffer = 256;
     GetUserNameA(Buffer, &pcbBuffer);
     if ( strlen(Buffer) )
+    {
       std::string::operator=(&v110, Buffer);
+    }
   }
   v52 = (void *)g_pCfgMgr->GetStringValue(g_pCfgMgr, &v97, "COMMANDLINE", "playername", &v110);
   std::string::operator=(&v110, v52);
@@ -269,7 +271,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v51 = j__mbstowcs(Dest, v15, v16.m_u[6]);
   v66 = 2 * v51;
   if ( 2 * v51 >= 0x200 )
+  {
     report_rangecheckfailure();
+  }
   Dest[v66 / 2] = 0;
   v19 = &v17;
   v18 = std::wstring::wstring(&v17, Dest);
@@ -287,7 +291,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v76 = std::operator==<char>((int)&CGameSettings::m_strHelpURLenglish, (int)v47);
   std::string::~string(&v94);
   if ( v76 )
+  {
     CTrace::Print("GameSettings.cpp: No 'HelpURLenglish' given! Check 'Web.cfg'!");
+  }
   v46 = std::string::string(&v92, (char *)&byte_36C2642);
   v45 = v46;
   LOBYTE(v113) = 3;
@@ -300,7 +306,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v75 = std::operator==<char>((int)&CGameSettings::m_strNormURLenglish, (int)v43);
   std::string::~string(&v91);
   if ( v75 )
+  {
     CTrace::Print("GameSettings.cpp: No 'm_strNormURLenglish' given! Check 'Web.cfg'!");
+  }
   v42 = std::string::string(&v104, (char *)&byte_36C264A);
   v41 = v42;
   LOBYTE(v113) = 4;
@@ -313,7 +321,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v74 = std::operator==<char>((int)&CGameSettings::m_strHelpURLgerman, (int)v39);
   std::string::~string(&v88);
   if ( v74 )
+  {
     CTrace::Print("GameSettings.cpp: No 'm_strHelpURLgerman' given! Check 'Web.cfg'!");
+  }
   v38 = std::string::string(&v87, (char *)&byte_36C2672);
   v37 = v38;
   LOBYTE(v113) = 5;
@@ -326,7 +336,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v73 = std::operator==<char>((int)&CGameSettings::m_strNormURLgerman, (int)v35);
   std::string::~string(&v86);
   if ( v73 )
+  {
     CTrace::Print("GameSettings.cpp: No 'm_strNormURLgerman' given! Check 'Web.cfg'!");
+  }
   v34 = std::string::string(&v84, (char *)&byte_36C267D);
   v33 = v34;
   LOBYTE(v113) = 6;
@@ -339,7 +351,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v72 = std::operator==<char>((int)&CGameSettings::m_strManualURL_DE, (int)v30);
   std::string::~string(&v83);
   if ( v72 )
+  {
     CTrace::Print("GameSettings.cpp: No 'm_strManualURL_DE' given! Check 'Web.cfg'!");
+  }
   v29 = std::string::string(&v81, (char *)&byte_36C267F);
   v28 = v29;
   LOBYTE(v113) = 7;
@@ -352,7 +366,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v67 = std::operator==<char>((int)&CGameSettings::m_strManualURL_FR, (int)v26);
   std::string::~string(&v80);
   if ( v67 )
+  {
     CTrace::Print("GameSettings.cpp: No 'm_strManualURL_FR' given! Check 'Web.cfg'!");
+  }
   v25 = std::string::string(&v78, (char *)&byte_36C268B);
   v24 = v25;
   LOBYTE(v113) = 8;
@@ -365,7 +381,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v71 = std::operator==<char>((int)&CGameSettings::m_strManualURL_EN, (int)v22);
   std::string::~string(&v101);
   if ( v71 )
+  {
     CTrace::Print("GameSettings.cpp: No 'm_strManualURL_EN' given! Check 'Web.cfg'!");
+  }
   v21 = std::string::string(&v109, (char *)&byte_36C269B);
   v20 = v21;
   LOBYTE(v113) = 9;
@@ -378,7 +396,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v70 = std::operator==<char>((int)&CGameSettings::m_strTipsURL_DE, (int)v64);
   std::string::~string(&v108);
   if ( v70 )
+  {
     CTrace::Print("GameSettings.cpp: No 'TipsURL_DE' given! Check 'Web.cfg'!");
+  }
   v63 = std::string::string(&v106, (char *)&byte_36C26CF);
   v62 = v63;
   LOBYTE(v113) = 10;
@@ -391,7 +411,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v69 = std::operator==<char>((int)&CGameSettings::m_strTipsURL_FR, (int)v60);
   std::string::~string(&v89);
   if ( v69 )
+  {
     CTrace::Print("GameSettings.cpp: No 'TipsURL_FR' given! Check 'Web.cfg'!");
+  }
   v59 = std::string::string(&v103, (char *)&byte_36C26E7);
   v58 = v59;
   LOBYTE(v113) = 11;
@@ -404,7 +426,9 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v68 = std::operator==<char>((int)&CGameSettings::m_strTipsURL_EN, (int)v56);
   std::string::~string(&v102);
   if ( v68 )
+  {
     CTrace::Print("GameSettings.cpp: No 'TipsURL_EN' given! Check 'Web.cfg'!");
+  }
   CGameSettings::Save();
   v113 = -1;
   std::string::~string(&v110);
@@ -424,7 +448,9 @@ void __cdecl CGameSettings::Validate(void) {
 void __cdecl CGameSettings::DetermineHighestResolution(void) {
   
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "main\\GameSettings.cpp", 227, "g_pGfxEngine") == 1 )
+  {
     __debugbreak();
+  }
   for ( CGameSettings::m_iHighestPossibleResolution = 1;
         CGameSettings::m_iHighestPossibleResolution <= 3;
         ++CGameSettings::m_iHighestPossibleResolution )
@@ -458,7 +484,7 @@ std::wstring __cdecl CGameSettings::GetUserConfigDirectory(void) {
 
 
 // address=[0x1488600]
-// Decompiled from std::wstring *__cdecl CGameSettings::GetConfigFilePath(  std::wstring *__return_ptr ret,  const wchar_t *swpConfig,  char bAlsoCheckUserConfig)
+// Decompiled from std::wstring *__cdecl CGameSettings::GetConfigFilePath(std::wstring *__return_ptr ret, const wchar_t *swpConfig, char bAlsoCheckUserConfig)
 std::wstring __cdecl CGameSettings::GetConfigFilePath(wchar_t const * ret, bool swpConfig) {
   
   void *v4; // [esp+4h] [ebp-A4h]
@@ -521,7 +547,9 @@ void __cdecl CGameSettings::SetPlayerName(std::wstring a1) {
   v2 = std::wstring::c_str(&a2);
   v6 = j__wcstombs(Dest, v2, v3);
   if ( v6 >= 0x100 )
+  {
     report_rangecheckfailure();
+  }
   Dest[v6] = 0;
   v5 = ((int (__thiscall *)(CConfigManager *, const char *))g_pCfgMgr->GetConfigVar)(g_pCfgMgr, "GAMESETTINGS");
   v4 = std::string::string(&v7, Dest);
@@ -550,9 +578,13 @@ std::string __cdecl CGameSettings::GetManualURL(void a1) {
   else
   {
     if ( Language == 2 )
+    {
       std::string::string(a1, (int)&CGameSettings::m_strManualURL_FR);
+    }
     else
+    {
       std::string::string(a1, (int)&CGameSettings::m_strManualURL_EN);
+    }
     return a1;
   }
 }
@@ -573,9 +605,13 @@ std::string __cdecl CGameSettings::GetTipsURL(void a1) {
   else
   {
     if ( Language == 2 )
+    {
       std::string::string(&CGameSettings::m_strTipsURL_FR);
+    }
     else
+    {
       std::string::string(&CGameSettings::m_strTipsURL_EN);
+    }
     return a1;
   }
 }
@@ -599,12 +635,7 @@ int __cdecl CGameSettings::GetCampaignStatus(int _iCampaignType) {
       {
         if ( _iCampaignType < 21 || _iCampaignType >= 25 )
         {
-          if ( (!_iCampaignType || _iCampaignType >= 5)
-            && BBSupportDbgReport(
-                 2,
-                 "main\\GameSettings.cpp",
-                 345,
-                 "_iCampaignType && _iCampaignType < CAMPAIGN_MAX_MAIN") == 1 )
+          if ( (!_iCampaignType || _iCampaignType >= 5) && BBSupportDbgReport(2, "main\\GameSettings.cpp", 345, "_iCampaignType && _iCampaignType < CAMPAIGN_MAX_MAIN") == 1 )
           {
             __debugbreak();
           }
@@ -614,8 +645,12 @@ int __cdecl CGameSettings::GetCampaignStatus(int _iCampaignType) {
           CGameSettings::m_uiCampaignSave[2] = g_pCfgMgr->GetIntValue(g_pCfgMgr, "MISCDATA2", "Data03", 0);
           CGameSettings::m_uiCampaignSave[3] = g_pCfgMgr->GetIntValue(g_pCfgMgr, "MISCDATA2", "Data04", 0);
           v5 = 0;
-          for ( i = 0; i < 0x10; ++i )
+          for ( i = 0;
+                i < 0x10;
+                ++i )
+          {
             v5 |= *((_BYTE *)CGameSettings::m_uiCampaignSave + i);
+          }
           if ( v5 )
           {
             CGameSettings::Cryption((unsigned __int8 *)CGameSettings::m_uiCampaignSave, 0x10u);
@@ -670,9 +705,13 @@ int __cdecl CGameSettings::GetCampaignStatus(int _iCampaignType) {
   {
     CGameSettings::m_uiMDCampaignSave = g_pCfgMgr->GetIntValue(g_pCfgMgr, "MISCDATA2", "Data05", 0);
     if ( _iCampaignType == 10 )
+    {
       return (CGameSettings::m_uiMDCampaignSave & 0x80000000) != 0;
+    }
     else
+    {
       return (CGameSettings::m_uiMDCampaignSave >> (4 * _iCampaignType - 20)) & 0xF;
+    }
   }
 }
 
@@ -718,23 +757,16 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
 
   CampaignStatus = CGameSettings::GetCampaignStatus(a1);
   if ( CampaignStatus > a2 )
-    CTrace::Print(
-      "CGameSettings.cpp: Campaign state was already higher... Old %d, New %d, Campaign %d ",
-      CampaignStatus,
-      a2,
-      a1);
+  {
+    CTrace::Print("CGameSettings.cpp: Campaign state was already higher... Old %d, New %d, Campaign %d ", CampaignStatus, a2, a1);
+  }
   if ( a1 < 5 || a1 >= 11 )
   {
     if ( a1 < 11 || a1 >= 17 )
     {
       if ( a1 < 17 || a1 >= 21 )
       {
-        if ( (!a1 || a1 >= 5)
-          && BBSupportDbgReport(
-               2,
-               "main\\GameSettings.cpp",
-               487,
-               "_iCampaignType && _iCampaignType < CAMPAIGN_MAX_MAIN") == 1 )
+        if ( (!a1 || a1 >= 5) && BBSupportDbgReport(2, "main\\GameSettings.cpp", 487, "_iCampaignType && _iCampaignType < CAMPAIGN_MAX_MAIN") == 1 )
         {
           __debugbreak();
         }
@@ -830,7 +862,9 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
     v35 = -1;
     std::wstring::~wstring(&v31);
     if ( (CGameSettings::m_uiMDCampaignSave & 0x7FFFFFFF) == 0x33555 )
+    {
       CGameSettings::SetCampaignStatus(10, 1);
+    }
   }
 }
 
@@ -849,8 +883,12 @@ void __cdecl CGameSettings::Cryption(unsigned char * a1, unsigned long a2) {
   std::string::string(&v4, "19283746574839201324");
   LOBYTE(v5) = 1;
   Cryptor::Set_Key(v3, (int)&v4);
-  for ( i = 0; i < a2; ++i )
+  for ( i = 0;
+        i < a2;
+        ++i )
+  {
     Cryptor::Transform_Char((Cryptor *)v3, &a1[i]);
+  }
   LOBYTE(v5) = 0;
   std::string::~string(&v4);
   v5 = -1;
@@ -1342,7 +1380,9 @@ void __cdecl CGameSettings::LoadAINames(void) {
 
   result = 'yalP';
   strcpy(Format, "Player%d");
-  for ( i = 0; i < 9; ++i )
+  for ( i = 0;
+        i < 9;
+        ++i )
   {
     sprintf(Buffer, Format, i + 1);
     v7 = std::string::string(&v12, "AI Player");
@@ -1354,8 +1394,7 @@ void __cdecl CGameSettings::LoadAINames(void) {
     std::string::operator=(&v13, v6);
     std::string::~string(&v11);
     v1 = std::string::c_str(&v13);
-    if ( strlen(v1) >= 32
-      && BBSupportDbgReport(2, "main\\GameSettings.cpp", 275, "strlen( strTemp.c_str() ) < MAX_PLAYERNAME_LENGTH") == 1 )
+    if ( strlen(v1) >= 32 && BBSupportDbgReport(2, "main\\GameSettings.cpp", 275, "strlen( strTemp.c_str() ) < MAX_PLAYERNAME_LENGTH") == 1 )
     {
       __debugbreak();
     }
@@ -1364,7 +1403,9 @@ void __cdecl CGameSettings::LoadAINames(void) {
     v3 = std::string::c_str(&v13);
     v8 = j__mbstowcs(Dest, v3, v4);
     if ( v8 >= 64 )
+    {
       report_rangecheckfailure();
+    }
     Dest[v8] = 0;
     v5 = std::wstring::wstring(&v10, Dest);
     std::wstring::operator=(v5);

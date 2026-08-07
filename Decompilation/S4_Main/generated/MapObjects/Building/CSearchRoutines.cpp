@@ -7,9 +7,13 @@
 struct SSearchData const & __cdecl CSearchRoutines::GetSearchData(int a1) {
   
   if ( a1 <= 0 || a1 >= 27 )
+  {
     return g_sSearchData;
+  }
   else
+  {
     return &g_sSearchData[a1];
+  }
 }
 
 
@@ -33,30 +37,32 @@ int __cdecl CSearchRoutines::SearchTree(int a1, int a2, int a3) {
   IDecoObject *v8; // [esp+18h] [ebp-10h]
 
   if ( CWorldManager::FlagBits(a1, a2, 0x24u) )
+  {
     return 0;
+  }
   if ( CWorldManager::ResourceType(a1, a2) != 112 )
+  {
     return 0;
+  }
   v7 = CWorldManager::ObjectId(a1, a2);
   if ( !v7 )
+  {
     return 0;
+  }
   v8 = (IDecoObject *)CMapObjectMgr::EntityPtr(v7);
   IsStaticInstance = IDecoObject::IsStaticInstance(v8);
   if ( !IsStaticInstance )
   {
     v4 = IEntity::Type((unsigned __int16 *)v8);
-    BBSupportTracePrintF(
-      0,
-      "CSearchRoutines::SearchTree(): Tree %u, X: %u, Y: %u, Type: %u was already dynamic instance!",
-      v7,
-      a1,
-      a2,
-      v4);
+    BBSupportTracePrintF(0, "CSearchRoutines::SearchTree(): Tree %u, X: %u, Y: %u, Type: %u was already dynamic instance!", v7, a1, a2, v4);
     return 0;
   }
   FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
   v6 = (CTree *)CTree::operator new(0x50u);
   if ( v6 )
+  {
     CTree::CTree(v6, v8, FreeSlot, a1, a2);
+  }
   return FreeSlot;
 }
 
@@ -73,21 +79,35 @@ int __cdecl CSearchRoutines::SearchTreeSeedPos(int a1, int a2, int a3) {
 
   v6 = CWorldManager::Index(a1, a2);
   if ( CWorldManager::MapObjectId(v6) )
+  {
     return 0;
+  }
   if ( (a3 & 0xF) != 0 )
+  {
     v7 = ((unsigned int)CGameData::Rand(g_pGameData) & 3) == 0;
+  }
   else
+  {
     v7 = dword_378D7E0[(unsigned int)CGameData::Rand(g_pGameData) & 7];
+  }
   if ( !CDecoObjMgr::IsAddDecoObjOk((CDecoObjMgr *)&g_cDecoObjMgr, a1, a2, 1, 0, v7) )
+  {
     return 0;
-  for ( i = 0; i < 7; ++i )
+  }
+  for ( i = 0;
+        i < 7;
+        ++i )
   {
     v4 = v6 + CWorldManager::SurroundingHexPointRelIndex(i);
     v5 = CWorldManager::Ground(v4);
     if ( (v5 & 0xF0) != 0x10 )
+    {
       return 0;
+    }
     if ( v5 == 29 )
+    {
       return 0;
+    }
   }
   return -1;
 }
@@ -106,22 +126,36 @@ int __cdecl CSearchRoutines::SearchTreeSeedPosMaya(int a1, int a2, int a3) {
 
   v7 = CWorldManager::Index(a1, a2);
   if ( CWorldManager::MapObjectId(v7) )
+  {
     return 0;
+  }
   if ( (a3 & 0xF) != 0 )
+  {
     v8 = ((unsigned int)CGameData::Rand(g_pGameData) & 3) == 0;
+  }
   else
+  {
     v8 = dword_378D7E0[(unsigned int)CGameData::Rand(g_pGameData) & 7];
+  }
   if ( !CDecoObjMgr::IsAddDecoObjOk((CDecoObjMgr *)&g_cDecoObjMgr, a1, a2, 1, 0, v8) )
+  {
     return 0;
-  for ( i = 0; i < 7; ++i )
+  }
+  for ( i = 0;
+        i < 7;
+        ++i )
   {
     v4 = v7 + CWorldManager::SurroundingHexPointRelIndex(i);
     v5 = CWorldManager::Ground(v4);
     v6 = v5 & 0xF0;
     if ( v6 != 16 && v6 != 64 )
+    {
       return 0;
+    }
     if ( v5 == 29 )
+    {
       return 0;
+    }
   }
   return -1;
 }
@@ -140,22 +174,34 @@ int __cdecl CSearchRoutines::SearchAgave(int a1, int a2, int a3) {
 
   v7 = CWorldManager::ObjectId(a1, a2);
   if ( !v7 )
+  {
     return 0;
+  }
   v6 = (unsigned __int8 *)CMapObjectMgr::Entity(v7);
   if ( IEntity::ObjType(v6) != 32 )
+  {
     return 0;
+  }
   if ( IEntity::Type((unsigned __int16 *)v6) != 211 )
+  {
     return 0;
+  }
   if ( !IEntity::FlagBits(v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  {
     return 0;
+  }
   v5 = (IDecoObject *)CMapObjectMgr::EntityPtr(v7);
   IsStaticInstance = IDecoObject::IsStaticInstance(v5);
   if ( !IsStaticInstance )
+  {
     return 0;
+  }
   FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
   v4 = (CPlant *)CPlant::operator new(0x50u);
   if ( v4 )
+  {
     CPlant::CPlant(v4, v5, FreeSlot, a1, a2);
+  }
   return FreeSlot;
 }
 
@@ -172,19 +218,27 @@ int __cdecl CSearchRoutines::SearchAgaveSeedPos(int a1, int a2, int a3) {
 
   v6 = CWorldManager::Index(a1, a2);
   if ( (CWorldManager::Ground(v6) & 0xF0) != 0x40 )
+  {
     return 0;
+  }
   if ( (int)CSearchRoutines::CalcRawness(v6) > 7 )
+  {
     return 0;
+  }
   v5 = 0;
   if ( CWorldManager::Ground(v6) == 29 )
+  {
     return 0;
+  }
   while ( v5 < 7 )
   {
     v3 = a1 + CSpiralOffsets::DeltaX(v5);
     v4 = a2 + CSpiralOffsets::DeltaY(v5);
     v7 = CWorldManager::Index(v3, v4);
     if ( CWorldManager::FlagBits(v7, 0x7Fu) )
+    {
       return 0;
+    }
     ++v5;
   }
   return -1;
@@ -204,22 +258,34 @@ int __cdecl CSearchRoutines::SearchSunflower(int a1, int a2, int a3) {
 
   v7 = CWorldManager::ObjectId(a1, a2);
   if ( !v7 )
+  {
     return 0;
+  }
   v6 = (unsigned __int8 *)CMapObjectMgr::Entity(v7);
   if ( IEntity::ObjType(v6) != 32 )
+  {
     return 0;
+  }
   if ( IEntity::Type((unsigned __int16 *)v6) != 255 )
+  {
     return 0;
+  }
   if ( !IEntity::FlagBits(v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  {
     return 0;
+  }
   v5 = (IDecoObject *)CMapObjectMgr::EntityPtr(v7);
   IsStaticInstance = IDecoObject::IsStaticInstance(v5);
   if ( !IsStaticInstance )
+  {
     return 0;
+  }
   FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
   v4 = (CPlant *)CPlant::operator new(0x50u);
   if ( v4 )
+  {
     CPlant::CPlant(v4, v5, FreeSlot, a1, a2);
+  }
   return FreeSlot;
 }
 
@@ -236,19 +302,27 @@ int __cdecl CSearchRoutines::SearchSunflowerSeedPos(int a1, int a2, int a3) {
 
   v6 = CWorldManager::Index(a1, a2);
   if ( (CWorldManager::Ground(v6) & 0xF0) != 0x10 )
+  {
     return 0;
+  }
   if ( (int)CSearchRoutines::CalcRawness(v6) > 7 )
+  {
     return 0;
+  }
   v5 = 0;
   if ( CWorldManager::Ground(v6) == 29 )
+  {
     return 0;
+  }
   while ( v5 < 7 )
   {
     v3 = a1 + CSpiralOffsets::DeltaX(v5);
     v4 = a2 + CSpiralOffsets::DeltaY(v5);
     v7 = CWorldManager::Index(v3, v4);
     if ( CWorldManager::FlagBits(v7, 0x7Fu) )
+    {
       return 0;
+    }
     ++v5;
   }
   return -1;
@@ -268,22 +342,34 @@ int __cdecl CSearchRoutines::SearchVine(int a1, int a2, int a3) {
 
   v7 = CWorldManager::ObjectId(a1, a2);
   if ( !v7 )
+  {
     return 0;
+  }
   v6 = (unsigned __int8 *)CMapObjectMgr::Entity(v7);
   if ( IEntity::ObjType(v6) != 32 )
+  {
     return 0;
+  }
   if ( IEntity::Type((unsigned __int16 *)v6) != 162 )
+  {
     return 0;
+  }
   if ( !IEntity::FlagBits(v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  {
     return 0;
+  }
   v5 = (IDecoObject *)CMapObjectMgr::EntityPtr(v7);
   IsStaticInstance = IDecoObject::IsStaticInstance(v5);
   if ( !IsStaticInstance )
+  {
     return 0;
+  }
   FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
   v4 = (CPlant *)CPlant::operator new(0x50u);
   if ( v4 )
+  {
     CPlant::CPlant(v4, v5, FreeSlot, a1, a2);
+  }
   return FreeSlot;
 }
 
@@ -300,18 +386,28 @@ int __cdecl CSearchRoutines::SearchVineSeedPos(int a1, int a2, int a3) {
 
   v6 = CWorldManager::Index(a1, a2);
   if ( (CWorldManager::Ground(v6) & 0xF0) != 0x10 )
+  {
     return 0;
+  }
   if ( (int)CSearchRoutines::CalcRawness(v6) <= 7 )
+  {
     return 0;
+  }
   if ( CWorldManager::ShadingGradient(v6) < 8 )
+  {
     return 0;
-  for ( i = 0; i < 7; ++i )
+  }
+  for ( i = 0;
+        i < 7;
+        ++i )
   {
     v4 = a1 + CSpiralOffsets::DeltaX(i);
     v5 = a2 + CSpiralOffsets::DeltaY(i);
     v3 = CWorldManager::Index(v4, v5);
     if ( CWorldManager::FlagBits(v3, 0x7Fu) )
+    {
       return 0;
+    }
   }
   return -1;
 }
@@ -330,23 +426,30 @@ int __cdecl CSearchRoutines::SearchGrain(int a1, int a2, int a3) {
 
   v7 = CWorldManager::ObjectId(a1, a2);
   if ( !v7 )
+  {
     return 0;
+  }
   v6 = (unsigned __int8 *)CMapObjectMgr::Entity(v7);
-  if ( IEntity::ObjType(v6) != 32
-    || IEntity::Type((unsigned __int16 *)v6) != 209 && IEntity::Type((unsigned __int16 *)v6) != 210 )
+  if ( IEntity::ObjType(v6) != 32 || IEntity::Type((unsigned __int16 *)v6) != 209 && IEntity::Type((unsigned __int16 *)v6) != 210 )
   {
     return 0;
   }
   if ( !IEntity::FlagBits(v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  {
     return 0;
+  }
   v5 = (IDecoObject *)CMapObjectMgr::EntityPtr(v7);
   IsStaticInstance = IDecoObject::IsStaticInstance(v5);
   if ( !IsStaticInstance )
+  {
     return 0;
+  }
   FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
   v4 = (CPlant *)CPlant::operator new(0x50u);
   if ( v4 )
+  {
     CPlant::CPlant(v4, v5, FreeSlot, a1, a2);
+  }
   return FreeSlot;
 }
 
@@ -363,19 +466,27 @@ int __cdecl CSearchRoutines::SearchGrainSeedPos(int a1, int a2, int a3) {
 
   v6 = CWorldManager::Index(a1, a2);
   if ( (CWorldManager::Ground(v6) & 0xF0) != 0x10 )
+  {
     return 0;
+  }
   if ( CSearchRoutines::CalcRawness(v6) > 7 )
+  {
     return 0;
+  }
   v5 = 0;
   if ( CWorldManager::Ground(v6) == 64 )
+  {
     return 0;
+  }
   while ( v5 < 7 )
   {
     v3 = a1 + CSpiralOffsets::DeltaX(v5);
     v4 = a2 + CSpiralOffsets::DeltaY(v5);
     v7 = CWorldManager::Index(v3, v4);
     if ( CWorldManager::FlagBits(v7, 0x7Fu) )
+    {
       return 0;
+    }
     ++v5;
   }
   return -1;
@@ -392,17 +503,27 @@ int __cdecl CSearchRoutines::SearchBeehive(int a1, int a2, int a3) {
 
   v4 = CWorldManager::ObjectId(a1, a2);
   if ( !v4 )
+  {
     return 0;
+  }
   v3 = CWorldManager::Index(a1, a2);
   if ( CWorldManager::FlagBits(v3, 0x20u) )
+  {
     return 0;
+  }
   v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v4);
   if ( IEntity::ObjType(v5) != 32 )
+  {
     return 0;
+  }
   if ( IEntity::Type((unsigned __int16 *)v5) != 217 )
+  {
     return 0;
+  }
   if ( IEntity::FlagBits(v5, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  {
     return v4;
+  }
   return 0;
 }
 
@@ -416,9 +537,13 @@ int __cdecl CSearchRoutines::SearchBeehivePos(int a1, int a2, int a3) {
   CWorldManager::Index(a1, a2);
   v2 = (unsigned int)CGameData::Rand(g_pGameData);
   if ( CDecoObjMgr::IsAddDecoObjOk((CDecoObjMgr *)&g_cDecoObjMgr, a1, a2, 217, 0, v2 % 3) )
+  {
     return -1;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -431,13 +556,7 @@ int __cdecl CSearchRoutines::SearchMushroom(int a1, int a2, int a3) {
   unsigned __int8 *v5; // [esp+8h] [ebp-4h]
 
   v4 = CWorldManager::ObjectId(a1, a2);
-  if ( v4
-    && (v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v4), IEntity::ObjType(v5) == 32)
-    && (IEntity::Type((unsigned __int16 *)v5) == 212
-     || IEntity::Type((unsigned __int16 *)v5) == 213
-     || IEntity::Type((unsigned __int16 *)v5) == 214)
-    && IEntity::FlagBits(v5, (EntityFlag)((char *)&loc_1FFFFFF + 1))
-    && (v3 = (IDecoObject *)CMapObjectMgr::EntityPtr(v4), IDecoObject::IsStaticInstance(v3)) )
+  if ( v4 && (v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v4), IEntity::ObjType(v5) == 32) && (IEntity::Type((unsigned __int16 *)v5) == 212 || IEntity::Type((unsigned __int16 *)v5) == 213 || IEntity::Type((unsigned __int16 *)v5) == 214) && IEntity::FlagBits(v5, (EntityFlag)((char *)&loc_1FFFFFF + 1)) && (v3 = (IDecoObject *)CMapObjectMgr::EntityPtr(v4), IDecoObject::IsStaticInstance(v3)) )
   {
     return v4;
   }
@@ -456,9 +575,13 @@ int __cdecl CSearchRoutines::SearchMushroomSeedPos(int a1, int a2, int a3) {
 
   v3 = CWorldManager::Index(a1, a2);
   if ( !CWorldManager::FlagBits(v3, 4u) )
+  {
     return 0;
+  }
   if ( CDecoObjMgr::IsAddDecoObjOk((CDecoObjMgr *)&g_cDecoObjMgr, a1, a2, 212, 0, 0) )
+  {
     return -1;
+  }
   return 0;
 }
 
@@ -472,10 +595,7 @@ int __cdecl CSearchRoutines::SearchVenison(int a1, int a2, int a3) {
   unsigned __int8 *v5; // [esp+4h] [ebp-4h]
 
   v4 = CWorldManager::MapObjectId(a1, a2);
-  if ( v4
-    && (v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v4), IEntity::ObjType(v5) == 128)
-    && (v2 = IEntity::Type((unsigned __int16 *)v5), CAnimalMgr::IsHuntable((CAnimalMgr *)&g_cAnimalMgr, v2))
-    && IEntity::FlagBits(v5, (EntityFlag)&loc_3000000) )
+  if ( v4 && (v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v4), IEntity::ObjType(v5) == 128) && (v2 = IEntity::Type((unsigned __int16 *)v5), CAnimalMgr::IsHuntable((CAnimalMgr *)&g_cAnimalMgr, v2)) && IEntity::FlagBits(v5, (EntityFlag)&loc_3000000) )
   {
     return v4;
   }
@@ -505,22 +625,34 @@ int __cdecl CSearchRoutines::SearchStone(int a1, int a2, int a3) {
   IDecoObject *v7; // [esp+14h] [ebp-10h]
 
   if ( CWorldManager::FlagBits(a1, a2, 4u) )
+  {
     return 0;
+  }
   if ( CWorldManager::ResourceType(a1, a2) != 96 )
+  {
     return 0;
+  }
   v3 = CWorldManager::ObjectId(a1, a2);
   v7 = (IDecoObject *)CMapObjectMgr::EntityPtr(v3);
   if ( !v7 && BBSupportDbgReport(2, "MapObjects\\Building\\SearchRoutines.cpp", 483, "pSrcStone") == 1 )
+  {
     __debugbreak();
+  }
   if ( !v7 )
+  {
     return 0;
+  }
   IsStaticInstance = IDecoObject::IsStaticInstance(v7);
   if ( !IsStaticInstance )
+  {
     return 0;
+  }
   FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
   v6 = (CStone *)CStone::operator new(0x48u);
   if ( v6 )
+  {
     CStone::CStone(v6, v7, FreeSlot, a1, a2);
+  }
   return FreeSlot;
 }
 
@@ -537,30 +669,35 @@ int __cdecl CSearchRoutines::SearchFish(int a1, int a2, int a3) {
   int i; // [esp+24h] [ebp-4h]
 
   if ( !CWorldManager::InInnerWorld2(a1, a2) )
+  {
     return 0;
+  }
   v5 = CWorldManager::Index(a1, a2);
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     if ( i >= 19 )
+    {
       return 0;
+    }
     v8 = v5 + CWorldManager::SurroundingHexPointRelIndex(i);
     iFishAmount = CWorldManager::Resource(v8);
     if ( (unsigned int)(iFishAmount - 1) <= 0xE && !CWorldManager::FlagBits(v8, 4u) )
     {
       v7 = CWorldManager::Ground(v8) & 0xF0;
       if ( v7 == 96 || v7 == 0 )
+      {
         break;
+      }
     }
   }
   v4 = CGameData::Rand(g_pGameData);
   if ( v4 < CRandom16::PercentValue(0x21u) )
+  {
     return -1;
-  if ( (iFishAmount <= 0 || iFishAmount > 15)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\SearchRoutines.cpp",
-         1106,
-         "(iFishAmount > 0) && (iFishAmount <= RESOURCE_AMOUNT_MASK)") == 1 )
+  }
+  if ( (iFishAmount <= 0 || iFishAmount > 15) && BBSupportDbgReport(2, "MapObjects\\Building\\SearchRoutines.cpp", 1106, "(iFishAmount > 0) && (iFishAmount <= RESOURCE_AMOUNT_MASK)") == 1 )
   {
     __debugbreak();
   }
@@ -574,9 +711,13 @@ int __cdecl CSearchRoutines::SearchFish(int a1, int a2, int a3) {
 int __cdecl CSearchRoutines::SearchGold(int a1, int a2, int a3) {
   
   if ( CWorldManager::ResourceType(a1, a2) == 16 )
+  {
     return -1;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -585,9 +726,13 @@ int __cdecl CSearchRoutines::SearchGold(int a1, int a2, int a3) {
 int __cdecl CSearchRoutines::SearchCoal(int a1, int a2, int a3) {
   
   if ( CWorldManager::ResourceType(a1, a2) == 16 )
+  {
     return -1;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -596,9 +741,13 @@ int __cdecl CSearchRoutines::SearchCoal(int a1, int a2, int a3) {
 int __cdecl CSearchRoutines::SearchIron(int a1, int a2, int a3) {
   
   if ( CWorldManager::ResourceType(a1, a2) == 32 )
+  {
     return -1;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -607,9 +756,13 @@ int __cdecl CSearchRoutines::SearchIron(int a1, int a2, int a3) {
 int __cdecl CSearchRoutines::SearchSulfur(int a1, int a2, int a3) {
   
   if ( CWorldManager::ResourceType(a1, a2) == 64 )
+  {
     return -1;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -618,9 +771,13 @@ int __cdecl CSearchRoutines::SearchSulfur(int a1, int a2, int a3) {
 int __cdecl CSearchRoutines::SearchGranit(int a1, int a2, int a3) {
   
   if ( CWorldManager::ResourceType(a1, a2) == 80 )
+  {
     return -1;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -632,9 +789,13 @@ int __cdecl CSearchRoutines::SearchDarkLand(int a1, int a2, int a3) {
 
   v3 = CWorldManager::Index(a1, a2);
   if ( CWorldManager::FlagBits(v3, 4u) )
+  {
     return -1;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -646,9 +807,13 @@ int __cdecl CSearchRoutines::SearchGreenLand(int a1, int a2, int a3) {
 
   v3 = CWorldManager::Index(a1, a2);
   if ( CWorldManager::FlagBits(v3, 4u) )
+  {
     return 0;
+  }
   else
+  {
     return -1;
+  }
 }
 
 
@@ -681,9 +846,13 @@ int __cdecl CSearchRoutines::CalcRawness(int a1) {
   if ( v12 < v11 )
   {
     if ( v11 < v13 )
+    {
       return v13;
+    }
     else
+    {
       return v11;
+    }
   }
   else if ( v12 < v13 )
   {

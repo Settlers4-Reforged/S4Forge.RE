@@ -11,7 +11,9 @@ class CPersistence * __cdecl CDeliverPileRole::New(std::istream & a1) {
 
   C = (CDeliverPileRole *)operator new(8u);
   if ( C )
+  {
     CDeliverPileRole::CDeliverPileRole(C, (int)a1);
+  }
 }
 
 
@@ -26,22 +28,12 @@ void  CDeliverPileRole::Init(class CPile * _pPile) {
   CPile::SetRoleType(_pPile, 1u);
   CPile::SetOfferFlag(_pPile, 1u);
   v2 = IEntity::WorldIdx(_pPile);
-  if ( !CWorldManager::FlagBits(v2, 8u)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Pile\\DeliverPileRole.cpp",
-         100,
-         "g_cWorld.FlagBits(_pPile->WorldIdx(), FLAG_BUILDING) != 0") == 1 )
+  if ( !CWorldManager::FlagBits(v2, 8u) && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 100, "g_cWorld.FlagBits(_pPile->WorldIdx(), FLAG_BUILDING) != 0") == 1 )
   {
     __debugbreak();
   }
   v3 = IEntity::WorldIdx(_pPile);
-  if ( CWorldManager::EcoSectorId(v3) <= 0
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Pile\\DeliverPileRole.cpp",
-         101,
-         "g_cWorld.EcoSectorId(_pPile->WorldIdx()) > 0") == 1 )
+  if ( CWorldManager::EcoSectorId(v3) <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 101, "g_cWorld.EcoSectorId(_pPile->WorldIdx()) > 0") == 1 )
   {
     __debugbreak();
   }
@@ -69,12 +61,7 @@ LABEL_11:
       return;
     }
     _pPile = IEntity::WorldIdx(a2);
-    if ( !CWorldManager::FlagBits(_pPile, 8u)
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Pile\\DeliverPileRole.cpp",
-           155,
-           "g_cWorld.FlagBits( _pPile->WorldIdx(), FLAG_BUILDING )") == 1 )
+    if ( !CWorldManager::FlagBits(_pPile, 8u) && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 155, "g_cWorld.FlagBits( _pPile->WorldIdx(), FLAG_BUILDING )") == 1 )
     {
       __debugbreak();
     }
@@ -85,7 +72,9 @@ LABEL_11:
       v4 = IEntity::WorldIdx(a2);
       v5 = CWorldManager::FlagBits(v4, 0xFFu);
       if ( BBSupportDbgReportF(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 158, "iEcoSectorId != 0: Flagbits %x", v5) == 1 )
+      {
         __debugbreak();
+      }
     }
     if ( iEcoSectorId )
     {
@@ -108,11 +97,14 @@ void  CDeliverPileRole::Increase(class CPile * _pPile, int _iAmount) {
   struct CBuilding *BuildingPtr; // [esp+4h] [ebp-4h]
 
   if ( !_pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 186, "_pPile != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iAmount <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 187, "_iAmount > 0") == 1 )
+  {
     __debugbreak();
-  if ( !CPile::GetBuildingId(_pPile)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 193, "_pPile->GetBuildingId() != 0") == 1 )
+  }
+  if ( !CPile::GetBuildingId(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 193, "_pPile->GetBuildingId() != 0") == 1 )
   {
     __debugbreak();
   }

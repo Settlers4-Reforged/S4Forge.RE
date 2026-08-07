@@ -30,15 +30,19 @@ class CAINormalSectorAI *  CAINormalSectorAgent::SectorAI(void)const {
 
 
 // address=[0x1303c90]
-// Decompiled from CAINormalSectorAgent *__thiscall CAINormalSectorAgent::AttachSectorAI(  CAINormalSectorAgent *this,  struct CAINormalSectorAI *a2)
+// Decompiled from CAINormalSectorAgent *__thiscall CAINormalSectorAgent::AttachSectorAI(CAINormalSectorAgent *this, struct CAINormalSectorAI *a2)
 void  CAINormalSectorAgent::AttachSectorAI(class CAINormalSectorAI * a2) {
   
   CAINormalSectorAgent *result; // eax
 
   if ( !a2 && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 235, "_pSectorAI != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( *((_DWORD *)this + 9) && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 236, "m_pSectorAI == 0") == 1 )
+  {
     __debugbreak();
+  }
   result = this;
   *((_DWORD *)this + 9) = a2;
   return result;

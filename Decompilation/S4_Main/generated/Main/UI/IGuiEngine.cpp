@@ -52,17 +52,27 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
   struct SEventStruct v16; // [esp+48h] [ebp-14h] BYREF
 
   if ( !sub_2F9E8F0() || !a3 )
+  {
     return 0;
+  }
   if ( !sub_2F9E8B0(a2) )
+  {
     return 0;
+  }
   v12 = (unsigned __int16 *)sub_2F9E930(a2);
   if ( g_iOpenDialogs[*v12] )
+  {
     return 0;
+  }
   v13 = (struct SGuiControl *)(v12 + 8);
-  for ( i = 0; i < v12[6]; ++i )
+  for ( i = 0;
+        i < v12[6];
+        ++i )
   {
     if ( (v13->effects & 1) != 0 )
+    {
       v13->effects &= ~1u;
+    }
     if ( (v13->controlType == 5 || v13->controlType == 20) && (v13->id & 0x80u) != 0 )
     {
       if ( !IGuiEngine::SetText(this, a2, v13->valueLink, (char *)&byte_3AD1732) )
@@ -89,18 +99,18 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
   v15.m_sDestinationRect.left = v12[1] + IGuiEngine::GetDialogsRenderOffsetX(g_pGUIEngine);
   v15.m_sDestinationRect.top = v12[2] + IGuiEngine::GetDialogsRenderOffsetY(g_pGUIEngine);
   DialogsRenderScaleX = IGuiEngine::GetDialogsRenderScaleX(g_pGUIEngine);
-  v15.m_sDestinationRect.right = v15.m_sDestinationRect.left
-                               + (int)(float)((float)((float)v15.m_uU0 * DialogsRenderScaleX) + 0.5);
+  v15.m_sDestinationRect.right = v15.m_sDestinationRect.left + (int)(float)((float)((float)v15.m_uU0 * DialogsRenderScaleX) + 0.5);
   DialogsRenderScaleY = IGuiEngine::GetDialogsRenderScaleY(g_pGUIEngine);
-  v15.m_sDestinationRect.bottom = v15.m_sDestinationRect.top
-                                + (int)(float)((float)((float)v4 * DialogsRenderScaleY) + 0.5);
+  v15.m_sDestinationRect.bottom = v15.m_sDestinationRect.top + (int)(float)((float)((float)v4 * DialogsRenderScaleY) + 0.5);
   IGfxEngine::CreateGuiSurface(g_pGfxEngine, *v12, &v15);
   IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, *v12, 1);
   g_iOpenDialogs[*v12] = a2 + 1;
   g_pfDialogCallbacks[*v12] = (int)a3;
   a3(0, 0, 0);
   v14 = (struct SGuiControl *)(v12 + 8);
-  for ( j = 0; j < v12[6]; ++j )
+  for ( j = 0;
+        j < v12[6];
+        ++j )
   {
     if ( g_pfSetEnableStatus && a2 != g_iDialogToIgnore )
     {
@@ -136,8 +146,12 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
   g_pCurrentRepeatControl = 0;
   g_pfSetEnableStatus = 0;
   g_bDisableEvents = 1;
-  for ( i = 0; i < 19; ++i )
+  for ( i = 0;
+        i < 19;
+        ++i )
+  {
     g_hFonts[i] = 0;
+  }
   InitTables();
   return this;
 }
@@ -150,10 +164,14 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 19; ++i )
+  for ( i = 0;
+        i < 19;
+        ++i )
   {
     if ( g_hFonts[i] )
+    {
       DeleteObject(g_hFonts[i]);
+    }
   }
   g_pCurrentEditControl = 0;
   g_pCurrentDragControl = 0;
@@ -167,7 +185,7 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
 
 
 // address=[0x2f9fff0]
-// Decompiled from char __thiscall IGuiEngine::Init(  IGuiEngine *this,  struct IGfxEngine *a2,  struct CGfxManager *a3,  int a4,  int a5,  bool (__cdecl *a6)(int, int, int),  int a7)
+// Decompiled from char __thiscall IGuiEngine::Init(IGuiEngine *this, struct IGfxEngine *a2, struct CGfxManager *a3, int a4, int a5, bool (__cdecl *a6)(int, int, int), int a7)
 bool  IGuiEngine::Init(class IGfxEngine * a2, class CGfxManager * a3, void * a4, int a5, bool (__cdecl*)(int,int,int) a6, int a7) {
   
   int DeviceCaps; // eax
@@ -180,7 +198,9 @@ bool  IGuiEngine::Init(class IGfxEngine * a2, class CGfxManager * a3, void * a4,
   char v16; // [esp+23h] [ebp-1h]
 
   if ( !a2 || !a4 || !a3 )
+  {
     return 0;
+  }
   g_iDialogToIgnore = -1;
   g_bDisableEvents = 1;
   g_pGfxEngine = (int)a2;
@@ -224,10 +244,14 @@ bool  IGuiEngine::Init(class IGfxEngine * a2, class CGfxManager * a3, void * a4,
     hdc = GetDC(0);
     if ( hdc )
     {
-      for ( i = 0; i < 19; ++i )
+      for ( i = 0;
+            i < 19;
+            ++i )
       {
         if ( g_hFonts[i] )
+        {
           DeleteObject(g_hFonts[i]);
+        }
         nNumber = v10 + dword_3AD2458[21 * i];
         if ( v16 )
         {
@@ -235,40 +259,18 @@ bool  IGuiEngine::Init(class IGfxEngine * a2, class CGfxManager * a3, void * a4,
           nNumber = MulDiv(nNumber, 4 * DeviceCaps, 374);
         }
         if ( byte_3AD2478[84 * i] )
-          FontA = CreateFontA(
-                    nNumber,
-                    dword_3AD245C[21 * i],
-                    0,
-                    0,
-                    dword_3AD2460[21 * i],
-                    0,
-                    0,
-                    0,
-                    iCharSet,
-                    0,
-                    0,
-                    4u,
-                    0,
-                    &aArial_1[84 * i]);
+        {
+          FontA = CreateFontA(nNumber, dword_3AD245C[21 * i], 0, 0, dword_3AD2460[21 * i], 0, 0, 0, iCharSet, 0, 0, 4u, 0, &aArial_1[84 * i]);
+        }
         else
-          FontA = CreateFontA(
-                    nNumber,
-                    dword_3AD245C[21 * i],
-                    0,
-                    0,
-                    dword_3AD2460[21 * i],
-                    0,
-                    0,
-                    0,
-                    iCharSet,
-                    0,
-                    0,
-                    0,
-                    0,
-                    &aArial_1[84 * i]);
+        {
+          FontA = CreateFontA(nNumber, dword_3AD245C[21 * i], 0, 0, dword_3AD2460[21 * i], 0, 0, 0, iCharSet, 0, 0, 0, 0, &aArial_1[84 * i]);
+        }
         g_hFonts[i] = FontA;
         if ( !g_hFonts[i] )
+        {
           BBSupportTracePrintF(0, "GUI ENGINE: Cannot create font!");
+        }
       }
       ReleaseDC(0, hdc);
       IGfxEngine::SetWidthOfLeftGuiBorder((IGfxEngine *)g_pGfxEngine, 0);
@@ -330,28 +332,18 @@ void  IGuiEngine::RefreshAllSurfaces(void) {
   v9 = this;
   if ( g_pGfxEngine && g_pFileHeader && g_pGfxManager )
   {
-    for ( i = 0; i < 0xE; ++i )
+    for ( i = 0;
+          i < 0xE;
+          ++i )
     {
-      v12 = (const struct GUI_MENU_DIALOG_HEADER *)(*(_DWORD *)(g_pFileHeader + 4 * g_iOpenDialogs[i] + 12)
-                                                  + g_pFileHeader);
+      v12 = (const struct GUI_MENU_DIALOG_HEADER *)(*(_DWORD *)(g_pFileHeader + 4 * g_iOpenDialogs[i] + 12) + g_pFileHeader);
       IGfxEngine::SetVisibilityOfGuiSurface((IGfxEngine *)g_pGfxEngine, i, 0);
       if ( g_iOpenDialogs[i] )
       {
-        GuiSurfaceDescription = IGfxEngine::GetGuiSurfaceDescription(
-                                  (IGfxEngine *)g_pGfxEngine,
-                                  *(unsigned __int16 *)v12,
-                                  (struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *)v13);
-        if ( GuiSurfaceDescription
-          && v13[0] == *((unsigned __int16 *)v12 + 3)
-          && v13[1] == *((unsigned __int16 *)v12 + 4) )
+        GuiSurfaceDescription = IGfxEngine::GetGuiSurfaceDescription((IGfxEngine *)g_pGfxEngine, *(unsigned __int16 *)v12, (struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *)v13);
+        if ( GuiSurfaceDescription && v13[0] == *((unsigned __int16 *)v12 + 3) && v13[1] == *((unsigned __int16 *)v12 + 4) )
         {
-          v19 = *IGuiEngine::GetDialogDestinationRect(
-                   &v2,
-                   v12,
-                   *(_DWORD *)v9,
-                   *((_DWORD *)v9 + 1),
-                   *((float *)v9 + 2),
-                   *((float *)v9 + 3));
+          v19 = *IGuiEngine::GetDialogDestinationRect(&v2, v12, *(_DWORD *)v9, *((_DWORD *)v9 + 1), *((float *)v9 + 2), *((float *)v9 + 3));
           v17 = v19;
           IGfxEngine::SetGuiSurfaceDestinationRect((IGfxEngine *)g_pGfxEngine, *(unsigned __int16 *)v12, &v17);
         }
@@ -363,24 +355,17 @@ void  IGuiEngine::RefreshAllSurfaces(void) {
           v4 = *((unsigned __int16 *)v12 + 4);
           v14[0] = v3;
           v14[1] = v4;
-          v18 = *IGuiEngine::GetDialogDestinationRect(
-                   &v1,
-                   v12,
-                   *(_DWORD *)v9,
-                   *((_DWORD *)v9 + 1),
-                   *((float *)v9 + 2),
-                   *((float *)v9 + 3));
+          v18 = *IGuiEngine::GetDialogDestinationRect(&v1, v12, *(_DWORD *)v9, *((_DWORD *)v9 + 1), *((float *)v9 + 2), *((float *)v9 + 3));
           v15 = v18;
-          IGfxEngine::CreateGuiSurface(
-            (IGfxEngine *)g_pGfxEngine,
-            *(unsigned __int16 *)v12,
-            (struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *)v14);
+          IGfxEngine::CreateGuiSurface((IGfxEngine *)g_pGfxEngine, *(unsigned __int16 *)v12, (struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *)v14);
         }
         IGfxEngine::SetVisibilityOfGuiSurface((IGfxEngine *)g_pGfxEngine, *(unsigned __int16 *)v12, 1);
         if ( g_pfSetEnableStatus )
         {
           v6 = (struct SGuiControl *)((char *)v12 + 16);
-          for ( j = 0; j < *((unsigned __int16 *)v12 + 6); ++j )
+          for ( j = 0;
+                j < *((unsigned __int16 *)v12 + 6);
+                ++j )
           {
             v11 = (v6->effects & 4) == 0;
             v10 = (unsigned __int8)g_pfSetEnableStatus(g_iOpenDialogs[i] - 1, v6->valueLink, v6->controlType, v11, 4) == 0;
@@ -390,7 +375,9 @@ void  IGuiEngine::RefreshAllSurfaces(void) {
         }
         UpdateGui(i);
         if ( g_pfDialogCallbacks[*(unsigned __int16 *)v12] )
+        {
           ((void (__cdecl *)(int, _DWORD, _DWORD))g_pfDialogCallbacks[*(unsigned __int16 *)v12])(11, 0, 0);
+        }
       }
     }
   }
@@ -409,11 +396,17 @@ bool  IGuiEngine::CloseDialog(int a2) {
   char v8; // [esp+17h] [ebp-1h]
 
   if ( !g_pFileHeader || !g_pGfxEngine || !g_pGfxManager )
+  {
     return 0;
+  }
   if ( a2 >= *(_DWORD *)(g_pFileHeader + 4) || a2 < 0 )
+  {
     return 0;
+  }
   v8 = 0;
-  for ( i = 0; i < 0xE; ++i )
+  for ( i = 0;
+        i < 0xE;
+        ++i )
   {
     if ( g_iOpenDialogs[i] == a2 + 1 )
     {
@@ -422,33 +415,46 @@ bool  IGuiEngine::CloseDialog(int a2) {
     }
   }
   if ( !v8 )
+  {
     return 0;
+  }
   v7 = (unsigned __int16 *)(*(_DWORD *)(g_pFileHeader + 4 * a2 + 16) + g_pFileHeader);
   IGfxEngine::SetVisibilityOfGuiSurface((IGfxEngine *)g_pGfxEngine, *v7, 0);
   v4 = v7 + 8;
-  for ( j = 0; j < v7[6]; ++j )
+  for ( j = 0;
+        j < v7[6];
+        ++j )
   {
     if ( *((char *)v4 + 25) >= 0 )
     {
       LOBYTE(g_mbstrTextTable[75 * *((char *)v4 + 25)]) = 0;
       v3 = *((char *)v4 + 25);
       if ( v3 >= 0x50 )
+      {
         report_rangecheckfailure();
+      }
       g_bUsedTexts[v3] = 0;
     }
     *((_BYTE *)v4 + 25) = -1;
     v4 += 18;
   }
   if ( g_pCurrentEditControl && GetSurfaceID((struct SGuiControl *)g_pCurrentEditControl) == *v7 )
+  {
     g_pCurrentEditControl = 0;
+  }
   if ( g_pCurrentRepeatControl && GetSurfaceID((struct SGuiControl *)g_pCurrentRepeatControl) == *v7 )
+  {
     g_pCurrentRepeatControl = 0;
+  }
   if ( g_pCurrentSelectedControl && GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl) == *v7 )
+  {
     g_pCurrentSelectedControl = 0;
+  }
   if ( g_pCurrentDragControl && GetSurfaceID((struct SGuiControl *)g_pCurrentDragControl) == *v7 )
+  {
     g_pCurrentDragControl = 0;
-  if ( CToolTip::IsOpen((CToolTip *)&g_cToolTipExt)
-    && CToolTip::GetSourceDialogSurfaceID((CToolTip *)&g_cToolTipExt) == *v7 )
+  }
+  if ( CToolTip::IsOpen((CToolTip *)&g_cToolTipExt) && CToolTip::GetSourceDialogSurfaceID((CToolTip *)&g_cToolTipExt) == *v7 )
   {
     CToolTip::CloseTooltip((CToolTip *)&g_cToolTipExt);
   }
@@ -489,7 +495,7 @@ void  IGuiEngine::EnableShortcuts(bool a2) {
 
 
 // address=[0x2fa0920]
-// Decompiled from bool (__cdecl *__thiscall IGuiEngine::SetCtrlStatusCallback(  IGuiEngine *this,  bool (__cdecl *a2)(int, int, int, bool, int)))(int, int, int, bool, int)
+// Decompiled from bool (__cdecl *__thiscall IGuiEngine::SetCtrlStatusCallback(IGuiEngine *this, bool (__cdecl *a2)(int, int, int, bool, int)))(int, int, int, bool, int)
 void  IGuiEngine::SetCtrlStatusCallback(bool (__cdecl*)(int,int,int,bool,int) a2) {
   
   bool (__cdecl *result)(int, int, int, bool, int); // eax
@@ -519,9 +525,13 @@ bool  IGuiEngine::GetDialogRect(int a2, struct SGuiRect & a3) {
   unsigned __int16 *v4; // eax
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   if ( !(unsigned __int8)sub_2FA2880(a2) )
+  {
     return 0;
+  }
   v4 = (unsigned __int16 *)sub_2FA2900(a2);
   *(_DWORD *)a3 = v4[1];
   *((_DWORD *)a3 + 1) = v4[2];
@@ -538,9 +548,13 @@ bool  IGuiEngine::SetDialogRect(int a2, struct SGuiRect a3) {
   unsigned __int16 *v8; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   if ( !(unsigned __int8)sub_2FA2880(a2) )
+  {
     return 0;
+  }
   v8 = (unsigned __int16 *)sub_2FA2900(a2);
   v8[1] = a3;
   v8[2] = a4;
@@ -558,17 +572,17 @@ bool  IGuiEngine::MoveDialogTo(int a2, int a3, int a4) {
   unsigned __int16 *v6; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   if ( !(unsigned __int8)sub_2FA2880(a2) )
+  {
     return 0;
+  }
   v6 = (unsigned __int16 *)sub_2FA2900(a2);
   v6[1] = a3;
   v6[2] = a4;
-  return IGfxEngine::SetGuiSurfaceDestinationPosition(
-           (IGfxEngine *)g_pGfxEngine,
-           *v6,
-           a3 + *(_DWORD *)this,
-           a4 + *((_DWORD *)this + 1));
+  return IGfxEngine::SetGuiSurfaceDestinationPosition((IGfxEngine *)g_pGfxEngine, *v6, a3 + *(_DWORD *)this, a4 + *((_DWORD *)this + 1));
 }
 
 
@@ -585,17 +599,15 @@ bool  IGuiEngine::GetDialogRenderRect(int a2, struct SGuiRect & a3) {
 
   v6 = this;
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   if ( !(unsigned __int8)sub_2FA2880(a2) )
+  {
     return 0;
+  }
   v5 = (const struct GUI_MENU_DIALOG_HEADER *)sub_2FA2900(a2);
-  v9 = *IGuiEngine::GetDialogDestinationRect(
-          &v4,
-          v5,
-          *(_DWORD *)v6,
-          *((_DWORD *)v6 + 1),
-          *((float *)v6 + 2),
-          *((float *)v6 + 3));
+  v9 = *IGuiEngine::GetDialogDestinationRect(&v4, v5, *(_DWORD *)v6, *((_DWORD *)v6 + 1), *((float *)v6 + 2), *((float *)v6 + 3));
   top = v9.top;
   v8 = *(_QWORD *)&v9.right;
   *(_DWORD *)a3 = v9.left;
@@ -632,12 +644,15 @@ void  IGuiEngine::EnableTooltipsExt(bool a2) {
   CToolTip::SetEnableStatus((CToolTip *)&g_cToolTipExt, a2);
   result = a2;
   if ( !a2 )
+  {
     return result;
+  }
   if ( !g_pCurrentSelectedControl )
+  {
     return result;
+  }
   v6 = *(__int16 *)(g_pCurrentSelectedControl + 22);
-  v5 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
-     + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
+  v5 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
   SurfaceID = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
   ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[SurfaceID])(9, v5, v6);
   v4 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
@@ -654,14 +669,20 @@ void  IGuiEngine::SetDlgToIgnore(int a2, bool a3) {
 
   result = sub_2FA28C0();
   if ( !(_BYTE)result )
+  {
     return result;
+  }
   result = sub_2FA2880(a2);
   if ( !(_BYTE)result )
+  {
     return result;
+  }
   result = a2;
   g_iDialogToIgnore = a2;
   if ( !a3 )
+  {
     g_iDialogToIgnore = -1;
+  }
   return result;
 }
 
@@ -671,7 +692,9 @@ void  IGuiEngine::SetDlgToIgnore(int a2, bool a3) {
 bool  IGuiEngine::SetTooltip(char const * Str) {
   
   if ( !sub_2FA28C0() || !Str )
+  {
     return 0;
+  }
   CToolTip::SetTooltipText(Str);
   return 1;
 }
@@ -682,7 +705,9 @@ bool  IGuiEngine::SetTooltip(char const * Str) {
 bool  IGuiEngine::SetTooltipExt(char const * Str) {
   
   if ( !sub_2FA28C0() || !Str )
+  {
     return 0;
+  }
   CToolTip::SetTooltipText(g_cToolTipExt, Str);
   return 1;
 }
@@ -695,14 +720,22 @@ bool  IGuiEngine::SetTooltipID(int a2, int a3, int a4, int a5) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   if ( a4 >= 0 )
+  {
     ControlPtr->tooltipLink = a4;
+  }
   if ( a5 >= 0 )
+  {
     ControlPtr->tooltipLinkExtra = a5;
+  }
   return 1;
 }
 
@@ -715,10 +748,14 @@ bool  IGuiEngine::DisableDialogControls(int a2) {
   int v3; // [esp+4h] [ebp-4h]
 
   if ( !(unsigned __int8)sub_2FA2880(a2) )
+  {
     return 0;
+  }
   v3 = sub_2FA2900(a2);
   if ( !v3 )
+  {
     return 0;
+  }
   result = 1;
   *(_WORD *)(v3 + 12) = 0;
   return result;
@@ -736,16 +773,22 @@ bool  IGuiEngine::SetText(int _iContainer, int _iControlId, char const * Str) {
   struct SGuiControl *ControlPtr; // [esp+14h] [ebp-4h]
 
   if ( !sub_2FA28C0() || !Str )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(_iContainer, _iControlId);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   Count = strlen(Str);
   if ( ControlPtr->controlType == 21 )
   {
     ControlPtr->textOffset = (DWORD)Str;
     if ( !Count )
+    {
       ControlPtr->textOffset = 0;
+    }
     HIBYTE(ControlPtr->unknownData[1]) = 1;
     g_bGuiIsDirty = 1;
     return 1;
@@ -753,8 +796,12 @@ bool  IGuiEngine::SetText(int _iContainer, int _iControlId, char const * Str) {
   else
   {
     if ( (ControlPtr->id & 0x80u) == 0 )
+    {
       goto LABEL_41;
-    for ( i = 0; i < 80; ++i )
+    }
+    for ( i = 0;
+          i < 80;
+          ++i )
     {
       if ( !g_bUsedTexts[i] )
       {
@@ -764,18 +811,20 @@ bool  IGuiEngine::SetText(int _iContainer, int _iControlId, char const * Str) {
       }
     }
     if ( (ControlPtr->id & 0x80u) != 0 )
+    {
       return 0;
+    }
     if ( Count )
     {
 LABEL_41:
-      if ( j___mbscmp(
-             (const unsigned __int8 *)Str,
-             (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id]) )
+      if ( j___mbscmp((const unsigned __int8 *)Str, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id]) )
       {
         if ( Count )
         {
           if ( Count >= 299 )
+          {
             Count = 299;
+          }
           j__strncpy((char *)&g_mbstrTextTable[75 * (char)ControlPtr->id], Str, Count);
           *((_BYTE *)&g_mbstrTextTable[75 * (char)ControlPtr->id] + Count) = 0;
           g_bGuiIsDirty = 1;
@@ -793,7 +842,9 @@ LABEL_41:
             LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
             id = (char)ControlPtr->id;
             if ( id >= 0x50 )
+            {
               report_rangecheckfailure();
+            }
             g_bUsedTexts[id] = 0;
             ControlPtr->id = -1;
           }
@@ -818,7 +869,9 @@ LABEL_41:
         LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
         v6 = (char)ControlPtr->id;
         if ( v6 >= 0x50 )
+        {
           report_rangecheckfailure();
+        }
         g_bUsedTexts[v6] = 0;
         ControlPtr->id = -1;
       }
@@ -836,16 +889,26 @@ bool  IGuiEngine::SetEditProperties(int a2, int a3, unsigned char a4, unsigned c
   struct SGuiControl *ControlPtr; // [esp+8h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   if ( ControlPtr->controlType != 5 && ControlPtr->controlType != 20 )
+  {
     return 0;
+  }
   if ( a4 >= 0x73u )
+  {
     v6 = 115;
+  }
   else
+  {
     v6 = a4;
+  }
   LOBYTE(ControlPtr->unknown) = v6;
   HIBYTE(ControlPtr->unknown) = a5;
   return 1;
@@ -859,10 +922,14 @@ bool  IGuiEngine::SetTypeAsButton(int a2, int a3) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   ControlPtr->controlType = 13;
   ControlPtr->width = 161;
   ControlPtr->height = 30;
@@ -884,10 +951,14 @@ bool  IGuiEngine::SetTypeAsText(int a2, int a3) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   ControlPtr->controlType = 21;
   return 1;
 }
@@ -900,10 +971,14 @@ bool  IGuiEngine::SetTypeAsRadio(int a2, int a3, int a4, int a5) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   ControlPtr->controlType = 3;
   ControlPtr->mainTexture = a4;
   ControlPtr->buttonPressedTexture = a5;
@@ -922,7 +997,9 @@ bool  IGuiEngine::SetRadioCheckPressedState(int a2, int a3, bool a4) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   return ControlPtr && SetControlState(ControlPtr, 1, a4);
 }
@@ -935,12 +1012,18 @@ char const *  IGuiEngine::GetText(int container, int valueLink) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(container, valueLink);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   if ( (ControlPtr->id & 0x80u) == 0 )          // id >= 0
+  {
     return (char *)&g_mbstrTextTable[75 * (char)ControlPtr->id];
+  }
   return 0;
 }
 
@@ -957,46 +1040,49 @@ int  IGuiEngine::GetWrapPosition(int a2, int a3) {
 
   v5 = this;
   if ( !sub_2FA28C0() )
+  {
     return -1;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return -1;
+  }
   if ( (ControlPtr->id & 0x80u) != 0 )
+  {
     return -1;
+  }
   if ( !LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) )
+  {
     return -1;
-  if ( !CalcTextSize(
-          ControlPtr->textStyle,
-          (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id],
-          &psizl,
-          0,
-          -1) )
+  }
+  if ( !CalcTextSize(ControlPtr->textStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id], &psizl, 0, -1) )
+  {
     return -1;
+  }
   if ( psizl.cx <= ControlPtr->width - 4 )
+  {
     return -1;
+  }
   v7 = 0;
-  CalcTextSize(
-    ControlPtr->textStyle,
-    (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id],
-    &psizl,
-    0,
-    0);
+  CalcTextSize(ControlPtr->textStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id], &psizl, 0, 0);
   v6 = 251;
   while ( psizl.cx <= ControlPtr->width - 4 )
   {
     if ( --v6 < 0 )
+    {
       break;
-    CalcTextSize(
-      ControlPtr->textStyle,
-      (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id],
-      &psizl,
-      0,
-      ++v7);
+    }
+    CalcTextSize(ControlPtr->textStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id], &psizl, 0, ++v7);
   }
   if ( v6 > 0 )
+  {
     return v7 - 1;
+  }
   else
+  {
     return -1;
+  }
 }
 
 
@@ -1007,14 +1093,22 @@ bool  IGuiEngine::SetFontTemplate(int a2, int a3, int a4) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   if ( a4 >= 19 )
+  {
     return 0;
+  }
   if ( ControlPtr->textStyle == a4 )
+  {
     return 1;
+  }
   ControlPtr->textStyle = a4;
   g_bGuiIsDirty = 1;
   HIBYTE(ControlPtr->unknownData[1]) = 1;
@@ -1030,12 +1124,18 @@ bool  IGuiEngine::EnableControl(int a2, int a3, bool a4) {
   bool v6; // [esp+Bh] [ebp-1h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   if ( !g_pfSetEnableStatus )
+  {
     return SetControlState(ControlPtr, 4, !a4);
+  }
   v6 = (unsigned __int8)g_pfSetEnableStatus(a2, ControlPtr->valueLink, ControlPtr->controlType, a4, 8) == 0;
   return SetControlState(ControlPtr, 4, v6);
 }
@@ -1048,12 +1148,18 @@ bool  IGuiEngine::SetControlVisibility(int a2, int a3, bool a4) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-8h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( ControlPtr )
+  {
     return SetControlState(ControlPtr, 8, a4 == 0);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -1064,12 +1170,18 @@ bool  IGuiEngine::SetImages(int a2, int a3, int a4, int a5) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   if ( ControlPtr->mainTexture == a4 && ControlPtr->buttonPressedTexture == a5 )
+  {
     return 1;
+  }
   ControlPtr->mainTexture = a4;
   ControlPtr->buttonPressedTexture = a5;
   g_bGuiIsDirty = 1;
@@ -1085,10 +1197,14 @@ bool  IGuiEngine::SetUserLogoImage(int a2, int a3, int a4) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   ControlPtr->mainTexture = a4;
   ControlPtr->showTexture = -10;
   g_bGuiIsDirty = 1;
@@ -1098,7 +1214,7 @@ bool  IGuiEngine::SetUserLogoImage(int a2, int a3, int a4) {
 
 
 // address=[0x2fa1f10]
-// Decompiled from char __thiscall IGuiEngine::LockOwnerImage(  IGuiEngine *this,  int a2,  int a3,  struct SGuiRect *a4,  unsigned __int16 **a5,  unsigned int *a6)
+// Decompiled from char __thiscall IGuiEngine::LockOwnerImage(IGuiEngine *this, int a2, int a3, struct SGuiRect *a4, unsigned __int16 **a5, unsigned int *a6)
 bool  IGuiEngine::LockOwnerImage(int a2, int a3, struct SGuiRect & a4, unsigned short * & a5, unsigned int & a6) {
   
   unsigned __int16 *v7; // [esp+4h] [ebp-2DCh]
@@ -1113,17 +1229,27 @@ bool  IGuiEngine::LockOwnerImage(int a2, int a3, struct SGuiRect & a4, unsigned 
   *((_DWORD *)a4 + 1) = 0;
   *((_DWORD *)a4 + 3) = 0;
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   if ( !(unsigned __int8)sub_2FA2880(a2) )
+  {
     return 0;
+  }
   v7 = (unsigned __int16 *)sub_2FA2900(a2);
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   if ( ControlPtr->controlType != 9 )
+  {
     return 0;
+  }
   if ( dword_3E2F134 >= 0 )
+  {
     return 0;
+  }
   (**(void (__thiscall ***)(int, int *, _DWORD))g_pGfxManager)(g_pGfxManager, &v9, v7[5]);
   if ( v9 && v10 )
   {
@@ -1131,18 +1257,7 @@ bool  IGuiEngine::LockOwnerImage(int a2, int a3, struct SGuiRect & a4, unsigned 
     if ( *a5 )
     {
       dword_3E2F134 = *v7;
-      FastBlit8Bit(
-        (void *)(v9 + 12),
-        v7[3],
-        ControlPtr->x,
-        ControlPtr->y,
-        ControlPtr->width,
-        ControlPtr->height,
-        *a5,
-        *a6,
-        ControlPtr->x,
-        ControlPtr->y,
-        v10);
+      FastBlit8Bit((void *)(v9 + 12), v7[3], ControlPtr->x, ControlPtr->y, ControlPtr->width, ControlPtr->height, *a5, *a6, ControlPtr->x, ControlPtr->y, v10);
       *a5 += (*a6 >> 1) * ControlPtr->y;
       *a5 += ControlPtr->x;
       return 1;
@@ -1168,17 +1283,27 @@ bool  IGuiEngine::UnlockOwnerImage(int a2, int a3) {
   struct SGuiControl *ControlPtr; // [esp+8h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   if ( !(unsigned __int8)sub_2FA2880(a2) )
+  {
     return 0;
+  }
   v4 = (unsigned __int16 *)sub_2FA2900(a2);
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   if ( ControlPtr->controlType != 9 )
+  {
     return 0;
+  }
   if ( dword_3E2F134 < 0 )
+  {
     return 0;
+  }
   dword_3E2F134 = -1;
   return IGfxEngine::EndWriteToSurface(g_pGfxEngine, *v4);
 }
@@ -1196,35 +1321,34 @@ bool  IGuiEngine::EraseOwnerImage(int a2, int a3) {
   void *v9; // [esp+18h] [ebp-2D0h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   if ( !(unsigned __int8)sub_2FA2880(a2) )
+  {
     return 0;
+  }
   v6 = (unsigned __int16 *)sub_2FA2900(a2);
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   if ( ControlPtr->controlType != 9 )
+  {
     return 0;
+  }
   if ( dword_3E2F134 >= 0 )
+  {
     return 0;
+  }
   (**(void (__thiscall ***)(int, int *, _DWORD))g_pGfxManager)(g_pGfxManager, &v8, v6[5]);
   if ( v8 && v9 )
   {
     v5 = IGfxEngine::BeginWriteToSurface((IGfxEngine *)g_pGfxEngine, *v6, &v4);
     if ( v5 )
     {
-      FastBlit8Bit(
-        (void *)(v8 + 12),
-        v6[3],
-        ControlPtr->x,
-        ControlPtr->y,
-        ControlPtr->width,
-        ControlPtr->height,
-        v5,
-        v4,
-        ControlPtr->x,
-        ControlPtr->y,
-        v9);
+      FastBlit8Bit((void *)(v8 + 12), v6[3], ControlPtr->x, ControlPtr->y, ControlPtr->width, ControlPtr->height, v5, v4, ControlPtr->x, ControlPtr->y, v9);
       return IGfxEngine::EndWriteToSurface((IGfxEngine *)g_pGfxEngine, *v6);
     }
     else
@@ -1248,44 +1372,48 @@ bool  IGuiEngine::SetSliderPosition(int a2, int a3, int a4) {
   struct SGuiControl *ControlPtr; // [esp+8h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   if ( a4 > 0x64 )
+  {
     return 0;
-  if ( ControlPtr->controlType == 8
-    && g_pCurrentDragControl
-    && *(unsigned __int8 *)(g_pCurrentDragControl + 28) == LOBYTE(ControlPtr->unknown4) )
+  }
+  if ( ControlPtr->controlType == 8 && g_pCurrentDragControl && *(unsigned __int8 *)(g_pCurrentDragControl + 28) == LOBYTE(ControlPtr->unknown4) )
   {
     return 0;
   }
   if ( (ControlPtr->effects & 1) != 0 )
+  {
     ControlPtr->effects &= ~1u;
-  if ( ControlPtr->controlType == 7
-    && g_pCurrentDragControl
-    && (struct SGuiControl *)g_pCurrentDragControl == ControlPtr )
+  }
+  if ( ControlPtr->controlType == 7 && g_pCurrentDragControl && (struct SGuiControl *)g_pCurrentDragControl == ControlPtr )
   {
     return 0;
   }
   if ( (char)ControlPtr->showTexture == a4 )
+  {
     return 1;
+  }
   ControlPtr->showTexture = a4;
   g_bGuiIsDirty = 1;
   HIBYTE(ControlPtr->unknownData[1]) = 1;
   if ( ControlPtr->controlType != 7 && ControlPtr->controlType != 8 )
+  {
     return 1;
+  }
   p_width = &ControlPtr[-1].width;
   if ( LOBYTE(ControlPtr[-1].unknown4) != 16 )
   {
     BBSupportTracePrintF(0, "GUI ENGINE: No previous control GUI_CNTRL_SLIDERAREA of GUI_CNTRL_SLIDER!");
     return 0;
   }
-  ControlPtr->x = CalcSliderPosition(
-                    *p_width,
-                    p_width[2] + *p_width - ControlPtr->width,
-                    (char)ControlPtr->showTexture,
-                    0);
+  ControlPtr->x = CalcSliderPosition(*p_width, p_width[2] + *p_width - ControlPtr->width, (char)ControlPtr->showTexture, 0);
   *((_BYTE *)p_width + 35) = 1;
   return 1;
 }
@@ -1298,12 +1426,18 @@ int  IGuiEngine::GetSliderPosition(int a2, int a3) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return -1;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return -1;
+  }
   if ( ControlPtr->controlType == 7 || ControlPtr->controlType == 8 )
+  {
     return (char)ControlPtr->showTexture;
+  }
   return -1;
 }
 
@@ -1317,12 +1451,18 @@ bool  IGuiEngine::SelectControl(int a2, int _iControlId, bool a4) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, _iControlId);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   if ( ((ControlPtr->effects & 1) == 0 || a4) && ((ControlPtr->effects & 1) != 0 || !a4) )
+  {
     return 1;
+  }
   if ( ControlPtr->controlType == 2 && a4 || ControlPtr->controlType == 3 )
   {
     SelectRadioGroup(ControlPtr);
@@ -1360,17 +1500,25 @@ bool  IGuiEngine::ResetRadioGroup(int _iContainer, int _iControlId) {
   int v8; // [esp+10h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(_iContainer, _iControlId);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   unknown4_low = LOBYTE(ControlPtr->unknown4);
   v5 = *(_DWORD *)(g_pFileHeader + 4 * ControlPtr->unknownId + 16) + g_pFileHeader;
   v8 = v5 + 16;
-  for ( i = 0; i < *(unsigned __int16 *)(v5 + 12); ++i )
+  for ( i = 0;
+        i < *(unsigned __int16 *)(v5 + 12);
+        ++i )
   {
     if ( (*(_BYTE *)(v8 + 27) & 1) != 0 && *(unsigned __int8 *)(v8 + 28) == unknown4_low )
+    {
       SetControlState((struct SGuiControl *)v8, 1, 0);
+    }
     v8 += 36;
   }
   return 1;
@@ -1384,10 +1532,14 @@ bool  IGuiEngine::SetWidth(int a2, int a3, int a4) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   ControlPtr->width = a4;
   return 1;
 }
@@ -1400,10 +1552,14 @@ bool  IGuiEngine::SetPosition(int a2, int a3, int a4, int a5) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
+  {
     return 0;
+  }
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
+  {
     return 0;
+  }
   ControlPtr->x = a4;
   ControlPtr->y = a5;
   return 1;
@@ -1427,34 +1583,50 @@ void  IGuiEngine::InitShadeTables(void) {
   v8 = 150;
   v6 = 4;
   v4 = 12;
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
   {
     g_uShadeTable1[i] = IGfxEngine::ConvertRgbToHicol(v8, v6, v4);
     v8 = (int)(float)((float)((float)((float)i * 0.079999998) + 1.0) * 150.0);
     v6 = (int)(float)((float)((float)((float)i * 0.079999998) + 1.0) * 4.0);
     v4 = (int)(float)((float)((float)((float)i * 0.079999998) + 1.0) * 12.0);
     if ( v8 > 255 )
+    {
       v8 = 255;
+    }
     if ( v6 > 255 )
+    {
       v6 = 255;
+    }
     if ( v4 > 255 )
+    {
       v4 = 255;
+    }
   }
   v9 = 10;
   v7 = 150;
   v5 = 3;
-  for ( j = 0; j < 16; ++j )
+  for ( j = 0;
+        j < 16;
+        ++j )
   {
     g_uShadeTable2[j] = IGfxEngine::ConvertRgbToHicol(v9, v7, v5);
     v9 = (int)(float)((float)((float)((float)j * 0.079999998) + 1.0) * 10.0);
     v7 = (int)(float)((float)((float)((float)j * 0.079999998) + 1.0) * 150.0);
     v5 = (int)(float)((float)((float)((float)j * 0.079999998) + 1.0) * 3.0);
     if ( v9 > 255 )
+    {
       v9 = 255;
+    }
     if ( v7 > 255 )
+    {
       v7 = 255;
+    }
     if ( v5 > 255 )
+    {
       v5 = 255;
+    }
   }
   g_iLeftShadeColor = IGfxEngine::ConvertRgbToHicol(199, 178, 111);
   g_iRightShadeColor = IGfxEngine::ConvertRgbToHicol(50, 41, 45);
@@ -1465,7 +1637,7 @@ void  IGuiEngine::InitShadeTables(void) {
 
 
 // address=[0x2fa0b80]
-// Decompiled from struct tagRECT *__cdecl IGuiEngine::GetDialogDestinationRect(  struct tagRECT *retstr,  const struct GUI_MENU_DIALOG_HEADER *a2,  int a3,  int a4,  float a5,  float a6)
+// Decompiled from struct tagRECT *__cdecl IGuiEngine::GetDialogDestinationRect(struct tagRECT *retstr, const struct GUI_MENU_DIALOG_HEADER *a2, int a3, int a4, float a5, float a6)
 struct tagRECT __cdecl IGuiEngine::GetDialogDestinationRect(struct GUI_MENU_DIALOG_HEADER const & retstr, int a2, int a3, float a4, float a5) {
   
   LONG v7; // [esp+4h] [ebp-10h]

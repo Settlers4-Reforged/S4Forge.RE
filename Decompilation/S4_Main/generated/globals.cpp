@@ -71,9 +71,13 @@ protected: void __thiscall TPriorityQueue<struct SSquadValue,51>::DownHeap(int a
   {
     v13 = 2 * v11;
     if ( 2 * v11 < v10 && SSquadValue::operator<(&v12[2 * v13 + 1], (int)&v12[2 * v13 + 3]) )
+    {
       ++v13;
+    }
     if ( !SSquadValue::operator<(&v8, (int)&v12[2 * v13 + 1]) )
+    {
       break;
+    }
     v3 = v12[2 * v13 + 2];
     v4 = v11;
     v5 = v12;
@@ -178,13 +182,21 @@ bool __cdecl Grid::InQuadrat(int grid, int a2, int a3) {
   int v5; // [esp+8h] [ebp-4h]
 
   if ( grid < a3 )
+  {
     v5 = -1;
+  }
   else
+  {
     v5 = 0;
+  }
   if ( a2 < a3 )
+  {
     v4 = -1;
+  }
   else
+  {
     v4 = 0;
+  }
   return (v4 & v5) != 0;
 }
 
@@ -222,7 +234,9 @@ public: __thiscall TAIStaticMemoryPool<48,512>::TAIStaticMemoryPool<48,512>(void
   *this = 0;
   *(_DWORD *)TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(0) = -1;
   *(_DWORD *)(TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(0) + 4) = 1;
-  for ( i = 1; i < 511; ++i )
+  for ( i = 1;
+        i < 511;
+        ++i )
   {
     *(_DWORD *)TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(i) = i - 1;
     *(_DWORD *)(TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(i) + 4) = i + 1;
@@ -234,7 +248,7 @@ public: __thiscall TAIStaticMemoryPool<48,512>::TAIStaticMemoryPool<48,512>(void
 
 
 // address=[0x1309f90]
-// Decompiled from _DWORD *__thiscall TAIStaticObjectMemoryPool<CAIEcoSectorAIEx,48,512>::TAIStaticObjectMemoryPool<CAIEcoSectorAIEx,48,512>(  _DWORD *this)
+// Decompiled from _DWORD *__thiscall TAIStaticObjectMemoryPool<CAIEcoSectorAIEx,48,512>::TAIStaticObjectMemoryPool<CAIEcoSectorAIEx,48,512>(_DWORD *this)
 public: __thiscall TAIStaticObjectMemoryPool<class CAIEcoSectorAIEx,48,512>::TAIStaticObjectMemoryPool<class CAIEcoSectorAIEx,48,512>(void) {
   
   TAIStaticMemoryPool<48,512>::TAIStaticMemoryPool<48,512>(this);
@@ -256,40 +270,30 @@ public: void * __thiscall TAIStaticMemoryPool<48,512>::AllocateMemory(unsigned i
   
   int v3; // [esp+0h] [ebp-8h]
 
-  if ( a2 > 0x30
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         53,
-         "_uSize <= ENTRY_SIZE") == 1 )
+  if ( a2 > 0x30 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 53, "_uSize <= ENTRY_SIZE") == 1 )
   {
     __debugbreak();
   }
   v3 = *this;
   if ( (int)*this < 0 )
   {
-    if ( BBSupportDbgReport(
-           1,
-           "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-           72,
-           "TAIStaticMemoryPool::AllocateMemory(): Out of pool memory!") == 1 )
+    if ( BBSupportDbgReport(1, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 72, "TAIStaticMemoryPool::AllocateMemory(): Out of pool memory!") == 1 )
+    {
       __debugbreak();
+    }
     return 0;
   }
   else
   {
-    if ( *(_DWORD *)TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(v3) != -1
-      && BBSupportDbgReport(
-           2,
-           "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-           59,
-           "PoolFreeEntryPtr(iEntryIdx)->m_iPrevFreeEntryIdx == -1") == 1 )
+    if ( *(_DWORD *)TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(v3) != -1 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 59, "PoolFreeEntryPtr(iEntryIdx)->m_iPrevFreeEntryIdx == -1") == 1 )
     {
       __debugbreak();
     }
     *this = *(_DWORD *)(TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(v3) + 4);
     if ( (int)*this >= 0 )
+    {
       *(_DWORD *)TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(*this) = -1;
+    }
     return (int)&this[12 * v3 + 1];
   }
 }
@@ -302,7 +306,9 @@ public: void __thiscall TAIStaticObjectMemoryPool<class CAIEcoSectorAIEx,48,512>
   int result; // eax
 
   if ( !a1 )
+  {
     return result;
+  }
   delete a1;
   return TAIStaticMemoryPool<48,512>::FreeMemory(a1);
 }
@@ -317,12 +323,7 @@ public: void __thiscall TAIStaticMemoryPool<48,512>::FreeMemory(void * a2) {
   if ( a2 )
   {
     v2 = (a2 - (int)(this + 1)) / 48;
-    if ( a2 != TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(v2)
-      && BBSupportDbgReport(
-           2,
-           "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-           84,
-           "_pMemory == PoolFreeEntryPtr(iEntryIdx)") == 1 )
+    if ( a2 != TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(v2) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 84, "_pMemory == PoolFreeEntryPtr(iEntryIdx)") == 1 )
     {
       __debugbreak();
     }
@@ -330,12 +331,7 @@ public: void __thiscall TAIStaticMemoryPool<48,512>::FreeMemory(void * a2) {
     *(_DWORD *)(TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(v2) + 4) = *this;
     if ( *this >= 0 )
     {
-      if ( *(_DWORD *)TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(*this) != -1
-        && BBSupportDbgReport(
-             2,
-             "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-             91,
-             "PoolFreeEntryPtr(m_iFirstFreeEntryIdx)->m_iPrevFreeEntryIdx == -1") == 1 )
+      if ( *(_DWORD *)TAIStaticMemoryPool<48,512>::PoolFreeEntryPtr(*this) != -1 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 91, "PoolFreeEntryPtr(m_iFirstFreeEntryIdx)->m_iPrevFreeEntryIdx == -1") == 1 )
       {
         __debugbreak();
       }
@@ -382,11 +378,17 @@ int __cdecl Grid::DistanceInline(int a2, int a2) {
   Number = j__abs(this);
   v7 = j__abs(a2);
   if ( v3 < 0 )
+  {
     return v7 + Number;
+  }
   if ( Number >= v7 )
+  {
     return Number;
+  }
   else
+  {
     return v7;
+  }
 }
 
 
@@ -427,7 +429,9 @@ public: __thiscall TAIStaticMemoryPool<692,9>::TAIStaticMemoryPool<692,9>(void) 
   *this = 0;
   *(_DWORD *)TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(0) = -1;
   *(_DWORD *)(TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(0) + 4) = 1;
-  for ( i = 1; i < 8; ++i )
+  for ( i = 1;
+        i < 8;
+        ++i )
   {
     *(_DWORD *)TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(i) = i - 1;
     *(_DWORD *)(TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(i) + 4) = i + 1;
@@ -439,7 +443,7 @@ public: __thiscall TAIStaticMemoryPool<692,9>::TAIStaticMemoryPool<692,9>(void) 
 
 
 // address=[0x13190e0]
-// Decompiled from _DWORD *__thiscall TAIStaticObjectMemoryPool<CAIPlayerAI,692,9>::TAIStaticObjectMemoryPool<CAIPlayerAI,692,9>(  _DWORD *this)
+// Decompiled from _DWORD *__thiscall TAIStaticObjectMemoryPool<CAIPlayerAI,692,9>::TAIStaticObjectMemoryPool<CAIPlayerAI,692,9>(_DWORD *this)
 public: __thiscall TAIStaticObjectMemoryPool<class CAIPlayerAI,692,9>::TAIStaticObjectMemoryPool<class CAIPlayerAI,692,9>(void) {
   
   TAIStaticMemoryPool<692,9>::TAIStaticMemoryPool<692,9>(this);
@@ -458,7 +462,7 @@ public: __thiscall TAIStaticPtrVector<class CAISectorAI,8>::TAIStaticPtrVector<c
 
 
 // address=[0x1319140]
-// Decompiled from std::_Basic_container_proxy_ptr12 *__thiscall TStaticArray<int,8>::TStaticArray<int,8>(  std::_Basic_container_proxy_ptr12 *this)
+// Decompiled from std::_Basic_container_proxy_ptr12 *__thiscall TStaticArray<int,8>::TStaticArray<int,8>(std::_Basic_container_proxy_ptr12 *this)
 public: __thiscall TStaticArray<int,8>::TStaticArray<int,8>(void) {
   
   TStaticArray<int,8>::Init(this);
@@ -488,40 +492,30 @@ public: void * __thiscall TAIStaticMemoryPool<692,9>::AllocateMemory(unsigned in
   
   int v3; // [esp+0h] [ebp-8h]
 
-  if ( a2 > 0x2B4
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         53,
-         "_uSize <= ENTRY_SIZE") == 1 )
+  if ( a2 > 0x2B4 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 53, "_uSize <= ENTRY_SIZE") == 1 )
   {
     __debugbreak();
   }
   v3 = *this;
   if ( (int)*this < 0 )
   {
-    if ( BBSupportDbgReport(
-           1,
-           "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-           72,
-           "TAIStaticMemoryPool::AllocateMemory(): Out of pool memory!") == 1 )
+    if ( BBSupportDbgReport(1, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 72, "TAIStaticMemoryPool::AllocateMemory(): Out of pool memory!") == 1 )
+    {
       __debugbreak();
+    }
     return 0;
   }
   else
   {
-    if ( *(_DWORD *)TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(v3) != -1
-      && BBSupportDbgReport(
-           2,
-           "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-           59,
-           "PoolFreeEntryPtr(iEntryIdx)->m_iPrevFreeEntryIdx == -1") == 1 )
+    if ( *(_DWORD *)TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(v3) != -1 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 59, "PoolFreeEntryPtr(iEntryIdx)->m_iPrevFreeEntryIdx == -1") == 1 )
     {
       __debugbreak();
     }
     *this = *(_DWORD *)(TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(v3) + 4);
     if ( (int)*this >= 0 )
+    {
       *(_DWORD *)TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(*this) = -1;
+    }
     return (int)&this[173 * v3 + 1];
   }
 }
@@ -534,7 +528,9 @@ public: void __thiscall TAIStaticObjectMemoryPool<class CAIPlayerAI,692,9>::Dele
   int result; // eax
 
   if ( !a1 )
+  {
     return result;
+  }
   delete a1;
   return TAIStaticMemoryPool<692,9>::FreeMemory(a1);
 }
@@ -549,12 +545,7 @@ public: void __thiscall TAIStaticMemoryPool<692,9>::FreeMemory(void * a2) {
   if ( a2 )
   {
     v2 = (a2 - (int)(this + 1)) / 692;
-    if ( a2 != TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(v2)
-      && BBSupportDbgReport(
-           2,
-           "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-           84,
-           "_pMemory == PoolFreeEntryPtr(iEntryIdx)") == 1 )
+    if ( a2 != TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(v2) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 84, "_pMemory == PoolFreeEntryPtr(iEntryIdx)") == 1 )
     {
       __debugbreak();
     }
@@ -562,12 +553,7 @@ public: void __thiscall TAIStaticMemoryPool<692,9>::FreeMemory(void * a2) {
     *(_DWORD *)(TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(v2) + 4) = *this;
     if ( *this >= 0 )
     {
-      if ( *(_DWORD *)TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(*this) != -1
-        && BBSupportDbgReport(
-             2,
-             "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-             91,
-             "PoolFreeEntryPtr(m_iFirstFreeEntryIdx)->m_iPrevFreeEntryIdx == -1") == 1 )
+      if ( *(_DWORD *)TAIStaticMemoryPool<692,9>::PoolFreeEntryPtr(*this) != -1 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 91, "PoolFreeEntryPtr(m_iFirstFreeEntryIdx)->m_iPrevFreeEntryIdx == -1") == 1 )
       {
         __debugbreak();
       }
@@ -600,30 +586,15 @@ public: void __thiscall TAIStaticPtrVector<class CAISectorAI,8>::PushBack(class 
   
   int result; // eax
 
-  if ( !a2
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         216,
-         "_pEntry != 0") == 1 )
+  if ( !a2 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 216, "_pEntry != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *this >= 8
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         217,
-         "m_iSize < iMaxSize") == 1 )
+  if ( *this >= 8 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 217, "m_iSize < iMaxSize") == 1 )
   {
     __debugbreak();
   }
-  if ( this[*this + 1]
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         218,
-         "m_pEntries[m_iSize] == 0") == 1 )
+  if ( this[*this + 1] && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 218, "m_pEntries[m_iSize] == 0") == 1 )
   {
     __debugbreak();
   }
@@ -640,12 +611,7 @@ public: void __thiscall TStaticArray<int,8>::PushBack(int const & a2) {
   
   int *result; // eax
 
-  if ( *this >= 8
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h",
-         154,
-         "m_iSize < MAX_SIZE") == 1 )
+  if ( *this >= 8 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h", 154, "m_iSize < MAX_SIZE") == 1 )
   {
     __debugbreak();
   }
@@ -663,14 +629,11 @@ public: void __thiscall TAIStaticPtrVector<class CAISectorAI,8>::ReleaseAll(void
   _DWORD *result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *this; ++i )
+  for ( i = 0;
+        i < *this;
+        ++i )
   {
-    if ( !this[i + 1]
-      && BBSupportDbgReport(
-           2,
-           "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-           246,
-           "m_pEntries[i] != 0") == 1 )
+    if ( !this[i + 1] && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 246, "m_pEntries[i] != 0") == 1 )
     {
       __debugbreak();
     }
@@ -689,10 +652,14 @@ public: bool __thiscall TStaticArray<int,8>::SearchBackwards(int const & a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = *this - 1; i >= 0; --i )
+  for ( i = *this - 1;
+        i >= 0;
+        --i )
   {
     if ( this[i + 1] == *a2 )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -729,8 +696,12 @@ void __cdecl InitResourceGroundInfoMap(void) {
   int result; // eax
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
+  {
     dword_3EC2D28[i] = 7;
+  }
   dword_3EC2D28[1] = 1;
   dword_3EC2D28[4] = 2;
   dword_3EC2D28[9] = 3;
@@ -756,13 +727,21 @@ bool __cdecl Squares::ValidVW(int a1, int a2) {
   int v4; // [esp+8h] [ebp-4h]
 
   if ( (unsigned int)a1 < 0x40 )
+  {
     v4 = -1;
+  }
   else
+  {
     v4 = 0;
+  }
   if ( (unsigned int)a2 < 0x40 )
+  {
     v3 = -1;
+  }
   else
+  {
     v3 = 0;
+  }
   return (v3 & v4) != 0;
 }
 
@@ -776,7 +755,7 @@ void __cdecl AILuaGlobalFuncDebugTest(void) {
 
 
 // address=[0x131e5d0]
-// Decompiled from _DWORD *__thiscall TStaticConfigIntArray<3>::TStaticConfigIntArray<3>(  _DWORD *this,  int a2,  int a3,  int a4,  int a5,  int a6)
+// Decompiled from _DWORD *__thiscall TStaticConfigIntArray<3>::TStaticConfigIntArray<3>(_DWORD *this, int a2, int a3, int a4, int a5, int a6)
 public: __thiscall TStaticConfigIntArray<3>::TStaticConfigIntArray<3>(char const * a2, char const * a3, int a4, int a5, int a6) {
   
   TStaticConfigIntArrayBase<3>::TStaticConfigIntArrayBase<3>(a2, a3);
@@ -870,30 +849,15 @@ public: void __thiscall TAIStaticPtrVector<class CAIEcoSectorAIEx,512>::PushBack
   
   int result; // eax
 
-  if ( !a2
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         216,
-         "_pEntry != 0") == 1 )
+  if ( !a2 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 216, "_pEntry != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *this >= 512
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         217,
-         "m_iSize < iMaxSize") == 1 )
+  if ( *this >= 512 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 217, "m_iSize < iMaxSize") == 1 )
   {
     __debugbreak();
   }
-  if ( this[*this + 1]
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         218,
-         "m_pEntries[m_iSize] == 0") == 1 )
+  if ( this[*this + 1] && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 218, "m_pEntries[m_iSize] == 0") == 1 )
   {
     __debugbreak();
   }
@@ -910,45 +874,27 @@ public: void __thiscall TAIStaticPtrVector<class CAIEcoSectorAIEx,512>::Release(
   
   int result; // eax
 
-  if ( a2 < 0
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         225,
-         "_iIdx >= 0") == 1 )
+  if ( a2 < 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 225, "_iIdx >= 0") == 1 )
   {
     __debugbreak();
   }
-  if ( a2 >= *this
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         226,
-         "_iIdx < m_iSize") == 1 )
+  if ( a2 >= *this && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 226, "_iIdx < m_iSize") == 1 )
   {
     __debugbreak();
   }
-  if ( *this <= 0
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         227,
-         "m_iSize > 0") == 1 )
+  if ( *this <= 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 227, "m_iSize > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !this[a2 + 1]
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-         228,
-         "m_pEntries[_iIdx] != 0") == 1 )
+  if ( !this[a2 + 1] && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 228, "m_pEntries[_iIdx] != 0") == 1 )
   {
     __debugbreak();
   }
   (**(void (__thiscall ***)(int))this[a2 + 1])(this[a2 + 1]);
   if ( a2 < --*this )
+  {
     this[a2 + 1] = this[*this + 1];
+  }
   result = *this;
   this[*this + 1] = 0;
   return result;
@@ -962,14 +908,11 @@ public: void __thiscall TAIStaticPtrVector<class CAIEcoSectorAIEx,512>::ReleaseA
   _DWORD *result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *this; ++i )
+  for ( i = 0;
+        i < *this;
+        ++i )
   {
-    if ( !this[i + 1]
-      && BBSupportDbgReport(
-           2,
-           "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h",
-           246,
-           "m_pEntries[i] != 0") == 1 )
+    if ( !this[i + 1] && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Templates.h", 246, "m_pEntries[i] != 0") == 1 )
     {
       __debugbreak();
     }
@@ -1091,9 +1034,13 @@ char * __cdecl _tcsstr(char * Str, char const * Substr) {
 int __cdecl GetAvailableSection(void) {
   
   if ( ++dword_3ECD9CC < 255 )
+  {
     return dword_3ECD9CC;
+  }
   else
+  {
     return -1;
+  }
 }
 
 
@@ -1235,13 +1182,19 @@ void __cdecl Bugreport::LaunchAutoreport(bool a1, std::wstring const & a2) {
   StartupInfo.cb = 68;
   memset(&ProcessInformation, 0, sizeof(ProcessInformation));
   if ( (unsigned int)std::wstring::size(a2) >= 0x104 )
+  {
     j___wassert(L"commandLineArgs.size() < MAX_PATH", L"Bugreport.cpp", 0x41u);
+  }
   v2 = std::wstring::c_str(a2);
   snwprintf((char *const)CommandLine, 0x104u, L"%s", v2);
   if ( CreateProcessW(L"Exe\\Autoreport.exe", CommandLine, 0, 0, 0, 0, 0, 0, &StartupInfo, &ProcessInformation) )
   {
-    for ( ExitCode = 259; ExitCode == 259; GetExitCodeProcess(ProcessInformation.hProcess, &ExitCode) )
+    for ( ExitCode = 259;
+          ExitCode == 259;
+          GetExitCodeProcess(ProcessInformation.hProcess, &ExitCode) )
+    {
       ;
+    }
   }
   else if ( a1 )
   {
@@ -1267,7 +1220,9 @@ void __cdecl S4DebugTest(void) {
   {
     g_bDbgIsValidHeapPointer = j___CrtIsValidHeapPointer(g_pDbgValidHeapPointer) != 0;
     if ( !g_bDbgIsValidHeapPointer && BBSupportDbgReport(2, "DebugFkt.cpp", 873, "g_bDbgIsValidHeapPointer") == 1 )
+    {
       __debugbreak();
+    }
   }
 }
 
@@ -1326,10 +1281,14 @@ void __cdecl SaveWindowsPositionAndSize(struct HWND__ * hwnd) {
   v6 = (pwi.dwStyle & 0x40000) == 0;
   result = CGameSettings::SetGfxFullscreenEnabled(v6);
   if ( v4 < 800 || v5 < 600 )
+  {
     return result;
+  }
   result = v6;
   if ( !v6 )
+  {
     return CGameSettings::SetWindowsDimensions(left, top, v4, v5);
+  }
   return result;
 }
 
@@ -1373,11 +1332,17 @@ long __stdcall WndMsgProc(struct HWND__ * hWnd, unsigned int Msg, unsigned int w
     Msg = 118;
 LABEL_78:
     if ( !g_pEvnEngine )
+    {
       return 0;
+    }
     if ( IEventEngine::IsEventEngineLocked(g_pEvnEngine) )
+    {
       return 0;
+    }
     if ( IEventEngine::SendRawWindowEvent(g_pEvnEngine, hWnd, Msg, wParam, lParam) )
+    {
       return 0;
+    }
     return DefWindowProcA(hWnd, v5, v6, v7);
   }
   if ( Msg <= WM_MOUSEMOVE )
@@ -1396,49 +1361,81 @@ LABEL_78:
           Msg = 11;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam = 16;
+          }
           if ( (GetKeyState(KEYMODIFIER_CONTROL|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam |= 8u;
+          }
           if ( (GetAsyncKeyState(KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam |= 4u;
+          }
           if ( lParam == 24 )
+          {
             lParam = 16;
+          }
           goto LABEL_78;
         case 0x101u:
           Msg = 20;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam = 16;
+          }
           if ( (GetKeyState(KEYMODIFIER_CONTROL|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam |= 8u;
+          }
           if ( (GetKeyState(KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam |= 4u;
+          }
           if ( lParam == 24 )
+          {
             lParam = 16;
+          }
           goto LABEL_78;
         case 0x102u:
           Msg = 13;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam = 16;
+          }
           if ( (GetKeyState(KEYMODIFIER_CONTROL|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam |= 8u;
+          }
           if ( (GetKeyState(KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam |= 4u;
+          }
           if ( lParam == 24 )
+          {
             lParam = 16;
+          }
           goto LABEL_78;
         case 0x104u:
           Msg = 12;
           lParam = 0;
           if ( (GetKeyState(KEYMODIFIER_MENU|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam = 16;
+          }
           if ( (GetKeyState(KEYMODIFIER_CONTROL|KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam |= 8u;
+          }
           if ( (GetAsyncKeyState(KEYMODIFIER_ALTGR) & 0x8000000) != 0 )
+          {
             lParam |= 4u;
+          }
           if ( lParam == 24 )
+          {
             lParam = 16;
+          }
           goto LABEL_78;
         case 0x111u:
           Msg = 0;
@@ -1456,30 +1453,40 @@ LABEL_78:
       Msg = 7;
       wParam &= ~0x10u;
       if ( (GetKeyState(18) & 0x8000000) != 0 )
+      {
         wParam |= 0x10u;
+      }
       goto LABEL_78;
     case WM_LBUTTONUP:
       Msg = 8;
       wParam &= ~0x10u;
       if ( (GetKeyState(18) & 0x8000000) != 0 )
+      {
         wParam |= 0x10u;
+      }
       goto LABEL_78;
     case WM_RBUTTONDOWN:
       Msg = 9;
       wParam &= ~0x10u;
       if ( (GetKeyState(18) & 0x8000000) != 0 )
+      {
         wParam |= 0x10u;
+      }
       goto LABEL_78;
     case WM_RBUTTONUP:
       Msg = 0xA;
       wParam &= ~0x10u;
       if ( (GetKeyState(18) & 0x8000000) != 0 )
+      {
         wParam |= 0x10u;
+      }
       goto LABEL_78;
     case WM_MOUSEWHEEL:
       Msg = 14;
       if ( (GetKeyState(18) & 0x8000000) != 0 )
+      {
         wParam |= 0x10u;
+      }
       goto LABEL_78;
     case WM_SIZING:                             // lParam is from here a RECT*
                                                 // This here seems to force the window to be at least 800x600 in size
@@ -1544,9 +1551,13 @@ unsigned short __cdecl RegisterWindowClass(struct HINSTANCE__ * hInstance) {
   WNDCLASSEXA v2; // [esp+0h] [ebp-30h] BYREF
 
   if ( !g_pEvnEngine && BBSupportDbgReport(2, "FrameWork.cpp", 300, "g_pEvnEngine != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !g_pEvnEngine )
+  {
     return -1;
+  }
   v2.cbSize = 48;
   v2.style = 3;
   v2.lpfnWndProc = IEventEngine::GetEventFunction(g_pEvnEngine);
@@ -1588,13 +1599,13 @@ bool __cdecl ExistsExtractCommand(void) {
   v16 = v3;
   v3[4] = 128;
   if ( !g_iArgc )
+  {
     return 0;
+  }
   memset(Src, 0, sizeof(Src));
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
   v17 = 0;
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-    (int)&v14,
-    *g_pArgv);
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)&v14, *g_pArgv);
   LOBYTE(v17) = 1;
   v1 = std::wstring::c_str(&v14);
   wcsncpy(Src, v1, 0x7Fu);
@@ -1605,7 +1616,9 @@ bool __cdecl ExistsExtractCommand(void) {
     memcpy(Src, &Src[9], v2 - 9);
     v6 = 2 * wcslen(Src) - 20;
     if ( v6 >= 0x100 )
+    {
       report_rangecheckfailure();
+    }
     *(wchar_t *)((char *)Src + v6) = 0;
     v11 = 1;
     ElementCount = 0;
@@ -1699,7 +1712,9 @@ void __cdecl WriteIniFile(void) {
     Str[v5] = v8[2 * v4];
     v3 = Str[v5++];
     if ( v3 == 92 )
+    {
       Str[v5++] = v8[2 * v4];
+    }
     ++v4;
   }
   v0 = strlen(Str);
@@ -1733,7 +1748,9 @@ void __cdecl ShowFingerprint(void) {
   {
     v1 = BBSupportDbgReport(2, "FrameWork.cpp", 770, "iSize < MAX_FINGERPRINT_LENGTH");
     if ( v1 == 1 )
+    {
       __debugbreak();
+    }
   }
   memset(Text, 0, sizeof(Text));
   CFile::Read(sVersionFile, Text, iSize, 1u, UNUSED_ARG(), UNUSED_ARG());
@@ -1752,7 +1769,9 @@ void __cdecl ErrorMessageBox(char const * lpText) {
 
   hWnd = GetActiveWindow();
   if ( hWnd )
+  {
     hWnd = GetLastActivePopup(hWnd);
+  }
   return MessageBoxA(hWnd, lpText, "S4", 0x52010u);
 }
 
@@ -1819,10 +1838,14 @@ unsigned long __cdecl GetSystemLanguage(void) {
   sAvailableLanguages[25].m_iId = 17;
   GetLocaleInfoA(0x800u, 3u, LCData, 1024);
   LCData[2] = 0;
-  for ( i = 0; i < 26; ++i )
+  for ( i = 0;
+        i < 26;
+        ++i )
   {
     if ( !j__strcmp(sAvailableLanguages[i].m_spName, LCData) )
+    {
       return sAvailableLanguages[i].m_iId;
+    }
   }
   return 0;
 }
@@ -1872,9 +1895,7 @@ std::wstring __cdecl MapFilePaths::GetMapDirectoryPath(int a1) {
 
   va_start(va, a1);
   v7 = 0;
-  std::_Tree<std::_Tmap_traits<int,std::wstring,std::less<int>,std::allocator<std::pair<int const,std::wstring>>,0>>::find(
-    v4,
-    va);
+  std::_Tree<std::_Tmap_traits<int,std::wstring,std::less<int>,std::allocator<std::pair<int const,std::wstring>>,0>>::find(v4, va);
   v9 = 0;
   v6 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::wstring,std::less<int>,std::allocator<std::pair<int const,std::wstring>>,0>>::end(v3);
   v5 = v6;
@@ -1961,22 +1982,7 @@ std::wstring __cdecl MapFilePaths::GetFilePathForMapName(std::wstring const & a1
   v20 = std::_Tree<std::_Tmap_traits<int,std::wstring,std::less<int>,std::allocator<std::pair<int const,std::wstring>>,0>>::end(&v6);
   v19 = &v3;
   v18 = std::_Tree<std::_Tmap_traits<int,std::wstring,std::less<int>,std::allocator<std::pair<int const,std::wstring>>,0>>::begin(&v3);
-  v17 = std::accumulate<std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::wstring>>>>,std::wstring,_lambda_262b56d0dc28872bffad289ee61dbafa_>(
-          a1,
-          v3,
-          v4,
-          v5,
-          v6,
-          v7,
-          v8,
-          v9,
-          v10,
-          v11,
-          v12,
-          v13,
-          v14,
-          v15,
-          v16);
+  v17 = std::accumulate<std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::wstring>>>>,std::wstring,_lambda_262b56d0dc28872bffad289ee61dbafa_>(a1, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16);
   v26 |= 1u;
   v29 = -1;
   std::wstring::~wstring(v28);
@@ -1996,7 +2002,9 @@ void __cdecl UpdateGuiDlgAddSoldierBar(void) {
   CHAR Destination; // [esp+28h] [ebp-38h] BYREF
   char v7; // [esp+29h] [ebp-37h]
 
-  for ( i = 0; i < 3; ++i )
+  for ( i = 0;
+        i < 3;
+        ++i )
   {
     if ( g_cAddSoldierSideBarInfo.m_cLvl1SoldierCount[i] <= 0 || g_cAddSoldierSideBarInfo.m_cLvl1SoldierCount[i] >= 100 )
     {
@@ -2042,8 +2050,7 @@ void __cdecl UpdateGuiDlgAddSoldierBar(void) {
     }
     IGuiEngine::SetText(g_pGUIEngine, 48, dword_3689FDC[2 * i], &Destination);
     IGuiEngine::SetControlVisibility(g_pGUIEngine, 48, dword_3689FDC[2 * i], v3);
-    if ( (char)g_cAddSoldierSideBarInfo.m_cLvl3SoldierCount[i] <= 0
-      || (char)g_cAddSoldierSideBarInfo.m_cLvl3SoldierCount[i] >= 100 )
+    if ( (char)g_cAddSoldierSideBarInfo.m_cLvl3SoldierCount[i] <= 0 || (char)g_cAddSoldierSideBarInfo.m_cLvl3SoldierCount[i] >= 100 )
     {
       if ( (char)g_cAddSoldierSideBarInfo.m_cLvl3SoldierCount[i] <= 0 )
       {
@@ -2066,8 +2073,7 @@ void __cdecl UpdateGuiDlgAddSoldierBar(void) {
     IGuiEngine::SetText(g_pGUIEngine, 48, dword_3689FF4[2 * i], &Destination);
     IGuiEngine::SetControlVisibility(g_pGUIEngine, 48, dword_3689FF4[2 * i], v4);
   }
-  if ( (char)g_cAddSoldierSideBarInfo.m_cSpecialSoldierCount <= 0
-    || (char)g_cAddSoldierSideBarInfo.m_cSpecialSoldierCount >= 100 )
+  if ( (char)g_cAddSoldierSideBarInfo.m_cSpecialSoldierCount <= 0 || (char)g_cAddSoldierSideBarInfo.m_cSpecialSoldierCount >= 100 )
   {
     if ( (char)g_cAddSoldierSideBarInfo.m_cSpecialSoldierCount <= 0 )
     {
@@ -2125,7 +2131,9 @@ bool __cdecl GuiDlgAddSoldierBarProc(int a1, int a2, int a3) {
   int v28; // [esp+114h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -2135,9 +2143,13 @@ bool __cdecl GuiDlgAddSoldierBarProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -2322,15 +2334,21 @@ void __cdecl UpdateGuiDlgAddStorageBar(void) {
   int i; // [esp+4h] [ebp-4h]
 
   byte_3ECDE44 = 1;
-  for ( i = 0; i < 43; ++i )
+  for ( i = 0;
+        i < 43;
+        ++i )
   {
     v1 = dword_3ECDD98[byte_3F1F060[2 * i]];
     if ( v1 >= 0 )
     {
       if ( byte_3F1F061[2 * i] == 1 )
+      {
         IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 50, v1, 1);
+      }
       else
+      {
         IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 50, v1, 0);
+      }
     }
     result = i + 1;
   }
@@ -2346,7 +2364,9 @@ void __cdecl InitGuiDlgAddStorageBar(void) {
   int result; // eax
 
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   dword_3ECDD98[22] = 189;
   dword_3ECDD98[7] = 190;
   dword_3ECDD98[32] = 191;
@@ -2565,7 +2585,9 @@ bool __cdecl GuiDlgAddStorageBarProc(int a1, int a2, int a3) {
   int v113; // [esp+68Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -2577,9 +2599,13 @@ bool __cdecl GuiDlgAddStorageBarProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( S4LoWord(a2) )
@@ -3132,7 +3158,9 @@ bool __cdecl GuiDlgAddToolBarProc(int a1, int a2, int a3) {
   int v18; // [esp+108h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -3142,9 +3170,13 @@ bool __cdecl GuiDlgAddToolBarProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -3217,45 +3249,73 @@ bool __cdecl GuiDlgAddToolBarProc(int a1, int a2, int a3) {
           return 1;
         case 227:
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3ECDE70 = 4;
+          }
           else
+          {
             dword_3ECDE70 = 0;
+          }
           goto LABEL_36;
         case 228:
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3ECDE70 = 18;
+          }
           else
+          {
             dword_3ECDE70 = 0;
+          }
           goto LABEL_36;
         case 229:
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3ECDE70 = 25;
+          }
           else
+          {
             dword_3ECDE70 = 0;
+          }
           goto LABEL_36;
         case 230:
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3ECDE70 = 27;
+          }
           else
+          {
             dword_3ECDE70 = 0;
+          }
           goto LABEL_36;
         case 231:
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3ECDE70 = 29;
+          }
           else
+          {
             dword_3ECDE70 = 0;
+          }
           goto LABEL_36;
         case 232:
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3ECDE70 = 31;
+          }
           else
+          {
             dword_3ECDE70 = 0;
+          }
           goto LABEL_36;
         case 233:
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3ECDE70 = 28;
+          }
           else
+          {
             dword_3ECDE70 = 0;
+          }
 LABEL_36:
           PlayGuiSound(2);
           break;
@@ -3360,7 +3420,9 @@ void __cdecl UpdateGuiDlgAddVehicleBar(void result) {
   {
     if ( byte_3ECDE78 )
     {
-      for ( i = 0; i < 3; ++i )
+      for ( i = 0;
+            i < 3;
+            ++i )
       {
         vehicleType = g_cVehicleSideBarInfo.m_aVehicleInfos[i].vehicleType;
         switch ( vehicleType )
@@ -3383,7 +3445,9 @@ void __cdecl UpdateGuiDlgAddVehicleBar(void result) {
     else
     {
       dword_3ECDE7C[1] = 0;
-      for ( j = 0; j < 3; ++j )
+      for ( j = 0;
+            j < 3;
+            ++j )
       {
         v1 = g_cVehicleSideBarInfo.m_aVehicleInfos[j].vehicleType;
         if ( v1 == 4 )
@@ -3430,7 +3494,9 @@ bool __cdecl GuiDlgAddVehicleBarProc(int a1, int a2, int a3) {
   int v21; // [esp+110h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -3463,9 +3529,13 @@ bool __cdecl GuiDlgAddVehicleBarProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1u);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -3540,9 +3610,13 @@ bool __cdecl GuiDlgAddVehicleBarProc(int a1, int a2, int a3) {
           if ( (a2 & 0x10000) != 0 )
           {
             if ( byte_3ECDE78 )
+            {
               dword_3ECDE74 = 1;
+            }
             else
+            {
               dword_3ECDE74 = 4;
+            }
           }
           else
           {
@@ -3553,9 +3627,13 @@ bool __cdecl GuiDlgAddVehicleBarProc(int a1, int a2, int a3) {
           if ( (a2 & 0x10000) != 0 )
           {
             if ( byte_3ECDE78 )
+            {
               dword_3ECDE74 = 3;
+            }
             else
+            {
               dword_3ECDE74 = 5;
+            }
           }
           else
           {
@@ -3566,9 +3644,13 @@ bool __cdecl GuiDlgAddVehicleBarProc(int a1, int a2, int a3) {
           if ( (a2 & 0x10000) != 0 )
           {
             if ( byte_3ECDE78 )
+            {
               dword_3ECDE74 = 2;
+            }
             else
+            {
               dword_3ECDE74 = 0;
+            }
           }
           else
           {
@@ -3644,7 +3726,9 @@ void __cdecl InitGuiDlgAOBriefing(void) {
   v0 = std::string::c_str(&stru_402C998);
   result = CScrollMultiline::SetText(s_cAOScrolltext, v0);
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   v2 = g_pStringEngine->GetString(g_pStringEngine, 880);
   IGuiEngine::SetText((void *)g_pGUIEngine, 7, 13, v2);
   v3 = (char *)std::string::c_str(&stru_402C97C);
@@ -3654,7 +3738,9 @@ void __cdecl InitGuiDlgAOBriefing(void) {
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 7, 6, 0);
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 7, 4, 0);
   if ( dword_402C9EC >= 11 )
+  {
     IGuiEngine::SetImages((void *)g_pGUIEngine, 7, 6, dword_368A428[12 * dword_402C9EC - 132 + dword_402C9F0], 0);
+  }
   return IGuiEngine::SetText((void *)g_pGUIEngine, 7, 19, (char *)&byte_368A548);
 }
 
@@ -3673,7 +3759,9 @@ bool __cdecl GuiDlgAOBriefingProc(int a1, int a2, int a3) {
   int v11; // [esp+5Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -3681,9 +3769,13 @@ bool __cdecl GuiDlgAOBriefingProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1u);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -3752,7 +3844,9 @@ bool __cdecl GuiDlgAOBriefingProc(int a1, int a2, int a3) {
       if ( SHIWORD(a2) <= 0 )
       {
         if ( a2 < 0 )
+        {
           CScrollMultiline::ScrollDown(s_cAOScrolltext);
+        }
       }
       else
       {
@@ -3797,7 +3891,9 @@ bool __cdecl GuiDlgAOCampaignBonusProc(int a1, int a2, int a3) {
   int v10; // [esp+58h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -3805,9 +3901,13 @@ bool __cdecl GuiDlgAOCampaignBonusProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       if ( a2 == 23 )
@@ -3908,7 +4008,9 @@ bool __cdecl GuiDlgAOCampaignMayanProc(int a1, int a2, int a3) {
   int v16; // [esp+B8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -3916,9 +4018,13 @@ bool __cdecl GuiDlgAOCampaignMayanProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -4046,7 +4152,9 @@ bool __cdecl GuiDlgAOCampaignRomanProc(int a1, int a2, int a3) {
   int v16; // [esp+B8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -4054,9 +4162,13 @@ bool __cdecl GuiDlgAOCampaignRomanProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -4151,9 +4263,13 @@ void __cdecl InitGuiDlgAOCampaigns(void) {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 76, 0);
     IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 0, 65);
     if ( s_uAIDifficulty )
+    {
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 65, 1);
+    }
     else
+    {
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 64, 1);
+    }
   }
 }
 
@@ -4181,7 +4297,9 @@ bool __cdecl GuiDlgAOCampaignsProc(int a1, int a2, int a3) {
   int v20; // [esp+F8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -4189,9 +4307,13 @@ bool __cdecl GuiDlgAOCampaignsProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -4343,7 +4465,9 @@ bool __cdecl GuiDlgAOCampaignsSettleProc(int a1, int a2, int a3) {
   int v16; // [esp+B8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -4351,9 +4475,13 @@ bool __cdecl GuiDlgAOCampaignsSettleProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -4529,7 +4657,9 @@ bool __cdecl GuiDlgAOCampaignTrojanProc(int a1, int a2, int a3) {
   int v32; // [esp+1B8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -4537,9 +4667,13 @@ bool __cdecl GuiDlgAOCampaignTrojanProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -4732,7 +4866,9 @@ bool __cdecl GuiDlgAOCampaignVikingProc(int a1, int a2, int a3) {
   int v16; // [esp+B8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -4740,9 +4876,13 @@ bool __cdecl GuiDlgAOCampaignVikingProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -4953,7 +5093,9 @@ bool __cdecl GuiDlgAOSplashProc(int a1, int a2, int a3) {
   int v8; // [esp+3Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -4961,9 +5103,13 @@ bool __cdecl GuiDlgAOSplashProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (unsigned __int16)a2 )
@@ -5012,7 +5158,9 @@ bool __cdecl GuiDlgAOSplashProc(int a1, int a2, int a3) {
       if ( SHIWORD(a2) <= 0 )
       {
         if ( a2 < 0 )
+        {
           CScrollMultiline::ScrollDown(s_cAOSplashScrolltext);
+        }
       }
       else
       {
@@ -5036,14 +5184,12 @@ void __cdecl UpdateGuiDlgAvailableGoods(void) {
 
   s_bUpdatingAvailableGoodsGui = 1;
   IGuiEngine::SelectControl(g_pGUIEngine, 27, 323, !g_cGoodsStatisticInfo.m_bOverEcoSector);
-  for ( i = 0; i < 43; ++i )
+  for ( i = 0;
+        i < 43;
+        ++i )
   {
     _wsprintfA(Str, "%u", g_cGoodsStatisticInfo.m_aStatistics[i].m_uGoodCount);
-    IGuiEngine::SetText(
-      g_pGUIEngine,
-      27,
-      auAvailableGoodsTextGuiIds[g_cGoodsStatisticInfo.m_aStatistics[i].m_uGoodId],
-      Str);
+    IGuiEngine::SetText(g_pGUIEngine, 27, auAvailableGoodsTextGuiIds[g_cGoodsStatisticInfo.m_aStatistics[i].m_uGoodId], Str);
   }
   s_bUpdatingAvailableGoodsGui = 0;
 }
@@ -5056,7 +5202,9 @@ void __cdecl InitGuiDlgAvailableGoods(void) {
   int result; // eax
 
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   auAvailableGoodsTextGuiIds[22] = 293;
   auAvailableGoodsTextGuiIds[7] = 294;
   auAvailableGoodsTextGuiIds[32] = 295;
@@ -5117,7 +5265,9 @@ bool __cdecl GuiDlgAvailableGoodsProc(int a1, int a2, int a3) {
   int v10; // [esp+68h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -5129,9 +5279,13 @@ bool __cdecl GuiDlgAvailableGoodsProc(int a1, int a2, int a3) {
       if ( !s_bUpdatingAvailableGoodsGui )
       {
         if ( (a2 & 0x10000) != 0 )
+        {
           PlayGuiSound(1u);
+        }
         else
+        {
           PlayGuiSound(0);
+        }
       }
       break;
     case 3:
@@ -5221,7 +5375,9 @@ void __cdecl UpdateGuiDlgBarracksContext(void) {
     IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, 330, g_cBarracksInfo.m_unknownB);
     IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_368A65C[4], 0);
     IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_368A65C[5], 0);
-    for ( i = 0; i < 5; ++i )
+    for ( i = 0;
+          i < 5;
+          ++i )
     {
       switch ( g_cBarracksInfo.m_sPairs[i].m_mPileGoodType )
       {
@@ -5257,9 +5413,13 @@ void __cdecl UpdateGuiDlgBarracksContext(void) {
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_368A65C[2 * v6], 1);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_368A65C[2 * v6 + 1], 1);
         if ( Number < 0 )
+        {
           IGuiEngine::SetFontTemplate(g_pGUIEngine, 14, dword_368A65C[2 * v6], 2);
+        }
         else
+        {
           IGuiEngine::SetFontTemplate(g_pGUIEngine, 14, dword_368A65C[2 * v6], 1);
+        }
       }
     }
     byte_3ECF2A8 = 0;
@@ -5299,7 +5459,9 @@ bool __cdecl GuiDlgBarracksContextProc(int a1, int a2, int a3) {
   int v24; // [esp+178h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -5310,9 +5472,13 @@ bool __cdecl GuiDlgBarracksContextProc(int a1, int a2, int a3) {
       if ( !byte_3ECF2A8 )
       {
         if ( (a3 & 0x10000) != 0 )
+        {
           PlayGuiSound(1);
+        }
         else
+        {
           PlayGuiSound(0);
+        }
       }
       break;
     case 3:
@@ -5447,9 +5613,13 @@ bool __cdecl UpdateGuiDlgWinLoss(int a1) {
   char *v1; // eax
 
   if ( a1 == 1 )
+  {
     v1 = g_pStringEngine->GetString(g_pStringEngine, 1964);
+  }
   else
+  {
     v1 = g_pStringEngine->GetString(g_pStringEngine, 1934);
+  }
   IGuiEngine::SetText((void *)g_pGUIEngine, 72, 1795, v1);
   return 1;
 }
@@ -5463,7 +5633,9 @@ bool __cdecl GuiDlgWinLossProc(int a1, int a2, int a3) {
   char *v5; // eax
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -5471,9 +5643,13 @@ bool __cdecl GuiDlgWinLossProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 8:
       if ( a3 == -1 )
@@ -5529,7 +5705,9 @@ bool __cdecl GuiDlgBriefingProc(int a1, int a2, int a3) {
   char *v5; // eax
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -5537,9 +5715,13 @@ bool __cdecl GuiDlgBriefingProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 8:
       if ( a3 == -1 )
@@ -5595,10 +5777,14 @@ void __cdecl UpdateGuiDlgBuildBasic(void) {
   int v4; // [esp+Ch] [ebp-8h]
 
   if ( !g_pGUIEngine )
+  {
     return v0;
+  }
   byte_3ECF2A9 = 1;
   LOBYTE(v0) = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 9, 394, byte_3F1E909 == 0);
-  for ( i = 0; i < 10; ++i )
+  for ( i = 0;
+        i < 10;
+        ++i )
   {
     v4 = dword_3F1E914[4 * i];
     v3 = dword_3F1E910[4 * i];
@@ -5742,7 +5928,9 @@ bool __cdecl GuiDlgBuildBasicProc(int a1, int a2, int a3) {
   int v74; // [esp+574h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -5751,9 +5939,13 @@ bool __cdecl GuiDlgBuildBasicProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -5886,7 +6078,9 @@ bool __cdecl GuiDlgBuildBasicProc(int a1, int a2, int a3) {
           return 1;
         case 394:
           if ( byte_3ECF2A9 )
+          {
             return 1;
+          }
           if ( (a2 & 0x10000) != 0 )
           {
             v24 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v69, 0x1B8u, 0, 1u, 0, 0, 0);
@@ -6154,7 +6348,9 @@ void __cdecl UpdateGuiDlgBuildContext(void) {
       IGuiEngine::SetText((void *)g_pGUIEngine, 14, 410, Str);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, 410, 1);
     }
-    for ( i = 0; i < 3; ++i )
+    for ( i = 0;
+          i < 3;
+          ++i )
     {
       if ( g_cBuildingSiteInfo.m_sRequiredRessources[i].m_cType )
       {
@@ -6164,18 +6360,17 @@ void __cdecl UpdateGuiDlgBuildContext(void) {
         IGuiEngine::SetText((void *)g_pGUIEngine, 14, byte_368AA14[2 * i], Str);
         GuiGoodImageID = GetGuiGoodImageID((char)g_cBuildingSiteInfo.m_sRequiredRessources[i].m_cType);
         IGuiEngine::SetImages((void *)g_pGUIEngine, 14, byte_368AA14[2 * i + 1], GuiGoodImageID, 0);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          14,
-          byte_368AA14[2 * i + 1],
-          dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sRequiredRessources[i].m_cType + 3],
-          dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sRequiredRessources[i].m_cType + 4]);
+        IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 14, byte_368AA14[2 * i + 1], dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sRequiredRessources[i].m_cType + 3], dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sRequiredRessources[i].m_cType + 4]);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, byte_368AA14[2 * i], 1);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, byte_368AA14[2 * i + 1], 1);
         if ( Number < 0 )
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 14, byte_368AA14[2 * i], 2);
+        }
         else
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 14, byte_368AA14[2 * i], 1);
+        }
       }
       else
       {
@@ -6190,18 +6385,17 @@ void __cdecl UpdateGuiDlgBuildContext(void) {
         IGuiEngine::SetText((void *)g_pGUIEngine, 14, dword_368AA2C[2 * i], Str);
         v5 = GetGuiGoodImageID((char)g_cBuildingSiteInfo.m_sOtherRessources[i].m_cType);
         IGuiEngine::SetImages((void *)g_pGUIEngine, 14, dword_368AA2C[2 * i + 1], v5, 0);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          14,
-          byte_368AA14[2 * i + 1],
-          dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sOtherRessources[i].m_cType + 3],
-          dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sOtherRessources[i].m_cType + 4]);
+        IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 14, byte_368AA14[2 * i + 1], dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sOtherRessources[i].m_cType + 3], dword_368A6B8[5 * (char)g_cBuildingSiteInfo.m_sOtherRessources[i].m_cType + 4]);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, dword_368AA2C[2 * i], 1);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 14, dword_368AA2C[2 * i + 1], 1);
         if ( Numbera < 0 )
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 14, dword_368AA2C[2 * i], 2);
+        }
         else
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 14, dword_368AA2C[2 * i], 1);
+        }
       }
       else
       {
@@ -6241,7 +6435,9 @@ bool __cdecl GuiDlgBuildContextProc(int a1, int a2, int a3) {
   int v20; // [esp+130h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -6250,9 +6446,13 @@ bool __cdecl GuiDlgBuildContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -6410,7 +6610,9 @@ void __cdecl UpdateGuiDlgBuildEyecatcher(void) {
 
   if ( g_pGUIEngine )
   {
-    for ( i = 0; i < 12; ++i )
+    for ( i = 0;
+          i < 12;
+          ++i )
     {
       m_uCountTotal = g_cEyeCatcherBarInfo.m_sEyeCatcher[i].m_uCountTotal;
       m_uCountBuilt = g_cEyeCatcherBarInfo.m_sEyeCatcher[i].m_uCountBuilt;
@@ -6541,7 +6743,9 @@ bool __cdecl GuiDlgBuildEyecatcherProc(int a1, int a2, int a3) {
   int v78; // [esp+5C0h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -6550,9 +6754,13 @@ bool __cdecl GuiDlgBuildEyecatcherProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -6969,10 +7177,14 @@ void __cdecl UpdateGuiDlgBuildFood(void) {
   int v4; // [esp+Ch] [ebp-8h]
 
   if ( !g_pGUIEngine )
+  {
     return v0;
+  }
   byte_3ECF2AB = 1;
   LOBYTE(v0) = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 11, 458, byte_3F1E909 == 0);
-  for ( i = 0; i < 10; ++i )
+  for ( i = 0;
+        i < 10;
+        ++i )
   {
     v4 = dword_3F1E914[4 * i];
     v3 = dword_3F1E910[4 * i];
@@ -7193,7 +7405,9 @@ bool __cdecl GuiDlgBuildFoodProc(int a1, int a2, int a3) {
   int v130; // [esp+9D4h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -7202,9 +7416,13 @@ bool __cdecl GuiDlgBuildFoodProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       if ( (unsigned __int16)a2 > 0x7F3u )
@@ -7492,7 +7710,9 @@ bool __cdecl GuiDlgBuildFoodProc(int a1, int a2, int a3) {
             return 1;
           case 458:
             if ( byte_3ECF2AB )
+            {
               return 1;
+            }
             if ( (a2 & 0x10000) != 0 )
             {
               v38 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v125, 0x1B8u, 0, 1u, 0, 0, 0);
@@ -7905,13 +8125,13 @@ bool __cdecl GuiDlgBuildingContextProc(int a1, int a2, int a3) {
   int v10; // [esp+68h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
-      if ( g_cBuildingInfo.m_cType == BUILDING_RESIDENCESMALL
-        || g_cBuildingInfo.m_cType == BUILDING_RESIDENCEMEDIUM
-        || g_cBuildingInfo.m_cType == BUILDING_RESIDENCEBIG )
+      if ( g_cBuildingInfo.m_cType == BUILDING_RESIDENCESMALL || g_cBuildingInfo.m_cType == BUILDING_RESIDENCEMEDIUM || g_cBuildingInfo.m_cType == BUILDING_RESIDENCEBIG )
       {
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 15, 473, 1);
       }
@@ -7923,9 +8143,13 @@ bool __cdecl GuiDlgBuildingContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1u);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       if ( a2 == 465 )
@@ -8001,10 +8225,14 @@ void __cdecl UpdateGuiDlgBuildMetal(void) {
   int v4; // [esp+Ch] [ebp-8h]
 
   if ( !g_pGUIEngine )
+  {
     return v0;
+  }
   byte_3ECF2AC = 1;
   LOBYTE(v0) = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 10, 495, byte_3F1E909 == 0);
-  for ( i = 0; i < 10; ++i )
+  for ( i = 0;
+        i < 10;
+        ++i )
   {
     v4 = dword_3F1E914[4 * i];
     v3 = dword_3F1E910[4 * i];
@@ -8160,7 +8388,9 @@ bool __cdecl GuiDlgBuildMetalProc(int a1, int a2, int a3) {
   int v82; // [esp+614h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -8169,9 +8399,13 @@ bool __cdecl GuiDlgBuildMetalProc(int a1, int a2, int a3) {
       goto GuiDlgBuildMetalProc___def_17840F7;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       goto GuiDlgBuildMetalProc___def_17840F7;
     case 3:
       if ( (unsigned __int16)a2 > 0x1ECu )
@@ -8180,7 +8414,9 @@ bool __cdecl GuiDlgBuildMetalProc(int a1, int a2, int a3) {
         {
           case 0x1EFu:
             if ( byte_3ECF2AC )
+            {
               return 1;
+            }
             if ( (a2 & 0x10000) != 0 )
             {
               v25 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v77, 0x1B8u, 0, 1u, 0, 0, 0);
@@ -8639,10 +8875,14 @@ void __cdecl UpdateGuiDlgBuildMilitary(void) {
   int v4; // [esp+Ch] [ebp-8h]
 
   if ( !g_pGUIEngine )
+  {
     return v0;
+  }
   byte_3ECF2AD = 1;
   LOBYTE(v0) = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 13, 529, byte_3F1E909 == 0);
-  for ( i = 0; i < 10; ++i )
+  for ( i = 0;
+        i < 10;
+        ++i )
   {
     v4 = dword_3F1E914[4 * i];
     v3 = dword_3F1E910[4 * i];
@@ -8786,7 +9026,9 @@ bool __cdecl GuiDlgBuildMilitaryProc(int a1, int a2, int a3) {
   int v74; // [esp+574h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -8795,9 +9037,13 @@ bool __cdecl GuiDlgBuildMilitaryProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -8948,7 +9194,9 @@ bool __cdecl GuiDlgBuildMilitaryProc(int a1, int a2, int a3) {
           return 1;
         case 529:
           if ( byte_3ECF2AD )
+          {
             return 1;
+          }
           if ( (a2 & 0x10000) != 0 )
           {
             v24 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v69, 0x1B8u, 0, 1u, 0, 0, 0);
@@ -9225,7 +9473,9 @@ bool __cdecl GuiDlgBuildSubmenuProc(int a1, int a2, int a3) {
   int v56; // [esp+31Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -9233,9 +9483,13 @@ bool __cdecl GuiDlgBuildSubmenuProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( S4LoWord(a2) )
@@ -9537,10 +9791,14 @@ void __cdecl UpdateGuiDlgBuildTown(void) {
   int v4; // [esp+Ch] [ebp-8h]
 
   if ( !g_pGUIEngine )
+  {
     return v0;
+  }
   byte_3ECF2AE = 1;
   LOBYTE(v0) = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 12, 563, byte_3F1E909 == 0);
-  for ( i = 0; i < 10; ++i )
+  for ( i = 0;
+        i < 10;
+        ++i )
   {
     v4 = dword_3F1E914[4 * i];
     v3 = dword_3F1E910[4 * i];
@@ -9713,7 +9971,9 @@ bool __cdecl GuiDlgBuildTownProc(int a1, int a2, int a3) {
   int v106; // [esp+7B4h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -9722,9 +9982,13 @@ bool __cdecl GuiDlgBuildTownProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1u);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -9968,7 +10232,9 @@ bool __cdecl GuiDlgBuildTownProc(int a1, int a2, int a3) {
           return 1;
         case 563:
           if ( byte_3ECF2AE )
+          {
             return 1;
+          }
           if ( (a2 & 0x10000) != 0 )
           {
             v32 = CEvn_Logic::CEvn_Logic(&v94, 0x1B8u, 0, 1u, 0, 0, 0);
@@ -10190,9 +10456,13 @@ void __cdecl UpdateGuiDlgChat(void) {
   {
     byte_3ECF2AF = 1;
     if ( *(int *)(g_pGame + 400) < 0 )
+    {
       *(_DWORD *)(g_pGame + 400) = 0;
+    }
     v3 = 0;
-    for ( i = 0; i < 8; ++i )
+    for ( i = 0;
+          i < 8;
+          ++i )
     {
       if ( i >= *(_DWORD *)(g_pGame + 396) )
       {
@@ -10212,20 +10482,15 @@ void __cdecl UpdateGuiDlgChat(void) {
         IGuiEngine::SetText((void *)g_pGUIEngine, 58, dword_3D88360[4 * i], v0);
         IGuiEngine::SetImages((void *)g_pGUIEngine, 58, dword_3D88360[4 * i + 2], dword_3D883E0[v1], 0);
         if ( *(_BYTE *)(g_pGame + 40 * i + 441) )
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 58, dword_3D88360[4 * i], 13);
+        }
         else
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 58, dword_3D88360[4 * i], 11);
-        IGuiEngine::SetImages(
-          (void *)g_pGUIEngine,
-          58,
-          dword_3D88360[4 * i + 3],
-          dword_3D88400[*(_DWORD *)(g_pGame + 40 * i + 436)],
-          0);
-        IGuiEngine::SelectControl(
-          (IGuiEngine *)g_pGUIEngine,
-          58,
-          dword_3D88360[4 * i + 1],
-          *(_BYTE *)(g_pGame + 40 * i + 440));
+        }
+        IGuiEngine::SetImages((void *)g_pGUIEngine, 58, dword_3D88360[4 * i + 3], dword_3D88400[*(_DWORD *)(g_pGame + 40 * i + 436)], 0);
+        IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 58, dword_3D88360[4 * i + 1], *(_BYTE *)(g_pGame + 40 * i + 440));
         if ( i == *(_DWORD *)(g_pGame + 400) || *(int *)(g_pGame + 40 * i + 436) > 2 )
         {
           IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 58, dword_3D88360[4 * i + 1], 0);
@@ -10276,7 +10541,9 @@ bool __cdecl GuiDlgChatProc(int a1, int a2, int a3) {
   int v28; // [esp+198h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -10289,9 +10556,13 @@ bool __cdecl GuiDlgChatProc(int a1, int a2, int a3) {
       if ( !byte_3ECF2B0 )
       {
         if ( (a2 & 0x10000) != 0 )
+        {
           PlayGuiSound(1);
+        }
         else
+        {
           PlayGuiSound(0);
+        }
       }
       break;
     case 3:
@@ -10477,7 +10748,9 @@ void __cdecl UpdateGuiDlgClock(unsigned int a1) {
   {
     v3 = (int)(float)((float)dword_3ECF2B4 - (float)((float)a1 * v2));
     if ( v3 < 0 )
+    {
       v3 = 0;
+    }
     if ( v3 < 60 )
     {
       IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 74, 139, 2);
@@ -10499,7 +10772,9 @@ void __cdecl UpdateGuiDlgClock(unsigned int a1) {
 bool __cdecl GuiDlgClockProc(int a1, int a2, int a3) {
   
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   if ( a1 )
   {
     if ( a1 == 8 )
@@ -10549,16 +10824,22 @@ void __cdecl UpdateGuiDlgEconomy(void) {
   int i; // [esp+10h] [ebp-3Ch]
   CHAR Str[52]; // [esp+14h] [ebp-38h] BYREF
 
-  for ( i = 0; i < 7; ++i )
+  for ( i = 0;
+        i < 7;
+        ++i )
   {
     m_uWinGoodsAllies = g_cEconomyGameInfo.m_sStats[i].m_uWinGoodsAllies;
     m_uWinGoodsOther = g_cEconomyGameInfo.m_sStats[i].m_uWinGoodsOther;
     if ( m_uWinGoodsAllies >= m_uWinGoodsOther )
     {
       if ( m_uWinGoodsAllies <= m_uWinGoodsOther )
+      {
         v4 = 2;
+      }
       else
+      {
         v4 = 1;
+      }
       v3 = 2;
       IGuiEngine::SetFontTemplate(g_pGUIEngine, 77, dword_368AF18[3 * i], v4);
     }
@@ -10574,12 +10855,7 @@ void __cdecl UpdateGuiDlgEconomy(void) {
     IGuiEngine::SetText(g_pGUIEngine, 77, dword_368AF18[3 * i + 1], Str);
     GuiGoodImageID = GetGuiGoodImageID(g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood);
     IGuiEngine::SetImages(g_pGUIEngine, 77, dword_368AF18[3 * i + 2], GuiGoodImageID, 0);
-    IGuiEngine::SetTooltipID(
-      g_pGUIEngine,
-      77,
-      dword_368AF18[3 * i + 2],
-      dword_368ABB8[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 3],
-      dword_368ABB8[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 4]);
+    IGuiEngine::SetTooltipID(g_pGUIEngine, 77, dword_368AF18[3 * i + 2], dword_368ABB8[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 3], dword_368ABB8[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 4]);
   }
 }
 
@@ -10592,7 +10868,9 @@ bool __cdecl GuiDlgEconomyProc(int a1, int a2, int a3) {
   char *v5; // eax
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -10601,9 +10879,13 @@ bool __cdecl GuiDlgEconomyProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 8:
       if ( a3 == -1 )
@@ -10648,17 +10930,23 @@ void __cdecl UpdateGuiDlgFerryLoadContext(void) {
   {
     v0 = g_pStringEngine->GetString(g_pStringEngine, 1287);
     IGuiEngine::SetText(g_pGUIEngine, 42, 715, v0);
-    for ( i = 0; i < 5; ++i )
+    for ( i = 0;
+          i < 5;
+          ++i )
     {
       _wsprintfA(Str, "%u", g_cFerryLoadInfo.m_uCargpCount3[i]);
       IGuiEngine::SetText(g_pGUIEngine, 42, dword_368B060[2 * i], Str);
     }
-    for ( j = 0; j < 5; ++j )
+    for ( j = 0;
+          j < 5;
+          ++j )
     {
       _wsprintfA(Str, "%u", g_cFerryLoadInfo.m_uCargpCount2[j]);
       IGuiEngine::SetText(g_pGUIEngine, 42, dword_368B038[2 * j], Str);
     }
-    for ( k = 0; k < 2; ++k )
+    for ( k = 0;
+          k < 2;
+          ++k )
     {
       _wsprintfA(Str, "%u", g_cFerryLoadInfo.m_uCargpCount1[k]);
       IGuiEngine::SetText(g_pGUIEngine, 42, dword_368B088[2 * k], Str);
@@ -10682,7 +10970,9 @@ bool __cdecl GuiDlgFerryLoadContextProc(int a1, int a2, int a3) {
   int v12; // [esp+90h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -10690,9 +10980,13 @@ bool __cdecl GuiDlgFerryLoadContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -10778,7 +11072,9 @@ bool __cdecl GuiDlgFiguresSubmenuProc(int a1, int a2, int a3) {
   int v23; // [esp+134h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -10786,9 +11082,13 @@ bool __cdecl GuiDlgFiguresSubmenuProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1u);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( S4LoWord(a2) )
@@ -10954,7 +11254,9 @@ void __cdecl UpdateGuiDlgFreeCarrierMenu(void) {
   CHAR Str[52]; // [esp+0h] [ebp-38h] BYREF
 
   if ( !g_pGUIEngine )
+  {
     return result;
+  }
   IGuiEngine::EnableControl(g_pGUIEngine, 32, 755, g_cFreeCarrierInfo.m_bLooksAtEcoSector);
   IGuiEngine::EnableControl(g_pGUIEngine, 32, 756, g_cFreeCarrierInfo.m_bLooksAtEcoSector);
   IGuiEngine::EnableControl(g_pGUIEngine, 32, 757, g_cFreeCarrierInfo.m_bLooksAtEcoSector);
@@ -10975,9 +11277,13 @@ void __cdecl UpdateGuiDlgFreeCarrierMenu(void) {
   IGuiEngine::SetText(g_pGUIEngine, 32, 762, Str);
   IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 772, 1);
   if ( g_cFreeCarrierInfo.m_uNrOfFreeDigger >= 0 )
+  {
     _wsprintfA(Str, "+%d", g_cFreeCarrierInfo.m_uNrOfFreeDigger);
+  }
   else
+  {
     _wsprintfA(Str, "%d", g_cFreeCarrierInfo.m_uNrOfFreeDigger);
+  }
   IGuiEngine::SetText(g_pGUIEngine, 32, 772, Str);
   _wsprintfA(Str, "%d", g_cFreeCarrierInfo.m_uNrOfShovels);
   IGuiEngine::SetText(g_pGUIEngine, 32, 775, Str);
@@ -10986,9 +11292,13 @@ void __cdecl UpdateGuiDlgFreeCarrierMenu(void) {
   IGuiEngine::SetText(g_pGUIEngine, 32, 763, Str);
   IGuiEngine::SetControlVisibility(g_pGUIEngine, 32, 773, 1);
   if ( g_cFreeCarrierInfo.m_uNrOfFreeBuilders >= 0 )
+  {
     _wsprintfA(Str, "+%d", g_cFreeCarrierInfo.m_uNrOfFreeBuilders);
+  }
   else
+  {
     _wsprintfA(Str, "%d", g_cFreeCarrierInfo.m_uNrOfFreeBuilders);
+  }
   IGuiEngine::SetText(g_pGUIEngine, 32, 773, Str);
   _wsprintfA(Str, "%d", g_cFreeCarrierInfo.m_uNrOfHammers);
   IGuiEngine::SetText(g_pGUIEngine, 32, 774, Str);
@@ -11013,13 +11323,21 @@ void __cdecl UpdateGuiDlgFreeCarrierMenu(void) {
     IGuiEngine::SetText(g_pGUIEngine, 32, 767, Str);
   }
   if ( g_cFreeCarrierInfo.m_bHasHammers )
+  {
     IGuiEngine::SetImages(g_pGUIEngine, 32, 753, 443, 0);
+  }
   else
+  {
     IGuiEngine::SetImages(g_pGUIEngine, 32, 753, 502, 0);
+  }
   if ( g_cFreeCarrierInfo.m_bHasShovels )
+  {
     return IGuiEngine::SetImages(g_pGUIEngine, 32, 754, 437, 0);
+  }
   else
+  {
     return IGuiEngine::SetImages(g_pGUIEngine, 32, 754, 500, 0);
+  }
   return result;
 }
 
@@ -11043,7 +11361,9 @@ bool __cdecl GuiDlgFreeCarrierMenuProc(int a1, int a2, int a3) {
   int v16; // [esp+E0h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -11054,9 +11374,13 @@ bool __cdecl GuiDlgFreeCarrierMenuProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -11151,11 +11475,15 @@ void __cdecl GetGoodSliderVals(void) {
   int i; // [esp+4h] [ebp-3Ch]
   CHAR Str[52]; // [esp+8h] [ebp-38h] BYREF
 
-  for ( i = 0; i < g_cGoodDistributionInfo.m_uSupplyBuildings; ++i )
+  for ( i = 0;
+        i < g_cGoodDistributionInfo.m_uSupplyBuildings;
+        ++i )
   {
     SliderPosition = IGuiEngine::GetSliderPosition(g_pGUIEngine, 26, auPrioritySliderIds[i]);
     if ( SliderPosition < 0 )
+    {
       SliderPosition = 0;
+    }
     dword_3ECF2C0[i] = SliderPosition;
     _wsprintfA(Str, "%u%%", SliderPosition);
     IGuiEngine::SetText(g_pGUIEngine, 26, auPriotritySliderTextIds[i], Str);
@@ -11183,7 +11511,9 @@ void __cdecl UpdateGuiDlgGoodDistribution(void) {
     IGuiEngine::EnableControl(g_pGUIEngine, 26, 780, v3);
     IGuiEngine::EnableControl(g_pGUIEngine, 26, 781, v3);
     IGuiEngine::EnableControl(g_pGUIEngine, 26, 782, v3);
-    for ( i = 0; i < 5; ++i )
+    for ( i = 0;
+          i < 5;
+          ++i )
     {
       if ( i >= (int)g_cGoodDistributionInfo.m_uSupplyBuildings )
       {
@@ -11196,23 +11526,15 @@ void __cdecl UpdateGuiDlgGoodDistribution(void) {
       else
       {
         dword_3ECF2C0[i] = g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uPriority;
-        GuiHouseButtonID = GetGuiHouseButtonID(
-                             g_cGoodDistributionInfo.m_uPlayerRace,
-                             g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uBuildingId);
+        GuiHouseButtonID = GetGuiHouseButtonID(g_cGoodDistributionInfo.m_uPlayerRace, g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uBuildingId);
         IGuiEngine::SetImages(g_pGUIEngine, 26, auPrioritySliderHouseIds[i], GuiHouseButtonID, 0);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, auPrioritySliderHouseIds[i], 1);
-        GuiHouseString = GetGuiHouseString(
-                           g_cGoodDistributionInfo.m_uPlayerRace,
-                           g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uBuildingId);
+        GuiHouseString = GetGuiHouseString(g_cGoodDistributionInfo.m_uPlayerRace, g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uBuildingId);
         IGuiEngine::SetText(g_pGUIEngine, 26, auPriotritySliderTextIds[i], GuiHouseString);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, auPriotritySliderTextIds[i], 1);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, dword_3D88460[i], 1);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 26, auPrioritySliderIds[i], 1);
-        IGuiEngine::SetSliderPosition(
-          g_pGUIEngine,
-          26,
-          auPrioritySliderIds[i],
-          g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uPriority);
+        IGuiEngine::SetSliderPosition(g_pGUIEngine, 26, auPrioritySliderIds[i], g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uPriority);
       }
     }
   }
@@ -11227,8 +11549,12 @@ void __cdecl InitGuiDlgGoodDistribution(void) {
   int i; // [esp+0h] [ebp-4h]
 
   if ( !g_pStringEngine )
+  {
     return result;
-  for ( i = 0; i < 5; ++i )
+  }
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
     dword_3ECF2C0[i] = 0;
     IGuiEngine::SetImages((void *)g_pGUIEngine, 26, auPrioritySliderIds[i], 287, 337);
@@ -11265,7 +11591,9 @@ bool __cdecl GuiDlgGoodDistributionProc(int a1, int a2, int a3) {
   int v25; // [esp+184h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -11273,9 +11601,13 @@ bool __cdecl GuiDlgGoodDistributionProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1u);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 2:
       GetGoodSliderVals();
@@ -11297,8 +11629,12 @@ bool __cdecl GuiDlgGoodDistributionProc(int a1, int a2, int a3) {
       else if ( (unsigned __int16)a2 >= 0x31Bu )
       {
         GetGoodSliderVals();
-        for ( i = 0; i < g_cGoodDistributionInfo.m_uSupplyBuildings; ++i )
+        for ( i = 0;
+              i < g_cGoodDistributionInfo.m_uSupplyBuildings;
+              ++i )
+        {
           g_cGoodDistributionInfo.m_aSupplyPriorities[i].m_uPriority = dword_3ECF2C0[i];
+        }
         v6 = CEvn_Logic::CEvn_Logic(&v16, 0x1BDu, 0, 0, 0, 0, 0);
         v25 = 8;
         IEventEngine::SendAMessage(g_pEvnEngine, v6);
@@ -11415,13 +11751,17 @@ void __cdecl GoodsoutBarDisplaySubmenu(void) {
   int i; // [esp+0h] [ebp-4h]
   int j; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; i < 9; ++i )
+  for ( i = 0;
+        i < 9;
+        ++i )
   {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, dword_3D88498[i], 0);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, dword_3D884BC[i], 0);
     result = i + 1;
   }
-  for ( j = 1; j < 43; ++j )
+  for ( j = 1;
+        j < 43;
+        ++j )
   {
     result = 16 * j;
     if ( dword_3ECF2F8[4 * j] == dword_3ECF5AC )
@@ -11429,18 +11769,8 @@ void __cdecl GoodsoutBarDisplaySubmenu(void) {
       IGuiEngine::SetText((void *)g_pGUIEngine, 53, dword_3ECF2FC[4 * j], (char *)&byte_368B454);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, dword_3ECF2FC[4 * j], 1);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, dword_3ECF300[4 * j], 1);
-      IGuiEngine::SetImages(
-        (void *)g_pGUIEngine,
-        53,
-        dword_3ECF300[4 * j],
-        dword_368B0F8[5 * j + 1],
-        dword_368B0F8[5 * j + 2]);
-      result = IGuiEngine::SetTooltipID(
-                 (IGuiEngine *)g_pGUIEngine,
-                 53,
-                 dword_3ECF300[4 * j],
-                 dword_368B0F8[5 * j + 3],
-                 dword_368B0F8[5 * j + 4]);
+      IGuiEngine::SetImages((void *)g_pGUIEngine, 53, dword_3ECF300[4 * j], dword_368B0F8[5 * j + 1], dword_368B0F8[5 * j + 2]);
+      result = IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 53, dword_3ECF300[4 * j], dword_368B0F8[5 * j + 3], dword_368B0F8[5 * j + 4]);
     }
   }
   return result;
@@ -11459,7 +11789,9 @@ void __cdecl UpdateGuiDlgGoodsoutBar(void) {
   byte_3ECF2D8[16] = 1;
   byte_3ECF2D8[24] = 1;
   byte_3ECF2D8[8] = 1;
-  for ( i = 1; i < 43; ++i )
+  for ( i = 1;
+        i < 43;
+        ++i )
   {
     if ( byte_3F1E9B4[i] )
     {
@@ -11501,21 +11833,37 @@ void __cdecl UpdateGuiDlgGoodsoutBar(void) {
     }
   }
   if ( byte_3ECF2D8[0] )
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, 818, 0);
+  }
   else
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, 818, 1);
+  }
   if ( byte_3ECF2D8[8] )
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, 819, 0);
+  }
   else
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, 819, 1);
+  }
   if ( byte_3ECF2D8[16] )
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, 820, 0);
+  }
   else
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, 820, 1);
+  }
   if ( byte_3ECF2D8[24] )
+  {
     return IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, 821, 0);
+  }
   else
+  {
     return IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 53, 821, 1);
+  }
 }
 
 
@@ -11535,8 +11883,12 @@ void __cdecl InitGuiDlgGoodsoutBar(void) {
   int v9; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; i < 43; ++i )
+  for ( i = 0;
+        i < 43;
+        ++i )
+  {
     dword_3ECF300[4 * i] = -1;
+  }
   byte_3ECF2D8[0] = 1;
   dword_3ECF2DC[0] = 824;
   byte_3ECF2D8[16] = 1;
@@ -11728,7 +12080,9 @@ void __cdecl GoodsoutBarGoodSelected(int a1) {
   int result; // eax
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 1; i < 43; ++i )
+  for ( i = 1;
+        i < 43;
+        ++i )
   {
     if ( dword_3ECF2F8[4 * i] == dword_3ECF5AC )
     {
@@ -11767,7 +12121,9 @@ bool __cdecl GuiDlgGoodsoutBarProc(int a1, int a2, int a3) {
   int v18; // [esp+108h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -11776,9 +12132,13 @@ bool __cdecl GuiDlgGoodsoutBarProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -11867,9 +12227,13 @@ bool __cdecl GuiDlgGoodsoutBarProc(int a1, int a2, int a3) {
           break;
         case 826:
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3ECF5AC = 2;
+          }
           else
+          {
             dword_3ECF5AC = 0;
+          }
           GoodsoutBarDisplaySubmenu();
           IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 53, 829, 1);
           dword_3ECF5A8 = 18;
@@ -11878,9 +12242,13 @@ bool __cdecl GuiDlgGoodsoutBarProc(int a1, int a2, int a3) {
           break;
         case 827:
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3ECF5AC = 3;
+          }
           else
+          {
             dword_3ECF5AC = 0;
+          }
           GoodsoutBarDisplaySubmenu();
           IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 53, 829, 1);
           dword_3ECF5A8 = 34;
@@ -11897,9 +12265,13 @@ bool __cdecl GuiDlgGoodsoutBarProc(int a1, int a2, int a3) {
         case 836:
         case 837:
           if ( (a2 & 0x10000) != 0 )
+          {
             GoodsoutBarGoodSelected((unsigned __int16)a2);
+          }
           else
+          {
             dword_3ECF5A8 = 0;
+          }
           PlayGuiSound(2);
           break;
         default:
@@ -11952,7 +12324,9 @@ void __cdecl UpdateGuiDlgGoodstradeBar(void) {
   byte_3ECF648[16] = 1;
   byte_3ECF648[24] = 1;
   byte_3ECF648[8] = 1;
-  for ( i = 1; i < 43; ++i )
+  for ( i = 1;
+        i < 43;
+        ++i )
   {
     if ( byte_3F1ED75[i] <= 0 )
     {
@@ -11985,22 +12359,40 @@ void __cdecl UpdateGuiDlgGoodstradeBar(void) {
     }
   }
   if ( byte_3ECF648[0] )
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, 838, 0);
+  }
   else
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, 838, 1);
+  }
   if ( byte_3ECF648[8] )
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, 839, 0);
+  }
   else
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, 839, 1);
+  }
   if ( byte_3ECF648[16] )
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, 840, 0);
+  }
   else
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, 840, 1);
+  }
   if ( byte_3ECF648[24] )
+  {
     result = IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, 841, 0);
+  }
   else
+  {
     result = IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, 841, 1);
-  for ( j = 0; j < 9; ++j )
+  }
+  for ( j = 0;
+        j < 9;
+        ++j )
   {
     if ( j >= CPlayerManager::NumberOfPlayers() || CPlayerManager::GetLocalPlayerId(v1) == j + 1 )
     {
@@ -12009,12 +12401,7 @@ void __cdecl UpdateGuiDlgGoodstradeBar(void) {
     else
     {
       v2 = CPlayerManager::Color(j + 1);
-      IGuiEngine::SetImages(
-        (void *)g_pGUIEngine,
-        54,
-        dword_3D884F0[j],
-        dword_3D88510[2 * v2 + 1],
-        dword_3D88510[2 * v2]);
+      IGuiEngine::SetImages((void *)g_pGUIEngine, 54, dword_3D884F0[j], dword_3D88510[2 * v2 + 1], dword_3D88510[2 * v2]);
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 54, dword_3D884F0[j], byte_3F1ED6D[j]);
       result = IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, dword_3D884F0[j], 1);
     }
@@ -12032,31 +12419,25 @@ void __cdecl GoodstradeBarDisplaySubmenu(void) {
   int i; // [esp+0h] [ebp-4h]
   int j; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; i < 9; ++i )
+  for ( i = 0;
+        i < 9;
+        ++i )
   {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, dword_3D88550[i], 0);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, dword_3D88574[i], 0);
     result = i + 1;
   }
-  for ( j = 0; j < 43; ++j )
+  for ( j = 0;
+        j < 43;
+        ++j )
   {
     result = 16 * j;
     if ( dword_3ECF668[4 * j] == dword_3ECF918 && dword_3ECF670[4 * j] != -1 )
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, dword_3ECF66C[4 * j], 1);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 54, dword_3ECF670[4 * j], 1);
-      IGuiEngine::SetImages(
-        (void *)g_pGUIEngine,
-        54,
-        dword_3ECF670[4 * j],
-        dword_368B510[5 * j + 1],
-        dword_368B510[5 * j + 2]);
-      result = IGuiEngine::SetTooltipID(
-                 (IGuiEngine *)g_pGUIEngine,
-                 54,
-                 dword_3ECF670[4 * j],
-                 dword_368B510[5 * j + 3],
-                 dword_368B510[5 * j + 4]);
+      IGuiEngine::SetImages((void *)g_pGUIEngine, 54, dword_3ECF670[4 * j], dword_368B510[5 * j + 1], dword_368B510[5 * j + 2]);
+      result = IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 54, dword_3ECF670[4 * j], dword_368B510[5 * j + 3], dword_368B510[5 * j + 4]);
     }
   }
   return result;
@@ -12079,8 +12460,12 @@ void __cdecl InitGuiDlgGoodstradeBar(void) {
   int v9; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; i < 43; ++i )
+  for ( i = 0;
+        i < 43;
+        ++i )
+  {
     dword_3ECF670[4 * i] = -1;
+  }
   byte_3ECF648[0] = 1;
   dword_3ECF64C[0] = 842;
   byte_3ECF648[16] = 1;
@@ -12273,7 +12658,9 @@ void __cdecl GoodstradeBarGoodSelected(int a1) {
   _BYTE v3[32]; // [esp+10h] [ebp-30h] BYREF
   int v4; // [esp+3Ch] [ebp-4h]
 
-  for ( i = 1; i < 43; ++i )
+  for ( i = 1;
+        i < 43;
+        ++i )
   {
     if ( dword_3ECF668[4 * i] == dword_3ECF918 && a1 == dword_3ECF670[4 * i] )
     {
@@ -12314,7 +12701,9 @@ bool __cdecl GuiDlgGoodstradeBarProc(int a1, int a2, int a3) {
   int v22; // [esp+160h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -12323,9 +12712,13 @@ bool __cdecl GuiDlgGoodstradeBarProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -12344,15 +12737,23 @@ bool __cdecl GuiDlgGoodstradeBarProc(int a1, int a2, int a3) {
           break;
         case 844:
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3ECF918 = 2;
+          }
           else
+          {
             dword_3ECF918 = 0;
+          }
           goto LABEL_21;
         case 845:
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3ECF918 = 3;
+          }
           else
+          {
             dword_3ECF918 = 0;
+          }
 LABEL_21:
           GoodstradeBarDisplaySubmenu();
           UpdateGuiDlgGoodstradeBar();
@@ -12491,7 +12892,9 @@ void __cdecl UpdateGuiDlgGroup(void) {
 
   if ( g_pGUIEngine )
   {
-    for ( i = 0; i < 9; ++i )
+    for ( i = 0;
+          i < 9;
+          ++i )
     {
       switch ( unk_3F1E75C.m_aGroupLevel[i] )
       {
@@ -12584,7 +12987,9 @@ bool __cdecl GuiDlgGroupProc(int a1, int a2, int a3) {
   int v60; // [esp+454h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -12592,9 +12997,13 @@ bool __cdecl GuiDlgGroupProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a3) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( S4LoWord(a2) )
@@ -12895,14 +13304,20 @@ bool __cdecl GuiDlgIncomingMessageProc(int a1, int a2, int a3) {
   int v10; // [esp+58h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       if ( (unsigned __int16)a2 == 891 )
@@ -12984,13 +13399,19 @@ void __cdecl GuiDlgLanLobbyConnectFillList(void) {
 
   String::String((char *)&byte_368B9B2, -1);
   v10 = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     v4 = i + s_iLanLobbyPage;
     if ( i >= dword_4030714 || !dword_403071C )
     {
-      for ( j = 0; j < 5; ++j )
+      for ( j = 0;
+            j < 5;
+            ++j )
+      {
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 2, dword_368BFE8[5 * i + j], 0);
+      }
       continue;
     }
     v0 = (const wchar_t *)std::wstring::c_str(*(_Cnd_internal_imp_t **)(dword_403071C + 4 * v4));
@@ -12998,32 +13419,25 @@ void __cdecl GuiDlgLanLobbyConnectFillList(void) {
     IGuiEngine::SetText((void *)g_pGUIEngine, 2, dword_368BFE8[5 * i], Dest);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 2, dword_368BFE8[5 * i], 1);
     if ( *(_DWORD *)(*(_DWORD *)(dword_403071C + 4 * v4) + 84) >= *(_DWORD *)(*(_DWORD *)(dword_403071C + 4 * v4) + 88) )
-      IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 2, dword_368BFE8[5 * i], 0);
-    else
-      IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 2, dword_368BFE8[5 * i], 1);
-    if ( !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-      && !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
     {
-      IGuiEngine::EnableControl(
-        (IGuiEngine *)g_pGUIEngine,
-        2,
-        dword_368BFE8[5 * i],
-        (*(_BYTE *)(*(_DWORD *)(dword_403071C + 4 * v4) + 106) & 1) == 0);
+      IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 2, dword_368BFE8[5 * i], 0);
+    }
+    else
+    {
+      IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 2, dword_368BFE8[5 * i], 1);
+    }
+    if ( !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) && !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
+    {
+      IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 2, dword_368BFE8[5 * i], (*(_BYTE *)(*(_DWORD *)(dword_403071C + 4 * v4) + 106) & 1) == 0);
     }
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v6);
     LOBYTE(v10) = 1;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-      v8,
-      *(_DWORD *)(dword_403071C + 4 * v4) + 28);
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v8, *(_DWORD *)(dword_403071C + 4 * v4) + 28);
     LOBYTE(v10) = 2;
     v1 = (char *)std::string::c_str(v8);
     IGuiEngine::SetText((void *)g_pGUIEngine, 2, dword_368BFE8[5 * i + 1], v1);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 2, dword_368BFE8[5 * i + 1], 1);
-    _wsprintfA(
-      Dest,
-      " %d - %d",
-      *(_DWORD *)(*(_DWORD *)(dword_403071C + 4 * v4) + 84),
-      *(_DWORD *)(*(_DWORD *)(dword_403071C + 4 * v4) + 88));
+    _wsprintfA(Dest, " %d - %d", *(_DWORD *)(*(_DWORD *)(dword_403071C + 4 * v4) + 84), *(_DWORD *)(*(_DWORD *)(dword_403071C + 4 * v4) + 88));
     IGuiEngine::SetText((void *)g_pGUIEngine, 2, dword_368BFE8[5 * i + 2], Dest);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 2, dword_368BFE8[5 * i + 2], 1);
     v2 = *(_DWORD *)(*(_DWORD *)(dword_403071C + 4 * v4) + 92);
@@ -13044,9 +13458,13 @@ void __cdecl GuiDlgLanLobbyConnectFillList(void) {
 LABEL_19:
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 2, dword_368BFE8[5 * i + 3], 1);
     if ( *(_BYTE *)(*(_DWORD *)(dword_403071C + 4 * v4) + 96) )
+    {
       IGuiEngine::SetImages((void *)g_pGUIEngine, 2, dword_368BFE8[5 * i + 4], 89, 0);
+    }
     else
+    {
       IGuiEngine::SetImages((void *)g_pGUIEngine, 2, dword_368BFE8[5 * i + 4], 87, 0);
+    }
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 2, dword_368BFE8[5 * i + 4], 1);
     LOBYTE(v10) = 1;
     std::string::~string(v8);
@@ -13139,7 +13557,9 @@ bool __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, int a3) {
   int v15; // [esp+294h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -13148,9 +13568,13 @@ bool __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (BYTE2(a3) & 1) != 0 )
+      {
         PlayGuiSound(1u);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 2:
       if ( (unsigned __int16)a2 == 2312 )
@@ -13170,7 +13594,9 @@ bool __cdecl GuiDlgLanLobbyConnectMenuProc(int a1, int a2, int a3) {
         PlayGuiSound(2u);
         Str = (char *)IGuiEngine::GetText(g_pGUIEngine, 2, GUI_S_MPS_RANK_TT);
         if ( Str )
+        {
           std::string::operator=(&stru_403073C, Str);
+        }
       }
       break;
     case 3:
@@ -13295,7 +13721,9 @@ void __cdecl InitGuiDlgLoadSave(void) {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 33, 927, 0);
     IGuiEngine::SetText((void *)g_pGUIEngine, 33, 914, (char *)&byte_368D8B0);
     if ( !byte_4030398 )
+    {
       std::wstring::operator=(&stru_403037C, (wchar_t *)&word_368D8B4);
+    }
     IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 33, 912, 0);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 33, 913, 0);
     dword_3ECFA2C = 0;
@@ -13306,16 +13734,18 @@ void __cdecl InitGuiDlgLoadSave(void) {
       IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 33, 914, 1);
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v3);
       v5 = 0;
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-        v4,
-        &stru_403037C);
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v4, &stru_403037C);
       LOBYTE(v5) = 1;
       v0 = (char *)std::string::c_str(v4);
       IGuiEngine::SetText((void *)g_pGUIEngine, 33, 914, v0);
       v1 = g_pGameData && !CGameData::IsLadder(g_pGameData);
       IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 33, 912, v1);
-      for ( i = 0; i < 10; ++i )
+      for ( i = 0;
+            i < 10;
+            ++i )
+      {
         IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 33, dword_368E904[i], 1);
+      }
       LOBYTE(v5) = 0;
       std::string::~string(v4);
       v5 = -1;
@@ -13359,12 +13789,12 @@ void __cdecl GuiDlgLoadSaveNameSelected(int a1) {
   result = a1 + dword_3ECFA2C;
   v4 = a1 + dword_3ECFA2C;
   if ( a1 + dword_3ECFA2C >= dword_4030378 )
+  {
     return result;
+  }
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v5);
   v7 = 0;
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-    v6,
-    *(_DWORD *)(dword_4030374 + 4 * v4) + 28);
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v6, *(_DWORD *)(dword_4030374 + 4 * v4) + 28);
   LOBYTE(v7) = 1;
   v2 = (char *)std::string::c_str(v6);
   IGuiEngine::SetText((void *)g_pGUIEngine, 33, 914, v2);
@@ -13395,7 +13825,9 @@ void __cdecl GuiDlgLoadSaveFillList(void) {
     v3 = dword_4030378 > 10;
     IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 33, 925, dword_4030378 > 10);
     IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 33, 926, v3);
-    for ( i = 0; i < 10; ++i )
+    for ( i = 0;
+          i < 10;
+          ++i )
     {
       v1 = i + dword_3ECFA2C;
       if ( i >= dword_4030378 )
@@ -13406,9 +13838,7 @@ void __cdecl GuiDlgLoadSaveFillList(void) {
       {
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v4);
         v6 = 0;
-        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-          v5,
-          *(_DWORD *)(dword_4030374 + 4 * v1) + 28);
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v5, *(_DWORD *)(dword_4030374 + 4 * v1) + 28);
         LOBYTE(v6) = 1;
         v0 = (char *)std::string::c_str(v5);
         IGuiEngine::SetText((void *)g_pGUIEngine, 33, dword_368E904[i], v0);
@@ -13428,7 +13858,9 @@ void __cdecl GuiDlgLoadSaveFillList(void) {
 void __cdecl UpdateGuiDlgLoadSave(void) {
   
   if ( g_pGUIEngine )
+  {
     InitGuiDlgLoadSave();
+  }
 }
 
 
@@ -13448,7 +13880,9 @@ bool __cdecl GuiDlgLoadSaveProc(int a1, int a2, int a3) {
   int v13; // [esp+E0h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -13456,9 +13890,13 @@ bool __cdecl GuiDlgLoadSaveProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 2:
       if ( (unsigned __int16)a2 == 914 )
@@ -13470,9 +13908,7 @@ bool __cdecl GuiDlgLoadSaveProc(int a1, int a2, int a3) {
           IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 33, 912, 1);
           std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v9);
           v13 = 2;
-          std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-            (int)v12,
-            Str);
+          std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)v12, Str);
           LOBYTE(v13) = 3;
           std::wstring::operator=((int)v12);
           LOBYTE(v13) = 2;
@@ -13492,13 +13928,14 @@ bool __cdecl GuiDlgLoadSaveProc(int a1, int a2, int a3) {
       {
         case 912:
         case 914:
-          if ( (unsigned __int8)std::operator!=<wchar_t>(&stru_403037C, word_368D8B8)
-            && (unsigned __int8)std::operator!=<wchar_t>(&stru_403037C, word_368D8BC) )
+          if ( (unsigned __int8)std::operator!=<wchar_t>(&stru_403037C, word_368D8B8) && (unsigned __int8)std::operator!=<wchar_t>(&stru_403037C, word_368D8BC) )
           {
             if ( byte_4030398 )
             {
               if ( g_pGame && CStateGame::CanSave((CStateGame *)g_pGame) )
+              {
                 CStateGame::SaveGame((void *)g_pGame, 0);
+              }
             }
             else
             {
@@ -13641,22 +14078,32 @@ bool __cdecl GuiDlgLoadSaveSubmenuProc(int a1, int a2, int a3) {
   int v20; // [esp+134h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
       IGuiEngine::SelectControl(g_pGUIEngine, 8, GUI_ACP_ST_THIRTY, 1);
       byte_3ECFA3B = CGameData::GetMode(g_pGameData) == 3;
       if ( (unsigned __int8)std::operator!=<char>(&stru_402C9B4, (char *)&unk_368F798) || byte_3ECFA3B )
+      {
         IGuiEngine::EnableControl(g_pGUIEngine, 8, GUI_ACP_ST_TWO, 1);
+      }
       else
+      {
         IGuiEngine::EnableControl(g_pGUIEngine, 8, 929, 0);
+      }
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1u);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -13775,7 +14222,9 @@ void __cdecl UpdateGuiDlgMagicSpellBar(void) {
 
   if ( g_pGUIEngine )
   {
-    for ( i = 0; i < 8; ++i )
+    for ( i = 0;
+          i < 8;
+          ++i )
     {
       _wsprintfA(Str, "%u", g_cMagicSpellSideBarInfo.m_aSpells[i].m_uPossibleNumberOfCasts);
       _wsprintfA(v2, "%u", g_cMagicSpellSideBarInfo.m_aSpells[i].m_uCost);
@@ -13864,7 +14313,9 @@ bool __cdecl GuiDlgMagicSpellBarProc(int a1, int a2, int a3) {
   int v38; // [esp+298h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -13872,9 +14323,13 @@ bool __cdecl GuiDlgMagicSpellBarProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -14120,7 +14575,9 @@ LABEL_12:
             if ( v10 )
             {
               if ( v10 != 1 )
+              {
                 return;
+              }
             }
             else
             {
@@ -14177,7 +14634,9 @@ bool __cdecl GuiDlgMain3x3CampaignProc(int a1, int a2, int a3) {
   int v26; // [esp+158h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -14185,9 +14644,13 @@ bool __cdecl GuiDlgMain3x3CampaignProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -14312,7 +14775,9 @@ void __cdecl InitGuiDlgMainBarExt1(void) {
   char result; // al
 
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 622, "0");
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 623, "0");
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 624, "0");
@@ -14366,7 +14831,9 @@ bool __cdecl GuiDlgMainBarExt1Proc(int a1, int a2, int a3) {
   char *v5; // eax
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -14374,9 +14841,13 @@ bool __cdecl GuiDlgMainBarExt1Proc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 8:
       if ( a3 == -1 )
@@ -14443,7 +14914,9 @@ bool __cdecl GuiDlgMainBarExt2Proc(int a1, int a2, int a3) {
   int v18; // [esp+88h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -14456,9 +14929,13 @@ bool __cdecl GuiDlgMainBarExt2Proc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -14493,7 +14970,9 @@ bool __cdecl GuiDlgMainBarExt2Proc(int a1, int a2, int a3) {
         {
           pCamWndEntity = (int)CMapObjectMgr::EntityPtr((unsigned __int16)g_uCamWndEntityId);
           if ( !CMapObjectMgr::GetUniqueId((unsigned __int16)g_uCamWndEntityId) )
+          {
             pCamWndEntity = 0;
+          }
         }
         if ( pCamWndEntity )
         {
@@ -14563,7 +15042,9 @@ void __cdecl InitGuiDlgMainBriefing(void) {
   v0 = std::string::c_str(&stru_402C998);
   result = CScrollMultiline::SetText(s_cScrolltext, v0);
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   v2 = g_pStringEngine->GetString(g_pStringEngine, 880);
   IGuiEngine::SetText((void *)g_pGUIEngine, 10, 2054, v2);
   v3 = (char *)std::string::c_str(&stru_402C97C);
@@ -14593,7 +15074,9 @@ bool __cdecl GuiDlgMainBriefingProc(int a1, int a2, int a3) {
   int v13; // [esp+7Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -14601,9 +15084,13 @@ bool __cdecl GuiDlgMainBriefingProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -14688,7 +15175,9 @@ bool __cdecl GuiDlgMainBriefingProc(int a1, int a2, int a3) {
       if ( SHIWORD(a2) <= 0 )
       {
         if ( a2 < 0 )
+        {
           CScrollMultiline::ScrollDown(s_cScrolltext);
+        }
       }
       else
       {
@@ -14744,17 +15233,29 @@ void __cdecl GuiDlgMainCreditsInitText(void) {
       v3 = 101;
     }
     if ( dword_3ED03F4 >= 0 )
+    {
       ++dword_3ED03F4;
+    }
     else
+    {
       dword_3ED03F4 = v3;
+    }
     if ( dword_3ED03F4 >= 24 && dword_3ED03F4 < 63 && !v5 )
+    {
       dword_3ED03F4 = 63;
+    }
     if ( dword_3ED03F4 >= 63 && dword_3ED03F4 < 101 && !v6 )
+    {
       dword_3ED03F4 = 101;
+    }
     if ( dword_3ED03F4 == 62 && v6 )
+    {
       ++dword_3ED03F4;
+    }
     if ( dword_3ED03F4 >= 158 )
+    {
       dword_3ED03F4 = v3;
+    }
     if ( dword_3D885C0[4 * dword_3ED03F4] <= 0 )
     {
       IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 17, 2076, 16);
@@ -14802,7 +15303,9 @@ bool __cdecl GuiDlgMainCreditsTopProc(int,int,int) {
 bool __cdecl GuiDlgMainCreditsPaperProc(int a1, int a2, int a3) {
   
   if ( a1 )
+  {
     return 1;
+  }
   IGuiEngine::SetText((void *)g_pGUIEngine, 17, 2076, " ");
   IGuiEngine::SetText((void *)g_pGUIEngine, 17, 2078, " ");
   dword_3ED03F4 = -1;
@@ -14815,9 +15318,7 @@ bool __cdecl GuiDlgMainCreditsPaperProc(int a1, int a2, int a3) {
 // Decompiled from int __cdecl ConvertXCoord(int a1, const struct SGuiRect *a2)
 int __cdecl ConvertXCoord(int a1, struct SGuiRect const & a2) {
   
-  return (int)(float)((float)((float)((float)*((int *)a2 + 2) - (float)*(int *)a2)
-                            * (float)((float)a1 / *(float *)&dword_3D8919C))
-                    + 0.5);
+  return (int)(float)((float)((float)((float)*((int *)a2 + 2) - (float)*(int *)a2) * (float)((float)a1 / *(float *)&dword_3D8919C)) + 0.5);
 }
 
 
@@ -14825,9 +15326,7 @@ int __cdecl ConvertXCoord(int a1, struct SGuiRect const & a2) {
 // Decompiled from int __cdecl ConvertYCoord(int a1, const struct SGuiRect *a2)
 int __cdecl ConvertYCoord(int a1, struct SGuiRect const & a2) {
   
-  return (int)(float)((float)((float)((float)*((int *)a2 + 3) - (float)*((int *)a2 + 1))
-                            * (float)((float)a1 / *(float *)&dword_3D891A0))
-                    + 0.5);
+  return (int)(float)((float)((float)((float)*((int *)a2 + 3) - (float)*((int *)a2 + 1)) * (float)((float)a1 / *(float *)&dword_3D891A0)) + 0.5);
 }
 
 
@@ -14866,7 +15365,9 @@ void __cdecl UpdateGuiDlgMainCredits(void) {
     {
       *(float *)&dword_3D891A4 = *(float *)&dword_3D891A4 - 1.3;
       if ( *(float *)&dword_3D891A4 < 1.0 )
+      {
         dword_3D891A4 = LODWORD(FLOAT_1_0);
+      }
     }
     else
     {
@@ -14912,7 +15413,9 @@ bool __cdecl GuiDlgMainCreditsProc(int a1, int a2, int a3) {
   char *v4; // eax
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -14926,9 +15429,13 @@ bool __cdecl GuiDlgMainCreditsProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a3) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 8:
       IGuiEngine::SetTooltip((char *)&byte_368F912);
@@ -15084,7 +15591,9 @@ bool __cdecl GuiDlgMainDarktribeCampaignProc(int a1, int a2, int a3) {
   int v32; // [esp+1B8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -15092,9 +15601,13 @@ bool __cdecl GuiDlgMainDarktribeCampaignProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -15246,41 +15759,23 @@ void __cdecl GuiDlgDeteilStatisticFillList(void) {
   int i; // [esp+0h] [ebp-4h]
 
   result = s_iMainDeteilStatisticTopOffset;
-  for ( i = s_iMainDeteilStatisticTopOffset; i < s_iMainDeteilStatisticTopOffset + 10; ++i )
+  for ( i = s_iMainDeteilStatisticTopOffset;
+        i < s_iMainDeteilStatisticTopOffset + 10;
+        ++i )
   {
     if ( i - s_iMainDeteilStatisticTopOffset >= 10 )
     {
-      IGuiEngine::SetFontTemplate(
-        (IGuiEngine *)g_pGUIEngine,
-        21,
-        dword_368FA7C[i - s_iMainDeteilStatisticTopOffset],
-        dword_3ED0440[15 * i]);
-      IGuiEngine::SetText(
-        (void *)g_pGUIEngine,
-        21,
-        dword_368FA7C[i - s_iMainDeteilStatisticTopOffset],
-        (char *)&byte_368FA3F);
-      LOBYTE(result) = IGuiEngine::SetText(
-                         (void *)g_pGUIEngine,
-                         21,
-                         dword_368FAAC[i - s_iMainDeteilStatisticTopOffset],
-                         (char *)byte_368FA40);
+      IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 21, dword_368FA7C[i - s_iMainDeteilStatisticTopOffset], dword_3ED0440[15 * i]);
+      IGuiEngine::SetText((void *)g_pGUIEngine, 21, dword_368FA7C[i - s_iMainDeteilStatisticTopOffset], (char *)&byte_368FA3F);
+      LOBYTE(result) = IGuiEngine::SetText((void *)g_pGUIEngine, 21, dword_368FAAC[i - s_iMainDeteilStatisticTopOffset], (char *)byte_368FA40);
     }
     else
     {
-      IGuiEngine::SetFontTemplate(
-        (IGuiEngine *)g_pGUIEngine,
-        21,
-        dword_368FA7C[i - s_iMainDeteilStatisticTopOffset],
-        dword_3ED0440[15 * i]);
+      IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 21, dword_368FA7C[i - s_iMainDeteilStatisticTopOffset], dword_3ED0440[15 * i]);
       v1 = (char *)std::string::c_str((char *)&sDetailStatisticList + 60 * i);
       IGuiEngine::SetText((void *)g_pGUIEngine, 21, dword_368FA7C[i - s_iMainDeteilStatisticTopOffset], v1);
       v2 = (char *)std::string::c_str((char *)&unk_3ED0424 + 60 * i);
-      LOBYTE(result) = IGuiEngine::SetText(
-                         (void *)g_pGUIEngine,
-                         21,
-                         dword_368FAAC[i - s_iMainDeteilStatisticTopOffset],
-                         v2);
+      LOBYTE(result) = IGuiEngine::SetText((void *)g_pGUIEngine, 21, dword_368FAAC[i - s_iMainDeteilStatisticTopOffset], v2);
     }
   }
   return result;
@@ -15553,7 +16048,9 @@ void __cdecl UpdateGuiDlgMainDetailStatistic(int a1) {
   if ( g_pStringEngine )
   {
     InitGuiDlgMainDetailStatistic();
-    for ( i = 0; i < 100; ++i )
+    for ( i = 0;
+          i < 100;
+          ++i )
     {
       dword_3ED0440[15 * i] = 1;
       std::string::operator=((char *)&sDetailStatisticList + 60 * i, (char *)&byte_368F928);
@@ -15562,9 +16059,7 @@ void __cdecl UpdateGuiDlgMainDetailStatistic(int a1) {
     v1 = g_pStringEngine->GetString(g_pStringEngine, 2353);
     std::string::operator=(&sDetailStatisticList, v1);
     dword_3ED0440[0] = 17;
-    std::string::operator=(
-      (char *)&sDetailStatisticList + 60,
-      "----------------------------------------------------------------------------------------------------------------------");
+    std::string::operator=((char *)&sDetailStatisticList + 60, "----------------------------------------------------------------------------------------------------------------------");
     dword_3ED0440[15] = 12;
     std::string::operator=((char *)&unk_3ED0424 + 60, (char *)&byte_368F92A);
     v2 = g_pStringEngine->GetString(g_pStringEngine, 2355);
@@ -15638,9 +16133,7 @@ void __cdecl UpdateGuiDlgMainDetailStatistic(int a1) {
     v42 = g_pStringEngine->GetString(g_pStringEngine, 2385);
     std::string::operator=((char *)&sDetailStatisticList + 960, v42);
     dword_3ED0440[240] = 17;
-    std::string::operator=(
-      (char *)&sDetailStatisticList + 1020,
-      "----------------------------------------------------------------------------------------------------------------------");
+    std::string::operator=((char *)&sDetailStatisticList + 1020, "----------------------------------------------------------------------------------------------------------------------");
     dword_3ED0440[255] = 12;
     std::string::operator=((char *)&unk_3ED0424 + 1020, (char *)&byte_368F92F);
     if ( CEndStatistic::GetPlayerRace((CEndStatistic *)&g_cEndStatistic, a1) == 3 )
@@ -16003,15 +16496,11 @@ void __cdecl UpdateGuiDlgMainDetailStatistic(int a1) {
     operator delete(Dest);
     PlayerExitTime = CStatistic::GetPlayerExitTime((CStatistic *)&g_cEndStatistic, a1);
     if ( !PlayerExitTime )
+    {
       PlayerExitTime = CEndStatistic::GetTickCounter((CEndStatistic *)&g_cEndStatistic);
+    }
     v175 = (float)(unsigned int)(71 * PlayerExitTime);
-    snprintf(
-      Str,
-      0x32u,
-      "%02u:%02u:%02u",
-      (unsigned int)(float)(v175 / 1000.0) / 0xE10,
-      (unsigned int)(float)(v175 / 1000.0) / 0x3C % 0x3C,
-      (unsigned int)(float)(v175 / 1000.0) % 0x3C);
+    snprintf(Str, 0x32u, "%02u:%02u:%02u", (unsigned int)(float)(v175 / 1000.0) / 0xE10, (unsigned int)(float)(v175 / 1000.0) / 0x3C % 0x3C, (unsigned int)(float)(v175 / 1000.0) % 0x3C);
     IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 21, 2106, 850, 0);
     IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 21, 2111, 861, 0);
     IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 21, 2107, 875, 0);
@@ -16043,7 +16532,9 @@ bool __cdecl GuiDlgMainDetailStatisticProc(int a1, int a2, int a3) {
   int v8; // [esp+3Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -16051,9 +16542,13 @@ bool __cdecl GuiDlgMainDetailStatisticProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (unsigned __int16)a2 )
@@ -16099,7 +16594,9 @@ bool __cdecl GuiDlgMainDetailStatisticProc(int a1, int a2, int a3) {
       if ( SHIWORD(a2) <= 0 )
       {
         if ( a2 < 0 )
+        {
           sub_139B850();
+        }
       }
       else
       {
@@ -16139,16 +16636,24 @@ void __cdecl GuiDlgMainGameSettingsUpdateChangeSlot(int a1) {
   int i; // [esp+10h] [ebp-8h]
   char v7; // [esp+17h] [ebp-1h]
 
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( g_pGameType->m_sPlayerExclusiveColor[g_pGameType->m_sPlayerSlot15[i]] )
+    {
       g_pGameType->m_sPlayerSlot15[i] = -1;
+    }
   }
   v7 = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( g_pGameType->m_sPlayerSlot15[i] == a1 )
+    {
       v7 = 1;
+    }
   }
   if ( g_pGameType->m_sPlayerSlot15[a1] == -1 || g_pGameType->m_sPlayerExclusiveColor[a1] )
   {
@@ -16202,46 +16707,66 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
   v18 = 0;
   byte_3ED2031 = 1;
   if ( g_bIsHost && !byte_4030853 )
+  {
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2244, 0);
+  }
   IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2244, byte_40308A1);
   IGuiEngine::SelectControl(g_pGUIEngine, dword_403089C, 2244, byte_40308A2);
-  if ( g_pGameType->m_sPlayerType[dword_3D891AC] == 1
-    || !g_bIsHost
-    || INetworkEngine::StormDidEnterSession((INetworkEngine *)g_pNetworkEngine) )
+  if ( g_pGameType->m_sPlayerType[dword_3D891AC] == 1 || !g_bIsHost || INetworkEngine::StormDidEnterSession((INetworkEngine *)g_pNetworkEngine) )
   {
     dword_3D891AC = (char)CPlayerManager::GetLocalSlot();
   }
   IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2141, byte_40308A4);
   IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2245, byte_403088D);
   if ( byte_4030850 || byte_40308A0 || byte_40308A3 )
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2183, 0);
+  }
   else
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2183, 1);
+  }
   if ( byte_4030850 || byte_40308A0 || byte_40308A3 )
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2182, 0);
+  }
   else
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2182, 1);
+  }
   if ( byte_4030851 || byte_40308A0 || byte_40308A3 )
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2181, 0);
+  }
   else
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2181, 1);
+  }
   if ( byte_4030851 || byte_40308A0 || byte_40308A3 )
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2180, 0);
+  }
   else
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2180, 1);
+  }
   if ( byte_40308A0 || byte_40308A3 )
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2185, 0);
+  }
   else
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2185, 1);
+  }
   if ( byte_40308A0 || byte_40308A3 )
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2184, 0);
+  }
   else
+  {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2184, 1);
-  if ( byte_40308A0
-    || byte_40308A3
-    || dword_3D891AC < 0
-    || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 2
-    || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 3 )
+  }
+  if ( byte_40308A0 || byte_40308A3 || dword_3D891AC < 0 || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 2 || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 3 )
   {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2186, 0);
   }
@@ -16249,11 +16774,7 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
   {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2186, 1);
   }
-  if ( byte_40308A0
-    || byte_40308A3
-    || dword_3D891AC < 0
-    || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 2
-    || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 3 )
+  if ( byte_40308A0 || byte_40308A3 || dword_3D891AC < 0 || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 2 || *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 60) == 3 )
   {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2187, 0);
   }
@@ -16262,20 +16783,24 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
     IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2187, 1);
   }
   if ( g_bIsHost )
+  {
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2142, 1);
+  }
   else
+  {
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2142, 0);
+  }
   IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2142, byte_403088C);
   if ( !g_bIsHost )
+  {
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, 2141, byte_4030854 != 1);
+  }
   v0 = std::wstring::c_str(&stru_40307CC);
   j__wcstombs(Destination, v0, 0x100u);
   IGuiEngine::SetText(g_pGUIEngine, dword_403089C, 2145, Destination);
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v14);
   LOBYTE(v18) = 1;
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-    &v16,
-    &stru_40307E8);
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(&v16, &stru_40307E8);
   LOBYTE(v18) = 2;
   v1 = std::string::c_str(&v16);
   IGuiEngine::SetText(g_pGUIEngine, dword_403089C, 2152, v1);
@@ -16286,67 +16811,65 @@ void __cdecl GuiDlgMainGameSettingstUpdate(void) {
   _wsprintfA(Destination, "%u / %u", dword_4030840, dword_4030844);
   IGuiEngine::SetText(g_pGUIEngine, dword_403089C, 2143, Destination);
   if ( dword_3D891AC >= 0 )
-    IGuiEngine::SetImages(
-      g_pGUIEngine,
-      dword_403089C,
-      2189,
-      dword_3690424[*(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 36)],
-      0);
+  {
+    IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, 2189, dword_3690424[*(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 36)], 0);
+  }
   else
+  {
     IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, 2189, 0, 0);
+  }
   if ( dword_3D891AC >= 0 )
-    IGuiEngine::SetImages(
-      g_pGUIEngine,
-      dword_403089C,
-      2179,
-      dword_36904BC[*(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 40)],
-      0);
+  {
+    IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, 2179, dword_36904BC[*(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 40)], 0);
+  }
   else
+  {
     IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, 2179, 0, 0);
+  }
   if ( dword_3D891AC >= 0 )
-    IGuiEngine::SetImages(
-      g_pGUIEngine,
-      dword_403089C,
-      2188,
-      dword_3690404[*(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 4)],
-      0);
+  {
+    IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, 2188, dword_3690404[*(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 4)], 0);
+  }
   else
+  {
     IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, 2188, 0, 0);
+  }
   if ( dword_3D891AC >= 0 )
-    IGuiEngine::SetUserLogoImage(
-      g_pGUIEngine,
-      dword_403089C,
-      2256,
-      *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 44));
+  {
+    IGuiEngine::SetUserLogoImage(g_pGUIEngine, dword_403089C, 2256, *(_DWORD *)(dword_403083C + 2116 * dword_3D891AC + 44));
+  }
   else
+  {
     IGuiEngine::SetUserLogoImage(g_pGUIEngine, dword_403089C, 2256, 0);
-  for ( i = 0; i < 8; ++i )
+  }
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( i >= dword_4030848 )
     {
-      for ( j = 0; j < 11; ++j )
+      for ( j = 0;
+            j < 11;
+            ++j )
+      {
         IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + j], 0);
+      }
       continue;
     }
     IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i], 1);
     v7 = -1;
-    for ( k = 0; k < 8; ++k )
+    for ( k = 0;
+          k < 8;
+          ++k )
     {
       if ( g_pGameType->m_sPlayerSlot15[k] == (char)CPlayerManager::GetLocalSlot() )
+      {
         v7 = k;
+      }
     }
     if ( v7 == -1 )
     {
-      if ( !CGameType::IsSlotChangable(g_pGameType, i, 0)
-        || g_pGameType->m_sPlayerMapUploadStarted[(char)CPlayerManager::GetLocalSlot()] == 6
-        || g_pGameType->m_sPlayerMapUploadStarted[i] == 6
-        && g_pGameType->m_sPlayerType[i] != 2
-        && g_pGameType->m_sPlayerType[i] != 3
-        && !g_pGameType->m_sPlayerExclusiveColor[i]
-        || (!CGameType::IsClanGame(g_pGameType)
-          ? (v5 = 1)
-          : (v5 = *(_DWORD *)(dword_403083C + 2116 * (char)CPlayerManager::GetLocalSlot() + 4) == *(_DWORD *)(dword_403083C + 2116 * i + 4)),
-            !v5) )
+      if ( !CGameType::IsSlotChangable(g_pGameType, i, 0) || g_pGameType->m_sPlayerMapUploadStarted[(char)CPlayerManager::GetLocalSlot()] == 6 || g_pGameType->m_sPlayerMapUploadStarted[i] == 6 && g_pGameType->m_sPlayerType[i] != 2 && g_pGameType->m_sPlayerType[i] != 3 && !g_pGameType->m_sPlayerExclusiveColor[i] || (!CGameType::IsClanGame(g_pGameType) ? (v5 = 1) : (v5 = *(_DWORD *)(dword_403083C + 2116 * (char)CPlayerManager::GetLocalSlot() + 4) == *(_DWORD *)(dword_403083C + 2116 * i + 4)), !v5) )
       {
         if ( i != (char)CPlayerManager::GetLocalSlot() )
         {
@@ -16356,8 +16879,7 @@ LABEL_93:
         }
       }
     }
-    else if ( g_pGameType->m_sPlayerMapUploadStarted[(char)CPlayerManager::GetLocalSlot()] == 6
-           || i != (char)CPlayerManager::GetLocalSlot() && i != v7 )
+    else if ( g_pGameType->m_sPlayerMapUploadStarted[(char)CPlayerManager::GetLocalSlot()] == 6 || i != (char)CPlayerManager::GetLocalSlot() && i != v7 )
     {
       goto LABEL_93;
     }
@@ -16365,25 +16887,23 @@ LABEL_93:
 LABEL_95:
     if ( *(_BYTE *)(dword_403083C + 2116 * i) )
     {
-      for ( m = 1; m < 11; ++m )
+      for ( m = 1;
+            m < 11;
+            ++m )
+      {
         IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + m], 0);
-      IGuiEngine::SetImages(
-        g_pGUIEngine,
-        dword_403089C,
-        dword_3690578[11 * i + 9],
-        dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60)],
-        dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 1]);
-      IGuiEngine::SetTooltipID(
-        g_pGUIEngine,
-        dword_403089C,
-        dword_3690578[11 * i + 9],
-        dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 2],
-        0);
+      }
+      IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60)], dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 1]);
+      IGuiEngine::SetTooltipID(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 2], 0);
       IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
       if ( g_bIsHost && *(_BYTE *)(dword_403083C + 2116 * i + 2113) )
+      {
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
+      }
       else
+      {
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
+      }
       GuiDlgMainGameSettingsUpdateChangeSlot(i);
     }
     else
@@ -16395,7 +16915,9 @@ LABEL_95:
         if ( v6 == 2 || v6 == 3 )
         {
           if ( g_bIsHost )
+          {
             v12 = 1;
+          }
         }
         else if ( v6 == 1 )
         {
@@ -16403,70 +16925,55 @@ LABEL_95:
         }
       }
       if ( i == dword_3D891AC || !v12 )
+      {
         IGuiEngine::SetFontTemplate(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], 7);
+      }
       else
+      {
         IGuiEngine::SetFontTemplate(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], 9);
+      }
       IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], v12);
-      for ( n = 0; n < 11; ++n )
+      for ( n = 0;
+            n < 11;
+            ++n )
+      {
         IGuiEngine::SetControlVisibility(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + n], 1);
-      IGuiEngine::SetImages(
-        g_pGUIEngine,
-        dword_403089C,
-        dword_3690578[11 * i + 1],
-        dword_3690404[*(_DWORD *)(dword_403083C + 2116 * i + 4)],
-        0);
+      }
+      IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 1], dword_3690404[*(_DWORD *)(dword_403083C + 2116 * i + 4)], 0);
       v3 = std::wstring::c_str((std::wstring *)(dword_403083C + 2116 * i + 8));
       j__wcstombs(Destination, v3, 0x100u);
       IGuiEngine::SetText(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 2], Destination);
-      IGuiEngine::SetImages(
-        g_pGUIEngine,
-        dword_403089C,
-        dword_3690578[11 * i + 3],
-        dword_36904BC[*(_DWORD *)(dword_403083C + 2116 * i + 40)],
-        0);
-      IGuiEngine::SetImages(
-        g_pGUIEngine,
-        dword_403089C,
-        dword_3690578[11 * i + 4],
-        dword_3690424[*(_DWORD *)(dword_403083C + 2116 * i + 36)],
-        0);
+      IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 3], dword_36904BC[*(_DWORD *)(dword_403083C + 2116 * i + 40)], 0);
+      IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 4], dword_3690424[*(_DWORD *)(dword_403083C + 2116 * i + 36)], 0);
       if ( byte_4030853 )
+      {
         IGuiEngine::SetUserLogoImage(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 5], dword_4030858[i]);
+      }
       else
+      {
         IGuiEngine::SetUserLogoImage(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 5], i);
+      }
       if ( *(_DWORD *)(dword_403083C + 2116 * i + 48) )
+      {
         _wsprintfA(Destination, "%u", *(_DWORD *)(dword_403083C + 2116 * i + 48));
+      }
       else
+      {
         j__strcpy_0(Destination, "-");
+      }
       IGuiEngine::SetText(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 6], Destination);
-      IGuiEngine::SetImages(
-        g_pGUIEngine,
-        dword_403089C,
-        dword_3690578[11 * i + 7],
-        dword_3690564[*(_DWORD *)(dword_403083C + 2116 * i + 52)],
-        0);
-      IGuiEngine::SetImages(
-        g_pGUIEngine,
-        dword_403089C,
-        dword_3690578[11 * i + 8],
-        dword_36904D4[*(_DWORD *)(dword_403083C + 2116 * i + 56)],
-        0);
-      IGuiEngine::SetImages(
-        g_pGUIEngine,
-        dword_403089C,
-        dword_3690578[11 * i + 9],
-        dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60)],
-        dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 1]);
-      IGuiEngine::SetTooltipID(
-        g_pGUIEngine,
-        dword_403089C,
-        dword_3690578[11 * i + 9],
-        dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 2],
-        0);
+      IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 7], dword_3690564[*(_DWORD *)(dword_403083C + 2116 * i + 52)], 0);
+      IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 8], dword_36904D4[*(_DWORD *)(dword_403083C + 2116 * i + 56)], 0);
+      IGuiEngine::SetImages(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60)], dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 1]);
+      IGuiEngine::SetTooltipID(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], dword_36906D8[3 * *(_DWORD *)(dword_403083C + 2116 * i + 60) + 2], 0);
       if ( v12 && !*(_BYTE *)(dword_403083C + 2116 * i + 64) && *(_BYTE *)(dword_403083C + 2116 * i + 2113) && g_bIsHost )
+      {
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 1);
+      }
       else
+      {
         IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
+      }
       GuiDlgMainGameSettingsUpdateChangeSlot(i);
       v4 = *(_DWORD *)(dword_403083C + 2116 * i + 60) == 1 && !*(_BYTE *)(dword_403083C + 2116 * i + 64) && g_bIsHost;
       IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], g_bIsHost);
@@ -16519,13 +17026,17 @@ void __cdecl InitGuiDlgMainGameSettings(void) {
     IGuiEngine::SetWidth((IGuiEngine *)g_pGUIEngine, dword_403089C, 2143, 0x28u);
     if ( !g_bIsHost )
     {
-      for ( i = 0; i < 8; ++i )
+      for ( i = 0;
+            i < 8;
+            ++i )
       {
         IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 9], 0);
         IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_403089C, dword_3690578[11 * i + 10], 0);
       }
     }
-    for ( j = 0; j < 8; ++j )
+    for ( j = 0;
+          j < 8;
+          ++j )
     {
       _wsprintfA(Str, "%u", j + 1);
       IGuiEngine::SetText((void *)g_pGUIEngine, dword_403089C, dword_3690578[11 * j], Str);
@@ -16637,7 +17148,9 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
   int v86; // [esp+44Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   if ( a1 && dword_3D891AC < 0 )
   {
     LocalSlot = CPlayerManager::GetLocalSlot();
@@ -16652,7 +17165,9 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
           {
             Instance = StormManager::GetInstance();
             if ( g_pGameType->m_sPlayerPeerId[v50] == StormManager::GetLocalPeerId(Instance) )
+            {
               dword_3D891AC = v50;
+            }
           }
         }
       }
@@ -16666,7 +17181,9 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
       dword_3D891AC = LocalSlot;
     }
     if ( dword_3D891AC >= 0 )
+    {
       GuiDlgMainGameSettingstUpdate();
+    }
   }
   if ( a1 )
   {
@@ -16678,11 +17195,15 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
           goto LABEL_17;
         case 1:
           if ( !byte_3ED2031 && (a2 & 0x10000) != 0 )
+          {
             PlayGuiSound(1u);
+          }
           break;
         case 2:
           if ( (unsigned __int16)a2 == 2153 )
+          {
             PlayGuiSound(1u);
+          }
           break;
         case 3:
           switch ( (__int16)a2 )
@@ -16698,7 +17219,9 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
             case 2142:
               byte_3ED2030 = 0;
               IGuiEngine::EnableControl(g_pGUIEngine, dword_403089C, 2244, 0);
-              for ( i = 0; i < 8; ++i )
+              for ( i = 0;
+                    i < 8;
+                    ++i )
               {
                 if ( !g_pGameType->m_sPlayerExclusiveColor[i] )
                 {
@@ -16743,13 +17266,19 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
               v52 = (unsigned __int16)a2 - 2155;
               v53 = 0;
               if ( v51 != v52 && CGameType::IsSlotChangable(g_pGameType, v52, &v53) )
+              {
                 g_pGameType->m_sPlayerSlot15[v51] = v52;
+              }
               if ( v51 == v52 )
               {
-                for ( j = 0; j < 9; ++j )
+                for ( j = 0;
+                      j < 9;
+                      ++j )
                 {
                   if ( g_pGameType->m_sPlayerSlot15[j] == v51 )
+                  {
                     g_pGameType->m_sPlayerSlot15[j] = -1;
+                  }
                 }
                 g_pGameType->m_sPlayerSlot15[v51] = -1;
               }
@@ -16976,10 +17505,14 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
               break;
             case 2244:
               v46 = (char)CPlayerManager::GetLocalSlot();
-              for ( k = 0; k < 9; ++k )
+              for ( k = 0;
+                    k < 9;
+                    ++k )
               {
                 if ( g_pGameType->m_sPlayerSlot15[k] == v46 )
+                {
                   g_pGameType->m_sPlayerSlot15[k] = -1;
+                }
               }
               g_pGameType->m_sPlayerSlot15[v46] = -1;
               v24 = CEvn_Event::CEvn_Event(&v68, 0x1F58u, v46, v46, 0);
@@ -17042,7 +17575,9 @@ bool __cdecl GuiDlgMainGameSettingsProc(int a1, int a2, int a3) {
           break;
         case 4:
           if ( (unsigned __int16)a2 == 2153 )
+          {
             IGuiEngine::SetText(g_pGUIEngine, dword_403089C, 2153, (char *)&byte_368FC5E);
+          }
           break;
         case 8:
           if ( a3 == -1 )
@@ -17122,7 +17657,9 @@ void __cdecl GuiDlgLoadFillList(void) {
   std::string v7; // [esp+70h] [ebp-2Ch] BYREF
   int v8; // [esp+98h] [ebp-4h]
 
-  for ( i = 0; i < 18; ++i )
+  for ( i = 0;
+        i < 18;
+        ++i )
   {
     v4 = i + s_iMainLoadTopOffset;
     if ( i < dword_4030378 && dword_4030374 )
@@ -17138,9 +17675,7 @@ void __cdecl GuiDlgLoadFillList(void) {
       }
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v6);
       v8 = 0;
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-        &v7,
-        (std::wstring *)(*(_DWORD *)(dword_4030374 + 4 * v4) + 28));
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(&v7, (std::wstring *)(*(_DWORD *)(dword_4030374 + 4 * v4) + 28));
       LOBYTE(v8) = 1;
       v0 = std::string::c_str(&v7);
       IGuiEngine::SetText(g_pGUIEngine, 6, dword_3691FA0[2 * i], v0);
@@ -17157,8 +17692,12 @@ void __cdecl GuiDlgLoadFillList(void) {
     }
     else
     {
-      for ( j = 0; j < 2; ++j )
+      for ( j = 0;
+            j < 2;
+            ++j )
+      {
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 6, dword_3691FA0[2 * i + j], 0);
+      }
     }
   }
 }
@@ -17195,7 +17734,9 @@ bool __cdecl GuiDlgMainLoadProc(int a1, int a2, int a3) {
   int v11; // [esp+60h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -17217,9 +17758,13 @@ bool __cdecl GuiDlgMainLoadProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -17452,7 +17997,9 @@ bool __cdecl GuiDlgMainLoadTypeProc(int a1, int a2, int a3) {
   int v14; // [esp+98h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -17460,9 +18007,13 @@ bool __cdecl GuiDlgMainLoadTypeProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( S4LoWord(a2) )
@@ -17547,9 +18098,13 @@ void __cdecl InitGuiDlgMainLocalType(void) {
     IGuiEngine::SetText((void *)g_pGUIEngine, 7, 2402, v1);
     IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 7, 2414);
     if ( s_uAIDifficulty )
+    {
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 7, 2414, 1);
+    }
     else
+    {
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 7, 2413, 1);
+    }
   }
 }
 
@@ -17571,7 +18126,9 @@ bool __cdecl GuiDlgMainLocalTypeProc(int a1, int a2, int a3) {
   int v14; // [esp+98h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -17579,9 +18136,13 @@ bool __cdecl GuiDlgMainLocalTypeProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( ((a2 >> 16) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -17688,20 +18249,30 @@ void __cdecl GuiDlgMapSettingsFillList(void) {
   String::String((char *)&byte_3692103, -1);
   v7 = 0;
   byte_3EDDCEC = 1;
-  for ( i = 0; i < 7; ++i )
+  for ( i = 0;
+        i < 7;
+        ++i )
   {
     v3 = i + g_iMapListTopOffset;
     if ( i >= dword_4031918 )
     {
-      for ( j = 0; j < 6; ++j )
+      for ( j = 0;
+            j < 6;
+            ++j )
+      {
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i + j], 0);
+      }
     }
     else
     {
       if ( v3 == dword_403192C )
+      {
         v2 = 2;
+      }
       else
+      {
         v2 = 1;
+      }
       v0 = (char *)std::string::c_str(*(void **)(dword_4031920 + 4 * v3));
       IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i], v0);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i], 1);
@@ -17711,34 +18282,26 @@ void __cdecl GuiDlgMapSettingsFillList(void) {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i + 1], 1);
       IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i + 1], v2);
       if ( *(_BYTE *)(*(_DWORD *)(dword_4031920 + 4 * v3) + 79) )
+      {
         _wsprintfA(Str, "%d", *(_DWORD *)(*(_DWORD *)(dword_4031920 + 4 * v3) + 56));
+      }
       else
+      {
         _wsprintfA(Str, "%d-%d", 1, *(_DWORD *)(*(_DWORD *)(dword_4031920 + 4 * v3) + 56));
+      }
       IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i + 2], Str);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i + 2], 1);
       IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i + 2], v2);
-      IGuiEngine::SetControlVisibility(
-        (void *)g_pGUIEngine,
-        dword_4031998,
-        dword_3692058[6 * i + 3],
-        *(_BYTE *)(*(_DWORD *)(dword_4031920 + 4 * v3) + 72));
+      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i + 3], *(_BYTE *)(*(_DWORD *)(dword_4031920 + 4 * v3) + 72));
       if ( byte_4031914 )
-        IGuiEngine::SetControlVisibility(
-          (void *)g_pGUIEngine,
-          dword_4031998,
-          dword_3692058[6 * i + 4],
-          *(_BYTE *)(*(_DWORD *)(dword_4031920 + 4 * v3) + 76));
+      {
+        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i + 4], *(_BYTE *)(*(_DWORD *)(dword_4031920 + 4 * v3) + 76));
+      }
       else
-        IGuiEngine::SetControlVisibility(
-          (void *)g_pGUIEngine,
-          dword_4031998,
-          dword_3692058[6 * i + 4],
-          *(_BYTE *)(*(_DWORD *)(dword_4031920 + 4 * v3) + 73));
-      IGuiEngine::SetControlVisibility(
-        (void *)g_pGUIEngine,
-        dword_4031998,
-        dword_3692058[6 * i + 5],
-        *(_BYTE *)(*(_DWORD *)(dword_4031920 + 4 * v3) + 74));
+      {
+        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i + 4], *(_BYTE *)(*(_DWORD *)(dword_4031920 + 4 * v3) + 73));
+      }
+      IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, dword_3692058[6 * i + 5], *(_BYTE *)(*(_DWORD *)(dword_4031920 + 4 * v3) + 74));
     }
   }
   IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_4031998, 2442, byte_403195A);
@@ -17900,28 +18463,40 @@ void __cdecl InitGuiDlgMainMapSettings(void) {
   if ( g_pStringEngine )
   {
     if ( !g_pAddOn && BBSupportDbgReport(2, "gui\\GUI_MainMapSettings.cpp", 690, "g_pAddOn") == 1 )
+    {
       __debugbreak();
+    }
     if ( !g_pMissionCD2 && BBSupportDbgReport(2, "gui\\GUI_MainMapSettings.cpp", 691, "g_pMissionCD2") == 1 )
+    {
       __debugbreak();
+    }
     if ( !g_pMissionCD3 && BBSupportDbgReport(2, "gui\\GUI_MainMapSettings.cpp", 692, "g_pMissionCD3") == 1 )
+    {
       __debugbreak();
+    }
     if ( g_pAddOn )
     {
       if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) )
+      {
         g_uiExtrasAllowed |= 1u;
+      }
       else
+      {
         g_uiExtrasAllowed &= ~1u;
+      }
     }
     if ( (g_uiExtrasAllowed & 1) == 0 && g_pMissionCD2 )
     {
       if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
+      {
         g_uiExtrasAllowed |= 1u;
+      }
       else
+      {
         g_uiExtrasAllowed &= ~1u;
+      }
     }
-    if ( (g_uiExtrasAllowed & 1) == 0
-      && g_pMissionCD3
-      && (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD3 + 4))(g_pMissionCD3) )
+    if ( (g_uiExtrasAllowed & 1) == 0 && g_pMissionCD3 && (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD3 + 4))(g_pMissionCD3) )
     {
       g_uiExtrasAllowed |= 1u;
     }
@@ -17964,8 +18539,7 @@ void __cdecl InitGuiDlgMainMapSettings(void) {
     IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 2506, v10);
     v11 = g_pStringEngine->GetString(g_pStringEngine, 297);
     IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 2509, v11);
-    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-      || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
+    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, 2509, 1);
     }
@@ -17973,8 +18547,7 @@ void __cdecl InitGuiDlgMainMapSettings(void) {
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, 2509, 0);
     }
-    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-      || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
+    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, 2508, 1);
     }
@@ -17984,13 +18557,14 @@ void __cdecl InitGuiDlgMainMapSettings(void) {
     }
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, dword_4031998, 2508, g_uiExtrasAllowed & 1);
     if ( !g_pMissionCD && BBSupportDbgReport(2, "gui\\GUI_MainMapSettings.cpp", 844, "g_pMissionCD") == 1 )
+    {
       __debugbreak();
+    }
     if ( !g_pAddOn && BBSupportDbgReport(2, "gui\\GUI_MainMapSettings.cpp", 845, "g_pAddOn") == 1 )
+    {
       __debugbreak();
-    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD + 4))(g_pMissionCD)
-      || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-      || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2)
-      || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD3 + 4))(g_pMissionCD3) )
+    }
+    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD + 4))(g_pMissionCD) || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD3 + 4))(g_pMissionCD3) )
     {
       IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_4031998, 2507, 1);
     }
@@ -18072,7 +18646,9 @@ bool __cdecl GuiDlgMainMapSettingsProc(int a1, int a2, int a3) {
   int v65; // [esp+590h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -18085,13 +18661,19 @@ bool __cdecl GuiDlgMainMapSettingsProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (unsigned __int16)a2 == 2494 )
+      {
         g_bIsPrivateSession = BYTE2(a2) & 1;
+      }
       if ( !byte_3EDDCEC )
       {
         if ( ((a2 >> 16) & 1) != 0 )
+        {
           PlayGuiSound(1);
+        }
         else
+        {
           PlayGuiSound(0);
+        }
       }
       break;
     case 2:
@@ -18112,11 +18694,14 @@ bool __cdecl GuiDlgMainMapSettingsProc(int a1, int a2, int a3) {
       {
         case 2415:
           if ( !g_pAddOn && BBSupportDbgReport(2, "gui\\GUI_MainMapSettings.cpp", 1023, "g_pAddOn") == 1 )
+          {
             __debugbreak();
+          }
           if ( !g_pMissionCD2 && BBSupportDbgReport(2, "gui\\GUI_MainMapSettings.cpp", 1024, "g_pMissionCD2") == 1 )
+          {
             __debugbreak();
-          if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-            || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
+          }
+          if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
           {
             g_uiExtrasAllowed |= 1u;
           }
@@ -18170,9 +18755,13 @@ bool __cdecl GuiDlgMainMapSettingsProc(int a1, int a2, int a3) {
         case 2433:
           Instance = OnlineManager::GetInstance();
           if ( (unsigned __int8)OnlineManager::IsQuickMatchFlow(Instance) )
+          {
             v36 = 0;
+          }
           else
+          {
             v36 = g_bIsPrivateSession;
+          }
           v7 = (OnlineManager *)OnlineManager::GetInstance();
           OnlineManager::SetPrivate(v7, v36);
           byte_403199C = g_uiExtrasAllowed;
@@ -18183,7 +18772,9 @@ bool __cdecl GuiDlgMainMapSettingsProc(int a1, int a2, int a3) {
             std::wstring::~wstring(v37);
           }
           if ( (unsigned int)std::wstring::length(&stru_4031960) >= 0x1F )
+          {
             std::wstring::resize(32, 0);
+          }
           PlayGuiSound(2);
           v17 = CEvn_Event::CEvn_Event(&v51, 0x40u, 0, 0, 0);
           v65 = 3;
@@ -18375,18 +18966,23 @@ LABEL_89:
           break;
         case 2508:
           if ( !g_pAddOn && BBSupportDbgReport(2, "gui\\GUI_MainMapSettings.cpp", 1000, "g_pAddOn") == 1 )
+          {
             __debugbreak();
+          }
           if ( !g_pMissionCD2 && BBSupportDbgReport(2, "gui\\GUI_MainMapSettings.cpp", 1001, "g_pMissionCD2") == 1 )
+          {
             __debugbreak();
-          if ( g_pAddOn
-            && g_pMissionCD2
-            && ((*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-             || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2)) )
+          }
+          if ( g_pAddOn && g_pMissionCD2 && ((*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2)) )
           {
             if ( ((a2 >> 16) & 1) != 0 )
+            {
               g_uiExtrasAllowed |= 1u;
+            }
             else
+            {
               g_uiExtrasAllowed &= ~1u;
+            }
             v29 = CEvn_Event::CEvn_Event(&v53, 0x4Bu, (unsigned __int8)g_uiExtrasAllowed, 0, 0);
             v65 = 1;
             IEventEngine::SendAMessage(g_pEvnEngine, v29);
@@ -18482,7 +19078,9 @@ bool __cdecl GuiDlgMainMessageBoxProc(int a1, int a2, int a3) {
   int v8; // [esp+38h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -18490,9 +19088,13 @@ bool __cdecl GuiDlgMainMessageBoxProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       if ( S4LoWord(a2) == 2510 )
@@ -18565,7 +19167,9 @@ bool __cdecl GuiDlgMainscreenProc(int a1, int a2, int a3) {
   int v29; // [esp+198h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -18573,9 +19177,13 @@ bool __cdecl GuiDlgMainscreenProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       PlayGuiSound(2);
@@ -18969,23 +19577,31 @@ void __cdecl InitGuiDlgMainscreen(void) {
   byte_3EDDD30[1620] = 1;
   byte_3EDDD30[1812] = 1;
   byte_3EDDD30[2004] = 1;
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
   {
-    for ( j = 11; j < 12; ++j )
+    for ( j = 11;
+          j < 12;
+          ++j )
     {
       aControls[48 * j + 3 * i] = 45;
       dword_3EDDD2C[48 * j + 3 * i] = 2016;
       byte_3EDDD30[192 * j + 12 * i] = 0;
     }
   }
-  for ( i = 8; i <= 15; ++i )
+  for ( i = 8;
+        i <= 15;
+        ++i )
   {
     j = 11;
     v19 = 0;
     while ( !v19 )
     {
       if ( j <= 0 && BBSupportDbgReport(2, "gui\\GUI_Mainscreen.cpp", 438, "iControlCounter > 0") == 1 )
+      {
         __debugbreak();
+      }
       v0 = &aControls[48 * j - 72 + 3 * i];
       v1 = &aControls[48 * j + 3 * i];
       *v1 = *v0;
@@ -18993,7 +19609,9 @@ void __cdecl InitGuiDlgMainscreen(void) {
       v1[2] = v0[2];
       --j;
       if ( aControls[48 * j - 24 + 3 * i] == 43 )
+      {
         v19 = 1;
+      }
     }
     byte_3EDDD30[192 * j + 12 * i] = 1;
     aControls[48 * j + 3 * i] = 9501;
@@ -19009,22 +19627,26 @@ void __cdecl InitGuiDlgMainscreen(void) {
     }
   }
   if ( !g_pMissionCD && BBSupportDbgReport(2, "gui\\GUI_Mainscreen.cpp", 458, "g_pMissionCD") == 1 )
+  {
     __debugbreak();
+  }
   if ( !g_pAddOn && BBSupportDbgReport(2, "gui\\GUI_Mainscreen.cpp", 459, "g_pAddOn") == 1 )
+  {
     __debugbreak();
+  }
   if ( !g_pMissionCD2 && BBSupportDbgReport(2, "gui\\GUI_Mainscreen.cpp", 460, "g_pMissionCD2") == 1 )
+  {
     __debugbreak();
+  }
   if ( !g_pMissionCD3 && BBSupportDbgReport(2, "gui\\GUI_Mainscreen.cpp", 461, "g_pMissionCD3") == 1 )
+  {
     __debugbreak();
-  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD + 4))(g_pMissionCD)
-    && (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-    && (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2)
-    && ExtraCD::IsGermanOnlyContentEnabled() )
+  }
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD + 4))(g_pMissionCD) && (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) && (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) && ExtraCD::IsGermanOnlyContentEnabled() )
   {
     iStatus = 7;
   }
-  else if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2)
-         && ExtraCD::IsGermanOnlyContentEnabled() )
+  else if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) && ExtraCD::IsGermanOnlyContentEnabled() )
   {
     if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD + 4))(g_pMissionCD) )
     {
@@ -19042,68 +19664,47 @@ void __cdecl InitGuiDlgMainscreen(void) {
   else if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) )
   {
     if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD + 4))(g_pMissionCD) )
+    {
       iStatus = 3;
+    }
     else
+    {
       iStatus = 2;
+    }
   }
   else
   {
     iStatus = (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD + 4))(g_pMissionCD) != 0;
   }
-  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD3 + 4))(g_pMissionCD3)
-    && ExtraCD::IsGermanOnlyContentEnabled() )
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD3 + 4))(g_pMissionCD3) && ExtraCD::IsGermanOnlyContentEnabled() )
   {
     iStatus += 8;
   }
   if ( g_pStringEngine )
   {
-    v4 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                   g_pStringEngine,
-                   dword_3EDDD2C[3 * iStatus + 96]);
+    v4 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus + 96]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2531, v4);
-    v5 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                   g_pStringEngine,
-                   dword_3EDDD2C[3 * iStatus + 144]);
+    v5 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus + 144]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2532, v5);
-    v6 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                   g_pStringEngine,
-                   dword_3EDDD2C[3 * iStatus + 384]);
+    v6 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus + 384]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2533, v6);
-    v7 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                   g_pStringEngine,
-                   dword_3EDDD2C[3 * iStatus + 192]);
+    v7 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus + 192]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2534, v7);
-    v8 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                   g_pStringEngine,
-                   dword_3EDDD2C[3 * iStatus]);
+    v8 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2535, v8);
-    v9 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                   g_pStringEngine,
-                   dword_3EDDD2C[3 * iStatus + 240]);
+    v9 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus + 240]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2536, v9);
-    v10 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                    g_pStringEngine,
-                    dword_3EDDD2C[3 * iStatus + 288]);
+    v10 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus + 288]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2537, v10);
-    v11 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                    g_pStringEngine,
-                    dword_3EDDD2C[3 * iStatus + 336]);
+    v11 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus + 336]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2538, v11);
-    v12 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                    g_pStringEngine,
-                    dword_3EDDD2C[3 * iStatus + 48]);
+    v12 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus + 48]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2548, v12);
-    v13 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                    g_pStringEngine,
-                    dword_3EDDD2C[3 * iStatus + 432]);
+    v13 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus + 432]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2549, v13);
-    v14 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                    g_pStringEngine,
-                    dword_3EDDD2C[3 * iStatus + 480]);
+    v14 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus + 480]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2550, v14);
-    v15 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(
-                    g_pStringEngine,
-                    dword_3EDDD2C[3 * iStatus + 528]);
+    v15 = (char *)(*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, dword_3EDDD2C[3 * iStatus + 528]);
     IGuiEngine::SetText((void *)g_pGUIEngine, 0, 2551, v15);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 2535, byte_3EDDD30[12 * iStatus]);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 2548, byte_3EDDD30[12 * iStatus + 192]);
@@ -19150,7 +19751,9 @@ void __cdecl InitGuiDlgMainSplash(void) {
   char result; // al
 
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   result = g_iVictoryScreenCampaignType;
   switch ( g_iVictoryScreenCampaignType )
   {
@@ -19173,7 +19776,9 @@ bool __cdecl GuiDlgMainSplashProc(int a1, int a2, int a3) {
   char *v5; // eax
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -19181,9 +19786,13 @@ bool __cdecl GuiDlgMainSplashProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 8:
       if ( a3 == -1 )
@@ -19276,7 +19885,9 @@ void __cdecl InitGuiDlgMainStatisticDisplayMode(void) {
     IGuiEngine::SetImages((void *)g_pGUIEngine, 13, 2667, 244, 0);
     IGuiEngine::SetImages((void *)g_pGUIEngine, 13, 2668, 333, 0);
     v35 = 0;
-    for ( i = 1; i <= 8; ++i )
+    for ( i = 1;
+          i <= 8;
+          ++i )
     {
       TotalProducedSettler = CStatistic::GetTotalProducedSettler((CStatistic *)&g_cEndStatistic, i);
       v1 = CStatistic::GetTotalProducedBuildings((CStatistic *)&g_cEndStatistic, i) + 2 * TotalProducedSettler;
@@ -19287,9 +19898,13 @@ void __cdecl InitGuiDlgMainStatisticDisplayMode(void) {
       v6 = v5 + 2 * CStatistic::GetSoldiers((CStatistic *)&g_cEndStatistic, i);
       Value[i] = (5 * CStatistic::GetKills((CStatistic *)&g_cEndStatistic, i) + v6) / 10;
       if ( Value[i] > v35 )
+      {
         v35 = Value[i];
+      }
     }
-    for ( j = 1; j <= 8; ++j )
+    for ( j = 1;
+          j <= 8;
+          ++j )
     {
       NumberOfPlayers = CEndStatistic::GetNumberOfPlayers((CEndStatistic *)&g_cEndStatistic);
       if ( j <= NumberOfPlayers - CStatistic::GetDontShowLastNPlayers((CStatistic *)&g_cEndStatistic) )
@@ -19305,9 +19920,13 @@ void __cdecl InitGuiDlgMainStatisticDisplayMode(void) {
         v14 = j__strcat(v13, "%");
         IGuiEngine::SetText((void *)g_pGUIEngine, 13, dword_3694418[j], v14);
         if ( Value[j] == v35 )
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 13, dword_3694490[j], 0);
+        }
         else
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 13, dword_3694490[j], 1);
+        }
         v15 = j___itoa(Value[j], Buffer, 10);
         IGuiEngine::SetText((void *)g_pGUIEngine, 13, dword_3694490[j], v15);
         v16 = CStatistic::DefenceStrength100Max((CStatistic *)&g_cEndStatistic, j);
@@ -19334,7 +19953,9 @@ void __cdecl InitGuiDlgMainStatisticDisplayMode(void) {
     IGuiEngine::SetImages((void *)g_pGUIEngine, 13, 2666, 239, 0);
     IGuiEngine::SetImages((void *)g_pGUIEngine, 13, 2667, 236, 0);
     IGuiEngine::SetImages((void *)g_pGUIEngine, 13, 2668, 238, 0);
-    for ( k = 1; k <= 8; ++k )
+    for ( k = 1;
+          k <= 8;
+          ++k )
     {
       v21 = CEndStatistic::GetNumberOfPlayers((CEndStatistic *)&g_cEndStatistic);
       if ( k <= v21 - CStatistic::GetDontShowLastNPlayers((CStatistic *)&g_cEndStatistic) )
@@ -19401,13 +20022,7 @@ void __cdecl InitGuiDlgMainStatistic(void) {
   if ( g_pStringEngine )
   {
     v0 = (float)(unsigned int)(71 * CEndStatistic::GetTickCounter((CEndStatistic *)&g_cEndStatistic));
-    snprintf(
-      Str,
-      0x32u,
-      "%02u:%02u:%02u",
-      (unsigned int)(float)(v0 / 1000.0) / 0xE10,
-      (unsigned int)(float)(v0 / 1000.0) / 0x3C % 0x3C,
-      (unsigned int)(float)(v0 / 1000.0) % 0x3C);
+    snprintf(Str, 0x32u, "%02u:%02u:%02u", (unsigned int)(float)(v0 / 1000.0) / 0xE10, (unsigned int)(float)(v0 / 1000.0) / 0x3C % 0x3C, (unsigned int)(float)(v0 / 1000.0) % 0x3C);
     IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 13, 2584, 854, 0);
     IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 13, 2585, 865, 0);
     IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 13, 2567, 851, 0);
@@ -19431,11 +20046,15 @@ void __cdecl InitGuiDlgMainStatistic(void) {
         Stringa = String + 1;
         v17 = wcschr(Stringa, 46);
         if ( !v17 )
+        {
           v17 = (int)&Stringa[wcslen(Stringa)];
+        }
         wcsncpy(Destination, Stringa, (v17 - (int)Stringa) >> 1);
         v15 = (v17 - (int)Stringa) >> 1;
         if ( v15 >= 1024 )
+        {
           report_rangecheckfailure();
+        }
         Destination[v15] = 0;
       }
     }
@@ -19445,18 +20064,17 @@ void __cdecl InitGuiDlgMainStatistic(void) {
     }
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v21);
     v26 = 0;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-      v22,
-      Destination);
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v22, Destination);
     LOBYTE(v26) = 1;
     v5 = (char *)std::string::c_str(v22);
     IGuiEngine::SetText((void *)g_pGUIEngine, 13, 2661, v5);
-    if ( !(*(unsigned __int8 (__thiscall **)(void *, wchar_t *, _DWORD))(*(_DWORD *)g_pRandomMaps + 36))(
-            g_pRandomMaps,
-            Destination,
-            0) )
+    if ( !(*(unsigned __int8 (__thiscall **)(void *, wchar_t *, _DWORD))(*(_DWORD *)g_pRandomMaps + 36))(g_pRandomMaps, Destination, 0) )
+    {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 13, 2673, 0);
-    for ( i = 1; i <= 8; ++i )
+    }
+    for ( i = 1;
+          i <= 8;
+          ++i )
     {
       NumberOfPlayers = CEndStatistic::GetNumberOfPlayers((CEndStatistic *)&g_cEndStatistic);
       if ( i > NumberOfPlayers - CStatistic::GetDontShowLastNPlayers((CStatistic *)&g_cEndStatistic) )
@@ -19552,7 +20170,9 @@ bool __cdecl GuiDlgMainStatisticProc(int a1, int a2, int a3) {
   int v28; // [esp+1CCh] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -19562,9 +20182,13 @@ bool __cdecl GuiDlgMainStatisticProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( S4LoWord(a2) )
@@ -19656,19 +20280,9 @@ bool __cdecl GuiDlgMainStatisticProc(int a1, int a2, int a3) {
           v28 = 9;
           std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v16);
           LOBYTE(v28) = 10;
-          std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-            (int)v27,
-            Str);
+          std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)v27, Str);
           LOBYTE(v28) = 11;
-          if ( !(*(unsigned __int8 (__thiscall **)(void *, int *, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(
-                  g_pRandomMaps,
-                  v27,
-                  0)
-            && BBSupportDbgReport(
-                 2,
-                 "gui\\GUI_MainStatistic.cpp",
-                 768,
-                 "g_pRandomMaps->IsRandomMapFileName(testName,NULL)") == 1 )
+          if ( !(*(unsigned __int8 (__thiscall **)(void *, int *, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(g_pRandomMaps, v27, 0) && BBSupportDbgReport(2, "gui\\GUI_MainStatistic.cpp", 768, "g_pRandomMaps->IsRandomMapFileName(testName,NULL)") == 1 )
           {
             __debugbreak();
           }
@@ -19921,13 +20535,7 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
   if ( g_pStringEngine )
   {
     v0 = (float)(unsigned int)(71 * CEndStatistic::GetTickCounter((CEndStatistic *)&g_cEndStatistic));
-    snprintf(
-      Str,
-      0x32u,
-      "%02u:%02u:%02u",
-      (unsigned int)(float)(v0 / 1000.0) / 0xE10,
-      (unsigned int)(float)(v0 / 1000.0) / 0x3C % 0x3C,
-      (unsigned int)(float)(v0 / 1000.0) % 0x3C);
+    snprintf(Str, 0x32u, "%02u:%02u:%02u", (unsigned int)(float)(v0 / 1000.0) / 0xE10, (unsigned int)(float)(v0 / 1000.0) / 0x3C % 0x3C, (unsigned int)(float)(v0 / 1000.0) % 0x3C);
     IGuiEngine::EnableControl(g_pGUIEngine, 22, 2690, 0);
     IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, 2690, 0);
     IGuiEngine::SetTooltipID(g_pGUIEngine, 22, 2680, 851, 0);
@@ -19951,11 +20559,15 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
         Stringa = String + 1;
         v28 = wcschr(Stringa, 46);
         if ( !v28 )
+        {
           v28 = (int)&Stringa[wcslen(Stringa)];
+        }
         wcsncpy(Destination, Stringa, (v28 - (int)Stringa) >> 1);
         v18 = (v28 - (int)Stringa) >> 1;
         if ( v18 >= 1024 )
+        {
           report_rangecheckfailure();
+        }
         Destination[v18] = 0;
       }
     }
@@ -19965,33 +20577,29 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
     }
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v40);
     v48 = 0;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-      v41,
-      Destination);
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v41, Destination);
     LOBYTE(v48) = 1;
     v5 = (char *)std::string::c_str(v41);
     IGuiEngine::SetText(g_pGUIEngine, 22, 2766, v5);
-    if ( !(*(unsigned __int8 (__thiscall **)(void *, wchar_t *, _DWORD))(*(_DWORD *)g_pRandomMaps + 36))(
-            g_pRandomMaps,
-            Destination,
-            0) )
+    if ( !(*(unsigned __int8 (__thiscall **)(void *, wchar_t *, _DWORD))(*(_DWORD *)g_pRandomMaps + 36))(g_pRandomMaps, Destination, 0) )
+    {
       IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, 2795, 0);
-    for ( i = 0; i <= 7; ++i )
+    }
+    for ( i = 0;
+          i <= 7;
+          ++i )
     {
       IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694CBC[i], 1);
       GuiGoodImage = GetGuiGoodImage(g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood);
       IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694CBC[i], GuiGoodImage, 0);
-      IGuiEngine::SetTooltipID(
-        g_pGUIEngine,
-        22,
-        dword_3694CBC[i],
-        dword_36945F0[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 3],
-        dword_36945F0[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 4]);
+      IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694CBC[i], dword_36945F0[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 3], dword_36945F0[5 * g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood + 4]);
     }
     v17 = operator new[](0x10u);
     if ( byte_3EDE7FA )
     {
-      for ( j = 1; j <= 8; ++j )
+      for ( j = 1;
+            j <= 8;
+            ++j )
       {
         if ( byte_3EDE7FA && j <= CEndStatistic::GetNumberOfPlayers((CEndStatistic *)&g_cEndStatistic) )
         {
@@ -20039,25 +20647,30 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
             IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C90[j], 251, 0);
             IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694C90[j], 862, 0);
           }
-          for ( k = 0; k < 7; ++k )
+          for ( k = 0;
+                k < 7;
+                ++k )
           {
             v20 = 2;
             Good = CStatistic::GetGood((CStatistic *)&g_cEndStatistic, j, g_cEconomyGameInfo.m_sStats[k].m_uEconomyGood);
             v22 = -1;
-            for ( m = 1; m <= CEndStatistic::GetNumberOfPlayers((CEndStatistic *)&g_cEndStatistic); ++m )
+            for ( m = 1;
+                  m <= CEndStatistic::GetNumberOfPlayers((CEndStatistic *)&g_cEndStatistic);
+                  ++m )
             {
               if ( m != j )
               {
-                v21 = CStatistic::GetGood(
-                        (CStatistic *)&g_cEndStatistic,
-                        m,
-                        g_cEconomyGameInfo.m_sStats[k].m_uEconomyGood);
+                v21 = CStatistic::GetGood((CStatistic *)&g_cEndStatistic, m, g_cEconomyGameInfo.m_sStats[k].m_uEconomyGood);
                 if ( v21 > v22 )
+                {
                   v22 = v21;
+                }
               }
             }
             if ( v22 == Good )
+            {
               v20 = 1;
+            }
             IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694A80[7 * j - 7 + k], 1);
             IGuiEngine::SetFontTemplate(g_pGUIEngine, 22, dword_3694A80[7 * j - 7 + k], v20);
             _wsprintfA(v47, "%u", Good);
@@ -20073,17 +20686,27 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
           IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C68[j], 0);
           IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C40[j], 0);
           IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C90[j], 0);
-          for ( n = 0; n < 7; ++n )
+          for ( n = 0;
+                n < 7;
+                ++n )
+          {
             IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694A80[7 * j - 7 + n], 0);
+          }
         }
       }
     }
     else
     {
-      for ( ii = 1; ii <= 2; ++ii )
+      for ( ii = 1;
+            ii <= 2;
+            ++ii )
       {
-        for ( jj = 1; jj <= 8 && CEndStatistic::GetPlayerAlliance((CEndStatistic *)&g_cEndStatistic, jj) != ii; ++jj )
+        for ( jj = 1;
+              jj <= 8 && CEndStatistic::GetPlayerAlliance((CEndStatistic *)&g_cEndStatistic, jj) != ii;
+              ++jj )
+        {
           ;
+        }
         if ( jj <= 8 )
         {
           IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694BF0[jj], 1);
@@ -20116,7 +20739,9 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
             IGuiEngine::SetImages(g_pGUIEngine, 22, dword_3694C90[jj], 251, 0);
             IGuiEngine::SetTooltipID(g_pGUIEngine, 22, dword_3694C90[jj], 862, 0);
           }
-          for ( kk = 0; kk < 7; ++kk )
+          for ( kk = 0;
+                kk < 7;
+                ++kk )
           {
             if ( ii == 1 )
             {
@@ -20129,9 +20754,13 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
               m_uWinGoodsAllies = g_cEconomyGameInfo.m_sStats[kk].m_uWinGoodsOther;
             }
             if ( m_uWinGoodsAllies >= m_uWinGoodsOther )
+            {
               v25 = 1;
+            }
             else
+            {
               v25 = 2;
+            }
             IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694A80[7 * jj - 7 + kk], 1);
             IGuiEngine::SetFontTemplate(g_pGUIEngine, 22, dword_3694A80[7 * jj - 7 + kk], v25);
             _wsprintfA(v45, "%u", m_uWinGoodsAllies);
@@ -20139,7 +20768,9 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
           }
         }
       }
-      for ( mm = ii; mm <= 8; ++mm )
+      for ( mm = ii;
+            mm <= 8;
+            ++mm )
       {
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694BF0[mm], 0);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C18[mm], 0);
@@ -20147,8 +20778,12 @@ void __cdecl InitGuiDlgMainStatisticEcoDisplayMode(void) {
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C40[mm], 0);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694C90[mm], 0);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694A80[7 * mm - 7 + mm], 0);
-        for ( nn = 0; nn < 7; ++nn )
+        for ( nn = 0;
+              nn < 7;
+              ++nn )
+        {
           IGuiEngine::SetControlVisibility(g_pGUIEngine, 22, dword_3694A80[7 * mm - 7 + nn], 0);
+        }
       }
     }
     operator delete(v17);
@@ -20166,7 +20801,9 @@ void __cdecl InitGuiDlgMainStatisticEco(void) {
   
   byte_3EDE7FA = 0;
   if ( g_pStringEngine )
+  {
     InitGuiDlgMainStatisticEcoDisplayMode();
+  }
 }
 
 
@@ -20188,7 +20825,9 @@ bool __cdecl GuiDlgMainStatisticEcoProc(int a1, int a2, int a3) {
   int v15; // [esp+108h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -20196,9 +20835,13 @@ bool __cdecl GuiDlgMainStatisticEcoProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -20226,28 +20869,16 @@ bool __cdecl GuiDlgMainStatisticEcoProc(int a1, int a2, int a3) {
           v15 = 1;
           std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v9);
           LOBYTE(v15) = 2;
-          std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-            v13,
-            v12);
+          std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(v13, v12);
           LOBYTE(v15) = 3;
           std::wstring::wstring(v14);
           LOBYTE(v15) = 4;
-          if ( !(*(unsigned __int8 (__thiscall **)(void *, _BYTE *, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(
-                  g_pRandomMaps,
-                  v13,
-                  0)
-            && BBSupportDbgReport(
-                 2,
-                 "gui\\GUI_MainStatisticEco.cpp",
-                 831,
-                 "g_pRandomMaps->IsRandomMapFileName(temp,NULL)") == 1 )
+          if ( !(*(unsigned __int8 (__thiscall **)(void *, _BYTE *, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(g_pRandomMaps, v13, 0) && BBSupportDbgReport(2, "gui\\GUI_MainStatisticEco.cpp", 831, "g_pRandomMaps->IsRandomMapFileName(temp,NULL)") == 1 )
           {
             __debugbreak();
           }
           (*(void (__thiscall **)(void *, _BYTE *, _BYTE *))(*(_DWORD *)g_pRandomMaps + 32))(g_pRandomMaps, v13, v14);
-          v7 = std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-                 v10,
-                 v14);
+          v7 = std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v10, v14);
           LOBYTE(v15) = 5;
           (**(void (__thiscall ***)(void *, int))g_pClipboard)(g_pClipboard, v7);
           LOBYTE(v15) = 4;
@@ -20388,7 +21019,9 @@ bool __cdecl GuiDlgMainTutorialProc(int a1, int a2, int a3) {
   int v33; // [esp+1C4h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -20396,9 +21029,13 @@ bool __cdecl GuiDlgMainTutorialProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -20557,7 +21194,9 @@ LABEL_28:
       }
     case 6:
       if ( (unsigned __int16)a2 >= 0xAEEu && (unsigned __int16)a2 <= 0xAF9u )
+      {
         IGuiEngine::SetText((void *)g_pGUIEngine, 11, 2819, (char *)&byte_3694CDF);
+      }
       break;
     case 8:
       if ( a3 == -1 )
@@ -20602,7 +21241,9 @@ void __cdecl InitGuiDlgMD2Briefing(void) {
   v0 = std::string::c_str(&stru_402C998);
   result = CScrollMultiline::SetText(s_cMD2Scrolltext, v0);
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   v2 = g_pStringEngine->GetString(g_pStringEngine, 880);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 1802, v2);
   v3 = (char *)std::string::c_str(&stru_402C97C);
@@ -20630,7 +21271,9 @@ bool __cdecl GuiDlgMD2BriefingProc(int a1, int a2, int a3) {
   int v11; // [esp+5Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -20638,9 +21281,13 @@ bool __cdecl GuiDlgMD2BriefingProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -20709,7 +21356,9 @@ bool __cdecl GuiDlgMD2BriefingProc(int a1, int a2, int a3) {
       if ( SHIWORD(a2) <= 0 )
       {
         if ( a2 < 0 )
+        {
           CScrollMultiline::ScrollDown(s_cMD2Scrolltext);
+        }
       }
       else
       {
@@ -20735,15 +21384,21 @@ void __cdecl InitGuiDlgMD2Campaigns(void) {
   int v4; // [esp+Ch] [ebp-2Ch]
 
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   v1 = dword_402CBBC[17];
   v4 = dword_402CBBC[18];
   v3 = dword_402CBBC[19];
   v2 = dword_402CBBC[20];
   if ( v4 >= 1 || v3 >= 1 )
+  {
     IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1827, 1);
+  }
   else
+  {
     IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1827, 0);
+  }
   IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1851, v1 >= 1);
   IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1828, v1 >= 1);
   IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1852, v1 >= 2);
@@ -20772,9 +21427,13 @@ void __cdecl InitGuiDlgMD2Campaigns(void) {
   IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1850, v3 >= 4);
   IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1846, v3 >= 4);
   if ( v4 >= 1 || v3 >= 1 )
+  {
     IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1837, 1);
+  }
   else
+  {
     IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1837, 0);
+  }
   IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1855, v2 >= 1);
   IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1838, v2 >= 1);
   IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1856, v2 >= 2);
@@ -20787,9 +21446,13 @@ void __cdecl InitGuiDlgMD2Campaigns(void) {
   IGuiEngine::SetControlVisibility(g_pGUIEngine, 0, 1841, v2 >= 4);
   IGuiEngine::ResetRadioGroup(g_pGUIEngine, 0, 1825);
   if ( s_uAIDifficulty )
+  {
     return IGuiEngine::SelectControl(g_pGUIEngine, 0, 1825, 1);
+  }
   else
+  {
     return IGuiEngine::SelectControl(g_pGUIEngine, 0, 1824, 1);
+  }
   return result;
 }
 
@@ -20845,7 +21508,9 @@ bool __cdecl GuiDlgMD2CampaignsProc(int a1, int a2, int a3) {
   int v48; // [esp+2B8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -20853,9 +21518,13 @@ bool __cdecl GuiDlgMD2CampaignsProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -21083,7 +21752,9 @@ void __cdecl InitGuiDlgMDBriefing(void) {
   v0 = std::string::c_str(&stru_402C998);
   result = CScrollMultiline::SetText(s_cMDScrolltext, v0);
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   v2 = g_pStringEngine->GetString(g_pStringEngine, 880);
   IGuiEngine::SetText((void *)g_pGUIEngine, 5, 1866, v2);
   v3 = (char *)std::string::c_str(&stru_402C97C);
@@ -21111,7 +21782,9 @@ bool __cdecl GuiDlgMDBriefingProc(int a1, int a2, int a3) {
   int v11; // [esp+5Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -21119,9 +21792,13 @@ bool __cdecl GuiDlgMDBriefingProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -21190,7 +21867,9 @@ bool __cdecl GuiDlgMDBriefingProc(int a1, int a2, int a3) {
       if ( SHIWORD(a2) <= 0 )
       {
         if ( a2 < 0 )
+        {
           CScrollMultiline::ScrollDown(s_cMDScrolltext);
+        }
       }
       else
       {
@@ -21261,7 +21940,9 @@ bool __cdecl GuiDlgMDCampaignMayanProc(int a1, int a2, int a3) {
   int v18; // [esp+D8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -21269,9 +21950,13 @@ bool __cdecl GuiDlgMDCampaignMayanProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -21413,7 +22098,9 @@ bool __cdecl GuiDlgMDCampaignRomanProc(int a1, int a2, int a3) {
   int v18; // [esp+D8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -21421,9 +22108,13 @@ bool __cdecl GuiDlgMDCampaignRomanProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -21525,9 +22216,13 @@ void __cdecl InitGuiDlgMDCampaigns(void) {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 0, 1917, dword_402CBBC[10] != 0);
     IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 0, 1924);
     if ( s_uAIDifficulty )
+    {
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 1924, 1);
+    }
     else
+    {
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 1923, 1);
+    }
   }
 }
 
@@ -21553,7 +22248,9 @@ bool __cdecl GuiDlgMDCampaignsProc(int a1, int a2, int a3) {
   int v18; // [esp+D8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -21561,9 +22258,13 @@ bool __cdecl GuiDlgMDCampaignsProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -21720,7 +22421,9 @@ bool __cdecl GuiDlgMDCampaignsEcoConflictProc(int a1, int a2, int a3) {
   int v20; // [esp+F8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -21728,9 +22431,13 @@ bool __cdecl GuiDlgMDCampaignsEcoConflictProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -21880,7 +22587,9 @@ bool __cdecl GuiDlgMDCampaignVikingProc(int a1, int a2, int a3) {
   int v18; // [esp+D8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -21888,9 +22597,13 @@ bool __cdecl GuiDlgMDCampaignVikingProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -21983,7 +22696,9 @@ void __cdecl GuiDlgMDRandomMapParametersFillPlayerTeams(void) {
   CHAR Str[256]; // [esp+8h] [ebp-104h] BYREF
 
   if ( dword_4031928 > dword_4031924 )
+  {
     dword_4031928 = dword_4031924;
+  }
   _wsprintfA(Str, "%d", dword_4031924);
   IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1991, Str);
   _wsprintfA(Str, "%d", dword_4031928);
@@ -22061,9 +22776,13 @@ void __cdecl GuiDlgMDRandomMapParametersUpdate(void) {
   GuiDlgMDRandomMapParametersFillPlayerTeams();
   IGuiEngine::EnableControl(g_pGUIEngine, dword_4031998, 2005, byte_3EDFB44);
   if ( !g_pAddOn && BBSupportDbgReport(2, "gui\\GUI_MD_RandomMapParameters.cpp", 433, "g_pAddOn") == 1 )
+  {
     __debugbreak();
+  }
   if ( !g_pMissionCD2 && BBSupportDbgReport(2, "gui\\GUI_MD_RandomMapParameters.cpp", 434, "g_pMissionCD2") == 1 )
+  {
     __debugbreak();
+  }
   if ( g_pEvnEngine )
   {
     if ( g_pAddOn->IsExtraInstalled(g_pAddOn) || g_pMissionCD2->IsExtraInstalled(g_pMissionCD2) )
@@ -22302,9 +23021,13 @@ LABEL_62:
   }
   dword_4031FA0 = dword_4031924;
   if ( byte_4031FA4 )
+  {
     Dest[0] = 0;
+  }
   else
+  {
     sprintf(Dest, "%i", dword_4031F84);
+  }
   IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1972, Dest);
   if ( dword_4031F90 == 5 )
   {
@@ -22333,15 +23056,10 @@ LABEL_62:
   {
     std::wstring::wstring(&v52);
     v54 = 4;
-    (*(void (__thiscall **)(void *, int *, std::wstring *))(*(_DWORD *)g_pRandomMaps + 24))(
-      g_pRandomMaps,
-      &g_sRMP,
-      &v52);
+    (*(void (__thiscall **)(void *, int *, std::wstring *))(*(_DWORD *)g_pRandomMaps + 24))(g_pRandomMaps, &g_sRMP, &v52);
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v46);
     LOBYTE(v54) = 5;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-      &v51,
-      &v52);
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(&v51, &v52);
     LOBYTE(v54) = 6;
     v41 = std::string::c_str(&v51);
     IGuiEngine::SetText(g_pGUIEngine, dword_4031998, 1983, v41);
@@ -22407,7 +23125,9 @@ void __cdecl InitGuiDlgMDRandomMapParameters(void) {
     dword_4031F88 = 512;
     byte_3EDFB44 = 1;
     byte_3EDFB45 = 0;
-    for ( i = 0; i < 9; ++i )
+    for ( i = 0;
+          i < 9;
+          ++i )
     {
       dword_4031FA8[4 * i] = 16;
       dword_4031FB4[4 * i] = 0;
@@ -22469,8 +23189,7 @@ void __cdecl InitGuiDlgMDRandomMapParameters(void) {
     IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 1963, v16);
     v17 = g_pStringEngine->GetString(g_pStringEngine, 297);
     IGuiEngine::SetText((void *)g_pGUIEngine, dword_4031998, 2024, v17);
-    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-      || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
+    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, 2024, 1);
     }
@@ -22478,8 +23197,7 @@ void __cdecl InitGuiDlgMDRandomMapParameters(void) {
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, 2024, 0);
     }
-    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-      || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
+    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
     {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, 2023, 1);
     }
@@ -22489,7 +23207,9 @@ void __cdecl InitGuiDlgMDRandomMapParameters(void) {
     }
     IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, dword_4031998, 2023, 1);
     if ( !g_pMissionCD2 && BBSupportDbgReport(2, "gui\\GUI_MD_RandomMapParameters.cpp", 319, "g_pMissionCD2") == 1 )
+    {
       __debugbreak();
+    }
     v18 = (*(int (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, dword_4031998, 2025, v18);
     if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
@@ -22579,7 +23299,9 @@ bool __cdecl GuiDlgMDRandomMapParametersProc(int a1, int a2, int a3) {
   int v74; // [esp+6A4h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -22587,11 +23309,17 @@ bool __cdecl GuiDlgMDRandomMapParametersProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (unsigned __int16)a2 == 2003 )
+      {
         g_bIsPrivateSession = BYTE2(a2) & 1;
+      }
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 2:
       switch ( (unsigned __int16)a2 )
@@ -22622,14 +23350,9 @@ bool __cdecl GuiDlgMDRandomMapParametersProc(int a1, int a2, int a3) {
               j__strcpy_0(v72, Source);
               std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v40);
               v74 = 28;
-              std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-                (int)v68,
-                v72);
+              std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)v68, v72);
               LOBYTE(v74) = 29;
-              if ( (*(unsigned __int8 (__thiscall **)(void *, int *, int *))(*(_DWORD *)g_pRandomMaps + 16))(
-                     g_pRandomMaps,
-                     &g_sRMP,
-                     v68) )
+              if ( (*(unsigned __int8 (__thiscall **)(void *, int *, int *))(*(_DWORD *)g_pRandomMaps + 16))(g_pRandomMaps, &g_sRMP, v68) )
               {
                 byte_3EDFB44 = 1;
                 dword_4031924 = dword_4031FA0;
@@ -22828,9 +23551,13 @@ bool __cdecl GuiDlgMDRandomMapParametersProc(int a1, int a2, int a3) {
         case 2005:
           Instance = OnlineManager::GetInstance();
           if ( (unsigned __int8)OnlineManager::IsQuickMatchFlow(Instance) )
+          {
             v39 = 0;
+          }
           else
+          {
             v39 = g_bIsPrivateSession;
+          }
           v7 = (OnlineManager *)OnlineManager::GetInstance();
           OnlineManager::SetPrivate(v7, v39);
           byte_403199C = g_uiExtrasAllowed;
@@ -22841,7 +23568,9 @@ bool __cdecl GuiDlgMDRandomMapParametersProc(int a1, int a2, int a3) {
             std::wstring::~wstring(v42);
           }
           if ( (unsigned int)std::wstring::length(&stru_4031960) >= 0x1F )
+          {
             std::wstring::resize(32, 0);
+          }
           PlayGuiSound(2);
           v12 = CEvn_Event::CEvn_Event(&v67, 0x1B6Bu, 0, 0, 0);
           v74 = 3;
@@ -22905,20 +23634,17 @@ bool __cdecl GuiDlgMDRandomMapParametersProc(int a1, int a2, int a3) {
           (*(void (__thiscall **)(void *, _BYTE *, int))(*(_DWORD *)g_pClipboard + 8))(g_pClipboard, v70, 8);
           Str = (char *)std::string::c_str(v70);
           if ( !Str )
+          {
             goto LABEL_76;
+          }
           if ( strlen(Str) >= 8 )
           {
             j__strcpy_0(Destination, Str);
             std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v41);
             LOBYTE(v74) = 25;
-            std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-              (int)v69,
-              Destination);
+            std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)v69, Destination);
             LOBYTE(v74) = 26;
-            if ( (*(unsigned __int8 (__thiscall **)(void *, int *, int *))(*(_DWORD *)g_pRandomMaps + 16))(
-                   g_pRandomMaps,
-                   &g_sRMP,
-                   v69) )
+            if ( (*(unsigned __int8 (__thiscall **)(void *, int *, int *))(*(_DWORD *)g_pRandomMaps + 16))(g_pRandomMaps, &g_sRMP, v69) )
             {
               byte_3EDFB44 = 1;
               dword_4031924 = dword_4031FA0;
@@ -22952,22 +23678,25 @@ LABEL_76:
           break;
         case 2023:
           if ( !g_pAddOn && BBSupportDbgReport(2, "gui\\GUI_MD_RandomMapParameters.cpp", 1024, "g_pAddOn") == 1 )
-            __debugbreak();
-          if ( !g_pMissionCD2
-            && BBSupportDbgReport(2, "gui\\GUI_MD_RandomMapParameters.cpp", 1025, "g_pMissionCD2") == 1 )
           {
             __debugbreak();
           }
-          if ( !g_pAddOn && !g_pMissionCD2
-            || !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-            && !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
+          if ( !g_pMissionCD2 && BBSupportDbgReport(2, "gui\\GUI_MD_RandomMapParameters.cpp", 1025, "g_pMissionCD2") == 1 )
+          {
+            __debugbreak();
+          }
+          if ( !g_pAddOn && !g_pMissionCD2 || !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) && !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
           {
             return 1;
           }
           if ( (a2 & 0x10000) != 0 )
+          {
             g_uiExtrasAllowed |= 1u;
+          }
           else
+          {
             g_uiExtrasAllowed &= ~1u;
+          }
           v34 = CEvn_Event::CEvn_Event(&v54, 0x4Bu, (unsigned __int8)g_uiExtrasAllowed, 0, 0);
           v74 = 0;
           IEventEngine::SendAMessage(g_pEvnEngine, v34);
@@ -22975,13 +23704,14 @@ LABEL_76:
           CEvn_Event::~CEvn_Event(&v54);
           return 1;
         case 2025:
-          if ( !g_pMissionCD2
-            && BBSupportDbgReport(2, "gui\\GUI_MD_RandomMapParameters.cpp", 1044, "g_pMissionCD2") == 1 )
+          if ( !g_pMissionCD2 && BBSupportDbgReport(2, "gui\\GUI_MD_RandomMapParameters.cpp", 1044, "g_pMissionCD2") == 1 )
           {
             __debugbreak();
           }
           if ( !g_pMissionCD2 || !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) )
+          {
             return 1;
+          }
           g_bNewTextures = (a2 & 0x10000) != 0;
           v9 = CEvn_Event::CEvn_Event(&v55, 0x4Cu, (unsigned __int8)g_bNewTextures, 0, 0);
           v74 = 1;
@@ -23054,8 +23784,12 @@ void __cdecl UpdateGuiDlgMessages(class CEvn_Event * a1) {
         wparam = a1->m_wParam;
         if ( wparam )
         {
-          for ( i = 0; i < lparam; ++i )
+          for ( i = 0;
+                i < lparam;
+                ++i )
+          {
             CGuiMsgList::AddListItem(*(_DWORD *)(wparam + 8 * i + 4), *(char **)(wparam + 8 * i));
+          }
           v2 = CGuiMsgList::Listcount((CGuiMsgList *)&s_cMsgLst_0);
           CGuiMsgList::SetTopindex((CGuiMsgList *)&s_cMsgLst_0, v2 - 1);
         }
@@ -23075,7 +23809,9 @@ void __cdecl InitGuiDlgMessages(void) {
   _DWORD v1[16]; // [esp+0h] [ebp-44h] BYREF
 
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 40), 969, 0);
   v1[0] = *(_DWORD *)(g_pGuiMainEvents + 40);
   v1[1] = 958;
@@ -23091,12 +23827,7 @@ void __cdecl InitGuiDlgMessages(void) {
   v1[14] = 965;
   CGuiMsgList::SetOutputControls((CGuiMsgList *)&s_cMsgLst_0, 4, (struct CGuiMsgList::SControl *)v1);
   CGuiMsgList::SetTopindex((CGuiMsgList *)&s_cMsgLst_0, 0);
-  return IGuiEngine::SetEditProperties(
-           (IGuiEngine *)g_pGUIEngine,
-           *(_DWORD *)(g_pGuiMainEvents + 40),
-           969,
-           0x60u,
-           0x7Fu);
+  return IGuiEngine::SetEditProperties((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 40), 969, 0x60u, 0x7Fu);
 }
 
 
@@ -23165,9 +23896,13 @@ void __cdecl HighlightEntryDlgMessages(int a1, bool a2) {
 
   ListindexFromControlindex = 0;
   if ( a2 )
+  {
     v4 = 10;
+  }
   else
+  {
     v4 = 9;
+  }
   switch ( a1 )
   {
     case 958:
@@ -23186,14 +23921,22 @@ void __cdecl HighlightEntryDlgMessages(int a1, bool a2) {
       break;
   }
   if ( CGuiMsgList::GetListindexFromControlindex((CGuiMsgList *)&s_cMsgLst_0, 0) == ListindexFromControlindex )
+  {
     IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 40), 958, v4);
+  }
   if ( CGuiMsgList::GetListindexFromControlindex((CGuiMsgList *)&s_cMsgLst_0, 1) == ListindexFromControlindex )
+  {
     IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 40), 959, v4);
+  }
   if ( CGuiMsgList::GetListindexFromControlindex((CGuiMsgList *)&s_cMsgLst_0, 2) == ListindexFromControlindex )
+  {
     IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 40), 960, v4);
+  }
   v2 = CGuiMsgList::GetListindexFromControlindex((CGuiMsgList *)&s_cMsgLst_0, 3);
   if ( v2 == ListindexFromControlindex )
+  {
     LOBYTE(v2) = IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 40), 961, v4);
+  }
   return v2;
 }
 
@@ -23233,7 +23976,9 @@ bool __cdecl GuiDlgMessagesProc(int a1, int a2, int a3) {
   int v32; // [esp+110h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -23241,11 +23986,15 @@ bool __cdecl GuiDlgMessagesProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       break;
     case 2:
       if ( S4LoWord(a2) == 969 )
+      {
         PlayGuiSound(1);
+      }
       break;
     case 3:
       switch ( S4LoWord(a2) )
@@ -23402,9 +24151,13 @@ LABEL_15:
 bool __cdecl operator!=(class String const & a1, char const * a2) {
   
   if ( a2 )
+  {
     return std::operator!=<char>(a1, a2);
+  }
   else
+  {
     return std::operator!=<char>(a1, (char *)&off_366DCF4);
+  }
 }
 
 
@@ -23438,27 +24191,21 @@ void __cdecl UpdateGuiDlgMilitaryBuildingContext(void) {
     }
     IGuiEngine::SelectControl(g_pGUIEngine, 16, 972, g_cMilitaryBuildingInfo.m_bSomeFlagBits == 0);
     IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, 972, g_cMilitaryBuildingInfo.m_unknownB);
-    for ( i = 0; i < 10; ++i )
+    for ( i = 0;
+          i < 10;
+          ++i )
     {
       if ( g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitType == -2 )
       {
         IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], 158, 0);
-        IGuiEngine::SetSliderPosition(
-          g_pGUIEngine,
-          16,
-          dword_36971D8[2 * i + 1],
-          (char)g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitHealth);
+        IGuiEngine::SetSliderPosition(g_pGUIEngine, 16, dword_36971D8[2 * i + 1], (char)g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitHealth);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i], 1);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i + 1], 0);
       }
       else if ( g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitType == -1 )
       {
         IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], 159, 0);
-        IGuiEngine::SetSliderPosition(
-          g_pGUIEngine,
-          16,
-          dword_36971D8[2 * i + 1],
-          (char)g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitHealth);
+        IGuiEngine::SetSliderPosition(g_pGUIEngine, 16, dword_36971D8[2 * i + 1], (char)g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitHealth);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i], 1);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i + 1], 0);
       }
@@ -23472,178 +24219,66 @@ void __cdecl UpdateGuiDlgMilitaryBuildingContext(void) {
         switch ( g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitType )
         {
           case 0x1D:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 1],
-              dword_3696DF0[50 * dword_3EFD434 + 2]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 3],
-              dword_3696DF0[50 * dword_3EFD434 + 4]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 1], dword_3696DF0[50 * dword_3EFD434 + 2]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 3], dword_3696DF0[50 * dword_3EFD434 + 4]);
             break;
           case 0x1E:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 6],
-              dword_3696DF0[50 * dword_3EFD434 + 7]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 8],
-              dword_3696DF0[50 * dword_3EFD434 + 9]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 6], dword_3696DF0[50 * dword_3EFD434 + 7]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 8], dword_3696DF0[50 * dword_3EFD434 + 9]);
             break;
           case 0x1F:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 11],
-              dword_3696DF0[50 * dword_3EFD434 + 12]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 13],
-              dword_3696DF0[50 * dword_3EFD434 + 14]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 11], dword_3696DF0[50 * dword_3EFD434 + 12]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 13], dword_3696DF0[50 * dword_3EFD434 + 14]);
             break;
           case 0x20:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 16],
-              dword_3696DF0[50 * dword_3EFD434 + 17]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 18],
-              dword_3696DF0[50 * dword_3EFD434 + 19]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 16], dword_3696DF0[50 * dword_3EFD434 + 17]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 18], dword_3696DF0[50 * dword_3EFD434 + 19]);
             break;
           case 0x21:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 21],
-              dword_3696DF0[50 * dword_3EFD434 + 22]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 23],
-              dword_3696DF0[50 * dword_3EFD434 + 24]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 21], dword_3696DF0[50 * dword_3EFD434 + 22]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 23], dword_3696DF0[50 * dword_3EFD434 + 24]);
             break;
           case 0x22:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 26],
-              dword_3696DF0[50 * dword_3EFD434 + 27]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 28],
-              dword_3696DF0[50 * dword_3EFD434 + 29]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 26], dword_3696DF0[50 * dword_3EFD434 + 27]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 28], dword_3696DF0[50 * dword_3EFD434 + 29]);
             break;
           case 0x26:
           case 0x29:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 31],
-              dword_3696DF0[50 * dword_3EFD434 + 32]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 33],
-              dword_3696DF0[50 * dword_3EFD434 + 34]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 31], dword_3696DF0[50 * dword_3EFD434 + 32]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 33], dword_3696DF0[50 * dword_3EFD434 + 34]);
             break;
           case 0x27:
           case 0x2A:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 36],
-              dword_3696DF0[50 * dword_3EFD434 + 37]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 38],
-              dword_3696DF0[50 * dword_3EFD434 + 39]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 36], dword_3696DF0[50 * dword_3EFD434 + 37]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 38], dword_3696DF0[50 * dword_3EFD434 + 39]);
             break;
           case 0x28:
           case 0x2B:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 41],
-              dword_3696DF0[50 * dword_3EFD434 + 42]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 43],
-              dword_3696DF0[50 * dword_3EFD434 + 44]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 41], dword_3696DF0[50 * dword_3EFD434 + 42]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 43], dword_3696DF0[50 * dword_3EFD434 + 44]);
             break;
           case 0x2C:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 46],
-              dword_3696DF0[50 * dword_3EFD434 + 47]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_36971D8[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 48],
-              dword_3696DF0[50 * dword_3EFD434 + 49]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 46], dword_3696DF0[50 * dword_3EFD434 + 47]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_36971D8[2 * i], dword_3696DF0[50 * dword_3EFD434 + 48], dword_3696DF0[50 * dword_3EFD434 + 49]);
             break;
           default:
             break;
         }
-        IGuiEngine::SetSliderPosition(
-          g_pGUIEngine,
-          16,
-          dword_36971D8[2 * i + 1],
-          (char)g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitHealth);
+        IGuiEngine::SetSliderPosition(g_pGUIEngine, 16, dword_36971D8[2 * i + 1], (char)g_cMilitaryBuildingInfo.m_aStationedArchers[i].m_cUnitHealth);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i], 1);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_36971D8[2 * i + 1], 1);
       }
       if ( g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitType == -2 )
       {
         IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], 158, 0);
-        IGuiEngine::SetSliderPosition(
-          g_pGUIEngine,
-          16,
-          dword_3697228[2 * i + 1],
-          (char)g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitHealth);
+        IGuiEngine::SetSliderPosition(g_pGUIEngine, 16, dword_3697228[2 * i + 1], (char)g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitHealth);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i], 1);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i + 1], 0);
       }
       else if ( g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitType == -1 )
       {
         IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], 159, 0);
-        IGuiEngine::SetSliderPosition(
-          g_pGUIEngine,
-          16,
-          dword_3697228[2 * i + 1],
-          (char)g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitHealth);
+        IGuiEngine::SetSliderPosition(g_pGUIEngine, 16, dword_3697228[2 * i + 1], (char)g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitHealth);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i], 1);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i + 1], 0);
       }
@@ -23657,156 +24292,52 @@ void __cdecl UpdateGuiDlgMilitaryBuildingContext(void) {
         switch ( g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitType )
         {
           case 0x1D:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 1],
-              dword_3696DF0[50 * dword_3EFD434 + 2]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 3],
-              dword_3696DF0[50 * dword_3EFD434 + 4]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 1], dword_3696DF0[50 * dword_3EFD434 + 2]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 3], dword_3696DF0[50 * dword_3EFD434 + 4]);
             break;
           case 0x1E:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 6],
-              dword_3696DF0[50 * dword_3EFD434 + 7]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 8],
-              dword_3696DF0[50 * dword_3EFD434 + 9]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 6], dword_3696DF0[50 * dword_3EFD434 + 7]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 8], dword_3696DF0[50 * dword_3EFD434 + 9]);
             break;
           case 0x1F:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 11],
-              dword_3696DF0[50 * dword_3EFD434 + 12]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 13],
-              dword_3696DF0[50 * dword_3EFD434 + 14]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 11], dword_3696DF0[50 * dword_3EFD434 + 12]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 13], dword_3696DF0[50 * dword_3EFD434 + 14]);
             break;
           case 0x20:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 16],
-              dword_3696DF0[50 * dword_3EFD434 + 17]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 18],
-              dword_3696DF0[50 * dword_3EFD434 + 19]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 16], dword_3696DF0[50 * dword_3EFD434 + 17]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 18], dword_3696DF0[50 * dword_3EFD434 + 19]);
             break;
           case 0x21:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 21],
-              dword_3696DF0[50 * dword_3EFD434 + 22]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 23],
-              dword_3696DF0[50 * dword_3EFD434 + 24]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 21], dword_3696DF0[50 * dword_3EFD434 + 22]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 23], dword_3696DF0[50 * dword_3EFD434 + 24]);
             break;
           case 0x22:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 26],
-              dword_3696DF0[50 * dword_3EFD434 + 27]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 28],
-              dword_3696DF0[50 * dword_3EFD434 + 29]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 26], dword_3696DF0[50 * dword_3EFD434 + 27]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 28], dword_3696DF0[50 * dword_3EFD434 + 29]);
             break;
           case 0x26:
           case 0x29:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 31],
-              dword_3696DF0[50 * dword_3EFD434 + 32]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 33],
-              dword_3696DF0[50 * dword_3EFD434 + 34]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 31], dword_3696DF0[50 * dword_3EFD434 + 32]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 33], dword_3696DF0[50 * dword_3EFD434 + 34]);
             break;
           case 0x27:
           case 0x2A:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 36],
-              dword_3696DF0[50 * dword_3EFD434 + 37]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 38],
-              dword_3696DF0[50 * dword_3EFD434 + 39]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 36], dword_3696DF0[50 * dword_3EFD434 + 37]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 38], dword_3696DF0[50 * dword_3EFD434 + 39]);
             break;
           case 0x28:
           case 0x2B:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 41],
-              dword_3696DF0[50 * dword_3EFD434 + 42]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 43],
-              dword_3696DF0[50 * dword_3EFD434 + 44]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 41], dword_3696DF0[50 * dword_3EFD434 + 42]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 43], dword_3696DF0[50 * dword_3EFD434 + 44]);
             break;
           case 0x2C:
-            IGuiEngine::SetImages(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 46],
-              dword_3696DF0[50 * dword_3EFD434 + 47]);
-            IGuiEngine::SetTooltipID(
-              g_pGUIEngine,
-              16,
-              dword_3697228[2 * i],
-              dword_3696DF0[50 * dword_3EFD434 + 48],
-              dword_3696DF0[50 * dword_3EFD434 + 49]);
+            IGuiEngine::SetImages(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 46], dword_3696DF0[50 * dword_3EFD434 + 47]);
+            IGuiEngine::SetTooltipID(g_pGUIEngine, 16, dword_3697228[2 * i], dword_3696DF0[50 * dword_3EFD434 + 48], dword_3696DF0[50 * dword_3EFD434 + 49]);
             break;
           default:
             break;
         }
-        IGuiEngine::SetSliderPosition(
-          g_pGUIEngine,
-          16,
-          dword_3697228[2 * i + 1],
-          (char)g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitHealth);
+        IGuiEngine::SetSliderPosition(g_pGUIEngine, 16, dword_3697228[2 * i + 1], (char)g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitHealth);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i], 1);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 16, dword_3697228[2 * i + 1], 1);
       }
@@ -23879,7 +24410,9 @@ bool __cdecl GuiDlgMilitaryBuildingContextProc(int a1, int a2, int a3) {
   int v60; // [esp+428h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -23890,9 +24423,13 @@ bool __cdecl GuiDlgMilitaryBuildingContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -24149,7 +24686,9 @@ void __cdecl MinimpapResetOpenDialogs(void) {
 
   result = g_pGuiMainEvents;
   if ( *(_DWORD *)(g_pGuiMainEvents + 24) == -1 )
+  {
     return result;
+  }
   IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 24));
   result = g_pGuiMainEvents;
   *(_DWORD *)(g_pGuiMainEvents + 24) = -1;
@@ -24235,7 +24774,9 @@ bool __cdecl GuiDlgMinimapProc(int a1, int a2, int a3) {
   int v52; // [esp+360h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -24245,9 +24786,13 @@ bool __cdecl GuiDlgMinimapProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 2:
       goto GuiDlgMinimapProc___def_17BCEDB;
@@ -24402,9 +24947,13 @@ bool __cdecl GuiDlgMinimapProc(int a1, int a2, int a3) {
           if ( !byte_3EFD440 )
           {
             if ( (S4HiWord(a2) & 1) != 0 )
+            {
               dword_3EFD43C |= 1u;
+            }
             else
+            {
               dword_3EFD43C &= ~1u;
+            }
             PlayGuiSound(2);
             v22 = CEvn_Event::CEvn_Event((CEvn_Event *)v46, 0x6Au, dword_3EFD43C, 0, 0);
             v52 = 18;
@@ -24417,9 +24966,13 @@ bool __cdecl GuiDlgMinimapProc(int a1, int a2, int a3) {
           if ( !byte_3EFD440 )
           {
             if ( (S4HiWord(a2) & 1) != 0 )
+            {
               dword_3EFD43C |= 4u;
+            }
             else
+            {
               dword_3EFD43C &= ~4u;
+            }
             PlayGuiSound(2);
             v20 = CEvn_Event::CEvn_Event((CEvn_Event *)v44, 0x6Au, dword_3EFD43C, 0, 0);
             v52 = 20;
@@ -24432,9 +24985,13 @@ bool __cdecl GuiDlgMinimapProc(int a1, int a2, int a3) {
           if ( !byte_3EFD440 )
           {
             if ( (S4HiWord(a2) & 1) != 0 )
+            {
               dword_3EFD43C |= 2u;
+            }
             else
+            {
               dword_3EFD43C &= ~2u;
+            }
             PlayGuiSound(2);
             v21 = CEvn_Event::CEvn_Event((CEvn_Event *)v45, 0x6Au, dword_3EFD43C, 0, 0);
             v52 = 19;
@@ -24447,9 +25004,13 @@ bool __cdecl GuiDlgMinimapProc(int a1, int a2, int a3) {
           if ( !byte_3EFD440 )
           {
             if ( (S4HiWord(a2) & 1) != 0 )
+            {
               dword_3EFD43C |= 8u;
+            }
             else
+            {
               dword_3EFD43C &= ~8u;
+            }
             PlayGuiSound(2);
             v19 = CEvn_Event::CEvn_Event((CEvn_Event *)v43, 0x6Au, dword_3EFD43C, 0, 0);
             v52 = 21;
@@ -24529,7 +25090,9 @@ bool __cdecl GuiDlgMultiplayerTypeMenuProc(int a1, int a2, int a3) {
   int v12; // [esp+78h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -24537,9 +25100,13 @@ bool __cdecl GuiDlgMultiplayerTypeMenuProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       PlayGuiSound(2);
@@ -24612,7 +25179,9 @@ bool __cdecl GuiDlgOptionsSubmenuProc(int a1, int a2, int a3) {
   int v22; // [esp+138h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -24620,9 +25189,13 @@ bool __cdecl GuiDlgOptionsSubmenuProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( S4LoWord(a2) )
@@ -24630,7 +25203,9 @@ bool __cdecl GuiDlgOptionsSubmenuProc(int a1, int a2, int a3) {
         case 0x3FDu:
           PlayGuiSound(2);
           if ( !g_pEvnEngine && BBSupportDbgReport(2, "gui\\GUI_OptionsSubmenu.cpp", 137, "g_pEvnEngine!= NULL") == 1 )
+          {
             __debugbreak();
+          }
           if ( g_pEvnEngine )
           {
             v13 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v17, 0x192u, 0, 0, 0, 0, 0);
@@ -24648,7 +25223,9 @@ bool __cdecl GuiDlgOptionsSubmenuProc(int a1, int a2, int a3) {
         case 0x3FEu:
           PlayGuiSound(2);
           if ( !g_pEvnEngine && BBSupportDbgReport(2, "gui\\GUI_OptionsSubmenu.cpp", 150, "g_pEvnEngine!= NULL") == 1 )
+          {
             __debugbreak();
+          }
           if ( g_pEvnEngine )
           {
             v11 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v16, 0x192u, 0, 0, 0, 0, 0);
@@ -24666,7 +25243,9 @@ bool __cdecl GuiDlgOptionsSubmenuProc(int a1, int a2, int a3) {
         case 0x3FFu:
           PlayGuiSound(2);
           if ( !g_pEvnEngine && BBSupportDbgReport(2, "gui\\GUI_OptionsSubmenu.cpp", 162, "g_pEvnEngine!= NULL") == 1 )
+          {
             __debugbreak();
+          }
           if ( g_pEvnEngine )
           {
             v9 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v15, 0x192u, 0, 0, 0, 0, 0);
@@ -24684,7 +25263,9 @@ bool __cdecl GuiDlgOptionsSubmenuProc(int a1, int a2, int a3) {
         case 0x400u:
           PlayGuiSound(2);
           if ( !g_pEvnEngine && BBSupportDbgReport(2, "gui\\GUI_OptionsSubmenu.cpp", 175, "g_pEvnEngine!= NULL") == 1 )
+          {
             __debugbreak();
+          }
           if ( g_pEvnEngine )
           {
             v7 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v14, 0x192u, 0, 0, 0, 0, 0);
@@ -24766,7 +25347,9 @@ void __cdecl UpdateGuiDlgPortContext(void) {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 17, 1027, byte_3F1E578 == 0);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 17, 1027, byte_3F1E577);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 17, 1034, byte_3F1E576);
-    for ( i = 0; i < 15; ++i )
+    for ( i = 0;
+          i < 15;
+          ++i )
     {
       v4 = byte_3F1E580[2 * i];
       if ( v4 <= 0 || v4 >= 43 || byte_3F1E581[2 * i] <= 0 )
@@ -24781,12 +25364,7 @@ void __cdecl UpdateGuiDlgPortContext(void) {
         IGuiEngine::SetText((void *)g_pGUIEngine, 17, dword_36977D0[2 * i], Str);
         GuiGoodImageID = GetGuiGoodImageID(v4);
         IGuiEngine::SetImages((void *)g_pGUIEngine, 17, dword_36977D0[2 * i + 1], GuiGoodImageID, 0);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          17,
-          dword_36977D0[2 * i + 1],
-          dword_3697470[5 * v4 + 3],
-          dword_3697470[5 * v4 + 4]);
+        IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 17, dword_36977D0[2 * i + 1], dword_3697470[5 * v4 + 3], dword_3697470[5 * v4 + 4]);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 17, dword_36977D0[2 * i], 1);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 17, dword_36977D0[2 * i + 1], 1);
       }
@@ -24841,7 +25419,9 @@ bool __cdecl GuiDlgPortContextProc(int a1, int a2, int a3) {
   int v28; // [esp+1C0h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -24852,9 +25432,13 @@ bool __cdecl GuiDlgPortContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -24901,7 +25485,9 @@ bool __cdecl GuiDlgPortContextProc(int a1, int a2, int a3) {
           if ( (a2 & 0x10000) != 0 )
           {
             if ( byte_3EFD444 )
+            {
               IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 17, 1060, 0);
+            }
             v9 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v17, 0x1C8u, 0, 0, 0, 0, 0);
             v28 = 4;
             IEventEngine::SendAMessage(g_pEvnEngine, v9);
@@ -24929,7 +25515,9 @@ bool __cdecl GuiDlgPortContextProc(int a1, int a2, int a3) {
           if ( (a2 & 0x10000) != 0 )
           {
             if ( byte_3EFD443 )
+            {
               IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 17, 1057, 0);
+            }
             v6 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v19, 0x1C7u, 0, 0, 0, 0, 0);
             v28 = 7;
             IEventEngine::SendAMessage(g_pEvnEngine, v6);
@@ -25014,7 +25602,9 @@ bool __cdecl GuiDlgProductionSubmenuProc(int a1, int a2, int a3) {
   int v17; // [esp+E0h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -25022,9 +25612,13 @@ bool __cdecl GuiDlgProductionSubmenuProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       v11 = S4LoWord(a2);
@@ -25044,10 +25638,7 @@ bool __cdecl GuiDlgProductionSubmenuProc(int a1, int a2, int a3) {
               IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 12));
               *(_DWORD *)(g_pGuiMainEvents + 12) = -1;
             }
-            IGuiEngine::OpenDialog(
-              (IGuiEngine *)g_pGUIEngine,
-              26,
-              (bool (__cdecl *)(int, int, int))GuiDlgGoodDistributionProc);
+            IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 26, (bool (__cdecl *)(int, int, int))GuiDlgGoodDistributionProc);
             *(_DWORD *)(g_pGuiMainEvents + 12) = 26;
           }
           break;
@@ -25136,7 +25727,9 @@ bool __cdecl GuiDlgQuitGameProc(int a1, int a2, int a3) {
   int v11; // [esp+58h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -25144,9 +25737,13 @@ bool __cdecl GuiDlgQuitGameProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       v8 = S4LoWord(a2);
@@ -25250,12 +25847,7 @@ void __cdecl UpdateGuiDlgResourceCollectorContext(void) {
       IGuiEngine::SetText((void *)g_pGUIEngine, 18, 1091, Str);
       GuiGoodImageID = GetGuiGoodImageID(MEMORY[0x3F1E4F8]);
       IGuiEngine::SetImages((void *)g_pGUIEngine, 18, 1090, GuiGoodImageID, 0);
-      IGuiEngine::SetTooltipID(
-        (IGuiEngine *)g_pGUIEngine,
-        18,
-        1090,
-        dword_3697918[5 * MEMORY[0x3F1E4F8] + 3],
-        dword_3697918[5 * MEMORY[0x3F1E4F8] + 4]);
+      IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 18, 1090, dword_3697918[5 * MEMORY[0x3F1E4F8] + 3], dword_3697918[5 * MEMORY[0x3F1E4F8] + 4]);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1091, 1);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 18, 1090, 1);
     }
@@ -25283,7 +25875,9 @@ bool __cdecl GuiDlgResourceCollectorContextProc(int a1, int a2, int a3) {
   int v16; // [esp+E0h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -25292,9 +25886,13 @@ bool __cdecl GuiDlgResourceCollectorContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -25571,30 +26169,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v183 = 937;
+          }
           else
+          {
             v183 = 889;
+          }
           result = v183;
           break;
         case 2:
           if ( a3 )
+          {
             v181 = 950;
+          }
           else
+          {
             v181 = 901;
+          }
           result = v181;
           break;
         case 4:
           if ( a3 )
+          {
             v182 = 929;
+          }
           else
+          {
             v182 = 928;
+          }
           result = v182;
           break;
         default:
           if ( a3 )
+          {
             v180 = 939;
+          }
           else
+          {
             v180 = 898;
+          }
           result = v180;
           break;
       }
@@ -25604,30 +26218,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v179 = 945;
+          }
           else
+          {
             v179 = 887;
+          }
           result = v179;
           break;
         case 2:
           if ( a3 )
+          {
             v177 = 959;
+          }
           else
+          {
             v177 = 903;
+          }
           result = v177;
           break;
         case 4:
           if ( a3 )
+          {
             v178 = 975;
+          }
           else
+          {
             v178 = 974;
+          }
           result = v178;
           break;
         default:
           if ( a3 )
+          {
             v176 = 937;
+          }
           else
+          {
             v176 = 890;
+          }
           result = v176;
           break;
       }
@@ -25637,30 +26267,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v175 = 930;
+          }
           else
+          {
             v175 = 893;
+          }
           result = v175;
           break;
         case 2:
           if ( a3 )
+          {
             v173 = 943;
+          }
           else
+          {
             v173 = 898;
+          }
           result = v173;
           break;
         case 4:
           if ( a3 )
+          {
             v174 = 941;
+          }
           else
+          {
             v174 = 940;
+          }
           result = v174;
           break;
         default:
           if ( a3 )
+          {
             v172 = 956;
+          }
           else
+          {
             v172 = 895;
+          }
           result = v172;
           break;
       }
@@ -25670,30 +26316,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v171 = 925;
+          }
           else
+          {
             v171 = 876;
+          }
           result = v171;
           break;
         case 2:
           if ( a3 )
+          {
             v169 = 937;
+          }
           else
+          {
             v169 = 902;
+          }
           result = v169;
           break;
         case 4:
           if ( a3 )
+          {
             v170 = 951;
+          }
           else
+          {
             v170 = 950;
+          }
           result = v170;
           break;
         default:
           if ( a3 )
+          {
             v168 = 950;
+          }
           else
+          {
             v168 = 897;
+          }
           result = v168;
           break;
       }
@@ -25703,30 +26365,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v167 = 917;
+          }
           else
+          {
             v167 = 875;
+          }
           result = v167;
           break;
         case 2:
           if ( a3 )
+          {
             v165 = 930;
+          }
           else
+          {
             v165 = 920;
+          }
           result = v165;
           break;
         case 4:
           if ( a3 )
+          {
             v166 = 967;
+          }
           else
+          {
             v166 = 966;
+          }
           result = v166;
           break;
         default:
           if ( a3 )
+          {
             v164 = 962;
+          }
           else
+          {
             v164 = 901;
+          }
           result = v164;
           break;
       }
@@ -25736,30 +26414,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v163 = 946;
+          }
           else
+          {
             v163 = 881;
+          }
           result = v163;
           break;
         case 2:
           if ( a3 )
+          {
             v161 = 960;
+          }
           else
+          {
             v161 = 891;
+          }
           result = v161;
           break;
         case 4:
           if ( a3 )
+          {
             v162 = 908;
+          }
           else
+          {
             v162 = 907;
+          }
           result = v162;
           break;
         default:
           if ( a3 )
+          {
             v160 = 936;
+          }
           else
+          {
             v160 = 889;
+          }
           result = v160;
           break;
       }
@@ -25769,30 +26463,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v159 = 940;
+          }
           else
+          {
             v159 = 888;
+          }
           result = v159;
           break;
         case 2:
           if ( a3 )
+          {
             v157 = 954;
+          }
           else
+          {
             v157 = 923;
+          }
           result = v157;
           break;
         case 4:
           if ( a3 )
+          {
             v158 = 920;
+          }
           else
+          {
             v158 = 919;
+          }
           result = v158;
           break;
         default:
           if ( a3 )
+          {
             v156 = 942;
+          }
           else
+          {
             v156 = 899;
+          }
           result = v156;
           break;
       }
@@ -25802,30 +26512,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v91 = 929;
+          }
           else
+          {
             v91 = 900;
+          }
           result = v91;
           break;
         case 2:
           if ( a3 )
+          {
             v89 = 941;
+          }
           else
+          {
             v89 = 909;
+          }
           result = v89;
           break;
         case 4:
           if ( a3 )
+          {
             v90 = 945;
+          }
           else
+          {
             v90 = 944;
+          }
           result = v90;
           break;
         default:
           if ( a3 )
+          {
             v88 = 954;
+          }
           else
+          {
             v88 = 911;
+          }
           result = v88;
           break;
       }
@@ -25835,30 +26561,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v87 = 935;
+          }
           else
+          {
             v87 = 901;
+          }
           result = v87;
           break;
         case 2:
           if ( a3 )
+          {
             v85 = 948;
+          }
           else
+          {
             v85 = 910;
+          }
           result = v85;
           break;
         case 4:
           if ( a3 )
+          {
             v86 = 931;
+          }
           else
+          {
             v86 = 930;
+          }
           result = v86;
           break;
         default:
           if ( a3 )
+          {
             v84 = 961;
+          }
           else
+          {
             v84 = 912;
+          }
           result = v84;
           break;
       }
@@ -25868,30 +26610,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v155 = 953;
+          }
           else
+          {
             v155 = 886;
+          }
           result = v155;
           break;
         case 2:
           if ( a3 )
+          {
             v153 = 967;
+          }
           else
+          {
             v153 = 896;
+          }
           result = v153;
           break;
         case 4:
           if ( a3 )
+          {
             v154 = 894;
+          }
           else
+          {
             v154 = 893;
+          }
           result = v154;
           break;
         default:
           if ( a3 )
+          {
             v152 = 929;
+          }
           else
+          {
             v152 = 883;
+          }
           result = v152;
           break;
       }
@@ -25901,30 +26659,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v151 = 947;
+          }
           else
+          {
             v151 = 882;
+          }
           result = v151;
           break;
         case 2:
           if ( a3 )
+          {
             v149 = 961;
+          }
           else
+          {
             v149 = 892;
+          }
           result = v149;
           break;
         case 4:
           if ( a3 )
+          {
             v150 = 906;
+          }
           else
+          {
             v150 = 905;
+          }
           result = v150;
           break;
         default:
           if ( a3 )
+          {
             v148 = 935;
+          }
           else
+          {
             v148 = 888;
+          }
           result = v148;
           break;
       }
@@ -25934,30 +26708,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v147 = 954;
+          }
           else
+          {
             v147 = 913;
+          }
           result = v147;
           break;
         case 2:
           if ( a3 )
+          {
             v145 = 968;
+          }
           else
+          {
             v145 = 925;
+          }
           result = v145;
           break;
         case 4:
           if ( a3 )
+          {
             v146 = 892;
+          }
           else
+          {
             v146 = 891;
+          }
           result = v146;
           break;
         default:
           if ( a3 )
+          {
             v144 = 928;
+          }
           else
+          {
             v144 = 923;
+          }
           result = v144;
           break;
       }
@@ -25967,30 +26757,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v143 = 948;
+          }
           else
+          {
             v143 = 884;
+          }
           result = v143;
           break;
         case 2:
           if ( a3 )
+          {
             v141 = 962;
+          }
           else
+          {
             v141 = 894;
+          }
           result = v141;
           break;
         case 4:
           if ( a3 )
+          {
             v142 = 904;
+          }
           else
+          {
             v142 = 903;
+          }
           result = v142;
           break;
         default:
           if ( a3 )
+          {
             v140 = 934;
+          }
           else
+          {
             v140 = 882;
+          }
           result = v140;
           break;
       }
@@ -26000,30 +26806,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v83 = 924;
+          }
           else
+          {
             v83 = 896;
+          }
           result = v83;
           break;
         case 2:
           if ( a3 )
+          {
             v81 = 936;
+          }
           else
+          {
             v81 = 905;
+          }
           result = v81;
           break;
         case 4:
           if ( a3 )
+          {
             v82 = 953;
+          }
           else
+          {
             v82 = 952;
+          }
           result = v82;
           break;
         default:
           if ( a3 )
+          {
             v80 = 949;
+          }
           else
+          {
             v80 = 907;
+          }
           result = v80;
           break;
       }
@@ -26033,30 +26855,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v139 = 939;
+          }
           else
+          {
             v139 = 906;
+          }
           result = v139;
           break;
         case 2:
           if ( a3 )
+          {
             v137 = 953;
+          }
           else
+          {
             v137 = 917;
+          }
           result = v137;
           break;
         case 4:
           if ( a3 )
+          {
             v138 = 922;
+          }
           else
+          {
             v138 = 921;
+          }
           result = v138;
           break;
         default:
           if ( a3 )
+          {
             v136 = 941;
+          }
           else
+          {
             v136 = 917;
+          }
           result = v136;
           break;
       }
@@ -26066,30 +26904,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v135 = 944;
+          }
           else
+          {
             v135 = 880;
+          }
           result = v135;
           break;
         case 2:
           if ( a3 )
+          {
             v133 = 958;
+          }
           else
+          {
             v133 = 890;
+          }
           result = v133;
           break;
         case 4:
           if ( a3 )
+          {
             v134 = 910;
+          }
           else
+          {
             v134 = 909;
+          }
           result = v134;
           break;
         default:
           if ( a3 )
+          {
             v132 = 946;
+          }
           else
+          {
             v132 = 891;
+          }
           result = v132;
           break;
       }
@@ -26099,30 +26953,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v131 = 949;
+          }
           else
+          {
             v131 = 885;
+          }
           result = v131;
           break;
         case 2:
           if ( a3 )
+          {
             v129 = 963;
+          }
           else
+          {
             v129 = 895;
+          }
           result = v129;
           break;
         case 4:
           if ( a3 )
+          {
             v130 = 902;
+          }
           else
+          {
             v130 = 901;
+          }
           result = v130;
           break;
         default:
           if ( a3 )
+          {
             v128 = 933;
+          }
           else
+          {
             v128 = 896;
+          }
           result = v128;
           break;
       }
@@ -26133,34 +27003,50 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
         if ( _iRace == 1 )
         {
           if ( a3 )
+          {
             v79 = 958;
+          }
           else
+          {
             v79 = 957;
+          }
           result = v79;
         }
         else if ( _iRace == 4 )
         {
           if ( a3 )
+          {
             v78 = 957;
+          }
           else
+          {
             v78 = 956;
+          }
           result = v78;
         }
         else
         {
           if ( a3 )
+          {
             v76 = 934;
+          }
           else
+          {
             v76 = 893;
+          }
           result = v76;
         }
       }
       else
       {
         if ( a3 )
+        {
           v77 = 983;
+        }
         else
+        {
           v77 = 982;
+        }
         result = v77;
       }
       break;
@@ -26169,30 +27055,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v75 = 927;
+          }
           else
+          {
             v75 = 898;
+          }
           result = v75;
           break;
         case 2:
           if ( a3 )
+          {
             v73 = 939;
+          }
           else
+          {
             v73 = 907;
+          }
           result = v73;
           break;
         case 4:
           if ( a3 )
+          {
             v74 = 978;
+          }
           else
+          {
             v74 = 948;
+          }
           result = v74;
           break;
         default:
           if ( a3 )
+          {
             v72 = 952;
+          }
           else
+          {
             v72 = 909;
+          }
           result = v72;
           break;
       }
@@ -26202,30 +27104,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v71 = 926;
+          }
           else
+          {
             v71 = 897;
+          }
           result = v71;
           break;
         case 2:
           if ( a3 )
+          {
             v69 = 938;
+          }
           else
+          {
             v69 = 906;
+          }
           result = v69;
           break;
         case 4:
           if ( a3 )
+          {
             v70 = 949;
+          }
           else
+          {
             v70 = 979;
+          }
           result = v70;
           break;
         default:
           if ( a3 )
+          {
             v68 = 951;
+          }
           else
+          {
             v68 = 908;
+          }
           result = v68;
           break;
       }
@@ -26235,30 +27153,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v127 = 921;
+          }
           else
+          {
             v127 = 894;
+          }
           result = v127;
           break;
         case 2:
           if ( a3 )
+          {
             v125 = 932;
+          }
           else
+          {
             v125 = 922;
+          }
           result = v125;
           break;
         case 4:
           if ( a3 )
+          {
             v126 = 961;
+          }
           else
+          {
             v126 = 960;
+          }
           result = v126;
           break;
         default:
           if ( a3 )
+          {
             v124 = 947;
+          }
           else
+          {
             v124 = 905;
+          }
           result = v124;
           break;
       }
@@ -26268,30 +27202,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v123 = 956;
+          }
           else
+          {
             v123 = 874;
+          }
           result = v123;
           break;
         case 2:
           if ( a3 )
+          {
             v121 = 929;
+          }
           else
+          {
             v121 = 918;
+          }
           result = v121;
           break;
         case 4:
           if ( a3 )
+          {
             v122 = 969;
+          }
           else
+          {
             v122 = 968;
+          }
           result = v122;
           break;
         default:
           if ( a3 )
+          {
             v120 = 918;
+          }
           else
+          {
             v120 = 900;
+          }
           result = v120;
           break;
       }
@@ -26301,30 +27251,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v119 = 918;
+          }
           else
+          {
             v119 = 879;
+          }
           result = v119;
           break;
         case 2:
           if ( a3 )
+          {
             v117 = 931;
+          }
           else
+          {
             v117 = 921;
+          }
           result = v117;
           break;
         case 4:
           if ( a3 )
+          {
             v118 = 965;
+          }
           else
+          {
             v118 = 964;
+          }
           result = v118;
           break;
         default:
           if ( a3 )
+          {
             v116 = 963;
+          }
           else
+          {
             v116 = 903;
+          }
           result = v116;
           break;
       }
@@ -26334,39 +27300,59 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v67 = 952;
+          }
           else
+          {
             v67 = 912;
+          }
           result = v67;
           break;
         case 2:
           if ( a3 )
+          {
             v65 = 966;
+          }
           else
+          {
             v65 = 916;
+          }
           result = v65;
           break;
         case 4:
           if ( a3 )
+          {
             v66 = 896;
+          }
           else
+          {
             v66 = 895;
+          }
           result = v66;
           break;
         default:
           if ( a3 )
+          {
             v64 = 930;
+          }
           else
+          {
             v64 = 922;
+          }
           result = v64;
           break;
       }
       break;
     case BUILDING_CHARCOALMAKER:
       if ( a3 )
+      {
         v63 = 871;
+      }
       else
+      {
         v63 = 914;
+      }
       result = v63;
       break;
     case BUILDING_TRAININGCENTER:
@@ -26374,30 +27360,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v62 = 920;
+          }
           else
+          {
             v62 = 883;
+          }
           result = v62;
           break;
         case 2:
           if ( a3 )
+          {
             v60 = 928;
+          }
           else
+          {
             v60 = 886;
+          }
           result = v60;
           break;
         case 4:
           if ( a3 )
+          {
             v61 = 963;
+          }
           else
+          {
             v61 = 962;
+          }
           result = v61;
           break;
         default:
           if ( a3 )
+          {
             v59 = 964;
+          }
           else
+          {
             v59 = 904;
+          }
           result = v59;
           break;
       }
@@ -26407,30 +27409,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v58 = 941;
+          }
           else
+          {
             v58 = 907;
+          }
           result = v58;
           break;
         case 2:
           if ( a3 )
+          {
             v56 = 955;
+          }
           else
+          {
             v56 = 914;
+          }
           result = v56;
           break;
         case 4:
           if ( a3 )
+          {
             v57 = 918;
+          }
           else
+          {
             v57 = 917;
+          }
           result = v57;
           break;
         default:
           if ( a3 )
+          {
             v55 = 943;
+          }
           else
+          {
             v55 = 916;
+          }
           result = v55;
           break;
       }
@@ -26440,30 +27458,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v54 = 955;
+          }
           else
+          {
             v54 = 915;
+          }
           result = v54;
           break;
         case 2:
           if ( a3 )
+          {
             v52 = 969;
+          }
           else
+          {
             v52 = 926;
+          }
           result = v52;
           break;
         case 4:
           if ( a3 )
+          {
             v53 = 890;
+          }
           else
+          {
             v53 = 889;
+          }
           result = v53;
           break;
         default:
           if ( a3 )
+          {
             v51 = 927;
+          }
           else
+          {
             v51 = 924;
+          }
           result = v51;
           break;
       }
@@ -26473,30 +27507,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v50 = 916;
+          }
           else
+          {
             v50 = 905;
+          }
           result = v50;
           break;
         case 2:
           if ( a3 )
+          {
             v48 = 952;
+          }
           else
+          {
             v48 = 913;
+          }
           result = v48;
           break;
         case 4:
           if ( a3 )
+          {
             v49 = 925;
+          }
           else
+          {
             v49 = 924;
+          }
           result = v49;
           break;
         default:
           if ( a3 )
+          {
             v47 = 887;
+          }
           else
+          {
             v47 = 915;
+          }
           result = v47;
           break;
       }
@@ -26514,30 +27564,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v115 = 919;
+          }
           else
+          {
             v115 = 877;
+          }
           result = v115;
           break;
         case 2:
           if ( a3 )
+          {
             v113 = 942;
+          }
           else
+          {
             v113 = 887;
+          }
           result = v113;
           break;
         case 4:
           if ( a3 )
+          {
             v114 = 943;
+          }
           else
+          {
             v114 = 942;
+          }
           result = v114;
           break;
         default:
           if ( a3 )
+          {
             v112 = 955;
+          }
           else
+          {
             v112 = 893;
+          }
           result = v112;
           break;
       }
@@ -26555,30 +27621,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v111 = 934;
+          }
           else
+          {
             v111 = 878;
+          }
           result = v111;
           break;
         case 2:
           if ( a3 )
+          {
             v109 = 947;
+          }
           else
+          {
             v109 = 888;
+          }
           result = v109;
           break;
         case 4:
           if ( a3 )
+          {
             v110 = 933;
+          }
           else
+          {
             v110 = 932;
+          }
           result = v110;
           break;
         default:
           if ( a3 )
+          {
             v108 = 960;
+          }
           else
+          {
             v108 = 892;
+          }
           result = v108;
           break;
       }
@@ -26588,30 +27670,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v46 = 936;
+          }
           else
+          {
             v46 = 903;
+          }
           result = v46;
           break;
         case 2:
           if ( a3 )
+          {
             v44 = 949;
+          }
           else
+          {
             v44 = 911;
+          }
           result = v44;
           break;
         case 4:
           if ( a3 )
+          {
             v45 = 977;
+          }
           else
+          {
             v45 = 976;
+          }
           result = v45;
           break;
         default:
           if ( a3 )
+          {
             v43 = 938;
+          }
           else
+          {
             v43 = 913;
+          }
           result = v43;
           break;
       }
@@ -26621,67 +27719,103 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v42 = 923;
+          }
           else
+          {
             v42 = 895;
+          }
           result = v42;
           break;
         case 2:
           if ( a3 )
+          {
             v40 = 935;
+          }
           else
+          {
             v40 = 904;
+          }
           result = v40;
           break;
         case 4:
           if ( a3 )
+          {
             v41 = 955;
+          }
           else
+          {
             v41 = 954;
+          }
           result = v41;
           break;
         default:
           if ( a3 )
+          {
             v39 = 948;
+          }
           else
+          {
             v39 = 906;
+          }
           result = v39;
           break;
       }
       break;
     case BUILDING_VINYARD:
       if ( a3 )
+      {
         v38 = 965;
+      }
       else
+      {
         v38 = 902;
+      }
       result = v38;
       break;
     case BUILDING_AGAVEFARMERHUT:
       if ( a3 )
+      {
         v37 = 970;
+      }
       else
+      {
         v37 = 927;
+      }
       result = v37;
       break;
     case BUILDING_TEQUILAMAKERHUT:
       if ( a3 )
+      {
         v36 = 933;
+      }
       else
+      {
         v36 = 889;
+      }
       result = v36;
       break;
     case BUILDING_BEEKEEPERHUT:
       if ( a3 )
+      {
         v33 = 873;
+      }
       else
+      {
         v33 = 911;
+      }
       result = v33;
       break;
     case BUILDING_MEADMAKERHUT:
       if ( a3 )
+      {
         v32 = 922;
+      }
       else
+      {
         v32 = 902;
+      }
       result = v32;
       break;
     case BUILDING_RESIDENCESMALL:
@@ -26689,30 +27823,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v103 = 933;
+          }
           else
+          {
             v103 = 892;
+          }
           result = v103;
           break;
         case 2:
           if ( a3 )
+          {
             v101 = 946;
+          }
           else
+          {
             v101 = 900;
+          }
           result = v101;
           break;
         case 4:
           if ( a3 )
+          {
             v102 = 935;
+          }
           else
+          {
             v102 = 934;
+          }
           result = v102;
           break;
         default:
           if ( a3 )
+          {
             v100 = 959;
+          }
           else
+          {
             v100 = 886;
+          }
           result = v100;
           break;
       }
@@ -26722,30 +27872,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v99 = 932;
+          }
           else
+          {
             v99 = 891;
+          }
           result = v99;
           break;
         case 2:
           if ( a3 )
+          {
             v97 = 945;
+          }
           else
+          {
             v97 = 899;
+          }
           result = v97;
           break;
         case 4:
           if ( a3 )
+          {
             v98 = 937;
+          }
           else
+          {
             v98 = 936;
+          }
           result = v98;
           break;
         default:
           if ( a3 )
+          {
             v96 = 958;
+          }
           else
+          {
             v96 = 885;
+          }
           result = v96;
           break;
       }
@@ -26755,30 +27921,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v95 = 931;
+          }
           else
+          {
             v95 = 890;
+          }
           result = v95;
           break;
         case 2:
           if ( a3 )
+          {
             v93 = 944;
+          }
           else
+          {
             v93 = 897;
+          }
           result = v93;
           break;
         case 4:
           if ( a3 )
+          {
             v94 = 939;
+          }
           else
+          {
             v94 = 938;
+          }
           result = v94;
           break;
         default:
           if ( a3 )
+          {
             v92 = 957;
+          }
           else
+          {
             v92 = 884;
+          }
           result = v92;
           break;
       }
@@ -26788,30 +27970,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v31 = 928;
+          }
           else
+          {
             v31 = 899;
+          }
           result = v31;
           break;
         case 2:
           if ( a3 )
+          {
             v29 = 940;
+          }
           else
+          {
             v29 = 908;
+          }
           result = v29;
           break;
         case 4:
           if ( a3 )
+          {
             v30 = 947;
+          }
           else
+          {
             v30 = 946;
+          }
           result = v30;
           break;
         default:
           if ( a3 )
+          {
             v28 = 953;
+          }
           else
+          {
             v28 = 910;
+          }
           result = v28;
           break;
       }
@@ -26821,30 +28019,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v107 = 951;
+          }
           else
+          {
             v107 = 910;
+          }
           result = v107;
           break;
         case 2:
           if ( a3 )
+          {
             v105 = 965;
+          }
           else
+          {
             v105 = 924;
+          }
           result = v105;
           break;
         case 4:
           if ( a3 )
+          {
             v106 = 898;
+          }
           else
+          {
             v106 = 897;
+          }
           result = v106;
           break;
         default:
           if ( a3 )
+          {
             v104 = 931;
+          }
           else
+          {
             v104 = 921;
+          }
           result = v104;
           break;
       }
@@ -26854,30 +28068,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v27 = 938;
+          }
           else
+          {
             v27 = 904;
+          }
           result = v27;
           break;
         case 2:
           if ( a3 )
+          {
             v25 = 951;
+          }
           else
+          {
             v25 = 912;
+          }
           result = v25;
           break;
         case 4:
           if ( a3 )
+          {
             v26 = 927;
+          }
           else
+          {
             v26 = 926;
+          }
           result = v26;
           break;
         default:
           if ( a3 )
+          {
             v24 = 940;
+          }
           else
+          {
             v24 = 914;
+          }
           result = v24;
           break;
       }
@@ -26887,30 +28117,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v23 = 942;
+          }
           else
+          {
             v23 = 872;
+          }
           result = v23;
           break;
         case 2:
           if ( a3 )
+          {
             v21 = 956;
+          }
           else
+          {
             v21 = 884;
+          }
           result = v21;
           break;
         case 4:
           if ( a3 )
+          {
             v22 = 914;
+          }
           else
+          {
             v22 = 913;
+          }
           result = v22;
           break;
         default:
           if ( a3 )
+          {
             v20 = 944;
+          }
           else
+          {
             v20 = 894;
+          }
           result = v20;
           break;
       }
@@ -26920,30 +28166,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v19 = 943;
+          }
           else
+          {
             v19 = 908;
+          }
           result = v19;
           break;
         case 2:
           if ( a3 )
+          {
             v17 = 957;
+          }
           else
+          {
             v17 = 915;
+          }
           result = v17;
           break;
         case 4:
           if ( a3 )
+          {
             v18 = 912;
+          }
           else
+          {
             v18 = 911;
+          }
           result = v18;
           break;
         default:
           if ( a3 )
+          {
             v16 = 945;
+          }
           else
+          {
             v16 = 919;
+          }
           result = v16;
           break;
       }
@@ -26953,30 +28215,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v15 = 950;
+          }
           else
+          {
             v15 = 909;
+          }
           result = v15;
           break;
         case 2:
           if ( a3 )
+          {
             v13 = 964;
+          }
           else
+          {
             v13 = 919;
+          }
           result = v13;
           break;
         case 4:
           if ( a3 )
+          {
             v14 = 900;
+          }
           else
+          {
             v14 = 899;
+          }
           result = v14;
           break;
         default:
           if ( a3 )
+          {
             v12 = 932;
+          }
           else
+          {
             v12 = 920;
+          }
           result = v12;
           break;
       }
@@ -26988,30 +28266,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v11 = 917;
+          }
           else
+          {
             v11 = 875;
+          }
           result = v11;
           break;
         case 2:
           if ( a3 )
+          {
             v9 = 930;
+          }
           else
+          {
             v9 = 920;
+          }
           result = v9;
           break;
         case 4:
           if ( a3 )
+          {
             v10 = 967;
+          }
           else
+          {
             v10 = 966;
+          }
           result = v10;
           break;
         default:
           if ( a3 )
+          {
             v8 = 962;
+          }
           else
+          {
             v8 = 901;
+          }
           result = v8;
           break;
       }
@@ -27222,16 +28516,24 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       break;
     case BUILDING_SUNFLOWEROILMAKERHUT:
       if ( a3 )
+      {
         v34 = 971;
+      }
       else
+      {
         v34 = 970;
+      }
       result = v34;
       break;
     case BUILDING_SUNFLOWERFARMERHUT:
       if ( a3 )
+      {
         v35 = 973;
+      }
       else
+      {
         v35 = 972;
+      }
       result = v35;
       break;
     default:
@@ -27239,30 +28541,46 @@ unsigned int __cdecl GetGuiHouseImageID(int _iRace, enum BUILDING_TYPES _iBuildi
       {
         case 1:
           if ( a3 )
+          {
             v7 = 917;
+          }
           else
+          {
             v7 = 875;
+          }
           result = v7;
           break;
         case 2:
           if ( a3 )
+          {
             v5 = 930;
+          }
           else
+          {
             v5 = 920;
+          }
           result = v5;
           break;
         case 4:
           if ( a3 )
+          {
             v6 = 967;
+          }
           else
+          {
             v6 = 966;
+          }
           result = v6;
           break;
         default:
           if ( a3 )
+          {
             v4 = 962;
+          }
           else
+          {
             v4 = 901;
+          }
           result = v4;
           break;
       }
@@ -27805,7 +29123,9 @@ char const * __cdecl GetGuiHouseString(int a1, enum BUILDING_TYPES a2) {
   int v3; // [esp+38h] [ebp-4h]
 
   if ( !g_pStringEngine )
+  {
     return &sNoStringEngine;
+  }
   switch ( a2 )
   {
     case 1:
@@ -28210,9 +29530,13 @@ char const * __cdecl GetGuiHouseString(int a1, enum BUILDING_TYPES a2) {
       break;
   }
   if ( v3 == 3837 )
+  {
     return &sHouseStringNotFound;
+  }
   else
+  {
     return g_pStringEngine->GetString(g_pStringEngine, v3);
+  }
 }
 
 
@@ -28263,7 +29587,9 @@ void __cdecl UpdateGuiDlgResourceUpgradeContext(void) {
     }
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 19, 1099, byte_3F1E508 == 0);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 19, 1099, byte_3F1E507);
-    for ( i = 0; i < 5; ++i )
+    for ( i = 0;
+          i < 5;
+          ++i )
     {
       if ( byte_3F1E510[2 * i] <= 0 )
       {
@@ -28278,21 +29604,22 @@ void __cdecl UpdateGuiDlgResourceUpgradeContext(void) {
         IGuiEngine::SetText((void *)g_pGUIEngine, 19, dword_369808C[2 * i], Str);
         GuiGoodImageID = GetGuiGoodImageID(byte_3F1E510[2 * i]);
         IGuiEngine::SetImages((void *)g_pGUIEngine, 19, dword_369808C[2 * i + 1], GuiGoodImageID, 0);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          19,
-          dword_369808C[2 * i + 1],
-          dword_3697D30[5 * byte_3F1E510[2 * i] + 3],
-          dword_3697D30[5 * byte_3F1E510[2 * i] + 4]);
+        IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 19, dword_369808C[2 * i + 1], dword_3697D30[5 * byte_3F1E510[2 * i] + 3], dword_3697D30[5 * byte_3F1E510[2 * i] + 4]);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 19, dword_369808C[2 * i], 1);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 19, dword_369808C[2 * i + 1], 1);
         if ( Number < 0 )
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 19, dword_369808C[2 * i], 2);
+        }
         else
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 19, dword_369808C[2 * i], 1);
+        }
       }
     }
-    for ( j = 0; j < 10; ++j )
+    for ( j = 0;
+          j < 10;
+          ++j )
     {
       if ( byte_3F1E51A[2 * j] <= 0 )
       {
@@ -28307,24 +29634,27 @@ void __cdecl UpdateGuiDlgResourceUpgradeContext(void) {
         IGuiEngine::SetText((void *)g_pGUIEngine, 19, dword_36980B8[2 * j], Str);
         v5 = GetGuiGoodImageID(byte_3F1E51A[2 * j]);
         IGuiEngine::SetImages((void *)g_pGUIEngine, 19, dword_36980B8[2 * j + 1], v5, 0);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          19,
-          dword_36980B8[2 * j + 1],
-          dword_3697D30[5 * byte_3F1E51A[2 * j] + 3],
-          dword_3697D30[5 * byte_3F1E51A[2 * j] + 4]);
+        IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 19, dword_36980B8[2 * j + 1], dword_3697D30[5 * byte_3F1E51A[2 * j] + 3], dword_3697D30[5 * byte_3F1E51A[2 * j] + 4]);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 19, dword_36980B8[2 * j], 1);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 19, dword_36980B8[2 * j + 1], 1);
         if ( Numbera < 0 )
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 19, dword_36980B8[2 * j], 2);
+        }
         else
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 19, dword_36980B8[2 * j], 1);
+        }
       }
     }
     if ( byte_3F1E504 == 21 || byte_3F1E504 == 22 )
+    {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 19, 1138, 1);
+    }
     else
+    {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 19, 1138, 0);
+    }
     byte_3EFD447 = 0;
     if ( g_bOpenSidebar )
     {
@@ -28360,7 +29690,9 @@ bool __cdecl GuiDlgResourceUpgradeContextProc(int a1, int a2, int a3) {
   int v22; // [esp+150h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -28369,9 +29701,13 @@ bool __cdecl GuiDlgResourceUpgradeContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -28499,9 +29835,13 @@ void __cdecl UpdateGuiDlgSettingsGame(void) {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 38, 1150, *(_BYTE *)(g_pGame + 372));
     IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 38, 1149, *(_DWORD *)(g_pGame + 368));
     if ( s_uAIDifficulty )
+    {
       v0 = g_pStringEngine->GetString(g_pStringEngine, 891);
+    }
     else
+    {
       v0 = g_pStringEngine->GetString(g_pStringEngine, 889);
+    }
     IGuiEngine::SetText((void *)g_pGUIEngine, 38, 1142, v0);
     byte_3EFD448 = 0;
   }
@@ -28553,7 +29893,9 @@ bool __cdecl GuiDlgSettingsGameProc(int a1, int a2, int a3) {
   int v14; // [esp+98h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -28563,13 +29905,19 @@ bool __cdecl GuiDlgSettingsGameProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 2:
       if ( (unsigned __int16)a2 == 1149 && !byte_3EFD448 )
+      {
         *(_DWORD *)(g_pGame + 368) = a3;
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -28663,7 +30011,9 @@ void __cdecl UpdateGuiDlgSettingsGraphic(void) {
   char result; // al
 
   if ( !g_pGUIEngine )
+  {
     return result;
+  }
   byte_3EFD449 = 1;
   IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 36, 1177, 1);
   IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 36, 1157, 1);
@@ -28695,9 +30045,13 @@ void __cdecl UpdateGuiDlgSettingsGraphic(void) {
   IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 36, 1171, 1);
   IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 36, 1168);
   if ( *(_DWORD *)(g_pGame + 316) )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 36, 1169, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 36, 1168, 1);
+  }
   result = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 36, 1174, *(_DWORD *)(g_pGame + 324) != 0);
   byte_3EFD449 = 0;
   return result;
@@ -28774,7 +30128,9 @@ bool __cdecl GuiDlgSettingsGraphicProc(int a1, int a2, int a3) {
   int v14; // [esp+98h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -28784,9 +30140,13 @@ bool __cdecl GuiDlgSettingsGraphicProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       if ( (unsigned __int16)a2 == 1168 )
@@ -28871,57 +30231,109 @@ void __cdecl UpdateGuiDlgSettingsMessages(void) {
 
   byte_3EFD44A = 1;
   if ( (*(_DWORD *)(g_pGame + 380) & 3) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1206, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1206, 0);
+  }
   if ( (*(_DWORD *)(g_pGame + 380) & 5) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1205, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1205, 0);
+  }
   if ( (*(_DWORD *)(g_pGame + 380) & 0x300) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1204, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1204, 0);
+  }
   if ( (*(_DWORD *)(g_pGame + 380) & 0x500) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1203, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1203, 0);
+  }
   if ( (*(_DWORD *)(g_pGame + 380) & 0x900) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1202, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1202, 0);
+  }
   if ( (*(_DWORD *)(g_pGame + 380) & 0x1100) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1201, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1201, 0);
+  }
   if ( (*(_DWORD *)(g_pGame + 380) & 0x4100) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1199, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1199, 0);
+  }
   if ( (*(_DWORD *)(g_pGame + 380) & 0x30000) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1198, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1198, 0);
+  }
   if ( (*(_DWORD *)(g_pGame + 380) & 0x50000) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1197, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1197, 0);
+  }
   if ( (*(_DWORD *)(g_pGame + 380) & 0x90000) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1196, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1196, 0);
+  }
   if ( (*(_DWORD *)(g_pGame + 380) & 0x5000000) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1195, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1195, 0);
+  }
   if ( (*(_DWORD *)(g_pGame + 380) & 0x9000000) != 0 )
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1194, 1);
+  }
   else
+  {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1194, 0);
+  }
   if ( ((unsigned int)&loc_3000000 & *(_DWORD *)(g_pGame + 380)) != 0 )
+  {
     result = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1200, 1);
+  }
   else
+  {
     result = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 39, 1200, 0);
+  }
   byte_3EFD44A = 0;
   return result;
 }
@@ -29028,7 +30440,9 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
   int v45; // [esp+1B8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -29038,9 +30452,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       if ( !byte_3EFD44A )
@@ -29052,9 +30470,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v17 = *(_DWORD *)(g_pGame + 380) | 0x9000000;
+              }
               else
+              {
                 v17 = *(_DWORD *)(g_pGame + 380) & 0xF6FFFFFF;
+              }
               *(_DWORD *)(g_pGame + 380) = v17;
               v26 = CEvn_Event::CEvn_Event(&v36, 0x22u, 0, 0, 0);
               v45 = 11;
@@ -29068,9 +30490,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v16 = *(_DWORD *)(g_pGame + 380) | 0x5000000;
+              }
               else
+              {
                 v16 = *(_DWORD *)(g_pGame + 380) & 0xFAFFFFFF;
+              }
               *(_DWORD *)(g_pGame + 380) = v16;
               v27 = CEvn_Event::CEvn_Event(&v35, 0x22u, 0, 0, 0);
               v45 = 10;
@@ -29084,9 +30510,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v15 = *(_DWORD *)(g_pGame + 380) | 0x90000;
+              }
               else
+              {
                 v15 = *(_DWORD *)(g_pGame + 380) & 0xFFF6FFFF;
+              }
               *(_DWORD *)(g_pGame + 380) = v15;
               v28 = CEvn_Event::CEvn_Event(&v34, 0x22u, 0, 0, 0);
               v45 = 9;
@@ -29100,9 +30530,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v14 = *(_DWORD *)(g_pGame + 380) | 0x50000;
+              }
               else
+              {
                 v14 = *(_DWORD *)(g_pGame + 380) & 0xFFFAFFFF;
+              }
               *(_DWORD *)(g_pGame + 380) = v14;
               v24 = CEvn_Event::CEvn_Event(&v33, 0x22u, 0, 0, 0);
               v45 = 8;
@@ -29116,9 +30550,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v13 = *(_DWORD *)(g_pGame + 380) | 0x30000;
+              }
               else
+              {
                 v13 = *(_DWORD *)(g_pGame + 380) & 0xFFFCFFFF;
+              }
               *(_DWORD *)(g_pGame + 380) = v13;
               v23 = CEvn_Event::CEvn_Event(&v32, 0x22u, 0, 0, 0);
               v45 = 7;
@@ -29132,9 +30570,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v12 = *(_DWORD *)(g_pGame + 380) | 0x4100;
+              }
               else
+              {
                 v12 = *(_DWORD *)(g_pGame + 380) & 0xFFFFBEFF;
+              }
               *(_DWORD *)(g_pGame + 380) = v12;
               v22 = CEvn_Event::CEvn_Event(&v43, 0x22u, 0, 0, 0);
               v45 = 6;
@@ -29148,9 +30590,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v18 = (unsigned int)&loc_3000000 | *(_DWORD *)(g_pGame + 380);
+              }
               else
+              {
                 v18 = *(_DWORD *)(g_pGame + 380) & 0xFCFFFFFF;
+              }
               *(_DWORD *)(g_pGame + 380) = v18;
               v25 = CEvn_Event::CEvn_Event(&v44, 0x22u, 0, 0, 0);
               v45 = 12;
@@ -29186,9 +30632,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v10 = *(_DWORD *)(g_pGame + 380) | 0x900;
+              }
               else
+              {
                 v10 = *(_DWORD *)(g_pGame + 380) & 0xFFFFF6FF;
+              }
               *(_DWORD *)(g_pGame + 380) = v10;
               v20 = CEvn_Event::CEvn_Event(&v41, 0x22u, 0, 0, 0);
               v45 = 4;
@@ -29202,9 +30652,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v9 = *(_DWORD *)(g_pGame + 380) | 0x500;
+              }
               else
+              {
                 v9 = *(_DWORD *)(g_pGame + 380) & 0xFFFFFAFF;
+              }
               *(_DWORD *)(g_pGame + 380) = v9;
               v19 = CEvn_Event::CEvn_Event(&v40, 0x22u, 0, 0, 0);
               v45 = 3;
@@ -29218,9 +30672,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v8 = *(_DWORD *)(g_pGame + 380) | 0x300;
+              }
               else
+              {
                 v8 = *(_DWORD *)(g_pGame + 380) & 0xFFFFFCFF;
+              }
               *(_DWORD *)(g_pGame + 380) = v8;
               v29 = CEvn_Event::CEvn_Event(&v39, 0x22u, 0, 0, 0);
               v45 = 2;
@@ -29234,9 +30692,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v7 = *(_DWORD *)(g_pGame + 380) | 5;
+              }
               else
+              {
                 v7 = *(_DWORD *)(g_pGame + 380) & 0xFFFFFFFA;
+              }
               *(_DWORD *)(g_pGame + 380) = v7;
               v30 = CEvn_Event::CEvn_Event(&v38, 0x22u, 0, 0, 0);
               v45 = 1;
@@ -29250,9 +30712,13 @@ bool __cdecl GuiDlgSettingsMessagesProc(int a1, int a2, int a3) {
             {
               PlayGuiSound(1);
               if ( (a2 & 0x10000) != 0 )
+              {
                 v6 = *(_DWORD *)(g_pGame + 380) | 3;
+              }
               else
+              {
                 v6 = *(_DWORD *)(g_pGame + 380) & 0xFFFFFFFC;
+              }
               *(_DWORD *)(g_pGame + 380) = v6;
               v31 = CEvn_Event::CEvn_Event(&v37, 0x22u, 0, 0, 0);
               v45 = 0;
@@ -29302,7 +30768,9 @@ void __cdecl UpdateGuiDlgSettingsSound(void) {
   char result; // al
 
   if ( !g_pGUIEngine )
+  {
     return result;
+  }
   byte_3EFD44B = 1;
   IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 37, 1218, *(_BYTE *)(g_pGame + 352));
   IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 37, 1219, *(_BYTE *)(g_pGame + 353));
@@ -29379,7 +30847,9 @@ bool __cdecl GuiDlgSettingsSoundProc(int a1, int a2, int a3) {
   int v30; // [esp+19Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -29389,9 +30859,13 @@ bool __cdecl GuiDlgSettingsSoundProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 2:
       switch ( (__int16)a2 )
@@ -29580,7 +31054,9 @@ void __cdecl InitGuiDlgSettlerFindMenu(void) {
   if ( g_pStringEngine )
   {
     if ( CGameData::IsCampaign(g_pGameData) )
+    {
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 29, 1242, 0);
+    }
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 29, 1240, 1);
   }
 }
@@ -29605,7 +31081,9 @@ bool __cdecl GuiDlgSettlerFindMenuProc(int a1, int a2, int a3) {
   int v16; // [esp+A0h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -29613,9 +31091,13 @@ bool __cdecl GuiDlgSettlerFindMenuProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( S4LoWord(a2) )
@@ -29746,9 +31228,13 @@ void __cdecl SetAmountGuiDlgSettlerProductionMenu(int a1, int a2, int a3, int a4
   if ( a3 > -1 )
   {
     if ( a4 >= 0 )
+    {
       _wsprintfA(Str, "+%d", a4);
+    }
     else
+    {
       _wsprintfA(Str, "%d", a4);
+    }
     result = IGuiEngine::SetText((void *)g_pGUIEngine, 30, a3, Str);
   }
   if ( a5 > -1 )
@@ -29757,7 +31243,9 @@ void __cdecl SetAmountGuiDlgSettlerProductionMenu(int a1, int a2, int a3, int a4
     result = IGuiEngine::SetText((void *)g_pGUIEngine, 30, a5, Str);
   }
   if ( a7 <= -1 )
+  {
     return result;
+  }
   _wsprintfA(Str, "%d", a8);
   return IGuiEngine::SetText((void *)g_pGUIEngine, 30, a7, Str);
 }
@@ -29775,80 +31263,58 @@ void __cdecl UpdateGuiDlgSettlerProductionMenu(void) {
   IGuiEngine::EnableControl(g_pGUIEngine, 30, 1271, g_cSettlerProductionInfo.m_bInEcoSector);
   IGuiEngine::EnableControl(g_pGUIEngine, 30, 1272, g_cSettlerProductionInfo.m_bInEcoSector);
   SetAmountGuiDlgSettlerProductionMenu(1262, g_cSettlerProductionInfo.m_iFreeCarriers, -1, 0, -1, 0, -1, 0);
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     switch ( g_cSettlerProductionInfo.m_vSpecialist[i].m_iType )
     {
       case '.':
-        SetAmountGuiDlgSettlerProductionMenu(
-          1260,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount,
-          1277,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished,
-          1282,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods,
-          -1,
-          0);
+        SetAmountGuiDlgSettlerProductionMenu(1260, g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount, 1277, g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished, 1282, g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods, -1, 0);
         if ( g_cSettlerProductionInfo.m_vSpecialist[i].m_bEnoughGoods )
+        {
           IGuiEngine::SetImages(g_pGUIEngine, 30, 1266, 441, 0);
+        }
         else
+        {
           IGuiEngine::SetImages(g_pGUIEngine, 30, 1266, 501, 0);
+        }
         break;
       case '/':
-        SetAmountGuiDlgSettlerProductionMenu(
-          1259,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount,
-          1273,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished,
-          1280,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods,
-          -1,
-          0);
+        SetAmountGuiDlgSettlerProductionMenu(1259, g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount, 1273, g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished, 1280, g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods, -1, 0);
         if ( g_cSettlerProductionInfo.m_vSpecialist[i].m_bEnoughGoods )
+        {
           IGuiEngine::SetImages(g_pGUIEngine, 30, 1265, 437, 0);
+        }
         else
+        {
           IGuiEngine::SetImages(g_pGUIEngine, 30, 1265, 500, 0);
+        }
         break;
       case '0':
-        SetAmountGuiDlgSettlerProductionMenu(
-          1258,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount,
-          1276,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished,
-          -1,
-          0,
-          -1,
-          0);
+        SetAmountGuiDlgSettlerProductionMenu(1258, g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount, 1276, g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished, -1, 0, -1, 0);
         break;
       case '1':
-        SetAmountGuiDlgSettlerProductionMenu(
-          1257,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount,
-          1274,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished,
-          1279,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods,
-          -1,
-          0);
+        SetAmountGuiDlgSettlerProductionMenu(1257, g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount, 1274, g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished, 1279, g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods, -1, 0);
         if ( g_cSettlerProductionInfo.m_vSpecialist[i].m_bEnoughGoods )
+        {
           IGuiEngine::SetImages(g_pGUIEngine, 30, 1263, 443, 0);
+        }
         else
+        {
           IGuiEngine::SetImages(g_pGUIEngine, 30, 1263, 502, 0);
+        }
         break;
       case '2':
-        SetAmountGuiDlgSettlerProductionMenu(
-          1256,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount,
-          1275,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished,
-          1278,
-          g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods,
-          -1,
-          0);
+        SetAmountGuiDlgSettlerProductionMenu(1256, g_cSettlerProductionInfo.m_vSpecialist[i].m_iCount, 1275, g_cSettlerProductionInfo.m_vSpecialist[i].m_iWished, 1278, g_cSettlerProductionInfo.m_vSpecialist[i].m_iFreeGoods, -1, 0);
         if ( g_cSettlerProductionInfo.m_vSpecialist[i].m_bEnoughGoods )
+        {
           IGuiEngine::SetImages(g_pGUIEngine, 30, 1264, 437, 0);
+        }
         else
+        {
           IGuiEngine::SetImages(g_pGUIEngine, 30, 1264, 500, 0);
+        }
         break;
       default:
         continue;
@@ -29899,7 +31365,9 @@ bool __cdecl GuiDlgSettlerProductionMenuProc(int a1, int a2, int a3) {
   int v16; // [esp+E0h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -29908,9 +31376,13 @@ bool __cdecl GuiDlgSettlerProductionMenuProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -30022,10 +31494,14 @@ void __cdecl UpdateGuiDlgSettlerStatisticMenu(void) {
   CHAR Str[52]; // [esp+8h] [ebp-38h] BYREF
 
   if ( !g_pGUIEngine )
+  {
     return result;
+  }
   byte_3EFD454 = 1;
   IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 31, 1350, MEMORY[0x3F1E9E8] == 0);
-  for ( i = 0; i < 36; ++i )
+  for ( i = 0;
+        i < 36;
+        ++i )
   {
     if ( MEMORY[0x3F1EA08][2 * i] )
     {
@@ -30063,7 +31539,9 @@ bool __cdecl GuiDlgSettlerStatisticMenuProc(int a1, int a2, int a3) {
   int v10; // [esp+68h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -30074,9 +31552,13 @@ bool __cdecl GuiDlgSettlerStatisticMenuProc(int a1, int a2, int a3) {
       if ( !byte_3EFD454 )
       {
         if ( (a2 & 0x10000) != 0 )
+        {
           PlayGuiSound(1);
+        }
         else
+        {
           PlayGuiSound(0);
+        }
       }
       break;
     case 3:
@@ -30164,7 +31646,9 @@ void __cdecl UpdateGuiDlgShipVehicleContext(void) {
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 24, 1365, byte_3F1E610 == 0);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 24, 1365, byte_3F1E60F);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 24, 1386, byte_3F1E60E);
-    for ( i = 0; i < 5; ++i )
+    for ( i = 0;
+          i < 5;
+          ++i )
     {
       if ( byte_3F1E618[2 * i] )
       {
@@ -30174,18 +31658,17 @@ void __cdecl UpdateGuiDlgShipVehicleContext(void) {
         IGuiEngine::SetText((void *)g_pGUIEngine, 24, dword_36988F4[2 * i], Str);
         GuiGoodImageID = GetGuiGoodImageID(byte_3F1E618[2 * i]);
         IGuiEngine::SetImages((void *)g_pGUIEngine, 24, dword_36988F4[2 * i + 1], GuiGoodImageID, 0);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          24,
-          dword_36988F4[2 * i + 1],
-          dword_3698598[5 * byte_3F1E618[2 * i] + 3],
-          dword_3698598[5 * byte_3F1E618[2 * i] + 4]);
+        IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 24, dword_36988F4[2 * i + 1], dword_3698598[5 * byte_3F1E618[2 * i] + 3], dword_3698598[5 * byte_3F1E618[2 * i] + 4]);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 24, dword_36988F4[2 * i], 1);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 24, dword_36988F4[2 * i + 1], 1);
         if ( Number < 0 )
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 24, dword_36988F4[2 * i + 1], 2);
+        }
         else
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 24, dword_36988F4[2 * i], 1);
+        }
       }
       else
       {
@@ -30201,12 +31684,7 @@ void __cdecl UpdateGuiDlgShipVehicleContext(void) {
     else
     {
       IGuiEngine::SetImages((void *)g_pGUIEngine, 24, 1385, dword_36982D8[35 * byte_3F1E60D + 5 * dword_3F1E628], 0);
-      IGuiEngine::SetTooltipID(
-        (IGuiEngine *)g_pGUIEngine,
-        24,
-        1385,
-        dword_36982D8[35 * byte_3F1E60D + 3 + 5 * dword_3F1E628],
-        dword_36982D8[35 * byte_3F1E60D + 4 + 5 * dword_3F1E628]);
+      IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 24, 1385, dword_36982D8[35 * byte_3F1E60D + 3 + 5 * dword_3F1E628], dword_36982D8[35 * byte_3F1E60D + 4 + 5 * dword_3F1E628]);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 24, 1385, 1);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 24, 1383, 1);
     }
@@ -30254,7 +31732,9 @@ bool __cdecl GuiDlgShipVehicleContextProc(int a1, int a2, int a3) {
   int v22; // [esp+150h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -30263,9 +31743,13 @@ bool __cdecl GuiDlgShipVehicleContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -30411,18 +31895,17 @@ void __cdecl UpdateGuiDlgSmallTempleContext(void) {
       IGuiEngine::SetText((void *)g_pGUIEngine, 20, 1397, Str);
       GuiGoodImageID = GetGuiGoodImageID(byte_3F1E5DC);
       IGuiEngine::SetImages((void *)g_pGUIEngine, 20, 1396, GuiGoodImageID, 0);
-      IGuiEngine::SetTooltipID(
-        (IGuiEngine *)g_pGUIEngine,
-        20,
-        1396,
-        dword_3698A68[5 * byte_3F1E5DC + 3],
-        dword_3698A68[5 * byte_3F1E5DC + 4]);
+      IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 20, 1396, dword_3698A68[5 * byte_3F1E5DC + 3], dword_3698A68[5 * byte_3F1E5DC + 4]);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 20, 1397, 1);
       IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 20, 1396, 1);
       if ( Number < 0 )
+      {
         IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 20, 1396, 2);
+      }
       else
+      {
         IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 20, 1397, 1);
+      }
     }
     else
     {
@@ -30456,7 +31939,9 @@ bool __cdecl GuiDlgSmallTempleContextProc(int a1, int a2, int a3) {
   int v14; // [esp+B8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -30465,9 +31950,13 @@ bool __cdecl GuiDlgSmallTempleContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       if ( (unsigned __int16)a2 == 1387 )
@@ -30560,7 +32049,9 @@ void __cdecl SetSoldierProperties(struct SHealthState * a1, int a2, int a3) {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 45, a2, 1);
     result = IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 45, a3, 1);
     if ( a2 != 1442 )
+    {
       byte_3EFD459 = 0;
+    }
   }
   return result;
 }
@@ -30580,20 +32071,13 @@ void __cdecl UpdateGuiDlgSoldierContext(void) {
 
   if ( g_pGUIEngine )
   {
-    for ( i = 0; i < 3; ++i )
+    for ( i = 0;
+          i < 3;
+          ++i )
     {
-      SetSoldierProperties(
-        (struct SHealthState *)((char *)&unk_3F1E668 + 12 * i),
-        dword_3698E9C[2 * i],
-        dword_3698E9C[2 * i + 1]);
-      SetSoldierProperties(
-        (struct SHealthState *)((char *)&unk_3F1E68C + 12 * i),
-        dword_3698E84[2 * i],
-        dword_3698E84[2 * i + 1]);
-      SetSoldierProperties(
-        (struct SHealthState *)((char *)&unk_3F1E6B0 + 12 * i),
-        dword_3698EB4[2 * i],
-        dword_3698EB4[2 * i + 1]);
+      SetSoldierProperties((struct SHealthState *)((char *)&unk_3F1E668 + 12 * i), dword_3698E9C[2 * i], dword_3698E9C[2 * i + 1]);
+      SetSoldierProperties((struct SHealthState *)((char *)&unk_3F1E68C + 12 * i), dword_3698E84[2 * i], dword_3698E84[2 * i + 1]);
+      SetSoldierProperties((struct SHealthState *)((char *)&unk_3F1E6B0 + 12 * i), dword_3698EB4[2 * i], dword_3698EB4[2 * i + 1]);
     }
     SetSoldierProperties((struct SHealthState *)&unk_3F1E6D4, 1421, 1436);
     SetSoldierProperties((struct SHealthState *)&dword_3F1E6E0, 1442, 1443);
@@ -30664,7 +32148,9 @@ bool __cdecl GuiDlgSoldierContextProc(int a1, int a2, int a3) {
   int v26; // [esp+180h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -30677,9 +32163,13 @@ bool __cdecl GuiDlgSoldierContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (BYTE2(a3) & 1) != 0 )
+      {
         PlayGuiSound(1u);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
@@ -30713,7 +32203,9 @@ bool __cdecl GuiDlgSoldierContextProc(int a1, int a2, int a3) {
           if ( (a2 & 0x10000) != 0 )
           {
             if ( byte_3EFD457 )
+            {
               IGuiEngine::SelectControl(g_pGUIEngine, 45, 1444, 0);
+            }
             v9 = CEvn_Logic::CEvn_Logic(&v20, 0x1C2u, 0, 0, 0, 0, 0);
             v26 = 3;
             IEventEngine::SendAMessage(g_pEvnEngine, v9);
@@ -30741,7 +32233,9 @@ bool __cdecl GuiDlgSoldierContextProc(int a1, int a2, int a3) {
           if ( (a2 & 0x10000) != 0 )
           {
             if ( byte_3EFD458 )
+            {
               IGuiEngine::SelectControl(g_pGUIEngine, 45, 1440, 0);
+            }
             v13 = CEvn_Logic::CEvn_Logic(&v22, 0x1C1u, 0, 0, 0, 0, 0);
             v26 = 6;
             IEventEngine::SendAMessage(g_pEvnEngine, v13);
@@ -30805,7 +32299,9 @@ void __cdecl PlayGuiSound(int a1) {
   int result; // eax
 
   if ( a1 <= 5 )
+  {
     return CSoundManager::PlaySoundFX(g_pSoundManager, s_iGuiSoundTable[a1]);
+  }
   return result;
 }
 
@@ -30841,7 +32337,9 @@ void __cdecl UpdateGuiDlgSpecialistsContext(void) {
   char result; // al
 
   if ( !g_pGUIEngine )
+  {
     return result;
+  }
   SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E700], 1455, 1461);
   SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E70C], 1456, 1462);
   SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E718], 1457, 1463);
@@ -30870,7 +32368,9 @@ bool __cdecl GuiDlgSpecialistsContextProc(int a1, int a2, int a3) {
   int v17; // [esp+D8h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -30880,9 +32380,13 @@ bool __cdecl GuiDlgSpecialistsContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (unsigned __int16)a2 )
@@ -30965,7 +32469,9 @@ void __stdcall LineCallbackGoods(int a1, int a2, long a3) {
   int result; // eax
 
   if ( a2 <= 0 )
+  {
     return result;
+  }
   result = dword_3EFD460 + 2 * dword_3EFD464 * a2;
   *(_WORD *)(result + 2 * a1) = a3;
   return result;
@@ -30995,13 +32501,21 @@ void __cdecl DrawGoodsGrid(void) {
   int xStart; // [esp+8h] [ebp-4h]
 
   data = (unsigned __int16)IGfxEngine::ConvertRgbToHicol(50, 100, 50);
-  for ( xStart = 20; (float)xStart < 300.0; xStart += 20 )
+  for ( xStart = 20;
+        (float)xStart < 300.0;
+        xStart += 20 )
+  {
     LineDDA(xStart, 0, xStart, 179, LineCallbackGoods, data);
-  for ( yStart = 20; ; yStart += 20 )
+  }
+  for ( yStart = 20;
+        ;
+        yStart += 20 )
   {
     *(float *)&result = (float)yStart;
     if ( (float)yStart >= 179.0 )
+    {
       break;
+    }
     LineDDA(0, yStart, 299, yStart, LineCallbackGoods, data);
   }
   return result;
@@ -31063,13 +32577,7 @@ void __cdecl DrawGoodsGraph(void) {
   CHAR Str[64]; // [esp+4Ch] [ebp-44h] BYREF
 
   IGuiEngine::EraseOwnerImage(g_pGUIEngine, 76, 1471);
-  IGuiEngine::LockOwnerImage(
-    g_pGUIEngine,
-    76,
-    1471,
-    (struct SGuiRect *)v46,
-    (unsigned __int16 **)&dword_3EFD460,
-    (unsigned int *)&dword_3EFD464);
+  IGuiEngine::LockOwnerImage(g_pGUIEngine, 76, 1471, (struct SGuiRect *)v46, (unsigned __int16 **)&dword_3EFD460, (unsigned int *)&dword_3EFD464);
   v4 = 0;
   if ( dword_3EFD460 )
   {
@@ -31092,11 +32600,15 @@ void __cdecl DrawGoodsGraph(void) {
           IGuiEngine::SetText(g_pGUIEngine, 76, 1475, Str);
           yStarta = (int)(float)(178.0 - (float)((float)v41 * *(float *)&dword_3EFD474));
           xStarta = (int)(float)((float)15 * *(float *)&dword_3EFD470);
-          for ( i = dword_3F2BCC0; i >= 0; --i )
+          for ( i = dword_3F2BCC0;
+                i >= 0;
+                --i )
           {
             v42 = dword_3F32B24[784 * LocalPlayerId + 16 * dword_3EFD468 + i];
             if ( v42 > v4 )
+            {
               v4 = dword_3F32B24[784 * LocalPlayerId + 16 * dword_3EFD468 + i];
+            }
             yEndb = (int)(float)(178.0 - (float)((float)v42 * *(float *)&dword_3EFD474));
             xEndb = (int)(float)((float)v24 * *(float *)&dword_3EFD470);
             LineDDA(xStarta, yStarta, xEndb, yEndb, LineCallbackGoods, dataa);
@@ -31111,11 +32623,15 @@ void __cdecl DrawGoodsGraph(void) {
             }
             --v24;
           }
-          for ( j = dword_3F2BCC4 - 1; j > dword_3F2BCC0; --j )
+          for ( j = dword_3F2BCC4 - 1;
+                j > dword_3F2BCC0;
+                --j )
           {
             v43 = dword_3F32B24[784 * LocalPlayerId + 16 * dword_3EFD468 + j];
             if ( v43 > v4 )
+            {
               v4 = dword_3F32B24[784 * LocalPlayerId + 16 * dword_3EFD468 + j];
+            }
             yEndc = (int)(float)(178.0 - (float)((float)v43 * *(float *)&dword_3EFD474));
             xEndc = (int)(float)((float)v24 * *(float *)&dword_3EFD470);
             LineDDA(xStarta, yStarta, xEndc, yEndc, LineCallbackGoods, dataa);
@@ -31139,15 +32655,17 @@ void __cdecl DrawGoodsGraph(void) {
         IGfxEngine::GetPlayerColor(g_pGfxEngine, v2, &v47);
         datab = IGfxEngine::ConvertRgbToHicol(v47.m_iR, v47.m_iG, v47.m_iB);
         v25 = 15;
-        yStartb = (int)(float)(178.0
-                             - (float)((float)dword_3F39964[784 * v10 + 16 * dword_3EFD468 + dword_3F2BCD4]
-                                     * *(float *)&dword_3EFD474));
+        yStartb = (int)(float)(178.0 - (float)((float)dword_3F39964[784 * v10 + 16 * dword_3EFD468 + dword_3F2BCD4] * *(float *)&dword_3EFD474));
         xStartb = (int)(float)((float)15 * *(float *)&dword_3EFD470);
-        for ( k = dword_3F2BCD4; k >= 0; --k )
+        for ( k = dword_3F2BCD4;
+              k >= 0;
+              --k )
         {
           v44 = dword_3F39964[784 * v10 + 16 * dword_3EFD468 + k];
           if ( v44 > v4 )
+          {
             v4 = dword_3F39964[784 * v10 + 16 * dword_3EFD468 + k];
+          }
           yEndd = (int)(float)(178.0 - (float)((float)v44 * *(float *)&dword_3EFD474));
           xEndd = (int)(float)((float)v25 * *(float *)&dword_3EFD470);
           LineDDA(xStartb, yStartb, xEndd, yEndd, LineCallbackGoods, datab);
@@ -31162,11 +32680,15 @@ void __cdecl DrawGoodsGraph(void) {
           }
           --v25;
         }
-        for ( m = dword_3F2BCD8 - 1; m > dword_3F2BCD4; --m )
+        for ( m = dword_3F2BCD8 - 1;
+              m > dword_3F2BCD4;
+              --m )
         {
           v45 = dword_3F39964[784 * v10 + 16 * dword_3EFD468 + m];
           if ( v45 > v4 )
+          {
             v4 = dword_3F39964[784 * v10 + 16 * dword_3EFD468 + m];
+          }
           yEnde = (int)(float)(178.0 - (float)((float)v45 * *(float *)&dword_3EFD474));
           xEnde = (int)(float)((float)v25 * *(float *)&dword_3EFD470);
           LineDDA(xStartb, yStartb, xEnde, yEnde, LineCallbackGoods, datab);
@@ -31194,11 +32716,15 @@ void __cdecl DrawGoodsGraph(void) {
       *(float *)&dword_3EFD474 = 178.0 / *(float *)&dword_3EFD478;
       yStart = (int)(float)(178.0 - (float)((float)v38 * (float)(178.0 / *(float *)&dword_3EFD478)));
       xStart = (int)(float)((float)15 * *(float *)&dword_3EFD470);
-      for ( n = dword_3F2BCAC; n >= 0; --n )
+      for ( n = dword_3F2BCAC;
+            n >= 0;
+            --n )
       {
         v39 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD468 + n];
         if ( v39 > v4 )
+        {
           v4 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD468 + n];
+        }
         yEnd = (int)(float)(178.0 - (float)((float)v39 * *(float *)&dword_3EFD474));
         xEnd = (int)(float)((float)v23 * *(float *)&dword_3EFD470);
         LineDDA(xStart, yStart, xEnd, yEnd, LineCallbackGoods, data);
@@ -31213,11 +32739,15 @@ void __cdecl DrawGoodsGraph(void) {
         }
         --v23;
       }
-      for ( ii = dword_3F2BCB0 - 1; ii > dword_3F2BCAC; --ii )
+      for ( ii = dword_3F2BCB0 - 1;
+            ii > dword_3F2BCAC;
+            --ii )
       {
         v40 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD468 + ii];
         if ( v40 > v4 )
+        {
           v4 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD468 + ii];
+        }
         yEnda = (int)(float)(178.0 - (float)((float)v40 * *(float *)&dword_3EFD474));
         xEnda = (int)(float)((float)v23 * *(float *)&dword_3EFD470);
         LineDDA(xStart, yStart, xEnda, yEnda, LineCallbackGoods, data);
@@ -31240,7 +32770,9 @@ void __cdecl DrawGoodsGraph(void) {
     byte_3EFD45C = 0;
     *(float *)&dword_3EFD478 = (float)v4;
     if ( (float)v4 < 10.0 )
+    {
       dword_3EFD478 = LODWORD(FLOAT_10_0);
+    }
     InitMaxvalueGoods();
   }
 }
@@ -31261,7 +32793,9 @@ void __cdecl InitGuiDlgStatisticGoods(void) {
   char result; // al
 
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   IGuiEngine::SetText((void *)g_pGUIEngine, 76, 1477, "0");
   return IGuiEngine::SetText((void *)g_pGUIEngine, 76, 1481, " ");
 }
@@ -31323,7 +32857,9 @@ bool __cdecl GuiDlgStatisticGoodsProc(int a1, int a2, int a3) {
   char *v5; // eax
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -31343,9 +32879,13 @@ bool __cdecl GuiDlgStatisticGoodsProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       PlayGuiSound(2);
@@ -31425,12 +32965,16 @@ bool __cdecl GuiDlgStatisticGoodsProc(int a1, int a2, int a3) {
           case 1472:
             dword_3EFD46C = 0;
             if ( !byte_3EFD45D )
+            {
               goto LABEL_32;
+            }
             return 1;
           case 1473:
             dword_3EFD46C = 1;
             if ( !byte_3EFD45D )
+            {
               goto LABEL_32;
+            }
             return 1;
           case 1474:
             dword_3EFD46C = 2;
@@ -31443,16 +32987,22 @@ LABEL_32:
             break;
           case 1482:
             if ( ++dword_3EFD47C > 15 )
+            {
               dword_3EFD47C = 15;
+            }
             goto LABEL_34;
           case 1483:
             if ( --dword_3EFD47C < 0 )
+            {
               dword_3EFD47C = 0;
+            }
             goto LABEL_34;
           case 1484:
             dword_3EFD468 = 28;
             if ( !byte_3EFD45D )
+            {
               goto LABEL_34;
+            }
             break;
           case 1485:
             byte_3EFD45C = 1;
@@ -31502,12 +33052,16 @@ LABEL_32:
           case 1494:
             *(float *)&dword_3EFD478 = *(float *)&dword_3EFD478 - (float)(*(float *)&dword_3EFD478 / 10.0);
             if ( *(float *)&dword_3EFD478 < 10.0 )
+            {
               dword_3EFD478 = LODWORD(FLOAT_10_0);
+            }
             goto LABEL_87;
           case 1495:
             *(float *)&dword_3EFD478 = (float)(*(float *)&dword_3EFD478 / 10.0) + *(float *)&dword_3EFD478;
             if ( *(float *)&dword_3EFD478 > 9999.0 )
+            {
               dword_3EFD478 = LODWORD(FLOAT_9999_0);
+            }
             goto LABEL_87;
           case 1496:
             byte_3EFD45C = 1;
@@ -31644,7 +33198,9 @@ LABEL_32:
         {
           *(float *)&dword_3EFD478 = (float)(*(float *)&dword_3EFD478 / 10.0) + *(float *)&dword_3EFD478;
           if ( *(float *)&dword_3EFD478 > 9999.0 )
+          {
             dword_3EFD478 = LODWORD(FLOAT_9999_0);
+          }
           InitMaxvalueGoods();
         }
       }
@@ -31652,7 +33208,9 @@ LABEL_32:
       {
         *(float *)&dword_3EFD478 = *(float *)&dword_3EFD478 - (float)(*(float *)&dword_3EFD478 / 10.0);
         if ( *(float *)&dword_3EFD478 < 10.0 )
+        {
           dword_3EFD478 = LODWORD(FLOAT_10_0);
+        }
 LABEL_87:
         InitMaxvalueGoods();
       }
@@ -31675,7 +33233,9 @@ void __stdcall LineCallbackLand(int a1, int a2, long a3) {
   int result; // eax
 
   if ( a2 <= 0 )
+  {
     return result;
+  }
   result = dword_3EFD48C + 2 * dword_3EFD490 * a2;
   *(_WORD *)(result + 2 * a1) = a3;
   return result;
@@ -31705,13 +33265,21 @@ void __cdecl DrawLandGrid(void) {
   int xStart; // [esp+8h] [ebp-4h]
 
   data = (unsigned __int16)IGfxEngine::ConvertRgbToHicol(50, 100, 50);
-  for ( xStart = 20; (float)xStart < 300.0; xStart += 20 )
+  for ( xStart = 20;
+        (float)xStart < 300.0;
+        xStart += 20 )
+  {
     LineDDA(xStart, 0, xStart, 179, LineCallbackLand, data);
-  for ( yStart = 20; ; yStart += 20 )
+  }
+  for ( yStart = 20;
+        ;
+        yStart += 20 )
   {
     *(float *)&result = (float)yStart;
     if ( (float)yStart >= 179.0 )
+    {
       break;
+    }
     LineDDA(0, yStart, 299, yStart, LineCallbackLand, data);
   }
   return result;
@@ -31779,13 +33347,7 @@ void __cdecl DrawLandGraph(void) {
 
   v4 = 0;
   IGuiEngine::EraseOwnerImage((IGuiEngine *)g_pGUIEngine, 75, 1519);
-  IGuiEngine::LockOwnerImage(
-    (IGuiEngine *)g_pGUIEngine,
-    75,
-    1519,
-    (struct SGuiRect *)v49,
-    (unsigned __int16 **)&dword_3EFD48C,
-    (unsigned int *)&dword_3EFD490);
+  IGuiEngine::LockOwnerImage((IGuiEngine *)g_pGUIEngine, 75, 1519, (struct SGuiRect *)v49, (unsigned __int16 **)&dword_3EFD48C, (unsigned int *)&dword_3EFD490);
   if ( dword_3EFD48C )
   {
     dword_3EFD490 = (unsigned int)dword_3EFD490 >> 1;
@@ -31797,7 +33359,9 @@ void __cdecl DrawLandGraph(void) {
       {
         if ( dword_3F2BCC0 >= 0 )
         {
-          for ( i = 0; i < dword_3EFD4BC; ++i )
+          for ( i = 0;
+                i < dword_3EFD4BC;
+                ++i )
           {
             v9 = dword_3EFD49C[i];
             if ( byte_3EFD494[i] )
@@ -31811,11 +33375,15 @@ void __cdecl DrawLandGraph(void) {
               IGuiEngine::SetText((void *)g_pGUIEngine, 75, dword_3D891D8[3 * i + 2], Str);
               yStarta = (int)(float)(178.0 - (float)((float)v44 * *(float *)&dword_3EFD4CC));
               xStarta = (int)(float)((float)15 * *(float *)&dword_3EFD4C8);
-              for ( j = dword_3F2BCC0; j >= 0; --j )
+              for ( j = dword_3F2BCC0;
+                    j >= 0;
+                    --j )
               {
                 v45 = dword_3F32B24[784 * v9 + 16 * dword_3EFD4C0 + j];
                 if ( v45 > v4 )
+                {
                   v4 = dword_3F32B24[784 * v9 + 16 * dword_3EFD4C0 + j];
+                }
                 yEndb = (int)(float)(178.0 - (float)((float)v45 * *(float *)&dword_3EFD4CC));
                 xEndb = (int)(float)((float)v27 * *(float *)&dword_3EFD4C8);
                 LineDDA(xStarta, yStarta, xEndb, yEndb, LineCallbackLand, dataa);
@@ -31830,11 +33398,15 @@ void __cdecl DrawLandGraph(void) {
                 }
                 --v27;
               }
-              for ( k = dword_3F2BCC4 - 1; k > dword_3F2BCC0; --k )
+              for ( k = dword_3F2BCC4 - 1;
+                    k > dword_3F2BCC0;
+                    --k )
               {
                 v46 = dword_3F32B24[784 * v9 + 16 * dword_3EFD4C0 + k];
                 if ( v46 > v4 )
+                {
                   v4 = dword_3F32B24[784 * v9 + 16 * dword_3EFD4C0 + k];
+                }
                 yEndc = (int)(float)(178.0 - (float)((float)v46 * *(float *)&dword_3EFD4CC));
                 xEndc = (int)(float)((float)v27 * *(float *)&dword_3EFD4C8);
                 LineDDA(xStarta, yStarta, xEndc, yEndc, LineCallbackLand, dataa);
@@ -31855,7 +33427,9 @@ void __cdecl DrawLandGraph(void) {
       }
       else if ( dword_3EFD4C4 == 2 && dword_3F2BCD4 >= 0 )
       {
-        for ( m = 0; m < dword_3EFD4BC; ++m )
+        for ( m = 0;
+              m < dword_3EFD4BC;
+              ++m )
         {
           v10 = dword_3EFD49C[m];
           if ( byte_3EFD494[m] )
@@ -31864,15 +33438,17 @@ void __cdecl DrawLandGraph(void) {
             IGfxEngine::GetPlayerColor((IGfxEngine *)g_pGfxEngine, v2, (struct SGfxColor *)&v50);
             datab = (unsigned __int16)IGfxEngine::ConvertRgbToHicol(v50, v51, v52);
             v28 = 15;
-            yStartb = (int)(float)(178.0
-                                 - (float)((float)dword_3F39964[784 * v10 + 16 * dword_3EFD4C0 + dword_3F2BCD4]
-                                         * *(float *)&dword_3EFD4CC));
+            yStartb = (int)(float)(178.0 - (float)((float)dword_3F39964[784 * v10 + 16 * dword_3EFD4C0 + dword_3F2BCD4] * *(float *)&dword_3EFD4CC));
             xStartb = (int)(float)((float)15 * *(float *)&dword_3EFD4C8);
-            for ( n = dword_3F2BCD4; n >= 0; --n )
+            for ( n = dword_3F2BCD4;
+                  n >= 0;
+                  --n )
             {
               v47 = dword_3F39964[784 * v10 + 16 * dword_3EFD4C0 + n];
               if ( v47 > v4 )
+              {
                 v4 = dword_3F39964[784 * v10 + 16 * dword_3EFD4C0 + n];
+              }
               yEndd = (int)(float)(178.0 - (float)((float)v47 * *(float *)&dword_3EFD4CC));
               xEndd = (int)(float)((float)v28 * *(float *)&dword_3EFD4C8);
               LineDDA(xStartb, yStartb, xEndd, yEndd, LineCallbackLand, datab);
@@ -31887,11 +33463,15 @@ void __cdecl DrawLandGraph(void) {
               }
               --v28;
             }
-            for ( ii = dword_3F2BCD8 - 1; ii > dword_3F2BCD4; --ii )
+            for ( ii = dword_3F2BCD8 - 1;
+                  ii > dword_3F2BCD4;
+                  --ii )
             {
               v48 = dword_3F39964[784 * v10 + 16 * dword_3EFD4C0 + ii];
               if ( v48 > v4 )
+              {
                 v4 = dword_3F39964[784 * v10 + 16 * dword_3EFD4C0 + ii];
+              }
               yEnde = (int)(float)(178.0 - (float)((float)v48 * *(float *)&dword_3EFD4CC));
               xEnde = (int)(float)((float)v28 * *(float *)&dword_3EFD4C8);
               LineDDA(xStartb, yStartb, xEnde, yEnde, LineCallbackLand, datab);
@@ -31912,7 +33492,9 @@ void __cdecl DrawLandGraph(void) {
     }
     else if ( dword_3F2BCAC >= 0 )
     {
-      for ( jj = 0; jj < dword_3EFD4BC; ++jj )
+      for ( jj = 0;
+            jj < dword_3EFD4BC;
+            ++jj )
       {
         v8 = dword_3EFD49C[jj];
         if ( byte_3EFD494[jj] )
@@ -31925,11 +33507,15 @@ void __cdecl DrawLandGraph(void) {
           *(float *)&dword_3EFD4CC = 178.0 / *(float *)&dword_3EFD4D0;
           yStart = (int)(float)(178.0 - (float)((float)v41 * (float)(178.0 / *(float *)&dword_3EFD4D0)));
           xStart = (int)(float)((float)15 * *(float *)&dword_3EFD4C8);
-          for ( kk = dword_3F2BCAC; kk >= 0; --kk )
+          for ( kk = dword_3F2BCAC;
+                kk >= 0;
+                --kk )
           {
             v42 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD4C0 + kk];
             if ( v42 > v4 )
+            {
               v4 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD4C0 + kk];
+            }
             yEnd = (int)(float)(178.0 - (float)((float)v42 * *(float *)&dword_3EFD4CC));
             xEnd = (int)(float)((float)v26 * *(float *)&dword_3EFD4C8);
             LineDDA(xStart, yStart, xEnd, yEnd, LineCallbackLand, data);
@@ -31944,11 +33530,15 @@ void __cdecl DrawLandGraph(void) {
             }
             --v26;
           }
-          for ( mm = dword_3F2BCB0 - 1; mm > dword_3F2BCAC; --mm )
+          for ( mm = dword_3F2BCB0 - 1;
+                mm > dword_3F2BCAC;
+                --mm )
           {
             v43 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD4C0 + mm];
             if ( v43 > v4 )
+            {
               v4 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD4C0 + mm];
+            }
             yEnda = (int)(float)(178.0 - (float)((float)v43 * *(float *)&dword_3EFD4CC));
             xEnda = (int)(float)((float)v26 * *(float *)&dword_3EFD4C8);
             LineDDA(xStart, yStart, xEnda, yEnda, LineCallbackLand, data);
@@ -31973,7 +33563,9 @@ void __cdecl DrawLandGraph(void) {
     byte_3EFD488 = 0;
     *(float *)&dword_3EFD4D0 = (float)v4;
     if ( (float)v4 < 10.0 )
+    {
       dword_3EFD4D0 = LODWORD(FLOAT_10_0);
+    }
     InitMaxvalue();
   }
 }
@@ -32014,16 +33606,22 @@ void __cdecl InitGuiDlgStatisticLand(void) {
   {
     IGuiEngine::SetText((void *)g_pGUIEngine, 75, 1548, "0");
     dword_3EFD4BC = 0;
-    for ( i = 0; i < 8; ++i )
+    for ( i = 0;
+          i < 8;
+          ++i )
     {
       if ( (unsigned int)i >= 8 )
+      {
         report_rangecheckfailure();
+      }
       byte_3EFD494[i] = 0;
       dword_3EFD49C[i] = -1;
     }
     LocalPlayerId = CPlayerManager::GetLocalPlayerId(v5);
     v8 = CAlliances::AllianceId(LocalPlayerId);
-    for ( j = 1; j <= CPlayerManager::LastPlayerId(); ++j )
+    for ( j = 1;
+          j <= CPlayerManager::LastPlayerId();
+          ++j )
     {
       if ( CGameData::IsNetworkGame(g_pGameData) )
       {
@@ -32037,12 +33635,7 @@ void __cdecl InitGuiDlgStatisticLand(void) {
           std::wstring::~wstring(v16);
           dword_3EFD49C[dword_3EFD4BC] = j;
           IGuiEngine::SetText((void *)g_pGUIEngine, 75, dword_3D891D8[3 * dword_3EFD4BC], Dest);
-          IGuiEngine::SetImages(
-            (void *)g_pGUIEngine,
-            75,
-            dword_3D891D8[3 * dword_3EFD4BC + 1],
-            dword_3D89238[2 * v10 + 1],
-            dword_3D89238[2 * v10]);
+          IGuiEngine::SetImages((void *)g_pGUIEngine, 75, dword_3D891D8[3 * dword_3EFD4BC + 1], dword_3D89238[2 * v10 + 1], dword_3D89238[2 * v10]);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 75, dword_3D891D8[3 * dword_3EFD4BC], 1);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 75, dword_3D891D8[3 * dword_3EFD4BC + 1], 1);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 75, dword_3D891D8[3 * dword_3EFD4BC + 2], 1);
@@ -32062,19 +33655,16 @@ void __cdecl InitGuiDlgStatisticLand(void) {
           j__wcstombs(Dest, v4, 0x100u);
           std::wstring::~wstring(v15);
           IGuiEngine::SetText((void *)g_pGUIEngine, 75, dword_3D891D8[3 * j - 3], Dest);
-          IGuiEngine::SetImages(
-            (void *)g_pGUIEngine,
-            75,
-            dword_3D891D8[3 * j - 2],
-            dword_3D89238[2 * v11 + 1],
-            dword_3D89238[2 * v11]);
+          IGuiEngine::SetImages((void *)g_pGUIEngine, 75, dword_3D891D8[3 * j - 2], dword_3D89238[2 * v11 + 1], dword_3D89238[2 * v11]);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 75, dword_3D891D8[3 * j - 3], 1);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 75, dword_3D891D8[3 * j - 2], 1);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 75, dword_3D891D8[3 * j - 1], 1);
         }
       }
     }
-    for ( k = 0; k < 8; ++k )
+    for ( k = 0;
+          k < 8;
+          ++k )
     {
       if ( k >= dword_3EFD4BC )
       {
@@ -32147,7 +33737,9 @@ bool __cdecl GuiDlgStatisticLandProc(int a1, int a2, int a3) {
   char *v5; // eax
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -32169,9 +33761,13 @@ bool __cdecl GuiDlgStatisticLandProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       PlayGuiSound(2);
@@ -32180,12 +33776,16 @@ bool __cdecl GuiDlgStatisticLandProc(int a1, int a2, int a3) {
         case 1520:
           dword_3EFD4C4 = 0;
           if ( !byte_3EFD489 )
+          {
             goto LABEL_29;
+          }
           return 1;
         case 1521:
           dword_3EFD4C4 = 1;
           if ( !byte_3EFD489 )
+          {
             goto LABEL_29;
+          }
           return 1;
         case 1522:
           dword_3EFD4C4 = 2;
@@ -32200,109 +33800,167 @@ LABEL_29:
           byte_3EFD488 = 1;
           byte_3EFD494[0] = byte_3EFD494[0] == 0;
           if ( !byte_3EFD489 )
+          {
             goto LABEL_72;
+          }
           break;
         case 1524:
           byte_3EFD488 = 1;
           if ( byte_3EFD494[1] )
+          {
             byte_3EFD494[1] = 0;
+          }
           else
+          {
             byte_3EFD494[1] = 1;
+          }
           if ( !byte_3EFD489 )
+          {
             goto LABEL_72;
+          }
           break;
         case 1525:
           byte_3EFD488 = 1;
           if ( byte_3EFD494[2] )
+          {
             byte_3EFD494[2] = 0;
+          }
           else
+          {
             byte_3EFD494[2] = 1;
+          }
           if ( !byte_3EFD489 )
+          {
             goto LABEL_72;
+          }
           break;
         case 1526:
           byte_3EFD488 = 1;
           if ( byte_3EFD494[3] )
+          {
             byte_3EFD494[3] = 0;
+          }
           else
+          {
             byte_3EFD494[3] = 1;
+          }
           if ( !byte_3EFD489 )
+          {
             goto LABEL_72;
+          }
           break;
         case 1527:
           byte_3EFD488 = 1;
           if ( byte_3EFD494[4] )
+          {
             byte_3EFD494[4] = 0;
+          }
           else
+          {
             byte_3EFD494[4] = 1;
+          }
           if ( !byte_3EFD489 )
+          {
             goto LABEL_72;
+          }
           break;
         case 1528:
           byte_3EFD488 = 1;
           if ( byte_3EFD494[5] )
+          {
             byte_3EFD494[5] = 0;
+          }
           else
+          {
             byte_3EFD494[5] = 1;
+          }
           if ( !byte_3EFD489 )
+          {
             goto LABEL_72;
+          }
           break;
         case 1529:
           byte_3EFD488 = 1;
           if ( byte_3EFD494[6] )
+          {
             byte_3EFD494[6] = 0;
+          }
           else
+          {
             byte_3EFD494[6] = 1;
+          }
           if ( !byte_3EFD489 )
+          {
             goto LABEL_72;
+          }
           break;
         case 1530:
           byte_3EFD488 = 1;
           if ( byte_3EFD494[7] )
+          {
             byte_3EFD494[7] = 0;
+          }
           else
+          {
             byte_3EFD494[7] = 1;
+          }
           if ( !byte_3EFD489 )
+          {
             goto LABEL_72;
+          }
           break;
         case 1553:
           if ( ++dword_3EFD4D4 > 15 )
+          {
             dword_3EFD4D4 = 15;
+          }
           goto LABEL_72;
         case 1554:
           if ( --dword_3EFD4D4 < 0 )
+          {
             dword_3EFD4D4 = 0;
+          }
           goto LABEL_72;
         case 1555:
           byte_3EFD488 = 1;
           IGuiEngine::SetText((void *)g_pGUIEngine, 75, 1552, "%");
           dword_3EFD4C0 = 0;
           if ( !byte_3EFD489 )
+          {
             goto LABEL_72;
+          }
           break;
         case 1556:
           byte_3EFD488 = 1;
           IGuiEngine::SetText((void *)g_pGUIEngine, 75, 1552, (char *)&byte_3698F6F);
           dword_3EFD4C0 = 2;
           if ( !byte_3EFD489 )
+          {
             goto LABEL_72;
+          }
           break;
         case 1557:
           byte_3EFD488 = 1;
           IGuiEngine::SetText((void *)g_pGUIEngine, 75, 1552, (char *)&byte_3698F73);
           dword_3EFD4C0 = 1;
           if ( !byte_3EFD489 )
+          {
             goto LABEL_72;
+          }
           break;
         case 1558:
           *(float *)&dword_3EFD4D0 = (float)(*(float *)&dword_3EFD4D0 / 10.0) + *(float *)&dword_3EFD4D0;
           if ( *(float *)&dword_3EFD4D0 > 9999.0 )
+          {
             dword_3EFD4D0 = LODWORD(FLOAT_9999_0);
+          }
           goto LABEL_84;
         case 1559:
           *(float *)&dword_3EFD4D0 = *(float *)&dword_3EFD4D0 - (float)(*(float *)&dword_3EFD4D0 / 10.0);
           if ( *(float *)&dword_3EFD4D0 < 10.0 )
+          {
             dword_3EFD4D0 = LODWORD(FLOAT_10_0);
+          }
           goto LABEL_84;
         default:
           return 1;
@@ -32338,7 +33996,9 @@ LABEL_29:
         {
           *(float *)&dword_3EFD4D0 = (float)(*(float *)&dword_3EFD4D0 / 10.0) + *(float *)&dword_3EFD4D0;
           if ( *(float *)&dword_3EFD4D0 > 9999.0 )
+          {
             dword_3EFD4D0 = LODWORD(FLOAT_9999_0);
+          }
           InitMaxvalue();
         }
       }
@@ -32346,7 +34006,9 @@ LABEL_29:
       {
         *(float *)&dword_3EFD4D0 = *(float *)&dword_3EFD4D0 - (float)(*(float *)&dword_3EFD4D0 / 10.0);
         if ( *(float *)&dword_3EFD4D0 < 10.0 )
+        {
           dword_3EFD4D0 = LODWORD(FLOAT_10_0);
+        }
 LABEL_84:
         InitMaxvalue();
       }
@@ -32378,7 +34040,9 @@ bool __cdecl GuiDlgStatisticSubmenuProc(int a1, int a2, int a3) {
   int v13; // [esp+90h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -32386,9 +34050,13 @@ bool __cdecl GuiDlgStatisticSubmenuProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a2) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       v9 = S4LoWord(a2);
@@ -32425,10 +34093,7 @@ bool __cdecl GuiDlgStatisticSubmenuProc(int a1, int a2, int a3) {
               IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 12));
               *(_DWORD *)(g_pGuiMainEvents + 12) = -1;
             }
-            IGuiEngine::OpenDialog(
-              (IGuiEngine *)g_pGUIEngine,
-              75,
-              (bool (__cdecl *)(int, int, int))GuiDlgStatisticLandProc);
+            IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 75, (bool (__cdecl *)(int, int, int))GuiDlgStatisticLandProc);
             *(_DWORD *)(g_pGuiMainEvents + 12) = 75;
             UpdateGuiDlgStatisticLand();
           }
@@ -32446,10 +34111,7 @@ bool __cdecl GuiDlgStatisticSubmenuProc(int a1, int a2, int a3) {
               IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 12));
               *(_DWORD *)(g_pGuiMainEvents + 12) = -1;
             }
-            IGuiEngine::OpenDialog(
-              (IGuiEngine *)g_pGUIEngine,
-              76,
-              (bool (__cdecl *)(int, int, int))GuiDlgStatisticGoodsProc);
+            IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 76, (bool (__cdecl *)(int, int, int))GuiDlgStatisticGoodsProc);
             *(_DWORD *)(g_pGuiMainEvents + 12) = 76;
             UpdateGuiDlgStatisticGoods();
           }
@@ -32492,7 +34154,9 @@ void __stdcall LineCallback(int a1, int a2, long a3) {
   int result; // eax
 
   if ( a2 <= 0 )
+  {
     return result;
+  }
   result = dword_3EFD4EC + 2 * dword_3EFD4F0 * a2;
   *(_WORD *)(result + 2 * a1) = a3;
   return result;
@@ -32522,13 +34186,21 @@ void __cdecl DrawGrid(void) {
   int xStart; // [esp+8h] [ebp-4h]
 
   data = (unsigned __int16)IGfxEngine::ConvertRgbToHicol(50, 100, 50);
-  for ( xStart = 20; (float)xStart < 300.0; xStart += 20 )
+  for ( xStart = 20;
+        (float)xStart < 300.0;
+        xStart += 20 )
+  {
     LineDDA(xStart, 0, xStart, 179, LineCallback, data);
-  for ( yStart = 20; ; yStart += 20 )
+  }
+  for ( yStart = 20;
+        ;
+        yStart += 20 )
   {
     *(float *)&result = (float)yStart;
     if ( (float)yStart >= 179.0 )
+    {
       break;
+    }
     LineDDA(0, yStart, 299, yStart, LineCallback, data);
   }
   return result;
@@ -32595,13 +34267,7 @@ void __cdecl DrawGraph(void) {
   CHAR Str[64]; // [esp+50h] [ebp-44h] BYREF
 
   IGuiEngine::EraseOwnerImage((IGuiEngine *)g_pGUIEngine, 28, 1563);
-  IGuiEngine::LockOwnerImage(
-    (IGuiEngine *)g_pGUIEngine,
-    28,
-    1563,
-    (struct SGuiRect *)v49,
-    (unsigned __int16 **)&dword_3EFD4EC,
-    (unsigned int *)&dword_3EFD4F0);
+  IGuiEngine::LockOwnerImage((IGuiEngine *)g_pGUIEngine, 28, 1563, (struct SGuiRect *)v49, (unsigned __int16 **)&dword_3EFD4EC, (unsigned int *)&dword_3EFD4F0);
   v4 = 0;
   if ( dword_3EFD4EC )
   {
@@ -32614,7 +34280,9 @@ void __cdecl DrawGraph(void) {
       {
         if ( dword_3F2BCC0 >= 0 )
         {
-          for ( i = 0; i < dword_3EFD51C; ++i )
+          for ( i = 0;
+                i < dword_3EFD51C;
+                ++i )
           {
             v9 = dword_3EFD4FC[i];
             if ( byte_3EFD4F4[i] )
@@ -32628,11 +34296,15 @@ void __cdecl DrawGraph(void) {
               IGuiEngine::SetText((void *)g_pGUIEngine, 28, dword_3D89298[3 * i + 2], Str);
               yStarta = (int)(float)(178.0 - (float)((float)v44 * *(float *)&dword_3EFD52C));
               xStarta = (int)(float)((float)15 * *(float *)&dword_3EFD528);
-              for ( j = dword_3F2BCC0; j >= 0; --j )
+              for ( j = dword_3F2BCC0;
+                    j >= 0;
+                    --j )
               {
                 v45 = dword_3F32B24[784 * v9 + 16 * dword_3EFD520 + j];
                 if ( v45 > v4 )
+                {
                   v4 = dword_3F32B24[784 * v9 + 16 * dword_3EFD520 + j];
+                }
                 yEndb = (int)(float)(178.0 - (float)((float)v45 * *(float *)&dword_3EFD52C));
                 xEndb = (int)(float)((float)v27 * *(float *)&dword_3EFD528);
                 LineDDA(xStarta, yStarta, xEndb, yEndb, LineCallback, dataa);
@@ -32647,11 +34319,15 @@ void __cdecl DrawGraph(void) {
                 }
                 --v27;
               }
-              for ( k = dword_3F2BCC4 - 1; k > dword_3F2BCC0; --k )
+              for ( k = dword_3F2BCC4 - 1;
+                    k > dword_3F2BCC0;
+                    --k )
               {
                 v46 = dword_3F32B24[784 * v9 + 16 * dword_3EFD520 + k];
                 if ( v46 > v4 )
+                {
                   v4 = dword_3F32B24[784 * v9 + 16 * dword_3EFD520 + k];
+                }
                 yEndc = (int)(float)(178.0 - (float)((float)v46 * *(float *)&dword_3EFD52C));
                 xEndc = (int)(float)((float)v27 * *(float *)&dword_3EFD528);
                 LineDDA(xStarta, yStarta, xEndc, yEndc, LineCallback, dataa);
@@ -32672,7 +34348,9 @@ void __cdecl DrawGraph(void) {
       }
       else if ( dword_3EFD524 == 2 && dword_3F2BCD4 >= 0 )
       {
-        for ( m = 0; m < dword_3EFD51C; ++m )
+        for ( m = 0;
+              m < dword_3EFD51C;
+              ++m )
         {
           v10 = dword_3EFD4FC[m];
           if ( byte_3EFD4F4[m] )
@@ -32681,15 +34359,17 @@ void __cdecl DrawGraph(void) {
             IGfxEngine::GetPlayerColor((IGfxEngine *)g_pGfxEngine, v2, (struct SGfxColor *)&v50);
             datab = (unsigned __int16)IGfxEngine::ConvertRgbToHicol(v50, v51, v52);
             v28 = 15;
-            yStartb = (int)(float)(178.0
-                                 - (float)((float)dword_3F39964[784 * v10 + 16 * dword_3EFD520 + dword_3F2BCD4]
-                                         * *(float *)&dword_3EFD52C));
+            yStartb = (int)(float)(178.0 - (float)((float)dword_3F39964[784 * v10 + 16 * dword_3EFD520 + dword_3F2BCD4] * *(float *)&dword_3EFD52C));
             xStartb = (int)(float)((float)15 * *(float *)&dword_3EFD528);
-            for ( n = dword_3F2BCD4; n >= 0; --n )
+            for ( n = dword_3F2BCD4;
+                  n >= 0;
+                  --n )
             {
               v47 = dword_3F39964[784 * v10 + 16 * dword_3EFD520 + n];
               if ( v47 > v4 )
+              {
                 v4 = dword_3F39964[784 * v10 + 16 * dword_3EFD520 + n];
+              }
               yEndd = (int)(float)(178.0 - (float)((float)v47 * *(float *)&dword_3EFD52C));
               xEndd = (int)(float)((float)v28 * *(float *)&dword_3EFD528);
               LineDDA(xStartb, yStartb, xEndd, yEndd, LineCallback, datab);
@@ -32704,11 +34384,15 @@ void __cdecl DrawGraph(void) {
               }
               --v28;
             }
-            for ( ii = dword_3F2BCD8 - 1; ii > dword_3F2BCD4; --ii )
+            for ( ii = dword_3F2BCD8 - 1;
+                  ii > dword_3F2BCD4;
+                  --ii )
             {
               v48 = dword_3F39964[784 * v10 + 16 * dword_3EFD520 + ii];
               if ( v48 > v4 )
+              {
                 v4 = dword_3F39964[784 * v10 + 16 * dword_3EFD520 + ii];
+              }
               yEnde = (int)(float)(178.0 - (float)((float)v48 * *(float *)&dword_3EFD52C));
               xEnde = (int)(float)((float)v28 * *(float *)&dword_3EFD528);
               LineDDA(xStartb, yStartb, xEnde, yEnde, LineCallback, datab);
@@ -32729,7 +34413,9 @@ void __cdecl DrawGraph(void) {
     }
     else if ( dword_3F2BCAC >= 0 )
     {
-      for ( jj = 0; jj < dword_3EFD51C; ++jj )
+      for ( jj = 0;
+            jj < dword_3EFD51C;
+            ++jj )
       {
         v8 = dword_3EFD4FC[jj];
         if ( byte_3EFD4F4[jj] )
@@ -32742,11 +34428,15 @@ void __cdecl DrawGraph(void) {
           *(float *)&dword_3EFD52C = 178.0 / *(float *)&dword_3EFD530;
           yStart = (int)(float)(178.0 - (float)((float)v41 * (float)(178.0 / *(float *)&dword_3EFD530)));
           xStart = (int)(float)((float)15 * *(float *)&dword_3EFD528);
-          for ( kk = dword_3F2BCAC; kk >= 0; --kk )
+          for ( kk = dword_3F2BCAC;
+                kk >= 0;
+                --kk )
           {
             v42 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD520 + kk];
             if ( v42 > v4 )
+            {
               v4 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD520 + kk];
+            }
             yEnd = (int)(float)(178.0 - (float)((float)v42 * *(float *)&dword_3EFD52C));
             xEnd = (int)(float)((float)v26 * *(float *)&dword_3EFD528);
             LineDDA(xStart, yStart, xEnd, yEnd, LineCallback, data);
@@ -32761,11 +34451,15 @@ void __cdecl DrawGraph(void) {
             }
             --v26;
           }
-          for ( mm = dword_3F2BCB0 - 1; mm > dword_3F2BCAC; --mm )
+          for ( mm = dword_3F2BCB0 - 1;
+                mm > dword_3F2BCAC;
+                --mm )
           {
             v43 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD520 + mm];
             if ( v43 > v4 )
+            {
               v4 = dword_3F2BCE4[784 * v8 + 16 * dword_3EFD520 + mm];
+            }
             yEnda = (int)(float)(178.0 - (float)((float)v43 * *(float *)&dword_3EFD52C));
             xEnda = (int)(float)((float)v26 * *(float *)&dword_3EFD528);
             LineDDA(xStart, yStart, xEnda, yEnda, LineCallback, data);
@@ -32790,7 +34484,9 @@ void __cdecl DrawGraph(void) {
     byte_3EFD4E8 = 0;
     *(float *)&dword_3EFD530 = (float)v4;
     if ( (float)v4 < 10.0 )
+    {
       dword_3EFD530 = LODWORD(FLOAT_10_0);
+    }
     InitMaxvalueWarrior();
   }
 }
@@ -32832,16 +34528,22 @@ void __cdecl InitGuiDlgStatisticWarrior(void) {
     IGuiEngine::SetText((void *)g_pGUIEngine, 28, 1592, "0");
     IGuiEngine::SetText((void *)g_pGUIEngine, 28, 1596, "%");
     dword_3EFD51C = 0;
-    for ( i = 0; i < 8; ++i )
+    for ( i = 0;
+          i < 8;
+          ++i )
     {
       if ( (unsigned int)i >= 8 )
+      {
         report_rangecheckfailure();
+      }
       byte_3EFD4F4[i] = 0;
       dword_3EFD4FC[i] = -1;
     }
     LocalPlayerId = CPlayerManager::GetLocalPlayerId(v5);
     v8 = CAlliances::AllianceId(LocalPlayerId);
-    for ( j = 1; j <= CPlayerManager::LastPlayerId(); ++j )
+    for ( j = 1;
+          j <= CPlayerManager::LastPlayerId();
+          ++j )
     {
       if ( CGameData::IsNetworkGame(g_pGameData) )
       {
@@ -32855,12 +34557,7 @@ void __cdecl InitGuiDlgStatisticWarrior(void) {
           std::wstring::~wstring(v16);
           dword_3EFD4FC[dword_3EFD51C] = j;
           IGuiEngine::SetText((void *)g_pGUIEngine, 28, dword_3D89298[3 * dword_3EFD51C], Dest);
-          IGuiEngine::SetImages(
-            (void *)g_pGUIEngine,
-            28,
-            dword_3D89298[3 * dword_3EFD51C + 1],
-            dword_3D892F8[2 * v10 + 1],
-            dword_3D892F8[2 * v10]);
+          IGuiEngine::SetImages((void *)g_pGUIEngine, 28, dword_3D89298[3 * dword_3EFD51C + 1], dword_3D892F8[2 * v10 + 1], dword_3D892F8[2 * v10]);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 28, dword_3D89298[3 * dword_3EFD51C], 1);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 28, dword_3D89298[3 * dword_3EFD51C + 1], 1);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 28, dword_3D89298[3 * dword_3EFD51C + 2], 1);
@@ -32880,19 +34577,16 @@ void __cdecl InitGuiDlgStatisticWarrior(void) {
           j__wcstombs(Dest, v4, 0x100u);
           std::wstring::~wstring(v15);
           IGuiEngine::SetText((void *)g_pGUIEngine, 28, dword_3D89298[3 * j - 3], Dest);
-          IGuiEngine::SetImages(
-            (void *)g_pGUIEngine,
-            28,
-            dword_3D89298[3 * j - 2],
-            dword_3D892F8[2 * v11 + 1],
-            dword_3D892F8[2 * v11]);
+          IGuiEngine::SetImages((void *)g_pGUIEngine, 28, dword_3D89298[3 * j - 2], dword_3D892F8[2 * v11 + 1], dword_3D892F8[2 * v11]);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 28, dword_3D89298[3 * j - 3], 1);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 28, dword_3D89298[3 * j - 2], 1);
           IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 28, dword_3D89298[3 * j - 1], 1);
         }
       }
     }
-    for ( k = 0; k < 8; ++k )
+    for ( k = 0;
+          k < 8;
+          ++k )
     {
       if ( k >= dword_3EFD51C )
       {
@@ -32965,7 +34659,9 @@ bool __cdecl GuiDlgStatisticWarriorProc(int a1, int a2, int a3) {
   char *v5; // eax
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -32987,9 +34683,13 @@ bool __cdecl GuiDlgStatisticWarriorProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       PlayGuiSound(2);
@@ -32998,12 +34698,16 @@ bool __cdecl GuiDlgStatisticWarriorProc(int a1, int a2, int a3) {
         case 1564:
           dword_3EFD524 = 0;
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_29;
+          }
           return 1;
         case 1565:
           dword_3EFD524 = 1;
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_29;
+          }
           return 1;
         case 1566:
           dword_3EFD524 = 2;
@@ -33018,112 +34722,172 @@ LABEL_29:
           byte_3EFD4E8 = 1;
           byte_3EFD4F4[0] = byte_3EFD4F4[0] == 0;
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1568:
           byte_3EFD4E8 = 1;
           if ( byte_3EFD4F4[1] )
+          {
             byte_3EFD4F4[1] = 0;
+          }
           else
+          {
             byte_3EFD4F4[1] = 1;
+          }
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1569:
           byte_3EFD4E8 = 1;
           if ( byte_3EFD4F4[2] )
+          {
             byte_3EFD4F4[2] = 0;
+          }
           else
+          {
             byte_3EFD4F4[2] = 1;
+          }
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1570:
           byte_3EFD4E8 = 1;
           if ( byte_3EFD4F4[3] )
+          {
             byte_3EFD4F4[3] = 0;
+          }
           else
+          {
             byte_3EFD4F4[3] = 1;
+          }
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1571:
           byte_3EFD4E8 = 1;
           if ( byte_3EFD4F4[4] )
+          {
             byte_3EFD4F4[4] = 0;
+          }
           else
+          {
             byte_3EFD4F4[4] = 1;
+          }
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1572:
           byte_3EFD4E8 = 1;
           if ( byte_3EFD4F4[5] )
+          {
             byte_3EFD4F4[5] = 0;
+          }
           else
+          {
             byte_3EFD4F4[5] = 1;
+          }
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1573:
           byte_3EFD4E8 = 1;
           if ( byte_3EFD4F4[6] )
+          {
             byte_3EFD4F4[6] = 0;
+          }
           else
+          {
             byte_3EFD4F4[6] = 1;
+          }
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1574:
           byte_3EFD4E8 = 1;
           if ( byte_3EFD4F4[7] )
+          {
             byte_3EFD4F4[7] = 0;
+          }
           else
+          {
             byte_3EFD4F4[7] = 1;
+          }
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1597:
           byte_3EFD4E8 = 1;
           dword_3EFD520 = 3;
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1598:
           byte_3EFD4E8 = 1;
           dword_3EFD520 = 4;
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1599:
           byte_3EFD4E8 = 1;
           dword_3EFD520 = 5;
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1600:
           byte_3EFD4E8 = 1;
           dword_3EFD520 = 6;
           if ( !byte_3EFD4E9 )
+          {
             goto LABEL_74;
+          }
           break;
         case 1601:
           if ( ++dword_3EFD534 > 15 )
+          {
             dword_3EFD534 = 15;
+          }
           goto LABEL_74;
         case 1602:
           if ( --dword_3EFD534 < 0 )
+          {
             dword_3EFD534 = 0;
+          }
           goto LABEL_74;
         case 1603:
           *(float *)&dword_3EFD530 = *(float *)&dword_3EFD530 - (float)(*(float *)&dword_3EFD530 / 10.0);
           if ( *(float *)&dword_3EFD530 < 10.0 )
+          {
             dword_3EFD530 = LODWORD(FLOAT_10_0);
+          }
           goto LABEL_86;
         case 1604:
           *(float *)&dword_3EFD530 = (float)(*(float *)&dword_3EFD530 / 10.0) + *(float *)&dword_3EFD530;
           if ( *(float *)&dword_3EFD530 > 9999.0 )
+          {
             dword_3EFD530 = LODWORD(FLOAT_9999_0);
+          }
           goto LABEL_86;
         default:
           return 1;
@@ -33159,7 +34923,9 @@ LABEL_29:
         {
           *(float *)&dword_3EFD530 = (float)(*(float *)&dword_3EFD530 / 10.0) + *(float *)&dword_3EFD530;
           if ( *(float *)&dword_3EFD530 > 9999.0 )
+          {
             dword_3EFD530 = LODWORD(FLOAT_9999_0);
+          }
           InitMaxvalueWarrior();
         }
       }
@@ -33167,7 +34933,9 @@ LABEL_29:
       {
         *(float *)&dword_3EFD530 = *(float *)&dword_3EFD530 - (float)(*(float *)&dword_3EFD530 / 10.0);
         if ( *(float *)&dword_3EFD530 < 10.0 )
+        {
           dword_3EFD530 = LODWORD(FLOAT_10_0);
+        }
 LABEL_86:
         InitMaxvalueWarrior();
       }
@@ -33216,7 +34984,9 @@ void __cdecl UpdateGuiDlgStorageContext(void) {
     }
     IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 23, 1607, byte_3F1E5AC == 0);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 23, 1607, byte_3F1E5AB);
-    for ( i = 0; i < 10; ++i )
+    for ( i = 0;
+          i < 10;
+          ++i )
     {
       if ( byte_3F1E5B4[2 * i] )
       {
@@ -33226,18 +34996,17 @@ void __cdecl UpdateGuiDlgStorageContext(void) {
         IGuiEngine::SetText((void *)g_pGUIEngine, 23, dword_3699348[2 * i], Str);
         GuiGoodImageID = GetGuiGoodImageID(byte_3F1E5B4[2 * i]);
         IGuiEngine::SetImages((void *)g_pGUIEngine, 23, dword_3699348[2 * i + 1], GuiGoodImageID, 0);
-        IGuiEngine::SetTooltipID(
-          (IGuiEngine *)g_pGUIEngine,
-          23,
-          dword_3699348[2 * i + 1],
-          dword_3698FE8[5 * byte_3F1E5B4[2 * i] + 3],
-          dword_3698FE8[5 * byte_3F1E5B4[2 * i] + 4]);
+        IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 23, dword_3699348[2 * i + 1], dword_3698FE8[5 * byte_3F1E5B4[2 * i] + 3], dword_3698FE8[5 * byte_3F1E5B4[2 * i] + 4]);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 23, dword_3699348[2 * i], 1);
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 23, dword_3699348[2 * i + 1], 1);
         if ( Number < 0 )
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 23, dword_3699348[2 * i + 1], 2);
+        }
         else
+        {
           IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, 23, dword_3699348[2 * i], 1);
+        }
         byte_3EFD549 = 0;
       }
       else
@@ -33279,7 +35048,9 @@ bool __cdecl GuiDlgStorageContextProc(int a1, int a2, int a3) {
   int v20; // [esp+128h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -33289,9 +35060,13 @@ bool __cdecl GuiDlgStorageContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -33400,29 +35175,25 @@ void __cdecl UpdateGuiDlgTransportpriority(void) {
   int i; // [esp+4h] [ebp-4h]
 
   if ( !g_pGUIEngine )
+  {
     return result;
+  }
   v1 = 0;
   byte_3EFD5DC = 1;
   result = IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 25, dword_3D89358[0]);
-  for ( i = 0; i < 42; ++i )
+  for ( i = 0;
+        i < 42;
+        ++i )
   {
     if ( dword_3F1EDB0[i] > 0 && v1 < dword_3F1EDAC )
     {
-      IGuiEngine::SetImages(
-        (void *)g_pGUIEngine,
-        25,
-        dword_3D89358[v1],
-        dword_3699460[5 * dword_3F1EDB0[i] + 1],
-        dword_3699460[5 * dword_3F1EDB0[i] + 2]);
-      IGuiEngine::SetTooltipID(
-        (IGuiEngine *)g_pGUIEngine,
-        25,
-        dword_3D89358[v1],
-        dword_3699460[5 * dword_3F1EDB0[i] + 3],
-        dword_3699460[5 * dword_3F1EDB0[i] + 4]);
+      IGuiEngine::SetImages((void *)g_pGUIEngine, 25, dword_3D89358[v1], dword_3699460[5 * dword_3F1EDB0[i] + 1], dword_3699460[5 * dword_3F1EDB0[i] + 2]);
+      IGuiEngine::SetTooltipID((IGuiEngine *)g_pGUIEngine, 25, dword_3D89358[v1], dword_3699460[5 * dword_3F1EDB0[i] + 3], dword_3699460[5 * dword_3F1EDB0[i] + 4]);
       dword_3EFD550[v1] = dword_3F1EDB0[i];
       if ( dword_3F1EDB0[i] == dword_3EFD5D8 )
+      {
         IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 25, dword_3D89358[v1], 1);
+      }
     }
     result = ++v1;
   }
@@ -33439,9 +35210,13 @@ void __cdecl InitGuiDlgTransportpriority(void) {
   int i; // [esp+0h] [ebp-4h]
 
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   byte_3EFD5DC = 0;
-  for ( i = 0; i < 34; ++i )
+  for ( i = 0;
+        i < 34;
+        ++i )
   {
     dword_3EFD550[i] = -1;
     result = i + 1;
@@ -33472,7 +35247,9 @@ bool __cdecl GuiDlgTransportpriorityProc(int a1, int a2, int a3) {
   int v19; // [esp+10Ch] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -33483,9 +35260,13 @@ bool __cdecl GuiDlgTransportpriorityProc(int a1, int a2, int a3) {
       if ( !byte_3EFD5DC )
       {
         if ( (S4HiWord(a2) & 1) != 0 )
+        {
           PlayGuiSound(1);
+        }
         else
+        {
           PlayGuiSound(0);
+        }
       }
       break;
     case 3:
@@ -33760,9 +35541,13 @@ void __cdecl InitGuiDlgTutorial(void) {
 void __cdecl HighlightEntryDlgTutorialMessages(int a1, bool a2) {
   
   if ( a2 )
+  {
     return IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 40), a1, 13);
+  }
   if ( a1 == 1711 )
+  {
     return IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 40), 1711, 11);
+  }
   return IGuiEngine::SetFontTemplate((IGuiEngine *)g_pGUIEngine, *(_DWORD *)(g_pGuiMainEvents + 40), a1, 14);
 }
 
@@ -33787,7 +35572,9 @@ bool __cdecl GuiDlgTutorialProc(int a1, int a2, int a3) {
   int v17; // [esp+60h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -33795,9 +35582,13 @@ bool __cdecl GuiDlgTutorialProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (S4HiWord(a3) & 1) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       v12 = S4LoWord(a2);
@@ -33879,7 +35670,9 @@ void __cdecl UpdateGuiDlgTutorialCursor(void) {
 
   result = IGuiEngine::GetDialogRect((IGuiEngine *)g_pGUIEngine, 57, (struct SGuiRect *)&v1);
   if ( --dword_3D893FC > 0 )
+  {
     return result;
+  }
   if ( byte_3EFD5F9 )
   {
     result = IGuiEngine::MoveDialogTo((IGuiEngine *)g_pGUIEngine, 57, v1 + 10, v2 + 10);
@@ -33906,7 +35699,9 @@ bool __cdecl GuiDlgTutorialCursorProc(int a1, int a2, int a3) {
   char *v5; // eax
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   if ( a1 )
   {
     if ( a1 == 8 )
@@ -33993,9 +35788,13 @@ void __cdecl UpdateGuiDlgVehicleLoadContext(void) {
       {
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1750, 1);
         if ( byte_3F1E882 )
+        {
           IGuiEngine::SetImages(g_pGUIEngine, 41, 1750, 272, 273);
+        }
         else
+        {
           IGuiEngine::SetImages(g_pGUIEngine, 41, 1750, 274, 275);
+        }
       }
       else
       {
@@ -34006,13 +35805,19 @@ void __cdecl UpdateGuiDlgVehicleLoadContext(void) {
       v7 = CPlayerManager::Race(v6);
       IGuiEngine::SetImages(g_pGUIEngine, 41, 1716, dword_3699870[35 * v7 + 25], 0);
       if ( byte_3F1E881 )
+      {
         v8 = g_pStringEngine->GetString(g_pStringEngine, 883);
+      }
       else
+      {
         v8 = g_pStringEngine->GetString(g_pStringEngine, 2230);
+      }
       IGuiEngine::SetText(g_pGUIEngine, 41, 1714, v8);
       IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, 1752, 1);
     }
-    for ( i = 0; i < 15; ++i )
+    for ( i = 0;
+          i < 15;
+          ++i )
     {
       if ( g_cVehicleLoadInfo.m_vSlots[i].m_iGood <= 0 )
       {
@@ -34022,26 +35827,29 @@ void __cdecl UpdateGuiDlgVehicleLoadContext(void) {
       else
       {
         if ( byte_3F1E881 )
+        {
           _wsprintfA(Str, "%u/%u", g_cVehicleLoadInfo.m_vSlots[i].m_iAmount, g_cVehicleLoadInfo.m_vSlots[i].m_iUnknown);
+        }
         else
+        {
           _wsprintfA(Str, "%u", g_cVehicleLoadInfo.m_vSlots[i].m_iAmount);
+        }
         IGuiEngine::SetText(g_pGUIEngine, 41, dword_3699E90[2 * i], Str);
         GuiGoodImageID = GetGuiGoodImageID(g_cVehicleLoadInfo.m_vSlots[i].m_iGood);
         IGuiEngine::SetImages(g_pGUIEngine, 41, dword_3699E90[2 * i + 1], GuiGoodImageID, 0);
-        IGuiEngine::SetTooltipID(
-          g_pGUIEngine,
-          41,
-          dword_3699E90[2 * i + 1],
-          dword_3699B30[5 * g_cVehicleLoadInfo.m_vSlots[i].m_iGood + 3],
-          dword_3699B30[5 * g_cVehicleLoadInfo.m_vSlots[i].m_iGood + 4]);
+        IGuiEngine::SetTooltipID(g_pGUIEngine, 41, dword_3699E90[2 * i + 1], dword_3699B30[5 * g_cVehicleLoadInfo.m_vSlots[i].m_iGood + 3], dword_3699B30[5 * g_cVehicleLoadInfo.m_vSlots[i].m_iGood + 4]);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, dword_3699E90[2 * i], 1);
         IGuiEngine::SetControlVisibility(g_pGUIEngine, 41, dword_3699E90[2 * i + 1], 1);
       }
     }
     if ( byte_3F1E881 )
+    {
       _wsprintfA(Str, "%u/%u", dword_3F1E884, dword_3F1E888);
+    }
     else
+    {
       _wsprintfA(Str, "%u", dword_3F1E884);
+    }
     IGuiEngine::SetText(g_pGUIEngine, 41, 1733, Str);
     if ( g_cVehicleLoadInfo.m_iUnknown == 24 || g_cVehicleLoadInfo.m_iUnknown == 22 )
     {
@@ -34076,7 +35884,9 @@ bool __cdecl GuiDlgVehicleLoadContextProc(int a1, int a2, int a3) {
   int v16; // [esp+E0h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -34084,9 +35894,13 @@ bool __cdecl GuiDlgVehicleLoadContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( a2 )
@@ -34175,11 +35989,15 @@ void __cdecl UpdateGuiDlgVehiclesContext(void) {
   CHAR Str[52]; // [esp+10h] [ebp-38h] BYREF
 
   if ( !g_pGUIEngine )
+  {
     return result;
+  }
   IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 40, 1762, 0);
   IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 40, 1763, 0);
   result = IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 40, 1764, 0);
-  for ( i = 0; i < 3; ++i )
+  for ( i = 0;
+        i < 3;
+        ++i )
   {
     v1 = unk_3F1E744[2 * i];
     switch ( v1 )
@@ -34187,17 +36005,23 @@ void __cdecl UpdateGuiDlgVehiclesContext(void) {
       case 1:
         v2 = 1758;
         if ( unk_3F1E748[2 * i] > 0 )
+        {
           IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 40, 1762, 1);
+        }
         break;
       case 2:
         v2 = 1759;
         if ( unk_3F1E748[2 * i] > 0 )
+        {
           IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 40, 1763, 1);
+        }
         break;
       case 4:
         v2 = 1757;
         if ( unk_3F1E748[2 * i] > 0 )
+        {
           IGuiEngine::EnableControl((IGuiEngine *)g_pGUIEngine, 40, 1764, 1);
+        }
         IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 40, 1765, unk_3F1E748[2 * i] == 1);
         break;
       default:
@@ -34212,7 +36036,9 @@ void __cdecl UpdateGuiDlgVehiclesContext(void) {
     result = i + 1;
   }
   if ( !g_bOpenSidebar )
+  {
     return result;
+  }
   result = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 40, 1761, 1);
   g_bOpenSidebar = 0;
   return result;
@@ -34256,7 +36082,9 @@ bool __cdecl GuiDlgVehiclesContextProc(int a1, int a2, int a3) {
   int v20; // [esp+128h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -34265,9 +36093,13 @@ bool __cdecl GuiDlgVehiclesContextProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -34373,25 +36205,33 @@ void __cdecl GetSliderVals(void) {
 
   SliderPosition = IGuiEngine::GetSliderPosition((IGuiEngine *)g_pGUIEngine, 46, 1783);
   if ( SliderPosition < 0 )
+  {
     SliderPosition = 0;
+  }
   dword_3EFD604[0] = SliderPosition;
   _wsprintfA(Str, "%u%%", SliderPosition);
   IGuiEngine::SetText((void *)g_pGUIEngine, 46, 1791, Str);
   v2 = IGuiEngine::GetSliderPosition((IGuiEngine *)g_pGUIEngine, 46, 1784);
   if ( v2 < 0 )
+  {
     v2 = 0;
+  }
   dword_3EFD604[1] = v2;
   _wsprintfA(Str, "%u%%", v2);
   IGuiEngine::SetText((void *)g_pGUIEngine, 46, 1792, Str);
   v3 = IGuiEngine::GetSliderPosition((IGuiEngine *)g_pGUIEngine, 46, 1785);
   if ( v3 < 0 )
+  {
     v3 = 0;
+  }
   dword_3EFD604[2] = v3;
   _wsprintfA(Str, "%u%%", v3);
   IGuiEngine::SetText((void *)g_pGUIEngine, 46, 1793, Str);
   v4 = IGuiEngine::GetSliderPosition((IGuiEngine *)g_pGUIEngine, 46, 1787);
   if ( v4 < 0 )
+  {
     v4 = 0;
+  }
   dword_3EFD604[3] = v4;
   _wsprintfA(Str, "%u%%", v4);
   return IGuiEngine::SetText((void *)g_pGUIEngine, 46, 1794, Str);
@@ -34439,10 +36279,14 @@ void __cdecl UpdateGuiDlgWeaponsmithBar(void) {
   int i; // [esp+4h] [ebp-8h]
 
   if ( !g_pGUIEngine )
+  {
     return result;
+  }
   byte_3EFD5FC = 1;
   result = IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 46, 1778, byte_3F1E8CC == 0);
-  for ( i = 0; i < 4; ++i )
+  for ( i = 0;
+        i < 4;
+        ++i )
   {
     result = byte_3F1E8D0[12 * i] - 3;
     switch ( byte_3F1E8D0[12 * i] )
@@ -34515,13 +36359,17 @@ bool __cdecl GuiDlgWeaponsmithBarProc(int a1, int a2, int a3) {
   int v26; // [esp+1C4h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
       byte_3EFD5FC = 1;
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 46, 1778, byte_3F1E8CC == 0);
-      for ( i = 0; i < 4; ++i )
+      for ( i = 0;
+            i < 4;
+            ++i )
       {
         switch ( byte_3F1E8D0[12 * i] )
         {
@@ -34584,13 +36432,19 @@ bool __cdecl GuiDlgWeaponsmithBarProc(int a1, int a2, int a3) {
       return 1;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       return 1;
     case 2:
       if ( !byte_3EFD5FC )
+      {
         GetSliderVals();
+      }
       return 1;
     case 3:
       if ( (unsigned __int16)a2 > 0xB48u )
@@ -34598,9 +36452,13 @@ bool __cdecl GuiDlgWeaponsmithBarProc(int a1, int a2, int a3) {
         if ( (unsigned __int16)a2 == 2912 && !byte_3EFD5FC )
         {
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3EFD600 = 5;
+          }
           else
+          {
             dword_3EFD600 = 0;
+          }
           goto LABEL_59;
         }
       }
@@ -34662,9 +36520,13 @@ bool __cdecl GuiDlgWeaponsmithBarProc(int a1, int a2, int a3) {
               if ( !byte_3EFD5FC )
               {
                 if ( (a2 & 0x10000) != 0 )
+                {
                   dword_3EFD600 = 34;
+                }
                 else
+                {
                   dword_3EFD600 = 0;
+                }
                 goto LABEL_59;
               }
               break;
@@ -34672,9 +36534,13 @@ bool __cdecl GuiDlgWeaponsmithBarProc(int a1, int a2, int a3) {
               if ( !byte_3EFD5FC )
               {
                 if ( (a2 & 0x10000) != 0 )
+                {
                   dword_3EFD600 = 8;
+                }
                 else
+                {
                   dword_3EFD600 = 0;
+                }
                 goto LABEL_59;
               }
               break;
@@ -34682,9 +36548,13 @@ bool __cdecl GuiDlgWeaponsmithBarProc(int a1, int a2, int a3) {
               if ( !byte_3EFD5FC )
               {
                 if ( (a2 & 0x10000) != 0 )
+                {
                   dword_3EFD600 = 3;
+                }
                 else
+                {
                   dword_3EFD600 = 0;
+                }
                 goto LABEL_59;
               }
               break;
@@ -34716,14 +36586,7 @@ bool __cdecl GuiDlgWeaponsmithBarProc(int a1, int a2, int a3) {
             case 1785:
             case 1787:
               GetSliderVals();
-              v11 = CEvn_Logic::CEvn_Logic(
-                      (CEvn_Logic *)v18,
-                      0x1CFu,
-                      ((unsigned __int8)dword_3EFD604[3] << 24) | ((unsigned __int8)dword_3EFD604[2] << 16) | ((unsigned __int8)dword_3EFD604[1] << 8) | LOBYTE(dword_3EFD604[0]),
-                      0,
-                      0,
-                      0,
-                      0);
+              v11 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v18, 0x1CFu, ((unsigned __int8)dword_3EFD604[3] << 24) | ((unsigned __int8)dword_3EFD604[2] << 16) | ((unsigned __int8)dword_3EFD604[1] << 8) | LOBYTE(dword_3EFD604[0]), 0, 0, 0, 0);
               v26 = 8;
               IEventEngine::SendAMessage(g_pEvnEngine, v11);
               v26 = -1;
@@ -34734,9 +36597,13 @@ bool __cdecl GuiDlgWeaponsmithBarProc(int a1, int a2, int a3) {
               if ( !byte_3EFD5FC )
               {
                 if ( (a2 & 0x10000) != 0 )
+                {
                   dword_3EFD600 = 6;
+                }
                 else
+                {
                   dword_3EFD600 = 0;
+                }
                 goto LABEL_59;
               }
               break;
@@ -34748,9 +36615,13 @@ bool __cdecl GuiDlgWeaponsmithBarProc(int a1, int a2, int a3) {
         if ( !byte_3EFD5FC )
         {
           if ( (a2 & 0x10000) != 0 )
+          {
             dword_3EFD600 = 38;
+          }
           else
+          {
             dword_3EFD600 = 0;
+          }
 LABEL_59:
           PlayGuiSound(2);
         }
@@ -34798,7 +36669,9 @@ void __cdecl InitGuiDlgXMD3Briefing(void) {
   v0 = std::string::c_str(&stru_402C998);
   result = CScrollMultiline::SetText(s_cXMD3Scrolltext, v0);
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   v2 = g_pStringEngine->GetString(g_pStringEngine, 880);
   IGuiEngine::SetText((void *)g_pGUIEngine, 1, 2914, v2);
   v3 = (char *)std::string::c_str(&stru_402C97C);
@@ -34829,7 +36702,9 @@ bool __cdecl GuiDlgXMD3BriefingProc(int a1, int a2, int a3) {
   int v15; // [esp+74h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   v9[1] = a1;
   switch ( a1 )
   {
@@ -34838,9 +36713,13 @@ bool __cdecl GuiDlgXMD3BriefingProc(int a1, int a2, int a3) {
       break;
     case 1u:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1u);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3u:
       v10[1] = (unsigned __int16 *)((unsigned __int16)a2 - 2915);
@@ -34882,12 +36761,7 @@ bool __cdecl GuiDlgXMD3BriefingProc(int a1, int a2, int a3) {
                 IGuiEngine::LockOwnerImage(g_pGUIEngine, 1, 2926, (struct SGuiRect *)v12, v10, v9);
                 if ( v10[0] )
                 {
-                  CStateLobbyGameSettings::DrawMap(
-                    (unsigned __int16 *)g_pGameType->m_pMapPreview,
-                    v10[0],
-                    v9[0],
-                    g_pGameType->m_iMapPreviewWidth,
-                    g_pGameType->m_iMapPreviewHeight);
+                  CStateLobbyGameSettings::DrawMap((unsigned __int16 *)g_pGameType->m_pMapPreview, v10[0], v9[0], g_pGameType->m_iMapPreviewWidth, g_pGameType->m_iMapPreviewHeight);
                   IGuiEngine::UnlockOwnerImage(g_pGUIEngine, 1, 2926);
                 }
               }
@@ -34933,7 +36807,9 @@ bool __cdecl GuiDlgXMD3BriefingProc(int a1, int a2, int a3) {
       if ( SHIWORD(a2) <= 0 )
       {
         if ( v11 < 0 )
+        {
           CScrollMultiline::ScrollDown(s_cXMD3Scrolltext);
+        }
       }
       else
       {
@@ -34955,12 +36831,18 @@ void __cdecl InitGuiDlgXMD3Campaigns(void) {
   char result; // al
 
   if ( !g_pStringEngine )
+  {
     return result;
+  }
   IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 0, 2937);
   if ( s_uAIDifficulty )
+  {
     return IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 2937, 1);
+  }
   else
+  {
     return IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 2936, 1);
+  }
   return result;
 }
 
@@ -35008,7 +36890,9 @@ bool __cdecl GuiDlgXMD3CampaignsProc(int a1, int a2, int a3) {
   int v40; // [esp+238h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -35016,9 +36900,13 @@ bool __cdecl GuiDlgXMD3CampaignsProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a2 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       switch ( (__int16)a2 )
@@ -35210,9 +37098,13 @@ void __cdecl InitGuiDlgYesNo(void) {
   if ( g_pStringEngine )
   {
     if ( g_cInfoExchangeInt.m_uData == 1 )
+    {
       v0 = g_pStringEngine->GetString(g_pStringEngine, 2550);
+    }
     else
+    {
       v0 = g_pStringEngine->GetString(g_pStringEngine, 1971);
+    }
     IGuiEngine::SetText((void *)g_pGUIEngine, 43, 1798, v0);
     v1 = g_pStringEngine->GetString(g_pStringEngine, 1421);
     IGuiEngine::SetText((void *)g_pGUIEngine, 43, 1796, v1);
@@ -35233,7 +37125,9 @@ bool __cdecl GuiDlgYesNoProc(int a1, int a2, int a3) {
   int v10; // [esp+68h] [ebp-4h]
 
   if ( !g_pEvnEngine )
+  {
     return 0;
+  }
   switch ( a1 )
   {
     case 0:
@@ -35241,9 +37135,13 @@ bool __cdecl GuiDlgYesNoProc(int a1, int a2, int a3) {
       break;
     case 1:
       if ( (a3 & 0x10000) != 0 )
+      {
         PlayGuiSound(1);
+      }
       else
+      {
         PlayGuiSound(0);
+      }
       break;
     case 3:
       if ( a2 == 1799 )
@@ -35329,7 +37227,9 @@ public: unsigned long __thiscall cdm_crc::CRCGenerator<16,32773,0,0,1,1>::GetNor
 
   v4 = 0;
   CRC = cdm_crc::CRCGenerator<16,32773,0,0,1,1>::GetCRC(this);
-  for ( i = 8; i <= 32; i += 8 )
+  for ( i = 8;
+        i <= 32;
+        i += 8 )
   {
     v4 |= (unsigned __int8)CRC << (32 - i);
     CRC >>= 8;
@@ -35352,9 +37252,7 @@ public: void __thiscall cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Process(unsigne
   
   int result; // eax
 
-  result = ((unsigned int)*this >> 8) ^ cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::operator[](
-                                          cdm_crc::CRCGenerator_16_32773_0_0_1_1_::Table,
-                                          (unsigned __int8)(*(_BYTE *)this ^ a2));
+  result = ((unsigned int)*this >> 8) ^ cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::operator[](cdm_crc::CRCGenerator_16_32773_0_0_1_1_::Table, (unsigned __int8)(*(_BYTE *)this ^ a2));
   *this = result;
   return result;
 }
@@ -35367,7 +37265,9 @@ public: void __thiscall cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Process(unsigne
   int result; // eax
   int i; // [esp+4h] [ebp-8h]
 
-  for ( i = 0; i < a3; ++i )
+  for ( i = 0;
+        i < a3;
+        ++i )
   {
     cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Process(this, *a2++);
     result = i + 1;
@@ -35384,12 +37284,18 @@ private: unsigned long __cdecl cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Reflect(
   int i; // [esp+4h] [ebp-4h]
 
   v3 = a1;
-  for ( i = 0; i < a2; ++i )
+  for ( i = 0;
+        i < a2;
+        ++i )
   {
     if ( (v3 & 1) != 0 )
+    {
       a1 |= cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Bitmask(a2 - 1 - i);
+    }
     else
+    {
       a1 &= ~cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Bitmask(a2 - 1 - i);
+    }
     v3 >>= 1;
   }
   return a1;
@@ -35603,7 +37509,9 @@ void __cdecl Serial::Serialize(std::istream & a1, float & a2) {
   memset(String, 0, 0xFFu);
   v4 = 0;
   do
+  {
     std::istream::read(String, 1, 0);
+  }
   while ( String[0] == 32 );
   v3 = 1;
   while ( !v4 )
@@ -35656,306 +37564,81 @@ void __cdecl RegisterClasses(void) {
     CPersistence::RegisterClassWhithId((unsigned int *)&CBuilding::m_iClassID, CBuilding::New, 0);
     CPersistence::RegisterClassWhithId((unsigned int *)&CSettler::m_iClassID, CSettler::New, 0);
     CPersistence::RegisterClassWhithId((unsigned int *)&CPile::m_iClassID, CPile::New, 0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CLandAnimal::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CLandAnimal::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CPlant::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CPlant::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CStone::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CStone::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CTree::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTree::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CShadowHerb::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CShadowHerb::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CDecoObject::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDecoObject::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CAnyWherePileRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CAnyWherePileRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CBuildingSitePileRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuildingSitePileRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CDeliverPileRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDeliverPileRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CProductionPileRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CProductionPileRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CStoragePileRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CStoragePileRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CTradePileRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTradePileRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CAnimalRanchRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CAnimalRanchRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      CBarrackRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBarrackRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CBigTempleRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBigTempleRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CBuildingSiteRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuildingSiteRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CCastleRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CCastleRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CDarkTempleRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDarkTempleRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CEyeCatcherRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEyeCatcherRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CFarmBuildingRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFarmBuildingRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CGatherBuildingRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGatherBuildingRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CLookoutTowerRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CLookoutTowerRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CMilitaryBuildingRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMilitaryBuildingRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CMineRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMineRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CProductionBuildingRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CProductionBuildingRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CResidenceBuildingRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CResidenceBuildingRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CSimpleBuildingRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSimpleBuildingRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CSmallTempleRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSmallTempleRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CStorageBuildingRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CStorageBuildingRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CTradingBuildingRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTradingBuildingRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      CWorkshopBuildingRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CWorkshopBuildingRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CWorkUpBuildingRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CWorkUpBuildingRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CBuilderRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuilderRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CCarrierRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CCarrierRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CDarkGardenerRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDarkGardenerRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CDiggerRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDiggerRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CHunterRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CHunterRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CDonkeyRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDonkeyRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CDoorRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDoorRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CFleeRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFleeRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CFreeWorkerRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFreeWorkerRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CGardenerRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGardenerRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CGeologistRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGeologistRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CHouseWorkerRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CHouseWorkerRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CMushroomFarmerRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMushroomFarmerRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CPioneerRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CPioneerRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CPriestRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CPriestRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CSaboteurRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSaboteurRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CShamanRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CShamanRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CSlaveRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSlaveRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CSoldierRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSoldierRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CThiefRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CThiefRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CTowerSoldier::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTowerSoldier::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CCart::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CCart::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CRomanCatapult::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CRomanCatapult::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CMayaCatapult::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMayaCatapult::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CVikingCatapult::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CVikingCatapult::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      CTrojanCatapult::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTrojanCatapult::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CFerryShip::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFerryShip::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CTransportShip::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTransportShip::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CWarShip::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CWarShip::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CEntityTask::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEntityTask::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CEntityEvent::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEntityEvent::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CEcoSector::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEcoSector::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CGoodTransportPriority::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGoodTransportPriority::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CBuildingSupplyPriority::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuildingSupplyPriority::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CDarkMushroomFarmRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDarkMushroomFarmRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CRomanWarShip::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CRomanWarShip::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CMayaWarShip::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMayaWarShip::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CVikingWarShip::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CVikingWarShip::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CTrojanWarShip::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTrojanWarShip::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CSquadLeaderRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSquadLeaderRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CManakopter::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CManakopter::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CManakopterHallRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CManakopterHallRole::New,
-      0);
-    CPersistence::RegisterClassWhithId(
-      (unsigned int *)&CHJBRole::m_iClassID,
-      (struct CPersistence *(__cdecl *)(struct std::istrstream *))CHJBRole::New,
-      0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CLandAnimal::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CLandAnimal::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CPlant::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CPlant::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CStone::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CStone::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CTree::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTree::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CShadowHerb::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CShadowHerb::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CDecoObject::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDecoObject::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CAnyWherePileRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CAnyWherePileRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CBuildingSitePileRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuildingSitePileRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CDeliverPileRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDeliverPileRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CProductionPileRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CProductionPileRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CStoragePileRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CStoragePileRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CTradePileRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTradePileRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CAnimalRanchRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CAnimalRanchRole::New, 0);
+    CPersistence::RegisterClassWhithId(CBarrackRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBarrackRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CBigTempleRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBigTempleRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CBuildingSiteRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuildingSiteRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CCastleRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CCastleRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CDarkTempleRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDarkTempleRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CEyeCatcherRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEyeCatcherRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CFarmBuildingRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFarmBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CGatherBuildingRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGatherBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CLookoutTowerRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CLookoutTowerRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CMilitaryBuildingRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMilitaryBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CMineRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMineRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CProductionBuildingRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CProductionBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CResidenceBuildingRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CResidenceBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CSimpleBuildingRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSimpleBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CSmallTempleRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSmallTempleRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CStorageBuildingRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CStorageBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CTradingBuildingRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTradingBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId(CWorkshopBuildingRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CWorkshopBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CWorkUpBuildingRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CWorkUpBuildingRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CBuilderRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuilderRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CCarrierRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CCarrierRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CDarkGardenerRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDarkGardenerRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CDiggerRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDiggerRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CHunterRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CHunterRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CDonkeyRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDonkeyRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CDoorRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDoorRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CFleeRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFleeRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CFreeWorkerRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFreeWorkerRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CGardenerRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGardenerRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CGeologistRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGeologistRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CHouseWorkerRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CHouseWorkerRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CMushroomFarmerRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMushroomFarmerRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CPioneerRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CPioneerRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CPriestRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CPriestRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CSaboteurRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSaboteurRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CShamanRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CShamanRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CSlaveRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSlaveRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CSoldierRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSoldierRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CThiefRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CThiefRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CTowerSoldier::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTowerSoldier::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CCart::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CCart::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CRomanCatapult::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CRomanCatapult::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CMayaCatapult::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMayaCatapult::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CVikingCatapult::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CVikingCatapult::New, 0);
+    CPersistence::RegisterClassWhithId(CTrojanCatapult::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTrojanCatapult::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CFerryShip::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CFerryShip::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CTransportShip::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTransportShip::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CWarShip::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CWarShip::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CEntityTask::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEntityTask::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CEntityEvent::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEntityEvent::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CEcoSector::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CEcoSector::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CGoodTransportPriority::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CGoodTransportPriority::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CBuildingSupplyPriority::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CBuildingSupplyPriority::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CDarkMushroomFarmRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CDarkMushroomFarmRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CRomanWarShip::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CRomanWarShip::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CMayaWarShip::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CMayaWarShip::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CVikingWarShip::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CVikingWarShip::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CTrojanWarShip::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CTrojanWarShip::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CSquadLeaderRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CSquadLeaderRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CManakopter::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CManakopter::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CManakopterHallRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CManakopterHallRole::New, 0);
+    CPersistence::RegisterClassWhithId((unsigned int *)&CHJBRole::m_iClassID, (struct CPersistence *(__cdecl *)(struct std::istrstream *))CHJBRole::New, 0);
     s_bSetPersistenceClasses = 1;
   }
 }
@@ -35980,9 +37663,7 @@ void __cdecl Serial::Serialize(std::ostream & a1, char a2, char a3) {
     std::ostream::operator<<(std::hex);
     std::ostream::operator<<((a2 & 0xF0) >> 4);
     std::ostream::operator<<(a2 & 0xF);
-    return (struct std::ostream *)std::ios_base::flags(
-                                    (struct std::ostream *)((char *)a1 + *(_DWORD *)(*(_DWORD *)a1 + 4)),
-                                    v5);
+    return (struct std::ostream *)std::ios_base::flags((struct std::ostream *)((char *)a1 + *(_DWORD *)(*(_DWORD *)a1 + 4)), v5);
   }
   else
   {
@@ -36012,7 +37693,9 @@ bool __cdecl Serial::Serialize(std::istream & a1, char & a2, bool a3) {
 
   v5 = std::ios_base::flags(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1);
   if ( !a3 )
+  {
     std::ios_base::unsetf((std::ios_base *)(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1), 1);
+  }
   v8 = 0;
   std::operator>><char,std::char_traits<char>>(a1, &v9);
   if ( v9 == 92 )
@@ -36036,15 +37719,23 @@ bool __cdecl Serial::Serialize(std::istream & a1, char & a2, bool a3) {
       }
       v11 = j__toupper(v11);
       if ( v11 <= 57 )
+      {
         v7 = 48;
+      }
       else
+      {
         v7 = 55;
+      }
       v11 -= v7;
       v10 = j__toupper(v10);
       if ( v10 <= 57 )
+      {
         v6 = 48;
+      }
       else
+      {
         v6 = 55;
+      }
       v10 -= v6;
       *a2 = v10 | (16 * v11);
     }
@@ -36076,10 +37767,14 @@ void __cdecl Serial::Serialize(std::istream & a1, std::string & a2) {
     {
       result = (unsigned __int8)std::ios_base::operator bool(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1);
       if ( !(_BYTE)result )
+      {
         break;
+      }
       result = (unsigned __int8)Serial::Serialize(a1, &v5, 0);
       if ( !(_BYTE)result && v5 == 34 )
+      {
         break;
+      }
       std::string::operator+=(v5);
     }
   }
@@ -36139,7 +37834,7 @@ void __cdecl Serial::Serialize<unsigned int>(std::ostream & a1, unsigned int con
 
 
 // address=[0x14147e0]
-// Decompiled from _DWORD *__thiscall TStaticConfigIntArray<6>::TStaticConfigIntArray<6>(  _DWORD *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9)
+// Decompiled from _DWORD *__thiscall TStaticConfigIntArray<6>::TStaticConfigIntArray<6>(_DWORD *this, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9)
 public: __thiscall TStaticConfigIntArray<6>::TStaticConfigIntArray<6>(char const * a2, char const * a3, int a4, int a5, int a6, int a7, int a8, int a9) {
   
   TStaticConfigIntArrayBase<6>::TStaticConfigIntArrayBase<6>(a2, a3);
@@ -36203,9 +37898,13 @@ int __cdecl Grid::TurnLeft(int pos) {
   int dir; // [esp+0h] [ebp-4h]
 
   if ( pos )
+  {
     dir = 0;
+  }
   else
+  {
     dir = 6;
+  }
   return pos + dir - 1;
 }
 
@@ -36290,40 +37989,46 @@ std::istream & __cdecl LoadArray<signed char>(std::istream & a1, signed char * c
   v4 = 0;
   Size = 0;
   Serial::Serialize<unsigned int>(a1, &v4);
-  if ( v5 != v4
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h",
-         267,
-         "iElementSize == iReadiElementSize") == 1 )
+  if ( v5 != v4 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h", 267, "iElementSize == iReadiElementSize") == 1 )
   {
     __debugbreak();
   }
   Serial::Serialize<unsigned int>(a1, &Size);
-  if ( v7 != Size
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h",
-         270,
-         "iNumberOfElements == iReadNumberOfElements") == 1 )
+  if ( v7 != Size && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h", 270, "iNumberOfElements == iReadNumberOfElements") == 1 )
   {
     __debugbreak();
   }
   if ( Size <= v7 )
   {
-    for ( i = 0; i < Size; ++i )
+    for ( i = 0;
+          i < Size;
+          ++i )
+    {
       operator^<signed char>(a1, i + a2);
-    for ( i = Size; i < Size; ++i )
+    }
+    for ( i = Size;
+          i < Size;
+          ++i )
+    {
       memset((void *)(i + a2), 0, 1u);
+    }
     return a1;
   }
   else
   {
     v6 = operator new[](Size);
-    for ( j = 0; j < Size; ++j )
+    for ( j = 0;
+          j < Size;
+          ++j )
+    {
       operator^<signed char>(a1, &v6[j]);
-    for ( j = 0; j < v7; ++j )
+    }
+    for ( j = 0;
+          j < v7;
+          ++j )
+    {
       *(_BYTE *)(j + a2) = v6[j];
+    }
     operator delete[](v6);
     return a1;
   }
@@ -36347,40 +38052,46 @@ std::istream & __cdecl LoadArray<unsigned short>(std::istream & a1, unsigned sho
   v4 = 0;
   v8 = 0;
   Serial::Serialize<unsigned int>(a1, &v4);
-  if ( v5 != v4
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h",
-         267,
-         "iElementSize == iReadiElementSize") == 1 )
+  if ( v5 != v4 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h", 267, "iElementSize == iReadiElementSize") == 1 )
   {
     __debugbreak();
   }
   Serial::Serialize<unsigned int>(a1, &v8);
-  if ( v7 != v8
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h",
-         270,
-         "iNumberOfElements == iReadNumberOfElements") == 1 )
+  if ( v7 != v8 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h", 270, "iNumberOfElements == iReadNumberOfElements") == 1 )
   {
     __debugbreak();
   }
   if ( v8 <= v7 )
   {
-    for ( i = 0; i < v8; ++i )
+    for ( i = 0;
+          i < v8;
+          ++i )
+    {
       operator^<unsigned short>(a1, a2 + 2 * i);
-    for ( i = v8; i < v8; ++i )
+    }
+    for ( i = v8;
+          i < v8;
+          ++i )
+    {
       memset((void *)(a2 + 2 * i), 0, 2u);
+    }
     return a1;
   }
   else
   {
     v6 = operator new[](2 * v8);
-    for ( j = 0; j < v8; ++j )
+    for ( j = 0;
+          j < v8;
+          ++j )
+    {
       operator^<unsigned short>(a1, &v6[j]);
-    for ( j = 0; j < v7; ++j )
+    }
+    for ( j = 0;
+          j < v7;
+          ++j )
+    {
       *(_WORD *)(a2 + 2 * j) = v6[j];
+    }
     operator delete[](v6);
     return a1;
   }
@@ -36395,17 +38106,14 @@ std::istream & __cdecl LoadVector<unsigned short>(std::istream & a1, class std::
   int i; // [esp+4h] [ebp-8h]
   _BYTE v5[4]; // [esp+8h] [ebp-4h] BYREF
 
-  if ( std::vector<unsigned short>::size(arg4)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h",
-         304,
-         "_rVector.size()==0") == 1 )
+  if ( std::vector<unsigned short>::size(arg4) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h", 304, "_rVector.size()==0") == 1 )
   {
     __debugbreak();
   }
   operator^<int>(a1, &a2);
-  for ( i = 0; i < a2; ++i )
+  for ( i = 0;
+        i < a2;
+        ++i )
   {
     operator^<unsigned short>(a1, v5);
     std::vector<unsigned short>::push_back(v5);
@@ -36426,8 +38134,12 @@ std::ostream & __cdecl StoreArray<signed char>(std::ostream & a1, signed char co
   v4 = a3;
   Serial::Serialize<unsigned int>(a1, &v5);
   Serial::Serialize<unsigned int>(a1, (int *)&v4);
-  for ( i = 0; i < v4; ++i )
+  for ( i = 0;
+        i < v4;
+        ++i )
+  {
     operator^<signed char>(a1, i + a2);
+  }
   return a1;
 }
 
@@ -36444,8 +38156,12 @@ std::ostream & __cdecl StoreArray<unsigned short>(std::ostream & a1, unsigned sh
   v4 = a3 / 2;
   Serial::Serialize<unsigned int>((int)a1, &v5);
   Serial::Serialize<unsigned int>((int)a1, (int *)&v4);
-  for ( i = 0; i < v4; ++i )
+  for ( i = 0;
+        i < v4;
+        ++i )
+  {
     operator^<unsigned short>(a1, (WORD *)(a2 + 2 * i));
+  }
   return a1;
 }
 
@@ -36487,8 +38203,7 @@ std::ostream & __cdecl StoreVector<unsigned short>(std::ostream & a1, class std:
     v9 = v10;
     LOBYTE(v17) = 2;
     v15 |= 1u;
-    v13 = (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator!=(v10)
-       && v14 > 0;
+    v13 = (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator!=(v10) && v14 > 0;
     v16 = v13;
     v17 = 0;
     if ( (v15 & 1) != 0 )
@@ -36497,7 +38212,9 @@ std::ostream & __cdecl StoreVector<unsigned short>(std::ostream & a1, class std:
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v3);
     }
     if ( !v16 )
+    {
       break;
+    }
     v8 = (WORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator*(v6);
     operator^<unsigned short>(a1, v8);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator++(v4, 0);
@@ -36603,40 +38320,46 @@ std::istream & __cdecl LoadArray<int>(std::istream & a1, int * const a2, unsigne
   v4 = 0;
   v8 = 0;
   Serial::Serialize<unsigned int>(a1, &v4);
-  if ( v5 != v4
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h",
-         267,
-         "iElementSize == iReadiElementSize") == 1 )
+  if ( v5 != v4 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h", 267, "iElementSize == iReadiElementSize") == 1 )
   {
     __debugbreak();
   }
   Serial::Serialize<unsigned int>(a1, &v8);
-  if ( v7 != v8
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h",
-         270,
-         "iNumberOfElements == iReadNumberOfElements") == 1 )
+  if ( v7 != v8 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h", 270, "iNumberOfElements == iReadNumberOfElements") == 1 )
   {
     __debugbreak();
   }
   if ( v8 <= v7 )
   {
-    for ( i = 0; i < v8; ++i )
+    for ( i = 0;
+          i < v8;
+          ++i )
+    {
       operator^<int>(a1, (int *)(a2 + 4 * i));
-    for ( i = v8; i < v8; ++i )
+    }
+    for ( i = v8;
+          i < v8;
+          ++i )
+    {
       memset((void *)(a2 + 4 * i), 0, 4u);
+    }
     return a1;
   }
   else
   {
     v6 = (int *)operator new[](4 * v8);
-    for ( j = 0; j < v8; ++j )
+    for ( j = 0;
+          j < v8;
+          ++j )
+    {
       operator^<int>(a1, &v6[j]);
-    for ( j = 0; j < v7; ++j )
+    }
+    for ( j = 0;
+          j < v7;
+          ++j )
+    {
       *(_DWORD *)(a2 + 4 * j) = v6[j];
+    }
     operator delete[](v6);
     return a1;
   }
@@ -36648,9 +38371,13 @@ std::istream & __cdecl LoadArray<int>(std::istream & a1, int * const a2, unsigne
 int const & __cdecl BB::Max<int>(int const & a1, int const & a2) {
   
   if ( *a1 >= *a2 )
+  {
     return a1;
+  }
   else
+  {
     return a2;
+  }
 }
 
 
@@ -36666,8 +38393,12 @@ std::ostream & __cdecl StoreArray<int>(std::ostream & a1, int const * const a2, 
   v4 = a3 / 4;
   Serial::Serialize<unsigned int>((int)a1, &v5);
   Serial::Serialize<unsigned int>((int)a1, (int *)&v4);
-  for ( i = 0; i < v4; ++i )
+  for ( i = 0;
+        i < v4;
+        ++i )
+  {
     operator^<int>(a1, (int *)(a2 + 4 * i));
+  }
   return a1;
 }
 
@@ -36706,9 +38437,13 @@ void __cdecl Serial::Serialize(std::ostream & a1, bool a2) {
 int __cdecl sign(int a1) {
   
   if ( a1 < 0 )
+  {
     return -1;
+  }
   else
+  {
     return 1;
+  }
 }
 
 
@@ -36717,9 +38452,13 @@ int __cdecl sign(int a1) {
 int const & __cdecl BB::Min<int>(int const & a1, int const & a2) {
   
   if ( *a1 >= *a2 )
+  {
     return a2;
+  }
   else
+  {
     return a1;
+  }
 }
 
 
@@ -36732,23 +38471,16 @@ public: void __thiscall TSparseMap<unsigned char>::Clear(void) {
   TSparseMap::TNode *pTempNode; // [esp+Ch] [ebp-8h]
   unsigned int a1; // [esp+10h] [ebp-4h]
 
-  for ( a1 = 0; a1 < this->m_iWidth; ++a1 )
+  for ( a1 = 0;
+        a1 < this->m_iWidth;
+        ++a1 )
   {
-    if ( *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
-            &this->m_vNodes,
-            a1) )
+    if ( *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](&this->m_vNodes, a1) )
     {
-      v1 = std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
-             &this->m_vNodes,
-             a1);
+      v1 = std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](&this->m_vNodes, a1);
       v2 = *v1;
       pTempNode = (*v1)->m_pNextNode;
-      if ( !pTempNode
-        && BBSupportDbgReport(
-             2,
-             "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TSparseMap.h",
-             289,
-             "pTempNode!=NULL") == 1 )
+      if ( !pTempNode && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TSparseMap.h", 289, "pTempNode!=NULL") == 1 )
       {
         __debugbreak();
       }
@@ -36771,20 +38503,27 @@ public: unsigned char __thiscall TSparseMap<unsigned char>::Get(unsigned int _uX
   TSparseMap::TNode *i; // [esp+4h] [ebp-4h]
 
   if ( !TSparseMap<unsigned char>::IsValidCoordinate(this, _uX, _uY) )
-    j___wassert(
-      L"IsValidCoordinate(_uX, _uY)",
-      L"d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TSparseMap.h",
-      0x1B4u);
+  {
+    j___wassert(L"IsValidCoordinate(_uX, _uY)", L"d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TSparseMap.h", 0x1B4u);
+  }
   if ( !TSparseMap<unsigned char>::IsValidCoordinate(this, _uX, _uY) )
+  {
     return this->m_iDefault;
-  for ( i = (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
-                &this->m_vNodes,
-                _uY))->m_pNextNode; i->m_iHeight < _uX; i = i->m_pNextNode )
+  }
+  for ( i = (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](&this->m_vNodes, _uY))->m_pNextNode;
+        i->m_iHeight < _uX;
+        i = i->m_pNextNode )
+  {
     ;
+  }
   if ( i->m_iHeight == _uX )
+  {
     return i->m_iValue;
+  }
   else
+  {
     return this->m_iDefault;
+  }
 }
 
 
@@ -36806,24 +38545,27 @@ public: void __thiscall TSparseMap<unsigned char>::Set(unsigned int _uX, unsigne
   TSparseMap::TNode *i; // [esp+14h] [ebp-18h]
 
   if ( !TSparseMap<unsigned char>::IsValidCoordinate(this, _uX, _uY) )
-    j___wassert(
-      L"IsValidCoordinate(_uX, _uY)",
-      L"d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TSparseMap.h",
-      0x13Cu);
+  {
+    j___wassert(L"IsValidCoordinate(_uX, _uY)", L"d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TSparseMap.h", 0x13Cu);
+  }
   if ( TSparseMap<unsigned char>::IsValidCoordinate(this, _uX, _uY) )
   {
-    pTargetNode = *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
-                     &this->m_vNodes,
-                     _uY);
-    for ( i = (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
-                  &this->m_vNodes,
-                  _uY))->m_pNextNode; i->m_iHeight < _uX; i = i->m_pNextNode )
+    pTargetNode = *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](&this->m_vNodes, _uY);
+    for ( i = (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](&this->m_vNodes, _uY))->m_pNextNode;
+          i->m_iHeight < _uX;
+          i = i->m_pNextNode )
+    {
       pTargetNode = i;
+    }
     v5 = (TSparseMap::TNode *)TSparseMap<unsigned char>::TNode::operator new(0xC);
     if ( v5 )
+    {
       v4 = TSparseMap<unsigned char>::TNode::TNode(v5);
+    }
     else
+    {
       v4 = 0;
+    }
     if ( v4 )
     {
       LOBYTE(v4->m_iValue) = *_uValue;
@@ -36837,7 +38579,7 @@ public: void __thiscall TSparseMap<unsigned char>::Set(unsigned int _uX, unsigne
 
 
 // address=[0x1470380]
-// Decompiled from _DWORD *__thiscall TStaticConfigIntArray<8>::TStaticConfigIntArray<8>(  _DWORD *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  int a9,  int a10,  int a11)
+// Decompiled from _DWORD *__thiscall TStaticConfigIntArray<8>::TStaticConfigIntArray<8>(_DWORD *this, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11)
 public: __thiscall TStaticConfigIntArray<8>::TStaticConfigIntArray<8>(char const * a2, char const * a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11) {
   
   TStaticConfigIntArrayBase<8>::TStaticConfigIntArrayBase<8>(a2, a3);
@@ -37021,9 +38763,13 @@ public: void __thiscall TBitArray<2956>::SetArray(void) {
 public: void __thiscall TBitArray<2956>::SetValue(unsigned int a2, bool a3) {
   
   if ( a3 )
+  {
     return TBitArray<2956>::Set(this, a2);
+  }
   else
+  {
     return TBitArray<2956>::Clear(this, a2);
+  }
 }
 
 
@@ -37042,22 +38788,32 @@ bool __cdecl S4CheckGfx(int) {
   _BYTE v9[368]; // [esp+1Ch] [ebp-174h] BYREF
 
   memset(v9, 0, 0x16Fu);
-  for ( i = 0; i < 434; ++i )
+  for ( i = 0;
+        i < 434;
+        ++i )
   {
     if ( (unsigned int)dword_36BB420[2 * i] <= 0x16E )
     {
       if ( strstr((&off_36BB424)[2 * i], "WALK") )
+      {
         v9[dword_36BB420[2 * i]] = 1;
+      }
     }
   }
   v8 = 1;
   if ( g_pGfxManager )
   {
-    for ( j = 0; j < 5; ++j )
+    for ( j = 0;
+          j < 5;
+          ++j )
     {
-      for ( k = 1; k < 367; ++k )
+      for ( k = 1;
+            k < 367;
+            ++k )
       {
-        for ( m = 0; m < 6; ++m )
+        for ( m = 0;
+              m < 6;
+              ++m )
         {
           SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount((CGfxManager *)g_pGfxManager, j, k, m);
           if ( SettlerJobFrameCount <= 0x1F )
@@ -37067,15 +38823,7 @@ bool __cdecl S4CheckGfx(int) {
               v8 = 0;
               RaceName = CS4DefineNames::GetRaceName(j);
               SettlerJobName = CS4DefineNames::GetSettlerJobName(k);
-              BBSupportTracePrintF(
-                2,
-                "Direction %i of settler walk job %i (%s) of race %i (%s) has %u frames instead of 13 frames!",
-                m,
-                k,
-                SettlerJobName,
-                j,
-                RaceName,
-                SettlerJobFrameCount);
+              BBSupportTracePrintF(2, "Direction %i of settler walk job %i (%s) of race %i (%s) has %u frames instead of 13 frames!", m, k, SettlerJobName, j, RaceName, SettlerJobFrameCount);
             }
           }
           else
@@ -37103,16 +38851,16 @@ bool __cdecl ExtraCD::IsGermanOnlyContentEnabled(void) {
   CConfigManager *Instance; // [esp+8h] [ebp-14h]
 
   if ( dword_3F450B4 <= *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
+  {
     return byte_3F450B3 || CGameSettings::GetLanguage() == 1;
+  }
   j___Init_thread_header(&dword_3F450B4);
   if ( dword_3F450B4 != -1 )
+  {
     return byte_3F450B3 || CGameSettings::GetLanguage() == 1;
+  }
   Instance = CConfigManagerPtr::GetInstance();
-  byte_3F450B3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->GetIntValueNoAdd)(
-                   Instance,
-                   "GAMESETTINGS",
-                   "EnableGermanOnlyContent",
-                   1) != 0;
+  byte_3F450B3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->GetIntValueNoAdd)(Instance, "GAMESETTINGS", "EnableGermanOnlyContent", 1) != 0;
   j___Init_thread_footer((int)&dword_3F450B4);
   return byte_3F450B3 || CGameSettings::GetLanguage() == 1;
 }
@@ -37148,25 +38896,19 @@ void __cdecl SetCamWndViewPosition(void) {
   {
     v21 = CMapObjectMgr::EntityPtr((unsigned __int16)g_uCamWndEntityId);
     if ( !CMapObjectMgr::GetUniqueId((unsigned __int16)g_uCamWndEntityId) )
+    {
       v21 = 0;
+    }
   }
   else
   {
     v21 = 0;
   }
   if ( !v21 || IEntity::FlagBits(v21, ENTITY_FLAG_ON_BOARD) || !IEntity::X(v21) && !IEntity::Y(v21) )
-    return IGfxEngine::SetCameraViewPosition(
-             (IGfxEngine *)g_pGfxEngine,
-             (int)(((double)g_iCamWndX - (double)g_iCamWndY / 2.0) * (double)g_iCamWndScale
-                 - 87.0
-                 - (double)g_iCamWndScale / 24.0 * 40.0),
-             (int)((double)g_iCamWndY * ((double)g_iCamWndScale / 2.0) - (double)g_iCamWndScale / 24.0 * 10.0 - 95.0));
-  v13 = (IMovingEntity *)j____RTDynamicCast(
-                           (void **)&v21->__vftable,
-                           0,
-                           &IEntity__RTTI_Type_Descriptor_,
-                           &IMovingEntity__RTTI_Type_Descriptor_,
-                           0);
+  {
+    return IGfxEngine::SetCameraViewPosition((IGfxEngine *)g_pGfxEngine, (int)(((double)g_iCamWndX - (double)g_iCamWndY / 2.0) * (double)g_iCamWndScale - 87.0 - (double)g_iCamWndScale / 24.0 * 40.0), (int)((double)g_iCamWndY * ((double)g_iCamWndScale / 2.0) - (double)g_iCamWndScale / 24.0 * 10.0 - 95.0));
+  }
+  v13 = (IMovingEntity *)j____RTDynamicCast((void **)&v21->__vftable, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0);
   v5 = IEntity::Y(v21);
   v0 = IEntity::X(v21);
   v1 = CWorldManager::GroundHeight(v0, v5);
@@ -37180,21 +38922,20 @@ void __cdecl SetCamWndViewPosition(void) {
     v15 = 0;
     v16 = 0;
     if ( !v13 )
+    {
       return IGfxEngine::SetCameraViewPosition((IGfxEngine *)g_pGfxEngine, v15, v16);
-    v16 = (int)((double)IEntity::Y(v21) * ((double)g_iCamWndScale / 2.0)
-              - (double)g_iCamWndScale / 24.0 * 10.0
-              - (double)RenderHeight
-              - 95.0);
+    }
+    v16 = (int)((double)IEntity::Y(v21) * ((double)g_iCamWndScale / 2.0) - (double)g_iCamWndScale / 24.0 * 10.0 - (double)RenderHeight - 95.0);
     v7 = (double)IEntity::X(v21);
-    v15 = (int)((v7 - (double)IEntity::Y(v21) / 2.0) * (double)g_iCamWndScale
-              - (double)g_iCamWndScale / 24.0 * 40.0
-              - 87.0);
+    v15 = (int)((v7 - (double)IEntity::Y(v21) / 2.0) * (double)g_iCamWndScale - (double)g_iCamWndScale / 24.0 * 40.0 - 87.0);
     v17 = IEntity::X(v21);
     v19 = IEntity::Y(v21);
     v14 = IMovingEntity::Distance(v13);
     v8 = IMovingEntity::Direction(v13);
     if ( !v14 )
+    {
       return IGfxEngine::SetCameraViewPosition((IGfxEngine *)g_pGfxEngine, v15, v16);
+    }
     switch ( v8 )
     {
       case 0:
@@ -37227,13 +38968,21 @@ void __cdecl SetCamWndViewPosition(void) {
     v11 = j__abs(v15 - v18);
     v10 = j__abs(v16 - v20);
     if ( v15 <= v18 )
+    {
       v15 += (int)((double)v11 / 255.0 * (double)v14);
+    }
     else
+    {
       v15 -= (int)((double)v11 / 255.0 * (double)v14);
+    }
     if ( v16 <= v20 )
+    {
       v16 += (int)((double)v10 / 255.0 * (double)v14);
+    }
     else
+    {
       v16 -= (int)((double)v10 / 255.0 * (double)v14);
+    }
     return IGfxEngine::SetCameraViewPosition((IGfxEngine *)g_pGfxEngine, v15, v16);
   }
   else
@@ -37242,12 +38991,7 @@ void __cdecl SetCamWndViewPosition(void) {
     g_iCamWndY = IEntity::Y(v21);
     g_uCamWndEntityId = 0;
     g_iCamWndUniqueId = 0;
-    return IGfxEngine::SetCameraViewPosition(
-             (IGfxEngine *)g_pGfxEngine,
-             (int)(((double)g_iCamWndX - (double)g_iCamWndY / 2.0) * (double)g_iCamWndScale
-                 - 87.0
-                 - (double)g_iCamWndScale / 24.0 * 40.0),
-             (int)((double)g_iCamWndY * ((double)g_iCamWndScale / 2.0) - (double)g_iCamWndScale / 24.0 * 10.0 - 95.0));
+    return IGfxEngine::SetCameraViewPosition((IGfxEngine *)g_pGfxEngine, (int)(((double)g_iCamWndX - (double)g_iCamWndY / 2.0) * (double)g_iCamWndScale - 87.0 - (double)g_iCamWndScale / 24.0 * 40.0), (int)((double)g_iCamWndY * ((double)g_iCamWndScale / 2.0) - (double)g_iCamWndScale / 24.0 * 10.0 - 95.0));
   }
 }
 
@@ -37265,12 +39009,18 @@ void __cdecl UpdateReefBlockingBits(void) {
   int i; // [esp+10h] [ebp-8h]
   int j; // [esp+14h] [ebp-4h]
 
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = CWorldManager::Width();
     if ( i >= result )
+    {
       break;
-    for ( j = 0; j < CWorldManager::Height(); ++j )
+    }
+    for ( j = 0;
+          j < CWorldManager::Height();
+          ++j )
     {
       v4 = CWorldManager::Index(i, j);
       v2 = CWorldManager::FlagBits(v4, 2u);
@@ -37326,11 +39076,17 @@ public: __thiscall CRingBuffer<class CEvn_Logic>::~CRingBuffer<class CEvn_Logic>
   *this = CRingBuffer_CEvn_Logic_::_vftable_;
   result = this[5];
   if ( !result )
+  {
     return result;
+  }
   if ( *(_DWORD *)(result - 4) )
+  {
     return (*(int (__thiscall **)(_DWORD, int))(*(_DWORD *)this[5] + 8))(this[5], 3);
+  }
   else
+  {
     return operator delete[]((void *)(result - 4));
+  }
   return result;
 }
 
@@ -37392,7 +39148,9 @@ public: void __thiscall CRingBuffer<class CEvn_Logic>::StartVirtual(void) {
 public: bool __thiscall CRingBuffer<class CEvn_Logic>::Write(class CEvn_Logic & a2) {
   
   if ( (unsigned int)(this->dwordC + 1) % this->m_uCapacity == this->m_uPointer )
+  {
     return 0;
+  }
   CEvn_Logic::operator=(&this->m_aEvents[this->dwordC], a2);
   ++this->dwordC;
   this->dwordC %= this->m_uCapacity;
@@ -37431,7 +39189,9 @@ wchar_t * __cdecl MyWStrNCopy(wchar_t * a1, wchar_t const * a2, unsigned int a3)
   unsigned int v5; // [esp+20h] [ebp+10h]
 
   if ( a3 == 0 || a1 == 0 )
+  {
     return (int)a1;
+  }
   v5 = a3 - 1;
   v4 = 0;
   if ( *a2 )
@@ -37448,7 +39208,7 @@ wchar_t * __cdecl MyWStrNCopy(wchar_t * a1, wchar_t const * a2, unsigned int a3)
 
 
 // address=[0x149a3d0]
-// Decompiled from int __cdecl DecodeMapKey(_DWORD *a1, wchar_t *String)
+// Decompiled from int __cdecl DecodeMapKey(struct SRandomMapParams *a1, wchar_t *String)
 void __cdecl DecodeMapKey(struct SRandomMapParams * a1, wchar_t * String) {
   
   __int64 v2; // rax
@@ -37463,31 +39223,39 @@ void __cdecl DecodeMapKey(struct SRandomMapParams * a1, wchar_t * String) {
 
   v6 = j__wcsupr(String);
   memset(a1, 0, 0xB8u);
-  *a1 = 184;
+  a1->_unknownDWord = 184;
   v5 = 0LL;
   v7 = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     v10 = v6[i];
     if ( v10 < 65 )
+    {
       v11 = v10 - 48;
+    }
     else
+    {
       v11 = v10 - 55;
+    }
     v5 += (__int64)v11 << v7;
     v7 += 5;
   }
-  a1[8] = (v5 & 7) + 1;
-  a1[4] = 5 * (((v5 & 0x18) >> 3) + 1);
-  a1[2] = (((v5 & 0x1E0) >> 5) + 4) << 6;
-  a1[5] = (v5 & 0x600) >> 9;
-  a1[3] = 10 * (((v5 & 0x7800) >> 11) + 1);
+  a1->m_iNumPlayers = (v5 & 7) + 1;
+  *(_DWORD *)&a1->m_resourceCount = 5 * (((v5 & 0x18) >> 3) + 1);
+  a1->m_mapSize = (((v5 & 0x1E0) >> 5) + 4) << 6;
+  a1->m_iFlags = (v5 & 0x600) >> 9;
+  a1->m_iLandMassPercent = 10 * (((v5 & 0x7800) >> 11) + 1);
   LODWORD(v2) = v5 & 0xFFFF8000;
   HIDWORD(v2) = BYTE4(v5) & 7;
   v3 = v2 >> 15;
-  a1[1] = v3;
-  for ( j = 0; j < 9; ++j )
+  a1->m_iRandomSeed = v3;
+  for ( j = 0;
+        j < 9;
+        ++j )
   {
-    a1[4 * j + 10] = 16;
+    *(&a1[1]._unknownDWord + 4 * j) = 16;
     LODWORD(v3) = j + 1;
   }
   return v3;
@@ -37495,40 +39263,37 @@ void __cdecl DecodeMapKey(struct SRandomMapParams * a1, wchar_t * String) {
 
 
 // address=[0x149a5e0]
-// Decompiled from int __cdecl GenerateMapKey(struct SRandomMapParams *a1, wchar_t *a2)
+// Decompiled from void __cdecl GenerateMapKey(struct SRandomMapParams *a1, wchar_t *a2)
 void __cdecl GenerateMapKey(struct SRandomMapParams * a1, wchar_t * a2) {
   
   wchar_t v2; // dx
-  int result; // eax
-  __int64 v4; // [esp+0h] [ebp-1Ch]
-  __int64 v5; // [esp+8h] [ebp-14h]
-  char v6; // [esp+10h] [ebp-Ch]
+  __int64 v3; // [esp+0h] [ebp-1Ch]
+  __int64 v4; // [esp+8h] [ebp-14h]
+  char v5; // [esp+10h] [ebp-Ch]
   int i; // [esp+14h] [ebp-8h]
-  char v8; // [esp+1Bh] [ebp-1h]
+  char v7; // [esp+1Bh] [ebp-1h]
 
-  v5 = *((_DWORD *)a1 + 8)
-     - 1
-     + (__int64)(8 * (*((_DWORD *)a1 + 4) / 5) - 8)
-     + 32 * (*((_DWORD *)a1 + 2) / 64 - 4)
-     + ((*((_DWORD *)a1 + 5) & 3u) << 9)
-     + ((*((_DWORD *)a1 + 3) / 10 - 1) << 11)
-     + ((__int64)*((int *)a1 + 1) << 15);
-  v6 = 0;
-  v4 = 31LL;
-  for ( i = 0; i < 8; ++i )
+  v4 = *((_DWORD *)a1 + 8) - 1 + (__int64)(8 * (*((_DWORD *)a1 + 4) / 5) - 8) + 32 * (*((_DWORD *)a1 + 2) / 64 - 4) + ((*((_DWORD *)a1 + 5) & 3u) << 9) + ((*((_DWORD *)a1 + 3) / 10 - 1) << 11) + ((__int64)*((int *)a1 + 1) << 15);
+  v5 = 0;
+  v3 = 31LL;
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
-    v8 = (v4 & v5) >> v6;
-    if ( v8 >= 10 )
-      v2 = v8 + 55;
+    v7 = (v3 & v4) >> v5;
+    if ( v7 >= 10 )
+    {
+      v2 = v7 + '7';
+    }
     else
-      v2 = v8 + 48;
+    {
+      v2 = v7 + '0';
+    }
     a2[i] = v2;
-    v4 *= 32LL;
-    v6 += 5;
+    v3 *= 32LL;
+    v5 += 5;
   }
-  result = 16;
   a2[8] = 0;
-  return result;
 }
 
 
@@ -37546,23 +39311,39 @@ bool __cdecl IsValidMapKey(wchar_t * String) {
   int v9; // [esp+24h] [ebp-9Ch]
 
   if ( !String )
+  {
     return 0;
+  }
   v2 = 1;
   DecodeMapKey(v3, String);
   if ( v9 < 1 || v9 > 8 )
+  {
     v2 = 0;
+  }
   if ( v7 < 1 || v7 > 15 )
+  {
     v2 = 0;
+  }
   if ( v5 % 64 || v5 > 1024 || v5 < 256 )
+  {
     v2 = 0;
+  }
   if ( v8 >= 4 )
+  {
     v2 = 0;
+  }
   if ( v6 % 10 || v6 > 90 || v6 < 10 )
+  {
     v2 = 0;
+  }
   if ( v4 >= 0xF4240 )
+  {
     v2 = 0;
+  }
   if ( String[7] != 48 )
+  {
     return 0;
+  }
   return v2;
 }
 
@@ -37574,9 +39355,13 @@ int __stdcall DlgProc(struct HWND__ * hDlg, unsigned int a2, unsigned int a3, lo
   if ( a2 == 272 )
   {
     if ( g_pCfgMgr->GetIntValue(g_pCfgMgr, "GAMESETTINGS", "Language", 0) )
+    {
       SetDlgItemTextA(hDlg, 1009, "Tragen Sie bitte hier Ihre Fehlerbeschreibung ein...");
+    }
     else
+    {
       SetDlgItemTextA(hDlg, 1009, "Please fill in your problem description here...");
+    }
     return 1;
   }
   else if ( a2 == 273 )
@@ -37585,9 +39370,13 @@ int __stdcall DlgProc(struct HWND__ * hDlg, unsigned int a2, unsigned int a3, lo
     {
       GetDlgItemTextA(hDlg, 1009, g_szBugReportText, 0x2000);
       if ( IsDlgButtonChecked(hDlg, 1037) )
+      {
         EndDialog(hDlg, 2);
+      }
       else
+      {
         EndDialog(hDlg, 1);
+      }
     }
     else if ( a3 == 2 )
     {
@@ -37730,10 +39519,14 @@ private: void __thiscall AdvXMLParser::ConstIterator<class AdvXMLParser::Element
     v7 = -1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v1);
     if ( !v6 )
+    {
       break;
+    }
     v4 = *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(i + 1);
     if ( (*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v4 + 12))(v4, 1) )
+    {
       break;
+    }
   }
 }
 
@@ -37759,13 +39552,17 @@ void __cdecl Serial::Serialize(std::ostream & a1, float a2) {
   if ( v5 > 4 )
   {
     if ( v5 != 512 )
+    {
       goto LABEL_8;
+    }
 LABEL_7:
     a2 = 0.0;
     goto LABEL_8;
   }
   if ( v5 == 4 || v5 > 0 && v5 <= 2 )
+  {
     goto LABEL_7;
+  }
 LABEL_8:
   v4 = std::ios_base::precision((struct std::ostream *)((char *)a1 + *(_DWORD *)(*(_DWORD *)a1 + 4)));
   std::ios_base::precision((struct std::ostream *)((char *)a1 + *(_DWORD *)(*(_DWORD *)a1 + 4)), 18LL);
@@ -37802,40 +39599,46 @@ std::istream & __cdecl LoadArray<unsigned char>(std::istream & a1, unsigned char
   v4 = 0;
   Size = 0;
   Serial::Serialize<unsigned int>(a1, &v4);
-  if ( v5 != v4
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h",
-         267,
-         "iElementSize == iReadiElementSize") == 1 )
+  if ( v5 != v4 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h", 267, "iElementSize == iReadiElementSize") == 1 )
   {
     __debugbreak();
   }
   Serial::Serialize<unsigned int>(a1, &Size);
-  if ( v7 != Size
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h",
-         270,
-         "iNumberOfElements == iReadNumberOfElements") == 1 )
+  if ( v7 != Size && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h", 270, "iNumberOfElements == iReadNumberOfElements") == 1 )
   {
     __debugbreak();
   }
   if ( Size <= v7 )
   {
-    for ( i = 0; i < Size; ++i )
+    for ( i = 0;
+          i < Size;
+          ++i )
+    {
       operator^<unsigned char>(a1, i + a2);
-    for ( i = Size; i < Size; ++i )
+    }
+    for ( i = Size;
+          i < Size;
+          ++i )
+    {
       memset((void *)(i + a2), 0, 1u);
+    }
     return a1;
   }
   else
   {
     v6 = operator new[](Size);
-    for ( j = 0; j < Size; ++j )
+    for ( j = 0;
+          j < Size;
+          ++j )
+    {
       operator^<unsigned char>(a1, &v6[j]);
-    for ( j = 0; j < v7; ++j )
+    }
+    for ( j = 0;
+          j < v7;
+          ++j )
+    {
       *(_BYTE *)(j + a2) = v6[j];
+    }
     operator delete[](v6);
     return a1;
   }
@@ -37854,8 +39657,12 @@ std::ostream & __cdecl StoreArray<unsigned char>(std::ostream & a1, unsigned cha
   v4 = a3;
   Serial::Serialize<unsigned int>((int)a1, &v5);
   Serial::Serialize<unsigned int>((int)a1, (int *)&v4);
-  for ( i = 0; i < v4; ++i )
+  for ( i = 0;
+        i < v4;
+        ++i )
+  {
     operator^<unsigned char>(a1, (BYTE *)(i + a2));
+  }
   return a1;
 }
 
@@ -37897,39 +39704,43 @@ std::istream & __cdecl LoadArray<struct SLoadInfo>(std::istream & a1, struct SLo
   v6 = 0;
   v10 = 0;
   Serial::Serialize<unsigned int>(a1, &v6);
-  if ( v7 != v6
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h",
-         267,
-         "iElementSize == iReadiElementSize") == 1 )
+  if ( v7 != v6 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h", 267, "iElementSize == iReadiElementSize") == 1 )
   {
     __debugbreak();
   }
   Serial::Serialize<unsigned int>(a1, &v10);
-  if ( v9 != v10
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h",
-         270,
-         "iNumberOfElements == iReadNumberOfElements") == 1 )
+  if ( v9 != v10 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\LoadSave\\Serialize.h", 270, "iNumberOfElements == iReadNumberOfElements") == 1 )
   {
     __debugbreak();
   }
   if ( v10 <= v9 )
   {
-    for ( i = 0; i < v10; ++i )
+    for ( i = 0;
+          i < v10;
+          ++i )
+    {
       operator^<SLoadInfo>(a1, a2 + 12 * i);
-    for ( i = v10; i < v10; ++i )
+    }
+    for ( i = v10;
+          i < v10;
+          ++i )
+    {
       memset((void *)(a2 + 12 * i), 0, 0xCu);
+    }
     return a1;
   }
   else
   {
     v8 = (char *)operator new[](12 * v10);
-    for ( j = 0; j < v10; ++j )
+    for ( j = 0;
+          j < v10;
+          ++j )
+    {
       operator^<SLoadInfo>(a1, &v8[12 * j]);
-    for ( j = 0; j < v9; ++j )
+    }
+    for ( j = 0;
+          j < v9;
+          ++j )
     {
       v3 = &v8[12 * j];
       v4 = (_DWORD *)(a2 + 12 * j);
@@ -37957,7 +39768,9 @@ std::ostream & __cdecl StoreArray<struct SLoadInfo>(std::ostream & a1, struct SL
   v5 = a3 / 0xC;
   Serial::Serialize<unsigned int>(a1, &v6);
   Serial::Serialize<unsigned int>(a1, (int *)&v5);
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
     v3 = (_DWORD *)(a2 + 12 * i);
     v8[0] = *v3;
@@ -38008,7 +39821,7 @@ public: class TArgv<unsigned int,class std::vector<unsigned int,class std::alloc
 
 
 // address=[0x1552570]
-// Decompiled from void *__thiscall TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>(  CGroupMgr::TStaticArray100short *this)
+// Decompiled from void *__thiscall TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>(CGroupMgr::TStaticArray100short *this)
 public: __thiscall TStaticArray<unsigned short,100>::TStaticArray<unsigned short,100>(void) {
   
   TStaticArray<unsigned short,100>::Init(this);
@@ -38017,7 +39830,7 @@ public: __thiscall TStaticArray<unsigned short,100>::TStaticArray<unsigned short
 
 
 // address=[0x1552610]
-// Decompiled from unsigned __int16 *__thiscall TStaticArray<unsigned short,100>::operator[](  struct CGroupMgr::TStaticArray100short *this,  int a2)
+// Decompiled from unsigned __int16 *__thiscall TStaticArray<unsigned short,100>::operator[](struct CGroupMgr::TStaticArray100short *this, int a2)
 public: unsigned short & __thiscall TStaticArray<unsigned short,100>::operator[](int a2) {
   
   return &this->entry[a2];
@@ -38033,15 +39846,19 @@ public: unsigned short const & __thiscall TStaticArray<unsigned short,100>::oper
 
 
 // address=[0x15526b0]
-// Decompiled from int __thiscall TStaticArray<unsigned short,100>::FindEntry(  struct CGroupMgr::TStaticArray100short *this,  unsigned __int16 *a2)
+// Decompiled from int __thiscall TStaticArray<unsigned short,100>::FindEntry(struct CGroupMgr::TStaticArray100short *this, unsigned __int16 *a2)
 public: int __thiscall TStaticArray<unsigned short,100>::FindEntry(unsigned short const & a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < (signed int)this->size; ++i )
+  for ( i = 0;
+        i < (signed int)this->size;
+        ++i )
   {
     if ( this->entry[i] == *a2 )
+    {
       return i;
+    }
   }
   return -1;
 }
@@ -38059,12 +39876,7 @@ public: void __thiscall TStaticArray<unsigned short,100>::Init(void) {
 // Decompiled from void __thiscall TStaticArray<unsigned short,100>::PopBack(CGroupMgr::TStaticArray100short *this)
 public: void __thiscall TStaticArray<unsigned short,100>::PopBack(void) {
   
-  if ( (int)this->size <= 0
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h",
-         161,
-         "m_iSize > 0") == 1 )
+  if ( (int)this->size <= 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h", 161, "m_iSize > 0") == 1 )
   {
     __debugbreak();
   }
@@ -38076,12 +39888,7 @@ public: void __thiscall TStaticArray<unsigned short,100>::PopBack(void) {
 // Decompiled from void __thiscall TStaticArray<unsigned short,100>::PushBack(struct CGroupMgr::TStaticArray100short *this, _WORD *a2)
 public: void __thiscall TStaticArray<unsigned short,100>::PushBack(unsigned short const & a2) {
   
-  if ( (int)this->size >= 100
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h",
-         154,
-         "m_iSize < MAX_SIZE") == 1 )
+  if ( (int)this->size >= 100 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h", 154, "m_iSize < MAX_SIZE") == 1 )
   {
     __debugbreak();
   }
@@ -38090,14 +39897,16 @@ public: void __thiscall TStaticArray<unsigned short,100>::PushBack(unsigned shor
 
 
 // address=[0x1552850]
-// Decompiled from char __thiscall TStaticArray<unsigned short,100>::RemoveEntry(  struct CGroupMgr::TStaticArray100short *this,  unsigned __int16 *a1)
+// Decompiled from char __thiscall TStaticArray<unsigned short,100>::RemoveEntry(struct CGroupMgr::TStaticArray100short *this, unsigned __int16 *a1)
 public: bool __thiscall TStaticArray<unsigned short,100>::RemoveEntry(unsigned short const & a2) {
   
   int Entry; // [esp+4h] [ebp-4h]
 
   Entry = TStaticArray<unsigned short,100>::FindEntry(this, a1);
   if ( Entry < 0 )
+  {
     return 0;
+  }
   TStaticArray<unsigned short,100>::RemoveIndex(Entry);
   return 1;
 }
@@ -38107,17 +39916,14 @@ public: bool __thiscall TStaticArray<unsigned short,100>::RemoveEntry(unsigned s
 // Decompiled from void __thiscall TStaticArray<unsigned short,100>::RemoveIndex(CGroupMgr::TStaticArray100short *this, int a2)
 public: void __thiscall TStaticArray<unsigned short,100>::RemoveIndex(int a2) {
   
-  if ( (a2 >= (signed int)this->size || a2 < 0)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h",
-         209,
-         "(_iIndex >= 0) & (_iIndex < m_iSize)") == 1 )
+  if ( (a2 >= (signed int)this->size || a2 < 0) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h", 209, "(_iIndex >= 0) & (_iIndex < m_iSize)") == 1 )
   {
     __debugbreak();
   }
   if ( a2 < (signed int)--this->size )
+  {
     this->entry[a2] = this->entry[this->size];
+  }
 }
 
 
@@ -38175,7 +39981,9 @@ void __cdecl CheckRegister(char * a1, class CSettler * a2) {
 
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Registered);
   if ( result )
+  {
     return result;
+  }
   v3 = IEntity::ID(a2);
   return CTrace::Print("%s %u", a1, v3);
 }
@@ -38226,7 +40034,7 @@ void __cdecl Serial::Serialize<enum CFerryShip::TFerryJob>(std::ostream & a1, en
 
 
 // address=[0x15b1910]
-// Decompiled from _DWORD *__thiscall TStaticConfigIntArray<4>::TStaticConfigIntArray<4>(  _DWORD *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7)
+// Decompiled from _DWORD *__thiscall TStaticConfigIntArray<4>::TStaticConfigIntArray<4>(_DWORD *this, int a2, int a3, int a4, int a5, int a6, int a7)
 public: __thiscall TStaticConfigIntArray<4>::TStaticConfigIntArray<4>(char const * a2, char const * a3, int a4, int a5, int a6, int a7) {
   
   TStaticConfigIntArrayBase<4>::TStaticConfigIntArrayBase<4>(a2, a3);
@@ -38240,7 +40048,7 @@ public: __thiscall TStaticConfigIntArray<4>::TStaticConfigIntArray<4>(char const
 
 
 // address=[0x15b19a0]
-// Decompiled from TStaticConfigIntArrayBase<4> *__thiscall TStaticConfigIntArrayBase<4>::TStaticConfigIntArrayBase<4>(  TStaticConfigIntArrayBase<4> *this,  int a2,  int a3)
+// Decompiled from TStaticConfigIntArrayBase<4> *__thiscall TStaticConfigIntArrayBase<4>::TStaticConfigIntArrayBase<4>(TStaticConfigIntArrayBase<4> *this, int a2, int a3)
 private: __thiscall TStaticConfigIntArrayBase<4>::TStaticConfigIntArrayBase<4>(char const * a2, char const * a3) {
   
   CStaticConfigVar::CStaticConfigVar((CStaticConfigVar *)this, a2, a3, CONFIGVAR_TYPE_INT_ARRAY, 4);
@@ -38303,22 +40111,23 @@ class ISimpleNet * __cdecl CreateSimpleNet(void) {
   
   std::bad_function_call *v2; // [esp+Ch] [ebp-10h]
 
-  if ( !WSAStartup
-    && BBSupportDbgReportF(
-         2,
-         "net\\SimpleNet.cpp",
-         384,
-         "One or more function ptrs to WS2_32.DLL are NULL. You must call ImportWSAFunctions() before !") == 1 )
+  if ( !WSAStartup && BBSupportDbgReportF(2, "net\\SimpleNet.cpp", 384, "One or more function ptrs to WS2_32.DLL are NULL. You must call ImportWSAFunctions() before !") == 1 )
   {
     __debugbreak();
   }
   if ( !WSAStartup )
+  {
     return 0;
+  }
   v2 = (std::bad_function_call *)operator new(0x11BCu);
   if ( v2 )
+  {
     return CSimpleNet::CSimpleNet((CSimpleNet *)v2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -38351,19 +40160,13 @@ bool __cdecl ImportWSAFunctions(void) {
                 socket = (SOCKET (__stdcall *)(int, int, int))GetProcAddress(hWSALib, "socket");
                 if ( socket )
                 {
-                  getsockname = (int (__stdcall *)(SOCKET, struct sockaddr *, int *))GetProcAddress(
-                                                                                       hWSALib,
-                                                                                       "getsockname");
+                  getsockname = (int (__stdcall *)(SOCKET, struct sockaddr *, int *))GetProcAddress(hWSALib, "getsockname");
                   if ( getsockname )
                   {
-                    getsockopt = (int (__stdcall *)(SOCKET, int, int, char *, int *))GetProcAddress(
-                                                                                       hWSALib,
-                                                                                       "getsockopt");
+                    getsockopt = (int (__stdcall *)(SOCKET, int, int, char *, int *))GetProcAddress(hWSALib, "getsockopt");
                     if ( getsockopt )
                     {
-                      setsockopt = (int (__stdcall *)(SOCKET, int, int, const char *, int))GetProcAddress(
-                                                                                             hWSALib,
-                                                                                             "setsockopt");
+                      setsockopt = (int (__stdcall *)(SOCKET, int, int, const char *, int))GetProcAddress(hWSALib, "setsockopt");
                       if ( setsockopt )
                       {
                         bind = (int (__stdcall *)(SOCKET, const struct sockaddr *, int))GetProcAddress(hWSALib, "bind");
@@ -38383,16 +40186,16 @@ bool __cdecl ImportWSAFunctions(void) {
                                 {
                                   WSAIoctl = (int (__stdcall *)(SOCKET, DWORD, LPVOID, DWORD, LPVOID, DWORD, LPDWORD, LPWSAOVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE))GetProcAddress(hWSALib, "WSAIoctl");
                                   if ( !WSAIoctl )
+                                  {
                                     BBSupportTracePrintF(3, "Error getting WSAIoctl!");
+                                  }
                                   WSAStartup = (int (__stdcall *)(WORD, LPWSADATA))GetProcAddress(hWSALib, "WSAStartup");
                                   if ( WSAStartup )
                                   {
                                     gethostname = (int (__stdcall *)(char *, int))GetProcAddress(hWSALib, "gethostname");
                                     if ( gethostname )
                                     {
-                                      gethostbyname = (struct hostent *(__stdcall *)(const char *))GetProcAddress(
-                                                                                                     hWSALib,
-                                                                                                     "gethostbyname");
+                                      gethostbyname = (struct hostent *(__stdcall *)(const char *))GetProcAddress(hWSALib, "gethostbyname");
                                       if ( gethostbyname )
                                       {
                                         ntohl = (u_long (__stdcall *)(u_long))GetProcAddress(hWSALib, "ntohl");
@@ -38529,7 +40332,9 @@ void __cdecl ExitWSAFunctions(void) {
   BOOL result; // eax
 
   if ( !hWSALib )
+  {
     return result;
+  }
   result = FreeLibrary(hWSALib);
   hWSALib = 0;
   return result;
@@ -38639,9 +40444,13 @@ protected: void __thiscall TPriorityQueue<class COpenListEntry16,32768>::DownHea
   {
     v13 = 2 * v11;
     if ( 2 * v11 < v10 && COpenListEntry16::operator<(&v12[2 * v13 + 1], &v12[2 * v13 + 3]) )
+    {
       ++v13;
+    }
     if ( !COpenListEntry16::operator<(&v8, &v12[2 * v13 + 1]) )
+    {
       break;
+    }
     v3 = v12[2 * v13 + 2];
     v4 = v11;
     v5 = v12;
@@ -38684,9 +40493,13 @@ protected: void __thiscall TPriorityQueue<class COpenListEntry24,8192>::DownHeap
   {
     v13 = 2 * v11;
     if ( 2 * v11 < v10 && COpenListEntry24::operator<(&v12[2 * v13 + 1], &v12[2 * v13 + 3]) )
+    {
       ++v13;
+    }
     if ( !COpenListEntry24::operator<(&v8, &v12[2 * v13 + 1]) )
+    {
       break;
+    }
     v3 = v12[2 * v13 + 2];
     v4 = v11;
     v5 = v12;
@@ -39003,10 +40816,14 @@ int __cdecl Grid::Area(int width, int height) {
   BOOL v3; // [esp+8h] [ebp-18h]
 
   if ( !__PAIR64__(height, width) )
+  {
     return 0;
+  }
   v3 = height < 0 || width < 0 && height == 0;
   if ( !v3 )
+  {
     return 3 * v3 + (width <= height) + (width <= 0);
+  }
   width = -width;
   height = -height;
   return 3 * v3 + (width <= height) + (width <= 0);
@@ -39033,9 +40850,13 @@ int __cdecl Grid::Distance(int a1, int a2) {
   Number = j__abs(a1);
   v6 = j__abs(a2);
   if ( v3 < 0 )
+  {
     return v6 + Number;
+  }
   else
+  {
     return Max(Number, v6);
+  }
 }
 
 
@@ -39063,9 +40884,13 @@ int __cdecl Grid::Distance(struct SPoint const &) {
 int __cdecl Max(int a1, int a2) {
   
   if ( a1 >= a2 )
+  {
     return a1;
+  }
   else
+  {
     return a2;
+  }
 }
 
 
@@ -39074,9 +40899,13 @@ int __cdecl Max(int a1, int a2) {
 float __cdecl Max(float a1, float a2) {
   
   if ( a2 <= a1 )
+  {
     return a1;
+  }
   else
+  {
     return a2;
+  }
 }
 
 
@@ -39099,7 +40928,9 @@ void __cdecl NeighborAnalysis::CalcTileAreas(void) {
   dword_45020E0[0] = dword_45020C4[0];
   result = 0;
   dword_45020F8[0] = 0;
-  for ( i = 1; i < 6; ++i )
+  for ( i = 1;
+        i < 6;
+        ++i )
   {
     result = i;
     if ( dword_45020C0[i] != dword_45020C4[i] )
@@ -39110,10 +40941,14 @@ void __cdecl NeighborAnalysis::CalcTileAreas(void) {
     }
   }
   if ( dword_45020DC <= 0 )
+  {
     return result;
+  }
   result = dword_45020C4[0];
   if ( dword_45020C4[0] != dword_45020C4[5] )
+  {
     return result;
+  }
   result = dword_45020DC;
   dword_45020F8[0] = dword_45020F8[dword_45020DC--];
   return result;
@@ -39131,8 +40966,7 @@ void __cdecl NeighborAnalysis::Init(enum T_TILING_TYPE a1, int a2, int a3) {
   int i; // [esp+Ch] [ebp-4h]
 
   dword_42CF98C = 1;
-  if ( !CTilingWorld::WorldInInnerWorld1(a2, a3)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2917, "CTilingWorld::WorldInInnerWorld1(_iX, _iY)") == 1 )
+  if ( !CTilingWorld::WorldInInnerWorld1(a2, a3) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2917, "CTilingWorld::WorldInInnerWorld1(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -39140,14 +40974,20 @@ void __cdecl NeighborAnalysis::Init(enum T_TILING_TYPE a1, int a2, int a3) {
   dword_4300E6C = Y16X16::PackXYFast(a2, a3);
   dword_45020C0[0] = CTilingWorld::WorldIndex(a2, a3);
   CTileIdRef::CTileIdRef(v5, a1, dword_45020C0[0]);
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v3 = CTilingWorld::WorldNeighborRelIndex(i);
     v7 = CTileIdRef::TileId((CTileIdRef *)v5, v3);
     if ( CTiles::IsValidRealTile(v7) )
+    {
       v6 = v7;
+    }
     else
+    {
       v6 = 0;
+    }
     dword_45020C4[i] = v6;
   }
   return NeighborAnalysis::CalcTileAreas();
@@ -39164,7 +41004,9 @@ void __cdecl NeighborAnalysis::ReInit(void) {
   int v4; // [esp+8h] [ebp-4h]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2967, "s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   v1 = (NeighborAnalysis *)dword_42CF9A4;
   v3 = Y16X16::UnpackXFast(dword_4300E6C);
   v4 = Y16X16::UnpackYFast(dword_4300E6C);
@@ -39183,33 +41025,39 @@ void __cdecl NeighborAnalysis::InitOld(int a2, int a2) {
   int j; // [esp+4h] [ebp-4h]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2989, "s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   dword_42CF990 = 1;
   dword_4502110 = (int)this;
   dword_4502114 = a2;
-  if ( (NeighborAnalysis *)CTiling::TileId(dword_42CF9A4, dword_45020C0[0]) != this
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2998, "CTiling::TileId(s_tTilingType, s_iWorldIdx) == s_iOldTileId") == 1 )
+  if ( (NeighborAnalysis *)CTiling::TileId(dword_42CF9A4, dword_45020C0[0]) != this && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2998, "CTiling::TileId(s_tTilingType, s_iWorldIdx) == s_iOldTileId") == 1 )
   {
     __debugbreak();
   }
   v2 = (CTile *)ITiling::Tile(dword_4502110);
-  if ( CTile::OwnerId(v2) != dword_4502114
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2999, "ITiling::Tile(s_iOldTileId).OwnerId() == s_iOldOwnerId") == 1 )
+  if ( CTile::OwnerId(v2) != dword_4502114 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2999, "ITiling::Tile(s_iOldTileId).OwnerId() == s_iOldOwnerId") == 1 )
   {
     __debugbreak();
   }
   dword_4502118 = 0;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = i;
     if ( i > dword_45020DC )
+    {
       break;
+    }
     if ( (NeighborAnalysis *)dword_45020E0[i] == this )
     {
       dword_4502118 = 1;
       result = i;
       dword_450211C = i;
-      for ( j = i + 1; j <= dword_45020DC; ++j )
+      for ( j = i + 1;
+            j <= dword_45020DC;
+            ++j )
       {
         dword_4502118 += dword_45020E0[j] == (_DWORD)this;
         result = j + 1;
@@ -39228,7 +41076,9 @@ void __cdecl NeighborAnalysis::InitNew(int a2, int a3, bool a3) {
   int result; // eax
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3034, "s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   dword_42CF994 = 1;
   dword_4502120 = (int)this;
   dword_4502124 = a2;
@@ -39290,7 +41140,7 @@ protected: __thiscall TPowerOf2Wrap<32768>::TPowerOf2Wrap<32768>(void) {
 
 
 // address=[0x15f3dd0]
-// Decompiled from std::_Basic_container_proxy_ptr12 *__thiscall TStaticArray<int,63>::TStaticArray<int,63>(  std::_Basic_container_proxy_ptr12 *this)
+// Decompiled from std::_Basic_container_proxy_ptr12 *__thiscall TStaticArray<int,63>::TStaticArray<int,63>(std::_Basic_container_proxy_ptr12 *this)
 public: __thiscall TStaticArray<int,63>::TStaticArray<int,63>(void) {
   
   TStaticArray<int,63>::Init(this);
@@ -39671,12 +41521,7 @@ public: void __thiscall TStaticArray<int,63>::PushBack(int const & a2) {
   
   int *result; // eax
 
-  if ( *this >= 63
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h",
-         154,
-         "m_iSize < MAX_SIZE") == 1 )
+  if ( *this >= 63 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\Misc\\Templates.h", 154, "m_iSize < MAX_SIZE") == 1 )
   {
     __debugbreak();
   }
@@ -39720,7 +41565,9 @@ public: bool __thiscall TBitArray<32768>::SetIfNotSet(int a2) {
 
   v3 = 1 << (a2 & 0x1F);
   if ( (v3 & this[a2 >> 5]) != 0 )
+  {
     return 0;
+  }
   this[a2 >> 5] |= v3;
   return 1;
 }
@@ -39850,7 +41697,9 @@ std::wstring __cdecl SaveFilePath::BuildSaveFilePath(std::wstring const & a1) {
   LOBYTE(v7) = 3;
   std::wstring::~wstring(v4);
   if ( std::wstring::find(v5, 0) )
+  {
     std::wstring::operator+=((int)v5);
+  }
   std::wstring::operator+=(a2);
   std::wstring::wstring(a1, v6);
   LOBYTE(v7) = 0;
@@ -39990,38 +41839,54 @@ void __cdecl ScriptEconomyModeVictoryConditionCheck(void) {
   GameEndAnnouncement(0, 0);
   result = (unsigned __int8)result;
   if ( (_BYTE)result )
+  {
     return result;
+  }
   TickCounter = (float)(unsigned int)CStateGame::GetTickCounter(g_pGame);
   result = (int)(float)(TickCounter * (float)(71.0 / 1000.0)) / 60;
   if ( result < 60 )
+  {
     return result;
+  }
   PlayerId = CPlayerManager::LastPlayerId();
   EconomyGoodsArray = CGameData::GetEconomyGoodsArray(g_pGameData);
   if ( !EconomyGoodsArray && BBSupportDbgReport(2, "Script\\Script.cpp", 4282, "pGoods != 0") == 1 )
+  {
     __debugbreak();
+  }
   v10 = 0;
   v9 = 0;
   v15 = 0;
   v14 = 0;
-  for ( i = 0; i < 7; ++i )
+  for ( i = 0;
+        i < 7;
+        ++i )
   {
     v3 = (unsigned __int8)EconomyGoodsArray[i];
     v12 = 0;
     v11 = 0;
-    for ( j = 1; j <= PlayerId; ++j )
+    for ( j = 1;
+          j <= PlayerId;
+          ++j )
     {
       Good = CStatistic::GetGood((CStatistic *)&g_cStatistic, j, v3);
       if ( CAlliances::AllianceId(j) == 1 )
+      {
         v12 += Good;
+      }
       else
+      {
         v11 += Good;
+      }
     }
     v10 += v12;
     v9 += v11;
     if ( v12 <= v11 )
     {
       if ( v12 < v11 )
+      {
         ++v14;
+      }
     }
     else
     {
@@ -40029,13 +41894,14 @@ void __cdecl ScriptEconomyModeVictoryConditionCheck(void) {
     }
   }
   if ( v15 > v14 )
+  {
     goto LABEL_21;
+  }
   if ( v15 >= v14 )
   {
     if ( v10 > v9 )
     {
-      if ( v15 != v14
-        && BBSupportDbgReport(2, "Script\\Script.cpp", 4336, "iTeam1CategoryWins == iTeam2CategoryWins") == 1 )
+      if ( v15 != v14 && BBSupportDbgReport(2, "Script\\Script.cpp", 4336, "iTeam1CategoryWins == iTeam2CategoryWins") == 1 )
       {
         __debugbreak();
       }
@@ -40049,19 +41915,19 @@ LABEL_41:
     }
     if ( v10 >= v9 )
     {
-      if ( v15 != v14
-        && BBSupportDbgReport(2, "Script\\Script.cpp", 4348, "iTeam1CategoryWins == iTeam2CategoryWins") == 1 )
+      if ( v15 != v14 && BBSupportDbgReport(2, "Script\\Script.cpp", 4348, "iTeam1CategoryWins == iTeam2CategoryWins") == 1 )
       {
         __debugbreak();
       }
       if ( v10 != v9 && BBSupportDbgReport(2, "Script\\Script.cpp", 4349, "iTeam1TotalAmount == iTeam2TotalAmount") == 1 )
+      {
         __debugbreak();
+      }
       v8 = (CStateGame::Rand(g_pGame) & 1) + 1;
       v2 = CEvn_Event::CEvn_Event(&v16, 0x37u, v8, 0, 0);
       goto LABEL_41;
     }
-    if ( v15 != v14
-      && BBSupportDbgReport(2, "Script\\Script.cpp", 4342, "iTeam1CategoryWins == iTeam2CategoryWins") == 1 )
+    if ( v15 != v14 && BBSupportDbgReport(2, "Script\\Script.cpp", 4342, "iTeam1CategoryWins == iTeam2CategoryWins") == 1 )
     {
       __debugbreak();
     }
@@ -40086,7 +41952,9 @@ void __cdecl ScriptTracePrintF(unsigned int a1, char const * Format, ... a3) {
     Source[2047] = 0;
     BBSupportTracePrint(1, Source);
     if ( a1 )
+    {
       CTextMsgHandler::AddTextMsg(Source, 0, 0, 0, a1 >= 2);
+    }
   }
 }
 
@@ -40226,7 +42094,7 @@ public: __thiscall TMap<struct T_GFX_MAP_ELEMENT>::TMap<struct T_GFX_MAP_ELEMENT
 
 
 // address=[0x16a5890]
-// Decompiled from TSparseMap *__thiscall TSparseMap<unsigned char>::TSparseMap<unsigned char>(  TSparseMap *this,  int _iWidth,  int _iHeight,  BYTE a4)
+// Decompiled from TSparseMap *__thiscall TSparseMap<unsigned char>::TSparseMap<unsigned char>(TSparseMap *this, int _iWidth, int _iHeight, BYTE a4)
 public: __thiscall TSparseMap<unsigned char>::TSparseMap<unsigned char>(unsigned int _iWidth, unsigned int _iHeight, unsigned char a4) {
   
   std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>(this);
@@ -40293,28 +42161,34 @@ private: void __thiscall TSparseMap<unsigned char>::Construct(void) {
   unsigned int a1; // [esp+24h] [ebp-14h]
 
   std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::resize(this->m_iWidth);
-  for ( a1 = 0; a1 < this->m_iWidth; ++a1 )
+  for ( a1 = 0;
+        a1 < this->m_iWidth;
+        ++a1 )
   {
     v4 = (TSparseMap::TNode *)TSparseMap<unsigned char>::TNode::operator new(12);
     if ( v4 )
+    {
       v3 = TSparseMap<unsigned char>::TNode::TNode(v4);
+    }
     else
+    {
       v3 = 0;
+    }
     v3->m_iHeight = this->m_iHeight;
-    *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
-       &this->m_vNodes,
-       a1) = v3;
+    *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](&this->m_vNodes, a1) = v3;
     v2 = (TSparseMap::TNode *)TSparseMap<unsigned char>::TNode::operator new(12);
     if ( v2 )
+    {
       v1 = TSparseMap<unsigned char>::TNode::TNode(v2);
+    }
     else
+    {
       v1 = 0;
+    }
     LOBYTE(v1->m_iValue) = 0;
     v1->m_iHeight = this->m_iHeight;
     v1->m_pNextNode = 0;
-    (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
-        &this->m_vNodes,
-        a1))->m_pNextNode = v1;
+    (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](&this->m_vNodes, a1))->m_pNextNode = v1;
   }
 }
 
@@ -40328,18 +42202,14 @@ private: void __thiscall TSparseMap<unsigned char>::Destruct(void) {
   TSparseMap::TNode *m_pNextNode; // [esp+Ch] [ebp-Ch]
   unsigned int a1; // [esp+14h] [ebp-4h]
 
-  for ( a1 = 0; a1 < this->m_iWidth; ++a1 )
+  for ( a1 = 0;
+        a1 < this->m_iWidth;
+        ++a1 )
   {
-    if ( *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
-            &this->m_vNodes,
-            a1) )
+    if ( *std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](&this->m_vNodes, a1) )
     {
-      m_pNextNode = (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
-                        &this->m_vNodes,
-                        a1))->m_pNextNode;
-      v1 = (void **)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](
-                      &this->m_vNodes,
-                      a1);
+      m_pNextNode = (*std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](&this->m_vNodes, a1))->m_pNextNode;
+      v1 = (void **)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::operator[](&this->m_vNodes, a1);
       TSparseMap<unsigned char>::TNode::operator delete(*v1);
       do
       {
@@ -40362,7 +42232,9 @@ public: void __thiscall TMap<unsigned char>::Done(void) {
 
   result = (int)this;
   if ( *this )
+  {
     result = operator delete[](*this);
+  }
   *this = 0;
   return result;
 }
@@ -40376,7 +42248,9 @@ public: void __thiscall TMap<unsigned short>::Done(void) {
 
   result = (int)this;
   if ( *this )
+  {
     result = operator delete[](*this);
+  }
   *this = 0;
   return result;
 }
@@ -40390,7 +42264,9 @@ public: void __thiscall TMap<struct T_GFX_MAP_ELEMENT>::Done(void) {
 
   result = (int)this;
   if ( *this )
+  {
     result = operator delete[](*this);
+  }
   *this = 0;
   return result;
 }
@@ -40512,8 +42388,7 @@ void __cdecl TriggerAssert(bool a1, std::string const & a2, char const * a3, int
 
   if ( a1 != ubiservices::SystemChecker::GetTrue() )
   {
-    if ( !isUbiServicesSdkInitialized()
-      || (v6 = std::string::c_str(a2), (unsigned __int8)EalLogAssert2(a4, a3, v6, a5, a6, 2, 0)) )
+    if ( !isUbiServicesSdkInitialized() || (v6 = std::string::c_str(a2), (unsigned __int8)EalLogAssert2(a4, a3, v6, a5, a6, 2, 0)) )
     {
       ubiservices::SystemChecker::assessExpression(a3, a5, a6);
     }
@@ -40536,7 +42411,9 @@ __int64 __cdecl _InterlockedOr64_INLINE(__int64 volatile * a1, __int64 a2) {
   signed __int64 v3; // [esp+18h] [ebp-8h]
 
   do
+  {
     v3 = *a1;
+  }
   while ( v3 != _InterlockedCompareExchange64(a1, a2 | v3, v3) );
   return v3;
 }
@@ -40613,7 +42490,9 @@ __int64 __cdecl _InterlockedExchange64_INLINE(__int64 volatile * a1, __int64 a2)
   volatile signed __int64 v3; // [esp+10h] [ebp-8h]
 
   do
+  {
     v3 = *a1;
+  }
   while ( v3 != _InterlockedCompareExchange64(a1, a2, *a1) );
   return v3;
 }
@@ -40632,9 +42511,13 @@ __int64 __cdecl abs(__int64 a1) {
 float __cdecl pow(float x, int a2) {
   
   if ( HIDWORD(x) == 2 )
+  {
     return (float)(*(float *)&x * *(float *)&x);
+  }
   else
+  {
     return j__powf(*(float *)&x, (float)SHIDWORD(x));
+  }
 }
 
 
@@ -40645,32 +42528,23 @@ void * __cdecl SimplAlloc(unsigned long a1, unsigned int a2, unsigned long a3, i
   _DWORD v5[5]; // [esp+0h] [ebp-14h] BYREF
 
   memset(v5, 204, sizeof(v5));
-  if ( (!a2 || (a2 & (a2 - 1)) != 0)
-    && j___CrtDbgReportW(
-         2,
-         (char)L"D:/Projects/TSHE/PurpleLamp/S3/source/Storm/SDKs/Private/External/eal/Src/ealmem.cpp",
-         171,
-         0,
-         (wchar_t *)L"%ls",
-         0) == 1 )
+  if ( (!a2 || (a2 & (a2 - 1)) != 0) && j___CrtDbgReportW(2, (char)L"D:/Projects/TSHE/PurpleLamp/S3/source/Storm/SDKs/Private/External/eal/Src/ealmem.cpp", 171, 0, (wchar_t *)L"%ls", 0) == 1 )
   {
     __debugbreak();
   }
   v5[4] = a2 + a1 + 56;
   v5[3] = j__malloc(v5[4]);
   if ( !v5[3] )
+  {
     return 0;
+  }
   v5[2] = SimplEalRound<int,unsigned int>(v5[3] + 52, a2);
   if ( v5[2] % a2 )
   {
-    if ( j___CrtDbgReportW(
-           2,
-           (char)L"D:/Projects/TSHE/PurpleLamp/S3/source/Storm/SDKs/Private/External/eal/Src/ealmem.cpp",
-           190,
-           0,
-           (wchar_t *)L"%ls",
-           0) == 1 )
+    if ( j___CrtDbgReportW(2, (char)L"D:/Projects/TSHE/PurpleLamp/S3/source/Storm/SDKs/Private/External/eal/Src/ealmem.cpp", 190, 0, (wchar_t *)L"%ls", 0) == 1 )
+    {
       __debugbreak();
+    }
   }
   v5[1] = sub_2DD12A0(v5[2]);
   memset((void *)v5[1], 0, 0x34u);
@@ -40704,19 +42578,13 @@ void __cdecl SimplFree(void * a1) {
   {
     SIMPL_NS::g_memoryCorruption = 1;
     if ( *(_DWORD *)(v4 + 32) )
-      j__sprintf_s(
-        OutputString,
-        0x200u,
-        "Memory corruption found from %s, at %u",
-        *(const char **)(v4 + 32),
-        *(_DWORD *)(v4 + 28));
+    {
+      j__sprintf_s(OutputString, 0x200u, "Memory corruption found from %s, at %u", *(const char **)(v4 + 32), *(_DWORD *)(v4 + 28));
+    }
     else
-      j__sprintf_s(
-        OutputString,
-        0x200u,
-        "Memory corruption found from %s, at %u",
-        "Unknown Location",
-        *(_DWORD *)(v4 + 28));
+    {
+      j__sprintf_s(OutputString, 0x200u, "Memory corruption found from %s, at %u", "Unknown Location", *(_DWORD *)(v4 + 28));
+    }
     printf(OutputString);
     OutputDebugStringA(OutputString);
   }
@@ -40732,7 +42600,9 @@ void __cdecl SimplFree(void * a1) {
 unsigned int __stdcall _WindowsThreadCallback(void * a1) {
   
   if ( a1[1] )
+  {
     a1[1](a1[2]);
+  }
   return 0;
 }
 
@@ -40762,11 +42632,15 @@ void __cdecl DetachTrackMetaDataCallBack(void *) {
     v1 = 0;
     FAProfiler::LogMetaDataBlockBegin((FAProfiler *)"fa/profiler/detachedtrack/v1", 0, v1);
     v7 = (unsigned int)(v8 + 255) >> 8;
-    for ( i = 0; i < v7; ++i )
+    for ( i = 0;
+          i < v7;
+          ++i )
     {
       v3 = v8 - (i << 8);
       v5 = *(_DWORD *)std::min<unsigned int>(&v3, &unk_3A94DD4);
-      for ( j = 0; j < v5; ++j )
+      for ( j = 0;
+            j < v5;
+            ++j )
       {
         v0 = (_DWORD *)std::vector<int,FAProfiler::StdAllocator<int>>::operator[](j + (i << 8));
         Src[j] = *v0;
@@ -40870,9 +42744,13 @@ long __stdcall StringCbCopyA(char * pszDest, unsigned int cbDest, char const * p
 
   v4 = sub_2D61E70(pszDest, cbDest, 0x7FFFFFFF);
   if ( v4 >= 0 )
+  {
     return sub_2D61EA0(pszDest, cbDest, 0, pszSrc, 2147483646);
+  }
   if ( cbDest )
+  {
     *pszDest = 0;
+  }
   return v4;
 }
 
@@ -40886,7 +42764,9 @@ bool __cdecl TrackEnabled(int a1) {
 
   memset(v3, 204, sizeof(v3));
   if ( !FAProfiler::IsChannelEnabled(0, 0xCCCCCCCC80000000uLL) )
+  {
     return 0;
+  }
   v2 = std::bitset<1024>::operator[](v3, (a1 & 0x3FF00000) >> 20);
   HIBYTE(v3[2]) = std::bitset<1024>::reference::operator bool(v2, v3[0]);
   std::bitset<1024>::reference::~reference(v3);
@@ -40909,24 +42789,19 @@ __int64 __cdecl _InterlockedExchangeAdd64_INLINE(__int64 volatile * a1, __int64 
   signed __int64 v3; // [esp+18h] [ebp-8h]
 
   do
+  {
     v3 = *a1;
+  }
   while ( v3 != _InterlockedCompareExchange64(a1, a2 + v3, v3) );
   return v3;
 }
 
 
 // address=[0x2dfec60]
-// Decompiled from int __stdcall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::allocate(  int a1,  int a2)
+// Decompiled from int __stdcall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::allocate(int a1, int a2)
 public: struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *> * __thiscall SIMPL_NS::EalStdAllocator<struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *>,1111490559>::allocate(unsigned int a1, void const * a2) {
   
-  if ( a1 == -1
-    && j___CrtDbgReportW(
-         2,
-         (char)L"d:\\projects\\tshe\\purplelamp\\s3\\source\\storm\\sdks\\private\\external\\eal\\src\\simpleutils.h",
-         277,
-         0,
-         (wchar_t *)L"%ls",
-         0) == 1 )
+  if ( a1 == -1 && j___CrtDbgReportW(2, (char)L"d:\\projects\\tshe\\purplelamp\\s3\\source\\storm\\sdks\\private\\external\\eal\\src\\simpleutils.h", 277, 0, (wchar_t *)L"%ls", 0) == 1 )
   {
     __debugbreak();
   }
@@ -40938,14 +42813,7 @@ public: struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,voi
 // Decompiled from int __stdcall SIMPL_NS::EalStdAllocator<std::_Container_proxy,1111490559>::allocate(int a1, int a2)
 public: struct std::_Container_proxy * __thiscall SIMPL_NS::EalStdAllocator<struct std::_Container_proxy,1111490559>::allocate(unsigned int a1, void const * a2) {
   
-  if ( a1 == -1
-    && j___CrtDbgReportW(
-         2,
-         (char)L"d:\\projects\\tshe\\purplelamp\\s3\\source\\storm\\sdks\\private\\external\\eal\\src\\simpleutils.h",
-         277,
-         0,
-         (wchar_t *)L"%ls",
-         0) == 1 )
+  if ( a1 == -1 && j___CrtDbgReportW(2, (char)L"d:\\projects\\tshe\\purplelamp\\s3\\source\\storm\\sdks\\private\\external\\eal\\src\\simpleutils.h", 277, 0, (wchar_t *)L"%ls", 0) == 1 )
   {
     __debugbreak();
   }
@@ -40954,7 +42822,7 @@ public: struct std::_Container_proxy * __thiscall SIMPL_NS::EalStdAllocator<stru
 
 
 // address=[0x2e14590]
-// Decompiled from int __thiscall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::max_size(  void *this)
+// Decompiled from int __thiscall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::max_size(void *this)
 public: unsigned int __thiscall SIMPL_NS::EalStdAllocator<struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *>,1111490559>::max_size(void)const {
   
   return std::numeric_limits<unsigned int>::max(this);
@@ -41025,7 +42893,9 @@ struct FilePaths::PathSplitResult __cdecl FilePaths::SplitPath(std::wstring cons
       if ( uPosForwardSlash )
       {
         if ( uPosBackwardSlash && uPosBackwardSlash < uPosForwardSlash )
+        {
           uPosNextSlash = (int)uPosBackwardSlash;
+        }
       }
       else
       {
@@ -41211,7 +43081,9 @@ void __cdecl FilePaths::EnsurePathExists(std::wstring const & a1) {
       DirectoryW = CreateDirectoryW(v1, 0);
       v18 = DirectoryW;
       if ( !DirectoryW )
+      {
         break;
+      }
     }
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::wstring>>>::operator++(v4);
   }
@@ -41291,15 +43163,21 @@ unsigned int __stdcall Adler32(void const * a1, unsigned int a2, unsigned int a3
 
   v6 = a1;
   if ( !a1 )
+  {
     return a3;
+  }
   v23 = (unsigned __int16)a3;
   v7 = HIWORD(a3);
   while ( a2 )
   {
     if ( a2 >= 0x15B0 )
+    {
       v4 = 5552;
+    }
     else
+    {
       v4 = a2;
+    }
     v5 = v4;
     a2 -= v4;
     while ( v5 >= 16 )
@@ -41339,7 +43217,9 @@ unsigned int __stdcall Adler32(void const * a1, unsigned int a2, unsigned int a3
       v6 += 16;
       v5 -= 16;
     }
-    for ( ; v5; --v5 )
+    for ( ;
+          v5;
+          --v5 )
     {
       v23 += *v6;
       v7 += v23;
@@ -41365,9 +43245,13 @@ public: bool __thiscall greater_ptr<class CDestructor>::operator()(class CDestru
 unsigned int const & __cdecl BB::Max<unsigned int>(unsigned int const & a1, unsigned int const & a2) {
   
   if ( *a1 >= *a2 )
+  {
     return a1;
+  }
   else
+  {
     return a2;
+  }
 }
 
 
@@ -41389,15 +43273,21 @@ void __cdecl AdvXMLParser::NormalizeWhiteSpaces(std::string & a1) {
   unsigned int i; // [esp+4h] [ebp-8h]
   int v5; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; ; i = v5 + 1 )
+  for ( i = 0;
+        ;
+        i = v5 + 1 )
   {
     result = std::string::size(a1);
     if ( i >= result )
+    {
       break;
+    }
     result = std::string::find_first_of(" \t\r\n", i);
     v5 = result;
     if ( result == std::basic_string_char_std::char_traits_char__std::allocator_char___::npos )
+    {
       break;
+    }
     first_not_of = std::string::find_first_not_of(" \t\r\n", result);
     if ( first_not_of == std::basic_string_char_std::char_traits_char__std::allocator_char___::npos )
     {
@@ -41420,15 +43310,19 @@ void __cdecl AdvXMLParser::TrimSpaces(std::string & a1) {
 
   first_not_of = std::string::find_first_not_of(" \t\r\n", 0);
   if ( first_not_of == std::basic_string_char_std::char_traits_char__std::allocator_char___::npos )
+  {
     return std::string::erase(0);
+  }
   if ( first_not_of )
+  {
     std::string::erase(0, first_not_of);
-  last_not_of = std::string::find_last_not_of(
-                  " \t\r\n",
-                  std::basic_string_char_std::char_traits_char__std::allocator_char___::npos);
+  }
+  last_not_of = std::string::find_last_not_of(" \t\r\n", std::basic_string_char_std::char_traits_char__std::allocator_char___::npos);
   result = std::string::size(a1) - 1;
   if ( last_not_of < result )
+  {
     return std::string::erase(last_not_of);
+  }
   return result;
 }
 
@@ -41480,11 +43374,17 @@ void __cdecl AdvXMLParser::FillMap(void) {
 int __cdecl AdvXMLParser::HexDigitValue(char) {
   
   if ( (char)this >= 48 && (char)this <= 57 )
+  {
     return (char)this - 48;
+  }
   if ( (char)this < 97 || (char)this > 102 )
+  {
     return (char)this - 55;
+  }
   else
+  {
     return (char)this - 87;
+  }
 }
 
 
@@ -41504,8 +43404,7 @@ bool __cdecl AdvXMLParser::IsAlphaDigit(char) {
   char v3; // [esp+0h] [ebp-4h]
 
   v3 = v1;
-  return AdvXMLParser::IsAlpha((AdvXMLParser *)(unsigned __int8)this)
-      || AdvXMLParser::IsDigit((AdvXMLParser *)(unsigned __int8)this, v3);
+  return AdvXMLParser::IsAlpha((AdvXMLParser *)(unsigned __int8)this) || AdvXMLParser::IsDigit((AdvXMLParser *)(unsigned __int8)this, v3);
 }
 
 
@@ -41539,9 +43438,7 @@ bool __cdecl AdvXMLParser::IsHexDigit(char) {
   
   char v1; // cl
 
-  return AdvXMLParser::IsDigit((AdvXMLParser *)(unsigned __int8)this, v1)
-      || (char)this >= 97 && (char)this <= 102
-      || (char)this >= 65 && (char)this <= 70;
+  return AdvXMLParser::IsDigit((AdvXMLParser *)(unsigned __int8)this, v1) || (char)this >= 97 && (char)this <= 102 || (char)this >= 65 && (char)this <= 70;
 }
 
 
@@ -41549,11 +43446,7 @@ bool __cdecl AdvXMLParser::IsHexDigit(char) {
 // Decompiled from bool __cdecl AdvXMLParser::IsLetter(AdvXMLParser *this)
 bool __cdecl AdvXMLParser::IsLetter(char) {
   
-  return (unsigned __int8)this >= 0x41u && (unsigned __int8)this <= 0x5Au
-      || (unsigned __int8)this >= 0x61u && (unsigned __int8)this <= 0x7Au
-      || (unsigned __int8)this >= 0xC0u && (unsigned __int8)this <= 0xD6u
-      || (unsigned __int8)this >= 0xD8u && (unsigned __int8)this <= 0xF6u
-      || (unsigned __int8)this >= 0xF8u;
+  return (unsigned __int8)this >= 0x41u && (unsigned __int8)this <= 0x5Au || (unsigned __int8)this >= 0x61u && (unsigned __int8)this <= 0x7Au || (unsigned __int8)this >= 0xC0u && (unsigned __int8)this <= 0xD6u || (unsigned __int8)this >= 0xD8u && (unsigned __int8)this <= 0xF6u || (unsigned __int8)this >= 0xF8u;
 }
 
 
@@ -41565,14 +43458,7 @@ bool __cdecl AdvXMLParser::IsNameChar(char) {
   char v3; // [esp+0h] [ebp-4h]
 
   v3 = v1;
-  return AdvXMLParser::IsLetter((AdvXMLParser *)(unsigned __int8)this)
-      || AdvXMLParser::IsDigit((AdvXMLParser *)(unsigned __int8)this, v3)
-      || (char)this == 46
-      || (char)this == 45
-      || (char)this == 95
-      || (char)this == 58
-      || AdvXMLParser::IsCombiningChar()
-      || AdvXMLParser::IsExtender((AdvXMLParser *)(unsigned __int8)this);
+  return AdvXMLParser::IsLetter((AdvXMLParser *)(unsigned __int8)this) || AdvXMLParser::IsDigit((AdvXMLParser *)(unsigned __int8)this, v3) || (char)this == 46 || (char)this == 45 || (char)this == 95 || (char)this == 58 || AdvXMLParser::IsCombiningChar() || AdvXMLParser::IsExtender((AdvXMLParser *)(unsigned __int8)this);
 }
 
 
@@ -41597,9 +43483,13 @@ bool __cdecl AdvXMLParser::IsXmlChar(char) {
 char __cdecl AdvXMLParser::LowCase(char) {
   
   if ( (char)this < 65 || (char)this > 90 )
+  {
     return (char)this;
+  }
   else
+  {
     return (_BYTE)this + 32;
+  }
 }
 
 
@@ -41612,7 +43502,9 @@ unsigned long __cdecl _calcHash(unsigned char const * a1) {
   int v4; // [esp+8h] [ebp-4h]
 
   v3 = 0;
-  for ( i = a1; i < a1 + 5; ++i )
+  for ( i = a1;
+        i < a1 + 5;
+        ++i )
   {
     v4 = v3 ^ *i;
     v3 = __ROL4__(v4, 5);
@@ -41632,21 +43524,33 @@ void __cdecl shellSort(struct HuffStatTmpStruct * a1, int a2) {
   int i; // [esp+Ch] [ebp-4h]
 
   if ( a2 / 9 < 13 && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 64, "13 <= N / 9") == 1 )
+  {
     __debugbreak();
+  }
   result = a2 / 9;
   if ( a2 / 9 >= 40 )
   {
     result = BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 65, "40 > N / 9");
     if ( result == 1 )
+    {
       __debugbreak();
+    }
   }
-  for ( i = 40; i > 0; i /= 3 )
+  for ( i = 40;
+        i > 0;
+        i /= 3 )
   {
-    for ( j = i + 1; j <= a2; ++j )
+    for ( j = i + 1;
+          j <= a2;
+          ++j )
     {
       v3 = *((_DWORD *)a1 + j);
-      for ( k = j; k > i && operator<(&v3, (char *)a1 + 4 * (k - i)); k -= i )
+      for ( k = j;
+            k > i && operator<(&v3, (char *)a1 + 4 * (k - i));
+            k -= i )
+      {
         *((_DWORD *)a1 + k) = *((_DWORD *)a1 + k - i);
+      }
       *((_DWORD *)a1 + k) = v3;
     }
     result = i / 3;
@@ -41668,9 +43572,13 @@ int __cdecl operator<(struct HuffStatTmpStruct const & a1, struct HuffStatTmpStr
 int __cdecl cmpHuffStatTmpStruct(struct HuffStatTmpStruct const & a1, struct HuffStatTmpStruct const & a2) {
   
   if ( *((__int16 *)a2 + 1) == *((__int16 *)a1 + 1) )
+  {
     return *(__int16 *)a2 - *(__int16 *)a1;
+  }
   else
+  {
     return *((__int16 *)a2 + 1) - *((__int16 *)a1 + 1);
+  }
 }
 
 
@@ -41696,7 +43604,9 @@ char * __cdecl AdvXMLParser::Int2Chars(int a2, char * a3, int a3) {
     *v4-- = byte_3AB98CC[this & 0xF];
     this /= 16;
     if ( (unsigned int)v4 < a2 && BBSupportDbgReport(2, "Source\\Xml\\writer.cpp", 201, "pDigit >= szBuffer") == 1 )
+    {
       __debugbreak();
+    }
   }
   return v4;
 }
@@ -41745,7 +43655,9 @@ int __stdcall BBSupportDbgReport(int a1, char const * a2, unsigned int a3, char 
   v4 = a1 < 0;
   v28 = a1 & 0xBFFFFFFF;
   if ( v4 || v28 > 3 )
+  {
     return -1;
+  }
   memset(v24, 0, sizeof(v24));
   memset(v25, 0, sizeof(v25));
   if ( a2 )
@@ -41756,17 +43668,29 @@ int __stdcall BBSupportDbgReport(int a1, char const * a2, unsigned int a3, char 
   if ( _InterlockedIncrement(&dword_3E2E224) <= 0 )
   {
     if ( a4 )
+    {
       v13 = a4;
+    }
     else
+    {
       v13 = (const char *)&unk_3AB990E;
+    }
     if ( a2 )
+    {
       v8 = ": ";
+    }
     else
+    {
       v8 = (const char *)&unk_3AB990F;
+    }
     if ( v16 )
+    {
       snprintf(Source, 0x7FFu, "%s%s%s%s: %s", "CRT ", off_3AB9960[v28], v8, v25, v13);
+    }
     else
+    {
       snprintf(Source, 0x7FFu, "%s%s%s%s: %s", (const char *)&unk_3AB9921, off_3AB9960[v28], v8, v25, v13);
+    }
     Source[2047] = 0;
     BBSupportTracePrint(dword_3AB98E0[v28], Source);
     BBSupportTracePrint(dword_3AB98E0[v28], v24);
@@ -41779,7 +43703,9 @@ int __stdcall BBSupportDbgReport(int a1, char const * a2, unsigned int a3, char 
     else
     {
       if ( v28 )
+      {
         BBSupportLib::BBSTraceStackDump();
+      }
       if ( BBSupportLib::g_iBBSErrorhandlingMode == 3 )
       {
         _InterlockedDecrement(&dword_3E2E224);
@@ -41791,17 +43717,25 @@ int __stdcall BBSupportDbgReport(int a1, char const * a2, unsigned int a3, char 
       memset(v26, 0, sizeof(v26));
       BBSupportLib::BBSGetModuleFileName(0, v26, 0x208u);
       if ( v26[0] )
+      {
         _wsprintfW(Caption, L"%s%s%s", v26, L" - ", off_3AB98F0[v28]);
+      }
       else
+      {
         _wsprintfW(Caption, L"%s%s%s", v26, &unk_3AB99F4, off_3AB98F0[v28]);
+      }
       v17 = BBSupportLib::g_iBBSDeveloperErrorHandling != 0;
       v14 = "(Press Retry to debug the application.)\t\t";
       if ( !BBSupportLib::g_iBBSDeveloperErrorHandling )
       {
         if ( v28 )
+        {
           v10 = "Application will be terminated.\t\t";
+        }
         else
+        {
           v10 = "Press Ok to continue.\t\t\t";
+        }
         v14 = v10;
       }
       memset(Str, 0, sizeof(Str));
@@ -41823,22 +43757,28 @@ int __stdcall BBSupportDbgReport(int a1, char const * a2, unsigned int a3, char 
       {
         LastActivePopup = GetLastActivePopup(hWnd);
         if ( (unsigned __int8)BBSupportLib::BBSIsFullscreenWindow(hWnd) )
+        {
           ShowWindow(hWnd, 6);
+        }
       }
       if ( v17 )
+      {
         v7 = 73746;
+      }
       else
+      {
         v7 = 73744;
+      }
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v18);
       v27 = 0;
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-        (int)v19,
-        Str);
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)v19, Str);
       v6 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)v19);
       v11 = MessageBoxW(LastActivePopup, v6, Caption, v7);
       _InterlockedDecrement(&dword_3E2E224);
       if ( !v28 )
+      {
         goto LABEL_54;
+      }
       if ( !v17 || v11 == 3 )
       {
         j__raise(22);
@@ -41882,7 +43822,9 @@ int __cdecl BBSupportDbgReportF(int a1, char const * a2, unsigned int a3, char c
 
   va_start(va, Format);
   if ( !Format )
+  {
     return BBSupportDbgReport(a1, a2, a3, 0);
+  }
   memset(Buffer, 0, sizeof(Buffer));
   __vcrt_va_start_verify_argument_type<char const *>();
   j___vsnprintf(Buffer, 0xBFFu, Format, va);
@@ -41904,11 +43846,15 @@ void __stdcall BBSupportOpenTraceFile(int a1, wchar_t const * a2) {
   BBSupportSetErrorHandlingMode(-1);
   result = BBSupportLib::CBBSupportTraceFilePtr::operator BBSupportLib::IBBSupportTraceFile *(&BBSupportLib::g_pBBSTraceFile);
   if ( !result )
+  {
     return result;
+  }
   v3 = (CBBSupportLogFile *)BBSupportLib::CBBSupportTraceFilePtr::operator->(&BBSupportLib::g_pBBSTraceFile);
   result = CBBSupportLogFile::IsOpen(v3);
   if ( (_BYTE)result )
+  {
     return result;
+  }
   v4 = BBSupportLib::CBBSupportTraceFilePtr::operator->(&BBSupportLib::g_pBBSTraceFile);
   return (*(int (__thiscall **)(int, int, int, const wchar_t *))(*(_DWORD *)v4 + 12))(v4, v4, a1, a2);
 }
@@ -41948,30 +43894,48 @@ void __stdcall BBSupportSmartOpenTraceFile(wchar_t const * a1, wchar_t const * a
   BBSupportSetErrorHandlingMode(-1);
   result = BBSupportLib::CBBSupportTraceFilePtr::operator BBSupportLib::IBBSupportTraceFile *(&BBSupportLib::g_pBBSTraceFile);
   if ( !result )
+  {
     return result;
+  }
   v3 = (CBBSupportLogFile *)BBSupportLib::CBBSupportTraceFilePtr::operator->(&BBSupportLib::g_pBBSTraceFile);
   result = CBBSupportLogFile::IsOpen(v3);
   if ( (_BYTE)result )
+  {
     return result;
+  }
   if ( a1 && *a1 )
+  {
     v9 = a1;
+  }
   else
+  {
     v9 = L"Log\\";
+  }
   lpFileName = (const char *)v9;
   if ( a2 && *a2 )
+  {
     v8 = a2;
+  }
   else
+  {
     v8 = L"Trace";
+  }
   v22 = BBSupportLib::BBSIsDirectory(v9);
   if ( !v22 )
   {
     if ( CreateDirectoryW(v9, 0) )
+    {
       v22 = BBSupportLib::BBSIsDirectory(v9);
+    }
     else
+    {
       v22 = 0;
+    }
   }
   if ( !v22 )
+  {
     lpFileName = (const char *)&unk_3AB9B74;
+  }
   v15 = 1000;
   v19 = 0;
   v20 = 0;
@@ -41991,9 +43955,13 @@ void __stdcall BBSupportSmartOpenTraceFile(wchar_t const * a1, wchar_t const * a
         {
           v27[v17] = 1;
           if ( v17 < v15 )
+          {
             v15 = v17;
+          }
           if ( v17 > v19 )
+          {
             v19 = v17;
+          }
           ++v20;
         }
       }
@@ -42005,7 +43973,9 @@ void __stdcall BBSupportSmartOpenTraceFile(wchar_t const * a1, wchar_t const * a
   if ( v19 < 900 )
   {
     if ( v20 >= 10 )
+    {
       v12 = v20 - 9;
+    }
   }
   else
   {
@@ -42014,13 +43984,17 @@ void __stdcall BBSupportSmartOpenTraceFile(wchar_t const * a1, wchar_t const * a
   if ( v12 > 0 )
   {
     v10 = 0;
-    for ( i = v15; (int)i <= v19 && v10 < v12; ++i )
+    for ( i = v15;
+          (int)i <= v19 && v10 < v12;
+          ++i )
     {
       _wsprintfA(v26, "%s%s%03u.txt", lpFileName, (const char *)v8, i);
       if ( DeleteFileA(v26) )
       {
         if ( i >= 0x3E8 )
+        {
           report_rangecheckfailure();
+        }
         v27[i] = 0;
         ++v10;
       }
@@ -42042,8 +44016,12 @@ void __stdcall BBSupportSmartOpenTraceFile(wchar_t const * a1, wchar_t const * a
   j = v19 + 1;
   if ( v19 + 1 < 1 || j > 900 )
   {
-    for ( j = 1; j < 999 && v27[j]; ++j )
+    for ( j = 1;
+          j < 999 && v27[j];
+          ++j )
+    {
       ;
+    }
   }
   _wsprintfW(v24, L"%s%s%03u.txt", lpFileName, v8, j);
   v6 = BBSupportLib::CBBSupportTraceFilePtr::operator->(&BBSupportLib::g_pBBSTraceFile);
@@ -42084,18 +44062,22 @@ void __stdcall BBSupportTracePrint(unsigned int a1, char const * Source) {
 
   v6 = a1 & 0x7FFFFFFF;
   if ( (a1 & 0x7FFFFFFFu) >= 0xC8 )
+  {
     v6 = 0;
-  if ( BBSupportLib::CBBSupportTraceFilePtr::operator BBSupportLib::IBBSupportTraceFile *(&BBSupportLib::g_pBBSTraceFile) != 0
-    && Source != 0
-    && (unsigned __int8)byte_4686FAC[v6] >= 4u )
+  }
+  if ( BBSupportLib::CBBSupportTraceFilePtr::operator BBSupportLib::IBBSupportTraceFile *(&BBSupportLib::g_pBBSTraceFile) != 0 && Source != 0 && (unsigned __int8)byte_4686FAC[v6] >= 4u )
   {
     EnterCriticalSection(&CriticalSection);
     j__strncpy(OutputString, Source, 0x7FFu);
     OutputString[2047] = 0;
-    for ( i = strlen(OutputString); i > 0 && (unsigned __int8)OutputString[i - 1] - 1 <= 31; OutputString[i] = 0 )
+    for ( i = strlen(OutputString);
+          i > 0 && (unsigned __int8)OutputString[i - 1] - 1 <= 31;
+          OutputString[i] = 0 )
     {
       if ( (unsigned int)--i >= 0x800 )
+      {
         report_rangecheckfailure();
+      }
     }
     if ( a1 < 0 || (BBSupportLib::BBSGetDevelopmentFlags() & 1) != 0 )
     {
@@ -42107,16 +44089,13 @@ void __stdcall BBSupportTracePrint(unsigned int a1, char const * Source) {
       v5 = BBSupportLib::CBBSupportTraceFilePtr::operator->(&BBSupportLib::g_pBBSTraceFile);
       CurrentThreadId = GetCurrentThreadId();
       TickCount = GetTickCount();
-      (*(void (**)(int, const char *, ...))(*(_DWORD *)v5 + 24))(
-        v5,
-        "%10u  %08x    %s\r\n",
-        TickCount,
-        CurrentThreadId,
-        OutputString);
+      (*(void (**)(int, const char *, ...))(*(_DWORD *)v5 + 24))(v5, "%10u  %08x    %s\r\n", TickCount, CurrentThreadId, OutputString);
     }
     OutputString[i++] = 10;
     if ( (unsigned int)i >= 0x800 )
+    {
       report_rangecheckfailure();
+    }
     OutputString[i] = 0;
     OutputDebugStringA(OutputString);
     LeaveCriticalSection(&CriticalSection);
@@ -42138,19 +44117,23 @@ void __stdcall BBSupportTracePrint(unsigned int a1, wchar_t const * Source) {
 
   v6 = a1 & 0x7FFFFFFF;
   if ( (a1 & 0x7FFFFFFFu) >= 0xC8 )
+  {
     v6 = 0;
-  if ( BBSupportLib::CBBSupportTraceFilePtr::operator BBSupportLib::IBBSupportTraceFile *(&BBSupportLib::g_pBBSTraceFile) != 0
-    && Source != 0
-    && (unsigned __int8)byte_4686FAC[v6] >= 4u )
+  }
+  if ( BBSupportLib::CBBSupportTraceFilePtr::operator BBSupportLib::IBBSupportTraceFile *(&BBSupportLib::g_pBBSTraceFile) != 0 && Source != 0 && (unsigned __int8)byte_4686FAC[v6] >= 4u )
   {
     EnterCriticalSection(&CriticalSection);
     wcsncpy(Destination, Source, 0x7FFu);
     Destination[2047] = 0;
-    for ( i = wcslen(Destination); i > 0 && LOBYTE(Destination[i - 1]) - 1 <= 31; Destination[i] = 0 )
+    for ( i = wcslen(Destination);
+          i > 0 && LOBYTE(Destination[i - 1]) - 1 <= 31;
+          Destination[i] = 0 )
     {
       --i;
       if ( (unsigned int)(2 * i) >= 0x1000 )
+      {
         report_rangecheckfailure();
+      }
     }
     if ( a1 < 0 || (BBSupportLib::BBSGetDevelopmentFlags() & 1) != 0 )
     {
@@ -42162,16 +44145,13 @@ void __stdcall BBSupportTracePrint(unsigned int a1, wchar_t const * Source) {
       v5 = BBSupportLib::CBBSupportTraceFilePtr::operator->(&BBSupportLib::g_pBBSTraceFile);
       CurrentThreadId = GetCurrentThreadId();
       TickCount = GetTickCount();
-      (*(void (**)(int, const char *, ...))(*(_DWORD *)v5 + 24))(
-        v5,
-        "%10u  %08x    %s\r\n",
-        TickCount,
-        CurrentThreadId,
-        Destination);
+      (*(void (**)(int, const char *, ...))(*(_DWORD *)v5 + 24))(v5, "%10u  %08x    %s\r\n", TickCount, CurrentThreadId, Destination);
     }
     Destination[i++] = 10;
     if ( (unsigned int)(2 * i) >= 0x1000 )
+    {
       report_rangecheckfailure();
+    }
     Destination[i] = 0;
     OutputDebugStringW(Destination);
     LeaveCriticalSection(&CriticalSection);
@@ -42208,7 +44188,9 @@ void __stdcall BBSupportEnableTraceLevel(unsigned int a1) {
 
   result = (a1 < 0xC8) & (BBSupportLib::CBBSupportTraceFilePtr::operator BBSupportLib::IBBSupportTraceFile *(&BBSupportLib::g_pBBSTraceFile) != 0);
   if ( !result )
+  {
     return result;
+  }
   result = a1;
   byte_4686FAC[a1] |= 4u;
   return result;
@@ -42223,7 +44205,9 @@ void __stdcall BBSupportDisableTraceLevel(unsigned int a1) {
 
   result = (a1 < 0xC8) & (BBSupportLib::CBBSupportTraceFilePtr::operator BBSupportLib::IBBSupportTraceFile *(&BBSupportLib::g_pBBSTraceFile) != 0);
   if ( !result )
+  {
     return result;
+  }
   result = a1;
   byte_4686FAC[a1] &= ~4u;
   return result;
@@ -42240,7 +44224,9 @@ void __stdcall BBSupportLib::BBSCopyString<wchar_t>(wchar_t * a1, wchar_t const 
 
   result = a3 != 0 && a1 != 0;
   if ( a3 == 0 || a1 == 0 )
+  {
     return result;
+  }
   v5 = a3 - 1;
   v4 = 0;
   if ( *a2 )
@@ -42262,9 +44248,13 @@ void __stdcall BBSupportLib::BBSCopyString<wchar_t>(wchar_t * a1, wchar_t const 
 int __stdcall BBSupportLib::BBSGetDevelopmentFlags(void) {
   
   if ( BBSupportLib::g_iBBSDevelopmentFlags < 0 )
+  {
     return BBSupportLib::BBSGetDevelopmentFlagsEx();
+  }
   else
+  {
     return BBSupportLib::g_iBBSDevelopmentFlags;
+  }
 }
 
 
@@ -42341,7 +44331,9 @@ bool __stdcall BBSupportIsDevelopmentMachine(void) {
   *(_DWORD *)Data = 0;
   cbData = 4;
   if ( RegOpenKeyExA(HKEY_LOCAL_MACHINE, "Software\\BlueByte", 0, 0xF003Fu, &phkResult) )
+  {
     return 0;
+  }
   strcpy(ValueName, "Developer");
   v5 = 9;
   v1 = RegQueryValueExA(phkResult, ValueName, 0, &Type, Data, &cbData);
@@ -42363,19 +44355,25 @@ unsigned int __stdcall BBSupportDevelopmentMachineId(void) {
   CHAR ValueName[16]; // [esp+1Ch] [ebp-14h] BYREF
 
   if ( !BBSupportIsDevelopmentMachine() )
+  {
     return 0;
+  }
   phkResult = 0;
   Type = 4;
   *(_DWORD *)Data = 0;
   cbData[0] = 4;
   if ( RegOpenKeyExA(HKEY_LOCAL_MACHINE, "Software\\BlueByte", 0, 0xF003Fu, &phkResult) )
+  {
     return *(_DWORD *)Data;
+  }
   strcpy(ValueName, "DeveloperId");
   cbData[1] = 11;
   v1 = RegQueryValueExA(phkResult, ValueName, 0, &Type, Data, cbData);
   memset(ValueName, 0, sizeof(ValueName));
   if ( v1 )
+  {
     *(_DWORD *)Data = 0;
+  }
   RegCloseKey(phkResult);
   return *(_DWORD *)Data;
 }
@@ -42389,7 +44387,9 @@ unsigned int __stdcall BBSupportGetModuleTimeDateStamp(void * a1) {
 
   v2 = 0;
   if ( a1 && *(_WORD *)a1 == 23117 )
+  {
     return *(_DWORD *)((char *)a1 + *((_DWORD *)a1 + 15) + 8);
+  }
   return v2;
 }
 
@@ -42403,7 +44403,9 @@ wchar_t const * __stdcall BBSupportLib::BBSGetFileNameFromFilePath(wchar_t const
   int v5; // [esp+Ch] [ebp-4h]
 
   if ( !this )
+  {
     return 0;
+  }
   v5 = 0;
   v4 = 0;
   while ( *((_WORD *)this + v5) )
@@ -42411,13 +44413,19 @@ wchar_t const * __stdcall BBSupportLib::BBSGetFileNameFromFilePath(wchar_t const
     HIDWORD(v3) = *((unsigned __int16 *)this + v5) == '\\';
     LODWORD(v3) = *((unsigned __int16 *)this + v5) == '/';
     if ( v3 )
+    {
       v4 = v5;
+    }
     ++v5;
   }
   if ( v4 >= v5 - 1 )
+  {
     return 0;
+  }
   if ( v4 )
+  {
     return (BBSupportLib *)((char *)this + 2 * v4 + 2);
+  }
   return this;
 }
 
@@ -42432,13 +44440,19 @@ unsigned int __stdcall BBSupportLib::BBSGetModuleFileDir(struct HINSTANCE__ * hM
 
   v4 = 0;
   if ( nSize == 0 || lpFilename == 0 )
+  {
     return v4;
+  }
   *lpFilename = 0;
   if ( !GetModuleFileNameW(hModule, lpFilename, nSize) )
+  {
     return v4;
+  }
   v5 = BBSupportLib::BBSGetFileNameFromFilePath((BBSupportLib *)lpFilename, 0);
   if ( !v5 )
+  {
     return v4;
+  }
   v6 = (v5 - (BBSupportLib *)lpFilename) >> 1;
   if ( v6 <= 2 || v6 >= nSize )
   {
@@ -42464,18 +44478,28 @@ unsigned int __stdcall BBSupportLib::BBSGetModuleFileName(struct HINSTANCE__ * h
 
   v4 = 0;
   if ( a3 == 0 || a2 == 0 )
+  {
     return v4;
+  }
   *a2 = 0;
   if ( !GetModuleFileNameW(hModule, Filename, 0x208u) )
+  {
     return v4;
+  }
   Src = BBSupportLib::BBSGetFileNameFromFilePath((BBSupportLib *)Filename, 0);
   if ( !Src )
+  {
     return v4;
+  }
   v6 = wcslen(Src);
   if ( !v6 )
+  {
     return v4;
+  }
   if ( v6 + 1 >= a3 )
+  {
     return v4;
+  }
   memcpy(a2, Src, v6 + 1);
   return v6;
 }
@@ -42492,7 +44516,9 @@ bool __stdcall BBSupportLib::BBSIsDirectory(wchar_t const * lpFileName) {
 
   v5 = 0;
   if ( !lpFileName || !*lpFileName )
+  {
     return v5;
+  }
   dwErrCode = GetLastError();
   FileAttributesW = GetFileAttributesW(lpFileName);
   v3 = FileAttributesW != -1 && (FileAttributesW & 0x10) != 0;
@@ -42516,19 +44542,25 @@ int __stdcall BBSupportLib::BBSGetDevelopmentFlagsEx(void) {
 
   BBSupportLib::g_iBBSDevelopmentFlags = 0x80000000;
   if ( !BBSupportLib::BBSIsDevelopmentMachine() )
+  {
     return BBSupportLib::g_iBBSDevelopmentFlags;
+  }
   phkResult = 0;
   Type = 4;
   *(_DWORD *)Data = 0;
   cbData = 4;
   if ( RegOpenKeyExA(HKEY_LOCAL_MACHINE, "Software\\BlueByte", 0, 0xF003Fu, &phkResult) )
+  {
     return BBSupportLib::g_iBBSDevelopmentFlags;
+  }
   strcpy(ValueName, "DeveloperFlags");
   v5 = 14;
   v1 = RegQueryValueExA(phkResult, ValueName, 0, &Type, Data, &cbData);
   memset(ValueName, 0, sizeof(ValueName));
   if ( !v1 )
+  {
     BBSupportLib::g_iBBSDevelopmentFlags = *(_DWORD *)Data & 0x7FFFFFFF;
+  }
   RegCloseKey(phkResult);
   return BBSupportLib::g_iBBSDevelopmentFlags;
 }
@@ -42549,9 +44581,13 @@ int __stdcall BBSupportLib::BBSGetSupportFlagsEx(void) {
   *(_DWORD *)Data = 0;
   cbData = 4;
   if ( RegOpenKeyExA(HKEY_LOCAL_MACHINE, "Software\\BlueByte", 0, 0xF003Fu, &phkResult) )
+  {
     return BBSupportLib::g_iBBSSupportFlags;
+  }
   if ( !RegQueryValueExA(phkResult, "SupportFlags", 0, &Type, Data, &cbData) )
+  {
     BBSupportLib::g_iBBSSupportFlags = *(_DWORD *)Data & 0x7FFFFFFF;
+  }
   RegCloseKey(phkResult);
   return BBSupportLib::g_iBBSSupportFlags;
 }
@@ -42564,11 +44600,17 @@ bool __stdcall BBSupportLib::BBSIsDevelopmentMachine(void) {
   int v1; // [esp+4h] [ebp-4h]
 
   if ( BBSupportLib::g_iBBSIsDevelopmentMachine )
+  {
     return BBSupportLib::g_iBBSIsDevelopmentMachine > 0;
+  }
   if ( BBSupportIsDevelopmentMachine() )
+  {
     v1 = 1;
+  }
   else
+  {
     v1 = -1;
+  }
   BBSupportLib::g_iBBSIsDevelopmentMachine = v1;
   return BBSupportLib::g_iBBSIsDevelopmentMachine > 0;
 }
@@ -42585,11 +44627,15 @@ bool __stdcall BBSupportLib::BBSIsFullscreenWindow(struct HWND__ * hWnd) {
 
   v5 = 0;
   if ( !hWnd )
+  {
     return v5;
+  }
   SystemMetrics = GetSystemMetrics(0);
   v3 = GetSystemMetrics(1);
   if ( SystemMetrics > 0 && v3 > 0 && GetWindowRect(hWnd, &Rect) )
+  {
     return !Rect.left && Rect.right == SystemMetrics && !Rect.top && Rect.bottom == v3;
+  }
   return v5;
 }
 
@@ -42606,16 +44652,24 @@ void __stdcall BBSupportLib::BBSCopyTextToClipboard(char const * Src) {
   result = strlen(Src);
   v4 = result;
   if ( !result )
+  {
     return result;
+  }
   if ( result > 0x1000 )
+  {
     return result;
+  }
   result = OpenClipboard(0);
   if ( !result )
+  {
     return result;
+  }
   EmptyClipboard();
   hMem = GlobalAlloc(2u, v4 + 1);
   if ( !hMem )
+  {
     return CloseClipboard();
+  }
   v2 = GlobalLock(hMem);
   memcpy(v2, Src, v4 + 1);
   GlobalUnlock(hMem);
@@ -42637,7 +44691,9 @@ void __stdcall BBSupportLib::BBSCopyString<char>(char * a1, char const * a2, uns
 
   result = a3 != 0 && a1 != 0;
   if ( !result )
+  {
     return result;
+  }
   v5 = a3 - 1;
   v4 = 0;
   result = *a2;
@@ -42647,7 +44703,9 @@ void __stdcall BBSupportLib::BBSCopyString<char>(char * a1, char const * a2, uns
     {
       result = a2[v4];
       if ( !result )
+      {
         break;
+      }
       result = a2[v4];
       *(_BYTE *)(v4 + a1) = result;
       ++v4;
@@ -42670,13 +44728,21 @@ int __stdcall BBSupportLoadDbgHelpDll(int a1) {
     sub_2F31630(a1);
   }
   if ( dword_4687124 <= 0 )
+  {
     v3 = 0;
+  }
   else
+  {
     v3 = dword_4687124;
+  }
   if ( dword_468712C <= 0 )
+  {
     return -v3;
+  }
   else
+  {
     return v3;
+  }
 }
 
 
@@ -42703,10 +44769,14 @@ void __stdcall BBSupportTraceDumpModules(void) {
     Module32Next = (BOOL (__stdcall *)(HANDLE, LPMODULEENTRY32))GetProcAddress(hModule, "Module32Next");
   }
   if ( !CreateToolhelp32Snapshot || !Module32First || !Module32Next )
+  {
     return BBSupportTracePrintF(2, "Failed to get snapshot functions!");
+  }
   hObject = CreateToolhelp32Snapshot(8, 0);
   if ( !hObject )
+  {
     return BBSupportTracePrintF(2, "Failed to get module snapshot!");
+  }
   memset(&sModule, 0, sizeof(sModule));
   sModule.dwSize = 548;
   if ( Module32First(hObject, &sModule) )
@@ -42714,13 +44784,7 @@ void __stdcall BBSupportTraceDumpModules(void) {
     do
     {
       ModuleTimeDateStamp = BBSupportGetModuleTimeDateStamp(sModule.hModule);
-      BBSupportTracePrintF(
-        1,
-        "0x%08x (0x%08x) %s (0x%08x)",
-        sModule.modBaseAddr,
-        sModule.modBaseSize,
-        sModule.szModule,
-        ModuleTimeDateStamp);
+      BBSupportTracePrintF(1, "0x%08x (0x%08x) %s (0x%08x)", sModule.modBaseAddr, sModule.modBaseSize, sModule.szModule, ModuleTimeDateStamp);
     }
     while ( Module32Next(hObject, &sModule) );
   }
@@ -42741,9 +44805,13 @@ bool __stdcall BBSupportLib::BBSSymbolHandlerInitialized(void) {
 void * __stdcall BBSupportLib::BBSSymbolHandlerProcessHandle(void) {
   
   if ( dword_468712C <= 0 )
+  {
     return 0;
+  }
   else
+  {
     return hProcess;
+  }
 }
 
 
@@ -42768,7 +44836,9 @@ int __stdcall BBSupportLib::BBSGetSymbolAndLine(char * a2, unsigned int a3) {
   v11 = this != 0;
   v10 = dword_468712C > 0;
   if ( !v10 || !v11 )
+  {
     return v13;
+  }
   ms_exc.registration.TryLevel = 0;
   *this = 0;
   memset(v14, 0, sizeof(v14));
@@ -42787,9 +44857,13 @@ int __stdcall BBSupportLib::BBSGetSymbolAndLine(char * a2, unsigned int a3) {
   if ( SymGetLineFromAddr(hProcess, (DWORD)dwAddr, &v7, &Line) )
   {
     if ( v13 <= 0 )
+    {
       v8 = (const char *)&unk_3AB9E15;
+    }
     else
+    {
       v8 = "  ";
+    }
     v4 = _wsprintfA(&this[v13], "%s%s(%u)", v8, Line.FileName, Line.LineNumber);
     v13 += v4;
   }
@@ -42841,7 +44915,7 @@ bool __stdcall BBSupportLib::BBSTraceStackDump(void) {
 
 
 // address=[0x2f32070]
-// Decompiled from bool __cdecl TGetProcAddress<int __stdcall (unsigned long,void *,void *,_tagSTACKFRAME *,void *,int (__stdcall *)(void *,unsigned long,void *,unsigned long,unsigned long *),void * (__stdcall *)(void *,unsigned long),unsigned long (__stdcall *)(void *,unsigned long),unsigned long (__stdcall *)(void *,void *,_tagADDRESS *))>(  FARPROC *a1,  HMODULE hModule,  LPCSTR lpProcName)
+// Decompiled from bool __cdecl TGetProcAddress<int __stdcall (unsigned long,void *,void *,_tagSTACKFRAME *,void *,int (__stdcall *)(void *,unsigned long,void *,unsigned long,unsigned long *),void * (__stdcall *)(void *,unsigned long),unsigned long (__stdcall *)(void *,unsigned long),unsigned long (__stdcall *)(void *,void *,_tagADDRESS *))>(FARPROC *a1, HMODULE hModule, LPCSTR lpProcName)
 bool __cdecl TGetProcAddress<int __stdcall(unsigned long a1, void * hModule, void * lpProcName, struct _tagSTACKFRAME * a4, void * a5, int (__stdcall*)(void *,unsigned long,void *,unsigned long,unsigned long *) a6, void * (__stdcall*)(void *,unsigned long) a7, unsigned long (__stdcall*)(void *,unsigned long) a8, unsigned long (__stdcall*)(void *,void *,struct _tagADDRESS *))>(int (__stdcall*&)(unsigned long,void *,void *,struct _tagSTACKFRAME *,void *,int (__stdcall*)(void *,unsigned long,void *,unsigned long,unsigned long *),void * (__stdcall*)(void *,unsigned long),unsigned long (__stdcall*)(void *,unsigned long),unsigned long (__stdcall*)(void *,void *,struct _tagADDRESS *)),struct HINSTANCE__ *,char const * a9) {
   
   *a1 = GetProcAddress(hModule, lpProcName);
@@ -42859,7 +44933,7 @@ bool __cdecl TGetProcAddress<int __stdcall(void *)>(int (__stdcall*&)(void *),st
 
 
 // address=[0x2f32110]
-// Decompiled from bool __cdecl TGetProcAddress<int __stdcall (void *,unsigned long,unsigned long *,_IMAGEHLP_LINE *)>(  FARPROC *a1,  HMODULE hModule,  LPCSTR lpProcName)
+// Decompiled from bool __cdecl TGetProcAddress<int __stdcall (void *,unsigned long,unsigned long *,_IMAGEHLP_LINE *)>(FARPROC *a1, HMODULE hModule, LPCSTR lpProcName)
 bool __cdecl TGetProcAddress<int __stdcall(void * a1, unsigned long hModule, unsigned long * lpProcName, struct _IMAGEHLP_LINE *)>(int (__stdcall*&)(void *,unsigned long,unsigned long *,struct _IMAGEHLP_LINE *),struct HINSTANCE__ *,char const * a4) {
   
   *a1 = GetProcAddress(hModule, lpProcName);
@@ -42868,7 +44942,7 @@ bool __cdecl TGetProcAddress<int __stdcall(void * a1, unsigned long hModule, uns
 
 
 // address=[0x2f32160]
-// Decompiled from bool __cdecl TGetProcAddress<int __stdcall (void *,unsigned long,unsigned long *,_IMAGEHLP_SYMBOL *)>(  FARPROC *a1,  HMODULE hModule,  LPCSTR lpProcName)
+// Decompiled from bool __cdecl TGetProcAddress<int __stdcall (void *,unsigned long,unsigned long *,_IMAGEHLP_SYMBOL *)>(FARPROC *a1, HMODULE hModule, LPCSTR lpProcName)
 bool __cdecl TGetProcAddress<int __stdcall(void * a1, unsigned long hModule, unsigned long * lpProcName, struct _IMAGEHLP_SYMBOL *)>(int (__stdcall*&)(void *,unsigned long,unsigned long *,struct _IMAGEHLP_SYMBOL *),struct HINSTANCE__ *,char const * a4) {
   
   *a1 = GetProcAddress(hModule, lpProcName);
@@ -42904,7 +44978,7 @@ bool __cdecl TGetProcAddress<unsigned long __stdcall(unsigned long)>(unsigned lo
 
 
 // address=[0x2f322a0]
-// Decompiled from bool __cdecl TGetProcAddress<unsigned long __stdcall (void *,unsigned long)>(  FARPROC *a1,  HMODULE hModule,  LPCSTR lpProcName)
+// Decompiled from bool __cdecl TGetProcAddress<unsigned long __stdcall (void *,unsigned long)>(FARPROC *a1, HMODULE hModule, LPCSTR lpProcName)
 bool __cdecl TGetProcAddress<unsigned long __stdcall(void * a1, unsigned long)>(unsigned long (__stdcall*&)(void *,unsigned long),struct HINSTANCE__ *,char const * hModule) {
   
   *a1 = GetProcAddress(hModule, lpProcName);
@@ -42947,7 +45021,9 @@ void __stdcall BBSupportActivateUnhandledExceptionFilter(void) {
 void __cdecl SETranslator(unsigned int a1, struct _EXCEPTION_POINTERS * ExceptionInfo) {
   
   if ( !__scrt_is_nonwritable_in_current_image(ExceptionInfo) )
+  {
     sub_2F32EC0(ExceptionInfo);
+  }
   ExitProcess(1u);
 }
 
@@ -42958,7 +45034,9 @@ void __stdcall BBSupportActivateNewHandler(void) {
   
   j___set_new_mode(0);
   if ( !dword_4687168 )
+  {
     dword_4687168 = (int)j__malloc(0x400u);
+  }
   return j___set_new_handler(NewHandler);
 }
 
@@ -42974,9 +45052,13 @@ void __stdcall BBSupportActivateNewHandler(void) {
 int __stdcall BBSupportLib::BBSGetSupportFlags(void) {
   
   if ( BBSupportLib::g_iBBSSupportFlags < 0 )
+  {
     return BBSupportLib::BBSGetSupportFlagsEx();
+  }
   else
+  {
     return BBSupportLib::g_iBBSSupportFlags;
+  }
 }
 
 
@@ -43019,13 +45101,14 @@ void __cdecl ConvertMapIndexToScreenPosition(int a1, int a2, int & a3, int & a4,
     }
     else
     {
-      *a2 = ((g_uLeftGuiBorderWidth - dword_3E2E2B0 - (g_iVertexSize >> 16) - ((30 * g_iVertexSize) >> 16)) << 16)
-          + -g_iVertexSize / 2;
+      *a2 = ((g_uLeftGuiBorderWidth - dword_3E2E2B0 - (g_iVertexSize >> 16) - ((30 * g_iVertexSize) >> 16)) << 16) + -g_iVertexSize / 2;
       v12 = 0;
     }
     *a2 += g_iVertexSize * (a1 - v12 - (dword_3E2E2A8 + SHIDWORD(a1) / 2 - 30));
     if ( (int)(HIDWORD(a1) | a1) >= 0 && (int)a1 < (int)Size && SHIDWORD(a1) < (int)Size )
+    {
       v14 += 4 * a1 + 4 * Size * HIDWORD(a1);
+    }
     v13 = (int)CalcFinalHeightOffset(*v14) >> 16;
     *a3 -= v13 << 16;
     *a2 >>= 16;
@@ -43035,9 +45118,13 @@ void __cdecl ConvertMapIndexToScreenPosition(int a1, int a2, int & a3, int & a4,
       v11 = (int)CalcFinalHeightOffset(v14[-4 * Size]) >> 16;
       v10 = (int)CalcFinalHeightOffset(v14[-4 * Size - 4]) >> 16;
       if ( v11 >= v10 )
+      {
         v9 = v10;
+      }
       else
+      {
         v9 = v11;
+      }
       *a4 = ((dword_3E2E290 >> 16) - (v13 - v9)) / 2;
     }
     else
@@ -43049,9 +45136,13 @@ void __cdecl ConvertMapIndexToScreenPosition(int a1, int a2, int & a3, int & a4,
       v8 = (int)CalcFinalHeightOffset(v14[4 * Size + 4]) >> 16;
       v7 = (int)CalcFinalHeightOffset(v14[4 * Size]) >> 16;
       if ( v8 <= v7 )
+      {
         v6 = v7;
+      }
       else
+      {
         v6 = v8;
+      }
       result = ((dword_3E2E290 >> 16) - (v13 - v6)) / 2;
       *a5 = result;
     }
@@ -43089,13 +45180,14 @@ void __cdecl ConvertMapIndexToScreenPosition(int a1, int a2, int & a3, int & a4)
     }
     else
     {
-      *a3 = ((g_uLeftGuiBorderWidth - dword_3E2E2B0 - (g_iVertexSize >> 16) - ((30 * g_iVertexSize) >> 16)) << 16)
-          + -g_iVertexSize / 2;
+      *a3 = ((g_uLeftGuiBorderWidth - dword_3E2E2B0 - (g_iVertexSize >> 16) - ((30 * g_iVertexSize) >> 16)) << 16) + -g_iVertexSize / 2;
       v4 = 0;
     }
     *a3 += g_iVertexSize * (a1 - v4 - (dword_3E2E2A8 + a2 / 2 - 30));
     if ( (a2 | a1) >= 0 && a1 < (int)Size && a2 < (int)Size )
+    {
       v5 += a1 + Size * a2;
+    }
     *a4 -= CalcFinalHeightOffset(v5->m_uGroundHeight);
     *a3 >>= 16;
     *a4 >>= 16;
@@ -43163,16 +45255,18 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
     v38 = a1 + dword_3E2E2B0 + (g_iVertexSize >> 17);
     v39 = a2 + dword_3E2E2B4 + (dword_3E2E290 >> 17);
     if ( g_iCameraMode == 1 )
+    {
       v39 *= 2;
+    }
     *a4 = v39 / (g_iVertexSize >> 16) + dword_3E2E2AC + 1;
     if ( (*a4 & 1) != 0 )
+    {
       v25 = g_uLeftGuiBorderWidth - dword_3E2E2B0 - (g_iVertexSize >> 16) - ((30 * g_iVertexSize) >> 16);
+    }
     else
-      v25 = g_uLeftGuiBorderWidth
-          - dword_3E2E2B0
-          - (g_iVertexSize >> 16)
-          - ((30 * g_iVertexSize) >> 16)
-          - (g_iVertexSize >> 17);
+    {
+      v25 = g_uLeftGuiBorderWidth - dword_3E2E2B0 - (g_iVertexSize >> 16) - ((30 * g_iVertexSize) >> 16) - (g_iVertexSize >> 17);
+    }
     *a3 = dword_3E2E2A8 + *a4 / 2 - 30 + (v38 - v25) / (g_iVertexSize >> 16);
     if ( *a3 >= 0 && *a4 >= 0 && *a3 < (int)Size && *a4 < (int)Size )
     {
@@ -43180,7 +45274,9 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
       v21 = 5;
       v17 = FLOAT_0_75;
       if ( !g_iCameraMode )
+      {
         v17 = FLOAT_0_375;
+      }
       do
       {
         HIDWORD(v7) = *a4;
@@ -43189,9 +45285,13 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
         v11 = (int)(float)((float)(v27 - v22) / (float)((float)((float)(g_iVertexSize >> 16) / 32.0) * 1.65));
         Number = (int)(float)((float)(v11 / 7) * v17);
         if ( v26 - v25 >= 0 )
+        {
           v6 = (float)((float)(v26 - v25) / (float)(g_iVertexSize >> 16)) + 0.5;
+        }
         else
+        {
           v6 = (float)((float)(v26 - v25) / (float)(g_iVertexSize >> 16)) - 0.5;
+        }
         v19 = (int)v6;
         v30 = 1;
         if ( j__abs(Number) <= 0 || v27 >= v22 - v13 && v27 < v12 + v22 )
@@ -43207,9 +45307,13 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
             if ( j__abs(Number) < 1 )
             {
               if ( v11 >= 0 )
+              {
                 Number = 1;
+              }
               else
+              {
                 Number = -1;
+              }
             }
             *a4 += Number;
             v30 = 0;
@@ -43247,18 +45351,30 @@ int __cdecl SearchMapPoint(int a1, int a2, int & a3, int & a4, bool a5) {
         v32 = CalculateDistance(v28, v29, v26, v27);
       }
       if ( *a3 < (int)(Size - 1) )
+      {
         v33 = CalculateDistance(v28, v29, v26, v27);
+      }
       if ( *a4 > 0 )
+      {
         v34 = CalculateDistance(v28, v29, v26, v27);
+      }
       if ( *a4 > 0 && *a3 > 0 )
+      {
         v35 = CalculateDistance(v28, v29, v26, v27);
+      }
       if ( *a4 < (int)(Size - 1) && *a3 < (int)(Size - 1) )
+      {
         v36 = CalculateDistance(v28, v29, v26, v27);
+      }
       if ( *a4 < (int)(Size - 1) )
+      {
         v37 = CalculateDistance(v28, v29, v26, v27);
+      }
       v10 = 30000;
       v9 = 0;
-      for ( i = 0; i < 7; ++i )
+      for ( i = 0;
+            i < 7;
+            ++i )
       {
         if ( *(&v31 + i) < v10 )
         {
@@ -43322,7 +45438,9 @@ void __cdecl InitGradientTable(void) {
   int result; // eax
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; i < 512; ++i )
+  for ( i = 0;
+        i < 512;
+        ++i )
   {
     g_iDestSizeTable[i] = (int)(float)((float)i * *(float *)&g_fZoomFactor);
     result = i + 1;
@@ -43338,7 +45456,9 @@ void __cdecl InitCamGradientTable(void) {
   int result; // eax
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; i < 512; ++i )
+  for ( i = 0;
+        i < 512;
+        ++i )
   {
     g_iCamDestSizeTable[i] = (int)(float)((float)i * *(float *)&g_fCameraZoomFactor);
     result = i + 1;
@@ -43360,10 +45480,10 @@ void __cdecl RenderTmpText(void) {
 
   result = 1;
   if ( !g_cTextTmp[0] )
+  {
     return result;
-  ((void (__thiscall *)(CSurfaceV7 *, HDC *))D3DObjectPtr->FinalRenderSurface->GetDC)(
-    D3DObjectPtr->FinalRenderSurface,
-    &hdc);
+  }
+  ((void (__thiscall *)(CSurfaceV7 *, HDC *))D3DObjectPtr->FinalRenderSurface->GetDC)(D3DObjectPtr->FinalRenderSurface, &hdc);
   SetBkMode(hdc, 1);
   SetTextColor(hdc, g_iTextTmpColor);
   SetTextAlign(hdc, 0x18u);
@@ -43374,9 +45494,7 @@ void __cdecl RenderTmpText(void) {
   v2 = strlen("Hallo");
   TextOutA(hdc, 50, 50, "Hallo", v2);
   SelectObject(hdc, v3);
-  ((void (__thiscall *)(CSurfaceV7 *, HDC))D3DObjectPtr->FinalRenderSurface->ReleaseDC)(
-    D3DObjectPtr->FinalRenderSurface,
-    hdc);
+  ((void (__thiscall *)(CSurfaceV7 *, HDC))D3DObjectPtr->FinalRenderSurface->ReleaseDC)(D3DObjectPtr->FinalRenderSurface, hdc);
   return DeleteObject(h);
 }
 
@@ -43466,20 +45584,20 @@ bool __cdecl ReadTextureBitmap(int a1, void * Src, bool a3, bool a4) {
 
   if ( a3 )
   {
-    v7 = ((int (__thiscall *)(CSurfaceV7 *, _BYTE *, void **, _DWORD))D3DObjectPtr->LandscapeTextureTable[a1]->Lock)(
-           D3DObjectPtr->LandscapeTextureTable[a1],
-           v5,
-           &v6,
-           0);
+    v7 = ((int (__thiscall *)(CSurfaceV7 *, _BYTE *, void **, _DWORD))D3DObjectPtr->LandscapeTextureTable[a1]->Lock)(D3DObjectPtr->LandscapeTextureTable[a1], v5, &v6, 0);
     if ( v7 )
     {
       WriteError(v7, "LockTextureSurfaceForContentLoad");
       return 0;
     }
     if ( a4 )
+    {
       memcpy(v6, Src, 0x20000u);
+    }
     else
+    {
       memcpy(v6, Src, 0x8000u);
+    }
     v7 = ((int (__thiscall *)(CSurfaceV7 *))D3DObjectPtr->LandscapeTextureTable[a1]->Unlock)(D3DObjectPtr->LandscapeTextureTable[a1]);
     if ( v7 )
     {
@@ -43504,9 +45622,13 @@ bool __cdecl ReadTextureBitmap(int a1, void * Src, bool a3, bool a4) {
 bool __cdecl BlitRenderedSurfaceToDIB(struct HWND__ * hWnd, struct HBITMAP__ * h) {
   
   if ( D3DObjectPtr && D3DObjectPtr->LandscapeSurface )
+  {
     return CInterfaceD3D::BlitSurfaceToDIB(hWnd, h);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -43526,12 +45648,18 @@ bool __cdecl Initialize(void) {
   {
     C = (CInterfaceD3D *)operator new(0x794u);
     if ( C )
+    {
       v1 = CInterfaceD3D::CInterfaceD3D(C);
+    }
     else
+    {
       v1 = 0;
+    }
     D3DObjectPtr = v1;
     if ( !v1 )
+    {
       BBSupportTracePrintF(1, "GFX ENGINE: GFX ENGINE: Couldn't create gfx engine interface object!");
+    }
     return D3DObjectPtr != 0;
   }
 }
@@ -43584,23 +45712,35 @@ bool __cdecl ReadTextureBitmapSet(bool a1, bool a2, bool a3, int a4) {
   char v10; // [esp+17h] [ebp-1h]
 
   if ( !g_pfForceReload )
+  {
     return 0;
+  }
   v9 = g_pfForceReload(1, a2, a3);
   if ( !v9 )
+  {
     return 0;
+  }
   if ( *((unsigned __int8 *)v9 + 3) != a4 )
+  {
     return 0;
+  }
   v10 = 1;
   while ( v9[1] && ((*(_WORD *)v9 & 2) != 0 && a1 || (*(_WORD *)v9 & 2) == 0 && !a1) )
+  {
     v9 = (_DWORD *)((char *)v9 + v9[1] + 8);
+  }
   if ( !v9[1] && ((*(_WORD *)v9 & 2) != 0 && a1 || (*(_WORD *)v9 & 2) == 0 && !a1) )
+  {
     return 0;
+  }
   v5 = (char *)(v9 + 2);
   if ( a1 )
   {
     if ( a2 )
     {
-      for ( i = 0; i < a4; ++i )
+      for ( i = 0;
+            i < a4;
+            ++i )
       {
         if ( !(unsigned __int8)ReadTextureBitmap(i, &v5[0x20000 * i], 1, a2) )
         {
@@ -43611,7 +45751,9 @@ bool __cdecl ReadTextureBitmapSet(bool a1, bool a2, bool a3, int a4) {
     }
     else
     {
-      for ( j = 0; j < a4; ++j )
+      for ( j = 0;
+            j < a4;
+            ++j )
       {
         if ( !(unsigned __int8)ReadTextureBitmap(j, &v5[0x8000 * j], 1, 0) )
         {
@@ -43623,7 +45765,9 @@ bool __cdecl ReadTextureBitmapSet(bool a1, bool a2, bool a3, int a4) {
   }
   else
   {
-    for ( k = 0; k < a4; ++k )
+    for ( k = 0;
+          k < a4;
+          ++k )
     {
       if ( !(unsigned __int8)ReadTextureBitmap(k, &v5[66304 * k], 0, 1) )
       {
@@ -43648,7 +45792,9 @@ void __cdecl WriteError(int a1, char * a2) {
     if ( a1 > -2005530624 )
     {
       if ( a1 > 0 )
+      {
         goto WriteError___def_33609C9;
+      }
       if ( a1 )
       {
         switch ( a1 )
@@ -44231,7 +46377,9 @@ void __cdecl WriteError(int a1, char * a2) {
     else
     {
       if ( a1 != -2147024809 )
+      {
         goto WriteError___def_33609C9;
+      }
       sprintf(Buffer, "DDERR_INVALIDPARAMS");
     }
   }
@@ -44291,16 +46439,14 @@ bool __cdecl CheckConfiguration(struct SGfxRenderConfiguration & a1) {
   BBSupportTracePrintF(1, "GFX ENGINE: hWnd:          %d", a1->m_hWnd);
   BBSupportTracePrintF(1, "GFX ENGINE: ---------------------");
   if ( a1->m_uWidth < 1 )
+  {
     a1->m_uWidth = 1;
+  }
   if ( a1->m_uHeight < 1 )
+  {
     a1->m_uHeight = 1;
-  BBSupportTracePrintF(
-    1,
-    "GFX ENGINE: Set window setup: x:%d y:%d width:%d height:%d",
-    a1->m_uX,
-    a1->m_uY,
-    a1->m_uWidth,
-    a1->m_uHeight);
+  }
+  BBSupportTracePrintF(1, "GFX ENGINE: Set window setup: x:%d y:%d width:%d height:%d", a1->m_uX, a1->m_uY, a1->m_uWidth, a1->m_uHeight);
   return 1;
 }
 
@@ -44321,7 +46467,9 @@ bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   int iDestX; // [esp+24h] [ebp-4h]
 
   if ( !a4->m_pPalData )
+  {
     return 0;
+  }
   m_pGfxData = a4->m_pGfxData;
   a4->m_pGfxData = 0;
   if ( m_pGfxData )
@@ -44334,27 +46482,17 @@ bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     m_pGfxData += 2;
     iDestX = (a2 - (int)(float)((float)(*m_pGfxData++ << 16) * g_fZoomFactor)) >> 16;
     iDestY = (a3 - (int)(float)((float)(*m_pGfxData << 16) * g_fZoomFactor)) >> 16;
-    if ( iDestX <= GfxEngineSetup.m_uWidth
-      && iDestY <= GfxEngineSetup.m_uHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX >= g_uLeftGuiBorderWidth
-      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY >= 0 )
+    if ( iDestX <= GfxEngineSetup.m_uWidth && iDestY <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY >= 0 )
     {
       pPaletteAdress = (int)&g_uColorPalette;
       sub_2F6FD80(&pPaletteAdress, a1);
-      ZoomBobNormal(
-        pPaletteAdress,
-        (int)(m_pGfxData + 5),
-        iSourceWidth,
-        iSourceHeight,
-        iDestX,
-        iDestY,
-        0,
-        g_pBeginOfRenderBuffer,
-        0);
+      ZoomBobNormal(pPaletteAdress, (int)(m_pGfxData + 5), iSourceWidth, iSourceHeight, iDestX, iDestY, 0, g_pBeginOfRenderBuffer, 0);
     }
   }
   if ( !g_pIconPalette )
+  {
     return 1;
+  }
   if ( a4->m_uFlags )
   {
     v7 = (unsigned __int16 *)g_pIconGfx[a4->m_uFlags];
@@ -44363,13 +46501,12 @@ bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     iSourceWidth = *v7++;
     iSourceHeight = *v7++;
     if ( iSourceWidth > 512 || iSourceHeight > 512 )
+    {
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
+    }
     iDestX = (a2 - (int)(float)((float)(*v7++ << 16) * g_fZoomFactor)) >> 16;
     iDestY = (a3 - (int)(float)((float)(*v7 << 16) * g_fZoomFactor)) >> 16;
-    if ( iDestX <= GfxEngineSetup.m_uWidth
-      && iDestY <= GfxEngineSetup.m_uHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX >= g_uLeftGuiBorderWidth
-      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY >= 0 )
+    if ( iDestX <= GfxEngineSetup.m_uWidth && iDestY <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY >= 0 )
     {
       g_iSettlerSelections[3 * g_iSettlerSelectionCounter] = iDestX;
       g_iSettlerSelections[3 * g_iSettlerSelectionCounter + 1] = iDestY;
@@ -44383,13 +46520,12 @@ bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     iSourceWidth = *v9++;
     iSourceHeight = *v9++;
     if ( iSourceWidth > 512 || iSourceHeight > 512 )
+    {
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
+    }
     iDestX = (a2 - (int)(float)((float)(*v9++ << 16) * g_fZoomFactor)) >> 16;
     iDestY = (a3 - (int)(float)((float)(*v9 << 16) * g_fZoomFactor)) >> 16;
-    if ( iDestX <= GfxEngineSetup.m_uWidth
-      && iDestY <= GfxEngineSetup.m_uHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX >= g_uLeftGuiBorderWidth
-      && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY >= 0 )
+    if ( iDestX <= GfxEngineSetup.m_uWidth && iDestY <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY >= 0 )
     {
       g_iSettlerFitness[5 * g_iSettlerFitnessCounter] = iDestX;
       g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 1] = iDestY;
@@ -44399,19 +46535,20 @@ bool __cdecl BlitSettler(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     }
   }
   if ( !a4->m_u0 )
+  {
     return 1;
+  }
   v8 = (unsigned __int16 *)g_pIconGfx[a4->m_u0];
   a4->m_u0 = 0;
   iSourceWidth = *v8++;
   iSourceHeight = *v8++;
   if ( iSourceWidth > 512 || iSourceHeight > 512 )
+  {
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
+  }
   iDestX = (a2 - (int)(float)((float)(*v8++ << 16) * g_fZoomFactor)) >> 16;
   iDestY = (a3 - (int)(float)((float)(*v8 << 16) * g_fZoomFactor)) >> 16;
-  if ( iDestX > GfxEngineSetup.m_uWidth
-    || iDestY > GfxEngineSetup.m_uHeight
-    || *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX < g_uLeftGuiBorderWidth
-    || *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY < 0 )
+  if ( iDestX > GfxEngineSetup.m_uWidth || iDestY > GfxEngineSetup.m_uHeight || *(_DWORD *)(g_pDestSizeTable + 4 * iSourceWidth) + iDestX < g_uLeftGuiBorderWidth || *(_DWORD *)(g_pDestSizeTable + 4 * iSourceHeight) + iDestY < 0 )
   {
     return 1;
   }
@@ -44449,7 +46586,9 @@ bool __cdecl BlitObject(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   unsigned __int16 *v23; // [esp+20h] [ebp-4h]
 
   if ( !*((_DWORD *)a4 + 1) )
+  {
     return 0;
+  }
   sub_2F6FD80((char *)a4 + 4, a1);
   v20 = *(unsigned __int16 **)a4;
   *(_DWORD *)a4 = 0;
@@ -44459,7 +46598,9 @@ bool __cdecl BlitObject(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     v9 = v20[1];
     v21 = v20 + 2;
     if ( v7 > 512 || v9 > 512 )
+    {
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of object is too big! Object will be ignored!");
+    }
     v6 = g_fZoomFactor;
     v5 = *(_DWORD *)g_pZoomGradient;
     if ( (v21[2] & 0x10) != 0 )
@@ -44469,10 +46610,7 @@ bool __cdecl BlitObject(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
       v14 = (a2 - (int)(float)((float)(*v21 << 16) * g_fZoomFactor)) >> 16;
       v22 = v21 + 1;
       v17 = (a3 - (int)(float)((float)(*v22 << 16) * g_fZoomFactor)) >> 16;
-      if ( v14 <= GfxEngineSetup.m_uWidth
-        && v17 <= GfxEngineSetup.m_uHeight
-        && v14 + (*(int *)(g_pDestSizeTable + 4 * v7) >> 1) >= g_uLeftGuiBorderWidth
-        && v17 + (*(int *)(g_pDestSizeTable + 4 * v9) >> 1) >= 0 )
+      if ( v14 <= GfxEngineSetup.m_uWidth && v17 <= GfxEngineSetup.m_uHeight && v14 + (*(int *)(g_pDestSizeTable + 4 * v7) >> 1) >= g_uLeftGuiBorderWidth && v17 + (*(int *)(g_pDestSizeTable + 4 * v9) >> 1) >= 0 )
       {
         ZoomBobNormal(*((_DWORD *)a4 + 1), (int)(v22 + 3), v7, v9, v14, v17, 0, g_pBeginOfRenderBuffer, 1);
       }
@@ -44482,10 +46620,7 @@ bool __cdecl BlitObject(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
       v15 = (a2 - (int)(float)((float)(*v21 << 16) * g_fZoomFactor)) >> 16;
       v23 = v21 + 1;
       v18 = (a3 - (int)(float)((float)(*v23 << 16) * g_fZoomFactor)) >> 16;
-      if ( v15 <= GfxEngineSetup.m_uWidth
-        && v18 <= GfxEngineSetup.m_uHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v7) + v15 >= g_uLeftGuiBorderWidth
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v9) + v18 >= 0 )
+      if ( v15 <= GfxEngineSetup.m_uWidth && v18 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v7) + v15 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v9) + v18 >= 0 )
       {
         ZoomBobNormal(*((_DWORD *)a4 + 1), (int)(v23 + 3), v7, v9, v15, v18, 0, g_pBeginOfRenderBuffer, 0);
       }
@@ -44494,21 +46629,22 @@ bool __cdecl BlitObject(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     *(_DWORD *)g_pZoomGradient = v5;
   }
   if ( !*((_BYTE *)a4 + 22) || !g_pIconPalette )
+  {
     return 1;
+  }
   v11 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 22)];
   *((_BYTE *)a4 + 22) = 0;
   v8 = *v11;
   v10 = v11[1];
   v12 = v11 + 2;
   if ( v8 > 512 || v10 > 512 )
+  {
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
+  }
   v16 = (a2 - (int)(float)((float)(*v12 << 16) * g_fZoomFactor)) >> 16;
   v13 = v12 + 1;
   v19 = (a3 - (int)(float)((float)(*v13 << 16) * g_fZoomFactor)) >> 16;
-  if ( v16 <= GfxEngineSetup.m_uWidth
-    && v19 <= GfxEngineSetup.m_uHeight
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v8) + v16 >= g_uLeftGuiBorderWidth
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v10) + v19 >= 0 )
+  if ( v16 <= GfxEngineSetup.m_uWidth && v19 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v8) + v16 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v10) + v19 >= 0 )
   {
     ZoomBobNormal(g_pIconPalette, (int)(v13 + 3), v8, v10, v16, v19, 0, g_pBeginOfRenderBuffer, 0);
   }
@@ -44537,7 +46673,9 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
   unsigned __int16 *v19; // [esp+48h] [ebp-4h]
 
   if ( !*((_DWORD *)a4 + 1) )
+  {
     return 0;
+  }
   v19 = *(unsigned __int16 **)a4;
   *(_DWORD *)a4 = 0;
   v7 = (unsigned __int16)*((_DWORD *)a4 + 23);
@@ -44552,16 +46690,15 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     v15 = *v19++;
     v16 = *v19++;
     if ( v15 > 512 || v16 > 512 )
+    {
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of vehicle object is too big! Object will be ignored!");
+    }
     v17 = (a2 - (int)(float)((float)(*v19++ << 16) * g_fZoomFactor)) >> 16;
     v18 = (a3 - (int)(float)((float)(*v19 << 16) * g_fZoomFactor)) >> 16;
     v11 = g_pBeginOfRenderBuffer;
     if ( !v7 || v7 == 0xFFFF )
     {
-      if ( v17 <= GfxEngineSetup.m_uWidth
-        && v18 <= GfxEngineSetup.m_uHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
+      if ( v17 <= GfxEngineSetup.m_uWidth && v18 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
       {
         ZoomBobNormal((int)v10, (int)(v19 + 3), v15, v16, v17, v18, 0, g_pBeginOfRenderBuffer, 0);
       }
@@ -44570,10 +46707,7 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     {
       v5 = v7 * (int)(float)((float)v16 * g_fZoomFactor) / 0xFFFFu + v18;
       v8 = v5 - (int)(float)(g_fZoomFactor * 10.0);
-      v11 = g_iScanlineLength
-          + g_pRenderAdress
-          + g_iRenderPitch * (v5 - 1)
-          - g_iRenderPitch * (int)(float)(g_fZoomFactor * 10.0);
+      v11 = g_iScanlineLength + g_pRenderAdress + g_iRenderPitch * (v5 - 1) - g_iRenderPitch * (int)(float)(g_fZoomFactor * 10.0);
       v6 = v5;
       v9 = g_iScanlineLength + g_pRenderAdress + g_iRenderPitch * (v5 - 1);
       if ( v11 < g_pBeginOfRenderBuffer )
@@ -44596,10 +46730,7 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
         v9 = g_pEndOfRenderBuffer;
         v6 = GfxEngineSetup.m_uHeight - 1;
       }
-      if ( v17 <= GfxEngineSetup.m_uWidth
-        && v18 <= GfxEngineSetup.m_uHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
+      if ( v17 <= GfxEngineSetup.m_uWidth && v18 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
       {
         ZoomBobNormal((int)v10, (int)(v19 + 3), v15, v16, v17, v18, v6, v9, 0);
         ZoomBobBuildState((int)v10, (int)(v19 + 3), v15, v16, v17, v18, v8, v11, v9);
@@ -44612,13 +46743,12 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
       v15 = *v19++;
       v16 = *v19++;
       if ( v15 > 512 || v16 > 512 )
+      {
         BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of vehicle object is too big! Object will be ignored!");
+      }
       v17 = (a2 - (int)(float)((float)(*v19++ << 16) * g_fZoomFactor)) >> 16;
       v18 = (a3 - (int)(float)((float)(*v19 << 16) * g_fZoomFactor)) >> 16;
-      if ( v17 <= GfxEngineSetup.m_uWidth
-        && v18 <= GfxEngineSetup.m_uHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
+      if ( v17 <= GfxEngineSetup.m_uWidth && v18 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
       {
         v10 = (void *)*((_DWORD *)a4 + 4);
         sub_2F6FD80(&v10, a1);
@@ -44627,7 +46757,9 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     }
   }
   if ( !g_pIconPalette )
+  {
     return 1;
+  }
   *((_DWORD *)a4 + 23) = 0;
   if ( *((_BYTE *)a4 + 22) )
   {
@@ -44636,15 +46768,12 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     v15 = *v14++;
     v16 = *v14++;
     if ( v15 > 512 || v16 > 512 )
-      BBSupportTracePrintF(
-        0,
-        "GFX ENGINE: DATA ERROR: Size of vehicle selection object is too big! Object will be ignored!");
+    {
+      BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of vehicle selection object is too big! Object will be ignored!");
+    }
     v17 = (a2 - (int)(float)((float)(*v14++ << 16) * g_fZoomFactor)) >> 16;
     v18 = (a3 - (int)(float)((float)(*v14 << 16) * g_fZoomFactor)) >> 16;
-    if ( v17 <= GfxEngineSetup.m_uWidth
-      && v18 <= GfxEngineSetup.m_uHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
+    if ( v17 <= GfxEngineSetup.m_uWidth && v18 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
     {
       ZoomBobNormal(g_pIconPalette, (int)(v14 + 3), v15, v16, v17, v18, 0, g_pBeginOfRenderBuffer, 0);
     }
@@ -44656,31 +46785,31 @@ bool __cdecl BlitVehicle(int a1, int a2, int a3, struct SGfxObjectInfo * a4) {
     v15 = *v13++;
     v16 = *v13++;
     if ( v15 > 512 || v16 > 512 )
+    {
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
+    }
     v17 = (a2 - (int)(float)((float)(*v13++ << 16) * g_fZoomFactor)) >> 16;
     v18 = (a3 - (int)(float)((float)(*v13 << 16) * g_fZoomFactor)) >> 16;
-    if ( v17 <= GfxEngineSetup.m_uWidth
-      && v18 <= GfxEngineSetup.m_uHeight
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
-      && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
+    if ( v17 <= GfxEngineSetup.m_uWidth && v18 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
     {
       ZoomBobNormal(g_pIconPalette, (int)(v13 + 3), v15, v16, v17, v18, 0, g_pBeginOfRenderBuffer, 0);
     }
   }
   if ( !*((_BYTE *)a4 + 20) )
+  {
     return 1;
+  }
   v12 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 20)];
   *((_BYTE *)a4 + 20) = 0;
   v15 = *v12++;
   v16 = *v12++;
   if ( v15 > 512 || v16 > 512 )
+  {
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
+  }
   v17 = (a2 - (int)(float)((float)(*v12++ << 16) * g_fZoomFactor)) >> 16;
   v18 = (a3 - (int)(float)((float)(*v12 << 16) * g_fZoomFactor)) >> 16;
-  if ( v17 <= GfxEngineSetup.m_uWidth
-    && v18 <= GfxEngineSetup.m_uHeight
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
+  if ( v17 <= GfxEngineSetup.m_uWidth && v18 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v16) + v18 >= 0 )
   {
     ZoomBobNormal(g_pIconPalette, (int)(v12 + 3), v15, v16, v17, v18, 0, g_pBeginOfRenderBuffer, 0);
   }
@@ -44733,7 +46862,9 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
   _BYTE v45[512]; // [esp+A8h] [ebp-204h] BYREF
 
   if ( !_pInfo->m_pPalData )
+  {
     return 0;
+  }
   m_pGfxData = _pInfo->m_pGfxData;
   v26 = (unsigned __int16)_pInfo->uConstructionProgress;
   Src = _pInfo->m_pPalData;
@@ -44753,16 +46884,13 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
       v40 = *(unsigned __int16 *)m_pGfxData;
       m_pGfxData += 2;
       if ( v39 > 512 || v40 > 512 )
-        BBSupportTracePrintF(
-          0,
-          "GFX ENGINE: DATA ERROR: Size of build layer object is too big! Object will be ignored!");
+      {
+        BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of build layer object is too big! Object will be ignored!");
+      }
       v41 = (a2 - (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor)) >> 16;
       m_pGfxData += 2;
       v42 = (a3 - (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor)) >> 16;
-      if ( v41 <= GfxEngineSetup.m_uWidth
-        && v42 <= GfxEngineSetup.m_uHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + v41 >= g_uLeftGuiBorderWidth
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + v42 >= 0 )
+      if ( v41 <= GfxEngineSetup.m_uWidth && v42 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + v41 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + v42 >= 0 )
       {
         ZoomBobNormal((int)Src, (int)(m_pGfxData + 6), v39, v40, v41, v42, 0, g_pBeginOfRenderBuffer, 0);
       }
@@ -44776,7 +46904,9 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
     v40 = *(unsigned __int16 *)m_pGfxData;
     m_pGfxData += 2;
     if ( v39 > 512 || v40 > 512 )
+    {
       BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
+    }
     v41 = a2 - (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor);
     m_pGfxData += 2;
     v42 = a3 - (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor);
@@ -44787,25 +46917,17 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
     {
       if ( v26 != 0xFFFF )
       {
-        if ( v41 >> 16 <= GfxEngineSetup.m_uWidth
-          && v42 >> 16 <= GfxEngineSetup.m_uHeight
-          && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth
-          && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
+        if ( v41 >> 16 <= GfxEngineSetup.m_uWidth && v42 >> 16 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
         {
           ZoomBobNormal((int)Src, (int)m_pGfxData, v39, v40, v41 >> 16, v42 >> 16, 0, g_pBeginOfRenderBuffer, 0);
-          for ( i = 0; i < 4; ++i )
+          for ( i = 0;
+                i < 4;
+                ++i )
           {
             if ( _pInfo->m_vFXFrameData[i] )
-              ZoomBobNormal(
-                (int)Src,
-                _pInfo->m_vFXFrameData[i] + 12,
-                v39,
-                v40,
-                v41 >> 16,
-                v42 >> 16,
-                0,
-                g_pBeginOfRenderBuffer,
-                0);
+            {
+              ZoomBobNormal((int)Src, _pInfo->m_vFXFrameData[i] + 12, v39, v40, v41 >> 16, v42 >> 16, 0, g_pBeginOfRenderBuffer, 0);
+            }
           }
           if ( _pInfo->m_vFXFrameData[4] && *a6 < 511 )
           {
@@ -44818,7 +46940,9 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
             ++*a6;
           }
         }
-        for ( j = 0; j < 0xA; ++j )
+        for ( j = 0;
+              j < 0xA;
+              ++j )
         {
           m_pGfxData = *(BYTE **)&_pInfo->m_vPatches2[16 * j];
           if ( m_pGfxData )
@@ -44830,20 +46954,13 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
             if ( *(_DWORD *)&_pInfo->m_vPatches2[16 * j + 4] )
             {
               if ( v20 > 512 || v21 > 512 )
-                BBSupportTracePrintF(
-                  0,
-                  "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
-              v22 = (a2
-                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->m_vPatches2[16 * j + 8]) << 16)
-                                * g_fZoomFactor)) >> 16;
+              {
+                BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
+              }
+              v22 = (a2 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->m_vPatches2[16 * j + 8]) << 16) * g_fZoomFactor)) >> 16;
               m_pGfxData += 2;
-              v23 = (a3
-                   - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->m_vPatches2[16 * j + 12]) << 16)
-                                * g_fZoomFactor)) >> 16;
-              if ( v22 <= GfxEngineSetup.m_uWidth
-                && v23 <= GfxEngineSetup.m_uHeight
-                && *(_DWORD *)(g_pDestSizeTable + 4 * v20) + v22 >= g_uLeftGuiBorderWidth
-                && *(_DWORD *)(g_pDestSizeTable + 4 * v21) + v23 >= 0 )
+              v23 = (a3 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->m_vPatches2[16 * j + 12]) << 16) * g_fZoomFactor)) >> 16;
+              if ( v22 <= GfxEngineSetup.m_uWidth && v23 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v20) + v22 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v21) + v23 >= 0 )
               {
                 v12 = *(_DWORD *)&_pInfo->m_vPatches2[16 * j + 4];
                 sub_2F6FD80(&v12, a1);
@@ -44856,7 +46973,9 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
             }
           }
         }
-        for ( j = 0; j < 21; ++j )
+        for ( j = 0;
+              j < 21;
+              ++j )
         {
           v38 = _pInfo->m_vPatches[j].m_pGfxData;
           if ( v38 )
@@ -44865,21 +46984,14 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
             v19 = (unsigned __int8)*v38++;
             if ( _pInfo->m_vPatches[j].m_pPalData )
             {
-              v24 = (a2
-                   - (int)(float)((float)(((unsigned __int8)*v38++ - _pInfo->m_vPatches[j].m_iOffsetX) << 16)
-                                * g_fZoomFactor)) >> 16;
-              v25 = (a3
-                   - (int)(float)((float)(((unsigned __int8)*v38 - _pInfo->m_vPatches[j].m_iOffsetY) << 16)
-                                * g_fZoomFactor)) >> 16;
+              v24 = (a2 - (int)(float)((float)(((unsigned __int8)*v38++ - _pInfo->m_vPatches[j].m_iOffsetX) << 16) * g_fZoomFactor)) >> 16;
+              v25 = (a3 - (int)(float)((float)(((unsigned __int8)*v38 - _pInfo->m_vPatches[j].m_iOffsetY) << 16) * g_fZoomFactor)) >> 16;
               memcpy(&g_uColorPalette, _pInfo->m_vPatches[j].m_pPalData, 0x180u);
               memcpy(&unk_468A760, g_cColorGradient.m_vGradients[_pInfo->m_iColor], 0x40u);
               memcpy(&unk_468A7A0, &_pInfo->m_vPatches[j].m_pPalData[64 * _pInfo->m_iColor + 512], 0x40u);
               v11 = &g_uColorPalette;
               sub_2F6FD80((int *)&v11, a1);
-              if ( v24 <= GfxEngineSetup.m_uWidth
-                && v25 <= GfxEngineSetup.m_uHeight
-                && *(_DWORD *)(g_pDestSizeTable + 4 * v18) + v24 >= g_uLeftGuiBorderWidth
-                && *(_DWORD *)(g_pDestSizeTable + 4 * v19) + v25 >= 0 )
+              if ( v24 <= GfxEngineSetup.m_uWidth && v25 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v18) + v24 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v19) + v25 >= 0 )
               {
                 if ( j == 20 && *a6 < 511 )
                 {
@@ -44903,24 +47015,16 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
             }
           }
         }
-        if ( v41 >> 16 <= GfxEngineSetup.m_uWidth
-          && v42 >> 16 <= GfxEngineSetup.m_uHeight
-          && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth
-          && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
+        if ( v41 >> 16 <= GfxEngineSetup.m_uWidth && v42 >> 16 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
         {
-          for ( j = 5; j < 0xA; ++j )
+          for ( j = 5;
+                j < 0xA;
+                ++j )
           {
             if ( _pInfo->m_vFXFrameData[j] )
-              ZoomBobNormal(
-                (int)Src,
-                _pInfo->m_vFXFrameData[j] + 12,
-                v39,
-                v40,
-                v41 >> 16,
-                v42 >> 16,
-                0,
-                g_pBeginOfRenderBuffer,
-                0);
+            {
+              ZoomBobNormal((int)Src, _pInfo->m_vFXFrameData[j] + 12, v39, v40, v41 >> 16, v42 >> 16, 0, g_pBeginOfRenderBuffer, 0);
+            }
           }
         }
         if ( _pInfo->m_pMiniFlagGfxData && _pInfo->m_pMiniFlagPalData )
@@ -44931,27 +47035,17 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
           v32 = *(unsigned __int16 *)m_pGfxData;
           m_pGfxData += 2;
           if ( v31 > 512 || v32 > 512 )
+          {
             BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of building flag is too big! Object will be ignored!");
+          }
           v34 = a2 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - _pInfo->m_iOffsetX) << 16) * g_fZoomFactor);
           m_pGfxData += 2;
           v35 = a3 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - _pInfo->m_iOffsetY) << 16) * g_fZoomFactor);
-          if ( v34 >> 16 <= GfxEngineSetup.m_uWidth
-            && v35 >> 16 <= GfxEngineSetup.m_uHeight
-            && *(_DWORD *)(g_pDestSizeTable + 4 * v31) + (v34 >> 16) >= g_uLeftGuiBorderWidth
-            && *(_DWORD *)(g_pDestSizeTable + 4 * v32) + (v35 >> 16) >= 0 )
+          if ( v34 >> 16 <= GfxEngineSetup.m_uWidth && v35 >> 16 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v31) + (v34 >> 16) >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v32) + (v35 >> 16) >= 0 )
           {
             m_pMiniFlagPalData = _pInfo->m_pMiniFlagPalData;
             sub_2F6FD80(&m_pMiniFlagPalData, a1);
-            ZoomBobNormal(
-              m_pMiniFlagPalData,
-              (int)(m_pGfxData + 6),
-              v31,
-              v32,
-              v34 >> 16,
-              v35 >> 16,
-              0,
-              g_pBeginOfRenderBuffer,
-              0);
+            ZoomBobNormal(m_pMiniFlagPalData, (int)(m_pGfxData + 6), v31, v32, v34 >> 16, v35 >> 16, 0, g_pBeginOfRenderBuffer, 0);
           }
           if ( *(_DWORD *)_pInfo->gap38 && *(_DWORD *)&_pInfo->gap38[4] )
           {
@@ -44961,16 +47055,13 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
             v32 = *(unsigned __int16 *)m_pGfxData;
             m_pGfxData += 2;
             if ( v31 > 512 || v32 > 512 )
-              BBSupportTracePrintF(
-                0,
-                "GFX ENGINE: DATA ERROR: Size of heraldic figure is too big! Object will be ignored!");
+            {
+              BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of heraldic figure is too big! Object will be ignored!");
+            }
             v34 -= (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor);
             m_pGfxData += 2;
             v35 -= (int)(float)((float)(*(unsigned __int16 *)m_pGfxData << 16) * g_fZoomFactor);
-            if ( v34 >> 16 <= GfxEngineSetup.m_uWidth
-              && v35 >> 16 <= GfxEngineSetup.m_uHeight
-              && *(_DWORD *)(g_pDestSizeTable + 4 * v31) + (v34 >> 16) >= g_uLeftGuiBorderWidth
-              && *(_DWORD *)(g_pDestSizeTable + 4 * v32) + (v35 >> 16) >= 0 )
+            if ( v34 >> 16 <= GfxEngineSetup.m_uWidth && v35 >> 16 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v31) + (v34 >> 16) >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v32) + (v35 >> 16) >= 0 )
             {
               v7 = *(_DWORD *)&_pInfo->gap38[4];
               sub_2F6FD80(&v7, a1);
@@ -44978,7 +47069,9 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
             }
           }
         }
-        for ( j = 0; j < 6; ++j )
+        for ( j = 0;
+              j < 6;
+              ++j )
         {
           if ( *(_DWORD *)&_pInfo->gap_60[16 * j + 8] && *(_DWORD *)&_pInfo->gap_60[16 * j + 12] )
           {
@@ -44989,20 +47082,13 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
             v15 = *(unsigned __int16 *)m_pGfxData;
             m_pGfxData += 2;
             if ( v13 > 512 || v15 > 512 )
-              BBSupportTracePrintF(
-                0,
-                "GFX ENGINE: DATA ERROR: Size of building-effect is too big! Object will be ignored!");
-            v16 = (a2
-                 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_60[16 * j + 16]) << 16)
-                              * g_fZoomFactor)) >> 16;
+            {
+              BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of building-effect is too big! Object will be ignored!");
+            }
+            v16 = (a2 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_60[16 * j + 16]) << 16) * g_fZoomFactor)) >> 16;
             m_pGfxData += 2;
-            v17 = (a3
-                 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_60[16 * j + 20]) << 16)
-                              * g_fZoomFactor)) >> 16;
-            if ( v16 <= GfxEngineSetup.m_uWidth
-              && v17 <= GfxEngineSetup.m_uHeight
-              && *(_DWORD *)(g_pDestSizeTable + 4 * v13) + v16 >= g_uLeftGuiBorderWidth
-              && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= 0 )
+            v17 = (a3 - (int)(float)((float)((*(unsigned __int16 *)m_pGfxData - *(_DWORD *)&_pInfo->gap_60[16 * j + 20]) << 16) * g_fZoomFactor)) >> 16;
+            if ( v16 <= GfxEngineSetup.m_uWidth && v17 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v13) + v16 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v15) + v17 >= 0 )
             {
               v8 = *(_DWORD *)&_pInfo->gap_60[16 * j + 12];
               sub_2F6FD80(&v8, a1);
@@ -45040,10 +47126,7 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
         v30 = g_pEndOfRenderBuffer;
         v14 = GfxEngineSetup.m_uHeight - 1;
       }
-      if ( v41 >> 16 <= GfxEngineSetup.m_uWidth
-        && v42 >> 16 <= GfxEngineSetup.m_uHeight
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth
-        && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
+      if ( v41 >> 16 <= GfxEngineSetup.m_uWidth && v42 >> 16 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + (v41 >> 16) >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + (v42 >> 16) >= 0 )
       {
         ZoomBobNormal((int)Src, (int)m_pGfxData, v39, v40, v41 >> 16, v42 >> 16, v14, v30, 0);
         ZoomBobBuildState((int)Src, (int)m_pGfxData, v39, v40, v41 >> 16, v42 >> 16, v29, v33, v30);
@@ -45051,18 +47134,19 @@ bool __cdecl BlitBuilding(int a1, int a2, int a3, struct SGfxObjectInfo * _pInfo
     }
   }
   if ( !_pInfo->m_uFlags || !g_pIconPalette )
+  {
     return 1;
+  }
   v37 = (unsigned __int16 *)g_pIconGfx[_pInfo->m_uFlags];
   v39 = *v37++;
   v40 = *v37++;
   if ( v39 > 512 || v40 > 512 )
+  {
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
+  }
   v41 = (a2 - (int)(float)((float)(*v37++ << 16) * g_fZoomFactor)) >> 16;
   v42 = (a3 - (int)(float)((float)(*v37 << 16) * g_fZoomFactor)) >> 16;
-  if ( v41 <= GfxEngineSetup.m_uWidth
-    && v42 <= GfxEngineSetup.m_uHeight
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + v41 >= g_uLeftGuiBorderWidth
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + v42 >= 0 )
+  if ( v41 <= GfxEngineSetup.m_uWidth && v42 <= GfxEngineSetup.m_uHeight && *(_DWORD *)(g_pDestSizeTable + 4 * v39) + v41 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v40) + v42 >= 0 )
   {
     ZoomBobNormal(g_pIconPalette, (int)(v37 + 3), v39, v40, v41, v42, 0, g_pBeginOfRenderBuffer, 0);
   }
@@ -45082,23 +47166,28 @@ bool __cdecl BlitBorderstone(int a1, int a2, int a3, int a4) {
   unsigned __int16 *v10; // [esp+18h] [ebp-4h]
 
   if ( !g_pBorderstonePalette )
+  {
     return 0;
+  }
   if ( a4 < 1 || a4 > 8 )
+  {
     BBSupportTracePrintF(0, "GFX ENGINE: Illegal value of owner id.");
+  }
   v10 = (unsigned __int16 *)g_pBorderstoneGfx[a4];
   if ( !v10 )
+  {
     return 1;
+  }
   v6 = *v10;
   v7 = v10[1];
   v10 += 2;
   if ( v6 > 512 || v7 > 512 )
+  {
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of borderstone object is too big! Object will be ignored!");
+  }
   v8 = (a2 - (int)(float)((float)*v10++ * *(float *)&g_fZoomFactor)) >> 16;
   v9 = (a3 - (int)(float)((float)*v10 * *(float *)&g_fZoomFactor)) >> 16;
-  if ( v8 > MEMORY[0x3E2E26C]
-    || v9 > MEMORY[0x3E2E270]
-    || *(_DWORD *)(g_pDestSizeTable + 4 * v6) + v8 < g_uLeftGuiBorderWidth
-    || *(_DWORD *)(g_pDestSizeTable + 4 * v7) + v9 < 0 )
+  if ( v8 > MEMORY[0x3E2E26C] || v9 > MEMORY[0x3E2E270] || *(_DWORD *)(g_pDestSizeTable + 4 * v6) + v8 < g_uLeftGuiBorderWidth || *(_DWORD *)(g_pDestSizeTable + 4 * v7) + v9 < 0 )
   {
     return 1;
   }
@@ -45122,22 +47211,25 @@ bool __cdecl BlitAccessoryIcon(int a1, int a2, int a3, int a4) {
   unsigned __int16 *v11; // [esp+10h] [ebp-4h]
 
   if ( !g_pIconPalette )
+  {
     return 0;
+  }
   v9 = (unsigned __int16 *)g_pIconGfx[a4];
   if ( !v9 )
+  {
     return 1;
+  }
   v5 = *v9;
   v6 = v9[1];
   v10 = v9 + 2;
   if ( v5 > 512 || v6 > 512 )
+  {
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
+  }
   v7 = (a2 - (int)(float)((float)(*v10 << 16) * *(float *)&g_fZoomFactor)) >> 16;
   v11 = v10 + 1;
   v8 = (a3 - (int)(float)((float)(*v11 << 16) * *(float *)&g_fZoomFactor)) >> 16;
-  if ( v7 <= MEMORY[0x3E2E26C]
-    && v8 <= MEMORY[0x3E2E270]
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v5) + v7 >= g_uLeftGuiBorderWidth
-    && *(_DWORD *)(g_pDestSizeTable + 4 * v6) + v8 >= 0 )
+  if ( v7 <= MEMORY[0x3E2E26C] && v8 <= MEMORY[0x3E2E270] && *(_DWORD *)(g_pDestSizeTable + 4 * v5) + v7 >= g_uLeftGuiBorderWidth && *(_DWORD *)(g_pDestSizeTable + 4 * v6) + v8 >= 0 )
   {
     ZoomBobNormal((void *)g_pIconPalette, v11 + 3, v5, v6, v7, v8, 0, (void *)g_pBeginOfRenderBuffer, 0);
   }
@@ -45157,21 +47249,24 @@ bool __cdecl BlitWave(int a1, int a2, int a3, int a4, int a5) {
   unsigned __int16 *v11; // [esp+18h] [ebp-4h]
 
   if ( !g_pWavePalettes[a4] )
+  {
     return 0;
+  }
   v11 = (unsigned __int16 *)g_pWaveGfx[20 * a4 + a5];
   if ( !v11 )
+  {
     return 1;
+  }
   v7 = *v11;
   v8 = v11[1];
   v11 += 2;
   if ( v7 > 512 || v8 > 512 )
+  {
     BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of wave object is too big! Object will be ignored!");
+  }
   v9 = (a2 - (int)(float)((float)*v11++ * *(float *)&g_fZoomFactor)) >> 16;
   v10 = (a3 - (int)(float)((float)*v11 * *(float *)&g_fZoomFactor)) >> 16;
-  if ( v9 > MEMORY[0x3E2E26C]
-    || v10 > MEMORY[0x3E2E270]
-    || *(_DWORD *)(g_pDestSizeTable + 4 * v7) + v9 < g_uLeftGuiBorderWidth
-    || *(_DWORD *)(g_pDestSizeTable + 4 * v8) + v10 < 0 )
+  if ( v9 > MEMORY[0x3E2E26C] || v10 > MEMORY[0x3E2E270] || *(_DWORD *)(g_pDestSizeTable + 4 * v7) + v9 < g_uLeftGuiBorderWidth || *(_DWORD *)(g_pDestSizeTable + 4 * v8) + v10 < 0 )
   {
     return 1;
   }
@@ -45308,7 +47403,9 @@ bool __cdecl RenderObjectLayer(bool a1) {
   g_iSettlerMagicCounter = 0;
   v106 = 0;
   if ( !g_pfGetGfxObjectInfo || !g_pMapObjects || !g_pDecoObjects || !g_pfGetOwnerID )
+  {
     return 1;
+  }
   v96 = Size;
   v69 = g_pGfxLayer;
   if ( !g_pGfxLayer )
@@ -45322,7 +47419,9 @@ bool __cdecl RenderObjectLayer(bool a1) {
   v54 = (dword_3E2E290 + (GfxEngineSetup.m_uHeight << 16)) / dword_3E2E290;
   v92 = v54 + dword_3E2E2AC + 2;
   if ( v92 < g_iMapSize && v92 > 0 )
+  {
     v92 += (unsigned __int8)g_uMaxYTable[v92] / 8;
+  }
   v92 += 11;
   v109 = -8 * v102 - (dword_3E2E2B4 << 16);
   v53 = -v107 / 2;
@@ -45362,13 +47461,7 @@ bool __cdecl RenderObjectLayer(bool a1) {
     v50 = dword_3E2E2A8 + (dword_3E2E2AC - 7) / 2 - 30;
     v52 = v92;
     v51 = v50 + (v92 - (dword_3E2E2AC - 7)) / 2;
-    (**(void (__thiscall ***)(struct IGfxEffects *, int, int, int, int, int))s_pEffectSystem)(
-      s_pEffectSystem,
-      v50,
-      dword_3E2E2AC - 7,
-      v51,
-      v92,
-      v63 + dword_3E2E2A8 + v51 + (dword_3E2E2AC - 7) / 2 + 9);
+    (**(void (__thiscall ***)(struct IGfxEffects *, int, int, int, int, int))s_pEffectSystem)(s_pEffectSystem, v50, dword_3E2E2AC - 7, v51, v92, v63 + dword_3E2E2A8 + v51 + (dword_3E2E2AC - 7) / 2 + 9);
   }
   j = dword_3E2E2AC - 7;
   while ( j < v92 )
@@ -45385,7 +47478,9 @@ bool __cdecl RenderObjectLayer(bool a1) {
     }
     g_iUsedFogFadeStep = g_iFogFadeStep;
     if ( j < g_iFadeYBorder )
+    {
       g_iUsedFogFadeStep = 0;
+    }
     v35 = v63 + dword_3E2E2A8 + j / 2 + 1;
     v85 = dword_3E2E2A8 + v96 * j + j / 2 - 30;
     v41 = dword_3E2E2A8 + j / 2 - 30;
@@ -45425,7 +47520,9 @@ bool __cdecl RenderObjectLayer(bool a1) {
                   if ( GfxObjectInfo->m_uObjType == 8 )
                   {
                     if ( v84 > 59 )
+                    {
                       g_pfBlitBuilding(v84, v110, v109 - v101, GfxObjectInfo, (char *)&v114[0x300] + 24 * v97, &v97);
+                    }
                     memset(GfxObjectInfo, 0, sizeof(struct SGfxObjectInfo));
                   }
                   else if ( GfxObjectInfo->m_uObjType != 16 || v84 > 59 )
@@ -45497,13 +47594,13 @@ bool __cdecl RenderObjectLayer(bool a1) {
                           break;
                       }
                       if ( m_iDistance )
-                        g_pfBlitSettler(
-                          v91,
-                          v110 - ((m_iDistance * (v110 - v103)) >> 8),
-                          v109 - v101 - ((m_iDistance * (v109 - v101 - v104)) >> 8),
-                          GfxObjectInfo);
+                      {
+                        g_pfBlitSettler(v91, v110 - ((m_iDistance * (v110 - v103)) >> 8), v109 - v101 - ((m_iDistance * (v109 - v101 - v104)) >> 8), GfxObjectInfo);
+                      }
                       else
+                      {
                         g_pfBlitSettler(v91, v87, v88 - v101, GfxObjectInfo);
+                      }
                       break;
                     case 1:
                     case 3:
@@ -45548,9 +47645,7 @@ bool __cdecl RenderObjectLayer(bool a1) {
                         {
                           *((_DWORD *)&v114[768] + 6 * v97) = v77;
                           *((_DWORD *)&v114[768] + 6 * v97 + 1) = v110 - ((m_iDistance * (v110 - v103)) >> 8);
-                          *((_DWORD *)&v114[768] + 6 * v97 + 2) = v109
-                                                                - v101
-                                                                - ((m_iDistance * (v109 - v101 - v104)) >> 8);
+                          *((_DWORD *)&v114[768] + 6 * v97 + 2) = v109 - v101 - ((m_iDistance * (v109 - v101 - v104)) >> 8);
                           *((_DWORD *)&v114[769] + 6 * v97++ + 1) = v91;
                         }
                       }
@@ -45615,12 +47710,10 @@ bool __cdecl RenderObjectLayer(bool a1) {
                           break;
                       }
                       if ( !m_iDistance )
+                      {
                         goto RenderObjectLayer___def_336D47A;
-                      g_pfBlitObject(
-                        v91,
-                        v110 - ((m_iDistance * (v110 - v103)) >> 8),
-                        v109 - v101 - ((m_iDistance * (v109 - v101 - v104)) >> 8),
-                        GfxObjectInfo);
+                      }
+                      g_pfBlitObject(v91, v110 - ((m_iDistance * (v110 - v103)) >> 8), v109 - v101 - ((m_iDistance * (v109 - v101 - v104)) >> 8), GfxObjectInfo);
                       break;
                     default:
 RenderObjectLayer___def_336D47A:
@@ -45646,16 +47739,11 @@ RenderObjectLayer___def_336D47A:
       if ( s_pEffectSystem )
       {
         v46 = &g_pGfxLayer[Size * j];
-        for ( i = (*(int (__thiscall **)(struct IGfxEffects *, int))(*(_DWORD *)s_pEffectSystem + 4))(
-                    s_pEffectSystem,
-                    j);
+        for ( i = (*(int (__thiscall **)(struct IGfxEffects *, int))(*(_DWORD *)s_pEffectSystem + 4))(s_pEffectSystem, j);
               i;
               i = (*(int (__thiscall **)(struct IGfxEffects *))(*(_DWORD *)s_pEffectSystem + 8))(s_pEffectSystem) )
         {
-          v82 = (int)(float)((float)(*(float *)(i + 696) - 24.0) * g_fZoomFactor)
-              + g_uLeftGuiBorderWidth
-              - (v34 >> 16)
-              - v60;
+          v82 = (int)(float)((float)(*(float *)(i + 696) - 24.0) * g_fZoomFactor) + g_uLeftGuiBorderWidth - (v34 >> 16) - v60;
           v83 = (int)(float)((float)(*(float *)(i + 700) - 12.0) * g_fZoomFactor) - v47 - dword_3E2E2B4;
           v82 -= dword_3E2E2B0;
           v74 = CalcCurrentFog(&v46[*(_DWORD *)(i + 704)]);
@@ -45684,15 +47772,14 @@ RenderObjectLayer___def_336D47A:
     v109 += v102;
   }
   v60 = (int)(float)((float)(dword_3E2E2A8 + j / 2) * v61);
-  if ( g_sGfxObjectCursorBuilding >= 0
-    && byte_3E2E664
-    && !CFixCursor::IsVisible((CFixCursor *)&D3DObjectPtr[1].m_sClipper1.m_vChar.uC)
-    && !CFixCursor::IsVisible((CFixCursor *)&D3DObjectPtr[1].m_sViewport.dwY) )
+  if ( g_sGfxObjectCursorBuilding >= 0 && byte_3E2E664 && !CFixCursor::IsVisible((CFixCursor *)&D3DObjectPtr[1].m_sClipper1.m_vChar.uC) && !CFixCursor::IsVisible((CFixCursor *)&D3DObjectPtr[1].m_sViewport.dwY) )
   {
     IGfxEngine::GetScreenOffsetsByMapIndices(dword_3E2E38C, dword_3E2E390, &v44, &v45);
     g_pfBlitBuilding(255, v44 << 16, v45 << 16, &unk_3E2E394, (char *)&v114[768] + 24 * v97, &v97);
   }
-  for ( j = 0; j < v97; ++j )
+  for ( j = 0;
+        j < v97;
+        ++j )
   {
     if ( *((_DWORD *)&v114[768] + 6 * j) == -1 )
     {
@@ -45704,30 +47791,12 @@ RenderObjectLayer___def_336D47A:
         *(float *)&v29 = (float)*((int *)&v114[768] + 6 * j + 1);
         HIDWORD(v25) = **((unsigned __int16 **)&v114[768] + 6 * j + 3);
         LODWORD(v25) = *((_DWORD *)&v114[768] + 6 * j + 3) + 12;
-        RenderGfx(
-          (int)&dword_8F0000[157088] + j,
-          v66,
-          v25,
-          *(unsigned __int16 *)(*((_DWORD *)&v114[768] + 6 * j + 3) + 2),
-          v29,
-          65793 * v67,
-          0,
-          0,
-          0);
+        RenderGfx((int)&dword_8F0000[157088] + j, v66, v25, *(unsigned __int16 *)(*((_DWORD *)&v114[768] + 6 * j + 3) + 2), v29, 65793 * v67, 0, 0, 0);
       }
       else
       {
         sub_2F6FD80((int *)&v66, *((_DWORD *)&v114[769] + 6 * j + 1));
-        ZoomBobNormal(
-          (int)v66,
-          *((_DWORD *)&v114[768] + 6 * j + 3) + 12,
-          **((unsigned __int16 **)&v114[768] + 6 * j + 3),
-          *(unsigned __int16 *)(*((_DWORD *)&v114[768] + 6 * j + 3) + 2),
-          *((int *)&v114[768] + 6 * j + 1) >> 16,
-          *((int *)&v114[768] + 6 * j + 2) >> 16,
-          0,
-          g_pBeginOfRenderBuffer,
-          0);
+        ZoomBobNormal((int)v66, *((_DWORD *)&v114[768] + 6 * j + 3) + 12, **((unsigned __int16 **)&v114[768] + 6 * j + 3), *(unsigned __int16 *)(*((_DWORD *)&v114[768] + 6 * j + 3) + 2), *((int *)&v114[768] + 6 * j + 1) >> 16, *((int *)&v114[768] + 6 * j + 2) >> 16, 0, g_pBeginOfRenderBuffer, 0);
       }
     }
     else if ( *((_DWORD *)&v114[768] + 6 * j) == -2 )
@@ -45752,44 +47821,31 @@ RenderObjectLayer___def_336D47A:
       else
       {
         sub_2F6FD80((int *)&v64, (unsigned __int8)*((_DWORD *)&v114[769] + 6 * j + 1));
-        ZoomBobNormal(
-          (int)v64,
-          *((_DWORD *)&v114[768] + 6 * j + 3) + 8,
-          v57,
-          v58,
-          *((_DWORD *)&v114[768] + 6 * j + 1),
-          *((_DWORD *)&v114[768] + 6 * j + 2),
-          0,
-          g_pBeginOfRenderBuffer,
-          0);
+        ZoomBobNormal((int)v64, *((_DWORD *)&v114[768] + 6 * j + 3) + 8, v57, v58, *((_DWORD *)&v114[768] + 6 * j + 1), *((_DWORD *)&v114[768] + 6 * j + 2), 0, g_pBeginOfRenderBuffer, 0);
       }
     }
     else
     {
       GfxObjectInfo = g_pfGetGfxObjectInfo(*((_DWORD *)&v114[768] + 6 * j), -1);
-      g_pfBlitVehicle(
-        *((_DWORD *)&v114[769] + 6 * j + 1),
-        *((_DWORD *)&v114[768] + 6 * j + 1),
-        *((_DWORD *)&v114[768] + 6 * j + 2),
-        GfxObjectInfo);
+      g_pfBlitVehicle(*((_DWORD *)&v114[769] + 6 * j + 1), *((_DWORD *)&v114[768] + 6 * j + 1), *((_DWORD *)&v114[768] + 6 * j + 2), GfxObjectInfo);
     }
   }
-  for ( j = 0; j < v89; ++j )
+  for ( j = 0;
+        j < v89;
+        ++j )
   {
     v112[0] = v114[j + 256];
     v112[1] = DWORD2(v114[j + 256]);
     v113 = 0;
-    g_pfBlitObject(
-      HIDWORD(v114[j + 256]),
-      (unsigned __int16)DWORD1(v114[j + 256]) << 16,
-      DWORD1(v114[j + 256]) & 0xFFFF0000,
-      v112);
+    g_pfBlitObject(HIDWORD(v114[j + 256]), (unsigned __int16)DWORD1(v114[j + 256]) << 16, DWORD1(v114[j + 256]) & 0xFFFF0000, v112);
   }
   if ( g_iSettlerSelectionCounter )
   {
     if ( g_bHardwareObjectEnabled )
     {
-      for ( j = 0; j < g_iSettlerSelectionCounter; ++j )
+      for ( j = 0;
+            j < g_iSettlerSelectionCounter;
+            ++j )
       {
         v86 = (unsigned __int16 *)g_pIconGfx[g_iSettlerSelections[3 * j + 2]];
         LODWORD(v43) = *v86++;
@@ -45803,20 +47859,13 @@ RenderObjectLayer___def_336D47A:
     }
     else
     {
-      for ( j = 0; j < g_iSettlerSelectionCounter; ++j )
+      for ( j = 0;
+            j < g_iSettlerSelectionCounter;
+            ++j )
       {
         v81 = (unsigned __int16 *)g_pIconGfx[g_iSettlerSelections[3 * j + 2]];
         v42 = *v81++;
-        ZoomBobNormal(
-          g_pIconPalette,
-          (int)(v81 + 5),
-          v42,
-          *v81,
-          g_iSettlerSelections[3 * j],
-          g_iSettlerSelections[3 * j + 1],
-          0,
-          g_pBeginOfRenderBuffer,
-          0);
+        ZoomBobNormal(g_pIconPalette, (int)(v81 + 5), v42, *v81, g_iSettlerSelections[3 * j], g_iSettlerSelections[3 * j + 1], 0, g_pBeginOfRenderBuffer, 0);
       }
     }
   }
@@ -45824,7 +47873,9 @@ RenderObjectLayer___def_336D47A:
   {
     if ( g_bHardwareObjectEnabled )
     {
-      for ( j = 0; j < g_iSettlerMagicCounter; ++j )
+      for ( j = 0;
+            j < g_iSettlerMagicCounter;
+            ++j )
       {
         v56 = g_iSettlerMagic[5 * j + 4];
         *((float *)&v32 + 1) = (float)g_iSettlerMagic[5 * j + 1];
@@ -45833,38 +47884,26 @@ RenderObjectLayer___def_336D47A:
         LODWORD(v27) = g_iSettlerMagic[5 * j + 2];
         HIDWORD(v23) = v56 + 6;
         LODWORD(v23) = g_pIconPalette;
-        CacheRenderingStandard(
-          v23,
-          *(unsigned __int16 *)(v56 + 4),
-          64,
-          v27,
-          v32,
-          0,
-          (int)&dword_F29144[220078] + 3,
-          0,
-          0);
+        CacheRenderingStandard(v23, *(unsigned __int16 *)(v56 + 4), 64, v27, v32, 0, (int)&dword_F29144[220078] + 3, 0, 0);
       }
     }
     else
     {
-      for ( j = 0; j < g_iSettlerMagicCounter; ++j )
-        ZoomBobNormal(
-          g_pIconPalette,
-          g_iSettlerMagic[5 * j + 4] + 6,
-          g_iSettlerMagic[5 * j + 2],
-          g_iSettlerMagic[5 * j + 3],
-          g_iSettlerMagic[5 * j],
-          g_iSettlerMagic[5 * j + 1],
-          0,
-          g_pBeginOfRenderBuffer,
-          0);
+      for ( j = 0;
+            j < g_iSettlerMagicCounter;
+            ++j )
+      {
+        ZoomBobNormal(g_pIconPalette, g_iSettlerMagic[5 * j + 4] + 6, g_iSettlerMagic[5 * j + 2], g_iSettlerMagic[5 * j + 3], g_iSettlerMagic[5 * j], g_iSettlerMagic[5 * j + 1], 0, g_pBeginOfRenderBuffer, 0);
+      }
     }
   }
   if ( g_iSettlerFitnessCounter )
   {
     if ( g_bHardwareObjectEnabled )
     {
-      for ( j = 0; j < g_iSettlerFitnessCounter; ++j )
+      for ( j = 0;
+            j < g_iSettlerFitnessCounter;
+            ++j )
       {
         v55 = g_iSettlerFitness[5 * j + 4];
         *((float *)&v33 + 1) = (float)g_iSettlerFitness[5 * j + 1];
@@ -45873,31 +47912,17 @@ RenderObjectLayer___def_336D47A:
         LODWORD(v28) = g_iSettlerFitness[5 * j + 2];
         HIDWORD(v24) = v55 + 6;
         LODWORD(v24) = g_pIconPalette;
-        CacheRenderingStandard(
-          v24,
-          *(unsigned __int16 *)(v55 + 4),
-          64,
-          v28,
-          v33,
-          0,
-          (int)&dword_F29144[220078] + 3,
-          0,
-          0);
+        CacheRenderingStandard(v24, *(unsigned __int16 *)(v55 + 4), 64, v28, v33, 0, (int)&dword_F29144[220078] + 3, 0, 0);
       }
     }
     else
     {
-      for ( j = 0; j < g_iSettlerFitnessCounter; ++j )
-        ZoomBobNormal(
-          g_pIconPalette,
-          g_iSettlerFitness[5 * j + 4] + 6,
-          g_iSettlerFitness[5 * j + 2],
-          g_iSettlerFitness[5 * j + 3],
-          g_iSettlerFitness[5 * j],
-          g_iSettlerFitness[5 * j + 1],
-          0,
-          g_pBeginOfRenderBuffer,
-          0);
+      for ( j = 0;
+            j < g_iSettlerFitnessCounter;
+            ++j )
+      {
+        ZoomBobNormal(g_pIconPalette, g_iSettlerFitness[5 * j + 4] + 6, g_iSettlerFitness[5 * j + 2], g_iSettlerFitness[5 * j + 3], g_iSettlerFitness[5 * j], g_iSettlerFitness[5 * j + 1], 0, g_pBeginOfRenderBuffer, 0);
+      }
     }
   }
   if ( g_bIconLayerEnabled && g_pfSetNumberOfNextLine && g_pfGetIconObjectByX )
@@ -45929,7 +47954,9 @@ RenderObjectLayer___def_336D47A:
           {
             IconObjectByX = g_pfGetIconObjectByX(v100 + v80);
             if ( IconObjectByX == 255 )
+            {
               break;
+            }
             if ( IconObjectByX )
             {
               v105 = &v69[v100 + v70];
@@ -45947,7 +47974,9 @@ RenderObjectLayer___def_336D47A:
     }
   }
   if ( D3DObjectPtr->m_bInitHardware && g_bHardwareObjectEnabled )
+  {
     FlushCacheList();
+  }
   if ( g_pRequestedRectangle && !a1 )
   {
     if ( D3DObjectPtr->m_bInitHardware && g_bHardwareObjectEnabled )
@@ -45977,19 +48006,29 @@ RenderObjectLayer___def_336D47A:
       dword_468DCF8 = v36;
     }
     if ( dword_468DCEC < 0 )
+    {
       dword_468DCEC = 0;
+    }
     if ( dword_468DCF0 < 0 )
+    {
       dword_468DCF0 = 0;
+    }
     if ( dword_468DCF8 >= GfxEngineSetup.m_uHeight )
+    {
       dword_468DCF8 = GfxEngineSetup.m_uHeight - 1;
+    }
     if ( dword_468DCF4 >= GfxEngineSetup.m_uWidth )
+    {
       dword_468DCF4 = GfxEngineSetup.m_uWidth - 1;
+    }
     v15 = g_uRequestedRectangleColor;
     v16 = (__int16 *)(dword_468DCEC + dword_468DCEC + g_iRenderPitch * dword_468DCF0 + g_pBeginOfRenderBuffer);
     v17 = v16;
     v18 = (__int16 *)((char *)v16 + dword_468DCF4 - dword_468DCEC + dword_468DCF4 - dword_468DCEC);
     do
+    {
       *v16++ = v15;
+    }
     while ( (int)v16 <= (int)v18 );
     v19 = v17;
     v20 = dword_468DCF8 - dword_468DCF0;
@@ -46004,7 +48043,9 @@ RenderObjectLayer___def_336D47A:
       }
       while ( v20-- > 1 );
       do
+      {
         *++v19 = v15;
+      }
       while ( (int)v19 < (int)v18 );
     }
     if ( D3DObjectPtr->m_bInitHardware )
@@ -46054,11 +48095,7 @@ int __cdecl CalcCurrentFog(struct T_GFX_MAP_ELEMENT * a1) {
 
   NewFogging = T_GFX_MAP_ELEMENT::GetNewFogging(a1);
   OldFogging = T_GFX_MAP_ELEMENT::GetOldFogging(a1);
-  return CHeightAndTypeTable::GetObjectFog(
-           (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-           g_iUsedFogFadeStep,
-           OldFogging,
-           NewFogging);
+  return CHeightAndTypeTable::GetObjectFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, OldFogging, NewFogging);
 }
 
 
@@ -46144,10 +48181,7 @@ void __cdecl ZoomBobBuildState(void * a1, void * a2, int a3, int a4, int a5, int
   if ( a5 < 0 || (v9 = operator|| + operator||, operator|| + operator|| >= MEMORY[0x3E2E26C]) )
   {
     v62 = __PAIR64__(v9, g_pZoomGradient);
-    if ( operator|| >= MEMORY[0x3E2E270]
-      || operator|| + operator|| < 0 != __OFADD__(operator||, operator||)
-      || operator|| >= MEMORY[0x3E2E26C]
-      || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) )
+    if ( operator|| >= MEMORY[0x3E2E270] || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) || operator|| >= MEMORY[0x3E2E26C] || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) )
     {
       return v62;
     }
@@ -46173,24 +48207,34 @@ LABEL_62:
         v23 = (operator|| + v43 < 0) ^ __OFADD__(operator||, v43);
         v43 += operator||;
         if ( !v23 )
+        {
           break;
+        }
         operator|| = v43;
         if ( v40 <= 0 )
+        {
           v40 += operator||;
+        }
         do
         {
           while ( 1 )
           {
             v41 = *v37++;
             if ( v41 <= 1u )
+            {
               break;
+            }
             v23 = v40-- <= 1;
             if ( v23 )
+            {
               goto LABEL_60;
+            }
           }
           LOBYTE(v39) = *v37++;
           if ( !(_BYTE)v39 )
+          {
             return v62;
+          }
           v23 = v40 <= v39;
           v40 -= v39;
         }
@@ -46202,11 +48246,15 @@ LABEL_60:
       v45 = g_iRenderPitch + operator||;
       operator|| = v45;
       if ( v45 < operator|| )
+      {
         v45 = operator||;
+      }
       operator|| = v45;
       v46 = g_iScanlineLength + v45;
       if ( v46 >= operator|| )
+      {
         v46 = operator||;
+      }
       operator|| = v46;
       ++operator||;
       v39 = 0;
@@ -46239,28 +48287,38 @@ LABEL_60:
       if ( v50 >= g_iScanlineLength + operator|| )
       {
         if ( v50 < operator|| )
+        {
           goto LABEL_73;
+        }
         return v62;
       }
       v39 = 0;
       if ( operator|| > operator|| )
+      {
         break;
+      }
       while ( 1 )
       {
         v23 = v40-- < 1;
         if ( v23 )
+        {
           break;
+        }
         v55 = *v37++;
         if ( v55 <= 1u )
         {
           v54 = v40 + 1;
           LOBYTE(v39) = *v37++;
           if ( !(_BYTE)v39 )
+          {
             return v62;
+          }
           v23 = v54 < v39;
           v40 = v54 - v39;
           if ( v23 )
+          {
             goto LABEL_62;
+          }
         }
       }
     }
@@ -46271,17 +48329,23 @@ LABEL_60:
 LABEL_73:
         v23 = v40-- < 1;
         if ( v23 )
+        {
           goto LABEL_61;
+        }
         LOBYTE(v39) = *v37++;
         if ( (_BYTE)v39 )
+        {
           break;
+        }
         v51 = v40 + 1;
         LOBYTE(v39) = *v37++;
 LABEL_104:
         v23 = v51 < v39;
         v40 = v51 - v39;
         if ( v23 )
+        {
           goto LABEL_62;
+        }
         v56 = operator|| * v39;
         v57 = (unsigned int)(v56 + v42 + 0x10000) >> 16;
         LOWORD(v42) = v56 + v42;
@@ -46293,45 +48357,67 @@ LABEL_104:
         v58 = v40 + 1;
         LOBYTE(v39) = *v37++;
         if ( !(_BYTE)v39 )
+        {
           return v62;
+        }
         v40 = v58 - v39++;
         v59 = v50 & 2;
         if ( (v50 & 2) == 0 )
+        {
           --v59;
+        }
         if ( (operator|| & 1) != 0 )
+        {
           v59 = -v59;
+        }
         while ( --v39 )
         {
           v60 = (operator|| + v42 < 0) ^ __OFADD__(operator||, v42);
-          for ( v42 += operator||; !v60; v60 = (v42 < 0) ^ v25 )
+          for ( v42 += operator||;
+                !v60;
+                v60 = (v42 < 0) ^ v25 )
           {
             v59 = -v59;
             if ( v59 >= 1 && v50 >= operator|| && v50 < operator|| )
+            {
               *(_WORD *)v50 = 0;
+            }
             v50 += 2;
             v23 = v42 < 0x10000;
             v42 -= 0x10000;
             if ( v23 )
+            {
               break;
+            }
             v59 = -v59;
             if ( v59 >= 1 && v50 >= operator|| && v50 < operator|| )
+            {
               *(_WORD *)v50 = 0;
+            }
             v50 += 2;
             v23 = v42 < 0x10000;
             v42 -= 0x10000;
             if ( v23 )
+            {
               break;
+            }
             v59 = -v59;
             if ( v59 >= 1 && v50 >= operator|| && v50 < operator|| )
+            {
               *(_WORD *)v50 = 0;
+            }
             v50 += 2;
             v23 = v42 < 0x10000;
             v42 -= 0x10000;
             if ( v23 )
+            {
               break;
+            }
             v59 = -v59;
             if ( v59 >= 1 && v50 >= operator|| && v50 < operator|| )
+            {
               *(_WORD *)v50 = 0;
+            }
             v50 += 2;
             v25 = __OFSUB__(v42, 0x10000);
             v42 -= 0x10000;
@@ -46347,32 +48433,48 @@ LABEL_104:
           goto LABEL_104;
         }
         v52 = (operator|| + v42 < 0) ^ __OFADD__(operator||, v42);
-        for ( v42 += operator||; !v52; v52 = (v42 < 0) ^ v25 )
+        for ( v42 += operator||;
+              !v52;
+              v52 = (v42 < 0) ^ v25 )
         {
           v53 = *(_WORD *)(v38 + 2 * v39);
           if ( v50 >= operator|| && v50 < operator|| )
+          {
             *(_WORD *)v50 = v53;
+          }
           v50 += 2;
           v23 = v42 < 0x10000;
           v42 -= 0x10000;
           if ( v23 )
+          {
             break;
+          }
           if ( v50 >= operator|| && v50 < operator|| )
+          {
             *(_WORD *)v50 = v53;
+          }
           v50 += 2;
           v23 = v42 < 0x10000;
           v42 -= 0x10000;
           if ( v23 )
+          {
             break;
+          }
           if ( v50 >= operator|| && v50 < operator|| )
+          {
             *(_WORD *)v50 = v53;
+          }
           v50 += 2;
           v23 = v42 < 0x10000;
           v42 -= 0x10000;
           if ( v23 )
+          {
             break;
+          }
           if ( v50 >= operator|| && v50 < operator|| )
+          {
             *(_WORD *)v50 = v53;
+          }
           v50 += 2;
           v25 = __OFSUB__(v42, 0x10000);
           v42 -= 0x10000;
@@ -46383,7 +48485,9 @@ LABEL_104:
   HIDWORD(v61) = operator|| + operator||;
   LODWORD(v61) = g_pZoomGradient;
   if ( operator|| >= MEMORY[0x3E2E270] || operator|| + operator|| < 0 != __OFADD__(operator||, operator||) )
+  {
     return v61;
+  }
   v10 = (unsigned __int8 *)operator||;
   v11 = operator||;
   operator|| = operator|| + operator|| + g_iRenderPitch * (operator|| - 1) + g_pRenderAdress;
@@ -46405,24 +48509,34 @@ LABEL_14:
       v23 = (operator|| + v16 < 0) ^ __OFADD__(operator||, v16);
       v16 += operator||;
       if ( !v23 )
+      {
         break;
+      }
       operator|| = v16;
       if ( v13 <= 0 )
+      {
         v13 += operator||;
+      }
       do
       {
         while ( 1 )
         {
           v14 = *v10++;
           if ( v14 <= 1u )
+          {
             break;
+          }
           v23 = v13-- <= 1;
           if ( v23 )
+          {
             goto LABEL_12;
+          }
         }
         LOBYTE(v12) = *v10++;
         if ( !(_BYTE)v12 )
+        {
           return v61;
+        }
         v23 = v13 <= v12;
         v13 -= v12;
       }
@@ -46459,23 +48573,31 @@ LABEL_12:
     }
     v21 = v17 + 2 * v19;
     if ( v21 >= operator|| )
+    {
       break;
+    }
     while ( 1 )
     {
       v23 = v13-- < 1;
       if ( v23 )
+      {
         break;
+      }
       v27 = *v10++;
       if ( v27 <= 1u )
       {
         v26 = v13 + 1;
         LOBYTE(v12) = *v10++;
         if ( !(_BYTE)v12 )
+        {
           return v61;
+        }
         v23 = v26 < v12;
         v13 = v26 - v12;
         if ( v23 )
+        {
           goto LABEL_14;
+        }
       }
     }
   }
@@ -46487,17 +48609,23 @@ LABEL_12:
       {
         v23 = v13-- < 1;
         if ( v23 )
+        {
           goto LABEL_13;
+        }
         LOBYTE(v12) = *v10++;
         if ( (_BYTE)v12 )
+        {
           break;
+        }
         v22 = v13 + 1;
         LOBYTE(v12) = *v10++;
 LABEL_38:
         v23 = v22 < v12;
         v13 = v22 - v12;
         if ( v23 )
+        {
           goto LABEL_14;
+        }
         v28 = operator|| * v12;
         v29 = (unsigned int)(v28 + v15 + 0x10000) >> 16;
         LOWORD(v15) = v28 + v15;
@@ -46509,7 +48637,9 @@ LABEL_38:
         v30 = v13 + 1;
         LOBYTE(v12) = *v10++;
         if ( !(_BYTE)v12 )
+        {
           return v61;
+        }
         v13 = v30 - v12;
         v31 = operator|| * v12;
         v32 = v31 + v15 + 0x10000;
@@ -46535,7 +48665,9 @@ LABEL_38:
           v23 = v33 < 1;
           v35 = v33 - 1;
           if ( v23 )
+          {
             break;
+          }
           *(_WORD *)v21 = 0;
           v33 = v35 - 1;
           v21 += 4;
@@ -46553,7 +48685,9 @@ LABEL_38:
           goto LABEL_38;
         }
         v23 = (operator|| + v15 < 0) ^ __OFADD__(operator||, v15);
-        for ( v15 += operator||; !v23; v23 = (v15 < 0) ^ v25 )
+        for ( v15 += operator||;
+              !v23;
+              v23 = (v15 < 0) ^ v25 )
         {
           v24 = *(_WORD *)(v11 + 2 * v12);
           *(_WORD *)v21 = v24;
@@ -46561,19 +48695,25 @@ LABEL_38:
           v23 = v15 < 0x10000;
           v15 -= 0x10000;
           if ( v23 )
+          {
             break;
+          }
           *(_WORD *)v21 = v24;
           v21 += 2;
           v23 = v15 < 0x10000;
           v15 -= 0x10000;
           if ( v23 )
+          {
             break;
+          }
           *(_WORD *)v21 = v24;
           v21 += 2;
           v23 = v15 < 0x10000;
           v15 -= 0x10000;
           if ( v23 )
+          {
             break;
+          }
           *(_WORD *)v21 = v24;
           v21 += 2;
           v25 = __OFSUB__(v15, 0x10000);
@@ -46587,7 +48727,7 @@ LABEL_38:
 
 
 // address=[0x2f72630]
-// Decompiled from unsigned __int64 __cdecl ZoomBobNormal(  int _pPaletteAdress,  int _pSourceAdress,  int _iSourceWidth,  int _iSourceHeight,  int _iDestX,  int _iDestY,  int _iUpperClippingLine,  int _pUpperClippingBorder,  char a9)
+// Decompiled from unsigned __int64 __cdecl ZoomBobNormal(int _pPaletteAdress, int _pSourceAdress, int _iSourceWidth, int _iSourceHeight, int _iDestX, int _iDestY, int _iUpperClippingLine, int _pUpperClippingBorder, char a9)
 void __cdecl ZoomBobNormal(void * _pPaletteAdress, void * _pSourceAdress, int _iSourceWidth, int _iSourceHeight, int _iDestX, int _iDestY, int _iUpperClippingLine, void * _pUpperClippingBorder, int a9) {
   
   int v9; // edx
@@ -46657,28 +48797,17 @@ void __cdecl ZoomBobNormal(void * _pPaletteAdress, void * _pSourceAdress, int _i
   v9 = g_pEndOfRenderBuffer;
   ZoomBobNormal_::_2_::s_pLowerClippingBorder = g_pEndOfRenderBuffer;
   ZoomBobNormal_::_2_::s_iZoom = *g_pZoomGradient;
-  if ( _iDestX < 0
-    || (v9 = ZoomBobNormal_::_2_::s_iDestWidth + ZoomBobNormal_::_2_::s_iDestX,
-        ZoomBobNormal_::_2_::s_iDestWidth + ZoomBobNormal_::_2_::s_iDestX >= GfxEngineSetup.m_uWidth) )
+  if ( _iDestX < 0 || (v9 = ZoomBobNormal_::_2_::s_iDestWidth + ZoomBobNormal_::_2_::s_iDestX, ZoomBobNormal_::_2_::s_iDestWidth + ZoomBobNormal_::_2_::s_iDestX >= GfxEngineSetup.m_uWidth) )
   {
     v62 = __PAIR64__(v9, (unsigned int)g_pZoomGradient);
-    if ( ZoomBobNormal_::_2_::s_iDestY >= GfxEngineSetup.m_uHeight
-      || ZoomBobNormal_::_2_::s_iDestHeight + ZoomBobNormal_::_2_::s_iDestY < 0 != __OFADD__(
-                                                                                     ZoomBobNormal_::_2_::s_iDestHeight,
-                                                                                     ZoomBobNormal_::_2_::s_iDestY)
-      || ZoomBobNormal_::_2_::s_iDestX >= GfxEngineSetup.m_uWidth
-      || ZoomBobNormal_::_2_::s_iDestWidth + ZoomBobNormal_::_2_::s_iDestX < 0 != __OFADD__(
-                                                                                    ZoomBobNormal_::_2_::s_iDestWidth,
-                                                                                    ZoomBobNormal_::_2_::s_iDestX) )
+    if ( ZoomBobNormal_::_2_::s_iDestY >= GfxEngineSetup.m_uHeight || ZoomBobNormal_::_2_::s_iDestHeight + ZoomBobNormal_::_2_::s_iDestY < 0 != __OFADD__(ZoomBobNormal_::_2_::s_iDestHeight, ZoomBobNormal_::_2_::s_iDestY) || ZoomBobNormal_::_2_::s_iDestX >= GfxEngineSetup.m_uWidth || ZoomBobNormal_::_2_::s_iDestWidth + ZoomBobNormal_::_2_::s_iDestX < 0 != __OFADD__(ZoomBobNormal_::_2_::s_iDestWidth, ZoomBobNormal_::_2_::s_iDestX) )
     {
       return v62;
     }
     ZoomBobNormal____2___s_pSourceAdress = (unsigned __int8 *)ZoomBobNormal_::_2_::s_pSourceAdress;
     ZoomBobNormal____2___s_pPaletteAdress = ZoomBobNormal_::_2_::s_pPaletteAdress;
     ZoomBobNormal_::_2_::s_pBeginOfScanline = g_iRenderPitch * (ZoomBobNormal_::_2_::s_iDestY - 1) + g_pRenderAdress;
-    ZoomBobNormal_::_2_::s_iStartOfDestLine = ZoomBobNormal_::_2_::s_iDestX
-                                            + ZoomBobNormal_::_2_::s_iDestX
-                                            + ZoomBobNormal_::_2_::s_pBeginOfScanline;
+    ZoomBobNormal_::_2_::s_iStartOfDestLine = ZoomBobNormal_::_2_::s_iDestX + ZoomBobNormal_::_2_::s_iDestX + ZoomBobNormal_::_2_::s_pBeginOfScanline;
     ZoomBobNormal_::_2_::s_iSourceLineStart = ZoomBobNormal_::_2_::s_pSourceAdress;
     ZoomBobNormal_::_2_::s_iStartOfDestLineRest = 0;
     v39 = 0;
@@ -46696,24 +48825,34 @@ LABEL_59:
         v22 = (ZoomBobNormal_::_2_::s_iZoom + v43 < 0) ^ __OFADD__(ZoomBobNormal_::_2_::s_iZoom, v43);
         v43 += ZoomBobNormal_::_2_::s_iZoom;
         if ( !v22 )
+        {
           break;
+        }
         ZoomBobNormal_::_2_::s_iGradientY = v43;
         if ( v40 <= 0 )
+        {
           v40 += ZoomBobNormal_::_2_::s_iSourceWidth;
+        }
         do
         {
           while ( 1 )
           {
             v41 = *ZoomBobNormal____2___s_pSourceAdress++;
             if ( v41 <= 1u )
+            {
               break;
+            }
             v22 = v40-- <= 1;
             if ( v22 )
+            {
               goto LABEL_57;
+            }
           }
           LOBYTE(v39) = *ZoomBobNormal____2___s_pSourceAdress++;
           if ( !(_BYTE)v39 )
+          {
             return v62;
+          }
           v22 = v40 <= v39;
           v40 -= v39;
         }
@@ -46725,11 +48864,15 @@ LABEL_57:
       v45 = g_iRenderPitch + ZoomBobNormal_::_2_::s_pBeginOfScanline;
       ZoomBobNormal_::_2_::s_pBeginOfScanline = v45;
       if ( v45 < ZoomBobNormal_::_2_::s_pUpperClippingBorder )
+      {
         v45 = ZoomBobNormal_::_2_::s_pUpperClippingBorder;
+      }
       ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery = v45;
       v46 = g_iScanlineLength + v45;
       if ( v46 >= ZoomBobNormal_::_2_::s_pLowerClippingBorder )
+      {
         v46 = ZoomBobNormal_::_2_::s_pLowerClippingBorder;
+      }
       ZoomBobNormal_::_2_::s_pEndOfScanline = v46;
       ++ZoomBobNormal_::_2_::s_iDestY;
       v39 = 0;
@@ -46760,7 +48903,9 @@ LABEL_57:
       }
       v50 = v44 + 2 * v48;
       if ( v50 >= g_iScanlineLength + ZoomBobNormal_::_2_::s_pUpperClippingBorder )
+      {
         break;
+      }
       v39 = 0;
       if ( ZoomBobNormal_::_2_::s_iDestY > ZoomBobNormal_::_2_::s_iUpperClippingLine )
       {
@@ -46769,7 +48914,9 @@ LABEL_70:
         {
           v22 = v40-- < 1;
           if ( v22 )
+          {
             break;
+          }
           LOBYTE(v39) = *ZoomBobNormal____2___s_pSourceAdress++;
           if ( (_BYTE)v39 )
           {
@@ -46778,22 +48925,28 @@ LABEL_70:
               v58 = v40 + 1;
               LOBYTE(v39) = *ZoomBobNormal____2___s_pSourceAdress++;
               if ( !(_BYTE)v39 )
+              {
                 return v62;
+              }
               v40 = v58 - v39++;
               v59 = v50 & 2;
               if ( (v50 & 2) == 0 )
+              {
                 --v59;
+              }
               if ( (ZoomBobNormal_::_2_::s_iDestY & 1) != 0 )
+              {
                 v59 = -v59;
+              }
               while ( --v39 )
               {
                 v60 = (ZoomBobNormal_::_2_::s_iZoom + v42 < 0) ^ __OFADD__(ZoomBobNormal_::_2_::s_iZoom, v42);
-                for ( v42 += ZoomBobNormal_::_2_::s_iZoom; !v60; v60 = (v42 < 0) ^ v24 )
+                for ( v42 += ZoomBobNormal_::_2_::s_iZoom;
+                      !v60;
+                      v60 = (v42 < 0) ^ v24 )
                 {
                   v59 = -v59;
-                  if ( v59 >= 1
-                    && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery
-                    && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                  if ( v59 >= 1 && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
                   {
                     *(_WORD *)v50 = 0;
                   }
@@ -46801,11 +48954,11 @@ LABEL_70:
                   v22 = v42 < 0x10000;
                   v42 -= 0x10000;
                   if ( v22 )
+                  {
                     break;
+                  }
                   v59 = -v59;
-                  if ( v59 >= 1
-                    && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery
-                    && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                  if ( v59 >= 1 && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
                   {
                     *(_WORD *)v50 = 0;
                   }
@@ -46813,11 +48966,11 @@ LABEL_70:
                   v22 = v42 < 0x10000;
                   v42 -= 0x10000;
                   if ( v22 )
+                  {
                     break;
+                  }
                   v59 = -v59;
-                  if ( v59 >= 1
-                    && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery
-                    && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                  if ( v59 >= 1 && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
                   {
                     *(_WORD *)v50 = 0;
                   }
@@ -46825,11 +48978,11 @@ LABEL_70:
                   v22 = v42 < 0x10000;
                   v42 -= 0x10000;
                   if ( v22 )
+                  {
                     break;
+                  }
                   v59 = -v59;
-                  if ( v59 >= 1
-                    && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery
-                    && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                  if ( v59 >= 1 && v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
                   {
                     *(_WORD *)v50 = 0;
                   }
@@ -46842,32 +48995,48 @@ LABEL_70:
             else
             {
               v51 = (ZoomBobNormal_::_2_::s_iZoom + v42 < 0) ^ __OFADD__(ZoomBobNormal_::_2_::s_iZoom, v42);
-              for ( v42 += ZoomBobNormal_::_2_::s_iZoom; !v51; v51 = (v42 < 0) ^ v24 )
+              for ( v42 += ZoomBobNormal_::_2_::s_iZoom;
+                    !v51;
+                    v51 = (v42 < 0) ^ v24 )
               {
                 v52 = *(_WORD *)(ZoomBobNormal____2___s_pPaletteAdress + 2 * v39);
                 if ( v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                {
                   *(_WORD *)v50 = v52;
+                }
                 v50 += 2;
                 v22 = v42 < 0x10000;
                 v42 -= 0x10000;
                 if ( v22 )
+                {
                   break;
+                }
                 if ( v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                {
                   *(_WORD *)v50 = v52;
+                }
                 v50 += 2;
                 v22 = v42 < 0x10000;
                 v42 -= 0x10000;
                 if ( v22 )
+                {
                   break;
+                }
                 if ( v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                {
                   *(_WORD *)v50 = v52;
+                }
                 v50 += 2;
                 v22 = v42 < 0x10000;
                 v42 -= 0x10000;
                 if ( v22 )
+                {
                   break;
+                }
                 if ( v50 >= ZoomBobNormal_::_2_::s_pBeginOfScanlineQuery && v50 < ZoomBobNormal_::_2_::s_pEndOfScanline )
+                {
                   *(_WORD *)v50 = v52;
+                }
                 v50 += 2;
                 v24 = __OFSUB__(v42, 0x10000);
                 v42 -= 0x10000;
@@ -46881,7 +49050,9 @@ LABEL_70:
             v22 = v55 < v39;
             v40 = v55 - v39;
             if ( v22 )
+            {
               goto LABEL_59;
+            }
             v56 = ZoomBobNormal_::_2_::s_iZoom * v39;
             v57 = (unsigned int)(v56 + v42 + 0x10000) >> 16;
             LOWORD(v42) = v56 + v42;
@@ -46896,43 +49067,45 @@ LABEL_70:
         {
           v22 = v40-- < 1;
           if ( v22 )
+          {
             break;
+          }
           v54 = *ZoomBobNormal____2___s_pSourceAdress++;
           if ( v54 <= 1u )
           {
             v53 = v40 + 1;
             LOBYTE(v39) = *ZoomBobNormal____2___s_pSourceAdress++;
             if ( !(_BYTE)v39 )
+            {
               return v62;
+            }
             v22 = v53 < v39;
             v40 = v53 - v39;
             if ( v22 )
+            {
               goto LABEL_59;
+            }
           }
         }
       }
     }
     if ( v50 < ZoomBobNormal_::_2_::s_pLowerClippingBorder )
+    {
       goto LABEL_70;
+    }
     return v62;
   }
   else
   {
     HIDWORD(v61) = ZoomBobNormal_::_2_::s_iDestWidth + ZoomBobNormal_::_2_::s_iDestX;
     LODWORD(v61) = g_pZoomGradient;
-    if ( ZoomBobNormal_::_2_::s_iDestY >= GfxEngineSetup.m_uHeight
-      || ZoomBobNormal_::_2_::s_iDestHeight + ZoomBobNormal_::_2_::s_iDestY < 0 != __OFADD__(
-                                                                                     ZoomBobNormal_::_2_::s_iDestHeight,
-                                                                                     ZoomBobNormal_::_2_::s_iDestY) )
+    if ( ZoomBobNormal_::_2_::s_iDestY >= GfxEngineSetup.m_uHeight || ZoomBobNormal_::_2_::s_iDestHeight + ZoomBobNormal_::_2_::s_iDestY < 0 != __OFADD__(ZoomBobNormal_::_2_::s_iDestHeight, ZoomBobNormal_::_2_::s_iDestY) )
     {
       return v61;
     }
     _ZoomBobNormal____2___s_pSourceAdress = (unsigned __int8 *)ZoomBobNormal_::_2_::s_pSourceAdress;
     _ZoomBobNormal____2___s_pPaletteAdress = ZoomBobNormal_::_2_::s_pPaletteAdress;
-    ZoomBobNormal_::_2_::s_iStartOfDestLine = ZoomBobNormal_::_2_::s_iDestX
-                                            + ZoomBobNormal_::_2_::s_iDestX
-                                            + g_iRenderPitch * (ZoomBobNormal_::_2_::s_iDestY - 1)
-                                            + g_pRenderAdress;
+    ZoomBobNormal_::_2_::s_iStartOfDestLine = ZoomBobNormal_::_2_::s_iDestX + ZoomBobNormal_::_2_::s_iDestX + g_iRenderPitch * (ZoomBobNormal_::_2_::s_iDestY - 1) + g_pRenderAdress;
     ZoomBobNormal_::_2_::s_iSourceLineStart = ZoomBobNormal_::_2_::s_pSourceAdress;
     ZoomBobNormal_::_2_::s_iStartOfDestLineRest = 0;
     v12 = 0;
@@ -46952,24 +49125,34 @@ LABEL_14:
           v22 = (ZoomBobNormal_::_2_::s_iZoom + v16 < 0) ^ __OFADD__(ZoomBobNormal_::_2_::s_iZoom, v16);
           v16 += ZoomBobNormal_::_2_::s_iZoom;
           if ( !v22 )
+          {
             break;
+          }
           ZoomBobNormal_::_2_::s_iGradientY = v16;
           if ( v13 <= 0 )
+          {
             v13 += ZoomBobNormal_::_2_::s_iSourceWidth;
+          }
           do
           {
             while ( 1 )
             {
               v14 = *_ZoomBobNormal____2___s_pSourceAdress++;
               if ( v14 <= 1u )
+              {
                 break;
+              }
               v22 = v13-- <= 1;
               if ( v22 )
+              {
                 goto LABEL_12;
+              }
             }
             LOBYTE(v12) = *_ZoomBobNormal____2___s_pSourceAdress++;
             if ( !(_BYTE)v12 )
+            {
               return v61;
+            }
             v22 = v13 <= v12;
             v13 -= v12;
           }
@@ -47006,33 +49189,45 @@ LABEL_12:
         }
         v21 = v17 + 2 * v19;
         if ( v21 >= ZoomBobNormal_::_2_::s_pUpperClippingBorder )
+        {
           break;
+        }
         while ( 1 )
         {
           v22 = v13-- < 1;
           if ( v22 )
+          {
             break;
+          }
           v26 = *_ZoomBobNormal____2___s_pSourceAdress++;
           if ( v26 <= 1u )
           {
             v25 = v13 + 1;
             LOBYTE(v12) = *_ZoomBobNormal____2___s_pSourceAdress++;
             if ( !(_BYTE)v12 )
+            {
               return v61;
+            }
             v22 = v25 < v12;
             v13 = v25 - v12;
             if ( v22 )
+            {
               goto LABEL_14;
+            }
           }
         }
       }
       if ( v21 >= ZoomBobNormal_::_2_::s_pLowerClippingBorder )
+      {
         break;
+      }
       while ( 1 )
       {
         v22 = v13-- < 1;
         if ( v22 )
+        {
           break;
+        }
         LOBYTE(v12) = *_ZoomBobNormal____2___s_pSourceAdress++;
         if ( (_BYTE)v12 )
         {
@@ -47041,7 +49236,9 @@ LABEL_12:
             v30 = v13 + 1;
             LOBYTE(v12) = *_ZoomBobNormal____2___s_pSourceAdress++;
             if ( !(_BYTE)v12 )
+            {
               return v61;
+            }
             v13 = v30 - v12;
             v31 = ZoomBobNormal_::_2_::s_iZoom * v12;
             v32 = v31 + v15 + 0x10000;
@@ -47067,7 +49264,9 @@ LABEL_12:
               v22 = v33 < 1;
               v35 = v33 - 1;
               if ( v22 )
+              {
                 break;
+              }
               *(_WORD *)v21 = 0;
               v33 = v35 - 1;
               v21 += 4;
@@ -47079,7 +49278,9 @@ LABEL_12:
           else
           {
             v22 = (ZoomBobNormal_::_2_::s_iZoom + v15 < 0) ^ __OFADD__(ZoomBobNormal_::_2_::s_iZoom, v15);
-            for ( v15 += ZoomBobNormal_::_2_::s_iZoom; !v22; v22 = (v15 < 0) ^ v24 )
+            for ( v15 += ZoomBobNormal_::_2_::s_iZoom;
+                  !v22;
+                  v22 = (v15 < 0) ^ v24 )
             {
               v23 = *(_WORD *)(_ZoomBobNormal____2___s_pPaletteAdress + 2 * v12);
               *(_WORD *)v21 = v23;
@@ -47087,19 +49288,25 @@ LABEL_12:
               v22 = v15 < 0x10000;
               v15 -= 0x10000;
               if ( v22 )
+              {
                 break;
+              }
               *(_WORD *)v21 = v23;
               v21 += 2;
               v22 = v15 < 0x10000;
               v15 -= 0x10000;
               if ( v22 )
+              {
                 break;
+              }
               *(_WORD *)v21 = v23;
               v21 += 2;
               v22 = v15 < 0x10000;
               v15 -= 0x10000;
               if ( v22 )
+              {
                 break;
+              }
               *(_WORD *)v21 = v23;
               v21 += 2;
               v24 = __OFSUB__(v15, 0x10000);
@@ -47114,7 +49321,9 @@ LABEL_12:
           v22 = v27 < v12;
           v13 = v27 - v12;
           if ( v22 )
+          {
             goto LABEL_14;
+          }
           v28 = ZoomBobNormal_::_2_::s_iZoom * v12;
           v29 = (unsigned int)(v28 + v15 + 0x10000) >> 16;
           LOWORD(v15) = v28 + v15;
@@ -47137,46 +49346,38 @@ bool __cdecl AddGuiPatches(void) {
   unsigned int i; // [esp+8h] [ebp-4h]
 
   if ( !D3DObjectPtr )
+  {
     return 1;
+  }
   if ( !D3DObjectPtr->FinalRenderSurface )
+  {
     return 1;
+  }
   if ( SGfxRenderConfiguration::IsEditorMode(&GfxEngineSetup) )
   {
     if ( !D3DObjectPtr->m_pGuiSurfaces[0] || !g_bGuiSurfaceVisible[0] )
+    {
       return 1;
+    }
     if ( !sub_2F74710((RECT *)&stru_468DFA4[0].m_uU4) )
+    {
       return 1;
-    v2 = D3DObjectPtr->m_pGuiSurfaces[0]->Blt(
-           D3DObjectPtr->m_pGuiSurfaces[0],
-           (struct tagRECT *)byte_468E208,
-           D3DObjectPtr->FinalRenderSurface,
-           (struct tagRECT *)byte_468E128,
-           0,
-           0);
+    }
+    v2 = D3DObjectPtr->m_pGuiSurfaces[0]->Blt(D3DObjectPtr->m_pGuiSurfaces[0], (struct tagRECT *)byte_468E208, D3DObjectPtr->FinalRenderSurface, (struct tagRECT *)byte_468E128, 0, 0);
     if ( !v2 && D3DObjectPtr->m_pGuiSurfaces[1] && g_bGuiSurfaceVisible[1] )
     {
       if ( !sub_2F74710((RECT *)&stru_468DFA4[1].m_uU4) )
+      {
         return 1;
+      }
       if ( LOBYTE(stru_468DFA4[1].m_sDestinationRect.bottom) )
       {
         D3DObjectPtr->m_pGuiSurfaces[1]->SetColorKey(D3DObjectPtr->m_pGuiSurfaces[1], 8, (int *)&g_sColorKeyGui);
-        v2 = D3DObjectPtr->m_pGuiSurfaces[0]->Blt(
-               D3DObjectPtr->m_pGuiSurfaces[0],
-               (struct tagRECT *)&byte_468E208[16],
-               D3DObjectPtr->m_pGuiSurfaces[1],
-               (struct tagRECT *)&byte_468E128[16],
-               0x8000,
-               0);
+        v2 = D3DObjectPtr->m_pGuiSurfaces[0]->Blt(D3DObjectPtr->m_pGuiSurfaces[0], (struct tagRECT *)&byte_468E208[16], D3DObjectPtr->m_pGuiSurfaces[1], (struct tagRECT *)&byte_468E128[16], 0x8000, 0);
       }
       else
       {
-        v2 = D3DObjectPtr->m_pGuiSurfaces[0]->Blt(
-               D3DObjectPtr->m_pGuiSurfaces[0],
-               (struct tagRECT *)&byte_468E208[16],
-               D3DObjectPtr->m_pGuiSurfaces[1],
-               (struct tagRECT *)&byte_468E128[16],
-               0,
-               0);
+        v2 = D3DObjectPtr->m_pGuiSurfaces[0]->Blt(D3DObjectPtr->m_pGuiSurfaces[0], (struct tagRECT *)&byte_468E208[16], D3DObjectPtr->m_pGuiSurfaces[1], (struct tagRECT *)&byte_468E128[16], 0, 0);
       }
     }
     if ( v2 )
@@ -47190,30 +49391,20 @@ bool __cdecl AddGuiPatches(void) {
   }
   else
   {
-    for ( i = 0; i < 0xE; ++i )
+    for ( i = 0;
+          i < 0xE;
+          ++i )
     {
       if ( D3DObjectPtr->m_pGuiSurfaces[i] && g_bGuiSurfaceVisible[i] && sub_2F74710((RECT *)&stru_468DFA4[i].m_uU4) )
       {
         if ( LOBYTE(stru_468DFA4[i].m_sDestinationRect.bottom) )
         {
           D3DObjectPtr->m_pGuiSurfaces[i]->SetColorKey(D3DObjectPtr->m_pGuiSurfaces[i], 8, (int *)&g_sColorKeyGui);
-          v1 = D3DObjectPtr->FinalRenderSurface->Blt(
-                 D3DObjectPtr->FinalRenderSurface,
-                 (struct tagRECT *)&byte_468E208[16 * i],
-                 D3DObjectPtr->m_pGuiSurfaces[i],
-                 (struct tagRECT *)&byte_468E128[16 * i],
-                 0x8000,
-                 0);
+          v1 = D3DObjectPtr->FinalRenderSurface->Blt(D3DObjectPtr->FinalRenderSurface, (struct tagRECT *)&byte_468E208[16 * i], D3DObjectPtr->m_pGuiSurfaces[i], (struct tagRECT *)&byte_468E128[16 * i], 0x8000, 0);
         }
         else
         {
-          v1 = D3DObjectPtr->FinalRenderSurface->Blt(
-                 D3DObjectPtr->FinalRenderSurface,
-                 (struct tagRECT *)&byte_468E208[16 * i],
-                 D3DObjectPtr->m_pGuiSurfaces[i],
-                 (struct tagRECT *)&byte_468E128[16 * i],
-                 0,
-                 0);
+          v1 = D3DObjectPtr->FinalRenderSurface->Blt(D3DObjectPtr->FinalRenderSurface, (struct tagRECT *)&byte_468E208[16 * i], D3DObjectPtr->m_pGuiSurfaces[i], (struct tagRECT *)&byte_468E128[16 * i], 0, 0);
         }
         if ( v1 )
         {
@@ -47283,7 +49474,9 @@ void __cdecl AddDebugStrings(int a1) {
     }
     SelectObject(hdc, ho);
     if ( !s_pfDebugValueCallback )
+    {
       goto LABEL_21;
+    }
     v9 = Size;
     v17 = g_pGfxLayer;
     if ( g_pGfxLayer )
@@ -47296,7 +49489,9 @@ void __cdecl AddDebugStrings(int a1) {
       if ( D3DObjectPtr )
       {
         v11 = -g_iVertexSize / 2;
-        for ( i = dword_3E2E2AC; i < v12 + dword_3E2E2AC + 16; ++i )
+        for ( i = dword_3E2E2AC;
+              i < v12 + dword_3E2E2AC + 16;
+              ++i )
         {
           if ( (i & 1) != 0 )
           {
@@ -47310,7 +49505,9 @@ void __cdecl AddDebugStrings(int a1) {
           }
           v8 = v10 + dword_3E2E2A8 + i / 2 + 1;
           v19 = i / 2 + dword_3E2E2A8 + v9 * i;
-          for ( j = dword_3E2E2A8 + i / 2; j < v8; ++j )
+          for ( j = dword_3E2E2A8 + i / 2;
+                j < v8;
+                ++j )
           {
             if ( FastIndexValidation(i) && FastIndexValidation(v21 + j) )
             {
@@ -47495,31 +49692,47 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
 
   g_bRenderSuccess = 1;
   if ( dword_3E2E314 == 2000 )
+  {
     return g_bRenderSuccess;
+  }
   g_iMapSize = Size;
   v46 = g_pGfxLayer;
   if ( !g_pGfxLayer )
+  {
     return 1;
+  }
   dword_3E2E708 = LODWORD(FLOAT_0_001953125);
   if ( !SGfxRenderConfiguration::IsHQTextureSet((SGfxRenderConfiguration *)&GfxEngineSetup) )
+  {
     dword_3E2E708 = LODWORD(FLOAT_0_00390625);
+  }
   if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup) )
   {
     if ( !D3DObjectPtr )
+    {
       return 0;
+    }
     if ( !D3DObjectPtr->m_bInitHardware )
+    {
       return 0;
+    }
     LandscapeRenderTargetSurface = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
     if ( LandscapeRenderTargetSurface->IsLost(LandscapeRenderTargetSurface) == -2005532222 )
+    {
       return 0;
+    }
   }
   else
   {
     dword_3E2E708 = 0;
     if ( !D3DObjectPtr )
+    {
       return 0;
+    }
     if ( !D3DObjectPtr->m_bInitSoftware )
+    {
       return 0;
+    }
   }
   v82 = g_iVertexSize;
   v81 = dword_3E2E290;
@@ -47528,7 +49741,9 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
   v14 = (dword_3E2E290 + (MEMORY[0x3E2E270] << 16)) / dword_3E2E290;
   v69 = v14 + a2 + 2;
   if ( v14 + a2 + 5 < g_iMapSize && v69 > 0 )
+  {
     v69 += (unsigned __int8)byte_469717B[v69] / 5;
+  }
   v97 = -v81 - (dword_3E2E2B4 << 16);
   v33 = -v82 / 2;
   v66 = v82 / 2;
@@ -47552,12 +49767,16 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
     }
     j__TRI_set_window(v12, MEMORY[0x3E2E26C] + 1, MEMORY[0x3E2E270] + 1, v13);
   }
-  for ( Number = a2; Number < v69; ++Number )
+  for ( Number = a2;
+        Number < v69;
+        ++Number )
   {
     if ( Number >= dword_3E2E314 - 2 )
     {
       if ( Number > g_iFoggingRange + 2 )
+      {
         break;
+      }
       if ( (Number & 1) != 0 )
       {
         v96 = (g_uLeftGuiBorderWidth - dword_3E2E2B0 - (v82 >> 16)) << 16;
@@ -47588,11 +49807,17 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
       *(float *)&g_fPatternSuboffsetY = (float)(j__abs(Number) % 8) * 0.125;
       *(float *)&g_fPatternSuboffsetY = *(float *)&g_fPatternSuboffsetY + *(float *)&dword_3E2E708;
       if ( g_bHalfLine )
+      {
         *(float *)&g_fPatternSuboffsetX = (float)((float)((v63 - Number / 2) % 8) * 0.125) + 0.0625;
+      }
       else
+      {
         *(float *)&g_fPatternSuboffsetX = (float)((v63 - Number / 2) % 8) * 0.125;
+      }
       if ( *(float *)&g_fPatternSuboffsetX < 0.0 )
+      {
         *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX + 1.0;
+      }
       *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX + *(float *)&dword_3E2E708;
       v80 = v63;
       v93 = FastIndexValidation(Number);
@@ -47609,23 +49834,15 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         OldFogging = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
         v44 = NewFogging != OldFogging;
         v105 = v44 | v111->m_uGfxBits & 0x40;
-        ShadowFog = CHeightAndTypeTable::GetShadowFog(
-                      (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                      g_iUsedFogFadeStep,
-                      v43,
-                      OldFogging,
-                      NewFogging);
-        LightFog = CHeightAndTypeTable::GetLightFog(
-                     (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                     g_iUsedFogFadeStep,
-                     v43,
-                     OldFogging,
-                     NewFogging);
+        ShadowFog = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, OldFogging, NewFogging);
+        LightFog = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, OldFogging, NewFogging);
         v110 = (unsigned __int8)byte_3ACD340[v111->m_uGroundType];
         v85 = (v111->m_uGradient & 0x40) != 0;
         v99 = v85;
         if ( (v110 == 28 || v110 == 29) && CalcCurrentFog(v111) <= 59 )
+        {
           v110 = 16;
+        }
         v111->m_uGfxBits &= ~0x40u;
       }
       else
@@ -47638,7 +49855,9 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         v99 = 0;
       }
       if ( Number == g_iFadeYBorder - 1 )
+      {
         g_iUsedFogFadeStep = 15;
+      }
       v111 += g_iMapSize;
       if ( v86 && v95 )
       {
@@ -47649,23 +49868,15 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         v56 = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
         v41 = v57 != v56;
         v98 = v41 | v111->m_uGfxBits & 0x40;
-        v61 = CHeightAndTypeTable::GetShadowFog(
-                (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                g_iUsedFogFadeStep,
-                v40,
-                v56,
-                v57);
-        v60 = CHeightAndTypeTable::GetLightFog(
-                (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                g_iUsedFogFadeStep,
-                v40,
-                v56,
-                v57);
+        v61 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v40, v56, v57);
+        v60 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v40, v56, v57);
         v104 = (unsigned __int8)byte_3ACD340[v111->m_uGroundType];
         v84 = (v111->m_uGradient & 0x40) != 0;
         v91 = v84;
         if ( (v104 == 28 || v104 == 29) && CalcCurrentFog(v111) <= 59 )
+        {
           v104 = 16;
+        }
         v111->m_uGfxBits &= ~0x40u;
       }
       else
@@ -47684,7 +49895,9 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         v95 = FastIndexValidation(Number + 1);
         v94 = FastIndexValidation(v80 + (unsigned __int8)g_bHalfLine + 1);
         if ( Number == g_iFadeYBorder - 1 )
+        {
           g_iUsedFogFadeStep = 15;
+        }
         ++v111;
         if ( v94 && v95 )
         {
@@ -47695,23 +49908,15 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
           v53 = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
           v38 = v54 != v53;
           v106 = v38 | v111->m_uGfxBits & 0x40;
-          v73 = CHeightAndTypeTable::GetShadowFog(
-                  (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                  g_iUsedFogFadeStep,
-                  v37,
-                  v53,
-                  v54);
-          v72 = CHeightAndTypeTable::GetLightFog(
-                  (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                  g_iUsedFogFadeStep,
-                  v37,
-                  v53,
-                  v54);
+          v73 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v37, v53, v54);
+          v72 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v37, v53, v54);
           v109 = (unsigned __int8)byte_3ACD340[v111->m_uGroundType];
           v83 = (v111->m_uGradient & 0x40) != 0;
           v100 = v83;
           if ( (v109 == 28 || v109 == 29) && CalcCurrentFog(v111) <= 59 )
+          {
             v109 = 16;
+          }
           v111->m_uGfxBits &= ~0x40u;
         }
         else
@@ -47740,23 +49945,15 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
           v50 = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
           v35 = v51 != v50;
           v101 = v35 | v111->m_uGfxBits & 0x40;
-          v68 = CHeightAndTypeTable::GetShadowFog(
-                  (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                  g_iUsedFogFadeStep,
-                  v34,
-                  v50,
-                  v51);
-          v67 = CHeightAndTypeTable::GetLightFog(
-                  (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                  g_iUsedFogFadeStep,
-                  v34,
-                  v50,
-                  v51);
+          v68 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v34, v50, v51);
+          v67 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v34, v50, v51);
           v102 = (unsigned __int8)byte_3ACD340[v111->m_uGroundType];
           v88 = (v111->m_uGradient & 0x40) != 0;
           v92 = v88;
           if ( (v102 == 28 || v102 == 29) && CalcCurrentFog(v111) <= 59 )
+          {
             v102 = 16;
+          }
           v111->m_uGfxBits &= ~0x40u;
         }
         else
@@ -47800,11 +49997,17 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
               if ( v26 > 0 && v25 > 0 )
               {
                 if ( v110 == 28 )
+                {
                   v110 = 29;
+                }
                 if ( v104 == 28 )
+                {
                   v104 = 29;
+                }
                 if ( v109 == 28 )
+                {
                   v109 = 29;
+                }
               }
               if ( v104 == v109 )
               {
@@ -47828,27 +50031,18 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
                 {
                   if ( v104 == v109 )
                   {
-                    v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v104]
-                                       + 4 * (unsigned __int8)byte_3ACD510[v110]];
+                    v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v104] + 4 * (unsigned __int8)byte_3ACD510[v110]];
                     v90 = &PatternTripleVertices[144 * *v107 + 36 * v107[1] + 36 * (unsigned __int8)(v112 & v107[3])];
                   }
                   else if ( v104 == v110 )
                   {
-                    v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v104]
-                                       + 4 * (unsigned __int8)byte_3ACD510[v109]];
-                    v90 = &PatternTripleVertices[144 * *v107
-                                               + 12
-                                               + 36 * v107[1]
-                                               + 36 * (unsigned __int8)(v112 & v107[3])];
+                    v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v104] + 4 * (unsigned __int8)byte_3ACD510[v109]];
+                    v90 = &PatternTripleVertices[144 * *v107 + 12 + 36 * v107[1] + 36 * (unsigned __int8)(v112 & v107[3])];
                   }
                   else
                   {
-                    v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110]
-                                       + 4 * (unsigned __int8)byte_3ACD510[v104]];
-                    v90 = &PatternTripleVertices[144 * *v107
-                                               + 24
-                                               + 36 * v107[1]
-                                               + 36 * (unsigned __int8)(v112 & v107[3])];
+                    v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v104]];
+                    v90 = &PatternTripleVertices[144 * *v107 + 24 + 36 * v107[1] + 36 * (unsigned __int8)(v112 & v107[3])];
                   }
                 }
               }
@@ -47890,14 +50084,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
           {
             g_bSplitTriangle = 0;
             g_pVertex -= 64;
-            *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                            (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                            v73,
-                                            v61);
-            *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                            (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                            v72,
-                                            v60);
+            *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, v61);
+            *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v72, v60);
             *(float *)g_pVertex = (float)(v96 >> 16);
             *(float *)(g_pVertex + 4) = (float)((v81 + v97 - (v62 + v71) / 2) >> 16);
             qmemcpy((void *)(g_pVertex + 96), (const void *)g_pVertex, 0x20u);
@@ -47908,14 +50096,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
             *(float *)g_pVertex = (float)((v66 + v96) >> 16);
             *(float *)(g_pVertex + 4) = (float)((v81 + v97 - v71) >> 16);
             g_pVertex += 32;
-            *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                            (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                            v73,
-                                            v61);
-            *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                            (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                            v72,
-                                            v60);
+            *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, v61);
+            *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v72, v60);
             *(float *)g_pVertex = (float)(v96 >> 16);
             *(float *)(g_pVertex + 4) = (float)((v81 + v97 - (v71 + v62) / 2) >> 16);
             g_pVertex -= 32;
@@ -47931,9 +50113,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
             g_pVertex += 32;
           }
         }
-        if ( (v80 != v24 - 1 || !g_bHalfLine)
-          && ((v97 >> 16) - v79 <= MEMORY[0x3E2E270] || (v97 >> 16) - v70 <= MEMORY[0x3E2E270])
-          && v106 | v101 | v105 )
+        if ( (v80 != v24 - 1 || !g_bHalfLine) && ((v97 >> 16) - v79 <= MEMORY[0x3E2E270] || (v97 >> 16) - v70 <= MEMORY[0x3E2E270]) && v106 | v101 | v105 )
         {
           s_iDarkTribeElement = 22 * (v100 || v92 || v99);
           if ( v110 == v102 && v102 == v109 && byte_3ACD240[v110] >= 0 )
@@ -47959,11 +50139,17 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
               if ( v17 > 0 && v16 > 0 )
               {
                 if ( v110 == 28 )
+                {
                   v110 = 29;
+                }
                 if ( v102 == 28 )
+                {
                   v102 = 29;
+                }
                 if ( v109 == 28 )
+                {
                   v109 = 29;
+                }
               }
               if ( v110 == v102 )
               {
@@ -47987,26 +50173,17 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
                 {
                   if ( v110 == v102 )
                   {
-                    v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110]
-                                       + 4 * (unsigned __int8)byte_3ACD510[v109]];
-                    v89 = &PatternTripleVertices[144 * *v108
-                                               + 18
-                                               + 36 * v108[1]
-                                               + 36 * (unsigned __int8)(v112 & v108[3])];
+                    v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v109]];
+                    v89 = &PatternTripleVertices[144 * *v108 + 18 + 36 * v108[1] + 36 * (unsigned __int8)(v112 & v108[3])];
                   }
                   else if ( v102 == v109 )
                   {
-                    v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v102]
-                                       + 4 * (unsigned __int8)byte_3ACD510[v110]];
-                    v89 = &PatternTripleVertices[144 * *v108
-                                               + 30
-                                               + 36 * v108[1]
-                                               + 36 * (unsigned __int8)(v112 & v108[3])];
+                    v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v102] + 4 * (unsigned __int8)byte_3ACD510[v110]];
+                    v89 = &PatternTripleVertices[144 * *v108 + 30 + 36 * v108[1] + 36 * (unsigned __int8)(v112 & v108[3])];
                   }
                   else
                   {
-                    v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110]
-                                       + 4 * (unsigned __int8)byte_3ACD510[v102]];
+                    v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v102]];
                     v89 = &PatternTripleVertices[144 * *v108 + 6 + 36 * v108[1] + 36 * (unsigned __int8)(v112 & v108[3])];
                   }
                 }
@@ -48049,14 +50226,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
           {
             g_bSplitTriangle = 0;
             g_pVertex -= 64;
-            *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                            (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                            v68,
-                                            ShadowFog);
-            *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                            (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                            v67,
-                                            LightFog);
+            *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v68, ShadowFog);
+            *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v67, LightFog);
             *(float *)g_pVertex = (float)((v66 + v96) >> 16);
             *(float *)(g_pVertex + 4) = (float)((v97 - (v79 + v70) / 2) >> 16);
             qmemcpy((void *)(g_pVertex + 96), (const void *)g_pVertex, 0x20u);
@@ -48068,14 +50239,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
             *(float *)g_pVertex = (float)((v82 + v96) >> 16);
             *(float *)(g_pVertex + 4) = (float)((v97 - v70) >> 16);
             g_pVertex += 64;
-            *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                            (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                            v68,
-                                            ShadowFog);
-            *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                            (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                            v67,
-                                            LightFog);
+            *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v68, ShadowFog);
+            *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v67, LightFog);
             *(float *)g_pVertex = (float)((v66 + v96) >> 16);
             *(float *)(g_pVertex + 4) = (float)((v97 - (v79 + v70) / 2) >> 16);
             *(_DWORD *)(g_pVertex + 24) = 0;
@@ -48091,13 +50256,17 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
           }
         }
         if ( g_pVertex > (unsigned int)g_pVertexMax )
+        {
           CInterfaceD3D::RenderScene(D3DObjectPtr, 0);
+        }
         v96 += v82;
         v87 = v112 == 0;
         v112 = v112 == 0;
         *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX + 0.125;
         if ( *(float *)&g_fPatternSuboffsetX >= 1.0 )
+        {
           *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX - 1.0;
+        }
         v111 += g_iMapSize;
         v79 = v10;
         v62 = v9;
@@ -48274,27 +50443,41 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
   g_iMapSize = Size;
   v51 = g_pGfxLayer;
   if ( !g_pGfxLayer )
+  {
     return 1;
+  }
   dword_3E2E708 = LODWORD(FLOAT_0_001953125);
   if ( !SGfxRenderConfiguration::IsHQTextureSet(&GfxEngineSetup) )
+  {
     dword_3E2E708 = LODWORD(FLOAT_0_00390625);
+  }
   if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
   {
     if ( !D3DObjectPtr )
+    {
       return 0;
+    }
     if ( !D3DObjectPtr->m_bInitHardware )
+    {
       return 0;
+    }
     LandscapeRenderTargetSurface = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
     if ( LandscapeRenderTargetSurface->IsLost(LandscapeRenderTargetSurface) == -2005532222 )
+    {
       return 0;
+    }
   }
   else
   {
     dword_3E2E708 = 0;
     if ( !D3DObjectPtr )
+    {
       return 0;
+    }
     if ( !D3DObjectPtr->m_bInitSoftware )
+    {
       return 0;
+    }
   }
   g_pVertex = D3DObjectPtr->field_0;
   v99 = g_iVertexSize;
@@ -48305,7 +50488,9 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
   v34 = -g_iVertexSize / 2;
   v94 = g_iVertexSize / 2;
   if ( (dword_3E2E290 + (GfxEngineSetup.m_uHeight << 16)) / dword_3E2E290 + a2 + 5 < g_iMapSize && v74 > 0 )
+  {
     v74 += (unsigned __int8)byte_469717B[v74] / 5;
+  }
   v124 = -1;
   v125 = -1;
   v126 = -1;
@@ -48332,15 +50517,23 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
     v15 = ((v99 * (dword_3E2E2A8 - dword_46C1654)) >> 16) - (dword_46C1658 - dword_3E2E2B0);
     v57 = ((v94 * (dword_3E2E2AC - dword_46C165C)) >> 16) - (dword_46C1660 - dword_3E2E2B4);
     if ( Number + dword_46C1664 != v15 )
+    {
       Number = v15 - dword_46C1664;
+    }
     if ( v97 + dword_46C1668 != v57 )
+    {
       v97 = v57 - dword_46C1668;
+    }
     dword_46C1664 += Number;
     dword_46C1668 += v97;
     if ( j__abs(Number) >= GfxEngineSetup.m_uWidth - g_uLeftGuiBorderWidth )
+    {
       byte_3E2E2FF = 1;
+    }
     if ( j__abs(v97) >= GfxEngineSetup.m_uWidth )
+    {
       byte_3E2E2FF = 1;
+    }
     if ( Number >= 0 )
     {
       if ( Number <= 0 )
@@ -48394,7 +50587,9 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
     v55 = !v125 && v127 == GfxEngineSetup.m_uHeight;
     v92 = v55;
     if ( v109 && v92 )
+    {
       return 1;
+    }
     if ( !byte_3E2E2FF )
     {
       v54 = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
@@ -48436,7 +50631,9 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
   }
   v60 = (g_uLeftGuiBorderWidth - dword_3E2E2B0 - (v99 >> 16)) << 16;
   v84 = -1;
-  for ( i = a2; i < v74; ++i )
+  for ( i = a2;
+        i < v74;
+        ++i )
   {
     v108 = 1;
     if ( v124 != -1 )
@@ -48533,11 +50730,17 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
     *(float *)&g_fPatternSuboffsetY = (float)(j__abs(i) % 8) * 0.125;
     *(float *)&g_fPatternSuboffsetY = *(float *)&g_fPatternSuboffsetY + *(float *)&dword_3E2E708;
     if ( g_bHalfLine )
+    {
       *(float *)&g_fPatternSuboffsetX = (float)((float)((v80 - i / 2) % 8) * 0.125) + 0.0625;
+    }
     else
+    {
       *(float *)&g_fPatternSuboffsetX = (float)((v80 - i / 2) % 8) * 0.125;
+    }
     if ( *(float *)&g_fPatternSuboffsetX < 0.0 )
+    {
       *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX + 1.0;
+    }
     *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX + *(float *)&dword_3E2E708;
     v83 = v80;
     v100 = FastIndexValidation(i);
@@ -48552,23 +50755,15 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
       v47 = v50 ? 0 : v118->m_uGradient & 0xF;
       NewFogging = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
       OldFogging = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
-      ShadowFog = CHeightAndTypeTable::GetShadowFog(
-                    (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                    g_iUsedFogFadeStep,
-                    v47,
-                    OldFogging,
-                    NewFogging);
-      LightFog = CHeightAndTypeTable::GetLightFog(
-                   (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                   g_iUsedFogFadeStep,
-                   v47,
-                   OldFogging,
-                   NewFogging);
+      ShadowFog = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
+      LightFog = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
       v117 = (unsigned __int8)byte_3ACD340[v118->m_uGroundType];
       v91 = (v118->m_uGradient & 0x40) != 0;
       v106 = v91;
       if ( (v117 == 28 || v117 == 29) && CalcCurrentFog(v118) <= 59 )
+      {
         v117 = 16;
+      }
     }
     else
     {
@@ -48579,7 +50774,9 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
       v106 = 0;
     }
     if ( i == g_iFadeYBorder - 1 )
+    {
       g_iUsedFogFadeStep = 15;
+    }
     v118 += g_iMapSize;
     if ( v90 && v104 )
     {
@@ -48588,23 +50785,15 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
       v43 = v46 ? 0 : v118->m_uGradient & 0xF;
       v45 = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
       v44 = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
-      v68 = CHeightAndTypeTable::GetShadowFog(
-              (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-              g_iUsedFogFadeStep,
-              v43,
-              v44,
-              v45);
-      v67 = CHeightAndTypeTable::GetLightFog(
-              (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-              g_iUsedFogFadeStep,
-              v43,
-              v44,
-              v45);
+      v68 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
+      v67 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
       v111 = (unsigned __int8)byte_3ACD340[v118->m_uGroundType];
       v89 = (v118->m_uGradient & 0x40) != 0;
       v101 = v89;
       if ( (v111 == 28 || v111 == 29) && CalcCurrentFog(v118) <= 59 )
+      {
         v111 = 16;
+      }
     }
     else
     {
@@ -48621,7 +50810,9 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
       v104 = FastIndexValidation(i + 1);
       v103 = FastIndexValidation(v83 + (unsigned __int8)g_bHalfLine + 1);
       if ( i == g_iFadeYBorder - 1 )
+      {
         g_iUsedFogFadeStep = 15;
+      }
       ++v118;
       if ( v103 && v104 )
       {
@@ -48630,23 +50821,15 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
         v39 = v42 ? 0 : v118->m_uGradient & 0xF;
         v41 = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
         v40 = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
-        v75 = CHeightAndTypeTable::GetShadowFog(
-                (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                g_iUsedFogFadeStep,
-                v39,
-                v40,
-                v41);
-        v78 = CHeightAndTypeTable::GetLightFog(
-                (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                g_iUsedFogFadeStep,
-                v39,
-                v40,
-                v41);
+        v75 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
+        v78 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
         v115 = (unsigned __int8)byte_3ACD340[v118->m_uGroundType];
         v87 = (v118->m_uGradient & 0x40) != 0;
         v107 = v87;
         if ( (v115 == 28 || v115 == 29) && CalcCurrentFog(v118) <= 59 )
+        {
           v115 = 16;
+        }
       }
       else
       {
@@ -48670,23 +50853,15 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
         v35 = v38 ? 0 : v118->m_uGradient & 0xF;
         v37 = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
         v36 = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
-        v73 = CHeightAndTypeTable::GetShadowFog(
-                (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                g_iUsedFogFadeStep,
-                v35,
-                v36,
-                v37);
-        v72 = CHeightAndTypeTable::GetLightFog(
-                (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                g_iUsedFogFadeStep,
-                v35,
-                v36,
-                v37);
+        v73 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
+        v72 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
         v110 = (unsigned __int8)byte_3ACD340[v118->m_uGroundType];
         v88 = (v118->m_uGradient & 0x40) != 0;
         v102 = v88;
         if ( (v110 == 28 || v110 == 29) && CalcCurrentFog(v118) <= 59 )
+        {
           v110 = 16;
+        }
       }
       else
       {
@@ -48727,11 +50902,17 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
             if ( v27 > 0 && v26 > 0 )
             {
               if ( v117 == 28 )
+              {
                 v117 = 29;
+              }
               if ( v111 == 28 )
+              {
                 v111 = 29;
+              }
               if ( v115 == 28 )
+              {
                 v115 = 29;
+              }
             }
             if ( v111 == v115 )
             {
@@ -48755,20 +50936,17 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
               {
                 if ( v111 == v115 )
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v117]];
+                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111] + 4 * (unsigned __int8)byte_3ACD510[v117]];
                   v96 = &PatternTripleVertices[144 * *v114 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
                 }
                 else if ( v111 == v117 )
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v115]];
+                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111] + 4 * (unsigned __int8)byte_3ACD510[v115]];
                   v96 = &PatternTripleVertices[144 * *v114 + 12 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
                 }
                 else
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v111]];
+                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v111]];
                   v96 = &PatternTripleVertices[144 * *v114 + 24 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
                 }
               }
@@ -48811,14 +50989,8 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
         {
           g_bSplitTriangle = 0;
           g_pVertex -= 64;
-          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v75,
-                                          v68);
-          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v78,
-                                          v67);
+          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v75, v68);
+          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v78, v67);
           *(float *)g_pVertex = (float)(v105 >> 16);
           *(float *)(g_pVertex + 4) = (float)((v85 + v112 - (v69 + v77) / 2) >> 16);
           qmemcpy((void *)(g_pVertex + 96), (const void *)g_pVertex, 0x20u);
@@ -48829,14 +51001,8 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
           *(float *)g_pVertex = (float)((v94 + v105) >> 16);
           *(float *)(g_pVertex + 4) = (float)((v85 + v112 - v77) >> 16);
           g_pVertex += 32;
-          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v75,
-                                          v68);
-          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v78,
-                                          v67);
+          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v75, v68);
+          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v78, v67);
           *(float *)g_pVertex = (float)(v105 >> 16);
           *(float *)(g_pVertex + 4) = (float)((v85 + v112 - (v77 + v69) / 2) >> 16);
           g_pVertex -= 32;
@@ -48852,8 +51018,7 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
           g_pVertex += 32;
         }
       }
-      if ( (v83 != v66 - 1 || !g_bHalfLine)
-        && ((v112 >> 16) - v82 <= GfxEngineSetup.m_uHeight || (v112 >> 16) - v76 <= GfxEngineSetup.m_uHeight) )
+      if ( (v83 != v66 - 1 || !g_bHalfLine) && ((v112 >> 16) - v82 <= GfxEngineSetup.m_uHeight || (v112 >> 16) - v76 <= GfxEngineSetup.m_uHeight) )
       {
         s_iDarkTribeElement = 22 * (v107 || v102 || v106);
         if ( v117 == v110 && v110 == v115 && byte_3ACD240[v117] >= 0 )
@@ -48879,11 +51044,17 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
             if ( v19 > 0 && v18 > 0 )
             {
               if ( v117 == 28 )
+              {
                 v117 = 29;
+              }
               if ( v110 == 28 )
+              {
                 v110 = 29;
+              }
               if ( v115 == 28 )
+              {
                 v115 = 29;
+              }
             }
             if ( v117 == v110 )
             {
@@ -48907,20 +51078,17 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
               {
                 if ( v117 == v110 )
                 {
-                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v115]];
+                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v115]];
                   v95 = &PatternTripleVertices[144 * *v113 + 18 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
                 }
                 else if ( v110 == v115 )
                 {
-                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v117]];
+                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v117]];
                   v95 = &PatternTripleVertices[144 * *v113 + 30 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
                 }
                 else
                 {
-                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v110]];
+                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v110]];
                   v95 = &PatternTripleVertices[144 * *v113 + 6 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
                 }
               }
@@ -48963,14 +51131,8 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
         {
           g_bSplitTriangle = 0;
           g_pVertex -= 64;
-          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v73,
-                                          ShadowFog);
-          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v72,
-                                          LightFog);
+          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, ShadowFog);
+          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v72, LightFog);
           *(float *)g_pVertex = (float)((v94 + v105) >> 16);
           *(float *)(g_pVertex + 4) = (float)((v112 - (v82 + v76) / 2) >> 16);
           qmemcpy((void *)(g_pVertex + 96), (const void *)g_pVertex, 0x20u);
@@ -48982,14 +51144,8 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
           *(float *)g_pVertex = (float)((v99 + v105) >> 16);
           *(float *)(g_pVertex + 4) = (float)((v112 - v76) >> 16);
           g_pVertex += 64;
-          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v73,
-                                          ShadowFog);
-          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v72,
-                                          LightFog);
+          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, ShadowFog);
+          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v72, LightFog);
           *(float *)g_pVertex = (float)((v94 + v105) >> 16);
           *(float *)(g_pVertex + 4) = (float)((v112 - (v82 + v76) / 2) >> 16);
           *(_DWORD *)(g_pVertex + 24) = 0;
@@ -49005,13 +51161,17 @@ bool __cdecl DrawTexturedLandscape(int a1, int a2) {
         }
       }
       if ( g_pVertex >= (unsigned int)g_pVertexMax )
+      {
         CInterfaceD3D::RenderScene(D3DObjectPtr, 0);
+      }
       v105 += v99;
       v86 = v119 == 0;
       v119 = v119 == 0;
       *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX + 0.125;
       if ( *(float *)&g_fPatternSuboffsetX >= 1.0 )
+      {
         *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX - 1.0;
+      }
       v118 += g_iMapSize;
       v82 = v12;
       v69 = v11;
@@ -49182,27 +51342,41 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
   g_iMapSize = Size;
   v51 = g_pGfxLayer;
   if ( !g_pGfxLayer )
+  {
     return 1;
+  }
   dword_3E2E708 = LODWORD(FLOAT_0_001953125);
   if ( !SGfxRenderConfiguration::IsHQTextureSet((SGfxRenderConfiguration *)&GfxEngineSetup) )
+  {
     dword_3E2E708 = LODWORD(FLOAT_0_00390625);
+  }
   if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup) )
   {
     if ( !D3DObjectPtr )
+    {
       return 0;
+    }
     if ( !D3DObjectPtr->m_bInitHardware )
+    {
       return 0;
+    }
     LandscapeRenderTargetSurface = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
     if ( ((int (__thiscall *)(CSurfaceV7 *))LandscapeRenderTargetSurface->IsLost)(LandscapeRenderTargetSurface) == -2005532222 )
+    {
       return 0;
+    }
   }
   else
   {
     dword_3E2E708 = 0;
     if ( !D3DObjectPtr )
+    {
       return 0;
+    }
     if ( !D3DObjectPtr->m_bInitSoftware )
+    {
       return 0;
+    }
   }
   g_pVertex = D3DObjectPtr->field_0;
   v100 = g_iCameraVertexSize;
@@ -49214,7 +51388,9 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
   v34 = -g_iCameraVertexSize / 2;
   v95 = g_iCameraVertexSize / 2;
   if ( v10 + a2 + 5 < g_iMapSize && v75 > 0 )
+  {
     v75 += (unsigned __int8)byte_469717B[v75] / 5;
+  }
   v125 = -1;
   v126 = -1;
   v127 = -1;
@@ -49241,15 +51417,23 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
     v15 = ((v100 * (dword_3E2E2C4 - dword_46C167C)) >> 16) - (dword_46C1680 - dword_3E2E2CC);
     v58 = ((v95 * (dword_3E2E2C8 - dword_46C1684)) >> 16) - (dword_46C1688 - dword_3E2E2D0);
     if ( Number + dword_46C168C != v15 )
+    {
       Number = v15 - dword_46C168C;
+    }
     if ( v98 + dword_46C1690 != v58 )
+    {
       v98 = v58 - dword_46C1690;
+    }
     dword_46C168C += Number;
     dword_46C1690 += v98;
     if ( j__abs(Number) >= dword_3E2E2DC )
+    {
       byte_3E2E2FE = 1;
+    }
     if ( j__abs(v98) >= dword_3E2E2DC )
+    {
       byte_3E2E2FE = 1;
+    }
     if ( Number >= 0 )
     {
       if ( Number <= 0 )
@@ -49303,18 +51487,14 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
     v56 = !v126 && v128 == dword_3E2E2E0;
     v93 = v56;
     if ( v110 && v93 )
+    {
       return 1;
+    }
     if ( !byte_3E2E2FE )
     {
       v55 = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
       v3 = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
-      v94 = ((int (__thiscall *)(CSurfaceV7 *, int *, CSurfaceV7 *, int *, _DWORD, _DWORD))v55->Blt)(
-              v55,
-              &v125,
-              v3,
-              &v121,
-              0,
-              0);
+      v94 = ((int (__thiscall *)(CSurfaceV7 *, int *, CSurfaceV7 *, int *, _DWORD, _DWORD))v55->Blt)(v55, &v125, v3, &v121, 0, 0);
       if ( v94 )
       {
         WriteError(v94, "CamDeltaScrollBlitError");
@@ -49350,15 +51530,13 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       byte_4696877 = 0;
       return 0;
     }
-    j__TRI_set_window(
-      v5 + 2 * dword_3E2E2D4 + 2 * ((unsigned int)(v53 * dword_3E2E2D8) >> 1),
-      dword_3E2E2DC + 1,
-      dword_3E2E2E0 + 1,
-      v53);
+    j__TRI_set_window(v5 + 2 * dword_3E2E2D4 + 2 * ((unsigned int)(v53 * dword_3E2E2D8) >> 1), dword_3E2E2DC + 1, dword_3E2E2E0 + 1, v53);
   }
   v61 = (-dword_3E2E2CC - (v100 >> 16)) << 16;
   v85 = -1;
-  for ( i = a2; i < v75; ++i )
+  for ( i = a2;
+        i < v75;
+        ++i )
   {
     v109 = 1;
     if ( v125 != -1 )
@@ -49455,11 +51633,17 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
     *(float *)&g_fPatternSuboffsetY = (float)(j__abs(i) % 8) * 0.125;
     *(float *)&g_fPatternSuboffsetY = *(float *)&g_fPatternSuboffsetY + *(float *)&dword_3E2E708;
     if ( g_bHalfLine )
+    {
       *(float *)&g_fPatternSuboffsetX = (float)((float)((v81 - i / 2) % 8) * 0.125) + 0.0625;
+    }
     else
+    {
       *(float *)&g_fPatternSuboffsetX = (float)((v81 - i / 2) % 8) * 0.125;
+    }
     if ( *(float *)&g_fPatternSuboffsetX < 0.0 )
+    {
       *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX + 1.0;
+    }
     *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX + *(float *)&dword_3E2E708;
     v84 = v81;
     v101 = FastIndexValidation(i);
@@ -49474,23 +51658,15 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       v47 = v50 ? 0 : *((_BYTE *)v119 + 2) & 0xF;
       NewFogging = T_GFX_MAP_ELEMENT::GetNewFogging(v119);
       OldFogging = T_GFX_MAP_ELEMENT::GetOldFogging(v119);
-      ShadowFog = CHeightAndTypeTable::GetShadowFog(
-                    (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                    g_iUsedFogFadeStep,
-                    v47,
-                    OldFogging,
-                    NewFogging);
-      LightFog = CHeightAndTypeTable::GetLightFog(
-                   (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                   g_iUsedFogFadeStep,
-                   v47,
-                   OldFogging,
-                   NewFogging);
+      ShadowFog = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
+      LightFog = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
       v118 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v119 + 1)];
       v92 = (*((_BYTE *)v119 + 2) & 0x40) != 0;
       v107 = v92;
       if ( (v118 == 28 || v118 == 29) && CalcCurrentFog(v119) <= 59 )
+      {
         v118 = 16;
+      }
     }
     else
     {
@@ -49501,7 +51677,9 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       v107 = 0;
     }
     if ( i == g_iFadeYBorder - 1 )
+    {
       g_iUsedFogFadeStep = 15;
+    }
     v119 = (T_GFX_MAP_ELEMENT *)((char *)v119 + 4 * g_iMapSize);
     if ( v91 && v105 )
     {
@@ -49510,23 +51688,15 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       v43 = v46 ? 0 : *((_BYTE *)v119 + 2) & 0xF;
       v45 = T_GFX_MAP_ELEMENT::GetNewFogging(v119);
       v44 = T_GFX_MAP_ELEMENT::GetOldFogging(v119);
-      v69 = CHeightAndTypeTable::GetShadowFog(
-              (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-              g_iUsedFogFadeStep,
-              v43,
-              v44,
-              v45);
-      v68 = CHeightAndTypeTable::GetLightFog(
-              (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-              g_iUsedFogFadeStep,
-              v43,
-              v44,
-              v45);
+      v69 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
+      v68 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
       v112 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v119 + 1)];
       v90 = (*((_BYTE *)v119 + 2) & 0x40) != 0;
       v102 = v90;
       if ( (v112 == 28 || v112 == 29) && CalcCurrentFog(v119) <= 59 )
+      {
         v112 = 16;
+      }
     }
     else
     {
@@ -49543,7 +51713,9 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       v105 = FastIndexValidation(i + 1);
       v104 = FastIndexValidation(v84 + (unsigned __int8)g_bHalfLine + 1);
       if ( i == g_iFadeYBorder - 1 )
+      {
         g_iUsedFogFadeStep = 15;
+      }
       v119 = (T_GFX_MAP_ELEMENT *)((char *)v119 + 4);
       if ( v104 && v105 )
       {
@@ -49552,23 +51724,15 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
         v39 = v42 ? 0 : *((_BYTE *)v119 + 2) & 0xF;
         v41 = T_GFX_MAP_ELEMENT::GetNewFogging(v119);
         v40 = T_GFX_MAP_ELEMENT::GetOldFogging(v119);
-        v76 = CHeightAndTypeTable::GetShadowFog(
-                (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                g_iUsedFogFadeStep,
-                v39,
-                v40,
-                v41);
-        v79 = CHeightAndTypeTable::GetLightFog(
-                (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                g_iUsedFogFadeStep,
-                v39,
-                v40,
-                v41);
+        v76 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
+        v79 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
         v116 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v119 + 1)];
         v88 = (*((_BYTE *)v119 + 2) & 0x40) != 0;
         v108 = v88;
         if ( (v116 == 28 || v116 == 29) && CalcCurrentFog(v119) <= 59 )
+        {
           v116 = 16;
+        }
       }
       else
       {
@@ -49592,23 +51756,15 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
         v35 = v38 ? 0 : *((_BYTE *)v119 + 2) & 0xF;
         v37 = T_GFX_MAP_ELEMENT::GetNewFogging(v119);
         v36 = T_GFX_MAP_ELEMENT::GetOldFogging(v119);
-        v74 = CHeightAndTypeTable::GetShadowFog(
-                (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                g_iUsedFogFadeStep,
-                v35,
-                v36,
-                v37);
-        v73 = CHeightAndTypeTable::GetLightFog(
-                (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                g_iUsedFogFadeStep,
-                v35,
-                v36,
-                v37);
+        v74 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
+        v73 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
         v111 = (unsigned __int8)byte_3ACD340[*((unsigned __int8 *)v119 + 1)];
         v89 = (*((_BYTE *)v119 + 2) & 0x40) != 0;
         v103 = v89;
         if ( (v111 == 28 || v111 == 29) && CalcCurrentFog(v119) <= 59 )
+        {
           v111 = 16;
+        }
       }
       else
       {
@@ -49649,11 +51805,17 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
             if ( v27 > 0 && v26 > 0 )
             {
               if ( v118 == 28 )
+              {
                 v118 = 29;
+              }
               if ( v112 == 28 )
+              {
                 v112 = 29;
+              }
               if ( v116 == 28 )
+              {
                 v116 = 29;
+              }
             }
             if ( v112 == v116 )
             {
@@ -49677,20 +51839,17 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
               {
                 if ( v112 == v116 )
                 {
-                  v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v112]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v118]];
+                  v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v112] + 4 * (unsigned __int8)byte_3ACD510[v118]];
                   v97 = &PatternTripleVertices[144 * *v115 + 36 * v115[1] + 36 * (unsigned __int8)(v120 & v115[3])];
                 }
                 else if ( v112 == v118 )
                 {
-                  v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v112]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v116]];
+                  v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v112] + 4 * (unsigned __int8)byte_3ACD510[v116]];
                   v97 = &PatternTripleVertices[144 * *v115 + 12 + 36 * v115[1] + 36 * (unsigned __int8)(v120 & v115[3])];
                 }
                 else
                 {
-                  v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v112]];
+                  v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118] + 4 * (unsigned __int8)byte_3ACD510[v112]];
                   v97 = &PatternTripleVertices[144 * *v115 + 24 + 36 * v115[1] + 36 * (unsigned __int8)(v120 & v115[3])];
                 }
               }
@@ -49733,14 +51892,8 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
         {
           g_bSplitTriangle = 0;
           g_pVertex -= 64;
-          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v76,
-                                          v69);
-          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v79,
-                                          v68);
+          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v76, v69);
+          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v79, v68);
           *(float *)g_pVertex = (float)(v106 >> 16);
           *(float *)(g_pVertex + 4) = (float)((v86 + v113 - (v70 + v78) / 2) >> 16);
           qmemcpy((void *)(g_pVertex + 96), (const void *)g_pVertex, 0x20u);
@@ -49751,14 +51904,8 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
           *(float *)g_pVertex = (float)((v95 + v106) >> 16);
           *(float *)(g_pVertex + 4) = (float)((v86 + v113 - v78) >> 16);
           g_pVertex += 32;
-          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v76,
-                                          v69);
-          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v79,
-                                          v68);
+          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v76, v69);
+          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v79, v68);
           *(float *)g_pVertex = (float)(v106 >> 16);
           *(float *)(g_pVertex + 4) = (float)((v86 + v113 - (v78 + v70) / 2) >> 16);
           g_pVertex -= 32;
@@ -49774,8 +51921,7 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
           g_pVertex += 32;
         }
       }
-      if ( (v84 != v67 - 1 || !g_bHalfLine)
-        && ((v113 >> 16) - v83 <= dword_3E2E2E0 || (v113 >> 16) - v77 <= dword_3E2E2E0) )
+      if ( (v84 != v67 - 1 || !g_bHalfLine) && ((v113 >> 16) - v83 <= dword_3E2E2E0 || (v113 >> 16) - v77 <= dword_3E2E2E0) )
       {
         s_iDarkTribeElement = 22 * (v108 || v103 || v107);
         if ( v118 == v111 && v111 == v116 && byte_3ACD240[v118] >= 0 )
@@ -49801,11 +51947,17 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
             if ( v19 > 0 && v16 > 0 )
             {
               if ( v118 == 28 )
+              {
                 v118 = 29;
+              }
               if ( v111 == 28 )
+              {
                 v111 = 29;
+              }
               if ( v116 == 28 )
+              {
                 v116 = 29;
+              }
             }
             if ( v118 == v111 )
             {
@@ -49829,20 +51981,17 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
               {
                 if ( v118 == v111 )
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v116]];
+                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118] + 4 * (unsigned __int8)byte_3ACD510[v116]];
                   v96 = &PatternTripleVertices[144 * *v114 + 18 + 36 * v114[1] + 36 * (unsigned __int8)(v120 & v114[3])];
                 }
                 else if ( v111 == v116 )
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v118]];
+                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111] + 4 * (unsigned __int8)byte_3ACD510[v118]];
                   v96 = &PatternTripleVertices[144 * *v114 + 30 + 36 * v114[1] + 36 * (unsigned __int8)(v120 & v114[3])];
                 }
                 else
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118]
-                                     + 4 * (unsigned __int8)byte_3ACD510[v111]];
+                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118] + 4 * (unsigned __int8)byte_3ACD510[v111]];
                   v96 = &PatternTripleVertices[144 * *v114 + 6 + 36 * v114[1] + 36 * (unsigned __int8)(v120 & v114[3])];
                 }
               }
@@ -49885,14 +52034,8 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
         {
           g_bSplitTriangle = 0;
           g_pVertex -= 64;
-          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v74,
-                                          ShadowFog);
-          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v73,
-                                          LightFog);
+          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v74, ShadowFog);
+          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, LightFog);
           *(float *)g_pVertex = (float)((v95 + v106) >> 16);
           *(float *)(g_pVertex + 4) = (float)((v113 - (v83 + v77) / 2) >> 16);
           qmemcpy((void *)(g_pVertex + 96), (const void *)g_pVertex, 0x20u);
@@ -49904,14 +52047,8 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
           *(float *)g_pVertex = (float)((v100 + v106) >> 16);
           *(float *)(g_pVertex + 4) = (float)((v113 - v77) >> 16);
           g_pVertex += 64;
-          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v74,
-                                          ShadowFog);
-          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue(
-                                          (CHeightAndTypeTable *)g_cHeightAndTypeTable,
-                                          v73,
-                                          LightFog);
+          *(_DWORD *)(g_pVertex + 16) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v74, ShadowFog);
+          *(_DWORD *)(g_pVertex + 20) = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, LightFog);
           *(float *)g_pVertex = (float)((v95 + v106) >> 16);
           *(float *)(g_pVertex + 4) = (float)((v113 - (v83 + v77) / 2) >> 16);
           *(_DWORD *)(g_pVertex + 24) = 0;
@@ -49927,13 +52064,17 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
         }
       }
       if ( g_pVertex >= (unsigned int)g_pVertexMax )
+      {
         CInterfaceD3D::RenderScene(D3DObjectPtr, 1);
+      }
       v106 += v100;
       v87 = v120 == 0;
       v120 = v120 == 0;
       *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX + 0.125;
       if ( *(float *)&g_fPatternSuboffsetX >= 1.0 )
+      {
         *(float *)&g_fPatternSuboffsetX = *(float *)&g_fPatternSuboffsetX - 1.0;
+      }
       v119 = (T_GFX_MAP_ELEMENT *)((char *)v119 + 4 * g_iMapSize);
       v83 = v13;
       v70 = v12;
@@ -49981,16 +52122,24 @@ void __cdecl CalcMaxHeights(struct T_GFX_MAP_ELEMENT * a1, int a2) {
   int i; // [esp+Ch] [ebp-8h]
   int j; // [esp+10h] [ebp-4h]
 
-  for ( i = 0; i < a2; ++i )
+  for ( i = 0;
+        i < a2;
+        ++i )
   {
     v5 = 0;
     v4 = (char *)a1 + 4 * a2 * i;
-    for ( j = 0; j < a2; ++j )
+    for ( j = 0;
+          j < a2;
+          ++j )
     {
       if ( v5 <= (unsigned __int8)v4[4 * j] )
+      {
         v3 = (unsigned __int8)v4[4 * j];
+      }
       else
+      {
         v3 = v5;
+      }
       v5 = v3;
     }
     g_uMaxYTable[i] = v5;
@@ -50021,24 +52170,38 @@ void __cdecl SetObjectMovement(int a1, int a2) {
 long __stdcall D3DEnumPixelFormatsCallback(struct _DDPIXELFORMAT * a1, void * a2) {
   
   if ( (a1->dwFlags & 0xE0000) != 0 )
+  {
     return 1;
+  }
   if ( a1->dwFourCC )
+  {
     return 1;
+  }
   if ( a1->dwRGBBitCount != 16 )
+  {
     return 1;
+  }
   if ( (a1->dwFlags & 1) != 0 )
   {
     if ( a1->dwRBitMask == 3840 && a1->dwGBitMask == 240 && a1->dwBBitMask == 15 && a1->dwRGBAlphaBitMask == 61440 )
+    {
       a2[2] = 1;
+    }
     if ( a1->dwRBitMask == 31744 && a1->dwGBitMask == 992 && a1->dwBBitMask == 31 && a1->dwRGBAlphaBitMask == 0x8000 )
+    {
       a2[3] = 1;
+    }
   }
   else
   {
     if ( a1->dwRBitMask == 31744 && a1->dwGBitMask == 992 && a1->dwBBitMask == 31 && !a1->dwRGBAlphaBitMask )
+    {
       *a2 = 1;
+    }
     if ( a1->dwRBitMask == 63488 && a1->dwGBitMask == 2016 && a1->dwBBitMask == 31 && !a1->dwRGBAlphaBitMask )
+    {
       a2[1] = 1;
+    }
   }
   return 1;
 }
@@ -50070,12 +52233,10 @@ bool __cdecl DrawMiniMapLandscapeLayer(void) {
   unsigned __int8 v20; // [esp+46h] [ebp-2h]
 
   if ( !g_pGfxLayer )
+  {
     return 0;
-  v13 = ((int (__thiscall *)(CSurfaceV7 *, unsigned int *, int *, int))D3DObjectPtr->MiniMapSurface->Lock)(
-          D3DObjectPtr->MiniMapSurface,
-          &v8,
-          &v6,
-          1);
+  }
+  v13 = ((int (__thiscall *)(CSurfaceV7 *, unsigned int *, int *, int))D3DObjectPtr->MiniMapSurface->Lock)(D3DObjectPtr->MiniMapSurface, &v8, &v6, 1);
   if ( v13 )
   {
     WriteError(v13, "LockMiniMapSurface");
@@ -50087,10 +52248,11 @@ bool __cdecl DrawMiniMapLandscapeLayer(void) {
     v15 = (_WORD *)(v6 + 2 * ((v8 * dword_46C7E4C) >> 1));
     v15 += dword_46C7E48 + 80 - dword_46C7E4C % 8 / 2;
     v4 = 8 * (v8 >> 1) - 160;
-    for ( i = dword_46C7E4C; i < 160; i += 8 )
+    for ( i = dword_46C7E4C;
+          i < 160;
+          i += 8 )
     {
-      v10 = (float)(int)(Size * (int)(float)((float)((float)i * *(float *)&dword_3E2E71C) + 0.5))
-          + (float)((float)dword_46C7E48 * *(float *)&dword_3E2E71C);
+      v10 = (float)(int)(Size * (int)(float)((float)((float)i * *(float *)&dword_3E2E71C) + 0.5)) + (float)((float)dword_46C7E48 * *(float *)&dword_3E2E71C);
       v12 = dword_46C7E48;
       while ( v12 < 160 )
       {
@@ -50128,23 +52290,37 @@ bool __cdecl DrawMiniMapLandscapeLayer(void) {
             }
           }
           if ( v16 < 9 )
+          {
             v16 = 9;
+          }
           if ( v18 < 9 )
+          {
             v18 = 9;
+          }
           if ( v17 < 9 )
+          {
             v17 = 9;
+          }
           if ( v16 > 255 )
+          {
             v16 = 255;
+          }
           if ( v18 > 255 )
+          {
             v18 = 255;
+          }
           if ( v17 > 255 )
+          {
             v17 = 255;
+          }
           if ( g_uGfxMode == 1 )
-            v2 = 32 * (int)(float)((float)v17 * 0.12156863)
-               + ((unsigned __int16)(int)(float)((float)v16 * 0.12156863) << 10);
+          {
+            v2 = 32 * (int)(float)((float)v17 * 0.12156863) + ((unsigned __int16)(int)(float)((float)v16 * 0.12156863) << 10);
+          }
           else
-            v2 = 32 * (int)(float)((float)v17 * 0.24705882)
-               + ((unsigned __int16)(int)(float)((float)v16 * 0.12156863) << 11);
+          {
+            v2 = 32 * (int)(float)((float)v17 * 0.24705882) + ((unsigned __int16)(int)(float)((float)v16 * 0.12156863) << 11);
+          }
           *v15 = (int)(float)((float)v18 * 0.12156863) + v2;
         }
         v12 += 8;
@@ -50191,9 +52367,13 @@ bool __cdecl DrawMiniMapObjectLayer(void) {
   int v17; // [esp+3Ch] [ebp-4h]
 
   if ( !g_pfGetGfxMiniMapColor || !g_pfGetOwnerID )
+  {
     return 0;
+  }
   if ( !g_pGfxLayer )
+  {
     return 0;
+  }
   v12 = D3DObjectPtr->MiniMapSurface->Lock(D3DObjectPtr->MiniMapSurface, (int *)&v5, &v6, 1);
   if ( v12 )
   {
@@ -50206,7 +52386,9 @@ bool __cdecl DrawMiniMapObjectLayer(void) {
     NewValue = _controlfp(0x300u, 0x300u);
     v9 += 160;
     v4 = v5 >> 1;
-    for ( i = dword_46C7E4C; i < (int)Size; i += 8 )
+    for ( i = dword_46C7E4C;
+          i < (int)Size;
+          i += 8 )
     {
       v17 = (int)(float)((float)((float)i * *(float *)&dword_3E2E718) + 0.5);
       v7 = v9 + 2 * (v4 * v17 - v17 / 2);
@@ -50217,7 +52399,9 @@ bool __cdecl DrawMiniMapObjectLayer(void) {
         v16 = (int)(float)((float)((float)v11 * *(float *)&dword_3E2E718) + 0.5);
         v14 = (unsigned __int8)byte_46C8358[162 * v16 + v17];
         if ( v14 )
+        {
           byte_46C8358[162 * v16 + v17] = --v14;
+        }
         if ( !v14 || v14 == 254 )
         {
           GfxMiniMapColor = g_pfGetGfxMiniMapColor(v15);
@@ -50234,10 +52418,7 @@ bool __cdecl DrawMiniMapObjectLayer(void) {
           {
             OwnerID = g_pfGetOwnerID(v15);
             byte_46C8358[162 * v16 + v17] = byte_46CE9E0[162 * v16 + v17];
-            v2 = IGfxEngine::ConvertRgbToHicol(
-                   g_cColorGradient.m_vPlayerColors[OwnerID].m_iR,
-                   g_cColorGradient.m_vPlayerColors[OwnerID].m_iG,
-                   g_cColorGradient.m_vPlayerColors[OwnerID].m_iB);
+            v2 = IGfxEngine::ConvertRgbToHicol(g_cColorGradient.m_vPlayerColors[OwnerID].m_iR, g_cColorGradient.m_vPlayerColors[OwnerID].m_iG, g_cColorGradient.m_vPlayerColors[OwnerID].m_iB);
             *(_WORD *)(v7 + 2 * v16) = v2;
           }
         }
@@ -50279,12 +52460,14 @@ bool __cdecl MarkCurrentArea(void) {
   _WORD *v13; // [esp+30h] [ebp-4h]
 
   if ( !D3DObjectPtr )
+  {
     return 0;
+  }
   if ( !D3DObjectPtr->m_bInitHardware && !D3DObjectPtr->m_bInitSoftware )
+  {
     return 0;
-  v8 = ((int (__thiscall *)(CSurfaceV7 *, _DWORD))D3DObjectPtr->MiniMapAreaSurface->ClearSurface)(
-         D3DObjectPtr->MiniMapAreaSurface,
-         0);
+  }
+  v8 = ((int (__thiscall *)(CSurfaceV7 *, _DWORD))D3DObjectPtr->MiniMapAreaSurface->ClearSurface)(D3DObjectPtr->MiniMapAreaSurface, 0);
   if ( v8 )
   {
     WriteError(v8, "Clear mini map surface");
@@ -50292,11 +52475,7 @@ bool __cdecl MarkCurrentArea(void) {
   }
   else
   {
-    v8 = ((int (__thiscall *)(CSurfaceV7 *, unsigned int *, unsigned int *, int))D3DObjectPtr->MiniMapAreaSurface->Lock)(
-           D3DObjectPtr->MiniMapAreaSurface,
-           &v2,
-           &v3,
-           1);
+    v8 = ((int (__thiscall *)(CSurfaceV7 *, unsigned int *, unsigned int *, int))D3DObjectPtr->MiniMapAreaSurface->Lock)(D3DObjectPtr->MiniMapAreaSurface, &v2, &v3, 1);
     if ( v8 )
     {
       WriteError(v8, "LockMiniMapAreaSurface");
@@ -50320,20 +52499,28 @@ bool __cdecl MarkCurrentArea(void) {
       }
       else
       {
-        for ( i = 0; i < dword_3E2E724; ++i )
+        for ( i = 0;
+              i < dword_3E2E724;
+              ++i )
         {
           if ( v12 <= v9 && v12 > v10 )
+          {
             *v13 = -1;
+          }
           ++v13;
           ++v12;
         }
       }
       --v13;
       --v12;
-      for ( i = 0; i < dword_3E2E728; ++i )
+      for ( i = 0;
+            i < dword_3E2E728;
+            ++i )
       {
         if ( (unsigned int)v13 > v6 && (unsigned int)v13 < v5 && v12 <= v9 && v12 > v10 )
+        {
           *v13 = -1;
+        }
         v13 += v7;
         if ( (i & 1) != 0 )
         {
@@ -50349,20 +52536,28 @@ bool __cdecl MarkCurrentArea(void) {
       }
       else
       {
-        for ( i = 0; i < dword_3E2E724; ++i )
+        for ( i = 0;
+              i < dword_3E2E724;
+              ++i )
         {
           if ( v12 <= v9 && v12 > v10 )
+          {
             *v13 = -1;
+          }
           --v13;
           --v12;
         }
       }
       ++v13;
       ++v12;
-      for ( i = 0; i < dword_3E2E728; ++i )
+      for ( i = 0;
+            i < dword_3E2E728;
+            ++i )
       {
         if ( (unsigned int)v13 > v6 && (unsigned int)v13 < v5 && v12 <= v9 && v12 > v10 )
+        {
           *v13 = -1;
+        }
         v13 -= v7;
         if ( (i & 1) != 0 )
         {
@@ -50421,7 +52616,9 @@ bool __cdecl DrawCompleteMiniMap(void) {
   unsigned __int8 v29; // [esp+66h] [ebp-2h]
 
   if ( !g_pGfxLayer || !g_pfGetOwnerID )
+  {
     return 0;
+  }
   v19 = D3DObjectPtr->MiniMapSurface->Lock(D3DObjectPtr->MiniMapSurface, (int *)&v9, &v10, 1);
   if ( v19 )
   {
@@ -50433,17 +52630,19 @@ bool __cdecl DrawCompleteMiniMap(void) {
     NewValue = _controlfp(0x300u, 0x300u);
     v26 = (_WORD *)(v10 + 160);
     v6 = (v9 >> 1) - 160;
-    for ( i = 0; i < 160; ++i )
+    for ( i = 0;
+          i < 160;
+          ++i )
     {
       v13 = (float)(int)(Size * (int)(float)((float)((float)i * *(float *)&dword_3E2E71C) + 0.5));
-      for ( j = 0; j < 160; ++j )
+      for ( j = 0;
+            j < 160;
+            ++j )
       {
         v18 = &g_pGfxLayer[(float)(v13 + 0.5)];
         m_uGroundType = v18->m_uGroundType;
         v14 = 8 * T_GFX_MAP_ELEMENT::GetGradient(v18) - 64;
-        v1 = CLandscapeColorProperties::ColorEntry(
-               (CLandscapeColorProperties *)&g_cLandscapeColorProperties,
-               m_uGroundType);
+        v1 = CLandscapeColorProperties::ColorEntry((CLandscapeColorProperties *)&g_cLandscapeColorProperties, m_uGroundType);
         v28 = *(_WORD *)v1;
         v29 = v1[2];
         v24 = v14 + (unsigned __int8)v28;
@@ -50472,25 +52671,37 @@ bool __cdecl DrawCompleteMiniMap(void) {
           }
         }
         if ( v24 < 9 )
+        {
           v24 = 9;
+        }
         if ( v27 < 9 )
+        {
           v27 = 9;
+        }
         if ( v25 < 9 )
+        {
           v25 = 9;
+        }
         if ( v24 > 255 )
+        {
           v24 = 255;
+        }
         if ( v27 > 255 )
+        {
           v27 = 255;
+        }
         if ( v25 > 255 )
+        {
           v25 = 255;
+        }
         if ( g_uGfxMode == 1 )
-          *v26 = (int)(float)((float)v27 * 0.12156863)
-               + 32 * (int)(float)((float)v25 * 0.12156863)
-               + ((unsigned __int16)(int)(float)((float)v24 * 0.12156863) << 10);
+        {
+          *v26 = (int)(float)((float)v27 * 0.12156863) + 32 * (int)(float)((float)v25 * 0.12156863) + ((unsigned __int16)(int)(float)((float)v24 * 0.12156863) << 10);
+        }
         else
-          *v26 = (int)(float)((float)v27 * 0.12156863)
-               + 32 * (int)(float)((float)v25 * 0.24705882)
-               + ((unsigned __int16)(int)(float)((float)v24 * 0.12156863) << 11);
+        {
+          *v26 = (int)(float)((float)v27 * 0.12156863) + 32 * (int)(float)((float)v25 * 0.24705882) + ((unsigned __int16)(int)(float)((float)v24 * 0.12156863) << 11);
+        }
         ++v26;
         v13 = v13 + *(float *)&dword_3E2E71C;
       }
@@ -50502,7 +52713,9 @@ bool __cdecl DrawCompleteMiniMap(void) {
       memset(byte_46C8358, 0, 0x6684u);
       v26 = (_WORD *)(v10 + 160);
       v5 = v9 >> 1;
-      for ( i = 0; i < (int)Size; ++i )
+      for ( i = 0;
+            i < (int)Size;
+            ++i )
       {
         v21 = (int)(float)((float)((float)i * *(float *)&dword_3E2E718) + 0.5);
         v8 = &v26[v5 * v21 - v21 / 2];
@@ -50525,10 +52738,7 @@ bool __cdecl DrawCompleteMiniMap(void) {
           {
             OwnerID = g_pfGetOwnerID(v22);
             byte_46C8358[162 * v20 + v21] = byte_46CE9E0[162 * v20 + v21];
-            v3 = IGfxEngine::ConvertRgbToHicol(
-                   *(_DWORD *)&g_cColorGradient.m_vGradients[8][12 * OwnerID],
-                   (int)(&g_cColorGradient.?)[3 * OwnerID],
-                   (int)(&g_cColorGradient.?)[3 * OwnerID]);
+            v3 = IGfxEngine::ConvertRgbToHicol(*(_DWORD *)&g_cColorGradient.m_vGradients[8][12 * OwnerID], (int)(&g_cColorGradient.?)[3 * OwnerID], (int)(&g_cColorGradient.?)[3 * OwnerID]);
             v8[v20] = v3;
           }
           ++v17;
@@ -50592,18 +52802,26 @@ void __cdecl CalcMaxTimeStamps(void) {
   {
     do
     {
-      for ( i = v4; i < (int)Size; i += 8 )
+      for ( i = v4;
+            i < (int)Size;
+            i += 8 )
       {
         v1 = (int)(float)((float)((float)i * *(float *)&dword_3E2E718) + 0.5);
-        for ( j = v5; j < (int)Size; j += 8 )
+        for ( j = v5;
+              j < (int)Size;
+              j += 8 )
+        {
           ++byte_46CE9E0[162 * (int)(float)((float)((float)j * *(float *)&dword_3E2E718) + 0.5) + v1];
+        }
       }
       result = (void *)++v5;
       while ( v5 >= 8 )
       {
         v5 -= 8;
         if ( ++v4 >= 8 )
+        {
           v4 = 0;
+        }
       }
     }
     while ( v5 || v4 );
@@ -50624,7 +52842,9 @@ void __cdecl GetNextLayer(void) {
   {
     dword_46C7E48 -= 8;
     if ( ++dword_46C7E4C >= 8 )
+    {
       dword_46C7E4C = 0;
+    }
   }
   return result;
 }
@@ -50656,19 +52876,29 @@ void __cdecl RefreshShading(int a1, bool a2) {
 
   v6 = dword_46D7A70 + 4 * a1;
   if ( a1 >= dword_46D7A74 )
+  {
     v2 = *(unsigned __int8 *)(v6 - 4 * dword_46D7A74);
+  }
   else
+  {
     v2 = *(unsigned __int8 *)(dword_46D7A70 + 4 * a1);
+  }
   if ( a1 < dword_46D7A78 - dword_46D7A74 )
+  {
     v3 = *(unsigned __int8 *)(v6 + 4 * dword_46D7A74);
+  }
   else
+  {
     v3 = *(unsigned __int8 *)(dword_46D7A70 + 4 * a1);
+  }
   v5 = v2 - v3;
   LOBYTE(v4) = 8;
   if ( v2 - v3 <= 0 )
   {
     if ( v5 < 0 )
+    {
       v4 = (v5 >> 1) + 8;
+    }
   }
   else
   {
@@ -50679,9 +52909,13 @@ void __cdecl RefreshShading(int a1, bool a2) {
   if ( !a2 )
   {
     if ( a1 >= dword_46D7A74 )
+    {
       RefreshShading(a1 - dword_46D7A74, 1);
+    }
     if ( a1 < dword_46D7A78 - dword_46D7A74 )
+    {
       RefreshShading(dword_46D7A74 + a1, 1);
+    }
   }
 }
 
@@ -50730,32 +52964,21 @@ bool __cdecl CheckField(int a1, int a2, int a3, int a4) {
     }
   }
   if ( !(unsigned __int8)sub_2F8F730(a2) )
-    return (unsigned __int8)sub_2F8F660(a4, v5)
-        && (unsigned __int8)sub_2F8F660(a4, v6)
-        && (unsigned __int8)sub_2F8F660(a4, v7)
-        && (unsigned __int8)sub_2F8F660(a4, v8)
-        && (unsigned __int8)sub_2F8F660(a4, v9)
-        && (unsigned __int8)sub_2F8F660(a4, v10);
+  {
+    return (unsigned __int8)sub_2F8F660(a4, v5) && (unsigned __int8)sub_2F8F660(a4, v6) && (unsigned __int8)sub_2F8F660(a4, v7) && (unsigned __int8)sub_2F8F660(a4, v8) && (unsigned __int8)sub_2F8F660(a4, v9) && (unsigned __int8)sub_2F8F660(a4, v10);
+  }
   if ( (unsigned __int8)sub_2F8F710(a1 - 1) )
   {
     v7 = *(unsigned __int8 *)(dword_46D7A70 + 4 * a3 - 3);
     *(_BYTE *)(dword_46D7A70 + 4 * a3 - 1) |= 0x40u;
   }
   if ( !(unsigned __int8)sub_2F8F710(a1 + 1) )
-    return (unsigned __int8)sub_2F8F660(a4, v5)
-        && (unsigned __int8)sub_2F8F660(a4, v6)
-        && (unsigned __int8)sub_2F8F660(a4, v7)
-        && (unsigned __int8)sub_2F8F660(a4, v8)
-        && (unsigned __int8)sub_2F8F660(a4, v9)
-        && (unsigned __int8)sub_2F8F660(a4, v10);
+  {
+    return (unsigned __int8)sub_2F8F660(a4, v5) && (unsigned __int8)sub_2F8F660(a4, v6) && (unsigned __int8)sub_2F8F660(a4, v7) && (unsigned __int8)sub_2F8F660(a4, v8) && (unsigned __int8)sub_2F8F660(a4, v9) && (unsigned __int8)sub_2F8F660(a4, v10);
+  }
   v8 = *(unsigned __int8 *)(dword_46D7A70 + 4 * a3 + 5);
   *(_BYTE *)(dword_46D7A70 + 4 * a3 + 7) |= 0x40u;
-  return (unsigned __int8)sub_2F8F660(a4, v5)
-      && (unsigned __int8)sub_2F8F660(a4, v6)
-      && (unsigned __int8)sub_2F8F660(a4, v7)
-      && (unsigned __int8)sub_2F8F660(a4, v8)
-      && (unsigned __int8)sub_2F8F660(a4, v9)
-      && (unsigned __int8)sub_2F8F660(a4, v10);
+  return (unsigned __int8)sub_2F8F660(a4, v5) && (unsigned __int8)sub_2F8F660(a4, v6) && (unsigned __int8)sub_2F8F660(a4, v7) && (unsigned __int8)sub_2F8F660(a4, v8) && (unsigned __int8)sub_2F8F660(a4, v9) && (unsigned __int8)sub_2F8F660(a4, v10);
 }
 
 
@@ -50768,9 +52991,13 @@ void __cdecl SetDarkLandFlag(int a1, int a2, bool a3, int & a4, int & a5) {
 
   v6 = a1 + a2 * dword_46D7A74;
   if ( a3 && *(unsigned __int8 *)(dword_46D7A70 + 4 * v6 + 1) > 7u )
+  {
     *(_BYTE *)(dword_46D7A70 + 4 * v6 + 2) |= 0x40u;
+  }
   else
+  {
     *(_BYTE *)(dword_46D7A70 + 4 * v6 + 2) &= ~0x40u;
+  }
   *(_BYTE *)(dword_46D7A70 + 4 * v6 + 3) |= 0x40u;
   dword_46D7D90 = a2;
   dword_46D7A7C = a2;
@@ -50794,9 +53021,13 @@ void __cdecl EnsureDarkCrossingBit(int a1, int a2, int a3, bool a4) {
   if ( (unsigned __int8)sub_2F8F6D0(a2, a3) )
   {
     if ( a3 < dword_46D7A7C )
+    {
       dword_46D7A7C = a3;
+    }
     if ( a3 > dword_46D7D90 )
+    {
       dword_46D7D90 = a3;
+    }
     v4 = (*(_BYTE *)(dword_46D7A70 + 4 * a1 + 2) & 0x40) != 0;
     if ( (unsigned __int8)sub_2F8F730(a3 - 1) )
     {
@@ -50829,9 +53060,13 @@ void __cdecl EnsureDarkCrossingBit(int a1, int a2, int a3, bool a4) {
       *(_BYTE *)(dword_46D7A70 + 4 * a1 - 1) |= 0x40u;
     }
     if ( !v4 || v4 == 7 || (*(_BYTE *)(dword_46D7A70 + 4 * a1 + 2) & 0x40) != 0 )
+    {
       *(_BYTE *)(dword_46D7A70 + 4 * a1 + 2) &= ~0x80u;
+    }
     else
+    {
       *(_BYTE *)(dword_46D7A70 + 4 * a1 + 2) |= 0x80u;
+    }
     if ( !a4 )
     {
       EnsureDarkCrossingBit(a1 + 1, a2 + 1, a3, 1);
@@ -50889,7 +53124,9 @@ bool __cdecl BlitSettlerHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
   int v33; // [esp+54h] [ebp+10h]
 
   if ( !*((_DWORD *)a4 + 1) )
+  {
     return 0;
+  }
   byte_46F32C8 = *((_BYTE *)a4 + 23) != 0;
   *((_BYTE *)a4 + 23) = 0;
   v32 = a2 >> 16;
@@ -50907,31 +53144,25 @@ bool __cdecl BlitSettlerHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
     v28 = (float)v32 - (float)((float)*v22 * g_fZoomFactor);
     v23 = v22 + 1;
     v24 = (float)v33 - (float)((float)*v23 * g_fZoomFactor);
-    if ( (float)GfxEngineSetup.m_uWidth >= v28
-      && (float)GfxEngineSetup.m_uHeight >= v24
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v12) + v28) >= (float)g_uLeftGuiBorderWidth
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v8) + v24) >= 0.0 )
+    if ( (float)GfxEngineSetup.m_uWidth >= v28 && (float)GfxEngineSetup.m_uHeight >= v24 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v12) + v28) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v8) + v24) >= 0.0 )
     {
       if ( g_fZoomFactor >= 1.0 )
+      {
         v7 = 0;
+      }
       else
+      {
         v7 = 64;
+      }
       HIDWORD(v5) = v12;
       LODWORD(v5) = v23 + 5;
-      RenderGfx(
-        *(_DWORD *)(v23 + 1) + 1000000 * *((unsigned __int8 *)a4 + 715),
-        &g_uColorPalette,
-        v5,
-        v8,
-        __SPAIR64__(LODWORD(v24), LODWORD(v28)),
-        65793 * a1,
-        0,
-        v7,
-        0);
+      RenderGfx(*(_DWORD *)(v23 + 1) + 1000000 * *((unsigned __int8 *)a4 + 715), &g_uColorPalette, v5, v8, __SPAIR64__(LODWORD(v24), LODWORD(v28)), 65793 * a1, 0, v7, 0);
     }
   }
   if ( !g_pIconPalette )
+  {
     return 1;
+  }
   if ( *((_BYTE *)a4 + 22) )
   {
     v16 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 22)];
@@ -50941,10 +53172,7 @@ bool __cdecl BlitSettlerHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
     v9 = *v16++;
     v29 = (float)v32 - (float)((float)*v16 * g_fZoomFactor);
     v25 = (float)v33 - (float)((float)v16[1] * g_fZoomFactor);
-    if ( (float)GfxEngineSetup.m_uWidth >= v29
-      && (float)GfxEngineSetup.m_uHeight >= v25
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v13) + v29) >= (float)g_uLeftGuiBorderWidth
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v9) + v25) >= 0.0 )
+    if ( (float)GfxEngineSetup.m_uWidth >= v29 && (float)GfxEngineSetup.m_uHeight >= v25 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v13) + v29) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v9) + v25) >= 0.0 )
     {
       g_iSettlerSelections[3 * g_iSettlerSelectionCounter] = (int)v29;
       g_iSettlerSelections[3 * g_iSettlerSelectionCounter + 1] = (int)v25;
@@ -50960,10 +53188,7 @@ bool __cdecl BlitSettlerHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
     v30 = (float)v32 - (float)((float)*v19 * g_fZoomFactor);
     v20 = v19 + 1;
     v26 = (float)v33 - (float)((float)*v20 * g_fZoomFactor);
-    if ( (float)GfxEngineSetup.m_uWidth >= v30
-      && (float)GfxEngineSetup.m_uHeight >= v26
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v14) + v30) >= (float)g_uLeftGuiBorderWidth
-      && (float)((float)*(int *)(g_pDestSizeTable + 4 * v10) + v26) >= 0.0 )
+    if ( (float)GfxEngineSetup.m_uWidth >= v30 && (float)GfxEngineSetup.m_uHeight >= v26 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v14) + v30) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v10) + v26) >= 0.0 )
     {
       g_iSettlerFitness[5 * g_iSettlerFitnessCounter] = (int)v30;
       g_iSettlerFitness[5 * g_iSettlerFitnessCounter + 1] = (int)v26;
@@ -50973,7 +53198,9 @@ bool __cdecl BlitSettlerHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
     }
   }
   if ( !*((_BYTE *)a4 + 21) )
+  {
     return 1;
+  }
   v17 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 21)];
   *((_BYTE *)a4 + 21) = 0;
   v15 = *v17++;
@@ -50981,10 +53208,7 @@ bool __cdecl BlitSettlerHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
   v31 = (float)v32 - (float)((float)*v17 * g_fZoomFactor);
   v18 = v17 + 1;
   v27 = (float)v33 - (float)((float)*v18 * g_fZoomFactor);
-  if ( (float)GfxEngineSetup.m_uWidth < v31
-    || (float)GfxEngineSetup.m_uHeight < v27
-    || (float)((float)*(int *)(g_pDestSizeTable + 4 * v15) + v31) < (float)g_uLeftGuiBorderWidth
-    || (float)((float)*(int *)(g_pDestSizeTable + 4 * v11) + v27) < 0.0 )
+  if ( (float)GfxEngineSetup.m_uWidth < v31 || (float)GfxEngineSetup.m_uHeight < v27 || (float)((float)*(int *)(g_pDestSizeTable + 4 * v15) + v31) < (float)g_uLeftGuiBorderWidth || (float)((float)*(int *)(g_pDestSizeTable + 4 * v11) + v27) < 0.0 )
   {
     return 1;
   }
@@ -51010,34 +53234,23 @@ bool __cdecl BlitWaveHardware(int a1, int a2, int a3, int a4, int a5) {
   unsigned __int16 *v12; // [esp+28h] [ebp-4h]
 
   if ( !g_pWavePalettes[a4] )
+  {
     return 0;
+  }
   v10 = (unsigned __int16 *)g_pWaveGfx[20 * a4 + a5];
   if ( !v10 )
+  {
     return 1;
+  }
   v6 = *v10;
   v11 = v10 + 1;
   v7 = *v11++;
   v8 = (a2 - (int)(float)((float)*v11 * *(float *)&g_fZoomFactor)) >> 16;
   v12 = v11 + 1;
   v9 = (a3 - (int)(float)((float)*v12 * *(float *)&g_fZoomFactor)) >> 16;
-  if ( v8 <= MEMORY[0x3E2E26C]
-    && v9 <= MEMORY[0x3E2E270]
-    && v8 + (*(int *)(g_pDestSizeTable + 4 * v6) >> 1) >= g_uLeftGuiBorderWidth
-    && v9 + (*(int *)(g_pDestSizeTable + 4 * v7) >> 1) >= 0 )
+  if ( v8 <= MEMORY[0x3E2E26C] && v9 <= MEMORY[0x3E2E270] && v8 + (*(int *)(g_pDestSizeTable + 4 * v6) >> 1) >= g_uLeftGuiBorderWidth && v9 + (*(int *)(g_pDestSizeTable + 4 * v7) >> 1) >= 0 )
   {
-    CacheRenderingStandard(
-      (void *)g_pWavePalettes[a4],
-      v12 + 3,
-      v12[2],
-      32,
-      v6,
-      v7,
-      (float)v8,
-      (float)v9,
-      0,
-      65793 * a1,
-      0,
-      8);
+    CacheRenderingStandard((void *)g_pWavePalettes[a4], v12 + 3, v12[2], 32, v6, v7, (float)v8, (float)v9, 0, 65793 * a1, 0, 8);
   }
   return 1;
 }
@@ -51166,7 +53379,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
   int v123; // [esp+234h] [ebp+10h]
 
   if ( !_pInfo->m_pPalData )
+  {
     return 0;
+  }
   byte_46F32C8 = _pInfo->m_bUsed;
   _pInfo->m_bUsed = 0;
   v122 = a2 >> 16;
@@ -51176,9 +53391,13 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
   v51 = 0;
   v52 = 0;
   if ( _pInfo->m_pGfxData <= (BYTE *)_pInfo->m_pBuildLayerGfxData )
+  {
     dword58 = (__int16 *)_pInfo->m_pBuildLayerGfxData;
+  }
   else
+  {
     dword58 = (__int16 *)_pInfo->m_pGfxData;
+  }
   v75 = *dword58;
   v79 = dword58[1];
   v48 = dword58[2];
@@ -51189,7 +53408,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
     v115 = 0;
     v117 = (char *)*dword58;
     v119 = dword58[1];
-    for ( i = 0; i < 0xA; ++i )
+    for ( i = 0;
+          i < 0xA;
+          ++i )
     {
       v88 = *(__int16 **)&_pInfo->?[16 * i + 248];
       if ( v88 )
@@ -51205,7 +53426,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
         {
           v72 = (char *)(v28 + v71);
           if ( (int)v72 > (int)v117 )
+          {
             v117 = v72;
+          }
         }
         else
         {
@@ -51214,7 +53437,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
         if ( v26 + v49 - v27 >= 0 )
         {
           if ( v25 + v26 + v49 - v27 > v119 )
+          {
             v119 = v25 + v26 + v49 - v27;
+          }
         }
         else
         {
@@ -51222,7 +53447,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
         }
       }
     }
-    for ( j = 0; j < 0x15; ++j )
+    for ( j = 0;
+          j < 0x15;
+          ++j )
     {
       v55 = *(unsigned __int8 **)&_pInfo->gap_60[16 * j + 104];
       if ( v55 )
@@ -51238,7 +53465,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
         {
           v68 = &v67[v24];
           if ( (int)v68 > (int)v117 )
+          {
             v117 = v68;
+          }
         }
         else
         {
@@ -51247,7 +53476,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
         if ( (int)v22 + v49 - v23 >= 0 )
         {
           if ( (int)v22 + v49 - v23 + v17 > v119 )
+          {
             v119 = (signed int)v22 + v49 - v23 + v17;
+          }
         }
         else
         {
@@ -51268,7 +53499,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
       {
         v66 = (char *)(v21 + v65);
         if ( (int)v66 > (int)v117 )
+        {
           v117 = v66;
+        }
       }
       else
       {
@@ -51277,7 +53510,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
       if ( (int)(m_iOffsetY + v49 - v20) >= 0 )
       {
         if ( (int)(v18 + m_iOffsetY + v49 - v20) > v119 )
+        {
           v119 = v18 + m_iOffsetY + v49 - v20;
+        }
       }
       else
       {
@@ -51285,13 +53520,21 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
       }
     }
     if ( (int)v117 > v75 )
+    {
       v51 = (int)&v117[-v75];
+    }
     if ( v119 > v79 )
+    {
       v52 = v119 - v79;
+    }
     if ( v113 < 0 )
+    {
       v73 = -v113;
+    }
     if ( v115 < 0 )
+    {
       v74 = -v115;
+    }
     v114 = v73 + v113;
     v118 = (int)&v117[v73];
     v116 = v74 + v115;
@@ -51300,10 +53543,7 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
     {
       v82 = (float)v122 - (float)((float)(v73 + v48) * g_fZoomFactor);
       v87 = (float)v123 - (float)((float)(v74 + v49) * g_fZoomFactor);
-      if ( (float)GfxEngineSetup.m_uWidth >= v82
-        && (float)GfxEngineSetup.m_uHeight >= v87
-        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v118 - v114)) + v82) >= (float)g_uLeftGuiBorderWidth
-        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v120 - v116)) + v87) >= 0.0 )
+      if ( (float)GfxEngineSetup.m_uWidth >= v82 && (float)GfxEngineSetup.m_uHeight >= v87 && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v118 - v114)) + v82) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v120 - v116)) + v87) >= 0.0 )
       {
         if ( byte_3E2E324 )
         {
@@ -51352,13 +53592,7 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
           *(float *)&v121[43] = FLOAT_0_5;
           *(float *)&v121[40] = v82 + v43;
           *(float *)&v121[41] = v87 + v42;
-          D3DObjectPtr->m_pObjectDevice->DrawPrimitive(
-            D3DObjectPtr->m_pObjectDevice,
-            D3DPT_TRIANGLELIST,
-            452,
-            v121,
-            6,
-            0);
+          D3DObjectPtr->m_pObjectDevice->DrawPrimitive(D3DObjectPtr->m_pObjectDevice, D3DPT_TRIANGLELIST, 452, v121, 6, 0);
         }
         m_pGfxData = _pInfo->m_pGfxData;
         if ( _pInfo->m_pBuildLayerGfxData )
@@ -51372,25 +53606,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
             *(float *)&v83 = (float)v122 - (float)((float)(v73 + *v96) * g_fZoomFactor);
             v97 = v96 + 1;
             *((float *)&v83 + 1) = (float)v123 - (float)((float)(v74 + *v97) * g_fZoomFactor);
-            if ( (float)GfxEngineSetup.m_uWidth >= *(float *)&v83
-              && (float)GfxEngineSetup.m_uHeight >= *((float *)&v83 + 1)
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v76) + *(float *)&v83) >= (float)g_uLeftGuiBorderWidth
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v80) + *((float *)&v83 + 1)) >= 0.0 )
+            if ( (float)GfxEngineSetup.m_uWidth >= *(float *)&v83 && (float)GfxEngineSetup.m_uHeight >= *((float *)&v83 + 1) && (float)((float)*(int *)(g_pDestSizeTable + 4 * v76) + *(float *)&v83) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v80) + *((float *)&v83 + 1)) >= 0.0 )
             {
-              sub_2F96D80(
-                v97[2],
-                (int)_pInfo->m_pPalData,
-                (int)(v97 + 3),
-                v76,
-                v80,
-                v83,
-                0,
-                65793 * a1,
-                v73,
-                v51,
-                v74,
-                v52,
-                1);
+              sub_2F96D80(v97[2], (int)_pInfo->m_pPalData, (int)(v97 + 3), v76, v80, v83, 0, 65793 * a1, v73, v51, v74, v52, 1);
             }
             m_pGfxData = _pInfo->m_pGfxData;
           }
@@ -51407,54 +53625,19 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
           v99 = (int)(v98 + 3);
           if ( _pInfo->uConstructionProgress )
           {
-            sub_2F96D80(
-              *(__int16 *)(v99 - 2),
-              (int)_pInfo->m_pPalData,
-              v99,
-              v77,
-              v81,
-              v84,
-              BYTE1(_pInfo->uConstructionProgress),
-              65793 * a1,
-              v73,
-              v51,
-              v74,
-              v52,
-              1);
+            sub_2F96D80(*(__int16 *)(v99 - 2), (int)_pInfo->m_pPalData, v99, v77, v81, v84, BYTE1(_pInfo->uConstructionProgress), 65793 * a1, v73, v51, v74, v52, 1);
           }
           else if ( _pInfo->uConstructionProgress != 0xFFFF )
           {
-            sub_2F96D80(
-              *(__int16 *)(v99 - 2),
-              (int)_pInfo->m_pPalData,
-              v99,
-              v77,
-              v81,
-              v84,
-              0,
-              65793 * a1,
-              v73,
-              v51,
-              v74,
-              v52,
-              1);
-            for ( k = 0; k < 4; ++k )
+            sub_2F96D80(*(__int16 *)(v99 - 2), (int)_pInfo->m_pPalData, v99, v77, v81, v84, 0, 65793 * a1, v73, v51, v74, v52, 1);
+            for ( k = 0;
+                  k < 4;
+                  ++k )
             {
               if ( _pInfo->m_vFXFrameData[k] )
-                sub_2F96D80(
-                  *(unsigned __int16 *)(_pInfo->m_vFXFrameData[k] + 8),
-                  (int)_pInfo->m_pPalData,
-                  _pInfo->m_vFXFrameData[k] + 12,
-                  v77,
-                  v81,
-                  0LL,
-                  0,
-                  65793 * a1,
-                  v73,
-                  v51,
-                  v74,
-                  v52,
-                  0);
+              {
+                sub_2F96D80(*(unsigned __int16 *)(_pInfo->m_vFXFrameData[k] + 8), (int)_pInfo->m_pPalData, _pInfo->m_vFXFrameData[k] + 12, v77, v81, 0LL, 0, 65793 * a1, v73, v51, v74, v52, 0);
+              }
             }
             if ( _pInfo->m_vFXFrameData[4] && *a6 < 511 )
             {
@@ -51466,7 +53649,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
               a5[5] = a1;
               ++*a6;
             }
-            for ( m = 0; m < 0xA; ++m )
+            for ( m = 0;
+                  m < 0xA;
+                  ++m )
             {
               v100 = *(__int16 **)&_pInfo->?[16 * m + 248];
               if ( v100 )
@@ -51478,27 +53663,14 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
                 if ( *(_DWORD *)&_pInfo->?[16 * m + 252] )
                 {
                   if ( v36 > 512 || v37 > 512 )
-                    BBSupportTracePrintF(
-                      0,
-                      "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
+                  {
+                    BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of building object is too big! Object will be ignored!");
+                  }
                   v13 = *v102;
                   v103 = v102 + 1;
                   *((float *)&v8 + 1) = (float)(*(_DWORD *)&_pInfo->?[16 * m + 260] + v49 - *v103);
                   *(float *)&v8 = (float)(*(_DWORD *)&_pInfo->?[16 * m + 256] + v48 - v13);
-                  sub_2F96D80(
-                    v103[2],
-                    *(_DWORD *)&_pInfo->?[16 * m + 252],
-                    (int)(v103 + 3),
-                    v36,
-                    v37,
-                    v8,
-                    0,
-                    65793 * a1,
-                    v73,
-                    v51,
-                    v74,
-                    v52,
-                    0);
+                  sub_2F96D80(v103[2], *(_DWORD *)&_pInfo->?[16 * m + 252], (int)(v103 + 3), v36, v37, v8, 0, 65793 * a1, v73, v51, v74, v52, 0);
                 }
                 else
                 {
@@ -51506,7 +53678,9 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
                 }
               }
             }
-            for ( n = 0; n < 21; ++n )
+            for ( n = 0;
+                  n < 21;
+                  ++n )
             {
               v61 = *(unsigned __int8 **)&_pInfo->gap_60[16 * n + 104];
               if ( v61 )
@@ -51520,10 +53694,8 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
                   v34 = *v63;
                   v64 = v63 + 1;
                   v35 = *v64;
-                  v16 = (int)(float)((float)v122
-                                   - (float)((float)(v34 - (unsigned int)_pInfo->?[4 * n + 1]) * g_fZoomFactor));
-                  v15 = (int)(float)((float)v123
-                                   - (float)((float)(v35 - (unsigned int)_pInfo->?[4 * n + 2]) * g_fZoomFactor));
+                  v16 = (int)(float)((float)v122 - (float)((float)(v34 - (unsigned int)_pInfo->?[4 * n + 1]) * g_fZoomFactor));
+                  v15 = (int)(float)((float)v123 - (float)((float)(v35 - (unsigned int)_pInfo->?[4 * n + 2]) * g_fZoomFactor));
                   memcpy(&g_uColorPalette, _pInfo->?[4 * n], 0x180u);
                   memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * _pInfo->m_iColor, 0x40u);
                   memcpy(&unk_468A7A0, &_pInfo->?[4 * n][16 * _pInfo->m_iColor + 128], 0x40u);
@@ -51541,20 +53713,7 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
                   {
                     *((float *)&v9 + 1) = (float)((unsigned int)_pInfo->?[4 * n + 2] + v49 - v35);
                     *(float *)&v9 = (float)((unsigned int)_pInfo->?[4 * n + 1] + v48 - v34);
-                    sub_2F96D80(
-                      *(_DWORD *)(v64 + 1),
-                      (int)&g_uColorPalette,
-                      (int)(v64 + 5),
-                      v32,
-                      v33,
-                      v9,
-                      0,
-                      65793 * a1,
-                      v73,
-                      v51,
-                      v74,
-                      v52,
-                      0);
+                    sub_2F96D80(*(_DWORD *)(v64 + 1), (int)&g_uColorPalette, (int)(v64 + 5), v32, v33, v9, 0, 65793 * a1, v73, v51, v74, v52, 0);
                   }
                 }
                 else
@@ -51563,23 +53722,14 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
                 }
               }
             }
-            for ( ii = 5; ii < 0xA; ++ii )
+            for ( ii = 5;
+                  ii < 0xA;
+                  ++ii )
             {
               if ( _pInfo->m_vFXFrameData[ii] )
-                sub_2F96D80(
-                  *(unsigned __int16 *)(_pInfo->m_vFXFrameData[ii] + 8),
-                  (int)_pInfo->m_pPalData,
-                  _pInfo->m_vFXFrameData[ii] + 12,
-                  v77,
-                  v81,
-                  0LL,
-                  0,
-                  65793 * a1,
-                  v73,
-                  v51,
-                  v74,
-                  v52,
-                  0);
+              {
+                sub_2F96D80(*(unsigned __int16 *)(_pInfo->m_vFXFrameData[ii] + 8), (int)_pInfo->m_pPalData, _pInfo->m_vFXFrameData[ii] + 12, v77, v81, 0LL, 0, 65793 * a1, v73, v51, v74, v52, 0);
+              }
             }
             if ( _pInfo->m_pMiniFlagGfxData && _pInfo->m_pMiniFlagPalData )
             {
@@ -51588,28 +53738,15 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
               v46 = v104[1];
               v105 = v104 + 2;
               if ( v44 > 512 || v46 > 512 )
-                BBSupportTracePrintF(
-                  0,
-                  "GFX ENGINE: DATA ERROR: Size of building flag is too big! Object will be ignored!");
+              {
+                BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of building flag is too big! Object will be ignored!");
+              }
               v30 = *v105;
               v106 = v105 + 1;
               v31 = *v106;
               *((float *)&v10 + 1) = (float)(_pInfo->m_iOffsetY + v49 - v31);
               *(float *)&v10 = (float)(_pInfo->m_iOffsetX + v48 - v30);
-              sub_2F96D80(
-                v106[2],
-                _pInfo->m_pMiniFlagPalData,
-                (int)(v106 + 3),
-                v44,
-                v46,
-                v10,
-                0,
-                65793 * a1,
-                v73,
-                v51,
-                v74,
-                v52,
-                0);
+              sub_2F96D80(v106[2], _pInfo->m_pMiniFlagPalData, (int)(v106 + 3), v44, v46, v10, 0, 65793 * a1, v73, v51, v74, v52, 0);
               if ( *(_DWORD *)_pInfo->gap38 && *(_DWORD *)&_pInfo->gap38[4] )
               {
                 v107 = *(__int16 **)_pInfo->gap38;
@@ -51617,32 +53754,21 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
                 v47 = v107[1];
                 v108 = v107 + 2;
                 if ( v45 > 512 || v47 > 512 )
-                  BBSupportTracePrintF(
-                    0,
-                    "GFX ENGINE: DATA ERROR: Size of heraldic figure is too big! Object will be ignored!");
+                {
+                  BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of heraldic figure is too big! Object will be ignored!");
+                }
                 v14 = *v108;
                 v109 = v108 + 1;
                 *((float *)&v11 + 1) = (float)(_pInfo->m_iOffsetY + v49 - v31 - *v109);
                 *(float *)&v11 = (float)(_pInfo->m_iOffsetX + v48 - v30 - v14);
-                sub_2F96D80(
-                  v109[2],
-                  *(_DWORD *)&_pInfo->gap38[4],
-                  (int)(v109 + 3),
-                  v45,
-                  v47,
-                  v11,
-                  0,
-                  65793 * a1,
-                  v73,
-                  v51,
-                  v74,
-                  v52,
-                  0);
+                sub_2F96D80(v109[2], *(_DWORD *)&_pInfo->gap38[4], (int)(v109 + 3), v45, v47, v11, 0, 65793 * a1, v73, v51, v74, v52, 0);
               }
             }
           }
         }
-        for ( jj = 0; jj < 6; ++jj )
+        for ( jj = 0;
+              jj < 6;
+              ++jj )
         {
           if ( *(_DWORD *)&_pInfo->gap_60[16 * jj + 8] && *(_DWORD *)&_pInfo->gap_60[16 * jj + 12] )
           {
@@ -51652,18 +53778,13 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
             v41 = v110[1];
             v111 = v110 + 2;
             if ( v40 > 512 || v41 > 512 )
-              BBSupportTracePrintF(
-                0,
-                "GFX ENGINE: DATA ERROR: Size of building-effect is too big! Object will be ignored!");
-            *(float *)&v85 = (float)v122
-                           - (float)((float)(*v111 - *(_DWORD *)&_pInfo->gap_60[16 * jj + 16]) * g_fZoomFactor);
+            {
+              BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of building-effect is too big! Object will be ignored!");
+            }
+            *(float *)&v85 = (float)v122 - (float)((float)(*v111 - *(_DWORD *)&_pInfo->gap_60[16 * jj + 16]) * g_fZoomFactor);
             v112 = v111 + 1;
-            *((float *)&v85 + 1) = (float)v123
-                                 - (float)((float)(*v112 - *(_DWORD *)&_pInfo->gap_60[16 * jj + 20]) * g_fZoomFactor);
-            if ( (float)GfxEngineSetup.m_uWidth >= *(float *)&v85
-              && (float)GfxEngineSetup.m_uHeight >= *((float *)&v85 + 1)
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v40) + *(float *)&v85) >= (float)g_uLeftGuiBorderWidth
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v41) + *((float *)&v85 + 1)) >= 0.0 )
+            *((float *)&v85 + 1) = (float)v123 - (float)((float)(*v112 - *(_DWORD *)&_pInfo->gap_60[16 * jj + 20]) * g_fZoomFactor);
+            if ( (float)GfxEngineSetup.m_uWidth >= *(float *)&v85 && (float)GfxEngineSetup.m_uHeight >= *((float *)&v85 + 1) && (float)((float)*(int *)(g_pDestSizeTable + 4 * v40) + *(float *)&v85) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v41) + *((float *)&v85 + 1)) >= 0.0 )
             {
               HIDWORD(v12) = v40;
               LODWORD(v12) = v112 + 3;
@@ -51672,22 +53793,21 @@ bool __cdecl BlitBuildingHardware(int a1, int a2, int a3, struct SGfxObjectInfo 
           }
         }
         if ( !_pInfo->m_uFlags || !g_pIconPalette )
+        {
           return 1;
+        }
         v58 = (unsigned __int16 *)g_pIconGfx[_pInfo->m_uFlags];
         LODWORD(v78) = *v58;
         HIDWORD(v78) = v58[1];
         v59 = v58 + 2;
         if ( (int)v78 > 512 || SHIDWORD(v78) > 512 )
-          BBSupportTracePrintF(
-            0,
-            "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
+        {
+          BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of accessory object is too big! Object will be ignored!");
+        }
         *(float *)&v86 = (float)v122 - (float)((float)*v59 * g_fZoomFactor);
         v60 = v59 + 1;
         *((float *)&v86 + 1) = (float)v123 - (float)((float)*v60 * g_fZoomFactor);
-        if ( (float)GfxEngineSetup.m_uWidth < *(float *)&v86
-          || (float)GfxEngineSetup.m_uHeight < *((float *)&v86 + 1)
-          || (float)((float)*(int *)(g_pDestSizeTable + 4 * v78) + *(float *)&v86) < (float)g_uLeftGuiBorderWidth
-          || (float)((float)*(int *)(g_pDestSizeTable + 4 * HIDWORD(v78)) + *((float *)&v86 + 1)) < 0.0 )
+        if ( (float)GfxEngineSetup.m_uWidth < *(float *)&v86 || (float)GfxEngineSetup.m_uHeight < *((float *)&v86 + 1) || (float)((float)*(int *)(g_pDestSizeTable + 4 * v78) + *(float *)&v86) < (float)g_uLeftGuiBorderWidth || (float)((float)*(int *)(g_pDestSizeTable + 4 * HIDWORD(v78)) + *((float *)&v86 + 1)) < 0.0 )
         {
           return 1;
         }
@@ -51743,7 +53863,9 @@ bool __cdecl BlitObjectHardware(int a1, int a2, int a3, struct SGfxObjectInfo * 
   int v25; // [esp+50h] [ebp+10h]
 
   if ( !*((_DWORD *)a4 + 1) )
+  {
     return 0;
+  }
   byte_46F32C8 = *((_BYTE *)a4 + 23) != 0;
   *((_BYTE *)a4 + 23) = 0;
   v24 = a2 >> 16;
@@ -51765,24 +53887,9 @@ bool __cdecl BlitObjectHardware(int a1, int a2, int a3, struct SGfxObjectInfo * 
       v11 = (float)v24 - (float)((float)*v21 * *(float *)&g_fZoomFactor);
       v22 = v21 + 1;
       v14 = (float)v25 - (float)((float)*v22 * *(float *)&g_fZoomFactor);
-      if ( (float)MEMORY[0x3E2E26C] >= v11
-        && (float)MEMORY[0x3E2E270] >= v14
-        && (float)((float)(*(int *)(g_pDestSizeTable + 4 * v7) >> 1) + v11) >= (float)g_uLeftGuiBorderWidth
-        && (float)((float)(*(int *)(g_pDestSizeTable + 4 * v9) >> 1) + v14) >= 0.0 )
+      if ( (float)MEMORY[0x3E2E26C] >= v11 && (float)MEMORY[0x3E2E270] >= v14 && (float)((float)(*(int *)(g_pDestSizeTable + 4 * v7) >> 1) + v11) >= (float)g_uLeftGuiBorderWidth && (float)((float)(*(int *)(g_pDestSizeTable + 4 * v9) >> 1) + v14) >= 0.0 )
       {
-        CacheRenderingStandard(
-          *((void **)a4 + 1),
-          v22 + 3,
-          v22[2],
-          *((unsigned __int8 *)a4 + 712),
-          v7,
-          v9,
-          v11,
-          v14,
-          0,
-          65793 * a1,
-          1,
-          0);
+        CacheRenderingStandard(*((void **)a4 + 1), v22 + 3, v22[2], *((unsigned __int8 *)a4 + 712), v7, v9, v11, v14, 0, 65793 * a1, 1, 0);
       }
     }
     else
@@ -51790,33 +53897,22 @@ bool __cdecl BlitObjectHardware(int a1, int a2, int a3, struct SGfxObjectInfo * 
       v12 = (float)v24 - (float)((float)*v21 * *(float *)&g_fZoomFactor);
       v23 = v21 + 1;
       v15 = (float)v25 - (float)((float)*v23 * *(float *)&g_fZoomFactor);
-      if ( (float)MEMORY[0x3E2E26C] >= v12
-        && (float)MEMORY[0x3E2E270] >= v15
-        && (float)((float)*(int *)(g_pDestSizeTable + 4 * v7) + v12) >= (float)g_uLeftGuiBorderWidth
-        && (float)((float)*(int *)(g_pDestSizeTable + 4 * v9) + v15) >= 0.0 )
+      if ( (float)MEMORY[0x3E2E26C] >= v12 && (float)MEMORY[0x3E2E270] >= v15 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v7) + v12) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v9) + v15) >= 0.0 )
       {
-        CacheRenderingStandard(
-          *((void **)a4 + 1),
-          v23 + 3,
-          v23[2],
-          *((unsigned __int8 *)a4 + 712),
-          v7,
-          v9,
-          v12,
-          v15,
-          0,
-          65793 * a1,
-          0,
-          0);
+        CacheRenderingStandard(*((void **)a4 + 1), v23 + 3, v23[2], *((unsigned __int8 *)a4 + 712), v7, v9, v12, v15, 0, 65793 * a1, 0, 0);
       }
     }
     g_fZoomFactor = v6;
     *(_DWORD *)g_pZoomGradient = v5;
   }
   if ( !*((_BYTE *)a4 + 22) )
+  {
     return 1;
+  }
   if ( !g_pIconPalette )
+  {
     return 1;
+  }
   v17 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 22)];
   *((_BYTE *)a4 + 22) = 0;
   v8 = *v17++;
@@ -51824,24 +53920,9 @@ bool __cdecl BlitObjectHardware(int a1, int a2, int a3, struct SGfxObjectInfo * 
   v13 = (float)v24 - (float)((float)*v17 * *(float *)&g_fZoomFactor);
   v18 = v17 + 1;
   v16 = (float)v25 - (float)((float)*v18 * *(float *)&g_fZoomFactor);
-  if ( (float)MEMORY[0x3E2E26C] >= v13
-    && (float)MEMORY[0x3E2E270] >= v16
-    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v8) + v13) >= (float)g_uLeftGuiBorderWidth
-    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v10) + v16) >= 0.0 )
+  if ( (float)MEMORY[0x3E2E26C] >= v13 && (float)MEMORY[0x3E2E270] >= v16 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v8) + v13) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v10) + v16) >= 0.0 )
   {
-    CacheRenderingStandard(
-      (void *)g_pIconPalette,
-      v18 + 3,
-      v18[2],
-      *((unsigned __int8 *)a4 + 712),
-      v8,
-      v10,
-      v13,
-      v16,
-      0,
-      65793 * a1,
-      0,
-      0);
+    CacheRenderingStandard((void *)g_pIconPalette, v18 + 3, v18[2], *((unsigned __int8 *)a4 + 712), v8, v10, v13, v16, 0, 65793 * a1, 0, 0);
   }
   return 1;
 }
@@ -51862,24 +53943,27 @@ bool __cdecl BlitBorderstoneHardware(int a1, int a2, int a3, int a4) {
   int v13; // [esp+40h] [ebp+10h]
 
   if ( !g_pBorderstonePalette )
+  {
     return 0;
+  }
   v12 = a2 >> 16;
   v13 = a3 >> 16;
   if ( a4 < 1 || a4 > 8 )
+  {
     BBSupportTracePrintF(0, "GFX ENGINE: Illegal value of owner id.");
+  }
   v9 = (unsigned __int16 *)g_pBorderstoneGfx[a4];
   if ( !v9 )
+  {
     return 1;
+  }
   v5 = *v9;
   v10 = v9 + 1;
   v6 = *v10;
   v7 = (float)v12 - (float)((float)v10[1] * *(float *)&g_fZoomFactor);
   v11 = v10 + 2;
   v8 = (float)v13 - (float)((float)*v11 * *(float *)&g_fZoomFactor);
-  if ( (float)MEMORY[0x3E2E26C] >= v7
-    && (float)MEMORY[0x3E2E270] >= v8
-    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v5) + v7) >= (float)g_uLeftGuiBorderWidth
-    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v6) + v8) >= 0.0 )
+  if ( (float)MEMORY[0x3E2E26C] >= v7 && (float)MEMORY[0x3E2E270] >= v8 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v5) + v7) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v6) + v8) >= 0.0 )
   {
     CacheRenderingStandard((void *)g_pBorderstonePalette, v11 + 3, v11[2], 32, v5, v6, v7, v8, 0, 65793 * a1, 0, 0);
   }
@@ -51949,7 +54033,9 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
   int v60; // [esp+1A4h] [ebp+10h]
 
   if ( !*((_DWORD *)a4 + 1) )
+  {
     return 0;
+  }
   byte_46F32C8 = *((_BYTE *)a4 + 23) != 0;
   *((_BYTE *)a4 + 23) = 0;
   v59 = a2 >> 16;
@@ -51959,9 +54045,13 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
   v15 = 0;
   v11 = 0;
   if ( *(_DWORD *)a4 <= *((_DWORD *)a4 + 22) )
+  {
     v10 = (__int16 *)*((_DWORD *)a4 + 22);
+  }
   else
+  {
     v10 = *(__int16 **)a4;
+  }
   v32 = *v10;
   v37 = v10[1];
   v13 = v10[2];
@@ -51985,7 +54075,9 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
       {
         v28 = v9 + v27;
         if ( v28 > v32 )
+        {
           v54 = v28;
+        }
       }
       else
       {
@@ -51994,7 +54086,9 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
       if ( v7 + v14 - v8 >= 0 )
       {
         if ( v6 + v7 + v14 - v8 > v37 )
+        {
           v56 = v6 + v7 + v14 - v8;
+        }
       }
       else
       {
@@ -52002,13 +54096,21 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
       }
     }
     if ( v54 > v32 )
+    {
       v15 = v54 - v32;
+    }
     if ( v56 > v37 )
+    {
       v11 = v56 - v37;
+    }
     if ( v50 < 0 )
+    {
       v17 = -v50;
+    }
     if ( v52 < 0 )
+    {
       v18 = -v52;
+    }
     v51 = v17 + v50;
     v55 = v17 + v54;
     v53 = v18 + v52;
@@ -52017,10 +54119,7 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
     {
       v46 = (float)v59 - (float)((float)(v17 + v13) * *(float *)&g_fZoomFactor);
       v42 = (float)v60 - (float)((float)(v18 + v14) * *(float *)&g_fZoomFactor);
-      if ( (float)MEMORY[0x3E2E26C] >= v46
-        && (float)MEMORY[0x3E2E270] >= v42
-        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v55 - v51)) + v46) >= (float)g_uLeftGuiBorderWidth
-        && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v57 - v53)) + v42) >= 0.0 )
+      if ( (float)MEMORY[0x3E2E26C] >= v46 && (float)MEMORY[0x3E2E270] >= v42 && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v55 - v51)) + v46) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * (v57 - v53)) + v42) >= 0.0 )
       {
         if ( byte_3E2E324 )
         {
@@ -52069,13 +54168,7 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
           *(float *)&v58[43] = FLOAT_0_5;
           *(float *)&v58[40] = v46 + v16;
           *(float *)&v58[41] = v42 + v12;
-          (*(void (__stdcall **)(int, int, int, _DWORD *, int, _DWORD))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 100))(
-            D3DObjectPtr->m_pObjectDevice,
-            4,
-            452,
-            v58,
-            6,
-            0);
+          (*(void (__stdcall **)(int, int, int, _DWORD *, int, _DWORD))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 100))(D3DObjectPtr->m_pObjectDevice, 4, 452, v58, 6, 0);
         }
         v29 = *(_DWORD *)a4;
         *(_DWORD *)a4 = 0;
@@ -52084,26 +54177,9 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
           memcpy(&g_uColorPalette, *((const void **)a4 + 1), 0x180u);
           memcpy(&unk_468A760, (char *)&g_cColorGradient + 64 * *((unsigned __int8 *)a4 + 715), 0x40u);
           memcpy(&unk_468A7A0, (const void *)(*((_DWORD *)a4 + 1) + (*((unsigned __int8 *)a4 + 715) << 6) + 512), 0x40u);
-          if ( (float)MEMORY[0x3E2E26C] >= v46
-            && (float)MEMORY[0x3E2E270] >= v42
-            && (float)((float)*(int *)(g_pDestSizeTable + 4 * v32) + v46) >= (float)g_uLeftGuiBorderWidth
-            && (float)((float)*(int *)(g_pDestSizeTable + 4 * v37) + v42) >= 0.0 )
+          if ( (float)MEMORY[0x3E2E26C] >= v46 && (float)MEMORY[0x3E2E270] >= v42 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v32) + v46) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v37) + v42) >= 0.0 )
           {
-            sub_2F96D80(
-              *(unsigned __int16 *)(v29 + 8),
-              &g_uColorPalette,
-              v29 + 12,
-              v32,
-              v37,
-              LODWORD(v46),
-              LODWORD(v42),
-              BYTE1(*((_DWORD *)a4 + 23)),
-              65793 * a1,
-              v17,
-              v15,
-              v18,
-              v11,
-              1);
+            sub_2F96D80(*(unsigned __int16 *)(v29 + 8), &g_uColorPalette, v29 + 12, v32, v37, LODWORD(v46), LODWORD(v42), BYTE1(*((_DWORD *)a4 + 23)), 65793 * a1, v17, v15, v18, v11, 1);
           }
           if ( *((_DWORD *)a4 + 3) )
           {
@@ -52113,26 +54189,9 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
             v38 = *v30++;
             v5 = *v30;
             v31 = v30 + 1;
-            if ( (float)MEMORY[0x3E2E26C] >= v46
-              && (float)MEMORY[0x3E2E270] >= v42
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v33) + v46) >= (float)g_uLeftGuiBorderWidth
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v38) + v42) >= 0.0 )
+            if ( (float)MEMORY[0x3E2E26C] >= v46 && (float)MEMORY[0x3E2E270] >= v42 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v33) + v46) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v38) + v42) >= 0.0 )
             {
-              ((void (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char))sub_2F96D80)(
-                v31[1],
-                *((_DWORD *)a4 + 4),
-                v31 + 3,
-                v33,
-                v38,
-                (float)(v13 - v5),
-                (float)(v14 - *v31),
-                0,
-                65793 * a1,
-                v17,
-                v15,
-                v18,
-                v11,
-                0);
+              ((void (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, char))sub_2F96D80)(v31[1], *((_DWORD *)a4 + 4), v31 + 3, v33, v38, (float)(v13 - v5), (float)(v14 - *v31), 0, 65793 * a1, v17, v15, v18, v11, 0);
             }
           }
         }
@@ -52148,24 +54207,9 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
             v47 = (float)v59 - (float)((float)*v25 * *(float *)&g_fZoomFactor);
             v26 = v25 + 1;
             v43 = (float)v60 - (float)((float)*v26 * *(float *)&g_fZoomFactor);
-            if ( (float)MEMORY[0x3E2E26C] >= v47
-              && (float)MEMORY[0x3E2E270] >= v43
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v34) + v47) >= (float)g_uLeftGuiBorderWidth
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v39) + v43) >= 0.0 )
+            if ( (float)MEMORY[0x3E2E26C] >= v47 && (float)MEMORY[0x3E2E270] >= v43 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v34) + v47) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v39) + v43) >= 0.0 )
             {
-              CacheRenderingStandard(
-                (void *)g_pIconPalette,
-                v26 + 3,
-                v26[2],
-                64,
-                v34,
-                v39,
-                v47,
-                v43,
-                0,
-                (char *)&dword_F29144[220078] + 3,
-                0,
-                0);
+              CacheRenderingStandard((void *)g_pIconPalette, v26 + 3, v26[2], 64, v34, v39, v47, v43, 0, (char *)&dword_F29144[220078] + 3, 0, 0);
             }
           }
           if ( *((_BYTE *)a4 + 21) )
@@ -52177,28 +54221,15 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
             v48 = (float)v59 - (float)((float)*v23 * *(float *)&g_fZoomFactor);
             v24 = v23 + 1;
             v44 = (float)v60 - (float)((float)*v24 * *(float *)&g_fZoomFactor);
-            if ( (float)MEMORY[0x3E2E26C] >= v48
-              && (float)MEMORY[0x3E2E270] >= v44
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v35) + v48) >= (float)g_uLeftGuiBorderWidth
-              && (float)((float)*(int *)(g_pDestSizeTable + 4 * v40) + v44) >= 0.0 )
+            if ( (float)MEMORY[0x3E2E26C] >= v48 && (float)MEMORY[0x3E2E270] >= v44 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v35) + v48) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v40) + v44) >= 0.0 )
             {
-              CacheRenderingStandard(
-                (void *)g_pIconPalette,
-                v24 + 3,
-                v24[2],
-                64,
-                v35,
-                v40,
-                v48,
-                v44,
-                0,
-                (char *)&dword_F29144[220078] + 3,
-                0,
-                0);
+              CacheRenderingStandard((void *)g_pIconPalette, v24 + 3, v24[2], 64, v35, v40, v48, v44, 0, (char *)&dword_F29144[220078] + 3, 0, 0);
             }
           }
           if ( !*((_BYTE *)a4 + 20) )
+          {
             return 1;
+          }
           v21 = (unsigned __int16 *)g_pIconGfx[*((unsigned __int8 *)a4 + 20)];
           *((_BYTE *)a4 + 20) = 0;
           v36 = *v21++;
@@ -52206,24 +54237,9 @@ bool __cdecl BlitVehicleHardware(int a1, int a2, int a3, struct SGfxObjectInfo *
           v49 = (float)v59 - (float)((float)*v21 * *(float *)&g_fZoomFactor);
           v22 = v21 + 1;
           v45 = (float)v60 - (float)((float)*v22 * *(float *)&g_fZoomFactor);
-          if ( (float)MEMORY[0x3E2E26C] >= v49
-            && (float)MEMORY[0x3E2E270] >= v45
-            && (float)((float)*(int *)(g_pDestSizeTable + 4 * v36) + v49) >= (float)g_uLeftGuiBorderWidth
-            && (float)((float)*(int *)(g_pDestSizeTable + 4 * v41) + v45) >= 0.0 )
+          if ( (float)MEMORY[0x3E2E26C] >= v49 && (float)MEMORY[0x3E2E270] >= v45 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v36) + v49) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v41) + v45) >= 0.0 )
           {
-            CacheRenderingStandard(
-              (void *)g_pIconPalette,
-              v22 + 3,
-              v22[2],
-              64,
-              v36,
-              v41,
-              v49,
-              v45,
-              0,
-              (char *)&dword_F29144[220078] + 3,
-              0,
-              0);
+            CacheRenderingStandard((void *)g_pIconPalette, v22 + 3, v22[2], 64, v36, v41, v49, v45, 0, (char *)&dword_F29144[220078] + 3, 0, 0);
           }
           return 1;
         }
@@ -52267,36 +54283,25 @@ bool __cdecl BlitAccessoryIconHardware(int a1, int a2, int a3, int a4) {
   int v13; // [esp+3Ch] [ebp+10h]
 
   if ( !g_pIconPalette )
+  {
     return 0;
+  }
   v12 = a2 >> 16;
   v13 = a3 >> 16;
   v9 = (unsigned __int16 *)g_pIconGfx[a4];
   if ( !v9 )
+  {
     return 1;
+  }
   v5 = *v9;
   v10 = v9 + 1;
   v6 = *v10++;
   v7 = (float)v12 - (float)((float)*v10 * *(float *)&g_fZoomFactor);
   v11 = v10 + 1;
   v8 = (float)v13 - (float)((float)*v11 * *(float *)&g_fZoomFactor);
-  if ( (float)MEMORY[0x3E2E26C] >= v7
-    && (float)MEMORY[0x3E2E270] >= v8
-    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v5) + v7) >= (float)g_uLeftGuiBorderWidth
-    && (float)((float)*(int *)(g_pDestSizeTable + 4 * v6) + v8) >= 0.0 )
+  if ( (float)MEMORY[0x3E2E26C] >= v7 && (float)MEMORY[0x3E2E270] >= v8 && (float)((float)*(int *)(g_pDestSizeTable + 4 * v5) + v7) >= (float)g_uLeftGuiBorderWidth && (float)((float)*(int *)(g_pDestSizeTable + 4 * v6) + v8) >= 0.0 )
   {
-    CacheRenderingStandard(
-      (void *)g_pIconPalette,
-      v11 + 3,
-      v11[2],
-      64,
-      v5,
-      v6,
-      v7,
-      v8,
-      0,
-      (char *)&dword_F29144[220078] + 3,
-      0,
-      0);
+    CacheRenderingStandard((void *)g_pIconPalette, v11 + 3, v11[2], 64, v5, v6, v7, v8, 0, (char *)&dword_F29144[220078] + 3, 0, 0);
   }
   return 1;
 }
@@ -52315,12 +54320,14 @@ void __cdecl RenderGfx(int a1, void * a2, void * a3, int a4, int a5, float a6, f
   int IsAlreadyStored; // [esp+38h] [ebp-4h]
 
   if ( SHIDWORD(a3) > 512 || a4 > 512 )
+  {
     return BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Size of object is too big! Object will be ignored!");
-  IsAlreadyStored = CUploadCachePageManager::IsAlreadyStored(
-                      (CUploadCachePageManager *)D3DObjectPtr->CCachePageManager[0],
-                      a1);
+  }
+  IsAlreadyStored = CUploadCachePageManager::IsAlreadyStored((CUploadCachePageManager *)D3DObjectPtr->CCachePageManager[0], a1);
   if ( IsAlreadyStored >= 0 )
+  {
     return sub_2F976F0(a6, a5, HIDWORD(a5), 0, IsAlreadyStored, a7, a8 | 0x10, a9);
+  }
   v13 = HIDWORD(a3);
   v14 = a4;
   if ( *(float *)&g_fZoomFactor < 1.0 && (a8 & 0x40) != 0 )
@@ -52328,47 +54335,30 @@ void __cdecl RenderGfx(int a1, void * a2, void * a3, int a4, int a5, float a6, f
     v13 = (int)(float)((float)SHIDWORD(a3) * *(float *)&g_fZoomFactor) + 1;
     v14 = (int)(float)((float)a4 * *(float *)&g_fZoomFactor) + 1;
   }
-  if ( !CCachePageManager::GetPictureArea(
-          (CCachePageManager *)D3DObjectPtr->CCachePageManager[0],
-          *(float *)&a5,
-          *((float *)&a5 + 1),
-          v13,
-          v14,
-          a6,
-          a7,
-          &v10,
-          &v11) )
+  if ( !CCachePageManager::GetPictureArea((CCachePageManager *)D3DObjectPtr->CCachePageManager[0], *(float *)&a5, *((float *)&a5 + 1), v13, v14, a6, a7, &v10, &v11) )
   {
     FlushCacheList();
-    CCachePageManager::GetPictureArea(
-      (CCachePageManager *)D3DObjectPtr->CCachePageManager[0],
-      *(float *)&a5,
-      *((float *)&a5 + 1),
-      v13,
-      v14,
-      a6,
-      a7,
-      &v10,
-      &v11);
+    CCachePageManager::GetPictureArea((CCachePageManager *)D3DObjectPtr->CCachePageManager[0], *(float *)&a5, *((float *)&a5 + 1), v13, v14, a6, a7, &v10, &v11);
   }
   CCachePageManager::LockSourceSurface((CCachePageManager *)D3DObjectPtr->CCachePageManager[0], &v12, &v15);
   v15 += v10 + v11 * v12 / 2;
   if ( *(float *)&g_fZoomFactor < 1.0 && (a8 & 0x40) != 0 )
+  {
     sub_2F97D20(a2, a3, HIDWORD(a3), a4, v15, v12, 0, 0);
+  }
   else
+  {
     sub_2F977E0(a2, a3, v15, v12, HIDWORD(a3), a4);
+  }
   CCachePageManager::UnlockSourceSurface((CCachePageManager *)D3DObjectPtr->CCachePageManager[0]);
   IsAlreadyStored = CCachePageManager::GetLastCacheObjectNr((CCachePageManager *)D3DObjectPtr->CCachePageManager[0]);
-  CUploadCachePageManager::StoreGfxId(
-    (CUploadCachePageManager *)D3DObjectPtr->CCachePageManager[0],
-    IsAlreadyStored,
-    a1);
+  CUploadCachePageManager::StoreGfxId((CUploadCachePageManager *)D3DObjectPtr->CCachePageManager[0], IsAlreadyStored, a1);
   return sub_2F976F0(a6, a5, HIDWORD(a5), 0, IsAlreadyStored, a7, a8 | 0x10, a9);
 }
 
 
 // address=[0x2f97030]
-// Decompiled from char __cdecl CacheRenderingStandard(  __int64 a1,  int a2,  int a3,  __int64 a4,  __int64 a5,  char a6,  int a7,  int a8,  char a9)
+// Decompiled from char __cdecl CacheRenderingStandard(__int64 a1, int a2, int a3, __int64 a4, __int64 a5, char a6, int a7, int a8, char a9)
 bool __cdecl CacheRenderingStandard(void * a1, void * a2, int a3, int a4, int a5, int a6, float a7, float a8, unsigned int a9, int a10, int a11, unsigned char a12) {
   
   char SurfaceIdx; // al
@@ -52403,18 +54393,11 @@ bool __cdecl CacheRenderingStandard(void * a1, void * a2, int a3, int a4, int a5
       }
       else if ( CInterfaceD3D::GetCacheRetrys(D3DObjectPtr) > 0 )
       {
-        for ( i = 1; i < D3DObjectPtr->m_uCacheSurfaceCount && D3DObjectPtr->m_pCacheManagers[i]; ++i )
+        for ( i = 1;
+              i < D3DObjectPtr->m_uCacheSurfaceCount && D3DObjectPtr->m_pCacheManagers[i];
+              ++i )
         {
-          if ( CCachePageManager::GetPictureArea(
-                 (CCachePageManager *)D3DObjectPtr->m_pCacheManagers[i],
-                 0.0,
-                 0.0,
-                 a4,
-                 SHIDWORD(a4),
-                 a7,
-                 a8,
-                 &v18,
-                 &v19) )
+          if ( CCachePageManager::GetPictureArea((CCachePageManager *)D3DObjectPtr->m_pCacheManagers[i], 0.0, 0.0, a4, SHIDWORD(a4), a7, a8, &v18, &v19) )
           {
             CCachePageManager::LockVideoSurface((CCachePageManager *)D3DObjectPtr->m_pCacheManagers[i], &v20, &v22);
             v22 += v18 + v19 * v20 / 2;
@@ -52444,50 +54427,28 @@ bool __cdecl CacheRenderingStandard(void * a1, void * a2, int a3, int a4, int a5
         }
       }
       if ( !v25 )
-        RenderGfx(
-          a2,
-          (void *)a1,
-          (void *)HIDWORD(a1),
-          a4,
-          HIDWORD(a4),
-          *(float *)&a5,
-          *((float *)&a5 + 1),
-          a7,
-          a8,
-          0,
-          a6);
+      {
+        RenderGfx(a2, (void *)a1, (void *)HIDWORD(a1), a4, HIDWORD(a4), *(float *)&a5, *((float *)&a5 + 1), a7, a8, 0, a6);
+      }
       return 1;
     }
     else
     {
       if ( *(float *)&g_fZoomFactor >= 1.0 )
+      {
         v21 = 0;
+      }
       else
+      {
         v21 = 64;
-      RenderGfx(
-        a2,
-        (void *)a1,
-        (void *)HIDWORD(a1),
-        a4,
-        HIDWORD(a4),
-        *(float *)&a5,
-        *((float *)&a5 + 1),
-        a7,
-        0,
-        v21,
-        a6);
+      }
+      RenderGfx(a2, (void *)a1, (void *)HIDWORD(a1), a4, HIDWORD(a4), *(float *)&a5, *((float *)&a5 + 1), a7, 0, v21, a6);
       return 1;
     }
   }
   else
   {
-    BBSupportTracePrintF(
-      0,
-      "GFX ENGINE: The following object exceed the size limits: Object of type: %d Object ID: %d Width: %d Height: %d",
-      a3,
-      a2,
-      (_DWORD)a4,
-      HIDWORD(a4));
+    BBSupportTracePrintF(0, "GFX ENGINE: The following object exceed the size limits: Object of type: %d Object ID: %d Width: %d Height: %d", a3, a2, (_DWORD)a4, HIDWORD(a4));
     BBSupportTracePrintF(0, "GFX ENGINE: This object will be ignored!");
     return 0;
   }
@@ -52512,80 +54473,50 @@ void __cdecl FlushCacheList(void) {
   v6 = 0;
   IsFiltering = SGfxRenderConfiguration::IsFiltering((SGfxRenderConfiguration *)&GfxEngineSetup);
   if ( IsFiltering )
+  {
     v3 = 2;
+  }
   else
+  {
     v3 = 1;
-  (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
-    D3DObjectPtr->m_pObjectDevice,
-    0,
-    16,
-    v3);
+  }
+  (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(D3DObjectPtr->m_pObjectDevice, 0, 16, v3);
   if ( IsFiltering )
+  {
     v2 = 2;
+  }
   else
+  {
     v2 = 1;
-  (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
-    D3DObjectPtr->m_pObjectDevice,
-    0,
-    17,
-    v2);
-  for ( i = 0; i < dword_47132D4; ++i )
+  }
+  (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(D3DObjectPtr->m_pObjectDevice, 0, 17, v2);
+  for ( i = 0;
+        i < dword_47132D4;
+        ++i )
   {
     if ( v6 != (byte_47132E7[16 * i] & 8) )
     {
       if ( (byte_47132E7[16 * i] & 8) != 0 )
       {
-        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
-          D3DObjectPtr->m_pObjectDevice,
-          0,
-          16,
-          1);
-        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
-          D3DObjectPtr->m_pObjectDevice,
-          0,
-          17,
-          1);
+        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(D3DObjectPtr->m_pObjectDevice, 0, 16, 1);
+        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(D3DObjectPtr->m_pObjectDevice, 0, 17, 1);
         v6 = 1;
       }
       else if ( IsFiltering )
       {
-        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
-          D3DObjectPtr->m_pObjectDevice,
-          0,
-          16,
-          2);
-        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(
-          D3DObjectPtr->m_pObjectDevice,
-          0,
-          17,
-          2);
+        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(D3DObjectPtr->m_pObjectDevice, 0, 16, 2);
+        (*(void (__stdcall **)(int, _DWORD, int, int))(*(_DWORD *)D3DObjectPtr->m_pObjectDevice + 148))(D3DObjectPtr->m_pObjectDevice, 0, 17, 2);
         v6 = 0;
       }
     }
     if ( (byte_47132E7[16 * i] & 0x10) != 0 )
     {
       v5 = *(float *)&g_fZoomFactor < 1.0 && (byte_47132E7[16 * i] & 0x40) != 0;
-      CCachePageManager::RenderCacheObject(
-        (CCachePageManager *)D3DObjectPtr->CCachePageManager[(unsigned __int8)byte_47132E4[16 * i]],
-        (unsigned __int8)byte_47132E5[16 * i],
-        *(float *)&dword_47132DC[4 * i],
-        *(float *)&dword_47132E0[4 * i],
-        dword_47132D8[4 * i],
-        byte_47132E7[16 * i],
-        (unsigned __int8)byte_47132E6[16 * i],
-        v5);
+      CCachePageManager::RenderCacheObject((CCachePageManager *)D3DObjectPtr->CCachePageManager[(unsigned __int8)byte_47132E4[16 * i]], (unsigned __int8)byte_47132E5[16 * i], *(float *)&dword_47132DC[4 * i], *(float *)&dword_47132E0[4 * i], dword_47132D8[4 * i], byte_47132E7[16 * i], (unsigned __int8)byte_47132E6[16 * i], v5);
     }
     else
     {
-      CCachePageManager::RenderCacheObject(
-        (CCachePageManager *)D3DObjectPtr->m_pCacheManagers[(unsigned __int8)byte_47132E4[16 * i]],
-        (unsigned __int8)byte_47132E5[16 * i],
-        *(float *)&dword_47132DC[4 * i],
-        *(float *)&dword_47132E0[4 * i],
-        dword_47132D8[4 * i],
-        byte_47132E7[16 * i],
-        0,
-        0);
+      CCachePageManager::RenderCacheObject((CCachePageManager *)D3DObjectPtr->m_pCacheManagers[(unsigned __int8)byte_47132E4[16 * i]], (unsigned __int8)byte_47132E5[16 * i], *(float *)&dword_47132DC[4 * i], *(float *)&dword_47132E0[4 * i], dword_47132D8[4 * i], byte_47132E7[16 * i], 0, 0);
     }
   }
   CCachePageManager::ReleaseData((CCachePageManager *)D3DObjectPtr->CCachePageManager[0]);
@@ -52701,14 +54632,18 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
   char v100; // [esp+FFh] [ebp-1h]
 
   if ( !g_pGUIEngine || !g_pFileHeader || !g_pGfxEngine )
+  {
     return 0;
+  }
   if ( IGfxEngine::IsGfxEngineRebuilded((IGfxEngine *)g_pGfxEngine) )
   {
     BBSupportTracePrintF(0, "GUI ENGINE: Refreshing surfaces!");
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
   }
   if ( g_bDisableEvents && a1->m_iEventId != 21 )
+  {
     return 0;
+  }
   v100 = 0;
   v99 = 0;
   v91 = a1->m_iEventId - 5;
@@ -52719,7 +54654,9 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
     case 2:
       v77 = sub_2F9E860(a1->m_lParam);
       if ( !IsNonTransparentGuiArea(v77, SHIDWORD(v77)) )
+      {
         goto GuiEngine2_EventProc___def_3399920;
+      }
       v99 = 1;
       currentTickCount = GetTickCount();
       if ( CToolTip::IsOpen((CToolTip *)&g_cToolTip) )
@@ -52729,7 +54666,9 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
       }
       ControlUnderCursor = FindControlUnderCursor(v77, SHIDWORD(v77), &v98, &v70, &v71);
       if ( !ControlUnderCursor || v98->controlType != 16 )
+      {
         goto LABEL_95;
+      }
       v98 = (struct SGuiControl *)((char *)v98 + 36);
       if ( v98->controlType == 7 || v98->controlType == 8 )
       {
@@ -52741,9 +54680,13 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
           v82 = *p_width + *(unsigned __int16 *)(v81 + 2);
           v83 = p_width[2] + *p_width + *(unsigned __int16 *)(v81 + 2) - v98->width;
           if ( v94 < v82 )
+          {
             v94 = v82;
+          }
           if ( v94 > v83 )
+          {
             v94 = v83;
+          }
           if ( v98->x != v94 )
           {
             showTexture = CalcPercentageValue(v82, v83, v94, 0);
@@ -52787,12 +54730,15 @@ LABEL_95:
               case 1:
                 v17 = v100;
                 if ( (*(_BYTE *)(g_pCurrentSelectedControl + 27) & 1) != 0 )
+                {
                   v100 = SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 0) | v17;
+                }
                 else
+                {
                   v100 = SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 1) | v17;
+                }
                 v56 = AddKeyStates(a1->m_wParam);
-                v44 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
-                    + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
+                v44 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
                 v18 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
                 ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v18])(3, v44, v56);
                 break;
@@ -52826,8 +54772,7 @@ LABEL_95:
                 g_pCurrentRepeatControl = g_pCurrentSelectedControl;
                 dword_4726EBC = GetTickCount() + 300;
                 v57 = AddKeyStates(a1->m_wParam);
-                v45 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
-                    + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
+                v45 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
                 v20 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
                 ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v20])(3, v45, v57);
                 break;
@@ -52850,11 +54795,12 @@ LABEL_95:
       }
       v67 = sub_2F9E860(a1->m_lParam);
       if ( !IsNonTransparentGuiArea(v67, SHIDWORD(v67)) && !g_pCurrentDragControl )
+      {
         goto GuiEngine2_EventProc___def_3399920;
+      }
       v99 = 1;
       currentTickCount = GetTickCount();
-      if ( !g_pCurrentDragControl
-        || *(_BYTE *)(g_pCurrentDragControl + 24) != 7 && *(_BYTE *)(g_pCurrentDragControl + 24) != 8 )
+      if ( !g_pCurrentDragControl || *(_BYTE *)(g_pCurrentDragControl + 24) != 7 && *(_BYTE *)(g_pCurrentDragControl + 24) != 8 )
       {
         goto LABEL_146;
       }
@@ -52865,11 +54811,7 @@ LABEL_95:
         BBSupportTracePrintF(0, "GUI ENGINE: Illegal data. Can't find slider area.");
         goto GuiEngine2_EventProc___def_3399920;
       }
-      v22 = CalcPercentageValue(
-              *v88 + *(unsigned __int16 *)(v73 + 2),
-              v88[2] + *v88 + *(unsigned __int16 *)(v73 + 2) - *(unsigned __int16 *)(g_pCurrentDragControl + 4),
-              *(unsigned __int16 *)g_pCurrentDragControl,
-              0);
+      v22 = CalcPercentageValue(*v88 + *(unsigned __int16 *)(v73 + 2), v88[2] + *v88 + *(unsigned __int16 *)(v73 + 2) - *(unsigned __int16 *)(g_pCurrentDragControl + 4), *(unsigned __int16 *)g_pCurrentDragControl, 0);
       v59 = AddKeyStates(a1->m_wParam) + v22;
       v47 = (*(unsigned __int8 *)(g_pCurrentDragControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentDragControl + 10);
       v23 = GetSurfaceID((struct SGuiControl *)g_pCurrentDragControl);
@@ -52893,8 +54835,7 @@ LABEL_146:
             {
               v100 |= SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 0);
               v60 = AddKeyStates(a1->m_wParam);
-              v48 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
-                  + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
+              v48 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
               v24 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
               ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v24])(3, v48, v60);
             }
@@ -52913,8 +54854,7 @@ GuiEngine2_EventProc___def_339AC41:
       qword_471F794 = sub_2F9E830(a1->m_lParam);
       currentTickCount = GetTickCount();
       v97 = FindControlUnderCursor(v66, SHIDWORD(v66), &v98, &v70, &v71);
-      if ( g_pCurrentDragControl
-        && (*(_BYTE *)(g_pCurrentDragControl + 24) == 7 || *(_BYTE *)(g_pCurrentDragControl + 24) == 8) )
+      if ( g_pCurrentDragControl && (*(_BYTE *)(g_pCurrentDragControl + 24) == 7 || *(_BYTE *)(g_pCurrentDragControl + 24) == 8) )
       {
         v93 = v66;
         v78 = sub_2F9E930(*(unsigned __int8 *)(g_pCurrentDragControl + 31));
@@ -52927,9 +54867,13 @@ GuiEngine2_EventProc___def_339AC41:
         v79 = *v87 + *(unsigned __int16 *)(v78 + 2);
         v80 = v87[2] + *v87 + *(unsigned __int16 *)(v78 + 2) - *(unsigned __int16 *)(g_pCurrentDragControl + 4);
         if ( v93 < v79 )
+        {
           v93 = v79;
+        }
         if ( v93 > v80 )
+        {
           v93 = v80;
+        }
         if ( *(unsigned __int16 *)g_pCurrentDragControl != v93 )
         {
           v86 = CalcPercentageValue(v79, v80, v93, 0);
@@ -52938,9 +54882,7 @@ GuiEngine2_EventProc___def_339AC41:
           if ( *(_BYTE *)(g_pCurrentDragControl + 24) == 8 )
           {
             RestoreMultisliderSettings((struct SGuiControl *)g_pCurrentDragControl);
-            ChangeMultisliders(
-              (struct SGuiControl *)g_pCurrentDragControl,
-              *(unsigned __int8 *)(g_pCurrentDragControl + 33) - v86);
+            ChangeMultisliders((struct SGuiControl *)g_pCurrentDragControl, *(unsigned __int8 *)(g_pCurrentDragControl + 33) - v86);
             EnsureMultisliders((struct SGuiControl *)g_pCurrentDragControl);
             v86 = *(char *)(g_pCurrentDragControl + 30);
           }
@@ -52948,24 +54890,19 @@ GuiEngine2_EventProc___def_339AC41:
           *(_BYTE *)(g_pCurrentDragControl + 35) = 1;
           v100 = 1;
           v61 = v86;
-          v49 = (*(unsigned __int8 *)(g_pCurrentDragControl + 27) << 16)
-              + *(unsigned __int16 *)(g_pCurrentDragControl + 10);
+          v49 = (*(unsigned __int8 *)(g_pCurrentDragControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentDragControl + 10);
           v25 = GetSurfaceID((struct SGuiControl *)g_pCurrentDragControl);
           ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v25])(2, v49, v61);
         }
       }
       else
       {
-        if ( g_pCurrentDragControl
-          && ((struct SGuiControl *)g_pCurrentDragControl != v98 || !v97)
-          && (*(_BYTE *)(g_pCurrentDragControl + 27) & 1) != 0 )
+        if ( g_pCurrentDragControl && ((struct SGuiControl *)g_pCurrentDragControl != v98 || !v97) && (*(_BYTE *)(g_pCurrentDragControl + 27) & 1) != 0 )
         {
           v26 = v100;
           v100 = SetControlState((struct SGuiControl *)g_pCurrentDragControl, 1, 0) | v26;
         }
-        if ( (struct SGuiControl *)g_pCurrentDragControl == v98
-          && v97
-          && (*(_BYTE *)(g_pCurrentDragControl + 27) & 1) == 0 )
+        if ( (struct SGuiControl *)g_pCurrentDragControl == v98 && v97 && (*(_BYTE *)(g_pCurrentDragControl + 27) & 1) == 0 )
         {
           v27 = v100;
           v100 = SetControlState((struct SGuiControl *)g_pCurrentDragControl, 1, 1) | v27;
@@ -52990,7 +54927,9 @@ GuiEngine2_EventProc___def_339AC41:
           dword_3E2F12C = GetTickCount() + 700;
         }
         if ( CToolTip::IsOpen((CToolTip *)&g_cToolTip) )
+        {
           dword_3E2F128 = GetTickCount();
+        }
         CToolTip::CloseTooltip((CToolTip *)&g_cToolTip);
         CToolTip::Unlock((CToolTip *)&g_cToolTip);
       }
@@ -53007,8 +54946,7 @@ GuiEngine2_EventProc___def_339AC41:
           if ( CToolTip::IsOpen((CToolTip *)&g_cToolTipExt) )
           {
             v62 = *(__int16 *)(g_pCurrentSelectedControl + 22);
-            v50 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
-                + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
+            v50 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
             v31 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
             ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v31])(9, v50, v62);
             if ( CToolTip::GetCurrentLengthOfTooltip((CToolTip *)&g_cToolTipExt) )
@@ -53028,8 +54966,7 @@ GuiEngine2_EventProc___def_339AC41:
           else
           {
             v63 = *(__int16 *)(g_pCurrentSelectedControl + 22);
-            v51 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
-                + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
+            v51 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
             v33 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
             ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v33])(9, v51, v63);
             v34 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
@@ -53050,14 +54987,15 @@ GuiEngine2_EventProc___def_3399920:
     case 4:
       v68 = sub_2F9E860(a1->m_lParam);
       if ( !IsNonTransparentGuiArea(v68, SHIDWORD(v68)) )
+      {
         goto GuiEngine2_EventProc___def_3399920;
+      }
       v95 = FindControlUnderCursor(v68, SHIDWORD(v68), &v98, &v70, &v71);
       if ( (struct SGuiControl *)g_pCurrentSelectedControl != v98 || (struct SGuiControl *)g_pCurrentDragControl == v98 )
+      {
         goto LABEL_127;
-      if ( !v95
-        || v98->controlType != 16
-        || (v98 = (struct SGuiControl *)((char *)v98 + 36), v98->controlType == 7)
-        || v98->controlType == 8 )
+      }
+      if ( !v95 || v98->controlType != 16 || (v98 = (struct SGuiControl *)((char *)v98 + 36), v98->controlType == 7) || v98->controlType == 8 )
       {
         if ( v98 && v98->controlType == 8 )
         {
@@ -53108,8 +55046,7 @@ LABEL_127:
             case 19:
             case 20:
               v58 = AddKeyStates(a1->m_wParam);
-              v46 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
-                  + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
+              v46 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
               v21 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
               ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v21])(7, v46, v58);
               break;
@@ -53187,18 +55124,14 @@ LABEL_127:
           case 11:
             v99 = 1;
             v7 = *(unsigned __int8 *)(g_pCurrentEditControl + 33);
-            if ( v7 < j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)])
-              && (unsigned __int8)DeleteCharacter(
-                                    (char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)],
-                                    *(unsigned __int8 *)(g_pCurrentEditControl + 33)) )
+            if ( v7 < j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)]) && (unsigned __int8)DeleteCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 33)) )
             {
               dword_3E2F124 = 3;
               SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
               CalcCharWidths(g_pCurrentEditControl);
               v100 = 1;
               *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
-              v39 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16)
-                  + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
+              v39 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
               v8 = GetSurfaceID((struct SGuiControl *)g_pCurrentEditControl);
               ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v8])(2, v39, 0);
             }
@@ -53217,10 +55150,7 @@ LABEL_127:
         {
           case 8:
             v99 = 1;
-            if ( *(_BYTE *)(g_pCurrentEditControl + 33)
-              && (unsigned __int8)DeleteCharacter(
-                                    (char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)],
-                                    *(unsigned __int8 *)(g_pCurrentEditControl + 33) - 1) )
+            if ( *(_BYTE *)(g_pCurrentEditControl + 33) && (unsigned __int8)DeleteCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 33) - 1) )
             {
               dword_3E2F124 = 3;
               v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
@@ -53229,8 +55159,7 @@ LABEL_127:
               v100 = 1;
               *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
               DoScrolling((struct SGuiControl *)g_pCurrentEditControl, 0);
-              v35 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16)
-                  + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
+              v35 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
               v2 = GetSurfaceID((struct SGuiControl *)g_pCurrentEditControl);
               ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v2])(2, v35, 0);
             }
@@ -53238,38 +55167,30 @@ LABEL_127:
           case 13:
             v99 = 1;
             v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 64, 0);
-            v36 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16)
-                + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
+            v36 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
             v3 = GetSurfaceID((struct SGuiControl *)g_pCurrentEditControl);
             ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v3])(3, v36, 0);
             if ( (*(_BYTE *)(g_pCurrentEditControl + 27) & 0x40) == 0 )
+            {
               g_pCurrentEditControl = 0;
+            }
             break;
           case 27:
             v99 = 1;
             v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 64, 0);
-            v37 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16)
-                + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
+            v37 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
             v4 = GetSurfaceID((struct SGuiControl *)g_pCurrentEditControl);
             ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v4])(4, v37, 0);
             if ( (*(_BYTE *)(g_pCurrentEditControl + 27) & 0x40) == 0 )
+            {
               g_pCurrentEditControl = 0;
+            }
             break;
           default:
             if ( IsValidInput(a1->m_wParam, *(_BYTE *)(g_pCurrentEditControl + 13)) )
             {
               v99 = 1;
-              if ( *(unsigned __int8 *)(g_pCurrentEditControl + 12) >= 0x7Du
-                 ? InsertCharacter(
-                     (char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)],
-                     125,
-                     *(unsigned __int8 *)(g_pCurrentEditControl + 33),
-                     a1->m_wParam)
-                 : (unsigned __int8)InsertCharacter(
-                                      (char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)],
-                                      *(unsigned __int8 *)(g_pCurrentEditControl + 12),
-                                      *(unsigned __int8 *)(g_pCurrentEditControl + 33),
-                                      a1->m_wParam) )
+              if ( *(unsigned __int8 *)(g_pCurrentEditControl + 12) >= 0x7Du ? InsertCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], 125, *(unsigned __int8 *)(g_pCurrentEditControl + 33), a1->m_wParam) : (unsigned __int8)InsertCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 12), *(unsigned __int8 *)(g_pCurrentEditControl + 33), a1->m_wParam) )
               {
                 dword_3E2F124 = 3;
                 v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
@@ -53278,8 +55199,7 @@ LABEL_127:
                 v100 = 1;
                 *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
                 DoScrolling((struct SGuiControl *)g_pCurrentEditControl, 1);
-                v38 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16)
-                    + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
+                v38 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
                 v6 = GetSurfaceID((struct SGuiControl *)g_pCurrentEditControl);
                 ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v6])(2, v38, 0);
               }
@@ -53297,10 +55217,7 @@ LABEL_127:
         if ( v84 )
         {
           v99 = 1;
-          ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[*(unsigned __int16 *)v84])(
-            10,
-            a1->m_wParam,
-            a1->m_lParam);
+          ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[*(unsigned __int16 *)v84])(10, a1->m_wParam, a1->m_lParam);
         }
       }
       goto GuiEngine2_EventProc___def_3399920;
@@ -53308,8 +55225,7 @@ LABEL_127:
       if ( g_pCurrentRepeatControl && GetTickCount() > dword_4726EBC )
       {
         v52 = AddKeyStates(a1->m_wParam);
-        v40 = (*(unsigned __int8 *)(g_pCurrentRepeatControl + 27) << 16)
-            + *(unsigned __int16 *)(g_pCurrentRepeatControl + 10);
+        v40 = (*(unsigned __int8 *)(g_pCurrentRepeatControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentRepeatControl + 10);
         v11 = GetSurfaceID((struct SGuiControl *)g_pCurrentRepeatControl);
         ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v11])(3, v40, v52);
       }
@@ -53324,16 +55240,18 @@ LABEL_127:
         if ( g_pCurrentEditControl )
         {
           if ( (*(_BYTE *)(g_pCurrentEditControl + 27) & 0x80) != 0 )
+          {
             v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 0);
+          }
           else
+          {
             v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
+          }
         }
       }
       if ( g_pCurrentSelectedControl )
       {
-        if ( GetTickCount() <= currentTickCount + 700 && GetTickCount() >= dword_3E2F128 + 400
-          || CToolTip::IsOpen((CToolTip *)&g_cToolTip)
-          || CToolTip::IsLocked((CToolTip *)&g_cToolTip) )
+        if ( GetTickCount() <= currentTickCount + 700 && GetTickCount() >= dword_3E2F128 + 400 || CToolTip::IsOpen((CToolTip *)&g_cToolTip) || CToolTip::IsLocked((CToolTip *)&g_cToolTip) )
         {
           if ( CToolTip::IsOpen((CToolTip *)&g_cToolTip) && GetTickCount() > dword_4726EC4 + 8000 )
           {
@@ -53344,8 +55262,7 @@ LABEL_127:
         else
         {
           v53 = *(__int16 *)(g_pCurrentSelectedControl + 20);
-          v41 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16)
-              + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
+          v41 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
           v12 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
           ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v12])(8, v41, v53);
           v65 = sub_2F9E830(a1->m_lParam);
@@ -53470,13 +55387,19 @@ struct SGuiControl * __cdecl GetControlPtr(int container, int valueLink) {
   struct SGuiControl *v5; // [esp+8h] [ebp-4h]
 
   if ( !sub_2F9E8B0(container) )
+  {
     return 0;
+  }
   v3 = sub_2F9E930(container);
   v5 = (struct SGuiControl *)(v3 + 16);
-  for ( i = 0; i < *(unsigned __int16 *)(v3 + 12); ++i )
+  for ( i = 0;
+        i < *(unsigned __int16 *)(v3 + 12);
+        ++i )
   {
     if ( valueLink == v5->valueLink )
+    {
       return v5;
+    }
     v5 = (struct SGuiControl *)((char *)v5 + 36);
   }
   return 0;
@@ -53491,9 +55414,13 @@ int __cdecl CalcSliderPosition(int a1, int a2, int a3, bool a4) {
 
   v5 = (int)(float)((float)((float)a3 * (float)((float)(a2 - a1) * 0.0099999998)) + 0.5);
   if ( a4 )
+  {
     return a2 - v5;
+  }
   else
+  {
     return v5 + a1;
+  }
 }
 
 
@@ -53502,9 +55429,13 @@ int __cdecl CalcSliderPosition(int a1, int a2, int a3, bool a4) {
 int __cdecl CalcPercentageValue(int a1, int a2, int a3, bool a4) {
   
   if ( a2 == a1 )
+  {
     return 0;
+  }
   if ( a4 )
+  {
     return 100 - (int)(float)((float)((float)(a3 - a1) * (float)(100.0 / (float)(a2 - a1))) + 0.5);
+  }
   return (int)(float)((float)((float)(a3 - a1) * (float)(100.0 / (float)(a2 - a1))) + 0.5);
 }
 
@@ -53517,9 +55448,13 @@ int __cdecl AddKeyStates(int a1) {
 
   v2 = 0;
   if ( (a1 & 8) != 0 )
+  {
     v2 = 65537;
+  }
   if ( (a1 & 4) != 0 )
+  {
     return v2 | 0x10004;
+  }
   return v2;
 }
 
@@ -53533,23 +55468,35 @@ bool __cdecl IsNonTransparentGuiArea(int a1, int a2) {
   _DWORD v5[180]; // [esp+14h] [ebp-2D4h] BYREF
 
   if ( !g_pFileHeader )
+  {
     return 0;
-  for ( i = 0; ; ++i )
+  }
+  for ( i = 0;
+        ;
+        ++i )
   {
     if ( i >= 0xE )
+    {
       return 0;
+    }
     if ( g_iOpenDialogs[i] )
     {
       v4 = (unsigned __int16 *)sub_2F9E930(g_iOpenDialogs[i] - 1);
       if ( a1 >= v4[1] && a2 >= v4[2] && a1 <= v4[3] + v4[1] && a2 <= v4[4] + v4[2] )
+      {
         break;
+      }
     }
   }
   if ( (v4[7] & 2) != 0 )
+  {
     return 1;
+  }
   (**(void (__thiscall ***)(int, _DWORD *, _DWORD))g_pGfxManager)(g_pGfxManager, v5, v4[5]);
   if ( v5[0] )
+  {
     return *(_BYTE *)(a1 - v4[1] + v5[0] + 12 + (a2 - v4[2]) * v4[3]) != 0;
+  }
   BBSupportTracePrintF(0, "GUI ENGINE: Can't get source data from gfx manager for mask test.");
   IGfxEngine::EndWriteToSurface((IGfxEngine *)g_pGfxEngine, *v4);
   return 0;
@@ -53566,11 +55513,15 @@ bool __cdecl DeleteCharacter(unsigned char * String, int Count) {
   char Destination[300]; // [esp+Ch] [ebp-130h] BYREF
 
   if ( Count < 0 || Count >= j___mbstrlen(String) )
+  {
     return 0;
+  }
   v4 = Destination;
   v3 = j___mbstrlen(String);
   if ( !v3 )
+  {
     return 0;
+  }
   if ( Count <= 0 )
   {
     j__strcpy(Destination, &byte_3AD1733);
@@ -53583,9 +55534,13 @@ bool __cdecl DeleteCharacter(unsigned char * String, int Count) {
     v4 = (char *)j___mbsninc((const unsigned __int8 *)Destination, Count);
   }
   if ( v3 <= Count + 1 )
+  {
     j__strcpy(v4, &byte_3AD176D);
+  }
   else
+  {
     j__strcpy(v4, Source);
+  }
   j__strcpy(String, Destination);
   return 1;
 }
@@ -53603,9 +55558,13 @@ bool __cdecl InsertCharacter(unsigned char * Str, int a2, int Count, int a4) {
   char Destination[300]; // [esp+14h] [ebp-130h] BYREF
 
   if ( (int)strlen(Str) >= a2 )
+  {
     return 0;
+  }
   if ( Count < 0 || Count >= j___mbstrlen(Str) + 1 )
+  {
     return 0;
+  }
   v6 = Str;
   v7 = Destination;
   v5 = j___mbstrlen(Str);
@@ -53624,9 +55583,13 @@ bool __cdecl InsertCharacter(unsigned char * Str, int a2, int Count, int a4) {
   j__strcpy(v7, Source);
   v8 = (char *)j___mbsninc((const unsigned __int8 *)v7, 1u);
   if ( v5 <= Count )
+  {
     j__strcpy(v8, &byte_3AD176F);
+  }
   else
+  {
     j__strcpy(v8, v6);
+  }
   j__strcpy(Str, Destination);
   return 1;
 }
@@ -53646,12 +55609,7 @@ void __cdecl DoScrolling(struct SGuiControl * a1, int a2) {
   int v9; // [esp+18h] [ebp-8h]
   int v10; // [esp+1Ch] [ebp-4h]
 
-  CalcTextSize(
-    a1->textStyle,
-    (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)a1->id],
-    &psizl,
-    LOBYTE(a1->unknownData[1]),
-    HIBYTE(a1->unknownData[0]) - LOBYTE(a1->unknownData[1]));
+  CalcTextSize(a1->textStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)a1->id], &psizl, LOBYTE(a1->unknownData[1]), HIBYTE(a1->unknownData[0]) - LOBYTE(a1->unknownData[1]));
   result = a1;
   if ( psizl.cx > a1->width - 30 && a2 == 1 )
   {
@@ -53720,7 +55678,9 @@ bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGui
   _WORD v22[256]; // [esp+314h] [ebp-204h] BYREF
 
   if ( a5->controlType == 9 )
+  {
     return 0;
+  }
   v14 = (unsigned __int16 *)sub_2F9E930(a5->unknownId);
   (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(g_pGfxManager, &v20, v14[5]);
   if ( !v20 || !v21 )
@@ -53759,7 +55719,9 @@ bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGui
       v6 = 16.0 / (float)(a5->width - 2);
       if ( (char)a5->showTexture > 0 )
       {
-        for ( i = a5->x + 1; i < a5->x + a5->width - 1; ++i )
+        for ( i = a5->x + 1;
+              i < a5->x + a5->width - 1;
+              ++i )
         {
           FastVLine((unsigned __int16 *)a1, a2, i, v7, a5->y + a5->height - 1, g_uShadeTable2[v15]);
           v15 = v15 + v6;
@@ -53768,7 +55730,9 @@ bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGui
       v16 = 0.0;
       if ( (char)a5->showTexture < 100 )
       {
-        for ( j = a5->x + 1; j < a5->x + a5->width - 1; ++j )
+        for ( j = a5->x + 1;
+              j < a5->x + a5->width - 1;
+              ++j )
         {
           FastVLine((unsigned __int16 *)a1, a2, j, a5->y + 1, v7, g_uShadeTable1[v16]);
           v16 = v16 + v6;
@@ -53791,19 +55755,12 @@ bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGui
         }
         else
         {
-          (*(void (__thiscall **)(int, unsigned __int16 **, int, _DWORD))(*(_DWORD *)g_pGfxManager + 4))(
-            g_pGfxManager,
-            &v20,
-            a5->mainTexture + 1,
-            0);
+          (*(void (__thiscall **)(int, unsigned __int16 **, int, _DWORD))(*(_DWORD *)g_pGfxManager + 4))(g_pGfxManager, &v20, a5->mainTexture + 1, 0);
         }
       }
       else if ( (a5->effects & 1) != 0 )
       {
-        (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(
-          g_pGfxManager,
-          &v20,
-          a5->buttonPressedTexture);
+        (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(g_pGfxManager, &v20, a5->buttonPressedTexture);
       }
       else
       {
@@ -53836,16 +55793,24 @@ bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGui
         if ( (a5->effects & 2) != 0 )
         {
           if ( v18 )
+          {
             UnpackGfxTransparentHiLight555(v21, v19 + 6, &a1[2 * a5->x + a2 * a5->y], a2, *v19, v19[1]);
+          }
           else
+          {
             UnpackGfxTransparentHiLight565(v21, v19 + 6, &a1[2 * a5->x + a2 * a5->y], a2, *v19, v19[1]);
+          }
         }
         else if ( (a5->effects & 4) != 0 )
         {
           if ( v18 )
+          {
             UnpackGfxTransparentGrayed555(v21, v19 + 6, &a1[2 * a5->x + a2 * a5->y], a2, *v19, v19[1]);
+          }
           else
+          {
             UnpackGfxTransparentGrayed565(v21, v19 + 6, &a1[2 * a5->x + a2 * a5->y], a2, *v19, v19[1]);
+          }
         }
         else
         {
@@ -53853,10 +55818,16 @@ bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGui
         }
       }
       if ( (a5->effects & 0xC0) != 0xC0 )
+      {
         return 1;
+      }
       v8 = 0;
-      for ( k = LOBYTE(a5->unknownData[1]); k < HIBYTE(a5->unknownData[0]); ++k )
+      for ( k = LOBYTE(a5->unknownData[1]);
+            k < HIBYTE(a5->unknownData[0]);
+            ++k )
+      {
         v8 += g_iEditWidthTable[k];
+      }
       FastVLine((unsigned __int16 *)&a1[2 * a5->x + a2 * a5->y], a2, v8 + 2, 0, a5->height - 1, 0xFFFFu);
       return 1;
     }
@@ -53864,10 +55835,16 @@ bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGui
   else
   {
     if ( (a5->effects & 0xC0) != 0xC0 )
+    {
       return 1;
+    }
     v9 = 0;
-    for ( m = LOBYTE(a5->unknownData[1]); m < HIBYTE(a5->unknownData[0]); ++m )
+    for ( m = LOBYTE(a5->unknownData[1]);
+          m < HIBYTE(a5->unknownData[0]);
+          ++m )
+    {
       v9 += g_iEditWidthTable[m];
+    }
     FastVLine((unsigned __int16 *)&a1[2 * a5->x + a2 * a5->y], a2, v9 + 2, 0, a5->height - 1, 0xFFFFu);
     return 1;
   }
@@ -53887,7 +55864,9 @@ bool __cdecl DrawControlText(struct HDC__ * hdc, struct SGuiControl * a2) {
   char Destination[128]; // [esp+30h] [ebp-84h] BYREF
 
   if ( (*((_BYTE *)a2 + 27) & 8) != 0 )
+  {
     return 0;
+  }
   lpchText = (LPCSTR)&g_mbstrTextTable[75 * *((char *)a2 + 25)];
   switch ( *((_BYTE *)a2 + 24) )
   {
@@ -53899,7 +55878,9 @@ bool __cdecl DrawControlText(struct HDC__ * hdc, struct SGuiControl * a2) {
       break;
     case 0x15:
       if ( !*((_DWORD *)a2 + 4) )
+      {
         return 0;
+      }
       lpchText = (LPCSTR)*((_DWORD *)a2 + 4);
       break;
     case 5:
@@ -53914,15 +55895,21 @@ bool __cdecl DrawControlText(struct HDC__ * hdc, struct SGuiControl * a2) {
       break;
     default:
       if ( *((char *)a2 + 25) < 0 )
+      {
         return 0;
+      }
       if ( !LOBYTE(g_mbstrTextTable[75 * *((char *)a2 + 25)]) || !g_bUsedTexts[*((char *)a2 + 25)] )
+      {
         return 0;
+      }
       break;
   }
   cchText = j___mbstrlen(lpchText);
   v7 = *((unsigned __int8 *)a2 + 26);
   if ( v7 >= 0x13 )
+  {
     v7 = 0;
+  }
   h = SelectObject(hdc, g_hFonts[v7]);
   rc.left = *a2;
   rc.top = *((char *)a2 + 30) + a2[1];
@@ -53954,14 +55941,13 @@ bool __cdecl DrawControlText(struct HDC__ * hdc, struct SGuiControl * a2) {
     rc.bottom -= dword_3AD1A1C[21 * v7];
   }
   if ( (*((_BYTE *)a2 + 27) & 4) != 0 )
-    SetTextColor(
-      hdc,
-      (int)(float)((float)(unsigned __int8)*(&off_3AD1A14 + 21 * v7) * 0.60000002)
-    + ((int)(float)((float)((int)((unsigned int)&dword_F29144[203695] & (unsigned int)*(&off_3AD1A14 + 21 * v7)) >> 16)
-                  * 0.60000002) << 16)
-    + ((int)(float)((float)((int)((unsigned int)*(&off_3AD1A14 + 21 * v7) & 0xFF00) >> 8) * 0.60000002) << 8));
+  {
+    SetTextColor(hdc, (int)(float)((float)(unsigned __int8)*(&off_3AD1A14 + 21 * v7) * 0.60000002) + ((int)(float)((float)((int)((unsigned int)&dword_F29144[203695] & (unsigned int)*(&off_3AD1A14 + 21 * v7)) >> 16) * 0.60000002) << 16) + ((int)(float)((float)((int)((unsigned int)*(&off_3AD1A14 + 21 * v7) & 0xFF00) >> 8) * 0.60000002) << 8));
+  }
   else
+  {
     SetTextColor(hdc, (COLORREF)*(&off_3AD1A14 + 21 * v7));
+  }
   DrawTextA(hdc, lpchText, cchText, &rc, dword_3AD19C8[2 * *((unsigned __int8 *)a2 + 32) + g_iAlignMode]);
   SelectObject(hdc, h);
   return 1;
@@ -53978,25 +55964,39 @@ bool __cdecl SetControlState(struct SGuiControl * a1, int a2, bool a3) {
   int v7; // [esp-8h] [ebp-10h]
 
   if ( ((unsigned __int8)a2 & a1->effects) != 0 && a3 || ((unsigned __int8)a2 & a1->effects) == 0 && !a3 )
+  {
     return 0;
+  }
   if ( a2 == 2 && !CanHilightControl(a1->controlType) )
+  {
     return 0;
+  }
   if ( a3 )
+  {
     a1->effects |= a2;
+  }
   else
+  {
     a1->effects &= ~(_BYTE)a2;
+  }
   g_bGuiIsDirty = 1;
   HIBYTE(a1->unknownData[1]) = 1;
   if ( a2 == 64 && LOBYTE(a1->unknownData[1]) )
+  {
     LOBYTE(a1->unknownData[1]) = 0;
+  }
   if ( a2 == 2 )
   {
     v6 = (a1->effects << 16) + a1->valueLink;
     SurfaceID = GetSurfaceID(a1);
     if ( a3 )
+    {
       ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[SurfaceID])(5, v6, 0);
+    }
     else
+    {
       ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[SurfaceID])(6, v6, 0);
+    }
   }
   else if ( a2 != 128 && a2 != 4 )
   {
@@ -54028,7 +56028,9 @@ void __cdecl ChangeMultisliders(struct SGuiControl * a1, int a2) {
   unknown4_low = LOBYTE(a1->unknown4);
   v10 = 1;
   if ( a2 < 0 )
+  {
     v10 = -1;
+  }
   v12 = 1;
   result = *(unsigned __int16 *)(v8 + 12);
 LABEL_4:
@@ -54036,7 +56038,9 @@ LABEL_4:
   {
     v12 = 0;
     v11 = v8 + 16;
-    for ( i = 0; i < *(unsigned __int16 *)(v8 + 12); ++i )
+    for ( i = 0;
+          i < *(unsigned __int16 *)(v8 + 12);
+          ++i )
     {
       if ( *(_BYTE *)(v11 + 24) == 8 )
       {
@@ -54056,7 +56060,9 @@ LABEL_4:
             else
             {
               if ( !a2 )
+              {
                 goto LABEL_4;
+              }
               if ( (unsigned int)(v10 + *(char *)(v11 + 30)) <= 0x64 )
               {
                 *(_BYTE *)(v11 + 30) += v10;
@@ -54065,14 +56071,10 @@ LABEL_4:
                 *(_BYTE *)(v11 + 35) = 1;
                 v9 = (unsigned __int16 *)(v11 - 36);
                 if ( *(_BYTE *)(v11 - 36 + 24) != 16 )
-                  return BBSupportTracePrintF(
-                           0,
-                           "GUI ENGINE: No previous control GUI_CNTRL_SLIDERAREA of GUI_CNTRL_SLIDER!");
-                *(_WORD *)v11 = CalcSliderPosition(
-                                  *v9,
-                                  v9[2] + *v9 - *(unsigned __int16 *)(v11 + 4),
-                                  *(char *)(v11 + 30),
-                                  0);
+                {
+                  return BBSupportTracePrintF(0, "GUI ENGINE: No previous control GUI_CNTRL_SLIDERAREA of GUI_CNTRL_SLIDER!");
+                }
+                *(_WORD *)v11 = CalcSliderPosition(*v9, v9[2] + *v9 - *(unsigned __int16 *)(v11 + 4), *(char *)(v11 + 30), 0);
                 if ( g_pfDialogCallbacks[GetSurfaceID((struct SGuiControl *)v11)] )
                 {
                   v5 = *(char *)(v11 + 30);
@@ -54119,7 +56121,9 @@ void __cdecl EnsureMultisliders(struct SGuiControl * a1) {
   v8 = sub_2F9E930(a1->unknownId);
   v9 = v8 + 16;
   v6 = 0;
-  for ( i = 0; i < *(unsigned __int16 *)(v8 + 12); ++i )
+  for ( i = 0;
+        i < *(unsigned __int16 *)(v8 + 12);
+        ++i )
   {
     if ( *(_BYTE *)(v9 + 24) == 8 )
     {
@@ -54132,7 +56136,9 @@ void __cdecl EnsureMultisliders(struct SGuiControl * a1) {
         else
         {
           if ( (*(_BYTE *)(v9 + 27) & 0xC) == 0 )
+          {
             v6 += *(char *)(v9 + 30);
+          }
           v9 += 36;
         }
       }
@@ -54149,16 +56155,24 @@ void __cdecl EnsureMultisliders(struct SGuiControl * a1) {
   result = (int)a1;
   v2 = v6 + (char)a1->showTexture;
   if ( v2 == 100 )
+  {
     return result;
+  }
   a1->showTexture += 100 - v2;
   if ( (a1->showTexture & 0x80u) != 0 )
+  {
     a1->showTexture = 0;
+  }
   if ( (char)a1->showTexture > 100 )
+  {
     a1->showTexture = 100;
+  }
   a1->x = CalcSliderPosition(a1[-1].width, a1[-1].mainTexture + a1[-1].width - a1->width, (char)a1->showTexture, 0);
   result = GetSurfaceID(a1);
   if ( !g_pfDialogCallbacks[result] )
+  {
     return result;
+  }
   showTexture = (char)a1->showTexture;
   v4 = (a1->effects << 16) + a1->valueLink;
   SurfaceID = GetSurfaceID(a1);
@@ -54178,18 +56192,24 @@ bool __cdecl CanLockMultislider(struct SGuiControl * a1) {
 
   v5 = sub_2F9E930(a1->unknownId);
   if ( (a1->effects & 1) != 0 )
+  {
     return 0;
+  }
   v6 = (_BYTE *)(v5 + 16);
   v3 = 0;
   v2 = 0;
-  for ( i = 0; i < *(unsigned __int16 *)(v5 + 12); ++i )
+  for ( i = 0;
+        i < *(unsigned __int16 *)(v5 + 12);
+        ++i )
   {
     if ( v6[24] == 8 )
     {
       if ( v6[28] == LOBYTE(a1->unknown4) )
       {
         if ( (v6[27] & 0xD) != 0 )
+        {
           ++v2;
+        }
         ++v3;
         v6 += 36;
       }
@@ -54220,17 +56240,23 @@ void __cdecl StoreMultisliderSettings(struct SGuiControl * a1) {
   v3 = sub_2F9E930(a1->unknownId);
   v5 = (_BYTE *)(v3 + 16);
   unknown4_low = LOBYTE(a1->unknown4);
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = v3;
     if ( i >= *(unsigned __int16 *)(v3 + 12) )
+    {
       break;
+    }
     if ( v5[24] == 8 )
     {
       if ( (unsigned __int8)v5[28] == unknown4_low )
       {
         if ( (v5[27] & 0xC) == 0 )
+        {
           v5[33] = v5[30];
+        }
         v5 += 36;
       }
       else
@@ -54261,11 +56287,15 @@ void __cdecl RestoreMultisliderSettings(struct SGuiControl * a1) {
   v3 = sub_2F9E930(a1->unknownId);
   v6 = v3 + 16;
   unknown4_low = LOBYTE(a1->unknown4);
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = v3;
     if ( i >= *(unsigned __int16 *)(v3 + 12) )
+    {
       break;
+    }
     if ( *(_BYTE *)(v6 + 24) == 8 )
     {
       if ( *(unsigned __int8 *)(v6 + 28) == unknown4_low )
@@ -54284,7 +56314,9 @@ void __cdecl RestoreMultisliderSettings(struct SGuiControl * a1) {
           *(_BYTE *)(v6 + 35) = 1;
           v5 = (unsigned __int16 *)(v6 - 36);
           if ( *(_BYTE *)(v6 - 36 + 24) != 16 )
+          {
             return BBSupportTracePrintF(0, "GUI ENGINE: No previous control GUI_CNTRL_SLIDERAREA of GUI_CNTRL_SLIDER!");
+          }
           *(_WORD *)v6 = CalcSliderPosition(*v5, v5[2] + *v5 - *(unsigned __int16 *)(v6 + 4), *(char *)(v6 + 30), 0);
           *((_BYTE *)v5 + 35) = 1;
           v6 += 36;
@@ -54335,13 +56367,13 @@ bool __cdecl SelectRadioGroup(struct SGuiControl * a1) {
   {
     v6 = sub_2F9E930(a1->unknownId);
     v8 = v6 + 16;
-    for ( i = 0; i < *(unsigned __int16 *)(v6 + 12); ++i )
+    for ( i = 0;
+          i < *(unsigned __int16 *)(v6 + 12);
+          ++i )
     {
       if ( *(_BYTE *)(v8 + 24) == 3 || *(_BYTE *)(v8 + 24) == 2 )
       {
-        if ( (*(_BYTE *)(v8 + 27) & 1) != 0
-          && *(unsigned __int8 *)(v8 + 28) == LOBYTE(a1->unknown4)
-          && a1 != (struct SGuiControl *)v8 )
+        if ( (*(_BYTE *)(v8 + 27) & 1) != 0 && *(unsigned __int8 *)(v8 + 28) == LOBYTE(a1->unknown4) && a1 != (struct SGuiControl *)v8 )
         {
           SetControlState((struct SGuiControl *)v8, 1, 0);
         }
@@ -54374,8 +56406,12 @@ bool __cdecl FindControlUnderCursor(int a1, int a2, struct SGuiControl * & a3, i
   *a5 = 0;
   *a4 = 0;
   if ( !g_pFileHeader )
+  {
     return 0;
-  for ( i = 13; i >= 0; --i )
+  }
+  for ( i = 13;
+        i >= 0;
+        --i )
   {
     if ( g_iOpenDialogs[i] )
     {
@@ -54383,7 +56419,9 @@ bool __cdecl FindControlUnderCursor(int a1, int a2, struct SGuiControl * & a3, i
       if ( a1 >= v8[1] && a2 >= v8[2] && a1 <= v8[3] + v8[1] && a2 <= v8[4] + v8[2] )
       {
         v9 = v8 + 8;
-        for ( j = 0; j < v8[6]; ++j )
+        for ( j = 0;
+              j < v8[6];
+              ++j )
         {
           if ( (*((_BYTE *)v9 + 27) & 0xC) != 0 )
           {
@@ -54396,13 +56434,12 @@ bool __cdecl FindControlUnderCursor(int a1, int a2, struct SGuiControl * & a3, i
           else
           {
             if ( *((_BYTE *)v9 + 24) != 16 )
+            {
               goto LABEL_30;
+            }
             if ( *((_BYTE *)v9 + 60) == 7 || *((_BYTE *)v9 + 60) == 8 )
             {
-              if ( a1 >= v8[1] + v9[18]
-                && a2 >= v8[2] + v9[19]
-                && a1 <= v9[20] + v8[1] + v9[18]
-                && a2 <= v9[21] + v8[2] + v9[19] )
+              if ( a1 >= v8[1] + v9[18] && a2 >= v8[2] + v9[19] && a1 <= v9[20] + v8[1] + v9[18] && a2 <= v9[21] + v8[2] + v9[19] )
               {
                 *a3 = (struct SGuiControl *)(v9 + 18);
                 *a4 = i;
@@ -54435,16 +56472,17 @@ bool __cdecl FindDialogUnderCursor(int a1, int a2, struct GUI_MENU_DIALOG_HEADER
 
   *a3 = 0;
   if ( !g_pFileHeader )
+  {
     return 0;
-  for ( i = 13; i >= 0; --i )
+  }
+  for ( i = 13;
+        i >= 0;
+        --i )
   {
     if ( g_iOpenDialogs[i] )
     {
       v5 = sub_2F9E930(g_iOpenDialogs[i] - 1);
-      if ( a1 >= *(unsigned __int16 *)(v5 + 2)
-        && a2 >= *(unsigned __int16 *)(v5 + 4)
-        && a1 <= *(unsigned __int16 *)(v5 + 6) + *(unsigned __int16 *)(v5 + 2)
-        && a2 <= *(unsigned __int16 *)(v5 + 8) + *(unsigned __int16 *)(v5 + 4) )
+      if ( a1 >= *(unsigned __int16 *)(v5 + 2) && a2 >= *(unsigned __int16 *)(v5 + 4) && a1 <= *(unsigned __int16 *)(v5 + 6) + *(unsigned __int16 *)(v5 + 2) && a2 <= *(unsigned __int16 *)(v5 + 8) + *(unsigned __int16 *)(v5 + 4) )
       {
         *a3 = (struct GUI_MENU_DIALOG_HEADER *)v5;
         return 1;
@@ -54476,11 +56514,15 @@ void __cdecl UpdateGui(int surfaceToDraw) {
 
   g_bGuiIsDirty = 1;
   if ( surfaceToDraw == -1 && (LOBYTE(v1) = g_bGuiIsDirty) == 0 )
+  {
     return (char)v1;
+  }
   LOBYTE(v1) = sub_2F9E8F0();
   if ( (_BYTE)v1 )
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       if ( i >= 0xE )
       {
@@ -54489,7 +56531,9 @@ void __cdecl UpdateGui(int surfaceToDraw) {
       }
       LOBYTE(v1) = i;
       if ( !g_iOpenDialogs[i] )
+      {
         continue;
+      }
       v11 = (unsigned __int16 *)sub_2F9E930(g_iOpenDialogs[i] - 1);
       v10 = (struct SGuiControl *)(v11 + 8);
       v3 = (struct SGuiControl *)(v11 + 8);
@@ -54502,7 +56546,9 @@ void __cdecl UpdateGui(int surfaceToDraw) {
           v1 = IGfxEngine::BeginWriteToSurface((IGfxEngine *)g_pGfxEngine, *v11, &v5);
           v8 = v1;
           if ( !v1 )
+          {
             return (char)v1;
+          }
           v12 = 1;
           FastRaster(v8, v5, 0, 0, v11[3], v11[4], 0);
         }
@@ -54528,7 +56574,9 @@ void __cdecl UpdateGui(int surfaceToDraw) {
           v1 = IGfxEngine::BeginWriteToSurface((IGfxEngine *)g_pGfxEngine, *v11, &v5);
           v8 = v1;
           if ( !v1 )
+          {
             return (char)v1;
+          }
           v12 = 1;
           if ( (v11[7] & 1) != 0 )
           {
@@ -54543,7 +56591,9 @@ void __cdecl UpdateGui(int surfaceToDraw) {
           }
         }
       }
-      for ( j = 0; j < v11[6]; ++j )
+      for ( j = 0;
+            j < v11[6];
+            ++j )
       {
         if ( surfaceToDraw == i )
         {
@@ -54557,12 +56607,16 @@ void __cdecl UpdateGui(int surfaceToDraw) {
             v1 = IGfxEngine::BeginWriteToSurface((IGfxEngine *)g_pGfxEngine, *v11, &v5);
             v8 = v1;
             if ( !v1 )
+            {
               return (char)v1;
+            }
             v12 = 1;
           }
           DrawControl((char *)v8, v5, v11[3], v11[4], v10);
           if ( !IsTextControl(v10->controlType) )
+          {
             HIBYTE(v10->unknownData[1]) = 0;
+          }
         }
         v10 = (struct SGuiControl *)((char *)v10 + 36);
       }
@@ -54573,11 +56627,15 @@ void __cdecl UpdateGui(int surfaceToDraw) {
       }
       v10 = v3;
       hdc = 0;
-      for ( j = 0; ; ++j )
+      for ( j = 0;
+            ;
+            ++j )
       {
         LOBYTE(v1) = (_BYTE)v11;
         if ( j >= v11[6] )
+        {
           break;
+        }
         if ( HIBYTE(v10->unknownData[1]) && IsTextControl(v10->controlType) )
         {
           if ( !v12 )
@@ -54621,24 +56679,34 @@ void __cdecl CalcCharWidths(struct SGuiControl * a1) {
 
   result = a1;
   if ( *(char *)(a1 + 25) < 0 )
+  {
     return result;
+  }
   result = j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(a1 + 25)]);
   v4 = result;
   if ( result < 1 )
+  {
     return result;
+  }
   hdc = CreateCompatibleDC(0);
   if ( hdc )
   {
     h = SelectObject(hdc, g_hFonts[*(unsigned __int8 *)(a1 + 26)]);
     Source = (unsigned __int8 *)&g_mbstrTextTable[75 * *(char *)(a1 + 25)];
-    for ( i = 0; i < v4; ++i )
+    for ( i = 0;
+          i < v4;
+          ++i )
     {
       j___mbsncpy((unsigned __int8 *)String, Source, 1u);
       Source = j___mbsninc(Source, 1u);
       if ( (*(_BYTE *)(a1 + 13) & 0x80) != 0 )
+      {
         GetTextExtentPoint32A(hdc, "*", 1, &psizl);
+      }
       else
+      {
         GetTextExtentPoint32A(hdc, String, 1, &psizl);
+      }
       g_iEditWidthTable[i] = psizl.cx;
     }
     SelectObject(hdc, h);
@@ -54667,30 +56735,38 @@ bool __cdecl SelectEditControl(struct SGuiControl * a1, int a2) {
   CalcCharWidths((signed int)a1);
   v4 = sub_2F9E930(a1->unknownId);
   v8 = a1->x + *(unsigned __int16 *)(v4 + 2) + 2;
-  String = (char *)j___mbsninc(
-                     (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)a1->id],
-                     LOBYTE(a1->unknownData[1]));
+  String = (char *)j___mbsninc((const unsigned __int8 *)&g_mbstrTextTable[75 * (char)a1->id], LOBYTE(a1->unknownData[1]));
   v7 = j___mbstrlen(String);
   HIBYTE(a1->unknownData[0]) = a1->unknownData[1];
-  for ( i = HIBYTE(a1->unknownData[0]); ; ++i )
+  for ( i = HIBYTE(a1->unknownData[0]);
+        ;
+        ++i )
   {
     v3 = v7--;
     if ( v3 <= 0 || a2 <= v8 )
+    {
       break;
+    }
     ++HIBYTE(a1->unknownData[0]);
     v8 += g_iEditWidthTable[i];
   }
   if ( HIBYTE(a1->unknownData[0]) && a2 < v8 - dword_471F81C[HIBYTE(a1->unknownData[0])] / 2 )
+  {
     --HIBYTE(a1->unknownData[0]);
+  }
   SetControlState(a1, 64, 1);
   dword_3E2F124 = 3;
   SetControlState(a1, 128, 1);
   HIBYTE(a1->unknownData[1]) = 1;
   v9 = a1->x + *(unsigned __int16 *)(v4 + 2) + 2;
   if ( a2 < a1->x + *(unsigned __int16 *)(v4 + 2) + 32 )
+  {
     DoScrolling(a1, 0);
+  }
   if ( a2 > v9 + a1->width - 32 )
+  {
     DoScrolling(a1, 1);
+  }
   return 1;
 }
 
@@ -54702,11 +56778,17 @@ bool __cdecl IsValidInput(int a1, int a2) {
   char result; // al
 
   if ( a1 >= 48 && a1 <= 57 && (a2 & 5) != 0 )
+  {
     return 1;
+  }
   if ( (a1 >= 65 && a1 <= 90 || a1 >= 97 && a1 <= 122) && (a2 & 6) != 0 )
+  {
     return 1;
+  }
   if ( (a1 == 43 || a1 == 95 || a1 == 45 || a1 == 32) && (a2 & 4) != 0 )
+  {
     return 1;
+  }
   switch ( a1 )
   {
     case '!':
@@ -54726,7 +56808,9 @@ bool __cdecl IsValidInput(int a1, int a2) {
     case '?':
     case '_':
       if ( (a2 & 8) == 0 )
+      {
         goto IsValidInput___def_339E66B;
+      }
       result = 1;
       break;
     default:
@@ -54747,7 +56831,9 @@ IsValidInput___def_339E66B:
           case 246:
           case 252:
             if ( (a2 & 0x20) == 0 )
+            {
               goto IsValidInput___def_339E6B2;
+            }
             result = 1;
             break;
           default:
@@ -54785,10 +56871,14 @@ bool __cdecl CalcTextSize(int a1, char * a2, struct tagSIZE & psizl, int Count, 
   {
     lpString = (const char *)a2;
     if ( Count )
+    {
       lpString = (const char *)j___mbsninc(a2, Count);
+    }
     v8 = j___mbstrlen(lpString);
     if ( a5 >= 0 && a5 < v8 )
+    {
       v8 = a5;
+    }
     c = (unsigned __int8 *)(j___mbsninc((const unsigned __int8 *)lpString, v8) - (unsigned __int8 *)lpString);
     h = SelectObject(hdc, g_hFonts[a1]);
     GetTextExtentPoint32A(hdc, lpString, (int)c, psizl);
@@ -54813,25 +56903,39 @@ void __cdecl InitTables(void) {
   int j; // [esp+0h] [ebp-4h]
   int k; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; i < 32; ++i )
+  for ( i = 0;
+        i < 32;
+        ++i )
   {
     byte_47272D0[i] = i;
     if ( i + 4 * i / 10 <= 31 )
+    {
       byte_47272D0[i] += 4 * i / 10;
+    }
     else
+    {
       byte_47272D0[i] = 31;
+    }
     result = i + 1;
   }
-  for ( j = 0; j < 64; ++j )
+  for ( j = 0;
+        j < 64;
+        ++j )
   {
     byte_47272F0[j] = j;
     if ( j + 4 * j / 10 <= 63 )
+    {
       byte_47272F0[j] += 4 * j / 10;
+    }
     else
+    {
       byte_47272F0[j] = 63;
+    }
     result = j + 1;
   }
-  for ( k = 0; k < 96; ++k )
+  for ( k = 0;
+        k < 96;
+        ++k )
   {
     byte_4727330[k] = k / 3;
     result = k + 1;
@@ -54844,7 +56948,7 @@ void __cdecl InitTables(void) {
 // [Decompilation failed for void __cdecl FastBlit(void *,int,int,int,int,int,void *,int,int,int)]
 
 // address=[0x2fa4300]
-// Decompiled from unsigned __int64 __cdecl FastBlit8Bit(  char *a1,  int a2,  int a3,  int a4,  int a5,  int a6,  char *a7,  int a8,  int a9,  int a10,  _WORD *a11)
+// Decompiled from unsigned __int64 __cdecl FastBlit8Bit(char *a1, int a2, int a3, int a4, int a5, int a6, char *a7, int a8, int a9, int a10, _WORD *a11)
 void __cdecl FastBlit8Bit(void * a1, int a2, int a3, int a4, int a5, int a6, void * a7, int a8, int a9, int a10, void * a11) {
   
   char *v11; // esi
@@ -54943,7 +57047,9 @@ void __cdecl FastBlit8Bit(void * a1, int a2, int a3, int a4, int a5, int a6, voi
       }
       while ( v15 >= 16 );
       if ( v15 < 8 )
+      {
         goto LABEL_8;
+      }
     }
     else if ( dword_47274D8 < 8 )
     {
@@ -55078,12 +57184,16 @@ void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a
     {
       LOBYTE(v10) = *v6++;
       if ( (unsigned __int8)v10 <= 1u )
+      {
         break;
+      }
       ++v8;
       --v9;
       *(_WORD *)(v7 + 2 * v8) = a1[v10];
       if ( !v9 )
+      {
         goto LABEL_10;
+      }
     }
     if ( (_BYTE)v10 != 1 )
     {
@@ -55101,7 +57211,9 @@ void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a
     }
     v12 = (unsigned __int8)*v6;
     if ( !*v6 )
+    {
       return __PAIR64__(a6, a4);
+    }
     ++v6;
     v13 = v8 + 1;
     v9 -= v12;
@@ -55129,7 +57241,9 @@ void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a
         while ( v12 >= 0x10 );
         v7 = v16;
         if ( !v12 )
+        {
           goto LABEL_8;
+        }
       }
       else
       {
@@ -55150,7 +57264,9 @@ void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a
         while ( v12 >= 0x10 );
         v7 = v16;
         if ( !v12 )
+        {
           goto LABEL_8;
+        }
       }
     }
     do
@@ -55210,7 +57326,9 @@ void __cdecl UnpackGfxTransparentHiLight555(void * a1, void * a2, void * a3, int
     {
       LOBYTE(v10) = *v6++;
       if ( (unsigned __int8)v10 <= 1u )
+      {
         break;
+      }
       v20 = v8 + 1;
       v11 = a1[v10];
       v12 = (unsigned __int16)(v11 & 0x7C00) >> 10;
@@ -55225,7 +57343,9 @@ void __cdecl UnpackGfxTransparentHiLight555(void * a1, void * a2, void * a3, int
       --v9;
       *(_WORD *)(v7 + 2 * v20) = v14;
       if ( !v9 )
+      {
         goto LABEL_10;
+      }
     }
     if ( (_BYTE)v10 != 1 )
     {
@@ -55243,7 +57363,9 @@ void __cdecl UnpackGfxTransparentHiLight555(void * a1, void * a2, void * a3, int
     }
     v16 = (unsigned __int8)*v6;
     if ( !*v6 )
+    {
       return __PAIR64__(a6, a4);
+    }
     ++v6;
     v17 = v8 + 1;
     v9 -= v16;
@@ -55271,7 +57393,9 @@ void __cdecl UnpackGfxTransparentHiLight555(void * a1, void * a2, void * a3, int
         while ( v16 >= 0x10 );
         v7 = v21;
         if ( !v16 )
+        {
           goto LABEL_8;
+        }
       }
       else
       {
@@ -55292,7 +57416,9 @@ void __cdecl UnpackGfxTransparentHiLight555(void * a1, void * a2, void * a3, int
         while ( v16 >= 0x10 );
         v7 = v21;
         if ( !v16 )
+        {
           goto LABEL_8;
+        }
       }
     }
     do
@@ -55352,7 +57478,9 @@ void __cdecl UnpackGfxTransparentHiLight565(void * a1, void * a2, void * a3, int
     {
       LOBYTE(v10) = *v6++;
       if ( (unsigned __int8)v10 <= 1u )
+      {
         break;
+      }
       v20 = v8 + 1;
       v11 = a1[v10];
       v12 = (unsigned __int16)(v11 & 0xF800) >> 11;
@@ -55367,7 +57495,9 @@ void __cdecl UnpackGfxTransparentHiLight565(void * a1, void * a2, void * a3, int
       --v9;
       *(_WORD *)(v7 + 2 * v20) = v14;
       if ( !v9 )
+      {
         goto LABEL_10;
+      }
     }
     if ( (_BYTE)v10 != 1 )
     {
@@ -55385,7 +57515,9 @@ void __cdecl UnpackGfxTransparentHiLight565(void * a1, void * a2, void * a3, int
     }
     v16 = (unsigned __int8)*v6;
     if ( !*v6 )
+    {
       return __PAIR64__(a6, a4);
+    }
     ++v6;
     v17 = v8 + 1;
     v9 -= v16;
@@ -55413,7 +57545,9 @@ void __cdecl UnpackGfxTransparentHiLight565(void * a1, void * a2, void * a3, int
         while ( v16 >= 0x10 );
         v7 = v21;
         if ( !v16 )
+        {
           goto LABEL_8;
+        }
       }
       else
       {
@@ -55434,7 +57568,9 @@ void __cdecl UnpackGfxTransparentHiLight565(void * a1, void * a2, void * a3, int
         while ( v16 >= 0x10 );
         v7 = v21;
         if ( !v16 )
+        {
           goto LABEL_8;
+        }
       }
     }
     do
@@ -55490,7 +57626,9 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
     {
       LOBYTE(v10) = *v6++;
       if ( (unsigned __int8)v10 <= 1u )
+      {
         break;
+      }
       v11 = ((unsigned __int16)(a1[v10] & 0x3E0) >> 5) + ((unsigned __int16)(a1[v10] & 0x7C00) >> 10) + (a1[v10] & 0x1F);
       LOBYTE(v11) = byte_4727330[v11];
       ++v8;
@@ -55498,7 +57636,9 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
       --v9;
       *(_WORD *)(v7 + 2 * v8) = 1057 * v11;
       if ( !v9 )
+      {
         goto LABEL_10;
+      }
     }
     if ( (_BYTE)v10 != 1 )
     {
@@ -55516,7 +57656,9 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
     }
     v13 = (unsigned __int8)*v6;
     if ( !*v6 )
+    {
       return __PAIR64__(a6, a4);
+    }
     ++v6;
     v14 = v8 + 1;
     v9 -= v13;
@@ -55544,7 +57686,9 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
         while ( v13 >= 0x10 );
         v7 = v17;
         if ( !v13 )
+        {
           goto LABEL_8;
+        }
       }
       else
       {
@@ -55565,7 +57709,9 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
         while ( v13 >= 0x10 );
         v7 = v17;
         if ( !v13 )
+        {
           goto LABEL_8;
+        }
       }
     }
     do
@@ -55621,7 +57767,9 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
     {
       LOBYTE(v10) = *v6++;
       if ( (unsigned __int8)v10 <= 1u )
+      {
         break;
+      }
       v11 = ((unsigned __int16)(a1[v10] & 0x7E0) >> 6) + ((unsigned __int16)(a1[v10] & 0xF800) >> 11) + (a1[v10] & 0x1F);
       LOBYTE(v11) = byte_4727330[v11];
       ++v8;
@@ -55629,7 +57777,9 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
       --v9;
       *(_WORD *)(v7 + 2 * v8) = 2113 * v11;
       if ( !v9 )
+      {
         goto LABEL_10;
+      }
     }
     if ( (_BYTE)v10 != 1 )
     {
@@ -55647,7 +57797,9 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
     }
     v13 = (unsigned __int8)*v6;
     if ( !*v6 )
+    {
       return __PAIR64__(a6, a4);
+    }
     ++v6;
     v14 = v8 + 1;
     v9 -= v13;
@@ -55675,7 +57827,9 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
         while ( v13 >= 0x10 );
         v7 = v17;
         if ( !v13 )
+        {
           goto LABEL_8;
+        }
       }
       else
       {
@@ -55696,7 +57850,9 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
         while ( v13 >= 0x10 );
         v7 = v17;
         if ( !v13 )
+        {
           goto LABEL_8;
+        }
       }
     }
     do
@@ -55745,12 +57901,16 @@ void __cdecl FastRectangle(unsigned short * a1, int a2, int a3, int a4, int a5, 
   v9 = v8;
   v10 = (__int16 *)((char *)a1 + a2 * a4 + a5 + a5);
   do
+  {
     *v8++ = a7;
+  }
   while ( (int)v8 <= (int)v10 );
   v11 = v9;
   v12 = dword_4727488 - dword_4727484;
   if ( dword_4727488 == dword_4727484 )
+  {
     return v15;
+  }
   do
   {
     v10 = (__int16 *)((char *)v10 + dword_472747C);
@@ -55760,7 +57920,9 @@ void __cdecl FastRectangle(unsigned short * a1, int a2, int a3, int a4, int a5, 
   }
   while ( v12-- > 1 );
   do
+  {
     *++v11 = a7;
+  }
   while ( (int)v11 < (int)v10 );
   return v15;
 }
@@ -55782,7 +57944,9 @@ void __cdecl FastHLine(unsigned short * a1, int a2, int a3, int a4, int a5, unsi
   v6 = (__int16 *)((char *)a1 + a2 * a4 + dword_47274A4 + dword_47274A4);
   v7 = &v6[a5 - a3];
   do
+  {
     *v6++ = a6;
+  }
   while ( (int)v6 <= (int)v7 );
   return __PAIR64__((unsigned int)a1, a2);
 }
@@ -55844,7 +58008,9 @@ void __cdecl FastRaster(void * a1, int a2, int a3, int a4, int a5, int a6, int a
   v8 = a6;
   v9 = 0;
   if ( (dword_4727500 & 2) != 0 )
+  {
     v9 = -1;
+  }
   do
   {
     v10 = dword_47274F8;
@@ -55870,7 +58036,9 @@ void __cdecl FastRaster(void * a1, int a2, int a3, int a4, int a5, int a6, int a
       }
       while ( v10 >= 16 );
       if ( v10 < 8 )
+      {
         goto LABEL_11;
+      }
     }
     else if ( v10 < 8 )
     {
@@ -55923,7 +58091,9 @@ LABEL_11:
                 {
                   v7[6] = a7;
                   if ( v18 >= 2 )
+                  {
                     v7[7] = a7;
+                  }
                 }
               }
             }
@@ -55973,9 +58143,13 @@ void __cdecl FastRasterSolid(void * a1, int a2, int a3, int a4, int a5, int a6, 
   v9 = a6;
   v10 = 0;
   if ( (dword_4727520 & 2) != 0 )
+  {
     v10 = -1;
+  }
   if ( (dword_472752C & 1) == 0 )
+  {
     v10 = ~v10;
+  }
   dword_4727540 = a7;
   dword_472753C = a8;
   do
@@ -56010,7 +58184,9 @@ void __cdecl FastRasterSolid(void * a1, int a2, int a3, int a4, int a5, int a6, 
       }
       while ( v12 >= 16 );
       if ( v12 < 8 )
+      {
         goto LABEL_12;
+      }
     }
     else if ( v12 < 8 )
     {
@@ -56067,7 +58243,9 @@ LABEL_12:
                 {
                   v8[6] = v11;
                   if ( v21 >= 1 )
+                  {
                     v8[7] = v13;
+                  }
                 }
               }
             }
@@ -56118,11 +58296,16 @@ unsigned long __cdecl CalcChecksumOfFile(void * hFile, int * a2) {
 
 
 // address=[0x2fbbe50]
-// [Decompilation failed for int __cdecl GetMapAccessInterfaceVersion(void)]
+// Decompiled from int GetMapAccessInterfaceVersion()
+int __cdecl GetMapAccessInterfaceVersion(void) {
+  
+  return 105;
+}
+
 
 // address=[0x2fbbe60]
-// Decompiled from void __cdecl MA_OpenMapFile(wchar_t *psz, int *a2, int *a3, int a4)
-void __cdecl MA_OpenMapFile(wchar_t * a1, int * a2, int * a3, int a4) {
+// Decompiled from void __cdecl MA_OpenMapFile(wchar_t *_swpName, int *_pFileBuffer, int *_iErrorCode, int _bReadToBuffer)
+void __cdecl MA_OpenMapFile(wchar_t * _swpName, int * _pFileBuffer, int * _iErrorCode, int _bReadToBuffer) {
   
   const CHAR *v4; // eax
   unsigned int v5; // [esp+1CCh] [ebp-A0h]
@@ -56142,7 +58325,7 @@ void __cdecl MA_OpenMapFile(wchar_t * a1, int * a2, int * a3, int a4) {
   int Buffer; // [esp+22Ch] [ebp-40h] BYREF
   DWORD NumberOfBytesRead; // [esp+230h] [ebp-3Ch] BYREF
   BOOL bHasData; // [esp+234h] [ebp-38h]
-  BSTR *v23; // [esp+238h] [ebp-34h] BYREF
+  BSTR *swName; // [esp+238h] [ebp-34h] BYREF
   HANDLE hFile; // [esp+23Ch] [ebp-30h]
   unsigned __int8 *lpBuffer; // [esp+240h] [ebp-2Ch]
   struct SMapChunkHeader sChunkHeader; // [esp+244h] [ebp-28h] BYREF
@@ -56155,21 +58338,21 @@ void __cdecl MA_OpenMapFile(wchar_t * a1, int * a2, int * a3, int a4) {
   g_bSettlersAvailable = 0;
   if ( g_bMapIsLoaded )
   {
-    *a3 = 7;
+    *_iErrorCode = 7;
     return;
   }
   g_bAddOnMap = 0;
   g_bEditorMap = 0;
   g_bCampaign = 0;
-  *a2 = 0;
-  _bstr_t::_bstr_t(&v23, psz);
+  *_pFileBuffer = 0;
+  _bstr_t::_bstr_t(&swName, _swpName);
   v27 = 0;
   lpBuffer = (unsigned __int8 *)operator new[](0x40018u);
   if ( !lpBuffer )
   {
-    *a3 = 2;
+    *_iErrorCode = 2;
     v27 = -1;
-    _bstr_t::~_bstr_t(&v23);
+    _bstr_t::~_bstr_t(&swName);
     return;
   }
   v16 = operator new[](0x2001u);
@@ -56179,9 +58362,9 @@ void __cdecl MA_OpenMapFile(wchar_t * a1, int * a2, int * a3, int a4) {
     C = lpBuffer;
     operator delete[](lpBuffer);
     lpBuffer = 0;
-    *a3 = 2;
+    *_iErrorCode = 2;
     v27 = -1;
-    _bstr_t::~_bstr_t(&v23);
+    _bstr_t::~_bstr_t(&swName);
     return;
   }
   memset(g_pTextDescription, 0, 0x2001u);
@@ -56195,9 +58378,9 @@ void __cdecl MA_OpenMapFile(wchar_t * a1, int * a2, int * a3, int a4) {
     operator delete[](g_pTextDescription);
     lpBuffer = 0;
     g_pTextDescription = 0;
-    *a3 = 2;
+    *_iErrorCode = 2;
     v27 = -1;
-    _bstr_t::~_bstr_t(&v23);
+    _bstr_t::~_bstr_t(&swName);
     return;
   }
   memset(g_pTextEnglishDescription, 0, 0x2001u);
@@ -56214,9 +58397,9 @@ void __cdecl MA_OpenMapFile(wchar_t * a1, int * a2, int * a3, int a4) {
     lpBuffer = 0;
     g_pTextDescription = 0;
     g_pTextEnglishDescription = 0;
-    *a3 = 2;
+    *_iErrorCode = 2;
     v27 = -1;
-    _bstr_t::~_bstr_t(&v23);
+    _bstr_t::~_bstr_t(&swName);
     return;
   }
   memset(g_pTextTandT, 0, 0x2001u);
@@ -56236,13 +58419,13 @@ void __cdecl MA_OpenMapFile(wchar_t * a1, int * a2, int * a3, int a4) {
     g_pTextDescription = 0;
     g_pTextEnglishDescription = 0;
     g_pTextTandT = 0;
-    *a3 = 2;
+    *_iErrorCode = 2;
     v27 = -1;
-    _bstr_t::~_bstr_t(&v23);
+    _bstr_t::~_bstr_t(&swName);
     return;
   }
   memset(g_pTextEnglishTandT, 0, 0x2001u);
-  v4 = (const CHAR *)_bstr_t::operator char const *(&v23);
+  v4 = (const CHAR *)_bstr_t::operator char const *(&swName);
   hFile = CreateFileA(v4, 0x80000000, 1u, 0, 3u, 0x80u, 0);
   if ( hFile == (HANDLE)-1 )
   {
@@ -56256,16 +58439,18 @@ void __cdecl MA_OpenMapFile(wchar_t * a1, int * a2, int * a3, int a4) {
     g_pTextEnglishDescription = 0;
     g_pTextTandT = 0;
     g_pTextEnglishTandT = 0;
-    *a3 = 5;
+    *_iErrorCode = 5;
     v27 = -1;
-    _bstr_t::~_bstr_t(&v23);
+    _bstr_t::~_bstr_t(&swName);
   }
   else
   {
     ReadFile(hFile, &Buffer, 4u, &NumberOfBytesRead, 0);
-    *a2 = Buffer;
-    if ( !a4 )
+    *_pFileBuffer = Buffer;
+    if ( !_bReadToBuffer )
+    {
       goto LABEL_19;
+    }
     v5 = CalcChecksumOfFile(hFile, v6);
     if ( v6[0] )
     {
@@ -56281,9 +58466,9 @@ LABEL_16:
       g_pTextEnglishDescription = 0;
       g_pTextTandT = 0;
       g_pTextEnglishTandT = 0;
-      *a3 = 2;
+      *_iErrorCode = 2;
       v27 = -1;
-      _bstr_t::~_bstr_t(&v23);
+      _bstr_t::~_bstr_t(&swName);
       return;
     }
     if ( v5 == Buffer )
@@ -56295,7 +58480,9 @@ LABEL_19:
       if ( iFileVersion == 31 || iFileVersion == 40 )
       {
         if ( iFileVersion == 40 )
+        {
           g_bAddOnMap = 1;
+        }
         while ( 2 )
         {
           bHasData = ReadFile(hFile, &sChunkHeader, 0x18u, &NumberOfBytesRead, 0);
@@ -56312,34 +58499,48 @@ LABEL_19:
                 ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
                 memcpy(&g_sGeneralMapData, lpBuffer, sizeof(g_sGeneralMapData));
                 if ( !bHasData )
+                {
                   goto LABEL_46;
+                }
                 goto LABEL_72;
               case MAP_CHUNK_PLAYER:
                 bHasData = CPlayerData::Load(&g_cPlayerAndTeamData, lpBuffer, hFile, sChunkHeader);
                 g_sGeneralMapData.m_uNumberOfPlayers = CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData);
                 if ( !bHasData )
+                {
                   goto LABEL_46;
+                }
                 goto LABEL_72;
               case MAP_CHUNK_TEAM:
                 bHasData = CPlayerData::LoadTeamData(&g_cPlayerAndTeamData, lpBuffer, hFile, sChunkHeader);
                 if ( !bHasData )
+                {
                   goto LABEL_46;
+                }
                 goto LABEL_72;
               case MAP_CHUNK_PREVIEW:
-                if ( a4 )
+                if ( _bReadToBuffer )
                 {
                   g_iPreviewSize = sChunkHeader.m_iNumberOfPlayers;
                   if ( sChunkHeader.m_iNumberOfPlayers < 128 || g_iPreviewSize > 1024 )
+                  {
                     goto LABEL_46;
+                  }
                   if ( g_pPreviewGfx )
+                  {
                     operator delete[](g_pPreviewGfx);
+                  }
                   g_pPreviewGfx = operator new[](2 * g_iPreviewSize * g_iPreviewSize);
                   if ( !g_pPreviewGfx )
+                  {
                     goto LABEL_16;
+                  }
                   bHasData = ReadFile(hFile, g_pPreviewGfx, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
                   ReadChunk((char *)g_pPreviewGfx, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
                   if ( !bHasData )
+                  {
                     goto LABEL_46;
+                  }
                 }
                 else if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
                 {
@@ -56347,80 +58548,104 @@ LABEL_19:
                 }
 LABEL_72:
                 if ( sChunkHeader.m_iChunkId )
+                {
                   continue;
+                }
 LABEL_75:
                 CloseHandle(hFile);
                 operator delete[](lpBuffer);
                 g_bMapIsLoaded = 1;
-                *a3 = 0;
+                *_iErrorCode = 0;
                 v27 = -1;
-                _bstr_t::~_bstr_t(&v23);
+                _bstr_t::~_bstr_t(&swName);
                 break;
               case MAP_CHUNK_DUMMY_2:
                 goto LABEL_75;
               case MAP_CHUNK_SETTLERS:
                 g_bSettlersAvailable = 1;
                 if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
+                {
                   goto LABEL_59;
+                }
                 goto LABEL_72;
               case MAP_CHUNK_BUILDINGS:
                 g_bBuildingsAvailable = 1;
                 if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
+                {
                   goto LABEL_59;
+                }
                 goto LABEL_72;
               case MAP_CHUNK_PILES:
                 g_bPilesAvailable = 1;
                 if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
+                {
                   goto LABEL_59;
+                }
                 goto LABEL_72;
               case MAP_CHUNK_DESCRIPTION:
                 bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
                 ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
                 if ( !bHasData )
+                {
                   goto LABEL_59;
+                }
                 memcpy(g_pTextDescription, lpBuffer, sChunkHeader.m_iDecompressedSize);
                 goto LABEL_72;
               case MAP_CHUNK_TIPS:
                 bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
                 ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
                 if ( !bHasData )
+                {
                   goto LABEL_59;
+                }
                 memcpy(g_pTextTandT, lpBuffer, sChunkHeader.m_iDecompressedSize);
                 goto LABEL_72;
               case MAP_CHUNK_ENGLISH_DESCRIPTION:
                 bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
                 ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
                 if ( !bHasData )
+                {
                   goto LABEL_59;
+                }
                 memcpy(g_pTextEnglishDescription, lpBuffer, sChunkHeader.m_iDecompressedSize);
                 goto LABEL_72;
               case MAP_CHUNK_ENGLISH_TIPS:
                 bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
                 ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
                 if ( !bHasData )
+                {
                   goto LABEL_59;
+                }
                 memcpy(g_pTextEnglishTandT, lpBuffer, sChunkHeader.m_iDecompressedSize);
                 goto LABEL_72;
               case MAP_CHUNK_IS_EDITOR:
                 g_bEditorMap = 1;
                 if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
+                {
                   goto LABEL_59;
+                }
                 goto LABEL_72;
               case MAP_CHUNK_IS_CAMPAIGN:
                 g_bCampaign = 1;
                 if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
+                {
                   goto LABEL_59;
+                }
                 goto LABEL_72;
               case MAP_CHUNK_EDITOR_DATA:
                 bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
                 ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
                 memcpy(&g_sEditorInfo, lpBuffer, 0x14u);
                 if ( !bHasData )
+                {
                   goto LABEL_46;
+                }
                 goto LABEL_72;
               default:
                 if ( SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1 )
+                {
                   goto LABEL_59;
+                }
                 goto LABEL_72;
             }
           }
@@ -56438,9 +58663,9 @@ LABEL_46:
             g_pTextEnglishDescription = 0;
             g_pTextTandT = 0;
             g_pTextEnglishTandT = 0;
-            *a3 = 3;
+            *_iErrorCode = 3;
             v27 = -1;
-            _bstr_t::~_bstr_t(&v23);
+            _bstr_t::~_bstr_t(&swName);
           }
           break;
         }
@@ -56459,9 +58684,9 @@ LABEL_59:
         g_pTextEnglishDescription = 0;
         g_pTextTandT = 0;
         g_pTextEnglishTandT = 0;
-        *a3 = 4;
+        *_iErrorCode = 4;
         v27 = -1;
-        _bstr_t::~_bstr_t(&v23);
+        _bstr_t::~_bstr_t(&swName);
       }
     }
     else
@@ -56477,9 +58702,9 @@ LABEL_59:
       g_pTextEnglishDescription = 0;
       g_pTextTandT = 0;
       g_pTextEnglishTandT = 0;
-      *a3 = 1;
+      *_iErrorCode = 1;
       v27 = -1;
-      _bstr_t::~_bstr_t(&v23);
+      _bstr_t::~_bstr_t(&swName);
     }
   }
 }
@@ -56523,9 +58748,13 @@ void __cdecl MA_IsEditorMap(int * a1) {
 void __cdecl MA_GetNumberOfPlayers(int * a1) {
   
   if ( g_bMapIsLoaded )
+  {
     *a1 = MEMORY[0x4727570];
+  }
   else
+  {
     *a1 = 0;
+  }
 }
 
 
@@ -56550,7 +58779,7 @@ void __cdecl MA_GetNumberOfSetups(int * a1) {
 
 
 // address=[0x2fbdc80]
-// Decompiled from void __cdecl MA_GetMapData(  int *_pWidthHeight,  int *_pGameType,  int *_pMapFlags,  int *_pStartResources,  int *_pIsEmptyMap)
+// Decompiled from void __cdecl MA_GetMapData(int *_pWidthHeight, int *_pGameType, int *_pMapFlags, int *_pStartResources, int *_pIsEmptyMap)
 void __cdecl MA_GetMapData(int * _pWidthHeight, int * _pGameType, int * _pMapFlags, int * _pStartResources, int * _pIsEmptyMap) {
   
   if ( g_bMapIsLoaded )
@@ -56573,7 +58802,7 @@ void __cdecl MA_GetMapData(int * _pWidthHeight, int * _pGameType, int * _pMapFla
 
 
 // address=[0x2fbdd10]
-// Decompiled from wchar_t *__cdecl MA_GetPlayerData(  int _iPlayerIndex,  int _iSetupIndex,  int *_iPlayerRace,  int *_iPlayerX,  int *_iPlayerY,  wchar_t **_swpPlayerName,  wchar_t **_swpSetupName,  int *_iPlayerControl,  int *_iHasTeam,  int *_iPlayerTeam)
+// Decompiled from wchar_t *__cdecl MA_GetPlayerData(int _iPlayerIndex, int _iSetupIndex, int *_iPlayerRace, int *_iPlayerX, int *_iPlayerY, wchar_t **_swpPlayerName, wchar_t **_swpSetupName, int *_iPlayerControl, int *_iHasTeam, int *_iPlayerTeam)
 void __cdecl MA_GetPlayerData(int _iPlayerIndex, int _iSetupIndex, int * _iPlayerRace, int * _iPlayerX, int * _iPlayerY, wchar_t * * _swpPlayerName, wchar_t * * _swpSetupName, int * _iPlayerControl, int * _iHasTeam, int * _iPlayerTeam) {
   
   char *NameOfPlayer; // eax
@@ -56582,11 +58811,7 @@ void __cdecl MA_GetPlayerData(int _iPlayerIndex, int _iSetupIndex, int * _iPlaye
   WCHAR psz[160]; // [esp+4h] [ebp-284h] BYREF
   WCHAR WideCharStr[160]; // [esp+144h] [ebp-144h] BYREF
 
-  if ( g_bMapIsLoaded
-    && _iPlayerIndex > 0
-    && _iPlayerIndex <= CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData)
-    && _iSetupIndex >= 0
-    && _iSetupIndex < CPlayerData::GetNumberOfSetups(&g_cPlayerAndTeamData) )
+  if ( g_bMapIsLoaded && _iPlayerIndex > 0 && _iPlayerIndex <= CPlayerData::GetNumberOfPlayers(&g_cPlayerAndTeamData) && _iSetupIndex >= 0 && _iSetupIndex < CPlayerData::GetNumberOfSetups(&g_cPlayerAndTeamData) )
   {
     *_iPlayerRace = CPlayerData::GetRaceOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
     *_iPlayerX = CPlayerData::GetXOfPlayer(&g_cPlayerAndTeamData, _iPlayerIndex);
@@ -56620,24 +58845,19 @@ void __cdecl MA_GetPlayerData(int _iPlayerIndex, int _iSetupIndex, int * _iPlaye
 
 
 // address=[0x2fbdf20]
-// Decompiled from int *__cdecl MA_GetDataChecksums(int *a1, int *a2)
+// Decompiled from void __cdecl MA_GetDataChecksums(int *a1, int *a2)
 void __cdecl MA_GetDataChecksums(int * a1, int * a2) {
   
-  int *result; // eax
-
   if ( g_bMapIsLoaded )
   {
-    *a1 = (unsigned __int16)word_472755A;
-    result = (int *)(unsigned __int16)word_472755C;
-    *a2 = (unsigned __int16)word_472755C;
+    *a1 = g_iMapChecksum1;
+    *a2 = g_iMapChecksum2;
   }
   else
   {
     *a2 = 0;
-    result = a1;
     *a1 = 0;
   }
-  return result;
 }
 
 
@@ -56671,65 +58891,61 @@ void __cdecl MA_GetDescriptionText(int a1, wchar_t * * a2) {
     }
   }
   if ( lpMultiByteStr )
+  {
     MultiByteToWideChar(0, 1u, lpMultiByteStr, -1, WideCharStr, 0x4000);
+  }
   else
+  {
     MultiByteToWideChar(0, 1u, byte_3AD3323, -1, WideCharStr, 80);
+  }
   v2 = SysAllocString(WideCharStr);
   *a2 = v2;
 }
 
 
 // address=[0x2fbe080]
-// Decompiled from int *__cdecl MA_GetPreviewMapRawData(int *a1, int *a2, struct tagVARIANT *a3)
-void __cdecl MA_GetPreviewMapRawData(int * a1, int * a2, struct tagVARIANT * a3) {
+// Decompiled from void __cdecl MA_GetPreviewMapRawData(int *_iWidth, int *_iHeight, struct tagVARIANT *a3)
+void __cdecl MA_GetPreviewMapRawData(int * _iWidth, int * _iHeight, struct tagVARIANT * a3) {
   
-  int *result; // eax
-
   if ( g_pPreviewGfx && g_iPreviewSize )
   {
-    *a2 = g_iPreviewSize;
-    *a1 = g_iPreviewSize;
+    *_iHeight = g_iPreviewSize;
+    *_iWidth = g_iPreviewSize;
     a3->lVal = (LONG)g_pPreviewGfx;
-    result = _enc_textbss_begin + 12306;
     a3->vt = 16402;
   }
   else
   {
     a3->lVal = 0;
     a3->vt = 0;
-    *a2 = 0;
-    result = a1;
-    *a1 = 0;
+    *_iHeight = 0;
+    *_iWidth = 0;
   }
-  return result;
 }
 
 
 // address=[0x2fbe0f0]
-// Decompiled from int *__cdecl MA_GetMapProperty(int a1, int *a2)
+// Decompiled from void __cdecl MA_GetMapProperty(int a1, int *a2)
 void __cdecl MA_GetMapProperty(int a1, int * a2) {
   
-  int *result; // eax
-  BOOL v3; // [esp+0h] [ebp-Ch]
-  BOOL v4; // [esp+4h] [ebp-8h]
+  BOOL v2; // [esp+0h] [ebp-Ch]
+  BOOL v3; // [esp+4h] [ebp-8h]
 
   if ( a1 == 1 )
   {
-    v4 = g_bAddOnMap && g_bMapIsLoaded;
-    *a2 = v4;
+    v3 = g_bAddOnMap && g_bMapIsLoaded;
+    *a2 = v3;
   }
   else if ( a1 == 2 )
   {
-    v3 = (MEMORY[0x4727580] & 0x40) != 0 && g_bMapIsLoaded;
-    *a2 = v3;
+    v2 = (g_sGeneralMapData.m_iFlags & 0x40) != 0 && g_bMapIsLoaded;
+    *a2 = v2;
   }
   else
   {
     *a2 = -1;
   }
-  result = a2;
   *a2 = g_bAddOnMap;
-  return result;
 }
 
 
@@ -56785,7 +59001,9 @@ void __cdecl ReleaseMemory(void) {
     g_pTextEnglishDescription = 0;
   }
   if ( !g_pTextEnglishTandT )
+  {
     return result;
+  }
   result = operator delete[](g_pTextEnglishTandT);
   g_pTextEnglishTandT = 0;
   return result;
@@ -56820,8 +59038,12 @@ void __cdecl Cryption(unsigned char * a1, unsigned long a2) {
   std::string::string(v4, "01234567890123456789");
   LOBYTE(v5) = 1;
   Cryptor::Set_Key(v3, (int)v4);
-  for ( i = 0; i < a2; ++i )
+  for ( i = 0;
+        i < a2;
+        ++i )
+  {
     Cryptor::Transform_Char((Cryptor *)v3, &a1[i]);
+  }
   LOBYTE(v5) = 0;
   std::string::~string(v4);
   v5 = -1;
@@ -56844,23 +59066,37 @@ bool __cdecl ReadChunk(void * Src, int a2, int a3) {
   char *v9; // [esp+24h] [ebp-4h]
 
   if ( a3 == -1 )
+  {
     return 1;
+  }
   if ( a2 <= a3 )
+  {
     v4 = (char *)operator new[](a3);
+  }
   else
+  {
     v4 = (char *)operator new[](a2);
+  }
   v9 = v4;
   if ( !v4 )
+  {
     return 0;
+  }
   if ( a2 <= a3 )
+  {
     memcpy(v4, Src, a3);
+  }
   else
+  {
     memcpy(v4, Src, a2);
+  }
   v8 = j__LZHLCreateDecompressor();
   v5 = &Src[a3];
   v6 = &v9[a2];
   do
+  {
     v7 = j__LZHLDecompress(v8, &v5[-a3], &a3, &v6[-a2], &a2);
+  }
   while ( a2 && v7 );
   j__LZHLDestroyDecompressor(v8);
   operator delete[](v9);
@@ -56887,16 +59123,16 @@ void __cdecl InitRandomMap(class IMapGeneratorHost * a1, struct SRandomMapParams
   int v7; // [esp+5Ch] [ebp-50h] BYREF
   CFeatureGrid *v8; // [esp+60h] [ebp-4Ch]
   void *v9; // [esp+64h] [ebp-48h]
-  CMirrorBasicGrid *v10; // [esp+68h] [ebp-44h]
+  CBasicGrid *v10; // [esp+68h] [ebp-44h]
   void *v11; // [esp+6Ch] [ebp-40h]
   CBasicGrid *v12; // [esp+70h] [ebp-3Ch]
   void *v13; // [esp+74h] [ebp-38h]
-  CPlayerData *v14; // [esp+78h] [ebp-34h]
+  MG::CPlayerData *v14; // [esp+78h] [ebp-34h]
   void *v15; // [esp+7Ch] [ebp-30h]
   CRandom16Ex *v16; // [esp+80h] [ebp-2Ch]
   void *v17; // [esp+84h] [ebp-28h]
   __ExceptionPtr *v18; // [esp+88h] [ebp-24h]
-  int v19; // [esp+8Ch] [ebp-20h]
+  CBasicGrid *v19; // [esp+8Ch] [ebp-20h]
   int i; // [esp+90h] [ebp-1Ch]
   int k; // [esp+94h] [ebp-18h]
   int j; // [esp+98h] [ebp-14h]
@@ -56907,7 +59143,7 @@ void __cdecl InitRandomMap(class IMapGeneratorHost * a1, struct SRandomMapParams
   if ( g_pBasicGrid )
   {
     v19 = g_pBasicGrid;
-    delete (CBasicGrid *)g_pBasicGrid;
+    delete g_pBasicGrid;
     g_pBasicGrid = 0;
   }
   if ( g_pFeatureGrid )
@@ -56918,12 +59154,16 @@ void __cdecl InitRandomMap(class IMapGeneratorHost * a1, struct SRandomMapParams
   }
   if ( g_pPlayerData )
   {
-    for ( i = 0; i < (unsigned __int8)g_iNumPlayers; ++i )
+    for ( i = 0;
+          i < (unsigned __int8)g_iNumPlayers;
+          ++i )
     {
-      if ( *(_DWORD *)(g_pPlayerData + 4 * i) )
-        operator delete(*(void **)(g_pPlayerData + 4 * i));
+      if ( g_pPlayerData[i] )
+      {
+        operator delete(g_pPlayerData[i]);
+      }
     }
-    operator delete[]((void *)g_pPlayerData);
+    operator delete[](g_pPlayerData);
     g_pPlayerData = 0;
   }
   if ( g_pRand )
@@ -56936,90 +59176,115 @@ void __cdecl InitRandomMap(class IMapGeneratorHost * a1, struct SRandomMapParams
   g_pMapElement = (*(int (__thiscall **)(int))(*(_DWORD *)g_pHost + 16))(g_pHost);
   g_iWorldSize = (*(int (__thiscall **)(int))(*(_DWORD *)g_pHost + 12))(g_pHost);
   g_pEditorLayer = (*(int (__thiscall **)(int))(*(_DWORD *)g_pHost + 20))(g_pHost);
-  g_iNumPlayers = *((_BYTE *)a2 + 32);
-  g_pPlayerData = (int)operator new[](4 * (unsigned __int8)g_iNumPlayers);
-  g_iLandMassPercent = *((_DWORD *)a2 + 3) + 9;
-  g_uResourceWealth = *((_BYTE *)a2 + 16);
-  g_iFlags = *((_DWORD *)a2 + 5);
-  g_iRandomSeed = *((_DWORD *)a2 + 1);
-  g_bNoObjects = *((_BYTE *)a2 + 37);
+  g_iNumPlayers = a2->m_iNumPlayers;
+  g_pPlayerData = (MG::CPlayerData **)operator new[](4 * (unsigned __int8)g_iNumPlayers);
+  g_iLandMassPercent = a2->m_iLandMassPercent + 9;
+  g_uResourceWealth = a2->m_resourceCount;
+  g_iFlags = a2->m_iFlags;
+  g_iRandomSeed = a2->m_iRandomSeed;
+  g_bNoObjects = a2->m_bNoObjects;
   g_uSnowLimit = g_iWorldSize / 15 + 80;
   v17 = operator new(8u);
   v24 = 0;
   if ( v17 )
+  {
     v16 = CRandom16Ex::CRandom16Ex((CRandom16Ex *)v17, g_iRandomSeed);
+  }
   else
+  {
     v16 = 0;
+  }
   v24 = -1;
   g_pRand = v16;
   v23 = (int)(sqrt<int>(g_iWorldSize) / 2.0);
   if ( v23 % 4 )
   {
     if ( g_iWorldSize <= 512 )
+    {
       v23 -= v23 % 4;
+    }
     else
+    {
       v23 += 4 - v23 % 4;
+    }
   }
   g_iNumRivers = g_iWorldSize / (150 - g_iLandMassPercent) - (unsigned __int8)g_iNumPlayers;
-  *(float *)&g_fScaleFactor = (float)(g_iWorldSize - 100) / (float)v23;
-  if ( (!g_iNumPlayers || (unsigned __int8)g_iNumPlayers >= 9u)
-    && BBSupportDbgReport(2, "MapGen.cpp", 123, "g_iNumPlayers > 0 && g_iNumPlayers < 9") == 1 )
+  g_fScaleFactor = (float)(g_iWorldSize - 100) / (float)v23;
+  if ( (!g_iNumPlayers || (unsigned __int8)g_iNumPlayers >= 9u) && BBSupportDbgReport(2, "MapGen.cpp", 123, "g_iNumPlayers > 0 && g_iNumPlayers < 9") == 1 )
   {
     __debugbreak();
   }
-  for ( j = 0; j < (unsigned __int8)g_iNumPlayers; ++j )
+  for ( j = 0;
+        j < (unsigned __int8)g_iNumPlayers;
+        ++j )
   {
     v15 = operator new(0x20u);
     v24 = 1;
     if ( v15 )
-      v14 = CPlayerData::CPlayerData((CPlayerData *)v15, *((_DWORD *)a2 + 4 * j + 11), *((_BYTE *)a2 + 16 * j + 48) & 1);
+    {
+      v14 = CPlayerData::CPlayerData((MG::CPlayerData *)v15, *(&a2[1].m_iRandomSeed + 4 * j), *(_BYTE *)(&a2[1].m_mapSize + 4 * j) & 1);
+    }
     else
+    {
       v14 = 0;
+    }
     v24 = -1;
-    *(_DWORD *)(g_pPlayerData + 4 * j) = v14;
+    g_pPlayerData[j] = v14;
   }
   if ( (g_iFlags & 1) != 0 || (g_iFlags & 2) != 0 )
   {
     v11 = operator new(0x10u);
     v24 = 3;
     if ( v11 )
+    {
       v10 = CMirrorBasicGrid::CMirrorBasicGrid((CMirrorBasicGrid *)v11, v23 / 2, g_iLandMassPercent);
+    }
     else
+    {
       v10 = 0;
+    }
     v24 = -1;
-    g_pBasicGrid = (int)v10;
+    g_pBasicGrid = v10;
   }
   else
   {
     v13 = operator new(0x10u);
     v24 = 2;
     if ( v13 )
+    {
       v12 = CBasicGrid::CBasicGrid((CBasicGrid *)v13, v23 / 2, g_iLandMassPercent);
+    }
     else
+    {
       v12 = 0;
+    }
     v24 = -1;
-    g_pBasicGrid = (int)v12;
+    g_pBasicGrid = v12;
   }
-  (**(void (__thiscall ***)(int))g_pBasicGrid)(g_pBasicGrid);
+  (**(void (__thiscall ***)(CBasicGrid *))g_pBasicGrid)(g_pBasicGrid);
   v9 = operator new(0x54u);
   v24 = 4;
   if ( v9 )
+  {
     v8 = CFeatureGrid::CFeatureGrid((CFeatureGrid *)v9, v23);
+  }
   else
+  {
     v8 = 0;
+  }
   v24 = -1;
   g_pFeatureGrid = (int)v8;
   CFeatureGrid::initGrid(v8);
-  for ( k = 0; k < (unsigned __int8)g_iNumPlayers; ++k )
+  for ( k = 0;
+        k < (unsigned __int8)g_iNumPlayers;
+        ++k )
   {
     v7 = 0;
     v6 = 0;
-    CPlayerData::getStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * k), &v7, &v6);
-    v4 = (int)(float)((float)((float)((float)((float)v7 * *(float *)&g_fScaleFactor) * 2.0) + 50.0)
-                    + *(float *)&g_fScaleFactor);
-    v5 = (int)(float)((float)((float)((float)((float)v6 * *(float *)&g_fScaleFactor) * 2.0) + 50.0)
-                    + *(float *)&g_fScaleFactor);
-    CPlayerData::setStartPos_Real(*(CPlayerData **)(g_pPlayerData + 4 * k), v4, v5);
+    CPlayerData::getStartPos_Basic((CPlayerData *)g_pPlayerData[k], &v7, &v6);
+    v4 = (int)(float)((float)((float)((float)((float)v7 * g_fScaleFactor) * 2.0) + 50.0) + g_fScaleFactor);
+    v5 = (int)(float)((float)((float)((float)((float)v6 * g_fScaleFactor) * 2.0) + 50.0) + g_fScaleFactor);
+    CPlayerData::setStartPos_Real(g_pPlayerData[k], v4, v5);
     (*(void (__thiscall **)(int, int, int, int))(*(_DWORD *)g_pHost + 28))(g_pHost, k + 1, v4, v5);
   }
   return _controlfp(NewValue, 0x30F031Fu);
@@ -57027,154 +59292,117 @@ void __cdecl InitRandomMap(class IMapGeneratorHost * a1, struct SRandomMapParams
 
 
 // address=[0x2fc09f0]
-// Decompiled from unsigned int __cdecl CreatePreview(struct IMapGeneratorHost *a1, unsigned __int16 *a2, int a3)
-void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * a2, int a3) {
+// Decompiled from unsigned int __cdecl CreatePreview(struct IMapGeneratorHost *a1, unsigned __int16 *_pImage, int _iSize)
+void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * _pImage, int _iSize) {
   
-  unsigned int v3; // eax
-  unsigned int v4; // eax
-  unsigned int v5; // eax
-  unsigned int v6; // eax
-  _BYTE v8[60]; // [esp+8h] [ebp-778h] BYREF
-  _BYTE v9[60]; // [esp+44h] [ebp-73Ch] BYREF
-  _BYTE v10[60]; // [esp+80h] [ebp-700h] BYREF
-  _BYTE v11[60]; // [esp+BCh] [ebp-6C4h] BYREF
-  _BYTE v12[60]; // [esp+F8h] [ebp-688h] BYREF
-  _BYTE v13[60]; // [esp+134h] [ebp-64Ch] BYREF
-  _BYTE v14[60]; // [esp+170h] [ebp-610h] BYREF
-  _BYTE v15[60]; // [esp+1ACh] [ebp-5D4h] BYREF
+  DWORD v3; // eax
+  DWORD v4; // eax
+  DWORD v5; // eax
+  DWORD v6; // eax
+  CPreviewBlob v8; // [esp+8h] [ebp-778h] BYREF
+  CPreviewBlob v9; // [esp+44h] [ebp-73Ch] BYREF
+  CPreviewBlob v10; // [esp+80h] [ebp-700h] BYREF
+  CPreviewBlob v11; // [esp+BCh] [ebp-6C4h] BYREF
+  CPreviewBlob v12; // [esp+F8h] [ebp-688h] BYREF
+  CPreviewBlob v13; // [esp+134h] [ebp-64Ch] BYREF
+  CPreviewBlob v14; // [esp+170h] [ebp-610h] BYREF
+  CPreviewBlob v15; // [esp+1ACh] [ebp-5D4h] BYREF
   int Element; // [esp+1E8h] [ebp-598h]
   unsigned int NewValue; // [esp+1ECh] [ebp-594h]
   void *C; // [esp+1F0h] [ebp-590h]
   void *v19; // [esp+1F4h] [ebp-58Ch]
   struct CCheckLayer *v20; // [esp+1F8h] [ebp-588h]
-  struct CCheckLayer *v21; // [esp+1FCh] [ebp-584h]
-  void *v22; // [esp+200h] [ebp-580h]
+  __int16 *v22; // [esp+200h] [ebp-580h]
   CCheckLayer *v23; // [esp+204h] [ebp-57Ch]
   int v24; // [esp+208h] [ebp-578h]
-  struct CCheckLayer *v25; // [esp+20Ch] [ebp-574h]
+  struct CCheckLayer *cCheckLayer; // [esp+20Ch] [ebp-574h] MAPDST
   void *v26; // [esp+210h] [ebp-570h]
   __int16 v27; // [esp+214h] [ebp-56Ch]
   int v28; // [esp+218h] [ebp-568h]
   int i; // [esp+21Ch] [ebp-564h]
-  int ii; // [esp+220h] [ebp-560h]
-  int n; // [esp+224h] [ebp-55Ch]
+  int m; // [esp+220h] [ebp-560h]
+  int k; // [esp+224h] [ebp-55Ch]
   int v32; // [esp+228h] [ebp-558h]
   int v33; // [esp+22Ch] [ebp-554h]
   unsigned int v34; // [esp+230h] [ebp-550h]
-  struct CCheckLayer *v35; // [esp+234h] [ebp-54Ch]
-  int v36; // [esp+238h] [ebp-548h]
-  int v37; // [esp+23Ch] [ebp-544h]
-  int v38; // [esp+240h] [ebp-540h]
+  int iBlue; // [esp+238h] [ebp-548h]
+  int iGreen; // [esp+23Ch] [ebp-544h]
+  int iRed; // [esp+240h] [ebp-540h]
   int v39; // [esp+244h] [ebp-53Ch]
   int v40; // [esp+248h] [ebp-538h]
   unsigned __int16 v41; // [esp+24Ch] [ebp-534h]
   unsigned __int16 v42; // [esp+250h] [ebp-530h]
   int Size; // [esp+254h] [ebp-52Ch]
-  int m; // [esp+258h] [ebp-528h]
+  int x; // [esp+258h] [ebp-528h]
   int j; // [esp+25Ch] [ebp-524h]
   int v46; // [esp+260h] [ebp-520h]
   float v47; // [esp+264h] [ebp-51Ch]
-  int v48; // [esp+268h] [ebp-518h]
-  int k; // [esp+26Ch] [ebp-514h]
-  _BYTE v50[1280]; // [esp+270h] [ebp-510h] BYREF
+  int iStride; // [esp+268h] [ebp-518h]
+  int y; // [esp+26Ch] [ebp-514h]
+  CLandscapeColorProperties cLandscapeColorProperties; // [esp+270h] [ebp-510h] BYREF
   int v51; // [esp+77Ch] [ebp-4h]
 
   NewValue = _controlfp(0xA031Fu, 0x30F031Fu);
   CRandom16Ex::Init(g_pRand, g_iRandomSeed, 0);
-  g_iPreviewImageSize = a3;
-  v48 = 2 * a3;
-  CLandscapeColorProperties::CLandscapeColorProperties((CLandscapeColorProperties *)v50);
-  v22 = operator new[](2 * v48 * v48);
-  g_pPreviewImage = (int)v22;
-  v27 = CLandscapeColorProperties::HiColValue((CLandscapeColorProperties *)v50, 7);
-  for ( i = 0; i < v48 * v48; ++i )
-    *(_WORD *)(g_pPreviewImage + 2 * i) = v27;
+  g_iPreviewImageSize = _iSize;
+  iStride = 2 * _iSize;
+  CLandscapeColorProperties::CLandscapeColorProperties(&cLandscapeColorProperties);
+  v22 = (__int16 *)operator new[](2 * iStride * iStride);
+  g_pPreviewImage = v22;
+  v27 = CLandscapeColorProperties::HiColValue(&cLandscapeColorProperties, 7);
+  for ( i = 0;
+        i < iStride * iStride;
+        ++i )
+  {
+    g_pPreviewImage[i] = v27;
+  }
   Size = CGrid::getSize((CGrid *)g_pFeatureGrid);
-  v47 = (float)(v48 - 40) / (float)Size;
+  v47 = (float)(iStride - 40) / (float)Size;
   v34 = (int)(float)(v47 / 8.0);
-  v26 = operator new(0xCu);
+  v26 = operator new(12u);
   v51 = 0;
   if ( v26 )
-    v25 = CCheckLayer::CCheckLayer((CCheckLayer *)v26, 256);
+  {
+    cCheckLayer = CCheckLayer::CCheckLayer((CCheckLayer *)v26, 256);
+  }
   else
-    v25 = 0;
-  v21 = v25;
+  {
+    cCheckLayer = 0;
+  }
   v51 = -1;
-  v35 = v25;
-  for ( j = 0; j < Size * Size; ++j )
+  for ( j = 0;
+        j < Size * Size;
+        ++j )
   {
     v39 = (int)(float)((float)((float)(j % Size) * v47) + 20.0);
     v40 = (int)(float)((float)((float)(j / Size) * v47) + 20.0);
     if ( CGrid::getElement((CGrid *)g_pFeatureGrid, j) )
     {
-      v41 = CLandscapeColorProperties::HiColValue((CLandscapeColorProperties *)v50, 16);
+      v41 = CLandscapeColorProperties::HiColValue(&cLandscapeColorProperties, 16);
       Element = CGrid::getElement((CGrid *)g_pFeatureGrid, j);
       v3 = CRandom16::Rand(g_pRand);
       v46 = v34 + v3 % v34;
-      CPreviewBlob::CPreviewBlob(
-        (CPreviewBlob *)v15,
-        v39 - v46,
-        v40 - v46,
-        (int)(float)((float)((float)v39 + v47) + (float)v46),
-        (int)(float)((float)((float)v40 + v47) + (float)v46),
-        v41,
-        20,
-        v48,
-        v35);
-      CBlob::drawBlob((CBlob *)v15);
+      CPreviewBlob::CPreviewBlob(&v15, v39 - v46, v40 - v46, (int)(float)((float)((float)v39 + v47) + (float)v46), (int)(float)((float)((float)v40 + v47) + (float)v46), v41, 20, iStride, cCheckLayer);
+      CBlob::drawBlob(&v15);
       v4 = CRandom16::Rand(g_pRand);
       v46 = v34 + v4 % v34;
-      CPreviewBlob::CPreviewBlob(
-        (CPreviewBlob *)v14,
-        v39 - v46,
-        v46 + v40,
-        (int)(float)((float)((float)v39 + v47) + (float)v46),
-        (int)(float)((float)((float)v40 + v47) + (float)v46),
-        v41,
-        20,
-        v48,
-        v35);
-      CBlob::drawBlob((CBlob *)v14);
+      CPreviewBlob::CPreviewBlob(&v14, v39 - v46, v46 + v40, (int)(float)((float)((float)v39 + v47) + (float)v46), (int)(float)((float)((float)v40 + v47) + (float)v46), v41, 20, iStride, cCheckLayer);
+      CBlob::drawBlob(&v14);
       v5 = CRandom16::Rand(g_pRand);
       v46 = v34 + v5 % v34;
-      CPreviewBlob::CPreviewBlob(
-        (CPreviewBlob *)v13,
-        v46 + v39,
-        v40 - v46,
-        (int)(float)((float)((float)v39 + v47) + (float)v46),
-        (int)(float)((float)((float)v40 + v47) - (float)v46),
-        v41,
-        20,
-        v48,
-        v35);
-      CBlob::drawBlob((CBlob *)v13);
+      CPreviewBlob::CPreviewBlob(&v13, v46 + v39, v40 - v46, (int)(float)((float)((float)v39 + v47) + (float)v46), (int)(float)((float)((float)v40 + v47) - (float)v46), v41, 20, iStride, cCheckLayer);
+      CBlob::drawBlob(&v13);
       v6 = CRandom16::Rand(g_pRand);
       v46 = v34 + v6 % v34;
-      CPreviewBlob::CPreviewBlob(
-        (CPreviewBlob *)v8,
-        v46 + v39,
-        v46 + v40,
-        (int)(float)((float)((float)v39 + v47) + (float)v46),
-        (int)(float)((float)((float)v40 + v47) + (float)v46),
-        v41,
-        20,
-        v48,
-        v35);
-      CBlob::drawBlob((CBlob *)v8);
-      CPreviewBlob::CPreviewBlob(
-        (CPreviewBlob *)v12,
-        v39,
-        v40,
-        (int)(float)((float)v39 + v47),
-        (int)(float)((float)v40 + v47),
-        v41,
-        20,
-        v48,
-        v35);
-      CBlob::drawBlob((CBlob *)v12);
+      CPreviewBlob::CPreviewBlob(&v8, v46 + v39, v46 + v40, (int)(float)((float)((float)v39 + v47) + (float)v46), (int)(float)((float)((float)v40 + v47) + (float)v46), v41, 20, iStride, cCheckLayer);
+      CBlob::drawBlob(&v8);
+      CPreviewBlob::CPreviewBlob(&v12, v39, v40, (int)(float)((float)v39 + v47), (int)(float)((float)v40 + v47), v41, 20, iStride, cCheckLayer);
+      CBlob::drawBlob(&v12);
     }
   }
-  for ( j = 0; j < Size * Size; ++j )
+  for ( j = 0;
+        j < Size * Size;
+        ++j )
   {
     v32 = (int)(float)((float)((float)(j % Size) * v47) + 20.0);
     v33 = (int)(float)((float)((float)(j / Size) * v47) + 20.0);
@@ -57185,103 +59413,96 @@ void __cdecl CreatePreview(class IMapGeneratorHost * a1, unsigned short * a2, in
       v24 = v28;
       if ( v28 == 102 )
       {
-        v42 = CLandscapeColorProperties::HiColValue((CLandscapeColorProperties *)v50, 32);
+        v42 = CLandscapeColorProperties::HiColValue(&cLandscapeColorProperties, 32);
       }
       else if ( v24 == 106 )
       {
-        v42 = CLandscapeColorProperties::HiColValue((CLandscapeColorProperties *)v50, 64);
+        v42 = CLandscapeColorProperties::HiColValue(&cLandscapeColorProperties, 64);
       }
       else
       {
-        v42 = CLandscapeColorProperties::HiColValue((CLandscapeColorProperties *)v50, 16);
+        v42 = CLandscapeColorProperties::HiColValue(&cLandscapeColorProperties, 16);
       }
-      CPreviewBlob::CPreviewBlob(
-        (CPreviewBlob *)v11,
-        v32,
-        v33,
-        (int)(float)((float)v32 + v47),
-        (int)(float)((float)v33 + v47),
-        v42,
-        20,
-        v48,
-        v35);
-      CBlob::drawBlob((CBlob *)v11);
+      CPreviewBlob::CPreviewBlob(&v11, v32, v33, (int)(float)((float)v32 + v47), (int)(float)((float)v33 + v47), v42, 20, iStride, cCheckLayer);
+      CBlob::drawBlob(&v11);
       if ( v28 == 102 && j % Size < Size - 1 && CGrid::getElement((CGrid *)g_pFeatureGrid, j + 1) == 102 )
       {
-        CPreviewBlob::CPreviewBlob(
-          (CPreviewBlob *)v10,
-          (int)(float)((float)v32 + (float)(v47 / 2.0)),
-          v33,
-          (int)((double)v32 + v47 * 1.5),
-          (int)(float)((float)v33 + v47),
-          v42,
-          20,
-          v48,
-          v35);
-        CBlob::drawBlob((CBlob *)v10);
+        CPreviewBlob::CPreviewBlob(&v10, (int)(float)((float)v32 + (float)(v47 / 2.0)), v33, (int)((double)v32 + v47 * 1.5), (int)(float)((float)v33 + v47), v42, 20, iStride, cCheckLayer);
+        CBlob::drawBlob(&v10);
       }
       if ( v28 == 102 && j < Size * (Size - 1) && CGrid::getElement((CGrid *)g_pFeatureGrid, Size + j) == 102 )
       {
-        CPreviewBlob::CPreviewBlob(
-          (CPreviewBlob *)v9,
-          v32,
-          (int)(float)((float)v33 + (float)(v47 / 2.0)),
-          (int)(float)((float)v32 + v47),
-          (int)((double)v33 + v47 * 1.5),
-          v42,
-          20,
-          v48,
-          v35);
-        CBlob::drawBlob((CBlob *)v9);
+        CPreviewBlob::CPreviewBlob(&v9, v32, (int)(float)((float)v33 + (float)(v47 / 2.0)), (int)(float)((float)v32 + v47), (int)((double)v33 + v47 * 1.5), v42, 20, iStride, cCheckLayer);
+        CBlob::drawBlob(&v9);
       }
     }
   }
-  for ( k = 0; k < g_iPreviewImageSize; ++k )
+  for ( y = 0;
+        y < g_iPreviewImageSize;
+        ++y )
   {
-    for ( m = 0; m < g_iPreviewImageSize; ++m )
+    for ( x = 0;
+          x < g_iPreviewImageSize;
+          ++x )
     {
-      v38 = 0;
-      v37 = 0;
-      v36 = 0;
-      v38 = *(_WORD *)(g_pPreviewImage + 2 * (v48 * 2 * k + 2 * m)) & 0x7C00;
-      v37 = *(_WORD *)(g_pPreviewImage + 2 * (v48 * 2 * k + 2 * m)) & 0x3E0;
-      v36 = *(_WORD *)(g_pPreviewImage + 2 * (v48 * 2 * k + 2 * m)) & 0x1F;
-      v38 += *(_WORD *)(g_pPreviewImage + 2 * (v48 * 2 * k + 2 * m + 1)) & 0x7C00;
-      v37 += *(_WORD *)(g_pPreviewImage + 2 * (v48 * 2 * k + 2 * m + 1)) & 0x3E0;
-      v36 += *(_WORD *)(g_pPreviewImage + 2 * (v48 * 2 * k + 2 * m + 1)) & 0x1F;
-      v38 += *(_WORD *)(g_pPreviewImage + 2 * (v48 * (2 * k + 1) + 2 * m)) & 0x7C00;
-      v37 += *(_WORD *)(g_pPreviewImage + 2 * (v48 * (2 * k + 1) + 2 * m)) & 0x3E0;
-      v36 += *(_WORD *)(g_pPreviewImage + 2 * (v48 * (2 * k + 1) + 2 * m)) & 0x1F;
-      v38 += *(_WORD *)(g_pPreviewImage + 2 * (v48 * (2 * k + 1) + 2 * m + 1)) & 0x7C00;
-      v37 += *(_WORD *)(g_pPreviewImage + 2 * (v48 * (2 * k + 1) + 2 * m + 1)) & 0x3E0;
-      v36 += *(_WORD *)(g_pPreviewImage + 2 * (v48 * (2 * k + 1) + 2 * m + 1)) & 0x1F;
-      a2[m + g_iPreviewImageSize * k] = ((v36 / 4) & 0x1F) + ((v37 / 4) & 0x3E0) + ((v38 / 4) & 0x7C00);
+      iRed = 0;
+      iGreen = 0;
+      iBlue = 0;
+      iRed = g_pPreviewImage[2 * x + iStride * 2 * y] & 0x7C00;
+      iGreen = g_pPreviewImage[2 * x + iStride * 2 * y] & 0x3E0;
+      iBlue = g_pPreviewImage[2 * x + iStride * 2 * y] & 0x1F;
+      iRed += g_pPreviewImage[2 * x + 1 + iStride * 2 * y] & 0x7C00;
+      iGreen += g_pPreviewImage[2 * x + 1 + iStride * 2 * y] & 0x3E0;
+      iBlue += g_pPreviewImage[2 * x + 1 + iStride * 2 * y] & 0x1F;
+      iRed += g_pPreviewImage[2 * x + iStride * (2 * y + 1)] & 0x7C00;
+      iGreen += g_pPreviewImage[2 * x + iStride * (2 * y + 1)] & 0x3E0;
+      iBlue += g_pPreviewImage[2 * x + iStride * (2 * y + 1)] & 0x1F;
+      iRed += g_pPreviewImage[2 * x + 1 + iStride * (2 * y + 1)] & 0x7C00;
+      iGreen += g_pPreviewImage[2 * x + 1 + iStride * (2 * y + 1)] & 0x3E0;
+      iBlue += g_pPreviewImage[2 * x + 1 + iStride * (2 * y + 1)] & 0x1F;
+      _pImage[x + g_iPreviewImageSize * y] = ((iBlue / 4) & 0x1F) + ((iGreen / 4) & 0x3E0) + ((iRed / 4) & 0x7C00);
     }
   }
   if ( (g_iFlags & 1) != 0 )
   {
-    for ( k = 0; k < g_iPreviewImageSize; ++k )
+    for ( y = 0;
+          y < g_iPreviewImageSize;
+          ++y )
     {
-      for ( n = 0; n < k; ++n )
-        a2[k + g_iPreviewImageSize * n] = a2[n + g_iPreviewImageSize * k];
+      for ( k = 0;
+            k < y;
+            ++k )
+      {
+        _pImage[y + g_iPreviewImageSize * k] = _pImage[k + g_iPreviewImageSize * y];
+      }
     }
   }
   if ( (g_iFlags & 2) != 0 )
   {
-    for ( k = 0; k < g_iPreviewImageSize; ++k )
+    for ( y = 0;
+          y < g_iPreviewImageSize;
+          ++y )
     {
-      for ( ii = 0; ii < g_iPreviewImageSize - k - 1; ++ii )
-        a2[g_iPreviewImageSize - k - 1 + g_iPreviewImageSize * (g_iPreviewImageSize - 1 - ii)] = a2[ii + g_iPreviewImageSize * k];
+      for ( m = 0;
+            m < g_iPreviewImageSize - y - 1;
+            ++m )
+      {
+        _pImage[g_iPreviewImageSize - y - 1 + g_iPreviewImageSize * (g_iPreviewImageSize - 1 - m)] = _pImage[m + g_iPreviewImageSize * y];
+      }
     }
   }
-  v20 = v35;
-  v23 = v35;
-  if ( v35 )
+  v20 = cCheckLayer;
+  v23 = cCheckLayer;
+  if ( cCheckLayer )
+  {
     v19 = delete v23;
+  }
   else
+  {
     v19 = 0;
-  C = (void *)g_pPreviewImage;
-  operator delete[]((void *)g_pPreviewImage);
+  }
+  C = g_pPreviewImage;
+  operator delete[](g_pPreviewImage);
   return _controlfp(NewValue, 0x30F031Fu);
 }
 
@@ -57416,16 +59637,22 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   int v125; // [esp+10018h] [ebp-4h]
 
   if ( !g_pMapElement )
+  {
     return 0;
+  }
   NewValue = _controlfp(0xA031Fu, 0x30F031Fu);
   CRandom16Ex::Init(g_pRand, g_iRandomSeed, 0);
   g_pHost = (int)a1;
   v72 = (CCheckLayer *)operator new(0xCu);
   v125 = 0;
   if ( v72 )
+  {
     v71 = CCheckLayer::CCheckLayer(v72, 256);
+  }
   else
+  {
     v71 = 0;
+  }
   v56 = v71;
   v125 = -1;
   g_pCheckLayer = (int)v71;
@@ -57435,114 +59662,53 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   *(float *)&g_fScaleFactor = (float)(g_iWorldSize - 100) / (float)Size;
   v115 = (int)(float)(*(float *)&g_fScaleFactor / 2.0);
   v53 = (int)(float)(*(float *)&g_fScaleFactor / 4.0);
-  for ( i = 0; i < Size * Size; ++i )
+  for ( i = 0;
+        i < Size * Size;
+        ++i )
   {
     v109 = (int)(float)((float)((float)(i % Size) * *(float *)&g_fScaleFactor) + 50.0);
     v110 = (int)(float)((float)((float)(i / Size) * *(float *)&g_fScaleFactor) + 50.0);
-    if ( (double)g_iWorldSize <= (double)v109 + *(float *)&g_fScaleFactor * 1.5
-      && BBSupportDbgReport(2, "MapGen.cpp", 500, "iUpperLeftX + g_fScaleFactor * 1.5 < g_iWorldSize") == 1 )
+    if ( (double)g_iWorldSize <= (double)v109 + *(float *)&g_fScaleFactor * 1.5 && BBSupportDbgReport(2, "MapGen.cpp", 500, "iUpperLeftX + g_fScaleFactor * 1.5 < g_iWorldSize") == 1 )
     {
       __debugbreak();
     }
-    if ( (double)g_iWorldSize <= (double)v110 + *(float *)&g_fScaleFactor * 1.5
-      && BBSupportDbgReport(2, "MapGen.cpp", 501, "iUpperLeftY + g_fScaleFactor * 1.5 < g_iWorldSize") == 1 )
+    if ( (double)g_iWorldSize <= (double)v110 + *(float *)&g_fScaleFactor * 1.5 && BBSupportDbgReport(2, "MapGen.cpp", 501, "iUpperLeftY + g_fScaleFactor * 1.5 < g_iWorldSize") == 1 )
     {
       __debugbreak();
     }
     if ( CGrid::getElement((CGrid *)g_pFeatureGrid, i) )
     {
-      if ( i < Size * (Size - 1)
-        && i % Size != Size - 1
-        && CGrid::getElement((CGrid *)g_pFeatureGrid, i + 1)
-        && CGrid::getElement((CGrid *)g_pFeatureGrid, Size + i) )
+      if ( i < Size * (Size - 1) && i % Size != Size - 1 && CGrid::getElement((CGrid *)g_pFeatureGrid, i + 1) && CGrid::getElement((CGrid *)g_pFeatureGrid, Size + i) )
       {
         if ( CGrid::getElement((CGrid *)g_pFeatureGrid, i + Size + 1) )
         {
-          CLandBlob::CLandBlob(
-            (CLandBlob *)v33,
-            v115 + v109,
-            v115 + v110,
-            (int)(float)((float)((float)v109 + *(float *)&g_fScaleFactor) + (float)(int)v115),
-            (int)(float)((float)((float)v110 + *(float *)&g_fScaleFactor) + (float)(int)v115),
-            1,
-            16,
-            50,
-            g_iWorldSize,
-            (struct CCheckLayer *)g_pCheckLayer);
+          CLandBlob::CLandBlob((CLandBlob *)v33, v115 + v109, v115 + v110, (int)(float)((float)((float)v109 + *(float *)&g_fScaleFactor) + (float)(int)v115), (int)(float)((float)((float)v110 + *(float *)&g_fScaleFactor) + (float)(int)v115), 1, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
           CBlob::drawBlob((CBlob *)v33);
         }
       }
       v2 = CRandom16::Rand(g_pRand);
       v111 = v2 % v115;
-      CLandBlob::CLandBlob(
-        (CLandBlob *)v32,
-        v2 % v115 + v109 - v115,
-        v2 % v115 + v110 - v115,
-        v2 % v115 + v115 + v109,
-        v2 % v115 + v115 + v110,
-        1,
-        16,
-        50,
-        g_iWorldSize,
-        (struct CCheckLayer *)g_pCheckLayer);
+      CLandBlob::CLandBlob((CLandBlob *)v32, v2 % v115 + v109 - v115, v2 % v115 + v110 - v115, v2 % v115 + v115 + v109, v2 % v115 + v115 + v110, 1, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
       CBlob::drawBlob((CBlob *)v32);
       v3 = CRandom16::Rand(g_pRand);
       v111 = v3 % v115;
-      CLandBlob::CLandBlob(
-        (CLandBlob *)v31,
-        v3 % v115 + v109 - v115,
-        v115 + v110 - v3 % v115,
-        v3 % v115 + v115 + v109,
-        (int)(float)((float)((float)v110 + (float)(*(float *)&g_fScaleFactor * 1.5)) - (float)(int)(v3 % v115)),
-        1,
-        16,
-        50,
-        g_iWorldSize,
-        (struct CCheckLayer *)g_pCheckLayer);
+      CLandBlob::CLandBlob((CLandBlob *)v31, v3 % v115 + v109 - v115, v115 + v110 - v3 % v115, v3 % v115 + v115 + v109, (int)(float)((float)((float)v110 + (float)(*(float *)&g_fScaleFactor * 1.5)) - (float)(int)(v3 % v115)), 1, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
       CBlob::drawBlob((CBlob *)v31);
       v4 = CRandom16::Rand(g_pRand);
       v111 = v4 % v115;
-      CLandBlob::CLandBlob(
-        (CLandBlob *)v38,
-        v115 + v109 - v4 % v115,
-        v4 % v115 + v110 - v115,
-        (int)(float)((float)((float)v109 + (float)(*(float *)&g_fScaleFactor * 1.5)) - (float)(int)(v4 % v115)),
-        v4 % v115 + v115 + v110,
-        1,
-        16,
-        50,
-        g_iWorldSize,
-        (struct CCheckLayer *)g_pCheckLayer);
+      CLandBlob::CLandBlob((CLandBlob *)v38, v115 + v109 - v4 % v115, v4 % v115 + v110 - v115, (int)(float)((float)((float)v109 + (float)(*(float *)&g_fScaleFactor * 1.5)) - (float)(int)(v4 % v115)), v4 % v115 + v115 + v110, 1, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
       CBlob::drawBlob((CBlob *)v38);
       v5 = CRandom16::Rand(g_pRand);
       v111 = v5 % v115;
-      CLandBlob::CLandBlob(
-        (CLandBlob *)v37,
-        v115 + v109 - v5 % v115,
-        v115 + v110 - v5 % v115,
-        (int)(float)((float)((float)v109 + (float)(*(float *)&g_fScaleFactor * 1.5)) - (float)(int)(v5 % v115)),
-        (int)(float)((float)((float)v110 + (float)(*(float *)&g_fScaleFactor * 1.5)) - (float)(int)(v5 % v115)),
-        1,
-        16,
-        50,
-        g_iWorldSize,
-        (struct CCheckLayer *)g_pCheckLayer);
+      CLandBlob::CLandBlob((CLandBlob *)v37, v115 + v109 - v5 % v115, v115 + v110 - v5 % v115, (int)(float)((float)((float)v109 + (float)(*(float *)&g_fScaleFactor * 1.5)) - (float)(int)(v5 % v115)), (int)(float)((float)((float)v110 + (float)(*(float *)&g_fScaleFactor * 1.5)) - (float)(int)(v5 % v115)), 1, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
       CBlob::drawBlob((CBlob *)v37);
-      CLandBlob::CLandBlob(
-        (CLandBlob *)v36,
-        v109,
-        v110,
-        (int)(float)((float)v109 + *(float *)&g_fScaleFactor),
-        (int)(float)((float)v110 + *(float *)&g_fScaleFactor),
-        1,
-        16,
-        50,
-        g_iWorldSize,
-        (struct CCheckLayer *)g_pCheckLayer);
+      CLandBlob::CLandBlob((CLandBlob *)v36, v109, v110, (int)(float)((float)v109 + *(float *)&g_fScaleFactor), (int)(float)((float)v110 + *(float *)&g_fScaleFactor), 1, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
       CBlob::drawBlob((CBlob *)v36);
     }
   }
-  for ( i = 0; i < v106; ++i )
+  for ( i = 0;
+        i < v106;
+        ++i )
   {
     if ( CGrid::getElement((CGrid *)g_pFeatureGrid, i) == 102 )
     {
@@ -57552,33 +59718,37 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
       v70 = 1;
       v83 = 1;
       v86 = 1;
-      if ( i - 1 > 0
-        && (CGrid::getElement((CGrid *)g_pFeatureGrid, i - 1) == 1
-         || CGrid::getElement((CGrid *)g_pFeatureGrid, i - 1) == 102) )
+      if ( i - 1 > 0 && (CGrid::getElement((CGrid *)g_pFeatureGrid, i - 1) == 1 || CGrid::getElement((CGrid *)g_pFeatureGrid, i - 1) == 102) )
       {
         v83 = (int)(float)(*(float *)&g_fScaleFactor / 2.0);
         if ( CGrid::getElement((CGrid *)g_pFeatureGrid, i - 1) == 1 )
+        {
           CGrid::setElement((CGrid *)g_pFeatureGrid, i - 1, 102);
+        }
       }
-      if ( i - Size > 0
-        && (CGrid::getElement((CGrid *)g_pFeatureGrid, i - Size) == 1
-         || CGrid::getElement((CGrid *)g_pFeatureGrid, i - Size) == 102) )
+      if ( i - Size > 0 && (CGrid::getElement((CGrid *)g_pFeatureGrid, i - Size) == 1 || CGrid::getElement((CGrid *)g_pFeatureGrid, i - Size) == 102) )
       {
         v85 = (int)(float)(*(float *)&g_fScaleFactor / 2.0);
         if ( CGrid::getElement((CGrid *)g_pFeatureGrid, i - Size) == 1 )
+        {
           CGrid::setElement((CGrid *)g_pFeatureGrid, i - Size, 102);
+        }
       }
       if ( i + 1 < v106 && CGrid::getElement((CGrid *)g_pFeatureGrid, i + 1) == 102 )
       {
         v86 = (int)(float)(*(float *)&g_fScaleFactor / 2.0);
         if ( CGrid::getElement((CGrid *)g_pFeatureGrid, i + 1) == 1 )
+        {
           CGrid::setElement((CGrid *)g_pFeatureGrid, i + 1, 102);
+        }
       }
       if ( Size + i < v106 && CGrid::getElement((CGrid *)g_pFeatureGrid, Size + i) == 102 )
       {
         v70 = (int)(float)(*(float *)&g_fScaleFactor / 2.0);
         if ( CGrid::getElement((CGrid *)g_pFeatureGrid, Size + i) == 1 )
+        {
           CGrid::setElement((CGrid *)g_pFeatureGrid, Size + i, 102);
+        }
       }
       v29 = (struct CCheckLayer *)g_pCheckLayer;
       v27 = g_iWorldSize;
@@ -57591,39 +59761,20 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
       CBlob::drawBlob((CBlob *)v124);
     }
   }
-  for ( i = 0; i < v106; ++i )
+  for ( i = 0;
+        i < v106;
+        ++i )
   {
     v98 = (int)(float)((float)((float)(i % Size) * *(float *)&g_fScaleFactor) + 50.0);
     v105 = (int)(float)((float)((float)(i / Size) * *(float *)&g_fScaleFactor) + 50.0);
     if ( CGrid::getElement((CGrid *)g_pFeatureGrid, i) == 106 )
     {
-      CLandBlob::CLandBlob(
-        (CLandBlob *)v35,
-        (int)(float)((float)v98 + (float)(*(float *)&g_fScaleFactor / 4.0)),
-        (int)(float)((float)v105 + (float)(*(float *)&g_fScaleFactor / 4.0)),
-        (int)(float)((float)v98 + *(float *)&g_fScaleFactor),
-        (int)(float)((float)v105 + *(float *)&g_fScaleFactor),
-        0,
-        64,
-        50,
-        g_iWorldSize,
-        (struct CCheckLayer *)g_pCheckLayer);
+      CLandBlob::CLandBlob((CLandBlob *)v35, (int)(float)((float)v98 + (float)(*(float *)&g_fScaleFactor / 4.0)), (int)(float)((float)v105 + (float)(*(float *)&g_fScaleFactor / 4.0)), (int)(float)((float)v98 + *(float *)&g_fScaleFactor), (int)(float)((float)v105 + *(float *)&g_fScaleFactor), 0, 64, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
       CBlob::drawBlob((CBlob *)v35);
     }
-    else if ( (CGrid::getElement((CGrid *)g_pFeatureGrid, i) == 1 || CGrid::getElement((CGrid *)g_pFeatureGrid, i) == 104)
-           && CRandom16::Rand(g_pRand) % 6u > 4 )
+    else if ( (CGrid::getElement((CGrid *)g_pFeatureGrid, i) == 1 || CGrid::getElement((CGrid *)g_pFeatureGrid, i) == 104) && CRandom16::Rand(g_pRand) % 6u > 4 )
     {
-      CLandBlob::CLandBlob(
-        (CLandBlob *)v34,
-        (int)(float)((float)v98 + (float)(*(float *)&g_fScaleFactor / 2.0)),
-        (int)(float)((float)v105 + (float)(*(float *)&g_fScaleFactor / 2.0)),
-        (int)(float)((float)v98 + *(float *)&g_fScaleFactor),
-        (int)(float)((float)v105 + *(float *)&g_fScaleFactor),
-        0,
-        24,
-        50,
-        g_iWorldSize,
-        (struct CCheckLayer *)g_pCheckLayer);
+      CLandBlob::CLandBlob((CLandBlob *)v34, (int)(float)((float)v98 + (float)(*(float *)&g_fScaleFactor / 2.0)), (int)(float)((float)v105 + (float)(*(float *)&g_fScaleFactor / 2.0)), (int)(float)((float)v98 + *(float *)&g_fScaleFactor), (int)(float)((float)v105 + *(float *)&g_fScaleFactor), 0, 24, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
       CBlob::drawBlob((CBlob *)v34);
     }
   }
@@ -57635,15 +59786,23 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   CreateBorder(7, 255, 254);
   ChangeBorder(255, 48);
   if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pHost + 32))(g_pHost) )
+  {
     ChangeBorder(254, 8);
+  }
   else
+  {
     ChangeBorder(254, 48);
+  }
   CreateBorder(32, 16, 17);
   CreateBorder(32, 17, 33);
   if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pHost + 32))(g_pHost) )
+  {
     CreateBorder(7, 8, 255);
+  }
   else
+  {
     CreateBorder(7, 48, 255);
+  }
   CreateSpeckledBorder(7, 255, 1);
   CreateSpeckledBorder(7, 1, 2);
   CreateSpeckledBorder(7, 2, 3);
@@ -57655,13 +59814,21 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   if ( (g_iFlags & 1) != 0 && (g_iFlags & 2) != 0 )
   {
     if ( (unsigned __int8)g_iNumPlayers > 4u )
+    {
       v99 = 2;
+    }
     else
+    {
       v99 = 1;
+    }
   }
   if ( (g_iFlags & 1) != 0 || (g_iFlags & 2) != 0 )
+  {
     v99 = (int)(float)((float)((float)(unsigned __int8)g_iNumPlayers / 2.0) + 0.5);
-  for ( i = 0; i < v99; ++i )
+  }
+  for ( i = 0;
+        i < v99;
+        ++i )
   {
     v80 = 0;
     v81 = 0;
@@ -57672,7 +59839,9 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
     v125 = -1;
     CRiver::~CRiver(v49);
   }
-  for ( j = 0; j < g_iNumRivers; ++j )
+  for ( j = 0;
+        j < g_iNumRivers;
+        ++j )
   {
     do
     {
@@ -57693,9 +59862,13 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
     CRiver::~CRiver(v50);
   }
   CHexIndices::CHexIndices((CHexIndices *)v123);
-  for ( i = 0; i < (unsigned __int8)g_iNumPlayers; ++i )
+  for ( i = 0;
+        i < (unsigned __int8)g_iNumPlayers;
+        ++i )
   {
-    for ( k = 0; k < 3; ++k )
+    for ( k = 0;
+          k < 3;
+          ++k )
     {
       v108 = 0;
       v107 = 0;
@@ -57715,9 +59888,7 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
         v107 = (int)(float)(v54 + v11);
         ++v88;
       }
-      while ( (*(_BYTE *)(g_pMapElement + 4 * (v108 + g_iWorldSize * v107) + 1) != 32
-            || *(_BYTE *)(g_pEditorLayer + 4 * (v108 + g_iWorldSize * v107) + 3))
-           && v88 < 50 );
+      while ( (*(_BYTE *)(g_pMapElement + 4 * (v108 + g_iWorldSize * v107) + 1) != 32 || *(_BYTE *)(g_pEditorLayer + 4 * (v108 + g_iWorldSize * v107) + 3)) && v88 < 50 );
       v112 = 0;
       v87 = k;
       if ( k )
@@ -57736,7 +59907,9 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
         v112 = 16;
       }
       CHexIndices::SetFirst((CHexIndices *)v123);
-      for ( m = 0; m < 16; ++m )
+      for ( m = 0;
+            m < 16;
+            ++m )
       {
         Index = CHexIndices::GetIndex((CHexIndices *)v123);
         v94 = v108 + Index;
@@ -57746,19 +59919,17 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
         {
           v14 = v112;
           v15 = CRandom16::Rand(g_pRand);
-          *(_BYTE *)(g_pEditorLayer + 4 * (v94 + g_iWorldSize * v95) + 3) = (g_uResourceWealth
-                                                                           + v15
-                                                                           % (16
-                                                                            - (unsigned int)(unsigned __int8)g_uResourceWealth)) | v14;
+          *(_BYTE *)(g_pEditorLayer + 4 * (v94 + g_iWorldSize * v95) + 3) = (g_uResourceWealth + v15 % (16 - (unsigned int)(unsigned __int8)g_uResourceWealth)) | v14;
         }
       }
     }
   }
   v69 = g_iWorldSize * g_iWorldSize;
-  for ( i = 0; i < v69; ++i )
+  for ( i = 0;
+        i < v69;
+        ++i )
   {
-    if ( *(_BYTE *)(g_pMapElement + 4 * i + 1) == 32
-      && !(CRandom16::Rand(g_pRand) % (250 - 10 * (unsigned int)(unsigned __int8)g_uResourceWealth)) )
+    if ( *(_BYTE *)(g_pMapElement + 4 * i + 1) == 32 && !(CRandom16::Rand(g_pRand) % (250 - 10 * (unsigned int)(unsigned __int8)g_uResourceWealth)) )
     {
       v116 = 1;
       v119 = CRandom16::Rand(g_pRand) % 0x14u;
@@ -57794,56 +59965,54 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
       v68 = i % g_iWorldSize;
       v67 = i / g_iWorldSize;
       CHexIndices::SetFirst((CHexIndices *)v123);
-      for ( n = 0; n < v117; ++n )
+      for ( n = 0;
+            n < v117;
+            ++n )
       {
         v16 = CHexIndices::GetIndex((CHexIndices *)v123);
         v101 = v68 + v16;
         v17 = CHexIndices::GetIndex((CHexIndices *)v123);
         v102 = v67 + v17;
-        if ( ValidateMapIndex(v101, v67 + v17)
-          && *(_BYTE *)(g_pMapElement + 4 * (v101 + g_iWorldSize * v102) + 1) == 32
-          && !*(_BYTE *)(g_pEditorLayer + 4 * (v101 + g_iWorldSize * v102) + 3) )
+        if ( ValidateMapIndex(v101, v67 + v17) && *(_BYTE *)(g_pMapElement + 4 * (v101 + g_iWorldSize * v102) + 1) == 32 && !*(_BYTE *)(g_pEditorLayer + 4 * (v101 + g_iWorldSize * v102) + 3) )
         {
           v18 = v116;
           v19 = CRandom16::Rand(g_pRand);
-          *(_BYTE *)(g_pEditorLayer + 4 * (v101 + g_iWorldSize * v102) + 3) = (g_uResourceWealth
-                                                                             + v19
-                                                                             % (16
-                                                                              - (unsigned int)(unsigned __int8)g_uResourceWealth)) | v18;
+          *(_BYTE *)(g_pEditorLayer + 4 * (v101 + g_iWorldSize * v102) + 3) = (g_uResourceWealth + v19 % (16 - (unsigned int)(unsigned __int8)g_uResourceWealth)) | v18;
         }
       }
     }
-    if ( !*(_BYTE *)(g_pMapElement + 4 * i + 1)
-      || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 1
-      || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 2
-      || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 3
-      || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 4
-      || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 5
-      || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 6 )
+    if ( !*(_BYTE *)(g_pMapElement + 4 * i + 1) || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 1 || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 2 || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 3 || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 4 || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 5 || *(_BYTE *)(g_pMapElement + 4 * i + 1) == 6 )
     {
       v20 = CRandom16::Rand(g_pRand);
-      *(_BYTE *)(g_pEditorLayer + 4 * i + 3) = g_uResourceWealth
-                                             + v20 % (16 - (unsigned int)(unsigned __int8)g_uResourceWealth);
+      *(_BYTE *)(g_pEditorLayer + 4 * i + 3) = g_uResourceWealth + v20 % (16 - (unsigned int)(unsigned __int8)g_uResourceWealth);
     }
   }
   if ( (g_iFlags & 1) != 0 )
+  {
     mirrorMapDiag();
+  }
   if ( (g_iFlags & 2) != 0 )
+  {
     mirrorMapOppDiag();
+  }
   repairHeights();
   CreateBorder(128, 32, 35);
   CreateBorder(128, 35, 129);
   CreateSpeckledBorder(24, 16, 25);
   CreateBorder(64, 16, 20);
   CreateSpeckledBorder(64, 20, 65);
-  for ( ii = 0; ii < (unsigned __int8)g_iNumPlayers; ++ii )
+  for ( ii = 0;
+        ii < (unsigned __int8)g_iNumPlayers;
+        ++ii )
   {
     v77 = 0;
     v76 = 0;
     CPlayerData::getStartPos_Real(*(CPlayerData **)(g_pPlayerData + 4 * ii), &v77, &v76);
     CHexIndices::CHexIndices((CHexIndices *)v122);
     CHexIndices::SetFirst((CHexIndices *)v122);
-    for ( jj = 0; jj < 96; ++jj )
+    for ( jj = 0;
+          jj < 96;
+          ++jj )
     {
       v21 = CHexIndices::GetIndex((CHexIndices *)v122);
       v90 = v77 + v21;
@@ -57859,7 +60028,9 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   (*(void (__thiscall **)(int))(*(_DWORD *)g_pHost + 8))(g_pHost);
   if ( !g_bNoObjects )
   {
-    for ( i = 0; i < v106; ++i )
+    for ( i = 0;
+          i < v106;
+          ++i )
     {
       v113 = (int)(float)((float)((float)(i % Size) * *(float *)&g_fScaleFactor) + 50.0);
       v114 = (int)(float)((float)((float)(i / Size) * *(float *)&g_fScaleFactor) + 50.0);
@@ -57869,160 +60040,40 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
         v30 = (struct CCheckLayer *)g_pCheckLayer;
         v28 = g_iWorldSize;
         v23 = CRandom16::Rand(g_pRand);
-        CObjectBlob::CObjectBlob(
-          (CObjectBlob *)v42,
-          v113,
-          v114,
-          (int)(float)((float)v113 + *(float *)&g_fScaleFactor),
-          (int)(float)((float)v114 + *(float *)&g_fScaleFactor),
-          1,
-          10,
-          v23 % 0x19 + 60,
-          16,
-          50,
-          v28,
-          v30);
+        CObjectBlob::CObjectBlob((CObjectBlob *)v42, v113, v114, (int)(float)((float)v113 + *(float *)&g_fScaleFactor), (int)(float)((float)v114 + *(float *)&g_fScaleFactor), 1, 10, v23 % 0x19 + 60, 16, 50, v28, v30);
         CBlob::drawBlob((CBlob *)v42);
-        CObjectBlob::CObjectBlob(
-          (CObjectBlob *)v41,
-          v113,
-          v114,
-          (int)(float)((float)v113 + *(float *)&g_fScaleFactor),
-          (int)(float)((float)v114 + *(float *)&g_fScaleFactor),
-          174,
-          4,
-          40,
-          16,
-          50,
-          g_iWorldSize,
-          (struct CCheckLayer *)g_pCheckLayer);
+        CObjectBlob::CObjectBlob((CObjectBlob *)v41, v113, v114, (int)(float)((float)v113 + *(float *)&g_fScaleFactor), (int)(float)((float)v114 + *(float *)&g_fScaleFactor), 174, 4, 40, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
         CBlob::drawBlob((CBlob *)v41);
-        CObjectBlob::CObjectBlob(
-          (CObjectBlob *)v40,
-          v113,
-          v114,
-          (int)(float)((float)v113 + *(float *)&g_fScaleFactor),
-          (int)(float)((float)v114 + *(float *)&g_fScaleFactor),
-          181,
-          3,
-          5,
-          16,
-          50,
-          g_iWorldSize,
-          (struct CCheckLayer *)g_pCheckLayer);
+        CObjectBlob::CObjectBlob((CObjectBlob *)v40, v113, v114, (int)(float)((float)v113 + *(float *)&g_fScaleFactor), (int)(float)((float)v114 + *(float *)&g_fScaleFactor), 181, 3, 5, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
         CBlob::drawBlob((CBlob *)v40);
       }
       if ( Element == 105 )
       {
-        CObjectBlob::CObjectBlob(
-          (CObjectBlob *)v48,
-          v113,
-          v114,
-          (int)(float)((float)v113 + *(float *)&g_fScaleFactor),
-          (int)(float)((float)v114 + *(float *)&g_fScaleFactor),
-          124,
-          11,
-          90,
-          16,
-          50,
-          g_iWorldSize,
-          (struct CCheckLayer *)g_pCheckLayer);
+        CObjectBlob::CObjectBlob((CObjectBlob *)v48, v113, v114, (int)(float)((float)v113 + *(float *)&g_fScaleFactor), (int)(float)((float)v114 + *(float *)&g_fScaleFactor), 124, 11, 90, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
         CBlob::drawBlob((CBlob *)v48);
       }
       if ( Element == 1 || Element == 104 || Element == 101 || Element == 105 )
       {
-        CObjectBlob::CObjectBlob(
-          (CObjectBlob *)v47,
-          v113,
-          v114,
-          (int)(float)((float)v113 + *(float *)&g_fScaleFactor),
-          (int)(float)((float)v114 + *(float *)&g_fScaleFactor),
-          76,
-          10,
-          80,
-          16,
-          50,
-          g_iWorldSize,
-          (struct CCheckLayer *)g_pCheckLayer);
+        CObjectBlob::CObjectBlob((CObjectBlob *)v47, v113, v114, (int)(float)((float)v113 + *(float *)&g_fScaleFactor), (int)(float)((float)v114 + *(float *)&g_fScaleFactor), 76, 10, 80, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
         CBlob::drawBlob((CBlob *)v47);
-        CObjectBlob::CObjectBlob(
-          (CObjectBlob *)v46,
-          v113,
-          v114,
-          (int)(float)((float)v113 + *(float *)&g_fScaleFactor),
-          (int)(float)((float)v114 + *(float *)&g_fScaleFactor),
-          43,
-          7,
-          5,
-          16,
-          50,
-          g_iWorldSize,
-          (struct CCheckLayer *)g_pCheckLayer);
+        CObjectBlob::CObjectBlob((CObjectBlob *)v46, v113, v114, (int)(float)((float)v113 + *(float *)&g_fScaleFactor), (int)(float)((float)v114 + *(float *)&g_fScaleFactor), 43, 7, 5, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
         CBlob::drawBlob((CBlob *)v46);
       }
       if ( Element == 1 && !(CRandom16::Rand(g_pRand) % 0xAu) )
       {
-        CObjectBlob::CObjectBlob(
-          (CObjectBlob *)v45,
-          v113,
-          v114,
-          (int)(float)((float)v113 + *(float *)&g_fScaleFactor),
-          (int)(float)((float)v114 + *(float *)&g_fScaleFactor),
-          184,
-          5,
-          80,
-          16,
-          50,
-          g_iWorldSize,
-          (struct CCheckLayer *)g_pCheckLayer);
+        CObjectBlob::CObjectBlob((CObjectBlob *)v45, v113, v114, (int)(float)((float)v113 + *(float *)&g_fScaleFactor), (int)(float)((float)v114 + *(float *)&g_fScaleFactor), 184, 5, 80, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
         CBlob::drawBlob((CBlob *)v45);
       }
       if ( (Element == 1 || Element == 104 || Element == 105) && !(CRandom16::Rand(g_pRand) % 0x14u) )
       {
-        CObjectBlob::CObjectBlob(
-          (CObjectBlob *)v44,
-          v113,
-          v114,
-          (int)(float)((float)v113 + *(float *)&g_fScaleFactor),
-          (int)(float)((float)v114 + *(float *)&g_fScaleFactor),
-          56,
-          20,
-          2,
-          16,
-          50,
-          g_iWorldSize,
-          (struct CCheckLayer *)g_pCheckLayer);
+        CObjectBlob::CObjectBlob((CObjectBlob *)v44, v113, v114, (int)(float)((float)v113 + *(float *)&g_fScaleFactor), (int)(float)((float)v114 + *(float *)&g_fScaleFactor), 56, 20, 2, 16, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
         CBlob::drawBlob((CBlob *)v44);
       }
       if ( Element == 106 )
       {
-        CObjectBlob::CObjectBlob(
-          (CObjectBlob *)v43,
-          v113,
-          v114,
-          (int)(float)((float)v113 + *(float *)&g_fScaleFactor),
-          (int)(float)((float)v114 + *(float *)&g_fScaleFactor),
-          52,
-          2,
-          -300,
-          64,
-          50,
-          g_iWorldSize,
-          (struct CCheckLayer *)g_pCheckLayer);
+        CObjectBlob::CObjectBlob((CObjectBlob *)v43, v113, v114, (int)(float)((float)v113 + *(float *)&g_fScaleFactor), (int)(float)((float)v114 + *(float *)&g_fScaleFactor), 52, 2, -300, 64, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
         CBlob::drawBlob((CBlob *)v43);
-        CObjectBlob::CObjectBlob(
-          (CObjectBlob *)v39,
-          v113,
-          v114,
-          (int)(float)((float)v113 + *(float *)&g_fScaleFactor),
-          (int)(float)((float)v114 + *(float *)&g_fScaleFactor),
-          120,
-          3,
-          0,
-          64,
-          50,
-          g_iWorldSize,
-          (struct CCheckLayer *)g_pCheckLayer);
+        CObjectBlob::CObjectBlob((CObjectBlob *)v39, v113, v114, (int)(float)((float)v113 + *(float *)&g_fScaleFactor), (int)(float)((float)v114 + *(float *)&g_fScaleFactor), 120, 3, 0, 64, 50, g_iWorldSize, (struct CCheckLayer *)g_pCheckLayer);
         CBlob::drawBlob((CBlob *)v39);
       }
     }
@@ -58047,7 +60098,9 @@ bool __cdecl GenerateRandomMap(class IMapGeneratorHost * a1) {
   }
   if ( g_pPlayerData )
   {
-    for ( i = 0; i < (unsigned __int8)g_iNumPlayers; ++i )
+    for ( i = 0;
+          i < (unsigned __int8)g_iNumPlayers;
+          ++i )
     {
       if ( *(_DWORD *)(g_pPlayerData + 4 * i) )
       {
@@ -58086,49 +60139,53 @@ void __cdecl repairHeights(void) {
   int j; // [esp+8h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-8h]
 
-  for ( i = 1; i < g_iWorldSize; ++i )
+  for ( i = 1;
+        i < g_iWorldSize;
+        ++i )
   {
-    for ( j = 1; j < g_iWorldSize - 1; ++j )
+    for ( j = 1;
+          j < g_iWorldSize - 1;
+          ++j )
     {
       if ( *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * (i - 1) - 1)) >= (int)*(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * (i - 1))) )
+      {
         v0 = j + g_iWorldSize * (i - 1);
+      }
       else
+      {
         v0 = j + g_iWorldSize * (i - 1) - 1;
-      if ( *(unsigned __int8 *)(g_pMapElement + 4 * v0)
-         + 5
-         - *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) < 0 )
+      }
+      if ( *(unsigned __int8 *)(g_pMapElement + 4 * v0) + 5 - *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) < 0 )
       {
         *(_BYTE *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) = *(_BYTE *)(g_pMapElement + 4 * v0) + 5;
-        if ( *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) > (int)(unsigned __int8)g_uSnowLimit
-          && *(_BYTE *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) == 32 )
+        if ( *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) > (int)(unsigned __int8)g_uSnowLimit && *(_BYTE *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) == 32 )
         {
           *(_BYTE *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) = 0x80;
           *(_BYTE *)(g_pEditorLayer + 4 * (j + g_iWorldSize * i) + 3) = 0;
         }
-        else if ( *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) < (int)(unsigned __int8)g_uSnowLimit
-               && *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) == 128 )
+        else if ( *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) < (int)(unsigned __int8)g_uSnowLimit && *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) == 128 )
         {
           *(_BYTE *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) = 32;
         }
       }
       if ( *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * (i - 1) - 1)) <= (int)*(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * (i - 1))) )
+      {
         v1 = j + g_iWorldSize * (i - 1);
+      }
       else
+      {
         v1 = j + g_iWorldSize * (i - 1) - 1;
-      v2 = *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i))
-         - (*(unsigned __int8 *)(g_pMapElement + 4 * v1)
-          - 7);
+      }
+      v2 = *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) - (*(unsigned __int8 *)(g_pMapElement + 4 * v1) - 7);
       if ( v2 < 0 )
       {
         *(_BYTE *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) -= v2;
-        if ( *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) > (int)(unsigned __int8)g_uSnowLimit
-          && *(_BYTE *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) == 32 )
+        if ( *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) > (int)(unsigned __int8)g_uSnowLimit && *(_BYTE *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) == 32 )
         {
           *(_BYTE *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) = 0x80;
           *(_BYTE *)(g_pEditorLayer + 4 * (j + g_iWorldSize * i) + 3) = 0;
         }
-        else if ( *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) < (int)(unsigned __int8)g_uSnowLimit
-               && *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) == 128 )
+        else if ( *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i)) < (int)(unsigned __int8)g_uSnowLimit && *(unsigned __int8 *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) == 128 )
         {
           *(_BYTE *)(g_pMapElement + 4 * (j + g_iWorldSize * i) + 1) = 32;
         }
@@ -58146,9 +60203,13 @@ void __cdecl mirrorMapDiag(void) {
   int j; // [esp+0h] [ebp-8h]
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < g_iWorldSize; ++i )
+  for ( i = 0;
+        i < g_iWorldSize;
+        ++i )
   {
-    for ( j = 0; j < i; ++j )
+    for ( j = 0;
+          j < i;
+          ++j )
     {
       *(_DWORD *)(g_pMapElement + 4 * (i + g_iWorldSize * j)) = *(_DWORD *)(g_pMapElement + 4 * (j + g_iWorldSize * i));
       *(_DWORD *)(g_pEditorLayer + 4 * (i + g_iWorldSize * j)) = *(_DWORD *)(g_pEditorLayer + 4 * (j + g_iWorldSize * i));
@@ -58167,9 +60228,13 @@ void __cdecl mirrorMapOppDiag(void) {
   int j; // [esp+0h] [ebp-8h]
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < g_iWorldSize; ++i )
+  for ( i = 0;
+        i < g_iWorldSize;
+        ++i )
   {
-    for ( j = 0; j < g_iWorldSize - i - 1; ++j )
+    for ( j = 0;
+          j < g_iWorldSize - i - 1;
+          ++j )
     {
       *(_DWORD *)(g_pMapElement + 4 * (g_iWorldSize - i + g_iWorldSize * (g_iWorldSize - 1 - j) - 1)) = *(_DWORD *)(g_pMapElement + 4 * (j + g_iWorldSize * i));
       *(_DWORD *)(g_pEditorLayer + 4 * (g_iWorldSize - i + g_iWorldSize * (g_iWorldSize - 1 - j) - 1)) = *(_DWORD *)(g_pEditorLayer + 4 * (j + g_iWorldSize * i));
@@ -58191,17 +60256,15 @@ void __cdecl CreateBorder(int a1, int a2, int a3) {
 
   result = (*(int (__thiscall **)(int))(*(_DWORD *)g_pHost + 12))(g_pHost);
   v4 = result;
-  for ( i = 1; i < v4 - 1; ++i )
+  for ( i = 1;
+        i < v4 - 1;
+        ++i )
   {
-    for ( j = 1; j < v4 - 1; ++j )
+    for ( j = 1;
+          j < v4 - 1;
+          ++j )
     {
-      if ( GetGroundType(i, j) == a1
-        && (GetGroundType(i + 1, j) == a2
-         || GetGroundType(i - 1, j) == a2
-         || GetGroundType(i, j - 1) == a2
-         || GetGroundType(i, j + 1) == a2
-         || GetGroundType(i + 1, j + 1) == a2
-         || GetGroundType(i - 1, j - 1) == a2) )
+      if ( GetGroundType(i, j) == a1 && (GetGroundType(i + 1, j) == a2 || GetGroundType(i - 1, j) == a2 || GetGroundType(i, j - 1) == a2 || GetGroundType(i, j + 1) == a2 || GetGroundType(i + 1, j + 1) == a2 || GetGroundType(i - 1, j - 1) == a2) )
       {
         SetGroundType(i, j, a3);
       }
@@ -58226,59 +60289,87 @@ void __cdecl CreateSpeckledBorder(int a1, int a2, int a3) {
   int i; // [esp+1Ch] [ebp-8h]
   int j; // [esp+20h] [ebp-4h]
 
-  for ( i = 4; i < g_iWorldSize - 4; ++i )
+  for ( i = 4;
+        i < g_iWorldSize - 4;
+        ++i )
   {
-    for ( j = 4; j < g_iWorldSize - 4; ++j )
+    for ( j = 4;
+          j < g_iWorldSize - 4;
+          ++j )
     {
       if ( GetGroundType(i, j) == a1 )
       {
         v7 = CRandom16::Rand((CRandom16 *)g_pRand) % 4u + 1;
         if ( GetGroundType(i + 1, j) == a2 )
         {
-          for ( k = 0; k < v7; ++k )
+          for ( k = 0;
+                k < v7;
+                ++k )
           {
             if ( GetGroundType(i - k, j) == a1 )
+            {
               SetGroundType(i - k, j, a3);
+            }
           }
         }
         if ( GetGroundType(i - 1, j) == a2 )
         {
-          for ( m = 0; m < v7; ++m )
+          for ( m = 0;
+                m < v7;
+                ++m )
           {
             if ( GetGroundType(m + i, j) == a1 )
+            {
               SetGroundType(m + i, j, a3);
+            }
           }
         }
         if ( GetGroundType(i, j - 1) == a2 )
         {
-          for ( n = 0; n < v7; ++n )
+          for ( n = 0;
+                n < v7;
+                ++n )
           {
             if ( GetGroundType(i, n + j) == a1 )
+            {
               SetGroundType(i, n + j, a3);
+            }
           }
         }
         if ( GetGroundType(i, j + 1) == a2 )
         {
-          for ( ii = 0; ii < v7; ++ii )
+          for ( ii = 0;
+                ii < v7;
+                ++ii )
           {
             if ( GetGroundType(i, j - ii) == a1 )
+            {
               SetGroundType(i, j - ii, a3);
+            }
           }
         }
         if ( GetGroundType(i + 1, j + 1) == a2 )
         {
-          for ( jj = 0; jj < v7; ++jj )
+          for ( jj = 0;
+                jj < v7;
+                ++jj )
           {
             if ( GetGroundType(i - jj, j - jj) == a1 )
+            {
               SetGroundType(i - jj, j - jj, a3);
+            }
           }
         }
         if ( GetGroundType(i - 1, j - 1) == a2 )
         {
-          for ( kk = 0; kk < v7; ++kk )
+          for ( kk = 0;
+                kk < v7;
+                ++kk )
           {
             if ( GetGroundType(kk + i, kk + j) == a1 )
+            {
               SetGroundType(kk + i, kk + j, a3);
+            }
           }
         }
       }
@@ -58294,12 +60385,18 @@ void __cdecl ChangeBorder(int a1, int a2) {
   int i; // [esp+0h] [ebp-8h]
   int j; // [esp+4h] [ebp-4h]
 
-  for ( i = 1; i < g_iWorldSize - 1; ++i )
+  for ( i = 1;
+        i < g_iWorldSize - 1;
+        ++i )
   {
-    for ( j = 1; j < g_iWorldSize - 1; ++j )
+    for ( j = 1;
+          j < g_iWorldSize - 1;
+          ++j )
     {
       if ( GetGroundType(i, j) == a1 )
+      {
         SetGroundType(i, j, a2);
+      }
     }
   }
 }
@@ -58330,11 +60427,17 @@ void __cdecl SetGroundType(int a1, int a2, int a3) {
 int __cdecl ValidateMapIndex(int a1, int a2) {
   
   if ( a1 < 0 )
+  {
     return 0;
+  }
   if ( a1 >= g_iWorldSize )
+  {
     return 0;
+  }
   if ( a2 >= 0 )
+  {
     return a2 < g_iWorldSize;
+  }
   return 0;
 }
 
@@ -58456,14 +60559,18 @@ void __cdecl MakeRiverMouth(int a1, int a2) {
   result = 4;
   v9 = FieldForRings[5];
   v29 = 0;
-  for ( i = 0; i < v9; ++i )
+  for ( i = 0;
+        i < v9;
+        ++i )
   {
     v19 = a1 + CHexIndices::GetIndex((CHexIndices *)&unk_4727A28);
     v18 = a2 + CHexIndices::GetIndex((CHexIndices *)&unk_4727A28);
     if ( ValidateMapIndex(v19, v18) )
     {
       if ( *(_BYTE *)(g_pMapElement + 4 * (v19 + g_iWorldSize * v18) + 1) == 99 )
+      {
         v29 = 1;
+      }
       if ( v29 )
       {
         if ( CheckForRiverNeighbours(v19, v18, v19 + g_iWorldSize * v18) == 1 )
@@ -58479,14 +60586,20 @@ void __cdecl MakeRiverMouth(int a1, int a2) {
     result = i + 1;
   }
   if ( !v29 )
+  {
     return result;
+  }
   CHexIndices::SetFirst((CHexIndices *)&unk_4727A28);
   v28 = 0;
-  for ( j = 0; ; ++j )
+  for ( j = 0;
+        ;
+        ++j )
   {
     result = j;
     if ( j >= v9 )
+    {
       break;
+    }
     v13 = a1 + CHexIndices::GetIndex((CHexIndices *)&unk_4727A28);
     v12 = a2 + CHexIndices::GetIndex((CHexIndices *)&unk_4727A28);
     if ( ValidateMapIndex(v13, v12) )
@@ -58502,14 +60615,20 @@ void __cdecl MakeRiverMouth(int a1, int a2) {
     }
   }
   if ( !v28 )
+  {
     return result;
+  }
   Number = v16 - v7;
   v22 = v17 - v6;
   v3 = j__abs(v16 - v7);
   if ( v3 <= j__abs(v17 - v6) )
+  {
     v8 = j__abs(v22);
+  }
   else
+  {
     v8 = j__abs(Number);
+  }
   if ( v8 == j__abs(Number) )
   {
     v15 = v17;
@@ -58525,18 +60644,28 @@ void __cdecl MakeRiverMouth(int a1, int a2) {
     {
       result = j__abs(Number);
       if ( v21 > result )
+      {
         break;
+      }
       *(_BYTE *)(g_pMapElement + 4 * (v26 + g_iWorldSize * v15) + 1) = 0;
       if ( v22 < 0 )
+      {
         v15 = (int)(float)((float)((float)v17 + (float)((float)v21 * v11)) + 0.5);
+      }
       else
+      {
         v15 = (int)(float)((float)((float)v17 - (float)((float)v21 * v11)) + 0.5);
+      }
       ++v21;
       *(_BYTE *)(g_pMapElement + 4 * (v26 + g_iWorldSize * v15) + 1) = 0;
       if ( Number >= 0 )
+      {
         --v26;
+      }
       else
+      {
         ++v26;
+      }
     }
   }
   else
@@ -58554,18 +60683,28 @@ void __cdecl MakeRiverMouth(int a1, int a2) {
     {
       result = j__abs(v22);
       if ( v20 > result )
+      {
         break;
+      }
       *(_BYTE *)(g_pMapElement + 4 * (v14 + g_iWorldSize * v27) + 1) = 0;
       if ( Number < 0 )
+      {
         v14 = (int)(float)((float)((float)v16 + (float)((float)v20 * v10)) + 0.5);
+      }
       else
+      {
         v14 = (int)(float)((float)((float)v16 - (float)((float)v20 * v10)) + 0.5);
+      }
       ++v20;
       *(_BYTE *)(g_pMapElement + 4 * (v14 + g_iWorldSize * v27) + 1) = 0;
       if ( v22 >= 0 )
+      {
         --v27;
+      }
       else
+      {
         ++v27;
+      }
     }
   }
   return result;
@@ -58589,9 +60728,7 @@ int __cdecl CheckForRiverNeighbours(int a1, int a2, int a3) {
   {
     if ( ValidateXMapIndex(a1 - 1) )
     {
-      if ( (*(unsigned __int8 *)(g_pMapElement + 4 * (a3 - 1 - g_iWorldSize) + 1) < 0x60u
-         || *(unsigned __int8 *)(g_pMapElement + 4 * (a3 - 1 - g_iWorldSize) + 1) > 0x63u)
-        && *(_BYTE *)(g_pMapElement + 4 * (a3 - 1 - g_iWorldSize) + 1) )
+      if ( (*(unsigned __int8 *)(g_pMapElement + 4 * (a3 - 1 - g_iWorldSize) + 1) < 0x60u || *(unsigned __int8 *)(g_pMapElement + 4 * (a3 - 1 - g_iWorldSize) + 1) > 0x63u) && *(_BYTE *)(g_pMapElement + 4 * (a3 - 1 - g_iWorldSize) + 1) )
       {
         v3 = j__abs(0);
       }
@@ -58603,9 +60740,7 @@ int __cdecl CheckForRiverNeighbours(int a1, int a2, int a3) {
     }
     if ( ValidateXMapIndex(a1) )
     {
-      if ( (*(unsigned __int8 *)(g_pMapElement + 4 * (a3 - g_iWorldSize) + 1) < 0x60u
-         || *(unsigned __int8 *)(g_pMapElement + 4 * (a3 - g_iWorldSize) + 1) > 0x63u)
-        && *(_BYTE *)(g_pMapElement + 4 * (a3 - g_iWorldSize) + 1) )
+      if ( (*(unsigned __int8 *)(g_pMapElement + 4 * (a3 - g_iWorldSize) + 1) < 0x60u || *(unsigned __int8 *)(g_pMapElement + 4 * (a3 - g_iWorldSize) + 1) > 0x63u) && *(_BYTE *)(g_pMapElement + 4 * (a3 - g_iWorldSize) + 1) )
       {
         v4 = j__abs(0);
       }
@@ -58618,9 +60753,7 @@ int __cdecl CheckForRiverNeighbours(int a1, int a2, int a3) {
   }
   if ( ValidateYMapIndex(a2) && ValidateXMapIndex(a1 + 1) )
   {
-    if ( (*(unsigned __int8 *)(g_pMapElement + 4 * a3 + 5) < 0x60u
-       || *(unsigned __int8 *)(g_pMapElement + 4 * a3 + 5) > 0x63u)
-      && *(_BYTE *)(g_pMapElement + 4 * a3 + 5) )
+    if ( (*(unsigned __int8 *)(g_pMapElement + 4 * a3 + 5) < 0x60u || *(unsigned __int8 *)(g_pMapElement + 4 * a3 + 5) > 0x63u) && *(_BYTE *)(g_pMapElement + 4 * a3 + 5) )
     {
       v5 = j__abs(0);
     }
@@ -58634,9 +60767,7 @@ int __cdecl CheckForRiverNeighbours(int a1, int a2, int a3) {
   {
     if ( ValidateXMapIndex(a1 + 1) )
     {
-      if ( (*(unsigned __int8 *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 5) < 0x60u
-         || *(unsigned __int8 *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 5) > 0x63u)
-        && *(_BYTE *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 5) )
+      if ( (*(unsigned __int8 *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 5) < 0x60u || *(unsigned __int8 *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 5) > 0x63u) && *(_BYTE *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 5) )
       {
         v6 = j__abs(0);
       }
@@ -58648,9 +60779,7 @@ int __cdecl CheckForRiverNeighbours(int a1, int a2, int a3) {
     }
     if ( ValidateXMapIndex(a1) )
     {
-      if ( (*(unsigned __int8 *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 1) < 0x60u
-         || *(unsigned __int8 *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 1) > 0x63u)
-        && *(_BYTE *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 1) )
+      if ( (*(unsigned __int8 *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 1) < 0x60u || *(unsigned __int8 *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 1) > 0x63u) && *(_BYTE *)(g_pMapElement + 4 * (g_iWorldSize + a3) + 1) )
       {
         v7 = j__abs(0);
       }
@@ -58662,10 +60791,10 @@ int __cdecl CheckForRiverNeighbours(int a1, int a2, int a3) {
     }
   }
   if ( !ValidateYMapIndex(a2) || !ValidateXMapIndex(a1 - 1) )
+  {
     return v10;
-  if ( (*(unsigned __int8 *)(g_pMapElement + 4 * a3 - 3) < 0x60u
-     || *(unsigned __int8 *)(g_pMapElement + 4 * a3 - 3) > 0x63u)
-    && *(_BYTE *)(g_pMapElement + 4 * a3 - 3) )
+  }
+  if ( (*(unsigned __int8 *)(g_pMapElement + 4 * a3 - 3) < 0x60u || *(unsigned __int8 *)(g_pMapElement + 4 * a3 - 3) > 0x63u) && *(_BYTE *)(g_pMapElement + 4 * a3 - 3) )
   {
     v8 = j__abs(0);
   }
@@ -58710,12 +60839,18 @@ class IRTComp * __cdecl GetLibInstance(void) {
   CRTComp *C; // [esp+Ch] [ebp-10h]
 
   if ( pTheRTComp )
+  {
     return pTheRTComp;
+  }
   C = (CRTComp *)operator new(0x50u);
   if ( C )
+  {
     v1 = CRTComp::CRTComp(C);
+  }
   else
+  {
     v1 = 0;
+  }
   pTheRTComp = (int)v1;
   return pTheRTComp;
 }
@@ -58734,7 +60869,9 @@ unsigned int __cdecl GetSoundInterfaceVersion(void) {
 void __stdcall PlaylistCallback(struct _STREAM * a1) {
   
   if ( g_pcSoundSystem )
+  {
     CSoundSystem::PlaylistTitleEnded((CSoundSystem *)g_pcSoundSystem, a1);
+  }
 }
 
 
@@ -58746,7 +60883,9 @@ void __stdcall PlaylistCallback(struct _STREAM * a1) {
 int __stdcall SoundEnumCallback(struct _GUID * a1, char const * a2, char const * a3, void * a4) {
   
   if ( g_pcSoundSystem )
+  {
     CSoundSystem::AddSoundCard((CSoundSystem *)g_pcSoundSystem, a1, a2);
+  }
   return 1;
 }
 
@@ -58756,7 +60895,9 @@ int __stdcall SoundEnumCallback(struct _GUID * a1, char const * a2, char const *
 void __cdecl _Atexit(void (__cdecl*)(void) Ptr) {
   
   if ( !dword_3E519B0 )
+  {
     j__abort();
+  }
   --dword_3E519B0;
   dword_47313F0[dword_3E519B0] = (int)EncodePointer(Ptr);
 }
@@ -58772,11 +60913,15 @@ void * __cdecl operator new(unsigned int Size) {
   {
     v2 = j__malloc(Size);
     if ( v2 )
+    {
       break;
+    }
     if ( !j___callnewh(Size) )
     {
       if ( Size == -1 )
+      {
         __scrt_throw_std_bad_array_new_length();
+      }
       __scrt_throw_std_bad_alloc();
     }
   }
@@ -58806,7 +60951,9 @@ void __stdcall __ArrayUnwind(void * a1, unsigned int a2, unsigned int a3, void (
   
   int i; // [esp+14h] [ebp-1Ch]
 
-  for ( i = 0; i != a3; ++i )
+  for ( i = 0;
+        i != a3;
+        ++i )
   {
     a1 -= a2;
     a4(a1);
@@ -58854,18 +61001,7 @@ void __cdecl _RTC_AllocaFailure(void * a1, struct _RTC_ALLOCA_NODE * a2, int a3)
   {
     if ( a2 )
     {
-      j__sprintf_s(
-        Buffer,
-        0xF4u,
-        "%s%s%p%s%zd%s%d%s",
-        "Stack area around _alloca memory reserved by this function is corrupted",
-        "\nAddress: 0x",
-        &a2[1],
-        "\nSize: ",
-        a2->allocaSize - 36,
-        "\nAllocation number within this function: ",
-        a3,
-        "\nData: <");
+      j__sprintf_s(Buffer, 0xF4u, "%s%s%p%s%zd%s%d%s", "Stack area around _alloca memory reserved by this function is corrupted", "\nAddress: 0x", &a2[1], "\nSize: ", a2->allocaSize - 36, "\nAllocation number within this function: ", a3, "\nData: <");
       unknown_libname_8812((int)v8, v7, (int)&a2[1], a2->allocaSize - 36);
       v5 = 244 - _strlen_priv(Buffer);
       v4 = _strlen_priv(Buffer);
@@ -58894,7 +61030,9 @@ void __cdecl _RTC_Failure(void * a1, int a2) {
   {
     v2 = *(&RTC_ErrorLevels + a2);
     if ( v2 != -1 )
+    {
       failwithmessage(a1, v2, a2, (&lpMultiByteStr)[a2]);
+    }
   }
 }
 
@@ -58928,12 +61066,16 @@ void __cdecl _RTC_StackFailure(void * a1, char const * a2) {
       v4 = strlen(a2) + 1;
       v5 = (char *)&v11 + 3;
       while ( *++v5 )
+      {
         ;
+      }
       qmemcpy(v5, a2, v4);
       v7 = strlen("' was corrupted.") + 1;
       v8 = (char *)&v11 + 3;
       while ( *++v8 )
+      {
         ;
+      }
       p_MultiByteStr = &MultiByteStr;
       qmemcpy(v8, "' was corrupted.", v7);
     }
@@ -58968,11 +61110,15 @@ void * __cdecl operator new(unsigned int Size, int a2, char const * a3, int a4) 
   {
     v5 = j___malloc_dbg(Size, a2, a3, a4);
     if ( v5 )
+    {
       break;
+    }
     if ( !j___callnewh(Size) )
     {
       if ( Size == -1 )
+      {
         __scrt_throw_std_bad_array_new_length();
+      }
       __scrt_throw_std_bad_alloc();
     }
   }
@@ -59056,17 +61202,27 @@ int __cdecl _RTC_GetSrcLine(unsigned char * a1, wchar_t * a2, unsigned long a3, 
   *a4 = 0;
   *a2 = 0;
   if ( !VirtualQuery(a1 - 1, &Buffer, 0x1Cu) )
+  {
     return 0;
+  }
   if ( !j____vcrt_GetModuleFileNameW((HMODULE)Buffer.AllocationBase, lpFilename, nSize) )
+  {
     return 0;
+  }
   if ( *(_WORD *)Buffer.AllocationBase != 23117 )
+  {
     return 0;
+  }
   v7 = *((_DWORD *)Buffer.AllocationBase + 15);
   if ( v7 <= 0 )
+  {
     return 0;
+  }
   v8 = (char *)Buffer.AllocationBase + v7;
   if ( *(_DWORD *)((char *)Buffer.AllocationBase + v7) != 17744 )
+  {
     return 0;
+  }
   v9 = (char *)(a1 - 1) - (char *)Buffer.AllocationBase;
   v10 = *((unsigned __int16 *)v8 + 3);
   v11 = 0;
@@ -59081,7 +61237,9 @@ int __cdecl _RTC_GetSrcLine(unsigned char * a1, wchar_t * a2, unsigned long a3, 
       {
         v11 = v9 - *v14;
         if ( v9 < *(v14 - 1) )
+        {
           break;
+        }
       }
       ++v13;
       v14 += 10;
@@ -59089,7 +61247,9 @@ int __cdecl _RTC_GetSrcLine(unsigned char * a1, wchar_t * a2, unsigned long a3, 
     while ( v13 < v10 );
   }
   if ( v13 == v10 )
+  {
     return 0;
+  }
   v37 = (unsigned int *)(v13 + 1);
   if ( byte_4731C1D )
   {
@@ -59098,39 +61258,26 @@ int __cdecl _RTC_GetSrcLine(unsigned char * a1, wchar_t * a2, unsigned long a3, 
   else
   {
     if ( dword_4731C18 )
+    {
       return 0;
+    }
     PdbDll = GetPdbDll();
     dword_4731C18 = (int)PdbDll;
     if ( !PdbDll )
+    {
       return 0;
+    }
     byte_4731C1D = 1;
   }
   PDBOpenValidate5 = GetProcAddress(PdbDll, "PDBOpenValidate5");
-  if ( !PDBOpenValidate5
-    || !((int (__cdecl *)(LPWSTR, _DWORD, _DWORD, _DWORD, char *, _DWORD, _DWORD, _DWORD **))PDBOpenValidate5)(
-          lpFilename,
-          0,
-          0,
-          0,
-          v28,
-          0,
-          0,
-          &v34) )
+  if ( !PDBOpenValidate5 || !((int (__cdecl *)(LPWSTR, _DWORD, _DWORD, _DWORD, char *, _DWORD, _DWORD, _DWORD **))PDBOpenValidate5)(lpFilename, 0, 0, 0, v28, 0, 0, &v34) )
   {
     return 0;
   }
   v31 = 0;
-  if ( (_UNKNOWN *)(*(int (__thiscall **)(_DWORD *))*v34)(v34) == (_UNKNOWN *)((char *)&loc_1329140 + 1)
-    && (*(int (__thiscall **)(_DWORD *, _DWORD, void *, int *))(*v34 + 28))(v34, 0, &string__107, &v32) )
+  if ( (_UNKNOWN *)(*(int (__thiscall **)(_DWORD *))*v34)(v34) == (_UNKNOWN *)((char *)&loc_1329140 + 1) && (*(int (__thiscall **)(_DWORD *, _DWORD, void *, int *))(*v34 + 28))(v34, 0, &string__107, &v32) )
   {
-    if ( (*(int (__thiscall **)(int, unsigned int *, unsigned int, int *, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v32 + 32))(
-           v32,
-           v37,
-           v11,
-           &v35,
-           0,
-           0,
-           0) )
+    if ( (*(int (__thiscall **)(int, unsigned int *, unsigned int, int *, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v32 + 32))(v32, v37, v11, &v35, 0, 0, 0) )
     {
       v38 = 0;
       if ( (*(unsigned __int8 (__thiscall **)(int, int *))(*(_DWORD *)v35 + 104))(v35, &v38) && v38 )
@@ -59138,59 +61285,50 @@ int __cdecl _RTC_GetSrcLine(unsigned char * a1, wchar_t * a2, unsigned long a3, 
         v17 = 0;
         if ( (*(int (__thiscall **)(int))(*(_DWORD *)v38 + 8))(v38) )
         {
-          while ( (*(unsigned __int8 (__thiscall **)(int, _DWORD, unsigned int *, unsigned __int16 *, int *, unsigned int *, _DWORD))(*(_DWORD *)v38 + 12))(
-                    v38,
-                    0,
-                    &v33,
-                    &v39,
-                    &v30,
-                    &v36,
-                    0) )
+          while ( (*(unsigned __int8 (__thiscall **)(int, _DWORD, unsigned int *, unsigned __int16 *, int *, unsigned int *, _DWORD))(*(_DWORD *)v38 + 12))(v38, 0, &v33, &v39, &v30, &v36, 0) )
           {
             if ( (unsigned int *)v39 == v37 && v33 <= v11 && v11 < v33 + v30 )
             {
               if ( !v36 )
+              {
                 break;
+              }
               if ( v36 >= 0x1FFFFFFF )
+              {
                 break;
+              }
               v26 = 8 * v36;
               ProcessHeap = GetProcessHeap();
               v20 = (unsigned int *)HeapAlloc(ProcessHeap, 0, v26);
               v37 = v20;
               if ( !v20 )
+              {
                 break;
-              v21 = (*(int (__thiscall **)(int, int *, _DWORD, _DWORD, _DWORD, unsigned int *, unsigned int *))(*(_DWORD *)v38 + 12))(
-                      v38,
-                      &v29,
-                      0,
-                      0,
-                      0,
-                      &v36,
-                      v20);
+              }
+              v21 = (*(int (__thiscall **)(int, int *, _DWORD, _DWORD, _DWORD, unsigned int *, unsigned int *))(*(_DWORD *)v38 + 12))(v38, &v29, 0, 0, 0, &v36, v20);
               v17 = v37;
               if ( v21 )
               {
                 v22 = v11 - v33;
                 if ( v22 >= *v37 )
                 {
-                  for ( i = 1; i < v36; ++i )
+                  for ( i = 1;
+                        i < v36;
+                        ++i )
                   {
                     if ( v22 < v37[2 * i] )
+                    {
                       break;
+                    }
                   }
                   v24 = v35;
                   *a4 = ((unsigned int)&dword_F29144[220078] + 3) & v37[2 * i - 1];
-                  v25 = (*(int (__thiscall **)(int, int, wchar_t *, char *, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v24 + 112))(
-                          v24,
-                          v29,
-                          a2,
-                          &a3,
-                          0,
-                          0,
-                          0);
+                  v25 = (*(int (__thiscall **)(int, int, wchar_t *, char *, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v24 + 112))(v24, v29, a2, &a3, 0, 0, 0);
                   v17 = v37;
                   if ( v25 )
+                  {
                     v31 = 1;
+                  }
                 }
               }
               goto _RTC_GetSrcLine___$DONE5$74;
@@ -59248,12 +61386,11 @@ long __cdecl _com_dispatch_method(struct IDispatch * a1, long a2, unsigned short
   va_copy((va_list)&Target[5], va);
   Target[1] = _com_invoke_helper(a1, a2, a3, a4, a5, String, (int)va, (int)&Target[3]);
   if ( (Target[1] & 0x80000000) == 0 )
+  {
     return Target[1];
+  }
   Target[0] = (uintptr_t)_errorPfn;
-  ((void (__thiscall *)(void (__stdcall __noreturn *)(struct _GUID *, struct IErrorInfo *), uintptr_t, uintptr_t))_errorPfn)(
-    _errorPfn,
-    Target[1],
-    Target[3]);
+  ((void (__thiscall *)(void (__stdcall __noreturn *)(struct _GUID *, struct IErrorInfo *), uintptr_t, uintptr_t))_errorPfn)(_errorPfn, Target[1], Target[3]);
   return Target[1];
 }
 
@@ -59268,9 +61405,7 @@ long __cdecl _com_dispatch_method(struct IDispatch * a1, long a2, unsigned short
 // Decompiled from void __stdcall __noreturn _com_issue_error(int a1)
 void __stdcall _com_issue_error(long a1) {
   
-  ((void (__thiscall *)(void (__stdcall __noreturn *)(struct _GUID *, struct IErrorInfo *), int))_errorPfn)(
-    _errorPfn,
-    a1);
+  ((void (__thiscall *)(void (__stdcall __noreturn *)(struct _GUID *, struct IErrorInfo *), int))_errorPfn)(_errorPfn, a1);
 }
 
 
@@ -59291,7 +61426,9 @@ char * __stdcall _com_util::ConvertBSTRToString(wchar_t * lpWideCharStr) {
   memset(&v6[4], 204, 24);
   v6[10] = v6;
   if ( !lpWideCharStr )
+  {
     return 0;
+  }
   v6[9] = wcslen(lpWideCharStr) + 1;
   v6[8] = WideCharToMultiByte(0, 0, lpWideCharStr, v6[9], 0, 0, 0, 0);
   if ( !v6[8] )
@@ -59306,9 +61443,13 @@ char * __stdcall _com_util::ConvertBSTRToString(wchar_t * lpWideCharStr) {
   v6[7] = v6[4];
   v7 = -1;
   if ( !v6[4] )
+  {
     _com_issue_error(-2147024882);
+  }
   if ( WideCharToMultiByte(0, 0, lpWideCharStr, v6[9], (LPSTR)v6[7], v6[8], 0, 0) )
+  {
     return v6[7];
+  }
   v6[5] = v6[7];
   operator delete[]((void *)v6[7]);
   v6[7] = 0;
@@ -59327,9 +61468,13 @@ char * __stdcall _com_util::ConvertBSTRToString(wchar_t * lpWideCharStr) {
 long __stdcall HRESULT_FROM_WIN32(unsigned long x) {
   
   if ( (int)x > 0 )
+  {
     return (unsigned __int16)x | 0x80070000;
+  }
   else
+  {
     return x;
+  }
 }
 
 
@@ -59359,7 +61504,9 @@ long __cdecl _com_dispatch_raw_method(struct IDispatch * a1, long a2, unsigned s
   va_copy((va_list)&perrinfo[2], va);
   v7 = _com_invoke_helper(a1, a2, a3, a4, a5, String, (int)va, (int)perrinfo);
   if ( v7 < 0 )
+  {
     SetErrorInfo(0, perrinfo[0]);
+  }
   return v7;
 }
 
@@ -59371,7 +61518,7 @@ long __cdecl _com_dispatch_raw_method(struct IDispatch * a1, long a2, unsigned s
 // [Decompilation failed for long __cdecl _com_dispatch_raw_propput(struct IDispatch *,long,unsigned short,...)]
 
 // address=[0x301b7e0]
-// Decompiled from int __cdecl _com_invoke_helper(  int a1,  int a2,  unsigned __int16 a3,  VARTYPE a4,  SHORT *a5,  wchar_t *String,  int a7,  struct IErrorInfo **a8)
+// Decompiled from int __cdecl _com_invoke_helper(int a1, int a2, unsigned __int16 a3, VARTYPE a4, SHORT *a5, wchar_t *String, int a7, struct IErrorInfo **a8)
 long __cdecl _com_invoke_helper(struct IDispatch * a1, long a2, unsigned short a3, unsigned short a4, void * a5, wchar_t const * String, char * a7, struct IErrorInfo * * a8) {
   
   int result; // eax
@@ -59419,9 +61566,13 @@ long __cdecl _com_invoke_helper(struct IDispatch * a1, long a2, unsigned short a
 
   PAllocaInfoList = 0;
   if ( !a1 )
+  {
     return -2147467261;
+  }
   if ( a8 )
+  {
     *a8 = 0;
+  }
   v46 = 0;
   v47 = 0;
   v48 = 0;
@@ -59435,7 +61586,9 @@ long __cdecl _com_invoke_helper(struct IDispatch * a1, long a2, unsigned short a
   if ( (a3 & 0xC) != 0 )
   {
     if ( !v48 )
+    {
       return -2147024809;
+    }
     v49 = 1;
     v47 = &v44;
   }
@@ -59549,7 +61702,9 @@ LABEL_42:
           default:
 _com_invoke_helper___def_341BA01:
             if ( (*(_WORD *)v41 & 0x2000) == 0 )
+            {
               return -2147024809;
+            }
             a7 += 4;
             *((_DWORD *)v41 + 2) = *(_DWORD *)(a7 - 4);
             break;
@@ -59608,9 +61763,13 @@ _com_invoke_helper___def_341BA01:
             case 9:
               a7 += 4;
               if ( *(_WORD *)(a7 - 4) )
+              {
                 v28 = -1;
+              }
               else
+              {
                 v28 = 0;
+              }
               *((_WORD *)v41 + 4) = v28;
               goto LABEL_67;
             case 10:
@@ -59693,14 +61852,18 @@ LABEL_67:
       v27 = (*v42 & 0x4000) != 0 ? (char *)*((_DWORD *)v41 + 2) : v41;
       v39 = v27;
       if ( *(_WORD *)v27 != 10 || *((_DWORD *)v39 + 2) != -2147352572 )
+      {
         break;
+      }
       ++v40;
       v41 += 16;
       --v42;
     }
     if ( v40 )
     {
-      for ( i = 0; i < v49; ++i )
+      for ( i = 0;
+            i < v49;
+            ++i )
       {
         v20 = (char *)v43 + 16 * i;
         v21 = (char *)v43 + 16 * v40 + 16 * i;
@@ -59715,34 +61878,34 @@ LABEL_67:
   }
   VariantInit(&pvarg);
   if ( a4 )
+  {
     p_pvarg = &pvarg;
+  }
   else
+  {
     p_pvarg = 0;
+  }
   v37 = p_pvarg;
   memset(&v35, 0, sizeof(v35));
   v34[0] = -1;
   Target = *(_DWORD *)(*(_DWORD *)a1 + 24);
-  v33 = ((int (__thiscall *)(uintptr_t, int, int, GUID *, _DWORD, _DWORD, char **, VARIANTARG *, struct tagEXCEPINFO *, int *))Target)(
-          Target,
-          a1,
-          a2,
-          &_GUID_00000000_0000_0000_0000_000000000000,
-          0,
-          a3,
-          &v46,
-          p_pvarg,
-          &v35,
-          v34);
+  v33 = ((int (__thiscall *)(uintptr_t, int, int, GUID *, _DWORD, _DWORD, char **, VARIANTARG *, struct tagEXCEPINFO *, int *))Target)(Target, a1, a2, &_GUID_00000000_0000_0000_0000_000000000000, 0, a3, &v46, p_pvarg, &v35, v34);
   if ( v33 < 0 )
   {
     VariantClear(&pvarg);
     if ( v33 == -2147352567 )
+    {
       return _com_handle_excepinfo(&v35, a8);
+    }
     else
+    {
       return v33;
+    }
   }
   if ( !a4 || !a5 )
+  {
     return v33;
+  }
   if ( a4 != 12 && a4 != pvarg.vt )
   {
     v33 = VariantChangeType(&pvarg, &pvarg, 0, a4);
@@ -59923,55 +62086,52 @@ long __stdcall _com_handle_excepinfo(struct tagEXCEPINFO & a1, struct IErrorInfo
   ICreateErrorInfo *pperrinfo; // [esp+30h] [ebp-8h] BYREF
 
   if ( a1->pfnDeferredFillIn )
-    ((void (__thiscall *)(HRESULT (__stdcall *)(struct tagEXCEPINFO *), struct tagEXCEPINFO *))a1->pfnDeferredFillIn)(
-      a1->pfnDeferredFillIn,
-      a1);
+  {
+    ((void (__thiscall *)(HRESULT (__stdcall *)(struct tagEXCEPINFO *), struct tagEXCEPINFO *))a1->pfnDeferredFillIn)(a1->pfnDeferredFillIn, a1);
+  }
   pperrinfo = 0;
   if ( a2 && CreateErrorInfo(&pperrinfo) >= 0 )
   {
-    ((void (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, const GUID *const), ICreateErrorInfo *, GUID *))pperrinfo->lpVtbl->SetGUID)(
-      pperrinfo->lpVtbl->SetGUID,
-      pperrinfo,
-      &_GUID_00020400_0000_0000_c000_000000000046);
+    ((void (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, const GUID *const), ICreateErrorInfo *, GUID *))pperrinfo->lpVtbl->SetGUID)(pperrinfo->lpVtbl->SetGUID, pperrinfo, &_GUID_00020400_0000_0000_c000_000000000046);
     if ( a1->bstrSource )
-      ((void (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, LPOLESTR), ICreateErrorInfo *, BSTR))pperrinfo->lpVtbl->SetSource)(
-        pperrinfo->lpVtbl->SetSource,
-        pperrinfo,
-        a1->bstrSource);
+    {
+      ((void (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, LPOLESTR), ICreateErrorInfo *, BSTR))pperrinfo->lpVtbl->SetSource)(pperrinfo->lpVtbl->SetSource, pperrinfo, a1->bstrSource);
+    }
     if ( a1->bstrDescription )
-      ((void (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, LPOLESTR), ICreateErrorInfo *, BSTR))pperrinfo->lpVtbl->SetDescription)(
-        pperrinfo->lpVtbl->SetDescription,
-        pperrinfo,
-        a1->bstrDescription);
+    {
+      ((void (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, LPOLESTR), ICreateErrorInfo *, BSTR))pperrinfo->lpVtbl->SetDescription)(pperrinfo->lpVtbl->SetDescription, pperrinfo, a1->bstrDescription);
+    }
     if ( a1->bstrHelpFile )
-      ((void (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, LPOLESTR), ICreateErrorInfo *, BSTR))pperrinfo->lpVtbl->SetHelpFile)(
-        pperrinfo->lpVtbl->SetHelpFile,
-        pperrinfo,
-        a1->bstrHelpFile);
-    ((void (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, DWORD), ICreateErrorInfo *, DWORD))pperrinfo->lpVtbl->SetHelpContext)(
-      pperrinfo->lpVtbl->SetHelpContext,
-      pperrinfo,
-      a1->dwHelpContext);
-    if ( ((int (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, const IID *const, void **), ICreateErrorInfo *, GUID *, struct IErrorInfo **))pperrinfo->lpVtbl->QueryInterface)(
-           pperrinfo->lpVtbl->QueryInterface,
-           pperrinfo,
-           &_GUID_1cf2b120_547d_101b_8e65_08002b2bd119,
-           a2) < 0 )
+    {
+      ((void (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, LPOLESTR), ICreateErrorInfo *, BSTR))pperrinfo->lpVtbl->SetHelpFile)(pperrinfo->lpVtbl->SetHelpFile, pperrinfo, a1->bstrHelpFile);
+    }
+    ((void (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, DWORD), ICreateErrorInfo *, DWORD))pperrinfo->lpVtbl->SetHelpContext)(pperrinfo->lpVtbl->SetHelpContext, pperrinfo, a1->dwHelpContext);
+    if ( ((int (__thiscall *)(HRESULT (__stdcall *)(ICreateErrorInfo *, const IID *const, void **), ICreateErrorInfo *, GUID *, struct IErrorInfo **))pperrinfo->lpVtbl->QueryInterface)(pperrinfo->lpVtbl->QueryInterface, pperrinfo, &_GUID_1cf2b120_547d_101b_8e65_08002b2bd119, a2) < 0 )
+    {
       *a2 = 0;
-    ((void (__thiscall *)(ULONG (__stdcall *)(ICreateErrorInfo *), ICreateErrorInfo *))pperrinfo->lpVtbl->Release)(
-      pperrinfo->lpVtbl->Release,
-      pperrinfo);
+    }
+    ((void (__thiscall *)(ULONG (__stdcall *)(ICreateErrorInfo *), ICreateErrorInfo *))pperrinfo->lpVtbl->Release)(pperrinfo->lpVtbl->Release, pperrinfo);
   }
   if ( a1->bstrSource )
+  {
     SysFreeString(a1->bstrSource);
+  }
   if ( a1->bstrDescription )
+  {
     SysFreeString(a1->bstrDescription);
+  }
   if ( a1->bstrHelpFile )
+  {
     SysFreeString(a1->bstrHelpFile);
+  }
   if ( a1->wCode )
+  {
     return _com_error::WCodeToHRESULT(a1->wCode);
+  }
   else
+  {
     return a1->scode;
+  }
 }
 
 
@@ -60032,7 +62192,7 @@ void __cdecl __vcrt_va_start_verify_argument_type<__int64>(void) {
 
 
 // address=[0x3078a90]
-// Decompiled from void *__cdecl _CallCatchBlock2(  struct EHRegistrationNode *a1,  const struct _s_FuncInfo *a2,  void *a3,  int a4,  unsigned int a5)
+// Decompiled from void *__cdecl _CallCatchBlock2(struct EHRegistrationNode *a1, const struct _s_FuncInfo *a2, void *a3, int a4, unsigned int a5)
 void * __cdecl _CallCatchBlock2(struct EHRegistrationNode * a1, struct _s_FuncInfo const * a2, void * a3, int a4, unsigned long a5) {
   
   return (void *)_CallSettingFrame(a3, a1, a5);
@@ -60040,7 +62200,7 @@ void * __cdecl _CallCatchBlock2(struct EHRegistrationNode * a1, struct _s_FuncIn
 
 
 // address=[0x3078b20]
-// Decompiled from int __cdecl _CallSETranslator(  struct EHExceptionRecord *a1,  struct EHRegistrationNode *a2,  void *a3,  void *a4,  const struct _s_FuncInfo *a5,  int a6,  struct EHRegistrationNode *a7)
+// Decompiled from int __cdecl _CallSETranslator(struct EHExceptionRecord *a1, struct EHRegistrationNode *a2, void *a3, void *a4, const struct _s_FuncInfo *a5, int a6, struct EHRegistrationNode *a7)
 int __cdecl _CallSETranslator(struct EHExceptionRecord * a1, struct EHRegistrationNode * a2, void * a3, void * a4, struct _s_FuncInfo const * a5, int a6, struct EHRegistrationNode * a7) {
   
   int v8; // [esp+0h] [ebp-3Ch] BYREF
@@ -60081,14 +62241,16 @@ int __cdecl _CallSETranslator(struct EHExceptionRecord * a1, struct EHRegistrati
     v20(a1->ExceptionCode, v18);
     v19 = 0;
     if ( v17 )
+    {
       ExceptionList->Next = NtCurrentTeb()->NtTib.ExceptionList->Next;
+    }
     return v19;
   }
 }
 
 
 // address=[0x3078c50]
-// Decompiled from TryBlockMapEntry *__cdecl _GetRangeOfTrysToCheck(  const struct _s_FuncInfo *a1,  int a2,  int a3,  unsigned int *a4,  unsigned int *a5)
+// Decompiled from TryBlockMapEntry *__cdecl _GetRangeOfTrysToCheck(const struct _s_FuncInfo *a1, int a2, int a3, unsigned int *a4, unsigned int *a5)
 struct _s_TryBlockMapEntry const * __cdecl _GetRangeOfTrysToCheck(struct _s_FuncInfo const * a1, int a2, int a3, unsigned int * a4, unsigned int * a5) {
   
   unsigned int v6; // [esp+0h] [ebp-10h]
@@ -60104,7 +62266,9 @@ struct _s_TryBlockMapEntry const * __cdecl _GetRangeOfTrysToCheck(struct _s_Func
   while ( a2 >= 0 )
   {
     if ( nTryBlocks == -1 )
+    {
       j__terminate();
+    }
     if ( pTryBlockMap[--nTryBlocks].tryHigh < a3 && a3 <= pTryBlockMap[nTryBlocks].catchHigh || nTryBlocks == -1 )
     {
       --a2;
@@ -60116,13 +62280,15 @@ struct _s_TryBlockMapEntry const * __cdecl _GetRangeOfTrysToCheck(struct _s_Func
   *a4 = v10;
   *a5 = v8;
   if ( v8 > a1->nTryBlocks || v10 > v8 )
+  {
     j__terminate();
+  }
   return &pTryBlockMap[v10];
 }
 
 
 // address=[0x3078d50]
-// Decompiled from void __stdcall _JumpToContinuation(  void (__stdcall *a1)(void *, struct EHRegistrationNode *),  struct EHRegistrationNode *a2)
+// Decompiled from void __stdcall _JumpToContinuation(void (__stdcall *a1)(void *, struct EHRegistrationNode *), struct EHRegistrationNode *a2)
 void __stdcall _JumpToContinuation(void * a1, struct EHRegistrationNode * a2) {
   
   a1(a1, a2);
@@ -60130,7 +62296,7 @@ void __stdcall _JumpToContinuation(void * a1, struct EHRegistrationNode * a2) {
 
 
 // address=[0x3078d90]
-// Decompiled from void __userpurge _UnwindNestedFrames(  struct _EXCEPTION_REGISTRATION_RECORD **a1@<ebx>,  PVOID TargetFrame,  PEXCEPTION_RECORD ExceptionRecord)
+// Decompiled from void __userpurge _UnwindNestedFrames(struct _EXCEPTION_REGISTRATION_RECORD **a1@<ebx>, PVOID TargetFrame, PEXCEPTION_RECORD ExceptionRecord)
 void __stdcall _UnwindNestedFrames(struct EHRegistrationNode * a1, struct EHExceptionRecord * TargetFrame) {
   
   RtlUnwind(TargetFrame, &UnwindNestedFrames_::_ReturnPoint_3, ExceptionRecord, 0);
@@ -60144,9 +62310,13 @@ void __stdcall _UnwindNestedFrames(struct EHRegistrationNode * a1, struct EHExce
 void (__cdecl*__cdecl _set_se_translator(int))(unsigned int a1, struct _EXCEPTION_POINTERS * a2) {
   
   if ( a1 )
+  {
     return 0;
+  }
   else
+  {
     return (void (__cdecl *)(unsigned int, struct _EXCEPTION_POINTERS *))j___set_se_translator(0);
+  }
 }
 
 
@@ -60212,7 +62382,9 @@ bool __cdecl _ValidateWrite(void * a1, unsigned int a2) {
 char * __cdecl getStringHelper(char * a1, char * a2, char * a3, int a4) {
   
   if ( a4 > a2 - (int)a1 )
+  {
     a4 = a2 - (_DWORD)a1;
+  }
   und_memcpy(a1, a3, a4);
   return &a1[a4];
 }
@@ -60256,21 +62428,12 @@ int (__cdecl*__cdecl _set_new_handler(int))(unsigned int a1) {
   int v4; // [esp-2h] [ebp-4h] BYREF
 
   v4 = v1;
-  if ( a1
-    && j___CrtDbgReportW(
-         2,
-         (char)L"minkernel\\crts\\ucrt\\src\\appcrt\\heap\\new_handler.cpp",
-         49,
-         0,
-         (wchar_t *)L"%ls",
-         (char)L"new_handler == 0") == 1 )
+  if ( a1 && j___CrtDbgReportW(2, (char)L"minkernel\\crts\\ucrt\\src\\appcrt\\heap\\new_handler.cpp", 49, 0, (wchar_t *)L"%ls", (char)L"new_handler == 0") == 1 )
   {
     __debugbreak();
   }
   HIBYTE(v4) = __crt_fast_encode_pointer(0);
-  v2 = (int (__cdecl *)(size_t))__crt_fast_encoded_nullptr_t::operator<int __cdecl (unsigned int)> int (__cdecl *)(unsigned int)(
-                                  (char *)&v4 + 3,
-                                  v4);
+  v2 = (int (__cdecl *)(size_t))__crt_fast_encoded_nullptr_t::operator<int __cdecl (unsigned int)> int (__cdecl *)(unsigned int)((char *)&v4 + 3, v4);
   return j___set_new_handler(v2);
 }
 
@@ -60404,9 +62567,13 @@ char * __cdecl strcat<char *>(char * & a1, char const * a2) {
 char * __cdecl strcat<260>(char (&)[260] Destination, char const * Source) {
   
   if ( j__strcat_s(Destination, 0x104u, Source) )
+  {
     return 0;
+  }
   else
+  {
     return Destination;
+  }
 }
 
 
@@ -60415,9 +62582,13 @@ char * __cdecl strcat<260>(char (&)[260] Destination, char const * Source) {
 char * __cdecl strcat<512>(char (&)[512] Destination, char const * Source) {
   
   if ( j__strcat_s(Destination, 0x200u, Source) )
+  {
     return 0;
+  }
   else
+  {
     return Destination;
+  }
 }
 
 
@@ -60426,9 +62597,13 @@ char * __cdecl strcat<512>(char (&)[512] Destination, char const * Source) {
 char * __cdecl strcat<64>(char (&)[64] Destination, char const * Source) {
   
   if ( j__strcat_s(Destination, 0x40u, Source) )
+  {
     return 0;
+  }
   else
+  {
     return Destination;
+  }
 }
 
 
@@ -60437,9 +62612,13 @@ char * __cdecl strcat<64>(char (&)[64] Destination, char const * Source) {
 char * __cdecl _tcsncpy<128>(char (&)[128] Dst, char const * Src, unsigned int MaxCount) {
   
   if ( j___tcsncpy_s(Dst, 0x80u, Src, MaxCount) )
+  {
     return 0;
+  }
   else
+  {
     return Dst;
+  }
 }
 
 
@@ -60448,9 +62627,13 @@ char * __cdecl _tcsncpy<128>(char (&)[128] Dst, char const * Src, unsigned int M
 char * __cdecl strcat<1024>(char (&)[1024] Destination, char const * Source) {
   
   if ( j__strcat_s(Destination, 0x400u, Source) )
+  {
     return 0;
+  }
   else
+  {
     return Destination;
+  }
 }
 
 

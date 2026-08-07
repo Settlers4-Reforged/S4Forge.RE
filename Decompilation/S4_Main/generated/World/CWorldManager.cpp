@@ -19,13 +19,21 @@ bool __cdecl CWorldManager::InWorld(int _iX, int _iY) {
   int v4; // [esp+8h] [ebp-4h]
 
   if ( _iX < CWorldManager::m_iWidthHeight )
+  {
     v4 = -1;
+  }
   else
+  {
     v4 = 0;
+  }
   if ( _iY < CWorldManager::m_iWidthHeight )
+  {
     v3 = -1;
+  }
   else
+  {
     v3 = 0;
+  }
   return (v3 & v4) != 0;
 }
 
@@ -124,9 +132,13 @@ int __cdecl CWorldManager::NeighborRelIndex(int a1) {
 int __cdecl CWorldManager::SettlerId(int a1, int a2) {
   
   if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * a1 + 2 * CWorldManager::m_iWidthHeight * a2] )
+  {
     return CWorldManager::CheckSettlerId(*(unsigned __int16 *)&CWorldManager::m_cMapObjectMap.m_pData[2 * a1 + 2 * CWorldManager::m_iWidthHeight * a2]);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -201,9 +213,13 @@ int __cdecl CWorldManager::ResourceAmount(int _iX, int _iY, int _iResourceType) 
 
   v5 = CWorldManager::m_cResourceMap.m_pData[_iX + CWorldManager::m_iWidthHeight * _iY];
   if ( (v5 & 0xF0) == _iResourceType )
+  {
     return v5 & 0xF;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -212,9 +228,13 @@ int __cdecl CWorldManager::ResourceAmount(int _iX, int _iY, int _iResourceType) 
 int __cdecl CWorldManager::BuildingId(int _iX, int _iY) {
   
   if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iX + 2 * CWorldManager::m_iWidthHeight * _iY] )
+  {
     return CWorldManager::CheckBuildingId(*(unsigned __int16 *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iX + 2 * CWorldManager::m_iWidthHeight * _iY]);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -244,9 +264,13 @@ int __cdecl CWorldManager::Ground(int _iX, int _iY) {
 int __cdecl CWorldManager::BuildingId(int _iTileId) {
   
   if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId] )
+  {
     return CWorldManager::CheckBuildingId(*(unsigned __int16 *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId]);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -295,9 +319,13 @@ int __cdecl CWorldManager::ObjectId(int _iTileId) {
 int __cdecl CWorldManager::OccupyingEntityId(int _iTileId) {
   
   if ( CWorldManager::FlagBits(_iTileId, 1u) )
+  {
     return 0;
+  }
   else
+  {
     return CWorldManager::MapObjectId(_iTileId);
+  }
 }
 
 
@@ -315,12 +343,7 @@ void __cdecl CWorldManager::ClearFlagBits(int _iX, int _iY, unsigned int _uMask)
   
   int result; // eax
 
-  if ( (_uMask & 1) != 0
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\World\\World.h",
-         584,
-         "(_uMask & FLAG_BLOCKED_LAND) == 0") == 1 )
+  if ( (_uMask & 1) != 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\World\\World.h", 584, "(_uMask & FLAG_BLOCKED_LAND) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -334,12 +357,7 @@ void __cdecl CWorldManager::ClearFlagBits(int _iX, int _iY, unsigned int _uMask)
 // Decompiled from void __cdecl CWorldManager::ClearFlagBits(int _iTileId, char _uMask)
 void __cdecl CWorldManager::ClearFlagBits(int _iTileId, unsigned int _uMask) {
   
-  if ( (_uMask & 1) != 0
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\World\\World.h",
-         572,
-         "(_uMask & FLAG_BLOCKED_LAND) == 0") == 1 )
+  if ( (_uMask & 1) != 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\World\\World.h", 572, "(_uMask & FLAG_BLOCKED_LAND) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -357,13 +375,21 @@ bool __cdecl CWorldManager::InInnerWorld16(int _iX, int _iY) {
 
   _iYa = _iY - 16;
   if ( _iX - 16 < (unsigned int)(CWorldManager::m_iWidthHeight - 32) )
+  {
     v4 = -1;
+  }
   else
+  {
     v4 = 0;
+  }
   if ( _iYa < CWorldManager::m_iWidthHeight - 32 )
+  {
     v3 = -1;
+  }
   else
+  {
     v3 = 0;
+  }
   return (v3 & v4) != 0;
 }
 
@@ -382,12 +408,7 @@ void __cdecl CWorldManager::SetFlagBits(int _iX, int _iY, unsigned int _uMask) {
   
   unsigned __int8 *result; // eax
 
-  if ( (_uMask & 1) != 0
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\World\\World.h",
-         560,
-         "(_uMask & FLAG_BLOCKED_LAND) == 0") == 1 )
+  if ( (_uMask & 1) != 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\World\\World.h", 560, "(_uMask & FLAG_BLOCKED_LAND) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -401,12 +422,7 @@ void __cdecl CWorldManager::SetFlagBits(int _iX, int _iY, unsigned int _uMask) {
 // Decompiled from void __cdecl CWorldManager::SetFlagBits(int _iTileId, unsigned int _uMask)
 void __cdecl CWorldManager::SetFlagBits(int _iTileId, unsigned int _uMask) {
   
-  if ( (_uMask & 1) != 0
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\World\\World.h",
-         548,
-         "(_uMask & FLAG_BLOCKED_LAND) == 0") == 1 )
+  if ( (_uMask & 1) != 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\World\\World.h", 548, "(_uMask & FLAG_BLOCKED_LAND) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -446,9 +462,13 @@ int __cdecl CWorldManager::Index(int _iXY) {
 int __cdecl CWorldManager::PileId(int _iTileId) {
   
   if ( *(_WORD *)&CWorldManager::m_cDecoObjectMap.m_pData[2 * _iTileId] )
+  {
     return CWorldManager::CheckPileId(*(unsigned __int16 *)&CWorldManager::m_cDecoObjectMap.m_pData[2 * _iTileId]);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -457,9 +477,13 @@ int __cdecl CWorldManager::PileId(int _iTileId) {
 int __cdecl CWorldManager::SettlerId(int _iTileId) {
   
   if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId] )
+  {
     return CWorldManager::CheckSettlerId(*(unsigned __int16 *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId]);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -513,9 +537,13 @@ int __cdecl CWorldManager::ResourceAmount(int _iX, int _iY) {
 
   v4 = CWorldManager::m_cResourceMap.m_pData[_iX];
   if ( (v4 & 0xF0) == _iY )
+  {
     return v4 & 0xF;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -548,9 +576,13 @@ void __cdecl CWorldManager::SetResource(int _iTileId, int _iResourceType, int _i
 int __cdecl CWorldManager::PileId(int _iX, int _iY) {
   
   if ( *(_WORD *)&CWorldManager::m_cDecoObjectMap.m_pData[2 * _iX + 2 * CWorldManager::m_iWidthHeight * _iY] )
+  {
     return CWorldManager::CheckPileId(*(unsigned __int16 *)&CWorldManager::m_cDecoObjectMap.m_pData[2 * _iX + 2 * CWorldManager::m_iWidthHeight * _iY]);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -622,8 +654,7 @@ bool __cdecl CWorldManager::InWorld(int _iTileId) {
 // Decompiled from bool __cdecl CWorldManager::IsPositionFreeForSettler(int _iTileId)
 bool __cdecl CWorldManager::IsPositionFreeForSettler(int _iTileId) {
   
-  return (CWorldManager::m_cFlagMap.m_pData[_iTileId] & 1) == 0
-      && !*(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId];
+  return (CWorldManager::m_cFlagMap.m_pData[_iTileId] & 1) == 0 && !*(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId];
 }
 
 
@@ -711,9 +742,7 @@ void __cdecl CWorldManager::IncreaseGroundHeight(int _iX, int _iY) {
 // Decompiled from bool __cdecl CWorldManager::IsWater(int _iX, int _iY)
 bool __cdecl CWorldManager::IsWater(int _iX, int _iY) {
   
-  return CLandscapeProperties::IsWater(CWorldManager::m_cRenderMap.m_pData[4 * _iX
-                                                                         + 1
-                                                                         + 4 * CWorldManager::m_iWidthHeight * _iY]);
+  return CLandscapeProperties::IsWater(CWorldManager::m_cRenderMap.m_pData[4 * _iX + 1 + 4 * CWorldManager::m_iWidthHeight * _iY]);
 }
 
 
@@ -756,13 +785,21 @@ bool __cdecl CWorldManager::InInnerWorld2(int _iX, int _iY) {
 
   _iYa = _iY - 2;
   if ( _iX - 2 < (unsigned int)(CWorldManager::m_iWidthHeight - 4) )
+  {
     v4 = -1;
+  }
   else
+  {
     v4 = 0;
+  }
   if ( _iYa < CWorldManager::m_iWidthHeight - 4 )
+  {
     v3 = -1;
+  }
   else
+  {
     v3 = 0;
+  }
   return (v3 & v4) != 0;
 }
 
@@ -787,8 +824,7 @@ int __cdecl CWorldManager::ShadingGradient(int a1) {
 // Decompiled from int __cdecl CWorldManager::CatapultTileId(int _iX, int _iY)
 int __cdecl CWorldManager::CatapultTileId(int _iX, int _iY) {
   
-  return *(unsigned __int16 *)&CWorldManager::m_cCatapultTileIdMap.m_pData[2 * _iX
-                                                                         + 2 * CWorldManager::m_iWidthHeight * _iY];
+  return *(unsigned __int16 *)&CWorldManager::m_cCatapultTileIdMap.m_pData[2 * _iX + 2 * CWorldManager::m_iWidthHeight * _iY];
 }
 
 
@@ -802,13 +838,21 @@ bool __cdecl CWorldManager::InInnerWorld1(int _iX, int _iY) {
 
   _iYa = _iY - 1;
   if ( _iX - 1 < (unsigned int)(CWorldManager::m_iWidthHeight - 2) )
+  {
     v4 = -1;
+  }
   else
+  {
     v4 = 0;
+  }
   if ( _iYa < CWorldManager::m_iWidthHeight - 2 )
+  {
     v3 = -1;
+  }
   else
+  {
     v3 = 0;
+  }
   return (v3 & v4) != 0;
 }
 
@@ -887,7 +931,9 @@ bool __cdecl CWorldManager::LoadMap(class S4::CMapFile & a1, int _iWidth) {
   exceptionBlock = 0;
   TMap<unsigned char>::Init(&mOwnerMap, CWorldManager::m_iWidthHeight);
   TMap<unsigned char>::LoadMap(&mOwnerMap, a1, 0xD2u, CWorldManager::m_iWidthHeight);
-  for ( i = 0; i < CWorldManager::m_iWorldIdxMax; ++i )
+  for ( i = 0;
+        i < CWorldManager::m_iWorldIdxMax;
+        ++i )
   {
     v2 = ITiling::OwnerPseudoTileId(mOwnerMap.m_pData[i]);
     CWorldManager::StartUpOwner(i, v2);
@@ -903,15 +949,7 @@ bool __cdecl CWorldManager::LoadMap(class S4::CMapFile & a1, int _iWidth) {
   TMap<unsigned char>::LoadMap(&CWorldManager::m_cResourceMap, a1, 207u, CWorldManager::m_iWidthHeight);
   TMap<unsigned char>::LoadMap(&CWorldManager::m_cWalkCount5MoveCost3Map, a1, 209u, CWorldManager::m_iWidthHeight);
   TSparseMap<unsigned char>::LoadMap(CWorldManager::m_pHelpObjectMap, a1, 204u);
-  g_pTiling->Init(
-    g_pTiling,
-    _iWidth,
-    (struct T_GFX_MAP_ELEMENT *)CWorldManager::m_cRenderMap.m_pData,
-    CWorldManager::m_cFlagMap.m_pData,
-    (unsigned __int16 *)CWorldManager::m_cNormalTileIdMap.m_pData,
-    (unsigned __int16 **)CWorldManager::m_cCatapultTileIdMap.m_pData,
-    CWorldManager::m_cFogMap.m_pData,
-    0);
+  g_pTiling->Init(g_pTiling, _iWidth, (struct T_GFX_MAP_ELEMENT *)CWorldManager::m_cRenderMap.m_pData, CWorldManager::m_cFlagMap.m_pData, (unsigned __int16 *)CWorldManager::m_cNormalTileIdMap.m_pData, (unsigned __int16 **)CWorldManager::m_cCatapultTileIdMap.m_pData, CWorldManager::m_cFogMap.m_pData, 0);
   return 1;
 }
 
@@ -930,7 +968,9 @@ bool __cdecl CWorldManager::SaveMap(class S4::CMapFile & _pMapFile) {
   TMap<unsigned char>::TMap<unsigned char>(&mOwnerMap);
   v7 = 0;
   TMap<unsigned char>::Init(&mOwnerMap, CWorldManager::m_iWidthHeight);
-  for ( i = 0; i < CWorldManager::m_iWorldIdxMax; ++i )
+  for ( i = 0;
+        i < CWorldManager::m_iWorldIdxMax;
+        ++i )
   {
     v1 = CWorldManager::NormalTileId(i);
     v2 = ITiling::Tile(v1);
@@ -945,11 +985,7 @@ bool __cdecl CWorldManager::SaveMap(class S4::CMapFile & _pMapFile) {
   TMap<unsigned short>::SaveMap(&CWorldManager::m_cMapObjectMap, _pMapFile, 0xCA, CWorldManager::m_iWidthHeight);
   TMap<unsigned short>::SaveMap(&CWorldManager::m_cDecoObjectMap, _pMapFile, 0xC9, CWorldManager::m_iWidthHeight);
   TMap<unsigned char>::SaveMap(&CWorldManager::m_cResourceMap, _pMapFile, 0xCFu, CWorldManager::m_iWidthHeight);
-  TMap<unsigned char>::SaveMap(
-    &CWorldManager::m_cWalkCount5MoveCost3Map,
-    _pMapFile,
-    0xD1u,
-    CWorldManager::m_iWidthHeight);
+  TMap<unsigned char>::SaveMap(&CWorldManager::m_cWalkCount5MoveCost3Map, _pMapFile, 0xD1u, CWorldManager::m_iWidthHeight);
   TSparseMap<unsigned char>::SaveMap(CWorldManager::m_pHelpObjectMap, _pMapFile, 204);
   return 1;
 }
@@ -979,24 +1015,38 @@ void __cdecl CWorldManager::LoadGfxData(class S4::CMapFile & a1, int a2, int _iW
   v5 = 0;
   pMapElements = (SGroundData *)S4::CMapFile::LoadChunk(a1, MAP_CHUNK_ELEMENTS, 0, &v5, 0);
   if ( !GfxMapElements && BBSupportDbgReport(2, "World\\World.cpp", 878, "pGfxMapElements != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !pMapElements && BBSupportDbgReport(2, "World\\World.cpp", 879, "pMapElements != NULL") == 1 )
+  {
     __debugbreak();
+  }
   pMapElementsStart = pMapElements;
   iTileId = 0;
-  for ( iY = 0; iY < _iWidth; ++iY )
+  for ( iY = 0;
+        iY < _iWidth;
+        ++iY )
   {
-    for ( iX = 0; iX < _iWidth; ++iX )
+    for ( iX = 0;
+          iX < _iWidth;
+          ++iX )
     {
       *(struct T_GFX_MAP_ELEMENT *)&CWorldManager::m_cRenderMap.m_pData[4 * iTileId] = *GfxMapElements;
       if ( CWorldManager::IsWater(iTileId) )
+      {
         iOwner = ITiling::OwnerPseudoTileId(0);
+      }
       else
+      {
         iOwner = ITiling::OwnerPseudoTileId(pMapElements->m_iOwner);
+      }
       CWorldManager::StartUpOwner(iTileId, iOwner);
       iOccupied = pMapElements->m_iOccupied;
       if ( (GfxMapElements->m_uGradient & 0x40) != 0 )
+      {
         iOccupied |= 4u;
+      }
       if ( (iOccupied & 2) != 0 )
       {
         CWorldManager::SetMoveCostsBits(iTileId, 7);
@@ -1020,32 +1070,26 @@ void __cdecl CWorldManager::LoadGfxData(class S4::CMapFile & a1, int a2, int _iW
       ++iTileId;
     }
   }
-  g_pTiling->Init(
-    g_pTiling,
-    _iWidth,
-    (struct T_GFX_MAP_ELEMENT *)CWorldManager::m_cRenderMap.m_pData,
-    CWorldManager::m_cFlagMap.m_pData,
-    (unsigned __int16 *)CWorldManager::m_cNormalTileIdMap.m_pData,
-    (unsigned __int16 **)CWorldManager::m_cCatapultTileIdMap.m_pData,
-    CWorldManager::m_cFogMap.m_pData,
-    1);
+  g_pTiling->Init(g_pTiling, _iWidth, (struct T_GFX_MAP_ELEMENT *)CWorldManager::m_cRenderMap.m_pData, CWorldManager::m_cFlagMap.m_pData, (unsigned __int16 *)CWorldManager::m_cNormalTileIdMap.m_pData, (unsigned __int16 **)CWorldManager::m_cCatapultTileIdMap.m_pData, CWorldManager::m_cFogMap.m_pData, 1);
   S4::CMapFile::CloseChunk(a1, a2, 0);
   pMapElements = pMapElementsStart;
-  for ( iY = 0; iY < _iWidth; ++iY )
+  for ( iY = 0;
+        iY < _iWidth;
+        ++iY )
   {
-    for ( iX = 0; iX < _iWidth; ++iX )
+    for ( iX = 0;
+          iX < _iWidth;
+          ++iX )
     {
       iObjectID = pMapElements->m_iObjectType;
-      if ( iObjectID
-        && iObjectID != OBJECT_WHEAT1
-        && iObjectID != OBJECT_WHEAT2
-        && iObjectID != OBJECT_GRAPE
-        && iObjectID != OBJECT_AGAVE )
+      if ( iObjectID && iObjectID != OBJECT_WHEAT1 && iObjectID != OBJECT_WHEAT2 && iObjectID != OBJECT_GRAPE && iObjectID != OBJECT_AGAVE )
       {
         CDecoObjMgr::AddDecoObjWithoutFlags(&g_cDecoObjMgr, iX, iY, iObjectID, 0, 1);
       }
       if ( pMapElements->m_iResource )
+      {
         CWorldManager::SetResource(iX, iY, pMapElements->m_iResource & 0xF0, pMapElements->m_iResource & 0xF);
+      }
       ++pMapElements;
     }
   }
@@ -1165,19 +1209,24 @@ int __cdecl CWorldManager::CheckBlockable(int _iX, int _iY) {
   int v4; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  if ( !CWorldManager::InInnerWorld2(_iX, _iY)
-    && BBSupportDbgReport(2, "World\\World.cpp", 1013, "InInnerWorld2(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InInnerWorld2(_iX, _iY) && BBSupportDbgReport(2, "World\\World.cpp", 1013, "InInnerWorld2(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   v4 = CWorldManager::Index(_iX, _iY);
   if ( CWorldManager::MapObjectId(v4) )
+  {
     return 0;
-  for ( i = 1; i < 7; ++i )
+  }
+  for ( i = 1;
+        i < 7;
+        ++i )
   {
     v3 = v4 + CWorldManager::SurroundingHexPointRelIndex(i);
     if ( (unsigned int)(CWorldManager::MapObjectId(v3) - 1) <= 5 )
+    {
       return 0;
+    }
   }
   return 1;
 }
@@ -1259,13 +1308,10 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
   _BYTE v51[112211]; // [esp+1138h] [ebp-1B658h] BYREF
 
   if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "World\\World.cpp", 447, "InWorld(_iX, _iY)") == 1 )
+  {
     __debugbreak();
-  if ( CSpiralOffsets::MaxGridDistance(40) > 50
-    && BBSupportDbgReport(
-         2,
-         "World\\World.cpp",
-         459,
-         "g_cSpiralOffsets.MaxGridDistance(MAX_INFLU_RADIUS) <= MAX_INFLU_DIST") == 1 )
+  }
+  if ( CSpiralOffsets::MaxGridDistance(40) > 50 && BBSupportDbgReport(2, "World\\World.cpp", 459, "g_cSpiralOffsets.MaxGridDistance(MAX_INFLU_RADIUS) <= MAX_INFLU_DIST") == 1 )
   {
     __debugbreak();
   }
@@ -1273,37 +1319,55 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
   v31 = 0;
   v39 = 0;
   if ( (int)(_iX - 100) < 1 )
+  {
     v12 = 1 - _iX;
+  }
   else
+  {
     v12 = -100;
+  }
   if ( (int)(_iX + 100) > CWorldManager::Width() - 2 )
+  {
     v11 = CWorldManager::Width() - 2 - _iX;
+  }
   else
+  {
     v11 = 100;
+  }
   if ( (int)(_iY - 100) < 1 )
+  {
     v26 = 1 - _iY;
+  }
   else
+  {
     v26 = -100;
+  }
   v24 = v26;
   if ( (int)(_iY + 100) > CWorldManager::Height() - 2 )
+  {
     v25 = CWorldManager::Height() - 2 - _iY;
+  }
   else
+  {
     v25 = 100;
+  }
   v9 = v25;
   v34 = CWorldManager::Index(_iX, v24 + _iY);
-  for ( iDYX[0] = v24; iDYX[0] <= v9; ++iDYX[0] )
+  for ( iDYX[0] = v24;
+        iDYX[0] <= v9;
+        ++iDYX[0] )
   {
-    for ( iDYX[1] = v12; iDYX[1] <= v11; ++iDYX[1] )
+    for ( iDYX[1] = v12;
+          iDYX[1] <= v11;
+          ++iDYX[1] )
     {
       iWorldIdx = iDYX[1] + v34;
-      if ( !CWorldManager::InInnerWorld1(iDYX[1] + _iX, iDYX[0] + _iY)
-        && BBSupportDbgReport(2, "World\\World.cpp", 497, "InInnerWorld1(_iX + iDX, _iY + iDY)") == 1 )
+      if ( !CWorldManager::InInnerWorld1(iDYX[1] + _iX, iDYX[0] + _iY) && BBSupportDbgReport(2, "World\\World.cpp", 497, "InInnerWorld1(_iX + iDX, _iY + iDY)") == 1 )
       {
         __debugbreak();
       }
       v2 = CWorldManager::Index(iDYX[1] + _iX, iDYX[0] + _iY);
-      if ( v2 != iWorldIdx
-        && BBSupportDbgReport(2, "World\\World.cpp", 498, "Index(_iX + iDX, _iY + iDY) == iWorldIdx") == 1 )
+      if ( v2 != iWorldIdx && BBSupportDbgReport(2, "World\\World.cpp", 498, "Index(_iX + iDX, _iY + iDY) == iWorldIdx") == 1 )
       {
         __debugbreak();
       }
@@ -1324,12 +1388,7 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
           if ( v3 >= Grid::Distance(iDYX[1], iDYX[0]) )
           {
             iOwnerId = IEntity::OwnerId(v40);
-            if ( (iOwnerId > 8 || iOwnerId < 1)
-              && BBSupportDbgReport(
-                   2,
-                   "World\\World.cpp",
-                   530,
-                   "(iOwnerId >= PLAYER_FIRST) & (iOwnerId <= PLAYER_LAST)") == 1 )
+            if ( (iOwnerId > 8 || iOwnerId < 1) && BBSupportDbgReport(2, "World\\World.cpp", 530, "(iOwnerId >= PLAYER_FIRST) & (iOwnerId <= PLAYER_LAST)") == 1 )
             {
               __debugbreak();
             }
@@ -1346,7 +1405,9 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
             }
             v8 = iDYX[1] + 50;
             v7 = iDYX[0] + 50;
-            for ( i = 1; i <= v35; ++i )
+            for ( i = 1;
+                  i <= v35;
+                  ++i )
             {
               v44 = v8 + CSpiralOffsets::DeltaX(i);
               v45 = v7 + CSpiralOffsets::DeltaY(i);
@@ -1356,7 +1417,9 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
                 v4 = CSpiralOffsets::Radius(i);
                 v49 += 50 - v4;
                 if ( v49 > 0xFE )
+                {
                   v49 = 254;
+                }
                 v51[1111 * v45 + 11 * v44 + iOwnerId] = v49;
                 if ( v49 > (unsigned __int8)v51[1111 * v45 + 11 * v44] )
                 {
@@ -1372,34 +1435,52 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
     v34 += CWorldManager::Width();
   }
   if ( (int)(_iX - 50) < 1 )
-    v21 = 1 - _iX;
-  else
-    v21 = -50;
-  if ( (int)(_iX + 50) > CWorldManager::Width() - 2 )
-    v20 = CWorldManager::Width() - 2 - _iX;
-  else
-    v20 = 50;
-  if ( (int)(_iY - 50) < 1 )
-    v19 = 1 - _iY;
-  else
-    v19 = -50;
-  if ( (int)(_iY + 50) > CWorldManager::Height() - 2 )
-    v18 = CWorldManager::Height() - 2 - _iY;
-  else
-    v18 = 50;
-  v32 = CWorldManager::Index(_iX, v19 + _iY);
-  for ( j = v19; j <= v18; ++j )
   {
-    for ( k = v21; k <= v20; ++k )
+    v21 = 1 - _iX;
+  }
+  else
+  {
+    v21 = -50;
+  }
+  if ( (int)(_iX + 50) > CWorldManager::Width() - 2 )
+  {
+    v20 = CWorldManager::Width() - 2 - _iX;
+  }
+  else
+  {
+    v20 = 50;
+  }
+  if ( (int)(_iY - 50) < 1 )
+  {
+    v19 = 1 - _iY;
+  }
+  else
+  {
+    v19 = -50;
+  }
+  if ( (int)(_iY + 50) > CWorldManager::Height() - 2 )
+  {
+    v18 = CWorldManager::Height() - 2 - _iY;
+  }
+  else
+  {
+    v18 = 50;
+  }
+  v32 = CWorldManager::Index(_iX, v19 + _iY);
+  for ( j = v19;
+        j <= v18;
+        ++j )
+  {
+    for ( k = v21;
+          k <= v20;
+          ++k )
     {
       v17 = k + v32;
-      if ( !CWorldManager::InInnerWorld1(k + _iX, j + _iY)
-        && BBSupportDbgReport(2, "World\\World.cpp", 610, "InInnerWorld1(_iX + iDX, _iY + iDY)") == 1 )
+      if ( !CWorldManager::InInnerWorld1(k + _iX, j + _iY) && BBSupportDbgReport(2, "World\\World.cpp", 610, "InInnerWorld1(_iX + iDX, _iY + iDY)") == 1 )
       {
         __debugbreak();
       }
-      if ( CWorldManager::Index(k + _iX, j + _iY) != v17
-        && BBSupportDbgReport(2, "World\\World.cpp", 611, "Index(_iX + iDX, _iY + iDY) == iWorldIdx") == 1 )
+      if ( CWorldManager::Index(k + _iX, j + _iY) != v17 && BBSupportDbgReport(2, "World\\World.cpp", 611, "Index(_iX + iDX, _iY + iDY) == iWorldIdx") == 1 )
       {
         __debugbreak();
       }
@@ -1407,26 +1488,30 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
       v5 = ITiling::Tile(v16);
       v33 = CTile::OwnerId(v5);
       if ( v16 < 10 )
+      {
         v15 = 192;
+      }
       else
+      {
         v15 = 128;
+      }
       v33 |= v15;
       v51[1111 * j + 56109 + 11 * k] = v33;
     }
     v32 += CWorldManager::Width();
   }
   v6 = CSpiralOffsets::Last(40);
-  for ( m = 0; m <= v6; ++m )
+  for ( m = 0;
+        m <= v6;
+        ++m )
   {
     v41 = CSpiralOffsets::DeltaX(m);
     v42 = CSpiralOffsets::DeltaY(m);
-    if ( (v41 < -50 || v41 > 50)
-      && BBSupportDbgReport(2, "World\\World.cpp", 703, "(iDX >= -MAX_INFLU_DIST) && (iDX <= MAX_INFLU_DIST)") == 1 )
+    if ( (v41 < -50 || v41 > 50) && BBSupportDbgReport(2, "World\\World.cpp", 703, "(iDX >= -MAX_INFLU_DIST) && (iDX <= MAX_INFLU_DIST)") == 1 )
     {
       __debugbreak();
     }
-    if ( (v42 < -50 || v42 > 50)
-      && BBSupportDbgReport(2, "World\\World.cpp", 704, "(iDY >= -MAX_INFLU_DIST) && (iDY <= MAX_INFLU_DIST)") == 1 )
+    if ( (v42 < -50 || v42 > 50) && BBSupportDbgReport(2, "World\\World.cpp", 704, "(iDY >= -MAX_INFLU_DIST) && (iDY <= MAX_INFLU_DIST)") == 1 )
     {
       __debugbreak();
     }
@@ -1445,7 +1530,9 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
         {
           v13 = v37 != 0;
           if ( CWorldManager::FlagBits(v27, 8u) != 0 && v13 )
+          {
             CBuildingMgr::DestroyBuilding((CBuildingMgr *)g_cBuildingMgr, v28, v29, 0);
+          }
           CWorldManager::SetOwnerId(v28, v29, v30);
         }
       }
@@ -1469,8 +1556,7 @@ void __cdecl CWorldManager::SetTowerBits(int _iX, int _iY, int a3, int a4) {
   int v8; // [esp+14h] [ebp-8h] BYREF
   int i; // [esp+18h] [ebp-4h]
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "World\\World.cpp", 411, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "World\\World.cpp", 411, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -1479,7 +1565,9 @@ void __cdecl CWorldManager::SetTowerBits(int _iX, int _iY, int a3, int a4) {
   CWorldManager::GetBuildingInfluenceInfo(a3, &v8, &v4);
   if ( v8 > 0 )
   {
-    for ( i = 0; i <= v8; ++i )
+    for ( i = 0;
+          i <= v8;
+          ++i )
     {
       v6 = _iX + CSpiralOffsets::DeltaX(i);
       v7 = _iY + CSpiralOffsets::DeltaY(i);
@@ -1487,7 +1575,9 @@ void __cdecl CWorldManager::SetTowerBits(int _iX, int _iY, int a3, int a4) {
       {
         v5 = CWorldManager::Index(v6, v7);
         if ( ITiling::OwnerId(v5) == a4 )
+        {
           CWorldManager::SetFlagBits(v5, 0x80u);
+        }
       }
     }
   }
@@ -1531,7 +1621,9 @@ void __cdecl CWorldManager::TraceLine(int a1, int a2, int a3, int a4) {
   v7 = v4 - v5;
   v9 = v6 - v8;
   if ( v6 - v8 < 0 )
+  {
     v9 = v8 - v6;
+  }
   if ( v9 >= v7 || v6 < v8 )
   {
     if ( v9 < v7 || v6 < v8 )
@@ -1540,7 +1632,9 @@ void __cdecl CWorldManager::TraceLine(int a1, int a2, int a3, int a4) {
       {
         v21 = -(v9 >> 1);
         v13 = v4;
-        for ( i = v6; i <= v8; ++i )
+        for ( i = v6;
+              i <= v8;
+              ++i )
         {
           CWorldManager::SetHelperObject(v13, i, 17);
           v21 += v7;
@@ -1555,7 +1649,9 @@ void __cdecl CWorldManager::TraceLine(int a1, int a2, int a3, int a4) {
       {
         v20 = -(v7 >> 1);
         v16 = v8;
-        for ( j = v5; j <= v4; ++j )
+        for ( j = v5;
+              j <= v4;
+              ++j )
         {
           CWorldManager::SetHelperObject(j, v16, 17);
           v20 += v9;
@@ -1571,7 +1667,9 @@ void __cdecl CWorldManager::TraceLine(int a1, int a2, int a3, int a4) {
     {
       v19 = -(v9 >> 1);
       v11 = v5;
-      for ( k = v8; k <= v6; ++k )
+      for ( k = v8;
+            k <= v6;
+            ++k )
       {
         CWorldManager::SetHelperObject(v11, k, 17);
         v19 += v7;
@@ -1587,7 +1685,9 @@ void __cdecl CWorldManager::TraceLine(int a1, int a2, int a3, int a4) {
   {
     v18 = -(v7 >> 1);
     v14 = v8;
-    for ( m = v5; m <= v4; ++m )
+    for ( m = v5;
+          m <= v4;
+          ++m )
     {
       CWorldManager::SetHelperObject(m, v14, 17);
       v18 += v9;
@@ -1627,7 +1727,9 @@ struct SGfxColor * __cdecl CWorldManager::GetMiniMapColor(unsigned int _iTileId)
           LocalPlayerId = CPlayerManager::GetLocalPlayerId();
           v1 = IEntity::ObjType(v9);
           if ( CMinimapHandler::GetObjectColor(v1, &CWorldManager::m_sMinimapColorBuffer, 0, LocalPlayerId) )
+          {
             return &CWorldManager::m_sMinimapColorBuffer;
+          }
         }
         else
         {
@@ -1635,16 +1737,22 @@ struct SGfxColor * __cdecl CWorldManager::GetMiniMapColor(unsigned int _iTileId)
           v4 = IEntity::WarriorType(v9);
           v3 = IEntity::ObjType(v9);
           if ( CMinimapHandler::GetObjectColor(v3, &CWorldManager::m_sMinimapColorBuffer, v4, v6) )
+          {
             return &CWorldManager::m_sMinimapColorBuffer;
+          }
         }
       }
     }
   }
   if ( !CMinimapHandler::IsEcoSectorEnabled() )
+  {
     return 0;
+  }
   v7 = ITiling::OwnerId(_iTileId);
   if ( v7 <= 0 )
+  {
     return 0;
+  }
   CMinimapHandler::GetEcoSectorColor(v7, &CWorldManager::m_sMinimapColorBuffer);
   return &CWorldManager::m_sMinimapColorBuffer;
 }
@@ -1702,15 +1810,17 @@ void __cdecl CWorldManager::Construct(int _iWidthHeight) {
   TSparseMap<unsigned char> *C; // [esp+14h] [ebp-14h]
 
   if ( _iWidthHeight <= 0 && BBSupportDbgReport(2, "World\\World.cpp", 118, "_iWidthHeight > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iWidthHeight > 1024 && BBSupportDbgReport(2, "World\\World.cpp", 119, "_iWidthHeight <= 1024") == 1 )
+  {
     __debugbreak();
+  }
   CWorldManager::m_iWidthHeight = _iWidthHeight;
   CWorldManager::m_iWorldIdxMax = _iWidthHeight * _iWidthHeight;
   CNeighborRelIndices::Init((CNeighborRelIndices *)CWorldManager::m_cNeighborRelIndices, _iWidthHeight);
-  CSurroundingHexPointsIndices::Init(
-    (CSurroundingHexPointsIndices *)CWorldManager::m_cSurroundingHexPointsIndices,
-    CWorldManager::m_iWidthHeight);
+  CSurroundingHexPointsIndices::Init((CSurroundingHexPointsIndices *)CWorldManager::m_cSurroundingHexPointsIndices, CWorldManager::m_iWidthHeight);
   TMap<unsigned short>::Init(&CWorldManager::m_cNormalTileIdMap, CWorldManager::m_iWidthHeight);
   TMap<unsigned short>::Init(&CWorldManager::m_cCatapultTileIdMap, CWorldManager::m_iWidthHeight);
   TMap<T_GFX_MAP_ELEMENT>::Init(&CWorldManager::m_cRenderMap, CWorldManager::m_iWidthHeight);
@@ -1721,16 +1831,18 @@ void __cdecl CWorldManager::Construct(int _iWidthHeight) {
   TMap<unsigned char>::Init(&CWorldManager::m_cWalkCount5MoveCost3Map, CWorldManager::m_iWidthHeight);
   TMap<unsigned char>::Init(&CWorldManager::m_cFogMap, CWorldManager::m_iWidthHeight);
   if ( CWorldManager::m_pHelpObjectMap )
+  {
     TSparseMap<unsigned char>::`scalar deleting destructor'(CWorldManager::m_pHelpObjectMap, 1u);
+  }
   C = (TSparseMap<unsigned char> *)operator new(0x24u);
   if ( C )
-    v1 = (TSparseMap *)TSparseMap<unsigned char>::TSparseMap<unsigned char>(
-                         C,
-                         CWorldManager::m_iWidthHeight,
-                         CWorldManager::m_iWidthHeight,
-                         0);
+  {
+    v1 = (TSparseMap *)TSparseMap<unsigned char>::TSparseMap<unsigned char>(C, CWorldManager::m_iWidthHeight, CWorldManager::m_iWidthHeight, 0);
+  }
   else
+  {
     v1 = 0;
+  }
   CWorldManager::m_pHelpObjectMap = v1;
 }
 
@@ -1741,15 +1853,25 @@ void __cdecl CWorldManager::SetGroundInit(int a1, int a2) {
   
   CWorldManager::SetGroundTypeOnly(a1, a2);
   if ( CLandscapeProperties::IsBlockedLand((CLandscapeProperties *)&s_cLandscapeProperties, a2) )
+  {
     CWorldManager::SetBlockedLandEx(a1);
+  }
   else
+  {
     CWorldManager::ClearBlockedLandEx(a1);
+  }
   if ( CLandscapeProperties::IsSlowType((CLandscapeProperties *)&s_cLandscapeProperties, a2) )
+  {
     CWorldManager::SetMoveCostsBits(a1, 3);
+  }
   else
+  {
     CWorldManager::SetMoveCostsBits(a1, 2);
+  }
   if ( a2 == 28 || a2 == 29 )
+  {
     CWorldManager::SetMoveCostsBits(a1, 0);
+  }
 }
 
 
@@ -1788,9 +1910,13 @@ int __cdecl CWorldManager::CheckSettlerId(int a1) {
 
   v3 = CMapObjectMgr::EntityPtr(a1);
   if ( v3 && IEntity::ObjType(v3) == SETTLER_OBJ )
+  {
     return a1;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -1802,9 +1928,13 @@ int __cdecl CWorldManager::CheckBuildingId(int a1) {
 
   v3 = CMapObjectMgr::EntityPtr(a1);
   if ( v3 && IEntity::ObjType(v3) == BUILDING_OBJ )
+  {
     return a1;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -1816,9 +1946,13 @@ int __cdecl CWorldManager::CheckPileId(int a1) {
 
   v3 = CMapObjectMgr::EntityPtr(a1);
   if ( v3 && IEntity::ObjType(v3) == PILE_OBJ )
+  {
     return a1;
+  }
   else
+  {
     return 0;
+  }
 }
 
 

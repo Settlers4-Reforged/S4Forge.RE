@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateCampaign3X3::DynamicCreateFunc(void * a1) {
 
   C = (CStateCampaign3X3 *)operator new(4u);
   if ( C )
+  {
     return CStateCampaign3X3::CStateCampaign3X3(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -39,8 +43,7 @@ class CGameState * __cdecl CStateCampaign3X3::DynamicCreateFunc(void * a1) {
  CStateCampaign3X3::~CStateCampaign3X3(void) {
   
   *(_DWORD *)this = &CStateCampaign3X3::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 8)
-    && BBSupportDbgReport(2, "main\\states\\StateCampaign3X3.cpp", 72, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 8) && BBSupportDbgReport(2, "main\\states\\StateCampaign3X3.cpp", 72, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -65,7 +68,9 @@ bool  CStateCampaign3X3::Perform(void) {
   }
   v1 = dword_402CC34 + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_402CC34 = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -89,7 +94,9 @@ bool  CStateCampaign3X3::OnEvent(class CEvn_Event & a2) {
   if ( event == 11 )
   {
     if ( (unsigned __int16)a2->m_wParam != 27 )
+    {
       return CGuiGameState::OnEvent(this, a2);
+    }
     v3 = CEvn_Event::CEvn_Event(&v7, 0x67u, 0, 0, 0);
     v8 = 0;
     IEventEngine::SendAMessage(g_pEvnEngine, v3);
@@ -100,7 +107,9 @@ bool  CStateCampaign3X3::OnEvent(class CEvn_Event & a2) {
   if ( event != 102 )
   {
     if ( event != 103 )
+    {
       return CGuiGameState::OnEvent(this, a2);
+    }
     CGameStateHandler::Switch((int)CStateLocalType::DynamicCreateFunc, 0);
     return 1;
   }
@@ -116,12 +125,7 @@ bool  CStateCampaign3X3::OnEvent(class CEvn_Event & a2) {
     {
       v6 = 3;
     }
-    else if ( BBSupportDbgReportF(
-                2,
-                "main\\states\\StateCampaign3X3.cpp",
-                130,
-                "Unkown Race for Camapaign %d",
-                a2->m_lParam) == 1 )
+    else if ( BBSupportDbgReportF(2, "main\\states\\StateCampaign3X3.cpp", 130, "Unkown Race for Camapaign %d", a2->m_lParam) == 1 )
     {
       __debugbreak();
     }

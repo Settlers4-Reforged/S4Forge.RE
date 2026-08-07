@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CAnimalRanchRole::New(std::istream & a1) {
   
   if ( operator new(0x194u) )
+  {
     return CAnimalRanchRole::CAnimalRanchRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -56,10 +60,9 @@ void  CAnimalRanchRole::LogicUpdate(class CBuilding * a2) {
   v36 = this;
   v2 = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( v2 )
-    LOBYTE(v2) = (*(int (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v36 + 88))(
-                   v36,
-                   a2,
-                   1);
+  {
+    LOBYTE(v2) = (*(int (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v36 + 88))(v36, a2, 1);
+  }
   v35 = *((_BYTE *)v36 + 4);
   switch ( v35 )
   {
@@ -87,18 +90,11 @@ LABEL_35:
       }
       break;
     case 3:
-      if ( !*((_BYTE *)v36 + 29)
-        || !IEntity::FlagBits(a2, (EntityFlag)0x1000u)
-        || !CWorkUpBuildingRole::HaveMaterial(v36, a2) )
+      if ( !*((_BYTE *)v36 + 29) || !IEntity::FlagBits(a2, (EntityFlag)0x1000u) || !CWorkUpBuildingRole::HaveMaterial(v36, a2) )
       {
         goto LABEL_35;
       }
-      if ( !*(_BYTE *)std::vector<unsigned char>::operator[](0)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Building\\AnimalRanchRole.cpp",
-             169,
-             "m_pBuildingInfo->vAnimListId[0] != 0") == 1 )
+      if ( !*(_BYTE *)std::vector<unsigned char>::operator[](0) && BBSupportDbgReport(2, "MapObjects\\Building\\AnimalRanchRole.cpp", 169, "m_pBuildingInfo->vAnimListId[0] != 0") == 1 )
       {
         __debugbreak();
       }
@@ -107,15 +103,15 @@ LABEL_35:
       {
         v33 = CPileMgr::operator[](*((unsigned __int16 *)v36 + 191));
         if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v33 + 40))(v33) >= 8 )
+        {
           goto LABEL_35;
+        }
         if ( *((unsigned __int8 *)v36 + 400) >= 6u )
         {
           --*((_BYTE *)v36 + 400);
           v22 = IEntity::Type((unsigned __int16 *)a2);
           v7 = IEntity::Race(a2);
-          *((_DWORD *)v36 + 19) = CGfxManager::GetBuildingFirstJob((CGfxManager *)g_pGfxManager, v7, v22)
-                                + *((unsigned __int8 *)v36 + 400)
-                                + 1;
+          *((_DWORD *)v36 + 19) = CGfxManager::GetBuildingFirstJob((CGfxManager *)g_pGfxManager, v7, v22) + *((unsigned __int8 *)v36 + 400) + 1;
           v8 = CPileMgr::operator[](*((unsigned __int16 *)v36 + 191));
           CPile::IncreaseUnforeseen((CPile *)v8, 1);
           LOBYTE(v2) = IAnimatedEntity::RegisterForLogicUpdate(31);
@@ -141,16 +137,15 @@ LABEL_35:
             *((_BYTE *)v36 + 156) = 1;
             *((_BYTE *)v36 + 158) = 0;
           }
-          LOBYTE(v2) = (*(int (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v36 + 72))(
-                         v36,
-                         a2,
-                         1);
+          LOBYTE(v2) = (*(int (__thiscall **)(CWorkUpBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v36 + 72))(v36, a2, 1);
         }
       }
       else
       {
         if ( v34 != 13 )
+        {
           goto LABEL_35;
+        }
         v31 = CSettlerMgr::operator[](*((unsigned __int16 *)v36 + 4));
         v9 = (unsigned __int8 *)std::vector<unsigned char>::operator[](0);
         v28 = CEntityEvent::CEntityEvent((CEntityEvent *)v25, 3u, 0, 0, *v9, 0);
@@ -220,9 +215,7 @@ void  CAnimalRanchRole::Init(class CBuilding * a2) {
   ++*((_BYTE *)this + 400);
   v6 = IEntity::Type((unsigned __int16 *)a2);
   v2 = IEntity::Race(a2);
-  *((_DWORD *)this + 19) = CGfxManager::GetBuildingFirstJob((CGfxManager *)g_pGfxManager, v2, v6)
-                         + *((unsigned __int8 *)this + 400)
-                         + 1;
+  *((_DWORD *)this + 19) = CGfxManager::GetBuildingFirstJob((CGfxManager *)g_pGfxManager, v2, v6) + *((unsigned __int8 *)this + 400) + 1;
   *((_BYTE *)this + 156) = 1;
   *((_BYTE *)this + 158) = 0;
   v3 = CBuilding::EnsignWorldIdx(a2);

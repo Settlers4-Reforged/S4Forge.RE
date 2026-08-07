@@ -4,7 +4,7 @@
 // Definitions for class CAITaskForcePriestsRoman
 
 // address=[0x132b8b0]
-// Decompiled from int __thiscall CAITaskForcePriestsRoman::ChooseMilitarySpell(  CAITaskForcePriestsRoman *this,  const struct SCountFightersResult *a2,  int a3)
+// Decompiled from int __thiscall CAITaskForcePriestsRoman::ChooseMilitarySpell(CAITaskForcePriestsRoman *this, const struct SCountFightersResult *a2, int a3)
 int  CAITaskForcePriestsRoman::ChooseMilitarySpell(struct SCountFightersResult const & a2, int a3) {
   
   unsigned int v4; // esi
@@ -18,22 +18,30 @@ int  CAITaskForcePriestsRoman::ChooseMilitarySpell(struct SCountFightersResult c
 
   m_uEnemySoldiers = a2->m_uEnemySoldiers;
   if ( m_uEnemySoldiers <= 0 )
+  {
     return -1;
+  }
   if ( m_uEnemySoldiers < 5 )
   {
     v4 = IAIEnvironment::Rand();
     if ( v4 >= m_uEnemySoldiers * CRandom16::PercentValue(0x14u) )
+    {
       return -1;
+    }
   }
   m_uAllySoldiers = a2->m_uAllySoldiers;
   if ( m_uAllySoldiers < 10 )
   {
     v5 = IAIEnvironment::Rand();
     if ( v5 >= m_uAllySoldiers * CRandom16::PercentValue(0xAu) )
+    {
       a3 &= ~0x10u;
+    }
   }
   if ( (a3 & 0x70) == 0 )
+  {
     return -1;
+  }
   v9 = CStaticConfigVarInt::operator int(&s_cAIConfigRomanMilitarySpellChanceNone);
   v8 = CStaticConfigVarInt::operator int(&s_cAIConfigRomanMilitarySpellChanceSoldier);
   v7 = CStaticConfigVarInt::operator int(&s_cAIConfigRomanMilitarySpellChanceAttack);
@@ -43,7 +51,7 @@ int  CAITaskForcePriestsRoman::ChooseMilitarySpell(struct SCountFightersResult c
 
 
 // address=[0x132b980]
-// Decompiled from int __thiscall CAITaskForcePriestsRoman::ChooseMilitarySpellDestination(  CAITaskForcePriestsRoman *this,  int a2,  int a3,  int a4,  int a5)
+// Decompiled from int __thiscall CAITaskForcePriestsRoman::ChooseMilitarySpellDestination(CAITaskForcePriestsRoman *this, int a2, int a3, int a4, int a5)
 int  CAITaskForcePriestsRoman::ChooseMilitarySpellDestination(int a2, int a3, int a4, int a5) {
   
   int v5; // eax
@@ -80,7 +88,7 @@ int  CAITaskForcePriestsRoman::ChooseMilitarySpellDestination(int a2, int a3, in
 
 
 // address=[0x132e520]
-// Decompiled from CAITaskForcePriestsRoman *__thiscall CAITaskForcePriestsRoman::CAITaskForcePriestsRoman(  CAITaskForcePriestsRoman *this,  int iOwnerId,  int tType,  int iFlags)
+// Decompiled from CAITaskForcePriestsRoman *__thiscall CAITaskForcePriestsRoman::CAITaskForcePriestsRoman(CAITaskForcePriestsRoman *this, int iOwnerId, int tType, int iFlags)
  CAITaskForcePriestsRoman::CAITaskForcePriestsRoman(int iOwnerId, enum T_AI_TASK_FORCE_TYPE tType, int iFlags) {
   
   CAITaskForcePriests::CAITaskForcePriests(this, iOwnerId, tType, iFlags);

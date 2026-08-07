@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream & a1) {
   
   if ( operator new(0x10u) )
+  {
     return CBuildingSupplyPriority::CBuildingSupplyPriority(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -50,7 +54,9 @@ class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream & a1) {
   }
   v13 = 0;
   operator^<int>(a2, (int)&v13);
-  for ( i = 0; i < v13; ++i )
+  for ( i = 0;
+        i < v13;
+        ++i )
   {
     v9 = 0;
     operator^<int>(a2, (int)&v9);
@@ -58,7 +64,9 @@ class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream & a1) {
     operator^<int>(a2, (int)&v12);
     std::map<int,int>::map<int,int>(v4);
     LOBYTE(v17) = 1;
-    for ( j = 0; j < v12; ++j )
+    for ( j = 0;
+          j < v12;
+          ++j )
     {
       v11 = 0;
       operator^<int>(a2, (int)&v11);
@@ -118,11 +126,12 @@ void  CBuildingSupplyPriority::Store(std::ostream & a2) {
     LOBYTE(v21) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v5);
     if ( !v20 )
+    {
       break;
+    }
     v13[0] = *(_DWORD *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v7);
     operator^<int>((int)a2, v13);
-    v17 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v7)
-        + 4;
+    v17 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v7) + 4;
     v12 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::size(v17);
     operator^<int>((int)a2, &v12);
     std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::begin(v8);
@@ -136,20 +145,19 @@ void  CBuildingSupplyPriority::Store(std::ostream & a2) {
       LOBYTE(v21) = 2;
       std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v3);
       if ( !v19 )
+      {
         break;
+      }
       v10[0] = *(_DWORD *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator*(v8);
       operator^<int>((int)a2, v10);
-      v9 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator*(v8)
-                     + 4);
+      v9 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator*(v8) + 4);
       operator^<int>((int)a2, &v9);
       std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator++(v4, 0);
       std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v4);
     }
     LOBYTE(v21) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v8);
-    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(
-      v6,
-      0);
+    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(v6, 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v6);
   }
   v21 = -1;
@@ -158,7 +166,7 @@ void  CBuildingSupplyPriority::Store(std::ostream & a2) {
 
 
 // address=[0x140aea0]
-// Decompiled from CBuildingSupplyPriority *__thiscall CBuildingSupplyPriority::CBuildingSupplyPriority(  CBuildingSupplyPriority *this,  int a2)
+// Decompiled from CBuildingSupplyPriority *__thiscall CBuildingSupplyPriority::CBuildingSupplyPriority(CBuildingSupplyPriority *this, int a2)
  CBuildingSupplyPriority::CBuildingSupplyPriority(int a2) {
   
   CPersistence::CPersistence(this);
@@ -211,16 +219,13 @@ int  CBuildingSupplyPriority::GetPriority(enum BUILDING_TYPES a2, enum PILE_TYPE
   v17 = this;
   v18 = 0;
   v15 = a2;
-  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::find(
-    v6,
-    &v15);
+  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::find(v6, &v15);
   v21 = 0;
   v14 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v5);
   v13 = v14;
   LOBYTE(v21) = 1;
   v18 |= 1u;
-  v16 = !(unsigned __int8)std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v14)
-     && BBSupportDbgReport(2, "Logic\\BuildingSupplyPriority.cpp", 152, "findAt!=m_cBuildingList.end()") == 1;
+  v16 = !(unsigned __int8)std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v14) && BBSupportDbgReport(2, "Logic\\BuildingSupplyPriority.cpp", 152, "findAt!=m_cBuildingList.end()") == 1;
   v20 = v16;
   v21 = 0;
   if ( (v18 & 1) != 0 )
@@ -229,7 +234,9 @@ int  CBuildingSupplyPriority::GetPriority(enum BUILDING_TYPES a2, enum PILE_TYPE
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v5);
   }
   if ( v20 )
+  {
     __debugbreak();
+  }
   v12 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v4);
   v11[1] = v12;
   LOBYTE(v21) = 2;
@@ -295,17 +302,16 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES a2, str
     LOBYTE(v24) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v9);
     if ( !v23 )
+    {
       break;
-    v20 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v11)
-        + 4;
+    }
+    v20 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v11) + 4;
     v15[0] = a2;
     v16 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::end(v7);
     v15[1] = v16;
     LOBYTE(v24) = 2;
     v6 = v16;
-    v14 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(
-            v8,
-            v15);
+    v14 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(v8, v15);
     v13[1] = v14;
     LOBYTE(v24) = 3;
     v22 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator!=(v6);
@@ -321,9 +327,7 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES a2, str
       v4 = (_DWORD *)std::map<int,int>::operator[](v13);
       *(_DWORD *)(a3 + 8 * v21++ + 4) = *v4;
     }
-    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(
-      v10,
-      0);
+    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(v10, 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v10);
   }
   v12 = v21;
@@ -370,17 +374,16 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES a2) {
     LOBYTE(v21) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v6);
     if ( !v20 )
+    {
       break;
-    v16 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v8)
-        + 4;
+    }
+    v16 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v8) + 4;
     v12[0] = a2;
     v13 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::end(v4);
     v12[1] = v13;
     LOBYTE(v21) = 2;
     v3 = v13;
-    v11 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(
-            v5,
-            v12);
+    v11 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(v5, v12);
     v10 = v11;
     LOBYTE(v21) = 3;
     v19 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator!=(v3);
@@ -389,10 +392,10 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES a2) {
     LOBYTE(v21) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v4);
     if ( v19 )
+    {
       ++v18;
-    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(
-      v7,
-      0);
+    }
+    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(v7, 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v7);
   }
   v9 = v18;
@@ -442,17 +445,16 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, struct SDistri
     LOBYTE(v25) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v9);
     if ( !v24 )
+    {
       break;
-    v21 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v11)
-        + 4;
+    }
+    v21 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v11) + 4;
     v16[0] = a2;
     v17 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::end(v7);
     v16[1] = v17;
     LOBYTE(v25) = 2;
     v5 = v17;
-    v15 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(
-            v8,
-            v16);
+    v15 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(v8, v16);
     v14[1] = v15;
     LOBYTE(v25) = 3;
     v23 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator!=(v5);
@@ -463,9 +465,7 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, struct SDistri
     if ( v23 )
     {
       v14[0] = a2;
-      v13 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(
-              v6,
-              v14);
+      v13 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(v6, v14);
       v12 = v13;
       LOBYTE(v25) = 4;
       v3 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator*(v13);
@@ -474,9 +474,7 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, struct SDistri
       std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v6);
       BBSupportTracePrintF(1, " Change Good %d Priotity to %d", a2, *(_DWORD *)(a3 + 8 * v22++ + 4));
     }
-    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(
-      v10,
-      0);
+    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(v10, 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v10);
   }
   v25 = -1;
@@ -511,16 +509,13 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, enum BUILDING_
   v18 = this;
   v20 = 0;
   v16[0] = a3;
-  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::find(
-    v8,
-    v16);
+  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::find(v8, v16);
   v23 = 0;
   v15 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v7);
   v14 = v15;
   LOBYTE(v23) = 1;
   v20 |= 1u;
-  v17 = !(unsigned __int8)std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v15)
-     && BBSupportDbgReport(2, "Logic\\BuildingSupplyPriority.cpp", 218, "findAt!=m_cBuildingList.end()") == 1;
+  v17 = !(unsigned __int8)std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v15) && BBSupportDbgReport(2, "Logic\\BuildingSupplyPriority.cpp", 218, "findAt!=m_cBuildingList.end()") == 1;
   v22 = v17;
   v23 = 0;
   if ( (v20 & 1) != 0 )
@@ -529,7 +524,9 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, enum BUILDING_
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v7);
   }
   if ( v22 )
+  {
     __debugbreak();
+  }
   v13 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v6);
   v12[1] = v13;
   LOBYTE(v23) = 2;
@@ -546,7 +543,9 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, enum BUILDING_
     if ( a4 + v10 >= 0 )
     {
       if ( v19 > 100 )
+      {
         v19 = 100;
+      }
     }
     else
     {
@@ -1418,10 +1417,16 @@ void  CBuildingSupplyPriority::CreateAllRacesPriorities(void) {
   CGoodDistributionInfo::CGoodDistributionInfo(&v54);
   NumberOfSupplyBuildings = CBuildingSupplyPriority::GetNumberOfSupplyBuildings(v53, 9, (int)v54.m_aSupplyPriorities);
   v51 = 0;
-  for ( i = 0; i < NumberOfSupplyBuildings; ++i )
+  for ( i = 0;
+        i < NumberOfSupplyBuildings;
+        ++i )
+  {
     v51 += v54.m_aSupplyPriorities[i].m_uPriority;
+  }
   if ( v51 != 100 && BBSupportDbgReport(2, "Logic\\BuildingSupplyPriority.cpp", 299, "Result == 100") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 

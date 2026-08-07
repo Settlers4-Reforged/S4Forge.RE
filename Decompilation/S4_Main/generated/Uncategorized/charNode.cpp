@@ -26,7 +26,9 @@ char  charNode::getLastChar(void)const {
 char *  charNode::getString(char * a2, char * a3)const {
   
   if ( a2 < a3 )
+  {
     *a2++ = *((_BYTE *)this + 4);
+  }
   return a2;
 }
 

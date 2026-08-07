@@ -102,9 +102,13 @@ void  CFeatureGrid::initGrid(void) {
   v59 = this;
   v48 = 0;
   Size = CGrid::getSize((CGrid *)(g_pBasicGrid + 4));
-  for ( i = 0; i < Size; ++i )
+  for ( i = 0;
+        i < Size;
+        ++i )
   {
-    for ( j = 0; j < Size; ++j )
+    for ( j = 0;
+          j < Size;
+          ++j )
     {
       if ( CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j, i) == 1 )
       {
@@ -113,10 +117,7 @@ void  CFeatureGrid::initGrid(void) {
         {
           v38 = CRandom16::Rand((CRandom16 *)g_pRand) % 6;
         }
-        else if ( !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j + 1, i)
-               || !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j - 1, i)
-               || !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j, i + 1)
-               || !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j, i - 1) )
+        else if ( !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j + 1, i) || !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j - 1, i) || !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j, i + 1) || !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j, i - 1) )
         {
           v38 = CRandom16::Rand((CRandom16 *)g_pRand) % 6;
         }
@@ -140,8 +141,7 @@ void  CFeatureGrid::initGrid(void) {
           *(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (2 * i + 1) + 2 * j + 1) = 1;
           ++v48;
         }
-        if ( *((_DWORD *)v59 + 1) * (2 * i + 1) + 2 * j + 1 >= *((_DWORD *)v59 + 1) * *((_DWORD *)v59 + 1)
-          && BBSupportDbgReport(2, "FeatureGrid.cpp", 93, "( x * 2 + ( y * 2 + 1 ) * m_iSize + 1 ) < m_iSize * m_iSize") == 1 )
+        if ( *((_DWORD *)v59 + 1) * (2 * i + 1) + 2 * j + 1 >= *((_DWORD *)v59 + 1) * *((_DWORD *)v59 + 1) && BBSupportDbgReport(2, "FeatureGrid.cpp", 93, "( x * 2 + ( y * 2 + 1 ) * m_iSize + 1 ) < m_iSize * m_iSize") == 1 )
         {
           __debugbreak();
         }
@@ -169,13 +169,17 @@ void  CFeatureGrid::initGrid(void) {
     *((_DWORD *)v59 + 3) += (unsigned __int8)g_iNumPlayers / 4;
     *((_DWORD *)v59 + 4) += (unsigned __int8)g_iNumPlayers / 4;
   }
-  for ( k = 0; k < *((_DWORD *)v59 + 2); ++k )
+  for ( k = 0;
+        k < *((_DWORD *)v59 + 2);
+        ++k )
   {
     v1 = CRandom16::Rand((CRandom16 *)g_pRand);
     v31 = v1 % *((_DWORD *)v59 + 1);
     v2 = CRandom16::Rand((CRandom16 *)g_pRand);
     v30 = v2 % *((_DWORD *)v59 + 1);
-    for ( m = 0; !CFeatureGrid::findNearestElement(v59, (int *)&v31, (int *)&v30, 1, 1) && m < 5; ++m )
+    for ( m = 0;
+          !CFeatureGrid::findNearestElement(v59, (int *)&v31, (int *)&v30, 1, 1) && m < 5;
+          ++m )
     {
       v3 = CRandom16::Rand((CRandom16 *)g_pRand);
       v31 = v3 % *((_DWORD *)v59 + 1);
@@ -187,29 +191,25 @@ void  CFeatureGrid::initGrid(void) {
       *(_BYTE *)(*(_DWORD *)v59 + v31 + *((_DWORD *)v59 + 1) * v30) = 102;
       v46 = v31;
       v47 = v30;
-      for ( n = 1; n < 2; ++n )
+      for ( n = 1;
+            n < 2;
+            ++n )
       {
         v58 = 0;
-        if ( (v46 < 0 || v46 >= *((_DWORD *)v59 + 1))
-          && BBSupportDbgReport(2, "FeatureGrid.cpp", 155, "iCurX >= 0 && iCurX < m_iSize") == 1 )
+        if ( (v46 < 0 || v46 >= *((_DWORD *)v59 + 1)) && BBSupportDbgReport(2, "FeatureGrid.cpp", 155, "iCurX >= 0 && iCurX < m_iSize") == 1 )
         {
           __debugbreak();
         }
-        if ( (v47 < 0 || v47 >= *((_DWORD *)v59 + 1))
-          && BBSupportDbgReport(2, "FeatureGrid.cpp", 156, "iCurY >= 0 && iCurY < m_iSize") == 1 )
+        if ( (v47 < 0 || v47 >= *((_DWORD *)v59 + 1)) && BBSupportDbgReport(2, "FeatureGrid.cpp", 156, "iCurY >= 0 && iCurY < m_iSize") == 1 )
         {
           __debugbreak();
         }
-        if ( !v58
-          && v46 + 1 < *((_DWORD *)v59 + 1)
-          && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * v47 + 1) == 1 )
+        if ( !v58 && v46 + 1 < *((_DWORD *)v59 + 1) && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * v47 + 1) == 1 )
         {
           ++v46;
           v58 = 1;
         }
-        if ( !v58
-          && v47 + 1 < *((_DWORD *)v59 + 1)
-          && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * (v47 + 1)) == 1 )
+        if ( !v58 && v47 + 1 < *((_DWORD *)v59 + 1) && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * (v47 + 1)) == 1 )
         {
           ++v47;
           v58 = 1;
@@ -228,7 +228,9 @@ void  CFeatureGrid::initGrid(void) {
       }
     }
   }
-  for ( ii = 0; ii < (unsigned __int8)g_iNumPlayers; ++ii )
+  for ( ii = 0;
+        ii < (unsigned __int8)g_iNumPlayers;
+        ++ii )
   {
     v50 = 0;
     v51 = 0;
@@ -242,9 +244,13 @@ void  CFeatureGrid::initGrid(void) {
     {
       v5 = j__abs(v25 - v50);
       if ( j__abs(v26 - v51) + v5 <= 2 )
+      {
         CPlayerData::setNearestMountain(*(CPlayerData **)(g_pPlayerData + 4 * ii), v25, v26);
+      }
       else
+      {
         v49 = 1;
+      }
     }
     else
     {
@@ -266,44 +272,45 @@ void  CFeatureGrid::initGrid(void) {
       v57 = v19;
       v45 = 0;
       if ( !v50 )
+      {
         v50 = 1;
+      }
       if ( v50 == *((_DWORD *)v59 + 1) - 1 )
+      {
         --v50;
+      }
       if ( !v51 )
+      {
         v51 = 1;
+      }
       if ( v51 == *((_DWORD *)v59 + 1) - 1 )
+      {
         --v51;
+      }
       while ( v57 != v29 && !v45 )
       {
         if ( (g_iFlags & 1) != 0 && (g_iFlags & 2) != 0 && v57 == 4 && v29 != 5 )
+        {
           ++v57;
-        if ( *((_DWORD *)v59 + v57 + 5) + v50 >= 0
-          && *((_DWORD *)v59 + v57 + 5) + v50 < *((_DWORD *)v59 + 1)
-          && *((_DWORD *)v59 + v57 + 13) + v51 >= 0
-          && *((_DWORD *)v59 + v57 + 13) + v51 < *((_DWORD *)v59 + 1)
-          && *(_BYTE *)(*(_DWORD *)v59
-                      + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v57 + 13) + v51)
-                      + *((_DWORD *)v59 + v57 + 5)
-                      + v50) != 101 )
+        }
+        if ( *((_DWORD *)v59 + v57 + 5) + v50 >= 0 && *((_DWORD *)v59 + v57 + 5) + v50 < *((_DWORD *)v59 + 1) && *((_DWORD *)v59 + v57 + 13) + v51 >= 0 && *((_DWORD *)v59 + v57 + 13) + v51 < *((_DWORD *)v59 + 1) && *(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v57 + 13) + v51) + *((_DWORD *)v59 + v57 + 5) + v50) != 101 )
         {
           v45 = 1;
-          *(_BYTE *)(*(_DWORD *)v59
-                   + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v57 + 13) + v51)
-                   + *((_DWORD *)v59 + v57 + 5)
-                   + v50) = 102;
-          CPlayerData::setNearestMountain(
-            *(CPlayerData **)(g_pPlayerData + 4 * ii),
-            *((_DWORD *)v59 + v57 + 5) + v50,
-            *((_DWORD *)v59 + v57 + 13) + v51);
+          *(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v57 + 13) + v51) + *((_DWORD *)v59 + v57 + 5) + v50) = 102;
+          CPlayerData::setNearestMountain(*(CPlayerData **)(g_pPlayerData + 4 * ii), *((_DWORD *)v59 + v57 + 5) + v50, *((_DWORD *)v59 + v57 + 13) + v51);
         }
         if ( ++v57 == 8 )
+        {
           v57 = 0;
+        }
       }
     }
   }
   v23 = 0;
   v22 = 0;
-  for ( jj = 0; jj < v48; ++jj )
+  for ( jj = 0;
+        jj < v48;
+        ++jj )
   {
     if ( v23 <= *((_DWORD *)v59 + 3) )
     {
@@ -330,7 +337,9 @@ void  CFeatureGrid::initGrid(void) {
       }
     }
   }
-  for ( ii = 0; ii < (unsigned __int8)g_iNumPlayers; ++ii )
+  for ( ii = 0;
+        ii < (unsigned __int8)g_iNumPlayers;
+        ++ii )
   {
     v10 = CRandom16::Rand((CRandom16 *)g_pRand);
     v21 = v10 % 3 + 3;
@@ -353,26 +362,20 @@ void  CFeatureGrid::initGrid(void) {
     v44 = 0;
     while ( v52 != v21 && !v44 )
     {
-      if ( *((_DWORD *)v59 + v52 + 5) + v40 >= 0
-        && *((_DWORD *)v59 + v52 + 5) + v40 < *((_DWORD *)v59 + 1)
-        && *((_DWORD *)v59 + v52 + 13) + v39 >= 0
-        && *((_DWORD *)v59 + v52 + 13) + v39 < *((_DWORD *)v59 + 1)
-        && *(_BYTE *)(*(_DWORD *)v59
-                    + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v52 + 13) + v39)
-                    + *((_DWORD *)v59 + v52 + 5)
-                    + v40) == 101 )
+      if ( *((_DWORD *)v59 + v52 + 5) + v40 >= 0 && *((_DWORD *)v59 + v52 + 5) + v40 < *((_DWORD *)v59 + 1) && *((_DWORD *)v59 + v52 + 13) + v39 >= 0 && *((_DWORD *)v59 + v52 + 13) + v39 < *((_DWORD *)v59 + 1) && *(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v52 + 13) + v39) + *((_DWORD *)v59 + v52 + 5) + v40) == 101 )
       {
-        *(_BYTE *)(*(_DWORD *)v59
-                 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v52 + 13) + v39)
-                 + *((_DWORD *)v59 + v52 + 5)
-                 + v40) = 104;
+        *(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v52 + 13) + v39) + *((_DWORD *)v59 + v52 + 5) + v40) = 104;
         v44 = 1;
       }
       if ( ++v52 == 8 )
+      {
         v52 = 0;
+      }
     }
   }
-  for ( ii = 0; ii < (unsigned __int8)g_iNumPlayers; ++ii )
+  for ( ii = 0;
+        ii < (unsigned __int8)g_iNumPlayers;
+        ++ii )
   {
     v37 = 0;
     v36 = 0;
@@ -381,8 +384,7 @@ void  CFeatureGrid::initGrid(void) {
     v36 *= 2;
     v34 = v37;
     v35 = v36;
-    if ( !CFeatureGrid::findNearestElement(v59, &v34, &v35, 1, 1)
-      || (v11 = j__abs(v34 - v37), j__abs(v35 - v36) + v11 > 3) )
+    if ( !CFeatureGrid::findNearestElement(v59, &v34, &v35, 1, 1) || (v11 = j__abs(v34 - v37), j__abs(v35 - v36) + v11 > 3) )
     {
       v34 = v37;
       v35 = v36;
@@ -390,11 +392,15 @@ void  CFeatureGrid::initGrid(void) {
     }
     *(_BYTE *)(*(_DWORD *)v59 + v34 + *((_DWORD *)v59 + 1) * v35) = 106;
   }
-  for ( ii = 0; ; ++ii )
+  for ( ii = 0;
+        ;
+        ++ii )
   {
     result = (unsigned __int8)g_iNumPlayers;
     if ( ii >= (unsigned __int8)g_iNumPlayers )
+    {
       break;
+    }
     v20 = CRandom16::Rand((CRandom16 *)g_pRand) % 8;
     if ( (int)(v20 + 1) <= 7 )
     {
@@ -415,27 +421,15 @@ void  CFeatureGrid::initGrid(void) {
     v43 = 0;
     while ( v53 != v20 && !v43 )
     {
-      if ( *((_DWORD *)v59 + v53 + 5) + v42 >= 0
-        && *((_DWORD *)v59 + v53 + 5) + v42 < *((_DWORD *)v59 + 1)
-        && *((_DWORD *)v59 + v53 + 13) + v41 >= 0
-        && *((_DWORD *)v59 + v53 + 13) + v41 < *((_DWORD *)v59 + 1)
-        && (*(_BYTE *)(*(_DWORD *)v59
-                     + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v53 + 13) + v41)
-                     + *((_DWORD *)v59 + v53 + 5)
-                     + v42) == 1
-         || *(_BYTE *)(*(_DWORD *)v59
-                     + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v53 + 13) + v41)
-                     + *((_DWORD *)v59 + v53 + 5)
-                     + v42) == 101) )
+      if ( *((_DWORD *)v59 + v53 + 5) + v42 >= 0 && *((_DWORD *)v59 + v53 + 5) + v42 < *((_DWORD *)v59 + 1) && *((_DWORD *)v59 + v53 + 13) + v41 >= 0 && *((_DWORD *)v59 + v53 + 13) + v41 < *((_DWORD *)v59 + 1) && (*(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v53 + 13) + v41) + *((_DWORD *)v59 + v53 + 5) + v42) == 1 || *(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v53 + 13) + v41) + *((_DWORD *)v59 + v53 + 5) + v42) == 101) )
       {
-        *(_BYTE *)(*(_DWORD *)v59
-                 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v53 + 13) + v41)
-                 + *((_DWORD *)v59 + v53 + 5)
-                 + v42) = 105;
+        *(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v53 + 13) + v41) + *((_DWORD *)v59 + v53 + 5) + v42) = 105;
         v43 = 1;
       }
       if ( ++v53 == 8 )
+      {
         v53 = 0;
+      }
     }
   }
   return result;
@@ -481,7 +475,9 @@ bool  CFeatureGrid::findNearestElement(int & a2, int & a3, int a4, bool a5) {
   {
     v13 = *(_DWORD *)TStaticFIFO<int,256>::Top(v22);
     TStaticFIFO<int,256>::Pop(v22);
-    for ( i = 0; i < 8; ++i )
+    for ( i = 0;
+          i < 8;
+          ++i )
     {
       v21 = v13 % *((_DWORD *)v19 + 1);
       v20 = v13 / *((_DWORD *)v19 + 1);
@@ -497,7 +493,9 @@ bool  CFeatureGrid::findNearestElement(int & a2, int & a3, int a4, bool a5) {
           break;
         case 1:
           if ( v20 - 1 >= 0 )
+          {
             --v20;
+          }
           break;
         case 2:
           if ( v21 + 1 < *((_DWORD *)v19 + 1) && v20 - 1 >= 0 )
@@ -508,15 +506,21 @@ bool  CFeatureGrid::findNearestElement(int & a2, int & a3, int a4, bool a5) {
           break;
         case 3:
           if ( v21 - 1 >= 0 )
+          {
             --v21;
+          }
           break;
         case 4:
           if ( v21 + 1 < *((_DWORD *)v19 + 1) )
+          {
             ++v21;
+          }
           break;
         case 5:
           if ( v20 + 1 < *((_DWORD *)v19 + 1) )
+          {
             ++v20;
+          }
           break;
         case 6:
           if ( v21 + 1 < *((_DWORD *)v19 + 1) && v20 + 1 < *((_DWORD *)v19 + 1) )
@@ -538,13 +542,21 @@ bool  CFeatureGrid::findNearestElement(int & a2, int & a3, int a4, bool a5) {
       if ( !*((_BYTE *)v18 + v21 + *((_DWORD *)v19 + 1) * v20) )
       {
         if ( v21 >= *((_DWORD *)v19 + 1) && BBSupportDbgReport(2, "FeatureGrid.cpp", 499, "iCurrentX < m_iSize") == 1 )
+        {
           __debugbreak();
+        }
         if ( v21 < 0 && BBSupportDbgReport(2, "FeatureGrid.cpp", 500, "iCurrentX >= 0") == 1 )
+        {
           __debugbreak();
+        }
         if ( v20 >= *((_DWORD *)v19 + 1) && BBSupportDbgReport(2, "FeatureGrid.cpp", 501, "iCurrentY < m_iSize") == 1 )
+        {
           __debugbreak();
+        }
         if ( v20 < 0 && BBSupportDbgReport(2, "FeatureGrid.cpp", 502, "iCurrentY >= 0") == 1 )
+        {
           __debugbreak();
+        }
         *((_BYTE *)v18 + v21 + *((_DWORD *)v19 + 1) * v20) = 1;
         if ( !a5 || *(_BYTE *)(*(_DWORD *)v19 + v21 + *((_DWORD *)v19 + 1) * v20) )
         {
@@ -567,7 +579,9 @@ bool  CFeatureGrid::findNearestElement(int & a2, int & a3, int a4, bool a5) {
   }
   operator delete[](v18);
   if ( v16 == 1024 && v15 == 1024 )
+  {
     return 0;
+  }
   *a2 = v16;
   *a3 = v15;
   return 1;

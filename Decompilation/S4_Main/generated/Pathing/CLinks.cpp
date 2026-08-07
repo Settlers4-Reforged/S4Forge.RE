@@ -14,8 +14,12 @@ void __cdecl CLinks::InitLinks(void) {
   LOBYTE(CLinks::m_cLinks[0x3FFFE].m_uData) = 0;
   HIBYTE(CLinks::m_cLinks[0x3FFFE].m_uData) = 0xFE;
   CLinks::m_cLinks[0x3FFFF].m_uData = 0;
-  for ( i = 2; i <= 0x3FFFD; ++i )
+  for ( i = 2;
+        i <= 0x3FFFD;
+        ++i )
+  {
     CLinks::m_cLinks[i].m_uData = 0xFF00;
+  }
   CLinks::m_iLinksPushBackMode = 1;
   CLinks::m_iMinFreeLinksId = 2;
   CLinks::m_iMaxUsedLinksId = 2;
@@ -26,8 +30,7 @@ void __cdecl CLinks::InitLinks(void) {
 // Decompiled from void CLinks::DeactivateLinksPushBackMode()
 void __cdecl CLinks::DeactivateLinksPushBackMode(void) {
   
-  if ( !CLinks::m_iLinksPushBackMode
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 674, "m_iLinksPushBackMode") == 1 )
+  if ( !CLinks::m_iLinksPushBackMode && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 674, "m_iLinksPushBackMode") == 1 )
   {
     __debugbreak();
   }
@@ -46,8 +49,7 @@ class CLinkList & __cdecl CLinks::PushLinksBack(class CIntLinkList const & a1) {
   int v4; // [esp+4h] [ebp-Ch]
   CLinkList *v5; // [esp+Ch] [ebp-4h]
 
-  if ( !CLinks::m_iLinksPushBackMode
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 690, "m_iLinksPushBackMode") == 1 )
+  if ( !CLinks::m_iLinksPushBackMode && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 690, "m_iLinksPushBackMode") == 1 )
   {
     __debugbreak();
   }
@@ -72,44 +74,43 @@ int __cdecl CLinks::PushLinksUndef(int a1) {
   iSizeEx = a1 + (a1 & 1) + 2;
   iUnusedLinksId = CLinks::SearchForUnusedLinkEntries(iSizeEx);
   if ( !iUnusedLinksId )
+  {
     return 0;
+  }
   if ( (iSizeEx & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 719, "(iSizeEx & 1) == 0") == 1 )
-    __debugbreak();
-  if ( (iUnusedLinksId & 1) != 0
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 720, "(iUnusedLinksId & 1) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( iSizeEx + iUnusedLinksId > 262142
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 721, "(iUnusedLinksId + iSizeEx) <= (LINK_LAST_REAL + 1)") == 1 )
+  if ( (iUnusedLinksId & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 720, "(iUnusedLinksId & 1) == 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( iSizeEx + iUnusedLinksId > 262142 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 721, "(iUnusedLinksId + iSizeEx) <= (LINK_LAST_REAL + 1)") == 1 )
   {
     __debugbreak();
   }
   if ( iSizeEx + iUnusedLinksId > CLinks::m_iMaxUsedLinksId )
+  {
     CLinks::m_iMaxUsedLinksId = iSizeEx + iUnusedLinksId;
-  if ( CLinks::m_iMaxUsedLinksId < 2
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 728, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
+  }
+  if ( CLinks::m_iMaxUsedLinksId < 2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 728, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMaxUsedLinksId > 262142
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 729, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
+  if ( CLinks::m_iMaxUsedLinksId > 262142 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 729, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
   {
     __debugbreak();
   }
-  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 730, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
+  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 730, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
   {
     __debugbreak();
   }
   v1 = CLinks::Link(CLinks::m_iMaxUsedLinksId);
-  if ( CLink::Used(v1)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 731, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
+  if ( CLink::Used(v1) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 731, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMinFreeLinksId > CLinks::m_iMaxUsedLinksId
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 733, "m_iMinFreeLinksId <= m_iMaxUsedLinksId") == 1 )
+  if ( CLinks::m_iMinFreeLinksId > CLinks::m_iMaxUsedLinksId && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 733, "m_iMinFreeLinksId <= m_iMaxUsedLinksId") == 1 )
   {
     __debugbreak();
   }
@@ -165,20 +166,21 @@ void __cdecl CLinks::LinkListMarkAsUnused(class CLinkList & a1) {
   v1 = CLinkList::Size(a1);
   v3 = ((CLinkList::Size(a1) & 1) + v1) >> 1;
   *a1 = (struct CLinkList)0xFF00FF00;
-  for ( i = 0; i < v3; ++i )
+  for ( i = 0;
+        i < v3;
+        ++i )
+  {
     *(_DWORD *)&a1->m_uLinkTileIds[2 * i].m_uData = 0xFF00FF00;
+  }
   iLinksId = CLinks::LinksId(a1);
-  if ( (iLinksId > 262141 || iLinksId < 2)
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\TilesAndLinks.cpp",
-         886,
-         "(iLinksId >= LINK_FIRST_REAL) & (iLinksId <= LINK_LAST_REAL)") == 1 )
+  if ( (iLinksId > 262141 || iLinksId < 2) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 886, "(iLinksId >= LINK_FIRST_REAL) & (iLinksId <= LINK_LAST_REAL)") == 1 )
   {
     __debugbreak();
   }
   if ( iLinksId < CLinks::m_iMinFreeLinksId )
+  {
     CLinks::m_iMinFreeLinksId = iLinksId;
+  }
   return CLinks::CheckLinksInfo();
 }
 
@@ -193,44 +195,33 @@ void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList & _rLinkList, int _i
   int iLinksId; // [esp+Ch] [ebp-8h]
   int iOldSize; // [esp+10h] [ebp-4h]
 
-  if ( CLinkList::SearchForLinkTileId(_rLinkList, _iLinkTileId)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 910, "!_rLinkList.SearchForLinkTileId(_iLinkTileId)") == 1 )
+  if ( CLinkList::SearchForLinkTileId(_rLinkList, _iLinkTileId) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 910, "!_rLinkList.SearchForLinkTileId(_iLinkTileId)") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMaxUsedLinksId < LINK_FIRST_REAL
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 912, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
+  if ( CLinks::m_iMaxUsedLinksId < LINK_FIRST_REAL && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 912, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMaxUsedLinksId > 262142
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 913, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
+  if ( CLinks::m_iMaxUsedLinksId > 262142 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 913, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
   {
     __debugbreak();
   }
-  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 914, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
+  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 914, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
   {
     __debugbreak();
   }
   v2 = CLinks::Link(CLinks::m_iMaxUsedLinksId);
-  if ( CLink::Used(v2)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 915, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
+  if ( CLink::Used(v2) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 915, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
   {
     __debugbreak();
   }
   iOldSize = CLinkList::Size(_rLinkList);
-  if ( iOldSize + 1 >= 62
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 921, "(iOldSize + 1) < LINK_LIST_MAX") == 1 )
+  if ( iOldSize + 1 >= 62 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 921, "(iOldSize + 1) < LINK_LIST_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( _rLinkList->m_uLinkTileIds[iOldSize].m_uData != 65280
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\TilesAndLinks.cpp",
-         922,
-         "_rLinkList.m_uLinkTileIds[iOldSize] == LINK_ENTRY_UNUSED_16") == 1 )
+  if ( _rLinkList->m_uLinkTileIds[iOldSize].m_uData != 65280 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 922, "_rLinkList.m_uLinkTileIds[iOldSize] == LINK_ENTRY_UNUSED_16") == 1 )
   {
     __debugbreak();
   }
@@ -238,35 +229,28 @@ void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList & _rLinkList, int _i
   _rLinkList->m_uLinkTileIds[iOldSize].m_uData = _iLinkTileId;
   iLinksId = CLinks::LinksId(_rLinkList);
   v4 = iOldSize + (((_BYTE)iOldSize + 1) & 1) + 3;
-  if ( (iLinksId > 262141 || iLinksId < 2)
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\TilesAndLinks.cpp",
-         932,
-         "(iLinksId >= LINK_FIRST_REAL) & (iLinksId <= LINK_LAST_REAL)") == 1 )
+  if ( (iLinksId > 262141 || iLinksId < 2) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 932, "(iLinksId >= LINK_FIRST_REAL) & (iLinksId <= LINK_LAST_REAL)") == 1 )
   {
     __debugbreak();
   }
   if ( v4 + iLinksId >= CLinks::m_iMaxUsedLinksId )
+  {
     CLinks::m_iMaxUsedLinksId = v4 + iLinksId;
-  if ( CLinks::m_iMaxUsedLinksId < 2
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 939, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
+  }
+  if ( CLinks::m_iMaxUsedLinksId < 2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 939, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMaxUsedLinksId > 262142
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 940, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
+  if ( CLinks::m_iMaxUsedLinksId > 262142 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 940, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
   {
     __debugbreak();
   }
-  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 941, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
+  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 941, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
   {
     __debugbreak();
   }
   v3 = CLinks::Link(CLinks::m_iMaxUsedLinksId);
-  if ( CLink::Used(v3)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 942, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
+  if ( CLink::Used(v3) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 942, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
   {
     __debugbreak();
   }
@@ -283,7 +267,9 @@ bool __cdecl CLinks::LinkListRemoveLinkTileId(class CLinkList & a1, int a2) {
   int m_uSize; // [esp+10h] [ebp-4h]
 
   m_uSize = a1->m_uSize;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     if ( i >= m_uSize )
     {
@@ -291,7 +277,9 @@ bool __cdecl CLinks::LinkListRemoveLinkTileId(class CLinkList & a1, int a2) {
       return 0;
     }
     if ( a1->m_uLinkTileIds[i].m_uData == a2 )
+    {
       break;
+    }
   }
   a1->m_uLinkTileIds[i].m_uData = *(&a1->m_uOwnerTileId + m_uSize);
   *(&a1->m_uOwnerTileId + m_uSize) = -256;
@@ -301,7 +289,9 @@ bool __cdecl CLinks::LinkListRemoveLinkTileId(class CLinkList & a1, int a2) {
     v4 = CLinks::LinksId(a1);
     v3 = m_uSize + (((_BYTE)m_uSize - 1) & 1) + 1;
     if ( v3 + v4 < CLinks::m_iMinFreeLinksId )
+    {
       CLinks::m_iMinFreeLinksId = v3 + v4;
+    }
   }
   CLinks::CheckLinksInfo();
   return 1;
@@ -314,7 +304,9 @@ bool __cdecl CLinks::LinkListReplaceLink(class CLinkList & a1, int a2, int a3) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < a1->m_uSize; ++i )
+  for ( i = 0;
+        i < a1->m_uSize;
+        ++i )
   {
     if ( a1->m_uLinkTileIds[i].m_uData == a2 )
     {
@@ -346,125 +338,122 @@ int __cdecl CLinks::SearchForUnusedLinkEntries(int _iSizeEx) {
   int v15; // [esp+10h] [ebp-4h]
 
   if ( _iSizeEx < 2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 752, "_iSizeEx >= 2") == 1 )
+  {
     __debugbreak();
+  }
   if ( (_iSizeEx & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 753, "(_iSizeEx & 1) == 0") == 1 )
-    __debugbreak();
-  if ( CLinks::m_iLinksPushBackMode
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 755, "!m_iLinksPushBackMode") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMaxUsedLinksId < 2
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 757, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
+  if ( CLinks::m_iLinksPushBackMode && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 755, "!m_iLinksPushBackMode") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMaxUsedLinksId > 262142
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 758, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
+  if ( CLinks::m_iMaxUsedLinksId < 2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 757, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
   {
     __debugbreak();
   }
-  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 759, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
+  if ( CLinks::m_iMaxUsedLinksId > 262142 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 758, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 759, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
   {
     __debugbreak();
   }
   v1 = CLinks::Link(CLinks::m_iMaxUsedLinksId);
-  if ( CLink::Used(v1)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 760, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
+  if ( CLink::Used(v1) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 760, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMinFreeLinksId < 2
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 762, "m_iMinFreeLinksId >= LINK_FIRST_REAL") == 1 )
+  if ( CLinks::m_iMinFreeLinksId < 2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 762, "m_iMinFreeLinksId >= LINK_FIRST_REAL") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMinFreeLinksId > 262142
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 763, "m_iMinFreeLinksId <= (LINK_LAST_REAL + 1)") == 1 )
+  if ( CLinks::m_iMinFreeLinksId > 262142 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 763, "m_iMinFreeLinksId <= (LINK_LAST_REAL + 1)") == 1 )
   {
     __debugbreak();
   }
-  if ( (CLinks::m_iMinFreeLinksId & 1) != 0
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 764, "(m_iMinFreeLinksId & 1) == 0") == 1 )
+  if ( (CLinks::m_iMinFreeLinksId & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 764, "(m_iMinFreeLinksId & 1) == 0") == 1 )
   {
     __debugbreak();
   }
   v2 = CLinks::Link(CLinks::m_iMinFreeLinksId - 2);
-  if ( !CLink::Used(v2)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 765, "Link(m_iMinFreeLinksId - 2).Used()") == 1 )
+  if ( !CLink::Used(v2) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 765, "Link(m_iMinFreeLinksId - 2).Used()") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMinFreeLinksId > CLinks::m_iMaxUsedLinksId
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 767, "m_iMinFreeLinksId <= m_iMaxUsedLinksId") == 1 )
+  if ( CLinks::m_iMinFreeLinksId > CLinks::m_iMaxUsedLinksId && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 767, "m_iMinFreeLinksId <= m_iMaxUsedLinksId") == 1 )
   {
     __debugbreak();
   }
-  for ( i = CLinks::m_iMinFreeLinksId; ; i += 2 )
+  for ( i = CLinks::m_iMinFreeLinksId;
+        ;
+        i += 2 )
   {
     v3 = CLinks::Link(i);
     if ( !CLink::Used(v3) )
+    {
       break;
+    }
   }
   CLinks::m_iMinFreeLinksId = i;
   if ( i < 2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 782, "m_iMinFreeLinksId >= LINK_FIRST_REAL") == 1 )
-    __debugbreak();
-  if ( CLinks::m_iMinFreeLinksId > 262142
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 783, "m_iMinFreeLinksId <= (LINK_LAST_REAL + 1)") == 1 )
   {
     __debugbreak();
   }
-  if ( (CLinks::m_iMinFreeLinksId & 1) != 0
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 784, "(m_iMinFreeLinksId & 1) == 0") == 1 )
+  if ( CLinks::m_iMinFreeLinksId > 262142 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 783, "m_iMinFreeLinksId <= (LINK_LAST_REAL + 1)") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( (CLinks::m_iMinFreeLinksId & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 784, "(m_iMinFreeLinksId & 1) == 0") == 1 )
   {
     __debugbreak();
   }
   v4 = CLinks::Link(CLinks::m_iMinFreeLinksId - 2);
-  if ( !CLink::Used(v4)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 785, "Link(m_iMinFreeLinksId - 2).Used()") == 1 )
+  if ( !CLink::Used(v4) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 785, "Link(m_iMinFreeLinksId - 2).Used()") == 1 )
   {
     __debugbreak();
   }
   v5 = CLinks::Link(CLinks::m_iMinFreeLinksId);
-  if ( CLink::Used(v5)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 786, "!Link(m_iMinFreeLinksId).Used()") == 1 )
+  if ( CLink::Used(v5) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 786, "!Link(m_iMinFreeLinksId).Used()") == 1 )
   {
     __debugbreak();
   }
-  for ( j = CLinks::m_iMaxUsedLinksId; ; j -= 2 )
+  for ( j = CLinks::m_iMaxUsedLinksId;
+        ;
+        j -= 2 )
   {
     v6 = CLinks::Link(j - 2);
     if ( !CLink::Unused(v6) )
+    {
       break;
+    }
   }
   CLinks::m_iMaxUsedLinksId = j;
   if ( j < 2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 802, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
-    __debugbreak();
-  if ( CLinks::m_iMaxUsedLinksId > 262142
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 803, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
   {
     __debugbreak();
   }
-  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 804, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
+  if ( CLinks::m_iMaxUsedLinksId > 262142 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 803, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 804, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
   {
     __debugbreak();
   }
   v7 = CLinks::Link(CLinks::m_iMaxUsedLinksId - 2);
-  if ( !CLink::Used(v7)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 805, "Link(m_iMaxUsedLinksId - 2).Used()") == 1 )
+  if ( !CLink::Used(v7) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 805, "Link(m_iMaxUsedLinksId - 2).Used()") == 1 )
   {
     __debugbreak();
   }
   v8 = CLinks::Link(CLinks::m_iMaxUsedLinksId);
-  if ( CLink::Used(v8)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 806, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
+  if ( CLink::Used(v8) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 806, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMinFreeLinksId > CLinks::m_iMaxUsedLinksId
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 808, "m_iMinFreeLinksId <= m_iMaxUsedLinksId") == 1 )
+  if ( CLinks::m_iMinFreeLinksId > CLinks::m_iMaxUsedLinksId && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 808, "m_iMinFreeLinksId <= m_iMaxUsedLinksId") == 1 )
   {
     __debugbreak();
   }
@@ -476,21 +465,26 @@ int __cdecl CLinks::SearchForUnusedLinkEntries(int _iSizeEx) {
     {
       v10 = CLinks::Link(v15);
       if ( ((v15 < v12) & CLink::Unused(v10)) == 0 )
+      {
         break;
+      }
       v15 += 2;
     }
     if ( v15 < v12 )
     {
       v11 = CLinks::Link(v15);
-      if ( !CLink::IsHeader(v11)
-        && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 841, "Link(iNextUsedLinksId).IsHeader()") == 1 )
+      if ( !CLink::IsHeader(v11) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 841, "Link(iNextUsedLinksId).IsHeader()") == 1 )
       {
         __debugbreak();
       }
       if ( 262142 - CLinks::m_iMaxUsedLinksId < _iSizeEx )
+      {
         return 0;
+      }
       else
+      {
         return CLinks::m_iMaxUsedLinksId;
+      }
     }
     else
     {
@@ -523,15 +517,21 @@ void __cdecl CLinks::CalculateLinksInfo(void) {
   int j; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 2; ; i += 2 )
+  for ( i = 2;
+        ;
+        i += 2 )
   {
     v0 = CLinks::Link(i);
     if ( !CLink::Used(v0) )
+    {
       break;
+    }
   }
   v7 = i - 2;
   v6 = i - 2;
-  for ( j = i; j <= 262141; j += 2 )
+  for ( j = i;
+        j <= 262141;
+        j += 2 )
   {
     v1 = CLinks::Link(j);
     if ( CLink::Used(v1) )
@@ -543,58 +543,50 @@ void __cdecl CLinks::CalculateLinksInfo(void) {
   CLinks::m_iMinFreeLinksId = i;
   CLinks::m_iMaxUsedLinksId = v6 + 2;
   if ( i < 2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1065, "m_iMinFreeLinksId >= LINK_FIRST_REAL") == 1 )
-    __debugbreak();
-  if ( CLinks::m_iMinFreeLinksId > 262142
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1066, "m_iMinFreeLinksId <= (LINK_LAST_REAL + 1)") == 1 )
   {
     __debugbreak();
   }
-  if ( (CLinks::m_iMinFreeLinksId & 1) != 0
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1067, "(m_iMinFreeLinksId & 1) == 0") == 1 )
+  if ( CLinks::m_iMinFreeLinksId > 262142 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1066, "m_iMinFreeLinksId <= (LINK_LAST_REAL + 1)") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( (CLinks::m_iMinFreeLinksId & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1067, "(m_iMinFreeLinksId & 1) == 0") == 1 )
   {
     __debugbreak();
   }
   v2 = CLinks::Link(CLinks::m_iMinFreeLinksId - 2);
-  if ( !CLink::Used(v2)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1068, "Link(m_iMinFreeLinksId - 2).Used()") == 1 )
+  if ( !CLink::Used(v2) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1068, "Link(m_iMinFreeLinksId - 2).Used()") == 1 )
   {
     __debugbreak();
   }
   v3 = CLinks::Link(CLinks::m_iMinFreeLinksId);
-  if ( CLink::Used(v3)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1069, "!Link(m_iMinFreeLinksId).Used()") == 1 )
+  if ( CLink::Used(v3) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1069, "!Link(m_iMinFreeLinksId).Used()") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMaxUsedLinksId < 2
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1071, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
+  if ( CLinks::m_iMaxUsedLinksId < 2 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1071, "m_iMaxUsedLinksId >= LINK_FIRST_REAL") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMaxUsedLinksId > 262142
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1072, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
+  if ( CLinks::m_iMaxUsedLinksId > 262142 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1072, "m_iMaxUsedLinksId <= (LINK_LAST_REAL + 1)") == 1 )
   {
     __debugbreak();
   }
-  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1073, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
+  if ( (CLinks::m_iMaxUsedLinksId & 1) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1073, "(m_iMaxUsedLinksId & 1) == 0") == 1 )
   {
     __debugbreak();
   }
   v4 = CLinks::Link(CLinks::m_iMaxUsedLinksId - 2);
-  if ( !CLink::Used(v4)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1074, "Link(m_iMaxUsedLinksId - 2).Used()") == 1 )
+  if ( !CLink::Used(v4) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1074, "Link(m_iMaxUsedLinksId - 2).Used()") == 1 )
   {
     __debugbreak();
   }
   v5 = CLinks::Link(CLinks::m_iMaxUsedLinksId);
-  if ( CLink::Used(v5)
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1075, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
+  if ( CLink::Used(v5) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1075, "!Link(m_iMaxUsedLinksId).Used()") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinks::m_iMinFreeLinksId > CLinks::m_iMaxUsedLinksId
-    && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1077, "m_iMinFreeLinksId <= m_iMaxUsedLinksId") == 1 )
+  if ( CLinks::m_iMinFreeLinksId > CLinks::m_iMaxUsedLinksId && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1077, "m_iMinFreeLinksId <= m_iMaxUsedLinksId") == 1 )
   {
     __debugbreak();
   }

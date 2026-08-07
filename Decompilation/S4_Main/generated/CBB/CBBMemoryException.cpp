@@ -31,7 +31,7 @@ bool  CBBMemoryException::GetErrorMessage(char * a2, unsigned int a3) {
 
 
 // address=[0x2f337b0]
-// Decompiled from boost::exception_detail::clone_base *__thiscall CBBMemoryException::CBBMemoryException(  boost::exception_detail::clone_base *this,  struct boost::exception_detail::clone_base *a2)
+// Decompiled from boost::exception_detail::clone_base *__thiscall CBBMemoryException::CBBMemoryException(boost::exception_detail::clone_base *this, struct boost::exception_detail::clone_base *a2)
  CBBMemoryException::CBBMemoryException(class CBBMemoryException const & a2) {
   
   CBBException::CBBException(this, a2);

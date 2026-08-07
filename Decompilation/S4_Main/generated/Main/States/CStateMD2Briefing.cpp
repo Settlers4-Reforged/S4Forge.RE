@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateMD2Briefing::DynamicCreateFunc(void * a1) {
 
   C = (CStateMD2Briefing *)operator new(0x10u);
   if ( C )
+  {
     return CStateMD2Briefing::CStateMD2Briefing(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -30,8 +34,7 @@ class CGameState * __cdecl CStateMD2Briefing::DynamicCreateFunc(void * a1) {
   *((_DWORD *)this + 1) = (unsigned __int16)a2;
   *((_DWORD *)this + 2) = HIWORD(a2);
   *((_BYTE *)this + 12) = 0;
-  if ( *((int *)this + 1) >= 25
-    && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 209, "m_iCampaignType < CAMPAIGN_MAX") == 1 )
+  if ( *((int *)this + 1) >= 25 && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 209, "m_iCampaignType < CAMPAIGN_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -42,8 +45,7 @@ class CGameState * __cdecl CStateMD2Briefing::DynamicCreateFunc(void * a1) {
   }
   else
   {
-    if ( *((int *)this + 2) >= 5
-      && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 217, "m_iLevel < MD2_CAMPAIGN_RMVT_COUNT") == 1 )
+    if ( *((int *)this + 2) >= 5 && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 217, "m_iLevel < MD2_CAMPAIGN_RMVT_COUNT") == 1 )
     {
       __debugbreak();
     }
@@ -90,8 +92,7 @@ bool  CStateMD2Briefing::Perform(void) {
   {
     CSoundManager::StopMusic(g_pSoundManager);
     CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
-    if ( !byte_402C9F4
-      && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 522, "g_cBriefingSettings.m_bIsCampaign") == 1 )
+    if ( !byte_402C9F4 && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 522, "g_cBriefingSettings.m_bIsCampaign") == 1 )
     {
       __debugbreak();
     }
@@ -127,7 +128,9 @@ bool  CStateMD2Briefing::Perform(void) {
     }
     v2 = dword_4031E2C + 30;
     if ( v2 >= timeGetTime() )
+    {
       return 1;
+    }
     dword_4031E2C = timeGetTime();
     IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
     IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -226,8 +229,7 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
   {
     CSoundManager::StopMusic((CSoundManager *)g_pSoundManager);
     CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
-    if ( !byte_402C9F4
-      && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 291, "g_cBriefingSettings.m_bIsCampaign") == 1 )
+    if ( !byte_402C9F4 && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 291, "g_cBriefingSettings.m_bIsCampaign") == 1 )
     {
       __debugbreak();
     }
@@ -256,7 +258,9 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
   else
   {
     if ( m_iEventId != 9009 )
+    {
       return CGuiGameState::OnEvent(v45, a2);
+    }
     Instance = (CGUIWrapper *)CGUIWrapper::GetInstance();
     CGUIWrapper::ReleaseGUIGFXFile(Instance);
     CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
@@ -268,18 +272,20 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
       C = operator new(0x620u);
       v52 = 1;
       if ( C )
+      {
         v35 = CGameType::CGameType((CGameType *)C);
+      }
       else
+      {
         v35 = 0;
+      }
       v29 = v35;
       v52 = -1;
       g_pGameType = (int)v35;
       v46 = 0;
       v19 = 256;
       v16 = *((_DWORD *)v45 + 2) + 1;
-      v4 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_4031D98
-                                                                   + 28 * *((_DWORD *)v45 + 1)
-                                                                   - 476));
+      v4 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_4031D98 + 28 * *((_DWORD *)v45 + 1) - 476));
       snwprintf(Buffer, 0xFFu, v4, v16);
       std::wstring::wstring(v50);
       v52 = 2;
@@ -296,30 +302,12 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
         v8 = 1;
         v18 = v7;
         v17 = std::wstring::wstring(v7, v50);
-        MapData = CGameType::LoadMapData(
-                    (CGameType *)g_pGameType,
-                    v7[0],
-                    v7[1],
-                    v7[2],
-                    v7[3],
-                    v7[4],
-                    v7[5],
-                    v7[6],
-                    v8,
-                    v9,
-                    v10,
-                    v11,
-                    v12,
-                    v13,
-                    v14,
-                    v15,
-                    v16);
+        MapData = CGameType::LoadMapData((CGameType *)g_pGameType, v7[0], v7[1], v7[2], v7[3], v7[4], v7[5], v7[6], v8, v9, v10, v11, v12, v13, v14, v15, v16);
         v46 = MapData;
       }
       if ( v46 )
       {
-        if ( !CGameType::IsCampaignMap((CGameType *)g_pGameType)
-          && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 432, "g_pGameType->IsCampaignMap()") == 1 )
+        if ( !CGameType::IsCampaignMap((CGameType *)g_pGameType) && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 432, "g_pGameType->IsCampaignMap()") == 1 )
         {
           __debugbreak();
         }
@@ -334,9 +322,13 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
         v33 = operator new(0x18u);
         LOBYTE(v52) = 3;
         if ( v33 )
+        {
           v32 = INetworkEngine::INetworkEngine((INetworkEngine *)v33, 0);
+        }
         else
+        {
           v32 = 0;
+        }
         v24 = v32;
         LOBYTE(v52) = 2;
         g_pNetworkEngine = (int)v32;
@@ -353,8 +345,12 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
         *(_DWORD *)(g_pGameType + 740) = *((_DWORD *)v45 + 1);
         *(_DWORD *)(g_pGameType + 744) = *((_DWORD *)v45 + 2);
         *(_DWORD *)(g_pGameType + 692) = 3;
-        for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
+        for ( i = 0;
+              i < *(_DWORD *)(g_pGameType + 852);
+              ++i )
+        {
           *(_BYTE *)(i + g_pGameType + 440) = 0;
+        }
         INetworkEngine::Start(1, 1, *(_DWORD *)(g_pGameType + 852), 0);
         CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
         v42 = 1;
@@ -368,14 +364,15 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
         std::string::operator=(&g_iMessageBoxStringID, v5);
         v47 = IGuiEngine::CloseDialog(g_pGUIEngine, 1);
         if ( !g_pMissionCD2 && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 416, "g_pMissionCD2") == 1 )
+        {
           __debugbreak();
-        (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD2 + 12))(
-          g_pMissionCD2,
-          0,
-          GuiDlgMainscreenProc);
+        }
+        (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD2 + 12))(g_pMissionCD2, 0, GuiDlgMainscreenProc);
         v47 = IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
         if ( !v47 && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 419, "bRet") == 1 )
+        {
           __debugbreak();
+        }
         BBSupportTracePrintF(3, "MissionCD2 Map '%s' not found!", Buffer);
         IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
         if ( g_pGameType )
@@ -395,11 +392,10 @@ bool  CStateMD2Briefing::OnEvent(class CEvn_Event & a2) {
     {
       IGuiEngine::CloseDialog(g_pGUIEngine, 1);
       if ( !g_pMissionCD2 && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 381, "g_pMissionCD2") == 1 )
+      {
         __debugbreak();
-      (*(void (__thiscall **)(int, int, char (__cdecl *)(int, unsigned int, int)))(*(_DWORD *)g_pMissionCD2 + 12))(
-        g_pMissionCD2,
-        20,
-        GuiDlgMainMessageBoxProc);
+      }
+      (*(void (__thiscall **)(int, int, char (__cdecl *)(int, unsigned int, int)))(*(_DWORD *)g_pMissionCD2 + 12))(g_pMissionCD2, 20, GuiDlgMainMessageBoxProc);
       CGameStateHandler::Switch((int)CStateMessageBox::DynamicCreateFunc, 2398);
       return 1;
     }
@@ -430,19 +426,13 @@ void __cdecl CStateMD2Briefing::InitBriefingTexts(int a1, int a2) {
   char *v17; // eax
   char *v18; // eax
 
-  if ( (!a1 || a1 >= 25)
-    && BBSupportDbgReport(
-         2,
-         "main\\states\\StateMD2Briefing.cpp",
-         581,
-         "( _iCampaignType ) && ( _iCampaignType < CAMPAIGN_MAX )") == 1 )
+  if ( (!a1 || a1 >= 25) && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 581, "( _iCampaignType ) && ( _iCampaignType < CAMPAIGN_MAX )") == 1 )
   {
     __debugbreak();
   }
   if ( a1 >= 17 && a1 <= 20 )
   {
-    if ( a2 >= 5
-      && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 589, "_iLevel < MD2_CAMPAIGN_RMVT_COUNT") == 1 )
+    if ( a2 >= 5 && BBSupportDbgReport(2, "main\\states\\StateMD2Briefing.cpp", 589, "_iLevel < MD2_CAMPAIGN_RMVT_COUNT") == 1 )
     {
       __debugbreak();
     }
@@ -493,13 +483,11 @@ void __cdecl CStateMD2Briefing::InitBriefingTexts(int a1, int a2) {
       result = std::string::operator=(&stru_402C97C, v18);
       break;
     default:
-      result = (void *)BBSupportDbgReportF(
-                         2,
-                         "main\\states\\StateMD2Briefing.cpp",
-                         634,
-                         "Invalid CampaignType during CStateMD2Briefing::InitBriefingTexts init!");
+      result = (void *)BBSupportDbgReportF(2, "main\\states\\StateMD2Briefing.cpp", 634, "Invalid CampaignType during CStateMD2Briefing::InitBriefingTexts init!");
       if ( result == (void *)1 )
+      {
         __debugbreak();
+      }
       break;
   }
   return result;

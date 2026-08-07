@@ -23,9 +23,13 @@ int  INetworkEngine::GetVirtualTick(void) {
 long  INetworkEngine::GetLocalIP(void) {
   
   if ( *((_BYTE *)this + 12) )
+  {
     return (char *)CGameHost::GetLocalIP(this[2]);
+  }
   else
+  {
     return (char *)&dword_F29144[220110] + 3;
+  }
 }
 
 
@@ -81,7 +85,9 @@ bool  INetworkEngine::StartNewTick(bool a2) {
 
   started = CGameHost::StartNewCycle(this[2], a2);
   if ( a2 )
+  {
     *((_BYTE *)this + 6) = started;
+  }
   return started;
 }
 
@@ -157,7 +163,9 @@ void  INetworkEngine::StormResetEnterSessionFlag(void) {
   result = this;
   *(_DWORD *)this = &INetworkEngine::_vftable_;
   if ( !*((_DWORD *)this + 2) )
+  {
     return result;
+  }
   (***((void (__thiscall ****)(_DWORD, int))this + 2))(*((_DWORD *)this + 2), 1);
   result = this;
   *((_DWORD *)this + 2) = 0;
@@ -172,28 +180,20 @@ bool  INetworkEngine::SendNetMessage(class CEvn_Logic & a2) {
   CNet_Event v4; // [esp+Ch] [ebp-30h] BYREF
   int v5; // [esp+38h] [ebp-4h]
 
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "INetworkEngine::SendNetMessage(): msg %u, owner %i, wparam 0x%08x, wparam 0x%08x.",
-    a2->m_iEventId,
-    a2->m_iOwner,
-    a2->m_wParam,
-    a2->m_lParam);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "INetworkEngine::SendNetMessage(): msg %u, owner %i, wparam 0x%08x, wparam 0x%08x.", a2->m_iEventId, a2->m_iOwner, a2->m_wParam, a2->m_lParam);
   if ( !a2->m_iOwner && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 205, "_pMessage.m_iOwner") == 1 )
+  {
     __debugbreak();
+  }
   if ( !*((_BYTE *)this + 6) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 206, "m_bTickOpen") == 1 )
+  {
     __debugbreak();
+  }
   if ( !CPlayerManager::IsAlive(a2->m_iOwner) && a2->m_iEventId != 4002 )
+  {
     return 1;
-  CNet_Event::CNet_Event(
-    &v4,
-    a2->m_iEventId,
-    a2->m_wParam,
-    a2->m_lParam,
-    a2->m_iOwner,
-    (uint)a2->m_iData,
-    a2->m_iDataSize,
-    a2->m_iTick);
+  }
+  CNet_Event::CNet_Event(&v4, a2->m_iEventId, a2->m_wParam, a2->m_lParam, a2->m_iOwner, (uint)a2->m_iData, a2->m_iDataSize, a2->m_iTick);
   v5 = 0;
   INetworkEngine::PushMsg(this, &v4);
   v5 = -1;
@@ -203,26 +203,26 @@ bool  INetworkEngine::SendNetMessage(class CEvn_Logic & a2) {
 
 
 // address=[0x15c8690]
-// Decompiled from char __thiscall INetworkEngine::SendNetMessage(  INetworkEngine *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  int a5)
+// Decompiled from char __thiscall INetworkEngine::SendNetMessage(INetworkEngine *this, unsigned int a2, unsigned int a3, unsigned int a4, int a5)
 bool  INetworkEngine::SendNetMessage(unsigned int a2, unsigned int a3, unsigned int a4, int a5) {
   
   unsigned int CurrentTickCounter; // [esp+8h] [ebp-38h]
   _BYTE v8[32]; // [esp+10h] [ebp-30h] BYREF
   int v9; // [esp+3Ch] [ebp-4h]
 
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "INetworkEngine::SendNetMessage(): msg %u, owner %i, wparam 0x%08x, wparam 0x%08x.",
-    a2,
-    a5,
-    a3,
-    a4);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "INetworkEngine::SendNetMessage(): msg %u, owner %i, wparam 0x%08x, wparam 0x%08x.", a2, a5, a3, a4);
   if ( a5 <= 0 && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 155, "_iOwnerId > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !*((_BYTE *)this + 6) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 156, "m_bTickOpen") == 1 )
+  {
     __debugbreak();
+  }
   if ( !CPlayerManager::IsAlive(a5) && a2 != 4002 )
+  {
     return 1;
+  }
   if ( g_pEvnEngine )
   {
     CurrentTickCounter = IEventEngine::GetCurrentTickCounter(g_pEvnEngine);
@@ -247,15 +247,7 @@ bool  INetworkEngine::SendAsyncNetMessage(class CEvn_Logic & a2, unsigned char a
   CNet_Event Src; // [esp+Ch] [ebp-30h] BYREF
   int v5; // [esp+38h] [ebp-4h]
 
-  CNet_Event::CNet_Event(
-    &Src,
-    a2->m_iEventId,
-    a2->m_wParam,
-    a2->m_lParam,
-    a2->m_iOwner,
-    (uint)a2->m_iData,
-    a2->m_iDataSize,
-    a2->m_iTick);
+  CNet_Event::CNet_Event(&Src, a2->m_iEventId, a2->m_wParam, a2->m_lParam, a2->m_iOwner, (uint)a2->m_iData, a2->m_iDataSize, a2->m_iTick);
   v5 = 0;
   INetworkEngine::PushAsyncMsg(&Src, a3);
   v5 = -1;
@@ -282,14 +274,18 @@ bool  INetworkEngine::DeliverNetMessages(void) {
   if ( *((_BYTE *)this + 12) )
   {
     while ( INetworkEngine::CheckForMsg(this) )
+    {
       ;
+    }
   }
   while ( 1 )
   {
     INetworkEngine::PopMsg(this, v3);
     v12 = 0;
     if ( !v10 )
+    {
       break;
+    }
     CEvn_Logic::CEvn_Logic((CEvn_Logic *)v11, v4, v5, v6, v10, v8, v9);
     LOBYTE(v12) = 1;
     v11[4] = v7;
@@ -322,28 +318,32 @@ bool  INetworkEngine::Start(bool a2, unsigned int a3, unsigned int a4, wchar_t c
   CGameHost *C; // [esp+1Ch] [ebp-14h]
 
   if ( *((_BYTE *)this + 5) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 83, "!m_bStarted") == 1 )
+  {
     __debugbreak();
+  }
   *((_BYTE *)this + 4) = a2;
   if ( !*((_DWORD *)this + 2) )
   {
     C = (CGameHost *)operator new(0x4F0u);
     if ( C )
+    {
       v7 = CGameHost::CGameHost(C, *((_BYTE *)this + 12));
+    }
     else
+    {
       v7 = 0;
+    }
     *((_DWORD *)this + 2) = v7;
   }
   if ( Source )
   {
     CGameHost::StartIniFileGame(Source);
     *((_BYTE *)this + 4) = CGameType::IsHost(g_pGameType);
-    if ( !CGameType::IsWebGame(g_pGameType)
-      && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 106, "g_pGameType->IsWebGame()") == 1 )
+    if ( !CGameType::IsWebGame(g_pGameType) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 106, "g_pGameType->IsWebGame()") == 1 )
     {
       __debugbreak();
     }
-    if ( !CGameType::IsMultiplayerGame(g_pGameType)
-      && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 107, "g_pGameType->IsMultiplayerGame()") == 1 )
+    if ( !CGameType::IsMultiplayerGame(g_pGameType) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 107, "g_pGameType->IsMultiplayerGame()") == 1 )
     {
       __debugbreak();
     }
@@ -354,16 +354,24 @@ bool  INetworkEngine::Start(bool a2, unsigned int a3, unsigned int a4, wchar_t c
     if ( *((_BYTE *)this + 12) || !a4 )
     {
       if ( *((_BYTE *)this + 4) )
+      {
         CGameHost::InitAsHost(*((CGameHost **)this + 2), a3);
+      }
       else
+      {
         CGameHost::InitAsClient(*((CGameHost **)this + 2), a3);
+      }
     }
     else
     {
       if ( operator new(0x65Cu) )
+      {
         v6 = (struct CMsgStacks *)CMsgStacks::CMsgStacks(a4, 0, g_pGameType->m_uiTickCounter);
+      }
       else
+      {
         v6 = 0;
+      }
       CGameHost::RegisterMsgStacks(*((CGameHost **)this + 2), v6);
     }
     return 1;
@@ -386,7 +394,9 @@ void  INetworkEngine::OnEndSaving(void) {
   int v1; // eax
 
   if ( !*((_DWORD *)this + 2) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 305, "m_pGameHost != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( *((_DWORD *)this + 2) )
   {
     v1 = CStaticConfigVarInt::operator int(&g_iSaveingTimeout);
@@ -400,7 +410,9 @@ void  INetworkEngine::OnEndSaving(void) {
 void  INetworkEngine::StormJoinSessionSucceeded(void) {
   
   if ( !*((_DWORD *)this + 2) && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 314, "m_pGameHost != NULL") == 1 )
+  {
     __debugbreak();
+  }
   CGameHost::StormJoinSessionSucceeded(*((CGameHost **)this + 2));
 }
 
@@ -410,7 +422,9 @@ void  INetworkEngine::StormJoinSessionSucceeded(void) {
 void  INetworkEngine::StormHost_NewPlayerMessage(unsigned int a2, std::wstring & a3, int a4) {
   
   if ( !this[2] && BBSupportDbgReport(2, "Net\\INetworkEngine.cpp", 320, "m_pGameHost != NULL") == 1 )
+  {
     __debugbreak();
+  }
   return CGameHost::StormHost_NewPlayerMessage(a2, a3, a4);
 }
 

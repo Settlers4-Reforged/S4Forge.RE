@@ -11,14 +11,18 @@ class CPersistence * __cdecl CShadowHerb::New(std::istream & a1) {
 
   v3 = (CShadowHerb *)CShadowHerb::operator new(0x50u);
   if ( v3 )
+  {
     return CShadowHerb::CShadowHerb(v3, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x154abc0]
-// Decompiled from CShadowHerb *__thiscall CShadowHerb::CShadowHerb(  CShadowHerb *this,  unsigned int a2,  unsigned int a3,  int a4,  int a5,  int a6)
+// Decompiled from CShadowHerb *__thiscall CShadowHerb::CShadowHerb(CShadowHerb *this, unsigned int a2, unsigned int a3, int a4, int a5, int a6)
  CShadowHerb::CShadowHerb(int a2, int a3, int a4, int a5, int a6) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, 0);
@@ -28,13 +32,11 @@ class CPersistence * __cdecl CShadowHerb::New(std::istream & a1) {
   this->m_iPhases = 0;
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   this->m_uU5 = 0;
-  if ( !this->m_uCycleFrames
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\ShadowHerb.cpp", 77, "m_uCycleFrames > 0") == 1 )
+  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\ShadowHerb.cpp", 77, "m_uCycleFrames > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_uCycleFrames >= 0x20u
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\ShadowHerb.cpp", 78, "m_uCycleFrames < 32") == 1 )
+  if ( this->m_uCycleFrames >= 0x20u && BBSupportDbgReport(2, "MapObjects\\DecoObj\\ShadowHerb.cpp", 78, "m_uCycleFrames < 32") == 1 )
   {
     __debugbreak();
   }
@@ -58,8 +60,7 @@ void  CShadowHerb::LogicUpdate(void) {
     case 0u:
       ++this->m_iPhases;
       this->m_iFrame = 0;
-      this->m_iJobPart = this->m_iPhases
-                       + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
+      this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
       this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
       IAnimatedEntity::RegisterForLogicUpdate(this, 1);
       break;
@@ -111,7 +112,9 @@ struct SGfxObjectInfo *  CShadowHerb::GetGfxInfos(void) {
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, v2);
   if ( v4 && this->m_iPhases != 1 && this->m_iPhases != 2 )
+  {
     this->m_iFrame = (v4 + (unsigned int)this->m_iFrame) % this->m_uCycleFrames;
+  }
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
   MEMORY[0x40FE518] = 16;
   MEMORY[0x40FE51A] = IEntity::IsVisible(this);

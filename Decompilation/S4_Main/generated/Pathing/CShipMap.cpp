@@ -13,8 +13,7 @@ bool __cdecl CShipMap::InShipList(int a1) {
   int (*v6)[4]; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a1)
-    && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 348, "g_cWorld.InWorldPackedXY(_iXY)") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a1) && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 348, "g_cWorld.InWorldPackedXY(_iXY)") == 1 )
   {
     __debugbreak();
   }
@@ -23,12 +22,18 @@ bool __cdecl CShipMap::InShipList(int a1) {
   v2 = (Squares *)Y16X16::UnpackYFast(a1);
   v5 = Squares::XYToVW(v2);
   v6 = CShipMap::ShipListVW(v4, v5);
-  for ( i = 0; i < 4; ++i )
+  for ( i = 0;
+        i < 4;
+        ++i )
   {
     if ( (*v6)[i] == a1 )
+    {
       return 1;
+    }
     if ( !(*v6)[i] )
+    {
       return 0;
+    }
   }
   return 0;
 }
@@ -70,11 +75,15 @@ bool __cdecl CShipMap::PlaceShip(int a1) {
 
   EntryForPlaceShip = CShipMap::GetEntryForPlaceShip(a1);
   if ( !EntryForPlaceShip )
+  {
     return 0;
+  }
   if ( *EntryForPlaceShip )
   {
     if ( BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 227, "*pShipMapEntry == 0") == 1 )
+    {
       __debugbreak();
+    }
   }
   *EntryForPlaceShip = a1;
   return 1;
@@ -97,32 +106,54 @@ int * __cdecl CShipMap::GetEntryForPlaceShip(int a1) {
   v2 = (Squares *)Y16X16::UnpackYFast(a1);
   v6 = Squares::XYToVW(v2);
   v4 = CShipMap::ShipListVW(v7, v6);
-  for ( i = 0; i < 3; ++i )
+  for ( i = 0;
+        i < 3;
+        ++i )
   {
     if ( !(*v4)[i] )
+    {
       return &(*v4)[i];
+    }
   }
   if ( (*v4)[3] )
+  {
     return 0;
+  }
   if ( (*CShipMap::ShipListVW(v7, v6 - 1))[3] )
+  {
     return 0;
+  }
   if ( (*CShipMap::ShipListVW(v7, v6 + 1))[3] )
+  {
     return 0;
+  }
   if ( v7 > 0 )
   {
     if ( (*CShipMap::ShipListVW(v7 - 1, v6 - 1))[3] )
+    {
       return 0;
+    }
     if ( (*CShipMap::ShipListVW(v7 - 1, v6))[3] )
+    {
       return 0;
+    }
   }
   if ( v7 >= 63 )
+  {
     return &(*v4)[3];
+  }
   if ( (*CShipMap::ShipListVW(v7 + 1, v6))[3] )
+  {
     return 0;
+  }
   if ( (*CShipMap::ShipListVW(v7 + 1, v6 + 1))[3] )
+  {
     return 0;
+  }
   else
+  {
     return &(*v4)[3];
+  }
 }
 
 
@@ -142,14 +173,22 @@ bool __cdecl CShipMap::RemoveShip(int a1) {
   v2 = (Squares *)Y16X16::UnpackYFast(a1);
   v5 = Squares::XYToVW(v2);
   v6 = CShipMap::ShipListVW(v4, v5);
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     if ( i >= 4 )
+    {
       return 0;
+    }
     if ( (*v6)[i] == a1 )
+    {
       break;
+    }
     if ( !(*v6)[i] )
+    {
       return 0;
+    }
   }
   while ( i < 3 && (*v6)[i + 1] )
   {

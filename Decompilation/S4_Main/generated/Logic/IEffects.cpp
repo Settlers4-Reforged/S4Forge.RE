@@ -11,9 +11,13 @@ class IEffects * __cdecl IEffects::CreateEffects(void) {
 
   C = (CEffects *)operator new(0x44394u);
   if ( C )
+  {
     return CEffects::CEffects(C);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

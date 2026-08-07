@@ -3,7 +3,7 @@
 // Definitions for class CWarriorEntitySpiralWalk
 
 // address=[0x1470560]
-// Decompiled from CWarriorEntitySpiralWalk *__thiscall CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(  CWarriorEntitySpiralWalk *this,  int a2,  int a3,  int a4,  int a5,  int a6)
+// Decompiled from CWarriorEntitySpiralWalk *__thiscall CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(CWarriorEntitySpiralWalk *this, int a2, int a3, int a4, int a5, int a6)
  CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk(int a2, int a3, int a4, int a5, int a6) {
   
   CSettlerSpiralWalk::CSettlerSpiralWalk(this, a2, a3, a4);
@@ -27,8 +27,7 @@ bool  CWarriorEntitySpiralWalk::NextEntity(class IEntity * & a2) {
   while ( CSettlerSpiralWalk::NextSettlerId(v6, &v5) )
   {
     v7 = (unsigned __int8 *)CMapObjectMgr::Entity(v5);
-    if ( (((unsigned int)&loc_1FFFFFF + 1) & IEntity::Flags(v7)) != 0
-      && (*((_DWORD *)v6 + 7) & (1 << IEntity::WarriorType())) != 0 )
+    if ( (((unsigned int)&loc_1FFFFFF + 1) & IEntity::Flags(v7)) != 0 && (*((_DWORD *)v6 + 7) & (1 << IEntity::WarriorType())) != 0 )
     {
       v4 = IEntity::OwnerId(v7);
       v2 = CAlliances::PlayerBit(v4);

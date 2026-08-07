@@ -24,7 +24,9 @@
   std::string::string();
   v9 = 0;
   if ( !Str )
+  {
     return this;
+  }
   v5 = std::string::string(v7, Str);
   LOBYTE(v9) = 1;
   v4 = (void *)std::string::string((int)v5, 0, Size);
@@ -106,7 +108,9 @@ char const *  String::c_str(void)const {
 class String &  String::operator+=(char const * Str) {
   
   if ( Str )
+  {
     std::string::operator+=(Str);
+  }
   return this;
 }
 

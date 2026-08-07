@@ -7,9 +7,13 @@
 char  pDNameNode::getLastChar(void)const {
   
   if ( this[1] )
+  {
     return DName::getLastChar(this[1]);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -18,9 +22,13 @@ char  pDNameNode::getLastChar(void)const {
 char *  pDNameNode::getString(char * a2, char * a3)const {
   
   if ( this[1] )
+  {
     return DName::getString(this[1], a2, a3);
+  }
   else
+  {
     return a2;
+  }
 }
 
 
@@ -29,9 +37,13 @@ char *  pDNameNode::getString(char * a2, char * a3)const {
 int  pDNameNode::length(void)const {
   
   if ( this[1] )
+  {
     return DName::length(this[1]);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

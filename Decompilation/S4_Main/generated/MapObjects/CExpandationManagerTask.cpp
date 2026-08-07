@@ -39,7 +39,7 @@
 
 
 // address=[0x2f51a50]
-// Decompiled from char __thiscall CExpandationManagerTask::GetExpandationPermission(  CExpandationManagerTask *this,  struct CExpandationEvent *a2)
+// Decompiled from char __thiscall CExpandationManagerTask::GetExpandationPermission(CExpandationManagerTask *this, struct CExpandationEvent *a2)
 bool  CExpandationManagerTask::GetExpandationPermission(class CExpandationEvent * a2) {
   
   struct CDynListEntry *i; // [esp+8h] [ebp-8h]
@@ -50,9 +50,13 @@ bool  CExpandationManagerTask::GetExpandationPermission(class CExpandationEvent 
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 4) == 7 && *((_DWORD *)i + 3) != *((_DWORD *)a2 + 3) )
+    {
       return 0;
+    }
     if ( *((_DWORD *)i + 4) == 9 && (*((_DWORD *)i + 11) == 46 || *((_DWORD *)i + 11) == 47) )
+    {
       return 0;
+    }
   }
   return 1;
 }
@@ -66,10 +70,14 @@ bool  CExpandationManagerTask::IsBorderElement(int a2, int a3) {
   unsigned int i; // [esp+8h] [ebp-4h]
 
   v4 = CReserveDatabase::PackPosition(*this[10], a2, a3);
-  for ( i = 0; i < std::vector<int>::size(this + 13); ++i )
+  for ( i = 0;
+        i < std::vector<int>::size(this + 13);
+        ++i )
   {
     if ( v4 == *(_DWORD *)std::vector<int>::operator[](i) )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -93,15 +101,21 @@ bool  CExpandationManagerTask::IsShooting(void) {
       *((_BYTE *)this + 76) = 1;
       this[20] = (CSchedule *)((char *)this[20] + 1);
       if ( (int)this[20] > 4 )
+      {
         this[20] = 0;
+      }
     }
     if ( *((_BYTE *)this + 76) && (int)this[18] < 490 && !CSchedule::IsAnyExpandation((CDynList **)this[10]) )
     {
       C = (CExpandationEvent *)operator new(0x74u);
       if ( C )
+      {
         v3 = CExpandationEvent::CExpandationEvent(C, this[3], 0, this[(_DWORD)this[20] + 21]);
+      }
       else
+      {
         v3 = 0;
+      }
       this[8] = (CSchedule *)CSchedule::NewSchedEntry(this[10], v3);
       this[17] = 0;
       this[18] = (CSchedule *)500;

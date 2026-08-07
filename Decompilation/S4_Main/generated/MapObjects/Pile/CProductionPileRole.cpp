@@ -11,7 +11,9 @@ class CPersistence * __cdecl CProductionPileRole::New(std::istream & a1) {
 
   C = (CProductionPileRole *)operator new(8u);
   if ( C )
+  {
     CProductionPileRole::CProductionPileRole(C, (int)a1);
+  }
 }
 
 
@@ -56,22 +58,12 @@ void  CProductionPileRole::Init(class CPile * a2) {
   CPile::OfferCompletePileIfPossible(a2, 0);
   IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
   _pPile = IEntity::WorldIdx(a2);
-  if ( !CWorldManager::FlagBits(_pPile, 8u)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Pile\\ProductionPileRole.cpp",
-         94,
-         "g_cWorld.FlagBits(_pPile->WorldIdx(), FLAG_BUILDING) != 0") == 1 )
+  if ( !CWorldManager::FlagBits(_pPile, 8u) && BBSupportDbgReport(2, "MapObjects\\Pile\\ProductionPileRole.cpp", 94, "g_cWorld.FlagBits(_pPile->WorldIdx(), FLAG_BUILDING) != 0") == 1 )
   {
     __debugbreak();
   }
   v3 = IEntity::WorldIdx(a2);
-  if ( CWorldManager::EcoSectorId(v3) <= 0
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Pile\\ProductionPileRole.cpp",
-         95,
-         "g_cWorld.EcoSectorId(_pPile->WorldIdx()) > 0") == 1 )
+  if ( CWorldManager::EcoSectorId(v3) <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\ProductionPileRole.cpp", 95, "g_cWorld.EcoSectorId(_pPile->WorldIdx()) > 0") == 1 )
   {
     __debugbreak();
   }
@@ -87,7 +79,9 @@ void  CProductionPileRole::LogicUpdate(class CPile * a2) {
   CEcoSector *v4; // eax
 
   if ( CPile::NumberOfAvailableGoods(a2) < 2 )
+  {
     return IAnimatedEntity::RegisterForLogicUpdate(31);
+  }
   v2 = IEntity::WorldIdx();
   v3 = CWorldManager::EcoSectorId(v2);
   v4 = (CEcoSector *)CEcoSectorMgr::operator[](v3);
@@ -106,7 +100,9 @@ void  CProductionPileRole::Increase(class CPile * a2, int a3) {
 
   IPileRole::Increase(this, a2, a3);
   if ( a3 < 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\ProductionPileRole.cpp", 142, "_iAmount >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a3 > 0 )
   {
     v3 = IEntity::WorldIdx(a2);

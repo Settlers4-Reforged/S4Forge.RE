@@ -10,7 +10,9 @@ bool  CGenericSettlerIterator::Init(int a2, int a3, int a4) {
   if ( CPlayerIterator::Init(this, a2) )
   {
     if ( !a4 )
+    {
       a4 = a3;
+    }
     *((_DWORD *)this + 7) = a3;
     *((_DWORD *)this + 8) = a4;
     return 1;
@@ -38,9 +40,13 @@ int  CGenericSettlerIterator::FirstSettler(void) {
     v2 = CPlayerIterator::PlayerId(this);
     *((_DWORD *)this + 6) = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, v2, v3);
     if ( *((_DWORD *)this + 6) )
+    {
       return *((_DWORD *)this + 6);
+    }
     else
+    {
       return CGenericSettlerIterator::NextSettler(this);
+    }
   }
   else
   {
@@ -70,7 +76,9 @@ int  CGenericSettlerIterator::NextSettler(void) {
       if ( ++*((_DWORD *)this + 5) > *((_DWORD *)this + 8) )
       {
         if ( !CPlayerIterator::NextPlayer(this) )
+        {
           return 0;
+        }
         *((_DWORD *)this + 5) = *((_DWORD *)this + 7);
       }
       v5 = CSettlerIteratorBase::SettlerType((CGenericSettlerIterator *)((char *)this + 20));
@@ -88,9 +96,13 @@ int  CGenericSettlerIterator::NextSettler(void) {
 int  CGenericSettlerIterator::NextSettlerIfCurrentIsNotValid(void) {
   
   if ( CSettlerIteratorBase::SettlerValid((CSettlerIteratorBase *)(this + 5), this[6]) )
+  {
     return this[6];
+  }
   else
+  {
     return CGenericSettlerIterator::NextSettler((CGenericSettlerIterator *)this);
+  }
 }
 
 
@@ -99,9 +111,13 @@ int  CGenericSettlerIterator::NextSettlerIfCurrentIsNotValid(void) {
 int  CGenericSettlerIterator::NextSettlerOrFirstIfCurrentIsEndOfList(void) {
   
   if ( *((_DWORD *)this + 6) )
+  {
     return CGenericSettlerIterator::NextSettler(this);
+  }
   else
+  {
     return CGenericSettlerIterator::FirstSettler(this);
+  }
 }
 
 

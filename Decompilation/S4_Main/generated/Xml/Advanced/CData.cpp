@@ -64,7 +64,9 @@ class AdvXMLParser::CData *  AdvXMLParser::CData::Clone(class AdvXMLParser::Node
   }
   v8 = -1;
   if ( (v6 & 1) != 0 )
+  {
     std::string::~string(v7);
+  }
   return v4;
 }
 
@@ -126,13 +128,17 @@ class AdvXMLParser::CData * __cdecl AdvXMLParser::CData::Parse(class AdvXMLParse
   int v10; // [esp+4Ch] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseString(a1, "<![CDATA[") )
+  {
     return 0;
+  }
   AdvXMLParser::Bookmark::Bookmark((AdvXMLParser::Bookmark *)v4, a1);
   while ( !AdvXMLParser::Parser::ParseString(a1, "]]>") )
   {
     Char = AdvXMLParser::Parser::NextChar(a1);
     if ( !AdvXMLParser::IsXmlChar((AdvXMLParser *)Char) )
+    {
       AdvXMLParser::Parser::SyntaxError(a1, 2);
+    }
   }
   std::string::string();
   v10 = 0;
@@ -140,9 +146,13 @@ class AdvXMLParser::CData * __cdecl AdvXMLParser::CData::Parse(class AdvXMLParse
   C = operator new(0x40u);
   LOBYTE(v10) = 1;
   if ( C )
+  {
     v7 = AdvXMLParser::CData::CData(a2, v9);
+  }
   else
+  {
     v7 = 0;
+  }
   v6 = v7;
   v5 = v7;
   v10 = -1;

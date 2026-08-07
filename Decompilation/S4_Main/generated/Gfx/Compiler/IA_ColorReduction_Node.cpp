@@ -3,7 +3,7 @@
 // Definitions for class IA_ColorReduction_Node
 
 // address=[0x2fd3800]
-// Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::IA_ColorReduction_Node(  IA_ColorReduction_Node *this,  int a2,  bool a3)
+// Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::IA_ColorReduction_Node(IA_ColorReduction_Node *this, int a2, bool a3)
  IA_ColorReduction_Node::IA_ColorReduction_Node(int a2, bool a3) {
   
   memset(this, 0, 0x6Cu);
@@ -30,7 +30,7 @@ unsigned long  IA_ColorReduction_Node::GetColorCount(void) {
 
 
 // address=[0x2fd3870]
-// Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::AddColor(  IA_ColorReduction_Node *this,  struct IA_ColorReduction_Color *a2)
+// Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::AddColor(IA_ColorReduction_Node *this, struct IA_ColorReduction_Color *a2)
 void  IA_ColorReduction_Node::AddColor(class IA_ColorReduction_Color & a2) {
   
   IA_ColorReduction_Node *result; // eax
@@ -84,7 +84,7 @@ int  IA_ColorReduction_Node::GetColorIndex(void) {
 
 
 // address=[0x2fd39b0]
-// Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::SetNext(  IA_ColorReduction_Node *this,  struct IA_ColorReduction_Node *a2)
+// Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::SetNext(IA_ColorReduction_Node *this, struct IA_ColorReduction_Node *a2)
 void  IA_ColorReduction_Node::SetNext(class IA_ColorReduction_Node * a2) {
   
   IA_ColorReduction_Node *result; // eax
@@ -104,7 +104,7 @@ class IA_ColorReduction_Node *  IA_ColorReduction_Node::GetNext(void) {
 
 
 // address=[0x2fd39f0]
-// Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::SetPrev(  IA_ColorReduction_Node *this,  struct IA_ColorReduction_Node *a2)
+// Decompiled from IA_ColorReduction_Node *__thiscall IA_ColorReduction_Node::SetPrev(IA_ColorReduction_Node *this, struct IA_ColorReduction_Node *a2)
 void  IA_ColorReduction_Node::SetPrev(class IA_ColorReduction_Node * a2) {
   
   IA_ColorReduction_Node *result; // eax
@@ -132,7 +132,7 @@ int  IA_ColorReduction_Node::GetNumChild(void) {
 
 
 // address=[0x2fd3a50]
-// Decompiled from int __thiscall IA_ColorReduction_Node::SetChild(  IA_ColorReduction_Node *this,  int a2,  struct IA_ColorReduction_Node *a3)
+// Decompiled from int __thiscall IA_ColorReduction_Node::SetChild(IA_ColorReduction_Node *this, int a2, struct IA_ColorReduction_Node *a3)
 void  IA_ColorReduction_Node::SetChild(int a2, class IA_ColorReduction_Node * a3) {
   
   int result; // eax

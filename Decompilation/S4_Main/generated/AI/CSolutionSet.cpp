@@ -13,9 +13,13 @@
   *(_DWORD *)this = &CSolutionSet::_vftable_;
   C = (CDynList *)operator new(0xCu);
   if ( C )
+  {
     v2 = CDynList::CDynList(C);
+  }
   else
+  {
     v2 = 0;
+  }
   *((_DWORD *)this + 3) = v2;
   return this;
 }
@@ -27,7 +31,9 @@
   
   *this = (CDynList *)&CSolutionSet::_vftable_;
   if ( this[3] )
+  {
     delete this[3];
+  }
   CDynListEntry::~CDynListEntry((CDynListEntry *)this);
 }
 
@@ -49,9 +55,13 @@ void  CSolutionSet::NewSolution(int a2, class CParam * a3) {
 
   C = (CSolution *)operator new(0x14u);
   if ( C )
+  {
     v5 = CSolution::CSolution(C, a2, a3);
+  }
   else
+  {
     v5 = 0;
+  }
   return CDynList::addElement(this[3], v5);
 }
 

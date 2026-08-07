@@ -7,12 +7,7 @@
 // Decompiled from CBuildingInfoMgr::SBuildingInfos *__cdecl CBuildingInfoMgr::GetBuildingInfo(int a1, int a2)
 struct CBuildingInfoMgr::SBuildingInfos const & __cdecl CBuildingInfoMgr::GetBuildingInfo(int a1, int a2) {
   
-  if ( CBuildingInfoMgr::m_bInit != 1
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\building\\BuildingInfoMgr.h",
-         312,
-         "m_bInit == true") == 1 )
+  if ( CBuildingInfoMgr::m_bInit != 1 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\building\\BuildingInfoMgr.h", 312, "m_bInit == true") == 1 )
   {
     __debugbreak();
   }
@@ -50,7 +45,9 @@ int  CBuildingInfoMgr::GetXMLVersion(void)const {
 void  CBuildingInfoMgr::LoadInfo(bool a2) {
   
   if ( a2 )
+  {
     CBuildingInfoMgr::ClearInfo(this);
+  }
   if ( !CBuildingInfoMgr::m_bInit )
   {
     CBuildingInfoMgr::ReadBuildingInfo(this);
@@ -121,20 +118,19 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
   CBuildingBits::CBuildingBits(&cBuildingBits);
   CBuildingBits::CBuildingBits(&cBlockingBots);
   CBuildingBits::CBuildingBits(&cWaterBits);
-  if ( _iRace < 0
-    && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 198, "_iRace >= RACE_FIRST") == 1 )
+  if ( _iRace < 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 198, "_iRace >= RACE_FIRST") == 1 )
   {
     __debugbreak();
   }
   if ( _iRace >= 5 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 199, "_iRace < RACE_MAX") == 1 )
-    __debugbreak();
-  if ( _iBuildingType <= 0
-    && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 200, "_iBuildingType > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( _iBuildingType >= 83
-    && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 201, "_iBuildingType < BUILDING_MAX") == 1 )
+  if ( _iBuildingType <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 200, "_iBuildingType > 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( _iBuildingType >= 83 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 201, "_iBuildingType < BUILDING_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -154,50 +150,27 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
   if ( !bAllInside )
   {
     v53 = 0;
-    BBSupportTracePrintF(
-      3,
-      "Invalid digging bits for building %i (%s) of race %i!",
-      _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_spName,
-      _iRace);
+    BBSupportTracePrintF(3, "Invalid digging bits for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
   }
   v39 = 1;
-  if ( !v54->m_bIsPort
-    && (v54->m_iBBRMinX < -15 || v54->m_iBBRMaY > 15 || v54->m_iBBRMinY < -15 || v54->m_iBBRMaxY > 15) )
+  if ( !v54->m_bIsPort && (v54->m_iBBRMinX < -15 || v54->m_iBBRMaY > 15 || v54->m_iBBRMinY < -15 || v54->m_iBBRMaxY > 15) )
   {
     v39 = 0;
-    BBSupportTracePrintF(
-      3,
-      "Invalid size of bounding box for building %i (%s) of race %i!",
-      _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_spName,
-      _iRace);
+    BBSupportTracePrintF(3, "Invalid size of bounding box for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
   }
   v47 = 1;
   v46 = 1;
-  CBuildingFlagsWalk::CBuildingFlagsWalk(
-    &cBuildPosWalk,
-    0,
-    0,
-    v54->m_iHotSpotX,
-    v54->m_iHotSpotY,
-    &v54->m_vBuildingPosLines);
+  CBuildingFlagsWalk::CBuildingFlagsWalk(&cBuildPosWalk, 0, 0, v54->m_iHotSpotX, v54->m_iHotSpotY, &v54->m_vBuildingPosLines);
   while ( CBuildingFlagsWalk::NextPosition(&cBuildPosWalk) )
   {
     v4 = cBuildingBits.m_iBits[CBuildingFlagsWalk::CurrentY(&cBuildPosWalk) + 40];
     v4[CBuildingFlagsWalk::CurrentX(&cBuildPosWalk) + 40] = 1;
     v5 = CBuildingFlagsWalk::CurrentX(&cBuildPosWalk);
-    if ( v5 < v54->m_iBBRMinX
-      || (v6 = CBuildingFlagsWalk::CurrentX(&cBuildPosWalk), v6 > v54->m_iBBRMaY)
-      || (v7 = CBuildingFlagsWalk::CurrentY(&cBuildPosWalk), v7 < v54->m_iBBRMinY)
-      || (v8 = CBuildingFlagsWalk::CurrentY(&cBuildPosWalk), v8 > v54->m_iBBRMaxY) )
+    if ( v5 < v54->m_iBBRMinX || (v6 = CBuildingFlagsWalk::CurrentX(&cBuildPosWalk), v6 > v54->m_iBBRMaY) || (v7 = CBuildingFlagsWalk::CurrentY(&cBuildPosWalk), v7 < v54->m_iBBRMinY) || (v8 = CBuildingFlagsWalk::CurrentY(&cBuildPosWalk), v8 > v54->m_iBBRMaxY) )
     {
       v47 = 0;
     }
-    if ( CBuildingFlagsWalk::CurrentX(&cBuildPosWalk) < -15
-      || CBuildingFlagsWalk::CurrentX(&cBuildPosWalk) > 15
-      || CBuildingFlagsWalk::CurrentY(&cBuildPosWalk) < -15
-      || CBuildingFlagsWalk::CurrentY(&cBuildPosWalk) > 15 )
+    if ( CBuildingFlagsWalk::CurrentX(&cBuildPosWalk) < -15 || CBuildingFlagsWalk::CurrentX(&cBuildPosWalk) > 15 || CBuildingFlagsWalk::CurrentY(&cBuildPosWalk) < -15 || CBuildingFlagsWalk::CurrentY(&cBuildPosWalk) > 15 )
     {
       v46 = 0;
     }
@@ -205,32 +178,16 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
   if ( !v47 )
   {
     v53 = 0;
-    BBSupportTracePrintF(
-      3,
-      "Invalid bounding box for building %i (%s) of race %i!",
-      _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_spName,
-      _iRace);
+    BBSupportTracePrintF(3, "Invalid bounding box for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
   }
   if ( !v46 )
   {
     v53 = 0;
-    BBSupportTracePrintF(
-      3,
-      "Building bits out of range (-15..15) for building %i (%s) of race %i!",
-      _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_spName,
-      _iRace);
+    BBSupportTracePrintF(3, "Building bits out of range (-15..15) for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
   }
   bValidBlockPosBits = 1;
   bHotspotBlocked = 0;
-  CBuildingFlagsWalk::CBuildingFlagsWalk(
-    &cBlockPosWalk,
-    0,
-    0,
-    v54->m_iHotSpotX,
-    v54->m_iHotSpotY,
-    &v54->m_vBlockPosLines);
+  CBuildingFlagsWalk::CBuildingFlagsWalk(&cBlockPosWalk, 0, 0, v54->m_iHotSpotX, v54->m_iHotSpotY, &v54->m_vBlockPosLines);
   while ( CBuildingFlagsWalk::NextPosition(&cBlockPosWalk) )
   {
     v35 = CBuildingFlagsWalk::CurrentX(&cBlockPosWalk);
@@ -238,7 +195,9 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
     cBlockingBots.m_iBits[v36 + 40][v35 + 40] = 1;
     v34 = !v35 && !v36;
     bHotspotBlocked |= v34;
-    for ( i = 0; i <= 6; ++i )
+    for ( i = 0;
+          i <= 6;
+          ++i )
     {
       v9 = CSpiralOffsets::DeltaX(i);
       v31 = v35 + v9;
@@ -259,29 +218,20 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
   if ( !bValidBlockPosBits )
   {
     v53 = 0;
-    BBSupportTracePrintF(
-      3,
-      "Invalid blocking bits for building %i (%s) of race %i!",
-      _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_spName,
-      _iRace);
+    BBSupportTracePrintF(3, "Invalid blocking bits for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
   }
   v51 = 1;
   iPileNumber = v54->m_iPileNumber;
-  for ( j = 0; j < iPileNumber; ++j )
+  for ( j = 0;
+        j < iPileNumber;
+        ++j )
   {
     m_iGood = v54->m_vPileSpots[j].m_iGood;
     m_uXOffset = v54->m_vPileSpots[j].m_uXOffset;
     m_uYOffset = v54->m_vPileSpots[j].m_uYOffset;
     if ( (m_iGood <= 0 || m_iGood >= 43) && _iBuildingType != 13 )
     {
-      BBSupportTracePrintF(
-        3,
-        "Pile %i, good %i, position (%i, %i): Invalid good type!",
-        j,
-        m_iGood,
-        m_uXOffset,
-        m_uYOffset);
+      BBSupportTracePrintF(3, "Pile %i, good %i, position (%i, %i): Invalid good type!", j, m_iGood, m_uXOffset, m_uYOffset);
       v51 = 0;
     }
     else if ( m_uXOffset < -15 || m_uXOffset > 15 || m_uYOffset < -15 || m_uYOffset > 15 )
@@ -291,36 +241,19 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
     }
     else if ( !cBuildingBits.m_iBits[m_uYOffset + 40][m_uXOffset + 40] )
     {
-      BBSupportTracePrintF(
-        3,
-        "Pile %i, good %i, position (%i, %i): No building bit at position!",
-        j,
-        m_iGood,
-        m_uXOffset,
-        m_uYOffset);
+      BBSupportTracePrintF(3, "Pile %i, good %i, position (%i, %i): No building bit at position!", j, m_iGood, m_uXOffset, m_uYOffset);
       v51 = 0;
     }
     else if ( cBlockingBots.m_iBits[m_uYOffset + 40][m_uXOffset + 40] )
     {
-      BBSupportTracePrintF(
-        3,
-        "Pile %i, good %i, position (%i, %i): Position is blocked!",
-        j,
-        m_iGood,
-        m_uXOffset,
-        m_uYOffset);
+      BBSupportTracePrintF(3, "Pile %i, good %i, position (%i, %i): Position is blocked!", j, m_iGood, m_uXOffset, m_uYOffset);
       v51 = 0;
     }
   }
   if ( !v51 )
   {
     v53 = 0;
-    BBSupportTracePrintF(
-      3,
-      "Invalid piles for building %i (%s) of race %i!",
-      _iBuildingType,
-      s_sBuildingDefines[_iBuildingType].m_spName,
-      _iRace);
+    BBSupportTracePrintF(3, "Invalid piles for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
   }
   v52 = 1;
   iFlagX = (char)v54->m_iFlagX;
@@ -364,7 +297,9 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
     v52 = 0;
   }
   if ( !v52 )
+  {
     v53 = 0;
+  }
   if ( v54->m_bIsPort )
   {
     v45 = 0;
@@ -383,26 +318,13 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
     }
     if ( v45 )
     {
-      BBSupportTracePrintF(
-        3,
-        "Invalid working position (%i, %i) for building %i (%s) of race %i!",
-        m_iWorkPosXOffset,
-        m_iWorkPosYOffset,
-        _iBuildingType,
-        s_sBuildingDefines[_iBuildingType].m_spName,
-        _iRace);
+      BBSupportTracePrintF(3, "Invalid working position (%i, %i) for building %i (%s) of race %i!", m_iWorkPosXOffset, m_iWorkPosYOffset, _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
       v53 = 0;
     }
   }
   if ( v54->m_bIsPort )
   {
-    CBuildingFlagsWalk::CBuildingFlagsWalk(
-      &v19,
-      0,
-      0,
-      v54->m_iHotSpotX,
-      v54->m_iHotSpotY,
-      &v54->m_vWaterRepealingPosLines);
+    CBuildingFlagsWalk::CBuildingFlagsWalk(&v19, 0, 0, v54->m_iHotSpotX, v54->m_iHotSpotY, &v54->m_vWaterRepealingPosLines);
     while ( CBuildingFlagsWalk::NextPosition(&v19) )
     {
       v26 = CBuildingFlagsWalk::CurrentX(&v19);
@@ -422,7 +344,9 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
   BBSupportTracePrintF(-2147483641, "B L O C K I N G   B I T S");
   CBuildingBits::PrintToTraceFile(&cBlockingBots, -2147483641);
   if ( !v54->m_bIsPort )
+  {
     return v53;
+  }
   v18 = CS4DefineNames::GetRaceName(_iRace);
   v13 = CS4DefineNames::GetBuildingName(_iBuildingType);
   BBSupportTracePrintF(-2147483641, "%s (%s)", v13, v18);
@@ -446,10 +370,16 @@ void  CBuildingInfoMgr::DbgTraceProductionDelays(void) {
   _DWORD v8[5]; // [esp+Ch] [ebp-18h]
 
   BBSupportTracePrintF(1, "%-30s  %-7s %-7s %-7s %-7s", "Building", "Roman", "Viking", "Maya", "Trojan");
-  for ( i = 1; i < 83; ++i )
+  for ( i = 1;
+        i < 83;
+        ++i )
   {
-    for ( j = 0; j < 5; ++j )
+    for ( j = 0;
+          j < 5;
+          ++j )
+    {
       v8[j] = CBuildingInfoMgr::m_vBuildingInfos[j][i].m_iProductionDelay;
+    }
     v5 = v8[4];
     v4 = v8[2];
     v3 = v8[1];
@@ -480,12 +410,7 @@ bool __cdecl CBuildingInfoMgr::BuildingTypeExIsShipyard(int a1) {
 // Decompiled from CBuildingInfoMgr::STriggerInfos *__cdecl CBuildingInfoMgr::GetTriggerInfo(int a1, int a2)
 struct CBuildingInfoMgr::STriggerInfos const & __cdecl CBuildingInfoMgr::GetTriggerInfo(int a1, int a2) {
   
-  if ( CBuildingInfoMgr::m_bInit != 1
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\building\\BuildingInfoMgr.h",
-         351,
-         "m_bInit == true") == 1 )
+  if ( CBuildingInfoMgr::m_bInit != 1 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\building\\BuildingInfoMgr.h", 351, "m_bInit == true") == 1 )
   {
     __debugbreak();
   }
@@ -502,15 +427,16 @@ void  CBuildingInfoMgr::ClearInfo(void) {
   CBuildingInfoMgr::SBuildingInfos *v4; // [esp+10h] [ebp-4h]
 
   CBuildingInfoMgr::m_bInit = 0;
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
-    for ( j = 0; j < 83; ++j )
+    for ( j = 0;
+          j < 83;
+          ++j )
     {
       v4 = &CBuildingInfoMgr::m_vBuildingInfos[i][j];
-      memset(
-        v4,
-        0,
-        (char *)&CBuildingInfoMgr::m_vBuildingInfos[0][0].m_vAnimationList - (char *)CBuildingInfoMgr::m_vBuildingInfos);
+      memset(v4, 0, (char *)&CBuildingInfoMgr::m_vBuildingInfos[0][0].m_vAnimationList - (char *)CBuildingInfoMgr::m_vBuildingInfos);
       std::vector<unsigned char>::clear(&v4->m_vAnimationList);
       std::vector<unsigned int>::clear(&v4->m_vBuildingPosLines);
       std::vector<unsigned int>::clear(&v4->m_vDigPosLines);
@@ -1447,9 +1373,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
         v622 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v284);
         v621 = AdvXMLParser::Element::operator[](v622, "id");
         v741 = v621;
-        v178[23] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, std::string *))(*(_DWORD *)v621 + 8))(
-                     v621,
-                     &v877);
+        v178[23] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, std::string *))(*(_DWORD *)v621 + 8))(v621, &v877);
         LOBYTE(exceptionBlock) = 9;
         if ( std::string::length(&v877) )
         {
@@ -1459,18 +1383,14 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
           v617 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v618, v160);
           v616 = v617;
           LOBYTE(exceptionBlock) = 10;
-          v178[22] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(
-                       v776,
-                       v617);
+          v178[22] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v776, v617);
           LOBYTE(exceptionBlock) = 12;
           AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v160);
           v615 = (void *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v284);
           v614 = AdvXMLParser::NodeContainer::End(v615, v169);
           v613 = v614;
           LOBYTE(exceptionBlock) = 13;
-          v178[20] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(
-                       v177,
-                       v614);
+          v178[20] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v177, v614);
           LOBYTE(exceptionBlock) = 15;
           AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v169);
           while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v776, (int)v177) )
@@ -1478,22 +1398,20 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
             v612 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
             v611 = AdvXMLParser::Element::operator[](v612, "id");
             v740 = v611;
-            v178[19] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, std::string *))(*(_DWORD *)v611 + 8))(
-                         v611,
-                         &v879);
+            v178[19] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, std::string *))(*(_DWORD *)v611 + 8))(v611, &v879);
             LOBYTE(exceptionBlock) = 16;
             if ( !std::string::length(&v879) )
             {
-              v610 = BBSupportDbgReport(
-                       2,
-                       "MapObjects\\Building\\BuildingInfoMgr.cpp",
-                       609,
-                       "strBuildingName.length() > 0");
+              v610 = BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 609, "strBuildingName.length() > 0");
               if ( v610 == 1 )
+              {
                 __debugbreak();
+              }
             }
             if ( !std::string::length(&v879) )
+            {
               goto LABEL_16;
+            }
             Instance = CConfigManagerPtr::GetInstance();
             v739 = Instance;
             v4 = std::string::c_str(&v879);
@@ -1503,7 +1421,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
             {
               v607 = BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 618, "buildingIdx > 0");
               if ( v607 == 1 )
+              {
                 __debugbreak();
+              }
             }
             if ( iBuildingType > 0 )
             {
@@ -1535,9 +1455,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v597 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
               v596 = AdvXMLParser::Element::operator()(v597, "boards", 0);
               v735 = v596;
-              v595 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v596->GetValue)(
-                                      v596,
-                                      v815);
+              v595 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v596->GetValue)(v596, v815);
               v11 = std::string::c_str(v595);
               v12 = j__atoi(v11);
               v779->m_iBoards = v12;
@@ -1545,9 +1463,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v594 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
               v593 = AdvXMLParser::Element::operator()(v594, "gold", 0);
               v734 = v593;
-              v592 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v593->GetValue)(
-                                      v593,
-                                      v816);
+              v592 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v593->GetValue)(v593, v816);
               v13 = std::string::c_str(v592);
               v14 = j__atoi(v13);
               v779->m_iGold = v14;
@@ -1555,14 +1471,14 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v591 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
               v590 = AdvXMLParser::Element::operator()(v591, "lines", 0);
               v733 = v590;
-              v589 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v590->GetValue)(
-                                      v590,
-                                      v817);
+              v589 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v590->GetValue)(v590, v817);
               v15 = std::string::c_str(v589);
               v16 = j__atoi(v15);
               v779->m_iLines = v16;
               std::string::~string(v817);
-              for ( i = 0; i < (unsigned __int8)v779->m_iLines; ++i )
+              for ( i = 0;
+                    i < (unsigned __int8)v779->m_iLines;
+                    ++i )
               {
                 v588 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
                 v587 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v588, "buildingPosLines", 0);
@@ -1609,7 +1525,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               if ( IsShipyard || (IsPort = CBuildingInfoMgr::BuildingTypeExIsPort((S4_BUILDING_ENUM)iBuildingType)) )
               {
                 v779->m_bIsPort = 1;
-                for ( j = 0; j < (unsigned __int8)v779->m_iLines; ++j )
+                for ( j = 0;
+                      j < (unsigned __int8)v779->m_iLines;
+                      ++j )
                 {
                   v568 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
                   v567 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v568, "waterPosLines", 0);
@@ -1653,7 +1571,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v25 = j__atoi(v24);
               v779->m_iBuilderNumber = v25;
               std::string::~string(v825);
-              for ( k = 0; k < (char)v779->m_iBuilderNumber; ++k )
+              for ( k = 0;
+                    k < (char)v779->m_iBuilderNumber;
+                    ++k )
               {
                 v548 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
                 v547 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v548, "builderInfo", k);
@@ -1750,9 +1670,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v507 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v508, "bitBoundingRect", 0);
               v506 = AdvXMLParser::Element::operator()(v507, "maxX", 0);
               v712 = v506;
-              v505 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v506->GetValue)(
-                                      v506,
-                                      v836);
+              v505 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v506->GetValue)(v506, v836);
               v46 = std::string::c_str(v505);
               v47 = j__atoi(v46);
               v779->m_iBBRMaY = v47;
@@ -1761,9 +1679,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v503 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v504, "bitBoundingRect", 0);
               v502 = AdvXMLParser::Element::operator()(v503, "minY", 0);
               v711 = v502;
-              v501 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v502->GetValue)(
-                                      v502,
-                                      v837);
+              v501 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v502->GetValue)(v502, v837);
               v48 = std::string::c_str(v501);
               v49 = j__atoi(v48);
               v779->m_iBBRMinY = v49;
@@ -1772,9 +1688,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v499 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v500, "bitBoundingRect", 0);
               v182 = AdvXMLParser::Element::operator()(v499, "maxY", 0);
               v710 = v182;
-              v183 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v182->GetValue)(
-                                      v182,
-                                      v838);
+              v183 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v182->GetValue)(v182, v838);
               v50 = std::string::c_str(v183);
               v51 = j__atoi(v50);
               v779->m_iBBRMaxY = v51;
@@ -1782,14 +1696,14 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v184 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
               v185 = AdvXMLParser::Element::operator()(v184, "pileNumber", 0);
               v709 = v185;
-              v186 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v185->GetValue)(
-                                      v185,
-                                      v839);
+              v186 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v185->GetValue)(v185, v839);
               v52 = std::string::c_str(v186);
               v53 = j__atoi(v52);
               v779->m_iPileNumber = v53;
               std::string::~string(v839);
-              for ( m = 0; m < v779->m_iPileNumber; ++m )
+              for ( m = 0;
+                    m < v779->m_iPileNumber;
+                    ++m )
               {
                 v187 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
                 v188 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v187, "pile", m);
@@ -1854,9 +1768,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v215 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v214, "pile", m);
                 v216 = AdvXMLParser::Element::operator()(v215, "xPixelOffset", 0);
                 v701 = v216;
-                v217 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v216->GetValue)(
-                                        v216,
-                                        v846);
+                v217 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v216->GetValue)(v216, v846);
                 v65 = std::string::c_str(v217);
                 v66 = j__atoi(v65);
                 v779->m_vPileSpots[m].m_iXPixelOffset = v66;
@@ -1865,9 +1777,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v219 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v218, "pile", m);
                 v220 = AdvXMLParser::Element::operator()(v219, "yPixelOffset", 0);
                 v700 = v220;
-                v221 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v220->GetValue)(
-                                        v220,
-                                        v847);
+                v221 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v220->GetValue)(v220, v847);
                 v67 = std::string::c_str(v221);
                 v68 = j__atoi(v67);
                 v779->m_vPileSpots[m].m_iYPixelOffset = v68;
@@ -1883,15 +1793,15 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               std::string::~string(v848);
               if ( v779->m_uWarriorNumber >= 21u )
               {
-                v225 = BBSupportDbgReport(
-                         2,
-                         "MapObjects\\Building\\BuildingInfoMgr.cpp",
-                         738,
-                         "bI.m_uWarriorNumber < MAX_NUMBER_OF_BUILDING_SETTLERS");
+                v225 = BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 738, "bI.m_uWarriorNumber < MAX_NUMBER_OF_BUILDING_SETTLERS");
                 if ( v225 == 1 )
+                {
                   __debugbreak();
+                }
               }
-              for ( n = 0; n < v779->m_uWarriorNumber; ++n )
+              for ( n = 0;
+                    n < v779->m_uWarriorNumber;
+                    ++n )
               {
                 v226 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
                 v227 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v226, "settler", n);
@@ -1906,9 +1816,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v231 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v230, "settler", n);
                 v232 = AdvXMLParser::Element::operator()(v231, "yOffset", 0);
                 v697 = v232;
-                v233 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v232->GetValue)(
-                                        v232,
-                                        v850);
+                v233 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v232->GetValue)(v232, v850);
                 v73 = std::string::c_str(v233);
                 v74 = j__atoi(v73);
                 v779->m_vSettlerSpots[n].m_iYOffset = v74;
@@ -1917,9 +1825,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v235 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v234, "settler", n);
                 v236 = AdvXMLParser::Element::operator()(v235, "direction", 0);
                 v696 = v236;
-                v237 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v236->GetValue)(
-                                        v236,
-                                        v851);
+                v237 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v236->GetValue)(v236, v851);
                 v75 = std::string::c_str(v237);
                 v76 = j__atoi(v75);
                 v779->m_vSettlerSpots[n].m_iDirection = v76;
@@ -1943,13 +1849,17 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v779->m_uU0 = -1;
               if ( m_uWarriorNumber > 0 )
               {
-                for ( ii = 0; ii < m_uWarriorNumber; ++ii )
+                for ( ii = 0;
+                      ii < m_uWarriorNumber;
+                      ++ii )
                 {
                   if ( v779->m_vSettlerSpots[ii].m_bTop )
                   {
                     ++v779->m_uBowmanNumber;
                     if ( (v779->m_uU0 & 0x80u) != 0 )
+                    {
                       v779->m_uU0 = ii;
+                    }
                   }
                   else
                   {
@@ -1960,31 +1870,21 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 {
                   v152 = iRace;
                   v77 = std::string::c_str(&v879);
-                  v242 = BBSupportDbgReportF(
-                           2,
-                           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-                           783,
-                           "Bowman number == 0 for building %i (%s) of race %i!",
-                           iBuildingType,
-                           v77,
-                           v152);
+                  v242 = BBSupportDbgReportF(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 783, "Bowman number == 0 for building %i (%s) of race %i!", iBuildingType, v77, v152);
                   if ( v242 == 1 )
+                  {
                     __debugbreak();
+                  }
                 }
                 if ( !v779->m_uSwordsmanNumber )
                 {
                   v153 = iRace;
                   v78 = std::string::c_str(&v879);
-                  v243 = BBSupportDbgReportF(
-                           2,
-                           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-                           784,
-                           "Swordsman number == 0 for building %i (%s) of race %i!",
-                           iBuildingType,
-                           v78,
-                           v153);
+                  v243 = BBSupportDbgReportF(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 784, "Swordsman number == 0 for building %i (%s) of race %i!", iBuildingType, v78, v153);
                   if ( v243 == 1 )
+                  {
                     __debugbreak();
+                  }
                 }
               }
               v244 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
@@ -2078,18 +1978,18 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               iProductionDelay = j__atoi(v90);
               if ( (unsigned int)iProductionDelay >= 0x100 )
               {
-                v278 = BBSupportDbgReport(
-                         2,
-                         "MapObjects\\Building\\BuildingInfoMgr.cpp",
-                         816,
-                         "(iProductionDelay >= 0) && (iProductionDelay <= 255)");
+                v278 = BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 816, "(iProductionDelay >= 0) && (iProductionDelay <= 255)");
                 if ( v278 == 1 )
+                {
                   __debugbreak();
+                }
               }
               if ( iProductionDelay >= 0 )
               {
                 if ( iProductionDelay > 255 )
+                {
                   iProductionDelay = 255;
+                }
               }
               else
               {
@@ -2168,9 +2068,13 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 iTotalResources = m_iGold + m_iBoards + m_iStone;
                 v677 = 8 * iTotalResources / 2;
                 if ( v677 >= 250 )
+                {
                   v676 = 250;
+                }
                 else
+                {
                   v676 = v677;
+                }
                 v779->m_iHealth = v676;
               }
               v479 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
@@ -2178,9 +2082,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v477 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v478, v168);
               v476 = v477;
               LOBYTE(exceptionBlock) = 30;
-              v178[13] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(
-                           v179,
-                           v477);
+              v178[13] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v179, v477);
               LOBYTE(exceptionBlock) = 32;
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v168);
               v475 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
@@ -2188,9 +2090,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v473 = AdvXMLParser::NodeContainer::End(v474, v167);
               v472 = v473;
               LOBYTE(exceptionBlock) = 33;
-              v178[12] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(
-                           v178,
-                           v473);
+              v178[12] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v178, v473);
               LOBYTE(exceptionBlock) = 35;
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v167);
               while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v179, (int)v178) )
@@ -2221,9 +2121,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v463 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v464, v166);
               v462 = v463;
               LOBYTE(exceptionBlock) = 39;
-              v178[31] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(
-                           v633,
-                           v463);
+              v178[31] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v633, v463);
               LOBYTE(exceptionBlock) = 41;
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v166);
               v461 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
@@ -2231,9 +2129,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v459 = AdvXMLParser::NodeContainer::End(v460, v165);
               v458 = v459;
               LOBYTE(exceptionBlock) = 42;
-              v178[9] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(
-                          v172,
-                          v459);
+              v178[9] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v172, v459);
               LOBYTE(exceptionBlock) = 44;
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v165);
               while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v633, (int)v172) )
@@ -2250,13 +2146,11 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 std::string::~string(v786);
                 if ( !std::string::length(&v878) )
                 {
-                  v453 = BBSupportDbgReport(
-                           2,
-                           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-                           864,
-                           "patchName.length() > 0");
+                  v453 = BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 864, "patchName.length() > 0");
                   if ( v453 == 1 )
+                  {
                     __debugbreak();
+                  }
                 }
                 v452 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
                 v451 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v452, "job", 0);
@@ -2275,16 +2169,11 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                   v670 = std::string::length(&v878) ? std::string::c_str(&v878) : (char *)&unk_3778527;
                   v154 = std::string::c_str(&v877);
                   v108 = std::string::c_str(&v879);
-                  v446 = BBSupportDbgReportF(
-                           2,
-                           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-                           868,
-                           "Patch job \"%s\" not valid for building %s for race %s!",
-                           v670,
-                           v108,
-                           v154);
+                  v446 = BBSupportDbgReportF(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 868, "Patch job \"%s\" not valid for building %s for race %s!", v670, v108, v154);
                   if ( v446 == 1 )
+                  {
                     __debugbreak();
+                  }
                 }
                 v779->m_vPatches[v774].m_iJob = jobDefineValue;
                 v445 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
@@ -2337,7 +2226,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 LOBYTE(exceptionBlock) = 47;
                 std::string::~string(v791);
                 if ( v744 < 0 )
+                {
                   v744 = 0;
+                }
                 v779->m_vPatches[v774].m_iSound = v744;
                 v426 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
                 v425 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v426, "sound", 0);
@@ -2358,7 +2249,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v779->m_vPatches[v774].m_iSoundRandomness = v119;
                 std::string::~string(v793);
                 if ( !v779->m_vPatches[v774].m_iSoundRandomness )
+                {
                   v779->m_vPatches[v774].m_iSoundRandomness = 100;
+                }
                 ++v774;
                 LOBYTE(exceptionBlock) = 44;
                 std::string::~string(&v878);
@@ -2369,9 +2262,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v416 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v417, v164);
               v415 = v416;
               LOBYTE(exceptionBlock) = 52;
-              v178[6] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(
-                          v180,
-                          v416);
+              v178[6] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v180, v416);
               LOBYTE(exceptionBlock) = 54;
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v164);
               v414 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
@@ -2379,9 +2270,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v412 = AdvXMLParser::NodeContainer::End(v413, v163);
               v411 = v412;
               LOBYTE(exceptionBlock) = 55;
-              v178[5] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(
-                          v173,
-                          v412);
+              v178[5] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v173, v412);
               LOBYTE(exceptionBlock) = 57;
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v163);
               while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v180, (int)v173) )
@@ -2389,18 +2278,14 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v410 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v180);
                 v409 = AdvXMLParser::Element::operator()(v410, "slot", 0);
                 v662 = v409;
-                v408 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v409->GetValue)(
-                                        v409,
-                                        v794);
+                v408 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v409->GetValue)(v409, v794);
                 v120 = std::string::c_str(v408);
                 v401 = j__atoi(v120);
                 std::string::~string(v794);
                 v407 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v180);
                 v406 = AdvXMLParser::Element::operator()(v407, "job", 0);
                 v661 = v406;
-                v405 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v406->GetValue)(
-                                        v406,
-                                        v795);
+                v405 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v406->GetValue)(v406, v795);
                 v404 = v405;
                 LOBYTE(exceptionBlock) = 58;
                 v121 = std::string::c_str(v405);
@@ -2424,7 +2309,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v396 = -v779->m_iHotSpotX;
               v397 = -v779->m_iHotSpotY;
               m_iLines = (unsigned __int8)v779->m_iLines;
-              for ( a2 = 0; (int)a2 < m_iLines; ++a2 )
+              for ( a2 = 0;
+                    (int)a2 < m_iLines;
+                    ++a2 )
               {
                 v398 = (int *)std::vector<unsigned int>::operator[](&v779->m_vBuildingPosLines, a2);
                 v747 = *v398;
@@ -2437,7 +2324,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                     v394 = Grid::DistanceInline(v743, v395);
                     v660 = v394;
                     if ( v394 > (int)iMaxDistance )
+                    {
                       iMaxDistance = v660;
+                    }
                   }
                   ++v743;
                   v747 *= 2;
@@ -2445,29 +2334,21 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               }
               if ( iMaxDistance >= 0x40 )
               {
-                v393 = BBSupportDbgReport(
-                         2,
-                         "MapObjects\\Building\\BuildingInfoMgr.cpp",
-                         952,
-                         "(iMaxDistance >= 0) && (iMaxDistance < 64)");
+                v393 = BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 952, "(iMaxDistance >= 0) && (iMaxDistance < 64)");
                 if ( v393 == 1 )
+                {
                   __debugbreak();
+                }
               }
               v779->m_iMaxDistance = iMaxDistance;
               if ( !CBuildingInfoMgr::DbgCheckBuildingBits(this, iRace, iBuildingType) )
               {
                 RaceName = CS4DefineNames::GetRaceName(iRace);
-                v391 = BBSupportDbgReportF(
-                         2,
-                         "MapObjects\\Building\\BuildingInfoMgr.cpp",
-                         956,
-                         "Invalid building info for building %i (%s) of race %i (%s)!",
-                         iBuildingType,
-                         s_sBuildingDefines[iBuildingType].m_spName,
-                         iRace,
-                         RaceName);
+                v391 = BBSupportDbgReportF(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 956, "Invalid building info for building %i (%s) of race %i (%s)!", iBuildingType, s_sBuildingDefines[iBuildingType].m_spName, iRace, RaceName);
                 if ( v391 == 1 )
+                {
                   __debugbreak();
+                }
               }
               LOBYTE(exceptionBlock) = 54;
               AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v173);
@@ -2522,219 +2403,99 @@ LABEL_16:
     exceptionBlock = -1;
     C = v757;
     operator delete[](v757);
-    if ( CBuildingInfoMgr::m_vBuildingInfos[0][46].m_uSwordsmanNumber != 1
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           973,
-           "m_vBuildingInfos[RACE_ROMAN][BUILDING_GUARDTOWERSMALL].m_uSwordsmanNumber == 1") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[0][46].m_uSwordsmanNumber != 1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 973, "m_vBuildingInfos[RACE_ROMAN][BUILDING_GUARDTOWERSMALL].m_uSwordsmanNumber == 1") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[0][46].m_uBowmanNumber != 2
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           974,
-           "m_vBuildingInfos[RACE_ROMAN][BUILDING_GUARDTOWERSMALL].m_uBowmanNumber == 2") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[0][46].m_uBowmanNumber != 2 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 974, "m_vBuildingInfos[RACE_ROMAN][BUILDING_GUARDTOWERSMALL].m_uBowmanNumber == 2") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[0][47].m_uSwordsmanNumber != 3
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           976,
-           "m_vBuildingInfos[RACE_ROMAN][BUILDING_GUARDTOWERBIG].m_uSwordsmanNumber == 3") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[0][47].m_uSwordsmanNumber != 3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 976, "m_vBuildingInfos[RACE_ROMAN][BUILDING_GUARDTOWERBIG].m_uSwordsmanNumber == 3") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[0][47].m_uBowmanNumber != 3
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           977,
-           "m_vBuildingInfos[RACE_ROMAN][BUILDING_GUARDTOWERBIG].m_uBowmanNumber == 3") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[0][47].m_uBowmanNumber != 3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 977, "m_vBuildingInfos[RACE_ROMAN][BUILDING_GUARDTOWERBIG].m_uBowmanNumber == 3") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[0][48].m_uSwordsmanNumber != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           979,
-           "m_vBuildingInfos[RACE_ROMAN][BUILDING_CASTLE].m_uSwordsmanNumber == 4") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[0][48].m_uSwordsmanNumber != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 979, "m_vBuildingInfos[RACE_ROMAN][BUILDING_CASTLE].m_uSwordsmanNumber == 4") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[0][48].m_uBowmanNumber != 5
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           980,
-           "m_vBuildingInfos[RACE_ROMAN][BUILDING_CASTLE].m_uBowmanNumber == 5") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[0][48].m_uBowmanNumber != 5 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 980, "m_vBuildingInfos[RACE_ROMAN][BUILDING_CASTLE].m_uBowmanNumber == 5") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[1][46].m_uSwordsmanNumber != 1
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           982,
-           "m_vBuildingInfos[RACE_VIKING][BUILDING_GUARDTOWERSMALL].m_uSwordsmanNumber == 1") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[1][46].m_uSwordsmanNumber != 1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 982, "m_vBuildingInfos[RACE_VIKING][BUILDING_GUARDTOWERSMALL].m_uSwordsmanNumber == 1") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[1][46].m_uBowmanNumber != 2
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           983,
-           "m_vBuildingInfos[RACE_VIKING][BUILDING_GUARDTOWERSMALL].m_uBowmanNumber == 2") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[1][46].m_uBowmanNumber != 2 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 983, "m_vBuildingInfos[RACE_VIKING][BUILDING_GUARDTOWERSMALL].m_uBowmanNumber == 2") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[1][47].m_uSwordsmanNumber != 3
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           985,
-           "m_vBuildingInfos[RACE_VIKING][BUILDING_GUARDTOWERBIG].m_uSwordsmanNumber == 3") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[1][47].m_uSwordsmanNumber != 3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 985, "m_vBuildingInfos[RACE_VIKING][BUILDING_GUARDTOWERBIG].m_uSwordsmanNumber == 3") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[1][47].m_uBowmanNumber != 3
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           986,
-           "m_vBuildingInfos[RACE_VIKING][BUILDING_GUARDTOWERBIG].m_uBowmanNumber == 3") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[1][47].m_uBowmanNumber != 3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 986, "m_vBuildingInfos[RACE_VIKING][BUILDING_GUARDTOWERBIG].m_uBowmanNumber == 3") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[1][48].m_uSwordsmanNumber != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           988,
-           "m_vBuildingInfos[RACE_VIKING][BUILDING_CASTLE].m_uSwordsmanNumber == 4") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[1][48].m_uSwordsmanNumber != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 988, "m_vBuildingInfos[RACE_VIKING][BUILDING_CASTLE].m_uSwordsmanNumber == 4") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[1][48].m_uBowmanNumber != 5
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           989,
-           "m_vBuildingInfos[RACE_VIKING][BUILDING_CASTLE].m_uBowmanNumber == 5") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[1][48].m_uBowmanNumber != 5 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 989, "m_vBuildingInfos[RACE_VIKING][BUILDING_CASTLE].m_uBowmanNumber == 5") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[2][46].m_uSwordsmanNumber != 1
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           991,
-           "m_vBuildingInfos[RACE_MAYA][BUILDING_GUARDTOWERSMALL].m_uSwordsmanNumber == 1") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[2][46].m_uSwordsmanNumber != 1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 991, "m_vBuildingInfos[RACE_MAYA][BUILDING_GUARDTOWERSMALL].m_uSwordsmanNumber == 1") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[2][46].m_uBowmanNumber != 2
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           992,
-           "m_vBuildingInfos[RACE_MAYA][BUILDING_GUARDTOWERSMALL].m_uBowmanNumber == 2") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[2][46].m_uBowmanNumber != 2 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 992, "m_vBuildingInfos[RACE_MAYA][BUILDING_GUARDTOWERSMALL].m_uBowmanNumber == 2") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[2][47].m_uSwordsmanNumber != 3
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           994,
-           "m_vBuildingInfos[RACE_MAYA][BUILDING_GUARDTOWERBIG].m_uSwordsmanNumber == 3") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[2][47].m_uSwordsmanNumber != 3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 994, "m_vBuildingInfos[RACE_MAYA][BUILDING_GUARDTOWERBIG].m_uSwordsmanNumber == 3") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[2][47].m_uBowmanNumber != 3
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           995,
-           "m_vBuildingInfos[RACE_MAYA][BUILDING_GUARDTOWERBIG].m_uBowmanNumber == 3") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[2][47].m_uBowmanNumber != 3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 995, "m_vBuildingInfos[RACE_MAYA][BUILDING_GUARDTOWERBIG].m_uBowmanNumber == 3") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[2][48].m_uSwordsmanNumber != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           997,
-           "m_vBuildingInfos[RACE_MAYA][BUILDING_CASTLE].m_uSwordsmanNumber == 4") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[2][48].m_uSwordsmanNumber != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 997, "m_vBuildingInfos[RACE_MAYA][BUILDING_CASTLE].m_uSwordsmanNumber == 4") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[2][48].m_uBowmanNumber != 5
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           998,
-           "m_vBuildingInfos[RACE_MAYA][BUILDING_CASTLE].m_uBowmanNumber == 5") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[2][48].m_uBowmanNumber != 5 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 998, "m_vBuildingInfos[RACE_MAYA][BUILDING_CASTLE].m_uBowmanNumber == 5") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[4][46].m_uSwordsmanNumber != 1
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           1000,
-           "m_vBuildingInfos[RACE_TROJAN][BUILDING_GUARDTOWERSMALL].m_uSwordsmanNumber == 1") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[4][46].m_uSwordsmanNumber != 1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 1000, "m_vBuildingInfos[RACE_TROJAN][BUILDING_GUARDTOWERSMALL].m_uSwordsmanNumber == 1") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[4][46].m_uBowmanNumber != 2
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           1001,
-           "m_vBuildingInfos[RACE_TROJAN][BUILDING_GUARDTOWERSMALL].m_uBowmanNumber == 2") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[4][46].m_uBowmanNumber != 2 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 1001, "m_vBuildingInfos[RACE_TROJAN][BUILDING_GUARDTOWERSMALL].m_uBowmanNumber == 2") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[4][47].m_uSwordsmanNumber != 3
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           1003,
-           "m_vBuildingInfos[RACE_TROJAN][BUILDING_GUARDTOWERBIG].m_uSwordsmanNumber == 3") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[4][47].m_uSwordsmanNumber != 3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 1003, "m_vBuildingInfos[RACE_TROJAN][BUILDING_GUARDTOWERBIG].m_uSwordsmanNumber == 3") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[4][47].m_uBowmanNumber != 3
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           1004,
-           "m_vBuildingInfos[RACE_TROJAN][BUILDING_GUARDTOWERBIG].m_uBowmanNumber == 3") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[4][47].m_uBowmanNumber != 3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 1004, "m_vBuildingInfos[RACE_TROJAN][BUILDING_GUARDTOWERBIG].m_uBowmanNumber == 3") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[4][48].m_uSwordsmanNumber != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           1006,
-           "m_vBuildingInfos[RACE_TROJAN][BUILDING_CASTLE].m_uSwordsmanNumber == 4") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[4][48].m_uSwordsmanNumber != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 1006, "m_vBuildingInfos[RACE_TROJAN][BUILDING_CASTLE].m_uSwordsmanNumber == 4") == 1 )
     {
       __debugbreak();
     }
-    if ( CBuildingInfoMgr::m_vBuildingInfos[4][48].m_uBowmanNumber != 5
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingInfoMgr.cpp",
-           1007,
-           "m_vBuildingInfos[RACE_TROJAN][BUILDING_CASTLE].m_uBowmanNumber == 5") == 1 )
+    if ( CBuildingInfoMgr::m_vBuildingInfos[4][48].m_uBowmanNumber != 5 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 1007, "m_vBuildingInfos[RACE_TROJAN][BUILDING_CASTLE].m_uBowmanNumber == 5") == 1 )
     {
       __debugbreak();
     }
@@ -2772,9 +2533,7 @@ LABEL_16:
         v382 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v181);
         v381 = AdvXMLParser::Element::operator[](v382, "id");
         v656 = v381;
-        v178[33] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, struct std::string *))(*(_DWORD *)v381 + 8))(
-                     v381,
-                     &v862);
+        v178[33] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, struct std::string *))(*(_DWORD *)v381 + 8))(v381, &v862);
         LOBYTE(exceptionBlock) = 73;
         v380 = CDefineTranslator::GetValueOfDefine(v654, &v862);
         v369 = v380;
@@ -2797,9 +2556,7 @@ LABEL_16:
           v373 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
           v372 = AdvXMLParser::Element::operator[](v373, "id");
           v655 = v372;
-          v178[10] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, struct std::string *))(*(_DWORD *)v372 + 8))(
-                       v372,
-                       &v875);
+          v178[10] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, struct std::string *))(*(_DWORD *)v372 + 8))(v372, &v875);
           LOBYTE(exceptionBlock) = 80;
           v371 = CDefineTranslator::GetValueOfDefine(v654, &v875);
           v370 = v371;
@@ -2874,7 +2631,9 @@ LABEL_16:
           v340 = v647->GetDefineValue(v647, v133);
           v778->m_iPatchSoundId = v340;
           if ( v778->m_iPatchSoundId == -1 )
+          {
             v778->m_iPatchSoundId = 0;
+          }
           v339 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
           v338 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v339, "patch", 0);
           v337 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v338, "sound", 0);
@@ -2886,7 +2645,9 @@ LABEL_16:
           v778->m_iPatchSoundRandomness = v135;
           std::string::~string(v800);
           if ( !v778->m_iPatchSoundRandomness )
+          {
             v778->m_iPatchSoundRandomness = 100;
+          }
           v334 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
           v333 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v334, "patch", 0);
           v332 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v333, "sound", 0);
@@ -2963,7 +2724,9 @@ LABEL_16:
           LOBYTE(exceptionBlock) = 90;
           std::string::~string(v807);
           if ( v778->m_iEffectSoundId == -1 )
+          {
             v778->m_iEffectSoundId = 0;
+          }
           v298 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
           v297 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v298, "effect", 0);
           v296 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v297, "sound", 0);
@@ -2975,7 +2738,9 @@ LABEL_16:
           v778->m_iEffectSoundRandomness = v149;
           std::string::~string(v808);
           if ( !v778->m_iPatchSoundRandomness )
+          {
             v778->m_iPatchSoundRandomness = 100;
+          }
           v293 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
           v292 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v293, "effect", 0);
           v291 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v292, "sound", 0);

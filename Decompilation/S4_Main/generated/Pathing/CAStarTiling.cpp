@@ -67,13 +67,11 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
   int v63[65537]; // [esp+1090h] [ebp-80008h] BYREF
   _QWORD v64[32768]; // [esp+41094h] [ebp-40004h] BYREF
 
-  if ( !CWorldManager::InWorldPackedXY(_iStartXY)
-    && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 1384, "g_cWorld.InWorldPackedXY(_iStartXY)") == 1 )
+  if ( !CWorldManager::InWorldPackedXY(_iStartXY) && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 1384, "g_cWorld.InWorldPackedXY(_iStartXY)") == 1 )
   {
     __debugbreak();
   }
-  if ( !CWorldManager::InWorldPackedXY(_iEndXY)
-    && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 1385, "g_cWorld.InWorldPackedXY(_iEndXY)") == 1 )
+  if ( !CWorldManager::InWorldPackedXY(_iEndXY) && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 1385, "g_cWorld.InWorldPackedXY(_iEndXY)") == 1 )
   {
     __debugbreak();
   }
@@ -104,7 +102,9 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
       dword_416C790 = v48;
       uAStarMode = (a4 & 0x700) >> 8;
       if ( uAStarMode > 7 && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 1435, "uAStarMode <= ASTAR_MODE_LAST") == 1 )
+      {
         __debugbreak();
+      }
       v46 = uAStarMode;
       switch ( uAStarMode )
       {
@@ -167,7 +167,9 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
       v37 = dword_416C798 == sub_15D4DD0;
       v38 = (a4 & 0x80u) != 0;
       if ( v38 && v37 )
+      {
         dword_416C798 = (int (__cdecl *)(_DWORD, _DWORD))sub_15D4EA0;
+      }
       v7 = (struct CTile *)ITiling::Tile(dword_416C7AC);
       if ( (*(_DWORD *)dword_416C79C & CTile::Type(v7, v29[0])) != 0 )
       {
@@ -179,9 +181,13 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
         TPriorityQueue<COpenListEntry16,32768>::TPriorityQueue<COpenListEntry16,32768>(v63);
         v58 = 0;
         if ( (a4 & 0x40) != 0 )
+        {
           v36 = 80;
+        }
         else
+        {
           v36 = 0;
+        }
         v43 = v36;
         TBitArray<32768>::ClearArray(v62);
         TBitArray<32768>::Set(v62, dword_416C7AC);
@@ -207,11 +213,15 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
           v32 = *(_DWORD *)(dword_416C79C + 4 * v44);
           v15 = (struct CTile *)ITiling::Tile(v56);
           v45 = (unsigned __int8 *)CTile::LinkList(v15);
-          for ( i = 0; ; ++i )
+          for ( i = 0;
+                ;
+                ++i )
           {
             v16 = CLinkList::Size(v45);
             if ( i >= v16 )
+            {
               break;
+            }
             v60 = *(unsigned __int16 *)CLinkList::operator[](v45, i);
             v17 = (struct CTile *)ITiling::Tile(v60);
             v18 = CTile::Type(v17, v29[0]);
@@ -243,10 +253,14 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
                         v21 = (COpenListEntry16 *)TPriorityQueue<COpenListEntry16,32768>::operator[](v63, j);
                         v22 = COpenListEntry16::Index(v21);
                         if ( v22 == v60 )
+                        {
                           break;
+                        }
                       }
                       if ( j > _crt_argv_no_arguments )
+                      {
                         TPriorityQueue<COpenListEntry16,32768>::Remove(v63, j);
+                      }
                     }
                   }
                 }
@@ -280,7 +294,9 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
           v25 = ITiling::Tile(v58);
           v26 = CTile::CenterXY(v25);
           CWaypoints::PushGoal(a3, v26, 0);
-          for ( k = v58; k != dword_416C7AC; k = CG24Closed1Parent16::Parent((CG24Closed1Parent16 *)&v64[k]) )
+          for ( k = v58;
+                k != dword_416C7AC;
+                k = CG24Closed1Parent16::Parent((CG24Closed1Parent16 *)&v64[k]) )
           {
             v27 = ITiling::Tile(k);
             v28 = CTile::CenterXY(v27);

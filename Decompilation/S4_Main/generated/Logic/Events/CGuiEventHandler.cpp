@@ -112,7 +112,9 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
       if ( g_pGfxEngine )
       {
         if ( *((_BYTE *)v23 + 64) && *((_DWORD *)v23 + 14) == 57 )
+        {
           UpdateGuiDlgTutorialCursor();
+        }
         if ( *((_DWORD *)v23 + 15) != -1 )
         {
           TickCounter = CStateGame::GetTickCounter(g_pGame);
@@ -123,11 +125,17 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
           }
         }
         if ( *((_DWORD *)v23 + 13) == -1 )
+        {
           return 0;
+        }
         if ( !*((_BYTE *)v23 + 65) )
+        {
           return 0;
+        }
         if ( --dword_3D891A8 > 0 )
+        {
           return 0;
+        }
         if ( byte_3ED2029 )
         {
           IGuiEngine::SetImages(g_pGUIEngine, 59, 891, 328, 329);
@@ -154,7 +162,9 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
       IGuiEngine::OpenDialog(g_pGUIEngine, 9, (bool (__cdecl *)(int, int, int))GuiDlgBuildBasicProc);
       *((_DWORD *)v23 + 3) = -1;
       if ( *((_BYTE *)v23 + 64) )
+      {
         IGuiEngine::SetDlgToIgnore(g_pGUIEngine, 36, 1);
+      }
       CGuiEventHandler::ResetMainMenu(v23);
       if ( *((_BYTE *)v23 + 5) )
       {
@@ -165,7 +175,9 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
         CEvn_Logic::~CEvn_Logic(&v24);
       }
       if ( *((_DWORD *)v23 + 13) != -1 )
+      {
         return 0;
+      }
       IGuiEngine::OpenDialog(g_pGUIEngine, 59, (bool (__cdecl *)(int, int, int))GuiDlgIncomingMessageProc);
       *((_DWORD *)v23 + 13) = 59;
       CGuiEventHandler::RecalcDialogPos(v23, 1);
@@ -181,7 +193,9 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
         else if ( a2->m_iEventId == 609 )
         {
           if ( *((_DWORD *)v23 + 7) != -1 )
+          {
             return 1;
+          }
           IGuiEngine::OpenDialog(g_pGUIEngine, 72, (bool (__cdecl *)(int, int, int))GuiDlgWinLossProc);
           *((_DWORD *)v23 + 7) = 72;
           IGuiEngine::GetDialogRenderRect(g_pGUIEngine, 72, (struct SGuiRect *)v31);
@@ -253,22 +267,30 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
               return 1;
             case 3:
               if ( *((_DWORD *)v23 + 3) != -1 )
+              {
                 CGuiEventHandler::HandleMsgRefreshDialog(v23, a2);
+              }
               return 1;
             case 4:
               if ( *((_DWORD *)v23 + 5) != -1 )
+              {
                 IGuiEngine::SetSliderPosition(g_pGUIEngine, *((_DWORD *)v23 + 5), 613, a2->m_lParam);
+              }
               return 1;
             case 5:
               if ( *((_DWORD *)v23 + 4) != -1 )
+              {
                 CGuiEventHandler::HandleMsgRefreshDialog(v23, a2);
+              }
               return 1;
             case 6:
               CGuiEventHandler::HandleMsgOpenSidebar(v23, a2);
               return 1;
             case 7:
               if ( *((_DWORD *)v23 + 4) == -1 )
+              {
                 return 1;
+              }
               IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)v23 + 4));
               *((_DWORD *)v23 + 4) = -1;
               return 1;
@@ -284,16 +306,22 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
               }
               PlayGuiSound(1u);
               if ( a2->m_lParam )
+              {
                 v16 = 1712;
+              }
               else
+              {
                 v16 = 1711;
+              }
               v12 = v16;
               v4 = g_pStringEngine->GetString(g_pStringEngine, a2->m_wParam);
               IGuiEngine::SetText(g_pGUIEngine, *((_DWORD *)v23 + 10), v16, v4);
               return 1;
             case 11:
               if ( *((_BYTE *)v23 + 64) )
+              {
                 return 0;
+              }
               if ( *((_DWORD *)v23 + 10) != -1 )
               {
                 PlayGuiSound(5u);
@@ -311,11 +339,17 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
             case 12:
 LABEL_115:
               if ( *((_BYTE *)v23 + 64) )
+              {
                 return 0;
+              }
               if ( *((_DWORD *)v23 + 10) != -1 )
+              {
                 goto LABEL_118;
+              }
               if ( *((_DWORD *)v23 + 13) != -1 )
+              {
                 return 1;
+              }
               PlayGuiSound(4u);
               IGuiEngine::OpenDialog(g_pGUIEngine, 59, (bool (__cdecl *)(int, int, int))GuiDlgIncomingMessageProc);
               *((_DWORD *)v23 + 13) = 59;
@@ -323,9 +357,13 @@ LABEL_115:
               return 1;
             case 13:
               if ( *((_BYTE *)v23 + 64) )
+              {
                 return 0;
+              }
               if ( *((_DWORD *)v23 + 10) == -1 )
+              {
                 goto CGuiEventHandler__OnEvent___def_179DF97;
+              }
 LABEL_118:
               PlayGuiSound(1u);
               UpdateGuiDlgMessages(a2);
@@ -355,10 +393,14 @@ CGuiEventHandler__OnEvent___def_179DF97:
               else
               {
                 if ( a2->m_iEventId != 633 )
+                {
                   PlayGuiSound(5u);
+                }
 LABEL_134:
                 if ( (unsigned __int16)a2->m_lParam )
+                {
                   *((_BYTE *)v23 + 65) = 1;
+                }
                 if ( *((_BYTE *)v23 + 64) )
                 {
                   result = 0;
@@ -370,7 +412,9 @@ LABEL_134:
                     if ( HIWORD(a2->m_lParam) )
                     {
                       if ( a2->m_iEventId != 634 )
+                      {
                         PlayGuiSound(4u);
+                      }
                     }
                   }
                   if ( *((_DWORD *)v23 + 10) == -1 )
@@ -380,7 +424,9 @@ LABEL_134:
                   else
                   {
                     if ( a2->m_iEventId != 633 && a2->m_iEventId != 634 )
+                    {
                       PlayGuiSound(1u);
+                    }
                     UpdateGuiDlgMessages(a2);
                     result = 1;
                   }
@@ -395,7 +441,9 @@ LABEL_134:
                 *((_BYTE *)v23 + 65) = 0;
               }
               if ( *((_DWORD *)v23 + 10) != -1 )
+              {
                 return 1;
+              }
               CGuiEventHandler::GetTextMessageDialogParameters(v23, v8);
               *((_DWORD *)v23 + 10) = v8[0];
               IGuiEngine::OpenDialog(g_pGUIEngine, v8[0], (bool (__cdecl *)(int, int, int))v8[1]);
@@ -414,7 +462,9 @@ LABEL_134:
               return 1;
             case 17:
               if ( *((_DWORD *)v23 + 10) == -1 )
+              {
                 return 1;
+              }
               IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)v23 + 10));
               *((_DWORD *)v23 + 10) = -1;
               IGuiEngine::OpenDialog(g_pGUIEngine, 59, (bool (__cdecl *)(int, int, int))GuiDlgIncomingMessageProc);
@@ -425,7 +475,9 @@ LABEL_134:
               return 1;
             case 18:
               if ( *((_BYTE *)v23 + 4) && *((_DWORD *)v23 + 3) != -1 )
+              {
                 CGuiEventHandler::HandleMsgRefreshSettingsDialog(v23, a2);
+              }
               return 1;
             case 19:
               *((_BYTE *)v23 + 4) = 1;
@@ -436,7 +488,9 @@ LABEL_134:
               return 1;
             case 21:
               if ( !*((_BYTE *)v23 + 64) )
+              {
                 return 1;
+              }
               if ( a2->m_lParam == 1 )
               {
                 if ( *((_DWORD *)v23 + 14) == -1 )
@@ -454,18 +508,24 @@ LABEL_134:
               return 1;
             case 22:
               if ( *((_DWORD *)v23 + 5) != -1 )
+              {
                 UpdateGuiDlgMinimap(a2->m_wParam);
+              }
               return 1;
             case 26:
               if ( *((_DWORD *)v23 + 15) != -1 )
+              {
                 return 1;
+              }
               IGuiEngine::OpenDialog(g_pGUIEngine, 74, (bool (__cdecl *)(int, int, int))GuiDlgClockProc);
               *((_DWORD *)v23 + 15) = 74;
               CGuiEventHandler::RecalcDialogPos(v23, 1);
               return 1;
             case 27:
               if ( *((_DWORD *)v23 + 15) == -1 )
+              {
                 return 1;
+              }
               IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)v23 + 15));
               *((_DWORD *)v23 + 15) = -1;
               return 1;
@@ -624,7 +684,9 @@ void  CGuiEventHandler::RecalcDialogPos(bool a2) {
     result = IGuiEngine::SetDialogRenderPos(g_pGUIEngine, *((_DWORD *)this + 10), 209, OutputHeight - (v28 - v26 + 1));
   }
   if ( !g_pGame->m_bExtendedTooltip )
+  {
     return result;
+  }
   IGuiEngine::GetDialogRenderRect(g_pGUIEngine, 73, (struct SGuiRect *)&v25);
   v8 = v27 - v25 + 1;
   v5 = IGfxEngine::GetOutputHeight(g_pGfxEngine);
@@ -647,11 +709,7 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event & a2) {
   CEvn_Event v8; // [esp+5Ch] [ebp-28h] BYREF
   int v9; // [esp+80h] [ebp-4h]
 
-  if ( a2->m_wParam != 13
-    || (a2->m_lParam & 4) != 0
-    || (a2->m_lParam & 8) != 0
-    || *((_BYTE *)this + 64)
-    || !g_pEvnEngine )
+  if ( a2->m_wParam != 13 || (a2->m_lParam & 4) != 0 || (a2->m_lParam & 8) != 0 || *((_BYTE *)this + 64) || !g_pEvnEngine )
   {
     if ( *((_BYTE *)this + 64) )
     {
@@ -808,13 +866,17 @@ bool  CGuiEventHandler::HandleMsgKeyDown(class CEvn_Event & a2) {
       return 1;
     case 117:
       if ( *((_BYTE *)this + 64) )
+      {
         return 1;
+      }
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 611, 1);
       IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 8, 931, 1);
       return 1;
     case 118:
       if ( *((_BYTE *)this + 66) )
+      {
         return 1;
+      }
       if ( *((_DWORD *)this + 15) == -1 )
       {
         v3 = CEvn_Event::CEvn_Event(&v6, 0x273u, 0, 0, 0);
@@ -849,7 +911,9 @@ void  CGuiEventHandler::HandleMsgNewDialog(class CEvn_Event & a2) {
   result = (char)a2;
   lparam = a2->m_lParam;
   if ( !lparam )
+  {
     return result;
+  }
   if ( *((_DWORD *)this + 3) != -1 )
   {
     IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 3));
@@ -1020,7 +1084,9 @@ void  CGuiEventHandler::HandleMsgOpenSettings(class CEvn_Event & a2) {
   result = (char)a2;
   lparam = (_DWORD *)a2->m_lParam;
   if ( !lparam )
+  {
     return result;
+  }
   if ( *((_DWORD *)this + 3) != -1 )
   {
     IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 3));
@@ -1072,7 +1138,9 @@ void  CGuiEventHandler::HandleMsgOpenSidebar(class CEvn_Event & a2) {
   LOBYTE(v2) = (_BYTE)a2;
   lparam = a2->m_lParam;
   if ( !lparam )
+  {
     return v2;
+  }
   if ( *((_DWORD *)this + 4) != -1 )
   {
     IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 4));
@@ -1208,7 +1276,9 @@ void  CGuiEventHandler::HandleMsgCloseAllDialogs(void) {
   }
   result = this;
   if ( *((_DWORD *)this + 15) == -1 )
+  {
     return result;
+  }
   IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 15));
   result = this;
   *((_DWORD *)this + 15) = -1;
@@ -1349,7 +1419,9 @@ void  CGuiEventHandler::HandleMsgRefreshDialog(class CEvn_Event & a2) {
         break;
       case 0x25:
         if ( *((_DWORD *)this + 8) != -1 )
+        {
           UpdateGuiDlgMainBarExt1();
+        }
         break;
       default:
         return;
@@ -1403,7 +1475,9 @@ void  CGuiEventHandler::ResetMainMenu(void) {
 
   result = (char)this;
   if ( *((_DWORD *)this + 5) != -1 )
+  {
     return IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 606, 1);
+  }
   return result;
 }
 
@@ -1430,7 +1504,9 @@ void  CGuiEventHandler::ResetMainMenuForContext(void) {
   v7 = -1;
   CEvn_Event::~CEvn_Event(&v6);
   if ( *((_DWORD *)this + 5) != -1 )
+  {
     IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 0, 606);
+  }
   if ( *((_DWORD *)this + 3) != -1 )
   {
     IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 3));
@@ -1438,7 +1514,9 @@ void  CGuiEventHandler::ResetMainMenuForContext(void) {
   }
   result = this;
   if ( *((_DWORD *)this + 6) == -1 )
+  {
     return result;
+  }
   IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 6));
   result = this;
   *((_DWORD *)this + 6) = -1;

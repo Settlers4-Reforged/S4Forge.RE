@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CVikingWarShip::New(std::istream & a1) {
   
   if ( CWarShip::operator new(0xC8u) )
+  {
     return CVikingWarShip::CVikingWarShip(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -81,7 +85,7 @@ void  CVikingWarShip::IncreaseAmmo(int a2) {
 // [Decompilation failed for static unsigned long CVikingWarShip::m_iClassID]
 
 // address=[0x15a1c30]
-// Decompiled from CVikingWarShip *__thiscall CVikingWarShip::CVikingWarShip(  CVikingWarShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
+// Decompiled from CVikingWarShip *__thiscall CVikingWarShip::CVikingWarShip(CVikingWarShip *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
  CVikingWarShip::CVikingWarShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CWarShip::CWarShip(this, a2, a3, a4, a5, a6, a7, a8);
@@ -99,9 +103,13 @@ bool  CVikingWarShip::EnoughAmmo(void)const {
   unsigned int v4; // [esp+10h] [ebp-8h]
 
   if ( CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost) <= 0 )
+  {
     v4 = 1;
+  }
   else
+  {
     v4 = CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost);
+  }
   v1 = IEntity::OwnerId((unsigned __int8 *)this);
   return CMagic::GetCurrentManaAmount(v1) >= v4;
 }
@@ -115,9 +123,13 @@ unsigned int  CVikingWarShip::AmmoAmount(void)const {
   unsigned int v4; // [esp+10h] [ebp-4h]
 
   if ( CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost) <= 0 )
+  {
     v4 = 1;
+  }
   else
+  {
     v4 = CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost);
+  }
   v1 = IEntity::OwnerId((unsigned __int8 *)this);
   return CMagic::GetCurrentManaAmount(v1) / v4;
 }

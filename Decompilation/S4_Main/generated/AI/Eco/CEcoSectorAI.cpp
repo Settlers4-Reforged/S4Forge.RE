@@ -14,7 +14,7 @@
 
 
 // address=[0x2f34890]
-// Decompiled from CEcoSectorAI *__thiscall CEcoSectorAI::CEcoSectorAI(  CEcoSectorAI *this,  struct IAIEcoManager *a2,  struct IAISectorAI *a3,  int a4,  int a5)
+// Decompiled from CEcoSectorAI *__thiscall CEcoSectorAI::CEcoSectorAI(CEcoSectorAI *this, struct IAIEcoManager *a2, struct IAISectorAI *a3, int a4, int a5)
  CEcoSectorAI::CEcoSectorAI(class IAIEcoManager * a2, class IAISectorAI * a3, int a4, int a5) {
   
   CSchedule *v6; // [esp+14h] [ebp-30h]
@@ -31,29 +31,45 @@
   *((_DWORD *)this + 8) = 0;
   C = (CReserveDatabase *)operator new(0x1Cu);
   if ( C )
+  {
     v12 = CReserveDatabase::CReserveDatabase(C);
+  }
   else
+  {
     v12 = 0;
+  }
   *((_DWORD *)this + 3) = v12;
   v11 = (CProductionTab *)operator new(1u);
   if ( v11 )
+  {
     v10 = CProductionTab::CProductionTab(v11);
+  }
   else
+  {
     v10 = 0;
+  }
   *((_DWORD *)this + 4) = v10;
   v9 = (CProductionDataTab *)operator new(1u);
   if ( v9 )
+  {
     v8 = CProductionDataTab::CProductionDataTab(v9);
+  }
   else
+  {
     v8 = 0;
+  }
   *((_DWORD *)this + 5) = v8;
   *((_DWORD *)this + 6) = a2;
   *((_DWORD *)this + 7) = a3;
   v7 = (CSchedule *)operator new(0x7Cu);
   if ( v7 )
+  {
     v6 = CSchedule::CSchedule(v7, this, a4, a5);
+  }
   else
+  {
     v6 = 0;
+  }
   *((_DWORD *)this + 1) = v6;
   CSchedule::Settings(*((CSchedule **)this + 1));
   return this;
@@ -68,14 +84,22 @@
 
   *this = (CReserveDatabase *)CEcoSectorAI::_vftable_;
   if ( this[3] )
+  {
     delete this[3];
+  }
   if ( this[4] )
+  {
     delete this[4];
+  }
   if ( this[5] )
+  {
     delete this[5];
+  }
   result = this[1];
   if ( result )
+  {
     return (CReserveDatabase *)delete this[1];
+  }
   return result;
 }
 
@@ -88,7 +112,9 @@ void  CEcoSectorAI::Release(void) {
 
   result = this;
   if ( this )
+  {
     return (CEcoSectorAI *)delete this;
+  }
   return result;
 }
 
@@ -100,8 +126,12 @@ void  CEcoSectorAI::ReadConfigFile(void) {
   int result; // eax
   int i; // [esp+10h] [ebp-8h]
 
-  for ( i = 0; i < 83; ++i )
+  for ( i = 0;
+        i < 83;
+        ++i )
+  {
     result = i + 1;
+  }
   return result;
 }
 
@@ -125,9 +155,13 @@ enum T_AI_BUILD_RESULT  CEcoSectorAI::PutUpBuilding(int a2, int a3, int a4, int 
   v6 = CReserveDatabase::PackPosition(this[3], a3, a4);
   C = (CMainProblemSolveEvent *)operator new(0x70u);
   if ( C )
+  {
     v8 = CMainProblemSolveEvent::CMainProblemSolveEvent(C, -1, 9, a2, v6, 0, 0);
+  }
   else
+  {
     v8 = 0;
+  }
   CSchedule::NewSchedEntry(this[1], v8);
   return 1;
 }

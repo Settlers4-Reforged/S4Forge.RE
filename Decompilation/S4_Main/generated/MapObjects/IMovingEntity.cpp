@@ -48,9 +48,13 @@ int  IMovingEntity::GetJobPart(void)const {
 bool  IMovingEntity::IsFree(int a2) {
   
   if ( IMovingEntity::IsNotBlocked(this, a2) )
+  {
     return IMovingEntity::IsNotOccupied(this, a2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -58,12 +62,10 @@ bool  IMovingEntity::IsFree(int a2) {
 // Decompiled from char __thiscall IMovingEntity::IsUnEmployed(IMovingEntity *this)
 bool  IMovingEntity::IsUnEmployed(void)const {
   
-  if ( BBSupportDbgReport(
-         0,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\MovingEntity.h",
-         174,
-         "Nearly virtual function IMovingEntity::IsUnEmployed called") == 1 )
+  if ( BBSupportDbgReport(0, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\MovingEntity.h", 174, "Nearly virtual function IMovingEntity::IsUnEmployed called") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 
@@ -139,14 +141,14 @@ void  IMovingEntity::NewToDoList(class std::list<class CEntityTask,class std::al
   int v7; // [esp+24h] [ebp-4h]
 
   if ( !_toDo && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 152, "_toDo != NULL") == 1 )
+  {
     __debugbreak();
+  }
   this->m_pToDoList = (std::list *)_toDo;
   v5 = std::list<CEntityTask>::begin(this->m_pToDoList);
   v4 = v5;
   v7 = 0;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(
-    &this->m_cCurrentToDoItemIter,
-    v5);
+  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(&this->m_cCurrentToDoItemIter, v5);
   v7 = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v3);
   this->m_iToDoSize = a3;
@@ -164,14 +166,14 @@ void  IMovingEntity::ResetToDoList(void) {
   int exceptionBlock; // [esp+38h] [ebp-4h]
 
   if ( !this->m_pToDoList && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 183, "m_toDoList != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( this->m_pToDoList )
   {
     v7 = std::list<CEntityTask>::begin(this->m_pToDoList);
     exceptionBlock = 0;
-    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(
-      &this->m_cCurrentToDoItemIter,
-      v7);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(&this->m_cCurrentToDoItemIter, v7);
     exceptionBlock = -1;
     return std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v3);
   }
@@ -179,9 +181,7 @@ void  IMovingEntity::ResetToDoList(void) {
   {
     v5 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v2);
     exceptionBlock = 1;
-    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(
-      &this->m_cCurrentToDoItemIter,
-      (int)v5);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(&this->m_cCurrentToDoItemIter, (int)v5);
     exceptionBlock = -1;
     return std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v2);
   }
@@ -200,13 +200,13 @@ void  IMovingEntity::SetToDoList(class std::list<class CEntityTask,class std::al
   this->m_pToDoList = (std::list *)a2;
   this->m_iToDoSize = -1;
   if ( !this->m_pToDoList && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 171, "m_toDoList != nullptr") == 1 )
+  {
     __debugbreak();
+  }
   v4 = std::list<CEntityTask>::begin(this->m_pToDoList);
   v3 = v4;
   v6 = 0;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(
-    &this->m_cCurrentToDoItemIter,
-    v4);
+  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(&this->m_cCurrentToDoItemIter, v4);
   v6 = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v2);
 }
@@ -245,9 +245,7 @@ bool  IMovingEntity::IsEndIter(void) {
 
   v4 = (std::_Iterator_base12 *)std::list<CEntityTask>::end(this->m_pToDoList);
   v8 = 0;
-  v7 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==(
-         (std::_Iterator_base12 *)&this->m_cCurrentToDoItemIter,
-         v4);
+  v7 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==((std::_Iterator_base12 *)&this->m_cCurrentToDoItemIter, v4);
   v8 = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v2);
   return v7;
@@ -384,9 +382,13 @@ void  IMovingEntity::DecDistance(unsigned int a2) {
   else
   {
     if ( this->m_iDistance == 255 )
+    {
       m_iDistance = this->m_iDistance + 1;
+    }
     else
+    {
       m_iDistance = this->m_iDistance;
+    }
     this->m_iDistance = m_iDistance - a2;
   }
 }

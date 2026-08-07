@@ -7,9 +7,13 @@
 class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void * a1) {
   
   if ( operator new(0xB48u) )
+  {
     return (struct CGameState *)CStateLobbyConnect::CStateLobbyConnect((int)a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -31,12 +35,7 @@ class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void * a1) {
   CGuiGameState::CGuiGameState(this);
   v13 = 0;
   *(_DWORD *)this = &CStateLobbyConnect::_vftable_;
-  _vec_ctor(
-    (char *)this + 4,
-    0x8Cu,
-    0x14u,
-    CLanLobbyConnect::SGameEntry::SGameEntry,
-    CLanLobbyConnect::SGameEntry::~SGameEntry);
+  _vec_ctor((char *)this + 4, 0x8Cu, 0x14u, CLanLobbyConnect::SGameEntry::SGameEntry, CLanLobbyConnect::SGameEntry::~SGameEntry);
   LOBYTE(v13) = 1;
   *((_BYTE *)this + 2884) = 0;
   Instance = (OnlineManager *)OnlineManager::GetInstance();
@@ -55,9 +54,13 @@ class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void * a1) {
     C = (CGameType *)operator new(0x620u);
     LOBYTE(v13) = 2;
     if ( C )
+    {
       v8 = CGameType::CGameType(C);
+    }
     else
+    {
       v8 = 0;
+    }
     LOBYTE(v13) = 1;
     g_pGameType = (int)v8;
   }
@@ -86,8 +89,7 @@ class CGameState * __cdecl CStateLobbyConnect::DynamicCreateFunc(void * a1) {
  CStateLobbyConnect::~CStateLobbyConnect(void) {
   
   *(_DWORD *)this = &CStateLobbyConnect::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 2)
-    && BBSupportDbgReport(2, "main\\states\\StateLobbyConnect.cpp", 142, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 2) && BBSupportDbgReport(2, "main\\states\\StateLobbyConnect.cpp", 142, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -125,7 +127,9 @@ bool  CStateLobbyConnect::Perform(void) {
     CGameStateHandler::Queue((int)CStateMessageBox::DynamicCreateFunc, (int)v3);
     CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
     if ( g_pNetworkEngine )
+    {
       (**(void (__thiscall ***)(int, int))g_pNetworkEngine)(g_pNetworkEngine, 1);
+    }
     g_pNetworkEngine = 0;
     return 1;
   }
@@ -159,7 +163,9 @@ bool  CStateLobbyConnect::Perform(void) {
       if ( !(unsigned __int8)INetworkEngine::Start(0, 0, 0, 0) )
       {
         if ( g_pNetworkEngine )
+        {
           (**(void (__thiscall ***)(int, int))g_pNetworkEngine)(g_pNetworkEngine, 1);
+        }
         g_pNetworkEngine = 0;
         byte_4030758 = 1;
         CTrace::Print("GameHost: Unrecoverable network error while starting network for Game Search!");
@@ -187,7 +193,9 @@ bool  CStateLobbyConnect::Perform(void) {
     IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   }
   if ( g_pNetworkEngine )
+  {
     INetworkEngine::CheckForMsg((INetworkEngine *)g_pNetworkEngine);
+  }
   return 1;
 }
 
@@ -298,14 +306,7 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event & a2) {
       v10 = &v8;
       v16 = std::wstring::wstring(&v8, &g_swPlayerName);
       CGameSettings::SetPlayerName(v8);
-      if ( g_pNetworkEngine
-        || ((C = operator new(0x18u), v53 = 2, !C)
-          ? (v40 = 0)
-          : (v40 = INetworkEngine::INetworkEngine((INetworkEngine *)C, 1)),
-            v26 = v40,
-            v53 = -1,
-            g_pNetworkEngine = v40,
-            (unsigned __int8)INetworkEngine::Start(0, 0, 0, 0)) )
+      if ( g_pNetworkEngine || ((C = operator new(0x18u), v53 = 2, !C) ? (v40 = 0) : (v40 = INetworkEngine::INetworkEngine((INetworkEngine *)C, 1)), v26 = v40, v53 = -1, g_pNetworkEngine = v40, (unsigned __int8)INetworkEngine::Start(0, 0, 0, 0)) )
       {
         v8.m_u[6] = 0;
         v8.m_u[5] = 0;
@@ -318,31 +319,28 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event & a2) {
         v6 = 0;
         v9 = &v5;
         v14 = std::wstring::wstring(&v5, &v48[5 * g_iLanLobbyNr + 2].m_u[1]);
-        if ( !CGameType::LoadMapData(
-                g_pGameType,
-                v5,
-                v6,
-                v7,
-                v8.m_u[0],
-                v8.m_u[1],
-                v8.m_u[2],
-                v8.m_u[3],
-                v8.m_u[4],
-                v8.m_u[5],
-                v8.m_u[6]) )
+        if ( !CGameType::LoadMapData(g_pGameType, v5, v6, v7, v8.m_u[0], v8.m_u[1], v8.m_u[2], v8.m_u[3], v8.m_u[4], v8.m_u[5], v8.m_u[6]) )
         {
           v25 = g_pGameType;
           v39 = g_pGameType;
           if ( g_pGameType )
+          {
             v24 = delete v39;
+          }
           else
+          {
             v24 = 0;
+          }
           v38 = operator new(0x620u);
           v53 = 3;
           if ( v38 )
+          {
             v37 = CGameType::CGameType((CGameType *)v38);
+          }
           else
+          {
             v37 = 0;
+          }
           v23 = v37;
           v53 = -1;
           g_pGameType = v37;
@@ -360,7 +358,9 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event & a2) {
         {
           std::wstring::operator=(&g_pGameType->m_swSaveFile, &v48[5 * g_iLanLobbyNr + 4]);
           if ( g_pGameType->bIsAutosave )
+          {
             std::wstring::operator+=(&g_pGameType->m_swSaveFile, (wchar_t *)L"_autoSave");
+          }
           std::wstring::operator+=(&g_pGameType->m_swSaveFile, (wchar_t *)L".sav");
         }
         CLanLobby::Communicate(1024, (void *)g_iLanLobbyNr);
@@ -374,7 +374,9 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event & a2) {
         v49 = IGuiEngine::CloseDialog(g_pGUIEngine, 2);
         v49 = IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
         if ( !v49 && BBSupportDbgReport(2, "main\\states\\StateLobbyConnect.cpp", 349, "bRet") == 1 )
+        {
           __debugbreak();
+        }
         CTrace::Print("GameHost: Unrecoverable network error while starting network for Game Join!");
         result = 1;
       }
@@ -398,9 +400,7 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event & a2) {
         g_pNetworkEngine = 0;
       }
       dword_403191C = 1;
-      CGameStateHandler::Switch(
-        (struct CGameState *(__cdecl *)(void *))CStateLobbyMapSettings::DynamicCreateFunc,
-        (void *)1);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLobbyMapSettings::DynamicCreateFunc, (void *)1);
       result = 1;
       break;
     case 49:
@@ -425,9 +425,7 @@ bool  CStateLobbyConnect::OnEvent(class CEvn_Event & a2) {
       Instance = (OnlineManager *)OnlineManager::GetInstance();
       OnlineManager::SetQuickMatchFlow(Instance, v8.m_u[6]);
       dword_403191C = 1;
-      CGameStateHandler::Switch(
-        (struct CGameState *(__cdecl *)(void *))CStateLobbyMapSettings::DynamicCreateFunc,
-        (void *)1);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLobbyMapSettings::DynamicCreateFunc, (void *)1);
       result = 1;
       break;
     case 101:

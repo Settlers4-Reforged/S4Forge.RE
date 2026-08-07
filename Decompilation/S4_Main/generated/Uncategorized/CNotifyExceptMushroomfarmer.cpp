@@ -3,7 +3,7 @@
 // Definitions for class CNotifyExceptMushroomfarmer
 
 // address=[0x1508120]
-// Decompiled from CNotifyExceptMushroomfarmer *__thiscall CNotifyExceptMushroomfarmer::CNotifyExceptMushroomfarmer(  CNotifyExceptMushroomfarmer *this)
+// Decompiled from CNotifyExceptMushroomfarmer *__thiscall CNotifyExceptMushroomfarmer::CNotifyExceptMushroomfarmer(CNotifyExceptMushroomfarmer *this)
  CNotifyExceptMushroomfarmer::CNotifyExceptMushroomfarmer(void) {
   
   INotifyFilter::INotifyFilter(this);

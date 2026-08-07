@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateLobbyLoadMP::DynamicCreateFunc(void * a1) {
 
   C = (CStateLobbyLoadMP *)operator new(0xAFA0u);
   if ( C )
+  {
     return CStateLobbyLoadMP::CStateLobbyLoadMP(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -71,10 +75,14 @@ bool  CStateLobbyLoadMP::Perform(void) {
     IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   }
   if ( !g_pNetworkEngine )
+  {
     return 1;
+  }
   INetworkEngine::CheckForMsg((INetworkEngine *)g_pNetworkEngine);
   if ( !INetworkEngine::StormDidEnterSession((INetworkEngine *)g_pNetworkEngine) )
+  {
     return 1;
+  }
   CStateLobbyLoadMP::UpdateGameTypeData(this);
   (*(void (__thiscall **)(CStateLobbyLoadMP *, int))(*(_DWORD *)this + 16))(this, 1);
   INetworkEngine::StormResetEnterSessionFlag((INetworkEngine *)g_pNetworkEngine);
@@ -104,11 +112,17 @@ void  CStateLobbyLoadMP::CreateLobbyGameInfo(class CLanLobbyGameSettings & a2, s
   *(_BYTE *)(a2 + 137) = 1;
   *(_BYTE *)(a2 + 136) = 1;
   *(_DWORD *)(a2 + 120) = 1;
-  for ( i = 0; i < *(_DWORD *)(g_pGameType + 112); ++i )
+  for ( i = 0;
+        i < *(_DWORD *)(g_pGameType + 112);
+        ++i )
+  {
     *(_BYTE *)(*(_DWORD *)(a2 + 116) + 2116 * i) = 1;
+  }
   *(_BYTE *)(*(_DWORD *)(a2 + 116) + 2116 * CGameType::GetLocalSlot(g_pGameType)) = 0;
   if ( this[16932] )
+  {
     this[2116 * CGameType::GetLocalSlot(g_pGameType) + 68] = 1;
+  }
   v3 = (void *)INetworkEngine::ConvertIPAddress((int)v6, *(_DWORD *)(g_pGameType + 68));
   std::string::operator=((void *)(a2 + 60), v3);
   std::string::~string(v6);
@@ -130,14 +144,14 @@ void  CStateLobbyLoadMP::UpdateGameTypeData(void) {
   int v7; // [esp+40h] [ebp-4h]
 
   if ( !g_pGameType && BBSupportDbgReport(2, "main\\States\\StateLobbyLoadMP.cpp", 129, "g_pGameType!=NULL") == 1 )
-    __debugbreak();
-  if ( *(_BYTE *)(g_pGameType + 732)
-    && BBSupportDbgReport(2, "main\\States\\StateLobbyLoadMP.cpp", 130, "!g_pGameType->m_bLocalGame") == 1 )
   {
     __debugbreak();
   }
-  if ( !*(_BYTE *)(g_pGameType + 696)
-    && BBSupportDbgReport(2, "main\\States\\StateLobbyLoadMP.cpp", 131, "g_pGameType->m_bSavedGame") == 1 )
+  if ( *(_BYTE *)(g_pGameType + 732) && BBSupportDbgReport(2, "main\\States\\StateLobbyLoadMP.cpp", 130, "!g_pGameType->m_bLocalGame") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( !*(_BYTE *)(g_pGameType + 696) && BBSupportDbgReport(2, "main\\States\\StateLobbyLoadMP.cpp", 131, "g_pGameType->m_bSavedGame") == 1 )
   {
     __debugbreak();
   }
@@ -152,12 +166,18 @@ void  CStateLobbyLoadMP::UpdateGameTypeData(void) {
     LocalPeerId = OnlineManager::GetLocalPeerId(Instance);
     *(_DWORD *)(g_pGameType + 4 * CGameType::GetLocalSlot(g_pGameType) + 224) = LocalPeerId;
   }
-  for ( i = 0; i < *(_DWORD *)(g_pGameType + 112); ++i )
+  for ( i = 0;
+        i < *(_DWORD *)(g_pGameType + 112);
+        ++i )
   {
     if ( *(_DWORD *)(g_pGameType + 4 * i + 116) == 2 || *(_DWORD *)(g_pGameType + 4 * i + 116) == 3 )
+    {
       *(_DWORD *)(g_pGameType + 4 * i + 452) = 6;
+    }
     else
+    {
       *(_DWORD *)(g_pGameType + 4 * i + 452) = 0;
+    }
     if ( (unsigned __int8)CGameType::IsSaveGame((void *)g_pGameType) )
     {
       if ( *(_DWORD *)(g_pGameType + 4 * i + 116) == 2 || *(_DWORD *)(g_pGameType + 4 * i + 116) == 3 )
@@ -177,9 +197,7 @@ void  CStateLobbyLoadMP::UpdateGameTypeData(void) {
     {
       *(_DWORD *)(g_pGameType + 4 * i + 116) = 1;
     }
-    if ( (unsigned __int8)CGameType::IsHost(g_pGameType)
-      && (*(_DWORD *)(g_pGameType + 4 * i + 116) != 2 && *(_DWORD *)(g_pGameType + 4 * i + 116) != 3
-       || *(_DWORD *)(g_pGameType + 4 * i + 404) != 3) )
+    if ( (unsigned __int8)CGameType::IsHost(g_pGameType) && (*(_DWORD *)(g_pGameType + 4 * i + 116) != 2 && *(_DWORD *)(g_pGameType + 4 * i + 116) != 3 || *(_DWORD *)(g_pGameType + 4 * i + 404) != 3) )
     {
       *(_BYTE *)(i + g_pGameType + 998) = 1;
     }

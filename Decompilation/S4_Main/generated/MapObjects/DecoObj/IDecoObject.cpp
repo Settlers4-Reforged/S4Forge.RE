@@ -12,7 +12,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
 
 
 // address=[0x15414c0]
-// Decompiled from IDecoObject *__thiscall IDecoObject::IDecoObject(  IDecoObject *this,  unsigned int _iX,  unsigned int _iY,  T_OBJECT_TYPE _iDecoObjectType,  int _iId,  bool a6)
+// Decompiled from IDecoObject *__thiscall IDecoObject::IDecoObject(IDecoObject *this, unsigned int _iX, unsigned int _iY, T_OBJECT_TYPE _iDecoObjectType, int _iId, bool a6)
  IDecoObject::IDecoObject(int _iX, int _iY, int _iDecoObjectType, int _iId, bool a6) {
   
   int iDbgType; // [esp+4h] [ebp-1Ch]
@@ -22,49 +22,48 @@ bool  IDecoObject::IsStaticInstance(void)const {
   IAnimatedEntity::IAnimatedEntity(this, _iId);
   this->__vftable = (IAnimatedEntity_vtbl *)&IDecoObject::_vftable_;
   this->m_bStaticInstance = a6;
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 63, "g_cWorld.InWorld( _iX, _iY )") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 63, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
-  if ( _iDecoObjectType <= OBJECT_NO_OBJECT
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 64, "_iDecoObjectType > 0") == 1 )
+  if ( _iDecoObjectType <= OBJECT_NO_OBJECT && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 64, "_iDecoObjectType > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( _iDecoObjectType >= OBJECT_MAX
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 65, "_iDecoObjectType < OBJECT_MAX") == 1 )
+  if ( _iDecoObjectType >= OBJECT_MAX && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 65, "_iDecoObjectType < OBJECT_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( _iId <= 0 && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 66, "_iId > 0") == 1 )
+  {
     __debugbreak();
+  }
   this->m_uObjType = LANDSCAPE_OBJ;
   this->m_iType = _iDecoObjectType;
   this->m_iFrame = 0;
   IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
   if ( a6 )
+  {
     IEntity::SetPosition(this, 0, 0);
+  }
   else
+  {
     IEntity::SetPosition(this, _iX, _iY);
+  }
   v8 = CWorldManager::ObjectId(_iX, _iY);
   if ( v8 )
   {
     pDbgDecoObject = (IDecoObject *)CDecoObjMgr::GetDecoObjPtr(v8);
     if ( !pDbgDecoObject && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 94, "pDbgDecoObject != 0") == 1 )
+    {
       __debugbreak();
+    }
     if ( pDbgDecoObject )
     {
       iDbgType = IEntity::Type(pDbgDecoObject);
       if ( IDecoObject::IsStaticInstance(pDbgDecoObject) )
       {
-        if ( iDbgType != IEntity::Type(this)
-          && CDecoObjMgr::GetTotalBuildingRings(&g_cDecoObjMgr, iDbgType)
-          && BBSupportDbgReport(
-               2,
-               "MapObjects\\DecoObj\\DecoObj.cpp",
-               102,
-               "iDbgType == Type() || ( g_cDecoObjMgr.GetTotalBuildingRings( iDbgType ) == 0 )") == 1 )
+        if ( iDbgType != IEntity::Type(this) && CDecoObjMgr::GetTotalBuildingRings(&g_cDecoObjMgr, iDbgType) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 102, "iDbgType == Type() || ( g_cDecoObjMgr.GetTotalBuildingRings( iDbgType ) == 0 )") == 1 )
         {
           __debugbreak();
         }
@@ -81,7 +80,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
 
 
 // address=[0x1541700]
-// Decompiled from IDecoObject *__thiscall IDecoObject::IDecoObject(  IDecoObject *this,  const struct IDecoObject *_rStaticDecoObject,  int _iId,  unsigned int _iX,  unsigned int _iY)
+// Decompiled from IDecoObject *__thiscall IDecoObject::IDecoObject(IDecoObject *this, const struct IDecoObject *_rStaticDecoObject, int _iId, unsigned int _iX, unsigned int _iY)
  IDecoObject::IDecoObject(class IDecoObject const & _rStaticDecoObject, int _iId, int _iX, int _iY) {
   
   int v5; // esi
@@ -89,25 +88,19 @@ bool  IDecoObject::IsStaticInstance(void)const {
   IAnimatedEntity::IAnimatedEntity(this, _iId);
   this->__vftable = (IAnimatedEntity_vtbl *)&IDecoObject::_vftable_;
   this->m_bStaticInstance = 0;
-  if ( _rStaticDecoObject->m_uObjType != LANDSCAPE_OBJ
-    && BBSupportDbgReportF(
-         2,
-         "MapObjects\\DecoObj\\DecoObj.cpp",
-         133,
-         "%u == LANDSCAPE_OBJ",
-         _rStaticDecoObject->m_uObjType) == 1 )
+  if ( _rStaticDecoObject->m_uObjType != LANDSCAPE_OBJ && BBSupportDbgReportF(2, "MapObjects\\DecoObj\\DecoObj.cpp", 133, "%u == LANDSCAPE_OBJ", _rStaticDecoObject->m_uObjType) == 1 )
   {
     __debugbreak();
   }
-  if ( !_rStaticDecoObject->m_bStaticInstance
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 134, "_rStaticDecoObject.m_bStaticInstance") == 1 )
+  if ( !_rStaticDecoObject->m_bStaticInstance && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 134, "_rStaticDecoObject.m_bStaticInstance") == 1 )
   {
     __debugbreak();
   }
   if ( _iId <= 0 && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 135, "_iId > 0") == 1 )
+  {
     __debugbreak();
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 136, "g_cWorld.InWorld( _iX, _iY )") == 1 )
+  }
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 136, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
@@ -118,12 +111,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
   if ( CWorldManager::ObjectId(_iX, _iY) )
   {
     v5 = CWorldManager::ObjectId(_iX, _iY);
-    if ( v5 != IEntity::EntityId(&_rStaticDecoObject->IAnimatedEntity)
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\DecoObj\\DecoObj.cpp",
-           145,
-           "( g_cWorld.ObjectId( _iX, _iY ) == 0 ) || ( g_cWorld.ObjectId( _iX, _iY ) == _rStaticDecoObject.EntityId() )") == 1 )
+    if ( v5 != IEntity::EntityId(&_rStaticDecoObject->IAnimatedEntity) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 145, "( g_cWorld.ObjectId( _iX, _iY ) == 0 ) || ( g_cWorld.ObjectId( _iX, _iY ) == _rStaticDecoObject.EntityId() )") == 1 )
     {
       __debugbreak();
     }
@@ -146,24 +134,22 @@ bool  IDecoObject::IsStaticInstance(void)const {
 
   this->__vftable = (IAnimatedEntity_vtbl *)&IDecoObject::_vftable_;
   if ( this->m_bStaticInstance )
+  {
     return IAnimatedEntity::~IAnimatedEntity(this);
-  if ( !IEntity::X(this)
-    && !IEntity::Y(this)
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 164, "! ( ( X() == 0 ) && ( Y() == 0 ) )") == 1 )
+  }
+  if ( !IEntity::X(this) && !IEntity::Y(this) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 164, "! ( ( X() == 0 ) && ( Y() == 0 ) )") == 1 )
   {
     __debugbreak();
   }
   v6 = IEntity::Y(this);
   v1 = IEntity::X(this);
-  if ( !CWorldManager::InWorld(v1, v6)
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 165, "g_cWorld.InWorld( X(), Y() )") == 1 )
+  if ( !CWorldManager::InWorld(v1, v6) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 165, "g_cWorld.InWorld( X(), Y() )") == 1 )
   {
     __debugbreak();
   }
   v2 = IEntity::WorldIdx();
   v3 = CWorldManager::ObjectId(v2);
-  if ( v3 != IEntity::EntityId(this)
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 166, "g_cWorld.ObjectId( WorldIdx() ) == EntityId()") == 1 )
+  if ( v3 != IEntity::EntityId(this) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 166, "g_cWorld.ObjectId( WorldIdx() ) == EntityId()") == 1 )
   {
     __debugbreak();
   }
@@ -182,13 +168,21 @@ int  IDecoObject::ConvertToDarkOrGreen(bool a2) {
 
   v5 = IEntity::Type(this);
   if ( a2 )
+  {
     DarkObject = CDarkConvert::GetDarkObject(v5);
+  }
   else
+  {
     DarkObject = CDarkConvert::GetGreenObject(v5);
+  }
   if ( DarkObject )
+  {
     return DarkObject;
+  }
   else
+  {
     return v5;
+  }
 }
 
 

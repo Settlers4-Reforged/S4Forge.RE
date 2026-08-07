@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateEndStatistic::DynamicCreateFunc(void * a1) {
 
   C = (CStateEndStatistic *)operator new(4u);
   if ( C )
+  {
     return CStateEndStatistic::CStateEndStatistic(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -35,11 +39,7 @@ class CGameState * __cdecl CStateEndStatistic::DynamicCreateFunc(void * a1) {
   IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
   std::wstring::wstring(v6);
   LOBYTE(v7) = 1;
-  if ( (*(unsigned __int8 (__thiscall **)(void *, _BYTE *, const wchar_t *, int))(*(_DWORD *)g_pCDDrive + 8))(
-         g_pCDDrive,
-         v6,
-         L"Snd\\Romans*.mp3",
-         131073) )
+  if ( (*(unsigned __int8 (__thiscall **)(void *, _BYTE *, const wchar_t *, int))(*(_DWORD *)g_pCDDrive + 8))(g_pCDDrive, v6, L"Snd\\Romans*.mp3", 131073) )
   {
     v2 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v6);
     CSoundManager::PlayBackgroundMusic(5, 4, v2);
@@ -59,8 +59,7 @@ class CGameState * __cdecl CStateEndStatistic::DynamicCreateFunc(void * a1) {
  CStateEndStatistic::~CStateEndStatistic(void) {
   
   *(_DWORD *)this = &CStateEndStatistic::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 13)
-    && BBSupportDbgReport(2, "main\\States\\StateEndStatistic.cpp", 91, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 13) && BBSupportDbgReport(2, "main\\States\\StateEndStatistic.cpp", 91, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -85,7 +84,9 @@ bool  CStateEndStatistic::Perform(void) {
   }
   v1 = dword_402CC58 + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_402CC58 = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -111,7 +112,9 @@ bool  CStateEndStatistic::OnEvent(class CEvn_Event & a2) {
   {
     case 0xB:
       if ( (unsigned __int16)a2->m_wParam != 27 )
+      {
         goto CStateEndStatistic__OnEvent___def_18A4F31;
+      }
       v5 = CEvn_Event::CEvn_Event(&v8, 0x5Du, 0, 0, 0);
       v9 = 0;
       IEventEngine::SendAMessage(g_pEvnEngine, v5);

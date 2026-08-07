@@ -3,7 +3,7 @@
 // Definitions for class CAIAgentTowerOccupation
 
 // address=[0x1303df0]
-// Decompiled from unsigned int __thiscall CAIAgentTowerOccupation::Execute(  CAIAgentTowerOccupation *this,  unsigned int a2,  unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentTowerOccupation::Execute(CAIAgentTowerOccupation *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentTowerOccupation::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -18,7 +18,9 @@ unsigned int  CAIAgentTowerOccupation::Execute(unsigned int a2, unsigned int a3)
 
   v11 = 0;
   v3 = CAINormalSectorAgent::SectorAI(this);
-  for ( i = (CAIEntityInfo *)CAITaskForce::FirstEntity((char *)v3 + 2564); i; i = (CAIEntityInfo *)v6 )
+  for ( i = (CAIEntityInfo *)CAITaskForce::FirstEntity((char *)v3 + 2564);
+        i;
+        i = (CAIEntityInfo *)v6 )
   {
     v6 = CAIEntityInfo::Next(i);
     v8 = CAIEntityInfo::EntityId(i);
@@ -28,7 +30,9 @@ unsigned int  CAIAgentTowerOccupation::Execute(unsigned int a2, unsigned int a3)
     {
       EntityInfo = (CAIEntityInfo *)IAIEnvironment::EntityGetEntityInfo(v10, 0);
       if ( EntityInfo )
+      {
         v13 = CAIEntityInfo::TargetId(EntityInfo) != v8;
+      }
     }
     if ( v13 )
     {
@@ -38,9 +42,13 @@ unsigned int  CAIAgentTowerOccupation::Execute(unsigned int a2, unsigned int a3)
     ++v11;
   }
   if ( v11 )
+  {
     return CAIAgent::ExecuteResult(0, 0);
+  }
   else
+  {
     return CAIAgent::ExecuteResult(0, 0x20u);
+  }
 }
 
 

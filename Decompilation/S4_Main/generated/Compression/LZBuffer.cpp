@@ -40,28 +40,42 @@ int  LZBuffer::_nMatch(int a2, unsigned char const * a3, int a4) {
   int j; // [esp+14h] [ebp-4h]
 
   if ( a4 >= 0x10000 && BBSupportDbgReport(2, "Source\\compression\\lz.cpp", 64, "nLimit < LZBUFSIZE") == 1 )
+  {
     __debugbreak();
+  }
   if ( 0x10000 - a2 < a4 )
   {
-    for ( i = a2; i < 0x10000; ++i )
+    for ( i = a2;
+          i < 0x10000;
+          ++i )
     {
       if ( *(unsigned __int8 *)(*(_DWORD *)this + i) != a3[i - a2] )
+      {
         return i - a2;
+      }
     }
     v5 = 0x10000 - a2;
-    for ( j = 0; j < a4 - (0x10000 - a2); ++j )
+    for ( j = 0;
+          j < a4 - (0x10000 - a2);
+          ++j )
     {
       if ( *(unsigned __int8 *)(*(_DWORD *)this + j) != a3[j + v5] )
+      {
         return j + v5;
+      }
     }
     return a4;
   }
   else
   {
-    for ( k = 0; k < a4; ++k )
+    for ( k = 0;
+          k < a4;
+          ++k )
     {
       if ( *(unsigned __int8 *)(*(_DWORD *)this + k + a2) != a3[k] )
+      {
         return k;
+      }
     }
     return a4;
   }
@@ -90,12 +104,7 @@ void  LZBuffer::_toBuf(unsigned char const * Src, unsigned int a3) {
   int result; // eax
   int v4; // [esp+8h] [ebp-8h]
 
-  if ( a3 >= 0x10000
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\source\\compression\\_lz.h",
-         128,
-         "sz < LZBUFSIZE") == 1 )
+  if ( a3 >= 0x10000 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\source\\compression\\_lz.h", 128, "sz < LZBUFSIZE") == 1 )
   {
     __debugbreak();
   }
@@ -129,18 +138,15 @@ void  LZBuffer::_bufCpy(unsigned char * a2, int a3, unsigned int a4) {
   
   int v6; // [esp+Ch] [ebp-4h]
 
-  if ( a4 >= 0x10000
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\source\\compression\\_lz.h",
-         144,
-         "sz < LZBUFSIZE") == 1 )
+  if ( a4 >= 0x10000 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\source\\compression\\_lz.h", 144, "sz < LZBUFSIZE") == 1 )
   {
     __debugbreak();
   }
   v6 = LZBuffer::_wrap(a3);
   if ( (int)(a4 + v6) <= 0x10000 )
+  {
     return memcpy(a2, (char *)*this + v6, a4);
+  }
   memcpy(a2, (char *)*this + v6, 0x10000 - v6);
   return memcpy(&a2[0x10000 - v6], *this, a4 - (0x10000 - v6));
 }

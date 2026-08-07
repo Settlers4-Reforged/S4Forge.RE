@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateAOSplash::DynamicCreateFunc(void * a1) {
 
   C = (CStateAOSplash *)operator new(4u);
   if ( C )
+  {
     return CStateAOSplash::CStateAOSplash(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -24,12 +28,7 @@ class CGameState * __cdecl CStateAOSplash::DynamicCreateFunc(void * a1) {
   *(_DWORD *)this = &CStateAOSplash::_vftable_;
   g_iAOSplashType = a2;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  CGuiGameState::SetupGuiWithExtra(
-    this,
-    L"Menu\\GUISetStartscreens.dat",
-    8,
-    GuiDlgAOSplashProc,
-    (struct IExtraCD *)g_pAddOn);
+  CGuiGameState::SetupGuiWithExtra(this, L"Menu\\GUISetStartscreens.dat", 8, GuiDlgAOSplashProc, (struct IExtraCD *)g_pAddOn);
   IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
   return this;
 }
@@ -41,8 +40,7 @@ class CGameState * __cdecl CStateAOSplash::DynamicCreateFunc(void * a1) {
   
   *(_DWORD *)this = &CStateAOSplash::_vftable_;
   IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 1);
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 8)
-    && BBSupportDbgReport(2, "main\\states\\stateaosplash.cpp", 73, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 8) && BBSupportDbgReport(2, "main\\states\\stateaosplash.cpp", 73, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -67,7 +65,9 @@ bool  CStateAOSplash::Perform(void) {
   }
   v1 = dword_402C934 + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_402C934 = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);

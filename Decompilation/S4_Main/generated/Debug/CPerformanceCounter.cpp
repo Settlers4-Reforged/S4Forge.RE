@@ -8,7 +8,9 @@
  CPerformanceCounter::CPerformanceCounter(void) {
   
   if ( !s_bPerfFrequencyCalculated )
+  {
     CalcPerfFrequency();
+  }
   CPerformanceCounter::Clear(this);
   return this;
 }
@@ -42,9 +44,13 @@ double  CPerformanceCounter::TimeMs(void)const {
   v3 = (double)(this->sMeasureCounter.QuadPart - this->sStartCounter.QuadPart) * s_dPerfFrequency;
   v2 = (double)(this->uMeasureTickCount - this->uStartTickCount);
   if ( v3 - v2 >= 1000.0 )
+  {
     return v2;
+  }
   else
+  {
     return v3;
+  }
 }
 
 

@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CTowerSoldier::New(std::istream & a1) {
   
   if ( operator new(0x34u) )
+  {
     return CTowerSoldier::CTowerSoldier(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -105,7 +109,9 @@ void  CTowerSoldier::LogicUpdate(class CSettler * a2) {
   char v54; // [esp+4Fh] [ebp-1h]
 
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 255, "_pSettler != 0") == 1 )
+  {
     __debugbreak();
+  }
   v45 = *((_BYTE *)this + 4);
   if ( v45 == 16 )
   {
@@ -129,13 +135,10 @@ void  CTowerSoldier::LogicUpdate(class CSettler * a2) {
   }
   else if ( v45 != 17 )
   {
-    if ( BBSupportDbgReportF(
-           1,
-           "MapObjects\\Settler\\TowerSoldierRole.cpp",
-           431,
-           "CTowerSoldier::LogicUpdate(): Invalid task %i!",
-           *((char *)this + 4)) == 1 )
+    if ( BBSupportDbgReportF(1, "MapObjects\\Settler\\TowerSoldierRole.cpp", 431, "CTowerSoldier::LogicUpdate(): Invalid task %i!", *((char *)this + 4)) == 1 )
+    {
       __debugbreak();
+    }
     return;
   }
   v49 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
@@ -151,7 +154,9 @@ void  CTowerSoldier::LogicUpdate(class CSettler * a2) {
       v6 = IEntity::OwnerId((unsigned __int8 *)v49);
       v52 = CTowerSoldier::SearchDoorGuardTarget(v6, v27);
       if ( v52 <= 0 )
+      {
         goto LABEL_17;
+      }
       v28 = IEntity::Type((unsigned __int16 *)a2);
       v7 = IEntity::Race(a2);
       v39 = *(_BYTE *)(CSettlerMgr::GetSettlerInfo(v7, v28) + 3);
@@ -160,7 +165,9 @@ void  CTowerSoldier::LogicUpdate(class CSettler * a2) {
       IMovingEntity::SetDirection(a2, *((unsigned __int8 *)this + 46));
       CSettler::TakeAnimList(a2, 2);
       if ( IEntity::WarriorType() != 3 )
+      {
         return;
+      }
       v29 = IEntity::Type((unsigned __int16 *)v49);
       v8 = IEntity::Race(a2);
       BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v8, v29);
@@ -180,27 +187,16 @@ LABEL_17:
       v46 = CStaticConfigVarInt::operator int(&g_iTowerBowmanExtraDmg);
       goto LABEL_35;
     case 3:
-      if ( !*((_DWORD *)this + 12)
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 346, "m_uLastActionTick > 0") == 1 )
+      if ( !*((_DWORD *)this + 12) && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 346, "m_uLastActionTick > 0") == 1 )
       {
         __debugbreak();
       }
       v12 = IEntity::PackedXY(a2);
-      if ( v12 != CBuilding::DoorPackedXY(v49)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Settler\\TowerSoldierRole.cpp",
-             347,
-             "_pSettler->PackedXY() == rBuilding.DoorPackedXY()") == 1 )
+      if ( v12 != CBuilding::DoorPackedXY(v49) && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 347, "_pSettler->PackedXY() == rBuilding.DoorPackedXY()") == 1 )
       {
         __debugbreak();
       }
-      if ( IEntity::WarriorType() != 13
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Settler\\TowerSoldierRole.cpp",
-             348,
-             "_pSettler->WarriorType() == WARRIOR_TYPE_TOWER_GUARD") == 1 )
+      if ( IEntity::WarriorType() != 13 && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 348, "_pSettler->WarriorType() == WARRIOR_TYPE_TOWER_GUARD") == 1 )
       {
         __debugbreak();
       }
@@ -210,19 +206,20 @@ LABEL_17:
       v46 = CStaticConfigVarInt::operator int(&g_iTowerDoorGuardExtraDmg);
       v14 = IEntity::Type((unsigned __int16 *)a2);
       if ( CSettlerMgr::SettlerWarriorType(v14) == 3 )
+      {
         v54 = 1;
+      }
       if ( v51 > 0 || CStateGame::GetTickCounter(g_pGame) < (unsigned int)(*((_DWORD *)this + 12) + 45) )
+      {
         goto LABEL_35;
+      }
       CTowerSoldier::WorkIsDone(this, a2);
       break;
     default:
-      if ( BBSupportDbgReportF(
-             1,
-             "MapObjects\\Settler\\TowerSoldierRole.cpp",
-             372,
-             "CTowerSoldier::LogicUpdate(): Invalid position %i!",
-             *((unsigned __int8 *)this + 45)) == 1 )
+      if ( BBSupportDbgReportF(1, "MapObjects\\Settler\\TowerSoldierRole.cpp", 372, "CTowerSoldier::LogicUpdate(): Invalid position %i!", *((unsigned __int8 *)this + 45)) == 1 )
+      {
         __debugbreak();
+      }
 LABEL_35:
       if ( v51 <= 0 )
       {
@@ -231,9 +228,13 @@ LABEL_35:
         if ( *((_BYTE *)this + 4) == 17 )
         {
           if ( *((_BYTE *)this + 45) == 3 )
+          {
             v40 = 4;
+          }
           else
+          {
             v40 = 31;
+          }
           v21 = CStateGame::Rand(g_pGame);
           IAnimatedEntity::RegisterForLogicUpdate(v40 - (v21 & 3));
         }
@@ -272,14 +273,7 @@ LABEL_35:
             v19 = CMapObjectMgr::Entity(*((unsigned __int16 *)this + 17));
             v23 = IEntity::PackedXY(v19);
             v20 = IEntity::PackedXY(a2);
-            (*(void (__thiscall **)(int, _DWORD, int, int, int, int, int))(*(_DWORD *)v41 + 24))(
-              v41,
-              0,
-              v20,
-              v23,
-              15,
-              v25,
-              v36);
+            (*(void (__thiscall **)(int, _DWORD, int, int, int, int, int))(*(_DWORD *)v41 + 24))(v41, 0, v20, v23, 15, v25, v36);
           }
         }
       }
@@ -304,7 +298,9 @@ bool  CTowerSoldier::SetFree(class CSettler * a2, int a3) {
   int v5; // [esp-4h] [ebp-8h]
 
   if ( !*((_WORD *)this + 16) )
+  {
     return 0;
+  }
   v5 = IEntity::ID();
   v3 = (CBuilding *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
   CBuilding::InhabitantFlee(v3, v5);
@@ -319,21 +315,11 @@ void  CTowerSoldier::SetTowerInfo(int a2, enum CTowerSoldier::T_TOWER_POSITION a
   
   int result; // eax
 
-  if ( a2 >= 0x100
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Settler\\TowerSoldierRole.cpp",
-         926,
-         "(_iSlotIndex >= 0) && (_iSlotIndex < 256)") == 1 )
+  if ( a2 >= 0x100 && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 926, "(_iSlotIndex >= 0) && (_iSlotIndex < 256)") == 1 )
   {
     __debugbreak();
   }
-  if ( a4 >= 6
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Settler\\TowerSoldierRole.cpp",
-         927,
-         "(_iDefaultDir >= 0) && (_iDefaultDir < 6)") == 1 )
+  if ( a4 >= 6 && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 927, "(_iDefaultDir >= 0) && (_iDefaultDir < 6)") == 1 )
   {
     __debugbreak();
   }
@@ -464,12 +450,13 @@ int __cdecl CTowerSoldier::SearchDoorGuardTarget(int a1, int a2) {
   v14 = Y16X16::UnpackXFast(a2);
   v13 = Y16X16::UnpackYFast(a2);
   v11 = CAlliances::AllianceId(a1);
-  if ( !CWorldManager::InInnerWorld2(v14, v13)
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 734, "g_cWorld.InInnerWorld2(iX0, iY0)") == 1 )
+  if ( !CWorldManager::InInnerWorld2(v14, v13) && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 734, "g_cWorld.InInnerWorld2(iX0, iY0)") == 1 )
   {
     __debugbreak();
   }
-  for ( i = 1; i <= 6; ++i )
+  for ( i = 1;
+        i <= 6;
+        ++i )
   {
     v8 = v14 + CSpiralOffsets::DeltaX(i);
     v9 = v13 + CSpiralOffsets::DeltaY(i);
@@ -493,7 +480,9 @@ int __cdecl CTowerSoldier::SearchDoorGuardTarget(int a1, int a2) {
             HIDWORD(v10) = v12 == 0;
             LODWORD(v10) = v12 == v11;
             if ( v10 )
+            {
               return v15;
+            }
           }
         }
       }
@@ -542,13 +531,17 @@ int __cdecl CTowerSoldier::SearchBowmanTarget(int a1, int a2) {
   v28 = Y16X16::UnpackXFast(a2);
   v29 = Y16X16::UnpackYFast(a2);
   if ( !CScanner::CheckIfAEnemyUnitMayBeInRange(v28, v29, 20, a1) )
+  {
     return 0;
+  }
   v25 = CAlliances::AllianceId(a1);
   v22 = Y16X16::UnpackXFast(a2);
   v23 = Y16X16::UnpackYFast(a2);
   v30 = -1;
   v20 = 20;
-  for ( i = 1; i <= CPlayerManager::NumberOfPlayers(); ++i )
+  for ( i = 1;
+        i <= CPlayerManager::NumberOfPlayers();
+        ++i )
   {
     if ( CPlayerManager::Race(i) == 3 && CAlliances::AllianceId(i) != v25 )
     {
@@ -573,10 +566,14 @@ int __cdecl CTowerSoldier::SearchBowmanTarget(int a1, int a2) {
     }
   }
   if ( v30 != -1 )
+  {
     return v30;
+  }
   v12 = CSpiralOffsets::First(1);
   v11 = CSpiralOffsets::Last(20);
-  for ( j = v12; j <= v11; ++j )
+  for ( j = v12;
+        j <= v11;
+        ++j )
   {
     v18 = v28 + CSpiralOffsets::DeltaX(j);
     v6 = CSpiralOffsets::DeltaY(j);
@@ -596,16 +593,16 @@ int __cdecl CTowerSoldier::SearchBowmanTarget(int a1, int a2) {
           v17 = IEntity::Flags(v27);
           if ( v10 )
           {
-            if ( v9 != v25
-              && (char *)(((unsigned int)&loc_301FFFE + 2) & v17) == &byte_201FFE1[31]
-              && (v17 & 0x8000000) == 0 )
+            if ( v9 != v25 && (char *)(((unsigned int)&loc_301FFFE + 2) & v17) == &byte_201FFE1[31] && (v17 & 0x8000000) == 0 )
             {
               v8 = ITiling::OwnerId(v26);
               v16 = CAlliances::AllianceId(v8);
               HIDWORD(v15) = v16 == 0;
               LODWORD(v15) = v16 == v25;
               if ( v15 )
+              {
                 return v24;
+              }
             }
           }
         }
@@ -649,7 +646,9 @@ void  CTowerSoldier::GetNextJob(class CSettler * a2) {
   v3 = this;
   IMovingEntity::IncToDoListIter(a2);
   if ( IMovingEntity::IsEndIter(a2) )
+  {
     IMovingEntity::ResetToDoList(v3);
+  }
   return (*(int (__thiscall **)(CTowerSoldier *, struct CSettler *))(*(_DWORD *)v3 + 40))(v3, a2);
 }
 
@@ -667,13 +666,11 @@ void  CTowerSoldier::TakeJob(class CSettler * a2) {
   v4 = *((_BYTE *)this + 4);
   if ( v4 == 16 )
   {
-    if ( !*((_WORD *)this + 17)
-      && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 230, "m_uEntityId > 0") == 1 )
+    if ( !*((_WORD *)this + 17) && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 230, "m_uEntityId > 0") == 1 )
     {
       __debugbreak();
     }
-    if ( *((char *)this + 6) <= 0
-      && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 231, "m_iJobCounter > 0") == 1 )
+    if ( *((char *)this + 6) <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 231, "m_iJobCounter > 0") == 1 )
     {
       __debugbreak();
     }
@@ -685,14 +682,11 @@ void  CTowerSoldier::TakeJob(class CSettler * a2) {
   }
   else
   {
-    result = BBSupportDbgReportF(
-               1,
-               "MapObjects\\Settler\\TowerSoldierRole.cpp",
-               240,
-               "CTowerSoldier::TakeJob(): Invalid task %i!",
-               *((char *)this + 4));
+    result = BBSupportDbgReportF(1, "MapObjects\\Settler\\TowerSoldierRole.cpp", 240, "CTowerSoldier::TakeJob(): Invalid task %i!", *((char *)this + 4));
     if ( result == 1 )
+    {
       __debugbreak();
+    }
   }
   return result;
 }
@@ -704,17 +698,11 @@ void  CTowerSoldier::Init(class CSettler * a2) {
   
   CTowerSoldier *result; // eax
 
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Offered|ENTITY_FLAG_ATTACHED)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Settler\\TowerSoldierRole.cpp",
-         180,
-         "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED | ENTITY_FLAG_OFFERED )") == 1 )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Offered|ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 180, "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED | ENTITY_FLAG_OFFERED )") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_WORD *)this + 16)
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 181, "!m_uHomeEntityId") == 1 )
+  if ( *((_WORD *)this + 16) && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 181, "!m_uHomeEntityId") == 1 )
   {
     __debugbreak();
   }
@@ -736,9 +724,13 @@ void  CTowerSoldier::SearchEnemy(class CSettler * a2) {
 
   v2 = IEntity::PackedXY(a2);
   if ( CTowerSoldier::GetAttacker(this, a2, v2) )
+  {
     (*(void (__thiscall **)(CTowerSoldier *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
+  }
   else
+  {
     CTowerSoldier::WorkIsDone(this, a2);
+  }
 }
 
 
@@ -763,7 +755,9 @@ bool  CTowerSoldier::GetAttacker(class CSettler * a2, int a3) {
   v3 = Y16X16::UnpackXFast(a3);
   NearestEnemyFighter = CScanner::FindNearestEnemyFighter(v3, v9, 3, v10);
   if ( NearestEnemyFighter == -1 )
+  {
     return 0;
+  }
   v11 = Y16X16::UnpackYFast(NearestEnemyFighter);
   v4 = Y16X16::UnpackXFast(NearestEnemyFighter);
   *((_WORD *)this + 17) = CWorldManager::SettlerId(v4, v11);
@@ -831,8 +825,7 @@ void  CTowerSoldier::ConvertEventIntoGoal(class CSettler * a2, class CEntityEven
   {
     case 7:
     case 9:
-      if ( !*(_WORD *)(this + 32)
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 575, "m_uHomeEntityId != 0") == 1 )
+      if ( !*(_WORD *)(this + 32) && BBSupportDbgReport(2, "MapObjects\\Settler\\TowerSoldierRole.cpp", 575, "m_uHomeEntityId != 0") == 1 )
       {
         __debugbreak();
       }

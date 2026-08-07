@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CRomanCatapult::New(std::istream & a1) {
   
   if ( CRomanCatapult::operator new(0xD8u) )
+  {
     return CRomanCatapult::CRomanCatapult(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -89,7 +93,7 @@ unsigned long  CRomanCatapult::ClassID(void)const {
 // [Decompilation failed for static unsigned long CRomanCatapult::m_iClassID]
 
 // address=[0x153ecb0]
-// Decompiled from CRomanCatapult *__thiscall CRomanCatapult::CRomanCatapult(  CRomanCatapult *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
+// Decompiled from CRomanCatapult *__thiscall CRomanCatapult::CRomanCatapult(CRomanCatapult *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
  CRomanCatapult::CRomanCatapult(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CCatapult::CCatapult(this, a2, a3, a4, a5, a6, a7, a8);

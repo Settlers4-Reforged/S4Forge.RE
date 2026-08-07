@@ -19,9 +19,13 @@ class CGameState * __cdecl CGameState::DynamicCreateFunc(void * a1) {
 
   v3 = (CGameState *)operator new(4u);
   if ( v3 )
+  {
     return CGameState::CGameState(v3, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -58,12 +62,10 @@ bool  CGameState::CanProcessInvites(void) {
 // Decompiled from char CGameState::Perform()
 bool  CGameState::Perform(void) {
   
-  if ( BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\GameState.h",
-         54,
-         "false") == 1 )
+  if ( BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\GameState.h", 54, "false") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 

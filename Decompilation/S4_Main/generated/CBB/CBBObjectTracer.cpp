@@ -23,9 +23,13 @@ void __cdecl CBBObjectTracer::InitObject(class CBBObject & target, char const * 
   char *type; // [esp+0h] [ebp-4h]
 
   if ( _sType && *_sType )
+  {
     type = _sType;
+  }
   else
+  {
     type = "Object of unknown type";
+  }
   target->m_spType = type;
   if ( _bFirst )
   {
@@ -75,16 +79,26 @@ void __cdecl CBBObjectTracer::DumpObjects(void) {
   CBBObject *i; // [esp+8h] [ebp-4h]
 
   if ( CBBObjectTracer::m_iNumberOfObjects == 1 )
+  {
     BBSupportTracePrint(0, "Object list (1 entry):");
+  }
   else
+  {
     BBSupportTracePrintF(0, "Object list (%i entries):", CBBObjectTracer::m_iNumberOfObjects);
+  }
   BBSupportTracePrint(0, (char *)&sEmpty7);
-  for ( i = CBBObjectTracer::m_pObjectFirst; i; i = i->m_pFirst )
+  for ( i = CBBObjectTracer::m_pObjectFirst;
+        i;
+        i = i->m_pFirst )
   {
     if ( i->m_spType )
+    {
       m_spType = i->m_spType;
+    }
     else
+    {
       m_spType = "Object of unknown type";
+    }
     BBSupportTracePrintF(0, "  %06x-%08x %s", i->m_uSerialNumber, i, m_spType);
   }
 }

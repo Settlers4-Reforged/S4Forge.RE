@@ -58,10 +58,18 @@ struct SBUILDINFODATA &  SBUILDINFODATA::operator=(struct SBUILDINFODATA const &
   this[1] = a2[1];
   this[2] = a2[2];
   this[3] = a2[3];
-  for ( i = 0; i < 7; ++i )
+  for ( i = 0;
+        i < 7;
+        ++i )
+  {
     this[i + 4] = a2[i + 4];
-  for ( j = 0; j < 8; ++j )
+  }
+  for ( j = 0;
+        j < 8;
+        ++j )
+  {
     *((_WORD *)this + j + 22) = *((_WORD *)a2 + j + 22);
+  }
   std::vector<SPOSS_BUILD_PLACE>::operator=(a2 + 15);
   return this;
 }

@@ -27,10 +27,14 @@ bool  CBuildingIteratorBase::BuildingValid(int a2) {
 
   v4 = 1;
   if ( !a2 )
+  {
     return v4;
+  }
   v2 = CMapObjectMgr::Entity(a2);
   if ( (IEntity::Flags(v2) & ENTITY_FLAG_AliveMask) == 0 )
+  {
     return 0;
+  }
   return v4;
 }
 

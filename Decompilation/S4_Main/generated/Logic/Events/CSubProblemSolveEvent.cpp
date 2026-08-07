@@ -3,7 +3,7 @@
 // Definitions for class CSubProblemSolveEvent
 
 // address=[0x2f4e360]
-// Decompiled from CSubProblemSolveEvent *__thiscall CSubProblemSolveEvent::CSubProblemSolveEvent(  CSubProblemSolveEvent *this,  struct CSiedlerAI *a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  struct COptimizeOptions *a9)
+// Decompiled from CSubProblemSolveEvent *__thiscall CSubProblemSolveEvent::CSubProblemSolveEvent(CSubProblemSolveEvent *this, struct CSiedlerAI *a2, int a3, int a4, int a5, int a6, int a7, int a8, struct COptimizeOptions *a9)
  CSubProblemSolveEvent::CSubProblemSolveEvent(class CSiedlerAI * a2, int a3, int a4, int a5, int a6, int a7, int a8, class COptimizeOptions * a9) {
   
   int i; // [esp+4h] [ebp-14h]
@@ -22,8 +22,12 @@
   *((_DWORD *)this + 14) = a8;
   *((_DWORD *)this + 15) = a4;
   *((_DWORD *)this + 8) = a3;
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
+  {
     *((_DWORD *)this + i + 19) = 0;
+  }
   CSiedlerAI::GetInvokeBuildingType(*((CSiedlerAI **)this + 18), this, (CSubProblemSolveEvent *)((char *)this + 76));
   *((_BYTE *)this + 104) = 0;
   return this;
@@ -36,7 +40,9 @@
   
   *this = (COptimizeOptions *)&CSubProblemSolveEvent::_vftable_;
   if ( this[25] )
+  {
     delete this[25];
+  }
   IScheduleEntry::~IScheduleEntry((IScheduleEntry *)this);
 }
 
@@ -101,9 +107,13 @@ bool  CSubProblemSolveEvent::action(void) {
       C = operator new(0x50u);
       v11 = 0;
       if ( C )
+      {
         v7 = (struct IScheduleEntry *)CInvokeEvent::CInvokeEvent(C, *((_DWORD *)v10 + 19));
+      }
       else
+      {
         v7 = 0;
+      }
       v4[1] = (int)v7;
       v11 = -1;
       CSchedule::NewSchedEntry(*((CSchedule **)v10 + 10), v7);
@@ -111,13 +121,7 @@ bool  CSubProblemSolveEvent::action(void) {
     }
     if ( *(_DWORD *)(v9 + 48) == 2 && !*((_BYTE *)v10 + 104) )
     {
-      v6 = CSiedlerAI::GetInvokePosition(
-             *((CSiedlerAI **)v10 + 18),
-             *((_DWORD *)v10 + 15),
-             *((_DWORD *)v10 + 11),
-             *((_DWORD *)v10 + 12),
-             *((_DWORD *)v10 + 13),
-             *((_DWORD *)v10 + 14));
+      v6 = CSiedlerAI::GetInvokePosition(*((CSiedlerAI **)v10 + 18), *((_DWORD *)v10 + 15), *((_DWORD *)v10 + 11), *((_DWORD *)v10 + 12), *((_DWORD *)v10 + 13), *((_DWORD *)v10 + 14));
       CReserveDatabase::UnpackPosition(**((CReserveDatabase ***)v10 + 10), v6, &v3, v4);
       v5 = CReserveDatabase::PackPosition(**((CReserveDatabase ***)v10 + 10), 16 * v3 + 8, 16 * v4[0] + 8);
       CInvokeEvent::AddInvokePositionAroundResource(v9, *((_DWORD *)v10 + 19), v5);
@@ -134,30 +138,14 @@ bool  CSubProblemSolveEvent::action(void) {
   }
   if ( CSchedule::AllSubProblemsSolved(*((CDynList ***)v10 + 10), *((_DWORD *)v10 + 3)) )
   {
-    BBSupportTracePrintF(
-      0,
-      "SubCall ProbNr:%i von EventNr: %i from Event: %i",
-      *((_DWORD *)v10 + 15),
-      *((_DWORD *)v10 + 3),
-      *((_DWORD *)v10 + 8));
+    BBSupportTracePrintF(0, "SubCall ProbNr:%i von EventNr: %i from Event: %i", *((_DWORD *)v10 + 15), *((_DWORD *)v10 + 3), *((_DWORD *)v10 + 8));
     *(_DWORD *)(*((_DWORD *)v10 + 18) + 36) = 0;
-    *((_DWORD *)v10 + 17) = IAI_Module::Problem(
-                              *((IAI_Module **)v10 + 18),
-                              *((_DWORD *)v10 + 15),
-                              *((_DWORD *)v10 + 11),
-                              *((_DWORD *)v10 + 12),
-                              *((_DWORD *)v10 + 13),
-                              *((_DWORD *)v10 + 14));
+    *((_DWORD *)v10 + 17) = IAI_Module::Problem(*((IAI_Module **)v10 + 18), *((_DWORD *)v10 + 15), *((_DWORD *)v10 + 11), *((_DWORD *)v10 + 12), *((_DWORD *)v10 + 13), *((_DWORD *)v10 + 14));
     if ( *((_DWORD *)v10 + 17) )
     {
       *((_DWORD *)v10 + 16) = 2;
       *((_DWORD *)v10 + 5) = 1;
-      BBSupportTracePrintF(
-        0,
-        "OK ProbNr:%i von EventNr: %i from Event %i",
-        *((_DWORD *)v10 + 15),
-        *((_DWORD *)v10 + 3),
-        *((_DWORD *)v10 + 8));
+      BBSupportTracePrintF(0, "OK ProbNr:%i von EventNr: %i from Event %i", *((_DWORD *)v10 + 15), *((_DWORD *)v10 + 3), *((_DWORD *)v10 + 8));
       CSchedule::TerminateSubProblems(*((CDynList ***)v10 + 10), *((_DWORD *)v10 + 3));
       return 1;
     }
@@ -165,17 +153,14 @@ bool  CSubProblemSolveEvent::action(void) {
     {
       if ( *(_DWORD *)(*((_DWORD *)v10 + 18) + 36) == 3 || *(_DWORD *)(*((_DWORD *)v10 + 18) + 36) == 1 )
       {
-        BBSupportTracePrintF(
-          0,
-          "Reject ProbNr:%i von EventNr: %i from Event:%i",
-          *((_DWORD *)v10 + 15),
-          *((_DWORD *)v10 + 3),
-          *((_DWORD *)v10 + 8));
+        BBSupportTracePrintF(0, "Reject ProbNr:%i von EventNr: %i from Event:%i", *((_DWORD *)v10 + 15), *((_DWORD *)v10 + 3), *((_DWORD *)v10 + 8));
         *((_DWORD *)v10 + 16) = 1;
         CSchedule::TerminateSubProblems(*((CDynList ***)v10 + 10), *((_DWORD *)v10 + 3));
       }
       if ( *(_DWORD *)(*((_DWORD *)v10 + 18) + 36) )
+      {
         return 0;
+      }
       *((_DWORD *)v10 + 16) = 2;
       *((_DWORD *)v10 + 5) = 1;
       return 0;
@@ -194,7 +179,9 @@ bool  CSubProblemSolveEvent::action(void) {
 bool  CSubProblemSolveEvent::IsAlive(void) {
   
   if ( CSchedule::GetMainProblemSolve(*((CSchedule **)this + 10), *((_DWORD *)this + 8)) )
+  {
     return 1;
+  }
   *((_DWORD *)this + 5) = 3;
   return 0;
 }

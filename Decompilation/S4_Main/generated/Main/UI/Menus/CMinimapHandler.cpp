@@ -11,12 +11,16 @@ void __cdecl CMinimapHandler::FilterKeyPressed(int a1) {
   int v3; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < 11; ++i )
+  for ( i = 0;
+        i < 11;
+        ++i )
   {
     v2 = CMinimapHandler::m_iObjectType[i];
     v3 = CMinimapHandler::m_iObjectGroups[v2];
     if ( v3 != 5 )
+    {
       CMinimapHandler::m_iGroupEnabled[v3] = (CMinimapHandler::m_iObjectBitMask[v2] & a1) != 0;
+    }
     result = i + 1;
   }
   return result;
@@ -36,8 +40,12 @@ void __cdecl CMinimapHandler::Init(void) {
   memset(CMinimapHandler::m_iGroupEnabled, 0, sizeof(CMinimapHandler::m_iGroupEnabled));
   memset(CMinimapHandler::m_sObjectColor, 255, 0x48u);
   memset(CMinimapHandler::m_iObjectBitMask, 0, sizeof(CMinimapHandler::m_iObjectBitMask));
-  for ( i = 0; i < 132; ++i )
+  for ( i = 0;
+        i < 132;
+        ++i )
+  {
     CMinimapHandler::m_iObjectGroups[i] = 5;
+  }
   CMinimapHandler::m_iObjectGroups[8] = 0;
   CMinimapHandler::m_iObjectGroups[10] = 0;
   CMinimapHandler::m_iObjectGroups[22] = 1;
@@ -52,18 +60,24 @@ void __cdecl CMinimapHandler::Init(void) {
   CMinimapHandler::m_iObjectBitMask[4] = 2;
   CMinimapHandler::m_iObjectBitMask[1] = 4;
   CMinimapHandler::m_iObjectBitMask[127] = 8;
-  for ( j = 0; j < 4; ++j )
+  for ( j = 0;
+        j < 4;
+        ++j )
   {
     CMinimapHandler::m_sObjectColor[j].m_iR = *(_DWORD *)TStaticConfigIntArrayBase<4>::operator[](&g_iR, j);
     dword_415AB0C[3 * j] = *(_DWORD *)TStaticConfigIntArrayBase<4>::operator[](&g_iG, j);
     dword_415AB10[3 * j] = *(_DWORD *)TStaticConfigIntArrayBase<4>::operator[](&g_iB, j);
   }
   CMinimapHandler::UpdateAlliances();
-  for ( k = 1; ; ++k )
+  for ( k = 1;
+        ;
+        ++k )
   {
     result = CPlayerManager::LastPlayerId();
     if ( k > result )
+    {
       break;
+    }
     v1 = CPlayerManager::Color(k);
     IGfxEngine::GetPlayerColor(g_pGfxEngine, v1, &CMinimapHandler::m_sOwnerColor[k]);
   }
@@ -88,7 +102,9 @@ void __cdecl CMinimapHandler::UpdateAlliances(void) {
   v4 = CAlliances::AllianceId(LocalPlayerId);
   result = (_DWORD *)CPlayerManager::LastPlayerId();
   v5 = result;
-  for ( i = 1; i <= (int)v5; ++i )
+  for ( i = 1;
+        i <= (int)v5;
+        ++i )
   {
     if ( i == LocalPlayerId )
     {
@@ -133,14 +149,22 @@ bool __cdecl CMinimapHandler::GetObjectColor(int a1, struct SGfxColor & a2, int 
   int v5; // [esp+4h] [ebp-4h]
 
   if ( a3 && a1 == 1 )
+  {
     a1 = 22;
+  }
   v5 = CMinimapHandler::m_iObjectGroups[a1];
   if ( !CMinimapHandler::m_iGroupEnabled[v5] )
+  {
     return 0;
+  }
   if ( v5 == 1 )
+  {
     *a2 = CMinimapHandler::m_sOwnerColorAlly[a4 - 1];
+  }
   else
+  {
     *a2 = CMinimapHandler::m_sObjectColor[3];
+  }
   return 1;
 }
 

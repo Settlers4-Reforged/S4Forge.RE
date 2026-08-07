@@ -134,7 +134,9 @@ void  CPlayerMagicData::Clear(void) {
   CPlayerMagicData::SetManaAmount(this, 0);
   CPlayerMagicData::SetTotalAmountOfCollectedMana(this, 0);
   CPlayerMagicData::SetMaxNumberOfBigTemples(this, 0);
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     CPlayerMagicData::SetSpellCategoryCost(this, i, 0);
     CPlayerMagicData::SetSpellCategoryCounter(this, i, 0);

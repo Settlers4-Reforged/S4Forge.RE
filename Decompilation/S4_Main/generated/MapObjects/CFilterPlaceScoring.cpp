@@ -13,7 +13,7 @@
 
 
 // address=[0x2f39720]
-// Decompiled from CFilterPlaceScoring *__thiscall CFilterPlaceScoring::CFilterPlaceScoring(  CFilterPlaceScoring *this,  struct CSchedule *a2,  struct SBUILDINFODATA *a3,  int a4,  int a5,  int a6)
+// Decompiled from CFilterPlaceScoring *__thiscall CFilterPlaceScoring::CFilterPlaceScoring(CFilterPlaceScoring *this, struct CSchedule *a2, struct SBUILDINFODATA *a3, int a4, int a5, int a6)
  CFilterPlaceScoring::CFilterPlaceScoring(class CSchedule * a2, struct SBUILDINFODATA * a3, int a4, int a5, int a6) {
   
   IFilterEntry::IFilterEntry(this);
@@ -23,7 +23,9 @@
   *((_DWORD *)this + 5) = *(_DWORD *)a3;
   *((_DWORD *)this + 6) = *((_DWORD *)a3 + 1);
   if ( *((_DWORD *)this + 4) == 46 )
+  {
     *((_DWORD *)this + 11) = a5;
+  }
   *((_DWORD *)this + 10) = *(_DWORD *)std::vector<SPOSS_BUILD_PLACE>::operator[](a4);
   *((_BYTE *)this + 48) = *(_BYTE *)(std::vector<SPOSS_BUILD_PLACE>::operator[](a4) + 4);
   *((_DWORD *)this + 13) = a5;

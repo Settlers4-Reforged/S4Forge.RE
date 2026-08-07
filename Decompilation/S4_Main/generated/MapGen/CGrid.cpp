@@ -26,9 +26,13 @@
 int  CGrid::getElement(int a2, int a3) {
   
   if ( a2 >= *((_DWORD *)this + 1) || a3 >= *((_DWORD *)this + 1) )
+  {
     return -1;
+  }
   else
+  {
     return *(unsigned __int8 *)(*(_DWORD *)this + a2 + *((_DWORD *)this + 1) * a3);
+  }
 }
 
 
@@ -40,10 +44,14 @@ void  CGrid::setElement(int a2, int a3, int a4) {
 
   result = (char)this;
   if ( a2 >= *((_DWORD *)this + 1) )
+  {
     return result;
+  }
   result = a3;
   if ( a3 >= *((_DWORD *)this + 1) )
+  {
     return result;
+  }
   result = a4;
   *(_BYTE *)(*(_DWORD *)this + a2 + *((_DWORD *)this + 1) * a3) = a4;
   return result;
@@ -55,9 +63,13 @@ void  CGrid::setElement(int a2, int a3, int a4) {
 int  CGrid::getElement(int a2) {
   
   if ( a2 >= *((_DWORD *)this + 1) * *((_DWORD *)this + 1) )
+  {
     return -1;
+  }
   else
+  {
     return *(unsigned __int8 *)(*(_DWORD *)this + a2);
+  }
 }
 
 

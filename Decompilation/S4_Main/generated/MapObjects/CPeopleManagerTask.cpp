@@ -60,19 +60,29 @@ bool  CPeopleManagerTask::IsShooting(void) {
   this[11] = 0;
   this[13] = 0;
   if ( NeededBuildingSettler > v9 )
+  {
     v8 = NeededBuildingSettler - v9;
+  }
   else
+  {
     v8 = 0;
+  }
   if ( v8 > 0 )
   {
     v7 = CSchedule::GetEcoSector(this[10]);
     if ( v8 - (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v7 + 144))(v7, 31) > 0 )
+    {
       this[11] = (CSchedule *)((unsigned int)this[11] | 1);
+    }
   }
   if ( NeededBuildingSettler > v6 )
+  {
     v5 = NeededBuildingSettler - v6;
+  }
   else
+  {
     v5 = 0;
+  }
   if ( v5 > 0 )
   {
     v4 = CSchedule::GetEcoSector(this[10]);
@@ -81,9 +91,13 @@ bool  CPeopleManagerTask::IsShooting(void) {
   }
   v13 = v5 + v8;
   if ( v5 + v8 > 10 )
+  {
     v13 = 10;
+  }
   if ( v2 >= NeededCarierSettler + v13 || this[8] )
+  {
     return v16;
+  }
   this[11] = (CSchedule *)((unsigned int)this[11] | 4);
   return 1;
 }
@@ -98,21 +112,20 @@ bool  CPeopleManagerTask::action(void) {
   int GoodPositionForBuilding; // [esp+10h] [ebp-14h]
 
   if ( *((_DWORD *)this + 11) != (*((_DWORD *)this + 11) | 4) )
+  {
     return 1;
+  }
   GoodPositionForBuilding = CSchedule::GetGoodPositionForBuilding(*((CSchedule **)this + 10), 40);
   *((_DWORD *)this + 14) = CSchedule::GetResidenceBuildingLevel(*((CSchedule **)this + 10));
   C = (CMainProblemSolveEvent *)operator new(0x70u);
   if ( C )
-    v2 = CMainProblemSolveEvent::CMainProblemSolveEvent(
-           C,
-           *((_DWORD *)this + 3),
-           9,
-           *((_DWORD *)this + 14),
-           GoodPositionForBuilding,
-           0,
-           0);
+  {
+    v2 = CMainProblemSolveEvent::CMainProblemSolveEvent(C, *((_DWORD *)this + 3), 9, *((_DWORD *)this + 14), GoodPositionForBuilding, 0, 0);
+  }
   else
+  {
     v2 = 0;
+  }
   *((_DWORD *)this + 8) = CSchedule::NewSchedEntry(*((CSchedule **)this + 10), v2);
   *((_DWORD *)this + 5) = 1;
   *((_DWORD *)this + 13) = 0;
@@ -142,29 +155,40 @@ bool  CPeopleManagerTask::WaitFor(void) {
   CPeopleManagerTask::SetMinimumCarrier((CPeopleManagerTask *)this);
   CPeopleManagerTask::ExistNotEmptyResidence((CPeopleManagerTask *)this);
   if ( !this[13] )
+  {
     return 0;
+  }
   if ( this[13] != (CSchedule *)1 )
   {
-    if ( CBuildingManagerTask::IsRejectedBuilding(SpecialTask, 41, 1)
-      || CBuildingManagerTask::IsRejectedBuilding(SpecialTask, 42, 1) )
+    if ( CBuildingManagerTask::IsRejectedBuilding(SpecialTask, 41, 1) || CBuildingManagerTask::IsRejectedBuilding(SpecialTask, 42, 1) )
     {
       *((_BYTE *)this + 60) = 1;
     }
     if ( this[13] != (CSchedule *)2 )
+    {
       return 0;
+    }
     this[16] = (CSchedule *)((char *)this[16] - 1);
     if ( !*((_BYTE *)this + 60) )
+    {
       return 0;
+    }
     this[8] = 0;
     return 1;
   }
   if ( !this[8] || CSchedule::IsAnyExpandation((CDynList **)this[10]) )
+  {
     return 1;
+  }
   C = (CExpandationEvent *)operator new(0x74u);
   if ( C )
+  {
     v3 = CExpandationEvent::CExpandationEvent(C, this[3], 0, -3);
+  }
   else
+  {
     v3 = 0;
+  }
   this[8] = (CSchedule *)CSchedule::NewSchedEntry(this[10], v3);
   return 1;
 }
@@ -199,9 +223,13 @@ int  CPeopleManagerTask::GetNeededBuildingSettler(int a2) {
 
   v3 = (a2 - 20) / 6 + 5;
   if ( v3 < 5 )
+  {
     return 5;
+  }
   if ( v3 > 15 )
+  {
     return 15;
+  }
   return v3;
 }
 
@@ -250,7 +278,9 @@ bool  CPeopleManagerTask::DestroyResidenceBuildings(void) {
   v22[0] = 40;
   v22[1] = 41;
   v22[2] = 42;
-  for ( i = 0; i < 3; ++i )
+  for ( i = 0;
+        i < 3;
+        ++i )
   {
     if ( v11 > v21[i] )
     {
@@ -267,12 +297,7 @@ bool  CPeopleManagerTask::DestroyResidenceBuildings(void) {
           if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v8 + 76))(v8, *v1) )
           {
             v2 = (_DWORD *)std::vector<int>::operator[](0);
-            BBSupportTracePrintF(
-              3,
-              "AI_BuildingEvent::PlayerNr %i destroy %s with ID %i",
-              *(_DWORD *)(*((_DWORD *)v20 + 10) + 20),
-              (&off_3AC3FBC)[2 * v22[i]],
-              *v2);
+            BBSupportTracePrintF(3, "AI_BuildingEvent::PlayerNr %i destroy %s with ID %i", *(_DWORD *)(*((_DWORD *)v20 + 10) + 20), (&off_3AC3FBC)[2 * v22[i]], *v2);
             v7 = CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
             v3 = (_DWORD *)std::vector<int>::operator[](0);
             (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v7 + 104))(v7, *v3);
@@ -310,11 +335,17 @@ void  CPeopleManagerTask::SetMinimumCarrier(void) {
   EcoSector = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
   v6 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 152))(EcoSector, 1);
   if ( v6 - v9 < 10 )
+  {
     v9 = v6 - 10;
+  }
   if ( v9 < 5 )
+  {
     v9 = 5;
+  }
   if ( v9 > 80 )
+  {
     v9 = 80;
+  }
   v5 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
   (*(void (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v5 + 320))(v5, 12);
   v4 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
@@ -347,18 +378,21 @@ bool  CPeopleManagerTask::ExistNotEmptyResidence(void) {
   v13[1] = 41;
   v13[2] = 42;
   std::vector<int>::clear();
-  for ( i = 0; i < 3; ++i )
+  for ( i = 0;
+        i < 3;
+        ++i )
   {
     EcoSector = CSchedule::GetEcoSector(*((CSchedule **)v10 + 10));
-    (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, _BYTE *))(*(_DWORD *)EcoSector + 160))(
-      EcoSector,
-      v13[i],
-      v5);
-    for ( j = 0; ; ++j )
+    (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, _BYTE *))(*(_DWORD *)EcoSector + 160))(EcoSector, v13[i], v5);
+    for ( j = 0;
+          ;
+          ++j )
     {
       v1 = std::vector<int>::size(v5);
       if ( j >= v1 )
+      {
         break;
+      }
       v7 = CSchedule::GetEcoSector(*((CSchedule **)v10 + 10));
       v2 = (_DWORD *)std::vector<int>::operator[](j);
       if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v7 + 68))(v7, *v2) >= 100 )
@@ -366,7 +400,9 @@ bool  CPeopleManagerTask::ExistNotEmptyResidence(void) {
         v6 = CSchedule::GetEcoSector(*((CSchedule **)v10 + 10));
         v3 = (_DWORD *)std::vector<int>::operator[](j);
         if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v6 + 92))(v6, *v3) <= 0 )
+        {
           continue;
+        }
       }
       *((_BYTE *)v10 + 60) = 0;
     }

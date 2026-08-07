@@ -9,13 +9,19 @@ bool  CHJBMgr::LocalLoadHJBGfxFileIfNecessary(void) {
   bool v2; // [esp+Fh] [ebp-1h]
 
   if ( IHJBMgr::m_iLocalHJBGfxLoaded >= 0 )
+  {
     return IHJBMgr::m_iLocalHJBGfxLoaded > 0;
+  }
   v2 = 0;
   if ( g_pGfxManager )
+  {
     v2 = CGfxManager::EnableGfxFile((CGfxManager *)g_pGfxManager, 0x19u, 0, 1, 0x3Au);
+  }
   IHJBMgr::m_iLocalHJBGfxLoaded = v2;
   if ( v2 )
+  {
     g_bGfxHJBLoadSpecialGfx = 1;
+  }
   return IHJBMgr::m_iLocalHJBGfxLoaded > 0;
 }
 
@@ -25,7 +31,9 @@ bool  CHJBMgr::LocalLoadHJBGfxFileIfNecessary(void) {
 bool  CHJBMgr::StaticCheckHJBCommand(char const * a2) {
   
   if ( !a2 )
+  {
     return 0;
+  }
   return *a2 == 33 && a2[1] == 104 && a2[2] == 106 && a2[3] == 98 && !a2[4];
 }
 
@@ -79,7 +87,9 @@ void  CHJBMgr::ProcessHJBAcknowledgement(int a2, int a3) {
       v6 = 1;
       *((_BYTE *)this + a2 + 8) = 1;
       PlayerId = CPlayerManager::LastPlayerId();
-      for ( i = 1; i <= PlayerId; ++i )
+      for ( i = 1;
+            i <= PlayerId;
+            ++i )
       {
         if ( !*((_BYTE *)this + i + 8) && !CPlayerManager::IsAI(i) )
         {
@@ -138,9 +148,13 @@ bool  CHJBMgr::LocalIsHJBAllowedEx(void) {
   {
     v4 = CHJBMgr::CheckHJBDatFile(this);
     if ( v4 )
+    {
       v2 = 1;
+    }
     else
+    {
       v2 = -1;
+    }
     IHJBMgr::m_iLocalHJBAllowed = v2;
   }
   else
@@ -157,8 +171,7 @@ void  CHJBMgr::ActivateHJB(int a2) {
   
   if ( a2 >= 1 && a2 <= 8 && !IHJBMgr::m_iHJBPlayerId )
   {
-    if ( IHJBMgr::m_iHJBEntityId != -1
-      && BBSupportDbgReport(2, "mapobjects\\settler\\HJBMgr.cpp", 291, "m_iHJBEntityId == -1") == 1 )
+    if ( IHJBMgr::m_iHJBEntityId != -1 && BBSupportDbgReport(2, "mapobjects\\settler\\HJBMgr.cpp", 291, "m_iHJBEntityId == -1") == 1 )
     {
       __debugbreak();
     }
@@ -217,7 +230,9 @@ bool  CHJBMgr::CheckHJBDatFile(void) {
     v4 = Adler32((unsigned __int8 *)Buffer, 0x4000u, 1u);
     v3[10] = v4;
     if ( v4 != -1293418438 )
+    {
       v9 = 0;
+    }
     LOBYTE(v13) = 1;
     CFile::~CFile();
     v13 = 0;

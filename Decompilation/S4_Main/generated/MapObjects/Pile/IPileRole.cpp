@@ -68,16 +68,16 @@ void  IPileRole::ReassessDistance(class CPile * a2, int & a3) {
 void  IPileRole::Increase(class CPile * a2, int a3) {
   
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 123, "_iAmount > 0") == 1 )
+  {
     __debugbreak();
-  if ( CPile::NumberOfAvailableGoods(a2) <= 0
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 124, "_pPile->NumberOfAvailableGoods() > 0") == 1 )
+  }
+  if ( CPile::NumberOfAvailableGoods(a2) <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 124, "_pPile->NumberOfAvailableGoods() > 0") == 1 )
   {
     __debugbreak();
   }
   if ( CPile::IsInOfferList(a2) )
   {
-    if ( !CPile::GetOfferFlag(a2)
-      && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 128, "_pPile->GetOfferFlag()") == 1 )
+    if ( !CPile::GetOfferFlag(a2) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 128, "_pPile->GetOfferFlag()") == 1 )
     {
       __debugbreak();
     }
@@ -94,16 +94,19 @@ void  IPileRole::Increase(class CPile * a2, int a3) {
 void  IPileRole::Decrease(class CPile * a2, int a3) {
   
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 150, "_iAmount > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( CPile::IsInOfferList(a2) )
   {
-    if ( !CPile::GetOfferFlag(a2)
-      && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 154, "_pPile->GetOfferFlag()") == 1 )
+    if ( !CPile::GetOfferFlag(a2) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 154, "_pPile->GetOfferFlag()") == 1 )
     {
       __debugbreak();
     }
     if ( CPile::NumberOfAvailableGoods(a2) <= 0 )
+    {
       CPile::CancelOffer(a2, a3, 0);
+    }
   }
 }
 
@@ -114,13 +117,14 @@ void  IPileRole::IncAmoutLeaving(class CPile * a2) {
   
   if ( CPile::IsInOfferList(a2) )
   {
-    if ( !CPile::GetOfferFlag(a2)
-      && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 79, "_pPile->GetOfferFlag()") == 1 )
+    if ( !CPile::GetOfferFlag(a2) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 79, "_pPile->GetOfferFlag()") == 1 )
     {
       __debugbreak();
     }
     if ( CPile::NumberOfAvailableGoods(a2) <= 0 )
+    {
       CPile::CancelOffer(a2, 0, 0);
+    }
   }
 }
 
@@ -129,15 +133,13 @@ void  IPileRole::IncAmoutLeaving(class CPile * a2) {
 // Decompiled from void __thiscall IPileRole::DecAmountLeaving(IPileRole *this, struct CPile *a2)
 void  IPileRole::DecAmountLeaving(class CPile * a2) {
   
-  if ( CPile::NumberOfAvailableGoods(a2) <= 0
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 98, "_pPile->NumberOfAvailableGoods() > 0") == 1 )
+  if ( CPile::NumberOfAvailableGoods(a2) <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 98, "_pPile->NumberOfAvailableGoods() > 0") == 1 )
   {
     __debugbreak();
   }
   if ( CPile::IsInOfferList(a2) )
   {
-    if ( !CPile::GetOfferFlag(a2)
-      && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 109, "_pPile->GetOfferFlag()") == 1 )
+    if ( !CPile::GetOfferFlag(a2) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 109, "_pPile->GetOfferFlag()") == 1 )
     {
       __debugbreak();
     }
@@ -162,7 +164,9 @@ void  IPileRole::Init(class CPile * a2) {
 void  IPileRole::Occupied(class CPile * a2, int a3) {
   
   if ( BBSupportDbgReport(1, "MapObjects\\Pile\\PileRole.cpp", 194, "IPileRole::Occupied() called!") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 
@@ -186,7 +190,9 @@ bool  IPileRole::SetFree(class CPile * a2, int a3) {
   v4 = IEntity::EntityId((unsigned __int16 *)a2);
   BBSupportTracePrintF(0, "IPileRole::SetFree(): pile %i, (%i, %i), role %s, building %i", v4, v6, v7, v8, v9);
   if ( BBSupportDbgReport(1, "MapObjects\\Pile\\PileRole.cpp", 207, "IPileRole::SetFree() called!") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 
@@ -207,28 +213,23 @@ void  IPileRole::NotifyChangeEcoSector(class CPile * a2, int a3, int a4) {
 // Decompiled from int __thiscall IPileRole::SubjectDie(IPileRole *this, struct CPile *a2, int a3)
 void  IPileRole::SubjectDie(class CPile * a2, int a3) {
   
-  if ( CPile::GetBuildingId(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 220, "_pPile->GetBuildingId() == 0") == 1 )
+  if ( CPile::GetBuildingId(a2) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 220, "_pPile->GetBuildingId() == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 221, "_pPile->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 221, "_pPile->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( CPile::GetRoleType(a2) == 3
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 222, "_pPile->GetRoleType() != IPileRole::PILE_ANYWHERE") == 1 )
+  if ( CPile::GetRoleType(a2) == 3 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 222, "_pPile->GetRoleType() != IPileRole::PILE_ANYWHERE") == 1 )
   {
     __debugbreak();
   }
-  if ( CPile::AmountLeaving(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 224, "_pPile->AmountLeaving() == 0") == 1 )
+  if ( CPile::AmountLeaving(a2) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 224, "_pPile->AmountLeaving() == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( CPile::AmountComing(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 225, "_pPile->AmountComing() == 0") == 1 )
+  if ( CPile::AmountComing(a2) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileRole.cpp", 225, "_pPile->AmountComing() == 0") == 1 )
   {
     __debugbreak();
   }

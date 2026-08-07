@@ -12,12 +12,18 @@ void  CCommandQueue::CheckCommand(class CEntityEvent * a2) {
   result = a2;
   v3 = *((_DWORD *)a2 + 1);
   if ( v3 == 16 )
+  {
     return (struct CEntityEvent *)CCommandQueue::Push(this, a2);
+  }
   if ( v3 != 17 )
+  {
     return result;
+  }
   result = (struct CEntityEvent *)std::deque<CEntityEvent>::size(this);
   if ( result )
+  {
     return (struct CEntityEvent *)std::deque<CEntityEvent>::clear(17, this);
+  }
   return result;
 }
 
@@ -30,7 +36,9 @@ void  CCommandQueue::Push(class CEntityEvent * a2) {
 
   result = std::deque<CEntityEvent>::size(this);
   if ( result < 0x10 )
+  {
     return std::deque<CEntityEvent>::push_back(a2);
+  }
   return result;
 }
 
@@ -50,13 +58,7 @@ class CEntityEvent  CCommandQueue::Pop(void a2) {
   if ( std::deque<CEntityEvent>::size(this) )
   {
     v6 = std::deque<CEntityEvent>::front();
-    CEntityEvent::CEntityEvent(
-      (CEntityEvent *)v3,
-      *(_BYTE *)(v6 + 8),
-      0,
-      *(_DWORD *)(v6 + 12),
-      *(_DWORD *)(v6 + 16),
-      *(_DWORD *)(v6 + 20));
+    CEntityEvent::CEntityEvent((CEntityEvent *)v3, *(_BYTE *)(v6 + 8), 0, *(_DWORD *)(v6 + 12), *(_DWORD *)(v6 + 16), *(_DWORD *)(v6 + 20));
     v7 = 0;
     std::deque<CEntityEvent>::pop_front(v4);
     CEntityEvent::CEntityEvent((struct boost::exception_detail::clone_base *)v3);

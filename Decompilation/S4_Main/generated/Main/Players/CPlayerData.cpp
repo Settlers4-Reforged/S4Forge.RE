@@ -24,20 +24,28 @@ void  CPlayerData::Init(void) {
   this->m_iNumberOfSetups = 1;
   this->m_uNumberOfPlayers = 1;
   Source = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     this->m_sPlayers[i].m_uX = 128;
     this->m_sPlayers[i].m_uY = 128;
     j__strncpy(this->m_sPlayers[i].m_sName, &Source, 0x21u);
     this->m_sPlayers[i].m_uRace = 0;
-    for ( j = 0; j < 10; ++j )
+    for ( j = 0;
+          j < 10;
+          ++j )
     {
       this->m_sSetups[j][i].m_iPlayerControl = 1;
       this->m_sSetups[j][i].m_iTeam = 0;
     }
   }
-  for ( k = 0; k < 10; ++k )
+  for ( k = 0;
+        k < 10;
+        ++k )
+  {
     memset(this->m_uSetupNames[k], 0, sizeof(this->m_uSetupNames[k]));
+  }
 }
 
 
@@ -64,7 +72,9 @@ int  CPlayerData::AddPlayer(int _iRace, int _iX, int _iY, char * _spName) {
   char *Destination; // [esp+0h] [ebp-8h]
 
   if ( (int)this->m_uNumberOfPlayers >= 8 )
+  {
     return 0;
+  }
   this->m_sPlayers[this->m_uNumberOfPlayers].m_uRace = _iRace;
   this->m_sPlayers[this->m_uNumberOfPlayers].m_uX = _iX;
   this->m_sPlayers[this->m_uNumberOfPlayers].m_uY = _iY;
@@ -81,9 +91,13 @@ int  CPlayerData::DeletePlayer(int _Number) {
   int iNewPlayers; // [esp+8h] [ebp-8h]
 
   if ( _Number <= 0 || _Number > MAX_PLAYER )
+  {
     j___wassert(L"_Number>0 && _Number<=MAX_PLAYER", L"PlayerAndTeamData.cpp", 0xAEu);
+  }
   if ( (int)this->m_uNumberOfPlayers < 2 )
+  {
     return 0;
+  }
   iNewPlayers = this->m_uNumberOfPlayers - 1;
   this->m_uNumberOfPlayers = iNewPlayers;
   qmemcpy(&this->m_uSetupNames[8][0x2D * _Number + 0x15], &this->m_sPlayers[iNewPlayers], 0x2Du);// Replace player to delete with latest player and decrement that by 1
@@ -98,8 +112,12 @@ int  CPlayerData::AddSetup(void) {
   int i; // [esp+0h] [ebp-8h]
 
   if ( this->m_iNumberOfSetups >= 10 )
+  {
     return 0;
-  for ( i = 0; i < 8; ++i )
+  }
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     this->m_sSetups[this->m_iNumberOfSetups][i].m_iPlayerControl = 1;
     this->m_sSetups[this->m_iNumberOfSetups][i].m_iTeam = 0;
@@ -116,11 +134,15 @@ int  CPlayerData::DeleteSetup(int setupId) {
   int i; // [esp+0h] [ebp-8h]
 
   if ( this->m_iNumberOfSetups < 2 )
+  {
     return 0;
-  for ( i = 0; i < 8; ++i )
-    this->m_sSetups[setupId][i] = *(CPlayerData::Team *)&this->m_sPlayers[7].m_sName[16 * this->m_iNumberOfSetups
-                                                                                   + 17
-                                                                                   + 2 * i];
+  }
+  for ( i = 0;
+        i < 8;
+        ++i )
+  {
+    this->m_sSetups[setupId][i] = *(CPlayerData::Team *)&this->m_sPlayers[7].m_sName[16 * this->m_iNumberOfSetups + 17 + 2 * i];
+  }
   --this->m_iNumberOfSetups;
   return 1;
 }
@@ -131,7 +153,9 @@ int  CPlayerData::DeleteSetup(int setupId) {
 int  CPlayerData::GetRaceOfPlayer(int _Player) {
   
   if ( _Player < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0xDCu);
+  }
   return *(_DWORD *)&this->m_uSetupNames[8][45 * _Player + 21];// m_sPlayers.m_uRace
 }
 
@@ -141,7 +165,9 @@ int  CPlayerData::GetRaceOfPlayer(int _Player) {
 int  CPlayerData::GetXOfPlayer(int a2) {
   
   if ( a2 < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0xEAu);
+  }
   return *(_DWORD *)&this->m_uSetupNames[45 * a2 + 289];
 }
 
@@ -151,7 +177,9 @@ int  CPlayerData::GetXOfPlayer(int a2) {
 int  CPlayerData::GetYOfPlayer(int a2) {
   
   if ( a2 < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0xF8u);
+  }
   return *(_DWORD *)&this->m_uSetupNames[45 * a2 + 293];
 }
 
@@ -169,9 +197,13 @@ void  CPlayerData::ChangePlayer(int _iSourcePlayer, int _iDestPlayer) {
   int i; // [esp+0h] [ebp-8h]
 
   if ( !_iSourcePlayer )
+  {
     j___wassert(L"_iSourcePlayer!=0", L"PlayerAndTeamData.cpp", 0x4Bu);
+  }
   if ( !_iDestPlayer )
+  {
     j___wassert(L"_iDestPlayer!=0", L"PlayerAndTeamData.cpp", 0x4Cu);
+  }
   if ( _iSourcePlayer != _iDestPlayer )
   {
     XOfPlayer = CPlayerData::GetXOfPlayer(this, _iSourcePlayer);
@@ -182,7 +214,9 @@ void  CPlayerData::ChangePlayer(int _iSourcePlayer, int _iDestPlayer) {
     CPlayerData::SetRaceOfPlayer(this, _iDestPlayer, RaceOfPlayer);
     NameOfPlayer = CPlayerData::GetNameOfPlayer(this, _iSourcePlayer);
     CPlayerData::SetNameOfPlayer(_iDestPlayer, NameOfPlayer);
-    for ( i = 0; i < 10; ++i )
+    for ( i = 0;
+          i < 10;
+          ++i )
     {
       ControlOfPlayer = CPlayerData::GetControlOfPlayer(this, _iSourcePlayer, i);
       CPlayerData::SetControlOfPlayer(this, _iDestPlayer, i, ControlOfPlayer);
@@ -198,7 +232,9 @@ void  CPlayerData::ChangePlayer(int _iSourcePlayer, int _iDestPlayer) {
 char *  CPlayerData::GetNameOfPlayer(int a2) {
   
   if ( a2 < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x106u);
+  }
   return &this->m_uSetupNames[9][45 * a2];
 }
 
@@ -216,7 +252,9 @@ char *  CPlayerData::GetSetupName(int a2) {
 int  CPlayerData::GetControlOfPlayer(int player, int setupId) {
   
   if ( player < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x189u);
+  }
   return (unsigned __int8)this->m_sPlayers[7].m_sName[16 * setupId + 32 + 2 * player];
 }
 
@@ -226,7 +264,9 @@ int  CPlayerData::GetControlOfPlayer(int player, int setupId) {
 int  CPlayerData::GetTeamOfPlayer(int a2, int a3) {
   
   if ( a2 < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x198u);
+  }
   return (unsigned __int8)this->m_sPlayers[7].m_sName[16 * a3 + 31 + 2 * a2];// CPlayerData.m_sSetups.field_0
 }
 
@@ -238,7 +278,9 @@ void  CPlayerData::SetRaceOfPlayer(int a2, int a3) {
   CPlayerData *result; // eax
 
   if ( a2 < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x15Au);
+  }
   result = this;
   *(_DWORD *)&this->m_uSetupNames[8][45 * a2 + 21] = a3;// CPlayerData.m_sPlayers.m_uRace
   return result;
@@ -252,7 +294,9 @@ void  CPlayerData::SetXOfPlayer(int a2, int a3) {
   CPlayerData *result; // eax
 
   if ( a2 < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x13Cu);
+  }
   result = this;
   *(_DWORD *)((char *)&this[9].m_uSetupNames + 45 * a2 + 1) = a3;
   return result;
@@ -266,7 +310,9 @@ void  CPlayerData::SetYOfPlayer(int a2, int a3) {
   CPlayerData *result; // eax
 
   if ( a2 < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x14Bu);
+  }
   result = this;
   *(_DWORD *)((char *)this + 45 * a2 + 293) = a3;
   return result;
@@ -278,7 +324,9 @@ void  CPlayerData::SetYOfPlayer(int a2, int a3) {
 void  CPlayerData::SetNameOfPlayer(int a2, char * Source) {
   
   if ( a2 < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x121u);
+  }
   return j__strcpy_0(&this->m_uSetupNames[9][45 * a2], Source);
 }
 
@@ -298,7 +346,9 @@ void  CPlayerData::SetControlOfPlayer(int a2, int a3, int a4) {
   CPlayerData::Team *result; // eax
 
   if ( a2 < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x16Au);
+  }
   result = this->m_sSetups[a3];
   result[a2 - 1].m_iPlayerControl = a4;
   return result;
@@ -312,7 +362,9 @@ void  CPlayerData::SetTeamOfPlayer(int a2, int a3, int a4) {
   char *result; // eax
 
   if ( a2 < 1 )
+  {
     j___wassert(L"_Player>=1", L"PlayerAndTeamData.cpp", 0x17Au);
+  }
   result = (char *)this + 16 * a3 + 690;
   result[2 * a2 - 2] = a4;
   return result;
@@ -360,7 +412,7 @@ int  CPlayerData::Load(unsigned char * a2, void * a3, struct SMapChunkHeader a4)
 
 
 // address=[0x2fbf980]
-// Decompiled from BOOL __thiscall CPlayerData::LoadTeamData(  CPlayerData *this,  unsigned __int8 *lpBuffer,  void *hFile,  struct SMapChunkHeader a4)
+// Decompiled from BOOL __thiscall CPlayerData::LoadTeamData(CPlayerData *this, unsigned __int8 *lpBuffer, void *hFile, struct SMapChunkHeader a4)
 int  CPlayerData::LoadTeamData(unsigned char * a2, void * a3, struct SMapChunkHeader a4) {
   
   int NumberOfPlayers; // eax
@@ -370,12 +422,16 @@ int  CPlayerData::LoadTeamData(unsigned char * a2, void * a3, struct SMapChunkHe
 
   iSetup = a4.m_iSetup;
   if ( a4.m_iSetup >= 10u )
+  {
     return 0;
+  }
   v7 = ReadFile(hFile, lpBuffer, a4.m_iSize, &NumberOfBytesRead, 0);
   ReadChunk((char *)lpBuffer, a4.m_iSize, a4.m_iDecompressedSize);
   memcpy(this->m_uSetupNames[iSetup], lpBuffer, sizeof(this->m_uSetupNames[iSetup]));
   if ( iSetup + 1 > this->m_iNumberOfSetups )
+  {
     this->m_iNumberOfSetups = iSetup + 1;
+  }
   NumberOfPlayers = CPlayerData::GetNumberOfPlayers(this);
   memcpy(&this->m_sSetups[8 * iSetup], lpBuffer + 33, 2 * NumberOfPlayers);
   return v7;
@@ -410,29 +466,45 @@ int  CPlayerData::CheckTeams(void) {
   int m; // [esp+10h] [ebp-28h]
   _DWORD uSetups[8]; // [esp+14h] [ebp-24h]
 
-  for ( i = 0; i < this->m_iNumberOfSetups; ++i )
+  for ( i = 0;
+        i < this->m_iNumberOfSetups;
+        ++i )
   {
-    for ( j = 0; j < 8; ++j )
+    for ( j = 0;
+          j < 8;
+          ++j )
+    {
       uSetups[j] = 0;
-    for ( k = 0; k < this->m_uNumberOfPlayers; ++k )
+    }
+    for ( k = 0;
+          k < this->m_uNumberOfPlayers;
+          ++k )
     {
       m_iTeam = this->m_sSetups[i][k].m_iTeam;
       if ( m_iTeam != 255 )
       {
         if ( m_iTeam >= this->m_uNumberOfPlayers )
+        {
           return 0;
+        }
         uSetups[m_iTeam] = 1;
       }
     }
     if ( !uSetups[0] )
+    {
       return 0;
+    }
     v2 = 1;
-    for ( m = 0; m < 8; ++m )
+    for ( m = 0;
+          m < 8;
+          ++m )
     {
       if ( v2 )
       {
         if ( !uSetups[m] )
+        {
           v2 = 0;
+        }
       }
       else if ( uSetups[m] )
       {

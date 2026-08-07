@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void * a1) {
 
   C = (CStateMessageBox *)operator new(4u);
   if ( C )
+  {
     return CStateMessageBox::CStateMessageBox(C, (T_S4_TRANSLATION)a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -34,11 +38,7 @@ class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void * a1) {
     v2 = g_pStringEngine->GetString(g_pStringEngine, Str);
     std::string::operator=(&g_iMessageBoxStringID, v2);
   }
-  CGuiGameState::SetupGui(
-    this,
-    L"Menu\\GUISetStartscreens.dat",
-    20,
-    (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
+  CGuiGameState::SetupGui(this, L"Menu\\GUISetStartscreens.dat", 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
   IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
   return this;
 }
@@ -49,8 +49,7 @@ class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void * a1) {
  CStateMessageBox::~CStateMessageBox(void) {
   
   *(_DWORD *)this = &CStateMessageBox::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 20)
-    && BBSupportDbgReport(2, "main\\States\\StateMessageBox.cpp", 75, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 20) && BBSupportDbgReport(2, "main\\States\\StateMessageBox.cpp", 75, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -75,7 +74,9 @@ bool  CStateMessageBox::Perform(void) {
   }
   v1 = dword_40320A4 + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_40320A4 = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);

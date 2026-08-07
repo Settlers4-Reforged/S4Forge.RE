@@ -53,18 +53,28 @@
   v11 = 0.0;
   *((_DWORD *)this + 27) = 0;
   if ( a2 != -5 )
+  {
     return this;
+  }
   C = (CFilter *)operator new(0x18u);
   if ( C )
+  {
     v7 = CFilter::CFilter(C, 5);
+  }
   else
+  {
     v7 = 0;
+  }
   *((_DWORD *)this + 11) = v7;
-  for ( i = CDynList::FirstEntry(a3[1]); i; i = (struct CDynListEntry *)CDynListEntry::Next(i) )
+  for ( i = CDynList::FirstEntry(a3[1]);
+        i;
+        i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 4) == 5 )
     {
-      for ( j = 0; j < *(_DWORD *)(*((_DWORD *)i + 21) + 8); ++j )
+      for ( j = 0;
+            j < *(_DWORD *)(*((_DWORD *)i + 21) + 8);
+            ++j )
       {
         FilterEntry = CFilter::GetFilterEntry(*((CFilter **)i + 21), j);
         if ( *((_DWORD *)FilterEntry + 6) )
@@ -88,15 +98,13 @@
           }
           v6 = (CFilterResourceLandscape *)operator new(0x20u);
           if ( v6 )
-            v5 = CFilterResourceLandscape::CFilterResourceLandscape(
-                   v6,
-                   *((_DWORD *)FilterEntry + 3),
-                   *((_DWORD *)FilterEntry + 4),
-                   (int)(float)((float)*((int *)FilterEntry + 5) * v11),
-                   *((_DWORD *)FilterEntry + 6),
-                   *((_DWORD *)FilterEntry + 7));
+          {
+            v5 = CFilterResourceLandscape::CFilterResourceLandscape(v6, *((_DWORD *)FilterEntry + 3), *((_DWORD *)FilterEntry + 4), (int)(float)((float)*((int *)FilterEntry + 5) * v11), *((_DWORD *)FilterEntry + 6), *((_DWORD *)FilterEntry + 7));
+          }
           else
+          {
             v5 = 0;
+          }
           CFilter::AddFilterEntry(*((CFilter **)this + 11), v5);
           break;
         }
@@ -119,9 +127,13 @@
   {
     v2 = *((_DWORD *)this + 11);
     if ( v2 )
+    {
       v1 = (***((int (__thiscall ****)(_DWORD, int))this + 11))(*((_DWORD *)this + 11), 1);
+    }
     else
+    {
       v1 = 0;
+    }
   }
   std::vector<SRESOURCECONCENTRATIONDATA>::clear();
   std::vector<SUNDERGROUNDCONCENTRATIONDATA>::clear();
@@ -171,20 +183,25 @@ bool  CExpandationEvent::IsShooting(void a2) {
   unsigned int j; // [esp+54h] [ebp-14h]
 
   SpecialTask = CSchedule::GetSpecialTask(this[10], 6);
-  if ( std::vector<SUNDERGROUNDCONCENTRATIONDATA>::size(this + 16)
-    || std::vector<SRESOURCECONCENTRATIONDATA>::size(this + 12) )
+  if ( std::vector<SUNDERGROUNDCONCENTRATIONDATA>::size(this + 16) || std::vector<SRESOURCECONCENTRATIONDATA>::size(this + 12) )
   {
     if ( !this[11] )
     {
       C = (CFilter *)operator new(0x18u);
       if ( C )
+      {
         v24 = CFilter::CFilter(C, 5);
+      }
       else
+      {
         v24 = 0;
+      }
       this[11] = v24;
       if ( *((_BYTE *)this + 112) )
       {
-        for ( i = 0; i < std::vector<SUNDERGROUNDCONCENTRATIONDATA>::size(this + 16); ++i )
+        for ( i = 0;
+              i < std::vector<SUNDERGROUNDCONCENTRATIONDATA>::size(this + 16);
+              ++i )
         {
           v17 = *(__int16 *)(std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i) + 8);
           v7 = std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i);
@@ -201,13 +218,7 @@ bool  CExpandationEvent::IsShooting(void a2) {
               v14 = *(__int16 *)(std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i) + 4);
               v12 = *(__int16 *)(std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i) + 8);
               v10 = std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i);
-              v20 = CFilterResourceLandscape::CFilterResourceLandscape(
-                      v21,
-                      *(__int16 *)(v10 + 6),
-                      v12,
-                      v14,
-                      NextPositionInside,
-                      v33);
+              v20 = CFilterResourceLandscape::CFilterResourceLandscape(v21, *(__int16 *)(v10 + 6), v12, v14, NextPositionInside, v33);
             }
             else
             {
@@ -219,7 +230,9 @@ bool  CExpandationEvent::IsShooting(void a2) {
       }
       else
       {
-        for ( j = 0; j < std::vector<SRESOURCECONCENTRATIONDATA>::size(this + 12); ++j )
+        for ( j = 0;
+              j < std::vector<SRESOURCECONCENTRATIONDATA>::size(this + 12);
+              ++j )
         {
           v15 = *(__int16 *)(std::vector<SRESOURCECONCENTRATIONDATA>::operator[](j) + 8);
           v3 = std::vector<SRESOURCECONCENTRATIONDATA>::operator[](j);
@@ -264,10 +277,7 @@ bool  CExpandationEvent::IsShooting(void a2) {
       case 0xFFFFFFFA:
         *((_BYTE *)this + 112) = 1;
         EcoSector = CSchedule::GetEcoSector(this[10]);
-        (*(void (__thiscall **)(struct IAIEcoManager *, int, char *))(*(_DWORD *)EcoSector + 252))(
-          EcoSector,
-          2,
-          (char *)this + 64);
+        (*(void (__thiscall **)(struct IAIEcoManager *, int, char *))(*(_DWORD *)EcoSector + 252))(EcoSector, 2, (char *)this + 64);
         break;
       case 0xFFFFFFFC:
         *((_BYTE *)this + 112) = 1;
@@ -287,11 +297,10 @@ bool  CExpandationEvent::IsShooting(void a2) {
       default:
         *((_BYTE *)this + 112) = 0;
         v26 = CSchedule::GetEcoSector(this[10]);
-        if ( !(*(int (__thiscall **)(struct IAIEcoManager *, CSchedule *, char *))(*(_DWORD *)v26 + 188))(
-                v26,
-                this[22],
-                (char *)this + 48) )
+        if ( !(*(int (__thiscall **)(struct IAIEcoManager *, CSchedule *, char *))(*(_DWORD *)v26 + 188))(v26, this[22], (char *)this + 48) )
+        {
           this[5] = (CSchedule *)3;
+        }
         break;
     }
     return 0;
@@ -308,9 +317,13 @@ bool  CExpandationEvent::action(void) {
 
   C = (CMainProblemSolveEvent *)operator new(0x70u);
   if ( C )
+  {
     v2 = CMainProblemSolveEvent::CMainProblemSolveEvent(C, *((_DWORD *)this + 3), 11, *((_DWORD *)this + 22), 0, 0, 0);
+  }
   else
+  {
     v2 = 0;
+  }
   *((_DWORD *)this + 21) = CSchedule::NewSchedEntry(*((CSchedule **)this + 10), v2, *((_DWORD *)this + 3));
   *((_DWORD *)this + 5) = 1;
   return 1;
@@ -335,7 +348,9 @@ bool  CExpandationEvent::WaitFor(void) {
   if ( v2 == 1 )
   {
     if ( !*((_DWORD *)this + 8) )
+    {
       return 0;
+    }
     CSchedule::MarkSolvedProblem(*((CSchedule **)this + 10), *((_DWORD *)this + 8), 0);
     *((_DWORD *)this + 8) = 0;
     *((_DWORD *)this + 5) = 3;
@@ -344,9 +359,13 @@ bool  CExpandationEvent::WaitFor(void) {
   else
   {
     if ( v2 != 2 )
+    {
       return 0;
+    }
     if ( *((_DWORD *)this + 8) )
+    {
       CSchedule::MarkSolvedProblem(*((CSchedule **)this + 10), *((_DWORD *)this + 8), 1);
+    }
     *((_DWORD *)this + 5) = 3;
     return 0;
   }

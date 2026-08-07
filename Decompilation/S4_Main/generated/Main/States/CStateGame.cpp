@@ -30,9 +30,7 @@ unsigned int  CStateGame::Rand(void) {
 // Decompiled from bool __thiscall CStateGame::IsMessage(CStateGame *this)
 bool  CStateGame::IsMessage(void) {
   
-  return ((int (__thiscall *)(CLogicRingBuffer *, CStateGame *))this->m_sLogicRingBuffer->Check)(
-           this->m_sLogicRingBuffer,
-           this);
+  return ((int (__thiscall *)(CLogicRingBuffer *, CStateGame *))this->m_sLogicRingBuffer->Check)(this->m_sLogicRingBuffer, this);
 }
 
 
@@ -64,9 +62,13 @@ class CGameState * __cdecl CStateGame::DynamicCreateFunc(void * a1) {
 
   C = (CStateGame *)operator new(0x2D4u);
   if ( C )
+  {
     return CStateGame::CStateGame(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -114,9 +116,13 @@ void  CStateGame::UpdateToGuiInfoStruct(void) {
   this->m_bUserMP3 = CGameSettings::GetUserMP3() != 0;
   this->field_164 = 2;
   if ( CGameData::IsTutorial(g_pGameData) )
+  {
     this->m_bExtendedTooltip = 1;
+  }
   else
+  {
     this->m_bExtendedTooltip = CGameSettings::GetExtendedTooltip();
+  }
   this->m_bBorderScrollEnabled = CGameSettings::GetBorderScrollEnabled();
   this->m_uScrollStepValue = CGameSettings::GetScrollStepValue();
   this->m_bAlwaysUrgentMsg = CGameSettings::GetAlwaysUrgentMsg();
@@ -127,15 +133,21 @@ void  CStateGame::UpdateToGuiInfoStruct(void) {
   v11 = 0;
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   uLocalAliance = CAlliances::AllianceId(LocalPlayerId);
-  for ( i = 1; i <= CPlayerManager::LastPlayerId(); ++i )
+  for ( i = 1;
+        i <= CPlayerManager::LastPlayerId();
+        ++i )
   {
     if ( CPlayerManager::IsAI(i) )
     {
       this->m_sChatInfo.m_asPlayerInfo[i - 1].m_bFilterMessages = 0;
       if ( CPlayerManager::GetPlayerControl(i) == 2 )
+      {
         *(&this->m_sChatInfo.m_iActualPlayerCount + 0xA * i) = 3;// m_uType
+      }
       else
+      {
         *(&this->m_sChatInfo.m_iActualPlayerCount + 10 * i) = 4;// m_uType
+      }
     }
     else
     {
@@ -155,13 +167,17 @@ void  CStateGame::UpdateToGuiInfoStruct(void) {
     v18 = -1;
     std::wstring::~wstring(&v15);
     if ( v6 >= 0x100 )
+    {
       report_rangecheckfailure();
+    }
     Dest[v6] = 0;
     v5 = std::string::string(&v14, Dest);
     std::string::operator=(&this->m_bBorderScrollEnabled + 0x28 * i, v5);// m_sName
     std::string::~string(&v14);
     if ( this->m_sChatInfo.m_asPlayerInfo[i - 1].m_bFilterMessages )
+    {
       v11 |= 1 << (i - 1);
+    }
   }
   CGameSettings::SetChatMessageFilter(v11);
   s_uAIDifficulty = CGameSettings::GetAIDifficulty();
@@ -195,14 +211,22 @@ void  CStateGame::UpdateFromGuiInfoStruct(void) {
   IGuiEngine::EnableTooltipsExt((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 90) != 0);
   CGuiEventHandler::RecalcDialogPos((CGuiEventHandler *)g_pGuiMainEvents, 0);
   v2 = 0;
-  for ( i = 1; i <= CPlayerManager::LastPlayerId(); ++i )
+  for ( i = 1;
+        i <= CPlayerManager::LastPlayerId();
+        ++i )
   {
     if ( CPlayerManager::IsAI(i) )
+    {
       *((_BYTE *)this + 40 * i + 400) = 0;
+    }
     if ( *((_BYTE *)this + 40 * i + 400) )
+    {
       v1 = 1 << (i - 1);
+    }
     else
+    {
       v1 = 0;
+    }
     v2 |= v1;
   }
   CGameSettings::SetChatMessageFilter(v2);
@@ -220,28 +244,39 @@ void  CStateGame::UpdateMusicSettings(void) {
   std::wstring v6; // [esp+1Ch] [ebp-2Ch] BYREF
   int v7; // [esp+44h] [ebp-4h]
 
-  CTrace::Print(
-    "StateGame: Applying new sound settings: Music %u, Sound %u, MicVol %u, PlbkVol %u",
-    this->m_uMusicVolume,
-    this->m_uSoundFXVolume,
-    this->m_uVoiceChatVolume,
-    this->m_uVoiceChatMicro);
+  CTrace::Print("StateGame: Applying new sound settings: Music %u, Sound %u, MicVol %u, PlbkVol %u", this->m_uMusicVolume, this->m_uSoundFXVolume, this->m_uVoiceChatVolume, this->m_uVoiceChatMicro);
   if ( this->m_bMusicOn )
+  {
     CSoundManager::SetMusicVolume(g_pSoundManager, this->m_uMusicVolume);
+  }
   else
+  {
     CSoundManager::SetMusicVolume(g_pSoundManager, 0);
+  }
   if ( this->m_bSoundFxOn )
+  {
     CSoundManager::SetSoundVolume(g_pSoundManager, this->m_uSoundFXVolume);
+  }
   else
+  {
     CSoundManager::SetSoundVolume(g_pSoundManager, 0);
+  }
   if ( this->m_bVoiceChatOn )
+  {
     ISoundEngine::VCSetMicVolume(g_pSoundEngine, this->m_uVoiceChatVolume);
+  }
   else
+  {
     ISoundEngine::VCSetMicVolume(g_pSoundEngine, 0);
+  }
   if ( this->m_bVoiceChatOn )
+  {
     ISoundEngine::VCSetVolume(g_pSoundEngine, this->m_uVoiceChatMicro);
+  }
   else
+  {
     ISoundEngine::VCSetVolume(g_pSoundEngine, 0);
+  }
   if ( this->m_bUserMP3 )
   {
     CSoundManager::PlayDirectory((wchar_t *)L"Snd\\User");
@@ -272,14 +307,22 @@ bool  CStateGame::IsInMinimap(struct tagPOINT * a2, struct tagPOINT * a3) {
 
   v4.y = a2->y - 8;
   if ( v4.y > 160 )
+  {
     return 0;
+  }
   v4.x = a2->x - 15 - (160 - v4.y) / 2;
   if ( v4.x > 0xA0u )
+  {
     return 0;
+  }
   if ( v4.y < 0 )
+  {
     return 0;
+  }
   if ( a3 )
+  {
     *a3 = v4;
+  }
   return 1;
 }
 
@@ -354,7 +397,9 @@ void  CStateGame::SetupGUI(void) {
   int v9; // [esp+94h] [ebp-4h]
 
   if ( g_pGUIEngine )
+  {
     CStateGame::ExitGUI(this);
+  }
   if ( g_pDialogData )
   {
     operator delete(g_pDialogData);
@@ -367,48 +412,23 @@ void  CStateGame::SetupGUI(void) {
   switch ( v7 )
   {
     case 1:
-      CFileEx::Open(
-        &v8.IFileEx,
-        (wchar_t *)L"Menu\\GUISetVikings.DAT",
-        CFile_BINARY|CFile_READ,
-        0,
-        UNUSED_ARG(),
-        UNUSED_ARG());
+      CFileEx::Open(&v8.IFileEx, (wchar_t *)L"Menu\\GUISetVikings.DAT", CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
       break;
     case 2:
-      CFileEx::Open(
-        &v8.IFileEx,
-        (wchar_t *)L"Menu\\GUISetMayas.DAT",
-        CFile_BINARY|CFile_READ,
-        0,
-        UNUSED_ARG(),
-        UNUSED_ARG());
+      CFileEx::Open(&v8.IFileEx, (wchar_t *)L"Menu\\GUISetMayas.DAT", CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
       break;
     case 4:
-      CFileEx::Open(
-        &v8.IFileEx,
-        (wchar_t *)L"Menu\\GUISetTrojans.DAT",
-        CFile_BINARY|CFile_READ,
-        0,
-        UNUSED_ARG(),
-        UNUSED_ARG());
+      CFileEx::Open(&v8.IFileEx, (wchar_t *)L"Menu\\GUISetTrojans.DAT", CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
       break;
     default:
-      CFileEx::Open(
-        &v8.IFileEx,
-        (wchar_t *)L"Menu\\GUISetRomans.DAT",
-        CFile_BINARY|CFile_READ,
-        0,
-        UNUSED_ARG(),
-        UNUSED_ARG());
+      CFileEx::Open(&v8.IFileEx, (wchar_t *)L"Menu\\GUISetRomans.DAT", CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
       break;
   }
   v2 = CFileEx::Size(&v8);
   g_pDialogData = operator new[](v2);
   v3 = CFileEx::Size(&v8);
   v5 = CFileEx::Read(&v8.IFileEx.__vftable, g_pDialogData, 1, v3, UNUSED_ARG(), UNUSED_ARG());
-  if ( v5 != CFileEx::Size(&v8)
-    && BBSupportDbgReport(2, "Main\\States\\StateGame.cpp", 1281, "iSize == file.Size()") == 1 )
+  if ( v5 != CFileEx::Size(&v8) && BBSupportDbgReport(2, "Main\\States\\StateGame.cpp", 1281, "iSize == file.Size()") == 1 )
   {
     __debugbreak();
   }
@@ -432,7 +452,9 @@ void  CStateGame::ExitGUI(void) {
   {
     IEventEngine::UnRegisterHandle(g_pEvnEngine, (struct IEvn_Handle *)g_pGuiMainEvents);
     if ( g_pGuiMainEvents )
+    {
       (*(void (__thiscall **)(int, int))(*(_DWORD *)g_pGuiMainEvents + 4))(g_pGuiMainEvents, 1);
+    }
     g_pGuiMainEvents = 0;
   }
   if ( g_pGUIEngine )
@@ -441,7 +463,9 @@ void  CStateGame::ExitGUI(void) {
     g_pGUIEngine = 0;
   }
   if ( !g_pDialogData )
+  {
     return IGuiEngine::EnableTooltipsExt(g_pGUIEngine, 0);
+  }
   operator delete(g_pDialogData);
   g_pDialogData = 0;
   return IGuiEngine::EnableTooltipsExt(g_pGUIEngine, 0);
@@ -464,31 +488,34 @@ bool  CStateGame::InitGuiEngine(char * a2) {
   int v13; // [esp+60h] [ebp-4h]
 
   if ( g_pGUIEngine )
+  {
     CStateGame::ExitGUI(this);
+  }
   C = (IGuiEngine *)operator new(0x10u);
   v13 = 0;
   if ( C )
+  {
     v8 = IGuiEngine::IGuiEngine(C);
+  }
   else
+  {
     v8 = 0;
+  }
   g_pGUIEngine = v8;
   Language = CGameSettings::GetLanguage();
-  IGuiEngine::Init(
-    g_pGUIEngine,
-    g_pGfxEngine,
-    g_pGfxManager,
-    (int)a2,
-    0,
-    (bool (__cdecl *)(int, int, int))GuiDlgMinimapProc,
-    Language);
+  IGuiEngine::Init(g_pGUIEngine, g_pGfxEngine, g_pGfxManager, (int)a2, 0, (bool (__cdecl *)(int, int, int))GuiDlgMinimapProc, Language);
   IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
   IsTutorial = CGameData::IsTutorial(&this->m_sGameData);
   v6 = (CGuiEventHandler *)operator new(0x44u);
   v13 = 1;
   if ( v6 )
+  {
     v5 = CGuiEventHandler::CGuiEventHandler(v6, IsTutorial);
+  }
   else
+  {
     v5 = 0;
+  }
   v13 = -1;
   g_pGuiMainEvents = (int)v5;
   IEventEngine::RegisterHandle(g_pEvnEngine, v5);
@@ -537,9 +564,13 @@ void  CStateGame::EndGame(void) {
   if ( !CGameData::IsTutorial(g_pGameData) )
   {
     if ( CGameData::GetMode(g_pGameData) == 3 )
+    {
       CGameStateHandler::Queue(CStateEcoStatistic::DynamicCreateFunc, 0);
+    }
     else
+    {
       CGameStateHandler::Queue(CStateEndStatistic::DynamicCreateFunc, 0);
+    }
   }
   v8 = 0;
   v7 = 0;
@@ -569,12 +600,16 @@ void  CStateGame::EndGame(void) {
       CampaignStatus = CGameSettings::GetCampaignStatus(g_pGameType->m_iCampaignType);
       v13 = g_pGameType->m_iMissionId + 1;
       if ( v13 > CampaignStatus )
+      {
         CGameSettings::SetCampaignStatus(g_pGameType->m_iCampaignType, v13);
+      }
     }
     if ( g_pGameType->m_iCampaignType == 4 && v19 && g_pGameType->m_iMissionId == 11 )
     {
       if ( (unsigned __int8)CGameSettings::GetShowVideos() )
+      {
         CGameStateHandler::Queue((CStateMessageBox *(__cdecl *)(int))CStateVideo::DynamicCreateFunc, (void *)6);
+      }
       v18 = 0;
     }
     else if ( g_pGameType->m_iCampaignType == 15 && v19 )
@@ -582,13 +617,17 @@ void  CStateGame::EndGame(void) {
       if ( g_pGameType->m_iMissionId == 4 )
       {
         if ( (unsigned __int8)CGameSettings::GetShowVideos() )
+        {
           CGameStateHandler::Queue((CStateMessageBox *(__cdecl *)(int))CStateVideo::DynamicCreateFunc, (void *)9);
+        }
         v18 = 14;
       }
       if ( g_pGameType->m_iMissionId == 11 )
       {
         if ( (unsigned __int8)CGameSettings::GetShowVideos() )
+        {
           CGameStateHandler::Queue((CStateMessageBox *(__cdecl *)(int))CStateVideo::DynamicCreateFunc, (void *)0xA);
+        }
         v18 = 0;
       }
       v17 = g_pGameType->m_iMissionId + 1;
@@ -610,14 +649,12 @@ void  CStateGame::EndGame(void) {
     else if ( g_pGameType->m_iCampaignType == 12 && v19 )
     {
       if ( g_pGameType->m_iMissionId == 1 )
+      {
         CGameStateHandler::Queue(CStateAOSplash::DynamicCreateFunc, (void *)0xFFFFFFFF);
+      }
       v18 = 13;
     }
-    else if ( g_pGameType->m_iMissionId == 2
-           && v19
-           && (g_pGameType->m_iCampaignType == 1
-            || g_pGameType->m_iCampaignType == 2
-            || g_pGameType->m_iCampaignType == 3) )
+    else if ( g_pGameType->m_iMissionId == 2 && v19 && (g_pGameType->m_iCampaignType == 1 || g_pGameType->m_iCampaignType == 2 || g_pGameType->m_iCampaignType == 3) )
     {
       CGameStateHandler::Queue(CStateVictoryScreen::DynamicCreateFunc, (void *)g_pGameType->m_iCampaignType);
       v18 = 0;
@@ -694,7 +731,9 @@ void  CStateGame::EndGame(void) {
 bool  CStateGame::SwitchPause(void) {
   
   if ( CGameData::IsNetworkGame((CStateGame *)((char *)this + 76)) )
+  {
     return *((_BYTE *)this + 71);
+  }
   *((_BYTE *)this + 71) = *((_BYTE *)this + 71) == 0;
   *((_BYTE *)this + 116) = *((_BYTE *)this + 116) == 0;
   if ( *((_BYTE *)this + 71) )
@@ -713,7 +752,7 @@ bool  CStateGame::SwitchPause(void) {
 
 
 // address=[0x14a69e0]
-// Decompiled from void __thiscall CStateGame::SendLogicMessage(  CStateGame *this,  uint a2,  uint a3,  uint a4,  int a5,  uint a6,  unsigned int a7)
+// Decompiled from void __thiscall CStateGame::SendLogicMessage(CStateGame *this, uint a2, uint a3, uint a4, int a5, uint a6, unsigned int a7)
 void  CStateGame::SendLogicMessage(unsigned int a2, unsigned int a3, long a4, unsigned int a5, unsigned int a6, unsigned int a7) {
   
   CEvn_Logic v8; // [esp+8h] [ebp-30h] BYREF
@@ -722,17 +761,18 @@ void  CStateGame::SendLogicMessage(unsigned int a2, unsigned int a3, long a4, un
   if ( !this->byte47 )
   {
     if ( a6 && !a7 && BBSupportDbgReportF(2, "Main\\States\\StateGame.cpp", 1395, "iSize != 0: Message: %u", a2) == 1 )
+    {
       __debugbreak();
+    }
     if ( a7 && !a6 && BBSupportDbgReportF(2, "Main\\States\\StateGame.cpp", 1399, "iSize != NULL: Message: %u", a2) == 1 )
+    {
       __debugbreak();
+    }
     if ( CPlayerManager::IsAlive(a5) )
     {
       CEvn_Logic::CEvn_Logic(&v8, a2, a3, a4, a5, a6, a7);
       v9 = 0;
-      if ( !((unsigned __int8 (__thiscall *)(CLogicRingBuffer *, CEvn_Logic *))this->m_sLogicRingBuffer->Write)(
-              this->m_sLogicRingBuffer,
-              &v8)
-        && BBSupportDbgReportF(2, "Main\\States\\StateGame.cpp", 1410, "Unable to write to Logic Message Queue ") == 1 )
+      if ( !((unsigned __int8 (__thiscall *)(CLogicRingBuffer *, CEvn_Logic *))this->m_sLogicRingBuffer->Write)(this->m_sLogicRingBuffer, &v8) && BBSupportDbgReportF(2, "Main\\States\\StateGame.cpp", 1410, "Unable to write to Logic Message Queue ") == 1 )
       {
         __debugbreak();
       }
@@ -761,20 +801,34 @@ int  CStateGame::GetModifierState(void) {
   unsigned __int16 v5; // [esp+10h] [ebp-4h]
 
   if ( GetAsyncKeyState(18) )
+  {
     v4 = 16;
+  }
   else
+  {
     v4 = 0;
+  }
   if ( GetAsyncKeyState(16) )
+  {
     v3 = 4;
+  }
   else
+  {
     v3 = 0;
+  }
   if ( GetAsyncKeyState(17) )
+  {
     v2 = 8;
+  }
   else
+  {
     v2 = 0;
+  }
   v5 = v2 | v3 | v4;
   if ( v5 == 24 )
+  {
     return 16;
+  }
   return v5;
 }
 
@@ -887,7 +941,9 @@ int  CStateGame::GetModifierState(void) {
   g_uDbgTickCounter = 0;
   g_iGameSpeed = 1;
   if ( g_pGfxEngine )
+  {
     IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
+  }
   this->dword4 = 0;
   this->m_uLastRenderTime = 0;
   this->dwordC = 0;
@@ -939,7 +995,9 @@ int  CStateGame::GetModifierState(void) {
   g_pGame = this;
   g_pGameData = &this->m_sGameData;
   if ( a2 && BBSupportDbgReport(2, "Main\\States\\StateGame.cpp", 246, "!_pvParam") == 1 )
+  {
     __debugbreak();
+  }
   this->dword120 = 0;
   this->dword10 = 0;
   this->dword118 = 0;
@@ -988,7 +1046,9 @@ int  CStateGame::GetModifierState(void) {
     CStateGame::UpdateMusicSettings(this);
     CStateGame::SetupGUI(this);
     if ( CGameData::IsTutorial(&this->m_sGameData) )
+    {
       CTutorial::Init((CTutorial *)&g_cTutorial);
+    }
     CStateGame::NotifyGfxEngine(this);
     CStateGame::UpdateClientSize(this);
     CGfxManager::DisableGfxFile(g_pGfxManager, 1);
@@ -1011,9 +1071,7 @@ int  CStateGame::GetModifierState(void) {
     BBSupportTracePrintF(1, (char *)&byte_373E2D7);
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v37);
     LOBYTE(exceptionBlock) = 13;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-      (int)&v49,
-      &g_pGameType->m_swMapName);
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes((int)&v49, &g_pGameType->m_swMapName);
     LOBYTE(exceptionBlock) = 14;
     v7 = std::string::c_str(&v49);
     BBSupportTracePrintF(1, "MapName:        %s", v7);
@@ -1034,16 +1092,18 @@ int  CStateGame::GetModifierState(void) {
     LOBYTE(exceptionBlock) = 4;
     std::string::~string(&v42);
     if ( g_pGameType->m_bIsSaveGame )
+    {
       BBSupportTracePrintF(1, "Saved Game:     %s", "Yes");
+    }
     else
+    {
       BBSupportTracePrintF(1, "Saved Game:     %s", "No");
+    }
     if ( g_pGameType->m_bIsSaveGame )
     {
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v36);
       LOBYTE(exceptionBlock) = 17;
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-        (int)&v50,
-        &g_pGameType->m_swSaveFile);
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes((int)&v50, &g_pGameType->m_swSaveFile);
       LOBYTE(exceptionBlock) = 18;
       v10 = std::string::c_str(&v50);
       BBSupportTracePrintF(1, "Save File:     %s", v10);
@@ -1057,9 +1117,13 @@ int  CStateGame::GetModifierState(void) {
     PlayerId = CPlayerManager::LastPlayerId();
     BBSupportTracePrintF(1, "Playercount:    %d", PlayerId);
     if ( INetworkEngine::IsHost(g_pNetworkEngine) )
+    {
       BBSupportTracePrintF(1, "Network:\t\t   %s", "Host");
+    }
     else
+    {
       BBSupportTracePrintF(1, "Network:\t\t   %s", "Client");
+    }
     BBSupportTracePrintF(1, "--------------------------------------------------");
     if ( CGameData::IsGameWon(&this->m_sGameData) && CGameData::GetMode(&this->m_sGameData) != 5 )
     {
@@ -1080,7 +1144,9 @@ int  CStateGame::GetModifierState(void) {
       else
       {
         if ( CGameData::IsNetworkGame(&this->m_sGameData) )
+        {
           (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pFogging + 40))(g_pFogging, 1);
+        }
         v28 = CEvn_Event::CEvn_Event(&v46, 0x261u, 0, 0, 0);
         LOBYTE(exceptionBlock) = 20;
         IEventEngine::SendAMessage(g_pEvnEngine, v28);
@@ -1089,11 +1155,15 @@ int  CStateGame::GetModifierState(void) {
         v16 = CPlayerManager::GetLocalPlayerId();
         v17 = CPlayerManager::Color(v16);
         CTextMsgHandler::AddTextMsg(2254, v17, 1);
-        for ( i = 1; i < CPlayerManager::LastPlayerId(); ++i )
+        for ( i = 1;
+              i < CPlayerManager::LastPlayerId();
+              ++i )
         {
           v18 = CAlliances::AllianceId(i);
           if ( v18 != CGameData::TeamWon(&this->m_sGameData) )
+          {
             CPlayerManager::PlayerDied(i);
+          }
         }
       }
     }
@@ -1116,7 +1186,9 @@ int  CStateGame::GetModifierState(void) {
   *((_BYTE *)this + 70) = 0;
   CGameRun::Exit();
   if ( CGameData::IsTutorial((CStateGame *)((char *)this + 76)) )
+  {
     CTutorial::Kill((CTutorial *)&g_cTutorial);
+  }
   CStateGame::ExitGUI(this);
   CTextMsgHandler::Kill();
   IGfxEngine::SetTickCounterAdress((IGfxEngine *)g_pGfxEngine, 0);
@@ -1227,7 +1299,9 @@ bool  CStateGame::Perform(void) {
       break;
   }
   if ( (unsigned __int8)CGameSettings::GetBorderScrollEnabled() && CGameSettings::GetGfxFullscreenEnabled() )
+  {
     CStateGame::HandleBorderScroll(v50);
+  }
   if ( !v50->byte125 )
   {
     v36 = CEvn_Event::CEvn_Event(&v54, 0x27u, 0, 0, 0);
@@ -1256,7 +1330,9 @@ bool  CStateGame::Perform(void) {
     }
   }
   if ( !IEventEngine::DispatchSystemMessages(g_pEvnEngine) )
+  {
     return 0;
+  }
   INetworkEngine::DeliverNetMessages(g_pNetworkEngine);
   if ( v50->byte46 )
   {
@@ -1303,7 +1379,9 @@ bool  CStateGame::Perform(void) {
       CDebugFkt::SetFrameCounter(0.0, v38, v31, v32, v23, v24, v22, BytesPerSecond);
     }
     if ( !v50->dword4 )
+    {
       v50->dword4 = timeGetTime();
+    }
     Time = timeGetTime();
     v29 = Time - v50->dword4;
     if ( (unsigned __int8)CGameStateHandler::IsGrabbing() )
@@ -1334,7 +1412,9 @@ bool  CStateGame::Perform(void) {
       {
         IGfxEngine::ShowFrame(g_pGfxEngine);
         if ( !IEventEngine::DispatchSystemMessages(g_pEvnEngine) )
+        {
           return 0;
+        }
         IGuiEngine::RenderGui(g_pGUIEngine);
         CStateGame::RenderFrame(v50);
       }
@@ -1354,7 +1434,9 @@ bool  CStateGame::Perform(void) {
         VirtualTick = INetworkEngine::GetVirtualTick(g_pNetworkEngine);
         CStateGame::GameData(g_pGame)->m_uVirtualTick = VirtualTick;
         if ( !IEventEngine::DispatchSystemMessages(g_pEvnEngine) )
+        {
           return 0;
+        }
         INetworkEngine::DeliverNetMessages(g_pNetworkEngine);
         if ( INetworkEngine::StartNewTick((CGameHost **)g_pNetworkEngine, 0) )
         {
@@ -1363,8 +1445,7 @@ bool  CStateGame::Perform(void) {
           v11 = CStateGame::GameData(g_pGame);
           v11->m_uTickCounter = ValidTick;
           g_uDbgTickCounter = ValidTick;
-          if ( !CStateGame::GameData(g_pGame)->m_uTickCounter
-            && BBSupportDbgReport(2, "Main\\States\\StateGame.cpp", 682, "g_pGame->GameData().m_uTickCounter != 0") == 1 )
+          if ( !CStateGame::GameData(g_pGame)->m_uTickCounter && BBSupportDbgReport(2, "Main\\States\\StateGame.cpp", 682, "g_pGame->GameData().m_uTickCounter != 0") == 1 )
           {
             __debugbreak();
           }
@@ -1425,7 +1506,9 @@ bool  CStateGame::Perform(void) {
           }
           CGameRun::Run();
           if ( !CGameType::IsHost(g_pGameType) )
+          {
             Sleep(0xDCu);
+          }
           INetworkEngine::EndTick(g_pNetworkEngine);
           ++v44;
         }
@@ -1434,7 +1517,9 @@ bool  CStateGame::Perform(void) {
       if ( v50->byte45 )
       {
         if ( !v49 )
+        {
           IGfxEngine::ShowFrame(g_pGfxEngine);
+        }
         IGfxEngine::RenderFrame(g_pGfxEngine, 1, 0);
         v49 = 0;
         v50->dword4 = v48 + timeGetTime();
@@ -1442,10 +1527,14 @@ bool  CStateGame::Perform(void) {
       }
     }
     if ( !v49 )
+    {
       IGfxEngine::ShowFrame(g_pGfxEngine);
+    }
     v50->dword4 += v48;
     if ( !CGameData::IsNetworkGame(&v50->m_sGameData) && v48 == 71 )
+    {
       v50->dword4 = timeGetTime() + 71;
+    }
   }
   else
   {
@@ -1454,7 +1543,9 @@ bool  CStateGame::Perform(void) {
     IGfxEngine::ShowFrame(g_pGfxEngine);
   }
   if ( v50->byte125 )
+  {
     return 1;
+  }
   INetworkEngine::GameInitalized((CGameHost **)g_pNetworkEngine);
   v50->byte125 = 1;
   return 1;
@@ -1488,10 +1579,7 @@ void  CStateGame::NotifyGfxEngine(void) {
   MapObjectPtr = CWorldManager::GetMapObjectPtr();
   IGfxEngine::SetObjectLayerAccess(g_pGfxEngine, MapObjectGetGfxInfo, MapObjectPtr, (unsigned __int16 *)DecoObjectPtr);
   IGfxEngine::SetMiniMapColorCallback(g_pGfxEngine, CWorldManager::GetMiniMapColor);
-  IGfxEngine::SetIconCallbacks(
-    g_pGfxEngine,
-    CWorldManager::WorldSetNumberOfNextLine,
-    CWorldManager::WorldGetIconObjectByX);
+  IGfxEngine::SetIconCallbacks(g_pGfxEngine, CWorldManager::WorldSetNumberOfNextLine, CWorldManager::WorldGetIconObjectByX);
   IGfxEngine::EnableIconLayer(g_pGfxEngine, 0);
   (*(void (__thiscall **)(void *, CStateGame *))(*(_DWORD *)g_pFogging + 16))(g_pFogging, this);
 }
@@ -1505,9 +1593,13 @@ bool  CStateGame::EnableOrDisableDebugString(bool a2) {
 
   byte44 = this->m_bAllowDebugString;
   if ( a2 )
+  {
     IGfxEngine::EnableDebugStringCallback(g_pGfxEngine, (char *(__cdecl *)())CDebugFkt::DebugString);
+  }
   else
+  {
     IGfxEngine::EnableDebugStringCallback(g_pGfxEngine, 0);
+  }
   this->m_bAllowDebugString = a2;
   return byte44;
 }
@@ -1517,11 +1609,7 @@ bool  CStateGame::EnableOrDisableDebugString(bool a2) {
 // Decompiled from bool __thiscall CStateGame::CanSave(CStateGame *this)
 bool  CStateGame::CanSave(void) {
   
-  return !this->byte47
-      && !CGameData::IsTutorial(&this->m_sGameData)
-      && (!CGameData::IsNetworkGame(&this->m_sGameData)
-       || (unsigned int)(CGameData::GetTickCounter(&this->m_sGameData) - this->m_uValidTick) > 0x348)
-      && !CGameData::IsLadder(&this->m_sGameData);
+  return !this->byte47 && !CGameData::IsTutorial(&this->m_sGameData) && (!CGameData::IsNetworkGame(&this->m_sGameData) || (unsigned int)(CGameData::GetTickCounter(&this->m_sGameData) - this->m_uValidTick) > 0x348) && !CGameData::IsLadder(&this->m_sGameData);
 }
 
 
@@ -1558,9 +1646,13 @@ void  CStateGame::ZoomIn(int a2) {
   int v2; // [esp+0h] [ebp-Ch]
 
   if ( (unsigned int)(this->m_sGameData.m_uZoom + 20000 * a2) <= 0x480000 )
+  {
     v2 = this->m_sGameData.m_uZoom + 20000 * a2;
+  }
   else
+  {
     v2 = 4718592;
+  }
   CStateGame::UpdateTriangleSizePreservingWorldPosition(this, v2);
   CStateGame::UpdateZoomFactor(this);
 }
@@ -1573,9 +1665,13 @@ void  CStateGame::ZoomOut(int a2) {
   int v2; // [esp+0h] [ebp-Ch]
 
   if ( *((_DWORD *)this + 26) - 20000 * a2 >= 917504 )
+  {
     v2 = *((_DWORD *)this + 26) - 20000 * a2;
+  }
   else
+  {
     v2 = 917504;
+  }
   CStateGame::UpdateTriangleSizePreservingWorldPosition(this, v2);
   CStateGame::UpdateZoomFactor(this);
 }
@@ -1605,12 +1701,7 @@ void  CStateGame::UpdateZoomFactor(void) {
   int v4; // [esp+3Ch] [ebp-4h]
 
   CStateGame::VerifyWorldOffset(this);
-  CEvn_Event::CEvn_Event(
-    &v3,
-    0x25Du,
-    0,
-    (int)((double)(unsigned int)(this->m_sGameData.m_uZoom - 0xE0000) * 100.0 / 3801088.0),
-    0);
+  CEvn_Event::CEvn_Event(&v3, 0x25Du, 0, (int)((double)(unsigned int)(this->m_sGameData.m_uZoom - 0xE0000) * 100.0 / 3801088.0), 0);
   v4 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v3);
   v4 = -1;
@@ -1633,7 +1724,9 @@ void  CStateGame::VerifyWorldOffset(void) {
   if ( this->m_sGameData.m_uCamY >= this->m_sGameData.m_uUnknown * ((int)this->m_sGameData.m_uZoom >> 16) )
   {
     if ( this->m_sGameData.m_uCamY > this->m_sGameData.m_iWidth * ((int)this->m_sGameData.m_uZoom >> 16) / 2 )
+    {
       this->m_sGameData.m_uCamY = this->m_sGameData.m_iWidth * ((int)this->m_sGameData.m_uZoom >> 16) / 2;
+    }
   }
   else
   {
@@ -1643,7 +1736,9 @@ void  CStateGame::VerifyWorldOffset(void) {
   if ( this->m_sGameData.m_uCamX >= this->m_sGameData.m_uUnknown * ((int)this->m_sGameData.m_uZoom >> 16) - dword18 )
   {
     if ( this->m_sGameData.m_uCamX > this->m_sGameData.m_iWidth * ((int)this->m_sGameData.m_uZoom >> 16) - dword18 )
+    {
       this->m_sGameData.m_uCamX = this->m_sGameData.m_iWidth * ((int)this->m_sGameData.m_uZoom >> 16) - dword18;
+    }
   }
   else
   {
@@ -1665,9 +1760,13 @@ void  CStateGame::VerifyWorldOffset(void) {
 void  CStateGame::HandleBorderScroll(void) {
   
   if ( *((_DWORD *)this + 64) )
+  {
     CStateGame::ScrollHorizontal(this, *((_DWORD *)this + 64) == 2);
+  }
   if ( *((_DWORD *)this + 65) )
+  {
     CStateGame::ScrollVertical(this, *((_DWORD *)this + 65) == 4);
+  }
   CStateGame::VerifyWorldOffset(this);
 }
 
@@ -1704,7 +1803,9 @@ void  CStateGame::UpdateClientSize(void) {
   this->m_uClientWidth = IGfxEngine::GetOutputWidth(g_pGfxEngine);
   this->m_uClientHeight = IGfxEngine::GetOutputHeight(g_pGfxEngine);
   if ( g_pGUIEngine )
+  {
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
+  }
   this->m_uClientSizeRelated210 = 210;
 }
 
@@ -2038,8 +2139,7 @@ bool  CStateGame::OnEvent(class CEvn_Event & _sEvent) {
         switch ( m_iEventId )
         {
           case 0u:
-            if ( CPlayerManager::IsAlive(_sEvent->m_iOwner)
-              && (LocalPlayerId = CPlayerManager::GetLocalPlayerId(), CPlayerManager::IsAlive(LocalPlayerId)) )
+            if ( CPlayerManager::IsAlive(_sEvent->m_iOwner) && (LocalPlayerId = CPlayerManager::GetLocalPlayerId(), CPlayerManager::IsAlive(LocalPlayerId)) )
             {
               m_lParam = _sEvent->m_lParam;
               v62.m_uU1C = *(_DWORD *)std::_Iterator_base12::operator=(&m_lParam);
@@ -2050,15 +2150,7 @@ bool  CStateGame::OnEvent(class CEvn_Event & _sEvent) {
               v86 = &v62;
               v85 = std::begin<std::vector<CStateGame::Random_HistoryEntry>>(&v62, &this->m_vRandomHistory);
               v317 = -1;
-              v84 = std::find_if<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CStateGame::Random_HistoryEntry>>>,_lambda_03817ffcf3c1f43769e18417d11e255d_>(
-                      (int)v101,
-                      v62.m_uU4,
-                      v62.m_uU8,
-                      v62.m_uUC,
-                      v62.m_uU10,
-                      v62.m_uU14,
-                      v62.m_uU18,
-                      v62.m_uU1C);
+              v84 = std::find_if<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CStateGame::Random_HistoryEntry>>>,_lambda_03817ffcf3c1f43769e18417d11e255d_>((int)v101, v62.m_uU4, v62.m_uU8, v62.m_uUC, v62.m_uU10, v62.m_uU14, v62.m_uU18, v62.m_uU1C);
               v317 = 6;
               v117 = (std::_Iterator_base12 *)std::vector<CStateGame::Random_HistoryEntry>::end(v69);
               v118 = v117;
@@ -2067,7 +2159,9 @@ bool  CStateGame::OnEvent(class CEvn_Event & _sEvent) {
               LOBYTE(v317) = 6;
               std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CStateGame::Random_HistoryEntry>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CStateGame::Random_HistoryEntry>>>(v69);
               if ( v255 )
+              {
                 CTextMsgHandler::AddTextMsg("DESYNC: Rand History search failed!", 0, 0, 0, 1);
+              }
               v24 = (int *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CStateGame::Random_HistoryEntry>>>::operator*(v101);
               v25 = v24[1];
               v96 = *v24;
@@ -2083,18 +2177,14 @@ bool  CStateGame::OnEvent(class CEvn_Event & _sEvent) {
                 IMessageTracer::Done(g_pMsgTracer);
                 IMessageTracer::Done(g_pMsgTracer2);
                 CMapObjectMgr::DbgPrintAllEntities(g_pMapObjectMgr, 0x80000003);
-                if ( BBSupportDbgReport(
-                       1,
-                       "Main\\States\\StateGameII.cpp",
-                       641,
-                       "DESYNC: Game not synchronized anymore!") == 1 )
+                if ( BBSupportDbgReport(1, "Main\\States\\StateGameII.cpp", 641, "DESYNC: Game not synchronized anymore!") == 1 )
+                {
                   __debugbreak();
+                }
               }
               if ( (unsigned int)std::vector<CStateGame::Random_HistoryEntry>::size(&this->m_vRandomHistory) > 0x14 )
               {
-                v119 = (struct std::_Iterator_base12 *)std::begin<std::vector<CStateGame::Random_HistoryEntry>>(
-                                                         v67,
-                                                         &this->m_vRandomHistory);
+                v119 = (struct std::_Iterator_base12 *)std::begin<std::vector<CStateGame::Random_HistoryEntry>>(v67, &this->m_vRandomHistory);
                 v120 = v119;
                 LOBYTE(v317) = 8;
                 p_m_uU14 = &v62.m_uU14;
@@ -2139,7 +2229,9 @@ bool  CStateGame::OnEvent(class CEvn_Event & _sEvent) {
             v194 = 512 - strlen(Str);
             Source = (char *)v243->m_iData;
             if ( strlen(Source) > v194 )
+            {
               Source[v194] = 0;
+            }
             j__strcpy_0(&Str[v270], Source);
             v51 = CPlayerManager::Color(v243->m_iOwner);
             CTextMsgHandler::AddChatMsg(Str, v51);
@@ -2147,8 +2239,7 @@ bool  CStateGame::OnEvent(class CEvn_Event & _sEvent) {
             break;
           case 3u:
             v226 = _sEvent;
-            if ( CPlayerManager::IsAlive(_sEvent->m_iOwner)
-              && (v26 = CPlayerManager::GetLocalPlayerId(), CPlayerManager::IsAlive(v26)) )
+            if ( CPlayerManager::IsAlive(_sEvent->m_iOwner) && (v26 = CPlayerManager::GetLocalPlayerId(), CPlayerManager::IsAlive(v26)) )
             {
               if ( CGameData::IsNetworkGame(&this->m_sGameData) )
               {
@@ -2161,15 +2252,7 @@ bool  CStateGame::OnEvent(class CEvn_Event & _sEvent) {
                 v73 = &v62;
                 v81 = std::begin<std::vector<CStateGame::CRC_HistoryEntry>>(&v62, &this->m_vCRCHistory);
                 v317 = -1;
-                v80 = std::find_if<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CStateGame::CRC_HistoryEntry>>>,_lambda_9d6ec2be6c5ed87acf2c2ca5fd2e9b85_>(
-                        v92,
-                        v62.m_uU4,
-                        v62.m_uU8,
-                        v62.m_uUC,
-                        v62.m_uU10,
-                        v62.m_uU14,
-                        v62.m_uU18,
-                        v62.m_uU1C);
+                v80 = std::find_if<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CStateGame::CRC_HistoryEntry>>>,_lambda_9d6ec2be6c5ed87acf2c2ca5fd2e9b85_>(v92, v62.m_uU4, v62.m_uU8, v62.m_uUC, v62.m_uU10, v62.m_uU14, v62.m_uU18, v62.m_uU1C);
                 v317 = 10;
                 v123 = (std::_Iterator_base12 *)std::vector<CStateGame::CRC_HistoryEntry>::end(v66);
                 v124 = v123;
@@ -2178,7 +2261,9 @@ bool  CStateGame::OnEvent(class CEvn_Event & _sEvent) {
                 LOBYTE(v317) = 10;
                 std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CStateGame::CRC_HistoryEntry>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CStateGame::CRC_HistoryEntry>>>(v66);
                 if ( v253 )
+                {
                   CTextMsgHandler::AddTextMsg("DESYNC: CRC History search failed!", 0, 0, 0, 1);
+                }
                 v27 = (int *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CStateGame::CRC_HistoryEntry>>>::operator*(v92);
                 v28 = v27[1];
                 v98 = *v27;
@@ -2194,18 +2279,14 @@ bool  CStateGame::OnEvent(class CEvn_Event & _sEvent) {
                   IMessageTracer::Done(g_pMsgTracer);
                   IMessageTracer::Done(g_pMsgTracer2);
                   CMapObjectMgr::DbgPrintAllEntities(g_pMapObjectMgr, -2147483645);
-                  if ( BBSupportDbgReport(
-                         1,
-                         "Main\\States\\StateGameII.cpp",
-                         714,
-                         "DESYNC: Game not synchronized anymore!") == 1 )
+                  if ( BBSupportDbgReport(1, "Main\\States\\StateGameII.cpp", 714, "DESYNC: Game not synchronized anymore!") == 1 )
+                  {
                     __debugbreak();
+                  }
                 }
                 if ( (unsigned int)std::vector<CStateGame::CRC_HistoryEntry>::size(&this->m_vCRCHistory) > 0x14 )
                 {
-                  v140 = (struct std::_Iterator_base12 *)std::begin<std::vector<CStateGame::CRC_HistoryEntry>>(
-                                                           v70,
-                                                           &this->m_vCRCHistory);
+                  v140 = (struct std::_Iterator_base12 *)std::begin<std::vector<CStateGame::CRC_HistoryEntry>>(v70, &this->m_vCRCHistory);
                   v125 = v140;
                   LOBYTE(v317) = 12;
                   v79 = &v62.m_uU14;
@@ -2281,9 +2362,13 @@ LABEL_269:
                 this->m_uValidTick = CGameData::GetTickCounter(g_pGameData);
                 v264 = 1;
                 if ( m_wParam == 2 )
+                {
                   v264 = CTextMsgHandler::AddTextMsg(445, 0, 1, 1);
+                }
                 if ( v264 )
+                {
                   CTextMsgHandler::AddTextMsg(1957, 0, 1);
+                }
               }
               else
               {
@@ -2315,32 +2400,24 @@ LABEL_269:
             }
             else if ( g_pGameType->m_sPlayerValidTicks[v228] != v215 )
             {
-              for ( i = 0; i < 8; ++i )
+              for ( i = 0;
+                    i < 8;
+                    ++i )
               {
                 if ( g_pGameType->m_sPlayerType[i] == 1 )
                 {
                   Instance = StormManager::GetInstance();
                   if ( g_pGameType->m_sPlayerPeerId[i] != StormManager::GetLocalPeerId(Instance) )
                   {
-                    v112 = (std::string *)INetworkEngine::ConvertIPAddress(
-                                            (_DWORD ***)g_pNetworkEngine,
-                                            v286,
-                                            g_pGameType->m_uiIPPlayer[i]);
+                    v112 = (std::string *)INetworkEngine::ConvertIPAddress((_DWORD ***)g_pNetworkEngine, v286, g_pGameType->m_uiIPPlayer[i]);
                     v113 = v112;
                     v317 = 4;
                     v21 = std::string::c_str(v112);
                     CTrace::Print("Connectionloss: Removing Player index%i, with ip %s", i, v21);
                     v317 = -1;
                     std::string::~string(v286);
-                    v247 = INetworkEngine::KickPlayerPeerId(
-                             (CGameHost **)g_pNetworkEngine,
-                             g_pGameType->m_sPlayerPeerId[i]);
-                    if ( !v247
-                      && BBSupportDbgReportF(
-                           2,
-                           "Main\\States\\StateGameII.cpp",
-                           549,
-                           "Connectionloss: Player could not be removed! Tracefile -> Thomas") == 1 )
+                    v247 = INetworkEngine::KickPlayerPeerId((CGameHost **)g_pNetworkEngine, g_pGameType->m_sPlayerPeerId[i]);
+                    if ( !v247 && BBSupportDbgReportF(2, "Main\\States\\StateGameII.cpp", 549, "Connectionloss: Player could not be removed! Tracefile -> Thomas") == 1 )
                     {
                       __debugbreak();
                     }
@@ -2377,9 +2454,13 @@ CStateGame__OnEvent___def_18AD2EB:
             v269.y = HIWORD(_sEvent->m_lParam);
             v269.x = LOWORD(v269.x);
             if ( SLOWORD(v269.y) < 0 )
+            {
               v269.y = 0;
+            }
             if ( SLOWORD(v269.x) < 0 )
+            {
               v269.x = 0;
+            }
             this->m_sGameData.m_iScreenMouseX = v269.x;
             this->m_sGameData.m_iScreenMouseY = v269.y;
             if ( this->byteF8 )
@@ -2394,11 +2475,17 @@ CStateGame__OnEvent___def_18AD2EB:
               ClientToScreen(g_hWnd, &Point);
               v244 = Point.y - *(_DWORD *)&this->?[21];
               if ( v244 > 0 )
+              {
                 CStateGame::ZoomOut(this, v244 / 4);
+              }
               if ( v244 < 0 )
+              {
                 CStateGame::ZoomIn(this, -v244 / 4);
+              }
               if ( (unsigned __int8)_ThemeHelper::GetProc(v63, v64) && v244 )
+              {
                 SetCursorPos(*(_DWORD *)&this->?[17], *(_DWORD *)&this->?[21]);
+              }
               return 1;
             }
             else if ( this->byteF4 )
@@ -2406,20 +2493,23 @@ CStateGame__OnEvent___def_18AD2EB:
               Number = v269.x - *(_DWORD *)&this->?[1];
               v131 = v269.y - *(_DWORD *)&this->?[5];
               if ( (unsigned int)j__abs(Number) <= 4 && (unsigned int)j__abs(v131) <= 4 )
+              {
                 return 1;
+              }
               if ( v269.x >= *(_DWORD *)this->m_uClientSizeRelated210 )
+              {
                 x = v269.x;
+              }
               else
+              {
                 x = *(_DWORD *)this->m_uClientSizeRelated210;
+              }
               v269.x = x;
               dword_402F3B4 = *(_DWORD *)&this->?[1];
               dword_402F3B8 = *(_DWORD *)&this->?[5];
               dword_402F3BC = x;
               dword_402F3C0 = v269.y;
-              if ( IGfxEngine::GetCursorShape(g_pGfxEngine) != 3
-                && IGfxEngine::GetCursorShape(g_pGfxEngine) != 6
-                && IGfxEngine::GetCursorShape(g_pGfxEngine) != 7
-                && IGfxEngine::GetCursorShape(g_pGfxEngine) != 4 )
+              if ( IGfxEngine::GetCursorShape(g_pGfxEngine) != 3 && IGfxEngine::GetCursorShape(g_pGfxEngine) != 6 && IGfxEngine::GetCursorShape(g_pGfxEngine) != 7 && IGfxEngine::GetCursorShape(g_pGfxEngine) != 4 )
               {
                 v30 = IGfxEngine::ConvertRgbToHicol(255, 255, 255);
                 IGfxEngine::DrawRectangle(g_pGfxEngine, (struct tagRECT *)&dword_402F3B4, v30);
@@ -2459,8 +2549,7 @@ CStateGame__OnEvent___def_18AD2EB:
                   this->m_sGameData.m_uCamY = *(_DWORD *)&this->?[29] - v205;
                 }
                 CStateGame::VerifyWorldOffset(this);
-                if ( !(unsigned __int8)_ThemeHelper::GetProc(v63, v64)
-                  || v269.x == *(_DWORD *)&this->?[17] && v269.y == *(_DWORD *)&this->?[21] )
+                if ( !(unsigned __int8)_ThemeHelper::GetProc(v63, v64) || v269.x == *(_DWORD *)&this->?[17] && v269.y == *(_DWORD *)&this->?[21] )
                 {
                   return 1;
                 }
@@ -2500,7 +2589,9 @@ CStateGame__OnEvent___def_18AD2EB:
                 v136 = abs(v269.x - *(_DWORD *)&this->?[17]);
                 v137 = abs(v269.y - *(_DWORD *)&this->?[21]);
                 if ( v136 > 4 || v137 > 4 )
+                {
                   this->byteF6 = 1;
+                }
                 return 1;
               }
             }
@@ -2511,7 +2602,9 @@ CStateGame__OnEvent___def_18AD2EB:
               if ( v269.x )
               {
                 if ( v269.x == *(_DWORD *)&this->m_uClientSizeRelated210[8] - 1 )
+                {
                   this->dword100 = 2;
+                }
               }
               else
               {
@@ -2520,7 +2613,9 @@ CStateGame__OnEvent___def_18AD2EB:
               if ( v269.y )
               {
                 if ( v269.y == *(_DWORD *)&this->m_uClientSizeRelated210[12] - 1 )
+                {
                   this->dword104 = 4;
+                }
               }
               else
               {
@@ -2568,14 +2663,8 @@ CStateGame__OnEvent___def_18AD2EB:
                   this->byte48 = 0;
                 }
                 this->byteF8 = 1;
-                this->m_sGameData.m_uCamX = ((int)this->m_sGameData.m_uZoom >> 16)
-                                          * this->m_sGameData.m_iHeight
-                                          * v95.x
-                                          / 0xA0u;
-                this->m_sGameData.m_uCamY = this->m_sGameData.m_iHeight
-                                          * v95.y
-                                          * ((int)this->m_sGameData.m_uZoom >> 16)
-                                          / 0xA0u;
+                this->m_sGameData.m_uCamX = ((int)this->m_sGameData.m_uZoom >> 16) * this->m_sGameData.m_iHeight * v95.x / 0xA0u;
+                this->m_sGameData.m_uCamY = this->m_sGameData.m_iHeight * v95.y * ((int)this->m_sGameData.m_uZoom >> 16) / 0xA0u;
                 this->m_sGameData.m_uCamX -= this->m_sGameData.m_uCamY / 2;
                 this->m_sGameData.m_uCamY /= 2;
                 CStateGame::VerifyWorldOffset(this);
@@ -2620,23 +2709,21 @@ CStateGame__OnEvent___def_18AD2EB:
             v235 = (unsigned __int16)_sEvent->m_lParam;
             m_lParam_high = HIWORD(_sEvent->m_lParam);
             if ( v235 >= *(_DWORD *)this->m_uClientSizeRelated210 )
+            {
               v212 = v235;
+            }
             else
+            {
               v212 = *(_DWORD *)this->m_uClientSizeRelated210;
+            }
             v235 = v212;
             v225 = 0;
             v240 = 0;
             v233 = 477;
-            if ( (unsigned int)abs(v212 - *(_DWORD *)&this->?[1]) <= 4
-              && (unsigned int)abs(m_lParam_high - *(_DWORD *)&this->?[5]) <= 4 )
+            if ( (unsigned int)abs(v212 - *(_DWORD *)&this->?[1]) <= 4 && (unsigned int)abs(m_lParam_high - *(_DWORD *)&this->?[5]) <= 4 )
             {
               v233 = 477;
-              v91 = IGfxEngine::GetClosestMapPoint(
-                      g_pGfxEngine,
-                      *(_DWORD *)&this->?[1],
-                      *(_DWORD *)&this->?[5],
-                      &v128,
-                      &v129);
+              v91 = IGfxEngine::GetClosestMapPoint(g_pGfxEngine, *(_DWORD *)&this->?[1], *(_DWORD *)&this->?[5], &v128, &v129);
               v225 = ((unsigned __int16)v129 << 16) | (unsigned __int16)v128;
               v240 = _sEvent->m_wParam;
             }
@@ -2645,19 +2732,27 @@ CStateGame__OnEvent___def_18AD2EB:
               IGfxEngine::DrawRectangle(g_pGfxEngine, 0, 0);
               v225 = ((unsigned __int16)*(_DWORD *)&this->?[5] << 16) | (unsigned __int16)*(_DWORD *)&this->?[1];
               if ( v235 < 0 )
+              {
                 v211 = 0;
+              }
               else
+              {
                 v211 = v235;
+              }
               v126 = v211;
               v210 = m_lParam_high;
               v127 = m_lParam_high;
               v240 = ((unsigned __int16)m_lParam_high << 16) | (unsigned __int16)v211;
               if ( (_sEvent->m_wParam & 8) != 0 )
+              {
                 v240 |= 0x80000000;
+              }
               v233 = 478;
             }
             if ( !(dword_402F3B8 + dword_402F3BC + dword_402F3C0 + dword_402F3B4) && v233 == 478 )
+            {
               return 1;
+            }
             v29 = CPlayerManager::GetLocalPlayerId();
             CStateGame::SendLogicMessage(this, v233, v240, v225, v29, 0, 0);
             dword_402F3B8 = 0;
@@ -2732,7 +2827,9 @@ CStateGame__OnEvent___def_18AD2EB:
             }
           case 7u:
             if ( !this->byteF5 )
+            {
               return 1;
+            }
             IGfxEngine::LockCursorShape(g_pGfxEngine, 0);
             this->byteF5 = 0;
             this->byteF4 = 0;
@@ -2762,7 +2859,9 @@ LABEL_148:
                 this->byteF6 = 0;
                 IGfxEngine::FixCursor(g_pGfxEngine, 0, 0);
                 if ( !(unsigned __int8)_ThemeHelper::GetProc(v63, v64) )
+                {
                   return 1;
+                }
                 ClientToScreen(g_hWnd, (LPPOINT)&this->?[9]);
                 SetCursorPos(*(_DWORD *)&this->?[9], *(_DWORD *)&this->?[13]);
                 return 1;
@@ -2772,12 +2871,7 @@ LABEL_148:
                 v202 = 0;
                 v232 = 0;
                 v147 = 480;
-                v139 = IGfxEngine::GetClosestMapPoint(
-                         g_pGfxEngine,
-                         *(_DWORD *)&this->?[9],
-                         *(_DWORD *)&this->?[13],
-                         &v222,
-                         &v221);
+                v139 = IGfxEngine::GetClosestMapPoint(g_pGfxEngine, *(_DWORD *)&this->?[9], *(_DWORD *)&this->?[13], &v222, &v221);
                 if ( v139 < 0 || v222 <= 0 || v221 <= 0 )
                 {
                   v222 = 0;
@@ -2786,7 +2880,9 @@ LABEL_148:
                 v202 = ((unsigned __int16)v221 << 16) | (unsigned __int16)v222;
                 v232 = _sEvent->m_wParam;
                 if ( v232 == 24 )
+                {
                   v232 = 16;
+                }
                 v37 = CPlayerManager::GetLocalPlayerId();
                 CStateGame::SendLogicMessage(this, v147, v232, v202, v37, 0, 0);
                 return 1;
@@ -2795,18 +2891,28 @@ LABEL_148:
           case 8u:
             v190 = _sEvent->m_lParam;
             if ( !this->byte126 )
+            {
               goto LABEL_381;
+            }
             if ( (v190 & 8) == 0 )
+            {
               goto LABEL_381;
+            }
             v256 = _sEvent->m_wParam;
             if ( v256 == 'S' )
+            {
               goto LABEL_381;
+            }
             v192 = v256 >= 65;
             v191 = v256 <= 90;
             if ( !v191 || !v192 )
+            {
               goto LABEL_381;
+            }
             if ( (v190 & 4) == 0 )
+            {
               v256 += 32;
+            }
             if ( v256 == 'q' )
             {
               CStateGame::EnableOrDisableDebugString(this, this->m_bAllowDebugString == 0);
@@ -2821,7 +2927,9 @@ LABEL_148:
               String::~String((String *)v305);
               IGfxEngine::EnableDebugValueCallback(g_pGfxEngine, 0);
               if ( !this->m_bAllowDebugString )
+              {
                 CStateGame::EnableOrDisableDebugString(this, 1);
+              }
               return 0;
             }
             else
@@ -2830,7 +2938,9 @@ LABEL_148:
               if ( v189 )
               {
                 if ( !this->m_bAllowDebugString )
+                {
                   CStateGame::EnableOrDisableDebugString(this, 1);
+                }
                 IGfxEngine::EnableDebugValueCallback(g_pGfxEngine, v189);
                 return 0;
               }
@@ -2850,7 +2960,9 @@ LABEL_381:
                     goto CStateGame__OnEvent___def_18B0CD2;
                   case 1:
                     if ( _sEvent->m_lParam )
+                    {
                       goto CStateGame__OnEvent___def_18B0CD2;
+                    }
                     v157 = CEvn_Event::CEvn_Event(&v298, 0x6Bu, 1u, 0, 0);
                     v317 = 32;
                     IEventEngine::SendAMessage(g_pEvnEngine, v157);
@@ -2919,7 +3031,9 @@ LABEL_381:
                     goto CStateGame__OnEvent___def_18B0CD2;
                   case 38:
                     if ( !this->byte126 )
+                    {
                       goto CStateGame__OnEvent___def_18B0CD2;
+                    }
                     if ( (_sEvent->m_lParam & 8) != 0 )
                     {
                       v159 = CEvn_Event::CEvn_Event(&v294, 0x17u, 0, 0, 0);
@@ -2948,9 +3062,13 @@ LABEL_381:
                     {
                       v259 = _sEvent->m_wParam;
                       if ( v259 == 48 )
+                      {
                         v186 = 58;
+                      }
                       else
+                      {
                         v186 = v259;
+                      }
                       v259 = v186 - 48;
                       if ( (_sEvent->m_lParam & 8) != 0 )
                       {
@@ -2966,9 +3084,7 @@ LABEL_381:
                       {
                         v261 = (_sEvent->m_lParam & 0x1C) == 0;
                         v246 = v261;
-                        if ( v261
-                          && this->dword118 == v259
-                          && this->dword11C > INetworkEngine::GetVirtualTick((CGameHost **)g_pNetworkEngine) - 6 )
+                        if ( v261 && this->dword118 == v259 && this->dword11C > INetworkEngine::GetVirtualTick((CGameHost **)g_pNetworkEngine) - 6 )
                         {
                           v60 = CPlayerManager::GetLocalPlayerId();
                           v153 = CEvn_Logic::CEvn_Logic(&v273, 0x1D9u, v259, 0, v60, 0, 0);
@@ -2995,7 +3111,9 @@ LABEL_381:
                     break;
                   case 74:
                     if ( (_sEvent->m_lParam & 8) == 0 )
+                    {
                       goto CStateGame__OnEvent___def_18B0CD2;
+                    }
                     if ( !IEventEngine::IsEventPlaying(g_pEvnEngine) )
                     {
                       if ( IEventEngine::IsEventRecording(g_pEvnEngine) )
@@ -3021,7 +3139,9 @@ LABEL_381:
                     break;
                   case 75:
                     if ( !g_pGame || !CStateGame::CanSave(g_pGame) || (_sEvent->m_lParam & 8) == 0 )
+                    {
                       goto CStateGame__OnEvent___def_18B0CD2;
+                    }
                     CStateGame::SaveGame(this, 1);
                     result = 1;
                     break;
@@ -3036,7 +3156,9 @@ LABEL_381:
                   case 96:
                   case 97:
                     if ( !this->byte126 )
+                    {
                       goto CStateGame__OnEvent___def_18B0CD2;
+                    }
                     if ( (_sEvent->m_lParam & 8) != 0 )
                     {
                       v217 = _sEvent->m_wParam - 96;
@@ -3050,26 +3172,36 @@ LABEL_381:
                     else
                     {
                       if ( _sEvent->m_wParam == 105 )
+                      {
                         g_iGameSpeed = 20;
+                      }
                       else
+                      {
                         g_iGameSpeed = _sEvent->m_wParam - 96;
+                      }
                       result = 1;
                     }
                     break;
                   case 102:
                     if ( this->byte126 )
+                    {
                       g_iGameSpeed = 99;
+                    }
                     goto CStateGame__OnEvent___def_18B0CD2;
                   case 111:
                     if ( !this->byte126 || (_sEvent->m_lParam & 8) == 0 || !this->byte126 )
+                    {
                       goto CStateGame__OnEvent___def_18B0CD2;
+                    }
                     v262 = (*(unsigned __int8 (__thiscall **)(void *))(*(_DWORD *)g_pFogging + 36))(g_pFogging) == 0;
                     (*(void (__thiscall **)(void *, bool))(*(_DWORD *)g_pFogging + 40))(g_pFogging, v262);
                     result = 1;
                     break;
                   case 112:
                     if ( !this->byte47 && (!g_pGameType || !CGameType::IsMultiplayerGame(g_pGameType)) )
+                    {
                       this->byte45 = 1;
+                    }
                     result = 1;
                     break;
                   case 114:
@@ -3127,9 +3259,13 @@ LABEL_363:
           case 0xBu:
             m_wParam_high = HIWORD(_sEvent->m_wParam);
             if ( (__int16)m_wParam_high <= 0 )
+            {
               CStateGame::ZoomOut(this, 5 * (-(__int16)m_wParam_high / 120));
+            }
             else
+            {
               CStateGame::ZoomIn(this, 5 * (m_wParam_high / 120));
+            }
             return 1;
           case 0xFu:
             v214 = _sEvent->m_lParam;
@@ -3149,7 +3285,9 @@ LABEL_363:
 CStateGame__OnEvent___def_18B0CD2:
             v150 = _sEvent->m_wParam;
             if ( v150 != 9 || _sEvent->m_lParam )
+            {
               goto CStateGame__OnEvent___def_18AD2EB;
+            }
             v149 = CEvn_Event::CEvn_Event(&v293, 0x6Bu, 0, 0, 0);
             v317 = 38;
             IEventEngine::SendAMessage(g_pEvnEngine, v149);
@@ -3203,11 +3341,7 @@ CStateGame__OnEvent___def_18B0CD2:
               {
                 *(_DWORD *)&this->field_134[16] = _sEvent->m_lParam;
               }
-              else if ( BBSupportDbgReportF(
-                          2,
-                          "Main\\States\\StateGameII.cpp",
-                          1650,
-                          "StateGameII: Invalid setting item identifier!") == 1 )
+              else if ( BBSupportDbgReportF(2, "Main\\States\\StateGameII.cpp", 1650, "StateGameII: Invalid setting item identifier!") == 1 )
               {
                 __debugbreak();
               }
@@ -3254,7 +3388,9 @@ CStateGame__OnEvent___def_18B0CD2:
             v220 = 0;
             v39 = CPlayerManager::GetLocalPlayerId();
             v197 = CAlliances::AllianceId(v39);
-            for ( j = 1; j <= CPlayerManager::LastPlayerId(); ++j )
+            for ( j = 1;
+                  j <= CPlayerManager::LastPlayerId();
+                  ++j )
             {
               if ( CPlayerManager::GetLocalPlayerId() != j && !CPlayerManager::IsAI(j) )
               {
@@ -3262,13 +3398,21 @@ CStateGame__OnEvent___def_18B0CD2:
                 v198 = CAlliances::AllianceId(j);
                 v199 = _sEvent->m_wParam;
                 if ( v199 == 1 )
+                {
                   v268 = v198 == v197;
+                }
                 else
+                {
                   v268 = v199 != 2 || v198 != v197;
+                }
                 if ( v268 )
+                {
                   v196 = 1 << (j - 1);
+                }
                 else
+                {
                   v196 = 0;
+                }
                 v220 |= v196;
               }
             }
@@ -3291,21 +3435,21 @@ CStateGame__OnEvent___def_18B0CD2:
           case 0x23u:
             v231 = _sEvent->m_wParam;
             if ( v231 && std::string::length(v231) )
+            {
               v195 = std::string::c_str((std::string *)v231);
+            }
             else
+            {
               v195 = 0;
+            }
             v267 = v195;
             if ( !v195 || *v267 != 33 )
+            {
               goto LABEL_354;
+            }
             if ( (*(unsigned __int8 (__thiscall **)(void *, char *))(*(_DWORD *)g_pHJBMgr + 4))(g_pHJBMgr, v267) )
             {
-              if ( (unsigned __int8)IHJBMgr::LocalIsHJBAllowed()
-                && (v40 = CPlayerManager::GetLocalPlayerId(),
-                    RealPlayerName = CGameType::GetRealPlayerName(g_pGameType, v40 - 1),
-                    (*(unsigned __int8 (__thiscall **)(void *, std::wstring *))(*(_DWORD *)g_pHJBMgr + 8))(
-                      g_pHJBMgr,
-                      RealPlayerName))
-                && (v42 = CStateGame::GameData(this), !CGameData::IsLadder(v42)) )
+              if ( (unsigned __int8)IHJBMgr::LocalIsHJBAllowed() && (v40 = CPlayerManager::GetLocalPlayerId(), RealPlayerName = CGameType::GetRealPlayerName(g_pGameType, v40 - 1), (*(unsigned __int8 (__thiscall **)(void *, std::wstring *))(*(_DWORD *)g_pHJBMgr + 8))(g_pHJBMgr, RealPlayerName)) && (v42 = CStateGame::GameData(this), !CGameData::IsLadder(v42)) )
               {
                 v43 = CPlayerManager::GetLocalPlayerId();
                 CStateGame::SendLogicMessage(this, 0x1E8u, 0, 0, v43, 0, 0);
@@ -3331,28 +3475,14 @@ LABEL_354:
                 v317 = 26;
                 ChatMessageFilter = CGameSettings::GetChatMessageFilter();
                 v48 = CPlayerManager::GetLocalPlayerId();
-                INetworkEngine::SendAsyncNetMessage(
-                  (INetworkEngine *)g_pNetworkEngine,
-                  &v307,
-                  (1 << (v48 - 1)) | ChatMessageFilter);
+                INetworkEngine::SendAsyncNetMessage((INetworkEngine *)g_pNetworkEngine, &v307, (1 << (v48 - 1)) | ChatMessageFilter);
                 v317 = -1;
                 CEvn_Logic::~CEvn_Logic(&v307);
                 return 1;
               }
               else
               {
-                if ( v267[1] == 'i'
-                  && v267[2] == 'n'
-                  && v267[3] == 'c'
-                  && v267[4] == 'u'
-                  && v267[5] == 'b'
-                  && v267[6] == 'a'
-                  && v267[7] == 't'
-                  && v267[8] == 'i'
-                  && v267[9] == 'o'
-                  && v267[10] == 'n'
-                  && v267[11] == '2'
-                  && !v267[12] )
+                if ( v267[1] == 'i' && v267[2] == 'n' && v267[3] == 'c' && v267[4] == 'u' && v267[5] == 'b' && v267[6] == 'a' && v267[7] == 't' && v267[8] == 'i' && v267[9] == 'o' && v267[10] == 'n' && v267[11] == '2' && !v267[12] )
                 {
                   if ( this->byte126 )
                   {
@@ -3369,14 +3499,7 @@ LABEL_354:
                 {
                   v90 = &v62;
                   v89 = std::string::string(&v62, v231);
-                  CStateGame::PerformCommand(
-                    v62.m_uU4,
-                    v62.m_uU8,
-                    v62.m_uUC,
-                    v62.m_uU10,
-                    v62.m_uU14,
-                    v62.m_uU18,
-                    v62.m_uU1C);
+                  CStateGame::PerformCommand(v62.m_uU4, v62.m_uU8, v62.m_uUC, v62.m_uU10, v62.m_uU14, v62.m_uU18, v62.m_uU1C);
                 }
                 return 1;
               }
@@ -3398,12 +3521,16 @@ LABEL_354:
             return 1;
           case 0x34u:
             if ( CGameData::GetMode(&this->m_sGameData) == 5 )
+            {
               return 1;
+            }
             if ( !CGameData::IsGameWon(&this->m_sGameData) )
             {
               CGameData::TeamWon(&this->m_sGameData, _sEvent->m_wParam);
               if ( CGameData::IsTutorial(&this->m_sGameData) )
+              {
                 return 1;
+              }
               IGuiEngine::SelectControl(g_pGUIEngine, 0, 611, 1);
               IGuiEngine::SelectControl(g_pGUIEngine, 8, 930, 1);
               v3 = CPlayerManager::GetLocalPlayerId();
@@ -3432,7 +3559,9 @@ LABEL_354:
               else
               {
                 if ( CGameData::IsNetworkGame(&this->m_sGameData) )
+                {
                   (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pFogging + 40))(g_pFogging, 1);
+                }
                 v142 = CEvn_Event::CEvn_Event(&v301, 0x261u, 0, 0, 0);
                 v102 = &v142->__vftable;
                 v317 = 1;
@@ -3453,12 +3582,18 @@ LABEL_354:
                 }
               }
               v185 = 0;
-              for ( k = 0; ; ++k )
+              for ( k = 0;
+                    ;
+                    ++k )
               {
                 if ( k >= CPlayerManager::LastPlayerId() )
+                {
                   goto LABEL_61;
+                }
                 if ( g_pGameType->m_sPlayerTeam[k] == CGameData::TeamWon(&this->m_sGameData) - 1 )
+                {
                   break;
+                }
               }
               v185 = g_pGameType->m_sPlayerPeerId[k];
 LABEL_61:
@@ -3466,12 +3601,7 @@ LABEL_61:
               CStatistic::FreezeEcoStatistic((CStatistic *)&g_cStatistic);
               return 1;
             }
-            if ( CGameData::TeamWon(&this->m_sGameData) != _sEvent->m_wParam
-              && BBSupportDbgReport(
-                   2,
-                   "Main\\States\\StateGameII.cpp",
-                   365,
-                   "m_cGameData.TeamWon() == _rEvent.m_wParam") == 1 )
+            if ( CGameData::TeamWon(&this->m_sGameData) != _sEvent->m_wParam && BBSupportDbgReport(2, "Main\\States\\StateGameII.cpp", 365, "m_cGameData.TeamWon() == _rEvent.m_wParam") == 1 )
             {
               __debugbreak();
             }
@@ -3499,7 +3629,9 @@ LABEL_61:
               std::wstring::~wstring(&v279);
               v184 = v106;
               if ( v106 >= 0x21 )
+              {
                 report_rangecheckfailure();
+              }
               Dest[v184] = 0;
               v62.m_uU1C = (int)Dest;
               v62.m_uU18 = 1;
@@ -3509,9 +3641,13 @@ LABEL_61:
             }
             CPlayerManager::PlayerDied(_sEvent->m_wParam);
             if ( CPlayerManager::IsAI(_sEvent->m_wParam) )
+            {
               (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 32))(g_pAI, _sEvent->m_wParam);
+            }
             CStatistic::FreezeEcoStatistic((CStatistic *)&g_cStatistic);
-            for ( m = 1; m < 83; ++m )
+            for ( m = 1;
+                  m < 83;
+                  ++m )
             {
               if ( m != 46 && m != 47 && m != 48 )
               {
@@ -3521,7 +3657,9 @@ LABEL_61:
                       n = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v16) )
                 {
                   if ( IEntity::FlagBits(n, (EntityFlag)4096) )
+                  {
                     CBuilding::Switch();
+                  }
                   v16 = IAnimatedEntity::Next(n);
                 }
               }
@@ -3541,7 +3679,9 @@ LABEL_61:
             std::wstring::~wstring(&v278);
             v183 = v111;
             if ( v111 >= 0x21 )
+            {
               report_rangecheckfailure();
+            }
             v315[v183] = 0;
             CPlayerManager::SetPlayerControl(_sEvent->m_wParam, 2);
             v62.m_uU1C = (int)v315;
@@ -3551,14 +3691,18 @@ LABEL_61:
             CTextMsgHandler::AddTextMsg(2258, v19, 0, 1, v315);
             CStateGame::UpdateToGuiInfoStruct(this);
             if ( CPlayerManager::IsAlive(_sEvent->m_wParam) )
+            {
               (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 28))(g_pAI, _sEvent->m_wParam);
+            }
             return 1;
           case 0x67u:
             CMinimapHandler::FilterKeyPressed(_sEvent->m_wParam);
             return 1;
           case 0x6Bu:
             if ( !_sEvent->m_wParam )
+            {
               CTextMsgHandler::AddTextMsg(2252, 0, 1, 1);
+            }
             return 1;
           default:
             goto CStateGame__OnEvent___def_18AD2EB;
@@ -3567,64 +3711,21 @@ LABEL_61:
     }
     else
     {
-      if ( !j____RTDynamicCast(
-              (void **)&_sEvent->__vftable,
-              0,
-              &CEvn_Event__RTTI_Type_Descriptor_,
-              &CEvn_Logic__RTTI_Type_Descriptor_,
-              0)
-        && BBSupportDbgReportF(
-             2,
-             "Main\\States\\StateGameII.cpp",
-             328,
-             "Message != NET_LOGIC_MSG: m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x",
-             _sEvent->m_lParam,
-             _sEvent->m_iEventId,
-             _sEvent->m_wParam,
-             v63) == 1 )
+      if ( !j____RTDynamicCast((void **)&_sEvent->__vftable, 0, &CEvn_Event__RTTI_Type_Descriptor_, &CEvn_Logic__RTTI_Type_Descriptor_, 0) && BBSupportDbgReportF(2, "Main\\States\\StateGameII.cpp", 328, "Message != NET_LOGIC_MSG: m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x", _sEvent->m_lParam, _sEvent->m_iEventId, _sEvent->m_wParam, v63) == 1 )
       {
         __debugbreak();
       }
       v266 = _sEvent;
-      if ( _sEvent->m_iDataSize
-        && !v266->m_iData
-        && BBSupportDbgReportF(
-             2,
-             "Main\\States\\StateGameII.cpp",
-             333,
-             "m_iData != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x",
-             v266->m_iOwner,
-             v266->m_lParam,
-             v266->m_iEventId,
-             v266->m_wParam,
-             v266->m_iDataSize) == 1 )
+      if ( _sEvent->m_iDataSize && !v266->m_iData && BBSupportDbgReportF(2, "Main\\States\\StateGameII.cpp", 333, "m_iData != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x", v266->m_iOwner, v266->m_lParam, v266->m_iEventId, v266->m_wParam, v266->m_iDataSize) == 1 )
       {
         __debugbreak();
       }
-      if ( v266->m_iData
-        && !v266->m_iDataSize
-        && BBSupportDbgReportF(
-             2,
-             "Main\\States\\StateGameII.cpp",
-             337,
-             "m_iDataSize != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x",
-             v266->m_iOwner,
-             v266->m_lParam,
-             v266->m_iEventId,
-             v266->m_wParam,
-             v266->m_iDataSize) == 1 )
+      if ( v266->m_iData && !v266->m_iDataSize && BBSupportDbgReportF(2, "Main\\States\\StateGameII.cpp", 337, "m_iDataSize != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x", v266->m_iOwner, v266->m_lParam, v266->m_iEventId, v266->m_wParam, v266->m_iDataSize) == 1 )
       {
         __debugbreak();
       }
       v145 = _sEvent;
-      if ( !(*(unsigned __int8 (__thiscall **)(_DWORD, struct CEvn_Logic *))(*(_DWORD *)this->m_sLogicRingBuffer + 4))(
-              this->m_sLogicRingBuffer,
-              _sEvent)
-        && BBSupportDbgReport(
-             1,
-             "Main\\States\\StateGameII.cpp",
-             344,
-             "Internal error (L2)- aborting!\nInterner Fehler (L2) aufgetreten! Programm wird abgebrochen!") == 1 )
+      if ( !(*(unsigned __int8 (__thiscall **)(_DWORD, struct CEvn_Logic *))(*(_DWORD *)this->m_sLogicRingBuffer + 4))(this->m_sLogicRingBuffer, _sEvent) && BBSupportDbgReport(1, "Main\\States\\StateGameII.cpp", 344, "Internal error (L2)- aborting!\nInterner Fehler (L2) aufgetreten! Programm wird abgebrochen!") == 1 )
       {
         __debugbreak();
       }
@@ -3633,64 +3734,21 @@ LABEL_61:
   }
   else
   {
-    if ( !j____RTDynamicCast(
-            (void **)&_sEvent->__vftable,
-            0,
-            &CEvn_Event__RTTI_Type_Descriptor_,
-            &CEvn_Logic__RTTI_Type_Descriptor_,
-            0)
-      && BBSupportDbgReportF(
-           2,
-           "Main\\States\\StateGameII.cpp",
-           303,
-           "Message != LOGIC_MSG: m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x",
-           _sEvent->m_lParam,
-           _sEvent->m_iEventId,
-           _sEvent->m_wParam,
-           v63) == 1 )
+    if ( !j____RTDynamicCast((void **)&_sEvent->__vftable, 0, &CEvn_Event__RTTI_Type_Descriptor_, &CEvn_Logic__RTTI_Type_Descriptor_, 0) && BBSupportDbgReportF(2, "Main\\States\\StateGameII.cpp", 303, "Message != LOGIC_MSG: m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x", _sEvent->m_lParam, _sEvent->m_iEventId, _sEvent->m_wParam, v63) == 1 )
     {
       __debugbreak();
     }
     v265 = _sEvent;
-    if ( _sEvent->m_iDataSize
-      && !v265->m_iData
-      && BBSupportDbgReportF(
-           2,
-           "Main\\States\\StateGameII.cpp",
-           308,
-           "m_iData != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x",
-           v265->m_iOwner,
-           v265->m_lParam,
-           v265->m_iEventId,
-           v265->m_wParam,
-           v265->m_iDataSize) == 1 )
+    if ( _sEvent->m_iDataSize && !v265->m_iData && BBSupportDbgReportF(2, "Main\\States\\StateGameII.cpp", 308, "m_iData != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x", v265->m_iOwner, v265->m_lParam, v265->m_iEventId, v265->m_wParam, v265->m_iDataSize) == 1 )
     {
       __debugbreak();
     }
-    if ( v265->m_iData
-      && !v265->m_iDataSize
-      && BBSupportDbgReportF(
-           2,
-           "Main\\States\\StateGameII.cpp",
-           312,
-           "m_iDataSize != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x",
-           v265->m_iOwner,
-           v265->m_lParam,
-           v265->m_iEventId,
-           v265->m_wParam,
-           v265->m_iDataSize) == 1 )
+    if ( v265->m_iData && !v265->m_iDataSize && BBSupportDbgReportF(2, "Main\\States\\StateGameII.cpp", 312, "m_iDataSize != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x", v265->m_iOwner, v265->m_lParam, v265->m_iEventId, v265->m_wParam, v265->m_iDataSize) == 1 )
     {
       __debugbreak();
     }
     v146 = _sEvent;
-    if ( !(*(unsigned __int8 (__thiscall **)(_DWORD, struct CEvn_Logic *))(*(_DWORD *)this->m_sLogicRingBuffer + 4))(
-            this->m_sLogicRingBuffer,
-            _sEvent)
-      && BBSupportDbgReport(
-           1,
-           "Main\\States\\StateGameII.cpp",
-           319,
-           "Internal error (L1)- aborting!\nInterner Fehler (L1) aufgetreten! Programm wird abgebrochen!") == 1 )
+    if ( !(*(unsigned __int8 (__thiscall **)(_DWORD, struct CEvn_Logic *))(*(_DWORD *)this->m_sLogicRingBuffer + 4))(this->m_sLogicRingBuffer, _sEvent) && BBSupportDbgReport(1, "Main\\States\\StateGameII.cpp", 319, "Internal error (L1)- aborting!\nInterner Fehler (L1) aufgetreten! Programm wird abgebrochen!") == 1 )
     {
       __debugbreak();
     }
@@ -3722,9 +3780,13 @@ void  CStateGame::ScrollHorizontal(bool a2) {
   int ScrollStepValue; // [esp+4h] [ebp-4h]
 
   if ( a2 )
+  {
     ScrollStepValue = CGameSettings::GetScrollStepValue();
+  }
   else
+  {
     ScrollStepValue = -CGameSettings::GetScrollStepValue();
+  }
   result = this;
   this->m_sGameData.m_uCamX += ScrollStepValue;
   return result;
@@ -3739,9 +3801,13 @@ void  CStateGame::ScrollVertical(bool a2) {
   int ScrollStepValue; // [esp+4h] [ebp-4h]
 
   if ( a2 )
+  {
     ScrollStepValue = CGameSettings::GetScrollStepValue();
+  }
   else
+  {
     ScrollStepValue = -CGameSettings::GetScrollStepValue();
+  }
   result = this;
   this->m_sGameData.m_uCamY += ScrollStepValue;
   return result;
@@ -3760,34 +3826,44 @@ void  CStateGame::CheckAutosaveTimer(void) {
   int v7; // [esp+10h] [ebp-Ch]
 
   Instance = CConfigManagerPtr::GetInstance();
-  TickCounter = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->GetIntValueNoAdd)(
-                  Instance,
-                  "GAMESETTINGS",
-                  "IsAutosaveEnabled",
-                  1);
+  TickCounter = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))Instance->GetIntValueNoAdd)(Instance, "GAMESETTINGS", "IsAutosaveEnabled", 1);
   if ( !TickCounter )
+  {
     return TickCounter;
+  }
   TickCounter = 60 * CGameSettings::GetAutosaveInterval();
   v7 = TickCounter;
   if ( TickCounter <= 0 )
+  {
     return TickCounter;
+  }
   LOBYTE(TickCounter) = CGameData::IsGameWon(&this->m_sGameData);
   if ( (_BYTE)TickCounter )
+  {
     return TickCounter;
+  }
   LOBYTE(TickCounter) = CStateGame::CanSave(this);
   if ( !(_BYTE)TickCounter )
+  {
     return TickCounter;
+  }
   v4 = CGameData::GetTickCounter(&this->m_sGameData) - this->m_uValidTick;
   v3 = sub_14A8B60(v4);
   if ( v7 < 60 )
+  {
     v7 = 60;
+  }
   LOBYTE(TickCounter) = v3;
   if ( v3 <= v7 )
+  {
     return TickCounter;
+  }
   v5 = CGameData::IsNetworkGame(&this->m_sGameData) && !CGameType::IsHost(g_pGameType);
   LOBYTE(TickCounter) = v5;
   if ( v5 )
+  {
     return TickCounter;
+  }
   CStateGame::SaveGame(this, 2);
   TickCounter = CGameData::GetTickCounter(&this->m_sGameData);
   this->m_uValidTick = TickCounter;

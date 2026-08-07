@@ -10,14 +10,18 @@ class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc(void *
 
   C = (CStateMDRandomMapParameters *)operator new(0xCu);
   if ( C )
+  {
     return CStateMDRandomMapParameters::CStateMDRandomMapParameters(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x14c8180]
-// Decompiled from CStateMDRandomMapParameters *__thiscall CStateMDRandomMapParameters::CStateMDRandomMapParameters(  CStateMDRandomMapParameters *this,  void *a2)
+// Decompiled from CStateMDRandomMapParameters *__thiscall CStateMDRandomMapParameters::CStateMDRandomMapParameters(CStateMDRandomMapParameters *this, void *a2)
  CStateMDRandomMapParameters::CStateMDRandomMapParameters(void * a2) {
   
   __int64 v2; // kr00_8
@@ -40,9 +44,13 @@ class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc(void *
   *(_DWORD *)this = &CStateMDRandomMapParameters::_vftable_;
   *((_BYTE *)this + 4) = (_BYTE)a2;
   if ( *((_BYTE *)this + 4) )
+  {
     dword_4031998 = 6;
+  }
   else
+  {
     dword_4031998 = 7;
+  }
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
   if ( g_pNetworkEngine )
   {
@@ -64,9 +72,13 @@ class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc(void *
     C = (CGameType *)operator new(0x620u);
     LOBYTE(v17) = 1;
     if ( C )
+    {
       v8 = CGameType::CGameType(C);
+    }
     else
+    {
       v8 = 0;
+    }
     LOBYTE(v17) = 0;
     g_pGameType = (int)v8;
     dword_4031938 = 0;
@@ -89,7 +101,9 @@ class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc(void *
     byte_4031FA4 = 0;
     dword_4031F90 = 10;
     dword_4031F88 = 512;
-    for ( i = 0; i < 9; ++i )
+    for ( i = 0;
+          i < 9;
+          ++i )
     {
       dword_4031FA8[4 * i] = 16;
       dword_4031FB4[4 * i] = 0;
@@ -100,7 +114,9 @@ class CGameState * __cdecl CStateMDRandomMapParameters::DynamicCreateFunc(void *
     v3 = g_pStringEngine->GetString(g_pStringEngine, 789);
     j__mbstowcs(Dest, v3, 0x200u);
     if ( !j__wcscmp(Dest, L"dummy") )
+    {
       wcscpy(Dest, L"%s's Game");
+    }
     PlayerName = (_Cnd_internal_imp_t *)CGameSettings::GetPlayerName((int)v13);
     v4 = (const char *)std::wstring::c_str(PlayerName);
     j__swprintf(Buffer, 0x100u, v4);
@@ -141,7 +157,9 @@ bool  CStateMDRandomMapParameters::Perform(void) {
   }
   v1 = dword_403209C + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_403209C = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -238,9 +256,13 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
         C = operator new(0x18u);
         v65 = 2;
         if ( C )
+        {
           v38 = INetworkEngine::INetworkEngine((INetworkEngine *)C, *((_BYTE *)v57 + 4));
+        }
         else
+        {
           v38 = 0;
+        }
         v31 = v38;
         v65 = -1;
         g_pNetworkEngine = (int)v38;
@@ -261,23 +283,7 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
           v14 = v58;
           v23 = &v7;
           v22 = std::wstring::wstring((int)v64);
-          MapData = CGameType::LoadMapData(
-                      v7,
-                      v8,
-                      v9,
-                      v10,
-                      v11,
-                      v12,
-                      v13,
-                      v14,
-                      LocalIP,
-                      v16,
-                      v17,
-                      v18,
-                      AIDifficulty,
-                      v20,
-                      v21,
-                      SBYTE4(v21));
+          MapData = CGameType::LoadMapData(v7, v8, v9, v10, v11, v12, v13, v14, LocalIP, v16, v17, v18, AIDifficulty, v20, v21, SBYTE4(v21));
           v46 = MapData;
           *(_DWORD *)(g_pGameType + 72) = dword_4031928;
           *(_DWORD *)(g_pGameType + 112) = dword_4031924;
@@ -287,17 +293,25 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
           *(_DWORD *)(g_pGameType + 112) = dword_4031924;
           std::wstring::operator=((int)&stru_4031960);
           if ( *((_BYTE *)v57 + 4) )
+          {
             v37 = 2;
+          }
           else
+          {
             v37 = 1;
+          }
           *(_DWORD *)(g_pGameType + 692) = v37;
           *(_DWORD *)(g_pGameType + 740) = 0;
           LocalSlot = CPlayerManager::GetLocalSlot();
           CGameType::SetLocalSlot((CGameType *)g_pGameType, LocalSlot);
           *(_BYTE *)(g_pGameType + 560) = byte_403199C;
           CGameType::SetMCD2TextureSet((CGameType *)g_pGameType, byte_403199D);
-          for ( i = 0; i < *(_DWORD *)(g_pGameType + 112); ++i )
+          for ( i = 0;
+                i < *(_DWORD *)(g_pGameType + 112);
+                ++i )
+          {
             *(_DWORD *)(g_pGameType + 4 * i + 152) %= *(_DWORD *)(g_pGameType + 72);
+          }
           if ( dword_4031934 == 5 )
           {
             *(_BYTE *)(g_pGameType + 748) = 1;
@@ -306,26 +320,30 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
           if ( dword_4031934 == 3 )
           {
             v26 = *(_DWORD *)(g_pGameType + 112) % 2u + (*(_DWORD *)(g_pGameType + 112) >> 1);
-            for ( j = 0; j < *(_DWORD *)(g_pGameType + 72); ++j )
+            for ( j = 0;
+                  j < *(_DWORD *)(g_pGameType + 72);
+                  ++j )
+            {
               *(_DWORD *)(g_pGameType + 4 * j + 76) = v26;
+            }
           }
           CGameType::SetHost((CGameType *)g_pGameType, 1);
           IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, dword_4031998);
-          if ( !g_pMissionCD
-            && BBSupportDbgReport(2, "main\\States\\StateMDRandomMapParameters.cpp", 339, "g_pMissionCD") == 1 )
+          if ( !g_pMissionCD && BBSupportDbgReport(2, "main\\States\\StateMDRandomMapParameters.cpp", 339, "g_pMissionCD") == 1 )
           {
             __debugbreak();
           }
-          (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(
-            g_pMissionCD,
-            0,
-            GuiDlgMainscreenProc);
+          (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(g_pMissionCD, 0, GuiDlgMainscreenProc);
           CGameStateHandler::Switch((int)CStateLobbyGameSettings::DynamicCreateFunc, 1);
           Instance = OnlineManager::GetInstance();
           if ( (unsigned __int8)OnlineManager::IsQuickMatchFlow(Instance) )
+          {
             CLanLobby::Communicate(1059, 0);
+          }
           else
+          {
             CLanLobby::Communicate(1051, 0);
+          }
           v54 = 1;
           v65 = -1;
           std::wstring::~wstring(v64);
@@ -339,18 +357,15 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
           std::string::operator=(&g_iMessageBoxStringID, v3);
           v59 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, dword_4031998);
           if ( !v59 && BBSupportDbgReport(2, "main\\States\\StateMDRandomMapParameters.cpp", 276, "bRet") == 1 )
-            __debugbreak();
-          if ( !g_pMissionCD
-            && BBSupportDbgReport(2, "main\\States\\StateMDRandomMapParameters.cpp", 277, "g_pMissionCD") == 1 )
           {
             __debugbreak();
           }
-          (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(
-            g_pMissionCD,
-            0,
-            GuiDlgMainscreenProc);
-          if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc)
-            && BBSupportDbgReport(2, "main\\States\\StateMDRandomMapParameters.cpp", 280, "bRet") == 1 )
+          if ( !g_pMissionCD && BBSupportDbgReport(2, "main\\States\\StateMDRandomMapParameters.cpp", 277, "g_pMissionCD") == 1 )
+          {
+            __debugbreak();
+          }
+          (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(g_pMissionCD, 0, GuiDlgMainscreenProc);
+          if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc) && BBSupportDbgReport(2, "main\\States\\StateMDRandomMapParameters.cpp", 280, "bRet") == 1 )
           {
             __debugbreak();
           }
@@ -359,15 +374,11 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
         break;
       case 1u:
         IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, dword_4031998);
-        if ( !g_pMissionCD
-          && BBSupportDbgReport(2, "main\\States\\StateMDRandomMapParameters.cpp", 362, "g_pMissionCD") == 1 )
+        if ( !g_pMissionCD && BBSupportDbgReport(2, "main\\States\\StateMDRandomMapParameters.cpp", 362, "g_pMissionCD") == 1 )
         {
           __debugbreak();
         }
-        (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(
-          g_pMissionCD,
-          0,
-          GuiDlgMainscreenProc);
+        (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(g_pMissionCD, 0, GuiDlgMainscreenProc);
         dword_403191C = a2->m_wParam;
         CGameStateHandler::Switch((int)CStateLobbyMapSettings::DynamicCreateFunc, *((unsigned __int8 *)v57 + 4));
         result = 1;
@@ -376,7 +387,9 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
         if ( a2->m_wParam )
         {
           if ( dword_4031F88 < 1024 )
+          {
             dword_4031F88 += 64;
+          }
         }
         else if ( dword_4031F88 > 256 )
         {
@@ -387,7 +400,9 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
         if ( a2->m_wParam )
         {
           if ( (dword_4031F94 & 3u) < 3 )
+          {
             ++dword_4031F94;
+          }
         }
         else if ( (dword_4031F94 & 3) != 0 )
         {
@@ -398,7 +413,9 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
         if ( a2->m_wParam )
         {
           if ( dword_4031F8C < 90 )
+          {
             dword_4031F8C += 10;
+          }
         }
         else if ( dword_4031F8C > 10 )
         {
@@ -409,7 +426,9 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
         if ( a2->m_wParam )
         {
           if ( dword_4031F90 < 15 )
+          {
             dword_4031F90 += 5;
+          }
         }
         else if ( dword_4031F90 > 5 )
         {
@@ -432,13 +451,19 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
           v42 = operator new(0x620u);
           v65 = 4;
           if ( v42 )
+          {
             v41 = CGameType::CGameType((CGameType *)v42);
+          }
           else
+          {
             v41 = 0;
+          }
           v30 = v41;
           v65 = -1;
           g_pGameType = (int)v41;
-          for ( k = 0; k < *(_DWORD *)(v50 + 16); ++k )
+          for ( k = 0;
+                k < *(_DWORD *)(v50 + 16);
+                ++k )
           {
             *(_DWORD *)(g_pGameType + 4 * k + 260) = *(_DWORD *)(v50 + 4 * k + 24);
             *(_DWORD *)(g_pGameType + 4 * k + 296) = *(_DWORD *)(v50 + 4 * k + 60);
@@ -449,9 +474,13 @@ bool  CStateMDRandomMapParameters::OnEvent(class CEvn_Event & a2) {
           v29 = g_pGameType;
           v40 = (CGameType *)g_pGameType;
           if ( g_pGameType )
+          {
             v28 = delete v40;
+          }
           else
+          {
             v28 = 0;
+          }
           g_pGameType = v27;
           IGuiEngine::SetImages((void *)g_pGUIEngine, dword_4031998, 2006, 30, 30);
           result = 1;
@@ -471,21 +500,23 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
   {
     (*(void (__thiscall **)(void *))(*(_DWORD *)g_pRandomMaps + 4))(g_pRandomMaps);
     IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, dword_4031998);
-    if ( !g_pMissionCD
-      && BBSupportDbgReport(2, "main\\States\\StateMDRandomMapParameters.cpp", 236, "g_pMissionCD") == 1 )
+    if ( !g_pMissionCD && BBSupportDbgReport(2, "main\\States\\StateMDRandomMapParameters.cpp", 236, "g_pMissionCD") == 1 )
     {
       __debugbreak();
     }
-    (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(
-      g_pMissionCD,
-      0,
-      GuiDlgMainscreenProc);
+    (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(g_pMissionCD, 0, GuiDlgMainscreenProc);
     if ( *((_BYTE *)v57 + 4) )
+    {
       CGameStateHandler::Switch((int)CStateLobbyConnect::DynamicCreateFunc, 1);
+    }
     else
+    {
       CGameStateHandler::Switch((int)CStateLocalType::DynamicCreateFunc, 1);
+    }
     if ( !g_pGameType )
+    {
       return 1;
+    }
     v35 = g_pGameType;
     v34 = delete (CGameType *)g_pGameType;
     g_pGameType = 0;
@@ -498,7 +529,9 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
     {
       case 0u:
         if ( (unsigned __int16)a2->m_wParam != 27 )
+        {
           goto CStateMDRandomMapParameters__OnEvent___def_18C873C;
+        }
         if ( byte_403206C )
         {
           v25 = CEvn_Event::CEvn_Event(&v63, 0x72u, 0, 0, 0);
@@ -520,12 +553,16 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
         if ( a2->m_wParam )
         {
           if ( dword_4031928 == dword_4031924 )
+          {
             return 1;
+          }
           v43 = dword_4031934;
           if ( dword_4031934 == 1 )
           {
             if ( dword_4031928 < 8 )
+            {
               ++dword_4031928;
+            }
           }
           else if ( v43 == 3 && dword_4031928 < 2 )
           {
@@ -535,7 +572,9 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
         else
         {
           if ( dword_4031928 == 2 )
+          {
             return 1;
+          }
           --dword_4031928;
         }
         break;
@@ -543,7 +582,9 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
         if ( a2->m_wParam )
         {
           if ( dword_4031924 < 8 )
+          {
             ++dword_4031924;
+          }
         }
         else if ( dword_4031924 > 2 && dword_4031928 > --dword_4031924 )
         {
@@ -557,7 +598,9 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
           if ( a2->m_wParam )
           {
             if ( ++dword_4031934 > 6 )
+            {
               dword_4031934 = 1;
+            }
           }
           else if ( !--dword_4031934 )
           {
@@ -608,21 +651,29 @@ CStateMDRandomMapParameters__OnEvent___def_18C873C:
         if ( a2->m_wParam )
         {
           if ( dword_4031930 == 3 )
+          {
             return 1;
+          }
           ++dword_4031930;
         }
         else
         {
           if ( dword_4031930 == 1 )
+          {
             return 1;
+          }
           --dword_4031930;
         }
         break;
       case 0x40u:
         if ( a2->m_wParam )
+        {
           byte_403199C |= 1u;
+        }
         else
+        {
           byte_403199C &= ~1u;
+        }
         v53 = byte_403199C;
         return 1;
       case 0x41u:
@@ -660,7 +711,7 @@ LABEL_134:
 
 
 // address=[0x14c96a0]
-// Decompiled from int __cdecl CStateMDRandomMapParameters::DrawMap(  unsigned __int16 *a1,  unsigned __int16 *a2,  unsigned int a3,  int a4,  int a5)
+// Decompiled from int __cdecl CStateMDRandomMapParameters::DrawMap(unsigned __int16 *a1, unsigned __int16 *a2, unsigned int a3, int a4, int a5)
 void __cdecl CStateMDRandomMapParameters::DrawMap(unsigned short * a1, unsigned short * a2, unsigned int a3, int a4, int a5) {
   
   int result; // eax
@@ -686,9 +737,13 @@ void __cdecl CStateMDRandomMapParameters::DrawMap(unsigned short * a1, unsigned 
   _DWORD v25[180]; // [esp+64h] [ebp-2D4h] BYREF
 
   v16 = IGfxEngine::GetGfxMode((IGfxEngine *)g_pGfxEngine) == 1;
-  for ( i = 3; i < 157; ++i )
+  for ( i = 3;
+        i < 157;
+        ++i )
   {
-    for ( j = 3; j < 157; ++j )
+    for ( j = 3;
+          j < 157;
+          ++j )
     {
       v11 = (float)a5 / 160.0;
       v12 = (float)a4 / 160.0;
@@ -706,22 +761,34 @@ void __cdecl CStateMDRandomMapParameters::DrawMap(unsigned short * a1, unsigned 
   }
   v13 = 160.0 / (float)*(int *)(g_pGameType + 56);
   if ( *(_DWORD *)(g_pGameType + 112) )
+  {
     v7 = *(_DWORD *)(g_pGameType + 112);
+  }
   else
+  {
     v7 = *(_DWORD *)(g_pGameType + 852);
-  for ( k = 0; ; ++k )
+  }
+  for ( k = 0;
+        ;
+        ++k )
   {
     result = k;
     if ( k >= v7 )
+    {
       break;
+    }
     v6 = (int)(float)((float)*(int *)(g_pGameType + 4 * k + 296) * v13);
     v8 = (int)(float)((float)*(int *)(g_pGameType + 4 * k + 260) * v13) + (160 - v6) / 2;
     CGfxManager::GetAccessoryGfxInfo((CGfxManager *)g_pGfxManager, (struct SGfxObjectInfo *)v25, k + 52);
     v19 = (unsigned __int16 *)v25[0];
     v17 = (unsigned __int8 *)(v25[0] + 12);
-    for ( m = 0; m < v19[1]; ++m )
+    for ( m = 0;
+          m < v19[1];
+          ++m )
     {
-      for ( n = 0; n < *v19; ++n )
+      for ( n = 0;
+            n < *v19;
+            ++n )
       {
         v24 = *v17++;
         if ( v24 )
@@ -730,7 +797,9 @@ void __cdecl CStateMDRandomMapParameters::DrawMap(unsigned short * a1, unsigned 
           {
             v9 = *v17++;
             if ( !v9 )
+            {
               break;
+            }
             m += (v9 - 1) / *v19;
             n += (v9 - 1) % *v19;
             if ( n >= *v19 )
@@ -748,7 +817,9 @@ void __cdecl CStateMDRandomMapParameters::DrawMap(unsigned short * a1, unsigned 
         {
           v10 = *v17++;
           if ( !v10 )
+          {
             break;
+          }
           m += (v10 - 1) / *v19;
           n += (v10 - 1) % *v19;
           if ( n >= *v19 )
@@ -774,14 +845,14 @@ void  CStateMDRandomMapParameters::PaintMap(void) {
   unsigned __int16 *v4; // [esp+14h] [ebp-18h] BYREF
   _BYTE v5[16]; // [esp+18h] [ebp-14h] BYREF
 
-  v2 = (unsigned __int16 *)(*(int (__thiscall **)(void *, CStateMDRandomMapParameters *))(*(_DWORD *)g_pRandomMaps + 56))(
-                             g_pRandomMaps,
-                             this);
+  v2 = (unsigned __int16 *)(*(int (__thiscall **)(void *, CStateMDRandomMapParameters *))(*(_DWORD *)g_pRandomMaps + 56))(g_pRandomMaps, this);
   v4 = 0;
   v3 = 0;
   result = IGuiEngine::LockOwnerImage(g_pGUIEngine, dword_4031998, 2022, (struct SGuiRect *)v5, &v4, &v3);
   if ( !v4 )
+  {
     return result;
+  }
   CStateMDRandomMapParameters::DrawMap(v2, v4, v3, 160, 160);
   return IGuiEngine::UnlockOwnerImage(g_pGUIEngine, dword_4031998, GUI_S4S_GS_MASIZE_TT);
 }

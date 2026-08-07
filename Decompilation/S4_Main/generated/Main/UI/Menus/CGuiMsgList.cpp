@@ -19,10 +19,14 @@
 bool  CGuiMsgList::AddListItem(int a2, char const * Str) {
   
   if ( this[25217] >= 200 )
+  {
     return 0;
+  }
   this[this[25217] + 25016] = a2;
   if ( strlen(Str) > 0x1F4 )
+  {
     return 0;
+  }
   j__strcpy_0((char *)&this[125 * this[25217]++ + 16], Str);
   return 1;
 }
@@ -33,9 +37,13 @@ bool  CGuiMsgList::AddListItem(int a2, char const * Str) {
 bool  CGuiMsgList::SetListindex(int a2) {
   
   if ( a2 >= this[25217] )
+  {
     this[25216] = this[25217] - 1;
+  }
   else
+  {
     this[25216] = a2;
+  }
   return 1;
 }
 
@@ -48,13 +56,17 @@ bool  CGuiMsgList::SetTopindex(int a2) {
   int v4; // [esp+4h] [ebp-Ch]
   int i; // [esp+8h] [ebp-8h]
 
-  for ( i = 0; i < *((_DWORD *)this + 25218); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 25218);
+        ++i )
   {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 4 * i), *((_DWORD *)this + 4 * i + 1), 0);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 4 * i), *((_DWORD *)this + 4 * i + 2), 0);
   }
   if ( !*((_DWORD *)this + 25217) )
+  {
     return 1;
+  }
   if ( a2 >= *((_DWORD *)this + 25217) )
   {
     *((_DWORD *)this + 25219) = *((_DWORD *)this + 25217) - 1;
@@ -62,12 +74,18 @@ bool  CGuiMsgList::SetTopindex(int a2) {
   else
   {
     if ( a2 < 0 )
+    {
       a2 = 0;
+    }
     *((_DWORD *)this + 25219) = a2;
   }
   v4 = *((_DWORD *)this + 25219);
-  for ( j = *((_DWORD *)this + 25218) - 1; j >= 0 && v4 >= 0; j = CGuiMsgList::SetListentry(this, v4--, j) )
+  for ( j = *((_DWORD *)this + 25218) - 1;
+        j >= 0 && v4 >= 0;
+        j = CGuiMsgList::SetListentry(this, v4--, j) )
+  {
     ;
+  }
   return 1;
 }
 
@@ -88,11 +106,15 @@ bool  CGuiMsgList::RemoveListItem(int a2) {
   int i; // [esp+8h] [ebp-8h]
 
   if ( a2 >= *((_DWORD *)this + 25217) )
+  {
     return 0;
+  }
   v3 = *((_DWORD *)this + 25217) - 1;
   if ( a2 < v3 )
   {
-    for ( i = a2; i < v3; ++i )
+    for ( i = a2;
+          i < v3;
+          ++i )
     {
       *((_BYTE *)this + 500 * i + 64) = *((_BYTE *)this + 500 * i + 564);
       *((_DWORD *)this + i + 25016) = *((_DWORD *)this + i + 25017);
@@ -100,9 +122,13 @@ bool  CGuiMsgList::RemoveListItem(int a2) {
   }
   --*((_DWORD *)this + 25217);
   if ( a2 >= *((_DWORD *)this + 25219) )
+  {
     CGuiMsgList::SetTopindex(this, *((_DWORD *)this + 25219));
+  }
   else
+  {
     CGuiMsgList::SetTopindex(this, *((_DWORD *)this + 25219) - 1);
+  }
   return 1;
 }
 
@@ -126,12 +152,16 @@ bool  CGuiMsgList::SetOutputControls(int a2, struct CGuiMsgList::SControl * a3) 
   int i; // [esp+4h] [ebp-4h]
   int j; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *((_DWORD *)this + 25218); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 25218);
+        ++i )
   {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 4 * i), *((_DWORD *)this + 4 * i + 1), 0);
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 4 * i), *((_DWORD *)this + 4 * i + 2), 0);
   }
-  for ( j = 0; j < a2; ++j )
+  for ( j = 0;
+        j < a2;
+        ++j )
   {
     v3 = (_DWORD *)((char *)a3 + 16 * j);
     v4 = (_DWORD *)((char *)this + 16 * j);
@@ -165,10 +195,7 @@ int  CGuiMsgList::SetListentry(int a2, int a3) {
   do
   {
     IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 4 * a3), *((_DWORD *)this + 4 * a3 + 1), Destination);
-    Count = IGuiEngine::GetWrapPosition(
-              (IGuiEngine *)g_pGUIEngine,
-              *((_DWORD *)this + 4 * a3),
-              *((_DWORD *)this + 4 * a3 + 1));
+    Count = IGuiEngine::GetWrapPosition((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 4 * a3), *((_DWORD *)this + 4 * a3 + 1));
     if ( Count <= 0 )
     {
       j__strcpy_0(&Str[500 * v5], Destination);
@@ -182,20 +209,20 @@ int  CGuiMsgList::SetListentry(int a2, int a3) {
         ;
       }
       if ( j___mbsncmp(Source, " ", 1u) )
+      {
         Sourcea = (char *)j___mbsninc((const unsigned __int8 *)Destination, Count);
+      }
       else
+      {
         Sourcea = (char *)j___mbsinc(Source);
+      }
       v7 = *Sourcea;
       *Sourcea = 0;
       j__strcpy_0(&Str[500 * v5], Destination);
       *Sourcea = v7;
       if ( a3 <= 0 )
       {
-        IGuiEngine::SetControlVisibility(
-          (void *)g_pGUIEngine,
-          *((_DWORD *)this + 4 * a3),
-          *((_DWORD *)this + 4 * a3 + 2),
-          0);
+        IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 4 * a3), *((_DWORD *)this + 4 * a3 + 2), 0);
         IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 4 * a3), *((_DWORD *)this + 4 * a3 + 1), Sourcea);
       }
       j__strcpy_0(Destination, Sourcea);
@@ -203,32 +230,19 @@ int  CGuiMsgList::SetListentry(int a2, int a3) {
     ++v5;
   }
   while ( Count >= 0 && v5 < 4 );
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
-    IGuiEngine::SetText(
-      (void *)g_pGUIEngine,
-      *((_DWORD *)this + 4 * v11),
-      *((_DWORD *)this + 4 * v11 + 1),
-      &Str[500 * (v5 - 1 - i)]);
-    IGuiEngine::SetControlVisibility(
-      (void *)g_pGUIEngine,
-      *((_DWORD *)this + 4 * v11),
-      *((_DWORD *)this + 4 * v11 + 1),
-      1);
-    IGuiEngine::SetImages(
-      (void *)g_pGUIEngine,
-      *((_DWORD *)this + 4 * v11),
-      *((_DWORD *)this + 4 * v11 + 2),
-      *((_DWORD *)this + a2 + 25016),
-      0);
-    IGuiEngine::SetControlVisibility(
-      (void *)g_pGUIEngine,
-      *((_DWORD *)this + 4 * v11),
-      *((_DWORD *)this + 4 * v11 + 2),
-      v5 - 1 == i);
+    IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 4 * v11), *((_DWORD *)this + 4 * v11 + 1), &Str[500 * (v5 - 1 - i)]);
+    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 4 * v11), *((_DWORD *)this + 4 * v11 + 1), 1);
+    IGuiEngine::SetImages((void *)g_pGUIEngine, *((_DWORD *)this + 4 * v11), *((_DWORD *)this + 4 * v11 + 2), *((_DWORD *)this + a2 + 25016), 0);
+    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 4 * v11), *((_DWORD *)this + 4 * v11 + 2), v5 - 1 == i);
     *((_DWORD *)this + 4 * v11-- + 3) = a2;
     if ( v11 < 0 )
+    {
       break;
+    }
   }
   return v11;
 }

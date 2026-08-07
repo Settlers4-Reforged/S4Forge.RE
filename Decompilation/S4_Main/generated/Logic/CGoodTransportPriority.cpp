@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CGoodTransportPriority::New(std::istream & a1) {
   
   if ( operator new(0x64u) )
+  {
     return CGoodTransportPriority::CGoodTransportPriority(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -25,19 +29,18 @@ int  CGoodTransportPriority::GetNumberOfPriorities(void) {
 // Decompiled from int __thiscall CGoodTransportPriority::GetPriority(unsigned __int16 *this, int a2)
 int  CGoodTransportPriority::GetPriority(enum PILE_TYPES a2) {
   
-  if ( (a2 <= 0 || a2 >= 43)
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\GoodTransportPriority.h",
-         195,
-         "_iGoodType > GOOD_NO_GOOD && _iGoodType< GOOD_MAX") == 1 )
+  if ( (a2 <= 0 || a2 >= 43) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\GoodTransportPriority.h", 195, "_iGoodType > GOOD_NO_GOOD && _iGoodType< GOOD_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( a2 <= 0 || a2 >= 43 )
+  {
     return -1;
+  }
   else
+  {
     return this[a2 + 2];
+  }
 }
 
 
@@ -89,7 +92,7 @@ void  CGoodTransportPriority::Store(std::ostream & a2) {
 
 
 // address=[0x1452bf0]
-// Decompiled from CGoodTransportPriority *__thiscall CGoodTransportPriority::CGoodTransportPriority(  CGoodTransportPriority *this,  unsigned __int8 a2)
+// Decompiled from CGoodTransportPriority *__thiscall CGoodTransportPriority::CGoodTransportPriority(CGoodTransportPriority *this, unsigned __int8 a2)
  CGoodTransportPriority::CGoodTransportPriority(unsigned char a2) {
   
   CPersistence::CPersistence(this);
@@ -126,24 +129,25 @@ void  CGoodTransportPriority::ChangePriority(enum PILE_TYPES a2, int a3) {
   int i; // [esp+10h] [ebp-Ch]
   int k; // [esp+14h] [ebp-8h]
 
-  if ( (a2 <= 0 || a2 >= 43)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\GoodTransportPriority.cpp",
-         109,
-         "_iGoodType > GOOD_NO_GOOD && _iGoodType< GOOD_MAX") == 1 )
+  if ( (a2 <= 0 || a2 >= 43) && BBSupportDbgReport(2, "Logic\\GoodTransportPriority.cpp", 109, "_iGoodType > GOOD_NO_GOOD && _iGoodType< GOOD_MAX") == 1 )
   {
     __debugbreak();
   }
   result = 0;
   if ( a2 <= 0 || a2 >= 43 )
+  {
     return result;
+  }
   if ( a3 == 100 )
   {
-    for ( i = 0; i < 43; ++i )
+    for ( i = 0;
+          i < 43;
+          ++i )
     {
       if ( (unsigned __int16)this[i + 2] > (int)(unsigned __int16)this[a2 + 2] )
+      {
         --this[i + 2];
+      }
     }
     result = (int)this;
     this[a2 + 2] = this[46];
@@ -152,10 +156,14 @@ void  CGoodTransportPriority::ChangePriority(enum PILE_TYPES a2, int a3) {
   {
     result = a2;
     v4 = -1;
-    for ( j = 0; j < 43 && v4 == -1; ++j )
+    for ( j = 0;
+          j < 43 && v4 == -1;
+          ++j )
     {
       if ( (unsigned __int16)this[j + 2] == a3 + (unsigned __int16)this[a2 + 2] )
+      {
         v4 = j;
+      }
       result = j + 1;
     }
     if ( v4 > 0 )
@@ -167,10 +175,14 @@ void  CGoodTransportPriority::ChangePriority(enum PILE_TYPES a2, int a3) {
   }
   else
   {
-    for ( k = 0; k < 43; ++k )
+    for ( k = 0;
+          k < 43;
+          ++k )
     {
       if ( this[k + 2] && (unsigned __int16)this[k + 2] < (int)(unsigned __int16)this[a2 + 2] )
+      {
         ++this[k + 2];
+      }
     }
     result = 1;
     this[a2 + 2] = 1;
@@ -191,21 +203,28 @@ void  CGoodTransportPriority::GetSortedGoods(int * const a2) {
   int j; // [esp+18h] [ebp-4h]
 
   if ( !*((_BYTE *)this + 96) && BBSupportDbgReport(2, "Logic\\GoodTransportPriority.cpp", 78, "m_bIsInit") == 1 )
+  {
     __debugbreak();
-  if ( !*((_DWORD *)this + 23)
-    && BBSupportDbgReport(2, "Logic\\GoodTransportPriority.cpp", 79, "m_iNumberOfPriorities!= 0") == 1 )
+  }
+  if ( !*((_DWORD *)this + 23) && BBSupportDbgReport(2, "Logic\\GoodTransportPriority.cpp", 79, "m_iNumberOfPriorities!= 0") == 1 )
   {
     __debugbreak();
   }
   v3 = 0;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = this;
     if ( i >= *((_DWORD *)this + 23) )
+    {
       break;
+    }
     v6 = -1;
     v4 = 0xFFFF;
-    for ( j = 0; j < 43; ++j )
+    for ( j = 0;
+          j < 43;
+          ++j )
     {
       if ( *((unsigned __int16 *)this + j + 2) > v3 && *((unsigned __int16 *)this + j + 2) <= v4 )
       {

@@ -3,7 +3,7 @@
 // Definitions for class CEcoManagerLeaf
 
 // address=[0x134b270]
-// Decompiled from CEcoManagerLeaf::CEMLD *__thiscall CEcoManagerLeaf::CEcoManagerLeaf(  CEcoManagerLeaf::CEMLD *this,  int a2,  int a3,  int a4,  int a5)
+// Decompiled from CEcoManagerLeaf::CEMLD *__thiscall CEcoManagerLeaf::CEcoManagerLeaf(CEcoManagerLeaf::CEMLD *this, int a2, int a3, int a4, int a5)
  CEcoManagerLeaf::CEcoManagerLeaf(enum IECONOMANAGERGRIDRESOLUTION a2, enum BUILDING_TYPES a3, int a4, int a5) {
   
   CEcoManagerLeaf::CEMLD::CEMLD(this);
@@ -24,10 +24,14 @@
   int v3; // [esp+8h] [ebp-10h]
 
   v3 = 0;
-  for ( i = CEcoManagerLeaf::GetNrChilds(this); v3 < i; i = CEcoManagerLeaf::GetNrChilds(this) )
+  for ( i = CEcoManagerLeaf::GetNrChilds(this);
+        v3 < i;
+        i = CEcoManagerLeaf::GetNrChilds(this) )
   {
     if ( CEcoManagerLeaf::GetChild(this, v3) )
+    {
       CEcoManagerLeaf::RemoveChild(this, v3);
+    }
     ++v3;
   }
   CEcoManagerLeaf::CEMLD::~CEMLD(this);
@@ -48,7 +52,7 @@ void  CEcoManagerLeaf::GetPosition(int & a2, int & a3) {
 
 
 // address=[0x134b370]
-// Decompiled from struct Concurrency::details::stl_condition_variable_win7 *__thiscall CEcoManagerLeaf::GetBuildInfo(  _Cnd_internal_imp_t *this)
+// Decompiled from struct Concurrency::details::stl_condition_variable_win7 *__thiscall CEcoManagerLeaf::GetBuildInfo(_Cnd_internal_imp_t *this)
 struct SBUILDINFODATA const *  CEcoManagerLeaf::GetBuildInfo(void) {
   
   return this;
@@ -72,11 +76,15 @@ bool  CEcoManagerLeaf::Update(void) {
   _BYTE v13[44]; // [esp+24h] [ebp-30h] BYREF
 
   v9 = 0;
-  for ( i = CEcoManagerLeaf::GetNrChilds(this); v9 < i; i = CEcoManagerLeaf::GetNrChilds(this) )
+  for ( i = CEcoManagerLeaf::GetNrChilds(this);
+        v9 < i;
+        i = CEcoManagerLeaf::GetNrChilds(this) )
   {
     Child = CEcoManagerLeaf::GetChild(this, v9);
     if ( Child )
+    {
       CEcoManagerLeaf::Update(Child);
+    }
     ++v9;
   }
   *((_DWORD *)this + 23) = 0;
@@ -84,26 +92,48 @@ bool  CEcoManagerLeaf::Update(void) {
   if ( v5 == 16 )
   {
     qmemcpy(v13, CAIResourceMap::ResourceDataVW(*(_DWORD *)this, *((_DWORD *)this + 1)), 0x2Au);
-    for ( j = 0; j < 8; ++j )
+    for ( j = 0;
+          j < 8;
+          ++j )
+    {
       *((_WORD *)this + j + 22) = CAIResourceData::ResourceAmount1((CAIResourceData *)v13, j);
-    for ( k = 0; k < 7; ++k )
+    }
+    for ( k = 0;
+          k < 7;
+          ++k )
+    {
       *((_DWORD *)this + k + 4) = CAIResourceData::GroundInfo1((CAIResourceData *)v13, k);
+    }
   }
   else if ( v5 == 32 || v5 == 64 )
   {
-    for ( m = 0; m < 8; ++m )
+    for ( m = 0;
+          m < 8;
+          ++m )
+    {
       *((_WORD *)this + m + 22) = 0;
+    }
     if ( *((_DWORD *)this + 3) == 32 )
+    {
       *((_DWORD *)this + 23) = CEcoManagerLeaf::GetNrValidChilds(this);
-    for ( n = 0; n < CEcoManagerLeaf::GetNrChilds(this); ++n )
+    }
+    for ( n = 0;
+          n < CEcoManagerLeaf::GetNrChilds(this);
+          ++n )
     {
       v4 = CEcoManagerLeaf::GetChild(this, n);
       if ( v4 )
       {
-        for ( ii = 0; ii < 8; ++ii )
+        for ( ii = 0;
+              ii < 8;
+              ++ii )
+        {
           *((_WORD *)this + ii + 22) += CEcoManagerLeaf::GetResourceAmount(v4, ii);
+        }
         if ( *((_DWORD *)this + 3) == 64 )
+        {
           *((_DWORD *)this + 23) += CEcoManagerLeaf::GetNrValidOfAllSubChilds(v4);
+        }
       }
     }
   }
@@ -149,22 +179,18 @@ bool  CEcoManagerLeaf::AddPosition(int a2, int a3, class std::vector<struct SPOS
 
   if ( *((_DWORD *)this + 3) == 16 )
   {
-    if ( (unsigned int)std::vector<SPOSS_BUILD_PLACE>::size() > 0x100
-      && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManagerLeaf.cpp", 194, "_pvasPossibleBuildPlaces->size() <= 256") == 1 )
+    if ( (unsigned int)std::vector<SPOSS_BUILD_PLACE>::size() > 0x100 && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManagerLeaf.cpp", 194, "_pvasPossibleBuildPlaces->size() <= 256") == 1 )
     {
       __debugbreak();
     }
-    for ( i = 0; i < std::vector<SPOSS_BUILD_PLACE>::size(); ++i )
+    for ( i = 0;
+          i < std::vector<SPOSS_BUILD_PLACE>::size();
+          ++i )
     {
       v4 = std::vector<SPOSS_BUILD_PLACE>::at(i);
       std::vector<SPOSS_BUILD_PLACE>::push_back(v4);
     }
-    if ( (unsigned int)std::vector<SPOSS_BUILD_PLACE>::size() > 0x100
-      && BBSupportDbgReport(
-           2,
-           "AI\\EcoManager\\CEcoManagerLeaf.cpp",
-           198,
-           "m_Vars.sBuildInfoData.vasPossibleBuildPositions.size() <= 256") == 1 )
+    if ( (unsigned int)std::vector<SPOSS_BUILD_PLACE>::size() > 0x100 && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManagerLeaf.cpp", 198, "m_Vars.sBuildInfoData.vasPossibleBuildPositions.size() <= 256") == 1 )
     {
       __debugbreak();
     }
@@ -212,9 +238,13 @@ bool  CEcoManagerLeaf::AddPosition(int a2, int a3, class std::vector<struct SPOS
         {
           C = (CEcoManagerLeaf::CEMLD *)operator new(0x68u);
           if ( C )
+          {
             v9 = CEcoManagerLeaf::CEcoManagerLeaf(C, *((int *)this + 3) >> 1, *((_DWORD *)this + 2), v16, v17);
+          }
           else
+          {
             v9 = 0;
+          }
           *((_DWORD *)this + FreeChildPos + 19) = v9;
           v8 = CEcoManagerLeaf::GetChild(this, FreeChildPos);
           CEcoManagerLeaf::AddPosition(v8, a2, a3, a4);
@@ -256,10 +286,14 @@ int  CEcoManagerLeaf::GetNrValidChilds(void) {
 
   v4 = 0;
   v5 = 0;
-  for ( i = CEcoManagerLeaf::GetNrChilds(this); v5 < i; i = CEcoManagerLeaf::GetNrChilds(this) )
+  for ( i = CEcoManagerLeaf::GetNrChilds(this);
+        v5 < i;
+        i = CEcoManagerLeaf::GetNrChilds(this) )
   {
     if ( CEcoManagerLeaf::GetChild(this, v5) )
+    {
       ++v4;
+    }
     ++v5;
   }
   return v4;
@@ -279,9 +313,13 @@ int  CEcoManagerLeaf::GetNrValidOfAllSubChilds(void) {
 class CEcoManagerLeaf *  CEcoManagerLeaf::GetChild(int a2) {
   
   if ( a2 < CEcoManagerLeaf::GetNrChilds(this) && a2 >= 0 )
+  {
     return *((_DWORD *)this + a2 + 19);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -297,17 +335,23 @@ int  CEcoManagerLeaf::GetChild(int a2, int a3) {
   int i; // [esp+10h] [ebp-4h]
 
   v8 = this;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     NrChilds = CEcoManagerLeaf::GetNrChilds(v8);
     if ( i >= NrChilds )
+    {
       break;
+    }
     Child = CEcoManagerLeaf::GetChild(v8, i);
     if ( Child )
     {
       CEcoManagerLeaf::GetPosition(Child, &v6, &v5);
       if ( v6 == a2 && v5 == a3 )
+      {
         return i;
+      }
     }
   }
   return -1;
@@ -319,9 +363,13 @@ int  CEcoManagerLeaf::GetChild(int a2, int a3) {
 bool  CEcoManagerLeaf::RemoveChild(int a2) {
   
   if ( !CEcoManagerLeaf::GetChild(this, a2) )
+  {
     return 0;
+  }
   if ( *((_DWORD *)this + a2 + 19) )
+  {
     delete *((CEcoManagerLeaf **)this + a2 + 19);
+  }
   *((_DWORD *)this + a2 + 19) = 0;
   return 1;
 }
@@ -335,10 +383,14 @@ int  CEcoManagerLeaf::GetFreeChildPos(void) {
   int v4; // [esp+4h] [ebp-4h]
 
   v4 = 0;
-  for ( i = CEcoManagerLeaf::GetNrChilds(this); v4 < i; i = CEcoManagerLeaf::GetNrChilds(this) )
+  for ( i = CEcoManagerLeaf::GetNrChilds(this);
+        v4 < i;
+        i = CEcoManagerLeaf::GetNrChilds(this) )
   {
     if ( !CEcoManagerLeaf::GetChild(this, v4) )
+    {
       return v4;
+    }
     ++v4;
   }
   return -1;

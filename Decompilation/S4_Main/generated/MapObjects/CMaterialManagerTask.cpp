@@ -99,16 +99,13 @@ bool  CMaterialManagerTask::action(void a2) {
       {
         C = (CMainProblemSolveEvent *)operator new(0x70u);
         if ( C )
-          v9 = CMainProblemSolveEvent::CMainProblemSolveEvent(
-                 C,
-                 *((_DWORD *)this + 3),
-                 3,
-                 *((_DWORD *)this + 13),
-                 0,
-                 0,
-                 0);
+        {
+          v9 = CMainProblemSolveEvent::CMainProblemSolveEvent(C, *((_DWORD *)this + 3), 3, *((_DWORD *)this + 13), 0, 0, 0);
+        }
         else
+        {
           v9 = 0;
+        }
         *((_DWORD *)this + 8) = CSchedule::NewSchedEntry(*((CSchedule **)this + 10), v9);
         goto CMaterialManagerTask__action___def_33551D7;
       }
@@ -118,16 +115,13 @@ bool  CMaterialManagerTask::action(void a2) {
       TargetPosition = CSchedule::GetTargetPosition(*((CSchedule **)this + 10), *((_DWORD *)this + 13));
       v7 = (CMainProblemSolveEvent *)operator new(0x70u);
       if ( v7 )
-        v6 = CMainProblemSolveEvent::CMainProblemSolveEvent(
-               v7,
-               *((_DWORD *)this + 3),
-               10,
-               *((_DWORD *)this + 13),
-               0,
-               TargetPosition,
-               0);
+      {
+        v6 = CMainProblemSolveEvent::CMainProblemSolveEvent(v7, *((_DWORD *)this + 3), 10, *((_DWORD *)this + 13), 0, TargetPosition, 0);
+      }
       else
+      {
         v6 = 0;
+      }
       *((_DWORD *)this + 8) = CSchedule::NewSchedEntry(*((CSchedule **)this + 10), v6);
       goto CMaterialManagerTask__action___def_33551D7;
     case 3:
@@ -138,9 +132,13 @@ bool  CMaterialManagerTask::action(void a2) {
       }
       v5 = (CExpandationEvent *)operator new(0x74u);
       if ( v5 )
+      {
         v4 = CExpandationEvent::CExpandationEvent(v5, *((_DWORD *)this + 3), 0, v11);
+      }
       else
+      {
         v4 = 0;
+      }
       *((_DWORD *)this + 8) = CSchedule::NewSchedEntry(*((CSchedule **)this + 10), v4);
       goto CMaterialManagerTask__action___def_33551D7;
     case 4:
@@ -153,9 +151,13 @@ bool  CMaterialManagerTask::action(void a2) {
       {
         v3 = (CExpandationEvent *)operator new(0x74u);
         if ( v3 )
+        {
           v2 = CExpandationEvent::CExpandationEvent(v3, -5, *((CDynList ***)this + 10));
+        }
         else
+        {
           v2 = 0;
+        }
         *((_DWORD *)this + 8) = CSchedule::NewSchedEntry(*((CSchedule **)this + 10), v2);
 CMaterialManagerTask__action___def_33551D7:
         *((_DWORD *)this + 5) = 1;
@@ -190,24 +192,18 @@ bool  CMaterialManagerTask::WaitFor(void) {
       {
         this[12] = (CSchedule *)2;
         this[8] = 0;
-        BBSupportTracePrintF(
-          0,
-          "AI Failed: PlayerNr %i do not adding production of %s",
-          *((_DWORD *)this[10] + 5),
-          (&off_3AC3C14)[2 * (_DWORD)this[13]]);
+        BBSupportTracePrintF(0, "AI Failed: PlayerNr %i do not adding production of %s", *((_DWORD *)this[10] + 5), (&off_3AC3C14)[2 * (_DWORD)this[13]]);
         result = 1;
       }
       else
       {
         if ( this[14] != (CSchedule *)2 )
+        {
           goto CMaterialManagerTask__WaitFor___def_33554A8;
+        }
         this[12] = (CSchedule *)1;
         this[8] = 0;
-        BBSupportTracePrintF(
-          0,
-          "AI Success: PlayerNr %i add production of %s",
-          *((_DWORD *)this[10] + 5),
-          (&off_3AC3C14)[2 * (_DWORD)this[13]]);
+        BBSupportTracePrintF(0, "AI Success: PlayerNr %i add production of %s", *((_DWORD *)this[10] + 5), (&off_3AC3C14)[2 * (_DWORD)this[13]]);
         result = 1;
       }
       break;
@@ -216,80 +212,66 @@ bool  CMaterialManagerTask::WaitFor(void) {
       {
         this[8] = 0;
         this[12] = (CSchedule *)3;
-        BBSupportTracePrintF(
-          0,
-          "AI Failed: PlayerNr %i do not init a new production of %s",
-          *((_DWORD *)this[10] + 5),
-          (&off_3AC3C14)[2 * (_DWORD)this[13]]);
+        BBSupportTracePrintF(0, "AI Failed: PlayerNr %i do not init a new production of %s", *((_DWORD *)this[10] + 5), (&off_3AC3C14)[2 * (_DWORD)this[13]]);
         result = 1;
       }
       else
       {
         if ( this[14] != (CSchedule *)2 )
+        {
           goto CMaterialManagerTask__WaitFor___def_33554A8;
+        }
         this[8] = 0;
         this[12] = (CSchedule *)1;
-        BBSupportTracePrintF(
-          0,
-          "AI Success: PlayerNr %i init a new production of %s",
-          *((_DWORD *)this[10] + 5),
-          (&off_3AC3C14)[2 * (_DWORD)this[13]]);
+        BBSupportTracePrintF(0, "AI Success: PlayerNr %i init a new production of %s", *((_DWORD *)this[10] + 5), (&off_3AC3C14)[2 * (_DWORD)this[13]]);
         result = 1;
       }
       break;
     case 3u:
       if ( CBuildingManagerTask::IsRejectedBuilding(SpecialTask, 46, 1) )
+      {
         this[14] = (CSchedule *)1;
+      }
       if ( this[14] == (CSchedule *)2 )
       {
         this[8] = 0;
         this[12] = (CSchedule *)1;
-        BBSupportTracePrintF(
-          0,
-          "AI Success: PlayerNr %i init an expandation for getting %s",
-          *((_DWORD *)this[10] + 5),
-          (&off_3AC3C14)[2 * (_DWORD)this[13]]);
+        BBSupportTracePrintF(0, "AI Success: PlayerNr %i init an expandation for getting %s", *((_DWORD *)this[10] + 5), (&off_3AC3C14)[2 * (_DWORD)this[13]]);
         result = 1;
       }
       else
       {
         if ( this[14] != (CSchedule *)1 )
+        {
           goto CMaterialManagerTask__WaitFor___def_33554A8;
+        }
         this[8] = 0;
         this[12] = (CSchedule *)4;
-        BBSupportTracePrintF(
-          0,
-          "AI failed: PlayerNr %i can't do an expandation for getting %s",
-          *((_DWORD *)this[10] + 5),
-          (&off_3AC3C14)[2 * (_DWORD)this[13]]);
+        BBSupportTracePrintF(0, "AI failed: PlayerNr %i can't do an expandation for getting %s", *((_DWORD *)this[10] + 5), (&off_3AC3C14)[2 * (_DWORD)this[13]]);
         result = 1;
       }
       break;
     case 4u:
       if ( CBuildingManagerTask::IsRejectedBuilding(SpecialTask, 46, 1) )
+      {
         this[14] = (CSchedule *)1;
+      }
       if ( this[14] == (CSchedule *)2 )
       {
         this[8] = 0;
         this[12] = (CSchedule *)1;
-        BBSupportTracePrintF(
-          0,
-          "AI Success: PlayerNr %i init an safty expandation for getting %s",
-          *((_DWORD *)this[10] + 5),
-          (&off_3AC3C14)[2 * (_DWORD)this[13]]);
+        BBSupportTracePrintF(0, "AI Success: PlayerNr %i init an safty expandation for getting %s", *((_DWORD *)this[10] + 5), (&off_3AC3C14)[2 * (_DWORD)this[13]]);
         result = 1;
       }
       else
       {
         if ( this[14] != (CSchedule *)1 )
+        {
           goto CMaterialManagerTask__WaitFor___def_33554A8;
+        }
         this[8] = 0;
         this[12] = (CSchedule *)1;
-        BBSupportTracePrintF(
-          0,
-          "AI Success: PlayerNr %i can't do an safty expandation for getting %s",
-          *((_DWORD *)this[10] + 5),
-          (&off_3AC3C14)[2 * (_DWORD)this[13]]);
+        BBSupportTracePrintF(0, "AI Success: PlayerNr %i can't do an safty expandation for getting %s", *((_DWORD *)this[10] + 5), (&off_3AC3C14)[2 * (_DWORD)this[13]]);
         result = 1;
       }
       break;
@@ -298,7 +280,9 @@ CMaterialManagerTask__WaitFor___def_33554A8:
       if ( this[8] )
       {
         if ( !CSchedule::GetSchedEntry(this[10], this[8]) )
+        {
           this[14] = (CSchedule *)1;
+        }
       }
       result = 0;
       break;
@@ -315,9 +299,7 @@ int  CMaterialManagerTask::MinDebitOutput(enum PILE_TYPES a2) {
   int v3; // eax
 
   EcoSector = CSchedule::GetEcoSector(this[10]);
-  v3 = (*(int (__thiscall **)(struct IAIEcoManager *, struct IAIEcoManager *))(*(_DWORD *)EcoSector + 292))(
-         EcoSector,
-         EcoSector);
+  v3 = (*(int (__thiscall **)(struct IAIEcoManager *, struct IAIEcoManager *))(*(_DWORD *)EcoSector + 292))(EcoSector, EcoSector);
   return CDebitLevelManager::GetDebitValue(*((_DWORD *)this[10] + 2), *((_DWORD *)this[10] + 6), a2, 0, v3);
 }
 

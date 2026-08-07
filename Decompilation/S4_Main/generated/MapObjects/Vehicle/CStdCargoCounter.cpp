@@ -41,7 +41,9 @@ void  CStdCargoCounter::CountEntity(int a2, int _iCargoType) {
           break;
         default:
           if ( BBSupportDbgReport(1, "MapObjects\\Vehicle.cpp", 1704, "Invalid cargo type") == 1 )
+          {
             __debugbreak();
+          }
           break;
       }
     }

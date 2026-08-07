@@ -15,7 +15,9 @@ void  CAIRegions::DefineRegion(int _iRegionId, int a3, int a4, int a5) {
   {
     CAIRegion::DefineRegion(&this->m_cRegions[_iRegionId], a3, a4, a5);
     if ( _iRegionId > this->m_iLastUsedRegionId )
+    {
       this->m_iLastUsedRegionId = _iRegionId;
+    }
   }
 }
 
@@ -26,19 +28,15 @@ void  CAIRegions::ClearRegion(int _iRegionId) {
   
   if ( CAIRegions::IsValidRegionId(_iRegionId) )
   {
-    if ( _iRegionId > this->m_iLastUsedRegionId
-      && CAIRegion::Used(&this->m_cRegions[_iRegionId])
-      && BBSupportDbgReport(
-           2,
-           "AI\\AI_Global.cpp",
-           555,
-           "(_iRegionId <= m_iLastUsedRegionId ) || !m_cRegions[_iRegionId].Used()") == 1 )
+    if ( _iRegionId > this->m_iLastUsedRegionId && CAIRegion::Used(&this->m_cRegions[_iRegionId]) && BBSupportDbgReport(2, "AI\\AI_Global.cpp", 555, "(_iRegionId <= m_iLastUsedRegionId ) || !m_cRegions[_iRegionId].Used()") == 1 )
     {
       __debugbreak();
     }
     CAIRegion::Clear(&this->m_cRegions[_iRegionId]);
     if ( this->m_iLastUsedRegionId == _iRegionId )
+    {
       CAIRegions::CalculateLastUsedRegionId(this);
+    }
   }
 }
 
@@ -50,8 +48,12 @@ void  CAIRegions::ClearAllRegions(void) {
   int i; // [esp+4h] [ebp-4h]
 
   this->m_iLastUsedRegionId = 0;
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
+  {
     CAIRegion::Clear(&this->m_cRegions[i]);
+  }
 }
 
 
@@ -69,13 +71,16 @@ void  CAIRegions::Load(class IS4Chunk & a2) {
   
   int i; // [esp+8h] [ebp-4h]
 
-  if ( a2->LoadUnsigned32(16, 16) != 16
-    && BBSupportDbgReport(2, "AI\\AI_Global.cpp", 602, "iRegionsMax == AI_REGION_MAX") == 1 )
+  if ( a2->LoadUnsigned32(16, 16) != 16 && BBSupportDbgReport(2, "AI\\AI_Global.cpp", 602, "iRegionsMax == AI_REGION_MAX") == 1 )
   {
     __debugbreak();
   }
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
+  {
     CAIRegion::Load(&this->m_cRegions[i], a2);
+  }
   a2->Load(this->m_vPlayerRegionFlags, 576);
   CAIRegions::CalculateLastUsedRegionId(this);
 }
@@ -88,8 +93,12 @@ void  CAIRegions::Save(class IS4Chunk & a2) {
   int i; // [esp+4h] [ebp-4h]
 
   a2->SaveUnsigned32(16);
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
+  {
     CAIRegion::Save(&this->m_cRegions[i], a2);
+  }
   a2->Save(this->m_vPlayerRegionFlags, 0x240u);
 }
 
@@ -103,24 +112,14 @@ bool __cdecl CAIRegions::IsValidRegionId(int a1) {
 
 
 // address=[0x131ee40]
-// Decompiled from void __thiscall CAIRegions::SetPlayerRegionFlagBits(  CAIRegions *this,  unsigned int _iPlayerId,  unsigned int _iRegionId,  int a4)
+// Decompiled from void __thiscall CAIRegions::SetPlayerRegionFlagBits(CAIRegions *this, unsigned int _iPlayerId, unsigned int _iRegionId, int a4)
 void  CAIRegions::SetPlayerRegionFlagBits(int _iPlayerId, int _iRegionId, int a4) {
   
-  if ( _iPlayerId >= 9
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Global.h",
-         262,
-         "static_cast<unsigned int>(_iPlayerId) < PLAYER_MAX") == 1 )
+  if ( _iPlayerId >= 9 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Global.h", 262, "static_cast<unsigned int>(_iPlayerId) < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( _iRegionId >= 0x10
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Global.h",
-         263,
-         "static_cast<unsigned int>(_iRegionId) < AI_REGION_MAX") == 1 )
+  if ( _iRegionId >= 0x10 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Global.h", 263, "static_cast<unsigned int>(_iRegionId) < AI_REGION_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -135,7 +134,9 @@ void  CAIRegions::CalculateLastUsedRegionId(void) {
   int i; // [esp+4h] [ebp-4h]
 
   this->m_iLastUsedRegionId = 0;
-  for ( i = 15; i >= 1; --i )
+  for ( i = 15;
+        i >= 1;
+        --i )
   {
     if ( CAIRegion::Used(&this->m_cRegions[i]) )
     {

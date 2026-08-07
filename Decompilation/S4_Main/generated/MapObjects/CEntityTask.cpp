@@ -11,9 +11,13 @@ class CPersistence * __cdecl CEntityTask::New(std::istream & a1) {
 
   C = (CEntityTask *)operator new(24u);
   if ( C )
+  {
     return CEntityTask::CEntityTask(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -49,7 +53,7 @@ unsigned long  CEntityTask::ClassID(void)const {
 
 
 // address=[0x14dfb60]
-// Decompiled from CEntityTask *__thiscall CEntityTask::CEntityTask(  CEntityTask *this,  int _iTask,  int _iJobNr,  int _iX,  int _iY,  int _iDuration,  int _iFrameCount,  int _iDir,  bool _bForward,  bool _bVisible,  int _iEntity,  unsigned int a12,  unsigned int a13,  unsigned int _iTrigger)
+// Decompiled from CEntityTask *__thiscall CEntityTask::CEntityTask(CEntityTask *this, int _iTask, int _iJobNr, int _iX, int _iY, int _iDuration, int _iFrameCount, int _iDir, bool _bForward, bool _bVisible, int _iEntity, unsigned int a12, unsigned int a13, unsigned int _iTrigger)
  CEntityTask::CEntityTask(int _iTask, int _iJobNr, int _iX, int _iY, int _iDuration, int _iFrameCount, int _iDir, bool _bForward, bool _bVisible, int _iEntity, unsigned int a12, unsigned int a13, unsigned int _iTrigger) {
   
   CPersistence::CPersistence(this);
@@ -134,9 +138,7 @@ void  CEntityTask::Store(std::ostream & a1) {
 // Decompiled from CEntityTask *__thiscall CEntityTask::CEntityTask(CEntityTask *this, struct CEntityTask *a2)
  CEntityTask::CEntityTask(class CEntityTask && a2) {
   
-  CPersistence::CPersistence(
-    (boost::exception_detail::clone_base *)this,
-    (const struct boost::exception_detail::clone_base *)a2);
+  CPersistence::CPersistence((boost::exception_detail::clone_base *)this, (const struct boost::exception_detail::clone_base *)a2);
   this->__vftable = (CPersistence_vtbl *)&CEntityTask::_vftable_;
   this->m_iTask = a2->m_iTask;
   this->m_iEntity = a2->m_iEntity;
@@ -162,12 +164,7 @@ class CEntityTask * __cdecl CEntityTask::Load(std::istream & a1) {
   void **v1; // eax
 
   v1 = (void **)CPersistence::New(a1);
-  return (struct CEntityTask *)j____RTDynamicCast(
-                                 v1,
-                                 0,
-                                 &CPersistence__RTTI_Type_Descriptor_,
-                                 &CEntityTask__RTTI_Type_Descriptor_,
-                                 1);
+  return (struct CEntityTask *)j____RTDynamicCast(v1, 0, &CPersistence__RTTI_Type_Descriptor_, &CEntityTask__RTTI_Type_Descriptor_, 1);
 }
 
 

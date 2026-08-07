@@ -21,14 +21,15 @@ void  CPossibleDirs::PushDir(int a2) {
   
   CPossibleDirs *result; // eax
 
-  if ( a2 >= 6
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\LandAnimal.cpp", 640, "(_iDir >= 0) && (_iDir < NEIGHBORS_MAX)") == 1 )
+  if ( a2 >= 6 && BBSupportDbgReport(2, "MapObjects\\Animal\\LandAnimal.cpp", 640, "(_iDir >= 0) && (_iDir < NEIGHBORS_MAX)") == 1 )
   {
     __debugbreak();
   }
   result = this;
   if ( ((1 << a2) & *((_DWORD *)this + 1)) != 0 )
+  {
     return result;
+  }
   *((_DWORD *)this + 1) |= 1 << a2;
   *((_DWORD *)this + *(_DWORD *)this + 2) = a2;
   result = this;

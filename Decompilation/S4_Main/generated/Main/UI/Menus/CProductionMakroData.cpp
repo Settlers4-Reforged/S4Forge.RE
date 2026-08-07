@@ -12,7 +12,7 @@
 
 
 // address=[0x2f56810]
-// Decompiled from _DWORD *__thiscall CProductionMakroData::CProductionMakroData(  _DWORD *this,  CDynList **a2,  int a3,  int a4,  int a5,  int a6)
+// Decompiled from _DWORD *__thiscall CProductionMakroData::CProductionMakroData(_DWORD *this, CDynList **a2, int a3, int a4, int a5, int a6)
  CProductionMakroData::CProductionMakroData(class CSchedule * a2, int a3, enum BUILDING_TYPES a4, struct SBuildId * a5, struct SBuildId * a6) {
   
   struct CDynListEntry *ProductivityControll; // [esp+8h] [ebp-20h]
@@ -27,7 +27,9 @@
   this[124] = a3;
   NearestInputBuildings = 0;
   v8 = 0;
-  for ( i = 0; i < 20; ++i )
+  for ( i = 0;
+        i < 20;
+        ++i )
   {
     memset(&this[2 * i], 0, 8u);
     memset(&this[2 * i + 40], 0, 8u);
@@ -35,28 +37,44 @@
   }
   this[127] = 0;
   if ( !this[125] )
+  {
     return this;
-  for ( j = 0; *(_DWORD *)(a6 + 8 * j); ++j )
+  }
+  for ( j = 0;
+        *(_DWORD *)(a6 + 8 * j);
+        ++j )
   {
     ProductivityControll = CSchedule::GetProductivityControll(a2, *(_DWORD *)(a6 + 8 * j), *(_DWORD *)(a6 + 8 * j + 4));
     if ( ProductivityControll )
+    {
       this[127] += CProductivityControll::CalcPotentialOutput(ProductivityControll);
+    }
   }
   CSchedule::CopyMakroBuildings(this, a6, 20);
-  for ( k = 0; this[2 * k]; ++k )
+  for ( k = 0;
+        this[2 * k];
+        ++k )
   {
     NearestInputBuildings = CSchedule::GetNearestInputBuildings(a2, this[2 * k], this[2 * k + 1], 0, (int)(this + 40));
     if ( !NearestInputBuildings )
+    {
       NearestInputBuildings = -1;
+    }
     v8 = CSchedule::GetNearestInputBuildings(a2, this[2 * k], this[2 * k + 1], 1, (int)(this + 80));
     if ( !v8 )
+    {
       v8 = -1;
+    }
   }
   this[128] = this[127];
   if ( this[128] > NearestInputBuildings && NearestInputBuildings != -1 )
+  {
     this[128] = NearestInputBuildings;
+  }
   if ( this[128] > v8 && v8 != -1 )
+  {
     this[128] = v8;
+  }
   return this;
 }
 

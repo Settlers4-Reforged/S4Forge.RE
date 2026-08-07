@@ -10,9 +10,13 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
 
   C = (CGame_InitNetwork *)operator new(4u);
   if ( C )
+  {
     return CGame_InitNetwork::CGame_InitNetwork(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -45,18 +49,26 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
       C = (CGameType *)operator new(0x620u);
       LOBYTE(v17) = 1;
       if ( C )
+      {
         v10 = CGameType::CGameType(C);
+      }
       else
+      {
         v10 = 0;
+      }
       LOBYTE(v17) = 0;
       g_pGameType = (std::wstring *)v10;
     }
     v9 = (INetworkEngine *)operator new(0x18u);
     LOBYTE(v17) = 2;
     if ( v9 )
+    {
       v8 = INetworkEngine::INetworkEngine(v9, 1);
+    }
     else
+    {
       v8 = 0;
+    }
     LOBYTE(v17) = 0;
     g_pNetworkEngine = (int)v8;
     INetworkEngine::Start(1, 0, 0, a2);
@@ -79,9 +91,13 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
       v7 = (INetworkEngine *)operator new(0x18u);
       LOBYTE(v17) = 5;
       if ( v7 )
+      {
         v6 = INetworkEngine::INetworkEngine(v7, (bool)a2);
+      }
       else
+      {
         v6 = 0;
+      }
       LOBYTE(v17) = 0;
       g_pNetworkEngine = (int)v6;
       INetworkEngine::Start(1, 0, 0, 0);
@@ -110,7 +126,9 @@ bool  CGame_InitNetwork::Perform(void) {
     IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   }
   if ( g_pNetworkEngine )
+  {
     INetworkEngine::CheckForMsg((INetworkEngine *)g_pNetworkEngine);
+  }
   return 1;
 }
 
@@ -120,9 +138,13 @@ bool  CGame_InitNetwork::Perform(void) {
 bool  CGame_InitNetwork::OnEvent(class CEvn_Event & a2) {
   
   if ( a2->m_iEventId == 4001 )
+  {
     return 1;
+  }
   if ( a2->m_iEventId != 24 )
+  {
     return 0;
+  }
   CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
   return 1;
 }

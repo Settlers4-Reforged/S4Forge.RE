@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CSquadLeaderRole::New(std::istream & a1) {
   
   if ( operator new(0x74u) )
+  {
     return CSquadLeaderRole::CSquadLeaderRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -54,7 +58,7 @@ void  CSquadLeaderRole::Init(class CSettler * a2) {
 
 
 // address=[0x15923d0]
-// Decompiled from struct CWarriorBehavior::SWarriorBehaviorData *__thiscall CSquadLeaderRole::LogicUpdateJob(  CSquadLeaderRole *this,  struct CSettler *a2)
+// Decompiled from struct CWarriorBehavior::SWarriorBehaviorData *__thiscall CSquadLeaderRole::LogicUpdateJob(CSquadLeaderRole *this, struct CSettler *a2)
 void  CSquadLeaderRole::LogicUpdateJob(class CSettler * a2) {
   
   struct CWarriorBehavior::SWarriorBehaviorData *result; // eax
@@ -62,7 +66,9 @@ void  CSquadLeaderRole::LogicUpdateJob(class CSettler * a2) {
   CSoldierRole::LogicUpdateJob(this, a2);
   result = CWarriorBehavior::GetWarriorBehaviorData((CSquadLeaderRole *)((char *)this + 48));
   if ( !*((_BYTE *)result + 4) && *((int *)this + 28) > 0 )
+  {
     return result;
+  }
   result = (struct CWarriorBehavior::SWarriorBehaviorData *)IEntity::PackedXY(a2);
   *((_DWORD *)this + 28) = result;
   return result;
@@ -154,9 +160,7 @@ int  CSquadLeaderRole::WarriorTaskWalkOneStep(class IMovingEntity & a2) {
   struct CWalking *v11; // [esp+10h] [ebp-8h]
 
   v10 = CSoldierRole::WarriorTaskWalkOneStep(this, a2);
-  if ( (v10 & 0x10) != 0
-    && (int)ISelectableSettlerRole::GetPrimaryGroupId((CSquadLeaderRole *)((char *)this - 48)) > 0
-    && IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) )
+  if ( (v10 & 0x10) != 0 && (int)ISelectableSettlerRole::GetPrimaryGroupId((CSquadLeaderRole *)((char *)this - 48)) > 0 && IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) )
   {
     if ( *((int *)this + 16) <= 0 )
     {
@@ -265,7 +269,9 @@ void  CSquadLeaderRole::CommandGroupMembers(class IMovingEntity & a2) {
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   result = (int)this;
   if ( TickCounter < *((_DWORD *)this + 25) )
+  {
     return result;
+  }
   v15 = IEntity::OwnerId((unsigned __int8 *)a2);
   result = ISelectableSettlerRole::GetPrimaryGroupId(this);
   v19 = result;
@@ -284,26 +290,31 @@ void  CSquadLeaderRole::CommandGroupMembers(class IMovingEntity & a2) {
     else
     {
       if ( (*((_DWORD *)CWarriorBehavior::GetWarriorBehaviorData((CSquadLeaderRole *)((char *)this + 48)) + 3) & 0x200000) != 0 )
+      {
         v17 = 0x200000;
+      }
       else
+      {
         v17 = 0x100000;
+      }
       v5 = sqrt<int>(v22);
       v12 = (int)(v5 * 0.75 + 3.0);
       v24 = *((_DWORD *)this + 27) <= 0;
       v16 = IMovingEntity::Walking(a2);
-      v23 = (*(int (__thiscall **)(struct CWalking *, _DWORD, _DWORD))(*(_DWORD *)v16 + 32))(
-              v16,
-              LODWORD(v5),
-              HIDWORD(v5));
+      v23 = (*(int (__thiscall **)(struct CWalking *, _DWORD, _DWORD))(*(_DWORD *)v16 + 32))(v16, LODWORD(v5), HIDWORD(v5));
       if ( v23 < 0 )
+      {
         v23 = IEntity::PackedXY(a2);
+      }
       v8 = Y16X16::UnpackXFast(v23);
       v9 = Y16X16::UnpackYFast(v23);
       v3 = IEntity::PackedXY(a2);
       CGroupDestinations::CGroupDestinations((CGroupDestinations *)v26, v8, v9, v22, 0, v3);
       v6 = IEntity::EntityId((unsigned __int16 *)a2);
       v7 = (*(int (__thiscall **)(void *, int, int))(*(_DWORD *)g_pGroupMgr + 16))(g_pGroupMgr, v15, v19);
-      for ( i = 0; i < v22; ++i )
+      for ( i = 0;
+            i < v22;
+            ++i )
       {
         v14 = *(unsigned __int16 *)(v7 + 2 * i);
         if ( v14 != v6 )
@@ -314,15 +325,9 @@ void  CSquadLeaderRole::CommandGroupMembers(class IMovingEntity & a2) {
           {
             v13 = (Y16X16 *)CWarriorBehavior::WarriorDestinationXY(v20);
             NextDestination = CGroupDestinations::GetNextDestination(v26);
-            if ( v24
-              || (v4 = IEntity::PackedXY(a2), Y16X16::DistanceFast(v13, v4) > v12)
-              && Y16X16::DistanceFast(v13, NextDestination) > v12 )
+            if ( v24 || (v4 = IEntity::PackedXY(a2), Y16X16::DistanceFast(v13, v4) > v12) && Y16X16::DistanceFast(v13, NextDestination) > v12 )
             {
-              (**(void (__thiscall ***)(pairNode *, unsigned __int8 *, int, int))v20)(
-                v20,
-                SettlerPtr,
-                NextDestination,
-                v17);
+              (**(void (__thiscall ***)(pairNode *, unsigned __int8 *, int, int))v20)(v20, SettlerPtr, NextDestination, v17);
             }
           }
         }
@@ -343,12 +348,7 @@ class CSquadLeaderRole * __cdecl CSquadLeaderRole::Load_HACK_VERSION(std::istrea
   struct CPersistence *v1; // eax
 
   v1 = CPersistence::New_HACK_VERSION(a1);
-  return j____RTDynamicCast(
-           (void **)&v1->__vftable,
-           0,
-           &CPersistence__RTTI_Type_Descriptor_,
-           &CSquadLeaderRole__RTTI_Type_Descriptor_,
-           1);
+  return j____RTDynamicCast((void **)&v1->__vftable, 0, &CPersistence__RTTI_Type_Descriptor_, &CSquadLeaderRole__RTTI_Type_Descriptor_, 1);
 }
 
 

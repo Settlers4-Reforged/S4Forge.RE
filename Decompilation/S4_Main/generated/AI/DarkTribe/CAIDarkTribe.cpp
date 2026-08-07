@@ -44,9 +44,13 @@ class CAIDarkTribe * __cdecl CAIDarkTribe::CreateInstance(int) {
 
   v2 = (std::bad_function_call *)operator new(0x4084u);
   if ( v2 )
+  {
     return CAIDarkTribe::CAIDarkTribe(v2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -58,7 +62,9 @@ void  CAIDarkTribe::Release(void) {
 
   result = this;
   if ( this )
+  {
     return (CAIDarkTribe *)delete this;
+  }
   return result;
 }
 
@@ -118,11 +124,15 @@ int  CAIDarkTribe::GetNearGardenerWorkPosition(int a2) {
   BorderElementListIndex = CAIDarkTribe::GetBorderElementListIndex(v25, v12);
   if ( BorderElementListIndex != -1 )
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       NrLandConversionPositions = CAIDarkTribe::GetNrLandConversionPositions(v25);
       if ( i >= NrLandConversionPositions )
+      {
         break;
+      }
       LandConversionPosition = (Y16X16 *)CAIDarkTribe::GetLandConversionPosition(v25, i);
       Y16X16::UnpackXYFast(LandConversionPosition, &v22, (int *)&v23);
       v20 = Squares::XYToVW(v22);
@@ -144,11 +154,15 @@ int  CAIDarkTribe::GetNearGardenerWorkPosition(int a2) {
       WorkingPosition = CAIDarkTribe::GetWorkingPosition(v17, v18, v11, v7);
       if ( WorkingPosition )
       {
-        for ( i = 0; ; ++i )
+        for ( i = 0;
+              ;
+              ++i )
         {
           v3 = std::vector<int>::size(v7);
           if ( i >= v3 )
+          {
             break;
+          }
           LandConversionPosition = *(Y16X16 **)std::vector<int>::operator[](i);
           Y16X16::UnpackXYFast(LandConversionPosition, &v22, (int *)&v23);
           if ( CAIDarkTribe::IsAdjacent(v25, v14, v15, v22, v23) )
@@ -163,11 +177,15 @@ int  CAIDarkTribe::GetNearGardenerWorkPosition(int a2) {
   }
   if ( !v28 )
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       NrBorderElements = CAIDarkTribe::GetNrBorderElements(v25);
       if ( i >= NrBorderElements )
+      {
         break;
+      }
       BorderElement = (Y16X16 *)CAIDarkTribe::GetBorderElement(v25, i);
       Y16X16::UnpackXYFast(BorderElement, &v20, &v21);
       if ( CAIDarkTribe::IsAdjacent(v25, v17, v18, v20, v21) )
@@ -178,11 +196,15 @@ int  CAIDarkTribe::GetNearGardenerWorkPosition(int a2) {
           WorkingPosition = CAIDarkTribe::GetWorkingPosition(v20, v21, v10, v7);
           if ( WorkingPosition )
           {
-            for ( j = 0; ; ++j )
+            for ( j = 0;
+                  ;
+                  ++j )
             {
               v5 = std::vector<int>::size(v7);
               if ( j >= v5 )
+              {
                 break;
+              }
               LandConversionPosition = *(Y16X16 **)std::vector<int>::operator[](j);
               Y16X16::UnpackXYFast(LandConversionPosition, &v22, (int *)&v23);
               if ( CAIDarkTribe::IsAdjacent(v25, v14, v15, v22, v23) )
@@ -218,11 +240,15 @@ int  CAIDarkTribe::GetNextGardenerWorkPosition(void) {
 
   LandConversionPosition = 0;
   if ( !CAIDarkTribe::GetNrLandConversionPositions(this) )
+  {
     return LandConversionPosition;
+  }
   LandConversionPosition = CAIDarkTribe::GetLandConversionPosition(this, 0);
   CAIDarkTribe::RemoveLandConversionPosition(this, LandConversionPosition);
   if ( (int)CAIDarkTribe::GetNrLandConversionPositions(this) < 10 )
+  {
     *((_BYTE *)this + 36) = 1;
+  }
   return LandConversionPosition;
 }
 
@@ -245,9 +271,13 @@ bool  CAIDarkTribe::InvokeBuilding(enum BUILDING_TYPES a2) {
 
   NextBuildingPosition = 0;
   if ( a2 == 49 )
+  {
     NextBuildingPosition = CAIDarkTribe::GetNextBuildingPosition((CAIDarkTribe *)this);
+  }
   if ( !NextBuildingPosition )
+  {
     return NextBuildingPosition != 0;
+  }
   CEvn_Logic::CEvn_Logic((CEvn_Logic *)v5, 0x13A1u, a2, NextBuildingPosition, this[4], 0, 0);
   v6 = 0;
   INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, (struct CEvn_Logic *)v5);
@@ -277,13 +307,16 @@ void  CAIDarkTribe::UpdateLandChangement(int a2, int a3, bool a4) {
   {
     CAIDarkTribe::RemoveLandConversionPosition(this, v8);
     if ( (int)CAIDarkTribe::GetNrLandConversionPositions(this) < 10 )
+    {
       *((_BYTE *)this + 36) = 1;
+    }
   }
   if ( !CAIDarkTribe::IsInBorderElementList(this, v10) )
+  {
     goto LABEL_10;
+  }
   BorderElementListIndex = CAIDarkTribe::GetBorderElementListIndex(this, v10);
-  if ( BorderElementListIndex == -1
-    && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 182, "iIndex != AI_DT_UNKNOWN_ELEMENT") == 1 )
+  if ( BorderElementListIndex == -1 && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 182, "iIndex != AI_DT_UNKNOWN_ELEMENT") == 1 )
   {
     __debugbreak();
   }
@@ -291,8 +324,10 @@ void  CAIDarkTribe::UpdateLandChangement(int a2, int a3, bool a4) {
   v5 = (_DWORD *)std::vector<int>::operator[](BorderElementListIndex);
   ++*v5;
   if ( *(int *)std::vector<int>::operator[](BorderElementListIndex) > 16 || !CAIDarkTribe::HasChangeableLand(this, v4) )
+  {
 LABEL_10:
     CAIDarkTribe::UpdateDarkTribeElement(this, v10, a4);
+  }
 }
 
 
@@ -325,10 +360,14 @@ int  CAIDarkTribe::IsBuildedPosition(int a2, int a3) {
   v10 = Squares::XYToVW(a3);
   v13 = Y16X16::PackXYFast(v9, v10);
   if ( !CAIDarkTribe::IsInOccupiedElementList(v14, v13) )
+  {
     return 0;
+  }
   OccupiedElementListIndex = CAIDarkTribe::GetOccupiedElementListIndex(v14, v13);
   if ( OccupiedElementListIndex == -1 )
+  {
     return 0;
+  }
   OccupiedElement = (int *)CAIDarkTribe::GetOccupiedElement(v14, v6, OccupiedElementListIndex);
   v4 = OccupiedElement[1];
   v7 = *OccupiedElement;
@@ -349,9 +388,13 @@ int  CAIDarkTribe::IsBuildingPosition(int a2, int a3) {
   v6 = Squares::XYToVW(a3);
   v4 = Y16X16::PackXYFast(v5, v6);
   if ( CAIDarkTribe::IsInBuildingGridList(this, v4) )
+  {
     return v5 + v6 * *((_DWORD *)this + 2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -367,9 +410,13 @@ int  CAIDarkTribe::IsOccupiedPosition(int a2, int a3) {
   v6 = Squares::XYToVW(a3);
   v4 = Y16X16::PackXYFast(v5, v6);
   if ( CAIDarkTribe::IsInOccupiedElementList(this, v4) )
+  {
     return v5 + v6 * *((_DWORD *)this + 2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -385,9 +432,13 @@ int  CAIDarkTribe::IsBorderPosition(int a2, int a3) {
   v6 = Squares::XYToVW(a3);
   v4 = Y16X16::PackXYFast(v5, v6);
   if ( CAIDarkTribe::IsInBorderElementList(this, v4) )
+  {
     return v5 + v6 * *((_DWORD *)this + 2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -411,10 +462,14 @@ int  CAIDarkTribe::IsReservedMushroomPosition(int a2, int a3) {
   v9 = Squares::XYToVW(a3);
   v11 = Y16X16::PackXYFast(v8, v9);
   if ( !CAIDarkTribe::IsInOccupiedElementList(v12, v11) )
+  {
     return 0;
+  }
   OccupiedElementListIndex = CAIDarkTribe::GetOccupiedElementListIndex(v12, v11);
   if ( OccupiedElementListIndex == -1 )
+  {
     return 0;
+  }
   OccupiedElement = (_DWORD *)CAIDarkTribe::GetOccupiedElement(v12, v6, OccupiedElementListIndex);
   v4 = OccupiedElement[1];
   v7[0] = *OccupiedElement;
@@ -461,16 +516,26 @@ void  CAIDarkTribe::InitDarkTribeElements(void) {
   CAIDarkTribe::UnInitDarkTribeElements(v28);
   FirstBuildingId = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)v28 + 1), 50);
   if ( !FirstBuildingId )
+  {
     FirstBuildingId = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)v28 + 1), 51);
+  }
   if ( !FirstBuildingId && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 594, "iBuildingID") == 1 )
+  {
     __debugbreak();
+  }
   result = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, FirstBuildingId);
   BuildingPtr = result;
   if ( !result )
-    return result;
-  for ( i = 0; i < *((_DWORD *)v28 + 3); ++i )
   {
-    for ( j = 0; j < *((_DWORD *)v28 + 2); ++j )
+    return result;
+  }
+  for ( i = 0;
+        i < *((_DWORD *)v28 + 3);
+        ++i )
+  {
+    for ( j = 0;
+          j < *((_DWORD *)v28 + 2);
+          ++j )
     {
       v20 = Y16X16::PackXYFast(j, i);
       CAIDarkTribe::AddToElementList(v28, v20);
@@ -486,8 +551,7 @@ void  CAIDarkTribe::InitDarkTribeElements(void) {
   v4 = CBuilding::EnsignWorldIdx(BuildingPtr);
   *((_DWORD *)v28 + 6) = v4;
   OccupiedElementListIndex = CAIDarkTribe::GetOccupiedElementListIndex(v28, *((_DWORD *)v28 + 4));
-  if ( OccupiedElementListIndex == -1
-    && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 621, "iIndex != AI_DT_UNKNOWN_ELEMENT") == 1 )
+  if ( OccupiedElementListIndex == -1 && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 621, "iIndex != AI_DT_UNKNOWN_ELEMENT") == 1 )
   {
     __debugbreak();
   }
@@ -509,8 +573,7 @@ void  CAIDarkTribe::InitDarkTribeElements(void) {
     i = Squares::XYToVW(v21);
     v20 = Y16X16::PackXYFast(j, i);
     OccupiedElementListIndex = CAIDarkTribe::GetOccupiedElementListIndex(v28, v20);
-    if ( OccupiedElementListIndex == -1
-      && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 643, "iIndex != AI_DT_UNKNOWN_ELEMENT") == 1 )
+    if ( OccupiedElementListIndex == -1 && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 643, "iIndex != AI_DT_UNKNOWN_ELEMENT") == 1 )
     {
       __debugbreak();
     }
@@ -594,9 +657,13 @@ void  CAIDarkTribe::UpdateDarkTribeElement(int a2, bool a3) {
     if ( a3 )
     {
       if ( !CAIDarkTribe::IsInOccupiedElementList(v29, a2) )
+      {
         CAIDarkTribe::AddToElementList(v29, a2);
+      }
       if ( !CAIDarkTribe::IsInBorderElementInWorkList(v29, a2) )
+      {
         std::vector<int>::push_back(&a2);
+      }
       if ( !CAIDarkTribe::IsInBorderElementList(v29, a2) )
       {
         std::vector<int>::push_back(&a2);
@@ -606,18 +673,15 @@ void  CAIDarkTribe::UpdateDarkTribeElement(int a2, bool a3) {
       if ( !CAIDarkTribe::HasChangeableLand(v29, v20) )
       {
         *((_BYTE *)v29 + 37) = 1;
-        for ( i = 0; i < 6; ++i )
+        for ( i = 0;
+              i < 6;
+              ++i )
         {
           v23 = g_sNeighborPoints[2 * i] + v26;
           v24 = MEMORY[0x37D8C0C][2 * i] + v27;
           if ( v24 >= 0 && v24 <= *((_DWORD *)v29 + 3) && v23 >= 0 && v23 <= *((_DWORD *)v29 + 2) )
           {
-            if ( (*(unsigned __int8 (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pTiling + 32))(
-                   g_pTiling,
-                   v26,
-                   v27,
-                   v23,
-                   v24) )
+            if ( (*(unsigned __int8 (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pTiling + 32))(g_pTiling, v26, v27, v23, v24) )
             {
               v18 = Y16X16::PackXYFast(v23, v24);
               CAIDarkTribe::AddToElementList(v29, v18);
@@ -748,7 +812,9 @@ void  CAIDarkTribe::AddToElementList(int a2) {
           std::vector<int>::push_back(&v21);
         }
         if ( !CAIDarkTribe::IsInBorderElementInWorkList(v28, a2) )
+        {
           std::vector<int>::push_back(&a2);
+        }
       }
       else
       {
@@ -795,18 +861,12 @@ void  CAIDarkTribe::AddToElementList(int a2) {
             if ( v30 )
             {
               LOWORD(v17) = 4;
-              CAIDarkTribe::ReplaceOccupiedElement(
-                v28,
-                OccupiedElementListIndex,
-                (const struct SAIDTOCCUPIEDELEMENT *)&v16);
+              CAIDarkTribe::ReplaceOccupiedElement(v28, OccupiedElementListIndex, (const struct SAIDTOCCUPIEDELEMENT *)&v16);
             }
             else if ( !v29 )
             {
               LOWORD(v17) = 1;
-              CAIDarkTribe::ReplaceOccupiedElement(
-                v28,
-                OccupiedElementListIndex,
-                (const struct SAIDTOCCUPIEDELEMENT *)&v16);
+              CAIDarkTribe::ReplaceOccupiedElement(v28, OccupiedElementListIndex, (const struct SAIDTOCCUPIEDELEMENT *)&v16);
               CAIVWVector::PushBack((CAIDarkTribe *)((char *)v28 + 8308), v16);
             }
           }
@@ -822,7 +882,9 @@ void  CAIDarkTribe::AddToElementList(int a2) {
         std::vector<int>::push_back(&v18);
       }
       if ( !CAIDarkTribe::IsInBorderElementInWorkList(v28, a2) )
+      {
         std::vector<int>::push_back(&a2);
+      }
     }
   }
 }
@@ -837,39 +899,23 @@ void  CAIDarkTribe::PushNewOccupiedElement(struct SAIDTOCCUPIEDELEMENT const & a
   int v4; // [esp+4h] [ebp-Ch]
   int v5; // [esp+8h] [ebp-8h]
 
-  if ( *((_WORD *)a2 + 2)
-    && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 975, "_rNewElement.m_iFlags == AI_DT_FLAG_UNDEFINED") == 1 )
+  if ( *((_WORD *)a2 + 2) && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 975, "_rNewElement.m_iFlags == AI_DT_FLAG_UNDEFINED") == 1 )
   {
     __debugbreak();
   }
-  if ( CAIDarkTribe::IsInOccupiedElementList(this, *(_DWORD *)a2)
-    && BBSupportDbgReport(
-         2,
-         "Ai\\Dark Tribe\\CAI_DarkTribe.cpp",
-         976,
-         "!IsInOccupiedElementList(_rNewElement.m_iPackedVW)") == 1 )
+  if ( CAIDarkTribe::IsInOccupiedElementList(this, *(_DWORD *)a2) && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 976, "!IsInOccupiedElementList(_rNewElement.m_iPackedVW)") == 1 )
   {
     __debugbreak();
   }
   v5 = std::vector<SAIDTOCCUPIEDELEMENT>::size((char *)this + 8232);
   std::vector<SAIDTOCCUPIEDELEMENT>::push_back(a2);
-  if ( *(_DWORD *)std::vector<SAIDTOCCUPIEDELEMENT>::operator[](v5) != *(_DWORD *)a2
-    && BBSupportDbgReport(
-         2,
-         "Ai\\Dark Tribe\\CAI_DarkTribe.cpp",
-         982,
-         "m_sUnInitializedVars.vuOccupiedElements[iNewIndex].m_iPackedVW == _rNewElement.m_iPackedVW") == 1 )
+  if ( *(_DWORD *)std::vector<SAIDTOCCUPIEDELEMENT>::operator[](v5) != *(_DWORD *)a2 && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 982, "m_sUnInitializedVars.vuOccupiedElements[iNewIndex].m_iPackedVW == _rNewElement.m_iPackedVW") == 1 )
   {
     __debugbreak();
   }
   v3 = (Grid *)Y16X16::UnpackXFast(*(_DWORD *)a2);
   v4 = Y16X16::UnpackYFast(*(_DWORD *)a2);
-  if ( !Grid::InQuadrat(v3, v4, 64)
-    && BBSupportDbgReport(
-         2,
-         "Ai\\Dark Tribe\\CAI_DarkTribe.cpp",
-         987,
-         "Grid::InQuadrat(iV, iW, Squares::SQUARE_GRID_MAX_V_W)") == 1 )
+  if ( !Grid::InQuadrat(v3, v4, 64) && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 987, "Grid::InQuadrat(iV, iW, Squares::SQUARE_GRID_MAX_V_W)") == 1 )
   {
     __debugbreak();
   }
@@ -890,16 +936,13 @@ bool  CAIDarkTribe::ReplaceOccupiedElement(int a2, struct SAIDTOCCUPIEDELEMENT c
   int v8; // [esp+10h] [ebp-8h]
 
   if ( a2 < 0 || a2 >= CAIDarkTribe::GetNrOccupiedElements(this) )
+  {
     return 0;
+  }
   v8 = std::vector<SAIDTOCCUPIEDELEMENT>::operator[](a2);
   v4 = Y16X16::UnpackXFast(*(_DWORD *)v8);
   v5 = Y16X16::UnpackYFast(*(_DWORD *)v8);
-  if ( *((unsigned __int16 *)this + 64 * v5 + v4 + 20) != a2 + 1
-    && BBSupportDbgReport(
-         2,
-         "Ai\\Dark Tribe\\CAI_DarkTribe.cpp",
-         1009,
-         "m_sUnInitializedVars.m_uOccupiedElementsIndices[iOldW][iOldV] == 1 + _iIndex") == 1 )
+  if ( *((unsigned __int16 *)this + 64 * v5 + v4 + 20) != a2 + 1 && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 1009, "m_sUnInitializedVars.m_uOccupiedElementsIndices[iOldW][iOldV] == 1 + _iIndex") == 1 )
   {
     __debugbreak();
   }
@@ -908,23 +951,16 @@ bool  CAIDarkTribe::ReplaceOccupiedElement(int a2, struct SAIDTOCCUPIEDELEMENT c
   *(_DWORD *)v8 = *(_DWORD *)a3;
   v6 = (Grid *)Y16X16::UnpackXFast(*(_DWORD *)a3);
   v7 = Y16X16::UnpackYFast(*(_DWORD *)a3);
-  if ( !Grid::InQuadrat(v6, v7, 64)
-    && BBSupportDbgReport(
-         2,
-         "Ai\\Dark Tribe\\CAI_DarkTribe.cpp",
-         1019,
-         "Grid::InQuadrat(iNewV, iNewW, Squares::SQUARE_GRID_MAX_V_W)") == 1 )
+  if ( !Grid::InQuadrat(v6, v7, 64) && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 1019, "Grid::InQuadrat(iNewV, iNewW, Squares::SQUARE_GRID_MAX_V_W)") == 1 )
   {
     __debugbreak();
   }
   if ( *((_WORD *)this + 64 * v7 + (_DWORD)v6 + 20) )
   {
-    if ( BBSupportDbgReport(
-           2,
-           "Ai\\Dark Tribe\\CAI_DarkTribe.cpp",
-           1020,
-           "m_sUnInitializedVars.m_uOccupiedElementsIndices[iNewW][iNewV] == 0") == 1 )
+    if ( BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 1020, "m_sUnInitializedVars.m_uOccupiedElementsIndices[iNewW][iNewV] == 0") == 1 )
+    {
       __debugbreak();
+    }
   }
   *((_WORD *)this + 64 * v7 + (_DWORD)v6 + 20) = a2 + 1;
   return 1;
@@ -949,10 +985,14 @@ void  CAIDarkTribe::RemoveOccupiedElement(int a2) {
   NrOccupiedElements = CAIDarkTribe::GetNrOccupiedElements(this);
   v9 = NrOccupiedElements;
   if ( a2 < 0 )
+  {
     return NrOccupiedElements;
+  }
   LOBYTE(NrOccupiedElements) = a2;
   if ( a2 >= v9 )
+  {
     return NrOccupiedElements;
+  }
   v10 = v9 - 1;
   v3 = (int *)std::vector<SAIDTOCCUPIEDELEMENT>::operator[](v9 - 1);
   v4 = v3[1];
@@ -960,19 +1000,16 @@ void  CAIDarkTribe::RemoveOccupiedElement(int a2) {
   v6[1] = v4;
   v7 = Y16X16::UnpackXFast(v6[0]);
   v8 = Y16X16::UnpackYFast(v6[0]);
-  if ( *((unsigned __int16 *)v11 + 64 * v8 + v7 + 20) != v9
-    && BBSupportDbgReport(
-         2,
-         "Ai\\Dark Tribe\\CAI_DarkTribe.cpp",
-         1047,
-         "m_sUnInitializedVars.m_uOccupiedElementsIndices[iLastW][iLastV] == 1 + iLastIndex") == 1 )
+  if ( *((unsigned __int16 *)v11 + 64 * v8 + v7 + 20) != v9 && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 1047, "m_sUnInitializedVars.m_uOccupiedElementsIndices[iLastW][iLastV] == 1 + iLastIndex") == 1 )
   {
     __debugbreak();
   }
   *((_WORD *)v11 + 64 * v8 + v7 + 20) = 0;
   LOBYTE(NrOccupiedElements) = std::vector<SAIDTOCCUPIEDELEMENT>::pop_back((char *)v11 + 8232);
   if ( a2 < v10 )
+  {
     LOBYTE(NrOccupiedElements) = CAIDarkTribe::ReplaceOccupiedElement(v11, a2, (const struct SAIDTOCCUPIEDELEMENT *)v6);
+  }
   return NrOccupiedElements;
 }
 
@@ -994,12 +1031,7 @@ int  CAIDarkTribe::GetOccupiedElementListIndex(int a2) {
 
   v4 = (Grid *)Y16X16::UnpackXFast(a2);
   v5 = Y16X16::UnpackYFast(a2);
-  if ( !Grid::InQuadrat(v4, v5, 64)
-    && BBSupportDbgReport(
-         2,
-         "Ai\\Dark Tribe\\CAI_DarkTribe.cpp",
-         1076,
-         "Grid::InQuadrat(iV, iW, Squares::SQUARE_GRID_MAX_V_W)") == 1 )
+  if ( !Grid::InQuadrat(v4, v5, 64) && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 1076, "Grid::InQuadrat(iV, iW, Squares::SQUARE_GRID_MAX_V_W)") == 1 )
   {
     __debugbreak();
   }
@@ -1041,10 +1073,14 @@ int  CAIDarkTribe::GetBorderElementListIndex(int a2)const {
   int i; // [esp+8h] [ebp-4h]
 
   NrBorderElements = CAIDarkTribe::GetNrBorderElements(this);
-  for ( i = 0; i < NrBorderElements; ++i )
+  for ( i = 0;
+        i < NrBorderElements;
+        ++i )
   {
     if ( CAIDarkTribe::GetBorderElement(this, i) == a2 )
+    {
       return i;
+    }
   }
   return -1;
 }
@@ -1075,10 +1111,14 @@ int  CAIDarkTribe::GetBorderElementInWorkListIndex(int a2)const {
   int i; // [esp+8h] [ebp-4h]
 
   NrBorderElementsInWork = CAIDarkTribe::GetNrBorderElementsInWork(this);
-  for ( i = 0; i < NrBorderElementsInWork; ++i )
+  for ( i = 0;
+        i < NrBorderElementsInWork;
+        ++i )
   {
     if ( CAIDarkTribe::GetBorderElementInWork(this, i) == a2 )
+    {
       return i;
+    }
   }
   return -1;
 }
@@ -1140,10 +1180,14 @@ int  CAIDarkTribe::GetLandConversionPositionIndex(int a2)const {
   int i; // [esp+8h] [ebp-4h]
 
   NrLandConversionPositions = CAIDarkTribe::GetNrLandConversionPositions(this);
-  for ( i = 0; i < NrLandConversionPositions; ++i )
+  for ( i = 0;
+        i < NrLandConversionPositions;
+        ++i )
   {
     if ( CAIDarkTribe::GetLandConversionPosition(this, i) == a2 )
+    {
       return i;
+    }
   }
   return -1;
 }
@@ -1164,7 +1208,9 @@ void  CAIDarkTribe::CleanLandConversionPositionsOfGrid(int a2) {
 
   result = CAIDarkTribe::GetNrLandConversionPositions(this);
   NrLandConversionPositions = result;
-  for ( i = 0; i < NrLandConversionPositions; ++i )
+  for ( i = 0;
+        i < NrLandConversionPositions;
+        ++i )
   {
     LandConversionPosition = CAIDarkTribe::GetLandConversionPosition(this, i);
     v3 = (Squares *)Y16X16::UnpackYFast(LandConversionPosition);
@@ -1176,7 +1222,9 @@ void  CAIDarkTribe::CleanLandConversionPositionsOfGrid(int a2) {
       CAIDarkTribe::RemoveLandConversionPosition(this, LandConversionPosition);
       NrLandConversionPositions = CAIDarkTribe::GetNrLandConversionPositions(this);
       if ( NrLandConversionPositions < 10 )
+      {
         *((_BYTE *)this + 36) = 1;
+      }
       --i;
     }
     result = i + 1;
@@ -1214,9 +1262,7 @@ void  CAIDarkTribe::CheckSendGardenerPositions(void) {
     {
       v15 = 1;
       NextCurrentUsedInWorkElementIndex = CAIDarkTribe::GetNextCurrentUsedInWorkElementIndex(v13);
-      while ( (unsigned int)std::list<int>::size((char *)v13 + 8296) < 0x14
-           && NextCurrentUsedInWorkElementIndex != -1
-           && v15 )
+      while ( (unsigned int)std::list<int>::size((char *)v13 + 8296) < 0x14 && NextCurrentUsedInWorkElementIndex != -1 && v15 )
       {
         v15 = 0;
         BorderElementInWork = (Y16X16 *)CAIDarkTribe::GetBorderElementInWork(v13, NextCurrentUsedInWorkElementIndex);
@@ -1226,11 +1272,15 @@ void  CAIDarkTribe::CheckSendGardenerPositions(void) {
         {
           if ( (unsigned __int8)CAIDarkTribe::GetWorkingPosition(v7, v8, v9, v3) )
           {
-            for ( i = 0; ; ++i )
+            for ( i = 0;
+                  ;
+                  ++i )
             {
               v1 = std::vector<int>::size(v3);
               if ( i >= v1 )
+              {
                 break;
+              }
               v10 = *(Y16X16 **)std::vector<int>::operator[](i);
               if ( !CAIDarkTribe::IsInLandConversionPositionsList(v13, v10) )
               {
@@ -1247,9 +1297,13 @@ void  CAIDarkTribe::CheckSendGardenerPositions(void) {
           CAIDarkTribe::RemoveBorderElementInWork(v13, NextCurrentUsedInWorkElementIndex);
         }
         if ( v15 )
+        {
           NextCurrentUsedInWorkElementIndex = CAIDarkTribe::GetNextCurrentUsedInWorkElementIndex(v13);
+        }
         else
+        {
           NextCurrentUsedInWorkElementIndex = -1;
+        }
       }
     }
   }
@@ -1277,7 +1331,9 @@ int  CAIDarkTribe::GetNextCurrentUsedInWorkElementIndex(void) {
   int v14; // [esp+30h] [ebp-8h]
 
   if ( !CAIDarkTribe::GetNrBorderElementsInWork(this) )
+  {
     return -1;
+  }
   v10 = Y16X16::UnpackXFast(*((_DWORD *)this + 4));
   v11 = Y16X16::UnpackYFast(*((_DWORD *)this + 4));
   v4 = *((_DWORD *)this + 7);
@@ -1288,13 +1344,17 @@ int  CAIDarkTribe::GetNextCurrentUsedInWorkElementIndex(void) {
     v5 = (Grid *)Y16X16::UnpackXFast(BorderElementInWork);
     v6 = Y16X16::UnpackYFast(BorderElementInWork);
     if ( Grid::Distance(v5, v6, v10, v11) <= *((_DWORD *)this + 8) )
+    {
       return *((_DWORD *)this + 7);
+    }
     CAIDarkTribe::IncreaseNextCurrentUsedInWorkElementIndex(this);
   }
   while ( *((_DWORD *)this + 7) != v4 || (int)++*((_DWORD *)this + 8) < 100 );
   v7 = -1;
   v8 = 0xFFFF;
-  for ( i = 0; i < CAIDarkTribe::GetNrBorderElementsInWork(this); ++i )
+  for ( i = 0;
+        i < CAIDarkTribe::GetNrBorderElementsInWork(this);
+        ++i )
   {
     v14 = CAIDarkTribe::GetBorderElementInWork(this, i);
     v2 = (Grid *)Y16X16::UnpackXFast(v14);
@@ -1408,15 +1468,21 @@ int  CAIDarkTribe::GetNextBuildingPosition(void) {
 
   v22 = this;
   if ( !(*(unsigned __int8 (__thiscall **)(CAIDarkTribe *, int))(*(_DWORD *)this + 16))(this, 49) )
+  {
     return 0;
+  }
   Y16X16::UnpackXYFast(*((Y16X16 **)v22 + 4), &v12, &v13);
   v14 = 0xFFFF;
   v19 = -1;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     NrBuildingGrids = CAIDarkTribe::GetNrBuildingGrids(v22);
     if ( i >= NrBuildingGrids )
+    {
       break;
+    }
     BuildingGrid = (Y16X16 *)CAIDarkTribe::GetBuildingGrid(v22, i);
     Y16X16::UnpackXYFast(BuildingGrid, &k, (int *)&j);
     v6 = Squares::VWToXY(j);
@@ -1437,11 +1503,15 @@ int  CAIDarkTribe::GetNextBuildingPosition(void) {
     }
   }
   if ( v19 == -1 )
+  {
     return 0;
+  }
   Y16X16::UnpackXYFast(*((Y16X16 **)v22 + 5), &v12, &v13);
   v11 = CWorldManager::SectorId(*((_DWORD *)v22 + 6));
   if ( v11 <= 0 && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 1540, "iCenterSectorId > 0") == 1 )
+  {
     __debugbreak();
+  }
   BuildingGrid = (Y16X16 *)CAIDarkTribe::GetBuildingGrid(v22, v19);
   CAIDarkTribe::RemoveBuildingGrid(v22, v19);
   Y16X16::UnpackXYFast(BuildingGrid, &v17, (int *)&v18);
@@ -1449,22 +1519,19 @@ int  CAIDarkTribe::GetNextBuildingPosition(void) {
   v18 = (Squares *)Squares::VWToXY(v18);
   v4 = CAIEcoSpecialBuildingInfos::TheObject(3, 49);
   BoundingBoxInfo = (char *)CAIEcoSpecialBuildingInfos::GetBoundingBoxInfo(v4, v5, v7);
-  for ( j = v18; (int)j < (int)((char *)v18 + 16); j = (Squares *)((char *)j + 1) )
+  for ( j = v18;
+        (int)j < (int)((char *)v18 + 16);
+        j = (Squares *)((char *)j + 1) )
   {
-    for ( k = v17; (int)k < (int)((char *)v17 + 16); k = (Squares *)((char *)k + 1) )
+    for ( k = v17;
+          (int)k < (int)((char *)v17 + 16);
+          k = (Squares *)((char *)k + 1) )
     {
       if ( CWorldManager::ResourceAmount((int)k, (int)j, 112) || CWorldManager::ResourceAmount((int)k, (int)j, 96) )
       {
         k = (Squares *)((char *)k - *BoundingBoxInfo);
       }
-      else if ( CWorldManager::SectorId((int)k, (int)j) == v11
-             && (int)CBuildingMgr::CheckForBuild((CBuildingMgr *)g_cBuildingMgr, k, j, *((_DWORD *)v22 + 1), 49, 0) > 0
-             && (*(unsigned __int8 (__thiscall **)(void *, _DWORD, Squares *, Squares *))(*(_DWORD *)g_pDarkTribe + 20))(
-                  g_pDarkTribe,
-                  *((_DWORD *)v22 + 1),
-                  k,
-                  j)
-             && CAIDarkTribe::CheckOtherBuildingPositions(v22, k, j) )
+      else if ( CWorldManager::SectorId((int)k, (int)j) == v11 && (int)CBuildingMgr::CheckForBuild((CBuildingMgr *)g_cBuildingMgr, k, j, *((_DWORD *)v22 + 1), 49, 0) > 0 && (*(unsigned __int8 (__thiscall **)(void *, _DWORD, Squares *, Squares *))(*(_DWORD *)g_pDarkTribe + 20))(g_pDarkTribe, *((_DWORD *)v22 + 1), k, j) && CAIDarkTribe::CheckOtherBuildingPositions(v22, k, j) )
       {
         return Y16X16::PackXYFast((int)k, (int)j);
       }
@@ -1515,11 +1582,15 @@ bool  CAIDarkTribe::CheckBuildingGrids(void) {
   SAIDTOCCUPIEDELEMENT::SAIDTOCCUPIEDELEMENT((SAIDTOCCUPIEDELEMENT *)&v15, 0, 0);
   SAIDTOCCUPIEDELEMENT::SAIDTOCCUPIEDELEMENT((SAIDTOCCUPIEDELEMENT *)&v13, 0, 0);
   if ( !*((_BYTE *)v27 + 37) )
+  {
     return 0;
+  }
   *((_BYTE *)v27 + 37) = 0;
   NrOccupiedElements = CAIDarkTribe::GetNrOccupiedElements(v27);
   v32 = 0;
-  for ( i = 0; i < NrOccupiedElements; ++i )
+  for ( i = 0;
+        i < NrOccupiedElements;
+        ++i )
   {
     OccupiedElement = CAIDarkTribe::GetOccupiedElement(v27, v12, i);
     v3 = *(_DWORD *)(OccupiedElement + 4);
@@ -1529,7 +1600,9 @@ bool  CAIDarkTribe::CheckBuildingGrids(void) {
     if ( (_WORD)v18 )
     {
       if ( (__int16)v18 == 1 && !CAIDarkTribe::IsInBuildingGridList(v27, v17) )
+      {
         CAIVWVector::PushBack((CAIDarkTribe *)((char *)v27 + 8308), v17);
+      }
     }
     else if ( !CAIDarkTribe::IsInBorderElementList(v27, v17) )
     {
@@ -1604,21 +1677,26 @@ bool  CAIDarkTribe::CheckOtherBuildingPositions(int a2, int a3) {
   int i; // [esp+30h] [ebp-E8h]
   _BYTE v18[224]; // [esp+34h] [ebp-E4h] BYREF
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
-    && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 1698, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "Ai\\Dark Tribe\\CAI_DarkTribe.cpp", 1698, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   CTmpEntitiesRef::CTmpEntitiesRef((CTmpEntitiesRef *)v10);
   CVWList::CVWList((CVWList *)v18, a2, a3, 22);
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     v3 = CVWList::Size((CVWList *)v18);
     if ( i >= v3 )
+    {
       break;
+    }
     v11 = *(_DWORD *)CVWList::operator[](i);
     v12 = *(_DWORD *)(CVWList::operator[](i) + 4);
-    for ( j = CWarMap::FirstEntityIdVW(2, v11, v12); j; j = CWarMapNode::Next(v7) )
+    for ( j = CWarMap::FirstEntityIdVW(2, v11, v12);
+          j;
+          j = CWarMapNode::Next(v7) )
     {
       v8 = (CPropertySet *)CTmpEntitiesRef::operator[](j);
       v15 = (_DWORD *)CBuildingMgr::operator[](j);
@@ -1629,7 +1707,9 @@ bool  CAIDarkTribe::CheckOtherBuildingPositions(int a2, int a3) {
       v9 = CWorldManager::Index(v13, v14);
       ITiling::SectorId(v9);
       if ( (int)Grid::DistanceInline((Grid *)(v13 - a2), v14 - a3) <= 22 )
+      {
         return 0;
+      }
       v7 = IEntity::WarMapNode(v8);
     }
   }
@@ -1646,7 +1726,9 @@ bool  CAIDarkTribe::IsPureDarkLandAround(int a2, int a3) {
   int v7; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v6 = g_sNeighborPoints[2 * i] + a2;
     v7 = MEMORY[0x37D8C0C][2 * i] + a3;
@@ -1656,7 +1738,9 @@ bool  CAIDarkTribe::IsPureDarkLandAround(int a2, int a3) {
       if ( !CAIDarkTribe::HasChangeableLand(this, v4) )
       {
         if ( CAIResourceData::GroundInfo1(v4, 0) )
+        {
           return 1;
+        }
       }
     }
   }
@@ -1669,10 +1753,10 @@ bool  CAIDarkTribe::IsPureDarkLandAround(int a2, int a3) {
 bool  CAIDarkTribe::HasChangeableLand(class CAIResourceData const & a2) {
   
   if ( (CAIResourceData::Flags1(a2) & 1) == 0 )
+  {
     return 0;
-  return CAIResourceData::GroundInfo1(a2, 1)
-      || CAIResourceData::GroundInfo1(a2, 2)
-      || CAIResourceData::GroundInfo1(a2, 3);
+  }
+  return CAIResourceData::GroundInfo1(a2, 1) || CAIResourceData::GroundInfo1(a2, 2) || CAIResourceData::GroundInfo1(a2, 3);
 }
 
 
@@ -1699,14 +1783,18 @@ int  CAIDarkTribe::CountAdjacentDarkLand(int a2, int a3) {
   int i; // [esp+10h] [ebp-4h]
 
   v6 = 0;
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v4 = g_sNeighborPoints[2 * i] + a2;
     v5 = MEMORY[0x37D8C0C][2 * i] + a3;
     if ( (unsigned __int8)CWorldManager::InWorld(v4, v5) )
     {
       if ( CWorldManager::FlagBits(v4, v5, 4u) )
+      {
         ++v6;
+      }
     }
   }
   return v6;
@@ -1719,10 +1807,14 @@ bool  CAIDarkTribe::IsAdjacent(int a2, int a3, int a4, int a5) {
   
   int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     if ( g_sNeighborPoints[2 * i] + a2 == a4 && MEMORY[0x37D8C0C][2 * i] + a3 == a5 )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -1737,27 +1829,15 @@ void  CAIDarkTribe::CheckManakopterHallExists(void) {
   _BYTE v4[32]; // [esp+10h] [ebp-30h] BYREF
   int v5; // [esp+3Ch] [ebp-4h]
 
-  if ( CBuildingMgr::PlayerUsesManakopterHalls((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 1))
-    && !CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 1), 80) )
+  if ( CBuildingMgr::PlayerUsesManakopterHalls((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 1)) && !CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 1), 80) )
   {
-    TimeSinceHallDestruction = CBuildingMgr::GetTimeSinceHallDestruction(
-                                 (CBuildingMgr *)g_cBuildingMgr,
-                                 *((_DWORD *)this + 1));
+    TimeSinceHallDestruction = CBuildingMgr::GetTimeSinceHallDestruction((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 1));
     if ( TimeSinceHallDestruction > CAIPlayersScriptVars::GetValue(g_cAIPlayersScriptVars, *((_DWORD *)this + 1), 19) )
     {
-      ValidManakopterHallPosition = CBuildingMgr::GetValidManakopterHallPosition(
-                                      (CBuildingMgr *)g_cBuildingMgr,
-                                      *((_DWORD *)this + 1));
+      ValidManakopterHallPosition = CBuildingMgr::GetValidManakopterHallPosition((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 1));
       if ( ValidManakopterHallPosition )
       {
-        CEvn_Logic::CEvn_Logic(
-          (CEvn_Logic *)v4,
-          0x13A1u,
-          0x50u,
-          ValidManakopterHallPosition,
-          *((_BYTE *)this + 4),
-          0,
-          0);
+        CEvn_Logic::CEvn_Logic((CEvn_Logic *)v4, 0x13A1u, 0x50u, ValidManakopterHallPosition, *((_BYTE *)this + 4), 0, 0);
         v5 = 0;
         INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, (struct CEvn_Logic *)v4);
         v5 = -1;
@@ -1773,9 +1853,13 @@ void  CAIDarkTribe::CheckManakopterHallExists(void) {
 int  CAIDarkTribe::GetBorderElement(int a2)const {
   
   if ( a2 >= 0 && a2 < CAIDarkTribe::GetNrBorderElements(this) )
+  {
     return *(_DWORD *)std::vector<int>::operator[](a2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -1784,9 +1868,13 @@ int  CAIDarkTribe::GetBorderElement(int a2)const {
 int  CAIDarkTribe::GetBorderElementInWork(int a2)const {
   
   if ( a2 >= 0 && a2 < CAIDarkTribe::GetNrBorderElementsInWork(this) )
+  {
     return *(_DWORD *)std::vector<int>::operator[](a2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -1878,7 +1966,9 @@ void  CAIDarkTribe::IncreaseNextCurrentUsedInWorkElementIndex(void) {
   ++*((_DWORD *)this + 7);
   result = CAIDarkTribe::GetNrBorderElementsInWork(this);
   if ( *((_DWORD *)this + 7) >= result )
+  {
     *((_DWORD *)this + 7) = 0;
+  }
   return result;
 }
 
@@ -1931,7 +2021,9 @@ void  CAIDarkTribe::RemoveLandConversionPosition(int a2) {
 
   result = CAIDarkTribe::GetNrLandConversionPositions(this);
   if ( result )
+  {
     return std::list<int>::remove(&a2);
+  }
   return result;
 }
 

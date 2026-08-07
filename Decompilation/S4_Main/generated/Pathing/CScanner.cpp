@@ -4,17 +4,12 @@
 // Definitions for class CScanner
 
 // address=[0x1301390]
-// Decompiled from bool __cdecl CScanner::FindNearestEnemyTowerInSector(  struct SFindNearestResult *a1,  unsigned int a2,  unsigned int a3,  int a4,  int iPlayerId)
+// Decompiled from bool __cdecl CScanner::FindNearestEnemyTowerInSector(struct SFindNearestResult *a1, unsigned int a2, unsigned int a3, int a4, int iPlayerId)
 bool __cdecl CScanner::FindNearestEnemyTowerInSector(struct SFindNearestResult & a1, int a2, int a3, int a4, int iPlayerId) {
   
   int v6; // [esp+0h] [ebp-4h]
 
-  if ( !CAlliances::IsValidUsedPlayerId(iPlayerId)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Pathing\\Scanner.h",
-         377,
-         "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CAlliances::IsValidUsedPlayerId(iPlayerId) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Pathing\\Scanner.h", 377, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -30,12 +25,7 @@ int __cdecl CScanner::FindNearestOwnTowerInSector(int a1, int a2, int a3, int _i
   struct SFindNearestResult v5; // [esp+0h] [ebp-Ch] BYREF
   int v6; // [esp+8h] [ebp-4h]
 
-  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Pathing\\Scanner.h",
-         391,
-         "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Pathing\\Scanner.h", 391, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -55,33 +45,37 @@ bool __cdecl CScanner::CheckIfAEnemyUnitMayBeInRange(int _iX, int _iY, int _iRad
   int i; // [esp+Ch] [ebp-E8h]
   CVWList v9; // [esp+10h] [ebp-E4h] BYREF
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 461, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 461, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( _iRadius <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 462, "_iRadius > 0") == 1 )
+  {
     __debugbreak();
-  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 463, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
+  }
+  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 463, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
   iAllianceId = CAlliances::AllianceId(_iPlayerId);
   CVWList::CVWList(&v9, _iX, _iY, _iRadius);
-  for ( i = 0; i < CVWList::Size(&v9); ++i )
+  for ( i = 0;
+        i < CVWList::Size(&v9);
+        ++i )
   {
     m_iV = CVWList::operator[](&v9, i)->m_iV;
     v4 = CVWList::operator[](&v9, i);
     if ( CInfluMap::EnemyValueVW(m_iV, v4->m_iW, iAllianceId) > 0 )
+    {
       return 1;
+    }
   }
   return 0;
 }
 
 
 // address=[0x15df200]
-// Decompiled from int __cdecl CScanner::CountCiviliansAndFindNearestInSector(  unsigned int _iX,  unsigned int _iY,  int _iRadius,  int a4,  int *a5)
+// Decompiled from int __cdecl CScanner::CountCiviliansAndFindNearestInSector(unsigned int _iX, unsigned int _iY, int _iRadius, int a4, int *a5)
 int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int _iX, int _iY, int _iRadius, int a4, int * a5) {
   
   const struct CVWList::SVW *v5; // eax
@@ -102,13 +96,14 @@ int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int _iX, int _iY, int
   IEntity *v21; // [esp+30h] [ebp-E8h]
   CVWList v22; // [esp+34h] [ebp-E4h] BYREF
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 817, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 817, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( _iRadius <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 818, "_iRadius > 0") == 1 )
+  {
     __debugbreak();
+  }
   iResult = 0;
   iSectorId = CWorldManager::SectorId(_iX, _iY);
   iNearestXY = -1;
@@ -116,15 +111,18 @@ int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int _iX, int _iY, int
   if ( iSectorId > 0 )
   {
     CVWList::CVWList(&v22, _iX, _iY, _iRadius);
-    for ( i = 0; i < CVWList::Size(&v22); ++i )
+    for ( i = 0;
+          i < CVWList::Size(&v22);
+          ++i )
     {
       m_iV = CVWList::operator[](&v22, i)->m_iV;
       v5 = CVWList::operator[](&v22, i);
-      for ( j = CWarMap::FirstEntityIdVW(0, m_iV, v5->m_iW); j; j = CWarMapNode::Next(v8) )
+      for ( j = CWarMap::FirstEntityIdVW(0, m_iV, v5->m_iW);
+            j;
+            j = CWarMapNode::Next(v8) )
       {
         v21 = CMapObjectMgr::Entity(j);
-        if ( IEntity::WarriorType(v21) == AI_WARRIOR_TYPE_NONE
-          && IEntity::FlagBits(v21, ENTITY_FLAG_Ready|ENTITY_FLAG_Visible) == (ENTITY_FLAG_Ready|ENTITY_FLAG_Visible) )
+        if ( IEntity::WarriorType(v21) == AI_WARRIOR_TYPE_NONE && IEntity::FlagBits(v21, ENTITY_FLAG_Ready|ENTITY_FLAG_Visible) == (ENTITY_FLAG_Ready|ENTITY_FLAG_Visible) )
         {
           v6 = IEntity::OwnerId(v21);
           if ( (a4 & CAlliances::PlayerBit(v6)) != 0 )
@@ -150,10 +148,10 @@ int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int _iX, int _iY, int
     }
   }
   if ( a5 )
+  {
     *a5 = iNearestXY;
-  if ( iResult
-    && iNearestXY < 0
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 880, "(iResult == 0) || (iNearestXY >= 0)") == 1 )
+  }
+  if ( iResult && iNearestXY < 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 880, "(iResult == 0) || (iNearestXY >= 0)") == 1 )
   {
     __debugbreak();
   }
@@ -162,7 +160,7 @@ int __cdecl CScanner::CountCiviliansAndFindNearestInSector(int _iX, int _iY, int
 
 
 // address=[0x15df4f0]
-// Decompiled from void __cdecl CScanner::CountFighters(  struct SCountFightersResult *a1,  unsigned int _iX,  unsigned int _iY,  int _iRadius,  int _iPlayerId)
+// Decompiled from void __cdecl CScanner::CountFighters(struct SCountFightersResult *a1, unsigned int _iX, unsigned int _iY, int _iRadius, int _iPlayerId)
 void __cdecl CScanner::CountFighters(struct SCountFightersResult & a1, int _iX, int _iY, int _iRadius, int _iPlayerId) {
   
   const struct CVWList::SVW *v5; // eax
@@ -184,26 +182,30 @@ void __cdecl CScanner::CountFighters(struct SCountFightersResult & a1, int _iX, 
   CVWList v23; // [esp+58h] [ebp-FCh] BYREF
   int iSearchValues[6]; // [esp+138h] [ebp-1Ch] BYREF
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 892, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 892, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( _iRadius <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 893, "_iRadius > 0") == 1 )
+  {
     __debugbreak();
-  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 894, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
+  }
+  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 894, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
   CVWList::CVWList(&v23, _iX, _iY, _iRadius);
   iAllyBits = CAlliances::PlayerAllyBits(_iPlayerId);
   memset(iSearchValues, 0, sizeof(iSearchValues));
-  for ( i = 0; i < CVWList::Size(&v23); ++i )
+  for ( i = 0;
+        i < CVWList::Size(&v23);
+        ++i )
   {
     m_iV = CVWList::operator[](&v23, i)->m_iV;
     v5 = CVWList::operator[](&v23, i);
-    for ( j = CWarMap::FirstEntityIdVW(0, m_iV, v5->m_iW); j; j = CWarMapNode::Next(v8) )
+    for ( j = CWarMap::FirstEntityIdVW(0, m_iV, v5->m_iW);
+          j;
+          j = CWarMapNode::Next(v8) )
     {
       iEntity = CMapObjectMgr::Entity(j);
       iEntityWarriorType = 1 << IEntity::WarriorType(iEntity);
@@ -246,7 +248,7 @@ void __cdecl CScanner::CountFighters(struct SCountFightersResult & a1, int _iX, 
 
 
 // address=[0x15df900]
-// Decompiled from struct SEvalFightersResult *__cdecl CScanner::EvaluateFighters(  struct SEvalFightersResult *a1,  unsigned int _iX,  unsigned int _iY,  int a4,  int a5)
+// Decompiled from struct SEvalFightersResult *__cdecl CScanner::EvaluateFighters(struct SEvalFightersResult *a1, unsigned int _iX, unsigned int _iY, int a4, int a5)
 void __cdecl CScanner::EvaluateFighters(struct SEvalFightersResult & a1, int _iX, int _iY, int a4, int a5) {
   
   const struct CVWList::SVW *v5; // eax
@@ -273,30 +275,36 @@ void __cdecl CScanner::EvaluateFighters(struct SEvalFightersResult & a1, int _iX
   int iInfluences[3]; // [esp+140h] [ebp-1Ch] BYREF
   int iUnitCount[3]; // [esp+14Ch] [ebp-10h] BYREF
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 963, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 963, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( a4 <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 964, "_iRadius > 0") == 1 )
+  {
     __debugbreak();
-  if ( !CAlliances::IsValidUsedPlayerId(a5)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 965, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
+  }
+  if ( !CAlliances::IsValidUsedPlayerId(a5) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 965, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
   iSectorId = CWorldManager::SectorId(_iX, _iY);
   if ( !iSectorId && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 969, "iSectorId != 0") == 1 )
+  {
     __debugbreak();
+  }
   CVWList::CVWList(&cVWList, _iX, _iY, a4);
   iAllyMask = CAlliances::PlayerAllyBits(a5);
   memset(iUnitCount, 0, sizeof(iUnitCount));
   memset(iInfluences, 0, sizeof(iInfluences));
-  for ( i = 0; i < CVWList::Size(&cVWList); ++i )
+  for ( i = 0;
+        i < CVWList::Size(&cVWList);
+        ++i )
   {
     m_iV = CVWList::operator[](&cVWList, i)->m_iV;
     v5 = CVWList::operator[](&cVWList, i);
-    for ( j = CWarMap::FirstEntityIdVW(0, m_iV, v5->m_iW); j; j = CWarMapNode::Next(v7) )
+    for ( j = CWarMap::FirstEntityIdVW(0, m_iV, v5->m_iW);
+          j;
+          j = CWarMapNode::Next(v7) )
     {
       v24 = CMapObjectMgr::Entity(j);
       if ( ((1 << IEntity::WarriorType(v24)) & 60) != 0 )
@@ -313,20 +321,28 @@ void __cdecl CScanner::EvaluateFighters(struct SEvalFightersResult & a1, int _iX
             v6 = IEntity::OwnerId(v24);
             bIsEnemy = (iAllyMask & CAlliances::PlayerBit(v6)) == 0;
             if ( bIsOwn && bIsEnemy && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1011, "!(uIsOwn && uIsEnemy)") == 1 )
+            {
               __debugbreak();
+            }
             // 0 = ally
             // 1 = own
             // 2 = enemy
             uIdx = bIsOwn + 2 * bIsEnemy;
             if ( uIdx >= 3 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1015, "uIdx < 3") == 1 )
+            {
               __debugbreak();
+            }
             ++iUnitCount[uIdx];
             v9 = IEntity::Type(v24);
             iInfluValue = 16 * CWarMap::SettlerInfluValue(v9);
             if ( v21 > 12 )
+            {
               iAdjInflu = iInfluValue / v21;
+            }
             else
+            {
               iAdjInflu = iInfluValue;
+            }
             iInfluences[uIdx] += iAdjInflu;
           }
         }
@@ -346,7 +362,7 @@ void __cdecl CScanner::EvaluateFighters(struct SEvalFightersResult & a1, int _iX
 
 
 // address=[0x15dfdc0]
-// Decompiled from void __cdecl CScanner::EvaluateTowers(  struct SEvalTowersResult *arg0,  unsigned int _iX,  unsigned int _iY,  int _iRadius,  int _iPlayerId)
+// Decompiled from void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult *arg0, unsigned int _iX, unsigned int _iY, int _iRadius, int _iPlayerId)
 void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult & arg0, int _iX, int _iY, int _iRadius, int _iPlayerId) {
   
   const struct CVWList::SVW *v5; // eax
@@ -389,21 +405,23 @@ void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult & arg0, int _iX, 
   _DWORD aStationedScore[3]; // [esp+198h] [ebp-1Ch] BYREF
   _DWORD aStationedBowmen[3]; // [esp+1A4h] [ebp-10h] BYREF
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1049, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1049, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( _iRadius <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1050, "_iRadius > 0") == 1 )
+  {
     __debugbreak();
-  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1051, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
+  }
+  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1051, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
   iSectorId = CWorldManager::SectorId(_iX, _iY);
   if ( !iSectorId && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1055, "iSectorId != 0") == 1 )
+  {
     __debugbreak();
+  }
   CVWList::CVWList(&cVWList, _iX, _iY, _iRadius);
   iPlayerAllyBits = CAlliances::PlayerAllyBits(_iPlayerId);
   memset(aTowerCount, 0, sizeof(aTowerCount));
@@ -411,17 +429,20 @@ void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult & arg0, int _iX, 
   memset(aStationedSwordmen, 0, sizeof(aStationedSwordmen));
   memset(aStationedBowmen, 0, sizeof(aStationedBowmen));
   memset(aStationedScore, 0, sizeof(aStationedScore));
-  for ( i = 0; i < CVWList::Size(&cVWList); ++i )
+  for ( i = 0;
+        i < CVWList::Size(&cVWList);
+        ++i )
   {
     m_iV = CVWList::operator[](&cVWList, i)->m_iV;
     v5 = CVWList::operator[](&cVWList, i);
-    for ( a1 = CWarMap::FirstEntityIdVW(2, m_iV, v5->m_iW); a1; a1 = CWarMapNode::Next(rWarMapNode) )
+    for ( a1 = CWarMap::FirstEntityIdVW(2, m_iV, v5->m_iW);
+          a1;
+          a1 = CWarMapNode::Next(rWarMapNode) )
     {
       v26 = CMapObjectMgr::Entity(a1);
       if ( IEntity::WarriorType(v26) == AI_WARRIOR_TYPE_TOWER_BUILDING )
       {
-        if ( IEntity::ObjType(v26) != BUILDING_OBJ
-          && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1084, "rEntity.ObjType() == BUILDING_OBJ") == 1 )
+        if ( IEntity::ObjType(v26) != BUILDING_OBJ && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1084, "rEntity.ObjType() == BUILDING_OBJ") == 1 )
         {
           __debugbreak();
         }
@@ -438,9 +459,7 @@ void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult & arg0, int _iX, 
           {
             iOwner = IEntity::OwnerId(rBuildingEntity);
             bIsEnemy = (iPlayerAllyBits & CAlliances::PlayerBit(iOwner)) == 0;
-            if ( iOwner == _iPlayerId
-              && bIsEnemy
-              && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1105, "!(uIsOwn && uIsEnemy)") == 1 )
+            if ( iOwner == _iPlayerId && bIsEnemy && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1105, "!(uIsOwn && uIsEnemy)") == 1 )
             {
               __debugbreak();
             }
@@ -449,7 +468,9 @@ void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult & arg0, int _iX, 
             // 2 == Enemy
             uIdx = (iOwner == _iPlayerId) + 2 * bIsEnemy;
             if ( uIdx >= 3 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1109, "uIdx < 3") == 1 )
+            {
               __debugbreak();
+            }
             ++aTowerCount[uIdx];
             iTowerScore = 1;
             iBuildingType = IEntity::Type(rBuildingEntity);
@@ -465,17 +486,7 @@ void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult & arg0, int _iX, 
             if ( IEntity::FlagBits(rBuildingEntity, ENTITY_FLAG_Ready) )
             {
               pBuildingRole = (void **)CBuilding::Role(rBuildingEntity);
-              if ( !j____RTDynamicCast(
-                      pBuildingRole,
-                      0,
-                      &IBuildingRole__RTTI_Type_Descriptor_,
-                      &CMilitaryBuildingRole__RTTI_Type_Descriptor_,
-                      0)
-                && BBSupportDbgReport(
-                     2,
-                     "Pathing\\Scanner.cpp",
-                     1132,
-                     "dynamic_cast<const CMilitaryBuildingRole*>(pBuildingRole) != 0") == 1 )
+              if ( !j____RTDynamicCast(pBuildingRole, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CMilitaryBuildingRole__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1132, "dynamic_cast<const CMilitaryBuildingRole*>(pBuildingRole) != 0") == 1 )
               {
                 __debugbreak();
               }
@@ -484,14 +495,15 @@ void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult & arg0, int _iX, 
               iStationedBowmen = 0;
               iStationedSwordmen = 0;
               iStationedScore = 0;
-              for ( j = 0; j < iInhabitantCount; ++j )
+              for ( j = 0;
+                    j < iInhabitantCount;
+                    ++j )
               {
                 v8 = std::vector<unsigned short>::operator[](j);
                 if ( *v8 )
                 {
                   v30 = CMapObjectMgr::Entity(*v8);
-                  if ( IEntity::ObjType(v30) != SETTLER_OBJ
-                    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1154, "rInhabitant.ObjType() == SETTLER_OBJ") == 1 )
+                  if ( IEntity::ObjType(v30) != SETTLER_OBJ && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1154, "rInhabitant.ObjType() == SETTLER_OBJ") == 1 )
                   {
                     __debugbreak();
                   }
@@ -499,9 +511,13 @@ void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult & arg0, int _iX, 
                   v19 = IEntity::WarriorType(v30);
                   iStationedInfluence = 16 * CWarMap::SettlerInfluValue(v10);
                   if ( iInlineDistance > 12 )
+                  {
                     iInfluence = iStationedInfluence / iInlineDistance;
+                  }
                   else
+                  {
                     iInfluence = iStationedInfluence;
+                  }
                   if ( v19 == AI_WARRIOR_TYPE_BOWMAN )
                   {
                     ++iStationedBowmen;
@@ -532,7 +548,7 @@ void __cdecl CScanner::EvaluateTowers(struct SEvalTowersResult & arg0, int _iX, 
 
 
 // address=[0x15e0530]
-// Decompiled from bool __cdecl CScanner::FindNearestTowerInSector(  struct SFindNearestResult *arg0,  unsigned int iX,  unsigned int iY,  int _iRadius,  int a5)
+// Decompiled from bool __cdecl CScanner::FindNearestTowerInSector(struct SFindNearestResult *arg0, unsigned int iX, unsigned int iY, int _iRadius, int a5)
 bool __cdecl CScanner::FindNearestTowerInSector(struct SFindNearestResult & arg0, int iX, int iY, int _iRadius, int a5) {
   
   const struct CVWList::SVW *v5; // eax
@@ -552,23 +568,30 @@ bool __cdecl CScanner::FindNearestTowerInSector(struct SFindNearestResult & arg0
   CVWList cVWList; // [esp+40h] [ebp-E4h] BYREF
 
   v15.m_iNearestFoundId = 0;
-  if ( !CWorldManager::InWorld(iX, iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1207, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(iX, iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1207, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( _iRadius <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1208, "_iRadius > 0") == 1 )
+  {
     __debugbreak();
+  }
   iSectorId = CWorldManager::SectorId(iX, iY);
   if ( !iSectorId && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1212, "iSectorId != 0") == 1 )
+  {
     __debugbreak();
+  }
   CVWList::CVWList(&cVWList, iX, iY, _iRadius);
   v15.m_iDistance = 0x4000;
-  for ( i = 0; i < CVWList::Size(&cVWList); ++i )
+  for ( i = 0;
+        i < CVWList::Size(&cVWList);
+        ++i )
   {
     m_iV = CVWList::operator[](&cVWList, i)->m_iV;
     v5 = CVWList::operator[](&cVWList, i);
-    for ( a1 = CWarMap::FirstEntityIdVW(2, m_iV, v5->m_iW); a1; a1 = CWarMapNode::Next(rWarMapNode) )
+    for ( a1 = CWarMap::FirstEntityIdVW(2, m_iV, v5->m_iW);
+          a1;
+          a1 = CWarMapNode::Next(rWarMapNode) )
     {
       v18 = (IEntity *)CBuildingMgr::operator[](a1);
       v19 = IEntity::FlagBits(v18, ENTITY_FLAG_Ready) != 0;
@@ -581,12 +604,16 @@ bool __cdecl CScanner::FindNearestTowerInSector(struct SFindNearestResult & arg0
           iBuildingY = CBuilding::EnsignY(v18);
           iTowerSectorId = CWorldManager::SectorId(iBuildingX, iBuildingY);
           if ( !iTowerSectorId && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1244, "iTowerSectorId != 0") == 1 )
+          {
             __debugbreak();
+          }
           if ( iTowerSectorId == iSectorId )
           {
             iDistance = Grid::Distance(iBuildingX - iX, iBuildingY - iY);
             if ( iDistance < v15.m_iDistance )
+            {
               v15 = (struct SFindNearestResult)__PAIR64__(iDistance, a1);
+            }
           }
         }
       }
@@ -599,7 +626,7 @@ bool __cdecl CScanner::FindNearestTowerInSector(struct SFindNearestResult & arg0
 
 
 // address=[0x15e08a0]
-// Decompiled from int __cdecl CScanner::FindNearestFighter(  unsigned int _iX,  unsigned int _iY,  int _iRadius,  int _iFighterSearchMask,  int _iOwnerBitMask)
+// Decompiled from int __cdecl CScanner::FindNearestFighter(unsigned int _iX, unsigned int _iY, int _iRadius, int _iFighterSearchMask, int _iOwnerBitMask)
 int __cdecl CScanner::FindNearestFighter(int _iX, int _iY, int _iRadius, int _iFighterSearchMask, int _iOwnerBitMask) {
   
   const struct CVWList::SVW *v5; // eax
@@ -617,21 +644,26 @@ int __cdecl CScanner::FindNearestFighter(int _iX, int _iY, int _iRadius, int _iF
   int i; // [esp+28h] [ebp-E8h]
   CVWList cVWList; // [esp+2Ch] [ebp-E4h] BYREF
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 489, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 489, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( _iRadius <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 490, "_iRadius > 0") == 1 )
+  {
     __debugbreak();
+  }
   CVWList::CVWList(&cVWList, _iX, _iY, _iRadius);
   iSmallestDistance = 0x4000;
   iFoundFighter = -1;
-  for ( i = 0; i < CVWList::Size(&cVWList); ++i )
+  for ( i = 0;
+        i < CVWList::Size(&cVWList);
+        ++i )
   {
     m_iV = CVWList::operator[](&cVWList, i)->m_iV;
     v5 = CVWList::operator[](&cVWList, i);
-    for ( j = CWarMap::FirstEntityIdVW(0, m_iV, v5->m_iW); j; j = CWarMapNode::Next(v8) )
+    for ( j = CWarMap::FirstEntityIdVW(0, m_iV, v5->m_iW);
+          j;
+          j = CWarMapNode::Next(v8) )
     {
       rEntity = CMapObjectMgr::Entity(j);
       if ( (_iFighterSearchMask & (1 << IEntity::WarriorType(rEntity))) != 0 )
@@ -654,7 +686,9 @@ int __cdecl CScanner::FindNearestFighter(int _iX, int _iY, int _iRadius, int _iF
     }
   }
   if ( iSmallestDistance > _iRadius )
+  {
     return -1;
+  }
   return iFoundFighter;
 }
 
@@ -680,21 +714,26 @@ int __cdecl CScanner::FindNearestAnimal(int _iX, int _iY, int a3, bool a4, int a
   int i; // [esp+20h] [ebp-E8h]
   CVWList v21; // [esp+24h] [ebp-E4h] BYREF
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 547, "g_cWorld.InWorld( _iX, _iY )") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 547, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
   if ( a3 <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 548, "_iRadius > 0") == 1 )
+  {
     __debugbreak();
+  }
   CVWList::CVWList(&v21, _iX, _iY, a3);
   v16 = 0x4000;
   v15 = -1;
-  for ( i = 0; i < CVWList::Size(&v21); ++i )
+  for ( i = 0;
+        i < CVWList::Size(&v21);
+        ++i )
   {
     m_iV = CVWList::operator[](&v21, i)->m_iV;
     v5 = CVWList::operator[](&v21, i);
-    for ( j = CWarMap::FirstEntityIdVW(3, m_iV, v5->m_iW); j; j = CWarMapNode::Next(v9) )
+    for ( j = CWarMap::FirstEntityIdVW(3, m_iV, v5->m_iW);
+          j;
+          j = CWarMapNode::Next(v9) )
     {
       v18 = CMapObjectMgr::Entity(j);
       v19 = IEntity::PackedXY(v18);
@@ -718,7 +757,9 @@ int __cdecl CScanner::FindNearestAnimal(int _iX, int _iY, int a3, bool a4, int a
     }
   }
   if ( v16 > a3 )
+  {
     return -1;
+  }
   return v15;
 }
 
@@ -779,7 +820,7 @@ int __cdecl CScanner::FindNearestAllyFighter(int a1, int a2, int a3, int a4) {
 
 
 // address=[0x15e0e30]
-// Decompiled from int __cdecl CScanner::CountSettlers(  unsigned int _iX,  unsigned int _iY,  int _iRadius,  int *_pPlayerIds,  int *_pSettlerTypes,  int _iSectorId,  int _iLimit)
+// Decompiled from int __cdecl CScanner::CountSettlers(unsigned int _iX, unsigned int _iY, int _iRadius, int *_pPlayerIds, int *_pSettlerTypes, int _iSectorId, int _iLimit)
 int __cdecl CScanner::CountSettlers(int _iX, int _iY, int _iRadius, int const * _pPlayerIds, int const * _pSettlerTypes, int _iSectorId, int _iLimit) {
   
   IEntity *v7; // eax
@@ -795,27 +836,42 @@ int __cdecl CScanner::CountSettlers(int _iX, int _iY, int _iRadius, int const * 
   int k; // [esp+24h] [ebp-8h]
   int iCount; // [esp+28h] [ebp-4h]
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1277, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1277, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( _iRadius <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1278, "_iRadius > 0") == 1 )
-    __debugbreak();
-  if ( _iSectorId < 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1279, "_iSectorId >= 0") == 1 )
-    __debugbreak();
-  if ( !_pPlayerIds && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1280, "_pPlayerIds != 0") == 1 )
-    __debugbreak();
-  if ( !_pSettlerTypes && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1281, "_pSettlerTypes != 0") == 1 )
-    __debugbreak();
-  if ( _iLimit <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1282, "_iLimit > 0") == 1 )
-    __debugbreak();
-  iCount = 0;
-  for ( i = _pPlayerIds; *i; ++i )
   {
-    for ( j = _pSettlerTypes; *j; ++j )
+    __debugbreak();
+  }
+  if ( _iSectorId < 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1279, "_iSectorId >= 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( !_pPlayerIds && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1280, "_pPlayerIds != 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( !_pSettlerTypes && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1281, "_pSettlerTypes != 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( _iLimit <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1282, "_iLimit > 0") == 1 )
+  {
+    __debugbreak();
+  }
+  iCount = 0;
+  for ( i = _pPlayerIds;
+        *i;
+        ++i )
+  {
+    for ( j = _pSettlerTypes;
+          *j;
+          ++j )
     {
-      for ( k = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, *i, *j); k; k = IAnimatedEntity::Next(rEntity) )
+      for ( k = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, *i, *j);
+            k;
+            k = IAnimatedEntity::Next(rEntity) )
       {
         v7 = CMapObjectMgr::Entity(k);
         v15 = IEntity::PackedXY(v7);
@@ -827,7 +883,9 @@ int __cdecl CScanner::CountSettlers(int _iX, int _iY, int _iRadius, int const * 
           v11 = ITiling::NormalTileId(v12);
           v8 = ITiling::Tile(v11);
           if ( CTile::SectorId(v8) == _iSectorId && ++iCount >= _iLimit )
+          {
             return iCount;
+          }
         }
         rEntity = CMapObjectMgr::MovingEntity(k);
       }
@@ -860,63 +918,85 @@ int __cdecl CScanner::IsNearMyLand(int _iPlayerId, int _iX, int _iY) {
   int v20; // [esp+50h] [ebp-4h]
   int v21; // [esp+50h] [ebp-4h]
 
-  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1339, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1339, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1340, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1340, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   iMapWidth = CWorldManager::Width();
   v8 = CWorldManager::Index(_iX, _iY);
   if ( ITiling::OwnerId(v8) == _iPlayerId )
+  {
     return 0;
+  }
   v9 = COwnerMap::OwnerBit(_iPlayerId);
   v10 = Squares::XYToVW(_iX);
   v11 = Squares::XYToVW(_iY);
   if ( (v9 & COwnerMap::OwnerBits9VW(v10, v11)) == 0 )
+  {
     return -1;
+  }
   if ( (v9 & COwnerMap::OwnerBits1VW(v10, v11)) == 0 && Grid::InQuadrat((_iX & 0xF) - 4, (_iY & 0xF) - 4, 8u) )
+  {
     return -1;
+  }
   if ( _iY - 4 < iMapWidth - 8 && _iX - 4 < iMapWidth - 8 )
   {
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       v16 = CWorldManager::NeighborRelIndex(i);
       v19 = v16 + v16 + v8;
       if ( ITiling::OwnerId(v16 + v8) == _iPlayerId )
+      {
         return 1;
+      }
       v4 = ITiling::OwnerId(v19);
       v20 = v16 + v19;
       if ( v4 == _iPlayerId )
+      {
         return 1;
+      }
       v5 = ITiling::OwnerId(v20);
       v21 = v16 + v20;
       if ( v5 == _iPlayerId )
+      {
         return 1;
+      }
       if ( ITiling::OwnerId(v21) == _iPlayerId )
+      {
         return 1;
+      }
     }
   }
   else
   {
-    for ( j = 0; j < 6; ++j )
+    for ( j = 0;
+          j < 6;
+          ++j )
     {
       x = g_sNeighborPoints[j].x;
       y = g_sNeighborPoints[j].y;
       v14 = _iX;
       v15 = _iY;
-      for ( k = 0; k < 4; ++k )
+      for ( k = 0;
+            k < 4;
+            ++k )
       {
         v14 += x;
         v15 += y;
         if ( !Grid::InQuadrat(v14, v15, iMapWidth) )
+        {
           break;
+        }
         if ( ITiling::OwnerId(v14 + iMapWidth * v15) == _iPlayerId )
+        {
           return 1;
+        }
       }
     }
   }
@@ -940,7 +1020,9 @@ bool __cdecl CScanner::FindNearestPlayerLand(int a1, int & a2, int & a3) {
   v11 = 0;
   v9 = CWorldManager::SectorId(*a2, *a3);
   if ( v9 <= 0 )
+  {
     return v11;
+  }
   CSpiralWalk::CSpiralWalk((CSpiralWalk *)v4, *a2, *a3, 50);
   while ( CSpiralWalk::NextXY(v4, &v8, &v7) )
   {
@@ -976,30 +1058,36 @@ bool __cdecl CScanner::FindAnyEnemyFighter(int _iX, int _iY, int _iRadius, int a
   int i; // [esp+28h] [ebp-E8h]
   CVWList v18; // [esp+2Ch] [ebp-E4h] BYREF
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 603, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 603, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( _iRadius <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 604, "_iRadius > 0") == 1 )
+  {
     __debugbreak();
-  if ( !CAlliances::IsValidUsedPlayerId(a5)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 605, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
+  }
+  if ( !CAlliances::IsValidUsedPlayerId(a5) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 605, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
   v14 = CAlliances::AllianceId(a5);
   v10 = CAlliances::PlayerEnemyBits(a5);
   if ( _iRadius <= 16 && !CInfluMap::EnemyValueXY(_iX, _iY, v14) )
+  {
     return 0;
+  }
   CVWList::CVWList(&v18, _iX, _iY, _iRadius);
-  for ( i = 0; i < CVWList::Size(&v18); ++i )
+  for ( i = 0;
+        i < CVWList::Size(&v18);
+        ++i )
   {
     m_iV = CVWList::operator[](&v18, i)->m_iV;
     m_iW = CVWList::operator[](&v18, i)->m_iW;
     if ( CInfluMap::EnemyValueVW(m_iV, m_iW, v14) >= 16 )
     {
-      for ( j = CWarMap::FirstEntityIdVW(0, m_iV, m_iW); j; j = CWarMapNode::Next(v8) )
+      for ( j = CWarMap::FirstEntityIdVW(0, m_iV, m_iW);
+            j;
+            j = CWarMapNode::Next(v8) )
       {
         v16 = CMapObjectMgr::Entity(j);
         v6 = IEntity::OwnerId(v16);
@@ -1009,7 +1097,9 @@ bool __cdecl CScanner::FindAnyEnemyFighter(int _iX, int _iY, int _iRadius, int a
           v9 = Y16X16::UnpackYFast(v11) - _iY;
           v7 = Y16X16::UnpackXFast(v11);
           if ( Grid::DistanceInline(v7 - _iX, v9) <= _iRadius )
+          {
             return 1;
+          }
         }
         v8 = IEntity::WarMapNode(v16);
       }
@@ -1040,24 +1130,28 @@ bool __cdecl CScanner::FindAnySettlerOrVehicle(int _iX, int _iY, int _iRadius, i
   int i; // [esp+28h] [ebp-E8h]
   CVWList cVWList; // [esp+2Ch] [ebp-E4h] BYREF
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 666, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 666, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( _iRadius <= 0 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 667, "_iRadius > 0") == 1 )
+  {
     __debugbreak();
-  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 668, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
+  }
+  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 668, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
   CVWList::CVWList(&cVWList, _iX, _iY, _iRadius);
-  for ( i = 0; i < CVWList::Size(&cVWList); ++i )
+  for ( i = 0;
+        i < CVWList::Size(&cVWList);
+        ++i )
   {
     m_iV = CVWList::operator[](&cVWList, i)->m_iV;
     m_iW = CVWList::operator[](&cVWList, i)->m_iW;
-    for ( j = CWarMap::FirstEntityIdVW(0, m_iV, m_iW); j; j = CWarMapNode::Next(v6) )
+    for ( j = CWarMap::FirstEntityIdVW(0, m_iV, m_iW);
+          j;
+          j = CWarMapNode::Next(v6) )
     {
       v18 = CMapObjectMgr::Entity(j);
       if ( IEntity::OwnerId(v18) == _iPlayerId )
@@ -1066,11 +1160,15 @@ bool __cdecl CScanner::FindAnySettlerOrVehicle(int _iX, int _iY, int _iRadius, i
         v9 = Y16X16::UnpackYFast(v14) - _iY;
         v4 = Y16X16::UnpackXFast(v14);
         if ( Grid::DistanceInline(v4 - _iX, v9) <= _iRadius )
+        {
           return 1;
+        }
       }
       v6 = IEntity::WarMapNode(v18);
     }
-    for ( k = CWarMap::FirstEntityIdVW(1, m_iV, m_iW); k; k = CWarMapNode::Next(v8) )
+    for ( k = CWarMap::FirstEntityIdVW(1, m_iV, m_iW);
+          k;
+          k = CWarMapNode::Next(v8) )
     {
       v16 = CMapObjectMgr::Entity(k);
       if ( IEntity::OwnerId(v16) == _iPlayerId )
@@ -1079,7 +1177,9 @@ bool __cdecl CScanner::FindAnySettlerOrVehicle(int _iX, int _iY, int _iRadius, i
         v10 = Y16X16::UnpackYFast(v11) - _iY;
         v7 = Y16X16::UnpackXFast(v11);
         if ( Grid::DistanceInline(v7 - _iX, v10) <= _iRadius )
+        {
           return 1;
+        }
       }
       v8 = IEntity::WarMapNode(v16);
     }
@@ -1103,20 +1203,17 @@ bool __cdecl CScanner::IsAreaCompletelyOwned(int _iX, int _iY, int _iRadius, int
   BOOL v13; // [esp+2Ch] [ebp-8h]
   bool IsWater; // [esp+33h] [ebp-1h]
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1448, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1448, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   v13 = _iRadius >= 0;
   v12 = _iRadius < 75;
-  if ( (!v12 || !v13)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1449, "(_iRadius >= 0) & (_iRadius < SPIRAL_RADIUS_MAX)") == 1 )
+  if ( (!v12 || !v13) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1449, "(_iRadius >= 0) & (_iRadius < SPIRAL_RADIUS_MAX)") == 1 )
   {
     __debugbreak();
   }
-  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1450, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CAlliances::IsValidUsedPlayerId(_iPlayerId) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1450, "g_cAlliances.IsValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -1129,7 +1226,9 @@ bool __cdecl CScanner::IsAreaCompletelyOwned(int _iX, int _iY, int _iRadius, int
     v10 = !IsWater;
     v9 = v6 != _iPlayerId;
     if ( v9 && v10 )
+    {
       return 0;
+    }
   }
   return 1;
 }
@@ -1146,15 +1245,13 @@ bool __cdecl CScanner::IsAreaCompletelyGreen(int _iX, int _iY, int _iRadius) {
   BOOL v8; // [esp+1Ch] [ebp-8h]
   BOOL v9; // [esp+20h] [ebp-4h]
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1479, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1479, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   v9 = _iRadius >= 0;
   v8 = _iRadius < 75;
-  if ( (!v8 || !v9)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1480, "(_iRadius >= 0) & (_iRadius < SPIRAL_RADIUS_MAX)") == 1 )
+  if ( (!v8 || !v9) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1480, "(_iRadius >= 0) & (_iRadius < SPIRAL_RADIUS_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -1163,7 +1260,9 @@ bool __cdecl CScanner::IsAreaCompletelyGreen(int _iX, int _iY, int _iRadius) {
   {
     v5 = CWorldManager::Index(v6, v7);
     if ( CWorldManager::FlagBits(v5, 4u) )
+    {
       return 0;
+    }
   }
   return 1;
 }
@@ -1180,15 +1279,13 @@ bool __cdecl CScanner::IsAreaCompletelyDarkLand(int _iX, int _iY, int _iRadius) 
   BOOL v8; // [esp+1Ch] [ebp-8h]
   BOOL v9; // [esp+20h] [ebp-4h]
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1507, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1507, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   v9 = _iRadius >= 0;
   v8 = _iRadius < 75;
-  if ( (!v8 || !v9)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1508, "(_iRadius >= 0) & (_iRadius < SPIRAL_RADIUS_MAX)") == 1 )
+  if ( (!v8 || !v9) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 1508, "(_iRadius >= 0) & (_iRadius < SPIRAL_RADIUS_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -1197,7 +1294,9 @@ bool __cdecl CScanner::IsAreaCompletelyDarkLand(int _iX, int _iY, int _iRadius) 
   {
     v5 = CWorldManager::Index(v6, v7);
     if ( !CWorldManager::FlagBits(v5, 4u) )
+    {
       return 0;
+    }
   }
   return 1;
 }

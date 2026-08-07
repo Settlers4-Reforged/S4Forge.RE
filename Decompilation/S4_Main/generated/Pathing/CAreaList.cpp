@@ -29,7 +29,9 @@ void  CAreaList::InitOne(int a2) {
 void  CAreaList::PushBack(int a2) {
   
   if ( *(int *)this >= 63 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 575, "m_iSize < AREA_LIST_MAX") == 1 )
+  {
     __debugbreak();
+  }
   return TStaticArray<int,63>::PushBack(&a2);
 }
 

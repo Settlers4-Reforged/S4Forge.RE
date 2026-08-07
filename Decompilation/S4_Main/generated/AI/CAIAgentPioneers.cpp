@@ -63,8 +63,12 @@ unsigned int  CAIAgentPioneers::Execute(unsigned int a2, unsigned int a3) {
     v7 = CAINormalSectorAgent::SectorAI(v34);
     v29 = CAISectorAI::Reservoir(v7, 7);
     if ( !v29 && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 1015, "pReservoir != 0") == 1 )
+    {
       __debugbreak();
-    for ( i = CAITaskForce::FirstEntity(v29); i; i = v20 )
+    }
+    for ( i = CAITaskForce::FirstEntity(v29);
+          i;
+          i = v20 )
     {
       v20 = CAIEntityInfo::Next(i);
       v28 = CAIEntityInfo::EntityId(i);
@@ -86,19 +90,11 @@ unsigned int  CAIAgentPioneers::Execute(unsigned int a2, unsigned int a3) {
     {
       v30 = IAIEnvironment::TickCounter();
       v35 = 0;
-      if ( *((int *)v34 + 10) > 0
-        && *((int *)v34 + 11) > 0
-        && *((_DWORD *)v34 + 12)
-        && *((_DWORD *)v34 + 12) + 1400 > v30 )
+      if ( *((int *)v34 + 10) > 0 && *((int *)v34 + 11) > 0 && *((_DWORD *)v34 + 12) && *((_DWORD *)v34 + 12) + 1400 > v30 )
       {
         v8 = CAINormalSectorAgent::SectorAI(v34);
         v9 = CAISectorAI::SectorId(v8);
-        CSectorSpiralWalk::CSectorSpiralWalk(
-          (CSectorSpiralWalk *)v18,
-          *((_DWORD *)v34 + 10),
-          *((_DWORD *)v34 + 11),
-          8,
-          v9);
+        CSectorSpiralWalk::CSectorSpiralWalk((CSectorSpiralWalk *)v18, *((_DWORD *)v34 + 10), *((_DWORD *)v34 + 11), 8, v9);
         if ( CSectorSpiralWalk::NextXY((CSectorSpiralWalk *)v18, (int *)v34 + 10, (int *)v34 + 11) )
         {
           v10 = CAINormalSectorAgent::SectorAI(v34);
@@ -106,7 +102,9 @@ unsigned int  CAIAgentPioneers::Execute(unsigned int a2, unsigned int a3) {
           v12 = CAIPlayerAI::PlayerId(v11);
           v19 = IAIEnvironment::AlliancesAllianceId(v12);
           if ( (int)CInfluMap::EnemyValueXY(*((_DWORD *)v34 + 10), *((_DWORD *)v34 + 11), v19) >= 16 )
+          {
             v35 = 1;
+          }
         }
         else
         {
@@ -146,7 +144,9 @@ unsigned int  CAIAgentPioneers::Execute(unsigned int a2, unsigned int a3) {
           }
         }
       }
-      for ( j = (CAIEntityInfo *)CAITaskForce::FirstEntity(v31); j; j = (CAIEntityInfo *)CAIEntityInfo::Next(j) )
+      for ( j = (CAIEntityInfo *)CAITaskForce::FirstEntity(v31);
+            j;
+            j = (CAIEntityInfo *)CAIEntityInfo::Next(j) )
       {
         v24 = CAIEntityInfo::EntityId(j);
         if ( v35 || IAIEnvironment::MovingEntityIsWaiting(v24) )
@@ -198,7 +198,9 @@ bool  CAIAgentPioneers::FindWorkPosition(int & a2, int & a3) {
 
   v14 = IAIEnvironment::WorldSectorId(*a2, *a3);
   if ( !v14 )
+  {
     return 0;
+  }
   *((_DWORD *)this + 15) = 0;
   *((_DWORD *)this + 16) = 0;
   *((_DWORD *)this + 17) = 0x7FFFFFFF;
@@ -214,13 +216,14 @@ bool  CAIAgentPioneers::FindWorkPosition(int & a2, int & a3) {
   *((_DWORD *)this + 14) = IAIEnvironment::AlliancesAllianceId(v15);
   *((_DWORD *)this + 13) = v14;
   v7 = IAIEnvironment::WorldWidth();
-  if ( v7 != IAIEnvironment::WorldHeight()
-    && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 929, "g_pAIEnv->WorldWidth() == g_pAIEnv->WorldHeight()") == 1 )
+  if ( v7 != IAIEnvironment::WorldHeight() && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 929, "g_pAIEnv->WorldWidth() == g_pAIEnv->WorldHeight()") == 1 )
   {
     __debugbreak();
   }
   memset(v21, 0, 0x31u);
-  for ( i = 0; i < 49; ++i )
+  for ( i = 0;
+        i < 49;
+        ++i )
   {
     v16 = (Grid *)(dword_3D7A030[2 * i] + v12);
     v17 = dword_3D7A034[2 * i] + v11;
@@ -230,7 +233,9 @@ bool  CAIAgentPioneers::FindWorkPosition(int & a2, int & a3) {
       {
         v21[i] = 1;
         if ( (v8 & COwnerMap::OwnerBits9VW(v16, v17)) != 0 )
+        {
           CAIAgentPioneers::CheckSquare(this, v16, v17);
+        }
       }
     }
     else
@@ -242,14 +247,20 @@ bool  CAIAgentPioneers::FindWorkPosition(int & a2, int & a3) {
   LODWORD(v13) = *((_DWORD *)this + 17) > 20;
   if ( v13 )
   {
-    for ( j = 0; j < 49; ++j )
+    for ( j = 0;
+          j < 49;
+          ++j )
     {
       if ( !v21[j] )
+      {
         CAIAgentPioneers::CheckSquare(this, dword_3D7A030[2 * j] + v12, dword_3D7A034[2 * j] + v11);
+      }
     }
   }
   if ( *((int *)this + 15) <= 0 )
+  {
     return 0;
+  }
   *a2 = *((_DWORD *)this + 15);
   *a3 = *((_DWORD *)this + 16);
   return 1;
@@ -264,17 +275,25 @@ bool  CAIAgentPioneers::CheckSquare(int a2, int a3) {
   int i; // [esp+Ch] [ebp-Ch]
   struct CTile *v6; // [esp+10h] [ebp-8h]
 
-  for ( i = ITiling::FirstTileOfSquareVW(a2, a3); ; i = CTile::NextSquareTile(v6) )
+  for ( i = ITiling::FirstTileOfSquareVW(a2, a3);
+        ;
+        i = CTile::NextSquareTile(v6) )
   {
     if ( !i )
+    {
       return 0;
+    }
     v6 = (struct CTile *)ITiling::Tile(i);
     if ( CTile::SectorId(v6) == *((_DWORD *)this + 13) && !CTile::OwnerId(v6) )
+    {
       break;
+    }
   }
   v4 = CInfluMap::EnemyValueVW(a2, a3, *((_DWORD *)this + 14));
   if ( v4 >= *((_DWORD *)this + 17) )
+  {
     return 1;
+  }
   *((_DWORD *)this + 17) = v4;
   *((_DWORD *)this + 15) = CTile::CenterX(v6);
   *((_DWORD *)this + 16) = CTile::CenterY(v6);

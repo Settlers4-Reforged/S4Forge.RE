@@ -97,7 +97,9 @@ char  AdvXMLParser::Parser::NextChar(void) {
     if ( v2 == 13 )
     {
       if ( *((_DWORD *)this + 2) < *((_DWORD *)this + 3) && **((_BYTE **)this + 2) == 10 )
+      {
         ++*((_DWORD *)this + 2);
+      }
       v2 = 10;
     }
     *((_DWORD *)this + 6) = *((_DWORD *)this + 5);
@@ -128,17 +130,23 @@ void  AdvXMLParser::Parser::PreviousChar(void) {
 
   result = (AdvXMLParser::Parser *)this;
   if ( this[2] > this[3] )
+  {
     return result;
+  }
   if ( (AdvXMLParser::Parser *)((char *)this[2] - 1) >= this[1] )
   {
     this[2] = (AdvXMLParser::Parser *)((char *)this[2] - 1);
     if ( *(_BYTE *)this[2] == 10 )
     {
       if ( this[2] > this[1] && *((_BYTE *)this[2] - 1) == 13 )
+      {
         this[2] = (AdvXMLParser::Parser *)((char *)this[2] - 1);
+      }
       this[4] = (AdvXMLParser::Parser *)((char *)this[4] - 1);
       if ( (int)this[4] < 1 && BBSupportDbgReport(2, "Source\\Xml\\reader.cpp", 147, "m_nLine >= 1") == 1 )
+      {
         __debugbreak();
+      }
     }
     result = this[6];
     this[5] = result;
@@ -160,7 +168,9 @@ void  AdvXMLParser::Parser::PreviousChar(void) {
 bool  AdvXMLParser::Parser::ParseChar(char a2) {
   
   if ( AdvXMLParser::Parser::NextChar(this) == a2 )
+  {
     return 1;
+  }
   AdvXMLParser::Parser::PreviousChar(this);
   return 0;
 }
@@ -227,7 +237,9 @@ bool  AdvXMLParser::Parser::ParseNumber(int & a2) {
   v3 = (char)this;
   Char = AdvXMLParser::Parser::NextChar(this);
   if ( !AdvXMLParser::IsDigit((AdvXMLParser *)Char, v3) )
+  {
     return 0;
+  }
   *a2 = 0;
   while ( AdvXMLParser::IsDigit((AdvXMLParser *)Char, (char)v4) )
   {
@@ -249,7 +261,9 @@ bool  AdvXMLParser::Parser::ParseHexNumber(int & a2) {
 
   Char = AdvXMLParser::Parser::NextChar(this);
   if ( !AdvXMLParser::IsHexDigit((AdvXMLParser *)Char) )
+  {
     return 0;
+  }
   *a2 = 0;
   while ( AdvXMLParser::IsHexDigit((AdvXMLParser *)Char) )
   {
@@ -272,11 +286,15 @@ bool  AdvXMLParser::Parser::ParseDeclBegining(char const * a2) {
   v4 = this;
   AdvXMLParser::Bookmark::Bookmark((AdvXMLParser::Bookmark *)v3, this);
   if ( !AdvXMLParser::Parser::ParseSpaces(v4) )
+  {
     return 0;
+  }
   if ( AdvXMLParser::Parser::ParseString(v4, a2) )
   {
     if ( !AdvXMLParser::Parser::ParseEq(v4) )
+    {
       AdvXMLParser::Parser::SyntaxError(v4, 3);
+    }
     return 1;
   }
   else
@@ -301,7 +319,9 @@ bool  AdvXMLParser::Parser::ParseSpaces(void) {
   if ( AdvXMLParser::IsSpace((AdvXMLParser *)Char, v2) )
   {
     do
+    {
       v5 = AdvXMLParser::Parser::NextChar(v3);
+    }
     while ( AdvXMLParser::IsSpace((AdvXMLParser *)v5, (char)v3) );
     AdvXMLParser::Parser::PreviousChar(v3);
     return 1;
@@ -351,7 +371,9 @@ bool  AdvXMLParser::Parser::ParseName(std::string & a2) {
   if ( AdvXMLParser::IsAlpha((AdvXMLParser *)Char, v3[0]) || Char == 95 || Char == 58 )
   {
     while ( AdvXMLParser::IsNameChar((AdvXMLParser *)Char, v3[0]) )
+    {
       Char = AdvXMLParser::Parser::NextChar(v4);
+    }
     AdvXMLParser::Parser::PreviousChar(v4);
     AdvXMLParser::Bookmark::GetSubString(a2, 0);
     return 1;
@@ -378,7 +400,9 @@ bool  AdvXMLParser::Parser::ParseNmtoken(std::string & a2) {
   if ( AdvXMLParser::IsNameChar((AdvXMLParser *)Char, v3[0]) )
   {
     while ( AdvXMLParser::IsNameChar((AdvXMLParser *)Char, v3[0]) )
+    {
       Char = AdvXMLParser::Parser::NextChar(v4);
+    }
     AdvXMLParser::Parser::PreviousChar(v4);
     AdvXMLParser::Bookmark::GetSubString(a2, 0);
     return 1;

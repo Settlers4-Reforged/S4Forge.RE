@@ -4,7 +4,7 @@
 // Definitions for class AdvXMLParser
 
 // address=[0x14f33d0]
-// Decompiled from _DWORD *__thiscall AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(  _DWORD *this,  _DWORD *a2)
+// Decompiled from _DWORD *__thiscall AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(_DWORD *this, _DWORD *a2)
  AdvXMLParser::ConstIterator<class AdvXMLParser::Element>::ConstIterator<class AdvXMLParser::Element>(struct AdvXMLParser::Node::ConstIteratorRef const & a2) {
   
   *this = *a2;
@@ -26,9 +26,7 @@
 // Decompiled from bool __thiscall AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(_DWORD *this, int a2)
 bool  AdvXMLParser::ConstIterator<class AdvXMLParser::Element>::operator<(struct AdvXMLParser::ConstIterator<class AdvXMLParser::Element> const & a2) {
   
-  return std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(
-           this + 1,
-           (std::_Iterator_base12 *)(a2 + 4));
+  return std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(this + 1, (std::_Iterator_base12 *)(a2 + 4));
 }
 
 

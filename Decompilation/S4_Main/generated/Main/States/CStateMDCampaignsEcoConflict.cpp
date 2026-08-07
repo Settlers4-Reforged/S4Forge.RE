@@ -10,14 +10,18 @@ class CGameState * __cdecl CStateMDCampaignsEcoConflict::DynamicCreateFunc(void 
 
   C = (CStateMDCampaignsEcoConflict *)operator new(4u);
   if ( C )
+  {
     return CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x14c7730]
-// Decompiled from CStateMDCampaignsEcoConflict *__thiscall CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(  CStateMDCampaignsEcoConflict *this,  void *a2)
+// Decompiled from CStateMDCampaignsEcoConflict *__thiscall CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(CStateMDCampaignsEcoConflict *this, void *a2)
  CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
@@ -70,7 +74,9 @@ bool  CStateMDCampaignsEcoConflict::Perform(void) {
     }
     v2 = dword_4031F6C + 30;
     if ( v2 >= timeGetTime() )
+    {
       return 1;
+    }
     dword_4031F6C = timeGetTime();
     IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
     IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);

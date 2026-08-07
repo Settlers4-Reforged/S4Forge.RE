@@ -58,21 +58,29 @@ void  CStatisticArchive::TriggerStatistic(void) {
   {
     *((_DWORD *)this + 6) = 0;
     if ( ++*((_DWORD *)this + 3) >= *((_DWORD *)this + 4) )
+    {
       *((_DWORD *)this + 3) = 0;
+    }
   }
   if ( ++*((_DWORD *)this + 11) >= *((_DWORD *)this + 7) || *((_DWORD *)this + 8) == -1 )
   {
     *((_DWORD *)this + 11) = 0;
     if ( ++*((_DWORD *)this + 8) >= *((_DWORD *)this + 9) )
+    {
       *((_DWORD *)this + 8) = 0;
+    }
   }
   if ( ++*((_DWORD *)this + 16) >= *((_DWORD *)this + 12) || *((_DWORD *)this + 13) == -1 )
   {
     *((_DWORD *)this + 16) = 0;
     if ( ++*((_DWORD *)this + 13) >= *((_DWORD *)this + 14) )
+    {
       *((_DWORD *)this + 13) = 0;
+    }
   }
-  for ( i = 1; i <= CPlayerManager::NumberOfPlayers(); ++i )
+  for ( i = 1;
+        i <= CPlayerManager::NumberOfPlayers();
+        ++i )
   {
     CStatisticArchive::GetAreaSizeData(this, i);
     CStatisticArchive::GetPopulationData(this, i);
@@ -85,7 +93,9 @@ void  CStatisticArchive::TriggerStatistic(void) {
   }
   *((_DWORD *)this + 1) += 10;
   if ( *((int *)this + 1) > 100 )
+  {
     *((_DWORD *)this + 1) = 0;
+  }
   v2 = CEvn_Event::CEvn_Event(&v5, 0x277u, 0, 0, 0);
   v6 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, v2);
@@ -431,28 +441,34 @@ void  CStatisticArchive::Load(class IS4Chunk & a2) {
   v8 = 0;
   result = (**(int (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v8, 4);
   if ( v8 != 1 )
+  {
     return result;
+  }
   (**(void (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v7, 4);
   if ( v7 != 9 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 95, "iNumberPlayer== PLAYER_MAX") == 1 )
+  {
     __debugbreak();
+  }
   (**(void (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v6, 4);
-  if ( v6 != 49
-    && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 98, "StatisticTypeMax == STATISTICTYPE_MAX") == 1 )
+  if ( v6 != 49 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 98, "StatisticTypeMax == STATISTICTYPE_MAX") == 1 )
   {
     __debugbreak();
   }
   (**(void (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v5, 4);
   if ( v5 != 16 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 101, "MaxSamplesShort == MAX_SAMPLESSHORT") == 1 )
+  {
     __debugbreak();
+  }
   (**(void (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v4, 4);
-  if ( v4 != 16
-    && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 104, "MaxSamplesMedium == MAX_SAMPLESMEDIUM") == 1 )
+  if ( v4 != 16 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 104, "MaxSamplesMedium == MAX_SAMPLESMEDIUM") == 1 )
   {
     __debugbreak();
   }
   (**(void (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v3, 4);
   if ( v3 != 16 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 107, "MaxSamplesLong == MAX_SAMPLESLONG") == 1 )
+  {
     __debugbreak();
+  }
   (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v9 + 68, 28224);
   (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v9 + 28292, 28224);
   (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v9 + 56516, 28224);

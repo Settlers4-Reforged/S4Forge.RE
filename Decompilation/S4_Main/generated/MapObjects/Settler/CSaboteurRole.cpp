@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CSaboteurRole::New(std::istream & a1) {
   
   if ( operator new(0x68u) )
+  {
     return CSaboteurRole::CSaboteurRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -40,16 +44,20 @@ void  CSaboteurRole::LogicUpdate(class CSettler * a2) {
 
   TickCounter = CGameData::GetTickCounter(g_pGameData);
   if ( TickCounter >= *((_DWORD *)this + 25) )
+  {
     *((_DWORD *)this + 25) = ISelectableSettlerRole::ThiefCheckMasquerade(this, a2) + TickCounter;
+  }
   if ( *((_BYTE *)this + 4) != 16 )
+  {
     return ISettlerRole::LogicUpdate(this, a2);
+  }
   *((_BYTE *)this + 4) = 27;
   v11 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 17));
   if ( !v11 )
+  {
     return ISettlerRole::LogicUpdate(this, a2);
-  if ( !IEntity::FlagBits(v11, (EntityFlag)((char *)&loc_1FFFFFF + 1))
-    || !IEntity::FlagBits(v11, ENTITY_FLAG_VulnerableMask)
-    || CStateGame::Rand(g_pGame) >= (unsigned int)g_uSaboteurHitChange )
+  }
+  if ( !IEntity::FlagBits(v11, (EntityFlag)((char *)&loc_1FFFFFF + 1)) || !IEntity::FlagBits(v11, ENTITY_FLAG_VulnerableMask) || CStateGame::Rand(g_pGame) >= (unsigned int)g_uSaboteurHitChange )
   {
     return ISettlerRole::LogicUpdate(this, a2);
   }
@@ -149,7 +157,9 @@ void  CSaboteurRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_
   
   this[13] = CGameData::GetTickCounter(g_pGameData) + 45;
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Ownerless) )
+  {
     ISelectableSettlerRole::ThiefExpose((ISelectableSettlerRole *)(this - 12), a2);
+  }
   return CSoldierRole::WarriorTaskAttack(this, a2, a3, a4);
 }
 

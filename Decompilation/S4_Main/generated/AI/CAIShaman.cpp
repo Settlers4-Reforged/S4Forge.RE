@@ -44,7 +44,9 @@ bool  CAIShaman::FindGlobalTargetForShaman(int player, int a3, int & x, int & y,
       {
         v21 = MostRequiredGood == 7;
         if ( MostRequiredGood == 20 )
+        {
           v21 = 2;
+        }
       }
     }
   }
@@ -52,43 +54,58 @@ bool  CAIShaman::FindGlobalTargetForShaman(int player, int a3, int & x, int & y,
   {
     v8 = IAIEnvironment::Rand();
     if ( v8 < CRandom16::PercentValue(0x46u) )
+    {
       v21 = 3;
+    }
   }
   if ( *((int *)v22 + 6) <= 0 )
+  {
     return 0;
+  }
   v19 = 0;
   v18 = 0;
   v15 = 0;
   v17 = dword_3D7A6F0[v21];
   v12 = CStateGame::Rand(g_pGame) % (unsigned int)v17;
   PlayerId = IAIEnvironment::AlliancesLastPlayerId();
-  for ( i = 1; ; ++i )
+  for ( i = 1;
+        ;
+        ++i )
   {
     if ( i > PlayerId )
+    {
       return 0;
+    }
     if ( (a3 & IAIEnvironment::AlliancesPlayerBit(i)) != 0 )
     {
-      for ( j = 0; j < v17 - 1; ++j )
+      for ( j = 0;
+            j < v17 - 1;
+            ++j )
+      {
         CAIShaman::FindBetterTargetBuilding(v22, i, dword_3D7A6B0[4 * v21 + (int)(j + v12) % v17], &v19, &v18, &v15, a6);
+      }
       if ( v15 <= 0 )
-        CAIShaman::FindBetterTargetBuilding(
-          v22,
-          i,
-          dword_3D7A6B0[4 * v21 + (int)(v12 + v17 - 1) % v17],
-          &v19,
-          &v18,
-          &v15,
-          a6);
+      {
+        CAIShaman::FindBetterTargetBuilding(v22, i, dword_3D7A6B0[4 * v21 + (int)(v12 + v17 - 1) % v17], &v19, &v18, &v15, a6);
+      }
       if ( v15 > 0 )
+      {
         break;
+      }
     }
   }
   if ( v21 == 1 )
+  {
     (*(void (__thiscall **)(CAIShaman *, int *, int *, int))(*(_DWORD *)v22 + 8))(v22, &v19, &v18, 7);
+  }
   if ( v21 == 2 )
+  {
     (*(void (__thiscall **)(CAIShaman *, int *, int *, int))(*(_DWORD *)v22 + 8))(v22, &v19, &v18, 20);
+  }
   if ( v21 == 3 )
+  {
     (*(void (__thiscall **)(CAIShaman *, int *, int *, int))(*(_DWORD *)v22 + 12))(v22, &v19, &v18, 25);
+  }
   *x = v19;
   *y = v18;
   return 1;
@@ -106,7 +123,9 @@ bool  CAIShaman::FindNearTargetForShaman(int a2, int a3, int & a4, int & a5) {
   IAIEnvironment::AlliancesAllianceId(a2);
   v6 = CAlliances::PlayerEnemyBits(a2);
   if ( CScanner::CountCiviliansAndFindNearestInSector(*a4, *a5, a3, v6, &v7) <= 0 )
+  {
     return 0;
+  }
   *a4 = IAIEnvironment::UnpackXFast(v7);
   *a5 = IAIEnvironment::UnpackYFast(v7);
   return 1;
@@ -158,7 +177,9 @@ int  CAIShaman::FindTeleportationTarget(int & a2, int & a3, int a4) {
     }
   }
   if ( !v14 )
+  {
     return v14;
+  }
   v9 = CPileMgr::GetPilePtr(v14);
   *a2 = IEntity::X(v9);
   *a3 = IEntity::Y(v9);
@@ -236,15 +257,19 @@ int  CAIShaman::EvaluateTargetPosition(int a2, int a3) {
   v4 = -CInfluMap::EnemyValueVW(v5, v6, *((_DWORD *)this + 2));
   NearestInSector = CScanner::CountCiviliansAndFindNearestInSector((int)a2, (int)a3, 24, *((_DWORD *)this + 3), 0);
   if ( NearestInSector <= 0 )
+  {
     v7 = 0;
+  }
   else
+  {
     v7 = 100;
+  }
   return v7 + 8 * NearestInSector - v4;
 }
 
 
 // address=[0x1326af0]
-// Decompiled from int __thiscall CAIShaman::FindBetterTargetBuilding(  CAIShaman *this,  int a2,  int a3,  struct _Cnd_internal_imp_t **a4,  Squares **a5,  int *a6,  bool a7)
+// Decompiled from int __thiscall CAIShaman::FindBetterTargetBuilding(CAIShaman *this, int a2, int a3, struct _Cnd_internal_imp_t **a4, Squares **a5, int *a6, bool a7)
 void  CAIShaman::FindBetterTargetBuilding(int a2, int a3, int & a4, int & a5, int & a6, bool a7) {
   
   int result; // eax
@@ -255,7 +280,9 @@ void  CAIShaman::FindBetterTargetBuilding(int a2, int a3, int & a4, int & a5, in
   struct _Cnd_internal_imp_t *v13; // [esp+18h] [ebp-4h]
 
   result = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, a2, a3);
-  for ( i = result; i; i = result )
+  for ( i = result;
+        i;
+        i = result )
   {
     v11 = CBuildingMgr::operator[](i);
     v13 = (struct _Cnd_internal_imp_t *)CBuilding::EnsignX(v11);

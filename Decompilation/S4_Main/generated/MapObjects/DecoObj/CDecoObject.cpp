@@ -8,21 +8,24 @@
 class CPersistence * __cdecl CDecoObject::New(std::istream & a1) {
   
   if ( CDecoObject::operator new(0x50u) )
+  {
     return CDecoObject::CDecoObject(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x1541b70]
-// Decompiled from CDecoObject *__thiscall CDecoObject::CDecoObject(  CDecoObject *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  int a5,  int a6,  int a7)
+// Decompiled from CDecoObject *__thiscall CDecoObject::CDecoObject(CDecoObject *this, unsigned int a2, unsigned int a3, unsigned int a4, int a5, int a6, int a7)
  CDecoObject::CDecoObject(int a2, int a3, int a4, int a5, int a6, int a7) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, 1);
   this->__vftable = (IAnimatedEntity_vtbl *)&CDecoObject::_vftable_;
   this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, a4);
-  if ( this->m_iJobPart >= 0x228u
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 264, "m_uJobPart<SIV_OBJECT_MAX") == 1 )
+  if ( this->m_iJobPart >= 0x228u && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 264, "m_uJobPart<SIV_OBJECT_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -51,16 +54,24 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
       {
         this->m_iFrame = (v2 + this->m_iFrame) % this->m_uCycleFrames;
         if ( this->m_iFrame == this->m_uCycleFrames - 1 )
+        {
           this->m_uU1 = !this->m_uU1;
+        }
       }
       else
       {
         if ( v2 <= this->m_iFrame )
+        {
           this->m_iFrame -= v2;
+        }
         else
+        {
           this->m_iFrame = 0;
+        }
         if ( !this->m_iFrame )
+        {
           this->m_uU1 = !this->m_uU1;
+        }
       }
     }
     else
@@ -70,9 +81,13 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
   }
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
   if ( this->m_iType == 123 )
+  {
     MEMORY[0x40FE518] = 16;
+  }
   else
+  {
     MEMORY[0x40FE518] = this->m_uObjType;
+  }
   MEMORY[0x40FE51A] = IEntity::IsVisible(this);
   IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;

@@ -25,8 +25,7 @@ int  CDarkTribe::OrderMushroomFarmer(int a2) {
   BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr(a2);
   if ( BuildingPtr && IEntity::Type((unsigned __int16 *)BuildingPtr) == 49 )
   {
-    if ( !IEntity::FlagBits(BuildingPtr, 0x2000000)
-      && BBSupportDbgReport(2, (int)"Logic\\DarkTribe.cpp", 284, (int)"pBuilding->FlagBits(ENTITY_FLAG_READY) != 0") == 1 )
+    if ( !IEntity::FlagBits(BuildingPtr, 0x2000000) && BBSupportDbgReport(2, (int)"Logic\\DarkTribe.cpp", 284, (int)"pBuilding->FlagBits(ENTITY_FLAG_READY) != 0") == 1 )
     {
       __debugbreak();
     }
@@ -38,9 +37,13 @@ int  CDarkTribe::OrderMushroomFarmer(int a2) {
       v5 = CBuilding::EnsignWorldIdx(v10);
       v11 = CWorldManager::SectorId(v5);
       if ( v12 <= 0 && BBSupportDbgReport(2, (int)"Logic\\DarkTribe.cpp", 297, (int)"iMushroomFarmSectorId > 0") == 1 )
+      {
         __debugbreak();
+      }
       if ( v11 <= 0 && BBSupportDbgReport(2, (int)"Logic\\DarkTribe.cpp", 298, (int)"iDarkTempleSectorId > 0") == 1 )
+      {
         __debugbreak();
+      }
       if ( v12 == v11 )
       {
         v13 = CDarkTempleRole::ProduceMushroomFarmer(v10);
@@ -73,13 +76,10 @@ int  CDarkTribe::OrderMushroomFarmer(int a2) {
   }
   else
   {
-    if ( BBSupportDbgReportF(
-           1,
-           "Logic\\DarkTribe.cpp",
-           279,
-           "CDarkTribe::OrderMushroomFarmer(): Invalid building id %i",
-           a2) == 1 )
+    if ( BBSupportDbgReportF(1, "Logic\\DarkTribe.cpp", 279, "CDarkTribe::OrderMushroomFarmer(): Invalid building id %i", a2) == 1 )
+    {
       __debugbreak();
+    }
     return -1;
   }
 }
@@ -102,9 +102,10 @@ int  CDarkTribe::OrderSettlerToDarkTemple(int a2, bool a3) {
   v10 = this;
   SettlerPtr = CSettlerMgr::GetSettlerPtr(a2);
   if ( !SettlerPtr )
+  {
     return -1;
-  if ( IEntity::Race(SettlerPtr) != 3
-    && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 339, "pSettler->Race() == RACE_DARK") == 1 )
+  }
+  if ( IEntity::Race(SettlerPtr) != 3 && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 339, "pSettler->Race() == RACE_DARK") == 1 )
   {
     __debugbreak();
   }
@@ -138,26 +139,25 @@ void  CDarkTribe::AssociateServantWithMushroomFarm(int a2) {
   unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-8h]
 
   SettlerPtr = CSettlerMgr::GetSettlerPtr(a2);
-  if ( SettlerPtr
-    && !IEntity::FlagBits(SettlerPtr, (EntityFlag)&MEMORY[0x4000000])
-    && IEntity::Type((unsigned __int16 *)SettlerPtr) == 55 )
+  if ( SettlerPtr && !IEntity::FlagBits(SettlerPtr, (EntityFlag)&MEMORY[0x4000000]) && IEntity::Type((unsigned __int16 *)SettlerPtr) == 55 )
   {
     MushroomFarmForServant = CDarkTribe::FindMushroomFarmForServant(this, a2);
     if ( MushroomFarmForServant <= 0 )
+    {
       (*(void (__thiscall **)(CDarkTribe *, int, _DWORD))(*(_DWORD *)this + 4))(this, a2, 0);
+    }
     else
+    {
       CDarkTribe::OrderServantToMushroomFarm(this, a2, MushroomFarmForServant);
+    }
   }
   else
   {
     CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, a2, 0, 0);
-    if ( BBSupportDbgReportF(
-           1,
-           "Logic\\DarkTribe.cpp",
-           379,
-           "CDarkTribe::AssociateServantWithMushroomFarm: Invalid settler id %i",
-           a2) == 1 )
+    if ( BBSupportDbgReportF(1, "Logic\\DarkTribe.cpp", 379, "CDarkTribe::AssociateServantWithMushroomFarm: Invalid settler id %i", a2) == 1 )
+    {
       __debugbreak();
+    }
   }
 }
 
@@ -172,11 +172,17 @@ class CBuilding *  CDarkTribe::GetDarkTempleIfReady(int a2) {
   DarkTempleId = CDarkTribe::GetDarkTempleId(this, a2);
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, DarkTempleId);
   if ( !BuildingPtr )
+  {
     return 0;
+  }
   if ( IEntity::FlagBits(BuildingPtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  {
     return BuildingPtr;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -191,28 +197,34 @@ void  CDarkTribe::ChangePositionOrSurroundingToDarkLand(int a2, int a3, bool a4)
   int v9; // [esp+10h] [ebp-8h]
   int i; // [esp+14h] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2 - 3, a3 - 3)
-    && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 403, "g_cWorld.InWorld( _iX - 3, _iY - 3 )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2 - 3, a3 - 3) && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 403, "g_cWorld.InWorld( _iX - 3, _iY - 3 )") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2 + 3, a3 + 3)
-    && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 404, "g_cWorld.InWorld( _iX + 3, _iY + 3 )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2 + 3, a3 + 3) && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 404, "g_cWorld.InWorld( _iX + 3, _iY + 3 )") == 1 )
   {
     __debugbreak();
   }
   if ( a4 )
+  {
     v7 = 7;
+  }
   else
+  {
     v7 = 1;
+  }
   result = v7;
-  for ( i = 0; i < v7; ++i )
+  for ( i = 0;
+        i < v7;
+        ++i )
   {
     if ( i > 0 && i != 6 )
     {
       result = CStateGame::Rand(g_pGame);
       if ( result < 0x4000 )
+      {
         continue;
+      }
     }
     v8 = a2 + CSpiralOffsets::DeltaX(i);
     v9 = a3 + CSpiralOffsets::DeltaY(i);
@@ -264,17 +276,27 @@ bool  CDarkTribe::IsMushroomFarmPositionValid(int a2, int a3, int a4) {
   int i; // [esp+3Ch] [ebp-4h]
 
   if ( !CWorldManager::InInnerWorld16(a3, a4) )
+  {
     return 0;
+  }
   PlayerId = CPlayerManager::LastPlayerId();
-  for ( i = 1; i <= PlayerId; ++i )
+  for ( i = 1;
+        i <= PlayerId;
+        ++i )
   {
     if ( CPlayerManager::Race(i) == 3 )
     {
       if ( i == a2 )
+      {
         v12 = 40;
+      }
       else
+      {
         v12 = 60;
-      for ( j = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, i, 50); j; j = v11 )
+      }
+      for ( j = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, i, 50);
+            j;
+            j = v11 )
       {
         BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, j);
         if ( BuildingPtr )
@@ -284,15 +306,23 @@ bool  CDarkTribe::IsMushroomFarmPositionValid(int a2, int a3, int a4) {
             v7 = IEntity::X(BuildingPtr);
             v8 = IEntity::Y(BuildingPtr);
             if ( Grid::Distance((Grid *)(a3 - v7), a4 - v8) < v12 )
+            {
               return 0;
+            }
           }
         }
         if ( BuildingPtr )
+        {
           v11 = IAnimatedEntity::Next(BuildingPtr);
+        }
         else
+        {
           v11 = 0;
+        }
       }
-      for ( k = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, i, 51); k; k = v10 )
+      for ( k = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, i, 51);
+            k;
+            k = v10 )
       {
         v13 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, k);
         if ( v13 )
@@ -302,13 +332,19 @@ bool  CDarkTribe::IsMushroomFarmPositionValid(int a2, int a3, int a4) {
             v5 = IEntity::X(v13);
             v6 = IEntity::Y(v13);
             if ( Grid::Distance((Grid *)(a3 - v5), a4 - v6) < v12 )
+            {
               return 0;
+            }
           }
         }
         if ( v13 )
+        {
           v10 = IAnimatedEntity::Next(v13);
+        }
         else
+        {
           v10 = 0;
+        }
       }
     }
   }
@@ -340,20 +376,32 @@ bool  CDarkTribe::IsObjectSurrounded(int a2, bool a3) {
 
   v19 = 0;
   if ( a3 )
+  {
     v5 = 64;
+  }
   else
+  {
     v5 = 72;
+  }
   if ( a3 )
+  {
     v4 = 4;
+  }
   else
+  {
     v4 = 0;
+  }
   v10 = a2;
   if ( !CWorldManager::FlagBits(a2, v5) )
+  {
     return v19;
+  }
   v7 = -1;
   v8 = 0;
   v20 = CWorldManager::FlagBits(a2, 0x40u) == 0;
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v9 = a2 + CWorldManager::NeighborRelIndex(i);
     if ( (unsigned __int8)CWorldManager::IsBlockedLand(v9) )
@@ -362,33 +410,45 @@ bool  CDarkTribe::IsObjectSurrounded(int a2, bool a3) {
       IsWater = CWorldManager::IsWater(v9);
       v17 = CWorldManager::FlagBits(v9, 8u) == 8;
       if ( !IsWater && (!v20 || v17) )
+      {
         v7 = i;
+      }
     }
   }
   if ( v8 >= 6 || v7 < 0 )
+  {
     return v19;
+  }
   v13 = 1;
   v14 = (Grid *)Grid::TurnRight((Grid *)v7);
   CWorldManager::X(a2);
   CWorldManager::Y(a2);
-  for ( j = 0; j < 0x4000; ++j )
+  for ( j = 0;
+        j < 0x4000;
+        ++j )
   {
     v11 = a2 + CWorldManager::NeighborRelIndex(v14);
     v6 = CWorldManager::Flags(v11);
     IsBlockedLand = CWorldManager::IsBlockedLand(v11);
     if ( v20 )
+    {
       CWorldManager::FlagBits(v11, 8u);
+    }
     if ( IsBlockedLand )
     {
       if ( (v5 & v6) == 0 )
+      {
         break;
+      }
       ++v13;
       v14 = (Grid *)Grid::TurnRight(v14);
     }
     else
     {
       if ( (v6 & 4) != v4 || (v5 & v6) == 0 )
+      {
         break;
+      }
       --v13;
       v14 = (Grid *)Grid::TurnLeft(v14);
       a2 = v11;
@@ -400,7 +460,9 @@ bool  CDarkTribe::IsObjectSurrounded(int a2, bool a3) {
     }
   }
   if ( j > 0x4000 && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 903, "16384 >= iCounter") == 1 )
+  {
     __debugbreak();
+  }
   return v19;
 }
 
@@ -423,7 +485,9 @@ int  CDarkTribe::GetDarkTempleId(int a2) {
 
   FirstBuildingId = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, a2, 50);
   if ( !FirstBuildingId )
+  {
     return CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, a2, 51);
+  }
   return FirstBuildingId;
 }
 
@@ -441,8 +505,7 @@ bool  CDarkTribe::GetDarkTempleIfReady(int a2, class CBuilding * & a3, class CDa
   if ( BuildingPtr && IEntity::FlagBits(BuildingPtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
   {
     v6 = (void **)CBuilding::Role(BuildingPtr);
-    if ( !j____RTDynamicCast(v6, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CDarkTempleRole__RTTI_Type_Descriptor_, 0)
-      && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 149, "dynamic_cast<CDarkTempleRole*>(pBuildingRole) != 0") == 1 )
+    if ( !j____RTDynamicCast(v6, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CDarkTempleRole__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 149, "dynamic_cast<CDarkTempleRole*>(pBuildingRole) != 0") == 1 )
     {
       __debugbreak();
     }
@@ -483,10 +546,11 @@ int  CDarkTribe::FindMushroomFarmForServant(int a2) {
 
   v6 = 0;
   if ( a2 <= 0 && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 174, "_iServantId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v18 = (unsigned __int16 *)CSettlerMgr::operator[](a2);
-  if ( IEntity::Type(v18) != 55
-    && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 178, "rSettler.Type() == SETTLER_SLAVED_SETTLER") == 1 )
+  if ( IEntity::Type(v18) != 55 && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 178, "rSettler.Type() == SETTLER_SLAVED_SETTLER") == 1 )
   {
     __debugbreak();
   }
@@ -495,14 +559,17 @@ int  CDarkTribe::FindMushroomFarmForServant(int a2) {
   v12 = IEntity::Y(v18);
   v14 = CWorldManager::SectorId(v10, v12);
   if ( v14 <= 0 && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 187, "iServantSectorId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v9 = 5;
   v7 = 0x4000;
-  for ( i = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, v5, 49); i; i = IAnimatedEntity::Next(v19) )
+  for ( i = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, v5, 49);
+        i;
+        i = IAnimatedEntity::Next(v19) )
   {
     v19 = CBuildingMgr::Building((CBuildingMgr *)g_cBuildingMgr, i);
-    if ( IEntity::Type((unsigned __int16 *)v19) != 49
-      && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 198, "rMushroomFarm.Type() == BUILDING_MUSHROOMFARM") == 1 )
+    if ( IEntity::Type((unsigned __int16 *)v19) != 49 && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 198, "rMushroomFarm.Type() == BUILDING_MUSHROOMFARM") == 1 )
     {
       __debugbreak();
     }
@@ -513,17 +580,7 @@ int  CDarkTribe::FindMushroomFarmForServant(int a2) {
       if ( CWorldManager::SectorId(v11, v13) == v14 )
       {
         v2 = (void **)CBuilding::Role(v19);
-        if ( !j____RTDynamicCast(
-                v2,
-                0,
-                &IBuildingRole__RTTI_Type_Descriptor_,
-                &CDarkMushroomFarmRole__RTTI_Type_Descriptor_,
-                0)
-          && BBSupportDbgReport(
-               2,
-               "Logic\\DarkTribe.cpp",
-               209,
-               "dynamic_cast<CDarkMushroomFarmRole*>(&rMushroomFarm.Role()) != 0") == 1 )
+        if ( !j____RTDynamicCast(v2, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CDarkMushroomFarmRole__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 209, "dynamic_cast<CDarkMushroomFarmRole*>(&rMushroomFarm.Role()) != 0") == 1 )
         {
           __debugbreak();
         }
@@ -565,53 +622,35 @@ void  CDarkTribe::OrderServantToMushroomFarm(int a2, int a3) {
 
   v8 = this;
   if ( a2 <= 0 && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 250, "_iServantId > 0") == 1 )
-    __debugbreak();
-  if ( a3 <= 0 && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 251, "_iMushroomFarmId > 0") == 1 )
-    __debugbreak();
-  if ( !CSettlerMgr::GetSettlerPtr(a2)
-    && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 252, "g_cSettlerMgr.GetSettlerPtr(_iServantId) != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a3)
-    && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 253, "g_cBuildingMgr.GetBuildingPtr(_iMushroomFarmId) != 0") == 1 )
+  if ( a3 <= 0 && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 251, "_iMushroomFarmId > 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( !CSettlerMgr::GetSettlerPtr(a2) && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 252, "g_cSettlerMgr.GetSettlerPtr(_iServantId) != 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a3) && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 253, "g_cBuildingMgr.GetBuildingPtr(_iMushroomFarmId) != 0") == 1 )
   {
     __debugbreak();
   }
   v3 = (unsigned __int16 *)CMapObjectMgr::Entity(a2);
-  if ( IEntity::Type(v3) != 55
-    && BBSupportDbgReport(
-         2,
-         "Logic\\DarkTribe.cpp",
-         254,
-         "g_pMapObjectMgr->Entity(_iServantId).Type() == SETTLER_SLAVED_SETTLER") == 1 )
+  if ( IEntity::Type(v3) != 55 && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 254, "g_pMapObjectMgr->Entity(_iServantId).Type() == SETTLER_SLAVED_SETTLER") == 1 )
   {
     __debugbreak();
   }
   v4 = (unsigned __int16 *)CMapObjectMgr::Entity(a3);
-  if ( IEntity::Type(v4) != 49
-    && BBSupportDbgReport(
-         2,
-         "Logic\\DarkTribe.cpp",
-         255,
-         "g_pMapObjectMgr->Entity(_iMushroomFarmId).Type() == BUILDING_MUSHROOMFARM") == 1 )
+  if ( IEntity::Type(v4) != 49 && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 255, "g_pMapObjectMgr->Entity(_iMushroomFarmId).Type() == BUILDING_MUSHROOMFARM") == 1 )
   {
     __debugbreak();
   }
   SettlerPtr = CSettlerMgr::GetSettlerPtr(a2);
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a3);
   v5 = (void **)CBuilding::Role(BuildingPtr);
-  if ( !j____RTDynamicCast(
-          v5,
-          0,
-          &IBuildingRole__RTTI_Type_Descriptor_,
-          &CDarkMushroomFarmRole__RTTI_Type_Descriptor_,
-          0)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\DarkTribe.cpp",
-         260,
-         "dynamic_cast<CDarkMushroomFarmRole*>(&pMushroomFarm->Role()) != 0") == 1 )
+  if ( !j____RTDynamicCast(v5, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CDarkMushroomFarmRole__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 260, "dynamic_cast<CDarkMushroomFarmRole*>(&pMushroomFarm->Role()) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -645,8 +684,7 @@ void  CDarkTribe::ChangeElementToDarkOrGreen(int a2, int a3, bool a4, int a5) {
   bool v18; // [esp+27h] [ebp-1h]
 
   v12 = this;
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
-    && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 486, "g_cWorld.InWorld( _iX, _iY )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 486, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
@@ -655,11 +693,17 @@ void  CDarkTribe::ChangeElementToDarkOrGreen(int a2, int a3, bool a4, int a5) {
   v16 = v18;
   result = v18;
   if ( a4 == v18 )
+  {
     return result;
+  }
   if ( a4 )
+  {
     CWorldManager::SetFlagBits(v13, 4u);
+  }
   else
+  {
     CWorldManager::ClearFlagBits(v13, 4);
+  }
   IGfxEngine::SetDarkLand((IGfxEngine *)g_pGfxEngine, a2, a3, a4);
   v11 = CWorldManager::ObjectId(v13);
   if ( v11 <= 0 )
@@ -667,22 +711,30 @@ void  CDarkTribe::ChangeElementToDarkOrGreen(int a2, int a3, bool a4, int a5) {
     v17 = CWorldManager::FlagBits(v13, 0x40u) == 0;
     v14 = v17;
     if ( a4 )
+    {
       v10 = 4;
+    }
     else
+    {
       v10 = 0;
+    }
     v6 = v10;
     if ( (*(unsigned __int8 (__thiscall **)(CDarkTribe *, int, bool))(*(_DWORD *)v12 + 28))(v12, v13, a4) )
     {
       if ( v14 )
       {
         if ( !a4 && a5 > 0 )
+        {
           CBuildingMgr::DestroyBuilding((CBuildingMgr *)g_cBuildingMgr, a2, a3, a5);
+        }
       }
       else
       {
         ThisDecoObj = CDecoObjMgr::GetThisDecoObj(a2, a3, 3, &v8, &v9);
         if ( ThisDecoObj && CWorldManager::FlagBits(v8, v9, 4u) != v6 )
+        {
           CDarkTribe::ChangeObjectToDarkOrGreen(v12, ThisDecoObj, v8, v9, a4);
+        }
       }
     }
   }
@@ -711,12 +763,15 @@ void  CDarkTribe::ChangeObjectToDarkOrGreen(int a2, int a3, int a4, bool a5) {
     v8 = IEntity::Type(DecoObjPtr);
     v7 = (*(int (__thiscall **)(unsigned __int16 *, CDarkTribe *))(*(_DWORD *)DecoObjPtr + 40))(DecoObjPtr, this);
     if ( a5 )
+    {
       DarkObject = CDarkConvert::GetDarkObject(v8);
+    }
     else
+    {
       DarkObject = CDarkConvert::GetGreenObject(v8);
+    }
     CDecoObjMgr::RemoveDecoObject((CDecoObjMgr *)&g_cDecoObjMgr, a3, a4, 0);
-    if ( CWorldManager::ObjectId(a3, a4)
-      && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 592, "g_cWorld.ObjectId( _iX, _iY ) == 0") == 1 )
+    if ( CWorldManager::ObjectId(a3, a4) && BBSupportDbgReport(2, "Logic\\DarkTribe.cpp", 592, "g_cWorld.ObjectId( _iX, _iY ) == 0") == 1 )
     {
       __debugbreak();
     }
@@ -729,22 +784,18 @@ void  CDarkTribe::ChangeObjectToDarkOrGreen(int a2, int a3, int a4, bool a5) {
     if ( !v11 )
     {
       v5 = CLogic::Effects((DWORD *)g_pLogic);
-      (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v5 + 16))(
-        v5,
-        64,
-        69,
-        a3,
-        a4,
-        0,
-        0,
-        0);
+      (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v5 + 16))(v5, 64, 69, a3, a4, 0, 0, 0);
     }
     if ( (CWorldManager::FlagBits(a3, a4, 4u) != 0) != a5 )
     {
       if ( a5 )
+      {
         CWorldManager::SetFlagBits(a3, a4, 4);
+      }
       else
+      {
         CWorldManager::ClearFlagBits(a3, a4, 4);
+      }
       IGfxEngine::SetDarkLand((IGfxEngine *)g_pGfxEngine, a3, a4, a5);
     }
   }
@@ -762,20 +813,30 @@ void  CDarkTribe::FillUnderObject(int a2, int a3, bool a4) {
   if ( (CWorldManager::FlagBits(a2, a3, 4u) == 4) != a4 )
   {
     if ( a4 )
+    {
       CWorldManager::SetFlagBits(a2, a3, 4);
+    }
     else
+    {
       CWorldManager::ClearFlagBits(a2, a3, 4);
+    }
     IGfxEngine::SetDarkLand((IGfxEngine *)g_pGfxEngine, a2, a3, a4);
-    for ( i = 1; i < 7; ++i )
+    for ( i = 1;
+          i < 7;
+          ++i )
     {
       v5 = a2 + CSpiralOffsets::DeltaX(i);
       v6 = a3 + CSpiralOffsets::DeltaY(i);
       if ( (unsigned __int8)CWorldManager::InWorld(v5, v6) )
       {
         if ( CWorldManager::FlagBits(v5, v6, 0x40u) )
+        {
           return;
+        }
         if ( (CWorldManager::FlagBits(v5, v6, 4u) == 4) != a4 )
+        {
           CDarkTribe::FillUnderObject(this, v5, v6, a4);
+        }
       }
     }
   }
@@ -794,14 +855,18 @@ void  CDarkTribe::SetHolesDarkOrGreen(int a2, int a3, bool a4, int a5) {
   int i; // [esp+1Ch] [ebp-8h]
   char v12; // [esp+22h] [ebp-2h]
 
-  for ( i = 1; i < 7; ++i )
+  for ( i = 1;
+        i < 7;
+        ++i )
   {
     v8 = a2 + CSpiralOffsets::DeltaX(i);
     v9 = a3 + CSpiralOffsets::DeltaY(i);
     if ( (unsigned __int8)CWorldManager::InWorld(v8, v9) && (CWorldManager::FlagBits(v8, v9, 4u) != 0) != a4 )
     {
       v12 = 1;
-      for ( j = 1; j < 7; ++j )
+      for ( j = 1;
+            j < 7;
+            ++j )
       {
         v6 = v8 + CSpiralOffsets::DeltaX(j);
         v7 = v9 + CSpiralOffsets::DeltaY(j);
@@ -812,7 +877,9 @@ void  CDarkTribe::SetHolesDarkOrGreen(int a2, int a3, bool a4, int a5) {
         }
       }
       if ( v12 )
+      {
         CDarkTribe::ChangeElementToDarkOrGreen(this, v8, v9, a4, a5);
+      }
     }
   }
 }

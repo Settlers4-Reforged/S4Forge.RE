@@ -11,7 +11,7 @@
 
 
 // address=[0x2d73a20]
-// Decompiled from void *__thiscall SIMPL_NS::EalStdAllocator<std::_Container_proxy,1111490559>::EalStdAllocator<std::_Container_proxy,1111490559>(  void *this,  int a2)
+// Decompiled from void *__thiscall SIMPL_NS::EalStdAllocator<std::_Container_proxy,1111490559>::EalStdAllocator<std::_Container_proxy,1111490559>(void *this, int a2)
  SIMPL_NS::EalStdAllocator<struct std::_Container_proxy,1111490559>::EalStdAllocator<struct std::_Container_proxy,1111490559><struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *> >(class SIMPL_NS::EalStdAllocator<struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *>,1111490559> const & a2) {
   
   return this;
@@ -19,7 +19,7 @@
 
 
 // address=[0x2db17c0]
-// Decompiled from void *__thiscall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>(  void *this)
+// Decompiled from void *__thiscall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>(void *this)
  SIMPL_NS::EalStdAllocator<struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *>,1111490559>::EalStdAllocator<struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *>,1111490559>(void) {
   
   return this;
@@ -36,7 +36,9 @@ void  SIMPL_NS::EalStdAllocator<struct std::_Container_proxy,1111490559>::constr
   result = operator new(8u, a1);
   v3 = result;
   if ( !result )
+  {
     return result;
+  }
   result = (_DWORD *)a2[1];
   *v3 = *a2;
   v3[1] = result;
@@ -45,11 +47,13 @@ void  SIMPL_NS::EalStdAllocator<struct std::_Container_proxy,1111490559>::constr
 
 
 // address=[0x2e03c40]
-// Decompiled from void __stdcall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::deallocate(  void *a1,  int a2)
+// Decompiled from void __stdcall SIMPL_NS::EalStdAllocator<std::_Tree_node<std::pair<int const,unsigned __int64>,void *>,1111490559>::deallocate(void *a1, int a2)
 void  SIMPL_NS::EalStdAllocator<struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *>,1111490559>::deallocate(struct std::_Tree_node<struct std::pair<int const ,unsigned __int64>,void *> * a1, unsigned int a2) {
   
   if ( a1 )
+  {
     SimplFree(a1);
+  }
 }
 
 
@@ -58,7 +62,9 @@ void  SIMPL_NS::EalStdAllocator<struct std::_Tree_node<struct std::pair<int cons
 void  SIMPL_NS::EalStdAllocator<struct std::_Container_proxy,1111490559>::deallocate(struct std::_Container_proxy * a1, unsigned int a2) {
   
   if ( a1 )
+  {
     SimplFree(a1);
+  }
 }
 
 

@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateMDBriefing::DynamicCreateFunc(void * a1) {
 
   C = (CStateMDBriefing *)operator new(0x10u);
   if ( C )
+  {
     return CStateMDBriefing::CStateMDBriefing(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -28,8 +32,7 @@ class CGameState * __cdecl CStateMDBriefing::DynamicCreateFunc(void * a1) {
   *((_DWORD *)this + 1) = (unsigned __int16)a2;
   *((_DWORD *)this + 2) = HIWORD(a2);
   *((_BYTE *)this + 12) = 0;
-  if ( *((int *)this + 1) >= 25
-    && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 232, "m_iCampaignType < CAMPAIGN_MAX") == 1 )
+  if ( *((int *)this + 1) >= 25 && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 232, "m_iCampaignType < CAMPAIGN_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -38,8 +41,7 @@ class CGameState * __cdecl CStateMDBriefing::DynamicCreateFunc(void * a1) {
     case 5:
     case 6:
     case 7:
-      if ( *((int *)this + 2) >= 5
-        && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 245, "m_iLevel < MD_CAMPAIGN_RMV_COUNT") == 1 )
+      if ( *((int *)this + 2) >= 5 && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 245, "m_iLevel < MD_CAMPAIGN_RMV_COUNT") == 1 )
       {
         __debugbreak();
       }
@@ -47,16 +49,14 @@ class CGameState * __cdecl CStateMDBriefing::DynamicCreateFunc(void * a1) {
       break;
     case 8:
     case 9:
-      if ( *((int *)this + 2) >= 3
-        && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 252, "m_iLevel < MD_CAMPAIGN_ECOCONFLICT_COUNT") == 1 )
+      if ( *((int *)this + 2) >= 3 && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 252, "m_iLevel < MD_CAMPAIGN_ECOCONFLICT_COUNT") == 1 )
       {
         __debugbreak();
       }
       byte_402C9F4 = 1;
       break;
     case 0xA:
-      if ( *((int *)this + 2) >= 1
-        && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 237, "m_iLevel < MD_BONUS_COUNT") == 1 )
+      if ( *((int *)this + 2) >= 1 && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 237, "m_iLevel < MD_BONUS_COUNT") == 1 )
       {
         __debugbreak();
       }
@@ -106,8 +106,7 @@ bool  CStateMDBriefing::Perform(void) {
   {
     CSoundManager::StopMusic(g_pSoundManager);
     CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
-    if ( !byte_402C9F4
-      && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 554, "g_cBriefingSettings.m_bIsCampaign") == 1 )
+    if ( !byte_402C9F4 && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 554, "g_cBriefingSettings.m_bIsCampaign") == 1 )
     {
       __debugbreak();
     }
@@ -152,7 +151,9 @@ bool  CStateMDBriefing::Perform(void) {
     }
     v2 = dword_4031F4C + 30;
     if ( v2 >= timeGetTime() )
+    {
       return 1;
+    }
     dword_4031F4C = timeGetTime();
     IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
     IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -255,8 +256,7 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
   {
     CSoundManager::StopMusic(g_pSoundManager);
     CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
-    if ( !byte_402C9F4
-      && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 326, "g_cBriefingSettings.m_bIsCampaign") == 1 )
+    if ( !byte_402C9F4 && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 326, "g_cBriefingSettings.m_bIsCampaign") == 1 )
     {
       __debugbreak();
     }
@@ -293,7 +293,9 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
   else
   {
     if ( event != 7030 )
+    {
       return CGuiGameState::OnEvent(v51, a2);
+    }
     Instance = (CGUIWrapper *)CGUIWrapper::GetInstance(v23);
     CGUIWrapper::ReleaseGUIGFXFile(Instance);
     CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
@@ -305,26 +307,24 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
       C = operator new(0x620u);
       v58 = 1;
       if ( C )
+      {
         v41 = CGameType::CGameType((CGameType *)C);
+      }
       else
+      {
         v41 = 0;
+      }
       v34 = v41;
       v58 = -1;
       g_pGameType = (int)v41;
       v52 = 0;
       v26 = 256;
       v22 = *((_DWORD *)v51 + 2) + 1;
-      v4 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_4031E78
-                                                                   + 28 * *((_DWORD *)v51 + 1)
-                                                                   - 140));
+      v4 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_4031E78 + 28 * *((_DWORD *)v51 + 1) - 140));
       snwprintf(Buffer, 0xFFu, v4, v22);
       std::wstring::wstring(v56);
       v58 = 2;
-      if ( (*(unsigned __int8 (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)g_pCDDrive + 8))(
-             g_pCDDrive,
-             v56,
-             Buffer,
-             3145736) )
+      if ( (*(unsigned __int8 (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)g_pCDDrive + 8))(g_pCDDrive, v56, Buffer, 3145736) )
       {
         v22 = 0;
         v21 = 0;
@@ -342,8 +342,7 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
       }
       if ( v52 )
       {
-        if ( !CGameType::IsCampaignMap((CGameType *)g_pGameType)
-          && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 464, "g_pGameType->IsCampaignMap()") == 1 )
+        if ( !CGameType::IsCampaignMap((CGameType *)g_pGameType) && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 464, "g_pGameType->IsCampaignMap()") == 1 )
         {
           __debugbreak();
         }
@@ -358,9 +357,13 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
         v38 = operator new(0x18u);
         LOBYTE(v58) = 3;
         if ( v38 )
+        {
           v39 = INetworkEngine::INetworkEngine((INetworkEngine *)v38, 0);
+        }
         else
+        {
           v39 = 0;
+        }
         v29 = v39;
         LOBYTE(v58) = 2;
         g_pNetworkEngine = (int)v39;
@@ -377,8 +380,12 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
         *(_DWORD *)(g_pGameType + 740) = *((_DWORD *)v51 + 1);
         *(_DWORD *)(g_pGameType + 744) = *((_DWORD *)v51 + 2);
         *(_DWORD *)(g_pGameType + 692) = 3;
-        for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
+        for ( i = 0;
+              i < *(_DWORD *)(g_pGameType + 852);
+              ++i )
+        {
           *(_BYTE *)(i + g_pGameType + 440) = 0;
+        }
         INetworkEngine::Start(1, 1, *(_DWORD *)(g_pGameType + 852), 0);
         CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
         v48 = 1;
@@ -392,14 +399,15 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
         std::string::operator=(&g_iMessageBoxStringID, v5);
         v53 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 5);
         if ( !g_pMissionCD && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 448, "g_pMissionCD") == 1 )
+        {
           __debugbreak();
-        (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(
-          g_pMissionCD,
-          0,
-          GuiDlgMainscreenProc);
+        }
+        (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(g_pMissionCD, 0, GuiDlgMainscreenProc);
         v53 = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc);
         if ( !v53 && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 451, "bRet") == 1 )
+        {
           __debugbreak();
+        }
         BBSupportTracePrintF(3, "MissionCD Map '%s' not found!", Buffer);
         IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
         if ( g_pGameType )
@@ -419,11 +427,10 @@ bool  CStateMDBriefing::OnEvent(class CEvn_Event & a2) {
     {
       IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 5);
       if ( !g_pMissionCD && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 413, "g_pMissionCD") == 1 )
+      {
         __debugbreak();
-      (*(void (__thiscall **)(int, int, bool (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(
-        g_pMissionCD,
-        20,
-        GuiDlgMainMessageBoxProc);
+      }
+      (*(void (__thiscall **)(int, int, bool (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD + 12))(g_pMissionCD, 20, GuiDlgMainMessageBoxProc);
       CGameStateHandler::Switch((int)CStateMessageBox::DynamicCreateFunc, 2398);
       return 1;
     }
@@ -461,12 +468,7 @@ void __cdecl CStateMDBriefing::InitBriefingTexts(int a1, int a2) {
   char *v25; // eax
   char *v26; // eax
 
-  if ( (!a1 || a1 >= 25)
-    && BBSupportDbgReport(
-         2,
-         "main\\States\\StateMDBriefing.cpp",
-         611,
-         "( _iCampaignType ) && ( _iCampaignType < CAMPAIGN_MAX )") == 1 )
+  if ( (!a1 || a1 >= 25) && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 611, "( _iCampaignType ) && ( _iCampaignType < CAMPAIGN_MAX )") == 1 )
   {
     __debugbreak();
   }
@@ -475,8 +477,7 @@ void __cdecl CStateMDBriefing::InitBriefingTexts(int a1, int a2) {
     case 5:
     case 6:
     case 7:
-      if ( a2 >= 5
-        && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 624, "_iLevel < MD_CAMPAIGN_RMV_COUNT") == 1 )
+      if ( a2 >= 5 && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 624, "_iLevel < MD_CAMPAIGN_RMV_COUNT") == 1 )
       {
         __debugbreak();
       }
@@ -484,8 +485,7 @@ void __cdecl CStateMDBriefing::InitBriefingTexts(int a1, int a2) {
       break;
     case 8:
     case 9:
-      if ( a2 >= 3
-        && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 631, "_iLevel < MD_CAMPAIGN_ECOCONFLICT_COUNT") == 1 )
+      if ( a2 >= 3 && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 631, "_iLevel < MD_CAMPAIGN_ECOCONFLICT_COUNT") == 1 )
       {
         __debugbreak();
       }
@@ -493,7 +493,9 @@ void __cdecl CStateMDBriefing::InitBriefingTexts(int a1, int a2) {
       break;
     case 10:
       if ( a2 >= 1 && BBSupportDbgReport(2, "main\\States\\StateMDBriefing.cpp", 616, "_iLevel < MD_BONUS_COUNT") == 1 )
+      {
         __debugbreak();
+      }
       byte_402C9F4 = 1;
       break;
     default:
@@ -564,13 +566,11 @@ void __cdecl CStateMDBriefing::InitBriefingTexts(int a1, int a2) {
       result = std::string::operator=(&stru_402C97C, v26);
       break;
     default:
-      result = (void *)BBSupportDbgReportF(
-                         2,
-                         "main\\States\\StateMDBriefing.cpp",
-                         692,
-                         "Invalid CampaignType during CStateMDBriefing::InitBriefingTexts init!");
+      result = (void *)BBSupportDbgReportF(2, "main\\States\\StateMDBriefing.cpp", 692, "Invalid CampaignType during CStateMDBriefing::InitBriefingTexts init!");
       if ( result == (void *)1 )
+      {
         __debugbreak();
+      }
       break;
   }
   return result;

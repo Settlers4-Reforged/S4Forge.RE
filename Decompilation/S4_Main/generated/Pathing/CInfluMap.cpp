@@ -70,19 +70,26 @@ void __cdecl CInfluMap::ModifyInfluenceMapVW(int a1, int a2, int a3, int Number)
   int v5; // [esp+8h] [ebp-4h]
 
   if ( !CInfluMap::m_iInitialized && BBSupportDbgReport(2, "Pathing\\InfluMap.cpp", 84, "m_iInitialized") == 1 )
+  {
     __debugbreak();
-  if ( (a3 < 1 || a3 > 8)
-    && BBSupportDbgReport(2, "Pathing\\InfluMap.cpp", 85, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  }
+  if ( (a3 < 1 || a3 > 8) && BBSupportDbgReport(2, "Pathing\\InfluMap.cpp", 85, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
   v5 = CAlliances::AllianceId(a3);
   if ( !v5 && BBSupportDbgReport(2, "Pathing\\InfluMap.cpp", 89, "iAllianceId != ALLIANCE_NO_ALLIANCE") == 1 )
+  {
     __debugbreak();
+  }
   if ( j__abs(Number) < 2 )
+  {
     v4 = Number;
+  }
   else
+  {
     v4 = 8 * Number;
+  }
   CInfluMap::ModifyValueVW(a1, a2, v5, v4);
   CInfluMap::ModifyValueVW(a1, a2 - 1, v5, Number);
   CInfluMap::ModifyValueVW(a1, a2 + 1, v5, Number);

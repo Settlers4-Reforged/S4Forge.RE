@@ -41,9 +41,13 @@ void __stdcall CBBSupportLogFile::SetFileMode(int a2) {
 
   result = this;
   if ( *((_DWORD *)this + 2) )
+  {
     return result;
+  }
   if ( a2 >= 4 )
+  {
     a2 = 0;
+  }
   *((_DWORD *)this + 1) = a2;
   return result;
 }
@@ -58,15 +62,21 @@ void __stdcall CBBSupportLogFile::SetFilePath(wchar_t const * a2) {
 
   result = this;
   if ( *((_DWORD *)this + 2) )
+  {
     return result;
+  }
   result = (CBBSupportLogFile *)memset((char *)this + 20, 0, 0x228u);
   if ( a2 )
   {
-    for ( i = 0; i < 0x227; ++i )
+    for ( i = 0;
+          i < 0x227;
+          ++i )
     {
       result = (CBBSupportLogFile *)a2;
       if ( !a2[i] )
+      {
         break;
+      }
       result = this;
       *((_WORD *)this + i + 10) = a2[i];
     }
@@ -76,7 +86,7 @@ void __stdcall CBBSupportLogFile::SetFilePath(wchar_t const * a2) {
 
 
 // address=[0x2f33f50]
-// Decompiled from int __thiscall CBBSupportLogFile::SetFileModePathAndCreateOrDeleteIfDesired(  void *ecx0,  CBBSupportLogFile *this,  int a3,  const wchar_t *a4)
+// Decompiled from int __thiscall CBBSupportLogFile::SetFileModePathAndCreateOrDeleteIfDesired(void *ecx0, CBBSupportLogFile *this, int a3, const wchar_t *a4)
 void __stdcall CBBSupportLogFile::SetFileModePathAndCreateOrDeleteIfDesired(int ecx0, wchar_t const * this) {
   
   int result; // eax
@@ -86,11 +96,17 @@ void __stdcall CBBSupportLogFile::SetFileModePathAndCreateOrDeleteIfDesired(int 
   result = (*(int (__stdcall **)(CBBSupportLogFile *, const wchar_t *))(*(_DWORD *)this + 8))(this, a4);
   v5 = *((_DWORD *)this + 1);
   if ( v5 == 1 )
+  {
     return (*(int (__stdcall **)(CBBSupportLogFile *))(*(_DWORD *)this + 36))(this);
+  }
   if ( v5 == 2 )
+  {
     return (*(int (__stdcall **)(CBBSupportLogFile *))(*(_DWORD *)this + 40))(this);
+  }
   if ( v5 != 3 )
+  {
     return result;
+  }
   return (*(int (__stdcall **)(CBBSupportLogFile *))(*(_DWORD *)this + 36))(this);
 }
 
@@ -125,14 +141,16 @@ void __stdcall CBBSupportLogFile::Print(char const * a2) {
   int i; // [esp+0h] [ebp-4h]
 
   if ( !a2 )
+  {
     return result;
-  for ( i = 0; a2[i]; ++i )
+  }
+  for ( i = 0;
+        a2[i];
+        ++i )
+  {
     ;
-  return (*(int (__thiscall **)(CBBSupportLogFile *, CBBSupportLogFile *, const char *, int))(*(_DWORD *)this + 16))(
-           this,
-           this,
-           a2,
-           i);
+  }
+  return (*(int (__thiscall **)(CBBSupportLogFile *, CBBSupportLogFile *, const char *, int))(*(_DWORD *)this + 16))(this, this, a2, i);
 }
 
 
@@ -152,8 +170,12 @@ void __cdecl CBBSupportLogFile::PrintF(char const * a1, ... a2) {
     __vcrt_va_start_verify_argument_type<char const *>();
     wvsprintfA(v4, a2, va);
     v4[1023] = 0;
-    for ( i = 0; v4[i]; ++i )
+    for ( i = 0;
+          v4[i];
+          ++i )
+    {
       ;
+    }
     (*(void (__stdcall **)(int, CHAR *, int))(*(_DWORD *)a1 + 16))(a1, v4, i);
     SetLastError(dwErrCode);
   }
@@ -168,11 +190,10 @@ void __cdecl CBBSupportLogFile::PrintNewLine(void) {
 
   result = this;
   if ( *((_DWORD *)this + 3) )
+  {
     return result;
-  result = (CBBSupportLogFile *)(*(int (__stdcall **)(CBBSupportLogFile *, void *, int))(*(_DWORD *)this + 16))(
-                                  this,
-                                  &unk_3ABA9BC,
-                                  2);
+  }
+  result = (CBBSupportLogFile *)(*(int (__stdcall **)(CBBSupportLogFile *, void *, int))(*(_DWORD *)this + 16))(this, &unk_3ABA9BC, 2);
   *((_DWORD *)this + 3) = 1;
   return result;
 }
@@ -211,11 +232,17 @@ void __stdcall CBBSupportLogFile::Open(void) {
     dwFlagsAndAttributes = 128;
     v5 = BBSupportLib::BBSGetSupportFlags(dwErrCodea);
     if ( (v5 & 2) == 0 && (v5 & 1) != 0 )
+    {
       dwFlagsAndAttributes = -2147483520;
+    }
     if ( *((_DWORD *)this + 1) == 3 )
+    {
       FileW = CreateFileW((LPCWSTR)this + 10, 0x40000000u, 1u, 0, 4u, dwFlagsAndAttributes, 0);
+    }
     else
+    {
       FileW = CreateFileW((LPCWSTR)this + 10, 0x40000000u, 1u, 0, 2u, dwFlagsAndAttributes, 0);
+    }
     *((_DWORD *)this + 4) = FileW;
     if ( *((_DWORD *)this + 4) == -1 )
     {
@@ -226,9 +253,13 @@ void __stdcall CBBSupportLogFile::Open(void) {
       SetFilePointer(*((HANDLE *)this + 4), 0, 0, 2u);
     }
     if ( *((_DWORD *)this + 4) )
+    {
       v4 = 1;
+    }
     else
+    {
       v4 = -1;
+    }
     *((_DWORD *)this + 2) = v4;
     SetLastError(dwErrCode);
   }
@@ -293,7 +324,9 @@ bool __stdcall CBBSupportLogFile::GetFilePath(wchar_t * a2, unsigned int a3) {
 bool __stdcall CBBSupportLogFile::OpenIfNecessary(void) {
   
   if ( *((_DWORD *)this + 2) == 0 && *((_DWORD *)this + 1) == 2 )
+  {
     (*(void (__stdcall **)(CBBSupportLogFile *))(*(_DWORD *)this + 36))(this);
+  }
   return CBBSupportLogFile::IsOpen(this);
 }
 

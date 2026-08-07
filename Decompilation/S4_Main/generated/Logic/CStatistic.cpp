@@ -7,12 +7,7 @@
 // Decompiled from int __thiscall CStatistic::DefenceStrength100Max(CStatistic *this, int a2)
 int  CStatistic::DefenceStrength100Max(int a2)const {
   
-  if ( (a2 < 1 || a2 > 8)
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\Statistic.h",
-         365,
-         "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (a2 < 1 || a2 > 8) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\Statistic.h", 365, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -32,12 +27,7 @@ int  CStatistic::GetDontShowLastNPlayers(void) {
 // Decompiled from int __thiscall CStatistic::OffenceStrength100Max(CStatistic *this, int _iPlayerId)
 int  CStatistic::OffenceStrength100Max(int _iPlayerId)const {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\Statistic.h",
-         381,
-         "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\Statistic.h", 381, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -90,11 +80,12 @@ void  CStatistic::Update(void) {
   if ( (int)g_pGameType->m_iTeamWon > 0 && !CStatistic::m_bWonStateSaved )
   {
     CStatistic::m_bWonStateSaved = 1;
-    for ( i = 0; i < 9; ++i )
-      memcpy(
-        this->m_sPlayerStats[i].m_iWinGoods,
-        this->m_sPlayerStats[i].m_iNrOfGood,
-        sizeof(this->m_sPlayerStats[i].m_iWinGoods));
+    for ( i = 0;
+          i < 9;
+          ++i )
+    {
+      memcpy(this->m_sPlayerStats[i].m_iWinGoods, this->m_sPlayerStats[i].m_iNrOfGood, sizeof(this->m_sPlayerStats[i].m_iWinGoods));
+    }
   }
 }
 
@@ -120,18 +111,27 @@ void  CStatistic::Load(class IS4Chunk & a2) {
   a2->LoadSignature(762231707);
   v3 = a2->LoadUnsigned32(3, 4);
   if ( v3 == 3 )
+  {
     uStructSize = 4388;
+  }
   else
+  {
     uStructSize = a2->LoadUnsigned32(0, 4392);
-  if ( uStructSize > 0x1128
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 118, "uStructSize <= sizeof(SPlayerStatistic)") == 1 )
+  }
+  if ( uStructSize > 0x1128 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 118, "uStructSize <= sizeof(SPlayerStatistic)") == 1 )
   {
     __debugbreak();
   }
-  for ( i = 0; i < 9; ++i )
+  for ( i = 0;
+        i < 9;
+        ++i )
+  {
     a2->Load(&this->m_sPlayerStats[i], uStructSize);
+  }
   if ( v3 >= 4 )
+  {
     a2->LoadSignature(762231803);
+  }
 }
 
 
@@ -152,44 +152,41 @@ void  CStatistic::Save(class IS4Chunk & a2) {
 // Decompiled from void __thiscall CStatistic::DecSettler(CStatistic *this, int _iPlayerId, S4_SETTLER_ENUM _iSettlerType)
 void  CStatistic::DecSettler(int _iPlayerId, int _iSettlerType) {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 328, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 328, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
-  if ( (_iSettlerType <= SETTLER_NO_SETTLER || _iSettlerType >= SETTLER_MAX)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 329, "(_iSettlerType > 0) && (_iSettlerType < SETTLER_MAX)") == 1 )
+  if ( (_iSettlerType <= SETTLER_NO_SETTLER || _iSettlerType >= SETTLER_MAX) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 329, "(_iSettlerType > 0) && (_iSettlerType < SETTLER_MAX)") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfSettler[_iSettlerType] <= 0
-    && BBSupportDbgReport(
-         2,
-         "Logic\\Statistic.cpp",
-         331,
-         "m_sPlayerStats[_iPlayerId].m_iNrOfSettler[_iSettlerType] > 0") == 1 )
+  if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfSettler[_iSettlerType] <= 0 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 331, "m_sPlayerStats[_iPlayerId].m_iNrOfSettler[_iSettlerType] > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_sPlayerStats[_iPlayerId].m_iTotalNrOfSettler <= 0
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 332, "m_sPlayerStats[_iPlayerId].m_iTotalNrOfSettler > 0") == 1 )
+  if ( this->m_sPlayerStats[_iPlayerId].m_iTotalNrOfSettler <= 0 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 332, "m_sPlayerStats[_iPlayerId].m_iTotalNrOfSettler > 0") == 1 )
   {
     __debugbreak();
   }
   if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfSettler[_iSettlerType] > 0 )
+  {
     --this->m_sPlayerStats[_iPlayerId].m_iNrOfSettler[_iSettlerType];
+  }
   if ( this->m_sPlayerStats[_iPlayerId].m_iTotalNrOfSettler > 0 )
+  {
     --this->m_sPlayerStats[_iPlayerId].m_iTotalNrOfSettler;
+  }
   switch ( CSettlerMgr::SettlerWarriorType(_iSettlerType) )
   {
     case 0:
-      if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfCivilian <= 0
-        && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 369, "m_sPlayerStats[_iPlayerId].m_iNrOfCivilian > 0") == 1 )
+      if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfCivilian <= 0 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 369, "m_sPlayerStats[_iPlayerId].m_iNrOfCivilian > 0") == 1 )
       {
         __debugbreak();
       }
       if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfCivilian > 0 )
+      {
         --this->m_sPlayerStats[_iPlayerId].m_iNrOfCivilian;
+      }
       break;
     case 1:
     case 6:
@@ -197,13 +194,14 @@ void  CStatistic::DecSettler(int _iPlayerId, int _iSettlerType) {
     case 14:
       return;
     default:
-      if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfSoldier <= 0
-        && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 380, "m_sPlayerStats[_iPlayerId].m_iNrOfSoldier > 0") == 1 )
+      if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfSoldier <= 0 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 380, "m_sPlayerStats[_iPlayerId].m_iNrOfSoldier > 0") == 1 )
       {
         __debugbreak();
       }
       if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfSoldier > 0 )
+      {
         --this->m_sPlayerStats[_iPlayerId].m_iNrOfSoldier;
+      }
       break;
   }
 }
@@ -213,13 +211,11 @@ void  CStatistic::DecSettler(int _iPlayerId, int _iSettlerType) {
 // Decompiled from void __thiscall CStatistic::AddSettler(CStatistic *this, int a2, S4_SETTLER_ENUM _iSettlerType)
 void  CStatistic::AddSettler(int a2, int _iSettlerType) {
   
-  if ( (a2 < 1 || a2 > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 283, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (a2 < 1 || a2 > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 283, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
-  if ( (_iSettlerType <= SETTLER_NO_SETTLER || _iSettlerType >= SETTLER_MAX)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 284, "(_iSettlerType > 0) && (_iSettlerType < SETTLER_MAX)") == 1 )
+  if ( (_iSettlerType <= SETTLER_NO_SETTLER || _iSettlerType >= SETTLER_MAX) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 284, "(_iSettlerType > 0) && (_iSettlerType < SETTLER_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -246,13 +242,11 @@ void  CStatistic::AddSettler(int a2, int _iSettlerType) {
 // Decompiled from int __thiscall CStatistic::GetSettler(CStatistic *this, int _iPlayerId, int _iSettlerType)
 int  CStatistic::GetSettler(int _iPlayerId, int _iSettlerType)const {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 398, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 398, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
-  if ( (_iSettlerType <= 0 || _iSettlerType >= 67)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 399, "(_iSettlerType > 0) && (_iSettlerType < SETTLER_MAX)") == 1 )
+  if ( (_iSettlerType <= 0 || _iSettlerType >= 67) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 399, "(_iSettlerType > 0) && (_iSettlerType < SETTLER_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -264,8 +258,7 @@ int  CStatistic::GetSettler(int _iPlayerId, int _iSettlerType)const {
 // Decompiled from int __thiscall CStatistic::GetTotalSettler(CStatistic *this, int a2)
 int  CStatistic::GetTotalSettler(int a2)const {
   
-  if ( (a2 < 1 || a2 > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 412, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (a2 < 1 || a2 > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 412, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -277,8 +270,7 @@ int  CStatistic::GetTotalSettler(int a2)const {
 // Decompiled from int __thiscall CStatistic::GetCivilian(CStatistic *this, int a2)
 int  CStatistic::GetCivilian(int a2)const {
   
-  if ( (a2 < 1 || a2 > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 467, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (a2 < 1 || a2 > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 467, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -294,17 +286,20 @@ int  CStatistic::GetSoldiers(int _iPlayerId)const {
   int v5; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 480, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 480, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
   v5 = 0;
-  for ( i = 0; i < 67; ++i )
+  for ( i = 0;
+        i < 67;
+        ++i )
   {
     v4 = CSettlerMgr::SettlerWarriorType(i);
     if ( v4 > 0 && v4 <= 6 )
+    {
       v5 += this->m_sPlayerStats[_iPlayerId].m_iTotalOfSettler[i];
+    }
   }
   return v5;
 }
@@ -314,8 +309,7 @@ int  CStatistic::GetSoldiers(int _iPlayerId)const {
 // Decompiled from int __thiscall CStatistic::GetNrOfSoldiers(CStatistic *this, int a2)
 int  CStatistic::GetNrOfSoldiers(int a2)const {
   
-  if ( (a2 < 1 || a2 > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 512, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (a2 < 1 || a2 > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 512, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -327,13 +321,11 @@ int  CStatistic::GetNrOfSoldiers(int a2)const {
 // Decompiled from void __thiscall CStatistic::AddProducedSettler(CStatistic *this, int a2, int _iSettlerType)
 void  CStatistic::AddProducedSettler(int a2, int _iSettlerType) {
   
-  if ( (a2 < 1 || a2 > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 426, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (a2 < 1 || a2 > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 426, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
-  if ( (_iSettlerType <= 0 || _iSettlerType >= 67)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 427, "(_iSettlerType > 0) && (_iSettlerType < SETTLER_MAX)") == 1 )
+  if ( (_iSettlerType <= 0 || _iSettlerType >= 67) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 427, "(_iSettlerType > 0) && (_iSettlerType < SETTLER_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -346,13 +338,11 @@ void  CStatistic::AddProducedSettler(int a2, int _iSettlerType) {
 // Decompiled from int __thiscall CStatistic::GetProducedSettler(CStatistic *this, int _iPlayerId, int _iSettlerType)
 int  CStatistic::GetProducedSettler(int _iPlayerId, int _iSettlerType)const {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 441, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 441, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
-  if ( (_iSettlerType <= 0 || _iSettlerType >= 67)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 442, "(_iSettlerType > 0) && (_iSettlerType < SETTLER_MAX)") == 1 )
+  if ( (_iSettlerType <= 0 || _iSettlerType >= 67) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 442, "(_iSettlerType > 0) && (_iSettlerType < SETTLER_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -364,8 +354,7 @@ int  CStatistic::GetProducedSettler(int _iPlayerId, int _iSettlerType)const {
 // Decompiled from int __thiscall CStatistic::GetTotalProducedSettler(CStatistic *this, int _iPlayerId)
 int  CStatistic::GetTotalProducedSettler(int _iPlayerId)const {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 454, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 454, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -401,12 +390,7 @@ void  CStatistic::DecBuilding(int _iPlayerId, int _iBuildingType, int a4) {
   DWORD v4; // eax
 
   BBSupportTracePrintF(0, "CStatistic::DecBuilding(%i, %i, %i) called.", _iPlayerId, _iBuildingType, a4);
-  if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfBuilding[_iBuildingType] < a4
-    && BBSupportDbgReport(
-         2,
-         "Logic\\Statistic.cpp",
-         555,
-         "m_sPlayerStats[ _iPlayerId ].m_iNrOfBuildings[ _iBuildingType ] >= _iAmount") == 1 )
+  if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfBuilding[_iBuildingType] < a4 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 555, "m_sPlayerStats[ _iPlayerId ].m_iNrOfBuildings[ _iBuildingType ] >= _iAmount") == 1 )
   {
     __debugbreak();
   }
@@ -429,13 +413,14 @@ int  CStatistic::GetBuildings(int _iPlayerId, int _iBuildingType)const {
 // Decompiled from void __thiscall CStatistic::AddProducedBuilding(CStatistic *this, int a2, int a3, int a4)
 void  CStatistic::AddProducedBuilding(int a2, int a3, int a4) {
   
-  if ( (a2 <= 0 || a2 >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 610, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (a2 <= 0 || a2 >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 610, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( a3 >= 83 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 611, "_iBuilding < BUILDING_MAX") == 1 )
+  {
     __debugbreak();
+  }
   this->m_sPlayerStats[a2].m_iNrOfProducedBuilding[a3] += a4;
   this->m_sPlayerStats[a2].m_iProducedBuildings += a4;
 }
@@ -445,13 +430,14 @@ void  CStatistic::AddProducedBuilding(int a2, int a3, int a4) {
 // Decompiled from int __thiscall CStatistic::GetProducedBuildings(CStatistic *this, int _iPlayerId, int _iBuilding)
 int  CStatistic::GetProducedBuildings(int _iPlayerId, int _iBuilding)const {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 624, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 624, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( _iBuilding >= 83 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 625, "_iBuilding < BUILDING_MAX") == 1 )
+  {
     __debugbreak();
+  }
   return this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedBuilding[_iBuilding];
 }
 
@@ -496,14 +482,11 @@ void  CStatistic::AddCaptureBuilding(int _iPlayer, int _iTarget, int _iBuilding)
 // Decompiled from int __thiscall CStatistic::GetCapturedTowers(CStatistic *this, int _iPlayer)
 int  CStatistic::GetCapturedTowers(int _iPlayer) {
   
-  if ( (_iPlayer <= 0 || _iPlayer >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1584, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayer <= 0 || _iPlayer >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1584, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  return this->m_sPlayerStats[_iPlayer].m_iNrOfCapturedBuilding[48]
-       + this->m_sPlayerStats[_iPlayer].m_iNrOfCapturedBuilding[47]
-       + this->m_sPlayerStats[_iPlayer].m_iNrOfCapturedBuilding[46];
+  return this->m_sPlayerStats[_iPlayer].m_iNrOfCapturedBuilding[48] + this->m_sPlayerStats[_iPlayer].m_iNrOfCapturedBuilding[47] + this->m_sPlayerStats[_iPlayer].m_iNrOfCapturedBuilding[46];
 }
 
 
@@ -511,9 +494,7 @@ int  CStatistic::GetCapturedTowers(int _iPlayer) {
 // Decompiled from int __thiscall CStatistic::GetLossesTowers(CStatistic *this, int a2)
 int  CStatistic::GetLossesTowers(int a2) {
   
-  return this->m_sPlayerStats[a2].m_iNrOfLostBuilding[BUILDING_CASTLE]
-       + this->m_sPlayerStats[a2].m_iNrOfLostBuilding[BUILDING_GUARDTOWERBIG]
-       + this->m_sPlayerStats[a2].m_iNrOfLostBuilding[BUILDING_GUARDTOWERSMALL];
+  return this->m_sPlayerStats[a2].m_iNrOfLostBuilding[BUILDING_CASTLE] + this->m_sPlayerStats[a2].m_iNrOfLostBuilding[BUILDING_GUARDTOWERBIG] + this->m_sPlayerStats[a2].m_iNrOfLostBuilding[BUILDING_GUARDTOWERSMALL];
 }
 
 
@@ -530,12 +511,7 @@ void  CStatistic::AddConstruction(int _iPlayerId, int _iBuildingType, int _iCoun
 // Decompiled from void __thiscall CStatistic::DecConstruction(CStatistic *this, int _iPlayerId, int _iBuildingType, int a4)
 void  CStatistic::DecConstruction(int _iPlayerId, int _iBuildingType, int a4) {
   
-  if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfBuildingSites[_iBuildingType] < a4
-    && BBSupportDbgReport(
-         2,
-         "Logic\\Statistic.cpp",
-         661,
-         "m_sPlayerStats[ _iPlayerId ].m_iNrOfBuildingSites[ _iBuildingType ] >= _iAmount") == 1 )
+  if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfBuildingSites[_iBuildingType] < a4 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 661, "m_sPlayerStats[ _iPlayerId ].m_iNrOfBuildingSites[ _iBuildingType ] >= _iAmount") == 1 )
   {
     __debugbreak();
   }
@@ -596,17 +572,20 @@ int  CStatistic::GetResidenceSpace(int _iPlayerId)const {
 // Decompiled from void __thiscall CStatistic::AddGood(CStatistic *this, int _iPlayerId, S4_GOOD_ENUM _iGood, int a4)
 void  CStatistic::AddGood(int _iPlayerId, int _iGood, int a4) {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 162, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 162, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( _iGood >= GOOD_MAX && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 163, "_iGood < GOOD_MAX") == 1 )
+  {
     __debugbreak();
+  }
   this->m_sPlayerStats[_iPlayerId].m_iNrOfGood[_iGood] += a4;
   this->m_sPlayerStats[_iPlayerId].m_iTotalGoods += a4;
   if ( !CStatistic::m_bWonStateSaved )
+  {
     this->m_sPlayerStats[_iPlayerId].m_iWinGoods[_iGood] = this->m_sPlayerStats[_iPlayerId].m_iNrOfGood[_iGood];
+  }
 }
 
 
@@ -616,16 +595,19 @@ void  CStatistic::DecGood(int _iPlayerId, int _iGood, int _iCount) {
   
   int v4; // [esp+0h] [ebp-8h]
 
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 183, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 183, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( _iGood >= 43 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 184, "_iGood < GOOD_MAX") == 1 )
+  {
     __debugbreak();
+  }
   v4 = _iCount;
   if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfGood[_iGood] < _iCount )
+  {
     v4 = this->m_sPlayerStats[_iPlayerId].m_iNrOfGood[_iGood];
+  }
   this->m_sPlayerStats[_iPlayerId].m_iNrOfGood[_iGood] -= v4;
   this->m_sPlayerStats[_iPlayerId].m_iTotalGoods -= v4;
 }
@@ -635,13 +617,14 @@ void  CStatistic::DecGood(int _iPlayerId, int _iGood, int _iCount) {
 // Decompiled from int __thiscall CStatistic::GetGood(CStatistic *this, int _iPlayerId, int _iGood)
 int  CStatistic::GetGood(int _iPlayerId, int _iGood)const {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 202, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 202, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( _iGood >= 43 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 203, "_iGood < GOOD_MAX") == 1 )
+  {
     __debugbreak();
+  }
   return this->m_sPlayerStats[_iPlayerId].m_iNrOfGood[_iGood];
 }
 
@@ -650,13 +633,14 @@ int  CStatistic::GetGood(int _iPlayerId, int _iGood)const {
 // Decompiled from int __thiscall CStatistic::GetWinGood(CStatistic *this, int _iPlayerId, int _iGood)
 int  CStatistic::GetWinGood(int _iPlayerId, int _iGood)const {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 210, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 210, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( _iGood >= 43 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 211, "_iGood < GOOD_MAX") == 1 )
+  {
     __debugbreak();
+  }
   return this->m_sPlayerStats[_iPlayerId].m_iWinGoods[_iGood];
 }
 
@@ -665,8 +649,7 @@ int  CStatistic::GetWinGood(int _iPlayerId, int _iGood)const {
 // Decompiled from int __thiscall CStatistic::GetTotalGood(CStatistic *this, int _iPlayerId)
 int  CStatistic::GetTotalGood(int _iPlayerId)const {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 223, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 223, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -678,13 +661,14 @@ int  CStatistic::GetTotalGood(int _iPlayerId)const {
 // Decompiled from void __thiscall CStatistic::AddProducedGoods(CStatistic *this, int _iPlayerId, int _iGood, int _iCount)
 void  CStatistic::AddProducedGoods(int _iPlayerId, int _iGood, int _iCount) {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 235, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 235, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( _iGood >= 43 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 236, "_iGood < GOOD_MAX") == 1 )
+  {
     __debugbreak();
+  }
   this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedGoods[_iGood] += _iCount;
   this->m_sPlayerStats[_iPlayerId].m_iTotalProducedGoods += _iCount;
 }
@@ -694,13 +678,14 @@ void  CStatistic::AddProducedGoods(int _iPlayerId, int _iGood, int _iCount) {
 // Decompiled from int __thiscall CStatistic::GetProducedGoods(CStatistic *this, int _iPlayerId, int _iGood)
 int  CStatistic::GetProducedGoods(int _iPlayerId, int _iGood)const {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 249, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 249, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( _iGood >= 43 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 250, "_iGood < GOOD_MAX") == 1 )
+  {
     __debugbreak();
+  }
   return this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedGoods[_iGood];
 }
 
@@ -709,8 +694,7 @@ int  CStatistic::GetProducedGoods(int _iPlayerId, int _iGood)const {
 // Decompiled from int __thiscall CStatistic::GetTotalProducedGood(CStatistic *this, int _iPlayerId)
 int  CStatistic::GetTotalProducedGood(int _iPlayerId)const {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 263, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 263, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -722,13 +706,14 @@ int  CStatistic::GetTotalProducedGood(int _iPlayerId)const {
 // Decompiled from void __thiscall CStatistic::AddVehicle(CStatistic *this, int _iPlayerId, int _iVehicleType, int _iCount)
 void  CStatistic::AddVehicle(int _iPlayerId, int _iVehicleType, int _iCount) {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 759, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 759, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( _iVehicleType >= 6 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 760, "_iVehicleType < VEHICLE_MAX") == 1 )
+  {
     __debugbreak();
+  }
   this->m_sPlayerStats[_iPlayerId].m_iNrOfVehicle[_iVehicleType] += _iCount;
   this->m_sPlayerStats[_iPlayerId].m_iTotalVehicles += _iCount;
 }
@@ -742,7 +727,9 @@ void  CStatistic::DecVehicle(int _iPlayerId, int _iVehicleType, int _iCount) {
 
   v4 = _iCount;
   if ( this->m_sPlayerStats[_iPlayerId].m_iNrOfVehicle[_iVehicleType] < _iCount )
+  {
     v4 = this->m_sPlayerStats[_iPlayerId].m_iNrOfVehicle[_iVehicleType];
+  }
   this->m_sPlayerStats[_iPlayerId].m_iNrOfVehicle[_iVehicleType] -= v4;
   this->m_sPlayerStats[_iPlayerId].m_iTotalVehicles -= v4;
 }
@@ -760,8 +747,7 @@ int  CStatistic::GetVehicle(int a2, int a3)const {
 // Decompiled from int __thiscall CStatistic::GetTotalVehicle(CStatistic *this, int _iPlayerId)
 int  CStatistic::GetTotalVehicle(int _iPlayerId)const {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 803, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 803, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -773,13 +759,11 @@ int  CStatistic::GetTotalVehicle(int _iPlayerId)const {
 // Decompiled from void __thiscall CStatistic::AddProducedVehicle(CStatistic *this, int _iPlayerId, int _iVehicleType, int _iCount)
 void  CStatistic::AddProducedVehicle(int _iPlayerId, int _iVehicleType, int _iCount) {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 817, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 817, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
-  if ( (_iVehicleType <= 0 || _iVehicleType >= 6)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 818, "(_iVehicleType > 0) && (_iVehicleType < VEHICLE_MAX)") == 1 )
+  if ( (_iVehicleType <= 0 || _iVehicleType >= 6) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 818, "(_iVehicleType > 0) && (_iVehicleType < VEHICLE_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -792,13 +776,11 @@ void  CStatistic::AddProducedVehicle(int _iPlayerId, int _iVehicleType, int _iCo
 // Decompiled from int __thiscall CStatistic::GetProducedVehicle(CStatistic *this, int _iPlayerId, int _iVehicleType)
 int  CStatistic::GetProducedVehicle(int _iPlayerId, int _iVehicleType)const {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 831, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 831, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
-  if ( (_iVehicleType <= 0 || _iVehicleType >= 6)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 832, "(_iVehicleType > 0) && (_iVehicleType < VEHICLE_MAX)") == 1 )
+  if ( (_iVehicleType <= 0 || _iVehicleType >= 6) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 832, "(_iVehicleType > 0) && (_iVehicleType < VEHICLE_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -810,8 +792,7 @@ int  CStatistic::GetProducedVehicle(int _iPlayerId, int _iVehicleType)const {
 // Decompiled from int __thiscall CStatistic::GetTotalProducedVehicled(CStatistic *this, int _iPlayerId)
 int  CStatistic::GetTotalProducedVehicled(int _iPlayerId)const {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 845, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 845, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -823,8 +804,7 @@ int  CStatistic::GetTotalProducedVehicled(int _iPlayerId)const {
 // Decompiled from int __thiscall CStatistic::GetMana(CStatistic *this, int _iPlayerId)
 int  CStatistic::GetMana(int _iPlayerId)const {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1104, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1104, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -836,8 +816,7 @@ int  CStatistic::GetMana(int _iPlayerId)const {
 // Decompiled from int __thiscall CStatistic::GetProducedMana(CStatistic *this, int a2)
 int  CStatistic::GetProducedMana(int a2)const {
   
-  if ( (a2 <= 0 || a2 >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1116, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (a2 <= 0 || a2 >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1116, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -849,13 +828,14 @@ int  CStatistic::GetProducedMana(int a2)const {
 // Decompiled from void __thiscall CStatistic::IncKillsOfType(CStatistic *this, int _iPlayerId, int _iSettlerType)
 void  CStatistic::IncKillsOfType(int _iPlayerId, int _iSettlerType) {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 863, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 863, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
   if ( _iSettlerType <= 0 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 864, "_iSettlerType > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iSettlerType < 67 )
   {
     ++this->m_sPlayerStats[_iPlayerId].m_iNrOfKill[_iSettlerType];
@@ -884,13 +864,14 @@ int  CStatistic::GetKills(int _iPlayerId)const {
 // Decompiled from void __thiscall CStatistic::IncLossesOfType(CStatistic *this, int _iPlayerId, int _iSettlerType)
 void  CStatistic::IncLossesOfType(int _iPlayerId, int _iSettlerType) {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 899, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 899, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
   if ( _iSettlerType <= 0 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 900, "_iSettlerType > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iSettlerType < 67 )
   {
     ++this->m_sPlayerStats[_iPlayerId].m_iNrOfLoss[_iSettlerType];
@@ -919,13 +900,11 @@ int  CStatistic::GetLosses(int _iPlayerId)const {
 // Decompiled from void __thiscall CStatistic::IncKillsVehicleOfType(CStatistic *this, int _iPlayerId, int _iVehicleType)
 void  CStatistic::IncKillsVehicleOfType(int _iPlayerId, int _iVehicleType) {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 962, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 962, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
-  if ( (_iVehicleType <= 0 || _iVehicleType >= 6)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 963, "(_iVehicleType > 0) && (_iVehicleType < VEHICLE_MAX)") == 1 )
+  if ( (_iVehicleType <= 0 || _iVehicleType >= 6) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 963, "(_iVehicleType > 0) && (_iVehicleType < VEHICLE_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -954,13 +933,11 @@ int  CStatistic::GetKillsVehicle(int _iPlayerId)const {
 // Decompiled from void __thiscall CStatistic::IncLossesVehicleOfType(CStatistic *this, int _iPlayerId, int _iVehicleType)
 void  CStatistic::IncLossesVehicleOfType(int _iPlayerId, int _iVehicleType) {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 996, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 996, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
-  if ( (_iVehicleType <= 0 || _iVehicleType >= 6)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 997, "(_iVehicleType > 0) && (_iVehicleType < VEHICLE_MAX)") == 1 )
+  if ( (_iVehicleType <= 0 || _iVehicleType >= 6) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 997, "(_iVehicleType > 0) && (_iVehicleType < VEHICLE_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -1048,8 +1025,7 @@ void  CStatistic::SetOffenceStrength100(int a2, int a3) {
   
   int iOffenceStrengthBase256; // [esp+8h] [ebp-4h]
 
-  if ( (a2 < 1 || a2 >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1150, "_iPlayerId >= 1 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (a2 < 1 || a2 >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1150, "_iPlayerId >= 1 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -1062,7 +1038,9 @@ void  CStatistic::SetOffenceStrength100(int a2, int a3) {
       if ( iOffenceStrengthBase256 >= this->m_sPlayerStats[a2].m_iOffenceStrengthBase256 )
       {
         if ( iOffenceStrengthBase256 > 384 )
+        {
           iOffenceStrengthBase256 = 384;
+        }
       }
       else
       {
@@ -1079,8 +1057,7 @@ void  CStatistic::SetOffenceStrength100(int a2, int a3) {
 // Decompiled from int __thiscall CStatistic::UsedBuildingMaterial(CStatistic *this, int _iPlayerId)
 int  CStatistic::UsedBuildingMaterial(int _iPlayerId)const {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1129, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1129, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -1092,14 +1069,11 @@ int  CStatistic::UsedBuildingMaterial(int _iPlayerId)const {
 // Decompiled from int __thiscall CStatistic::GetTotalTowers(CStatistic *this, int _iPlayerId)
 int  CStatistic::GetTotalTowers(int _iPlayerId) {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1523, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1523, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  return this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedBuilding[BUILDING_CASTLE]
-       + this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedBuilding[BUILDING_GUARDTOWERBIG]
-       + this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedBuilding[BUILDING_GUARDTOWERSMALL];
+  return this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedBuilding[BUILDING_CASTLE] + this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedBuilding[BUILDING_GUARDTOWERBIG] + this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedBuilding[BUILDING_GUARDTOWERSMALL];
 }
 
 
@@ -1107,15 +1081,11 @@ int  CStatistic::GetTotalTowers(int _iPlayerId) {
 // Decompiled from int __thiscall CStatistic::GetTotalMineProduction(CStatistic *this, int a2)
 int  CStatistic::GetTotalMineProduction(int a2) {
   
-  if ( (a2 <= 0 || a2 >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1535, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (a2 <= 0 || a2 >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1535, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  return this->m_sPlayerStats[a2].m_iNrOfProducedGoods[GOOD_IRONORE]
-       + this->m_sPlayerStats[a2].m_iNrOfProducedGoods[GOOD_SULFUR]
-       + this->m_sPlayerStats[a2].m_iNrOfProducedGoods[GOOD_GOLDORE]
-       + this->m_sPlayerStats[a2].m_iNrOfProducedGoods[GOOD_COAL];
+  return this->m_sPlayerStats[a2].m_iNrOfProducedGoods[GOOD_IRONORE] + this->m_sPlayerStats[a2].m_iNrOfProducedGoods[GOOD_SULFUR] + this->m_sPlayerStats[a2].m_iNrOfProducedGoods[GOOD_GOLDORE] + this->m_sPlayerStats[a2].m_iNrOfProducedGoods[GOOD_COAL];
 }
 
 
@@ -1123,14 +1093,11 @@ int  CStatistic::GetTotalMineProduction(int a2) {
 // Decompiled from int __thiscall CStatistic::GetTotalFood(CStatistic *this, int _iPlayerId)
 int  CStatistic::GetTotalFood(int _iPlayerId) {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1548, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1548, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  return this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedGoods[GOOD_MEAT]
-       + this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedGoods[GOOD_FISH]
-       + this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedGoods[GOOD_BREAD];
+  return this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedGoods[GOOD_MEAT] + this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedGoods[GOOD_FISH] + this->m_sPlayerStats[_iPlayerId].m_iNrOfProducedGoods[GOOD_BREAD];
 }
 
 
@@ -1138,8 +1105,7 @@ int  CStatistic::GetTotalFood(int _iPlayerId) {
 // Decompiled from void __thiscall CStatistic::SetPlayerExitTime(CStatistic *this, int _iPlayerId, int _iExitTime)
 void  CStatistic::SetPlayerExitTime(int _iPlayerId, unsigned int _iExitTime) {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1560, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1560, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -1151,8 +1117,7 @@ void  CStatistic::SetPlayerExitTime(int _iPlayerId, unsigned int _iExitTime) {
 // Decompiled from int __thiscall CStatistic::GetPlayerExitTime(CStatistic *this, int _iPlayerId)
 unsigned int  CStatistic::GetPlayerExitTime(int _iPlayerId) {
   
-  if ( (_iPlayerId <= 0 || _iPlayerId >= 9)
-    && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1570, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
+  if ( (_iPlayerId <= 0 || _iPlayerId >= 9) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1570, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -1170,24 +1135,34 @@ void  CStatistic::UpdateStartStatistic(void) {
   int j; // [esp+10h] [ebp-Ch]
   int i; // [esp+18h] [ebp-4h]
 
-  for ( i = 1; i <= 8; ++i )
+  for ( i = 1;
+        i <= 8;
+        ++i )
   {
-    for ( j = 0; j < SETTLER_MAX; ++j )
+    for ( j = 0;
+          j < SETTLER_MAX;
+          ++j )
     {
       this->m_sPlayerStats[i].m_iTotalOfSettler[j] = this->m_sPlayerStats[i].m_iNrOfSettler[j];
       this->m_sPlayerStats[i].m_iProducedSettlers += this->m_sPlayerStats[i].m_iNrOfSettler[j];
     }
-    for ( k = 0; k < BUILDING_MAX; ++k )
+    for ( k = 0;
+          k < BUILDING_MAX;
+          ++k )
     {
       this->m_sPlayerStats[i].m_iNrOfProducedBuilding[k] = this->m_sPlayerStats[i].m_iNrOfBuilding[k];
       this->m_sPlayerStats[i].m_iProducedBuildings += this->m_sPlayerStats[i].m_iNrOfBuilding[k];
     }
-    for ( m = 0; m < 6; ++m )
+    for ( m = 0;
+          m < 6;
+          ++m )
     {
       this->m_sPlayerStats[i].m_iNrOfProducedVehicle[m] = this->m_sPlayerStats[i].m_iNrOfVehicle[m];
       this->m_sPlayerStats[i].m_iTotalProducedVehicles += this->m_sPlayerStats[i].m_iNrOfVehicle[m];
     }
-    for ( n = 0; n < GOOD_MAX; ++n )
+    for ( n = 0;
+          n < GOOD_MAX;
+          ++n )
     {
       this->m_sPlayerStats[i].m_iNrOfProducedGoods[n] = this->m_sPlayerStats[i].m_iNrOfGood[n];
       this->m_sPlayerStats[i].m_iTotalProducedGoods += this->m_sPlayerStats[i].m_iNrOfGood[n];
@@ -1239,7 +1214,9 @@ void  CStatistic::FillExtraInfo(void) {
   v28 = 0;
   v30 = CPlayerManager::PlayerGameData(a1);
   CPlayerGameData::ResetIterator(v30);
-  for ( i = CPlayerGameData::GetNextEcoSectorId(v30); i; i = CPlayerGameData::GetNextEcoSectorId(v30) )
+  for ( i = CPlayerGameData::GetNextEcoSectorId(v30);
+        i;
+        i = CPlayerGameData::GetNextEcoSectorId(v30) )
   {
     EcoSectorPtr = (CEcoSector *)CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, i);
     if ( EcoSectorPtr && CEcoSector::Owner(EcoSectorPtr) == a1 )
@@ -1247,7 +1224,9 @@ void  CStatistic::FillExtraInfo(void) {
       v1 = CEcoSector::NrOfSettler(EcoSectorPtr, SETTLER_CARRIER);
       v27 = v1 - CEcoSector::MinCarrier(EcoSectorPtr);
       if ( v27 > 0 )
+      {
         v28 += v27;
+      }
     }
   }
   g_cExtendedMenuInfo.m_uCarriers = v28;
@@ -1281,11 +1260,7 @@ void  CStatistic::FillExtraInfo(void) {
   v23 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BACKPACKCATAPULTIST_01) + v22;
   v24 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BACKPACKCATAPULTIST_02) + v23;
   v25 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BACKPACKCATAPULTIST_03) + v24;
-  g_cExtendedMenuInfo.m_uSoldierCount = CSettlerMgr::GetNumberOfSettlers(
-                                          (CSettlerMgr *)g_cSettlerMgr,
-                                          a1,
-                                          SETTLER_SQUADLEADER)
-                                      + v25;
+  g_cExtendedMenuInfo.m_uSoldierCount = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_SQUADLEADER) + v25;
   g_cExtendedMenuInfo.m_uOffenseStrength = CStatistic::OffenceStrength100(this, a1);
   g_cExtendedMenuInfo.m_uDefenceStrength = CStatistic::DefenceStrength100(this, a1);
   g_cExtendedMenuInfo.m_uMana = CStatistic::GetMana(this, a1);
@@ -1293,9 +1268,13 @@ void  CStatistic::FillExtraInfo(void) {
   CEvn_Event::CEvn_Event(&v34, 0x25Cu, 0, (unsigned int)&g_cExtendedMenuInfo, 0);
   v35 = 0;
   if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1701, "g_pEvnEngine != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( g_pEvnEngine )
+  {
     IEventEngine::SendAMessage(g_pEvnEngine, &v34);
+  }
   v35 = -1;
   return CEvn_Event::~CEvn_Event(&v34);
 }
@@ -1314,16 +1293,24 @@ void __cdecl CStatistic::FillEconomyGameMenu(class CInfoExchange * a1, bool a2, 
 
   CInfoExchange::Clear(&g_cEconomyGameInfo);
   g_cEconomyGameInfo.m_iUnknown = 36;
-  for ( i = 0; i < 7; ++i )
+  for ( i = 0;
+        i < 7;
+        ++i )
   {
     v4 = (unsigned __int8)CGameData::GetEconomyGoodsArray(g_pGameData)[i];
     g_cEconomyGameInfo.m_sStats[i].m_uEconomyGood = v4;
-    for ( j = 1; j <= CPlayerManager::LastPlayerId(); ++j )
+    for ( j = 1;
+          j <= CPlayerManager::LastPlayerId();
+          ++j )
     {
       if ( CAlliances::AllianceId(j) == 1 )
+      {
         g_cEconomyGameInfo.m_sStats[i].m_uWinGoodsAllies += CStatistic::GetWinGood(&g_cStatistic, j, v4);
+      }
       else
+      {
         g_cEconomyGameInfo.m_sStats[i].m_uWinGoodsOther += CStatistic::GetWinGood(&g_cStatistic, j, v4);
+      }
     }
   }
   v3 = CEvn_Event::CEvn_Event(&v7, 0x25Au, 0, (unsigned int)&g_cEconomyGameInfo, 0);
@@ -1343,11 +1330,12 @@ void  CStatistic::FreezeEcoStatistic(void) {
   if ( !CStatistic::m_bWonStateSaved )
   {
     CStatistic::m_bWonStateSaved = 1;
-    for ( i = 0; i < 9; ++i )
-      memcpy(
-        this->m_sPlayerStats[i].m_iWinGoods,
-        this->m_sPlayerStats[i].m_iNrOfGood,
-        sizeof(this->m_sPlayerStats[i].m_iWinGoods));
+    for ( i = 0;
+          i < 9;
+          ++i )
+    {
+      memcpy(this->m_sPlayerStats[i].m_iWinGoods, this->m_sPlayerStats[i].m_iNrOfGood, sizeof(this->m_sPlayerStats[i].m_iWinGoods));
+    }
   }
 }
 
@@ -1356,12 +1344,7 @@ void  CStatistic::FreezeEcoStatistic(void) {
 // Decompiled from int __thiscall CStatistic::DefenceStrength100(CStatistic *this, int _iPlayerId)
 int  CStatistic::DefenceStrength100(int _iPlayerId)const {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\Statistic.h",
-         357,
-         "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\Statistic.h", 357, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -1373,12 +1356,7 @@ int  CStatistic::DefenceStrength100(int _iPlayerId)const {
 // Decompiled from int __thiscall CStatistic::OffenceStrength100(CStatistic *this, int _iPlayerId)
 int  CStatistic::OffenceStrength100(int _iPlayerId)const {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\Statistic.h",
-         371,
-         "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\Statistic.h", 371, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -1401,12 +1379,7 @@ int  CStatistic::OffenceStrength100(int _iPlayerId)const {
 // Decompiled from int __thiscall CStatistic::DefenceStrength256(CStatistic *this, int _iPlayerId)
 int  CStatistic::DefenceStrength256(int _iPlayerId)const {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\Statistic.h",
-         387,
-         "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\Statistic.h", 387, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -1418,12 +1391,7 @@ int  CStatistic::DefenceStrength256(int _iPlayerId)const {
 // Decompiled from int __thiscall CStatistic::OffenceStrength256(CStatistic *this, int _iPlayerId)
 int  CStatistic::OffenceStrength256(int _iPlayerId)const {
   
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\Statistic.h",
-         395,
-         "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\Statistic.h", 395, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
@@ -1449,21 +1417,28 @@ void  CStatistic::CalcPlayerOffenceStrengthBaseValues(void) {
 
   iNumberOfPlayers = CPlayerManager::NumberOfPlayers();
   if ( iNumberOfPlayers <= 0 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1373, "iNumberOfPlayers > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( iNumberOfPlayers > 0 )
   {
     iOffenceStrengthBase256 = 768 / (iNumberOfPlayers + 4);
-    if ( iOffenceStrengthBase256 <= 0
-      && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1383, "iOffenceStrengthBase256 > 0") == 1 )
+    if ( iOffenceStrengthBase256 <= 0 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1383, "iOffenceStrengthBase256 > 0") == 1 )
     {
       __debugbreak();
     }
-    for ( i = 1; i < iNumberOfPlayers + 1; ++i )
+    for ( i = 1;
+          i < iNumberOfPlayers + 1;
+          ++i )
     {
       if ( CPlayerManager::Race(i) == 3 )
+      {
         this->m_sPlayerStats[i].m_iOffenceStrengthBase256 = 256;
+      }
       else
+      {
         this->m_sPlayerStats[i].m_iOffenceStrengthBase256 = iOffenceStrengthBase256;
+      }
       CStatistic::SPlayerStatistic::CalculateFightingStrength(&this->m_sPlayerStats[i], i);
     }
   }
@@ -1471,48 +1446,32 @@ void  CStatistic::CalcPlayerOffenceStrengthBaseValues(void) {
 
 
 // address=[0x1478a00]
-// Decompiled from void __thiscall CStatistic::UpdateFightingStrength(  CStatistic *this,  int _iPlayerId,  unsigned int _iRace,  S4_BUILDING_ENUM _iBuildingType,  int a5)
+// Decompiled from void __thiscall CStatistic::UpdateFightingStrength(CStatistic *this, int _iPlayerId, unsigned int _iRace, S4_BUILDING_ENUM _iBuildingType, int a5)
 void  CStatistic::UpdateFightingStrength(int _iPlayerId, int _iRace, int _iBuildingType, int a5) {
   
   CBuildingInfoMgr::SBuildingInfos *BuildingInfo; // [esp+10h] [ebp-8h]
 
-  if ( (_iPlayerId < 1 || _iPlayerId > 8)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\Statistic.cpp",
-         1411,
-         "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (_iPlayerId < 1 || _iPlayerId > 8) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1411, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
   if ( _iRace > 4 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1412, "(_iRace >= 0) && (_iRace < RACE_MAX)") == 1 )
+  {
     __debugbreak();
-  if ( (_iBuildingType <= BUILDING_NO_BUILDING || _iBuildingType >= BUILDING_MAX)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\Statistic.cpp",
-         1413,
-         "(_iBuildingType > BUILDING_NO_BUILDING) && (_iBuildingType < BUILDING_MAX)") == 1 )
+  }
+  if ( (_iBuildingType <= BUILDING_NO_BUILDING || _iBuildingType >= BUILDING_MAX) && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1413, "(_iBuildingType > BUILDING_NO_BUILDING) && (_iBuildingType < BUILDING_MAX)") == 1 )
   {
     __debugbreak();
   }
   BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(_iRace, _iBuildingType);
   if ( _iBuildingType < BUILDING_EYECATCHER01 || _iBuildingType > BUILDING_EYECATCHER12 )
-    CStatistic::SPlayerStatistic::UpdateFightingStrength(
-      &this->m_sPlayerStats[_iPlayerId],
-      _iPlayerId,
-      BuildingInfo->m_iBoards * a5,
-      BuildingInfo->m_iStone * a5,
-      BuildingInfo->m_iGold * a5,
-      0);
+  {
+    CStatistic::SPlayerStatistic::UpdateFightingStrength(&this->m_sPlayerStats[_iPlayerId], _iPlayerId, BuildingInfo->m_iBoards * a5, BuildingInfo->m_iStone * a5, BuildingInfo->m_iGold * a5, 0);
+  }
   else
-    CStatistic::SPlayerStatistic::UpdateFightingStrength(
-      &this->m_sPlayerStats[_iPlayerId],
-      _iPlayerId,
-      BuildingInfo->m_iBoards * a5,
-      BuildingInfo->m_iStone * a5,
-      BuildingInfo->m_iGold * a5,
-      1);
+  {
+    CStatistic::SPlayerStatistic::UpdateFightingStrength(&this->m_sPlayerStats[_iPlayerId], _iPlayerId, BuildingInfo->m_iBoards * a5, BuildingInfo->m_iStone * a5, BuildingInfo->m_iGold * a5, 1);
+  }
 }
 
 
@@ -1524,8 +1483,12 @@ void  CStatistic::CalculateFightingStrengths(void) {
   int i; // [esp+8h] [ebp-4h]
 
   PlayerId = CPlayerManager::LastPlayerId();
-  for ( i = 1; i <= PlayerId; ++i )
+  for ( i = 1;
+        i <= PlayerId;
+        ++i )
+  {
     CStatistic::SPlayerStatistic::CalculateFightingStrength(&this->m_sPlayerStats[i], i);
+  }
 }
 
 
@@ -1538,14 +1501,14 @@ void  CStatistic::CalculateLandSize(void) {
   int i; // [esp+Ch] [ebp-4h]
 
   PlayerId = CPlayerManager::LastPlayerId();
-  for ( i = 1; i <= PlayerId; ++i )
+  for ( i = 1;
+        i <= PlayerId;
+        ++i )
   {
     this->m_sPlayerStats[i].m_iLandSize = g_pTiling->NumberOfOwnedLandElements(g_pTiling, i);
     v1 = 100 * this->m_sPlayerStats[i].m_iLandSize;
     this->m_sPlayerStats[i].m_iLandSize = v1 / g_pTiling->NumberOfLandElements(g_pTiling);
-    this->m_sPlayerStats[i].m_iMaxLandSize = *(_DWORD *)std::max<long>(
-                                                          &this->m_sPlayerStats[i].m_iMaxLandSize,
-                                                          &this->m_sPlayerStats[i].m_iLandSize);
+    this->m_sPlayerStats[i].m_iMaxLandSize = *(_DWORD *)std::max<long>(&this->m_sPlayerStats[i].m_iMaxLandSize, &this->m_sPlayerStats[i].m_iLandSize);
   }
 }
 
@@ -1558,7 +1521,9 @@ void  CStatistic::CalculateMana(void) {
   int i; // [esp+8h] [ebp-4h]
 
   PlayerId = CPlayerManager::LastPlayerId();
-  for ( i = 1; i <= PlayerId; ++i )
+  for ( i = 1;
+        i <= PlayerId;
+        ++i )
   {
     this->m_sPlayerStats[i].m_iMana = CMagic::GetCurrentManaAmount(i);
     this->m_sPlayerStats[i].m_iProducedMana = CMagic::TotalAmountOfCollectedMana(i);

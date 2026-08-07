@@ -22,7 +22,9 @@ void  CMapGeneratorHost::Init(int a2) {
   memset(this[78], 0, 4 * (_DWORD)this[2]);
   this[79] = operator new[](4 * (_DWORD)this[2]);
   result = memset(this[79], 0, 4 * (_DWORD)this[2]);
-  for ( i = 0; i < (int)this[2]; ++i )
+  for ( i = 0;
+        i < (int)this[2];
+        ++i )
   {
     *((_BYTE *)this[78] + 4 * i + 1) = 7;
     result = (void *)(i + 1);
@@ -42,16 +44,18 @@ void  CMapGeneratorHost::UpdateGroundInformation(void) {
 
   result = (CMapGeneratorHost *)this;
   if ( !*((_BYTE *)this + 4) )
+  {
     return result;
+  }
   result = this[78];
   v2 = result;
   v3 = this[79];
-  for ( i = 0; i < (int)this[2]; ++i )
+  for ( i = 0;
+        i < (int)this[2];
+        ++i )
   {
     CMapGeneratorHost::RefreshShading((CMapGeneratorHost *)this, i);
-    if ( CLandscapeProperties::IsBlockedLand(
-           (CLandscapeProperties *)&s_cLandscapeProperties,
-           *((unsigned __int8 *)v2 + 1)) )
+    if ( CLandscapeProperties::IsBlockedLand((CLandscapeProperties *)&s_cLandscapeProperties, *((unsigned __int8 *)v2 + 1)) )
     {
       *((_BYTE *)v3 + 2) |= 1u;
     }
@@ -95,56 +99,82 @@ bool  CMapGeneratorHost::SetObject(int a2, int a3, int a4) {
 
   v28 = this;
   if ( !Grid::InQuadrat((int)a2, a3, *((_DWORD *)this + 52)) )
+  {
     return 0;
+  }
   v23 = (char *)a2 + *((_DWORD *)v28 + 52) * a3;
   if ( *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (_DWORD)v23) )
+  {
     return 0;
+  }
   if ( (*(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (_DWORD)v23 + 2) & 0x43) != 0 )
+  {
     return 0;
+  }
   CDecoObjMgr::GetDecoObjectFlagsInfo((CDecoObjMgr *)&g_cDecoObjMgr, a4, &v29, &v27, &v15);
   if ( v29 )
   {
     if ( v27 != 1 && BBSupportDbgReport(2, "main\\RandomMapHost.cpp", 317, (const char *)&dword_37039A0[1]) == 1 )
+    {
       __debugbreak();
+    }
   }
   else
   {
     v14 = CSpiralOffsets::First(v27);
-    for ( i = 0; i < v14; ++i )
+    for ( i = 0;
+          i < v14;
+          ++i )
     {
       v20 = (int)a2 + CSpiralOffsets::DeltaX(i);
       v21 = a3 + CSpiralOffsets::DeltaY(i);
       if ( !Grid::InQuadrat(v20, v21, *((_DWORD *)v28 + 52)) )
+      {
         return 0;
+      }
       v19 = v20 + *((_DWORD *)v28 + 52) * v21;
       if ( *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * v19) )
+      {
         return 0;
+      }
       if ( (*(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * v19 + 2) & 0x43) != 0 )
+      {
         return 0;
+      }
     }
   }
   v13 = CSpiralOffsets::First(v27);
   v12 = CSpiralOffsets::First(v15);
-  for ( j = v13; j < v12; ++j )
+  for ( j = v13;
+        j < v12;
+        ++j )
   {
     v17 = (int)a2 + CSpiralOffsets::DeltaX(j);
     v18 = a3 + CSpiralOffsets::DeltaY(j);
     if ( !Grid::InQuadrat(v17, v18, *((_DWORD *)v28 + 52)) )
+    {
       return 0;
+    }
     if ( (*(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (v17 + *((_DWORD *)v28 + 52) * v18) + 2) & 0x43) != 0 )
+    {
       return 0;
+    }
   }
   *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (_DWORD)v23) = a4;
   if ( v29 )
   {
     if ( v27 != 1 && BBSupportDbgReport(2, "main\\RandomMapHost.cpp", 370, "iTotalBlockingOrRepellingRings == 1") == 1 )
+    {
       __debugbreak();
+    }
     *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (_DWORD)v23 + 2) |= 0x42u;
   }
   else
   {
     v11 = CSpiralOffsets::First(v27);
-    for ( k = 0; k < v11; ++k )
+    for ( k = 0;
+          k < v11;
+          ++k )
     {
       v9 = (char *)a2 + CSpiralOffsets::DeltaX(k);
       v10 = a3 + CSpiralOffsets::DeltaY(k);
@@ -154,7 +184,9 @@ bool  CMapGeneratorHost::SetObject(int a2, int a3, int a4) {
   }
   v8 = CSpiralOffsets::First(v27);
   v7 = CSpiralOffsets::First(v15);
-  for ( m = v8; m < v7; ++m )
+  for ( m = v8;
+        m < v7;
+        ++m )
   {
     v5 = (char *)a2 + CSpiralOffsets::DeltaX(m);
     v6 = a3 + CSpiralOffsets::DeltaY(m);
@@ -171,7 +203,9 @@ void  CMapGeneratorHost::SetPlayerStartPosition(int a2, int a3, int a4) {
   int result; // eax
 
   if ( a2 < 1 || a2 > 8 )
+  {
     return result;
+  }
   *((_DWORD *)this + a2 + 54) = a3;
   result = a2;
   *((_DWORD *)this + a2 + 63) = a4;
@@ -180,12 +214,12 @@ void  CMapGeneratorHost::SetPlayerStartPosition(int a2, int a3, int a4) {
 
 
 // address=[0x1498b50]
-// Decompiled from CMapGeneratorHost *__thiscall CMapGeneratorHost::CMapGeneratorHost(  CMapGeneratorHost *this,  const struct SRandomMapParams *a2)
+// Decompiled from CMapGeneratorHost *__thiscall CMapGeneratorHost::CMapGeneratorHost(CMapGeneratorHost *this, const struct SRandomMapParams *a2)
  CMapGeneratorHost::CMapGeneratorHost(struct SRandomMapParams const & a2) {
   
   IMapGeneratorHost::IMapGeneratorHost(this);
   *(_DWORD *)this = &CMapGeneratorHost::_vftable_;
-  CDecoObjMgr::LoadInfo((CDecoObjMgr *)&g_cDecoObjMgr);
+  CDecoObjMgr::LoadInfo(&g_cDecoObjMgr);
   *((_BYTE *)this + 4) = 0;
   *((_DWORD *)this + 2) = 0;
   CMapGeneratorHost::ClearRandomMapInfo(this);
@@ -195,7 +229,9 @@ void  CMapGeneratorHost::SetPlayerStartPosition(int a2, int a3, int a4) {
   if ( *((int *)this + 5) >= 64 )
   {
     if ( *((int *)this + 5) > 1024 )
+    {
       *((_DWORD *)this + 5) = 1024;
+    }
   }
   else
   {
@@ -205,7 +241,9 @@ void  CMapGeneratorHost::SetPlayerStartPosition(int a2, int a3, int a4) {
   if ( *((int *)this + 11) >= 1 )
   {
     if ( *((int *)this + 11) > 9 )
+    {
       *((_DWORD *)this + 11) = 9;
+    }
   }
   else
   {
@@ -232,7 +270,9 @@ void  CMapGeneratorHost::CleanUp(void) {
 
   result = (CMapGeneratorHost *)this;
   if ( !*((_BYTE *)this + 4) )
+  {
     return result;
+  }
   if ( this[79] )
   {
     operator delete[](this[79]);
@@ -290,19 +330,29 @@ void  CMapGeneratorHost::RefreshShading(int a2) {
 
   v5 = (unsigned __int8 *)(*((_DWORD *)this + 78) + 4 * a2);
   if ( a2 >= *((_DWORD *)this + 5) )
+  {
     v3 = v5[-4 * *((_DWORD *)this + 5)];
+  }
   else
+  {
     v3 = *v5;
+  }
   if ( a2 < *((_DWORD *)this + 2) - *((_DWORD *)this + 5) )
+  {
     v4 = v5[4 * *((_DWORD *)this + 5)];
+  }
   else
+  {
     v4 = *v5;
+  }
   v7 = v3 - v4;
   LOBYTE(v6) = 8;
   if ( v3 - v4 <= 0 )
   {
     if ( v7 < 0 )
+    {
       v6 = (v7 >> 1) + 8;
+    }
   }
   else
   {

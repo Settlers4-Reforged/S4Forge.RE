@@ -31,7 +31,9 @@ bool __cdecl CGameStateHandler::Init(void) {
   std::list<SStateCommand>::clear(&CGameStateHandler::m_listQueuedStates);
   CGameStateHandler::m_bWantSwitch = 0;
   if ( !g_pEvnEngine && BBSupportDbgReport(2, "Main\\GameStateHandler.cpp", 487, "g_pEvnEngine") == 1 )
+  {
     __debugbreak();
+  }
   CGameStateHandler::InitStringEngine();
   std::string::string(&nettestDefault, "none");
   v20 = 0;
@@ -61,9 +63,13 @@ bool __cdecl CGameStateHandler::Init(void) {
     CTrace::Print("INIT GFX-ENGINE COMPLETE");
     CGameSettings::DetermineHighestResolution();
     if ( CGameStateHandler::InitSoundEngine() )
+    {
       CTrace::Print("INIT SOUND-ENGINE COMPLETE");
+    }
     else
+    {
       CTrace::Print("INIT SOUND-ENGINE FAILED");
+    }
     if ( CGameStateHandler::InitGfxManager() )
     {
       CTrace::Print("INIT GFX-MANAGER COMPLETE");
@@ -71,15 +77,23 @@ bool __cdecl CGameStateHandler::Init(void) {
       {
         CTrace::Print("INIT GFX-RTCompiler COMPLETE");
         if ( CGameStateHandler::InitSoundManager() )
+        {
           CTrace::Print("INIT SOUND-MANAGER COMPLETE");
+        }
         else
+        {
           CTrace::Print("INIT SOUND-MANAGER FAILED");
+        }
         v11 = (CGameStateEventHandle *)operator new(4u);
         v20 = 4;
         if ( v11 )
+        {
           v10 = CGameStateEventHandle::CGameStateEventHandle(v11);
+        }
         else
+        {
           v10 = 0;
+        }
         v20 = -1;
         g_pGameStateEventHandle = v10;
         IEventEngine::RegisterHandle(g_pEvnEngine, v10);
@@ -119,9 +133,13 @@ bool __cdecl CGameStateHandler::Init(void) {
             C = (CGameType *)operator new(0x620u);
             v20 = 7;
             if ( C )
+            {
               v6 = CGameType::CGameType(C);
+            }
             else
+            {
               v6 = 0;
+            }
             v20 = -1;
             g_pGameType = v6;
             if ( CGameStateHandler::StartDummyGame() )
@@ -129,9 +147,13 @@ bool __cdecl CGameStateHandler::Init(void) {
               v7 = (INetworkEngine *)operator new(0x18u);
               v20 = 8;
               if ( v7 )
+              {
                 v8 = INetworkEngine::INetworkEngine(v7, 0);
+              }
               else
+              {
                 v8 = 0;
+              }
               v20 = -1;
               g_pNetworkEngine = v8;
               INetworkEngine::Start(1, 1, g_pGameType->m_iActualPlayerCount, 0);
@@ -207,9 +229,13 @@ bool __cdecl CGameStateHandler::Perform(void) {
       exceptionBlock = 0;
       IEventEngine::SendAMessage(g_pEvnEngine, &v18);
       if ( Time - CGameStateHandler::m_uiLastTime - 100 >= 0xA )
+      {
         CGameStateHandler::m_uiLastTime = Time - 10;
+      }
       else
+      {
         CGameStateHandler::m_uiLastTime += 100;
+      }
       exceptionBlock = -1;
       CEvn_Event::~CEvn_Event(&v18);
     }
@@ -230,7 +256,9 @@ bool __cdecl CGameStateHandler::Perform(void) {
       CGameStateHandler::m_s_pCurrentState = 0;
     }
     if ( !std::list<SStateCommand>::size(&CGameStateHandler::m_listQueuedStates) )
+    {
       return 0;
+    }
     pIt = (void *)std::list<SStateCommand>::begin(&CGameStateHandler::m_listQueuedStates, (int)&v5);
     exceptionBlock = 1;
     pNextState = (SStateCommand *)std::_List_iterator<std::_List_val<std::_List_simple_types<SStateCommand>>>::operator*(pIt);
@@ -239,11 +267,15 @@ bool __cdecl CGameStateHandler::Perform(void) {
     CGameStateHandler::m_s_pCurrentState = pNextState->m_pStateFactory(pNextState->m_pFactoryArgument);
     std::list<SStateCommand>::pop_front(v4, v5.m_pStateFactory);
     if ( !CGameStateHandler::m_s_pCurrentState )
+    {
       return 0;
+    }
     IEventEngine::LockEventEngine(g_pEvnEngine, 0);
   }
   if ( !IEventEngine::DispatchSystemMessages(g_pEvnEngine) )
+  {
     return 0;
+  }
   Instance = UPlay::UPlayManager::GetInstance();
   (*(void (__thiscall **)(int))(*(_DWORD *)Instance + 4))(Instance);
   v13 = UPlay::UPlayManager::GetInstance();
@@ -255,15 +287,25 @@ bool __cdecl CGameStateHandler::Perform(void) {
     StormManager::Update(v2);
   }
   if ( CGameStateHandler::m_bQuitApplication )
+  {
     return 0;
+  }
   if ( g_pSoundEngine )
+  {
     ISoundEngine::Perform(g_pSoundEngine);
+  }
   if ( !CGameStateHandler::m_s_pCurrentState )
+  {
     return 1;
+  }
   if ( !g_pGfxEngine || !g_pGUIEngine )
+  {
     return CGameStateHandler::m_s_pCurrentState->Perform(CGameStateHandler::m_s_pCurrentState);
+  }
   if ( IGfxEngine::IsGfxEngineRebuilded(g_pGfxEngine) )
+  {
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
+  }
   return CGameStateHandler::m_s_pCurrentState->Perform(CGameStateHandler::m_s_pCurrentState);
 }
 
@@ -273,9 +315,13 @@ bool __cdecl CGameStateHandler::Perform(void) {
 bool __cdecl CGameStateHandler::CanProcessInvites(void) {
   
   if ( CGameStateHandler::m_s_pCurrentState )
+  {
     return CGameStateHandler::m_s_pCurrentState->CanProcessInvites(CGameStateHandler::m_s_pCurrentState);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -309,9 +355,7 @@ void __cdecl CGameStateHandler::Kill(void) {
   }
   if ( g_pGameStateEventHandle )
   {
-    (*(void (__thiscall **)(CGameStateEventHandle *, int))(*(_DWORD *)g_pGameStateEventHandle + 4))(// dtor
-      g_pGameStateEventHandle,
-      1);
+    (*(void (__thiscall **)(CGameStateEventHandle *, int))(*(_DWORD *)g_pGameStateEventHandle + 4))(g_pGameStateEventHandle, 1);
     g_pGameStateEventHandle = 0;
   }
   if ( g_pNetworkEngine )
@@ -321,9 +365,7 @@ void __cdecl CGameStateHandler::Kill(void) {
   }
   if ( CGameStateHandler::m_s_pCurrentState )
   {
-    ((void (__thiscall *)(struct CGameState *, int))CGameStateHandler::m_s_pCurrentState->dtor)(
-      CGameStateHandler::m_s_pCurrentState,
-      1);
+    ((void (__thiscall *)(struct CGameState *, int))CGameStateHandler::m_s_pCurrentState->dtor)(CGameStateHandler::m_s_pCurrentState, 1);
     CGameStateHandler::m_s_pCurrentState = 0;
   }
   if ( g_pGUIEngine )
@@ -362,6 +404,9 @@ void __cdecl CGameStateHandler::Kill(void) {
   ExitWSAFunctions();
   return timeEndPeriod(1u);
 }
+/* Orphan comments:
+dtor
+*/
 
 
 // address=[0x148b900]
@@ -380,9 +425,13 @@ bool __cdecl CGameStateHandler::InitGfxEngine(void) {
   memset(&CGameStateHandler::m_sRenderCfg, 0, sizeof(CGameStateHandler::m_sRenderCfg));
   C = (IGfxEngine *)operator new(0x28u);
   if ( C )
+  {
     v1 = IGfxEngine::IGfxEngine(C);
+  }
   else
+  {
     v1 = 0;
+  }
   g_pGfxEngine = v1;
   _controlfp(0xA031Fu, 0x30F031Fu);
   IGfxEngine::SetTriangleSize(g_pGfxEngine, 0x180000);
@@ -390,9 +439,13 @@ bool __cdecl CGameStateHandler::InitGfxEngine(void) {
   IGfxEngine::SetScrollOffsets(g_pGfxEngine, 0, 0);
   IGfxEngine::EnableMiniMap(g_pGfxEngine, 1, 15, 8, 0);
   if ( CGameStateHandler::BuildInitRenderCfg(0, 1) )
+  {
     return 1;
+  }
   if ( g_pGfxEngine )
+  {
     delete g_pGfxEngine;
+  }
   g_pGfxEngine = 0;
   return 0;
 }
@@ -406,29 +459,41 @@ bool __cdecl CGameStateHandler::InitSoundEngine(void) {
   ISoundEngine *C; // [esp+18h] [ebp-14h]
 
   if ( g_pSoundEngine && BBSupportDbgReport(2, "Main\\GameStateHandler.cpp", 1322, "g_pSoundEngine == NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( GetSoundInterfaceVersion() == 151 )
   {
     C = (ISoundEngine *)operator new(4u);
     if ( C )
+    {
       v1 = ISoundEngine::ISoundEngine(C);
+    }
     else
+    {
       v1 = 0;
+    }
     g_pSoundEngine = v1;
     if ( v1 )
     {
       if ( ISoundEngine::Init(g_pSoundEngine, word_36D5788, 22050, 1, 16, 28, 4) )
       {
         if ( ISoundEngine::VCStart(g_pSoundEngine, g_pEvnEngine, 1) )
+        {
           CTrace::Print("INIT VOICE-CHAT COMPLETE");
+        }
         else
+        {
           CTrace::Print("INIT VOICE-CHAT FAILED");
+        }
         ISoundEngine::SetTimerInterval(g_pSoundEngine, 71);
       }
       else
       {
         if ( g_pSoundEngine )
+        {
           (**(void (__thiscall ***)(ISoundEngine *, int))g_pSoundEngine)(g_pSoundEngine, 1);// dtor
+        }
         g_pSoundEngine = 0;
       }
     }
@@ -453,15 +518,16 @@ bool __cdecl CGameStateHandler::InitGfxManager(void) {
   bool bHasAnyMissionCD; // [esp+23h] [ebp-Dh]
 
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\GameStateHandler.cpp", 1385, "g_pGfxEngine") == 1 )
+  {
     __debugbreak();
+  }
   uBitMode = IGfxEngine::GetGfxMode(g_pGfxEngine);
   if ( uBitMode )
   {
     C = (CGfxManager *)operator new(0xCC0u);
     if ( C )
     {
-      bHasAnyMissionCD = g_pMissionCD2->IsExtraInstalled(g_pMissionCD2)
-                      || g_pMissionCD3->IsExtraInstalled(g_pMissionCD3);
+      bHasAnyMissionCD = g_pMissionCD2->IsExtraInstalled(g_pMissionCD2) || g_pMissionCD3->IsExtraInstalled(g_pMissionCD3);
       bHasAddOn = g_pAddOn->IsExtraInstalled(g_pAddOn);
       v2 = CGfxManager::CGfxManager(C, uBitMode == 2, bHasAddOn, bHasAnyMissionCD);
     }
@@ -488,7 +554,9 @@ bool __cdecl CGameStateHandler::InitGfxManager(void) {
     else
     {
       if ( g_pGfxManager )
+      {
         delete g_pGfxManager;
+      }
       g_pGfxManager = 0;
       return 0;
     }
@@ -510,9 +578,13 @@ bool __cdecl CGameStateHandler::InitSoundManager(void) {
 
   C = (CSoundManager *)operator new(0x1E4u);
   if ( C )
+  {
     v1 = CSoundManager::CSoundManager(C);
+  }
   else
+  {
     v1 = 0;
+  }
   g_pSoundManager = v1;
   return CSoundManager::OpenSoundFiles(v1) != 0;
 }
@@ -618,7 +690,9 @@ void __cdecl CGameStateHandler::LoadAllConfigFiles(void) {
   int v2; // [esp+30h] [ebp-4h]
 
   if ( (BBSupportDevelopmentMachineId() & 1) != 0 )
+  {
     CGameStateHandler::DietmarsGameSettingsDefaults();
+  }
   CGameStateHandler::LoadConfigFile(L"AINames", 0);
   CGameStateHandler::LoadConfigFile(L"Animals", 0);
   CGameStateHandler::LoadConfigFile(L"Balancing", 0);
@@ -672,9 +746,13 @@ bool __cdecl CGameStateHandler::RebuildGfxEngine(bool a1) {
       CGfxManager::OpenGFXFiles(g_pGfxManager);
     }
     if ( a1 )
+    {
       ResetGfxState(bIsGameState);
+    }
     if ( !g_pGUIEngine )
+    {
       return 1;
+    }
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
     v12 = *GetRectOfWindow(&v4);
     v6 = CEvn_Event::CEvn_Event(&v10, 0x272u, (unsigned int)&v12, 0, 0);
@@ -781,7 +859,9 @@ bool __cdecl CGameStateHandler::ShowHTMLPage(std::string a1, std::string a2) {
   std::string::string(&v16);
   LOBYTE(v18) = 3;
   if ( (int)v15 < 2 )
+  {
     goto LABEL_11;
+  }
   if ( (int)v15 <= 3 )
   {
     std::string::operator=(&v16, "File not found!");
@@ -1000,9 +1080,7 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   g_pCfgMgr->GetStringValue(g_pCfgMgr, &v36, "COMMANDLINE", "map", &v35);
   LOBYTE(v39) = 3;
   std::string::~string(&v35);
-  a2 = (std::wstring *)std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-                         &v30,
-                         &v36);
+  a2 = (std::wstring *)std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(&v30, &v36);
   std::wstring::operator=(&g_pGameType->m_swMapName, a2);
   std::wstring::~wstring(&v30);
   v0 = std::string::c_str(&v36);
@@ -1021,32 +1099,23 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
   }
   else
   {
-    MA_GetMapData(
-      &g_pGameType->m_iWidthHeight,
-      &iGameType,
-      &iMapFlags,
-      &g_pGameType->m_iStartResources,
-      &g_pGameType->m_bIsEmptyMap);
+    MA_GetMapData(&g_pGameType->m_iWidthHeight, &iGameType, &iMapFlags, &g_pGameType->m_iStartResources, &g_pGameType->m_bIsEmptyMap);
     MA_GetNumberOfPlayers(&iNumberOfPlayers);
     g_pGameType->m_iMapMaxNumPlayers = iNumberOfPlayers;
     v22 = 0;
-    for ( i = 0; (int)i < iNumberOfPlayers; ++i )
+    for ( i = 0;
+          (int)i < iNumberOfPlayers;
+          ++i )
     {
-      MA_GetPlayerData(
-        i + 1,
-        0,
-        &g_pGameType->m_sPlayerRaces[i],
-        &g_pGameType->m_sPlayerStartX[i],
-        &g_pGameType->m_sPlayerStartY[i],
-        &swPlayerName,
-        &swSetupName,
-        &iControlOfPlayer,
-        &iHasTeam,
-        &g_pGameType->m_sPlayerTeam[i]);
+      MA_GetPlayerData(i + 1, 0, &g_pGameType->m_sPlayerRaces[i], &g_pGameType->m_sPlayerStartX[i], &g_pGameType->m_sPlayerStartY[i], &swPlayerName, &swSetupName, &iControlOfPlayer, &iHasTeam, &g_pGameType->m_sPlayerTeam[i]);
       if ( g_pGameType->m_sPlayerRaces[i] == 255 )
+      {
         g_pGameType->m_sPlayerRaces[i] = 5;
+      }
       if ( g_pGameType->m_sPlayerTeam[i] > v22 )
+      {
         v22 = g_pGameType->m_sPlayerTeam[i];
+      }
       if ( iControlOfPlayer == 2 )
       {
         v11 = (std::wstring *)std::wstring::wstring(&v31, swPlayerName);
@@ -1068,15 +1137,21 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
     g_pGameType->m_iMode = 1;
     g_pGameType->m_iGameType = 1;
     CGameType::SetMCD2TextureSet(g_pGameType, 1);
-    for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
+    for ( i = 0;
+          i < g_pGameType->m_iActualPlayerCount;
+          ++i )
+    {
       ++g_pGameType->m_iAllianceSizes[g_pGameType->m_sPlayerTeam[i]];
+    }
     g_pGameType->m_iActualPlayerCount = iNumberOfPlayers;
     if ( g_pGameType->m_iActualPlayerCount > (unsigned int)iNumberOfPlayers )
     {
       MessageBoxA(g_hWnd, "Too many players given for map.\nPlayercount reduced!!", "S4", 0x30u);
       g_pGameType->m_iActualPlayerCount = iNumberOfPlayers;
     }
-    for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
+    for ( i = 0;
+          i < g_pGameType->m_iActualPlayerCount;
+          ++i )
     {
       v14 = std::wstring::wstring(&v33, (wchar_t *)&word_36D068C);
       v15 = v14;
@@ -1088,7 +1163,9 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
       LOBYTE(v39) = 3;
       std::wstring::~wstring(&v33);
       if ( v27 )
+      {
         break;
+      }
       if ( g_pGameType->m_sPlayerType[i] == 1 )
       {
         v20 = (WCHAR *)"HUMAN";
@@ -1106,18 +1183,32 @@ bool __cdecl CGameStateHandler::StartDummyGame(void) {
       LOBYTE(v39) = 3;
       std::wstring::~wstring(&v34);
     }
-    for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
+    for ( i = 0;
+          i < g_pGameType->m_iActualPlayerCount;
+          ++i )
     {
       if ( i )
+      {
         v18 = 0;
+      }
       else
+      {
         v18 = 0x100007F;
+      }
       g_pGameType->m_uiIPPlayer[i] = v18;
     }
-    for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
+    for ( i = 0;
+          i < g_pGameType->m_iActualPlayerCount;
+          ++i )
+    {
       g_pGameType->m_sPlayerColor[i] = i;
-    for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
+    }
+    for ( i = 0;
+          i < g_pGameType->m_iActualPlayerCount;
+          ++i )
+    {
       g_pGameType->m_sPlayerSlot8[i] = 0;
+    }
     MA_CloseMapFile();
     v2 = std::string::c_str(&v36);
     hFile = CreateFileA(v2, 0x80000000, 0, 0, 3u, 0, 0);
@@ -1144,7 +1235,9 @@ void __cdecl CGameStateHandler::PerformPendingFullScreenEnterOrExit(void) {
   HIBYTE(v1) = CGameSettings::GetGfxFullscreenEnabled() != 0;
   BYTE2(v1) = HIBYTE(v1);
   if ( IsWindowFullscreen() != HIBYTE(v1) )
+  {
     CGameStateHandler::SetCorrectWindowSize(v1);
+  }
 }
 
 
@@ -1263,23 +1356,23 @@ bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2) {
     CTrace::Print("ERROR: GfxEngine could not be initialized: SWError %d, HWError %d!", v19, v20);
     v18 = v19;
     if ( v19 > 0 && (v18 <= 4 || v18 == 6) )
-      std::string::operator+=("Software 3D: The Settlers IV needs at least DirectX7.0 for Windows 95/98/2000 or DirectX3."
-                              "0 for Windows NT4.0\n"
-                              "Software 3D: Die Siedler IV ben?tigt mindestens DirectX7.0 unter Windows 95/98/2000 und Di"
-                              "rectX3.0 unter Windows NT 4.0!");
+    {
+      std::string::operator+=("Software 3D: The Settlers IV needs at least DirectX7.0 for Windows 95/98/2000 or DirectX3.0 for Windows NT4.0\nSoftware 3D: Die Siedler IV ben?tigt mindestens DirectX7.0 unter Windows 95/98/2000 und DirectX3.0 unter Windows NT 4.0!");
+    }
     else
-      std::string::operator+=("Software 3D: Error initializing Graphic Interface!\n"
-                              "Software 3D: Fehler beim Starten der Grafikausgabe!");
+    {
+      std::string::operator+=("Software 3D: Error initializing Graphic Interface!\nSoftware 3D: Fehler beim Starten der Grafikausgabe!");
+    }
     std::string::operator+=("\n\n");
     v17 = v20;
     if ( v20 > 0 && (v17 <= 4 || v17 == 6) )
-      std::string::operator+=("Hardware 3D: The Settlers IV needs at least DirectX7.0 for Windows 95/98/2000 or DirectX3."
-                              "0 for Windows NT4.0\n"
-                              "Hardware 3D: Die Siedler IV ben?tigt mindestens DirectX7.0 unter Windows 95/98/2000 und Di"
-                              "rectX3.0 unter Windows NT 4.0!");
+    {
+      std::string::operator+=("Hardware 3D: The Settlers IV needs at least DirectX7.0 for Windows 95/98/2000 or DirectX3.0 for Windows NT4.0\nHardware 3D: Die Siedler IV ben?tigt mindestens DirectX7.0 unter Windows 95/98/2000 und DirectX3.0 unter Windows NT 4.0!");
+    }
     else
-      std::string::operator+=("Hardware 3D: Error initializing Graphic Interface!\n"
-                              "Hardware 3D: Fehler beim Starten der Grafikausgabe!");
+    {
+      std::string::operator+=("Hardware 3D: Error initializing Graphic Interface!\nHardware 3D: Fehler beim Starten der Grafikausgabe!");
+    }
     *(_DWORD *)&v9[48] = 48;
     *(_DWORD *)&v9[44] = "S4";
     v5 = std::string::c_str((std::string *)v27);
@@ -1287,7 +1380,9 @@ bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2) {
     j__exit(0);
   }
   if ( g_pGUIEngine )
+  {
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
+  }
   IsFiltering = SGfxRenderConfiguration::IsFiltering(&CGameStateHandler::m_sRenderCfg);
   CGameSettings::SetGfxFiltering(IsFiltering);
   IsHQTextureSet = SGfxRenderConfiguration::IsHQTextureSet(&CGameStateHandler::m_sRenderCfg);

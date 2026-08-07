@@ -42,10 +42,14 @@ int  CAIDefenceGoals::Search(int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *(_DWORD *)this; ++i )
+  for ( i = 0;
+        i < *(_DWORD *)this;
+        ++i )
   {
     if ( *((unsigned __int16 *)this + 10 * i + 2) == a2 )
+    {
       return i;
+    }
   }
   return -1;
 }
@@ -59,7 +63,9 @@ int  CAIDefenceGoals::SetFlagBitsId(int a2, int a3) {
 
   v5 = CAIDefenceGoals::Search(this, a2);
   if ( v5 >= 0 )
+  {
     *((_BYTE *)this + 20 * v5 + 6) |= a3;
+  }
   return v5;
 }
 
@@ -77,9 +83,13 @@ void  CAIDefenceGoals::Insert(int a2, int a3, int a4, int a5) {
   if ( v6 >= 0 )
   {
     if ( *((_DWORD *)this + 5 * v6 + 2) < a3 )
+    {
       *((_DWORD *)this + 5 * v6 + 2) = a3;
+    }
     if ( *((_DWORD *)this + 5 * v6 + 3) < a4 )
+    {
       *((_DWORD *)this + 5 * v6 + 3) = a4;
+    }
     result = (int)this + 20 * v6 + 4;
     if ( *((_DWORD *)this + 5 * v6 + 4) < a5 )
     {
@@ -114,7 +124,9 @@ int  CAIDefenceGoals::NextUnprotectedGoalIdx(int a2) {
   while ( a2 < *(_DWORD *)this )
   {
     if ( (*((_BYTE *)this + 20 * a2 + 6) & 1) == 0 )
+    {
       return a2;
+    }
     ++a2;
   }
   return -1;

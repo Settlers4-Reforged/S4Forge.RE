@@ -46,14 +46,16 @@ void  CMirrorBasicGrid::initGrid(void) {
   v2 = *((_DWORD *)this + 2) * *((_DWORD *)this + 2);
   v11 = 0;
   if ( (g_iFlags & 2) != 0 && (g_iFlags & 1) != 0 )
-    v11 = (int)(float)((float)((float)((float)v2 * (float)((float)*((int *)v19 + 3) / 100.0))
-                             - (float)(unsigned __int8)g_iNumPlayers)
-                     / 4.0);
+  {
+    v11 = (int)(float)((float)((float)((float)v2 * (float)((float)*((int *)v19 + 3) / 100.0)) - (float)(unsigned __int8)g_iNumPlayers) / 4.0);
+  }
   else
-    v11 = (int)(float)((float)((float)((float)v2 * (float)((float)*((int *)v19 + 3) / 100.0))
-                             - (float)(unsigned __int8)g_iNumPlayers)
-                     / 2.0);
-  for ( i = 0; i < v11; ++i )
+  {
+    v11 = (int)(float)((float)((float)((float)v2 * (float)((float)*((int *)v19 + 3) / 100.0)) - (float)(unsigned __int8)g_iNumPlayers) / 2.0);
+  }
+  for ( i = 0;
+        i < v11;
+        ++i )
   {
     v9 = 0;
     v10 = 0;
@@ -62,7 +64,9 @@ void  CMirrorBasicGrid::initGrid(void) {
     {
       CMirrorBasicGrid::getMirrorBasisPoint(v19, &v9, &v10, 1);
       if ( !*(_BYTE *)(*((_DWORD *)v19 + 1) + v9 + *((_DWORD *)v19 + 2) * v10) )
+      {
         v18 = 1;
+      }
     }
     *(_BYTE *)(*((_DWORD *)v19 + 1) + v9 + *((_DWORD *)v19 + 2) * v10) = 1;
   }
@@ -80,11 +84,12 @@ void  CMirrorBasicGrid::initGrid(void) {
     v17 = 0;
     v16 = 0;
     v15 = 0;
-    for ( j = 0; !v17 && j < 40; ++j )
+    for ( j = 0;
+          !v17 && j < 40;
+          ++j )
     {
       CMirrorBasicGrid::getMirrorBasisPoint(v19, &v16, &v15, 0);
-      if ( *(_BYTE *)(*((_DWORD *)v19 + 1) + v16 + *((_DWORD *)v19 + 2) * v15) != 101
-        && *(_BYTE *)(*((_DWORD *)v19 + 1) + v16 + *((_DWORD *)v19 + 2) * v15) != 1 )
+      if ( *(_BYTE *)(*((_DWORD *)v19 + 1) + v16 + *((_DWORD *)v19 + 2) * v15) != 101 && *(_BYTE *)(*((_DWORD *)v19 + 1) + v16 + *((_DWORD *)v19 + 2) * v15) != 1 )
       {
         v17 = 1;
       }
@@ -127,15 +132,18 @@ void  CMirrorBasicGrid::initGrid(void) {
     }
   }
   v3 = 0;
-  for ( k = 0; k < 4; ++k )
+  for ( k = 0;
+        k < 4;
+        ++k )
   {
-    for ( m = 0; m < 4; ++m )
+    for ( m = 0;
+          m < 4;
+          ++m )
     {
       if ( v22[4 * k + m] != -1 )
-        CPlayerData::setStartPos_Basic(
-          *(CPlayerData **)(g_pPlayerData + 4 * v3++),
-          v21[v22[4 * k + m]],
-          v21[v22[4 * k + m] + 8]);
+      {
+        CPlayerData::setStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * v3++), v21[v22[4 * k + m]], v21[v22[4 * k + m] + 8]);
+      }
       result = m + 1;
     }
   }
@@ -188,7 +196,9 @@ void  CMirrorBasicGrid::getMirrorBasisPoint(int & a2, int & a3, bool a4) {
     *a3 = v7;
   }
   if ( (g_iFlags & 2) == 0 || (g_iFlags & 1) == 0 )
+  {
     return result;
+  }
   if ( a4 )
   {
     *a2 = CRandom16::Rand((CRandom16 *)g_pRand) % (*((_DWORD *)this + 2) / 2);

@@ -26,12 +26,7 @@ void  CLua::BeginBlock(void) {
 void  CLua::CallFunction(unsigned int a2) {
   
   lua_state = this->state;
-  if ( !j__lua_isfunction(a2)
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h",
-         407,
-         "lua_isfunction(_FuncObj)") == 1 )
+  if ( !j__lua_isfunction(a2) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 407, "lua_isfunction(_FuncObj)") == 1 )
   {
     __debugbreak();
   }
@@ -56,25 +51,20 @@ void  CLua::CallFunction(char const * Str) {
     }
     else
     {
-      if ( BBSupportDbgReportF(
-             1,
-             "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h",
-             429,
-             "CLua::CallFunction(): Function \"%s\" not found [may be ignored]!",
-             Str) == 1 )
+      if ( BBSupportDbgReportF(1, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 429, "CLua::CallFunction(): Function \"%s\" not found [may be ignored]!", Str) == 1 )
+      {
         __debugbreak();
+      }
       return 0;
     }
   }
   else
   {
-    result = BBSupportDbgReport(
-               1,
-               "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h",
-               434,
-               "CLua::CallFunction(): Invalid function name [may be ignored]!");
+    result = BBSupportDbgReport(1, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 434, "CLua::CallFunction(): Invalid function name [may be ignored]!");
     if ( result == 1 )
+    {
       __debugbreak();
+    }
   }
   return result;
 }
@@ -95,12 +85,7 @@ void  CLua::CreateTable(char const * _pName) {
   
   int v2; // eax
 
-  if ( !_pName
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h",
-         444,
-         "_pName != NULL") == 1 )
+  if ( !_pName && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 444, "_pName != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -142,12 +127,7 @@ void  CLua::GetFuncInfo(unsigned int a2, char * * a3, int * a4) {
 // Decompiled from int __thiscall CLua::GetGlobal(CLua *this, char *Str)
 unsigned int  CLua::GetGlobal(char const * Str) {
   
-  if ( !Str
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h",
-         614,
-         "_pName != NULL") == 1 )
+  if ( !Str && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 614, "_pName != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -244,12 +224,7 @@ void  CLua::PushInt(int a2) {
 // Decompiled from int __thiscall CLua::SetGlobal(void **this, char *Str)
 void  CLua::SetGlobal(char const * Str) {
   
-  if ( !Str
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h",
-         624,
-         "_pName != NULL") == 1 )
+  if ( !Str && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 624, "_pName != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -307,7 +282,9 @@ bool  CLua::ExecuteScript(wchar_t const * FileName) {
   v15 = &v3;
   v8 = this;
   if ( !FileName || !*FileName )
+  {
     return 0;
+  }
   v13 = 1;
   lua_state = *v8;
   ElementCount = 0;
@@ -352,7 +329,9 @@ bool  CLua::ExecuteScript(class IScriptFile & _rScriptFile) {
 
   lua_state = *(void **)this;
   if ( !_rScriptFile->GetScript(_rScriptFile) )
+  {
     return 0;
+  }
   iSize = _rScriptFile->GetSize(_rScriptFile);
   spFile = _rScriptFile->GetScript(_rScriptFile);
   return j__lua_dobuffer(spFile, iSize, 0) == 0;
@@ -402,7 +381,9 @@ void  CLua::ExportTableFunction(char const * a2, void (__cdecl*)(void) a3, char 
     j__lua_setglobal((char *)a2);
   }
   if ( !lua_istable(v6) && BBSupportDbgReport(2, "Script\\Lua.cpp", 253, "lua_istable(TableObj)") == 1 )
+  {
     __debugbreak();
+  }
   lua_pushobject(v6);
   lua_pushstring((char *)Str);
   lua_pushcclosure(a3, 0);
@@ -416,7 +397,9 @@ void  CLua::ExportTableFunction(char const * a2, void (__cdecl*)(void) a3, char 
 void  CLua::ExportFunctions(struct CLua::SFuncInfo * a2) {
   
   if ( !a1 && BBSupportDbgReport(2, "Script\\Lua.cpp", 280, "_pFuncInfo != NULL") == 1 )
+  {
     __debugbreak();
+  }
   while ( a1->m_fpFunction && a1->m_swpName )
   {
     CLua::ExportFunction(this, a1->m_fpFunction, a1->m_swpName);
@@ -430,9 +413,13 @@ void  CLua::ExportFunctions(struct CLua::SFuncInfo * a2) {
 void  CLua::ExportTableFunctions(char const * a2, struct CLua::SFuncInfo * a3) {
   
   if ( !a2 && BBSupportDbgReport(2, "Script\\Lua.cpp", 303, "_pTableName != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !a3 && BBSupportDbgReport(2, "Script\\Lua.cpp", 304, "_pFuncInfo != NULL") == 1 )
+  {
     __debugbreak();
+  }
   while ( a3->m_fpFunction && a3->m_swpName )
   {
     CLua::ExportTableFunction(this, a2, a3->m_fpFunction, a3->m_swpName);
@@ -448,9 +435,13 @@ void  CLua::ExportTableVar(char const * _pTableName, char const * _pVarName, dou
   int TableObj; // [esp+Ch] [ebp-4h]
 
   if ( !_pTableName && BBSupportDbgReport(2, "Script\\Lua.cpp", 323, "_pTableName != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !_pVarName && BBSupportDbgReport(2, "Script\\Lua.cpp", 324, "_pVarName != NULL") == 1 )
+  {
     __debugbreak();
+  }
   lua_state = this->state;
   lua_beginblock();
   TableObj = lua_getglobal(_pTableName);
@@ -461,7 +452,9 @@ void  CLua::ExportTableVar(char const * _pTableName, char const * _pVarName, dou
     j__lua_setglobal(_pTableName);
   }
   if ( !lua_istable(TableObj) && BBSupportDbgReport(2, "Script\\Lua.cpp", 340, "lua_istable(TableObj)") == 1 )
+  {
     __debugbreak();
+  }
   lua_pushobject(TableObj);
   lua_pushstring(_pVarName);
   lua_pushnumber(_dVar);
@@ -475,7 +468,9 @@ void  CLua::ExportTableVar(char const * _pTableName, char const * _pVarName, dou
 void  CLua::ExportTableVars(char const * _pTableName, struct CLua::SVarInfo * a3) {
   
   if ( !_pTableName && BBSupportDbgReport(2, "Script\\Lua.cpp", 359, "_pTableName != NULL") == 1 )
+  {
     __debugbreak();
+  }
   while ( a3->m_swpName )
   {
     CLua::ExportTableVar(_pTableName, (char *)a3->m_swpName, a3->m_dDefault);
@@ -485,7 +480,7 @@ void  CLua::ExportTableVars(char const * _pTableName, struct CLua::SVarInfo * a3
 
 
 // address=[0x1602ea0]
-// Decompiled from void __thiscall CLua::ExportTableTypes(  CLua *this,  const char *_pTableName,  const char *_pDefinePrefix,  const struct SConfigTypeString *a4,  unsigned int _uCount)
+// Decompiled from void __thiscall CLua::ExportTableTypes(CLua *this, const char *_pTableName, const char *_pDefinePrefix, const struct SConfigTypeString *a4, unsigned int _uCount)
 void  CLua::ExportTableTypes(char const * _pTableName, char const * _pDefinePrefix, struct SConfigTypeString const * a4, unsigned int _uCount) {
   
   char *m_sName; // [esp+10h] [ebp-Ch]
@@ -493,15 +488,23 @@ void  CLua::ExportTableTypes(char const * _pTableName, char const * _pDefinePref
   signed int uPrefixLength; // [esp+18h] [ebp-4h]
 
   if ( !_pTableName && BBSupportDbgReport(2, "Script\\Lua.cpp", 374, "_pTableName != 0") == 1 )
+  {
     __debugbreak();
+  }
   uPrefixLength = 0;
   if ( _pDefinePrefix )
+  {
     uPrefixLength = strlen(_pDefinePrefix);
-  for ( i = 0; i < _uCount; ++i )
+  }
+  for ( i = 0;
+        i < _uCount;
+        ++i )
   {
     m_sName = (char *)a4->m_spName;
     if ( (int)strlen(m_sName) > uPrefixLength )
+    {
       CLua::ExportTableVar((char *)_pTableName, &m_sName[uPrefixLength], (double)a4->m_iNr);
+    }
     ++a4;
   }
 }
@@ -570,7 +573,9 @@ void __cdecl CLua::Push(enum EScriptType a1, ... a1) {
         break;
       default:
         if ( BBSupportDbgReport(2, "Script\\Lua.cpp", 481, "false") == 1 )
+        {
           __debugbreak();
+        }
         break;
     }
     v9 = (CLua::SFuncInfo *)((char *)v9 + 4);
@@ -609,7 +614,9 @@ void __cdecl CLua::Get(enum EScriptType a1, ... a2) {
   {
     v16 = j__lua_lua2C(v15);
     if ( !v16 && BBSupportDbgReport(2, "Script\\Lua.cpp", 514, "Param != LUA_NOOBJECT") == 1 )
+    {
       __debugbreak();
+    }
     v14 = v7;
     switch ( v7 )
     {
@@ -647,7 +654,9 @@ void __cdecl CLua::Get(enum EScriptType a1, ... a2) {
         break;
       default:
         if ( BBSupportDbgReport(2, "Script\\Lua.cpp", 562, "false") == 1 )
+        {
           __debugbreak();
+        }
         break;
     }
     v17 += 4;
@@ -736,7 +745,9 @@ void  CLua::GetString(int a2, std::string & a3) {
   v3 = j__lua_lua2C(a2);
   result = (char *)j__lua_getstring(v3);
   if ( result )
+  {
     return (char *)std::string::operator+=(result);
+  }
   return result;
 }
 
@@ -782,11 +793,17 @@ void  CLua::dbgCheckParam(int a2) {
   v2 = j__lua_stackedfunction(1);
   result = j__lua_currentline(v2);
   if ( v4 )
+  {
     return result;
+  }
   if ( result == -1 )
+  {
     return BBSupportTracePrintF(0, "ScriptErr: Missing parameter (no debuginfo available)");
+  }
   else
+  {
     return BBSupportTracePrintF(0, "ScriptErr: Missing parameter %d at line %d", a2, result);
+  }
   return result;
 }
 

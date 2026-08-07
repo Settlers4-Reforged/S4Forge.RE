@@ -152,7 +152,9 @@ unsigned int  CAIAgentSquads::Execute(unsigned int a2, unsigned int a3) {
   CAIGoalCache::DeleteInvalidGoals((struct CAINormalSectorAI *)((char *)v131 + 660));
   CAIDefenceGoals::CAIDefenceGoals((CAIDefenceGoals *)v132);
   v43 = CAIGoalCache::NumberOfCachedGoals((struct CAINormalSectorAI *)((char *)v131 + 264));
-  for ( i = 0; i < v43; ++i )
+  for ( i = 0;
+        i < v43;
+        ++i )
   {
     v4 = CAIGoalCache::Goal((struct CAINormalSectorAI *)((char *)v131 + 264), i);
     v74 = CAIGoal::EntityId((CAIGoal *)v4);
@@ -160,9 +162,13 @@ unsigned int  CAIAgentSquads::Execute(unsigned int a2, unsigned int a3) {
     v75 = CAIGoal::Value((CAIGoal *)v5);
     dword10 = IAIEnvironment::EntityGetEntityInfoTower(v74)->m_iEnemyValue;
     if ( dword10 > 0 || v75 > 0 )
+    {
       CAIDefenceGoals::Insert((CAIDefenceGoals *)v132, v74, 0x80000000, v75, dword10);
+    }
   }
-  for ( j = 0; j < CAIGoalCache::NumberOfCachedGoals((struct CAINormalSectorAI *)((char *)v131 + 660)); ++j )
+  for ( j = 0;
+        j < CAIGoalCache::NumberOfCachedGoals((struct CAINormalSectorAI *)((char *)v131 + 660));
+        ++j )
   {
     v6 = CAIGoalCache::Goal((struct CAINormalSectorAI *)((char *)v131 + 660), j);
     v35 = CAIGoal::Value((CAIGoal *)v6);
@@ -188,25 +194,29 @@ unsigned int  CAIAgentSquads::Execute(unsigned int a2, unsigned int a3) {
   v83 = 0;
   v77 = 0;
   v11 = (CAITaskForceGroup *)CAISectorAI::TaskForceGroup(v131);
-  for ( k = CAITaskForceGroup::FirstTaskForce(v11, 2); k; k = TaskForceGroupMemberOfSameClass )
+  for ( k = CAITaskForceGroup::FirstTaskForce(v11, 2);
+        k;
+        k = TaskForceGroupMemberOfSameClass )
   {
     TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(k);
     if ( CAITaskForce::Type(k) != 5 )
+    {
       continue;
+    }
     v120 = CAITaskForce::NumberOfEntities((pairNode *)k);
     if ( v120 <= 0 )
+    {
       goto LABEL_26;
+    }
     v88 = CAITaskForce::GoalEntityId(k);
     v86 = -1;
     if ( v88 > 0 )
+    {
       v86 = CAIDefenceGoals::SetFlagBitsId((CAIDefenceGoals *)v132, v88, 1);
+    }
     if ( v86 < 0 )
     {
-      ((void (__thiscall *)(CAITaskForce *, _DWORD, _DWORD, _DWORD))k->j_?NewCommand@CAITaskForce@@UAE_NHHH@Z)(
-        k,
-        0,
-        0,
-        0);
+      ((void (__thiscall *)(CAITaskForce *, _DWORD, _DWORD, _DWORD))k->j_?NewCommand@CAITaskForce@@UAE_NHHH@Z)(k, 0, 0, 0);
       CAISectorAI::MoveFightersToReservoir(v131, k);
       --v116;
 LABEL_26:
@@ -222,9 +232,13 @@ LABEL_26:
     v72 = ((int (__thiscall *)(CAITaskForce *, int))k->NumberOfEntities)(k, 5);
     v77 += v72;
     if ( v72 <= 0 )
+    {
       ++v79;
+    }
     if ( v71 > v120 )
+    {
       v71 = v120;
+    }
     if ( v82 < v120 )
     {
       v105 = k;
@@ -241,7 +255,9 @@ LABEL_26:
   v111 = 0;
   v68 = 0;
   v90 = 0;
-  for ( m = 0; m < v92; ++m )
+  for ( m = 0;
+        m < v92;
+        ++m )
   {
     v69 = CAIDefenceGoals::Goal((CAIDefenceGoals *)v132, m);
     v127 = (v69[2] & 1) == 0;
@@ -273,17 +289,20 @@ LABEL_26:
     v96 = v119;
     if ( !v65 )
     {
-      if ( iTotalNumberOfInsufficientFighters
-        && BBSupportDbgReport(2, "AI\\AI_AgentsSquads.cpp", 404, "iTotalNumberOfInsufficientFighters == 0") == 1 )
+      if ( iTotalNumberOfInsufficientFighters && BBSupportDbgReport(2, "AI\\AI_AgentsSquads.cpp", 404, "iTotalNumberOfInsufficientFighters == 0") == 1 )
       {
         __debugbreak();
       }
       if ( v124 > 0 )
       {
         if ( v119 > v124 )
+        {
           v64 = v66 + v67;
+        }
         else
+        {
           v64 = v119;
+        }
         v96 = v64;
       }
     }
@@ -293,11 +312,7 @@ LABEL_26:
       TaskForce = CAITaskForceGroup::CreateTaskForce(v17, 5);
       UnprotectedGoalIdx = CAIDefenceGoals::NextUnprotectedGoalIdx((CAIDefenceGoals *)v132, 0);
       v18 = CAIDefenceGoals::Goal((CAIDefenceGoals *)v132, UnprotectedGoalIdx);
-      ((void (__thiscall *)(struct CAITaskForce *, int, _DWORD, _DWORD))TaskForce->j_?NewCommand@CAITaskForce@@UAE_NHHH@Z)(
-        TaskForce,
-        2,
-        *(unsigned __int16 *)v18,
-        0);
+      ((void (__thiscall *)(struct CAITaskForce *, int, _DWORD, _DWORD))TaskForce->j_?NewCommand@CAITaskForce@@UAE_NHHH@Z)(TaskForce, 2, *(unsigned __int16 *)v18, 0);
       iTotalNumberOfInsufficientFighters += v119;
       ++v115;
       v63 = CAIDefenceGoals::Goal((CAIDefenceGoals *)v132, UnprotectedGoalIdx) + 2;
@@ -316,9 +331,13 @@ LABEL_26:
       if ( v95 > 0 )
       {
         if ( v95 > CStaticConfigVarInt::operator int(&s_iSquadMaxRecruits) )
+        {
           v95 = CStaticConfigVarInt::operator int(&s_iSquadMaxRecruits);
+        }
         v19 = (CAITaskForceGroup *)CAISectorAI::TaskForceGroup(v131);
-        for ( n = CAITaskForceGroup::FirstTaskForce(v19, 2); n; n = v41 )
+        for ( n = CAITaskForceGroup::FirstTaskForce(v19, 2);
+              n;
+              n = v41 )
         {
           v41 = CAITaskForce::NextTaskForceGroupMemberOfSameClass(n);
           if ( CAITaskForce::Type(n) == 5 && CAITaskForce::NumberOfEntities((pairNode *)n) < v119 )
@@ -327,11 +346,7 @@ LABEL_26:
             v20 = CMapObjectMgr::Entity(v62);
             v42 = IEntity::PackedXY(v20);
             CAISectorAI::AutoRecruitFightersForSquad(v131, n, v42, v95);
-            ((void (__thiscall *)(CAITaskForce *, int, int, _DWORD))n->j_?NewCommand@CAITaskForce@@UAE_NHHH@Z)(
-              n,
-              2,
-              v62,
-              0);
+            ((void (__thiscall *)(CAITaskForce *, int, int, _DWORD))n->j_?NewCommand@CAITaskForce@@UAE_NHHH@Z)(n, 2, v62, 0);
           }
         }
       }
@@ -341,14 +356,18 @@ LABEL_26:
     if ( v90 <= 0 )
     {
       v58 = 0x7FFFFFFF;
-      for ( ii = 0; ii < v92; ++ii )
+      for ( ii = 0;
+            ii < v92;
+            ++ii )
       {
         v93 = CAIDefenceGoals::Goal((CAIDefenceGoals *)v132, ii);
         if ( (v93[2] & 3) != 0 )
         {
           v94 = (CMFCToolBarButton *)*((_DWORD *)v93 + 4);
           if ( !v94 && BBSupportDbgReport(2, "AI\\AI_AgentsSquads.cpp", 544, "pTaskForce != 0") == 1 )
+          {
             __debugbreak();
+          }
           if ( v94 )
           {
             if ( CAITaskForce::Status(v94) == 4 )
@@ -373,7 +392,9 @@ LABEL_26:
         v40 = *(unsigned __int16 *)CAIDefenceGoals::Goal((CAIDefenceGoals *)v132, v121);
         v38 = IAIEnvironment::EntityPackedPosition(v40);
         v56 = 0x80000000;
-        for ( jj = 0; jj < v92; ++jj )
+        for ( jj = 0;
+              jj < v92;
+              ++jj )
         {
           v91 = CAIDefenceGoals::Goal((CAIDefenceGoals *)v132, jj);
           if ( (v91[2] & 3) == 0 )
@@ -397,7 +418,9 @@ LABEL_26:
     {
       v61 = 0x7FFFFFFF;
       v60 = 0x80000000;
-      for ( kk = 0; kk < v92; ++kk )
+      for ( kk = 0;
+            kk < v92;
+            ++kk )
       {
         v104 = CAIDefenceGoals::Goal((CAIDefenceGoals *)v132, kk);
         if ( (v104[2] & 3) != 0 )
@@ -443,11 +466,7 @@ LABEL_26:
           if ( *((_DWORD *)CAIDefenceGoals::Goal((CAIDefenceGoals *)v132, v114) + 3) >= 2 * v37 )
           {
             v25 = CAIDefenceGoals::Goal((CAIDefenceGoals *)v132, v114);
-            (*(void (__thiscall **)(CMFCToolBarButton *, int, _DWORD, _DWORD))(*(_DWORD *)v101 + 32))(
-              v101,
-              2,
-              *(unsigned __int16 *)v25,
-              0);
+            (*(void (__thiscall **)(CMFCToolBarButton *, int, _DWORD, _DWORD))(*(_DWORD *)v101 + 32))(v101, 2, *(unsigned __int16 *)v25, 0);
           }
         }
       }
@@ -457,9 +476,9 @@ LABEL_26:
     v99 = v52 + v77 + v53 + v100 + v109;
     v54 = 0;
     if ( v99 > 0 )
-      v54 = (int)(float)((float)((float)(int)g_cAIPlayerEvaluations.m_sPlayerEvaluations[v108].m_uTotalUnitValueEx
-                               * (float)(int)g_cAIPlayerEvaluations.m_sPlayerEvaluations[v108].m_uTotalUnitCountEx)
-                       / (float)v99);
+    {
+      v54 = (int)(float)((float)((float)(int)g_cAIPlayerEvaluations.m_sPlayerEvaluations[v108].m_uTotalUnitValueEx * (float)(int)g_cAIPlayerEvaluations.m_sPlayerEvaluations[v108].m_uTotalUnitCountEx) / (float)v99);
+    }
     CAIAgentAttack::SetOwnFighterNumberAndValue((CAIAgentAttack *)((char *)v131 + 2804), v99, v54);
     CAIGoalCache::DeleteInvalidGoals((struct CAINormalSectorAI *)((char *)v131 + 1452));
     CAIGoalCache::DeleteInvalidGoals((struct CAINormalSectorAI *)((char *)v131 + 1056));
@@ -471,9 +490,13 @@ LABEL_26:
       if ( v112 <= 12 )
       {
         if ( v112 <= 6 )
+        {
           v125 = 12;
+        }
         else
+        {
           v125 = 4;
+        }
         v117 = 12;
       }
       else
@@ -489,9 +512,13 @@ LABEL_26:
       {
         v125 = 12;
         if ( v113 <= 6 )
+        {
           v117 = 12;
+        }
         else
+        {
           v117 = 4;
+        }
       }
       else
       {
@@ -501,7 +528,9 @@ LABEL_26:
     }
     v26 = CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v108);
     if ( CAIPlayerScriptVars::DifficultyLevel(v26) != 1 && v109 > 10 && v53 < (v100 + v109) / 8 )
+    {
       v118 = (IAIEnvironment::Rand() & 3) + 1;
+    }
     v47 = IAIEnvironment::Clip((v79 - v52) / 2, 0, 2);
     v51 = v100 + v109;
     v78 = j__abs(v109 - 2 * v100);
@@ -521,7 +550,9 @@ LABEL_26:
           v27 = IAIEnvironment::AlliancesAllianceId(v108);
           v49 = IAIEnvironment::AlliancesEnemyPlayerIds(v27);
           v87 = 0;
-          for ( mm = 0; v49[mm]; ++mm )
+          for ( mm = 0;
+                v49[mm];
+                ++mm )
           {
             v46 = &g_cAIPlayerEvaluations.m_sPlayerEvaluations[v49[mm]];
             v87 += v46->m_uTotalWeaponCount + v46->m_uTotalUnitCount;
@@ -555,9 +586,13 @@ LABEL_26:
     v33 = CAITaskForce::NumberOfEntities(v32);
     v34 = (pairNode *)CAISectorAI::Reservoir(v131, 3);
     if ( CAITaskForce::NumberOfEntities(v34) + v33 <= 10 )
+    {
       return CAIAgent::ExecuteResult(0, 0);
+    }
     else
+    {
       return CAIAgent::ExecuteResult(0xAu, 0);
+    }
   }
 }
 
@@ -571,7 +606,7 @@ LABEL_26:
 
 
 // address=[0x13088d0]
-// Decompiled from struct CAITaskForce *__thiscall CAIAgentSquads::SimpleSquadManagement(  CAINormalSectorAgent *this,  int a2,  int a3,  int a4)
+// Decompiled from struct CAITaskForce *__thiscall CAIAgentSquads::SimpleSquadManagement(CAINormalSectorAgent *this, int a2, int a3, int a4)
 void  CAIAgentSquads::SimpleSquadManagement(enum T_AI_WARRIOR_TYPE a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   struct CAINormalSectorAI *v4; // eax
@@ -591,24 +626,23 @@ void  CAIAgentSquads::SimpleSquadManagement(enum T_AI_WARRIOR_TYPE a2, enum T_AI
   int Entity; // [esp+30h] [ebp-8h]
   pairNode *TaskForce; // [esp+34h] [ebp-4h]
 
-  if ( (a2 != 6 || a3 != 8)
-    && BBSupportDbgReport(
-         2,
-         "AI\\AI_AgentsSquads.cpp",
-         52,
-         "((_tReservoir == AI_WARRIOR_TYPE_PRIEST) && (_tTaskForceType == AI_TASK_FORCE_TYPE_PRIESTS))") == 1 )
+  if ( (a2 != 6 || a3 != 8) && BBSupportDbgReport(2, "AI\\AI_AgentsSquads.cpp", 52, "((_tReservoir == AI_WARRIOR_TYPE_PRIEST) && (_tTaskForceType == AI_TASK_FORCE_TYPE_PRIESTS))") == 1 )
   {
     __debugbreak();
   }
   if ( a4 <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentsSquads.cpp", 54, "_iScheduledTaskForceSize > 0") == 1 )
+  {
     __debugbreak();
+  }
   v16 = CAITaskForces::TaskForceClass(a3);
   v4 = CAINormalSectorAgent::SectorAI(this);
   CAISectorAI::DeleteEmptyTaskForces(v4, v16);
   v5 = CAINormalSectorAgent::SectorAI(this);
   v17 = CAISectorAI::Reservoir(v5, a2);
   if ( !v17 && BBSupportDbgReport(2, "AI\\AI_AgentsSquads.cpp", 62, "pReservoir != 0") == 1 )
+  {
     __debugbreak();
+  }
   Entity = CAITaskForce::FirstEntity(v17);
   v6 = CAINormalSectorAgent::SectorAI(this);
   v7 = CAISectorAI::TaskForceGroup(v6);
@@ -645,13 +679,10 @@ LABEL_12:
       TaskForce = CAITaskForceGroup::CreateTaskForce(v10, a3);
     }
     if ( !TaskForce && BBSupportDbgReport(2, "AI\\AI_AgentsSquads.cpp", 109, "pTaskForce != 0") == 1 )
+    {
       __debugbreak();
-    if ( CAITaskForce::NumberOfEntities(TaskForce) >= a4
-      && BBSupportDbgReport(
-           2,
-           "AI\\AI_AgentsSquads.cpp",
-           110,
-           "pTaskForce->NumberOfEntities() < _iScheduledTaskForceSize") == 1 )
+    }
+    if ( CAITaskForce::NumberOfEntities(TaskForce) >= a4 && BBSupportDbgReport(2, "AI\\AI_AgentsSquads.cpp", 110, "pTaskForce->NumberOfEntities() < _iScheduledTaskForceSize") == 1 )
     {
       __debugbreak();
     }
@@ -689,7 +720,9 @@ void  CAIAgentSquads::AssociateTaskForcesToSquads(enum T_AI_TASK_FORCE_CLASS a2)
     {
       result = (struct CAITaskForce *)CAITaskForce::AssociatedTaskForce(TaskForce);
       if ( !result )
+      {
         break;
+      }
       result = CAITaskForce::NextTaskForceGroupMemberOfSameClass(TaskForce);
       TaskForce = result;
     }
@@ -699,7 +732,9 @@ void  CAIAgentSquads::AssociateTaskForcesToSquads(enum T_AI_TASK_FORCE_CLASS a2)
       {
         result = (struct CAITaskForce *)CAITaskForce::AssociatedTaskForce(v8);
         if ( !result )
+        {
           break;
+        }
       }
       result = CAITaskForce::NextTaskForceGroupMemberOfSameClass(v8);
       v8 = result;
@@ -707,22 +742,19 @@ void  CAIAgentSquads::AssociateTaskForcesToSquads(enum T_AI_TASK_FORCE_CLASS a2)
     v10 = v8 != 0 && TaskForce != 0;
     if ( v10 )
     {
-      if ( CAITaskForce::AssociatedTaskForce(TaskForce)
-        && BBSupportDbgReport(2, "AI\\AI_AgentsSquads.cpp", 159, "pTaskForce->AssociatedTaskForce() == 0") == 1 )
+      if ( CAITaskForce::AssociatedTaskForce(TaskForce) && BBSupportDbgReport(2, "AI\\AI_AgentsSquads.cpp", 159, "pTaskForce->AssociatedTaskForce() == 0") == 1 )
       {
         __debugbreak();
       }
       if ( CAITaskForce::AssociatedTaskForce(v8) )
       {
         if ( BBSupportDbgReport(2, "AI\\AI_AgentsSquads.cpp", 160, "pSquad->AssociatedTaskForce() == 0") == 1 )
+        {
           __debugbreak();
+        }
       }
       CAITaskForce::SetAssociatedTaskForce(TaskForce, v8);
-      result = (struct CAITaskForce *)(*(int (__thiscall **)(CAITaskForce *, int, int, _DWORD))(*(_DWORD *)TaskForce + 32))(
-                                        TaskForce,
-                                        6,
-                                        -1,
-                                        0);
+      result = (struct CAITaskForce *)(*(int (__thiscall **)(CAITaskForce *, int, int, _DWORD))(*(_DWORD *)TaskForce + 32))(TaskForce, 6, -1, 0);
     }
   }
   while ( v10 );

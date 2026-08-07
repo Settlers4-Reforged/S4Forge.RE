@@ -9,7 +9,9 @@ void  CManyBuildingTypesIterator::Init(int a2, int a3, int a4) {
   int result; // eax
 
   if ( !a4 )
+  {
     a4 = a3;
+  }
   CBuildingIteratorBase::Init(this, 0);
   *((_DWORD *)this + 2) = a2;
   *((_DWORD *)this + 3) = a3;
@@ -26,15 +28,16 @@ int  CManyBuildingTypesIterator::FirstBuilding(void) {
   bool v2; // [esp+0h] [ebp-8h]
 
   *(_DWORD *)this = *((_DWORD *)this + 3);
-  *((_DWORD *)this + 1) = CBuildingMgr::GetFirstBuildingId(
-                            (CBuildingMgr *)g_cBuildingMgr,
-                            *((_DWORD *)this + 2),
-                            *((_DWORD *)this + 3));
+  *((_DWORD *)this + 1) = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 2), *((_DWORD *)this + 3));
   v2 = *((_DWORD *)this + 1) != 0;
   if ( (v2 & CBuildingIteratorBase::BuildingValid(this, *((_DWORD *)this + 1))) != 0 )
+  {
     return *((_DWORD *)this + 1);
+  }
   else
+  {
     return CManyBuildingTypesIterator::NextBuilding(this);
+  }
 }
 
 
@@ -60,10 +63,7 @@ int  CManyBuildingTypesIterator::NextBuilding(void) {
         *((_DWORD *)this + 1) = 0;
         return 0;
       }
-      FirstBuildingId = CBuildingMgr::GetFirstBuildingId(
-                          (CBuildingMgr *)g_cBuildingMgr,
-                          *((_DWORD *)this + 2),
-                          *(_DWORD *)this);
+      FirstBuildingId = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 2), *(_DWORD *)this);
     }
   }
   while ( !CBuildingIteratorBase::BuildingValid(this, FirstBuildingId) );
@@ -77,14 +77,18 @@ int  CManyBuildingTypesIterator::NextBuilding(void) {
 int  CManyBuildingTypesIterator::NextBuildingIfCurrentIsNotValid(void) {
   
   if ( CBuildingIteratorBase::BuildingValid(this, *((_DWORD *)this + 1)) )
+  {
     return *((_DWORD *)this + 1);
+  }
   else
+  {
     return CManyBuildingTypesIterator::NextBuilding(this);
+  }
 }
 
 
 // address=[0x13171f0]
-// Decompiled from CManyBuildingTypesIterator *__thiscall CManyBuildingTypesIterator::CManyBuildingTypesIterator(  CManyBuildingTypesIterator *this)
+// Decompiled from CManyBuildingTypesIterator *__thiscall CManyBuildingTypesIterator::CManyBuildingTypesIterator(CManyBuildingTypesIterator *this)
  CManyBuildingTypesIterator::CManyBuildingTypesIterator(void) {
   
   return this;

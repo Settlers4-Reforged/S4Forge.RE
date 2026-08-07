@@ -27,7 +27,9 @@ void  CAINormalPlayerAI::Load(class IS4Chunk & a2) {
     CAIPlayerAI::Load(this, a2);
     (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1517215742);
     v3 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-    for ( i = 0; i < v3; ++i )
+    for ( i = 0;
+          i < v3;
+          ++i )
     {
       NormalSectorAI = CAISectorAI::CreateNormalSectorAI((CAINormalPlayerAI *)((char *)this - 4), 0);
       (*(void (__thiscall **)(int, struct IS4Chunk *))(*(_DWORD *)NormalSectorAI + 20))(NormalSectorAI, a2);
@@ -56,7 +58,9 @@ void  CAINormalPlayerAI::Save(class IS4Chunk & a2) {
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1517215742);
   v4 = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)this + 68);
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, v4);
-  for ( i = 0; i < v4; ++i )
+  for ( i = 0;
+        i < v4;
+        ++i )
   {
     v3 = TAIStaticPtrVector<CAISectorAI,8>::operator[](i);
     (*(void (__thiscall **)(int, struct IS4Chunk *))(*(_DWORD *)v3 + 24))(v3, a2);

@@ -12,7 +12,9 @@ int __cdecl COwnerMapExEx::CalculateOwnerBits1(int a1, int a2) {
   int i; // [esp+8h] [ebp-4h]
 
   v5 = 0;
-  for ( i = ITiling::FirstTileOfSquareVW(a1, a2); i; i = CTile::NextSquareTile(v4) )
+  for ( i = ITiling::FirstTileOfSquareVW(a1, a2);
+        i;
+        i = CTile::NextSquareTile(v4) )
   {
     v4 = (struct CTile *)ITiling::Tile(i);
     v2 = CTile::OwnerId(v4);
@@ -44,7 +46,9 @@ int __cdecl COwnerMapExEx::CalculateOwnerBits9(int a1, int a2) {
     v9 |= COwnerMap::OwnerBits1VW(a1 - 1, a2 + 1) | v5;
   }
   if ( a1 >= 63 )
+  {
     return v9;
+  }
   v6 = COwnerMap::OwnerBits1VW(a1 + 1, a2 - 1);
   v7 = COwnerMap::OwnerBits1VW(a1 + 1, a2) | v6;
   return v9 | COwnerMap::OwnerBits1VW(a1 + 1, a2 + 1) | v7;

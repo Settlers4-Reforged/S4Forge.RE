@@ -10,14 +10,18 @@ class CGameState * __cdecl CStateLobbyMapSettings::DynamicCreateFunc(void * a1) 
 
   C = (CStateLobbyMapSettings *)operator new(0x14u);
   if ( C )
+  {
     return CStateLobbyMapSettings::CStateLobbyMapSettings(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x14bd770]
-// Decompiled from CStateLobbyMapSettings *__thiscall CStateLobbyMapSettings::CStateLobbyMapSettings(  CStateLobbyMapSettings *this,  void *a2)
+// Decompiled from CStateLobbyMapSettings *__thiscall CStateLobbyMapSettings::CStateLobbyMapSettings(CStateLobbyMapSettings *this, void *a2)
  CStateLobbyMapSettings::CStateLobbyMapSettings(void * a2) {
   
   const char *v2; // eax
@@ -60,9 +64,13 @@ class CGameState * __cdecl CStateLobbyMapSettings::DynamicCreateFunc(void * a1) 
     C = (CGameType *)operator new(0x620u);
     LOBYTE(v15) = 1;
     if ( C )
+    {
       v7 = CGameType::CGameType(C);
+    }
     else
+    {
       v7 = 0;
+    }
     LOBYTE(v15) = 0;
     g_pGameType = (int)v7;
     memset(&CStateLobbyMapSettings::m_stempMapPtr, 0, 0xFA0u);
@@ -72,7 +80,9 @@ class CGameState * __cdecl CStateLobbyMapSettings::DynamicCreateFunc(void * a1) 
     v2 = g_pStringEngine->GetString(g_pStringEngine, 789);
     j__mbstowcs(Dest, v2, 0x200u);
     if ( !j__wcscmp(Dest, L"dummy") )
+    {
       wcscpy(Dest, L"%s's Game");
+    }
     PlayerName = (_Cnd_internal_imp_t *)CGameSettings::GetPlayerName((int)v11);
     v3 = (const char *)std::wstring::c_str(PlayerName);
     j__swprintf(Buffer, 0x100u, v3);
@@ -92,8 +102,7 @@ class CGameState * __cdecl CStateLobbyMapSettings::DynamicCreateFunc(void * a1) 
  CStateLobbyMapSettings::~CStateLobbyMapSettings(void) {
   
   *(_DWORD *)this = &CStateLobbyMapSettings::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 4))
-    && BBSupportDbgReport(2, "main\\states\\StateLobbyMapSettings.cpp", 151, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 4)) && BBSupportDbgReport(2, "main\\states\\StateLobbyMapSettings.cpp", 151, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -119,7 +128,9 @@ bool  CStateLobbyMapSettings::Perform(void) {
   }
   v1 = dword_4031CE8 + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_4031CE8 = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -191,12 +202,12 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
   v50 = this;
   m_iEventId = a2->m_iEventId;
   if ( m_iEventId > 0x1B69 )
+  {
     return CGuiGameState::OnEvent(v50, a2);
+  }
   if ( m_iEventId == 7017 )
   {
-    CGameStateHandler::Switch(
-      (struct CGameState *(__cdecl *)(void *))CStateMDRandomMapParameters::DynamicCreateFunc,
-      (void *)*((unsigned __int8 *)v50 + 4));
+    CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDRandomMapParameters::DynamicCreateFunc, (void *)*((unsigned __int8 *)v50 + 4));
     return CGuiGameState::OnEvent(v50, a2);
   }
   m_iEventId -= 13;
@@ -204,7 +215,9 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
   {
     case 0u:
       if ( a2->m_wParam != 27 )
+      {
         return 1;
+      }
       if ( byte_403190C )
       {
         v20 = CEvn_Event::CEvn_Event(&v55, 0x72u, 0, 0, 0);
@@ -224,13 +237,17 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
       return 1;
     case 0x32u:
       if ( *((_BYTE *)v50 + 4) )
-        CGameStateHandler::Switch(
-          (struct CGameState *(__cdecl *)(void *))CStateLobbyConnect::DynamicCreateFunc,
-          (void *)1);
+      {
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLobbyConnect::DynamicCreateFunc, (void *)1);
+      }
       else
+      {
         CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLocalType::DynamicCreateFunc, (void *)1);
+      }
       if ( !g_pGameType )
+      {
         return 1;
+      }
       v29 = g_pGameType;
       v28 = delete g_pGameType;
       g_pGameType = 0;
@@ -247,9 +264,13 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
       C = operator new(0x18u);
       v56 = 2;
       if ( C )
+      {
         v32 = INetworkEngine::INetworkEngine((INetworkEngine *)C, *((_BYTE *)v50 + 4));
+      }
       else
+      {
         v32 = 0;
+      }
       v25 = v32;
       v56 = -1;
       g_pNetworkEngine = v32;
@@ -278,9 +299,13 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
         g_pGameType->m_iActualPlayerCount = dword_4031924;
         std::wstring::operator=(&g_pGameType->m_swGameName, &stru_4031960);
         if ( *((_BYTE *)v50 + 4) )
+        {
           v31 = 2;
+        }
         else
+        {
           v31 = 1;
+        }
         g_pGameType->m_iGameType = v31;
         g_pGameType->m_iCampaignType = 0;
         LocalSlot = CPlayerManager::GetLocalSlot();
@@ -294,8 +319,12 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
         v56 = -1;
         std::wstring::~wstring(&v52);
         g_pGameType->m_uExtraFlags = byte_403199C;
-        for ( i = 0; i < g_pGameType->m_iActualPlayerCount; ++i )
+        for ( i = 0;
+              i < g_pGameType->m_iActualPlayerCount;
+              ++i )
+        {
           g_pGameType->m_sPlayerTeam[i] %= g_pGameType->m_uiNumberAlliances;
+        }
         if ( dword_4031934 == 5 )
         {
           g_pGameType->m_bIsGameWon = 1;
@@ -304,18 +333,24 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
         if ( dword_4031934 == 3 )
         {
           v23 = g_pGameType->m_iActualPlayerCount % 2u + (g_pGameType->m_iActualPlayerCount >> 1);
-          for ( j = 0; j < g_pGameType->m_uiNumberAlliances; ++j )
+          for ( j = 0;
+                j < g_pGameType->m_uiNumberAlliances;
+                ++j )
+          {
             g_pGameType->m_iAllianceSizes[j] = v23;
+          }
         }
         CGameType::SetHost(g_pGameType, 1);
-        CGameStateHandler::Switch(
-          (struct CGameState *(__cdecl *)(void *))CStateLobbyGameSettings::DynamicCreateFunc,
-          (void *)1);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLobbyGameSettings::DynamicCreateFunc, (void *)1);
         Instance = OnlineManager::GetInstance();
         if ( (unsigned __int8)OnlineManager::IsQuickMatchFlow(Instance) )
+        {
           CLanLobby::Communicate(1059, 0);
+        }
         else
+        {
           CLanLobby::Communicate(1051, 0);
+        }
         return 1;
       }
       else
@@ -325,8 +360,7 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
         v3 = g_pStringEngine->GetString(g_pStringEngine, 2402);
         std::string::operator=(&g_iMessageBoxStringID, v3);
         IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)v50 + 4));
-        if ( !IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc)
-          && BBSupportDbgReport(2, "main\\states\\StateLobbyMapSettings.cpp", 458, "bRet") == 1 )
+        if ( !IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc) && BBSupportDbgReport(2, "main\\states\\StateLobbyMapSettings.cpp", 458, "bRet") == 1 )
         {
           __debugbreak();
         }
@@ -341,9 +375,13 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
       if ( a2->m_wParam )
       {
         if ( dword_4031938 == *((_DWORD *)CStateLobbyMapSettings::m_stempMapPtr[dword_403192C] + 22) - 1 )
+        {
           dword_4031938 = 0;
+        }
         else
+        {
           ++dword_4031938;
+        }
       }
       else if ( dword_4031938 )
       {
@@ -359,14 +397,20 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
       if ( a2->m_wParam )
       {
         if ( dword_4031928 == dword_4031924 )
+        {
           return 1;
+        }
         if ( dword_4031934 == 3 && dword_4031928 < 2 || dword_4031934 != 3 )
+        {
           ++dword_4031928;
+        }
       }
       else
       {
         if ( dword_4031928 == 1 || dword_4031934 != 5 && dword_4031928 <= 2 )
+        {
           return 1;
+        }
         --dword_4031928;
       }
       goto LABEL_110;
@@ -374,15 +418,21 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
       if ( a2->m_wParam )
       {
         if ( dword_4031924 == *((_DWORD *)CStateLobbyMapSettings::m_stempMapPtr[dword_403192C] + 14) )
+        {
           return 1;
+        }
         ++dword_4031924;
       }
       else
       {
         if ( dword_4031924 <= 2 )
+        {
           return 1;
+        }
         if ( dword_4031928 > --dword_4031924 )
+        {
           --dword_4031928;
+        }
       }
       goto LABEL_110;
     case 0x38u:
@@ -392,7 +442,9 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
         if ( a2->m_wParam )
         {
           if ( ++dword_4031934 > 6 )
+          {
             dword_4031934 = 1;
+          }
         }
         else if ( !--dword_4031934 )
         {
@@ -458,13 +510,17 @@ bool  CStateLobbyMapSettings::OnEvent(class CEvn_Event & a2) {
       if ( a2->m_wParam )
       {
         if ( dword_4031930 == 3 )
+        {
           return 1;
+        }
         ++dword_4031930;
       }
       else
       {
         if ( dword_4031930 == 1 )
+        {
           return 1;
+        }
         --dword_4031930;
       }
 LABEL_110:
@@ -490,9 +546,13 @@ LABEL_110:
       goto LABEL_110;
     case 0x3Eu:
       if ( a2->m_wParam )
+      {
         byte_403199C |= 1u;
+      }
       else
+      {
         byte_403199C &= ~1u;
+      }
       v47 = byte_403199C;
       return 1;
     case 0x65u:
@@ -513,7 +573,7 @@ LABEL_110:
 
 
 // address=[0x14be980]
-// Decompiled from void __thiscall CStateLobbyMapSettings::AddMapList(  struct CStateLobbyMapSettings *this,  std::wstring arg0,  std::wstring a3)
+// Decompiled from void __thiscall CStateLobbyMapSettings::AddMapList(struct CStateLobbyMapSettings *this, std::wstring arg0, std::wstring a3)
 void  CStateLobbyMapSettings::AddMapList(std::wstring arg0, std::wstring a3) {
   
   wchar_t *v3; // eax
@@ -590,35 +650,33 @@ void  CStateLobbyMapSettings::AddMapList(std::wstring arg0, std::wstring a3) {
       v14 = std::wstring::wstring(&v4, &a2);
       bLoadedMap = CGameType::LoadMapData(g_pGameType, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13);
       v35 = bLoadedMap;
-      v28 = bLoadedMap
-         && (!CGameType::IsAddOnMap(g_pGameType)
-          || !CGameType::IsBlueByteAddOnMap(g_pGameType)
-          || g_pAddOn->IsExtraInstalled(g_pAddOn));
+      v28 = bLoadedMap && (!CGameType::IsAddOnMap(g_pGameType) || !CGameType::IsBlueByteAddOnMap(g_pGameType) || g_pAddOn->IsExtraInstalled(g_pAddOn));
       v35 = v28;
-      v27 = v28
-         && (!CGameType::IsAddOnMap(g_pGameType)
-          || g_pAddOn->IsExtraInstalled(g_pAddOn)
-          || g_pMissionCD2->IsExtraInstalled(g_pMissionCD2));
+      v27 = v28 && (!CGameType::IsAddOnMap(g_pGameType) || g_pAddOn->IsExtraInstalled(g_pAddOn) || g_pMissionCD2->IsExtraInstalled(g_pMissionCD2));
       v35 = v27;
-      v26 = v27
-         && (!CGameType::IsMCD2TextureSet(g_pGameType) && !CGameType::IsBlueByteMCD2Map(g_pGameType)
-          || g_pMissionCD2->IsExtraInstalled(g_pMissionCD2));
+      v26 = v27 && (!CGameType::IsMCD2TextureSet(g_pGameType) && !CGameType::IsBlueByteMCD2Map(g_pGameType) || g_pMissionCD2->IsExtraInstalled(g_pMissionCD2));
       v35 = v26;
       if ( !v26 )
       {
         v17 = CStateLobbyMapSettings::m_stempMapPtr[*v34];
         v21 = v17;
         if ( v17 )
+        {
           v16 = CLanLobbyMapSettings::delete v21;
+        }
         else
+        {
           v16 = 0;
+        }
         CStateLobbyMapSettings::m_stempMapPtr[*v34] = 0;
         goto LABEL_41;
       }
       if ( byte_4031914 )
       {
         if ( g_pGameType->m_bHasOpponents )
+        {
           goto LABEL_29;
+        }
       }
       else if ( g_pGameType->m_bIsSoloMap )
       {
@@ -633,9 +691,13 @@ LABEL_29:
         *(&CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_48 + 2) = g_pGameType->m_bEconomyPossible;
         *(&CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_48 + 3) = g_pGameType->m_bCompetetivePossible;
         if ( byte_4031914 )
+        {
           m_bFreeSettlePossible = 0;
+        }
         else
+        {
           m_bFreeSettlePossible = g_pGameType->m_bFreeSettlePossible;
+        }
         *(&CStateLobbyMapSettings::m_stempMapPtr[*v34]->field_48 + 1) = m_bFreeSettlePossible;
         CStateLobbyMapSettings::m_stempMapPtr[*v34]->gap_4C[0] = g_pGameType->m_bCooperationPossible;
         CStateLobbyMapSettings::m_stempMapPtr[*v34]->gap_4C[1] = 0;
@@ -656,10 +718,7 @@ LABEL_29:
         *v19 = 0;
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>((char *)v37);
         LOBYTE(v41) = 3;
-        v18 = (void *)std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-                        v37,
-                        (int)v38,
-                        (char *)String);
+        v18 = (void *)std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v37, (int)v38, (char *)String);
         std::string::operator=(CStateLobbyMapSettings::m_stempMapPtr[*v34], v18);
         std::string::~string(v38);
         ++*v34;
@@ -673,7 +732,9 @@ LABEL_41:
     while ( j___wfindnext64i32(FindHandle, &FindData) != -1 );
   }
   if ( FindHandle != -1 )
+  {
     j___findclose(FindHandle);
+  }
   LOBYTE(v41) = 0;
   std::wstring::~wstring(&arg0);
   v41 = -1;
@@ -756,9 +817,13 @@ int  CStateLobbyMapSettings::RefreshMapList(void) {
   dword_4031920 = (int)CStateLobbyMapSettings::m_stempMapPtr;
   CStateLobbyMapSettings::Sort(v29);
   if ( dword_4031918 )
+  {
     dword_403192C = 0;
+  }
   else
+  {
     dword_403192C = -1;
+  }
   CStateLobbyMapSettings::ApplyMapData(v29, dword_403192C);
   IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
   IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 1);
@@ -777,12 +842,13 @@ void  CStateLobbyMapSettings::ClearMapList(void) {
   
   int i; // [esp+10h] [ebp-4h]
 
-  for ( i = 0; i < 1000; ++i )
+  for ( i = 0;
+        i < 1000;
+        ++i )
   {
     if ( CStateLobbyMapSettings::m_stempMapPtr[i] )
     {
-      CLanLobbyMapSettings::delete (CLanLobbyMapSettings::SMapEntryCStateLobbyMapSettings::m_stempMapPtr[i],
-        1u);
+      CLanLobbyMapSettings::delete (CLanLobbyMapSettings::SMapEntry *)CStateLobbyMapSettings::m_stempMapPtr[i];
       CStateLobbyMapSettings::m_stempMapPtr[i] = 0;
     }
   }
@@ -798,16 +864,24 @@ void  CStateLobbyMapSettings::SetupGUI(void) {
   int result; // eax
 
   if ( *((_BYTE *)this + 4) )
+  {
     *((_DWORD *)this + 4) = 3;
+  }
   else
+  {
     *((_DWORD *)this + 4) = 18;
+  }
   dword_4031998 = *((_DWORD *)this + 4);
   LOBYTE(result) = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 4), GuiDlgMainMapSettingsProc);
   if ( (_BYTE)result )
+  {
     return result;
+  }
   result = BBSupportDbgReport(2, "main\\states\\StateLobbyMapSettings.cpp", 813, "bRet");
   if ( result == 1 )
+  {
     __debugbreak();
+  }
   return result;
 }
 
@@ -922,11 +996,10 @@ void  CStateLobbyMapSettings::ApplyMapData(int a2) {
       dword_4031934 = *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 68);
       std::string::operator=(g_pGameType + 756);
       if ( byte_4031914 )
+      {
         *(_BYTE *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 73) = 0;
-      v21 = *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 72)
-          + *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 73)
-          + *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 74)
-          + *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 75);
+      }
+      v21 = *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 72) + *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 73) + *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 74) + *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 75);
       v23[1] = v21 > 1;
       byte_4031958 = v21 > 1;
       if ( g_pGameType )
@@ -936,21 +1009,10 @@ void  CStateLobbyMapSettings::ApplyMapData(int a2) {
         {
           v27 = 0;
           v23[0] = 0;
-          IGuiEngine::LockOwnerImage(
-            (IGuiEngine *)g_pGUIEngine,
-            *((_DWORD *)v28 + 4),
-            2495,
-            (struct SGuiRect *)v30,
-            &v27,
-            v23);
+          IGuiEngine::LockOwnerImage((IGuiEngine *)g_pGUIEngine, *((_DWORD *)v28 + 4), 2495, (struct SGuiRect *)v30, &v27, v23);
           if ( v27 )
           {
-            CStateLobbyGameSettings::DrawMap(
-              *(unsigned __int16 **)(g_pGameType + 1016),
-              v27,
-              v23[0],
-              *(_DWORD *)(g_pGameType + 1020),
-              *(_DWORD *)(g_pGameType + 1024));
+            CStateLobbyGameSettings::DrawMap(*(unsigned __int16 **)(g_pGameType + 1016), v27, v23[0], *(_DWORD *)(g_pGameType + 1020), *(_DWORD *)(g_pGameType + 1024));
             IGuiEngine::UnlockOwnerImage((IGuiEngine *)g_pGUIEngine, *((_DWORD *)v28 + 4), 2495);
           }
         }
@@ -969,9 +1031,13 @@ void  CStateLobbyMapSettings::Sort(void) {
   int i; // [esp+Ch] [ebp-8h]
   int j; // [esp+10h] [ebp-4h]
 
-  for ( i = 0; i < dword_4031918 - 1; ++i )
+  for ( i = 0;
+        i < dword_4031918 - 1;
+        ++i )
   {
-    for ( j = 0; j < dword_4031918 - 1; ++j )
+    for ( j = 0;
+          j < dword_4031918 - 1;
+          ++j )
     {
       if ( (int)CStateLobbyMapSettings::Compare(this, j, j + 1) < 0 )
       {
@@ -1017,92 +1083,148 @@ int  CStateLobbyMapSettings::Compare(int a2, int a3) {
         v3 = (const char *)std::string::c_str((void *)CStateLobbyMapSettings::m_stempMapPtr[a2]);
         v18 = stricmp(v3, v5);
         if ( !v18 )
+        {
           goto CStateLobbyMapSettings__Compare___def_18BF9AD;
+        }
         if ( *((_BYTE *)this + 12) )
+        {
           v16 = -1;
+        }
         else
+        {
           v16 = 0;
+        }
         result = v16 ^ v18;
         break;
       case 1:
-        if ( *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 60) == *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a3]
-                                                                                      + 60) )
+        if ( *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 60) == *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a3] + 60) )
+        {
           goto CStateLobbyMapSettings__Compare___def_18BF9AD;
-        if ( *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 60) <= *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a3]
-                                                                                      + 60) )
+        }
+        if ( *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 60) <= *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a3] + 60) )
+        {
           v15 = -1;
+        }
         else
+        {
           v15 = 1;
+        }
         if ( *((_BYTE *)this + 12) )
+        {
           v14 = -1;
+        }
         else
+        {
           v14 = 0;
+        }
         result = v14 ^ v15;
         break;
       case 2:
-        if ( *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 56) == *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a3]
-                                                                                      + 56) )
+        if ( *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 56) == *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a3] + 56) )
+        {
           goto CStateLobbyMapSettings__Compare___def_18BF9AD;
-        if ( *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 56) <= *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a3]
-                                                                                      + 56) )
+        }
+        if ( *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 56) <= *(_DWORD *)(CStateLobbyMapSettings::m_stempMapPtr[a3] + 56) )
+        {
           v13 = -1;
+        }
         else
+        {
           v13 = 1;
+        }
         if ( *((_BYTE *)this + 12) )
+        {
           v12 = -1;
+        }
         else
+        {
           v12 = 0;
+        }
         result = v12 ^ v13;
         break;
       case 3:
         if ( *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 72) == *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a3] + 72) )
+        {
           goto CStateLobbyMapSettings__Compare___def_18BF9AD;
+        }
         if ( *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 72) >= (int)*(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a3] + 72) )
+        {
           v11 = -1;
+        }
         else
+        {
           v11 = 1;
+        }
         if ( *((_BYTE *)this + 12) )
+        {
           v10 = -1;
+        }
         else
+        {
           v10 = 0;
+        }
         result = v10 ^ v11;
         break;
       case 4:
         if ( byte_4031914 )
         {
           if ( *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 75) == *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a3] + 75) )
+          {
             goto CStateLobbyMapSettings__Compare___def_18BF9AD;
+          }
           if ( *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 75) >= (int)*(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a3] + 75) )
+          {
             v9 = -1;
+          }
           else
+          {
             v9 = 1;
+          }
           if ( *((_BYTE *)this + 12) )
+          {
             v8 = -1;
+          }
           else
+          {
             v8 = 0;
+          }
           result = v8 ^ v9;
         }
         else
         {
           if ( *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 73) == *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a3] + 73) )
+          {
             goto CStateLobbyMapSettings__Compare___def_18BF9AD;
+          }
           if ( *(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a2] + 73) >= (int)*(unsigned __int8 *)(CStateLobbyMapSettings::m_stempMapPtr[a3] + 73) )
+          {
             v7 = -1;
+          }
           else
+          {
             v7 = 1;
+          }
           if ( *((_BYTE *)this + 12) )
+          {
             v6 = -1;
+          }
           else
+          {
             v6 = 0;
+          }
           result = v6 ^ v7;
         }
         break;
       default:
 CStateLobbyMapSettings__Compare___def_18BF9AD:
         if ( ++v19 == 6 )
+        {
           v19 = 0;
+        }
         if ( ++v17 != 6 )
+        {
           continue;
+        }
         result = 0;
         break;
     }

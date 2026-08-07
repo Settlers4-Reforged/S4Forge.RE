@@ -4,7 +4,7 @@
 // Definitions for class CS4InvalidMapException
 
 // address=[0x1313ec0]
-// Decompiled from boost::exception_detail::clone_base *__thiscall CS4InvalidMapException::CS4InvalidMapException(  boost::exception_detail::clone_base *this,  struct boost::exception_detail::clone_base *a2)
+// Decompiled from boost::exception_detail::clone_base *__thiscall CS4InvalidMapException::CS4InvalidMapException(boost::exception_detail::clone_base *this, struct boost::exception_detail::clone_base *a2)
  CS4InvalidMapException::CS4InvalidMapException(class CS4InvalidMapException const & a2) {
   
   CBBException::CBBException(this, a2);

@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CStorageBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x1BCu) )
+  {
     return CStorageBuildingRole::CStorageBuildingRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -34,8 +38,12 @@ class CStorageBuildingRole * __cdecl CStorageBuildingRole::Load(std::istream & a
   IBuildingRole::IBuildingRole(this);
   *(_DWORD *)this = &CStorageBuildingRole::_vftable_;
   std::vector<unsigned short>::vector<unsigned short>((char *)this + 428);
-  for ( i = 0; i < 43; ++i )
+  for ( i = 0;
+        i < 43;
+        ++i )
+  {
     *((_BYTE *)this + i + 384) = 0;
+  }
   *((_DWORD *)this + 95) = 0;
   std::vector<unsigned short>::clear();
   return this;
@@ -72,7 +80,9 @@ class CStorageBuildingRole * __cdecl CStorageBuildingRole::Load(std::istream & a
   operator^<int>(a2, (int)(v7 + 380));
   LoadArray<unsigned char>(a2, v7 + 384, 43);
   operator^<unsigned int>(a2, v3);
-  for ( i = 0; i < v3[0]; ++i )
+  for ( i = 0;
+        i < v3[0];
+        ++i )
   {
     operator^<unsigned short>(a2, v8);
     std::vector<unsigned short>::push_back(v8);
@@ -101,7 +111,9 @@ void  CStorageBuildingRole::Store(std::ostream & a2) {
   StoreArray<unsigned char>(a2, (char *)v7 + 384, 43);
   v5 = std::vector<unsigned short>::size((char *)v7 + 428);
   result = operator^<unsigned int>(a2, &v5);
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
     v3 = (__int16 *)std::vector<unsigned short>::operator[]((char *)v7 + 428, i);
     operator^<unsigned short>((int)a2, v3);
@@ -129,17 +141,18 @@ void  CStorageBuildingRole::Init(class CBuilding * a2) {
   __int16 v15; // [esp+1Ah] [ebp-2h] BYREF
 
   IBuildingRole::InitCommon((int)a2);
-  for ( i = 0; i < 43; ++i )
-    *((_BYTE *)this + i + 384) = 0;
-  std::vector<unsigned short>::clear();
-  for ( j = 0; j < *(char *)(*((_DWORD *)this + 94) + 57); ++j )
+  for ( i = 0;
+        i < 43;
+        ++i )
   {
-    if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * j + 63) != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\StorageBuilding.cpp",
-           192,
-           "m_pBuildingInfo->piles[p].type == IPileRole::PILE_TRADE") == 1 )
+    *((_BYTE *)this + i + 384) = 0;
+  }
+  std::vector<unsigned short>::clear();
+  for ( j = 0;
+        j < *(char *)(*((_DWORD *)this + 94) + 57);
+        ++j )
+  {
+    if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * j + 63) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 192, "m_pBuildingInfo->piles[p].type == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
@@ -147,17 +160,7 @@ void  CStorageBuildingRole::Init(class CBuilding * a2) {
     v9 = *(char *)(*((_DWORD *)this + 94) + 16 * j + 60) + CWorldManager::X(v2);
     v3 = IEntity::WorldIdx();
     v10 = *(char *)(*((_DWORD *)this + 94) + 16 * j + 61) + CWorldManager::Y(v3);
-    v11 = CPileMgr::AddPile(
-            (CPileMgr *)&g_cPileMgr,
-            v9,
-            v10,
-            *(char *)(*((_DWORD *)this + 94) + 16 * j + 62),
-            0,
-            *(char *)(*((_DWORD *)this + 94) + 16 * j + 63),
-            *(char *)(*((_DWORD *)this + 94) + 16 * j + 64),
-            *(char *)(*((_DWORD *)this + 94) + 16 * j + 65),
-            *(_DWORD *)(*((_DWORD *)this + 94) + 16 * j + 68),
-            *(_DWORD *)(*((_DWORD *)this + 94) + 16 * j + 72));
+    v11 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v9, v10, *(char *)(*((_DWORD *)this + 94) + 16 * j + 62), 0, *(char *)(*((_DWORD *)this + 94) + 16 * j + 63), *(char *)(*((_DWORD *)this + 94) + 16 * j + 64), *(char *)(*((_DWORD *)this + 94) + 16 * j + 65), *(_DWORD *)(*((_DWORD *)this + 94) + 16 * j + 68), *(_DWORD *)(*((_DWORD *)this + 94) + 16 * j + 72));
     v8 = IEntity::ID();
     v4 = CPileMgr::operator[](v11);
     CPile::SetBuildingId((CPile *)v4, v8);
@@ -169,13 +172,14 @@ void  CStorageBuildingRole::Init(class CBuilding * a2) {
     v15 = v11;
     std::vector<unsigned short>::push_back(&v15);
   }
-  if ( !std::vector<unsigned short>::size((char *)this + 428)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 217, "m_vPileId.size()>0") == 1 )
+  if ( !std::vector<unsigned short>::size((char *)this + 428) && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 217, "m_vPileId.size()>0") == 1 )
   {
     __debugbreak();
   }
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     (*(void (__thiscall **)(CStorageBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
+  }
   v6 = CBuilding::EcoSectorId(a2);
   CStorageBuildingRole::RegisterPilesAndStorageAtEcosector(this, v6);
   return IAnimatedEntity::RegisterForLogicUpdate(14);
@@ -217,26 +221,36 @@ void  CStorageBuildingRole::Switch(void) {
   v6 = CWorldManager::EcoSectorId(v2);
   EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v6);
   if ( !EcoSectorPtr && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 252, "pEcosector") == 1 )
+  {
     __debugbreak();
+  }
   CEcoSector::CleanUpBuildingNeed(EcoSectorPtr, *((unsigned __int16 *)this + 3));
   v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   v4 = IEntity::FlagBits(v3, (EntityFlag)0x1000u);
   if ( v4 )
   {
-    for ( i = 1; i < 43; ++i )
+    for ( i = 1;
+          i < 43;
+          ++i )
     {
       LOBYTE(v4) = i + (_BYTE)this;
       if ( *((_BYTE *)this + i + 384) )
+      {
         LOBYTE(v4) = CEcoSector::RegisterGoodStorage(EcoSectorPtr, *((unsigned __int16 *)this + 3), i);
+      }
     }
   }
   else
   {
-    for ( j = 1; j < 43; ++j )
+    for ( j = 1;
+          j < 43;
+          ++j )
     {
       LOBYTE(v4) = j + (_BYTE)this;
       if ( *((_BYTE *)this + j + 384) )
+      {
         LOBYTE(v4) = CEcoSector::UnregisterGoodStorage(EcoSectorPtr, *((unsigned __int16 *)this + 3), j);
+      }
     }
   }
   return v4;
@@ -248,13 +262,15 @@ void  CStorageBuildingRole::Switch(void) {
 void  CStorageBuildingRole::LogicUpdate(class CBuilding * a2) {
   
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     (*(void (__thiscall **)(CStorageBuildingRole *, struct CBuilding *, int))(*(_DWORD *)this + 88))(this, a2, 1);
+  }
   return IAnimatedEntity::RegisterForLogicUpdate(14);
 }
 
 
 // address=[0x151d6b0]
-// Decompiled from unsigned int __thiscall CStorageBuildingRole::FillGfxInfo(  CStorageBuildingRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
+// Decompiled from unsigned int __thiscall CStorageBuildingRole::FillGfxInfo(CStorageBuildingRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
 void  CStorageBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
@@ -272,11 +288,15 @@ void  CStorageBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectI
   v3 = IEntity::Race(a2);
   CGfxManager::GetBuildingGfxInfo((int)a3, v3, v9, 1, (int)this + 76);
   v10 = 0;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = std::vector<unsigned short>::size((char *)this + 428);
     if ( i >= result )
+    {
       break;
+    }
     v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
     v6 = CPileMgr::operator[](*v5);
     if ( (unsigned __int8)CPile::IsPatchPile(v6) )
@@ -323,7 +343,9 @@ void  CStorageBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   byte_3F1E5B0 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v10, 1u);
   byte_3F1E5AA = 0;
   byte_3F1E5B1 = 0;
-  for ( i = 0; i < std::vector<unsigned short>::size((char *)this + 428); ++i )
+  for ( i = 0;
+        i < std::vector<unsigned short>::size((char *)this + 428);
+        ++i )
   {
     v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
     v14 = CPileMgr::operator[](*v5);
@@ -344,7 +366,9 @@ void  CStorageBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   }
   v11 = 604;
   if ( !a3 )
+  {
     v11 = 602;
+  }
   CEvn_Event::CEvn_Event(&v17, v11, 0, (unsigned int)&g_cStorageInfo, 0);
   v18 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v17);
@@ -354,7 +378,7 @@ void  CStorageBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
 
 
 // address=[0x151d9e0]
-// Decompiled from _DWORD *__thiscall CStorageBuildingRole::FillStorageSideBar(  CStorageBuildingRole *this,  struct CStorageSideBarInfo *a2,  bool a3)
+// Decompiled from _DWORD *__thiscall CStorageBuildingRole::FillStorageSideBar(CStorageBuildingRole *this, struct CStorageSideBarInfo *a2, bool a3)
 void  CStorageBuildingRole::FillStorageSideBar(class CStorageSideBarInfo * a2, bool a3) {
   
   unsigned int v4; // [esp+8h] [ebp-30h]
@@ -363,23 +387,28 @@ void  CStorageBuildingRole::FillStorageSideBar(class CStorageSideBarInfo * a2, b
   int v7; // [esp+34h] [ebp-4h]
 
   *((_DWORD *)a2 + 1) = 15;
-  for ( i = 0; i < 43; ++i )
+  for ( i = 0;
+        i < 43;
+        ++i )
   {
     *((_BYTE *)a2 + 2 * i + 8) = i;
     *((_BYTE *)a2 + 2 * i + 9) = *((_BYTE *)this + i + 384);
   }
   v4 = 606;
   if ( !a3 )
+  {
     v4 = 607;
+  }
   CEvn_Event::CEvn_Event(&v6, v4, 0, (unsigned int)a2, 0);
   v7 = 0;
-  if ( !g_pEvnEngine
-    && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 396, "g_pEvnEngine != NULL") == 1 )
+  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 396, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
   if ( g_pEvnEngine )
+  {
     IEventEngine::SendAMessage(g_pEvnEngine, &v6);
+  }
   v7 = -1;
   return CEvn_Event::~CEvn_Event(&v6);
 }
@@ -395,26 +424,26 @@ int  CStorageBuildingRole::GetPileIdWithGood(int a2)const {
   CPile *PilePtr; // [esp+Ch] [ebp-4h]
 
   if ( a2 > 0x2A )
+  {
     return 0;
-  for ( i = 0; i < *(char *)(*((_DWORD *)this + 94) + 57); ++i )
+  }
+  for ( i = 0;
+        i < *(char *)(*((_DWORD *)this + 94) + 57);
+        ++i )
   {
     v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
     PilePtr = CPileMgr::GetPilePtr(*v3);
-    if ( CPile::GetRoleType(PilePtr) != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\StorageBuilding.cpp",
-           426,
-           "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+    if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 426, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
-    if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2
-      && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) < 8 )
+    if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) < 8 )
     {
       v4 = CPile::AmountComing(PilePtr);
       if ( v4 < 8 - (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) )
+      {
         return *(unsigned __int16 *)std::vector<unsigned short>::operator[](i);
+      }
     }
   }
   return 0;
@@ -438,22 +467,21 @@ int  CStorageBuildingRole::GetNextFreePile(void) {
   CPile *PilePtr; // [esp+4h] [ebp-Ch]
   signed int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; i < *(char *)(*((_DWORD *)this + 94) + 57); ++i )
+  for ( i = 0;
+        i < *(char *)(*((_DWORD *)this + 94) + 57);
+        ++i )
   {
     v1 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
     PilePtr = CPileMgr::GetPilePtr(*v1);
-    if ( CPile::GetRoleType(PilePtr) != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\StorageBuilding.cpp",
-           800,
-           "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+    if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 800, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v3 = (void *)CPile::Role(PilePtr);
     if ( !CTradePileRole::GetTradeRoleType(v3) )
+    {
       return *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
+    }
   }
   return 0;
 }
@@ -468,16 +496,13 @@ int  CStorageBuildingRole::ReserveNextFreePile(int a2) {
   CPile *PilePtr; // [esp+8h] [ebp-8h]
   signed int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; i < *(char *)(this[94] + 57); ++i )
+  for ( i = 0;
+        i < *(char *)(this[94] + 57);
+        ++i )
   {
     v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](this + 107, i);
     PilePtr = CPileMgr::GetPilePtr(*v2);
-    if ( CPile::GetRoleType(PilePtr) != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\StorageBuilding.cpp",
-           742,
-           "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+    if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 742, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
@@ -502,33 +527,32 @@ bool  CStorageBuildingRole::ReserveFreePile(int a2, int a3) {
   CPile *PilePtr; // [esp+4h] [ebp-Ch]
   signed int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     if ( i >= *(char *)(*((_DWORD *)this + 94) + 57) )
+    {
       return 0;
+    }
     if ( *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i) == a3 )
+    {
       break;
+    }
   }
   v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
   PilePtr = CPileMgr::GetPilePtr(*v3);
-  if ( CPile::GetRoleType(PilePtr) != 4
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\StorageBuilding.cpp",
-         773,
-         "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+  if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 773, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
   {
     __debugbreak();
   }
   v5 = (void *)CPile::Role(PilePtr);
   if ( CTradePileRole::GetTradeRoleType(v5) )
   {
-    if ( BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\StorageBuilding.cpp",
-           776,
-           "rTradePileRole.GetTradeRoleType() == CTradePileRole::TRADEPILE_FREE") == 1 )
+    if ( BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 776, "rTradePileRole.GetTradeRoleType() == CTradePileRole::TRADEPILE_FREE") == 1 )
+    {
       __debugbreak();
+    }
   }
   CTradePileRole::SetTradeRoleType(v5, 2);
   CPile::SetGoodType(PilePtr, a2);
@@ -548,24 +572,20 @@ int  CStorageBuildingRole::GetSpaceAmount(int a2) {
   CPile *PilePtr; // [esp+14h] [ebp-4h]
 
   v8 = 0;
-  for ( i = 0; i < *(char *)(*((_DWORD *)this + 94) + 57); ++i )
+  for ( i = 0;
+        i < *(char *)(*((_DWORD *)this + 94) + 57);
+        ++i )
   {
     v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
     PilePtr = CPileMgr::GetPilePtr(*v2);
-    if ( CPile::GetRoleType(PilePtr) != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\StorageBuilding.cpp",
-           825,
-           "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+    if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 825, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v6 = (void *)CPile::Role(PilePtr);
     if ( CTradePileRole::GetTradeRoleType(v6) )
     {
-      if ( (CTradePileRole::GetTradeRoleType(v6) == 1 || CTradePileRole::GetTradeRoleType(v6) == 2)
-        && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 )
+      if ( (CTradePileRole::GetTradeRoleType(v6) == 1 || CTradePileRole::GetTradeRoleType(v6) == 2) && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 )
       {
         v3 = 8 - (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
         v8 += v3 - CPile::AmountComing(PilePtr);
@@ -596,23 +616,26 @@ void  CStorageBuildingRole::RegisterPilesAndStorageAtEcosector(int a2) {
   int j; // [esp+14h] [ebp-4h]
 
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 855, "_iESID") == 1 )
+  {
     __debugbreak();
+  }
   v8 = (CEcoSector *)CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, a2);
   if ( !v8 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 857, "pEcosector") == 1 )
+  {
     __debugbreak();
-  for ( i = 0; ; ++i )
+  }
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = *(char *)(*((_DWORD *)this + 94) + 57);
     if ( i >= result )
+    {
       break;
+    }
     v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
     PilePtr = CPileMgr::GetPilePtr(*v3);
-    if ( CPile::GetRoleType(PilePtr) != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\StorageBuilding.cpp",
-           864,
-           "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+    if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 864, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
@@ -623,7 +646,9 @@ void  CStorageBuildingRole::RegisterPilesAndStorageAtEcosector(int a2) {
       if ( CTradePileRole::GetTradeRoleType(v7) == 1 || CTradePileRole::GetTradeRoleType(v7) == 2 )
       {
         if ( !v6 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 876, "iGoodType") == 1 )
+        {
           __debugbreak();
+        }
         v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
         CEcoSector::RegisterGoodStoragePile(v8, *((unsigned __int16 *)this + 3), *v5, v6);
       }
@@ -634,18 +659,22 @@ void  CStorageBuildingRole::RegisterPilesAndStorageAtEcosector(int a2) {
       CEcoSector::RegisterFreeStoragePile(v8, *((unsigned __int16 *)this + 3), *v4);
     }
   }
-  for ( j = 1; j < 43; ++j )
+  for ( j = 1;
+        j < 43;
+        ++j )
   {
     result = (int)this + j;
     if ( *((_BYTE *)this + j + 384) )
+    {
       LOBYTE(result) = CEcoSector::RegisterGoodStorage(v8, *((unsigned __int16 *)this + 3), j);
+    }
   }
   return result;
 }
 
 
 // address=[0x151e180]
-// Decompiled from void __thiscall CStorageBuildingRole::ExecuteUnforseenGoodTypeChange(  CStorageBuildingRole *this,  int a2,  int a3,  int a4)
+// Decompiled from void __thiscall CStorageBuildingRole::ExecuteUnforseenGoodTypeChange(CStorageBuildingRole *this, int a2, int a3, int a4)
 void  CStorageBuildingRole::ExecuteUnforseenGoodTypeChange(int a2, int a3, int a4) {
   
   CPile *PilePtr; // [esp+0h] [ebp-10h]
@@ -655,24 +684,25 @@ void  CStorageBuildingRole::ExecuteUnforseenGoodTypeChange(int a2, int a3, int a
   if ( a3 )
   {
     PilePtr = CPileMgr::GetPilePtr(a2);
-    if ( CPile::GetRoleType(PilePtr) != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\StorageBuilding.cpp",
-           903,
-           "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+    if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 903, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v5 = CBuildingMgr::EcoSectorId((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
     if ( !v5 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 906, "iESID") == 1 )
+    {
       __debugbreak();
+    }
     EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v5);
     if ( !EcoSectorPtr && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 908, "pEcosector") == 1 )
+    {
       __debugbreak();
+    }
     CEcoSector::UnregisterGoodStoragePile(EcoSectorPtr, *((unsigned __int16 *)this + 3), a2, a3);
     if ( *((_BYTE *)this + a4 + 384) )
+    {
       CEcoSector::RegisterGoodStoragePile(EcoSectorPtr, *((unsigned __int16 *)this + 3), a2, a4);
+    }
   }
 }
 
@@ -693,19 +723,29 @@ void  CStorageBuildingRole::UnregisterPile(int a2) {
 
   LOBYTE(TradeRoleType) = (_BYTE)this;
   if ( !*((_WORD *)this + 3) )
+  {
     return TradeRoleType;
+  }
   v3 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   v7 = CBuilding::EcoSectorId(v3);
   if ( !v7 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 933, "iESID") == 1 )
+  {
     __debugbreak();
+  }
   v8 = (CEcoSector *)CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, v7);
   if ( !v8 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 935, "pEcosector") == 1 )
+  {
     __debugbreak();
-  for ( i = 0; ; ++i )
+  }
+  for ( i = 0;
+        ;
+        ++i )
   {
     TradeRoleType = *((_DWORD *)this + 94);
     if ( i >= *(char *)(TradeRoleType + 57) )
+    {
       break;
+    }
     if ( a2 == *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i) )
     {
       v4 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
@@ -713,12 +753,13 @@ void  CStorageBuildingRole::UnregisterPile(int a2) {
       v10 = (void *)CPile::Role(PilePtr);
       if ( CTradePileRole::GetTradeRoleType(v10) )
       {
-        if ( CTradePileRole::GetTradeRoleType(v10) == 1
-          || (TradeRoleType = CTradePileRole::GetTradeRoleType(v10), TradeRoleType == 2) )
+        if ( CTradePileRole::GetTradeRoleType(v10) == 1 || (TradeRoleType = CTradePileRole::GetTradeRoleType(v10), TradeRoleType == 2) )
         {
           v6 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
           if ( !v6 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 955, "iGoodType") == 1 )
+          {
             __debugbreak();
+          }
           LOBYTE(TradeRoleType) = CEcoSector::UnregisterGoodStoragePile(v8, *((unsigned __int16 *)this + 3), a2, v6);
         }
       }
@@ -747,47 +788,49 @@ void  CStorageBuildingRole::SwitchGood(int a2, int a3) {
   signed int i; // [esp+14h] [ebp-Ch]
   CPile *PilePtr; // [esp+18h] [ebp-8h]
 
-  if ( (a2 <= 0 || a2 >= 43)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\StorageBuilding.cpp",
-         458,
-         "0 < _iGoodType && _iGoodType < GOOD_MAX") == 1 )
+  if ( (a2 <= 0 || a2 >= 43) && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 458, "0 < _iGoodType && _iGoodType < GOOD_MAX") == 1 )
   {
     __debugbreak();
   }
   v6 = CBuildingMgr::EcoSectorId((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
   if ( !v6 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 461, "iESID") == 1 )
+  {
     __debugbreak();
+  }
   v7 = (CEcoSector *)CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, v6);
   if ( !v7 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 463, "pEcosector") == 1 )
+  {
     __debugbreak();
+  }
   if ( a3 )
   {
     v4 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
     if ( IEntity::FlagBits(v4, (EntityFlag)0x1000u) )
+    {
       CEcoSector::RegisterGoodStorage(v7, *((unsigned __int16 *)this + 3), a2);
+    }
   }
   else
   {
     CEcoSector::UnregisterGoodStorage(v7, *((unsigned __int16 *)this + 3), a2);
-    for ( i = 0; i < *(char *)(*((_DWORD *)this + 94) + 57); ++i )
+    for ( i = 0;
+          i < *(char *)(*((_DWORD *)this + 94) + 57);
+          ++i )
     {
       v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
       PilePtr = CPileMgr::GetPilePtr(*v3);
-      if ( CPile::GetRoleType(PilePtr) != 4
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Building\\StorageBuilding.cpp",
-             474,
-             "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+      if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 474, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
       {
         __debugbreak();
       }
       if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 )
+      {
         CPile::NotifyTargetDieAndDetachAllObservers(PilePtr);
+      }
     }
-    for ( j = CStorageBuildingRole::GetReservedPile(this, a2); j; j = CStorageBuildingRole::GetReservedPile(this, a2) )
+    for ( j = CStorageBuildingRole::GetReservedPile(this, a2);
+          j;
+          j = CStorageBuildingRole::GetReservedPile(this, a2) )
     {
       CStorageBuildingRole::CheckEmptyPile(this, j);
       CPileMgr::GetPilePtr(j);
@@ -795,8 +838,7 @@ void  CStorageBuildingRole::SwitchGood(int a2, int a3) {
   }
   *((_BYTE *)this + a2 + 384) = a3;
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-  if ( !BuildingPtr
-    && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 503, "pTradingBuilding!=NULL") == 1 )
+  if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 503, "pTradingBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
@@ -804,13 +846,15 @@ void  CStorageBuildingRole::SwitchGood(int a2, int a3) {
   {
     v5 = IEntity::OwnerId(BuildingPtr);
     if ( v5 == CPlayerManager::GetLocalPlayerId() && IEntity::IsSelected((IEntity *)BuildingPtr) )
+    {
       CStorageBuildingRole::FillStorageSideBar(this, (struct CStorageSideBarInfo *)&g_cStorageSideBarInfo, 1);
+    }
   }
 }
 
 
 // address=[0x151e690]
-// Decompiled from char __thiscall CStorageBuildingRole::NotifyChangeEcoSector(  CStorageBuildingRole *this,  struct CPile *a2,  int a3,  int a4)
+// Decompiled from char __thiscall CStorageBuildingRole::NotifyChangeEcoSector(CStorageBuildingRole *this, struct CPile *a2, int a3, int a4)
 void  CStorageBuildingRole::NotifyChangeEcoSector(class CPile * a2, int a3, int a4) {
   
   int TradeRoleType; // eax
@@ -824,33 +868,35 @@ void  CStorageBuildingRole::NotifyChangeEcoSector(class CPile * a2, int a3, int 
   CEcoSector *v13; // [esp+Ch] [ebp-Ch]
   int i; // [esp+10h] [ebp-8h]
 
-  if ( CPile::GetRoleType(a2) != 4
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\StorageBuilding.cpp",
-         525,
-         "_pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+  if ( CPile::GetRoleType(a2) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 525, "_pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
   {
     __debugbreak();
   }
   LOBYTE(TradeRoleType) = 0;
   if ( a3 == a4 )
+  {
     return TradeRoleType;
+  }
   v13 = (CEcoSector *)CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, a3);
   if ( !v13 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 530, "pOldEcosector") == 1 )
+  {
     __debugbreak();
+  }
   v12 = (CEcoSector *)CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, a4);
   if ( !v12 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 532, "pNewEcosector") == 1 )
+  {
     __debugbreak();
+  }
   v10 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)a2 + 60))(a2);
   v11 = (void *)CPile::Role(a2);
   if ( CTradePileRole::GetTradeRoleType(v11) )
   {
-    if ( CTradePileRole::GetTradeRoleType(v11) == 1
-      || (TradeRoleType = CTradePileRole::GetTradeRoleType(v11), TradeRoleType == 2) )
+    if ( CTradePileRole::GetTradeRoleType(v11) == 1 || (TradeRoleType = CTradePileRole::GetTradeRoleType(v11), TradeRoleType == 2) )
     {
       if ( !v10 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 546, "iGoodType") == 1 )
+      {
         __debugbreak();
+      }
       v7 = IEntity::ID();
       CEcoSector::UnregisterGoodStoragePile(v13, *((unsigned __int16 *)this + 3), v7, v10);
       v8 = IEntity::ID();
@@ -864,7 +910,9 @@ void  CStorageBuildingRole::NotifyChangeEcoSector(class CPile * a2, int a3, int 
     v6 = IEntity::ID();
     LOBYTE(TradeRoleType) = CEcoSector::RegisterFreeStoragePile(v12, *((unsigned __int16 *)this + 3), v6);
   }
-  for ( i = 1; i < 43; ++i )
+  for ( i = 1;
+        i < 43;
+        ++i )
   {
     if ( *((_BYTE *)this + i + 384) )
     {
@@ -921,10 +969,14 @@ int  CStorageBuildingRole::NrSelectedStores(void) {
   int i; // [esp+8h] [ebp-4h]
 
   v2 = 0;
-  for ( i = 0; i < 43; ++i )
+  for ( i = 0;
+        i < 43;
+        ++i )
   {
     if ( *((_BYTE *)this + i + 384) )
+    {
       ++v2;
+    }
   }
   return v2;
 }
@@ -941,22 +993,21 @@ int  CStorageBuildingRole::NrUsedPiles(void) {
   signed int i; // [esp+10h] [ebp-4h]
 
   v6 = 0;
-  for ( i = 0; i < *(char *)(*((_DWORD *)this + 94) + 57); ++i )
+  for ( i = 0;
+        i < *(char *)(*((_DWORD *)this + 94) + 57);
+        ++i )
   {
     v1 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
     PilePtr = CPileMgr::GetPilePtr(*v1);
-    if ( CPile::GetRoleType(PilePtr) != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\StorageBuilding.cpp",
-           592,
-           "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+    if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 592, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v3 = (void *)CPile::Role(PilePtr);
     if ( CTradePileRole::GetTradeRoleType(v3) )
+    {
       ++v6;
+    }
   }
   return v6;
 }
@@ -980,25 +1031,33 @@ void  CStorageBuildingRole::CheckGoodToStore(void) {
 
   FullPile = CStorageBuildingRole::NrSelectedStores((CStorageBuildingRole *)this);
   if ( !FullPile )
+  {
     return FullPile;
+  }
   FullPile = CStorageBuildingRole::NrUsedPiles((CStorageBuildingRole *)this);
   if ( FullPile == *(char *)(*(_DWORD *)(this + 376) + 57) )
+  {
     return FullPile;
+  }
   v5 = CBuildingMgr::EcoSectorId((CBuildingMgr *)g_cBuildingMgr, *(unsigned __int16 *)(this + 6));
   v9 = (CEcoSector *)CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, v5);
   LOBYTE(FullPile) = CEcoSector::HaveFreeCarrier(v9);
   if ( !(_BYTE)FullPile )
+  {
     return FullPile;
-  *(_DWORD *)(this + 380) = CStorageBuildingRole::GetNextGoodToCheck(
-                              (CStorageBuildingRole *)this,
-                              *(_DWORD *)(this + 380));
+  }
+  *(_DWORD *)(this + 380) = CStorageBuildingRole::GetNextGoodToCheck((CStorageBuildingRole *)this, *(_DWORD *)(this + 380));
   LOBYTE(FullPile) = *(_BYTE *)(this + *(_DWORD *)(this + 380) + 384);
   if ( !(_BYTE)FullPile )
+  {
     return FullPile;
+  }
   FullPile = CEcoSector::GetFullPile(v9, *(_DWORD *)(this + 380));
   v8 = FullPile;
   if ( !FullPile )
+  {
     return FullPile;
+  }
   v7 = (*(int (__thiscall **)(int, _DWORD))(*(_DWORD *)this + 56))(this, *(_DWORD *)(this + 380));
   if ( v7 )
   {
@@ -1009,24 +1068,25 @@ void  CStorageBuildingRole::CheckGoodToStore(void) {
       v2 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
       FullPile = CPile::AmountComing(PilePtr);
       if ( FullPile + v2 < 8 )
+      {
         LOBYTE(FullPile) = CEcoSector::TransportGood(v9, v8, *(unsigned __int16 *)(this + 6));
+      }
     }
   }
   else
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       FullPile = *(_DWORD *)(this + 376);
       if ( i >= *(char *)(FullPile + 57) )
+      {
         break;
+      }
       v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((void *)(this + 428), i);
       v12 = CPileMgr::GetPilePtr(*v3);
-      if ( CPile::GetRoleType(v12) != 4
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Building\\StorageBuilding.cpp",
-             657,
-             "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+      if ( CPile::GetRoleType(v12) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 657, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
       {
         __debugbreak();
       }
@@ -1052,11 +1112,15 @@ int  CStorageBuildingRole::GetNextGoodToCheck(int a2) {
 
   v3 = a2 + 1;
   if ( a2 == 42 )
+  {
     v3 = 1;
+  }
   while ( !*((_BYTE *)this + v3 + 384) && v3 != a2 )
   {
     if ( ++v3 == 43 )
+    {
       v3 = 1;
+    }
   }
   return v3;
 }
@@ -1070,21 +1134,17 @@ int  CStorageBuildingRole::GetReservedPile(int a2) {
   signed int i; // [esp+4h] [ebp-8h]
   CPile *PilePtr; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < *(char *)(*((_DWORD *)this + 94) + 57); ++i )
+  for ( i = 0;
+        i < *(char *)(*((_DWORD *)this + 94) + 57);
+        ++i )
   {
     v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
     PilePtr = CPileMgr::GetPilePtr(*v2);
-    if ( CPile::GetRoleType(PilePtr) != 4
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\StorageBuilding.cpp",
-           715,
-           "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+    if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 715, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
-    if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2
-      && !(*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) )
+    if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 && !(*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) )
     {
       return *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 428, i);
     }
@@ -1105,24 +1165,25 @@ void  CStorageBuildingRole::CheckEmptyPile(int a2) {
   CPile *PilePtr; // [esp+10h] [ebp-4h]
 
   PilePtr = CPileMgr::GetPilePtr(a2);
-  if ( CPile::GetRoleType(PilePtr) != 4
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\StorageBuilding.cpp",
-         979,
-         "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+  if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 979, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
   {
     __debugbreak();
   }
   result = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
   if ( result )
+  {
     return result;
+  }
   v5 = CBuildingMgr::EcoSectorId((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
   if ( !v5 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 983, "iESID") == 1 )
+  {
     __debugbreak();
+  }
   v6 = (CEcoSector *)CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, v5);
   if ( !v6 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 985, "pEcosector") == 1 )
+  {
     __debugbreak();
+  }
   v3 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
   CEcoSector::UnregisterGoodStoragePile(v6, *((unsigned __int16 *)this + 3), a2, v3);
   CEcoSector::RegisterFreeStoragePile(v6, *((unsigned __int16 *)this + 3), a2);
@@ -1143,22 +1204,32 @@ bool  CStorageBuildingRole::CrushBuilding(void) {
   int i; // [esp+Ch] [ebp-4h]
 
   if ( !*((_WORD *)this + 3) )
+  {
     return 1;
+  }
   v1 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   v4 = CBuilding::EcoSectorId(v1);
   if ( !v4 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 103, "iESID") == 1 )
+  {
     __debugbreak();
+  }
   v3 = (CEcoSector *)CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, v4);
   if ( !v3 && BBSupportDbgReport(2, "MapObjects\\Building\\StorageBuilding.cpp", 105, "pEcosector") == 1 )
+  {
     __debugbreak();
-  for ( i = 1; i < 43; ++i )
+  }
+  for ( i = 1;
+        i < 43;
+        ++i )
+  {
     CEcoSector::UnregisterGoodStorage(v3, *((unsigned __int16 *)this + 3), i);
+  }
   return 1;
 }
 
 
 // address=[0x151fa10]
-// Decompiled from void __thiscall CStorageBuildingRole::ConvertEventIntoGoal(  CStorageBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
+// Decompiled from void __thiscall CStorageBuildingRole::ConvertEventIntoGoal(CStorageBuildingRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CStorageBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;

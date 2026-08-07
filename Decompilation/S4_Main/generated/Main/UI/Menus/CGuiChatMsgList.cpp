@@ -19,9 +19,13 @@
 bool  CGuiChatMsgList::AddListItem(char const * Str) {
   
   if ( this[10031] >= 200 )
+  {
     CGuiChatMsgList::RemoveListItem((CGuiChatMsgList *)this, 0);
+  }
   if ( strlen(Str) > 0xC8 )
+  {
     return 0;
+  }
   j__strcpy_0((char *)&this[50 * this[10031]++ + 30], Str);
   return 1;
 }
@@ -32,9 +36,13 @@ bool  CGuiChatMsgList::AddListItem(char const * Str) {
 bool  CGuiChatMsgList::SetListindex(int a2) {
   
   if ( a2 >= this[10031] )
+  {
     this[10030] = this[10031] - 1;
+  }
   else
+  {
     this[10030] = a2;
+  }
   return 1;
 }
 
@@ -47,8 +55,12 @@ bool  CGuiChatMsgList::SetTopindex(int a2) {
   int v4; // [esp+4h] [ebp-Ch]
   int i; // [esp+8h] [ebp-8h]
 
-  for ( i = 0; i < *((_DWORD *)this + 10032); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 10032);
+        ++i )
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 3 * i), *((_DWORD *)this + 3 * i + 1), 0);
+  }
   if ( a2 >= *((_DWORD *)this + 10031) )
   {
     *((_DWORD *)this + 10033) = *((_DWORD *)this + 10031) - 1;
@@ -56,12 +68,18 @@ bool  CGuiChatMsgList::SetTopindex(int a2) {
   else
   {
     if ( a2 < 0 )
+    {
       a2 = 0;
+    }
     *((_DWORD *)this + 10033) = a2;
   }
   v4 = *((_DWORD *)this + 10033);
-  for ( j = *((_DWORD *)this + 10032) - 1; j >= 0 && v4 >= 0; j = CGuiChatMsgList::SetListentry(this, v4--, j) )
+  for ( j = *((_DWORD *)this + 10032) - 1;
+        j >= 0 && v4 >= 0;
+        j = CGuiChatMsgList::SetListentry(this, v4--, j) )
+  {
     ;
+  }
   return 1;
 }
 
@@ -74,18 +92,28 @@ bool  CGuiChatMsgList::RemoveListItem(int a2) {
   int i; // [esp+4h] [ebp-8h]
 
   if ( a2 >= *((_DWORD *)this + 10031) )
+  {
     return 0;
+  }
   v3 = *((_DWORD *)this + 10031) - 1;
   if ( a2 < v3 )
   {
-    for ( i = a2; i < v3; ++i )
+    for ( i = a2;
+          i < v3;
+          ++i )
+    {
       j__strcpy_0((char *)this + 200 * i + 120, (const char *)this + 200 * i + 320);
+    }
   }
   --*((_DWORD *)this + 10031);
   if ( a2 >= *((_DWORD *)this + 10033) )
+  {
     CGuiChatMsgList::SetTopindex(this, *((_DWORD *)this + 10033));
+  }
   else
+  {
     CGuiChatMsgList::SetTopindex(this, *((_DWORD *)this + 10033) - 1);
+  }
   return 1;
 }
 
@@ -96,8 +124,12 @@ bool  CGuiChatMsgList::Clear(void) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 200; ++i )
+  for ( i = 0;
+        i < 200;
+        ++i )
+  {
     j__strcpy_0((char *)this + 200 * i + 120, &byte_368FC5F);
+  }
   *((_DWORD *)this + 10031) = 0;
   *((_DWORD *)this + 10030) = -1;
   return 1;
@@ -113,9 +145,15 @@ bool  CGuiChatMsgList::SetOutputControls(int a2, struct CGuiChatMsgList::SContro
   int i; // [esp+4h] [ebp-4h]
   int j; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *((_DWORD *)this + 10032); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 10032);
+        ++i )
+  {
     IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 3 * i), *((_DWORD *)this + 3 * i + 1), 0);
-  for ( j = 0; j < a2; ++j )
+  }
+  for ( j = 0;
+        j < a2;
+        ++j )
   {
     v3 = (_DWORD *)((char *)a3 + 12 * j);
     v4 = (_DWORD *)((char *)this + 12 * j);
@@ -143,18 +181,13 @@ int  CGuiChatMsgList::SetListentry(int a2, int a3) {
   v10 = a3;
   j__strcpy_0(Destination, (const char *)this + 200 * a2 + 120);
   IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 3 * v10), *((_DWORD *)this + 3 * v10 + 1), Destination);
-  IGuiEngine::SetControlVisibility(
-    (void *)g_pGUIEngine,
-    *((_DWORD *)this + 3 * v10),
-    *((_DWORD *)this + 3 * v10 + 1),
-    1);
+  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 3 * v10), *((_DWORD *)this + 3 * v10 + 1), 1);
   *((_DWORD *)this + 3 * a3 + 2) = a2;
-  Count = IGuiEngine::GetWrapPosition(
-            (IGuiEngine *)g_pGUIEngine,
-            *((_DWORD *)this + 3 * v10),
-            *((_DWORD *)this + 3 * v10 + 1));
+  Count = IGuiEngine::GetWrapPosition((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 3 * v10), *((_DWORD *)this + 3 * v10 + 1));
   if ( Count <= 0 )
+  {
     return v10 - 1;
+  }
   Counta = Count - 1;
   for ( Ptr = j___mbsninc((const unsigned __int8 *)Destination, Counta);
         Ptr > (const unsigned __int8 *)Destination && j___mbsncmp(Ptr, &byte_3690324, 1u);
@@ -163,9 +196,13 @@ int  CGuiChatMsgList::SetListentry(int a2, int a3) {
     ;
   }
   if ( j___mbsncmp(Ptr, &byte_369038C, 1u) )
+  {
     Ptra = j___mbsninc((const unsigned __int8 *)Destination, Counta);
+  }
   else
+  {
     Ptra = j___mbsinc(Ptr);
+  }
   v6 = *Ptra;
   *Ptra = 0;
   if ( a3 <= 0 )
@@ -175,16 +212,8 @@ int  CGuiChatMsgList::SetListentry(int a2, int a3) {
   }
   else
   {
-    IGuiEngine::SetText(
-      (void *)g_pGUIEngine,
-      *((_DWORD *)this + 3 * a3 - 3),
-      *((_DWORD *)this + 3 * a3 - 2),
-      Destination);
-    IGuiEngine::SetControlVisibility(
-      (void *)g_pGUIEngine,
-      *((_DWORD *)this + 3 * a3 - 3),
-      *((_DWORD *)this + 3 * a3 - 2),
-      1);
+    IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 3 * a3 - 3), *((_DWORD *)this + 3 * a3 - 2), Destination);
+    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 3 * a3 - 3), *((_DWORD *)this + 3 * a3 - 2), 1);
     *((_DWORD *)this + 3 * a3 - 1) = a2;
     *Ptra = v6;
     IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 3 * a3), *((_DWORD *)this + 3 * a3 + 1), (char *)Ptra);

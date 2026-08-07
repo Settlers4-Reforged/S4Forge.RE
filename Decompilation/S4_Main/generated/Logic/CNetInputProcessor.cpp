@@ -163,13 +163,7 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
   v132 = *((_DWORD *)a2 + 1);
   v152 = *((unsigned __int8 *)a2 + 30);
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  IMessageTracer::PushFormatedInts(
-    (IMessageTracer *)g_pMsgTracer,
-    "CNetInputProcessor::Process(): msg %i, owner %i, wparam 0x%08x, lparam 0x%08x",
-    v132,
-    v152,
-    *((_DWORD *)a2 + 2),
-    *((_DWORD *)a2 + 3));
+  IMessageTracer::PushFormatedInts((IMessageTracer *)g_pMsgTracer, "CNetInputProcessor::Process(): msg %i, owner %i, wparam 0x%08x, lparam 0x%08x", v132, v152, *((_DWORD *)a2 + 2), *((_DWORD *)a2 + 3));
   v145 = v132 - 5001;
   switch ( v132 )
   {
@@ -185,7 +179,9 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
           CEvn_Logic::CEvn_Logic((CEvn_Logic *)v153, 0x193u, 0, 0, 0, 0, 0);
           v154 = 0;
           if ( g_pEvnEngine )
+          {
             IEventEngine::SendAMessage(g_pEvnEngine, v153);
+          }
           v154 = -1;
           CEvn_Logic::~CEvn_Logic(v153);
         }
@@ -194,11 +190,15 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
     case 5002:
       v131 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(*((_DWORD *)a2 + 2), v152);
       if ( v131 )
+      {
         CBuilding::CrushBuilding(v131);
+      }
       break;
     case 5003:
       if ( CNetInputProcessor::GetAliveBuildingPtrOfPlayer(*((_DWORD *)a2 + 2), v152) )
+      {
         CBuilding::Switch();
+      }
       break;
     case 5004:
       v84 = *((_DWORD *)a2 + 2);
@@ -208,14 +208,11 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
         if ( !(unsigned __int8)CBuilding::IsBuildUp(v141) )
         {
           v2 = (void **)CBuilding::Role(v141);
-          v140 = j____RTDynamicCast(
-                   v2,
-                   0,
-                   &IBuildingRole__RTTI_Type_Descriptor_,
-                   &CBuildingSiteRole__RTTI_Type_Descriptor_,
-                   0);
+          v140 = j____RTDynamicCast(v2, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CBuildingSiteRole__RTTI_Type_Descriptor_, 0);
           if ( v140 )
+          {
             (*(void (__thiscall **)(int))(*(_DWORD *)v140 + 36))(v140);
+          }
         }
       }
       break;
@@ -229,23 +226,15 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
         if ( AliveBuildingPtr )
         {
           v3 = (void **)CBuilding::Role(v130);
-          v127 = (CTradingBuildingRole *)j____RTDynamicCast(
-                                           v3,
-                                           0,
-                                           &IBuildingRole__RTTI_Type_Descriptor_,
-                                           &CTradingBuildingRole__RTTI_Type_Descriptor_,
-                                           0);
+          v127 = (CTradingBuildingRole *)j____RTDynamicCast(v3, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
           v4 = (void **)CBuilding::Role(AliveBuildingPtr);
-          v82 = j____RTDynamicCast(
-                  v4,
-                  0,
-                  &IBuildingRole__RTTI_Type_Descriptor_,
-                  &CTradingBuildingRole__RTTI_Type_Descriptor_,
-                  0);
+          v82 = j____RTDynamicCast(v4, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
           if ( v127 )
           {
             if ( v82 )
+            {
               CTradingBuildingRole::SetTradeTarget(v127, v128);
+            }
           }
         }
       }
@@ -258,14 +247,11 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       if ( v126 )
       {
         v5 = (void **)CBuilding::Role(v126);
-        v125 = (CTradingBuildingRole *)j____RTDynamicCast(
-                                         v5,
-                                         0,
-                                         &IBuildingRole__RTTI_Type_Descriptor_,
-                                         &CTradingBuildingRole__RTTI_Type_Descriptor_,
-                                         0);
+        v125 = (CTradingBuildingRole *)j____RTDynamicCast(v5, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
         if ( v125 )
+        {
           CTradingBuildingRole::TransportGood(v125, v79, v80);
+        }
       }
       break;
     case 5007:
@@ -275,14 +261,11 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       if ( v124 )
       {
         v6 = (void **)CBuilding::Role(v124);
-        v123 = (CTradingBuildingRole *)j____RTDynamicCast(
-                                         v6,
-                                         0,
-                                         &IBuildingRole__RTTI_Type_Descriptor_,
-                                         &CTradingBuildingRole__RTTI_Type_Descriptor_,
-                                         0);
+        v123 = (CTradingBuildingRole *)j____RTDynamicCast(v6, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
         if ( v123 )
+        {
           CTradingBuildingRole::TradeWith(v123, v77);
+        }
       }
       break;
     case 5008:
@@ -292,54 +275,55 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       if ( v122 )
       {
         v7 = (void **)CBuilding::Role(v122);
-        v121 = (CTradingBuildingRole *)j____RTDynamicCast(
-                                         v7,
-                                         0,
-                                         &IBuildingRole__RTTI_Type_Descriptor_,
-                                         &CTradingBuildingRole__RTTI_Type_Descriptor_,
-                                         0);
+        v121 = (CTradingBuildingRole *)j____RTDynamicCast(v7, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
         if ( v121 )
+        {
           CTradingBuildingRole::TradeGood(v121, v75);
+        }
       }
       break;
     case 5009:
       v74 = *((_DWORD *)a2 + 2);
       ReadyVehiclePtr = CNetInputProcessor::GetReadyVehiclePtr(v74);
       if ( ReadyVehiclePtr )
+      {
         (*(void (__thiscall **)(struct CVehicle *))(*(_DWORD *)ReadyVehiclePtr + 152))(ReadyVehiclePtr);
+      }
       break;
     case 5010:
       v120 = (void **)CNetInputProcessor::GetReadyVehiclePtr(*((_DWORD *)a2 + 2));
       if ( v120 )
       {
-        v119 = (CCatapult *)j____RTDynamicCast(
-                              v120,
-                              0,
-                              &CVehicle__RTTI_Type_Descriptor_,
-                              &CCatapult__RTTI_Type_Descriptor_,
-                              0);
+        v119 = (CCatapult *)j____RTDynamicCast(v120, 0, &CVehicle__RTTI_Type_Descriptor_, &CCatapult__RTTI_Type_Descriptor_, 0);
         if ( v119 )
+        {
           CCatapult::RequestAmmoDonkey(v119);
+        }
       }
       break;
     case 5011:
       ReadyCartPtr = CNetInputProcessor::GetReadyCartPtr(*((_DWORD *)a2 + 2));
       if ( ReadyCartPtr )
+      {
         CCart::CreateSettlement(ReadyCartPtr);
+      }
       break;
     case 5012:
       v117 = CNetInputProcessor::GetReadyCartPtr(*((_DWORD *)a2 + 2));
       if ( v117 )
+      {
         CCart::CreateFoundationCart(v117);
+      }
       break;
     case 5013:
       v116 = CNetInputProcessor::GetReadyCartPtr(*((_DWORD *)a2 + 2));
       if ( v116 )
+      {
         CCart::CreateNormalCart(v116);
+      }
       break;
     case 5014:
-      if ( !*((_DWORD *)a2 + 6)
-        && BBSupportDbgReport(2, "Logic\\NetInputProcessor.cpp", 621, "_rEvent.m_iData != 0") == 1 )
+      if ( !*((_DWORD *)a2 + 6) && BBSupportDbgReport(2, "Logic\\NetInputProcessor.cpp", 621, "_rEvent.m_iData != 0") == 1 )
       {
         __debugbreak();
       }
@@ -347,69 +331,45 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       v115 = (void *)*((_DWORD *)a2 + 6);
       v72 = Y16X16::UnpackXFast(*((_DWORD *)a2 + 2));
       v73 = Y16X16::UnpackYFast(*((_DWORD *)a2 + 2));
-      (*(void (__thiscall **)(void *, int, void *, int, int, _DWORD))(*(_DWORD *)g_pGroupMgr + 40))(
-        g_pGroupMgr,
-        v71,
-        v115,
-        v72,
-        v73,
-        *((_DWORD *)a2 + 3));
+      (*(void (__thiscall **)(void *, int, void *, int, int, _DWORD))(*(_DWORD *)g_pGroupMgr + 40))(g_pGroupMgr, v71, v115, v72, v73, *((_DWORD *)a2 + 3));
       C = v115;
       operator delete[](v115);
       break;
     case 5015:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             638,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_FORCE_GOTO") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 638, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_FORCE_GOTO") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5016:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             645,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_STAND_GROUND") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 645, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_STAND_GROUND") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5017:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             652,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_SET_WAYPOINT") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 652, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_SET_WAYPOINT") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5018:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             659,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_PATROL") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 659, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_PATROL") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5019:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             666,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_INJURED_OUT") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 666, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_INJURED_OUT") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5020:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             673,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_ESCORT") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 673, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_ESCORT") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5021:
       v138 = (unsigned __int16 *)*((_DWORD *)a2 + 6);
@@ -417,15 +377,15 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       v68 = v69 >> 1;
       if ( v138 )
       {
-        for ( i = 0; i < v68; ++i )
+        for ( i = 0;
+              i < v68;
+              ++i )
         {
           v67 = v138[i];
           ReadySettlerPtr = (CPropertySet *)CNetInputProcessor::GetReadySettlerPtr(v67);
           if ( ReadySettlerPtr )
           {
-            if ( IEntity::OwnerId((unsigned __int8 *)ReadySettlerPtr) == v152
-              && !IEntity::FlagBits(ReadySettlerPtr, ENTITY_FLAG_ON_BOARD)
-              && IEntity::WarriorType() == 7 )
+            if ( IEntity::OwnerId((unsigned __int8 *)ReadySettlerPtr) == v152 && !IEntity::FlagBits(ReadySettlerPtr, ENTITY_FLAG_ON_BOARD) && IEntity::WarriorType() == 7 )
             {
               v113 = IEntity::X(ReadySettlerPtr);
               v114 = IEntity::Y(ReadySettlerPtr);
@@ -438,7 +398,9 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
                   v110 = EcoSectorPtr ? CEcoSector::Owner(EcoSectorPtr) : 0;
                   v66 = v110;
                   if ( v110 == v152 )
+                  {
                     CSettler::ChangeType(ReadySettlerPtr, 1, 1, 0);
+                  }
                 }
               }
             }
@@ -449,31 +411,22 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       operator delete[](v138);
       break;
     case 5022:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             735,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_ENTITY_TO_SELECTION") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 735, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_ENTITY_TO_SELECTION") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5023:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             742,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_SELECT_KIND") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 742, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_SELECT_KIND") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5024:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             749,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_SELECT_TYPE") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 749, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_SELECT_TYPE") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5025:
       v64 = *((_DWORD *)a2 + 2);
@@ -483,13 +436,10 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       CBuildingMgr::CheckForBuild((CBuildingMgr *)g_cBuildingMgr, v62, v63, *((unsigned __int8 *)a2 + 30), v64, 1);
       break;
     case 5026:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             776,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_SEARCH_UNIT") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 776, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_SEARCH_UNIT") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5027:
       v61 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
@@ -497,7 +447,9 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       v60 = *((_DWORD *)a2 + 3);
       EcoSectorPtrOfPlayer = CNetInputProcessor::GetEcoSectorPtrOfPlayer(v61, v152);
       if ( EcoSectorPtrOfPlayer )
+      {
         CEcoSector::ChangeMinMaxValues(EcoSectorPtrOfPlayer, v59, v60);
+      }
       break;
     case 5028:
       v56 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
@@ -506,26 +458,27 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       v58 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 3));
       v107 = CNetInputProcessor::GetEcoSectorPtrOfPlayer(v58, v152);
       if ( v107 )
+      {
         CEcoSector::ChangeBuildingSupplyPrio(v107, v55, v56, (unsigned __int8)v57);
+      }
       break;
     case 5029:
       v54 = CNetInputProcessor::UnpackSignedLoValue(*((_DWORD *)a2 + 2));
       v53 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
       v106 = *((_DWORD *)a2 + 3);
       if ( CNetInputProcessor::GetEcoSectorPtrOfPlayer(v106, v152) )
+      {
         CEcoSectorMgr::ChangeTransportPrio(v53, v54, v106);
+      }
       break;
     case 5030:
       v33 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(*((_DWORD *)a2 + 2), v152);
       v8 = (void **)CBuilding::Role(v33);
-      v105 = (CWorkshopBuildingRole *)j____RTDynamicCast(
-                                        v8,
-                                        0,
-                                        &IBuildingRole__RTTI_Type_Descriptor_,
-                                        &CWorkshopBuildingRole__RTTI_Type_Descriptor_,
-                                        0);
+      v105 = (CWorkshopBuildingRole *)j____RTDynamicCast(v8, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CWorkshopBuildingRole__RTTI_Type_Descriptor_, 0);
       if ( v105 )
+      {
         CWorkshopBuildingRole::CancelCurrentProduction(v105);
+      }
       break;
     case 5031:
       v51 = *((_DWORD *)a2 + 2);
@@ -601,34 +554,27 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       v42 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v43, v152);
       v102 = CNetInputProcessor::GetBuildingEcoSectorPtr(v42);
       if ( v102 )
+      {
         CEcoSector::SetWeaponAutoProduction(v102, v41 != 1);
+      }
       break;
     case 5036:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             964,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_STANDARD_PRODUCTION") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 964, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_STANDARD_PRODUCTION") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5037:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             971,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_SET_GOOD_SWITCH") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 971, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_SET_GOOD_SWITCH") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5038:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             978,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_SET_JOB_PERCENT") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 978, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_SET_JOB_PERCENT") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5039:
       v38 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
@@ -636,7 +582,9 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       v39 = *((_DWORD *)a2 + 3);
       v101 = CNetInputProcessor::GetEcoSectorPtrOfPlayer(v40, v152);
       if ( v101 )
+      {
         CEcoSector::ChangeSpecialistWish(v101, v38, v39);
+      }
       break;
     case 5040:
       v35 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
@@ -646,14 +594,11 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       if ( v100 )
       {
         v10 = (void **)CBuilding::Role(v100);
-        v99 = (CWorkshopBuildingRole *)j____RTDynamicCast(
-                                         v10,
-                                         0,
-                                         &IBuildingRole__RTTI_Type_Descriptor_,
-                                         &CWorkshopBuildingRole__RTTI_Type_Descriptor_,
-                                         0);
+        v99 = (CWorkshopBuildingRole *)j____RTDynamicCast(v10, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CWorkshopBuildingRole__RTTI_Type_Descriptor_, 0);
         if ( v99 )
+        {
           CWorkshopBuildingRole::TakeOrder(v99, v35, v36);
+        }
       }
       break;
     case 5041:
@@ -663,7 +608,9 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
         v98 = *((_DWORD *)a2 + 2);
         v34 = *((unsigned __int16 *)a2 + 14) >> 1;
         (*(void (__thiscall **)(void *, int, int))(*(_DWORD *)g_pGroupMgr + 32))(g_pGroupMgr, v152, v98);
-        for ( j = 0; j < v34; ++j )
+        for ( j = 0;
+              j < v34;
+              ++j )
         {
           v134 = v133[j];
           if ( CNetInputProcessor::IsReadyEntityOfPlayer(v134, v152) )
@@ -677,22 +624,16 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       }
       break;
     case 5042:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             1052,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_GROUP_TO_SELECTION") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 1052, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_GROUP_TO_SELECTION") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5043:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             1059,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_SELECT_GROUP") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 1059, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_SELECT_GROUP") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5044:
       v30 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
@@ -702,33 +643,24 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       if ( v97 )
       {
         v11 = (void **)CBuilding::Role(v97);
-        v96 = (CStorageBuildingRole *)j____RTDynamicCast(
-                                        v11,
-                                        0,
-                                        &IBuildingRole__RTTI_Type_Descriptor_,
-                                        &CStorageBuildingRole__RTTI_Type_Descriptor_,
-                                        0);
+        v96 = (CStorageBuildingRole *)j____RTDynamicCast(v11, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CStorageBuildingRole__RTTI_Type_Descriptor_, 0);
         if ( v96 )
+        {
           CStorageBuildingRole::SwitchGood(v96, v30, v31);
+        }
       }
       break;
     case 5045:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             1087,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_SET_GOOD_PRIORITY") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 1087, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_SET_GOOD_PRIORITY") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5046:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             1094,
-             "CNetInputProcessor::Process(): Unsupported message %s!",
-             "NET_LOGIC_MSG_SET_TRADE") == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 1094, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_SET_TRADE") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 5047:
       v93 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
@@ -740,20 +672,19 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
         if ( IEntity::Race(v142) == 3 )
         {
           v12 = (void **)CBuilding::Role(v142);
-          v87 = (CDarkTempleRole *)j____RTDynamicCast(
-                                     v12,
-                                     0,
-                                     &IBuildingRole__RTTI_Type_Descriptor_,
-                                     &CDarkTempleRole__RTTI_Type_Descriptor_,
-                                     0);
+          v87 = (CDarkTempleRole *)j____RTDynamicCast(v12, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CDarkTempleRole__RTTI_Type_Descriptor_, 0);
           if ( v87 )
+          {
             CDarkTempleRole::TakeOrder(v87, v93, v94);
+          }
         }
         else
         {
           v92 = CNetInputProcessor::GetBuildingEcoSectorPtr(v142);
           if ( v92 )
+          {
             CEcoSector::TakeSoldierOrder(v92, v93, v94);
+          }
         }
       }
       break;
@@ -777,23 +708,14 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       VehiclePtr = (void **)CVehicleMgr::GetVehiclePtr(v90);
       if ( VehiclePtr )
       {
-        if ( !IEntity::FlagBits(VehiclePtr, (EntityFlag)&MEMORY[0x4000000])
-          && IEntity::OwnerId((unsigned __int8 *)VehiclePtr) == v152 )
+        if ( !IEntity::FlagBits(VehiclePtr, (EntityFlag)&MEMORY[0x4000000]) && IEntity::OwnerId((unsigned __int8 *)VehiclePtr) == v152 )
         {
           if ( j____RTDynamicCast(VehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CWheeler__RTTI_Type_Descriptor_, 0) )
           {
             v91 = CLogic::Effects((DWORD *)g_pLogic);
             v15 = IEntity::Y(VehiclePtr);
             v13 = IEntity::X(VehiclePtr);
-            (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v91 + 16))(
-              v91,
-              62,
-              3,
-              v13,
-              v15,
-              0,
-              0,
-              0);
+            (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v91 + 16))(v91, 62, 3, v13, v15, 0, 0, 0);
             CVehicleMgr::DeleteVehicle((CVehicleMgr *)&g_cVehicleMgr, v90);
           }
         }
@@ -807,33 +729,24 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       if ( v89 )
       {
         v14 = (void **)CBuilding::Role(v89);
-        v88 = (CTradingBuildingRole *)j____RTDynamicCast(
-                                        v14,
-                                        0,
-                                        &IBuildingRole__RTTI_Type_Descriptor_,
-                                        &CTradingBuildingRole__RTTI_Type_Descriptor_,
-                                        0);
+        v88 = (CTradingBuildingRole *)j____RTDynamicCast(v14, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
         if ( v88 )
+        {
           CTradingBuildingRole::ChangeTradeStatus(v88, v21, v151);
+        }
       }
       break;
     case 5051:
       (*(void (__thiscall **)(void *, _DWORD))(*(_DWORD *)g_pHJBMgr + 12))(g_pHJBMgr, *((unsigned __int8 *)a2 + 30));
       break;
     case 5052:
-      (*(void (__thiscall **)(void *, _DWORD, _DWORD))(*(_DWORD *)g_pHJBMgr + 16))(
-        g_pHJBMgr,
-        *((unsigned __int8 *)a2 + 30),
-        *((_DWORD *)a2 + 2));
+      (*(void (__thiscall **)(void *, _DWORD, _DWORD))(*(_DWORD *)g_pHJBMgr + 16))(g_pHJBMgr, *((unsigned __int8 *)a2 + 30), *((_DWORD *)a2 + 2));
       break;
     default:
-      if ( BBSupportDbgReportF(
-             1,
-             "Logic\\NetInputProcessor.cpp",
-             1228,
-             "CNetInputProcessor::Process(): Unsupported message %i!",
-             v132) == 1 )
+      if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 1228, "CNetInputProcessor::Process(): Unsupported message %i!", v132) == 1 )
+      {
         __debugbreak();
+      }
       break;
   }
 }
@@ -855,8 +768,12 @@ char * __cdecl CNetInputProcessor::DbgMsgName(int a1) {
   
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; word_3D897D0[2 * i] != -1 && word_3D897D0[2 * i] != a1; ++i )
+  for ( i = 0;
+        word_3D897D0[2 * i] != -1 && word_3D897D0[2 * i] != a1;
+        ++i )
+  {
     ;
+  }
   return (&off_3D897D4)[2 * i];
 }
 
@@ -869,9 +786,13 @@ class CSettler * __cdecl CNetInputProcessor::GetReadySettlerPtr(int a1) {
 
   SettlerPtr = (_DWORD *)CSettlerMgr::GetSettlerPtr(a1);
   if ( SettlerPtr && IEntity::FlagBits(SettlerPtr, (EntityFlag)&loc_1C00000) )
+  {
     return SettlerPtr;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -883,9 +804,13 @@ class CSettler * __cdecl CNetInputProcessor::GetReadySettlerPtrOfType(int a1, in
 
   SettlerPtr = (unsigned __int16 *)CSettlerMgr::GetSettlerPtr(a1);
   if ( SettlerPtr && IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Ready) && IEntity::Type(SettlerPtr) == a2 )
+  {
     return SettlerPtr;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -897,9 +822,13 @@ class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtr(int a1) {
 
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
   if ( !BuildingPtr || IEntity::FlagBits(BuildingPtr, (EntityFlag)&MEMORY[0x4000000]) )
+  {
     return 0;
+  }
   else
+  {
     return BuildingPtr;
+  }
 }
 
 
@@ -910,9 +839,7 @@ class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtrOfPlayer(int a1
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-4h]
 
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
-  if ( BuildingPtr
-    && !IEntity::FlagBits(BuildingPtr, (EntityFlag)&MEMORY[0x4000000])
-    && IEntity::OwnerId(BuildingPtr) == a2 )
+  if ( BuildingPtr && !IEntity::FlagBits(BuildingPtr, (EntityFlag)&MEMORY[0x4000000]) && IEntity::OwnerId(BuildingPtr) == a2 )
   {
     return BuildingPtr;
   }
@@ -931,9 +858,13 @@ class CVehicle * __cdecl CNetInputProcessor::GetReadyVehiclePtr(int a1) {
 
   VehiclePtr = CVehicleMgr::GetVehiclePtr(a1);
   if ( VehiclePtr && IEntity::FlagBits(VehiclePtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  {
     return VehiclePtr;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -945,9 +876,13 @@ class CCart * __cdecl CNetInputProcessor::GetReadyCartPtr(int a1) {
 
   ReadyVehiclePtr = (void **)CNetInputProcessor::GetReadyVehiclePtr(a1);
   if ( ReadyVehiclePtr )
+  {
     return j____RTDynamicCast(ReadyVehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CCart__RTTI_Type_Descriptor_, 0);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -958,12 +893,18 @@ class CEcoSector * __cdecl CNetInputProcessor::GetEcoSectorPtrOfPlayer(int a1, i
   struct CEcoSector *EcoSectorPtr; // [esp+0h] [ebp-4h]
 
   if ( a1 <= 0 )
+  {
     return 0;
+  }
   EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, a1);
   if ( EcoSectorPtr && CEcoSector::Owner(EcoSectorPtr) == a2 )
+  {
     return EcoSectorPtr;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -975,13 +916,19 @@ class CEcoSector * __cdecl CNetInputProcessor::GetBuildingEcoSectorPtr(class CBu
   int v4; // [esp+8h] [ebp-4h]
 
   if ( !a1 )
+  {
     return 0;
+  }
   v1 = CBuilding::EnsignWorldIdx(a1);
   v4 = CWorldManager::EcoSectorId(v1);
   if ( v4 <= 0 )
+  {
     return 0;
+  }
   else
+  {
     return CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v4);
+  }
 }
 
 

@@ -9,7 +9,9 @@ void  CManySettlerTypesIterator::Init(int a2, int a3, int a4) {
   int result; // eax
 
   if ( !a4 )
+  {
     a4 = a3;
+  }
   CSettlerIteratorBase::Init(this, 0);
   *((_DWORD *)this + 2) = a2;
   *((_DWORD *)this + 3) = a3;
@@ -26,15 +28,16 @@ int  CManySettlerTypesIterator::FirstSettler(void) {
   bool v2; // [esp+0h] [ebp-8h]
 
   *(_DWORD *)this = *((_DWORD *)this + 3);
-  *((_DWORD *)this + 1) = CSettlerMgr::GetFirstSettlerId(
-                            (CSettlerMgr *)g_cSettlerMgr,
-                            *((_DWORD *)this + 2),
-                            *((_DWORD *)this + 3));
+  *((_DWORD *)this + 1) = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, *((_DWORD *)this + 2), *((_DWORD *)this + 3));
   v2 = *((_DWORD *)this + 1) != 0;
   if ( (v2 & CSettlerIteratorBase::SettlerValid(this, *((_DWORD *)this + 1))) != 0 )
+  {
     return *((_DWORD *)this + 1);
+  }
   else
+  {
     return CManySettlerTypesIterator::NextSettler(this);
+  }
 }
 
 
@@ -71,14 +74,18 @@ int  CManySettlerTypesIterator::NextSettler(void) {
 int  CManySettlerTypesIterator::NextSettlerIfCurrentIsNotValid(void) {
   
   if ( CSettlerIteratorBase::SettlerValid(this, *((_DWORD *)this + 1)) )
+  {
     return *((_DWORD *)this + 1);
+  }
   else
+  {
     return CManySettlerTypesIterator::NextSettler(this);
+  }
 }
 
 
 // address=[0x1317210]
-// Decompiled from CManySettlerTypesIterator *__thiscall CManySettlerTypesIterator::CManySettlerTypesIterator(  CManySettlerTypesIterator *this)
+// Decompiled from CManySettlerTypesIterator *__thiscall CManySettlerTypesIterator::CManySettlerTypesIterator(CManySettlerTypesIterator *this)
  CManySettlerTypesIterator::CManySettlerTypesIterator(void) {
   
   return this;

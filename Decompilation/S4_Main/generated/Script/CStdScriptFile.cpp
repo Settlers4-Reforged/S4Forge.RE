@@ -16,7 +16,9 @@
   this->m_pScript = 0;
   this->m_uSize = 0;
   if ( !FileName )
+  {
     return this;
+  }
   CFileEx::CFileEx(&v4, UNUSED_ARG());
   LOBYTE(v5) = 1;
   CFileEx::Open(&v4.IFileEx, FileName, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());

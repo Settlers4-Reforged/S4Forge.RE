@@ -43,7 +43,9 @@ void  CMsgStack::Clear(void) {
   {
     result = (unsigned __int8)std::list<CNet_Event>::empty(&this->this_list, this);
     if ( (_BYTE)result )
+    {
       break;
+    }
     std::list<CNet_Event>::pop_front(&this->this_list);
   }
   return result;
@@ -85,10 +87,14 @@ bool  CMsgStack::IsValid(void) {
   int v2; // [esp+4h] [ebp-8h]
 
   if ( !CMsgStack::IsSizeAlreadySet(this) )
+  {
     return 0;
+  }
   v2 = std::list<CNet_Event>::size(&this->this_list);
   if ( v2 > this->m_iExpectedSize )
+  {
     CTrace::Print("MsgStacks.cpp: Message stack is: %d expected: %d!", v2, this->m_iExpectedSize);
+  }
   return this->m_iExpectedSize == v2;
 }
 
@@ -134,7 +140,9 @@ bool  CMsgStack::IsInStack(unsigned char _iId) {
     LOBYTE(v11) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>(v4);
     if ( !v10 )
+    {
       break;
+    }
     if ( std::_List_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>::operator*(v5)->m_iMsgNr == _iId )
     {
       v9 = 1;

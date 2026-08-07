@@ -26,18 +26,22 @@ int const *  CConfigVarIntArray::GetIntArray(void)const {
   CDynamicConfigVar::CDynamicConfigVar(this, CONFIGVAR_TYPE_INT_ARRAY, _iSize);
   this->__vftable = (CConfigVar_vtbl *)&CConfigVarIntArray::_vftable_;
   if ( _iSize <= 0 && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1352, "_iSize > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iSize >= 256 && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1353, "_iSize < 256") == 1 )
+  {
     __debugbreak();
-  this->value = (int *)operator new[](
-                         (unsigned __int64)(unsigned int)_iSize >> 0x1E != 0 ? -1 : 4 * _iSize,
-                         1,
-                         "Source\\ConfigManager\\ConfigManager.cpp",
-                         1355);
+  }
+  this->value = (int *)operator new[]((unsigned __int64)(unsigned int)_iSize >> 0x1E != 0 ? -1 : 4 * _iSize, 1, "Source\\ConfigManager\\ConfigManager.cpp", 1355);
   if ( Src )
+  {
     memcpy(this->value, Src, 4 * _iSize);
+  }
   else
+  {
     memset(this->value, 0, 4 * _iSize);
+  }
   return this;
 }
 

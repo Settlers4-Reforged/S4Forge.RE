@@ -17,7 +17,9 @@ int __cdecl CAStar64Normal::MoveCosts(int a1, int a2) {
   int v2; // esi
 
   if ( a2 >= 7 || !CWorldManager::SettlerId(a1) )
+  {
     return CAStar64::WorldMoveCostsNoRoad(a1);
+  }
   v2 = CAStar64::WorldMoveCostsNoRoad(a1);
   return v2 + CAStar64::SettlerDisplacementCosts(a1, a2);
 }

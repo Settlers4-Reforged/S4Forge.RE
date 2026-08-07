@@ -14,9 +14,13 @@
   *((_DWORD *)this + 3) = a2;
   C = (CParam *)operator new(0x1Cu);
   if ( C )
+  {
     v4 = CParam::CParam(C, *((_DWORD *)a3 + 3), *((_DWORD *)a3 + 4), *((_DWORD *)a3 + 5), *((_DWORD *)a3 + 6));
+  }
   else
+  {
     v4 = 0;
+  }
   *((_DWORD *)this + 4) = v4;
   return this;
 }
@@ -28,7 +32,9 @@
   
   *(_DWORD *)this = &CHistorySolution::_vftable_;
   if ( *((_DWORD *)this + 4) )
+  {
     (***((void (__thiscall ****)(_DWORD, int))this + 4))(*((_DWORD *)this + 4), 1);
+  }
   CDynListEntry::~CDynListEntry(this);
 }
 

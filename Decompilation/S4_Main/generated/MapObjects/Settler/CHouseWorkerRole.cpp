@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CHouseWorkerRole::New(std::istream & a1) {
   
   if ( operator new(0x34u) )
+  {
     return CHouseWorkerRole::CHouseWorkerRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -61,7 +65,9 @@ void  CHouseWorkerRole::LogicUpdateJob(class CSettler * a2) {
 
   result = (_BYTE *)(*(int (__thiscall **)(_BYTE *, CMFCCaptionButton *))(*(_DWORD *)this + 124))(this, a2);
   if ( !(_BYTE)result )
+  {
     return result;
+  }
   ISettlerRole::Update(a2);
   result = this;
   switch ( this[4] )
@@ -69,40 +75,44 @@ void  CHouseWorkerRole::LogicUpdateJob(class CSettler * a2) {
     case 0:
       this[6] -= 9;
       if ( (char)this[6] <= 0 )
+      {
         goto LABEL_62;
+      }
       result = (_BYTE *)IAnimatedEntity::RegisterForLogicUpdate(9);
       break;
     case 1:
       if ( (char)this[6] <= (int)(unsigned __int8)this[7] )
+      {
         v21 = (char)this[6];
+      }
       else
+      {
         v21 = (unsigned __int8)this[7];
+      }
       this[6] -= v21;
       if ( (char)this[6] <= 0 )
       {
         if ( IEntity::Type((unsigned __int16 *)a2) == 20 )
         {
-          if ( !*((_WORD *)this + 17)
-            && BBSupportDbgReport(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 326, "m_uEntityId") == 1 )
+          if ( !*((_WORD *)this + 17) && BBSupportDbgReport(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 326, "m_uEntityId") == 1 )
           {
             __debugbreak();
           }
           v27 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 17));
           if ( !v27 && BBSupportDbgReport(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 328, "pEntity") == 1 )
+          {
             __debugbreak();
+          }
           if ( v27 )
           {
-            if ( IEntity::ObjType(v27) != 1
-              && BBSupportDbgReport(
-                   2,
-                   "MapObjects\\Settler\\HouseWorkerRole.cpp",
-                   331,
-                   "pEntity->ObjType() == SETTLER_OBJ") == 1 )
+            if ( IEntity::ObjType(v27) != 1 && BBSupportDbgReport(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 331, "pEntity->ObjType() == SETTLER_OBJ") == 1 )
             {
               __debugbreak();
             }
             if ( IEntity::ObjType(v27) == 1 )
+            {
               (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v27 + 24))(v27, -1);
+            }
           }
         }
         goto LABEL_62;
@@ -112,17 +122,27 @@ void  CHouseWorkerRole::LogicUpdateJob(class CSettler * a2) {
     case 2:
       this[6] -= 31;
       if ( (char)this[6] <= 0 )
+      {
         goto LABEL_62;
+      }
       if ( (char)this[6] <= 31 )
+      {
         result = (_BYTE *)IAnimatedEntity::RegisterForLogicUpdate((char)this[6]);
+      }
       else
+      {
         result = (_BYTE *)IAnimatedEntity::RegisterForLogicUpdate(31);
+      }
       break;
     case 3:
       if ( (char)this[6] <= (int)(unsigned __int8)this[7] )
+      {
         v20 = (char)this[6];
+      }
       else
+      {
         v20 = (unsigned __int8)this[7];
+      }
       this[6] -= v20;
       if ( (char)this[6] <= 0 )
       {
@@ -130,7 +150,9 @@ void  CHouseWorkerRole::LogicUpdateJob(class CSettler * a2) {
         {
           VehiclePtr = CVehicleMgr::GetVehiclePtr(*((unsigned __int16 *)this + 17));
           if ( VehiclePtr )
+          {
             CVehicle::AddBuildingMaterial(VehiclePtr, (CVehicle *)(unsigned __int8)this[11]);
+          }
           this[11] = 0;
         }
         goto LABEL_62;
@@ -142,7 +164,9 @@ void  CHouseWorkerRole::LogicUpdateJob(class CSettler * a2) {
       v25 = (unsigned __int8)this[7] / 2;
       this[6] -= v25;
       if ( (char)this[6] < v25 )
+      {
         goto LABEL_62;
+      }
       if ( IEntity::Type((unsigned __int16 *)a2) == 15 )
       {
         v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
@@ -153,14 +177,11 @@ void  CHouseWorkerRole::LogicUpdateJob(class CSettler * a2) {
       v23 = CBuilding::Role(v4);
       v26 = (*(int (__thiscall **)(int, _DWORD))(*(_DWORD *)v23 + 56))(v23, (unsigned __int8)this[11]);
       if ( !v26 && BBSupportDbgReport(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 252, "iPileId != 0") == 1 )
+      {
         __debugbreak();
+      }
       v5 = CPileMgr::operator[](v26);
-      if ( CPile::GetRoleType((CPile *)v5)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Settler\\HouseWorkerRole.cpp",
-             253,
-             "g_cPileMgr[ iPileId ].GetRoleType() == IPileRole::PILE_PRODUCTION") == 1 )
+      if ( CPile::GetRoleType((CPile *)v5) && BBSupportDbgReport(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 253, "g_cPileMgr[ iPileId ].GetRoleType() == IPileRole::PILE_PRODUCTION") == 1 )
       {
         __debugbreak();
       }
@@ -183,7 +204,9 @@ LABEL_62:
         v22 = CBuilding::Role(v7);
         v28 = (*(int (__thiscall **)(int, _DWORD))(*(_DWORD *)v22 + 56))(v22, (unsigned __int8)this[11]);
         if ( !v28 && BBSupportDbgReport(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 285, "iPileId != 0") == 1 )
+        {
           __debugbreak();
+        }
         v8 = CPileMgr::operator[](v28);
         if ( CPile::GetRoleType((CPile *)v8) != 1 )
         {
@@ -192,21 +215,19 @@ LABEL_62:
           v10 = CPileMgr::operator[](v28);
           v11 = IEntity::X(v10);
           if ( BBSupportDbgReportF(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 290, "Pile x: %u y: %u", v11, v16) == 1 )
+          {
             __debugbreak();
+          }
         }
         v12 = CPileMgr::operator[](v28);
         if ( !IEntity::FlagBits(v12, (EntityFlag)0x10u) )
         {
           v17 = IEntity::Race(a2);
           v13 = IEntity::Type((unsigned __int16 *)a2);
-          if ( BBSupportDbgReportF(
-                 2,
-                 "MapObjects\\Settler\\HouseWorkerRole.cpp",
-                 292,
-                 "Pile not locked! Settler %u, Race %u",
-                 v13,
-                 v17) == 1 )
+          if ( BBSupportDbgReportF(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 292, "Pile not locked! Settler %u, Race %u", v13, v17) == 1 )
+          {
             __debugbreak();
+          }
         }
         v14 = CPileMgr::operator[](v28);
         CPile::DecreaseUnforeseen((CPile *)v14, 1);
@@ -251,30 +272,44 @@ void  CHouseWorkerRole::UpdateJob(class CSettler * a2) {
       v7 = IAnimatedEntity::Frame(a2);
       v6 = *((unsigned __int16 *)this + 4);
       if ( v7 > v6 )
+      {
         return (CHouseWorkerRole *)IAnimatedEntity::SetFrame(v7 - v6);
+      }
     }
     else
     {
       if ( v9 != 5 )
+      {
         return result;
+      }
       v5 = *((unsigned __int16 *)this + 4) + IAnimatedEntity::Frame(a2);
       if ( v5 < *((unsigned __int8 *)this + 7) )
+      {
         return (CHouseWorkerRole *)IAnimatedEntity::SetFrame(v5);
+      }
       if ( *((_BYTE *)this + 7) )
+      {
         return (CHouseWorkerRole *)IAnimatedEntity::SetFrame(*((_BYTE *)this + 7) - 1);
+      }
     }
     return (CHouseWorkerRole *)IAnimatedEntity::SetFrame(0);
   }
   v3 = IAnimatedEntity::Frame(a2);
   IAnimatedEntity::SetFrame((*((unsigned __int16 *)this + 4) + v3) % *((unsigned __int8 *)this + 7));
   if ( !IAnimatedEntity::Frame(a2) && *((unsigned __int8 *)this + 7) > 1u )
+  {
     IAnimatedEntity::SetFrame(1);
+  }
   v4 = *((unsigned __int16 *)this + 4);
-  for ( i = 0; ; i = (CHouseWorkerRole *)((char *)i + 1) )
+  for ( i = 0;
+        ;
+        i = (CHouseWorkerRole *)((char *)i + 1) )
   {
     result = i;
     if ( (int)i >= v4 )
+    {
       break;
+    }
     *((float *)this + 9) = *((float *)this + 9) + *((float *)this + 11);
     *((float *)this + 10) = *((float *)this + 10) + *((float *)this + 12);
   }
@@ -383,7 +418,9 @@ void  CHouseWorkerRole::GetNextJob(class CSettler * a2) {
   IMovingEntity::IncToDoListIter(a2);
   result = IMovingEntity::IsEndIter(a2);
   if ( !(_BYTE)result )
+  {
     return (*(int (__thiscall **)(CHouseWorkerRole *, struct CSettler *))(*(_DWORD *)this + 40))(this, a2);
+  }
   *((_BYTE *)this + 4) = 17;
   return result;
 }
@@ -436,9 +473,10 @@ void  CHouseWorkerRole::TakeJob(class CSettler * a2) {
         v10 = (int)((float)(v12 * 0.041666668) + 0.5);
         v20 = 9 * *(_DWORD *)BB::Max<int>(&v10, &v11);
         if ( v20 < 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 550, "iJobCounter >= 0") == 1 )
+        {
           __debugbreak();
-        if ( v20 >= 128
-          && BBSupportDbgReport(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 551, "iJobCounter < 128") == 1 )
+        }
+        if ( v20 >= 128 && BBSupportDbgReport(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 551, "iJobCounter < 128") == 1 )
         {
           __debugbreak();
         }
@@ -460,21 +498,29 @@ void  CHouseWorkerRole::TakeJob(class CSettler * a2) {
       break;
     case 1:
       if ( (*(unsigned __int8 (__thiscall **)(ISettlerRole *, CMFCCaptionButton *))(*(_DWORD *)v21 + 124))(v21, a2) )
+      {
         goto LABEL_14;
+      }
       break;
     case 2:
       if ( (*(unsigned __int8 (__thiscall **)(ISettlerRole *, CMFCCaptionButton *))(*(_DWORD *)v21 + 124))(v21, a2) )
       {
         if ( *((char *)v21 + 6) <= 31 )
+        {
           IAnimatedEntity::RegisterForLogicUpdate(*((char *)v21 + 6));
+        }
         else
+        {
           IAnimatedEntity::RegisterForLogicUpdate(31);
+        }
       }
       break;
     case 3:
       if ( (*(unsigned __int8 (__thiscall **)(ISettlerRole *, CMFCCaptionButton *))(*(_DWORD *)v21 + 124))(v21, a2) )
+      {
 LABEL_14:
         IAnimatedEntity::RegisterForLogicUpdate(*((unsigned __int8 *)v21 + 7) - 1);
+      }
       break;
     case 4:
       if ( (*(unsigned __int8 (__thiscall **)(ISettlerRole *, CMFCCaptionButton *))(*(_DWORD *)v21 + 124))(v21, a2) )
@@ -485,7 +531,9 @@ LABEL_14:
       break;
     case 5:
       if ( (*(unsigned __int8 (__thiscall **)(ISettlerRole *, CMFCCaptionButton *))(*(_DWORD *)v21 + 124))(v21, a2) )
+      {
         IAnimatedEntity::RegisterForLogicUpdate(*((char *)v21 + 6) / 2);
+      }
       break;
     case 10:
       IAnimatedEntity::SetFrame(1);
@@ -579,12 +627,7 @@ void  CHouseWorkerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityE
       }
       break;
     case 3:
-      if ( !IEntity::FlagBits(a2, ENTITY_FLAG_MagicInvisible)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Settler\\HouseWorkerRole.cpp",
-             788,
-             "_pSettler->FlagBits(ENTITY_FLAG_MAGIC_INVISIBLE)!=0") == 1 )
+      if ( !IEntity::FlagBits(a2, ENTITY_FLAG_MagicInvisible) && BBSupportDbgReport(2, "MapObjects\\Settler\\HouseWorkerRole.cpp", 788, "_pSettler->FlagBits(ENTITY_FLAG_MAGIC_INVISIBLE)!=0") == 1 )
       {
         __debugbreak();
       }
@@ -610,10 +653,7 @@ void  CHouseWorkerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityE
       }
       break;
     case 9:
-      result = (*(int (__thiscall **)(ISettlerRole *, unsigned __int16 *, _DWORD))(*(_DWORD *)this + 64))(
-                 this,
-                 a2,
-                 a3[5]);
+      result = (*(int (__thiscall **)(ISettlerRole *, unsigned __int16 *, _DWORD))(*(_DWORD *)this + 64))(this, a2, a3[5]);
       break;
     default:
       result = IEntity::FlagBits(a2, ENTITY_FLAG_Registered);

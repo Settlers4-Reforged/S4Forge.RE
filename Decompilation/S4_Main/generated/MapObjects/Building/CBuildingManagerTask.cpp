@@ -154,10 +154,18 @@
   v22[3] = v21[3];
   CRequire::~CRequire(v24);
   *((_DWORD *)v45 + 23) = 0;
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
+  {
     *((_DWORD *)v45 + i + 68) = 0;
-  for ( i = 0; i < 10; ++i )
+  }
+  for ( i = 0;
+        i < 10;
+        ++i )
+  {
     *((_DWORD *)v45 + i + 73) = 0;
+  }
   return v45;
 }
 
@@ -202,8 +210,7 @@ bool  CBuildingManagerTask::IsShooting(void) {
   if ( CSchedule::GetNumberOfBuildingType(v15[10], 21) || CSchedule::GetNumberOfBuildingType(v15[10], 20) <= 0 )
   {
     EcoSector = CSchedule::GetEcoSector(v15[10]);
-    if ( (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 156))(EcoSector, 21) > 0
-      && !v15[23] )
+    if ( (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 156))(EcoSector, 21) > 0 && !v15[23] )
     {
       v11 = CSchedule::GetEcoSector(v15[10]);
       (*(void (__thiscall **)(struct IAIEcoManager *, int, _BYTE *))(*(_DWORD *)v11 + 160))(v11, 21, v5);
@@ -212,10 +219,14 @@ bool  CBuildingManagerTask::IsShooting(void) {
         v10 = CSchedule::GetEcoSector(v15[10]);
         v2 = (_DWORD *)std::vector<int>::operator[](0);
         if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v10 + 76))(v10, *v2) )
+        {
           v15[23] = *(CSchedule **)std::vector<int>::operator[](0);
+        }
       }
     }
-    for ( i = 0; i < 11; ++i )
+    for ( i = 0;
+          i < 11;
+          ++i )
     {
       if ( (int)v15[4 * i + 25] > (int)v15[4 * i + 26] )
       {
@@ -241,11 +252,7 @@ LABEL_15:
             if ( v15[23] )
             {
               v6 = CSchedule::GetEcoSector(v15[10]);
-              (*(void (__thiscall **)(struct IAIEcoManager *, CSchedule *, CSchedule *, int))(*(_DWORD *)v6 + 268))(
-                v6,
-                v15[23],
-                v15[4 * i + 24],
-                v15[4 * i + 25] - v15[4 * i + 26]);
+              (*(void (__thiscall **)(struct IAIEcoManager *, CSchedule *, CSchedule *, int))(*(_DWORD *)v6 + 268))(v6, v15[23], v15[4 * i + 24], v15[4 * i + 25] - v15[4 * i + 26]);
             }
             break;
           default:
@@ -279,9 +286,13 @@ bool  CBuildingManagerTask::action(void) {
   GoodPositionForBuilding = CSchedule::GetGoodPositionForBuilding(this[10], 21);
   C = (CMainProblemSolveEvent *)operator new(0x70u);
   if ( C )
+  {
     v3 = CMainProblemSolveEvent::CMainProblemSolveEvent(C, this[3], 9, 21, GoodPositionForBuilding, 0, 0);
+  }
   else
+  {
     v3 = 0;
+  }
   this[8] = (CSchedule *)CSchedule::NewSchedEntry(this[10], v3);
   this[5] = (CSchedule *)1;
   return 0;
@@ -360,9 +371,7 @@ void  CBuildingManagerTask::UpdateRequireGoods(bool a2) {
 
   *((_DWORD *)this + 12) = 0;
   EcoSector = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-  *((_DWORD *)this + 21) = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 152))(
-                             EcoSector,
-                             2);
+  *((_DWORD *)this + 21) = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 152))(EcoSector, 2);
   v36 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
   *((_DWORD *)this + 20) = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v36 + 152))(v36, 3);
   v35 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
@@ -373,20 +382,22 @@ void  CBuildingManagerTask::UpdateRequireGoods(bool a2) {
   if ( *((_DWORD *)this + 23) )
   {
     v34 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-    if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v34 + 304))(
-            v34,
-            *((_DWORD *)this + 23)) )
+    if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v34 + 304))(v34, *((_DWORD *)this + 23)) )
+    {
       *((_DWORD *)this + 23) = 0;
+    }
   }
-  for ( i = 0; i < 11; ++i )
+  for ( i = 0;
+        i < 11;
+        ++i )
   {
     *((_DWORD *)this + 4 * i + 25) = 0;
     v33 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-    *((_DWORD *)this + 4 * i + 26) = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v33 + 144))(
-                                       v33,
-                                       *((_DWORD *)this + 4 * i + 24));
+    *((_DWORD *)this + 4 * i + 26) = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v33 + 144))(v33, *((_DWORD *)this + 4 * i + 24));
   }
-  for ( j = 0; j < CDynList::size(*(CDynList **)(*((_DWORD *)this + 10) + 4)); ++j )
+  for ( j = 0;
+        j < CDynList::size(*(CDynList **)(*((_DWORD *)this + 10) + 4));
+        ++j )
   {
     v44 = CDynList::elementAt(*(CDynList **)(*((_DWORD *)this + 10) + 4), j);
     if ( *(_DWORD *)(v44 + 20) != 3 )
@@ -395,34 +406,34 @@ void  CBuildingManagerTask::UpdateRequireGoods(bool a2) {
       {
         if ( *(_DWORD *)(v44 + 52) == 1 )
         {
-          for ( k = 0; k < 3; ++k )
+          for ( k = 0;
+                k < 3;
+                ++k )
           {
             v32 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-            *((_DWORD *)this + 4 * k + 25) += (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v32 + 60))(
-                                                v32,
-                                                *(_DWORD *)(v44 + 44),
-                                                k);
+            *((_DWORD *)this + 4 * k + 25) += (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v32 + 60))(v32, *(_DWORD *)(v44 + 44), k);
           }
         }
         else
         {
           v31 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-          if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v31 + 304))(
-                  v31,
-                  *(_DWORD *)(v44 + 48)) )
+          if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v31 + 304))(v31, *(_DWORD *)(v44 + 48)) )
+          {
             continue;
+          }
           ++*((_DWORD *)this + 12);
           v47 = 1;
-          for ( m = 0; m < 3; ++m )
+          for ( m = 0;
+                m < 3;
+                ++m )
           {
             v30 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-            v29 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v30 + 64))(
-                    v30,
-                    *(_DWORD *)(v44 + 48),
-                    m);
+            v29 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v30 + 64))(v30, *(_DWORD *)(v44 + 48), m);
             *((_DWORD *)this + 4 * m + 25) += v29;
             if ( v29 > 0 )
+            {
               v47 = 0;
+            }
           }
           if ( v47 )
           {
@@ -437,16 +448,15 @@ void  CBuildingManagerTask::UpdateRequireGoods(bool a2) {
         Tool = CProductionDataTab::GetTool(*(void **)(*((_DWORD *)this + 10) + 40), *(_DWORD *)(v44 + 44));
         if ( Tool )
         {
-          ProductivityControll = CSchedule::GetProductivityControll(
-                                   *((CDynList ***)this + 10),
-                                   *(_DWORD *)(v44 + 48),
-                                   *(_DWORD *)(v44 + 52));
+          ProductivityControll = CSchedule::GetProductivityControll(*((CDynList ***)this + 10), *(_DWORD *)(v44 + 48), *(_DWORD *)(v44 + 52));
           if ( ProductivityControll )
           {
             if ( !*((_BYTE *)ProductivityControll + 101) && *((_DWORD *)this + 23) )
             {
               if ( a2 )
+              {
                 *((_BYTE *)ProductivityControll + 101) = 1;
+              }
               v28 = (_DWORD *)((char *)this + 16 * CBuildingManagerTask::GetToolRequireIndex(this, Tool) + 100);
               ++*v28;
             }
@@ -456,9 +466,7 @@ void  CBuildingManagerTask::UpdateRequireGoods(bool a2) {
       if ( *(_DWORD *)(v44 + 16) == 2 && *(_DWORD *)(v44 + 48) == 3 )
       {
         v27 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v27 + 304))(
-               v27,
-               *(_DWORD *)(v44 + 44)) )
+        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v27 + 304))(v27, *(_DWORD *)(v44 + 44)) )
         {
           if ( !*(_BYTE *)(v44 + 101) )
           {
@@ -469,14 +477,14 @@ void  CBuildingManagerTask::UpdateRequireGoods(bool a2) {
               {
                 CProductionDataTab::GetNeededSettler(*(void **)(*((_DWORD *)this + 10) + 40), *(_DWORD *)(v44 + 84));
                 v26 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-                if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v26 + 84))(
-                        v26,
-                        *(_DWORD *)(v44 + 44)) )
+                if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v26 + 84))(v26, *(_DWORD *)(v44 + 44)) )
                 {
                   v25 = (_DWORD *)((char *)this + 16 * CBuildingManagerTask::GetToolRequireIndex(this, v43) + 100);
                   ++*v25;
                   if ( a2 )
+                  {
                     *(_BYTE *)(v44 + 101) = 1;
+                  }
                 }
               }
             }
@@ -492,20 +500,12 @@ void  CBuildingManagerTask::UpdateRequireGoods(bool a2) {
     if ( *((_DWORD *)this + 23) )
     {
       v24 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-      (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int, int))(*(_DWORD *)v24 + 268))(
-        v24,
-        *((_DWORD *)this + 23),
-        31,
-        v40 - *((_DWORD *)this + 21));
+      (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int, int))(*(_DWORD *)v24 + 268))(v24, *((_DWORD *)this + 23), 31, v40 - *((_DWORD *)this + 21));
     }
     if ( *((_DWORD *)this + 23) )
     {
       v23 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-      (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int, int))(*(_DWORD *)v23 + 268))(
-        v23,
-        *((_DWORD *)this + 23),
-        18,
-        v38 - *((_DWORD *)this + 20));
+      (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int, int))(*(_DWORD *)v23 + 268))(v23, *((_DWORD *)this + 23), 18, v38 - *((_DWORD *)this + 20));
     }
   }
   else
@@ -525,17 +525,15 @@ void  CBuildingManagerTask::UpdateRequireGoods(bool a2) {
         if ( *((_DWORD *)this + 23) )
         {
           v17 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-          (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int, int))(*(_DWORD *)v17 + 268))(
-            v17,
-            *((_DWORD *)this + 23),
-            31,
-            v40 - *((_DWORD *)this + 21));
+          (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int, int))(*(_DWORD *)v17 + 268))(v17, *((_DWORD *)this + 23), 31, v40 - *((_DWORD *)this + 21));
         }
       }
       else
       {
         if ( v41 > 5 )
+        {
           v41 = 5;
+        }
         v20 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
         v19 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
         v18 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
@@ -555,7 +553,9 @@ void  CBuildingManagerTask::UpdateRequireGoods(bool a2) {
       if ( v39 > 0 )
       {
         if ( v39 > 5 )
+        {
           v39 = 5;
+        }
         v14 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
         v13 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
         v12 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
@@ -571,14 +571,14 @@ LABEL_68:
     if ( *((_DWORD *)this + 13) == 1 && *((_DWORD *)this + 15) )
     {
       v9 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v9 + 304))(
-             v9,
-             *((_DWORD *)this + 15)) )
+      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v9 + 304))(v9, *((_DWORD *)this + 15)) )
       {
         v8 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
         v6 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v8 + 68))(v8, *((_DWORD *)this + 15));
         if ( v6 < 100 )
+        {
           return v6;
+        }
       }
       *((_DWORD *)this + 13) = 2;
       *((_DWORD *)this + 14) = 0;
@@ -586,19 +586,14 @@ LABEL_68:
     }
     LOBYTE(v6) = CBuildingManagerTask::AlertLevelZero(this);
     if ( (unsigned __int8)v6 != 1 )
+    {
       LOBYTE(v6) = CBuildingManagerTask::AlertLevelOne(this);
+    }
   }
   else
   {
     v11 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-    if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v11 + 304))(
-            v11,
-            *((_DWORD *)this + 15))
-      || (v10 = CSchedule::GetEcoSector(*((CSchedule **)this + 10)),
-          v6 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v10 + 68))(
-                 v10,
-                 *((_DWORD *)this + 15)),
-          v6 >= 100) )
+    if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v11 + 304))(v11, *((_DWORD *)this + 15)) || (v10 = CSchedule::GetEcoSector(*((CSchedule **)this + 10)), v6 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v10 + 68))(v10, *((_DWORD *)this + 15)), v6 >= 100) )
     {
       *((_DWORD *)this + 13) = 2;
       *((_DWORD *)this + 14) = 0;
@@ -616,10 +611,14 @@ int  CBuildingManagerTask::GetToolRequireIndex(enum PILE_TYPES a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 11; ++i )
+  for ( i = 0;
+        i < 11;
+        ++i )
   {
     if ( this[4 * i + 24] == a2 )
+    {
       return i;
+    }
   }
   return 11;
 }
@@ -650,7 +649,9 @@ bool  CBuildingManagerTask::GetBuildingPermission(class CBuildingEvent * a2) {
         return 0;
       }
       if ( *((_DWORD *)a2 + 13) != 1 )
+      {
         this[15] = (CSchedule *)*((_DWORD *)a2 + 12);
+      }
     }
 LABEL_14:
     std::vector<SBuildId>::~vector<SBuildId>();
@@ -663,10 +664,10 @@ LABEL_14:
     return v11;
   }
   EcoSector = CSchedule::GetEcoSector(this[10]);
-  if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 68))(
-         EcoSector,
-         *((_DWORD *)a2 + 12)) > 1 )
+  if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 68))(EcoSector, *((_DWORD *)a2 + 12)) > 1 )
+  {
     goto LABEL_14;
+  }
   if ( !*((_BYTE *)a2 + 85) )
   {
     Tool = CProductionDataTab::GetTool(*((void **)this[10] + 10), *((_DWORD *)a2 + 11));
@@ -688,11 +689,7 @@ LABEL_14:
           }
           *((_BYTE *)a2 + 85) = 1;
           v4 = CSchedule::GetEcoSector(this[10]);
-          (*(void (__thiscall **)(struct IAIEcoManager *, CSchedule *, int, int))(*(_DWORD *)v4 + 268))(
-            v4,
-            this[23],
-            Tool,
-            1);
+          (*(void (__thiscall **)(struct IAIEcoManager *, CSchedule *, int, int))(*(_DWORD *)v4 + 268))(v4, this[23], Tool, 1);
         }
       }
     }
@@ -704,7 +701,7 @@ LABEL_14:
 
 
 // address=[0x2f50b50]
-// Decompiled from char __thiscall CBuildingManagerTask::GetSeperateBuildingPermission(  CBuildingManagerTask *this,  struct CBuildingEvent *a2)
+// Decompiled from char __thiscall CBuildingManagerTask::GetSeperateBuildingPermission(CBuildingManagerTask *this, struct CBuildingEvent *a2)
 bool  CBuildingManagerTask::GetSeperateBuildingPermission(class CBuildingEvent * a2) {
   
   char result; // al
@@ -712,8 +709,7 @@ bool  CBuildingManagerTask::GetSeperateBuildingPermission(class CBuildingEvent *
   switch ( *((_DWORD *)a2 + 11) )
   {
     case 5:
-      if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 9)
-        || CSchedule::GetNumberOfBuildingTypeAtBuilding(*((CDynList ***)this + 10), 12, 0, 1) )
+      if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 9) || CSchedule::GetNumberOfBuildingTypeAtBuilding(*((CDynList ***)this + 10), 12, 0, 1) )
       {
         goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
       }
@@ -723,7 +719,9 @@ bool  CBuildingManagerTask::GetSeperateBuildingPermission(class CBuildingEvent *
       if ( CSchedule::GetNumberOfBuildingTypeAtBuilding(*((CDynList ***)this + 10), 12, 10, 1) )
       {
         if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 22) )
+        {
           goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
+        }
         result = 0;
       }
       else
@@ -734,14 +732,18 @@ bool  CBuildingManagerTask::GetSeperateBuildingPermission(class CBuildingEvent *
     case 9:
     case 0xC:
       if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 11) )
+      {
         goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
+      }
       result = 0;
       break;
     case 0xA:
       if ( CSchedule::GetNumberOfBuildingTypeAtBuilding(*((CDynList ***)this + 10), 9, 5, 1) )
       {
         if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 22) )
+        {
           goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
+        }
         result = 0;
       }
       else
@@ -751,17 +753,20 @@ bool  CBuildingManagerTask::GetSeperateBuildingPermission(class CBuildingEvent *
       break;
     case 0x10:
       if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 24) )
+      {
         goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
+      }
       result = 0;
       break;
     case 0x13:
       if ( CSchedule::GetNumberOfBuildingTypeAtBuilding(*((CDynList ***)this + 10), 16, 15, 1) )
+      {
         goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
+      }
       result = 0;
       break;
     case 0x14:
-      if ( CSchedule::GetNumberOfBuildingTypeAtBuilding(*((CDynList ***)this + 10), 17, 0, 1)
-        && CSchedule::GetNumberOfBuildingTypeAtBuilding(*((CDynList ***)this + 10), 15, 0, 1) )
+      if ( CSchedule::GetNumberOfBuildingTypeAtBuilding(*((CDynList ***)this + 10), 17, 0, 1) && CSchedule::GetNumberOfBuildingTypeAtBuilding(*((CDynList ***)this + 10), 15, 0, 1) )
       {
         goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
       }
@@ -769,27 +774,37 @@ bool  CBuildingManagerTask::GetSeperateBuildingPermission(class CBuildingEvent *
       break;
     case 0x15:
       if ( CSchedule::GetNumberOfBuildingTypeAtBuilding(*((CDynList ***)this + 10), 20, 15, 1) )
+      {
         goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
+      }
       result = 0;
       break;
     case 0x16:
       if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 20) )
+      {
         goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
+      }
       result = 0;
       break;
     case 0x18:
       if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 22) )
+      {
         goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
+      }
       result = 0;
       break;
     case 0x2B:
       if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 19) )
+      {
         goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
+      }
       result = 0;
       break;
     case 0x2C:
       if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 43) )
+      {
         goto CBuildingManagerTask__GetSeperateBuildingPermission___def_3350B7F;
+      }
       result = 0;
       break;
     default:
@@ -808,7 +823,9 @@ void  CBuildingManagerTask::SetRejectedBuilding(enum BUILDING_TYPES a2) {
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
     if ( !this[i + 68] )
     {
@@ -828,15 +845,23 @@ bool  CBuildingManagerTask::IsRejectedBuilding(enum BUILDING_TYPES a2, bool a3) 
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     if ( i >= 5 )
+    {
       return 0;
+    }
     if ( this[i + 68] == a2 )
+    {
       break;
+    }
   }
   if ( a3 )
+  {
     this[i + 68] = 0;
+  }
   return 1;
 }
 
@@ -847,7 +872,9 @@ bool  CBuildingManagerTask::SetBuildingAtPlanning(enum BUILDING_TYPES a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 10; ++i )
+  for ( i = 0;
+        i < 10;
+        ++i )
   {
     if ( !this[i + 73] )
     {
@@ -865,10 +892,14 @@ bool  CBuildingManagerTask::IsBuildingAtPlanning(enum BUILDING_TYPES a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 10; ++i )
+  for ( i = 0;
+        i < 10;
+        ++i )
   {
     if ( this[i + 73] == a2 )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -880,7 +911,9 @@ bool  CBuildingManagerTask::RemoveBuildingAtPlanning(enum BUILDING_TYPES a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 10; ++i )
+  for ( i = 0;
+        i < 10;
+        ++i )
   {
     if ( this[i + 73] == a2 )
     {
@@ -910,10 +943,11 @@ bool  CBuildingManagerTask::AlertLevelZero(void) {
   v11 = 0;
   v10 = *((_DWORD *)this + 25) - *((_DWORD *)this + 26);
   if ( v10 <= 0 )
+  {
     goto LABEL_21;
+  }
   EcoSector = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-  if ( v10 > (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 144))(EcoSector, 22)
-    && !CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 1) )
+  if ( v10 > (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 144))(EcoSector, 22) && !CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 1) )
   {
     *((_DWORD *)this + 13) = 0;
     *((_DWORD *)this + 14) = 1;
@@ -923,47 +957,32 @@ bool  CBuildingManagerTask::AlertLevelZero(void) {
   if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 3) )
   {
 LABEL_21:
-    if ( *((_DWORD *)this + 30) - *((_DWORD *)this + 29) >= 0
-      || CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 4) )
+    if ( *((_DWORD *)this + 30) - *((_DWORD *)this + 29) >= 0 || CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 4) )
     {
       if ( !*((_DWORD *)this + 14) )
+      {
         return 0;
+      }
       if ( *((_DWORD *)this + 15) )
       {
         v8 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-        v11 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v8 + 60))(
-                v8,
-                *((_DWORD *)this + 14),
-                1);
+        v11 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v8 + 60))(v8, *((_DWORD *)this + 14), 1);
         v7 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-        (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, _DWORD))(*(_DWORD *)v7 + 60))(
-          v7,
-          *((_DWORD *)this + 14),
-          0);
+        (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, _DWORD))(*(_DWORD *)v7 + 60))(v7, *((_DWORD *)this + 14), 0);
       }
       else
       {
         v6 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v6 + 304))(
-               v6,
-               *((_DWORD *)this + 15)) )
+        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v6 + 304))(v6, *((_DWORD *)this + 15)) )
         {
           v5 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-          v11 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v5 + 64))(
-                  v5,
-                  *((_DWORD *)this + 15),
-                  1);
+          v11 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, int))(*(_DWORD *)v5 + 64))(v5, *((_DWORD *)this + 15), 1);
           v4 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-          (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, _DWORD))(*(_DWORD *)v4 + 64))(
-            v4,
-            *((_DWORD *)this + 15),
-            0);
+          (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, _DWORD))(*(_DWORD *)v4 + 64))(v4, *((_DWORD *)this + 15), 0);
         }
       }
       v3 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-      if ( v11 > (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v3 + 144))(v3, 32)
-        || (v2 = CSchedule::GetEcoSector(*((CSchedule **)this + 10)),
-            v11 > (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v2 + 144))(v2, 32)) )
+      if ( v11 > (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v3 + 144))(v3, 32) || (v2 = CSchedule::GetEcoSector(*((CSchedule **)this + 10)), v11 > (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v2 + 144))(v2, 32)) )
       {
         CSchedule::DestroySeveralBuildings(*((CSchedule **)this + 10));
       }

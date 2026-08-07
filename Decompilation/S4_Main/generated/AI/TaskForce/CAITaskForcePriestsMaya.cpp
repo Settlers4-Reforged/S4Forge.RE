@@ -4,7 +4,7 @@
 // Definitions for class CAITaskForcePriestsMaya
 
 // address=[0x132bbf0]
-// Decompiled from int __thiscall CAITaskForcePriestsMaya::ChooseMilitarySpell(  CAITaskForcePriestsMaya *this,  const struct SCountFightersResult *a2,  int a3)
+// Decompiled from int __thiscall CAITaskForcePriestsMaya::ChooseMilitarySpell(CAITaskForcePriestsMaya *this, const struct SCountFightersResult *a2, int a3)
 int  CAITaskForcePriestsMaya::ChooseMilitarySpell(struct SCountFightersResult const & a2, int a3) {
   
   unsigned int v4; // esi
@@ -20,31 +20,38 @@ int  CAITaskForcePriestsMaya::ChooseMilitarySpell(struct SCountFightersResult co
 
   m_uEnemySoldiers = a2->m_uEnemySoldiers;
   if ( m_uEnemySoldiers <= 0 )
+  {
     return -1;
+  }
   if ( m_uEnemySoldiers < 5 )
   {
     v4 = IAIEnvironment::Rand();
     if ( v4 >= m_uEnemySoldiers * CRandom16::PercentValue(0x14u) )
+    {
       return -1;
+    }
   }
   m_uEnemyBowmen = a2->m_uEnemyBowmen;
   if ( m_uEnemyBowmen < 10 )
   {
     v5 = IAIEnvironment::Rand();
     if ( v5 >= m_uEnemyBowmen * CRandom16::PercentValue(0xAu) )
+    {
       a3 &= ~0x20u;
+    }
   }
   m_uAllySoldiers = a2->m_uAllySoldiers;
   if ( m_uAllySoldiers < 10 )
   {
-    if ( m_uAllySoldiers < 5
-      || (v6 = IAIEnvironment::Rand(), v6 >= CRandom16::PercentValue(0x14u) * (m_uAllySoldiers - 5)) )
+    if ( m_uAllySoldiers < 5 || (v6 = IAIEnvironment::Rand(), v6 >= CRandom16::PercentValue(0x14u) * (m_uAllySoldiers - 5)) )
     {
       a3 &= ~0x40u;
     }
   }
   if ( (a3 & 0x70) == 0 )
+  {
     return -1;
+  }
   v10 = CStaticConfigVarInt::operator int(&s_sConfigMayaMilitarySpellChanceNone);
   v9 = CStaticConfigVarInt::operator int(&s_sConfigMayaMilitarySpellChanceSoldier);
   v8 = CStaticConfigVarInt::operator int(&s_sConfigMayaMilitarySpellChanceAttack);
@@ -54,7 +61,7 @@ int  CAITaskForcePriestsMaya::ChooseMilitarySpell(struct SCountFightersResult co
 
 
 // address=[0x132bd00]
-// Decompiled from int __thiscall CAITaskForcePriestsMaya::ChooseMilitarySpellDestination(  CAITaskForcePriestsMaya *this,  int a2,  int a3,  int a4,  int a5)
+// Decompiled from int __thiscall CAITaskForcePriestsMaya::ChooseMilitarySpellDestination(CAITaskForcePriestsMaya *this, int a2, int a3, int a4, int a5)
 int  CAITaskForcePriestsMaya::ChooseMilitarySpellDestination(int a2, int a3, int a4, int a5) {
   
   int v5; // eax
@@ -73,12 +80,16 @@ int  CAITaskForcePriestsMaya::ChooseMilitarySpellDestination(int a2, int a3, int
     v10 = IAIEnvironment::WorldHeight() - 32;
     if ( v11 > 0 && v10 > 0 )
     {
-      for ( i = 0; i < 5; ++i )
+      for ( i = 0;
+            i < 5;
+            ++i )
       {
         v8 = IAIEnvironment::Rand() % v11 + 16;
         v9 = IAIEnvironment::Rand() % v10 + 16;
         if ( IAIEnvironment::GetNearestNoneBlockedPosition(&v8, &v9) >= 0 )
+        {
           return IAIEnvironment::PackXYFast(v8, v9);
+        }
       }
     }
     return -1;
@@ -101,7 +112,7 @@ int  CAITaskForcePriestsMaya::ChooseMilitarySpellDestination(int a2, int a3, int
 
 
 // address=[0x132e4e0]
-// Decompiled from CAITaskForcePriestsMaya *__thiscall CAITaskForcePriestsMaya::CAITaskForcePriestsMaya(  CAITaskForcePriestsMaya *this,  int a2,  int a3,  int a4)
+// Decompiled from CAITaskForcePriestsMaya *__thiscall CAITaskForcePriestsMaya::CAITaskForcePriestsMaya(CAITaskForcePriestsMaya *this, int a2, int a3, int a4)
  CAITaskForcePriestsMaya::CAITaskForcePriestsMaya(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   CAITaskForcePriests::CAITaskForcePriests(this, a2, a3, a4);

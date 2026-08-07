@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CSimpleBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x180u) )
+  {
     return CSimpleBuildingRole::CSimpleBuildingRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -149,15 +153,21 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v62; // [esp+D0h] [ebp-4h]
 
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     this->FillDialog(this, a2, 1);
+  }
   m_uLogicState = this->m_uLogicState;
   switch ( m_uLogicState )
   {
     case 1u:
       if ( this->OrderInhabitant(this, a2) )
+      {
         this->m_uLogicState = 3;
+      }
       else
+      {
         IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
+      }
       break;
     case 2u:
       if ( this->m_iDelayTick > (int)this->m_pBuildingInfo->m_iProductionDelay )
@@ -227,9 +237,7 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
             v10 = IEntity::OwnerId(v57);
             v11 = CAlliances::AllianceId(v10);
             v12 = IEntity::OwnerId(a2);
-            if ( v11 == CAlliances::AllianceId(v12)
-              && IEntity::WarriorType(v57)
-              && v57->Amount() < v42->m_iMaxLifePoints )
+            if ( v11 == CAlliances::AllianceId(v12) && IEntity::WarriorType(v57) && v57->Amount() < v42->m_iMaxLifePoints )
             {
               this->m_iNextWorkTicks = 0;
               v33 = CSettlerMgr::operator[](this->m_uSettlerId);
@@ -279,8 +287,7 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
                     if ( v18 == CAlliances::AllianceId(v19) && v59->Amount(v59) < v36->m_iMaxLifePoints )
                     {
                       v20 = CSettler::Role(v59);
-                      if ( ISettlerRole::GetTask(v20) == 27
-                        || (v21 = CSettler::Role(v59), ISettlerRole::GetTask(v21) == 17) )
+                      if ( ISettlerRole::GetTask(v20) == 27 || (v21 = CSettler::Role(v59), ISettlerRole::GetTask(v21) == 17) )
                       {
                         v22 = CBuilding::EnsignPackedXY(a2);
                         v35 = CEntityEvent::CEntityEvent(&v29, 0x11u, 13, 0, v22, 0);
@@ -302,7 +309,9 @@ void  CSimpleBuildingRole::LogicUpdate(class CBuilding * a2) {
             this->m_vWorkingArea[0] += v58;
             v23 = this->m_vWorkingArea[0];
             if ( v23 >= CSpiralOffsets::Last(this->m_pBuildingInfo->m_iWorkingAreaRadius) )
+            {
               this->m_vWorkingArea[0] = 0;
+            }
             if ( v60 == 1 )
             {
               this->m_iNextWorkTicks = 10;
@@ -367,15 +376,16 @@ void  CSimpleBuildingRole::Init(class CBuilding * a2) {
     v2 = IEntity::Race(a2);
     CSettlerMgr::GetSettlerInfo(v2, v3);
     this->m_pSearchFkt = *(_DWORD *)std::vector<CSettlerMgr::SSearchInfos>::operator[](1);
-    if ( !this->m_pSearchFkt
-      && BBSupportDbgReport(2, "MapObjects\\Building\\SimpleBuilding.cpp", 141, "m_pSearchFkt!= NULL") == 1 )
+    if ( !this->m_pSearchFkt && BBSupportDbgReport(2, "MapObjects\\Building\\SimpleBuilding.cpp", 141, "m_pSearchFkt!= NULL") == 1 )
     {
       __debugbreak();
     }
   }
   IAnimatedEntity::RegisterForLogicUpdate(a2, 2);
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     this->FillDialog(this, a2, 0);
+  }
 }
 
 
@@ -402,8 +412,7 @@ void  CSimpleBuildingRole::PostLoadInit(class CBuilding * a2) {
     v3 = IEntity::Race(a2);
     SettlerInfo = CSettlerMgr::GetSettlerInfo(v3, m_iBuildingInhabitant);
     this->m_pSearchFkt = std::vector<CSettlerMgr::SSearchInfos>::operator[](&SettlerInfo->m_vSearches, 1u)->m_pSearchFkt;
-    if ( !this->m_pSearchFkt
-      && BBSupportDbgReport(2, "MapObjects\\Building\\SimpleBuilding.cpp", 115, "m_pSearchFkt != 0") == 1 )
+    if ( !this->m_pSearchFkt && BBSupportDbgReport(2, "MapObjects\\Building\\SimpleBuilding.cpp", 115, "m_pSearchFkt != 0") == 1 )
     {
       __debugbreak();
     }
@@ -432,14 +441,15 @@ bool  CSimpleBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   CMFCToolBarButton *v18; // [esp+24h] [ebp-8h]
 
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\SimpleBuilding.cpp", 161, "_iSettlerId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v17 = (CSettler *)CSettlerMgr::operator[](a3);
   if ( IEntity::Type((unsigned __int16 *)a2) == 27 )
   {
     if ( *((_BYTE *)this + 29) )
     {
-      if ( *((unsigned __int16 *)this + 4) != a3
-        && BBSupportDbgReport(2, "MapObjects\\Building\\SimpleBuilding.cpp", 184, "m_uSettlerId == _iSettlerId") == 1 )
+      if ( *((unsigned __int16 *)this + 4) != a3 && BBSupportDbgReport(2, "MapObjects\\Building\\SimpleBuilding.cpp", 184, "m_uSettlerId == _iSettlerId") == 1 )
       {
         __debugbreak();
       }
@@ -462,8 +472,7 @@ bool  CSimpleBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   }
   else if ( *((_BYTE *)this + 29) )
   {
-    if ( *((unsigned __int16 *)this + 4) != a3
-      && BBSupportDbgReport(2, "MapObjects\\Building\\SimpleBuilding.cpp", 210, "m_uSettlerId == _iSettlerId") == 1 )
+    if ( *((unsigned __int16 *)this + 4) != a3 && BBSupportDbgReport(2, "MapObjects\\Building\\SimpleBuilding.cpp", 210, "m_uSettlerId == _iSettlerId") == 1 )
     {
       __debugbreak();
     }
@@ -489,12 +498,7 @@ bool  CSimpleBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
     v11 = (const char *)type_info::name(v7);
     v8 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
     BuildingName = CS4DefineNames::GetBuildingName(v8);
-    BBSupportTracePrintF(
-      2,
-      "WARNING: Building %s (role %s) of race %s has no production delay!",
-      BuildingName,
-      v11,
-      RaceName);
+    BBSupportTracePrintF(2, "WARNING: Building %s (role %s) of race %s has no production delay!", BuildingName, v11, RaceName);
   }
   *((_BYTE *)this + 4) = 2;
   (*(void (__thiscall **)(CSimpleBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 72))(this, a2, 0);
@@ -536,10 +540,14 @@ void  CSimpleBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
     MEMORY[0x3F1E4BC] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v9, 1u);
     g_cBuildingInfo.m_bInhabitants = this->m_bInhabitants;
     if ( this->m_bInhabitants )
+    {
       MEMORY[0x3F1E4BD] = *((_BYTE *)this->m_pBuildingInfo + 478);
+    }
     v13 = 604;
     if ( !a3 )
+    {
       v13 = 602;
+    }
     CEvn_Event::CEvn_Event(&v16, v13, 0, (unsigned int)&g_cBuildingInfo, 0);
     v17 = 0;
     IEventEngine::SendAMessage(g_pEvnEngine, &v16);
@@ -564,10 +572,14 @@ void  CSimpleBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
     MEMORY[0x3F1E4F9] = 0;
     MEMORY[0x3F1E4F8] = 0;
     if ( this->m_bInhabitants )
+    {
       MEMORY[0x3F1E4F5] = *((_BYTE *)this->m_pBuildingInfo + 478);
+    }
     v12 = 604;
     if ( !a3 )
+    {
       v12 = 602;
+    }
     CEvn_Event::CEvn_Event(&v15, v12, 0, (unsigned int)&g_cResourceCollectorInfo, 0);
     v17 = 1;
     IEventEngine::SendAMessage(g_pEvnEngine, &v15);
@@ -623,7 +635,7 @@ void  CSimpleBuildingRole::Store(std::ostream & a2) {
 // [Decompilation failed for static unsigned long CSimpleBuildingRole::m_iClassID]
 
 // address=[0x14fd250]
-// Decompiled from void __thiscall CSimpleBuildingRole::ConvertEventIntoGoal(  CSimpleBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
+// Decompiled from void __thiscall CSimpleBuildingRole::ConvertEventIntoGoal(CSimpleBuildingRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CSimpleBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;

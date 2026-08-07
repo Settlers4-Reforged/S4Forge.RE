@@ -36,12 +36,16 @@ bool  CAITaskForceEx::CheckWaypoint(void) {
 
   uWaypoint = CAITaskForceEx::WaypointXY(this);
   if ( uWaypoint <= 0 )
+  {
     return 0;
+  }
   iX = IAIEnvironment::UnpackXFast(uWaypoint);
   iY = IAIEnvironment::UnpackYFast(uWaypoint);
   iSectorId = IAIEnvironment::WorldSectorId(iX, iY);
   if ( iSectorId <= 0 )
+  {
     return 0;
+  }
   a1 = 0;
   a2 = 0;
   return CAITaskForce::GetPositionOfFirstEntity(this, &a1, &a2) && iSectorId == IAIEnvironment::WorldSectorId(a1, a2);
@@ -63,21 +67,27 @@ bool  CAITaskForceEx::CheckDestination(void) {
   int NearestNoneBlockedPosition; // [esp+10h] [ebp-Ch]
 
   if ( (CAITaskForce::Flags(this) & 0x2000) == 0 )
+  {
     return 1;
+  }
   if ( this->m_iDestinationXY < 0 )
+  {
     this->m_iDestinationXY = CAITaskForce::CmdGoal(this);
+  }
   if ( this->m_iDestinationXY < 0 )
+  {
     return 0;
-  if ( !IAIEnvironment::WorldInWorldPackedXY(this->m_iDestinationXY)
-    && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 501, "g_pAIEnv->WorldInWorldPackedXY(m_iDestinationXY)") == 1 )
+  }
+  if ( !IAIEnvironment::WorldInWorldPackedXY(this->m_iDestinationXY) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 501, "g_pAIEnv->WorldInWorldPackedXY(m_iDestinationXY)") == 1 )
   {
     __debugbreak();
   }
   if ( !IAIEnvironment::WorldIsBlockedLandPackedXY(this->m_iDestinationXY) )
+  {
     return 1;
+  }
   v1 = CAITaskForce::CmdGoal(this);
-  if ( !IAIEnvironment::WorldInWorldPackedXY(v1)
-    && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 507, "g_pAIEnv->WorldInWorldPackedXY(CmdGoal())") == 1 )
+  if ( !IAIEnvironment::WorldInWorldPackedXY(v1) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 507, "g_pAIEnv->WorldInWorldPackedXY(CmdGoal())") == 1 )
   {
     __debugbreak();
   }
@@ -118,24 +128,31 @@ bool  CAITaskForceEx::FindWaypoints(void) {
 
   CAITaskForceEx::ClearWaypoints(this);
   if ( !CAITaskForceEx::CheckDestination(this) )
+  {
     return 0;
+  }
   Entity = CAITaskForce::FirstEntity(this);
   if ( !Entity )
+  {
     return 0;
+  }
   v2 = CAIEntityInfo::EntityId(Entity);
   iXY = IAIEnvironment::EntityPackedPosition(v2);
   iOwner = CAITaskForce::OwnerId(this) | 0x80;
   iDestXY = CAITaskForceEx::DestinationXY(this);
   if ( !CAStarTiling::FindPath(iXY, iDestXY, &v10, iOwner) )
+  {
     return 0;
-  for ( i = 0; ((i < 3) & (CWaypoints::CachedWaypointsCount(&v10) > 0)) != 0; ++i )
+  }
+  for ( i = 0;
+        ((i < 3) & (CWaypoints::CachedWaypointsCount(&v10) > 0)) != 0;
+        ++i )
   {
     v5 = CWaypoints::Back(&v10);
     CWaypoints::PopBack(&v10);
     this->m_iWaypointsXY[i] = v5;
   }
-  if ( this->m_iWaypointsXY[0] < 0
-    && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 590, "m_iWaypointsXY[0] >= 0") == 1 )
+  if ( this->m_iWaypointsXY[0] < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 590, "m_iWaypointsXY[0] >= 0") == 1 )
   {
     __debugbreak();
   }
@@ -198,31 +215,39 @@ void  CAITaskForceEx::Execute(void) {
       CAITaskForce::ClearStateFlagBit(this, 0x10000u);
       return;
     case 104:
-      if ( !CAITaskForce::GoalIsEntity(this)
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 860, "GoalIsEntity()") == 1 )
+      if ( !CAITaskForce::GoalIsEntity(this) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 860, "GoalIsEntity()") == 1 )
       {
         __debugbreak();
       }
       v2 = CAITaskForce::CmdGoal(this);
       if ( (IAIEnvironment::EntityFlags(v2) & ENTITY_FLAG_Ready) == 0 )
+      {
         goto LABEL_34;
-      for ( i = CAITaskForce::FirstEntity(this); i; i = CAIEntityInfo::Next(i) )
+      }
+      for ( i = CAITaskForce::FirstEntity(this);
+            i;
+            i = CAIEntityInfo::Next(i) )
+      {
         CAIEntityInfo::EntityId(i);
+      }
       return;
     case 105:
-      if ( !CAITaskForce::GoalIsEntity(this)
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 887, "GoalIsEntity()") == 1 )
+      if ( !CAITaskForce::GoalIsEntity(this) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 887, "GoalIsEntity()") == 1 )
       {
         __debugbreak();
       }
       v3 = CAITaskForce::CmdGoal(this);
       if ( (IAIEnvironment::EntityFlags(v3) & ENTITY_FLAG_Ready) != 0 )
+      {
         return;
+      }
       goto LABEL_34;
     case 106:
       if ( !CAITaskForceEx::EscortInitWalk(this) )
+      {
 LABEL_34:
         CAITaskForce::SetState(this, 0);
+      }
       return;
     default:
       return;
@@ -231,7 +256,9 @@ LABEL_34:
   {
     v4 = CAIEntityInfo::EntityId(Entity);
     if ( IAIEnvironment::MovingEntityWalkingState(v4) >= v6 && ++v7 >= v5 )
+    {
       return;
+    }
     Entity = CAIEntityInfo::Next(Entity);
   }
   CAITaskForce::SetStateFlagBit(this, 0x10000u);
@@ -246,7 +273,9 @@ LABEL_34:
     Waypoints = 1;
     CAITaskForceEx::PopWaypoint(this);
     if ( !CAITaskForceEx::CheckWaypoint(this) )
+    {
       Waypoints = CAITaskForceEx::FindWaypoints(this);
+    }
     if ( Waypoints )
     {
       CAITaskForceEx::InitGroupWalk(this);
@@ -282,19 +311,19 @@ void  CAITaskForceEx::InitWalk(bool a2) {
   {
     iX0 = CAITaskForceEx::WaypointX(this);
     iY0 = CAITaskForceEx::WaypointY(this);
-    if ( !IAIEnvironment::WorldInWorld(iX0, iY0)
-      && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 631, "g_pAIEnv->WorldInWorld(iX0, iY0)") == 1 )
+    if ( !IAIEnvironment::WorldInWorld(iX0, iY0) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 631, "g_pAIEnv->WorldInWorld(iX0, iY0)") == 1 )
     {
       __debugbreak();
     }
-    if ( IAIEnvironment::WorldIsBlockedLand(iX0, iY0)
-      && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 632, "!g_pAIEnv->WorldIsBlockedLand(iX0, iY0)") == 1 )
+    if ( IAIEnvironment::WorldIsBlockedLand(iX0, iY0) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 632, "!g_pAIEnv->WorldIsBlockedLand(iX0, iY0)") == 1 )
     {
       __debugbreak();
     }
     iSectorId = IAIEnvironment::WorldSectorId(iX0, iY0);
     if ( iSectorId <= 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 636, "iSectorId > 0") == 1 )
+    {
       __debugbreak();
+    }
     v13 = 0;
     while ( Entity )
     {
@@ -305,17 +334,25 @@ void  CAITaskForceEx::InitWalk(bool a2) {
             i = IAIEnvironment::WorldInWorld(v7, v8) )
       {
         if ( v13 < 37 )
+        {
           v5 = v13 + 1;
+        }
         else
+        {
           v5 = 0;
+        }
         v13 = v5;
         v7 = iX0 + 2 * SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * v5]);
         v8 = iY0 + 2 * SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * v5]);
       }
       if ( v13 < 37 )
+      {
         v4 = v13 + 1;
+      }
       else
+      {
         v4 = 0;
+      }
       v13 = v4;
       v3 = CAIEntityInfo::EntityId(Entity);
       IAIEnvironment::MovingEntitySendMoveCommand(v3, v7, v8, a2);
@@ -356,9 +393,10 @@ bool  CAITaskForceEx::FindSneakUpPosition(void) {
   this->SetDestinationXY(this, -1);
   Entity = CAITaskForce::FirstEntity(this);
   if ( !Entity )
+  {
     return 0;
-  if ( !CAITaskForce::GoalIsPosition(this)
-    && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 281, "GoalIsPosition()") == 1 )
+  }
+  if ( !CAITaskForce::GoalIsPosition(this) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 281, "GoalIsPosition()") == 1 )
   {
     __debugbreak();
   }
@@ -367,9 +405,13 @@ bool  CAITaskForceEx::FindSneakUpPosition(void) {
   iDestXY = CAITaskForce::CmdGoal(this);
   iOwnerId = CAITaskForce::OwnerId(this);
   if ( !CAStarTiling::FindPath(iDestXY, iXY, &v15, iOwnerId | 0xA0) )
+  {
     return 0;
+  }
   if ( CWaypoints::CachedWaypointsCount(&v15) <= 0 )
+  {
     return 0;
+  }
   v12 = 0;
   v4 = CAITaskForce::OwnerId(this);
   v5 = IAIEnvironment::AlliancesPlayerEnemyBits(v4);
@@ -386,7 +428,9 @@ bool  CAITaskForceEx::FindSneakUpPosition(void) {
       if ( v14 )
       {
         if ( v12 > 45 )
+        {
           break;
+        }
       }
       else
       {
@@ -395,7 +439,9 @@ bool  CAITaskForceEx::FindSneakUpPosition(void) {
     }
   }
   if ( v12 <= 0 )
+  {
     return 0;
+  }
   this->SetDestinationXY(this, iDestXY);
   return 1;
 }
@@ -497,7 +543,7 @@ int  CAITaskForceEx::WaypointY(void)const {
 
 
 // address=[0x132a140]
-// Decompiled from CAITaskForceEx *__thiscall CAITaskForceEx::CAITaskForceEx(  CAITaskForceEx *this,  int iOwnerId,  int tClass,  int tType,  int iFlags)
+// Decompiled from CAITaskForceEx *__thiscall CAITaskForceEx::CAITaskForceEx(CAITaskForceEx *this, int iOwnerId, int tClass, int tType, int iFlags)
  CAITaskForceEx::CAITaskForceEx(int iOwnerId, enum T_AI_TASK_FORCE_CLASS tClass, enum T_AI_TASK_FORCE_TYPE tType, int iFlags) {
   
   CAITaskForce::CAITaskForce(this, iOwnerId, tClass, tType, iFlags);
@@ -537,10 +583,7 @@ bool  CAITaskForceEx::EscortInitWalk(void) {
     this->SetDestinationXY(this, -1);
     return 0;
   }
-  if ( !CAITaskForce::GetPositionOfFirstEntity(this, &iX, &iY)
-    || (iThisSectorId = IAIEnvironment::WorldSectorId(iX, iY),
-        iAssociatedSectorId = IAIEnvironment::WorldSectorId(iXAssociated, iYAssociated),
-        iAssociatedSectorId != iThisSectorId) )
+  if ( !CAITaskForce::GetPositionOfFirstEntity(this, &iX, &iY) || (iThisSectorId = IAIEnvironment::WorldSectorId(iX, iY), iAssociatedSectorId = IAIEnvironment::WorldSectorId(iXAssociated, iYAssociated), iAssociatedSectorId != iThisSectorId) )
   {
     this->SetDestinationXY(this, -1);
     return 0;
@@ -551,21 +594,29 @@ bool  CAITaskForceEx::EscortInitWalk(void) {
     this->SetDestinationXY(this, -1);
   }
   if ( CAITaskForceEx::DestinationXY(this) <= 0 )
+  {
     goto LABEL_17;
+  }
   iDestX = CAITaskForceEx::DestinationX(this);
   iDestY = CAITaskForceEx::DestinationY(this);
   v3 = IAIEnvironment::WorldSectorId(iDestX, iDestY);
   if ( v3 != iThisSectorId )
+  {
     goto LABEL_17;
+  }
   v10 = IAIEnvironment::GridDistance(iXAssociated - iDestX, iYAssociated - iDestY);
   if ( v10 <= 6 )
+  {
     return 1;
+  }
   if ( v10 <= 12 )
   {
     iDestOwnerId = CAITaskForce::OwnerId(this);
     iDestOwnerAllianceId = IAIEnvironment::AlliancesAllianceId(iDestOwnerId);
     if ( !CInfluMap::EnemyValueXY(iXAssociated, iYAssociated, iDestOwnerAllianceId) )
+    {
       return 1;
+    }
   }
 LABEL_17:
   iXYAssociated = IAIEnvironment::PackXYFast(iXAssociated, iYAssociated);

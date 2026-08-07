@@ -39,23 +39,18 @@ unsigned int  CAIAgentAttack::Execute(unsigned int a2, unsigned int a3) {
       CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v15);
       v12 = CAIPlayerScriptVars::operator[](0);
       if ( v12 <= 0 )
+      {
         return CAIAgent::ExecuteResult(0, 0);
+      }
       CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v15);
       v10 = CAIPlayerScriptVars::operator[](1);
       v9 = IAIEnvironment::MinutesToTicks(v10);
       v14 = IAIEnvironment::TickCounter();
       if ( v14 <= this->m_uU4 || v14 <= v9 )
+      {
         return CAIAgent::ExecuteResult(0, 0);
-      if ( (unsigned int)IAIEnvironment::Rand() < this->m_uU5
-        && ((v5 = IAIEnvironment::Rand(),
-             CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v15),
-             v6 = CAIPlayerScriptVars::operator[](2),
-             v5 >= CRandom16::PercentValue(v6))
-          ? (v13 = 2)
-          : (v13 = 1),
-            (v13 == 1 || v12 > 1)
-         && CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, 0, v13)
-         && CAIAgentAttack::OrderSquadsToSneakUpPosition(this, v13 == 1)) )
+      }
+      if ( (unsigned int)IAIEnvironment::Rand() < this->m_uU5 && ((v5 = IAIEnvironment::Rand(), CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v15), v6 = CAIPlayerScriptVars::operator[](2), v5 >= CRandom16::PercentValue(v6)) ? (v13 = 2) : (v13 = 1), (v13 == 1 || v12 > 1) && CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, 0, v13) && CAIAgentAttack::OrderSquadsToSneakUpPosition(this, v13 == 1)) )
       {
         this->m_uU1 = 1;
         return CAIAgent::ExecuteResult(0, 0);
@@ -63,23 +58,33 @@ unsigned int  CAIAgentAttack::Execute(unsigned int a2, unsigned int a3) {
       else
       {
         if ( this->m_uU5 < CRandom16::PercentValue(0x10u) )
+        {
           this->m_uU5 += CRandom16::PercentValue(2u);
+        }
         v8 = IAIEnvironment::Rand();
         return CAIAgent::ExecuteResult((v8 & 0x100) + 512, 0);
       }
     case 1:
       if ( !CAIAgentAttack::CheckCurrentTarget(this, 1) )
+      {
         goto LABEL_23;
+      }
       v11 = CAIAgentAttack::CheckIfSneakUpPositionIsReached(this);
       if ( !v11 )
+      {
         goto LABEL_23;
+      }
       if ( v11 > 0 )
+      {
         this->m_uU1 = 3;
+      }
       return CAIAgent::ExecuteResult(0, 0);
     case 2:
       CAIAgentAttack::CheckCurrentTarget(this, 1);
       if ( CAIAgentAttack::CheckSquadTargets(this) > 0 )
+      {
         return CAIAgent::ExecuteResult(0, 0);
+      }
       CAIAgentAttack::OrderSquadsHome(this, 4);
       CAIAgentAttack::ResetAttackState(this);
       return CAIAgent::ExecuteResult(0, 0);
@@ -96,13 +101,10 @@ LABEL_23:
       }
       return CAIAgent::ExecuteResult(0, 0);
     default:
-      if ( BBSupportDbgReportF(
-             1,
-             "AI\\AI_AgentsAttack.cpp",
-             783,
-             "CAIAgentAttack::Execute(): Invalid state %i!",
-             this->m_uU1) == 1 )
+      if ( BBSupportDbgReportF(1, "AI\\AI_AgentsAttack.cpp", 783, "CAIAgentAttack::Execute(): Invalid state %i!", this->m_uU1) == 1 )
+      {
         __debugbreak();
+      }
       CAIAgentAttack::ResetAttackState(this);
       return CAIAgent::ExecuteResult(0, 0);
   }
@@ -176,18 +178,20 @@ bool  CAIAgentAttack::AttackNow(int a2, int a3) {
   int v6; // eax
 
   if ( a2 && !IAIEnvironment::AlliancesIsValidUsedPlayerId(a2) )
+  {
     return 0;
+  }
   if ( a2 )
   {
     v4 = CAINormalSectorAgent::SectorAI(this);
     v5 = (pairNode *)CAISectorAI::PlayerAI(v4);
     v6 = CAIPlayerAI::PlayerId(v5);
     if ( IAIEnvironment::AlliancesAllied(v6, a2) )
+    {
       return 0;
+    }
   }
-  if ( *((_DWORD *)this + 10)
-    || !CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, a2, 0)
-    || !CAIAgentAttack::OrderSquadsToSneakUpPosition(this, a3) )
+  if ( *((_DWORD *)this + 10) || !CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, a2, 0) || !CAIAgentAttack::OrderSquadsToSneakUpPosition(this, a3) )
   {
     return 0;
   }
@@ -271,7 +275,9 @@ bool  CAIAgentAttack::CheckAttackPosition(void) {
   v3 = CAISectorAI::SectorId(v1);
   NearestSectorPosition = IAIEnvironment::FindNearestSectorPosition(this + 18, this + 19, v3, 15);
   if ( NearestSectorPosition )
+  {
     return NearestSectorPosition;
+  }
   this[18] = 0;
   this[19] = 0;
   return NearestSectorPosition;
@@ -328,7 +334,9 @@ void  CAIAgentAttack::OrderSquadsHome(enum T_AI_TASK_FORCE_CMD a2) {
   {
     result = CAITaskForceClassWalk::NextTaskForce(v8, a2);
     if ( !(_BYTE)result )
+    {
       break;
+    }
     v7 = (struct CAITaskForce *)CAITaskForceClassWalk::CurrentTaskForce(v8);
     v6 = CAINormalSectorAgent::SectorAI(v10);
     CAINormalSectorAI::MoveSquadHome(v6, v7);
@@ -371,7 +379,9 @@ int  CAIAgentAttack::CheckIfSneakUpPositionIsReached(void) {
     ++v7;
     v3 = CAITaskForceClassWalk::CurrentTaskForce(v5);
     if ( CAITaskForce::Status(v3) == 2 )
+    {
       return -1;
+    }
   }
   return v7;
 }
@@ -397,11 +407,17 @@ bool  CAIAgentAttack::CheckCurrentTarget(bool a2) {
     HasGivenUniqueId = !IAIEnvironment::AlliancesAllied(v4, v6);
   }
   if ( HasGivenUniqueId )
+  {
     return HasGivenUniqueId;
+  }
   if ( a2 )
+  {
     return CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, *((_DWORD *)this + 17), 0);
+  }
   else
+  {
     CAIAgentAttack::ResetAttackTarget(this);
+  }
   return HasGivenUniqueId;
 }
 
@@ -451,13 +467,17 @@ int  CAIAgentAttack::CheckSquadTargets(void) {
       ++v18;
       PositionOfFirstEntity = CAITaskForce::GetPositionOfFirstEntity(v21, &v14, v15);
       if ( !PositionOfFirstEntity && BBSupportDbgReport(2, "AI\\AI_AgentsAttack.cpp", 619, "bGetPositionOk") == 1 )
+      {
         __debugbreak();
+      }
       v23 = 0;
       if ( CAITaskForce::Status(v21) == 2 )
       {
         v6 = CAITaskForce::CmdTimeStamp(v21);
         if ( v6 + IAIEnvironment::Rand() % 0x80u + 185 < v17 )
+        {
           v23 = 1;
+        }
       }
       else
       {
@@ -467,7 +487,9 @@ int  CAIAgentAttack::CheckSquadTargets(void) {
       {
         v19 = 0;
         if ( !CAIAgentAttack::FindNearTarget(v20, v21, 32, &v19) )
+        {
           v19 = *((_DWORD *)v20 + 15);
+        }
         if ( v19 <= 0 )
         {
           v12 = v21;
@@ -475,10 +497,7 @@ int  CAIAgentAttack::CheckSquadTargets(void) {
           CAINormalSectorAI::MoveSquadHome(v9, v12);
           --v18;
         }
-        else if ( CAITaskForce::Command(v21) != 4
-               || (v7 = CAITaskForce::CmdGoal(v21), v7 != v19)
-               || ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(v21)) != 0
-               || (v8 = CAITaskForce::CmdTimeStamp(v21), v17 >= v8 + 1000) )
+        else if ( CAITaskForce::Command(v21) != 4 || (v7 = CAITaskForce::CmdGoal(v21), v7 != v19) || ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(v21)) != 0 || (v8 = CAITaskForce::CmdTimeStamp(v21), v17 >= v8 + 1000) )
         {
           (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)v21 + 32))(v21, 4, v19, 0);
         }
@@ -507,12 +526,18 @@ bool  CAIAgentAttack::FindNearTarget(class CAITaskForce * a2, int a3, int & a4) 
   v7[2] = this;
   *a5 = 0;
   if ( !CAITaskForce::GetPositionOfFirstEntity(a3, &v8, &v9) )
+  {
     return 0;
+  }
   v6 = CAITaskForce::OwnerId(a3);
   if ( !CScanner::FindNearestEnemyTowerInSector((struct SFindNearestResult *)v7, v8, v9, 32, v6) )
+  {
     return *a5 > 0;
+  }
   if ( v7[0] <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentsAttack.cpp", 576, "sResult.m_iEntityId > 0") == 1 )
+  {
     __debugbreak();
+  }
   *a5 = v7[0];
   return *a5 > 0;
 }
@@ -539,11 +564,7 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
   int v18; // [esp+34h] [ebp-Ch]
   int i; // [esp+3Ch] [ebp-4h]
 
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "CAIAgentAttack::CheckStrengthAndFindAnyTarget(): TargetPlayerId %u, Mode %u",
-    (DWORD)a2,
-    a3);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CAIAgentAttack::CheckStrengthAndFindAnyTarget(): TargetPlayerId %u, Mode %u", (DWORD)a2, a3);
   CAIAgentAttack::ResetAttackTarget(this);
   if ( !a3 || this->m_uU2 >= 15 )
   {
@@ -556,20 +577,30 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
       v12 = CAIPlayerAI::PlayerId(v3);
       v17 = IAIEnvironment::AlliancesPlayerAllyBits(v12);
       if ( (int)a2 > 0 )
+      {
         v17 = ~IAIEnvironment::AlliancesPlayerBit((char)a2);
+      }
       m_uU3 = this->m_uU3;
       if ( a3 > 0 )
       {
         if ( a3 == 1 )
+        {
           v13 = 3;
+        }
         else
+        {
           v13 = 4;
+        }
         CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v12);
         v11 = CAIPlayerScriptVars::operator[](v13);
         if ( v11 > 0 )
+        {
           m_uU3 = 100 * m_uU3 / v11;
+        }
       }
-      for ( i = 0; i < v10; ++i )
+      for ( i = 0;
+            i < v10;
+            ++i )
       {
         v4 = CAIGoalCache::Goal(v16, i);
         v18 = CAIGoal::EntityId((CAIGoal *)v4);
@@ -587,10 +618,7 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
             }
             else if ( CAIAgentAttack::SetAttackTarget(this, v18) )
             {
-              IMessageTracer::PushFormatedInts(
-                g_pMsgTracer,
-                "CAIAgentAttack::CheckStrengthAndFindAnyTarget(): Attack target %u",
-                v18);
+              IMessageTracer::PushFormatedInts(g_pMsgTracer, "CAIAgentAttack::CheckStrengthAndFindAnyTarget(): Attack target %u", v18);
               return 1;
             }
           }
@@ -624,7 +652,9 @@ bool  CAIAgentAttack::OrderSquadsToSneakUpPosition(int a2) {
   v11 = this;
   v8 = IAIEnvironment::PackXYFast(*((_DWORD *)this + 18), *((_DWORD *)this + 19));
   if ( v8 <= 0 )
+  {
     return 0;
+  }
   v7 = CAINormalSectorAgent::SectorAI(v11);
   v9 = (_DWORD *)CAISectorAI::TaskForceGroup(v7);
   v10 = CAITaskForceGroup::NumberOfTaskForcesOfType(v9, 5);
@@ -632,25 +662,35 @@ bool  CAIAgentAttack::OrderSquadsToSneakUpPosition(int a2) {
   if ( a2 <= 0 )
   {
     if ( a2 < 0 )
+    {
       v15 = IAIEnvironment::ClipMax(v15, a2 + v10);
+    }
   }
   else
   {
     v15 = IAIEnvironment::ClipMax(v15, a2);
   }
   if ( v15 <= 0 )
+  {
     return 0;
+  }
   if ( v15 > 50 )
+  {
     v15 = 50;
+  }
   TPriorityQueue<SSquadValue,51>::TPriorityQueue<SSquadValue,51>(v16);
-  for ( i = (CAITaskForce *)CAITaskForceGroup::FirstTaskForce(v9, 2); i; i = TaskForceGroupMemberOfSameClass )
+  for ( i = (CAITaskForce *)CAITaskForceGroup::FirstTaskForce(v9, 2);
+        i;
+        i = TaskForceGroupMemberOfSameClass )
   {
     TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
     if ( CAITaskForce::Type(i) == 5 )
     {
       v3 = i;
       if ( (*(int (__thiscall **)(CAITaskForce *, int))(*(_DWORD *)i + 16))(i, 2) )
+      {
         TPriorityQueue<SSquadValue,51>::Push(&v3);
+      }
     }
   }
   v12 = 0;

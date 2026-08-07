@@ -8,7 +8,9 @@
 bool  CGuiGameState::OnEvent(class CEvn_Event & a2) {
   
   if ( a2->m_iEventId == 3 )
+  {
     CGuiGameState::AlignDialogsInScreenCenter(this);
+  }
   return CGameState::OnEvent((int)a2);
 }
 
@@ -38,23 +40,26 @@ void  CGuiGameState::EnsureGfxEngineIsInGuiMode(void) {
   char result; // al
 
   if ( !g_pGfxEngine )
+  {
     return CGameStateHandler::RebuildGfxEngine(1);
+  }
   result = IGfxEngine::IsGuiMode(g_pGfxEngine, this);
   if ( !result )
+  {
     return CGameStateHandler::RebuildGfxEngine(1);
+  }
   return result;
 }
 
 
 // address=[0x1372180]
-// Decompiled from void __thiscall CGuiGameState::SetupGui(  CGuiGameState *this,  wchar_t *FileName,  int a3,  bool (__cdecl *a4)(int, int, int),  int a5)
+// Decompiled from void __thiscall CGuiGameState::SetupGui(CGuiGameState *this, wchar_t *FileName, int a3, bool (__cdecl *a4)(int, int, int), int a5)
 void  CGuiGameState::SetupGui(wchar_t const * FileName, int a3, bool (__cdecl*)(int,int,int) a4, int a5) {
   
   ReadDialogData(FileName);
   if ( g_pGUIEngine )
   {
-    if ( !IGuiEngine::OpenDialog(g_pGUIEngine, a5, a4)
-      && BBSupportDbgReport(2, "Main\\States\\GuiGameState.cpp", 68, "bRet") == 1 )
+    if ( !IGuiEngine::OpenDialog(g_pGUIEngine, a5, a4) && BBSupportDbgReport(2, "Main\\States\\GuiGameState.cpp", 68, "bRet") == 1 )
     {
       __debugbreak();
     }
@@ -69,15 +74,14 @@ void  CGuiGameState::SetupGui(wchar_t const * FileName, int a3, bool (__cdecl*)(
 
 
 // address=[0x1372230]
-// Decompiled from void __thiscall CGuiGameState::SetupGuiWithExtra(  CGuiGameState *this,  wchar_t *FileName,  int a3,  bool (__cdecl *a4)(int, int, int),  struct IExtraCD *pExtraCD)
+// Decompiled from void __thiscall CGuiGameState::SetupGuiWithExtra(CGuiGameState *this, wchar_t *FileName, int a3, bool (__cdecl *a4)(int, int, int), struct IExtraCD *pExtraCD)
 void  CGuiGameState::SetupGuiWithExtra(wchar_t const * FileName, int a3, bool (__cdecl*)(int,int,int) a4, class IExtraCD * pExtraCD) {
   
   ReadDialogData(FileName);
   if ( g_pGUIEngine )
   {
     pExtraCD->EnsureExtraGUI(pExtraCD, a3, a4);
-    if ( !IGuiEngine::OpenDialog(g_pGUIEngine, a3, a4)
-      && BBSupportDbgReport(2, "Main\\States\\GuiGameState.cpp", 94, "bRet") == 1 )
+    if ( !IGuiEngine::OpenDialog(g_pGUIEngine, a3, a4) && BBSupportDbgReport(2, "Main\\States\\GuiGameState.cpp", 94, "bRet") == 1 )
     {
       __debugbreak();
     }
@@ -92,14 +96,15 @@ void  CGuiGameState::SetupGuiWithExtra(wchar_t const * FileName, int a3, bool (_
 
 
 // address=[0x13722f0]
-// Decompiled from void __thiscall CGuiGameState::SetupExtraGui(  CGuiGameState *this,  struct IExtraCD *addon,  int a3,  bool (__cdecl *a4)(int, int, int))
+// Decompiled from void __thiscall CGuiGameState::SetupExtraGui(CGuiGameState *this, struct IExtraCD *addon, int a3, bool (__cdecl *a4)(int, int, int))
 void  CGuiGameState::SetupExtraGui(class IExtraCD * addon, int a3, bool (__cdecl*)(int,int,int) a4) {
   
   if ( !addon && BBSupportDbgReport(2, "Main\\States\\GuiGameState.cpp", 126, "addon") == 1 )
+  {
     __debugbreak();
+  }
   addon->EnsureExtraGUI(addon, a3, a4);
-  if ( !IGfxEngine::IsGuiMode(g_pGfxEngine)
-    && BBSupportDbgReportF(2, "Main\\States\\GuiGameState.cpp", 130, "GfxEngine not in GUI Mode after GFX switch!") == 1 )
+  if ( !IGfxEngine::IsGuiMode(g_pGfxEngine) && BBSupportDbgReportF(2, "Main\\States\\GuiGameState.cpp", 130, "GfxEngine not in GUI Mode after GFX switch!") == 1 )
   {
     __debugbreak();
   }
@@ -115,13 +120,15 @@ bool  CGuiGameState::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
 
   bRet = IGuiEngine::OpenDialog(g_pGUIEngine, a2, a3);
   if ( !bRet && BBSupportDbgReport(2, "Main\\States\\GuiGameState.cpp", 138, "bRet") == 1 )
+  {
     __debugbreak();
+  }
   return bRet;
 }
 
 
 // address=[0x14a3530]
-// Decompiled from void __thiscall CGuiGameState::SetupGui(  CGuiGameState *this,  const wchar_t *a2,  int a3,  bool (__cdecl *a4)(int, int, int))
+// Decompiled from void __thiscall CGuiGameState::SetupGui(CGuiGameState *this, const wchar_t *a2, int a3, bool (__cdecl *a4)(int, int, int))
 void  CGuiGameState::SetupGui(wchar_t const * a2, int a3, bool (__cdecl*)(int,int,int) a4) {
   
   CGuiGameState::SetupGui(this, a2, a3, a4, a3);
@@ -137,14 +144,20 @@ bool  CGuiGameState::InitGuiEngine(char * a2, int a3, bool (__cdecl*)(int,int,in
   IGuiEngine *C; // [esp+10h] [ebp-10h]
 
   if ( g_pGUIEngine )
+  {
     return 0;
+  }
   if ( GetGuiInterfaceVersion() == 120 )
   {
     C = (IGuiEngine *)operator new(0x10u);
     if ( C )
+    {
       v6 = IGuiEngine::IGuiEngine(C);
+    }
     else
+    {
       v6 = 0;
+    }
     g_pGUIEngine = v6;
     Language = CGameSettings::GetLanguage();
     IGuiEngine::Init(g_pGUIEngine, g_pGfxEngine, g_pGfxManager, (int)a2, a3, a4, Language);
@@ -172,11 +185,15 @@ void  CGuiGameState::AlignDialogsInScreenCenter(void) {
   int OutputHeight; // [esp+30h] [ebp-8h]
 
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\States\\GuiGameState.cpp", 145, "g_pGfxEngine != nullptr") == 1 )
+  {
     __debugbreak();
+  }
   if ( g_pGfxEngine )
   {
     if ( !g_pGUIEngine && BBSupportDbgReport(2, "Main\\States\\GuiGameState.cpp", 149, "g_pGUIEngine != nullptr") == 1 )
+    {
       __debugbreak();
+    }
     if ( g_pGUIEngine )
     {
       v5 = (float)g_pResolutions[1].m_iWidth / (float)g_pResolutions[1].m_iHeight;

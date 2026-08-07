@@ -23,7 +23,9 @@ void  CSurfaceV7::Release(void) {
 
   result = this;
   if ( this->innerSurface )
+  {
     return (CSurfaceV7 *)this->innerSurface->lpVtbl->Release(this->innerSurface);
+  }
   return result;
 }
 
@@ -121,7 +123,7 @@ long  CSurfaceV7::ClearSurface(struct tagRECT a2, class CBlitFX * a3) {
 
 
 // address=[0x2f86810]
-// Decompiled from HRESULT __thiscall CSurfaceV7::Blt(  CSurfaceV7 *this,  struct tagRECT *a2,  CSurfaceV7 *a3,  struct tagRECT *a4,  DWORD a5,  struct _DDBLTFX *a6)
+// Decompiled from HRESULT __thiscall CSurfaceV7::Blt(CSurfaceV7 *this, struct tagRECT *a2, CSurfaceV7 *a3, struct tagRECT *a4, DWORD a5, struct _DDBLTFX *a6)
 long  CSurfaceV7::Blt(struct tagRECT * a2, class CSurface * a3, struct tagRECT * a4, unsigned long a5, struct _DDBLTFX * a6) {
   
   HRESULT v8; // [esp+4h] [ebp-4h]
@@ -129,7 +131,9 @@ long  CSurfaceV7::Blt(struct tagRECT * a2, class CSurface * a3, struct tagRECT *
   do
   {
     do
+    {
       v8 = this->innerSurface->lpVtbl->Blt(this->innerSurface, a2, a3->innerSurface, a4, a5, a6);
+    }
     while ( v8 == -2005532132 );
   }
   while ( v8 == -2005532242 );
@@ -154,11 +158,15 @@ long  CSurfaceV7::Lock(unsigned int & a2, void * & a3, bool a4) {
 
   v7 = 1;
   if ( a4 )
+  {
     v7 = 2049;
+  }
   do
   {
     do
+    {
       v6 = this->innerSurface->lpVtbl->Lock(this->innerSurface, 0, &s_cSurfaceDescription, v7, 0);
+    }
     while ( v6 == -2005532132 );
   }
   while ( v6 == -2005532242 );
@@ -185,7 +193,9 @@ long  CSurfaceV7::GetDC(struct HDC__ * * a2) {
   do
   {
     do
+    {
       v4 = this->innerSurface->lpVtbl->GetDC(this->innerSurface, a2);
+    }
     while ( v4 == -2005532132 );
   }
   while ( v4 == -2005532242 );
@@ -197,15 +207,12 @@ long  CSurfaceV7::GetDC(struct HDC__ * * a2) {
 // Decompiled from int __thiscall CSurfaceV7::ReleaseDC(CSurfaceV7 *this, HDC a2)
 long  CSurfaceV7::ReleaseDC(struct HDC__ * a2) {
   
-  return ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, HDC))this->innerSurface->lpVtbl->ReleaseDC)(
-           this->innerSurface,
-           this->innerSurface,
-           a2);
+  return ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, HDC))this->innerSurface->lpVtbl->ReleaseDC)(this->innerSurface, this->innerSurface, a2);
 }
 
 
 // address=[0x2f869c0]
-// Decompiled from int __thiscall CSurfaceV7::CreateSurface(  CSurfaceV7 *this,  void *a2,  int a3,  int a4,  bool a5,  bool a6,  bool a7,  int a8,  bool a9,  bool a10,  bool a11)
+// Decompiled from int __thiscall CSurfaceV7::CreateSurface(CSurfaceV7 *this, void *a2, int a3, int a4, bool a5, bool a6, bool a7, int a8, bool a9, bool a10, bool a11)
 long  CSurfaceV7::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, bool a7, int a8, bool a9, bool a10, bool a11) {
   
   MEMORY[0x46C6714] = 1;
@@ -218,7 +225,9 @@ long  CSurfaceV7::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, boo
       MEMORY[0x46C6714] |= 0x20u;
       MEMORY[0x46C6724] = 1;
       if ( a6 )
+      {
         MEMORY[0x46C6778] |= 0x2000u;
+      }
     }
   }
   else
@@ -260,11 +269,17 @@ long  CSurfaceV7::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, boo
       MEMORY[0x46C6778] = 64;
     }
     if ( a5 )
+    {
       MEMORY[0x46C6778] |= 0x4000u;
+    }
     else
+    {
       MEMORY[0x46C6778] |= 0x800u;
+    }
     if ( a6 && !a7 )
+    {
       MEMORY[0x46C6778] |= 0x2000u;
+    }
     if ( a10 && a11 )
     {
       MEMORY[0x46C6778] |= 0x4018u;
@@ -272,11 +287,7 @@ long  CSurfaceV7::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, boo
       MEMORY[0x46C6724] = 1;
     }
   }
-  return (*(int (__stdcall **)(void *, void *, LPDIRECTDRAWSURFACE7 *, _DWORD))(*(_DWORD *)a2 + 24))(
-           a2,
-           &s_cSurfaceDescription,
-           &this->innerSurface,
-           0);
+  return (*(int (__stdcall **)(void *, void *, LPDIRECTDRAWSURFACE7 *, _DWORD))(*(_DWORD *)a2 + 24))(a2, &s_cSurfaceDescription, &this->innerSurface, 0);
 }
 
 
@@ -338,10 +349,7 @@ long  CSurfaceV7::GetSurfaceSize(int & a2, int & a3) {
 // Decompiled from int __thiscall CSurfaceV7::SetClipper(CSurfaceV7 *this, struct IDirectDrawClipper *a2)
 long  CSurfaceV7::SetClipper(struct IDirectDrawClipper * a2) {
   
-  return ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, struct IDirectDrawClipper *))this->innerSurface->lpVtbl->SetClipper)(
-           this->innerSurface,
-           this->innerSurface,
-           a2);
+  return ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, struct IDirectDrawClipper *))this->innerSurface->lpVtbl->SetClipper)(this->innerSurface, this->innerSurface, a2);
 }
 
 
@@ -377,11 +385,7 @@ void *  CSurfaceV7::GetAttachedSurfacePtr(void) {
   v4 = this;
   v5[0] = 4;
   memset(&v5[1], 0, 12);
-  if ( ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, _DWORD *, int *))this->innerSurface->lpVtbl->GetAttachedSurface)(
-         this->innerSurface,
-         this->innerSurface,
-         v5,
-         &v2) )
+  if ( ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, _DWORD *, int *))this->innerSurface->lpVtbl->GetAttachedSurface)(this->innerSurface, this->innerSurface, v5, &v2) )
   {
     return 0;
   }
@@ -405,11 +409,10 @@ bool  CSurfaceV7::IsBackBufferReference(void) {
 long  CSurfaceV7::SetAsRenderTarget(struct IDirect3DDevice7 * a2) {
   
   if ( !this->innerSurface )
+  {
     j___wassert(L"m_pSurfaceV7 != nullptr", L"DirectXHelperClasses.cpp", 0x56Au);
-  return (*(int (__stdcall **)(struct IDirect3DDevice7 *, LPDIRECTDRAWSURFACE7, _DWORD))(*(_DWORD *)a2 + 32))(
-           a2,
-           this->innerSurface,
-           0);
+  }
+  return (*(int (__stdcall **)(struct IDirect3DDevice7 *, LPDIRECTDRAWSURFACE7, _DWORD))(*(_DWORD *)a2 + 32))(a2, this->innerSurface, 0);
 }
 
 

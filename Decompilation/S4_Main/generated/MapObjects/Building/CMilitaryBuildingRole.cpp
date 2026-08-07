@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CMilitaryBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x1B8u) )
+  {
     return CMilitaryBuildingRole::CMilitaryBuildingRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -94,8 +98,7 @@ void  CMilitaryBuildingRole::LogicUpdate(class CBuilding * a2) {
   unsigned int v2; // esi
   int v3; // eax
 
-  if ( (*(int (__thiscall **)(struct CBuilding *))(*(_DWORD *)a2 + 40))(a2) < *(unsigned __int8 *)(*((_DWORD *)this + 94)
-                                                                                                 + 500) )
+  if ( (*(int (__thiscall **)(struct CBuilding *))(*(_DWORD *)a2 + 40))(a2) < *(unsigned __int8 *)(*((_DWORD *)this + 94) + 500) )
   {
     v2 = CStateGame::Rand(g_pGame);
     if ( v2 < CRandom16::PercentValue(0x21u) )
@@ -108,7 +111,9 @@ void  CMilitaryBuildingRole::LogicUpdate(class CBuilding * a2) {
   CMilitaryBuildingRole::ThrowOut(this, a2);
   CMilitaryBuildingRole::OrderWarrior(this, a2);
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     (*(void (__thiscall **)(CMilitaryBuildingRole *, struct CBuilding *, int))(*(_DWORD *)this + 88))(this, a2, 1);
+  }
   return IAnimatedEntity::RegisterForLogicUpdate(15);
 }
 
@@ -121,10 +126,14 @@ void  CMilitaryBuildingRole::Update(class CBuilding * a2) {
 
   result = IBuildingRole::Update(a2);
   if ( !*(_WORD *)(this + 10) )
+  {
     return result;
+  }
   result = this;
   if ( !*(_BYTE *)(this + 400) )
+  {
     return result;
+  }
   result = this;
   *(_BYTE *)(this + 359) = (*(unsigned __int8 *)(this + 359) + 1) % *(_DWORD *)(this + 404);
   return result;
@@ -162,7 +171,9 @@ void  CMilitaryBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObject
     this[37] = this[85];
     v3 = (_DWORD *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 193));
     if ( !IEntity::FlagBits(v3, (EntityFlag)0x10000u) )
+    {
       ++this[37];
+    }
   }
   (*(void (__thiscall **)(_DWORD *, unsigned __int16 *))(*this + 16))(this, a2);
   v4 = IEntity::Type(a2);
@@ -185,14 +196,11 @@ void  CMilitaryBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObject
         v17 = 2;
         break;
     }
-    for ( i = 0; i < this[99] && dword_3D8B148[45 * v14 + 15 * v17 + 3 * i]; ++i )
+    for ( i = 0;
+          i < this[99] && dword_3D8B148[45 * v14 + 15 * v17 + 3 * i];
+          ++i )
     {
-      CGfxManager::GetEffectGfxInfo(
-        (CGfxManager *)g_pGfxManager,
-        (struct SGfxObjectInfo *)v22,
-        dword_3D8B148[45 * v14 + 15 * v17 + 3 * i],
-        0,
-        *((unsigned __int8 *)this + 359));
+      CGfxManager::GetEffectGfxInfo((CGfxManager *)g_pGfxManager, (struct SGfxObjectInfo *)v22, dword_3D8B148[45 * v14 + 15 * v17 + 3 * i], 0, *((unsigned __int8 *)this + 359));
       *(_DWORD *)(a3 + 16 * i + 104) = v22[0];
       *(_DWORD *)(a3 + 16 * i + 108) = v22[1];
       *(_DWORD *)(a3 + 16 * i + 112) = dword_3D8B148[45 * v14 + 1 + 15 * v17 + 3 * i];
@@ -201,12 +209,13 @@ void  CMilitaryBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObject
   }
   v6 = IEntity::OwnerId((unsigned __int8 *)a2);
   *(_BYTE *)(a3 + 715) = CPlayerManager::Color(v6);
-  for ( j = 0; j < std::vector<unsigned short>::size(this + 106); ++j )
+  for ( j = 0;
+        j < std::vector<unsigned short>::size(this + 106);
+        ++j )
   {
     if ( *(_WORD *)std::vector<unsigned short>::operator[](this + 106, j) )
     {
-      if ( *(unsigned __int16 *)std::vector<unsigned short>::operator[](this + 106, j) != *((unsigned __int16 *)this
-                                                                                          + 194) )
+      if ( *(unsigned __int16 *)std::vector<unsigned short>::operator[](this + 106, j) != *((unsigned __int16 *)this + 194) )
       {
         v7 = (unsigned __int16 *)std::vector<unsigned short>::operator[](this + 106, j);
         v8 = (CSettler *)CSettlerMgr::operator[](*v7);
@@ -216,7 +225,9 @@ void  CMilitaryBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObject
   }
   result = *((unsigned __int8 *)this + 29);
   if ( !*((_BYTE *)this + 29) )
+  {
     return result;
+  }
   v15 = 0;
   switch ( IEntity::Race(a2) )
   {
@@ -235,14 +246,10 @@ void  CMilitaryBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObject
     default:
       v12 = IEntity::Type(a2);
       v10 = IEntity::Race(a2);
-      if ( BBSupportDbgReportF(
-             2,
-             "MapObjects\\Building\\MilitaryBuilding.cpp",
-             1040,
-             "Invalid Race %u for Military Building Role Type %u",
-             v10,
-             v12) == 1 )
+      if ( BBSupportDbgReportF(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1040, "Invalid Race %u for Military Building Role Type %u", v10, v12) == 1 )
+      {
         __debugbreak();
+      }
       break;
   }
   if ( v15 )
@@ -280,39 +287,19 @@ void  CMilitaryBuildingRole::Init(class CBuilding * a2) {
   int v6; // [esp+0h] [ebp-Ch]
 
   IBuildingRole::InitCommon((int)a2);
-  if ( !*(_BYTE *)(this[94] + 220)
-    && BBSupportDbgReport(
-         2,
-         (int)"MapObjects\\Building\\MilitaryBuilding.cpp",
-         378,
-         (int)"m_pBuildingInfo->m_uWarriorNumber > 0") == 1 )
+  if ( !*(_BYTE *)(this[94] + 220) && BBSupportDbgReport(2, (int)"MapObjects\\Building\\MilitaryBuilding.cpp", 378, (int)"m_pBuildingInfo->m_uWarriorNumber > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !*(_BYTE *)(this[94] + 221)
-    && BBSupportDbgReport(
-         2,
-         (int)"MapObjects\\Building\\MilitaryBuilding.cpp",
-         379,
-         (int)"m_pBuildingInfo->m_uSwordsmanNumber > 0") == 1 )
+  if ( !*(_BYTE *)(this[94] + 221) && BBSupportDbgReport(2, (int)"MapObjects\\Building\\MilitaryBuilding.cpp", 379, (int)"m_pBuildingInfo->m_uSwordsmanNumber > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !*(_BYTE *)(this[94] + 222)
-    && BBSupportDbgReport(
-         2,
-         (int)"MapObjects\\Building\\MilitaryBuilding.cpp",
-         380,
-         (int)"m_pBuildingInfo->m_uBowmanNumber > 0") == 1 )
+  if ( !*(_BYTE *)(this[94] + 222) && BBSupportDbgReport(2, (int)"MapObjects\\Building\\MilitaryBuilding.cpp", 380, (int)"m_pBuildingInfo->m_uBowmanNumber > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *(char *)(this[94] + 223) < 0
-    && BBSupportDbgReport(
-         2,
-         (int)"MapObjects\\Building\\MilitaryBuilding.cpp",
-         381,
-         (int)"m_pBuildingInfo->m_iAboveDoorSlot >= 0") == 1 )
+  if ( *(char *)(this[94] + 223) < 0 && BBSupportDbgReport(2, (int)"MapObjects\\Building\\MilitaryBuilding.cpp", 381, (int)"m_pBuildingInfo->m_iAboveDoorSlot >= 0") == 1 )
   {
     __debugbreak();
   }
@@ -335,7 +322,9 @@ void  CMilitaryBuildingRole::Init(class CBuilding * a2) {
   std::vector<unsigned short>::clear();
   std::vector<unsigned short>::resize(*(unsigned __int8 *)(this[94] + 220));
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     (*(void (__thiscall **)(_DWORD *, _DWORD *, _DWORD))(*this + 88))(this, a2, 0);
+  }
   v2 = IEntity::WorldIdx();
   v6 = *(char *)(this[94] + 40) + CWorldManager::X(v2);
   v3 = IEntity::WorldIdx();
@@ -357,35 +346,28 @@ void  CMilitaryBuildingRole::PostLoadInit(class CBuilding * a2) {
   v4 = IEntity::Type((unsigned __int16 *)a2);
   v2 = IEntity::Race(a2);
   *((_DWORD *)this + 94) = CBuildingInfoMgr::GetBuildingInfo(v2, v4);
-  if ( !*(_BYTE *)(*((_DWORD *)this + 94) + 220)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 362, "m_pBuildingInfo->m_uWarriorNumber > 0") == 1 )
+  if ( !*(_BYTE *)(*((_DWORD *)this + 94) + 220) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 362, "m_pBuildingInfo->m_uWarriorNumber > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !*(_BYTE *)(*((_DWORD *)this + 94) + 221)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         363,
-         "m_pBuildingInfo->m_uSwordsmanNumber > 0") == 1 )
+  if ( !*(_BYTE *)(*((_DWORD *)this + 94) + 221) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 363, "m_pBuildingInfo->m_uSwordsmanNumber > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !*(_BYTE *)(*((_DWORD *)this + 94) + 222)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 364, "m_pBuildingInfo->m_uBowmanNumber > 0") == 1 )
+  if ( !*(_BYTE *)(*((_DWORD *)this + 94) + 222) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 364, "m_pBuildingInfo->m_uBowmanNumber > 0") == 1 )
   {
     __debugbreak();
   }
   result = *((_DWORD *)this + 94);
   if ( *(char *)(result + 223) >= 0 )
+  {
     return result;
-  result = BBSupportDbgReport(
-             2,
-             "MapObjects\\Building\\MilitaryBuilding.cpp",
-             365,
-             "m_pBuildingInfo->m_iAboveDoorSlot >= 0");
+  }
+  result = BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 365, "m_pBuildingInfo->m_iAboveDoorSlot >= 0");
   if ( result == 1 )
+  {
     __debugbreak();
+  }
   return result;
 }
 
@@ -424,32 +406,30 @@ void  CMilitaryBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cMilitaryBuildingInfo.m_bHasWorkingArea = 0;
   cType = IEntity::Type(a2);
   cOwnerId = IEntity::OwnerId(a2);
-  g_cMilitaryBuildingInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings(
-                                            (CBuildingMgr *)g_cBuildingMgr,
-                                            cOwnerId,
-                                            cType,
-                                            0);
+  g_cMilitaryBuildingInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, cOwnerId, cType, 0);
   cType = IEntity::Type(a2);
   cOwnerId = IEntity::OwnerId(a2);
-  g_cMilitaryBuildingInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings(
-                                                 (CBuildingMgr *)g_cBuildingMgr,
-                                                 cOwnerId,
-                                                 cType,
-                                                 1u);
+  g_cMilitaryBuildingInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, cOwnerId, cType, 1u);
   g_cMilitaryBuildingInfo.m_bInhabitants = *((_BYTE *)this + 29);
-  for ( i = 0; i < *((unsigned __int8 *)this + 385); ++i )
+  for ( i = 0;
+        i < *((unsigned __int8 *)this + 385);
+        ++i )
   {
     g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitType = -2;
     g_cMilitaryBuildingInfo.m_aStationedSoldiers[i].m_cUnitHealth = 0;
   }
-  for ( j = 0; j < *((unsigned __int8 *)this + 384); ++j )
+  for ( j = 0;
+        j < *((unsigned __int8 *)this + 384);
+        ++j )
   {
     g_cMilitaryBuildingInfo.m_aStationedArchers[j].m_cUnitType = -2;
     g_cMilitaryBuildingInfo.m_aStationedArchers[j].m_cUnitHealth = 0;
   }
   v17 = 0;
   v16 = 0;
-  for ( k = 0; k < std::vector<unsigned short>::size((char *)this + 424); ++k )
+  for ( k = 0;
+        k < std::vector<unsigned short>::size((char *)this + 424);
+        ++k )
   {
     v5 = (_WORD *)std::vector<unsigned short>::operator[]((char *)this + 424, k);
     if ( *v5 )
@@ -464,7 +444,9 @@ void  CMilitaryBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
       {
         v13 = ((int (__thiscall *)(IEntity *))v18->Amount)(v18);
         if ( v13 < m_bHealth )
+        {
           v14 = 100 * v13 / m_bHealth;
+        }
       }
       if ( *(_BYTE *)(*((_DWORD *)this + 94) + 12 * k + 233) )
       {
@@ -478,19 +460,25 @@ void  CMilitaryBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
       }
     }
   }
-  for ( m = v17; m < *((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 381); ++m )
+  for ( m = v17;
+        m < *((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 381);
+        ++m )
   {
     g_cMilitaryBuildingInfo.m_aStationedSoldiers[m].m_cUnitType = -1;
     g_cMilitaryBuildingInfo.m_aStationedSoldiers[m].m_cUnitHealth = 0;
   }
-  for ( n = v16; n < *((unsigned __int8 *)this + 382) + *((unsigned __int8 *)this + 380); ++n )
+  for ( n = v16;
+        n < *((unsigned __int8 *)this + 382) + *((unsigned __int8 *)this + 380);
+        ++n )
   {
     g_cMilitaryBuildingInfo.m_aStationedArchers[n].m_cUnitType = -1;
     g_cMilitaryBuildingInfo.m_aStationedArchers[n].m_cUnitHealth = 0;
   }
   v12 = 604;
   if ( !a3 )
+  {
     v12 = 602;
+  }
   CEvn_Event::CEvn_Event(&v25, v12, 0, (unsigned int)&g_cMilitaryBuildingInfo, 0);
   v26 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v25);
@@ -505,13 +493,14 @@ bool  CMilitaryBuildingRole::IncWishAndOrder(int a2, bool a3) {
   
   if ( a2 == 2 )
   {
-    if ( *((unsigned __int8 *)this + 385) >= (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 221)
-      || *((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 381) >= *(unsigned __int8 *)(*((_DWORD *)this + 94) + 221) )
+    if ( *((unsigned __int8 *)this + 385) >= (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 221) || *((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 381) >= *(unsigned __int8 *)(*((_DWORD *)this + 94) + 221) )
     {
       return 0;
     }
     if ( a3 )
+    {
       return 1;
+    }
     ++*((_BYTE *)this + 385);
     ++*((_BYTE *)this + 383);
     return 1;
@@ -520,21 +509,20 @@ bool  CMilitaryBuildingRole::IncWishAndOrder(int a2, bool a3) {
   {
     if ( a2 != 3 )
     {
-      if ( BBSupportDbgReport(
-             1,
-             "MapObjects\\Building\\MilitaryBuilding.cpp",
-             1312,
-             "CMilitaryBuildingRole::IncWishAndOrder(): Invalid warrior type!") == 1 )
+      if ( BBSupportDbgReport(1, "MapObjects\\Building\\MilitaryBuilding.cpp", 1312, "CMilitaryBuildingRole::IncWishAndOrder(): Invalid warrior type!") == 1 )
+      {
         __debugbreak();
+      }
       return 0;
     }
-    if ( *((unsigned __int8 *)this + 384) >= (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 222)
-      || *((unsigned __int8 *)this + 382) + *((unsigned __int8 *)this + 380) >= *(unsigned __int8 *)(*((_DWORD *)this + 94) + 222) )
+    if ( *((unsigned __int8 *)this + 384) >= (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 222) || *((unsigned __int8 *)this + 382) + *((unsigned __int8 *)this + 380) >= *(unsigned __int8 *)(*((_DWORD *)this + 94) + 222) )
     {
       return 0;
     }
     if ( a3 )
+    {
       return 1;
+    }
     ++*((_BYTE *)this + 384);
     ++*((_BYTE *)this + 382);
     return 1;
@@ -547,9 +535,13 @@ bool  CMilitaryBuildingRole::IncWishAndOrder(int a2, bool a3) {
 int  CMilitaryBuildingRole::GetWish(int a2) {
   
   if ( a2 == 2 )
+  {
     return (unsigned __int8)this[1].m_iDelayTick;
+  }
   if ( a2 == 3 )
+  {
     return (unsigned __int8)this[1].m_uLogicState;
+  }
   return 0;
 }
 
@@ -564,13 +556,19 @@ int  CMilitaryBuildingRole::Decrease(int a2) {
 
   v6 = IBuildingRole::Decrease(this, a2);
   if ( v6 <= 0 )
+  {
     return 0;
+  }
   BuildingPtr = (IEntity *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
   if ( !BuildingPtr || IEntity::FlagBits(BuildingPtr, (EntityFlag)&MEMORY[0x4000000]) )
+  {
     return v6;
+  }
   v3 = IEntity::Hitpoints(BuildingPtr) - v6;
   if ( v3 > 0 )
+  {
     CMilitaryBuildingRole::SetEffectDisplay(this, v3, 0);
+  }
   return v6;
 }
 
@@ -581,14 +579,11 @@ bool  CMilitaryBuildingRole::HaveFreeSlots(int a2) {
   
   if ( a2 != 2 )
   {
-    if ( a2 != 3
-      || *((unsigned __int8 *)this + 384) >= (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 222)
-      || *((unsigned __int8 *)this + 382) + *((unsigned __int8 *)this + 380) >= *(unsigned __int8 *)(*((_DWORD *)this + 94) + 222) )
+    if ( a2 != 3 || *((unsigned __int8 *)this + 384) >= (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 222) || *((unsigned __int8 *)this + 382) + *((unsigned __int8 *)this + 380) >= *(unsigned __int8 *)(*((_DWORD *)this + 94) + 222) )
     {
       return 0;
     }
-    if ( (int)CMilitaryBuildingRole::GetFirstFreeSlot(this, 1) < 0
-      && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1919, "GetFirstFreeSlot(true) >= 0") == 1 )
+    if ( (int)CMilitaryBuildingRole::GetFirstFreeSlot(this, 1) < 0 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1919, "GetFirstFreeSlot(true) >= 0") == 1 )
     {
       __debugbreak();
     }
@@ -596,14 +591,11 @@ bool  CMilitaryBuildingRole::HaveFreeSlots(int a2) {
     ++*((_BYTE *)this + 384);
     return 1;
   }
-  if ( *((unsigned __int8 *)this + 385) >= (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 221)
-    || *((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 381) >= *(unsigned __int8 *)(*((_DWORD *)this + 94)
-                                                                                                 + 221) )
+  if ( *((unsigned __int8 *)this + 385) >= (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 221) || *((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 381) >= *(unsigned __int8 *)(*((_DWORD *)this + 94) + 221) )
   {
     return 0;
   }
-  if ( (int)CMilitaryBuildingRole::GetFirstFreeSlot(this, 0) < 0
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1938, "GetFirstFreeSlot(false) >= 0") == 1 )
+  if ( (int)CMilitaryBuildingRole::GetFirstFreeSlot(this, 0) < 0 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1938, "GetFirstFreeSlot(false) >= 0") == 1 )
   {
     __debugbreak();
   }
@@ -624,22 +616,21 @@ void  CMilitaryBuildingRole::RemoveInhabitant(class CBuilding * a2) {
   signed int i; // [esp+8h] [ebp-8h]
 
   if ( *((_WORD *)this + 194) )
+  {
     CMilitaryBuildingRole::TowerGuardEnter(this, 0);
+  }
   CMilitaryBuildingRole::RemoveDoorIfNecessary(this, a2);
   result = std::vector<unsigned short>::size((char *)this + 424);
   v5 = result;
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
     v3 = (_WORD *)std::vector<unsigned short>::operator[]((char *)this + 424, i);
     if ( *v3 )
     {
       v4 = (_DWORD *)CSettlerMgr::operator[]((unsigned __int16)*v3);
-      if ( !IEntity::FlagBits(v4, ENTITY_FLAG_ON_BOARD)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Building\\MilitaryBuilding.cpp",
-             1175,
-             "g_cSettlerMgr[iInhabitantId].FlagBits(ENTITY_FLAG_ON_BOARD) != 0") == 1 )
+      if ( !IEntity::FlagBits(v4, ENTITY_FLAG_ON_BOARD) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1175, "g_cSettlerMgr[iInhabitantId].FlagBits(ENTITY_FLAG_ON_BOARD) != 0") == 1 )
       {
         __debugbreak();
       }
@@ -660,7 +651,9 @@ void  CMilitaryBuildingRole::InhabitantFlee(int a2) {
   signed int Slot; // [esp+8h] [ebp-8h]
 
   if ( a2 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1420, "_iSettlerId > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 == *((unsigned __int16 *)this + 193) )
   {
     CMilitaryBuildingRole::OnDoorKilled(this);
@@ -673,8 +666,7 @@ void  CMilitaryBuildingRole::InhabitantFlee(int a2) {
       CSettlerMgr::operator[](a2);
       if ( IEntity::WarriorType() == 3 )
       {
-        if ( !*((_BYTE *)this + 382)
-          && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1463, "m_uNrOfBowmenOrders > 0") == 1 )
+        if ( !*((_BYTE *)this + 382) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1463, "m_uNrOfBowmenOrders > 0") == 1 )
         {
           __debugbreak();
         }
@@ -682,19 +674,13 @@ void  CMilitaryBuildingRole::InhabitantFlee(int a2) {
       }
       else if ( IEntity::WarriorType() == 2 )
       {
-        if ( !*((_BYTE *)this + 383)
-          && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1469, "m_uNrOfSwordsmenOrders > 0") == 1 )
+        if ( !*((_BYTE *)this + 383) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1469, "m_uNrOfSwordsmenOrders > 0") == 1 )
         {
           __debugbreak();
         }
         --*((_BYTE *)this + 383);
       }
-      else if ( BBSupportDbgReportF(
-                  1,
-                  "MapObjects\\Building\\MilitaryBuilding.cpp",
-                  1475,
-                  "CMilitaryBuildingRole::InhabitantFlee(): Invalid settler id %i!",
-                  a2) == 1 )
+      else if ( BBSupportDbgReportF(1, "MapObjects\\Building\\MilitaryBuilding.cpp", 1475, "CMilitaryBuildingRole::InhabitantFlee(): Invalid settler id %i!", a2) == 1 )
       {
         __debugbreak();
       }
@@ -706,8 +692,7 @@ void  CMilitaryBuildingRole::InhabitantFlee(int a2) {
       *(_WORD *)std::vector<unsigned short>::operator[]((char *)this + 424, Slot) = 0;
       if ( CMilitaryBuildingRole::IsTopPosition(this, Slot) )
       {
-        if ( !*((_BYTE *)this + 380)
-          && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1437, "m_uNrOfBowmen > 0") == 1 )
+        if ( !*((_BYTE *)this + 380) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1437, "m_uNrOfBowmen > 0") == 1 )
         {
           __debugbreak();
         }
@@ -716,8 +701,7 @@ void  CMilitaryBuildingRole::InhabitantFlee(int a2) {
       }
       else
       {
-        if ( !*((_BYTE *)this + 381)
-          && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1445, "m_uNrOfSwordsmen > 0") == 1 )
+        if ( !*((_BYTE *)this + 381) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1445, "m_uNrOfSwordsmen > 0") == 1 )
         {
           __debugbreak();
         }
@@ -725,7 +709,9 @@ void  CMilitaryBuildingRole::InhabitantFlee(int a2) {
         CMilitaryBuildingRole::MoveAfterWindow(this);
       }
       if ( a2 == *((unsigned __int16 *)this + 194) )
+      {
         CMilitaryBuildingRole::OnTowerGuardKilled(this);
+      }
     }
   }
 }
@@ -742,18 +728,14 @@ void  CMilitaryBuildingRole::SetDoorInvincible(int a2) {
 
   result = this;
   if ( !*((_WORD *)this + 193) )
+  {
     return result;
+  }
   v5 = (_DWORD *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 193));
   IEntity::ClearFlagBits(v5, (EntityFlag)0x10000u);
   v4 = CLogic::FutureEvents(g_pLogic);
   v3 = IEntity::ID();
-  return (CMilitaryBuildingRole *)(*(int (__thiscall **)(int, int, int, int, int, _DWORD))(*(_DWORD *)v4 + 12))(
-                                    v4,
-                                    1,
-                                    a2,
-                                    v3,
-                                    0x10000,
-                                    0);
+  return (CMilitaryBuildingRole *)(*(int (__thiscall **)(int, int, int, int, int, _DWORD))(*(_DWORD *)v4 + 12))(v4, 1, a2, v3, 0x10000, 0);
 }
 
 
@@ -794,7 +776,9 @@ void  CMilitaryBuildingRole::SetDoorInvincible(int a2) {
   operator^<unsigned short>(a2, v8 + 386);
   operator^<unsigned short>(a2, v8 + 388);
   if ( v6 >= 2 )
+  {
     operator^<unsigned int>(a2, v8 + 392);
+  }
   if ( v6 >= 3 )
   {
     operator^<bool>(a2, v8 + 400);
@@ -802,13 +786,17 @@ void  CMilitaryBuildingRole::SetDoorInvincible(int a2) {
     operator^<int>(a2, (int)(v8 + 396));
   }
   operator^<unsigned int>(a2, &v5);
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
     v2 = std::vector<unsigned short>::operator[](v8 + 408, i);
     operator^<unsigned short>(a2, v2);
   }
   operator^<unsigned int>(a2, &v5);
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
     operator^<unsigned short>(a2, v9);
     std::vector<unsigned short>::push_back(v9);
@@ -848,18 +836,24 @@ void  CMilitaryBuildingRole::Store(std::ostream & a2) {
   operator^<int>((int)a2, (int *)v8 + 99);
   v6 = std::vector<unsigned short>::size((char *)v8 + 408);
   operator^<unsigned int>(a2, &v6);
-  for ( i = 0; i < v6; ++i )
+  for ( i = 0;
+        i < v6;
+        ++i )
   {
     v2 = (__int16 *)std::vector<unsigned short>::operator[]((char *)v8 + 408, i);
     operator^<unsigned short>((int)a2, v2);
   }
   v6 = std::vector<unsigned short>::size((char *)v8 + 424);
   operator^<unsigned int>(a2, &v6);
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = i;
     if ( i >= v6 )
+    {
       break;
+    }
     v4 = (__int16 *)std::vector<unsigned short>::operator[]((char *)v8 + 424, i);
     operator^<unsigned short>((int)a2, v4);
   }
@@ -898,10 +892,14 @@ bool  CMilitaryBuildingRole::TryCrushBuilding(void) {
 
   v7 = (struct CBuilding *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   if ( !CMilitaryBuildingRole::SearchAttacker(this, v7) )
+  {
     return 1;
+  }
   v1 = IEntity::OwnerId((unsigned __int8 *)v7);
   if ( v1 != CPlayerManager::GetLocalPlayerId() )
+  {
     return 0;
+  }
   v5 = IEntity::Y(v7);
   v4 = IEntity::X(v7);
   v2 = IEntity::OwnerId((unsigned __int8 *)v7);
@@ -965,9 +963,13 @@ bool  CMilitaryBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
 
   v23 = this;
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 588, "_pBuilding != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 589, "_iSettlerId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);
   v4 = (unsigned __int8 *)CSettlerMgr::operator[](a3);
   if ( v3 == IEntity::OwnerId(v4) || *((unsigned __int16 *)v23 + 194) != a3 )
@@ -985,9 +987,13 @@ bool  CMilitaryBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
         C = operator new(0x34u);
         v24 = 0;
         if ( C )
+        {
           v18 = CTowerSoldier::CTowerSoldier((CTowerSoldier *)C);
+        }
         else
+        {
           v18 = 0;
+        }
         v15 = v18;
         std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>(v18);
         v24 = 1;
@@ -1007,10 +1013,11 @@ bool  CMilitaryBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
         if ( v17 == 2 )
         {
           v14 = *(unsigned __int8 *)(*((_DWORD *)v23 + 94) + 220);
-          for ( i = 0; i < v14; ++i )
+          for ( i = 0;
+                i < v14;
+                ++i )
           {
-            if ( !*(_BYTE *)(*((_DWORD *)v23 + 94) + 12 * i + 233)
-              && !*(_WORD *)std::vector<unsigned short>::operator[]((char *)v23 + 424, i) )
+            if ( !*(_BYTE *)(*((_DWORD *)v23 + 94) + 12 * i + 233) && !*(_WORD *)std::vector<unsigned short>::operator[]((char *)v23 + 424, i) )
             {
               v10 = IEntity::ID();
               *(_WORD *)std::vector<unsigned short>::operator[]((char *)v23 + 424, i) = v10;
@@ -1024,10 +1031,11 @@ bool  CMilitaryBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
         else if ( v17 == 3 )
         {
           v13 = *(unsigned __int8 *)(*((_DWORD *)v23 + 94) + 220);
-          for ( j = 0; j < v13; ++j )
+          for ( j = 0;
+                j < v13;
+                ++j )
           {
-            if ( *(_BYTE *)(*((_DWORD *)v23 + 94) + 12 * j + 233)
-              && !*(_WORD *)std::vector<unsigned short>::operator[]((char *)v23 + 424, j) )
+            if ( *(_BYTE *)(*((_DWORD *)v23 + 94) + 12 * j + 233) && !*(_WORD *)std::vector<unsigned short>::operator[]((char *)v23 + 424, j) )
             {
               v11 = IEntity::ID();
               *(_WORD *)std::vector<unsigned short>::operator[]((char *)v23 + 424, j) = v11;
@@ -1038,11 +1046,7 @@ bool  CMilitaryBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
           ++*((_BYTE *)v23 + 380);
           --*((_BYTE *)v23 + 382);
         }
-        else if ( BBSupportDbgReportF(
-                    2,
-                    "MapObjects\\Building\\MilitaryBuilding.cpp",
-                    718,
-                    "Wrong m_sWarriors type enter a tower") == 1 )
+        else if ( BBSupportDbgReportF(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 718, "Wrong m_sWarriors type enter a tower") == 1 )
         {
           __debugbreak();
         }
@@ -1110,25 +1114,26 @@ bool  CMilitaryBuildingRole::FirstSettlerEnter(class CBuilding * a2, int a3) {
   int v39; // [esp+7Ch] [ebp-4h]
 
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 441, "_pBuilding != 0") == 1 )
+  {
     __debugbreak();
+  }
   v35 = (unsigned __int8 *)CSettlerMgr::operator[](a3);
-  if ( *((_BYTE *)this + 29)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 445, "!m_bWorkerInHouse") == 1 )
+  if ( *((_BYTE *)this + 29) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 445, "!m_bWorkerInHouse") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_BYTE *)this + 380)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 446, "m_uNrOfBowmen == 0") == 1 )
+  if ( *((_BYTE *)this + 380) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 446, "m_uNrOfBowmen == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_BYTE *)this + 381)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 447, "m_uNrOfSwordsmen == 0") == 1 )
+  if ( *((_BYTE *)this + 381) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 447, "m_uNrOfSwordsmen == 0") == 1 )
   {
     __debugbreak();
   }
   if ( IEntity::Race(v35) == 3 )
+  {
     return 1;
+  }
   *((_BYTE *)this + 29) = 1;
   if ( CBuildingMgr::InLoadBuildingData((CBuildingMgr *)g_cBuildingMgr) )
   {
@@ -1151,13 +1156,14 @@ bool  CMilitaryBuildingRole::FirstSettlerEnter(class CBuilding * a2, int a3) {
       v6 = IEntity::ID();
       CEvn_Logic::CEvn_Logic((CEvn_Logic *)v38, 0x2BDu, v6, 0, v17, 0, 0);
       v39 = 0;
-      if ( !g_pEvnEngine
-        && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 479, "g_pEvnEngine != NULL") == 1 )
+      if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 479, "g_pEvnEngine != NULL") == 1 )
       {
         __debugbreak();
       }
       if ( g_pEvnEngine )
+      {
         IEventEngine::SendAMessage(g_pEvnEngine, v38);
+      }
       v39 = -1;
       CEvn_Logic::~CEvn_Logic(v38);
     }
@@ -1166,12 +1172,7 @@ bool  CMilitaryBuildingRole::FirstSettlerEnter(class CBuilding * a2, int a3) {
       v27 = IEntity::UniqueId(a2);
       v7 = IEntity::EntityId((unsigned __int16 *)a2);
       CMapObjectMgr::AssignNewUniqueId(v7);
-      if ( IEntity::UniqueId(a2) == v27
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Building\\MilitaryBuilding.cpp",
-             491,
-             "_pBuilding->UniqueId() != iOldUniqueId") == 1 )
+      if ( IEntity::UniqueId(a2) == v27 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 491, "_pBuilding->UniqueId() != iOldUniqueId") == 1 )
       {
         __debugbreak();
       }
@@ -1187,18 +1188,21 @@ bool  CMilitaryBuildingRole::FirstSettlerEnter(class CBuilding * a2, int a3) {
       v10 = IEntity::ID();
       CEvn_Logic::CEvn_Logic((CEvn_Logic *)v37, 0x2BFu, v10, 0, v18, 0, 0);
       v39 = 1;
-      if ( !g_pEvnEngine
-        && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 507, "g_pEvnEngine != NULL") == 1 )
+      if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 507, "g_pEvnEngine != NULL") == 1 )
       {
         __debugbreak();
       }
       if ( g_pEvnEngine )
+      {
         IEventEngine::SendAMessage(g_pEvnEngine, v37);
+      }
       v32 = IEntity::EntityId((unsigned __int16 *)a2);
       v34 = IEntity::OwnerId((unsigned __int8 *)a2);
       v33 = IEntity::OwnerId(v35);
       if ( v34 == CPlayerManager::GetLocalPlayerId() )
+      {
         CInputProcessor::DeSelectEntity(&g_cInputProcessor, v32);
+      }
       CBuildingMgr::ChangeOwnerIdOfBuilding((CBuildingMgr *)g_cBuildingMgr, v32, v33);
       v21 = IEntity::Y(a2);
       v11 = IEntity::X(a2);
@@ -1236,25 +1240,18 @@ void  CMilitaryBuildingRole::TowerGuardEnter(bool a2) {
   CMFCToolBarButton *v3; // [esp+4h] [ebp-Ch]
   IAnimatedEntity *v5; // [esp+Ch] [ebp-4h]
 
-  if ( !*((_WORD *)this + 3)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 554, "m_uBuildingId > 0") == 1 )
+  if ( !*((_WORD *)this + 3) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 554, "m_uBuildingId > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_WORD *)this + 194)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 555, "m_uTowerGuardId > 0") == 1 )
+  if ( !*((_WORD *)this + 194) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 555, "m_uTowerGuardId > 0") == 1 )
   {
     __debugbreak();
   }
   v3 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   v5 = (IAnimatedEntity *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 194));
   v2 = IEntity::PackedXY(v5);
-  if ( v2 != CBuilding::DoorPackedXY(v3)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         560,
-         "rTowerGuard.PackedXY() == rBuilding.DoorPackedXY()") == 1 )
+  if ( v2 != CBuilding::DoorPackedXY(v3) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 560, "rTowerGuard.PackedXY() == rBuilding.DoorPackedXY()") == 1 )
   {
     __debugbreak();
   }
@@ -1266,7 +1263,9 @@ void  CMilitaryBuildingRole::TowerGuardEnter(bool a2) {
   CMilitaryBuildingRole::SetSettlerTowerInfo(this, v5, -1, -1, 0);
   *((_WORD *)this + 194) = 0;
   if ( a2 )
+  {
     CMilitaryBuildingRole::InsertDoor(this, v3, 0);
+  }
 }
 
 
@@ -1285,23 +1284,22 @@ void  CMilitaryBuildingRole::KillInhabitant(class CBuilding * a2) {
   v2 = IEntity::OwnerId((unsigned __int8 *)a2);
   CStatistic::IncBuildingLosses((CStatistic *)&g_cStatistic, v2);
   if ( *((_WORD *)this + 194) )
+  {
     CMilitaryBuildingRole::TowerGuardEnter(this, 0);
+  }
   CMilitaryBuildingRole::RemoveDoorIfNecessary(this, a2);
   result = std::vector<unsigned short>::size((char *)this + 424);
   v5 = result;
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
     v4 = (_WORD *)std::vector<unsigned short>::operator[]((char *)this + 424, i);
     v6 = (unsigned __int16)*v4;
     if ( *v4 )
     {
       v7 = (CSettler *)CSettlerMgr::operator[](v6);
-      if ( !IEntity::FlagBits(v7, ENTITY_FLAG_ON_BOARD)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Building\\MilitaryBuilding.cpp",
-             1214,
-             "rInhabitant.FlagBits(ENTITY_FLAG_ON_BOARD) != 0") == 1 )
+      if ( !IEntity::FlagBits(v7, ENTITY_FLAG_ON_BOARD) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1214, "rInhabitant.FlagBits(ENTITY_FLAG_ON_BOARD) != 0") == 1 )
       {
         __debugbreak();
       }
@@ -1348,14 +1346,20 @@ void  CMilitaryBuildingRole::ThrowOut(class CBuilding * a2) {
       v4 = LastUsedSlot >= 0;
     }
     if ( !v4 && *((unsigned __int8 *)this + 380) > (int)*((unsigned __int8 *)this + 384) )
+    {
       LastUsedSlot = CMilitaryBuildingRole::GetLastUsedSlot(this, 1, 1);
+    }
     if ( LastUsedSlot >= 0 )
     {
       CMilitaryBuildingRole::ThrowOutSettler(this, a2, LastUsedSlot);
       if ( v4 )
+      {
         CMilitaryBuildingRole::MoveAfterWindow(this);
+      }
       else
+      {
         CMilitaryBuildingRole::MoveAfterAboveDoor(this);
+      }
     }
   }
 }
@@ -1395,7 +1399,9 @@ void  CMilitaryBuildingRole::ThrowOutId(class CBuilding * a2) {
         {
           v15 = 0;
           v12 = 0;
-          for ( i = 0; i < *(unsigned __int8 *)(*((_DWORD *)v17 + 94) + 220); ++i )
+          for ( i = 0;
+                i < *(unsigned __int8 *)(*((_DWORD *)v17 + 94) + 220);
+                ++i )
           {
             v3 = *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)v17 + 424, i);
             if ( v3 == *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)v17 + 408, 0) )
@@ -1460,11 +1466,14 @@ void  CMilitaryBuildingRole::ThrowOutSettler(class CBuilding * a2, int a3) {
 
   v14 = this;
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1562, "_pBuilding != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a3 < 0 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1563, "_iSlot >= 0") == 1 )
+  {
     __debugbreak();
-  if ( a3 >= (unsigned int)std::vector<unsigned short>::size((char *)v14 + 424)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1564, "_iSlot < m_vInhabitants.size()") == 1 )
+  }
+  if ( a3 >= (unsigned int)std::vector<unsigned short>::size((char *)v14 + 424) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1564, "_iSlot < m_vInhabitants.size()") == 1 )
   {
     __debugbreak();
   }
@@ -1472,8 +1481,7 @@ void  CMilitaryBuildingRole::ThrowOutSettler(class CBuilding * a2, int a3) {
   *(_WORD *)std::vector<unsigned short>::operator[]((char *)v14 + 424, a3) = 0;
   if ( *(_BYTE *)(*((_DWORD *)v14 + 94) + 12 * a3 + 233) )
   {
-    if ( !*((_BYTE *)v14 + 380)
-      && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1572, "m_uNrOfBowmen > 0") == 1 )
+    if ( !*((_BYTE *)v14 + 380) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1572, "m_uNrOfBowmen > 0") == 1 )
     {
       __debugbreak();
     }
@@ -1481,8 +1489,7 @@ void  CMilitaryBuildingRole::ThrowOutSettler(class CBuilding * a2, int a3) {
   }
   else
   {
-    if ( !*((_BYTE *)v14 + 381)
-      && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1578, "m_uNrOfSwordsmen > 0") == 1 )
+    if ( !*((_BYTE *)v14 + 381) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1578, "m_uNrOfSwordsmen > 0") == 1 )
     {
       __debugbreak();
     }
@@ -1544,68 +1551,44 @@ void  CMilitaryBuildingRole::OrderWarrior(class CBuilding * a2) {
   bool v10; // [esp+19h] [ebp-7h]
   bool v11; // [esp+1Fh] [ebp-1h]
 
-  if ( *((unsigned __int8 *)this + 384) > (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 222)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         1808,
-         "m_uNrOfBowmenWish <= m_pBuildingInfo->m_uBowmanNumber") == 1 )
+  if ( *((unsigned __int8 *)this + 384) > (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 222) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1808, "m_uNrOfBowmenWish <= m_pBuildingInfo->m_uBowmanNumber") == 1 )
   {
     __debugbreak();
   }
-  if ( *((unsigned __int8 *)this + 385) > (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 221)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         1809,
-         "m_uNrOfSwordsmenWish <= m_pBuildingInfo->m_uSwordsmanNumber") == 1 )
+  if ( *((unsigned __int8 *)this + 385) > (int)*(unsigned __int8 *)(*((_DWORD *)this + 94) + 221) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1809, "m_uNrOfSwordsmenWish <= m_pBuildingInfo->m_uSwordsmanNumber") == 1 )
   {
     __debugbreak();
   }
   v9 = *((unsigned __int8 *)this + 381) + *((unsigned __int8 *)this + 380) == 0;
-  v11 = v9
-     && *((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 382) == 0
-     && *((unsigned __int8 *)this + 385) + *((unsigned __int8 *)this + 384) == 0;
-  if ( (*((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 381) < *((unsigned __int8 *)this + 385) || v11)
-    && (CSettlerMgr::OrderAIWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 2)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 31, 0x14u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 30, 0x14u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 29, 0x14u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 31, 0x28u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 30, 0x28u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 29, 0x28u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 31, 0x50u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 30, 0x50u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 29, 0x50u)) )
+  v11 = v9 && *((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 382) == 0 && *((unsigned __int8 *)this + 385) + *((unsigned __int8 *)this + 384) == 0;
+  if ( (*((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 381) < *((unsigned __int8 *)this + 385) || v11) && (CSettlerMgr::OrderAIWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 2) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 31, 0x14u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 30, 0x14u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 29, 0x14u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 31, 0x28u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 30, 0x28u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 29, 0x28u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 31, 0x50u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 30, 0x50u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 29, 0x50u)) )
   {
     ++*((_BYTE *)this + 383);
     if ( v11 )
+    {
       *((_BYTE *)this + 385) = 1;
+    }
   }
   v10 = *((_BYTE *)this + 383) == 0 && v11;
-  if ( (*((unsigned __int8 *)this + 382) + *((unsigned __int8 *)this + 380) < *((unsigned __int8 *)this + 384) || v10)
-    && (CSettlerMgr::OrderAIWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 3)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 34, 0x14u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 33, 0x14u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 32, 0x14u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 34, 0x28u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 33, 0x28u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 32, 0x28u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 34, 0x50u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 33, 0x50u)
-     || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 32, 0x50u)) )
+  if ( (*((unsigned __int8 *)this + 382) + *((unsigned __int8 *)this + 380) < *((unsigned __int8 *)this + 384) || v10) && (CSettlerMgr::OrderAIWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 3) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 34, 0x14u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 33, 0x14u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 32, 0x14u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 34, 0x28u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 33, 0x28u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 32, 0x28u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 34, 0x50u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 33, 0x50u) || CSettlerMgr::OrderWarrior((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)this + 3), 32, 0x50u)) )
   {
     ++*((_BYTE *)this + 382);
     if ( v10 )
+    {
       *((_BYTE *)this + 384) = 1;
+    }
   }
   LOBYTE(LocalPlayerId) = *((unsigned __int8 *)this + 383) + *((unsigned __int8 *)this + 382) == 0;
   if ( ((unsigned __int8)LocalPlayerId & v9) == 0 )
+  {
     return LocalPlayerId;
+  }
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   if ( v3 != LocalPlayerId )
+  {
     return LocalPlayerId;
+  }
   v7 = IEntity::Y(a2);
   v6 = IEntity::X(a2);
   v4 = IEntity::OwnerId((unsigned __int8 *)a2);
@@ -1628,12 +1611,7 @@ void  CMilitaryBuildingRole::MoveAfterAboveDoor(void) {
   signed int v8; // [esp+1Ch] [ebp-Ch]
   signed int i; // [esp+20h] [ebp-8h]
 
-  if ( std::vector<unsigned short>::size((char *)this + 424) != *(unsigned __int8 *)(*((_DWORD *)this + 94) + 220)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         1636,
-         "m_vInhabitants.size() == m_pBuildingInfo->m_uWarriorNumber") == 1 )
+  if ( std::vector<unsigned short>::size((char *)this + 424) != *(unsigned __int8 *)(*((_DWORD *)this + 94) + 220) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1636, "m_vInhabitants.size() == m_pBuildingInfo->m_uWarriorNumber") == 1 )
   {
     __debugbreak();
   }
@@ -1643,7 +1621,9 @@ void  CMilitaryBuildingRole::MoveAfterAboveDoor(void) {
   {
     v8 = -1;
     v5 = 0;
-    for ( i = v3 - 1; i >= 0; --i )
+    for ( i = v3 - 1;
+          i >= 0;
+          --i )
     {
       if ( *(_BYTE *)(*((_DWORD *)this + 94) + 12 * i + 233) )
       {
@@ -1651,12 +1631,7 @@ void  CMilitaryBuildingRole::MoveAfterAboveDoor(void) {
         if ( *v1 )
         {
           v6 = (unsigned __int16 *)CMapObjectMgr::Entity((unsigned __int16)*v1);
-          if ( IEntity::WarriorType() != 3
-            && BBSupportDbgReport(
-                 2,
-                 "MapObjects\\Building\\MilitaryBuilding.cpp",
-                 1660,
-                 "rEntity.WarriorType() == WARRIOR_TYPE_FIGHTER_BOWMAN") == 1 )
+          if ( IEntity::WarriorType() != 3 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1660, "rEntity.WarriorType() == WARRIOR_TYPE_FIGHTER_BOWMAN") == 1 )
           {
             __debugbreak();
           }
@@ -1670,8 +1645,7 @@ void  CMilitaryBuildingRole::MoveAfterAboveDoor(void) {
     }
     if ( v8 >= 0 )
     {
-      if ( v7 >= v8
-        && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1675, "iAboveDoorSlot < iBestSlot") == 1 )
+      if ( v7 >= v8 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1675, "iAboveDoorSlot < iBestSlot") == 1 )
       {
         __debugbreak();
       }
@@ -1701,11 +1675,15 @@ void  CMilitaryBuildingRole::MoveAfterWindow(void) {
 
   v4 = *(unsigned __int8 *)(*((_DWORD *)this + 94) + 220);
   v5 = 0;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = std::vector<unsigned short>::size((char *)this + 424);
     if ( i >= result )
+    {
       break;
+    }
     if ( *(_WORD *)std::vector<unsigned short>::operator[]((char *)this + 424, i) )
     {
       v6 = *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 424, i);
@@ -1713,12 +1691,16 @@ void  CMilitaryBuildingRole::MoveAfterWindow(void) {
       v2 = IEntity::Type(v3);
       if ( CSettlerMgr::SettlerWarriorType(v2) == 2 )
       {
-        for ( j = v5; j < v4; ++j )
+        for ( j = v5;
+              j < v4;
+              ++j )
         {
           ++v5;
           if ( !*(_BYTE *)(*((_DWORD *)this + 94) + 12 * j + 233) )
           {
-            for ( k = 0; k < v4; ++k )
+            for ( k = 0;
+                  k < v4;
+                  ++k )
             {
               if ( *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 424, k) == v6 )
               {
@@ -1748,31 +1730,23 @@ void  CMilitaryBuildingRole::InsertDoor(class CBuilding * a2, bool a3) {
   int v6; // [esp+Ch] [ebp-Ch]
   CSettler *v7; // [esp+10h] [ebp-8h]
 
-  if ( *((_WORD *)this + 193)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1962, "m_uDoorId == 0") == 1 )
+  if ( *((_WORD *)this + 193) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1962, "m_uDoorId == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_WORD *)this + 194)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1963, "m_uTowerGuardId == 0") == 1 )
+  if ( *((_WORD *)this + 194) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1963, "m_uTowerGuardId == 0") == 1 )
   {
     __debugbreak();
   }
   v5 = CBuilding::DoorX(a2);
   v6 = CBuilding::DoorY(a2);
   v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  if ( !CSettlerMgr::IsAddSettlerOk((CSettlerMgr *)g_cSettlerMgr, v5, v6, 0)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         1969,
-         "g_cSettlerMgr.IsAddSettlerOk(iDoorX, iDoorY)") == 1 )
+  if ( !CSettlerMgr::IsAddSettlerOk((CSettlerMgr *)g_cSettlerMgr, v5, v6, 0) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1969, "g_cSettlerMgr.IsAddSettlerOk(iDoorX, iDoorY)") == 1 )
   {
     __debugbreak();
   }
   *((_WORD *)this + 193) = CSettlerMgr::AddGuardSettler((CSettlerMgr *)g_cSettlerMgr, v5, v6, v4);
-  if ( !*((_WORD *)this + 193)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1973, "m_uDoorId != 0") == 1 )
+  if ( !*((_WORD *)this + 193) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 1973, "m_uDoorId != 0") == 1 )
   {
     __debugbreak();
   }
@@ -1798,7 +1772,7 @@ void  CMilitaryBuildingRole::InsertDoor(class CBuilding * a2, bool a3) {
 
 
 // address=[0x15114b0]
-// Decompiled from CMilitaryBuildingRole *__thiscall CMilitaryBuildingRole::RemoveDoorIfNecessary(  CMilitaryBuildingRole *this,  struct CBuilding *a2)
+// Decompiled from CMilitaryBuildingRole *__thiscall CMilitaryBuildingRole::RemoveDoorIfNecessary(CMilitaryBuildingRole *this, struct CBuilding *a2)
 void  CMilitaryBuildingRole::RemoveDoorIfNecessary(class CBuilding * a2) {
   
   CMilitaryBuildingRole *result; // eax
@@ -1808,7 +1782,9 @@ void  CMilitaryBuildingRole::RemoveDoorIfNecessary(class CBuilding * a2) {
   result = this;
   v4 = *((unsigned __int16 *)this + 193);
   if ( !*((_WORD *)this + 193) )
+  {
     return result;
+  }
   *((_WORD *)this + 193) = 0;
   *((_BYTE *)this + 336) = 0;
   *((_DWORD *)this + 37) = 0;
@@ -1829,7 +1805,9 @@ void  CMilitaryBuildingRole::MakeInvisibleDoorVisible(class CBuilding * a2) {
 
   result = (int)this;
   if ( !*((_WORD *)this + 193) )
+  {
     return result;
+  }
   v3 = (_DWORD *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 193));
   IEntity::SetFlagBits(v3, (EntityFlag)0x10000u);
   *((_BYTE *)this + 336) = 1;
@@ -1844,8 +1822,7 @@ void  CMilitaryBuildingRole::MakeInvisibleDoorVisible(class CBuilding * a2) {
 // Decompiled from void __thiscall CMilitaryBuildingRole::OnDoorKilled(CMilitaryBuildingRole *this)
 void  CMilitaryBuildingRole::OnDoorKilled(void) {
   
-  if ( !*((_WORD *)this + 193)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2061, "m_uDoorId > 0") == 1 )
+  if ( !*((_WORD *)this + 193) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2061, "m_uDoorId > 0") == 1 )
   {
     __debugbreak();
   }
@@ -1861,8 +1838,7 @@ void  CMilitaryBuildingRole::OnDoorKilled(void) {
 // Decompiled from void __thiscall CMilitaryBuildingRole::OnTowerGuardKilled(CMilitaryBuildingRole *this)
 void  CMilitaryBuildingRole::OnTowerGuardKilled(void) {
   
-  if ( !*((_WORD *)this + 194)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2082, "m_uTowerGuardId > 0") == 1 )
+  if ( !*((_WORD *)this + 194) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2082, "m_uTowerGuardId > 0") == 1 )
   {
     __debugbreak();
   }
@@ -1904,20 +1880,20 @@ void  CMilitaryBuildingRole::InsertTowerGuard(void) {
   bool v27; // [esp+6Fh] [ebp-1h]
 
   v26 = this;
-  if ( *((_WORD *)this + 193)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2098, "m_uDoorId == 0") == 1 )
+  if ( *((_WORD *)this + 193) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2098, "m_uDoorId == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_WORD *)v26 + 194)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2099, "m_uTowerGuardId == 0") == 1 )
+  if ( *((_WORD *)v26 + 194) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2099, "m_uTowerGuardId == 0") == 1 )
   {
     __debugbreak();
   }
   v23 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((unsigned __int16 *)v26 + 3));
   v25 = 0;
   v19 = -1;
-  for ( i = *(unsigned __int8 *)(*((_DWORD *)v26 + 94) + 220) - 1; i >= 0; --i )
+  for ( i = *(unsigned __int8 *)(*((_DWORD *)v26 + 94) + 220) - 1;
+        i >= 0;
+        --i )
   {
     if ( !*(_BYTE *)(*((_DWORD *)v26 + 94) + 12 * i + 233) )
     {
@@ -1932,8 +1908,7 @@ void  CMilitaryBuildingRole::InsertTowerGuard(void) {
   }
   if ( v25 <= 0 )
   {
-    if ( *((_BYTE *)v26 + 381)
-      && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2127, "m_uNrOfSwordsmen == 0") == 1 )
+    if ( *((_BYTE *)v26 + 381) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2127, "m_uNrOfSwordsmen == 0") == 1 )
     {
       __debugbreak();
     }
@@ -1941,7 +1916,9 @@ void  CMilitaryBuildingRole::InsertTowerGuard(void) {
   }
   if ( v25 <= 0 )
   {
-    for ( j = *(unsigned __int8 *)(*((_DWORD *)v26 + 94) + 220) - 1; j >= 0; --j )
+    for ( j = *(unsigned __int8 *)(*((_DWORD *)v26 + 94) + 220) - 1;
+          j >= 0;
+          --j )
     {
       if ( *(_BYTE *)(*((_DWORD *)v26 + 94) + 12 * j + 233) )
       {
@@ -1956,8 +1933,7 @@ void  CMilitaryBuildingRole::InsertTowerGuard(void) {
     }
     if ( v25 <= 0 )
     {
-      if ( *((_BYTE *)v26 + 380)
-        && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2159, "m_uNrOfBowmen == 0") == 1 )
+      if ( *((_BYTE *)v26 + 380) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2159, "m_uNrOfBowmen == 0") == 1 )
       {
         __debugbreak();
       }
@@ -1967,17 +1943,11 @@ void  CMilitaryBuildingRole::InsertTowerGuard(void) {
   *((_WORD *)v26 + 194) = v25;
   if ( v25 > 0 )
   {
-    if ( v25 != *((unsigned __int16 *)v26 + 194)
-      && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2246, "iNewDoorGuardId == m_uTowerGuardId") == 1 )
+    if ( v25 != *((unsigned __int16 *)v26 + 194) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2246, "iNewDoorGuardId == m_uTowerGuardId") == 1 )
     {
       __debugbreak();
     }
-    if ( (v19 < 0 || *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)v26 + 424, v19) != v25)
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\MilitaryBuilding.cpp",
-           2247,
-           "(iNewDoorGuardSlot >= 0) && (m_vInhabitants[iNewDoorGuardSlot] == iNewDoorGuardId)") == 1 )
+    if ( (v19 < 0 || *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)v26 + 424, v19) != v25) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2247, "(iNewDoorGuardSlot >= 0) && (m_vInhabitants[iNewDoorGuardSlot] == iNewDoorGuardId)") == 1 )
     {
       __debugbreak();
     }
@@ -1985,7 +1955,9 @@ void  CMilitaryBuildingRole::InsertTowerGuard(void) {
     v3 = CBuilding::DoorPackedXY(v23);
     v12 = CWorldManager::Index(v3);
     v11 = 2;
-    for ( k = 5; k >= 0; --k )
+    for ( k = 5;
+          k >= 0;
+          --k )
     {
       v6 = v12 + CWorldManager::NeighborRelIndex(k);
       if ( !CWorldManager::FlagBits(v6, 1u) )
@@ -1994,12 +1966,7 @@ void  CMilitaryBuildingRole::InsertTowerGuard(void) {
         break;
       }
     }
-    if ( CWorldManager::MapObjectId(v12)
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\MilitaryBuilding.cpp",
-           2267,
-           "g_cWorld.MapObjectId(iDoorWorldIdx) == 0") == 1 )
+    if ( CWorldManager::MapObjectId(v12) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2267, "g_cWorld.MapObjectId(iDoorWorldIdx) == 0") == 1 )
     {
       __debugbreak();
     }
@@ -2014,13 +1981,11 @@ void  CMilitaryBuildingRole::InsertTowerGuard(void) {
   }
   else
   {
-    if ( *((_BYTE *)v26 + 380)
-      && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2173, "m_uNrOfBowmen == 0") == 1 )
+    if ( *((_BYTE *)v26 + 380) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2173, "m_uNrOfBowmen == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( *((_BYTE *)v26 + 381)
-      && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2174, "m_uNrOfSwordsmen == 0") == 1 )
+    if ( *((_BYTE *)v26 + 381) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2174, "m_uNrOfSwordsmen == 0") == 1 )
     {
       __debugbreak();
     }
@@ -2051,13 +2016,17 @@ void  CMilitaryBuildingRole::InsertTowerGuard(void) {
     {
       CMilitaryBuildingRole::InsertDoor(v26, v23, 1);
       if ( v18 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2223, "iSettlerId > 0") == 1 )
+      {
         __debugbreak();
+      }
       CMilitaryBuildingRole::CancelAllOrders(v26, v23);
       *((_BYTE *)v26 + 384) = 0;
       *((_BYTE *)v26 + 385) = 0;
       v27 = CMilitaryBuildingRole::IncWishAndOrder(v26, v15, 0);
       if ( !v27 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2232, "bIncWishAndOrderOk") == 1 )
+      {
         __debugbreak();
+      }
       CSettlerMgr::OrderWarriorToTower((CSettlerMgr *)g_cSettlerMgr, *((unsigned __int16 *)v26 + 3), v18);
     }
     else
@@ -2099,20 +2068,16 @@ int  CMilitaryBuildingRole::GetFirstFreeSlot(bool a2) {
   int v3; // [esp+0h] [ebp-Ch]
   signed int i; // [esp+8h] [ebp-4h]
 
-  if ( std::vector<unsigned short>::size((char *)this + 424) != *(unsigned __int8 *)(*((_DWORD *)this + 94) + 220)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         2600,
-         "m_vInhabitants.size() == m_pBuildingInfo->m_uWarriorNumber") == 1 )
+  if ( std::vector<unsigned short>::size((char *)this + 424) != *(unsigned __int8 *)(*((_DWORD *)this + 94) + 220) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2600, "m_vInhabitants.size() == m_pBuildingInfo->m_uWarriorNumber") == 1 )
   {
     __debugbreak();
   }
   v3 = std::vector<unsigned short>::size((char *)this + 424);
-  for ( i = 0; i < v3; ++i )
+  for ( i = 0;
+        i < v3;
+        ++i )
   {
-    if ( *(_BYTE *)(*((_DWORD *)this + 94) + 12 * i + 233) == a2
-      && !*(_WORD *)std::vector<unsigned short>::operator[]((char *)this + 424, i) )
+    if ( *(_BYTE *)(*((_DWORD *)this + 94) + 12 * i + 233) == a2 && !*(_WORD *)std::vector<unsigned short>::operator[]((char *)this + 424, i) )
     {
       return i;
     }
@@ -2128,16 +2093,13 @@ int  CMilitaryBuildingRole::GetLastUsedSlot(bool a2, bool a3) {
   _WORD *v3; // eax
   signed int i; // [esp+8h] [ebp-8h]
 
-  if ( std::vector<unsigned short>::size((char *)this + 424) != *(unsigned __int8 *)(*((_DWORD *)this + 94) + 220)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         2633,
-         "m_vInhabitants.size() == m_pBuildingInfo->m_uWarriorNumber") == 1 )
+  if ( std::vector<unsigned short>::size((char *)this + 424) != *(unsigned __int8 *)(*((_DWORD *)this + 94) + 220) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2633, "m_vInhabitants.size() == m_pBuildingInfo->m_uWarriorNumber") == 1 )
   {
     __debugbreak();
   }
-  for ( i = std::vector<unsigned short>::size((char *)this + 424) - 1; i >= 0; --i )
+  for ( i = std::vector<unsigned short>::size((char *)this + 424) - 1;
+        i >= 0;
+        --i )
   {
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 12 * i + 233) == a2 )
     {
@@ -2145,7 +2107,9 @@ int  CMilitaryBuildingRole::GetLastUsedSlot(bool a2, bool a3) {
       if ( *v3 )
       {
         if ( !a3 || *v3 != *((_WORD *)this + 194) )
+        {
           return i;
+        }
       }
     }
   }
@@ -2161,28 +2125,29 @@ int  CMilitaryBuildingRole::GetSlot(int a2) {
   signed int i; // [esp+8h] [ebp-4h]
 
   if ( a2 <= 0 )
+  {
     return -1;
-  if ( std::vector<unsigned short>::size((char *)this + 424) != *(unsigned __int8 *)(*((_DWORD *)this + 94) + 220)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         2675,
-         "m_vInhabitants.size() == m_pBuildingInfo->m_uWarriorNumber") == 1 )
+  }
+  if ( std::vector<unsigned short>::size((char *)this + 424) != *(unsigned __int8 *)(*((_DWORD *)this + 94) + 220) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2675, "m_vInhabitants.size() == m_pBuildingInfo->m_uWarriorNumber") == 1 )
   {
     __debugbreak();
   }
   v3 = std::vector<unsigned short>::size((char *)this + 424);
-  for ( i = 0; i < v3; ++i )
+  for ( i = 0;
+        i < v3;
+        ++i )
   {
     if ( *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 424, i) == a2 )
+    {
       return i;
+    }
   }
   return -1;
 }
 
 
 // address=[0x1511f30]
-// Decompiled from _DWORD *__thiscall CMilitaryBuildingRole::ConvertEventIntoGoal(  CMilitaryBuildingRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
+// Decompiled from _DWORD *__thiscall CMilitaryBuildingRole::ConvertEventIntoGoal(CMilitaryBuildingRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CMilitaryBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   int v4; // [esp+8h] [ebp-8h]
@@ -2198,14 +2163,12 @@ void  CMilitaryBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CE
     {
       if ( *((_DWORD *)a3 + 2) )
       {
-        if ( *((unsigned __int8 *)this + 384) > 1u
-          || *((_BYTE *)this + 384) == 1 && *((_BYTE *)this + 385) && *((_BYTE *)this + 381) )
+        if ( *((unsigned __int8 *)this + 384) > 1u || *((_BYTE *)this + 384) == 1 && *((_BYTE *)this + 385) && *((_BYTE *)this + 381) )
         {
           --*((_BYTE *)this + 384);
         }
       }
-      else if ( *((unsigned __int8 *)this + 385) > 1u
-             || *((_BYTE *)this + 385) == 1 && *((_BYTE *)this + 384) && *((_BYTE *)this + 380) )
+      else if ( *((unsigned __int8 *)this + 385) > 1u || *((_BYTE *)this + 385) == 1 && *((_BYTE *)this + 384) && *((_BYTE *)this + 380) )
       {
         --*((_BYTE *)this + 385);
       }
@@ -2235,7 +2198,7 @@ void  CMilitaryBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CE
 
 
 // address=[0x15120d0]
-// Decompiled from int __thiscall CMilitaryBuildingRole::SetSettlerTowerInfo(  CMilitaryBuildingRole *this,  struct CSettler *a2,  signed int Slot,  int a4,  bool a5)
+// Decompiled from int __thiscall CMilitaryBuildingRole::SetSettlerTowerInfo(CMilitaryBuildingRole *this, struct CSettler *a2, signed int Slot, int a4, bool a5)
 void  CMilitaryBuildingRole::SetSettlerTowerInfo(class CSettler & a2, int Slot, int a4, bool a5) {
   
   void **v5; // eax
@@ -2246,22 +2209,12 @@ void  CMilitaryBuildingRole::SetSettlerTowerInfo(class CSettler & a2, int Slot, 
   CTowerSoldier *v11; // [esp+28h] [ebp-10h]
 
   v10 = *(unsigned __int8 *)(*((_DWORD *)this + 94) + 220);
-  if ( (Slot < -1 || Slot >= v10)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         744,
-         "(_iSlotIdx >= -1) && (_iSlotIdx < iNumberOfSlots)") == 1 )
+  if ( (Slot < -1 || Slot >= v10) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 744, "(_iSlotIdx >= -1) && (_iSlotIdx < iNumberOfSlots)") == 1 )
   {
     __debugbreak();
   }
   v5 = (void **)CSettler::Role(a2);
-  if ( !j____RTDynamicCast(v5, 0, &ISettlerRole__RTTI_Type_Descriptor_, &CTowerSoldier__RTTI_Type_Descriptor_, 0)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         745,
-         "dynamic_cast<CTowerSoldier*>(&_rSettler.Role()) != 0") == 1 )
+  if ( !j____RTDynamicCast(v5, 0, &ISettlerRole__RTTI_Type_Descriptor_, &CTowerSoldier__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 745, "dynamic_cast<CTowerSoldier*>(&_rSettler.Role()) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -2269,47 +2222,39 @@ void  CMilitaryBuildingRole::SetSettlerTowerInfo(class CSettler & a2, int Slot, 
   if ( Slot < 0 )
   {
     Slot = CTowerSoldier::GetSlot(v11);
-    if ( (Slot < 0 || Slot >= v10)
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\MilitaryBuilding.cpp",
-           753,
-           "(_iSlotIdx >= 0) && (_iSlotIdx < iNumberOfSlots)") == 1 )
+    if ( (Slot < 0 || Slot >= v10) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 753, "(_iSlotIdx >= 0) && (_iSlotIdx < iNumberOfSlots)") == 1 )
     {
       __debugbreak();
     }
   }
   v6 = IEntity::EntityId((unsigned __int16 *)a2);
-  if ( v6 != *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 424, Slot)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\MilitaryBuilding.cpp",
-         756,
-         "_rSettler.EntityId() == m_vInhabitants[_iSlotIdx]") == 1 )
+  if ( v6 != *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 424, Slot) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 756, "_rSettler.EntityId() == m_vInhabitants[_iSlotIdx]") == 1 )
   {
     __debugbreak();
   }
   if ( a5 )
+  {
     CSettler::SetOffset(a2, 0.0, 0.0);
+  }
   else
-    CSettler::SetOffset(
-      a2,
-      (float)*(int *)(*((_DWORD *)this + 94) + 12 * Slot + 224),
-      (float)*(int *)(*((_DWORD *)this + 94) + 12 * Slot + 228));
+  {
+    CSettler::SetOffset(a2, (float)*(int *)(*((_DWORD *)this + 94) + 12 * Slot + 224), (float)*(int *)(*((_DWORD *)this + 94) + 12 * Slot + 228));
+  }
   if ( a4 < 0 )
+  {
     v9 = *(unsigned __int8 *)(*((_DWORD *)this + 94) + 12 * Slot + 232);
+  }
   else
+  {
     v9 = a4;
+  }
   if ( a4 != -2 || ISettlerRole::GetTask(v11) == 17 )
+  {
     IMovingEntity::SetDirection(a2, v9);
+  }
   if ( a5 )
   {
-    if ( IEntity::EntityId((unsigned __int16 *)a2) != *((unsigned __int16 *)this + 194)
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\MilitaryBuilding.cpp",
-           782,
-           "_rSettler.EntityId() == m_uTowerGuardId") == 1 )
+    if ( IEntity::EntityId((unsigned __int16 *)a2) != *((unsigned __int16 *)this + 194) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 782, "_rSettler.EntityId() == m_uTowerGuardId") == 1 )
     {
       __debugbreak();
     }
@@ -2318,9 +2263,13 @@ void  CMilitaryBuildingRole::SetSettlerTowerInfo(class CSettler & a2, int Slot, 
   else if ( *(_BYTE *)(*((_DWORD *)this + 94) + 12 * Slot + 233) )
   {
     if ( Slot == *(char *)(*((_DWORD *)this + 94) + 223) )
+    {
       v8 = 1;
+    }
     else
+    {
       v8 = 2;
+    }
     return CTowerSoldier::SetTowerInfo(v11, Slot, v8, v9);
   }
   else
@@ -2370,9 +2319,13 @@ void  CMilitaryBuildingRole::SetEffectDisplay(int a2, int a3) {
       break;
   }
   if ( v5 < v7 * v4 )
+  {
     ++*((_DWORD *)this + 99);
+  }
   if ( v5 >= v6 * v4 )
+  {
     --*((_DWORD *)this + 99);
+  }
   if ( !*((_BYTE *)this + 400) && *((_DWORD *)this + 99) )
   {
     *((_BYTE *)this + 400) = 1;
@@ -2382,7 +2335,9 @@ void  CMilitaryBuildingRole::SetEffectDisplay(int a2, int a3) {
   }
   result = (CMilitaryBuildingRole *)*((_DWORD *)this + 94);
   if ( v5 < 100 * *((unsigned __int8 *)result + 500) )
+  {
     return result;
+  }
   result = this;
   *((_BYTE *)this + 400) = 0;
   *((_DWORD *)this + 99) = 0;
@@ -2399,7 +2354,7 @@ bool  CMilitaryBuildingRole::IsTopPosition(int a2) {
 
 
 // address=[0x1512500]
-// Decompiled from unsigned __int8 *__thiscall CMilitaryBuildingRole::NotifyDetach(  CMilitaryBuildingRole *this,  struct CBuilding *a2,  int a3)
+// Decompiled from unsigned __int8 *__thiscall CMilitaryBuildingRole::NotifyDetach(CMilitaryBuildingRole *this, struct CBuilding *a2, int a3)
 void  CMilitaryBuildingRole::NotifyDetach(class CBuilding * a2, int a3) {
   
   unsigned __int8 *result; // eax
@@ -2417,34 +2372,34 @@ void  CMilitaryBuildingRole::NotifyDetach(class CBuilding * a2, int a3) {
     v6 = IEntity::WarriorType();
     if ( v6 == 3 )
     {
-      if ( !*((_BYTE *)this + 382)
-        && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2710, "m_uNrOfBowmenOrders > 0") == 1 )
+      if ( !*((_BYTE *)this + 382) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2710, "m_uNrOfBowmenOrders > 0") == 1 )
       {
         __debugbreak();
       }
-      if ( (int)CMilitaryBuildingRole::GetSlot(this, a3) >= 0
-        && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2711, "GetSlot(_iObserverId) < 0") == 1 )
+      if ( (int)CMilitaryBuildingRole::GetSlot(this, a3) >= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2711, "GetSlot(_iObserverId) < 0") == 1 )
       {
         __debugbreak();
       }
       if ( *((_BYTE *)this + 382) )
+      {
         --*((_BYTE *)this + 382);
+      }
       v9 = 1;
     }
     if ( v6 == 2 )
     {
-      if ( !*((_BYTE *)this + 383)
-        && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2723, "m_uNrOfSwordsmenOrders > 0") == 1 )
+      if ( !*((_BYTE *)this + 383) && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2723, "m_uNrOfSwordsmenOrders > 0") == 1 )
       {
         __debugbreak();
       }
-      if ( (int)CMilitaryBuildingRole::GetSlot(this, a3) >= 0
-        && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2724, "GetSlot(_iObserverId) < 0") == 1 )
+      if ( (int)CMilitaryBuildingRole::GetSlot(this, a3) >= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\MilitaryBuilding.cpp", 2724, "GetSlot(_iObserverId) < 0") == 1 )
       {
         __debugbreak();
       }
       if ( *((_BYTE *)this + 383) )
+      {
         --*((_BYTE *)this + 383);
+      }
       v9 = 1;
     }
     v4 = IEntity::OwnerId(v7);
@@ -2456,7 +2411,9 @@ void  CMilitaryBuildingRole::NotifyDetach(class CBuilding * a2, int a3) {
     }
   }
   if ( v9 )
+  {
     return result;
+  }
   BBSupportTracePrintF(3, "CMilitaryBuildingRole::NotifyDetach(): Invalid observer!");
   v5 = IEntity::EntityId((unsigned __int16 *)a2);
   CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v5, 0, 0);

@@ -32,8 +32,7 @@ bool  CWarMapNode::IsInWarMap(void)const {
 // Decompiled from void __thiscall CWarMapNode::~CWarMapNode(CWarMapNode *this)
  CWarMapNode::~CWarMapNode(void) {
   
-  if ( this->m_uNextPrev != 0xFFFF
-    && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 173, "m_uNextPrev == NEXT_PREV_NOT_IN_LIST") == 1 )
+  if ( this->m_uNextPrev != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 173, "m_uNextPrev == NEXT_PREV_NOT_IN_LIST") == 1 )
   {
     __debugbreak();
   }

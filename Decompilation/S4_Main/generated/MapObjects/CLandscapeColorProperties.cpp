@@ -3,7 +3,7 @@
 // Definitions for class CLandscapeColorProperties
 
 // address=[0x2f8dcb0]
-// Decompiled from CLandscapeColorProperties *__thiscall CLandscapeColorProperties::CLandscapeColorProperties(  CLandscapeColorProperties *this)
+// Decompiled from CLandscapeColorProperties *__thiscall CLandscapeColorProperties::CLandscapeColorProperties(CLandscapeColorProperties *this)
  CLandscapeColorProperties::CLandscapeColorProperties(void) {
   
   int i; // [esp+10h] [ebp-Ch]
@@ -137,16 +137,18 @@
   this->m_vColorEntries[29].m_iGreen = 60;
   this->m_vColorEntries[29].m_iBlue = 60;
   this->m_vHiColorEntry[29] = 0;
-  for ( i = 0; i < 256; ++i )
-    this->m_vHiColorEntry[i] = (unsigned __int8)(int)(float)((float)this->m_vColorEntries[i].m_iBlue * 0.12156863)
-                             + 32 * (unsigned __int8)(int)(float)((float)this->m_vColorEntries[i].m_iGreen * 0.12156863)
-                             + ((unsigned __int8)(int)(float)((float)this->m_vColorEntries[i].m_iRed * 0.12156863) << 10);
+  for ( i = 0;
+        i < 256;
+        ++i )
+  {
+    this->m_vHiColorEntry[i] = (unsigned __int8)(int)(float)((float)this->m_vColorEntries[i].m_iBlue * 0.12156863) + 32 * (unsigned __int8)(int)(float)((float)this->m_vColorEntries[i].m_iGreen * 0.12156863) + ((unsigned __int8)(int)(float)((float)this->m_vColorEntries[i].m_iRed * 0.12156863) << 10);
+  }
   return this;
 }
 
 
 // address=[0x2f8eab0]
-// Decompiled from CLandscapeColorProperties::SColorEntry *__thiscall CLandscapeColorProperties::ColorEntry(  CLandscapeColorProperties *this,  int a2)
+// Decompiled from CLandscapeColorProperties::SColorEntry *__thiscall CLandscapeColorProperties::ColorEntry(CLandscapeColorProperties *this, int a2)
 struct CLandscapeColorProperties::SColorEntry const &  CLandscapeColorProperties::ColorEntry(int a2)const {
   
   return &this->m_vColorEntries[a2];

@@ -29,7 +29,9 @@ int  HuffStat::makeSortedTmp(struct HuffStatTmpStruct * a2) {
   int i; // [esp+Ch] [ebp-4h]
 
   v3 = 0;
-  for ( i = 0; i < 274; ++i )
+  for ( i = 0;
+        i < 274;
+        ++i )
   {
     *((_WORD *)a2 + 2 * i) = i;
     *((_WORD *)a2 + 2 * i + 1) = *(_WORD *)(*(_DWORD *)this + 2 * i);

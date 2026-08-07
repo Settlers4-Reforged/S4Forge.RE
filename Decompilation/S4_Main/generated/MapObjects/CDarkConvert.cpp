@@ -8,10 +8,14 @@ int __cdecl CDarkConvert::GetGreenObject(int a1) {
   
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; CDarkConvert::m_aiConvTable[2 * i]; ++i )
+  for ( i = 0;
+        CDarkConvert::m_aiConvTable[2 * i];
+        ++i )
   {
     if ( CDarkConvert::m_aiConvTable[2 * i + 1] == a1 )
+    {
       return CDarkConvert::m_aiConvTable[2 * i];
+    }
   }
   return 0;
 }
@@ -23,10 +27,14 @@ int __cdecl CDarkConvert::GetDarkObject(int a1) {
   
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; CDarkConvert::m_aiConvTable[2 * i]; ++i )
+  for ( i = 0;
+        CDarkConvert::m_aiConvTable[2 * i];
+        ++i )
   {
     if ( CDarkConvert::m_aiConvTable[2 * i] == a1 )
+    {
       return CDarkConvert::m_aiConvTable[2 * i + 1];
+    }
   }
   return 0;
 }

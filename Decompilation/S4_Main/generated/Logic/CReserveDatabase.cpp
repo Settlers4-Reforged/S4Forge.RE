@@ -37,21 +37,33 @@ void  CReserveDatabase::UnpackPosition(int a2, int & a3, int & a4) {
   *((_DWORD *)this + 3) = 0;
   C = (CDynList *)operator new(0xCu);
   if ( C )
+  {
     v6 = CDynList::CDynList(C);
+  }
   else
+  {
     v6 = 0;
+  }
   *(_DWORD *)this = v6;
   v5 = (CDynList *)operator new(0xCu);
   if ( v5 )
+  {
     v4 = CDynList::CDynList(v5);
+  }
   else
+  {
     v4 = 0;
+  }
   *((_DWORD *)this + 1) = v4;
   v3 = (CDynList *)operator new(0xCu);
   if ( v3 )
+  {
     v2 = CDynList::CDynList(v3);
+  }
   else
+  {
     v2 = 0;
+  }
   *((_DWORD *)this + 2) = v2;
   *((_DWORD *)this + 4) = 1;
   *((_DWORD *)this + 5) = 0;
@@ -67,12 +79,18 @@ void  CReserveDatabase::UnpackPosition(int a2, int & a3, int & a4) {
   CDynList **result; // eax
 
   if ( *this )
+  {
     delete *this;
+  }
   if ( this[1] )
+  {
     delete this[1];
+  }
   result = this;
   if ( this[2] )
+  {
     return (CDynList **)delete this[2];
+  }
   return result;
 }
 
@@ -94,9 +112,13 @@ int  CReserveDatabase::ReserveBuilding(enum BUILDING_TYPES a2, int a3, int a4, i
   {
     v13 = operator new(0x34u);
     if ( v13 )
+    {
       v12 = CGrpReserveEntry::CGrpReserveEntry(v13, a2, a3, a4, a8);
+    }
     else
+    {
       v12 = 0;
+    }
     v11 = *(_DWORD *)(this + 12) + 1;
     *(_DWORD *)(this + 12) = v11;
     *(_DWORD *)(v12 + 24) = v11;
@@ -106,9 +128,13 @@ int  CReserveDatabase::ReserveBuilding(enum BUILDING_TYPES a2, int a3, int a4, i
     CReserveDatabase::NewSubReserveEntry((CReserveDatabase *)this, (struct CGrpReserveEntry *)v12, a8);
     v10 = (CRefGrpEntry *)operator new(0x14u);
     if ( v10 )
+    {
       v9 = CRefGrpEntry::CRefGrpEntry(v10, *(_DWORD *)(v12 + 24), (struct CGrpReserveEntry *)v12);
+    }
     else
+    {
       v9 = 0;
+    }
     CDynList::addElement(*(CDynList **)(this + 8), v9);
     return *(_DWORD *)(v12 + 24);
   }
@@ -116,9 +142,13 @@ int  CReserveDatabase::ReserveBuilding(enum BUILDING_TYPES a2, int a3, int a4, i
   {
     C = operator new(0x2Cu);
     if ( C )
+    {
       v15 = CReserveEntry::CReserveEntry(C, a2, a3, a4);
+    }
     else
+    {
       v15 = 0;
+    }
     v14 = *(_DWORD *)(this + 12) + 1;
     *(_DWORD *)(this + 12) = v14;
     *(_DWORD *)(v15 + 24) = v14;
@@ -140,7 +170,9 @@ bool  CReserveDatabase::RemoveBuilding(int a2, int a3) {
 
   if ( !a3 )
   {
-    for ( i = 0; i < CDynList::size(*this); ++i )
+    for ( i = 0;
+          i < CDynList::size(*this);
+          ++i )
     {
       v4 = (struct CDynListEntry *)CDynList::elementAt(*this, i);
       if ( *((_DWORD *)v4 + 6) == a2 )
@@ -166,32 +198,44 @@ void  CReserveDatabase::RemoveGrpEntry(int a2, class CGrpReserveEntry * a3) {
 
   if ( a3 )
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       result = CDynList::size(a3[12]);
       if ( i >= result )
+      {
         break;
+      }
       v6 = CDynList::elementAt(a3[12], i);
       if ( !a2 || CReserveDatabase::InSameGroup((CReserveDatabase *)this, *(_DWORD *)(v6 + 44), a2) )
       {
         if ( CDynList::size(*(CDynList **)(v6 + 48)) > 0 )
+        {
           CReserveDatabase::RemoveGrpEntry((CReserveDatabase *)this, a2, (struct CGrpReserveEntry *)v6);
+        }
         CDynList::delElement(a3[12], i--);
       }
     }
   }
   else
   {
-    for ( j = 0; ; ++j )
+    for ( j = 0;
+          ;
+          ++j )
     {
       result = CDynList::size(this[1]);
       if ( j >= result )
+      {
         break;
+      }
       v5 = CDynList::elementAt(this[1], j);
       if ( !a2 || CReserveDatabase::InSameGroup((CReserveDatabase *)this, *(_DWORD *)(v5 + 44), a2) )
       {
         if ( CDynList::size(*(CDynList **)(v5 + 48)) > 0 )
+        {
           CReserveDatabase::RemoveGrpEntry((CReserveDatabase *)this, a2, (struct CGrpReserveEntry *)v5);
+        }
         CDynList::delElement(this[1], j--);
       }
     }
@@ -229,10 +273,7 @@ int  CReserveDatabase::GetReserveBuilding(int a2, enum BUILDING_TYPES a3) {
   _DWORD *v4; // [esp+4h] [ebp-4h] BYREF
 
   v4 = 0;
-  if ( (unsigned __int8)CReserveDatabase::GetSubReserveEntry(this, a2, &v4, a3) == 1
-    && v4
-    && v4[11] == a2
-    && (v4[3] == a3 || !a3) )
+  if ( (unsigned __int8)CReserveDatabase::GetSubReserveEntry(this, a2, &v4, a3) == 1 && v4 && v4[11] == a2 && (v4[3] == a3 || !a3) )
   {
     return v4[6];
   }
@@ -251,9 +292,13 @@ int  CReserveDatabase::GetResGrpNr(int a2) {
 
   GrpResBuilding = CReserveDatabase::GetGrpResBuilding(this, a2);
   if ( GrpResBuilding )
+  {
     return *((_DWORD *)GrpResBuilding + 11);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -273,11 +318,17 @@ bool  CReserveDatabase::NewSubReserveEntry(class CGrpReserveEntry * a2, int a3) 
 
   v5 = 0;
   if ( (unsigned __int8)CReserveDatabase::GetSubReserveEntry(this, a3, &v5, 0) == 1 )
+  {
     return 0;
+  }
   if ( v5 )
+  {
     CDynList::addElement(*(CDynList **)(v5 + 48), a2);
+  }
   else
+  {
     CDynList::addElement(this[1], a2);
+  }
   return 1;
 }
 
@@ -292,7 +343,9 @@ bool  CReserveDatabase::GetSubReserveEntry(int a2, class CGrpReserveEntry * & a3
   int v9; // [esp+10h] [ebp-4h]
 
   v7 = 0;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     if ( i >= CDynList::size(this[1]) )
     {
@@ -306,7 +359,9 @@ bool  CReserveDatabase::GetSubReserveEntry(int a2, class CGrpReserveEntry * & a3
       return 1;
     }
     if ( CReserveDatabase::InSameGroup((CReserveDatabase *)this, *(_DWORD *)(v9 + 44), a2) )
+    {
       break;
+    }
   }
   *a3 = v9;
   while ( v7 < CDynList::size(*(CDynList **)(v9 + 48)) )
@@ -347,8 +402,12 @@ bool  CReserveDatabase::GetResBuildingInGroup(int a2, class CReserveEntry * a3) 
   v9 = 0;
   v10 = 0;
   while ( *((_DWORD *)a3 + 11 * v9 + 3) )
+  {
     ++v9;
-  for ( i = 0; i < CDynList::size(this[1]); ++i )
+  }
+  for ( i = 0;
+        i < CDynList::size(this[1]);
+        ++i )
   {
     v8 = CDynList::elementAt(this[1], i);
     if ( CReserveDatabase::InSameGroup((CReserveDatabase *)this, *(_DWORD *)(v8 + 44), a2) )
@@ -360,7 +419,9 @@ bool  CReserveDatabase::GetResBuildingInGroup(int a2, class CReserveEntry * a3) 
       *((_DWORD *)a3 + 11 * v9++ + 8) = *(_DWORD *)(v8 + 32);
       v10 = 1;
       if ( *(_DWORD *)(v8 + 44) == a2 )
+      {
         return 1;
+      }
       while ( v6 < CDynList::size(*(CDynList **)(v8 + 48)) )
       {
         v7 = (_DWORD *)CDynList::elementAt(*(CDynList **)(v8 + 48), v6);
@@ -402,9 +463,13 @@ enum BUILDING_TYPES  CReserveDatabase::GetResBuildingType(int a2) {
 
   GrpResBuilding = CReserveDatabase::GetGrpResBuilding(this, a2);
   if ( GrpResBuilding )
+  {
     return *((_DWORD *)GrpResBuilding + 3);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -417,21 +482,31 @@ class CGrpReserveEntry *  CReserveDatabase::GetGrpResBuilding(int a2) {
 
   v5 = a2 - *((_DWORD *)this + 4);
   if ( CDynList::size(*((CDynList **)this + 2)) <= v5 && CDynList::size(*((CDynList **)this + 2)) > 0 )
+  {
     v5 = CDynList::size(*((CDynList **)this + 2)) - 1;
+  }
   v3 = CDynList::elementAt(*((CDynList **)this + 2), v5);
   if ( !v3 )
+  {
     return 0;
+  }
   while ( *(_DWORD *)(v3 + 12) != a2 && v5 > 0 )
+  {
     v3 = CDynList::elementAt(*((CDynList **)this + 2), --v5);
+  }
   if ( *(_DWORD *)(v3 + 12) == a2 )
+  {
     return *(_DWORD *)(v3 + 16);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x2f410a0]
-// Decompiled from struct CGrpReserveEntry *__thiscall CReserveDatabase::GetGrpResBuilding(  CDynList **this,  int a2,  struct CGrpReserveEntry *a3)
+// Decompiled from struct CGrpReserveEntry *__thiscall CReserveDatabase::GetGrpResBuilding(CDynList **this, int a2, struct CGrpReserveEntry *a3)
 class CGrpReserveEntry *  CReserveDatabase::GetGrpResBuilding(int a2, class CGrpReserveEntry * a3) {
   
   struct CGrpReserveEntry *v4; // [esp+0h] [ebp-10h]
@@ -442,25 +517,35 @@ class CGrpReserveEntry *  CReserveDatabase::GetGrpResBuilding(int a2, class CGrp
   int i; // [esp+Ch] [ebp-4h]
 
   if ( a3 && *((_DWORD *)a3 + 6) == a2 )
+  {
     return a3;
+  }
   if ( a3 )
   {
-    for ( i = 0; i < CDynList::size(*((CDynList **)a3 + 12)); ++i )
+    for ( i = 0;
+          i < CDynList::size(*((CDynList **)a3 + 12));
+          ++i )
     {
       v5 = (struct CGrpReserveEntry *)CDynList::elementAt(*((CDynList **)a3 + 12), i);
       GrpResBuilding = CReserveDatabase::GetGrpResBuilding((CReserveDatabase *)this, a2, v5);
       if ( GrpResBuilding )
+      {
         return GrpResBuilding;
+      }
     }
   }
   else
   {
-    for ( j = 0; j < CDynList::size(this[1]); ++j )
+    for ( j = 0;
+          j < CDynList::size(this[1]);
+          ++j )
     {
       v4 = (struct CGrpReserveEntry *)CDynList::elementAt(this[1], j);
       v7 = CReserveDatabase::GetGrpResBuilding((CReserveDatabase *)this, a2, v4);
       if ( v7 )
+      {
         return v7;
+      }
     }
   }
   return 0;
@@ -473,19 +558,18 @@ bool  CReserveDatabase::IsBuildingPlaceAvailable(class IAIEcoManager * a2, enum 
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; *(_DWORD *)(a5 + 44 * i + 12); ++i )
+  for ( i = 0;
+        *(_DWORD *)(a5 + 44 * i + 12);
+        ++i )
   {
-    if ( (*(unsigned __int8 (__thiscall **)(int, _DWORD, _DWORD, int, int))(*(_DWORD *)a2 + 40))(
-           a2,
-           *(_DWORD *)(a5 + 44 * i + 12),
-           *(_DWORD *)(a5 + 44 * i + 32),
-           a3,
-           a4) )
+    if ( (*(unsigned __int8 (__thiscall **)(int, _DWORD, _DWORD, int, int))(*(_DWORD *)a2 + 40))(a2, *(_DWORD *)(a5 + 44 * i + 12), *(_DWORD *)(a5 + 44 * i + 32), a3, a4) )
     {
       return 0;
     }
     if ( *(_DWORD *)(a5 + 44 * i + 36) && CReserveDatabase::InSameGrid8(this, a4, *(_DWORD *)(a5 + 44 * i + 36)) )
+    {
       return 0;
+    }
   }
   return 1;
 }
@@ -502,11 +586,17 @@ bool  CReserveDatabase::IsBuildingTypeInGrp(enum BUILDING_TYPES a2, int a3) {
 
   _vec_ctor(v7, 0x2Cu, 6u, CReserveEntry::CReserveEntry, CReserveEntry::~CReserveEntry);
   v8 = 0;
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
+  {
     memset(&v7[11 * i], 0, 0x2Cu);
+  }
   if ( CReserveDatabase::GetResBuildingInGroup(this, a3, (struct CReserveEntry *)v7) )
   {
-    for ( j = 0; v7[11 * j + 3]; ++j )
+    for ( j = 0;
+          v7[11 * j + 3];
+          ++j )
     {
       if ( v7[11 * j + 3] == a2 )
       {
@@ -536,17 +626,23 @@ bool  CReserveDatabase::InSameGroup(int a2, int a3) {
     {
       v4 /= 10;
       if ( v4 == a2 )
+      {
         return 1;
+      }
     }
   }
   if ( a2 <= a3 )
+  {
     return a2 == a3;
+  }
   v5 = a2;
   while ( v5 / 10 )
   {
     v5 /= 10;
     if ( v5 == a3 )
+    {
       return 1;
+    }
   }
   return a2 == a3;
 }
@@ -557,7 +653,9 @@ bool  CReserveDatabase::InSameGroup(int a2, int a3) {
 bool  CReserveDatabase::UnLockReserveDatabase(int a2) {
   
   if ( *((_DWORD *)this + 5) != a2 )
+  {
     return 0;
+  }
   *((_DWORD *)this + 5) = 0;
   CReserveDatabase::RemoveGrpEntry(this, 0, 0);
   CDynList::ClearDynList(*((CDynList **)this + 2));
@@ -580,9 +678,13 @@ int  CReserveDatabase::GetLockedSchedNr(void) {
 bool  CReserveDatabase::LockReserveDatabase(int a2) {
   
   if ( *((_DWORD *)this + 5) )
+  {
     return 0;
+  }
   if ( *((_DWORD *)this + 6) && *((_DWORD *)this + 6) != a2 )
+  {
     return 0;
+  }
   *((_DWORD *)this + 5) = a2;
   *((_DWORD *)this + 6) = 0;
   return 1;
@@ -594,7 +696,9 @@ bool  CReserveDatabase::LockReserveDatabase(int a2) {
 bool  CReserveDatabase::ReserveLock(int a2) {
   
   if ( this[6] )
+  {
     return 0;
+  }
   this[6] = a2;
   return 1;
 }
@@ -616,7 +720,9 @@ void  CReserveDatabase::SetScoringData(int a2, int a3) {
 
   result = CReserveDatabase::GetGrpResBuilding(this, a2);
   if ( result )
+  {
     *((_DWORD *)result + 7) = a3;
+  }
   return result;
 }
 
@@ -629,9 +735,13 @@ int  CReserveDatabase::GetScoringData(int a2) {
 
   GrpResBuilding = CReserveDatabase::GetGrpResBuilding(this, a2);
   if ( GrpResBuilding )
+  {
     return *((_DWORD *)GrpResBuilding + 7);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -643,9 +753,13 @@ int  CReserveDatabase::GetPackWorldPosition(int a2) {
 
   GrpResBuilding = CReserveDatabase::GetGrpResBuilding(this, a2);
   if ( GrpResBuilding )
+  {
     return *((_DWORD *)GrpResBuilding + 8);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -657,7 +771,9 @@ int  CReserveDatabase::GetPackWorldPosition(int a2, int & a3, int & a4) {
 
   GrpResBuilding = CReserveDatabase::GetGrpResBuilding(this, a2);
   if ( !GrpResBuilding )
+  {
     return 0;
+  }
   CReserveDatabase::UnpackPosition(this, *((_DWORD *)GrpResBuilding + 8), a3, a4);
   return *((_DWORD *)GrpResBuilding + 8);
 }

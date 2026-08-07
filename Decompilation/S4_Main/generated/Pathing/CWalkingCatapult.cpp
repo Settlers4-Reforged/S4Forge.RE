@@ -46,23 +46,35 @@ bool  CWalkingCatapult::IsNotOccupied(int a2) {
 
   v3 = CWorldManager::Width();
   if ( CWorldManager::OccupyingEntityId(a2) )
+  {
     return 0;
+  }
   if ( CWorldManager::OccupyingEntityId(a2 + 1) )
+  {
     return 0;
+  }
   if ( CWorldManager::OccupyingEntityId(a2 + v3 + 1) )
+  {
     return 0;
+  }
   if ( CWorldManager::OccupyingEntityId(v3 + a2) )
+  {
     return 0;
+  }
   if ( CWorldManager::OccupyingEntityId(a2 - 1) )
+  {
     return 0;
+  }
   if ( CWorldManager::OccupyingEntityId(a2 - v3 - 1) )
+  {
     return 0;
+  }
   return CWorldManager::OccupyingEntityId(a2 - v3) == 0;
 }
 
 
 // address=[0x15f9300]
-// Decompiled from char __thiscall CWalkingCatapult::FindPathAStar64(  CWalkingCatapult *this,  unsigned int a2,  unsigned int a3,  struct CDirCache *a4)
+// Decompiled from char __thiscall CWalkingCatapult::FindPathAStar64(CWalkingCatapult *this, unsigned int a2, unsigned int a3, struct CDirCache *a4)
 bool  CWalkingCatapult::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
   
   int v5; // [esp+4h] [ebp-2Ch]
@@ -74,7 +86,9 @@ bool  CWalkingCatapult::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
   _BYTE v11[8]; // [esp+24h] [ebp-Ch]
 
   iIndex = CWorldManager::Index(a2);
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v7 = iIndex + CWorldManager::NeighborRelIndex(i);
     if ( CWorldManager::MapObjectId(v7) == i + 1 )
@@ -85,12 +99,16 @@ bool  CWalkingCatapult::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
     else
     {
       if ( (unsigned int)i >= 6 )
+      {
         report_rangecheckfailure();
+      }
       v11[i] = 0;
     }
   }
   bFound = CAStar64::FindPath((CAStar64 *)&g_cAStar64Catapult, a2, a3, a4);
-  for ( j = 0; j < 6; ++j )
+  for ( j = 0;
+        j < 6;
+        ++j )
   {
     if ( v11[j] )
     {
@@ -131,18 +149,21 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
 
   iCurrentX = Y16X16::UnpackXFast(a2);
   iCurrentY = Y16X16::UnpackYFast(a2);
-  if ( !CWorldManager::InInnerWorld1(iCurrentX, iCurrentY)
-    && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2009, "g_cWorld.InInnerWorld1(iCurrentX, iCurrentY)") == 1 )
+  if ( !CWorldManager::InInnerWorld1(iCurrentX, iCurrentY) && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2009, "g_cWorld.InInnerWorld1(iCurrentX, iCurrentY)") == 1 )
   {
     __debugbreak();
   }
   if ( !CWorldManager::InInnerWorld1(iCurrentX, iCurrentY) )
+  {
     return 8;
+  }
   v16 = CWorldManager::Index(iCurrentX, iCurrentY);
   v26 = CWorldManager::MoveCostsBits(v16) >= 7;
   if ( !v26 )
   {
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       v12 = v16 + CWorldManager::NeighborRelIndex(i);
       if ( CWorldManager::FlagBits(v12, 8u) && CWorldManager::MoveCostsBits(v12) >= 7 )
@@ -156,14 +177,18 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
   {
     v9 = this->SectorId(this, v16);
     if ( (this->m_sData.m_uFlags & 0x20000) == 0 )
+    {
       this->m_sData.m_iIdleWalkToXY = -1;
+    }
     this->m_sData.m_uFlags &= ~0x20000u;
     if ( CWorldManager::InWorldPackedXY(this->m_sData.m_iIdleWalkToXY) )
     {
       v11 = CWorldManager::Index(this->m_sData.m_iIdleWalkToXY);
       v10 = this->SectorId(this, v11);
       if ( CWorldManager::MoveCostsBits(v11) == 7 || v10 <= 0 || v9 != v10 )
+      {
         this->m_sData.m_iIdleWalkToXY = -1;
+      }
     }
     else
     {
@@ -175,19 +200,21 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
       v5 = Y16X16::UnpackYFast(a2);
       v13 = -1;
       v7 = -1;
-      for ( j = 0; j < SurroundingHexPointsCount(15); ++j )
+      for ( j = 0;
+            j < SurroundingHexPointsCount(15);
+            ++j )
       {
         v15 = v6 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[j]);
         v14 = v5 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[j]);
         if ( CWorldManager::InWorld(v15, v14) )
         {
           v20 = CWorldManager::Index(v15, v14);
-          if ( this->SectorId(this, v20) == v9
-            && CWorldManager::MoveCostsBits(v20) < 7
-            && this->IsNotOccupied(this, v20) )
+          if ( this->SectorId(this, v20) == v9 && CWorldManager::MoveCostsBits(v20) < 7 && this->IsNotOccupied(this, v20) )
           {
             v25 = 1;
-            for ( k = 1; k < 19; ++k )
+            for ( k = 1;
+                  k < 19;
+                  ++k )
             {
               v8 = v20 + CWorldManager::SurroundingHexPointRelIndex(k);
               if ( CWorldManager::FlagBits(v8, 8u) && CWorldManager::MoveCostsBits(v8) >= 7 )
@@ -206,13 +233,17 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
         }
       }
       if ( v13 < 0 )
+      {
         return 8;
+      }
       this->m_sData.m_iIdleWalkToXY = Y16X16::PackXYFast(v13, v7);
     }
     v17 = Y16X16::DirectionFast(a2, this->m_sData.m_iIdleWalkToXY);
     v4 = CWorldManager::Index(g_sNeighborPoints[v17].x + iCurrentX, g_sNeighborPoints[v17].y + iCurrentY);
     if ( !this->IsNotBlocked(this, v4) )
+    {
       return 8;
+    }
     return v17;
   }
   else

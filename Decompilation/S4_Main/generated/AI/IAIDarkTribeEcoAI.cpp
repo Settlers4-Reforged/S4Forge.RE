@@ -10,9 +10,13 @@ class IAIDarkTribeEcoAI * __cdecl IAIDarkTribeEcoAI::CreateEcoAI(struct SAIDarkT
 
   v3 = (std::bad_function_call *)operator new(0x4084u);
   if ( v3 )
+  {
     return CAIDarkTribe::CAIDarkTribe(v3, *(_DWORD *)a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

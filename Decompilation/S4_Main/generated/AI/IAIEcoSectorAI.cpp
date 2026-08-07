@@ -20,28 +20,33 @@ class IAIEcoSectorAI * __cdecl IAIEcoSectorAI::CreateEcoSectorAI(class IAIEcoMan
   int v6; // [esp+18h] [ebp-10h]
 
   if ( !a1 && BBSupportDbgReport(2, "Source\\SiedAI.cpp", 2120, "_pEcoManager != 0") == 1 )
+  {
     __debugbreak();
-  if ( (**(int (__thiscall ***)(struct IAIEcoManager *))a1)(a1) != 2
-    && BBSupportDbgReport(
-         2,
-         "Source\\SiedAI.cpp",
-         2121,
-         "_pEcoManager->InterfaceVersion() == IAIEcoManager::INTERFACE_VERSION") == 1 )
+  }
+  if ( (**(int (__thiscall ***)(struct IAIEcoManager *))a1)(a1) != 2 && BBSupportDbgReport(2, "Source\\SiedAI.cpp", 2121, "_pEcoManager->InterfaceVersion() == IAIEcoManager::INTERFACE_VERSION") == 1 )
   {
     __debugbreak();
   }
   v5 = (struct IAISectorAI *)(*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)a1 + 332))(a1);
   if ( !v5 && BBSupportDbgReport(2, "Source\\SiedAI.cpp", 2125, "pSectorAI != 0") == 1 )
+  {
     __debugbreak();
+  }
   v6 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)a1 + 128))(a1);
   v2 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)a1 + 136))(a1);
   if ( !v6 && BBSupportDbgReport(2, "Source\\SiedAI.cpp", 2130, "iPlayerId != PLAYER_NO_PLAYER") == 1 )
+  {
     __debugbreak();
+  }
   C = (CEcoSectorAI *)operator new(0x24u);
   if ( C )
+  {
     return CEcoSectorAI::CEcoSectorAI(C, a1, v5, v6, v2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

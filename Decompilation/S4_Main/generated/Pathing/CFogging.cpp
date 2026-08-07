@@ -23,8 +23,12 @@ void  CFogging::Load(class IS4Chunk & a2) {
   Size = v6 * v6;
   v8 = operator new[](v6 * v6);
   (**(void (__thiscall ***)(struct IS4Chunk *, _BYTE *, int))a2)(a2, v8, v6 * v6);
-  for ( i = 0; i < (int)Size; ++i )
+  for ( i = 0;
+        i < (int)Size;
+        ++i )
+  {
     *(_BYTE *)(*((_DWORD *)v11 + 2) + 4 * i + 3) |= v8[i];
+  }
   operator delete[](v8);
   std::list<SFogSpotInfo>::clear();
   *((_BYTE *)v11 + 76) = 0;
@@ -36,7 +40,9 @@ void  CFogging::Load(class IS4Chunk & a2) {
   {
     v5 = 0;
     result = (**(int (__thiscall ***)(struct IS4Chunk *, unsigned int *, int))a2)(a2, &v5, 4);
-    for ( j = 0; j < v5; ++j )
+    for ( j = 0;
+          j < v5;
+          ++j )
     {
       (**(void (__thiscall ***)(struct IS4Chunk *, _BYTE *, int))a2)(a2, v12, 16);
       std::list<SFogSpotInfo>::push_back(v12);
@@ -84,8 +90,12 @@ void  CFogging::Save(class IS4Chunk & a2) {
   Size = v12 * v12;
   v10 = operator new[](v12 * v12);
   v13 = v10;
-  for ( i = 0; i < (int)Size; ++i )
+  for ( i = 0;
+        i < (int)Size;
+        ++i )
+  {
     v13[i] = *(_BYTE *)(*((_DWORD *)v15 + 2) + 4 * i + 3) & 0x3F;
+  }
   (*(void (__thiscall **)(struct IS4Chunk *, _BYTE *, size_t))(*(_DWORD *)a2 + 16))(a2, v13, Size);
   C = v13;
   operator delete[](v13);
@@ -104,7 +114,9 @@ void  CFogging::Save(class IS4Chunk & a2) {
     LOBYTE(v20) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<SFogSpotInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SFogSpotInfo>>>(v4);
     if ( !v17 )
+    {
       break;
+    }
     v18[0] = *(_DWORD *)std::_List_iterator<std::_List_val<std::_List_simple_types<SFogSpotInfo>>>::operator->(v11);
     v18[1] = *(_DWORD *)(std::_List_iterator<std::_List_val<std::_List_simple_types<SFogSpotInfo>>>::operator->(v11) + 4);
     v18[2] = *(_DWORD *)(std::_List_iterator<std::_List_val<std::_List_simple_types<SFogSpotInfo>>>::operator->(v11) + 8);
@@ -125,20 +137,32 @@ void  CFogging::Save(class IS4Chunk & a2) {
 void  CFogging::Init(struct T_GFX_MAP_ELEMENT * a2, unsigned char * a3) {
   
   if ( !a2 && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1277, "_pGfxMapElements != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !a3 && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1278, "_pFogLayer != 0") == 1 )
+  {
     __debugbreak();
+  }
   (*(void (__thiscall **)(CFogging *))(*(_DWORD *)this + 12))(this);
   *((_DWORD *)this + 2) = a2;
   *((_DWORD *)this + 3) = a3;
   if ( !*((_DWORD *)this + 10) )
+  {
     *((_DWORD *)this + 10) = operator new(8u);
+  }
   if ( !*((_DWORD *)this + 11) )
+  {
     *((_DWORD *)this + 11) = operator new(8u);
+  }
   if ( !*((_DWORD *)this + 10) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1295, "m_pRWM1 != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !*((_DWORD *)this + 11) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1296, "m_pRWM2 != 0") == 1 )
+  {
     __debugbreak();
+  }
   memset(*((void **)this + 10), 0, 8u);
   return memset(*((void **)this + 11), 0, 8u);
 }
@@ -183,22 +207,27 @@ void  CFogging::Start(void) {
   int i; // [esp+4h] [ebp-8h]
 
   v4 = CWorldManager::Width(this);
-  if ( v4 != CWorldManager::Height(v2, v1)
-    && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1474, "iWidthHeight == g_cWorld.Height()") == 1 )
+  if ( v4 != CWorldManager::Height(v2, v1) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1474, "iWidthHeight == g_cWorld.Height()") == 1 )
   {
     __debugbreak();
   }
   CFogging::ClearDynamicFoggingAndCalcStatic(this);
   CFogging::InitializeDynamicLayer(this, 0, v4);
-  for ( i = 0; i < 32; ++i )
+  for ( i = 0;
+        i < 32;
+        ++i )
+  {
     CFogging::CalculateDynamicLayer(this, i);
+  }
   if ( !*((_BYTE *)this + 4) )
   {
     CFogging::SetWholeGfxLayerAndInitializeDynamicLayer(this);
     *((_BYTE *)this + 4) = 0;
   }
   if ( g_pGfxEngine )
+  {
     IGfxEngine::SetFoggingFadingStep((IGfxEngine *)g_pGfxEngine, 0);
+  }
   *((_DWORD *)this + 4) = 1;
   *((_DWORD *)this + 5) = 0;
   *((_DWORD *)this + 7) = 0;
@@ -296,7 +325,9 @@ void  CFogging::Update(void) {
         LOBYTE(v27) = 0;
         std::_List_iterator<std::_List_val<std::_List_simple_types<SFogSpotInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SFogSpotInfo>>>(v9);
         if ( !v25 )
+        {
           break;
+        }
         v7 = *(_DWORD *)(std::_List_iterator<std::_List_val<std::_List_simple_types<SFogSpotInfo>>>::operator->(v10) + 4);
         v2 = (_DWORD *)std::_List_iterator<std::_List_val<std::_List_simple_types<SFogSpotInfo>>>::operator->(v10);
         CFogging::UpdateEntityFogging(v23, *v2, v7, 35);
@@ -305,7 +336,9 @@ void  CFogging::Update(void) {
       }
       v3 = std::list<SFogSpotInfo>::front();
       if ( *(_DWORD *)(v3 + 8) <= (unsigned int)CStateGame::GetTickCounter(g_pGame) )
+      {
         std::list<SFogSpotInfo>::pop_front();
+      }
       v27 = -1;
       return std::_List_iterator<std::_List_val<std::_List_simple_types<SFogSpotInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SFogSpotInfo>>>(v10);
     }
@@ -318,7 +351,9 @@ void  CFogging::Update(void) {
       CFogging::CalcYRange(v23, *((_DWORD *)v23 + 5), 8u, v11, &v17);
       CFogging::UpdateGfxLayerAndInitializeDynamicLayer(v23, v11[0], v17);
       if ( g_pGfxEngine )
+      {
         IGfxEngine::SetFoggingUpdateMode((IGfxEngine *)g_pGfxEngine, v17);
+      }
     }
     v16 = *((_DWORD *)v23 + 5) + 1;
     result = v16;
@@ -338,8 +373,7 @@ void  CFogging::Update(void) {
       {
         if ( *((int *)v23 + 9) < 0 )
         {
-          if ( *((_DWORD *)v23 + 8) != 0x4000
-            && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1644, "m_iFoggingUpdateYFirst == 16384") == 1 )
+          if ( *((_DWORD *)v23 + 8) != 0x4000 && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1644, "m_iFoggingUpdateYFirst == 16384") == 1 )
           {
             __debugbreak();
           }
@@ -347,8 +381,7 @@ void  CFogging::Update(void) {
         }
         else
         {
-          if ( *((_DWORD *)v23 + 8) > *((_DWORD *)v23 + 9)
-            && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1638, "m_iFoggingUpdateYFirst <= m_iFoggingUpdateYLast") == 1 )
+          if ( *((_DWORD *)v23 + 8) > *((_DWORD *)v23 + 9) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1638, "m_iFoggingUpdateYFirst <= m_iFoggingUpdateYLast") == 1 )
           {
             __debugbreak();
           }
@@ -387,17 +420,22 @@ void  CFogging::ResetGfxFogLayer(bool a2) {
   int i; // [esp+10h] [ebp-8h]
 
   v7 = CWorldManager::Width(this);
-  if ( v7 != CWorldManager::Height(v3, v2)
-    && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 582, "iWidthHeight == g_cWorld.Height()") == 1 )
+  if ( v7 != CWorldManager::Height(v3, v2) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 582, "iWidthHeight == g_cWorld.Height()") == 1 )
   {
     __debugbreak();
   }
   if ( a2 )
+  {
     v6 = 0;
+  }
   else
+  {
     v6 = 7;
+  }
   result = v6;
-  for ( i = 0; i < v7 * v7; ++i )
+  for ( i = 0;
+        i < v7 * v7;
+        ++i )
   {
     *(_BYTE *)(*((_DWORD *)this + 2) + 4 * i + 3) = (8 * v6) | v6 | *(_BYTE *)(*((_DWORD *)this + 2) + 4 * i + 3) & 0xC0;
     result = i + 1;
@@ -424,20 +462,27 @@ void  CFogging::UpdateOwnerFogging(int a2, int a3, int a4) {
   int v15; // [esp+34h] [ebp-14h]
   bool v17; // [esp+42h] [ebp-6h]
 
-  if ( !CWorldManager::InInnerWorld2(a2, a3)
-    && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1679, "g_cWorld.InInnerWorld2(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InInnerWorld2(a2, a3) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1679, "g_cWorld.InInnerWorld2(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( !g_pGfxEngine && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1681, "g_pGfxEngine != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1682, "m_pFogLayer != 0") == 1 )
+  {
     __debugbreak();
+  }
   LocalPlayerId = CPlayerManager::GetLocalPlayerId(v4);
   if ( *((_BYTE *)this + 76) )
+  {
     v9 = CAlliances::PlayerBit(LocalPlayerId);
+  }
   else
+  {
     v9 = CAlliances::PlayerAllyBits(LocalPlayerId);
+  }
   v17 = (v9 & CAlliances::PlayerBit(a4)) != 0;
   v15 = CWorldManager::Index(a2, a3);
   if ( v17 )
@@ -451,7 +496,9 @@ void  CFogging::UpdateOwnerFogging(int a2, int a3, int a4) {
   else if ( (*(_BYTE *)(*((_DWORD *)this + 3) + v15) & 7u) < 3 )
   {
     *(_BYTE *)(*((_DWORD *)this + 3) + v15) = *(_BYTE *)(*((_DWORD *)this + 3) + v15) & 0x38 | 3;
-    for ( i = 0; i < 19; ++i )
+    for ( i = 0;
+          i < 19;
+          ++i )
     {
       v8 = a2 + CSpiralOffsets::DeltaX(i);
       v7 = a3 + CSpiralOffsets::DeltaY(i);
@@ -459,7 +506,9 @@ void  CFogging::UpdateOwnerFogging(int a2, int a3, int a4) {
       if ( (*(_BYTE *)(*((_DWORD *)this + 3) + v11) & 7) != 0 )
       {
         v12 = 3;
-        for ( j = 1; j < 19; ++j )
+        for ( j = 1;
+              j < 19;
+              ++j )
         {
           v5 = v8 + CSpiralOffsets::DeltaX(j);
           v6 = v7 + CSpiralOffsets::DeltaY(j);
@@ -469,8 +518,7 @@ void  CFogging::UpdateOwnerFogging(int a2, int a3, int a4) {
             break;
           }
         }
-        if ( (v12 < 1 || v12 > 3)
-          && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1741, "(iNearest >= 1) && (iNearest <= 3)") == 1 )
+        if ( (v12 < 1 || v12 > 3) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1741, "(iNearest >= 1) && (iNearest <= 3)") == 1 )
         {
           __debugbreak();
         }
@@ -494,9 +542,13 @@ bool  CFogging::IsPositionVisible(int a2, int a3)const {
   int v10; // [esp+18h] [ebp-Ch]
 
   if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) )
+  {
     return 0;
+  }
   if ( !*((_DWORD *)this + 2) )
+  {
     return 0;
+  }
   v9 = CWorldManager::Index(a2, a3);
   OldFogging = T_GFX_MAP_ELEMENT::GetOldFogging((T_GFX_MAP_ELEMENT *)(*((_DWORD *)this + 2) + 4 * v9));
   NewFogging = T_GFX_MAP_ELEMENT::GetNewFogging((T_GFX_MAP_ELEMENT *)(*((_DWORD *)this + 2) + 4 * v9));
@@ -505,17 +557,25 @@ bool  CFogging::IsPositionVisible(int a2, int a3)const {
   if ( v8 == 1 )
   {
     if ( *((_DWORD *)this + 7) >= 0xFu )
+    {
       v7 = NewFogging;
+    }
     else
+    {
       v7 = OldFogging;
+    }
     v10 = v7;
   }
   else if ( v8 == 2 )
   {
     if ( a3 > *((_DWORD *)this + 9) )
+    {
       v4 = NewFogging;
+    }
     else
+    {
       v4 = OldFogging;
+    }
     v10 = v4;
   }
   return v10 < 3;
@@ -539,7 +599,9 @@ void  CFogging::SetRWM(bool a2) {
 
   result = (CFogging *)this;
   if ( !this[10] )
+  {
     return result;
+  }
   v3 = CWorldManager::Width(this) << 8;
   *(_DWORD *)this[10] = 158619957 * a2 + 16 * CAlliances::NumberOfPlayers() + v3;
   result = this[10];
@@ -556,7 +618,9 @@ void  CFogging::SetAlliesDontRevealFog(bool a2) {
 
   result = this;
   if ( *((_BYTE *)this + 77) == a2 )
+  {
     return result;
+  }
   result = this;
   *((_BYTE *)this + 77) = a2;
   *((_BYTE *)this + 78) = 1;
@@ -614,7 +678,9 @@ void  CFogging::LiftFogAtSpot(int a2, int a3, unsigned int a4, int a5) {
   LocalPlayerId = CPlayerManager::GetLocalPlayerId(this);
   result = (CAlliances::PlayerAllyBits(LocalPlayerId) & v7) != 0;
   if ( !result )
+  {
     return result;
+  }
   v9[2] = a4;
   v10 = a5;
   v9[0] = a2;
@@ -727,36 +793,51 @@ void  CFogging::ClearDynamicFoggingAndCalcStatic(void) {
   char v30; // [esp+9Ah] [ebp-2h]
 
   if ( !*((_DWORD *)this + 3) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1343, "m_pFogLayer != 0") == 1 )
+  {
     __debugbreak();
+  }
   v28 = (Squares *)CWorldManager::Width(0);
   v19 = Squares::XYToVW(v28);
-  if ( v28 != (Squares *)CWorldManager::Height(v2, v1)
-    && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1353, "iWidthHeight == g_cWorld.Height()") == 1 )
+  if ( v28 != (Squares *)CWorldManager::Height(v2, v1) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1353, "iWidthHeight == g_cWorld.Height()") == 1 )
   {
     __debugbreak();
   }
   memset(*((void **)this + 3), 7, (_DWORD)v28 * (_DWORD)v28);
   LocalPlayerId = CPlayerManager::GetLocalPlayerId(v4);
   if ( *((_BYTE *)this + 76) )
-    v14 = (char *)CAlliances::PlayerBit(LocalPlayerId);
-  else
-    v14 = (char *)CAlliances::PlayerAllyBits(LocalPlayerId);
-  result = v14;
-  for ( i = 0; (int)i < v19; i = (Squares *)((char *)i + 1) )
   {
-    for ( j = 0; (int)j < v19; j = (Squares *)((char *)j + 1) )
+    v14 = (char *)CAlliances::PlayerBit(LocalPlayerId);
+  }
+  else
+  {
+    v14 = (char *)CAlliances::PlayerAllyBits(LocalPlayerId);
+  }
+  result = v14;
+  for ( i = 0;
+        (int)i < v19;
+        i = (Squares *)((char *)i + 1) )
+  {
+    for ( j = 0;
+          (int)j < v19;
+          j = (Squares *)((char *)j + 1) )
     {
       if ( ((unsigned int)v14 & COwnerMap::OwnerBits1VW(j, i)) != 0 )
       {
         v8 = Squares::VWToXY(j);
         v27 = v8 + (_DWORD)v28 * Squares::VWToXY(i);
-        for ( k = 0; k < 16; ++k )
+        for ( k = 0;
+              k < 16;
+              ++k )
         {
-          for ( m = 0; m < 16; ++m )
+          for ( m = 0;
+                m < 16;
+                ++m )
           {
             v7 = ITiling::OwnerId(v27);
             if ( ((unsigned int)v14 & CAlliances::PlayerBit(v7)) != 0 )
+            {
               *(_BYTE *)(*((_DWORD *)this + 3) + v27) = 0;
+            }
             ++v27;
           }
           v27 = (int)v28 + v27 - 16;
@@ -765,22 +846,32 @@ void  CFogging::ClearDynamicFoggingAndCalcStatic(void) {
       result = (char *)j + 1;
     }
   }
-  for ( n = 0; (int)n < v19; n = (Squares *)((char *)n + 1) )
+  for ( n = 0;
+        (int)n < v19;
+        n = (Squares *)((char *)n + 1) )
   {
-    for ( ii = 0; (int)ii < v19; ii = (Squares *)((char *)ii + 1) )
+    for ( ii = 0;
+          (int)ii < v19;
+          ii = (Squares *)((char *)ii + 1) )
     {
       if ( COwnerMap::OwnerBits1VW(ii, n) )
       {
         v12 = Squares::VWToXY(ii);
         v13 = Squares::VWToXY(n);
-        for ( jj = v13; jj < v13 + 16; ++jj )
+        for ( jj = v13;
+              jj < v13 + 16;
+              ++jj )
         {
-          for ( kk = v12; kk < v12 + 16; ++kk )
+          for ( kk = v12;
+                kk < v12 + 16;
+                ++kk )
           {
             if ( !*(_BYTE *)(*((_DWORD *)this + 3) + kk + (_DWORD)v28 * jj) )
             {
               v30 = 0;
-              for ( mm = 0; mm < 6; ++mm )
+              for ( mm = 0;
+                    mm < 6;
+                    ++mm )
               {
                 v11 = kk + (_DWORD)v28 * jj + CWorldManager::NeighborRelIndex(mm);
                 if ( *(unsigned __int8 *)(*((_DWORD *)this + 3) + v11) > 1u )
@@ -792,13 +883,17 @@ void  CFogging::ClearDynamicFoggingAndCalcStatic(void) {
               if ( v30 )
               {
                 v6 = CSpiralOffsets::Last(6);
-                for ( nn = 7; nn <= v6; ++nn )
+                for ( nn = 7;
+                      nn <= v6;
+                      ++nn )
                 {
                   v5 = kk + CSpiralOffsets::DeltaX(nn);
                   v10 = v5 + (_DWORD)v28 * (jj + CSpiralOffsets::DeltaY(nn));
                   v9 = CSpiralOffsets::Radius(nn);
                   if ( *(unsigned __int8 *)(*((_DWORD *)this + 3) + v10) > v9 )
+                  {
                     *(_BYTE *)(*((_DWORD *)this + 3) + v10) = v9;
+                  }
                 }
               }
             }
@@ -833,16 +928,19 @@ void  CFogging::UpdateEntityFogging(int a2, int a3, int a4) {
   char v19; // [esp+3Eh] [ebp-2h]
   unsigned __int8 v20; // [esp+3Fh] [ebp-1h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
-    && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 694, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 694, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( a4 < 8 && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 695, "_iFogRadius >= 8") == 1 )
+  {
     __debugbreak();
+  }
   result = CSpiralOffsets::Last(a4);
   v7 = result;
-  for ( i = 0; i <= v7; ++i )
+  for ( i = 0;
+        i <= v7;
+        ++i )
   {
     v12 = a2 + CSpiralOffsets::DeltaX(i);
     v13 = a3 + CSpiralOffsets::DeltaY(i);
@@ -851,17 +949,23 @@ void  CFogging::UpdateEntityFogging(int a2, int a3, int a4) {
       v11 = CWorldManager::Index(v12, v13);
       v19 = *(_BYTE *)(*((_DWORD *)this + 3) + v11);
       if ( (v19 & 0x38) != 0 )
+      {
         *(_BYTE *)(*((_DWORD *)this + 3) + v11) = v19 & 0xC7;
+      }
     }
     result = i + 1;
   }
   v20 = 0;
-  for ( j = a4 + 1; j <= a4 + 6; ++j )
+  for ( j = a4 + 1;
+        j <= a4 + 6;
+        ++j )
   {
     v20 += 8;
     v6 = CSpiralOffsets::Last(j - 1);
     v5 = CSpiralOffsets::Last(j);
-    for ( k = v6; k <= v5; ++k )
+    for ( k = v6;
+          k <= v5;
+          ++k )
     {
       v9 = a2 + CSpiralOffsets::DeltaX(k);
       v10 = a3 + CSpiralOffsets::DeltaY(k);
@@ -870,7 +974,9 @@ void  CFogging::UpdateEntityFogging(int a2, int a3, int a4) {
         v8 = CWorldManager::Index(v9, v10);
         v18 = *(_BYTE *)(*((_DWORD *)this + 3) + v8);
         if ( v20 < (v18 & 0x38) )
+        {
           *(_BYTE *)(*((_DWORD *)this + 3) + v8) = v20 | v18 & 0xC7;
+        }
       }
     }
     result = j + 1;
@@ -880,7 +986,7 @@ void  CFogging::UpdateEntityFogging(int a2, int a3, int a4) {
 
 
 // address=[0x15d8b70]
-// Decompiled from unsigned int __thiscall CFogging::CalcYRange(  CFogging *this,  unsigned int a2,  unsigned int a3,  unsigned int *a4,  unsigned int *a5)
+// Decompiled from unsigned int __thiscall CFogging::CalcYRange(CFogging *this, unsigned int a2, unsigned int a3, unsigned int *a4, unsigned int *a5)
 void  CFogging::CalcYRange(unsigned int a2, unsigned int a3, int & a4, int & a5) {
   
   unsigned int result; // eax
@@ -888,11 +994,15 @@ void  CFogging::CalcYRange(unsigned int a2, unsigned int a3, int & a4, int & a5)
   unsigned int v7; // [esp+10h] [ebp-4h]
 
   if ( !a3 && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 600, "_uNumberOfSteps > 0") == 1 )
+  {
     __debugbreak();
+  }
   v7 = CWorldManager::Width(this);
   v6 = v7 / a3 + v7 / a3 * a2;
   if ( v6 > v7 )
+  {
     v6 = v7;
+  }
   result = v7 / a3 * a2;
   *a4 = result;
   *a5 = v6;
@@ -911,14 +1021,16 @@ void  CFogging::InitializeDynamicLayer(int a2, int a3) {
 
   v5 = CWorldManager::Index(0, a2);
   v4 = CWorldManager::Index(0, a3);
-  for ( i = v5; ; ++i )
+  for ( i = v5;
+        ;
+        ++i )
   {
     result = i;
     if ( i >= v4 )
+    {
       break;
-    *(_BYTE *)(*((_DWORD *)this + 3) + i) = *(_BYTE *)(*((_DWORD *)this + 3) + i) & 7 | (8
-                                                                                       * *(_BYTE *)(*((_DWORD *)this + 3)
-                                                                                                  + i));
+    }
+    *(_BYTE *)(*((_DWORD *)this + 3) + i) = *(_BYTE *)(*((_DWORD *)this + 3) + i) & 7 | (8 * *(_BYTE *)(*((_DWORD *)this + 3) + i));
   }
   return result;
 }
@@ -936,7 +1048,9 @@ void  CFogging::SetDynamicLayerToFullBright(int a2, int a3) {
   v5 = CWorldManager::Index(0, a2);
   result = CWorldManager::Index(0, a3);
   v4 = result;
-  for ( i = v5; i < v4; ++i )
+  for ( i = v5;
+        i < v4;
+        ++i )
   {
     *(_BYTE *)(*((_DWORD *)this + 3) + i) &= 0xC7u;
     result = i + 1;
@@ -968,14 +1082,22 @@ void  CFogging::CalculateDynamicLayer(int a2) {
   void **v19; // [esp+5Ch] [ebp-8h]
 
   if ( a2 < 0 && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 763, "_iStep >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 <= 0 )
+  {
     *((_DWORD *)this + 6) = 0;
+  }
   LocalPlayerId = CPlayerManager::GetLocalPlayerId(v3);
   if ( *((_BYTE *)this + 76) )
+  {
     v11 = CAlliances::PlayerBit(LocalPlayerId);
+  }
   else
+  {
     v11 = CAlliances::PlayerAllyBits(LocalPlayerId);
+  }
   UsedId = CMapObjectMgr::LastUsedId();
   result = (a2 + 1) * ((UsedId + 31) >> 5);
   v15 = result;
@@ -984,13 +1106,14 @@ void  CFogging::CalculateDynamicLayer(int a2) {
     result = UsedId;
     v15 = UsedId;
   }
-  for ( i = *((_DWORD *)this + 6); i <= v15; ++i )
+  for ( i = *((_DWORD *)this + 6);
+        i <= v15;
+        ++i )
   {
     v19 = (void **)CMapObjectMgr::EntityPtr(i);
     if ( v19 )
     {
-      if ( IEntity::ObjType((unsigned __int8 *)v19) == 8
-        && (IEntity::Type((unsigned __int16 *)v19) == 50 || IEntity::Type((unsigned __int16 *)v19) == 51) )
+      if ( IEntity::ObjType((unsigned __int8 *)v19) == 8 && (IEntity::Type((unsigned __int16 *)v19) == 50 || IEntity::Type((unsigned __int16 *)v19) == 51) )
       {
         if ( IEntity::FlagBits(v19, (EntityFlag)0x200000u) )
         {
@@ -1016,9 +1139,13 @@ void  CFogging::CalculateDynamicLayer(int a2) {
                 if ( (v13 & 0xF) != 0 && (v13 & 0x8000) == 0 )
                 {
                   if ( v10 == 48 )
+                  {
                     v18 = 25;
+                  }
                   else
+                  {
                     v18 = 15;
+                  }
                 }
                 break;
               case 2:
@@ -1038,58 +1165,34 @@ void  CFogging::CalculateDynamicLayer(int a2) {
                     v18 = 45;
                     break;
                   case 46:
-                    if ( !j____RTDynamicCast(
-                            v19,
-                            0,
-                            &IEntity__RTTI_Type_Descriptor_,
-                            &CBuilding__RTTI_Type_Descriptor_,
-                            0)
-                      && BBSupportDbgReport(
-                           2,
-                           "Pathing\\Fogging.cpp",
-                           868,
-                           "dynamic_cast<const CBuilding*>(pEntity) != 0") == 1 )
+                    if ( !j____RTDynamicCast(v19, 0, &IEntity__RTTI_Type_Descriptor_, &CBuilding__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 868, "dynamic_cast<const CBuilding*>(pEntity) != 0") == 1 )
                     {
                       __debugbreak();
                     }
                     if ( (unsigned __int8)CBuilding::HaveInhabitant() )
+                    {
                       v18 = 35;
+                    }
                     break;
                   case 47:
-                    if ( !j____RTDynamicCast(
-                            v19,
-                            0,
-                            &IEntity__RTTI_Type_Descriptor_,
-                            &CBuilding__RTTI_Type_Descriptor_,
-                            0)
-                      && BBSupportDbgReport(
-                           2,
-                           "Pathing\\Fogging.cpp",
-                           882,
-                           "dynamic_cast<const CBuilding*>(pEntity) != 0") == 1 )
+                    if ( !j____RTDynamicCast(v19, 0, &IEntity__RTTI_Type_Descriptor_, &CBuilding__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 882, "dynamic_cast<const CBuilding*>(pEntity) != 0") == 1 )
                     {
                       __debugbreak();
                     }
                     if ( (unsigned __int8)CBuilding::HaveInhabitant() )
+                    {
                       v18 = 40;
+                    }
                     break;
                   case 48:
-                    if ( !j____RTDynamicCast(
-                            v19,
-                            0,
-                            &IEntity__RTTI_Type_Descriptor_,
-                            &CBuilding__RTTI_Type_Descriptor_,
-                            0)
-                      && BBSupportDbgReport(
-                           2,
-                           "Pathing\\Fogging.cpp",
-                           896,
-                           "dynamic_cast<const CBuilding*>(pEntity) != 0") == 1 )
+                    if ( !j____RTDynamicCast(v19, 0, &IEntity__RTTI_Type_Descriptor_, &CBuilding__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 896, "dynamic_cast<const CBuilding*>(pEntity) != 0") == 1 )
                     {
                       __debugbreak();
                     }
                     if ( (unsigned __int8)CBuilding::HaveInhabitant() )
+                    {
                       v18 = 45;
+                    }
                     break;
                   default:
                     goto CFogging__CalculateDynamicLayer___def_19D8EDA;
@@ -1104,7 +1207,9 @@ CFogging__CalculateDynamicLayer___def_19D8EDA:
               v8 = IEntity::X(v19);
               v9 = IEntity::Y(v19);
               if ( v8 >= 2 && v9 >= 2 )
+              {
                 CFogging::UpdateEntityFogging(this, v8, v9, v18);
+              }
             }
           }
         }
@@ -1162,7 +1267,9 @@ void  CFogging::UpdateGfxLayerAndInitializeDynamicLayer(int a2, int a3) {
   v34 = *((_DWORD *)this + 8);
   v33 = *((_DWORD *)this + 9);
   if ( v33 >= a2 && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 1031, "iChangeYLast < _iYMin") == 1 )
+  {
     __debugbreak();
+  }
   v31 = a2;
   __asm { pushaw }
   v4 = v30;
@@ -1221,7 +1328,9 @@ void  CFogging::UpdateGfxLayerAndInitializeDynamicLayer(int a2, int a3) {
     if ( (_mm_cvtsi64_si32(_m_psrlqi(v9, 0x20u)) & _mm_cvtsi64_si32(v9)) != 0xFFFFFFFF )
     {
       if ( (int)v31 < v34 )
+      {
         v34 = v31;
+      }
       v33 = v31;
     }
     ++v31;
@@ -1251,13 +1360,13 @@ void  CFogging::SetWholeGfxLayerAndInitializeDynamicLayer(void) {
   v1 = CWorldManager::Width(0);
   result = CWorldManager::Height(v3, v2);
   v5 = result * v1;
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
     v8 = *(_BYTE *)(*((_DWORD *)this + 3) + i);
     *(_BYTE *)(*((_DWORD *)this + 3) + i) = v8 & 7 | (8 * v8);
-    *(_BYTE *)(*((_DWORD *)this + 2) + 4 * i + 3) = ((v8 & 0x38) >> 3) | v8 & 0x38 | *(_BYTE *)(*((_DWORD *)this + 2)
-                                                                                              + 4 * i
-                                                                                              + 3) & 0xC0;
+    *(_BYTE *)(*((_DWORD *)this + 2) + 4 * i + 3) = ((v8 & 0x38) >> 3) | v8 & 0x38 | *(_BYTE *)(*((_DWORD *)this + 2) + 4 * i + 3) & 0xC0;
     result = i + 1;
   }
   return result;
@@ -1280,14 +1389,18 @@ void  CFogging::SmoothFullBrightStaticFog(int a2, int a3) {
   v5 = CWorldManager::Width(this);
   result = CSpiralOffsets::Last(6);
   v6 = result;
-  for ( i = 1; i <= v6; ++i )
+  for ( i = 1;
+        i <= v6;
+        ++i )
   {
     v4 = a2 + CSpiralOffsets::DeltaX(i);
     v7 = v4 + v5 * (a3 + CSpiralOffsets::DeltaY(i));
     v9 = CSpiralOffsets::Radius(i);
     v11 = *(_BYTE *)(*((_DWORD *)this + 3) + v7);
     if ( (v11 & 7) > v9 )
+    {
       *(_BYTE *)(*((_DWORD *)this + 3) + v7) = v9 | v11 & 0x38;
+    }
     result = i + 1;
   }
   return result;
@@ -1307,17 +1420,23 @@ void  CFogging::UpdateLandExplorationState(void) {
   result = this;
   v2 = *((unsigned __int8 *)this + 52);
   if ( !v2 )
+  {
     return result;
+  }
   v3 = (Squares *)CWorldManager::Width(v2);
   v4 = Squares::XYToVW(v3);
   while ( 1 )
   {
     result = this;
     if ( *((_DWORD *)this + 15) >= v4 )
+    {
       break;
+    }
     result = (CFogging *)CFogging::IsSquareLandExploredVW(this, *((_DWORD *)this + 14), *((_DWORD *)this + 15));
     if ( !(_BYTE)result )
+    {
       break;
+    }
     v5 = *((_DWORD *)this + 14) + 1;
     *((_DWORD *)this + 14) = v5;
     if ( v5 >= v4 )
@@ -1359,8 +1478,7 @@ bool  CFogging::IsSquareLandExploredVW(int a2, int a3) {
   int j; // [esp+54h] [ebp-8h]
   int i; // [esp+58h] [ebp-4h]
 
-  if ( !Squares::ValidVW(a2, (unsigned int)a3)
-    && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 521, "Squares::ValidVW(_iV, _iW)") == 1 )
+  if ( !Squares::ValidVW(a2, (unsigned int)a3) && BBSupportDbgReport(2, "Pathing\\Fogging.cpp", 521, "Squares::ValidVW(_iV, _iW)") == 1 )
   {
     __debugbreak();
   }
@@ -1374,7 +1492,9 @@ bool  CFogging::IsSquareLandExploredVW(int a2, int a3) {
   v4 = BB::Min<int>(&v16, &v17);
   v23 = *(_DWORD *)BB::Min<int>(v4, v6);
   if ( v23 <= 2 )
+  {
     return 1;
+  }
   v15 = 176 - 16 * v23;
   v14 = 80;
   v7 = *(_DWORD *)BB::Min<int>(&v14, &v15);
@@ -1383,17 +1503,19 @@ bool  CFogging::IsSquareLandExploredVW(int a2, int a3) {
   v12 = v21 + 16;
   v13 = v22 + 16;
   v25 = 0;
-  for ( i = v22; i < v13; ++i )
+  for ( i = v22;
+        i < v13;
+        ++i )
   {
     v11 = CWorldManager::Index(0, i);
-    for ( j = v21; j < v12; ++j )
+    for ( j = v21;
+          j < v12;
+          ++j )
     {
       v26 = j + v11;
       v10 = CWorldManager::Ground(j + v11);
       v9 = CWorldManager::Flags(v26);
-      if ( ((v10 & 0xF0) == 0x10 || (v9 & 1) == 0)
-        && T_GFX_MAP_ELEMENT::GetNewFogging((T_GFX_MAP_ELEMENT *)(*((_DWORD *)this + 2) + 4 * v26)) > 3
-        && ++v25 >= v7 )
+      if ( ((v10 & 0xF0) == 0x10 || (v9 & 1) == 0) && T_GFX_MAP_ELEMENT::GetNewFogging((T_GFX_MAP_ELEMENT *)(*((_DWORD *)this + 2) + 4 * v26)) > 3 && ++v25 >= v7 )
       {
         return 0;
       }
@@ -1413,7 +1535,9 @@ bool  CFogging::RWMEx(void) {
   unsigned int v5; // [esp+1Ch] [ebp-Ch]
 
   if ( !*((_DWORD *)this + 11) )
+  {
     return 0;
+  }
   v5 = **((_DWORD **)this + 11) ^ 0x90909090;
   v3 = *(_DWORD *)(*((_DWORD *)this + 11) + 4) - 168430090;
   v1 = CWorldManager::Width(this) << 8;
@@ -1430,7 +1554,9 @@ void  CFogging::UpdateRWM(void) {
 
   result = (CFogging *)this;
   if ( this[11] == 0 || this[10] == 0 )
+  {
     return result;
+  }
   *(_DWORD *)this[11] = *(_DWORD *)this[10] ^ 0x90909090;
   result = this[11];
   *((_DWORD *)result + 1) = *((_DWORD *)this[10] + 1) + 168430090;

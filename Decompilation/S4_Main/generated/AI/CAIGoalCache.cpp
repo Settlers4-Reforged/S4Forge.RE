@@ -42,15 +42,15 @@ void  CAIGoalCache::Insert(int a2, int a3) {
   int j; // [esp+20h] [ebp-8h]
 
   if ( a2 <= 0 && BBSupportDbgReport(2, "AI\\AI_Military.cpp", 120, "_iEntityId > 0") == 1 )
+  {
     __debugbreak();
-  if ( (*((_DWORD *)this + 1) > 31 || *((_DWORD *)this + 1) < 0)
-    && BBSupportDbgReport(2, "AI\\AI_Military.cpp", 122, "(m_iSize >= 0) & (m_iSize <= (AI_GOAL_CACHE_MAX - 1))") == 1 )
+  }
+  if ( (*((_DWORD *)this + 1) > 31 || *((_DWORD *)this + 1) < 0) && BBSupportDbgReport(2, "AI\\AI_Military.cpp", 122, "(m_iSize >= 0) & (m_iSize <= (AI_GOAL_CACHE_MAX - 1))") == 1 )
   {
     __debugbreak();
   }
   CAIGoalCache::Delete(this, a2);
-  if ( (*((_DWORD *)this + 1) > 31 || *((_DWORD *)this + 1) < 0)
-    && BBSupportDbgReport(2, "AI\\AI_Military.cpp", 126, "(m_iSize >= 0) & (m_iSize <= (AI_GOAL_CACHE_MAX - 1))") == 1 )
+  if ( (*((_DWORD *)this + 1) > 31 || *((_DWORD *)this + 1) < 0) && BBSupportDbgReport(2, "AI\\AI_Military.cpp", 126, "(m_iSize >= 0) & (m_iSize <= (AI_GOAL_CACHE_MAX - 1))") == 1 )
   {
     __debugbreak();
   }
@@ -60,10 +60,18 @@ void  CAIGoalCache::Insert(int a2, int a3) {
     if ( *((int *)this + 1) > 0 )
     {
       if ( *((int *)this + 1) >= 31 )
+      {
         *((_DWORD *)this + 1) = 30;
-      for ( i = *((_DWORD *)this + 1) + 1; a3 > CAIGoal::Value((CAIGoalCache *)((char *)this + 12 * i - 4)); --i )
+      }
+      for ( i = *((_DWORD *)this + 1) + 1;
+            a3 > CAIGoal::Value((CAIGoalCache *)((char *)this + 12 * i - 4));
+            --i )
+      {
         ;
-      for ( j = *((_DWORD *)this + 1); j >= i; --j )
+      }
+      for ( j = *((_DWORD *)this + 1);
+            j >= i;
+            --j )
       {
         v3 = (_DWORD *)((char *)this + 12 * j + 20);
         *v3 = *((_DWORD *)this + 3 * j + 2);
@@ -81,14 +89,14 @@ void  CAIGoalCache::Insert(int a2, int a3) {
   }
   result = this;
   if ( *((_DWORD *)this + 1) <= 31 && *((_DWORD *)this + 1) >= 0 )
+  {
     return result;
-  result = (CAIGoalCache *)BBSupportDbgReport(
-                             2,
-                             "AI\\AI_Military.cpp",
-                             159,
-                             "(m_iSize >= 0) & (m_iSize <= (AI_GOAL_CACHE_MAX - 1))");
+  }
+  result = (CAIGoalCache *)BBSupportDbgReport(2, "AI\\AI_Military.cpp", 159, "(m_iSize >= 0) & (m_iSize <= (AI_GOAL_CACHE_MAX - 1))");
   if ( result == (CAIGoalCache *)1 )
+  {
     __debugbreak();
+  }
   return result;
 }
 
@@ -101,7 +109,9 @@ void  CAIGoalCache::Delete(int a2) {
 
   v3 = CAIGoalCache::Search(this, a2);
   if ( v3 )
+  {
     CAIGoalCache::DeleteIdx(this, v3);
+  }
 }
 
 
@@ -115,27 +125,34 @@ void  CAIGoalCache::DbgPrint(char const * const a2) {
   int v5; // [esp-4h] [ebp-14h]
   int i; // [esp+8h] [ebp-8h]
 
-  if ( (*((_DWORD *)this + 1) > 31 || *((_DWORD *)this + 1) < 0)
-    && BBSupportDbgReport(2, "AI\\AI_Military.cpp", 31, "(m_iSize >= 0) & (m_iSize <= (AI_GOAL_CACHE_MAX - 1))") == 1 )
+  if ( (*((_DWORD *)this + 1) > 31 || *((_DWORD *)this + 1) < 0) && BBSupportDbgReport(2, "AI\\AI_Military.cpp", 31, "(m_iSize >= 0) & (m_iSize <= (AI_GOAL_CACHE_MAX - 1))") == 1 )
   {
     __debugbreak();
   }
   if ( *((_DWORD *)this + 1) )
   {
     if ( *((_DWORD *)this + 1) == 1 )
+    {
       IAIEnvironment::DbgTracePrintF("%s: 1 entry.", a2);
+    }
     else
+    {
       IAIEnvironment::DbgTracePrintF("%s: %i entries.", a2, *((_DWORD *)this + 1));
+    }
   }
   else
   {
     IAIEnvironment::DbgTracePrintF("%s: No entries.", a2);
   }
-  for ( i = 1; ; ++i )
+  for ( i = 1;
+        ;
+        ++i )
   {
     result = this;
     if ( i > *((_DWORD *)this + 1) )
+    {
       break;
+    }
     v5 = CAIGoal::Value((CAIGoalCache *)((char *)this + 12 * i + 8));
     v4 = CAIGoal::UniqueId((CAIGoalCache *)((char *)this + 12 * i + 8));
     v3 = CAIGoal::EntityId((CAIGoalCache *)((char *)this + 12 * i + 8));
@@ -160,9 +177,13 @@ void  CAIGoalCache::DeleteInvalidGoals(void) {
     v3 = CAIGoal::EntityId((CAIGoalCache *)((char *)this + 12 * v5 + 8));
     v2 = CAIGoal::UniqueId((CAIGoalCache *)((char *)this + 12 * v5 + 8));
     if ( v2 == IAIEnvironment::EntityUniqueId(v3) )
+    {
       ++v5;
+    }
     else
+    {
       CAIGoalCache::DeleteIdx(this, v5);
+    }
   }
   result = IAIEnvironment::TickCounter();
   *((_DWORD *)this + 98) = result;
@@ -178,7 +199,9 @@ void  CAIGoalCache::DeleteInvalidGoalsIfNecessary(void) {
 
   result = IAIEnvironment::TickCounter();
   if ( *((_DWORD *)this + 98) != result )
+  {
     return CAIGoalCache::DeleteInvalidGoals(this);
+  }
   return result;
 }
 
@@ -226,10 +249,14 @@ int  CAIGoalCache::Search(int a2)const {
   int i; // [esp+8h] [ebp-4h]
 
   v3 = *((_DWORD *)this + 1);
-  for ( i = 1; i <= v3; ++i )
+  for ( i = 1;
+        i <= v3;
+        ++i )
   {
     if ( CAIGoal::EntityId((CAIGoalCache *)((char *)this + 12 * i + 8)) == a2 )
+    {
       return i;
+    }
   }
   return 0;
 }
@@ -243,7 +270,9 @@ void  CAIGoalCache::DeleteIdx(int a2) {
   CAIGoalCache *result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = a2 + 1; i <= *((_DWORD *)this + 1); ++i )
+  for ( i = a2 + 1;
+        i <= *((_DWORD *)this + 1);
+        ++i )
   {
     v2 = (_DWORD *)((char *)this + 12 * i - 4);
     *v2 = *((_DWORD *)this + 3 * i + 2);

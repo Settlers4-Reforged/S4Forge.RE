@@ -3,7 +3,7 @@
 // Definitions for class CAIAgentDarkTribeSquadManager
 
 // address=[0x1302430]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeSquadManager::Execute(  CAIAgentDarkTribeSquadManager *this,  unsigned int a2,  unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeSquadManager::Execute(CAIAgentDarkTribeSquadManager *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -96,9 +96,13 @@ unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int a2, unsigned i
   v5 = CAIDarkTribeSectorAgent::SectorAI(v61);
   v49 = (pairNode *)CAISectorAI::Reservoir(v5, 3);
   if ( !v50 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 496, "pReservoirSwordsman != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !v49 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 497, "pReservoirBowman != 0") == 1 )
+  {
     __debugbreak();
+  }
   v42 = CAITaskForce::NumberOfEntities(v50);
   v41 = CAITaskForce::NumberOfEntities(v49);
   v40 = v41 + v42;
@@ -119,7 +123,9 @@ unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int a2, unsigned i
     {
       v59 = CAITaskForce::NumberOfEntities(i);
       if ( v59 <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 524, "iSquadSize > 0") == 1 )
+      {
         __debugbreak();
+      }
       ++v57;
       v55 += v59;
       if ( CAITaskForce::Type(i) == 2 )
@@ -132,7 +138,9 @@ unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int a2, unsigned i
           v56 = i;
         }
         if ( v59 > v47 )
+        {
           v47 = v59;
+        }
       }
     }
     v8 = CAIDarkTribeSectorAgent::SectorAI(v61);
@@ -148,7 +156,9 @@ unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int a2, unsigned i
       {
         Entity = CAITaskForce::FirstEntity(v56);
         if ( !Entity && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 582, "pEntityInfo != 0") == 1 )
+        {
           __debugbreak();
+        }
         v18 = CAIEntityInfo::EntityId(Entity);
         v45 = IAIEnvironment::EntityPackedPosition(v18);
         v19 = CAIDarkTribeSectorAgent::SectorAI(v61);
@@ -172,7 +182,9 @@ unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int a2, unsigned i
       CAISectorAI::RecruitFightersForSquad(v17, TaskForce, v32, 3, 5);
       v51 = CAITaskForce::NumberOfEntities(TaskForce);
       if ( v51 <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 568, "iNewSquadSize > 0") == 1 )
+      {
         __debugbreak();
+      }
       ++v57;
       v55 += v51;
       ++v54;
@@ -185,12 +197,16 @@ unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int a2, unsigned i
   v24 = (CAIPlayerScriptVars *)CAIPlayersScriptVars::operator[](v23);
   v36 = CAIPlayerScriptVars::Flags(v24);
   if ( (v36 & 0x40000000) != 0 )
+  {
     return CAIAgent::ExecuteResult(0, 0);
+  }
   CAIAgentDarkTribeSquadManager::AssociateSquads(v61, 6);
   CAIAgentDarkTribeSquadManager::AssociateSquads(v61, 7);
   v25 = CAIDarkTribeSectorAgent::SectorAI(v61);
   v26 = CAISectorAI::TaskForceGroup(v25);
-  for ( j = (CDockState *)CAITaskForceGroup::FirstTaskForce(v26, 2); j; j = TaskForceGroupMemberOfSameClass )
+  for ( j = (CDockState *)CAITaskForceGroup::FirstTaskForce(v26, 2);
+        j;
+        j = TaskForceGroupMemberOfSameClass )
   {
     TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(j);
     if ( !CAITaskForce::AssociatedTaskForce(j) )
@@ -214,7 +230,7 @@ unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int a2, unsigned i
 
 
 // address=[0x1322ea0]
-// Decompiled from CAIAgentDarkTribeSquadManager *__thiscall CAIAgentDarkTribeSquadManager::CAIAgentDarkTribeSquadManager(  CAIAgentDarkTribeSquadManager *this)
+// Decompiled from CAIAgentDarkTribeSquadManager *__thiscall CAIAgentDarkTribeSquadManager::CAIAgentDarkTribeSquadManager(CAIAgentDarkTribeSquadManager *this)
  CAIAgentDarkTribeSquadManager::CAIAgentDarkTribeSquadManager(void) {
   
   CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "dark tribe squad manager");
@@ -233,7 +249,7 @@ unsigned int  CAIAgentDarkTribeSquadManager::Execute(unsigned int a2, unsigned i
 
 
 // address=[0x1302940]
-// Decompiled from struct CAITaskForce *__thiscall CAIAgentDarkTribeSquadManager::SimpleSquadManagement(  CAIDarkTribeSectorAgent *this,  int a2,  int a3,  int a4)
+// Decompiled from struct CAITaskForce *__thiscall CAIAgentDarkTribeSquadManager::SimpleSquadManagement(CAIDarkTribeSectorAgent *this, int a2, int a3, int a4)
 void  CAIAgentDarkTribeSquadManager::SimpleSquadManagement(enum T_AI_WARRIOR_TYPE a2, enum T_AI_TASK_FORCE_TYPE a3, int _iScheduledTaskForceSize) {
   
   struct CAIDarkTribeSectorAI *v4; // eax
@@ -252,28 +268,23 @@ void  CAIAgentDarkTribeSquadManager::SimpleSquadManagement(enum T_AI_WARRIOR_TYP
   int Entity; // [esp+2Ch] [ebp-8h]
   CUserToolsManager *TaskForce; // [esp+30h] [ebp-4h]
 
-  if ( (a2 != 7 || a3 != 11)
-    && (a2 != 4 || a3 != 12)
-    && (a2 != 9 || a3 != 13)
-    && BBSupportDbgReport(
-         2,
-         "AI\\AI_AgentsDark.cpp",
-         292,
-         "((_tReservoir == AI_WARRIOR_TYPE_MISC_UNIT) && (_tTaskForceType == AI_TASK_FORCE_TYPE_DARK_GARDENERS)) || ((_tR"
-         "eservoir == AI_WARRIOR_TYPE_FIGHTER_UNIQUE) && (_tTaskForceType == AI_TASK_FORCE_TYPE_SHAMANS)) || ((_tReservoi"
-         "r == AI_WARRIOR_TYPE_VEHICLE_MISC) && (_tTaskForceType == AI_TASK_FORCE_TYPE_MANAKOPTERS))") == 1 )
+  if ( (a2 != 7 || a3 != 11) && (a2 != 4 || a3 != 12) && (a2 != 9 || a3 != 13) && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 292, "((_tReservoir == AI_WARRIOR_TYPE_MISC_UNIT) && (_tTaskForceType == AI_TASK_FORCE_TYPE_DARK_GARDENERS)) || ((_tReservoir == AI_WARRIOR_TYPE_FIGHTER_UNIQUE) && (_tTaskForceType == AI_TASK_FORCE_TYPE_SHAMANS)) || ((_tReservoir == AI_WARRIOR_TYPE_VEHICLE_MISC) && (_tTaskForceType == AI_TASK_FORCE_TYPE_MANAKOPTERS))") == 1 )
   {
     __debugbreak();
   }
   if ( a4 <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 294, "_iScheduledTaskForceSize > 0") == 1 )
+  {
     __debugbreak();
+  }
   v15 = CAITaskForces::TaskForceClass(a3);
   v4 = CAIDarkTribeSectorAgent::SectorAI(this);
   CAISectorAI::DeleteEmptyTaskForces(v4, v15);
   v5 = CAIDarkTribeSectorAgent::SectorAI(this);
   v16 = CAISectorAI::Reservoir(v5, a2);
   if ( !v16 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 302, "pReservoir != 0") == 1 )
+  {
     __debugbreak();
+  }
   Entity = CAITaskForce::FirstEntity(v16);
   v6 = CAIDarkTribeSectorAgent::SectorAI(this);
   v7 = CAISectorAI::TaskForceGroup(v6);
@@ -284,9 +295,7 @@ LABEL_16:
   {
     while ( TaskForce )
     {
-      if ( CAITaskForce::Type(TaskForce) == a3
-        && CAITaskForce::NumberOfEntities(TaskForce) < a4
-        && (CAITaskForce::Flags(TaskForce) & 0x20000000) == 0 )
+      if ( CAITaskForce::Type(TaskForce) == a3 && CAITaskForce::NumberOfEntities(TaskForce) < a4 && (CAITaskForce::Flags(TaskForce) & 0x20000000) == 0 )
       {
         v13 = CAIEntityInfo::Next(Entity);
         v14 = CAIEntityInfo::EntityId(Entity);
@@ -308,13 +317,10 @@ LABEL_16:
       TaskForce = CAITaskForceGroup::CreateTaskForce(v10, a3);
     }
     if ( !TaskForce && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 349, "pTaskForce != 0") == 1 )
+    {
       __debugbreak();
-    if ( CAITaskForce::NumberOfEntities(TaskForce) >= a4
-      && BBSupportDbgReport(
-           2,
-           "AI\\AI_AgentsDark.cpp",
-           350,
-           "pTaskForce->NumberOfEntities() < _iScheduledTaskForceSize") == 1 )
+    }
+    if ( CAITaskForce::NumberOfEntities(TaskForce) >= a4 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 350, "pTaskForce->NumberOfEntities() < _iScheduledTaskForceSize") == 1 )
     {
       __debugbreak();
     }
@@ -346,11 +352,7 @@ void  CAIAgentDarkTribeSquadManager::AssociateSquads(enum T_AI_TASK_FORCE_CLASS 
   result = (struct CAITaskForce *)CAITaskForceGroup::FirstTaskForce(v5, 2);
   for ( i = result;
         ;
-        result = (struct CAITaskForce *)(*(int (__thiscall **)(CAITaskForce *, int, int, _DWORD))(*(_DWORD *)i + 32))(
-                                          i,
-                                          6,
-                                          -1,
-                                          0) )
+        result = (struct CAITaskForce *)(*(int (__thiscall **)(CAITaskForce *, int, int, _DWORD))(*(_DWORD *)i + 32))(i, 6, -1, 0) )
   {
     while ( TaskForce )
     {
@@ -358,7 +360,9 @@ void  CAIAgentDarkTribeSquadManager::AssociateSquads(enum T_AI_TASK_FORCE_CLASS 
       {
         result = (struct CAITaskForce *)(CAITaskForce::Flags(TaskForce) & 0x20000000);
         if ( !result )
+        {
           break;
+        }
       }
       result = CAITaskForce::NextTaskForceGroupMemberOfSameClass(TaskForce);
       TaskForce = result;
@@ -367,12 +371,16 @@ void  CAIAgentDarkTribeSquadManager::AssociateSquads(enum T_AI_TASK_FORCE_CLASS 
     {
       result = (struct CAITaskForce *)CAITaskForce::AssociatedTaskForce(i);
       if ( !result )
+      {
         break;
+      }
       result = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
       i = result;
     }
     if ( i == 0 || TaskForce == 0 )
+    {
       break;
+    }
     CAITaskForce::SetAssociatedTaskForce(i, TaskForce);
   }
   return result;
@@ -408,19 +416,27 @@ void  CAIAgentDarkTribeSquadManager::CheckSettlers(int a2, enum T_AI_WARRIOR_TYP
   {
     result = (void *)BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 421, "pReservoir != 0");
     if ( result == (void *)1 )
+    {
       __debugbreak();
+    }
   }
   if ( !v13 )
+  {
     return result;
+  }
   COneSettlerTypeIterator::COneSettlerTypeIterator((COneSettlerTypeIterator *)v7, v8, a2);
   v14 = 0;
   v11 = 0;
   v9 = 0;
   result = (void *)COneSettlerTypeIterator::FirstSettler((COneSettlerTypeIterator *)v7);
-  for ( i = (int)result; i; i = (int)result )
+  for ( i = (int)result;
+        i;
+        i = (int)result )
   {
     if ( ++v14 >= 10000 )
+    {
       break;
+    }
     ++v11;
     EntityInfo = IAIEnvironment::EntityGetEntityInfo(i, 0);
     if ( !EntityInfo || !CAIEntityInfo::TaskForce(EntityInfo) )

@@ -49,7 +49,9 @@ void  Cryptor::Set_Key(std::string const & a2) {
   std::string::string(this);
   v10 = 0;
   if ( !std::string::length(v9) )
+  {
     std::string::operator=(v9, aDefaultSeed);
+  }
   v6 = 0;
   while ( (unsigned int)std::string::length(v9) < 0xC )
   {
@@ -57,7 +59,9 @@ void  Cryptor::Set_Key(std::string const & a2) {
     std::string::operator+=(*v2);
     ++v6;
   }
-  for ( i = 0; i < 4; ++i )
+  for ( i = 0;
+        i < 4;
+        ++i )
   {
     v5 = this[7] << 8;
     this[7] = v5;
@@ -70,11 +74,17 @@ void  Cryptor::Set_Key(std::string const & a2) {
     this[9] = v3 | *(char *)std::string::operator[](i + 8);
   }
   if ( !this[7] )
+  {
     this[7] = 324508639;
+  }
   if ( !this[8] )
+  {
     this[8] = 610839776;
+  }
   if ( !this[9] )
+  {
     this[9] = -38177487;
+  }
   v10 = -1;
   std::string::~string(v9);
 }
@@ -93,7 +103,9 @@ void  Cryptor::Transform_Char(unsigned char & a2) {
   v6 = 0;
   v4 = *((_DWORD *)this + 8) & 1;
   v3 = *((_DWORD *)this + 9) & 1;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( (*((_DWORD *)this + 7) & 1) != 0 )
     {
@@ -163,7 +175,9 @@ void  Cryptor::Transform_File(std::string const & a2, std::string const & a3) {
     {
       v12 = std::istream::peek(v6, v7[0]);
       if ( v12 == -1 )
+      {
         break;
+      }
       std::ios::rdbuf((CUserToolsManager *)((char *)v10 + *(_DWORD *)(v10[0] + 4)));
       std::streambuf::pubseekoff(v9, 0, 0, 1, 3);
       Cryptor::Transform_Char(v11, (unsigned __int8 *)&v12);
@@ -191,7 +205,9 @@ void  Cryptor::Transform_String(std::string const & a2, std::string & a3) {
   Cryptor::Set_Key(a2);
   result = std::string::length(a3);
   v6 = result;
-  for ( i = 0; i < v6; ++i )
+  for ( i = 0;
+        i < v6;
+        ++i )
   {
     v4 = (unsigned __int8 *)std::string::operator[](i);
     Cryptor::Transform_Char(this, v4);
@@ -210,7 +226,9 @@ void  Cryptor::Weak_Transform_Char(unsigned char & a2) {
   unsigned __int8 v5; // [esp+Fh] [ebp-1h]
 
   v5 = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( (this[7] & 1) != 0 )
     {

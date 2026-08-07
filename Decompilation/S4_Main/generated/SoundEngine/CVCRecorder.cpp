@@ -38,7 +38,9 @@
   CVCRecorder::Shutdown((CVCRecorder *)this);
   if ( this[1] )
   {
-    for ( i = 0; i < (int)this[9]; ++i )
+    for ( i = 0;
+          i < (int)this[9];
+          ++i )
     {
       if ( *((_DWORD *)this[1] + i) )
       {
@@ -63,13 +65,21 @@ bool  CVCRecorder::Start(int a2, char * a3, int a4, struct _DIG_DRIVER * a5) {
   *((_DWORD *)this + 3) = 0;
   *((_DWORD *)this + 2) = -1;
   if ( !CVCRecorder::InitEncoder(this, a3) )
+  {
     return 0;
+  }
   *((_DWORD *)this + 4) = 4 * *((_DWORD *)this + 8);
   *((_DWORD *)this + 1) = operator new[](4 * *((_DWORD *)this + 9));
-  for ( i = 0; i < *((_DWORD *)this + 9); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 9);
+        ++i )
+  {
     *(_DWORD *)(*((_DWORD *)this + 1) + 4 * i) = operator new[](*((_DWORD *)this + 4));
+  }
   if ( !CVCRecorder::InitInputDriver(this, a4) )
+  {
     return 0;
+  }
   BBSupportTracePrintF(0, (char *)&dword_3AD5B84[1], a4, *((_DWORD *)this + 7), *((unsigned __int8 *)this + 97));
   return 1;
 }
@@ -112,20 +122,27 @@ long  CVCRecorder::CopyDataToEncoder(void * a2, long a3, long a4) {
   else
   {
     if ( a3 >= *(_DWORD *)(this + 16) - *(_DWORD *)(this + 20) )
+    {
       v5 = *(_DWORD *)(this + 16) - *(_DWORD *)(this + 20);
+    }
     else
+    {
       v5 = a3;
-    memcpy(
-      a2,
-      (const void *)(*(_DWORD *)(this + 20) + *(_DWORD *)(*(_DWORD *)(this + 4) + 4 * *(_DWORD *)(this + 8))),
-      v5);
+    }
+    memcpy(a2, (const void *)(*(_DWORD *)(this + 20) + *(_DWORD *)(*(_DWORD *)(this + 4) + 4 * *(_DWORD *)(this + 8))), v5);
     *(_DWORD *)(this + 20) += v5;
     if ( *(_DWORD *)(this + 20) != *(_DWORD *)(this + 16) )
+    {
       return v5;
+    }
     if ( *(_DWORD *)(this + 8) == *(_DWORD *)(this + 36) - 1 )
+    {
       *(_DWORD *)(this + 8) = 0;
+    }
     else
+    {
       ++*(_DWORD *)(this + 8);
+    }
     *(_DWORD *)(this + 20) = 0;
     return v5;
   }
@@ -137,11 +154,17 @@ long  CVCRecorder::CopyDataToEncoder(void * a2, long a3, long a4) {
 int  CVCRecorder::GetEncodedData(signed char * a2, int a3) {
   
   if ( !*((_DWORD *)this + 20) && BBSupportDbgReport(2, "VCRecorder.cpp", 425, "m_hTransmitStream") == 1 )
+  {
     __debugbreak();
+  }
   if ( *((_DWORD *)this + 2) == *((_DWORD *)this + 3) || *((_DWORD *)this + 2) == -1 )
+  {
     return 0;
+  }
   else
+  {
     return (*((int (__stdcall **)(_DWORD, signed __int8 *, int))this + 23))(*((_DWORD *)this + 20), a2, a3);
+  }
 }
 
 
@@ -160,7 +183,9 @@ void  CVCRecorder::Shutdown(void) {
     *((_DWORD *)this + 20) = 0;
   }
   if ( !*((_DWORD *)this + 12) )
+  {
     return result;
+  }
   AIL_set_input_state(*((_DWORD *)this + 12), 0);
   AIL_close_input(*((_DWORD *)this + 12));
   result = this;
@@ -185,7 +210,9 @@ void  CVCRecorder::ToggleRecording(bool a2) {
 
   result = this;
   if ( *((_BYTE *)this + 98) == a2 )
+  {
     return result;
+  }
   result = this;
   if ( *((_BYTE *)this + 97) )
   {
@@ -198,9 +225,13 @@ void  CVCRecorder::ToggleRecording(bool a2) {
           AIL_close_input(*((_DWORD *)this + 12));
           *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
           if ( !*((_DWORD *)this + 12) )
+          {
             BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Failed to re-open input driver");
+          }
           if ( !AIL_set_input_state(*((_DWORD *)this + 12), 1) )
+          {
             BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Failed to start recording");
+          }
         }
         *((_BYTE *)this + 98) = 1;
         return (CVCRecorder *)BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Recording started");
@@ -218,9 +249,9 @@ void  CVCRecorder::ToggleRecording(bool a2) {
     *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
     result = (CVCRecorder *)AIL_set_input_state(*((_DWORD *)this + 12), 1);
     if ( !result )
-      return (CVCRecorder *)BBSupportTracePrintF(
-                              0,
-                              "VoiceChat : VCRecorder::ToggleRecording : Failed to start recording ( half duplex )");
+    {
+      return (CVCRecorder *)BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Failed to start recording ( half duplex )");
+    }
   }
   else
   {
@@ -270,7 +301,9 @@ void  CVCRecorder::CalcNoiseVol(void) {
 
   *((_DWORD *)this + 26) = 40;
   while ( *((_DWORD *)this + 26) )
+  {
     Sleep(5u);
+  }
   result = *((_DWORD *)this + 25) / 40;
   *((_DWORD *)this + 25) = result;
   return result;
@@ -341,10 +374,7 @@ bool  CVCRecorder::InitEncoder(char * a2) {
       {
         v3 = v6(v7);
         *((_DWORD *)v8 + 8) = v3;
-        v4 = (*((int (__stdcall **)(CVCRecorder *, int (__stdcall *)(int, void *, size_t, int), _DWORD))v8 + 21))(
-               v8,
-               CVCRecorder::EncodeDataCB,
-               0);
+        v4 = (*((int (__stdcall **)(CVCRecorder *, int (__stdcall *)(int, void *, size_t, int), _DWORD))v8 + 21))(v8, CVCRecorder::EncodeDataCB, 0);
         *((_DWORD *)v8 + 20) = v4;
         if ( *((_DWORD *)v8 + 20) )
         {
@@ -385,13 +415,19 @@ void  CVCRecorder::RecordInput(void const * Src, long Size) {
     v10 = 1;
   }
   if ( !*(_BYTE *)(this + 99) )
+  {
     goto LABEL_13;
+  }
   v8 = 0;
   if ( !v10 )
   {
     v6 = Src;
-    for ( i = 0; i < Size / 2; ++i )
+    for ( i = 0;
+          i < Size / 2;
+          ++i )
+    {
       v8 += j__abs(*v6++);
+    }
     v8 /= Size;
     if ( *(_DWORD *)(this + 104) )
     {
@@ -403,18 +439,26 @@ void  CVCRecorder::RecordInput(void const * Src, long Size) {
   {
     LOBYTE(v3) = this;
     if ( !*(_DWORD *)(this + 20) )
+    {
       return v3;
+    }
   }
 LABEL_13:
   if ( !*(_BYTE *)(this + 96) || v10 )
   {
     v5 = *(void **)(*(_DWORD *)(this + 4) + 4 * *(_DWORD *)(this + 12));
     if ( Size < *(_DWORD *)(this + 16) )
+    {
       memset(v5, 0, *(_DWORD *)(this + 16));
+    }
     if ( v10 )
+    {
       memset(v5, 0, Size);
+    }
     else
+    {
       memcpy(v5, Src, Size);
+    }
     LOBYTE(v3) = this;
     if ( *(_DWORD *)(this + 12) == *(_DWORD *)(this + 36) - 1 )
     {
@@ -465,15 +509,21 @@ bool  CVCRecorder::Downsample(void const * a2, int a3) {
   {
     v4 = AIL_process_digital_audio(v5, *((_DWORD *)this + 4) - *((_DWORD *)this + 6), 8000, 1, 1, v7);
     if ( !v4 )
+    {
       return 0;
+    }
     *((_DWORD *)this + 6) += v4;
     if ( *((_DWORD *)this + 6) == *((_DWORD *)this + 4) )
     {
       *((_DWORD *)this + 6) = 0;
       if ( *((_DWORD *)this + 3) == *((_DWORD *)this + 9) - 1 )
+      {
         *((_DWORD *)this + 3) = 0;
+      }
       else
+      {
         ++*((_DWORD *)this + 3);
+      }
       if ( *((_DWORD *)this + 2) == -1 )
       {
         *((_DWORD *)this + 2) = 0;
@@ -510,9 +560,7 @@ bool  CVCRecorder::InitInputDriver(int a2) {
   }
   else
   {
-    BBSupportTracePrintF(
-      0,
-      "VoiceChat : VCRecorder::InitInputDriver : Couldn't start with 8000 kHz and full duplex. Retry output rate.");
+    BBSupportTracePrintF(0, "VoiceChat : VCRecorder::InitInputDriver : Couldn't start with 8000 kHz and full duplex. Retry output rate.");
     *((_DWORD *)this + 16) = a2;
     *((_DWORD *)this + 18) = CVCRecorder::CalcInputBufferSize(this, a2);
     *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
@@ -520,14 +568,14 @@ bool  CVCRecorder::InitInputDriver(int a2) {
     {
       *((_DWORD *)this + 7) = a2;
       if ( *((int *)this + 7) > 8000 )
+      {
         *((_BYTE *)this + 96) = 1;
+      }
       return 1;
     }
     else
     {
-      BBSupportTracePrintF(
-        0,
-        "VoiceChat : VCRecorder::InitInputDriver : Couldn't start with output rate and full duplex. Retry half duplex and 8000 kHz.");
+      BBSupportTracePrintF(0, "VoiceChat : VCRecorder::InitInputDriver : Couldn't start with output rate and full duplex. Retry half duplex and 8000 kHz.");
       *((_BYTE *)this + 97) = 0;
       AIL_digital_handle_release(*((_DWORD *)this + 13));
       *((_DWORD *)this + 16) = 8000;
@@ -543,9 +591,7 @@ bool  CVCRecorder::InitInputDriver(int a2) {
       }
       else
       {
-        BBSupportTracePrintF(
-          0,
-          "VoiceChat : VCRecorder::InitInputDriver : Couldn't start with 8000 kHz and half duplex. Retry output rate.");
+        BBSupportTracePrintF(0, "VoiceChat : VCRecorder::InitInputDriver : Couldn't start with 8000 kHz and half duplex. Retry output rate.");
         *((_DWORD *)this + 16) = a2;
         *((_DWORD *)this + 18) = CVCRecorder::CalcInputBufferSize(this, a2);
         *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
@@ -553,7 +599,9 @@ bool  CVCRecorder::InitInputDriver(int a2) {
         {
           *((_DWORD *)this + 7) = a2;
           if ( *((int *)this + 7) > 8000 )
+          {
             *((_BYTE *)this + 96) = 0;
+          }
           AIL_close_input(*((_DWORD *)this + 12));
           *((_DWORD *)this + 12) = 0;
           AIL_digital_handle_reacquire(*((_DWORD *)this + 13));
@@ -562,10 +610,7 @@ bool  CVCRecorder::InitInputDriver(int a2) {
         else
         {
           error = (const char *)AIL_last_error();
-          BBSupportTracePrintF(
-            0,
-            "VoiceChat : VCRecorder::InitInputDriver : Couldn't start with output rate and half duplex. Can't record. %s",
-            error);
+          BBSupportTracePrintF(0, "VoiceChat : VCRecorder::InitInputDriver : Couldn't start with output rate and half duplex. Can't record. %s", error);
           AIL_digital_handle_reacquire(*((_DWORD *)this + 13));
           return 0;
         }

@@ -15,7 +15,9 @@
   *(_DWORD *)this = &AdvXMLParser::EntityRef::_vftable_;
   *((_BYTE *)this + 36) = 0;
   if ( AdvXMLParser::EntityRef::MapReferenceName(this) )
+  {
     return this;
+  }
   AdvXMLParser::InvalidRefException::InvalidRefException(a2);
   _CxxThrowException(pExceptionObject, (_ThrowInfo *)&_TI2_AVInvalidRefException_AdvXMLParser__);
   return this;
@@ -84,7 +86,7 @@ std::string  AdvXMLParser::EntityRef::GetValue(void a2)const {
 
 
 // address=[0x2f150d0]
-// Decompiled from int __thiscall AdvXMLParser::EntityRef::CloneNode(  AdvXMLParser::EntityRef *this,  struct AdvXMLParser::NodeContainer *a2)
+// Decompiled from int __thiscall AdvXMLParser::EntityRef::CloneNode(AdvXMLParser::EntityRef *this, struct AdvXMLParser::NodeContainer *a2)
 class AdvXMLParser::Node *  AdvXMLParser::EntityRef::CloneNode(class AdvXMLParser::NodeContainer & a2)const {
   
   return AdvXMLParser::EntityRef::Clone(this, a2);
@@ -112,23 +114,33 @@ class AdvXMLParser::EntityRef * __cdecl AdvXMLParser::EntityRef::Parse(class Adv
   int v9; // [esp+40h] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseChar(a1, 38) )
+  {
     return 0;
+  }
   std::string::string();
   v9 = 0;
   if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v8) || !AdvXMLParser::Parser::ParseChar(a1, 59) )
+  {
     AdvXMLParser::Parser::SyntaxError(a1, 6);
+  }
   C = (AdvXMLParser::EntityRef *)operator new(0x28u);
   LOBYTE(v9) = 1;
   if ( C )
+  {
     v5 = AdvXMLParser::EntityRef::EntityRef(C, (int)a2, (int)v8);
+  }
   else
+  {
     v5 = 0;
+  }
   LOBYTE(v9) = 0;
   std::auto_ptr<AdvXMLParser::EntityRef>::auto_ptr<AdvXMLParser::EntityRef>(v5);
   LOBYTE(v9) = 2;
   v3 = (AdvXMLParser::EntityRef *)std::auto_ptr<AdvXMLParser::EntityRef>::operator->();
   if ( !AdvXMLParser::EntityRef::MapReferenceName(v3) )
+  {
     AdvXMLParser::Parser::SyntaxError(a1, 9);
+  }
   v4 = std::auto_ptr<AdvXMLParser::EntityRef>::release(v7);
   LOBYTE(v9) = 0;
   std::auto_ptr<AdvXMLParser::EntityRef>::~auto_ptr<AdvXMLParser::EntityRef>(v7);
@@ -139,7 +151,7 @@ class AdvXMLParser::EntityRef * __cdecl AdvXMLParser::EntityRef::Parse(class Adv
 
 
 // address=[0x2f2cfe0]
-// Decompiled from int __thiscall AdvXMLParser::EntityRef::GenerateXML(  AdvXMLParser::EntityRef *this,  struct AdvXMLParser::GenerateContext *a2)
+// Decompiled from int __thiscall AdvXMLParser::EntityRef::GenerateXML(AdvXMLParser::EntityRef *this, struct AdvXMLParser::GenerateContext *a2)
 void  AdvXMLParser::EntityRef::GenerateXML(class AdvXMLParser::GenerateContext & a2)const {
   
   int Name; // eax
@@ -171,10 +183,10 @@ bool  AdvXMLParser::EntityRef::MapReferenceName(void) {
 
   v10 = this;
   if ( (unsigned __int8)std::_Tree<std::_Tmap_traits<std::string,char,std::less<std::string>,std::allocator<std::pair<std::string const,char>>,0>>::empty(&AdvXMLParser::s_mapReferences) )
+  {
     AdvXMLParser::FillMap();
-  v9 = std::_Tree<std::_Tmap_traits<std::string,char,std::less<std::string>,std::allocator<std::pair<std::string const,char>>,0>>::find(
-         v4,
-         (char *)v10 + 4);
+  }
+  v9 = std::_Tree<std::_Tmap_traits<std::string,char,std::less<std::string>,std::allocator<std::pair<std::string const,char>>,0>>::find(v4, (char *)v10 + 4);
   v8 = v9;
   v14 = 0;
   std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,char>>>>::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,char>>>>(v9);

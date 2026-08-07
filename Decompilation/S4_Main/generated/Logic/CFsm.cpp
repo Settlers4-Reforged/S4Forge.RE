@@ -31,7 +31,9 @@ int  CFsm::CurrentState(void)const {
  CFsm::~CFsm(void) {
   
   if ( this->m_pTransitions )
+  {
     operator delete[](this->m_pTransitions);
+  }
   return std::list<CFsm::SEvent *>::~list<CFsm::SEvent *>(&this->m_pEventQueue);
 }
 
@@ -44,7 +46,9 @@ int  CFsm::DefineTransition(int a2, int a3, int a4, int a5) {
 
   v7 = CFsm::Hash(this, a2, a4);
   if ( v7 == -1 )
+  {
     return v7;
+  }
   this->m_pTransitions[v7].m_iStartState = a2;
   this->m_pTransitions[v7].m_iTransitionToState = a3;
   this->m_pTransitions[v7].m_iEventId = a4;
@@ -73,17 +77,19 @@ int  CFsm::Control(int _iEventId, void * _pEvent) {
     }
     else
     {
-      v4 = (unsigned __int8)this->m_pEventHandler->m_pHandlers[this->m_pTransitions[hash].m_iHandlerId](
-                              this->m_pEventHandler,
-                              i->m_pPayload);
+      v4 = (unsigned __int8)this->m_pEventHandler->m_pHandlers[this->m_pTransitions[hash].m_iHandlerId](this->m_pEventHandler, i->m_pPayload);
       this->m_iCurrentState = this->m_pTransitions[hash].m_iTransitionToState;
     }
     std::list<CFsm::SEvent *>::pop_front(&this->m_pEventQueue);
     operator delete(i);
     if ( std::list<CFsm::SEvent *>::size(&this->m_pEventQueue) )
+    {
       i = *std::list<CFsm::SEvent *>::front(&this->m_pEventQueue);
+    }
     else
+    {
       i = 0;
+    }
   }
   return v4;
 }
@@ -132,11 +138,17 @@ int  CFsm::Hash(int a2, int a3) {
   v5 = 0;
   v4 = (a2 + (a3 << 8)) % this->m_iSize;
   while ( this->m_pTransitions[(v5 + v4) % this->m_iSize].m_iHandlerId != -1 && v5 < this->m_iSize )
+  {
     ++v5;
+  }
   if ( v5 < this->m_iSize )
+  {
     return (v5 + v4) % this->m_iSize;
+  }
   else
+  {
     return -1;
+  }
 }
 
 
@@ -149,14 +161,18 @@ int  CFsm::Hash(int a2) {
 
   v4 = 0;
   v3 = (signed int)(this->m_iCurrentState + (a2 << 8)) % this->m_iSize;
-  while ( (this->m_pTransitions[(v4 + v3) % this->m_iSize].m_iStartState != this->m_iCurrentState
-        || this->m_pTransitions[(v4 + v3) % this->m_iSize].m_iEventId != a2)
-       && v4 < this->m_iSize )
+  while ( (this->m_pTransitions[(v4 + v3) % this->m_iSize].m_iStartState != this->m_iCurrentState || this->m_pTransitions[(v4 + v3) % this->m_iSize].m_iEventId != a2) && v4 < this->m_iSize )
+  {
     ++v4;
+  }
   if ( v4 < this->m_iSize )
+  {
     return (v4 + v3) % this->m_iSize;
+  }
   else
+  {
     return -1;
+  }
 }
 
 

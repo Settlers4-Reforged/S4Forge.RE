@@ -10,9 +10,13 @@ bool  CRegistry::ExistsHLMKey(char const * lpSubKey) {
   HKEY phkResult; // [esp+4h] [ebp-8h] BYREF
 
   if ( !lpSubKey || !*lpSubKey )
+  {
     return 0;
+  }
   if ( RegOpenKeyExA(HKEY_LOCAL_MACHINE, lpSubKey, 0, 0x20019u, &phkResult) )
+  {
     return 0;
+  }
   RegCloseKey(phkResult);
   return 1;
 }

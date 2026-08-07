@@ -3,7 +3,7 @@
 // Definitions for class CSettlerStatus
 
 // address=[0x1554910]
-// Decompiled from CManakopter::CSettlerStatus *__thiscall CManakopter::CSettlerStatus::CSettlerStatus(  CManakopter::CSettlerStatus *this,  const struct CManakopter::CSettlerStatus *a2)
+// Decompiled from CManakopter::CSettlerStatus *__thiscall CManakopter::CSettlerStatus::CSettlerStatus(CManakopter::CSettlerStatus *this, const struct CManakopter::CSettlerStatus *a2)
  CManakopter::CSettlerStatus::CSettlerStatus(class CManakopter::CSettlerStatus const & a2) {
   
   *(_DWORD *)this = *(_DWORD *)a2;

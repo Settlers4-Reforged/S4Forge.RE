@@ -18,58 +18,75 @@ void  CColorGradient::SetupGradients(int a2, struct SGfxColor a3, int a4) {
   {
     if ( a6 == 1 )
     {
-      for ( i = 31; i >= 0; --i )
+      for ( i = 31;
+            i >= 0;
+            --i )
       {
-        *(_WORD *)&this->m_vGradients[a2][2 * i] = (int)(float)((float)m_iB * 0.12156863)
-                                                 + 32 * (int)(float)((float)m_iG * 0.12156863)
-                                                 + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.12156863) << 10);
+        *(_WORD *)&this->m_vGradients[a2][2 * i] = (int)(float)((float)m_iB * 0.12156863) + 32 * (int)(float)((float)m_iG * 0.12156863) + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.12156863) << 10);
         a3.m_iR -= 8;
         m_iB -= 8;
         m_iG -= 8;
         if ( a3.m_iR < 0 )
+        {
           a3.m_iR = 0;
+        }
         if ( m_iG < 0 )
+        {
           m_iG = 0;
+        }
         if ( m_iB < 0 )
+        {
           m_iB = 0;
+        }
       }
     }
     else if ( a6 == 2 )
     {
-      for ( j = 31; j >= 0; --j )
+      for ( j = 31;
+            j >= 0;
+            --j )
       {
-        *(_WORD *)&this->m_vGradients[a2][2 * j] = (int)(float)((float)m_iB * 0.05882353)
-                                                 + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.05882353) << 8)
-                                                 + 16 * (int)(float)((float)m_iG * 0.05882353)
-                                                 - 4096;
+        *(_WORD *)&this->m_vGradients[a2][2 * j] = (int)(float)((float)m_iB * 0.05882353) + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.05882353) << 8) + 16 * (int)(float)((float)m_iG * 0.05882353) - 4096;
         a3.m_iR -= 8;
         m_iB -= 8;
         m_iG -= 8;
         if ( a3.m_iR < 0 )
+        {
           a3.m_iR = 0;
+        }
         if ( m_iG < 0 )
+        {
           m_iG = 0;
+        }
         if ( m_iB < 0 )
+        {
           m_iB = 0;
+        }
       }
     }
   }
   else
   {
-    for ( k = 31; k >= 0; --k )
+    for ( k = 31;
+          k >= 0;
+          --k )
     {
-      *(_WORD *)&this->m_vGradients[a2][2 * k] = (int)(float)((float)m_iB * 0.12156863)
-                                               + 32 * (int)(float)((float)m_iG * 0.24705882)
-                                               + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.12156863) << 11);
+      *(_WORD *)&this->m_vGradients[a2][2 * k] = (int)(float)((float)m_iB * 0.12156863) + 32 * (int)(float)((float)m_iG * 0.24705882) + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.12156863) << 11);
       a3.m_iR -= 8;
       m_iB -= 8;
       m_iG -= 8;
       if ( a3.m_iR < 0 )
+      {
         a3.m_iR = 0;
+      }
       if ( m_iG < 0 )
+      {
         m_iG = 0;
+      }
       if ( m_iB < 0 )
+      {
         m_iB = 0;
+      }
     }
   }
 }

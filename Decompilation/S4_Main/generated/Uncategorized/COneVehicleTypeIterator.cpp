@@ -18,10 +18,7 @@ void  COneVehicleTypeIterator::Init(int a2, int a3) {
 // Decompiled from int __thiscall COneVehicleTypeIterator::FirstVehicle(COneVehicleTypeIterator *this)
 int  COneVehicleTypeIterator::FirstVehicle(void) {
   
-  *((_DWORD *)this + 1) = CVehicleMgr::GetFirstVehicleId(
-                            (CVehicleMgr *)&g_cVehicleMgr,
-                            *((_DWORD *)this + 2),
-                            *(_DWORD *)this);
+  *((_DWORD *)this + 1) = CVehicleMgr::GetFirstVehicleId((CVehicleMgr *)&g_cVehicleMgr, *((_DWORD *)this + 2), *(_DWORD *)this);
   return COneVehicleTypeIterator::NextVehicleIfCurrentIsNotValid(this);
 }
 
@@ -49,9 +46,13 @@ int  COneVehicleTypeIterator::NextVehicle(void) {
 int  COneVehicleTypeIterator::NextVehicleIfCurrentIsNotValid(void) {
   
   if ( CVehicleIteratorBase::VehicleValid(this, *((_DWORD *)this + 1)) )
+  {
     return *((_DWORD *)this + 1);
+  }
   else
+  {
     return COneVehicleTypeIterator::NextVehicle(this);
+  }
 }
 
 

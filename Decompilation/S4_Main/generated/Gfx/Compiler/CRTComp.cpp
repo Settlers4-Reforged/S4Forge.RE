@@ -19,9 +19,13 @@
   
   *this = &CRTComp::_vftable_;
   if ( this[1] )
+  {
     operator delete(this[1]);
+  }
   if ( this[2] )
+  {
     operator delete(this[2]);
+  }
 }
 
 
@@ -33,16 +37,24 @@ enum RTCOMP_ERROR  CRTComp::SetWorkPath(wchar_t * String) {
   WCHAR Buffer[1024]; // [esp+10h] [ebp-804h] BYREF
 
   if ( !String )
+  {
     return 1;
+  }
   v3 = wcslen(String);
   if ( !v3 )
+  {
     return 1;
+  }
   GetCurrentDirectoryW(0x400u, Buffer);
   if ( !SetCurrentDirectoryW(String) )
+  {
     return 1;
+  }
   SetCurrentDirectoryW(Buffer);
   if ( this[1] )
+  {
     operator delete[](this[1]);
+  }
   this[1] = operator new[](2 * (v3 + 1));
   wcscpy((wchar_t *)this[1], String);
   return 0;
@@ -57,7 +69,9 @@ enum RTCOMP_ERROR  CRTComp::SetPlayerColors(struct SCOLOR * const a2) {
   int v3; // edx
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     v2 = a2 + 3 * i;
     v3 = (int)&this[3 * i + 12];
@@ -278,7 +292,9 @@ enum RTCOMP_ERROR  CRTComp::Compile(int a2) {
                             BB_SIV_ChunkHeader::Save(*((FILE **)v120 + 19));
                             v119 += 20;
                             v122[5] = 5900;
-                            for ( i = 0; i < a2; ++i )
+                            for ( i = 0;
+                                  i < a2;
+                                  ++i )
                             {
                               FileName = CRTComp::CreateCurFilename(v120, i);
                               Png = CRTComp::LoadPng(FileName, (int)v121);
@@ -296,25 +312,15 @@ enum RTCOMP_ERROR  CRTComp::Compile(int a2) {
                               IA_ColorReduction::InitTree((IA_ColorReduction *)v13);
                               CRTComp::CreateColorField((int)v123, 0x100u);
                               CRTComp::ConvertTo555(v120, (unsigned __int8 **const)v121, 400);
-                              IA_ColorReduction::BuildTree(
-                                (IA_ColorReduction *)v13,
-                                (unsigned __int8 **const)v121,
-                                0x190u);
+                              IA_ColorReduction::BuildTree((IA_ColorReduction *)v13, (unsigned __int8 **const)v121, 0x190u);
                               IA_ColorReduction::ReduceIt((IA_ColorReduction *)v13, 0xFDu);
-                              IA_ColorReduction::InitPalette(
-                                (IA_ColorReduction *)v13,
-                                (unsigned __int8 **const)v123,
-                                0xFDu);
+                              IA_ColorReduction::InitPalette((IA_ColorReduction *)v13, (unsigned __int8 **const)v123, 0xFDu);
                               v60 = CRTComp::PutColorMapColorKeyToFront(v120, (unsigned __int8 **const)v123);
                               CRTComp::FreeColormapShadowColor(v120, (unsigned __int8 **const)v123);
                               CRTComp::FreeColormapPlayerColor(v120, (unsigned __int8 **const)v123);
                               v61 = (unsigned __int8 *)operator new[](0x191u);
                               v121[4] = (int)v61;
-                              IA_ColorReduction::MapColors(
-                                (IA_ColorReduction *)v13,
-                                (unsigned __int8 **const)v121,
-                                v61,
-                                0x190u);
+                              IA_ColorReduction::MapColors((IA_ColorReduction *)v13, (unsigned __int8 **const)v121, v61, 0x190u);
                               CRTComp::PutBitmapColorKeyToFront(v120, (unsigned __int8 *)v121[4], 0x190u, v60);
                               CRTComp::FreeBitmapShadowColor(v120, (unsigned __int8 *)v121[4], 0x190u);
                               CRTComp::FreeBitmapPlayerColor(v120, (unsigned __int8 *)v121[4], 0x190u);
@@ -331,12 +337,7 @@ enum RTCOMP_ERROR  CRTComp::Compile(int a2) {
                               v114 += 12;
                               v59 = (unsigned __int8 *)operator new[](v122[1] * v122[0] + 1);
                               v113 = v59;
-                              ElementSize = CRTComp::EncodeImage(
-                                              v120,
-                                              (unsigned __int8 *)v121[4],
-                                              v59,
-                                              v122[0],
-                                              v122[1]);
+                              ElementSize = CRTComp::EncodeImage(v120, (unsigned __int8 *)v121[4], v59, v122[0], v122[1]);
                               j__fwrite(v113, ElementSize, 1u, *((FILE **)v120 + 10));
                               v114 += ElementSize;
                               C = v113;
@@ -345,27 +346,39 @@ enum RTCOMP_ERROR  CRTComp::Compile(int a2) {
                               v75 = operator new(0x1005u);
                               LOBYTE(v125) = 1;
                               if ( v75 )
+                              {
                                 v74 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v75, 1, 0);
+                              }
                               else
+                              {
                                 v74 = 0;
+                              }
                               v57 = v74;
                               LOBYTE(v125) = 0;
                               v117 = v74;
                               v73 = operator new(0x1005u);
                               LOBYTE(v125) = 2;
                               if ( v73 )
+                              {
                                 v72 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v73, 0, 0);
+                              }
                               else
+                              {
                                 v72 = 0;
+                              }
                               v56 = v72;
                               LOBYTE(v125) = 0;
                               v116 = v72;
                               v107 = operator new(0x1005u);
                               LOBYTE(v125) = 3;
                               if ( v107 )
+                              {
                                 v106 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v107, 2, 0);
+                              }
                               else
+                              {
                                 v106 = 0;
+                              }
                               v55 = v106;
                               LOBYTE(v125) = 0;
                               v115 = v106;
@@ -378,45 +391,69 @@ enum RTCOMP_ERROR  CRTComp::Compile(int a2) {
                               v54 = v117;
                               v105 = v117;
                               if ( v117 )
+                              {
                                 v53 = delete v105;
+                              }
                               else
+                              {
                                 v53 = 0;
+                              }
                               v52 = v116;
                               v104 = v116;
                               if ( v116 )
+                              {
                                 v51 = delete v104;
+                              }
                               else
+                              {
                                 v51 = 0;
+                              }
                               v50 = v115;
                               v103 = v115;
                               if ( v115 )
+                              {
                                 v49 = delete v103;
+                              }
                               else
+                              {
                                 v49 = 0;
+                              }
                               v102 = operator new(0x1005u);
                               LOBYTE(v125) = 4;
                               if ( v102 )
+                              {
                                 v101 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v102, 1, 1);
+                              }
                               else
+                              {
                                 v101 = 0;
+                              }
                               v48 = v101;
                               LOBYTE(v125) = 0;
                               v117 = v101;
                               v100 = operator new(0x1005u);
                               LOBYTE(v125) = 5;
                               if ( v100 )
+                              {
                                 v99 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v100, 0, 1);
+                              }
                               else
+                              {
                                 v99 = 0;
+                              }
                               v47 = v99;
                               LOBYTE(v125) = 0;
                               v116 = v99;
                               v98 = operator new(0x1005u);
                               LOBYTE(v125) = 6;
                               if ( v98 )
+                              {
                                 v97 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v98, 2, 1);
+                              }
                               else
+                              {
                                 v97 = 0;
+                              }
                               v46 = v97;
                               LOBYTE(v125) = 0;
                               v115 = v97;
@@ -429,21 +466,33 @@ enum RTCOMP_ERROR  CRTComp::Compile(int a2) {
                               v45 = v117;
                               v96 = v117;
                               if ( v117 )
+                              {
                                 v44 = delete v96;
+                              }
                               else
+                              {
                                 v44 = 0;
+                              }
                               v43 = v116;
                               v95 = v116;
                               if ( v116 )
+                              {
                                 v42 = delete v95;
+                              }
                               else
+                              {
                                 v42 = 0;
+                              }
                               v41 = v115;
                               v94 = v115;
                               if ( v115 )
+                              {
                                 v26 = delete v94;
+                              }
                               else
+                              {
                                 v26 = 0;
+                              }
                               j__fwrite(&v114, 4u, 1u, *((FILE **)v120 + 11));
                               v122[0] = v121[9];
                               v122[1] = v121[10];
@@ -454,12 +503,7 @@ enum RTCOMP_ERROR  CRTComp::Compile(int a2) {
                               v114 += 12;
                               v39 = (unsigned __int8 *)operator new[](v122[1] * v122[0] + 1);
                               v113 = v39;
-                              ElementSize = CRTComp::EncodeImage(
-                                              v120,
-                                              (unsigned __int8 *)v121[4],
-                                              v39,
-                                              v122[0],
-                                              v122[1]);
+                              ElementSize = CRTComp::EncodeImage(v120, (unsigned __int8 *)v121[4], v39, v122[0], v122[1]);
                               j__fwrite(v113, ElementSize, 1u, *((FILE **)v120 + 10));
                               v114 += ElementSize;
                               v38 = v113;
@@ -467,27 +511,39 @@ enum RTCOMP_ERROR  CRTComp::Compile(int a2) {
                               v93 = operator new(0x1005u);
                               LOBYTE(v125) = 7;
                               if ( v93 )
+                              {
                                 v92 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v93, 1, 0);
+                              }
                               else
+                              {
                                 v92 = 0;
+                              }
                               v37 = v92;
                               LOBYTE(v125) = 0;
                               v117 = v92;
                               v91 = operator new(0x1005u);
                               LOBYTE(v125) = 8;
                               if ( v91 )
+                              {
                                 v90 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v91, 0, 0);
+                              }
                               else
+                              {
                                 v90 = 0;
+                              }
                               v36 = v90;
                               LOBYTE(v125) = 0;
                               v116 = v90;
                               v89 = operator new(0x1005u);
                               LOBYTE(v125) = 9;
                               if ( v89 )
+                              {
                                 v88 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v89, 2, 0);
+                              }
                               else
+                              {
                                 v88 = 0;
+                              }
                               v35 = v88;
                               LOBYTE(v125) = 0;
                               v115 = v88;
@@ -500,45 +556,69 @@ enum RTCOMP_ERROR  CRTComp::Compile(int a2) {
                               v34 = v117;
                               v87 = v117;
                               if ( v117 )
+                              {
                                 v33 = delete v87;
+                              }
                               else
+                              {
                                 v33 = 0;
+                              }
                               v32 = v116;
                               v86 = v116;
                               if ( v116 )
+                              {
                                 v31 = delete v86;
+                              }
                               else
+                              {
                                 v31 = 0;
+                              }
                               v30 = v115;
                               v85 = v115;
                               if ( v115 )
+                              {
                                 v29 = delete v85;
+                              }
                               else
+                              {
                                 v29 = 0;
+                              }
                               v84 = operator new(0x1005u);
                               LOBYTE(v125) = 10;
                               if ( v84 )
+                              {
                                 v77 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v84, 1, 1);
+                              }
                               else
+                              {
                                 v77 = 0;
+                              }
                               v28 = v77;
                               LOBYTE(v125) = 0;
                               v117 = v77;
                               v82 = operator new(0x1005u);
                               LOBYTE(v125) = 11;
                               if ( v82 )
+                              {
                                 v81 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v82, 0, 1);
+                              }
                               else
+                              {
                                 v81 = 0;
+                              }
                               v27 = v81;
                               LOBYTE(v125) = 0;
                               v116 = v81;
                               v80 = operator new(0x1005u);
                               LOBYTE(v125) = 12;
                               if ( v80 )
+                              {
                                 v79 = SM_SIV_PaletteBlock::SM_SIV_PaletteBlock((SM_SIV_PaletteBlock *)v80, 2, 1);
+                              }
                               else
+                              {
                                 v79 = 0;
+                              }
                               v14 = v79;
                               LOBYTE(v125) = 0;
                               v115 = v79;
@@ -551,21 +631,33 @@ enum RTCOMP_ERROR  CRTComp::Compile(int a2) {
                               v25 = v117;
                               v78 = v117;
                               if ( v117 )
+                              {
                                 v24 = delete v78;
+                              }
                               else
+                              {
                                 v24 = 0;
+                              }
                               v23 = v116;
                               v71 = v116;
                               if ( v116 )
+                              {
                                 v22 = delete v71;
+                              }
                               else
+                              {
                                 v22 = 0;
+                              }
                               v21 = v115;
                               v76 = v115;
                               if ( v115 )
+                              {
                                 v20 = delete v76;
+                              }
                               else
+                              {
                                 v20 = 0;
+                              }
                               CRTComp::DeleteCurFilename(v120, FileName);
                               CRTComp::DestroyContent(v120, (struct SM_S_BF_BITMAP_DATA *)v121);
                               CRTComp::DestroyColorField(v120, (unsigned __int8 **const)v123);
@@ -739,7 +831,9 @@ bool  CRTComp::GetPictureInfos(wchar_t * FileName, int & a2, int & a3, int & a4)
 
   v7 = j__png_create_read_struct("1.0.6", 0, 0, 0);
   if ( !v7 )
+  {
     return 0;
+  }
   info_struct = j__png_create_info_struct(v7);
   if ( j___setjmp3(v7, 0) || (Stream = j___wfopen(FileName, L"rb")) == 0 )
   {
@@ -779,7 +873,9 @@ void  CRTComp::DeleteCurFilename(wchar_t * a2) {
   int result; // eax
 
   if ( a2 )
+  {
     return operator delete[](a2);
+  }
   return result;
 }
 
@@ -793,10 +889,14 @@ void  CRTComp::SetErrorFilename(wchar_t * String) {
 
   result = (wchar_t *)this;
   if ( this[2] )
+  {
     result = (wchar_t *)operator delete[](this[2]);
+  }
   this[2] = 0;
   if ( !String )
+  {
     return result;
+  }
   v3 = wcslen(String);
   this[2] = operator new[](2 * (v3 + 1));
   return wcscpy((wchar_t *)this[2], String);
@@ -819,7 +919,9 @@ enum RTCOMP_ERROR  CRTComp::LoadPng(wchar_t * FileName, struct SM_S_BF_BITMAP_DA
   memset(&v12[1], 0, 0x2Cu);
   v11 = j__png_create_read_struct("1.0.6", 0, 0, 0);
   if ( !v11 )
+  {
     return 4;
+  }
   v12[0] = j__png_create_info_struct(v11);
   if ( j___setjmp3(v11, 0) )
   {
@@ -851,8 +953,12 @@ enum RTCOMP_ERROR  CRTComp::LoadPng(wchar_t * FileName, struct SM_S_BF_BITMAP_DA
                   v8 = operator new[](4 * *(_DWORD *)(v12[0] + 4));
                   if ( v8 )
                   {
-                    for ( i = 0; i < *(_DWORD *)(v12[0] + 4); ++i )
+                    for ( i = 0;
+                          i < *(_DWORD *)(v12[0] + 4);
+                          ++i )
+                    {
                       v8[i] = &v9[rowbytes * i];
+                    }
                     j__png_set_bgr(v11);
                     j__png_read_image(v11, v8);
                     j__png_read_end(v11, 0);
@@ -861,9 +967,13 @@ enum RTCOMP_ERROR  CRTComp::LoadPng(wchar_t * FileName, struct SM_S_BF_BITMAP_DA
                     if ( *(_DWORD *)(a3 + 36) == 20 && *(_DWORD *)(a3 + 40) == 20 )
                     {
                       if ( *(_BYTE *)(v12[0] + 30) == 24 )
+                      {
                         CRTComp::Decompose24(this, (struct SM_S_BF_BITMAP_DATA *)a3, v9);
+                      }
                       else
+                      {
                         CRTComp::Decompose8(this, (struct SM_S_BF_BITMAP_DATA *)a3, v9, *(char **)(v12[0] + 16));
+                      }
                       CRTComp::CreateBoundingBox(this, (struct SM_S_BF_BITMAP_DATA *)a3);
                       if ( *(_DWORD *)(a3 + 28) == *(_DWORD *)(a3 + 20) || *(_DWORD *)(a3 + 32) == *(_DWORD *)(a3 + 24) )
                       {
@@ -962,7 +1072,9 @@ void  CRTComp::Decompose24(struct SM_S_BF_BITMAP_DATA * a2, unsigned char * a3) 
 
   Size = *((_DWORD *)a2 + 10) * *((_DWORD *)a2 + 9);
   result = CRTComp::CreateColorField((int)a2, Size);
-  for ( i = 0; i < Size; ++i )
+  for ( i = 0;
+        i < Size;
+        ++i )
   {
     *(_BYTE *)(*(_DWORD *)a2 + i) = *a3;
     v7 = a3 + 1;
@@ -986,7 +1098,9 @@ void  CRTComp::Decompose8(struct SM_S_BF_BITMAP_DATA * a2, unsigned char * a3, c
 
   Size = *((_DWORD *)a2 + 10) * *((_DWORD *)a2 + 9);
   result = CRTComp::CreateColorField((int)a2, Size);
-  for ( i = 0; i < Size; ++i )
+  for ( i = 0;
+        i < Size;
+        ++i )
   {
     v8 = *a3++;
     *(_BYTE *)(*(_DWORD *)a2 + i) = a4[3 * v8];
@@ -1006,7 +1120,9 @@ void  CRTComp::DestroyContent(struct SM_S_BF_BITMAP_DATA * a2) {
   {
     CRTComp::DestroyColorField(this, (unsigned __int8 **const)a2);
     if ( *((_DWORD *)a2 + 4) )
+    {
       operator delete[](*((void **)a2 + 4));
+    }
   }
 }
 
@@ -1023,25 +1139,37 @@ void  CRTComp::CreateBoundingBox(struct SM_S_BF_BITMAP_DATA * a2) {
   *((_DWORD *)a2 + 6) = 1000;
   *((_DWORD *)a2 + 7) = 0;
   *((_DWORD *)a2 + 8) = 0;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = i;
     if ( i >= *((_DWORD *)a2 + 10) )
-      break;
-    for ( j = 0; j < *((_DWORD *)a2 + 9); ++j )
     {
-      if ( *(unsigned __int8 *)(*(_DWORD *)a2 + j + *((_DWORD *)a2 + 9) * i) != 255
-        || *(_BYTE *)(*((_DWORD *)a2 + 1) + j + *((_DWORD *)a2 + 9) * i)
-        || *(unsigned __int8 *)(*((_DWORD *)a2 + 2) + j + *((_DWORD *)a2 + 9) * i) != 255 )
+      break;
+    }
+    for ( j = 0;
+          j < *((_DWORD *)a2 + 9);
+          ++j )
+    {
+      if ( *(unsigned __int8 *)(*(_DWORD *)a2 + j + *((_DWORD *)a2 + 9) * i) != 255 || *(_BYTE *)(*((_DWORD *)a2 + 1) + j + *((_DWORD *)a2 + 9) * i) || *(unsigned __int8 *)(*((_DWORD *)a2 + 2) + j + *((_DWORD *)a2 + 9) * i) != 255 )
       {
         if ( j < *((_DWORD *)a2 + 5) )
+        {
           *((_DWORD *)a2 + 5) = j;
+        }
         if ( j > *((_DWORD *)a2 + 7) )
+        {
           *((_DWORD *)a2 + 7) = j;
+        }
         if ( i < *((_DWORD *)a2 + 6) )
+        {
           *((_DWORD *)a2 + 6) = i;
+        }
         if ( i > *((_DWORD *)a2 + 8) )
+        {
           *((_DWORD *)a2 + 8) = i;
+        }
       }
     }
   }
@@ -1055,7 +1183,9 @@ void  CRTComp::CreateColorField(unsigned char * * const a1, int Size) {
   
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < 4; ++i )
+  for ( i = 0;
+        i < 4;
+        ++i )
   {
     *(_DWORD *)(a1 + 4 * i) = operator new[](Size + 1);
     memset(*(void **)(a1 + 4 * i), 0, Size);
@@ -1070,10 +1200,14 @@ void  CRTComp::DestroyColorField(unsigned char * * const a2) {
   int result; // eax
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < 4; ++i )
+  for ( i = 0;
+        i < 4;
+        ++i )
   {
     if ( a2[i] )
+    {
       operator delete[](a2[i]);
+    }
     result = i + 1;
   }
   return result;
@@ -1090,7 +1224,9 @@ void  CRTComp::ConvertTo555(unsigned char * * const a2, int a3) {
   unsigned __int8 v6; // [esp+9h] [ebp-3h]
   unsigned __int8 v7; // [esp+Ah] [ebp-2h]
 
-  for ( i = 0; i < a3; ++i )
+  for ( i = 0;
+        i < a3;
+        ++i )
   {
     v6 = (*a2)[i];
     v5 = a2[1][i];
@@ -1111,7 +1247,7 @@ void  CRTComp::ConvertTo555(unsigned char * * const a2, int a3) {
 
 
 // address=[0x2fcfad0]
-// Decompiled from unsigned __int8 __thiscall CRTComp::PutBitmapColorKeyToFront(  CRTComp *this,  unsigned __int8 *a2,  unsigned int a3,  unsigned __int8 a4)
+// Decompiled from unsigned __int8 __thiscall CRTComp::PutBitmapColorKeyToFront(CRTComp *this, unsigned __int8 *a2, unsigned int a3, unsigned __int8 a4)
 void  CRTComp::PutBitmapColorKeyToFront(unsigned char * a2, unsigned int a3, unsigned char a4) {
   
   unsigned __int8 result; // al
@@ -1121,13 +1257,17 @@ void  CRTComp::PutBitmapColorKeyToFront(unsigned char * a2, unsigned int a3, uns
   result = a4;
   if ( a4 )
   {
-    for ( i = 0; i < a3; ++i )
+    for ( i = 0;
+          i < a3;
+          ++i )
     {
       if ( a2[i] )
       {
         result = a4;
         if ( a2[i] == a4 )
+        {
           a2[i] = 0;
+        }
       }
       else
       {
@@ -1138,11 +1278,15 @@ void  CRTComp::PutBitmapColorKeyToFront(unsigned char * a2, unsigned int a3, uns
   }
   else
   {
-    for ( j = 0; ; ++j )
+    for ( j = 0;
+          ;
+          ++j )
     {
       result = j;
       if ( j >= a3 )
+      {
         break;
+      }
       ++a2[j];
     }
   }
@@ -1159,7 +1303,9 @@ int  CRTComp::PutColorMapColorKeyToFront(unsigned char * * const a2) {
   int j; // [esp+Ch] [ebp-8h]
 
   v3 = 0;
-  for ( i = 0; i < 256; ++i )
+  for ( i = 0;
+        i < 256;
+        ++i )
   {
     if ( (*a2)[i] == 248 && !a2[1][i] && a2[2][i] == 248 && (**a2 != 248 || *a2[1] || *a2[2] != 248) )
     {
@@ -1176,7 +1322,9 @@ int  CRTComp::PutColorMapColorKeyToFront(unsigned char * * const a2) {
   }
   if ( !v3 )
   {
-    for ( j = 254; j >= 0; --j )
+    for ( j = 254;
+          j >= 0;
+          --j )
     {
       (*a2)[j + 1] = (*a2)[j];
       a2[1][j + 1] = a2[1][j];
@@ -1195,7 +1343,9 @@ void  CRTComp::FreeColormapShadowColor(unsigned char * * const a2) {
   int result; // eax
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 254; i; --i )
+  for ( i = 254;
+        i;
+        --i )
   {
     (*a2)[i + 1] = (*a2)[i];
     a2[1][i + 1] = a2[1][i];
@@ -1218,10 +1368,14 @@ void  CRTComp::FreeBitmapShadowColor(unsigned char * a2, unsigned int a3) {
   unsigned int result; // eax
   unsigned int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < a3; ++i )
+  for ( i = 0;
+        i < a3;
+        ++i )
   {
     if ( a2[i] )
+    {
       ++a2[i];
+    }
     result = i + 1;
   }
   return result;
@@ -1235,7 +1389,9 @@ void  CRTComp::FreeColormapPlayerColor(unsigned char * * const a2) {
   int result; // eax
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 254; i > 1; --i )
+  for ( i = 254;
+        i > 1;
+        --i )
   {
     (*a2)[i + 1] = (*a2)[i];
     a2[1][i + 1] = a2[1][i];
@@ -1258,12 +1414,16 @@ void  CRTComp::FreeBitmapPlayerColor(unsigned char * a2, unsigned int a3) {
   unsigned int result; // eax
   unsigned int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < a3; ++i )
+  for ( i = 0;
+        i < a3;
+        ++i )
   {
     if ( a2[i] )
     {
       if ( a2[i] != 1 )
+      {
         ++a2[i];
+      }
     }
     result = i + 1;
   }
@@ -1284,18 +1444,23 @@ void  CRTComp::CenterBitmap(struct SM_S_BF_BITMAP_DATA * a2) {
 
   result = a2;
   if ( *((_DWORD *)a2 + 7) - *((_DWORD *)a2 + 5) == 19 && *((_DWORD *)a2 + 8) - *((_DWORD *)a2 + 6) == 19 )
+  {
     return result;
+  }
   Src = operator new[](0x191u);
   memset(Src, 0, 0x191u);
   v5 = *((_DWORD *)a2 + 7) - *((_DWORD *)a2 + 5) + 1;
   v4 = *((_DWORD *)a2 + 8) - *((_DWORD *)a2 + 6) + 1;
-  for ( i = 0; i < v5; ++i )
+  for ( i = 0;
+        i < v5;
+        ++i )
   {
-    for ( j = 0; j < v4; ++j )
-      *((_BYTE *)Src + 20 * (10 - (v4 >> 1)) + 20 * j + i + 10 - (v5 >> 1)) = *(_BYTE *)(*((_DWORD *)a2 + 4)
-                                                                                       + 20 * (*((_DWORD *)a2 + 6) + j)
-                                                                                       + i
-                                                                                       + *((_DWORD *)a2 + 5));
+    for ( j = 0;
+          j < v4;
+          ++j )
+    {
+      *((_BYTE *)Src + 20 * (10 - (v4 >> 1)) + 20 * j + i + 10 - (v5 >> 1)) = *(_BYTE *)(*((_DWORD *)a2 + 4) + 20 * (*((_DWORD *)a2 + 6) + j) + i + *((_DWORD *)a2 + 5));
+    }
   }
   memcpy(*((void **)a2 + 4), Src, 0x191u);
   return (struct SM_S_BF_BITMAP_DATA *)operator delete[](Src);
@@ -1313,10 +1478,16 @@ void  CRTComp::CreateMagBorder(struct SM_S_BF_BITMAP_DATA * a2) {
 
   v3 = operator new[](0x1E5u);
   memset(v3, 0, 0x1E5u);
-  for ( i = 0; i < 20; ++i )
+  for ( i = 0;
+        i < 20;
+        ++i )
   {
-    for ( j = 0; j < 20; ++j )
+    for ( j = 0;
+          j < 20;
+          ++j )
+    {
       *((_BYTE *)v3 + 22 * i + j + 23) = *(_BYTE *)(*((_DWORD *)a2 + 4) + j + 20 * i);
+    }
   }
   operator delete[](*((void **)a2 + 4));
   result = v3;
@@ -1355,10 +1526,16 @@ void  CRTComp::AddPlayerColor(struct SM_S_BF_BITMAP_DATA * a2) {
     v7 = *(_DWORD *)(a2 + 28) - *(_DWORD *)(a2 + 20) + 4;
     v3 = operator new[]((*(_DWORD *)(a2 + 32) - *(_DWORD *)(a2 + 24) + 4) * v7 + 1);
     memset(v3, 0, (v4 + 3) * (v5 + 3));
-    for ( i = 0; i < v5; ++i )
+    for ( i = 0;
+          i < v5;
+          ++i )
     {
-      for ( j = 0; j < v4; ++j )
+      for ( j = 0;
+            j < v4;
+            ++j )
+      {
         *((_BYTE *)v3 + v7 * (j + 1) + i + 1) = *(_BYTE *)(*(_DWORD *)(a2 + 16) + i + *(_DWORD *)(a2 + 36) * j);
+      }
     }
     operator delete[](*(void **)(a2 + 16));
     *(_DWORD *)(a2 + 16) = v3;
@@ -1367,9 +1544,13 @@ void  CRTComp::AddPlayerColor(struct SM_S_BF_BITMAP_DATA * a2) {
   }
   v6 = *(_DWORD *)(a2 + 36);
   v8 = *(_DWORD *)(a2 + 40);
-  for ( k = 0; k < v6; ++k )
+  for ( k = 0;
+        k < v6;
+        ++k )
   {
-    for ( m = 1; m < v8; ++m )
+    for ( m = 1;
+          m < v8;
+          ++m )
     {
       if ( *(unsigned __int8 *)(*(_DWORD *)(a2 + 16) + k + v8 * m) > 1u )
       {
@@ -1378,9 +1559,13 @@ void  CRTComp::AddPlayerColor(struct SM_S_BF_BITMAP_DATA * a2) {
       }
     }
   }
-  for ( n = 0; n < v6; ++n )
+  for ( n = 0;
+        n < v6;
+        ++n )
   {
-    for ( ii = v8 - 2; ii > 0; --ii )
+    for ( ii = v8 - 2;
+          ii > 0;
+          --ii )
     {
       if ( *(unsigned __int8 *)(*(_DWORD *)(a2 + 16) + n + v8 * ii) > 1u )
       {
@@ -1389,9 +1574,13 @@ void  CRTComp::AddPlayerColor(struct SM_S_BF_BITMAP_DATA * a2) {
       }
     }
   }
-  for ( jj = 0; jj < v8; ++jj )
+  for ( jj = 0;
+        jj < v8;
+        ++jj )
   {
-    for ( kk = v6 - 2; kk > 0; --kk )
+    for ( kk = v6 - 2;
+          kk > 0;
+          --kk )
     {
       if ( *(unsigned __int8 *)(*(_DWORD *)(a2 + 16) + kk + v8 * jj) > 1u )
       {
@@ -1400,9 +1589,13 @@ void  CRTComp::AddPlayerColor(struct SM_S_BF_BITMAP_DATA * a2) {
       }
     }
   }
-  for ( mm = v8 - 2; mm >= 0; --mm )
+  for ( mm = v8 - 2;
+        mm >= 0;
+        --mm )
   {
-    for ( nn = 1; nn < v6; ++nn )
+    for ( nn = 1;
+          nn < v6;
+          ++nn )
     {
       if ( *(unsigned __int8 *)(*(_DWORD *)(a2 + 16) + nn + v8 * mm) > 1u )
       {
@@ -1434,17 +1627,23 @@ unsigned char *  CRTComp::MakePanel(struct SM_S_BF_BITMAP_DATA * a1, bool a2) {
   v3 = a1[10];
   if ( a2 )
   {
-    for ( i = 0; i < v3; ++i )
+    for ( i = 0;
+          i < v3;
+          ++i )
     {
       v5 = i;
-      for ( j = 0; j < v6; ++j )
+      for ( j = 0;
+            j < v6;
+            ++j )
       {
         if ( j > 0 )
         {
           if ( j % 3 )
           {
             if ( (j & 1) == 0 )
+            {
               ++v5;
+            }
           }
           else
           {
@@ -1457,10 +1656,16 @@ unsigned char *  CRTComp::MakePanel(struct SM_S_BF_BITMAP_DATA * a1, bool a2) {
   }
   else
   {
-    for ( k = 0; k < v3; ++k )
+    for ( k = 0;
+          k < v3;
+          ++k )
     {
-      for ( m = 0; m < v6; ++m )
+      for ( m = 0;
+            m < v6;
+            ++m )
+      {
         *((_BYTE *)v4 + m + v6 * (k + v6 - m - 1)) = *(_BYTE *)(a1[4] + m + v6 * k);
+      }
     }
   }
   return v4;
@@ -1475,11 +1680,16 @@ void  CRTComp::HalfColorMap(unsigned char * * const a1) {
   int i; // [esp+4h] [ebp-8h]
   int j; // [esp+8h] [ebp-4h]
 
-  for ( i = 1; i < 256; ++i )
+  for ( i = 1;
+        i < 256;
+        ++i )
   {
-    for ( j = 0; j < 4; ++j )
-      *(_BYTE *)(*(_DWORD *)(a1 + 4 * j) + i) = (int)(float)((float)*(unsigned __int8 *)(*(_DWORD *)(a1 + 4 * j) + i)
-                                                           * 0.5);
+    for ( j = 0;
+          j < 4;
+          ++j )
+    {
+      *(_BYTE *)(*(_DWORD *)(a1 + 4 * j) + i) = (int)(float)((float)*(unsigned __int8 *)(*(_DWORD *)(a1 + 4 * j) + i) * 0.5);
+    }
     result = i + 1;
   }
   return result;
@@ -1502,7 +1712,9 @@ int  CRTComp::EncodeImage(unsigned char * a2, unsigned char * a3, int a4, int a5
   v13 = a3;
   v9 = 255;
   if ( a4 <= 255 )
+  {
     v9 = a4;
+  }
   v12 = 0;
   v11 = 2;
   v7 = &a2[a5 * a4];
@@ -1511,7 +1723,9 @@ int  CRTComp::EncodeImage(unsigned char * a2, unsigned char * a3, int a4, int a5
   {
     v8 = *a2++;
     if ( !v10-- )
+    {
       v10 = a4 - 1;
+    }
     if ( v8 )
     {
       if ( v8 == 1 )
@@ -1535,7 +1749,9 @@ int  CRTComp::EncodeImage(unsigned char * a2, unsigned char * a3, int a4, int a5
         else
         {
           if ( !v11 )
+          {
             *v13++ = v12;
+          }
           v11 = 1;
           v12 = 1;
           *v13++ = 1;
@@ -1554,7 +1770,9 @@ int  CRTComp::EncodeImage(unsigned char * a2, unsigned char * a3, int a4, int a5
     else if ( v11 )
     {
       if ( v11 == 1 )
+      {
         *v13++ = v12;
+      }
       v11 = 0;
       v12 = 1;
       *v13++ = 0;
@@ -1599,7 +1817,9 @@ void  CRTComp::Save8Bitmap(unsigned int ElementCount, unsigned int a2, unsigned 
   result = j__fopen("Testbitmap.bmp", "wb");
   Stream = result;
   if ( !result )
+  {
     return result;
+  }
   memset(Buffer, 0, 0xEu);
   Buffer[0] = 19778;
   *(_DWORD *)&Buffer[5] = 1078;
@@ -1618,7 +1838,9 @@ void  CRTComp::Save8Bitmap(unsigned int ElementCount, unsigned int a2, unsigned 
   j__fwrite(Buffer, 0xEu, 1u, Stream);
   j__fwrite(v10, 0x28u, 1u, Stream);
   v6[3] = 0;
-  for ( i = 0; i < 0x100; ++i )
+  for ( i = 0;
+        i < 0x100;
+        ++i )
   {
     v6[2] = *(_BYTE *)(*a4 + i);
     v6[1] = *(_BYTE *)(a4[1] + i);
@@ -1626,13 +1848,19 @@ void  CRTComp::Save8Bitmap(unsigned int ElementCount, unsigned int a2, unsigned 
     j__fwrite(v6, 4u, 1u, Stream);
   }
   v8 = 0;
-  for ( i = a2; i; --i )
+  for ( i = a2;
+        i;
+        --i )
   {
     j__fwrite((const void *)(a3 + ElementCount * (i - 1)), 1u, ElementCount, Stream);
     if ( ElementCount < 0x40 )
     {
-      for ( j = 0; j < 64 - ElementCount; ++j )
+      for ( j = 0;
+            j < 64 - ElementCount;
+            ++j )
+      {
         j__fwrite(&v8, 1u, 1u, Stream);
+      }
     }
   }
   return (FILE *)j__fclose(Stream);

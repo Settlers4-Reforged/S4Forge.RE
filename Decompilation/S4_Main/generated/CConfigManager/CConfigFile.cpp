@@ -34,7 +34,9 @@
  CConfigFile::~CConfigFile(void) {
   
   if ( this[7] )
+  {
     operator delete(this[7]);
+  }
   std::wstring::~wstring(this);
 }
 

@@ -49,7 +49,9 @@ unsigned int  CAIAgentIntruderCombat::Execute(unsigned int a2, unsigned int a3) 
   v18 = CAIPlayerAI::PlayerId(v4);
   v23 = (struct CAINormalSectorAI *)((char *)CAINormalSectorAgent::SectorAI(v26) + 2404);
   v28 = 0;
-  for ( i = (CPropertySet *)CAITaskForce::LastEntity(v23); i; i = v16 )
+  for ( i = (CPropertySet *)CAITaskForce::LastEntity(v23);
+        i;
+        i = v16 )
   {
     v16 = (CPropertySet *)CAIEntityInfo::Prev(i);
     v24 = CAIEntityInfo::TargetId(i);
@@ -89,7 +91,9 @@ unsigned int  CAIAgentIntruderCombat::Execute(unsigned int a2, unsigned int a3) 
   v28 -= v8;
   if ( v28 > 0 )
   {
-    for ( j = (CAIEntityInfo *)CAITaskForce::FirstEntity(v23); j; j = v15 )
+    for ( j = (CAIEntityInfo *)CAITaskForce::FirstEntity(v23);
+          j;
+          j = v15 )
     {
       v15 = (CAIEntityInfo *)CAIEntityInfo::Next(j);
       if ( !CAIEntityInfo::TargetId(j) )
@@ -142,7 +146,9 @@ void  CAIAgentIntruderCombat::MoveHunterHome(int a2) {
   IAIEnvironment::EntityGetPosition(a2, &v7, &v8);
   NearestOwnTowerInSector = CScanner::FindNearestOwnTowerInSector(v7, v8, 32, v9);
   if ( NearestOwnTowerInSector > 0 )
+  {
     IAIEnvironment::BuildingGetEnsignPosition(NearestOwnTowerInSector, &v10, &v11);
+  }
   return IAIEnvironment::MovingEntitySendMoveCommand(a2, v10, v11, 0);
 }
 
@@ -156,7 +162,9 @@ int  CAIAgentIntruderCombat::HuntNextIntruderType(void) {
   v1 = *((_DWORD *)this + 10) + 1;
   *((_DWORD *)this + 10) = v1;
   if ( v1 >= 6 )
+  {
     *((_DWORD *)this + 10) = 0;
+  }
   return CAIAgentIntruderCombat::HuntIntruders(this, dword_3D7A000[*((_DWORD *)this + 10)]);
 }
 
@@ -229,7 +237,9 @@ int  CAIAgentIntruderCombat::HuntIntruders(int a2) {
       v42 = 0;
       v34 = 0;
       v35 = 0x4000;
-      for ( i = (CAIEntityInfo *)CAITaskForce::FirstEntity(v29); i; i = (CAIEntityInfo *)CAIEntityInfo::Next(i) )
+      for ( i = (CAIEntityInfo *)CAITaskForce::FirstEntity(v29);
+            i;
+            i = (CAIEntityInfo *)CAIEntityInfo::Next(i) )
       {
         v25 = CAIEntityInfo::TargetId(i);
         if ( v25 )
@@ -278,7 +288,9 @@ int  CAIAgentIntruderCombat::HuntIntruders(int a2) {
               if ( v12 > 5 )
               {
                 v33 = 0;
-                for ( k = CAITaskForce::FirstEntity(j); k; k = CAIEntityInfo::Next(k) )
+                for ( k = CAITaskForce::FirstEntity(j);
+                      k;
+                      k = CAIEntityInfo::Next(k) )
                 {
                   v20 = CAIEntityInfo::EntityId(k);
                   IAIEnvironment::EntityGetWarriorTypeAndPosition(v20, (enum T_AI_WARRIOR_TYPE *)&v11, &v9, &v10);
@@ -293,13 +305,17 @@ int  CAIAgentIntruderCombat::HuntIntruders(int a2) {
                     HIDWORD(v19) = ++v33 >= 5;
                     LODWORD(v19) = v32 < 30;
                     if ( v19 )
+                    {
                       break;
+                    }
                   }
                 }
               }
             }
             if ( v31 < 40 )
+            {
               break;
+            }
           }
           if ( v30 > 0 )
           {

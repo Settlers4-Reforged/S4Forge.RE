@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CFreeWorkerRole::New(std::istream & a1) {
   
   if ( operator new(0x38u) )
+  {
     return CFreeWorkerRole::CFreeWorkerRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -78,17 +82,25 @@ void  CFreeWorkerRole::LogicUpdateJob(class CSettler * arg0) {
       case 0:
         this->m_iWalkspeed -= 9;
         if ( this->m_iWalkspeed > 0 )
+        {
           IAnimatedEntity::RegisterForLogicUpdate(arg0, 9);
+        }
         else
+        {
           this->GetNextJob(this, arg0);
+        }
         CheckRegister("LogicUpdateJob - GoVirtual - not registered settler", arg0);
         break;
       case 1:
       case 0x10:
         if ( this->m_iWalkspeed <= (int)this->m_uCycleFrames )
+        {
           m_iWalkspeed = this->m_iWalkspeed;
+        }
         else
+        {
           m_iWalkspeed = this->m_uCycleFrames;
+        }
         this->m_iWalkspeed -= m_iWalkspeed;
         if ( this->m_iWalkspeed <= 0 )
         {
@@ -138,17 +150,22 @@ LABEL_3:
         {
           v38 = CMapObjectMgr::EntityPtr(this->m_uEntityId);
           if ( !v38 && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 270, "pSupplier != 0") == 1 )
+          {
             __debugbreak();
+          }
           LOBYTE(this[1].__vftable) = ((int (__thiscall *)(IEntity *))v38->GetGoodType)(v38);
-          if ( (!LOBYTE(this[1].__vftable) || LOBYTE(this[1].__vftable) >= 0x2Bu)
-            && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 274, "m_uGood>0 && m_uGood <GOOD_MAX") == 1 )
+          if ( (!LOBYTE(this[1].__vftable) || LOBYTE(this[1].__vftable) >= 0x2Bu) && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 274, "m_uGood>0 && m_uGood <GOOD_MAX") == 1 )
           {
             __debugbreak();
           }
           if ( LOBYTE(this[1].__vftable) >= 0x2Bu )
+          {
             LOBYTE(this[1].__vftable) = 0;
+          }
           if ( LOBYTE(this[1].__vftable) )
+          {
             ((void (__thiscall *)(IEntity *, int))v38->Decrease)(v38, 1);
+          }
           IAnimatedEntity::RegisterForLogicUpdate(arg0, a2);
           CheckRegister("LogicUpdateJob - GetGood - not registered settler", arg0);
         }
@@ -160,34 +177,36 @@ LABEL_3:
       case 0xD:
       case 0x1E:
         if ( this->m_iWalkspeed <= (int)this->m_uCycleFrames )
+        {
           m_iCycleFrames = this->m_iWalkspeed;
+        }
         else
+        {
           m_iCycleFrames = this->m_uCycleFrames;
+        }
         this->m_iWalkspeed -= m_iCycleFrames;
         if ( this->m_iWalkspeed <= 0 )
         {
-          if ( !this->m_uEntityId
-            && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 315, "m_uEntityId != 0") == 1 )
+          if ( !this->m_uEntityId && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 315, "m_uEntityId != 0") == 1 )
           {
             __debugbreak();
           }
           v39 = CMapObjectMgr::EntityPtr(this->m_uEntityId);
           if ( !v39 && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 319, "pSupplier != 0") == 1 )
+          {
             __debugbreak();
+          }
           if ( v39 )
           {
             LOBYTE(this[1].__vftable) = ((int (__thiscall *)(IEntity *))v39->GetGoodType)(v39);
-            if ( (!LOBYTE(this[1].__vftable) || LOBYTE(this[1].__vftable) >= 0x2Bu)
-              && BBSupportDbgReport(
-                   2,
-                   "MapObjects\\Settler\\FreeWorkerRole.cpp",
-                   325,
-                   "m_uGood > 0 && m_uGood < GOOD_MAX") == 1 )
+            if ( (!LOBYTE(this[1].__vftable) || LOBYTE(this[1].__vftable) >= 0x2Bu) && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 325, "m_uGood > 0 && m_uGood < GOOD_MAX") == 1 )
             {
               __debugbreak();
             }
             if ( LOBYTE(this[1].__vftable) >= 0x2Bu )
+            {
               LOBYTE(this[1].__vftable) = 0;
+            }
           }
           else
           {
@@ -232,9 +251,13 @@ LABEL_3:
         return;
       case 0x19:
         if ( this->m_iWalkspeed <= (int)this->m_uCycleFrames )
+        {
           v32 = this->m_iWalkspeed;
+        }
         else
+        {
           v32 = this->m_uCycleFrames;
+        }
         this->m_iWalkspeed -= v32;
         if ( this->m_iWalkspeed <= 0 )
         {
@@ -263,9 +286,13 @@ LABEL_3:
       case 0x1C:
       case 0x1D:
         if ( this->m_iWalkspeed <= (int)this->m_uCycleFrames )
+        {
           v27 = this->m_iWalkspeed;
+        }
         else
+        {
           v27 = this->m_uCycleFrames;
+        }
         this->m_iWalkspeed -= v27;
         if ( this->m_iWalkspeed <= 0 )
         {
@@ -274,12 +301,7 @@ LABEL_3:
           {
             ((void (__thiscall *)(IEntity *, int))v35->Decrease)(v35, 1);
           }
-          else if ( BBSupportDbgReportF(
-                      1,
-                      "MapObjects\\Settler\\FreeWorkerRole.cpp",
-                      479,
-                      "CFreeWorkerRole::LogicUpdateJob(): Invalid target entity %i!",
-                      this->m_uEntityId) == 1 )
+          else if ( BBSupportDbgReportF(1, "MapObjects\\Settler\\FreeWorkerRole.cpp", 479, "CFreeWorkerRole::LogicUpdateJob(): Invalid target entity %i!", this->m_uEntityId) == 1 )
           {
             __debugbreak();
           }
@@ -330,9 +352,13 @@ void  CFreeWorkerRole::UpdateJob(class CSettler * a2) {
       {
         v8 = (*((unsigned __int16 *)this + 4) + IAnimatedEntity::Frame(a3)) % *((unsigned __int8 *)this + 7);
         if ( v8 || *((unsigned __int8 *)this + 7) <= 1u )
+        {
           IAnimatedEntity::SetFrame(v8);
+        }
         else
+        {
           IAnimatedEntity::SetFrame(1);
+        }
       }
       else
       {
@@ -340,7 +366,9 @@ void  CFreeWorkerRole::UpdateJob(class CSettler * a2) {
       }
       result = *((unsigned __int16 *)this + 4);
       v4 = result;
-      for ( i = 0; i < v4; ++i )
+      for ( i = 0;
+            i < v4;
+            ++i )
       {
         *((float *)this + 9) = *((float *)this + 9) + *((float *)this + 12);
         *((float *)this + 10) = *((float *)this + 10) + *((float *)this + 13);
@@ -352,7 +380,9 @@ void  CFreeWorkerRole::UpdateJob(class CSettler * a2) {
       v7 = IAnimatedEntity::Frame(a3);
       v6 = *((unsigned __int16 *)this + 4);
       if ( v7 <= v6 )
+      {
         goto LABEL_18;
+      }
       result = IAnimatedEntity::SetFrame(v7 - v6);
       break;
     case 5:
@@ -361,10 +391,14 @@ void  CFreeWorkerRole::UpdateJob(class CSettler * a2) {
       if ( v5 >= *((unsigned __int8 *)this + 7) )
       {
         if ( *((_BYTE *)this + 7) )
+        {
           result = IAnimatedEntity::SetFrame(*((_BYTE *)this + 7) - 1);
+        }
         else
+        {
 LABEL_18:
           result = IAnimatedEntity::SetFrame(0);
+        }
       }
       else
       {
@@ -412,8 +446,7 @@ void  CFreeWorkerRole::PostLoadInit(class CSettler * a1) {
   operator^<float>(a2, v5 + 48);
   operator^<float>(a2, v5 + 52);
   operator^<unsigned short>(a2, v5 + 46);
-  if ( (unsigned __int8)v5[44] >= 0x2Bu
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 117, "m_uGood < GOOD_MAX") == 1 )
+  if ( (unsigned __int8)v5[44] >= 0x2Bu && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 117, "m_uGood < GOOD_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -504,7 +537,9 @@ void  CFreeWorkerRole::GetNextJob(class CSettler * a2) {
   IMovingEntity::IncToDoListIter(a2);
   result = IMovingEntity::IsEndIter(a2);
   if ( !(_BYTE)result )
+  {
     return (*(int (__thiscall **)(CFreeWorkerRole *, struct CSettler *))(*(_DWORD *)this + 40))(this, a2);
+  }
   *((_BYTE *)this + 4) = 17;
   return result;
 }
@@ -583,9 +618,10 @@ void  CFreeWorkerRole::TakeJob(class CSettler * a2) {
         v25 = (int)((float)(v27 * 0.0039215689) + 0.5);
         v44 = 9 * *(_DWORD *)BB::Max<int>(&v25, &v26);
         if ( v44 < 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 930, "iJobCounter >= 0") == 1 )
+        {
           __debugbreak();
-        if ( v44 >= 128
-          && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 931, "iJobCounter < 128") == 1 )
+        }
+        if ( v44 >= 128 && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 931, "iJobCounter < 128") == 1 )
         {
           __debugbreak();
         }
@@ -618,13 +654,7 @@ void  CFreeWorkerRole::TakeJob(class CSettler * a2) {
           v17 = IEntity::Race(a2);
           v14 = *((unsigned __int16 *)ActualTask + 7);
           v3 = IEntity::Type((unsigned __int16 *)a2);
-          BBSupportTracePrintF(
-            3,
-            "### CFreeWorkerRole::TakeJob(): Invalid cycle frames %i! Settler type %i, job %i, race %i.",
-            *((unsigned __int8 *)v47 + 7),
-            v3,
-            v14,
-            v17);
+          BBSupportTracePrintF(3, "### CFreeWorkerRole::TakeJob(): Invalid cycle frames %i! Settler type %i, job %i, race %i.", *((unsigned __int8 *)v47 + 7), v3, v14, v17);
           IAnimatedEntity::RegisterForLogicUpdate(1);
         }
         else
@@ -729,8 +759,7 @@ void  CFreeWorkerRole::TakeJob(class CSettler * a2) {
     case 25:
       if ( (*(unsigned __int8 (__thiscall **)(ISettlerRole *, CMFCCaptionButton *))(*(_DWORD *)v47 + 124))(v47, a2) )
       {
-        if ( *((unsigned __int8 *)v47 + 7) <= 1u
-          && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 817, "m_iCycleFrames > 1") == 1 )
+        if ( *((unsigned __int8 *)v47 + 7) <= 1u && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 817, "m_iCycleFrames > 1") == 1 )
         {
           __debugbreak();
         }
@@ -744,8 +773,7 @@ void  CFreeWorkerRole::TakeJob(class CSettler * a2) {
         if ( CFreeWorkerRole::CheckResource(v47, a2, 0) == *((unsigned __int16 *)v47 + 17) )
         {
           *((_BYTE *)v47 + 45) = 1;
-          if ( *((unsigned __int8 *)v47 + 7) <= 1u
-            && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 861, "m_iCycleFrames > 1") == 1 )
+          if ( *((unsigned __int8 *)v47 + 7) <= 1u && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 861, "m_iCycleFrames > 1") == 1 )
           {
             __debugbreak();
           }
@@ -758,11 +786,7 @@ LABEL_28:
           v18 = *((unsigned __int16 *)v47 + 17);
           v15 = IEntity::Race(a2);
           v4 = IEntity::Type((unsigned __int16 *)a2);
-          CTrace::Print(
-            "Freeworkerrole: Working entity differs from stored entity! Should not happen! Settler %u, Race %u, Entity %u",
-            v4,
-            v15,
-            v18);
+          CTrace::Print("Freeworkerrole: Working entity differs from stored entity! Should not happen! Settler %u, Race %u, Entity %u", v4, v15, v18);
           v19 = IEntity::Type((unsigned __int16 *)a2);
           v5 = IEntity::Race(a2);
           SettlerInfo = CSettlerMgr::GetSettlerInfo(v5, v19);
@@ -801,7 +825,7 @@ void  CFreeWorkerRole::Init(class CSettler * a2) {
 
 
 // address=[0x156f220]
-// Decompiled from int __thiscall CFreeWorkerRole::ConvertEventIntoGoal(  CFreeWorkerRole *this,  struct CSettler *a2,  struct CEntityEvent *a3)
+// Decompiled from int __thiscall CFreeWorkerRole::ConvertEventIntoGoal(CFreeWorkerRole *this, struct CSettler *a2, struct CEntityEvent *a3)
 void  CFreeWorkerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int result; // eax
@@ -847,9 +871,7 @@ void  CFreeWorkerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEv
       }
       break;
     case 5:
-      result = (*(unsigned __int8 (__thiscall **)(CFreeWorkerRole *, struct CSettler *))(*(_DWORD *)this + 124))(
-                 this,
-                 a2);
+      result = (*(unsigned __int8 (__thiscall **)(CFreeWorkerRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2);
       if ( (_BYTE)result )
       {
         v21 = IEntity::Type((unsigned __int16 *)a2);
@@ -857,7 +879,9 @@ void  CFreeWorkerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEv
         CSettlerMgr::GetSettlerInfo(v11, v21);
         ISettlerRole::NewDestination(this, a2, *((_DWORD *)a3 + 5), 0);
         if ( IEntity::Type((unsigned __int16 *)a2) != 10 && IEntity::Type((unsigned __int16 *)a2) != 9 )
+        {
           (*(void (__thiscall **)(CFreeWorkerRole *, _DWORD))(*(_DWORD *)this + 52))(this, *((_DWORD *)a3 + 4));
+        }
         v22 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](1);
         v16 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](1);
         v12 = IEntity::Race(a2);
@@ -883,13 +907,14 @@ void  CFreeWorkerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEv
       break;
     case 9:
       if ( *((_BYTE *)this + 4) == 17 )
-        (*(void (__thiscall **)(CFreeWorkerRole *, struct CSettler *, _DWORD))(*(_DWORD *)this + 64))(
-          this,
-          a2,
-          *((_DWORD *)a3 + 5));
+      {
+        (*(void (__thiscall **)(CFreeWorkerRole *, struct CSettler *, _DWORD))(*(_DWORD *)this + 64))(this, a2, *((_DWORD *)a3 + 5));
+      }
       result = IEntity::FlagBits(a2, ENTITY_FLAG_Registered);
       if ( !result )
+      {
         result = IAnimatedEntity::RegisterForLogicUpdate(1);
+      }
       break;
     default:
       result = IEntity::FlagBits(a2, ENTITY_FLAG_Registered);
@@ -942,8 +967,7 @@ int  CFreeWorkerRole::CheckSpaceForPlant(class CSettler * a1) {
   v3 = IEntity::Type(a1);
   v1 = IEntity::Race(a1);
   SettlerInfo = CSettlerMgr::GetSettlerInfo(v1, v3);
-  if ( !std::vector<CSettlerMgr::SSearchInfos>::operator[](&SettlerInfo->m_vSearches, 0)->m_pSearchFkt
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 1344, "pSearchFkt != 0") == 1 )
+  if ( !std::vector<CSettlerMgr::SSearchInfos>::operator[](&SettlerInfo->m_vSearches, 0)->m_pSearchFkt && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 1344, "pSearchFkt != 0") == 1 )
   {
     __debugbreak();
   }
@@ -1000,18 +1024,14 @@ bool  CFreeWorkerRole::SetFree(class CSettler * a2, int a3) {
     v16 = v5 - *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](1) + 5);
     v6 = Y16X16::UnpackYFast(*((_DWORD *)this + 6));
     v7 = std::vector<CSettlerMgr::SSearchInfos>::operator[](1);
-    CDecoObjMgr::ClearFlagsForObject(
-      (CDecoObjMgr *)&g_cDecoObjMgr,
-      v16,
-      v6 - *(char *)(v7 + 6),
-      *((unsigned __int16 *)this + 23),
-      0);
+    CDecoObjMgr::ClearFlagsForObject((CDecoObjMgr *)&g_cDecoObjMgr, v16, v6 - *(char *)(v7 + 6), *((unsigned __int16 *)this + 23), 0);
     *((_WORD *)this + 23) = 0;
   }
   if ( !*((_BYTE *)this + 44) )
+  {
     return ISettlerRole::SetFree(this, a2, a3);
-  if ( *((unsigned __int8 *)this + 44) >= 0x2Bu
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 1282, "m_uGood < GOOD_MAX") == 1 )
+  }
+  if ( *((unsigned __int8 *)this + 44) >= 0x2Bu && BBSupportDbgReport(2, "MapObjects\\Settler\\FreeWorkerRole.cpp", 1282, "m_uGood < GOOD_MAX") == 1 )
   {
     __debugbreak();
   }

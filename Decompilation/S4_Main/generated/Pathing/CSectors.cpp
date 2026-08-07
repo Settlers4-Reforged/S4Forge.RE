@@ -23,14 +23,15 @@ void  CSectors::Init(void) {
 // Decompiled from int __thiscall CSectors::NewSector(CSectors *this, unsigned __int8 a2)
 int  CSectors::NewSector(unsigned char a2) {
   
-  if ( *(int *)this >= 32766
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 5927, "m_iSectorCount < SECTORS_MAX - 2") == 1 )
+  if ( *(int *)this >= 32766 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 5927, "m_iSectorCount < SECTORS_MAX - 2") == 1 )
   {
     __debugbreak();
   }
   ++*(_DWORD *)this;
   while ( *((_BYTE *)this + *((_DWORD *)this + 40961) + 4) )
+  {
     *((_DWORD *)this + 40961) = ((unsigned __int16)*((_DWORD *)this + 40961) + 1) & 0x7FFF;
+  }
   *((_BYTE *)this + *((_DWORD *)this + 40961) + 4) = a2 | 1;
   *((_DWORD *)this + *((_DWORD *)this + 40961) + 8193) = 0;
   return *((_DWORD *)this + 40961);
@@ -45,7 +46,9 @@ void  CSectors::DeleteSector(int a2) {
 
   result = this;
   if ( *(_DWORD *)this <= 0 || (int)a2 <= 0 )
+  {
     return result;
+  }
   --*(_DWORD *)this;
   *((_BYTE *)this + (_DWORD)a2 + 4) = 0;
   result = a2;
@@ -62,8 +65,12 @@ int  CSectors::CountSectors(unsigned char a2)const {
   int i; // [esp+Ch] [ebp-4h]
 
   v3 = 0;
-  for ( i = 0; i < 0x8000; ++i )
+  for ( i = 0;
+        i < 0x8000;
+        ++i )
+  {
     v3 += (unsigned __int8)(a2 & this[i + 4]) == a2;
+  }
   return v3;
 }
 

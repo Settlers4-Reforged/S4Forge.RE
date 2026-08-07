@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CSlaveRole::New(std::istream & a1) {
   
   if ( operator new(0x38u) )
+  {
     return CSlaveRole::CSlaveRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -104,14 +108,18 @@ void  CSlaveRole::UpdateJob(class CSettler * a2) {
       IAnimatedEntity::SetFrame(v5 - *((_WORD *)this + 4));
       result = IAnimatedEntity::Frame(a2);
       if ( result < 0 )
+      {
         result = IAnimatedEntity::SetFrame(0);
+      }
       break;
     case 22:
       v6 = IAnimatedEntity::Frame(a2);
       IAnimatedEntity::SetFrame(*((_WORD *)this + 4) + v6);
       result = IAnimatedEntity::Frame(a2);
       if ( result >= *((unsigned __int8 *)this + 7) )
+      {
         result = IAnimatedEntity::SetFrame(0);
+      }
       break;
     default:
       return result;
@@ -156,21 +164,24 @@ bool  CSlaveRole::SetFree(class CSettler * a2, int a3) {
 
   CSlaveRole::ClearWorkPositionAndFlagIfNecessary(this);
   if ( !ISettlerRole::HomeEntityId(this) )
+  {
     return 0;
+  }
   v7 = *((unsigned __int16 *)this + 16);
   v3 = IEntity::ID();
   CTrace::Print("SlaveRole: Freeing %i from %i", v3, v7);
   v4 = ISettlerRole::HomeEntityId(this);
   v8 = CMapObjectMgr::EntityPtr(v4);
   if ( !v8 && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 927, "pEntity != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( v8 )
   {
     v5 = IEntity::EntityId((unsigned __int16 *)a2);
     (*(void (__thiscall **)(int, int))(*(_DWORD *)v8 + 64))(v8, v5);
   }
-  if ( ISettlerRole::HomeEntityId(this)
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 934, "HomeEntityId() == 0") == 1 )
+  if ( ISettlerRole::HomeEntityId(this) && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 934, "HomeEntityId() == 0") == 1 )
   {
     __debugbreak();
   }
@@ -282,7 +293,9 @@ void  CSlaveRole::GetNextJob(class CSettler * a2) {
   v3 = this;
   IMovingEntity::IncToDoListIter(a2);
   if ( IMovingEntity::IsEndIter(a2) )
+  {
     IMovingEntity::ResetToDoList(v3);
+  }
   return (*(int (__thiscall **)(CSlaveRole *, struct CSettler *))(*(_DWORD *)v3 + 40))(v3, a2);
 }
 
@@ -325,9 +338,13 @@ void  CSlaveRole::TakeJob(class CSettler * a2) {
       v19 = *(__int16 *)(this + 16) + Y16X16::UnpackYFast(*(_DWORD *)(this + 24));
       *(_DWORD *)(this + 24) = Y16X16::PackXYFast(v18, v19);
       if ( *(_BYTE *)(this + 4) == 33 )
+      {
         v22 = 0x2000;
+      }
       else
+      {
         v22 = 0;
+      }
       IMovingEntity::WalkToXY(a2, *(_DWORD *)(this + 24), v22);
       *(_BYTE *)(this + 4) = 6;
       IMovingEntity::SetDisplacementCosts(5);
@@ -358,7 +375,9 @@ void  CSlaveRole::TakeJob(class CSettler * a2) {
       return;
     case 0x18:
       if ( !ISettlerRole::HomeEntityId(this) )
+      {
         goto LABEL_21;
+      }
       *(_DWORD *)(this + 36) = 0;
       *(_DWORD *)(this + 40) = 0;
       *(_DWORD *)(this + 24) = 0;
@@ -368,7 +387,9 @@ void  CSlaveRole::TakeJob(class CSettler * a2) {
       CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, v15);
       v21 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*(unsigned __int16 *)(this + 32));
       if ( !v21 )
+      {
         goto LABEL_21;
+      }
       v20 = IEntity::ObjType(v21);
       if ( v20 == 8 )
       {
@@ -383,8 +404,7 @@ void  CSlaveRole::TakeJob(class CSettler * a2) {
         v17 = v8 - IEntity::Y(a2);
         v9 = IEntity::X(ManakopterPtr);
         v10 = IEntity::X(a2);
-        if ( (int)Grid::Distance((Grid *)(v9 - v10), v17) >= 4
-          || IEntity::FlagBits(ManakopterPtr, (EntityFlag)&MEMORY[0x4000000]) )
+        if ( (int)Grid::Distance((Grid *)(v9 - v10), v17) >= 4 || IEntity::FlagBits(ManakopterPtr, (EntityFlag)&MEMORY[0x4000000]) )
         {
 LABEL_21:
           CSlaveRole::FreeServant((CSlaveRole *)this, a2);
@@ -455,20 +475,27 @@ bool  CSlaveRole::SearchPosition(class CSettler * a2) {
 
   CSlaveRole::ClearWorkPositionAndFlagIfNecessary(this);
   if ( !ISettlerRole::HomeEntityId(this) )
+  {
     return 0;
+  }
   v3 = ISettlerRole::HomeEntityId(this);
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v3);
   if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 820, "pBuilding != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !BuildingPtr )
+  {
     return 0;
-  if ( IEntity::Type((unsigned __int16 *)BuildingPtr) != 49
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 827, "pBuilding->Type() == BUILDING_MUSHROOMFARM") == 1 )
+  }
+  if ( IEntity::Type((unsigned __int16 *)BuildingPtr) != 49 && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 827, "pBuilding->Type() == BUILDING_MUSHROOMFARM") == 1 )
   {
     __debugbreak();
   }
   if ( IEntity::Type((unsigned __int16 *)BuildingPtr) != 49 )
+  {
     return 0;
+  }
   v16 = (CPane *)CBuilding::Role(BuildingPtr);
   WorkingAreaPackedXY = CBuilding::GetWorkingAreaPackedXY(BuildingPtr);
   v9 = (Grid *)Y16X16::UnpackXFast(WorkingAreaPackedXY);
@@ -494,12 +521,7 @@ bool  CSlaveRole::SearchPosition(class CSettler * a2) {
     }
     v21 = v12 + CSpiralOffsets::DeltaX(*((_DWORD *)this + 13));
     v20 = v11 + CSpiralOffsets::DeltaY(*((_DWORD *)this + 13));
-    if ( (unsigned __int8)CWorldManager::InWorld(v21, v20)
-      && (unsigned __int8)CWorldManager::InWorld(v21, v20 + 1)
-      && Grid::Distance(v9, v10, v21, v20) <= v15
-      && !CWorldManager::FlagBits(v21, v20 + 1, 0x20u)
-      && v8(v21, v20, 0)
-      && (unsigned int)CGameData::Rand(g_pGameData) >= 0x2000 )
+    if ( (unsigned __int8)CWorldManager::InWorld(v21, v20) && (unsigned __int8)CWorldManager::InWorld(v21, v20 + 1) && Grid::Distance(v9, v10, v21, v20) <= v15 && !CWorldManager::FlagBits(v21, v20 + 1, 0x20u) && v8(v21, v20, 0) && (unsigned int)CGameData::Rand(g_pGameData) >= 0x2000 )
     {
       v19 = v21;
       v17 = v20;
@@ -507,7 +529,9 @@ bool  CSlaveRole::SearchPosition(class CSettler * a2) {
     }
   }
   if ( v19 == -1 )
+  {
     return 0;
+  }
   v18 = v17 + 1;
   CSlaveRole::SetWorkPositionAndFlag(this, v19, v18);
   ISettlerRole::NewDestination(this, a2, v19, v18, 4096);
@@ -581,7 +605,9 @@ void  CSlaveRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
     case 0:
       CSlaveRole::ClearWorkPositionAndFlagIfNecessary((CSlaveRole *)v56);
       if ( !ISettlerRole::HomeEntityId(v56) )
+      {
         goto LABEL_15;
+      }
       v8 = ISettlerRole::HomeEntityId(v56);
       if ( CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v8) )
       {
@@ -620,8 +646,7 @@ LABEL_15:
       a2->NewToDoList(a2, (int)v14, v31);
       break;
     case 4:
-      if ( v56->m_iTask == 17
-        && ((unsigned __int8 (__thiscall *)(ISettlerRole *, CSettler *))v56->__vftable[1].ClassID)(v56, a2) )
+      if ( v56->m_iTask == 17 && ((unsigned __int8 (__thiscall *)(ISettlerRole *, CSettler *))v56->__vftable[1].ClassID)(v56, a2) )
       {
         IMovingEntity::ResetToDoList(a2);
         v56->TakeJob(v56, a2);
@@ -652,9 +677,13 @@ LABEL_15:
           v7 = IEntity::X(a2);
           v42 = CWorldManager::SectorId(v7, v29);
           if ( v43 == v42 )
+          {
             (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pDarkTribe + 8))(g_pDarkTribe, v49);
+          }
           else
+          {
             CSlaveRole::FreeServant((CSlaveRole *)v56, a2);
+          }
         }
       }
       else
@@ -662,13 +691,7 @@ LABEL_15:
         a2->NewToDoList(a2, (int)&unk_4158C88, -1);
         IMovingEntity::SetDisplacementCosts(a2, 10);
         v51 = CLogic::FutureEvents(g_pLogic);
-        (*(void (__thiscall **)(struct IFutureEvents *, int, int, int, int, _DWORD))(*(_DWORD *)v51 + 12))(
-          v51,
-          9,
-          4,
-          v49,
-          v52,
-          0);
+        (*(void (__thiscall **)(struct IFutureEvents *, int, int, int, int, _DWORD))(*(_DWORD *)v51 + 12))(v51, 9, 4, v49, v52, 0);
       }
       break;
     case 24:
@@ -703,7 +726,9 @@ LABEL_15:
           v18 = IEntity::X(a2);
           v38 = CWorldManager::SectorId(v18, v33);
           if ( v39 != v38 )
+          {
             CSlaveRole::FreeServant((CSlaveRole *)v56, a2);
+          }
         }
       }
       else
@@ -736,23 +761,19 @@ LABEL_15:
 // Decompiled from int __thiscall CSlaveRole::SetWorkPositionAndFlag(CSlaveRole *this, int a2, int a3)
 void  CSlaveRole::SetWorkPositionAndFlag(int a2, int a3) {
   
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 995, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 995, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
-  if ( CWorldManager::FlagBits(a2, a3, 0x20u)
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 996, "g_cWorld.FlagBits(_iX, _iY, FLAG_WORK) == 0") == 1 )
+  if ( CWorldManager::FlagBits(a2, a3, 0x20u) && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 996, "g_cWorld.FlagBits(_iX, _iY, FLAG_WORK) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 11) != -1
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 998, "m_iWorkPosX == -1") == 1 )
+  if ( *((_DWORD *)this + 11) != -1 && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 998, "m_iWorkPosX == -1") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 12) != -1
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 999, "m_iWorkPosY == -1") == 1 )
+  if ( *((_DWORD *)this + 12) != -1 && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 999, "m_iWorkPosY == -1") == 1 )
   {
     __debugbreak();
   }
@@ -770,13 +791,11 @@ void  CSlaveRole::ClearWorkPositionAndFlagIfNecessary(void) {
 
   if ( (int)this[1].__vftable < 0 )
   {
-    if ( this[1].__vftable != (ISettlerRole_vtbl *)-1
-      && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 1022, "m_iWorkPosX == -1") == 1 )
+    if ( this[1].__vftable != (ISettlerRole_vtbl *)-1 && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 1022, "m_iWorkPosX == -1") == 1 )
     {
       __debugbreak();
     }
-    if ( *(_DWORD *)&this[1].m_iTask != -1
-      && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 1023, "m_iWorkPosY == -1") == 1 )
+    if ( *(_DWORD *)&this[1].m_iTask != -1 && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 1023, "m_iWorkPosY == -1") == 1 )
     {
       __debugbreak();
     }
@@ -784,17 +803,11 @@ void  CSlaveRole::ClearWorkPositionAndFlagIfNecessary(void) {
   }
   else
   {
-    if ( !CWorldManager::InWorld((unsigned int)this[1].__vftable, *(_DWORD *)&this[1].m_iTask)
-      && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 1012, "g_cWorld.InWorld(m_iWorkPosX, m_iWorkPosY)") == 1 )
+    if ( !CWorldManager::InWorld((unsigned int)this[1].__vftable, *(_DWORD *)&this[1].m_iTask) && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 1012, "g_cWorld.InWorld(m_iWorkPosX, m_iWorkPosY)") == 1 )
     {
       __debugbreak();
     }
-    if ( !CWorldManager::FlagBits((int)this[1].__vftable, *(_DWORD *)&this[1].m_iTask, 0x20u)
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Settler\\SlaveRole.cpp",
-           1013,
-           "g_cWorld.FlagBits(m_iWorkPosX, m_iWorkPosY, FLAG_WORK) != 0") == 1 )
+    if ( !CWorldManager::FlagBits((int)this[1].__vftable, *(_DWORD *)&this[1].m_iTask, 0x20u) && BBSupportDbgReport(2, "MapObjects\\Settler\\SlaveRole.cpp", 1013, "g_cWorld.FlagBits(m_iWorkPosX, m_iWorkPosY, FLAG_WORK) != 0") == 1 )
     {
       __debugbreak();
     }
@@ -819,7 +832,9 @@ void  CSlaveRole::FreeServant(class CSettler * a2) {
     v2 = IEntity::WorldIdx();
     v3 = CWorldManager::MapObjectId(v2);
     if ( v3 == IEntity::ID() )
+    {
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Visible);
+    }
   }
   v4 = IEntity::ID();
   return CMapObjectMgr::Kill(v4, 0);

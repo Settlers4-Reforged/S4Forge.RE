@@ -4,7 +4,7 @@
 // Definitions for class CAITaskForceManakopters
 
 // address=[0x132a180]
-// Decompiled from CAITaskForceManakopters *__thiscall CAITaskForceManakopters::CAITaskForceManakopters(  CAITaskForceManakopters *this,  int a2,  int a3)
+// Decompiled from CAITaskForceManakopters *__thiscall CAITaskForceManakopters::CAITaskForceManakopters(CAITaskForceManakopters *this, int a2, int a3)
  CAITaskForceManakopters::CAITaskForceManakopters(int a2, int a3) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 8, 13, a3);
@@ -45,7 +45,9 @@ void  CAITaskForceManakopters::Execute(void) {
       {
         v2 = CAIEntityInfo::EntityId(Entity);
         if ( !IAIEnvironment::EntityIsManakopterMoving(v2) )
+        {
           CAITaskForce::SetNewStatusAndState(this, 1, 0, 0);
+        }
       }
       break;
     case 109:
@@ -78,7 +80,9 @@ void  CAITaskForceManakopters::Execute(void) {
       break;
     default:
       if ( BBSupportDbgReport(1, "AI\\AI_TaskForcesEx.cpp", 2850, "CAITaskForceManakopters::Execute(): Invalid state!") == 1 )
+      {
         __debugbreak();
+      }
       break;
   }
 }
@@ -111,12 +115,10 @@ bool  CAITaskForceManakopters::NewCommand(int a2, int a3, int a4) {
       result = 1;
       break;
     default:
-      if ( BBSupportDbgReport(
-             1,
-             "AI\\AI_TaskForcesEx.cpp",
-             2906,
-             "CAITaskForceManakopters::NewCommand(): Invalid command!") == 1 )
+      if ( BBSupportDbgReport(1, "AI\\AI_TaskForcesEx.cpp", 2906, "CAITaskForceManakopters::NewCommand(): Invalid command!") == 1 )
+      {
         __debugbreak();
+      }
       result = 0;
       break;
   }

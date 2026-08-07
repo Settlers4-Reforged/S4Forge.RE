@@ -11,7 +11,9 @@ class CPersistence * __cdecl CBuildingSitePileRole::New(std::istream & a1) {
 
   C = (CBuildingSitePileRole *)operator new(8u);
   if ( C )
+  {
     CBuildingSitePileRole::CBuildingSitePileRole(C, (int)a1);
+  }
 }
 
 
@@ -34,21 +36,22 @@ void  CBuildingSitePileRole::Increase(class CPile * _pPile, int _iAmount) {
   int v5; // [esp-4h] [ebp-8h]
 
   if ( !_pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 141, "_pPile != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iAmount <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 142, "_iAmount > 0") == 1 )
-    __debugbreak();
-  if ( CPile::IsInOfferList(_pPile)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 144, "!_pPile->IsInOfferList()") == 1 )
   {
     __debugbreak();
   }
-  if ( CPile::GetOfferFlag(_pPile)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 145, "!_pPile->GetOfferFlag()") == 1 )
+  if ( CPile::IsInOfferList(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 144, "!_pPile->IsInOfferList()") == 1 )
   {
     __debugbreak();
   }
-  if ( !CPile::GetBuildingId(_pPile)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 146, "_pPile->GetBuildingId() != 0") == 1 )
+  if ( CPile::GetOfferFlag(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 145, "!_pPile->GetOfferFlag()") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( !CPile::GetBuildingId(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 146, "_pPile->GetBuildingId() != 0") == 1 )
   {
     __debugbreak();
   }
@@ -63,8 +66,7 @@ void  CBuildingSitePileRole::Increase(class CPile * _pPile, int _iAmount) {
 // Decompiled from void __thiscall CBuildingSitePileRole::SubjectStopped(CBuildingSitePileRole *this, struct CPile *_pPile)
 void  CBuildingSitePileRole::SubjectStopped(class CPile * _pPile) {
   
-  if ( CPile::AmountLeaving(_pPile)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 105, "_pPile->AmountLeaving() == 0") == 1 )
+  if ( CPile::AmountLeaving(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 105, "_pPile->AmountLeaving() == 0") == 1 )
   {
     __debugbreak();
   }
@@ -78,8 +80,7 @@ void  CBuildingSitePileRole::SubjectStopped(class CPile * _pPile) {
 // Decompiled from void __thiscall CBuildingSitePileRole::SubjectStarted(CBuildingSitePileRole *this, struct CPile *_pPile)
 void  CBuildingSitePileRole::SubjectStarted(class CPile * _pPile) {
   
-  if ( CPile::AmountComing(_pPile)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 123, "_pPile->AmountComing() == 0") == 1 )
+  if ( CPile::AmountComing(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 123, "_pPile->AmountComing() == 0") == 1 )
   {
     __debugbreak();
   }
@@ -148,12 +149,7 @@ class CBuildingSitePileRole * __cdecl CBuildingSitePileRole::Load(std::istream &
   void **v1; // eax
 
   v1 = (void **)CPersistence::New(a1);
-  return j____RTDynamicCast(
-           v1,
-           0,
-           &CPersistence__RTTI_Type_Descriptor_,
-           &CBuildingSitePileRole__RTTI_Type_Descriptor_,
-           1);
+  return j____RTDynamicCast(v1, 0, &CPersistence__RTTI_Type_Descriptor_, &CBuildingSitePileRole__RTTI_Type_Descriptor_, 1);
 }
 
 

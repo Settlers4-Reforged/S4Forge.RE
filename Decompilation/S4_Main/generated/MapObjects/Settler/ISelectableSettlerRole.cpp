@@ -4,7 +4,7 @@
 // Definitions for class ISelectableSettlerRole
 
 // address=[0x157c980]
-// Decompiled from void __thiscall ISelectableSettlerRole::ISelectableSettlerRole(  ISelectableSettlerRole *this,  struct std::istream *_rStream)
+// Decompiled from void __thiscall ISelectableSettlerRole::ISelectableSettlerRole(ISelectableSettlerRole *this, struct std::istream *_rStream)
  ISelectableSettlerRole::ISelectableSettlerRole(std::istream & _rStream) {
   
   ISettlerRole::ISettlerRole(this, _rStream);
@@ -36,12 +36,7 @@ int  ISelectableSettlerRole::GetGroupFlags(void)const {
 // Decompiled from void __thiscall ISelectableSettlerRole::SetGroupFlags(ISelectableSettlerRole *this, unsigned int _iFlags)
 int  ISelectableSettlerRole::SetGroupFlags(int _iFlags) {
   
-  if ( _iFlags >= 0x10000
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Settler\\SelectableSettlerRole.cpp",
-         104,
-         "(_iFlags >= 0) && (_iFlags <= 0xFFFF)") == 1 )
+  if ( _iFlags >= 0x10000 && BBSupportDbgReport(2, "MapObjects\\Settler\\SelectableSettlerRole.cpp", 104, "(_iFlags >= 0) && (_iFlags <= 0xFFFF)") == 1 )
   {
     __debugbreak();
   }
@@ -53,12 +48,7 @@ int  ISelectableSettlerRole::SetGroupFlags(int _iFlags) {
 // Decompiled from void __thiscall ISelectableSettlerRole::SetGroupFlagBits(ISelectableSettlerRole *this, unsigned int _iFlagBits)
 int  ISelectableSettlerRole::SetGroupFlagBits(int _iFlagBits) {
   
-  if ( _iFlagBits >= 0x10000
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Settler\\SelectableSettlerRole.cpp",
-         118,
-         "(_iFlagBits >= 0) && (_iFlagBits <= 0xFFFF)") == 1 )
+  if ( _iFlagBits >= 0x10000 && BBSupportDbgReport(2, "MapObjects\\Settler\\SelectableSettlerRole.cpp", 118, "(_iFlagBits >= 0) && (_iFlagBits <= 0xFFFF)") == 1 )
   {
     __debugbreak();
   }
@@ -70,12 +60,7 @@ int  ISelectableSettlerRole::SetGroupFlagBits(int _iFlagBits) {
 // Decompiled from void __thiscall ISelectableSettlerRole::ClearGroupFlagBits(ISelectableSettlerRole *this, unsigned int _iFlagBits)
 int  ISelectableSettlerRole::ClearGroupFlagBits(int _iFlagBits) {
   
-  if ( _iFlagBits >= 0x10000
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Settler\\SelectableSettlerRole.cpp",
-         132,
-         "(_iFlagBits >= 0) && (_iFlagBits <= 0xFFFF)") == 1 )
+  if ( _iFlagBits >= 0x10000 && BBSupportDbgReport(2, "MapObjects\\Settler\\SelectableSettlerRole.cpp", 132, "(_iFlagBits >= 0) && (_iFlagBits <= 0xFFFF)") == 1 )
   {
     __debugbreak();
   }
@@ -121,14 +106,20 @@ bool  ISelectableSettlerRole::TakeCommonJob(class CSettler * arg0) {
 
   ActualTask = IMovingEntity::GetActualTask(arg0);
   if ( ActualTask->m_iTask != 7 )
+  {
     return 0;
+  }
   v3 = IAnimatedEntity::JobPart(arg0);
   a2 = IAnimatedEntity::Frame(arg0);
   ISettlerRole::InitCommonTaskValues(this, arg0, ActualTask);
   if ( v3 == IAnimatedEntity::JobPart(arg0) && a2 >= 1 && a2 < this->m_uCycleFrames )
+  {
     IAnimatedEntity::SetFrame(arg0, a2);
+  }
   else
+  {
     IAnimatedEntity::SetFrame(arg0, 1u);
+  }
   IMovingEntity::WalkToXY(arg0, this->m_iDestinationPosition, 0);
   IMovingEntity::SetDisplacementCosts(arg0, 5);
   this->m_iTask = 6;
@@ -154,14 +145,22 @@ int  ISelectableSettlerRole::Decrease(int a2) {
   IEntity *v6; // [esp+14h] [ebp-4h]
 
   if ( a2 <= 0 )
+  {
     return 0;
+  }
   v6 = CMapObjectMgr::EntityPtr(this->m_uAttachedSettlerId);
   if ( !v6 )
+  {
     return a2;
+  }
   if ( (IEntity::UniqueId(v6) & 0x20000000) != 0 )
+  {
     return 0;
+  }
   if ( IEntity::FlagBits(v6, (EntityFlag)0x200000) )
+  {
     a2 = (a2 * CStaticConfigVarInt::operator int((CStaticConfigVarInt *)g_pMagicShieldDmgDecrease256)) >> 8;
+  }
   if ( IEntity::Race(v6) == 3 )
   {
     --a2;
@@ -170,19 +169,25 @@ int  ISelectableSettlerRole::Decrease(int a2) {
   {
     v4 = CMapObjectMgr::EntityPtr(this->m_uAttachedSettlerId);
     if ( v4 )
+    {
       v3 = IEntity::Race(v4);
+    }
     else
+    {
       v3 = 0;
+    }
     a2 -= CSettlerMgr::GetSettlerInfo(v3, 44)->m_bArmor;
   }
   if ( a2 <= 0 )
+  {
     return 1;
+  }
   return a2;
 }
 
 
 // address=[0x157cd70]
-// Decompiled from char __thiscall ISelectableSettlerRole::ProcessGoToPosFerry(  ISelectableSettlerRole *this,  CSettler *a2,  const struct CEntityEvent *a3)
+// Decompiled from char __thiscall ISelectableSettlerRole::ProcessGoToPosFerry(ISelectableSettlerRole *this, CSettler *a2, const struct CEntityEvent *a3)
 bool  ISelectableSettlerRole::ProcessGoToPosFerry(class CSettler * a2, class CEntityEvent const * a3) {
   
   int v3; // esi
@@ -199,7 +204,9 @@ bool  ISelectableSettlerRole::ProcessGoToPosFerry(class CSettler * a2, class CEn
 
   m_iDataC = a3->m_iDataC;
   if ( m_iDataC <= 0 )
+  {
     return 0;
+  }
   v10 = Y16X16::UnpackXFast(m_iDataC);
   v11 = Y16X16::UnpackYFast(m_iDataC);
   FerryShipAt = (IEntity *)CVehicleMgr::GetFerryShipAt(v10, v11);
@@ -210,21 +217,22 @@ bool  ISelectableSettlerRole::ProcessGoToPosFerry(class CSettler * a2, class CEn
     {
       v4 = IEntity::EntityId(a2);
       if ( !CFerryShip::Request(FerryShipAt, v4) )
+      {
         return 1;
+      }
     }
   }
   if ( ISettlerRole::HomeEntityId(this) <= 0 )
+  {
     return 0;
+  }
   v6 = ISettlerRole::HomeEntityId(this);
   v7 = CMapObjectMgr::EntityPtr(v6);
-  pFerry = (CFerryShip *)j____RTDynamicCast(
-                           (void **)&v7->__vftable,
-                           0,
-                           &IEntity__RTTI_Type_Descriptor_,
-                           &CFerryShip__RTTI_Type_Descriptor_,
-                           0);
+  pFerry = (CFerryShip *)j____RTDynamicCast((void **)&v7->__vftable, 0, &IEntity__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0);
   if ( !pFerry )
+  {
     return 0;
+  }
   v8 = IEntity::EntityId(a2);
   pFerry->EntityOrderCanceled(pFerry, v8);
   v9 = IEntity::EntityId(a2);
@@ -262,7 +270,9 @@ unsigned int  ISelectableSettlerRole::ThiefCheckMasquerade(class CSettler * _pSe
     v9 = IEntity::Y(_pSettler);
     v6 = IEntity::X(_pSettler);
     if ( CScanner::FindAnyEnemyFighter(v6, v9, 6, 60, v11) )
+    {
       ISelectableSettlerRole::ThiefExpose(this, _pSettler);
+    }
   }
   else if ( v16 == v12 || !v16 )
   {
@@ -270,12 +280,18 @@ unsigned int  ISelectableSettlerRole::ThiefCheckMasquerade(class CSettler * _pSe
     v8 = IEntity::Y(_pSettler);
     v5 = IEntity::X(_pSettler);
     if ( !CScanner::FindAnyEnemyFighter(v5, v8, 15, 60, v10) )
+    {
       ISelectableSettlerRole::ThiefDisguise(this, _pSettler);
+    }
   }
   if ( IEntity::FlagBits(_pSettler, ENTITY_FLAG_Ownerless) )
+  {
     return 15;
+  }
   else
+  {
     return 45;
+  }
 }
 
 

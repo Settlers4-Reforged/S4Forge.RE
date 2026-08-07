@@ -21,7 +21,9 @@ bool __cdecl CAIResourceMap::IsOfLandtype(enum T_RESOURCE_LANDTYPE a1, int a2, i
   bool v16; // [esp+27h] [ebp-1h]
 
   if ( !Squares::ValidVW(a2, (unsigned int)a3) )
+  {
     return 0;
+  }
   v16 = 0;
   v15 = CAIResourceMap::ResourceDataVW(a2, a3);
   switch ( a1 )
@@ -33,12 +35,16 @@ bool __cdecl CAIResourceMap::IsOfLandtype(enum T_RESOURCE_LANDTYPE a1, int a2, i
     case 2:
       v12 = CAIResourceData::ResourceAmount1(v15, 7);
       if ( v12 < CStaticConfigVarInt::operator int(&g_iLIGHT_TREES) )
+      {
         v16 = v12 >= CStaticConfigVarInt::operator int(&g_iPLAIN_TREES);
+      }
       break;
     case 3:
       v13 = CAIResourceData::ResourceAmount1(v15, 7);
       if ( v13 < CStaticConfigVarInt::operator int(&g_iDEEP_TREES) )
+      {
         v16 = v13 >= CStaticConfigVarInt::operator int(&g_iLIGHT_TREES);
+      }
       break;
     case 4:
       v14 = CAIResourceData::ResourceAmount1(v15, 7);
@@ -65,9 +71,13 @@ bool __cdecl CAIResourceMap::IsOfLandtype(enum T_RESOURCE_LANDTYPE a1, int a2, i
     case 12:
       v5 = Squares::VWToXY(a2);
       v6 = Squares::VWToXY(a3);
-      for ( i = 0; i < 16; ++i )
+      for ( i = 0;
+            i < 16;
+            ++i )
       {
-        for ( j = 0; j < 16; ++j )
+        for ( j = 0;
+              j < 16;
+              ++j )
         {
           v8 = CWorldManager::ObjectId(i + v5, j + v6);
           if ( v8 )
@@ -89,7 +99,9 @@ bool __cdecl CAIResourceMap::IsOfLandtype(enum T_RESOURCE_LANDTYPE a1, int a2, i
       break;
     case 13:
       if ( (CAIResourceData::Flags1(v15) & 2) != 0 )
+      {
         v16 = CAIResourceData::GroundInfo1(v15, 1) != 0;
+      }
       break;
     case 14:
       v16 = (CAIResourceData::Flags1(v15) & 4) != 0;
@@ -120,27 +132,39 @@ int __cdecl CAIResourceMap::GetNumberOfSquaresWithDarkLand(int a1) {
   unsigned int i; // [esp+14h] [ebp-4h]
 
   if ( a1 <= 0 )
+  {
     return s_iResMapMaxVW * s_iResMapMaxVW;
+  }
   if ( a1 == dword_3EC2D1C )
+  {
     return dword_3EC2D20;
+  }
   v5 = 0;
-  for ( i = 0; (int)i < s_iResMapMaxVW; ++i )
+  for ( i = 0;
+        (int)i < s_iResMapMaxVW;
+        ++i )
   {
     if ( byte_3EC2CD8[i] )
     {
       v4 = 0;
-      for ( j = 0; j < s_iResMapMaxVW; ++j )
+      for ( j = 0;
+            j < s_iResMapMaxVW;
+            ++j )
       {
         v2 = CAIResourceMap::ResourceDataVW(j, i);
         v3 = CAIResourceData::GroundInfo1(v2, 0);
         v4 += v3;
         if ( v3 >= a1 )
+        {
           ++v5;
+        }
       }
       if ( !v4 )
       {
         if ( i >= 0x42 )
+        {
           report_rangecheckfailure();
+        }
         byte_3EC2CD8[i] = 0;
       }
     }
@@ -190,10 +214,11 @@ void __cdecl CAIResourceMap::Init(void) {
   dword_3EC2CAC = CWorldManager::Width();
   s_iResMapMaxVW = Squares::XYToVW(dword_3EC2CAC);
   if ( s_iResMapMaxVW <= 0 && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 754, "s_iResMapMaxVW > 0") == 1 )
+  {
     __debugbreak();
+  }
   s_iResMapUpdateSquaresNo = (s_iResMapMaxVW * s_iResMapMaxVW + 47) / 0x30u;
-  if ( s_iResMapUpdateSquaresNo < 1
-    && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 759, "s_iResMapUpdateSquaresNo >= 1") == 1 )
+  if ( s_iResMapUpdateSquaresNo < 1 && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 759, "s_iResMapUpdateSquaresNo >= 1") == 1 )
   {
     __debugbreak();
   }
@@ -204,19 +229,31 @@ void __cdecl CAIResourceMap::Init(void) {
   if ( v0 == CWorldManager::Height() && CWorldManager::Width() <= 1024 && (CWorldManager::Width() & 0xF) == 0 )
   {
     v3 = s_iResMapMaxVW;
-    for ( i = 0; i < v3; ++i )
+    for ( i = 0;
+          i < v3;
+          ++i )
     {
-      for ( j = 0; j < v3; ++j )
+      for ( j = 0;
+            j < v3;
+            ++j )
       {
         sub_131B740(j, i);
         if ( (unsigned __int8)sub_131BA00(j, i) )
+        {
           sub_131BE20(j, i);
+        }
       }
     }
-    for ( k = 0; k < v3; ++k )
+    for ( k = 0;
+          k < v3;
+          ++k )
     {
-      for ( m = 0; m < v3; ++m )
+      for ( m = 0;
+            m < v3;
+            ++m )
+      {
         sub_131B8B0(m, k);
+      }
     }
     CAIResourceMap::s_iInitialized = 1;
     CPerformanceCounter::Measure(s_AIPerformanceCounter);
@@ -250,8 +287,7 @@ void __cdecl CAIResourceMap::Update(void) {
 
   if ( CAIResourceMap::s_iInitialized )
   {
-    if ( CWorldManager::Width(this) != dword_3EC2CAC
-      && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 836, "g_cWorld.Width() == s_iWidthHeight") == 1 )
+    if ( CWorldManager::Width(this) != dword_3EC2CAC && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 836, "g_cWorld.Width() == s_iWidthHeight") == 1 )
     {
       __debugbreak();
     }
@@ -260,10 +296,14 @@ void __cdecl CAIResourceMap::Update(void) {
     {
       result = BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 837, "g_cWorld.Height() == s_iWidthHeight");
       if ( result == 1 )
+      {
         __debugbreak();
+      }
     }
     v4 = s_iResMapUpdateSquaresNo;
-    for ( i = 0; i < v4; ++i )
+    for ( i = 0;
+          i < v4;
+          ++i )
     {
       sub_131C060(dword_3EC2CD0, dword_3EC2CD4);
       v5 = dword_3EC2CD0 + 1;
@@ -286,7 +326,9 @@ void __cdecl CAIResourceMap::Update(void) {
   {
     result = BBSupportDbgReport(1, "AI\\AI_ResourceMap.cpp", 882, "CAIResourceMap::Update(): Not initialized!");
     if ( result == 1 )
+    {
       __debugbreak();
+    }
   }
   return result;
 }
@@ -302,23 +344,27 @@ void __cdecl CAIResourceMap::NotifyChange(int a1, int a2) {
   int v6; // [esp+4h] [ebp-4h]
 
   if ( !CAIResourceMap::s_iInitialized && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 893, "s_iInitialized") == 1 )
-    __debugbreak();
-  if ( CWorldManager::Width(v2) != dword_3EC2CAC
-    && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 895, "g_cWorld.Width() == s_iWidthHeight") == 1 )
   {
     __debugbreak();
   }
-  if ( CWorldManager::Height(0, v3) != dword_3EC2CAC
-    && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 896, "g_cWorld.Height() == s_iWidthHeight") == 1 )
+  if ( CWorldManager::Width(v2) != dword_3EC2CAC && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 895, "g_cWorld.Width() == s_iWidthHeight") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( CWorldManager::Height(0, v3) != dword_3EC2CAC && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 896, "g_cWorld.Height() == s_iWidthHeight") == 1 )
   {
     __debugbreak();
   }
   v5 = Squares::XYToVW(a1);
   v6 = Squares::XYToVW(a2);
   if ( v5 >= s_iResMapMaxVW && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 901, "iV < s_iResMapMaxVW") == 1 )
+  {
     __debugbreak();
+  }
   if ( v6 >= s_iResMapMaxVW && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 902, "iW < s_iResMapMaxVW") == 1 )
+  {
     __debugbreak();
+  }
   return sub_131C060(v5, v6);
 }
 
@@ -343,23 +389,27 @@ void __cdecl CAIResourceMap::NotifyResourceChange(int a1, int a2, int a3, int a4
   unsigned __int8 v17; // [esp+2Bh] [ebp-1h]
 
   if ( !CAIResourceMap::s_iInitialized && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 914, "s_iInitialized") == 1 )
-    __debugbreak();
-  if ( CWorldManager::Width(v4) != dword_3EC2CAC
-    && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 916, "g_cWorld.Width() == s_iWidthHeight") == 1 )
   {
     __debugbreak();
   }
-  if ( CWorldManager::Height(0, v5) != dword_3EC2CAC
-    && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 917, "g_cWorld.Height() == s_iWidthHeight") == 1 )
+  if ( CWorldManager::Width(v4) != dword_3EC2CAC && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 916, "g_cWorld.Width() == s_iWidthHeight") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( CWorldManager::Height(0, v5) != dword_3EC2CAC && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 917, "g_cWorld.Height() == s_iWidthHeight") == 1 )
   {
     __debugbreak();
   }
   v15 = Squares::XYToVW(a1);
   v11 = Squares::XYToVW(a2);
   if ( v15 >= s_iResMapMaxVW && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 922, "iV < s_iResMapMaxVW") == 1 )
+  {
     __debugbreak();
+  }
   if ( v11 >= s_iResMapMaxVW && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 923, "iW < s_iResMapMaxVW") == 1 )
+  {
     __debugbreak();
+  }
   v16 = sub_131B720(a3);
   v9 = sub_131B730(a3);
   v8 = sub_131B720(a4);
@@ -371,9 +421,13 @@ void __cdecl CAIResourceMap::NotifyResourceChange(int a1, int a2, int a3, int a4
     v17 = 1;
     *(_WORD *)(v14 + 2 * v16) -= v9;
     *(_WORD *)(v14 + 2 * v8) += v7;
-    for ( i = -1; i <= 1; ++i )
+    for ( i = -1;
+          i <= 1;
+          ++i )
     {
-      for ( j = -1; j <= 1; ++j )
+      for ( j = -1;
+            j <= 1;
+            ++j )
       {
         if ( j + v15 < (unsigned int)s_iResMapMaxVW )
         {
@@ -392,13 +446,13 @@ void __cdecl CAIResourceMap::NotifyResourceChange(int a1, int a2, int a3, int a4
   }
   result = v17;
   if ( v17 )
+  {
     return result;
-  if ( BBSupportDbgReport(
-         1,
-         "AI\\AI_ResourceMap.cpp",
-         973,
-         "CAIResourceMap::NotifyResourceChange(): Invalid ResourceMap entry [may be ignored!]") == 1 )
+  }
+  if ( BBSupportDbgReport(1, "AI\\AI_ResourceMap.cpp", 973, "CAIResourceMap::NotifyResourceChange(): Invalid ResourceMap entry [may be ignored!]") == 1 )
+  {
     __debugbreak();
+  }
   return sub_131C060(v15, v11);
 }
 
@@ -414,8 +468,7 @@ void __cdecl CAIResourceMap::NotifyDarkLandChange(int a1, int a2, bool a3) {
   int v6; // [esp+8h] [ebp-8h]
   int v7; // [esp+Ch] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld((int)a1, (int)a2)
-    && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 986, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld((int)a1, (int)a2) && BBSupportDbgReport(2, "AI\\AI_ResourceMap.cpp", 986, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -426,10 +479,10 @@ void __cdecl CAIResourceMap::NotifyDarkLandChange(int a1, int a2, bool a3) {
   sub_131BE20(v6, v7);
   result = sub_131BA00(v6, v7);
   if ( dword_3EC2D1C <= 0 )
+  {
     return result;
-  if ( (v4 = CAIResourceMap::ResourceDataVW(v6, v7), result = CAIResourceData::GroundInfo1(v4, 0), v5 < dword_3EC2D1C)
-    && result >= dword_3EC2D1C
-    || v5 >= dword_3EC2D1C && result < dword_3EC2D1C )
+  }
+  if ( (v4 = CAIResourceMap::ResourceDataVW(v6, v7), result = CAIResourceData::GroundInfo1(v4, 0), v5 < dword_3EC2D1C) && result >= dword_3EC2D1C || v5 >= dword_3EC2D1C && result < dword_3EC2D1C )
   {
     dword_3EC2D1C = -1;
   }

@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CThiefRole::New(std::istream & a1) {
   
   if ( operator new(0x44u) )
+  {
     return CThiefRole::CThiefRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -93,12 +97,16 @@ LABEL_16:
     goto LABEL_17;
   }
   if ( !ISettlerRole::SourcePileId(this) )
+  {
     return (*(int (__thiscall **)(CThiefRole *, struct CSettler *, int))(*(_DWORD *)this + 64))(this, a2, -1);
+  }
   v4 = ISettlerRole::SourcePileId(this);
   v5 = CPileMgr::operator[](v4);
   *((_BYTE *)this + 64) = (*(int (__thiscall **)(unsigned __int8 *, unsigned __int8 *))(*(_DWORD *)v5 + 60))(v5, v5);
   if ( !*((_BYTE *)this + 64) && BBSupportDbgReport(2, "MapObjects\\Settler\\ThiefRole.cpp", 333, "m_uGood > 0") == 1 )
+  {
     __debugbreak();
+  }
   v10 = IEntity::ID();
   v6 = ISettlerRole::SourcePileId(this);
   v7 = CPileMgr::operator[](v6);
@@ -119,7 +127,9 @@ void  CThiefRole::LogicUpdate(class CSettler * a2) {
 
   TickCounter = CGameData::GetTickCounter(g_pGameData);
   if ( TickCounter >= *((_DWORD *)this + 15) )
+  {
     *((_DWORD *)this + 15) = ISelectableSettlerRole::ThiefCheckMasquerade(this, a2) + TickCounter;
+  }
   return ISettlerRole::LogicUpdate(this, a2);
 }
 
@@ -143,20 +153,30 @@ void  CThiefRole::UpdateJob(class CSettler * a2) {
     v5 = IAnimatedEntity::Frame(a2);
     v4 = *((unsigned __int16 *)this + 4);
     if ( v5 <= v4 )
+    {
       return (CThiefRole *)IAnimatedEntity::SetFrame(0);
+    }
     else
+    {
       return (CThiefRole *)IAnimatedEntity::SetFrame(v5 - v4);
+    }
   }
   else if ( v6 == 22 )
   {
     v8 = *((unsigned __int8 *)this + 7);
     v7 = *((unsigned __int16 *)this + 4) + IAnimatedEntity::Frame(a2);
     if ( v7 < v8 )
+    {
       return (CThiefRole *)IAnimatedEntity::SetFrame(v7);
+    }
     if ( v8 <= 0 )
+    {
       v3 = 0;
+    }
     else
+    {
       v3 = v8 - 1;
+    }
     LOBYTE(v7) = v3;
     return (CThiefRole *)IAnimatedEntity::SetFrame(v7);
   }
@@ -173,7 +193,9 @@ void  CThiefRole::PostLoadInit(class CSettler * a2) {
 
   CWarMap::AddEntity(a2);
   if ( std::list<CEntityTask>::size((void *)(this + 48)) )
+  {
     IMovingEntity::SetToDoList(a2, this + 48);
+  }
   IMovingEntity::ResetToDoList(this);
   while ( *(_BYTE *)(v4 + 12) )
   {
@@ -237,7 +259,9 @@ bool  CThiefRole::SetFree(class CSettler * a2, int a3) {
   }
   operator^<unsigned char>(a2, v8 + 16);
   operator^<unsigned int>(a2, v4);
-  for ( i = 0; i < v4[0]; ++i )
+  for ( i = 0;
+        i < v4[0];
+        ++i )
   {
     v2 = CEntityTask::Load(a2);
     std::list<CEntityTask>::push_back(v2);
@@ -293,7 +317,9 @@ void  CThiefRole::Store(std::ostream & a2) {
     LOBYTE(v24) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v6);
     if ( !v22 )
+    {
       break;
+    }
     v18 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(v8);
     (*(void (__thiscall **)(int, struct std::ostream *))(*(_DWORD *)v18 + 4))(v18, a2);
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v8);
@@ -315,7 +341,9 @@ void  CThiefRole::Store(std::ostream & a2) {
       LOBYTE(v24) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v5);
       if ( !v21 )
+      {
         break;
+      }
       ActualIter = (std::_Iterator_base12 *)IMovingEntity::GetActualIter(v11, (int)v4);
       v9 = ActualIter;
       LOBYTE(v24) = 4;
@@ -323,7 +351,9 @@ void  CThiefRole::Store(std::ostream & a2) {
       LOBYTE(v24) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v4);
       if ( v20 )
+      {
         break;
+      }
       LOBYTE(v23) = v23 + 1;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v7);
     }
@@ -332,7 +362,9 @@ void  CThiefRole::Store(std::ostream & a2) {
   }
   v2 = (unsigned __int8)v23;
   if ( v2 >= std::list<CEntityTask>::size(v19 + 48) )
+  {
     LOBYTE(v23) = 0;
+  }
   return operator^<unsigned char>(a2, (int)&v23);
 }
 
@@ -388,7 +420,9 @@ void  CThiefRole::GetNextJob(class CSettler * a2) {
   IMovingEntity::IncToDoListIter(a2);
   result = IMovingEntity::IsEndIter(a2);
   if ( !(_BYTE)result )
+  {
     return (*(int (__thiscall **)(CThiefRole *, struct CSettler *))(*(_DWORD *)this + 40))(this, a2);
+  }
   *((_BYTE *)this + 4) = 17;
   return result;
 }
@@ -418,20 +452,28 @@ void  CThiefRole::TakeJob(class CSettler * a2) {
 
   result = ISelectableSettlerRole::TakeCommonJob(a2);
   if ( (_BYTE)result )
+  {
     return result;
+  }
   v17 = IAnimatedEntity::JobPart(a2);
   v16 = IAnimatedEntity::Frame(a2);
   ActualTask = (const struct CEntityTask *)IMovingEntity::GetActualTask(a2);
   ISettlerRole::InitCommonTaskValues((ISettlerRole *)this, a2, ActualTask);
   if ( IAnimatedEntity::JobPart(a2) == 301 && *(_BYTE *)(this + 64) )
+  {
     IAnimatedEntity::SetJobPart(a2, 302);
+  }
   switch ( *(_BYTE *)(this + 4) )
   {
     case 7:
       if ( v17 == IAnimatedEntity::JobPart(a2) && v16 >= *(unsigned __int8 *)(this + 7) )
+      {
         IAnimatedEntity::SetFrame(1);
+      }
       else
+      {
         IAnimatedEntity::SetFrame(v16);
+      }
       v13 = *(__int16 *)(this + 14) + Y16X16::UnpackXFast(*(_DWORD *)(this + 24));
       v10 = Y16X16::UnpackYFast(*(_DWORD *)(this + 24));
       *(_DWORD *)(this + 24) = Y16X16::PackXYFast(v13, *(__int16 *)(this + 16) + v10);
@@ -446,7 +488,9 @@ void  CThiefRole::TakeJob(class CSettler * a2) {
       {
         IAnimatedEntity::SetFrame(1);
         if ( *(__int16 *)(this + 14) > 0 || *(__int16 *)(this + 16) > 0 )
+        {
           ISettlerRole::NewDestination((ISettlerRole *)this, a2, *(__int16 *)(this + 14), *(__int16 *)(this + 16), 0);
+        }
         IMovingEntity::WalkToXY(a2, *(_DWORD *)(this + 24), 0);
         *(_BYTE *)(this + 4) = 6;
         IMovingEntity::SetDisplacementCosts(5);
@@ -457,7 +501,9 @@ void  CThiefRole::TakeJob(class CSettler * a2) {
         if ( CThiefRole::CheckGoodInSurrounding((CThiefRole *)this, a2) )
         {
           if ( v17 != IAnimatedEntity::JobPart(a2) || IAnimatedEntity::Frame(a2) >= *(unsigned __int8 *)(this + 7) )
+          {
             IAnimatedEntity::SetFrame(1);
+          }
           v14 = *(__int16 *)(this + 14) + Y16X16::UnpackXFast(*(_DWORD *)(this + 24));
           v9 = Y16X16::UnpackYFast(*(_DWORD *)(this + 24));
           *(_DWORD *)(this + 24) = Y16X16::PackXYFast(v14, *(__int16 *)(this + 16) + v9);
@@ -509,8 +555,7 @@ void  CThiefRole::TakeJob(class CSettler * a2) {
       }
       break;
     case 0x18:
-      if ( !*(_WORD *)(this + 32)
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\ThiefRole.cpp", 567, "m_uHomeEntityId") == 1 )
+      if ( !*(_WORD *)(this + 32) && BBSupportDbgReport(2, "MapObjects\\Settler\\ThiefRole.cpp", 567, "m_uHomeEntityId") == 1 )
       {
         __debugbreak();
       }
@@ -520,12 +565,7 @@ void  CThiefRole::TakeJob(class CSettler * a2) {
         v15 = CVehicleMgr::operator[](*(unsigned __int16 *)(this + 32));
         v11 = IEntity::ID();
         (*(void (__thiscall **)(int, int))(*(_DWORD *)v15 + 128))(v15, v11);
-        if ( !IEntity::FlagBits(a2, ENTITY_FLAG_ON_BOARD)
-          && BBSupportDbgReport(
-               2,
-               "MapObjects\\Settler\\ThiefRole.cpp",
-               571,
-               "_pSettler->FlagBits(ENTITY_FLAG_ON_BOARD ) != 0") == 1 )
+        if ( !IEntity::FlagBits(a2, ENTITY_FLAG_ON_BOARD) && BBSupportDbgReport(2, "MapObjects\\Settler\\ThiefRole.cpp", 571, "_pSettler->FlagBits(ENTITY_FLAG_ON_BOARD ) != 0") == 1 )
         {
           __debugbreak();
         }
@@ -546,17 +586,11 @@ void  CThiefRole::Init(class CSettler * a2) {
   
   int result; // eax
 
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Offered|ENTITY_FLAG_ATTACHED)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Settler\\ThiefRole.cpp",
-         203,
-         "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED | ENTITY_FLAG_OFFERED )") == 1 )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Offered|ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\ThiefRole.cpp", 203, "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED | ENTITY_FLAG_OFFERED )") == 1 )
   {
     __debugbreak();
   }
-  if ( *(_WORD *)(this + 32)
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\ThiefRole.cpp", 204, "!m_uHomeEntityId") == 1 )
+  if ( *(_WORD *)(this + 32) && BBSupportDbgReport(2, "MapObjects\\Settler\\ThiefRole.cpp", 204, "!m_uHomeEntityId") == 1 )
   {
     __debugbreak();
   }
@@ -597,7 +631,9 @@ bool  CThiefRole::CheckGoodInSurrounding(class CSettler * a2) {
   v13 = IEntity::Y(a2);
   v2 = IEntity::OwnerId((unsigned __int8 *)a2);
   v12 = CAlliances::AllianceId(v2);
-  for ( i = 0; i < 80; ++i )
+  for ( i = 0;
+        i < 80;
+        ++i )
   {
     v16 = v14 + CSpiralOffsets::DeltaX(i);
     v17 = v13 + CSpiralOffsets::DeltaY(i);
@@ -610,8 +646,7 @@ bool  CThiefRole::CheckGoodInSurrounding(class CSettler * a2) {
         PilePtr = CPileMgr::GetPilePtr(v11);
         if ( PilePtr )
         {
-          if ( (v15 != IEntity::OwnerId((unsigned __int8 *)a2) || CPile::GetRoleType(PilePtr) == 3)
-            && !IEntity::FlagBits(PilePtr, (EntityFlag)0x10u) )
+          if ( (v15 != IEntity::OwnerId((unsigned __int8 *)a2) || CPile::GetRoleType(PilePtr) == 3) && !IEntity::FlagBits(PilePtr, (EntityFlag)0x10u) )
           {
             v9 = IEntity::Y(a2);
             v8 = IEntity::X(a2);
@@ -701,8 +736,7 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
   {
     case 7:
       v39 = *((_DWORD *)a3 + 3);
-      if ( !CMapObjectMgr::ValidEntityId(v39)
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\ThiefRole.cpp", 828, "g_pMapObjectMgr->ValidEntityId(iEntityID)") == 1 )
+      if ( !CMapObjectMgr::ValidEntityId(v39) && BBSupportDbgReport(2, "MapObjects\\Settler\\ThiefRole.cpp", 828, "g_pMapObjectMgr->ValidEntityId(iEntityID)") == 1 )
       {
         __debugbreak();
       }
@@ -711,12 +745,7 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
       CSettler::TakeWaitList(a2);
       v30 = IEntity::ID();
       v21 = IEntity::OwnerId((unsigned __int8 *)a2);
-      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, unsigned int))(*(_DWORD *)g_pAI + 44))(
-                     g_pAI,
-                     21,
-                     v21,
-                     v30,
-                     v39);
+      LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, unsigned int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v21, v30, v39);
       break;
     case 9:
       LOBYTE(v3) = IAnimatedEntity::RegisterForLogicUpdate(1);
@@ -726,7 +755,9 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
       if ( v3 == 13 )
       {
         if ( ISettlerRole::SourcePileId(this) )
+        {
           (*(void (__thiscall **)(int, CPropertySet *, int))(*(_DWORD *)this + 64))(this, a2, -1);
+        }
         LOBYTE(v3) = ISelectableSettlerRole::ProcessGoToPosFerry((ISelectableSettlerRole *)this, a2, a3);
         if ( !(_BYTE)v3 )
         {
@@ -736,15 +767,21 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
           Y16X16::UnpackYFast(v42);
           v4 = IEntity::PackedXY(a2);
           if ( CThiefRole::IsAllyOwner((CThiefRole *)this, a2, v4) || !*(_DWORD *)(this + 28) )
+          {
             *(_DWORD *)(this + 28) = IEntity::PackedXY(a2);
+          }
           v44 = 225;
           if ( (v38 & 4) != 0 )
           {
             *(_DWORD *)(this + 24) = v42;
             if ( *(_BYTE *)(this + 64) )
+            {
               v44 = 227;
+            }
             else
+            {
               v44 = 228;
+            }
           }
           else
           {
@@ -752,7 +789,9 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
             if ( CThiefRole::IsAllyOwner((CThiefRole *)this, a2, *(_DWORD *)(this + 24)) )
             {
               if ( *(_BYTE *)(this + 64) )
+              {
                 v44 = 226;
+              }
             }
             else if ( *(_BYTE *)(this + 64) )
             {
@@ -799,12 +838,7 @@ void  CThiefRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent *
         v34 = *(unsigned __int16 *)(this + 32);
         v26 = IEntity::ID();
         v16 = IEntity::OwnerId((unsigned __int8 *)a2);
-        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(
-                       g_pAI,
-                       18,
-                       v16,
-                       v26,
-                       v34);
+        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v16, v26, v34);
       }
       else
       {

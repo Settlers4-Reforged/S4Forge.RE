@@ -128,7 +128,9 @@ void  CTutorial::DeleteWorldTutorialCursor(void) {
 
   result = this;
   if ( !*((_DWORD *)this + 2) )
+  {
     return result;
+  }
   v3 = *((_DWORD *)this + 2);
   v2 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
   IEffects::DeleteMovingEffect(v2, v3);
@@ -174,7 +176,9 @@ bool  CTutorial::OnEvent(class CEvn_Event & a2) {
     if ( event > 0x1389 )
     {
       if ( event != 5003 )
+      {
         return 0;
+      }
       SelectedBuilding = CTutorial::GetSelectedBuilding(this);
       CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 12, SelectedBuilding);
     }
@@ -190,7 +194,9 @@ bool  CTutorial::OnEvent(class CEvn_Event & a2) {
             return 0;
           case 0x195u:
             if ( !a2->m_wParam )
+            {
               return 0;
+            }
             v4 = CTutorial::GetSelectedBuilding(this);
             CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 10, v4);
             return 0;
@@ -206,10 +212,7 @@ LABEL_32:
             CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 0x14u);
             return 0;
           case 0x1ACu:
-            CGameScriptManager::SetGlobal(
-              (CGameScriptManager *)g_pScriptMgr,
-              "gActiveMenu",
-              byte_3F1E908 + 8 * a2->m_iEventId);
+            CGameScriptManager::SetGlobal((CGameScriptManager *)g_pScriptMgr, "gActiveMenu", byte_3F1E908 + 8 * a2->m_iEventId);
             return 0;
           case 0x1ADu:
           case 0x1AEu:
@@ -229,12 +232,7 @@ LABEL_32:
           case 0x1CAu:
           case 0x1CBu:
             CGameScriptManager::SetGlobal((CGameScriptManager *)g_pScriptMgr, "gActiveMenu", 8 * a2->m_iEventId);
-            CGameScriptManager::SendGameEvent(
-              (CGameScriptManager *)g_pScriptMgr,
-              19,
-              8 * a2->m_iEventId,
-              a2->m_wParam,
-              a2->m_lParam);
+            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 19, 8 * a2->m_iEventId, a2->m_wParam, a2->m_lParam);
             return 0;
           case 0x1B5u:
             CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 8, a2->m_lParam);
@@ -274,11 +272,15 @@ LABEL_35:
   {
     case 9u:
       if ( CTutorial::IsWarriorSelected(this) )
+      {
         CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 9u);
+      }
       return 0;
     case 0xBu:
       if ( a2->m_wParam != 32 || byte_3F44E66 )
+      {
         return 0;
+      }
       byte_3F44E66 = 1;
       CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 7u);
       result = 0;
@@ -287,7 +289,9 @@ LABEL_35:
       goto LABEL_30;
     case 0x14u:
       if ( a2->m_wParam != 32 )
+      {
         return 0;
+      }
       byte_3F44E66 = 0;
       result = 0;
       break;
@@ -321,11 +325,15 @@ bool  CTutorial::IsWarriorSelected(void) {
   v11 = 0;
   if ( std::vector<unsigned short>::size(v5) )
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       v2 = std::vector<unsigned short>::size(v5);
       if ( i >= v2 )
+      {
         break;
+      }
       v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
       if ( CSettlerMgr::GetSettlerPtr(*v3) )
       {
@@ -364,11 +372,15 @@ int  CTutorial::GetSelectedBuilding(void) {
   v11 = 0;
   if ( std::vector<unsigned short>::size(v5) )
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       v2 = std::vector<unsigned short>::size(v5);
       if ( i >= v2 )
+      {
         break;
+      }
       v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
       BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *v3);
       if ( BuildingPtr )

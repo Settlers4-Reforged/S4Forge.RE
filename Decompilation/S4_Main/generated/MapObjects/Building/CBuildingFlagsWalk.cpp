@@ -4,7 +4,7 @@
 // Definitions for class CBuildingFlagsWalk
 
 // address=[0x14eaf90]
-// Decompiled from CBuildingFlagsWalk *__thiscall CBuildingFlagsWalk::CBuildingFlagsWalk(  CBuildingFlagsWalk *this,  int a2,  int a3,  int a4,  int a5,  std::vector *a6)
+// Decompiled from CBuildingFlagsWalk *__thiscall CBuildingFlagsWalk::CBuildingFlagsWalk(CBuildingFlagsWalk *this, int a2, int a3, int a4, int a5, std::vector *a6)
  CBuildingFlagsWalk::CBuildingFlagsWalk(int a2, int a3, int a4, int a5, class std::vector<unsigned int,class std::allocator<unsigned int> > const & a6) {
   
   this->m_v0 = a6;
@@ -38,9 +38,13 @@ void  CBuildingFlagsWalk::Init(void) {
   this->m_iCurrentX = this->m_iU0;
   this->m_iCurrentY = this->m_iU1;
   if ( std::vector<unsigned int>::size(this->m_v0) )
+  {
     this->m_pFirst = *(_DWORD *)std::vector<unsigned int>::operator[](this->m_v0, 0);
+  }
   else
+  {
     this->m_pFirst = 0;
+  }
   this->m_iSteps = 1;
 }
 
@@ -65,8 +69,12 @@ bool  CBuildingFlagsWalk::NextPosition(void) {
     ++this->m_iSteps;
   }
   m_iCurrentX = this->m_iCurrentX;
-  for ( i = this->m_pFirst; i >= 0; i *= 2 )
+  for ( i = this->m_pFirst;
+        i >= 0;
+        i *= 2 )
+  {
     ++m_iCurrentX;
+  }
   this->m_iCurrentX = m_iCurrentX + 1;
   this->m_pFirst = 2 * i;
   return 1;

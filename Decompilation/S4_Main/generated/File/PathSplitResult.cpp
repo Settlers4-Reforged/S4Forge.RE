@@ -14,7 +14,7 @@
 
 
 // address=[0x2eff700]
-// Decompiled from FilePaths::PathSplitResult *__thiscall FilePaths::PathSplitResult::PathSplitResult(  FilePaths::PathSplitResult *this,  FilePaths::PathSplitResult *a2)
+// Decompiled from FilePaths::PathSplitResult *__thiscall FilePaths::PathSplitResult::PathSplitResult(FilePaths::PathSplitResult *this, FilePaths::PathSplitResult *a2)
  FilePaths::PathSplitResult::PathSplitResult(struct FilePaths::PathSplitResult && a2) {
   
   std::wstring::wstring(&this->m_swpDrive, &a2->m_swpDrive);

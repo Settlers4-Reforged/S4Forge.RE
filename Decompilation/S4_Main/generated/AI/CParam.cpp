@@ -103,10 +103,7 @@ void  CParam::SetParameterX(int a2, int a3) {
 // Decompiled from BOOL __thiscall CParam::ParamAreEqual(CParam *this, struct CParam *a2)
 int  CParam::ParamAreEqual(class CParam * a2) {
   
-  return *((_DWORD *)this + 3) == *((_DWORD *)a2 + 3)
-      && *((_DWORD *)this + 4) == *((_DWORD *)a2 + 4)
-      && *((_DWORD *)this + 5) == *((_DWORD *)a2 + 5)
-      && *((_DWORD *)this + 6) == *((_DWORD *)a2 + 6);
+  return *((_DWORD *)this + 3) == *((_DWORD *)a2 + 3) && *((_DWORD *)this + 4) == *((_DWORD *)a2 + 4) && *((_DWORD *)this + 5) == *((_DWORD *)a2 + 5) && *((_DWORD *)this + 6) == *((_DWORD *)a2 + 6);
 }
 
 

@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateBriefing::DynamicCreateFunc(void * a1) {
 
   C = (CStateBriefing *)operator new(0x10u);
   if ( C )
+  {
     return CStateBriefing::CStateBriefing(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -38,15 +42,13 @@ class CGameState * __cdecl CStateBriefing::DynamicCreateFunc(void * a1) {
   *((_DWORD *)this + 1) = (unsigned __int16)a2;
   *((_DWORD *)this + 2) = HIWORD(a2);
   *((_BYTE *)this + 12) = 0;
-  if ( *((int *)this + 1) >= 25
-    && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 208, "m_iCampaignType < CAMPAIGN_MAX") == 1 )
+  if ( *((int *)this + 1) >= 25 && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 208, "m_iCampaignType < CAMPAIGN_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( *((_DWORD *)this + 1) == 4 )
   {
-    if ( *((int *)this + 2) >= 12
-      && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 211, "m_iLevel < CAMPAIGN_DC_COUNT") == 1 )
+    if ( *((int *)this + 2) >= 12 && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 211, "m_iLevel < CAMPAIGN_DC_COUNT") == 1 )
     {
       __debugbreak();
     }
@@ -54,8 +56,7 @@ class CGameState * __cdecl CStateBriefing::DynamicCreateFunc(void * a1) {
   }
   else if ( *((_DWORD *)this + 1) )
   {
-    if ( *((int *)this + 2) >= 3
-      && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 216, "m_iLevel < CAMPAIGN_3C_COUNT") == 1 )
+    if ( *((int *)this + 2) >= 3 && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 216, "m_iLevel < CAMPAIGN_3C_COUNT") == 1 )
     {
       __debugbreak();
     }
@@ -80,21 +81,23 @@ class CGameState * __cdecl CStateBriefing::DynamicCreateFunc(void * a1) {
   CGuiGameState::SetupGui(this, L"Menu\\GUISetStartscreens.dat", 10, GuiDlgMainBriefingProc);
   IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
   if ( !*((_DWORD *)this + 1) )
+  {
     return this;
+  }
   if ( CGameSettings::GetLanguage() == 1 )
+  {
     v8 = (const wchar_t *)&unk_373C58C;
+  }
   else
+  {
     v8 = L"EN";
+  }
   v7 = *((_DWORD *)this + 2) + 1;
   v2 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)((char *)&stru_402CAA0 + 28 * *((_DWORD *)this + 1) - 28));
   snwprintf(Buffer, 0xFFu, v2, v8, v7);
   std::wstring::wstring(v10);
   LOBYTE(v12) = 1;
-  if ( (*(unsigned __int8 (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)g_pCDDrive + 8))(
-         g_pCDDrive,
-         v10,
-         Buffer,
-         3145732) )
+  if ( (*(unsigned __int8 (__thiscall **)(void *, char *, char *, int))(*(_DWORD *)g_pCDDrive + 8))(g_pCDDrive, v10, Buffer, 3145732) )
   {
     v4 = (const wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v10);
     if ( !CSoundManager::PlaySoundFile((CSoundManager *)g_pSoundManager, v4, 100, 64) )
@@ -123,8 +126,7 @@ class CGameState * __cdecl CStateBriefing::DynamicCreateFunc(void * a1) {
  CStateBriefing::~CStateBriefing(void) {
   
   *(_DWORD *)this = &CStateBriefing::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 10)
-    && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 281, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 10) && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 281, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -154,7 +156,9 @@ bool  CStateBriefing::Perform(void) {
   }
   v1 = dword_402CBB0 + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_402CBB0 = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -228,7 +232,9 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
   {
     case 0:
       if ( (unsigned __int16)a2->m_wParam != 27 )
+      {
         goto CStateBriefing__OnEvent___def_18A23F6;
+      }
       v20 = CEvn_Event::CEvn_Event(&v52, 0x70u, 0, 0, 0);
       v55 = 0;
       IEventEngine::SendAMessage(g_pEvnEngine, v20);
@@ -249,9 +255,13 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
           g_pGameType = 0;
         }
         if ( *((_DWORD *)v48 + 1) == 4 )
+        {
           CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateCampaignDark::DynamicCreateFunc, 0);
+        }
         else
+        {
           CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateCampaign3X3::DynamicCreateFunc, 0);
+        }
         result = 1;
       }
       else
@@ -265,16 +275,18 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
         C = operator new(0x18u);
         v55 = 1;
         if ( C )
+        {
           v39 = INetworkEngine::INetworkEngine((INetworkEngine *)C, 0);
+        }
         else
+        {
           v39 = 0;
+        }
         v31 = v39;
         v55 = -1;
         g_pNetworkEngine = v39;
         INetworkEngine::Start(1, 0, 0, 0);
-        CGameStateHandler::Switch(
-          (struct CGameState *(__cdecl *)(void *))CStateLobbyGameSettings::DynamicCreateFunc,
-          (void *)1);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLobbyGameSettings::DynamicCreateFunc, (void *)1);
         CLanLobby::Communicate(1051, 0);
         result = 1;
       }
@@ -291,9 +303,13 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
           v37 = operator new(0x620u);
           v55 = 2;
           if ( v37 )
+          {
             v36 = CGameType::CGameType((CGameType *)v37);
+          }
           else
+          {
             v36 = 0;
+          }
           v28 = v36;
           v55 = -1;
           g_pGameType = v36;
@@ -333,9 +349,13 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
             v34 = operator new(0x18u);
             LOBYTE(v55) = 4;
             if ( v34 )
+            {
               v33 = INetworkEngine::INetworkEngine((INetworkEngine *)v34, 0);
+            }
             else
+            {
               v33 = 0;
+            }
             v24 = v33;
             LOBYTE(v55) = 3;
             g_pNetworkEngine = v33;
@@ -352,8 +372,12 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
             g_pGameType->m_iCampaignType = *((_DWORD *)v48 + 1);
             g_pGameType->m_iMissionId = *((_DWORD *)v48 + 2);
             g_pGameType->m_iGameType = 3;
-            for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
+            for ( i = 0;
+                  i < g_pGameType->m_iMapMaxNumPlayers;
+                  ++i )
+            {
               g_pGameType->m_sPlayerExclusiveColor[i] = 0;
+            }
             INetworkEngine::Start(1, 1, g_pGameType->m_iMapMaxNumPlayers, 0);
             CGameStateHandler::Switch(CStateGame::DynamicCreateFunc, 0);
             v45 = 1;
@@ -368,7 +392,9 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
             v49 = IGuiEngine::CloseDialog(g_pGUIEngine, 10);
             v49 = IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
             if ( !v49 && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 405, "bRet") == 1 )
+            {
               __debugbreak();
+            }
             BBSupportTracePrintF(3, "Campaign map '%s' not found!", Buffer);
             IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
             if ( g_pGameType )
@@ -386,9 +412,7 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
         }
         else
         {
-          CGameStateHandler::Switch(
-            (struct CGameState *(__cdecl *)(void *))CStateMessageBox::DynamicCreateFunc,
-            (void *)0x95E);
+          CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMessageBox::DynamicCreateFunc, (void *)0x95E);
           result = 1;
         }
       }
@@ -400,11 +424,7 @@ bool  CStateBriefing::OnEvent(class CEvn_Event & a2) {
       break;
     case 103:
       v42 = IGuiEngine::CloseDialog(g_pGUIEngine, 20);
-      CGuiGameState::SetupGui(
-        v48,
-        L"Menu\\GUISetStartscreens.dat",
-        10,
-        (bool (__cdecl *)(int, int, int))GuiDlgMainBriefingProc);
+      CGuiGameState::SetupGui(v48, L"Menu\\GUISetStartscreens.dat", 10, (bool (__cdecl *)(int, int, int))GuiDlgMainBriefingProc);
       result = 1;
       break;
     case 109:
@@ -442,15 +462,16 @@ void __cdecl CStateBriefing::InitBriefingTexts(int a1, int a2) {
   char *v17; // eax
   char *v18; // eax
 
-  if ( (!a1 || a1 >= 25)
-    && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 568, "iCampaignType && iCampaignType < CAMPAIGN_MAX") == 1 )
+  if ( (!a1 || a1 >= 25) && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 568, "iCampaignType && iCampaignType < CAMPAIGN_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( a1 == 4 )
   {
     if ( a2 >= 12 && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 571, "iLevel < CAMPAIGN_DC_COUNT") == 1 )
+    {
       __debugbreak();
+    }
   }
   else if ( a2 >= 3 && BBSupportDbgReport(2, "main\\states\\StateBriefing.cpp", 575, "iLevel < CAMPAIGN_3C_COUNT") == 1 )
   {
@@ -501,13 +522,11 @@ void __cdecl CStateBriefing::InitBriefingTexts(int a1, int a2) {
       result = std::string::operator=(&stru_402C97C, v18);
       break;
     default:
-      result = (void *)BBSupportDbgReportF(
-                         2,
-                         "main\\states\\StateBriefing.cpp",
-                         615,
-                         "Invalid Race during CStateBriefing::InitBriefingTexts init!");
+      result = (void *)BBSupportDbgReportF(2, "main\\states\\StateBriefing.cpp", 615, "Invalid Race during CStateBriefing::InitBriefingTexts init!");
       if ( result == (void *)1 )
+      {
         __debugbreak();
+      }
       break;
   }
   return result;
@@ -525,20 +544,21 @@ void  CStateBriefing::PaintMap(bool a2) {
 
   result = a2;
   if ( !a2 )
+  {
     return IGuiEngine::EraseOwnerImage((IGuiEngine *)g_pGUIEngine, 10, 2075);
+  }
   if ( !g_pGameType || !*(_DWORD *)(g_pGameType + 1016) )
+  {
     return result;
+  }
   v4 = 0;
   v3 = 0;
   result = IGuiEngine::LockOwnerImage((IGuiEngine *)g_pGUIEngine, 10, 2075, (struct SGuiRect *)v5, &v4, &v3);
   if ( !v4 )
+  {
     return result;
-  CStateLobbyGameSettings::DrawMap(
-    *(unsigned __int16 **)(g_pGameType + 1016),
-    v4,
-    v3,
-    *(_DWORD *)(g_pGameType + 1020),
-    *(_DWORD *)(g_pGameType + 1024));
+  }
+  CStateLobbyGameSettings::DrawMap(*(unsigned __int16 **)(g_pGameType + 1016), v4, v3, *(_DWORD *)(g_pGameType + 1020), *(_DWORD *)(g_pGameType + 1024));
   return IGuiEngine::UnlockOwnerImage((IGuiEngine *)g_pGUIEngine, 10, 2075);
 }
 

@@ -3,7 +3,7 @@
 // Definitions for class CEcoManager
 
 // address=[0x133af00]
-// Decompiled from CEcoManager *__thiscall CEcoManager::CEcoManager(  CEcoManager *this,  int a2,  struct IAISectorAI *a3,  struct IAIEventQueue *a4)
+// Decompiled from CEcoManager *__thiscall CEcoManager::CEcoManager(CEcoManager *this, int a2, struct IAISectorAI *a3, struct IAIEventQueue *a4)
  CEcoManager::CEcoManager(int a2, class IAISectorAI * a3, class IAIEventQueue * a4) {
   
   int v4; // eax
@@ -17,7 +17,9 @@
   EnableDebugFlag(dword_3ECD4F0);
   memset((char *)this + 4, 0, 0x3FE54u);
   if ( CEcoManager::AddRef() )
+  {
     CAIEcoSpecialBuildingInfos::TheObject();
+  }
   *((_DWORD *)this + 1) = a2;
   v4 = CEcoSectorMgr::operator[](a2);
   *((_DWORD *)this + 2) = CEcoSector::Owner(v4);
@@ -35,13 +37,19 @@
   int i; // [esp+14h] [ebp-10h]
 
   *(_DWORD *)this = &CEcoManager::_vftable_;
-  for ( i = 0; i < 83; ++i )
+  for ( i = 0;
+        i < 83;
+        ++i )
+  {
     CEcoManager::Discard(this, i);
+  }
   if ( !CEcoManager::Release() )
   {
     v2 = (CAIEcoSpecialBuildingInfos *)CAIEcoSpecialBuildingInfos::TheObject();
     if ( v2 )
+    {
       delete v2;
+    }
   }
   CEcoManager::CEMD::~CEMD((CEcoManager *)((char *)this + 4));
   return IAIEcoManager::~IAIEcoManager(this);
@@ -70,8 +78,7 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::Invoke(enum BUILDING_TYPES a2) {
   
   int Tree; // [esp+0h] [ebp-8h]
 
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 238, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 238, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
@@ -86,9 +93,13 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::Invoke(enum BUILDING_TYPES a2) {
     *(_DWORD *)&this[4 * a2 + 259724] = 0;
   }
   if ( this[a2 + 348] )
+  {
     Tree = CEcoManager::CreateTree(this, a2, &this[4 * a2 + 16]);
+  }
   if ( Tree == 2 )
+  {
     return 2;
+  }
   if ( Tree == 1 || !CEcoManagerTree::GetNrValidOfAllBaseLeafes(*(_DWORD *)&this[4 * a2 + 16], 64) )
   {
     (*(void (__thiscall **)(_BYTE *, unsigned int))(*(_DWORD *)this + 16))(this, a2);
@@ -115,13 +126,14 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::Invoke(enum BUILDING_TYPES iBuildingType,
   int i; // [esp+3Ch] [ebp-14h]
   int v13; // [esp+4Ch] [ebp-4h]
 
-  if ( !CheckBuildingType(iBuildingType)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 295, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(iBuildingType) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 295, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
   if ( !CheckVW() && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 296, "CheckVW(_iV, _iW)") == 1 )
+  {
     __debugbreak();
+  }
   SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE((SAI_ECO_POSS_BUILD_PLACE *)v5);
   v13 = 0;
   if ( Squares::ValidVW(a3, a4) )
@@ -138,21 +150,20 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::Invoke(enum BUILDING_TYPES iBuildingType,
     }
     if ( *((_BYTE *)this + iBuildingType + 348) )
     {
-      for ( i = a4 - 1; i <= (int)(a4 + 1); ++i )
+      for ( i = a4 - 1;
+            i <= (int)(a4 + 1);
+            ++i )
       {
-        for ( j = (int)a3 - 1; j <= (int)a3 + 1; ++j )
+        for ( j = (int)a3 - 1;
+              j <= (int)a3 + 1;
+              ++j )
         {
           if ( !(unsigned __int8)CEcoManager::IsChecked(this, iBuildingType, j, i) )
           {
             TileOfSquareVW = ITiling::FirstTileOfSquareVW(j, i);
             if ( CEcoManager::IsMyTile(this, TileOfSquareVW) )
             {
-              if ( (unsigned __int8)CEcoManager::WorkOnTile(
-                                      this,
-                                      iBuildingType,
-                                      j,
-                                      i,
-                                      *((_DWORD *)this + iBuildingType + 4)) )
+              if ( (unsigned __int8)CEcoManager::WorkOnTile(this, iBuildingType, j, i, *((_DWORD *)this + iBuildingType + 4)) )
               {
                 v5[0] = j + ((_WORD)i << 8);
                 std::vector<SAI_ECO_POSS_BUILD_PLACE>::push_back((int)v5);
@@ -182,8 +193,7 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::Invoke(enum BUILDING_TYPES iBuildingType,
 // Decompiled from char __thiscall CEcoManager::Discard(_BYTE *this, unsigned int a2)
 bool  CEcoManager::Discard(enum BUILDING_TYPES a2) {
   
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 360, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 360, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
@@ -201,7 +211,9 @@ bool  CEcoManager::Discard(enum BUILDING_TYPES a2) {
   *(_DWORD *)&this[4 * a2 + 261384] = 0;
   std::vector<SAI_ECO_POSS_BUILD_PLACE>::clear();
   if ( !*(_DWORD *)&this[4 * a2 + 16] )
+  {
     return 0;
+  }
   delete *(CEcoManagerTree **)&this[4 * a2 + 16];
   *(_DWORD *)&this[4 * a2 + 16] = 0;
   return 1;
@@ -212,13 +224,14 @@ bool  CEcoManager::Discard(enum BUILDING_TYPES a2) {
 // Decompiled from bool __thiscall CEcoManager::DiscardPosition(_DWORD *this, unsigned int a2, struct SBUILDINFODATA *a3)
 bool  CEcoManager::DiscardPosition(enum BUILDING_TYPES a2, struct SBUILDINFODATA * a3) {
   
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 400, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 400, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
   if ( !a3 && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 401, "_paBuildInfoData != 0") == 1 )
+  {
     __debugbreak();
+  }
   return !this[a2 + 4] || CEcoManagerTree::RemoveLeaf((CEcoManagerTree *)this[a2 + 4], a3);
 }
 
@@ -239,18 +252,23 @@ int  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTION a2, enum BUILDI
   int j; // [esp+20h] [ebp-8h]
   int i; // [esp+24h] [ebp-4h]
 
-  if ( !CheckBuildingType(a3)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 426, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(a3) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 426, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
   if ( !a3 )
+  {
     return 0;
+  }
   v12 = (CEcoManagerTree *)this[a3 + 4];
   if ( !v12 )
+  {
     return 0;
+  }
   NrBaseLeaves = CEcoManagerTree::GetNrBaseLeaves(v12, 0);
-  for ( i = 0; i < NrBaseLeaves; ++i )
+  for ( i = 0;
+        i < NrBaseLeaves;
+        ++i )
   {
     BaseLeaf = CEcoManagerTree::GetBaseLeaf(v12, i);
     if ( a2 == 64 )
@@ -260,7 +278,9 @@ int  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTION a2, enum BUILDI
     }
     else
     {
-      for ( j = 0; j < CEcoManagerLeaf::GetNrChilds(BaseLeaf); ++j )
+      for ( j = 0;
+            j < CEcoManagerLeaf::GetNrChilds(BaseLeaf);
+            ++j )
       {
         Child = CEcoManagerLeaf::GetChild(BaseLeaf, j);
         if ( Child )
@@ -272,7 +292,9 @@ int  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTION a2, enum BUILDI
           }
           else
           {
-            for ( k = 0; k < CEcoManagerLeaf::GetNrChilds(Child); ++k )
+            for ( k = 0;
+                  k < CEcoManagerLeaf::GetNrChilds(Child);
+                  ++k )
             {
               v10 = CEcoManagerLeaf::GetChild(Child, k);
               if ( v10 )
@@ -303,27 +325,33 @@ int  CEcoManager::GetBuildPlace(enum BUILDING_TYPES a2, struct SBUILDINFODATA * 
   int i; // [esp+1Ch] [ebp-8h]
   int j; // [esp+20h] [ebp-4h]
 
-  if ( !(unsigned __int8)CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 501, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !(unsigned __int8)CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 501, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
-  if ( a5 >= 0x400
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 502, "static_cast<unsigned int>(_iDistance) < 1024") == 1 )
+  if ( a5 >= 0x400 && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 502, "static_cast<unsigned int>(_iDistance) < 1024") == 1 )
   {
     __debugbreak();
   }
   if ( !a3 || !a2 )
+  {
     return 0;
+  }
   v9 = *(_DWORD *)&this[4 * a2 + 16];
   if ( !v9 )
+  {
     return 0;
+  }
   v10 = *a3;
   v11 = a3[1];
   v7 = a3[2];
-  for ( i = -a5; i < (int)(a5 + 1); ++i )
+  for ( i = -a5;
+        i < (int)(a5 + 1);
+        ++i )
   {
-    for ( j = -a5; j < (int)(a5 + 1); ++j )
+    for ( j = -a5;
+          j < (int)(a5 + 1);
+          ++j )
     {
       if ( (i || j || !v7) && i + v10 >= 0 && i + v10 <= this[261716] && j + v11 >= 0 && j + v11 <= this[261717] )
       {
@@ -364,8 +392,7 @@ struct SBUILDINFODATA  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTI
 
   v17 = this;
   v18 = 0;
-  if ( !CheckBuildingType(a4)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 569, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(a4) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 569, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
@@ -386,9 +413,7 @@ struct SBUILDINFODATA  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTI
   if ( (a5 != -1 || v21 || v20) && (v9 = v17[a4 + 4]) != 0 )
   {
     v10 = v20 + v21 + v19;
-    if ( (!v19 || (*(unsigned __int8 (__thiscall **)(_DWORD *, int, int *, int *))(*v17 + 52))(v17, a5, &v12, &v11))
-      && (!v21 || (*(unsigned __int8 (__thiscall **)(_DWORD *, int, int *, int *))(*v17 + 52))(v17, a6, &v16, &v14))
-      && (!v20 || (*(unsigned __int8 (__thiscall **)(_DWORD *, int, int *, int *))(*v17 + 52))(v17, a7, &v15, &v13)) )
+    if ( (!v19 || (*(unsigned __int8 (__thiscall **)(_DWORD *, int, int *, int *))(*v17 + 52))(v17, a5, &v12, &v11)) && (!v21 || (*(unsigned __int8 (__thiscall **)(_DWORD *, int, int *, int *))(*v17 + 52))(v17, a6, &v16, &v14)) && (!v20 || (*(unsigned __int8 (__thiscall **)(_DWORD *, int, int *, int *))(*v17 + 52))(v17, a7, &v15, &v13)) )
     {
       v12 >>= 4;
       v11 >>= 4;
@@ -396,12 +421,7 @@ struct SBUILDINFODATA  CEcoManager::GetBuildPlace(enum IECONOMANAGERGRIDRESOLUTI
       v14 >>= 4;
       v15 >>= 4;
       v13 >>= 4;
-      v8 = (_Cnd_internal_imp_t *)CEcoManagerTree::FindNearLeaf(
-                                    v9,
-                                    16,
-                                    (v15 + v16 + v12) / v10,
-                                    (v13 + v14 + v11) / v10,
-                                    1);
+      v8 = (_Cnd_internal_imp_t *)CEcoManagerTree::FindNearLeaf(v9, 16, (v15 + v16 + v12) / v10, (v13 + v14 + v11) / v10, 1);
       if ( v8 )
       {
         v22[3] = 16;
@@ -440,18 +460,18 @@ bool  CEcoManager::IsInside(enum BUILDING_TYPES a2, int a3, int a4) {
   
   int v5; // eax
 
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 672, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 672, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)_should_initialize_environment_1(a3, a4)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 673, "CheckXY(_iWorldX, _iWorldY)") == 1 )
+  if ( !(unsigned __int8)_should_initialize_environment_1(a3, a4) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 673, "CheckXY(_iWorldX, _iWorldY)") == 1 )
   {
     __debugbreak();
   }
   if ( !(unsigned __int8)CWorldManager::InWorld(a3, a4) )
+  {
     return 0;
+  }
   v5 = (*(int (__thiscall **)(void *))(*(_DWORD *)this + 128))(this);
   return CBuildingMgr::CheckForBuild((CBuildingMgr *)g_cBuildingMgr, a3, a4, v5, a2, 0) > 0;
 }
@@ -471,23 +491,19 @@ bool  CEcoManager::AreBuildingsOverlapped(enum BUILDING_TYPES a2, int a3, enum B
   char *v14; // [esp+38h] [ebp-8h]
   char *BoundingBoxInfo; // [esp+3Ch] [ebp-4h]
 
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 694, "CheckBuildingType(_iBuildingType1)") == 1 )
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 694, "CheckBuildingType(_iBuildingType1)") == 1 )
   {
     __debugbreak();
   }
-  if ( !CheckBuildingType(a4)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 695, "CheckBuildingType(_iBuildingType2)") == 1 )
+  if ( !CheckBuildingType(a4) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 695, "CheckBuildingType(_iBuildingType2)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)_should_initialize_environment_2(a3)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 696, "CheckPackedXY(_iPackedxy1)") == 1 )
+  if ( !(unsigned __int8)_should_initialize_environment_2(a3) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 696, "CheckPackedXY(_iPackedxy1)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)_should_initialize_environment_2(a5)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 697, "CheckPackedXY(_iPackedxy2)") == 1 )
+  if ( !(unsigned __int8)_should_initialize_environment_2(a5) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 697, "CheckPackedXY(_iPackedxy2)") == 1 )
   {
     __debugbreak();
   }
@@ -501,9 +517,13 @@ bool  CEcoManager::AreBuildingsOverlapped(enum BUILDING_TYPES a2, int a3, enum B
   v11 = Y16X16::UnpackXFast(a5);
   v10 = Y16X16::UnpackYFast(a5);
   if ( (int)Grid::Distance(v13, v12, v11, v10) < 5 )
+  {
     return 1;
+  }
   if ( (int)v13 + *BoundingBoxInfo > v11 + v14[1] || (int)v13 + BoundingBoxInfo[1] < v11 + *v14 )
+  {
     return 0;
+  }
   return v12 + BoundingBoxInfo[2] <= v10 + v14[3] && v12 + BoundingBoxInfo[3] >= v10 + v14[2];
 }
 
@@ -520,29 +540,24 @@ int  CEcoManager::CheckBuildingOverlappingWithinGrid(enum BUILDING_TYPES a2, int
   unsigned __int8 *BuildingPtr; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 757, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 757, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)_should_initialize_environment_2(a3)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 758, "CheckPackedXY(_iPackedXY)") == 1 )
+  if ( !(unsigned __int8)_should_initialize_environment_2(a3) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 758, "CheckPackedXY(_iPackedXY)") == 1 )
   {
     __debugbreak();
   }
   v7 = Y16X16::UnpackXFast(a3) >> 4;
   v8 = Y16X16::UnpackYFast(a3) >> 4;
-  for ( i = CWarMap::FirstEntityIdVW(2, v7, v8); i; i = CWarMapNode::Next(v5) )
+  for ( i = CWarMap::FirstEntityIdVW(2, v7, v8);
+        i;
+        i = CWarMapNode::Next(v5) )
   {
     BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, i);
     v6 = CBuilding::EnsignPackedXY(BuildingPtr);
     v3 = IEntity::Type((unsigned __int16 *)BuildingPtr);
-    if ( (*(unsigned __int8 (__thiscall **)(void *, unsigned int, int, int, int))(*(_DWORD *)this + 40))(
-           this,
-           a2,
-           a3,
-           v3,
-           v6) )
+    if ( (*(unsigned __int8 (__thiscall **)(void *, unsigned int, int, int, int))(*(_DWORD *)this + 40))(this, a2, a3, v3, v6) )
     {
       return i;
     }
@@ -556,8 +571,7 @@ int  CEcoManager::CheckBuildingOverlappingWithinGrid(enum BUILDING_TYPES a2, int
 // Decompiled from int __thiscall CEcoManager::GetBuildingIndex(CEcoManager *this, int a2, int a3)
 int  CEcoManager::GetBuildingIndex(int a2, int a3) {
   
-  if ( !(unsigned __int8)_should_initialize_environment_1(a2, a3)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 793, "CheckXY(_iWorldX, _iWorldY)") == 1 )
+  if ( !(unsigned __int8)_should_initialize_environment_1(a2, a3) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 793, "CheckXY(_iWorldX, _iWorldY)") == 1 )
   {
     __debugbreak();
   }
@@ -574,12 +588,7 @@ bool  CEcoManager::GetBuildingPosition(int a2, int & a3, int & a4) {
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
   if ( BuildingPtr && !IEntity::FlagBits(BuildingPtr, (EntityFlag)&MEMORY[0x4000000]) )
   {
-    if ( CBuilding::EcoSectorId(BuildingPtr) != *((_DWORD *)this + 1)
-      && BBSupportDbgReport(
-           2,
-           "AI\\EcoManager\\CEcoManager.cpp",
-           824,
-           "pBuilding->EcoSectorId() == m_Vars.iUsedEcoSector") == 1 )
+    if ( CBuilding::EcoSectorId(BuildingPtr) != *((_DWORD *)this + 1) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 824, "pBuilding->EcoSectorId() == m_Vars.iUsedEcoSector") == 1 )
     {
       __debugbreak();
     }
@@ -589,11 +598,7 @@ bool  CEcoManager::GetBuildingPosition(int a2, int & a3, int & a4) {
   }
   else
   {
-    BBSupportTracePrintF(
-      3,
-      "### CEcoManager::GetBuildingPosition(): eco-sector %i, building id %i failed! ###",
-      *((_DWORD *)this + 1),
-      a2);
+    BBSupportTracePrintF(3, "### CEcoManager::GetBuildingPosition(): eco-sector %i, building id %i failed! ###", *((_DWORD *)this + 1), a2);
     *a3 = 0;
     *a4 = 0;
     return 0;
@@ -609,27 +614,33 @@ int  CEcoManager::GetPileAmount(int a2, enum PILE_TYPES a3) {
   unsigned __int8 *BuildingPtr; // [esp+4h] [ebp-Ch]
   struct CPile *PilePtr; // [esp+Ch] [ebp-4h]
 
-  if ( !(*(unsigned __int8 (__thiscall **)(void *, int))(*(_DWORD *)this + 304))(this, a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 838, "CheckBuildingId(_iBuildingID)") == 1 )
+  if ( !(*(unsigned __int8 (__thiscall **)(void *, int))(*(_DWORD *)this + 304))(this, a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 838, "CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)sub_13406F0(a3)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 839, "CheckGoodType(_iPileType)") == 1 )
+  if ( !(unsigned __int8)sub_13406F0(a3) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 839, "CheckGoodType(_iPileType)") == 1 )
   {
     __debugbreak();
   }
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
   if ( !BuildingPtr )
+  {
     return 0;
+  }
   PileIdWithGood = CBuilding::GetPileIdWithGood((CBuilding *)BuildingPtr, a3);
   if ( !PileIdWithGood )
+  {
     return 0;
+  }
   PilePtr = CPileMgr::GetPilePtr(PileIdWithGood);
   if ( PilePtr )
+  {
     return (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -644,8 +655,7 @@ int  CEcoManager::GetCountOfGoodsForBuilding(enum BUILDING_TYPES a2, enum IECONE
   int v8; // [esp-8h] [ebp-Ch]
   int v9; // [esp-8h] [ebp-Ch]
 
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 870, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 870, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
@@ -684,15 +694,16 @@ int  CEcoManager::GetCountOfPendingGoodsForBuilding(int a2, enum IECONEEDEDRESOU
   int v4; // [esp+8h] [ebp-8h]
   unsigned __int8 *BuildingPtr; // [esp+Ch] [ebp-4h]
 
-  if ( !(*(unsigned __int8 (__thiscall **)(void *, int))(*(_DWORD *)this + 304))(this, a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 890, "CheckBuildingId(_iBuildingID)") == 1 )
+  if ( !(*(unsigned __int8 (__thiscall **)(void *, int))(*(_DWORD *)this + 304))(this, a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 890, "CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
   v4 = 0;
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
   if ( !BuildingPtr )
+  {
     return 0;
+  }
   switch ( a3 )
   {
     case 0:
@@ -713,14 +724,15 @@ int  CEcoManager::BuildingProgress(int a2) {
   CBuildingSiteRole *v3; // [esp+0h] [ebp-Ch]
   _DWORD *v4; // [esp+4h] [ebp-8h]
 
-  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, int))(*(_DWORD *)this + 304))(this, a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 931, "CheckBuildingId(_iBuildingID)") == 1 )
+  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, int))(*(_DWORD *)this + 304))(this, a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 931, "CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
   v4 = (_DWORD *)CBuildingMgr::operator[](a2);
   if ( (unsigned __int8)CBuilding::IsBuildUp(v4) )
+  {
     return 100;
+  }
   v3 = (CBuildingSiteRole *)CBuilding::Role(v4);
   return CBuildingSiteRole::BuildingProgress(v3);
 }
@@ -732,8 +744,7 @@ bool  CEcoManager::IsActive(int a2) {
   
   _DWORD *v4; // [esp+4h] [ebp-8h]
 
-  if ( !(*(unsigned __int8 (__thiscall **)(void *, int))(*(_DWORD *)this + 304))(this, a2)
-    && BBSupportDbgReport(2, (int)"AI\\EcoManager\\CEcoManager.cpp", 949, (int)"CheckBuildingId(_iBuildingID)") == 1 )
+  if ( !(*(unsigned __int8 (__thiscall **)(void *, int))(*(_DWORD *)this + 304))(this, a2) && BBSupportDbgReport(2, (int)"AI\\EcoManager\\CEcoManager.cpp", 949, (int)"CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
@@ -748,8 +759,7 @@ bool  CEcoManager::IsBuildingPlaceActive(int a2) {
   
   _DWORD *v3; // [esp+0h] [ebp-Ch]
 
-  if ( !(*(unsigned __int8 (__thiscall **)(void *, int))(*(_DWORD *)this + 304))(this, a2)
-    && BBSupportDbgReport(2, (int)"AI\\EcoManager\\CEcoManager.cpp", 963, (int)"CheckBuildingId(_iBuildingID)") == 1 )
+  if ( !(*(unsigned __int8 (__thiscall **)(void *, int))(*(_DWORD *)this + 304))(this, a2) && BBSupportDbgReport(2, (int)"AI\\EcoManager\\CEcoManager.cpp", 963, (int)"CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
@@ -764,8 +774,7 @@ enum BUILDING_TYPES  CEcoManager::GetBuildingType(int a2) {
   
   unsigned __int16 *v3; // [esp+0h] [ebp-8h]
 
-  if ( !(*(unsigned __int8 (__thiscall **)(void *, int))(*(_DWORD *)this + 304))(this, a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 977, "CheckBuildingId(_iBuildingID)") == 1 )
+  if ( !(*(unsigned __int8 (__thiscall **)(void *, int))(*(_DWORD *)this + 304))(this, a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 977, "CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
@@ -778,8 +787,7 @@ enum BUILDING_TYPES  CEcoManager::GetBuildingType(int a2) {
 // Decompiled from int __thiscall CEcoManager::HaveInhabitant(CEcoManager *this, int a2)
 bool  CEcoManager::HaveInhabitant(int a2) {
   
-  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, int))(*(_DWORD *)this + 304))(this, a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 990, "CheckBuildingId(_iBuildingID)") == 1 )
+  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, int))(*(_DWORD *)this + 304))(this, a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 990, "CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
@@ -807,15 +815,16 @@ int  CEcoManager::GetRemainingNrOfSettlersComingOutOfResidence(int a2) {
   unsigned __int16 *v4; // [esp+4h] [ebp-Ch]
   int v5; // [esp+Ch] [ebp-4h]
 
-  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, int))(*(_DWORD *)this + 304))(this, a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1014, "CheckBuildingId(_iBuildingId)") == 1 )
+  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, int))(*(_DWORD *)this + 304))(this, a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1014, "CheckBuildingId(_iBuildingId)") == 1 )
   {
     __debugbreak();
   }
   v4 = (unsigned __int16 *)CBuildingMgr::operator[](a2);
   v5 = IEntity::Type(v4);
   if ( v5 != 40 && v5 != 41 && v5 != 42 )
+  {
     return 0;
+  }
   v3 = (CResidenceBuildingRole *)CBuilding::Role(v4);
   return CResidenceBuildingRole::ReturnRemainingSettlers(v3);
 }
@@ -829,12 +838,10 @@ int  CEcoManager::GetBuildingEcoSectorID(int a2) {
 
   BuildingPtr = (_DWORD *)CBuildingMgr::GetBuildingPtr(a2);
   if ( BuildingPtr && !IEntity::FlagBits(BuildingPtr, 0x4000000) )
+  {
     return CBuilding::EcoSectorId(BuildingPtr);
-  BBSupportTracePrintF(
-    3,
-    "### CEcoManager::GetBuildingEcoSectorID(): eco-sector %i, building id %i failed! ###",
-    this[1],
-    a2);
+  }
+  BBSupportTracePrintF(3, "### CEcoManager::GetBuildingEcoSectorID(): eco-sector %i, building id %i failed! ###", this[1], a2);
   return 0;
 }
 
@@ -851,21 +858,12 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::ConstructBuilding(enum BUILDING_TYPES a2,
   unsigned __int16 v11; // [esp+38h] [ebp-8h]
   int v12; // [esp+3Ch] [ebp-4h]
 
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "CEcoManager::ConstructBuilding(): player %i, eco-sector %i, building type %i, position (%i, %i)",
-    this[2],
-    this[1],
-    a2,
-    a3,
-    a4);
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1062, "CheckBuildingType(_iBuildingType)") == 1 )
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CEcoManager::ConstructBuilding(): player %i, eco-sector %i, building type %i, position (%i, %i)", this[2], this[1], a2, a3, a4);
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1062, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)_should_initialize_environment_1(a3, a4)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1063, "CheckXY(_iWorldX, _iWorldY)") == 1 )
+  if ( !(unsigned __int8)_should_initialize_environment_1(a3, a4) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1063, "CheckXY(_iWorldX, _iWorldY)") == 1 )
   {
     __debugbreak();
   }
@@ -890,14 +888,8 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::DestroyBuilding(int a2) {
   ushort v7; // [esp+34h] [ebp-8h]
   int v8; // [esp+38h] [ebp-4h]
 
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "CEcoManager::DestroyBuilding(): player %i, eco-sector %i, building id %i",
-    this[2],
-    this[1],
-    a2);
-  if ( !(*(unsigned __int8 (__thiscall **)(int *, DWORD))(*this + 304))(this, a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1080, "CheckBuildingId(_iBuildingID)") == 1 )
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CEcoManager::DestroyBuilding(): player %i, eco-sector %i, building id %i", this[2], this[1], a2);
+  if ( !(*(unsigned __int8 (__thiscall **)(int *, DWORD))(*this + 304))(this, a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1080, "CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
@@ -921,8 +913,7 @@ int  CEcoManager::GetContentOfWorkingArea(int a2) {
   void *v6; // [esp+0h] [ebp-Ch]
   int WorkingAreaPackedXY; // [esp+4h] [ebp-8h]
 
-  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, int))(*(_DWORD *)this + 304))(this, a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1099, "CheckBuildingId(_iBuildingID)") == 1 )
+  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, int))(*(_DWORD *)this + 304))(this, a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1099, "CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
@@ -944,26 +935,19 @@ bool  CEcoManager::ChangeWorkingAreaTo(int a2, int a3, int a4) {
   _BYTE v8[32]; // [esp+10h] [ebp-30h] BYREF
   int v9; // [esp+3Ch] [ebp-4h]
 
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "CEcoManager::ChangeWorkingAreaTo(): player %i, eco-sector %i, building id %i, position (%i, %i)",
-    *((_DWORD *)this + 2),
-    *((_DWORD *)this + 1),
-    a2,
-    a3,
-    a4);
-  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, unsigned int))(*(_DWORD *)this + 304))(this, a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1116, "CheckBuildingId(_iBuildingID)") == 1 )
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CEcoManager::ChangeWorkingAreaTo(): player %i, eco-sector %i, building id %i, position (%i, %i)", *((_DWORD *)this + 2), *((_DWORD *)this + 1), a2, a3, a4);
+  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, unsigned int))(*(_DWORD *)this + 304))(this, a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1116, "CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)_should_initialize_environment_1(a3, a4)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1117, "CheckXY(_iWorldX, _iWorldY)") == 1 )
+  if ( !(unsigned __int8)_should_initialize_environment_1(a3, a4) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1117, "CheckXY(_iWorldX, _iWorldY)") == 1 )
   {
     __debugbreak();
   }
   if ( !(unsigned __int8)CWorldManager::InWorld(a3, a4) )
+  {
     return 0;
+  }
   v6 = Y16X16::PackXYFast(a3, a4);
   v5 = (*(int (__thiscall **)(CEcoManager *))(*(_DWORD *)this + 128))(this);
   CEvn_Logic::CEvn_Logic((CEvn_Logic *)v8, 0x1389u, a2, v6, v5, 0, 0);
@@ -982,8 +966,7 @@ bool  CEcoManager::GetPositionWorkingArea(int a2, int & a3, int & a4) {
   void *v5; // [esp+0h] [ebp-Ch]
   int WorkingAreaPackedXY; // [esp+4h] [ebp-8h]
 
-  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, int))(*(_DWORD *)this + 304))(this, a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1135, "CheckBuildingId(_iBuildingID)") == 1 )
+  if ( !(*(unsigned __int8 (__thiscall **)(CEcoManager *, int))(*(_DWORD *)this + 304))(this, a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1135, "CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
@@ -1014,19 +997,19 @@ int  CEcoManager::GetContentOfWorkingArea(enum BUILDING_TYPES a2, int a3, int a4
   int v15; // [esp+34h] [ebp-4h]
 
   v6 = this;
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1156, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1156, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)_should_initialize_environment_1(a3, a4)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1157, "CheckXY(_iWorldX, _iWorldY)") == 1 )
+  if ( !(unsigned __int8)_should_initialize_environment_1(a3, a4) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1157, "CheckXY(_iWorldX, _iWorldY)") == 1 )
   {
     __debugbreak();
   }
   v11 = (*(int (__thiscall **)(void *, unsigned int))(*(_DWORD *)v6 + 124))(v6, a2);
   if ( v11 > 7 )
+  {
     v11 = 7;
+  }
   v15 = 0;
   CSpiralWalk::CSpiralWalk((CSpiralWalk *)v5, a3, a4, v11);
   v12 = a2 - 11;
@@ -1036,9 +1019,7 @@ int  CEcoManager::GetContentOfWorkingArea(enum BUILDING_TYPES a2, int a3, int a4
       while ( CSpiralWalk::NextXY(v5, &v13, &v14) )
       {
         v10 = CWorldManager::Index(v13, v14);
-        if ( (CWorldManager::Ground(v10) & 0xF0) == 0x10
-          && (CWorldManager::Flags(v10) & 0xD) == 0
-          && (int)CSearchRoutines::CalcRawness(v10) <= 7 )
+        if ( (CWorldManager::Ground(v10) & 0xF0) == 0x10 && (CWorldManager::Flags(v10) & 0xD) == 0 && (int)CSearchRoutines::CalcRawness(v10) <= 7 )
         {
           ++v15;
         }
@@ -1048,9 +1029,7 @@ int  CEcoManager::GetContentOfWorkingArea(enum BUILDING_TYPES a2, int a3, int a4
       while ( CSpiralWalk::NextXY(v5, &v13, &v14) )
       {
         v9 = CWorldManager::Index(v13, v14);
-        if ( (CWorldManager::Ground(v9) & 0xF0) == 0x10
-          && (CWorldManager::Flags(v9) & 0xD) == 0
-          && (int)CSearchRoutines::CalcRawness(v9) > 7 )
+        if ( (CWorldManager::Ground(v9) & 0xF0) == 0x10 && (CWorldManager::Flags(v9) & 0xD) == 0 && (int)CSearchRoutines::CalcRawness(v9) > 7 )
         {
           ++v15;
         }
@@ -1060,9 +1039,7 @@ int  CEcoManager::GetContentOfWorkingArea(enum BUILDING_TYPES a2, int a3, int a4
       while ( CSpiralWalk::NextXY(v5, &v13, &v14) )
       {
         v8 = CWorldManager::Index(v13, v14);
-        if ( (CWorldManager::Ground(v8) & 0xF0) == 0x40
-          && (CWorldManager::Flags(v8) & 0xD) == 0
-          && (int)CSearchRoutines::CalcRawness(v8) <= 7 )
+        if ( (CWorldManager::Ground(v8) & 0xF0) == 0x40 && (CWorldManager::Flags(v8) & 0xD) == 0 && (int)CSearchRoutines::CalcRawness(v8) <= 7 )
         {
           ++v15;
         }
@@ -1072,9 +1049,7 @@ int  CEcoManager::GetContentOfWorkingArea(enum BUILDING_TYPES a2, int a3, int a4
       while ( CSpiralWalk::NextXY(v5, &v13, &v14) )
       {
         v7 = CWorldManager::Index(v13, v14);
-        if ( (CWorldManager::Ground(v7) & 0xF0) == 0x10
-          && (CWorldManager::Flags(v7) & 0xD) == 0
-          && (int)CSearchRoutines::CalcRawness(v7) > 7 )
+        if ( (CWorldManager::Ground(v7) & 0xF0) == 0x10 && (CWorldManager::Flags(v7) & 0xD) == 0 && (int)CSearchRoutines::CalcRawness(v7) > 7 )
         {
           ++v15;
         }
@@ -1093,8 +1068,7 @@ int  CEcoManager::GetWorkingAreaSize(enum BUILDING_TYPES a2) {
   
   int v2; // eax
 
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1265, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1265, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
@@ -1132,8 +1106,7 @@ int  CEcoManager::GetRangeOfTower(enum BUILDING_TYPES a2) {
   
   int v2; // eax
 
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1293, "CheckBuildingType(_iBuildingType2)") == 1 )
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1293, "CheckBuildingType(_iBuildingType2)") == 1 )
   {
     __debugbreak();
   }
@@ -1148,8 +1121,7 @@ int  CEcoManager::GetGoodAmount(enum PILE_TYPES a2) {
   
   CEcoSector *v2; // eax
 
-  if ( !(unsigned __int8)sub_13406F0(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1305, "CheckGoodType(_iGoodType)") == 1 )
+  if ( !(unsigned __int8)sub_13406F0(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1305, "CheckGoodType(_iGoodType)") == 1 )
   {
     __debugbreak();
   }
@@ -1175,8 +1147,7 @@ int  CEcoManager::GetSettlerAmount(enum SETTLER_TYPES a2) {
   
   CEcoSector *v2; // eax
 
-  if ( !(unsigned __int8)sub_1340720(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1323, "CheckSettlerType(_iSettlerType)") == 1 )
+  if ( !(unsigned __int8)sub_1340720(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1323, "CheckSettlerType(_iSettlerType)") == 1 )
   {
     __debugbreak();
   }
@@ -1194,8 +1165,7 @@ int  CEcoManager::GetBuildingAmount(enum BUILDING_TYPES a2) {
   int v5; // [esp+Ch] [ebp-Ch]
   int i; // [esp+10h] [ebp-8h]
 
-  if ( !CheckBuildingType(a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1333, "CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !CheckBuildingType(a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 1333, "CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
@@ -1207,7 +1177,9 @@ int  CEcoManager::GetBuildingAmount(enum BUILDING_TYPES a2) {
   {
     BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, i);
     if ( CEcoManager::GetBuildingEcoSectorID(this, (struct CBuilding *)BuildingPtr) == *((_DWORD *)this + 1) )
+    {
       ++v5;
+    }
   }
   return v5;
 }
@@ -1226,14 +1198,15 @@ int  CEcoManager::GetBuildingIDs(enum BUILDING_TYPES a2, class std::vector<int,c
   _DWORD *v10; // [esp+10h] [ebp-4h]
 
   v10 = this;
-  if ( !(unsigned __int8)CheckBuildingType(a2)
-    && BBSupportDbgReport(2, (int)"AI\\EcoManager\\CEcoManager.cpp", 1369, (int)"CheckBuildingType(_iBuildingType)") == 1 )
+  if ( !(unsigned __int8)CheckBuildingType(a2) && BBSupportDbgReport(2, (int)"AI\\EcoManager\\CEcoManager.cpp", 1369, (int)"CheckBuildingType(_iBuildingType)") == 1 )
   {
     __debugbreak();
   }
   v3 = (*(int (__thiscall **)(_DWORD *))(*v10 + 128))(v10);
   std::vector<int>::clear(v3, 0);
-  for ( i = CBuildingMgr::GetFirstBuildingId(v6, a2); i; i = IAnimatedEntity::Next(BuildingPtr) )
+  for ( i = CBuildingMgr::GetFirstBuildingId(v6, a2);
+        i;
+        i = IAnimatedEntity::Next(BuildingPtr) )
   {
     BuildingPtr = (_DWORD *)CBuildingMgr::GetBuildingPtr(i);
     if ( IEntity::FlagBits(BuildingPtr, 0x3000000) )
@@ -1261,9 +1234,13 @@ int  CEcoManager::GetResourceAmountAt(int a2, int a3, int a4) {
   CAIResourceData *v5; // eax
 
   if ( !Squares::ValidVW(a3, a4) )
+  {
     return 0;
+  }
   if ( a2 >> 4 >= 8 )
+  {
     return 0;
+  }
   v5 = CAIResourceMap::ResourceDataVW(a3, a4);
   return CAIResourceData::ResourceAmount1(v5, a2 >> 4);
 }
@@ -1276,9 +1253,13 @@ int  CEcoManager::GetResourceAmountAtAndAround(int a2, int a3, int a4) {
   CAIResourceData *v5; // eax
 
   if ( !Squares::ValidVW(a3, a4) )
+  {
     return 0;
+  }
   if ( a2 >> 4 >= 8 )
+  {
     return 0;
+  }
   v5 = CAIResourceMap::ResourceDataVW(a3, a4);
   return CAIResourceData::ResourceAmount9(v5, a2 >> 4);
 }
@@ -1310,10 +1291,16 @@ bool  CEcoManager::GetResourceCenterXY(int a2, int a3, int a4, int & a5, int & a
   v10 = Squares::VWToXY(a3);
   v9 = Squares::VWToXY(a4);
   if ( !(unsigned __int8)CWorldManager::InWorld(v10, v9) )
-    return 0;
-  for ( i = 0; i < 16; ++i )
   {
-    for ( j = 0; j < 16; ++j )
+    return 0;
+  }
+  for ( i = 0;
+        i < 16;
+        ++i )
+  {
+    for ( j = 0;
+          j < 16;
+          ++j )
     {
       v15 = j + v10;
       v13 = i + v9;
@@ -1333,10 +1320,7 @@ bool  CEcoManager::GetResourceCenterXY(int a2, int a3, int a4, int & a5, int & a
             v20 = 2;
             v14 = 2;
           }
-          if ( (*(unsigned __int8 (__thiscall **)(CEcoManager *, int, int))(*(_DWORD *)this + 196))(
-                 this,
-                 v14 + v15,
-                 v20 + v13) )
+          if ( (*(unsigned __int8 (__thiscall **)(CEcoManager *, int, int))(*(_DWORD *)this + 196))(this, v14 + v15, v20 + v13) )
           {
             if ( (*(int (__thiscall **)(CEcoManager *, int, int, int))(*(_DWORD *)this + 236))(this, a2, v15, v13) )
             {
@@ -1359,7 +1343,9 @@ bool  CEcoManager::GetResourceCenterXY(int a2, int a3, int a4, int & a5, int & a
     }
   }
   if ( !v18 )
+  {
     return v21;
+  }
   *a5 = v11 / v18;
   *a6 = v12 / v18;
   return 1;
@@ -1383,15 +1369,23 @@ int  CEcoManager::GetSingleResourceConcentrationAt(int a2, int a3, int a4) {
   int j; // [esp+24h] [ebp-4h]
 
   if ( !Squares::ValidVW(a3, (unsigned int)a4) )
+  {
     return 0;
+  }
   v9 = 0;
   v8 = Squares::VWToXY(a3);
   v7 = Squares::VWToXY(a4);
   if ( !(unsigned __int8)CWorldManager::InWorld(v8, v7) )
-    return 0;
-  for ( i = 0; i < 16; ++i )
   {
-    for ( j = 0; j < 16; ++j )
+    return 0;
+  }
+  for ( i = 0;
+        i < 16;
+        ++i )
+  {
+    for ( j = 0;
+          j < 16;
+          ++j )
     {
       v10 = j + v8;
       v11 = i + v7;
@@ -1411,10 +1405,7 @@ int  CEcoManager::GetSingleResourceConcentrationAt(int a2, int a3, int a4) {
             v15 = 2;
             v12 = 2;
           }
-          if ( (*(unsigned __int8 (__thiscall **)(CEcoManager *, int, int))(*(_DWORD *)this + 196))(
-                 this,
-                 v12 + v10,
-                 v15 + v11) )
+          if ( (*(unsigned __int8 (__thiscall **)(CEcoManager *, int, int))(*(_DWORD *)this + 196))(this, v12 + v10, v15 + v11) )
           {
             v9 += (*(int (__thiscall **)(CEcoManager *, int, int, int))(*(_DWORD *)this + 236))(this, a2, v10, v11);
           }
@@ -1456,24 +1447,18 @@ int  CEcoManager::GetSingleResourceConcentrationInside(int a2, class std::vector
   while ( !(unsigned __int8)CAI_Ecosector_Grid_Iterator::IsEnd((CAI_Ecosector_Grid_Iterator *)v7) )
   {
     Next = CAI_Ecosector_Grid_Iterator::GetNext((CAI_Ecosector_Grid_Iterator *)v7);
-    if ( (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 164))(
-           this,
-           a2,
-           (unsigned __int8)Next,
-           (Next & 0xFF00) >> 8) )
+    if ( (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 164))(this, a2, (unsigned __int8)Next, (Next & 0xFF00) >> 8) )
     {
       v12 = 1;
       v8 = a2;
       v10 = (unsigned __int8)Next;
       v11 = (Next & 0xFF00) >> 8;
       v9 = 0;
-      v9 = (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 164))(
-             this,
-             a2,
-             (unsigned __int8)Next,
-             (Next & 0xFF00) >> 8);
+      v9 = (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 164))(this, a2, (unsigned __int8)Next, (Next & 0xFF00) >> 8);
       if ( v9 )
+      {
         std::vector<SRESOURCECONCENTRATIONDATA>::push_back(&v8);
+      }
     }
   }
   v4 = std::vector<SRESOURCECONCENTRATIONDATA>::size(a3);
@@ -1504,19 +1489,11 @@ int  CEcoManager::GetAroundResourceConcentrationInside(int a2, class std::vector
   while ( !(unsigned __int8)CAI_Ecosector_Grid_Iterator::IsEnd((CAI_Ecosector_Grid_Iterator *)v7) )
   {
     Next = CAI_Ecosector_Grid_Iterator::GetNext((CAI_Ecosector_Grid_Iterator *)v7);
-    if ( (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 168))(
-           this,
-           a2,
-           (unsigned __int8)Next,
-           (Next & 0xFF00) >> 8) )
+    if ( (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 168))(this, a2, (unsigned __int8)Next, (Next & 0xFF00) >> 8) )
     {
       v12 = 1;
       v8 = a2;
-      v9 = (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 168))(
-             this,
-             a2,
-             (unsigned __int8)Next,
-             (Next & 0xFF00) >> 8);
+      v9 = (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 168))(this, a2, (unsigned __int8)Next, (Next & 0xFF00) >> 8);
       v10 = (unsigned __int8)Next;
       v11 = (Next & 0xFF00) >> 8;
       std::vector<SRESOURCECONCENTRATIONDATA>::push_back(&v8);
@@ -1546,12 +1523,18 @@ int  CEcoManager::GetSingleResourceConcentrationOutside(int a2, class std::vecto
 
   std::vector<SRESOURCECONCENTRATIONDATA>::clear();
   if ( !CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, *((_DWORD *)this + 1)) )
+  {
     return 0;
+  }
   v4 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)this + 128))(this);
   v6 = COwnerMap::OwnerBit(v4);
-  for ( i = 0; i < this[261716]; ++i )
+  for ( i = 0;
+        i < this[261716];
+        ++i )
   {
-    for ( j = 0; j < this[261717]; ++j )
+    for ( j = 0;
+          j < this[261717];
+          ++j )
     {
       TileOfSquareVW = ITiling::FirstTileOfSquareVW(i, j);
       if ( (v6 & COwnerMap::OwnerBits1VW(i, j)) == 0 && !CEcoManager::IsMyTile((CEcoManager *)this, TileOfSquareVW) )
@@ -1589,12 +1572,18 @@ int  CEcoManager::GetAroundResourceConcentrationOutside(int a2, class std::vecto
 
   std::vector<SRESOURCECONCENTRATIONDATA>::clear();
   if ( !CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, *((_DWORD *)this + 1)) )
+  {
     return 0;
+  }
   v4 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)this + 128))(this);
   v6 = COwnerMap::OwnerBit(v4);
-  for ( i = 0; i < this[261716]; ++i )
+  for ( i = 0;
+        i < this[261716];
+        ++i )
   {
-    for ( j = 0; j < this[261717]; ++j )
+    for ( j = 0;
+          j < this[261717];
+          ++j )
     {
       TileOfSquareVW = ITiling::FirstTileOfSquareVW(i, j);
       if ( (v6 & COwnerMap::OwnerBits1VW(i, j)) == 0 && !CEcoManager::IsMyTile((CEcoManager *)this, TileOfSquareVW) )
@@ -1631,17 +1620,25 @@ bool  CEcoManager::IsBorderElement(int a2, int a3) {
   int TileOfSquareVW; // [esp+8h] [ebp-4h]
 
   if ( !Squares::ValidVW(a2, a3) )
+  {
     return 0;
+  }
   TileOfSquareVW = ITiling::FirstTileOfSquareVW((int)a2, a3);
   if ( !CEcoManager::IsMyTile(this, TileOfSquareVW) )
+  {
     return 0;
+  }
   while ( TileOfSquareVW )
   {
     v5 = (struct CTile *)ITiling::Tile(TileOfSquareVW);
     if ( CTile::TilingType(v5) )
+    {
       return 1;
+    }
     if ( CTile::EcoSectorId(v5) != *((_DWORD *)this + 1) )
+    {
       return 1;
+    }
     TileOfSquareVW = CTile::NextSquareTile(v5);
   }
   return 0;
@@ -1658,27 +1655,34 @@ bool  CEcoManager::IsResourceAround(int a2, int a3, int a4, int a5) {
   _BYTE v10[44]; // [esp+2Ch] [ebp-30h] BYREF
 
   if ( !Squares::ValidVW(a3, a4) )
+  {
     return 0;
+  }
   v7 = a2 >> 4;
   qmemcpy(v10, CAIResourceMap::ResourceDataVW(a3, a4), 0x2Au);
   if ( CAIResourceData::ResourceAmount9((CAIResourceData *)v10, a2 >> 4) )
-    return 1;
-  if ( CAIResourceData::ResourceAmount1((CAIResourceData *)v10, v7) )
-    return 1;
-  for ( i = -a5; i < a5 + 1; ++i )
   {
-    for ( j = -a5; j < a5 + 1; ++j )
+    return 1;
+  }
+  if ( CAIResourceData::ResourceAmount1((CAIResourceData *)v10, v7) )
+  {
+    return 1;
+  }
+  for ( i = -a5;
+        i < a5 + 1;
+        ++i )
+  {
+    for ( j = -a5;
+          j < a5 + 1;
+          ++j )
     {
-      if ( j * j + i * i <= a5 * a5
-        && (i || j)
-        && (int)a3 + i >= 0
-        && (int)a3 + i <= *((unsigned __int8 *)this + 261716)
-        && (int)(j + a4) >= 0
-        && (int)(j + a4) <= *((unsigned __int8 *)this + 261717) )
+      if ( j * j + i * i <= a5 * a5 && (i || j) && (int)a3 + i >= 0 && (int)a3 + i <= *((unsigned __int8 *)this + 261716) && (int)(j + a4) >= 0 && (int)(j + a4) <= *((unsigned __int8 *)this + 261717) )
       {
         qmemcpy(v10, CAIResourceMap::ResourceDataVW((char *)a3 + i, j + a4), 0x2Au);
         if ( CAIResourceData::ResourceAmount1((CAIResourceData *)v10, v7) )
+        {
           return 1;
+        }
       }
     }
   }
@@ -1695,25 +1699,23 @@ bool  CEcoManager::IsLandscapeAround(int a2, int a3, int a4, int a5) {
   _BYTE v9[44]; // [esp+28h] [ebp-30h] BYREF
 
   if ( !Squares::ValidVW(a3, a4) )
+  {
     return 0;
+  }
   qmemcpy(v9, CAIResourceMap::ResourceDataVW(a3, a4), 0x2Au);
   if ( CAIResourceData::GroundInfo1((CAIResourceData *)v9, a2) )
-    return 1;
-  for ( i = -a5; i < a5 + 1; ++i )
   {
-    for ( j = -a5; j < a5 + 1; ++j )
+    return 1;
+  }
+  for ( i = -a5;
+        i < a5 + 1;
+        ++i )
+  {
+    for ( j = -a5;
+          j < a5 + 1;
+          ++j )
     {
-      if ( j * j + i * i <= a5 * a5
-        && (i || j)
-        && (int)a3 + i >= 0
-        && (int)a3 + i <= *((unsigned __int8 *)this + 261716)
-        && (int)(j + a4) >= 0
-        && (int)(j + a4) <= *((unsigned __int8 *)this + 261717)
-        && (*(int (__thiscall **)(CEcoManager *, int, int, unsigned int))(*(_DWORD *)this + 244))(
-             this,
-             a2,
-             (int)a3 + i,
-             j + a4) )
+      if ( j * j + i * i <= a5 * a5 && (i || j) && (int)a3 + i >= 0 && (int)a3 + i <= *((unsigned __int8 *)this + 261716) && (int)(j + a4) >= 0 && (int)(j + a4) <= *((unsigned __int8 *)this + 261717) && (*(int (__thiscall **)(CEcoManager *, int, int, unsigned int))(*(_DWORD *)this + 244))(this, a2, (int)a3 + i, j + a4) )
       {
         return 1;
       }
@@ -1730,7 +1732,9 @@ bool  CEcoManager::HasLand(int a2, int a3) {
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
 
   if ( !Squares::ValidVW(a2, a3) )
+  {
     return 0;
+  }
   v4 = CAIResourceMap::ResourceDataVW(a2, a3);
   return (CAIResourceData::Flags1(v4) & 1) != 0;
 }
@@ -1743,7 +1747,9 @@ bool  CEcoManager::HasLandAround(int a2, int a3) {
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
 
   if ( !Squares::ValidVW(a2, a3) )
+  {
     return 0;
+  }
   v4 = CAIResourceMap::ResourceDataVW(a2, a3);
   return (CAIResourceData::Flags1(v4) & 1) != 0;
 }
@@ -1756,7 +1762,9 @@ bool  CEcoManager::HasWater(int a2, int a3) {
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
 
   if ( !Squares::ValidVW(a2, a3) )
+  {
     return 0;
+  }
   v4 = CAIResourceMap::ResourceDataVW(a2, a3);
   return (CAIResourceData::Flags1(v4) & 2) != 0;
 }
@@ -1769,7 +1777,9 @@ bool  CEcoManager::HasWaterAround(int a2, int a3) {
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
 
   if ( !Squares::ValidVW(a2, a3) )
+  {
     return 0;
+  }
   v4 = CAIResourceMap::ResourceDataVW(a2, a3);
   return (CAIResourceData::Flags9(v4) & 2) != 0;
 }
@@ -1782,7 +1792,9 @@ bool  CEcoManager::HasRiver(int a2, int a3) {
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
 
   if ( !Squares::ValidVW(a2, a3) )
+  {
     return 0;
+  }
   v4 = CAIResourceMap::ResourceDataVW(a2, a3);
   return (CAIResourceData::Flags1(v4) & 4) != 0;
 }
@@ -1795,7 +1807,9 @@ bool  CEcoManager::HasRiverAround(int a2, int a3) {
   CAIResourceData *v4; // [esp+4h] [ebp-4h]
 
   if ( !Squares::ValidVW(a2, a3) )
+  {
     return 0;
+  }
   v4 = CAIResourceMap::ResourceDataVW(a2, a3);
   return (CAIResourceData::Flags9(v4) & 4) != 0;
 }
@@ -1806,9 +1820,13 @@ bool  CEcoManager::HasRiverAround(int a2, int a3) {
 int  CEcoManager::GetResourceAmountXY(int a2, int a3, int a4) {
   
   if ( (unsigned __int8)CWorldManager::InWorld(a3, a4) )
+  {
     return CWorldManager::ResourceAmount(a3, a4, a2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -1866,7 +1884,9 @@ int  CEcoManager::GetLandscapeAmount(int a2, int a3, int a4) {
   CAIResourceData *v5; // [esp+4h] [ebp-4h]
 
   if ( !Squares::ValidVW(a3, a4) )
+  {
     return 0;
+  }
   v5 = CAIResourceMap::ResourceDataVW(a3, a4);
   return CAIResourceData::GroundInfo1(v5, a2);
 }
@@ -1893,19 +1913,11 @@ int  CEcoManager::GetLandscapeConcentrationInside(int a2, class std::vector<stru
   while ( !(unsigned __int8)CAI_Ecosector_Grid_Iterator::IsEnd((CAI_Ecosector_Grid_Iterator *)v7) )
   {
     Next = CAI_Ecosector_Grid_Iterator::GetNext((CAI_Ecosector_Grid_Iterator *)v7);
-    if ( (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 244))(
-           this,
-           a2,
-           (unsigned __int8)Next,
-           (Next & 0xFF00) >> 8) )
+    if ( (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 244))(this, a2, (unsigned __int8)Next, (Next & 0xFF00) >> 8) )
     {
       v12 = 1;
       v8 = a2;
-      v9 = (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 244))(
-             this,
-             a2,
-             (unsigned __int8)Next,
-             (Next & 0xFF00) >> 8);
+      v9 = (*(int (__thiscall **)(int *, int, _DWORD, int))(*this + 244))(this, a2, (unsigned __int8)Next, (Next & 0xFF00) >> 8);
       v10 = (unsigned __int8)Next;
       v11 = (Next & 0xFF00) >> 8;
       std::vector<SUNDERGROUNDCONCENTRATIONDATA>::push_back(&v8);
@@ -1936,9 +1948,13 @@ int  CEcoManager::GetLandscapeConcentrationOutside(int a2, class std::vector<str
   std::vector<SUNDERGROUNDCONCENTRATIONDATA>::clear();
   v3 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)this + 128))(this);
   v6 = COwnerMap::OwnerBit(v3);
-  for ( i = 0; i < this[261716]; ++i )
+  for ( i = 0;
+        i < this[261716];
+        ++i )
   {
-    for ( j = 0; j < this[261717]; ++j )
+    for ( j = 0;
+          j < this[261717];
+          ++j )
     {
       TileOfSquareVW = ITiling::FirstTileOfSquareVW(i, j);
       if ( (v6 & COwnerMap::OwnerBits1VW(i, j)) == 0 && !CEcoManager::IsMyTile((CEcoManager *)this, TileOfSquareVW) )
@@ -2006,12 +2022,18 @@ int  CEcoManager::GetFirstRiverPos(int a2, int a3) {
 
   v4 = Squares::VWToXY(a2);
   v5 = Squares::VWToXY(a3);
-  for ( i = 16; i > 0; --i )
+  for ( i = 16;
+        i > 0;
+        --i )
   {
-    for ( j = 16; j > 0; --j )
+    for ( j = 16;
+          j > 0;
+          --j )
     {
       if ( (CWorldManager::Ground(j + v4, i + v5) & 0xF0) == 0x60 )
+      {
         return Y16X16::PackXYFast(j + v4, i + v5);
+      }
     }
   }
   return 0;
@@ -2039,27 +2061,39 @@ int  CEcoManager::ConvertTo(enum BUILDING_TYPES a2, enum IECONOMANAGERGRIDRESOLU
 
   v19 = 0;
   if ( !a4 || !a5 )
+  {
     return 0;
+  }
   v14 = this[a2 + 4];
   if ( !v14 )
+  {
     return 0;
+  }
   v13 = a4[3];
   if ( a3 == v13 )
+  {
     return 0;
+  }
   if ( a3 <= v13 )
   {
     Leaf = (CEcoManagerLeaf *)CEcoManagerTree::FindLeaf(v14, a4[3], *a4, a4[1]);
     if ( !Leaf )
+    {
       return 0;
+    }
     if ( v13 == 64 && a3 == 16 )
     {
-      for ( i = 0; i < CEcoManagerLeaf::GetNrChilds(Leaf); ++i )
+      for ( i = 0;
+            i < CEcoManagerLeaf::GetNrChilds(Leaf);
+            ++i )
       {
         if ( CEcoManagerLeaf::GetChild(Leaf, i) )
         {
           Child = CEcoManagerLeaf::GetChild(Leaf, i);
           v16 = 0;
-          for ( j = CEcoManagerLeaf::GetNrChilds(Child); v16 < j; j = CEcoManagerLeaf::GetNrChilds(Child) )
+          for ( j = CEcoManagerLeaf::GetNrChilds(Child);
+                v16 < j;
+                j = CEcoManagerLeaf::GetNrChilds(Child) )
           {
             if ( CEcoManagerLeaf::GetChild(Child, v16) )
             {
@@ -2074,7 +2108,9 @@ int  CEcoManager::ConvertTo(enum BUILDING_TYPES a2, enum IECONOMANAGERGRIDRESOLU
     }
     else
     {
-      for ( k = 0; k < CEcoManagerLeaf::GetNrChilds(Leaf); ++k )
+      for ( k = 0;
+            k < CEcoManagerLeaf::GetNrChilds(Leaf);
+            ++k )
       {
         if ( CEcoManagerLeaf::GetChild(Leaf, k) )
         {
@@ -2096,7 +2132,9 @@ int  CEcoManager::ConvertTo(enum BUILDING_TYPES a2, enum IECONOMANAGERGRIDRESOLU
     }
     v9 = (_Cnd_internal_imp_t *)CEcoManagerTree::FindLeaf(v14, a3, v10, v11);
     if ( !v9 )
+    {
       return 0;
+    }
     *(_DWORD *)(a5 + 12) = a3;
     CEcoManager::CopyData(v9, a5);
   }
@@ -2115,14 +2153,7 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::SendProduceOrder(int a2, enum PILE_TYPES 
   unsigned __int16 v10; // [esp+38h] [ebp-8h]
   int v11; // [esp+3Ch] [ebp-4h]
 
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "CEcoManager::SendProduceOrder(): player %i, eco-sector %i, building id %i, good %i, amount %i",
-    this[2],
-    this[1],
-    a2,
-    a3,
-    a4);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CEcoManager::SendProduceOrder(): player %i, eco-sector %i, building id %i, good %i, amount %i", this[2], this[1], a2, a3, a4);
   v4 = (*(int (__thiscall **)(int *, _DWORD, _DWORD))(*this + 128))(this, 0, 0);
   CEvn_Logic::CEvn_Logic((CEvn_Logic *)v8, 0x13A9u, v6, a4, v4, v9, v10);
   v11 = 0;
@@ -2144,14 +2175,7 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::RecruteSpecialist(int a2, enum SETTLER_TY
   unsigned __int16 v10; // [esp+38h] [ebp-8h]
   int v11; // [esp+3Ch] [ebp-4h]
 
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "CEcoManager::RecruteSpecialist(): player %i, eco-sector %i, building id %i, settler type %i, amount %i",
-    this[2],
-    this[1],
-    a2,
-    a3,
-    a4);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CEcoManager::RecruteSpecialist(): player %i, eco-sector %i, building id %i, settler type %i, amount %i", this[2], this[1], a2, a3, a4);
   v4 = (*(int (__thiscall **)(int *, _DWORD, _DWORD))(*this + 128))(this, 0, 0);
   CEvn_Logic::CEvn_Logic((CEvn_Logic *)v8, 0x13B7u, v6, a4, v4, v9, v10);
   v11 = 0;
@@ -2172,14 +2196,8 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::SwitchBuildingStatus(int a2) {
   unsigned __int16 v7; // [esp+34h] [ebp-8h]
   int v8; // [esp+38h] [ebp-4h]
 
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "CEcoManager::SwitchBuildingStatus(): player %i, eco-sector %i, building id %i",
-    this[2],
-    this[1],
-    a2);
-  if ( !(*(unsigned __int8 (__thiscall **)(int *, unsigned int))(*this + 304))(this, a2)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 2428, "CheckBuildingId(_iBuildingID)") == 1 )
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CEcoManager::SwitchBuildingStatus(): player %i, eco-sector %i, building id %i", this[2], this[1], a2);
+  if ( !(*(unsigned __int8 (__thiscall **)(int *, unsigned int))(*this + 304))(this, a2) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 2428, "CheckBuildingId(_iBuildingID)") == 1 )
   {
     __debugbreak();
   }
@@ -2194,20 +2212,15 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::SwitchBuildingStatus(int a2) {
 
 
 // address=[0x133f1b0]
-// Decompiled from int __thiscall CEcoManager::SendNetMessage(  _DWORD *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  int a5,  unsigned int a6)
+// Decompiled from int __thiscall CEcoManager::SendNetMessage(_DWORD *this, unsigned int a2, unsigned int a3, unsigned int a4, int a5, unsigned int a6)
 enum AI_ECOMANAGER_ERROR  CEcoManager::SendNetMessage(int a2, int a3, int a4, int a5, int a6) {
   
   _BYTE v7[32]; // [esp+Ch] [ebp-50h] BYREF
   _BYTE v8[32]; // [esp+2Ch] [ebp-30h] BYREF
   int v9; // [esp+58h] [ebp-4h]
 
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "CEcoManager::SendNetMessage(): player %i, eco-sector %i",
-    this[2],
-    this[1]);
-  if ( (a5 <= 0 || a5 >= 9)
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 2446, "0<_iData3 && _iData3 < PLAYER_MAX") == 1 )
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CEcoManager::SendNetMessage(): player %i, eco-sector %i", this[2], this[1]);
+  if ( (a5 <= 0 || a5 >= 9) && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 2446, "0<_iData3 && _iData3 < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -2222,7 +2235,9 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::SendNetMessage(int a2, int a3, int a4, in
   else
   {
     if ( a6 && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 2458, "_iData4 == 0") == 1 )
+    {
       __debugbreak();
+    }
     CEvn_Logic::CEvn_Logic((CEvn_Logic *)v7, a2, a3, a4, a5, 0, 0);
     v9 = 1;
     INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, (struct CEvn_Logic *)v7);
@@ -2293,9 +2308,10 @@ int  CEcoManager::GetStoragePlace(int a2, int a3) {
 
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
   if ( !BuildingPtr && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 2531, "pBuilding") == 1 )
+  {
     __debugbreak();
-  if ( IEntity::Type((unsigned __int16 *)BuildingPtr) != 34
-    && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 2532, "pBuilding->Type() == BUILDING_STORAGEAREA") == 1 )
+  }
+  if ( IEntity::Type((unsigned __int16 *)BuildingPtr) != 34 && BBSupportDbgReport(2, "AI\\EcoManager\\CEcoManager.cpp", 2532, "pBuilding->Type() == BUILDING_STORAGEAREA") == 1 )
   {
     __debugbreak();
   }
@@ -2316,7 +2332,9 @@ bool  CEcoManager::CheckBuildingId(unsigned int a2) {
     if ( BuildingPtr )
     {
       if ( !IEntity::FlagBits(BuildingPtr, 0x4000000) && CBuilding::EcoSectorId(BuildingPtr) == this[1] )
+      {
         return 1;
+      }
     }
   }
   BBSupportTracePrintF(0, "CEcoManager::CheckBuildingId(): Invalid building id %i!", a2);
@@ -2475,9 +2493,13 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::CreateTree(enum BUILDING_TYPES a2, class 
       C = operator new(0x10u);
       LOBYTE(v52) = 1;
       if ( C )
+      {
         v41 = CEcoManagerTree::CEcoManagerTree((CEcoManagerTree *)C);
+      }
       else
+      {
         v41 = 0;
+      }
       v29 = v41;
       LOBYTE(v52) = 0;
       *a3 = v41;
@@ -2508,12 +2530,11 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::CreateTree(enum BUILDING_TYPES a2, class 
           DefaultUndergroundByRace = 1;
           DefaultUndergroundByRace = CEcoManager::GetDefaultUndergroundByRace(v51);
           if ( a2 == 14 || a2 == 15 || a2 == 16 || a2 == 17 || a2 == 18 )
+          {
             DefaultUndergroundByRace = 4;
+          }
           v10 = v50;
-          v24 = (*(int (__thiscall **)(CEcoManager *, int, _DWORD))(*(_DWORD *)v51 + 244))(
-                  v51,
-                  DefaultUndergroundByRace,
-                  v49);
+          v24 = (*(int (__thiscall **)(CEcoManager *, int, _DWORD))(*(_DWORD *)v51 + 244))(v51, DefaultUndergroundByRace, v49);
           v8 = (*(int (__thiscall **)(CEcoManager *, int))(*(_DWORD *)v51 + 136))(v51, a2);
           v5 = (unsigned __int16 *)CAIEcoSpecialBuildingInfos::TheObject();
           BlockingBitAmount = CAIEcoSpecialBuildingInfos::GetBlockingBitAmount(v5, v8, v10);
@@ -2559,8 +2580,7 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::CreateTree(enum BUILDING_TYPES a2, class 
             v45 = v21 + (v44 + v22) % 16;
             v46 = v20 + ((v44 + v22) >> 4);
             v34 = Y16X16::PackXYFast(v45, v46);
-            if ( !(*(int (__thiscall **)(CEcoManager *, int, int, int))(*(_DWORD *)v51 + 236))(v51, v45, v46, 112)
-              && !(*(int (__thiscall **)(CEcoManager *, int, int, int))(*(_DWORD *)v51 + 236))(v51, v45, v46, 96) )
+            if ( !(*(int (__thiscall **)(CEcoManager *, int, int, int))(*(_DWORD *)v51 + 236))(v51, v45, v46, 112) && !(*(int (__thiscall **)(CEcoManager *, int, int, int))(*(_DWORD *)v51 + 236))(v51, v45, v46, 96) )
             {
               v37 = (*(int (__thiscall **)(CEcoManager *, int, int))(*(_DWORD *)v51 + 44))(v51, a2, v34);
               if ( v37 )
@@ -2587,7 +2607,9 @@ enum AI_ECOMANAGER_ERROR  CEcoManager::CreateTree(enum BUILDING_TYPES a2, class 
             ++v44;
           }
           if ( ++*((_DWORD *)v51 + a2 + 65180) >= *((_DWORD *)v51 + a2 + 65097) )
+          {
             *((_BYTE *)v51 + a2 + 597) = 1;
+          }
         }
         v19 = 2;
         v52 = -1;
@@ -2673,7 +2695,9 @@ bool  CEcoManager::WorkOnTile(enum BUILDING_TYPES a2, int a3, int a4, class CEco
 
   v22 = 1;
   if ( !(*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int))(*(_DWORD *)this + 212))(this, a3, a4) )
+  {
     return 0;
+  }
   DefaultUndergroundByRace = CEcoManager::GetDefaultUndergroundByRace((CEcoManager *)this);
   if ( a2 != 14 && a2 != 15 && a2 != 16 && a2 != 17 && a2 != 18 )
   {
@@ -2681,33 +2705,29 @@ bool  CEcoManager::WorkOnTile(enum BUILDING_TYPES a2, int a3, int a4, class CEco
     if ( v17 == 2 || v17 == 1 )
     {
       if ( v17 == 2 )
+      {
         v13 = 2;
+      }
       if ( v17 == 1 )
+      {
         v13 = 3;
-      v6 = (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(
-             this,
-             DefaultUndergroundByRace,
-             a3,
-             a4);
+      }
+      v6 = (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(this, DefaultUndergroundByRace, a3, a4);
       if ( (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(this, v13, a3, a4) + v6 <= 0 )
+      {
         return 0;
+      }
     }
     else if ( v17 == 4 )
     {
-      v7 = (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(
-             this,
-             DefaultUndergroundByRace,
-             a3,
-             a4);
+      v7 = (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(this, DefaultUndergroundByRace, a3, a4);
       v8 = (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(this, 2, a3, a4) + v7;
       if ( (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(this, 3, a3, a4) + v8 <= 0 )
+      {
         return 0;
+      }
     }
-    else if ( (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(
-                this,
-                DefaultUndergroundByRace,
-                a3,
-                a4) <= 0 )
+    else if ( (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(this, DefaultUndergroundByRace, a3, a4) <= 0 )
     {
       return 0;
     }
@@ -2716,32 +2736,17 @@ bool  CEcoManager::WorkOnTile(enum BUILDING_TYPES a2, int a3, int a4, class CEco
   {
     case 1:
     case 7:
-      return (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int, int, int))(*(_DWORD *)this + 204))(
-               this,
-               112,
-               a3,
-               a4,
-               2)
-          || (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 164))(this, 112, a3, a4);
+      return (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int, int, int))(*(_DWORD *)this + 204))(this, 112, a3, a4, 2) || (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 164))(this, 112, a3, a4);
     case 4:
-      return (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int, int, int))(*(_DWORD *)this + 204))(
-               this,
-               96,
-               a3,
-               a4,
-               2)
-          || (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 164))(this, 96, a3, a4);
+      return (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int, int, int))(*(_DWORD *)this + 204))(this, 96, a3, a4, 2) || (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 164))(this, 96, a3, a4);
     case 5:
       return (*(int (__thiscall **)(unsigned __int8 *, int, int))(*(_DWORD *)this + 232))(this, a3, a4);
     case 6:
-      v22 = (*(int (__thiscall **)(unsigned __int8 *, _DWORD, int, int, int))(*(_DWORD *)this + 204))(
-              this,
-              0,
-              a3,
-              a4,
-              2);
+      v22 = (*(int (__thiscall **)(unsigned __int8 *, _DWORD, int, int, int))(*(_DWORD *)this + 204))(this, 0, a3, a4, 2);
       if ( !v22 || CEcoManager::CanBeReachedByFisher(this, a3, a4) )
+      {
         return v22;
+      }
       v22 = 0;
       v20 = -2;
       break;
@@ -2752,15 +2757,25 @@ bool  CEcoManager::WorkOnTile(enum BUILDING_TYPES a2, int a3, int a4, class CEco
     case 18:
       v18 = 0;
       if ( a2 == 14 )
+      {
         v18 = 80;
+      }
       if ( a2 == 15 )
+      {
         v18 = 32;
+      }
       if ( a2 == 16 )
+      {
         v18 = 48;
+      }
       if ( a2 == 17 )
+      {
         v18 = 16;
+      }
       if ( a2 == 18 )
+      {
         v18 = 64;
+      }
       return (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 164))(this, v18, a3, a4) != 0;
     case 31:
     case 32:
@@ -2768,39 +2783,23 @@ bool  CEcoManager::WorkOnTile(enum BUILDING_TYPES a2, int a3, int a4, class CEco
     case 35:
       return (*(int (__thiscall **)(unsigned __int8 *, int, int, int, int))(*(_DWORD *)this + 208))(this, 6, a3, a4, 1);
     case 36:
-      return (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int, int, int))(*(_DWORD *)this + 208))(
-               this,
-               2,
-               a3,
-               a4,
-               1)
-          || (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(this, 2, a3, a4);
+      return (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int, int, int))(*(_DWORD *)this + 208))(this, 2, a3, a4, 1) || (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(this, 2, a3, a4);
     case 82:
-      return (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int, int, int))(*(_DWORD *)this + 208))(
-               this,
-               1,
-               a3,
-               a4,
-               1)
-          || (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(this, 1, a3, a4);
+      return (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int, int, int))(*(_DWORD *)this + 208))(this, 1, a3, a4, 1) || (*(int (__thiscall **)(unsigned __int8 *, int, int, int))(*(_DWORD *)this + 244))(this, 1, a3, a4);
     default:
       return v22;
   }
   while ( v20 < 3 )
   {
-    for ( i = -2; i < 3; ++i )
+    for ( i = -2;
+          i < 3;
+          ++i )
     {
       if ( i * i + v20 * v20 <= 4 && (v20 || i) )
       {
         v15 = v20 + a3;
         v16 = i + a4;
-        if ( v20 + a3 >= 0
-          && v15 <= this[261716]
-          && v16 >= 0
-          && v16 <= this[261717]
-          && (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int))(*(_DWORD *)this + 212))(this, v15, v16)
-          && (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int))(*(_DWORD *)this + 220))(this, v15, v16)
-          && CEcoManager::CanBeReachedByFisher(this, v15, v16) )
+        if ( v20 + a3 >= 0 && v15 <= this[261716] && v16 >= 0 && v16 <= this[261717] && (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int))(*(_DWORD *)this + 212))(this, v15, v16) && (*(unsigned __int8 (__thiscall **)(unsigned __int8 *, int, int))(*(_DWORD *)this + 220))(this, v15, v16) && CEcoManager::CanBeReachedByFisher(this, v15, v16) )
         {
           return 1;
         }
@@ -2822,9 +2821,13 @@ bool  CEcoManager::IsMyTile(int SquareTile) {
   {
     v5 = (struct CTile *)ITiling::Tile(SquareTile);
     if ( CTile::TilingType(v5) )
+    {
       return 0;
+    }
     if ( CTile::EcoSectorId(v5) == *((_DWORD *)this + 1) )
+    {
       return 1;
+    }
     SquareTile = CTile::NextSquareTile(v5);
   }
   return 0;
@@ -2896,19 +2899,25 @@ bool  CEcoManager::CanBeReachedByFisher(int a2, int a3) {
   void *v10; // [esp+14h] [ebp-8h]
   int v11; // [esp+18h] [ebp-4h]
 
-  for ( i = ITiling::FirstTileOfSquareVW(a2, a3); i; i = CTile::NextSquareTile(v10) )
+  for ( i = ITiling::FirstTileOfSquareVW(a2, a3);
+        i;
+        i = CTile::NextSquareTile(v10) )
   {
     v10 = (void *)ITiling::Tile(i);
     if ( CTile::EcoSectorId(v10) == this[1] )
     {
       v8 = (unsigned __int8 *)CTile::LinkList(v10);
       v11 = 0;
-      for ( j = CLinkList::Size(v8); v11 < j; j = CLinkList::Size(v8) )
+      for ( j = CLinkList::Size(v8);
+            v11 < j;
+            j = CLinkList::Size(v8) )
       {
         v4 = (unsigned __int16 *)CLinkList::operator[](v11);
         v5 = (void *)ITiling::Tile(*v4);
         if ( (CTile::Type(v5, (int)v5) & 0x4000000) != 0 )
+        {
           return 1;
+        }
         ++v11;
       }
     }
@@ -2924,7 +2933,9 @@ bool  CEcoManager::CopyData(class CEcoManagerLeaf * a1, struct SBUILDINFODATA * 
   struct Concurrency::details::stl_condition_variable_win7 *BuildInfo; // eax
 
   if ( !a1 || !a2 )
+  {
     return 0;
+  }
   BuildInfo = CEcoManagerLeaf::GetBuildInfo(a1);
   SBUILDINFODATA::operator=(BuildInfo);
   return 1;
@@ -2936,9 +2947,13 @@ bool  CEcoManager::CopyData(class CEcoManagerLeaf * a1, struct SBUILDINFODATA * 
 bool  CEcoManager::IsChecked(enum BUILDING_TYPES a2, int a3, int a4) {
   
   if ( a3 < 0 || a4 < 0 )
+  {
     return 1;
+  }
   if ( 8 * a4 + (a3 >> 3) < 512 )
+  {
     return ((1 << (a3 & 7)) & this[512 * a2 + 217228 + 8 * a4 + (a3 >> 3)]) != 0;
+  }
   return 1;
 }
 
@@ -2960,12 +2975,16 @@ void  CEcoManager::SetChecked(enum BUILDING_TYPES a2, int a3, int a4) {
   int v6; // [esp+10h] [ebp-4h]
 
   if ( a3 < 0 || a4 < 0 )
+  {
     return result;
+  }
   v5 = a3 >> 3;
   v6 = 8 * a4;
   result = 8 * a4 + (a3 >> 3);
   if ( result >= 512 )
+  {
     return result;
+  }
   result = (1 << (a3 & 7)) | (unsigned __int8)this[512 * a2 + 217228 + v5 + v6];
   this[512 * a2 + 217228 + v5 + v6] = result;
   return result;

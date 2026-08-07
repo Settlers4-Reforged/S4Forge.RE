@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CMayaWarShip::New(std::istream & a1) {
   
   if ( CWarShip::operator new(0xC8u) )
+  {
     return CMayaWarShip::CMayaWarShip(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -73,7 +77,7 @@ unsigned long  CMayaWarShip::ClassID(void)const {
 // [Decompilation failed for static unsigned long CMayaWarShip::m_iClassID]
 
 // address=[0x15a1ae0]
-// Decompiled from CMayaWarShip *__thiscall CMayaWarShip::CMayaWarShip(  CMayaWarShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
+// Decompiled from CMayaWarShip *__thiscall CMayaWarShip::CMayaWarShip(CMayaWarShip *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
  CMayaWarShip::CMayaWarShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CWarShip::CWarShip(this, a2, a3, a4, a5, a6, a7, a8);

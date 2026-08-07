@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CTree::New(std::istream & a1) {
   
   if ( CTree::operator new(0x50u) )
+  {
     return CTree::CTree(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -21,20 +25,21 @@ class CPersistence * __cdecl CTree::New(std::istream & a1) {
   *(_DWORD *)this = &CTree::_vftable_;
   *((_BYTE *)this + 72) = 1;
   *((_BYTE *)this + 73) = a6;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                        + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                              (CGfxManager *)g_pGfxManager,
-                                              *((unsigned __int16 *)this + 6));
-  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                            (CGfxManager *)g_pGfxManager,
-                            *((unsigned __int16 *)this + 19));
+  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
+  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19));
   if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 69, "m_uCycleFrames") == 1 )
+  {
     __debugbreak();
+  }
   *((_DWORD *)this + 19) = 0;
   if ( IDecoObject::IsStaticInstance(this) )
+  {
     *((_BYTE *)this + 36) = CStateGame::Rand(g_pGame) % (unsigned int)*((unsigned __int8 *)this + 74);
+  }
   else
+  {
     IAnimatedEntity::RegisterForLogicUpdate(31);
+  }
   return this;
 }
 
@@ -47,13 +52,12 @@ class CPersistence * __cdecl CTree::New(std::istream & a1) {
   *(_DWORD *)this = &CTree::_vftable_;
   *((_DWORD *)this + 19) = 0;
   *((_BYTE *)this + 73) = 3;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                        + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                              (CGfxManager *)g_pGfxManager,
-                                              *((unsigned __int16 *)this + 6));
+  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
   *((_BYTE *)this + 74) = *((_BYTE *)a2 + 74);
   if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 104, "m_uCycleFrames") == 1 )
+  {
     __debugbreak();
+  }
   *((_BYTE *)this + 36) = *((_BYTE *)a2 + 36);
   *((_BYTE *)this + 72) = 1;
   return this;
@@ -81,15 +85,16 @@ void  CTree::LogicUpdate(void) {
     case 1:
     case 2:
       if ( (int)++*((_DWORD *)this + 19) < 40 )
+      {
         goto LABEL_17;
+      }
       *((_DWORD *)this + 19) = 0;
       ++*((_BYTE *)this + 73);
-      *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                            + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                                  (CGfxManager *)g_pGfxManager,
-                                                  *((unsigned __int16 *)this + 6));
+      *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
       if ( *((_BYTE *)this + 73) != 3 )
+      {
         goto LABEL_17;
+      }
       v6 = IEntity::Y(this);
       v1 = IEntity::X(this);
       CWorldManager::SetResource(v1, v6, 112, 1);
@@ -102,13 +107,8 @@ void  CTree::LogicUpdate(void) {
       ++*((_BYTE *)this + 73);
       *((_DWORD *)this + 19) = 0;
       *((_BYTE *)this + 36) = 0;
-      *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                            + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                                  (CGfxManager *)g_pGfxManager,
-                                                  *((unsigned __int16 *)this + 6));
-      *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                                (CGfxManager *)g_pGfxManager,
-                                *((unsigned __int16 *)this + 19));
+      *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
+      *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19));
       v10 = IEntity::Y(this);
       v3 = IEntity::X(this);
       if ( (*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)g_pFogging + 32))(g_pFogging, v3, v10) )
@@ -124,23 +124,16 @@ void  CTree::LogicUpdate(void) {
         ++*((_BYTE *)this + 73);
         *((_DWORD *)this + 19) = 0;
         *((_BYTE *)this + 36) = 0;
-        *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                              + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                                    (CGfxManager *)g_pGfxManager,
-                                                    *((unsigned __int16 *)this + 6));
+        *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
         *((_BYTE *)this + 74) = 1;
         if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 283, "m_uCycleFrames") == 1 )
+        {
           __debugbreak();
+        }
       }
       goto LABEL_17;
     case 0xA:
-      if ( (int)++*((_DWORD *)this + 19) < 2
-        || (*((_DWORD *)this + 19) = 0,
-            ++*((_BYTE *)this + 36),
-            *((unsigned __int8 *)this + 36) <= (int)(CGfxManager::GetObjectFrameCount(
-                                                       (CGfxManager *)g_pGfxManager,
-                                                       *((unsigned __int16 *)this + 19))
-                                                   - 1)) )
+      if ( (int)++*((_DWORD *)this + 19) < 2 || (*((_DWORD *)this + 19) = 0, ++*((_BYTE *)this + 36), *((unsigned __int8 *)this + 36) <= (int)(CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19)) - 1)) )
       {
 LABEL_17:
         IAnimatedEntity::RegisterForLogicUpdate(31);
@@ -170,16 +163,18 @@ struct SGfxObjectInfo *  CTree::GetGfxInfos(void) {
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick((CMFCCaptionButton *)this, v2);
   if ( v4 && *(_BYTE *)(this + 73) != 10 )
+  {
     *(_BYTE *)(this + 36) = (v4 + (unsigned int)*(unsigned __int8 *)(this + 36)) % *(unsigned __int8 *)(this + 74);
-  CGfxManager::GetObjectGfxInfo(
-    &IEntity::m_sGfxInfo,
-    *(unsigned __int16 *)(this + 38),
-    *(unsigned __int8 *)(this + 36),
-    1);
+  }
+  CGfxManager::GetObjectGfxInfo(&IEntity::m_sGfxInfo, *(unsigned __int16 *)(this + 38), *(unsigned __int8 *)(this + 36), 1);
   if ( *(_BYTE *)(this + 73) == 3 )
+  {
     MEMORY[0x40FE518] = *(_BYTE *)(this + 10);
+  }
   else
+  {
     MEMORY[0x40FE518] = 16;
+  }
   MEMORY[0x40FE51A] = IEntity::IsVisible((void *)this);
   MEMORY[0x40FE266] = 0;
   return &IEntity::m_sGfxInfo;
@@ -201,8 +196,7 @@ void  CTree::Decrease(int a2) {
   int v2; // eax
   CTree *result; // eax
 
-  if ( IDecoObject::IsStaticInstance(this)
-    && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 323, "! IsStaticInstance()") == 1 )
+  if ( IDecoObject::IsStaticInstance(this) && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 323, "! IsStaticInstance()") == 1 )
   {
     __debugbreak();
   }
@@ -213,20 +207,21 @@ void  CTree::Decrease(int a2) {
   }
   ++*((_BYTE *)this + 73);
   *((_BYTE *)this + 36) = 0;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73)
-                        + (unsigned __int16)CGfxManager::GetObjectFirstJob(
-                                              (CGfxManager *)g_pGfxManager,
-                                              *((unsigned __int16 *)this + 6));
-  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(
-                            (CGfxManager *)g_pGfxManager,
-                            *((unsigned __int16 *)this + 19));
+  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
+  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19));
   if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 337, "m_uCycleFrames") == 1 )
+  {
     __debugbreak();
+  }
   if ( *((_BYTE *)this + 73) == 4 )
+  {
     IAnimatedEntity::RegisterForLogicUpdate(*((unsigned __int8 *)this + 74) - 1);
+  }
   result = this;
   if ( *((_BYTE *)this + 73) == 9 )
+  {
     return (CTree *)IAnimatedEntity::RegisterForLogicUpdate(31);
+  }
   return result;
 }
 
@@ -257,11 +252,15 @@ int  CTree::ConvertToDarkOrGreen(bool a2) {
   v3 = IEntity::Type((unsigned __int16 *)this);
   v4 = IDecoObject::ConvertToDarkOrGreen(this, a2);
   if ( v4 == v3 || IDecoObject::IsStaticInstance(this) )
+  {
     return v4;
+  }
   if ( *((_BYTE *)this + 73) && *((_BYTE *)this + 73) == 1 )
   {
     if ( *((_BYTE *)this + 73) != 2 && *((_BYTE *)this + 73) != 3 )
+    {
       return v3;
+    }
   }
   else
   {

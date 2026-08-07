@@ -23,7 +23,7 @@
 
 
 // address=[0x2fd3690]
-// Decompiled from IA_ColorReduction_Color *__thiscall IA_ColorReduction_Color::SetValues(  IA_ColorReduction_Color *this,  char a2,  char a3,  char a4,  unsigned __int8 a5)
+// Decompiled from IA_ColorReduction_Color *__thiscall IA_ColorReduction_Color::SetValues(IA_ColorReduction_Color *this, char a2, char a3, char a4, unsigned __int8 a5)
 void  IA_ColorReduction_Color::SetValues(unsigned char a2, unsigned char a3, unsigned char a4, unsigned char a5) {
   
   IA_ColorReduction_Color *result; // eax
@@ -58,7 +58,7 @@ unsigned char  IA_ColorReduction_Color::GetRed(void) {
 
 
 // address=[0x2fd36f0]
-// Decompiled from IA_ColorReduction_Color *__thiscall IA_ColorReduction_Color::SetGreen(  IA_ColorReduction_Color *this,  unsigned __int8 a2)
+// Decompiled from IA_ColorReduction_Color *__thiscall IA_ColorReduction_Color::SetGreen(IA_ColorReduction_Color *this, unsigned __int8 a2)
 void  IA_ColorReduction_Color::SetGreen(unsigned char a2) {
   
   IA_ColorReduction_Color *result; // eax
@@ -98,7 +98,7 @@ unsigned char  IA_ColorReduction_Color::GetBlue(void) {
 
 
 // address=[0x2fd3770]
-// Decompiled from IA_ColorReduction_Color *__thiscall IA_ColorReduction_Color::SetAlpha(  IA_ColorReduction_Color *this,  unsigned __int8 a2)
+// Decompiled from IA_ColorReduction_Color *__thiscall IA_ColorReduction_Color::SetAlpha(IA_ColorReduction_Color *this, unsigned __int8 a2)
 void  IA_ColorReduction_Color::SetAlpha(unsigned char a2) {
   
   IA_ColorReduction_Color *result; // eax

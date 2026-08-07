@@ -11,7 +11,9 @@ class CPersistence * __cdecl CStoragePileRole::New(std::istream & a1) {
 
   C = (CStoragePileRole *)operator new(8u);
   if ( C )
+  {
     CStoragePileRole::CStoragePileRole(C, (int)a1);
+  }
 }
 
 

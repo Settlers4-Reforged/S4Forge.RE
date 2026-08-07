@@ -23,20 +23,30 @@ void __cdecl COwnerMapEx::CalculateOwnerBits(void) {
   v5 = Squares::XYToVW(v0);
   v1 = CWorldManager::Height();
   v6 = Squares::XYToVW(v1);
-  for ( i = 0; i < v6; ++i )
+  for ( i = 0;
+        i < v6;
+        ++i )
   {
-    for ( j = 0; j < v5; ++j )
+    for ( j = 0;
+          j < v5;
+          ++j )
     {
       v2 = COwnerMapExEx::CalculateOwnerBits1(j, i);
       *COwnerMap::OwnerBits1VWRef(j, i) = v2;
     }
   }
-  for ( k = 0; ; ++k )
+  for ( k = 0;
+        ;
+        ++k )
   {
     result = k;
     if ( k >= v6 )
+    {
       break;
-    for ( m = 0; m < v5; ++m )
+    }
+    for ( m = 0;
+          m < v5;
+          ++m )
     {
       v4 = COwnerMapExEx::CalculateOwnerBits9(m, k);
       *COwnerMap::OwnerBits9VWRef(m, k) = v4;
@@ -127,12 +137,16 @@ void __cdecl COwnerMapEx::NotifyDeleteTile(int a1, int a2) {
     v3 = (Squares *)Y16X16::UnpackYFast(a1);
     v9 = Squares::XYToVW(v3);
     v5 = 16 << a2;
-    for ( i = ITiling::FirstTileOfSquareVW(v10, v9); i; i = CTile::NextSquareTile(v7) )
+    for ( i = ITiling::FirstTileOfSquareVW(v10, v9);
+          i;
+          i = CTile::NextSquareTile(v7) )
     {
       v7 = (struct CTile *)ITiling::Tile(i);
       v4 = CTile::Type(v7, v5);
       if ( (v5 & v4) != 0 )
+      {
         return;
+      }
     }
     v6 = COwnerMap::OwnerBits1VWRef(v10, v9);
     *v6 &= ~(unsigned __int8)COwnerMap::OwnerBit(a2);

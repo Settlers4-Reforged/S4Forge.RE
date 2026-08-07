@@ -83,12 +83,7 @@ void  CWaypoints::PushBack(int _iXY) {
 // Decompiled from void __thiscall CWaypoints::PushGoal(CWaypoints *this, int a2, int a3)
 void  CWaypoints::PushGoal(int a2, int a3) {
   
-  if ( this->m_iTotalWaypoints
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\AStar.h",
-         285,
-         "m_iWaypointsCount == 0") == 1 )
+  if ( this->m_iTotalWaypoints && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\AStar.h", 285, "m_iWaypointsCount == 0") == 1 )
   {
     __debugbreak();
   }

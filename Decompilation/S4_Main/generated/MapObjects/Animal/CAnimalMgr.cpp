@@ -16,7 +16,9 @@
   std::vector<unsigned int>::vector<unsigned int>();
   CRandom16Ex::CRandom16Ex((CRandom16Ex *)((char *)this + 380), 0);
   CAnimalMgr::Clear(this);
-  for ( i = 0; i < 17; ++i )
+  for ( i = 0;
+        i < 17;
+        ++i )
   {
     *((_DWORD *)this + i + 24) = 0;
     *((_DWORD *)this + i + 41) = 0;
@@ -91,25 +93,28 @@ void  CAnimalMgr::Init(void) {
   v4 = CWorldManager::Width();
   v25 = v3 / (CWorldManager::Height() * v4);
   if ( !v25 )
+  {
     v25 = 1;
+  }
   v21 = (int)this[61] * v25 * v15 / 10000;
   if ( v21 < (int)this[64] )
+  {
     this[64] = (CAnimalEffect *)v21;
-  v14 = 100
-      - ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-          g_pCfgMgr,
-          "ANIMAL_DATA",
-          "HUNT_PERCENT",
-          50);
+  }
+  v14 = 100 - ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "HUNT_PERCENT", 50);
   this[65] = (CAnimalEffect *)(v14 * (int)this[64] / 100);
   std::vector<unsigned int>::clear();
   std::vector<unsigned int>::clear();
   std::vector<unsigned int>::clear();
   std::vector<unsigned int>::clear();
   std::vector<unsigned int>::clear();
-  for ( i = 0; i < (int)this[71]; ++i )
+  for ( i = 0;
+        i < (int)this[71];
+        ++i )
   {
-    for ( j = 0; j < (int)this[72]; ++j )
+    for ( j = 0;
+          j < (int)this[72];
+          ++j )
     {
       if ( CAIResourceMap::IsOfLandtype(12, (Squares *)i, (Squares *)j) )
       {
@@ -117,9 +122,13 @@ void  CAnimalMgr::Init(void) {
         std::vector<unsigned int>::push_back(&v13);
         v23 = 16 * i;
         v24 = 16 * j;
-        for ( k = 0; k < 16; ++k )
+        for ( k = 0;
+              k < 16;
+              ++k )
         {
-          for ( m = 0; m < 16; ++m )
+          for ( m = 0;
+                m < 16;
+                ++m )
           {
             v20 = CWorldManager::ObjectId(k + v23, m + v24);
             if ( v20 )
@@ -147,9 +156,7 @@ void  CAnimalMgr::Init(void) {
         v10 = Y16X16::PackXYFast(i, j);
         std::vector<unsigned int>::push_back(&v10);
       }
-      if ( CAIResourceMap::IsOfLandtype(7, (Squares *)i, (Squares *)j)
-        && (unsigned __int8)CAnimalMgr::IsLandscapeAround(this, 13, i, j)
-        || CAIResourceMap::IsOfLandtype(13, (Squares *)i, (Squares *)j) )
+      if ( CAIResourceMap::IsOfLandtype(7, (Squares *)i, (Squares *)j) && (unsigned __int8)CAnimalMgr::IsLandscapeAround(this, 13, i, j) || CAIResourceMap::IsOfLandtype(13, (Squares *)i, (Squares *)j) )
       {
         v9 = Y16X16::PackXYFast(i, j);
         std::vector<unsigned int>::push_back(&v9);
@@ -159,9 +166,13 @@ void  CAnimalMgr::Init(void) {
   C = operator new(0x38u);
   v32 = 0;
   if ( C )
+  {
     v17 = CAnimalEffect::CAnimalEffect((CAnimalEffect *)C);
+  }
   else
+  {
     v17 = 0;
+  }
   v32 = -1;
   this[97] = v17;
   CAnimalEffect::SetMaxAmountButterflies(this[97], (int)this[67] + 1);
@@ -169,7 +180,9 @@ void  CAnimalMgr::Init(void) {
   CAnimalEffect::SetMaxAmountSeagulls(this[97], (int)this[69] + 1);
   result = CMapObjectMgr::LastUsedId();
   v8 = result;
-  for ( n = 1; n <= v8; ++n )
+  for ( n = 1;
+        n <= v8;
+        ++n )
   {
     v22 = CMapObjectMgr::EntityPtr(n);
     if ( v22 )
@@ -182,7 +195,9 @@ void  CAnimalMgr::Init(void) {
           this[62] = (CAnimalEffect *)((char *)this[62] + 1);
           v7 = IEntity::Type(v16);
           if ( !CAnimalMgr::IsHuntable((CAnimalMgr *)this, v7) )
+          {
             this[63] = (CAnimalEffect *)((char *)this[63] + 1);
+          }
         }
       }
     }
@@ -204,10 +219,14 @@ void  CAnimalMgr::ShutDown(void) {
   {
     result = this[97];
     if ( result )
+    {
       result = (CAnimalMgr *)delete this[97];
+    }
     this[97] = 0;
   }
-  for ( i = 0; i < 17; ++i )
+  for ( i = 0;
+        i < 17;
+        ++i )
   {
     if ( this[i + 24] )
     {
@@ -242,26 +261,30 @@ int  CAnimalMgr::AddAnimal(int a2, int a3, int a4) {
   int v5; // [esp+0h] [ebp-Ch]
   int v6; // [esp+4h] [ebp-8h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 447, "g_cWorld.InWorld( _iX, _iY )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 447, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
-  if ( (a4 <= 0 || a4 >= 18)
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 448, "_iAnimalType>0 && _iAnimalType<ANIMAL_MAX") == 1 )
+  if ( (a4 <= 0 || a4 >= 18) && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 448, "_iAnimalType>0 && _iAnimalType<ANIMAL_MAX") == 1 )
   {
     __debugbreak();
   }
   v6 = CWorldManager::Index(a2, a3);
   if ( !CAnimalMgr::IsTileFree(this, v6) )
+  {
     return 0;
+  }
   v5 = CAnimalMgr::Create(a2, a3, a4);
   ++*((_DWORD *)this + 62);
   if ( byte_4032AD4[40 * a4] )
+  {
     return v5;
+  }
   ++*((_DWORD *)this + 63);
   if ( dword_4032AE4[10 * a4] >= 0 )
+  {
     ++dword_4032AEC[10 * a4];
+  }
   return v5;
 }
 
@@ -273,23 +296,17 @@ int  CAnimalMgr::AddAnimalAsEffect(int a2, int a3, int a4, int a5) {
   unsigned int AnimalFirstJob; // [esp+4h] [ebp-8h]
   int v7; // [esp+8h] [ebp-4h]
 
-  if ( (a5 <= 0 || a5 >= 42)
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 486, "_iAnimalJob>0 && _iAnimalJob<SIV_ANIMAL_MAX") == 1 )
+  if ( (a5 <= 0 || a5 >= 42) && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 486, "_iAnimalJob>0 && _iAnimalJob<SIV_ANIMAL_MAX") == 1 )
   {
     __debugbreak();
   }
   if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) )
+  {
     return 0;
+  }
   AnimalFirstJob = CGfxManager::GetAnimalFirstJob((CGfxManager *)g_pGfxManager, a5);
   v7 = CLogic::Effects((DWORD *)g_pLogic);
-  return (*(int (__thiscall **)(int, unsigned int, _DWORD, int, int, int, _DWORD))(*(_DWORD *)v7 + 32))(
-           v7,
-           AnimalFirstJob,
-           0,
-           a2,
-           a3,
-           a4,
-           0);
+  return (*(int (__thiscall **)(int, unsigned int, _DWORD, int, int, int, _DWORD))(*(_DWORD *)v7 + 32))(v7, AnimalFirstJob, 0, a2, a3, a4, 0);
 }
 
 
@@ -301,26 +318,27 @@ void  CAnimalMgr::DeleteAnimal(int a2) {
   unsigned __int16 *v3; // [esp+0h] [ebp-Ch]
   int v4; // [esp+4h] [ebp-8h]
 
-  if ( (a2 <= 0 || a2 >= 0xFFFF)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Animal\\AnimalMgr.cpp",
-         507,
-         "_iAnimalId>0 && _iAnimalId<CMapObjectMgr::MAX_ENTRIES") == 1 )
+  if ( (a2 <= 0 || a2 >= 0xFFFF) && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 507, "_iAnimalId>0 && _iAnimalId<CMapObjectMgr::MAX_ENTRIES") == 1 )
   {
     __debugbreak();
   }
   result = 0;
   if ( !a2 )
+  {
     return result;
+  }
   --*((_DWORD *)this + 62);
   v3 = (unsigned __int16 *)CAnimalMgr::Animal(a2);
   v4 = IEntity::Type(v3);
   if ( CAnimalMgr::IsHuntable(this, v4) )
+  {
     return CMapObjectMgr::Kill(a2, 0);
+  }
   --*((_DWORD *)this + 63);
   if ( dword_4032AE4[10 * v4] >= 0 )
+  {
     --dword_4032AEC[10 * v4];
+  }
   return CMapObjectMgr::Kill(a2, 0);
 }
 
@@ -346,24 +364,32 @@ void  CAnimalMgr::SpawnAnimalBehindTree(int a2, int a3, int a4) {
   v6 = v4 % 0x10;
   v5 = v4 / 0x10;
   v13 = v6;
-  for ( i = 2; i < 16; ++i )
+  for ( i = 2;
+        i < 16;
+        ++i )
   {
     if ( v13 < 16 )
     {
       if ( v13 < 2 )
+      {
         v13 = 2;
+      }
     }
     else
     {
       LOBYTE(v5) = v13 - 16;
       v13 -= 16;
     }
-    for ( j = 1; j < 16; ++j )
+    for ( j = 1;
+          j < 16;
+          ++j )
     {
       if ( v14 < 16 )
       {
         if ( v14 < 1 )
+        {
           v14 = 1;
+        }
       }
       else
       {
@@ -413,7 +439,9 @@ void  CAnimalMgr::SpawnAnimalInTown(int a2, int a3, int a4) {
   v12 = this;
   v4 = CAnimalMgr::CountBuildingSquares(this, a3, a4);
   if ( v4 < 3 )
+  {
     return v4;
+  }
   EntityIdVW = CWarMap::FirstEntityIdVW(2, a3, a4);
   BuildingPtr = (CPropertySet *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, EntityIdVW);
   v5 = IEntity::WarMapNode(BuildingPtr);
@@ -421,16 +449,22 @@ void  CAnimalMgr::SpawnAnimalInTown(int a2, int a3, int a4) {
   v17 = v4;
   if ( !v4 )
   {
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       v4 = CWarMap::FirstEntityIdVW(2, g_sNeighborPoints[2 * i] + a3, MEMORY[0x37D8C0C][2 * i] + a4);
       v17 = v4;
       if ( v4 > 0 )
+      {
         break;
+      }
     }
   }
   if ( !v17 )
+  {
     return v4;
+  }
   v6 = (Y16X16 *)IEntity::PackedXY(BuildingPtr);
   Y16X16::UnpackXYFast(v6, &v15, &v16);
   BuildingPtr = (CPropertySet *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v17);
@@ -441,16 +475,24 @@ void  CAnimalMgr::SpawnAnimalInTown(int a2, int a3, int a4) {
   v13 = CWorldManager::Index(v15, v16);
   LOBYTE(v4) = CAnimalMgr::IsTileFree(v12, v13);
   if ( !(_BYTE)v4 )
+  {
     return v4;
+  }
   v4 = CWorldManager::Ground(v13) & 0xF0;
   if ( v4 != 16 )
+  {
     return v4;
+  }
   v4 = CWorldManager::FlagBits(v13, 4u);
   if ( v4 )
+  {
     return v4;
+  }
   LOBYTE(v4) = CWorldManager::IsPositionFreeForSettler(v13);
   if ( (_BYTE)v4 )
+  {
     LOBYTE(v4) = CAnimalMgr::AddAnimal(v12, v15, v16, a2);
+  }
   return v4;
 }
 
@@ -469,14 +511,16 @@ void  CAnimalMgr::SpawnAnimalOnGround(int a2, int a3, int a4, int a5) {
   v8 = CWorldManager::Width(this);
   result = v8 * 16 * a5 + 16 * a4;
   v6 = result;
-  for ( i = 1; i < 15; ++i )
+  for ( i = 1;
+        i < 15;
+        ++i )
   {
-    for ( j = 1; j < 15; ++j )
+    for ( j = 1;
+          j < 15;
+          ++j )
     {
       v9 = v8 * i + j + v6;
-      if ( (CWorldManager::Ground(v9) & 0xF0) == a3
-        && CAnimalMgr::IsTileFree(this, v9)
-        && CWorldManager::IsPositionFreeForSettler(v9) )
+      if ( (CWorldManager::Ground(v9) & 0xF0) == a3 && CAnimalMgr::IsTileFree(this, v9) && CWorldManager::IsPositionFreeForSettler(v9) )
       {
         return CAnimalMgr::AddAnimal(this, j + 16 * a4, i + 16 * a5, a2);
       }
@@ -501,14 +545,16 @@ void  CAnimalMgr::SpawnAnimalOnDarkLand(int a2, int a3, int a4) {
   v7 = CWorldManager::Width(this);
   result = v7 * 16 * a4 + 16 * a3;
   v5 = result;
-  for ( i = 1; i < 15; ++i )
+  for ( i = 1;
+        i < 15;
+        ++i )
   {
-    for ( j = 1; j < 15; ++j )
+    for ( j = 1;
+          j < 15;
+          ++j )
     {
       v8 = v7 * i + j + v5;
-      if ( CWorldManager::FlagBits(v8, 4u)
-        && CAnimalMgr::IsTileFree(this, v8)
-        && CWorldManager::IsPositionFreeForSettler(v8) )
+      if ( CWorldManager::FlagBits(v8, 4u) && CAnimalMgr::IsTileFree(this, v8) && CWorldManager::IsPositionFreeForSettler(v8) )
       {
         return CAnimalMgr::AddAnimal(this, j + 16 * a3, i + 16 * a4, a2);
       }
@@ -546,7 +592,9 @@ void  CAnimalMgr::Update(void) {
     CAnimalMgr::ShowEffect(this);
   }
   if ( !(*((_DWORD *)this + 93) % 3) )
+  {
     CAnimalMgr::ShowFishResources(this);
+  }
   v9 = CLogic::Effects((DWORD *)g_pLogic);
   if ( !(*(int (__thiscall **)(int, int))(*(_DWORD *)v9 + 48))(v9, 11) )
   {
@@ -555,27 +603,35 @@ void  CAnimalMgr::Update(void) {
     {
       v7 = CLogic::Effects((DWORD *)g_pLogic);
       if ( !(*(int (__thiscall **)(int, int))(*(_DWORD *)v7 + 48))(v7, 13) )
+      {
         CAnimalMgr::AddButterflies(this);
+      }
     }
   }
   v6 = CLogic::Effects((DWORD *)g_pLogic);
   if ( !(*(int (__thiscall **)(int, int))(*(_DWORD *)v6 + 48))(v6, 14) )
+  {
     CAnimalMgr::AddBirds(this);
+  }
   v5 = CLogic::Effects((DWORD *)g_pLogic);
   if ( !(*(int (__thiscall **)(int, int))(*(_DWORD *)v5 + 48))(v5, 15) )
   {
     v4 = CLogic::Effects((DWORD *)g_pLogic);
     if ( !(*(int (__thiscall **)(int, int))(*(_DWORD *)v4 + 48))(v4, 16) )
+    {
       CAnimalMgr::AddSeagulls(this);
+    }
   }
   v3 = CLogic::Effects((DWORD *)g_pLogic);
   if ( !(*(int (__thiscall **)(int, int))(*(_DWORD *)v3 + 48))(v3, 17) )
+  {
     CAnimalMgr::AddDucks(this);
+  }
 }
 
 
 // address=[0x14dbe60]
-// Decompiled from char __thiscall CAnimalMgr::UpdateMovingEffect(  CAnimalEffect **this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  unsigned int a5)
+// Decompiled from char __thiscall CAnimalMgr::UpdateMovingEffect(CAnimalEffect **this, unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5)
 void  CAnimalMgr::UpdateMovingEffect(unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
   return CAnimalEffect::Update(this[97], a2, a3, a4, a5);
@@ -592,7 +648,9 @@ void  CAnimalMgr::AddButterfly(int a2, int a3) {
 
   result = (CAnimalMgr *)this;
   if ( !this[97] )
+  {
     return result;
+  }
   v5 = CAnimalEffect::AddButterfly(this[97], a2, a3);
   v4 = (void *)CLogic::FutureEvents(g_pLogic);
   return (CAnimalMgr *)IFutureEvents::AddFutureEvent16(v4, 7, 1, 0, v5, a2, a3, 0);
@@ -607,10 +665,14 @@ bool  CAnimalMgr::IsButterflyLand(int a2, int a3) {
   unsigned int i; // [esp+8h] [ebp-4h]
 
   v4 = Y16X16::PackXYFast(a2, a3);
-  for ( i = 0; i < std::vector<unsigned int>::size(this + 308); ++i )
+  for ( i = 0;
+        i < std::vector<unsigned int>::size(this + 308);
+        ++i )
   {
     if ( *(_DWORD *)std::vector<unsigned int>::operator[](i) == v4 )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -624,19 +686,24 @@ bool  CAnimalMgr::CheckButterflyUnderground(int a2, int a3) {
   int v5; // [esp+4h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 854, "g_cWorld.InWorld( _iX, _iY )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 854, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
   if ( !CAnimalMgr::CheckButterflyUndergroundFast(this, a2, a3) )
+  {
     return 0;
-  for ( i = 0; i < 12; ++i )
+  }
+  for ( i = 0;
+        i < 12;
+        ++i )
   {
     v4 = a2 + CSpiralOffsets::DeltaX(i + 7);
     v5 = a3 + CSpiralOffsets::DeltaY(i + 7);
     if ( (CWorldManager::Ground(v4, v5) & 0xF0) == 0x10 )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -646,8 +713,7 @@ bool  CAnimalMgr::CheckButterflyUnderground(int a2, int a3) {
 // Decompiled from bool __thiscall CAnimalMgr::CheckButterflyUndergroundFast(CAnimalMgr *this, int a2, int a3)
 bool  CAnimalMgr::CheckButterflyUndergroundFast(int a2, int a3) {
   
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 878, "g_cWorld.InWorld( _iX, _iY )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 878, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
@@ -663,10 +729,14 @@ bool  CAnimalMgr::IsBirdLand(int a2, int a3) {
   unsigned int i; // [esp+8h] [ebp-4h]
 
   v4 = Y16X16::PackXYFast(a2, a3);
-  for ( i = 0; i < std::vector<unsigned int>::size(this + 324); ++i )
+  for ( i = 0;
+        i < std::vector<unsigned int>::size(this + 324);
+        ++i )
   {
     if ( *(_DWORD *)std::vector<unsigned int>::operator[](i) == v4 )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -681,28 +751,26 @@ bool  CAnimalMgr::CheckBirdUnderground(int a2, int a3) {
   int v6; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 916, "g_cWorld.InWorld( _iX, _iY )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 916, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
   v4 = CWorldManager::Index(a2, a3);
   if ( CWorldManager::FlagBits(v4, 4u) )
-    return 0;
-  if ( (CWorldManager::Ground(a2, a3) & 0xF0) != 0x10
-    && (CWorldManager::Ground(a2, a3) & 0xF0) != 0x20
-    && (CWorldManager::Ground(a2, a3) & 0xF0) != 0x70 )
   {
     return 0;
   }
-  for ( i = 0; i < 12; ++i )
+  if ( (CWorldManager::Ground(a2, a3) & 0xF0) != 0x10 && (CWorldManager::Ground(a2, a3) & 0xF0) != 0x20 && (CWorldManager::Ground(a2, a3) & 0xF0) != 0x70 )
+  {
+    return 0;
+  }
+  for ( i = 0;
+        i < 12;
+        ++i )
   {
     v5 = a2 + CSpiralOffsets::DeltaX(i + 7);
     v6 = a3 + CSpiralOffsets::DeltaY(i + 7);
-    if ( (unsigned __int8)CWorldManager::InWorld(v5, v6)
-      && ((CWorldManager::Ground(v5, v6) & 0xF0) == 0x10
-       || (CWorldManager::Ground(v5, v6) & 0xF0) == 0x20
-       || (CWorldManager::Ground(v5, v6) & 0xF0) == 0x70) )
+    if ( (unsigned __int8)CWorldManager::InWorld(v5, v6) && ((CWorldManager::Ground(v5, v6) & 0xF0) == 0x10 || (CWorldManager::Ground(v5, v6) & 0xF0) == 0x20 || (CWorldManager::Ground(v5, v6) & 0xF0) == 0x70) )
     {
       return 1;
     }
@@ -728,7 +796,9 @@ bool  CAnimalMgr::IsSeagullLand(int a2, int a3) {
         i = std::vector<unsigned int>::size(v8 + 340, v6, v8) )
   {
     if ( *(_DWORD *)std::vector<unsigned int>::operator[](v9) == v6 )
+    {
       return 1;
+    }
     ++v9;
   }
   return 0;
@@ -746,25 +816,28 @@ bool  CAnimalMgr::CheckSeagullUnderground(int a1, int a2) {
   int v7; // [esp+14h] [ebp-4h]
   int v8; // [esp+14h] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a1, a2)
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 980, "g_cWorld.InWorld( _iX, _iY )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a1, a2) && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 980, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
   v7 = CWorldManager::Index(a1, a2);
   LandscapePtr = CWorldManager::GetLandscapePtr();
   if ( (CWorldManager::Ground(v7) & 0xF0) != 0x30 && (CWorldManager::Ground(v7) & 0xF0) != 0 )
+  {
     return 0;
+  }
   if ( (*(_BYTE *)(LandscapePtr + 4 * v7 + 2) & 0x20) != 0 )
+  {
     return 0;
-  for ( i = 0; i < 12; ++i )
+  }
+  for ( i = 0;
+        i < 12;
+        ++i )
   {
     v3 = a1 + CSpiralOffsets::DeltaX(i + 7);
     v4 = a2 + CSpiralOffsets::DeltaY(i + 7);
     v8 = CWorldManager::Index(v3, v4);
-    if ( CWorldManager::InWorld(v8)
-      && ((CWorldManager::Ground(v8) & 0xF0) == 0x30 || (CWorldManager::Ground(v8) & 0xF0) == 0)
-      && (*(_BYTE *)(LandscapePtr + 4 * v8 + 2) & 0x20) == 0 )
+    if ( CWorldManager::InWorld(v8) && ((CWorldManager::Ground(v8) & 0xF0) == 0x30 || (CWorldManager::Ground(v8) & 0xF0) == 0) && (*(_BYTE *)(LandscapePtr + 4 * v8 + 2) & 0x20) == 0 )
     {
       return 1;
     }
@@ -784,23 +857,24 @@ bool  CAnimalMgr::CheckSeagullUndergroundAddPosition(int a2, int a3) {
   int v8; // [esp+14h] [ebp-4h]
   int v9; // [esp+14h] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 1026, "g_cWorld.InWorld( _iX, _iY )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 1026, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
   LandscapePtr = CWorldManager::GetLandscapePtr();
   v8 = CWorldManager::Index(a2, a3);
   if ( (CWorldManager::Ground(v8) & 0xF0) != 0 || (*(_BYTE *)(LandscapePtr + 4 * v8 + 2) & 0x20) != 0 )
+  {
     return 0;
-  for ( i = 0; i < 12; ++i )
+  }
+  for ( i = 0;
+        i < 12;
+        ++i )
   {
     v4 = a2 + CSpiralOffsets::DeltaX(i + 7);
     v5 = a3 + CSpiralOffsets::DeltaY(i + 7);
     v9 = CWorldManager::Index(v4, v5);
-    if ( CWorldManager::InWorld(v9)
-      && (CWorldManager::Ground(v9) & 0xF0) == 0
-      && (*(_BYTE *)(LandscapePtr + 4 * v9 + 2) & 0x20) == 0 )
+    if ( CWorldManager::InWorld(v9) && (CWorldManager::Ground(v9) & 0xF0) == 0 && (*(_BYTE *)(LandscapePtr + 4 * v9 + 2) & 0x20) == 0 )
     {
       return 1;
     }
@@ -844,7 +918,9 @@ void  CAnimalMgr::Store(class S4::CMapFile & a2) {
   UsedId = CMapObjectMgr::LastUsedId();
   v14 = UsedId;
   v16 = 0;
-  for ( i = 0; i <= v14; ++i )
+  for ( i = 0;
+        i <= v14;
+        ++i )
   {
     v11 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(i);
     v15 = v11;
@@ -852,11 +928,15 @@ void  CAnimalMgr::Store(class S4::CMapFile & a2) {
     {
       v10 = IEntity::ObjType(v15);
       if ( v10 == 128 )
+      {
         ++v16;
+      }
     }
   }
   operator^<unsigned int>((struct std::ostream *)v5, &v16);
-  for ( i = 0; i <= v14; ++i )
+  for ( i = 0;
+        i <= v14;
+        ++i )
   {
     v9 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(i);
     v17 = v9;
@@ -864,7 +944,9 @@ void  CAnimalMgr::Store(class S4::CMapFile & a2) {
     {
       v8 = IEntity::ObjType(v17);
       if ( v8 == 128 )
+      {
         (*(void (__thiscall **)(unsigned __int8 *, _DWORD *))(*(_DWORD *)v17 + 4))(v17, v5);
+      }
     }
   }
   std::ostream::put(0);
@@ -921,8 +1003,12 @@ void  CAnimalMgr::Load(class S4::CMapFile & a2) {
     }
     v7 = 0;
     operator^<unsigned int>(v2, &v7);
-    for ( i = 0; i < v7; ++i )
+    for ( i = 0;
+          i < v7;
+          ++i )
+    {
       CPersistence::New((struct std::istream *)v2);
+    }
     std::ios_base::exceptions((std::ios_base *)((char *)v2 + *(_DWORD *)(v2[0] + 4)), v3);
     LOBYTE(v12) = 0;
     std::istringstream::`vbase destructor'(v2);
@@ -940,9 +1026,13 @@ bool  CAnimalMgr::IsHuntable(int a2) {
 
   AnimalDataPtr = CAnimalMgr::GetAnimalDataPtr(this, a2);
   if ( AnimalDataPtr )
+  {
     return *((_BYTE *)AnimalDataPtr + 4);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -951,9 +1041,13 @@ bool  CAnimalMgr::IsHuntable(int a2) {
 struct SAnimalData *  CAnimalMgr::GetAnimalDataPtr(int a2) {
   
   if ( a2 < 0x12 )
+  {
     return &CAnimalMgr::m_asAnimalData[10 * a2];
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -962,9 +1056,13 @@ struct SAnimalData *  CAnimalMgr::GetAnimalDataPtr(int a2) {
 struct SAnimalData *  CAnimalMgr::GetAnimalEffectDataPtr(int a2) {
   
   if ( a2 < 8 )
+  {
     return &CAnimalMgr::m_asAnimalEffectData[10 * a2];
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -1021,109 +1119,72 @@ void  CAnimalMgr::LoadAnimalData(void) {
 
   memset(CAnimalMgr::m_asAnimalData, 0, 0x2D0u);
   memset(CAnimalMgr::m_asAnimalEffectData, 0, 0x140u);
-  *((_DWORD *)this + 64) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-                             g_pCfgMgr,
-                             "ANIMAL_DATA",
-                             "MAX_ANIMALS",
-                             1000);
-  *((_DWORD *)this + 66) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-                             g_pCfgMgr,
-                             "ANIMAL_DATA",
-                             "MAX_MYSTIC",
-                             4);
-  *((_DWORD *)this + 94) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-                             g_pCfgMgr,
-                             "ANIMAL_DATA",
-                             "FISH_MIN",
-                             2);
-  *((_DWORD *)this + 58) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-                             g_pCfgMgr,
-                             "ANIMAL_DATA",
-                             "PLAIN_TREES",
-                             1);
-  *((_DWORD *)this + 59) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-                             g_pCfgMgr,
-                             "ANIMAL_DATA",
-                             "LIGHT_TREES",
-                             4);
-  *((_DWORD *)this + 60) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-                             g_pCfgMgr,
-                             "ANIMAL_DATA",
-                             "DEEP_TREES",
-                             8);
-  *((_DWORD *)this + 61) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-                             g_pCfgMgr,
-                             "ANIMAL_DATA",
-                             "LAND_POP",
-                             8);
-  *((_DWORD *)this + 67) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-                             g_pCfgMgr,
-                             "ANIMAL_DATA",
-                             "AMOUNT_BUTTERFLY",
-                             0);
-  *((_DWORD *)this + 68) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-                             g_pCfgMgr,
-                             "ANIMAL_DATA",
-                             "AMOUNT_BIRDS",
-                             0);
-  *((_DWORD *)this + 69) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-                             g_pCfgMgr,
-                             "ANIMAL_DATA",
-                             "AMOUNT_SEAGULL",
-                             0);
-  *((_DWORD *)this + 70) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-                             g_pCfgMgr,
-                             "ANIMAL_DATA",
-                             "AMOUNT_DUCK",
-                             0);
+  *((_DWORD *)this + 64) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "MAX_ANIMALS", 1000);
+  *((_DWORD *)this + 66) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "MAX_MYSTIC", 4);
+  *((_DWORD *)this + 94) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "FISH_MIN", 2);
+  *((_DWORD *)this + 58) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "PLAIN_TREES", 1);
+  *((_DWORD *)this + 59) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "LIGHT_TREES", 4);
+  *((_DWORD *)this + 60) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "DEEP_TREES", 8);
+  *((_DWORD *)this + 61) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "LAND_POP", 8);
+  *((_DWORD *)this + 67) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "AMOUNT_BUTTERFLY", 0);
+  *((_DWORD *)this + 68) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "AMOUNT_BIRDS", 0);
+  *((_DWORD *)this + 69) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "AMOUNT_SEAGULL", 0);
+  *((_DWORD *)this + 70) = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "AMOUNT_DUCK", 0);
   v25 = (*(int (__thiscall **)(void *))(*(_DWORD *)g_pTiling + 52))(g_pTiling) / 25600;
   if ( !v25 )
+  {
     v25 = 1;
+  }
   *((_DWORD *)this + 67) *= v25;
   *((_DWORD *)this + 68) *= v25;
   *((_DWORD *)this + 69) *= v25;
-  result = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-             g_pCfgMgr,
-             "ANIMAL_DATA",
-             "SEARCH_RAD",
-             10);
+  result = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, "ANIMAL_DATA", "SEARCH_RAD", 10);
   v12 = result;
-  for ( i = 0; i < 17; ++i )
+  for ( i = 0;
+        i < 17;
+        ++i )
   {
     v20 = operator new(0x10u);
     if ( v20 )
+    {
       v19 = std::vector<int>::vector<int>(v20);
+    }
     else
+    {
       v19 = 0;
+    }
     *((_DWORD *)this + i + 24) = v19;
     v18 = operator new(0x10u);
     if ( v18 )
+    {
       v17 = std::vector<int>::vector<int>(v18);
+    }
     else
+    {
       v17 = 0;
+    }
     *((_DWORD *)this + i + 41) = v17;
     result = i + 1;
   }
-  for ( i = 1; i < 18; ++i )
+  for ( i = 1;
+        i < 18;
+        ++i )
   {
     AnimalName = CS4DefineNames::GetAnimalName(i);
-    if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, _DWORD))g_pCfgMgr->DoesExist)(
-           g_pCfgMgr,
-           AnimalName,
-           0) )
+    if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, _DWORD))g_pCfgMgr->DoesExist)(g_pCfgMgr, AnimalName, 0) )
     {
       memset(&CAnimalMgr::m_asAnimalData[10 * i], 0, 0x28u);
-      v2 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-             g_pCfgMgr,
-             AnimalName,
-             "RACE",
-             -1);
+      v2 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, AnimalName, "RACE", -1);
       dword_4032AE4[10 * i] = v2;
       if ( dword_4032AE4[10 * i] <= -1 )
+      {
         goto LABEL_23;
+      }
       result = CPlayerManager::LastPlayerId();
       v31 = 0;
-      for ( j = result; j >= 1; --j )
+      for ( j = result;
+            j >= 1;
+            --j )
       {
         result = CPlayerManager::Race(j);
         if ( result == dword_4032AE4[10 * i] )
@@ -1135,43 +1196,21 @@ void  CAnimalMgr::LoadAnimalData(void) {
       if ( v31 )
       {
 LABEL_23:
-        v3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-               g_pCfgMgr,
-               AnimalName,
-               "LAND_TYPE",
-               0);
+        v3 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, AnimalName, "LAND_TYPE", 0);
         CAnimalMgr::m_asAnimalData[10 * i] = v3;
-        v16 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-                g_pCfgMgr,
-                AnimalName,
-                "HUNTABLE",
-                0) != 0;
+        v16 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, AnimalName, "HUNTABLE", 0) != 0;
         byte_4032AD4[40 * i] = v16;
-        v15 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-                g_pCfgMgr,
-                AnimalName,
-                "RUNAWAY",
-                0) != 0;
+        v15 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, AnimalName, "RUNAWAY", 0) != 0;
         byte_4032AD5[40 * i] = v15;
-        v4 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-               g_pCfgMgr,
-               AnimalName,
-               "SPEED_DIVIDER",
-               0);
+        v4 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, AnimalName, "SPEED_DIVIDER", 0);
         dword_4032AE0[10 * i] = v4;
-        v5 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-               g_pCfgMgr,
-               AnimalName,
-               "SOUND",
-               0);
+        v5 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, AnimalName, "SOUND", 0);
         dword_4032AF0[10 * i] = v5;
         if ( dword_4032AF0[10 * i] == -1 )
+        {
           dword_4032AF0[10 * i] = 0;
-        v6 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-               g_pCfgMgr,
-               AnimalName,
-               "SOUND_INTERVAL",
-               100);
+        }
+        v6 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, AnimalName, "SOUND_INTERVAL", 100);
         byte_4032AF4[40 * i] = v6;
         dword_4032AE8[10 * i] = v12;
         std::vector<int>::push_back((int)&i);
@@ -1206,26 +1245,25 @@ LABEL_23:
       result = CTrace::Print("CAnimalMgr::LoadAnimalData : No config data for animal %s available", AnimalName);
     }
   }
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     v27 = (&off_3775B54)[2 * i];
-    if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, _DWORD))g_pCfgMgr->DoesExist)(
-           g_pCfgMgr,
-           v27,
-           0) )
+    if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, _DWORD))g_pCfgMgr->DoesExist)(g_pCfgMgr, v27, 0) )
     {
       memset(&CAnimalMgr::m_asAnimalEffectData[10 * i], 0, 0x28u);
-      v7 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-             g_pCfgMgr,
-             v27,
-             "RACE",
-             -1);
+      v7 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, v27, "RACE", -1);
       dword_4032DB4[10 * i] = v7;
       if ( dword_4032DB4[10 * i] <= -1 )
+      {
         goto LABEL_44;
+      }
       result = CPlayerManager::LastPlayerId();
       v30 = 0;
-      for ( k = result; k >= 1; --k )
+      for ( k = result;
+            k >= 1;
+            --k )
       {
         result = CPlayerManager::Race(k);
         if ( result == dword_4032DB4[10 * i] )
@@ -1237,43 +1275,21 @@ LABEL_23:
       if ( v30 )
       {
 LABEL_44:
-        v8 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-               g_pCfgMgr,
-               v27,
-               "LAND_TYPE",
-               0);
+        v8 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, v27, "LAND_TYPE", 0);
         CAnimalMgr::m_asAnimalEffectData[10 * i] = v8;
-        v14 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-                g_pCfgMgr,
-                v27,
-                "HUNTABLE",
-                0) != 0;
+        v14 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, v27, "HUNTABLE", 0) != 0;
         byte_4032DA4[40 * i] = v14;
-        v13 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-                g_pCfgMgr,
-                v27,
-                "RUNAWAY",
-                0) != 0;
+        v13 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, v27, "RUNAWAY", 0) != 0;
         byte_4032DA5[40 * i] = v13;
-        v9 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-               g_pCfgMgr,
-               v27,
-               "SPEED_DIVIDER",
-               0);
+        v9 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, v27, "SPEED_DIVIDER", 0);
         dword_4032DB0[10 * i] = v9;
-        v10 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(
-                g_pCfgMgr,
-                v27,
-                "SOUND",
-                0);
+        v10 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, _DWORD))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, v27, "SOUND", 0);
         dword_4032DC0[10 * i] = v10;
         if ( dword_4032DC0[10 * i] == -1 )
+        {
           dword_4032DC0[10 * i] = 0;
-        v11 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(
-                g_pCfgMgr,
-                v27,
-                "SOUND_INTERVAL",
-                100);
+        }
+        v11 = ((int (__thiscall *)(CConfigManager *, const char *, const char *, int))g_pCfgMgr->GetIntValueNoAdd)(g_pCfgMgr, v27, "SOUND_INTERVAL", 100);
         byte_4032DC4[40 * i] = v11;
         dword_4032DB8[10 * i] = v12;
         std::vector<int>::push_back((int)&i);
@@ -1434,7 +1450,9 @@ void __cdecl CAnimalMgr::InitAnimalJobs(class CAnimal * a1, int a2) {
   v8 = CEntityTask::CEntityTask((CEntityTask *)v13, 6u, v18, 0, 0, -1, v7, -1, 1, 1, 0, 0, 0, 0);
   result = CAnimal::AddTask(a1, v8);
   if ( v21 == -1 )
+  {
     return result;
+  }
   v10 = CGfxManager::GetAnimalFrameCount(g_pGfxManager, v21);
   v11 = CEntityTask::CEntityTask((CEntityTask *)v12, 0x1Bu, v21, 0, 0, -1, v10, -1, 1, 1, 0, 0, 0, 0);
   return CAnimal::AddTask(a1, v11);
@@ -1458,7 +1476,9 @@ void  CAnimalMgr::SpawnAnimal(int a2, int a3) {
   v3 = 100 * CWarMap::NumberOfEntitiesVW(3, a2, a3);
   LOBYTE(EntityIdVW) = (_BYTE)this;
   if ( v3 > *((_DWORD *)this + 61) )
+  {
     return EntityIdVW;
+  }
   v8 = CAIResourceMap::ResourceDataVW(a2, a3);
   EntityIdVW = CWarMap::FirstEntityIdVW(2, a2, a3);
   if ( EntityIdVW <= 0 )
@@ -1477,9 +1497,13 @@ void  CAnimalMgr::SpawnAnimal(int a2, int a3) {
           {
             LOBYTE(EntityIdVW) = (_BYTE)this;
             if ( v7 < *((_DWORD *)this + 58) )
+            {
               v11 = 1;
+            }
             else
+            {
               v11 = 2;
+            }
           }
           else
           {
@@ -1502,25 +1526,35 @@ void  CAnimalMgr::SpawnAnimal(int a2, int a3) {
     v11 = 9;
   }
   if ( v11 < 0 )
+  {
     return EntityIdVW;
+  }
   EntityIdVW = std::vector<int>::size(*((_DWORD *)this + v11 + 24));
   v9 = EntityIdVW;
   if ( !EntityIdVW )
+  {
     return EntityIdVW;
+  }
   v5 = CStateGame::Rand(g_pGame);
   v10 = *(_DWORD *)std::vector<int>::operator[](v5 % v9);
   if ( v10 == 9 && (int)(CStateGame::Rand(g_pGame) % 0xAu) < 5 )
+  {
     v10 = 16;
+  }
   if ( !byte_4032AD4[40 * v10] )
   {
     EntityIdVW = *((_DWORD *)this + 63);
     if ( EntityIdVW >= *((_DWORD *)this + 65) )
+    {
       return EntityIdVW;
+    }
     if ( dword_4032AE4[10 * v10] >= 0 )
     {
       LOBYTE(EntityIdVW) = (_BYTE)this;
       if ( dword_4032AEC[10 * v10] >= *((_DWORD *)this + 66) )
+      {
         return EntityIdVW;
+      }
     }
   }
   LOBYTE(EntityIdVW) = v11 - 1;
@@ -1552,22 +1586,24 @@ int __cdecl CAnimalMgr::Create(int a1, int a2, int a3) {
   CLandAnimal *v5; // [esp+10h] [ebp-14h]
   CLandAnimal *v6; // [esp+14h] [ebp-10h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a1, a2)
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 1670, "g_cWorld.InWorld( _iX, _iY )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a1, a2) && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 1670, "g_cWorld.InWorld( _iX, _iY )") == 1 )
   {
     __debugbreak();
   }
-  if ( (a3 <= 0 || a3 >= 18)
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 1671, "_iAnimalType>0 && _iAnimalType<ANIMAL_MAX") == 1 )
+  if ( (a3 <= 0 || a3 >= 18) && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalMgr.cpp", 1671, "_iAnimalType>0 && _iAnimalType<ANIMAL_MAX") == 1 )
   {
     __debugbreak();
   }
   FreeSlot = CMapObjectMgr::GetFreeSlot(0);
   v6 = (CLandAnimal *)CLandAnimal::operator new(0xB0u);
   if ( v6 )
+  {
     v5 = CLandAnimal::CLandAnimal(v6, a1, a2, a3, FreeSlot);
+  }
   else
+  {
     v5 = 0;
+  }
   CAnimalMgr::InitAnimalJobs(v5, a3);
   CLandAnimal::Init(v5, (struct SAnimalData *)&CAnimalMgr::m_asAnimalData[10 * a3]);
   return FreeSlot;
@@ -1598,11 +1634,7 @@ void  CAnimalMgr::ShowEffect(void) {
   v8 += v2 % 8;
   v3 = CAnimalMgr::EffectRandomNumber(v7) % 8;
   v9 += v3;
-  if ( v8 >= 0
-    && v8 < *((_DWORD *)v7 + 71)
-    && v9 >= 0
-    && v9 < *((_DWORD *)v7 + 72)
-    && 2 * ITiling::NumberOfWaterElementsDiv2VW(v8, v9) > 200 )
+  if ( v8 >= 0 && v8 < *((_DWORD *)v7 + 71) && v9 >= 0 && v9 < *((_DWORD *)v7 + 72) && 2 * ITiling::NumberOfWaterElementsDiv2VW(v8, v9) > 200 )
   {
     CAnimalMgr::ShowWaterEffect(v7, v8, v9);
   }
@@ -1636,7 +1668,9 @@ void  CAnimalMgr::ShowWaterEffect(int a2, int a3) {
     DistanceToNearestShip = std::vector<int>::size(*((_DWORD *)this + 31));
     v18 = DistanceToNearestShip;
     if ( !DistanceToNearestShip )
+    {
       return DistanceToNearestShip;
+    }
     v5 = CAnimalMgr::EffectRandomNumber(this);
     v17 = *(_DWORD *)std::vector<int>::operator[](v5 % v18);
     v11 = CAnimalMgr::EffectRandomNumber(this) % 6;
@@ -1649,21 +1683,31 @@ void  CAnimalMgr::ShowWaterEffect(int a2, int a3) {
   v9 = CAnimalMgr::EffectRandomNumber(this) % 0x10;
   v10 = CAnimalMgr::EffectRandomNumber(this) % 0x10;
   v14 = v13 + v9 + v10 * CWorldManager::Width(16);
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
-    for ( j = 0; j < 5; ++j )
+    for ( j = 0;
+          j < 5;
+          ++j )
     {
       v12 = i * CWorldManager::Width(v6) + j + v14;
       LOBYTE(DistanceToNearestShip) = CWaterFlags::IsWater(v12);
       if ( !(_BYTE)DistanceToNearestShip )
+      {
         return DistanceToNearestShip;
+      }
       LOBYTE(DistanceToNearestShip) = CWaterFlags::IsBlockedWater(v12);
       if ( (_BYTE)DistanceToNearestShip )
+      {
         return DistanceToNearestShip;
+      }
       v7 = CWaterFlags::WaterFlags(v12);
       DistanceToNearestShip = CWaterFlags::WaterFlagsGetDistanceToNearestShip(v7);
       if ( DistanceToNearestShip != -1 )
+      {
         return DistanceToNearestShip;
+      }
     }
   }
   LOBYTE(DistanceToNearestShip) = CAnimalMgr::AddAnimalAsEffect(this, 16 * a2 + v9 + 2, 16 * a3 + v10 + 2, v11, v17);
@@ -1704,19 +1748,29 @@ void  CAnimalMgr::ShowFishResources(void) {
   result = v3 / 4;
   v16 += v5;
   if ( v14 < 0 )
+  {
     return result;
+  }
   result = v14;
   if ( v14 >= *((_DWORD *)this + 71) || v16 < 0 || v16 >= *((_DWORD *)this + 72) )
+  {
     return result;
+  }
   v9 = CAIResourceMap::ResourceDataVW(v14, v16);
   result = CAIResourceData::ResourceAmount1(v9, 0);
   if ( result <= 0 )
+  {
     return result;
+  }
   result = v11 * 16 * v16;
   v8 = result + 16 * v14;
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
   {
-    for ( j = 0; j < 16; ++j )
+    for ( j = 0;
+          j < 16;
+          ++j )
     {
       v10 = (char *)(v11 * i + j + v8);
       v7 = CAnimalMgr::EffectRandomNumber(this) % 6;
@@ -1725,7 +1779,9 @@ void  CAnimalMgr::ShowFishResources(void) {
       {
         result = CWorldManager::FlagBits(v10, 4u);
         if ( !result )
+        {
           return CAnimalMgr::AddAnimalAsEffect(this, j + 16 * v14, i + 16 * v16, v7, 15);
+        }
       }
     }
   }
@@ -1741,14 +1797,22 @@ int  CAnimalMgr::CountBuildingSquares(int a2, int a3) {
   int v5; // [esp+8h] [ebp-4h]
 
   v5 = 0;
-  for ( i = -1; i < 2; ++i )
+  for ( i = -1;
+        i < 2;
+        ++i )
   {
     if ( CWarMap::FirstEntityIdVW(2, i + a2, a3 - 1) > 0 )
+    {
       ++v5;
+    }
     if ( CWarMap::FirstEntityIdVW(2, i + a2, a3) > 0 )
+    {
       ++v5;
+    }
     if ( CWarMap::FirstEntityIdVW(2, i + a2, a3 + 1) > 0 )
+    {
       ++v5;
+    }
   }
   return v5;
 }
@@ -1758,9 +1822,7 @@ int  CAnimalMgr::CountBuildingSquares(int a2, int a3) {
 // Decompiled from bool __thiscall CAnimalMgr::IsTileFree(CAnimalMgr *this, int a2)
 bool  CAnimalMgr::IsTileFree(int a2) {
   
-  return !(unsigned __int8)CWorldManager::IsBlockedLand(a2)
-      && CWorldManager::ObjectId(a2) <= 0
-      && CWorldManager::MapObjectId(a2) <= 0;
+  return !(unsigned __int8)CWorldManager::IsBlockedLand(a2) && CWorldManager::ObjectId(a2) <= 0 && CWorldManager::MapObjectId(a2) <= 0;
 }
 
 
@@ -1772,15 +1834,13 @@ bool  CAnimalMgr::IsLandscapeAround(enum T_RESOURCE_LANDTYPE a2, int a3, int a4)
   Squares *v7; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v6 = (Squares *)(g_sNeighborPoints[2 * i] + a3);
     v7 = (Squares *)(MEMORY[0x37D8C0C][2 * i] + a4);
-    if ( (int)v7 >= 0
-      && (int)v7 <= this[71]
-      && (int)v6 >= 0
-      && (int)v6 <= this[72]
-      && CAIResourceMap::IsOfLandtype(a2, v6, v7) )
+    if ( (int)v7 >= 0 && (int)v7 <= this[71] && (int)v6 >= 0 && (int)v6 <= this[72] && CAIResourceMap::IsOfLandtype(a2, v6, v7) )
     {
       return 1;
     }
@@ -1812,15 +1872,23 @@ void  CAnimalMgr::AddButterflies(void) {
 
   v15 = this;
   if ( *((_DWORD *)this + 67) >= (unsigned int)std::vector<unsigned int>::size((char *)this + 292) )
+  {
     v13 = std::vector<unsigned int>::size((char *)v15 + 292);
+  }
   else
+  {
     v13 = *((_DWORD *)v15 + 67);
+  }
   v9 = v13;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = i;
     if ( i >= v9 )
+    {
       break;
+    }
     v2 = CAnimalMgr::EffectRandomNumber(v15);
     v8 = v2 % std::vector<unsigned int>::size((char *)v15 + 292);
     v3 = (Y16X16 **)std::vector<unsigned int>::operator[](v8);
@@ -1869,7 +1937,9 @@ void  CAnimalMgr::AddBirds(void) {
   result = std::vector<unsigned int>::size(this + 81);
   if ( result )
   {
-    for ( i = 0; i < (int)v19[68]; ++i )
+    for ( i = 0;
+          i < (int)v19[68];
+          ++i )
     {
       v21 = 0;
 LABEL_5:
@@ -1879,7 +1949,9 @@ LABEL_5:
         v13 = v2 % std::vector<unsigned int>::size(v19 + 81);
         v12 = *(Y16X16 **)std::vector<unsigned int>::operator[](v13);
         Y16X16::UnpackXYFast(v12, &v11, (int *)&v10);
-        for ( j = 0; j < 256; ++j )
+        for ( j = 0;
+              j < 256;
+              ++j )
         {
           v17 = j >> 4;
           v16 = j & 0xF;
@@ -1941,7 +2013,9 @@ void  CAnimalMgr::AddSeagulls(void) {
   result = std::vector<unsigned int>::size(this + 85);
   if ( result )
   {
-    for ( i = 0; i < (int)v19[69]; ++i )
+    for ( i = 0;
+          i < (int)v19[69];
+          ++i )
     {
       v21 = 0;
 LABEL_5:
@@ -1951,7 +2025,9 @@ LABEL_5:
         v13 = v2 % std::vector<unsigned int>::size(v19 + 85);
         v12 = *(Y16X16 **)std::vector<unsigned int>::operator[](v13);
         Y16X16::UnpackXYFast(v12, &v11, (int *)&v10);
-        for ( j = 0; j < 256; ++j )
+        for ( j = 0;
+              j < 256;
+              ++j )
         {
           v17 = j >> 4;
           v16 = j & 0xF;
@@ -2011,7 +2087,9 @@ void  CAnimalMgr::AddDucks(void) {
   result = std::vector<unsigned int>::size(this + 89);
   if ( result )
   {
-    for ( i = 0; i < (int)v18[70]; ++i )
+    for ( i = 0;
+          i < (int)v18[70];
+          ++i )
     {
       v2 = CAnimalMgr::EffectRandomNumber((CAnimalMgr *)v18);
       v13 = v2 % std::vector<unsigned int>::size(v18 + 89);

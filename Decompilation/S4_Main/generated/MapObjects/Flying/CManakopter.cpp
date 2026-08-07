@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CManakopter::New(std::istream & a1) {
   
   if ( operator new(0x94u) )
+  {
     return CManakopter::CManakopter(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -30,29 +34,13 @@ class CPersistence * __cdecl CManakopter::New(std::istream & a1) {
   IEntity::SetOwnerId((IEntity *)this, a4);
   IEntity::SetRace((IEntity *)this, 3u);
   v10 = CLogic::Effects((DWORD *)g_pLogic);
-  *((_DWORD *)this + 29) = (*(int (__thiscall **)(int, int, _DWORD, _DWORD))(*(_DWORD *)v10 + 80))(
-                             v10,
-                             111,
-                             *((_DWORD *)this + 18),
-                             0);
+  *((_DWORD *)this + 29) = (*(int (__thiscall **)(int, int, _DWORD, _DWORD))(*(_DWORD *)v10 + 80))(v10, 111, *((_DWORD *)this + 18), 0);
   v9 = CLogic::Effects((DWORD *)g_pLogic);
-  *((_DWORD *)this + 28) = (*(int (__thiscall **)(int, int, _DWORD, int))(*(_DWORD *)v9 + 80))(
-                             v9,
-                             109,
-                             *((_DWORD *)this + 18),
-                             1);
+  *((_DWORD *)this + 28) = (*(int (__thiscall **)(int, int, _DWORD, int))(*(_DWORD *)v9 + 80))(v9, 109, *((_DWORD *)this + 18), 1);
   v8 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v8 + 84))(
-    v8,
-    *((_DWORD *)this + 29),
-    LODWORD(FLOAT_N10_0),
-    LODWORD(FLOAT_N50_0));
+  (*(void (__thiscall **)(int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v8 + 84))(v8, *((_DWORD *)this + 29), LODWORD(FLOAT_N10_0), LODWORD(FLOAT_N50_0));
   v7 = CLogic::Effects((DWORD *)g_pLogic);
-  (*(void (__thiscall **)(int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v7 + 84))(
-    v7,
-    *((_DWORD *)this + 28),
-    LODWORD(FLOAT_N10_0),
-    LODWORD(FLOAT_N50_0));
+  (*(void (__thiscall **)(int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v7 + 84))(v7, *((_DWORD *)this + 28), LODWORD(FLOAT_N10_0), LODWORD(FLOAT_N50_0));
   v6 = CLogic::Effects((DWORD *)g_pLogic);
   (*(void (__thiscall **)(int, _DWORD, int))(*(_DWORD *)v6 + 56))(v6, *((_DWORD *)this + 18), 60);
   *((_DWORD *)this + 30) = 999;
@@ -61,15 +49,18 @@ class CPersistence * __cdecl CManakopter::New(std::istream & a1) {
   *((_DWORD *)this + 33) = -10;
   *((_DWORD *)this + 34) = -50;
   *((_WORD *)this + 6) = 1;
-  if ( CStaticConfigVarInt::operator int(&CManakopter::s_iManakopterHitPoints) >= 256
-    && BBSupportDbgReport(2, "mapobjects\\Manakopter.cpp", 77, "s_iManakopterHitPoints < 256") == 1 )
+  if ( CStaticConfigVarInt::operator int(&CManakopter::s_iManakopterHitPoints) >= 256 && BBSupportDbgReport(2, "mapobjects\\Manakopter.cpp", 77, "s_iManakopterHitPoints < 256") == 1 )
   {
     __debugbreak();
   }
   if ( CStaticConfigVarInt::operator int(&CManakopter::s_iManakopterHitPoints) >= 256 )
+  {
     v5 = -6;
+  }
   else
+  {
     v5 = CStaticConfigVarInt::operator int(&CManakopter::s_iManakopterHitPoints);
+  }
   *((_BYTE *)this + 33) = v5;
   IEntity::SetFlagBits(this, (EntityFlag)((char *)&loc_2020108 + 1));
   *((_DWORD *)this + 6) = Y16X16::PackXYFast(a3, SHIDWORD(a3));
@@ -126,13 +117,7 @@ void  CManakopter::LogicUpdate(void) {
     v17 = 0;
     v18 = 0;
     v23 = CLogic::Effects((DWORD *)g_pLogic);
-    (*(void (__thiscall **)(int, _DWORD, _BYTE *, int *, int *, _BYTE *))(*(_DWORD *)v23 + 52))(
-      v23,
-      *((_DWORD *)v26 + 18),
-      v7,
-      &v24,
-      &v25,
-      v8);
+    (*(void (__thiscall **)(int, _DWORD, _BYTE *, int *, int *, _BYTE *))(*(_DWORD *)v23 + 52))(v23, *((_DWORD *)v26 + 18), v7, &v24, &v25, v8);
     v9 = *((_DWORD *)v26 + 6);
     v1 = Y16X16::PackXYFast(v24, v25);
     *((_DWORD *)v26 + 6) = v1;
@@ -154,17 +139,9 @@ void  CManakopter::LogicUpdate(void) {
       {
         *((_DWORD *)v26 + 34) += 5;
         v12 = CLogic::Effects((DWORD *)g_pLogic);
-        (*(void (__thiscall **)(int, _DWORD, float, float))(*(_DWORD *)v12 + 84))(
-          v12,
-          *((_DWORD *)v26 + 29),
-          (float)*((int *)v26 + 33),
-          (float)*((int *)v26 + 34));
+        (*(void (__thiscall **)(int, _DWORD, float, float))(*(_DWORD *)v12 + 84))(v12, *((_DWORD *)v26 + 29), (float)*((int *)v26 + 33), (float)*((int *)v26 + 34));
         v11 = CLogic::Effects((DWORD *)g_pLogic);
-        (*(void (__thiscall **)(int, _DWORD, float, float))(*(_DWORD *)v11 + 84))(
-          v11,
-          *((_DWORD *)v26 + 28),
-          (float)*((int *)v26 + 33),
-          (float)*((int *)v26 + 34));
+        (*(void (__thiscall **)(int, _DWORD, float, float))(*(_DWORD *)v11 + 84))(v11, *((_DWORD *)v26 + 28), (float)*((int *)v26 + 33), (float)*((int *)v26 + 34));
         IAnimatedEntity::RegisterForLogicUpdate(1);
         IFlyingEntity::ClearFlyingFlagBits(v26, 1);
       }
@@ -174,63 +151,58 @@ void  CManakopter::LogicUpdate(void) {
       if ( v25 != *((unsigned __int16 *)v26 + 39) )
       {
         if ( v25 <= *((unsigned __int16 *)v26 + 39) )
+        {
           v20 = 1;
+        }
         else
+        {
           v20 = -1;
+        }
         v18 = v20;
       }
       if ( v24 != *((unsigned __int16 *)v26 + 38) )
       {
         if ( v24 <= *((unsigned __int16 *)v26 + 38) )
+        {
           v19 = 1;
+        }
         else
+        {
           v19 = -1;
+        }
         v17 = v19;
       }
       v16 = CLogic::Effects((DWORD *)g_pLogic);
-      v13 = (*(int (__thiscall **)(int, _DWORD, int, int, _DWORD))(*(_DWORD *)v16 + 60))(
-              v16,
-              *((_DWORD *)v26 + 18),
-              v17 + v24,
-              v18 + v25,
-              0);
+      v13 = (*(int (__thiscall **)(int, _DWORD, int, int, _DWORD))(*(_DWORD *)v16 + 60))(v16, *((_DWORD *)v26 + 18), v17 + v24, v18 + v25, 0);
       v15 = CLogic::Effects((DWORD *)g_pLogic);
       (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v15 + 88))(v15, *((_DWORD *)v26 + 29));
       v14 = CLogic::Effects((DWORD *)g_pLogic);
       (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v14 + 88))(v14, *((_DWORD *)v26 + 28));
       if ( v13 )
+      {
         IAnimatedEntity::RegisterForLogicUpdate(v13);
+      }
     }
     else
     {
       *((_DWORD *)v26 + 34) -= 5;
       v22 = CLogic::Effects((DWORD *)g_pLogic);
-      (*(void (__thiscall **)(int, _DWORD, float, float))(*(_DWORD *)v22 + 84))(
-        v22,
-        *((_DWORD *)v26 + 29),
-        (float)*((int *)v26 + 33),
-        (float)*((int *)v26 + 34));
+      (*(void (__thiscall **)(int, _DWORD, float, float))(*(_DWORD *)v22 + 84))(v22, *((_DWORD *)v26 + 29), (float)*((int *)v26 + 33), (float)*((int *)v26 + 34));
       v21 = CLogic::Effects((DWORD *)g_pLogic);
-      (*(void (__thiscall **)(int, _DWORD, float, float))(*(_DWORD *)v21 + 84))(
-        v21,
-        *((_DWORD *)v26 + 28),
-        (float)*((int *)v26 + 33),
-        (float)*((int *)v26 + 34));
+      (*(void (__thiscall **)(int, _DWORD, float, float))(*(_DWORD *)v21 + 84))(v21, *((_DWORD *)v26 + 28), (float)*((int *)v26 + 33), (float)*((int *)v26 + 34));
       IAnimatedEntity::RegisterForLogicUpdate(1);
     }
     v10 = CLogic::Effects((DWORD *)g_pLogic);
     if ( (*(unsigned __int8 (__thiscall **)(int, _DWORD))(*(_DWORD *)v10 + 92))(v10, *((_DWORD *)v26 + 28)) )
     {
-      if ( IFlyingEntity::FlyingFlagBits(v26, 1)
-        && !CSoundManager::IsPlaying((CSoundManager *)g_pSoundManager, *((_DWORD *)v26 + 36)) )
+      if ( IFlyingEntity::FlyingFlagBits(v26, 1) && !CSoundManager::IsPlaying((CSoundManager *)g_pSoundManager, *((_DWORD *)v26 + 36)) )
       {
         CSoundManager::StopSound((CSoundManager *)g_pSoundManager, *((_DWORD *)v26 + 35));
         *((_DWORD *)v26 + 35) = -1;
         v4 = CSoundManager::PlayEnvironmentSound(g_pSoundManager, 99, v24, v25, 0);
         *((_DWORD *)v26 + 36) = v4;
       }
-      if ( !IFlyingEntity::FlyingFlagBits(v26, 1)
-        && !CSoundManager::IsPlaying((CSoundManager *)g_pSoundManager, *((_DWORD *)v26 + 35)) )
+      if ( !IFlyingEntity::FlyingFlagBits(v26, 1) && !CSoundManager::IsPlaying((CSoundManager *)g_pSoundManager, *((_DWORD *)v26 + 35)) )
       {
         CSoundManager::StopSound((CSoundManager *)g_pSoundManager, *((_DWORD *)v26 + 36));
         *((_DWORD *)v26 + 36) = -1;
@@ -274,20 +246,25 @@ bool  CManakopter::SettlerEnter(int a2) {
 
   v11 = this;
   SettlerPtr = (CPropertySet *)CSettlerMgr::GetSettlerPtr(a2);
-  if ( IEntity::Race(SettlerPtr) != 3
-    && BBSupportDbgReport(2, "mapobjects\\Manakopter.cpp", 400, "pSettler->Race() == RACE_DARK") == 1 )
+  if ( IEntity::Race(SettlerPtr) != 3 && BBSupportDbgReport(2, "mapobjects\\Manakopter.cpp", 400, "pSettler->Race() == RACE_DARK") == 1 )
   {
     __debugbreak();
   }
   if ( !SettlerPtr && BBSupportDbgReport(2, "mapobjects\\Manakopter.cpp", 401, "pSettler != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !SettlerPtr || ((unsigned int)&MEMORY[0x4000000] & IEntity::Flags(SettlerPtr)) != 0 )
+  {
     return 0;
+  }
   v7 = IEntity::Type((unsigned __int16 *)SettlerPtr);
   v8 = IEntity::UniqueId(SettlerPtr);
   v13 = 0;
   v9 = std::vector<CManakopter::CSettlerStatus>::size((char *)v11 + 96);
-  for ( i = 0; i < v9; ++i )
+  for ( i = 0;
+        i < v9;
+        ++i )
   {
     if ( *(_DWORD *)(std::vector<CManakopter::CSettlerStatus>::operator[](i) + 4) == a2 )
     {
@@ -297,10 +274,7 @@ bool  CManakopter::SettlerEnter(int a2) {
   }
   if ( v13 )
   {
-    (*(void (__thiscall **)(CPropertySet *, _DWORD, const char *))(*(_DWORD *)SettlerPtr + 48))(
-      SettlerPtr,
-      0,
-      "CManakopter::SettlerEnter(): Settler already on board");
+    (*(void (__thiscall **)(CPropertySet *, _DWORD, const char *))(*(_DWORD *)SettlerPtr + 48))(SettlerPtr, 0, "CManakopter::SettlerEnter(): Settler already on board");
   }
   else
   {
@@ -318,7 +292,9 @@ bool  CManakopter::SettlerEnter(int a2) {
   IFlyingEntity::SetFlyingFlagBits(v11, 4);
   IFlyingEntity::ClearFlyingFlagBits(v11, 2);
   if ( !*((_DWORD *)v11 + 30) && !*((_DWORD *)v11 + 31) && !*((_DWORD *)v11 + 32) )
+  {
     IFlyingEntity::SetFlyingFlagBits(v11, 8);
+  }
   return 1;
 }
 
@@ -437,7 +413,9 @@ void  CManakopter::Delete(void) {
     if ( SettlerPtr )
     {
       if ( IEntity::UniqueId(SettlerPtr) == v10 )
+      {
         CMapObjectMgr::Kill(v13, 0);
+      }
     }
     std::vector<CManakopter::CSettlerStatus>::pop_back((char *)this + 96);
   }
@@ -459,15 +437,7 @@ void  CManakopter::Delete(void) {
   v12 = CLogic::Effects((DWORD *)g_pLogic);
   v6 = IEntity::Y(this);
   v5 = IEntity::X(this);
-  (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(
-    v12,
-    114,
-    101,
-    v5,
-    v6,
-    0,
-    0,
-    0);
+  (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12 + 16))(v12, 114, 101, v5, v6, 0, 0, 0);
   IFlyingEntity::Delete(this);
 }
 
@@ -483,9 +453,13 @@ void  CManakopter::Decrease(int a2) {
   {
     v4 = CStaticConfigVarInt::operator int(&CManakopter::s_iManakopterArmor);
     if ( a2 <= v4 )
+    {
       v3 = 1;
+    }
     else
+    {
       v3 = a2 - v4;
+    }
     IEntity::Decrease((int)this, v3);
   }
 }
@@ -521,7 +495,9 @@ void  CManakopter::Decrease(int a2) {
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
   operator^<unsigned int>(a2, v7);
-  for ( i = 0; i < v7[0]; ++i )
+  for ( i = 0;
+        i < v7[0];
+        ++i )
   {
     CManakopter::CSettlerStatus::CSettlerStatus((CManakopter::CSettlerStatus *)v3);
     LOBYTE(v12) = 2;
@@ -568,7 +544,9 @@ void  CManakopter::Store(std::ostream & a2) {
   operator^<unsigned int>(a2, &v7);
   v8 = std::vector<CManakopter::CSettlerStatus>::size(v10 + 24);
   operator^<unsigned int>(a2, &v8);
-  for ( i = 0; i < v8; ++i )
+  for ( i = 0;
+        i < v8;
+        ++i )
   {
     v2 = (const struct CManakopter::CSettlerStatus *)std::vector<CManakopter::CSettlerStatus>::operator[](i);
     CManakopter::CSettlerStatus::CSettlerStatus((CManakopter::CSettlerStatus *)&v4, v2);

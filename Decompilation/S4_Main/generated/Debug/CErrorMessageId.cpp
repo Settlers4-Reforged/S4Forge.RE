@@ -12,7 +12,9 @@
   this->m_uMessageId = 0;
   if ( Str1 && *Str1 )
   {
-    for ( i = 1; i <= 1; ++i )
+    for ( i = 1;
+          i <= 1;
+          ++i )
     {
       if ( !j__strcmp(Str1, s_aErrorMessages[i].m_uName) )
       {
@@ -23,9 +25,13 @@
   }
   ++s_uUnknownErrorMessageCount;
   if ( Str1 )
+  {
     BBSupportTracePrintF(3, "Unkwown error message <%s>!", Str1);
+  }
   else
+  {
     BBSupportTracePrintF(3, "Unkwown error message <%s>!", "NULL");
+  }
   return this;
 }
 

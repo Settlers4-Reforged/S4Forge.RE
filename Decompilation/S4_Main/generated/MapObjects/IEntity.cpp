@@ -288,12 +288,16 @@ bool  IEntity::IsSelected(void)const {
 
   this->__vftable = (IEntity_vtbl *)&IEntity::_vftable_;
   if ( CWarMapNode::IsInWarMap(&this->m_warMapNode) )
+  {
     CWarMap::RemoveEntity(this);
+  }
   if ( this->m_psAIEntityInfo )
   {
     m_psAIEntityInfo = this->m_psAIEntityInfo;
     if ( m_psAIEntityInfo )
+    {
       delete m_psAIEntityInfo;
+    }
     this->m_psAIEntityInfo = 0;
   }
   this->m_iUniqueId |= 0x40000000u;
@@ -381,9 +385,13 @@ int  IEntity::WorldIdx(void)const {
 int  IEntity::Increase(int byAmount) {
   
   if ( byAmount + this->m_iLivePoints <= 255 )
+  {
     this->m_iLivePoints += byAmount;
+  }
   else
+  {
     this->m_iLivePoints = -1;
+  }
   return this->m_iLivePoints;
 }
 
@@ -438,7 +446,9 @@ int  IEntity::MaxHitpoints(void)const {
 void  IEntity::SetAIEntityInfoPtr(class CAIEntityInfo * a2) {
   
   if ( this->m_psAIEntityInfo )
+  {
     delete this->m_psAIEntityInfo;
+  }
   this->m_psAIEntityInfo = a2;
 }
 
@@ -460,9 +470,13 @@ void  IEntity::DbgPrint(int logLevel, char const * customMessage) {
   const char *message; // [esp+0h] [ebp-8h]
 
   if ( customMessage )
+  {
     message = customMessage;
+  }
   else
+  {
     message = "IEntity::DbgPrint()";
+  }
   y = IEntity::Y(this);
   x = IEntity::X(this);
   flags = IEntity::Flags(this);
@@ -473,19 +487,7 @@ void  IEntity::DbgPrint(int logLevel, char const * customMessage) {
   entityId = IEntity::EntityId(this);
   v3 = typeid(this);
   v4 = type_info::name(v3);
-  BBSupportTracePrintF(
-    logLevel,
-    "%s: %s, id %i, obj type %02x, type %i, race %i, owner %i, flags 0x%08x, pos (%i, %i).",
-    message,
-    v4,
-    entityId,
-    objType,
-    type,
-    race,
-    ownerId,
-    flags,
-    x,
-    y);
+  BBSupportTracePrintF(logLevel, "%s: %s, id %i, obj type %02x, type %i, race %i, owner %i, flags 0x%08x, pos (%i, %i).", message, v4, entityId, objType, type, race, ownerId, flags, x, y);
 }
 
 
@@ -498,16 +500,14 @@ void  IEntity::PlaceInMapObjectLayer(int packedXY) {
   int x; // [esp+4h] [ebp-Ch]
   int y; // [esp+8h] [ebp-8h]
 
-  if ( (this->m_iFlags & 0x8000) == 0
-    && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 284, "(m_iFlags & ENTITY_FLAG_ON_BOARD) != 0") == 1 )
+  if ( (this->m_iFlags & 0x8000) == 0 && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 284, "(m_iFlags & ENTITY_FLAG_ON_BOARD) != 0") == 1 )
   {
     __debugbreak();
   }
   this->m_iFlags &= ~0x8000u;
   if ( packedXY >= 0 )
   {
-    if ( !CWorldManager::InWorldPackedXY(packedXY)
-      && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 290, "g_cWorld.InWorldPackedXY(_iPackedXY)") == 1 )
+    if ( !CWorldManager::InWorldPackedXY(packedXY) && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 290, "g_cWorld.InWorldPackedXY(_iPackedXY)") == 1 )
     {
       __debugbreak();
     }
@@ -515,14 +515,12 @@ void  IEntity::PlaceInMapObjectLayer(int packedXY) {
   }
   x = IEntity::X(this);
   y = IEntity::Y(this);
-  if ( !CWorldManager::InWorld(x, y)
-    && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 298, "g_cWorld.InWorld(iEntityX, iEntityY)") == 1 )
+  if ( !CWorldManager::InWorld(x, y) && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 298, "g_cWorld.InWorld(iEntityX, iEntityY)") == 1 )
   {
     __debugbreak();
   }
   worldIndex = CWorldManager::Index(x, y);
-  if ( CWorldManager::MapObjectId(worldIndex)
-    && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 302, "g_cWorld.MapObjectId(iEntityWorldIdx) == 0") == 1 )
+  if ( CWorldManager::MapObjectId(worldIndex) && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 302, "g_cWorld.MapObjectId(iEntityWorldIdx) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -541,23 +539,20 @@ void  IEntity::RemoveFromMapObjectLayer(void) {
   int x; // [esp+8h] [ebp-Ch]
   int y; // [esp+Ch] [ebp-8h]
 
-  if ( (this->m_iFlags & 0x8000) != 0
-    && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 316, "(m_iFlags & ENTITY_FLAG_ON_BOARD) == 0") == 1 )
+  if ( (this->m_iFlags & 0x8000) != 0 && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 316, "(m_iFlags & ENTITY_FLAG_ON_BOARD) == 0") == 1 )
   {
     __debugbreak();
   }
   this->m_iFlags |= 0x8000u;
   x = IEntity::X(this);
   y = IEntity::Y(this);
-  if ( !CWorldManager::InWorld(x, y)
-    && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 323, "g_cWorld.InWorld(iEntityX, iEntityY)") == 1 )
+  if ( !CWorldManager::InWorld(x, y) && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 323, "g_cWorld.InWorld(iEntityX, iEntityY)") == 1 )
   {
     __debugbreak();
   }
   worldIndex = CWorldManager::Index(x, y);
   mapId = CWorldManager::MapObjectId(worldIndex);
-  if ( mapId != IEntity::EntityId(this)
-    && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 327, "g_cWorld.MapObjectId(iEntityWorldIdx) == EntityId()") == 1 )
+  if ( mapId != IEntity::EntityId(this) && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 327, "g_cWorld.MapObjectId(iEntityWorldIdx) == EntityId()") == 1 )
   {
     __debugbreak();
   }
@@ -583,12 +578,7 @@ void  IEntity::RemoveFromMapObjectLayerIfNecessary(void) {
       y = IEntity::Y(this);
       x = IEntity::X(this);
       mapId = CWorldManager::MapObjectId(x, y);
-      if ( mapId == IEntity::EntityId(this)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Entity.cpp",
-             348,
-             "!g_cWorld.InWorld(X(), Y()) || (g_cWorld.MapObjectId(X(), Y()) != EntityId())") == 1 )
+      if ( mapId == IEntity::EntityId(this) && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 348, "!g_cWorld.InWorld(X(), Y()) || (g_cWorld.MapObjectId(X(), Y()) != EntityId())") == 1 )
       {
         __debugbreak();
       }
@@ -606,7 +596,9 @@ void  IEntity::RemoveFromMapObjectLayerIfNecessary(void) {
 void  IEntity::Detach(int a1) {
   
   if ( BBSupportDbgReport(1, "MapObjects\\Entity.cpp", 360, "IEntity::Detach() called!") == 1 )
+  {
     __debugbreak();
+  }
 }
 
 
@@ -631,7 +623,9 @@ int  IEntity::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
 void  IEntity::AddToWarMap(void) {
   
   if ( IEntity::FlagBits(this, ENTITY_FLAG_Ready) )
+  {
     CWarMap::AddEntity(this);
+  }
 }
 
 

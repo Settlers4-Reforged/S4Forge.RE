@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void * a1) {
 
   C = (CStateSlideshow *)operator new(0x18u);
   if ( C )
+  {
     return CStateSlideshow::CStateSlideshow(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -26,9 +30,13 @@ class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void * a1) {
   *((_DWORD *)this + 2) = a2;
   CSlideshow::CSlideshow((CStateSlideshow *)((char *)this + 12), *((_DWORD *)this + 2));
   if ( !g_pGfxEngine || !(unsigned __int8)IGfxEngine::IsGuiMode(g_pGfxEngine) )
+  {
     CGameStateHandler::RebuildGfxEngine(1);
+  }
   if ( !CSlideshow::Advance((CStateSlideshow *)((char *)this + 12)) )
+  {
     *((_BYTE *)this + 4) = 1;
+  }
   return this;
 }
 
@@ -77,7 +85,9 @@ bool  CStateSlideshow::Perform(void) {
   int v6; // [esp+38h] [ebp-4h]
 
   if ( *((_BYTE *)this + 4) && *((_DWORD *)this + 2) == 1 )
+  {
     return 0;
+  }
   if ( *((_BYTE *)this + 4) )
   {
     v3 = CEvn_Event::CEvn_Event(&v5, 0xDu, 0x20u, 0, 0);
@@ -98,7 +108,9 @@ bool  CStateSlideshow::Perform(void) {
   }
   v2 = dword_40320AC + 30;
   if ( v2 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_40320AC = timeGetTime();
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
   IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
@@ -130,7 +142,9 @@ bool  CStateSlideshow::OnEvent(class CEvn_Event & a2) {
     if ( a2->m_wParam == 32 )
     {
       if ( !CSlideshow::Advance((CStateSlideshow *)((char *)this + 12)) )
+      {
         CGameStateHandler::Next();
+      }
       return 1;
     }
     else

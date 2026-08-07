@@ -3,7 +3,7 @@
 // Definitions for class CAIAgentDarkTribeRecruitment
 
 // address=[0x1301f00]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeRecruitment::Execute(  CAIAgentDarkTribeRecruitment *this,  unsigned int a2,  unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeRecruitment::Execute(CAIAgentDarkTribeRecruitment *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -51,7 +51,9 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned in
   v43 = CAIPlayerAI::PlayerId(v4);
   v31 = IAIEnvironment::MagicCurrentManaAmount(v43);
   if ( v31 < 20 )
+  {
     return CAIAgent::ExecuteResult(0, 1u);
+  }
   v5 = (CAIPlayerScriptVars *)CAIPlayersScriptVars::operator[](v43);
   v35 = CAIPlayerScriptVars::Flags(v5);
   NumberOfSettlers = IAIEnvironment::SettlerGetNumberOfSettlers(v43, 29);
@@ -96,8 +98,7 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned in
     if ( v38 > 0 )
     {
       v34 = (v41 << 8) / v38;
-      if ( v34 < NumberOfSettlers
-        && BBSupportDbgReport(2, aAiAiAgentsdark_5, 240, "iScheduledSwordsmanNumber >= iSwordsmanNumber") == 1 )
+      if ( v34 < NumberOfSettlers && BBSupportDbgReport(2, aAiAiAgentsdark_5, 240, "iScheduledSwordsmanNumber >= iSwordsmanNumber") == 1 )
       {
         __debugbreak();
       }
@@ -115,7 +116,9 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned in
   v13 = CAISectorAI::HeadquarterId(v12);
   IAIEnvironment::EventSendDarkTribeProductionMsg(v43, v13, 54, v32);
   if ( v39 >= CAIPlayersScriptVars::GetValue(g_cAIPlayersScriptVars, v43, 5) )
+  {
     return CAIAgent::ExecuteResult(0, 0);
+  }
   if ( v31 >= 50 )
   {
     v37 += 4;
@@ -132,7 +135,7 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned in
 
 
 // address=[0x1322e40]
-// Decompiled from CAIAgentDarkTribeRecruitment *__thiscall CAIAgentDarkTribeRecruitment::CAIAgentDarkTribeRecruitment(  CAIAgentDarkTribeRecruitment *this)
+// Decompiled from CAIAgentDarkTribeRecruitment *__thiscall CAIAgentDarkTribeRecruitment::CAIAgentDarkTribeRecruitment(CAIAgentDarkTribeRecruitment *this)
  CAIAgentDarkTribeRecruitment::CAIAgentDarkTribeRecruitment(void) {
   
   CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "dark tribe recruitment");

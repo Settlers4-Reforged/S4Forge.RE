@@ -87,7 +87,9 @@ void  CSquareVisited::Set(int a2) {
 bool  CSquareVisited::SetIfNotVisited(int a2) {
   
   if ( *((unsigned __int8 *)this + a2 + 13) == *((unsigned __int8 *)this + 12) )
+  {
     return 0;
+  }
   *((_BYTE *)this + a2 + 13) = *((_BYTE *)this + 12);
   return 1;
 }
@@ -117,8 +119,7 @@ int  CSquareVisited::WorldPackedXYIndex(int a2)const {
   Y16X16 *v4; // [esp+8h] [ebp-4h]
 
   v4 = (Y16X16 *)(a2 - *(_DWORD *)this);
-  if ( !Y16X16::XYNotNegative(v4)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 1171, "Y16X16::XYNotNegative(iPackedXY)") == 1 )
+  if ( !Y16X16::XYNotNegative(v4) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 1171, "Y16X16::XYNotNegative(iPackedXY)") == 1 )
   {
     __debugbreak();
   }

@@ -4,7 +4,7 @@
 // Definitions for class CEffect
 
 // address=[0x144a5e0]
-// Decompiled from int __thiscall CEffect::InitEffect(  CEffect *this,  int _uEffect,  SIV_SOUNDS _tSoundId,  int _iX,  int _iY,  uint _uStartDelay,  int _iDuration,  bool _bTopEffect)
+// Decompiled from int __thiscall CEffect::InitEffect(CEffect *this, int _uEffect, SIV_SOUNDS _tSoundId, int _iX, int _iY, uint _uStartDelay, int _iDuration, bool _bTopEffect)
 void  CEffect::InitEffect(int _uEffect, enum SIV_SOUNDS _tSoundId, int _iX, int _iY, unsigned int _uStartDelay, int _iDuration, bool _bTopEffect) {
   
   int EffectNumberOfFrames; // [esp+4h] [ebp-8h]
@@ -16,20 +16,30 @@ void  CEffect::InitEffect(int _uEffect, enum SIV_SOUNDS _tSoundId, int _iX, int 
   this->uEffect.m_iMaxDir = 1;
   this->uEffect.m_uFramesMax = EffectNumberOfFrames;
   if ( !this->uEffect.m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 689, "m_uFramesMax != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iDuration <= 0 )
+  {
     _iDuration = EffectNumberOfFrames;
+  }
   this->uEffect.m_iDir = 0;
   this->uEffect.m_iFrame = 0;
   this->uEffect.m_iNextTick = _uStartDelay + CStateGame::GetTickCounter(g_pGame);
   this->uEffect.m_iDuration = _iDuration;
   if ( this->uEffect.m_iDuration <= 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 704, "m_iDuration > 0") == 1 )
+  {
     __debugbreak();
+  }
   CEffect::GetWorldScreenCoordinates(_iX, _iY, &this->uEffect.m_fWorldX, &this->uEffect.m_fWorldY);
   if ( _bTopEffect )
+  {
     return (int)CEffect::SetVisualizeFunc(this, VISUALIZE_FUNC_TOP_EFFECT);
+  }
   else
+  {
     return (int)CEffect::SetVisualizeFunc(this, VISUALIZE_FUNC_EFFECT);
+  }
 }
 
 
@@ -43,7 +53,9 @@ void  CEffect::InitAngel(enum T_EFFECT_ANGEL _tAngel, enum SIV_SOUNDS a3, int _i
   unsigned int SettlerJobFrameCount; // [esp+14h] [ebp-8h]
 
   if ( !_tAngel && BBSupportDbgReport(2, "Logic\\Effects.cpp", 725, "_tAngel != EFFECT_ANGEL_NONE") == 1 )
+  {
     __debugbreak();
+  }
   this->uAngel.m_iX = _iX;
   this->uAngel.m_iY = _iY;
   this->m_iEffect = _tAngel;
@@ -54,24 +66,32 @@ void  CEffect::InitAngel(enum T_EFFECT_ANGEL _tAngel, enum SIV_SOUNDS a3, int _i
   this->uAngel.m_iColor = iColor;
   SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, iRace, s_iAngelEffectJobIds[_tAngel], 2u);
   if ( SettlerJobFrameCount )
+  {
     v8 = SettlerJobFrameCount;
+  }
   else
+  {
     v8 = 1;
+  }
   this->uAngel.m_uFramesMax = v8;
   this->uAngel.m_iFrame = 0;
   if ( !this->uAngel.m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 744, "m_uFramesMax > 0") == 1 )
+  {
     __debugbreak();
+  }
   this->uAngel.m_iNextTick = a7 + CStateGame::GetTickCounter(g_pGame);
   this->uAngel.m_iDuration = SettlerJobFrameCount;
   if ( this->uAngel.m_iDuration <= 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 751, "m_iDuration > 0") == 1 )
+  {
     __debugbreak();
+  }
   CEffect::GetWorldScreenCoordinates(_iX, _iY, &this->uAngel.m_fWorldX, &this->uAngel.m_fWorldY);
   CEffect::SetVisualizeFunc(this, 3);
 }
 
 
 // address=[0x144a880]
-// Decompiled from void __thiscall CEffect::InitMissile(  CEffect *this,  int a2,  int _iAttackerXY,  int _iTargetXY,  int _iStartDelay,  int a6,  int a7)
+// Decompiled from void __thiscall CEffect::InitMissile(CEffect *this, int a2, int _iAttackerXY, int _iTargetXY, int _iStartDelay, int a6, int a7)
 void  CEffect::InitMissile(enum T_EFFECT_MISSILE a2, int _iAttackerXY, int _iTargetXY, unsigned int _iStartDelay, int a6, int a7) {
   
   BYTE EffectNumberOfFrames; // al
@@ -116,9 +136,7 @@ void  CEffect::InitMissile(enum T_EFFECT_MISSILE a2, int _iAttackerXY, int _iTar
   CEffect::GetWorldScreenCoordinates(iTargetX, iTargetY, &fTargetX, &fTargetY);
   fRelativeX = fTargetX - fAttackerScreenX;
   fRelativeY = fTargetY - fAttackerScreenY;
-  fDistance = sqrt(
-                (float)((float)(fTargetX - fAttackerScreenX) * (float)(fTargetX - fAttackerScreenX))
-              + (float)((float)(fTargetY - fAttackerScreenY) * (float)(fTargetY - fAttackerScreenY)));
+  fDistance = sqrt((float)((float)(fTargetX - fAttackerScreenX) * (float)(fTargetX - fAttackerScreenX)) + (float)((float)(fTargetY - fAttackerScreenY) * (float)(fTargetY - fAttackerScreenY)));
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   EffectNumberOfFrames = CEffect::GetEffectNumberOfFrames(iEffectId);
   this->uMissile.m_uFramesMax = EffectNumberOfFrames;
@@ -126,7 +144,9 @@ void  CEffect::InitMissile(enum T_EFFECT_MISSILE a2, int _iAttackerXY, int _iTar
   this->uMissile.m_iDir = iCalcDir;
   this->uMissile.m_iNextTick = _iStartDelay + TickCounter;
   if ( !this->uMissile.m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 805, "m_uFramesMax > 0") == 1 )
+  {
     __debugbreak();
+  }
   bHasHit = 1;
   if ( fDistance > 0.0 )
   {
@@ -140,7 +160,9 @@ void  CEffect::InitMissile(enum T_EFFECT_MISSILE a2, int _iAttackerXY, int _iTar
       fDirY = fRelativeY - (float)((float)(2.0 * fDirectionScale) * fRelativeY);
       iTravelTime = (int)(float)(sProps->m_fTravelTimeScale * fImpactDistance);
       if ( iTravelTime < 1 )
+      {
         iTravelTime = 1;
+      }
       this->uMissile.m_iDuration = iTravelTime + 1;
       fArcAcceleration = sProps->m_fArcHeightScale * fImpactDistance;
       fInvDuration = 1.0 / (float)iTravelTime;
@@ -204,7 +226,9 @@ void  CEffect::InitSporeCloud(int _iSrcXY, int _iDstXY, unsigned int _iNextTick)
   fDistance = sqrt((float)(fRelDstWorldX * fRelDstWorldX) + (float)(fRelDstWorldY * fRelDstWorldY));
   iTimeIdxMax = (int)(float)(fDistance * 0.2);
   if ( iTimeIdxMax >= 255 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 901, "iTimeIdxMax < 255") == 1 )
+  {
     __debugbreak();
+  }
   if ( iTimeIdxMax <= 0 )
   {
     iTimeIdxMax = 1;
@@ -229,9 +253,13 @@ void  CEffect::InitSporeCloud(int _iSrcXY, int _iDstXY, unsigned int _iNextTick)
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   this->uSpore.m_iNextTick = _iNextTick + TickCounter;
   if ( this->m_iDuration <= 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 932, "m_iDuration > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 933, "m_uFramesMax > 0") == 1 )
+  {
     __debugbreak();
+  }
   CEffect::SetVisualizeFunc(this, VISUALIZE_FUNC_SPORE_CLOUD);
 }
 
@@ -249,13 +277,17 @@ void  CEffect::InitStagnantAnimal(enum SIV_ANIMALS a2, enum SIV_SOUNDS a3, int a
   this->uEffect.m_iMaxDir = 6;
   this->uEffect.m_uFramesMax = AnimalFrameCount;
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 956, "m_uFramesMax != 0") == 1 )
+  {
     __debugbreak();
+  }
   this->uEffect.m_iDir = a6;
   this->uEffect.m_iFrame = 0;
   this->m_iNextTick = a7 + CStateGame::GetTickCounter(g_pGame);
   this->m_iDuration = AnimalFrameCount;
   if ( this->m_iDuration <= 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 966, "m_iDuration > 0") == 1 )
+  {
     __debugbreak();
+  }
   CEffect::GetWorldScreenCoordinates(a4, a5, &this->uEffect.m_fWorldX, &this->uEffect.m_fWorldY);
   CEffect::SetVisualizeFunc(this, VISUALIZE_FUNC_STAGNANT_ANIMAL);
 }
@@ -271,7 +303,9 @@ void  CEffect::InitMovingEffect(int a2, int _iX, int _iY) {
   this->uMoving.m_iMaxDir = 16;
   this->uMoving.m_uFramesMax = CEffect::GetEffectNumberOfFrames(a2);
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 989, "m_uFramesMax != 0") == 1 )
+  {
     __debugbreak();
+  }
   this->uMoving.m_iDir = 0;
   this->uMoving.m_iFrame = 0;
   this->m_uDelay = 0;
@@ -301,9 +335,13 @@ unsigned int  CEffect::SetNewDestinationForMovingEffect(int _iDstX, int _iDstY, 
 
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   if ( TickCounter < this->m_iNextTick )
+  {
     iTicks = 0;
+  }
   else
+  {
     iTicks = TickCounter - this->m_iNextTick;
+  }
   m_uDelay = this->m_uDelay;
   this->m_iFrame = (iTicks + (unsigned int)this->m_iFrame) % this->m_uFramesMax;
   if ( iTicks < m_uDelay )
@@ -336,20 +374,20 @@ unsigned int  CEffect::SetNewDestinationForMovingEffect(int _iDstX, int _iDstY, 
   {
     this->uMoving.m_iStartX = _iDstX;
     this->uMoving.m_iStartY = _iDstY;
-    CEffect::GetWorldScreenCoordinates(
-      this->uMoving.m_iStartX,
-      this->uMoving.m_iStartY,
-      &this->uMoving.m_iScreenX,
-      &this->uMoving.m_iScreenY);
+    CEffect::GetWorldScreenCoordinates(this->uMoving.m_iStartX, this->uMoving.m_iStartY, &this->uMoving.m_iScreenX, &this->uMoving.m_iScreenY);
     iDeltaX = this->uMoving.m_iScreenX - this->uMoving.m_iStartScreenX;
     iDeltaY = this->uMoving.m_iScreenY - this->uMoving.m_iStartScreenY;
     iNewTimeIdxMax = (int)(this->uMoving.m_uSpeed * fast_square_root(iDeltaY * iDeltaY + iDeltaX * iDeltaX)) >> 9;
     if ( iNewTimeIdxMax >= 255 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1072, "iNewTimeIdxMax < 255") == 1 )
+    {
       __debugbreak();
+    }
     if ( iNewTimeIdxMax > 0 )
     {
       if ( iNewTimeIdxMax > 255 )
+      {
         iNewTimeIdxMax = 255;
+      }
     }
     else
     {
@@ -364,7 +402,9 @@ unsigned int  CEffect::SetNewDestinationForMovingEffect(int _iDstX, int _iDstY, 
   this->uMoving.m_iDuration = 0x7FFFFFFF;
   CEffect::SetVisualizeFunc(this, 8);
   if ( !uDelay && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1110, "uDelay > 0") == 1 )
+  {
     __debugbreak();
+  }
   return uDelay;
 }
 
@@ -374,15 +414,19 @@ unsigned int  CEffect::SetNewDestinationForMovingEffect(int _iDstX, int _iDstY, 
 void  CEffect::UpdateAttachedEffect(class CEffect const & rParent) {
   
   if ( this->uAttached.m_iMaxDir > 1u )
+  {
     this->uAttached.m_iDir = rParent->uEffect.m_iDir % (__int16)this->uAttached.m_iMaxDir;
+  }
   *(_QWORD *)&this->uAttached.m_iX = *(_QWORD *)&rParent->uEffect.m_iX;
   if ( (int)this->uAttached.m_iY < 1024 )
+  {
     ++this->uAttached.m_iY;
+  }
 }
 
 
 // address=[0x144b450]
-// Decompiled from void __thiscall CEffect::InitAttachedEffect(  CEffect *this,  unsigned int a2,  unsigned int _iParentId,  const struct CEffect *rParent,  char a5)
+// Decompiled from void __thiscall CEffect::InitAttachedEffect(CEffect *this, unsigned int a2, unsigned int _iParentId, const struct CEffect *rParent, char a5)
 void  CEffect::InitAttachedEffect(int a2, unsigned int _iParentId, class CEffect const & rParent, int a5) {
   
   BYTE iMaxDir; // [esp+0h] [ebp-Ch]
@@ -392,13 +436,19 @@ void  CEffect::InitAttachedEffect(int a2, unsigned int _iParentId, class CEffect
   this->m_tSoundId = 0;
   this->m_uDelay = 0;
   if ( (a5 & 1) != 0 )
+  {
     iMaxDir = rParent->uEffect.m_iMaxDir;
+  }
   else
+  {
     iMaxDir = 1;
+  }
   *(_WORD *)&this->uAttached.m_iMaxDir = iMaxDir;// Also resets dir to 0 (f*n decompiler getting smart on me here)
   EffectNumberOfFrames = CEffect::GetEffectNumberOfFrames(a2);
   if ( !EffectNumberOfFrames )
+  {
     LOBYTE(EffectNumberOfFrames) = 1;
+  }
   this->uAttached.m_uFramesMax = EffectNumberOfFrames;
   this->uAttached.m_iFrame = 0;
   *(_QWORD *)&this->m_iNextTick = *(_QWORD *)&rParent->m_iNextTick;// Also copies m_iDuration
@@ -416,9 +466,13 @@ void  CEffect::InitAttachedEffect(int a2, unsigned int _iParentId, class CEffect
 void  CEffect::VisualizeEffect(struct SGfxObjectInfo & rInfo, int _iTimeIndex) {
   
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1122, "m_uFramesMax > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iTimeIndex < 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1123, "_iTimeIndex >= 0") == 1 )
+  {
     __debugbreak();
+  }
   CEffect::GetEffectGfxInfo(rInfo, this->m_iEffect, 0, _iTimeIndex % (unsigned int)this->m_uFramesMax);
   rInfo->m_uObjType = 0x80;
   rInfo->m_iEffectScreenX = this->uEffect.m_fWorldX;
@@ -433,17 +487,15 @@ void  CEffect::VisualizeAngel(struct SGfxObjectInfo & rInfo, int _iTimeIndex) {
   BYTE iColor; // [esp+0h] [ebp-18h]
 
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1272, "m_uFramesMax > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iTimeIndex < 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1273, "_iTimeIndex >= 0") == 1 )
+  {
     __debugbreak();
+  }
   iColor = this->uAngel.m_iColor;
-  CGfxManager::GetSettlerGfxInfo(
-    g_pGfxManager,
-    rInfo,
-    this->uAngel.m_iRace,
-    s_iAngelEffectJobIds[this->m_iEffect],
-    _iTimeIndex % (unsigned int)this->m_uFramesMax,
-    2u);
+  CGfxManager::GetSettlerGfxInfo(g_pGfxManager, rInfo, this->uAngel.m_iRace, s_iAngelEffectJobIds[this->m_iEffect], _iTimeIndex % (unsigned int)this->m_uFramesMax, 2u);
   rInfo->m_uObjType = 1;
   rInfo->m_iColor = iColor;
   rInfo->m_iEffectScreenX = this->uAngel.m_fWorldX;
@@ -456,22 +508,17 @@ void  CEffect::VisualizeAngel(struct SGfxObjectInfo & rInfo, int _iTimeIndex) {
 void  CEffect::VisualizeArrow(struct SGfxObjectInfo & rInfo, int _iTimeIndex) {
   
   if ( _iTimeIndex < 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1297, "_iTimeIndex >= 0") == 1 )
+  {
     __debugbreak();
-  if ( this->m_iEffect >= (unsigned int)EFFECT_MAX
-    && (this->m_iEffect <= (unsigned int)EFFECT_2_NO_EFFECT || this->m_iEffect >= (unsigned int)EFFECT_2_MAX)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\Effects.cpp",
-         1299,
-         "(m_uEffect < EFFECT_MAX) || ( (m_uEffect > EFFECT_2_NO_EFFECT) && (m_uEffect < EFFECT_2_MAX) )") == 1 )
+  }
+  if ( this->m_iEffect >= (unsigned int)EFFECT_MAX && (this->m_iEffect <= (unsigned int)EFFECT_2_NO_EFFECT || this->m_iEffect >= (unsigned int)EFFECT_2_MAX) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1299, "(m_uEffect < EFFECT_MAX) || ( (m_uEffect > EFFECT_2_NO_EFFECT) && (m_uEffect < EFFECT_2_MAX) )") == 1 )
   {
     __debugbreak();
   }
   CEffect::GetEffectGfxInfo(rInfo, this->m_iEffect, this->uMissile.m_iDir, this->m_iFrame);
   rInfo->m_uObjType = 64;
   rInfo->m_iEffectScreenX = (float)(this->uMissile.m_fVelocityX * (float)_iTimeIndex) + this->uMissile.m_fWorldX;
-  rInfo->m_iEffectScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY)
-                          + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
+  rInfo->m_iEffectScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY) + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
 }
 
 
@@ -480,24 +527,21 @@ void  CEffect::VisualizeArrow(struct SGfxObjectInfo & rInfo, int _iTimeIndex) {
 void  CEffect::VisualizeCannonball(struct SGfxObjectInfo & a2, int _iTimeIndex) {
   
   if ( _iTimeIndex < 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1322, "_iTimeIndex >= 0") == 1 )
+  {
     __debugbreak();
-  if ( this->m_iEffect >= 0x56u
-    && (this->m_iEffect <= 0x64u || this->m_iEffect >= 0x74u)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\Effects.cpp",
-         1325,
-         "(m_uEffect < EFFECT_MAX) || ( (m_uEffect > EFFECT_2_NO_EFFECT) && (m_uEffect < EFFECT_2_MAX) )") == 1 )
+  }
+  if ( this->m_iEffect >= 0x56u && (this->m_iEffect <= 0x64u || this->m_iEffect >= 0x74u) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1325, "(m_uEffect < EFFECT_MAX) || ( (m_uEffect > EFFECT_2_NO_EFFECT) && (m_uEffect < EFFECT_2_MAX) )") == 1 )
   {
     __debugbreak();
   }
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1326, "m_uFramesMax > 0") == 1 )
+  {
     __debugbreak();
+  }
   CEffect::GetEffectGfxInfo(a2, this->m_iEffect, this->uMissile.m_iDir, _iTimeIndex % (unsigned int)this->m_uFramesMax);
   a2->m_uObjType = 64;
   a2->m_iEffectScreenX = (float)(this->uMissile.m_fVelocityX * (float)_iTimeIndex) + this->uMissile.m_fWorldX;
-  a2->m_iEffectScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY)
-                       + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
+  a2->m_iEffectScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY) + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
 }
 
 
@@ -506,9 +550,13 @@ void  CEffect::VisualizeCannonball(struct SGfxObjectInfo & a2, int _iTimeIndex) 
 void  CEffect::VisualizeSporeCloud(struct SGfxObjectInfo & a2, int _iTimeIndex) {
   
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1143, "m_uFramesMax > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iTimeIndex < 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1144, "_iTimeIndex >= 0") == 1 )
+  {
     __debugbreak();
+  }
   CEffect::GetEffectGfxInfo(a2, this->m_iEffect, this->uSpore.m_iDir, _iTimeIndex % (unsigned int)this->m_uFramesMax);
   a2->m_uObjType = 0x80;
   a2->m_iEffectScreenX = (float)(this->uSpore.m_fScreenStepX * (float)_iTimeIndex) + this->uSpore.m_fSrcScreenX;
@@ -521,15 +569,14 @@ void  CEffect::VisualizeSporeCloud(struct SGfxObjectInfo & a2, int _iTimeIndex) 
 void  CEffect::VisualizeStagnantAnimal(struct SGfxObjectInfo & a2, int _iTimeIndex) {
   
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1166, "m_uFramesMax > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iTimeIndex < 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1167, "_iTimeIndex >= 0") == 1 )
+  {
     __debugbreak();
-  CGfxManager::GetAnimalGfxInfo(
-    g_pGfxManager,
-    a2,
-    this->m_iEffect,
-    this->uEffect.m_iDir,
-    _iTimeIndex % (unsigned int)this->m_uFramesMax);
+  }
+  CGfxManager::GetAnimalGfxInfo(g_pGfxManager, a2, this->m_iEffect, this->uEffect.m_iDir, _iTimeIndex % (unsigned int)this->m_uFramesMax);
   a2->m_uObjType = 128;
   a2->m_iEffectScreenX = this->uEffect.m_fWorldX;
   a2->m_iEffectScreenY = this->uEffect.m_fWorldY;
@@ -544,27 +591,28 @@ void  CEffect::VisualizeMovingEffect(struct SGfxObjectInfo & a2, int _iTimeIndex
   int uDelay; // [esp+10h] [ebp-8h]
 
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1187, "m_uFramesMax > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iTimeIndex < 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1188, "_iTimeIndex >= 0") == 1 )
+  {
     __debugbreak();
-  CGfxManager::GetEffectGfxInfo(
-    g_pGfxManager,
-    a2,
-    this->m_iEffect,
-    this->uMoving.m_iDir,
-    (_iTimeIndex + (unsigned int)this->uMoving.m_iFrame) % this->uMoving.m_uFramesMax);
+  }
+  CGfxManager::GetEffectGfxInfo(g_pGfxManager, a2, this->m_iEffect, this->uMoving.m_iDir, (_iTimeIndex + (unsigned int)this->uMoving.m_iFrame) % this->uMoving.m_uFramesMax);
   a2->m_uObjType = 128;
   uDelay = this->m_uDelay;
   if ( _iTimeIndex > uDelay )
+  {
     iTimeIndex = this->m_uDelay;
+  }
   else
+  {
     iTimeIndex = _iTimeIndex;
+  }
   if ( this->m_uDelay && iTimeIndex > 0 )
   {
-    a2->m_iEffectScreenX = (float)(iTimeIndex * (this->uMoving.m_iScreenX - this->uMoving.m_iStartScreenX) / uDelay
-                                 + this->uMoving.m_iStartScreenX);
-    a2->m_iEffectScreenY = (float)(iTimeIndex * (this->uMoving.m_iScreenY - this->uMoving.m_iStartScreenY) / uDelay
-                                 + this->uMoving.m_iStartScreenY);
+    a2->m_iEffectScreenX = (float)(iTimeIndex * (this->uMoving.m_iScreenX - this->uMoving.m_iStartScreenX) / uDelay + this->uMoving.m_iStartScreenX);
+    a2->m_iEffectScreenY = (float)(iTimeIndex * (this->uMoving.m_iScreenY - this->uMoving.m_iStartScreenY) / uDelay + this->uMoving.m_iStartScreenY);
   }
   else
   {
@@ -580,9 +628,13 @@ void  CEffect::VisualizeMovingEffect(struct SGfxObjectInfo & a2, int _iTimeIndex
 void  CEffect::VisualizeTopEffect(struct SGfxObjectInfo & a2, int _iTimeIndex) {
   
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1221, "m_uFramesMax > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iTimeIndex < 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1222, "_iTimeIndex >= 0") == 1 )
+  {
     __debugbreak();
+  }
   CEffect::GetEffectGfxInfo(a2, this->m_iEffect, 0, _iTimeIndex % (unsigned int)this->m_uFramesMax);
   a2->m_uObjType = 0x80;
   a2->m_iEffectScreenX = this->uEffect.m_fWorldX;
@@ -596,28 +648,21 @@ void  CEffect::VisualizeTopEffect(struct SGfxObjectInfo & a2, int _iTimeIndex) {
 void  CEffect::VisualizeTopFireball(struct SGfxObjectInfo & a2, int _iTimeIndex) {
   
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1244, "m_uFramesMax > 0") == 1 )
-    __debugbreak();
-  if ( _iTimeIndex < 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1245, "_iTimeIndex >= 0") == 1 )
-    __debugbreak();
-  if ( this->m_iEffect >= (unsigned int)EFFECT_MAX
-    && (this->m_iEffect <= 0x64u || this->m_iEffect >= 0x74u)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\Effects.cpp",
-         1247,
-         "(m_uEffect < EFFECT_MAX) || ( (m_uEffect > EFFECT_2_NO_EFFECT) && (m_uEffect < EFFECT_2_MAX) )") == 1 )
   {
     __debugbreak();
   }
-  CEffect::GetEffectGfxInfo(
-    a2,
-    this->m_iEffect,
-    this->uMissile.m_iDir,
-    _iTimeIndex % (unsigned int)this->uAngel.m_uFramesMax);
+  if ( _iTimeIndex < 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1245, "_iTimeIndex >= 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( this->m_iEffect >= (unsigned int)EFFECT_MAX && (this->m_iEffect <= 0x64u || this->m_iEffect >= 0x74u) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1247, "(m_uEffect < EFFECT_MAX) || ( (m_uEffect > EFFECT_2_NO_EFFECT) && (m_uEffect < EFFECT_2_MAX) )") == 1 )
+  {
+    __debugbreak();
+  }
+  CEffect::GetEffectGfxInfo(a2, this->m_iEffect, this->uMissile.m_iDir, _iTimeIndex % (unsigned int)this->uAngel.m_uFramesMax);
   a2->m_uObjType = 64;
   a2->m_iEffectScreenX = (float)(this->uMissile.m_fVelocityX * (float)_iTimeIndex) + this->uMissile.m_fWorldX;
-  a2->m_iEffectScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY)
-                       + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
+  a2->m_iEffectScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY) + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
   a2->m_iZOrdering = -64;
 }
 
@@ -631,9 +676,13 @@ void  CEffect::VisualizeAttachedEffect(struct SGfxObjectInfo & a2, int _iTimeInd
   unsigned int iJob; // [esp+8h] [ebp-8h]
 
   if ( !this->m_uFramesMax && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1349, "m_uFramesMax > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iTimeIndex < 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1350, "_iTimeIndex >= 0") == 1 )
+  {
     __debugbreak();
+  }
   m_iEffect = this->m_iEffect;
   iDir = this->uAttached.m_iDir;
   iJob = _iTimeIndex % (unsigned int)this->uAngel.m_uFramesMax;
@@ -670,7 +719,9 @@ unsigned int __cdecl CEffect::GetEffectNumberOfFrames(int a1) {
 
   uNumberOfFrames = CGfxManager::GetEffectFrameCount(g_pGfxManager, a1);
   if ( uNumberOfFrames >= 0x100 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 661, "uNumberOfFrames < 256") == 1 )
+  {
     __debugbreak();
+  }
   return ((_BYTE)uNumberOfFrames == 0) + (unsigned __int8)uNumberOfFrames;
 }
 
@@ -713,7 +764,9 @@ void  CEffect::SetVisualizeFunc(enum T_VISUALIZE_FUNC a2) {
   if ( a2 > 11 )
   {
     if ( BBSupportDbgReport(1, "Logic\\Effects.cpp", 633, "CEffect::VisualizeFunc(): Invalid visualize function!") == 1 )
+    {
       __debugbreak();
+    }
     a2 = 1;
   }
   this->m_uVisualizeFunc = a2;

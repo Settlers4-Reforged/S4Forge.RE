@@ -91,9 +91,13 @@ class CPersistence * __cdecl CBuilding::New(std::istream & a1) {
 
   v3 = (CBuilding *)CBuilding::operator new(0x64u);
   if ( v3 )
+  {
     return CBuilding::CBuilding(v3, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -230,8 +234,7 @@ void  CBuilding::PostLoadInit(void) {
   CWarMap::AddEntity(this);
   v1 = std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
   (*(void (__thiscall **)(int, CBuilding *))(*(_DWORD *)v1 + 28))(v1, this);
-  if ( *(_DWORD *)(std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21) + 376)
-    && *(_BYTE *)(*(_DWORD *)(std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21) + 376) + 6) )
+  if ( *(_DWORD *)(std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21) + 376) && *(_BYTE *)(*(_DWORD *)(std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21) + 376) + 6) )
   {
     if ( IEntity::FlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
     {
@@ -251,7 +254,9 @@ void  CBuilding::LogicUpdate(void) {
 
   result = IAnimatedEntity::ProcessAllEvents(this);
   if ( (_BYTE)result )
+  {
     return result;
+  }
   v2 = std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
   return (*(int (__thiscall **)(int, CBuilding *))(*(_DWORD *)v2 + 12))(v2, this);
 }
@@ -264,7 +269,9 @@ struct SGfxObjectInfo *  CBuilding::GetGfxInfos(void) {
   struct IBuildingRole *v1; // eax
 
   if ( CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
+  {
     IAnimatedEntity::BoxSelection();
+  }
   IEntity::m_sGfxInfo.m_pBuildLayerGfxData = 0;
   IEntity::m_sGfxInfo.uConstructionProgress = 0;
   v1 = (struct IBuildingRole *)std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
@@ -272,9 +279,13 @@ struct SGfxObjectInfo *  CBuilding::GetGfxInfos(void) {
   IEntity::m_sGfxInfo.m_uObjType = *((_BYTE *)this + 10);
   IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
   if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
+  {
     IEntity::m_sGfxInfo.m_uFlags = 28;
+  }
   else
+  {
     IEntity::m_sGfxInfo.m_uFlags = 0;
+  }
   return &IEntity::m_sGfxInfo;
 }
 
@@ -320,7 +331,9 @@ void  CBuilding::TryCrushBuilding(void) {
   v4 = std::auto_ptr<IBuildingRole>::operator->(&this[2].m_iType);
   result = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)v4 + 40))(v4);
   if ( !(_BYTE)result )
+  {
     return result;
+  }
   g_cInfoExchangeInt.m_iUnknown = 10;
   g_cInfoExchangeInt.m_uData = 0;
   v2 = IEntity::Type(this);
@@ -328,14 +341,20 @@ void  CBuilding::TryCrushBuilding(void) {
   {
     v3 = IEntity::OwnerId(this);
     if ( !CBuildingMgr::CheckNumberOfOccupiedMilitaryBuildings((CBuildingMgr *)g_cBuildingMgr, v3, 2) )
+    {
       g_cInfoExchangeInt.m_uData = 1;
+    }
   }
   CEvn_Event::CEvn_Event(&v6, 0x25Au, 0, (unsigned int)&g_cInfoExchangeInt, 0);
   v7 = 0;
   if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 538, "g_pEvnEngine != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( g_pEvnEngine )
+  {
     IEventEngine::SendAMessage(g_pEvnEngine, &v6);
+  }
   v7 = -1;
   return CEvn_Event::~CEvn_Event(&v6);
 }
@@ -447,9 +466,7 @@ void  CBuilding::DestroyBuilding(int a2) {
   int v35; // [esp+58h] [ebp-4h]
 
   v32 = 0;
-  if ( IEntity::Type(this) == 51
-    && g_pGameType->m_iMissionId == 11
-    && (g_pGameType->m_iCampaignType == 15 || g_pGameType->m_iCampaignType == 4) )
+  if ( IEntity::Type(this) == 51 && g_pGameType->m_iMissionId == 11 && (g_pGameType->m_iCampaignType == 15 || g_pGameType->m_iCampaignType == 4) )
   {
     v32 = 1;
     v2 = IEntity::OwnerId(this);
@@ -627,11 +644,15 @@ void  CBuilding::SetToWorld(void) {
     LOBYTE(v56) = 0;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v29);
     if ( !v52 )
+    {
       break;
+    }
     ++v53;
     if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v44) )
     {
-      for ( i = 31; i >= 0; --i )
+      for ( i = 31;
+            i >= 0;
+            --i )
       {
         v2 = (_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v44);
         if ( (*v2 & (1 << i)) != 0 )
@@ -664,11 +685,15 @@ void  CBuilding::SetToWorld(void) {
     LOBYTE(v56) = 0;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v27);
     if ( !v51 )
+    {
       break;
+    }
     ++v53;
     if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v44) )
     {
-      for ( j = 31; j >= 0; --j )
+      for ( j = 31;
+            j >= 0;
+            --j )
       {
         v5 = (_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v44);
         if ( (*v5 & (1 << j)) != 0 )
@@ -706,11 +731,15 @@ void  CBuilding::SetToWorld(void) {
     LOBYTE(v56) = 0;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v25);
     if ( !v50 )
+    {
       break;
+    }
     ++v53;
     if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v44) )
     {
-      for ( k = 31; k >= 0; --k )
+      for ( k = 31;
+            k >= 0;
+            --k )
       {
         v10 = (_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v44);
         if ( (*v10 & (1 << k)) != 0 )
@@ -743,12 +772,7 @@ void  CBuilding::SetToWorld(void) {
   CBuilding::CorrectBuildingBits(v54);
   v20 = IEntity::Y(v54);
   v15 = IEntity::X(v54);
-  if ( !CWorldManager::FlagBits(v15, v20, 1u)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\Building.cpp",
-         453,
-         "g_cWorld.FlagBits(X(), Y(), FLAG_BLOCKED_LAND) != 0") == 1 )
+  if ( !CWorldManager::FlagBits(v15, v20, 1u) && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 453, "g_cWorld.FlagBits(X(), Y(), FLAG_BLOCKED_LAND) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -770,7 +794,9 @@ void  CBuilding::Decrease(int a2) {
   result = (*(int (__thiscall **)(int, int))(*(_DWORD *)v4 + 108))(v4, a2);
   v6 = result;
   if ( result <= 0 )
+  {
     return result;
+  }
   if ( result < this->m_iLivePoints )
   {
     result = (int)this;
@@ -781,8 +807,7 @@ void  CBuilding::Decrease(int a2) {
     this->m_iLivePoints = 0;
     if ( (this->m_iUniqueId & 0x20000000) != 0 )
     {
-      if ( IEntity::FlagBits(this, ENTITY_FLAG_AliveMask)
-        && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 1017, "FlagBits(ENTITY_FLAG_ALIVE_MASK) == 0") == 1 )
+      if ( IEntity::FlagBits(this, ENTITY_FLAG_AliveMask) && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 1017, "FlagBits(ENTITY_FLAG_ALIVE_MASK) == 0") == 1 )
       {
         __debugbreak();
       }
@@ -791,7 +816,9 @@ void  CBuilding::Decrease(int a2) {
       {
         result = BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 1018, "FlagBits(ENTITY_FLAG_DIED) != 0");
         if ( result == 1 )
+        {
           __debugbreak();
+        }
       }
     }
     else
@@ -869,12 +896,10 @@ void  CBuilding::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
 
   if ( a2 )
   {
-    if ( BBSupportDbgReport(
-           1,
-           "MapObjects\\Building\\Building.cpp",
-           971,
-           "ISettlerRole::SetObserverTarget(): Invalid target type!") == 1 )
+    if ( BBSupportDbgReport(1, "MapObjects\\Building\\Building.cpp", 971, "ISettlerRole::SetObserverTarget(): Invalid target type!") == 1 )
+    {
       __debugbreak();
+    }
     return 0;
   }
   else
@@ -882,9 +907,13 @@ void  CBuilding::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
     *(_WORD *)(this + 70) = a3;
     result = this;
     if ( a3 <= 0 )
+    {
       v4 = *(_DWORD *)(this + 20) & 0xFFFFFFDF;
+    }
     else
+    {
       v4 = *(_DWORD *)(this + 20) | 0x20;
+    }
     *(_DWORD *)(this + 20) = v4;
   }
   return result;
@@ -896,9 +925,13 @@ void  CBuilding::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
 int  CBuilding::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
   
   if ( a2 )
+  {
     return 0;
+  }
   else
+  {
     return this[35];
+  }
 }
 
 
@@ -991,10 +1024,14 @@ bool  CBuilding::IsOccupied(void)const {
 
   v4 = 0;
   if ( !IEntity::FlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  {
     return v4;
+  }
   v1 = (void *)std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
   if ( (unsigned __int8)IBuildingRole::HaveInhabitant(v1, v3) )
+  {
     return 1;
+  }
   return v4;
 }
 
@@ -1120,30 +1157,16 @@ void  CBuilding::CorrectBuildingBits(void) {
   this[1].m_iUniqueId = 0;
   *(_DWORD *)&this[1].m_iEntityId = 0;
   *(_DWORD *)&this[1].m_iType = 0;
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "CBuilding::CBuilding(): entity id %u, player %u, building type %u, position (%i, %i)",
-    a7,
-    a5,
-    a4,
-    a2,
-    a3);
-  if ( (a4 <= 0 || a4 >= 83)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\Building.cpp",
-         89,
-         "(_iBuildingTypeEx > BUILDING_NO_BUILDING) && (_iBuildingTypeEx < BUILDING_MAX)") == 1 )
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CBuilding::CBuilding(): entity id %u, player %u, building type %u, position (%i, %i)", a7, a5, a4, a2, a3);
+  if ( (a4 <= 0 || a4 >= 83) && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 89, "(_iBuildingTypeEx > BUILDING_NO_BUILDING) && (_iBuildingTypeEx < BUILDING_MAX)") == 1 )
   {
     __debugbreak();
   }
-  if ( a4 == 32
-    && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 90, "_iBuildingTypeEx != BUILDING_PORT") == 1 )
+  if ( a4 == 32 && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 90, "_iBuildingTypeEx != BUILDING_PORT") == 1 )
   {
     __debugbreak();
   }
-  if ( a4 == 31
-    && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 91, "_iBuildingTypeEx != BUILDING_SHIPYARD") == 1 )
+  if ( a4 == 31 && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 91, "_iBuildingTypeEx != BUILDING_SHIPYARD") == 1 )
   {
     __debugbreak();
   }
@@ -1154,12 +1177,8 @@ void  CBuilding::CorrectBuildingBits(void) {
   IEntity::SetRace(this, v8);
   v9 = IEntity::Race(this);
   BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v9, a4);
-  this[1].m_iUniqueId = Y16X16::PackXYFast(
-                          a2 + (char)BuildingInfo->m_iDoorXOffset,
-                          a3 + (char)BuildingInfo->m_iDoorYOffset);
-  *(_DWORD *)&this[1].m_iEntityId = Y16X16::PackXYFast(
-                                      a2 + (char)BuildingInfo->m_iFlagX,
-                                      a3 + (char)BuildingInfo->m_iFlagY);
+  this[1].m_iUniqueId = Y16X16::PackXYFast(a2 + (char)BuildingInfo->m_iDoorXOffset, a3 + (char)BuildingInfo->m_iDoorYOffset);
+  *(_DWORD *)&this[1].m_iEntityId = Y16X16::PackXYFast(a2 + (char)BuildingInfo->m_iFlagX, a3 + (char)BuildingInfo->m_iFlagY);
   *(_DWORD *)&this[1].m_iType = CBuilding::EnsignPackedXY(this);
   if ( (unsigned __int8)CBuildingMgr::IsPortEx(a4) )
   {
@@ -1177,7 +1196,9 @@ void  CBuilding::CorrectBuildingBits(void) {
   this->m_uObjType = Building;
   IEntity::SetFlagBits(this, (EntityFlag)4352);
   if ( (unsigned __int8)CBuildingMgr::IsMilitary(v12) )
+  {
     IEntity::SetFlagBits(this, (EntityFlag)12);
+  }
   CWarMap::AddEntity(this);
   v11 = std::auto_ptr<IBuildingRole>::operator->(&this[1].m_psAIEntityInfo);
   (*(void (__thiscall **)(int, CBuilding *))(*(_DWORD *)v11 + 24))(v11, this);
@@ -1265,12 +1286,7 @@ void  CBuilding::Ready(void) {
   }
   v21 = IEntity::Y(v24);
   v11 = IEntity::X(v24);
-  if ( !CWorldManager::FlagBits(v11, v21, 1u)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\Building.cpp",
-         346,
-         "g_cWorld.FlagBits(X(), Y(), FLAG_BLOCKED_LAND) != 0") == 1 )
+  if ( !CWorldManager::FlagBits(v11, v21, 1u) && BBSupportDbgReport(2, "MapObjects\\Building\\Building.cpp", 346, "g_cWorld.FlagBits(X(), Y(), FLAG_BLOCKED_LAND) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -1364,12 +1380,16 @@ void  CBuilding::RemoveBuildingBits(void) {
     LOBYTE(v55) = 0;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v31);
     if ( !v51 )
+    {
       break;
+    }
     ++v48;
     if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v44) )
     {
       v46 = v48 + v39;
-      for ( i = 31; i >= 0; --i )
+      for ( i = 31;
+            i >= 0;
+            --i )
       {
         v4 = (_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v44);
         if ( (*v4 & (1 << i)) != 0 )

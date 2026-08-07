@@ -11,10 +11,14 @@ unsigned int  CInstallationInfo::GetConfigChecksum(void) {
   SConfigFile *i; // [esp+8h] [ebp-4h]
 
   ConfigFileCRC = 1;
-  for ( i = s_sConfigFiles; i->m_sName; ++i )
+  for ( i = s_sConfigFiles;
+        i->m_sName;
+        ++i )
   {
     if ( LOBYTE(i->m_uId) )
+    {
       ConfigFileCRC = CInstallationInfo::GetConfigFileCRC((wchar_t *)i->m_sName, ConfigFileCRC);
+    }
   }
   return ConfigFileCRC;
 }
@@ -40,10 +44,14 @@ unsigned int  CInstallationInfo::GetGfxChecksum(void) {
   CPerformanceCounter::CPerformanceCounter((CPerformanceCounter *)v3);
   CPerformanceCounter::Start(v3);
   GfxFileCRC = 1;
-  for ( i = s_sGfxFiles; i->m_uId >= 0; ++i )
+  for ( i = s_sGfxFiles;
+        i->m_uId >= 0;
+        ++i )
   {
     if ( LOBYTE(i->m_uU) )
+    {
       GfxFileCRC = CInstallationInfo::GetGfxFileCRC(i->m_uId, GfxFileCRC);
+    }
   }
   CPerformanceCounter::Measure(v3);
   v1 = CPerformanceCounter::TimeMs((CPerformanceCounter *)v3);
@@ -65,9 +73,13 @@ bool  CInstallationInfo::CheckInstallation(int a2) {
   v3 = CInstallationInfo::CheckGfxFiles(a2) & v2;
   v6 = CInstallationInfo::CheckWithLuaScript(a2) & v3;
   if ( v6 )
+  {
     BBSupportTracePrintF(1, "Installation check: %s!", "Ok");
+  }
   else
+  {
     BBSupportTracePrintF(1, "Installation check: %s!", "Failed");
+  }
   CInstallationInfo::CheckTrojanVehicleGfx(this);
   return v6;
 }
@@ -79,12 +91,18 @@ bool  CInstallationInfo::IsOptionalGameConfigFile(wchar_t const * String2) {
   
   SConfigFile *i; // [esp+14h] [ebp-4h]
 
-  for ( i = s_sConfigFiles; ; ++i )
+  for ( i = s_sConfigFiles;
+        ;
+        ++i )
   {
     if ( i == &s_sConfigFiles[16] )
+    {
       j___wassert(L"false", L"main\\InstallationInfo.cpp", 0x271u);
+    }
     if ( !j__wcscmp(i->m_sName, String2) )
+    {
       break;
+    }
   }
   return (i->m_uFlags & 0x40000) != 0;
 }
@@ -124,7 +142,9 @@ bool __cdecl CInstallationInfo::GetFileProperties(wchar_t const * String, struct
   memset(a2, 0, sizeof(SFileProperties));
   v7 = 0;
   if ( !String || !*String )
+  {
     return v7;
+  }
   CFileEx::CFileEx(&v8, UNUSED_ARG());
   v10 = 1;
   CFileEx::Open(&v8.IFileEx, String, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
@@ -169,7 +189,9 @@ unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const * FileName, uns
 
   v13 = &v3;
   if ( !FileName || !*FileName )
+  {
     return a2;
+  }
   v11 = 1;
   ElementCount = 0;
   Buffer = 0;
@@ -214,7 +236,9 @@ unsigned int __cdecl CInstallationInfo::GetConfigFileCRC(wchar_t const * String,
   int v6; // [esp+30h] [ebp-4h]
 
   if ( !String || !*String )
+  {
     return a2;
+  }
   CGameSettings::GetConfigFilePath(&ret, String, 1);
   v6 = 0;
   v3 = std::wstring::c_str(&ret);
@@ -266,7 +290,9 @@ bool __cdecl CInstallationInfo::CheckFile(wchar_t const * a1, int a2) {
   if ( (a2 & 0x10000) != 0 )
   {
     if ( FileProperties )
+    {
       BBSupportTracePrintF(1, "File should not exist: %s!", (const char *)a1);
+    }
     v4 = FileProperties == 0;
     return FileProperties == 0;
   }
@@ -340,8 +366,12 @@ bool __cdecl CInstallationInfo::CheckConfigFiles(int a1) {
   char v3; // [esp+Bh] [ebp-1h]
 
   v3 = 1;
-  for ( i = s_sConfigFiles; i->m_sName; ++i )
+  for ( i = s_sConfigFiles;
+        i->m_sName;
+        ++i )
+  {
     v3 &= CInstallationInfo::CheckConfigFile((wchar_t *)i->m_sName, i->m_uFlags | a1);
+  }
   return v3;
 }
 
@@ -354,8 +384,12 @@ bool __cdecl CInstallationInfo::CheckGfxFiles(int a1) {
   char v3; // [esp+Bh] [ebp-1h]
 
   v3 = 1;
-  for ( i = s_sGfxFiles; i->m_uId >= 0; ++i )
+  for ( i = s_sGfxFiles;
+        i->m_uId >= 0;
+        ++i )
+  {
     v3 &= CInstallationInfo::CheckGfxFile(i->m_uId, i->m_uFlags | a1);
+  }
   return v3;
 }
 
@@ -382,24 +416,31 @@ void  CInstallationInfo::CheckTrojanVehicleGfx(void) {
   {
     dwFileAttributes = GetFileAttributesW(L"Gfx\\34.gfx");
     if ( (dwFileAttributes & 1) != 0 )
+    {
       SetFileAttributesW(L"Gfx\\34.gfx", dwFileAttributes ^ 1);
+    }
     hFile = CreateFileW(L"Gfx\\34.gfx", 0xC0000000, 0, 0, 3u, 0x80u, 0);
     if ( hFile )
     {
       if ( GetFileSize(hFile, 0) == 0x365FEE )
       {
-        for ( i = 0; i < 1; ++i )
+        for ( i = 0;
+              i < 1;
+              ++i )
         {
-          for ( j = 0; j < 1; ++j )
+          for ( j = 0;
+                j < 1;
+                ++j )
           {
             NumberOfBytesRead = 0;
-            for ( k = 0; s_cTrojanVehicleGfxCheckpoints[k].m_uAtOffset; ++k )
+            for ( k = 0;
+                  s_cTrojanVehicleGfxCheckpoints[k].m_uAtOffset;
+                  ++k )
             {
               SetFilePointer(hFile, s_cTrojanVehicleGfxCheckpoints[k].m_uAtOffset, 0, FILE_BEGIN);
               ReadFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
               ReadFile(hFile, &v9, 2u, &NumberOfBytesRead, 0);
-              if ( v10 != s_cTrojanVehicleGfxCheckpoints[k].m_uExpectedData[2]
-                || v9 != s_cTrojanVehicleGfxCheckpoints[k].m_uExpectedData[3] )
+              if ( v10 != s_cTrojanVehicleGfxCheckpoints[k].m_uExpectedData[2] || v9 != s_cTrojanVehicleGfxCheckpoints[k].m_uExpectedData[3] )
               {
                 goto LABEL_61;
               }
@@ -409,7 +450,9 @@ void  CInstallationInfo::CheckTrojanVehicleGfx(void) {
             v11 = 0;
             ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
             if ( !NumberOfBytesRead )
+            {
               v11 = 1;
+            }
             while ( !v11 )
             {
               if ( Buffer == 161 )
@@ -432,7 +475,9 @@ void  CInstallationInfo::CheckTrojanVehicleGfx(void) {
                             ++v1;
                             ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
                             if ( !NumberOfBytesRead )
+                            {
                               v11 = 1;
+                            }
                           }
                         }
                         else
@@ -456,12 +501,18 @@ void  CInstallationInfo::CheckTrojanVehicleGfx(void) {
               {
                 ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
                 if ( !NumberOfBytesRead )
+                {
                   v11 = 1;
+                }
               }
             }
             if ( v1 != 96 )
+            {
               goto LABEL_61;
-            for ( m = 0; s_cTrojanVehicleGfxCheckpoints[m].m_uAtOffset; ++m )
+            }
+            for ( m = 0;
+                  s_cTrojanVehicleGfxCheckpoints[m].m_uAtOffset;
+                  ++m )
             {
               SetFilePointer(hFile, s_cTrojanVehicleGfxCheckpoints[m].m_uAtOffset, 0, FILE_BEGIN);
               v10 = s_cTrojanVehicleGfxCheckpoints[m].m_uExpectedData[0];
@@ -475,7 +526,9 @@ void  CInstallationInfo::CheckTrojanVehicleGfx(void) {
             v11 = 0;
             ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
             if ( !NumberOfBytesRead )
+            {
               v11 = 1;
+            }
             v10 = 'x';
             v9 = ';';
             while ( !v11 )
@@ -504,7 +557,9 @@ void  CInstallationInfo::CheckTrojanVehicleGfx(void) {
                             WriteFile(hFile, &v9, 2u, &NumberOfBytesRead, 0);
                             ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
                             if ( !NumberOfBytesRead )
+                            {
                               v11 = 1;
+                            }
                           }
                         }
                         else
@@ -528,7 +583,9 @@ void  CInstallationInfo::CheckTrojanVehicleGfx(void) {
               {
                 ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
                 if ( !NumberOfBytesRead )
+                {
                   v11 = 1;
+                }
               }
             }
           }
@@ -550,11 +607,11 @@ bool __cdecl CInstallationInfo::CheckWithLuaScript(int a1) {
   int v4; // [esp+1Ch] [ebp-4h]
 
   CInstallationInfo::m_iLuaCheckFlags = a1;
-  CInstallationInfo::m_bLuaCheckOk = CInstallationInfo::CheckFile(
-                                       (wchar_t *)L"Script\\Internal\\CheckInstallation.txt",
-                                       a1);
+  CInstallationInfo::m_bLuaCheckOk = CInstallationInfo::CheckFile((wchar_t *)L"Script\\Internal\\CheckInstallation.txt", a1);
   if ( !CInstallationInfo::m_bLuaCheckOk )
+  {
     return CInstallationInfo::m_bLuaCheckOk;
+  }
   CLua::CLua((CLua *)&v2);
   v4 = 0;
   CLua::ExportGlobalVar("MUST_NOT_EXIST", DOUBLE_65536_0);
@@ -565,7 +622,9 @@ bool __cdecl CInstallationInfo::CheckWithLuaScript(int a1) {
   CLua::ExportFunction((int)CInstallationInfo::LuaCheckFiles, "CheckFiles");
   v3 = CLua::ExecuteScript((wchar_t *)L"Script\\Internal\\CheckInstallation.txt");
   if ( !v3 )
+  {
     BBSupportTracePrintF(1, "Failed to execute script!");
+  }
   CInstallationInfo::m_bLuaCheckOk &= v3;
   v4 = -1;
   CLua::~CLua(&v2);
@@ -596,9 +655,7 @@ void __cdecl CInstallationInfo::LuaCheckFile(void) {
   {
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v8);
     v10 = 0;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-      (int)&v9,
-      Str);
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)&v9, Str);
     LOBYTE(v10) = 1;
     v3 = CInstallationInfo::m_bLuaCheckOk;
     v5 = IntegerZeroIfNoObject | CInstallationInfo::m_iLuaCheckFlags;
@@ -649,14 +706,14 @@ void __cdecl CInstallationInfo::LuaCheckFiles(void) {
   if ( Format && *Format && Integer >= 0 && v8 >= 0 && IntegerZeroIfNoObject >= 0 )
   {
     Str[511] = 0;
-    for ( i = Integer; i <= v8; ++i )
+    for ( i = Integer;
+          i <= v8;
+          ++i )
     {
       snprintf(Str, 0x1FFu, Format, i);
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v12);
       v15 = 0;
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-        (int)&v13,
-        Str);
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)&v13, Str);
       LOBYTE(v15) = 1;
       v4 = CInstallationInfo::m_bLuaCheckOk;
       v6 = IntegerZeroIfNoObject | CInstallationInfo::m_iLuaCheckFlags;
@@ -681,9 +738,13 @@ void __cdecl CInstallationInfo::LuaCheckFiles(void) {
 int __cdecl CInstallationInfo::LuaGetInteger(unsigned int a1) {
   
   if ( j__lua_isnumber(a1) )
+  {
     return (int)j__lua_getnumber(a1);
+  }
   else
+  {
     return -1;
+  }
 }
 
 
@@ -692,9 +753,13 @@ int __cdecl CInstallationInfo::LuaGetInteger(unsigned int a1) {
 int __cdecl CInstallationInfo::LuaGetIntegerZeroIfNoObject(unsigned int a1) {
   
   if ( a1 )
+  {
     return CInstallationInfo::LuaGetInteger(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -703,9 +768,13 @@ int __cdecl CInstallationInfo::LuaGetIntegerZeroIfNoObject(unsigned int a1) {
 char const * __cdecl CInstallationInfo::LuaGetString(unsigned int a1) {
   
   if ( j__lua_isstring(a1) )
+  {
     return j__lua_getstring(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

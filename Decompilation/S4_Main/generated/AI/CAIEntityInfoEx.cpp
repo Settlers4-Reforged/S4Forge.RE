@@ -44,15 +44,21 @@ class CAIEntityInfoEx * __cdecl CAIEntityInfoEx::CreateExtendedInfo(enum T_AI_EN
   if ( a1 )
   {
     if ( BBSupportDbgReport(1, "AI\\AI_EntityInfo.cpp", 135, "CAIEntityInfoEx::CreateExtendedInfo(): Invalid class!") == 1 )
+    {
       __debugbreak();
+    }
   }
   else
   {
     C = (CAIEntityInfoTower *)operator new(0x14u);
     if ( C )
+    {
       return CAIEntityInfoTower::CAIEntityInfoTower(C);
+    }
     else
+    {
       return 0;
+    }
   }
   return (CAIEntityInfoTower *)v2;
 }

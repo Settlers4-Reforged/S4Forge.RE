@@ -24,17 +24,23 @@ enum T_S4_CDROM_TYPE  CCDDrive::GetCDType(char driveName) {
   WCHAR FileName[1024]; // [esp+10h] [ebp-804h] BYREF
 
   if ( driveName >= 'a' && driveName <= 'z' )
+  {
     driveName -= 32;
+  }
   if ( driveName >= 'A' && driveName <= 'Z' && CCDDrive::GetDriveTypeA(this, driveName) == 5 )
   {
-    for ( i = 0; i < 9; ++i )
+    for ( i = 0;
+          i < 9;
+          ++i )
     {
       v3 = dword_36BB280[i];
       if ( v3 )
       {
         _wsprintfW(FileName, L"%c:\\%s", driveName, v3);
         if ( CCDDrive::FindFile(FileName) )
+        {
           return i;
+        }
       }
     }
   }
@@ -53,7 +59,9 @@ char  CCDDrive::GetCDDrive(enum T_S4_CDROM_TYPE a2) {
   char i; // [esp+7h] [ebp-1h]
 
   if ( a2 <= 0 || a2 >= 9 )
+  {
     return 0;
+  }
   v7 = 0;
   v6 = this->m_aU2[a2];
   v3 = ((int (__thiscall *)(CCDDrive *, _DWORD))this->GetCDType)(this, v6);
@@ -63,7 +71,9 @@ char  CCDDrive::GetCDDrive(enum T_S4_CDROM_TYPE a2) {
   }
   else
   {
-    for ( i = 65; i <= 90; ++i )
+    for ( i = 65;
+          i <= 90;
+          ++i )
     {
       if ( i != (char)v6 )
       {
@@ -94,21 +104,31 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
   _BYTE v12[256]; // [esp+1010h] [ebp-104h] BYREF
 
   if ( (a4 & 0x100000) != 0 )
+  {
     a4 |= 1u;
+  }
   if ( (a4 & 0x200000) != 0 )
+  {
     a4 |= 0x10000u;
+  }
   if ( !lpFileName )
+  {
     lpFileName = (LPCWSTR)&word_36BB364;
+  }
   v9 = 0;
   if ( (a4 & 1) != 0 && CCDDrive::FindFile(lpFileName) )
+  {
     v9 = 64;
+  }
   if ( !v9 )
   {
     if ( (a4 & 0x400000) != 0 )
     {
       memset(Source, 0, sizeof(Source));
       memset(v12, 0, sizeof(v12));
-      for ( i = 1; i < 9; ++i )
+      for ( i = 1;
+            i < 9;
+            ++i )
       {
         v8 = this->GetCDDrive(this, i);
         if ( v8 )
@@ -133,27 +153,37 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
     }
     else
     {
-      for ( j = 1; j < 9; ++j )
+      for ( j = 1;
+            j < 9;
+            ++j )
       {
         if ( (a4 & (1 << j)) != 0 )
         {
           v9 = this->GetCDDrive(this, j);
           if ( v9 )
+          {
             break;
+          }
         }
       }
     }
   }
   if ( !v9 && (a4 & 0x10000) != 0 )
+  {
     v9 = 64;
+  }
   if ( v9 )
   {
     if ( v9 == 64 )
     {
       if ( (a4 & 0x20000) != 0 )
+      {
         _wsprintfW(String, L".\\");
+      }
       else
+      {
         _wsprintfW(String, L".\\%s", lpFileName);
+      }
     }
     else if ( (a4 & 0x20000) != 0 )
     {
@@ -183,10 +213,14 @@ bool __cdecl CCDDrive::FindFile(wchar_t const * lpFileName) {
   struct _WIN32_FIND_DATAW FindFileData; // [esp+4h] [ebp-254h] BYREF
 
   if ( !lpFileName || !*lpFileName )
+  {
     return 0;
+  }
   hFindFile = FindFirstFileW(lpFileName, &FindFileData);
   if ( hFindFile == (HANDLE)-1 )
+  {
     return 0;
+  }
   FindClose(hFindFile);
   return 1;
 }
@@ -199,7 +233,9 @@ unsigned int  CCDDrive::GetDriveTypeA(char _cDrive) {
   char RootPathName[8]; // [esp+8h] [ebp-Ch] BYREF
 
   if ( !this->m_uDriveType )
+  {
     this->m_uDriveType = CCDDrive::DriveTypeExCheck(this);
+  }
   strcpy(RootPathName, "C:\\");
   *(_DWORD *)&RootPathName[4] = 0;
   RootPathName[0] = _cDrive;
@@ -216,15 +252,7 @@ bool __cdecl CCDDrive::AreCDTypesMatching(enum T_S4_CDROM_TYPE a1, enum T_S4_CDR
 
   v5 = a1 == 2 || a1 == 3 || a1 == 4;
   v4 = a2 == 2 || a2 == 3 || a2 == 4;
-  return a1
-      && a2
-      && (a1 == a2
-       || a1 == 1
-       || a2 == 1
-       || a1 == 5 && v4
-       || a2 == 5 && v5
-       || a1 == 7 && (v4 || a2 == 6)
-       || a2 == 7 && (v5 || a1 == 6));
+  return a1 && a2 && (a1 == a2 || a1 == 1 || a2 == 1 || a1 == 5 && v4 || a2 == 5 && v5 || a1 == 7 && (v4 || a2 == 6) || a2 == 7 && (v5 || a1 == 6));
 }
 
 

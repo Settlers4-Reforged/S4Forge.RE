@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CPriestRole::New(std::istream & a1) {
   
   if ( operator new(0x40u) )
+  {
     return CPriestRole::CPriestRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -61,7 +65,9 @@ void  CPriestRole::LogicUpdateJob(class CSettler * a2) {
       v5 = IEntity::X(a2);
       result = Grid::Distance((Grid *)(v4 - v5), v11);
       if ( result <= SpellRange )
+      {
         return (*(int (__thiscall **)(CPriestRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
+      }
     }
   }
   else if ( v14 == 16 )
@@ -122,7 +128,9 @@ void  CPriestRole::PostLoadInit(class CSettler * a1) {
     operator^<int>(a2, (int)(v9 + 15));
   }
   operator^<unsigned int>(a2, &v4);
-  for ( i = 0; i < v4; ++i )
+  for ( i = 0;
+        i < v4;
+        ++i )
   {
     v2 = CEntityTask::Load(a2);
     std::list<CEntityTask>::push_back(v2);
@@ -166,7 +174,9 @@ void  CPriestRole::Store(std::ostream & a2) {
     LOBYTE(v13) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v4);
     if ( !v12 )
+    {
       break;
+    }
     v10 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(v5, v3, v4[0]);
     (*(void (__thiscall **)(int, struct std::ostream *))(*(_DWORD *)v10 + 4))(v10, a2);
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v5);
@@ -226,12 +236,16 @@ int  CPriestRole::GetKindOfSelection(class CSettler * a2)const {
   *(_DWORD *)this = &CPriestRole::_vftable_;
   v2 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
   if ( !IEntity::FlagBits(v2, ENTITY_FLAG_ON_BOARD) )
+  {
     CWarMap::RemoveEntity(v2);
+  }
   if ( *((_WORD *)this + 16) )
   {
     VehiclePtr = CVehicleMgr::GetVehiclePtr(*((unsigned __int16 *)this + 16));
     if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Settler\\PriestRole.cpp", 58, "pVehicle!=NULL") == 1 )
+    {
       __debugbreak();
+    }
     if ( VehiclePtr )
     {
       v1 = IEntity::ID();
@@ -254,7 +268,9 @@ void  CPriestRole::GetNextJob(class CSettler * a2) {
   {
     IMovingEntity::IncToDoListIter(a2);
     if ( !IMovingEntity::IsEndIter(a2) )
+    {
       return (*(int (__thiscall **)(CPriestRole *, struct CSettler *))(*(_DWORD *)v3 + 40))(v3, a2);
+    }
   }
   IMovingEntity::ResetToDoList(v3);
   *((_DWORD *)v3 + 15) = -1;
@@ -302,7 +318,9 @@ void  CPriestRole::TakeJob(class CSettler * a2) {
       case 7:
         IAnimatedEntity::SetFrame(1);
         if ( *(__int16 *)(this + 14) > 0 || *(__int16 *)(this + 16) > 0 )
+        {
           ISettlerRole::NewDestination((ISettlerRole *)this, a2, *(__int16 *)(this + 14), *(__int16 *)(this + 16), 0);
+        }
         IMovingEntity::WalkToXY(a2, *(_DWORD *)(this + 24), 0);
         *(_BYTE *)(this + 4) = 6;
         IMovingEntity::SetDisplacementCosts(5);
@@ -469,8 +487,7 @@ void  CPriestRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
   {
     case 3:
       v46 = 0;
-      if ( *((int *)a3 + 5) < 0
-        && BBSupportDbgReport(2, "MapObjects\\Settler\\PriestRole.cpp", 490, "_pEvent->m_iData2 >= 0") == 1 )
+      if ( *((int *)a3 + 5) < 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\PriestRole.cpp", 490, "_pEvent->m_iData2 >= 0") == 1 )
       {
         __debugbreak();
       }
@@ -496,10 +513,14 @@ void  CPriestRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
       goto LABEL_19;
     case 0x11:
       if ( *((_DWORD *)a3 + 2) != 13 )
+      {
         goto LABEL_19;
+      }
       result = ISelectableSettlerRole::ProcessGoToPosFerry((ISelectableSettlerRole *)this, a2, a3);
       if ( (_BYTE)result )
+      {
         return result;
+      }
       v43 = *((_DWORD *)a3 + 4);
       v39 = Y16X16::UnpackXFast(v43);
       v40 = Y16X16::UnpackYFast(v43);
@@ -510,7 +531,9 @@ void  CPriestRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
 LABEL_19:
       result = v46;
       if ( v46 )
+      {
         *(_DWORD *)(this + 60) = -1;
+      }
       return result;
     case 0x18:
       v31 = IEntity::Type((unsigned __int16 *)a2);

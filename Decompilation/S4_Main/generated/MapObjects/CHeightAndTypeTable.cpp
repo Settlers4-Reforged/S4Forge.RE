@@ -449,18 +449,28 @@ int  CHeightAndTypeTable::GetObjectFog(int a2, int a3, int a4) {
   *((_BYTE *)v8 + 156 * (unsigned __int8)byte_3ACD510[7] + 4 * (unsigned __int8)byte_3ACD510[4] + 129) = 3;
   *((_BYTE *)v8 + 156 * (unsigned __int8)byte_3ACD510[7] + 4 * (unsigned __int8)byte_3ACD510[4] + 130) = 5;
   *((_BYTE *)v8 + 156 * (unsigned __int8)byte_3ACD510[7] + 4 * (unsigned __int8)byte_3ACD510[4] + 131) = 0x80;
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
   {
-    for ( j = 0; j < 16; ++j )
+    for ( j = 0;
+          j < 16;
+          ++j )
     {
-      for ( k = 0; k < 8; ++k )
+      for ( k = 0;
+            k < 8;
+            ++k )
       {
-        for ( m = 0; m < 8; ++m )
+        for ( m = 0;
+              m < 8;
+              ++m )
         {
           v3 = (unsigned __int8)byte_3ACD720[j];
           v3 += ((unsigned __int8)byte_3ACD720[j] << 8) + ((unsigned __int8)byte_3ACD720[j] << 16);
           if ( !j )
+          {
             v3 = -12114871;
+          }
           v2 = *((_DWORD *)v8 + j + 16);
           CHeightAndTypeTable::CalcFogging(v8, i, k, m, j, &v3, &v2);
           *((_DWORD *)v8 + 2048 * i + 128 * j + 16 * k + 2 * m + 1553) = v3;
@@ -492,31 +502,55 @@ void  CHeightAndTypeTable::InitShadeTables(void) {
   v6 = FLOAT_48_0;
   v7 = FLOAT_23_0;
   if ( 48.0 >= 23.0 )
+  {
     v3 = FLOAT_48_0;
+  }
   else
+  {
     v3 = FLOAT_23_0;
+  }
   if ( v3 <= 71.0 )
+  {
     v2 = FLOAT_71_0;
+  }
   else
+  {
     v2 = v3;
+  }
   v4 = v2 / 8.0;
-  for ( i = 15; i > 8; --i )
+  for ( i = 15;
+        i > 8;
+        --i )
   {
     *((_DWORD *)this + i + 16) = (int)(float)((float)(v7 / 256.0) * 255.0) | ((int)(float)((float)(v6 / 256.0) * 255.0) << 8) | ((int)(float)((float)(v5 / 256.0) * 255.0) << 16) | 0xFF000000;
     v7 = v7 - v4;
     if ( v7 < 0.0 )
+    {
       v7 = 0.0;
+    }
     v6 = v6 - v4;
     if ( v6 < 0.0 )
+    {
       v6 = 0.0;
+    }
     v5 = v5 - v4;
     if ( v5 < 0.0 )
+    {
       v5 = 0.0;
+    }
   }
-  for ( j = 8; j >= 0; --j )
+  for ( j = 8;
+        j >= 0;
+        --j )
+  {
     *((_DWORD *)this + j + 16) = -16777216;
-  for ( k = 15; k > 8; --k )
+  }
+  for ( k = 15;
+        k > 8;
+        --k )
+  {
     *((_DWORD *)this + k) = -1;
+  }
   *((_DWORD *)this + 8) = -1;
   *((_DWORD *)this + 7) = -5921371;
   *((_DWORD *)this + 6) = -10066330;
@@ -532,7 +566,7 @@ void  CHeightAndTypeTable::InitShadeTables(void) {
 
 
 // address=[0x2f85c90]
-// Decompiled from int __thiscall CHeightAndTypeTable::CalcFogging(  CHeightAndTypeTable *this,  int a2,  int a3,  int a4,  int a5,  unsigned int *a6,  unsigned int *a7)
+// Decompiled from int __thiscall CHeightAndTypeTable::CalcFogging(CHeightAndTypeTable *this, int a2, int a3, int a4, int a5, unsigned int *a6, unsigned int *a7)
 void  CHeightAndTypeTable::CalcFogging(int a2, int a3, int a4, int a5, unsigned int & a6, unsigned int & a7) {
   
   int result; // eax
@@ -543,21 +577,26 @@ void  CHeightAndTypeTable::CalcFogging(int a2, int a3, int a4, int a5, unsigned 
 
   result = 16 * (a3 * (15 - a2) + a4 * a2) / 15;
   if ( !result )
+  {
     return result;
+  }
   v10 = (unsigned __int8)*((_DWORD *)this + 8 - (result >> 4));
   if ( result >> 4 != 8 )
+  {
     v10 = (unsigned __int8)*((_DWORD *)this + 8 - (result >> 4) - 1);
+  }
   if ( ((unsigned __int8)*((_DWORD *)this + 8 - (result >> 4)) * (15 - (result & 0xF)) + v10 * (result & 0xFu)) >> 4 >= (unsigned __int8)*a6 )
+  {
     v9 = (unsigned __int8)*a6;
+  }
   else
+  {
     v9 = ((unsigned __int8)*((_DWORD *)this + 8 - (result >> 4)) * (15 - (result & 0xF)) + v10 * (result & 0xFu)) >> 4;
+  }
   v8 = (float)v9;
-  *a6 = (int)(float)((float)(unsigned __int8)*a6 * (float)(v8 / 255.0))
-      + ((int)(float)((float)(unsigned __int8)BYTE2(*a6) * (float)(v8 / 255.0)) << 16)
-      + ((int)(float)((float)(unsigned __int8)BYTE1(*a6) * (float)(v8 / 255.0)) << 8);
+  *a6 = (int)(float)((float)(unsigned __int8)*a6 * (float)(v8 / 255.0)) + ((int)(float)((float)(unsigned __int8)BYTE2(*a6) * (float)(v8 / 255.0)) << 16) + ((int)(float)((float)(unsigned __int8)BYTE1(*a6) * (float)(v8 / 255.0)) << 8);
   v11 = 1.0 - (float)((float)(a3 * (15 - a2) + a4 * a2) / 105.0);
-  result = (int)(float)((float)(unsigned __int8)*a7 * v11)
-         + ((int)(float)((float)(unsigned __int8)BYTE2(*a7) * v11) << 16);
+  result = (int)(float)((float)(unsigned __int8)*a7 * v11) + ((int)(float)((float)(unsigned __int8)BYTE2(*a7) * v11) << 16);
   *a7 = result + ((int)(float)((float)(unsigned __int8)BYTE1(*a7) * v11) << 8);
   return result;
 }
@@ -567,9 +606,7 @@ void  CHeightAndTypeTable::CalcFogging(int a2, int a3, int a4, int a5, unsigned 
 // Decompiled from int __thiscall CHeightAndTypeTable::GetAverageShadingValue(CHeightAndTypeTable *this, int a2, int a3)
 int  CHeightAndTypeTable::GetAverageShadingValue(int a2, int a3) {
   
-  return ((unsigned __int8)a3 + (unsigned __int8)a2) / 2
-       + (((BYTE2(a3) + BYTE2(a2)) / 2) << 16)
-       + (((BYTE1(a3) + BYTE1(a2)) / 2) << 8);
+  return ((unsigned __int8)a3 + (unsigned __int8)a2) / 2 + (((BYTE2(a3) + BYTE2(a2)) / 2) << 16) + (((BYTE1(a3) + BYTE1(a2)) / 2) << 8);
 }
 
 

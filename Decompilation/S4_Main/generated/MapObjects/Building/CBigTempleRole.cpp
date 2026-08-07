@@ -10,9 +10,13 @@ class CPersistence * __cdecl CBigTempleRole::New(std::istream & a1) {
 
   C = (CBigTempleRole *)operator new(0x180u);
   if ( C )
+  {
     return CBigTempleRole::CBigTempleRole(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -29,7 +33,9 @@ void  CBigTempleRole::LogicUpdate(class CBuilding * a2) {
   unsigned __int8 uLogicState; // [esp+0h] [ebp-8h]
 
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     this->FillDialog(this, a2, 1);
+  }
   uLogicState = this->m_uLogicState;
   if ( uLogicState == 2 )
   {
@@ -48,7 +54,9 @@ void  CBigTempleRole::LogicUpdate(class CBuilding * a2) {
   else if ( uLogicState == 3 )
   {
     if ( IEntity::FlagBits(a2, (EntityFlag)4096) )
+    {
       CBigTempleRole::ThrowOutPriest(a2);
+    }
     if ( this->m_uThrownOutPriests < 10u )
     {
       if ( this->m_pBuildingInfo->m_iProductionDelay )
@@ -66,12 +74,7 @@ void  CBigTempleRole::LogicUpdate(class CBuilding * a2) {
         v6 = type_info::name(v3);
         v4 = CBuilding::BuildingTypeEx(a2);
         BuildingName = CS4DefineNames::GetBuildingName(v4);
-        BBSupportTracePrintF(
-          2,
-          "WARNING: Building %s (role %s) of race %s has no production delay!",
-          BuildingName,
-          v6,
-          RaceName);
+        BBSupportTracePrintF(2, "WARNING: Building %s (role %s) of race %s has no production delay!", BuildingName, v6, RaceName);
       }
     }
   }
@@ -103,7 +106,9 @@ void  CBigTempleRole::Init(class CBuilding * a2) {
   v2 = IEntity::OwnerId(a2);
   CMagic::IncreaseManaByBigTemple(v2);
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     this->FillDialog(this, a2, 0);
+  }
   return IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
 }
 
@@ -142,15 +147,13 @@ void  CBigTempleRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cBuildingInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, ownerId, type, 0);
   type = IEntity::Type(a2);
   ownerId = IEntity::OwnerId(a2);
-  g_cBuildingInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings(
-                                         (CBuildingMgr *)g_cBuildingMgr,
-                                         ownerId,
-                                         type,
-                                         1u);
+  g_cBuildingInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, ownerId, type, 1u);
   g_cBuildingInfo.m_bInhabitants = this->m_bInhabitants;
   v9 = 604;
   if ( !a3 )
+  {
     v9 = 602;
+  }
   CEvn_Event::CEvn_Event(&v10, v9, 0, (unsigned int)&g_cBuildingInfo, 0);
   v11 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v10);
@@ -304,7 +307,7 @@ void  CBigTempleRole::ThrowOutPriest(class CBuilding * a2) {
 
 
 // address=[0x14e88f0]
-// Decompiled from void __thiscall CBigTempleRole::ConvertEventIntoGoal(  CBigTempleRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
+// Decompiled from void __thiscall CBigTempleRole::ConvertEventIntoGoal(CBigTempleRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CBigTempleRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;

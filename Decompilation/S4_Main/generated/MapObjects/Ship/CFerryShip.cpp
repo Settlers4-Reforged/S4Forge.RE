@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CFerryShip::New(std::istream & a1) {
   
   if ( CFerryShip::operator new(0xD8u) )
+  {
     return CFerryShip::CFerryShip(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -35,11 +39,15 @@ void  CFerryShip::Delete(void) {
   int v17; // [esp+54h] [ebp-4h]
 
   v16 = this;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     v1 = std::vector<CFerryShip::CCargo>::size((char *)v16 + 180);
     if ( i >= v1 )
+    {
       break;
+    }
     v2 = (const struct CFerryShip::CCargo *)std::vector<CFerryShip::CCargo>::operator[](i);
     CFerryShip::CCargo::CCargo((CFerryShip::CCargo *)v8, v2);
     if ( v8[2] > 0 )
@@ -55,15 +63,12 @@ void  CFerryShip::Delete(void) {
           v3 = std::vector<CFerryShip::CCargo>::operator[](i);
           v14 = (void **)CMapObjectMgr::EntityPtr(*(_DWORD *)(v3 + 12));
           if ( !v14 && BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 333, "pEntity!=NULL") == 1 )
+          {
             __debugbreak();
+          }
           if ( v14 )
           {
-            if ( !j____RTDynamicCast(v14, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0)
-              && BBSupportDbgReport(
-                   2,
-                   "MapObjects\\Ship\\FerryShip.cpp",
-                   336,
-                   "dynamic_cast<IMovingEntity*>(pEntity)!=NULL") == 1 )
+            if ( !j____RTDynamicCast(v14, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 336, "dynamic_cast<IMovingEntity*>(pEntity)!=NULL") == 1 )
             {
               __debugbreak();
             }
@@ -110,21 +115,12 @@ int const  CFerryShip::GetMeetingPointXY(enum OBJ_TYPE a2, int a3) {
   CFerryShip *v13; // [esp+18h] [ebp-4h]
 
   v13 = this;
-  if ( !CMapObjectMgr::ValidEntityId(a3)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 1021, "g_pMapObjectMgr->ValidEntityId(_iEntityId)") == 1 )
+  if ( !CMapObjectMgr::ValidEntityId(a3) && BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 1021, "g_pMapObjectMgr->ValidEntityId(_iEntityId)") == 1 )
   {
     __debugbreak();
   }
   v9 = CFerryShip::CalcDistanceToLand(v13, &v10, &v11);
-  if ( v9 <= *((_DWORD *)v13 + 43)
-    && (v12 = (_DWORD *)CMapObjectMgr::EntityPtr(a3)) != 0
-    && (v3 = IEntity::Y(v12),
-        v7 = v3 - IEntity::Y(v13),
-        v4 = IEntity::X(v12),
-        v5 = IEntity::X(v13),
-        v8 = Grid::Distance((Grid *)(v4 - v5), v7),
-        v8 < *((_DWORD *)v13 + 44))
-    && CFerryShip::FindLoadPosition(v13, a3, &v10, &v11) )
+  if ( v9 <= *((_DWORD *)v13 + 43) && (v12 = (_DWORD *)CMapObjectMgr::EntityPtr(a3)) != 0 && (v3 = IEntity::Y(v12), v7 = v3 - IEntity::Y(v13), v4 = IEntity::X(v12), v5 = IEntity::X(v13), v8 = Grid::Distance((Grid *)(v4 - v5), v7), v8 < *((_DWORD *)v13 + 44)) && CFerryShip::FindLoadPosition(v13, a3, &v10, &v11) )
   {
     return Y16X16::PackXYFast(v10, v11);
   }
@@ -191,40 +187,55 @@ enum CFerryShip::TFerryRequestResult  CFerryShip::Request(int a2) {
 
   v49 = this;
   if ( !IEntity::FlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  {
     return 2;
+  }
   v50 = 0;
   VehiclePtr = (void **)CVehicleMgr::GetVehiclePtr(a2);
-  v42 = (unsigned __int8 *)j____RTDynamicCast(
-                             VehiclePtr,
-                             0,
-                             &CVehicle__RTTI_Type_Descriptor_,
-                             &CWheeler__RTTI_Type_Descriptor_,
-                             0);
+  v42 = (unsigned __int8 *)j____RTDynamicCast(VehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CWheeler__RTTI_Type_Descriptor_, 0);
   SettlerPtr = CSettlerMgr::GetSettlerPtr(a2);
   if ( !SettlerPtr && !v42 )
+  {
     return 2;
+  }
   if ( SettlerPtr )
+  {
     v50 = (unsigned __int16 *)SettlerPtr;
+  }
   else
+  {
     v50 = (unsigned __int16 *)v42;
+  }
   if ( !v50 )
+  {
     return 1;
+  }
   v22 = IEntity::Type(v50);
   v4 = IEntity::ObjType((unsigned __int8 *)v50);
   if ( !CFerryShip::CanLoad(v49, v4, v22) )
+  {
     return 3;
+  }
   v5 = IEntity::OwnerId((unsigned __int8 *)v49);
   if ( v5 != IEntity::OwnerId((unsigned __int8 *)v50) )
+  {
     return 4;
+  }
   if ( (*(int (__thiscall **)(unsigned __int16 *, _DWORD))(*(_DWORD *)v50 + 72))(v50, 0) )
+  {
     return 4;
+  }
   v6 = IEntity::ID();
   if ( CFerryShip::HasRegisterdCargo(v49, v6) )
+  {
     return 4;
+  }
   v7 = IEntity::ObjType((unsigned __int8 *)v50);
   v43 = (*(int (__thiscall **)(CPropertySheet *, int, int))(*(_DWORD *)v49 + 140))(v49, v7, a2);
   if ( !v43 )
+  {
     return 2;
+  }
   v41 = Y16X16::UnpackXFast(v43);
   v40 = Y16X16::UnpackYFast(v43);
   v8 = IEntity::ID();
@@ -238,7 +249,9 @@ enum CFerryShip::TFerryRequestResult  CFerryShip::Request(int a2) {
   v45 = v40;
   v35 = CSpiralOffsets::Last(10);
   v48 = 0;
-  for ( i = 0; i <= v35 && !v48; ++i )
+  for ( i = 0;
+        i <= v35 && !v48;
+        ++i )
   {
     v9 = CSpiralOffsets::DeltaX(i);
     v38 = v46 + v9;
@@ -265,9 +278,13 @@ enum CFerryShip::TFerryRequestResult  CFerryShip::Request(int a2) {
   CEntityEvent::~CEntityEvent(v24);
   v14 = IEntity::X(v49);
   if ( v14 == v46 && (v15 = IEntity::Y(v49), v15 == v45) )
+  {
     CFerryShip::SetFerryJob(v49, 2);
+  }
   else
+  {
     CFerryShip::SetFerryJob(v49, 1);
+  }
   v22 = IEntity::ID();
   v20 = IEntity::Type(v50);
   v16 = IEntity::ObjType((unsigned __int8 *)v50);
@@ -319,11 +336,15 @@ void  CFerryShip::FillDialog(bool a2) {
   g_cFerryLoadInfo.m_uCargpCount2[2] = 0;
   g_cFerryLoadInfo.m_uCargpCount2[4] = 0;
   g_cFerryLoadInfo.m_iUnknown = 23;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     v2 = std::vector<CFerryShip::CCargo>::size((char *)this + 180);
     if ( i >= v2 )
+    {
       break;
+    }
     v3 = (const struct CFerryShip::CCargo *)std::vector<CFerryShip::CCargo>::operator[]((char *)this + 180, i);
     CFerryShip::CCargo::CCargo((CFerryShip::CCargo *)&v4, v3);
     if ( v7 )
@@ -389,7 +410,9 @@ void  CFerryShip::FillDialog(bool a2) {
   }
   v8 = 604;
   if ( !a2 )
+  {
     v8 = 602;
+  }
   CEvn_Event::CEvn_Event(&v12, v8, 0, (unsigned int)&g_cFerryLoadInfo, 0);
   v13 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v12);
@@ -435,11 +458,15 @@ void  CFerryShip::VehicleLogicUpdate(void) {
   {
     v19 = CShip::RepairBuildingInRange(v25);
     if ( v19 )
+    {
       CShip::RepairAt(v25, v19);
+    }
     *((_DWORD *)v25 + 42) = TickCounter;
   }
   if ( IEntity::FlagBits(v25, (EntityFlag)0x400u) )
+  {
     (*(void (__thiscall **)(CShip *, int))(*(_DWORD *)v25 + 148))(v25, 1);
+  }
   v20 = *((_BYTE *)v25 + 107);
   switch ( v20 )
   {
@@ -462,18 +489,26 @@ LABEL_13:
   }
   result = IEntity::FlagBits(v25, (EntityFlag)&MEMORY[0x4000000]);
   if ( result )
+  {
     return result;
+  }
   if ( *((unsigned __int8 *)v25 + 107) != *((_DWORD *)v25 + 53) )
   {
     if ( *((_DWORD *)v25 + 53) == 6 )
+    {
       CFerryShip::OnShipArrived(v25);
+    }
     if ( *((_BYTE *)v25 + 107) == 6 )
     {
-      for ( i = 0; ; ++i )
+      for ( i = 0;
+            ;
+            ++i )
       {
         v6 = std::vector<CFerryShip::CCargo>::size((char *)v25 + 180);
         if ( i >= v6 )
+        {
           break;
+        }
         v24 = (CFerryShip::CCargo *)std::vector<CFerryShip::CCargo>::operator[](i);
         if ( *((int *)v24 + 2) > 0 && !*((_BYTE *)v24 + 21) )
         {
@@ -484,16 +519,15 @@ LABEL_13:
           {
             result = BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 281, "pEntity!=NULL");
             if ( result == 1 )
+            {
               __debugbreak();
+            }
           }
           if ( !v22 )
+          {
             return result;
-          if ( !j____RTDynamicCast(v22, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0)
-            && BBSupportDbgReport(
-                 2,
-                 "MapObjects\\Ship\\FerryShip.cpp",
-                 286,
-                 "dynamic_cast<IMovingEntity*>(pEntity)!=NULL") == 1 )
+          }
+          if ( !j____RTDynamicCast(v22, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 286, "dynamic_cast<IMovingEntity*>(pEntity)!=NULL") == 1 )
           {
             __debugbreak();
           }
@@ -553,24 +587,29 @@ void  CFerryShip::Unload(void) {
   v13 = this;
   result = IEntity::FlagBits(this, (EntityFlag)&MEMORY[0x4000000]);
   if ( result )
+  {
     return result;
+  }
   v8 = 0;
   v7 = 0;
   v6 = CFerryShip::CalcDistanceToLand(v13, &v8, &v7);
   if ( v6 > *((_DWORD *)v13 + 43) )
+  {
     return (*(int (__thiscall **)(CFerryShip *, int))(*(_DWORD *)v13 + 148))(v13, 1);
-  for ( i = 0; ; ++i )
+  }
+  for ( i = 0;
+        ;
+        ++i )
   {
     v2 = std::vector<CFerryShip::CCargo>::size((char *)v13 + 180);
     if ( i >= v2 )
+    {
       break;
+    }
     v12 = (CFerryShip::CCargo *)std::vector<CFerryShip::CCargo>::operator[](i);
     v9 = v8;
     v10 = v7;
-    if ( *((int *)v12 + 2) > 0
-      && *((_BYTE *)v12 + 21)
-      && CFerryShip::FindUnLoadPosition(v13, *(_DWORD *)v12, &v9, &v10)
-      && CFerryShip::UnloadAt(v13, *((_DWORD *)v12 + 3), v9, v10) )
+    if ( *((int *)v12 + 2) > 0 && *((_BYTE *)v12 + 21) && CFerryShip::FindUnLoadPosition(v13, *(_DWORD *)v12, &v9, &v10) && CFerryShip::UnloadAt(v13, *((_DWORD *)v12 + 3), v9, v10) )
     {
       CargoSize = CFerryShip::CCargo::GetCargoSize(v12);
       *((_DWORD *)v13 + 49) -= *((_DWORD *)v12 + 2) * CargoSize;
@@ -616,9 +655,13 @@ bool  CFerryShip::EmergencyReload(int a2) {
   v22 = this;
   v21 = (unsigned __int16 *)CMapObjectMgr::EntityPtr(a2);
   if ( !v21 && BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 1127, "pEntity!=NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !v21 )
+  {
     return 0;
+  }
   v10 = IEntity::ID();
   v8 = IEntity::Type(v21);
   v2 = IEntity::ObjType((unsigned __int8 *)v21);
@@ -633,16 +676,24 @@ bool  CFerryShip::EmergencyReload(int a2) {
   v23 = -1;
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>(v12);
   v19 = 0;
-  for ( i = 0; !v19; ++i )
+  for ( i = 0;
+        !v19;
+        ++i )
   {
     v3 = std::vector<CFerryShip::CCargo>::size(&v22[45]);
     if ( i >= v3 )
+    {
       break;
+    }
     if ( *(_DWORD *)(std::vector<CFerryShip::CCargo>::operator[](i) + 12) == a2 )
+    {
       v19 = std::vector<CFerryShip::CCargo>::operator[](i);
+    }
   }
   if ( !v19 && BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 1142, "pCargo!=NULL") == 1 )
+  {
     __debugbreak();
+  }
   *(_BYTE *)(v19 + 20) = 1;
   *(_BYTE *)(v19 + 21) = 1;
   IEntity::SetFlagBits(v21, ENTITY_FLAG_ON_BOARD);
@@ -651,7 +702,9 @@ bool  CFerryShip::EmergencyReload(int a2) {
   CargoSize = CFerryShip::GetCargoSize(v4, v10);
   v22[49].CPersistence = (struct IEntityVtbl *)((char *)v22[49].CPersistence + CargoSize);
   if ( IEntity::IsSelected(v22) )
+  {
     ((void (__thiscall *)(IEntity *, int))v22->CPersistence[3].Base)(v22, 1);
+  }
   return 1;
 }
 
@@ -685,22 +738,32 @@ void  CFerryShip::EntityOrderCanceled(int a2) {
 
   v21 = this;
   v20 = 0;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = std::vector<CFerryShip::CCargo>::size((char *)v21 + 180);
     if ( i >= result )
+    {
       break;
+    }
     if ( *(_DWORD *)(std::vector<CFerryShip::CCargo>::operator[](i) + 12) == a2 )
+    {
       v20 = (CFerryShip::CCargo *)std::vector<CFerryShip::CCargo>::operator[](i);
+    }
   }
   if ( !v20 )
   {
     result = BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 364, "pCargo!=NULL");
     if ( result == 1 )
+    {
       __debugbreak();
+    }
   }
   if ( !v20 )
+  {
     return result;
+  }
   CFerryShip::SetFerryJob(v21, 0);
   v3 = IEntity::PackedXY(v21);
   v18 = CEntityEvent::CEntityEvent((CEntityEvent *)v6, 0x11u, 13, 0, v3, 0);
@@ -722,7 +785,9 @@ void  CFerryShip::EntityOrderCanceled(int a2) {
     LOBYTE(v23) = 1;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>(v8);
     if ( !v22 )
+    {
       break;
+    }
     v14 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>::operator*(v10);
     if ( *(_DWORD *)(v14 + 12) == *((_DWORD *)v20 + 3) )
     {
@@ -749,13 +814,19 @@ void  CFerryShip::EntityEnter(int a2) {
   unsigned int i; // [esp+4h] [ebp-8h]
 
   v2 = 0;
-  for ( i = 0; i < std::vector<CFerryShip::CCargo>::size((char *)this + 180); ++i )
+  for ( i = 0;
+        i < std::vector<CFerryShip::CCargo>::size((char *)this + 180);
+        ++i )
   {
     if ( *(_DWORD *)(std::vector<CFerryShip::CCargo>::operator[](i) + 12) == a2 )
+    {
       v2 = std::vector<CFerryShip::CCargo>::operator[](i);
+    }
   }
   if ( !v2 && BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 881, "pCargo!= NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( v2 )
   {
     *(_BYTE *)(v2 + 20) = 1;
@@ -775,12 +846,15 @@ bool  CFerryShip::CanLoad(int a2, int a3) {
   int CargoSize; // [esp+4h] [ebp-8h]
 
   if ( a2 != 1 && a2 != 4 )
+  {
     return 0;
+  }
   if ( a2 == 4 && a3 != 5 && a3 != 4 )
+  {
     return 0;
+  }
   CargoSize = CFerryShip::GetCargoSize(a2, a3);
-  return CargoSize + *((_DWORD *)this + 49) <= *((_DWORD *)this + 51)
-      && CargoSize + *((_DWORD *)this + 50) <= *((_DWORD *)this + 51);
+  return CargoSize + *((_DWORD *)this + 49) <= *((_DWORD *)this + 51) && CargoSize + *((_DWORD *)this + 50) <= *((_DWORD *)this + 51);
 }
 
 
@@ -803,16 +877,22 @@ bool  CFerryShip::AddEntityToFerry(int a2) {
 
   v13 = this;
   if ( !CMapObjectMgr::ValidUsedEntityId(a2) )
+  {
     return 0;
+  }
   v10 = (unsigned __int16 *)CMapObjectMgr::EntityPtr(a2);
   v7 = IEntity::Type(v10);
   v3 = IEntity::ObjType((unsigned __int8 *)v10);
   if ( !CFerryShip::CanLoad(v13, v3, v7) )
+  {
     return 0;
+  }
   SettlerPtr = CSettlerMgr::GetSettlerPtr(a2);
   VehiclePtr = CVehicleMgr::GetVehiclePtr(a2);
   if ( !SettlerPtr && !VehiclePtr )
+  {
     return 0;
+  }
   v6 = IEntity::Type(v10);
   v4 = IEntity::ObjType((unsigned __int8 *)v10);
   v5 = CFerryShip::CCargo::CCargo((CFerryShip::CCargo *)v8, v4, v6, 1, a2);
@@ -827,12 +907,10 @@ bool  CFerryShip::AddEntityToFerry(int a2) {
   {
     if ( IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Selected) )
     {
-      if ( BBSupportDbgReport(
-             2,
-             "MapObjects\\Ship\\FerryShip.cpp",
-             727,
-             "pSettler->FlagBits(ENTITY_FLAG_SELECTED) == 0") == 1 )
+      if ( BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 727, "pSettler->FlagBits(ENTITY_FLAG_SELECTED) == 0") == 1 )
+      {
         __debugbreak();
+      }
     }
     CSettler::TakeWaitList(SettlerPtr);
     (*(void (__thiscall **)(unsigned __int8 *))(*(_DWORD *)SettlerPtr + 56))(SettlerPtr);
@@ -842,7 +920,9 @@ bool  CFerryShip::AddEntityToFerry(int a2) {
   else
   {
     if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 736, "pVehicle != 0") == 1 )
+    {
       __debugbreak();
+    }
     IEntity::RemoveFromMapObjectLayerIfNecessary(VehiclePtr);
     IAnimatedEntity::UnRegisterFromLogicUpdate(VehiclePtr);
     IEntity::ClearFlagBits(VehiclePtr, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
@@ -865,7 +945,9 @@ void  CFerryShip::CountCargo(class ICargoCounter & a2) {
 
   result = std::vector<CFerryShip::CCargo>::size((char *)this + 180);
   v6 = result;
-  for ( i = 0; i < v6; ++i )
+  for ( i = 0;
+        i < v6;
+        ++i )
   {
     v5 = std::vector<CFerryShip::CCargo>::operator[](i);
     v7 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*(_DWORD *)(v5 + 12));
@@ -906,7 +988,9 @@ struct SGfxObjectInfo *  CFerryShip::GetGfxInfos(void) {
   
   CShip::GetGfxInfos((int)this);
   if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) )
+  {
     MEMORY[0x40FE264] = CShip::GetHealthDisplayID(this);
+  }
   return &IEntity::m_sGfxInfo;
 }
 
@@ -968,7 +1052,9 @@ struct SGfxObjectInfo *  CFerryShip::GetGfxInfos(void) {
   v26[52] = v28;
   operator^<int>(a2, (int)(v26 + 53));
   operator^<unsigned char>(a2, &v27);
-  for ( i = 0; i < v27; ++i )
+  for ( i = 0;
+        i < v27;
+        ++i )
   {
     CFerryShip::CCargo::CCargo((CFerryShip::CCargo *)&v8);
     operator^<int>(a2, (int)v9);
@@ -1021,7 +1107,9 @@ void  CFerryShip::Store(std::ostream & a2) {
   operator^<int>((int)a2, v12 + 53);
   LOBYTE(var1) = std::vector<CFerryShip::CCargo>::size(v12 + 45);
   result = operator^<unsigned char>(a2, (int)&var1);
-  for ( i = 0; i < (unsigned __int8)var1; ++i )
+  for ( i = 0;
+        i < (unsigned __int8)var1;
+        ++i )
   {
     v3 = std::vector<CFerryShip::CCargo>::operator[](i);
     operator^<int>((int)a2, (int *)(v3 + 4));
@@ -1055,9 +1143,13 @@ unsigned long  CFerryShip::ClassID(void)const {
 int __cdecl CFerryShip::GetCargoSize(int a1, int a2) {
   
   if ( a1 == 4 && (a2 == 5 || a2 == 4) )
+  {
     return 5;
+  }
   else
+  {
     return 1;
+  }
 }
 
 
@@ -1065,7 +1157,7 @@ int __cdecl CFerryShip::GetCargoSize(int a1, int a2) {
 // [Decompilation failed for static unsigned long CFerryShip::m_iClassID]
 
 // address=[0x1598010]
-// Decompiled from CFerryShip *__thiscall CFerryShip::CFerryShip(  CFerryShip *this,  int a2,  int a3,  int a4,  int a5,  WORD a6,  DWORD a7,  bool a8)
+// Decompiled from CFerryShip *__thiscall CFerryShip::CFerryShip(CFerryShip *this, int a2, int a3, int a4, int a5, WORD a6, DWORD a7, bool a8)
  CFerryShip::CFerryShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CShip::CShip(this, a2, a3, a4, a5, a6, a7, a8);
@@ -1099,7 +1191,9 @@ int __cdecl CFerryShip::GetCargoSize(int a1, int a2) {
 bool  CFerryShip::OnShipArrived(void) {
   
   if ( CFerryShip::GetFerryJob(this) != 1 )
+  {
     return 1;
+  }
   if ( CFerryShip::OnLoad(this) )
   {
     CFerryShip::SetFerryJob(this, 0);
@@ -1132,22 +1226,21 @@ bool  CFerryShip::OnLoad(void) {
   CPaneContainer *v14; // [esp+Ch] [ebp-Ch]
   CPropertySet *SettlerPtr; // [esp+10h] [ebp-8h]
 
-  for ( i = 0; i < std::vector<CFerryShip::CCargo>::size(&this[45]); ++i )
+  for ( i = 0;
+        i < std::vector<CFerryShip::CCargo>::size(&this[45]);
+        ++i )
   {
     v13 = std::vector<CFerryShip::CCargo>::operator[](i);
     if ( *(_BYTE *)(v13 + 20) && !*(_BYTE *)(v13 + 21) )
     {
       v11 = 0;
       VehiclePtr = (void **)CVehicleMgr::GetVehiclePtr(*(_DWORD *)(v13 + 12));
-      v14 = (CPaneContainer *)j____RTDynamicCast(
-                                VehiclePtr,
-                                0,
-                                &CVehicle__RTTI_Type_Descriptor_,
-                                &CWheeler__RTTI_Type_Descriptor_,
-                                0);
+      v14 = (CPaneContainer *)j____RTDynamicCast(VehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CWheeler__RTTI_Type_Descriptor_, 0);
       SettlerPtr = (CPropertySet *)CSettlerMgr::GetSettlerPtr(*(_DWORD *)(v13 + 12));
       if ( !SettlerPtr && !v14 )
+      {
         return 0;
+      }
       if ( v14 )
       {
         CWheeler::RemoveFromWorld(v14);
@@ -1181,7 +1274,9 @@ bool  CFerryShip::OnLoad(void) {
     }
   }
   if ( IEntity::IsSelected(this) )
+  {
     ((void (__thiscall *)(IEntity *, int))this->CPersistence[3].Base)(this, 1);
+  }
   return 1;
 }
 
@@ -1203,7 +1298,9 @@ int  CFerryShip::CalcDistanceToLand(int & a2, int & a3) {
 
   v10 = *((_DWORD *)this + 43) + 1;
   v8 = CSpiralOffsets::Last(*((_DWORD *)this + 43));
-  for ( i = 0; i <= v8; ++i )
+  for ( i = 0;
+        i <= v8;
+        ++i )
   {
     v3 = IEntity::X(this);
     v12 = CSpiralOffsets::DeltaX(i) + v3;
@@ -1244,26 +1341,26 @@ bool  CFerryShip::FindLoadPosition(int a2, int & a3, int & a4) {
   bool v16; // [esp+33h] [ebp-5Dh]
   _BYTE v17[88]; // [esp+34h] [ebp-5Ch] BYREF
 
-  if ( !CMapObjectMgr::ValidEntityId(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 484, "g_pMapObjectMgr->ValidEntityId(_iEntityId)") == 1 )
+  if ( !CMapObjectMgr::ValidEntityId(a2) && BBSupportDbgReport(2, "MapObjects\\Ship\\FerryShip.cpp", 484, "g_pMapObjectMgr->ValidEntityId(_iEntityId)") == 1 )
   {
     __debugbreak();
   }
   v15 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a2);
   if ( !v15 )
+  {
     return 0;
+  }
   v10 = CSpiralOffsets::Last(10);
-  for ( i = 0; i <= v10; ++i )
+  for ( i = 0;
+        i <= v10;
+        ++i )
   {
     v14 = *a3 + CSpiralOffsets::DeltaX(i);
     v13 = *a4 + CSpiralOffsets::DeltaY(i);
     v11 = Y16X16::PackXYFast(v14, v13);
     if ( (unsigned __int8)CWorldManager::InWorld(v14, v13) && !CWorldManager::IsWater(v14, v13) )
     {
-      if ( IEntity::ObjType(v15) == 1 && CWorldManager::IsPositionFreeForSettler(v14, v13)
-        || IEntity::ObjType(v15) != 1
-        && (v5 = IEntity::Type((unsigned __int16 *)v15),
-            CVehicleMgr::IsPositionFreeForVehicle((CVehicleMgr *)&g_cVehicleMgr, v14, v13, v5)) )
+      if ( IEntity::ObjType(v15) == 1 && CWorldManager::IsPositionFreeForSettler(v14, v13) || IEntity::ObjType(v15) != 1 && (v5 = IEntity::Type((unsigned __int16 *)v15), CVehicleMgr::IsPositionFreeForVehicle((CVehicleMgr *)&g_cVehicleMgr, v14, v13, v5)) )
       {
         v9 = CWorldManager::MapObjectId(v14, v13);
         v8 = CWorldManager::Index(v11);
@@ -1313,27 +1410,33 @@ bool  CFerryShip::FindUnLoadPosition(int a2, int & a3, int & a4) {
   char v19; // [esp+3Bh] [ebp-1h]
 
   v11 = CSpiralOffsets::Last(*((_DWORD *)this + 43));
-  for ( i = 0; i <= v11; ++i )
+  for ( i = 0;
+        i <= v11;
+        ++i )
   {
     v18 = *a3 + CSpiralOffsets::DeltaX(i);
     v17 = *a4 + CSpiralOffsets::DeltaY(i);
     if ( (unsigned __int8)CWorldManager::InWorld(v18, v17) )
     {
-      if ( (v4 = CWorldManager::Index(v18, v17), ITiling::CatapultSectorId(v4), a2 == 1)
-        && CWorldManager::IsPositionFreeForSettler(v18, v17)
-        || a2 != 1 && CVehicleMgr::IsPositionFreeForVehicle((CVehicleMgr *)&g_cVehicleMgr, v18, v17, a2) )
+      if ( (v4 = CWorldManager::Index(v18, v17), ITiling::CatapultSectorId(v4), a2 == 1) && CWorldManager::IsPositionFreeForSettler(v18, v17) || a2 != 1 && CVehicleMgr::IsPositionFreeForVehicle((CVehicleMgr *)&g_cVehicleMgr, v18, v17, a2) )
       {
         v19 = 0;
-        for ( j = 0; j < std::vector<CFerryShip::CCargo>::size((char *)this + 180) && !v19; ++j )
+        for ( j = 0;
+              j < std::vector<CFerryShip::CCargo>::size((char *)this + 180) && !v19;
+              ++j )
         {
-          for ( k = 0; k < 6 && !v19; ++k )
+          for ( k = 0;
+                k < 6 && !v19;
+                ++k )
           {
             v5 = Y16X16::PackXYFast(v18, v17);
             v10 = CWorldManager::Index(v5);
             v6 = std::vector<CFerryShip::CCargo>::operator[](j);
             v7 = CWorldManager::Index(*(_DWORD *)(v6 + 16));
             v9 = CWorldManager::NeighborRelIndex(k) + v7;
-            for ( m = 0; m < 6; ++m )
+            for ( m = 0;
+                  m < 6;
+                  ++m )
             {
               if ( v9 == v10 + CWorldManager::NeighborRelIndex(m) )
               {
@@ -1438,12 +1541,7 @@ void  CFerryShip::ClearCargo(void) {
   v18 = 0;
   while ( 1 )
   {
-    v14 = std::vector<CFerryShip::CCargo>::size((char *)v15 + 180)
-       && (v13 = (std::_Iterator_base12 *)std::vector<CFerryShip::CCargo>::end(v5),
-           v12 = v13,
-           LOBYTE(v18) = 1,
-           v16 |= 1u,
-           (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>::operator!=(v13));
+    v14 = std::vector<CFerryShip::CCargo>::size((char *)v15 + 180) && (v13 = (std::_Iterator_base12 *)std::vector<CFerryShip::CCargo>::end(v5), v12 = v13, LOBYTE(v18) = 1, v16 |= 1u, (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>::operator!=(v13));
     v17 = v14;
     v18 = 0;
     if ( (v16 & 1) != 0 )
@@ -1452,7 +1550,9 @@ void  CFerryShip::ClearCargo(void) {
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>(v5);
     }
     if ( !v17 )
+    {
       break;
+    }
     v11 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>::operator*(v6);
     if ( *(int *)(v11 + 8) > 0 )
     {
@@ -1503,12 +1603,7 @@ void  CFerryShip::DeleteCargo(class CFerryShip::CCargo & a2) {
   v18 = 0;
   while ( 1 )
   {
-    v14 = std::vector<CFerryShip::CCargo>::size((char *)v15 + 180)
-       && (v13 = std::vector<CFerryShip::CCargo>::end(v5),
-           v12 = v13,
-           LOBYTE(v18) = 1,
-           v16 |= 1u,
-           (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>::operator<=(v13));
+    v14 = std::vector<CFerryShip::CCargo>::size((char *)v15 + 180) && (v13 = std::vector<CFerryShip::CCargo>::end(v5), v12 = v13, LOBYTE(v18) = 1, v16 |= 1u, (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>::operator<=(v13));
     v17 = v14;
     v18 = 0;
     if ( (v16 & 1) != 0 )
@@ -1517,7 +1612,9 @@ void  CFerryShip::DeleteCargo(class CFerryShip::CCargo & a2) {
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>(v5);
     }
     if ( !v17 )
+    {
       break;
+    }
     v11 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CFerryShip::CCargo>>>::operator*(v7);
     if ( *(_DWORD *)(v11 + 12) == *((_DWORD *)a2 + 3) )
     {
@@ -1542,10 +1639,14 @@ bool  CFerryShip::HasRegisterdCargo(int a2) {
   
   unsigned int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < std::vector<CFerryShip::CCargo>::size((char *)this + 180); ++i )
+  for ( i = 0;
+        i < std::vector<CFerryShip::CCargo>::size((char *)this + 180);
+        ++i )
   {
     if ( *(_DWORD *)(std::vector<CFerryShip::CCargo>::operator[](i) + 12) == a2 )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -1559,10 +1660,14 @@ void  CFerryShip::NotifyDetach(int a2) {
 
   result = (_DWORD *)CMapObjectMgr::EntityPtr(a2);
   if ( !result )
+  {
     return result;
+  }
   result = (_DWORD *)IEntity::FlagBits(result, (EntityFlag)&loc_3000000);
   if ( !result )
+  {
     return (_DWORD *)(*(int (__thiscall **)(CFerryShip *, int))(*(_DWORD *)this + 124))(this, a2);
+  }
   return result;
 }
 

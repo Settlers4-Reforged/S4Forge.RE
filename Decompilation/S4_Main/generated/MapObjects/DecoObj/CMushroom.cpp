@@ -15,7 +15,9 @@
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 82, "m_uCycleFrames") == 1 )
+  {
     __debugbreak();
+  }
   if ( this->m_iPhases )
   {
     this->m_iFrame = CStateGame::Rand(g_pGame) % this->m_uCycleFrames;
@@ -31,7 +33,7 @@
 
 
 // address=[0x15497e0]
-// Decompiled from CMushroom *__thiscall CMushroom::CMushroom(  CMushroom *this,  const struct CMushroom *a2,  int a3,  unsigned int a4,  unsigned int a5)
+// Decompiled from CMushroom *__thiscall CMushroom::CMushroom(CMushroom *this, const struct CMushroom *a2, int a3, unsigned int a4, unsigned int a5)
  CMushroom::CMushroom(class CMushroom const & a2, int a3, int a4, int a5) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5);
@@ -41,7 +43,9 @@
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = a2->m_uCycleFrames;
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 129, "m_uCycleFrames") == 1 )
+  {
     __debugbreak();
+  }
   this->m_iFrame = a2->m_iFrame;
   this->m_uU1 = 1;
   return this;
@@ -73,13 +77,16 @@ void  CMushroom::LogicUpdate(void) {
     case 1u:
     case 2u:
       if ( ++this->m_uU0 < 5 )
+      {
         goto LABEL_10;
+      }
       this->m_uU0 = 0;
       ++this->m_iPhases;
-      this->m_iJobPart = this->m_iPhases
-                       + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
+      this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
       if ( this->m_iPhases != 3 )
+      {
         goto LABEL_10;
+      }
       v5 = IEntity::Type(this);
       v4 = IEntity::Y(this);
       v1 = IEntity::X(this);
@@ -91,11 +98,7 @@ void  CMushroom::LogicUpdate(void) {
       IAnimatedEntity::RegisterForLogicUpdate(this, 31);
       break;
     case 4u:
-      if ( ++this->m_uU0 < 5
-        || (this->m_uU0 = 0,
-            ++this->m_iFrame,
-            m_cFrame = this->m_iFrame,
-            m_cFrame < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart)) )
+      if ( ++this->m_uU0 < 5 || (this->m_uU0 = 0, ++this->m_iFrame, m_cFrame = this->m_iFrame, m_cFrame < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart)) )
       {
 LABEL_10:
         IAnimatedEntity::RegisterForLogicUpdate(this, 31);
@@ -125,7 +128,9 @@ struct SGfxObjectInfo *  CMushroom::GetGfxInfos(void) {
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, v2);
   if ( v4 )
+  {
     this->m_iFrame = (v4 + (unsigned int)this->m_iFrame) % this->m_uCycleFrames;
+  }
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
   MEMORY[0x40FE518] = 16;
   MEMORY[0x40FE51A] = IEntity::IsVisible(this);
@@ -138,8 +143,7 @@ struct SGfxObjectInfo *  CMushroom::GetGfxInfos(void) {
 // Decompiled from int __thiscall CMushroom::Decrease(CMushroom *this, int a2)
 void  CMushroom::Decrease(int a2) {
   
-  if ( IDecoObject::IsStaticInstance(this)
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 335, "IsStaticInstance() == false") == 1 )
+  if ( IDecoObject::IsStaticInstance(this) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 335, "IsStaticInstance() == false") == 1 )
   {
     __debugbreak();
   }
@@ -149,7 +153,9 @@ void  CMushroom::Decrease(int a2) {
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 345, "m_uCycleFrames") == 1 )
+  {
     __debugbreak();
+  }
   this->m_uU0 = 0;
   return IAnimatedEntity::RegisterForLogicUpdate(this, 31);
 }

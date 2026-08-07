@@ -31,8 +31,7 @@ void  CAIDarkTribePlayerAI::Execute(void) {
   int v12; // [esp+34h] [ebp-8h]
 
   v8 = IAIEnvironment::TickCounter();
-  if ( IAIEnvironment::EntityIsAlive(*((_DWORD *)this + 171))
-    && (v1 = IAIEnvironment::EntityOwnerId(*((_DWORD *)this + 171)), v1 == CAIPlayerAI::PlayerId(this)) )
+  if ( IAIEnvironment::EntityIsAlive(*((_DWORD *)this + 171)) && (v1 = IAIEnvironment::EntityOwnerId(*((_DWORD *)this + 171)), v1 == CAIPlayerAI::PlayerId(this)) )
   {
     CAIPlayersScriptVars::operator[](*((_DWORD *)this + 3));
     v9 = CAIPlayerScriptVars::operator[](14);
@@ -45,13 +44,14 @@ void  CAIDarkTribePlayerAI::Execute(void) {
     if ( (v9 > 0 || v10 > 0) && v12 > 0 )
     {
       if ( !(14 * v12) && BBSupportDbgReport(2, "AI\\AI_PlayerAIDark.cpp", 159, "uDelayInTicks > 0") == 1 )
+      {
         __debugbreak();
+      }
       if ( !(v8 % (14 * v12)) && IAIEnvironment::MagicCurrentManaAmount(*((_DWORD *)this + 3)) < v5 )
       {
         v2 = CAIPlayerAI::PlayerId(this);
         NumberOfBuildings = IAIEnvironment::BuildingGetNumberOfBuildings(v2, 49, 1u);
-        if ( NumberOfBuildings < 0
-          && BBSupportDbgReport(2, "AI\\AI_PlayerAIDark.cpp", 169, "iNumberOfMushroomFarms >= 0") == 1 )
+        if ( NumberOfBuildings < 0 && BBSupportDbgReport(2, "AI\\AI_PlayerAIDark.cpp", 169, "iNumberOfMushroomFarms >= 0") == 1 )
         {
           __debugbreak();
         }
@@ -62,8 +62,7 @@ void  CAIDarkTribePlayerAI::Execute(void) {
     v7 = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)this + 72);
     if ( v7 > 0 )
     {
-      if ( !TAIStaticPtrVector<CAISectorAI,8>::operator[](0)
-        && BBSupportDbgReport(2, "AI\\AI_PlayerAIDark.cpp", 183, "m_cSectorAIs[0] != 0") == 1 )
+      if ( !TAIStaticPtrVector<CAISectorAI,8>::operator[](0) && BBSupportDbgReport(2, "AI\\AI_PlayerAIDark.cpp", 183, "m_cSectorAIs[0] != 0") == 1 )
       {
         __debugbreak();
       }
@@ -75,8 +74,7 @@ void  CAIDarkTribePlayerAI::Execute(void) {
     (*(void (__thiscall **)(char *, unsigned int, int))(*((_DWORD *)this + 7) + 4))((char *)this + 28, v8, 511);
     if ( v7 > 0 )
     {
-      if ( !TAIStaticPtrVector<CAISectorAI,8>::operator[](0)
-        && BBSupportDbgReport(2, "AI\\AI_PlayerAIDark.cpp", 196, "m_cSectorAIs[0] != 0") == 1 )
+      if ( !TAIStaticPtrVector<CAISectorAI,8>::operator[](0) && BBSupportDbgReport(2, "AI\\AI_PlayerAIDark.cpp", 196, "m_cSectorAIs[0] != 0") == 1 )
       {
         __debugbreak();
       }
@@ -116,9 +114,7 @@ void  CAIDarkTribePlayerAI::Load(class IS4Chunk & a2) {
       if ( v3 )
       {
         v7 = 0;
-        DarkTribeSectorAI = CAISectorAI::CreateDarkTribeSectorAI(
-                              (CAIDarkTribePlayerAI *)((char *)this - 4),
-                              *((_DWORD *)this + 170));
+        DarkTribeSectorAI = CAISectorAI::CreateDarkTribeSectorAI((CAIDarkTribePlayerAI *)((char *)this - 4), *((_DWORD *)this + 170));
         TAIStaticPtrVector<CAISectorAI,8>::PushBack(DarkTribeSectorAI);
         (*(void (__thiscall **)(int, struct IS4Chunk *))(*(_DWORD *)DarkTribeSectorAI + 20))(DarkTribeSectorAI, a2);
       }
@@ -126,7 +122,9 @@ void  CAIDarkTribePlayerAI::Load(class IS4Chunk & a2) {
   }
   result = (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1517219839);
   if ( v7 )
+  {
     return (*(int (__thiscall **)(char *, int))(*((_DWORD *)this - 1) + 8))((char *)this - 4, v3);
+  }
   return result;
 }
 
@@ -168,14 +166,12 @@ void  CAIDarkTribePlayerAI::Init(void) {
 
   CAIPlayerAI::Init(this);
   CAIPlayerAI::FillGeneralReservoir(this);
-  if ( IAIEnvironment::PlayerRace(*((_DWORD *)this + 3)) != 3
-    && BBSupportDbgReport(2, "AI\\AI_PlayerAIDark.cpp", 217, "iRace == RACE_DARK") == 1 )
+  if ( IAIEnvironment::PlayerRace(*((_DWORD *)this + 3)) != 3 && BBSupportDbgReport(2, "AI\\AI_PlayerAIDark.cpp", 217, "iRace == RACE_DARK") == 1 )
   {
     __debugbreak();
   }
   NumberOfBuildings = IAIEnvironment::BuildingGetNumberOfBuildings(*((_DWORD *)this + 3), 50, 2u);
-  if ( IAIEnvironment::BuildingGetNumberOfBuildings(*((_DWORD *)this + 3), 51, 2u) + NumberOfBuildings != 1
-    && BBSupportDbgReport(2, "AI\\AI_PlayerAIDark.cpp", 222, "(iNumberOfDarkTemples + iNumberOfFortresses) == 1") == 1 )
+  if ( IAIEnvironment::BuildingGetNumberOfBuildings(*((_DWORD *)this + 3), 51, 2u) + NumberOfBuildings != 1 && BBSupportDbgReport(2, "AI\\AI_PlayerAIDark.cpp", 222, "(iNumberOfDarkTemples + iNumberOfFortresses) == 1") == 1 )
   {
     __debugbreak();
   }
@@ -188,9 +184,13 @@ void  CAIDarkTribePlayerAI::Init(void) {
   {
     *((_DWORD *)this + 171) = IAIEnvironment::BuildingGetFirstBuildingId(*((_DWORD *)this + 3), 51);
     if ( *((_DWORD *)this + 171) )
+    {
       v4 = 51;
+    }
     else
+    {
       v4 = 0;
+    }
     *((_DWORD *)this + 172) = v4;
   }
   if ( *((_DWORD *)this + 171) )
@@ -200,13 +200,11 @@ void  CAIDarkTribePlayerAI::Init(void) {
   }
   else
   {
-    result = BBSupportDbgReport(
-               1,
-               "AI\\AI_PlayerAIDark.cpp",
-               246,
-               "CAIDarkTribePlayerAI::CAIDarkTribePlayerAI(): No dark temple or fortress found!");
+    result = BBSupportDbgReport(1, "AI\\AI_PlayerAIDark.cpp", 246, "CAIDarkTribePlayerAI::CAIDarkTribePlayerAI(): No dark temple or fortress found!");
     if ( result == 1 )
+    {
       __debugbreak();
+    }
   }
   return result;
 }

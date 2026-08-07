@@ -10,9 +10,13 @@ class CPersistence * __cdecl CBuildingSiteRole::New(std::istream & a1) {
 
   C = (CBuildingSiteRole *)operator new(0x1C8u);
   if ( C )
+  {
     return CBuildingSiteRole::CBuildingSiteRole(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -256,15 +260,21 @@ void  CBuildingSiteRole::LogicUpdate(class CBuilding * arg0) {
   int v90; // [esp+F0h] [ebp-4h]
 
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     this->FillDialog(this, a2, 1);
+  }
   IAnimatedEntity::RegisterForLogicUpdate(a2, 15);
   if ( IEntity::FlagBits(a2, (EntityFlag)4096) )
   {
     iEcoSectorId = CBuildingSiteRole::GetEcoSectorId(this, a2);
     if ( IEntity::Type(a2) == 49 || IEntity::Type(a2) == 80 )
+    {
       goto LABEL_77;
+    }
     if ( !iEcoSectorId && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 439, "iEcoSectorId != 0") == 1 )
+    {
       __debugbreak();
+    }
     if ( iEcoSectorId )
     {
 LABEL_77:
@@ -274,13 +284,19 @@ LABEL_77:
         case 0:
           iDiggingNeeded = this->m_iDiggingNeeded;
           if ( iDiggingNeeded <= 0 )
+          {
             goto LABEL_12;
+          }
           CBuildingSiteRole::OrderDigger(this, iDiggingNeeded, a2);
           iDiggerCalled = this->m_uDiggerAct;
           if ( !iDiggerCalled )
+          {
             return;
+          }
           if ( iDiggingNeeded / iDiggerCalled < 25 )
+          {
             this->m_uBuildStage = 3;
+          }
           return;
         case 1:
           if ( this->m_iDiggingNeeded <= 0 )
@@ -309,20 +325,22 @@ LABEL_12:
           std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v61);
           while ( 1 )
           {
-            v69 = (std::_Iterator_base12 *)std::vector<unsigned int>::end(
-                                             &this->m_pBuildingInfo->m_vBlockPosLines,
-                                             (int)v60);
+            v69 = (std::_Iterator_base12 *)std::vector<unsigned int>::end(&this->m_pBuildingInfo->m_vBlockPosLines, (int)v60);
             v68 = v69;
             LOBYTE(v90) = 2;
             v88 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator!=(v69);
             LOBYTE(v90) = 0;
             std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v60);
             if ( !v88 )
+            {
               break;
+            }
             ++v80;
             if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v72) )
             {
-              for ( i = 31; i >= 0; --i )
+              for ( i = 31;
+                    i >= 0;
+                    --i )
               {
                 v4 = (_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v72);
                 if ( (*v4 & (1 << i)) != 0 )
@@ -338,7 +356,9 @@ LABEL_12:
                   v10 = IEntity::WorldIdx(a2);
                   CWorldManager::SetFlagBits(v10, 2u);
                   if ( !CWorldManager::CheckBlockable(v81, v82) )
+                  {
                     v84 = 1;
+                  }
                 }
               }
             }
@@ -351,13 +371,7 @@ LABEL_12:
             m_iHotSpotX = this->m_pBuildingInfo->m_iHotSpotX;
             v39 = IEntity::Y(a2);
             v11 = IEntity::X(a2);
-            CBuildingFlagsWalk::CBuildingFlagsWalk(
-              &v59,
-              v11,
-              v39,
-              m_iHotSpotX,
-              m_iHotSpotY,
-              p_m_vWaterRepealingPosLines);
+            CBuildingFlagsWalk::CBuildingFlagsWalk(&v59, v11, v39, m_iHotSpotX, m_iHotSpotY, p_m_vWaterRepealingPosLines);
             while ( CBuildingFlagsWalk::NextPosition(&v59) )
             {
               v50 = CBuildingFlagsWalk::CurrentY(&v59);
@@ -368,7 +382,9 @@ LABEL_12:
               {
                 CWaterFlags::SetWaterFlagBitRepelling(v85);
                 if ( CWorldManager::MapObjectId(v85) )
+                {
                   v84 = 1;
+                }
               }
               else
               {
@@ -377,7 +393,9 @@ LABEL_12:
                 v14 = IEntity::WorldIdx(a2);
                 CWorldManager::SetFlagBits(v14, 2u);
                 if ( !CWorldManager::CheckBlockable(v81, v82) )
+                {
                   v84 = 1;
+                }
               }
               CWorldManager::SetObjectId(v85, 0);
               CWorldManager::SetFlagBits(v85, 8u);
@@ -389,7 +407,9 @@ LABEL_12:
             v64 = CWorldManager::Index(v65, v66);
             v17 = CBuilding::BuildingTypeEx(a2);
             if ( CBuildingMgr::IsShipyardEx(v17) )
+            {
               CWaterFlags::SetWaterFlagBitRepelling(v64);
+            }
           }
           v18 = IEntity::Type(a2);
           if ( CBuildingMgr::IsMilitary(v18) )
@@ -405,7 +425,9 @@ LABEL_12:
             v24 = IEntity::WorldIdx(a2);
             CWorldManager::SetFlagBits(v24, 2u);
             if ( !CWorldManager::CheckBlockable(v75, v76) )
+            {
               v84 = 1;
+            }
           }
           if ( !v84 )
           {
@@ -435,7 +457,9 @@ LABEL_12:
           CBuildingSiteRole::OrderBuilder(this, a2);
           CBuildingSiteRole::OrderMaterial(this, a2);
           if ( this->m_iProvidedScaledTotalResouces < this->m_iScaledTotalResources )
+          {
             return;
+          }
           CBuildingSiteRole::DeleteStakes(this, a2);
           CBuildingSiteRole::BuildingDone(this, a2);
           return;
@@ -483,7 +507,9 @@ LABEL_57:
         v55 = CBuildingFlagsWalk::CurrentY(&v57);
         v35 = CBuildingFlagsWalk::CurrentX(&v57);
         if ( !CWorldManager::CheckBlockable(v35, v55) )
+        {
           return;
+        }
       }
       uDelay = 1;
       if ( IEntity::Type(a2) == BUILDING_MUSHROOMFARM )
@@ -494,20 +520,19 @@ LABEL_57:
         v73->AddEffect(v73, EFFECT_MUSHROOMFARM_BUILD, 0, v36, v42, 0, 0, 0);
       }
       if ( !uDelay && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 716, "uDelay > 0") == 1 )
+      {
         __debugbreak();
-      if ( uDelay > 31
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Building\\BuildingSite.cpp",
-             717,
-             "uDelay <= CMapObjectMgr::MAX_DELTA_TICKS_FOR_LOGIC_UPDATE") == 1 )
+      }
+      if ( uDelay > 31 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 717, "uDelay <= CMapObjectMgr::MAX_DELTA_TICKS_FOR_LOGIC_UPDATE") == 1 )
       {
         __debugbreak();
       }
       if ( uDelay )
       {
         if ( uDelay > 31 )
+        {
           uDelay = 31;
+        }
       }
       else
       {
@@ -538,13 +563,15 @@ void  CBuildingSiteRole::PostLoadInit(class CBuilding * a2) {
   if ( this->m_pBuildingInfo->m_bIsPort )
   {
     if ( this->m_uBuildStage == 5 )
+    {
       IBuildingRole::PostLoadSetWaterFlags(this, a2);
+    }
   }
 }
 
 
 // address=[0x1501f60]
-// Decompiled from void __thiscall CBuildingSiteRole::FillGfxInfo(  CBuildingSiteRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
+// Decompiled from void __thiscall CBuildingSiteRole::FillGfxInfo(CBuildingSiteRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
 void  CBuildingSiteRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   unsigned int v3; // eax
@@ -554,24 +581,23 @@ void  CBuildingSiteRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo
   if ( this->m_iU0 < this->m_iProvidedScaledTotalResouces - this->m_uBuilderAct )
   {
     if ( this->m_iU0 >= this->m_iProvidedScaledTotalResouces - 2 * this->m_uBuilderAct )
+    {
       this->m_iU0 += this->m_uBuilderAct;
+    }
     else
+    {
       this->m_iU0 = this->m_iProvidedScaledTotalResouces;
+    }
   }
   if ( this->m_iU0 >= this->m_iScaledTotalResources / 2 )
   {
     v5 = 3;
-    a3->uConstructionProgress = 0xFFFF
-                              - this->m_iInverseScaledTotalResources
-                              - this->m_iInverseScaledTotalResources * (this->m_iU0 - this->m_iScaledTotalResources / 2);
+    a3->uConstructionProgress = 0xFFFF - this->m_iInverseScaledTotalResources - this->m_iInverseScaledTotalResources * (this->m_iU0 - this->m_iScaledTotalResources / 2);
     if ( a3->uConstructionProgress > 0xFFFFu )
+    {
       a3->uConstructionProgress = 0;
-    if ( a3->uConstructionProgress > 0xFFFFu
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingSite.cpp",
-           392,
-           "_sGfxInfo.uConstructionProgress <= BUILDING_PROGRESS_MAX") == 1 )
+    }
+    if ( a3->uConstructionProgress > 0xFFFFu && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 392, "_sGfxInfo.uConstructionProgress <= BUILDING_PROGRESS_MAX") == 1 )
     {
       __debugbreak();
     }
@@ -581,13 +607,10 @@ void  CBuildingSiteRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo
     v5 = 2;
     a3->uConstructionProgress = 0xFFFF - this->m_iInverseScaledTotalResources * this->m_iU0;
     if ( a3->uConstructionProgress > 0xFFFFu )
+    {
       a3->uConstructionProgress = 0;
-    if ( a3->uConstructionProgress > 0xFFFFu
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingSite.cpp",
-           378,
-           "_sGfxInfo.uConstructionProgress <= BUILDING_PROGRESS_MAX") == 1 )
+    }
+    if ( a3->uConstructionProgress > 0xFFFFu && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 378, "_sGfxInfo.uConstructionProgress <= BUILDING_PROGRESS_MAX") == 1 )
     {
       __debugbreak();
     }
@@ -666,19 +689,27 @@ int  CBuildingSiteRole::HaveBuildingMaterial(void) {
   {
     v1 = CPileMgr::operator[](this->m_uBoardsPileId);
     if ( CPile::GoodAvailable(v1) )
+    {
       return result;
+    }
   }
   if ( this->m_uStonePileId )
   {
     v2 = CPileMgr::operator[](this->m_uStonePileId);
     if ( CPile::GoodAvailable(v2) )
+    {
       return result;
+    }
   }
   if ( !this->m_uGoldPileId )
+  {
     return 0;
+  }
   v3 = CPileMgr::operator[](this->m_uGoldPileId);
   if ( !CPile::GoodAvailable(v3) )
+  {
     return 0;
+  }
   return result;
 }
 
@@ -698,7 +729,9 @@ void  CBuildingSiteRole::SetDiggingInfos(int a2, int a3) {
     this->m_iDiggingNeeded = a3;
     this->m_iMaxNeededDigger = ((this->m_iDiggingNeeded + 16) >> 5) + 1;
     if ( this->m_iMaxNeededDigger > 8 )
+    {
       this->m_iMaxNeededDigger = 8;
+    }
   }
 }
 
@@ -713,22 +746,23 @@ int  CBuildingSiteRole::BuildingProgress(void) {
   {
     this->m_fBarDiv = (float)(this->m_iScaledTotalResources + this->m_iDiggingNeeded) / 100.0;
     if ( this->m_fBarDiv == 0.0 )
+    {
       this->m_fBarDiv = FLOAT_1_0;
+    }
   }
-  if ( this->m_fBarDiv == 0.0
-    && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 2185, "m_fBarDiv != 0.0f") == 1 )
+  if ( this->m_fBarDiv == 0.0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 2185, "m_fBarDiv != 0.0f") == 1 )
   {
     __debugbreak();
   }
-  v2 = (int)(float)(100.0
-                  - (float)((float)(this->m_iScaledTotalResources
-                                  + this->m_iDiggingNeeded
-                                  - this->m_iProvidedScaledTotalResouces)
-                          / this->m_fBarDiv));
+  v2 = (int)(float)(100.0 - (float)((float)(this->m_iScaledTotalResources + this->m_iDiggingNeeded - this->m_iProvidedScaledTotalResouces) / this->m_fBarDiv));
   if ( v2 > 100 )
+  {
     v2 = 100;
+  }
   if ( v2 < 0 )
+  {
     return 0;
+  }
   return v2;
 }
 
@@ -798,7 +832,9 @@ void  CBuildingSiteRole::FillDialog(class CBuilding * a2, bool a3) {
   v4 = CBuilding::EnsignWorldIdx(v3);
   iESId = CWorldManager::EcoSectorId(v4);
   if ( !iESId && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 2208, "iESId > 0") == 1 )
+  {
     __debugbreak();
+  }
   g_cBuildingSiteInfo.m_iUnknown = 1;
   g_cBuildingSiteInfo.m_cType = IEntity::Type(a2);
   g_cBuildingSiteInfo.m_cRace = IEntity::Race(a2);
@@ -811,18 +847,26 @@ void  CBuildingSiteRole::FillDialog(class CBuilding * a2, bool a3) {
   {
     v6 = CEcoSectorMgr::operator[](g_cESMgr, iESId);
     if ( CEcoSector::NrOfGoods(v6, m_iTool) <= 0 )
+    {
       g_cBuildingSiteInfo.m_iTools = -(char)m_iTool;
+    }
     else
+    {
       g_cBuildingSiteInfo.m_iTools = m_iTool;
+    }
   }
   _iSettlerType = this->m_pBuildingInfo->m_iBuildingInhabitant;
   if ( this->m_pBuildingInfo->m_iBuildingInhabitant )
   {
     v7 = CEcoSectorMgr::operator[](g_cESMgr, iESId);
     if ( CEcoSector::NrOfSettler(v7, _iSettlerType) <= 0 )
+    {
       g_cBuildingSiteInfo.m_iSettlerCount = -(char)_iSettlerType;
+    }
     else
+    {
       g_cBuildingSiteInfo.m_iSettlerCount = _iSettlerType;
+    }
   }
   g_cBuildingSiteInfo.m_bHasWorkingArea = this->m_pBuildingInfo->m_iWorkingAreaRadius > 0;
   v14 = IEntity::Type(a2);
@@ -830,23 +874,25 @@ void  CBuildingSiteRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cBuildingSiteInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v8, v14, 0);
   v15 = IEntity::Type(a2);
   v9 = IEntity::OwnerId(a2);
-  g_cBuildingSiteInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings(
-                                             (CBuildingMgr *)g_cBuildingMgr,
-                                             v9,
-                                             v15,
-                                             1u);
+  g_cBuildingSiteInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v9, v15, 1u);
   g_cBuildingSiteInfo.m_iBuildingProgress = CBuildingSiteRole::BuildingProgress(this);
   if ( this->m_uBoardsPileId )
   {
     v27 = CBuildingSiteRole::NeedBoards(this);
     v10 = CEcoSectorMgr::operator[](g_cESMgr, iESId);
     if ( CEcoSector::NrOfGoods(v10, GOOD_BOARD) < v27 )
+    {
       v27 = -v27;
+    }
     g_cBuildingSiteInfo.m_sRequiredRessources[0].m_cAmount = v27;
     if ( v27 )
+    {
       g_cBuildingSiteInfo.m_sRequiredRessources[0].m_cType = GOOD_BOARD;
+    }
     else
+    {
       g_cBuildingSiteInfo.m_sRequiredRessources[0].m_cType = 0;
+    }
   }
   else
   {
@@ -857,12 +903,18 @@ void  CBuildingSiteRole::FillDialog(class CBuilding * a2, bool a3) {
     v26 = CBuildingSiteRole::NeedStone(this);
     v11 = CEcoSectorMgr::operator[](g_cESMgr, iESId);
     if ( CEcoSector::NrOfGoods(v11, GOOD_STONE) < v26 )
+    {
       v26 = -v26;
+    }
     g_cBuildingSiteInfo.m_sRequiredRessources[1].m_cAmount = v26;
     if ( v26 )
+    {
       g_cBuildingSiteInfo.m_sRequiredRessources[1].m_cType = GOOD_STONE;
+    }
     else
+    {
       g_cBuildingSiteInfo.m_sRequiredRessources[1].m_cType = 0;
+    }
   }
   else
   {
@@ -873,12 +925,18 @@ void  CBuildingSiteRole::FillDialog(class CBuilding * a2, bool a3) {
     bBuildingNeedsGold = CBuildingSiteRole::NeedGold(this);
     v12 = CEcoSectorMgr::operator[](g_cESMgr, iESId);
     if ( CEcoSector::NrOfGoods(v12, GOOD_GOLDBAR) < bBuildingNeedsGold )
+    {
       bBuildingNeedsGold = -bBuildingNeedsGold;
+    }
     g_cBuildingSiteInfo.m_sRequiredRessources[2].m_cAmount = bBuildingNeedsGold;
     if ( bBuildingNeedsGold )
+    {
       g_cBuildingSiteInfo.m_sRequiredRessources[2].m_cType = GOOD_GOLDBAR;
+    }
     else
+    {
       g_cBuildingSiteInfo.m_sRequiredRessources[2].m_cType = 0;
+    }
   }
   else
   {
@@ -922,7 +980,9 @@ void  CBuildingSiteRole::FillDialog(class CBuilding * a2, bool a3) {
   }
   v16 = 604;
   if ( !a3 )
+  {
     v16 = 602;
+  }
   CEvn_Event::CEvn_Event(&v30, v16, 0, (unsigned int)&g_cBuildingSiteInfo, 0);
   v31 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v30);
@@ -938,23 +998,16 @@ void  CBuildingSiteRole::GetBuilderPos(struct SBuilderPos & a2) {
   CBuilding *v2; // eax
   CBuilding *v3; // eax
 
-  if ( !this->m_uBuilderAct
-    && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 950, "m_uBuilderAct") == 1 )
+  if ( !this->m_uBuilderAct && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 950, "m_uBuilderAct") == 1 )
   {
     __debugbreak();
   }
   this->m_uPosCounter = this->m_uBuilderAct - 1;
-  if ( this->m_uPosCounter >= this->m_pBuildingInfo->m_iBuilderNumber
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\BuildingSite.cpp",
-         953,
-         "m_uPosCounter < m_pBuildingInfo->iBuilderNumber") == 1 )
+  if ( this->m_uPosCounter >= this->m_pBuildingInfo->m_iBuilderNumber && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 953, "m_uPosCounter < m_pBuildingInfo->iBuilderNumber") == 1 )
   {
     __debugbreak();
   }
-  if ( !this->m_pBuildingInfo
-    && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 954, "m_pBuildingInfo != 0") == 1 )
+  if ( !this->m_pBuildingInfo && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 954, "m_pBuildingInfo != 0") == 1 )
   {
     __debugbreak();
   }
@@ -1186,12 +1239,18 @@ bool  CBuildingSiteRole::CrushBuilding(void) {
   {
     v7 = 31;
     iOwner = IEntity::OwnerId(v8);
-    for ( i = 0; i < v7; ++i )
+    for ( i = 0;
+          i < v7;
+          ++i )
     {
-      for ( j = 0; j < v7; ++j )
+      for ( j = 0;
+            j < v7;
+            ++j )
       {
         if ( s_iDigMap[iOwner][this->m_iDigMap].m_vCells[j][i] )
+        {
           CWorldManager::ClearFlagBits(v3 + j - 15, v4 + i - 15, 16);
+        }
       }
     }
     s_iDigMap[iOwner][this->m_iDigMap].m_uHeader = 0;
@@ -1336,12 +1395,7 @@ void  CBuildingSiteRole::CheckDeactivatePriority(int _iBuildingEcoSectorId) {
   if ( !this->m_bBoardPriority && !this->m_bStonePriority && !this->m_bBuilderPriority && !this->m_bDiggerPriority )
   {
     v2 = CEcoSectorMgr::operator[](g_cESMgr, _iBuildingEcoSectorId);
-    if ( !CEcoSector::BuildingSitesWithPrio(v2)
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\BuildingSite.cpp",
-           1871,
-           "g_cESMgr[ _iBuildingEcoSectorId ].BuildingSitesWithPrio() != 0") == 1 )
+    if ( !CEcoSector::BuildingSitesWithPrio(v2) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 1871, "g_cESMgr[ _iBuildingEcoSectorId ].BuildingSitesWithPrio() != 0") == 1 )
     {
       __debugbreak();
     }
@@ -1504,15 +1558,15 @@ void  CBuildingSiteRole::OrderDigger(class CBuilding * a2) {
     if ( EcoSectorId > 0 )
     {
       v6 = CEcoSectorMgr::operator[](g_cESMgr, EcoSectorId);
-      if ( this->m_bDiggerPriority
-        || (v3 = CEcoSector::NeededPrioDigger(v6), v3 < CEcoSector::NrOfSettler(v6, SETTLER_DIGGER)) )
+      if ( this->m_bDiggerPriority || (v3 = CEcoSector::NeededPrioDigger(v6), v3 < CEcoSector::NrOfSettler(v6, SETTLER_DIGGER)) )
       {
-        if ( (!this->m_uDiggerAct || this->m_iDiggingNeeded / this->m_uDiggerAct >= 10)
-          && this->m_iMaxNeededDigger - this->m_uDiggerAct > 0 )
+        if ( (!this->m_uDiggerAct || this->m_iDiggingNeeded / this->m_uDiggerAct >= 10) && this->m_iMaxNeededDigger - this->m_uDiggerAct > 0 )
         {
           v4 = IEntity::ID(a3);
           if ( CEcoSector::CallWorker(v6, v4, 2) )
+          {
             ++this->m_uDiggerAct;
+          }
         }
       }
     }
@@ -1534,7 +1588,9 @@ void  CBuildingSiteRole::DiggingIsReady(int a2) {
   }
   EcoSectorId = CBuildingSiteRole::GetEcoSectorId(this);
   if ( EcoSectorId > 0 )
+  {
     CBuildingSiteRole::CheckDeactivateUrgentDigger(this, EcoSectorId);
+  }
 }
 
 
@@ -1596,15 +1652,15 @@ void  CBuildingSiteRole::OrderBuilder(class CBuilding * a2) {
     if ( EcoSectorId > 0 )
     {
       v5 = CEcoSectorMgr::operator[](g_cESMgr, EcoSectorId);
-      if ( this->m_bBuilderPriority
-        || (v2 = CEcoSector::NeededPrioBuilder(v5), v2 < CEcoSector::NrOfSettler(v5, SETTLER_BUILDER)) )
+      if ( this->m_bBuilderPriority || (v2 = CEcoSector::NeededPrioBuilder(v5), v2 < CEcoSector::NrOfSettler(v5, SETTLER_BUILDER)) )
       {
-        if ( (this->m_uBuildStage >= 4u || this->m_iDiggingNeeded < 40 && this->m_uDiggerAct)
-          && this->m_uBuilderNumber - this->m_uBuilderAct > 0 )
+        if ( (this->m_uBuildStage >= 4u || this->m_iDiggingNeeded < 40 && this->m_uDiggerAct) && this->m_uBuilderNumber - this->m_uBuilderAct > 0 )
         {
           v3 = IEntity::ID(a2);
           if ( CEcoSector::CallWorker(v5, v3, 3) )
+          {
             ++this->m_uBuilderAct;
+          }
         }
       }
     }
@@ -1638,13 +1694,21 @@ void  CBuildingSiteRole::OrderMaterial(class CBuilding * a2) {
     if ( this->m_bPriority )
     {
       if ( CBuildingSiteRole::NeedBoards(this) )
+      {
         CBuildingSiteRole::CheckActivateUrgentBoards(this, EcoSectorId);
+      }
       else
+      {
         CBuildingSiteRole::CheckDeactivateUrgentBoards(this, EcoSectorId);
+      }
       if ( CBuildingSiteRole::NeedStone(this) )
+      {
         CBuildingSiteRole::CheckActivateUrgentStones(this, EcoSectorId);
+      }
       else
+      {
         CBuildingSiteRole::CheckDeactivateUrgentStones(this, EcoSectorId);
+      }
     }
     if ( this->m_uDiggerAct || this->m_uBuildStage >= 3u )
     {
@@ -1786,11 +1850,15 @@ void  CBuildingSiteRole::DeleteStakes(class CBuilding * a2) {
     LOBYTE(v20) = 0;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v8);
     if ( !v19 )
+    {
       break;
+    }
     ++v16;
     if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v10) )
     {
-      for ( i = 31; i >= 0; --i )
+      for ( i = 31;
+            i >= 0;
+            --i )
       {
         v2 = (_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v10);
         if ( (*v2 & (1 << i)) != 0 )
@@ -1829,8 +1897,7 @@ void  CBuildingSiteRole::BuilderLeft(int a2) {
   v5 = IEntity::Type(v2);
   if ( v5 == SETTLER_DIGGER )
   {
-    if ( !this->m_uDiggerAct
-      && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 1183, "m_uDiggerAct") == 1 )
+    if ( !this->m_uDiggerAct && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 1183, "m_uDiggerAct") == 1 )
     {
       __debugbreak();
     }
@@ -1839,20 +1906,18 @@ void  CBuildingSiteRole::BuilderLeft(int a2) {
   else if ( v5 == SETTLER_BUILDER )
   {
     if ( this->m_uBuilderAct )
+    {
       --this->m_uBuilderAct;
+    }
   }
   else
   {
     v3 = CSettlerMgr::operator[](a2);
     v4 = IEntity::Type(v3);
-    if ( BBSupportDbgReportF(
-           2,
-           "MapObjects\\Building\\BuildingSite.cpp",
-           1201,
-           "Wrong Builder left. ID %d, Type %d",
-           a2,
-           v4) == 1 )
+    if ( BBSupportDbgReportF(2, "MapObjects\\Building\\BuildingSite.cpp", 1201, "Wrong Builder left. ID %d, Type %d", a2, v4) == 1 )
+    {
       __debugbreak();
+    }
   }
 }
 
@@ -2026,8 +2091,12 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
   else
   {
     v54 = 1;
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
+    {
       v77[3 * i] = 0;
+    }
     v55 = IEntity::X(a2) + 32 - this->m_pBuildingInfo->m_iHotSpotX - 1;
     v56 = IEntity::Y(a2) - this->m_pBuildingInfo->m_iHotSpotY - 1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v61);
@@ -2041,21 +2110,23 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v52);
     while ( 1 )
     {
-      v58 = (std::_Iterator_base12 *)std::vector<unsigned int>::end(
-                                       &this->m_pBuildingInfo->m_vBuildingPosLines,
-                                       (int)v51);
+      v58 = (std::_Iterator_base12 *)std::vector<unsigned int>::end(&this->m_pBuildingInfo->m_vBuildingPosLines, (int)v51);
       v57 = v58;
       LOBYTE(v78) = 2;
       v70 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator!=(v58);
       LOBYTE(v78) = 0;
       std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v51);
       if ( !v70 )
+      {
         break;
+      }
       ++v66;
       if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v61) )
       {
         v72 = v66 + v56;
-        for ( j = 31; j >= 0; --j )
+        for ( j = 31;
+              j >= 0;
+              --j )
         {
           v2 = (_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v61);
           if ( (*v2 & (1 << j)) != 0 )
@@ -2070,7 +2141,9 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
             CWorldManager::SetFlagBits(v73, v72, 8);
             if ( v54 && (v73 || v72) )
             {
-              for ( k = 0; ; ++k )
+              for ( k = 0;
+                    ;
+                    ++k )
               {
                 v3 = IEntity::X(a2);
                 v4 = CSpiralOffsets::DeltaX(k);
@@ -2079,7 +2152,9 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
                   v5 = IEntity::Y(a2);
                   v6 = CSpiralOffsets::DeltaY(k);
                   if ( v6 + v5 == v72 )
+                  {
                     break;
+                  }
                 }
               }
               v67 = CSpiralOffsets::Direction(k);
@@ -2097,10 +2172,14 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
       }
       std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator++(v61);
     }
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       if ( (int)v77[3 * i] >= 1 )
+      {
         CDecoObjMgr::AddDecoObj(&g_cDecoObjMgr, v77[3 * i + 1], v77[3 * i + 2], OBJECT_PEG01, 0, 1);
+      }
     }
     v37 = IEntity::ID(a2);
     v9 = IEntity::WorldIdx(a2);
@@ -2137,9 +2216,13 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
     }
     v20 = IEntity::Type(a2);
     if ( CBuildingMgr::IsMine(v20) )
+    {
       this->m_uBuildStage = 4;
+    }
     else
+    {
       this->m_uBuildStage = 2;
+    }
     if ( this->m_pBuildingInfo->m_bIsPort )
     {
       p_m_vWaterRepealingPosLines = &this->m_pBuildingInfo->m_vWaterRepealingPosLines;
@@ -2177,7 +2260,7 @@ void  CBuildingSiteRole::PrepareGround(class CBuilding * a2) {
 
 
 // address=[0x15063d0]
-// Decompiled from void __thiscall CBuildingSiteRole::ConvertEventIntoGoal(  CBuildingSiteRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
+// Decompiled from void __thiscall CBuildingSiteRole::ConvertEventIntoGoal(CBuildingSiteRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CBuildingSiteRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
@@ -2192,7 +2275,9 @@ int  CBuildingSiteRole::GetEcoSectorId(class CBuilding * a2) {
   int v3; // eax
 
   if ( !a2 )
+  {
     return 0;
+  }
   v2 = CBuilding::EnsignPackedXY(a2);
   v3 = CWorldManager::Index(v2);
   return ITiling::EcoSectorId(v3);
@@ -2207,7 +2292,9 @@ int  CBuildingSiteRole::NeedBoards(void)const {
   int m_uProvidedBoards; // esi
 
   if ( !this->m_uBoards )
+  {
     return 0;
+  }
   v1 = CPileMgr::operator[](this->m_uBoardsPileId);
   m_uProvidedBoards = this->m_uProvidedBoards;
   return this->m_uBoards - v1->Amount(v1) - m_uProvidedBoards;
@@ -2222,7 +2309,9 @@ int  CBuildingSiteRole::NeedGold(void)const {
   int m_uProvidedGold; // esi
 
   if ( !this->m_uGold )
+  {
     return 0;
+  }
   v1 = CPileMgr::operator[](this->m_uGoldPileId);
   m_uProvidedGold = this->m_uProvidedGold;
   return this->m_uGold - v1->Amount(v1) - m_uProvidedGold;
@@ -2237,7 +2326,9 @@ int  CBuildingSiteRole::NeedStone(void)const {
   int m_uiProvidedStone; // esi
 
   if ( !this->m_uStone )
+  {
     return 0;
+  }
   v1 = CPileMgr::operator[](this->m_uStonePileId);
   m_uiProvidedStone = this->m_uProvidedStone;
   return this->m_uStone - v1->Amount(v1) - m_uiProvidedStone;

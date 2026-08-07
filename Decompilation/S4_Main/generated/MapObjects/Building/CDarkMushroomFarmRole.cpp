@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CDarkMushroomFarmRole::New(std::istream & a1) {
   
   if ( operator new(0x19Cu) )
+  {
     return CDarkMushroomFarmRole::CDarkMushroomFarmRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -111,12 +115,13 @@ void  CDarkMushroomFarmRole::LogicUpdate(class CBuilding * a2) {
   bool IsDoorNeighborAndEnsignPosGreen; // [esp+17h] [ebp-1h]
 
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     (*(void (__thiscall **)(unsigned int *, CMFCToolBarButton *, int))(*this + 88))(this, a2, 1);
+  }
   switch ( *((_BYTE *)this + 4) )
   {
     case 1:
-      if ( CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen((CDarkMushroomFarmRole *)this, a2)
-        || (v7 = IEntity::ID(), (**(int (__thiscall ***)(void *, int))g_pDarkTribe)(g_pDarkTribe, v7) <= 0) )
+      if ( CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen((CDarkMushroomFarmRole *)this, a2) || (v7 = IEntity::ID(), (**(int (__thiscall ***)(void *, int))g_pDarkTribe)(g_pDarkTribe, v7) <= 0) )
       {
         result = IAnimatedEntity::RegisterForLogicUpdate(31);
       }
@@ -130,15 +135,17 @@ void  CDarkMushroomFarmRole::LogicUpdate(class CBuilding * a2) {
       TickCounter = CStateGame::GetTickCounter(g_pGame);
       CDarkMushroomFarmRole::TellServantsToWork((CDarkMushroomFarmRole *)this, a2);
       if ( !*((_BYTE *)this + 29) )
+      {
         goto LABEL_31;
+      }
       IsDoorNeighborAndEnsignPosGreen = 0;
       v15 = 0;
       if ( (int)this[98] < (int)this[95] )
       {
         if ( !(unsigned __int8)CDarkMushroomFarmRole::PlantMushroom(a2) )
-          IsDoorNeighborAndEnsignPosGreen = CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen(
-                                              (CDarkMushroomFarmRole *)this,
-                                              a2);
+        {
+          IsDoorNeighborAndEnsignPosGreen = CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen((CDarkMushroomFarmRole *)this, a2);
+        }
       }
       else
       {
@@ -160,9 +167,7 @@ void  CDarkMushroomFarmRole::LogicUpdate(class CBuilding * a2) {
       else
       {
 LABEL_31:
-        if ( this[98] == this[95]
-          || (int)(this[101] + 280) >= TickCounter
-          || !CDarkMushroomFarmRole::HarvestMushroom((CDarkMushroomFarmRole *)this, a2) )
+        if ( this[98] == this[95] || (int)(this[101] + 280) >= TickCounter || !CDarkMushroomFarmRole::HarvestMushroom((CDarkMushroomFarmRole *)this, a2) )
         {
           result = IAnimatedEntity::RegisterForLogicUpdate(1);
         }
@@ -184,7 +189,9 @@ LABEL_31:
       break;
     case 4:
       if ( *((_BYTE *)this + 29) )
+      {
         CDarkMushroomFarmRole::PlantMushroom(a2);
+      }
       if ( CStateGame::GetTickCounter(g_pGame) >= this[102] )
       {
         CDarkMushroomFarmRole::TellServantsToWork((CDarkMushroomFarmRole *)this, a2);
@@ -210,7 +217,9 @@ LABEL_31:
       break;
     case 5:
       if ( *((_BYTE *)this + 29) )
+      {
         CDarkMushroomFarmRole::PlantMushroom(a2);
+      }
       CDarkMushroomFarmRole::TellServantsToWork((CDarkMushroomFarmRole *)this, a2);
       ++this[98];
       *((_BYTE *)this + 176) = 0;
@@ -226,7 +235,7 @@ LABEL_31:
 
 
 // address=[0x1506f00]
-// Decompiled from int __thiscall CDarkMushroomFarmRole::FillGfxInfo(  CDarkMushroomFarmRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
+// Decompiled from int __thiscall CDarkMushroomFarmRole::FillGfxInfo(CDarkMushroomFarmRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
 void  CDarkMushroomFarmRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
@@ -264,13 +273,7 @@ void  CDarkMushroomFarmRole::Init(class CBuilding * a2) {
   v6 = IEntity::Y(a2);
   v5 = IEntity::X(a2);
   v2 = IEntity::OwnerId((unsigned __int8 *)a2);
-  BBSupportTracePrintF(
-    0,
-    "CDarkMushroomFarmRole::Init(): tick %u, owner %u, position (%i, %i)",
-    g_uDbgTickCounter,
-    v2,
-    v5,
-    v6);
+  BBSupportTracePrintF(0, "CDarkMushroomFarmRole::Init(): tick %u, owner %u, position (%i, %i)", g_uDbgTickCounter, v2, v5, v6);
   IBuildingRole::InitCommon((int)a2);
   *((_BYTE *)this + 4) = 1;
   v7 = *((_DWORD *)this + 50);
@@ -377,7 +380,9 @@ bool  CDarkMushroomFarmRole::HarvestMushroom(class CBuilding * a2) {
         {
           ++*((_DWORD *)this + 96);
           if ( *((_DWORD *)this + 96) > CSpiralOffsets::Last(*(_DWORD *)(*((_DWORD *)this + 94) + 492)) )
+          {
             *((_DWORD *)this + 96) = 0;
+          }
           break;
         }
       }
@@ -390,7 +395,9 @@ bool  CDarkMushroomFarmRole::HarvestMushroom(class CBuilding * a2) {
     }
   }
   if ( !v16 )
+  {
     return 0;
+  }
   v14 = CLogic::Effects((DWORD *)g_pLogic);
   v9 = IEntity::PackedXY(a2);
   v5 = Y16X16::PackXYFast(v17, v18);
@@ -473,7 +480,9 @@ bool  CDarkMushroomFarmRole::PlantMushroom(class CBuilding * a2) {
               v35 = 1;
               ++v34[97];
               if ( v34[97] > CSpiralOffsets::Last(*(_DWORD *)(v34[94] + 492)) )
+              {
                 v34[97] = 0;
+              }
               break;
             }
           }
@@ -488,7 +497,9 @@ bool  CDarkMushroomFarmRole::PlantMushroom(class CBuilding * a2) {
     }
   }
   if ( !v35 )
+  {
     return 0;
+  }
   v34[4] = Y16X16::PackXYFast(v30, v31);
   v7 = Y16X16::UnpackXFast(v34[4]);
   v25 = v7 - *(char *)(std::vector<CSettlerMgr::SSearchInfos>::operator[](1) + 5);
@@ -517,15 +528,19 @@ bool  CDarkMushroomFarmRole::PlantMushroom(class CBuilding * a2) {
 
 
 // address=[0x1507740]
-// Decompiled from CDarkMushroomFarmRole *__thiscall CDarkMushroomFarmRole::AttachServant(  CDarkMushroomFarmRole *this,  struct CBuilding *a2,  int a3)
+// Decompiled from CDarkMushroomFarmRole *__thiscall CDarkMushroomFarmRole::AttachServant(CDarkMushroomFarmRole *this, struct CBuilding *a2, int a3)
 void  CDarkMushroomFarmRole::AttachServant(class CBuilding * a2, int a3) {
   
   CDarkMushroomFarmRole *result; // eax
 
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkMushroomFarm.cpp", 633, "_pBuilding != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkMushroomFarm.cpp", 634, "_iServantId > 0") == 1 )
+  {
     __debugbreak();
+  }
   (*(void (__thiscall **)(struct CBuilding *, int))(*(_DWORD *)a2 + 116))(a2, a3);
   result = this;
   ++*((_DWORD *)this + 99);
@@ -540,19 +555,21 @@ void  CDarkMushroomFarmRole::DetachServant(class CBuilding * a2, int a3) {
   int result; // eax
 
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkMushroomFarm.cpp", 648, "_pBuilding != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkMushroomFarm.cpp", 649, "_iServantId > 0") == 1 )
+  {
     __debugbreak();
+  }
   (*(void (__thiscall **)(int, int))(*(_DWORD *)a2 + 64))(a2, a3);
   if ( (int)this[99] <= 0 )
   {
-    result = BBSupportDbgReport(
-               1,
-               "MapObjects\\Building\\DarkMushroomFarm.cpp",
-               659,
-               "CDarkMushroomFarmRole::DetachServant(): Invalid NumberOfAssociatedServants!");
+    result = BBSupportDbgReport(1, "MapObjects\\Building\\DarkMushroomFarm.cpp", 659, "CDarkMushroomFarmRole::DetachServant(): Invalid NumberOfAssociatedServants!");
     if ( result == 1 )
+    {
       __debugbreak();
+    }
   }
   else
   {
@@ -580,17 +597,16 @@ void  CDarkMushroomFarmRole::TellServantsToWork(class CBuilding * a2) {
   ++*((_DWORD *)this + 100);
   result = (int)v8;
   if ( *((int *)v8 + 100) <= 7 )
+  {
     return result;
+  }
   *((_DWORD *)v8 + 100) = 0;
   v7 = 0;
   v3 = CNotifyExceptMushroomfarmer::CNotifyExceptMushroomfarmer((CNotifyExceptMushroomfarmer *)&v7);
   v6 = CEntityEvent::CEntityEvent((CEntityEvent *)v4, 5u, 0, 0, 0, 0);
   v5 = v6;
   v9 = 0;
-  (*(void (__thiscall **)(struct CBuilding *, CEntityEvent *, CNotifyExceptMushroomfarmer *))(*(_DWORD *)a2 + 120))(
-    a2,
-    v6,
-    v3);
+  (*(void (__thiscall **)(struct CBuilding *, CEntityEvent *, CNotifyExceptMushroomfarmer *))(*(_DWORD *)a2 + 120))(a2, v6, v3);
   v9 = -1;
   return CEntityEvent::~CEntityEvent(v4);
 }
@@ -662,7 +678,7 @@ struct CBuildingInfoMgr::SBuildingInfos const *  CDarkMushroomFarmRole::GetBuild
 // [Decompilation failed for static unsigned long CDarkMushroomFarmRole::m_iClassID]
 
 // address=[0x1507930]
-// Decompiled from bool __thiscall CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen(  CDarkMushroomFarmRole *this,  struct CBuilding *a2)
+// Decompiled from bool __thiscall CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen(CDarkMushroomFarmRole *this, struct CBuilding *a2)
 bool  CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen(class CBuilding * a2) {
   
   int v3; // eax
@@ -672,23 +688,27 @@ bool  CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen(class CBuilding * a
   int i; // [esp+10h] [ebp-4h]
 
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkMushroomFarm.cpp", 196, "_pBuilding != 0") == 1 )
+  {
     __debugbreak();
+  }
   v6 = CBuilding::DoorWorldIdx(a2);
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v5 = v6 + CWorldManager::NeighborRelIndex(i);
     if ( CWorldManager::FlagBits(v5, 5u) == 4 )
+    {
       return 0;
+    }
   }
   v3 = CBuilding::EnsignWorldIdx(a2);
   if ( CWorldManager::FlagBits(v3, 1u) )
   {
-    if ( BBSupportDbgReport(
-           2,
-           "MapObjects\\Building\\DarkMushroomFarm.cpp",
-           210,
-           "g_cWorld.FlagBits(_pBuilding->EnsignWorldIdx(), FLAG_BLOCKED_LAND) == 0") == 1 )
+    if ( BBSupportDbgReport(2, "MapObjects\\Building\\DarkMushroomFarm.cpp", 210, "g_cWorld.FlagBits(_pBuilding->EnsignWorldIdx(), FLAG_BLOCKED_LAND) == 0") == 1 )
+    {
       __debugbreak();
+    }
   }
   v4 = CBuilding::EnsignWorldIdx(a2);
   return CWorldManager::FlagBits(v4, 4u) == 0;
@@ -696,7 +716,7 @@ bool  CDarkMushroomFarmRole::IsDoorNeighborAndEnsignPosGreen(class CBuilding * a
 
 
 // address=[0x14fd1e0]
-// Decompiled from void __thiscall CDarkMushroomFarmRole::ConvertEventIntoGoal(  CDarkMushroomFarmRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
+// Decompiled from void __thiscall CDarkMushroomFarmRole::ConvertEventIntoGoal(CDarkMushroomFarmRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CDarkMushroomFarmRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;
@@ -722,7 +742,9 @@ bool  CDarkMushroomFarmRole::CrushBuilding(void) {
   CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
   v4 = IAnimatedEntity::AttackerPlayerId();
   if ( v4 <= 0 )
+  {
     return 1;
+  }
   v1 = CPlayerManager::PlayerGameData(v4);
   v2 = CPlayerGameData::StaticData(v1);
   CPlayerStatisticData::IncreaseMushroomFarmsDestroyed(v2);

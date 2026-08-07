@@ -13,7 +13,9 @@ int  CAIResourceEvalParams::Evalute9(class CAIResourceData const & a2)const {
 
   v5 = 0;
   v4 = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     v2 = CAIResourceData::ResourceAmount9(a2, i);
     v5 += v2 * *((_DWORD *)this + 4 * i + 1) + *((_DWORD *)this + 4 * i) + v2 * v2 * *((_DWORD *)this + 4 * i + 2);

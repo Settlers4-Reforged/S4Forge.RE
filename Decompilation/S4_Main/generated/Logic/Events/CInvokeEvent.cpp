@@ -87,35 +87,32 @@ int  CInvokeEvent::AddInvokePositionAroundResource(enum BUILDING_TYPES a2, int a
     case 16:
     case 17:
     case 18:
-      ResourceForBuilding = CProductionDataTab::GetResourceForBuilding(
-                              *(void **)(*((_DWORD *)v16 + 10) + 40),
-                              a2,
-                              *(_DWORD *)(*((_DWORD *)v16 + 10) + 24));
+      ResourceForBuilding = CProductionDataTab::GetResourceForBuilding(*(void **)(*((_DWORD *)v16 + 10) + 40), a2, *(_DWORD *)(*((_DWORD *)v16 + 10) + 24));
       ResourceManager = CSchedule::GetResourceManager(*((CDynList ***)v16 + 10), ResourceForBuilding);
       if ( ResourceManager )
       {
-        for ( i = 0; i < *(_DWORD *)(*((_DWORD *)ResourceManager + 21) + 8); ++i )
+        for ( i = 0;
+              i < *(_DWORD *)(*((_DWORD *)ResourceManager + 21) + 8);
+              ++i )
         {
           FilterEntry = CFilter::GetFilterEntry(*((CFilter **)ResourceManager + 21), i);
           if ( FilterEntry )
           {
-            CReserveDatabase::PackPosition(
-              **((CReserveDatabase ***)v16 + 10),
-              *((_DWORD *)FilterEntry + 3),
-              *((_DWORD *)FilterEntry + 4));
-            v5 = CReserveDatabase::PackPosition(
-                   **((CReserveDatabase ***)v16 + 10),
-                   16 * *((_DWORD *)FilterEntry + 3) + 8,
-                   16 * *((_DWORD *)FilterEntry + 4) + 8);
+            CReserveDatabase::PackPosition(**((CReserveDatabase ***)v16 + 10), *((_DWORD *)FilterEntry + 3), *((_DWORD *)FilterEntry + 4));
+            v5 = CReserveDatabase::PackPosition(**((CReserveDatabase ***)v16 + 10), 16 * *((_DWORD *)FilterEntry + 3) + 8, 16 * *((_DWORD *)FilterEntry + 4) + 8);
             if ( a3 <= 0 || (int)CSchedule::CalcDistance(*((CSchedule **)v16 + 10), v5, a3) <= 80 )
             {
               ++v10;
               CReserveDatabase::UnpackPosition(**((CReserveDatabase ***)v16 + 10), v5, &v13, &v12);
               v13 /= 16;
               v12 /= 16;
-              for ( j = v13 - 6; j < v13 + 6; ++j )
+              for ( j = v13 - 6;
+                    j < v13 + 6;
+                    ++j )
               {
-                for ( k = v12 - 6; k < v12 + 6; ++k )
+                for ( k = v12 - 6;
+                      k < v12 + 6;
+                      ++k )
                 {
                   if ( j >= 0 && k >= 0 )
                   {
@@ -140,9 +137,13 @@ int  CInvokeEvent::AddInvokePositionAroundResource(enum BUILDING_TYPES a2, int a
         CReserveDatabase::UnpackPosition(**((CReserveDatabase ***)v16 + 10), a3, &v13, &v12);
         v13 /= 16;
         v12 /= 16;
-        for ( j = v13 - 6; j < v13 + 6; ++j )
+        for ( j = v13 - 6;
+              j < v13 + 6;
+              ++j )
         {
-          for ( k = v12 - 6; k < v12 + 6; ++k )
+          for ( k = v12 - 6;
+                k < v12 + 6;
+                ++k )
           {
             v7 = CReserveDatabase::PackPosition(**((CReserveDatabase ***)v16 + 10), j, k);
             CInvokeEvent::AddInvokePosition(v16, v7);
@@ -176,7 +177,9 @@ int  CInvokeEvent::AddInvokePositionAroundResource(enum BUILDING_TYPES a2, int a
 bool  CInvokeEvent::IsShooting(void) {
   
   if ( !*((_BYTE *)this + 76) )
+  {
     return 0;
+  }
   if ( *((_DWORD *)this + 12) == 1 )
   {
     *((_DWORD *)this + 5) = 3;
@@ -212,28 +215,29 @@ bool  CInvokeEvent::action(void) {
   v7 = 0;
   v8 = 0;
   if ( !*(_DWORD *)(*((_DWORD *)this + 10) + 32) )
+  {
     *(_DWORD *)(*((_DWORD *)v10 + 10) + 32) = *((_DWORD *)v10 + 3);
+  }
   if ( *((_DWORD *)v10 + 12) == 2 )
   {
     if ( !*((_DWORD *)v10 + 13) && !*((_BYTE *)v10 + 56) )
     {
-      for ( i = 0; ; ++i )
+      for ( i = 0;
+            ;
+            ++i )
       {
         v1 = std::vector<int>::size((char *)v10 + 60);
         if ( i >= v1 )
+        {
           break;
+        }
         v2 = (_DWORD *)std::vector<int>::operator[](i);
         CReserveDatabase::UnpackPosition(**((CReserveDatabase ***)v10 + 10), *v2, &v7, &v8);
         EcoSector = CSchedule::GetEcoSector(*((CSchedule **)v10 + 10));
-        (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int, int))(*(_DWORD *)EcoSector + 8))(
-          EcoSector,
-          *((_DWORD *)v10 + 11),
-          v7,
-          v8);
+        (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int, int))(*(_DWORD *)EcoSector + 8))(EcoSector, *((_DWORD *)v10 + 11), v7, v8);
       }
     }
-    if ( !*((_DWORD *)v10 + 12)
-      && BBSupportDbgReport(2, "Source\\EcoAI_ProblemSolve.cpp", 679, "m_iInvokeError != AI_EME_OK") == 1 )
+    if ( !*((_DWORD *)v10 + 12) && BBSupportDbgReport(2, "Source\\EcoAI_ProblemSolve.cpp", 679, "m_iInvokeError != AI_EME_OK") == 1 )
     {
       __debugbreak();
     }
@@ -243,9 +247,13 @@ bool  CInvokeEvent::action(void) {
     ++*((_DWORD *)v10 + 13);
   }
   if ( *((_DWORD *)v10 + 12) == 2 )
+  {
     return 1;
+  }
   if ( *(_DWORD *)(*((_DWORD *)v10 + 10) + 32) == *((_DWORD *)v10 + 3) )
+  {
     *(_DWORD *)(*((_DWORD *)v10 + 10) + 32) = 0;
+  }
   *((_DWORD *)v10 + 5) = 1;
   return 1;
 }
@@ -258,11 +266,11 @@ bool  CInvokeEvent::IsAlive(void) {
   struct IAIEcoManager *EcoSector; // [esp+0h] [ebp-8h]
 
   if ( *((_DWORD *)this + 12) != 1 )
+  {
     return 1;
+  }
   EcoSector = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-  (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 16))(
-    EcoSector,
-    *((_DWORD *)this + 11));
+  (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 16))(EcoSector, *((_DWORD *)this + 11));
   *((_DWORD *)this + 5) = 3;
   return 0;
 }
@@ -275,11 +283,11 @@ bool  CInvokeEvent::WaitFor(void) {
   struct IAIEcoManager *EcoSector; // [esp+0h] [ebp-8h]
 
   if ( CSchedule::InvokeNeeded(*((CDynList ***)this + 10), *((_DWORD *)this + 11)) )
+  {
     return 0;
+  }
   EcoSector = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-  (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 16))(
-    EcoSector,
-    *((_DWORD *)this + 11));
+  (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 16))(EcoSector, *((_DWORD *)this + 11));
   *((_DWORD *)this + 5) = 3;
   return 0;
 }

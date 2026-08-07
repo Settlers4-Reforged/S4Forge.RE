@@ -26,7 +26,9 @@
 bool  CTaskForceWarShips::IsAddEntityOk(int a2) {
   
   if ( IAIEnvironment::EntityWarriorType(a2) == 10 )
+  {
     return 1;
+  }
   IAIEnvironment::DbgTracePrintF("CTaskForceWarShips::IsAddEntityOk(): Entity %i is not a war ship!", a2);
   return 0;
 }

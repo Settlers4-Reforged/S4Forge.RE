@@ -22,7 +22,9 @@ void  CShip::VehicleLogicUpdate(void) {
   {
     v9 = CShip::RepairBuildingInRange(this);
     if ( v9 )
+    {
       CShip::RepairAt(this, v9);
+    }
     *((_DWORD *)this + 42) = TickCounter;
   }
   v10 = *((_BYTE *)this + 107);
@@ -59,7 +61,9 @@ struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
   unsigned int v7; // [esp+18h] [ebp-8h]
 
   if ( (unsigned __int8)CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
+  {
     IAnimatedEntity::BoxSelection();
+  }
   CVehicle::Update(this);
   if ( (unsigned __int8)CVehicle::IsTurning(this) )
   {
@@ -72,22 +76,18 @@ struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
     if ( (*(_BYTE *)(this + 104) & 8) != 0 )
     {
       if ( *(unsigned __int16 *)(this + 38) == v7 )
+      {
         v6 = *(_DWORD *)(*(_DWORD *)(this + 100) + 28);
+      }
       else
+      {
         v6 = *(unsigned __int16 *)(this + 38);
+      }
       CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v5, v6, *(char *)(this + 68), 0, 0, 0);
     }
     else
     {
-      CGfxManager::GetVehicleGfxInfo(
-        g_pGfxManager,
-        &IEntity::m_sGfxInfo,
-        v5,
-        *(_DWORD *)(*(_DWORD *)(this + 100) + 28),
-        *(char *)(this + 68),
-        0,
-        v7,
-        *(unsigned __int8 *)(this + 36));
+      CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v5, *(_DWORD *)(*(_DWORD *)(this + 100) + 28), *(char *)(this + 68), 0, v7, *(unsigned __int8 *)(this + 36));
     }
   }
   v1 = IEntity::OwnerId((IEntity *)this);
@@ -99,22 +99,32 @@ struct SGfxObjectInfo *  CShip::GetGfxInfos(void) {
   if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
   {
     if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
+    {
       v4 = 27;
+    }
     else
+    {
       v4 = 0;
+    }
     IEntity::m_sGfxInfo.m_uFlags = v4;
   }
   else if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
   {
     if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
+    {
       v3 = 89;
+    }
     else
+    {
       v3 = 0;
+    }
     IEntity::m_sGfxInfo.m_uFlags = v3;
   }
   IEntity::m_sGfxInfo.m_uDecorator = 0;
   if ( !IEntity::FlagBits((IEntity *)this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  {
     MEMORY[0x40FE2AC] = 65534 - *(unsigned __int16 *)(this + 124) * *(unsigned __int16 *)(this + 128);
+  }
   return &IEntity::m_sGfxInfo;
 }
 
@@ -134,8 +144,7 @@ int __cdecl CShip::FindBoardingLocation(class std::vector<unsigned short,class s
   int i; // [esp+20h] [ebp-8h]
   unsigned __int16 v13; // [esp+26h] [ebp-2h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 513, "g_cWorld.InWorldPackedXY(_iShipXY)") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 513, "g_cWorld.InWorldPackedXY(_iShipXY)") == 1 )
   {
     __debugbreak();
   }
@@ -150,11 +159,15 @@ int __cdecl CShip::FindBoardingLocation(class std::vector<unsigned short,class s
     v11 = -1;
     v6 = -1;
     v7 = 0;
-    for ( i = 0; i < v10; ++i )
+    for ( i = 0;
+          i < v10;
+          ++i )
     {
       v9 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](i);
       if ( v9 <= 0 && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 527, "iEntityId > 0") == 1 )
+      {
         __debugbreak();
+      }
       v8 = (unsigned __int8 *)CMapObjectMgr::Entity(v9);
       if ( IEntity::CheckType((IEntity *)v8, 1, 44) )
       {
@@ -164,7 +177,9 @@ int __cdecl CShip::FindBoardingLocation(class std::vector<unsigned short,class s
           {
             ++v7;
             if ( v6 < 0 )
+            {
               v6 = i;
+            }
           }
         }
         else
@@ -174,9 +189,13 @@ int __cdecl CShip::FindBoardingLocation(class std::vector<unsigned short,class s
       }
     }
     if ( v11 < 0 )
+    {
       v13 = *(_WORD *)std::vector<unsigned short>::operator[](0);
+    }
     else
+    {
       v13 = *(_WORD *)std::vector<unsigned short>::operator[](v11);
+    }
     v3 = CMapObjectMgr::Entity(v13);
     v4 = IEntity::PackedXY(v3);
     return CShip::FindBoardingLocation(v4, a2, a3);
@@ -208,25 +227,27 @@ int __cdecl CShip::FindBoardingLocation(int a1, int a2, struct SBoardingInfo & a
   int i; // [esp+2Ch] [ebp-60h]
   _BYTE v22[88]; // [esp+30h] [ebp-5Ch] BYREF
 
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a1)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 573, "g_cWorld.InWorldPackedXY(_iStartXY)") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a1) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 573, "g_cWorld.InWorldPackedXY(_iStartXY)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 574, "g_cWorld.InWorldPackedXY(_iShipXY)") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 574, "g_cWorld.InWorldPackedXY(_iShipXY)") == 1 )
   {
     __debugbreak();
   }
   memset(a3, 0, 0x10u);
   if ( (int)CAStarTiling::FindPath(a1, a2, (struct CWaypoints *)v22, 768) <= 0 )
+  {
     return 0;
+  }
   v3 = (Y16X16 *)CWaypoints::Goal((CWaypoints *)v22);
   Y16X16::UnpackXYFast(v3, &v14, &v13);
   v11 = CWorldManager::Index(v14, v13);
   v19 = -1;
   v16 = -1;
-  for ( i = 0; i < 19; ++i )
+  for ( i = 0;
+        i < 19;
+        ++i )
   {
     v10 = v11 + CWorldManager::SurroundingHexPointRelIndex(i);
     if ( !CWaterFlags::IsBlockedWater(v10) )
@@ -239,10 +260,14 @@ int __cdecl CShip::FindBoardingLocation(int a1, int a2, struct SBoardingInfo & a
     }
   }
   if ( v19 < 0 )
+  {
     return 0;
+  }
   v15 = -1;
   v12 = -1;
-  for ( j = 37; j < 91; ++j )
+  for ( j = 37;
+        j < 91;
+        ++j )
   {
     v7 = SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * j]);
     v18 = v19 + v7;
@@ -260,7 +285,9 @@ int __cdecl CShip::FindBoardingLocation(int a1, int a2, struct SBoardingInfo & a
     }
   }
   if ( v15 < 0 )
+  {
     return 0;
+  }
   *a3 = v19;
   a3[1] = v16;
   a3[2] = v15;
@@ -297,7 +324,9 @@ void  CShip::Unload(void) {
   this->m_uU2 = 0;
   CShip::PlaceVehicle(this, this->m_uPackedXY);
   if ( a8 )
+  {
     return this;
+  }
   CWarMap::AddEntity(this);
   v10 = IEntity::Y(this);
   v8 = IEntity::X(this);
@@ -442,7 +471,9 @@ void  CShip::WalkDir(int a2) {
         CWorldManager::SetMapObjectId(v9, 0);
         CWorldManager::SetMapObjectId(v10, v8);
         if ( v12 != (Y16X16 *)*((char *)this + 68) )
+        {
           CVehicle::InitTurn(this, (int)v12);
+        }
         IEntity::SetPosition(this, v11);
         IMovingEntity::InitDistance(this);
         CWarMap::NotifyMove(this, v7);
@@ -466,20 +497,20 @@ void  CShip::PlaceVehicle(int a2) {
   __int16 v3; // [esp+0h] [ebp-10h]
   int v5; // [esp+8h] [ebp-8h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 651, "g_cWorld.InWorldPackedXY( _iXY )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 651, "g_cWorld.InWorldPackedXY( _iXY )") == 1 )
   {
     __debugbreak();
   }
   v5 = CWorldManager::Index(a2);
   v3 = IEntity::EntityId((unsigned __int16 *)this);
-  if ( CWorldManager::MapObjectId(v5)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 656, "g_cWorld.MapObjectId( iWorldIdx ) == 0") == 1 )
+  if ( CWorldManager::MapObjectId(v5) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 656, "g_cWorld.MapObjectId( iWorldIdx ) == 0") == 1 )
   {
     __debugbreak();
   }
   if ( !CWater::PlaceShip(a2) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 660, "bPlaceShipOk") == 1 )
+  {
     __debugbreak();
+  }
   return CWorldManager::SetMapObjectId(v5, v3);
 }
 
@@ -497,25 +528,27 @@ void  CShip::RemoveVehicle(int a2) {
   int v9; // [esp+0h] [ebp-10h]
   int v10; // [esp+4h] [ebp-Ch]
 
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 674, "g_cWorld.InWorldPackedXY( _iXY )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 674, "g_cWorld.InWorldPackedXY( _iXY )") == 1 )
   {
     __debugbreak();
   }
   v10 = CWorldManager::Index(a2);
   v2 = CWorldManager::MapObjectId(v10);
-  if ( v2 != IEntity::EntityId((unsigned __int16 *)this)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 678, "g_cWorld.MapObjectId( iWorldIdx ) == EntityId()") == 1 )
+  if ( v2 != IEntity::EntityId((unsigned __int16 *)this) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 678, "g_cWorld.MapObjectId( iWorldIdx ) == EntityId()") == 1 )
   {
     __debugbreak();
   }
   if ( !CWater::RemoveShip(a2) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 682, "bRemoveShipOk") == 1 )
+  {
     __debugbreak();
+  }
   CWorldManager::SetMapObjectId(v10, 0);
   v3 = IEntity::OwnerId((unsigned __int8 *)this);
   LocalPlayerId = CPlayerManager::GetLocalPlayerId(v9);
   if ( v3 != LocalPlayerId )
+  {
     return LocalPlayerId;
+  }
   v8 = IEntity::Y(this);
   v7 = IEntity::X(this);
   v5 = IEntity::OwnerId((unsigned __int8 *)this);
@@ -539,7 +572,9 @@ int  CShip::RepairBuildingInRange(void) {
 
   v5 = IEntity::X(this);
   v4 = IEntity::Y(this);
-  for ( i = 0; i < 721; ++i )
+  for ( i = 0;
+        i < 721;
+        ++i )
   {
     v6 = v5 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * i]);
     v7 = v4 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * i]);
@@ -551,7 +586,9 @@ int  CShip::RepairBuildingInRange(void) {
       {
         v2 = (unsigned __int16 *)CBuildingMgr::operator[](v9);
         if ( IEntity::Type(v2) == 31 )
+        {
           return v9;
+        }
       }
     }
   }
@@ -566,19 +603,19 @@ void  CShip::RepairAt(int a2) {
   CShip *result; // eax
   char v3; // dl
 
-  if ( CShip::RepairBuildingInRange(this) != a2
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 738, "RepairBuildingInRange()==_iAtBuildingID") == 1 )
+  if ( CShip::RepairBuildingInRange(this) != a2 && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 738, "RepairBuildingInRange()==_iAtBuildingID") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 25)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 739, "m_pVehicleProperties!= NULL") == 1 )
+  if ( !*((_DWORD *)this + 25) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 739, "m_pVehicleProperties!= NULL") == 1 )
   {
     __debugbreak();
   }
   result = (CShip *)(*(int (__thiscall **)(CShip *))(*(_DWORD *)this + 40))(this);
   if ( (unsigned int)result >= *(_DWORD *)(*((_DWORD *)this + 25) + 48) )
+  {
     return result;
+  }
   v3 = CStaticConfigVarInt::operator int(&g_iShipRepairRate) + *((_BYTE *)this + 33);
   result = this;
   *((_BYTE *)this + 33) = v3;
@@ -592,25 +629,24 @@ int  CShip::GetHealthDisplayID(void) {
   
   unsigned int v2; // [esp+0h] [ebp-8h]
 
-  if ( !*((_DWORD *)this + 25)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 750, "m_pVehicleProperties!=NULL") == 1 )
+  if ( !*((_DWORD *)this + 25) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 750, "m_pVehicleProperties!=NULL") == 1 )
   {
     __debugbreak();
   }
   if ( !*((_DWORD *)this + 25) )
+  {
     return 0;
-  if ( !*(_DWORD *)(*((_DWORD *)this + 25) + 48)
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 753, "m_pVehicleProperties->m_uHitpoints!=0") == 1 )
+  }
+  if ( !*(_DWORD *)(*((_DWORD *)this + 25) + 48) && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 753, "m_pVehicleProperties->m_uHitpoints!=0") == 1 )
   {
     __debugbreak();
   }
   if ( !*(_DWORD *)(*((_DWORD *)this + 25) + 48) )
+  {
     return 0;
-  v2 = 7
-     - (unsigned int)(7 * (*(int (__thiscall **)(CShip *))(*(_DWORD *)this + 40))(this))
-     / *(_DWORD *)(*((_DWORD *)this + 25) + 48);
-  if ( v2 >= 8
-    && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 757, "iIndex>=0 && iIndex<=MAX_HEALTH_DISPLAY_INDEX") == 1 )
+  }
+  v2 = 7 - (unsigned int)(7 * (*(int (__thiscall **)(CShip *))(*(_DWORD *)this + 40))(this)) / *(_DWORD *)(*((_DWORD *)this + 25) + 48);
+  if ( v2 >= 8 && BBSupportDbgReport(2, "MapObjects\\Ship\\Ship.cpp", 757, "iIndex>=0 && iIndex<=MAX_HEALTH_DISPLAY_INDEX") == 1 )
   {
     __debugbreak();
   }

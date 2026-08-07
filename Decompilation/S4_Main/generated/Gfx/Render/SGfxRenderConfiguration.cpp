@@ -10,9 +10,13 @@ void  SGfxRenderConfiguration::EnableFiltering(bool a2) {
   int v2; // edx
 
   if ( a2 )
+  {
     v2 = this->m_uFlags | 8;
+  }
   else
+  {
     v2 = this->m_uFlags & 0xFFFFFFF7;
+  }
   this->m_uFlags = v2;
 }
 
@@ -24,9 +28,13 @@ void  SGfxRenderConfiguration::EnableHQTextureSet(bool a2) {
   int v2; // edx
 
   if ( a2 )
+  {
     v2 = this->m_uFlags | 4;
+  }
   else
+  {
     v2 = this->m_uFlags & 0xFFFFFFFB;
+  }
   this->m_uFlags = v2;
 }
 
@@ -36,9 +44,13 @@ void  SGfxRenderConfiguration::EnableHQTextureSet(bool a2) {
 void  SGfxRenderConfiguration::EnableHardwareLandscapeEngine(bool a2) {
   
   if ( a2 )
+  {
     this->m_uFlags |= 1u;
+  }
   else
+  {
     BBSupportTracePrintF(1, "LE software rendering is no longer supported");
+  }
 }
 
 
@@ -47,9 +59,13 @@ void  SGfxRenderConfiguration::EnableHardwareLandscapeEngine(bool a2) {
 void  SGfxRenderConfiguration::EnableHardwareObjectEngine(bool a2) {
   
   if ( a2 )
+  {
     this->m_uFlags |= 2u;
+  }
   else
+  {
     BBSupportTracePrintF(1, "OE software rendering is no longer supported");
+  }
 }
 
 
@@ -60,9 +76,13 @@ void  SGfxRenderConfiguration::ForceBlit(bool a2) {
   int v2; // edx
 
   if ( a2 )
+  {
     v2 = this->m_uFlags | 0x20;
+  }
   else
+  {
     v2 = this->m_uFlags & 0xFFFFFFDF;
+  }
   this->m_uFlags = v2;
 }
 
@@ -96,9 +116,13 @@ bool  SGfxRenderConfiguration::IsHardwareObjectEngine(void)const {
 void  SGfxRenderConfiguration::SetPureSoftwareMode(bool a2) {
   
   if ( a2 )
+  {
     this->m_uFlags |= 0x10u;
+  }
   else
+  {
     BBSupportTracePrintF(1, "Pure software rendering is no longer supported");
+  }
 }
 
 

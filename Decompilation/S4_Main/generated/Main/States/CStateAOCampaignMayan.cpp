@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateAOCampaignMayan::DynamicCreateFunc(void * a1) {
 
   C = (CStateAOCampaignMayan *)operator new(4u);
   if ( C )
+  {
     return CStateAOCampaignMayan::CStateAOCampaignMayan(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -68,7 +72,9 @@ bool  CStateAOCampaignMayan::Perform(void) {
     }
     v2 = dword_402C900 + 30;
     if ( v2 >= timeGetTime() )
+    {
       return 1;
+    }
     dword_402C900 = timeGetTime();
     IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
     IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);

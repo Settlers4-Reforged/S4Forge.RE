@@ -11,23 +11,13 @@
   CBBObjectTracer::Enter();
   CBBObjectTracer::InitObject(this, a2, a3);
   if ( CBBObjectTracer::m_iNumberOfObjects == 1 )
-    BBSupportTracePrintF(
-      0,
-      "%06x-%08x: %s created (%i object%s).",
-      this->m_uSerialNumber,
-      this,
-      this->m_spType,
-      1,
-      (const char *)&sEmpty6);
+  {
+    BBSupportTracePrintF(0, "%06x-%08x: %s created (%i object%s).", this->m_uSerialNumber, this, this->m_spType, 1, (const char *)&sEmpty6);
+  }
   else
-    BBSupportTracePrintF(
-      0,
-      "%06x-%08x: %s created (%i object%s).",
-      this->m_uSerialNumber,
-      this,
-      this->m_spType,
-      CBBObjectTracer::m_iNumberOfObjects,
-      "s");
+  {
+    BBSupportTracePrintF(0, "%06x-%08x: %s created (%i object%s).", this->m_uSerialNumber, this, this->m_spType, CBBObjectTracer::m_iNumberOfObjects, "s");
+  }
   CBBObjectTracer::Leave();
   return this;
 }
@@ -41,27 +31,13 @@
   CBBObjectTracer::Enter();
   CBBObjectTracer::InitObject(this, (int)a2->m_spType, a2->m_uSerialNumber != -1);
   if ( CBBObjectTracer::m_iNumberOfObjects == 1 )
-    BBSupportTracePrintF(
-      0,
-      "%06x-%08x: %s created as copy of %06x-%08x (%i object%s).",
-      this->m_uSerialNumber,
-      this,
-      this->m_spType,
-      a2->m_uSerialNumber,
-      a2,
-      1,
-      (const char *)&unk_3ABA812);
+  {
+    BBSupportTracePrintF(0, "%06x-%08x: %s created as copy of %06x-%08x (%i object%s).", this->m_uSerialNumber, this, this->m_spType, a2->m_uSerialNumber, a2, 1, (const char *)&unk_3ABA812);
+  }
   else
-    BBSupportTracePrintF(
-      0,
-      "%06x-%08x: %s created as copy of %06x-%08x (%i object%s).",
-      this->m_uSerialNumber,
-      this,
-      this->m_spType,
-      a2->m_uSerialNumber,
-      a2,
-      CBBObjectTracer::m_iNumberOfObjects,
-      "s");
+  {
+    BBSupportTracePrintF(0, "%06x-%08x: %s created as copy of %06x-%08x (%i object%s).", this->m_uSerialNumber, this, this->m_spType, a2->m_uSerialNumber, a2, CBBObjectTracer::m_iNumberOfObjects, "s");
+  }
   CBBObjectTracer::Leave();
   return this;
 }
@@ -81,27 +57,21 @@
     if ( CBBObjectTracer::IsObjectInList(this->m_uSerialNumber, &v1) )
     {
       if ( v1 )
+      {
         v1->m_pFirst = this->m_pFirst;
+      }
       else
+      {
         CBBObjectTracer::m_pObjectFirst = this->m_pFirst;
+      }
       if ( --CBBObjectTracer::m_iNumberOfObjects == 1 )
-        BBSupportTracePrintF(
-          0,
-          "%06x-%08x: %s deleted (%i object%s remaining).",
-          this->m_uSerialNumber,
-          this,
-          this->m_spType,
-          1,
-          (const char *)&unk_3ABA813);
+      {
+        BBSupportTracePrintF(0, "%06x-%08x: %s deleted (%i object%s remaining).", this->m_uSerialNumber, this, this->m_spType, 1, (const char *)&unk_3ABA813);
+      }
       else
-        BBSupportTracePrintF(
-          0,
-          "%06x-%08x: %s deleted (%i object%s remaining).",
-          this->m_uSerialNumber,
-          this,
-          this->m_spType,
-          CBBObjectTracer::m_iNumberOfObjects,
-          "s");
+      {
+        BBSupportTracePrintF(0, "%06x-%08x: %s deleted (%i object%s remaining).", this->m_uSerialNumber, this, this->m_spType, CBBObjectTracer::m_iNumberOfObjects, "s");
+      }
       if ( !this->m_uSerialNumber )
       {
         if ( CBBObjectTracer::m_iNumberOfObjects )
@@ -122,7 +92,9 @@
     {
       BBSupportTracePrintF(0, "%06x-%08x: Illegal object delete!", this->m_uSerialNumber, this);
       if ( BBSupportDbgReport(1, "ObjectTracer.cpp", 251, "Somebody tried to delete a none existing object!") == 1 )
+      {
         __debugbreak();
+      }
     }
     CBBObjectTracer::Leave();
   }

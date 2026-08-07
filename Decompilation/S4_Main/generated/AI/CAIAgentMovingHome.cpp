@@ -31,7 +31,9 @@ unsigned int  CAIAgentMovingHome::Execute(unsigned int a2, unsigned int a3) {
   {
     v7 = CAINormalSectorAgent::SectorAI(this);
     v8 = CAISectorAI::TaskForceGroup(v7);
-    for ( i = (pairNode *)CAITaskForceGroup::FirstTaskForce(v8, 2); i; i = TaskForceGroupMemberOfSameClass )
+    for ( i = (pairNode *)CAITaskForceGroup::FirstTaskForce(v8, 2);
+          i;
+          i = TaskForceGroupMemberOfSameClass )
     {
       TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
       if ( CAITaskForce::Type(i) == 3 )
@@ -43,9 +45,13 @@ unsigned int  CAIAgentMovingHome::Execute(unsigned int a2, unsigned int a3) {
           IAIEnvironment::WorldEcoSectorIdPackedXY(v10);
           v18 = v11;
           if ( v11 <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 1323, "iHomeEcoSectorId > 0") == 1 )
+          {
             __debugbreak();
+          }
           v22 = 1;
-          for ( j = (pairNode *)CAITaskForce::LastEntity(i); j; j = (pairNode *)v16 )
+          for ( j = (pairNode *)CAITaskForce::LastEntity(i);
+                j;
+                j = (pairNode *)v16 )
           {
             v16 = CAIEntityInfo::Prev(j);
             v17 = CAIEntityInfo::EntityId(j);

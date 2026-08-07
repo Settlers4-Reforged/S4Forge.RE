@@ -45,7 +45,7 @@ public:
     int  WarriorAttackCheckMedic(class IMovingEntity & a2);
 
     // address=[0x15ad980]
-    int  WarriorAttackCheckAxeWarrior(class IMovingEntity & a2);
+    int  WarriorAttackCheckAxeWarrior(class IMovingEntity & a1);
 
     // address=[0x15ad9c0]
     int  WarriorAttackCheckSaboteur(class IMovingEntity & a2);

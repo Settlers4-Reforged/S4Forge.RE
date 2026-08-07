@@ -10,14 +10,18 @@ class CGameState * __cdecl CStateMDCampaignViking::DynamicCreateFunc(void * a1) 
 
   C = (CStateMDCampaignViking *)operator new(4u);
   if ( C )
+  {
     return CStateMDCampaignViking::CStateMDCampaignViking(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x14c7c90]
-// Decompiled from CStateMDCampaignViking *__thiscall CStateMDCampaignViking::CStateMDCampaignViking(  CStateMDCampaignViking *this,  void *a2)
+// Decompiled from CStateMDCampaignViking *__thiscall CStateMDCampaignViking::CStateMDCampaignViking(CStateMDCampaignViking *this, void *a2)
  CStateMDCampaignViking::CStateMDCampaignViking(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
@@ -68,7 +72,9 @@ bool  CStateMDCampaignViking::Perform(void) {
     }
     v2 = dword_4031F74 + 30;
     if ( v2 >= timeGetTime() )
+    {
       return 1;
+    }
     dword_4031F74 = timeGetTime();
     IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
     IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);

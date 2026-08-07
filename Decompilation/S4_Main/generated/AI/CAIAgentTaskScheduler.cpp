@@ -8,13 +8,11 @@ unsigned int  CAIAgentTaskScheduler::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
 
-  if ( !CAINormalSectorAgent::SectorAI(this)
-    && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 253, "SectorAI() != 0") == 1 )
+  if ( !CAINormalSectorAgent::SectorAI(this) && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 253, "SectorAI() != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 10)
-    && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 254, "m_pTaskExecutionFunc != 0") == 1 )
+  if ( !*((_DWORD *)this + 10) && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 254, "m_pTaskExecutionFunc != 0") == 1 )
   {
     __debugbreak();
   }

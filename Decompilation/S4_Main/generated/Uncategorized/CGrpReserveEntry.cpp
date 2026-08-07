@@ -17,9 +17,13 @@
   this[11] = a5;
   C = (CDynList *)operator new(0xCu);
   if ( C )
+  {
     v6 = CDynList::CDynList(C);
+  }
   else
+  {
     v6 = 0;
+  }
   this[12] = v6;
   return this;
 }
@@ -31,7 +35,9 @@
   
   *this = (CDynList *)&CGrpReserveEntry::_vftable_;
   if ( this[12] )
+  {
     delete this[12];
+  }
   CReserveEntry::~CReserveEntry(this);
 }
 

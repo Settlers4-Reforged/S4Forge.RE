@@ -36,7 +36,9 @@
 bool  CExtraCD::IsExtraInstalled(void) {
   
   if ( *((_BYTE *)this + 8) )
+  {
     return *((_BYTE *)this + 9);
+  }
   *((_BYTE *)this + 8) = 1;
   *((_BYTE *)this + 9) = (*(int (__thiscall **)(CExtraCD *))(*(_DWORD *)this + 16))(this);
   return *((_BYTE *)this + 9);
@@ -52,31 +54,38 @@ void  CExtraCD::EnsureMainGUI(int a2, bool (__cdecl*)(int,int,int) a3) {
 
 
 // address=[0x1481810]
-// Decompiled from char __thiscall CExtraCD::EnsureGuiEngineHasGfxFileLoaded(  CExtraCD *this,  unsigned int a2,  int a3,  int a4,  bool (__cdecl *a5)(int, int, int),  bool a6)
+// Decompiled from char __thiscall CExtraCD::EnsureGuiEngineHasGfxFileLoaded(CExtraCD *this, unsigned int a2, int a3, int a4, bool (__cdecl *a5)(int, int, int), bool a6)
 void  CExtraCD::EnsureGuiEngineHasGfxFileLoaded(unsigned int a2, void * a3, int a4, bool (__cdecl*)(int,int,int) a5, bool a6) {
   
   unsigned int ActiveGUIGFXFile; // eax
   CGUIWrapper *Instance; // [esp+4h] [ebp-4h]
 
   Instance = (CGUIWrapper *)CGUIWrapper::GetInstance(this);
-  if ( !Instance
-    && BBSupportDbgReportF(2, "main\\ExtraCD.cpp", 286, "CExtraCD::EnsureMainGUI: couldn't get GUIWrapper!") == 1 )
+  if ( !Instance && BBSupportDbgReportF(2, "main\\ExtraCD.cpp", 286, "CExtraCD::EnsureMainGUI: couldn't get GUIWrapper!") == 1 )
   {
     __debugbreak();
   }
   if ( !a3 && BBSupportDbgReport(2, "main\\ExtraCD.cpp", 288, "_pMenuData") == 1 )
+  {
     __debugbreak();
+  }
   if ( !a6 )
   {
     ActiveGUIGFXFile = CGUIWrapper::GetActiveGUIGFXFile(Instance);
     if ( ActiveGUIGFXFile == a2 )
+    {
       return ActiveGUIGFXFile;
+    }
   }
   LOBYTE(ActiveGUIGFXFile) = CGUIWrapper::RebuildGuiEngineWithGfxFile(Instance, a2, a3, a4, a5);
   if ( (_BYTE)ActiveGUIGFXFile )
+  {
     return ActiveGUIGFXFile;
+  }
   if ( BBSupportDbgReportF(2, "main\\ExtraCD.cpp", 301, "CExtraCD::EnsureMainGUI: couldn't activate Main GUI file!") == 1 )
+  {
     __debugbreak();
+  }
   LOBYTE(ActiveGUIGFXFile) = 0;
   return ActiveGUIGFXFile;
 }
@@ -114,11 +123,17 @@ bool __cdecl CExtraCD::ExistsFiles(wchar_t const * * a1) {
   int v3; // [esp+0h] [ebp-4h]
 
   if ( !a1 )
+  {
     return 0;
-  for ( i = a1; *i; i = (wchar_t **)(v3 + 4) )
+  }
+  for ( i = a1;
+        *i;
+        i = (wchar_t **)(v3 + 4) )
   {
     if ( !(unsigned __int8)CExtraCD::ExistsFile(*i, (int)i) )
+    {
       return 0;
+    }
   }
   return 1;
 }
@@ -148,7 +163,9 @@ void  CExtraCD::LoadMenuData(wchar_t const * FileName) {
   v3 = CFileEx::Size(v7);
   v5 = CFileEx::Read(&v8, this[1], 1, v3, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h", 110);
   if ( v5 != CFileEx::Size(v7) && BBSupportDbgReport(2, "main\\ExtraCD.cpp", 246, "iSize == cFile.Size()") == 1 )
+  {
     __debugbreak();
+  }
   CFileEx::Close((CFileEx *)&v8, UNUSED_ARG(), UNUSED_ARG());
   v9 = -1;
   return CFileEx::~CFileEx(v7);

@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CMushroomFarmerRole::New(std::istream & a1) {
   
   if ( operator new(0x30u) )
+  {
     return CMushroomFarmerRole::CMushroomFarmerRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -51,14 +55,20 @@ void  CMushroomFarmerRole::LogicUpdateJob(class CSettler * a2) {
       return (*(int (__thiscall **)(CMushroomFarmerRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
     case 16:
       if ( *((char *)this + 6) <= (int)*((unsigned __int8 *)this + 7) )
+      {
         v10 = *((char *)this + 6);
+      }
       else
+      {
         v10 = *((unsigned __int8 *)this + 7);
+      }
       *((_BYTE *)this + 6) -= v10;
       if ( *((char *)this + 6) <= 0 )
       {
         if ( !*((_WORD *)this + 17) )
+        {
           return (*(int (__thiscall **)(CMushroomFarmerRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
+        }
         v9 = CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 17));
         ((void (__thiscall *)(IEntity *, int))v9->Decrease)(v9, 1);
         return (*(int (__thiscall **)(CMushroomFarmerRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
@@ -69,9 +79,13 @@ void  CMushroomFarmerRole::LogicUpdateJob(class CSettler * a2) {
       }
     case 25:
       if ( *((char *)this + 6) <= (int)*((unsigned __int8 *)this + 7) )
+      {
         v12 = *((char *)this + 6);
+      }
       else
+      {
         v12 = *((unsigned __int8 *)this + 7);
+      }
       *((_BYTE *)this + 6) -= v12;
       if ( *((char *)this + 6) <= 0 )
       {
@@ -117,14 +131,18 @@ void  CMushroomFarmerRole::UpdateJob(class CSettler * a2) {
       IAnimatedEntity::SetFrame(v3 - *((_WORD *)this + 4));
       result = IAnimatedEntity::Frame(a2);
       if ( result < 0 )
+      {
         return IAnimatedEntity::SetFrame(0);
+      }
       break;
     case 22:
       v4 = IAnimatedEntity::Frame(a2);
       IAnimatedEntity::SetFrame(*((_WORD *)this + 4) + v4);
       result = IAnimatedEntity::Frame(a2);
       if ( result >= *((unsigned __int8 *)this + 7) )
+      {
         return IAnimatedEntity::SetFrame(0);
+      }
       break;
     default:
       return CTrace::Print("MushroomfarmerRole - Update unknown task");
@@ -158,7 +176,9 @@ bool  CMushroomFarmerRole::SetFree(class CSettler * a2, int a3) {
     if ( ISettlerRole::HomeEntityId(this) )
     {
       if ( BBSupportDbgReport(2, "MapObjects\\Settler\\MushroomfarmerRole.cpp", 680, "HomeEntityId() == 0") == 1 )
+      {
         __debugbreak();
+      }
     }
   }
   (*(void (__thiscall **)(struct CSettler *))(*(_DWORD *)a2 + 104))(a2);
@@ -284,7 +304,9 @@ void  CMushroomFarmerRole::GetNextJob(class CSettler * a2) {
   IMovingEntity::IncToDoListIter(a2);
   result = IMovingEntity::IsEndIter(a2);
   if ( !(_BYTE)result )
+  {
     return (*(int (__thiscall **)(CMushroomFarmerRole *, struct CSettler *))(*(_DWORD *)this + 40))(this, a2);
+  }
   *((_BYTE *)this + 4) = 17;
   return result;
 }
@@ -315,9 +337,13 @@ void  CMushroomFarmerRole::TakeJob(class CSettler * a2) {
       v8 = *((__int16 *)this + 8) + Y16X16::UnpackYFast(*((_DWORD *)this + 6));
       *((_DWORD *)this + 6) = Y16X16::PackXYFast(v7, v8);
       if ( *((_BYTE *)this + 4) == 33 )
+      {
         v9 = 0x2000;
+      }
       else
+      {
         v9 = 0;
+      }
       IMovingEntity::WalkToXY(a2, *((_DWORD *)this + 6), v9);
       *((_BYTE *)this + 4) = 6;
       IMovingEntity::SetDisplacementCosts(5);
@@ -362,11 +388,7 @@ void  CMushroomFarmerRole::TakeJob(class CSettler * a2) {
         v5 = (CBuilding *)CBuildingMgr::operator[](v4);
         CBuilding::SettlerEnter(v5, v6);
       }
-      else if ( BBSupportDbgReportF(
-                  2,
-                  "MapObjects\\Settler\\MushroomfarmerRole.cpp",
-                  474,
-                  " m_uHomeEntityId == 0 -> crushed?") == 1 )
+      else if ( BBSupportDbgReportF(2, "MapObjects\\Settler\\MushroomfarmerRole.cpp", 474, " m_uHomeEntityId == 0 -> crushed?") == 1 )
       {
         __debugbreak();
       }
@@ -387,7 +409,7 @@ void  CMushroomFarmerRole::Init(class CSettler * a1) {
 
 
 // address=[0x1579070]
-// Decompiled from _DWORD *__thiscall CMushroomFarmerRole::ConvertEventIntoGoal(  CMushroomFarmerRole *this,  struct CSettler *a2,  struct CEntityEvent *a3)
+// Decompiled from _DWORD *__thiscall CMushroomFarmerRole::ConvertEventIntoGoal(CMushroomFarmerRole *this, struct CSettler *a2, struct CEntityEvent *a3)
 void  CMushroomFarmerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
@@ -420,7 +442,9 @@ void  CMushroomFarmerRole::ConvertEventIntoGoal(class CSettler * a2, class CEnti
   {
     case 1:
       if ( !ISettlerRole::HomeEntityId(this) )
+      {
         goto LABEL_2;
+      }
       v19 = IEntity::Type((unsigned __int16 *)a2);
       v5 = IEntity::Race(a2);
       CSettlerMgr::GetSettlerInfo(v5, v19);
@@ -435,7 +459,9 @@ void  CMushroomFarmerRole::ConvertEventIntoGoal(class CSettler * a2, class CEnti
       break;
     case 2:
       if ( !ISettlerRole::HomeEntityId(this) )
+      {
         goto LABEL_2;
+      }
       v21 = IEntity::Type((unsigned __int16 *)a2);
       v9 = IEntity::Race(a2);
       CSettlerMgr::GetSettlerInfo(v9, v21);

@@ -30,7 +30,7 @@ bool  AdvXMLParser::Reference::IsKindOf(int a2)const {
 
 
 // address=[0x2f23940]
-// Decompiled from struct AdvXMLParser::EntityRef *__cdecl AdvXMLParser::Reference::Parse(  struct AdvXMLParser::Parser *a1,  struct AdvXMLParser::NodeContainer *a2)
+// Decompiled from struct AdvXMLParser::EntityRef *__cdecl AdvXMLParser::Reference::Parse(struct AdvXMLParser::Parser *a1, struct AdvXMLParser::NodeContainer *a2)
 class AdvXMLParser::Reference * __cdecl AdvXMLParser::Reference::Parse(class AdvXMLParser::Parser & a1, class AdvXMLParser::NodeContainer & a2) {
   
   struct AdvXMLParser::CharRef *v3; // eax
@@ -40,7 +40,9 @@ class AdvXMLParser::Reference * __cdecl AdvXMLParser::Reference::Parse(class Adv
   int v7; // [esp+18h] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseChar(a1, 38) )
+  {
     return 0;
+  }
   AdvXMLParser::Parser::PreviousChar(a1);
   v3 = AdvXMLParser::CharRef::Parse(a1, a2);
   std::auto_ptr<AdvXMLParser::Reference>::auto_ptr<AdvXMLParser::Reference>(v3);

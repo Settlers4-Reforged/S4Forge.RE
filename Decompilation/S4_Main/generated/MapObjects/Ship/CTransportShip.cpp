@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CTransportShip::New(std::istream & a1) {
   
   if ( CTransportShip::operator new(0x12Cu) )
+  {
     return CTransportShip::CTransportShip(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -51,7 +55,9 @@ void  CTransportShip::FillDialog(bool a2) {
   int v6; // [esp+34h] [ebp-4h]
 
   byte_3F1E881 = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     MEMORY[0x3F1E790][3 * i] = *((_DWORD *)this + 3 * i + 49);
     MEMORY[0x3F1E794][3 * i] = *((_DWORD *)this + 3 * i + 50);
@@ -59,7 +65,9 @@ void  CTransportShip::FillDialog(bool a2) {
   MEMORY[0x3F1E78C] = 22;
   v3 = 604;
   if ( !a2 )
+  {
     v3 = 602;
+  }
   CEvn_Event::CEvn_Event(&v5, v3, 0, (unsigned int)&g_cVehicleLoadInfo, 0);
   v6 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v5);
@@ -76,10 +84,14 @@ int  CTransportShip::GetGoodAmount(int a2) {
   int i; // [esp+8h] [ebp-4h]
 
   v3 = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( *((_DWORD *)this + 3 * i + 49) == a2 )
+    {
       v3 += *((_DWORD *)this + 3 * i + 50);
+    }
   }
   return v3;
 }
@@ -94,28 +106,40 @@ int  CTransportShip::AddGood(int a2, int a3) {
   int i; // [esp+14h] [ebp-4h]
   int j; // [esp+14h] [ebp-4h]
 
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( *((_DWORD *)this + 3 * i + 49) == a2 && *((_DWORD *)this + 3 * i + 50) != 8 )
     {
       if ( 8 - *((_DWORD *)this + 3 * i + 50) >= a3 )
+      {
         v5 = a3;
+      }
       else
+      {
         v5 = 8 - *((_DWORD *)this + 3 * i + 50);
+      }
       *((_DWORD *)this + 3 * i + 50) += v5;
       a3 -= v5;
     }
   }
   if ( a3 )
   {
-    for ( j = 0; j < 8; ++j )
+    for ( j = 0;
+          j < 8;
+          ++j )
     {
       if ( !*((_DWORD *)this + 3 * j + 49) && a3 )
       {
         if ( a3 <= 8 )
+        {
           v4 = a3;
+        }
         else
+        {
           v4 = 8;
+        }
         *((_DWORD *)this + 3 * j + 50) += v4;
         *((_DWORD *)this + 3 * j + 49) = a2;
         a3 -= v4;
@@ -123,7 +147,9 @@ int  CTransportShip::AddGood(int a2, int a3) {
     }
   }
   if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  {
     (*(void (__thiscall **)(CTransportShip *, int))(*(_DWORD *)this + 148))(this, 1);
+  }
   return a3;
 }
 
@@ -135,22 +161,32 @@ int  CTransportShip::RemoveGood(int a2, int a3) {
   int v4; // [esp+8h] [ebp-Ch]
   int i; // [esp+10h] [ebp-4h]
 
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( *((_DWORD *)this + 3 * i + 49) == a2 )
     {
       if ( *((_DWORD *)this + 3 * i + 50) >= a3 )
+      {
         v4 = a3;
+      }
       else
+      {
         v4 = *((_DWORD *)this + 3 * i + 50);
+      }
       *((_DWORD *)this + 3 * i + 50) -= v4;
       if ( !*((_DWORD *)this + 3 * i + 50) )
+      {
         *((_DWORD *)this + 3 * i + 49) = 0;
+      }
       a3 -= v4;
     }
   }
   if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  {
     (*(void (__thiscall **)(CTransportShip *, int))(*(_DWORD *)this + 148))(this, 1);
+  }
   return a3;
 }
 
@@ -161,12 +197,18 @@ bool  CTransportShip::IsSpaceAvailable(int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( !*((_DWORD *)this + 3 * i + 49) )
+    {
       return 1;
+    }
     if ( *((_DWORD *)this + 3 * i + 49) == a2 && 8 - *((_DWORD *)this + 3 * i + 50) > 0 )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -180,10 +222,14 @@ int  CTransportShip::GetAvailableSpace(int a2) {
   int i; // [esp+8h] [ebp-4h]
 
   v3 = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( *((_DWORD *)this + 3 * i + 49) == a2 && 8 - *((_DWORD *)this + 3 * i + 50) > 0 )
+    {
       v3 += 8 - *((_DWORD *)this + 3 * i + 50);
+    }
   }
   return v3;
 }
@@ -197,10 +243,14 @@ int  CTransportShip::GetAvailableSpace(void) {
   int i; // [esp+8h] [ebp-4h]
 
   v2 = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( !*((_DWORD *)this + 3 * i + 49) )
+    {
       v2 += 8;
+    }
   }
   return v2;
 }
@@ -219,24 +269,36 @@ bool  CTransportShip::IsFull(void) {
   {
     v3 = 0;
     v2 = 0;
-    for ( i = 0; i < 8; ++i )
+    for ( i = 0;
+          i < 8;
+          ++i )
     {
       if ( *((int *)this + 3 * i + 50) > 0 )
+      {
         ++v2;
+      }
       v3 += *((_DWORD *)this + 3 * i + 50);
       if ( v3 >= 16 || v2 >= 2 )
+      {
         return 1;
+      }
     }
     return 0;
   }
   else
   {
-    for ( j = 0; j < 8; ++j )
+    for ( j = 0;
+          j < 8;
+          ++j )
     {
       if ( !*((_DWORD *)this + 3 * j + 49) )
+      {
         return 0;
+      }
       if ( 8 - *((_DWORD *)this + 3 * j + 50) > 0 )
+      {
         return 0;
+      }
     }
     return 1;
   }
@@ -251,8 +313,12 @@ bool  CTransportShip::HasLoadedSomething(void) {
   bool v3; // [esp+Bh] [ebp-1h]
 
   v3 = 0;
-  for ( i = 0; i < 8 && !v3; ++i )
+  for ( i = 0;
+        i < 8 && !v3;
+        ++i )
+  {
     v3 = *((_DWORD *)this + 3 * i + 50) != 0;
+  }
   return v3;
 }
 
@@ -263,10 +329,14 @@ bool  CTransportShip::HasLoadGood(enum PILE_TYPES a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( this[3 * i + 50] > 0 && this[3 * i + 49] == a2 )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -437,8 +507,7 @@ void  CTransportShip::ShipArrived(void) {
       v9 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 44));
       if ( v9 )
       {
-        if ( IEntity::Type((unsigned __int16 *)v9) != 32
-          && BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 743, "pBuilding->Type() == BUILDING_PORT") == 1 )
+        if ( IEntity::Type((unsigned __int16 *)v9) != 32 && BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 743, "pBuilding->Type() == BUILDING_PORT") == 1 )
         {
           __debugbreak();
         }
@@ -470,10 +539,14 @@ void  CTransportShip::MoveToTarget(void) {
   v6 = this;
   result = this;
   if ( !*((_DWORD *)this + 43) )
+  {
     return result;
+  }
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)v6 + 43));
   if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 771, "pTargetBuilding") == 1 )
+  {
     __debugbreak();
+  }
   WorkingAreaPackedXY = (Y16X16 *)CBuilding::GetWorkingAreaPackedXY(BuildingPtr);
   Y16X16::UnpackXYFast(WorkingAreaPackedXY, &v3, &v4);
   CTransportShip::SetGoToSource(v6, 0);
@@ -487,7 +560,9 @@ void  CTransportShip::MoveToTarget(void) {
 void  CTransportShip::SetFree(void) {
   
   if ( CTransportShip::HasLoadedSomething(this) )
+  {
     CTransportShip::DropGoods(this);
+  }
 }
 
 
@@ -498,11 +573,15 @@ void  CTransportShip::DropGoods(void) {
   int GoodAmount; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < 43; ++i )
+  for ( i = 0;
+        i < 43;
+        ++i )
   {
     GoodAmount = CTransportShip::GetGoodAmount(this, i);
     if ( GoodAmount )
+    {
       CTransportShip::RemoveGood(this, i, GoodAmount);
+    }
   }
   return IEntity::ClearFlagBits(this, ENTITY_FLAG_VulnerableMask);
 }
@@ -575,13 +654,10 @@ void  CTransportShip::SetHomeID(int a2) {
   unsigned __int8 *v4; // [esp+4h] [ebp-4h]
 
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 812, "_iHomeBuildingID!=0") == 1 )
+  {
     __debugbreak();
-  if ( !CMapObjectMgr::ValidEntityId(a2)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Ship\\TransportShip.cpp",
-         813,
-         "g_pMapObjectMgr->ValidEntityId(_iHomeBuildingID)") == 1 )
+  }
+  if ( !CMapObjectMgr::ValidEntityId(a2) && BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 813, "g_pMapObjectMgr->ValidEntityId(_iHomeBuildingID)") == 1 )
   {
     __debugbreak();
   }
@@ -591,10 +667,14 @@ void  CTransportShip::SetHomeID(int a2) {
   {
     result = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 815, "pBuilding!=NULL");
     if ( result == (unsigned __int8 *)1 )
+    {
       __debugbreak();
+    }
   }
   if ( !v4 )
+  {
     return result;
+  }
   result = (unsigned __int8 *)CBuilding::EnsignPackedXY(v4);
   *((_DWORD *)this + 45) = result;
   return result;
@@ -666,11 +746,15 @@ void  CTransportShip::VehicleLogicUpdate(void) {
   {
     v10 = CShip::RepairBuildingInRange(this);
     if ( v10 )
+    {
       CShip::RepairAt(this, v10);
+    }
     *((_DWORD *)this + 42) = TickCounter;
   }
   if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  {
     (*(void (__thiscall **)(CTransportShip *, int))(*(_DWORD *)this + 148))(this, 1);
+  }
   v11 = *((_BYTE *)this + 107);
   switch ( v11 )
   {
@@ -695,9 +779,13 @@ void  CTransportShip::VehicleLogicUpdate(void) {
       break;
   }
   if ( *((unsigned __int8 *)this + 107) != *((unsigned __int8 *)this + 192) && *((_BYTE *)this + 192) == 6 )
+  {
     CTransportShip::ShipArrived(this);
+  }
   if ( (*((_BYTE *)this + 104) & 0x40) != 0 )
+  {
     CTransportShip::TargetHarbourDestroyed(this);
+  }
   result = this;
   *((_BYTE *)this + 192) = *((_BYTE *)this + 107);
   return result;
@@ -711,9 +799,13 @@ void  CTransportShip::ConvertEventIntoGoal(class CEntityEvent * a2) {
   if ( *((_DWORD *)a2 + 1) == 9 || *((_DWORD *)a2 + 1) == 7 )
   {
     if ( *((_DWORD *)a2 + 3) == *((_DWORD *)this + 43) )
+    {
       CTransportShip::TargetHarbourDestroyed(this);
+    }
     if ( *((_DWORD *)a2 + 3) == *((_DWORD *)this + 44) )
+    {
       CTransportShip::DepartHarbourDestroyed(this);
+    }
   }
   CVehicle::ConvertEventIntoGoal(this, a2);
 }
@@ -738,7 +830,9 @@ struct SGfxObjectInfo *  CTransportShip::GetGfxInfos(void) {
   
   CShip::GetGfxInfos((int)this);
   if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  {
     MEMORY[0x40FE264] = CShip::GetHealthDisplayID(this);
+  }
   return &IEntity::m_sGfxInfo;
 }
 
@@ -839,7 +933,9 @@ void __cdecl CTransportShip::operator delete(void * a1) {
       operator^<bool>(a2, v11 + 185);
       operator^<int>(a2, (int)(v11 + 188));
       operator^<unsigned char>(a2, v11 + 192);
-      for ( i = 0; i < 8; ++i )
+      for ( i = 0;
+            i < 8;
+            ++i )
       {
         operator^<int>(a2, (int)&v11[12 * i + 200]);
         operator^<int>(a2, (int)&v11[12 * i + 204]);
@@ -854,7 +950,9 @@ void __cdecl CTransportShip::operator delete(void * a1) {
       operator^<bool>(a2, v11 + 185);
       operator^<int>(a2, (int)(v11 + 188));
       operator^<unsigned char>(a2, v11 + 192);
-      for ( j = 0; j < 8; ++j )
+      for ( j = 0;
+            j < 8;
+            ++j )
       {
         operator^<int>(a2, (int)&v11[12 * j + 200]);
         operator^<int>(a2, (int)&v11[12 * j + 204]);
@@ -870,7 +968,9 @@ void __cdecl CTransportShip::operator delete(void * a1) {
       operator^<bool>(a2, v11 + 185);
       operator^<int>(a2, (int)(v11 + 188));
       operator^<unsigned char>(a2, v11 + 192);
-      for ( k = 0; k < 8; ++k )
+      for ( k = 0;
+            k < 8;
+            ++k )
       {
         operator^<int>(a2, (int)&v11[12 * k + 200]);
         operator^<int>(a2, (int)&v11[12 * k + 204]);
@@ -888,7 +988,9 @@ void __cdecl CTransportShip::operator delete(void * a1) {
       operator^<bool>(a2, v11 + 185);
       operator^<int>(a2, (int)(v11 + 188));
       operator^<unsigned char>(a2, v11 + 192);
-      for ( m = 0; m < 8; ++m )
+      for ( m = 0;
+            m < 8;
+            ++m )
       {
         operator^<int>(a2, (int)&v11[12 * m + 200]);
         operator^<int>(a2, (int)&v11[12 * m + 204]);
@@ -929,7 +1031,9 @@ void  CTransportShip::Store(std::ostream & a2) {
   operator^<bool>((int)a2, (int)v6 + 185);
   operator^<int>((int)a2, v6 + 47);
   operator^<unsigned char>(a2, (int)(v6 + 48));
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     operator^<int>((int)a2, &v6[3 * i + 50]);
     operator^<int>((int)a2, &v6[3 * i + 51]);
@@ -954,7 +1058,7 @@ unsigned long  CTransportShip::ClassID(void)const {
 // [Decompilation failed for static unsigned long CTransportShip::m_iClassID]
 
 // address=[0x15a01e0]
-// Decompiled from CTransportShip *__thiscall CTransportShip::CTransportShip(  CTransportShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
+// Decompiled from CTransportShip *__thiscall CTransportShip::CTransportShip(CTransportShip *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
  CTransportShip::CTransportShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   int i; // [esp+0h] [ebp-8h]
@@ -965,7 +1069,9 @@ unsigned long  CTransportShip::ClassID(void)const {
   *((_DWORD *)this + 73) = 0;
   *((_BYTE *)this + 296) = 0;
   *((_BYTE *)this + 192) = *((_BYTE *)this + 107);
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     *((_DWORD *)this + 3 * i + 49) = 0;
     *((_DWORD *)this + 3 * i + 50) = 0;

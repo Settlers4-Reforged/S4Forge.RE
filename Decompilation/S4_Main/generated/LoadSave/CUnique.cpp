@@ -32,12 +32,9 @@ class CUnique & __cdecl CUnique::GetObjectA(unsigned long a1) {
   int v3; // [esp+10h] [ebp-10h]
   int v4; // [esp+1Ch] [ebp-4h]
 
-  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find(
-    v2,
-    &a1);
+  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find(v2, &a1);
   v4 = 0;
-  v3 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator*(v2)
-                 + 4);
+  v3 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator*(v2) + 4);
   v4 = -1;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>(v2);
   return v3;
@@ -57,9 +54,7 @@ class CUnique * __cdecl CUnique::GetObjectPtr(unsigned long a1) {
   char v8; // [esp+2Fh] [ebp-Dh]
   int v9; // [esp+38h] [ebp-4h]
 
-  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find(
-    v3,
-    &a1);
+  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find(v3, &a1);
   v9 = 0;
   v7 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::end(v2);
   v6 = v7;
@@ -76,8 +71,7 @@ class CUnique * __cdecl CUnique::GetObjectPtr(unsigned long a1) {
   }
   else
   {
-    v4 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator*(v3)
-                   + 4);
+    v4 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator*(v3) + 4);
     v9 = -1;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>(v3);
     return v4;
@@ -104,9 +98,7 @@ class CUnique * __cdecl CUnique::GetNextObjectPtr(unsigned long a1) {
   char v14; // [esp+53h] [ebp-Dh]
   int v15; // [esp+5Ch] [ebp-4h]
 
-  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find(
-    v5,
-    &a1);
+  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find(v5, &a1);
   v15 = 0;
   v12 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::end(v4);
   v11 = v12;
@@ -123,9 +115,7 @@ class CUnique * __cdecl CUnique::GetNextObjectPtr(unsigned long a1) {
   }
   else
   {
-    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator++(
-      v3,
-      0);
+    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator++(v3, 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>(v3);
     v9 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::end(v2);
     v8 = v9;
@@ -142,8 +132,7 @@ class CUnique * __cdecl CUnique::GetNextObjectPtr(unsigned long a1) {
     }
     else
     {
-      v6 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator*(v5)
-                     + 4);
+      v6 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator*(v5) + 4);
       v15 = -1;
       std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>(v5);
       return v6;
@@ -182,8 +171,7 @@ class CUnique * __cdecl CUnique::GetFirstObjectPtr(void) {
   }
   else
   {
-    v3 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator*(v2)
-                   + 4);
+    v3 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator*(v2) + 4);
     v8 = -1;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>(v2);
     return v3;
@@ -199,7 +187,9 @@ void __cdecl CUnique::Init(std::istream & a1) {
 
   result = (unsigned __int8)std::ios_base::operator bool(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1);
   if ( !(_BYTE)result )
+  {
     return result;
+  }
   result = CPersistence::LOAD_ID(a1);
   CUnique::_NextObjID = result;
   return result;

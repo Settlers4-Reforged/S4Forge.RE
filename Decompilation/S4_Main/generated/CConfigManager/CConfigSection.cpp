@@ -41,19 +41,23 @@
     v11 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator!=(v2);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>(v3);
     if ( !v11 )
+    {
       break;
-    v9 = *(CConfigVar **)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v5)
-                        + 28);
+    }
+    v9 = *(CConfigVar **)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v5) + 28);
     if ( v9 && !CConfigVar::Static(v9) )
     {
       v7 = v9;
       v8 = v9;
       if ( v9 )
+      {
         v6 = ((int (__thiscall *)(CConfigVar *, int))v8->j_??_ECConfigVar@@EAEPAXI@Z)(v8, 1);
+      }
       else
+      {
         v6 = 0;
-      *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v5)
-                + 28) = 0;
+      }
+      *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v5) + 28) = 0;
     }
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator++(v5);
   }
@@ -75,9 +79,7 @@ bool  CConfigSection::VarExists(std::string const & a2) {
   char v8; // [esp+2Bh] [ebp-Dh]
   int v9; // [esp+34h] [ebp-4h]
 
-  std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::find(
-    (int)v4,
-    (int)a2);
+  std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::find((int)v4, (int)a2);
   v9 = 0;
   v6 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::end((int)v3);
   v5 = v6;
@@ -109,38 +111,42 @@ void  CConfigSection::AddVar(std::string const & a2, int const * Src, int a4) {
       if ( v6 )
       {
         if ( Src )
+        {
           return (int *)memcpy(v6, Src, 4 * a4);
+        }
         else
+        {
           return (int *)memset(v6, 0, 4 * a4);
+        }
       }
       else
       {
-        result = (int *)BBSupportDbgReport(
-                          1,
-                          "Source\\ConfigManager\\ConfigManager.cpp",
-                          254,
-                          "CConfigSection::AddVar() [int array]: Invalid int array pointer!");
+        result = (int *)BBSupportDbgReport(1, "Source\\ConfigManager\\ConfigManager.cpp", 254, "CConfigSection::AddVar() [int array]: Invalid int array pointer!");
         if ( result == (int *)1 )
+        {
           __debugbreak();
+        }
       }
     }
     else
     {
-      if ( BBSupportDbgReport(
-             1,
-             "Source\\ConfigManager\\ConfigManager.cpp",
-             259,
-             "CConfigSection::AddVar() [int array]: Config var type / size mismatch!") == 1 )
+      if ( BBSupportDbgReport(1, "Source\\ConfigManager\\ConfigManager.cpp", 259, "CConfigSection::AddVar() [int array]: Config var type / size mismatch!") == 1 )
+      {
         __debugbreak();
+      }
       return 0;
     }
   }
   else
   {
     if ( operator new(0xCu, 1, "Source\\ConfigManager\\ConfigManager.cpp", 231) )
+    {
       v5 = CConfigVarIntArray::CConfigVarIntArray((void *)Src, a4);
+    }
     else
+    {
       v5 = 0;
+    }
     result = (int *)std::map<std::string,CConfigVar *>::operator[](a2);
     *result = v5;
   }
@@ -165,9 +171,13 @@ void  CConfigSection::AddVar(std::string const & a2, int a3) {
   {
     C = (CConfigVarInt *)operator new(0xCu, 1, "Source\\ConfigManager\\ConfigManager.cpp", 277);
     if ( C )
+    {
       v4 = CConfigVarInt::CConfigVarInt(C, a3);
+    }
     else
+    {
       v4 = 0;
+    }
     *(_DWORD *)std::map<std::string,CConfigVar *>::operator[](&this->m_mConfigs, (int)a2) = v4;
   }
 }
@@ -190,9 +200,13 @@ void  CConfigSection::AddVar(std::string const & a2, float a3) {
   {
     C = (CConfigVarFloat *)operator new(0xCu, 1, "Source\\ConfigManager\\ConfigManager.cpp", 300);
     if ( C )
+    {
       v4 = CConfigVarFloat::CConfigVarFloat(C, a3);
+    }
     else
+    {
       v4 = 0;
+    }
     *(_DWORD *)std::map<std::string,CConfigVar *>::operator[](&this->m_mConfigs, (int)a2) = v4;
   }
 }
@@ -215,9 +229,13 @@ void  CConfigSection::AddVar(std::string const & a2, std::string const & a3) {
   {
     C = (CConfigVarString *)operator new(0x24u, 1, "Source\\ConfigManager\\ConfigManager.cpp", 323);
     if ( C )
+    {
       v4 = CConfigVarString::CConfigVarString(C, (int)a3);
+    }
     else
+    {
       v4 = 0;
+    }
     *(_DWORD *)std::map<std::string,CConfigVar *>::operator[](&this->m_mConfigs, (int)a2) = v4;
   }
 }
@@ -229,12 +247,10 @@ void  CConfigSection::AddStaticConfigVar(std::string const & a2, class CConfigVa
   
   if ( CConfigSection::GetVar(this, a2) )
   {
-    if ( BBSupportDbgReport(
-           1,
-           "Source\\ConfigManager\\ConfigManager.cpp",
-           348,
-           "CConfigSection::AddStaticConfigVar(): Static config var already exists!") == 1 )
+    if ( BBSupportDbgReport(1, "Source\\ConfigManager\\ConfigManager.cpp", 348, "CConfigSection::AddStaticConfigVar(): Static config var already exists!") == 1 )
+    {
       __debugbreak();
+    }
   }
   else
   {
@@ -324,9 +340,10 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
     LOBYTE(v47) = 5;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>(v25);
     if ( !v40 )
+    {
       break;
-    v41 = *(CConfigVar **)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v32)
-                         + 28);
+    }
+    v41 = *(CConfigVar **)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v32) + 28);
     v5 = CConfigVar::Type(v41);
     v37 = v5 - 1;
     switch ( v5 )
@@ -348,7 +365,9 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
           sprintf(spFileContentBuffer, "    %s[%d] = ", v9, v21);
           v10 = strlen(spFileContentBuffer);
           CFile::Write(&pConfigFile, spFileContentBuffer, ElementSize, v10, UNUSED_ARG(), UNUSED_ARG());
-          for ( i = 0; i < v35 - 1; ++i )
+          for ( i = 0;
+                i < v35 - 1;
+                ++i )
           {
             sprintf(spFileContentBuffer, "%d,", *(_DWORD *)(v33 + 4 * i));
             v11 = strlen(spFileContentBuffer);
@@ -367,9 +386,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
         sprintf(spFileContentBuffer, "    %s = %f\r\n", v14, v19);
         break;
       case 4:
-        v27 = (void *)((int (__thiscall *)(CConfigVar *, _BYTE *))v41->j_?GetStringValue@CConfigVar@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ)(
-                        v41,
-                        v42);
+        v27 = (void *)((int (__thiscall *)(CConfigVar *, _BYTE *))v41->j_?GetStringValue@CConfigVar@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ)(v41, v42);
         std::string::operator=(&v43, v27);
         std::string::~string(v42);
         v22 = std::string::c_str(&v43);
@@ -383,9 +400,7 @@ bool  CConfigSection::Save(wchar_t const * FileName) {
     }
     v17 = strlen(spFileContentBuffer);
     CFile::Write(&pConfigFile, spFileContentBuffer, ElementSize, v17, UNUSED_ARG(), UNUSED_ARG());
-    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator++(
-      v24,
-      0);
+    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator++(v24, 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>(v24);
   }
   CFile::Write(&pConfigFile, "}\r\n", ElementSize, 1, UNUSED_ARG(), UNUSED_ARG());
@@ -414,9 +429,7 @@ class CConfigVar *  CConfigSection::GetVar(std::string const & a2) {
   char v10; // [esp+33h] [ebp-Dh]
   int v11; // [esp+3Ch] [ebp-4h]
 
-  std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::find(
-    (int)v4,
-    (int)a2);
+  std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::find((int)v4, (int)a2);
   v11 = 0;
   v8 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::end((int)v3);
   v7 = v8;
@@ -426,8 +439,7 @@ class CConfigVar *  CConfigSection::GetVar(std::string const & a2) {
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>(v3);
   if ( v10 )
   {
-    v6 = *(CConfigVar **)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v4)
-                        + 28);
+    v6 = *(CConfigVar **)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::operator*((std::_Iterator_base12 *)v4) + 28);
     v11 = -1;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,CConfigVar *>>>>(v4);
     return v6;
@@ -454,9 +466,7 @@ std::string const &  CConfigSection::Name(void) {
 // Decompiled from int __thiscall CConfigSection::NumberOfEntries(CConfigSection *this)
 int  CConfigSection::NumberOfEntries(void) {
   
-  return std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::size(
-           &this->m_mConfigs,
-           this);
+  return std::_Tree<std::_Tmap_traits<std::string,CConfigVar *,std::less<std::string>,std::allocator<std::pair<std::string const,CConfigVar *>>,0>>::size(&this->m_mConfigs, this);
 }
 
 

@@ -97,7 +97,7 @@ void  CAIDarkTribeSectorAI::Execute(void) {
 
 
 // address=[0x1322690]
-// Decompiled from char __thiscall CAIDarkTribeSectorAI::FindMushroomFarm(  CAIDarkTribeSectorAI *this,  struct _Cnd_internal_imp_t **a2,  struct _Mtx_internal_imp_t **a3,  int a4,  int a5)
+// Decompiled from char __thiscall CAIDarkTribeSectorAI::FindMushroomFarm(CAIDarkTribeSectorAI *this, struct _Cnd_internal_imp_t **a2, struct _Mtx_internal_imp_t **a3, int a4, int a5)
 bool  CAIDarkTribeSectorAI::FindMushroomFarm(int & a2, int & a3, int a4, int a5) {
   
   pairNode *v6; // eax
@@ -126,7 +126,9 @@ bool  CAIDarkTribeSectorAI::FindMushroomFarm(int & a2, int & a3, int a4, int a5)
   v18 = *a3;
   v19 = IAIEnvironment::WorldSectorId((int)*a2, (int)*a3);
   if ( v19 <= 0 )
+  {
     return 0;
+  }
   v6 = (pairNode *)CAISectorAI::PlayerAI(this);
   v7 = CAIPlayerAI::PlayerId(v6);
   v16 = IAIEnvironment::AlliancesAllianceId(v7);
@@ -134,7 +136,9 @@ bool  CAIDarkTribeSectorAI::FindMushroomFarm(int & a2, int & a3, int a4, int a5)
   v13 = -1048576;
   v8 = (pairNode *)CAISectorAI::PlayerAI(this);
   v9 = CAIPlayerAI::PlayerId(v8);
-  for ( i = IAIEnvironment::BuildingGetFirstBuildingId(v9, 49); i; i = IAIEnvironment::BuildingGetNextBuildingOfSameType(i) )
+  for ( i = IAIEnvironment::BuildingGetFirstBuildingId(v9, 49);
+        i;
+        i = IAIEnvironment::BuildingGetNextBuildingOfSameType(i) )
   {
     IAIEnvironment::BuildingGetEnsignPosition(i, (int *)&v26, (int *)&v23);
     if ( IAIEnvironment::WorldSectorId((int)v26, (int)v23) == v19 )
@@ -148,15 +152,21 @@ bool  CAIDarkTribeSectorAI::FindMushroomFarm(int & a2, int & a3, int a4, int a5)
       v25 = IAIEnvironment::GridDistance((char *)v26 - v11, v12);
       v27 = IAIEnvironment::Rand() % 0x20u - v21 - v14 / 2 + 4 * v15 - v25 / 8;
       if ( v21 < a4 )
+      {
         v27 -= 8 * (a4 - v21);
+      }
       if ( v14 <= 16 && v15 > 0 )
       {
         v27 += 50;
         if ( v25 < 50 )
+        {
           v27 += 50 - v25;
+        }
       }
       if ( v25 > a5 )
+      {
         v27 -= 32 * (v25 - a5);
+      }
       if ( v27 > v13 )
       {
         v13 = v27;
@@ -165,7 +175,9 @@ bool  CAIDarkTribeSectorAI::FindMushroomFarm(int & a2, int & a3, int a4, int a5)
     }
   }
   if ( !v20 )
+  {
     return 0;
+  }
   IAIEnvironment::BuildingGetEnsignPosition(v20, (int *)a2, (int *)a3);
   return 1;
 }
@@ -188,7 +200,7 @@ bool  CAIDarkTribeSectorAI::IsNormalPlayerSector(void)const {
 
 
 // address=[0x1321d50]
-// Decompiled from CAIDarkTribeSectorAI *__thiscall CAIDarkTribeSectorAI::CAIDarkTribeSectorAI(  CAIDarkTribeSectorAI *this,  pairNode *a2,  int a3)
+// Decompiled from CAIDarkTribeSectorAI *__thiscall CAIDarkTribeSectorAI::CAIDarkTribeSectorAI(CAIDarkTribeSectorAI *this, pairNode *a2, int a3)
  CAIDarkTribeSectorAI::CAIDarkTribeSectorAI(class CAIPlayerAI & a2, int a3) {
   
   struct IAIDarkTribeEcoAI *EcoAI; // eax
@@ -220,8 +232,7 @@ bool  CAIDarkTribeSectorAI::IsNormalPlayerSector(void)const {
   CAITaskForceReservoir::CAITaskForceReservoir((std::bad_function_call *)((char *)v6 + 940), *((_DWORD *)a2 + 3));
   CAIEventQueue::CAIEventQueue((std::bad_function_call *)((char *)v6 + 1020));
   LOBYTE(v7) = 14;
-  if ( CAIPlayerAI::Race(a2) != 3
-    && BBSupportDbgReport(2, "AI\\AI_SectorAIDark.cpp", 51, "_rPlayerAI.Race() == RACE_DARK") == 1 )
+  if ( CAIPlayerAI::Race(a2) != 3 && BBSupportDbgReport(2, "AI\\AI_SectorAIDark.cpp", 51, "_rPlayerAI.Race() == RACE_DARK") == 1 )
   {
     __debugbreak();
   }
@@ -239,52 +250,32 @@ bool  CAIDarkTribeSectorAI::IsNormalPlayerSector(void)const {
   *((_DWORD *)v6 + 12) = (char *)v6 + 780;
   *((_DWORD *)v6 + 17) = (char *)v6 + 860;
   if ( a3 <= 0 )
+  {
     return v6;
+  }
   *((_DWORD *)v6 + 58) = a3;
   *((_DWORD *)v6 + 61) = a3;
-  if ( IAIEnvironment::EntityObjectType(a3) != 8
-    && BBSupportDbgReport(
-         2,
-         "AI\\AI_SectorAIDark.cpp",
-         75,
-         "g_pAIEnv->EntityObjectType(_iHeadquarterId) == BUILDING_OBJ") == 1 )
+  if ( IAIEnvironment::EntityObjectType(a3) != 8 && BBSupportDbgReport(2, "AI\\AI_SectorAIDark.cpp", 75, "g_pAIEnv->EntityObjectType(_iHeadquarterId) == BUILDING_OBJ") == 1 )
   {
     __debugbreak();
   }
-  if ( IAIEnvironment::EntityType(a3) != 50
-    && IAIEnvironment::EntityType(a3) != 51
-    && BBSupportDbgReport(
-         2,
-         "AI\\AI_SectorAIDark.cpp",
-         76,
-         "(g_pAIEnv->EntityType(_iHeadquarterId) == BUILDING_DARKTEMPLE) || (g_pAIEnv->EntityType(_iHeadquarterId) == BUILDING_FORTRESS)") == 1 )
+  if ( IAIEnvironment::EntityType(a3) != 50 && IAIEnvironment::EntityType(a3) != 51 && BBSupportDbgReport(2, "AI\\AI_SectorAIDark.cpp", 76, "(g_pAIEnv->EntityType(_iHeadquarterId) == BUILDING_DARKTEMPLE) || (g_pAIEnv->EntityType(_iHeadquarterId) == BUILDING_FORTRESS)") == 1 )
   {
     __debugbreak();
   }
   IAIEnvironment::EntityGetPosition(a3, (int *)v6 + 59, (int *)v6 + 60);
   IAIEnvironment::BuildingGetEnsignPosition(a3, (int *)v6 + 62, (int *)v6 + 63);
-  if ( !IAIEnvironment::WorldInWorld(*((_DWORD *)v6 + 59), *((_DWORD *)v6 + 60))
-    && BBSupportDbgReport(
-         2,
-         "AI\\AI_SectorAIDark.cpp",
-         81,
-         "g_pAIEnv->WorldInWorld(m_sHeadquarterData.m_iOriginalBaseX, m_sHeadquarterData.m_iOriginalBaseY)") == 1 )
+  if ( !IAIEnvironment::WorldInWorld(*((_DWORD *)v6 + 59), *((_DWORD *)v6 + 60)) && BBSupportDbgReport(2, "AI\\AI_SectorAIDark.cpp", 81, "g_pAIEnv->WorldInWorld(m_sHeadquarterData.m_iOriginalBaseX, m_sHeadquarterData.m_iOriginalBaseY)") == 1 )
   {
     __debugbreak();
   }
-  if ( !IAIEnvironment::WorldInWorld(*((_DWORD *)v6 + 62), *((_DWORD *)v6 + 63))
-    && BBSupportDbgReport(
-         2,
-         "AI\\AI_SectorAIDark.cpp",
-         82,
-         "g_pAIEnv->WorldInWorld(m_sHeadquarterData.m_iCurrentBaseX, m_sHeadquarterData.m_iCurrentBaseY)") == 1 )
+  if ( !IAIEnvironment::WorldInWorld(*((_DWORD *)v6 + 62), *((_DWORD *)v6 + 63)) && BBSupportDbgReport(2, "AI\\AI_SectorAIDark.cpp", 82, "g_pAIEnv->WorldInWorld(m_sHeadquarterData.m_iCurrentBaseX, m_sHeadquarterData.m_iCurrentBaseY)") == 1 )
   {
     __debugbreak();
   }
   *((_DWORD *)v6 + 64) = IAIEnvironment::WorldIndex(*((_DWORD *)v6 + 62), *((_DWORD *)v6 + 63));
   *((_DWORD *)v6 + 65) = IAIEnvironment::WorldSectorId(*((_DWORD *)v6 + 64));
-  if ( *((int *)v6 + 65) <= 0
-    && BBSupportDbgReport(2, "AI\\AI_SectorAIDark.cpp", 87, "m_sHeadquarterData.m_iCurrentSectorId > 0") == 1 )
+  if ( *((int *)v6 + 65) <= 0 && BBSupportDbgReport(2, "AI\\AI_SectorAIDark.cpp", 87, "m_sHeadquarterData.m_iCurrentSectorId > 0") == 1 )
   {
     __debugbreak();
   }
@@ -293,7 +284,9 @@ bool  CAIDarkTribeSectorAI::IsNormalPlayerSector(void)const {
   EcoAI = IAIDarkTribeEcoAI::CreateEcoAI((const struct SAIDarkTribeEcoAIParams *)v5);
   *((_DWORD *)v6 + 261) = EcoAI;
   if ( !*((_DWORD *)v6 + 261) && BBSupportDbgReport(2, "AI\\AI_SectorAIDark.cpp", 98, "m_pEcoAI != 0") == 1 )
+  {
     __debugbreak();
+  }
   return v6;
 }
 
@@ -312,7 +305,9 @@ bool  CAIDarkTribeSectorAI::ProcessEvent(class CAIEvent const * a2) {
   bool v11; // [esp+26h] [ebp-2h]
 
   if ( !a2 && BBSupportDbgReport(2, "AI\\AI_SectorAIDark.cpp", 241, "_pEvent != 0") == 1 )
+  {
     __debugbreak();
+  }
   v9 = CAIEvent::Type(a2);
   switch ( v9 )
   {
@@ -324,9 +319,13 @@ bool  CAIDarkTribeSectorAI::ProcessEvent(class CAIEvent const * a2) {
       v8 = CAIEvent::Data2(a2);
       v6 = CAIEvent::Data3(a2);
       if ( v8 <= 0 )
+      {
         v7 = 0;
+      }
       else
+      {
         v7 = IAIEnvironment::AlliancesPlayerBit(v8);
+      }
       CAIAgentDarkTribeAttack::AttackWithShamans((CAIAgentDarkTribeAttack *)(this + 66), v7, v6, 1);
       return 1;
     case 29:
@@ -342,7 +341,7 @@ bool  CAIDarkTribeSectorAI::ProcessEvent(class CAIEvent const * a2) {
 
 
 // address=[0x1322a00]
-// Decompiled from void __thiscall CAIDarkTribeSectorAI::AttachAgentEx(  CAIDarkTribeSectorAI *this,  struct CAIDarkTribeSectorAgent *a2,  int a3,  int a4,  int a5)
+// Decompiled from void __thiscall CAIDarkTribeSectorAI::AttachAgentEx(CAIDarkTribeSectorAI *this, struct CAIDarkTribeSectorAgent *a2, int a3, int a4, int a5)
 void  CAIDarkTribeSectorAI::AttachAgentEx(class CAIDarkTribeSectorAgent & a2, unsigned int a3, unsigned int a4, unsigned int a5) {
   
   CAIDarkTribeSectorAgent::AttachSectorAI(a2, this);

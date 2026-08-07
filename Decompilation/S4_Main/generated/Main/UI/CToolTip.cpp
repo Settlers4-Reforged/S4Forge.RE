@@ -114,7 +114,9 @@ void  CToolTip::SetTooltipText(char const * Str) {
 
   Count = strlen(Str);
   if ( Count >= CToolTip::GetMaxLengthOfTooltip((CToolTip *)this) - 1 )
+  {
     Count = CToolTip::GetMaxLengthOfTooltip((CToolTip *)this) - 1;
+  }
   result = j__strncpy(this + 8, Str, Count);
   this[Count + 8] = 0;
   return result;
@@ -154,13 +156,21 @@ bool  CToolTip::OpenTooltip(int a2, int a3) {
   int v31; // [esp+68h] [ebp-8h]
 
   if ( !*((_BYTE *)this + 338) )
+  {
     return 1;
+  }
   if ( *((_BYTE *)this + 336) )
+  {
     CToolTip::CloseTooltip(this);
+  }
   if ( !g_pGfxEngine )
+  {
     return 0;
+  }
   if ( !*((_BYTE *)this + 8) )
+  {
     return 0;
+  }
   CalcTextSize(8, (const unsigned __int8 *)this + 8, &psizl, 0, -1);
   v15 = psizl.cx + 4;
   v16 = psizl.cy + 4;
@@ -273,9 +283,13 @@ bool  CToolTip::OpenTooltip(int a2, int a3) {
 bool  CToolTip::CloseTooltip(void) {
   
   if ( !*((_BYTE *)this + 336) )
+  {
     return 0;
+  }
   if ( !g_pGfxEngine )
+  {
     return 0;
+  }
   IGfxEngine::SetVisibilityOfGuiSurface((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this, 0);
   if ( IGfxEngine::DestroyGuiSurface((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this) )
   {

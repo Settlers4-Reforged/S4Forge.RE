@@ -3,7 +3,7 @@
 // Definitions for class CCargo
 
 // address=[0x159af90]
-// Decompiled from CFerryShip::CCargo *__thiscall CFerryShip::CCargo::CCargo(  CFerryShip::CCargo *this,  const struct CFerryShip::CCargo *a2)
+// Decompiled from CFerryShip::CCargo *__thiscall CFerryShip::CCargo::CCargo(CFerryShip::CCargo *this, const struct CFerryShip::CCargo *a2)
  CFerryShip::CCargo::CCargo(class CFerryShip::CCargo const & a2) {
   
   *(_DWORD *)this = *(_DWORD *)a2;

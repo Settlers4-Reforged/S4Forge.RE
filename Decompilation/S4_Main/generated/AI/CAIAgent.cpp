@@ -24,7 +24,9 @@ void  CAIAgent::ProcessEvent(class CAIEvent const & a2) {
 void  CAIAgent::UpdateScheduleTimeIfLess(unsigned int _uScheduleTime) {
   
   if ( _uScheduleTime < this->m_uScheduleTime && this->m_pScheduler != 0 )
+  {
     CAIScheduler::UpdateAgentScheduleTime(this->m_pScheduler, this, _uScheduleTime);
+  }
 }
 
 
@@ -51,13 +53,21 @@ void  CAIAgent::UpdateScheduleTimeIfLess(unsigned int _uScheduleTime) {
   
   this->__vftable = (CAIAgent_vtbl *)&CAIAgent::_vftable_;
   if ( this->m_pScheduler )
+  {
     CAIScheduler::RemoveAgent(this->m_pScheduler, this);
+  }
   if ( this->m_pScheduler && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 53, "m_pScheduler == 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( this->m_pPrevAgent && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 54, "m_pPrevAgent == 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( this->m_pNextAgent && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 55, "m_pNextAgent == 0") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 
@@ -75,7 +85,9 @@ void  CAIAgent::Load(class IS4Chunk & a2) {
   if ( this->m_pScheduler )
   {
     if ( uScheduleTime )
+    {
       CAIAgent::UpdateScheduleTime((CAIScheduler **)this, uScheduleTime);
+    }
   }
   else if ( uScheduleTime && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 86, "uScheduleTime == 0") == 1 )
   {
@@ -95,9 +107,13 @@ void  CAIAgent::Save(class IS4Chunk & a2) {
   a2->SaveUnsigned32(1);
   a2->SaveSignature(-1516306174);
   if ( this->m_pScheduler )
+  {
     uScheduleTime = this->m_uScheduleTime;
+  }
   else
+  {
     uScheduleTime = 0;
+  }
   a2->SaveUnsigned32(uScheduleTime);
   a2->SaveSignature(-1516306175);
 }
@@ -108,7 +124,9 @@ void  CAIAgent::Save(class IS4Chunk & a2) {
 void  CAIAgent::UpdateScheduleTime(unsigned int a2) {
   
   if ( this->m_pScheduler )
+  {
     CAIScheduler::UpdateAgentScheduleTime(this->m_pScheduler, this, a2);
+  }
 }
 
 

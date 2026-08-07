@@ -10,7 +10,9 @@ bool  CGenericBuildingIterator::Init(int a2, int a3, int a4) {
   if ( CPlayerIterator::Init(this, a2) )
   {
     if ( !a4 )
+    {
       a4 = a3;
+    }
     *((_DWORD *)this + 7) = a3;
     *((_DWORD *)this + 8) = a4;
     return 1;
@@ -38,9 +40,13 @@ int  CGenericBuildingIterator::FirstBuilding(void) {
     v2 = CPlayerIterator::PlayerId(this);
     *((_DWORD *)this + 6) = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, v2, v3);
     if ( *((_DWORD *)this + 6) )
+    {
       return *((_DWORD *)this + 6);
+    }
     else
+    {
       return CGenericBuildingIterator::NextBuilding(this);
+    }
   }
   else
   {
@@ -72,7 +78,9 @@ int  CGenericBuildingIterator::NextBuilding(void) {
       if ( ++*((_DWORD *)this + 5) > *((_DWORD *)this + 8) )
       {
         if ( !CPlayerIterator::NextPlayer(this) )
+        {
           return 0;
+        }
         *((_DWORD *)this + 5) = *((_DWORD *)this + 7);
       }
       v5 = CBuildingIteratorBase::BuildingType((CGenericBuildingIterator *)((char *)this + 20));
@@ -91,9 +99,13 @@ int  CGenericBuildingIterator::NextBuilding(void) {
 int  CGenericBuildingIterator::NextBuildingIfCurrentIsNotValid(void) {
   
   if ( CBuildingIteratorBase::BuildingValid((CBuildingIteratorBase *)(this + 5), this[6]) )
+  {
     return this[6];
+  }
   else
+  {
     return CGenericBuildingIterator::NextBuilding((CGenericBuildingIterator *)this);
+  }
 }
 
 
@@ -102,9 +114,13 @@ int  CGenericBuildingIterator::NextBuildingIfCurrentIsNotValid(void) {
 int  CGenericBuildingIterator::NextBuildingOrFirstIfCurrentIsEndOfList(void) {
   
   if ( *((_DWORD *)this + 6) )
+  {
     return CGenericBuildingIterator::NextBuilding(this);
+  }
   else
+  {
     return CGenericBuildingIterator::FirstBuilding(this);
+  }
 }
 
 

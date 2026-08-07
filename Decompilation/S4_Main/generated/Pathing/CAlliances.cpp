@@ -118,7 +118,9 @@ bool __cdecl CAlliances::AddPlayer(int _iPlayerId, int iAllianceId) {
     if ( CAlliances::m_iLocked )
     {
       if ( BBSupportDbgReport(1, "Pathing\\Alliances.cpp", 83, "CAlliances::AddPlayer(): Already locked!") == 1 )
+      {
         __debugbreak();
+      }
       return 0;
     }
     else if ( _iPlayerId >= 1 && _iPlayerId <= 8 )
@@ -126,41 +128,49 @@ bool __cdecl CAlliances::AddPlayer(int _iPlayerId, int iAllianceId) {
       if ( iAllianceId != 9 && (iAllianceId > 8 || iAllianceId < 1) )
       {
         if ( BBSupportDbgReport(1, "Pathing\\Alliances.cpp", 97, "CAlliances::AddPlayer(): Invalid alliance id!") == 1 )
+        {
           __debugbreak();
+        }
         return 0;
       }
       else if ( CAlliances::m_sData.m_iAllianceIds[_iPlayerId] )
       {
-        if ( BBSupportDbgReport(
-               1,
-               "Pathing\\Alliances.cpp",
-               104,
-               "CAlliances::AddPlayer(): Player already in alliance!") == 1 )
+        if ( BBSupportDbgReport(1, "Pathing\\Alliances.cpp", 104, "CAlliances::AddPlayer(): Player already in alliance!") == 1 )
+        {
           __debugbreak();
+        }
         return 0;
       }
       else
       {
         ++CAlliances::m_sData.m_iNumberOfPlayers;
         if ( _iPlayerId > CAlliances::m_sData.m_iLastPlayerId )
+        {
           CAlliances::m_sData.m_iLastPlayerId = _iPlayerId;
+        }
         CAlliances::m_sData.m_iAllianceIds[_iPlayerId] = iAllianceId;
         if ( iAllianceId != 9 )
+        {
           ++CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId];
+        }
         return 1;
       }
     }
     else
     {
       if ( BBSupportDbgReport(1, "Pathing\\Alliances.cpp", 90, "CAlliances::AddPlayer(): Invalid player id!") == 1 )
+      {
         __debugbreak();
+      }
       return 0;
     }
   }
   else
   {
     if ( BBSupportDbgReport(1, "Pathing\\Alliances.cpp", 76, "CAlliances::AddPlayer(): Not initialized!") == 1 )
+    {
       __debugbreak();
+    }
     return 0;
   }
 }
@@ -192,25 +202,26 @@ bool __cdecl CAlliances::Lock(void) {
     if ( CAlliances::m_iLocked )
     {
       if ( BBSupportDbgReport(1, "Pathing\\Alliances.cpp", 150, "CAlliances::Lock(): Already locked!") == 1 )
+      {
         __debugbreak();
+      }
       return 0;
     }
     else
     {
       CAlliances::m_iLocked = 1;
       iAllianceId = 1;
-      for ( i = 1; i <= CAlliances::m_sData.m_iLastPlayerId; ++i )
+      for ( i = 1;
+            i <= CAlliances::m_sData.m_iLastPlayerId;
+            ++i )
       {
         if ( CAlliances::m_sData.m_iAllianceIds[i] == 9 )
         {
           while ( CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId] != 0 && iAllianceId < 8 )
+          {
             ++iAllianceId;
-          if ( CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId]
-            && BBSupportDbgReport(
-                 2,
-                 "Pathing\\Alliances.cpp",
-                 171,
-                 "m_sData.m_iAlliancesNumberOfAllies[iAllianceId] == 0") == 1 )
+          }
+          if ( CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId] && BBSupportDbgReport(2, "Pathing\\Alliances.cpp", 171, "m_sData.m_iAlliancesNumberOfAllies[iAllianceId] == 0") == 1 )
           {
             __debugbreak();
           }
@@ -218,7 +229,9 @@ bool __cdecl CAlliances::Lock(void) {
           CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId] = 1;
         }
       }
-      for ( iAllianceId = 1; iAllianceId <= 8; ++iAllianceId )
+      for ( iAllianceId = 1;
+            iAllianceId <= 8;
+            ++iAllianceId )
       {
         iPlayerId = CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId];
         if ( iPlayerId > 0 )
@@ -226,44 +239,35 @@ bool __cdecl CAlliances::Lock(void) {
           ++CAlliances::m_sData.m_iNumberOfAlliances;
           CAlliances::m_sData.m_iLastAllianceId = iAllianceId;
           CAlliances::m_sData.m_iNumberOfEnemies[iAllianceId] = CAlliances::m_sData.m_iNumberOfPlayers - iPlayerId;
-          if ( CAlliances::m_sData.m_iNumberOfEnemies[iAllianceId] > 7
-            && BBSupportDbgReport(
-                 2,
-                 "Pathing\\Alliances.cpp",
-                 197,
-                 "m_sData.m_iAlliancesNumberOfEnemies[iAllianceId] <= (PLAYER_LAST - PLAYER_FIRST)") == 1 )
+          if ( CAlliances::m_sData.m_iNumberOfEnemies[iAllianceId] > 7 && BBSupportDbgReport(2, "Pathing\\Alliances.cpp", 197, "m_sData.m_iAlliancesNumberOfEnemies[iAllianceId] <= (PLAYER_LAST - PLAYER_FIRST)") == 1 )
           {
             __debugbreak();
           }
           iAllyCounter = 0;
           iEnemyCounter = 0;
           iLastPlayerId = CAlliances::m_sData.m_iLastPlayerId;
-          for ( k = 1; k <= iLastPlayerId; ++k )
+          for ( k = 1;
+                k <= iLastPlayerId;
+                ++k )
           {
             v5 = CAlliances::m_sData.m_iAllianceIds[k];
             if ( v5 )
             {
               if ( v5 == iAllianceId )
+              {
                 CAlliances::m_sData.m_iAllyPlayerIds[iAllianceId][iAllyCounter++] = k;
+              }
               else
+              {
                 CAlliances::m_sData.m_iEnemyPlayerIds[iAllianceId][iEnemyCounter++] = k;
+              }
             }
           }
-          if ( CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId] != iAllyCounter
-            && BBSupportDbgReport(
-                 2,
-                 "Pathing\\Alliances.cpp",
-                 224,
-                 "m_sData.m_iAlliancesNumberOfAllies[iAllianceId] == iAllyCounter") == 1 )
+          if ( CAlliances::m_sData.m_iAlliancesNumberOfAllies[iAllianceId] != iAllyCounter && BBSupportDbgReport(2, "Pathing\\Alliances.cpp", 224, "m_sData.m_iAlliancesNumberOfAllies[iAllianceId] == iAllyCounter") == 1 )
           {
             __debugbreak();
           }
-          if ( CAlliances::m_sData.m_iNumberOfEnemies[iAllianceId] != iEnemyCounter
-            && BBSupportDbgReport(
-                 2,
-                 "Pathing\\Alliances.cpp",
-                 225,
-                 "m_sData.m_iAlliancesNumberOfEnemies[iAllianceId] == iEnemyCounter") == 1 )
+          if ( CAlliances::m_sData.m_iNumberOfEnemies[iAllianceId] != iEnemyCounter && BBSupportDbgReport(2, "Pathing\\Alliances.cpp", 225, "m_sData.m_iAlliancesNumberOfEnemies[iAllianceId] == iEnemyCounter") == 1 )
           {
             __debugbreak();
           }
@@ -271,7 +275,9 @@ bool __cdecl CAlliances::Lock(void) {
       }
       iAllPlayerBits = 0;
       memset(iAllyBits, 0, sizeof(iAllyBits));
-      for ( m = 1; m <= CAlliances::m_sData.m_iLastPlayerId; ++m )
+      for ( m = 1;
+            m <= CAlliances::m_sData.m_iLastPlayerId;
+            ++m )
       {
         v4 = CAlliances::PlayerBit(m);
         v7 = CAlliances::m_sData.m_iAllianceIds[m];
@@ -282,43 +288,32 @@ bool __cdecl CAlliances::Lock(void) {
         }
       }
       CAlliances::m_sData.m_iAllPlayersBits = iAllPlayerBits;
-      for ( iAllianceId = 1; iAllianceId <= CAlliances::m_sData.m_iLastPlayerId; ++iAllianceId )
+      for ( iAllianceId = 1;
+            iAllianceId <= CAlliances::m_sData.m_iLastPlayerId;
+            ++iAllianceId )
       {
         iThisAlliance = CAlliances::m_sData.m_iAllianceIds[iAllianceId];
         if ( iThisAlliance )
         {
           CAlliances::m_sData.m_iPlayerAllyBits[iAllianceId] = iAllyBits[iThisAlliance];
           CAlliances::m_sData.m_iPlayerEnemyBits[iAllianceId] = iAllPlayerBits & ~iAllyBits[iThisAlliance];
-          if ( CAlliances::m_sData.m_iPlayerEnemyBits[iAllianceId] != (iAllyBits[iThisAlliance] ^ iAllPlayerBits)
-            && BBSupportDbgReport(
-                 2,
-                 "Pathing\\Alliances.cpp",
-                 265,
-                 "m_sData.m_iPlayersEnemyBits[iPlayerId] == (iAllPlayersBits ^ iAlliancesAllyBits[iAllianceId])") == 1 )
+          if ( CAlliances::m_sData.m_iPlayerEnemyBits[iAllianceId] != (iAllyBits[iThisAlliance] ^ iAllPlayerBits) && BBSupportDbgReport(2, "Pathing\\Alliances.cpp", 265, "m_sData.m_iPlayersEnemyBits[iPlayerId] == (iAllPlayersBits ^ iAlliancesAllyBits[iAllianceId])") == 1 )
           {
             __debugbreak();
           }
         }
       }
-      for ( iAllianceId = 1; iAllianceId <= 8; ++iAllianceId )
+      for ( iAllianceId = 1;
+            iAllianceId <= 8;
+            ++iAllianceId )
       {
         v1 = CAlliances::AllyPlayerIds(iAllianceId);
-        if ( v1[CAlliances::NumberOfAllies(iAllianceId)]
-          && BBSupportDbgReport(
-               2,
-               "Pathing\\Alliances.cpp",
-               277,
-               "AllyPlayerIds(iAllianceId)[NumberOfAllies(iAllianceId)] == PLAYER_NO_PLAYER") == 1 )
+        if ( v1[CAlliances::NumberOfAllies(iAllianceId)] && BBSupportDbgReport(2, "Pathing\\Alliances.cpp", 277, "AllyPlayerIds(iAllianceId)[NumberOfAllies(iAllianceId)] == PLAYER_NO_PLAYER") == 1 )
         {
           __debugbreak();
         }
         v2 = CAlliances::EnemyPlayerIds(iAllianceId);
-        if ( v2[CAlliances::NumberOfEnemies(iAllianceId)]
-          && BBSupportDbgReport(
-               2,
-               "Pathing\\Alliances.cpp",
-               278,
-               "EnemyPlayerIds(iAllianceId)[NumberOfEnemies(iAllianceId)] == PLAYER_NO_PLAYER") == 1 )
+        if ( v2[CAlliances::NumberOfEnemies(iAllianceId)] && BBSupportDbgReport(2, "Pathing\\Alliances.cpp", 278, "EnemyPlayerIds(iAllianceId)[NumberOfEnemies(iAllianceId)] == PLAYER_NO_PLAYER") == 1 )
         {
           __debugbreak();
         }
@@ -329,7 +324,9 @@ bool __cdecl CAlliances::Lock(void) {
   else
   {
     if ( BBSupportDbgReport(1, "Pathing\\Alliances.cpp", 143, "CAlliances::Lock(): Not initialized!") == 1 )
+    {
       __debugbreak();
+    }
     return 0;
   }
 }

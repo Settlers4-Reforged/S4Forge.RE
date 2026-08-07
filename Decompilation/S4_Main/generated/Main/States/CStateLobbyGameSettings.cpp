@@ -7,14 +7,18 @@
 class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(void * a1) {
   
   if ( operator new(0xAF9Cu) )
+  {
     return CStateLobbyGameSettings::CStateLobbyGameSettings(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x14b7f90]
-// Decompiled from CStateLobbyGameSettings *__thiscall CStateLobbyGameSettings::CStateLobbyGameSettings(  CStateLobbyGameSettings *this,  int a2)
+// Decompiled from CStateLobbyGameSettings *__thiscall CStateLobbyGameSettings::CStateLobbyGameSettings(CStateLobbyGameSettings *this, int a2)
  CStateLobbyGameSettings::CStateLobbyGameSettings(void * a2) {
   
   const WCHAR *v2; // eax
@@ -33,12 +37,7 @@ class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(void * a1)
   CGuiGameState::CGuiGameState(this);
   v15 = 0;
   *(_DWORD *)this = &CStateLobbyGameSettings::_vftable_;
-  _vec_ctor(
-    (char *)this + 4,
-    0x844u,
-    8u,
-    CLanLobbyGameSettings::SPlayerEntry::SPlayerEntry,
-    (void (__thiscall *)(void *))CLanLobbyGameSettings::SPlayerEntry::~SPlayerEntry);
+  _vec_ctor((char *)this + 4, 0x844u, 8u, CLanLobbyGameSettings::SPlayerEntry::SPlayerEntry, (void (__thiscall *)(void *))CLanLobbyGameSettings::SPlayerEntry::~SPlayerEntry);
   _vec_ctor((char *)this + 16944, 0x1Cu, 0x3E8u, std::wstring::wstring, std::wstring::~wstring);
   LOBYTE(v15) = 2;
   if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
@@ -48,21 +47,20 @@ class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(void * a1)
   }
   *((_BYTE *)this + 16932) = a2 != 0;
   *((_BYTE *)this + 16933) = 0;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     *((_BYTE *)this + i + 44948) = 0;
-    if ( g_pGameType
-      && (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType)
-      && (unsigned __int8)CGameType::IsHost(g_pGameType)
-      && i
-      && (*(_DWORD *)(g_pGameType + 4 * i + 116) != 2 && *(_DWORD *)(g_pGameType + 4 * i + 116) != 3
-       || *(_DWORD *)(g_pGameType + 4 * i + 404) != 3) )
+    if ( g_pGameType && (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) && (unsigned __int8)CGameType::IsHost(g_pGameType) && i && (*(_DWORD *)(g_pGameType + 4 * i + 116) != 2 && *(_DWORD *)(g_pGameType + 4 * i + 116) != 3 || *(_DWORD *)(g_pGameType + 4 * i + 404) != 3) )
     {
       *(_BYTE *)(i + g_pGameType + 998) = 1;
     }
   }
   if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) && CGameType::GetLocalSlot(g_pGameType) >= 0 )
+  {
     *(_DWORD *)(g_pGameType + 4 * CGameType::GetLocalSlot(g_pGameType) + 224) = 0;
+  }
   v7 = CGameType::ConvertMapNameToMPGameName((char *)g_pGameType, (int)v12);
   LOBYTE(v15) = 3;
   CStateLobbyGameSettings::CreateLobbyGameInfo(&g_cLobbyGameInfo, v7);
@@ -70,7 +68,9 @@ class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(void * a1)
   std::wstring::~wstring(v12);
   *((_DWORD *)this + 4235) = CGameType::GetLocalSlot(g_pGameType);
   if ( *(_DWORD *)(g_pGameType + 864) == 3 && !(unsigned __int8)CGameType::IsSaveGame((void *)g_pGameType) )
+  {
     CStateLobbyGameSettings::CreateRandomGoods(this);
+  }
   CGfxManager::DisableGfxFile((CGfxManager *)g_pGfxManager, 1);
   CStateLobbyGameSettings::CopyDefaultUserFlags();
   CStateLobbyGameSettings::CompileUserFlags();
@@ -132,7 +132,9 @@ class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(void * a1)
   CStateLobbyGameSettings::UserflagChanged(this, 0, 0);
   CStateLobbyGameSettings::PaintMap(this);
   if ( !byte_4030854 )
+  {
     IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
+  }
   return this;
 }
 
@@ -145,17 +147,17 @@ class CGameState * __cdecl CStateLobbyGameSettings::DynamicCreateFunc(void * a1)
 
   *(_DWORD *)this = &CStateLobbyGameSettings::_vftable_;
   if ( byte_4030853 && byte_40308A0 )
+  {
     CStateLobbyGameSettings::UserflagChanged(this, 0, 0);
+  }
   v2 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 11236));
   CStateLobbyGameSettings::ClearFlagnameList(this);
   if ( !v2 && BBSupportDbgReport(2, "main\\states\\StateLobbyGameSettings.cpp", 303, "bRet") == 1 )
+  {
     __debugbreak();
+  }
   `eh vector destructor iterator'((char *)this + 16944, 0x1Cu, 0x3E8u, std::wstring::~wstring);
-  `eh vector destructor iterator'(
-    (char *)this + 4,
-    0x844u,
-    8u,
-    (void (__thiscall *)(void *))CLanLobbyGameSettings::SPlayerEntry::~SPlayerEntry);
+  `eh vector destructor iterator'((char *)this + 4, 0x844u, 8u, (void (__thiscall *)(void *))CLanLobbyGameSettings::SPlayerEntry::~SPlayerEntry);
   CGuiGameState::~CGuiGameState(this);
 }
 
@@ -172,19 +174,21 @@ bool  CStateLobbyGameSettings::Perform(void) {
   char v8; // [esp+26h] [ebp-2h]
   char v9; // [esp+27h] [ebp-1h]
 
-  if ( g_pGameType
-    && (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType)
-    && (Instance = (OnlineManager *)OnlineManager::GetInstance(), OnlineManager::GetAndClearOnlineError(Instance)) )
+  if ( g_pGameType && (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) && (Instance = (OnlineManager *)OnlineManager::GetInstance(), OnlineManager::GetAndClearOnlineError(Instance)) )
   {
     byte_40308A0 = 0;
     v2 = g_pStringEngine->GetString(g_pStringEngine, 2503);
     CGameStateHandler::Queue((int)CStateMessageBox::DynamicCreateFunc, (int)v2);
     CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
     if ( g_pNetworkEngine )
+    {
       (**(void (__thiscall ***)(int, int))g_pNetworkEngine)(g_pNetworkEngine, 1);
+    }
     g_pNetworkEngine = 0;
     if ( !g_pGameType )
+    {
       return 1;
+    }
     delete (CGameType *)g_pGameType;
     g_pGameType = 0;
     return 1;
@@ -209,12 +213,16 @@ bool  CStateLobbyGameSettings::Perform(void) {
       IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
     }
     v9 = 0;
-    for ( i = 0; i < 8; ++i )
+    for ( i = 0;
+          i < 8;
+          ++i )
     {
       if ( *((_BYTE *)this + i + 44948) )
       {
         if ( !byte_4030853 )
+        {
           CStateLobbyGameSettings::UserflagChanged(this, -1, -1);
+        }
         v9 = 1;
         *((_BYTE *)this + i + 44948) = 0;
       }
@@ -233,9 +241,13 @@ bool  CStateLobbyGameSettings::Perform(void) {
       IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
     }
     if ( g_pNetworkEngine )
+    {
       INetworkEngine::CheckForMsg((INetworkEngine *)g_pNetworkEngine);
+    }
     if ( !g_pGameType )
+    {
       return 1;
+    }
     v7 = CStateLobbyGameSettings::CheckReady(this);
     if ( v7 != byte_40308A1 )
     {
@@ -337,10 +349,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         break;
       case 0x18u:
         v11 = std::string::string(v30, (char *)byte_3745C42);
-        v13 = (unsigned __int8)std::operator!=<char>(g_pGameType + 884, v11)
-           && *(_DWORD *)(g_pGameType + 692) == 1
-           && (!dword_403191C || dword_403191C == 2)
-           && *(_DWORD *)(g_pGameType + 864) != 3;
+        v13 = (unsigned __int8)std::operator!=<char>(g_pGameType + 884, v11) && *(_DWORD *)(g_pGameType + 692) == 1 && (!dword_403191C || dword_403191C == 2) && *(_DWORD *)(g_pGameType + 864) != 3;
         std::string::~string(v30);
         if ( v13 )
         {
@@ -360,7 +369,9 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         v9 = strlen(Str);
         v20 = j__mbstowcs(Dest, Str, v9);
         if ( v20 >= 256 )
+        {
           report_rangecheckfailure();
+        }
         Dest[v20] = 0;
         CLanLobby::Communicate(1050, Dest);
         result = 1;
@@ -368,9 +379,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
       case 0x4Du:
         Instance = UPlay::UPlayManager::GetInstance();
         (*(void (__thiscall **)(int, int))(*(_DWORD *)Instance + 52))(Instance, 1);
-        if ( g_pGameType
-          && (unsigned __int8)CGameType::IsSaveGame((void *)g_pGameType)
-          && (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
+        if ( g_pGameType && (unsigned __int8)CGameType::IsSaveGame((void *)g_pGameType) && (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
         {
           byte_40308A0 = 0;
           v3 = (void *)OnlineManager::GetInstance();
@@ -391,9 +400,7 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
             else if ( g_pGameType )
             {
               dword_403191C = *(_BYTE *)(g_pGameType + 732) == 0;
-              CGameStateHandler::Switch(
-                (int)CStateLobbyMapSettings::DynamicCreateFunc,
-                *(_BYTE *)(g_pGameType + 732) == 0);
+              CGameStateHandler::Switch((int)CStateLobbyMapSettings::DynamicCreateFunc, *(_BYTE *)(g_pGameType + 732) == 0);
             }
           }
           else
@@ -404,7 +411,9 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
           *((_BYTE *)this + 16933) = 0;
         }
         if ( g_pNetworkEngine )
+        {
           (**(void (__thiscall ***)(int, int))g_pNetworkEngine)(g_pNetworkEngine, 1);
+        }
         g_pNetworkEngine = 0;
         if ( g_pGameType )
         {
@@ -448,9 +457,13 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         v36[0] = a2->m_lParam;
         v36[1] = 2;
         if ( a2->m_wParam )
+        {
           v18 = 7;
+        }
         else
+        {
           v18 = 6;
+        }
         v36[2] = v18;
         CLanLobby::ChangeData(v36);
         result = 1;
@@ -459,9 +472,13 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         v38[0] = a2->m_lParam;
         v38[1] = 1;
         if ( a2->m_wParam )
+        {
           v16 = 7;
+        }
         else
+        {
           v16 = 6;
+        }
         v38[2] = v16;
         CLanLobby::ChangeData(v38);
         result = 1;
@@ -470,9 +487,13 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         v35[0] = a2->m_lParam;
         v35[1] = 0;
         if ( a2->m_wParam )
+        {
           v17 = 7;
+        }
         else
+        {
           v17 = 6;
+        }
         v35[2] = v17;
         CLanLobby::ChangeData(v35);
         result = 1;
@@ -481,9 +502,13 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         Src[0] = a2->m_lParam;
         Src[1] = 4;
         if ( a2->m_wParam )
+        {
           v15 = 7;
+        }
         else
+        {
           v15 = 6;
+        }
         Src[2] = v15;
         CLanLobby::ChangeData(Src);
         result = 1;
@@ -499,17 +524,18 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
         wparam = a2->m_wParam;
         if ( *(_BYTE *)(wparam + g_pGameType + 998) )
         {
-          if ( *(_BYTE *)(wparam + g_pGameType + 440)
-            || *(_DWORD *)(g_pGameType + 4 * wparam + 116) == 2
-            || *(_DWORD *)(g_pGameType + 4 * wparam + 116) == 3
-            || (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) && *(_BYTE *)(wparam + g_pGameType + 1007) )
+          if ( *(_BYTE *)(wparam + g_pGameType + 440) || *(_DWORD *)(g_pGameType + 4 * wparam + 116) == 2 || *(_DWORD *)(g_pGameType + 4 * wparam + 116) == 3 || (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) && *(_BYTE *)(wparam + g_pGameType + 1007) )
           {
             if ( ++*(_DWORD *)(g_pGameType + 4 * wparam + 116) == 4 )
             {
               if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
+              {
                 *(_DWORD *)(g_pGameType + 4 * wparam + 116) = 0;
+              }
               else
+              {
                 *(_DWORD *)(g_pGameType + 4 * wparam + 116) = 2;
+              }
             }
             if ( *(_DWORD *)(g_pGameType + 4 * wparam + 116) == 2 )
             {
@@ -529,10 +555,14 @@ bool  CStateLobbyGameSettings::OnEvent(class CEvn_Event & a2) {
           if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
           {
             v22 = 0;
-            for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
+            for ( i = 0;
+                  i < *(_DWORD *)(g_pGameType + 852);
+                  ++i )
             {
               if ( *(_DWORD *)(g_pGameType + 4 * i + 116) == 1 && *(_DWORD *)(g_pGameType + 4 * i + 224) == -1 )
+              {
                 ++v22;
+              }
             }
             v7 = (OnlineManager *)OnlineManager::GetInstance();
             OnlineManager::SetJoinAndDiscoveryOverride(v7, v22 == 0);
@@ -593,7 +623,9 @@ void  CStateLobbyGameSettings::UpdatePlayerList(bool a2) {
   {
     if ( (unsigned __int8)CGameType::IsWebGame(g_pGameType) )
     {
-      for ( i = 0; i < 8; ++i )
+      for ( i = 0;
+            i < 8;
+            ++i )
       {
         Instance = (OnlineManager *)OnlineManager::GetInstance();
         if ( OnlineManager::GetLocalPeerId(Instance) == *(_DWORD *)(g_pGameType + 4 * i + 224) )
@@ -609,16 +641,24 @@ void  CStateLobbyGameSettings::UpdatePlayerList(bool a2) {
     }
     *(_DWORD *)(g_pGameType + 620) = 0;
     v8 = 0;
-    for ( j = 0; j < *(_DWORD *)(g_pGameType + 852); ++j )
+    for ( j = 0;
+          j < *(_DWORD *)(g_pGameType + 852);
+          ++j )
     {
       if ( *(_DWORD *)(g_pGameType + 4 * j + 452) != 6 )
+      {
         v8 = 1;
+      }
     }
-    for ( k = 0; k < *(_DWORD *)(g_pGameType + 852); ++k )
+    for ( k = 0;
+          k < *(_DWORD *)(g_pGameType + 852);
+          ++k )
     {
       *((_BYTE *)this + 2116 * k + 4) = *(_BYTE *)(k + g_pGameType + 440);
       if ( !*((_BYTE *)this + 2116 * k + 4) )
+      {
         ++*(_DWORD *)(g_pGameType + 620);
+      }
       PlayerName = CGameType::GetPlayerName((void *)g_pGameType, v14, k);
       std::wstring::operator=(PlayerName);
       std::wstring::~wstring(v14);
@@ -628,9 +668,13 @@ void  CStateLobbyGameSettings::UpdatePlayerList(bool a2) {
         if ( *(_DWORD *)(g_pGameType + 4 * k + 624) >= (unsigned int)CStaticConfigVarInt::operator int(&g_iPingGood) )
         {
           if ( *(_DWORD *)(g_pGameType + 4 * k + 624) >= (unsigned int)CStaticConfigVarInt::operator int(&g_iPingAverage) )
+          {
             *((_DWORD *)this + 529 * k + 14) = 2;
+          }
           else
+          {
             *((_DWORD *)this + 529 * k + 14) = 1;
+          }
         }
         else
         {
@@ -643,7 +687,9 @@ void  CStateLobbyGameSettings::UpdatePlayerList(bool a2) {
       }
       *((_DWORD *)this + 529 * k + 16) = *(_DWORD *)(g_pGameType + 4 * k + 116);
       if ( v8 )
+      {
         *((_DWORD *)this + 529 * k + 11) = *(_DWORD *)(g_pGameType + 4 * k + 404);
+      }
       *((_DWORD *)this + 529 * k + 13) = *(_DWORD *)(g_pGameType + 4 * k + 488);
       *((_DWORD *)this + 529 * k + 15) = *(_DWORD *)(g_pGameType + 4 * k + 452);
       *((_DWORD *)this + 529 * k + 2) = *(_DWORD *)(g_pGameType + 4 * k + 152);
@@ -651,15 +697,17 @@ void  CStateLobbyGameSettings::UpdatePlayerList(bool a2) {
       if ( (unsigned __int8)CGameType::IsSaveGame((void *)g_pGameType) )
       {
         if ( (unsigned __int8)CGameType::IsHost(g_pGameType) )
+        {
           *((_BYTE *)this + 2116 * k + 2117) = *(_BYTE *)(k + g_pGameType + 998);
+        }
         else
+        {
           *((_BYTE *)this + 2116 * k + 2117) = 0;
+        }
       }
       else
       {
-        v5 = *(_BYTE *)(k + g_pGameType + 998)
-          || *(_DWORD *)(g_pGameType + 4 * k + 116) == 2
-          || *(_DWORD *)(g_pGameType + 4 * k + 116) == 3;
+        v5 = *(_BYTE *)(k + g_pGameType + 998) || *(_DWORD *)(g_pGameType + 4 * k + 116) == 2 || *(_DWORD *)(g_pGameType + 4 * k + 116) == 3;
         *((_BYTE *)this + 2116 * k + 2117) = v5;
       }
       if ( *((_DWORD *)this + 529 * k + 12) != *(_DWORD *)(g_pGameType + 4 * k + 368) )
@@ -668,7 +716,9 @@ void  CStateLobbyGameSettings::UpdatePlayerList(bool a2) {
         *((_BYTE *)this + k + 44948) = 1;
       }
       if ( k == LocalSlot )
+      {
         byte_40308A0 = *((_DWORD *)this + 529 * k + 15) == 6;
+      }
     }
     if ( LocalSlot != -1 )
     {
@@ -677,7 +727,9 @@ void  CStateLobbyGameSettings::UpdatePlayerList(bool a2) {
       dword_4030880 = *(_DWORD *)(g_pGameType + 4 * LocalSlot + 404);
       dword_4030884 = *(_DWORD *)(g_pGameType + 4 * LocalSlot + 152);
       if ( *((_BYTE *)this + 16932) )
+      {
         *((_BYTE *)this + 2116 * LocalSlot + 68) = 1;
+      }
       byte_4030850 = *(_BYTE *)(LocalSlot + g_pGameType + 1007) == 0;
     }
     dword_4030840 = *(_DWORD *)(g_pGameType + 620);
@@ -693,22 +745,26 @@ void  CStateLobbyGameSettings::UpdatePlayerList(bool a2) {
     std::wstring::operator=(g_pGameType);
     std::string::operator=(&unk_4030820, "Conflict Mode");
     byte_4030855 = *(_BYTE *)(g_pGameType + 560);
-    for ( m = 0; m < 8; ++m )
+    for ( m = 0;
+          m < 8;
+          ++m )
     {
       dword_4030858[m] = *(_DWORD *)(g_pGameType + 4 * m + 368);
       if ( LocalSlot == m )
+      {
         dword_4030878 = *(_DWORD *)(g_pGameType + 4 * m + 368);
+      }
     }
     if ( *((_BYTE *)this + 16932) )
+    {
       byte_403088C = CStateLobbyGameSettings::CheckContinue(this);
+    }
     byte_40308A2 = *(_DWORD *)(g_pGameType + 4 * LocalSlot + 452) == 6;
     CStateLobbyGameSettings::SetBackButtonState(this);
     if ( a2 )
     {
       GuiDlgMainGameSettingstUpdate();
-      if ( IGfxEngine::GetCursorShape(g_pGfxEngine) == 4
-        && byte_4030854
-        && !*(_DWORD *)(g_pGameType + 4 * (char)CPlayerManager::GetLocalSlot() + 452) )
+      if ( IGfxEngine::GetCursorShape(g_pGfxEngine) == 4 && byte_4030854 && !*(_DWORD *)(g_pGameType + 4 * (char)CPlayerManager::GetLocalSlot() + 452) )
       {
         IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
       }
@@ -733,15 +789,21 @@ void  CStateLobbyGameSettings::PrintChatLine(unsigned short const * String, unsi
   v2 = wcslen(String);
   v6 = j__wcstombs(Dest, String, v2);
   if ( v6 >= 0x100 )
+  {
     report_rangecheckfailure();
+  }
   Dest[v6] = 0;
   v3 = wcslen(Source);
   v5 = j__wcstombs(v8, Source, v3);
   if ( v5 >= 0x100 )
+  {
     report_rangecheckfailure();
+  }
   v8[v5] = 0;
   if ( Dest[12] )
+  {
     strcpy(&Dest[12], ".");
+  }
   sprintf(Buffer, "%s: %s", Dest, v8);
   return GuiDlgMainGameSettingsAddChatline(Buffer);
 }
@@ -831,7 +893,9 @@ int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
   }
   else
   {
-    for ( i = 0; i < 8; ++i )
+    for ( i = 0;
+          i < 8;
+          ++i )
     {
       IGfxEngine::GetPlayerColor(g_pGfxEngine, i, &v34);
       v46[3 * i] = v34.m_iR;
@@ -852,21 +916,22 @@ int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>((char *)v25);
       LOBYTE(v48) = 13;
       v1 = (char *)(*(int (__thiscall **)(int))(*(_DWORD *)g_pRTComp + 12))(g_pRTComp);
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-        v25,
-        (int)&v28,
-        v1);
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v25, (int)&v28, v1);
       LOBYTE(v48) = 14;
       v2 = std::string::c_str(&v28);
       sprintf(Buffer, "RTComp Error loading file %s!", v2);
       BBSupportTracePrintF(3, Buffer);
-      for ( j = 0; ; ++j )
+      for ( j = 0;
+            ;
+            ++j )
       {
         v18 = std::wstring::wstring(&v27, (wchar_t *)&word_37469DC);
         v21 = std::operator!=<wchar_t>(&v35 + j, v18);
         std::wstring::~wstring(&v27);
         if ( !v21 )
+        {
           break;
+        }
         std::operator+<wchar_t>(&v32, &v30, &v35 + j);
         LOBYTE(v48) = 15;
         v3 = std::wstring::c_str(&v32);
@@ -905,7 +970,9 @@ int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
         v20 = std::operator!=<wchar_t>(&v35 + v24, v17);
         std::wstring::~wstring(&v26);
         if ( !v20 )
+        {
           break;
+        }
         std::operator+<wchar_t>(&v33, &v30, &v35 + v24);
         LOBYTE(v48) = 16;
         std::operator+<wchar_t>(&v31, &v29, &v35 + v24);
@@ -1058,7 +1125,7 @@ bool __cdecl CStateLobbyGameSettings::CopyDefaultUserFlags(void) {
 
 
 // address=[0x14ba670]
-// Decompiled from int __cdecl CStateLobbyGameSettings::DrawMap(  unsigned __int16 *a1,  unsigned __int16 *a2,  unsigned int a3,  int a4,  int a5)
+// Decompiled from int __cdecl CStateLobbyGameSettings::DrawMap(unsigned __int16 *a1, unsigned __int16 *a2, unsigned int a3, int a4, int a5)
 void __cdecl CStateLobbyGameSettings::DrawMap(unsigned short * a1, unsigned short * a2, unsigned int a3, int a4, int a5) {
   
   int result; // eax
@@ -1084,9 +1151,13 @@ void __cdecl CStateLobbyGameSettings::DrawMap(unsigned short * a1, unsigned shor
   _DWORD v25[180]; // [esp+64h] [ebp-2D4h] BYREF
 
   v16 = IGfxEngine::GetGfxMode((IGfxEngine *)g_pGfxEngine) == 1;
-  for ( i = 3; i < 157; ++i )
+  for ( i = 3;
+        i < 157;
+        ++i )
   {
-    for ( j = 3; j < 157; ++j )
+    for ( j = 3;
+          j < 157;
+          ++j )
     {
       v11 = (float)a5 / 160.0;
       v12 = (float)a4 / 160.0;
@@ -1104,22 +1175,34 @@ void __cdecl CStateLobbyGameSettings::DrawMap(unsigned short * a1, unsigned shor
   }
   v13 = 160.0 / (float)*(int *)(g_pGameType + 56);
   if ( *(_DWORD *)(g_pGameType + 112) )
+  {
     v7 = *(_DWORD *)(g_pGameType + 112);
+  }
   else
+  {
     v7 = *(_DWORD *)(g_pGameType + 852);
-  for ( k = 0; ; ++k )
+  }
+  for ( k = 0;
+        ;
+        ++k )
   {
     result = k;
     if ( k >= v7 )
+    {
       break;
+    }
     v6 = (int)(float)((float)*(int *)(g_pGameType + 4 * k + 296) * v13);
     v8 = (int)(float)((float)*(int *)(g_pGameType + 4 * k + 260) * v13) + (160 - v6) / 2;
     CGfxManager::GetAccessoryGfxInfo((CGfxManager *)g_pGfxManager, (struct SGfxObjectInfo *)v25, k + 52);
     v19 = (unsigned __int16 *)v25[0];
     v17 = (unsigned __int8 *)(v25[0] + 12);
-    for ( m = 0; m < v19[1]; ++m )
+    for ( m = 0;
+          m < v19[1];
+          ++m )
     {
-      for ( n = 0; n < *v19; ++n )
+      for ( n = 0;
+            n < *v19;
+            ++n )
       {
         v24 = *v17++;
         if ( v24 )
@@ -1128,7 +1211,9 @@ void __cdecl CStateLobbyGameSettings::DrawMap(unsigned short * a1, unsigned shor
           {
             v9 = *v17++;
             if ( !v9 )
+            {
               break;
+            }
             m += (v9 - 1) / *v19;
             n += (v9 - 1) % *v19;
             if ( n >= *v19 )
@@ -1146,7 +1231,9 @@ void __cdecl CStateLobbyGameSettings::DrawMap(unsigned short * a1, unsigned shor
         {
           v10 = *v17++;
           if ( !v10 )
+          {
             break;
+          }
           m += (v10 - 1) / *v19;
           n += (v10 - 1) % *v19;
           if ( n >= *v19 )
@@ -1174,10 +1261,7 @@ void  CStateLobbyGameSettings::PaintMap(void) {
 
   if ( g_pGameType )
   {
-    v5 = (*(int (__thiscall **)(void *, std::wstring *, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(
-           g_pRandomMaps,
-           &g_pGameType->m_swMapName,
-           0);
+    v5 = (*(int (__thiscall **)(void *, std::wstring *, _DWORD))(*(_DWORD *)g_pRandomMaps + 32))(g_pRandomMaps, &g_pGameType->m_swMapName, 0);
     m_bIsSaveGame = g_pGameType->m_bIsSaveGame;
     if ( v5 )
     {
@@ -1189,9 +1273,7 @@ void  CStateLobbyGameSettings::PaintMap(void) {
       }
       else
       {
-        g_pGameType->m_pMapPreview = (*(int (__thiscall **)(void *, _DWORD *))(*(_DWORD *)g_pRandomMaps + 56))(
-                                       g_pRandomMaps,
-                                       this);
+        g_pGameType->m_pMapPreview = (*(int (__thiscall **)(void *, _DWORD *))(*(_DWORD *)g_pRandomMaps + 56))(g_pRandomMaps, this);
         g_pGameType->m_iMapPreviewWidth = 160;
         g_pGameType->m_iMapPreviewHeight = 160;
       }
@@ -1203,12 +1285,7 @@ void  CStateLobbyGameSettings::PaintMap(void) {
       IGuiEngine::LockOwnerImage(g_pGUIEngine, this[11236], 2246, (struct SGuiRect *)v6, (unsigned __int16 **)&v3, &v2);
       if ( v3 )
       {
-        CStateLobbyGameSettings::DrawMap(
-          (unsigned __int16 *)g_pGameType->m_pMapPreview,
-          (unsigned __int16 *)v3,
-          v2,
-          g_pGameType->m_iMapPreviewWidth,
-          g_pGameType->m_iMapPreviewHeight);
+        CStateLobbyGameSettings::DrawMap((unsigned __int16 *)g_pGameType->m_pMapPreview, (unsigned __int16 *)v3, v2, g_pGameType->m_iMapPreviewWidth, g_pGameType->m_iMapPreviewHeight);
         IGuiEngine::UnlockOwnerImage(g_pGUIEngine, this[11236], 2246);
       }
     }
@@ -1232,11 +1309,11 @@ void  CStateLobbyGameSettings::TransitionToHost(void) {
   *((_BYTE *)this + 16932) = 1;
   *((_BYTE *)this + 16933) = 1;
   CGameType::SetHost((CGameType *)g_pGameType, 1);
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
-    v2 = *(_BYTE *)(i + g_pGameType + 440)
-      || *(_DWORD *)(g_pGameType + 4 * i + 116) == 2
-      || *(_DWORD *)(g_pGameType + 4 * i + 116) == 3;
+    v2 = *(_BYTE *)(i + g_pGameType + 440) || *(_DWORD *)(g_pGameType + 4 * i + 116) == 2 || *(_DWORD *)(g_pGameType + 4 * i + 116) == 3;
     *(_BYTE *)(i + g_pGameType + 998) = v2;
   }
   return (*(int (__thiscall **)(CStateLobbyGameSettings *, int))(*(_DWORD *)this + 16))(this, 1);
@@ -1275,35 +1352,25 @@ void  CStateLobbyGameSettings::CreateRandomGoods(void) {
   {
     v1 = BBSupportDbgReport(2, "main\\states\\StateLobbyGameSettings.cpp", 1701, "!g_pGameType->IsSaveGame()");
     if ( v1 == 1 )
+    {
       __debugbreak();
+    }
   }
-  for ( i = 0; i < 7; ++i )
+  for ( i = 0;
+        i < 7;
+        ++i )
   {
     while ( 1 )
     {
       if ( *(_BYTE *)(i + g_pGameType + 784) )
       {
-        if ( *(_BYTE *)(i + g_pGameType + 784) != 1
-          && *(_BYTE *)(i + g_pGameType + 784) != 2
-          && *(_BYTE *)(i + g_pGameType + 784) != 6
-          && *(_BYTE *)(i + g_pGameType + 784) != 13
-          && *(_BYTE *)(i + g_pGameType + 784) != 23
-          && *(_BYTE *)(i + g_pGameType + 784) != 26
-          && *(_BYTE *)(i + g_pGameType + 784) != 30
-          && *(_BYTE *)(i + g_pGameType + 784) != 39
-          && *(_BYTE *)(i + g_pGameType + 784) != 40
-          && *(_BYTE *)(i + g_pGameType + 784) != 35
-          && *(_BYTE *)(i + g_pGameType + 784) != 19
-          && *(_BYTE *)(i + g_pGameType + 784) != 17
-          && *(_BYTE *)(i + g_pGameType + 784) != 5
-          && *(_BYTE *)(i + g_pGameType + 784) != 37
-          && *(_BYTE *)(i + g_pGameType + 784) != 38
-          && *(_BYTE *)(i + g_pGameType + 784) != 41
-          && *(_BYTE *)(i + g_pGameType + 784) != 42 )
+        if ( *(_BYTE *)(i + g_pGameType + 784) != 1 && *(_BYTE *)(i + g_pGameType + 784) != 2 && *(_BYTE *)(i + g_pGameType + 784) != 6 && *(_BYTE *)(i + g_pGameType + 784) != 13 && *(_BYTE *)(i + g_pGameType + 784) != 23 && *(_BYTE *)(i + g_pGameType + 784) != 26 && *(_BYTE *)(i + g_pGameType + 784) != 30 && *(_BYTE *)(i + g_pGameType + 784) != 39 && *(_BYTE *)(i + g_pGameType + 784) != 40 && *(_BYTE *)(i + g_pGameType + 784) != 35 && *(_BYTE *)(i + g_pGameType + 784) != 19 && *(_BYTE *)(i + g_pGameType + 784) != 17 && *(_BYTE *)(i + g_pGameType + 784) != 5 && *(_BYTE *)(i + g_pGameType + 784) != 37 && *(_BYTE *)(i + g_pGameType + 784) != 38 && *(_BYTE *)(i + g_pGameType + 784) != 41 && *(_BYTE *)(i + g_pGameType + 784) != 42 )
         {
           LOBYTE(v1) = CStateLobbyGameSettings::CheckDoubleEconomyGood(this, i);
           if ( !(_BYTE)v1 )
+          {
             break;
+          }
         }
       }
       *(_BYTE *)(i + g_pGameType + 784) = j__rand() % 43;
@@ -1319,10 +1386,14 @@ bool  CStateLobbyGameSettings::CheckDoubleEconomyGood(int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < a2; ++i )
+  for ( i = 0;
+        i < a2;
+        ++i )
   {
     if ( *(unsigned __int8 *)(i + g_pGameType + 784) == *(unsigned __int8 *)(a2 + g_pGameType + 784) )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -1366,12 +1437,7 @@ bool  CStateLobbyGameSettings::ReadUserflagFiles(void) {
       LOBYTE(v16) = 2;
       std::wstring::operator+=(v15, FindData.name);
       v2 = std::wstring::c_str((_Cnd_internal_imp_t *)v15);
-      v3 = (*(int (__thiscall **)(int, _DWORD *, _DWORD *, int *, int *))(*(_DWORD *)g_pRTComp + 16))(
-             g_pRTComp,
-             v2,
-             v7,
-             &v6,
-             &v5);
+      v3 = (*(int (__thiscall **)(int, _DWORD *, _DWORD *, int *, int *))(*(_DWORD *)g_pRTComp + 16))(g_pRTComp, v2, v7, &v6, &v5);
       v7[1] = v3;
       if ( v3 && v7[0] == 20 && v6 == 20 && v5 == 24 )
       {
@@ -1384,7 +1450,9 @@ bool  CStateLobbyGameSettings::ReadUserflagFiles(void) {
     while ( j___wfindnext64i32(FindHandle, &FindData) != -1 && *((int *)v10 + 4234) < 1000 );
   }
   if ( FindHandle != -1 )
+  {
     j___findclose(FindHandle);
+  }
   v8 = *((_DWORD *)v10 + 4234) >= 8;
   v11 = v8;
   LOBYTE(v16) = 0;
@@ -1402,8 +1470,12 @@ void  CStateLobbyGameSettings::ClearFlagnameList(void) {
   CStateLobbyGameSettings *result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 1000; ++i )
+  for ( i = 0;
+        i < 1000;
+        ++i )
+  {
     std::wstring::operator=((char *)this + 28 * i + 16944, (wchar_t *)&word_3746B20);
+  }
   result = this;
   *((_DWORD *)this + 4234) = 0;
   return result;
@@ -1418,17 +1490,25 @@ void  CStateLobbyGameSettings::SetupGUI(void) {
   unsigned __int8 v2; // [esp+7h] [ebp-1h]
 
   if ( byte_4030853 )
+  {
     *((_DWORD *)this + 11236) = 4;
+  }
   else
+  {
     *((_DWORD *)this + 11236) = 19;
+  }
   dword_403089C = *((_DWORD *)this + 11236);
   v2 = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 11236), GuiDlgMainGameSettingsProc);
   result = v2;
   if ( v2 )
+  {
     return result;
+  }
   result = BBSupportDbgReport(2, "main\\states\\StateLobbyGameSettings.cpp", 1224, "bRet");
   if ( result == 1 )
+  {
     __debugbreak();
+  }
   return result;
 }
 
@@ -1443,15 +1523,23 @@ bool  CStateLobbyGameSettings::CheckContinue(void) {
 
   v3 = 0;
   v2 = 0;
-  for ( i = 0; i < *(_DWORD *)(g_pGameType + 852); ++i )
+  for ( i = 0;
+        i < *(_DWORD *)(g_pGameType + 852);
+        ++i )
   {
     if ( *(_BYTE *)(i + g_pGameType + 440) && *(_DWORD *)(g_pGameType + 4 * i + 116) )
+    {
       return 0;
+    }
     ++v2;
     if ( byte_4030853 && !*(_BYTE *)(i + g_pGameType + 440) && *(_DWORD *)(dword_403083C + 2116 * i + 56) != 6 )
+    {
       return 0;
+    }
     if ( *(_DWORD *)(g_pGameType + 4 * i + 116) == 1 )
+    {
       ++v3;
+    }
   }
   return !(unsigned __int8)CGameType::IsLadderGame(g_pGameType) || v3 >= *(_DWORD *)(g_pGameType + 112);
 }
@@ -1470,41 +1558,48 @@ bool  CStateLobbyGameSettings::CheckReady(void) {
 
   LocalSlot = (char)CPlayerManager::GetLocalSlot();
   if ( !CGameType::IsMapLoaded(g_pGameType) && !byte_40308A3 )
-    return 0;
-  if ( g_pGameType->m_sPlayerMapUploadStarted[LocalSlot] == 6 )
-    return 1;
-  for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
   {
-    if ( i != LocalSlot
-      && g_pGameType->m_sPlayerColor[i] == g_pGameType->m_sPlayerColor[LocalSlot]
-      && !g_pGameType->m_sPlayerExclusiveColor[i] )
+    return 0;
+  }
+  if ( g_pGameType->m_sPlayerMapUploadStarted[LocalSlot] == 6 )
+  {
+    return 1;
+  }
+  for ( i = 0;
+        i < g_pGameType->m_iMapMaxNumPlayers;
+        ++i )
+  {
+    if ( i != LocalSlot && g_pGameType->m_sPlayerColor[i] == g_pGameType->m_sPlayerColor[LocalSlot] && !g_pGameType->m_sPlayerExclusiveColor[i] )
     {
       return 0;
     }
   }
   if ( g_pGameType->m_iMode != 3 )
+  {
     return 1;
+  }
   v3 = operator new[](4 * g_pGameType->m_uiNumberAlliances);
   memset(v3, 0, 4 * g_pGameType->m_uiNumberAlliances);
-  for ( j = 0; j < g_pGameType->m_iActualPlayerCount; ++j )
+  for ( j = 0;
+        j < g_pGameType->m_iActualPlayerCount;
+        ++j )
   {
     v4 = g_pGameType->m_sPlayerTeam[j];
     if ( !g_pGameType->m_sPlayerExclusiveColor[j] )
     {
-      if ( (v4 < 0 || (unsigned int)v4 >= g_pGameType->m_uiNumberAlliances)
-        && BBSupportDbgReport(
-             2,
-             "main\\states\\StateLobbyGameSettings.cpp",
-             1312,
-             "iCurrentAlliance>= 0 && iCurrentAlliance< g_pGameType->m_uiNumberAlliances") == 1 )
+      if ( (v4 < 0 || (unsigned int)v4 >= g_pGameType->m_uiNumberAlliances) && BBSupportDbgReport(2, "main\\states\\StateLobbyGameSettings.cpp", 1312, "iCurrentAlliance>= 0 && iCurrentAlliance< g_pGameType->m_uiNumberAlliances") == 1 )
       {
         __debugbreak();
       }
       if ( v4 >= 0 && (unsigned int)v4 < g_pGameType->m_uiNumberAlliances )
+      {
         ++*((_DWORD *)v3 + v4);
+      }
     }
   }
-  for ( k = 0; k < g_pGameType->m_uiNumberAlliances; ++k )
+  for ( k = 0;
+        k < g_pGameType->m_uiNumberAlliances;
+        ++k )
   {
     if ( *((int *)v3 + k) <= 0 )
     {
@@ -1523,8 +1618,7 @@ void  CStateLobbyGameSettings::SetBackButtonState(void) {
   
   int result; // eax
 
-  if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType)
-    && (result = CGameType::IsSaveGame((void *)g_pGameType), (_BYTE)result) )
+  if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) && (result = CGameType::IsSaveGame((void *)g_pGameType), (_BYTE)result) )
   {
     byte_40308A4 = 1;
   }
@@ -1571,21 +1665,11 @@ void  CStateLobbyGameSettings::UserflagChanged(int a2, int a3) {
           std::wstring::operator=(v14, (wchar_t *)L"Logo\\Current");
           std::wstring::operator+=(v14, Buffer);
           v8 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)v14);
-          v5 = (const WCHAR *)std::wstring::c_str((CStateLobbyGameSettings *)((char *)this
-                                                                            + 28
-                                                                            * *(_DWORD *)(g_pGameType
-                                                                                        + 4 * *(_DWORD *)v11
-                                                                                        + 368)
-                                                                            + 16944));
+          v5 = (const WCHAR *)std::wstring::c_str((CStateLobbyGameSettings *)((char *)this + 28 * *(_DWORD *)(g_pGameType + 4 * *(_DWORD *)v11 + 368) + 16944));
           if ( !CopyFileW(v5, v8, 0) )
           {
             v10 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v14);
-            v6 = (const char *)std::wstring::c_str((CStateLobbyGameSettings *)((char *)this
-                                                                             + 28
-                                                                             * *(_DWORD *)(g_pGameType
-                                                                                         + 4 * *(_DWORD *)v11
-                                                                                         + 368)
-                                                                             + 16944));
+            v6 = (const char *)std::wstring::c_str((CStateLobbyGameSettings *)((char *)this + 28 * *(_DWORD *)(g_pGameType + 4 * *(_DWORD *)v11 + 368) + 16944));
             CTrace::Print("::CopyFile() %s -> %s failed!", v6, v10);
           }
         }
@@ -1598,30 +1682,24 @@ void  CStateLobbyGameSettings::UserflagChanged(int a2, int a3) {
             std::wstring::operator=(v14, (wchar_t *)L"Logo\\Current");
             std::wstring::operator+=(v14, Buffer);
             v7 = (const WCHAR *)std::wstring::c_str((_Cnd_internal_imp_t *)v14);
-            v3 = (const WCHAR *)std::wstring::c_str((CStateLobbyGameSettings *)((char *)this
-                                                                              + 28
-                                                                              * *(_DWORD *)(g_pGameType
-                                                                                          + 4 * *(_DWORD *)v13
-                                                                                          + 368)
-                                                                              + 16944));
+            v3 = (const WCHAR *)std::wstring::c_str((CStateLobbyGameSettings *)((char *)this + 28 * *(_DWORD *)(g_pGameType + 4 * *(_DWORD *)v13 + 368) + 16944));
             if ( !CopyFileW(v3, v7, 0) )
             {
               v9 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v14);
-              v4 = (const char *)std::wstring::c_str((CStateLobbyGameSettings *)((char *)this
-                                                                               + 28
-                                                                               * *(_DWORD *)(g_pGameType
-                                                                                           + 4 * *(_DWORD *)v13
-                                                                                           + 368)
-                                                                               + 16944));
+              v4 = (const char *)std::wstring::c_str((CStateLobbyGameSettings *)((char *)this + 28 * *(_DWORD *)(g_pGameType + 4 * *(_DWORD *)v13 + 368) + 16944));
               CTrace::Print("::CopyFile() %s -> %s failed!", v4, v9);
             }
             ++*(_DWORD *)v13;
           }
         }
         if ( CStateLobbyGameSettings::CompileUserFlags() )
+        {
           CTrace::Print("Display Error-Dialog (No RTCompiler-Error)");
+        }
         if ( !CGfxManager::EnableGfxFile((CGfxManager *)g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF) )
+        {
           CTrace::Print("Display Error-Dialog (Userflags compile error)");
+        }
       }
     }
   }
@@ -1637,29 +1715,31 @@ void  CStateLobbyGameSettings::SetRandomRaces(void) {
   CStateLobbyGameSettings *result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  if ( !*((_BYTE *)this + 16932)
-    && BBSupportDbgReport(2, "main\\states\\StateLobbyGameSettings.cpp", 685, "m_bHost") == 1 )
+  if ( !*((_BYTE *)this + 16932) && BBSupportDbgReport(2, "main\\states\\StateLobbyGameSettings.cpp", 685, "m_bHost") == 1 )
   {
     __debugbreak();
   }
   result = this;
   if ( *((_BYTE *)this + 16932) )
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       result = (CStateLobbyGameSettings *)g_pGameType;
       if ( i >= *(_DWORD *)(g_pGameType + 852) )
+      {
         break;
+      }
       if ( *(_DWORD *)(g_pGameType + 4 * i + 404) == 5 )
       {
-        if ( (*(_BYTE *)(g_pGameType + 560) & 1) != 0
-          && ((*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn)
-           || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2)
-           || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD3 + 4))(g_pMissionCD3)) )
+        if ( (*(_BYTE *)(g_pGameType + 560) & 1) != 0 && ((*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pAddOn + 4))(g_pAddOn) || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD2 + 4))(g_pMissionCD2) || (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)g_pMissionCD3 + 4))(g_pMissionCD3)) )
         {
           *(_DWORD *)(g_pGameType + 4 * i + 404) = j__rand() & 3;
           if ( *(_DWORD *)(g_pGameType + 4 * i + 404) == 3 )
+          {
             *(_DWORD *)(g_pGameType + 4 * i + 404) = 4;
+          }
         }
         else
         {

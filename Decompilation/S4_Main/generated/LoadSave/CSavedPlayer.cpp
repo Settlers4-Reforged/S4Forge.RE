@@ -12,7 +12,9 @@ void  CSavedPlayer::Load(class IS4Chunk & a2) {
   uVersion = 0;
   a2->Load(&uVersion, 4);
   if ( uVersion != 1 && BBSupportDbgReport(2, "LoadSave\\GeneralChunk.cpp", 38, "VERSION==1") == 1 )
+  {
     __debugbreak();
+  }
   if ( uVersion == 1 )
   {
     a2->Load(this, 4);

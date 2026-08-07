@@ -3,7 +3,7 @@
 // Definitions for class COneSettlerTypeIterator
 
 // address=[0x13037c0]
-// Decompiled from COneSettlerTypeIterator *__thiscall COneSettlerTypeIterator::COneSettlerTypeIterator(  COneSettlerTypeIterator *this,  int a2,  int a3)
+// Decompiled from COneSettlerTypeIterator *__thiscall COneSettlerTypeIterator::COneSettlerTypeIterator(COneSettlerTypeIterator *this, int a2, int a3)
  COneSettlerTypeIterator::COneSettlerTypeIterator(int a2, int a3) {
   
   COneSettlerTypeIterator::Init(this, a2, a3);
@@ -27,10 +27,7 @@ void  COneSettlerTypeIterator::Init(int a2, int a3) {
 // Decompiled from int __thiscall COneSettlerTypeIterator::FirstSettler(COneSettlerTypeIterator *this)
 int  COneSettlerTypeIterator::FirstSettler(void) {
   
-  *((_DWORD *)this + 1) = CSettlerMgr::GetFirstSettlerId(
-                            (CSettlerMgr *)g_cSettlerMgr,
-                            *((_DWORD *)this + 2),
-                            *(_DWORD *)this);
+  *((_DWORD *)this + 1) = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, *((_DWORD *)this + 2), *(_DWORD *)this);
   return COneSettlerTypeIterator::NextSettlerIfCurrentIsNotValid(this);
 }
 
@@ -59,9 +56,13 @@ int  COneSettlerTypeIterator::NextSettler(void) {
 int  COneSettlerTypeIterator::NextSettlerIfCurrentIsNotValid(void) {
   
   if ( CSettlerIteratorBase::SettlerValid(this, *((_DWORD *)this + 1)) )
+  {
     return *((_DWORD *)this + 1);
+  }
   else
+  {
     return COneSettlerTypeIterator::NextSettler(this);
+  }
 }
 
 

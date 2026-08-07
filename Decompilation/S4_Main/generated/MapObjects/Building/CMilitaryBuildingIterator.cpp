@@ -3,7 +3,7 @@
 // Definitions for class CMilitaryBuildingIterator
 
 // address=[0x1325bc0]
-// Decompiled from CMilitaryBuildingIterator *__thiscall CMilitaryBuildingIterator::CMilitaryBuildingIterator(  CMilitaryBuildingIterator *this)
+// Decompiled from CMilitaryBuildingIterator *__thiscall CMilitaryBuildingIterator::CMilitaryBuildingIterator(CMilitaryBuildingIterator *this)
  CMilitaryBuildingIterator::CMilitaryBuildingIterator(void) {
   
   CGenericBuildingIterator::CGenericBuildingIterator(this);

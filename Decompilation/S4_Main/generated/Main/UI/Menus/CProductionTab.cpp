@@ -23,7 +23,9 @@ int  CProductionTab::GetProdIdForGoodType(enum PILE_TYPES a1, int a2) {
  CProductionTab::CProductionTab(void) {
   
   if ( CProductionTab::m_iNumberOfEntries )
+  {
     return this;
+  }
   memset(CProductionTab::m_aRaceAndGoodToProdIdMap, 0, 0x35Cu);
   CProductionTab::m_iNumberOfEntries = 1;
   CProductionTab::PT(this, "Holzproduktion", 5, 7, 1, 3, 0, 0, 0);
@@ -66,8 +68,7 @@ int  CProductionTab::GetAlternateProdForProdId(enum PILE_TYPES a2, int a3) {
   int ProdIdForGoodType; // [esp+4h] [ebp-8h]
 
   ProdIdForGoodType = CProductionTab::GetProdIdForGoodType(this, a2, a3);
-  if ( CProductionTab::m_aProductionEntry[8 * ProdIdForGoodType + 10] == a2
-    && CProductionTab::m_aProductionEntry[8 * ProdIdForGoodType + 9] == a3 )
+  if ( CProductionTab::m_aProductionEntry[8 * ProdIdForGoodType + 10] == a2 && CProductionTab::m_aProductionEntry[8 * ProdIdForGoodType + 9] == a3 )
   {
     return ProdIdForGoodType + 1;
   }
@@ -96,8 +97,12 @@ void  CProductionTab::PT(char const * a1, int a2, enum PILE_TYPES a3, enum BUILD
 
   if ( a2 == 5 )
   {
-    for ( i = 0; i < 5; ++i )
+    for ( i = 0;
+          i < 5;
+          ++i )
+    {
       CProductionTab::m_aRaceAndGoodToProdIdMap[43 * i + a3] = CProductionTab::m_iNumberOfEntries;
+    }
   }
   else
   {

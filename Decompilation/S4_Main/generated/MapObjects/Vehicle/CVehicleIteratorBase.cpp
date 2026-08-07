@@ -40,10 +40,14 @@ bool  CVehicleIteratorBase::VehicleValid(int a2) {
 
   v4 = 1;
   if ( !a2 )
+  {
     return v4;
+  }
   v2 = CMapObjectMgr::Entity(a2);
   if ( ((unsigned int)&loc_3000000 & IEntity::Flags(v2)) == 0 )
+  {
     return 0;
+  }
   return v4;
 }
 

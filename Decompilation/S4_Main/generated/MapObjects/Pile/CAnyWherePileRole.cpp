@@ -11,7 +11,9 @@ class CPersistence * __cdecl CAnyWherePileRole::New(std::istream & a1) {
 
   C = (CAnyWherePileRole *)operator new(8u);
   if ( C )
+  {
     CAnyWherePileRole::CAnyWherePileRole(C, (int)a1);
+  }
 }
 
 

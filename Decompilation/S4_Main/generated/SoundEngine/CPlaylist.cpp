@@ -55,9 +55,13 @@ void  CPlaylist::AddTitle(std::string const * a2, int a3) {
 
   v5 = (CPlaylist::SEntry *)operator new(0x20u);
   if ( v5 )
+  {
     v4 = CPlaylist::SEntry::SEntry(v5);
+  }
   else
+  {
     v4 = 0;
+  }
   v7 = v4;
   std::string::operator=(a2);
   *(_DWORD *)(v4 + 28) = a3;
@@ -75,16 +79,24 @@ void  CPlaylist::TitleEnded(void) {
   CPlaylist *result; // eax
 
   if ( *((int *)this + 5) <= 1 )
+  {
     ++*((_DWORD *)this + 6);
+  }
   else
+  {
     *((_DWORD *)this + 6) += j__rand() % (*((_DWORD *)this + 5) - 1) + 1;
+  }
   result = (CPlaylist *)*((_DWORD *)this + 6);
   if ( (int)result < *((_DWORD *)this + 5) )
+  {
     return result;
+  }
   result = (CPlaylist *)(*((_DWORD *)this + 6) - *((_DWORD *)this + 5));
   *((_DWORD *)this + 6) = result;
   if ( !*((_DWORD *)this + 8) )
+  {
     return result;
+  }
   result = this;
   ++*((_DWORD *)this + 7);
   return result;
@@ -142,7 +154,9 @@ char const *  CPlaylist::GetTitle(int a2) {
   void **v2; // eax
 
   if ( a2 >= this[5] )
+  {
     return 0;
+  }
   v2 = (void **)std::vector<CPlaylist::SEntry *>::operator[](a2);
   return std::string::c_str(*v2);
 }
@@ -155,7 +169,9 @@ char const *  CPlaylist::GetActiveTitle(void) {
   void **v1; // eax
 
   if ( !*((_DWORD *)this + 5) )
+  {
     return 0;
+  }
   v1 = (void **)std::vector<CPlaylist::SEntry *>::operator[](*((_DWORD *)this + 6));
   return std::string::c_str(*v1);
 }
@@ -214,9 +230,13 @@ void  CPlaylist::SetHandle(struct _STREAM * a2) {
 int  CPlaylist::GetFadeInTime(int a2) {
   
   if ( a2 < *((_DWORD *)this + 5) )
+  {
     return *(_DWORD *)(*(_DWORD *)std::vector<CPlaylist::SEntry *>::operator[](a2) + 28);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -269,13 +289,19 @@ void  CPlaylist::FreeMemory(void) {
     LOBYTE(v17) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>(v4);
     if ( !v16 )
+    {
       break;
+    }
     v11 = *(CPlaylist::SEntry **)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>::operator*(v5);
     v14 = v11;
     if ( v11 )
+    {
       v10 = CPlaylist::delete v14;
+    }
     else
+    {
       v10 = 0;
+    }
     v7 = v2;
     v6 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>((struct std::_Iterator_base12 *)v5);
     v9 = std::vector<CPlaylist::SEntry *>::erase(v3, v2[0], v2[1], v2[2]);

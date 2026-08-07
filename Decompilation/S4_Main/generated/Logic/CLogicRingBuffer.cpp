@@ -31,30 +31,25 @@ void  CLogicRingBuffer::Load(class IS4Chunk & a2) {
   _BYTE v5[32]; // [esp+14h] [ebp-30h] BYREF
   int v6; // [esp+40h] [ebp-4h]
 
-  if ( (*(unsigned __int8 (__thiscall **)(char *))(*((_DWORD *)this - 6) + 12))((char *)this - 24)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\LogicRingBuffer.h",
-         33,
-         (const char *)&dword_36C2338[1]) == 1 )
+  if ( (*(unsigned __int8 (__thiscall **)(char *))(*((_DWORD *)this - 6) + 12))((char *)this - 24) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\LogicRingBuffer.h", 33, (const char *)&dword_36C2338[1]) == 1 )
   {
     __debugbreak();
   }
   CEvn_Logic::CEvn_Logic(v5);
   v6 = 0;
   v2 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
-  for ( i = 0; i < v2; ++i )
+  for ( i = 0;
+        i < v2;
+        ++i )
   {
     if ( !(*(unsigned __int8 (__thiscall **)(char *, _BYTE *))(*((_DWORD *)this - 6) + 4))((char *)this - 24, v5) )
     {
       BBSupportTracePrint(3, "FATAL ERROR: Can't write to logic ringbuffer during load!");
       BBSupportTracePrintF(3, "->          Event#: %d", i);
-      if ( BBSupportDbgReport(
-             1,
-             "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\LogicRingBuffer.h",
-             48,
-             "Internal error (L0)- aborting!\nInterner Fehler (L0) aufgetreten! Programm wird abgebrochen!") == 1 )
+      if ( BBSupportDbgReport(1, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\LogicRingBuffer.h", 48, "Internal error (L0)- aborting!\nInterner Fehler (L0) aufgetreten! Programm wird abgebrochen!") == 1 )
+      {
         __debugbreak();
+      }
     }
   }
   v6 = -1;
@@ -83,7 +78,9 @@ void  CLogicRingBuffer::Save(class IS4Chunk & a2) {
   {
     result = (*(unsigned __int8 (__thiscall **)(char *))(*((_DWORD *)this - 6) + 20))((char *)this - 24);
     if ( !(_BYTE)result )
+    {
       break;
+    }
     v3 = (*(int (__thiscall **)(char *))(*((_DWORD *)this - 6) + 24))((char *)this - 24);
     (*(void (__thiscall **)(int, struct IS4Chunk *))(*(_DWORD *)v3 + 4))(v3, a2);
   }

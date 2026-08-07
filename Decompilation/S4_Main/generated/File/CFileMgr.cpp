@@ -46,23 +46,24 @@ struct _iobuf * __cdecl CFileMgr::Open(wchar_t const * FileName, wchar_t const *
   _DWORD *IsFileOpen; // [esp+8h] [ebp-4h]
 
   if ( !FileName )
+  {
     sub_2F292E0("Filename argument to fopen is NULL", Str, a4);
+  }
   if ( !Mode )
+  {
     sub_2F292E0("Mode argument to fopen is NULL", Str, a4);
+  }
   CFileMgr::CheckOpenMode(0, a4, (int)Str, (int)FileName, Mode, (int)&v5);
   IsFileOpen = (_DWORD *)CFileMgr::IsFileOpen(FileName);
   if ( IsFileOpen )
-    sub_2F292E0(
-      "File `%s' is already open in fopen (due to earlier %s on line %d, file `%s')",
-      Str,
-      a4,
-      FileName,
-      CFileMgr::fnames[IsFileOpen[5]],
-      IsFileOpen[3],
-      IsFileOpen[4]);
+  {
+    sub_2F292E0("File `%s' is already open in fopen (due to earlier %s on line %d, file `%s')", Str, a4, FileName, CFileMgr::fnames[IsFileOpen[5]], IsFileOpen[3], IsFileOpen[4]);
+  }
   v6 = (int)j___wfopen(FileName, Mode);
   if ( !v6 )
+  {
     return 0;
+  }
   CFileMgr::AddNewFileDesc(v6, 0, a4, Str, FileName, Mode, v5);
   return v6;
 }
@@ -75,7 +76,9 @@ void __cdecl CFileMgr::RemoveFromList(struct SFileDesc * a1) {
   int result; // eax
 
   if ( !a1 && BBSupportDbgReport(2, "Source\\File\\FileMgr.cpp", 342, "_pFileDesc != NULL") == 1 )
+  {
     __debugbreak();
+  }
   CFileMgr::DisposeNode(a1);
   --CFileMgr::m_iOpenFiles;
   qmemcpy(a1, &CFileMgr::m_vFileDesc[9 * CFileMgr::m_iOpenFiles], 0x24u);
@@ -93,7 +96,9 @@ struct SFileDesc * __cdecl CFileMgr::CheckValidFilePtr(struct _iobuf * a1, char 
   {
     v5 = CFileMgr::LookupFilePtr(a1);
     if ( !v5 )
+    {
       sub_2F292E0("FILE* pointer passed to `%s' was not previously opened", a3, a4, a2);
+    }
     return v5;
   }
   else
@@ -117,38 +122,42 @@ void __cdecl CFileMgr::ReportOpenFiles(void) {
 
   v5 = 0;
   BBSupportTracePrintF(2, "----------DEBUGLIB FILE REPORT----------");
-  for ( i = 0; i < CFileMgr::m_iOpenFiles; ++i )
+  for ( i = 0;
+        i < CFileMgr::m_iOpenFiles;
+        ++i )
   {
     v6 = &CFileMgr::m_vFileDesc[9 * i];
-    if ( (FILE *)*v6 != j____acrt_iob_func(0)
-      && (FILE *)*v6 != j____acrt_iob_func(1u)
-      && (FILE *)*v6 != j____acrt_iob_func(2u) )
+    if ( (FILE *)*v6 != j____acrt_iob_func(0) && (FILE *)*v6 != j____acrt_iob_func(1u) && (FILE *)*v6 != j____acrt_iob_func(2u) )
     {
       ++v5;
-      BBSupportTracePrintF(
-        2,
-        "File `%s' opened by %s at line %ld in file %s\n",
-        (const char *)v6[1],
-        CFileMgr::fnames[v6[5]],
-        v6[3],
-        (const char *)v6[4]);
+      BBSupportTracePrintF(2, "File `%s' opened by %s at line %ld in file %s\n", (const char *)v6[1], CFileMgr::fnames[v6[5]], v6[3], (const char *)v6[4]);
     }
   }
   v0 = j____acrt_iob_func(0);
   if ( !CFileMgr::LookupFilePtr(v0) )
+  {
     BBSupportTracePrintF(2, "(stdin) has been closed");
+  }
   v1 = j____acrt_iob_func(1u);
   if ( !CFileMgr::LookupFilePtr(v1) )
+  {
     BBSupportTracePrintF(2, "(stdout) has been closed");
+  }
   v2 = j____acrt_iob_func(2u);
   if ( !CFileMgr::LookupFilePtr(v2) )
+  {
     BBSupportTracePrintF(2, "(stderr) has been closed");
+  }
   if ( v5 )
   {
     if ( v5 == 1 )
+    {
       BBSupportTracePrintF(2, "There is 1 file open\n");
+    }
     else
+    {
       BBSupportTracePrintF(2, "There are %d files open", v5);
+    }
   }
   else
   {
@@ -166,27 +175,22 @@ void __cdecl CFileMgr::CheckOpenMode(int a1, int a2, char * a3, wchar_t const * 
   _DWORD *result; // eax
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; (&CFileMgr::m_sModes)[2 * i]; ++i )
+  for ( i = 0;
+        (&CFileMgr::m_sModes)[2 * i];
+        ++i )
   {
     v6 = wcslen((&CFileMgr::m_sModes)[2 * i]);
     if ( !j__wcsncmp(String2, (&CFileMgr::m_sModes)[2 * i], v6) )
+    {
       break;
+    }
   }
   if ( (&CFileMgr::m_sModes)[2 * i] )
   {
     *a6 = dword_3E2D2CC[2 * i];
-    if ( !j__wcscmp(L"rw", String2)
-      || !j__wcscmp(L"wr", String2)
-      || !j__wcscmp(L"rwb", String2)
-      || !j__wcscmp(L"wrb", String2) )
+    if ( !j__wcscmp(L"rw", String2) || !j__wcscmp(L"wr", String2) || !j__wcscmp(L"rwb", String2) || !j__wcscmp(L"wrb", String2) )
     {
-      return (_DWORD *)sub_2F292E0(
-                         "mode \"%s\" is obsolete (use \"rb+\") -- was supplied to %s to open file `%s'",
-                         a3,
-                         a2,
-                         String2,
-                         CFileMgr::fnames[a1],
-                         a4);
+      return (_DWORD *)sub_2F292E0("mode \"%s\" is obsolete (use \"rb+\") -- was supplied to %s to open file `%s'", a3, a2, String2, CFileMgr::fnames[a1], a4);
     }
     else
     {
@@ -198,28 +202,16 @@ void __cdecl CFileMgr::CheckOpenMode(int a1, int a2, char * a3, wchar_t const * 
         {
           result = (_DWORD *)(*a6 & 8);
           if ( !result )
-            return (_DWORD *)sub_2F292E0(
-                               "Update mode \"%s\" specifies text file; \"%sb\" is probably intended -- was supplied to %"
-                               "s to open file `%s'",
-                               a3,
-                               a2,
-                               (&CFileMgr::m_sModes)[2 * i],
-                               (&CFileMgr::m_sModes)[2 * i],
-                               CFileMgr::fnames[a1],
-                               a4);
+          {
+            return (_DWORD *)sub_2F292E0("Update mode \"%s\" specifies text file; \"%sb\" is probably intended -- was supplied to %s to open file `%s'", a3, a2, (&CFileMgr::m_sModes)[2 * i], (&CFileMgr::m_sModes)[2 * i], CFileMgr::fnames[a1], a4);
+          }
         }
       }
     }
   }
   else
   {
-    result = (_DWORD *)sub_2F292E0(
-                         "Bad mode \"%s\" supplied to %s to open file `%s'",
-                         a3,
-                         a2,
-                         String2,
-                         CFileMgr::fnames[a1],
-                         a4);
+    result = (_DWORD *)sub_2F292E0("Bad mode \"%s\" supplied to %s to open file `%s'", a3, a2, String2, CFileMgr::fnames[a1], a4);
     *a6 = 1;
   }
   return result;
@@ -259,13 +251,19 @@ void __cdecl CFileMgr::DisposeNode(struct SFileDesc * a1) {
 
   result = j____acrt_iob_func(0);
   if ( *a1 == result )
+  {
     return result;
+  }
   result = j____acrt_iob_func(1u);
   if ( *a1 == result )
+  {
     return result;
+  }
   result = j____acrt_iob_func(2u);
   if ( *a1 == result )
+  {
     return result;
+  }
   operator delete[](a1[4]);
   operator delete[](a1[1]);
   return (FILE *)operator delete[](a1[2]);
@@ -278,10 +276,14 @@ struct SFileDesc * __cdecl CFileMgr::IsFileOpen(wchar_t const * String2) {
   
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; i < CFileMgr::m_iOpenFiles; ++i )
+  for ( i = 0;
+        i < CFileMgr::m_iOpenFiles;
+        ++i )
   {
     if ( !j__wcscmp((const wchar_t *)dword_46857B4[9 * i], String2) )
+    {
       return &CFileMgr::m_vFileDesc[9 * i];
+    }
   }
   return 0;
 }
@@ -293,10 +295,14 @@ struct SFileDesc * __cdecl CFileMgr::LookupFilePtr(struct _iobuf * a1) {
   
   int i; // [esp+0h] [ebp-4h]
 
-  for ( i = 0; i < CFileMgr::m_iOpenFiles; ++i )
+  for ( i = 0;
+        i < CFileMgr::m_iOpenFiles;
+        ++i )
   {
     if ( (struct _iobuf *)CFileMgr::m_vFileDesc[9 * i] == a1 )
+    {
       return &CFileMgr::m_vFileDesc[9 * i];
+    }
   }
   return 0;
 }

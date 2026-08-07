@@ -10,8 +10,7 @@ void  TMap<unsigned char>::LoadMap(class S4::CMapFile & _rMapFile, int a3, int _
   void *pChunk; // [esp+8h] [ebp-4h]
 
   pChunk = S4::CMapFile::LoadChunk(_rMapFile, a3, 0, &a4, 0);
-  if ( !pChunk
-    && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TMap.h", 82, "pChunk != NULL") == 1 )
+  if ( !pChunk && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TMap.h", 82, "pChunk != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -30,8 +29,7 @@ void  TMap<unsigned short>::LoadMap(class S4::CMapFile & a2, int a3, int a4) {
 
   v5 = this;
   Src = S4::CMapFile::LoadChunk(a2, a3, 0, &a4a, 0);
-  if ( !Src
-    && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TMap.h", 82, "pChunk != NULL") == 1 )
+  if ( !Src && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TMap.h", 82, "pChunk != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -50,8 +48,7 @@ void  TMap<struct T_GFX_MAP_ELEMENT>::LoadMap(class S4::CMapFile & a2, int a3, i
 
   v5 = this;
   Src = S4::CMapFile::LoadChunk(a2, a3, 0, &a4a, 0);
-  if ( !Src
-    && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TMap.h", 82, "pChunk != NULL") == 1 )
+  if ( !Src && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TMap.h", 82, "pChunk != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -70,12 +67,7 @@ bool  TSparseMap<unsigned char>::LoadMap(class S4::CMapFile & a2, int a3) {
   TSparseMap<unsigned char>::Destruct(this);
   TSparseMap<unsigned char>::Construct(this);
   v6 = (TSparseMap::SSaveData *)S4::CMapFile::LoadChunk(a2, a3, 0, &v4, 0);
-  if ( !v6
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TSparseMap.h",
-         477,
-         "pBuffer != NULL") == 1 )
+  if ( !v6 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\world\\TSparseMap.h", 477, "pBuffer != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -94,7 +86,9 @@ bool  TSparseMap<unsigned char>::LoadMap(class S4::CMapFile & a2, int a3) {
 void  TMap<unsigned char>::SaveMap(class S4::CMapFile & a2, int a3, int a4) {
   
   if ( this->m_pData )
+  {
     S4::CMapFile::SaveChunk(a2, a3, 0, a4 * a4, this->m_pData, 0);
+  }
 }
 
 
@@ -103,7 +97,9 @@ void  TMap<unsigned char>::SaveMap(class S4::CMapFile & a2, int a3, int a4) {
 void  TMap<unsigned short>::SaveMap(class S4::CMapFile & a2, int a3, int a4) {
   
   if ( this->m_pData )
+  {
     S4::CMapFile::SaveChunk(a2, a3, 0, 2 * a4 * a4, this->m_pData, 0);
+  }
 }
 
 
@@ -112,7 +108,9 @@ void  TMap<unsigned short>::SaveMap(class S4::CMapFile & a2, int a3, int a4) {
 void  TMap<struct T_GFX_MAP_ELEMENT>::SaveMap(class S4::CMapFile & a2, int a3, int a4) {
   
   if ( this->m_pData )
+  {
     S4::CMapFile::SaveChunk(a2, a3, 0, 4 * a4 * a4, this->m_pData, 0);
+  }
 }
 
 
@@ -136,29 +134,24 @@ bool  TSparseMap<unsigned char>::SaveMap(class S4::CMapFile & _rMapFile, int a3)
 
   std::vector<TSparseMap<unsigned char>::SSaveData,std::allocator<TSparseMap<unsigned char>::SSaveData>>::vector<TSparseMap<unsigned char>::SSaveData,std::allocator<TSparseMap<unsigned char>::SSaveData>>(vec);
   exceptionBlock = 0;
-  std::vector<TSparseMap<unsigned char>::SSaveData,std::allocator<TSparseMap<unsigned char>::SSaveData>>::reserve(
-    vec,
-    this->m_uSetNodes + 1);
+  std::vector<TSparseMap<unsigned char>::SSaveData,std::allocator<TSparseMap<unsigned char>::SSaveData>>::reserve(vec, this->m_uSetNodes + 1);
   v12 = 0;
-  std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::begin(
-    this,
-    (int)v8);
+  std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::begin(this, (int)v8);
   LOBYTE(exceptionBlock) = 1;
   while ( 1 )
   {
-    end = (std::_Iterator_base12 *)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::end(
-                                     this,
-                                     (int)v7);
+    end = (std::_Iterator_base12 *)std::vector<TSparseMap<unsigned char>::TNode *,std::allocator<TSparseMap<unsigned char>::TNode *>>::end(this, (int)v7);
     LOBYTE(exceptionBlock) = 2;
-    v17 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<TSparseMap<unsigned char>::TNode *>>>::operator!=(
-            v8,
-            end);
+    v17 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<TSparseMap<unsigned char>::TNode *>>>::operator!=(v8, end);
     LOBYTE(exceptionBlock) = 1;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<TSparseMap<unsigned char>::TNode *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<TSparseMap<unsigned char>::TNode *>>>(v7);
     if ( !v17 )
+    {
       break;
-    for ( i = *(TSparseMap::TNode **)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<TSparseMap<unsigned char>::TNode *>>>::operator*(v8)
-                                    + 4); i->m_pNextNode; i = i->m_pNextNode )
+    }
+    for ( i = *(TSparseMap::TNode **)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<TSparseMap<unsigned char>::TNode *>>>::operator*(v8) + 4);
+          i->m_pNextNode;
+          i = i->m_pNextNode )
     {
       std::vector<TSparseMap<unsigned char>::SSaveData,std::allocator<TSparseMap<unsigned char>::SSaveData>>::emplace_back<>(vec);
       v13 = (TSparseMap::SSaveData *)std::vector<TSparseMap<unsigned char>::SSaveData,std::allocator<TSparseMap<unsigned char>::SSaveData>>::back(vec);

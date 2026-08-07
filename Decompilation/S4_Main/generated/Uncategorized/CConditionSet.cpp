@@ -11,9 +11,13 @@
 
   C = (CDynList *)operator new(0xCu);
   if ( C )
+  {
     v3 = CDynList::CDynList(C);
+  }
   else
+  {
     v3 = 0;
+  }
   *(_DWORD *)this = v3;
   return this;
 }
@@ -27,7 +31,9 @@
 
   result = this;
   if ( *this )
+  {
     return (CDynList **)delete *this;
+  }
   return result;
 }
 
@@ -57,16 +63,20 @@ void  CConditionSet::NewMayProblem(int a2, class CParam * a3) {
 
   C = (COptimizeOptions *)operator new(0x18u);
   if ( C )
+  {
     v4 = COptimizeOptions::COptimizeOptions(C);
+  }
   else
+  {
     v4 = 0;
+  }
   *((_DWORD *)v4 + 4) = 0;
   CConditionSet::NewProblem(this, a2, a3, v4);
 }
 
 
 // address=[0x2f3efe0]
-// Decompiled from void __thiscall CConditionSet::NewMayProblem_0(  CConditionSet *this,  int a2,  struct CParam *a3,  struct COptimizeOptions *a4)
+// Decompiled from void __thiscall CConditionSet::NewMayProblem_0(CConditionSet *this, int a2, struct CParam *a3, struct COptimizeOptions *a4)
 void  CConditionSet::NewMayProblem(int a2, class CParam * a3, class COptimizeOptions * a4) {
   
   *((_DWORD *)a4 + 4) = 0;
@@ -83,9 +93,13 @@ void  CConditionSet::NewProblem(int a2, class CParam * a3) {
 
   C = (COptimizeOptions *)operator new(0x18u);
   if ( C )
+  {
     v4 = COptimizeOptions::COptimizeOptions(C);
+  }
   else
+  {
     v4 = 0;
+  }
   CConditionSet::NewProblem(this, a2, a3, v4);
 }
 
@@ -104,20 +118,32 @@ void  CConditionSet::NewProblem(int a2, class CParam * a3, class COptimizeOption
   {
     v6 = (CCondition *)operator new(0x18u);
     if ( v6 )
+    {
       v5 = CCondition::CCondition(v6, a2, a3, a4);
+    }
     else
+    {
       v5 = 0;
+    }
     return CDynList::addElement(*this, v5);
   }
   else
   {
-    for ( i = 0; i < CDynList::size(*this) && *(_DWORD *)a4 <= **(_DWORD **)(CDynList::elementAt(*this, i) + 20); ++i )
+    for ( i = 0;
+          i < CDynList::size(*this) && *(_DWORD *)a4 <= **(_DWORD **)(CDynList::elementAt(*this, i) + 20);
+          ++i )
+    {
       ;
+    }
     C = (CCondition *)operator new(0x18u);
     if ( C )
+    {
       v7 = CCondition::CCondition(C, a2, a3, a4);
+    }
     else
+    {
       v7 = 0;
+    }
     return CDynList::insertElementAt(*this, v7, i);
   }
 }
@@ -132,11 +158,15 @@ void  CConditionSet::Ausgabe(void) {
   int v3; // [esp-8h] [ebp-14h]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = CDynList::size(*this);
     if ( i >= result )
+    {
       break;
+    }
     v3 = *(_DWORD *)(CDynList::elementAt(*this, i) + 12);
     std::operator<<<std::char_traits<char>>((int)&std::cout, "pSolutionSet ermittelt ! ");
     v2 = std::ostream::operator<<(v3);

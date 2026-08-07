@@ -42,12 +42,7 @@ void  CAIPlayerEvaluation::EvaluatePlayer(int a2) {
   this->m_uAITick = IAIEnvironment::TickCounter();
   NumberOfRandCalls = CRandom16::GetNumberOfRandCalls((CRandom16 *)&g_pGameData->m_sRandom);
   Seed = CRandom16::GetSeed((CRandom16 *)&g_pGameData->m_sRandom);
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer2,
-    "==> Evaluation: AI_tick %u, seed 0x%08x, counter %u",
-    this->m_uAITick,
-    Seed,
-    NumberOfRandCalls);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer2, "==> Evaluation: AI_tick %u, seed 0x%08x, counter %u", this->m_uAITick, Seed, NumberOfRandCalls);
   CAIPlayerEvaluation::EvaluateGoods(this, a2);
   CAIPlayerEvaluation::EvaluateWarriors(this, a2);
   CAIPlayerEvaluation::EvaluateBuildings(this, a2);
@@ -58,23 +53,10 @@ void  CAIPlayerEvaluation::EvaluatePlayer(int a2) {
 // Decompiled from void __thiscall CAIPlayerEvaluation::DbgPrint(CAIPlayerEvaluation *this)
 void  CAIPlayerEvaluation::DbgPrint(void) {
   
-  IAIEnvironment::DbgTracePrintF(
-    "F-S/B/U/L, P:      %5i, %5i, %5i, %5i, %5i",
-    this->m_uTotalSwordmen,
-    this->m_uTotalBowmen,
-    this->m_uSpecialistsCount,
-    this->m_uLeadersCount,
-    this->m_uPriestsCount);
+  IAIEnvironment::DbgTracePrintF("F-S/B/U/L, P:      %5i, %5i, %5i, %5i, %5i", this->m_uTotalSwordmen, this->m_uTotalBowmen, this->m_uSpecialistsCount, this->m_uLeadersCount, this->m_uPriestsCount);
   IAIEnvironment::DbgTracePrintF("Units (Value):     %5i, %5i", this->m_uTotalUnitCount, this->m_uTotalFighterCount);
-  IAIEnvironment::DbgTracePrintF(
-    "Towers & castles:  %5i, %5i, %5i",
-    this->m_uSmallTowerCount,
-    this->m_uBigTowerCount,
-    this->m_uCastleCount);
-  IAIEnvironment::DbgTracePrintF(
-    "Buildings (Value): %5i, %5i",
-    this->m_uTotalWarBuildingCount,
-    this->m_uTotalWarBuildingValue);
+  IAIEnvironment::DbgTracePrintF("Towers & castles:  %5i, %5i, %5i", this->m_uSmallTowerCount, this->m_uBigTowerCount, this->m_uCastleCount);
+  IAIEnvironment::DbgTracePrintF("Buildings (Value): %5i, %5i", this->m_uTotalWarBuildingCount, this->m_uTotalWarBuildingValue);
 }
 
 
@@ -104,14 +86,7 @@ void  CAIPlayerEvaluation::EvaluateGoods(int a2) {
   }
   this->m_uTotalWeaponCount = this->m_uSpecialWeaponCount + this->m_uBowCount + this->m_uSwordCount;
   this->m_uGoldCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_GOLDBAR);
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer2,
-    "CAIPlayerEvaluation(Goods): Player %i: %i %i %i %i",
-    a2,
-    this->m_uSwordCount,
-    this->m_uBowCount,
-    this->m_uSpecialWeaponCount,
-    this->m_uGoldCount);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer2, "CAIPlayerEvaluation(Goods): Player %i: %i %i %i %i", a2, this->m_uSwordCount, this->m_uBowCount, this->m_uSpecialWeaponCount, this->m_uGoldCount);
 }
 
 
@@ -132,83 +107,47 @@ void  CAIPlayerEvaluation::EvaluateWarriors(int _iPlayerId) {
   _DWORD aSettlerWeights[16]; // [esp+38h] [ebp-44h] BYREF
 
   memset(aSettlerWeights, 0, sizeof(aSettlerWeights));
-  for ( i = 0; s_sAISettlerEvalWeights[i].m_iType; ++i )
+  for ( i = 0;
+        s_sAISettlerEvalWeights[i].m_iType;
+        ++i )
   {
     uNumberOfSettlers = IAIEnvironment::SettlerGetNumberOfSettlers(_iPlayerId, s_sAISettlerEvalWeights[i].m_iType);
     iEvalType = s_sAISettlerEvalWeights[i].m_iEvalType;
-    IMessageTracer::PushFormatedInts(
-      g_pMsgTracer2,
-      "SettlerEvals %i, Eval type %i number: %i",
-      i,
-      iEvalType,
-      uNumberOfSettlers);
+    IMessageTracer::PushFormatedInts(g_pMsgTracer2, "SettlerEvals %i, Eval type %i number: %i", i, iEvalType, uNumberOfSettlers);
     aSettlerWeights[2 * iEvalType] += uNumberOfSettlers;
     aSettlerWeights[2 * iEvalType + 1] += s_sAISettlerEvalWeights[i].m_iWeight * uNumberOfSettlers;
   }
-  for ( j = 0; s_sAIOfferedSettlerEvalWeights[j].m_iType; ++j )
+  for ( j = 0;
+        s_sAIOfferedSettlerEvalWeights[j].m_iType;
+        ++j )
   {
-    NumberOfOfferedSettlers = CSettlerMgr::GetNumberOfOfferedSettlers(
-                                (CSettlerMgr *)g_cSettlerMgr,
-                                _iPlayerId,
-                                s_sAIOfferedSettlerEvalWeights[j].m_iType);
+    NumberOfOfferedSettlers = CSettlerMgr::GetNumberOfOfferedSettlers((CSettlerMgr *)g_cSettlerMgr, _iPlayerId, s_sAIOfferedSettlerEvalWeights[j].m_iType);
     iEvalType = s_sAIOfferedSettlerEvalWeights[j].m_iEvalType;
-    IMessageTracer::PushFormatedInts(
-      g_pMsgTracer2,
-      "SettlerEvalsEx %i, Eval type %i number: %i",
-      j,
-      iEvalType,
-      NumberOfOfferedSettlers);
+    IMessageTracer::PushFormatedInts(g_pMsgTracer2, "SettlerEvalsEx %i, Eval type %i number: %i", j, iEvalType, NumberOfOfferedSettlers);
     aSettlerWeights[2 * iEvalType] += NumberOfOfferedSettlers;
     aSettlerWeights[2 * iEvalType + 1] += s_sAIOfferedSettlerEvalWeights[j].m_iWeight * NumberOfOfferedSettlers;
   }
   uFighterNumber = aSettlerWeights[10] + aSettlerWeights[8] + aSettlerWeights[6];
   uFighterValue = aSettlerWeights[11] + aSettlerWeights[9] + aSettlerWeights[7];
   uLeaderValue = aSettlerWeights[13];
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer2,
-    "FighterNumber %i, FighterValue %i, LeaderValue %i.",
-    uFighterNumber,
-    uFighterValue,
-    aSettlerWeights[13]);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer2, "FighterNumber %i, FighterValue %i, LeaderValue %i.", uFighterNumber, uFighterValue, aSettlerWeights[13]);
   this->m_uOfferedSwordmen = aSettlerWeights[2];
   this->m_uOfferedBowmen = aSettlerWeights[4];
   this->m_uTotalSwordmen = aSettlerWeights[6];
   this->m_uTotalBowmen = aSettlerWeights[8];
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer2,
-    "OfferedSwordmen %i, OfferedBowmen %i, TotalSwordmen %i, TotalBowmen %i.",
-    this->m_uOfferedSwordmen,
-    this->m_uOfferedBowmen,
-    this->m_uTotalSwordmen,
-    this->m_uTotalBowmen);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer2, "OfferedSwordmen %i, OfferedBowmen %i, TotalSwordmen %i, TotalBowmen %i.", this->m_uOfferedSwordmen, this->m_uOfferedBowmen, this->m_uTotalSwordmen, this->m_uTotalBowmen);
   this->m_uSpecialistsCount = aSettlerWeights[10];
   this->m_uLeadersCount = aSettlerWeights[12];
   this->m_uPriestsCount = aSettlerWeights[14];
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer2,
-    "SpecialistsNumber %i, LeadersNumber %i, PriestsNumber %i",
-    this->m_uSpecialistsCount,
-    this->m_uLeadersCount,
-    this->m_uPriestsCount);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer2, "SpecialistsNumber %i, LeadersNumber %i, PriestsNumber %i", this->m_uSpecialistsCount, this->m_uLeadersCount, this->m_uPriestsCount);
   this->m_uTotalUnitCount = this->m_uPriestsCount + this->m_uLeadersCount + uFighterNumber;
   this->m_uTotalFighterCount = uLeaderValue + uFighterValue;
   uFighterNumberEx = aSettlerWeights[10] + aSettlerWeights[4] + aSettlerWeights[2];// Specialist + Bowmen + Swordmen
   uFighterValueEx = aSettlerWeights[11] + aSettlerWeights[5] + aSettlerWeights[3];
   this->m_uTotalUnitCountEx = this->m_uPriestsCount + this->m_uLeadersCount + uFighterNumberEx;
   this->m_uTotalUnitValueEx = uLeaderValue + uFighterValueEx;
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer2,
-    "FighterNumberEx %i, FighterValueEx %i",
-    uFighterNumberEx,
-    uFighterValueEx);
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer2,
-    "CAIPlayerEvaluation(MilUnits): Player %i: %i %i %i %i",
-    _iPlayerId,
-    this->m_uTotalUnitCount,
-    this->m_uTotalFighterCount,
-    this->m_uTotalUnitCountEx,
-    this->m_uTotalUnitValueEx);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer2, "FighterNumberEx %i, FighterValueEx %i", uFighterNumberEx, uFighterValueEx);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer2, "CAIPlayerEvaluation(MilUnits): Player %i: %i %i %i %i", _iPlayerId, this->m_uTotalUnitCount, this->m_uTotalFighterCount, this->m_uTotalUnitCountEx, this->m_uTotalUnitValueEx);
 }
 
 
@@ -235,12 +174,7 @@ void  CAIPlayerEvaluation::EvaluateBuildings(int a2) {
   }
   this->m_uTotalWarBuildingCount = uTotalWarBuildingCount;
   this->m_uTotalWarBuildingValue = uTotalWarBuildingValue;
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer2,
-    "CAIPlayerEvaluation(MilBuildings): Player %i: %i %i",
-    a2,
-    this->m_uTotalWarBuildingCount,
-    this->m_uTotalWarBuildingValue);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer2, "CAIPlayerEvaluation(MilBuildings): Player %i: %i %i", a2, this->m_uTotalWarBuildingCount, this->m_uTotalWarBuildingValue);
 }
 
 

@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateTutorial::DynamicCreateFunc(void * a1) {
 
   C = (CStateTutorial *)operator new(4u);
   if ( C )
+  {
     return CStateTutorial::CStateTutorial(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -35,8 +39,7 @@ class CGameState * __cdecl CStateTutorial::DynamicCreateFunc(void * a1) {
  CStateTutorial::~CStateTutorial(void) {
   
   *(_DWORD *)this = &CStateTutorial::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 11)
-    && BBSupportDbgReport(2, "main\\states\\StateTutorial.cpp", 76, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 11) && BBSupportDbgReport(2, "main\\states\\StateTutorial.cpp", 76, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -61,7 +64,9 @@ bool  CStateTutorial::Perform(void) {
   }
   v1 = dword_4032124 + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_4032124 = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -133,12 +138,7 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
       result = 1;
       break;
     case 91:
-      if ( a2->m_wParam >= 0xCu
-        && BBSupportDbgReport(
-             2,
-             "main\\states\\StateTutorial.cpp",
-             116,
-             "_rEvent.m_wParam < TUTORIAL_COUNT && _rEvent.m_wParam >= 0") == 1 )
+      if ( a2->m_wParam >= 0xCu && BBSupportDbgReport(2, "main\\states\\StateTutorial.cpp", 116, "_rEvent.m_wParam < TUTORIAL_COUNT && _rEvent.m_wParam >= 0") == 1 )
       {
         __debugbreak();
       }
@@ -148,9 +148,13 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
       C = operator new(0x620u);
       v43 = 1;
       if ( C )
+      {
         v32 = CGameType::CGameType((CGameType *)C);
+      }
       else
+      {
         v32 = 0;
+      }
       v27 = v32;
       v43 = -1;
       g_pGameType = (int)v32;
@@ -183,15 +187,23 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
           v31 = operator new(0x18u);
           v43 = 2;
           if ( v31 )
+          {
             v30 = INetworkEngine::INetworkEngine((INetworkEngine *)v31, 0);
+          }
           else
+          {
             v30 = 0;
+          }
           v24 = v30;
           v43 = -1;
           g_pNetworkEngine = (int)v30;
           *(_DWORD *)(g_pGameType + 112) = *(_DWORD *)(g_pGameType + 852);
-          for ( i = 0; i < *(_DWORD *)(g_pGameType + 112); ++i )
+          for ( i = 0;
+                i < *(_DWORD *)(g_pGameType + 112);
+                ++i )
+          {
             *(_BYTE *)(i + g_pGameType + 440) = 0;
+          }
           *(_DWORD *)(g_pGameType + 188) = INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
           Instance = (OnlineManager *)OnlineManager::GetInstance();
           *(_DWORD *)(g_pGameType + 224) = OnlineManager::GetLocalPeerId(Instance);
@@ -213,7 +225,9 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
         v40 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 11);
         v40 = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc);
         if ( !v40 && BBSupportDbgReport(2, "main\\states\\StateTutorial.cpp", 128, "bRet") == 1 )
+        {
           __debugbreak();
+        }
         BBSupportTracePrintF(3, "Tutorial Map '%s' not found!", (const char *)Buffer);
         result = 1;
       }

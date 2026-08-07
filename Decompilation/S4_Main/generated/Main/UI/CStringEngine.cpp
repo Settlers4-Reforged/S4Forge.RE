@@ -11,9 +11,13 @@ class CStringEngine * __cdecl CStringEngine::CreateStringEngine(int a1) {
 
   C = (CStringEngineEx *)operator new(8u);
   if ( C )
+  {
     return CStringEngineEx::CStringEngineEx(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

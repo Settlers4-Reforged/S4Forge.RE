@@ -7,21 +7,11 @@
 // Decompiled from unsigned int __cdecl CAIEvent::Pack(unsigned int _uDataA, unsigned int _uDataB)
 int __cdecl CAIEvent::Pack(unsigned int _uDataA, unsigned int _uDataB) {
   
-  if ( _uDataA > 0xFFFF
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\LibraryDistribution\\Include\\AI_Event.h",
-         102,
-         "_uDataA <= 0xFFFF") == 1 )
+  if ( _uDataA > 0xFFFF && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\LibraryDistribution\\Include\\AI_Event.h", 102, "_uDataA <= 0xFFFF") == 1 )
   {
     __debugbreak();
   }
-  if ( _uDataB > 0xFFFF
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\LibraryDistribution\\Include\\AI_Event.h",
-         103,
-         "_uDataB <= 0xFFFF") == 1 )
+  if ( _uDataB > 0xFFFF && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\LibraryDistribution\\Include\\AI_Event.h", 103, "_uDataB <= 0xFFFF") == 1 )
   {
     __debugbreak();
   }

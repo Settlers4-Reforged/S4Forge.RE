@@ -48,7 +48,9 @@ int  IFlyingEntity::FlyingFlagBits(int a2)const {
   LOBYTE(v5) = 1;
   operator^<unsigned int>(a2, &v3);
   if ( v3 != 1 )
+  {
     return v4;
+  }
   operator^<signed char>(a2, (char *)v4 + 82);
   operator^<unsigned int>(a2, v4 + 17);
   operator^<unsigned int>(a2, v4 + 18);

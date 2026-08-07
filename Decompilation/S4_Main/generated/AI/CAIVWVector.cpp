@@ -26,9 +26,13 @@
 int  CAIVWVector::At(int a2)const {
   
   if ( a2 >= std::vector<int>::size(this) )
+  {
     return 0;
+  }
   else
+  {
     return *(_DWORD *)std::vector<int>::operator[](a2);
+  }
 }
 
 
@@ -50,12 +54,7 @@ int  CAIVWVector::Index(int a2)const {
 
   v4 = (Grid *)Y16X16::UnpackXFast(a2);
   v5 = Y16X16::UnpackYFast(a2);
-  if ( !Grid::InQuadrat(v4, v5, 64)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h",
-         41,
-         (const char *)&dword_367DE24[1]) == 1 )
+  if ( !Grid::InQuadrat(v4, v5, 64) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h", 41, (const char *)&dword_367DE24[1]) == 1 )
   {
     __debugbreak();
   }
@@ -75,36 +74,23 @@ void  CAIVWVector::PushBack(int a2) {
 
   v5 = (Grid *)Y16X16::UnpackXFast(a2);
   v6 = Y16X16::UnpackYFast(a2);
-  if ( !Grid::InQuadrat(v5, v6, 64)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h",
-         53,
-         (const char *)&dword_367DE24[1]) == 1 )
+  if ( !Grid::InQuadrat(v5, v6, 64) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h", 53, (const char *)&dword_367DE24[1]) == 1 )
   {
     __debugbreak();
   }
-  if ( *((_WORD *)this + 64 * v6 + (_DWORD)v5 + 8)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h",
-         54,
-         "m_uIndices[iW][iV] == 0") == 1 )
+  if ( *((_WORD *)this + 64 * v6 + (_DWORD)v5 + 8) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h", 54, "m_uIndices[iW][iV] == 0") == 1 )
   {
     __debugbreak();
   }
   result = v5;
   if ( *((_WORD *)this + 64 * v6 + (_DWORD)v5 + 8) )
+  {
     return result;
+  }
   v4 = std::vector<int>::size(this);
   std::vector<int>::push_back(&a2);
   v3 = (_DWORD *)std::vector<int>::operator[](v4);
-  if ( *v3 != a2
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h",
-         62,
-         "m_cVWVector[iNewIndex] == _iPackedVW") == 1 )
+  if ( *v3 != a2 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h", 62, "m_cVWVector[iNewIndex] == _iPackedVW") == 1 )
   {
     __debugbreak();
   }
@@ -130,31 +116,25 @@ void  CAIVWVector::Remove(int a2) {
   v5 = std::vector<int>::size(this);
   result = a2;
   if ( a2 >= v5 )
+  {
     return result;
+  }
   v8 = *(_DWORD *)std::vector<int>::operator[](a2);
   v6 = Y16X16::UnpackXFast(v8);
   v7 = Y16X16::UnpackYFast(v8);
-  if ( *((unsigned __int16 *)this + 64 * v7 + v6 + 8) != a2 + 1
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h",
-         79,
-         "m_uIndices[iRemoveW][iRemoveV] == _iIndex + 1") == 1 )
+  if ( *((unsigned __int16 *)this + 64 * v7 + v6 + 8) != a2 + 1 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h", 79, "m_uIndices[iRemoveW][iRemoveV] == _iIndex + 1") == 1 )
   {
     __debugbreak();
   }
   *((_WORD *)this + 64 * v7 + v6 + 8) = 0;
   if ( (int)a2 >= (int)(v5 - 1) )
+  {
     return std::vector<int>::pop_back(this);
+  }
   v9 = *(_DWORD *)std::vector<int>::operator[](v5 - 1);
   v3 = Y16X16::UnpackXFast(v9);
   v4 = Y16X16::UnpackYFast(v9);
-  if ( *((unsigned __int16 *)this + 64 * v4 + v3 + 8) != v5
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h",
-         92,
-         "m_uIndices[iLastW][iLastV] == iLastIndex + 1") == 1 )
+  if ( *((unsigned __int16 *)this + 64 * v4 + v3 + 8) != v5 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\AI\\AI_VWVector.h", 92, "m_uIndices[iLastW][iLastV] == iLastIndex + 1") == 1 )
   {
     __debugbreak();
   }

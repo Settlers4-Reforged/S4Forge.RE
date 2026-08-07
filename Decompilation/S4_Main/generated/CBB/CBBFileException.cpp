@@ -66,9 +66,7 @@ bool  CBBFileException::GetErrorMessage(char * a2, unsigned int a3) {
   memset(Buffer, 0, sizeof(Buffer));
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v8);
   v11 = 0;
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-    v9,
-    (char *)this + 8);
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v9, (char *)this + 8);
   LOBYTE(v11) = 1;
   v6 = *((_DWORD *)this + 1);
   if ( v6 == 2 )
@@ -80,9 +78,13 @@ bool  CBBFileException::GetErrorMessage(char * a2, unsigned int a3) {
   {
     v4 = (const char *)std::string::c_str(v9);
     if ( v6 == 3 )
+    {
       sprintf(Buffer, "Error reading file \"%s\"!", v4);
+    }
     else
+    {
       sprintf(Buffer, "An file error occurred (\"%s\")!", v4);
+    }
   }
   BBSupportLib::BBSCopyString<char>(a2, Buffer, a3);
   LOBYTE(v11) = 0;

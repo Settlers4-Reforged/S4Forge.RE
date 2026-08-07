@@ -97,7 +97,9 @@ void  IBuildingRole::SwitchPriority(void) {
   this->m_bInhabitants = 0;
   this->byte16D = 0;
   this->m_pBuildingInfo = 0;
-  for ( i = 0; i < 0xA; ++i )
+  for ( i = 0;
+        i < 0xA;
+        ++i )
   {
     this->m_vPatchPairs[i].m_uJobId = 0;
     this->m_vPatchPairs[i].m_iJobFrame = 0;
@@ -142,19 +144,27 @@ void  IBuildingRole::Update(class CBuilding * _pBuilding) {
   TickCounter = CGameData::GetTickCounter(g_pGameData);
   this->m_iLastTick = TickCounter - IAnimatedEntity::LastUpdateTick(_pBuilding);
   if ( !this->m_iLastTick )
+  {
     return;
+  }
   v3 = CGameData::GetTickCounter(g_pGameData);
   IAnimatedEntity::SetLastUpdateTick(_pBuilding, v3);
-  for ( i = 0; i < 10; ++i )
+  for ( i = 0;
+        i < 10;
+        ++i )
   {
     if ( !this->m_vPatches[i].m_uU0 )
+    {
       continue;
+    }
     if ( !IEntity::Race(_pBuilding) || IEntity::Race(_pBuilding) == 1 )
     {
       iNext = this->m_vPatches[i].m_iTick + 1;
       this->m_vPatches[i].m_iTick = iNext;
       if ( iNext <= 2u )
+      {
         continue;
+      }
       this->m_vPatches[i].m_iTick = 0;
     }
     iType = this->m_vPatches[i].m_iType;
@@ -171,7 +181,9 @@ void  IBuildingRole::Update(class CBuilding * _pBuilding) {
           {
             this->m_vPatchPairs[i].m_iJobFrame = 0;
             if ( !this->m_vPatches[i].m_uTicks2 )
+            {
               return;
+            }
             m_uTicks2 = this->m_vPatches[i].m_uTicks2;
             this->m_vPatches[i].m_uTicks = m_uTicks2 + j__rand() % ((m_uTicks2 + 1) / 2);
             this->m_vPatches[i].m_uDuration = 0;
@@ -199,7 +211,9 @@ void  IBuildingRole::Update(class CBuilding * _pBuilding) {
           v9 = IEntity::Race(_pBuilding);
           v21 = CGfxManager::GetBuildingJobFrameCount(g_pGfxManager, v9, v20);
           if ( v21 <= 0 )
+          {
             v21 = 1;
+          }
           this->m_vPatchPairs[i].m_iJobFrame = (this->m_vPatchPairs[i].m_iJobFrame + 1) % v21;
         }
         else
@@ -214,14 +228,14 @@ void  IBuildingRole::Update(class CBuilding * _pBuilding) {
       v5 = IEntity::Race(_pBuilding);
       v22 = CGfxManager::GetBuildingJobFrameCount(g_pGfxManager, v5, v17);
       if ( v22 <= 0 )
+      {
         v22 = 1;
+      }
       this->m_vPatchPairs[i].m_iJobFrame = (this->m_vPatchPairs[i].m_iJobFrame + 1) % v22;
     }
-    if ( (int)this->m_vPatches[i].m_uSoundId > 0
-      && this->m_vPatches[i].m_uSoundFrame == this->m_vPatchPairs[i].m_iJobFrame )
+    if ( (int)this->m_vPatches[i].m_uSoundId > 0 && this->m_vPatches[i].m_uSoundFrame == this->m_vPatchPairs[i].m_iJobFrame )
     {
-      if ( this->m_vPatches[i].m_uSoundRandomness == 100
-        || (m_uSoundRandomness = this->m_vPatches[i].m_uSoundRandomness, m_uSoundRandomness >= j__rand() % 100) )
+      if ( this->m_vPatches[i].m_uSoundRandomness == 100 || (m_uSoundRandomness = this->m_vPatches[i].m_uSoundRandomness, m_uSoundRandomness >= j__rand() % 100) )
       {
         v15 = IEntity::Y(_pBuilding);
         v14 = IEntity::X(_pBuilding);
@@ -261,12 +275,10 @@ void  IBuildingRole::Update(class CBuilding * _pBuilding) {
       }
       else
       {
-        this->m_iEffectFrame = (this->m_iEffectFrame + 1)
-                             % (int)CGfxManager::GetEffectFrameCount(g_pGfxManager, this->m_uEffectId);
+        this->m_iEffectFrame = (this->m_iEffectFrame + 1) % (int)CGfxManager::GetEffectFrameCount(g_pGfxManager, this->m_uEffectId);
         if ( this->m_iEffectSoundId > 0 && this->m_iEffectSoundFrame == this->m_iEffectFrame )
         {
-          if ( this->m_iEffectSoundRandomness == 100
-            || (m_iEffectSoundRandomness = this->m_iEffectSoundRandomness, m_iEffectSoundRandomness >= j__rand() % 100) )
+          if ( this->m_iEffectSoundRandomness == 100 || (m_iEffectSoundRandomness = this->m_iEffectSoundRandomness, m_iEffectSoundRandomness >= j__rand() % 100) )
           {
             v16 = IEntity::Y(_pBuilding);
             v13 = IEntity::X(_pBuilding);
@@ -329,9 +341,10 @@ void  IBuildingRole::InhabitantFlee(int _iSettlerId) {
   CBuilding *v2; // eax
 
   if ( !this->m_uSettlerId && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 1285, "m_uSettlerId") == 1 )
+  {
     __debugbreak();
-  if ( this->m_uSettlerId != _iSettlerId
-    && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 1286, "m_uSettlerId == _iSettlerId") == 1 )
+  }
+  if ( this->m_uSettlerId != _iSettlerId && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 1286, "m_uSettlerId == _iSettlerId") == 1 )
   {
     __debugbreak();
   }
@@ -442,12 +455,7 @@ void  IBuildingRole::RemoveInhabitant(class CBuilding * a2) {
     v2 = IEntity::PackedXY(rSettler);
     if ( v2 == IEntity::PackedXY(rBuilding) )
     {
-      if ( !IEntity::FlagBits(rSettler, ENTITY_FLAG_ON_BOARD)
-        && BBSupportDbgReport(
-             2,
-             "MapObjects\\Building\\BuildingRole.cpp",
-             310,
-             "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) != 0") == 1 )
+      if ( !IEntity::FlagBits(rSettler, ENTITY_FLAG_ON_BOARD) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 310, "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) != 0") == 1 )
       {
         __debugbreak();
       }
@@ -460,7 +468,9 @@ void  IBuildingRole::RemoveInhabitant(class CBuilding * a2) {
       {
         v3 = CEcoSector::Owner(EcoSectorPtr);
         if ( v3 == IEntity::OwnerId(rSettler) )
+        {
           bPositionFound = CSettlerMgr::SearchFreePositionInEcoSector(&g_cSettlerMgr, &v14, &v15, v10);
+        }
       }
       if ( !bPositionFound )
       {
@@ -472,23 +482,19 @@ void  IBuildingRole::RemoveInhabitant(class CBuilding * a2) {
         {
           v5 = CEcoSector::Owner(v9);
           if ( v5 == IEntity::OwnerId(rSettler) )
+          {
             bPositionFound = CSettlerMgr::SearchFreePositionInEcoSector(&g_cSettlerMgr, &v14, &v15, v8);
+          }
         }
       }
-      if ( !bPositionFound
-        && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 336, "bPositionFound") == 1 )
+      if ( !bPositionFound && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 336, "bPositionFound") == 1 )
       {
         __debugbreak();
       }
       v6 = Y16X16::PackXYFast(v14, v15);
       rSettler->PlaceInMapObjectLayer(rSettler, v6);
     }
-    else if ( IEntity::FlagBits(rSettler, ENTITY_FLAG_ON_BOARD)
-           && BBSupportDbgReport(
-                2,
-                "MapObjects\\Building\\BuildingRole.cpp",
-                342,
-                "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) == 0") == 1 )
+    else if ( IEntity::FlagBits(rSettler, ENTITY_FLAG_ON_BOARD) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 342, "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) == 0") == 1 )
     {
       __debugbreak();
     }
@@ -562,18 +568,30 @@ bool  IBuildingRole::SearchInWorkingArea(class CBuilding * _pBuilding, int a3) {
   if ( this->m_pSearchFkt )
   {
     if ( this->m_vWorkingArea[2 * a3 + 1] < this->m_vWorkingArea[2 * a3] + 75 )
+    {
       this->m_vWorkingArea[2 * a3 + 1] = this->m_vWorkingArea[2 * a3] + 75;
-    for ( i = 0; i < 2; ++i )
+    }
+    for ( i = 0;
+          i < 2;
+          ++i )
     {
       if ( i )
+      {
         iIterMaxSpiralOfset = 50;
+      }
       else
+      {
         iIterMaxSpiralOfset = 75;
+      }
       v27 = iIterMaxSpiralOfset;
       iPrevSpiralOffset = this->m_vWorkingArea[2 * a3 + i];
       if ( iIterMaxSpiralOfset + iPrevSpiralOffset >= iLastSpiralOffset )
+      {
         v27 = iLastSpiralOffset - iPrevSpiralOffset;
-      for ( j = 0; j < v27; ++j )
+      }
+      for ( j = 0;
+            j < v27;
+            ++j )
       {
         iX = iWACenterX + CSpiralOffsets::DeltaX(j + iPrevSpiralOffset);
         iY = iWACenterY + CSpiralOffsets::DeltaY(j + iPrevSpiralOffset);
@@ -605,20 +623,16 @@ bool  IBuildingRole::SearchInWorkingArea(class CBuilding * _pBuilding, int a3) {
       }
       this->m_vWorkingArea[2 * a3 + i] += j;
       if ( v31 >= 0 )
+      {
         break;
+      }
     }
   }
-  if ( this->m_pBuildingInfo->m_iWorkingAreaRadius < 0
-    && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 618, "m_pBuildingInfo->workingAreaRadius >= 0") == 1 )
+  if ( this->m_pBuildingInfo->m_iWorkingAreaRadius < 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 618, "m_pBuildingInfo->workingAreaRadius >= 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_pBuildingInfo->m_iWorkingAreaRadius >= 75
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Building\\BuildingRole.cpp",
-         619,
-         "m_pBuildingInfo->workingAreaRadius < SPIRAL_RADIUS_MAX") == 1 )
+  if ( this->m_pBuildingInfo->m_iWorkingAreaRadius >= 75 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 619, "m_pBuildingInfo->workingAreaRadius < SPIRAL_RADIUS_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -628,7 +642,9 @@ bool  IBuildingRole::SearchInWorkingArea(class CBuilding * _pBuilding, int a3) {
     if ( this->m_vWorkingArea[2 * a3] < iLastSpiralOffset )
     {
       if ( this->m_vWorkingArea[2 * a3 + 1] >= iLastSpiralOffset )
+      {
         this->m_vWorkingArea[2 * a3 + 1] = 0;
+      }
     }
     else
     {
@@ -671,12 +687,18 @@ bool  IBuildingRole::SearchInWorkingArea(class CBuilding * _pBuilding, int a3) {
   else
   {
     if ( iFoundIdx < 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 625, "iFoundIdx >= 0") == 1 )
+    {
       __debugbreak();
+    }
     this->m_bHasWarnedAboutEmptyWA = 0;
     if ( !v31 || iFoundIdx <= 150 || this->m_vWorkingArea[2 * a3] >= 150u )
+    {
       this->m_vWorkingArea[2 * a3] = 0;
+    }
     else
+    {
       this->m_vWorkingArea[2 * a3 + 1] = iFoundIdx;
+    }
     if ( a3 == 1 )
     {
       this->m_vWorkingArea[0] = 0;
@@ -694,10 +716,14 @@ int  IBuildingRole::Decrease(int a2) {
   int v3; // [esp+Ch] [ebp+8h]
 
   if ( a2 <= 0 )
+  {
     return 0;
+  }
   v3 = (a2 - 5) / 2;
   if ( v3 <= 0 )
+  {
     return 1;
+  }
   return v3;
 }
 
@@ -785,11 +811,9 @@ void  IBuildingRole::TakeJobTrigger(int a2) {
       BBSupportTracePrintF(0, "Wrong sound id!!!");
       this->m_vPatches[m_iSlot].m_uSoundId = 0;
     }
-    if ( (int)this->m_vPatches[m_iSlot].m_uSoundId > 0
-      && this->m_vPatches[m_iSlot].m_uSoundFrame == this->m_vPatchPairs[m_iSlot].m_iJobFrame )
+    if ( (int)this->m_vPatches[m_iSlot].m_uSoundId > 0 && this->m_vPatches[m_iSlot].m_uSoundFrame == this->m_vPatchPairs[m_iSlot].m_iJobFrame )
     {
-      if ( this->m_vPatches[m_iSlot].m_uSoundRandomness == 100
-        || (m_uSoundRandomness = this->m_vPatches[m_iSlot].m_uSoundRandomness, m_uSoundRandomness >= j__rand() % 100) )
+      if ( this->m_vPatches[m_iSlot].m_uSoundRandomness == 100 || (m_uSoundRandomness = this->m_vPatches[m_iSlot].m_uSoundRandomness, m_uSoundRandomness >= j__rand() % 100) )
       {
         v6 = IEntity::Y(v9);
         v5 = IEntity::X(v9);
@@ -905,12 +929,16 @@ void  IBuildingRole::PostLoadSetWaterFlags(class CBuilding * a2) {
   this->m_iEffectSoundId = a2;
   operator^<unsigned char>(a1, &this->m_iEffectSoundRandomness);
   operator^<unsigned char>(a1, &this->m_iEffectSoundFrame);
-  for ( i = 0; i < 0xA; ++i )
+  for ( i = 0;
+        i < 0xA;
+        ++i )
   {
     operator^<unsigned int>(a1, &this->m_vPatchPairs[i]);
     operator^<unsigned int>(a1, &this->m_vPatchPairs[i].m_iJobFrame);
   }
-  for ( i = 0; i < 0xA; ++i )
+  for ( i = 0;
+        i < 0xA;
+        ++i )
   {
     operator^<unsigned char>(a1, &this->m_vPatches[i].m_uTicks);
     operator^<unsigned char>(a1, &this->m_vPatches[i].m_iType);
@@ -967,12 +995,16 @@ void  IBuildingRole::Store(std::ostream & _rStream) {
   operator^<int>(_rStream, &m_iEffectSoundId);
   operator^<unsigned char>(_rStream, &this->m_iEffectSoundRandomness);
   operator^<unsigned char>(_rStream, &this->m_iEffectSoundFrame);
-  for ( i = 0; i < 10; ++i )
+  for ( i = 0;
+        i < 10;
+        ++i )
   {
     operator^<unsigned int>(_rStream, &this->m_vPatchPairs[i].m_uJobId);
     operator^<unsigned int>(_rStream, &this->m_vPatchPairs[i].m_iJobFrame);
   }
-  for ( i = 0; i < 0xA; ++i )
+  for ( i = 0;
+        i < 0xA;
+        ++i )
   {
     operator^<unsigned char>(_rStream, &this->m_vPatches[i].m_uTicks);
     operator^<unsigned char>(_rStream, &this->m_vPatches[i].m_iType);
@@ -1038,13 +1070,14 @@ void  IBuildingRole::InitHousePatches(void) {
   unsigned int i; // [esp+Ch] [ebp-Ch]
   int m_iSlot; // [esp+10h] [ebp-8h]
 
-  if ( !this->m_pBuildingInfo
-    && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 1008, "m_pBuildingInfo != 0") == 1 )
+  if ( !this->m_pBuildingInfo && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 1008, "m_pBuildingInfo != 0") == 1 )
   {
     __debugbreak();
   }
   memset(this->m_vPatches, 0, sizeof(this->m_vPatches));
-  for ( i = 0; i < 0xA; ++i )
+  for ( i = 0;
+        i < 0xA;
+        ++i )
   {
     if ( this->m_pBuildingInfo->m_vPatches[i].m_iJob )
     {
@@ -1057,7 +1090,9 @@ void  IBuildingRole::InitHousePatches(void) {
       if ( (this->m_vPatches[m_iSlot].m_uSoundId & 0x80000000) != 0 && (int)this->m_vPatches[m_iSlot].m_uSoundId >= 109 )
       {
         if ( BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 1035, "0") == 1 )
+        {
           __debugbreak();
+        }
         this->m_vPatches[m_iSlot].m_uSoundId = 0;
       }
       this->m_vPatches[m_iSlot].m_iTick = 0;
@@ -1093,9 +1128,13 @@ void  IBuildingRole::InitHousePatches(void) {
         this->m_vPatchPairs[m_iSlot].m_uJobId = this->m_pBuildingInfo->m_vPatches[i].m_iJob;
         this->m_vPatchPairs[m_iSlot].m_iJobFrame = 0;
         if ( this->m_pBuildingInfo->m_vPatches[i].m_iTicks )
+        {
           this->m_vPatches[m_iSlot].m_uU0 = 1;
+        }
         else
+        {
           this->m_vPatches[m_iSlot].m_uU0 = 0;
+        }
       }
     }
   }
@@ -1113,19 +1152,27 @@ bool  IBuildingRole::OrderInhabitant(class CBuilding * a2) {
   int v7; // [esp+0h] [ebp-8h]
 
   if ( this->m_uSettlerId )
+  {
     return 1;
+  }
   v2 = CBuilding::EnsignWorldIdx(a2);
   v7 = CWorldManager::EcoSectorId(v2);
   if ( !v7 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingRole.cpp", 255, "m_iESId != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !v7 )
+  {
     return 0;
+  }
   m_iBuildingInhabitant = (char)this->m_pBuildingInfo->m_iBuildingInhabitant;
   v5 = IEntity::ID(a2);
   v4 = CEcoSectorMgr::operator[](g_cESMgr, v7);
   this->m_uSettlerId = CEcoSector::OrderWorker(v4, v5, m_iBuildingInhabitant);
   if ( this->m_uSettlerId )
+  {
     return 1;
+  }
   IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
   return 0;
 }
@@ -1162,9 +1209,13 @@ void  IBuildingRole::MiniFlag(struct SGfxObjectInfo & _rGfxInfo, int _iPlayer) {
     }
     v3 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_iEntityId);
     if ( IEntity::FlagBits(v3, (EntityFlag)4096) )
+    {
       iAmount = 1;
+    }
     else
+    {
       iAmount = 2;
+    }
     iFrame = s_iMiniFlagFrameCount;
     v4 = CPlayerManager::Color(_iPlayer);
     CGfxManager::GetObjectGfxInfo(g_pGfxManager, &a2, v4 + 544, iFrame, iAmount);

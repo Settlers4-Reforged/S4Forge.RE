@@ -3,7 +3,7 @@
 // Definitions for class CAIBuildingEnsignPositionIterator
 
 // address=[0x130d390]
-// Decompiled from CAIBuildingEnsignPositionIterator *__thiscall CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator(  CAIBuildingEnsignPositionIterator *this,  int a2,  int a3)
+// Decompiled from CAIBuildingEnsignPositionIterator *__thiscall CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator(CAIBuildingEnsignPositionIterator *this, int a2, int a3)
  CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator(int a2, int a3) {
   
   *(_DWORD *)this = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, a2, a3);
@@ -19,7 +19,9 @@ bool  CAIBuildingEnsignPositionIterator::NextXY(int & a2, int & a3) {
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-8h]
 
   if ( *(int *)this <= 0 )
+  {
     return 0;
+  }
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *(_DWORD *)this);
   *(_DWORD *)this = IAnimatedEntity::Next(BuildingPtr);
   v3 = (Y16X16 *)CBuilding::EnsignPackedXY(BuildingPtr);
@@ -35,7 +37,9 @@ bool  CAIBuildingEnsignPositionIterator::NextWorldIdx(int & a2) {
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-8h]
 
   if ( *this <= 0 )
+  {
     return 0;
+  }
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *this);
   *this = IAnimatedEntity::Next(BuildingPtr);
   *a2 = CBuilding::EnsignWorldIdx(BuildingPtr);

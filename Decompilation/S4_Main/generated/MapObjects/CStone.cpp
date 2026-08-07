@@ -10,9 +10,13 @@ class CPersistence * __cdecl CStone::New(std::istream & a1) {
 
   v3 = (CStone *)CStone::operator new(0x48u);
   if ( v3 )
+  {
     return CStone::CStone(v3, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -22,13 +26,7 @@ class CPersistence * __cdecl CStone::New(std::istream & a1) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a6, 1);
   *(_DWORD *)this = &CStone::_vftable_;
-  if ( a4 != 41
-    && a4 != 253
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Stone.cpp",
-         62,
-         "( _iStoneType == OBJECT_MINESET1 ) || ( _iStoneType == OBJECT_DARKMINESET1 )") == 1 )
+  if ( a4 != 41 && a4 != 253 && BBSupportDbgReport(2, "MapObjects\\Stone.cpp", 62, "( _iStoneType == OBJECT_MINESET1 ) || ( _iStoneType == OBJECT_DARKMINESET1 )") == 1 )
   {
     __debugbreak();
   }
@@ -79,12 +77,10 @@ void  CStone::LogicUpdate(void) {
 struct SGfxObjectInfo *  CStone::GetGfxInfos(void) {
   
   if ( !*(_BYTE *)(this + 33) )
+  {
     return 0;
-  CGfxManager::GetObjectGfxInfo(
-    &IEntity::m_sGfxInfo,
-    *(unsigned __int16 *)(this + 38),
-    0,
-    *(unsigned __int8 *)(this + 33));
+  }
+  CGfxManager::GetObjectGfxInfo(&IEntity::m_sGfxInfo, *(unsigned __int16 *)(this + 38), 0, *(unsigned __int8 *)(this + 33));
   MEMORY[0x40FE518] = 16;
   MEMORY[0x40FE51A] = IEntity::IsVisible((void *)this);
   MEMORY[0x40FE266] = 0;
@@ -115,21 +111,21 @@ void  CStone::Take(int a2) {
   int v10; // [esp+4h] [ebp-Ch]
   char v11; // [esp+8h] [ebp-8h]
 
-  if ( IDecoObject::IsStaticInstance(this)
-    && BBSupportDbgReport(2, "MapObjects\\Stone.cpp", 251, "! IsStaticInstance()") == 1 )
+  if ( IDecoObject::IsStaticInstance(this) && BBSupportDbgReport(2, "MapObjects\\Stone.cpp", 251, "! IsStaticInstance()") == 1 )
   {
     __debugbreak();
   }
   v2 = IEntity::WorldIdx();
   v11 = CWorldManager::Resource(v2);
   v10 = v11 & 0xF0;
-  if ( *((_BYTE *)this + 33) != (v11 & 0xF)
-    && BBSupportDbgReport(2, "MapObjects\\Stone.cpp", 257, "m_uLivePoint == iResourceAmount") == 1 )
+  if ( *((_BYTE *)this + 33) != (v11 & 0xF) && BBSupportDbgReport(2, "MapObjects\\Stone.cpp", 257, "m_uLivePoint == iResourceAmount") == 1 )
   {
     __debugbreak();
   }
   if ( v10 != 96 && BBSupportDbgReport(2, "MapObjects\\Stone.cpp", 258, "RESOURCE_STONE == iResourceType") == 1 )
+  {
     __debugbreak();
+  }
   if ( --*((_BYTE *)this + 33) )
   {
     v8 = *((unsigned __int8 *)this + 33);

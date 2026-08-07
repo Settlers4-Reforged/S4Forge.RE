@@ -20,8 +20,12 @@ unsigned int __cdecl LZHLCompressor::calcMaxBuf(unsigned int a1) {
   LZBuffer::LZBuffer(this);
   LZHLEncoderStat::LZHLEncoderStat((LZHLCompressor *)((char *)this + 8));
   *((_DWORD *)this + 5) = operator new[](0x10000u);
-  for ( i = 0; i < 0x8000; ++i )
+  for ( i = 0;
+        i < 0x8000;
+        ++i )
+  {
     *(_WORD *)(*((_DWORD *)this + 5) + 2 * i) = -1;
+  }
   return this;
 }
 
@@ -111,12 +115,18 @@ LABEL_5:
   {
     v49 = v44 - Src;
     if ( v44 - Src < 5 )
+    {
       break;
+    }
     v53 = 0;
     if ( (int)(v49 - 5) >= 64 )
+    {
       v37 = 64;
+    }
     else
+    {
       v37 = v49 - 5;
+    }
     v16 = v37;
     v47 = 0;
     v38 = 0;
@@ -131,9 +141,13 @@ LABEL_5:
       {
         v4 = LZBuffer::_distance(v45 - v48);
         if ( v4 >= (int)(v49 - v53) )
+        {
           v35 = v49 - v53;
+        }
         else
+        {
           v35 = LZBuffer::_distance(v45 - v48);
+        }
         if ( v35 >= 521 )
         {
           v33 = 521;
@@ -142,9 +156,13 @@ LABEL_5:
         {
           v5 = LZBuffer::_distance(v45 - v48);
           if ( v5 >= (int)(v49 - v53) )
+          {
             v34 = v49 - v53;
+          }
           else
+          {
             v34 = LZBuffer::_distance(v45 - v48);
+          }
           v33 = v34;
         }
         v21 = v33;
@@ -153,14 +171,24 @@ LABEL_5:
         if ( v6 == v45 )
         {
           if ( !v52 && BBSupportDbgReport(2, "Source\\compression\\lz.cpp", 194, "matchLen != 0") == 1 )
+          {
             __debugbreak();
+          }
           if ( (int)(521 - v52) >= (int)(v49 - v53 - v52) )
+          {
             v32 = v49 - v53 - v52;
+          }
           else
+          {
             v32 = 521 - v52;
+          }
           v20 = v32;
-          for ( i = 0; i < v20 && Src[i + v53] == Src[v52 + i + v53]; ++i )
+          for ( i = 0;
+                i < v20 && Src[i + v53] == Src[v52 + i + v53];
+                ++i )
+          {
             ;
+          }
           v52 += i;
         }
         if ( (int)v52 >= 3 )
@@ -179,26 +207,24 @@ LABEL_5:
             v28 = v29;
           }
           v40 = v28;
-          for ( j = 0; j < v40; ++j )
+          for ( j = 0;
+                j < v40;
+                ++j )
           {
             v7 = LZBuffer::_wrap(v48 - j - 1);
             if ( *(unsigned __int8 *)(*(_DWORD *)v51 + v7) != Src[v53 - j - 1] )
+            {
               break;
+            }
           }
           if ( j > 0 )
           {
-            if ( (int)(j + v52) < 4
-              && BBSupportDbgReport(2, "Source\\compression\\lz.cpp", 221, "matchLen + xtraMatch >= LZMIN") == 1 )
+            if ( (int)(j + v52) < 4 && BBSupportDbgReport(2, "Source\\compression\\lz.cpp", 221, "matchLen + xtraMatch >= LZMIN") == 1 )
             {
               __debugbreak();
             }
             v8 = j + v52;
-            if ( v8 > LZBuffer::_distance(*((_DWORD *)v51 + 1) - v48)
-              && BBSupportDbgReport(
-                   2,
-                   "Source\\compression\\lz.cpp",
-                   222,
-                   "matchLen + xtraMatch <= _distance(bufPos - hashPos)") == 1 )
+            if ( v8 > LZBuffer::_distance(*((_DWORD *)v51 + 1) - v48) && BBSupportDbgReport(2, "Source\\compression\\lz.cpp", 222, "matchLen + xtraMatch <= _distance(bufPos - hashPos)") == 1 )
             {
               __debugbreak();
             }
@@ -225,9 +251,13 @@ LABEL_5:
           v10 = LZBuffer::_distance(*((_DWORD *)v51 + 1) - v24);
           LZHLEncoder::putMatch((LZHLEncoder *)v14, Src, v53, v47 - 4, v10);
           if ( (int)(v47 - 2) >= v44 - &Src[v53 + 2] )
+          {
             v26 = v44 - &Src[v53 + 2];
+          }
           else
+          {
             v26 = v47 - 2;
+          }
           updated = LZHLCompressor::_updateTable(v51, updated, &Src[v53 + 1], *((_DWORD *)v51 + 1) + 2, v26);
           LZBuffer::_toBuf(&Src[v53], v47);
           Src += v47 + v53;
@@ -237,9 +267,13 @@ LABEL_5:
           v9 = LZBuffer::_distance(v45 - v48);
           LZHLEncoder::putMatch((LZHLEncoder *)v14, Src, v53, v52 - 4, v9);
           if ( (int)(v52 - 1) >= v44 - &Src[v53 + 1] )
+          {
             v27 = v44 - &Src[v53 + 1];
+          }
           else
+          {
             v27 = v52 - 1;
+          }
           updated = LZHLCompressor::_updateTable(v51, updated, &Src[v53], *((_DWORD *)v51 + 1) + 1, v27);
           LZBuffer::_toBuf(&Src[v53], v52);
           Src += v52 + v53;
@@ -253,9 +287,13 @@ LABEL_5:
           v11 = LZBuffer::_distance(v45 - v48);
           LZHLEncoder::putMatch((LZHLEncoder *)v14, Src, v53, v52 - 4, v11);
           if ( (int)(v52 - 1) >= v44 - &Src[v53 + 1] )
+          {
             v25 = v44 - &Src[v53 + 1];
+          }
           else
+          {
             v25 = v52 - 1;
+          }
           updated = LZHLCompressor::_updateTable(v51, updated, &Src[v53], *((_DWORD *)v51 + 1) + 1, v25);
           LZBuffer::_toBuf(&Src[v53], v52);
           Src += v52 + v53;
@@ -268,9 +306,13 @@ LABEL_5:
         v17 = updated;
       }
       if ( v38 && BBSupportDbgReport(2, "Source\\compression\\lz.cpp", 290, "!lazyForceMatch") == 1 )
+      {
         __debugbreak();
+      }
       if ( v53 + 1 > v16 )
+      {
         break;
+      }
       updated ^= __ROL4__(Src[v53], 25);
       updated ^= Src[v53 + 5];
       updated = __ROL4__(updated, 5);
@@ -293,9 +335,13 @@ LABEL_5:
       v12 = LZBuffer::_distance(*((_DWORD *)v51 + 1) - v24);
       LZHLEncoder::putMatch((LZHLEncoder *)v14, Src, v53, v47 - 4, v12);
       if ( (int)(v47 - 1) >= v44 - &Src[v53 + 1] )
+      {
         v23 = v44 - &Src[v53 + 1];
+      }
       else
+      {
         v23 = v47 - 1;
+      }
       updated = LZHLCompressor::_updateTable(v51, updated, &Src[v53], *((_DWORD *)v51 + 1) + 1, v23);
       LZBuffer::_toBuf(&Src[v53], v47);
       Src += v47 + v53;
@@ -314,7 +360,7 @@ LABEL_5:
 
 
 // address=[0x2f2a790]
-// Decompiled from int __thiscall LZHLCompressor::_updateTable(  LZHLCompressor *this,  unsigned int a2,  const unsigned __int8 *a3,  unsigned int a4,  int a5)
+// Decompiled from int __thiscall LZHLCompressor::_updateTable(LZHLCompressor *this, unsigned int a2, const unsigned __int8 *a3, unsigned int a4, int a5)
 unsigned long  LZHLCompressor::_updateTable(unsigned long a2, unsigned char const * a3, unsigned long a4, int a5) {
   
   const unsigned __int8 *j; // [esp+8h] [ebp-8h]
@@ -325,12 +371,16 @@ unsigned long  LZHLCompressor::_updateTable(unsigned long a2, unsigned char cons
   const unsigned __int8 *v12; // [esp+1Ch] [ebp+Ch]
 
   if ( a5 <= 0 )
+  {
     return 0;
+  }
   if ( a5 <= 1024 )
   {
     v11 = __ROL4__(a2 ^ __ROL4__(*a3, 25) ^ a3[5], 5);
     v12 = a3 + 1;
-    for ( i = 0; i < a5; ++i )
+    for ( i = 0;
+          i < a5;
+          ++i )
     {
       *(_WORD *)(*((_DWORD *)this + 5) + 2 * ((unsigned int)(214013 * v11 + 2531011) >> 17)) = LZBuffer::_wrap(i + a4);
       v11 = __ROL4__(v11 ^ __ROL4__(v12[i], 25) ^ v12[i + 5], 5);
@@ -340,7 +390,9 @@ unsigned long  LZHLCompressor::_updateTable(unsigned long a2, unsigned char cons
   else
   {
     v9 = 0;
-    for ( j = &a3[a5 + 1]; j < &a3[a5 + 6]; ++j )
+    for ( j = &a3[a5 + 1];
+          j < &a3[a5 + 6];
+          ++j )
     {
       v10 = v9 ^ *j;
       v9 = __ROL4__(v10, 5);

@@ -61,10 +61,10 @@ public:
 
     // Type information members
 public:
-    bool m_bU0;
-    int m_iU0;
-    int m_iU1;
-    int m_iU2;
+    bool m_bInited;
+    struct CMapGeneratorHost * m_pMapGeneratorHost;
+    __int16 * m_pPreviewImage;
+    S4::CMapFile * m_pMapFile;
 
 };
 

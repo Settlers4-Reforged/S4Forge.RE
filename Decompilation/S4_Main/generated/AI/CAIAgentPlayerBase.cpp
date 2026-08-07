@@ -8,9 +8,13 @@
 void  CAIAgentPlayerBase::AttachPlayerAI(class CAIPlayerAI * _pPlayerAI) {
   
   if ( !_pPlayerAI && BBSupportDbgReport(2, "AI\\AI_AgentsPlayer.cpp", 27, "_pPlayerAI != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( this->m_pPlayerAI && BBSupportDbgReport(2, "AI\\AI_AgentsPlayer.cpp", 28, "m_pPlayerAI == 0") == 1 )
+  {
     __debugbreak();
+  }
   this->m_pPlayerAI = _pPlayerAI;
 }
 

@@ -11,9 +11,13 @@ class IConfigManager * __cdecl IConfigManager::CreateConfigManger(void) {
 
   C = (CConfigManager *)operator new(0x1Cu, 1, "Source\\ConfigManager\\ConfigManager.cpp", 1407);
   if ( C )
+  {
     return CConfigManager::CConfigManager(C);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

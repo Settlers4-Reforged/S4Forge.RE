@@ -61,7 +61,9 @@ void __cdecl CGrabber::DoGrab(std::wstring a1) {
   WriteFile(hFile, lpBuffer, nNumberOfBytesToWrite, &NumberOfBytesWritten, 0);
   CloseHandle(hFile);
   if ( lpBuffer )
+  {
     operator delete[]((void *)lpBuffer);
+  }
   v19 = -1;
   std::wstring::~wstring(&a1);
 }
@@ -95,13 +97,17 @@ void * __cdecl CGrabber::GetScreenBits(void * lpvBits, void * a2, int * a3, int 
   v16 = a2;
   hdc = GetDC(g_hWnd);
   if ( !hdc )
+  {
     return 0;
+  }
   GetClientRect(g_hWnd, &Rect);
   v17 = Rect.right - Rect.left;
   cy = Rect.bottom - Rect.top;
   CompatibleDC = CreateCompatibleDC(hdc);
   if ( !CompatibleDC )
+  {
     return 0;
+  }
   h = CreateCompatibleBitmap(hdc, v17, cy);
   if ( h )
   {
@@ -112,9 +118,13 @@ void * __cdecl CGrabber::GetScreenBits(void * lpvBits, void * a2, int * a3, int 
       v15 = v8;
       cLines = v9;
       if ( a3 )
+      {
         *a3 = v15;
+      }
       if ( a4 )
+      {
         *a4 = cLines;
+      }
       Size = sub_1494AB0(v8, v9, a5);
       if ( !lpvBits )
       {
@@ -122,16 +132,24 @@ void * __cdecl CGrabber::GetScreenBits(void * lpvBits, void * a2, int * a3, int 
         lpvBits = v12;
       }
       if ( v16 )
+      {
         lpbmi = v16;
+      }
       else
+      {
         lpbmi = (LPBITMAPINFO)&v25;
+      }
       memset(lpbmi, 0, sizeof(struct tagBITMAPINFO));
       lpbmi->bmiHeader.biSize = 40;
       lpbmi->bmiHeader.biWidth = v15;
       if ( a6 )
+      {
         v14 = -cLines;
+      }
       else
+      {
         v14 = cLines;
+      }
       lpbmi->bmiHeader.biHeight = v14;
       lpbmi->bmiHeader.biPlanes = 1;
       lpbmi->bmiHeader.biBitCount = a5;

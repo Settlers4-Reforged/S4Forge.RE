@@ -10,14 +10,18 @@ class CGameState * __cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(void * 
 
   C = (CStateLobbyMultiplayerType *)operator new(4u);
   if ( C )
+  {
     return CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x14c0a50]
-// Decompiled from CStateLobbyMultiplayerType *__thiscall CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(  CStateLobbyMultiplayerType *this,  void *a2)
+// Decompiled from CStateLobbyMultiplayerType *__thiscall CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(CStateLobbyMultiplayerType *this, void *a2)
  CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
@@ -33,8 +37,7 @@ class CGameState * __cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(void * 
  CStateLobbyMultiplayerType::~CStateLobbyMultiplayerType(void) {
   
   *(_DWORD *)this = &CStateLobbyMultiplayerType::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 1)
-    && BBSupportDbgReport(2, "main\\states\\StateLobbyMultiplayerType.cpp", 68, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 1) && BBSupportDbgReport(2, "main\\states\\StateLobbyMultiplayerType.cpp", 68, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -59,7 +62,9 @@ bool  CStateLobbyMultiplayerType::Perform(void) {
   }
   v1 = dword_4031CF0 + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_4031CF0 = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -105,7 +110,9 @@ bool  CStateLobbyMultiplayerType::OnEvent(class CEvn_Event & a2) {
   {
     case 0:
       if ( (unsigned __int16)a2->m_wParam != 27 )
+      {
         goto CStateLobbyMultiplayerType__OnEvent___def_18C0C31;
+      }
       v18 = CEvn_Event::CEvn_Event(&v26, 0x36u, 0, 0, 0);
       v27 = 0;
       IEventEngine::SendAMessage(g_pEvnEngine, v18);
@@ -148,7 +155,9 @@ bool  CStateLobbyMultiplayerType::OnEvent(class CEvn_Event & a2) {
         v25 = v21;
       }
       if ( v25 )
+      {
         PostQuitMessage(0);
+      }
       IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
       result = 1;
       break;
@@ -171,7 +180,7 @@ CStateLobbyMultiplayerType__OnEvent___def_18C0C31:
 
 
 // address=[0x14c0880]
-// Decompiled from char __thiscall CStateLobbyMultiplayerType::LaunchWebLobby(  void *this,  char a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8)
+// Decompiled from char __thiscall CStateLobbyMultiplayerType::LaunchWebLobby(void *this, char a2, int a3, int a4, int a5, int a6, int a7, int a8)
 bool  CStateLobbyMultiplayerType::LaunchWebLobby(std::string a2) {
   
   char v9; // [esp-38h] [ebp-190h] BYREF
@@ -206,11 +215,15 @@ bool  CStateLobbyMultiplayerType::LaunchWebLobby(std::string a2) {
   v36 = 0;
   v30 = RegCreateKeyExA(HKEY_LOCAL_MACHINE, aSoftwareMicros, 0, 0, 0, 0x20019u, 0, &phkResult, 0);
   if ( v30 )
+  {
     goto LABEL_5;
+  }
   cbData = 260;
   v30 = RegQueryValueExA(phkResult, 0, 0, Type, Data, &cbData);
   if ( v30 )
+  {
     goto LABEL_5;
+  }
   v24 = v16;
   v27 = std::string::string(v16, aLobbys4Ini);
   v23 = v27;

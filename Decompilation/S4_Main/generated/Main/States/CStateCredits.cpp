@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void * a1) {
 
   C = (CStateCredits *)operator new(4u);
   if ( C )
+  {
     return CStateCredits::CStateCredits(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -36,24 +40,22 @@ class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void * a1) {
   *(_DWORD *)this = &CStateCredits::_vftable_;
   IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 1);
   if ( g_pSoundManager )
+  {
     CSoundManager::StopMusic(g_pSoundManager);
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 15)
-    && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 90, "bRet") == 1 )
+  }
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 15) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 90, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 16)
-    && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 92, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 16) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 92, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 17)
-    && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 94, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 17) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 94, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 14)
-    && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 96, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 14) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 96, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -77,7 +79,9 @@ bool  CStateCredits::Perform(void) {
   }
   Time = timeGetTime();
   if ( !byte_402CC48 || dword_402CC44 >= Time )
+  {
     return 1;
+  }
   dword_402CC44 = Time + 15;
   IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   byte_402CC48 = 0;
@@ -111,7 +115,9 @@ bool  CStateCredits::OnEvent(class CEvn_Event & a2) {
       return 1;
     case 0xB:
       if ( (unsigned __int16)a2->m_wParam != 27 )
+      {
         goto CStateCredits__OnEvent___def_18A4401;
+      }
       v4 = CEvn_Event::CEvn_Event(&v6, 0x6Du, 0, 0, 0);
       v8 = 1;
       IEventEngine::SendAMessage(g_pEvnEngine, v4);
@@ -140,23 +146,19 @@ void  CStateCredits::SetupGUI(void) {
     CSoundManager::StopMusic(g_pSoundManager);
     CSoundManager::PlayBackgroundMusic(5, 5, 0);
   }
-  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 14, GuiDlgMainCreditsProc)
-    && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 206, "bRet") == 1 )
+  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 14, GuiDlgMainCreditsProc) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 206, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 17, GuiDlgMainCreditsPaperProc)
-    && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 208, "bRet") == 1 )
+  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 17, GuiDlgMainCreditsPaperProc) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 208, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 16, GuiDlgMainCreditsTopProc)
-    && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 210, "bRet") == 1 )
+  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 16, GuiDlgMainCreditsTopProc) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 210, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 15, GuiDlgMainCreditsBottomProc)
-    && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 212, "bRet") == 1 )
+  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 15, GuiDlgMainCreditsBottomProc) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 212, "bRet") == 1 )
   {
     __debugbreak();
   }

@@ -11,12 +11,18 @@
 
   C = (BSTR *)_bstr_t::Data_t::operator new(0xCu);
   if ( C )
+  {
     v3 = _bstr_t::Data_t::Data_t(C, psz);
+  }
   else
+  {
     v3 = 0;
+  }
   *this = v3;
   if ( !*this )
+  {
     _com_issue_error(-2147024882);
+  }
   return this;
 }
 
@@ -34,9 +40,13 @@
  _bstr_t::operator char const *(void)const {
   
   if ( *this )
+  {
     return _bstr_t::Data_t::GetString(*this);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -48,7 +58,9 @@ void  _bstr_t::_Free(void) {
 
   result = this;
   if ( !*this )
+  {
     return result;
+  }
   result = (_bstr_t::Data_t **)_bstr_t::Data_t::Release(*this);
   *this = 0;
   return result;

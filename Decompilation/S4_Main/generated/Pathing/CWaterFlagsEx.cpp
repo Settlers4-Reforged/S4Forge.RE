@@ -13,15 +13,23 @@ void __cdecl CWaterFlagsEx::BlockRowPrimary(unsigned char * a1, int a2) {
   int i; // [esp+10h] [ebp-4h]
 
   v5 = CWorldManager::Width(v2) + 4;
-  for ( i = a2 * v5; ; ++i )
+  for ( i = a2 * v5;
+        ;
+        ++i )
   {
     result = i;
     if ( i > a2 * v5 + v5 - 1 )
+    {
       break;
+    }
     if ( (a1[i] & 1) != 0 )
+    {
       v4 = -59;
+    }
     else
+    {
       v4 = -62;
+    }
     a1[i] = v4;
   }
   return result;
@@ -40,12 +48,18 @@ void __cdecl CWaterFlagsEx::BlockColPrimary(unsigned char * a1, int a2) {
 
   v4 = CWorldManager::Width(v2) + 4;
   result = a2;
-  for ( i = a2; i <= a2 + v4 * (v4 - 1); i += v4 )
+  for ( i = a2;
+        i <= a2 + v4 * (v4 - 1);
+        i += v4 )
   {
     if ( (a1[i] & 1) != 0 )
+    {
       v5 = -59;
+    }
     else
+    {
       v5 = -62;
+    }
     a1[i] = v5;
     result = v4 + i;
   }
@@ -103,7 +117,9 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
   CPerformanceCounter::Start((CPerformanceCounter *)v5);
   v35 = CWorldManager::Width(v0);
   v39 = v35 + 4;
-  for ( i = 0; i < 61; ++i )
+  for ( i = 0;
+        i < 61;
+        ++i )
   {
     v1 = SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * i]);
     v2 = SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * i]);
@@ -114,7 +130,9 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
   memset(v15, 129, 2 * v39);
   memset(&v40[v39 * (v39 - 2)], 129, 2 * v39);
   v14 = v39 * v39 - 1;
-  for ( j = 0; j <= v14; j += v39 )
+  for ( j = 0;
+        j <= v14;
+        j += v39 )
   {
     v40[j] = -127;
     v40[j + 1] = -127;
@@ -122,29 +140,39 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
     v40[v39 - 1 + j] = -127;
   }
   v33 = 0;
-  for ( k = 0; k < v35; ++k )
+  for ( k = 0;
+        k < v35;
+        ++k )
   {
     v12 = v39 * (k + 2) + 2;
-    for ( m = 0; m < v35; ++m )
+    for ( m = 0;
+          m < v35;
+          ++m )
     {
       v13 = CWorldManager::Ground(v33);
       if ( CLandscapeProperties::IsWater(v13) )
       {
         v29 = 129;
         if ( CWorldManager::IsBlockedWater(v33) )
+        {
           v29 = 197;
+        }
       }
       else
       {
         v29 = 66;
         if ( (unsigned __int8)CWorldManager::IsBlockedLand(v33) )
+        {
           v29 = 194;
+        }
       }
       v40[m + v12] = v29;
       ++v33;
     }
   }
-  for ( n = 0; n < v35; ++n )
+  for ( n = 0;
+        n < v35;
+        ++n )
   {
     v37 = v39 * (n + 2) + 2;
     v10 = v37 + v39 - 5;
@@ -153,7 +181,9 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
       v17 = v40[v37];
       if ( (v17 & 0xE) == 0 )
       {
-        for ( ii = 1; ii < 19; ++ii )
+        for ( ii = 1;
+              ii < 19;
+              ++ii )
         {
           v11 = v41[ii] + v37;
           if ( (v40[v11] & 6) != 0 )
@@ -167,7 +197,9 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
     }
     while ( v37 <= v10 );
   }
-  for ( jj = 0; jj < v35; ++jj )
+  for ( jj = 0;
+        jj < v35;
+        ++jj )
   {
     v36 = v39 * (jj + 2) + 2;
     v8 = v36 + v39 - 5;
@@ -176,7 +208,9 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
       v16 = v40[v36];
       if ( (v16 & 0xE) == 0 )
       {
-        for ( kk = 1; kk < 19; ++kk )
+        for ( kk = 1;
+              kk < 19;
+              ++kk )
         {
           v9 = v41[kk] + v36;
           if ( (v40[v9] & 0xE) != 0 )
@@ -199,10 +233,14 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
   CWaterFlagsEx::BlockColPrimary(v40, v39 - 4);
   CWaterFlagsEx::BlockColPrimary(v40, v39 - 3);
   v19 = 0;
-  for ( mm = 0; mm < v35; ++mm )
+  for ( mm = 0;
+        mm < v35;
+        ++mm )
   {
     v32 = v39 * (mm + 2) + 2;
-    for ( nn = 0; nn < v35; ++nn )
+    for ( nn = 0;
+          nn < v35;
+          ++nn )
     {
       if ( (v40[v32] & 1) != 0 )
       {
@@ -217,13 +255,17 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
           else if ( (v21 & 0x18) != 0 )
           {
             v20 = 255;
-            for ( i1 = 1; i1 < 61; ++i1 )
+            for ( i1 = 1;
+                  i1 < 61;
+                  ++i1 )
             {
               v7 = v41[i1] + v32;
               v20 = (unsigned __int8)(v20 & v40[v7]);
             }
             if ( (v20 & 0xC0) == 0 )
+            {
               v22 = 50432;
+            }
           }
         }
         else

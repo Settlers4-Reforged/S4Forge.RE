@@ -21,8 +21,12 @@
   *((_DWORD *)this + 4) = 100;
   *((_DWORD *)this + 7) = 0;
   *((_DWORD *)this + 8) = 0;
-  for ( i = 0; i < 101; ++i )
+  for ( i = 0;
+        i < 101;
+        ++i )
+  {
     *((float *)this + i + 10) = (float)i * 0.0099999998;
+  }
   return this;
 }
 
@@ -34,28 +38,29 @@
   int v1; // [esp+18h] [ebp-18h]
 
   if ( g_pSoundEngine )
+  {
     ISoundEngine::StopPlayback((ISoundEngine *)g_pSoundEngine);
+  }
   if ( *((_DWORD *)this + 119) )
   {
-    (*(void (__thiscall **)(int, const char *, int))(*(_DWORD *)(*((_DWORD *)this + 119)
-                                                               + *(_DWORD *)(*(_DWORD *)(*((_DWORD *)this + 119) + 72)
-                                                                           + 4)
-                                                               + 72)
-                                                   + 32))(
-      *((_DWORD *)this + 119) + *(_DWORD *)(*(_DWORD *)(*((_DWORD *)this + 119) + 72) + 4) + 72,
-      "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h",
-      146);
+    (*(void (__thiscall **)(int, const char *, int))(*(_DWORD *)(*((_DWORD *)this + 119) + *(_DWORD *)(*(_DWORD *)(*((_DWORD *)this + 119) + 72) + 4) + 72) + 32))(*((_DWORD *)this + 119) + *(_DWORD *)(*(_DWORD *)(*((_DWORD *)this + 119) + 72) + 4) + 72, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h", 146);
     operator delete[](*((void **)this + 118));
     *((_DWORD *)this + 118) = 0;
     v1 = *((_DWORD *)this + 119);
     if ( v1 )
+    {
       (*(void (__thiscall **)(int, int))(*(_DWORD *)v1 + 24))(v1, 1);
+    }
     *((_DWORD *)this + 119) = 0;
   }
   if ( *((_DWORD *)this + 7) )
+  {
     operator delete[](*((void **)this + 7));
+  }
   if ( *((_DWORD *)this + 8) )
+  {
     operator delete[](*((void **)this + 8));
+  }
   String::~String((CSoundManager *)((char *)this + 444));
 }
 
@@ -94,32 +99,27 @@ bool  CSoundManager::OpenSoundFiles(void) {
   ElementCount = CFileEx::Size((CFileEx *)v19);
   *((_DWORD *)v18 + 9) = (ElementCount - 20) >> 2;
   if ( *((_DWORD *)v18 + 9) != dword_3737E6C[324] + dword_3737E68[324] )
-    CTrace::Print(
-      "CSoundManager::OpenSoundFiles : Number of items differs read %d expected %d",
-      *((_DWORD *)v18 + 9),
-      dword_3737E6C[324] + dword_3737E68[324]);
+  {
+    CTrace::Print("CSoundManager::OpenSoundFiles : Number of items differs read %d expected %d", *((_DWORD *)v18 + 9), dword_3737E6C[324] + dword_3737E68[324]);
+  }
   v9 = operator new[](4 * (ElementCount >> 2));
   *((_DWORD *)v18 + 118) = v9;
   v5[4] = CFileEx::Read(v20, *((void **)v18 + 118), 1, ElementCount, "Main\\SoundManager.cpp", 958);
   C = operator new(0x6Cu);
   LOBYTE(v21) = 3;
   if ( C )
+  {
     v11 = CFileEx::CFileEx((CFileEx *)C, 1);
+  }
   else
+  {
     v11 = 0;
+  }
   v8 = v11;
   *((_DWORD *)v18 + 119) = v11;
   LOBYTE(v21) = 4;
   v15 = *((_DWORD *)v18 + 119);
-  (**(void (__thiscall ***)(int, const wchar_t *, int, int, const char *, int))(v15
-                                                                              + *(_DWORD *)(*(_DWORD *)(v15 + 72) + 4)
-                                                                              + 72))(
-    v15 + *(_DWORD *)(*(_DWORD *)(v15 + 72) + 4) + 72,
-    L"snd\\0.snd",
-    6,
-    1,
-    "Main\\SoundManager.cpp",
-    971);
+  (**(void (__thiscall ***)(int, const wchar_t *, int, int, const char *, int))(v15 + *(_DWORD *)(*(_DWORD *)(v15 + 72) + 4) + 72))(v15 + *(_DWORD *)(*(_DWORD *)(v15 + 72) + 4) + 72, L"snd\\0.snd", 6, 1, "Main\\SoundManager.cpp", 971);
   v21 = 0;
   v7 = operator new[](4 * *((_DWORD *)v18 + 9));
   *((_DWORD *)v18 + 7) = v7;
@@ -128,13 +128,19 @@ bool  CSoundManager::OpenSoundFiles(void) {
   v14 = *((_DWORD *)v18 + 119);
   v1 = (*(int (__thiscall **)(int))(*(_DWORD *)(v14 + *(_DWORD *)(*(_DWORD *)(v14 + 72) + 4) + 72) + 12))(v14 + *(_DWORD *)(*(_DWORD *)(v14 + 72) + 4) + 72);
   *((_DWORD *)v18 + 120) = v1;
-  for ( i = 0; i < *((_DWORD *)v18 + 9); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)v18 + 9);
+        ++i )
   {
     v10 = *(_DWORD *)(*((_DWORD *)v18 + 118) + 4 * i + 20);
     if ( v10 )
+    {
       *(_DWORD *)(*((_DWORD *)v18 + 7) + 4 * i) = *((_DWORD *)v18 + 120) + 4 * (v10 >> 2);
+    }
     else
+    {
       *(_DWORD *)(*((_DWORD *)v18 + 7) + 4 * i) = 0;
+    }
     SoundName = CS4DefineNames::GetSoundName(i);
     v3 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "SOUND_VOLUMES", SoundName, 100);
     *(_DWORD *)(*((_DWORD *)v18 + 8) + 4 * i) = v3;
@@ -151,11 +157,17 @@ bool  CSoundManager::OpenSoundFiles(void) {
 unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS a2) {
   
   if ( a2 >= 109 && BBSupportDbgReport(2, "Main\\SoundManager.cpp", 240, "_iSoundID < SOUND_MAX") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 )
+  {
     return CSoundManager::PlaySoundFX(this, a2, 100, *this, 100, 0);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -164,16 +176,22 @@ unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS a2) {
 unsigned int  CSoundManager::PlaySoundFXLooped(enum SIV_SOUNDS a2) {
   
   if ( a2 >= 109 && BBSupportDbgReport(2, "Main\\SoundManager.cpp", 256, "_iSoundID < SOUND_MAX") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 )
+  {
     return CSoundManager::PlaySoundFX(this, a2, 100, *this, 100, 1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x149c4d0]
-// Decompiled from unsigned int __thiscall CSoundManager::PlaySoundFX(  CSoundManager *this,  unsigned int a2,  int a3,  int a4,  int a5,  bool a6)
+// Decompiled from unsigned int __thiscall CSoundManager::PlaySoundFX(CSoundManager *this, unsigned int a2, int a3, int a4, int a5, bool a6)
 unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS a2, int a3, int a4, int a5, bool a6) {
   
   const char *v7; // eax
@@ -186,13 +204,14 @@ unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS a2, int a3, int a4, int
   unsigned int *v15; // [esp+18h] [ebp-4h]
 
   if ( !a2 )
+  {
     return 0;
+  }
   if ( a2 < 0x6D )
   {
     if ( g_pSoundEngine )
     {
-      if ( !dword_3737E6C[3 * a2]
-        && BBSupportDbgReport(2, "Main\\SoundManager.cpp", 291, "g_sSoundLUT[_iSoundID].uNumSounds > 0") == 1 )
+      if ( !dword_3737E6C[3 * a2] && BBSupportDbgReport(2, "Main\\SoundManager.cpp", 291, "g_sSoundLUT[_iSoundID].uNumSounds > 0") == 1 )
       {
         __debugbreak();
       }
@@ -202,11 +221,7 @@ unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS a2, int a3, int a4, int
         v14 = *(_DWORD **)(*((_DWORD *)this + 7) + 4 * v11);
         if ( v14 )
         {
-          v12 = CSoundManager::CalcFinalVolume(
-                  this,
-                  *((_DWORD *)this + 5),
-                  *(_DWORD *)(*((_DWORD *)this + 8) + 4 * a2),
-                  a3);
+          v12 = CSoundManager::CalcFinalVolume(this, *((_DWORD *)this + 5), *(_DWORD *)(*((_DWORD *)this + 8) + 4 * a2), a3);
           v10 = *v14;
           v9 = v14[1];
           v15 = v14 + 2;
@@ -230,13 +245,10 @@ unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS a2, int a3, int a4, int
       }
       else
       {
-        if ( BBSupportDbgReportF(
-               1,
-               "Main\\SoundManager.cpp",
-               295,
-               "CSoundManager::PlaySoundFX(): Invalid sound id %i!",
-               a2) == 1 )
+        if ( BBSupportDbgReportF(1, "Main\\SoundManager.cpp", 295, "CSoundManager::PlaySoundFX(): Invalid sound id %i!", a2) == 1 )
+        {
           __debugbreak();
+        }
         return 0;
       }
     }
@@ -248,9 +260,13 @@ unsigned int  CSoundManager::PlaySoundFX(enum SIV_SOUNDS a2, int a3, int a4, int
   else
   {
     if ( BBSupportDbgReportF(1, "Main\\SoundManager.cpp", 278, "CSoundManager::PlaySoundFX(): Invalid sound id %i!", a2) == 1 )
+    {
       __debugbreak();
+    }
     if ( BBSupportDbgReportF(1, "Main\\SoundManager.cpp", 280, "CSoundManager::PlaySoundFX(): Invalid sound id %i!", a2) == 1 )
+    {
       __debugbreak();
+    }
     return 0;
   }
 }
@@ -266,9 +282,13 @@ unsigned int  CSoundManager::PlayEnvironmentSound(enum SIV_SOUNDS a2, int a3, in
 
   v8 = this;
   if ( !a2 )
+  {
     return 0;
+  }
   if ( a2 >= 109 && BBSupportDbgReport(2, "Main\\SoundManager.cpp", 197, "_iSoundID < SOUND_MAX") == 1 )
+  {
     __debugbreak();
+  }
   CSoundManager::CalcPanningAndVolume(v8, a3, a4, &v6, &v7);
   return CSoundManager::PlaySoundFX(v8, a2, v6, v7, 100, a5);
 }
@@ -279,9 +299,13 @@ unsigned int  CSoundManager::PlayEnvironmentSound(enum SIV_SOUNDS a2, int a3, in
 unsigned int  CSoundManager::PlaySoundFile(wchar_t const * a2, int a3, int a4) {
   
   if ( g_pSoundEngine )
+  {
     return ISoundEngine::PlaySoundFile((ISoundEngine *)g_pSoundEngine, a2, a3, a4);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -290,13 +314,19 @@ unsigned int  CSoundManager::PlaySoundFile(wchar_t const * a2, int a3, int a4) {
 unsigned int  CSoundManager::PlayBackgroundMusic(int a2, enum SIV_MUSICSTYLES a3, wchar_t const * String) {
   
   if ( !g_pSoundEngine )
+  {
     return 0;
+  }
   if ( *((_DWORD *)this + 3) == a2 )
+  {
     return dword_3D89CCC;
+  }
   if ( String && a2 < 0 )
   {
     if ( !(unsigned __int8)CSoundManager::CreateDirPlaylist(String) )
+    {
       return 0;
+    }
     a3 = 0;
   }
   else if ( !CSoundManager::CreatePlaylists(this, a2, String) )
@@ -322,9 +352,13 @@ unsigned int  CSoundManager::PlayDirectory(wchar_t const * String) {
 unsigned int  CSoundManager::ChangeMusicStyle(enum SIV_MUSICSTYLES a2) {
   
   if ( g_pSoundEngine )
+  {
     return ISoundEngine::ChangePlaylist((ISoundEngine *)g_pSoundEngine, a2, this[1]);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -337,9 +371,13 @@ unsigned int  CSoundManager::FadeInSound(enum SIV_SOUNDS a2, int a3, int a4, int
   int v8; // [esp+4h] [ebp-8h]
 
   if ( !g_pSoundEngine )
+  {
     return 0;
+  }
   if ( a2 >= 109 && BBSupportDbgReport(2, "Main\\SoundManager.cpp", 876, "_iSoundID < SOUND_MAX") == 1 )
+  {
     __debugbreak();
+  }
   v7 = CSoundManager::PlaySoundFX(this, a2, a3, *(_DWORD *)this, 100, 1);
   if ( v7 )
   {
@@ -372,7 +410,9 @@ unsigned int  CSoundManager::CrossFade(unsigned int a2, enum SIV_SOUNDS a3, int 
   int v8; // [esp+4h] [ebp-8h]
 
   if ( !g_pSoundEngine )
+  {
     return 0;
+  }
   v7 = CSoundManager::PlaySoundFX(this, a3, 0, 64, 100, 1);
   if ( v7 )
   {
@@ -409,7 +449,9 @@ void  CSoundManager::SetMusicVolume(int a2) {
     if ( *((int *)this + 1) <= 127 )
     {
       if ( *((int *)this + 1) < 0 )
+      {
         *((_DWORD *)this + 1) = 0;
+      }
     }
     else
     {
@@ -431,7 +473,9 @@ void  CSoundManager::SetSoundVolume(int a2) {
     if ( *((int *)this + 2) <= 127 )
     {
       if ( *((int *)this + 2) < 0 )
+      {
         *((_DWORD *)this + 2) = 0;
+      }
     }
     else
     {
@@ -451,9 +495,13 @@ void  CSoundManager::Mute(bool a2) {
   if ( g_pSoundEngine )
   {
     if ( a2 )
+    {
       v2 = 0;
+    }
     else
+    {
       v2 = 100;
+    }
     if ( v2 != *((_DWORD *)this + 6) )
     {
       *((_DWORD *)this + 6) = v2;
@@ -469,7 +517,9 @@ void  CSoundManager::Mute(bool a2) {
 void  CSoundManager::PausePlayback(bool a1) {
   
   if ( g_pSoundEngine )
+  {
     ISoundEngine::PausePlayback((ISoundEngine *)g_pSoundEngine, a1);
+  }
 }
 
 
@@ -480,7 +530,9 @@ void  CSoundManager::StopMusic(void) {
   CSoundManager *result; // eax
 
   if ( g_pSoundEngine )
+  {
     ISoundEngine::StopStreams((ISoundEngine *)g_pSoundEngine);
+  }
   result = this;
   *((_DWORD *)this + 3) = -2;
   return result;
@@ -495,10 +547,14 @@ void  CSoundManager::StopSounds(void) {
 
   if ( g_pSoundEngine )
   {
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       if ( ISoundEngine::IsRunning((ISoundEngine *)g_pSoundEngine, dword_3D89C6C[3 * i]) )
+      {
         ISoundEngine::StopSample((ISoundEngine *)g_pSoundEngine, dword_3D89C6C[3 * i]);
+      }
     }
     ISoundEngine::StopPlayback((ISoundEngine *)g_pSoundEngine);
   }
@@ -510,7 +566,9 @@ void  CSoundManager::StopSounds(void) {
 void  CSoundManager::StopSound(unsigned int a2) {
   
   if ( g_pSoundEngine )
+  {
     ISoundEngine::StopSample((ISoundEngine *)g_pSoundEngine, a2);
+  }
 }
 
 
@@ -552,8 +610,12 @@ void  CSoundManager::Update(void) {
     v5 = CAIResourceMap::ResourceDataVW(v6, v7);
     CSoundManager::CalcPanningAndVolume(v10, v11, v12, &v13, &v8);
     if ( v13 < 5 )
+    {
       v13 = 0;
-    for ( i = 0; i < 6; ++i )
+    }
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       v2 = CAIResourceData::Flags1(v5);
       if ( (dword_3D89C38[i] & v2) != 0 )
@@ -562,7 +624,9 @@ void  CSoundManager::Update(void) {
         {
           Volume = ISoundEngine::GetVolume((ISoundEngine *)g_pSoundEngine, dword_3D89C6C[3 * i]);
           if ( v13 <= Volume )
+          {
             byte_3D89C71[12 * i] = 0;
+          }
           if ( !byte_3D89C71[12 * i] )
           {
             ISoundEngine::ChangePan((ISoundEngine *)g_pSoundEngine, dword_3D89C6C[3 * i], v8);
@@ -610,7 +674,9 @@ bool  CSoundManager::CreatePlaylists(int a2, wchar_t const * a3) {
   int i; // [esp+4h] [ebp-4h]
 
   if ( !g_pSoundEngine )
+  {
     return 0;
+  }
   CSoundManager::StopMusic(this);
   ISoundEngine::CreatePlaylists((ISoundEngine *)g_pSoundEngine, 6);
   if ( a2 >= 0 )
@@ -620,8 +686,12 @@ bool  CSoundManager::CreatePlaylists(int a2, wchar_t const * a3) {
   }
   else
   {
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
+    {
       CSoundManager::LoadRaceTitles(this, i, a3);
+    }
   }
   return 1;
 }
@@ -635,9 +705,13 @@ int  CSoundManager::CalcFinalVolume(int a2, int a3, int a4) {
 
   v5 = (int)(float)((float)(a4 * a3 * a2 * *((_DWORD *)this + 6)) * 0.000001);
   if ( v5 > 127 )
+  {
     return 127;
+  }
   if ( v5 < 0 )
+  {
     return 0;
+  }
   return v5;
 }
 
@@ -719,7 +793,9 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
       break;
   }
   if ( v23 && !g_pSoundEngine )
+  {
     BBSupportTracePrintF(0, "CSoundManager::LoadRaceTitles(): SoundEngine not initialized!");
+  }
   if ( v23 )
   {
     v19 = 0;
@@ -738,7 +814,9 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
     v17 = (void *)std::operator+<char>((int)v31, (int)&v40, "SOUNDTRACKS");
     std::string::operator=(v35, v17);
     std::string::~string(v31);
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       v16 = std::operator+<char>((int)v29, (int)v35, "_");
       v15 = v16;
@@ -756,7 +834,9 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
       if ( v19 > 0 )
       {
         ISoundEngine::InitPlaylist((ISoundEngine *)g_pSoundEngine, i, 0);
-        for ( j = 0; j < v19; ++j )
+        for ( j = 0;
+              j < v19;
+              ++j )
         {
           sprintf(Str, "%d", j);
           v12 = (void *)std::operator+<char>((int)v27, (int)&v40, Str);
@@ -768,20 +848,14 @@ bool  CSoundManager::LoadRaceTitles(int a2, wchar_t const * a3) {
           LOBYTE(v43) = 8;
           std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v25);
           LOBYTE(v43) = 9;
-          v11 = std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-                  (int)&v26,
-                  (int)v34);
+          v11 = std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)&v26, (int)v34);
           std::wstring::operator=(v11);
           std::wstring::~wstring(&v26);
           if ( (unsigned __int8)std::operator!=<wchar_t>((int)v39, word_3738860) )
           {
             CFile::CFile(&v32);
             LOBYTE(v43) = 11;
-            ((void (__stdcall *)(int, int, char *, int))CFile::Open)(
-              (int)v39,
-              6,
-              "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h",
-              0);
+            ((void (__stdcall *)(int, int, char *, int))CFile::Open)((int)v39, 6, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
             CFile::Close(&v32, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
             v24 = 1;
             v43 = 10;
@@ -831,7 +905,9 @@ bool  CSoundManager::CreateDirPlaylist(wchar_t const * String) {
   int v8; // [esp+4ACh] [ebp-4h]
 
   if ( !g_pSoundEngine )
+  {
     return 0;
+  }
   this[3] = -1;
   CSoundManager::StopMusic(this);
   ISoundEngine::CreatePlaylists((ISoundEngine *)g_pSoundEngine, 1);

@@ -4,7 +4,7 @@
 // Definitions for class CAITaskForceShamans
 
 // address=[0x132a1c0]
-// Decompiled from CAITaskForceShamans *__thiscall CAITaskForceShamans::CAITaskForceShamans(  CAITaskForceShamans *this,  int iOwnerId,  int iFlags)
+// Decompiled from CAITaskForceShamans *__thiscall CAITaskForceShamans::CAITaskForceShamans(CAITaskForceShamans *this, int iOwnerId, int iFlags)
  CAITaskForceShamans::CAITaskForceShamans(int iOwnerId, int iFlags) {
   
   CAITaskForceEx::CAITaskForceEx((CAITaskForceEx *)this, iOwnerId, 7, 12, iFlags);
@@ -71,7 +71,9 @@ void  CAITaskForceShamans::Execute(void) {
           v9 = CAIEntityInfo::Next(v9);
         }
         if ( v13 )
+        {
           CAITaskForce::SetStatus(this, 8);
+        }
       }
       break;
     case 0x6F:
@@ -83,11 +85,15 @@ void  CAITaskForceShamans::Execute(void) {
         {
           v4 = CAIEntityInfo::EntityId(v8);
           if ( !IAIEnvironment::EntityIsShamanOutOfMana(v4) )
+          {
             v12 = 0;
+          }
           v8 = CAIEntityInfo::Next(v8);
         }
         if ( v12 )
+        {
           CAITaskForce::SetStatus(this, 10);
+        }
       }
       break;
     case 0x70:
@@ -99,7 +105,9 @@ void  CAITaskForceShamans::Execute(void) {
           v3 = CAIEntityInfo::EntityId(v7);
           v2 = CAITaskForce::CmdGoal(this);
           if ( !IAIEnvironment::EntitySendShamanWorkEvent(v3, v2) )
+          {
             return;
+          }
           v7 = CAIEntityInfo::Next(v7);
         }
         CAITaskForce::SetState(this, 111);
@@ -136,7 +144,9 @@ bool  CAITaskForceShamans::NewCommand(int a2, int a3, int a4) {
       CAITaskForce::MarkGoalAsPosition(this);
       SneakUpPosition = CAITaskForceEx::FindSneakUpPosition(this);
       if ( SneakUpPosition )
+      {
         CAITaskForce::SetNewStatusAndState(this, 2, 102, 0);
+      }
       result = SneakUpPosition;
       break;
     case 9u:
@@ -151,7 +161,9 @@ bool  CAITaskForceShamans::NewCommand(int a2, int a3, int a4) {
       break;
     default:
       if ( BBSupportDbgReport(1, "AI\\AI_TaskForcesEx.cpp", 2755, "CAITaskForceShamans::NewCommand(): Invalid command!") == 1 )
+      {
         __debugbreak();
+      }
       result = 0;
       break;
   }

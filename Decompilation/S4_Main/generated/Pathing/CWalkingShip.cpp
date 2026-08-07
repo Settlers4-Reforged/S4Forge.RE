@@ -53,10 +53,14 @@ bool  CWalkingShip::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
   char Path; // [esp+5h] [ebp-3h]
 
   if ( !CWater::RemoveShip(a2) && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2213, "bRemoved") == 1 )
+  {
     __debugbreak();
+  }
   Path = CAStar64::FindPath((CAStar64 *)&g_cAStar64Ship, a2, a3, a4);
   if ( !CWater::PlaceShip(a2) && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2219, "bPlaced") == 1 )
+  {
     __debugbreak();
+  }
   return Path;
 }
 
@@ -106,7 +110,9 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
   v28 = 10;
   v27 = 0;
   v23 = CWorldManager::Index(a2);
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v4 = v23 + CWorldManager::NeighborRelIndex(i);
     v26 = CWaterFlags::WaterFlags(v4);
@@ -121,9 +127,13 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
       v30 = (v26 & 0xF0) >> 4;
       v39[i] = v30;
       if ( v30 < v28 )
+      {
         v28 = (v26 & 0xF0) >> 4;
+      }
       if ( v30 > v27 )
+      {
         v27 = (v26 & 0xF0) >> 4;
+      }
     }
   }
   v39[6] = v39[0];
@@ -132,7 +142,9 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
   if ( v28 >= v27 || v27 <= 0 )
   {
     if ( (CWaterFlags::WaterFlags(v23) & 0x1000) != 0 )
+    {
       v34 = v24 + v25 < 6;
+    }
   }
   else
   {
@@ -143,14 +155,18 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
     v11 = CWorldManager::Index(a2);
     v12 = this->SectorId(this, v11);
     if ( (this->m_sData.m_uFlags & 0x20000) == 0 )
+    {
       this->m_sData.m_iIdleWalkToXY = -1;
+    }
     this->m_sData.m_uFlags &= ~0x20000u;
     if ( CWorldManager::InWorldPackedXY(this->m_sData.m_iIdleWalkToXY) )
     {
       v10 = CWorldManager::Index(this->m_sData.m_iIdleWalkToXY);
       v18 = this->SectorId(this, v10);
       if ( (CWaterFlags::WaterFlags(v23) & 0x1000) != 0 || v18 <= 0 || v12 != v18 )
+      {
         this->m_sData.m_iIdleWalkToXY = -1;
+      }
     }
     else
     {
@@ -162,7 +178,9 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
       v8 = Y16X16::UnpackYFast(a2);
       v20 = -1;
       v14 = -1;
-      for ( j = 0; j < SurroundingHexPointsCount(15); ++j )
+      for ( j = 0;
+            j < SurroundingHexPointsCount(15);
+            ++j )
       {
         v22 = v9 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * j]);
         v21 = v8 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * j]);
@@ -186,7 +204,9 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
         }
       }
       if ( v20 < 0 )
+      {
         return 8;
+      }
       this->m_sData.m_iIdleWalkToXY = Y16X16::PackXYFast(v20, v14);
     }
     v19 = Y16X16::DirectionFast(a2, this->m_sData.m_iIdleWalkToXY);
@@ -207,7 +227,9 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
   {
     v31 = 0;
     v13 = v39[5] == v28;
-    for ( k = 0; k < 6; ++k )
+    for ( k = 0;
+          k < 6;
+          ++k )
     {
       if ( v39[k] == v28 )
       {
@@ -221,10 +243,14 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
       }
     }
     v32 = CStateGame::Rand(g_pGame) % v31;
-    for ( m = 0; m < 6; ++m )
+    for ( m = 0;
+          m < 6;
+          ++m )
     {
       if ( v32 < v39[m] )
+      {
         return m;
+      }
     }
   }
   this->m_sData.m_iIdleWalkToXY = -1;

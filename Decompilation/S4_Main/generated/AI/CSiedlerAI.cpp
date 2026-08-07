@@ -304,44 +304,43 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
   v206 = 0;
   v207 = 0;
   v89[0] = 0;
-  for ( i = 0; i < 60; ++i )
+  for ( i = 0;
+        i < 60;
+        ++i )
+  {
     memset(&v224[11 * i], 0, 0x2Cu);
+  }
   CSchedule::GetBuildingInPlannedStatus(*((CSchedule **)v218 + 11), (struct CReserveEntry *)v224);
   v183 = a2 - 3;
   switch ( a2 )
   {
     case 3:
-      ProdIdForGoodType = CProductionTab::GetProdIdForGoodType(
-                            *((_DWORD *)v218 + 13),
-                            *((_DWORD *)a3 + 3),
-                            *((_DWORD *)v218 + 16));
+      ProdIdForGoodType = CProductionTab::GetProdIdForGoodType(*((_DWORD *)v218 + 13), *((_DWORD *)a3 + 3), *((_DWORD *)v218 + 16));
       *((_DWORD *)v218 + 8) = ProdIdForGoodType;
       v195 = 0;
       if ( *((_DWORD *)a3 + 5) )
       {
         *((_DWORD *)v218 + 17) = *((_DWORD *)a3 + 5);
-        if ( !CProductionTab::GetProdBuildingByProdIndex(
-                *((_DWORD *)v218 + 13),
-                *((_DWORD *)v218 + 8),
-                1,
-                *((_DWORD *)v218 + 16)) )
+        if ( !CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)v218 + 13), *((_DWORD *)v218 + 8), 1, *((_DWORD *)v218 + 16)) )
+        {
           v207 = 1;
+        }
       }
       else
       {
         *((_DWORD *)v218 + 17) = 0;
       }
-      ProdBuildingByProdIndex = CProductionTab::GetProdBuildingByProdIndex(
-                                  *((_DWORD *)v218 + 13),
-                                  *((_DWORD *)v218 + 8),
-                                  0,
-                                  *((_DWORD *)v218 + 16));
+      ProdBuildingByProdIndex = CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)v218 + 13), *((_DWORD *)v218 + 8), 0, *((_DWORD *)v218 + 16));
       v109 = (CParameterSet *)operator new(0x10u);
       LOBYTE(v225) = 8;
       if ( v109 )
+      {
         v108 = CParameterSet::CParameterSet(v109);
+      }
       else
+      {
         v108 = 0;
+      }
       v95 = v108;
       LOBYTE(v225) = 7;
       v208 = v108;
@@ -357,9 +356,13 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
             v167 = (CParam *)operator new(0x1Cu);
             LOBYTE(v225) = 12;
             if ( v167 )
+            {
               v166 = CParam::CParam(v167, v195, ReserveBuilding, 0, 0);
+            }
             else
+            {
               v166 = 0;
+            }
             v103 = v166;
             LOBYTE(v225) = 7;
             v211 = v166;
@@ -373,55 +376,49 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
         v206 = CSchedule::GetInvokeEvent(*((_DWORD *)v218 + 11), ProdBuildingByProdIndex);
         if ( v206 && !*(_DWORD *)(v206 + 48) )
         {
-          v209 = (*(int (__thiscall **)(_DWORD, int, int, _BYTE *))(**((_DWORD **)v218 + 10) + 32))(
-                   *((_DWORD *)v218 + 10),
-                   64,
-                   ProdBuildingByProdIndex,
-                   v187);
+          v209 = (*(int (__thiscall **)(_DWORD, int, int, _BYTE *))(**((_DWORD **)v218 + 10) + 32))(*((_DWORD *)v218 + 10), 64, ProdBuildingByProdIndex, v187);
           CReserveDatabase::GetResBuildingInGroup(*((CReserveDatabase **)v218 + 15), 0, (struct CReserveEntry *)v224);
           v107 = (CFilter *)operator new(0x18u);
           LOBYTE(v225) = 9;
           if ( v107 )
+          {
             v106 = CFilter::CFilter(v107, 5);
+          }
           else
+          {
             v106 = 0;
+          }
           v66 = v106;
           LOBYTE(v225) = 7;
           v213 = v106;
-          for ( i = 0; i < v209; ++i )
+          for ( i = 0;
+                i < v209;
+                ++i )
           {
             v4 = std::vector<SBUILDINFODATA>::operator[](i);
-            v186 = (*(int (__thiscall **)(_DWORD, int, int, int, _DWORD *))(**((_DWORD **)v218 + 10) + 264))(
-                     *((_DWORD *)v218 + 10),
-                     ProdBuildingByProdIndex,
-                     16,
-                     v4,
-                     v223);
+            v186 = (*(int (__thiscall **)(_DWORD, int, int, int, _DWORD *))(**((_DWORD **)v218 + 10) + 264))(*((_DWORD *)v218 + 10), ProdBuildingByProdIndex, 16, v4, v223);
             if ( v186 >= 0 )
             {
               std::vector<SBUILDINFODATA>::clear();
-              for ( j = 0; j < v186; ++j )
+              for ( j = 0;
+                    j < v186;
+                    ++j )
+              {
                 std::vector<SBUILDINFODATA>::push_back(&v223[19 * j]);
+              }
             }
             else
             {
               v186 = CSchedule::PreSelect16Grid(ProdBuildingByProdIndex, v223, v224, v64, v186, *((_DWORD *)v218 + 17));
             }
-            for ( k = 0; k < v186; ++k )
+            for ( k = 0;
+                  k < v186;
+                  ++k )
             {
               v49 = v207;
               v37 = *((_DWORD *)v218 + 17);
               v5 = std::vector<SBUILDINFODATA>::operator[](k);
-              if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(
-                                      *((_DWORD *)v218 + 11),
-                                      ProdBuildingByProdIndex,
-                                      v5,
-                                      v224,
-                                      &v200,
-                                      &v199,
-                                      0,
-                                      v37,
-                                      v49) )
+              if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(*((_DWORD *)v218 + 11), ProdBuildingByProdIndex, v5, v224, &v200, &v199, 0, v37, v49) )
               {
                 v105 = (CFilterPlaceScoring *)operator new(0x38u);
                 LOBYTE(v225) = 10;
@@ -431,13 +428,7 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
                   v38 = v205;
                   v26 = v199;
                   v6 = (struct SBUILDINFODATA *)std::vector<SBUILDINFODATA>::operator[](k);
-                  v170 = CFilterPlaceScoring::CFilterPlaceScoring(
-                           v105,
-                           *((struct CSchedule **)v218 + 11),
-                           v6,
-                           v26,
-                           v38,
-                           v50);
+                  v170 = CFilterPlaceScoring::CFilterPlaceScoring(v105, *((struct CSchedule **)v218 + 11), v6, v26, v38, v50);
                 }
                 else
                 {
@@ -451,24 +442,22 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
             std::vector<SBUILDINFODATA>::clear();
           }
           std::vector<SBUILDINFODATA>::clear();
-          for ( i = 0; i < *((_DWORD *)v213 + 2); ++i )
+          for ( i = 0;
+                i < *((_DWORD *)v213 + 2);
+                ++i )
           {
             FilterEntry = CFilter::GetFilterEntry(v213, i);
-            v197 = CReserveDatabase::ReserveBuilding(
-                     *((_DWORD *)v218 + 15),
-                     *((_DWORD *)FilterEntry + 4),
-                     *((_DWORD *)FilterEntry + 5),
-                     *((_DWORD *)FilterEntry + 6),
-                     *((_DWORD *)FilterEntry + 10),
-                     *((unsigned __int8 *)FilterEntry + 48),
-                     (int)*((double *)FilterEntry + 4),
-                     ++v196);
+            v197 = CReserveDatabase::ReserveBuilding(*((_DWORD *)v218 + 15), *((_DWORD *)FilterEntry + 4), *((_DWORD *)FilterEntry + 5), *((_DWORD *)FilterEntry + 6), *((_DWORD *)FilterEntry + 10), *((unsigned __int8 *)FilterEntry + 48), (int)*((double *)FilterEntry + 4), ++v196);
             v169 = (CParam *)operator new(0x1Cu);
             LOBYTE(v225) = 11;
             if ( v169 )
+            {
               v168 = CParam::CParam(v169, v195, v197, 0, 0);
+            }
             else
+            {
               v168 = 0;
+            }
             v63 = v168;
             LOBYTE(v225) = 7;
             v211 = v168;
@@ -477,11 +466,17 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
           v62 = v213;
           v178 = v213;
           if ( v213 )
+          {
             v104 = (**(int (__thiscall ***)(CFilter *, int))v178)(v178, 1);
+          }
           else
+          {
             v104 = 0;
+          }
           if ( !i )
+          {
             *((_DWORD *)v218 + 9) = 3;
+          }
         }
         else
         {
@@ -493,28 +488,34 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
       v145 = (CParameterSet *)operator new(0x10u);
       LOBYTE(v225) = 23;
       if ( v145 )
+      {
         v144 = CParameterSet::CParameterSet(v145);
+      }
       else
+      {
         v144 = 0;
+      }
       v89[1] = v144;
       LOBYTE(v225) = 7;
       v208 = v144;
-      ProdBuildingByProdIndex = CProductionDataTab::GoodTypeProducedBy(
-                                  *((_DWORD *)v218 + 14),
-                                  *((_DWORD *)a3 + 3),
-                                  0,
-                                  *((_DWORD *)v218 + 16));
+      ProdBuildingByProdIndex = CProductionDataTab::GoodTypeProducedBy(*((_DWORD *)v218 + 14), *((_DWORD *)a3 + 3), 0, *((_DWORD *)v218 + 16));
       CSchedule::UnmarkBuildings(*((CSchedule **)v218 + 11));
       i = 0;
       v214 = 1;
       CSchedule::GetWeakBuilding(ProdBuildingByProdIndex, v171, 0, v89);
-      for ( i = 0; ; ++i )
+      for ( i = 0;
+            ;
+            ++i )
       {
         v11 = std::vector<SMakroEntry>::size(v171);
         if ( i >= v11 )
+        {
           break;
+        }
         if ( !CReserveDatabase::GetReserveBuilding(*((_DWORD *)v218 + 15), 1, 0) )
+        {
           v201 = 1;
+        }
         if ( v201 )
         {
           std::vector<SMakroEntry>::operator[](i);
@@ -526,15 +527,7 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
           v24 = v202;
           v23 = v203;
           v13 = std::vector<SMakroEntry>::operator[](i);
-          ReserveBuilding = CReserveDatabase::ReserveBuilding(
-                              *((_DWORD *)v218 + 15),
-                              *(_DWORD *)(v13 + 8),
-                              v23,
-                              v24,
-                              v25,
-                              0,
-                              0,
-                              v54);
+          ReserveBuilding = CReserveDatabase::ReserveBuilding(*((_DWORD *)v218 + 15), *(_DWORD *)(v13 + 8), v23, v24, v25, 0, 0, v54);
           v143 = (CParam *)operator new(0x1Cu);
           LOBYTE(v225) = 24;
           if ( v143 )
@@ -580,7 +573,9 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
       }
       std::vector<SMakroEntry>::clear();
       if ( v214 )
+      {
         *((_DWORD *)v218 + 9) = 3;
+      }
       goto CSiedlerAI__GenerateAlternatives___def_3335063;
     case 5:
       v195 = *((_DWORD *)a3 + 3);
@@ -588,17 +583,8 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
       GrpResBuilding = CReserveDatabase::GetGrpResBuilding(*((CReserveDatabase **)v218 + 15), v205);
       if ( GrpResBuilding )
       {
-        ProdBuildingByProdIndex = CProductionTab::GetProdBuildingByProdIndex(
-                                    *((_DWORD *)v218 + 13),
-                                    *((_DWORD *)v218 + 8),
-                                    v195,
-                                    *((_DWORD *)v218 + 16));
-        if ( *((_DWORD *)v218 + 17)
-          && !CProductionTab::GetProdBuildingByProdIndex(
-                *((_DWORD *)v218 + 13),
-                *((_DWORD *)v218 + 8),
-                v195 + 1,
-                *((_DWORD *)v218 + 16)) )
+        ProdBuildingByProdIndex = CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)v218 + 13), *((_DWORD *)v218 + 8), v195, *((_DWORD *)v218 + 16));
+        if ( *((_DWORD *)v218 + 17) && !CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)v218 + 13), *((_DWORD *)v218 + 8), v195 + 1, *((_DWORD *)v218 + 16)) )
         {
           v207 = 1;
         }
@@ -609,9 +595,13 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
         v165 = (CParameterSet *)operator new(0x10u);
         LOBYTE(v225) = 13;
         if ( v165 )
+        {
           v164 = CParameterSet::CParameterSet(v165);
+        }
         else
+        {
           v164 = 0;
+        }
         v102 = v164;
         LOBYTE(v225) = 7;
         v208 = v164;
@@ -619,28 +609,26 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
         GrpNumber = CReserveDatabase::CreateGrpNumber(*((CReserveDatabase **)v218 + 15), ResGrpNr, 1);
         if ( CReserveDatabase::GetReserveBuilding(*((_DWORD *)v218 + 15), GrpNumber, ProdBuildingByProdIndex) )
         {
-          ReserveBuilding = CReserveDatabase::GetReserveBuilding(
-                              *((_DWORD *)v218 + 15),
-                              GrpNumber,
-                              ProdBuildingByProdIndex);
+          ReserveBuilding = CReserveDatabase::GetReserveBuilding(*((_DWORD *)v218 + 15), GrpNumber, ProdBuildingByProdIndex);
           i = 0;
           while ( ReserveBuilding )
           {
             v157 = (CParam *)operator new(0x1Cu);
             LOBYTE(v225) = 17;
             if ( v157 )
+            {
               v156 = CParam::CParam(v157, v195, ReserveBuilding, 0, v205);
+            }
             else
+            {
               v156 = 0;
+            }
             v96 = v156;
             LOBYTE(v225) = 7;
             v211 = v156;
             CParameterSet::NewParameterSet(v208, v156);
             GrpNumber = CReserveDatabase::CreateGrpNumber(*((CReserveDatabase **)v218 + 15), ResGrpNr, i + 2);
-            ReserveBuilding = CReserveDatabase::GetReserveBuilding(
-                                *((_DWORD *)v218 + 15),
-                                GrpNumber,
-                                ProdBuildingByProdIndex);
+            ReserveBuilding = CReserveDatabase::GetReserveBuilding(*((_DWORD *)v218 + 15), GrpNumber, ProdBuildingByProdIndex);
             ++i;
           }
         }
@@ -649,54 +637,35 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
           v206 = CSchedule::GetInvokeEvent(*((_DWORD *)v218 + 11), ProdBuildingByProdIndex);
           if ( v206 && !*(_DWORD *)(v206 + 48) )
           {
-            v185 = CProductionDataTab::GetMaxDistance(
-                     *((_DWORD *)v218 + 14),
-                     ProdBuildingByProdIndex,
-                     *((_DWORD *)v218 + 16))
-                 / 16
-                 + 1;
-            v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(
-                     *((_DWORD *)v218 + 10),
-                     ProdBuildingByProdIndex,
-                     &v219,
-                     v187,
-                     v185);
+            v185 = CProductionDataTab::GetMaxDistance(*((_DWORD *)v218 + 14), ProdBuildingByProdIndex, *((_DWORD *)v218 + 16)) / 16 + 1;
+            v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(*((_DWORD *)v218 + 10), ProdBuildingByProdIndex, &v219, v187, v185);
             if ( v209 < 2 )
-              v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(
-                       *((_DWORD *)v218 + 10),
-                       ProdBuildingByProdIndex,
-                       &v219,
-                       v187,
-                       3);
+            {
+              v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(*((_DWORD *)v218 + 10), ProdBuildingByProdIndex, &v219, v187, 3);
+            }
             v163 = (CFilter *)operator new(0x18u);
             LOBYTE(v225) = 14;
             if ( v163 )
+            {
               v162 = CFilter::CFilter(v163, 5);
+            }
             else
+            {
               v162 = 0;
+            }
             v101 = v162;
             LOBYTE(v225) = 7;
             v213 = v162;
-            CReserveDatabase::GetResBuildingInGroup(
-              *((CReserveDatabase **)v218 + 15),
-              ResGrpNr,
-              (struct CReserveEntry *)v224);
-            for ( i = 0; i < v209; ++i )
+            CReserveDatabase::GetResBuildingInGroup(*((CReserveDatabase **)v218 + 15), ResGrpNr, (struct CReserveEntry *)v224);
+            for ( i = 0;
+                  i < v209;
+                  ++i )
             {
               v51 = v207;
               v39 = *((_DWORD *)v218 + 17);
               v27 = *((_DWORD *)GrpResBuilding + 8);
               v7 = std::vector<SBUILDINFODATA>::operator[](i);
-              if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(
-                                      *((_DWORD *)v218 + 11),
-                                      ProdBuildingByProdIndex,
-                                      v7,
-                                      v224,
-                                      &v200,
-                                      &v199,
-                                      v27,
-                                      v39,
-                                      v51) )
+              if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(*((_DWORD *)v218 + 11), ProdBuildingByProdIndex, v7, v224, &v200, &v199, v27, v39, v51) )
               {
                 v161 = (CFilterPlaceScoring *)operator new(0x38u);
                 LOBYTE(v225) = 15;
@@ -706,13 +675,7 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
                   v40 = v205;
                   v28 = v199;
                   v8 = (struct SBUILDINFODATA *)std::vector<SBUILDINFODATA>::operator[](i);
-                  v160 = CFilterPlaceScoring::CFilterPlaceScoring(
-                           v161,
-                           *((struct CSchedule **)v218 + 11),
-                           v8,
-                           v28,
-                           v40,
-                           v52);
+                  v160 = CFilterPlaceScoring::CFilterPlaceScoring(v161, *((struct CSchedule **)v218 + 11), v8, v28, v40, v52);
                 }
                 else
                 {
@@ -724,39 +687,43 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
               }
             }
             std::vector<SBUILDINFODATA>::clear();
-            for ( i = 0; i < *((_DWORD *)v213 + 2); ++i )
+            for ( i = 0;
+                  i < *((_DWORD *)v213 + 2);
+                  ++i )
             {
               GrpNumber = CReserveDatabase::CreateGrpNumber(*((CReserveDatabase **)v218 + 15), ResGrpNr, i + 1);
               FilterEntry = CFilter::GetFilterEntry(v213, i);
               ++v196;
-              v197 = CReserveDatabase::ReserveBuilding(
-                       *((_DWORD *)v218 + 15),
-                       *((_DWORD *)FilterEntry + 4),
-                       *((_DWORD *)FilterEntry + 5),
-                       *((_DWORD *)FilterEntry + 6),
-                       *((_DWORD *)FilterEntry + 10),
-                       *((unsigned __int8 *)FilterEntry + 48),
-                       (int)*((double *)FilterEntry + 4),
-                       GrpNumber);
+              v197 = CReserveDatabase::ReserveBuilding(*((_DWORD *)v218 + 15), *((_DWORD *)FilterEntry + 4), *((_DWORD *)FilterEntry + 5), *((_DWORD *)FilterEntry + 6), *((_DWORD *)FilterEntry + 10), *((unsigned __int8 *)FilterEntry + 48), (int)*((double *)FilterEntry + 4), GrpNumber);
               v159 = (CParam *)operator new(0x1Cu);
               LOBYTE(v225) = 16;
               if ( v159 )
+              {
                 v158 = CParam::CParam(v159, v195, v197, 0, v205);
+              }
               else
+              {
                 v158 = 0;
+              }
               v99 = v158;
               LOBYTE(v225) = 7;
               v211 = v158;
               CParameterSet::NewParameterSet(v208, v158);
             }
             if ( !i )
+            {
               *((_DWORD *)v218 + 9) = 3;
+            }
             v98 = v213;
             v177 = v213;
             if ( v213 )
+            {
               v97 = (**(int (__thiscall ***)(CFilter *, int))v177)(v177, 1);
+            }
             else
+            {
               v97 = 0;
+            }
           }
           else
           {
@@ -781,9 +748,13 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
       v155 = (CParameterSet *)operator new(0x10u);
       LOBYTE(v225) = 18;
       if ( v155 )
+      {
         v154 = CParameterSet::CParameterSet(v155);
+      }
       else
+      {
         v154 = 0;
+      }
       v76 = v154;
       LOBYTE(v225) = 7;
       v208 = v154;
@@ -792,83 +763,62 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
       if ( CReserveDatabase::GetReserveBuilding(*((_DWORD *)v218 + 15), GrpNumber, ProdBuildingByProdIndex) )
       {
         GrpNumber = CReserveDatabase::CreateGrpNumber(*((CReserveDatabase **)v218 + 15), ResGrpNr, 1);
-        ReserveBuilding = CReserveDatabase::GetReserveBuilding(
-                            *((_DWORD *)v218 + 15),
-                            GrpNumber,
-                            ProdBuildingByProdIndex);
+        ReserveBuilding = CReserveDatabase::GetReserveBuilding(*((_DWORD *)v218 + 15), GrpNumber, ProdBuildingByProdIndex);
         i = 0;
         while ( ReserveBuilding )
         {
           v147 = (CParam *)operator new(0x1Cu);
           LOBYTE(v225) = 22;
           if ( v147 )
+          {
             v146 = CParam::CParam(v147, ProdBuildingByProdIndex, ReserveBuilding, 0, v205);
+          }
           else
+          {
             v146 = 0;
+          }
           v89[2] = v146;
           LOBYTE(v225) = 7;
           v211 = v146;
           CParameterSet::NewParameterSet(v208, v146);
           GrpNumber = CReserveDatabase::CreateGrpNumber(*((CReserveDatabase **)v218 + 15), ResGrpNr, i + 2);
-          ReserveBuilding = CReserveDatabase::GetReserveBuilding(
-                              *((_DWORD *)v218 + 15),
-                              GrpNumber,
-                              ProdBuildingByProdIndex);
+          ReserveBuilding = CReserveDatabase::GetReserveBuilding(*((_DWORD *)v218 + 15), GrpNumber, ProdBuildingByProdIndex);
           ++i;
         }
       }
       else
       {
-        CReserveDatabase::GetResBuildingInGroup(
-          *((CReserveDatabase **)v218 + 15),
-          ResGrpNr,
-          (struct CReserveEntry *)v224);
+        CReserveDatabase::GetResBuildingInGroup(*((CReserveDatabase **)v218 + 15), ResGrpNr, (struct CReserveEntry *)v224);
         v206 = CSchedule::GetInvokeEvent(*((_DWORD *)v218 + 11), ProdBuildingByProdIndex);
         if ( v206 && !*(_DWORD *)(v206 + 48) )
         {
-          v185 = CProductionDataTab::GetMaxDistance(
-                   *((_DWORD *)v218 + 14),
-                   ProdBuildingByProdIndex,
-                   *((_DWORD *)v218 + 16))
-               / 16
-               + 1;
-          v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(
-                   *((_DWORD *)v218 + 10),
-                   ProdBuildingByProdIndex,
-                   &v219,
-                   v187,
-                   v185);
+          v185 = CProductionDataTab::GetMaxDistance(*((_DWORD *)v218 + 14), ProdBuildingByProdIndex, *((_DWORD *)v218 + 16)) / 16 + 1;
+          v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(*((_DWORD *)v218 + 10), ProdBuildingByProdIndex, &v219, v187, v185);
           if ( !v209 )
-            v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(
-                     *((_DWORD *)v218 + 10),
-                     ProdBuildingByProdIndex,
-                     &v219,
-                     v187,
-                     3);
+          {
+            v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(*((_DWORD *)v218 + 10), ProdBuildingByProdIndex, &v219, v187, 3);
+          }
           v153 = (CFilter *)operator new(0x18u);
           LOBYTE(v225) = 19;
           if ( v153 )
+          {
             v152 = CFilter::CFilter(v153, 5);
+          }
           else
+          {
             v152 = 0;
+          }
           v94 = v152;
           LOBYTE(v225) = 7;
           v213 = v152;
-          for ( i = 0; i < v209; ++i )
+          for ( i = 0;
+                i < v209;
+                ++i )
           {
             v41 = *((_DWORD *)v218 + 17);
             v29 = *((_DWORD *)GrpResBuilding + 8);
             v9 = std::vector<SBUILDINFODATA>::operator[](i);
-            if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(
-                                    *((_DWORD *)v218 + 11),
-                                    ProdBuildingByProdIndex,
-                                    v9,
-                                    v224,
-                                    &v200,
-                                    &v199,
-                                    v29,
-                                    v41,
-                                    1) )
+            if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(*((_DWORD *)v218 + 11), ProdBuildingByProdIndex, v9, v224, &v200, &v199, v29, v41, 1) )
             {
               v151 = (CFilterPlaceScoring *)operator new(0x38u);
               LOBYTE(v225) = 20;
@@ -878,13 +828,7 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
                 v42 = v205;
                 v30 = v199;
                 v10 = (struct SBUILDINFODATA *)std::vector<SBUILDINFODATA>::operator[](i);
-                v150 = CFilterPlaceScoring::CFilterPlaceScoring(
-                         v151,
-                         *((struct CSchedule **)v218 + 11),
-                         v10,
-                         v30,
-                         v42,
-                         v53);
+                v150 = CFilterPlaceScoring::CFilterPlaceScoring(v151, *((struct CSchedule **)v218 + 11), v10, v30, v42, v53);
               }
               else
               {
@@ -896,39 +840,43 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
             }
             std::vector<SBUILDINFODATA>::clear();
           }
-          for ( i = 0; i < *((_DWORD *)v213 + 2); ++i )
+          for ( i = 0;
+                i < *((_DWORD *)v213 + 2);
+                ++i )
           {
             GrpNumber = CReserveDatabase::CreateGrpNumber(*((CReserveDatabase **)v218 + 15), ResGrpNr, i + 1);
             FilterEntry = CFilter::GetFilterEntry(v213, i);
             ++v196;
-            v197 = CReserveDatabase::ReserveBuilding(
-                     *((_DWORD *)v218 + 15),
-                     *((_DWORD *)FilterEntry + 4),
-                     *((_DWORD *)FilterEntry + 5),
-                     *((_DWORD *)FilterEntry + 6),
-                     *((_DWORD *)FilterEntry + 10),
-                     *((unsigned __int8 *)FilterEntry + 48),
-                     (int)*((double *)FilterEntry + 4),
-                     GrpNumber);
+            v197 = CReserveDatabase::ReserveBuilding(*((_DWORD *)v218 + 15), *((_DWORD *)FilterEntry + 4), *((_DWORD *)FilterEntry + 5), *((_DWORD *)FilterEntry + 6), *((_DWORD *)FilterEntry + 10), *((unsigned __int8 *)FilterEntry + 48), (int)*((double *)FilterEntry + 4), GrpNumber);
             v149 = (CParam *)operator new(0x1Cu);
             LOBYTE(v225) = 21;
             if ( v149 )
+            {
               v148 = CParam::CParam(v149, ProdBuildingByProdIndex, v197, 0, v205);
+            }
             else
+            {
               v148 = 0;
+            }
             v92 = v148;
             LOBYTE(v225) = 7;
             v211 = v148;
             CParameterSet::NewParameterSet(v208, v148);
           }
           if ( !i )
+          {
             *((_DWORD *)v218 + 9) = 3;
+          }
           v91 = v213;
           v176 = v213;
           if ( v213 )
+          {
             v90 = (**(int (__thiscall ***)(CFilter *, int))v176)(v176, 1);
+          }
           else
+          {
             v90 = 0;
+          }
         }
         else
         {
@@ -945,9 +893,13 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
       v139 = (CParameterSet *)operator new(0x10u);
       LOBYTE(v225) = 26;
       if ( v139 )
+      {
         v138 = CParameterSet::CParameterSet(v139);
+      }
       else
+      {
         v138 = 0;
+      }
       v86 = v138;
       LOBYTE(v225) = 7;
       v208 = v138;
@@ -963,9 +915,13 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
           v130 = (CParam *)operator new(0x1Cu);
           LOBYTE(v225) = 30;
           if ( v130 )
+          {
             v129 = CParam::CParam(v130, ProdBuildingByProdIndex, ReserveBuilding, 0, v205);
+          }
           else
+          {
             v129 = 0;
+          }
           v80 = v129;
           LOBYTE(v225) = 7;
           v211 = v129;
@@ -988,50 +944,34 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
           *((_DWORD *)v218 + 9) = 1;
           goto CSiedlerAI__GenerateAlternatives___def_3335063;
         }
-        v185 = CProductionDataTab::GetMaxDistance(
-                 *((_DWORD *)v218 + 14),
-                 ProdBuildingByProdIndex,
-                 *((_DWORD *)v218 + 16))
-             / 16
-             + 1;
+        v185 = CProductionDataTab::GetMaxDistance(*((_DWORD *)v218 + 14), ProdBuildingByProdIndex, *((_DWORD *)v218 + 16)) / 16 + 1;
         std::vector<SBUILDINFODATA>::clear();
-        v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(
-                 *((_DWORD *)v218 + 10),
-                 ProdBuildingByProdIndex,
-                 &v219,
-                 v187,
-                 v185);
+        v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(*((_DWORD *)v218 + 10), ProdBuildingByProdIndex, &v219, v187, v185);
         if ( !v209 )
-          v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(
-                   *((_DWORD *)v218 + 10),
-                   ProdBuildingByProdIndex,
-                   &v219,
-                   v187,
-                   2);
+        {
+          v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(*((_DWORD *)v218 + 10), ProdBuildingByProdIndex, &v219, v187, 2);
+        }
         v136 = (CFilter *)operator new(0x18u);
         LOBYTE(v225) = 27;
         if ( v136 )
+        {
           v135 = CFilter::CFilter(v136, 5);
+        }
         else
+        {
           v135 = 0;
+        }
         v85 = v135;
         LOBYTE(v225) = 7;
         v213 = v135;
-        for ( i = 0; i < v209; ++i )
+        for ( i = 0;
+              i < v209;
+              ++i )
         {
           v43 = *((_DWORD *)v218 + 17);
           v32 = CReserveDatabase::PackPosition(*((CReserveDatabase **)v218 + 15), v203, v202);
           v16 = std::vector<SBUILDINFODATA>::operator[](i);
-          if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(
-                                  *((_DWORD *)v218 + 11),
-                                  ProdBuildingByProdIndex,
-                                  v16,
-                                  v224,
-                                  &v200,
-                                  &v199,
-                                  v32,
-                                  v43,
-                                  1) )
+          if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(*((_DWORD *)v218 + 11), ProdBuildingByProdIndex, v16, v224, &v200, &v199, v32, v43, 1) )
           {
             v134 = (CFilterPlaceScoring *)operator new(0x38u);
             LOBYTE(v225) = 28;
@@ -1041,13 +981,7 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
               v44 = v205;
               v33 = v199;
               v17 = (struct SBUILDINFODATA *)std::vector<SBUILDINFODATA>::operator[](i);
-              v133 = CFilterPlaceScoring::CFilterPlaceScoring(
-                       v134,
-                       *((struct CSchedule **)v218 + 11),
-                       v17,
-                       v33,
-                       v44,
-                       v56);
+              v133 = CFilterPlaceScoring::CFilterPlaceScoring(v134, *((struct CSchedule **)v218 + 11), v17, v33, v44, v56);
             }
             else
             {
@@ -1059,26 +993,24 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
           }
         }
         std::vector<SBUILDINFODATA>::clear();
-        for ( i = 0; i < *((_DWORD *)v213 + 2); ++i )
+        for ( i = 0;
+              i < *((_DWORD *)v213 + 2);
+              ++i )
         {
           GrpNumber = CReserveDatabase::CreateGrpNumber(*((CReserveDatabase **)v218 + 15), ResGrpNr, i + 1);
           FilterEntry = CFilter::GetFilterEntry(v213, i);
           ++v196;
-          v197 = CReserveDatabase::ReserveBuilding(
-                   *((_DWORD *)v218 + 15),
-                   *((_DWORD *)FilterEntry + 4),
-                   *((_DWORD *)FilterEntry + 5),
-                   *((_DWORD *)FilterEntry + 6),
-                   *((_DWORD *)FilterEntry + 10),
-                   *((unsigned __int8 *)FilterEntry + 48),
-                   (int)*((double *)FilterEntry + 4),
-                   GrpNumber);
+          v197 = CReserveDatabase::ReserveBuilding(*((_DWORD *)v218 + 15), *((_DWORD *)FilterEntry + 4), *((_DWORD *)FilterEntry + 5), *((_DWORD *)FilterEntry + 6), *((_DWORD *)FilterEntry + 10), *((unsigned __int8 *)FilterEntry + 48), (int)*((double *)FilterEntry + 4), GrpNumber);
           v132 = (CParam *)operator new(0x1Cu);
           LOBYTE(v225) = 29;
           if ( v132 )
+          {
             v131 = CParam::CParam(v132, *((_DWORD *)FilterEntry + 4), v197, 0, v205);
+          }
           else
+          {
             v131 = 0;
+          }
           v83 = v131;
           LOBYTE(v225) = 7;
           v211 = v131;
@@ -1088,12 +1020,18 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
         v82 = v213;
         v175 = v213;
         if ( v213 )
+        {
           v81 = (**(int (__thiscall ***)(CFilter *, int))v175)(v175, 1);
+        }
         else
+        {
           v81 = 0;
+        }
       }
       if ( v214 )
+      {
         *((_DWORD *)v218 + 9) = 3;
+      }
       goto CSiedlerAI__GenerateAlternatives___def_3335063;
     case 9:
       ProdBuildingByProdIndex = *((_DWORD *)a3 + 3);
@@ -1106,52 +1044,45 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
       v128 = (CParameterSet *)operator new(0x10u);
       LOBYTE(v225) = 31;
       if ( v128 )
+      {
         v127 = CParameterSet::CParameterSet(v128);
+      }
       else
+      {
         v127 = 0;
+      }
       v79 = v127;
       LOBYTE(v225) = 7;
       v208 = v127;
       v206 = CSchedule::GetInvokeEvent(*((_DWORD *)v218 + 11), ProdBuildingByProdIndex);
       if ( v206 && !*(_DWORD *)(v206 + 48) )
       {
-        v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(
-                 *((_DWORD *)v218 + 10),
-                 ProdBuildingByProdIndex,
-                 &v219,
-                 v187,
-                 4);
+        v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(*((_DWORD *)v218 + 10), ProdBuildingByProdIndex, &v219, v187, 4);
         if ( v209 < 5 )
-          v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(
-                   *((_DWORD *)v218 + 10),
-                   ProdBuildingByProdIndex,
-                   &v219,
-                   v187,
-                   8);
+        {
+          v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(*((_DWORD *)v218 + 10), ProdBuildingByProdIndex, &v219, v187, 8);
+        }
         v126 = (CFilter *)operator new(0x18u);
         LOBYTE(v225) = 32;
         if ( v126 )
+        {
           v125 = CFilter::CFilter(v126, 5);
+        }
         else
+        {
           v125 = 0;
+        }
         v78 = v125;
         LOBYTE(v225) = 7;
         v213 = v125;
-        for ( i = 0; i < v209; ++i )
+        for ( i = 0;
+              i < v209;
+              ++i )
         {
           v45 = *((_DWORD *)v218 + 17);
           v34 = CReserveDatabase::PackPosition(*((CReserveDatabase **)v218 + 15), v203, v202);
           v18 = std::vector<SBUILDINFODATA>::operator[](i);
-          if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(
-                                  *((_DWORD *)v218 + 11),
-                                  ProdBuildingByProdIndex,
-                                  v18,
-                                  v224,
-                                  &v200,
-                                  &v199,
-                                  v34,
-                                  v45,
-                                  1) )
+          if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(*((_DWORD *)v218 + 11), ProdBuildingByProdIndex, v18, v224, &v200, &v199, v34, v45, 1) )
           {
             v124 = (CFilterPlaceScoring *)operator new(0x38u);
             LOBYTE(v225) = 33;
@@ -1161,13 +1092,7 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
               v46 = v205;
               v35 = v199;
               v19 = (struct SBUILDINFODATA *)std::vector<SBUILDINFODATA>::operator[](i);
-              v123 = CFilterPlaceScoring::CFilterPlaceScoring(
-                       v124,
-                       *((struct CSchedule **)v218 + 11),
-                       v19,
-                       v35,
-                       v46,
-                       v57);
+              v123 = CFilterPlaceScoring::CFilterPlaceScoring(v124, *((struct CSchedule **)v218 + 11), v19, v35, v46, v57);
             }
             else
             {
@@ -1179,28 +1104,40 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
           }
         }
         std::vector<SBUILDINFODATA>::clear();
-        for ( i = 0; i < *((_DWORD *)v213 + 2); ++i )
+        for ( i = 0;
+              i < *((_DWORD *)v213 + 2);
+              ++i )
         {
           FilterEntry = CFilter::GetFilterEntry(v213, i);
           v121 = (CParam *)operator new(0x1Cu);
           LOBYTE(v225) = 34;
           if ( v121 )
+          {
             v120 = CParam::CParam(v121, ProdBuildingByProdIndex, *((_DWORD *)FilterEntry + 10), 0, v122);
+          }
           else
+          {
             v120 = 0;
+          }
           v61 = v120;
           LOBYTE(v225) = 7;
           v211 = v120;
           CParameterSet::NewParameterSet(v208, v120);
         }
         if ( !i )
+        {
           *((_DWORD *)v218 + 9) = 3;
+        }
         v75 = v213;
         v174 = v213;
         if ( v213 )
+        {
           v74 = (**(int (__thiscall ***)(CFilter *, int))v174)(v174, 1);
+        }
         else
+        {
           v74 = 0;
+        }
       }
       else
       {
@@ -1218,9 +1155,13 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
       v119 = (CFilter *)operator new(0x18u);
       LOBYTE(v225) = 35;
       if ( v119 )
+      {
         v118 = CFilter::CFilter(v119, 5);
+      }
       else
+      {
         v118 = 0;
+      }
       v73 = v118;
       LOBYTE(v225) = 7;
       v213 = v118;
@@ -1255,15 +1196,11 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
       v184 = CFilter::GetFilterEntry(*((CFilter **)ExpandationEvent + 11), i);
       v180 = *((_DWORD *)v184 + 6);
       if ( !v180 )
+      {
         goto LABEL_239;
-      v114 = CReserveDatabase::PackPosition(
-               *((CReserveDatabase **)v218 + 15),
-               16 * *((_DWORD *)v184 + 3) + 8,
-               16 * *((_DWORD *)v184 + 4) + 8);
-      v115 = CReserveDatabase::PackPosition(
-               *((CReserveDatabase **)v218 + 15),
-               16 * *((_DWORD *)v184 + 3) + 8,
-               16 * *((_DWORD *)v184 + 4) + 8);
+      }
+      v114 = CReserveDatabase::PackPosition(*((CReserveDatabase **)v218 + 15), 16 * *((_DWORD *)v184 + 3) + 8, 16 * *((_DWORD *)v184 + 4) + 8);
+      v115 = CReserveDatabase::PackPosition(*((CReserveDatabase **)v218 + 15), 16 * *((_DWORD *)v184 + 3) + 8, 16 * *((_DWORD *)v184 + 4) + 8);
       CReserveDatabase::UnpackPosition(*((CReserveDatabase **)v218 + 15), v180, &v203, &v202);
     }
     v222 = 16;
@@ -1273,9 +1210,13 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
     v117 = (CParameterSet *)operator new(0x10u);
     LOBYTE(v225) = 36;
     if ( v117 )
+    {
       v116 = CParameterSet::CParameterSet(v117);
+    }
     else
+    {
       v116 = 0;
+    }
     v72 = v116;
     LOBYTE(v225) = 7;
     v208 = v116;
@@ -1286,26 +1227,14 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
       break;
     }
     std::vector<SBUILDINFODATA>::clear();
-    v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(
-             *((_DWORD *)v218 + 10),
-             46,
-             &v219,
-             v187,
-             1);
-    for ( k = 0; k < v209; ++k )
+    v209 = (*(int (__thiscall **)(_DWORD, int, int *, _BYTE *, int))(**((_DWORD **)v218 + 10) + 28))(*((_DWORD *)v218 + 10), 46, &v219, v187, 1);
+    for ( k = 0;
+          k < v209;
+          ++k )
     {
       v47 = v115;
       v20 = std::vector<SBUILDINFODATA>::operator[](k);
-      if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(
-                              *((_DWORD *)v218 + 11),
-                              46,
-                              v20,
-                              v224,
-                              &v200,
-                              &v199,
-                              0,
-                              v47,
-                              1) )
+      if ( (unsigned __int8)CSchedule::BestAndPossiblePlaceOf8Grid(*((_DWORD *)v218 + 11), 46, v20, v224, &v200, &v199, 0, v47, 1) )
       {
         v113 = (CFilterPlaceScoring *)operator new(0x38u);
         LOBYTE(v225) = 37;
@@ -1330,33 +1259,40 @@ class CParameterSet *  CSiedlerAI::GenerateAlternatives(int a2, class CParam * a
 LABEL_239:
     ++i;
   }
-  for ( i = 0; i < *((_DWORD *)v213 + 2); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)v213 + 2);
+        ++i )
   {
     FilterEntry = CFilter::GetFilterEntry(v213, i);
     v111 = (CParam *)operator new(0x1Cu);
     LOBYTE(v225) = 38;
     if ( v111 )
-      v110 = CParam::CParam(
-               v111,
-               46,
-               *((_DWORD *)FilterEntry + 10),
-               *((char *)FilterEntry + 48),
-               *((_DWORD *)FilterEntry + 11));
+    {
+      v110 = CParam::CParam(v111, 46, *((_DWORD *)FilterEntry + 10), *((char *)FilterEntry + 48), *((_DWORD *)FilterEntry + 11));
+    }
     else
+    {
       v110 = 0;
+    }
     v70 = v110;
     LOBYTE(v225) = 7;
     v211 = v110;
     CParameterSet::NewParameterSet(v208, v110);
   }
   if ( !i )
+  {
     *((_DWORD *)v218 + 9) = 3;
+  }
   v69 = v213;
   v173 = v213;
   if ( v213 )
+  {
     v68 = (**(int (__thiscall ***)(CFilter *, int))v173)(v173, 1);
+  }
   else
+  {
     v68 = 0;
+  }
 CSiedlerAI__GenerateAlternatives___def_3335063:
   v67 = v208;
   LOBYTE(v225) = 6;
@@ -1463,71 +1399,78 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
 
   C = (CConditionSet *)operator new(4u);
   if ( C )
+  {
     v59 = CConditionSet::CConditionSet(C);
+  }
   else
+  {
     v59 = 0;
+  }
   switch ( a2 )
   {
     case 3:
-      ProdBuildingByProdIndex = CProductionTab::GetProdBuildingByProdIndex(
-                                  *((_DWORD *)this + 13),
-                                  *((_DWORD *)this + 8),
-                                  0,
-                                  *((_DWORD *)this + 16));
+      ProdBuildingByProdIndex = CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)this + 13), *((_DWORD *)this + 8), 0, *((_DWORD *)this + 16));
       v65 = *((_DWORD *)a3 + 3);
       v71 = *((_DWORD *)a3 + 4);
       if ( v71 || *((_DWORD *)a3 + 5) )
       {
         v56 = (CParam *)operator new(0x1Cu);
         if ( v56 )
+        {
           v55 = CParam::CParam(v56, ProdBuildingByProdIndex, v71, 0, 0);
+        }
         else
+        {
           v55 = 0;
+        }
         CConditionSet::NewProblem(v59, 1, v55);
-        if ( CProductionTab::GetProdBuildingByProdIndex(
-               *((_DWORD *)this + 13),
-               *((_DWORD *)this + 8),
-               1,
-               *((_DWORD *)this + 16)) )
+        if ( CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)this + 13), *((_DWORD *)this + 8), 1, *((_DWORD *)this + 16)) )
         {
           v54 = (COptimizeOptions *)operator new(0x18u);
           if ( v54 )
+          {
             v53 = COptimizeOptions::COptimizeOptions(v54);
+          }
           else
+          {
             v53 = 0;
+          }
           IAI_Module::SetMaxSolution(this, v53, 5);
           if ( CSchedule::SearchExternSolution(*((CSchedule **)this + 11), *((_DWORD *)this + 7), 4, v65 + 1, 0, 0, v71) )
           {
             v48 = (CParam *)operator new(0x1Cu);
             if ( v48 )
+            {
               v47 = CParam::CParam(v48, v65 + 1, 0, 0, v71);
+            }
             else
+            {
               v47 = 0;
+            }
             CConditionSet::NewProblem(v59, 4, v47, v53);
           }
           else
           {
             v52 = (CSubProblemSolveEvent *)operator new(0x6Cu);
             if ( v52 )
-              v51 = CSubProblemSolveEvent::CSubProblemSolveEvent(
-                      v52,
-                      this,
-                      *((_DWORD *)this + 7),
-                      4,
-                      v65 + 1,
-                      0,
-                      0,
-                      v71,
-                      v53);
+            {
+              v51 = CSubProblemSolveEvent::CSubProblemSolveEvent(v52, this, *((_DWORD *)this + 7), 4, v65 + 1, 0, 0, v71, v53);
+            }
             else
+            {
               v51 = 0;
+            }
             CSchedule::NewSchedEntry(*((CSchedule **)this + 11), v51);
             *((_DWORD *)this + 9) = 2;
             v50 = (CParam *)operator new(0x1Cu);
             if ( v50 )
+            {
               v49 = CParam::CParam(v50, 0, 0, 0, 0);
+            }
             else
+            {
               v49 = 0;
+            }
             CConditionSet::NewProblem(v59, 20, v49);
           }
         }
@@ -1537,9 +1480,13 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
         *((_DWORD *)this + 9) = 3;
         v58 = (CParam *)operator new(0x1Cu);
         if ( v58 )
+        {
           v57 = CParam::CParam(v58, 0, 0, 0, 0);
+        }
         else
+        {
           v57 = 0;
+        }
         CConditionSet::NewProblem(v59, 20, v57);
       }
       break;
@@ -1550,50 +1497,50 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
       {
         v25 = (COptimizeOptions *)operator new(0x18u);
         if ( v25 )
+        {
           v24 = COptimizeOptions::COptimizeOptions(v25);
+        }
         else
+        {
           v24 = 0;
+        }
         IAI_Module::SetMaxSolution(this, v24, 5);
         GrpResBuilding = CReserveDatabase::GetGrpResBuilding(*((CReserveDatabase **)this + 15), v74);
-        if ( CSchedule::SearchExternSolution(
-               *((CSchedule **)this + 11),
-               *((_DWORD *)this + 7),
-               8,
-               *((_DWORD *)GrpResBuilding + 3),
-               v74,
-               0,
-               v62) )
+        if ( CSchedule::SearchExternSolution(*((CSchedule **)this + 11), *((_DWORD *)this + 7), 8, *((_DWORD *)GrpResBuilding + 3), v74, 0, v62) )
         {
           v19 = (CParam *)operator new(0x1Cu);
           if ( v19 )
+          {
             v18 = CParam::CParam(v19, *((_DWORD *)GrpResBuilding + 3), v74, 0, v62);
+          }
           else
+          {
             v18 = 0;
+          }
           CConditionSet::NewProblem(v59, 8, v18);
         }
         else
         {
           v23 = (CSubProblemSolveEvent *)operator new(0x6Cu);
           if ( v23 )
-            v22 = CSubProblemSolveEvent::CSubProblemSolveEvent(
-                    v23,
-                    this,
-                    *((_DWORD *)this + 7),
-                    8,
-                    *((_DWORD *)GrpResBuilding + 3),
-                    v74,
-                    0,
-                    v62,
-                    v24);
+          {
+            v22 = CSubProblemSolveEvent::CSubProblemSolveEvent(v23, this, *((_DWORD *)this + 7), 8, *((_DWORD *)GrpResBuilding + 3), v74, 0, v62, v24);
+          }
           else
+          {
             v22 = 0;
+          }
           CSchedule::NewSchedEntry(*((CSchedule **)this + 11), v22);
           *((_DWORD *)this + 9) = 2;
           v21 = (CParam *)operator new(0x1Cu);
           if ( v21 )
+          {
             v20 = CParam::CParam(v21, 0, 0, 0, 0);
+          }
           else
+          {
             v20 = 0;
+          }
           CConditionSet::NewProblem(v59, 20, v20);
         }
       }
@@ -1601,9 +1548,13 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
       {
         v27 = (CParam *)operator new(0x1Cu);
         if ( v27 )
+        {
           v26 = CParam::CParam(v27);
+        }
         else
+        {
           v26 = 0;
+        }
         *((_DWORD *)this + 9) = 3;
         CConditionSet::NewProblem(v59, 20, v26);
       }
@@ -1611,64 +1562,67 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
     case 5:
       v66 = *((_DWORD *)a3 + 3);
       v72 = *((_DWORD *)a3 + 4);
-      v77 = CProductionTab::GetProdBuildingByProdIndex(
-              *((_DWORD *)this + 13),
-              *((_DWORD *)this + 8),
-              v66,
-              *((_DWORD *)this + 16));
+      v77 = CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)this + 13), *((_DWORD *)this + 8), v66, *((_DWORD *)this + 16));
       v67 = CSchedule::GetInvokeEvent(*((_DWORD *)this + 11), v77);
       if ( v67 && !*(_DWORD *)(v67 + 48) )
       {
         v44 = (CParam *)operator new(0x1Cu);
         if ( v44 )
+        {
           v43 = CParam::CParam(v44, v77, v72, 0, 0);
+        }
         else
+        {
           v43 = 0;
+        }
         CConditionSet::NewProblem(v59, 1, v43);
-        if ( CProductionTab::GetProdBuildingByProdIndex(
-               *((_DWORD *)this + 13),
-               *((_DWORD *)this + 8),
-               v66 + 1,
-               *((_DWORD *)this + 16)) )
+        if ( CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)this + 13), *((_DWORD *)this + 8), v66 + 1, *((_DWORD *)this + 16)) )
         {
           v42 = (COptimizeOptions *)operator new(0x18u);
           if ( v42 )
+          {
             v41 = COptimizeOptions::COptimizeOptions(v42);
+          }
           else
+          {
             v41 = 0;
+          }
           IAI_Module::SetMaxSolution(this, v41, 5);
           if ( CSchedule::SearchExternSolution(*((CSchedule **)this + 11), *((_DWORD *)this + 7), 4, v66 + 1, 0, 0, v72) )
           {
             v36 = (CParam *)operator new(0x1Cu);
             if ( v36 )
+            {
               v35 = CParam::CParam(v36, v66 + 1, 0, 0, v72);
+            }
             else
+            {
               v35 = 0;
+            }
             CConditionSet::NewProblem(v59, 4, v35, v41);
           }
           else
           {
             v40 = (CSubProblemSolveEvent *)operator new(0x6Cu);
             if ( v40 )
-              v39 = CSubProblemSolveEvent::CSubProblemSolveEvent(
-                      v40,
-                      this,
-                      *((_DWORD *)this + 7),
-                      4,
-                      v66 + 1,
-                      0,
-                      0,
-                      v72,
-                      v41);
+            {
+              v39 = CSubProblemSolveEvent::CSubProblemSolveEvent(v40, this, *((_DWORD *)this + 7), 4, v66 + 1, 0, 0, v72, v41);
+            }
             else
+            {
               v39 = 0;
+            }
             CSchedule::NewSchedEntry(*((CSchedule **)this + 11), v39);
             *((_DWORD *)this + 9) = 2;
             v38 = (CParam *)operator new(0x1Cu);
             if ( v38 )
+            {
               v37 = CParam::CParam(v38, 0, 0, 0, 0);
+            }
             else
+            {
               v37 = 0;
+            }
             CConditionSet::NewProblem(v59, 20, v37);
           }
         }
@@ -1678,9 +1632,13 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
         *((_DWORD *)this + 9) = 1;
         v46 = (CParam *)operator new(0x1Cu);
         if ( v46 )
+        {
           v45 = CParam::CParam(v46, 0, 0, 0, 0);
+        }
         else
+        {
           v45 = 0;
+        }
         CConditionSet::NewProblem(v59, 20, v45);
       }
       break;
@@ -1695,9 +1653,13 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
           v30 = *((_DWORD *)a3 + 6);
           v29 = (CParam *)operator new(0x1Cu);
           if ( v29 )
+          {
             v28 = CParam::CParam(v29, v78, v73, 0, v30);
+          }
           else
+          {
             v28 = 0;
+          }
           CConditionSet::NewProblem(v59, 1, v28);
         }
         else
@@ -1705,9 +1667,13 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
           *((_DWORD *)this + 9) = 3;
           v32 = (CParam *)operator new(0x1Cu);
           if ( v32 )
+          {
             v31 = CParam::CParam(v32, 0, 0, 0, 0);
+          }
           else
+          {
             v31 = 0;
+          }
           CConditionSet::NewProblem(v59, 20, v31);
         }
       }
@@ -1716,9 +1682,13 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
         *((_DWORD *)this + 9) = 1;
         v34 = (CParam *)operator new(0x1Cu);
         if ( v34 )
+        {
           v33 = CParam::CParam(v34, 0, 0, 0, 0);
+        }
         else
+        {
           v33 = 0;
+        }
         CConditionSet::NewProblem(v59, 20, v33);
       }
       break;
@@ -1730,9 +1700,13 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
         v75 = *((_DWORD *)a3 + 4);
         v15 = (CParam *)operator new(0x1Cu);
         if ( v15 )
+        {
           v14 = CParam::CParam(v15, v79, v75, 0, 0);
+        }
         else
+        {
           v14 = 0;
+        }
         CConditionSet::NewProblem(v59, 1, v14);
       }
       else
@@ -1740,9 +1714,13 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
         *((_DWORD *)this + 9) = 1;
         v17 = (CParam *)operator new(0x1Cu);
         if ( v17 )
+        {
           v16 = CParam::CParam(v17, 0, 0, 0, 0);
+        }
         else
+        {
           v16 = 0;
+        }
         CConditionSet::NewProblem(v59, 20, v16);
       }
       break;
@@ -1755,9 +1733,13 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
         v5 = *((_DWORD *)a3 + 6);
         v11 = (CParam *)operator new(0x1Cu);
         if ( v11 )
+        {
           v10 = CParam::CParam(v11, v80, 0, v63, v5);
+        }
         else
+        {
           v10 = 0;
+        }
         CConditionSet::NewProblem(v59, 1, v10);
       }
       else
@@ -1765,9 +1747,13 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
         *((_DWORD *)this + 9) = 1;
         v13 = (CParam *)operator new(0x1Cu);
         if ( v13 )
+        {
           v12 = CParam::CParam(v13, 0, 0, 0, 0);
+        }
         else
+        {
           v12 = 0;
+        }
         CConditionSet::NewProblem(v59, 20, v12);
       }
       break;
@@ -1778,18 +1764,26 @@ class CConditionSet *  CSiedlerAI::Condition(int a2, class CParam * a3) {
         v4 = *((_DWORD *)a3 + 6);
         v7 = (CParam *)operator new(0x1Cu);
         if ( v7 )
+        {
           v6 = CParam::CParam(v7, 46, 0, v64, v4);
+        }
         else
+        {
           v6 = 0;
+        }
         CConditionSet::NewProblem(v59, 1, v6);
       }
       else
       {
         v9 = (CParam *)operator new(0x1Cu);
         if ( v9 )
+        {
           v8 = CParam::CParam(v9);
+        }
         else
+        {
           v8 = 0;
+        }
         *((_DWORD *)this + 9) = 3;
         CConditionSet::NewProblem(v59, 20, v8);
       }
@@ -1826,34 +1820,18 @@ double  CSiedlerAI::Valuation(int a2, class CParam * a3, int a4, int a5) {
       v6 = 0.0;
       break;
     case 3:
-      ProdBuildingByProdIndex = CProductionTab::GetProdBuildingByProdIndex(
-                                  *((_DWORD *)this + 13),
-                                  *((_DWORD *)this + 8),
-                                  0,
-                                  *((_DWORD *)this + 16));
+      ProdBuildingByProdIndex = CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)this + 13), *((_DWORD *)this + 8), 0, *((_DWORD *)this + 16));
       v13 = *((_DWORD *)a3 + 4);
-      v18 = CProductionTab::GetProdBuildingByProdIndex(
-              *((_DWORD *)this + 13),
-              *((_DWORD *)this + 8),
-              1,
-              *((_DWORD *)this + 16)) == 0;
+      v18 = CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)this + 13), *((_DWORD *)this + 8), 1, *((_DWORD *)this + 16)) == 0;
       v10 = CSiedlerAI::GeneralValuation(this, ProdBuildingByProdIndex, v13, 0, v18);
       v6 = v10;
       break;
     case 5:
       v11 = *((_DWORD *)a3 + 3);
       v14 = *((_DWORD *)a3 + 4);
-      v16 = CProductionTab::GetProdBuildingByProdIndex(
-              *((_DWORD *)this + 13),
-              *((_DWORD *)this + 8),
-              v11,
-              *((_DWORD *)this + 16));
+      v16 = CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)this + 13), *((_DWORD *)this + 8), v11, *((_DWORD *)this + 16));
       v12 = *((_DWORD *)a3 + 6);
-      v19 = CProductionTab::GetProdBuildingByProdIndex(
-              *((_DWORD *)this + 13),
-              *((_DWORD *)this + 8),
-              v11 + 1,
-              *((_DWORD *)this + 16)) == 0;
+      v19 = CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)this + 13), *((_DWORD *)this + 8), v11 + 1, *((_DWORD *)this + 16)) == 0;
       v9 = CSiedlerAI::GeneralValuation(this, v16, v14, v12, v19);
       v6 = v9;
       break;
@@ -1866,26 +1844,10 @@ double  CSiedlerAI::Valuation(int a2, class CParam * a3, int a4, int a5) {
       v6 = v7;
       break;
     case 9:
-      v6 = (float)CSchedule::GeneralValuation(
-                    *((_DWORD *)this + 11),
-                    *((_DWORD *)a3 + 3),
-                    1,
-                    *((_DWORD *)a3 + 4),
-                    *((_DWORD *)a3 + 6),
-                    *((_DWORD *)a3 + 6),
-                    1,
-                    *((_DWORD *)a3 + 5));
+      v6 = (float)CSchedule::GeneralValuation(*((_DWORD *)this + 11), *((_DWORD *)a3 + 3), 1, *((_DWORD *)a3 + 4), *((_DWORD *)a3 + 6), *((_DWORD *)a3 + 6), 1, *((_DWORD *)a3 + 5));
       break;
     case 10:
-      v6 = (float)CSchedule::GeneralValuation(
-                    *((_DWORD *)this + 11),
-                    *((_DWORD *)a3 + 3),
-                    1,
-                    *((_DWORD *)a3 + 4),
-                    0,
-                    *((_DWORD *)a3 + 6),
-                    1,
-                    *((_DWORD *)a3 + 5));
+      v6 = (float)CSchedule::GeneralValuation(*((_DWORD *)this + 11), *((_DWORD *)a3 + 3), 1, *((_DWORD *)a3 + 4), 0, *((_DWORD *)a3 + 6), 1, *((_DWORD *)a3 + 5));
       break;
     default:
       return v6;
@@ -1902,7 +1864,9 @@ int  CSiedlerAI::RepeatingBehaviour(int a2, class CParam * a3) {
 
   v4 = 1;
   if ( a2 == 2 )
+  {
     return 2;
+  }
   return v4;
 }
 
@@ -1915,7 +1879,9 @@ int  CSiedlerAI::PreferExternSolution(int a2, class CParam * a3) {
 
   v4 = 0;
   if ( a2 >= 4 && (a2 <= 5 || a2 == 8) )
+  {
     return 2;
+  }
   return v4;
 }
 
@@ -1929,17 +1895,14 @@ class CSolutionTree *  CSiedlerAI::ImportSolution(int a2, class CParam * a3) {
 
   v4 = 0;
   if ( a2 < 4 || a2 > 5 && a2 != 8 )
+  {
     return (struct CSolutionTree *)v4;
-  v6 = CSchedule::SearchExternSolution(
-         this[11],
-         this[7],
-         a2,
-         *((_DWORD *)a3 + 3),
-         *((_DWORD *)a3 + 4),
-         *((_DWORD *)a3 + 5),
-         *((_DWORD *)a3 + 6));
+  }
+  v6 = CSchedule::SearchExternSolution(this[11], this[7], a2, *((_DWORD *)a3 + 3), *((_DWORD *)a3 + 4), *((_DWORD *)a3 + 5), *((_DWORD *)a3 + 6));
   if ( v6 )
+  {
     return CSchedule::GetSolution(this[11], v6);
+  }
   return (struct CSolutionTree *)v4;
 }
 
@@ -1977,7 +1940,9 @@ void  CSiedlerAI::ExecuteAction(int a2, class CParam * a3) {
   result = a2;
   v8 = a2;
   if ( a2 != 1 )
+  {
     return result;
+  }
   if ( *((_DWORD *)a3 + 4) )
   {
     CReserveDatabase::GetResPosition(*((CReserveDatabase **)v14 + 15), *((_DWORD *)a3 + 4), &v12, &v13);
@@ -1991,32 +1956,24 @@ void  CSiedlerAI::ExecuteAction(int a2, class CParam * a3) {
   if ( *((_DWORD *)a3 + 3) == 46 )
   {
     CReserveDatabase::UnpackPosition(*((CReserveDatabase **)v14 + 15), *((_DWORD *)a3 + 6), &v5, v6);
-    (*(void (__thiscall **)(_DWORD, int, int, _DWORD, int *))(**(_DWORD **)(*(_DWORD *)(*((_DWORD *)v14 + 11) + 36) + 28)
-                                                            + 8))(
-      *(_DWORD *)(*(_DWORD *)(*((_DWORD *)v14 + 11) + 36) + 28),
-      v12,
-      v13,
-      0,
-      &v4);
+    (*(void (__thiscall **)(_DWORD, int, int, _DWORD, int *))(**(_DWORD **)(*(_DWORD *)(*((_DWORD *)v14 + 11) + 36) + 28) + 8))(*(_DWORD *)(*(_DWORD *)(*((_DWORD *)v14 + 11) + 36) + 28), v12, v13, 0, &v4);
     SchedEntry = CSchedule::GetSchedEntry(*((CSchedule **)v14 + 11), *((_DWORD *)v14 + 7));
     if ( v4 )
+    {
       *((_DWORD *)a3 + 3) = 47;
+    }
     CSchedule::SetPositionOfTower(*((CSchedule **)v14 + 11), *((_DWORD *)v14 + 7), *((_DWORD *)a3 + 3), v12, v13);
   }
   C = operator new(0x58u);
   v15 = 0;
   if ( C )
-    v9 = (struct IScheduleEntry *)CBuildingEvent::CBuildingEvent(
-                                    C,
-                                    *((_DWORD *)a3 + 3),
-                                    0,
-                                    v12,
-                                    v13,
-                                    PackWorldPosition,
-                                    0,
-                                    1);
+  {
+    v9 = (struct IScheduleEntry *)CBuildingEvent::CBuildingEvent(C, *((_DWORD *)a3 + 3), 0, v12, v13, PackWorldPosition, 0, 1);
+  }
   else
+  {
     v9 = 0;
+  }
   v6[2] = (int)v9;
   v15 = -1;
   return CSchedule::NewSchedEntry(*((CSchedule **)v14 + 11), v9);
@@ -2040,8 +1997,12 @@ void  CSiedlerAI::GetInvokeBuildingType(class IScheduleEntry * a2, enum BUILDING
   int i; // [esp+14h] [ebp-Ch]
   int v6; // [esp+18h] [ebp-8h]
 
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
+  {
     *((_DWORD *)a3 + i) = 0;
+  }
   if ( *((_DWORD *)a2 + 4) == 11 )
   {
     v4 = *((_DWORD *)a2 + 15);
@@ -2060,11 +2021,7 @@ void  CSiedlerAI::GetInvokeBuildingType(class IScheduleEntry * a2, enum BUILDING
       *(_DWORD *)a3 = 0;
       break;
     case 4:
-      result = CProductionTab::GetProdBuildingByProdIndex(
-                 *((_DWORD *)this + 13),
-                 *((_DWORD *)this + 8),
-                 v6,
-                 *((_DWORD *)this + 16));
+      result = CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)this + 13), *((_DWORD *)this + 8), v6, *((_DWORD *)this + 16));
       *(_DWORD *)a3 = result;
       break;
     case 5:
@@ -2081,11 +2038,7 @@ void  CSiedlerAI::GetInvokeBuildingType(class IScheduleEntry * a2, enum BUILDING
       break;
     case 10:
       *((_DWORD *)this + 8) = CProductionTab::GetProdIdForGoodType(*((_DWORD *)this + 13), v6, *((_DWORD *)this + 16));
-      result = CProductionTab::GetProdBuildingByProdIndex(
-                 *((_DWORD *)this + 13),
-                 *((_DWORD *)this + 8),
-                 0,
-                 *((_DWORD *)this + 16));
+      result = CProductionTab::GetProdBuildingByProdIndex(*((_DWORD *)this + 13), *((_DWORD *)this + 8), 0, *((_DWORD *)this + 16));
       *(_DWORD *)a3 = result;
       break;
     case 11:
@@ -2140,7 +2093,9 @@ int  CSiedlerAI::GetBestBuilding(struct SBUILDINFODATA * a2, int a3, int & a4) {
   int i; // [esp+14h] [ebp-4h]
 
   v7 = 0;
-  for ( i = 0; i < a3; ++i )
+  for ( i = 0;
+        i < a3;
+        ++i )
   {
     v6 = CSiedlerAI::ScoringBuilding(this, (struct SBUILDINFODATA *)(a2 + 76 * i));
     if ( v6 > v7 )
@@ -2174,15 +2129,7 @@ double  CSiedlerAI::GeneralValuation(enum BUILDING_TYPES a2, int a3, int a4, boo
   v8 = *((char *)GrpResBuilding + 40);
   v7 = *(_DWORD *)(this + 68);
   PackWorldPosition = CReserveDatabase::GetPackWorldPosition(*(CReserveDatabase **)(this + 60), a4);
-  return (double)CSchedule::GeneralValuation(
-                   *(_DWORD *)(this + 44),
-                   a2,
-                   1,
-                   *((_DWORD *)GrpResBuilding + 8),
-                   PackWorldPosition,
-                   v7,
-                   a5,
-                   v8);
+  return (double)CSchedule::GeneralValuation(*(_DWORD *)(this + 44), a2, 1, *((_DWORD *)GrpResBuilding + 8), PackWorldPosition, v7, a5, v8);
 }
 
 

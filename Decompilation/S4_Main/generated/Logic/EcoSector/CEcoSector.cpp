@@ -39,9 +39,13 @@ int  CEcoSector::MinCarrier(void)const {
 class CPersistence * __cdecl CEcoSector::New(std::istream & a1) {
   
   if ( operator new(0x3C4u) )
+  {
     return CEcoSector::CEcoSector(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -49,8 +53,7 @@ class CPersistence * __cdecl CEcoSector::New(std::istream & a1) {
 // Decompiled from int __thiscall CEcoSector::NrOfSettler(CEcoSector *this, unsigned int _iSettlerType)
 int  CEcoSector::NrOfSettler(int _iSettlerType)const {
   
-  if ( _iSettlerType > 0x42
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1130, "0<=_iSettlerType && _iSettlerType<SETTLER_MAX") == 1 )
+  if ( _iSettlerType > 0x42 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1130, "0<=_iSettlerType && _iSettlerType<SETTLER_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -65,18 +68,21 @@ void  CEcoSector::ChangeNrOfSettler(int a2, int a3) {
   __int16 result; // ax
   int v5; // [esp+8h] [ebp-4h]
 
-  if ( (a2 <= 0 || a2 >= 67)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1143, "0 < _iSettlerType && _iSettlerType < SETTLER_MAX") == 1 )
+  if ( (a2 <= 0 || a2 >= 67) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1143, "0 < _iSettlerType && _iSettlerType < SETTLER_MAX") == 1 )
   {
     __debugbreak();
   }
   v5 = a3 + *((unsigned __int16 *)this + a2 + 18);
   if ( v5 < 0 && BBSupportDbgReportF(2, "Logic\\EcoSector.cpp", 1149, "iNewAmount < 0! Settler type %i.", a2) == 1 )
+  {
     __debugbreak();
+  }
   if ( v5 >= 0 )
   {
     if ( v5 > 0xFFFF )
+    {
       LOWORD(v5) = -1;
+    }
   }
   else
   {
@@ -109,29 +115,29 @@ void  CEcoSector::SetSettlerOffer(int a2, int a3) {
   int i; // [esp+10h] [ebp-4h]
 
   SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, a3);
-  if ( IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Offered)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 921, "!pSettler->FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
+  if ( IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Offered) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 921, "!pSettler->FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
     __debugbreak();
   }
-  if ( CSettlerMgr::SettlerWarriorType(a2)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\EcoSector.cpp",
-         922,
-         "CSettlerMgr::SettlerWarriorType(_iSettlerType) == WARRIOR_TYPE_NONE") == 1 )
+  if ( CSettlerMgr::SettlerWarriorType(a2) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 922, "CSettlerMgr::SettlerWarriorType(_iSettlerType) == WARRIOR_TYPE_NONE") == 1 )
   {
     __debugbreak();
   }
   v6 = 0;
-  for ( i = *((unsigned __int16 *)this + a2 + 85); i; i = IAnimatedEntity::Next(v3) )
+  for ( i = *((unsigned __int16 *)this + a2 + 85);
+        i;
+        i = IAnimatedEntity::Next(v3) )
   {
     if ( a3 == i && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 932, "_iSettlerId != iActSettler") == 1 )
+    {
       __debugbreak();
+    }
     if ( debug )
     {
       if ( DEBUG_FLAGS[dword_3EFEB2C] )
+      {
         ++v6;
+      }
     }
     v3 = CSettlerMgr::operator[](i);
   }
@@ -146,16 +152,14 @@ void  CEcoSector::SetSettlerOffer(int a2, int a3) {
   *((_WORD *)this + a2 + 85) = a3;
   result = IEntity::SetFlagBits(SettlerPtr, ENTITY_FLAG_Offered);
   if ( !debug )
+  {
     return result;
+  }
   result = (_DWORD *)dword_3EFEB2C;
   if ( DEBUG_FLAGS[dword_3EFEB2C] )
-    return (_DWORD *)BBSupportTracePrintF(
-                       0,
-                       "CEcoSector::SetSettlerOffer(): offer %s nr %u to ecosector %u list - now %u entries",
-                       (&MEMORY[0x36A114C])[2 * a2],
-                       a3,
-                       *((unsigned __int16 *)this + 8),
-                       v6);
+  {
+    return (_DWORD *)BBSupportTracePrintF(0, "CEcoSector::SetSettlerOffer(): offer %s nr %u to ecosector %u list - now %u entries", (&MEMORY[0x36A114C])[2 * a2], a3, *((unsigned __int16 *)this + 8), v6);
+  }
   return result;
 }
 
@@ -164,8 +168,7 @@ void  CEcoSector::SetSettlerOffer(int a2, int a3) {
 // Decompiled from void __thiscall CEcoSector::SetSettlerOfferIncDisplay(CEcoSector *this, int a2, int a3)
 void  CEcoSector::SetSettlerOfferIncDisplay(int a2, int a3) {
   
-  if ( !CMapObjectMgr::ValidEntityId(a3)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 983, "g_pMapObjectMgr->ValidEntityId(_iSettlerId)") == 1 )
+  if ( !CMapObjectMgr::ValidEntityId(a3) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 983, "g_pMapObjectMgr->ValidEntityId(_iSettlerId)") == 1 )
   {
     __debugbreak();
   }
@@ -194,13 +197,11 @@ void  CEcoSector::GetSettlerOutOfOffer(int a2) {
   unsigned __int16 *v16; // [esp+10h] [ebp-4h]
 
   v16 = (unsigned __int16 *)CSettlerMgr::operator[](a2);
-  if ( !IEntity::FlagBits(v16, ENTITY_FLAG_Offered)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1009, "rActSettler.FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
+  if ( !IEntity::FlagBits(v16, ENTITY_FLAG_Offered) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1009, "rActSettler.FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::WarriorType()
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1011, "rActSettler.WarriorType() == WARRIOR_TYPE_NONE") == 1 )
+  if ( IEntity::WarriorType() && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1011, "rActSettler.WarriorType() == WARRIOR_TYPE_NONE") == 1 )
   {
     __debugbreak();
   }
@@ -228,32 +229,36 @@ void  CEcoSector::GetSettlerOutOfOffer(int a2) {
   IEntity::ClearFlagBits(v16, ENTITY_FLAG_Offered);
   v14 = 0;
   result = *((unsigned __int16 *)this + IEntity::Type(v16) + 85);
-  for ( i = result; i; i = result )
+  for ( i = result;
+        i;
+        i = result )
   {
     if ( a2 == i && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1040, "_iSettlerId != iActSettler") == 1 )
+    {
       __debugbreak();
+    }
     if ( debug )
     {
       if ( DEBUG_FLAGS[dword_3EFEB2C] )
+      {
         ++v14;
+      }
     }
     v8 = CSettlerMgr::operator[](i);
     result = IAnimatedEntity::Next(v8);
   }
   if ( !debug )
+  {
     return result;
+  }
   result = dword_3EFEB2C;
   if ( !DEBUG_FLAGS[dword_3EFEB2C] )
+  {
     return result;
+  }
   v10 = *((unsigned __int16 *)this + 8);
   v9 = IEntity::Type(v16);
-  return BBSupportTracePrintF(
-           0,
-           "CEcoSector::GetSettlerOutOfOffer(): get %s nr %u out of ecosector %u list - still %u entries",
-           (&MEMORY[0x36A114C])[2 * v9],
-           a2,
-           v10,
-           v14);
+  return BBSupportTracePrintF(0, "CEcoSector::GetSettlerOutOfOffer(): get %s nr %u out of ecosector %u list - still %u entries", (&MEMORY[0x36A114C])[2 * v9], a2, v10, v14);
 }
 
 
@@ -264,14 +269,15 @@ void  CEcoSector::GetSettlerOutOfOfferDecDisplay(int a2) {
   int v2; // eax
   unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-4h]
 
-  if ( !CMapObjectMgr::ValidEntityId(a2)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1068, "g_pMapObjectMgr->ValidEntityId(_iSettlerId)") == 1 )
+  if ( !CMapObjectMgr::ValidEntityId(a2) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1068, "g_pMapObjectMgr->ValidEntityId(_iSettlerId)") == 1 )
   {
     __debugbreak();
   }
   SettlerPtr = CSettlerMgr::GetSettlerPtr(a2);
   if ( !SettlerPtr && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1071, "pSettler!= NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( SettlerPtr )
   {
     CEcoSector::GetSettlerOutOfOffer(this, a2);
@@ -290,13 +296,11 @@ void  CEcoSector::GetCarrierOutOfOfferAndSetNextSettlerType(int a2, int a3) {
 
   CEcoSector::GetSettlerOutOfOffer(this, a2);
   v4 = (unsigned __int16 *)CSettlerMgr::operator[](a2);
-  if ( IEntity::Type(v4) != 1
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1090, "rSettler.Type() == SETTLER_CARRIER") == 1 )
+  if ( IEntity::Type(v4) != 1 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1090, "rSettler.Type() == SETTLER_CARRIER") == 1 )
   {
     __debugbreak();
   }
-  if ( !CSettler::SetNextSettlerType((CSettler *)v4, a3)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1094, "bSetNextSettlerTypeOk") == 1 )
+  if ( !CSettler::SetNextSettlerType((CSettler *)v4, a3) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1094, "bSetNextSettlerTypeOk") == 1 )
   {
     __debugbreak();
   }
@@ -314,17 +318,20 @@ void  CEcoSector::ResetCarrierNextSettlerTypeAndDecrementOrder(int a2) {
   int v3; // [esp+0h] [ebp-8h]
 
   v3 = CSettlerMgr::operator[](a2);
-  if ( IEntity::Type(v3) != 1
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1109, "rSettler.Type() == SETTLER_CARRIER") == 1 )
+  if ( IEntity::Type(v3) != 1 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1109, "rSettler.Type() == SETTLER_CARRIER") == 1 )
   {
     __debugbreak();
   }
   CSettler::SetNextSettlerType(0);
   if ( !this[17] && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1113, "m_uOrderedCarrier > 0") == 1 )
+  {
     __debugbreak();
+  }
   result = (_WORD *)(unsigned __int16)this[17];
   if ( !this[17] )
+  {
     return result;
+  }
   result = this;
   --this[17];
   return result;
@@ -391,22 +398,21 @@ int  CEcoSector::OrderWorker(int a2, int a3) {
   int v57; // [esp+A0h] [ebp-4h]
 
   v54 = this;
-  if ( CSettlerMgr::SettlerWarriorType(a3)
-    && BBSupportDbgReportF(
-         2,
-         "Logic\\EcoSector.cpp",
-         1794,
-         "WARNIG: Please don't call a soldier or specialist using OrderWorker!") == 1 )
+  if ( CSettlerMgr::SettlerWarriorType(a3) && BBSupportDbgReportF(2, "Logic\\EcoSector.cpp", 1794, "WARNIG: Please don't call a soldier or specialist using OrderWorker!") == 1 )
   {
     __debugbreak();
   }
   if ( CSettlerMgr::SettlerWarriorType(a3) )
+  {
     return 0;
+  }
   v4 = CBuildingMgr::operator[](a2);
   v5 = CBuilding::EnsignWorldIdx(v4);
   v48 = CWorldManager::EcoSectorId(v5);
   if ( !v48 && BBSupportDbgReportF(2, "Logic\\EcoSector.cpp", 1802, "NO_ECOSECTOR under building!") == 1 )
+  {
     __debugbreak();
+  }
   v55 = (_DWORD *)CBuildingMgr::operator[](a2);
   v30 = IEntity::Y(v55);
   v6 = IEntity::X(v55);
@@ -472,7 +478,9 @@ int  CEcoSector::OrderWorker(int a2, int a3) {
         {
           v25 = CEcoSector::Owner(v54);
           if ( v25 != CPlayerManager::GetLocalPlayerId() )
+          {
             return 0;
+          }
           v36 = IEntity::OwnerId((unsigned __int8 *)v55);
           v29 = IEntity::Y(v55);
           v26 = IEntity::X(v55);
@@ -517,10 +525,14 @@ int  CEcoSector::OrderWorker(int a2, int a3) {
     else
     {
       if ( a3 == 2 || a3 == 3 )
+      {
         return 0;
+      }
       v10 = IEntity::OwnerId((unsigned __int8 *)v55);
       if ( v10 != CPlayerManager::GetLocalPlayerId() )
+      {
         return 0;
+      }
       v31 = IEntity::Y(v55);
       v27 = IEntity::X(v55);
       v11 = IEntity::OwnerId((unsigned __int8 *)v55);
@@ -551,12 +563,7 @@ int  CEcoSector::CallWorker(int a2, int a3) {
   int v17; // [esp+40h] [ebp-4h]
 
   v14 = this;
-  if ( CSettlerMgr::SettlerWarriorType(a3)
-    && BBSupportDbgReportF(
-         2,
-         "Logic\\EcoSector.cpp",
-         1749,
-         "WARNIG: Please don't call a soldier or specialist using CallWorker!") == 1 )
+  if ( CSettlerMgr::SettlerWarriorType(a3) && BBSupportDbgReportF(2, "Logic\\EcoSector.cpp", 1749, "WARNIG: Please don't call a soldier or specialist using CallWorker!") == 1 )
   {
     __debugbreak();
   }
@@ -564,13 +571,17 @@ int  CEcoSector::CallWorker(int a2, int a3) {
   v4 = CBuilding::EnsignWorldIdx(v3);
   v12 = CWorldManager::EcoSectorId(v4);
   if ( !v12 && BBSupportDbgReportF(2, "Logic\\EcoSector.cpp", 1752, "NO_ECOSECTOR under building!") == 1 )
+  {
     __debugbreak();
+  }
   v15 = (_DWORD *)CBuildingMgr::operator[](a2);
   v8 = IEntity::Y(v15);
   v5 = IEntity::X(v15);
   NearestSettler = CEcoSector::GetNearestSettler(v14, a3, v5, v8);
   if ( !NearestSettler )
+  {
     return 0;
+  }
   CEcoSector::GetSettlerOutOfOffer(v14, NearestSettler);
   v6 = (CSettler *)CSettlerMgr::operator[](NearestSettler);
   CSettler::AttachToBuilding(v6, a2);
@@ -597,19 +608,19 @@ int  CEcoSector::GetNearestSettler(int a2, int a3, int a4) {
   int i; // [esp+10h] [ebp-8h]
   _DWORD *v12; // [esp+14h] [ebp-4h]
 
-  if ( (a2 <= 0 || a2 >= 67)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1706, "_iSettlerType>0 && _iSettlerType<SETTLER_MAX") == 1 )
+  if ( (a2 <= 0 || a2 >= 67) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1706, "_iSettlerType>0 && _iSettlerType<SETTLER_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorld(a3, a4)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1707, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a3, a4) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1707, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   v9 = -1;
   v8 = 0;
-  for ( i = CEcoSector::GetSettlerOffer(this, a2); i; i = IAnimatedEntity::Next(v12) )
+  for ( i = CEcoSector::GetSettlerOffer(this, a2);
+        i;
+        i = IAnimatedEntity::Next(v12) )
   {
     v12 = (_DWORD *)CSettlerMgr::operator[](i);
     if ( !CSettler::Strike((CSettler *)v12) )
@@ -648,7 +659,9 @@ int  CEcoSector::NrOfGoods(int a2)const {
 
   v5 = this;
   v6 = 0;
-  for ( i = *((unsigned __int16 *)this + a2 + 152); i; i = IAnimatedEntity::Next(v3) )
+  for ( i = *((unsigned __int16 *)this + a2 + 152);
+        i;
+        i = IAnimatedEntity::Next(v3) )
   {
     v2 = CPileMgr::operator[](i);
     v6 += (*(int (__thiscall **)(unsigned __int8 *, CEcoSector *, unsigned __int8 *))(*(_DWORD *)v2 + 40))(v2, v5, v2);
@@ -679,17 +692,22 @@ void  CEcoSector::SetGoodOffer(int a2, int a3) {
   int i; // [esp+Ch] [ebp-4h]
 
   if ( debug && DEBUG_FLAGS[dword_3EFEB2C] )
+  {
     BBSupportTracePrintF(0, "SetGoodOffer: es: %u good: %u, pileId: %u", this[8], a2, a3);
+  }
   v8 = CPileMgr::operator[](a3);
-  if ( IEntity::FlagBits(v8, ENTITY_FLAG_Offered)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1250, "!rPile.FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
+  if ( IEntity::FlagBits(v8, ENTITY_FLAG_Offered) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1250, "!rPile.FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
     __debugbreak();
   }
-  for ( i = this[a2 + 152]; i; i = IAnimatedEntity::Next(v3) )
+  for ( i = this[a2 + 152];
+        i;
+        i = IAnimatedEntity::Next(v3) )
   {
     if ( i == a3 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1258, "iActPile != _iPileId") == 1 )
+    {
       __debugbreak();
+    }
     v3 = CPileMgr::operator[](i);
   }
   v4 = CPileMgr::operator[](a3);
@@ -721,10 +739,11 @@ void  CEcoSector::GetPileOutOfOffer(int a2, int a3) {
   unsigned __int8 *v12; // [esp+8h] [ebp-4h]
 
   if ( debug && DEBUG_FLAGS[dword_3EFEB2C] )
+  {
     BBSupportTracePrintF(0, "GetPileOutOfOffer: es: %u good: %u, pileId: %u", *((unsigned __int16 *)this + 8), a2, a3);
+  }
   v12 = CPileMgr::operator[](a3);
-  if ( !IEntity::FlagBits(v12, ENTITY_FLAG_Offered)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1310, "rActPile.FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
+  if ( !IEntity::FlagBits(v12, ENTITY_FLAG_Offered) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1310, "rActPile.FlagBits(ENTITY_FLAG_OFFERED)") == 1 )
   {
     __debugbreak();
   }
@@ -794,9 +813,13 @@ void  CEcoSector::CleanUpBuildingNeed(int a2) {
 
   v20 = this;
   if ( !a2 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2773, "_iBuildingId!=0") == 1 )
+  {
     __debugbreak();
+  }
   result = 0;
-  for ( i = 0; i < 43; ++i )
+  for ( i = 0;
+        i < 43;
+        ++i )
   {
     std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v10);
     v23 = 0;
@@ -821,7 +844,9 @@ void  CEcoSector::CleanUpBuildingNeed(int a2) {
       LOBYTE(v23) = 0;
       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v8);
       if ( !v22 )
+      {
         break;
+      }
       if ( *(unsigned __int16 *)std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator*(v10) == a2 )
       {
         CTrace::Print("CleanUpBuildingNeed  erase building %u", a2);
@@ -873,14 +898,18 @@ int  CEcoSector::RequestGoodToVehicle(int a2, int a3) {
   v3 = IEntity::X(v17);
   NearestPile = CPileMgr::GetNearestPile((CPileMgr *)&g_cPileMgr, GoodOffer, v3, v9);
   if ( NearestPile <= 0 )
+  {
     return -1;
+  }
   v4 = CPileMgr::operator[](NearestPile);
   v10 = IEntity::Y(v4);
   v5 = CPileMgr::operator[](NearestPile);
   v6 = IEntity::X(v5);
   NearestSettler = CEcoSector::GetNearestSettler(v16, 1, v6, v10);
   if ( !NearestSettler )
+  {
     return -1;
+  }
   CEcoSector::GetSettlerOutOfOffer(v16, NearestSettler);
   v7 = CPileMgr::operator[](NearestPile);
   CPile::AttachAndIncAmountLeaving((unsigned __int16 *)v7, NearestSettler, 1, 2);
@@ -915,17 +944,25 @@ bool  CEcoSector::TransportGood(int a2, int a3) {
 
   v12 = this;
   if ( a2 == a3 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1666, "_iSrcPileId!=_iDestPileId") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 == a3 )
+  {
     return 0;
+  }
   if ( !a2 || !a3 )
+  {
     return 0;
+  }
   v13 = CPileMgr::operator[](a2);
   v6 = IEntity::Y(v13);
   v4 = IEntity::X(v13);
   NearestSettler = CEcoSector::GetNearestSettler(v12, 1, v4, v6);
   if ( !NearestSettler )
+  {
     return 0;
+  }
   CEcoSector::GetSettlerOutOfOffer(v12, NearestSettler);
   v11 = CSettlerMgr::operator[](NearestSettler);
   v10 = CEntityEvent::CEntityEvent((CEntityEvent *)v8, 0xAu, 0, 0, a2, a3);
@@ -951,14 +988,20 @@ void  CEcoSector::RequestSpace(class CPile * a2) {
   int v6; // [esp+4h] [ebp-4h]
 
   if ( !a2 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3314, "_pPile != 0") == 1 )
+  {
     __debugbreak();
+  }
   LOBYTE(NearestStoragePile) = 0;
   if ( !a2 )
+  {
     return NearestStoragePile;
+  }
   NearestStoragePile = CEcoSector::GetNearestStoragePile(this, a2);
   v6 = NearestStoragePile;
   if ( !NearestStoragePile )
+  {
     return NearestStoragePile;
+  }
   v3 = IEntity::ID();
   LOBYTE(NearestStoragePile) = CEcoSector::TransportGood(this, v3, v6);
   return NearestStoragePile;
@@ -975,7 +1018,9 @@ int  CEcoSector::GetFullPile(int a2) {
 
   v2 = std::vector<std::vector<unsigned short>>::operator[](a2);
   if ( !std::vector<unsigned short>::size(v2) )
+  {
     return 0;
+  }
   std::vector<std::vector<unsigned short>>::operator[](a2);
   v5 = *(unsigned __int16 *)std::vector<unsigned short>::back();
   v3 = std::vector<std::vector<unsigned short>>::operator[](a2);
@@ -995,7 +1040,9 @@ bool  CEcoSector::RegisterFreeStoragePile(int a2, int a3) {
   v6 = this;
   RegisteredFreeStoragePile = CEcoSector::GetRegisteredFreeStoragePile(this, a2, a3);
   if ( RegisteredFreeStoragePile != -1 )
+  {
     return 0;
+  }
   v4[0] = a2;
   v4[1] = a3;
   std::vector<CEcoSector::SECO_FREE_STORAGE_PILE_REG>::push_back(v4);
@@ -1016,7 +1063,9 @@ bool  CEcoSector::UnregisterFreeStoragePile(int a2, int a3) {
 
   RegisteredFreeStoragePile = CEcoSector::GetRegisteredFreeStoragePile(this, a2, a3);
   if ( RegisteredFreeStoragePile == -1 )
+  {
     return 0;
+  }
   v4 = std::vector<CEcoSector::SECO_FREE_STORAGE_PILE_REG>::size((char *)this + 424);
   v5 = (int *)std::vector<CEcoSector::SECO_FREE_STORAGE_PILE_REG>::operator[](v4 - 1);
   v6 = *v5;
@@ -1036,7 +1085,9 @@ bool  CEcoSector::RegisterGoodStoragePile(int a2, int a3, int a4) {
   _DWORD v5[3]; // [esp+8h] [ebp-10h] BYREF
 
   if ( CEcoSector::GetRegisteredGoodStoragePile(this, a2, a3, a4) != -1 )
+  {
     return 0;
+  }
   v5[0] = a2;
   v5[1] = a3;
   v5[2] = a4;
@@ -1056,7 +1107,9 @@ bool  CEcoSector::UnregisterGoodStoragePile(int a2, int a3, int a4) {
 
   RegisteredGoodStoragePile = CEcoSector::GetRegisteredGoodStoragePile(this, a2, a3, a4);
   if ( RegisteredGoodStoragePile == -1 )
+  {
     return 0;
+  }
   v5 = std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::size((char *)this + 440);
   v6 = (_DWORD *)std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::operator[](v5 - 1);
   v7 = (_DWORD *)std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::operator[](RegisteredGoodStoragePile);
@@ -1079,7 +1132,9 @@ bool  CEcoSector::RegisterGoodStorage(int a2, int a3) {
   v6 = this;
   RegisteredGoodStorage = CEcoSector::GetRegisteredGoodStorage(this, a2, a3);
   if ( RegisteredGoodStorage != -1 )
+  {
     return 0;
+  }
   v4[0] = a2;
   v4[1] = a3;
   std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::push_back(v4);
@@ -1100,7 +1155,9 @@ bool  CEcoSector::UnregisterGoodStorage(int a2, int a3) {
 
   RegisteredGoodStorage = CEcoSector::GetRegisteredGoodStorage(this, a2, a3);
   if ( RegisteredGoodStorage == -1 )
+  {
     return 0;
+  }
   v4 = std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::size((char *)this + 456);
   v5 = (int *)std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::operator[](v4 - 1);
   v6 = *v5;
@@ -1141,7 +1198,9 @@ int  CEcoSector::GetNearestStoragePile(class CPile & a2) {
   v13 = 0xFFFF;
   v22 = 0;
   v19 = 0;
-  for ( i = 0; i < std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::size((char *)this + 456); ++i )
+  for ( i = 0;
+        i < std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::size((char *)this + 456);
+        ++i )
   {
     v2 = std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::operator[](i);
     if ( *(_DWORD *)(v2 + 4) == (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)a2 + 60))(a2) )
@@ -1149,7 +1208,9 @@ int  CEcoSector::GetNearestStoragePile(class CPile & a2) {
       v3 = (int *)std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::operator[](i);
       BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *v3);
       if ( !BuildingPtr && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1516, "pBuilding") == 1 )
+      {
         __debugbreak();
+      }
       v16 = (CStorageBuildingRole *)CBuilding::Role(BuildingPtr);
       v4 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)a2 + 60))(a2);
       NextFreePile = (*(int (__thiscall **)(CStorageBuildingRole *, int))(*(_DWORD *)v16 + 56))(v16, v4);
@@ -1171,17 +1232,20 @@ int  CEcoSector::GetNearestStoragePile(class CPile & a2) {
     }
   }
   if ( !v22 || CEcoSector::GetRegisteredFreeStoragePile(this, v19, v22) == -1 )
+  {
     return v22;
+  }
   CEcoSector::UnregisterFreeStoragePile(this, v19, v22);
   v6 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)a2 + 60))(a2);
   CEcoSector::RegisterGoodStoragePile(this, v19, v22, v6);
   v18 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v19);
   if ( !v18 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1550, "pBuilding") == 1 )
+  {
     __debugbreak();
+  }
   v12 = (CStorageBuildingRole *)CBuilding::Role(v18);
   v7 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)a2 + 60))(a2);
-  if ( !CStorageBuildingRole::ReserveFreePile(v12, v7, v22)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1553, "bRes == true") == 1 )
+  if ( !CStorageBuildingRole::ReserveFreePile(v12, v7, v22) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 1553, "bRes == true") == 1 )
   {
     __debugbreak();
   }
@@ -1203,9 +1267,13 @@ void  CEcoSector::ChangeMinMaxValues(int a2, int a3) {
       if ( v3 < 999 )
       {
         if ( v3 > CEcoSector::NrOfSettler(this, 1) )
+        {
           *((_WORD *)this + 16) = CEcoSector::NrOfSettler(this, 1);
+        }
         else
+        {
           *((_WORD *)this + 16) = v3;
+        }
       }
       else
       {
@@ -1237,7 +1305,9 @@ void  CEcoSector::SetExtraMinCarrierForRecruitment(int a2) {
   if ( a2 >= 0 )
   {
     if ( a2 > 99 )
+    {
       LOBYTE(a2) = 99;
+    }
   }
   else
   {
@@ -1256,9 +1326,13 @@ bool  CEcoSector::CarrierForJobOrderAvailable(bool a2) {
   int v3; // [esp+14h] [ebp-8h]
 
   if ( a2 )
+  {
     v3 = *((unsigned __int8 *)this + 30);
+  }
   else
+  {
     v3 = 0;
+  }
   return *((unsigned __int16 *)this + 19) > v3 + *((unsigned __int16 *)this + 17) + *((unsigned __int16 *)this + 16);
 }
 
@@ -1269,17 +1343,24 @@ int  CEcoSector::WorkerDeltaAmount(int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; dword_3D894C8[2 * i] && dword_3D894C8[2 * i] != a2; ++i )
+  for ( i = 0;
+        dword_3D894C8[2 * i] && dword_3D894C8[2 * i] != a2;
+        ++i )
+  {
     ;
-  if ( dword_3D894CC[2 * i] == -1
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2440, "g_vWorkerProductionMap[k].m_iIdx != -1") == 1 )
+  }
+  if ( dword_3D894CC[2 * i] == -1 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2440, "g_vWorkerProductionMap[k].m_iIdx != -1") == 1 )
   {
     __debugbreak();
   }
   if ( dword_3D894CC[2 * i] == -1 )
+  {
     return 0;
+  }
   else
+  {
     return *((char *)this + dword_3D894CC[2 * i] + 677);
+  }
 }
 
 
@@ -1293,16 +1374,21 @@ void  CEcoSector::ChangeWorkerDeltaAmount(int a2, int a3) {
   _BYTE *v6; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; dword_3D894C8[2 * i] && dword_3D894C8[2 * i] != a2; ++i )
+  for ( i = 0;
+        dword_3D894C8[2 * i] && dword_3D894C8[2 * i] != a2;
+        ++i )
+  {
     ;
-  if ( dword_3D894CC[2 * i] == -1
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2466, "g_vWorkerProductionMap[k].m_iIdx != -1") == 1 )
+  }
+  if ( dword_3D894CC[2 * i] == -1 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2466, "g_vWorkerProductionMap[k].m_iIdx != -1") == 1 )
   {
     __debugbreak();
   }
   result = i;
   if ( dword_3D894CC[2 * i] == -1 )
+  {
     return result;
+  }
   v6 = (char *)this + dword_3D894CC[2 * i] + 677;
   v5 = (char)*v6;
   v4 = CEcoSector::NrOfSettler(this, a2);
@@ -1318,17 +1404,24 @@ int  CEcoSector::SpecialistWishes(int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; dword_3D89498[2 * i] && dword_3D89498[2 * i] != a2; ++i )
+  for ( i = 0;
+        dword_3D89498[2 * i] && dword_3D89498[2 * i] != a2;
+        ++i )
+  {
     ;
-  if ( dword_3D8949C[2 * i] == -1
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2114, "g_vSpecialistProductionMap[k].m_iIdx != -1") == 1 )
+  }
+  if ( dword_3D8949C[2 * i] == -1 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2114, "g_vSpecialistProductionMap[k].m_iIdx != -1") == 1 )
   {
     __debugbreak();
   }
   if ( dword_3D8949C[2 * i] == -1 )
+  {
     return 0;
+  }
   else
+  {
     return *((char *)this + dword_3D8949C[2 * i] + 672);
+  }
 }
 
 
@@ -1344,16 +1437,21 @@ void  CEcoSector::ChangeSpecialistWish(int a2, int a3) {
   _BYTE *v8; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; dword_3D89498[2 * i] && dword_3D89498[2 * i] != a2; ++i )
+  for ( i = 0;
+        dword_3D89498[2 * i] && dword_3D89498[2 * i] != a2;
+        ++i )
+  {
     ;
-  if ( dword_3D8949C[2 * i] == -1
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2139, "g_vSpecialistProductionMap[k].m_iIdx != -1") == 1 )
+  }
+  if ( dword_3D8949C[2 * i] == -1 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2139, "g_vSpecialistProductionMap[k].m_iIdx != -1") == 1 )
   {
     __debugbreak();
   }
   result = i;
   if ( dword_3D8949C[2 * i] == -1 )
+  {
     return result;
+  }
   v8 = (char *)this + dword_3D8949C[2 * i] + 672;
   v7 = (char)*v8;
   v6 = dword_3D89498[2 * i];
@@ -1484,15 +1582,21 @@ void  CEcoSector::InitTransport(void) {
   {
     v93 = 0;
     if ( v102 != 10 || !v101 )
+    {
       v102 = 1;
+    }
     v97 = 0;
     while ( !v97 && v102 < 43 )
     {
       Priority = CGoodTransportPriority::GetPriority((char *)v100 + 572, v102);
       if ( Priority == v82 )
+      {
         v97 = 1;
+      }
       else
+      {
         ++v102;
+      }
     }
     if ( v97 )
     {
@@ -1519,7 +1623,9 @@ void  CEcoSector::InitTransport(void) {
             LOBYTE(v105) = 3;
             std::vector<int>::resize(NumberOfSupplyBuildings);
             v77 = -1;
-            for ( i = 0; i < NumberOfSupplyBuildings; ++i )
+            for ( i = 0;
+                  i < NumberOfSupplyBuildings;
+                  ++i )
             {
               v78 = v104[2 * i];
               v93 = 1;
@@ -1527,9 +1633,10 @@ void  CEcoSector::InitTransport(void) {
               if ( i < NumberOfSupplyBuildings )
               {
                 if ( !v104[2 * i + 1] )
+                {
                   goto LABEL_25;
-                if ( v78 > 0x2A
-                  && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3032, "dp_type>=0 && dp_type<=DP_MAX") == 1 )
+                }
+                if ( v78 > 0x2A && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3032, "dp_type>=0 && dp_type<=DP_MAX") == 1 )
                 {
                   __debugbreak();
                 }
@@ -1570,8 +1677,7 @@ LABEL_25:
                   v65 = v47;
                   LOBYTE(v105) = 5;
                   v91 |= 1u;
-                  v73 = (unsigned __int8)std::_Deque_const_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator!=(v47)
-                     && !v99;
+                  v73 = (unsigned __int8)std::_Deque_const_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator!=(v47) && !v99;
                   v90 = v73;
                   v105 = 3;
                   if ( (v91 & 1) != 0 )
@@ -1580,12 +1686,11 @@ LABEL_25:
                     std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v39);
                   }
                   if ( !v90 )
+                  {
                     break;
+                  }
                   v81 = *(unsigned __int16 *)std::_Deque_const_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator*(v76);
-                  if ( v75 == 84
-                    && (v29 = (_BYTE *)_enc_textbss_begin,
-                        v6 = (_DWORD *)CBuildingMgr::operator[](v81),
-                        IEntity::FlagBits(v6, (EntityFlag)v29)) )
+                  if ( v75 == 84 && (v29 = (_BYTE *)_enc_textbss_begin, v6 = (_DWORD *)CBuildingMgr::operator[](v81), IEntity::FlagBits(v6, (EntityFlag)v29)) )
                   {
                     v99 = 1;
                   }
@@ -1598,12 +1703,12 @@ LABEL_25:
                       v29 = (_BYTE *)_enc_textbss_begin;
                       v9 = (_DWORD *)CBuildingMgr::operator[](v81);
                       if ( IEntity::FlagBits(v9, (EntityFlag)v29) )
+                      {
                         v99 = 1;
+                      }
                     }
                   }
-                  std::_Deque_const_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator++(
-                    v38,
-                    0);
+                  std::_Deque_const_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator++(v38, 0);
                   std::_Deque_const_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_const_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v38);
                 }
                 if ( v99 )
@@ -1636,8 +1741,7 @@ LABEL_25:
             v61 = v62;
             LOBYTE(v105) = 7;
             v91 |= 2u;
-            v72 = (unsigned __int8)std::_Deque_const_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator!=(v62)
-               && v94 != 100;
+            v72 = (unsigned __int8)std::_Deque_const_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator!=(v62) && v94 != 100;
             v89 = v72;
             v105 = 2;
             if ( (v91 & 2) != 0 )
@@ -1646,11 +1750,15 @@ LABEL_25:
               std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v32);
             }
             if ( !v89 )
+            {
               break;
+            }
             v95 = *(unsigned __int16 *)std::_Deque_const_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator*(v76);
             BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v95);
             if ( !BuildingPtr && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3128, "pBuilding!= NULL") == 1 )
+            {
               __debugbreak();
+            }
             if ( !BuildingPtr )
             {
               v105 = -1;
@@ -1664,10 +1772,7 @@ LABEL_25:
             {
               v103[v94++ + 200] = v95;
             }
-            else if ( v84 == 84
-                   && (v29 = (_BYTE *)_enc_textbss_begin,
-                       v10 = (_DWORD *)CBuildingMgr::operator[](v95),
-                       IEntity::FlagBits(v10, (EntityFlag)v29)) )
+            else if ( v84 == 84 && (v29 = (_BYTE *)_enc_textbss_begin, v10 = (_DWORD *)CBuildingMgr::operator[](v95), IEntity::FlagBits(v10, (EntityFlag)v29)) )
             {
               v103[v94++ + 200] = v95;
             }
@@ -1680,7 +1785,9 @@ LABEL_25:
                 v29 = (_BYTE *)_enc_textbss_begin;
                 v13 = (_DWORD *)CBuildingMgr::operator[](v95);
                 if ( IEntity::FlagBits(v13, (EntityFlag)v29) )
+                {
                   v103[v94++ + 200] = v95;
+                }
               }
             }
             std::_Deque_const_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator++(v36, 0);
@@ -1694,7 +1801,9 @@ LABEL_25:
           if ( v94 )
           {
             NearestPile = 0;
-            for ( j = 0; j < v94; ++j )
+            for ( j = 0;
+                  j < v94;
+                  ++j )
             {
               v95 = v103[j + 200];
               if ( v95 )
@@ -1740,7 +1849,9 @@ LABEL_25:
               }
             }
             v74 = 0;
-            for ( j = 0; j < v94; ++j )
+            for ( j = 0;
+                  j < v94;
+                  ++j )
             {
               if ( v103[j + 100] > v74 )
               {
@@ -1767,9 +1878,7 @@ LABEL_25:
               v68 = CPileMgr::operator[](v83);
               v23 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v68 + 40))(v68);
               v24 = CPileMgr::operator[](v83);
-              if ( CPile::AmountComing((CPile *)v24) + v23 < 8
-                && v83
-                && CEcoSector::TransportGood(v100, NearestPile, v83) == 1 )
+              if ( CPile::AmountComing((CPile *)v24) + v23 < 8 && v83 && CEcoSector::TransportGood(v100, NearestPile, v83) == 1 )
               {
                 if ( v102 == 10 && !v101 )
                 {
@@ -1791,7 +1900,9 @@ LABEL_25:
                       LOBYTE(v105) = 8;
                       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v34);
                       if ( !v88 )
+                      {
                         break;
+                      }
                       v26 = (unsigned __int16 *)std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator*(v51);
                       if ( *v26 == v95 )
                       {
@@ -1805,9 +1916,7 @@ LABEL_25:
                         std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v33);
                         break;
                       }
-                      std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator++(
-                        v35,
-                        0);
+                      std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator++(v35, 0);
                       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v35);
                     }
                     LOBYTE(v105) = 2;
@@ -1815,7 +1924,9 @@ LABEL_25:
                   }
                 }
                 if ( v85 <= 0x29 )
+                {
                   ++*((_WORD *)v100 + v85 + 236);
+                }
               }
             }
           }
@@ -1849,8 +1960,12 @@ void  CEcoSector::ResetGoodNeed(void) {
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 43; ++i )
+  for ( i = 0;
+        i < 43;
+        ++i )
+  {
     result = i + 1;
+  }
   return result;
 }
 
@@ -1904,7 +2019,9 @@ void  CEcoSector::RecruiteSpecialist(void) {
   int v43; // [esp+B8h] [ebp-4h]
 
   v41 = this;
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
     FirstSettlerId = 0;
     v39 = dword_3D89498[2 * i];
@@ -1922,7 +2039,9 @@ void  CEcoSector::RecruiteSpecialist(void) {
           v4 = CEcoSector::MinCarrier(v41);
           v5 = CEcoSector::NrOfSettler(v41, 1);
           if ( v4 >= v5 - CEcoSector::NumberOfCarriersWithJobOrder(v41) )
+          {
             return;
+          }
           NearestPile = 0;
           FirstSettlerId = *((unsigned __int16 *)v41 + 86);
           if ( FirstSettlerId )
@@ -1939,7 +2058,9 @@ void  CEcoSector::RecruiteSpecialist(void) {
               v7 = IEntity::X(v38);
               NearestPile = CPileMgr::GetNearestPile((CPileMgr *)&g_cPileMgr, GoodOffer, v7, v15);
               if ( !NearestPile )
+              {
                 break;
+              }
               v12 = IEntity::ID();
               v8 = CPileMgr::operator[](NearestPile);
               CPile::AttachAndIncAmountLeaving((unsigned __int16 *)v8, v12, 1, 2);
@@ -1955,8 +2076,7 @@ void  CEcoSector::RecruiteSpecialist(void) {
               {
                 v42 = 1;
                 v10 = CInputProcessor::Selection();
-                if ( !std::vector<unsigned short>::size(v10)
-                  && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2306, "g_cInputProcessor.Selection().size() != 0") == 1 )
+                if ( !std::vector<unsigned short>::size(v10) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2306, "g_cInputProcessor.Selection().size() != 0") == 1 )
                 {
                   __debugbreak();
                 }
@@ -1975,8 +2095,7 @@ void  CEcoSector::RecruiteSpecialist(void) {
                     v42 = 0;
                     break;
                   }
-                  if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 1
-                    || (NextSettlerType = CSettler::GetNextSettlerType(SettlerPtr), NextSettlerType != v39) )
+                  if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 1 || (NextSettlerType = CSettler::GetNextSettlerType(SettlerPtr), NextSettlerType != v39) )
                   {
                     v42 = 0;
                     break;
@@ -1984,7 +2103,9 @@ void  CEcoSector::RecruiteSpecialist(void) {
                   std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator++(v19);
                 }
                 if ( v42 == 1 )
+                {
                   CInputProcessor::AddToSelection(FirstSettlerId);
+                }
                 LOBYTE(v43) = 0;
                 std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v18);
                 v43 = -1;
@@ -2000,7 +2121,9 @@ void  CEcoSector::RecruiteSpecialist(void) {
               case '1':
               case '2':
                 if ( !NearestPile && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2349, "bestpile != 0") == 1 )
+                {
                   __debugbreak();
+                }
                 v23 = CEntityEvent::CEntityEvent((CEntityEvent *)v17, 0x15u, 0, v39, NearestPile, 0);
                 v22 = v23;
                 v43 = 2;
@@ -2076,7 +2199,9 @@ void  CEcoSector::RecruiteWorker(void) {
 
   v21 = this;
   v20 = 0;
-  for ( i = 0; i < 2; ++i )
+  for ( i = 0;
+        i < 2;
+        ++i )
   {
     if ( *((_BYTE *)v21 + i + 677) )
     {
@@ -2086,7 +2211,9 @@ void  CEcoSector::RecruiteWorker(void) {
         v1 = CEcoSector::MinCarrier(v21);
         v2 = CEcoSector::NrOfSettler(v21, 1);
         if ( v1 >= v2 - CEcoSector::NumberOfCarriersWithJobOrder(v21) )
+        {
           return;
+        }
         NearestPile = 0;
         v20 = *((unsigned __int16 *)v21 + 86);
         if ( v20 )
@@ -2103,7 +2230,9 @@ void  CEcoSector::RecruiteWorker(void) {
             v4 = IEntity::X(v17);
             NearestPile = CPileMgr::GetNearestPile((CPileMgr *)&g_cPileMgr, GoodOffer, v4, v8);
             if ( !NearestPile )
+            {
               continue;
+            }
             v6 = IEntity::ID();
             v5 = CPileMgr::operator[](NearestPile);
             CPile::AttachAndIncAmountLeaving((unsigned __int16 *)v5, v6, 1, 2);
@@ -2144,19 +2273,24 @@ void  CEcoSector::FillGoodDistribution(class CGoodDistributionInfo * a2) {
   signed int i; // [esp+10h] [ebp-4h]
 
   if ( !a2 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2844, "_pInfoExchange!=NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 )
   {
-    NumberOfSupplyBuildings = CBuildingSupplyPriority::GetNumberOfSupplyBuildings(
-                                (char *)this + 556,
-                                a2->m_uU5,
-                                (int)a2->m_aSupplyPriorities);
+    NumberOfSupplyBuildings = CBuildingSupplyPriority::GetNumberOfSupplyBuildings((char *)this + 556, a2->m_uU5, (int)a2->m_aSupplyPriorities);
     a2->m_uSupplyBuildings = NumberOfSupplyBuildings;
     sum = 0;
-    for ( i = 0; i < NumberOfSupplyBuildings; ++i )
+    for ( i = 0;
+          i < NumberOfSupplyBuildings;
+          ++i )
+    {
       sum += a2->m_aSupplyPriorities[i].m_uPriority;
+    }
     if ( sum != 100 && BBSupportDbgReportF(0, "Logic\\EcoSector.cpp", 2860, "sum!=100") == 1 )
+    {
       __debugbreak();
+    }
   }
 }
 
@@ -2168,10 +2302,14 @@ void  CEcoSector::ChangeGoodDistribution(class CGoodDistributionInfo * a2) {
   int result; // eax
 
   if ( !a2 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2872, "_pInfoExchange!=NULL") == 1 )
+  {
     __debugbreak();
+  }
   result = 0;
   if ( a2 )
+  {
     return CBuildingSupplyPriority::ChangePriority((void *)(this + 556), *(_DWORD *)(a2 + 60), a2 + 16);
+  }
   return result;
 }
 
@@ -2183,10 +2321,14 @@ void  CEcoSector::FillTransportPrio(class CTransportpriorityInfo * a2) {
   int result; // eax
 
   if ( !a2 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 2932, "_pInfoExchange != NULL") == 1 )
+  {
     __debugbreak();
+  }
   result = 0;
   if ( !a2 )
+  {
     return result;
+  }
   CGoodTransportPriority::GetSortedGoods(a2 + 16);
   result = CGoodTransportPriority::GetNumberOfPriorities(this + 572);
   *(_DWORD *)(a2 + 12) = result;
@@ -2215,17 +2357,22 @@ void  CEcoSector::ChangeBuildingSupplyPrio(enum PILE_TYPES a2, enum BUILDING_TYP
 // Decompiled from int __thiscall CEcoSector::GetNumberOfGoods(unsigned __int16 *this, int a2, int a3)
 int  CEcoSector::GetNumberOfGoods(int a2, enum CEcoSector::T_STATISTIC_GOOD_CATEGORY a3) {
   
-  if ( (a2 <= 0 || a2 >= 43)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3326, "(_iGoodType > GOOD_NO_GOOD) && (_iGoodType < GOOD_MAX)") == 1 )
+  if ( (a2 <= 0 || a2 >= 43) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3326, "(_iGoodType > GOOD_NO_GOOD) && (_iGoodType < GOOD_MAX)") == 1 )
   {
     __debugbreak();
   }
   if ( a2 <= 0 || a2 >= 43 )
+  {
     return 0;
+  }
   if ( !a3 )
+  {
     return this[a2 + 340];
+  }
   if ( a3 == 1 )
+  {
     return this[a2 + 383];
+  }
   return this[a2 + 383] + this[a2 + 340];
 }
 
@@ -2238,23 +2385,32 @@ void  CEcoSector::ChangeNumberOfGoodsPile(int a2, int a3) {
   __int16 v4; // [esp+4h] [ebp-Ch]
   int v6; // [esp+Ch] [ebp-4h]
 
-  if ( (a2 <= 0 || a2 >= 43)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3359, "(_iGoodType > GOOD_NO_GOOD) && (_iGoodType < GOOD_MAX)") == 1 )
+  if ( (a2 <= 0 || a2 >= 43) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3359, "(_iGoodType > GOOD_NO_GOOD) && (_iGoodType < GOOD_MAX)") == 1 )
   {
     __debugbreak();
   }
   result = 0;
   if ( a2 <= 0 || a2 >= 43 )
+  {
     return result;
+  }
   v6 = a3 + *((unsigned __int16 *)this + a2 + 340);
   if ( v6 < 0 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3369, "iNewAmount >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( v6 >= 0x8000 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3370, "iNewAmount < 32768") == 1 )
+  {
     __debugbreak();
+  }
   if ( v6 < 0 )
+  {
     v4 = 0;
+  }
   else
+  {
     v4 = v6;
+  }
   result = this;
   *((_WORD *)this + a2 + 340) = v4;
   return result;
@@ -2269,23 +2425,32 @@ void  CEcoSector::ChangeNumberOfGoodsCarrier(int a2, int a3) {
   __int16 v4; // [esp+4h] [ebp-Ch]
   int v6; // [esp+Ch] [ebp-4h]
 
-  if ( (a2 <= 0 || a2 >= 43)
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3379, "(_iGoodType > GOOD_NO_GOOD) && (_iGoodType < GOOD_MAX)") == 1 )
+  if ( (a2 <= 0 || a2 >= 43) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3379, "(_iGoodType > GOOD_NO_GOOD) && (_iGoodType < GOOD_MAX)") == 1 )
   {
     __debugbreak();
   }
   result = 0;
   if ( a2 <= 0 || a2 >= 43 )
+  {
     return result;
+  }
   v6 = a3 + (unsigned __int16)this[a2 + 383];
   if ( v6 < 0 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3389, "iNewAmount >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( v6 >= 0x8000 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3390, "iNewAmount < 32768") == 1 )
+  {
     __debugbreak();
+  }
   if ( v6 < 0 )
+  {
     v4 = 0;
+  }
   else
+  {
     v4 = v6;
+  }
   result = this;
   this[a2 + 383] = v4;
   return result;
@@ -2304,23 +2469,39 @@ void  CEcoSector::OrderDiggerAndBuilderAtStartUp(void) {
   if ( *((unsigned __int16 *)this + 19) - *((unsigned __int16 *)this + 17) - *((unsigned __int16 *)this + 16) > 0 )
   {
     if ( *((unsigned __int16 *)this + 21) >= 5u )
+    {
       v2 = 0;
+    }
     else
+    {
       v2 = 5 - *((unsigned __int16 *)this + 21);
+    }
     v4 = v2;
     if ( *((unsigned __int16 *)this + 20) >= 5u )
+    {
       v1 = 0;
+    }
     else
+    {
       v1 = 5 - *((unsigned __int16 *)this + 20);
+    }
     v3 = v1;
     if ( v2 > *((unsigned __int16 *)this + 358) )
+    {
       v4 = *((unsigned __int16 *)this + 358);
+    }
     if ( v1 > *((unsigned __int16 *)this + 371) )
+    {
       v3 = *((unsigned __int16 *)this + 371);
+    }
     if ( v4 > 0 )
+    {
       CEcoSector::ChangeWorkerDeltaAmount(this, 3, v4);
+    }
     if ( v3 > 0 )
+    {
       CEcoSector::ChangeWorkerDeltaAmount(this, 2, v3);
+    }
   }
 }
 
@@ -2338,7 +2519,9 @@ void  CEcoSector::TakeSoldierOrder(int a2, int a3) {
   {
     if ( !a4 )
     {
-      for ( i = 0; i < 10; ++i )
+      for ( i = 0;
+            i < 10;
+            ++i )
       {
         *((_BYTE *)this + i + 852) = 0;
         result = i + 1;
@@ -2347,8 +2530,12 @@ void  CEcoSector::TakeSoldierOrder(int a2, int a3) {
   }
   else
   {
-    for ( j = 0; g_vSoldierProductionMap[2 * j] && g_vSoldierProductionMap[2 * j] != a3; ++j )
+    for ( j = 0;
+          g_vSoldierProductionMap[2 * j] && g_vSoldierProductionMap[2 * j] != a3;
+          ++j )
+    {
       ;
+    }
     result = j;
     if ( g_vSoldierProductionMap[2 * j] != -1 )
     {
@@ -2408,15 +2595,16 @@ void  CEcoSector::TakeWeaponOrder(int a2, int a3) {
   char v7; // [esp+Fh] [ebp-1h]
 
   for ( i = 0;
-        i < std::vector<unsigned char>::size((char *)this + 916)
-     && *(unsigned __int8 *)std::vector<unsigned char>::operator[](i) != a2;
+        i < std::vector<unsigned char>::size((char *)this + 916) && *(unsigned __int8 *)std::vector<unsigned char>::operator[](i) != a2;
         ++i )
   {
     ;
   }
   result = (char *)std::vector<unsigned char>::operator[](i);
   if ( !*result )
+  {
     return result;
+  }
   v6 = *(_BYTE *)std::vector<unsigned char>::operator[](i);
   if ( a3 )
   {
@@ -2427,9 +2615,13 @@ void  CEcoSector::TakeWeaponOrder(int a2, int a3) {
     else if ( a3 <= 0 )
     {
       if ( a3 + v6 >= 0 )
+      {
         v7 = a3 + v6;
+      }
       else
+      {
         v7 = 0;
+      }
     }
     else if ( a3 + v6 <= 100 )
     {
@@ -2459,9 +2651,13 @@ void  CEcoSector::SetWeaponAutoProduction(bool a2) {
 
   result = a2;
   if ( a2 )
+  {
     v3 = 100;
+  }
   else
+  {
     v3 = 0;
+  }
   *((_BYTE *)this + 896) = v3;
   return result;
 }
@@ -2478,7 +2674,9 @@ void  CEcoSector::SetWeaponPercentage(unsigned int a2) {
   *(_BYTE *)std::vector<unsigned char>::operator[](2) = BYTE2(a2);
   result = (_BYTE *)std::vector<unsigned char>::size((char *)this + 932);
   if ( result != (_BYTE *)4 )
+  {
     return result;
+  }
   result = (_BYTE *)std::vector<unsigned char>::operator[](3);
   *result = HIBYTE(a2);
   return result;
@@ -2504,8 +2702,7 @@ void  CEcoSector::TakeToolOrder(int a2, int a3) {
   if ( a2 )
   {
     for ( i = 0;
-          i < std::vector<unsigned char>::size((char *)this + 880)
-       && *(unsigned __int8 *)std::vector<unsigned char>::operator[](i) != a2;
+          i < std::vector<unsigned char>::size((char *)this + 880) && *(unsigned __int8 *)std::vector<unsigned char>::operator[](i) != a2;
           ++i )
     {
       ;
@@ -2522,9 +2719,13 @@ void  CEcoSector::TakeToolOrder(int a2, int a3) {
         else if ( a3 <= 0 )
         {
           if ( a3 + v5 >= 0 )
+          {
             v6 = a3 + v5;
+          }
           else
+          {
             v6 = 0;
+          }
         }
         else if ( a3 + v5 <= 100 )
         {
@@ -2558,19 +2759,27 @@ int __cdecl CEcoSector::GetSettlerCountEcoSectorId(class CSettler const * a1) {
 
   v5 = 0;
   if ( !a1 )
+  {
     return v5;
+  }
   if ( IEntity::WarriorType() )
+  {
     return v5;
+  }
   v3 = IEntity::WorldIdx();
   v6 = IEntity::Flags(a1);
   v7 = CSettler::Role(a1);
   v4 = (*(int (__thiscall **)(int))(*(_DWORD *)v7 + 72))(v7);
   IEntity::Type((unsigned __int16 *)a1);
   if ( (_UNKNOWN *)(((unsigned int)&loc_200007C + 4) & v6) != (_UNKNOWN *)((char *)&loc_1FFFFFF + 1) || v4 == 18 )
+  {
     return v5;
+  }
   v2 = ITiling::EcoSectorId(v3);
   if ( (v6 & 0x8000) == 0 )
+  {
     return v2;
+  }
   return v5;
 }
 
@@ -2601,12 +2810,16 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
   v17 = 0;
   v13 = CEcoSector::EcoSectorId(this);
   if ( (*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pTiling + 40))(g_pTiling, v13) <= 20 )
+  {
     return v17;
+  }
   v11 = CEcoSector::Owner(this);
   memset(v20, 0, sizeof(v20));
   memset(v21, 0, sizeof(v21));
   UsedId = CMapObjectMgr::LastUsedId();
-  for ( i = 7; i <= UsedId; ++i )
+  for ( i = 7;
+        i <= UsedId;
+        ++i )
   {
     SettlerPtr = (const struct CSettler *)CSettlerMgr::GetSettlerPtr(i);
     if ( SettlerPtr )
@@ -2629,50 +2842,38 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       v6 = ITiling::EcoSectorId(v3);
       if ( v6 == v13 )
       {
-        v9 = (*(int (__thiscall **)(struct CPile *, int, int, int))(*(_DWORD *)PilePtr + 60))(
-               PilePtr,
-               v5,
-               v6,
-               SettlerCountEcoSectorId);
+        v9 = (*(int (__thiscall **)(struct CPile *, int, int, int))(*(_DWORD *)PilePtr + 60))(PilePtr, v5, v6, SettlerCountEcoSectorId);
         v5 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
         v21[v9] += v5;
       }
     }
   }
-  for ( j = 1; j < 67; ++j )
+  for ( j = 1;
+        j < 67;
+        ++j )
   {
     if ( *((unsigned __int16 *)this + j + 18) != v20[j] )
     {
       ++v17;
-      BBSupportTracePrintF(
-        0,
-        "Wrong number of settlers of type %i in eco-sector %i of owner %i, (is %i, should be %i)!",
-        j,
-        v13,
-        v11,
-        *((unsigned __int16 *)this + j + 18),
-        v20[j]);
+      BBSupportTracePrintF(0, "Wrong number of settlers of type %i in eco-sector %i of owner %i, (is %i, should be %i)!", j, v13, v11, *((unsigned __int16 *)this + j + 18), v20[j]);
     }
   }
-  for ( k = 1; k < 43; ++k )
+  for ( k = 1;
+        k < 43;
+        ++k )
   {
     if ( *((unsigned __int16 *)this + k + 340) != v21[k] )
     {
       ++v17;
-      BBSupportTracePrintF(
-        0,
-        "Wrong amount of pile goods of type %i in eco-sector %i of owner %i, (is %i, should be %i)!",
-        k,
-        v13,
-        v11,
-        *((unsigned __int16 *)this + k + 340),
-        v21[k]);
+      BBSupportTracePrintF(0, "Wrong amount of pile goods of type %i in eco-sector %i of owner %i, (is %i, should be %i)!", k, v13, v11, *((unsigned __int16 *)this + k + 340), v21[k]);
     }
   }
   if ( v17 )
   {
     if ( byte_3D894EF && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 3871, "iErrorCount == 0") == 1 )
+    {
       __debugbreak();
+    }
     byte_3D894EF = 0;
   }
   else
@@ -2745,7 +2946,9 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
   v22 = 0;
   operator^<int>(a2, (int)&v22);
   if ( v22 != -823895864 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 271, "iControllID == 0xCEE458C8") == 1 )
+  {
     __debugbreak();
+  }
   Version = Serial::LoadVersion(a2);
   switch ( Version )
   {
@@ -2766,22 +2969,32 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       operator^<unsigned short>(a2, (char *)v39 + 34);
       operator^<int>(a2, (int)v39 + 8);
       if ( *((int *)v39 + 2) < 0 )
+      {
         v21 = 0;
+      }
       else
+      {
         v21 = CWorldManager::EcoSectorId(*((_DWORD *)v39 + 2));
+      }
       *((_WORD *)v39 + 8) = v21;
       if ( !*((_WORD *)v39 + 8) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 301, "m_iEcoSectorId > 0") == 1 )
+      {
         __debugbreak();
+      }
       *((_DWORD *)v39 + 2) = -1;
       LoadArray<unsigned short>(a2, (char *)v39 + 36, 134);
       LoadArray<unsigned short>(a2, (char *)v39 + 170, 134);
       LoadArray<unsigned short>(a2, (char *)v39 + 304, 86);
       std::vector<std::deque<unsigned short>>::resize(43);
-      for ( i = 0; i < 43; ++i )
+      for ( i = 0;
+            i < 43;
+            ++i )
       {
         v20 = 0;
         operator^<int>(a2, (int)&v20);
-        for ( j = 0; j < v20; ++j )
+        for ( j = 0;
+              j < v20;
+              ++j )
         {
           v19 = 0;
           operator^<int>(a2, (int)&v19);
@@ -2795,7 +3008,9 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       LoadArray<signed char>(a2, (char *)v39 + 677, 2);
       v18 = 0;
       operator^<int>(a2, (int)&v18);
-      for ( i = 0; i < v18; ++i )
+      for ( i = 0;
+            i < v18;
+            ++i )
       {
         std::vector<unsigned short>::vector<unsigned short>(v5);
         LOBYTE(v40) = 11;
@@ -2808,31 +3023,41 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       LoadArray<unsigned short>(a2, (char *)v39 + 766, 86);
       LoadArray<signed char>(a2, (char *)v39 + 852, 10);
       operator^<unsigned char>(a2, &v38);
-      for ( i = 0; i < v38; ++i )
+      for ( i = 0;
+            i < v38;
+            ++i )
       {
         operator^<unsigned char>(a2, &v37);
         std::vector<unsigned char>::push_back(&v37);
       }
       operator^<unsigned char>(a2, &v38);
-      for ( i = 0; i < v38; ++i )
+      for ( i = 0;
+            i < v38;
+            ++i )
       {
         operator^<unsigned char>(a2, &v37);
         std::vector<unsigned char>::push_back(&v37);
       }
       operator^<unsigned char>(a2, &v38);
-      for ( i = 0; i < v38; ++i )
+      for ( i = 0;
+            i < v38;
+            ++i )
       {
         operator^<unsigned char>(a2, &v37);
         std::vector<unsigned char>::push_back(&v37);
       }
       operator^<unsigned char>(a2, &v38);
-      for ( i = 0; i < v38; ++i )
+      for ( i = 0;
+            i < v38;
+            ++i )
       {
         operator^<unsigned char>(a2, &v37);
         std::vector<unsigned char>::push_back(&v37);
       }
       operator^<unsigned char>(a2, &v38);
-      for ( i = 0; i < v38; ++i )
+      for ( i = 0;
+            i < v38;
+            ++i )
       {
         operator^<unsigned char>(a2, &v37);
         std::vector<unsigned char>::push_back(&v37);
@@ -2840,7 +3065,9 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       v17 = 0;
       operator^<int>(a2, (int)&v17);
       if ( v17 != 1073196093 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 381, "iControllID == 0x3FF7AC3D") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 6:
       operator^<int>(a2, (int)v39 + 12);
@@ -2859,22 +3086,32 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       operator^<unsigned short>(a2, (char *)v39 + 34);
       operator^<int>(a2, (int)v39 + 8);
       if ( *((int *)v39 + 2) < 0 )
+      {
         v16 = 0;
+      }
       else
+      {
         v16 = CWorldManager::EcoSectorId(*((_DWORD *)v39 + 2));
+      }
       *((_WORD *)v39 + 8) = v16;
       if ( !*((_WORD *)v39 + 8) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 411, "m_iEcoSectorId > 0") == 1 )
+      {
         __debugbreak();
+      }
       *((_DWORD *)v39 + 2) = -1;
       LoadArray<unsigned short>(a2, (char *)v39 + 36, 134);
       LoadArray<unsigned short>(a2, (char *)v39 + 170, 134);
       LoadArray<unsigned short>(a2, (char *)v39 + 304, 86);
       std::vector<std::deque<unsigned short>>::resize(43);
-      for ( k = 0; k < 43; ++k )
+      for ( k = 0;
+            k < 43;
+            ++k )
       {
         v15 = 0;
         operator^<int>(a2, (int)&v15);
-        for ( m = 0; m < v15; ++m )
+        for ( m = 0;
+              m < v15;
+              ++m )
         {
           v14 = 0;
           operator^<int>(a2, (int)&v14);
@@ -2888,7 +3125,9 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       LoadArray<signed char>(a2, (char *)v39 + 677, 2);
       v13 = 0;
       operator^<int>(a2, (int)&v13);
-      for ( k = 0; k < v13; ++k )
+      for ( k = 0;
+            k < v13;
+            ++k )
       {
         std::vector<unsigned short>::vector<unsigned short>(v4);
         LOBYTE(v40) = 12;
@@ -2901,32 +3140,42 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       LoadArray<unsigned short>(a2, (char *)v39 + 766, 86);
       LoadArray<signed char>(a2, (char *)v39 + 852, 10);
       operator^<unsigned char>(a2, &v36);
-      for ( k = 0; k < v36; ++k )
+      for ( k = 0;
+            k < v36;
+            ++k )
       {
         operator^<unsigned char>(a2, &v35);
         std::vector<unsigned char>::push_back(&v35);
       }
       operator^<unsigned char>(a2, &v36);
-      for ( k = 0; k < v36; ++k )
+      for ( k = 0;
+            k < v36;
+            ++k )
       {
         operator^<unsigned char>(a2, &v35);
         std::vector<unsigned char>::push_back(&v35);
       }
       operator^<unsigned char>(a2, &v36);
-      for ( k = 0; k < v36; ++k )
+      for ( k = 0;
+            k < v36;
+            ++k )
       {
         operator^<unsigned char>(a2, &v35);
         std::vector<unsigned char>::push_back(&v35);
       }
       operator^<unsigned char>(a2, (char *)v39 + 896);
       operator^<unsigned char>(a2, &v36);
-      for ( k = 0; k < v36; ++k )
+      for ( k = 0;
+            k < v36;
+            ++k )
       {
         operator^<unsigned char>(a2, &v35);
         std::vector<unsigned char>::push_back(&v35);
       }
       operator^<unsigned char>(a2, &v36);
-      for ( k = 0; k < v36; ++k )
+      for ( k = 0;
+            k < v36;
+            ++k )
       {
         operator^<unsigned char>(a2, &v35);
         std::vector<unsigned char>::push_back(&v35);
@@ -2934,7 +3183,9 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       v12 = 0;
       operator^<int>(a2, (int)&v12);
       if ( v12 != 1073196093 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 494, "iControllID == 0x3FF7AC3D") == 1 )
+      {
         __debugbreak();
+      }
       break;
     case 7:
       operator^<int>(a2, (int)v39 + 12);
@@ -2953,22 +3204,32 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       operator^<unsigned short>(a2, (char *)v39 + 34);
       operator^<int>(a2, (int)v39 + 8);
       if ( *((int *)v39 + 2) < 0 )
+      {
         v11 = 0;
+      }
       else
+      {
         v11 = CWorldManager::EcoSectorId(*((_DWORD *)v39 + 2));
+      }
       *((_WORD *)v39 + 8) = v11;
       if ( !*((_WORD *)v39 + 8) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 523, "m_iEcoSectorId > 0") == 1 )
+      {
         __debugbreak();
+      }
       *((_DWORD *)v39 + 2) = -1;
       LoadArray<unsigned short>(a2, (char *)v39 + 36, 134);
       LoadArray<unsigned short>(a2, (char *)v39 + 170, 134);
       LoadArray<unsigned short>(a2, (char *)v39 + 304, 86);
       std::vector<std::deque<unsigned short>>::resize(43);
-      for ( n = 0; n < 43; ++n )
+      for ( n = 0;
+            n < 43;
+            ++n )
       {
         v10 = 0;
         operator^<int>(a2, (int)&v10);
-        for ( ii = 0; ii < v10; ++ii )
+        for ( ii = 0;
+              ii < v10;
+              ++ii )
         {
           v9 = 0;
           operator^<int>(a2, (int)&v9);
@@ -2982,7 +3243,9 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       LoadArray<signed char>(a2, (char *)v39 + 677, 2);
       v8 = 0;
       operator^<int>(a2, (int)&v8);
-      for ( n = 0; n < v8; ++n )
+      for ( n = 0;
+            n < v8;
+            ++n )
       {
         std::vector<unsigned short>::vector<unsigned short>(v3);
         LOBYTE(v40) = 13;
@@ -2995,32 +3258,42 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       LoadArray<unsigned short>(a2, (char *)v39 + 766, 86);
       LoadArray<signed char>(a2, (char *)v39 + 852, 10);
       operator^<unsigned char>(a2, &v34);
-      for ( n = 0; n < v34; ++n )
+      for ( n = 0;
+            n < v34;
+            ++n )
       {
         operator^<unsigned char>(a2, &v33);
         std::vector<unsigned char>::push_back(&v33);
       }
       operator^<unsigned char>(a2, &v34);
-      for ( n = 0; n < v34; ++n )
+      for ( n = 0;
+            n < v34;
+            ++n )
       {
         operator^<unsigned char>(a2, &v33);
         std::vector<unsigned char>::push_back(&v33);
       }
       operator^<unsigned char>(a2, &v34);
-      for ( n = 0; n < v34; ++n )
+      for ( n = 0;
+            n < v34;
+            ++n )
       {
         operator^<unsigned char>(a2, &v33);
         std::vector<unsigned char>::push_back(&v33);
       }
       operator^<unsigned char>(a2, (char *)v39 + 896);
       operator^<unsigned char>(a2, &v34);
-      for ( n = 0; n < v34; ++n )
+      for ( n = 0;
+            n < v34;
+            ++n )
       {
         operator^<unsigned char>(a2, &v33);
         std::vector<unsigned char>::push_back(&v33);
       }
       operator^<unsigned char>(a2, &v34);
-      for ( n = 0; n < v34; ++n )
+      for ( n = 0;
+            n < v34;
+            ++n )
       {
         operator^<unsigned char>(a2, &v33);
         std::vector<unsigned char>::push_back(&v33);
@@ -3028,7 +3301,9 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       v7 = 0;
       operator^<int>(a2, (int)&v7);
       if ( v7 != 1073196093 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 605, "iControllID == 0x3FF7AC3D") == 1 )
+      {
         __debugbreak();
+      }
       operator^<unsigned int>(a2, (char *)v39 + 948);
       operator^<unsigned int>(a2, (char *)v39 + 952);
       operator^<unsigned int>(a2, (char *)v39 + 956);
@@ -3041,7 +3316,9 @@ int  CEcoSector::DbgCheckEcoSector(int a2) {
       _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
   if ( *((_WORD *)v39 + 8) )
+  {
     CEcoSectorMgr::RegisterEcoSector((CEcoSectorMgr *)g_cESMgr, *((unsigned __int16 *)v39 + 8), v39, 0);
+  }
   return v39;
 }
 
@@ -3106,16 +3383,23 @@ void  CEcoSector::Store(std::ostream & a2) {
   operator^<unsigned short>(a2, (char *)v30 + 34);
   operator^<int>(a2, v30 + 2);
   if ( (int)v30[2] < 0 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 675, "m_iStoreWorldIdx >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( (int)v30[2] < 0 )
+  {
     v28 = 0;
+  }
   else
+  {
     v28 = ITiling::EcoSectorId(v30[2]);
+  }
   v20 = v28;
   if ( !*((_WORD *)v30 + 8) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 677, "m_iEcoSectorId > 0") == 1 )
+  {
     __debugbreak();
-  if ( *((unsigned __int16 *)v30 + 8) != v20
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 678, "m_iEcoSectorId == iEcoSectorId") == 1 )
+  }
+  if ( *((unsigned __int16 *)v30 + 8) != v20 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 678, "m_iEcoSectorId == iEcoSectorId") == 1 )
   {
     __debugbreak();
   }
@@ -3123,7 +3407,9 @@ void  CEcoSector::Store(std::ostream & a2) {
   StoreArray<unsigned short>(a2, v30 + 9, 134);
   StoreArray<unsigned short>(a2, (char *)v30 + 170, 134);
   StoreArray<unsigned short>(a2, v30 + 76, 86);
-  for ( i = 0; i < 43; ++i )
+  for ( i = 0;
+        i < 43;
+        ++i )
   {
     v2 = std::vector<std::deque<unsigned short>>::operator[](i);
     v19 = std::deque<unsigned short>::size(v2);
@@ -3147,7 +3433,9 @@ void  CEcoSector::Store(std::ostream & a2) {
       LOBYTE(v33) = 0;
       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v9);
       if ( !v31 )
+      {
         break;
+      }
       v15[0] = *(unsigned __int16 *)std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator*(v11);
       operator^<int>(a2, v15);
       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator++(v11);
@@ -3160,7 +3448,9 @@ void  CEcoSector::Store(std::ostream & a2) {
   StoreArray<signed char>(a2, (char *)v30 + 677, 2);
   v27 = std::vector<std::vector<unsigned short>>::size(v30 + 102);
   operator^<int>(a2, &v27);
-  for ( i = 0; i < v27; ++i )
+  for ( i = 0;
+        i < v27;
+        ++i )
   {
     v14 = std::vector<std::vector<unsigned short>>::operator[](i);
     StoreVector<unsigned short>(a2, v14);
@@ -3169,40 +3459,43 @@ void  CEcoSector::Store(std::ostream & a2) {
   StoreArray<unsigned short>(a2, (char *)v30 + 766, 86);
   StoreArray<signed char>(a2, v30 + 213, 10);
   v26 = (unsigned int)std::vector<unsigned char>::size(v30 + 225) < 0x100;
-  if ( !v26
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 723, "static_cast<UINT32>(m_vWeaponOrder.size() < 256)") == 1 )
+  if ( !v26 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 723, "static_cast<UINT32>(m_vWeaponOrder.size() < 256)") == 1 )
   {
     __debugbreak();
   }
   v32 = std::vector<unsigned char>::size(v30 + 225);
   operator^<unsigned char>(a2, &v32);
-  for ( i = 0; i < v32; ++i )
+  for ( i = 0;
+        i < v32;
+        ++i )
   {
     v3 = std::vector<unsigned char>::operator[](i);
     operator^<unsigned char>(a2, v3);
   }
   v25 = (unsigned int)std::vector<unsigned char>::size(v30 + 229) < 0x100;
-  if ( !v25
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 731, "static_cast<UINT32>(m_vWeaponTranslater.size() < 256)") == 1 )
+  if ( !v25 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 731, "static_cast<UINT32>(m_vWeaponTranslater.size() < 256)") == 1 )
   {
     __debugbreak();
   }
   v32 = std::vector<unsigned char>::size(v30 + 229);
   operator^<unsigned char>(a2, &v32);
-  for ( i = 0; i < v32; ++i )
+  for ( i = 0;
+        i < v32;
+        ++i )
   {
     v4 = std::vector<unsigned char>::operator[](i);
     operator^<unsigned char>(a2, v4);
   }
   v24 = (unsigned int)std::vector<unsigned char>::size(v30 + 233) < 0x100;
-  if ( !v24
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 740, "static_cast<UINT32>(m_vWeaponPercentages.size() < 256)") == 1 )
+  if ( !v24 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 740, "static_cast<UINT32>(m_vWeaponPercentages.size() < 256)") == 1 )
   {
     __debugbreak();
   }
   v32 = std::vector<unsigned char>::size(v30 + 233);
   operator^<unsigned char>(a2, &v32);
-  for ( i = 0; i < v32; ++i )
+  for ( i = 0;
+        i < v32;
+        ++i )
   {
     v5 = std::vector<unsigned char>::operator[](i);
     operator^<unsigned char>(a2, v5);
@@ -3210,23 +3503,28 @@ void  CEcoSector::Store(std::ostream & a2) {
   operator^<unsigned char>(a2, v30 + 224);
   v23 = (unsigned int)std::vector<unsigned char>::size(v30 + 216) < 0x100;
   if ( !v23 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 750, "static_cast<UINT32>(m_vToolOrder.size() < 256)") == 1 )
+  {
     __debugbreak();
+  }
   v32 = std::vector<unsigned char>::size(v30 + 216);
   operator^<unsigned char>(a2, &v32);
-  for ( i = 0; i < v32; ++i )
+  for ( i = 0;
+        i < v32;
+        ++i )
   {
     v6 = std::vector<unsigned char>::operator[](i);
     operator^<unsigned char>(a2, v6);
   }
   v22 = (unsigned int)std::vector<unsigned char>::size(v30 + 220) < 0x100;
-  if ( !v22
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 758, "static_cast<UINT32>(m_vToolTranslater.size() < 256)") == 1 )
+  if ( !v22 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 758, "static_cast<UINT32>(m_vToolTranslater.size() < 256)") == 1 )
   {
     __debugbreak();
   }
   v32 = std::vector<unsigned char>::size(v30 + 220);
   operator^<unsigned char>(a2, &v32);
-  for ( i = 0; i < v32; ++i )
+  for ( i = 0;
+        i < v32;
+        ++i )
   {
     v7 = std::vector<unsigned char>::operator[](i);
     operator^<unsigned char>(a2, v7);
@@ -3278,12 +3576,7 @@ void  CEcoSector::ChangeBuildingSitesWithPrio(int a2) {
   
   CEcoSector *result; // eax
 
-  if ( a2 + *((unsigned __int8 *)this + 20) < 0
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\EcoSector.h",
-         243,
-         "m_uBuildingSiteWithPrio + _iDelta >= 0") == 1 )
+  if ( a2 + *((unsigned __int8 *)this + 20) < 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\EcoSector.h", 243, "m_uBuildingSiteWithPrio + _iDelta >= 0") == 1 )
   {
     __debugbreak();
   }
@@ -3311,22 +3604,12 @@ void  CEcoSector::ChangePrioBuilder(int a2, int a3) {
   
   CEcoSector *result; // eax
 
-  if ( a2 + *((char *)this + 22) < 0
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\EcoSector.h",
-         262,
-         "m_iNrOfBuildingsWithBuilderPrio + _iDeltaBuildingSites >= 0") == 1 )
+  if ( a2 + *((char *)this + 22) < 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\EcoSector.h", 262, "m_iNrOfBuildingsWithBuilderPrio + _iDeltaBuildingSites >= 0") == 1 )
   {
     __debugbreak();
   }
   *((_BYTE *)this + 22) += a2;
-  if ( a3 + *((__int16 *)this + 13) < 0
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\EcoSector.h",
-         265,
-         "m_iNeededPrioBuilder + _iDeltaBuilder >= 0") == 1 )
+  if ( a3 + *((__int16 *)this + 13) < 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\EcoSector.h", 265, "m_iNeededPrioBuilder + _iDeltaBuilder >= 0") == 1 )
   {
     __debugbreak();
   }
@@ -3342,22 +3625,12 @@ void  CEcoSector::ChangePrioDigger(int a2, int a3) {
   
   CEcoSector *result; // eax
 
-  if ( a2 + *((char *)this + 21) < 0
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\EcoSector.h",
-         251,
-         "m_iNrOfBuildingsWithDiggerPrio + _iDeltaBuildingSites >= 0") == 1 )
+  if ( a2 + *((char *)this + 21) < 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\EcoSector.h", 251, "m_iNrOfBuildingsWithDiggerPrio + _iDeltaBuildingSites >= 0") == 1 )
   {
     __debugbreak();
   }
   *((_BYTE *)this + 21) += a2;
-  if ( a3 + *((__int16 *)this + 12) < 0
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\EcoSector.h",
-         254,
-         "m_iNeededPrioDigger + _iDeltaDigger >= 0") == 1 )
+  if ( a3 + *((__int16 *)this + 12) < 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\logic\\EcoSector.h", 254, "m_iNeededPrioDigger + _iDeltaDigger >= 0") == 1 )
   {
     __debugbreak();
   }
@@ -3728,7 +4001,9 @@ void  CEcoSector::DecSize(void) {
   memset((char *)this + 852, 0, 0xAu);
   v5 = CPlayerManager::Race(*((unsigned __int8 *)this + 18));
   BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v5, 22);
-  for ( i = 0; i < *(char *)(BuildingInfo + 57); ++i )
+  for ( i = 0;
+        i < *(char *)(BuildingInfo + 57);
+        ++i )
   {
     if ( !*(_BYTE *)(BuildingInfo + 16 * i + 63) )
     {
@@ -3753,11 +4028,17 @@ void  CEcoSector::DecSize(void) {
     byte_3F1E8D8[12] = 50;
     byte_3F1E8D8[24] = 0;
   }
-  for ( j = 0; j < std::vector<unsigned char>::size((char *)this + 932); ++j )
+  for ( j = 0;
+        j < std::vector<unsigned char>::size((char *)this + 932);
+        ++j )
+  {
     *(_BYTE *)std::vector<unsigned char>::operator[](j) = byte_3F1E8D8[12 * j];
+  }
   v6 = CPlayerManager::Race(*((unsigned __int8 *)this + 18));
   v8 = CBuildingInfoMgr::GetBuildingInfo(v6, 21);
-  for ( k = 0; k < *(char *)(v8 + 57); ++k )
+  for ( k = 0;
+        k < *(char *)(v8 + 57);
+        ++k )
   {
     if ( !*(_BYTE *)(v8 + 16 * k + 63) )
     {
@@ -3768,12 +4049,7 @@ void  CEcoSector::DecSize(void) {
     }
   }
   CEcoSectorMgr::RegisterEcoSector((CEcoSectorMgr *)g_cESMgr, a3, this, 1);
-  BBSupportTracePrintF(
-    0,
-    "CEcoSector::CEcoSector(): owner %i, eco-sector %i, unique id 0x%08x.",
-    a2,
-    *((unsigned __int16 *)this + 8),
-    *((_DWORD *)this + 3));
+  BBSupportTracePrintF(0, "CEcoSector::CEcoSector(): owner %i, eco-sector %i, unique id 0x%08x.", a2, *((unsigned __int16 *)this + 8), *((_DWORD *)this + 3));
   return this;
 }
 
@@ -3783,12 +4059,7 @@ void  CEcoSector::DecSize(void) {
  CEcoSector::~CEcoSector(void) {
   
   *(_DWORD *)this = &CEcoSector::_vftable_;
-  BBSupportTracePrintF(
-    0,
-    "CEcoSector::~CEcoSector(): owner %i, eco-sector %i, unique id 0x%08x.",
-    *((unsigned __int8 *)this + 18),
-    *((unsigned __int16 *)this + 8),
-    *((_DWORD *)this + 3));
+  BBSupportTracePrintF(0, "CEcoSector::~CEcoSector(): owner %i, eco-sector %i, unique id 0x%08x.", *((unsigned __int8 *)this + 18), *((unsigned __int16 *)this + 8), *((_DWORD *)this + 3));
   *((_DWORD *)this + 3) = -1;
   std::vector<unsigned char>::~vector<unsigned char>();
   std::vector<unsigned char>::~vector<unsigned char>();
@@ -3812,13 +4083,18 @@ void  CEcoSector::SetWorldIdxForStore(int a2) {
 
   *((_DWORD *)this + 2) = a2;
   if ( a2 < 0 )
+  {
     v3 = 0;
+  }
   else
+  {
     v3 = ITiling::EcoSectorId(a2);
+  }
   if ( !*((_WORD *)this + 8) && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 815, "m_iEcoSectorId > 0") == 1 )
+  {
     __debugbreak();
-  if ( *((unsigned __int16 *)this + 8) != v3
-    && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 816, "m_iEcoSectorId == iEcoSectorId") == 1 )
+  }
+  if ( *((unsigned __int16 *)this + 8) != v3 && BBSupportDbgReport(2, "Logic\\EcoSector.cpp", 816, "m_iEcoSectorId == iEcoSectorId") == 1 )
   {
     __debugbreak();
   }
@@ -3861,7 +4137,9 @@ void  CEcoSector::MissingToolWarning(int a2, int a3, int a4, int a5, int a6) {
       break;
     case 18:
       if ( a3 != 3 )
+      {
         result = CTextMsgHandler::AddWarningMsg(2454, a6, a4, a5);
+      }
       break;
     case 25:
       result = CTextMsgHandler::AddWarningMsg(2455, a6, a4, a5);
@@ -3877,7 +4155,9 @@ void  CEcoSector::MissingToolWarning(int a2, int a3, int a4, int a5, int a6) {
       break;
     case 31:
       if ( a3 != 2 )
+      {
         result = CTextMsgHandler::AddWarningMsg(2460, a6, a4, a5);
+      }
       break;
     default:
       return result;
@@ -3891,15 +4171,23 @@ void  CEcoSector::MissingToolWarning(int a2, int a3, int a4, int a5, int a6) {
 int  CEcoSector::ChangeValue(int a2, int a3, int a4) {
   
   if ( !a4 )
+  {
     return 0;
+  }
   if ( a4 == 100 )
+  {
     return 99;
+  }
   if ( a4 <= 0 )
   {
     if ( a4 + a3 + a2 >= 0 )
+    {
       return a4 + a3;
+    }
     else
+    {
       return -a2;
+    }
   }
   else if ( a4 + a3 < 100 )
   {
@@ -3919,11 +4207,14 @@ int  CEcoSector::GetRegisteredFreeStoragePile(int a2, int a3) {
   int i; // [esp+4h] [ebp-4h]
 
   if ( !std::vector<CEcoSector::SECO_FREE_STORAGE_PILE_REG>::size((char *)this + 424) )
-    return -1;
-  for ( i = 0; i < std::vector<CEcoSector::SECO_FREE_STORAGE_PILE_REG>::size((char *)this + 424); ++i )
   {
-    if ( *(_DWORD *)std::vector<CEcoSector::SECO_FREE_STORAGE_PILE_REG>::operator[](i) == a2
-      && *(_DWORD *)(std::vector<CEcoSector::SECO_FREE_STORAGE_PILE_REG>::operator[](i) + 4) == a3 )
+    return -1;
+  }
+  for ( i = 0;
+        i < std::vector<CEcoSector::SECO_FREE_STORAGE_PILE_REG>::size((char *)this + 424);
+        ++i )
+  {
+    if ( *(_DWORD *)std::vector<CEcoSector::SECO_FREE_STORAGE_PILE_REG>::operator[](i) == a2 && *(_DWORD *)(std::vector<CEcoSector::SECO_FREE_STORAGE_PILE_REG>::operator[](i) + 4) == a3 )
     {
       return i;
     }
@@ -3939,12 +4230,14 @@ int  CEcoSector::GetRegisteredGoodStoragePile(int a2, int a3, int a4) {
   int i; // [esp+4h] [ebp-4h]
 
   if ( !std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::size((char *)this + 440) )
-    return -1;
-  for ( i = 0; i < std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::size((char *)this + 440); ++i )
   {
-    if ( *(_DWORD *)std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::operator[](i) == a2
-      && *(_DWORD *)(std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::operator[](i) + 4) == a3
-      && *(_DWORD *)(std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::operator[](i) + 8) == a4 )
+    return -1;
+  }
+  for ( i = 0;
+        i < std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::size((char *)this + 440);
+        ++i )
+  {
+    if ( *(_DWORD *)std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::operator[](i) == a2 && *(_DWORD *)(std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::operator[](i) + 4) == a3 && *(_DWORD *)(std::vector<CEcoSector::SECO_GOOD_STORAGE_PILE_REG>::operator[](i) + 8) == a4 )
     {
       return i;
     }
@@ -3960,11 +4253,14 @@ int  CEcoSector::GetRegisteredGoodStorage(int a2, int a3) {
   int i; // [esp+4h] [ebp-4h]
 
   if ( !std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::size((char *)this + 456) )
-    return -1;
-  for ( i = 0; i < std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::size((char *)this + 456); ++i )
   {
-    if ( *(_DWORD *)std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::operator[](i) == a2
-      && *(_DWORD *)(std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::operator[](i) + 4) == a3 )
+    return -1;
+  }
+  for ( i = 0;
+        i < std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::size((char *)this + 456);
+        ++i )
+  {
+    if ( *(_DWORD *)std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::operator[](i) == a2 && *(_DWORD *)(std::vector<CEcoSector::SECO_STORAGE_GOOD_REG>::operator[](i) + 4) == a3 )
     {
       return i;
     }
@@ -3994,10 +4290,7 @@ void  CEcoSector::ReregisterAllStorageRegistrations(void) {
   unsigned __int8 *BuildingPtr; // [esp+4h] [ebp-Ch]
   int FirstBuildingId; // [esp+8h] [ebp-8h]
 
-  FirstBuildingId = CBuildingMgr::GetFirstBuildingId(
-                      (CBuildingMgr *)g_cBuildingMgr,
-                      *(unsigned __int8 *)(this + 18),
-                      34);
+  FirstBuildingId = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, *(unsigned __int8 *)(this + 18), 34);
   while ( FirstBuildingId )
   {
     BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, FirstBuildingId);

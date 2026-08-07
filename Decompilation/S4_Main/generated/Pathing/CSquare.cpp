@@ -20,11 +20,15 @@ void  CSquare::InitAndFillTypeMapNormal(int a2, int a3) {
   CSquare::Init(this, a2, a3);
   result = CSquare::TileTypeXY(a2, a3);
   v5 = result;
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
   {
     result = CTilingWorld::WorldIndex(a2, i + a3);
     v11 = result;
-    for ( j = 0; j < 16; ++j )
+    for ( j = 0;
+          j < 16;
+          ++j )
     {
       v7 = ITiling::OwnerId(v11);
       v6 = CTilingWorld::WorldGroundType(v11);
@@ -36,8 +40,7 @@ void  CSquare::InitAndFillTypeMapNormal(int a2, int a3) {
       }
       else
       {
-        if ( (v8 & 0x20000000) == 0
-          && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 885, "iTileType & TILE_TYPE_IS_WATER") == 1 )
+        if ( (v8 & 0x20000000) == 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 885, "iTileType & TILE_TYPE_IS_WATER") == 1 )
         {
           __debugbreak();
         }
@@ -90,13 +93,17 @@ void  CSquare::InitAndFillTypeMapCatapult(int a2, int a3) {
   CSquare::Init(this, a2, a3);
   result = CSquare::TileTypeXY(a2, a3) | 0x8000000;
   v4 = result;
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
   {
     result = CTilingWorld::WorldIndex(a2, i + a3);
     v10 = result;
     v13 = 0;
     v14 = 1;
-    for ( j = 0; j < 16; ++j )
+    for ( j = 0;
+          j < 16;
+          ++j )
     {
       if ( CTilingWorld::WorldIsBlockedLand(v10) )
       {
@@ -113,7 +120,9 @@ void  CSquare::InitAndFillTypeMapCatapult(int a2, int a3) {
         }
         else if ( v14 )
         {
-          for ( k = 1; k < 19; ++k )
+          for ( k = 1;
+                k < 19;
+                ++k )
           {
             v6 = v10 + CTilingWorld::WorldSurroundingRelIndex(k);
             if ( CTilingWorld::WorldIsBlockedLand(v6) )
@@ -125,7 +134,9 @@ void  CSquare::InitAndFillTypeMapCatapult(int a2, int a3) {
         }
         else
         {
-          for ( m = 0; m < 5; ++m )
+          for ( m = 0;
+                m < 5;
+                ++m )
           {
             v5 = v10 + CTilingWorld::WorldSurroundingRelIndex(dword_37E1FCC[m]);
             if ( CTilingWorld::WorldIsBlockedLand(v5) )
@@ -210,7 +221,9 @@ void  CSquare::ConnectAreas(int a2, int a3) {
   v8 = *((_DWORD *)this + a2 + 518);
   v9 = *((_DWORD *)this + a3 + 518);
   if ( v9 < 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 788, "iComponent2 >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( v8 >= 0 )
   {
     if ( v8 != v9 )
@@ -226,16 +239,22 @@ void  CSquare::ConnectAreas(int a2, int a3) {
         v7 = v8;
       }
       v3 = TStaticArray<int,63>::Count((char *)this + 256 * v7 + 3096);
-      for ( i = 0; i < v3; ++i )
+      for ( i = 0;
+            i < v3;
+            ++i )
       {
         v4 = *(_DWORD *)TStaticArray<int,63>::operator[](i);
         *((_DWORD *)this + v4 + 518) = v5;
         CAreaList::PushBack((CSquare *)((char *)this + 256 * v5 + 3096), v4);
       }
       if ( v7 < *((_DWORD *)this + 5) )
+      {
         TStaticArray<int,63>::Init((CSquare *)((char *)this + 256 * v7 + 3096));
+      }
       else
+      {
         --*((_DWORD *)this + 5);
+      }
     }
   }
   else
@@ -254,11 +273,15 @@ void  CSquare::CalcComponentTileIndices(int a2) {
   int i; // [esp+0h] [ebp-8h]
 
   *((_DWORD *)this + 8966) = 0;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = i;
     if ( i >= *((_DWORD *)this + 5) )
+    {
       break;
+    }
     if ( (unsigned __int8)TStaticArray<int,63>::Empty((char *)this + 256 * i + 3096) )
     {
       *((_DWORD *)this + i + 8967) = 0;
@@ -278,7 +301,9 @@ void  CSquare::CalcComponentTileIndices(int a2) {
 void  CSquare::AddComponentIfNecessary(int a2) {
   
   if ( *((int *)this + a2 + 518) < 0 )
+  {
     CSquare::AddComponet(this, a2);
+  }
 }
 
 

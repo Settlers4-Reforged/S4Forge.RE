@@ -6,30 +6,15 @@
 // Decompiled from CEcoSector *__thiscall CEcoSectorMgr::GetEcoSectorPtr(CEcoSectorMgr *this, int a2)
 class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtr(int a2) {
   
-  if ( a2 <= 0
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h",
-         247,
-         (const char *)&dword_366FF60[1]) == 1 )
+  if ( a2 <= 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h", 247, (const char *)&dword_366FF60[1]) == 1 )
   {
     __debugbreak();
   }
-  if ( a2 >= 0x4000
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h",
-         248,
-         "_iEcoSectorId < MAX_ENTRIES") == 1 )
+  if ( a2 >= 0x4000 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h", 248, "_iEcoSectorId < MAX_ENTRIES") == 1 )
   {
     __debugbreak();
   }
-  if ( a2 > *((_DWORD *)this + 3)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h",
-         249,
-         "_iEcoSectorId <= m_sData.m_iMaxLastUsedId") == 1 )
+  if ( a2 > *((_DWORD *)this + 3) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h", 249, "_iEcoSectorId <= m_sData.m_iMaxLastUsedId") == 1 )
   {
     __debugbreak();
   }
@@ -42,9 +27,13 @@ class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtr(int a2) {
 class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtrEx(int a2) {
   
   if ( a2 >= 0x4000 )
+  {
     return 0;
+  }
   else
+  {
     return *((_DWORD *)this + a2 + 5);
+  }
 }
 
 
@@ -56,9 +45,13 @@ class CEcoSector *  CEcoSectorMgr::GetEcoSectorPtrEx(int a2, int a3) {
 
   EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtrEx(this, a2);
   if ( EcoSectorPtr && CEcoSector::GetUniqueId(EcoSectorPtr) == a3 )
+  {
     return EcoSectorPtr;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -74,30 +67,15 @@ int  CEcoSectorMgr::LastUsedEcoSectorId(void)const {
 // Decompiled from struct CEcoSector *__thiscall CEcoSectorMgr::EntryPtr(CEcoSectorMgr *this, int a2)
 class CEcoSector *  CEcoSectorMgr::EntryPtr(int a2) {
   
-  if ( a2 <= 0
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h",
-         294,
-         (const char *)&dword_366FF60[1]) == 1 )
+  if ( a2 <= 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h", 294, (const char *)&dword_366FF60[1]) == 1 )
   {
     __debugbreak();
   }
-  if ( a2 >= 0x4000
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h",
-         295,
-         "_iEcoSectorId < MAX_ENTRIES") == 1 )
+  if ( a2 >= 0x4000 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h", 295, "_iEcoSectorId < MAX_ENTRIES") == 1 )
   {
     __debugbreak();
   }
-  if ( a2 > *((_DWORD *)this + 3)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h",
-         296,
-         "_iEcoSectorId <= m_sData.m_iMaxLastUsedId") == 1 )
+  if ( a2 > *((_DWORD *)this + 3) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h", 296, "_iEcoSectorId <= m_sData.m_iMaxLastUsedId") == 1 )
   {
     __debugbreak();
   }
@@ -109,39 +87,19 @@ class CEcoSector *  CEcoSectorMgr::EntryPtr(int a2) {
 // Decompiled from struct CEcoSector *__thiscall CEcoSectorMgr::operator[](_DWORD *this, int a2)
 class CEcoSector &  CEcoSectorMgr::operator[](int a2) {
   
-  if ( a2 <= 0
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h",
-         230,
-         (const char *)&dword_366FF60[1]) == 1 )
+  if ( a2 <= 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h", 230, (const char *)&dword_366FF60[1]) == 1 )
   {
     __debugbreak();
   }
-  if ( a2 >= 0x4000
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h",
-         231,
-         "_iEcoSectorId < MAX_ENTRIES") == 1 )
+  if ( a2 >= 0x4000 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h", 231, "_iEcoSectorId < MAX_ENTRIES") == 1 )
   {
     __debugbreak();
   }
-  if ( a2 > this[3]
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h",
-         232,
-         "_iEcoSectorId <= m_sData.m_iMaxLastUsedId") == 1 )
+  if ( a2 > this[3] && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h", 232, "_iEcoSectorId <= m_sData.m_iMaxLastUsedId") == 1 )
   {
     __debugbreak();
   }
-  if ( !this[a2 + 5]
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h",
-         233,
-         "m_sData.m_vEcoSectors[_iEcoSectorId] != 0") == 1 )
+  if ( !this[a2 + 5] && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Logic\\EcoSectorMgr.h", 233, "m_sData.m_vEcoSectors[_iEcoSectorId] != 0") == 1 )
   {
     __debugbreak();
   }
@@ -155,19 +113,18 @@ class CEcoSector &  CEcoSectorMgr::operator[](int a2) {
   
   int i; // [esp+0h] [ebp-8h]
 
-  _vec_ctor(
-    (char *)this + 65596,
-    0x10u,
-    9u,
-    std::vector<unsigned short>::vector<unsigned short>,
-    std::vector<unsigned short>::~vector<unsigned short>);
+  _vec_ctor((char *)this + 65596, 0x10u, 9u, std::vector<unsigned short>::vector<unsigned short>, std::vector<unsigned short>::~vector<unsigned short>);
   memset(this, 0, 0x1003Cu);
   *((_DWORD *)this + 1) = 1;
   *((_DWORD *)this + 2) = 0;
   *((_DWORD *)this + 3) = 0;
   *((_DWORD *)this + 4) = 0x10000000;
-  for ( i = 0; i < 9; ++i )
+  for ( i = 0;
+        i < 9;
+        ++i )
+  {
     std::vector<unsigned short>::clear();
+  }
   return this;
 }
 
@@ -191,14 +148,20 @@ void  CEcoSectorMgr::OrderDiggerAndBuilderAtStartUp(void) {
   int i; // [esp+Ch] [ebp-4h]
 
   v2 = *((_DWORD *)this + 2);
-  for ( i = 1; ; ++i )
+  for ( i = 1;
+        ;
+        ++i )
   {
     result = i;
     if ( i > v2 )
+    {
       break;
+    }
     v3 = (CEcoSector *)*((_DWORD *)this + i + 5);
     if ( v3 )
+    {
       CEcoSector::OrderDiggerAndBuilderAtStartUp(v3);
+    }
   }
   return result;
 }
@@ -213,13 +176,17 @@ void  CEcoSectorMgr::Clear(void) {
   int i; // [esp+10h] [ebp-4h]
   int j; // [esp+10h] [ebp-4h]
 
-  for ( i = 1; i < 0x4000; ++i )
+  for ( i = 1;
+        i < 0x4000;
+        ++i )
   {
     if ( *((_DWORD *)this + i + 5) )
     {
       v2 = (CEcoSector *)*((_DWORD *)this + i + 5);
       if ( v2 )
+      {
         delete v2;
+      }
       *((_DWORD *)this + i + 5) = 0;
     }
   }
@@ -229,8 +196,12 @@ void  CEcoSectorMgr::Clear(void) {
   result = this;
   *((_DWORD *)this + 3) = 0;
   *((_DWORD *)this + 4) = 0x10000000;
-  for ( j = 0; j < 9; ++j )
+  for ( j = 0;
+        j < 9;
+        ++j )
+  {
     result = (CEcoSectorMgr *)std::vector<unsigned short>::clear();
+  }
   return result;
 }
 
@@ -244,7 +215,9 @@ void  CEcoSectorMgr::Update(void) {
   ++*((_DWORD *)this + 16389);
   result = this;
   if ( *((int *)this + 16389) < 32 )
+  {
     return result;
+  }
   result = (CEcoSectorMgr *)CEcoSectorMgr::UpdateStrikeSettlers((char *)this);
   *((_DWORD *)this + 16389) = 0;
   return result;
@@ -273,18 +246,26 @@ int  CEcoSectorMgr::GetNrOfStrikingCarriersInEcoSector(int a2) {
 
   v7 = *((_DWORD *)this + a2 + 5);
   if ( !v7 )
+  {
     return 0;
+  }
   v8 = 0;
   v6 = CEcoSector::Owner(v7);
   NrStrikingCarriers = CEcoSectorMgr::GetNrStrikingCarriers(this, v6);
-  for ( i = 0; i < NrStrikingCarriers; ++i )
+  for ( i = 0;
+        i < NrStrikingCarriers;
+        ++i )
   {
     v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 16 * v6 + 65596, i);
     if ( !CSettlerMgr::GetSettlerPtr(*v3) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 229, "pSettler") == 1 )
+    {
       __debugbreak();
+    }
     v4 = IEntity::WorldIdx();
     if ( CWorldManager::EcoSectorId(v4) == a2 )
+    {
       ++v8;
+    }
   }
   return v8;
 }
@@ -294,19 +275,18 @@ int  CEcoSectorMgr::GetNrOfStrikingCarriersInEcoSector(int a2) {
 // Decompiled from int __thiscall CEcoSectorMgr::GetNrOfInitialFreeBeds(CEcoSectorMgr *this, int a2)
 int  CEcoSectorMgr::GetNrOfInitialFreeBeds(int a2) {
   
-  if ( (a2 < 1 || a2 > 8)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\EcoSectorMgr.cpp",
-         1602,
-         "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (a2 < 1 || a2 > 8) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1602, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
   if ( a2 < 1 || a2 > 8 )
+  {
     return 0;
+  }
   else
+  {
     return *((_DWORD *)this + a2 + 16390);
+  }
 }
 
 
@@ -321,23 +301,16 @@ int  CEcoSectorMgr::GetNrOfCurrentTotalBeds(int a2) {
   int v6; // edi
   DWORD v9; // [esp+10h] [ebp-4h]
 
-  if ( (a2 < 1 || a2 > 8)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\EcoSectorMgr.cpp",
-         1621,
-         "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
+  if ( (a2 < 1 || a2 > 8) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1621, "(_iPlayerId >= PLAYER_FIRST) && (_iPlayerId <= PLAYER_LAST)") == 1 )
   {
     __debugbreak();
   }
   if ( a2 < 1 || a2 > 8 )
+  {
     return 0;
+  }
   v9 = CPlayerManager::Race(a2);
-  NumberOfBuildings = CBuildingMgr::GetNumberOfBuildings(
-                        (CBuildingMgr *)g_cBuildingMgr,
-                        a2,
-                        BUILDING_RESIDENCESMALL,
-                        1u);
+  NumberOfBuildings = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a2, BUILDING_RESIDENCESMALL, 1u);
   v3 = CBuildingInfoMgr::GetBuildingInfo(v9, 40)->m_iDummyValue * NumberOfBuildings;
   v4 = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, a2, BUILDING_RESIDENCEMEDIUM, 1u);
   v5 = CBuildingInfoMgr::GetBuildingInfo(v9, 41)->m_iDummyValue * v4 + v3;
@@ -355,11 +328,15 @@ void  CEcoSectorMgr::RemoveCarrierFromStrikeSettlers(int a2, int a3) {
   _WORD *v5; // esi
   unsigned int i; // [esp+4h] [ebp-8h]
 
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = std::vector<unsigned short>::size((char *)this + 16 * a2 + 65596);
     if ( i >= result )
+    {
       break;
+    }
     if ( *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 16 * a2 + 65596, i) == a3 )
     {
       v4 = std::vector<unsigned short>::size((char *)this + 16 * a2 + 65596);
@@ -379,15 +356,16 @@ void  CEcoSectorMgr::CalculateInitialFreeBeds(void) {
   int result; // eax
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 1; ; ++i )
+  for ( i = 1;
+        ;
+        ++i )
   {
     result = CPlayerManager::LastPlayerId();
     if ( i > result )
+    {
       break;
-    *((_DWORD *)this + i + 16390) = 10
-                                  * ((CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, i, 1) + 9)
-                                   / 10)
-                                  + 10;
+    }
+    *((_DWORD *)this + i + 16390) = 10 * ((CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, i, 1) + 9) / 10) + 10;
   }
   return result;
 }
@@ -431,11 +409,15 @@ void  CEcoSectorMgr::UpdateStrikeSettlers(void) {
   int v32; // [esp+94h] [ebp-4h]
 
   v26 = this;
-  for ( i = 1; ; ++i )
+  for ( i = 1;
+        ;
+        ++i )
   {
     result = CPlayerManager::LastPlayerId();
     if ( i > result )
+    {
       break;
+    }
     v2 = (void *)CPlayerManager::PlayerInfo(i);
     v11 = CPlayerInfo::Race(v2);
     NumberOfSettlers = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, i, 1);
@@ -452,11 +434,15 @@ void  CEcoSectorMgr::UpdateStrikeSettlers(void) {
         {
           v31 = 0;
           CPlayerGameData::ResetIterator(v22);
-          for ( j = CPlayerGameData::GetNextEcoSectorId(v22); j && v29; j = CPlayerGameData::GetNextEcoSectorId(v22) )
+          for ( j = CPlayerGameData::GetNextEcoSectorId(v22);
+                j && v29;
+                j = CPlayerGameData::GetNextEcoSectorId(v22) )
           {
             EcoSectorPtr = (unsigned __int16 *)CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, j);
             if ( !EcoSectorPtr && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1560, "pEcoSector") == 1 )
+            {
               __debugbreak();
+            }
             if ( EcoSectorPtr )
             {
               v7 = CEcoSector::Owner(EcoSectorPtr);
@@ -467,13 +453,13 @@ void  CEcoSectorMgr::UpdateStrikeSettlers(void) {
                 {
                   SettlerPtr = CSettlerMgr::GetSettlerPtr(SettlerOffer);
                   if ( !SettlerPtr && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1575, "pSettler") == 1 )
+                  {
                     __debugbreak();
+                  }
                   v13 = CEntityEvent::CEntityEvent((CEntityEvent *)v9, 0x1Bu, 0, 1, 0, 0);
                   v12 = v13;
                   v32 = 1;
-                  (*(void (__thiscall **)(unsigned __int8 *, CEntityEvent *))(*(_DWORD *)SettlerPtr + 80))(
-                    SettlerPtr,
-                    v13);
+                  (*(void (__thiscall **)(unsigned __int8 *, CEntityEvent *))(*(_DWORD *)SettlerPtr + 80))(SettlerPtr, v13);
                   v32 = -1;
                   CEntityEvent::~CEntityEvent(v9);
                   v8 = IEntity::ID();
@@ -494,17 +480,25 @@ void  CEcoSectorMgr::UpdateStrikeSettlers(void) {
       v29 = -v29;
       v4 = std::vector<unsigned short>::size((char *)v26 + 16 * i + 65596);
       if ( v4 >= v29 )
+      {
         v21 = v29;
+      }
       else
+      {
         v21 = std::vector<unsigned short>::size((char *)v26 + 16 * i + 65596);
+      }
       v16 = v21;
-      for ( k = 0; k < v16 && v29; ++k )
+      for ( k = 0;
+            k < v16 && v29;
+            ++k )
       {
         v5 = std::vector<unsigned short>::size((char *)v26 + 16 * i + 65596);
         v20 = *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)v26 + 16 * i + 65596, v5 - 1);
         SettlerPtr = CSettlerMgr::GetSettlerPtr(v20);
         if ( !SettlerPtr && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1524, "pSettler") == 1 )
+        {
           __debugbreak();
+        }
         if ( SettlerPtr )
         {
           v15 = CEntityEvent::CEntityEvent((CEntityEvent *)v10, 0x1Bu, 0, 0, 0, 0);
@@ -517,9 +511,13 @@ void  CEcoSectorMgr::UpdateStrikeSettlers(void) {
           j = CWorldManager::EcoSectorId(v6);
           EcoSectorPtr = (unsigned __int16 *)CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, j);
           if ( !EcoSectorPtr && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1532, "pEcoSector!= NULL") == 1 )
+          {
             __debugbreak();
+          }
           if ( EcoSectorPtr )
+          {
             CEcoSector::SetSettlerOffer(EcoSectorPtr, 1, v20);
+          }
           std::vector<unsigned short>::pop_back((char *)v26 + 16 * i + 65596);
           --v29;
         }
@@ -535,7 +533,9 @@ void  CEcoSectorMgr::UpdateStrikeSettlers(void) {
 int  CEcoSectorMgr::NotifyCreateEcoSector(int a2) {
   
   if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
+  {
     BBSupportTracePrintF(0, "CEcoSectorMgr -NotifyCreateEcoSector owner %u", a2);
+  }
   return CEcoSectorMgr::NewEcoSector(this, a2);
 }
 
@@ -580,14 +580,14 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int a2, int a3, int a4) {
   unsigned __int16 *v38; // [esp+40h] [ebp-8h]
   unsigned __int16 *v39; // [esp+44h] [ebp-4h]
 
-  if ( !a3
-    && !a4
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 722, "! (_iOldEcoSectorId==0 && _iNewEcoSectorId == 0)") == 1 )
+  if ( !a3 && !a4 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 722, "! (_iOldEcoSectorId==0 && _iNewEcoSectorId == 0)") == 1 )
   {
     __debugbreak();
   }
   if ( a3 == a4 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 723, "_iOldEcoSectorId != _iNewEcoSectorId") == 1 )
+  {
     __debugbreak();
+  }
   if ( a3 )
   {
     v4 = CEcoSectorMgr::operator[](a3);
@@ -616,14 +616,18 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int a2, int a3, int a4) {
       v12 = CEcoSectorMgr::operator[](a3);
       CEcoSector::DecSize(v12);
       if ( v32 != v31 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 857, "iOldOwner == iNewOwner") == 1 )
+      {
         __debugbreak();
+      }
       v13 = CEcoSectorMgr::operator[](a3);
       v14 = CEcoSector::Owner(v13);
       v15 = CEcoSectorMgr::operator[](a4);
       if ( v14 == CEcoSector::Owner(v15) )
       {
         if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
+        {
           BBSupportTracePrintF(0, "CEcoSectorMgr - NotifyChangeEcoSector same owner");
+        }
         v29 = CWorldManager::PileId(a2);
         if ( v29 )
         {
@@ -633,17 +637,23 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int a2, int a3, int a4) {
         if ( *this )
         {
           if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
+          {
             BBSupportTracePrintF(0, "CEcoSectorMgr - NotifyChangeEcoSector merge sector");
+          }
         }
         else
         {
           if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
+          {
             BBSupportTracePrintF(0, "CEcoSectorMgr - NotifyChangeEcoSector split sector");
+          }
           v37 = CWorldManager::SettlerId(a2);
           if ( v37 )
           {
             if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
+            {
               BBSupportTracePrintF(0, "CEcoSectorMgr - NotifyChangeEcoSector find Settler %u split es - update es", v37);
+            }
             v38 = (unsigned __int16 *)CSettlerMgr::operator[](v37);
             if ( IEntity::OwnerId((unsigned __int8 *)v38) == v32 && !IEntity::WarriorType() )
             {
@@ -659,12 +669,7 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int a2, int a3, int a4) {
               }
               if ( CSettler::GetNextSettlerType(v38) )
               {
-                if ( !*(_WORD *)(CEcoSectorMgr::operator[](a3) + 34)
-                  && BBSupportDbgReport(
-                       2,
-                       "Logic\\EcoSectorMgr.cpp",
-                       913,
-                       "g_cESMgr[_iOldEcoSectorId].m_uOrderedCarrier > 0") == 1 )
+                if ( !*(_WORD *)(CEcoSectorMgr::operator[](a3) + 34) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 913, "g_cESMgr[_iOldEcoSectorId].m_uOrderedCarrier > 0") == 1 )
                 {
                   __debugbreak();
                 }
@@ -695,7 +700,9 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int a2, int a3, int a4) {
       if ( v33 )
       {
         if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
+        {
           BBSupportTracePrintF(0, "CEcoSectorMgr - NotifyChangeEcoSector find pile %u on newES!=0 - occupy it", v33);
+        }
         v10 = (CPile *)CPileMgr::operator[](v33);
         CPile::Occupied(v10, a4);
       }
@@ -709,7 +716,9 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int a2, int a3, int a4) {
     if ( v35 )
     {
       if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
+      {
         BBSupportTracePrintF(0, "CEcoSectorMgr - NotifyChangeEcoSector find pile %u on newES=0 - set it free", v35);
+      }
       v7 = (CPile *)CPileMgr::operator[](v35);
       CPile::SetFree(v7, a3);
     }
@@ -717,13 +726,17 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int a2, int a3, int a4) {
     if ( v36 )
     {
       if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
+      {
         BBSupportTracePrintF(0, "CEcoSectorMgr - NotifyChangeEcoSector find settler %u on newES=0 - check free", v36);
+      }
       v39 = (unsigned __int16 *)CSettlerMgr::operator[](v36);
       if ( !IEntity::WarriorType() )
       {
         v34 = (CEcoSector *)CEcoSectorMgr::operator[](a3);
         if ( IEntity::FlagBits(v39, ENTITY_FLAG_Offered) )
+        {
           CEcoSector::GetSettlerOutOfOffer(v34, v36);
+        }
         v30 = CSettler::Role(v39);
         if ( (*(int (__thiscall **)(int))(*(_DWORD *)v30 + 72))(v30) != 18 )
         {
@@ -736,7 +749,9 @@ void  CEcoSectorMgr::NotifyChangeEcoSector(int a2, int a3, int a4) {
           if ( CSettler::GetNextSettlerType(v39) )
           {
             if ( BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 818, "rSettler.GetNextSettlerType() == 0") == 1 )
+            {
               __debugbreak();
+            }
           }
         }
         IEntity::SetFlagBits(v39, (EntityFlag)0x80u);
@@ -785,7 +800,9 @@ void  CEcoSectorMgr::SeparateEconomy(int a2, int a3) {
 
   BBSupportTracePrintF(0, "Ecosector Split: %u separates from %u", a3, a2);
   if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
+  {
     BBSupportTracePrintF(0, "CEcoSectorMgr - SeparateEconomy actES %u  newES %u", a2, a3);
+  }
   v23 = (CEcoSector *)CEcoSectorMgr::operator[](a2);
   v17 = (pairNode *)CEcoSectorMgr::operator[](a3);
   UniqueId = CEcoSector::GetUniqueId(v17);
@@ -793,15 +810,16 @@ void  CEcoSectorMgr::SeparateEconomy(int a2, int a3) {
   v3 = CEcoSector::Owner(v23);
   (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 16, v3, v12, UniqueId);
   v4 = (CEcoSector *)CEcoSectorMgr::operator[](a3);
-  if ( CEcoSector::BuildingSitesWithPrio(v4)
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1104, "g_cESMgr[_iNewEcoSectorId].BuildingSitesWithPrio() == 0") == 1 )
+  if ( CEcoSector::BuildingSitesWithPrio(v4) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1104, "g_cESMgr[_iNewEcoSectorId].BuildingSitesWithPrio() == 0") == 1 )
   {
     __debugbreak();
   }
   if ( CEcoSector::BuildingSitesWithPrio(v23) )
   {
     CEcoSector::ResetBuildingSitesWithPrio(v23);
-    for ( i = 1; i < 83; ++i )
+    for ( i = 1;
+          i < 83;
+          ++i )
     {
       v5 = CEcoSector::Owner(v23);
       FirstBuildingId = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, v5, i);
@@ -818,7 +836,9 @@ void  CEcoSectorMgr::SeparateEconomy(int a2, int a3) {
               v22 = (CBuildingSiteRole *)CBuilding::Role(BuildingPtr);
               v21 = (CEcoSector *)CEcoSectorMgr::operator[](v16);
               if ( CBuildingSiteRole::HavePriority(v22) )
+              {
                 CEcoSector::ChangeBuildingSitesWithPrio(v21, 1);
+              }
               if ( CBuildingSiteRole::HaveDiggerPriority(v22) )
               {
                 v6 = CBuildingSiteRole::MaxNeededDigger(v22);
@@ -830,9 +850,13 @@ void  CEcoSectorMgr::SeparateEconomy(int a2, int a3) {
                 CEcoSector::ChangePrioBuilder(v21, 1, v7);
               }
               if ( CBuildingSiteRole::HaveBoardPriority(v22) )
+              {
                 CEcoSector::ChangePrioBoards(v21, 1);
+              }
               if ( CBuildingSiteRole::HaveStonePriority(v22) )
+              {
                 CEcoSector::ChangePrioStone(v21, 1);
+              }
             }
           }
           FirstBuildingId = IAnimatedEntity::Next(BuildingPtr);
@@ -844,22 +868,30 @@ void  CEcoSectorMgr::SeparateEconomy(int a2, int a3) {
       }
     }
   }
-  for ( j = 0; j < 10; ++j )
+  for ( j = 0;
+        j < 10;
+        ++j )
   {
     NrOfSoldierOrder = CEcoSector::GetNrOfSoldierOrder(v23, j);
     CEcoSector::TakeSoldierOrder(v17, g_vSoldierProductionMap[2 * j], NrOfSoldierOrder);
   }
-  for ( k = 0; k < std::vector<unsigned char>::size((char *)v23 + 916); ++k )
+  for ( k = 0;
+        k < std::vector<unsigned char>::size((char *)v23 + 916);
+        ++k )
   {
     NrOfWeaponOrder = CEcoSector::GetNrOfWeaponOrder(v23, k);
     v9 = (unsigned __int8 *)std::vector<unsigned char>::operator[](k);
     CEcoSector::TakeWeaponOrder(v17, *v9, NrOfWeaponOrder);
   }
-  for ( m = 0; ; ++m )
+  for ( m = 0;
+        ;
+        ++m )
   {
     result = std::vector<unsigned char>::size((char *)v23 + 880);
     if ( m >= result )
+    {
       break;
+    }
     NrOfToolOrder = CEcoSector::GetNrOfToolOrder(v23, m);
     v11 = (unsigned __int8 *)std::vector<unsigned char>::operator[](m);
     CEcoSector::TakeToolOrder(v17, *v11, NrOfToolOrder);
@@ -927,7 +959,9 @@ void  CEcoSectorMgr::ConnectEconomy(int a2, int a3) {
   v38 = (unsigned __int16 *)CEcoSectorMgr::operator[](a2);
   v37 = (CEcoSector *)CEcoSectorMgr::operator[](a3);
   if ( debug && DEBUG_FLAGS[dword_3F0EC00] )
+  {
     BBSupportTracePrintF(0, "CEcoSectorMgr - ConnectEconomy actES %u  delES %u", a2, a3);
+  }
   v3 = CEcoSector::Owner(v38);
   (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 15, v3, a2, a3);
   v4 = CEcoSector::BuildingSitesWithPrio(v37);
@@ -942,7 +976,9 @@ void  CEcoSectorMgr::ConnectEconomy(int a2, int a3) {
   CEcoSector::ChangePrioBoards((CEcoSector *)v38, v7);
   v8 = CEcoSector::PrioStone(v37);
   CEcoSector::ChangePrioStone((CEcoSector *)v38, v8);
-  for ( i = 0; i < 10; ++i )
+  for ( i = 0;
+        i < 10;
+        ++i )
   {
     NrOfSoldierOrder = CEcoSector::GetNrOfSoldierOrder((CEcoSector *)v38, i);
     NrOfWeaponOrder = CEcoSector::GetNrOfSoldierOrder(v37, i);
@@ -950,17 +986,25 @@ void  CEcoSectorMgr::ConnectEconomy(int a2, int a3) {
     if ( *v9 == NrOfWeaponOrder && NrOfWeaponOrder != NrOfSoldierOrder )
     {
       if ( i == 9 )
+      {
         v27 = 15;
+      }
       else
+      {
         v27 = i;
+      }
       CEcoSector::TakeSoldierOrder((CEcoSector *)v38, g_vSoldierProductionMap[2 * v27], *v9 - NrOfSoldierOrder);
     }
   }
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     v10 = std::vector<unsigned char>::size(v38 + 458);
     if ( i >= v10 )
+    {
       break;
+    }
     NrOfSoldierOrder = CEcoSector::GetNrOfWeaponOrder((CEcoSector *)v38, i);
     NrOfWeaponOrder = CEcoSector::GetNrOfWeaponOrder(v37, i);
     v11 = (_DWORD *)BB::Max<int>(&NrOfSoldierOrder, &NrOfWeaponOrder);
@@ -971,11 +1015,15 @@ void  CEcoSectorMgr::ConnectEconomy(int a2, int a3) {
       CEcoSector::TakeWeaponOrder((CEcoSector *)v38, *v12, v20);
     }
   }
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = (_DWORD *)std::vector<unsigned char>::size(v38 + 440);
     if ( i >= (unsigned int)result )
+    {
       break;
+    }
     NrOfSoldierOrder = CEcoSector::GetNrOfToolOrder((CEcoSector *)v38, i);
     NrOfWeaponOrder = CEcoSector::GetNrOfToolOrder(v37, i);
     v14 = (_DWORD *)BB::Max<int>(&NrOfSoldierOrder, &NrOfWeaponOrder);
@@ -986,10 +1034,14 @@ void  CEcoSectorMgr::ConnectEconomy(int a2, int a3) {
       CEcoSector::TakeToolOrder((CEcoSector *)v38, *v15, v21);
     }
   }
-  for ( j = 0; j < 0x43; ++j )
+  for ( j = 0;
+        j < 0x43;
+        ++j )
   {
     result = (_DWORD *)CEcoSector::GetSettlerOffer(v37, j);
-    for ( k = result; k; k = (_DWORD *)v25 )
+    for ( k = result;
+          k;
+          k = (_DWORD *)v25 )
     {
       v31 = (unsigned __int16 *)CSettlerMgr::operator[](k);
       v25 = IAnimatedEntity::Next(v31);
@@ -999,10 +1051,14 @@ void  CEcoSectorMgr::ConnectEconomy(int a2, int a3) {
       result = CEcoSector::SetSettlerOffer(v38, v16, v22);
     }
   }
-  for ( m = 0; m < 0x2B; ++m )
+  for ( m = 0;
+        m < 0x2B;
+        ++m )
   {
     result = (_DWORD *)CEcoSector::GetGoodOffer(v37, m);
-    for ( n = (int)result; n; n = v24 )
+    for ( n = (int)result;
+          n;
+          n = v24 )
     {
       v30 = CPileMgr::operator[](n);
       v24 = IAnimatedEntity::Next(v30);
@@ -1012,7 +1068,9 @@ void  CEcoSectorMgr::ConnectEconomy(int a2, int a3) {
       result = CEcoSector::SetGoodOffer(v38, v17, v23);
     }
   }
-  for ( ii = 0; ii < 67; ++ii )
+  for ( ii = 0;
+        ii < 67;
+        ++ii )
   {
     v38[ii + 18] += *((_WORD *)v37 + ii + 18);
     result = (_DWORD *)(ii + 1);
@@ -1030,15 +1088,14 @@ void  CEcoSectorMgr::OfferSettler(int a2, int a3, int a4) {
 
   EcoSectorPtr = (unsigned __int16 *)CEcoSectorMgr::GetEcoSectorPtr(this, a2);
   if ( EcoSectorPtr )
+  {
     return CEcoSector::SetSettlerOffer(EcoSectorPtr, a3, a4);
-  result = (_DWORD *)BBSupportDbgReportF(
-                       1,
-                       "Logic\\EcoSectorMgr.cpp",
-                       646,
-                       "CEcoSectorMgr::OfferSettler(): Invalid eco-sector id %i!",
-                       a2);
+  }
+  result = (_DWORD *)BBSupportDbgReportF(1, "Logic\\EcoSectorMgr.cpp", 646, "CEcoSectorMgr::OfferSettler(): Invalid eco-sector id %i!", a2);
   if ( result == (_DWORD *)1 )
+  {
     __debugbreak();
+  }
   return result;
 }
 
@@ -1052,15 +1109,14 @@ void  CEcoSectorMgr::OfferGood(int a2, int a3, int a4) {
 
   EcoSectorPtr = (unsigned __int16 *)CEcoSectorMgr::GetEcoSectorPtr(this, a2);
   if ( EcoSectorPtr )
+  {
     return CEcoSector::SetGoodOffer(EcoSectorPtr, a3, a4);
-  result = (_DWORD *)BBSupportDbgReportF(
-                       1,
-                       "Logic\\EcoSectorMgr.cpp",
-                       668,
-                       "CEcoSectorMgr::OfferGood(): Invalid eco-sector id %i!",
-                       a2);
+  }
+  result = (_DWORD *)BBSupportDbgReportF(1, "Logic\\EcoSectorMgr.cpp", 668, "CEcoSectorMgr::OfferGood(): Invalid eco-sector id %i!", a2);
   if ( result == (_DWORD *)1 )
+  {
     __debugbreak();
+  }
   return result;
 }
 
@@ -1073,11 +1129,15 @@ void  CEcoSectorMgr::InitTransport(void) {
   int i; // [esp+8h] [ebp-4h]
 
   sub_1445200(dword_3F0EBFC);
-  for ( i = 1; i < 0x4000; ++i )
+  for ( i = 1;
+        i < 0x4000;
+        ++i )
   {
     v2 = (CEcoSector *)*((_DWORD *)this + i + 5);
     if ( v2 )
+    {
       CEcoSector::InitTransport(v2);
+    }
   }
 }
 
@@ -1090,11 +1150,15 @@ void  CEcoSectorMgr::RecruiteSpecialist(void) {
   CEcoSector *v3; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 1; i < 0x4000; ++i )
+  for ( i = 1;
+        i < 0x4000;
+        ++i )
   {
     v3 = (CEcoSector *)*((_DWORD *)this + i + 5);
     if ( v3 )
+    {
       CEcoSector::RecruiteSpecialist(v3);
+    }
     result = i + 1;
   }
   return result;
@@ -1109,11 +1173,15 @@ void  CEcoSectorMgr::RecruiteWorker(void) {
   CEcoSector *v3; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 1; i < 0x4000; ++i )
+  for ( i = 1;
+        i < 0x4000;
+        ++i )
   {
     v3 = (CEcoSector *)*((_DWORD *)this + i + 5);
     if ( v3 )
+    {
       CEcoSector::RecruiteWorker(v3);
+    }
     result = i + 1;
   }
   return result;
@@ -1135,15 +1203,14 @@ void __cdecl CEcoSectorMgr::FillGoodAmount(class CInfoExchange * a1, bool a2, bo
   int v12; // [esp+50h] [ebp-4h]
 
   if ( !a1 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1676, "_pInfoExchange != 0") == 1 )
+  {
     __debugbreak();
-  a1 = (CGoodsStatisticInfo *)j____RTDynamicCast(
-                                (void **)&a1->__vftable,
-                                0,
-                                &CInfoExchange__RTTI_Type_Descriptor_,
-                                &CGoodsStatisticInfo__RTTI_Type_Descriptor_,
-                                0);
+  }
+  a1 = (CGoodsStatisticInfo *)j____RTDynamicCast((void **)&a1->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CGoodsStatisticInfo__RTTI_Type_Descriptor_, 0);
   if ( !a1 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1680, "pMenu != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a1 )
   {
     a1->m_bOverEcoSector = a3;
@@ -1152,18 +1219,19 @@ void __cdecl CEcoSectorMgr::FillGoodAmount(class CInfoExchange * a1, bool a2, bo
       LocalPlayerEcoSectorPtrAtCenter = CEcoSectorMgr::GetLocalPlayerEcoSectorPtrAtCenter();
       if ( LocalPlayerEcoSectorPtrAtCenter )
       {
-        for ( i = 1; i < 43; ++i )
+        for ( i = 1;
+              i < 43;
+              ++i )
         {
           *(&a1->m_iUnknown + 2 * i) = i;
-          *((_DWORD *)&a1->m_bOverEcoSector + 2 * i) = CEcoSector::GetNumberOfGoods(
-                                                         LocalPlayerEcoSectorPtrAtCenter,
-                                                         i,
-                                                         2);
+          *((_DWORD *)&a1->m_bOverEcoSector + 2 * i) = CEcoSector::GetNumberOfGoods(LocalPlayerEcoSectorPtrAtCenter, i, 2);
         }
       }
       else
       {
-        for ( j = 1; j < 43; ++j )
+        for ( j = 1;
+              j < 43;
+              ++j )
         {
           *(&a1->m_iUnknown + 2 * j) = j;
           *((_DWORD *)&a1->m_bOverEcoSector + 2 * j) = 0;
@@ -1173,7 +1241,9 @@ void __cdecl CEcoSectorMgr::FillGoodAmount(class CInfoExchange * a1, bool a2, bo
     else
     {
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-      for ( k = 1; k < GOOD_MAX; ++k )
+      for ( k = 1;
+            k < GOOD_MAX;
+            ++k )
       {
         *(&a1->m_iUnknown + 2 * k) = k;
         *((_DWORD *)&a1->m_bOverEcoSector + 2 * k) = CStatistic::GetGood((CStatistic *)&g_cStatistic, LocalPlayerId, k);
@@ -1181,11 +1251,17 @@ void __cdecl CEcoSectorMgr::FillGoodAmount(class CInfoExchange * a1, bool a2, bo
     }
     a1->m_iUnknown = 32;
     if ( a2 )
+    {
       v5 = 604;
+    }
     else
+    {
       v5 = 602;
+    }
     if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1725, "g_pEvnEngine != NULL") == 1 )
+    {
       __debugbreak();
+    }
     if ( g_pEvnEngine )
     {
       v3 = CEvn_Event::CEvn_Event(&v11, v5, 0, (unsigned int)a1, 0);
@@ -1208,7 +1284,9 @@ void __cdecl CEcoSectorMgr::FillTransportPrio(class CInfoExchange * a1, bool a2,
   int v6; // [esp+38h] [ebp-4h]
 
   if ( !a1 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1937, "_pInfoExchange != 0") == 1 )
+  {
     __debugbreak();
+  }
   CPlayerManager::GetLocalPlayerId();
   *((_DWORD *)a1 + 1) = 33;
   LocalPlayerEcoSectorPtrAtCenter = (char *)CEcoSectorMgr::GetLocalPlayerEcoSectorPtrAtCenter();
@@ -1223,13 +1301,19 @@ void __cdecl CEcoSectorMgr::FillTransportPrio(class CInfoExchange * a1, bool a2,
   }
   v3 = 604;
   if ( !a2 )
+  {
     v3 = 602;
+  }
   CEvn_Event::CEvn_Event(&v5, v3, 0, (unsigned int)a1, 0);
   v6 = 0;
   if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1963, "g_pEvnEngine != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( g_pEvnEngine )
+  {
     IEventEngine::SendAMessage(g_pEvnEngine, &v5);
+  }
   v6 = -1;
   return CEvn_Event::~CEvn_Event(&v5);
 }
@@ -1246,14 +1330,20 @@ void __cdecl CEcoSectorMgr::ChangeTransportPrio(enum PILE_TYPES a1, int a2, bool
   CPlayerManager::GetLocalPlayerId();
   result = (_DWORD *)CEcoSectorMgr::GetLocalPlayerEcoSectorPtrAtCenter();
   if ( !result )
+  {
     return result;
+  }
   CEcoSector::ChangeTransportPrio(result, a1, a2);
   CEvn_Event::CEvn_Event((CEvn_Event *)v3, 604u, 0, (unsigned int)&g_cTransportpriorityInfo, 0);
   v4 = 0;
   if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1987, "g_pEvnEngine != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( g_pEvnEngine )
+  {
     IEventEngine::SendAMessage(g_pEvnEngine, v3);
+  }
   v4 = -1;
   return CEvn_Event::~CEvn_Event(v3);
 }
@@ -1274,17 +1364,25 @@ void __cdecl CEcoSectorMgr::ChangeTransportPrio(enum PILE_TYPES a1, int a2, int 
   {
     result = (struct CEcoSector *)BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1998, "pEcoSector!=NULL");
     if ( result == (struct CEcoSector *)1 )
+    {
       __debugbreak();
+    }
   }
   if ( !v4 )
+  {
     return result;
+  }
   CEcoSector::ChangeTransportPrio(v4, a1, a2);
   CEvn_Event::CEvn_Event((CEvn_Event *)v5, 604u, 0, (unsigned int)&g_cTransportpriorityInfo, 0);
   v6 = 0;
   if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2010, "g_pEvnEngine != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( g_pEvnEngine )
+  {
     IEventEngine::SendAMessage(g_pEvnEngine, v5);
+  }
   v6 = -1;
   return (struct CEcoSector *)CEvn_Event::~CEvn_Event(v5);
 }
@@ -1301,7 +1399,9 @@ void __cdecl CEcoSectorMgr::FillGoodDistribution(class CInfoExchange * _pInfoExc
   int exceptionBlock; // [esp+3Ch] [ebp-4h]
 
   if ( !_pInfoExchange && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1870, "_pInfoExchange != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( _pInfoExchange )
   {
     ecoSectorId = -1;
@@ -1315,9 +1415,13 @@ void __cdecl CEcoSectorMgr::FillGoodDistribution(class CInfoExchange * _pInfoExc
       if ( ecoSectorId != _pInfoExchange->m_uEcoSectorId )
       {
         if ( CEcoSector::Owner(LocalPlayerEcoSectorPtrAtCenter) == LocalPlayerId )
+        {
           CEcoSector::FillGoodDistribution(LocalPlayerEcoSectorPtrAtCenter, _pInfoExchange);
+        }
         else
+        {
           _pInfoExchange->m_uSupplyBuildings = 0;
+        }
       }
     }
     else
@@ -1330,9 +1434,13 @@ void __cdecl CEcoSectorMgr::FillGoodDistribution(class CInfoExchange * _pInfoExc
       CEvn_Event::CEvn_Event(&v6, 0x25Cu, 0, (unsigned int)_pInfoExchange, 0);
       exceptionBlock = 0;
       if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1911, "g_pEvnEngine != NULL") == 1 )
+      {
         __debugbreak();
+      }
       if ( g_pEvnEngine )
+      {
         IEventEngine::SendAMessage(g_pEvnEngine, &v6);
+      }
       exceptionBlock = -1;
       CEvn_Event::~CEvn_Event(&v6);
     }
@@ -1347,26 +1455,24 @@ void __cdecl CEcoSectorMgr::ChangeGoodDistributionPrio(enum PILE_TYPES a1, enum 
   int result; // eax
   struct CEcoSector *EcoSectorPtr; // [esp+0h] [ebp-4h]
 
-  if ( (a1 <= 0 || a1 >= 43)
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1846, "_GoodType > GOOD_NO_GOOD && _GoodType<GOOD_MAX") == 1 )
+  if ( (a1 <= 0 || a1 >= 43) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1846, "_GoodType > GOOD_NO_GOOD && _GoodType<GOOD_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( (a2 <= 0 || a2 >= 83)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\EcoSectorMgr.cpp",
-         1847,
-         "_BuildingType > BUILDING_NO_BUILDING && _BuildingType<BUILDING_MAX") == 1 )
+  if ( (a2 <= 0 || a2 >= 83) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1847, "_BuildingType > BUILDING_NO_BUILDING && _BuildingType<BUILDING_MAX") == 1 )
   {
     __debugbreak();
   }
   EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, a3);
   if ( !EcoSectorPtr && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1851, "pSector!=NULL") == 1 )
+  {
     __debugbreak();
+  }
   result = 0;
   if ( EcoSectorPtr )
+  {
     return CEcoSector::ChangeBuildingSupplyPrio(EcoSectorPtr, a1, a2, a4);
+  }
   return result;
 }
 
@@ -1387,7 +1493,9 @@ int __cdecl CEcoSectorMgr::GetLocalPlayerEcoSectorIdAtCenter(void) {
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CStateGame::GetCenterWorldCoordinate((CStateGame *)g_pGame, &v6, &v7);
   if ( !(unsigned __int8)CWorldManager::InWorld(v6, v7) )
+  {
     return v5;
+  }
   CSpiralWalk::CSpiralWalk((CSpiralWalk *)v2, v6, v7, 15);
   while ( CSpiralWalk::NextXY(v2, &v6, &v7) )
   {
@@ -1397,7 +1505,9 @@ int __cdecl CEcoSectorMgr::GetLocalPlayerEcoSectorIdAtCenter(void) {
     {
       v5 = CWorldManager::EcoSectorId(v6, v7);
       if ( v5 )
+      {
         break;
+      }
     }
   }
   return v5;
@@ -1413,10 +1523,14 @@ class CEcoSector * __cdecl CEcoSectorMgr::GetLocalPlayerEcoSectorPtrAtCenter(voi
 
   LocalPlayerEcoSectorIdAtCenter = CEcoSectorMgr::GetLocalPlayerEcoSectorIdAtCenter();
   if ( LocalPlayerEcoSectorIdAtCenter <= 0 )
+  {
     return 0;
+  }
   EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, LocalPlayerEcoSectorIdAtCenter);
   if ( !EcoSectorPtr && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2126, "pEcoSector != 0") == 1 )
+  {
     __debugbreak();
+  }
   return EcoSectorPtr;
 }
 
@@ -1474,23 +1588,33 @@ void  CEcoSectorMgr::Store(class S4::CMapFile & a2) {
   operator^<int>((int)v5, v31 + 3);
   operator^<int>((int)v5, v31 + 4);
   v24 = 0;
-  for ( i = 1; i <= v31[2]; ++i )
+  for ( i = 1;
+        i <= v31[2];
+        ++i )
   {
     if ( v31[i + 5] )
+    {
       ++v24;
+    }
   }
   operator^<int>((int)v5, &v24);
-  for ( j = 1; j <= v31[2]; ++j )
+  for ( j = 1;
+        j <= v31[2];
+        ++j )
   {
     v23 = v31[j + 5];
     if ( v23 )
+    {
       (*(void (__thiscall **)(int, _DWORD *))(*(_DWORD *)v23 + 4))(v23, v5);
+    }
   }
   operator^<int>((int)v5, v31 + 16389);
   StoreArray<int>(v5, v31 + 16390, 36);
   v20 = 9;
   operator^<int>((int)v5, &v20);
-  for ( k = 0; k < 9; ++k )
+  for ( k = 0;
+        k < 9;
+        ++k )
   {
     v22 = std::vector<unsigned short>::size(&v31[4 * k + 16399]);
     operator^<int>((int)v5, &v22);
@@ -1518,7 +1642,9 @@ void  CEcoSectorMgr::Store(class S4::CMapFile & a2) {
         std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v6);
       }
       if ( !v29 )
+      {
         break;
+      }
       v15 = (__int16 *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator*(v10);
       v14 = v15;
       operator^<unsigned short>((int)v5, v15);
@@ -1596,8 +1722,12 @@ void  CEcoSectorMgr::Load(class S4::CMapFile & a2) {
     operator^<int>((struct std::istream *)v3, (int *)(a2 + 16));
     v11 = 0;
     operator^<int>((struct std::istream *)v3, &v11);
-    for ( i = 0; i < v11; ++i )
+    for ( i = 0;
+          i < v11;
+          ++i )
+    {
       CPersistence::New((struct std::istream *)v3);
+    }
     operator^<int>((struct std::istream *)v3, (int *)(a2 + 65556));
     LoadArray<int>((struct std::istream *)v3, a2 + 65560, 0x24u);
     v14 = 0;
@@ -1606,19 +1736,27 @@ void  CEcoSectorMgr::Load(class S4::CMapFile & a2) {
     {
       v7 = BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 522, "iPlayerMax <= PLAYER_MAX");
       if ( v7 == 1 )
+      {
         __debugbreak();
+      }
     }
     LOBYTE(v21) = 3;
-    for ( j = 0; j < v14; ++j )
+    for ( j = 0;
+          j < v14;
+          ++j )
     {
       if ( std::vector<unsigned short>::size(a2 + 16 * j + 65596) )
       {
         v6 = BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 529, "m_vStrikeSettlers[i].size()==0");
         if ( v6 == 1 )
+        {
           __debugbreak();
+        }
       }
       operator^<int>((struct std::istream *)v3, &v5);
-      for ( k = 0; k < v5; ++k )
+      for ( k = 0;
+            k < v5;
+            ++k )
       {
         operator^<unsigned short>(v3, v16);
         std::vector<unsigned short>::push_back((void *)(a2 + 16 * j + 65596), (__int16 *)v16);
@@ -1652,16 +1790,22 @@ int  CEcoSectorMgr::GetNearestPileIDOfferGood(int a2, int a3, int a4, int a5) {
 
   v10 = 0;
   v11 = 0xFFFF;
-  for ( i = 1; i <= *((_DWORD *)this + 2); ++i )
+  for ( i = 1;
+        i <= *((_DWORD *)this + 2);
+        ++i )
   {
     v15 = (CEcoSector *)*((_DWORD *)this + i + 5);
     if ( v15 && CEcoSector::Owner(v15) == a2 )
     {
-      for ( j = CEcoSector::GetGoodOffer(v15, a5); j; j = IAnimatedEntity::Next(PilePtr) )
+      for ( j = CEcoSector::GetGoodOffer(v15, a5);
+            j;
+            j = IAnimatedEntity::Next(PilePtr) )
       {
         PilePtr = CPileMgr::GetPilePtr(j);
         if ( !PilePtr && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2060, "pPile!=NULL") == 1 )
+        {
           __debugbreak();
+        }
         if ( PilePtr )
         {
           v5 = IEntity::WorldIdx();
@@ -1694,13 +1838,19 @@ void  CEcoSectorMgr::DBG_CheckEcoSectors(void) {
   int i; // [esp+8h] [ebp-4h]
 
   v2 = *((_DWORD *)this + 2);
-  for ( i = 1; ; ++i )
+  for ( i = 1;
+        ;
+        ++i )
   {
     result = i;
     if ( i > v2 )
+    {
       break;
+    }
     if ( *((_DWORD *)this + i + 5) )
+    {
       CEcoSector::DbgCheckEcoSector(*((CEcoSector **)this + i + 5), 0);
+    }
   }
   return result;
 }
@@ -1713,11 +1863,15 @@ int  CEcoSectorMgr::GetFirstESForPlayer(int a2) {
   int v3; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 1; i <= *((_DWORD *)this + 2); ++i )
+  for ( i = 1;
+        i <= *((_DWORD *)this + 2);
+        ++i )
   {
     v3 = *((_DWORD *)this + i + 5);
     if ( v3 && CEcoSector::Owner(v3) == a2 )
+    {
       return i;
+    }
   }
   return 0;
 }
@@ -1730,11 +1884,15 @@ int  CEcoSectorMgr::GetNextESForPlayer(int a2, int a3) {
   int v4; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = a3 + 1; i <= *((_DWORD *)this + 2); ++i )
+  for ( i = a3 + 1;
+        i <= *((_DWORD *)this + 2);
+        ++i )
   {
     v4 = *((_DWORD *)this + i + 5);
     if ( v4 && CEcoSector::Owner(v4) == a2 )
+    {
       return i;
+    }
   }
   return 0;
 }
@@ -1747,20 +1905,21 @@ int  CEcoSectorMgr::GetFreeSlot(void) {
   int v2; // [esp+4h] [ebp-Ch]
   int i; // [esp+8h] [ebp-8h]
 
-  if ( (*((int *)this + 1) < 1 || *((int *)this + 1) > 0x4000)
-    && BBSupportDbgReport(
-         2,
-         "Logic\\EcoSectorMgr.cpp",
-         248,
-         "m_sData.m_iMinFreeId >= 1 && m_sData.m_iMinFreeId <= MAX_ENTRIES") == 1 )
+  if ( (*((int *)this + 1) < 1 || *((int *)this + 1) > 0x4000) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 248, "m_sData.m_iMinFreeId >= 1 && m_sData.m_iMinFreeId <= MAX_ENTRIES") == 1 )
   {
     __debugbreak();
   }
   if ( *((int *)this + 1) <= 0 )
+  {
     v2 = 1;
+  }
   else
+  {
     v2 = *((_DWORD *)this + 1);
-  for ( i = v2; i < 0x4000; ++i )
+  }
+  for ( i = v2;
+        i < 0x4000;
+        ++i )
   {
     if ( !*((_DWORD *)this + i + 5) )
     {
@@ -1780,33 +1939,30 @@ void  CEcoSectorMgr::RegisterEcoSector(int a2, class CEcoSector * a3, bool a4) {
   CEcoSectorMgr *result; // eax
 
   if ( !a3 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 294, "_pEcoSector != NULL") == 1 )
-    __debugbreak();
-  if ( (a2 <= 0 || a2 >= 0x4000)
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 295, "_iEcoSectorId > 0 && _iEcoSectorId < MAX_ENTRIES") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + a2 + 5)
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 296, "m_sData.m_vEcoSectors[_iEcoSectorId] == NULL") == 1 )
+  if ( (a2 <= 0 || a2 >= 0x4000) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 295, "_iEcoSectorId > 0 && _iEcoSectorId < MAX_ENTRIES") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( *((_DWORD *)this + a2 + 5) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 296, "m_sData.m_vEcoSectors[_iEcoSectorId] == NULL") == 1 )
   {
     __debugbreak();
   }
   if ( a4 )
   {
-    if ( *((_DWORD *)a3 + 3)
-      && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 302, "_pEcoSector->m_iUniqueId == 0") == 1 )
+    if ( *((_DWORD *)a3 + 3) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 302, "_pEcoSector->m_iUniqueId == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( *((int *)this + 4) < 0x10000000
-      && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 303, "m_sData.m_iCurrentUniqueId >= 0x10000000") == 1 )
+    if ( *((int *)this + 4) < 0x10000000 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 303, "m_sData.m_iCurrentUniqueId >= 0x10000000") == 1 )
     {
       __debugbreak();
     }
     *((_DWORD *)a3 + 3) = (*((_DWORD *)this + 4))++;
   }
-  else if ( *((int *)a3 + 3) < 0x10000000
-         && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 309, "_pEcoSector->m_iUniqueId >= 0x10000000") == 1 )
+  else if ( *((int *)a3 + 3) < 0x10000000 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 309, "_pEcoSector->m_iUniqueId >= 0x10000000") == 1 )
   {
     __debugbreak();
   }
@@ -1814,7 +1970,9 @@ void  CEcoSectorMgr::RegisterEcoSector(int a2, class CEcoSector * a3, bool a4) {
   {
     *((_DWORD *)this + 2) = a2;
     if ( a2 > *((_DWORD *)this + 3) )
+    {
       *((_DWORD *)this + 3) = a2;
+    }
   }
   result = this;
   *((_DWORD *)this + a2 + 5) = a3;
@@ -1830,45 +1988,50 @@ void  CEcoSectorMgr::DestroyEcoSector(int a2) {
   CEcoSector *v3; // [esp+18h] [ebp-Ch]
   int v4; // [esp+1Ch] [ebp-8h]
 
-  if ( (a2 <= 0 || a2 >= 0x4000)
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 337, "(_iEcoSectorId > 0) && (_iEcoSectorId < MAX_ENTRIES)") == 1 )
+  if ( (a2 <= 0 || a2 >= 0x4000) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 337, "(_iEcoSectorId > 0) && (_iEcoSectorId < MAX_ENTRIES)") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + a2 + 5)
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 338, "m_sData.m_vEcoSectors[_iEcoSectorId] != 0") == 1 )
+  if ( !*((_DWORD *)this + a2 + 5) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 338, "m_sData.m_vEcoSectors[_iEcoSectorId] != 0") == 1 )
   {
     __debugbreak();
   }
   v3 = (CEcoSector *)*((_DWORD *)this + a2 + 5);
   CEcoSector::Owner(v3);
-  if ( CEcoSector::EcoSectorId(v3) != a2
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 344, "pEcoSector->EcoSectorId() == _iEcoSectorId") == 1 )
+  if ( CEcoSector::EcoSectorId(v3) != a2 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 344, "pEcoSector->EcoSectorId() == _iEcoSectorId") == 1 )
   {
     __debugbreak();
   }
   if ( v3 )
+  {
     delete v3;
+  }
   *((_DWORD *)this + a2 + 5) = 0;
   if ( a2 < *((_DWORD *)this + 1) )
+  {
     *((_DWORD *)this + 1) = a2;
-  if ( *((int *)this + 2) < 0
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 355, "m_sData.m_iLastUsedId >= 0") == 1 )
+  }
+  if ( *((int *)this + 2) < 0 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 355, "m_sData.m_iLastUsedId >= 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 5)
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 356, "m_sData.m_vEcoSectors[0] == NULL") == 1 )
+  if ( *((_DWORD *)this + 5) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 356, "m_sData.m_vEcoSectors[0] == NULL") == 1 )
   {
     __debugbreak();
   }
   v4 = *((_DWORD *)this + 2);
   if ( v4 < 0 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 360, "iLastUsedId >= 0") == 1 )
+  {
     __debugbreak();
+  }
   while ( *((_DWORD *)this + v4 + 5) == 0 && v4 > 0 )
+  {
     --v4;
+  }
   if ( v4 < 0 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 367, "iLastUsedId >= 0") == 1 )
+  {
     __debugbreak();
+  }
   result = this;
   *((_DWORD *)this + 2) = v4;
   return result;
@@ -1899,30 +2062,33 @@ void  CEcoSectorMgr::CalculateStoreWorldIndices(void) {
 
   memset(v18, 255, sizeof(v18));
   v2 = CWorldManager::Width(v1);
-  if ( v2 != CWorldManager::Height(v4, v3)
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2164, "g_cWorld.Width() == g_cWorld.Height()") == 1 )
+  if ( v2 != CWorldManager::Height(v4, v3) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2164, "g_cWorld.Width() == g_cWorld.Height()") == 1 )
   {
     __debugbreak();
   }
   v5 = (Squares *)CWorldManager::Width(0);
   v10 = Squares::XYToVW(v5);
-  for ( i = 0; i < v10; ++i )
+  for ( i = 0;
+        i < v10;
+        ++i )
   {
-    for ( j = 0; j < v10; ++j )
+    for ( j = 0;
+          j < v10;
+          ++j )
     {
-      for ( k = ITiling::FirstTileOfSquareVW(j, i); k > 0; k = CTile::NextSquareTile(v13) )
+      for ( k = ITiling::FirstTileOfSquareVW(j, i);
+            k > 0;
+            k = CTile::NextSquareTile(v13) )
       {
         v13 = (struct CTile *)ITiling::Tile(k);
         v17 = CTile::EcoSectorId(v13);
         if ( v17 > 0 )
         {
-          if ( v17 >= 0x4000
-            && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2182, "iEcoSectorId < MAX_ENTRIES") == 1 )
+          if ( v17 >= 0x4000 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2182, "iEcoSectorId < MAX_ENTRIES") == 1 )
           {
             __debugbreak();
           }
-          if ( v17 > this[2]
-            && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2183, "iEcoSectorId <= m_sData.m_iLastUsedId") == 1 )
+          if ( v17 > this[2] && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2183, "iEcoSectorId <= m_sData.m_iLastUsedId") == 1 )
           {
             __debugbreak();
           }
@@ -1930,12 +2096,7 @@ void  CEcoSectorMgr::CalculateStoreWorldIndices(void) {
           {
             v6 = CTile::CenterXY(v13);
             v18[v17] = CWorldManager::Index(v6);
-            if ( ITiling::EcoSectorId(v18[v17]) != v17
-              && BBSupportDbgReport(
-                   2,
-                   "Logic\\EcoSectorMgr.cpp",
-                   2189,
-                   "g_pTiling->EcoSectorId(iStoreWorldIndices[iEcoSectorId]) == iEcoSectorId") == 1 )
+            if ( ITiling::EcoSectorId(v18[v17]) != v17 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2189, "g_pTiling->EcoSectorId(iStoreWorldIndices[iEcoSectorId]) == iEcoSectorId") == 1 )
             {
               __debugbreak();
             }
@@ -1945,23 +2106,25 @@ void  CEcoSectorMgr::CalculateStoreWorldIndices(void) {
     }
   }
   v8 = this[2];
-  for ( m = 1; ; ++m )
+  for ( m = 1;
+        ;
+        ++m )
   {
     result = m;
     if ( m > v8 )
+    {
       break;
+    }
     v9 = (CEcoSector *)this[m + 5];
     if ( v9 )
     {
-      if ( (int)v18[m] < 0
-        && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2206, "iStoreWorldIndices[iEcoSectorId] >= 0") == 1 )
+      if ( (int)v18[m] < 0 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2206, "iStoreWorldIndices[iEcoSectorId] >= 0") == 1 )
       {
         __debugbreak();
       }
       CEcoSector::SetWorldIdxForStore(v9, v18[m]);
     }
-    else if ( (int)v18[m] >= 0
-           && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2212, "iStoreWorldIndices[iEcoSectorId] < 0") == 1 )
+    else if ( (int)v18[m] >= 0 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 2212, "iStoreWorldIndices[iEcoSectorId] < 0") == 1 )
     {
       __debugbreak();
     }
@@ -1981,20 +2144,24 @@ int  CEcoSectorMgr::NewEcoSector(int a2) {
 
   FreeSlot = CEcoSectorMgr::GetFreeSlot(this);
   BBSupportTracePrintF(0, "CEcoSectorMgr::NewEcoSector(): owner %i.", a2);
-  if ( *((_DWORD *)this + FreeSlot + 5)
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1029, "m_sData.m_vEcoSectors[iEcoSectorId] == 0") == 1 )
+  if ( *((_DWORD *)this + FreeSlot + 5) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1029, "m_sData.m_vEcoSectors[iEcoSectorId] == 0") == 1 )
   {
     __debugbreak();
   }
   C = (CEcoSector *)operator new(0x3C4u);
   if ( C )
+  {
     v4 = CEcoSector::CEcoSector(C, a2, FreeSlot);
+  }
   else
+  {
     v4 = 0;
+  }
   if ( !v4 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1033, "pNewEcoSector != 0") == 1 )
+  {
     __debugbreak();
-  if ( *((pairNode **)this + FreeSlot + 5) != v4
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1034, "m_sData.m_vEcoSectors[iEcoSectorId] == pNewEcoSector") == 1 )
+  }
+  if ( *((pairNode **)this + FreeSlot + 5) != v4 && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1034, "m_sData.m_vEcoSectors[iEcoSectorId] == pNewEcoSector") == 1 )
   {
     __debugbreak();
   }
@@ -2017,44 +2184,42 @@ void  CEcoSectorMgr::DeleteEcoSector(int a2) {
   pairNode *v7; // [esp+Ch] [ebp-4h]
 
   BBSupportTracePrintF(0, "CEcoSectorMgr::DeleteEcoSector(): eco-sector %i", a2);
-  if ( (a2 <= 0 || a2 >= 0x4000)
-    && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1053, "(_iEcoSectorId > 0) && (_iEcoSectorId < MAX_ENTRIES)") == 1 )
+  if ( (a2 <= 0 || a2 >= 0x4000) && BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1053, "(_iEcoSectorId > 0) && (_iEcoSectorId < MAX_ENTRIES)") == 1 )
   {
     __debugbreak();
   }
   result = this;
   if ( !*((_DWORD *)this + a2 + 5) )
   {
-    result = (CEcoSectorMgr *)BBSupportDbgReport(
-                                2,
-                                "Logic\\EcoSectorMgr.cpp",
-                                1054,
-                                "m_sData.m_vEcoSectors[_iEcoSectorId] != 0");
+    result = (CEcoSectorMgr *)BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1054, "m_sData.m_vEcoSectors[_iEcoSectorId] != 0");
     if ( result == (CEcoSectorMgr *)1 )
+    {
       __debugbreak();
+    }
   }
   if ( a2 <= 0 || a2 >= 0x4000 )
+  {
     return result;
+  }
   result = this;
   v7 = (pairNode *)*((_DWORD *)this + a2 + 5);
   if ( !v7 )
+  {
     return result;
+  }
   if ( CEcoSector::Size(v7) )
   {
     if ( BBSupportDbgReport(2, "Logic\\EcoSectorMgr.cpp", 1065, "pEcoSector->Size() == 0") == 1 )
+    {
       __debugbreak();
+    }
   }
   v5 = CEcoSector::Owner(v7);
   UniqueId = CEcoSector::GetUniqueId(v7);
   CEcoSectorMgr::DestroyEcoSector(this, a2);
   v3 = CPlayerManager::PlayerGameData(v5);
   CPlayerGameData::DeleteEcoSectorId(v3, a2);
-  return (CEcoSectorMgr *)(*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(
-                            g_pAI,
-                            14,
-                            v5,
-                            a2,
-                            UniqueId);
+  return (CEcoSectorMgr *)(*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 14, v5, a2, UniqueId);
 }
 
 

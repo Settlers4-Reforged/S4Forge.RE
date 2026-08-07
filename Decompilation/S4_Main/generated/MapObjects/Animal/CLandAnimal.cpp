@@ -10,9 +10,13 @@ class CPersistence * __cdecl CLandAnimal::New(std::istream & a1) {
 
   v3 = (CLandAnimal *)CLandAnimal::operator new(0xB0u);
   if ( v3 )
+  {
     return CLandAnimal::CLandAnimal(v3, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -38,9 +42,13 @@ void  CLandAnimal::Init(struct SAnimalData * a2) {
   v15 = this;
   *((_DWORD *)this + 29) = a2;
   if ( *(_BYTE *)(*((_DWORD *)v15 + 29) + 4) )
+  {
     IEntity::SetFlagBits(v15, (EntityFlag)((char *)&loc_20200FC + 4));
+  }
   else
+  {
     IEntity::SetFlagBits(v15, (EntityFlag)&byte_20000CA[54]);
+  }
   *((_BYTE *)v15 + 70) = 0;
   v2 = CWalking::Create(0, 0);
   std::auto_ptr<CWalking>::auto_ptr<CWalking>(v2);
@@ -203,8 +211,7 @@ void  CLandAnimal::Store(std::ostream & a2) {
     v9 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=(v6);
     LOBYTE(v11) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v3);
-    if ( !v9
-      || (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==((std::_Iterator_base12 *)(v8 + 22)) )
+    if ( !v9 || (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==((std::_Iterator_base12 *)(v8 + 22)) )
     {
       break;
     }
@@ -367,9 +374,13 @@ void  CLandAnimal::LogicUpdateSpec(void) {
     if ( *(_DWORD *)&this->unk_64 == 3 || (int)this->unk_7c > 1 )
     {
       if ( CLandAnimal::CheckForEnemies(this) )
+      {
         *(_DWORD *)&this->unk_64 = 3;
+      }
       else
+      {
         *(_DWORD *)&this->unk_64 = 2;
+      }
       this->unk_7c = 0;
     }
     if ( *(_DWORD *)&this->unk_64 == 3 )
@@ -389,7 +400,9 @@ void  CLandAnimal::LogicUpdateSpec(void) {
   {
     v17 = CLandAnimal::GetMoveDir(this);
     if ( v17 >= 0 )
+    {
       goto LABEL_27;
+    }
   }
   v12 = CStateGame::Rand(g_pGame);
   if ( v12 >= CRandom16::PercentValue(0x1Eu) )
@@ -481,7 +494,9 @@ int  CLandAnimal::GetMoveDir(void) {
   CPossibleDirs::CPossibleDirs((CPossibleDirs *)v38);
   v3 = IEntity::PackedXY(this);
   v14 = CWorldManager::Index(v3);
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v22 = v14 + CWorldManager::NeighborRelIndex(i);
     if ( CWorldManager::FlagBits(v22, 1u) )
@@ -501,10 +516,14 @@ int  CLandAnimal::GetMoveDir(void) {
   if ( *((_DWORD *)this + 25) == 3 )
   {
     if ( *((int *)this + 37) < 0 || *((_DWORD *)this + 42) == -1 )
+    {
       *((_DWORD *)this + 42) = CLandAnimal::GetFleeDir(this);
+    }
     TerritoryDir = *((_DWORD *)this + 42);
     if ( (int)++*((_DWORD *)this + 37) > 4 )
+    {
       *((_DWORD *)this + 37) = -1;
+    }
   }
   else if ( *((int *)this + 36) > 8 )
   {
@@ -516,14 +535,18 @@ int  CLandAnimal::GetMoveDir(void) {
     {
       TerritoryDir = CLandAnimal::GetTerritoryDir(this);
       if ( TerritoryDir < 0 )
+      {
         TerritoryDir = CLandAnimal::GetDirection(this, *((_DWORD *)this + 41));
+      }
     }
     *((_DWORD *)this + 36) = 0;
   }
   v18 = IEntity::X(this);
   v17 = IEntity::Y(this);
   if ( TerritoryDir == -1 )
+  {
     TerritoryDir = *((char *)this + 68);
+  }
   v19 = (Y16X16 *)Grid::TurnLeft((Grid *)TerritoryDir);
   v21 = (Y16X16 *)Grid::TurnRight((Grid *)TerritoryDir);
   v20 = CStateGame::Rand(g_pGame);
@@ -531,20 +554,22 @@ int  CLandAnimal::GetMoveDir(void) {
   v25 = Y16X16::NeighborModifier(v19) + v4;
   v31 = CWorldManager::Index(v25);
   if ( CLandAnimal::CheckTile(this, v31) && !CLandAnimal::IsSettlerAroundTile(this, v25) )
+  {
     CPossibleDirs::PushDir((CPossibleDirs *)v38, v19);
+  }
   v5 = IEntity::PackedXY(this);
   v26 = Y16X16::NeighborModifier((Y16X16 *)TerritoryDir) + v5;
   v32 = CWorldManager::Index(v26);
-  if ( CLandAnimal::CheckTile(this, v32)
-    && !CLandAnimal::IsSettlerAroundTile(this, v26)
-    && v20 < CRandom16::PercentValue(0x46u) )
+  if ( CLandAnimal::CheckTile(this, v32) && !CLandAnimal::IsSettlerAroundTile(this, v26) && v20 < CRandom16::PercentValue(0x46u) )
   {
     v6 = IEntity::PackedXY(this);
     v7 = Y16X16::NeighborModifier((Y16X16 *)TerritoryDir);
     if ( !CLandAnimal::IsSettlerAroundTile(this, v7 + v6) )
     {
       if ( !v38[TerritoryDir + 8] )
+      {
         return TerritoryDir;
+      }
       CPossibleDirs::PushDir((CPossibleDirs *)v38, TerritoryDir);
     }
   }
@@ -552,42 +577,56 @@ int  CLandAnimal::GetMoveDir(void) {
   v27 = Y16X16::NeighborModifier(v21) + v9;
   v33 = CWorldManager::Index(v27);
   if ( CLandAnimal::CheckTile(this, v33) && !CLandAnimal::IsSettlerAroundTile(this, v27) )
+  {
     CPossibleDirs::PushDir((CPossibleDirs *)v38, v21);
+  }
   if ( !v38[0] )
   {
     v24 = v21;
-    for ( j = 0; j < 3; ++j )
+    for ( j = 0;
+          j < 3;
+          ++j )
     {
       v24 = (Grid *)Grid::TurnRight(v24);
       v34 = CWorldManager::Index(g_sNeighborPoints[2 * (_DWORD)v24] + v18, MEMORY[0x37D8C0C][2 * (_DWORD)v24] + v17);
       if ( CLandAnimal::CheckTile(this, v34) )
+      {
         CPossibleDirs::PushDir((CPossibleDirs *)v38, v24);
+      }
     }
   }
   if ( !v38[0] )
   {
-    for ( k = 0; k < 6; ++k )
+    for ( k = 0;
+          k < 6;
+          ++k )
     {
       v35 = CWorldManager::Index(g_sNeighborPoints[2 * k] + v18, MEMORY[0x37D8C0C][2 * k] + v17);
       if ( CLandAnimal::IsTileFree(this, v35) )
       {
         v10 = (CWalking *)std::auto_ptr<CWalking>::operator->(v35);
         if ( CWalking::IsFree(v10, v13) )
+        {
           CPossibleDirs::PushDir((CPossibleDirs *)v38, k);
+        }
       }
     }
   }
   if ( v38[0] <= 0 )
+  {
     return -1;
-  v23 = (Y16X16 *)(v20 < CRandom16::PercentValue(0x46u) && CPossibleDirs::Search((CPossibleDirs *)v38, TerritoryDir)
-                 ? TerritoryDir
-                 : v38[v20 % v38[0] + 2]);
+  }
+  v23 = (Y16X16 *)(v20 < CRandom16::PercentValue(0x46u) && CPossibleDirs::Search((CPossibleDirs *)v38, TerritoryDir) ? TerritoryDir : v38[v20 % v38[0] + 2]);
   v11 = IEntity::PackedXY(this);
   v12 = Y16X16::NeighborModifier(v23);
   if ( CLandAnimal::IsSettlerAroundTile(this, v12 + v11) )
+  {
     return -1;
+  }
   else
+  {
     return (int)v23;
+  }
 }
 
 
@@ -617,7 +656,9 @@ int  CLandAnimal::GetFleeDir(void) {
   v12 = (Y16X16 *)((char *)v15 + ((int)v15 - 1 < 0 ? 6 : 0) - 1);
   v5 = (Y16X16 *)((char *)v15 + 1);
   if ( (int)v15 + 1 >= 6 )
+  {
     v5 = (Y16X16 *)((char *)v15 - 5);
+  }
   v1 = IEntity::PackedXY(this);
   v9 = Y16X16::NeighborModifier(v15) + v1;
   v6 = CWorldManager::Index(v9);
@@ -630,16 +671,24 @@ int  CLandAnimal::GetFleeDir(void) {
   v10 = Y16X16::NeighborModifier(v12) + v2;
   v7 = CWorldManager::Index(v10);
   if ( CLandAnimal::IsTileFree(this, v7) )
+  {
     v17[v16++] = v12;
+  }
   v3 = IEntity::PackedXY(this);
   v11 = Y16X16::NeighborModifier(v5) + v3;
   v8 = CWorldManager::Index(v11);
   if ( CLandAnimal::IsTileFree(this, v8) )
+  {
     v17[v16++] = v5;
+  }
   if ( v16 )
+  {
     return (Y16X16 *)v17[CStateGame::Rand(g_pGame) % v16];
+  }
   else
+  {
     return v15;
+  }
 }
 
 
@@ -660,15 +709,23 @@ int  CLandAnimal::GetTerritoryDir(void) {
   v2 = (Squares *)IEntity::Y(this);
   v5 = Squares::XYToVW(v2);
   v7 = 0;
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     if ( CLandAnimal::IsValidSquare(this, g_sNeighborPoints[2 * i] + v4, MEMORY[0x37D8C0C][2 * i] + v5) )
+    {
       v9[++v7] = i;
+    }
   }
   if ( v7 <= 0 )
+  {
     return -1;
+  }
   else
+  {
     return v9[CStateGame::Rand(g_pGame) % (unsigned int)v7 + 1];
+  }
 }
 
 
@@ -686,21 +743,37 @@ int  CLandAnimal::GetDirection(int a2) {
   v3 = IEntity::Y(this);
   Y16X16::UnpackXYFast(a2, &v8, &v7);
   if ( v8 >= v4 )
+  {
     v8 = v8 > v4;
+  }
   else
+  {
     v8 = -1;
+  }
   if ( v7 >= v3 )
+  {
     v7 = v7 > v3;
+  }
   else
+  {
     v7 = -1;
+  }
   if ( v8 == -1 && v7 == 1 )
+  {
     return 3;
+  }
   if ( v8 == 1 && v7 == -1 )
+  {
     return 0;
-  for ( i = 0; i < 6; ++i )
+  }
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     if ( v8 == g_sNeighborPoints[2 * i] && v7 == MEMORY[0x37D8C0C][2 * i] )
+    {
       return i;
+    }
   }
   return -1;
 }
@@ -723,11 +796,15 @@ bool  CLandAnimal::CheckForEnemies(void) {
   }
   else
   {
-    for ( i = CPlayerManager::LastPlayerId(); i >= 1; --i )
+    for ( i = CPlayerManager::LastPlayerId();
+          i >= 1;
+          --i )
     {
       v6 *= 2;
       if ( CPlayerManager::Race(i) != *(_DWORD *)(*((_DWORD *)this + 29) + 20) )
+      {
         ++v6;
+      }
     }
   }
   v4 = *(_DWORD *)(*((_DWORD *)this + 29) + 24);
@@ -769,14 +846,16 @@ bool  CLandAnimal::IsValidSquare(int a2, int a3) {
     v7 = CWarMap::FirstEntityIdVW(2, a2, a3) > 0;
     return CAIResourceData::GroundInfo1(v5, 0) == 0 && v7;
   }
-  else if ( *(int *)(*((_DWORD *)this + 29) + 8) <= 0
-         || (v4 = CAIResourceData::ResourceAmount1(v5, 7), v4 >= *(_DWORD *)(*((_DWORD *)this + 29) + 8))
-         && v4 < *(_DWORD *)(*((_DWORD *)this + 29) + 12) )
+  else if ( *(int *)(*((_DWORD *)this + 29) + 8) <= 0 || (v4 = CAIResourceData::ResourceAmount1(v5, 7), v4 >= *(_DWORD *)(*((_DWORD *)this + 29) + 8)) && v4 < *(_DWORD *)(*((_DWORD *)this + 29) + 12) )
   {
     if ( **((_DWORD **)this + 29) == 8 )
+    {
       return CAIResourceData::GroundInfo1(v5, 0) > 120;
+    }
     else
+    {
       return CAIResourceData::GroundInfo1(v5, 1) > 120;
+    }
   }
   else
   {
@@ -797,9 +876,7 @@ bool  CLandAnimal::CheckTile(int a2) {
 // Decompiled from bool __thiscall CLandAnimal::IsTileFree(CLandAnimal *this, int a2)
 bool  CLandAnimal::IsTileFree(int a2) {
   
-  return !(unsigned __int8)CWorldManager::IsBlockedLand(a2)
-      && CWorldManager::ObjectId(a2) <= 0
-      && CWorldManager::MapObjectId(a2) <= 0;
+  return !(unsigned __int8)CWorldManager::IsBlockedLand(a2) && CWorldManager::ObjectId(a2) <= 0 && CWorldManager::MapObjectId(a2) <= 0;
 }
 
 
@@ -841,14 +918,18 @@ bool  CLandAnimal::IsSettlerAroundTile(int a2) {
   int v5; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v5 = a2 + Y16X16::NeighborModifier((Y16X16 *)i);
     if ( v5 != IEntity::PackedXY(this) )
     {
       v3 = CWorldManager::Index(v5);
       if ( CWorldManager::MapObjectId(v3) > 0 )
+      {
         return 1;
+      }
     }
   }
   return 0;

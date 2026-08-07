@@ -21,23 +21,37 @@ void __cdecl CTiling::BlockBorder(void) {
   v2 = CTilingWorld::WorldWidthHeight();
   v1 = CTilingWorld::WorldIndex(0, 1);
   v3 = 0;
-  for ( i = 0; i < v2; ++i )
+  for ( i = 0;
+        i < v2;
+        ++i )
+  {
     CTilingWorld::WorldSetBlockedLandFlag(v3++);
+  }
   v4 = CTilingWorld::WorldIndex(0, v2 - 1);
-  for ( j = 0; j < v2; ++j )
+  for ( j = 0;
+        j < v2;
+        ++j )
+  {
     CTilingWorld::WorldSetBlockedLandFlag(v4++);
+  }
   v5 = 0;
-  for ( k = 0; k < v2; ++k )
+  for ( k = 0;
+        k < v2;
+        ++k )
   {
     CTilingWorld::WorldSetBlockedLandFlag(v5);
     v5 += v1;
   }
   v6 = CTilingWorld::WorldIndex(v2 - 1, 0);
-  for ( m = 0; ; ++m )
+  for ( m = 0;
+        ;
+        ++m )
   {
     result = m;
     if ( m >= v2 )
+    {
       break;
+    }
     CTilingWorld::WorldSetBlockedLandFlag(v6);
     v6 += v1;
   }
@@ -57,7 +71,9 @@ void __cdecl CTiling::PrepareReCalculate(void) {
   int i; // [esp+10h] [ebp-4h]
 
   v5 = CTilingWorld::WorldWidthHeight();
-  for ( i = 0; i < v5 * v5; ++i )
+  for ( i = 0;
+        i < v5 * v5;
+        ++i )
   {
     v4 = ITiling::NormalTileId(i);
     v0 = (CTile *)ITiling::Tile(v4);
@@ -88,7 +104,9 @@ void __cdecl CTiling::CalcSquareComponents(void) {
   int v11; // [esp+48h] [ebp-4h]
 
   v8 = -1;
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
   {
     v5 = dword_42F7C68[CSquare::Index(i, 0)];
     if ( v5 >= 0 )
@@ -118,16 +136,24 @@ void __cdecl CTiling::CalcSquareComponents(void) {
     }
   }
   if ( v8 >= 0 )
+  {
     CSquare::AddComponet((CSquare *)&dword_42F7C50, v8);
-  for ( j = 1; j < 16; ++j )
+  }
+  for ( j = 1;
+        j < 16;
+        ++j )
   {
     v4 = dword_42F7C68[CSquare::Index(0, j)];
     if ( v4 >= 0 )
     {
       if ( v4 == dword_42F7C68[CSquare::Index(0, j - 1)] )
+      {
         v11 = dword_42F8068[CSquare::Index(0, j - 1)];
+      }
       else
+      {
         v11 = CSquare::NewArea((CSquare *)&dword_42F7C50, v4);
+      }
       dword_42F8068[CSquare::Index(0, j)] = v11;
     }
     else
@@ -135,7 +161,9 @@ void __cdecl CTiling::CalcSquareComponents(void) {
       v11 = -1;
       dword_42F8068[CSquare::Index(0, j)] = -1;
     }
-    for ( k = 1; k < 16; ++k )
+    for ( k = 1;
+          k < 16;
+          ++k )
     {
       v7 = dword_42F7C68[CSquare::Index(k, j)];
       if ( v7 >= 0 )
@@ -185,7 +213,9 @@ void __cdecl CTiling::CalcSquareComponents(void) {
       }
     }
     if ( v11 >= 0 )
+    {
       CSquare::AddComponentIfNecessary((CSquare *)&dword_42F7C50, v11);
+    }
   }
 }
 
@@ -221,9 +251,13 @@ void __cdecl CTiling::CalcSquareTiles(enum T_TILING_TYPE a1) {
   BB::ZeroMemPtr(&unk_4300A6C, 0x400u);
   v1 = CTilingWorld::WorldIndex(dword_42F7C50, dword_42F7C54);
   CTileIdRef::CTileIdRef(&v16, a1, v1);
-  for ( i = 0; i < 16; ++i )
+  for ( i = 0;
+        i < 16;
+        ++i )
   {
-    for ( j = 0; j < 16; ++j )
+    for ( j = 0;
+          j < 16;
+          ++j )
     {
       v12 = dword_42F8068[CSquare::Index(j, i)];
       if ( v12 >= 0 )
@@ -237,11 +271,15 @@ void __cdecl CTiling::CalcSquareTiles(enum T_TILING_TYPE a1) {
     v2 = CTilingWorld::WorldIndex(-16, 1);
     CTileIdRef::operator+=(&v16, v2);
   }
-  for ( k = 0; ; ++k )
+  for ( k = 0;
+        ;
+        ++k )
   {
     result = k;
     if ( k >= dword_42F7C64 )
+    {
       break;
+    }
     if ( !(unsigned __int8)TStaticArray<int,63>::Empty((char *)&unk_42F8868 + 256 * k) )
     {
       v13 = CCenter::Count((CCenter *)((char *)&unk_4300A6C + 8 * k));
@@ -318,31 +356,38 @@ int __cdecl CTiling::SearchForNearestTileElement(int a1, int a2, enum T_TILING_T
   int j; // [esp+28h] [ebp-8h]
   int i; // [esp+2Ch] [ebp-4h]
 
-  if ( !CTilingWorld::WorldInWorldPackedXY(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2016, "WorldInWorldPackedXY(_iStartPackedXY)") == 1 )
+  if ( !CTilingWorld::WorldInWorldPackedXY(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2016, "WorldInWorldPackedXY(_iStartPackedXY)") == 1 )
   {
     __debugbreak();
   }
   CTileIdRef::CTileIdRef(v11, a3, 0);
   v6 = CTilingWorld::WorldIndex(a1);
   if ( CTileIdRef::TileId((CTileIdRef *)v11, v6) == a2 )
+  {
     return a1;
+  }
   v13 = Y16X16::UnpackXFast(a1);
   v12 = Y16X16::UnpackYFast(a1);
   if ( CTilingWorld::WorldInInnerWorld16(v13, v12) )
   {
-    for ( i = 1; i < SurroundingHexPointsCount(15); ++i )
+    for ( i = 1;
+          i < SurroundingHexPointsCount(15);
+          ++i )
     {
       v7 = v13 + g_sSurroundingHexPoints8[4 * i];
       v8 = v12 + MEMORY[0x37D8D91][4 * i];
       v5 = CTilingWorld::WorldIndex(v7, v8);
       if ( CTileIdRef::TileId((CTileIdRef *)v11, v5) == a2 )
+      {
         return Y16X16::PackXYFast(v7, v8);
+      }
     }
   }
   else
   {
-    for ( j = 1; j < SurroundingHexPointsCount(15); ++j )
+    for ( j = 1;
+          j < SurroundingHexPointsCount(15);
+          ++j )
     {
       v9 = v13 + g_sSurroundingHexPoints8[4 * j];
       v10 = v12 + MEMORY[0x37D8D91][4 * j];
@@ -350,14 +395,20 @@ int __cdecl CTiling::SearchForNearestTileElement(int a1, int a2, enum T_TILING_T
       {
         v4 = CTilingWorld::WorldIndex(v9, v10);
         if ( CTileIdRef::TileId((CTileIdRef *)v11, v4) == a2 )
+        {
           return Y16X16::PackXYFast(v9, v10);
+        }
       }
     }
   }
   if ( !"CTiling::SearchForNearestTileElement failed!" )
+  {
     return a1;
+  }
   if ( BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2061, "!\"CTiling::SearchForNearestTileElement failed!\"") == 1 )
+  {
     __debugbreak();
+  }
   return a1;
 }
 
@@ -383,9 +434,13 @@ void __cdecl CTiling::CalcAllTiles(void) {
   memset(CTiling::m_iNumberOfOwnedElements, 0, sizeof(CTiling::m_iNumberOfOwnedElements));
   memset(m_uSquareNumberOfWaterElementsDiv2, 0, sizeof(m_uSquareNumberOfWaterElementsDiv2));
   v8 = CTilingWorld::WorldWidthHeight();
-  for ( i = 0; (int)i < v8; i = (Squares *)((char *)i + 16) )
+  for ( i = 0;
+        (int)i < v8;
+        i = (Squares *)((char *)i + 16) )
   {
-    for ( j = 0; (int)j < v8; j = (Squares *)((char *)j + 16) )
+    for ( j = 0;
+          (int)j < v8;
+          j = (Squares *)((char *)j + 16) )
     {
       CTiling::CalcSquarePrepareNormal(j, i);
       CTiling::CalcSquareComponents();
@@ -404,7 +459,9 @@ void __cdecl CTiling::CalcAllTiles(void) {
     }
   }
   CTilesEx::DeactivateTilesPushBackMode(i);
-  for ( k = 0; k < v8 * v8; ++k )
+  for ( k = 0;
+        k < v8 * v8;
+        ++k )
   {
     v4 = ITiling::NormalTileId(k);
     v5 = CTiles::TileEx(v4);
@@ -453,20 +510,25 @@ void __cdecl CTiling::CalcAllTileLinks(void) {
     v7 = 0;
   }
   v6 = CTilingWorld::WorldWidthHeight() - 1;
-  for ( i = 0; i < v6; ++i )
+  for ( i = 0;
+        i < v6;
+        ++i )
   {
     v18 = CTilingWorld::WorldIndex(0, i);
-    for ( j = 0; j < v6; ++j )
+    for ( j = 0;
+          j < v6;
+          ++j )
     {
       v17 = ITiling::NormalTileId(v18);
       if ( CTiles::IsValidRealTile(v17) )
       {
-        for ( k = 0; k < 3; ++k )
+        for ( k = 0;
+              k < 3;
+              ++k )
         {
           v0 = CTilingWorld::WorldNeighborRelIndex(k);
           v16 = ITiling::NormalTileId(v18 + v0);
-          if ( ((v16 != v17) & CTiles::IsValidRealTile(v16)) != 0
-            && !CIntLinkList::SearchBackwards((CIntLinkList *)&v7[256 * v17], v16) )
+          if ( ((v16 != v17) & CTiles::IsValidRealTile(v16)) != 0 && !CIntLinkList::SearchBackwards((CIntLinkList *)&v7[256 * v17], v16) )
           {
             CIntLinkList::PushBack((CIntLinkList *)&v7[256 * v17], v16);
             CIntLinkList::PushBack((CIntLinkList *)&v7[256 * v16], v17);
@@ -476,12 +538,13 @@ void __cdecl CTiling::CalcAllTileLinks(void) {
       v15 = ITiling::CatapultTileId(v18);
       if ( CTiles::IsValidRealTile(v15) )
       {
-        for ( m = 0; m < 3; ++m )
+        for ( m = 0;
+              m < 3;
+              ++m )
         {
           v1 = CTilingWorld::WorldNeighborRelIndex(m);
           v14 = ITiling::CatapultTileId(v18 + v1);
-          if ( ((v14 != v15) & CTiles::IsValidRealTile(v14)) != 0
-            && !CIntLinkList::SearchBackwards((CIntLinkList *)&v7[256 * v15], v14) )
+          if ( ((v14 != v15) & CTiles::IsValidRealTile(v14)) != 0 && !CIntLinkList::SearchBackwards((CIntLinkList *)&v7[256 * v15], v14) )
           {
             CIntLinkList::PushBack((CIntLinkList *)&v7[256 * v15], v14);
             CIntLinkList::PushBack((CIntLinkList *)&v7[256 * v14], v15);
@@ -493,7 +556,9 @@ void __cdecl CTiling::CalcAllTileLinks(void) {
   }
   CLinks::InitLinks();
   UsedTileId = CTilesEx::LastUsedTileId();
-  for ( n = 10; n <= UsedTileId; ++n )
+  for ( n = 10;
+        n <= UsedTileId;
+        ++n )
   {
     CIntLinkList::SetOwnerTileId((CIntLinkList *)&v7[256 * n], n);
     v4 = CLinks::PushLinksBack((const struct CIntLinkList *)&v7[256 * n]);
@@ -531,7 +596,9 @@ void __cdecl CTiling::CalcSectorIds(bool a1) {
   CSectors::Init((CSectors *)&CTiling::m_cSectors);
   CTiling::NotifyInitEcoSectors(a1);
   UsedTileId = CTilesEx::LastUsedTileId();
-  for ( i = 10; i <= UsedTileId; ++i )
+  for ( i = 10;
+        i <= UsedTileId;
+        ++i )
   {
     v1 = CTiles::TileEx(i);
     v14 = -!CTile::Used((CTile *)v1);
@@ -540,7 +607,9 @@ void __cdecl CTiling::CalcSectorIds(bool a1) {
     v3 = CTiles::TileEx(i);
     CTile::SetEcoSectorId((CTile *)v3, v14);
   }
-  for ( j = 10; j <= UsedTileId; ++j )
+  for ( j = 10;
+        j <= UsedTileId;
+        ++j )
   {
     v4 = CTiles::TileEx(j);
     v13 = ((unsigned int)&MEMORY[0x4000000] & CTile::Type(v4, v9)) == 0;
@@ -549,13 +618,19 @@ void __cdecl CTiling::CalcSectorIds(bool a1) {
     {
       v6 = CTiles::TileEx(j);
       if ( (CTile::Type(v6, v9) & 0x8000000) != 0 )
+      {
         CatapultSector = CTiling::NotifyCreateCatapultSector();
+      }
       else
+      {
         CatapultSector = CTiling::NotifyCreateSector();
+      }
       CTiling::WalkTilesChangeSector(j, CatapultSector);
     }
   }
-  for ( k = 10; k <= UsedTileId; ++k )
+  for ( k = 10;
+        k <= UsedTileId;
+        ++k )
   {
     v7 = CTiles::TileEx(k);
     v11 = CTile::OwnerId((CTile *)v7);
@@ -584,7 +659,9 @@ void __cdecl CTiling::CalcNotifyAll(bool a1) {
 
   v7 = CTilingWorld::WorldWidthHeight();
   result = v7 * v7;
-  for ( i = 0; i < v7 * v7; ++i )
+  for ( i = 0;
+        i < v7 * v7;
+        ++i )
   {
     v6 = ITiling::NormalTileId(i);
     v2 = (CTile *)ITiling::Tile(v6);
@@ -596,7 +673,9 @@ void __cdecl CTiling::CalcNotifyAll(bool a1) {
     {
       result = CSectors::IncSectorSize((CSectors *)&CTiling::m_cSectors, v5);
       if ( v4 )
+      {
         CTiling::NotifyChangeEcoSector(i, 0, v4, a1);
+      }
     }
   }
   return result;
@@ -614,8 +693,7 @@ void __cdecl CTiling::CalcTileLinks(int a1) {
   CTile *v6; // [esp+0h] [ebp-108h]
   _BYTE v7[256]; // [esp+4h] [ebp-104h] BYREF
 
-  if ( !CTilesEx::IsUsedRealTile(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2171, "IsUsedRealTile(_iTileId)") == 1 )
+  if ( !CTilesEx::IsUsedRealTile(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2171, "IsUsedRealTile(_iTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -644,8 +722,7 @@ void __cdecl CTiling::RecalcTileLinks(int a1) {
   CTile *v8; // [esp+0h] [ebp-108h]
   _BYTE v9[256]; // [esp+4h] [ebp-104h] BYREF
 
-  if ( !CTilesEx::IsUsedRealTile(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2195, "IsUsedRealTile(_iTileId)") == 1 )
+  if ( !CTilesEx::IsUsedRealTile(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2195, "IsUsedRealTile(_iTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -655,8 +732,7 @@ void __cdecl CTiling::RecalcTileLinks(int a1) {
   v1 = CTile::TilingType(v8);
   CTiling::CalcIntLinkList(v9, v1, v7);
   v2 = (CLinkList *)CTile::LinkList(v8);
-  if ( CLinkList::OwnerTileId(v2) != a1
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2202, "rTile.LinkList().OwnerTileId() == _iTileId") == 1 )
+  if ( CLinkList::OwnerTileId(v2) != a1 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2202, "rTile.LinkList().OwnerTileId() == _iTileId") == 1 )
   {
     __debugbreak();
   }
@@ -687,8 +763,7 @@ void __cdecl CTiling::ChangeTileIds(enum T_TILING_TYPE a1, int a2, int a3) {
   _BYTE v14[1032]; // [esp+18h] [ebp-40Ch] BYREF
 
   v3 = (struct CTile *)ITiling::Tile(a3);
-  if ( a1 != CTile::TilingType(v3)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2219, "_tTilingType == Tile(_iNewTileId).TilingType()") == 1 )
+  if ( a1 != CTile::TilingType(v3) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2219, "_tTilingType == Tile(_iNewTileId).TilingType()") == 1 )
   {
     __debugbreak();
   }
@@ -702,7 +777,9 @@ void __cdecl CTiling::ChangeTileIds(enum T_TILING_TYPE a1, int a2, int a3) {
   {
     v8 = *(_DWORD *)TLimitedFIFO<int,256>::Top(v14);
     TLimitedFIFO<int,256>::Pop(v14);
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       v10 = v8 + CTilingWorld::WorldNeighborRelIndex(i);
       if ( CTileIdRef::TileId((CTileIdRef *)v12, v10) == v9 )
@@ -763,8 +840,7 @@ bool __cdecl CTiling::CheckBorderLink(int a1, int a2) {
   char v17; // [esp+33h] [ebp-90Dh]
   _BYTE v18[2312]; // [esp+34h] [ebp-90Ch] BYREF
 
-  if ( !CTilingWorld::WorldInWorldPackedXY(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2283, "WorldInWorldPackedXY(_iStartXY)") == 1 )
+  if ( !CTilingWorld::WorldInWorldPackedXY(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2283, "WorldInWorldPackedXY(_iStartXY)") == 1 )
   {
     __debugbreak();
   }
@@ -786,12 +862,16 @@ bool __cdecl CTiling::CheckBorderLink(int a1, int a2) {
     v7 = CSquareVisited::WorldIdx((CSquareVisited *)&byte_4300E70, v15);
     if ( CSquareVisited::SetIfNotVisited((CSquareVisited *)&byte_4300E70, v15) )
     {
-      for ( i = 0; i < 6; ++i )
+      for ( i = 0;
+            i < 6;
+            ++i )
       {
         v6 = v7 + CTilingWorld::WorldNeighborRelIndex(i);
         v12 = CTileIdRef::TileId((CTileIdRef *)v13, v6);
         if ( v12 == a2 )
+        {
           return 1;
+        }
         if ( v12 == v5 )
         {
           v4 = CSquareVisited::NeighborRelIndex(i);
@@ -808,7 +888,9 @@ bool __cdecl CTiling::CheckBorderLink(int a1, int a2) {
         }
       }
       if ( v17 )
+      {
         TLimitedFIFO<int,576>::UndoPush(v14);
+      }
     }
   }
   return 0;
@@ -826,12 +908,18 @@ void __cdecl CTiling::NUpdateLinksAndCheckTileSpliting(void) {
   int v4; // [esp+Ch] [ebp-4h]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3798, "NeighborAnalysis::s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( !dword_42CF990 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3799, "NeighborAnalysis::s_iOldInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( dword_4502118 == 1 )
   {
-    for ( i = 0; i <= dword_45020DC; ++i )
+    for ( i = 0;
+          i <= dword_45020DC;
+          ++i )
     {
       v4 = dword_45020E0[i];
       v2 = v4 != dword_4502110;
@@ -839,35 +927,20 @@ void __cdecl CTiling::NUpdateLinksAndCheckTileSpliting(void) {
       {
         v1 = dword_4300E6C + Y16X16::NeighborModifier((Y16X16 *)dword_45020F8[i]);
         v0 = CTilingWorld::WorldIndex(v1);
-        if ( CTiling::TileId(dword_42CF9A4, v0) != v4
-          && BBSupportDbgReport(
-               2,
-               "Pathing\\Tiling.cpp",
-               3823,
-               "TileId(NeighborAnalysis::s_tTilingType, WorldIndex(iNeighborXY)) == iNeighborTileId") == 1 )
+        if ( CTiling::TileId(dword_42CF9A4, v0) != v4 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3823, "TileId(NeighborAnalysis::s_tTilingType, WorldIndex(iNeighborXY)) == iNeighborTileId") == 1 )
         {
           __debugbreak();
         }
         if ( CTiling::CheckBorderLink(v1, dword_4502110) )
         {
-          if ( !CTiling::DbgCheckTileLink(v4, dword_4502110)
-            && BBSupportDbgReport(
-                 2,
-                 "Pathing\\Tiling.cpp",
-                 3834,
-                 "DbgCheckTileLink(iNeighborTileId, NeighborAnalysis::s_iOldTileId)") == 1 )
+          if ( !CTiling::DbgCheckTileLink(v4, dword_4502110) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3834, "DbgCheckTileLink(iNeighborTileId, NeighborAnalysis::s_iOldTileId)") == 1 )
           {
             __debugbreak();
           }
         }
         else
         {
-          if ( CTiling::DbgCheckTileLink(v4, dword_4502110)
-            && BBSupportDbgReport(
-                 2,
-                 "Pathing\\Tiling.cpp",
-                 3827,
-                 "!DbgCheckTileLink(iNeighborTileId, NeighborAnalysis::s_iOldTileId)") == 1 )
+          if ( CTiling::DbgCheckTileLink(v4, dword_4502110) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3827, "!DbgCheckTileLink(iNeighborTileId, NeighborAnalysis::s_iOldTileId)") == 1 )
           {
             __debugbreak();
           }
@@ -908,16 +981,14 @@ int __cdecl CTiling::CalcIntLinkList(class CIntLinkList & a1, enum T_TILING_TYPE
 
   v15 = Y16X16::UnpackXFast(a3);
   v16 = Y16X16::UnpackYFast(a3);
-  if ( !CTilingWorld::WorldInWorld(v15, v16)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 1241, "WorldInWorld(iX, iY)") == 1 )
+  if ( !CTilingWorld::WorldInWorld(v15, v16) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 1241, "WorldInWorld(iX, iY)") == 1 )
   {
     __debugbreak();
   }
   v9 = CTilingWorld::WorldIndex(v15, v16);
   CTileIdRef::CTileIdRef(v10, a2, 0);
   v14 = CTileIdRef::TileId((CTileIdRef *)v10, v9);
-  if ( !CTilesEx::IsUsedRealTile(v14)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 1249, "IsUsedRealTile(iTileId)") == 1 )
+  if ( !CTilesEx::IsUsedRealTile(v14) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 1249, "IsUsedRealTile(iTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -934,7 +1005,9 @@ int __cdecl CTiling::CalcIntLinkList(class CIntLinkList & a1, enum T_TILING_TYPE
     v11 = *(_DWORD *)TStaticFIFO<int,256>::Top(v19);
     TStaticFIFO<int,256>::Pop(v19);
     v7 = CSquareVisited::WorldIdx((CSquareVisited *)&byte_4300E70, v11);
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       v4 = CSquareVisited::NeighborRelIndex(i);
       v13 = v11 + v4;
@@ -979,21 +1052,27 @@ void __cdecl CTiling::NCheckTileSplit(void) {
   CTiling::RecalcTileLinks(dword_4502110);
   result = (_BYTE *)CSquareVisited::WorldPackedXYIndex((CSquareVisited *)&byte_4300E70, dword_4300E6C);
   v7 = result;
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v6 = &v7[CSquareVisited::NeighborRelIndex(i)];
     v1 = CSquareVisited::operator[](v6);
     result = (_BYTE *)TBoolArray<6>::operator[](i);
     *result = v1;
   }
-  for ( j = 0; j < 6; ++j )
+  for ( j = 0;
+        j < 6;
+        ++j )
   {
     if ( ((dword_45020C4[j] == dword_4502110) & (*(_BYTE *)TBoolArray<6>::operator[](j) == 0)) != 0 )
     {
       v5 = dword_4300E6C + Y16X16::NeighborModifier((Y16X16 *)j);
       CTiling::SplitTile(dword_42CF9A4, v5);
       v4 = CSquareVisited::WorldPackedXYIndex((CSquareVisited *)&byte_4300E70, dword_4300E6C);
-      for ( k = 0; k < 6; ++k )
+      for ( k = 0;
+            k < 6;
+            ++k )
       {
         v3 = v4 + CSquareVisited::NeighborRelIndex(k);
         v8 = (char *)TBoolArray<6>::operator[](k);
@@ -1027,10 +1106,14 @@ void __cdecl CTiling::NCheckSectorSplit(void) {
   int v13[6]; // [esp+3Ch] [ebp-1Ch]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3274, "NeighborAnalysis::s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   v8 = -1;
   v9 = -1;
-  for ( i = 0; i <= dword_45020DC; ++i )
+  for ( i = 0;
+        i <= dword_45020DC;
+        ++i )
   {
     v6 = dword_45020E0[i];
     v4 = CTiles::TileEx(v6);
@@ -1042,7 +1125,9 @@ void __cdecl CTiling::NCheckSectorSplit(void) {
     {
       if ( v9 < 0 )
       {
-        for ( j = i - 2; j >= 0; --j )
+        for ( j = i - 2;
+              j >= 0;
+              --j )
         {
           if ( dword_45020E0[j] == v6 )
           {
@@ -1065,7 +1150,9 @@ void __cdecl CTiling::NCheckSectorSplit(void) {
     v3 = CTile::SectorId((CTile *)v0);
     TBitArray<32768>::ClearArray(&unk_45010C0);
     CTiling::WalkTilesSetVisited(v13[0]);
-    for ( k = 1; k <= v8; ++k )
+    for ( k = 1;
+          k <= v8;
+          ++k )
     {
       v5 = v13[k];
       v1 = CTiles::TileEx(v5);
@@ -1091,14 +1178,17 @@ void __cdecl CTiling::NCalcNewTileId(int a1) {
   int *v6; // [esp+8h] [ebp-4h]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3643, "NeighborAnalysis::s_iInitialized") == 1 )
+  {
     __debugbreak();
-  if ( (a1 & 0x3FE000) != 0
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3644, "(_iNewTileType & ~TILE_TYPE_EQUAL_MASK) == 0") == 1 )
+  }
+  if ( (a1 & 0x3FE000) != 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3644, "(_iNewTileType & ~TILE_TYPE_EQUAL_MASK) == 0") == 1 )
   {
     __debugbreak();
   }
   v6 = 0;
-  for ( i = 0; i <= dword_45020DC; ++i )
+  for ( i = 0;
+        i <= dword_45020DC;
+        ++i )
   {
     v4 = dword_45020E0[i];
     v1 = (struct CTile *)ITiling::Tile(v4);
@@ -1134,7 +1224,9 @@ void __cdecl CTiling::NCheckSectorMerge(int a1) {
   int v3; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i <= dword_45020DC; ++i )
+  for ( i = 0;
+        i <= dword_45020DC;
+        ++i )
   {
     v3 = dword_45020E0[i];
     if ( v3 )
@@ -1165,13 +1257,19 @@ void __cdecl CTiling::NCheckEcoSectorJoin(int a1) {
   int EcoSector; // [esp+8h] [ebp-4h]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3697, "NeighborAnalysis::s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( !dword_42CF994 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3698, "NeighborAnalysis::s_iNewInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( a1 )
   {
     v7 = 0;
-    for ( i = 0; i <= dword_45020DC; ++i )
+    for ( i = 0;
+          i <= dword_45020DC;
+          ++i )
     {
       v5 = dword_45020E0[i];
       v1 = CTiles::TileEx(v5);
@@ -1216,16 +1314,22 @@ void __cdecl CTiling::NCheckSectorAndEcoSectorDelete(void) {
   char v9; // [esp+1Fh] [ebp-1h]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3580, "NeighborAnalysis::s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( !dword_42CF990 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3581, "NeighborAnalysis::s_iOldInitialized") == 1 )
+  {
     __debugbreak();
+  }
   v0 = CTiles::TileEx(dword_4502110);
   v5 = CTile::SectorId((CTile *)v0);
   v1 = CTiles::TileEx(dword_4502110);
   v4 = CTile::EcoSectorId((CTile *)v1);
   v9 = 1;
   v8 = dword_4502114 != 0;
-  for ( i = 0; i <= dword_45020DC; ++i )
+  for ( i = 0;
+        i <= dword_45020DC;
+        ++i )
   {
     v6 = dword_45020E0[i];
     v2 = CTiles::TileEx(v6);
@@ -1234,9 +1338,13 @@ void __cdecl CTiling::NCheckSectorAndEcoSectorDelete(void) {
     v8 &= CTile::EcoSectorId((CTile *)v3) != v4;
   }
   if ( v9 )
+  {
     CTiling::NotifyDeleteSector(v5);
+  }
   if ( v8 )
+  {
     CTiling::NotifyDeleteEcoSector(v4);
+  }
 }
 
 
@@ -1250,11 +1358,14 @@ void __cdecl CTiling::NRemoveElementFromTile(void) {
   int **v3; // [esp+8h] [ebp-4h]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3108, "NeighborAnalysis::s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( !dword_42CF990 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3109, "NeighborAnalysis::s_iOldInitialized") == 1 )
+  {
     __debugbreak();
-  if ( dword_4502118 <= 0
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3110, "NeighborAnalysis::s_iOldTileChangeCount > 0") == 1 )
+  }
+  if ( dword_4502118 <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3110, "NeighborAnalysis::s_iOldTileChangeCount > 0") == 1 )
   {
     __debugbreak();
   }
@@ -1298,26 +1409,33 @@ void __cdecl CTiling::NCheckEcoSectorSplit(int a1) {
   int v23[6]; // [esp+80h] [ebp-1Ch]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3131, "NeighborAnalysis::s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( !a1 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3132, "_iOldOwnerId != 0") == 1 )
+  {
     __debugbreak();
+  }
   v15 = -1;
   v16 = -1;
-  for ( i = 0; i <= dword_45020DC; ++i )
+  for ( i = 0;
+        i <= dword_45020DC;
+        ++i )
   {
     v12 = dword_45020E0[i];
     v1 = CTiles::TileEx(v12);
     if ( CTile::OwnerId((CTile *)v1) == a1 )
     {
       v2 = CTiles::TileEx(v12);
-      if ( !CTile::EcoSectorId((CTile *)v2)
-        && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3156, "TileEx(iNeighborTileId).EcoSectorId() != 0") == 1 )
+      if ( !CTile::EcoSectorId((CTile *)v2) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3156, "TileEx(iNeighborTileId).EcoSectorId() != 0") == 1 )
       {
         __debugbreak();
       }
       if ( v16 < 0 )
       {
-        for ( j = i - 2; j >= 0; --j )
+        for ( j = i - 2;
+              j >= 0;
+              --j )
         {
           if ( dword_45020E0[j] == v12 )
           {
@@ -1346,7 +1464,9 @@ void __cdecl CTiling::NCheckEcoSectorSplit(int a1) {
     v21[0] = v23[0];
     v22[0] = CTiling::WalkTilesEcoSectorSetVisitedAndCountSize(v23[0]);
     v17 = 0;
-    for ( k = 1; k <= v15; ++k )
+    for ( k = 1;
+          k <= v15;
+          ++k )
     {
       v11 = v23[k];
       v4 = CTiles::TileEx(v11);
@@ -1361,7 +1481,9 @@ void __cdecl CTiling::NCheckEcoSectorSplit(int a1) {
       TBitArray<32768>::ClearArray(&unk_45010C0);
       v8 = 0;
       v9 = v22[0];
-      for ( m = 1; m <= v17; ++m )
+      for ( m = 1;
+            m <= v17;
+            ++m )
       {
         if ( v9 < v22[m] )
         {
@@ -1370,7 +1492,9 @@ void __cdecl CTiling::NCheckEcoSectorSplit(int a1) {
         }
       }
       v21[v8] = 0;
-      for ( n = 0; n <= v17; ++n )
+      for ( n = 0;
+            n <= v17;
+            ++n )
       {
         v7 = v21[n];
         if ( v7 > 0 )
@@ -1395,18 +1519,26 @@ void __cdecl CTiling::NCheckEcoSectorDelete(void) {
   int i; // [esp+8h] [ebp-4h]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3615, "NeighborAnalysis::s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( !dword_42CF990 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3616, "NeighborAnalysis::s_iOldInitialized") == 1 )
+  {
     __debugbreak();
+  }
   v0 = CTiles::TileEx(dword_4502110);
   v2 = CTile::EcoSectorId((CTile *)v0);
   if ( v2 )
   {
-    for ( i = 0; i <= dword_45020DC; ++i )
+    for ( i = 0;
+          i <= dword_45020DC;
+          ++i )
     {
       v1 = CTiles::TileEx(dword_45020E0[i]);
       if ( CTile::EcoSectorId((CTile *)v1) == v2 )
+      {
         return;
+      }
     }
     CTiling::NotifyDeleteEcoSector(v2);
   }
@@ -1429,16 +1561,21 @@ void __cdecl CTiling::NCheckEcoSectorMerge(int a1, int a2) {
   int v11; // [esp+10h] [ebp-4h]
 
   if ( !dword_42CF994 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3436, "NeighborAnalysis::s_iNewInitialized") == 1 )
+  {
     __debugbreak();
+  }
   v11 = dword_4502124;
   v8 = CTile::TileTypeToOwnerId(dword_4502120);
   if ( v11 <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3441, "iTileId > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( v8 <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3442, "iOwnerId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v2 = CTiles::TileEx(v11);
-  if ( CTile::OwnerId((CTile *)v2) != v8
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3443, "TileEx(iTileId).OwnerId() == iOwnerId") == 1 )
+  if ( CTile::OwnerId((CTile *)v2) != v8 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3443, "TileEx(iTileId).OwnerId() == iOwnerId") == 1 )
   {
     __debugbreak();
   }
@@ -1448,9 +1585,13 @@ void __cdecl CTiling::NCheckEcoSectorMerge(int a1, int a2) {
   {
     result = BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3444, "TileEx(iTileId).EcoSectorId() == _iEcoSectorId");
     if ( result == 1 )
+    {
       __debugbreak();
+    }
   }
-  for ( i = 0; i <= dword_45020DC; ++i )
+  for ( i = 0;
+        i <= dword_45020DC;
+        ++i )
   {
     v9 = dword_45020E0[i];
     v5 = CTiles::TileEx(v9);
@@ -1461,8 +1602,7 @@ void __cdecl CTiling::NCheckEcoSectorMerge(int a1, int a2) {
       {
         a2 = CTiling::MergeEcoSectors(v11, v9);
         v7 = CTiles::TileEx(v11);
-        if ( CTile::EcoSectorId((CTile *)v7) != a2
-          && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3458, "TileEx(iTileId).EcoSectorId() == _iEcoSectorId") == 1 )
+        if ( CTile::EcoSectorId((CTile *)v7) != a2 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3458, "TileEx(iTileId).EcoSectorId() == _iEcoSectorId") == 1 )
         {
           __debugbreak();
         }
@@ -1487,11 +1627,17 @@ void __cdecl CTiling::NCheckSectorJoin(void) {
   int v6; // [esp+8h] [ebp-4h]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3751, "NeighborAnalysis::s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( !dword_42CF994 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3752, "NeighborAnalysis::s_iNewInitialized") == 1 )
+  {
     __debugbreak();
+  }
   v6 = 0;
-  for ( i = 0; i <= dword_45020DC; ++i )
+  for ( i = 0;
+        i <= dword_45020DC;
+        ++i )
   {
     v4 = dword_45020E0[i];
     if ( v4 )
@@ -1546,14 +1692,20 @@ void __cdecl CTiling::NCheckTileMerge(void) {
   int v23; // [esp+48h] [ebp-4h]
 
   if ( !dword_42CF98C && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3473, "NeighborAnalysis::s_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( !dword_42CF994 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3474, "NeighborAnalysis::s_iNewInitialized") == 1 )
+  {
     __debugbreak();
+  }
   v22 = dword_4502124;
   v19 = (CTile *)CTiles::TileEx(dword_4502124);
   result = CTile::Type(v19, v8) & 0xFFC01FFF;
   v15 = result;
-  for ( i = 0; i <= dword_45020DC; ++i )
+  for ( i = 0;
+        i <= dword_45020DC;
+        ++i )
   {
     v23 = dword_45020E0[i];
     v17 = v23 != 0;
@@ -1573,19 +1725,21 @@ void __cdecl CTiling::NCheckTileMerge(void) {
           result = dword_45020E4[i];
           if ( result == v23 )
           {
-            result = BBSupportDbgReport(
-                       2,
-                       "Pathing\\Tiling.cpp",
-                       3519,
-                       "(i == NeighborAnalysis::s_iLastTileArea) || (NeighborAnalysis::s_iTileAreaTileIds[i + 1] != iNeighborTileId)");
+            result = BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3519, "(i == NeighborAnalysis::s_iLastTileArea) || (NeighborAnalysis::s_iTileAreaTileIds[i + 1] != iNeighborTileId)");
             if ( result == 1 )
+            {
               __debugbreak();
+            }
           }
         }
-        for ( j = i + 2; j <= dword_45020DC; ++j )
+        for ( j = i + 2;
+              j <= dword_45020DC;
+              ++j )
         {
           if ( dword_45020E0[j] == v23 )
+          {
             dword_45020E0[j] = v22;
+          }
           result = j + 1;
         }
       }
@@ -1601,13 +1755,14 @@ void __cdecl CTiling::NCheckTileMerge(void) {
           v10 = *(CTile *)CTiles::TileEx(v23);
           v3 = CTile::SectorId(v19);
           if ( v3 != CTile::SectorId(&v10) && CTile::SectorId(v19) && CTile::SectorId(&v10) )
+          {
             CTiling::MergeSectors(v22, v23);
+          }
           v18 = CTile::TileTypeToOwnerId(v15);
           v11 = CTile::TileTypeToOwnerId(v14);
           v4 = CTiles::TileEx(v22);
           v5 = CTile::OwnerId((CTile *)v4);
-          if ( v18 != v5
-            && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3558, "iNewOwnerId == TileEx(iNewTileId).OwnerId()") == 1 )
+          if ( v18 != v5 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3558, "iNewOwnerId == TileEx(iNewTileId).OwnerId()") == 1 )
           {
             __debugbreak();
           }
@@ -1619,7 +1774,9 @@ void __cdecl CTiling::NCheckTileMerge(void) {
             v6 = CTile::EcoSectorId(v19);
             result = CTile::EcoSectorId(&v10);
             if ( v6 != result )
+            {
               result = CTiling::MergeEcoSectors(v22, v23);
+            }
           }
         }
       }
@@ -1640,13 +1797,11 @@ void __cdecl CTiling::MergeTiles(int a1, int a2) {
   int **v7; // [esp+4h] [ebp-8h]
   int **v8; // [esp+8h] [ebp-4h]
 
-  if ( !CTiles::IsValidRealTile(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2774, "IsValidRealTile(_iRemainingTileId)") == 1 )
+  if ( !CTiles::IsValidRealTile(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2774, "IsValidRealTile(_iRemainingTileId)") == 1 )
   {
     __debugbreak();
   }
-  if ( !CTiles::IsValidRealTile(a2)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2775, "IsValidRealTile(_iToBeDeletedTileId)") == 1 )
+  if ( !CTiles::IsValidRealTile(a2) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2775, "IsValidRealTile(_iToBeDeletedTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -1655,13 +1810,11 @@ void __cdecl CTiling::MergeTiles(int a1, int a2) {
   v2 = CTile::SectorId((CTile *)v7);
   if ( v2 != CTile::SectorId((CTile *)v8) )
   {
-    if ( !CTile::SectorId((CTile *)v7)
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2784, "rRemainingTile.SectorId() != 0") == 1 )
+    if ( !CTile::SectorId((CTile *)v7) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2784, "rRemainingTile.SectorId() != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !CTile::SectorId((CTile *)v8)
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2785, "rToBeDeletedTile.SectorId() != 0") == 1 )
+    if ( !CTile::SectorId((CTile *)v8) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2785, "rToBeDeletedTile.SectorId() != 0") == 1 )
     {
       __debugbreak();
     }
@@ -1670,19 +1823,16 @@ void __cdecl CTiling::MergeTiles(int a1, int a2) {
   v3 = CTile::EcoSectorId((CTile *)v7);
   if ( v3 != CTile::EcoSectorId((CTile *)v8) )
   {
-    if ( !CTile::EcoSectorId((CTile *)v7)
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2794, "rRemainingTile.EcoSectorId() != 0") == 1 )
+    if ( !CTile::EcoSectorId((CTile *)v7) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2794, "rRemainingTile.EcoSectorId() != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !CTile::EcoSectorId((CTile *)v8)
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2795, "rToBeDeletedTile.EcoSectorId() != 0") == 1 )
+    if ( !CTile::EcoSectorId((CTile *)v8) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2795, "rToBeDeletedTile.EcoSectorId() != 0") == 1 )
     {
       __debugbreak();
     }
     v4 = CTile::OwnerId((CTile *)v7);
-    if ( v4 != CTile::OwnerId((CTile *)v8)
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2797, "rRemainingTile.OwnerId() == rToBeDeletedTile.OwnerId()") == 1 )
+    if ( v4 != CTile::OwnerId((CTile *)v8) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2797, "rRemainingTile.OwnerId() == rToBeDeletedTile.OwnerId()") == 1 )
     {
       __debugbreak();
     }
@@ -1765,8 +1915,7 @@ void __cdecl CTiling::WalkTileChangeTileId(int a1, int a2) {
   _BYTE v14[1032]; // [esp+1Ch] [ebp-40Ch] BYREF
 
   TilingType = CTiling::GetTilingType(a1);
-  if ( TilingType != CTiling::GetTilingType(a2)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2644, "GetTilingType(_iTileId) == GetTilingType(_iNewTileId)") == 1 )
+  if ( TilingType != CTiling::GetTilingType(a2) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2644, "GetTilingType(_iTileId) == GetTilingType(_iNewTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -1776,8 +1925,7 @@ void __cdecl CTiling::WalkTileChangeTileId(int a1, int a2) {
   v5 = (struct CTile *)ITiling::Tile(a1);
   v6 = CTile::TilingType(v5);
   CTileIdRef::CTileIdRef(v12, v6, 0);
-  if ( CTileIdRef::TileId((CTileIdRef *)v12, v10) != a1
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2649, "cTileIdsRef.TileId(iStartWorldIdx) == _iTileId") == 1 )
+  if ( CTileIdRef::TileId((CTileIdRef *)v12, v10) != a1 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2649, "cTileIdsRef.TileId(iStartWorldIdx) == _iTileId") == 1 )
   {
     __debugbreak();
   }
@@ -1787,18 +1935,24 @@ void __cdecl CTiling::WalkTileChangeTileId(int a1, int a2) {
   {
     result = TStaticFIFO<int,256>::Empty(v14);
     if ( (_BYTE)result )
+    {
       break;
+    }
     v11 = *(_DWORD *)TStaticFIFO<int,256>::Top(v14);
     TStaticFIFO<int,256>::Pop(v14);
     if ( CTileIdRef::TileId((CTileIdRef *)v12, v11) == a1 )
     {
       CTileIdRef::SetTileId((CTileIdRef *)v12, v11, a2);
-      for ( i = 0; i < 6; ++i )
+      for ( i = 0;
+            i < 6;
+            ++i )
       {
         v8 = CTilingWorld::WorldNeighborRelIndex(i);
         v9 = v11 + v8;
         if ( CTileIdRef::TileId((CTileIdRef *)v12, v11 + v8) == a1 )
+        {
           TStaticFIFO<int,256>::Push(&v9);
+        }
       }
     }
   }
@@ -1828,13 +1982,14 @@ void __cdecl CTiling::WalkTileNotifyEcoSectorChange(int a1, int a2, int a3) {
   int i; // [esp+20h] [ebp-410h]
   _BYTE v19[1032]; // [esp+24h] [ebp-40Ch] BYREF
 
-  if ( !CTilesEx::IsUsedRealTile(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2597, "IsUsedRealTile(_iTileId)") == 1 )
+  if ( !CTilesEx::IsUsedRealTile(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2597, "IsUsedRealTile(_iTileId)") == 1 )
   {
     __debugbreak();
   }
   if ( a2 == a3 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2598, "_iOldEcoSectorId != _iNewEcoSectorId") == 1 )
+  {
     __debugbreak();
+  }
   v3 = CTiles::TileEx(a1);
   v4 = CTile::CenterXY(v3);
   v13 = Y16X16::UnpackXFast(v4);
@@ -1851,19 +2006,25 @@ void __cdecl CTiling::WalkTileNotifyEcoSectorChange(int a1, int a2, int a3) {
   {
     result = TStaticFIFO<int,256>::Empty(v19);
     if ( (_BYTE)result )
+    {
       break;
+    }
     v17 = *(_DWORD *)TStaticFIFO<int,256>::Top(v19);
     TStaticFIFO<int,256>::Pop(v19);
     v16 = CSquareVisited::WorldIdx((CSquareVisited *)&byte_4300E70, v17);
     CTiling::NotifyChangeEcoSector(v16, a2, a3, 1);
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       v9 = CSquareVisited::NeighborRelIndex(i);
       v15 = v17 + v9;
       v10 = CTilingWorld::WorldNeighborRelIndex(i);
       v11 = v16 + v10;
       if ( CSquareVisited::SetIfNotVisited((CSquareVisited *)&byte_4300E70, v15) && ITiling::NormalTileId(v11) == a1 )
+      {
         TStaticFIFO<int,256>::Push(&v15);
+      }
     }
   }
   return result;
@@ -1888,8 +2049,7 @@ void __cdecl CTiling::WalkTilesSetVisited(int a1) {
   int i; // [esp+14h] [ebp-20010h]
   _BYTE v13[131080]; // [esp+18h] [ebp-2000Ch] BYREF
 
-  if ( !CTiles::IsValidRealTile(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2355, "IsValidRealTile(_iStartTileId)") == 1 )
+  if ( !CTiles::IsValidRealTile(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2355, "IsValidRealTile(_iStartTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -1902,23 +2062,31 @@ void __cdecl CTiling::WalkTilesSetVisited(int a1) {
   {
     result = (unsigned __int8)TLimitedFIFO<int,32768>::Empty(v13);
     if ( (_BYTE)result )
+    {
       break;
+    }
     v10 = *(_DWORD *)TLimitedFIFO<int,32768>::Top(v13);
     TLimitedFIFO<int,32768>::Pop(v13);
     v8 = CTiles::TileEx(v10);
     v11 = (unsigned __int8 *)CTile::LinkList(v8);
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       v3 = CLinkList::Size(v11);
       if ( i >= v3 )
+      {
         break;
+      }
       v9 = *(unsigned __int16 *)CLinkList::operator[](v11, i);
       v4 = CTiles::TileEx(v9);
       v5 = CTile::Type(v4, v7);
       if ( (v7 & v5) != 0 )
       {
         if ( (unsigned __int8)TBitArray<32768>::SetIfNotSet(v10) )
+        {
           TLimitedFIFO<int,32768>::Push(&v9);
+        }
       }
     }
   }
@@ -1947,8 +2115,7 @@ void __cdecl CTiling::WalkTilesChangeSector(int a1, int a2) {
   int i; // [esp+18h] [ebp-20010h]
   _BYTE v17[131080]; // [esp+1Ch] [ebp-2000Ch] BYREF
 
-  if ( !CTiles::IsValidRealTile(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2398, "IsValidRealTile(_iStartTileId)") == 1 )
+  if ( !CTiles::IsValidRealTile(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2398, "IsValidRealTile(_iStartTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -1957,14 +2124,18 @@ void __cdecl CTiling::WalkTilesChangeSector(int a1, int a2) {
   v3 = CTiles::TileEx(a1);
   v10 = CTile::Type(v3, v9) & 0x3C000000;
   if ( v14 == a2 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2403, "iOldSectorId != _iNewSectorId") == 1 )
+  {
     __debugbreak();
+  }
   TStaticList<int,32768>::TStaticList<int,32768>(v17);
   TStaticList<int,32768>::PushBack(&a1);
   while ( 1 )
   {
     result = TStaticList<int,32768>::Empty(v17);
     if ( (_BYTE)result )
+    {
       break;
+    }
     v11 = *(_DWORD *)TStaticList<int,32768>::Front(v17);
     TStaticList<int,32768>::PopFront(v17);
     v15 = CTiles::TileEx(v11);
@@ -1973,16 +2144,22 @@ void __cdecl CTiling::WalkTilesChangeSector(int a1, int a2) {
     {
       CTile::SetSectorId((CTile *)v15, a2);
       v13 = (unsigned __int8 *)CTile::LinkList(v15);
-      for ( i = 0; ; ++i )
+      for ( i = 0;
+            ;
+            ++i )
       {
         v6 = CLinkList::Size(v13);
         if ( i >= v6 )
+        {
           break;
+        }
         v12 = *(unsigned __int16 *)CLinkList::operator[](v13, i);
         v7 = CTiles::TileEx(v12);
         v8 = CTile::Type(v7, v10);
         if ( (v10 & v8) != 0 )
+        {
           TStaticList<int,32768>::PushBack(&v12);
+        }
       }
     }
   }
@@ -2007,38 +2184,47 @@ void __cdecl CTiling::WalkTilesSectorSetVisited(int a1) {
   int i; // [esp+14h] [ebp-20010h]
   _BYTE v12[131080]; // [esp+18h] [ebp-2000Ch] BYREF
 
-  if ( !CTiles::IsValidRealTile(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2499, "IsValidRealTile(_iStartTileId)") == 1 )
+  if ( !CTiles::IsValidRealTile(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2499, "IsValidRealTile(_iStartTileId)") == 1 )
   {
     __debugbreak();
   }
   v1 = CTiles::TileEx(a1);
   v8 = CTile::SectorId((CTile *)v1);
   if ( !v8 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2503, "iSectorId != 0") == 1 )
+  {
     __debugbreak();
+  }
   TLimitedFIFO<int,32768>::TLimitedFIFO<int,32768>(v12);
   TLimitedFIFO<int,32768>::Push(&a1);
   while ( 1 )
   {
     result = (unsigned __int8)TLimitedFIFO<int,32768>::Empty(v12);
     if ( (_BYTE)result )
+    {
       break;
+    }
     v10 = *(_DWORD *)TLimitedFIFO<int,32768>::Top(v12);
     TLimitedFIFO<int,32768>::Pop(v12);
     if ( (unsigned __int8)TBitArray<32768>::SetIfNotSet(v10) )
     {
       v6 = CTiles::TileEx(v10);
       v9 = (unsigned __int8 *)CTile::LinkList(v6);
-      for ( i = 0; ; ++i )
+      for ( i = 0;
+            ;
+            ++i )
       {
         v3 = CLinkList::Size(v9);
         if ( i >= v3 )
+        {
           break;
+        }
         v7 = *(unsigned __int16 *)CLinkList::operator[](v9, i);
         v4 = CTiles::TileEx(v7);
         v5 = CTile::SectorId((CTile *)v4);
         if ( v5 == v8 )
+        {
           TLimitedFIFO<int,32768>::Push(&v7);
+        }
       }
     }
   }
@@ -2063,38 +2249,47 @@ void __cdecl CTiling::WalkTilesEcoSectorSetVisited(int a1) {
   int i; // [esp+14h] [ebp-20010h]
   _BYTE v12[131080]; // [esp+18h] [ebp-2000Ch] BYREF
 
-  if ( !CTiles::IsValidRealTile(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2450, "IsValidRealTile(_iStartTileId)") == 1 )
+  if ( !CTiles::IsValidRealTile(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2450, "IsValidRealTile(_iStartTileId)") == 1 )
   {
     __debugbreak();
   }
   v1 = CTiles::TileEx(a1);
   v8 = CTile::EcoSectorId((CTile *)v1);
   if ( !v8 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2454, "iEcoSectorId != 0") == 1 )
+  {
     __debugbreak();
+  }
   TLimitedFIFO<int,32768>::TLimitedFIFO<int,32768>(v12);
   TLimitedFIFO<int,32768>::Push(&a1);
   while ( 1 )
   {
     result = (unsigned __int8)TLimitedFIFO<int,32768>::Empty(v12);
     if ( (_BYTE)result )
+    {
       break;
+    }
     v10 = *(_DWORD *)TLimitedFIFO<int,32768>::Top(v12);
     TLimitedFIFO<int,32768>::Pop(v12);
     if ( (unsigned __int8)TBitArray<32768>::SetIfNotSet(v10) )
     {
       v6 = CTiles::TileEx(v10);
       v9 = (unsigned __int8 *)CTile::LinkList(v6);
-      for ( i = 0; ; ++i )
+      for ( i = 0;
+            ;
+            ++i )
       {
         v3 = CLinkList::Size(v9);
         if ( i >= v3 )
+        {
           break;
+        }
         v7 = *(unsigned __int16 *)CLinkList::operator[](v9, i);
         v4 = CTiles::TileEx(v7);
         v5 = CTile::EcoSectorId((CTile *)v4);
         if ( v5 == v8 )
+        {
           TLimitedFIFO<int,32768>::Push(&v7);
+        }
       }
     }
   }
@@ -2124,8 +2319,7 @@ int __cdecl CTiling::WalkTilesEcoSectorSetVisitedAndCountSize(int a1) {
   int v17; // [esp+1Ch] [ebp-20010h] BYREF
   _BYTE v18[131080]; // [esp+20h] [ebp-2000Ch] BYREF
 
-  if ( !CTiles::IsValidRealTile(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2542, "IsValidRealTile(_iStartTileId)") == 1 )
+  if ( !CTiles::IsValidRealTile(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2542, "IsValidRealTile(_iStartTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -2136,9 +2330,13 @@ int __cdecl CTiling::WalkTilesEcoSectorSetVisitedAndCountSize(int a1) {
   v3 = CTiles::TileEx(a1);
   v11 = CTile::EcoSectorId((CTile *)v3);
   if ( v15 <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2549, "iOwnerId > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( v11 <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2550, "iEcoSectorId > 0") == 1 )
+  {
     __debugbreak();
+  }
   TLimitedFIFO<int,32768>::TLimitedFIFO<int,32768>(v18);
   TLimitedFIFO<int,32768>::Push(&a1);
   while ( !(unsigned __int8)TLimitedFIFO<int,32768>::Empty(v18) )
@@ -2150,15 +2348,16 @@ int __cdecl CTiling::WalkTilesEcoSectorSetVisitedAndCountSize(int a1) {
       v10 = CTiles::TileEx(v13);
       v12 = (unsigned __int8 *)CTile::LinkList(v10);
       v16 = 0;
-      for ( i = CLinkList::Size(v12); v16 < i; i = CLinkList::Size(v12) )
+      for ( i = CLinkList::Size(v12);
+            v16 < i;
+            i = CLinkList::Size(v12) )
       {
         v17 = *(unsigned __int16 *)CLinkList::operator[](v12, v16);
         v5 = CTiles::TileEx(v17);
         if ( CTile::EcoSectorId((CTile *)v5) == v11 )
         {
           v6 = CTiles::TileEx(v17);
-          if ( CTile::OwnerId((CTile *)v6) != v15
-            && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2573, "TileEx(iLinkTileId).OwnerId() == iOwnerId") == 1 )
+          if ( CTile::OwnerId((CTile *)v6) != v15 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2573, "TileEx(iLinkTileId).OwnerId() == iOwnerId") == 1 )
           {
             __debugbreak();
           }
@@ -2169,8 +2368,7 @@ int __cdecl CTiling::WalkTilesEcoSectorSetVisitedAndCountSize(int a1) {
         else
         {
           v8 = CTiles::TileEx(v17);
-          if ( CTile::OwnerId((CTile *)v8) == v15
-            && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2581, "TileEx(iLinkTileId).OwnerId() != iOwnerId") == 1 )
+          if ( CTile::OwnerId((CTile *)v8) == v15 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2581, "TileEx(iLinkTileId).OwnerId() != iOwnerId") == 1 )
           {
             __debugbreak();
           }
@@ -2203,8 +2401,7 @@ void __cdecl CTiling::WalkTilesChangeEcoSector(int a1, int a2) {
   int i; // [esp+14h] [ebp-20010h]
   _BYTE v16[131080]; // [esp+18h] [ebp-2000Ch] BYREF
 
-  if ( !CTiles::IsValidRealTile(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2685, "IsValidRealTile(_iStartTileId)") == 1 )
+  if ( !CTiles::IsValidRealTile(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2685, "IsValidRealTile(_iStartTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -2213,16 +2410,22 @@ void __cdecl CTiling::WalkTilesChangeEcoSector(int a1, int a2) {
   v3 = CTiles::TileEx(a1);
   v13 = CTile::EcoSectorId((CTile *)v3);
   if ( !v11 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2690, "iOwnerId != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( v13 == a2 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2691, "iOldEcoSectorId != _iNewEcoSectorId") == 1 )
+  {
     __debugbreak();
+  }
   TLimitedFIFO<int,32768>::TLimitedFIFO<int,32768>(v16);
   TLimitedFIFO<int,32768>::Push(&a1);
   while ( 1 )
   {
     result = (unsigned __int8)TLimitedFIFO<int,32768>::Empty(v16);
     if ( (_BYTE)result )
+    {
       break;
+    }
     v5 = (int *)TLimitedFIFO<int,32768>::Top(v16);
     v14 = CTiles::TileEx(*v5);
     TLimitedFIFO<int,32768>::Pop(v16);
@@ -2231,16 +2434,22 @@ void __cdecl CTiling::WalkTilesChangeEcoSector(int a1, int a2) {
     {
       CTile::SetEcoSectorId((CTile *)v14, a2);
       v12 = (unsigned __int8 *)CTile::LinkList(v14);
-      for ( i = 0; ; ++i )
+      for ( i = 0;
+            ;
+            ++i )
       {
         v7 = CLinkList::Size(v12);
         if ( i >= v7 )
+        {
           break;
+        }
         v10 = *(unsigned __int16 *)CLinkList::operator[](v12, i);
         v8 = CTiles::TileEx(v10);
         v9 = CTile::OwnerId((CTile *)v8);
         if ( v9 == v11 )
+        {
           TLimitedFIFO<int,32768>::Push(&v10);
+        }
       }
     }
   }
@@ -2268,8 +2477,7 @@ void __cdecl CTiling::WalkTilesChangeEcoSectorAndNotify(int a1, int a2) {
   int i; // [esp+18h] [ebp-20010h]
   _BYTE v16[131080]; // [esp+1Ch] [ebp-2000Ch] BYREF
 
-  if ( !CTiles::IsValidRealTile(a1)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2728, "IsValidRealTile(_iStartTileId)") == 1 )
+  if ( !CTiles::IsValidRealTile(a1) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2728, "IsValidRealTile(_iStartTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -2278,16 +2486,22 @@ void __cdecl CTiling::WalkTilesChangeEcoSectorAndNotify(int a1, int a2) {
   v3 = CTiles::TileEx(a1);
   v14 = CTile::EcoSectorId((CTile *)v3);
   if ( !v10 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2733, "iOwnerId != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( v14 == a2 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 2734, "iOldEcoSectorId != _iNewEcoSectorId") == 1 )
+  {
     __debugbreak();
+  }
   TLimitedFIFO<int,32768>::TLimitedFIFO<int,32768>(v16);
   TLimitedFIFO<int,32768>::Push(&a1);
   while ( 1 )
   {
     result = (unsigned __int8)TLimitedFIFO<int,32768>::Empty(v16);
     if ( (_BYTE)result )
+    {
       break;
+    }
     v12 = *(_DWORD *)TLimitedFIFO<int,32768>::Top(v16);
     TLimitedFIFO<int,32768>::Pop(v16);
     v13 = CTiles::TileEx(v12);
@@ -2297,16 +2511,22 @@ void __cdecl CTiling::WalkTilesChangeEcoSectorAndNotify(int a1, int a2) {
       CTile::SetEcoSectorId((CTile *)v13, a2);
       CTiling::WalkTileNotifyEcoSectorChange(v12, v14, a2);
       v11 = (unsigned __int8 *)CTile::LinkList(v13);
-      for ( i = 0; ; ++i )
+      for ( i = 0;
+            ;
+            ++i )
       {
         v6 = CLinkList::Size(v11);
         if ( i >= v6 )
+        {
           break;
+        }
         v9 = *(unsigned __int16 *)CLinkList::operator[](v11, i);
         v7 = CTiles::TileEx(v9);
         v8 = CTile::OwnerId((CTile *)v7);
         if ( v8 == v10 )
+        {
           TLimitedFIFO<int,32768>::Push(&v9);
+        }
       }
     }
   }
@@ -2324,25 +2544,30 @@ void __cdecl CTiling::CalculateBorderstoneBit(int a1, int a2) {
   int v6; // [esp+10h] [ebp-8h]
   int i; // [esp+14h] [ebp-4h]
 
-  if ( !CTilingWorld::WorldInWorld(a1, a2)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 401, "WorldInWorld(_iX, _iY)") == 1 )
+  if ( !CTilingWorld::WorldInWorld(a1, a2) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 401, "WorldInWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   v6 = CTilingWorld::WorldIndex(a1, a2);
   if ( !CTilingWorld::WorldInInnerWorld1(a1, a2) )
+  {
     return CTilingWorld::WorldClearGfxBorderstoneBit(v6);
+  }
   v5 = ITiling::OwnerId(v6);
   if ( v5 > 0 )
   {
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       v4 = v6 + CTilingWorld::WorldSortedNeighborRelIndex(i);
       if ( ITiling::OwnerId(v4) != v5 )
       {
         v3 = CTilingWorld::WorldGroundType(v4);
         if ( !CTilingWorld::WorldIsGroundTypeWater(v3) )
+        {
           return CTilingWorld::WorldSetGfxBorderstoneBit(v6);
+        }
       }
     }
   }
@@ -2357,13 +2582,14 @@ void __cdecl CTiling::CalculateBorderstoneBits7(int a1, int a2) {
   int result; // eax
   int i; // [esp+8h] [ebp-4h]
 
-  if ( !CTilingWorld::WorldInInnerWorld1(a1, a2)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 441, "WorldInInnerWorld1(_iX, _iY)") == 1 )
+  if ( !CTilingWorld::WorldInInnerWorld1(a1, a2) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 441, "WorldInInnerWorld1(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   result = CTiling::CalculateBorderstoneBit(a1, a2);
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     CTiling::CalculateBorderstoneBit(g_sNeighborPoints[2 * i] + a1, MEMORY[0x37D8C0C][2 * i] + a2);
     result = i + 1;
@@ -2382,8 +2608,12 @@ void __cdecl CTiling::ClearBorderstoneBits(void) {
 
   v1 = CTilingWorld::WorldWidthHeight();
   result = v1 * v1;
-  for ( i = 0; i < v1 * v1; ++i )
+  for ( i = 0;
+        i < v1 * v1;
+        ++i )
+  {
     result = CTilingWorld::WorldClearGfxBorderstoneBit(i);
+  }
   return result;
 }
 
@@ -2405,18 +2635,28 @@ void __cdecl CTiling::CalculateBorderstoneBits(void) {
   v0 = (Squares *)CTilingWorld::WorldWidthHeight();
   result = (char *)Squares::XYToVW(v0);
   v4 = (int)result;
-  for ( i = 0; (int)i < v4; i = (Squares *)((char *)i + 1) )
+  for ( i = 0;
+        (int)i < v4;
+        i = (Squares *)((char *)i + 1) )
   {
-    for ( j = 0; (int)j < v4; j = (Squares *)((char *)j + 1) )
+    for ( j = 0;
+          (int)j < v4;
+          j = (Squares *)((char *)j + 1) )
     {
       if ( COwnerMap::OwnerBits1VW(j, i) )
       {
         v2 = Squares::VWToXY(j);
         v3 = Squares::VWToXY(i);
-        for ( k = v3; k < v3 + 16; ++k )
+        for ( k = v3;
+              k < v3 + 16;
+              ++k )
         {
-          for ( m = v2; m < v2 + 16; ++m )
+          for ( m = v2;
+                m < v2 + 16;
+                ++m )
+          {
             CTiling::CalculateBorderstoneBit(m, k);
+          }
         }
       }
     }
@@ -2476,15 +2716,13 @@ void __cdecl CTiling::BlockedLandSurroundingCheck(int a1, int a2) {
   bool v50; // [esp+A3h] [ebp-400Dh]
   _BYTE v51[16392]; // [esp+A4h] [ebp-400Ch] BYREF
 
-  if ( !CTilingWorld::WorldInInnerWorld1(a1, a2)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 6007, "WorldInInnerWorld1(_iX, _iY)") == 1 )
+  if ( !CTilingWorld::WorldInInnerWorld1(a1, a2) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 6007, "WorldInInnerWorld1(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   v25 = CTilingWorld::WorldIndex(a1, a2);
   v44 = (Grid *)ITiling::OwnerId(v25);
-  if ( CTilingWorld::WorldIsBlockedLand(v25)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 6012, "!WorldIsBlockedLand(iWorldIdx0)") == 1 )
+  if ( CTilingWorld::WorldIsBlockedLand(v25) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 6012, "!WorldIsBlockedLand(iWorldIdx0)") == 1 )
   {
     __debugbreak();
   }
@@ -2493,11 +2731,15 @@ void __cdecl CTiling::BlockedLandSurroundingCheck(int a1, int a2) {
   {
     v2 = (Grid *)BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 6013, "iOwnerId > 0");
     if ( v2 == (Grid *)1 )
+    {
       __debugbreak();
+    }
   }
   v39 = -1;
   v33 = 0;
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v16 = v25 + CTilingWorld::WorldNeighborRelIndex(i);
     LOBYTE(v2) = CTilingWorld::WorldIsBlockedLand(v16);
@@ -2517,14 +2759,18 @@ void __cdecl CTiling::BlockedLandSurroundingCheck(int a1, int a2) {
   v24 = v39 >= 0;
   v23 = v33 < 6;
   if ( !v23 || !v24 )
+  {
     return (char)v2;
+  }
   v50 = 0;
   v40 = 1;
   v43 = (Grid *)Grid::TurnRight((Grid *)v39);
   LOBYTE(v2) = a1;
   v30 = a1;
   v29 = a2;
-  for ( j = 0; j < 0x40000; ++j )
+  for ( j = 0;
+        j < 0x40000;
+        ++j )
   {
     v22 = g_sNeighborPoints[2 * (_DWORD)v43] + v30;
     v21 = MEMORY[0x37D8C0C][2 * (_DWORD)v43] + v29;
@@ -2534,7 +2780,9 @@ void __cdecl CTiling::BlockedLandSurroundingCheck(int a1, int a2) {
       LOBYTE(v2) = CTilingWorld::WorldIsWater(v31);
       v11 = (unsigned __int8)v2;
       if ( (_BYTE)v2 )
+      {
         break;
+      }
       ++v40;
       v2 = (Grid *)Grid::TurnRight(v43);
       v43 = v2;
@@ -2544,7 +2792,9 @@ void __cdecl CTiling::BlockedLandSurroundingCheck(int a1, int a2) {
       v2 = (Grid *)ITiling::OwnerId(v31);
       v6 = v2;
       if ( v2 != v44 )
+      {
         break;
+      }
       --v40;
       v43 = (Grid *)Grid::TurnLeft(v43);
       v30 = v22;
@@ -2562,7 +2812,9 @@ void __cdecl CTiling::BlockedLandSurroundingCheck(int a1, int a2) {
     }
   }
   if ( !v50 )
+  {
     return (char)v2;
+  }
   v42 = v39;
   v27 = a1;
   v26 = a2;
@@ -2574,9 +2826,10 @@ void __cdecl CTiling::BlockedLandSurroundingCheck(int a1, int a2) {
       v34 = MEMORY[0x37D8C0C][2 * v42] + v26;
       v36 = CTilingWorld::WorldIndex(v35, v34);
       if ( !CTilingWorld::WorldIsBlockedLand(v36) )
+      {
         break;
-      if ( CTilingWorld::WorldIsWater(v36)
-        && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 6123, "!WorldIsWater(iCheckWorldIdx)") == 1 )
+      }
+      if ( CTilingWorld::WorldIsWater(v36) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 6123, "!WorldIsWater(iCheckWorldIdx)") == 1 )
       {
         __debugbreak();
       }
@@ -2601,7 +2854,9 @@ void __cdecl CTiling::BlockedLandSurroundingCheck(int a1, int a2) {
               v3 = ITiling::OwnerPseudoTileId((int)v44);
               CTiling::SetNormalTileId(v38, v3);
               (*(void (__thiscall **)(void *, int, int, Grid *))(*(_DWORD *)g_pFogging + 28))(g_pFogging, v13, v17, v44);
-              for ( k = 0; k < 6; ++k )
+              for ( k = 0;
+                    k < 6;
+                    ++k )
               {
                 v7 = Y16X16::g_iNeighborY16X16Modifiers[k] + v28;
                 TStaticFIFO<int,4096>::Push(&v7);
@@ -2615,7 +2870,9 @@ void __cdecl CTiling::BlockedLandSurroundingCheck(int a1, int a2) {
     }
     v4 = (Grid *)ITiling::OwnerId(v36);
     if ( v4 != v44 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 6179, "OwnerId(iCheckWorldIdx) == iOwnerId") == 1 )
+    {
       __debugbreak();
+    }
     v42 = Grid::TurnLeft((Grid *)v42);
     v27 = v35;
     v26 = v34;
@@ -2629,7 +2886,7 @@ void __cdecl CTiling::BlockedLandSurroundingCheck(int a1, int a2) {
 
 
 // address=[0x15ecb50]
-// Decompiled from void __thiscall CTiling::Init(  CTiling *this,  int iWorldWidthHeight,  struct T_GFX_MAP_ELEMENT *pGfxMapElements,  unsigned __int8 *pFlagBitsLayer,  unsigned __int16 *_pNormalTileIds,  unsigned __int16 **_pCatapultTileIds,  unsigned __int8 *pFogLayer,  bool a8)
+// Decompiled from void __thiscall CTiling::Init(CTiling *this, int iWorldWidthHeight, struct T_GFX_MAP_ELEMENT *pGfxMapElements, unsigned __int8 *pFlagBitsLayer, unsigned __int16 *_pNormalTileIds, unsigned __int16 **_pCatapultTileIds, unsigned __int8 *pFogLayer, bool a8)
 void  CTiling::Init(int iWorldWidthHeight, struct T_GFX_MAP_ELEMENT * pGfxMapElements, unsigned char * pFlagBitsLayer, unsigned short * _pNormalTileIds, unsigned short * _pCatapultTileIds, unsigned char * pFogLayer, bool a8) {
   
   double v8; // st7
@@ -2641,42 +2898,49 @@ void  CTiling::Init(int iWorldWidthHeight, struct T_GFX_MAP_ELEMENT * pGfxMapEle
   int k; // [esp+3Ch] [ebp-Ch]
 
   if ( !_pNormalTileIds && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3921, "_pNormalTileIds != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !_pCatapultTileIds && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3922, "_pCatapultTileIds != 0") == 1 )
+  {
     __debugbreak();
+  }
   this->Done(this);
   CTilingWorld::WorldInterfaceInit(iWorldWidthHeight, pGfxMapElements, pFlagBitsLayer, pFogLayer);
   ITiling::m_pTileIds = _pNormalTileIds;
   ITiling::m_pCatapultTileIds = (unsigned __int16 *)_pCatapultTileIds;
   iTileCount = iWorldWidthHeight * iWorldWidthHeight;
-  for ( i = 0; i < iTileCount; ++i )
+  for ( i = 0;
+        i < iTileCount;
+        ++i )
   {
-    if ( !CTiles::IsValidPseudoTile(_pNormalTileIds[i])
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3939, "CTiling::IsValidPseudoTile(_pNormalTileIds[i])") == 1 )
+    if ( !CTiles::IsValidPseudoTile(_pNormalTileIds[i]) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3939, "CTiling::IsValidPseudoTile(_pNormalTileIds[i])") == 1 )
     {
       __debugbreak();
     }
   }
-  for ( j = 0; j < iTileCount; ++j )
+  for ( j = 0;
+        j < iTileCount;
+        ++j )
   {
-    if ( *((_WORD *)_pCatapultTileIds + j)
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3944, "_pCatapultTileIds[j] == 0") == 1 )
+    if ( *((_WORD *)_pCatapultTileIds + j) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3944, "_pCatapultTileIds[j] == 0") == 1 )
     {
       __debugbreak();
     }
   }
   this->DbgCheckBlocking(this, 0);
   v10 = iWorldWidthHeight * iWorldWidthHeight;
-  for ( k = 0; k < v10; ++k )
+  for ( k = 0;
+        k < v10;
+        ++k )
   {
     if ( CTilingWorld::WorldIsWater(k) )
+    {
       CTilingWorld::WorldSetBlockedLandFlag(k);
+    }
   }
   CTiling::BlockBorder();
-  (*(void (__thiscall **)(void *, struct T_GFX_MAP_ELEMENT *, unsigned __int8 *))(*(_DWORD *)g_pFogging + 8))(
-    g_pFogging,
-    pGfxMapElements,
-    pFogLayer);
+  (*(void (__thiscall **)(void *, struct T_GFX_MAP_ELEMENT *, unsigned __int8 *))(*(_DWORD *)g_pFogging + 8))(g_pFogging, pGfxMapElements, pFogLayer);
   CWater::Init((unsigned __int16 *)_pCatapultTileIds);
   CPerformanceCounter::CPerformanceCounter((CPerformanceCounter *)v9);
   CPerformanceCounter::Start(v9);
@@ -2694,16 +2958,18 @@ void  CTiling::Init(int iWorldWidthHeight, struct T_GFX_MAP_ELEMENT * pGfxMapEle
   CProfile::Clear(stru_42F7B00);
   CProfile::Clear(stru_42F7BA8);
   if ( this->DbgCheckTiling(this, 0) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3994, "DbgCheckTiling() == 0") == 1 )
+  {
     __debugbreak();
-  if ( CTiling::DbgCheckTileSizes()
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3995, "DbgCheckTileSizes() == 0") == 1 )
+  }
+  if ( CTiling::DbgCheckTileSizes() && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3995, "DbgCheckTileSizes() == 0") == 1 )
   {
     __debugbreak();
   }
   if ( CTiling::DbgCheckSectors() && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3996, "DbgCheckSectors() == 0") == 1 )
+  {
     __debugbreak();
-  if ( CTiling::DbgCheckEcoSectors()
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3997, "DbgCheckEcoSectors() == 0") == 1 )
+  }
+  if ( CTiling::DbgCheckEcoSectors() && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 3997, "DbgCheckEcoSectors() == 0") == 1 )
   {
     __debugbreak();
   }
@@ -2727,11 +2993,7 @@ void  CTiling::Done(void) {
     CTiling::DbgCheckSectors(0);
     CTiling::DbgCheckEcoSectors(0);
     BBSupportTracePrintF(0, "CTiling::Done()...");
-    BBSupportTracePrintF(
-      0,
-      "  Maximal number of used tiles was %i (%.1f%%).",
-      CTilesEx::m_iMaxUsedTiles,
-      (double)CTilesEx::m_iMaxUsedTiles / 32757.0 * 100.0);
+    BBSupportTracePrintF(0, "  Maximal number of used tiles was %i (%.1f%%).", CTilesEx::m_iMaxUsedTiles, (double)CTilesEx::m_iMaxUsedTiles / 32757.0 * 100.0);
     BBSupportTracePrintF(0, "  CalculateListOfFreeTiles() was called %i times.", CTilesEx::m_iCalcFreeListCounter);
     v1 = CProfile::InfoStr((CProfile *)&stru_42F79B0);
     BBSupportTracePrintF(0, "  SetBlockedLand():   %s", v1);
@@ -2780,7 +3042,9 @@ void  CTiling::SetBlockedLand(int a2, int a3) {
   int i; // [esp+10h] [ebp-4h]
 
   if ( s_bTilingInModification && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4093, "!s_bTilingInModification") == 1 )
+  {
     __debugbreak();
+  }
   s_bTilingInModification = 1;
   if ( CTilingWorld::WorldInInnerWorld2(a2, a3) )
   {
@@ -2791,21 +3055,21 @@ void  CTiling::SetBlockedLand(int a2, int a3) {
     }
     else
     {
-      if ( CTilingWorld::WorldIsWater(v7)
-        && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4117, "!WorldIsWater(iWorldIdx)") == 1 )
+      if ( CTilingWorld::WorldIsWater(v7) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4117, "!WorldIsWater(iWorldIdx)") == 1 )
       {
         __debugbreak();
       }
       v3 = ITiling::NormalTileId(v7);
-      if ( !CTiles::IsValidRealTile(v3)
-        && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4118, "IsValidRealTile(NormalTileId(iWorldIdx))") == 1 )
+      if ( !CTiles::IsValidRealTile(v3) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4118, "IsValidRealTile(NormalTileId(iWorldIdx))") == 1 )
       {
         __debugbreak();
       }
       CProfile::Begin((CProfile *)&stru_42F79B0);
       CTilingWorld::WorldSetBlockedLandFlag(v7);
       CTiling::SetBlockingEx(this, 0, a2, a3);
-      for ( i = 0; i < 19; ++i )
+      for ( i = 0;
+            i < 19;
+            ++i )
       {
         v4 = a2 + CSpiralOffsets::DeltaX(i);
         v5 = a3 + CSpiralOffsets::DeltaY(i);
@@ -2818,12 +3082,10 @@ void  CTiling::SetBlockedLand(int a2, int a3) {
   }
   else
   {
-    if ( BBSupportDbgReport(
-           1,
-           "Pathing\\Tiling.cpp",
-           4099,
-           "CTiling::SetBlockedLand(): (X, Y) must be in inner inner world!") == 1 )
+    if ( BBSupportDbgReport(1, "Pathing\\Tiling.cpp", 4099, "CTiling::SetBlockedLand(): (X, Y) must be in inner inner world!") == 1 )
+    {
       __debugbreak();
+    }
     s_bTilingInModification = 0;
   }
 }
@@ -2837,7 +3099,9 @@ void  CTiling::SetBlockedWater(int a2, int a3) {
   int v3; // [esp+4h] [ebp-4h]
 
   if ( s_bTilingInModification && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4156, "!s_bTilingInModification") == 1 )
+  {
     __debugbreak();
+  }
   s_bTilingInModification = 1;
   if ( (unsigned __int8)CTilingWorld::WorldInInnerWorld2(a1, a2) )
   {
@@ -2849,8 +3113,7 @@ void  CTiling::SetBlockedWater(int a2, int a3) {
     }
     else
     {
-      if ( !(unsigned __int8)CTilingWorld::WorldIsWater(v3)
-        && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4180, "WorldIsWater(iWorldIdx)") == 1 )
+      if ( !(unsigned __int8)CTilingWorld::WorldIsWater(v3) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4180, "WorldIsWater(iWorldIdx)") == 1 )
       {
         __debugbreak();
       }
@@ -2861,13 +3124,11 @@ void  CTiling::SetBlockedWater(int a2, int a3) {
   }
   else
   {
-    result = BBSupportDbgReport(
-               1,
-               "Pathing\\Tiling.cpp",
-               4162,
-               "CTiling::SetBlockedWater(): (X, Y) must be in inner inner world!");
+    result = BBSupportDbgReport(1, "Pathing\\Tiling.cpp", 4162, "CTiling::SetBlockedWater(): (X, Y) must be in inner inner world!");
     if ( result == 1 )
+    {
       __debugbreak();
+    }
     s_bTilingInModification = 0;
   }
   return result;
@@ -2889,7 +3150,9 @@ void  CTiling::ClearBlockedLand(int a2, int a3) {
   char v12; // [esp+27h] [ebp-1h]
 
   if ( s_bTilingInModification && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4277, "!s_bTilingInModification") == 1 )
+  {
     __debugbreak();
+  }
   s_bTilingInModification = 1;
   if ( CTilingWorld::WorldInInnerWorld2(a2, a3) )
   {
@@ -2903,12 +3166,16 @@ void  CTiling::ClearBlockedLand(int a2, int a3) {
       CProfile::Begin((CProfile *)&stru_42F7A58);
       CTilingWorld::WorldClearBlockedLandFlag(v9);
       CTiling::ClearBlockingEx(this, 0, a2, a3);
-      for ( i = 0; i < 19; ++i )
+      for ( i = 0;
+            i < 19;
+            ++i )
       {
         v7 = a2 + CSpiralOffsets::DeltaX(i);
         v8 = a3 + CSpiralOffsets::DeltaY(i);
         v12 = 0;
-        for ( j = 0; j < 19; ++j )
+        for ( j = 0;
+              j < 19;
+              ++j )
         {
           v4 = v7 + CSpiralOffsets::DeltaX(j);
           v5 = v8 + CSpiralOffsets::DeltaY(j);
@@ -2920,7 +3187,9 @@ void  CTiling::ClearBlockedLand(int a2, int a3) {
           }
         }
         if ( !v12 )
+        {
           CTiling::ClearBlockingEx(this, 1, v7, v8);
+        }
       }
       CTiling::CalculateBorderstoneBits7(a2, a3);
       CProfile::End((CProfile *)&stru_42F7A58);
@@ -2933,12 +3202,10 @@ void  CTiling::ClearBlockedLand(int a2, int a3) {
   }
   else
   {
-    if ( BBSupportDbgReport(
-           1,
-           "Pathing\\Tiling.cpp",
-           4283,
-           "CTiling::ClearBlockedLand(): (X, Y) must be in inner inner world!") == 1 )
+    if ( BBSupportDbgReport(1, "Pathing\\Tiling.cpp", 4283, "CTiling::ClearBlockedLand(): (X, Y) must be in inner inner world!") == 1 )
+    {
       __debugbreak();
+    }
     s_bTilingInModification = 0;
   }
 }
@@ -2952,7 +3219,9 @@ void  CTiling::ClearBlockedWater(int a2, int a3) {
   int v6; // [esp+4h] [ebp-4h]
 
   if ( s_bTilingInModification && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4366, "!s_bTilingInModification") == 1 )
+  {
     __debugbreak();
+  }
   s_bTilingInModification = 1;
   if ( CTilingWorld::WorldInInnerWorld2(a2, a3) )
   {
@@ -2960,8 +3229,7 @@ void  CTiling::ClearBlockedWater(int a2, int a3) {
     LOBYTE(v3) = CWaterFlags::IsWater(v6);
     if ( (_BYTE)v3 )
     {
-      if ( !CTilingWorld::WorldIsWater(v6)
-        && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4390, "WorldIsWater(iWorldIdx)") == 1 )
+      if ( !CTilingWorld::WorldIsWater(v6) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4390, "WorldIsWater(iWorldIdx)") == 1 )
       {
         __debugbreak();
       }
@@ -2971,7 +3239,9 @@ void  CTiling::ClearBlockedWater(int a2, int a3) {
         CWaterFlags::ClearWaterFlagBits(v6, 512);
         LOBYTE(v3) = CWaterFlags::IsFreeWater(v6);
         if ( (_BYTE)v3 )
+        {
           LOBYTE(v3) = CTiling::ClearBlockingEx(this, 0, a2, a3);
+        }
         s_bTilingInModification = 0;
       }
       else
@@ -2986,13 +3256,11 @@ void  CTiling::ClearBlockedWater(int a2, int a3) {
   }
   else
   {
-    v3 = BBSupportDbgReport(
-           1,
-           "Pathing\\Tiling.cpp",
-           4372,
-           "CTiling::ClearBlockedWater(): (X, Y) must be in inner inner world!");
+    v3 = BBSupportDbgReport(1, "Pathing\\Tiling.cpp", 4372, "CTiling::ClearBlockedWater(): (X, Y) must be in inner inner world!");
     if ( v3 == 1 )
+    {
       __debugbreak();
+    }
     s_bTilingInModification = 0;
   }
   return v3;
@@ -3022,15 +3290,15 @@ void  CTiling::ChangeOwner(int a2, int a3, int a4) {
   NeighborAnalysis *v21; // [esp+14h] [ebp-8h]
 
   if ( s_bTilingInModification && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4499, "!s_bTilingInModification") == 1 )
-    __debugbreak();
-  s_bTilingInModification = 1;
-  if ( !CTilingWorld::WorldInInnerWorld1(a2, a3)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4503, "WorldInInnerWorld1(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
-  if ( !CTiling::IsValidOwnerId(a4)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4504, "IsValidOwnerId(_iNewOwnerId)") == 1 )
+  s_bTilingInModification = 1;
+  if ( !CTilingWorld::WorldInInnerWorld1(a2, a3) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4503, "WorldInInnerWorld1(_iX, _iY)") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( !CTiling::IsValidOwnerId(a4) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4504, "IsValidOwnerId(_iNewOwnerId)") == 1 )
   {
     __debugbreak();
   }
@@ -3056,24 +3324,18 @@ void  CTiling::ChangeOwner(int a2, int a3, int a4) {
         v6 = ITiling::OwnerPseudoTileId(a4);
         CTiling::SetNormalTileId(v20, v6);
         CTiling::CalculateBorderstoneBits7(a2, a3);
-        (*(void (__thiscall **)(void *, unsigned int, unsigned int, int))(*(_DWORD *)g_pFogging + 28))(
-          g_pFogging,
-          a2,
-          a3,
-          a4);
+        (*(void (__thiscall **)(void *, unsigned int, unsigned int, int))(*(_DWORD *)g_pFogging + 28))(g_pFogging, a2, a3, a4);
         CProfile::End((CProfile *)&stru_42F7B00);
       }
       s_bTilingInModification = 0;
     }
     else
     {
-      if ( !CTiles::IsValidRealTile(v21)
-        && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4570, "IsValidRealTile(iOldTileId)") == 1 )
+      if ( !CTiles::IsValidRealTile(v21) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4570, "IsValidRealTile(iOldTileId)") == 1 )
       {
         __debugbreak();
       }
-      if ( !CTilesEx::IsValidUsedTile(v21)
-        && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4571, "IsValidUsedTile(iOldTileId)") == 1 )
+      if ( !CTilesEx::IsValidUsedTile(v21) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4571, "IsValidUsedTile(iOldTileId)") == 1 )
       {
         __debugbreak();
       }
@@ -3105,7 +3367,9 @@ void  CTiling::ChangeOwner(int a2, int a3, int a4) {
       {
         CTiling::NUpdateLinksAndCheckTileSpliting();
         if ( v19 )
+        {
           CTiling::NCheckEcoSectorSplit(v19);
+        }
       }
       CTiling::NCalcNewTileId(v18);
       if ( dword_4502128 )
@@ -3128,11 +3392,7 @@ void  CTiling::ChangeOwner(int a2, int a3, int a4) {
       NeighborAnalysis::Done(v16);
       CTiling::CalculateBorderstoneBits7(a2, a3);
       CTiling::BlockedLandSurroundingCheck(a2, a3);
-      (*(void (__thiscall **)(void *, unsigned int, unsigned int, int))(*(_DWORD *)g_pFogging + 28))(
-        g_pFogging,
-        a2,
-        a3,
-        a4);
+      (*(void (__thiscall **)(void *, unsigned int, unsigned int, int))(*(_DWORD *)g_pFogging + 28))(g_pFogging, a2, a3, a4);
       CProfile::End((CProfile *)&stru_42F7B00);
       s_bTilingInModification = 0;
     }
@@ -3154,8 +3414,7 @@ void  CTiling::SetBlockingEx(enum T_TILING_TYPE a2, int a3, int a4) {
   int v12; // [esp+Ch] [ebp-8h]
   NeighborAnalysis *v13; // [esp+10h] [ebp-4h]
 
-  if ( !CTilingWorld::WorldInWorld(a3, a4)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4200, "WorldInWorld(_iX, _iY)") == 1 )
+  if ( !CTilingWorld::WorldInWorld(a3, a4) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4200, "WorldInWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -3163,25 +3422,17 @@ void  CTiling::SetBlockingEx(enum T_TILING_TYPE a2, int a3, int a4) {
   v13 = (NeighborAnalysis *)CTiling::TileId(a2, v11);
   if ( CTiles::IsValidRealTile(v13) )
   {
-    if ( !CTilingWorld::WorldInInnerWorld1(a3, a4)
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4210, "WorldInInnerWorld1(_iX, _iY)") == 1 )
+    if ( !CTilingWorld::WorldInInnerWorld1(a3, a4) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4210, "WorldInInnerWorld1(_iX, _iY)") == 1 )
     {
       __debugbreak();
     }
-    if ( !CTiles::IsValidRealTile(v13)
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4211, "IsValidRealTile(iOldTileId)") == 1 )
+    if ( !CTiles::IsValidRealTile(v13) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4211, "IsValidRealTile(iOldTileId)") == 1 )
     {
       __debugbreak();
     }
     v4 = (CTile *)ITiling::Tile((int)v13);
     v12 = CTile::OwnerId(v4);
-    if ( a2
-      && v12
-      && BBSupportDbgReport(
-           2,
-           "Pathing\\Tiling.cpp",
-           4215,
-           "(_tTilingType == TILING_TYPE_NORMAL) || (iOldOwnerId == 0)") == 1 )
+    if ( a2 && v12 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4215, "(_tTilingType == TILING_TYPE_NORMAL) || (iOldOwnerId == 0)") == 1 )
     {
       __debugbreak();
     }
@@ -3193,13 +3444,11 @@ void  CTiling::SetBlockingEx(enum T_TILING_TYPE a2, int a3, int a4) {
     CTile::ChangeSize((CTile *)v6, -1);
     if ( v12 )
     {
-      if ( !CTilingWorld::WorldInWorld(a3, a4)
-        && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4232, "WorldInWorld(_iX, _iY)") == 1 )
+      if ( !CTilingWorld::WorldInWorld(a3, a4) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4232, "WorldInWorld(_iX, _iY)") == 1 )
       {
         __debugbreak();
       }
-      if ( v11 != CTilingWorld::WorldIndex(a3, a4)
-        && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4233, "iWorldIdx == WorldIndex(_iX, _iY)") == 1 )
+      if ( v11 != CTilingWorld::WorldIndex(a3, a4) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4233, "iWorldIdx == WorldIndex(_iX, _iY)") == 1 )
       {
         __debugbreak();
       }
@@ -3221,7 +3470,9 @@ void  CTiling::SetBlockingEx(enum T_TILING_TYPE a2, int a3, int a4) {
       CTiling::NUpdateLinksAndCheckTileSpliting();
       CTiling::NCheckSectorSplit();
       if ( v12 )
+      {
         CTiling::NCheckEcoSectorSplit(v12);
+      }
     }
     NeighborAnalysis::Done(v9);
   }
@@ -3239,8 +3490,7 @@ void  CTiling::ClearBlockingEx(enum T_TILING_TYPE a2, int a3, int a4) {
   unsigned int v9; // [esp+8h] [ebp-Ch]
   int v10; // [esp+Ch] [ebp-8h]
 
-  if ( !CTilingWorld::WorldInWorld(a3, a4)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4422, "WorldInWorld(_iX, _iY)") == 1 )
+  if ( !CTilingWorld::WorldInWorld(a3, a4) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4422, "WorldInWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -3248,19 +3498,15 @@ void  CTiling::ClearBlockingEx(enum T_TILING_TYPE a2, int a3, int a4) {
   v9 = CTiling::TileId(a2, v10);
   if ( CTiles::IsValidPseudoTile(v9) )
   {
-    if ( !CTilingWorld::WorldInInnerWorld1(a3, a4)
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4434, "WorldInInnerWorld1(_iX, _iY)") == 1 )
+    if ( !CTilingWorld::WorldInInnerWorld1(a3, a4) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4434, "WorldInInnerWorld1(_iX, _iY)") == 1 )
     {
       __debugbreak();
     }
-    if ( v9 > 8
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4438, "(iOwnerId >= 0) && (iOwnerId <= TILES_OWNER_LAST)") == 1 )
+    if ( v9 > 8 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4438, "(iOwnerId >= 0) && (iOwnerId <= TILES_OWNER_LAST)") == 1 )
     {
       __debugbreak();
     }
-    if ( a2
-      && v9
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4439, "(_tTilingType == TILING_TYPE_NORMAL) || (iOwnerId == 0)") == 1 )
+    if ( a2 && v9 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4439, "(_tTilingType == TILING_TYPE_NORMAL) || (iOwnerId == 0)") == 1 )
     {
       __debugbreak();
     }
@@ -3279,7 +3525,9 @@ void  CTiling::ClearBlockingEx(enum T_TILING_TYPE a2, int a3, int a4) {
     {
       CTiling::NCheckSectorJoin();
       if ( v9 )
+      {
         CTiling::NCheckEcoSectorJoin(v9);
+      }
     }
     else
     {
@@ -3303,12 +3551,18 @@ int  CTiling::SectorSize(int a2)const {
   int v3; // [esp+4h] [ebp-4h]
 
   if ( a2 < 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4742, "_iSectorId >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 >= 0x8000 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4743, "_iSectorId < SECTORS_MAX") == 1 )
+  {
     __debugbreak();
+  }
   v3 = CSectors::SectorSize((CSectors *)&CTiling::m_cSectors, a2);
   if ( v3 < 0 )
+  {
     return 0;
+  }
   return v3;
 }
 
@@ -3318,15 +3572,25 @@ int  CTiling::SectorSize(int a2)const {
 int  CTiling::EcoSectorSize(int a2)const {
   
   if ( a2 < 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4762, "_iEcoSectorId >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 >= 0x4000 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4763, "_iEcoSectorId < TILING_ECO_SECTOR_MAX") == 1 )
+  {
     __debugbreak();
+  }
   if ( (unsigned int)a2 >= 0x4000 )
+  {
     return 0;
+  }
   if ( CTiling::m_iEcoSectorSizes[a2] < 0 )
+  {
     return 0;
+  }
   else
+  {
     return CTiling::m_iEcoSectorSizes[a2];
+  }
 }
 
 
@@ -3354,16 +3618,20 @@ int  CTiling::EcoSectorPackedPosition(int a2)const {
   int i; // [esp+24h] [ebp-4h]
 
   if ( (unsigned int)(a2 - 1) >= 0x3FFF || CTiling::m_iEcoSectorSizes[a2] <= 0 )
+  {
     return 0;
+  }
   v14 = (unsigned __int16)CTiling::m_uEcoSectorAnyTileIds[a2];
-  if ( !CTiles::IsValidRealTile(v14)
-    || (v19 = CTiles::TileEx(v14), !CTile::Used((CTile *)v19))
-    || CTile::EcoSectorId((CTile *)v19) != a2 )
+  if ( !CTiles::IsValidRealTile(v14) || (v19 = CTiles::TileEx(v14), !CTile::Used((CTile *)v19)) || CTile::EcoSectorId((CTile *)v19) != a2 )
   {
     UsedTileId = CTilesEx::LastUsedTileId(this);
     if ( CTiling::m_iEcoSectorTileIdIterator < 10 || CTiling::m_iEcoSectorTileIdIterator > UsedTileId )
+    {
       CTiling::m_iEcoSectorTileIdIterator = 10;
-    for ( i = CTiling::m_iEcoSectorTileIdIterator; i <= UsedTileId; ++i )
+    }
+    for ( i = CTiling::m_iEcoSectorTileIdIterator;
+          i <= UsedTileId;
+          ++i )
     {
       v18 = CTiles::TileEx(i);
       if ( CTile::Used((CTile *)v18) )
@@ -3371,8 +3639,7 @@ int  CTiling::EcoSectorPackedPosition(int a2)const {
         v16 = CTile::EcoSectorId((CTile *)v18);
         if ( v16 > 0 )
         {
-          if ( v16 >= 0x4000
-            && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4820, "iTileEcoSectorId < TILING_ECO_SECTOR_MAX") == 1 )
+          if ( v16 >= 0x4000 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4820, "iTileEcoSectorId < TILING_ECO_SECTOR_MAX") == 1 )
           {
             __debugbreak();
           }
@@ -3383,12 +3650,7 @@ int  CTiling::EcoSectorPackedPosition(int a2)const {
             v10 = CTile::CenterY((CTile *)v18);
             v5 = CTile::CenterX((CTile *)v18);
             v6 = CTilingWorld::WorldIndex(v5, v10);
-            if ( ITiling::EcoSectorId(v6) != a2
-              && BBSupportDbgReport(
-                   2,
-                   "Pathing\\Tiling.cpp",
-                   4828,
-                   "EcoSectorId(WorldIndex(rTile.CenterX(), rTile.CenterY())) == _iEcoSectorId") == 1 )
+            if ( ITiling::EcoSectorId(v6) != a2 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4828, "EcoSectorId(WorldIndex(rTile.CenterX(), rTile.CenterY())) == _iEcoSectorId") == 1 )
             {
               __debugbreak();
             }
@@ -3397,7 +3659,9 @@ int  CTiling::EcoSectorPackedPosition(int a2)const {
         }
       }
     }
-    for ( j = 10; j <= CTiling::m_iEcoSectorTileIdIterator; ++j )
+    for ( j = 10;
+          j <= CTiling::m_iEcoSectorTileIdIterator;
+          ++j )
     {
       v17 = CTiles::TileEx(j);
       if ( CTile::Used((CTile *)v17) )
@@ -3405,8 +3669,7 @@ int  CTiling::EcoSectorPackedPosition(int a2)const {
         v15 = CTile::EcoSectorId((CTile *)v17);
         if ( v15 > 0 )
         {
-          if ( v15 >= 0x4000
-            && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4848, "iTileEcoSectorId < TILING_ECO_SECTOR_MAX") == 1 )
+          if ( v15 >= 0x4000 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4848, "iTileEcoSectorId < TILING_ECO_SECTOR_MAX") == 1 )
           {
             __debugbreak();
           }
@@ -3417,12 +3680,7 @@ int  CTiling::EcoSectorPackedPosition(int a2)const {
             v11 = CTile::CenterY((CTile *)v17);
             v7 = CTile::CenterX((CTile *)v17);
             v8 = CTilingWorld::WorldIndex(v7, v11);
-            if ( ITiling::EcoSectorId(v8) != a2
-              && BBSupportDbgReport(
-                   2,
-                   "Pathing\\Tiling.cpp",
-                   4856,
-                   "EcoSectorId(WorldIndex(rTile.CenterX(), rTile.CenterY())) == _iEcoSectorId") == 1 )
+            if ( ITiling::EcoSectorId(v8) != a2 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4856, "EcoSectorId(WorldIndex(rTile.CenterX(), rTile.CenterY())) == _iEcoSectorId") == 1 )
             {
               __debugbreak();
             }
@@ -3432,24 +3690,16 @@ int  CTiling::EcoSectorPackedPosition(int a2)const {
       }
     }
     CTiling::m_iEcoSectorTileIdIterator = 10;
-    if ( BBSupportDbgReportF(
-           1,
-           "Pathing\\Tiling.cpp",
-           4867,
-           "CTiling::EcoSectorPackedPosition(): Eco-sector %i size > 0, but no tile found!",
-           a2) == 1 )
+    if ( BBSupportDbgReportF(1, "Pathing\\Tiling.cpp", 4867, "CTiling::EcoSectorPackedPosition(): Eco-sector %i size > 0, but no tile found!", a2) == 1 )
+    {
       __debugbreak();
+    }
     return 0;
   }
   v9 = CTile::CenterY((CTile *)v19);
   v2 = CTile::CenterX((CTile *)v19);
   v3 = CTilingWorld::WorldIndex(v2, v9);
-  if ( ITiling::EcoSectorId(v3) != a2
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         4796,
-         "EcoSectorId(WorldIndex(rCurrentTile.CenterX(), rCurrentTile.CenterY())) == _iEcoSectorId") == 1 )
+  if ( ITiling::EcoSectorId(v3) != a2 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 4796, "EcoSectorId(WorldIndex(rCurrentTile.CenterX(), rCurrentTile.CenterY())) == _iEcoSectorId") == 1 )
   {
     __debugbreak();
   }
@@ -3465,9 +3715,13 @@ int  CTiling::NumberOfWorldElements(void)const {
 
   v3 = CTilingWorld::WorldNumberOfElements();
   if ( v3 <= 0 )
+  {
     return 1;
+  }
   else
+  {
     return v3;
+  }
 }
 
 
@@ -3492,9 +3746,13 @@ int  CTiling::NumberOfWaterElements(void)const {
 int  CTiling::NumberOfOwnedLandElements(int a2)const {
   
   if ( a2 >= 9 )
+  {
     return 0;
+  }
   else
+  {
     return CTiling::m_iNumberOfOwnedElements[a2];
+  }
 }
 
 
@@ -3515,14 +3773,18 @@ bool  CTiling::AreNeighborSquaresConnectedViaLand(int a2, int a3, int a4, int a5
   int v16; // [esp+30h] [ebp-4h]
 
   v8 = this;
-  for ( i = ITiling::FirstTileOfSquareVW(a2, a3); i; i = CTile::NextSquareTile(v14) )
+  for ( i = ITiling::FirstTileOfSquareVW(a2, a3);
+        i;
+        i = CTile::NextSquareTile(v14) )
   {
     v14 = (struct CTile *)ITiling::Tile(i);
     if ( (CTile::Type(v14, (int)v8) & 0x10000000) != 0 )
     {
       v12 = (unsigned __int8 *)CTile::LinkList(v14);
       v16 = 0;
-      for ( j = CLinkList::Size(v12); v16 < j; j = CLinkList::Size(v12) )
+      for ( j = CLinkList::Size(v12);
+            v16 < j;
+            j = CLinkList::Size(v12) )
       {
         v6 = (unsigned __int16 *)CLinkList::operator[](v12, v16);
         v15 = (CTile *)ITiling::Tile(*v6);
@@ -3532,7 +3794,9 @@ bool  CTiling::AreNeighborSquaresConnectedViaLand(int a2, int a3, int a4, int a5
           v10 = (Squares *)CTile::CenterY(v15);
           v9 = Squares::XYToVW(v11);
           if ( Squares::XYToVW(v10) == a5 && v9 == a4 )
+          {
             return 1;
+          }
         }
         ++v16;
       }
@@ -3543,7 +3807,7 @@ bool  CTiling::AreNeighborSquaresConnectedViaLand(int a2, int a3, int a4, int a5
 
 
 // address=[0x15ee4e0]
-// Decompiled from char __thiscall CTiling::CheckFlagBits(  CTiling *this,  unsigned int a2,  unsigned int a3,  unsigned int a4,  const unsigned int *a5,  unsigned int a6)
+// Decompiled from char __thiscall CTiling::CheckFlagBits(CTiling *this, unsigned int a2, unsigned int a3, unsigned int a4, const unsigned int *a5, unsigned int a6)
 bool  CTiling::CheckFlagBits(int a2, int a3, unsigned int a4, unsigned int const * a5, unsigned int a6) {
   
   unsigned int v6; // ecx
@@ -3563,21 +3827,30 @@ bool  CTiling::CheckFlagBits(int a2, int a3, unsigned int a4, unsigned int const
   int v21; // [esp+14h] [ebp-Ch]
   char v22; // [esp+1Fh] [ebp-1h]
 
-  if ( !CTilingWorld::WorldInWorld(a2, a3)
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 5019, "WorldInWorld(_iX, _iY)") == 1 )
+  if ( !CTilingWorld::WorldInWorld(a2, a3) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 5019, "WorldInWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( !a4 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 5020, "_uNumberOfLines > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a4 > 0x20 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 5021, "_uNumberOfLines <= 32") == 1 )
+  {
     __debugbreak();
+  }
   if ( !a5 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 5022, "_pLineCheckMasks != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a6 > 0xFF && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 5023, "_uIllegalFlagBits <= 0xFF") == 1 )
+  {
     __debugbreak();
+  }
   if ( !a6 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 5024, "_uIllegalFlagBits != 0") == 1 )
+  {
     __debugbreak();
+  }
   v22 = 0;
   v20 = CTilingWorld::WorldWidthHeight();
   v21 = CTilingWorld::WorldIndex(a2, a3) + CTilingWorld::m_pWorldFlagBitsLayer;
@@ -3594,42 +3867,58 @@ bool  CTiling::CheckFlagBits(int a2, int a3, unsigned int a4, unsigned int const
     if ( *v7 )
     {
       if ( (*v8 & v10 & dword_37E0FE8[v11 >> 28]) != 0 )
+      {
         break;
+      }
       v12 = 16 * v11;
       if ( v12 )
       {
         if ( (v8[1] & v10 & dword_37E0FE8[v12 >> 28]) != 0 )
+        {
           break;
+        }
         v13 = 16 * v12;
         if ( v13 )
         {
           if ( (v8[2] & v10 & dword_37E0FE8[v13 >> 28]) != 0 )
+          {
             break;
+          }
           v14 = 16 * v13;
           if ( v14 )
           {
             if ( (v8[3] & v10 & dword_37E0FE8[v14 >> 28]) != 0 )
+            {
               break;
+            }
             v15 = 16 * v14;
             if ( v15 )
             {
               if ( (v8[4] & v10 & dword_37E0FE8[v15 >> 28]) != 0 )
+              {
                 break;
+              }
               v16 = 16 * v15;
               if ( v16 )
               {
                 if ( (v8[5] & v10 & dword_37E0FE8[v16 >> 28]) != 0 )
+                {
                   break;
+                }
                 v17 = 16 * v16;
                 if ( v17 )
                 {
                   if ( (v8[6] & v10 & dword_37E0FE8[v17 >> 28]) != 0 )
+                  {
                     break;
+                  }
                   v18 = 16 * v17;
                   if ( v18 )
                   {
                     if ( (v8[7] & v10 & dword_37E0FE8[v18 >> 28]) != 0 )
+                    {
                       break;
+                    }
                   }
                 }
               }
@@ -3680,7 +3969,9 @@ int __cdecl CTiling::DbgCheckTileLinkList(int a1, int a2) {
 
   v23 = 0;
   if ( !CTilesEx::IsUsedRealTile(a1) )
+  {
     return v23;
+  }
   v11 = CTiles::TileEx(a1);
   v12 = CTile::LinkList(v11);
   v13 = CTile::Type(v11);
@@ -3690,7 +3981,9 @@ int __cdecl CTiling::DbgCheckTileLinkList(int a1, int a2) {
   if ( (v13 & 0x3C000000u) > 0x10000000 )
   {
     if ( v19 != (void *)0x20000000 )
+    {
       goto LABEL_13;
+    }
     v18 = 0x8000000;
     v17 = 402653184;
   }
@@ -3723,7 +4016,9 @@ LABEL_14:
   v4 = CTile::TilingType(v3);
   CTiling::CalcIntLinkList((CIntLinkList *)v24, v4, v8);
   v10 = CIntLinkList::Size((CIntLinkList *)v24);
-  for ( i = 0; i < v10; ++i )
+  for ( i = 0;
+        i < v10;
+        ++i )
   {
     v15 = *(_DWORD *)CIntLinkList::operator[](v24, i);
     v22 = CLinkList::SearchForLinkTileId(v12, v15);
@@ -3732,11 +4027,7 @@ LABEL_14:
       if ( v22 )
       {
         ++v23;
-        BBSupportTracePrintF(
-          0,
-          "  DbgCheckTileLinkList(): Link to tile %i should not be in link list of tile %i!",
-          v15,
-          a1);
+        BBSupportTracePrintF(0, "  DbgCheckTileLinkList(): Link to tile %i should not be in link list of tile %i!", v15, a1);
       }
     }
     else if ( !v22 )
@@ -3746,7 +4037,9 @@ LABEL_14:
     }
   }
   v9 = CLinkList::Size(v12);
-  for ( j = 0; j < v9; ++j )
+  for ( j = 0;
+        j < v9;
+        ++j )
   {
     m_uLinkId = CLinkList::operator[](v12, j)->m_uData;
     if ( CTiles::IsValidRealTile(m_uLinkId) )
@@ -3761,71 +4054,40 @@ LABEL_14:
           if ( (v20 & 0xFFC01FFF) == (v13 & 0xFFC01FFF) )
           {
             ++v23;
-            BBSupportTracePrintF(
-              0,
-              "DbgCheckTileLinkList(): Tile %i in link list of tile %i has the same tile type!",
-              m_uLinkId,
-              a1);
+            BBSupportTracePrintF(0, "DbgCheckTileLinkList(): Tile %i in link list of tile %i has the same tile type!", m_uLinkId, a1);
           }
           if ( (v18 & v20) != 0 )
           {
             ++v23;
-            BBSupportTracePrintF(
-              0,
-              "DbgCheckTileLinkList(): Tile %i in link list of tile %i has an invalid tile type 0x%08x!",
-              m_uLinkId,
-              a1,
-              v20);
+            BBSupportTracePrintF(0, "DbgCheckTileLinkList(): Tile %i in link list of tile %i has an invalid tile type 0x%08x!", m_uLinkId, a1, v20);
           }
           else if ( (v17 & v20) != 0 )
           {
             ++v23;
-            BBSupportTracePrintF(
-              0,
-              "DbgCheckTileLinkList(): Tile %i in link list of tile %i has an weird tile type 0x%08x!",
-              m_uLinkId,
-              a1,
-              v20);
+            BBSupportTracePrintF(0, "DbgCheckTileLinkList(): Tile %i in link list of tile %i has an weird tile type 0x%08x!", m_uLinkId, a1, v20);
           }
         }
         else
         {
           ++v23;
-          BBSupportTracePrintF(
-            0,
-            "DbgCheckTileLinkList(): Tile %i in link list of tile %i has an invalid tile type 0x%08x!",
-            m_uLinkId,
-            a1,
-            v20);
+          BBSupportTracePrintF(0, "DbgCheckTileLinkList(): Tile %i in link list of tile %i has an invalid tile type 0x%08x!", m_uLinkId, a1, v20);
         }
       }
       else
       {
         ++v23;
-        BBSupportTracePrintF(
-          0,
-          "  DbgCheckTileLinkList(): Link to unused tile %i in link list of tile %i!",
-          m_uLinkId,
-          a1);
+        BBSupportTracePrintF(0, "  DbgCheckTileLinkList(): Link to unused tile %i in link list of tile %i!", m_uLinkId, a1);
       }
     }
     else
     {
       ++v23;
-      BBSupportTracePrintF(
-        0,
-        "  DbgCheckTileLinkList(): Tile %i in link list of tile %i is not a valid real tile!",
-        m_uLinkId,
-        a1);
+      BBSupportTracePrintF(0, "  DbgCheckTileLinkList(): Tile %i in link list of tile %i is not a valid real tile!", m_uLinkId, a1);
     }
     if ( !CIntLinkList::SearchBackwards((CIntLinkList *)v24, m_uLinkId) )
     {
       ++v23;
-      BBSupportTracePrintF(
-        0,
-        "  DbgCheckTileLinkList(): Invalid link to tile %i in link list of tile %i!",
-        m_uLinkId,
-        a1);
+      BBSupportTracePrintF(0, "  DbgCheckTileLinkList(): Invalid link to tile %i in link list of tile %i!", m_uLinkId, a1);
     }
   }
   return v23;
@@ -3940,9 +4202,13 @@ int  CTiling::DbgCheckTiling(int a2) {
   TBitArray<262144>::ClearArray(v67);
   TBitArray<262144>::ClearArray(v65);
   v36 = CTilingWorld::WorldWidthHeight();
-  for ( i = 0; i < v36; ++i )
+  for ( i = 0;
+        i < v36;
+        ++i )
   {
-    for ( j = 0; j < v36; ++j )
+    for ( j = 0;
+          j < v36;
+          ++j )
     {
       v2 = CTilingWorld::WorldIndex(j, i);
       v54 = ITiling::NormalTileId(v2);
@@ -3958,7 +4224,9 @@ int  CTiling::DbgCheckTiling(int a2) {
             IsBlockedWater = CWaterFlags::IsBlockedWater(v5);
             v6 = CTilingWorld::WorldIndex(j, i);
             if ( (CWaterFlags::WaterFlags(v6) & 0x400) != 0 )
+            {
               IsBlockedWater = 0;
+            }
           }
           else
           {
@@ -3994,10 +4262,14 @@ int  CTiling::DbgCheckTiling(int a2) {
       v8 = CTilingWorld::WorldIndex(j, i);
       v38 = ITiling::CatapultTileId(v8);
       if ( CTiles::IsValidRealTile(v38) )
+      {
         ++v68[v38];
+      }
     }
   }
-  for ( k = 10; k <= 32766; ++k )
+  for ( k = 10;
+        k <= 32766;
+        ++k )
   {
     v49 = CTiles::TileEx(k);
     if ( CTile::Used(v49) )
@@ -4036,15 +4308,21 @@ int  CTiling::DbgCheckTiling(int a2) {
         {
           if ( CLinkList::Size(v55) <= 62 )
           {
-            for ( m = 0; m < CLinkList::Size(v55) + 2; ++m )
+            for ( m = 0;
+                  m < CLinkList::Size(v55) + 2;
+                  ++m )
+            {
               TBitArray<262144>::Set(v65, m + v35);
+            }
             if ( CLinkList::OwnerTileId(v55) != k )
             {
               ++v64;
               v11 = CLinkList::OwnerTileId(v55);
               BBSupportTracePrintF(1, "  Tile %i, LinkList 0x%08x: Invalid owner tile id (%i)!", k, v53, v11);
             }
-            for ( n = 0; n < CLinkList::Size(v55); ++n )
+            for ( n = 0;
+                  n < CLinkList::Size(v55);
+                  ++n )
             {
               m_uLinkId = CLinkList::operator[](v55, n)->m_uData;
               if ( CTiles::IsValidTileId(m_uLinkId) && m_uLinkId )
@@ -4052,27 +4330,14 @@ int  CTiling::DbgCheckTiling(int a2) {
                 if ( !CTilesEx::IsUsedRealTile(m_uLinkId) )
                 {
                   ++v64;
-                  BBSupportTracePrintF(
-                    1,
-                    "  Tile %i, LinkList 0x%08x.%i: Not a used real tile id (%i)!",
-                    k,
-                    v53,
-                    n,
-                    m_uLinkId);
+                  BBSupportTracePrintF(1, "  Tile %i, LinkList 0x%08x.%i: Not a used real tile id (%i)!", k, v53, n, m_uLinkId);
                 }
               }
               else
               {
                 ++v64;
                 v12 = CTile::Type(v49);
-                BBSupportTracePrintF(
-                  1,
-                  "  Tile %i (%08x), LinkList 0x%08x.%i: Invalid link tile id (%i)!",
-                  k,
-                  v12,
-                  v53,
-                  n,
-                  m_uLinkId);
+                BBSupportTracePrintF(1, "  Tile %i (%08x), LinkList 0x%08x.%i: Invalid link tile id (%i)!", k, v12, v53, n, m_uLinkId);
               }
             }
             v51 = CLinkList::Size(v55);
@@ -4091,12 +4356,7 @@ int  CTiling::DbgCheckTiling(int a2) {
             {
               ++v64;
               v15 = CLinkList::operator[](v55, v51);
-              BBSupportTracePrintF(
-                1,
-                "  Tile %i, LinkList 0x%08x: Invalid next link tile id (%i)!",
-                k,
-                v53,
-                v15->m_uData);
+              BBSupportTracePrintF(1, "  Tile %i, LinkList 0x%08x: Invalid next link tile id (%i)!", k, v53, v15->m_uData);
             }
           }
           else
@@ -4181,7 +4441,9 @@ int  CTiling::DbgCheckTiling(int a2) {
   BBSupportTracePrintF(1, "  Used tiles: %i; free tiles: %i (%.1f%%).", v44, v43, (double)v43 / 32757.0 * 100.0);
   v40 = 0;
   v39 = 0;
-  for ( ii = 2; ii <= 262141; ++ii )
+  for ( ii = 2;
+        ii <= 262141;
+        ++ii )
   {
     v23 = CLinks::Link(ii);
     v40 += CLink::Used(v23);
@@ -4189,23 +4451,31 @@ int  CTiling::DbgCheckTiling(int a2) {
     v39 += CLink::Unused(v24);
   }
   v50 = 0;
-  for ( jj = 2; jj <= 262141; jj += 2 )
+  for ( jj = 2;
+        jj <= 262141;
+        jj += 2 )
   {
     v25 = CLinks::Link(jj);
     v56 = CLink::Unused(v25);
     v26 = CLinks::Link(jj + 1);
     v57 = CLink::Unused(v26);
     if ( v57 && v56 )
+    {
       v50 += 2;
+    }
     else
+    {
       v33 = jj;
+    }
     if ( !v57 && v56 )
     {
       ++v64;
       BBSupportTracePrintF(1, "  Link %i is unused, but link %i is not!", jj, jj + 1);
     }
   }
-  for ( kk = 2; kk <= 262141; ++kk )
+  for ( kk = 2;
+        kk <= 262141;
+        ++kk )
   {
     if ( TBitArray<262144>::operator[](v67, kk) )
     {
@@ -4246,27 +4516,26 @@ int  CTiling::DbgCheckTiling(int a2) {
       }
     }
   }
-  BBSupportTracePrintF(
-    1,
-    "  Used links: %i; unusable links: %i; free links: %i (%.1f%%), garbage free links: %i.",
-    v40,
-    v39 - v50,
-    v50,
-    (double)v50 / 262140.0 * 100.0,
-    v50 - (262140 - v33));
+  BBSupportTracePrintF(1, "  Used links: %i; unusable links: %i; free links: %i (%.1f%%), garbage free links: %i.", v40, v39 - v50, v50, (double)v50 / 262140.0 * 100.0, v50 - (262140 - v33));
   if ( v64 )
   {
     if ( v64 == 1 )
+    {
       BBSupportTracePrintF(1, "  1 error found!!");
+    }
     else
+    {
       BBSupportTracePrintF(1, "  %i errors found!!", v64);
+    }
   }
   else
   {
     BBSupportTracePrintF(1, "  No errors found.");
   }
   if ( (a2 & 1) != 0 )
+  {
     v64 += CTiling::DbgCheckSectors();
+  }
   return v64;
 }
 
@@ -4283,7 +4552,9 @@ void  CTiling::DbgReCalculate(int a2) {
   int v8; // [esp+14h] [ebp-8h]
 
   if ( !CTiling::m_iInitialized && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 5645, "m_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   CTiling::PrepareReCalculate();
   v3 = CTilingWorld::m_uWorldWidthHeight;
   v4 = m_pWorldGfxMapElements;
@@ -4292,15 +4563,7 @@ void  CTiling::DbgReCalculate(int a2) {
   v6 = ITiling::m_pTileIds;
   v7 = (int)*(&ITiling::m_pTileIds + 1);
   (*(void (__thiscall **)(CTiling *))(*(_DWORD *)this + 4))(this);
-  return (**(int (__thiscall ***)(CTiling *, int, int, int, __int16 *, int, int, int))this)(
-           this,
-           v3,
-           v4,
-           v5,
-           v6,
-           v7,
-           v8,
-           1);
+  return (**(int (__thiscall ***)(CTiling *, int, int, int, __int16 *, int, int, int))this)(this, v3, v4, v5, v6, v7, v8, 1);
 }
 
 
@@ -4334,55 +4597,85 @@ void  CTiling::DbgCheckBlocking(int a2) {
   v23 = CTilingWorld::WorldWidthHeight();
   BBSupportTracePrintF(0, "CTiling::DbgCheckBlocking()...");
   BBSupportTracePrintF(0, "  Map size is %i x %i.", v23, v23);
-  for ( i = 0; i < v23; ++i )
+  for ( i = 0;
+        i < v23;
+        ++i )
   {
     v2 = CTilingWorld::WorldIndex(i, 0);
     if ( !CTilingWorld::WorldIsWater(v2) )
+    {
       BBSupportTracePrintF(0, "  Error: (%4i, %4i) is not water!", i, 0);
+    }
     v3 = CTilingWorld::WorldIndex(i, 1);
     if ( !CTilingWorld::WorldIsWater(v3) )
+    {
       BBSupportTracePrintF(0, "  Error: (%4i, %4i) is not water!", i, 1);
+    }
     v4 = CTilingWorld::WorldIndex(i, v23 - 2);
     if ( !CTilingWorld::WorldIsWater(v4) )
+    {
       BBSupportTracePrintF(0, "  Error: (%4i, %4i) is not water!", i, v23 - 2);
+    }
     v5 = CTilingWorld::WorldIndex(i, v23 - 1);
     if ( !CTilingWorld::WorldIsWater(v5) )
+    {
       BBSupportTracePrintF(0, "  Error: (%4i, %4i) is not water!", i, v23 - 1);
+    }
   }
-  for ( j = 0; j < v23; ++j )
+  for ( j = 0;
+        j < v23;
+        ++j )
   {
     v6 = CTilingWorld::WorldIndex(0, j);
     if ( !CTilingWorld::WorldIsWater(v6) )
+    {
       BBSupportTracePrintF(0, "  Error: (%4i, %4i) is not water!", 0, j);
+    }
     v7 = CTilingWorld::WorldIndex(1, j);
     if ( !CTilingWorld::WorldIsWater(v7) )
+    {
       BBSupportTracePrintF(0, "  Error: (%4i, %4i) is not water!", 1, j);
+    }
     v8 = CTilingWorld::WorldIndex(v23 - 2, j);
     if ( !CTilingWorld::WorldIsWater(v8) )
+    {
       BBSupportTracePrintF(0, "  Error: (%4i, %4i) is not water!", v23 - 2, j);
+    }
     v9 = CTilingWorld::WorldIndex(v23 - 1, j);
     if ( !CTilingWorld::WorldIsWater(v9) )
+    {
       BBSupportTracePrintF(0, "  Error: (%4i, %4i) is not water!", v23 - 1, j);
+    }
   }
-  for ( k = 2; ; ++k )
+  for ( k = 2;
+        ;
+        ++k )
   {
     result = v23 - 2;
     if ( k >= v23 - 2 )
+    {
       break;
-    for ( m = 2; m < v23 - 2; ++m )
+    }
+    for ( m = 2;
+          m < v23 - 2;
+          ++m )
     {
       v13 = CTilingWorld::WorldIndex(m, k);
       if ( CTilingWorld::WorldIsWater(v13) )
       {
         if ( !CTilingWorld::WorldIsBlockedLand(v13) )
+        {
           BBSupportTracePrintF(0, "  Error: (%4i, %4i) is water, but not blocked!", m, k);
+        }
       }
       else if ( CTilingWorld::WorldIsBlockedLand(v13) )
       {
         v14 = 0;
         v15 = 0;
         v16 = 0;
-        for ( n = 0; n < 6; ++n )
+        for ( n = 0;
+              n < 6;
+              ++n )
         {
           v12 = CTilingWorld::WorldIndex(g_sNeighborPoints[2 * n] + m, MEMORY[0x37D8C0C][2 * n] + k);
           if ( CTilingWorld::WorldIsBlockedLand(v12) )
@@ -4397,21 +4690,16 @@ void  CTiling::DbgCheckBlocking(int a2) {
           {
             v17 = CTilingWorld::WorldGroundType(v13) & 0xF0;
             if ( v17 != 16 && v17 != 64 && v17 != 144 && v17 != 32 )
+            {
               ++v16;
+            }
           }
         }
         v11 = v16 + v15 + v14;
         if ( v11 != 6 )
-          BBSupportTracePrintF(
-            0,
-            "  Warning: (%4i, %4i) is blocked, but not all neighbors (%i) are \"reserved\" (%i blocked, %i building / dec"
-            "o, %i not possible).",
-            m,
-            k,
-            6 - v11,
-            v14,
-            v15,
-            v16);
+        {
+          BBSupportTracePrintF(0, "  Warning: (%4i, %4i) is blocked, but not all neighbors (%i) are \"reserved\" (%i blocked, %i building / deco, %i not possible).", m, k, 6 - v11, v14, v15, v16);
+        }
       }
     }
   }
@@ -4438,7 +4726,9 @@ void __cdecl CTiling::DbgPrintLinkList(class CLinkList const & a1) {
   {
     v1 = (unsigned __int16 *)CLinkList::operator[](a1, 0);
     snprintf(Source, 0x1000u, ", links: %i", *v1);
-    for ( i = 1; i < CLinkList::Size((unsigned __int8 *)a1); ++i )
+    for ( i = 1;
+          i < CLinkList::Size((unsigned __int8 *)a1);
+          ++i )
     {
       j__strncpy(Destination, Source, 0x1000u);
       v2 = (unsigned __int16 *)CLinkList::operator[](a1, i);
@@ -4480,31 +4770,47 @@ int __cdecl CTiling::DbgCheckSectors(int) {
   v9 = CTilingWorld::WorldWidthHeight();
   v7 = v9 * v9;
   memset(v16, 0, sizeof(v16));
-  for ( i = 0; i < v7; ++i )
+  for ( i = 0;
+        i < v7;
+        ++i )
   {
     v0 = ITiling::NormalTileId(i);
     v1 = CTiles::TileEx(v0);
     v8 = &v16[CTile::SectorId((CTile *)v1)];
     ++*v8;
   }
-  for ( j = 1; j < 0x10000; ++j )
+  for ( j = 1;
+        j < 0x10000;
+        ++j )
   {
     if ( v16[j] )
+    {
       ++v13;
+    }
   }
   v5 = v7 - v16[0];
   if ( v13 == 1 )
+  {
     v6 = (const char *)&unk_37DDF37;
+  }
   else
+  {
     v6 = "s";
+  }
   if ( v5 == 1 )
+  {
     BBSupportTracePrintF(0, "  %i element%s in %i sector%s.", 1, (const char *)&unk_37DDF4E, v13, v6);
+  }
   else
+  {
     BBSupportTracePrintF(0, "  %i element%s in %i sector%s.", v5, "s", v13, v6);
+  }
   v10 = 0;
   TBitArray<32768>::ClearArray(&unk_45010C0);
   UsedTileId = CTilesEx::LastUsedTileId();
-  for ( k = 10; k <= UsedTileId; ++k )
+  for ( k = 10;
+        k <= UsedTileId;
+        ++k )
   {
     if ( !(unsigned __int8)TBitArray<32768>::operator[](k) )
     {
@@ -4525,9 +4831,13 @@ int __cdecl CTiling::DbgCheckSectors(int) {
     BBSupportTracePrintF(0, "  Number of walks differs!");
   }
   if ( v14 )
+  {
     BBSupportTracePrintF(0, "  1 error found!!");
+  }
   else
+  {
     BBSupportTracePrintF(0, "  No errors found.");
+  }
   return v14;
 }
 
@@ -4560,44 +4870,57 @@ int __cdecl CTiling::DbgCheckEcoSectors(int) {
   v9 = CTilingWorld::WorldWidthHeight();
   v7 = v9 * v9;
   memset(v17, 0, sizeof(v17));
-  for ( i = 0; i < v7; ++i )
+  for ( i = 0;
+        i < v7;
+        ++i )
   {
     v0 = ITiling::NormalTileId(i);
     v1 = CTiles::TileEx(v0);
     v8 = &v17[CTile::EcoSectorId((CTile *)v1)];
     ++*v8;
   }
-  for ( j = 1; j < 0x4000; ++j )
+  for ( j = 1;
+        j < 0x4000;
+        ++j )
   {
     v13 = v17[j];
     if ( v13 )
+    {
       ++v12;
+    }
     else
+    {
       v13 = -1;
+    }
     if ( CTiling::m_iEcoSectorSizes[j] != v13 )
     {
       ++v16;
-      BBSupportTracePrintF(
-        0,
-        "  Invalid size for eco-sector %i (size is %i, should be %i)!",
-        j,
-        CTiling::m_iEcoSectorSizes[j],
-        v13);
+      BBSupportTracePrintF(0, "  Invalid size for eco-sector %i (size is %i, should be %i)!", j, CTiling::m_iEcoSectorSizes[j], v13);
     }
   }
   v5 = v7 - v17[0];
   if ( v12 == 1 )
+  {
     v6 = (const char *)&unk_37DDF4F;
+  }
   else
+  {
     v6 = "s";
+  }
   if ( v5 == 1 )
+  {
     BBSupportTracePrintF(0, "  %i element%s in %i eco-sector%s.", 1, (const char *)&unk_37DDF63, v12, v6);
+  }
   else
+  {
     BBSupportTracePrintF(0, "  %i element%s in %i eco-sector%s.", v5, "s", v12, v6);
+  }
   v10 = 0;
   TBitArray<32768>::ClearArray(&unk_45010C0);
   UsedTileId = CTilesEx::LastUsedTileId();
-  for ( k = 10; k <= UsedTileId; ++k )
+  for ( k = 10;
+        k <= UsedTileId;
+        ++k )
   {
     if ( !(unsigned __int8)TBitArray<32768>::operator[](k) )
     {
@@ -4617,9 +4940,13 @@ int __cdecl CTiling::DbgCheckEcoSectors(int) {
   if ( v16 )
   {
     if ( v16 == 1 )
+    {
       BBSupportTracePrintF(0, "  1 error found!!");
+    }
     else
+    {
       BBSupportTracePrintF(0, "  %i errors found!!", v16);
+    }
   }
   else
   {
@@ -4648,7 +4975,9 @@ int __cdecl CTiling::DbgCheckTileSizes(int) {
   BBSupportTracePrintF(0, "CTiling::DbgCheckTileSizes()...");
   memset(v10, 0, sizeof(v10));
   v3 = CTilingWorld::WorldNumberOfElements();
-  for ( i = 0; i < v3; ++i )
+  for ( i = 0;
+        i < v3;
+        ++i )
   {
     v5 = ITiling::NormalTileId(i);
     v4 = ITiling::CatapultTileId(i);
@@ -4656,7 +4985,9 @@ int __cdecl CTiling::DbgCheckTileSizes(int) {
     ++v10[v4];
   }
   UsedTileId = CTilesEx::LastUsedTileId();
-  for ( j = 10; j <= UsedTileId; ++j )
+  for ( j = 10;
+        j <= UsedTileId;
+        ++j )
   {
     v6 = CTiles::TileEx(j);
     if ( CTile::Used((CTile *)v6) && CTile::Size((CTile *)v6) != v10[j] )
@@ -4667,9 +4998,13 @@ int __cdecl CTiling::DbgCheckTileSizes(int) {
     }
   }
   if ( v7 )
+  {
     BBSupportTracePrintF(0, "  %i error(s) found!!", v7);
+  }
   else
+  {
     BBSupportTracePrintF(0, "  No errors found.");
+  }
   return v7;
 }
 
@@ -4696,18 +5031,15 @@ int __cdecl CTiling::EcoSectorSizeEx(int a1) {
   
   int v2; // [esp+0h] [ebp-4h]
 
-  if ( (a1 <= 0 || a1 >= 0x4000)
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         274,
-         "(_iEcoSectorId > 0) && (_iEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
+  if ( (a1 <= 0 || a1 >= 0x4000) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 274, "(_iEcoSectorId > 0) && (_iEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
   {
     __debugbreak();
   }
   v2 = CTiling::m_iEcoSectorSizes[a1];
   if ( v2 <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 278, "iSize > 0") == 1 )
+  {
     __debugbreak();
+  }
   return v2;
 }
 
@@ -4725,52 +5057,41 @@ bool __cdecl CTiling::IsValidOwnerId(int a1) {
 void __cdecl CTiling::NotifyChangeEcoSector(int a1, int a2, int a3, bool a4) {
   
   if ( a2 == a3 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 195, "_iOldEcoSectorId != _iNewEcoSectorId") == 1 )
-    __debugbreak();
-  if ( ITiling::EcoSectorId(a1) != a3
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 196, "EcoSectorId(_iWorldIdx) == _iNewEcoSectorId") == 1 )
   {
     __debugbreak();
   }
-  if ( (a2 >= 0x4000 || a2 < 0)
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         198,
-         "(_iOldEcoSectorId >= 0) & (_iOldEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
+  if ( ITiling::EcoSectorId(a1) != a3 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 196, "EcoSectorId(_iWorldIdx) == _iNewEcoSectorId") == 1 )
   {
     __debugbreak();
   }
-  if ( (a3 >= 0x4000 || a3 < 0)
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         199,
-         "(_iNewEcoSectorId >= 0) & (_iNewEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
+  if ( (a2 >= 0x4000 || a2 < 0) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 198, "(_iOldEcoSectorId >= 0) & (_iOldEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
   {
     __debugbreak();
   }
-  if ( (unsigned __int16)word_43010C0[a1] != a2
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         201,
-         "s_uDbgTilingWorldEcoSectorIds[_iWorldIdx] == _iOldEcoSectorId") == 1 )
+  if ( (a3 >= 0x4000 || a3 < 0) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 199, "(_iNewEcoSectorId >= 0) & (_iNewEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( (unsigned __int16)word_43010C0[a1] != a2 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 201, "s_uDbgTilingWorldEcoSectorIds[_iWorldIdx] == _iOldEcoSectorId") == 1 )
   {
     __debugbreak();
   }
   if ( a2 )
   {
-    if ( --CTiling::m_iEcoSectorSizes[a2] < 0
-      && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 207, "m_iEcoSectorSizes[_iOldEcoSectorId] >= 0") == 1 )
+    if ( --CTiling::m_iEcoSectorSizes[a2] < 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 207, "m_iEcoSectorSizes[_iOldEcoSectorId] >= 0") == 1 )
     {
       __debugbreak();
     }
   }
   if ( a3 )
+  {
     ++CTiling::m_iEcoSectorSizes[a3];
+  }
   word_43010C0[a1] = a3;
   if ( a4 )
+  {
     CEcoSectorMgr::NotifyChangeEcoSector(g_cESMgr, a1, a2, a3);
+  }
 }
 
 
@@ -4789,22 +5110,22 @@ int __cdecl CTiling::NotifyCreateEcoSector(int a1, bool a2) {
   int EcoSector; // [esp+0h] [ebp-4h]
 
   if ( a1 <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 148, "_iOwnerId > 0") == 1 )
-    __debugbreak();
-  if ( a2 )
-    EcoSector = CEcoSectorMgr::NotifyCreateEcoSector((CEcoSectorMgr *)g_cESMgr, a1);
-  else
-    EcoSector = ++CTiling::m_iInitLastEcoSectorId;
-  if ( (EcoSector <= 0 || EcoSector >= 0x4000)
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         163,
-         "(iNewEcoSectorId > 0) && (iNewEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
   {
     __debugbreak();
   }
-  if ( CTiling::m_iEcoSectorSizes[EcoSector] != -1
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 164, "m_iEcoSectorSizes[iNewEcoSectorId] == -1") == 1 )
+  if ( a2 )
+  {
+    EcoSector = CEcoSectorMgr::NotifyCreateEcoSector((CEcoSectorMgr *)g_cESMgr, a1);
+  }
+  else
+  {
+    EcoSector = ++CTiling::m_iInitLastEcoSectorId;
+  }
+  if ( (EcoSector <= 0 || EcoSector >= 0x4000) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 163, "(iNewEcoSectorId > 0) && (iNewEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( CTiling::m_iEcoSectorSizes[EcoSector] != -1 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 164, "m_iEcoSectorSizes[iNewEcoSectorId] == -1") == 1 )
   {
     __debugbreak();
   }
@@ -4826,11 +5147,14 @@ int __cdecl CTiling::NotifyCreateSector(void) {
 void __cdecl CTiling::NotifyDeleteEcoSector(int a1) {
   
   if ( a1 <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 178, (const char *)&dword_366FF60[1]) == 1 )
+  {
     __debugbreak();
+  }
   if ( a1 >= 0x4000 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 179, "_iEcoSectorId < TILING_ECO_SECTOR_MAX") == 1 )
+  {
     __debugbreak();
-  if ( CTiling::m_iEcoSectorSizes[a1]
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 181, "m_iEcoSectorSizes[_iEcoSectorId] == 0") == 1 )
+  }
+  if ( CTiling::m_iEcoSectorSizes[a1] && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 181, "m_iEcoSectorSizes[_iEcoSectorId] == 0") == 1 )
   {
     __debugbreak();
   }
@@ -4859,33 +5183,23 @@ void __cdecl CTiling::NotifyEcoSectorMerge(int a1, int a2) {
 // Decompiled from unsigned int __cdecl CTiling::NotifyEcoSectorSplit(signed int a1, signed int a2)
 void __cdecl CTiling::NotifyEcoSectorSplit(int a1, int a2) {
   
-  if ( (a1 <= 0 || a1 >= 0x4000)
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         230,
-         "(_iEcoSectorId > 0) && (_iEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
+  if ( (a1 <= 0 || a1 >= 0x4000) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 230, "(_iEcoSectorId > 0) && (_iEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
   {
     __debugbreak();
   }
-  if ( (a2 <= 0 || a2 >= 0x4000)
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         231,
-         "(_iCreatedEcoSectorId > 0) && (_iCreatedEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
+  if ( (a2 <= 0 || a2 >= 0x4000) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 231, "(_iCreatedEcoSectorId > 0) && (_iCreatedEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
   {
     __debugbreak();
   }
   if ( a1 == a2 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 232, "_iEcoSectorId != _iCreatedEcoSectorId") == 1 )
-    __debugbreak();
-  if ( CTiling::m_iEcoSectorSizes[a1] <= 0
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 234, "m_iEcoSectorSizes[_iEcoSectorId] > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( CTiling::m_iEcoSectorSizes[a2] <= 0
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 235, "m_iEcoSectorSizes[_iCreatedEcoSectorId] > 0") == 1 )
+  if ( CTiling::m_iEcoSectorSizes[a1] <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 234, "m_iEcoSectorSizes[_iEcoSectorId] > 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( CTiling::m_iEcoSectorSizes[a2] <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 235, "m_iEcoSectorSizes[_iCreatedEcoSectorId] > 0") == 1 )
   {
     __debugbreak();
   }
@@ -4897,33 +5211,23 @@ void __cdecl CTiling::NotifyEcoSectorSplit(int a1, int a2) {
 // Decompiled from _DWORD *__cdecl CTiling::NotifyEcoSectorsMerged(int a1, int a2)
 void __cdecl CTiling::NotifyEcoSectorsMerged(int a1, int a2) {
   
-  if ( (a1 <= 0 || a1 >= 0x4000)
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         257,
-         "(_iEcoSectorId > 0) && (_iEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
+  if ( (a1 <= 0 || a1 >= 0x4000) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 257, "(_iEcoSectorId > 0) && (_iEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
   {
     __debugbreak();
   }
-  if ( (a2 <= 0 || a2 >= 0x4000)
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\Tiling.cpp",
-         258,
-         "(_iEmptiedEcoSectorId > 0) && (_iEmptiedEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
+  if ( (a2 <= 0 || a2 >= 0x4000) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 258, "(_iEmptiedEcoSectorId > 0) && (_iEmptiedEcoSectorId < TILING_ECO_SECTOR_MAX)") == 1 )
   {
     __debugbreak();
   }
   if ( a1 == a2 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 259, "_iEcoSectorId != _iEmptiedEcoSectorId") == 1 )
-    __debugbreak();
-  if ( CTiling::m_iEcoSectorSizes[a1] <= 0
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 261, "m_iEcoSectorSizes[_iEcoSectorId] > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( CTiling::m_iEcoSectorSizes[a2]
-    && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 262, "m_iEcoSectorSizes[_iEmptiedEcoSectorId] == 0") == 1 )
+  if ( CTiling::m_iEcoSectorSizes[a1] <= 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 261, "m_iEcoSectorSizes[_iEcoSectorId] > 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( CTiling::m_iEcoSectorSizes[a2] && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 262, "m_iEcoSectorSizes[_iEmptiedEcoSectorId] == 0") == 1 )
   {
     __debugbreak();
   }

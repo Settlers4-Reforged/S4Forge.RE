@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateCampaignDark::DynamicCreateFunc(void * a1) {
 
   C = (CStateCampaignDark *)operator new(4u);
   if ( C )
+  {
     return CStateCampaignDark::CStateCampaignDark(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -35,8 +39,7 @@ class CGameState * __cdecl CStateCampaignDark::DynamicCreateFunc(void * a1) {
  CStateCampaignDark::~CStateCampaignDark(void) {
   
   *(_DWORD *)this = &CStateCampaignDark::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 9)
-    && BBSupportDbgReport(2, "main\\states\\StateCampaignDark.cpp", 65, (const char *)&dword_373DFA8[1]) == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 9) && BBSupportDbgReport(2, "main\\states\\StateCampaignDark.cpp", 65, (const char *)&dword_373DFA8[1]) == 1 )
   {
     __debugbreak();
   }
@@ -61,7 +64,9 @@ bool  CStateCampaignDark::Perform(void) {
   }
   v1 = dword_402CC3C + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_402CC3C = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -84,7 +89,9 @@ bool  CStateCampaignDark::OnEvent(class CEvn_Event & a2) {
   if ( event == 11 )
   {
     if ( (unsigned __int16)a2->m_wParam != 27 )
+    {
       return CGuiGameState::OnEvent(this, a2);
+    }
     v3 = CEvn_Event::CEvn_Event(&v6, 0x65u, 0, 0, 0);
     v7 = 0;
     IEventEngine::SendAMessage(g_pEvnEngine, v3);
@@ -95,7 +102,9 @@ bool  CStateCampaignDark::OnEvent(class CEvn_Event & a2) {
   if ( event != 100 )
   {
     if ( event != 101 )
+    {
       return CGuiGameState::OnEvent(this, a2);
+    }
     CGameStateHandler::Switch((int)CStateLocalType::DynamicCreateFunc, 0);
     return 1;
   }

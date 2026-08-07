@@ -67,18 +67,26 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
       {
         v16 = LZHLDecompressor::_get(this, &a4, v22, 4);
         if ( v16 < 0 )
+        {
           return 0;
+        }
         v23 = this[2 * v16 + 3];
         if ( v23 )
         {
           if ( v23 > 8 && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 430, "nBits <= 8") == 1 )
+          {
             __debugbreak();
+          }
           v15 = LZHLDecompressor::_get(this, &a4, v22, v23);
           if ( v15 < 0 )
+          {
             return 0;
+          }
           v14 = v15 + this[2 * v16 + 4];
           if ( v14 >= 274 )
+          {
             return 0;
+          }
           v27 = *(__int16 *)(this[35] + 2 * v14);
         }
         else
@@ -86,42 +94,64 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
           v27 = *(__int16 *)(this[35] + 2 * this[2 * v16 + 4]);
         }
         if ( v27 >= 274 && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 440, "symbol < NHUFFSYMBOLS") == 1 )
+        {
           __debugbreak();
+        }
         ++*(_WORD *)(this[2] + 2 * v27);
         if ( v27 >= 256 )
+        {
           break;
+        }
         if ( Src >= v9 )
+        {
           return 0;
+        }
         *Src++ = v27;
         LZBuffer::_toBuf((LZBuffer *)this, v27);
       }
       if ( v27 != 272 )
+      {
         break;
+      }
       HuffStat::makeSortedTmp((HuffStat *)(this + 2), (struct HuffStatTmpStruct *)v31);
-      for ( i = 0; i < 274; ++i )
+      for ( i = 0;
+            i < 274;
+            ++i )
+      {
         *(_WORD *)(this[35] + 2 * i) = v31[2 * i];
+      }
       v19 = 0;
       v18 = 0;
-      for ( j = 0; j < 16; ++j )
+      for ( j = 0;
+            j < 16;
+            ++j )
       {
         v17 = 0;
         while ( !LZHLDecompressor::_get(this, &a4, v22, 1) )
+        {
           ++v17;
+        }
         v19 += v17;
         this[2 * j + 3] = v19;
         this[2 * j + 4] = v18;
         v18 += 1 << v19;
       }
       if ( v18 >= 529 && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 475, "pos < NHUFFSYMBOLS + 255") == 1 )
+      {
         __debugbreak();
+      }
     }
     if ( v27 == 273 )
+    {
       break;
+    }
     if ( v27 >= 264 )
     {
       v13 = LZHLDecompressor::_get(this, &a4, v22, aGhijklmnopqrst[2 * v27]);
       if ( v13 < 0 )
+      {
         return 0;
+      }
       v10 = v13 + aGhijklmnopqrst[2 * v27 + 1];
     }
     else
@@ -130,36 +160,49 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
     }
     v12 = LZHLDecompressor::_get(this, &a4, v22, 3);
     if ( v12 < 0 )
+    {
       return 0;
+    }
     v24 = dword_3E2E1D8[2 * v12] + 9;
     v28 = 0;
     if ( v24 > 16 && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 523, "nBits <= 16") == 1 )
+    {
       __debugbreak();
+    }
     if ( v24 > 8 )
     {
       v24 -= 8;
       v28 = LZHLDecompressor::_get(this, &a4, v22, 8) << v24;
     }
     if ( v24 > 8 && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 529, "nBits <= 8") == 1 )
+    {
       __debugbreak();
+    }
     v11 = LZHLDecompressor::_get(this, &a4, v22, v24);
     if ( v11 < 0 )
+    {
       return 0;
+    }
     v29 = (v11 | v28) + (dword_3E2E1D8[2 * v12 + 1] << 9);
-    if ( (unsigned int)v29 >= 0x10000
-      && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 536, "disp >= 0 && disp < LZBUFSIZE") == 1 )
+    if ( (unsigned int)v29 >= 0x10000 && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 536, "disp >= 0 && disp < LZBUFSIZE") == 1 )
     {
       __debugbreak();
     }
     v21 = v10 + 4;
     if ( &Src[v10 + 4] > v9 )
+    {
       return 0;
+    }
     v8 = this[1] - v29;
     if ( v21 >= v29 )
     {
       LZBuffer::_bufCpy(Src, v8, v29);
-      for ( k = 0; k < v21 - v29; ++k )
+      for ( k = 0;
+            k < v21 - v29;
+            ++k )
+      {
         Src[v29 + k] = Src[k];
+      }
     }
     else
     {
@@ -169,9 +212,13 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
     Src += v21;
   }
   if ( a3 )
+  {
     *a3 -= Src - v7;
+  }
   if ( a5 )
+  {
     *a5 -= a4 - v6;
+  }
   return 1;
 }
 
@@ -183,7 +230,9 @@ int  LZHLDecompressor::_get(unsigned char const * & a2, unsigned char const * a3
   int v5; // [esp+0h] [ebp-8h]
 
   if ( a4 > 8 && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 392, "n <= 8") == 1 )
+  {
     __debugbreak();
+  }
   if ( this[37] < a4 )
   {
     if ( *a2 >= a3 )

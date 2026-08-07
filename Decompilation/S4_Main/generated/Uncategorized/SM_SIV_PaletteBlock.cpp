@@ -22,7 +22,7 @@
 
 
 // address=[0x2fd2a70]
-// Decompiled from int __thiscall SM_SIV_PaletteBlock::FillPalette(  _BYTE *this,  int a2,  _DWORD *a3,  unsigned __int8 a4,  unsigned __int16 a5)
+// Decompiled from int __thiscall SM_SIV_PaletteBlock::FillPalette(_BYTE *this, int a2, _DWORD *a3, unsigned __int8 a4, unsigned __int16 a5)
 int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE a2, unsigned char * * const a3, unsigned char a4, unsigned short a5) {
   
   unsigned int v5; // eax
@@ -46,7 +46,9 @@ int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE a2, unsigned char 
   v11 = this;
   if ( this[4] )
   {
-    for ( i = 0; i < (int)a5; ++i )
+    for ( i = 0;
+          i < (int)a5;
+          ++i )
     {
       v19 = *(_BYTE *)(*a3 + i);
       v20 = *(_BYTE *)(a3[1] + i);
@@ -73,7 +75,9 @@ int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE a2, unsigned char 
   }
   else
   {
-    for ( i = 0; i < (int)a5; ++i )
+    for ( i = 0;
+          i < (int)a5;
+          ++i )
     {
       v19 = *(_BYTE *)(*a3 + i);
       v20 = *(_BYTE *)(a3[1] + i);
@@ -108,14 +112,20 @@ int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE a2, unsigned char 
   }
   std::vector<unsigned short>::vector<unsigned short>(v8);
   v22 = 0;
-  for ( i = 0; i < 0x100u; ++i )
+  for ( i = 0;
+        i < 0x100u;
+        ++i )
   {
     v17 = 0;
-    for ( j = 0; ; ++j )
+    for ( j = 0;
+          ;
+          ++j )
     {
       v5 = std::vector<unsigned short>::size(v8);
       if ( j >= v5 )
+      {
         break;
+      }
       v6 = *(unsigned __int16 *)((char *)&v11[128 * a2 + 1] + 2 * i + 2 * a4 + 1);
       if ( v6 == *(unsigned __int16 *)std::vector<unsigned short>::operator[](v8, j) )
       {
@@ -124,7 +134,9 @@ int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE a2, unsigned char 
       }
     }
     if ( !v17 )
+    {
       std::vector<unsigned short>::push_back((char *)&v11[128 * a2 + 1] + 2 * i + 2 * a4 + 1);
+    }
   }
   v9 = std::vector<unsigned short>::size(v8);
   v22 = -1;
@@ -144,22 +156,36 @@ unsigned int  SM_SIV_PaletteBlock::Save(struct _iobuf * a2, struct _iobuf * Stre
   unsigned int i; // [esp+14h] [ebp-4h]
 
   if ( Stream )
+  {
     j__fwrite(&Buffer, 4u, 1u, Stream);
+  }
   if ( this[4] )
+  {
     v9 = 2;
+  }
   else
+  {
     v9 = 4;
+  }
   v8 = 2;
   if ( a5 && a6 )
-    v8 = 1;
-  v10 = Buffer;
-  for ( i = 0; i < v9; ++i )
   {
-    for ( j = 0; j < v8; ++j )
+    v8 = 1;
+  }
+  v10 = Buffer;
+  for ( i = 0;
+        i < v9;
+        ++i )
+  {
+    for ( j = 0;
+          j < v8;
+          ++j )
     {
       j__fwrite(&this[1024 * i + 5 + 512 * j], 0x200u, 1u, a2);
       if ( Stream )
+      {
         v10 += 512;
+      }
     }
   }
   return v10;
@@ -167,7 +193,7 @@ unsigned int  SM_SIV_PaletteBlock::Save(struct _iobuf * a2, struct _iobuf * Stre
 
 
 // address=[0x2fd33c0]
-// Decompiled from unsigned int __cdecl SM_SIV_PaletteBlock::Convert4444(  unsigned int a1,  unsigned int a2,  unsigned int a3,  unsigned int a4,  float a5)
+// Decompiled from unsigned int __cdecl SM_SIV_PaletteBlock::Convert4444(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4, float a5)
 unsigned short __cdecl SM_SIV_PaletteBlock::Convert4444(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4, float a5) {
   
   float v5; // xmm0_4

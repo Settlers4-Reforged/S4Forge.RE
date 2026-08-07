@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CRomanWarShip::New(std::istream & a1) {
   
   if ( CWarShip::operator new(0xC8u) )
+  {
     return CRomanWarShip::CRomanWarShip(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -73,7 +77,7 @@ unsigned long  CRomanWarShip::ClassID(void)const {
 // [Decompilation failed for static unsigned long CRomanWarShip::m_iClassID]
 
 // address=[0x15a1990]
-// Decompiled from CRomanWarShip *__thiscall CRomanWarShip::CRomanWarShip(  CRomanWarShip *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
+// Decompiled from CRomanWarShip *__thiscall CRomanWarShip::CRomanWarShip(CRomanWarShip *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
  CRomanWarShip::CRomanWarShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CWarShip::CWarShip(this, a2, a3, a4, a5, a6, a7, a8);

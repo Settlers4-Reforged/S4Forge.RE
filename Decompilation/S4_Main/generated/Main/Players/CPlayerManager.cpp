@@ -7,12 +7,7 @@
 // Decompiled from DWORD __cdecl CPlayerManager::Race(int _iPlayerId)
 int __cdecl CPlayerManager::Race(int _iPlayerId) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(_iPlayerId)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\PlayerManager.h",
-         172,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(_iPlayerId) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\PlayerManager.h", 172, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -48,12 +43,7 @@ int __cdecl CPlayerManager::GetLocalPlayerId(void) {
 // Decompiled from CPlayerInfo *__cdecl CPlayerManager::PlayerInfo(int a1)
 class CPlayerInfo const & __cdecl CPlayerManager::PlayerInfo(int a1) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\Playermanager.h",
-         158,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(a1) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\Playermanager.h", 158, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -65,12 +55,7 @@ class CPlayerInfo const & __cdecl CPlayerManager::PlayerInfo(int a1) {
 // Decompiled from DWORD __cdecl CPlayerManager::Color(int a1)
 int __cdecl CPlayerManager::Color(int a1) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\PlayerManager.h",
-         179,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(a1) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\PlayerManager.h", 179, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -90,12 +75,7 @@ int __cdecl CPlayerManager::NumberOfPlayers(void) {
 // Decompiled from CPlayerGameData *__cdecl CPlayerManager::PlayerGameData(int _iPlayerId)
 class CPlayerGameData & __cdecl CPlayerManager::PlayerGameData(int _iPlayerId) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(_iPlayerId)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\States\\..\\..\\Main\\PlayerManager.h",
-         165,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(_iPlayerId) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\States\\..\\..\\Main\\PlayerManager.h", 165, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -107,12 +87,7 @@ class CPlayerGameData & __cdecl CPlayerManager::PlayerGameData(int _iPlayerId) {
 // Decompiled from std::wstring *__cdecl CPlayerManager::Name(std::wstring *a1, int a2)
 std::wstring __cdecl CPlayerManager::Name(int a1) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a2)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\PlayerManager.h",
-         200,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(a2) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\PlayerManager.h", 200, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -125,12 +100,7 @@ std::wstring __cdecl CPlayerManager::Name(int a1) {
 // Decompiled from char __cdecl CPlayerManager::IsAlive(int a1)
 bool __cdecl CPlayerManager::IsAlive(int a1) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\States\\..\\..\\Main\\PlayerManager.h",
-         236,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(a1) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\States\\..\\..\\Main\\PlayerManager.h", 236, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -142,12 +112,7 @@ bool __cdecl CPlayerManager::IsAlive(int a1) {
 // Decompiled from bool __cdecl CPlayerManager::IsAI(int a1)
 bool __cdecl CPlayerManager::IsAI(int a1) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\PlayerManager.h",
-         230,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(a1) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\PlayerManager.h", 230, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -159,12 +124,7 @@ bool __cdecl CPlayerManager::IsAI(int a1) {
 // Decompiled from DWORD __cdecl CPlayerManager::GetPlayerControl(int a1)
 int __cdecl CPlayerManager::GetPlayerControl(int a1) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\States\\..\\PlayerManager.h",
-         207,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(a1) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\States\\..\\PlayerManager.h", 207, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -182,7 +142,9 @@ void __cdecl CPlayerManager::Init(void) {
   CPlayerManager::m_lLocalIP = 0;
   CPlayerManager::m_iNumberOfPlayer = 0;
   CPlayerManager::m_iLocalPlayer = 0;
-  for ( i = 0; i < 9; ++i )
+  for ( i = 0;
+        i < 9;
+        ++i )
   {
     CPlayerInfo::Clear(&CPlayerManager::m_cPlayerInfos[i]);
     CPlayerGameData::Clear(&CPlayerManager::m_cPlayerGameData[i]);
@@ -193,7 +155,7 @@ void __cdecl CPlayerManager::Init(void) {
 
 
 // address=[0x1497420]
-// Decompiled from int __cdecl CPlayerManager::AddPlayer(  DWORD _iPlayerRace,  DWORD _iPlayerX,  DWORD _iPlayerY,  DWORD _iPlayerColor,  DWORD _iPlayerIP,  DWORD _iPeerId,  std::wstring _swPlayerName,  DWORD _iType)
+// Decompiled from int __cdecl CPlayerManager::AddPlayer(DWORD _iPlayerRace, DWORD _iPlayerX, DWORD _iPlayerY, DWORD _iPlayerColor, DWORD _iPlayerIP, DWORD _iPeerId, std::wstring _swPlayerName, DWORD _iType)
 int __cdecl CPlayerManager::AddPlayer(int _iPlayerRace, int _iPlayerX, int _iPlayerY, int _iPlayerColor, int _iPlayerIP, int _iPeerId, std::wstring _swPlayerName, int _iType) {
   
   OnlineManager *Instance; // eax
@@ -210,7 +172,9 @@ int __cdecl CPlayerManager::AddPlayer(int _iPlayerRace, int _iPlayerX, int _iPla
     if ( "AddPlayer(): Not initialized!" )
     {
       if ( BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 112, "!\"AddPlayer(): Not initialized!\"") == 1 )
+      {
         __debugbreak();
+      }
     }
 LABEL_15:
     v15 = -1;
@@ -219,8 +183,7 @@ LABEL_15:
   }
   if ( CPlayerManager::m_iLocked )
   {
-    if ( "AddPlayer(): Already locked!"
-      && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 118, "!\"AddPlayer(): Already locked!\"") == 1 )
+    if ( "AddPlayer(): Already locked!" && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 118, "!\"AddPlayer(): Already locked!\"") == 1 )
     {
       __debugbreak();
     }
@@ -228,8 +191,7 @@ LABEL_15:
   }
   if ( CPlayerManager::LastPlayerId() >= 8 )
   {
-    if ( "AddPlayer(): Player limit reached!"
-      && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 124, "!\"AddPlayer(): Player limit reached!\"") == 1 )
+    if ( "AddPlayer(): Player limit reached!" && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 124, "!\"AddPlayer(): Player limit reached!\"") == 1 )
     {
       __debugbreak();
     }
@@ -255,16 +217,11 @@ LABEL_15:
   v10 = std::wstring::c_str(&_swPlayerName);
   v11 = j__wcstombs(_spPlayerName, v10, 0x100u);
   if ( v11 >= 0x100 )
+  {
     report_rangecheckfailure();
+  }
   _spPlayerName[v11] = 0;
-  CTrace::Print(
-    "PlayerManager.cpp: Adding player %s at %d/%d, with race %d, color %d, IP %d!",
-    _spPlayerName,
-    _iPlayerX,
-    _iPlayerY,
-    _iPlayerRace,
-    _iPlayerColor,
-    _iPlayerIP);
+  CTrace::Print("PlayerManager.cpp: Adding player %s at %d/%d, with race %d, color %d, IP %d!", _spPlayerName, _iPlayerX, _iPlayerY, _iPlayerRace, _iPlayerColor, _iPlayerIP);
   v15 = -1;
   std::wstring::~wstring(&_swPlayerName);
   return v12;
@@ -279,8 +236,7 @@ bool __cdecl CPlayerManager::Lock(void) {
   {
     if ( CPlayerManager::m_iLocked )
     {
-      if ( "Lock(): Already locked!"
-        && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 177, "!\"Lock(): Already locked!\"") == 1 )
+      if ( "Lock(): Already locked!" && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 177, "!\"Lock(): Already locked!\"") == 1 )
       {
         __debugbreak();
       }
@@ -294,16 +250,22 @@ bool __cdecl CPlayerManager::Lock(void) {
     else
     {
       if ( BBSupportDbgReport(1, "Main\\PlayerManager.cpp", 183, "No local Player!") == 1 )
+      {
         __debugbreak();
+      }
       return 0;
     }
   }
   else
   {
     if ( !"Lock(): Not initialized!" )
+    {
       return 0;
+    }
     if ( BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 171, "!\"Lock(): Not initialized!\"") == 1 )
+    {
       __debugbreak();
+    }
     return 0;
   }
 }
@@ -327,13 +289,19 @@ void  CPlayerManager::Load(class IS4Chunk & a2) {
 
   CPlayerManager::m_iNumberOfPlayer = a2->LoadUnsigned32(0, 12);
   CPlayerManager::m_iLocalPlayer = a2->LoadUnsigned32_(a2);
-  for ( i = 1; i <= CPlayerManager::LastPlayerId(); ++i )
+  for ( i = 1;
+        i <= CPlayerManager::LastPlayerId();
+        ++i )
   {
     CPlayerGameData::Load(&CPlayerManager::m_cPlayerGameData[i], a2);
     CPlayerGameData::PostLoadInit(&CPlayerManager::m_cPlayerGameData[i], i);
   }
-  for ( j = 1; j <= CPlayerManager::LastPlayerId(); ++j )
+  for ( j = 1;
+        j <= CPlayerManager::LastPlayerId();
+        ++j )
+  {
     CPlayerInfo::Load(&CPlayerManager::m_cPlayerInfos[j], a2);
+  }
 }
 
 
@@ -349,13 +317,21 @@ void  CPlayerManager::Save(class IS4Chunk & a2) {
   PlayerId = CPlayerManager::LastPlayerId();
   a2->SaveUnsigned32(PlayerId);
   a2->SaveUnsigned32(CPlayerManager::m_iLocalPlayer);
-  for ( i = 1; i <= CPlayerManager::LastPlayerId(); ++i )
+  for ( i = 1;
+        i <= CPlayerManager::LastPlayerId();
+        ++i )
+  {
     CPlayerGameData::Save(&CPlayerManager::m_cPlayerGameData[i], a2);
-  for ( j = 1; ; ++j )
+  }
+  for ( j = 1;
+        ;
+        ++j )
   {
     result = CPlayerManager::LastPlayerId();
     if ( j > result )
+    {
       break;
+    }
     CPlayerInfo::Save(&CPlayerManager::m_cPlayerInfos[j], a2);
   }
   return result;
@@ -375,21 +351,33 @@ void __cdecl CPlayerManager::PrintStats(void) {
 
   CTrace::Print("----------------------------------------------------------------------------------");
   CTrace::Print("Player Stats:");
-  for ( i = 1; i <= CPlayerManager::LastPlayerId(); ++i )
+  for ( i = 1;
+        i <= CPlayerManager::LastPlayerId();
+        ++i )
   {
     PlayerControl = CPlayerManager::GetPlayerControl(i);
     std::string::string(&v5, "Undefined");
     v6 = 0;
     if ( PlayerControl == 2 )
+    {
       std::string::operator=(&v5, "AI Level 1");
+    }
     if ( PlayerControl == 3 )
+    {
       std::string::operator=(&v5, "AI Level 2");
+    }
     if ( PlayerControl == 1 )
+    {
       std::string::operator=(&v5, "Human");
+    }
     if ( CPlayerManager::IsAlive(i) )
+    {
       v2 = "Yes";
+    }
     else
+    {
       v2 = "No";
+    }
     v0 = std::string::c_str(&v5);
     CTrace::Print("CPlayerManager: Player: %d, Control: %s, Alive: %s.", i, v0, v2);
     v6 = -1;
@@ -408,26 +396,37 @@ signed char __cdecl CPlayerManager::GetLocalSlot(void) {
   int i; // [esp+0h] [ebp-4h]
 
   if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 277, "g_pNetworkEngine != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !g_pGameType && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 278, "g_pGameType != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !g_pNetworkEngine || !g_pGameType )
+  {
     return -1;
-  if ( g_pGameType->m_iMapMaxNumPlayers > MAX_PLAYER
-    && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 284, "g_pGameType->m_iMapMaxNumPlayers <= MAX_PLAYER") == 1 )
+  }
+  if ( g_pGameType->m_iMapMaxNumPlayers > MAX_PLAYER && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 284, "g_pGameType->m_iMapMaxNumPlayers <= MAX_PLAYER") == 1 )
   {
     __debugbreak();
   }
   if ( (int)g_pGameType->m_iMapMaxNumPlayers > 8 )
+  {
     return -1;
-  for ( i = 0; i < g_pGameType->m_iMapMaxNumPlayers; ++i )
+  }
+  for ( i = 0;
+        i < g_pGameType->m_iMapMaxNumPlayers;
+        ++i )
   {
     Instance = (OnlineManager *)OnlineManager::GetInstance();
     if ( OnlineManager::IsInSession(Instance) )
     {
       v2 = StormManager::GetInstance();
       if ( StormManager::GetLocalPeerId(v2) == g_pGameType->m_sPlayerPeerId[i] )
+      {
         return i;
+      }
     }
   }
   return 0;
@@ -448,12 +447,7 @@ signed char __cdecl CPlayerManager::GetLocalSlot(void) {
 // Decompiled from void __cdecl CPlayerManager::PlayerDied(int a1)
 void __cdecl CPlayerManager::PlayerDied(int a1) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\..\\PlayerManager.h",
-         242,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(a1) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\..\\PlayerManager.h", 242, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -466,12 +460,7 @@ void __cdecl CPlayerManager::PlayerDied(int a1) {
 // Decompiled from DWORD __cdecl CPlayerManager::PeerId(int a1)
 int __cdecl CPlayerManager::PeerId(int a1) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\..\\PlayerManager.h",
-         193,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(a1) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\..\\PlayerManager.h", 193, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -483,12 +472,7 @@ int __cdecl CPlayerManager::PeerId(int a1) {
 // Decompiled from void __cdecl CPlayerManager::SetLocalPlayerId(int a1)
 void __cdecl CPlayerManager::SetLocalPlayerId(int a1) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\..\\PlayerManager.h",
-         149,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(a1) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\..\\PlayerManager.h", 149, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -503,12 +487,7 @@ void __cdecl CPlayerManager::SetPlayerControl(int a1, int arg4) {
   std::wstring *a2; // [esp+0h] [ebp-24h]
   std::wstring v3; // [esp+4h] [ebp-20h] BYREF
 
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\..\\PlayerManager.h",
-         214,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(a1) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\main\\states\\..\\PlayerManager.h", 214, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }
@@ -527,12 +506,7 @@ void __cdecl CPlayerManager::SetPlayerControl(int a1, int arg4) {
 // Decompiled from DWORD __cdecl CPlayerManager::IP(int a1)
 int __cdecl CPlayerManager::IP(int a1) {
   
-  if ( !CPlayerManager::ValidUsedPlayerId(a1)
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\net\\..\\main\\PlayerManager.h",
-         186,
-         "ValidUsedPlayerId(_iPlayerId)") == 1 )
+  if ( !CPlayerManager::ValidUsedPlayerId(a1) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\net\\..\\main\\PlayerManager.h", 186, "ValidUsedPlayerId(_iPlayerId)") == 1 )
   {
     __debugbreak();
   }

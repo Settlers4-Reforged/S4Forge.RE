@@ -44,12 +44,7 @@ int __cdecl CWarMap::FirstEntityIdXY(enum T_WAR_MAP_TYPE a1, int a2, int a3) {
 // Decompiled from int __cdecl CWarMap::SettlerInfluValue(unsigned int a1)
 int __cdecl CWarMap::SettlerInfluValue(int a1) {
   
-  if ( a1 >= 0x46
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\WarMap.h",
-         135,
-         "static_cast<unsigned int>(_iSettlerTypeEx) < SETTLER_MAX_EX") == 1 )
+  if ( a1 >= 0x46 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\WarMap.h", 135, "static_cast<unsigned int>(_iSettlerTypeEx) < SETTLER_MAX_EX") == 1 )
   {
     __debugbreak();
   }
@@ -70,24 +65,40 @@ void __cdecl CWarMap::Init(void) {
   memset(s_iEntityWarMapXYs, 255, 0x40000u);
   memset(CWarMap::m_iSettlerInfluValues, 0, sizeof(CWarMap::m_iSettlerInfluValues));
   memset(dword_45C6B70, 0, sizeof(dword_45C6B70));
-  for ( i = (int *)&unk_37E3150; *i >= 0; i += 2 )
+  for ( i = (int *)&unk_37E3150;
+        *i >= 0;
+        i += 2 )
   {
     if ( *i >= 70 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 212, "pInfuInfo->m_iType < SETTLER_MAX_EX") == 1 )
+    {
       __debugbreak();
+    }
     if ( i[1] < 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 214, "pInfuInfo->m_iValue >= 0") == 1 )
+    {
       __debugbreak();
+    }
     if ( i[1] > 15 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 215, "pInfuInfo->m_iValue <= 15") == 1 )
+    {
       __debugbreak();
+    }
     CWarMap::m_iSettlerInfluValues[*i] = i[1];
   }
-  for ( j = (int *)&unk_37E3240; *j >= 0; j += 2 )
+  for ( j = (int *)&unk_37E3240;
+        *j >= 0;
+        j += 2 )
   {
     if ( *j >= 6 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 222, "pInfuInfo->m_iType < VEHICLE_MAX") == 1 )
+    {
       __debugbreak();
+    }
     if ( j[1] < 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 224, "pInfuInfo->m_iValue >= 0") == 1 )
+    {
       __debugbreak();
+    }
     if ( j[1] > 15 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 225, "pInfuInfo->m_iValue <= 15") == 1 )
+    {
       __debugbreak();
+    }
     dword_45C6B70[*j] = j[1];
   }
   result = CInfluMap::Init();
@@ -104,10 +115,11 @@ void __cdecl CWarMap::Done(void) {
 
   if ( CWarMap::m_iInitialized )
   {
-    for ( i = 0; i < 0x10000; ++i )
+    for ( i = 0;
+          i < 0x10000;
+          ++i )
     {
-      if ( s_iEntityWarMapXYs[i] != -1
-        && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 251, "s_iEntityWarMapXYs[i] == -1") == 1 )
+      if ( s_iEntityWarMapXYs[i] != -1 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 251, "s_iEntityWarMapXYs[i] == -1") == 1 )
       {
         __debugbreak();
       }
@@ -174,29 +186,25 @@ void __cdecl CWarMap::NotifyMove(class IEntity & a1, int a2) {
   int v21; // [esp+10h] [ebp-4h]
 
   if ( !CWarMap::m_iInitialized && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 505, "m_iInitialized") == 1 )
+  {
     __debugbreak();
+  }
   if ( (IEntity::ObjType(a1) & 0xDF) != 0 )
   {
     if ( LOWORD(IEntity::WarMapNode(a1)->m_uNextPrev) == 0xFFFF )
     {
       v12 = IEntity::ID(a1);
-      BBSupportTracePrintF(
-        6,
-        "### ERROR !! CWarMap::NotifyMove(): Entity %i not in war map (Prev == PREV_NOT_IN_LIST) !! ERROR ###",
-        v12);
+      BBSupportTracePrintF(6, "### ERROR !! CWarMap::NotifyMove(): Entity %i not in war map (Prev == PREV_NOT_IN_LIST) !! ERROR ###", v12);
       v13 = IEntity::ID(a1);
       CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v13, 6, 0);
     }
     else
     {
       if ( IEntity::ID(a1) <= 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 511, "_rEntity.ID() > 0") == 1 )
+      {
         __debugbreak();
-      if ( LOWORD(IEntity::WarMapNode(a1)->m_uNextPrev) == 0xFFFF
-        && BBSupportDbgReport(
-             2,
-             "Pathing\\WarMap.cpp",
-             512,
-             "_rEntity.WarMapNode().m_uPrev != CWarMapNode::PREV_NOT_IN_LIST") == 1 )
+      }
+      if ( LOWORD(IEntity::WarMapNode(a1)->m_uNextPrev) == 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 512, "_rEntity.WarMapNode().m_uPrev != CWarMapNode::PREV_NOT_IN_LIST") == 1 )
       {
         __debugbreak();
       }
@@ -211,14 +219,7 @@ void __cdecl CWarMap::NotifyMove(class IEntity & a1, int a2) {
           v15 = Y16X16::UnpackYFast(a2);
           v14 = Y16X16::UnpackXFast(a2);
           v6 = IEntity::ID(a1);
-          BBSupportTracePrintF(
-            6,
-            "### ERROR !! CWarMap::NotifyMove(): Wrong old (X, Y) for entity %5i. Is (%4i, %4i), should be (%4i, %4i). !! ERROR ###",
-            v6,
-            v14,
-            v15,
-            v16,
-            v17);
+          BBSupportTracePrintF(6, "### ERROR !! CWarMap::NotifyMove(): Wrong old (X, Y) for entity %5i. Is (%4i, %4i), should be (%4i, %4i). !! ERROR ###", v6, v14, v15, v16, v17);
           v7 = IEntity::ID(a1);
           CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v7, 6, 0);
           a2 = s_iEntityWarMapXYs[IEntity::ID(a1)];
@@ -251,12 +252,7 @@ void __cdecl CWarMap::NotifyMove(class IEntity & a1, int a2) {
       }
     }
   }
-  else if ( IEntity::WarMapNode(a1)->m_uNextPrev != 0xFFFF
-         && BBSupportDbgReport(
-              2,
-              "Pathing\\WarMap.cpp",
-              563,
-              "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
+  else if ( IEntity::WarMapNode(a1)->m_uNextPrev != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 563, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
   {
     __debugbreak();
   }
@@ -291,13 +287,10 @@ void __cdecl CWarMap::AddEntityEx(class IEntity & target, int packedXY) {
   unsigned __int16 *v22; // [esp+24h] [ebp-4h]
 
   if ( !CWarMap::m_iInitialized && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 271, "m_iInitialized") == 1 )
+  {
     __debugbreak();
-  if ( *IEntity::WarMapNode(target) != 0xFFFF
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\WarMap.cpp",
-         272,
-         "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
+  }
+  if ( *IEntity::WarMapNode(target) != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 272, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
   {
     __debugbreak();
   }
@@ -306,28 +299,21 @@ void __cdecl CWarMap::AddEntityEx(class IEntity & target, int packedXY) {
     if ( s_iEntityWarMapXYs[IEntity::ID(target)] >= 0 )
     {
       targetId = IEntity::ID(target);
-      BBSupportTracePrintF(
-        6,
-        "### ERROR !! CWarMap::AddEntityEx(): Entity %i already in war map !! ERROR ###",
-        targetId);
+      BBSupportTracePrintF(6, "### ERROR !! CWarMap::AddEntityEx(): Entity %i already in war map !! ERROR ###", targetId);
       targetId = IEntity::ID(target);
       CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, targetId, 6, 0);
       CWarMap::RemoveEntity(target);
     }
-    if ( s_iEntityWarMapXYs[IEntity::ID(target)] != -1
-      && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 286, "s_iEntityWarMapXYs[_rEntity.ID()] == -1") == 1 )
+    if ( s_iEntityWarMapXYs[IEntity::ID(target)] != -1 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 286, "s_iEntityWarMapXYs[_rEntity.ID()] == -1") == 1 )
     {
       __debugbreak();
     }
     s_iEntityWarMapXYs[IEntity::ID(target)] = packedXY;
     if ( IEntity::ID(target) <= 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 292, "_rEntity.ID() > 0") == 1 )
+    {
       __debugbreak();
-    if ( *IEntity::WarMapNode(target) != 0xFFFF
-      && BBSupportDbgReport(
-           2,
-           "Pathing\\WarMap.cpp",
-           293,
-           "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
+    }
+    if ( *IEntity::WarMapNode(target) != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 293, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
     {
       __debugbreak();
     }
@@ -350,7 +336,9 @@ void __cdecl CWarMap::AddEntityEx(class IEntity & target, int packedXY) {
     objType = IEntity::ObjType(target);
     warMapType = CWarMap::ObjectTypeToWarMapType(objType);
     if ( !targetId && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 313, "uEntityId > 0") == 1 )
+    {
       __debugbreak();
+    }
     x = Y16X16::UnpackXFast(packedXY);
     v = Squares::XYToVW(x);
     y = Y16X16::UnpackYFast(packedXY);
@@ -366,18 +354,15 @@ void __cdecl CWarMap::AddEntityEx(class IEntity & target, int packedXY) {
       if ( CWarMapNode::Prev(v18) )
       {
         if ( BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 334, "rNextNode.Prev() == 0") == 1 )
+        {
           __debugbreak();
+        }
       }
       CWarMapNode::SetPrev(v18, targetId);
     }
     ++v22[1];
   }
-  else if ( *IEntity::WarMapNode(target) != 0xFFFF
-         && BBSupportDbgReport(
-              2,
-              "Pathing\\WarMap.cpp",
-              345,
-              "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
+  else if ( *IEntity::WarMapNode(target) != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 345, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
   {
     __debugbreak();
   }
@@ -421,13 +406,10 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
   CWarMapNode *v32; // [esp+20h] [ebp-4h]
 
   if ( !CWarMap::m_iInitialized && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 358, "m_iInitialized") == 1 )
+  {
     __debugbreak();
-  if ( *IEntity::WarMapNode(a1) == 0xFFFF
-    && BBSupportDbgReport(
-         2,
-         "Pathing\\WarMap.cpp",
-         359,
-         "_rEntity.WarMapNode().m_uNextPrev != CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
+  }
+  if ( *IEntity::WarMapNode(a1) == 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 359, "_rEntity.WarMapNode().m_uNextPrev != CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
   {
     __debugbreak();
   }
@@ -444,27 +426,17 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
         v21 = Y16X16::UnpackYFast(a2);
         v20 = Y16X16::UnpackXFast(a2);
         v6 = IEntity::ID(a1);
-        BBSupportTracePrintF(
-          6,
-          "### ERROR !! CWarMap::RemoveEntityEx(): Wrong (X, Y) for entity %5i. Is (%4i, %4i), should be (%4i, %4i) !! ERROR ###",
-          v6,
-          v20,
-          v21,
-          v22,
-          v23);
+        BBSupportTracePrintF(6, "### ERROR !! CWarMap::RemoveEntityEx(): Wrong (X, Y) for entity %5i. Is (%4i, %4i), should be (%4i, %4i) !! ERROR ###", v6, v20, v21, v22, v23);
         v7 = IEntity::ID(a1);
         CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v7, 6, 0);
         a2 = s_iEntityWarMapXYs[IEntity::ID(a1)];
       }
       s_iEntityWarMapXYs[IEntity::ID(a1)] = -1;
       if ( IEntity::ID(a1) <= 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 385, "_rEntity.ID() > 0") == 1 )
+      {
         __debugbreak();
-      if ( *(unsigned __int16 *)&IEntity::WarMapNode(a1)->m_uNextPrev == 0xFFFF
-        && BBSupportDbgReport(
-             2,
-             "Pathing\\WarMap.cpp",
-             386,
-             "_rEntity.WarMapNode().m_uPrev != CWarMapNode::PREV_NOT_IN_LIST") == 1 )
+      }
+      if ( *(unsigned __int16 *)&IEntity::WarMapNode(a1)->m_uNextPrev == 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 386, "_rEntity.WarMapNode().m_uPrev != CWarMapNode::PREV_NOT_IN_LIST") == 1 )
       {
         __debugbreak();
       }
@@ -488,15 +460,16 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
       v25 = CWarMap::ObjectTypeToWarMapType(v12);
       v31 = (unsigned __int16 *)CWarMap::WarMapTypeSquareDataVW(v25, v28, v29);
       if ( !v31[1] && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 413, "rWarMapTypeSquareData.m_uNumber > 0") == 1 )
+      {
         __debugbreak();
+      }
       --v31[1];
       if ( CWarMapNode::Prev(v32) )
       {
         prevWarMapNode = CWarMapNode::Prev(v32);
         v27 = CWarMapNode::GetFromPrev(prevWarMapNode);
         v14 = CWarMapNode::Next(v27);
-        if ( v14 != IEntity::ID(a1)
-          && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 423, "rPrevNode.Next() == _rEntity.ID()") == 1 )
+        if ( v14 != IEntity::ID(a1) && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 423, "rPrevNode.Next() == _rEntity.ID()") == 1 )
         {
           __debugbreak();
         }
@@ -506,8 +479,7 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
       else
       {
         v16 = *v31;
-        if ( v16 != IEntity::ID(a1)
-          && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 429, "rWarMapTypeSquareData.m_uFirst == _rEntity.ID()") == 1 )
+        if ( v16 != IEntity::ID(a1) && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 429, "rWarMapTypeSquareData.m_uFirst == _rEntity.ID()") == 1 )
         {
           __debugbreak();
         }
@@ -518,8 +490,7 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
         v17 = CWarMapNode::Next(v32);
         v26 = CWarMapNode::GetFromPrev(v17);
         v18 = CWarMapNode::Prev(v26);
-        if ( v18 != IEntity::ID(a1)
-          && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 440, "rNextNode.Prev() == _rEntity.ID()") == 1 )
+        if ( v18 != IEntity::ID(a1) && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 440, "rNextNode.Prev() == _rEntity.ID()") == 1 )
         {
           __debugbreak();
         }
@@ -536,12 +507,7 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
       CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v3, 6, 0);
     }
   }
-  else if ( *IEntity::WarMapNode(a1) != 0xFFFF
-         && BBSupportDbgReport(
-              2,
-              "Pathing\\WarMap.cpp",
-              452,
-              "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
+  else if ( *IEntity::WarMapNode(a1) != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 452, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
   {
     __debugbreak();
   }

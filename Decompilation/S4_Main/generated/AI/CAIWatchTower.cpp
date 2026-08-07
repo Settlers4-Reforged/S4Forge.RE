@@ -6,8 +6,7 @@
 // Decompiled from void __thiscall CAIWatchTower::Init(CAIWatchTower *this, int a2, int a3, int a4)
 void  CAIWatchTower::Init(int a2, int a3, int a4) {
   
-  if ( !IAIEnvironment::WorldInWorld(a2, a3)
-    && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 196, "g_pAIEnv->WorldInWorld(_iX, _iY)") == 1 )
+  if ( !IAIEnvironment::WorldInWorld(a2, a3) && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 196, "g_pAIEnv->WorldInWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -67,7 +66,9 @@ void  CAIWatchTower::SetValue(int a2) {
   unsigned int result; // eax
 
   if ( (a2 & 0xFF000000) != 0 && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 166, "(_iValue & 0xFF000000) == 0") == 1 )
+  {
     __debugbreak();
+  }
   result = a2 | *((_DWORD *)this + 1) & 0xFF000000;
   *((_DWORD *)this + 1) = result;
   return result;
@@ -80,8 +81,7 @@ void  CAIWatchTower::SetAllianceIdAndClearValue(int a2) {
   
   CAIWatchTower *result; // eax
 
-  if ( (a2 & 0xFFFFFF00) != 0
-    && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 184, "(_iAllianceId & 0xFFFFFF00) == 0") == 1 )
+  if ( (a2 & 0xFFFFFF00) != 0 && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 184, "(_iAllianceId & 0xFFFFFF00) == 0") == 1 )
   {
     __debugbreak();
   }

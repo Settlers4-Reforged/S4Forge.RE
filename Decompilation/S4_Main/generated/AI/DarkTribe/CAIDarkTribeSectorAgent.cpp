@@ -3,7 +3,7 @@
 // Definitions for class CAIDarkTribeSectorAgent
 
 // address=[0x12fc7f0]
-// Decompiled from CAIDarkTribeSectorAgent *__thiscall CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(  CAIDarkTribeSectorAgent *this,  const char *a2)
+// Decompiled from CAIDarkTribeSectorAgent *__thiscall CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(CAIDarkTribeSectorAgent *this, const char *a2)
  CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(char const * a2) {
   
   CAIAgent::CAIAgent(this, a2);
@@ -34,9 +34,13 @@ class CAIDarkTribeSectorAI *  CAIDarkTribeSectorAgent::SectorAI(void)const {
 void  CAIDarkTribeSectorAgent::AttachSectorAI(class CAIDarkTribeSectorAI * a2) {
   
   if ( !a2 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 127, "_pSectorAI != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( this->m_pSectorAI && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 128, "m_pSectorAI == 0") == 1 )
+  {
     __debugbreak();
+  }
   this->m_pSectorAI = a2;
 }
 

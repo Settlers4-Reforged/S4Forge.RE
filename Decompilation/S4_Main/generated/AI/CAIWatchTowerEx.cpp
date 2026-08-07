@@ -25,12 +25,16 @@ int  CAIWatchTowerEx::Calculate(void) {
 
   v15 = this;
   if ( !CAIWatchTower::Used(this) && BBSupportDbgReport(2, "AI\\AI_WatchTower.cpp", 235, "Used()") == 1 )
+  {
     __debugbreak();
+  }
   v1 = CAIWatchTower::PackedXY(v15);
   IAIEnvironment::UnpackXYFast(v1, &v14, &v7);
   v9 = CAIWatchTower::AllianceId(v15);
   v16 = 0;
-  for ( i = 0; i < SurroundingHexPointsCount(2); ++i )
+  for ( i = 0;
+        i < SurroundingHexPointsCount(2);
+        ++i )
   {
     v2 = SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * i]);
     v12 = v14 + 16 * v2;
@@ -45,9 +49,13 @@ int  CAIWatchTowerEx::Calculate(void) {
   v11 = v16 > 0;
   v5 = CAIWatchTower::Value(v15);
   if ( v16 == v5 )
+  {
     v10 = 0;
+  }
   else
+  {
     v10 = 2;
+  }
   v8 = v10 | v11;
   CAIWatchTower::SetValue(v15, v16);
   return v8;

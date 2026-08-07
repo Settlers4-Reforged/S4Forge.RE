@@ -3,7 +3,7 @@
 // Definitions for class CGroupDestinations
 
 // address=[0x15507a0]
-// Decompiled from CGroupDestinations *__thiscall CGroupDestinations::CGroupDestinations(  CGroupDestinations *this,  int a2,  int a3,  int a4,  char a5,  int a6)
+// Decompiled from CGroupDestinations *__thiscall CGroupDestinations::CGroupDestinations(CGroupDestinations *this, int a2, int a3, int a4, char a5, int a6)
  CGroupDestinations::CGroupDestinations(int a2, int a3, int a4, int a5, int a6) {
   
   int v6; // esi
@@ -28,8 +28,7 @@
   char v26; // [esp+47h] [ebp-1h]
 
   v25 = this;
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3)
-    && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 76, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 76, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -37,9 +36,13 @@
   *((_DWORD *)v25 + 1) = 0;
   *((_DWORD *)v25 + 2) = Y16X16::PackXYFast(a2, a3);
   if ( (a5 & 2) != 0 )
+  {
     v17 = CGroupDestinations::CatapultSectorId;
+  }
   else
+  {
     v17 = CGroupDestinations::NormalSectorId;
+  }
   v21 = v17;
   v20 = v17(a2, a3);
   if ( a6 <= 0 )
@@ -54,7 +57,9 @@
   }
   v22 = v16;
   if ( v20 > 0 && v20 == v22 )
+  {
     goto LABEL_21;
+  }
   v26 = 0;
   if ( v22 > 0 && (a5 & 1) != 0 )
   {
@@ -71,16 +76,24 @@
     }
   }
   if ( !v26 )
+  {
     return v25;
+  }
   v8 = Y16X16::PackXYFast(a2, a3);
   *((_DWORD *)v25 + 2) = v8;
 LABEL_21:
   if ( a4 <= 1 )
+  {
     return v25;
+  }
   if ( a4 > 100 )
+  {
     a4 = 100;
+  }
   v23 = 1;
-  for ( i = 1; v23 < a4 && i < 100; ++i )
+  for ( i = 1;
+        v23 < a4 && i < 100;
+        ++i )
   {
     v9 = CSpiralOffsets::DeltaX(i);
     v18 = a2 + 2 * v9;
@@ -110,9 +123,13 @@ int  CGroupDestinations::GetNextDestination(void) {
 
   v2 = *((_DWORD *)this + *((_DWORD *)this + 1) + 2);
   if ( *((_DWORD *)this + 1) < *(_DWORD *)this )
+  {
     v3 = *((_DWORD *)this + 1) + 1;
+  }
   else
+  {
     v3 = 0;
+  }
   *((_DWORD *)this + 1) = v3;
   return v2;
 }

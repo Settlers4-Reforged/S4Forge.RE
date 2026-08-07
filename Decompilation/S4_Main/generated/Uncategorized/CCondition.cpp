@@ -18,9 +18,13 @@
   
   *(_DWORD *)this = &CCondition::_vftable_;
   if ( *((_DWORD *)this + 4) )
+  {
     (***((void (__thiscall ****)(_DWORD, int))this + 4))(*((_DWORD *)this + 4), 1);
+  }
   if ( *((_DWORD *)this + 5) )
+  {
     delete *((COptimizeOptions **)this + 5);
+  }
   CDynListEntry::~CDynListEntry(this);
 }
 

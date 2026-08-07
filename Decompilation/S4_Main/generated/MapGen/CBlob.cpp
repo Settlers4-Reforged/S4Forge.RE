@@ -12,7 +12,7 @@
 
 
 // address=[0x2fc8910]
-// Decompiled from CBlob *__thiscall CBlob::CBlob(  CBlob *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  int a8,  struct CCheckLayer *a9)
+// Decompiled from CBlob *__thiscall CBlob::CBlob(CBlob *this, int a2, int a3, int a4, int a5, int a6, int a7, int a8, struct CCheckLayer *a9)
  CBlob::CBlob(int a2, int a3, int a4, int a5, int a6, int a7, int a8, class CCheckLayer * a9) {
   
   DWORD v10; // [esp+4h] [ebp-Ch]
@@ -67,13 +67,21 @@
   this->m_iMaxX += v11;
   this->m_iMaxY += v10;
   if ( this->m_iMaxY >= this->m_iWorldSize && BBSupportDbgReport(2, "Blob.cpp", 71, "m_iMaxY < m_iWorldSize") == 1 )
+  {
     __debugbreak();
+  }
   if ( this->m_iMaxX >= this->m_iWorldSize && BBSupportDbgReport(2, "Blob.cpp", 72, "m_iMaxX < m_iWorldSize") == 1 )
+  {
     __debugbreak();
+  }
   if ( this->m_iMinY <= 0 && BBSupportDbgReport(2, "Blob.cpp", 73, "m_iMinY > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( this->m_iMinX <= 0 && BBSupportDbgReport(2, "Blob.cpp", 74, "m_iMinX > 0") == 1 )
+  {
     __debugbreak();
+  }
   this->m_iU3 = this->m_iMinX - 10;
   this->m_iU4 = this->m_iMinY - 10;
   return this;
@@ -109,7 +117,9 @@ void  CBlob::drawBlob(void) {
     v13[0] = this->m_iMinY + (this->m_iMaxY - this->m_iMinY) / 2;
     v13[1] = this->m_iMaxY;
     v13[2] = this->m_iMinY + (this->m_iMaxY - this->m_iMinY) / 2;
-    for ( i = 0; i < 4; ++i )
+    for ( i = 0;
+          i < 4;
+          ++i )
     {
       iStartX = v15[i - 1];
       iStartY = v13[i - 1];
@@ -125,23 +135,19 @@ void  CBlob::drawBlob(void) {
       }
       iCurrentX = v15[i - 1];
       iCurrentY = v13[i - 1];
-      if ( (iEndX >= this->m_iWorldSize || iEndX <= 0)
-        && BBSupportDbgReport(2, "Blob.cpp", 128, "iEndX < m_iWorldSize && iEndX > 0") == 1 )
+      if ( (iEndX >= this->m_iWorldSize || iEndX <= 0) && BBSupportDbgReport(2, "Blob.cpp", 128, "iEndX < m_iWorldSize && iEndX > 0") == 1 )
       {
         __debugbreak();
       }
-      if ( (iEndY >= this->m_iWorldSize || iEndY <= 0)
-        && BBSupportDbgReport(2, "Blob.cpp", 129, "iEndY < m_iWorldSize && iEndY > 0") == 1 )
+      if ( (iEndY >= this->m_iWorldSize || iEndY <= 0) && BBSupportDbgReport(2, "Blob.cpp", 129, "iEndY < m_iWorldSize && iEndY > 0") == 1 )
       {
         __debugbreak();
       }
-      if ( (iStartX <= 0 || iStartX >= this->m_iWorldSize)
-        && BBSupportDbgReport(2, "Blob.cpp", 130, "iStartX > 0 && iStartX < m_iWorldSize") == 1 )
+      if ( (iStartX <= 0 || iStartX >= this->m_iWorldSize) && BBSupportDbgReport(2, "Blob.cpp", 130, "iStartX > 0 && iStartX < m_iWorldSize") == 1 )
       {
         __debugbreak();
       }
-      if ( (iStartY <= 0 || iStartY >= this->m_iWorldSize)
-        && BBSupportDbgReport(2, "Blob.cpp", 131, "iStartY > 0 && iStartY < m_iWorldSize") == 1 )
+      if ( (iStartY <= 0 || iStartY >= this->m_iWorldSize) && BBSupportDbgReport(2, "Blob.cpp", 131, "iStartY > 0 && iStartY < m_iWorldSize") == 1 )
       {
         __debugbreak();
       }
@@ -154,17 +160,18 @@ void  CBlob::drawBlob(void) {
         {
           case 1:
             if ( iEndX > iCurrentX && iCurrentX < this->m_iWorldSize - 1 )
+            {
               ++iCurrentX;
+            }
             if ( iEndX < iCurrentX && iCurrentX > 0 )
+            {
               --iCurrentX;
+            }
             break;
           case 2:
             if ( iEndX >= iCurrentX || iEndY <= iCurrentY || iCurrentY >= this->m_iWorldSize - 1 )
             {
-              if ( iEndX < iCurrentX
-                || iEndY < iCurrentY
-                || iCurrentX >= this->m_iWorldSize - 1
-                || iCurrentY >= this->m_iWorldSize - 1 )
+              if ( iEndX < iCurrentX || iEndY < iCurrentY || iCurrentX >= this->m_iWorldSize - 1 || iCurrentY >= this->m_iWorldSize - 1 )
               {
                 if ( iEndX <= iCurrentX || iEndY >= iCurrentY || iCurrentY <= 0 )
                 {
@@ -198,7 +205,9 @@ void  CBlob::drawBlob(void) {
                 if ( iEndX < iCurrentX || iEndY > iCurrentY || iCurrentX >= this->m_iWorldSize - 1 )
                 {
                   if ( iEndX < iCurrentX && iEndY < iCurrentY && iCurrentY > 0 )
+                  {
                     --iCurrentY;
+                  }
                 }
                 else
                 {
@@ -217,20 +226,25 @@ void  CBlob::drawBlob(void) {
             break;
         }
         if ( iCurrentX >= this->m_iWorldSize && BBSupportDbgReport(2, "Blob.cpp", 195, "iCurrentX < m_iWorldSize") == 1 )
+        {
           __debugbreak();
+        }
         if ( iCurrentX <= 0 && BBSupportDbgReport(2, "Blob.cpp", 196, "iCurrentX > 0") == 1 )
+        {
           __debugbreak();
+        }
         if ( iCurrentY >= this->m_iWorldSize && BBSupportDbgReport(2, "Blob.cpp", 197, "iCurrentY < m_iWorldSize") == 1 )
+        {
           __debugbreak();
+        }
         if ( iCurrentY <= 0 && BBSupportDbgReport(2, "Blob.cpp", 198, "iCurrentY > 0") == 1 )
+        {
           __debugbreak();
+        }
         this->processPoint(this, iCurrentX, iCurrentY);
       }
     }
-    this->fillBlob(
-      this,
-      this->m_iMinX + (this->m_iMaxX - this->m_iMinX) / 2,
-      this->m_iMinY + (this->m_iMaxY - this->m_iMinY) / 2);
+    this->fillBlob(this, this->m_iMinX + (this->m_iMaxX - this->m_iMinX) / 2, this->m_iMinY + (this->m_iMaxY - this->m_iMinY) / 2);
   }
 }
 
@@ -257,7 +271,9 @@ void  CBlob::fillBlob(int a2, int a3) {
   {
     v9 = *(_DWORD *)TStaticFIFO<int,512>::Top(v11);
     TStaticFIFO<int,512>::Pop(v11);
-    for ( i = 0; i < 6; ++i )
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
       v8 = 0;
       v3[1] = i;
@@ -265,27 +281,39 @@ void  CBlob::fillBlob(int a2, int a3) {
       {
         case 0:
           if ( v9 - this->m_iWorldSize - 1 >= 0 )
+          {
             v8 = v9 - this->m_iWorldSize - 1;
+          }
           break;
         case 1:
           if ( v9 - this->m_iWorldSize >= 0 )
+          {
             v8 = v9 - this->m_iWorldSize;
+          }
           break;
         case 2:
           if ( v9 - 1 >= 0 )
+          {
             v8 = v9 - 1;
+          }
           break;
         case 3:
           if ( v9 + 1 < iSize )
+          {
             v8 = v9 + 1;
+          }
           break;
         case 4:
           if ( this->m_iWorldSize + v9 < iSize )
+          {
             v8 = this->m_iWorldSize + v9;
+          }
           break;
         case 5:
           if ( v9 + this->m_iWorldSize + 1 < iSize )
+          {
             v8 = v9 + this->m_iWorldSize + 1;
+          }
           break;
         default:
           break;
@@ -293,13 +321,21 @@ void  CBlob::fillBlob(int a2, int a3) {
       iCurrentX = v8 % this->m_iWorldSize;
       iCurrentY = v8 / this->m_iWorldSize;
       if ( iCurrentX >= this->m_iWorldSize && BBSupportDbgReport(2, "Blob.cpp", 262, "iCurrentX < m_iWorldSize") == 1 )
+      {
         __debugbreak();
+      }
       if ( iCurrentX <= 0 && BBSupportDbgReport(2, "Blob.cpp", 263, "iCurrentX > 0") == 1 )
+      {
         __debugbreak();
+      }
       if ( iCurrentY >= this->m_iWorldSize && BBSupportDbgReport(2, "Blob.cpp", 264, "iCurrentY < m_iWorldSize") == 1 )
+      {
         __debugbreak();
+      }
       if ( iCurrentY <= 0 && BBSupportDbgReport(2, "Blob.cpp", 265, "iCurrentY > 0") == 1 )
+      {
         __debugbreak();
+      }
       if ( !CCheckLayer::getPoint(this->m_pCheckLayer, iCurrentX - this->m_iU3, iCurrentY - this->m_iU4) )
       {
         TStaticFIFO<int,512>::Push(v11, &v8);
@@ -320,19 +356,33 @@ int  CBlob::getNextDirection(int a2, int a3) {
 
   v4 = CRandom16::Rand(g_pRand) % 0x64;
   if ( a2 >= a3 )
+  {
     v6 = (int)abs(80.0 - (float)((float)((float)a3 / (float)a2) * 100.0));
+  }
   else
+  {
     v6 = (int)abs(80.0 - (float)((float)((float)a2 / (float)a3) * 100.0));
+  }
   if ( v6 >= 40 )
+  {
     v5 = (80 - v6) / 3;
+  }
   else
+  {
     v5 = v6 + 10;
+  }
   if ( v4 >= 0 && v4 < v5 )
+  {
     return 1;
+  }
   if ( v4 >= v5 && v4 < v6 + v5 )
+  {
     return 2;
+  }
   if ( v4 < v6 + v5 || v4 >= 100 )
+  {
     return -1;
+  }
   return 3;
 }
 

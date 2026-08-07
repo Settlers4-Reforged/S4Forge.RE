@@ -57,16 +57,26 @@ bool  CToolTipExt::OpenTooltip(void) {
 
   v25 = this;
   if ( !*((_BYTE *)this + 338) )
+  {
     return 1;
+  }
   if ( *((_BYTE *)v25 + 336) )
+  {
     CToolTip::CloseTooltip(v25);
+  }
   if ( !g_pGfxEngine )
+  {
     return 0;
+  }
   if ( !*((_BYTE *)v25 + 8) )
+  {
     return 0;
+  }
   if ( *((int *)v25 + 85) < 0 )
   {
-    for ( i = *(_DWORD *)(g_pFileHeader + 4) - 1; i >= 0; --i )
+    for ( i = *(_DWORD *)(g_pFileHeader + 4) - 1;
+          i >= 0;
+          --i )
     {
       v24 = (unsigned __int16 *)(*(_DWORD *)(g_pFileHeader + 4 * i + 16) + g_pFileHeader);
       v14 = 7;
@@ -78,7 +88,9 @@ bool  CToolTipExt::OpenTooltip(void) {
     }
   }
   if ( *((_DWORD *)v25 + 85) == -1 )
+  {
     return 0;
+  }
   v24 = (unsigned __int16 *)(*(_DWORD *)(g_pFileHeader + 4 * *((_DWORD *)v25 + 85) + 16) + g_pFileHeader);
   v12 = v24[3];
   v13 = v24[4];
@@ -189,13 +201,21 @@ bool  CToolTipExt::UpdateText(void) {
 
   v15 = (unsigned int *)this;
   if ( !*((_BYTE *)this + 338) )
+  {
     return 1;
+  }
   if ( !*((_BYTE *)v15 + 336) )
+  {
     return 0;
+  }
   if ( !g_pGfxEngine )
+  {
     return 0;
+  }
   if ( (v15[85] & 0x80000000) != 0 )
+  {
     return 0;
+  }
   v14 = *(_DWORD *)(g_pFileHeader + 4 * v15[85] + 16) + g_pFileHeader;
   if ( IGfxEngine::SolidColorFillGuiSurface((IGfxEngine *)g_pGfxEngine, *v15, 0, 0, 0) )
   {

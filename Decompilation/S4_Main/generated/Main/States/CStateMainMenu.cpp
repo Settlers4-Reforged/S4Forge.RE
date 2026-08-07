@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateMainMenu::DynamicCreateFunc(void * a1) {
 
   C = (CStateMainMenu *)operator new(0x14u);
   if ( C )
+  {
     return (struct CGameState *)CStateMainMenu::CStateMainMenu(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -68,9 +72,13 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   C = operator new(0x620u);
   LOBYTE(v21) = 4;
   if ( C )
+  {
     v11 = CGameType::CGameType((CGameType *)C);
+  }
   else
+  {
     v11 = 0;
+  }
   v4[7] = v11;
   LOBYTE(v21) = 1;
   g_pGameType = v11;
@@ -170,14 +178,22 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   if ( g_pSoundManager )
   {
     if ( CGameSettings::GetMusicOn() )
+    {
       MusicVolume = CGameSettings::GetMusicVolume();
+    }
     else
+    {
       MusicVolume = 0;
+    }
     CSoundManager::SetMusicVolume((CSoundManager *)g_pSoundManager, MusicVolume);
     if ( CGameSettings::GetSoundFxOn() )
+    {
       SoundFXVolume = CGameSettings::GetSoundFXVolume();
+    }
     else
+    {
       SoundFXVolume = 0;
+    }
     CSoundManager::SetSoundVolume((CSoundManager *)g_pSoundManager, SoundFXVolume);
   }
   *((_DWORD *)v25 + 1) = a2;
@@ -202,9 +218,13 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
       C = operator new(0x620u);
       LOBYTE(v30) = 1;
       if ( C )
+      {
         v17 = CGameType::CGameType((CGameType *)C);
+      }
       else
+      {
         v17 = 0;
+      }
       v12 = v17;
       LOBYTE(v30) = 0;
       g_pGameType = (int)v17;
@@ -225,13 +245,19 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
       CFile::Read(Buffer, v3, 1u, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
       CFile::Close((CFile *)v27, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
       if ( strstr((char *)Buffer, "LocalPlayerCreator=true") )
+      {
         v24 = 1;
+      }
       v15 = operator new(0x18u);
       LOBYTE(v30) = 6;
       if ( v15 )
+      {
         v14 = INetworkEngine::INetworkEngine((INetworkEngine *)v15, 1);
+      }
       else
+      {
         v14 = 0;
+      }
       v8[4] = v14;
       LOBYTE(v30) = 2;
       g_pNetworkEngine = (int)v14;
@@ -248,9 +274,13 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
         else
         {
           if ( INetworkEngine::IsHost((INetworkEngine *)g_pNetworkEngine) )
+          {
             CLanLobby::Communicate(1051, (void *)1);
+          }
           else
+          {
             IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
+          }
           v5 = INetworkEngine::IsHost((INetworkEngine *)g_pNetworkEngine);
           CGameStateHandler::Switch((int)CStateLobbyGameSettings::DynamicCreateFunc, v5);
           LOBYTE(v30) = 0;
@@ -259,11 +289,7 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
 LABEL_46:
         std::wstring::wstring(v28);
         LOBYTE(v30) = 7;
-        if ( (*(unsigned __int8 (__thiscall **)(void *, _BYTE *, const wchar_t *, int))(*(_DWORD *)g_pCDDrive + 8))(
-               g_pCDDrive,
-               v28,
-               L"Snd\\Romans*.mp3",
-               131073) )
+        if ( (*(unsigned __int8 (__thiscall **)(void *, _BYTE *, const wchar_t *, int))(*(_DWORD *)g_pCDDrive + 8))(g_pCDDrive, v28, L"Snd\\Romans*.mp3", 131073) )
         {
           v6 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v28);
           CSoundManager::PlayBackgroundMusic(5, 4, v6);
@@ -328,9 +354,13 @@ LABEL_46:
     case 19:
       v13 = UPlay::UPlayManager::GetInstance();
       if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v13 + 36))(v13) )
+      {
         CGameStateHandler::Next();
+      }
       else
+      {
         *((_DWORD *)v25 + 1) = 0;
+      }
       goto LABEL_46;
     default:
       CTrace::Print("MainMenu: Unknown Command!!");
@@ -344,8 +374,7 @@ LABEL_46:
  CStateMainMenu::~CStateMainMenu(void) {
   
   *(_DWORD *)this = &CStateMainMenu::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0)
-    && BBSupportDbgReport(2, "main\\states\\StateMainMenu.cpp", 340, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0) && BBSupportDbgReport(2, "main\\states\\StateMainMenu.cpp", 340, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -364,7 +393,9 @@ bool  CStateMainMenu::Perform(void) {
   if ( !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) || *((_BYTE *)this + 16) )
   {
     if ( *((_DWORD *)this + 1) )
+    {
       return *((_BYTE *)this + 8) == 0;
+    }
     if ( dword_4031D58 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
     {
       j___Init_thread_header(&dword_4031D58);
@@ -376,7 +407,9 @@ bool  CStateMainMenu::Perform(void) {
     }
     v2 = dword_4031D54 + 30;
     if ( v2 >= timeGetTime() )
+    {
       return *((_BYTE *)this + 8) == 0;
+    }
     dword_4031D54 = timeGetTime();
     IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
     IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -463,16 +496,18 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
         if ( *((int *)v25 + 3) < 2 )
         {
           if ( wparam == 2 && v30 )
+          {
             ++*((_DWORD *)v25 + 3);
+          }
           else
+          {
             *((_DWORD *)v25 + 3) = 0;
+          }
         }
         v22 = a2->m_wParam;
         if ( v22 == 3 && *((_DWORD *)v25 + 3) == 2 && v30 )
         {
-          if ( (*(unsigned __int8 (__thiscall **)(void *, _DWORD))(*(_DWORD *)g_pInstallationInfo + 16))(
-                 g_pInstallationInfo,
-                 0) )
+          if ( (*(unsigned __int8 (__thiscall **)(void *, _DWORD))(*(_DWORD *)g_pInstallationInfo + 16))(g_pInstallationInfo, 0) )
           {
             MessageBoxA(g_hWnd, "Check successful.", "Installation check", 0x40u);
           }
@@ -500,8 +535,7 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
           {
             std::string::operator=(&g_iMessageBoxStringID, aNetzwerkfehler);
             IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0);
-            if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc)
-              && BBSupportDbgReport(2, "main\\states\\StateMainMenu.cpp", 441, "bRet") == 1 )
+            if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc) && BBSupportDbgReport(2, "main\\states\\StateMainMenu.cpp", 441, "bRet") == 1 )
             {
               __debugbreak();
             }
@@ -521,9 +555,7 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
           }
           else
           {
-            std::string::operator=(
-              &g_iMessageBoxStringID,
-              "The Ubisoft services are not available.Please try again later.");
+            std::string::operator=(&g_iMessageBoxStringID, "The Ubisoft services are not available.Please try again later.");
           }
           IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0);
           IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc);
@@ -558,7 +590,9 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
           v29 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0);
           v29 = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc);
           if ( !v29 && BBSupportDbgReport(2, "main\\states\\StateMainMenu.cpp", 468, "bRet") == 1 )
+          {
             __debugbreak();
+          }
         }
         result = 1;
         break;
@@ -598,11 +632,7 @@ bool  CStateMainMenu::CanProcessInvites(void) {
 // Decompiled from void __thiscall CStateMainMenu::SetupGUI(CStateMainMenu *this)
 void  CStateMainMenu::SetupGUI(void) {
   
-  CGuiGameState::SetupGui(
-    this,
-    L"Menu\\GUISetStartscreens.dat",
-    0,
-    (bool (__cdecl *)(int, int, int))GuiDlgMainscreenProc);
+  CGuiGameState::SetupGui(this, L"Menu\\GUISetStartscreens.dat", 0, (bool (__cdecl *)(int, int, int))GuiDlgMainscreenProc);
 }
 
 

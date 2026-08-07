@@ -16,19 +16,21 @@
   *((_DWORD *)this + 2) = IAIEnvironment::EcoSectorGetUniqueId(a3);
   EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, *((_DWORD *)this + 1));
   if ( EcoSectorPtr )
+  {
     CEcoSector::SetWeaponAutoProduction(EcoSectorPtr, 0);
+  }
   *((_DWORD *)this + 3) = IAIEnvironment::TickCounter();
-  BBSupportTracePrintF(
-    0,
-    "CAIEcoSectorAIEx::CAIEcoSectorAIEx(): eco-sector id %i, unique id 0x%08x.",
-    *((_DWORD *)this + 1),
-    *((_DWORD *)this + 2));
+  BBSupportTracePrintF(0, "CAIEcoSectorAIEx::CAIEcoSectorAIEx(): eco-sector id %i, unique id 0x%08x.", *((_DWORD *)this + 1), *((_DWORD *)this + 2));
   *((_DWORD *)this + 10) = IAIEcoManager::CreateEcoManager(a3, a2, (CAIEcoSectorAIEx *)((char *)this + 16));
   *((_DWORD *)this + 11) = IAIEcoSectorAI::CreateEcoSectorAI(*((struct IAIEcoManager **)this + 10));
   if ( !*((_DWORD *)this + 11) && BBSupportDbgReport(2, "AI\\AI_EcoSectorAIEx.cpp", 54, "m_pEcoSectorAI != 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !off_3D7A214 && BBSupportDbgReport(2, "AI\\AI_EcoSectorAIEx.cpp", 55, "g_pAIEnv != 0") == 1 )
+  {
     __debugbreak();
+  }
   v3 = IAIEnvironment::GlobalEcoAIFlags();
   (*(void (__cdecl **)(int))(**((_DWORD **)this + 11) + 16))(v3);
   return this;
@@ -40,11 +42,7 @@
  CAIEcoSectorAIEx::~CAIEcoSectorAIEx(void) {
   
   *(_DWORD *)this = CAIEcoSectorAIEx::_vftable_;
-  BBSupportTracePrintF(
-    0,
-    "CAIEcoSectorAIEx::~CAIEcoSectorAIEx(): eco-sector id %i, unique id 0x%08x.",
-    *((_DWORD *)this + 1),
-    *((_DWORD *)this + 2));
+  BBSupportTracePrintF(0, "CAIEcoSectorAIEx::~CAIEcoSectorAIEx(): eco-sector id %i, unique id 0x%08x.", *((_DWORD *)this + 1), *((_DWORD *)this + 2));
   if ( *((_DWORD *)this + 11) )
   {
     (***((void (__thiscall ****)(_DWORD))this + 11))(*((_DWORD *)this + 11));
@@ -70,9 +68,13 @@ class CAIEcoSectorAIEx * __cdecl CAIEcoSectorAIEx::CreateEcoSectorAIEx(class IAI
   Memory = (void *)TAIStaticMemoryPool<48,512>::AllocateMemory(48);
   v5 = (CAIEcoSectorAIEx *)operator new(0x30u, Memory);
   if ( v5 )
+  {
     return CAIEcoSectorAIEx::CAIEcoSectorAIEx(v5, a1, a2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -91,11 +93,7 @@ void  CAIEcoSectorAIEx::Execute(void) {
     {
       v1 = (CRandom16 *)IAIEnvironment::RandomPtr();
       NumberOfRandCalls = CRandom16::GetNumberOfRandCalls(v1);
-      IMessageTracer::PushFormatedInts(
-        g_pMsgTracer,
-        "Before IAIEcoSectorAI->Execute(): eco-sector %u, rand counter %u",
-        *((_DWORD *)this + 1),
-        NumberOfRandCalls);
+      IMessageTracer::PushFormatedInts(g_pMsgTracer, "Before IAIEcoSectorAI->Execute(): eco-sector %u, rand counter %u", *((_DWORD *)this + 1), NumberOfRandCalls);
       (*(void (__thiscall **)(_DWORD))(**((_DWORD **)this + 11) + 4))(*((_DWORD *)this + 11));
       v3 = (CRandom16 *)IAIEnvironment::RandomPtr();
       v4 = CRandom16::GetNumberOfRandCalls(v3);
@@ -103,20 +101,20 @@ void  CAIEcoSectorAIEx::Execute(void) {
     }
     else
     {
-      BBSupportTracePrintF(
-        3,
-        "### CAIEcoSectorAIEx::Execute(): Invalid eco-sector! Eco-sector %i, unique id 0x%08x. ###",
-        *((_DWORD *)this + 1),
-        *((_DWORD *)this + 2));
+      BBSupportTracePrintF(3, "### CAIEcoSectorAIEx::Execute(): Invalid eco-sector! Eco-sector %i, unique id 0x%08x. ###", *((_DWORD *)this + 1), *((_DWORD *)this + 2));
       if ( BBSupportDbgReport(1, "AI\\AI_EcoSectorAIEx.cpp", 107, "CAIEcoSectorAIEx::Execute(): Invalid eco-sector!") == 1 )
+      {
         __debugbreak();
+      }
     }
   }
   else
   {
     BBSupportTracePrintF(3, "### CAIEcoSectorAIEx::Execute(): Invalid economy-ai! ###");
     if ( BBSupportDbgReport(1, "AI\\AI_EcoSectorAIEx.cpp", 114, "CAIEcoSectorAIEx::Execute(): Invalid economy-ai!") == 1 )
+    {
       __debugbreak();
+    }
   }
 }
 

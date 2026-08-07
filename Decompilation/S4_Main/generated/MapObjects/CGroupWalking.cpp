@@ -18,8 +18,12 @@ void  CGroupWalking::SetFast(void) {
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 4; ++i )
+  for ( i = 0;
+        i < 4;
+        ++i )
+  {
     result = i + 1;
+  }
   return result;
 }
 
@@ -31,8 +35,12 @@ void  CGroupWalking::SetNormal(void) {
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 4; ++i )
+  for ( i = 0;
+        i < 4;
+        ++i )
+  {
     result = i + 1;
+  }
   return result;
 }
 

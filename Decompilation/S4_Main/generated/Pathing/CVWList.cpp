@@ -29,7 +29,7 @@ int  CVWList::Size(void)const {
 
 
 // address=[0x15de830]
-// Decompiled from void __thiscall CVWList::CalculateOverlappingSquares(  CVWList *this,  unsigned int _iX,  unsigned int _iY,  unsigned int _iRadius)
+// Decompiled from void __thiscall CVWList::CalculateOverlappingSquares(CVWList *this, unsigned int _iX, unsigned int _iY, unsigned int _iRadius)
 void  CVWList::CalculateOverlappingSquares(int _iX, int _iY, int _iRadius) {
   
   int iV; // [esp+8h] [ebp-18h]
@@ -38,22 +38,29 @@ void  CVWList::CalculateOverlappingSquares(int _iX, int _iY, int _iRadius) {
   int j; // [esp+14h] [ebp-Ch]
   int i; // [esp+18h] [ebp-8h]
 
-  if ( !CWorldManager::InWorld(_iX, _iY)
-    && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 161, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(_iX, _iY) && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 161, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   if ( _iRadius > 0x20 && BBSupportDbgReport(2, "Pathing\\Scanner.cpp", 162, "(_iRadius >=0) && (_iRadius <= 32)") == 1 )
+  {
     __debugbreak();
+  }
   iV = Squares::XYToVW(_iX);
   iW = Squares::XYToVW(_iY);
   v6 = sub_15E1D20(iV, iW);
-  for ( i = -2; i <= 2; ++i )
+  for ( i = -2;
+        i <= 2;
+        ++i )
   {
-    for ( j = -2; j <= 2; ++j )
+    for ( j = -2;
+          j <= 2;
+          ++j )
     {
       if ( sub_15E1E40(&v6, j, i, _iX & 0xF, _iY & 0xF, _iRadius) )
+      {
         CVWList::PushEx(this, &v6, j + iV, i + iW);
+      }
     }
   }
   this->m_iSize = v6 & 0x1F;

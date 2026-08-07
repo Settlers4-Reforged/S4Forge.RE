@@ -55,7 +55,9 @@ void  SurfaceClipper::ReleaseClipper(void) {
 
   result = this;
   if ( !*(_DWORD *)this )
+  {
     return result;
+  }
   result = (SurfaceClipper *)(*(int (__stdcall **)(_DWORD))(**(_DWORD **)this + 8))(*(_DWORD *)this);
   *(_DWORD *)this = 0;
   return result;
@@ -87,11 +89,7 @@ long  SurfaceClipper::SetClipRect(struct tagRECT const & Src) {
 // Decompiled from int __thiscall SurfaceClipper::SetClipWindow(SurfaceClipper *this, HWND a2)
 long  SurfaceClipper::SetClipWindow(struct HWND__ * a2) {
   
-  return (*(int (__thiscall **)(_DWORD, _DWORD, _DWORD, HWND))(**(_DWORD **)this + 32))(
-           *(_DWORD *)this,
-           *(_DWORD *)this,
-           0,
-           a2);
+  return (*(int (__thiscall **)(_DWORD, _DWORD, _DWORD, HWND))(**(_DWORD **)this + 32))(*(_DWORD *)this, *(_DWORD *)this, 0, a2);
 }
 
 

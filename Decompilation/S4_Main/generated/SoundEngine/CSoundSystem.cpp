@@ -46,9 +46,13 @@
     if ( v2 )
     {
       if ( *((_DWORD *)v2 - 1) )
+      {
         (**(void (__thiscall ***)(CSoundSystem::SSoundCardData *, int))v2)(v2, 3);
+      }
       else
+      {
         operator delete[]((char *)v2 - 4);
+      }
     }
     this[14] = 0;
   }
@@ -56,7 +60,9 @@
   {
     v1 = this[13];
     if ( v1 )
+    {
       CSoundSystem::delete[] v1;
+    }
     this[13] = 0;
   }
 }
@@ -70,9 +76,13 @@ bool  CSoundSystem::Init(char const * a2, int a3, bool a4, int a5, int a6, int a
   if ( a4 )
   {
     if ( a5 == 16 )
+    {
       *((_DWORD *)this + 3) = 3;
+    }
     else
+    {
       *((_DWORD *)this + 3) = 2;
+    }
   }
   else
   {
@@ -86,7 +96,9 @@ bool  CSoundSystem::Init(char const * a2, int a3, bool a4, int a5, int a6, int a
   j__MSS_auto_cleanup();
   AIL_startup();
   if ( !CSoundSystem::InitOutputDriver(this) )
+  {
     return 0;
+  }
   CSoundSystem::AllocateSampleHandles(this);
   return 1;
 }
@@ -102,10 +114,14 @@ void  CSoundSystem::StopPlayback(void) {
 
   result = this;
   if ( !*((_DWORD *)this + 9) )
+  {
     return result;
+  }
   if ( *((_DWORD *)this + 10) )
   {
-    for ( i = 0; i < *((_DWORD *)this + 2); ++i )
+    for ( i = 0;
+          i < *((_DWORD *)this + 2);
+          ++i )
     {
       if ( *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i) )
       {
@@ -117,11 +133,15 @@ void  CSoundSystem::StopPlayback(void) {
   result = this;
   if ( *((_DWORD *)this + 11) )
   {
-    for ( j = 0; ; ++j )
+    for ( j = 0;
+          ;
+          ++j )
     {
       result = (CSoundSystem *)j;
       if ( j >= *((_DWORD *)this + 1) )
+      {
         break;
+      }
       if ( *(_DWORD *)(*((_DWORD *)this + 11) + 16 * j + 8) )
       {
         AIL_register_stream_callback(*(_DWORD *)(*((_DWORD *)this + 11) + 16 * j + 8), 0);
@@ -143,15 +163,23 @@ int  CSoundSystem::GetNumberOfPlayingVoices(void) {
   int j; // [esp+8h] [ebp-4h]
 
   v3 = 0;
-  for ( i = 0; i < this[2]; ++i )
+  for ( i = 0;
+        i < this[2];
+        ++i )
   {
     if ( AIL_sample_status(*(_DWORD *)(this[10] + 16 * i + 8)) == 4 )
+    {
       ++v3;
+    }
   }
-  for ( j = 0; j < this[1]; ++j )
+  for ( j = 0;
+        j < this[1];
+        ++j )
   {
     if ( AIL_stream_status(*(_DWORD *)(this[11] + 16 * j + 8)) == 4 )
+    {
       ++v3;
+    }
   }
   return v3;
 }
@@ -172,9 +200,13 @@ void  CSoundSystem::Shutdown(void) {
 int  CSoundSystem::GetCpuUsage(void) {
   
   if ( *((_DWORD *)this + 9) )
+  {
     return AIL_digital_CPU_percent(*((_DWORD *)this + 9));
+  }
   else
+  {
     return -1;
+  }
 }
 
 
@@ -187,9 +219,13 @@ unsigned int  CSoundSystem::PlaySoundFile(char const * a2, int a3, int a4) {
   int FreeSoundHandle; // [esp+4h] [ebp-8h]
 
   if ( a3 >= 0x80 && BBSupportDbgReport(2, "SoundSystem.cpp", 539, "(_iVolume>=0) && (_iVolume<=127)") == 1 )
+  {
     __debugbreak();
+  }
   if ( a4 >= 0x80 && BBSupportDbgReport(2, "SoundSystem.cpp", 541, "(_iPan>=0) && (_iPan<=127)") == 1 )
+  {
     __debugbreak();
+  }
   if ( *((_DWORD *)this + 9) )
   {
     FreeSoundHandle = CSoundSystem::GetFreeSoundHandle(this);
@@ -205,12 +241,7 @@ unsigned int  CSoundSystem::PlaySoundFile(char const * a2, int a3, int a4) {
       {
         v6 = AIL_file_size(a2);
         AIL_init_sample(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle + 8));
-        if ( AIL_set_named_sample_file(
-               *(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle + 8),
-               a2,
-               *(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle + 12),
-               v6,
-               0) )
+        if ( AIL_set_named_sample_file(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle + 8), a2, *(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle + 12), v6, 0) )
         {
           *(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle) = (*((_DWORD *)this + 8))++;
           *(_WORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle + 4) = a3;
@@ -250,9 +281,13 @@ unsigned int  CSoundSystem::PlayStream(char const * a2, int a3, int a4, bool a5,
   int v8; // [esp+0h] [ebp-8h]
 
   if ( a3 >= 0x80 && BBSupportDbgReport(2, "SoundSystem.cpp", 450, "(_iVolume>=0) && (_iVolume<=127)") == 1 )
+  {
     __debugbreak();
+  }
   if ( a4 >= 0x80 && BBSupportDbgReport(2, "SoundSystem.cpp", 452, "(_iPan>=0) && (_iPan<=127)") == 1 )
+  {
     __debugbreak();
+  }
   v8 = CSoundSystem::GetFreeStreamHandle(this);
   if ( v8 == -1 )
   {
@@ -273,7 +308,9 @@ unsigned int  CSoundSystem::PlayStream(char const * a2, int a3, int a4, bool a5,
       AIL_set_stream_pan(*(_DWORD *)(this[11] + 16 * v8 + 8), a4);
       AIL_set_stream_position(*(_DWORD *)(this[11] + 16 * v8 + 8), 0);
       if ( a5 )
+      {
         AIL_register_stream_callback(*(_DWORD *)(this[11] + 16 * v8 + 8), &CSoundSystem::LoopStreamCB);
+      }
       if ( a6 >= 0 )
       {
         AIL_register_stream_callback(*(_DWORD *)(this[11] + 16 * v8 + 8), PlaylistCallback);
@@ -294,7 +331,7 @@ unsigned int  CSoundSystem::PlayStream(char const * a2, int a3, int a4, bool a5,
 
 
 // address=[0x2fda4e0]
-// Decompiled from int __thiscall CSoundSystem::PlaySoundFromMemory(  CSoundSystem *this,  unsigned int *a2,  char *a3,  unsigned int a4,  int a5,  int a6,  int a7,  bool a8)
+// Decompiled from int __thiscall CSoundSystem::PlaySoundFromMemory(CSoundSystem *this, unsigned int *a2, char *a3, unsigned int a4, int a5, int a6, int a7, bool a8)
 unsigned int  CSoundSystem::PlaySoundFromMemory(unsigned int * a2, char * a3, unsigned int a4, int a5, int a6, int a7, bool a8) {
   
   int v9; // [esp+0h] [ebp-Ch]
@@ -316,9 +353,9 @@ unsigned int  CSoundSystem::PlaySoundFromMemory(unsigned int * a2, char * a3, un
         v9 = a7 * AIL_sample_playback_rate(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle + 8)) / 100;
         AIL_set_sample_playback_rate(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle + 8), v9);
         if ( a8 )
-          AIL_register_EOS_callback(
-            *(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle + 8),
-            CSoundSystem::LoopSampleCB);
+        {
+          AIL_register_EOS_callback(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle + 8), CSoundSystem::LoopSampleCB);
+        }
         AIL_start_sample(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle + 8));
         return *(_DWORD *)(*((_DWORD *)this + 10) + 16 * FreeSoundHandle);
       }
@@ -350,7 +387,9 @@ bool  CSoundSystem::ChangeVolume(unsigned int a2, int a3) {
   int SoundIndex; // [esp+4h] [ebp-4h]
 
   if ( a3 >= 0x80 && BBSupportDbgReport(2, "SoundSystem.cpp", 824, "(_iVolume>=0) && (_iVolume<=127)") == 1 )
+  {
     __debugbreak();
+  }
   StreamIndex = CSoundSystem::GetStreamIndex(this, a2);
   if ( StreamIndex < 0 )
   {
@@ -364,7 +403,9 @@ bool  CSoundSystem::ChangeVolume(unsigned int a2, int a3) {
       AIL_set_sample_volume(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * SoundIndex + 8), a3);
       *(_WORD *)(*((_DWORD *)this + 10) + 16 * SoundIndex + 4) = a3;
       if ( a3 )
+      {
         return 1;
+      }
       CSoundSystem::StopSample(this, a2);
       *(_DWORD *)(*((_DWORD *)this + 10) + 16 * SoundIndex) = 0;
       return 1;
@@ -388,10 +429,14 @@ int  CSoundSystem::GetVolume(unsigned int a2) {
 
   StreamIndex = CSoundSystem::GetStreamIndex(this, a2);
   if ( StreamIndex >= 0 )
+  {
     return *(__int16 *)(*((_DWORD *)this + 11) + 16 * StreamIndex + 4);
+  }
   SoundIndex = CSoundSystem::GetSoundIndex(this, a2);
   if ( SoundIndex >= 0 )
+  {
     return *(__int16 *)(*((_DWORD *)this + 10) + 16 * SoundIndex + 4);
+  }
   BBSupportTracePrintF(0, "CSoundSystem::GetVolume : Unknown ID : %i", a2);
   return 0;
 }
@@ -405,7 +450,9 @@ bool  CSoundSystem::ChangePan(unsigned int a2, int a3) {
   int SoundIndex; // [esp+4h] [ebp-4h]
 
   if ( a3 >= 0x80 && BBSupportDbgReport(2, "SoundSystem.cpp", 869, "(_iPan>=0) && (_iPan<=127)") == 1 )
+  {
     __debugbreak();
+  }
   StreamIndex = CSoundSystem::GetStreamIndex(this, a2);
   if ( StreamIndex < 0 )
   {
@@ -444,7 +491,9 @@ bool  CSoundSystem::Fade(unsigned int a2, int a3, int a4) {
     BBSupportTracePrintF(0, "CSoundSystem::Fade no timer interval set");
     return 0;
   }
-  for ( i = 0; i < *((_DWORD *)this + 1) + *((_DWORD *)this + 2); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 1) + *((_DWORD *)this + 2);
+        ++i )
   {
     if ( *(_DWORD *)(*((_DWORD *)this + 12) + 4 * i) && **(_DWORD **)(*((_DWORD *)this + 12) + 4 * i) == a2 )
     {
@@ -455,7 +504,9 @@ bool  CSoundSystem::Fade(unsigned int a2, int a3, int a4) {
   }
   if ( v7 < 0 )
   {
-    for ( j = 0; j < *((_DWORD *)this + 1) + *((_DWORD *)this + 2); ++j )
+    for ( j = 0;
+          j < *((_DWORD *)this + 1) + *((_DWORD *)this + 2);
+          ++j )
     {
       if ( !*(_DWORD *)(*((_DWORD *)this + 12) + 4 * j) )
       {
@@ -487,7 +538,9 @@ void  CSoundSystem::SetTimerInterval(int a2) {
   int result; // eax
 
   if ( a2 < 0 && BBSupportDbgReport(2, "SoundSystem.cpp", 1015, "_iInterval >= 0") == 1 )
+  {
     __debugbreak();
+  }
   result = 0;
   *((_DWORD *)this + 5) = a2;
   return result;
@@ -500,7 +553,9 @@ void  CSoundSystem::Update(void) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *((_DWORD *)this + 1); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 1);
+        ++i )
   {
     if ( *(_DWORD *)(*((_DWORD *)this + 11) + 16 * i + 8) )
     {
@@ -536,7 +591,9 @@ void  CSoundSystem::StopSample(unsigned int a2) {
         *(_DWORD *)(*((_DWORD *)this + 10) + 16 * v5 + 12) = 0;
       }
       if ( *(_DWORD *)(*((_DWORD *)this + 10) + 16 * v5 + 8) )
+      {
         AIL_stop_sample(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * v5 + 8));
+      }
       result = (int)this;
       *(_DWORD *)(*((_DWORD *)this + 10) + 16 * v5) = 0;
     }
@@ -544,8 +601,9 @@ void  CSoundSystem::StopSample(unsigned int a2) {
   else
   {
     if ( *(__int16 *)(*((_DWORD *)this + 11) + 16 * StreamIndex + 14) >= 0 )
-      CPlaylist::StoreStreamPos((CPlaylist *)(*((_DWORD *)this + 14)
-                                            + 48 * *(__int16 *)(*((_DWORD *)this + 11) + 16 * StreamIndex + 14)));
+    {
+      CPlaylist::StoreStreamPos((CPlaylist *)(*((_DWORD *)this + 14) + 48 * *(__int16 *)(*((_DWORD *)this + 11) + 16 * StreamIndex + 14)));
+    }
     AIL_close_stream(*(_DWORD *)(*((_DWORD *)this + 11) + 16 * StreamIndex + 8));
     *(_DWORD *)(*((_DWORD *)this + 11) + 16 * StreamIndex + 8) = 0;
     result = (int)this;
@@ -561,10 +619,14 @@ int  CSoundSystem::GetSampleID(struct _SAMPLE * a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *((_DWORD *)this + 2); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 2);
+        ++i )
   {
     if ( *(struct _SAMPLE **)(*((_DWORD *)this + 10) + 16 * i + 8) == a2 )
+    {
       return *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i);
+    }
   }
   return 0;
 }
@@ -580,11 +642,15 @@ void  CSoundSystem::StopStreams(void) {
   result = this;
   if ( *((_DWORD *)this + 11) )
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       result = (CSoundSystem *)i;
       if ( i >= *((_DWORD *)this + 1) )
+      {
         break;
+      }
       if ( *(_DWORD *)(*((_DWORD *)this + 11) + 16 * i + 8) )
       {
         AIL_register_stream_callback(*(_DWORD *)(*((_DWORD *)this + 11) + 16 * i + 8), 0);
@@ -609,13 +675,19 @@ void  CSoundSystem::StopSounds(void) {
   result = this;
   if ( *((_DWORD *)this + 10) )
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       result = (CSoundSystem *)i;
       if ( i >= *((_DWORD *)this + 2) )
+      {
         break;
+      }
       if ( *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i) )
+      {
         CSoundSystem::StopSample(this, *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i));
+      }
     }
   }
   return result;
@@ -632,25 +704,37 @@ void  CSoundSystem::PausePlayback(void) {
 
   result = this;
   if ( !*((_DWORD *)this + 9) )
+  {
     return result;
+  }
   if ( *((_DWORD *)this + 10) )
   {
-    for ( i = 0; i < *((_DWORD *)this + 2); ++i )
+    for ( i = 0;
+          i < *((_DWORD *)this + 2);
+          ++i )
     {
       if ( *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 8) )
+      {
         AIL_stop_sample(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 8));
+      }
     }
   }
   result = this;
   if ( *((_DWORD *)this + 11) )
   {
-    for ( j = 0; ; ++j )
+    for ( j = 0;
+          ;
+          ++j )
     {
       result = (CSoundSystem *)j;
       if ( j >= *((_DWORD *)this + 1) )
+      {
         break;
+      }
       if ( *(_DWORD *)(*((_DWORD *)this + 11) + 16 * j + 8) )
+      {
         AIL_pause_stream(*(_DWORD *)(*((_DWORD *)this + 11) + 16 * j + 8), 1);
+      }
     }
   }
   return result;
@@ -667,25 +751,37 @@ void  CSoundSystem::ResumePlayback(void) {
 
   result = this;
   if ( !*((_DWORD *)this + 9) )
+  {
     return result;
+  }
   if ( *((_DWORD *)this + 10) )
   {
-    for ( i = 0; i < *((_DWORD *)this + 2); ++i )
+    for ( i = 0;
+          i < *((_DWORD *)this + 2);
+          ++i )
     {
       if ( *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 8) )
+      {
         AIL_resume_sample(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 8));
+      }
     }
   }
   result = this;
   if ( *((_DWORD *)this + 11) )
   {
-    for ( j = 0; ; ++j )
+    for ( j = 0;
+          ;
+          ++j )
     {
       result = (CSoundSystem *)j;
       if ( j >= *((_DWORD *)this + 1) )
+      {
         break;
+      }
       if ( *(_DWORD *)(*((_DWORD *)this + 11) + 16 * j + 8) )
+      {
         AIL_pause_stream(*(_DWORD *)(*((_DWORD *)this + 11) + 16 * j + 8), 0);
+      }
     }
   }
   return result;
@@ -696,8 +792,7 @@ void  CSoundSystem::ResumePlayback(void) {
 // Decompiled from int __thiscall CSoundSystem::InitPlaylist(CSoundSystem *this, int a2, int a3)
 void  CSoundSystem::InitPlaylist(int a2, int a3) {
   
-  if ( (a3 < 0 || a2 >= *((_DWORD *)this + 15))
-    && BBSupportDbgReport(2, "SoundSystem.cpp", 1150, "(_iTimesToPlay >= 0) && (_iListID < m_iPlaylistNumber)") == 1 )
+  if ( (a3 < 0 || a2 >= *((_DWORD *)this + 15)) && BBSupportDbgReport(2, "SoundSystem.cpp", 1150, "(_iTimesToPlay >= 0) && (_iListID < m_iPlaylistNumber)") == 1 )
   {
     __debugbreak();
   }
@@ -710,9 +805,10 @@ void  CSoundSystem::InitPlaylist(int a2, int a3) {
 bool  CSoundSystem::AddTitleToPlaylist(int a2, std::string const * a3, int a4) {
   
   if ( !this[14] )
+  {
     return 0;
-  if ( (!a3 || a2 >= this[15])
-    && BBSupportDbgReport(2, "SoundSystem.cpp", 1170, "_pstrTitle && (_iListID < m_iPlaylistNumber )") == 1 )
+  }
+  if ( (!a3 || a2 >= this[15]) && BBSupportDbgReport(2, "SoundSystem.cpp", 1170, "_pstrTitle && (_iListID < m_iPlaylistNumber )") == 1 )
   {
     __debugbreak();
   }
@@ -736,10 +832,14 @@ void __stdcall CSoundSystem::LoopSampleCB(struct _SAMPLE * a1) {
   int result; // eax
 
   if ( !g_pcSoundSystem )
+  {
     return AIL_start_sample(a1);
+  }
   result = CSoundSystem::GetSampleID((CSoundSystem *)g_pcSoundSystem, a1);
   if ( result )
+  {
     return AIL_start_sample(a1);
+  }
   return result;
 }
 
@@ -760,9 +860,13 @@ void  CSoundSystem::CreatePlaylists(int a2) {
     if ( v5 )
     {
       if ( *(v5 - 1) )
+      {
         (**v5)(v5, 3);
+      }
       else
+      {
         operator delete[](v5 - 1);
+      }
     }
   }
   *((_DWORD *)this + 15) = a2;
@@ -790,13 +894,14 @@ unsigned int  CSoundSystem::StartPlaylist(int a2, int a3) {
   
   const char *ActiveTitle; // eax
 
-  if ( a2 >= *((_DWORD *)this + 15)
-    && BBSupportDbgReport(2, "SoundSystem.cpp", 1476, "_iListID < m_iPlaylistNumber") == 1 )
+  if ( a2 >= *((_DWORD *)this + 15) && BBSupportDbgReport(2, "SoundSystem.cpp", 1476, "_iListID < m_iPlaylistNumber") == 1 )
   {
     __debugbreak();
   }
   if ( !*((_DWORD *)this + 14) )
+  {
     return 0;
+  }
   CPlaylist::SetTitle((CPlaylist *)(*((_DWORD *)this + 14) + 48 * a2), 0);
   ActiveTitle = (const char *)CPlaylist::GetActiveTitle((CPlaylist *)(*((_DWORD *)this + 14) + 48 * a2));
   return CSoundSystem::PlayStream(this, ActiveTitle, a3, 0x40u, 0, a2);
@@ -827,18 +932,22 @@ unsigned int  CSoundSystem::ChangePlaylist(int a2, int a3) {
       CPlaylist::SetTitle((CPlaylist *)(*((_DWORD *)this + 14) + 48 * a2), PlayingTitleNum);
       ActiveTitle = (char *)CPlaylist::GetActiveTitle((CPlaylist *)(*((_DWORD *)this + 14) + 48 * a2));
       if ( ActiveTitle )
+      {
         v11 = CSoundSystem::PlayStream(this, ActiveTitle, 0, 0x40u, 0, a2);
+      }
       else
-        BBSupportTracePrintF(
-          0,
-          "SoundEngine : CSoundSystem::ChangePlaylist : Couldn't get valid filename of active title");
+      {
+        BBSupportTracePrintF(0, "SoundEngine : CSoundSystem::ChangePlaylist : Couldn't get valid filename of active title");
+      }
       if ( v11 )
       {
         if ( TrackID && TrackID != v11 )
         {
           StreamIndex = CSoundSystem::GetStreamIndex(this, TrackID);
           if ( StreamIndex >= 0 )
+          {
             *(_WORD *)(*((_DWORD *)this + 11) + 16 * StreamIndex + 14) = -1;
+          }
         }
         CPlaylist::ResumeOnLastPos((CPlaylist *)(*((_DWORD *)this + 14) + 48 * a2));
         *((_DWORD *)this + 16) = a2;
@@ -856,11 +965,7 @@ unsigned int  CSoundSystem::ChangePlaylist(int a2, int a3) {
     }
     else
     {
-      BBSupportTracePrintF(
-        0,
-        "SoundEngine : CSoundSystem::ChangePlaylist : ListID is bigger than number of playlists (ignore this msg, when pl"
-        "aying own mp3s) : %d",
-        a2);
+      BBSupportTracePrintF(0, "SoundEngine : CSoundSystem::ChangePlaylist : ListID is bigger than number of playlists (ignore this msg, when playing own mp3s) : %d", a2);
       return 0;
     }
   }
@@ -882,7 +987,9 @@ void  CSoundSystem::PlaylistTitleEnded(struct _STREAM * a2) {
   int v5; // [esp+10h] [ebp-Ch]
   int i; // [esp+14h] [ebp-8h]
 
-  for ( i = 0; i < *((_DWORD *)this + 1); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 1);
+        ++i )
   {
     if ( *(struct _STREAM **)(*((_DWORD *)this + 11) + 16 * i + 8) == a2 )
     {
@@ -897,23 +1004,21 @@ void  CSoundSystem::PlaylistTitleEnded(struct _STREAM * a2) {
         CPlaylist::TitleEnded((CPlaylist *)(*((_DWORD *)this + 14) + 48 * v5));
         ActiveTitle = (char *)CPlaylist::GetActiveTitle((CPlaylist *)(*((_DWORD *)this + 14) + 48 * v5));
         if ( ActiveTitle )
-          v4 = CSoundSystem::PlayStream(
-                 this,
-                 ActiveTitle,
-                 *(__int16 *)(*((_DWORD *)this + 11) + 16 * i + 4),
-                 *(__int16 *)(*((_DWORD *)this + 11) + 16 * i + 6),
-                 0,
-                 v5);
+        {
+          v4 = CSoundSystem::PlayStream(this, ActiveTitle, *(__int16 *)(*((_DWORD *)this + 11) + 16 * i + 4), *(__int16 *)(*((_DWORD *)this + 11) + 16 * i + 6), 0, v5);
+        }
         else
-          BBSupportTracePrintF(
-            0,
-            "SoundEngine : CSoundSystem::PlaylistTitleEnded : Couldn't get valid filename of active title");
+        {
+          BBSupportTracePrintF(0, "SoundEngine : CSoundSystem::PlaylistTitleEnded : Couldn't get valid filename of active title");
+        }
       }
       *(_BYTE *)(*((_DWORD *)this + 11) + 16 * i + 12) = 0;
       *(_DWORD *)(*((_DWORD *)this + 11) + 16 * i) = 0;
       *(_WORD *)(*((_DWORD *)this + 11) + 16 * i + 14) = -1;
       if ( !v4 )
+      {
         return;
+      }
       *(_DWORD *)(*((_DWORD *)this + 11) + 16 * CSoundSystem::GetStreamIndex(this, v4)) = v2;
       CPlaylist::SetTrackID((CPlaylist *)(*((_DWORD *)this + 14) + 48 * v5), v2);
       return;
@@ -929,10 +1034,14 @@ void  CSoundSystem::SampleEnded(struct _SAMPLE * a2) {
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *((_DWORD *)this + 2); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 2);
+        ++i )
   {
     if ( *(struct _SAMPLE **)(*((_DWORD *)this + 10) + 16 * i + 8) == a2 )
+    {
       *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i) = 0;
+    }
     result = i + 1;
   }
   return result;
@@ -946,14 +1055,18 @@ void  CSoundSystem::ChangeStreamVolume(int a2) {
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *((_DWORD *)this + 1); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 1);
+        ++i )
   {
     if ( *(_DWORD *)(*((_DWORD *)this + 11) + 16 * i + 8) )
     {
       if ( a2 )
       {
         if ( !*(_WORD *)(*((_DWORD *)this + 11) + 16 * i + 4) )
+        {
           AIL_pause_stream(*(_DWORD *)(*((_DWORD *)this + 11) + 16 * i + 8), 0);
+        }
       }
       else
       {
@@ -976,8 +1089,12 @@ void  CSoundSystem::ChangeSoundVolume(int a2) {
   int i; // [esp+4h] [ebp-4h]
 
   if ( !a2 )
+  {
     return CSoundSystem::StopSounds(this);
-  for ( i = 0; i < *((_DWORD *)this + 1); ++i )
+  }
+  for ( i = 0;
+        i < *((_DWORD *)this + 1);
+        ++i )
   {
     if ( *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 8) )
     {
@@ -1037,8 +1154,7 @@ int  CSoundSystem::EnumSoundCards(void) {
 // Decompiled from int __thiscall CSoundSystem::GetSoundCardName(_DWORD *this, int a2, int a3)
 std::string  CSoundSystem::GetSoundCardName(int a2) {
   
-  if ( (a3 >= this[6] || a3 < 0)
-    && BBSupportDbgReport(2, "SoundSystem.cpp", 1842, "(_iIdx<m_iSoundCards ) &&( _iIdx>=0 )") == 1 )
+  if ( (a3 >= this[6] || a3 < 0) && BBSupportDbgReport(2, "SoundSystem.cpp", 1842, "(_iIdx<m_iSoundCards ) &&( _iIdx>=0 )") == 1 )
   {
     __debugbreak();
   }
@@ -1053,8 +1169,7 @@ void  CSoundSystem::SetSoundCard(int a2) {
   
   CSoundSystem *result; // eax
 
-  if ( (a2 >= *((_DWORD *)this + 6) || a2 < 0)
-    && BBSupportDbgReport(2, "SoundSystem.cpp", 1853, "(_iIdx<m_iSoundCards ) &&( _iIdx>=0 )") == 1 )
+  if ( (a2 >= *((_DWORD *)this + 6) || a2 < 0) && BBSupportDbgReport(2, "SoundSystem.cpp", 1853, "(_iIdx<m_iSoundCards ) &&( _iIdx>=0 )") == 1 )
   {
     __debugbreak();
   }
@@ -1080,12 +1195,7 @@ void  CSoundSystem::AddSoundCard(struct _GUID * a2, char const * Str) {
   if ( v7 )
   {
     *v7 = v6;
-    _vec_ctor(
-      v7 + 1,
-      0x20u,
-      v6,
-      CSoundSystem::SSoundCardData::SSoundCardData,
-      CSoundSystem::SSoundCardData::~SSoundCardData);
+    _vec_ctor(v7 + 1, 0x20u, v6, CSoundSystem::SSoundCardData::SSoundCardData, CSoundSystem::SSoundCardData::~SSoundCardData);
     v5 = v7 + 1;
   }
   else
@@ -1094,13 +1204,17 @@ void  CSoundSystem::AddSoundCard(struct _GUID * a2, char const * Str) {
   }
   if ( *((_DWORD *)this + 13) )
   {
-    for ( i = 0; i < *((_DWORD *)this + 6) - 1; ++i )
+    for ( i = 0;
+          i < *((_DWORD *)this + 6) - 1;
+          ++i )
     {
       v5[8 * i] = *(_DWORD *)(*((_DWORD *)this + 13) + 32 * i);
       std::string::operator=(*((_DWORD *)this + 13) + 32 * i + 4);
     }
     if ( *((_DWORD *)this + 13) )
+    {
       CSoundSystem::delete[] *((CSoundSystem::SSoundCardData **)this + 13);
+    }
   }
   *((_DWORD *)this + 13) = v5;
   *(_DWORD *)(*((_DWORD *)this + 13) + 32 * (*((_DWORD *)this + 6) - 1)) = a2;
@@ -1135,32 +1249,54 @@ bool  CSoundSystem::InitOutputDriver(void) {
   AIL_set_preference(15, 0);
   v9[0] = 1;
   if ( (*((_DWORD *)this + 3) & 2) != 0 )
+  {
     v7 = 2;
+  }
   else
+  {
     v7 = 1;
+  }
   v9[1] = v7;
   v10 = *((_DWORD *)this + 4);
   if ( (*((_DWORD *)this + 3) & 1) != 0 )
+  {
     v6 = 2;
+  }
   else
+  {
     v6 = 1;
+  }
   if ( (*((_DWORD *)this + 3) & 2) != 0 )
+  {
     v5 = 2;
+  }
   else
+  {
     v5 = 1;
+  }
   v12 = v5 * v6;
   v11 = *((_DWORD *)this + 4) * (unsigned __int16)(v5 * v6);
   if ( (*((_DWORD *)this + 3) & 1) != 0 )
+  {
     v4 = 16;
+  }
   else
+  {
     v4 = 8;
+  }
   v13 = v4;
   if ( *((int *)this + 7) >= 0 )
+  {
     v3 = AIL_waveOutOpen((char *)this + 36, 0, *(_DWORD *)(*((_DWORD *)this + 13) + 32 * *((_DWORD *)this + 7)), v9);
+  }
   else
+  {
     v3 = AIL_waveOutOpen((char *)this + 36, 0, -1, v9);
+  }
   if ( !v3 )
+  {
     return 1;
+  }
   error = (const char *)AIL_last_error();
   BBSupportTracePrintF(0, "SoundEngine : CSoundSystem::InitOutputDriver : %s ", error);
   *((_DWORD *)this + 9) = 0;
@@ -1179,25 +1315,33 @@ void  CSoundSystem::AllocateSampleHandles(void) {
 
   CSoundSystem::FreeMemory(this);
   *((_DWORD *)this + 10) = operator new[](16 * *((_DWORD *)this + 2));
-  for ( i = 0; i < *((_DWORD *)this + 2); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 2);
+        ++i )
   {
     *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 8) = AIL_allocate_sample_handle(*((_DWORD *)this + 9));
     *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 12) = 0;
     *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i) = -1;
   }
   *((_DWORD *)this + 11) = operator new[](16 * *((_DWORD *)this + 1));
-  for ( j = 0; j < *((_DWORD *)this + 1); ++j )
+  for ( j = 0;
+        j < *((_DWORD *)this + 1);
+        ++j )
   {
     *(_DWORD *)(*((_DWORD *)this + 11) + 16 * j + 8) = 0;
     *(_DWORD *)(*((_DWORD *)this + 11) + 16 * j) = -1;
     *(_WORD *)(*((_DWORD *)this + 11) + 16 * j + 14) = -1;
   }
   *((_DWORD *)this + 12) = operator new[](4 * (*((_DWORD *)this + 1) + *((_DWORD *)this + 2)));
-  for ( k = 0; ; ++k )
+  for ( k = 0;
+        ;
+        ++k )
   {
     result = this;
     if ( k >= *((_DWORD *)this + 1) + *((_DWORD *)this + 2) )
+    {
       break;
+    }
     *(_DWORD *)(*((_DWORD *)this + 12) + 4 * k) = 0;
   }
   return result;
@@ -1210,10 +1354,14 @@ int  CSoundSystem::GetFreeStreamHandle(void) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *((_DWORD *)this + 1); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 1);
+        ++i )
   {
     if ( !*(_DWORD *)(*((_DWORD *)this + 11) + 16 * i + 8) )
+    {
       return i;
+    }
   }
   return -1;
 }
@@ -1226,16 +1374,24 @@ int  CSoundSystem::GetFreeSoundHandle(void) {
   int v2; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     if ( i >= *((_DWORD *)this + 2) )
+    {
       return -1;
+    }
     v2 = AIL_sample_status(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 8));
     if ( v2 == 2 || v2 == 8 || v2 == 1 )
+    {
       break;
+    }
   }
   if ( !*(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 12) )
+  {
     return i;
+  }
   AIL_mem_free_lock(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 12));
   *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 12) = 0;
   return i;
@@ -1254,7 +1410,9 @@ void  CSoundSystem::FreeMemory(void) {
   result = (CSoundSystem *)this;
   if ( this[10] )
   {
-    for ( i = 0; i < (int)this[2]; ++i )
+    for ( i = 0;
+          i < (int)this[2];
+          ++i )
     {
       if ( *((_DWORD *)this[10] + 4 * i + 3) )
       {
@@ -1273,7 +1431,9 @@ void  CSoundSystem::FreeMemory(void) {
   }
   if ( this[11] )
   {
-    for ( j = 0; j < (int)this[1]; ++j )
+    for ( j = 0;
+          j < (int)this[1];
+          ++j )
     {
       if ( *((_DWORD *)this[11] + 4 * j + 2) )
       {
@@ -1286,8 +1446,12 @@ void  CSoundSystem::FreeMemory(void) {
     this[11] = 0;
   }
   if ( !this[12] )
+  {
     return result;
-  for ( k = 0; k < (int)this[2] + (int)this[1]; ++k )
+  }
+  for ( k = 0;
+        k < (int)this[2] + (int)this[1];
+        ++k )
   {
     if ( *((_DWORD *)this[12] + k) )
     {
@@ -1307,10 +1471,11 @@ int  CSoundSystem::GetSoundIndex(unsigned int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *((_DWORD *)this + 2); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 2);
+        ++i )
   {
-    if ( *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i) == a2
-      && AIL_sample_status(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 8)) == 4 )
+    if ( *(_DWORD *)(*((_DWORD *)this + 10) + 16 * i) == a2 && AIL_sample_status(*(_DWORD *)(*((_DWORD *)this + 10) + 16 * i + 8)) == 4 )
     {
       return i;
     }
@@ -1325,11 +1490,11 @@ int  CSoundSystem::GetStreamIndex(unsigned int a2) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < *((_DWORD *)this + 1); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 1);
+        ++i )
   {
-    if ( *(_DWORD *)(*((_DWORD *)this + 11) + 16 * i) == a2
-      && (AIL_stream_status(*(_DWORD *)(*((_DWORD *)this + 11) + 16 * i + 8)) == 4
-       || AIL_stream_status(*(_DWORD *)(*((_DWORD *)this + 11) + 16 * i + 8)) == 2) )
+    if ( *(_DWORD *)(*((_DWORD *)this + 11) + 16 * i) == a2 && (AIL_stream_status(*(_DWORD *)(*((_DWORD *)this + 11) + 16 * i + 8)) == 4 || AIL_stream_status(*(_DWORD *)(*((_DWORD *)this + 11) + 16 * i + 8)) == 2) )
     {
       return i;
     }
@@ -1351,22 +1516,25 @@ void  CSoundSystem::UpdateFades(void) {
   result = this;
   if ( *((_DWORD *)this + 12) )
   {
-    for ( i = 0; ; i = (CSoundSystem *)((char *)i + 1) )
+    for ( i = 0;
+          ;
+          i = (CSoundSystem *)((char *)i + 1) )
     {
       result = (CSoundSystem *)(*((_DWORD *)this + 1) + *((_DWORD *)this + 2));
       if ( (int)i >= (int)result )
+      {
         break;
+      }
       if ( *(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i) )
       {
-        *(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i) + 8) = *(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i)
-                                                                                         + 8)
-                                                                             + *(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i)
-                                                                                         + 24);
+        *(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i) + 8) = *(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i) + 8) + *(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i) + 24);
         v4 = (int)*(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i) + 8);
         if ( v4 >= 0 )
         {
           if ( v4 > 127 )
+          {
             v4 = 127;
+          }
         }
         else
         {
@@ -1393,8 +1561,7 @@ void  CSoundSystem::UpdateFades(void) {
         }
         if ( *(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i) + 24) > 0.0 )
         {
-          if ( *(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i) + 8) >= *(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i)
-                                                                                                 + 16) )
+          if ( *(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i) + 8) >= *(double *)(*(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i) + 16) )
           {
             operator delete(*(void **)(*((_DWORD *)this + 12) + 4 * (_DWORD)i));
             *(_DWORD *)(*((_DWORD *)this + 12) + 4 * (_DWORD)i) = 0;

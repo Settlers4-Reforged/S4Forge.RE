@@ -12,14 +12,20 @@
   *(_DWORD *)this = &ISoundEngine::_vftable_;
   BBSupportTracePrintF(0, "ISoundEngine::ISoundEngine() called.");
   if ( g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 48, "g_pcSoundSystem == 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !g_pcSoundSystem )
   {
     C = (CSoundSystem *)operator new(0x44u);
     if ( C )
+    {
       v3 = CSoundSystem::CSoundSystem(C);
+    }
     else
+    {
       v3 = 0;
+    }
     g_pcSoundSystem = v3;
   }
   BBSupportTracePrintF(0, "ISoundEngine::ISoundEngine() finished.");
@@ -39,10 +45,14 @@
     g_pcVoiceChat = 0;
   }
   if ( !g_pcSoundSystem )
+  {
     return BBSupportTracePrintF(0, "ISoundEngine::~ISoundEngine() finished.");
+  }
   CSoundSystem::Shutdown((CSoundSystem *)g_pcSoundSystem);
   if ( g_pcSoundSystem )
+  {
     (*(void (__thiscall **)(_DWORD *, int))*g_pcSoundSystem)(g_pcSoundSystem, 1);
+  }
   g_pcSoundSystem = 0;
   return BBSupportTracePrintF(0, "ISoundEngine::~ISoundEngine() finished.");
 }
@@ -60,12 +70,12 @@ bool  ISoundEngine::Init(wchar_t * a2, int a3, bool a4, int a5, int a6, int a7) 
 
   BBSupportTracePrintF(0, "ISoundEngine::Init() called.");
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 89, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v10);
   v12 = 0;
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-    v11,
-    a2);
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v11, a2);
   LOBYTE(v12) = 1;
   v7 = (const char *)std::string::c_str(v11);
   v9 = CSoundSystem::Init((CSoundSystem *)g_pcSoundSystem, v7, a3, a4, a5, a6, a7);
@@ -83,7 +93,9 @@ bool  ISoundEngine::Init(wchar_t * a2, int a3, bool a4, int a5, int a6, int a7) 
 void  ISoundEngine::SetTimerInterval(int a2) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 222, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   CSoundSystem::SetTimerInterval((CSoundSystem *)g_pcSoundSystem, a2);
 }
 
@@ -93,9 +105,13 @@ void  ISoundEngine::SetTimerInterval(int a2) {
 int  ISoundEngine::GetNumberOfSoundCards(void) {
   
   if ( g_pcSoundSystem )
+  {
     return CSoundSystem::EnumSoundCards((CSoundSystem *)g_pcSoundSystem);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -106,7 +122,9 @@ void  ISoundEngine::SetSoundCard(int a1) {
   CSoundSystem *result; // eax
 
   if ( g_pcSoundSystem )
+  {
     return CSoundSystem::SetSoundCard((CSoundSystem *)g_pcSoundSystem, a1);
+  }
   return result;
 }
 
@@ -116,9 +134,13 @@ void  ISoundEngine::SetSoundCard(int a1) {
 std::string  ISoundEngine::GetSoundCardName(int a1) {
   
   if ( g_pcSoundSystem )
+  {
     CSoundSystem::GetSoundCardName(g_pcSoundSystem, (int)a1, a2);
+  }
   else
+  {
     std::string::string(a1, byte_3AD55A5);
+  }
   return a1;
 }
 
@@ -134,12 +156,12 @@ unsigned int  ISoundEngine::PlaySoundFile(wchar_t const * a2, int a3, int a4) {
   int v9; // [esp+8Ch] [ebp-4h]
 
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 148, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v7);
   v9 = 0;
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-    v8,
-    a2);
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v8, a2);
   LOBYTE(v9) = 1;
   v4 = (const char *)std::string::c_str(v8);
   v6 = CSoundSystem::PlaySoundFile((CSoundSystem *)g_pcSoundSystem, v4, a3, a4);
@@ -162,12 +184,12 @@ unsigned int  ISoundEngine::PlayStream(wchar_t const * a2, int a3, int a4) {
   int v9; // [esp+8Ch] [ebp-4h]
 
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 164, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v7);
   v9 = 0;
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-    v8,
-    a2);
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v8, a2);
   LOBYTE(v9) = 1;
   v4 = (const char *)std::string::c_str(v8);
   v6 = CSoundSystem::PlayStream(g_pcSoundSystem, v4, a3, a4, 0, -1);
@@ -180,11 +202,13 @@ unsigned int  ISoundEngine::PlayStream(wchar_t const * a2, int a3, int a4) {
 
 
 // address=[0x2fd5b30]
-// Decompiled from unsigned int __thiscall ISoundEngine::PlaySoundFromMemory(  ISoundEngine *this,  unsigned int *a2,  char *a3,  unsigned int a4,  int a5,  int a6,  int a7,  bool a8)
+// Decompiled from unsigned int __thiscall ISoundEngine::PlaySoundFromMemory(ISoundEngine *this, unsigned int *a2, char *a3, unsigned int a4, int a5, int a6, int a7, bool a8)
 unsigned int  ISoundEngine::PlaySoundFromMemory(unsigned int * a2, char * a3, unsigned int a4, int a5, int a6, int a7, bool a8) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 279, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   return CSoundSystem::PlaySoundFromMemory((CSoundSystem *)g_pcSoundSystem, a2, a3, a4, a5, a6, a7, a8);
 }
 
@@ -194,7 +218,9 @@ unsigned int  ISoundEngine::PlaySoundFromMemory(unsigned int * a2, char * a3, un
 bool  ISoundEngine::ChangeVolume(unsigned int a2, int a3) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 182, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   return CSoundSystem::ChangeVolume((CSoundSystem *)g_pcSoundSystem, a2, a3);
 }
 
@@ -204,7 +230,9 @@ bool  ISoundEngine::ChangeVolume(unsigned int a2, int a3) {
 int  ISoundEngine::GetVolume(unsigned int a2) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 192, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   return CSoundSystem::GetVolume((CSoundSystem *)g_pcSoundSystem, a2);
 }
 
@@ -214,7 +242,9 @@ int  ISoundEngine::GetVolume(unsigned int a2) {
 bool  ISoundEngine::ChangePan(unsigned int a2, int a3) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 202, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   return CSoundSystem::ChangePan((CSoundSystem *)g_pcSoundSystem, a2, a3);
 }
 
@@ -224,7 +254,9 @@ bool  ISoundEngine::ChangePan(unsigned int a2, int a3) {
 bool  ISoundEngine::Fade(unsigned int a2, int a3, int a4) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 212, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   return CSoundSystem::Fade((CSoundSystem *)g_pcSoundSystem, a2, a3, a4);
 }
 
@@ -234,7 +266,9 @@ bool  ISoundEngine::Fade(unsigned int a2, int a3, int a4) {
 void  ISoundEngine::StopSample(unsigned int a2) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 289, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   CSoundSystem::StopSample((CSoundSystem *)g_pcSoundSystem, a2);
 }
 
@@ -244,7 +278,9 @@ void  ISoundEngine::StopSample(unsigned int a2) {
 void  ISoundEngine::StopStreams(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 299, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   CSoundSystem::StopStreams((CSoundSystem *)g_pcSoundSystem);
 }
 
@@ -254,7 +290,9 @@ void  ISoundEngine::StopStreams(void) {
 void  ISoundEngine::StopSounds(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 309, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   return CSoundSystem::StopSounds((CSoundSystem *)g_pcSoundSystem);
 }
 
@@ -264,7 +302,9 @@ void  ISoundEngine::StopSounds(void) {
 void  ISoundEngine::StopPlayback(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 114, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   CSoundSystem::StopPlayback((CSoundSystem *)g_pcSoundSystem);
 }
 
@@ -274,7 +314,9 @@ void  ISoundEngine::StopPlayback(void) {
 void  ISoundEngine::ChangeStreamVolume(int a2) {
   
   if ( g_pcSoundSystem )
+  {
     CSoundSystem::ChangeStreamVolume((CSoundSystem *)g_pcSoundSystem, a2);
+  }
 }
 
 
@@ -283,7 +325,9 @@ void  ISoundEngine::ChangeStreamVolume(int a2) {
 void  ISoundEngine::ChangeSoundVolume(int a2) {
   
   if ( g_pcSoundSystem )
+  {
     CSoundSystem::ChangeSoundVolume((CSoundSystem *)g_pcSoundSystem, a2);
+  }
 }
 
 
@@ -294,9 +338,13 @@ void  ISoundEngine::PausePlayback(bool a2) {
   if ( g_pcSoundSystem )
   {
     if ( a2 )
+    {
       CSoundSystem::PausePlayback((CSoundSystem *)g_pcSoundSystem);
+    }
     else
+    {
       CSoundSystem::ResumePlayback((CSoundSystem *)g_pcSoundSystem);
+    }
   }
 }
 
@@ -306,10 +354,14 @@ void  ISoundEngine::PausePlayback(bool a2) {
 void  ISoundEngine::Perform(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 232, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   CSoundSystem::Update((CSoundSystem *)g_pcSoundSystem);
   if ( g_pcVoiceChat )
+  {
     CVoiceChat::Run((CVoiceChat *)g_pcVoiceChat);
+  }
 }
 
 
@@ -318,7 +370,9 @@ void  ISoundEngine::Perform(void) {
 void  ISoundEngine::Shutdown(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 124, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   BBSupportTracePrintF(0, "ISoundEngine::Shutdown() called.");
   CSoundSystem::Shutdown((CSoundSystem *)g_pcSoundSystem);
   return BBSupportTracePrintF(0, "ISoundEngine::Shutdown() finished.");
@@ -330,7 +384,9 @@ void  ISoundEngine::Shutdown(void) {
 int  ISoundEngine::GetCpuUsage(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 138, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   return CSoundSystem::GetCpuUsage((CSoundSystem *)g_pcSoundSystem);
 }
 
@@ -340,7 +396,9 @@ int  ISoundEngine::GetCpuUsage(void) {
 unsigned int  ISoundEngine::GetDigitalDriver(void) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 319, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   return CSoundSystem::GetDigitalDriver((CSoundSystem *)g_pcSoundSystem);
 }
 
@@ -350,7 +408,9 @@ unsigned int  ISoundEngine::GetDigitalDriver(void) {
 bool  ISoundEngine::IsRunning(unsigned int a2) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 329, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   return CSoundSystem::IsRunning((CSoundSystem *)g_pcSoundSystem, a2);
 }
 
@@ -360,7 +420,9 @@ bool  ISoundEngine::IsRunning(unsigned int a2) {
 void  ISoundEngine::CreatePlaylists(int a2) {
   
   if ( g_pcSoundSystem )
+  {
     CSoundSystem::CreatePlaylists((CSoundSystem *)g_pcSoundSystem, a2);
+  }
 }
 
 
@@ -369,7 +431,9 @@ void  ISoundEngine::CreatePlaylists(int a2) {
 void  ISoundEngine::InitPlaylist(int a2, int a3) {
   
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 251, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   CSoundSystem::InitPlaylist((CSoundSystem *)g_pcSoundSystem, a2, a3);
 }
 
@@ -384,12 +448,12 @@ bool  ISoundEngine::AddTitleToPlaylist(int a1, std::wstring * a2, int a3) {
   int v7; // [esp+8Ch] [ebp-4h]
 
   if ( !g_pcSoundSystem && BBSupportDbgReport(2, "SoundEngineInterface.cpp", 266, "g_pcSoundSystem") == 1 )
+  {
     __debugbreak();
+  }
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v5);
   v7 = 0;
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(
-    v6,
-    a2);
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v6, a2);
   LOBYTE(v7) = 1;
   v4 = CSoundSystem::AddTitleToPlaylist(a1, v6, a3);
   LOBYTE(v7) = 0;
@@ -405,9 +469,13 @@ bool  ISoundEngine::AddTitleToPlaylist(int a1, std::wstring * a2, int a3) {
 unsigned int  ISoundEngine::StartPlaylist(int a2, int a3) {
   
   if ( g_pcSoundSystem )
+  {
     return CSoundSystem::StartPlaylist((CSoundSystem *)g_pcSoundSystem, a2, a3);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -416,9 +484,13 @@ unsigned int  ISoundEngine::StartPlaylist(int a2, int a3) {
 unsigned int  ISoundEngine::ChangePlaylist(int a2, int a3) {
   
   if ( g_pcSoundSystem )
+  {
     return CSoundSystem::ChangePlaylist((CSoundSystem *)g_pcSoundSystem, a2, a3);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -429,7 +501,9 @@ void  ISoundEngine::SkipTitle(void) {
   int result; // eax
 
   if ( g_pcSoundSystem )
+  {
     return CSoundSystem::SkipTitle((CPlaylist **)g_pcSoundSystem);
+  }
   return result;
 }
 
@@ -439,7 +513,9 @@ void  ISoundEngine::SkipTitle(void) {
 void  ISoundEngine::VCToggleRecording(bool a1) {
   
   if ( g_pcVoiceChat )
+  {
     CVoiceChat::ToggleRecording((CVoiceChat *)g_pcVoiceChat, a1);
+  }
 }
 
 
@@ -456,19 +532,29 @@ bool  ISoundEngine::VCStart(class IEventEngine * a2, int a3) {
   {
     C = (CVoiceChat *)operator new(0xA8u);
     if ( C )
+    {
       v6 = CVoiceChat::CVoiceChat(C, 8, a3, a2);
+    }
     else
+    {
       v6 = 0;
+    }
     g_pcVoiceChat = (int)v6;
   }
   if ( !g_pcVoiceChat )
+  {
     return 0;
+  }
   DigitalDriver = CSoundSystem::GetDigitalDriver((CSoundSystem *)g_pcSoundSystem);
   SamplingRate = CSoundSystem::GetSamplingRate((CSoundSystem *)g_pcSoundSystem);
   if ( (unsigned __int8)CVoiceChat::Init(SamplingRate, DigitalDriver, ".v29") )
+  {
     return 1;
+  }
   if ( g_pcVoiceChat )
+  {
     delete (CVoiceChat *)g_pcVoiceChat;
+  }
   g_pcVoiceChat = 0;
   return 0;
 }
@@ -491,9 +577,13 @@ void  ISoundEngine::VCStop(void) {
 bool  ISoundEngine::VCReceivePackage(signed char * Src, int a2) {
   
   if ( g_pcVoiceChat )
+  {
     return CVoiceChat::ReceivePacket(Src, a2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -502,9 +592,13 @@ bool  ISoundEngine::VCReceivePackage(signed char * Src, int a2) {
 int  ISoundEngine::VCGetInputRate(void) {
   
   if ( g_pcVoiceChat )
+  {
     return CVoiceChat::GetInputSamplingRate((CVoiceChat *)g_pcVoiceChat);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -529,7 +623,9 @@ bool  ISoundEngine::VCIsRecording(void) {
 void  ISoundEngine::VCCalcBaseNoise(void) {
   
   if ( g_pcVoiceChat )
+  {
     CVoiceChat::CalcBaseNoise((CVoiceChat *)g_pcVoiceChat);
+  }
 }
 
 
@@ -540,7 +636,9 @@ void  ISoundEngine::VCSetTestMode(bool a1) {
   CVoiceChat *result; // eax
 
   if ( g_pcVoiceChat )
+  {
     return CVoiceChat::SetTestMode((CVoiceChat *)g_pcVoiceChat, a1);
+  }
   return result;
 }
 
@@ -552,7 +650,9 @@ void  ISoundEngine::VCSetVolume(int a2) {
   CVoiceChat *result; // eax
 
   if ( g_pcVoiceChat )
+  {
     return CVoiceChat::SetVolume((CVoiceChat *)g_pcVoiceChat, a2);
+  }
   return result;
 }
 
@@ -564,7 +664,9 @@ void  ISoundEngine::VCSetMicVolume(int a2) {
   char result; // al
 
   if ( g_pcVoiceChat )
+  {
     return CVoiceChat::SetMicVolume((CVoiceChat *)g_pcVoiceChat, a2);
+  }
   return result;
 }
 
@@ -574,9 +676,13 @@ void  ISoundEngine::VCSetMicVolume(int a2) {
 int  ISoundEngine::VCGetMicVolume(void) {
   
   if ( g_pcVoiceChat )
+  {
     return CVoiceChat::GetMicVolume((CVoiceChat *)g_pcVoiceChat);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

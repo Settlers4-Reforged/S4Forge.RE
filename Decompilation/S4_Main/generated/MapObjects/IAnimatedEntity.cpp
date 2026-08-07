@@ -39,12 +39,7 @@ int  IAnimatedEntity::Previous(void)const {
 // Decompiled from void __thiscall IAnimatedEntity::SetNext(IAnimatedEntity *this, int _id)
 void  IAnimatedEntity::SetNext(int _id) {
   
-  if ( IEntity::ID(this) == _id
-    && BBSupportDbgReport(
-         2,
-         "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\AnimatedEntity.h",
-         93,
-         "ID() != _id") == 1 )
+  if ( IEntity::ID(this) == _id && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\AnimatedEntity.h", 93, "ID() != _id") == 1 )
   {
     __debugbreak();
   }
@@ -108,7 +103,9 @@ void  IAnimatedEntity::SetEvent(class CEntityEvent const & a1) {
   v2 = IEntity::EntityId(this);
   IMessageTracer::PushFormatedInts(g_pMsgTracer, "SetEvent(): id %u, event %u, type %u", v2, m_iEvent, m_iType);
   if ( !IEntity::FlagBits(this, ENTITY_FLAG_Registered) )
+  {
     IAnimatedEntity::RegisterForLogicUpdate(this, 1);
+  }
   std::vector<CEntityEvent>::push_back(&this->m_iEventQueue, a1);
 }
 
@@ -160,7 +157,9 @@ void  IAnimatedEntity::BoxSelection(void) {
       else if ( (int)(EntitySelectionType & 0xFF0000) <= (SelectionType & 0xFF0000) )
       {
         if ( (EntitySelectionType & 0xFF0000) == (SelectionType & 0xFF0000) )
+        {
           v11 = (EntitySelectionType & 0xFF00) == (SelectionType & 0xFF00);
+        }
       }
       else
       {
@@ -174,13 +173,12 @@ void  IAnimatedEntity::BoxSelection(void) {
         v1 = IEntity::X(this);
         if ( IGfxEngine::GetScreenOffsetsByMapIndices(v1, v3, &xScreenOffset, &yScreenOffset) )
         {
-          if ( g_cInputProcessor.m_iSelectionXStart <= xScreenOffset
-            && g_cInputProcessor.m_iSelectionXEnd >= xScreenOffset
-            && g_cInputProcessor.m_iSelectionYStart <= yScreenOffset
-            && g_cInputProcessor.m_iSelectionYEnd >= yScreenOffset )
+          if ( g_cInputProcessor.m_iSelectionXStart <= xScreenOffset && g_cInputProcessor.m_iSelectionXEnd >= xScreenOffset && g_cInputProcessor.m_iSelectionYStart <= yScreenOffset && g_cInputProcessor.m_iSelectionYEnd >= yScreenOffset )
           {
             if ( !CInputProcessor::BoxSelectAllSettler(&g_cInputProcessor) )
+            {
               CInputProcessor::SetSelectionType(&g_cInputProcessor, EntitySelectionType);
+            }
             v2 = IEntity::EntityId(this);
             CInputProcessor::NewCandidate(&g_cInputProcessor, v2);
           }
@@ -301,7 +299,9 @@ void  IAnimatedEntity::SetJobPart(int a2) {
   operator^<unsigned int>(a1, &this->m_uLastUpdateTick);
   operator^<int>(a1, &this->m_uLastLogicUpdate);
   operator^<unsigned int>(a1, &iQueueSize);
-  for ( i = 0; i < iQueueSize; ++i )
+  for ( i = 0;
+        i < iQueueSize;
+        ++i )
   {
     v2 = (const struct CEntityEvent *)CEntityEvent::Load(a1);
     std::vector<CEntityEvent>::push_back(&this->m_iEventQueue, v2);
@@ -348,7 +348,9 @@ void  IAnimatedEntity::Store(std::ostream & a2) {
     LOBYTE(v12) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>(v3);
     if ( !v11 )
+    {
       break;
+    }
     v9 = (CEntityEvent *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::operator->(v4);
     v9->Store(v9, a2);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::operator++(v4);
@@ -390,14 +392,7 @@ bool  IAnimatedEntity::ProcessAllEvents(void) {
     LOBYTE(v15) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>(v5);
     this->m_iFlags &= ~0x80000000;
-    IMessageTracer::PushFormatedInts(
-      g_pMsgTracer,
-      "ConvertEventIntoGoal(): event %u, type %u, data %u, %u, %u",
-      v4.m_iEvent,
-      v4.m_iType,
-      v4.m_iDataA,
-      v4.m_iDataB,
-      v4.m_iDataC);
+    IMessageTracer::PushFormatedInts(g_pMsgTracer, "ConvertEventIntoGoal(): event %u, type %u, data %u, %u, %u", v4.m_iEvent, v4.m_iType, v4.m_iDataA, v4.m_iDataB, v4.m_iDataC);
     this->ConvertEventIntoGoal(this, &v4);
     v12 = this->m_iFlags >= 0;
     v14 = v12;

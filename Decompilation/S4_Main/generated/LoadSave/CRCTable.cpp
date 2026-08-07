@@ -9,8 +9,12 @@
   
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 256; ++i )
+  for ( i = 0;
+        i < 256;
+        ++i )
+  {
     this[i] = cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::CalcTableEntry(i);
+  }
   return this;
 }
 
@@ -36,12 +40,18 @@ unsigned long  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::CalcTableEntry
   v4 = cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Reflect(a1, 8);
   v2 = cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Bitmask(15);
   v5 = v4 << 8;
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
   {
     if ( (v2 & v5) != 0 )
+    {
       v5 = (2 * v5) ^ 0x8005;
+    }
     else
+    {
       v5 *= 2;
+    }
   }
   v6 = cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Reflect(v5, 16);
   return v6 & cdm_crc::CRCGenerator<16,32773,0,0,1,1>::WidthMask(16);

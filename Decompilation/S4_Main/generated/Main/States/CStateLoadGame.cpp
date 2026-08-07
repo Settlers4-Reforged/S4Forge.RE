@@ -22,9 +22,13 @@ class CGameState * __cdecl CStateLoadGame::DynamicCreateFunc(void * a1) {
 
   C = (CStateLoadGame *)operator new(0xCu);
   if ( C )
+  {
     return CStateLoadGame::CStateLoadGame(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -69,8 +73,7 @@ class CGameState * __cdecl CStateLoadGame::DynamicCreateFunc(void * a1) {
  CStateLoadGame::~CStateLoadGame(void) {
   
   *(_DWORD *)this = &CStateLoadGame::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 6)
-    && BBSupportDbgReport(2, "main\\states\\StateLoadGame.cpp", 104, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 6) && BBSupportDbgReport(2, "main\\states\\StateLoadGame.cpp", 104, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -95,7 +98,9 @@ bool  CStateLoadGame::Perform(void) {
   }
   v1 = dword_40306C4 + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_40306C4 = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -124,7 +129,9 @@ bool  CStateLoadGame::OnEvent(class CEvn_Event & a2) {
   {
     case 13:
       if ( a2->m_wParam != 27 )
+      {
         return 1;
+      }
       v8 = CEvn_Event::CEvn_Event(&v11, 0x5Eu, 0, 0, 0);
       v12 = 0;
       IEventEngine::SendAMessage(g_pEvnEngine, v8);
@@ -139,7 +146,9 @@ bool  CStateLoadGame::OnEvent(class CEvn_Event & a2) {
       v6 = &v3;
       v5 = std::wstring::wstring((int)&stru_403037C);
       if ( (unsigned __int8)CStateMainMenu::PreLoadGame(v3, v4) )
+      {
         return 1;
+      }
       CGameStateHandler::Queue((int)CStateMessageBox::DynamicCreateFunc, 2400);
       CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
       return 1;
@@ -230,7 +239,9 @@ void __cdecl CStateLoadGame::BuildSaveList(enum TGAME_TYPE a1, enum CAMPAIGN_TYP
         wcscpy(Destination, FindData.name);
         v8 = wcsstr(Destination, (wchar_t *)L".sav");
         if ( v8 )
+        {
           *v8 = 0;
+        }
         std::wstring::operator=((void *)(CStateLoadGame::m_stempSavePtr[v12] + 28), Destination);
         std::string::operator=((int)&v19);
         ++v12;
@@ -255,7 +266,9 @@ void __cdecl CStateLoadGame::DestroySaveList(void) {
   
   int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; i < dword_4030378; ++i )
+  for ( i = 0;
+        i < dword_4030378;
+        ++i )
   {
     if ( CStateLoadGame::m_stempSavePtr[i] )
     {
@@ -297,9 +310,13 @@ bool __cdecl CStateLoadGame::FileMatch(wchar_t const * String, enum TGAME_TYPE a
 
   v24 = v5;
   if ( !String && BBSupportDbgReport(2, "main\\states\\StateLoadGame.cpp", 287, "_pName!= NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !String )
+  {
     return 0;
+  }
   S4::CMapFile::CMapFile((CHandleMap *)v22, 0);
   v25 = 1;
   v5[4] = std::wstring::wstring(v23, String);
@@ -345,7 +362,9 @@ bool __cdecl CStateLoadGame::FileMatch(wchar_t const * String, enum TGAME_TYPE a
       default:
         v6 = BBSupportDbgReportF(2, "main\\states\\StateLoadGame.cpp", 338, "Invalid save game type %u", a2);
         if ( v6 == 1 )
+        {
           __debugbreak();
+        }
         v12 = 0;
         v25 = -1;
         S4::CMapFile::~CMapFile((CHandleMap *)v22);

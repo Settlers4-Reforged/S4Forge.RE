@@ -15,28 +15,32 @@ void  CVehicleInfoMgr::InitializeVehicleProperties(bool a2, bool _bKeepData) {
   {
     IVehicleInfoMgr::m_bInitialized = 1;
     memset(IVehicleInfoMgr::m_sVehicleProperties, 0, sizeof(IVehicleInfoMgr::m_sVehicleProperties));
-    for ( i = IVehicleInfoMgr::m_sVehicleDefinitions; i->m_pProperty; ++i )
+    for ( i = IVehicleInfoMgr::m_sVehicleDefinitions;
+          i->m_pProperty;
+          ++i )
     {
       uRace = i->m_uType;
       uType = i->m_uRace;
       if ( uRace >= 5 && BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 420, "uRace < RACE_MAX") == 1 )
+      {
         __debugbreak();
+      }
       if ( uType >= 6 && BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 421, "uType < VEHICLE_MAX") == 1 )
+      {
         __debugbreak();
-      qmemcpy(
-        (void *)&IVehicleInfoMgr::m_sVehicleProperties[uRace][uType],
-        i->m_pProperty,
-        sizeof(IVehicleInfoMgr::m_sVehicleProperties[uRace][uType]));
+      }
+      qmemcpy((void *)&IVehicleInfoMgr::m_sVehicleProperties[uRace][uType], i->m_pProperty, sizeof(IVehicleInfoMgr::m_sVehicleProperties[uRace][uType]));
       v3 = &IVehicleInfoMgr::m_sVehicleProperties[uRace][uType];
       v3->m_bInitialized = 1;
-      if ( v3->m_tVehicleType != uType
-        && BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 428, "rProperties.m_tVehicleType == uType") == 1 )
+      if ( v3->m_tVehicleType != uType && BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 428, "rProperties.m_tVehicleType == uType") == 1 )
       {
         __debugbreak();
       }
     }
     if ( !_bKeepData )
+    {
       CVehicleInfoMgr::ReadXMLFile(this);
+    }
   }
 }
 
@@ -202,7 +206,9 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
     {
       v52 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 471, "pDocument != 0");
       if ( v52 == 1 )
+      {
         __debugbreak();
+      }
     }
     Root = (void *)AdvXMLParser::Document::GetRoot(pDocument);
     v104 = Root;
@@ -230,7 +236,9 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
       {
         v42 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 486, "(iRaceId >= 0) && (iRaceId < RACE_MAX)");
         if ( v42 == 1 )
+        {
           __debugbreak();
+        }
       }
       v101 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v41);
       v100 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v101, v21);
@@ -259,13 +267,11 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         iVehicleType = v107->GetDefineValue(v107, v1);
         if ( iVehicleType <= 0 || iVehicleType >= 6 )
         {
-          v91 = BBSupportDbgReport(
-                  2,
-                  "MapObjects\\VehicleProperties.cpp",
-                  498,
-                  "(iVehicleType > VEHICLE_NO_VEHICLE) && (iVehicleType < VEHICLE_MAX)");
+          v91 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 498, "(iVehicleType > VEHICLE_NO_VEHICLE) && (iVehicleType < VEHICLE_MAX)");
           if ( v91 == 1 )
+          {
             __debugbreak();
+          }
         }
         bIsAttackVehicle = iVehicleType == 4 || iVehicleType == 1;
         rProperties = &IVehicleInfoMgr::m_sVehicleProperties[iRaceId][iVehicleType];
@@ -273,7 +279,9 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         {
           v90 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 504, "rProperties.m_bInitialized");
           if ( v90 == 1 )
+          {
             __debugbreak();
+          }
         }
         v89 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v115);
         v88 = AdvXMLParser::Element::operator()(v89, "Boards", 0);
@@ -289,7 +297,9 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
           {
             v87 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 516, "rProperties.m_uBoards <= 16");
             if ( v87 == 1 )
+            {
               __debugbreak();
+            }
           }
         }
         LOBYTE(exceptionBlock) = 15;
@@ -308,20 +318,20 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
           {
             v84 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 530, "rProperties.m_uIronbars <= 16");
             if ( v84 == 1 )
+            {
               __debugbreak();
+            }
           }
         }
         LOBYTE(exceptionBlock) = 15;
         std::string::~string(&v133);
         if ( !(rProperties->m_uIronbars + rProperties->m_uBoards) )
         {
-          v83 = BBSupportDbgReport(
-                  2,
-                  "MapObjects\\VehicleProperties.cpp",
-                  534,
-                  "(rProperties.m_uBoards + rProperties.m_uIronbars) > 0");
+          v83 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 534, "(rProperties.m_uBoards + rProperties.m_uIronbars) > 0");
           if ( v83 == 1 )
+          {
             __debugbreak();
+          }
         }
         v82 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v115);
         v81 = AdvXMLParser::Element::operator()(v82, "Hitpoints", 0);
@@ -337,13 +347,17 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
           {
             v80 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 545, "rProperties.m_uHitpoints > 0");
             if ( v80 == 1 )
+            {
               __debugbreak();
+            }
           }
           if ( rProperties->m_uHitpoints >= 0x100u )
           {
             v79 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 546, "rProperties.m_uHitpoints < 256");
             if ( v79 == 1 )
+            {
               __debugbreak();
+            }
           }
         }
         LOBYTE(exceptionBlock) = 15;
@@ -362,7 +376,9 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
           {
             v76 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 560, "rProperties.m_uArmor < 256");
             if ( v76 == 1 )
+            {
               __debugbreak();
+            }
           }
         }
         LOBYTE(exceptionBlock) = 15;
@@ -383,20 +399,26 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
             {
               v73 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 575, "rProperties.m_uDamage > 0");
               if ( v73 == 1 )
+              {
                 __debugbreak();
+              }
             }
             if ( rProperties->m_uDamage >= 0x100u )
             {
               v72 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 576, "rProperties.m_uDamage < 256");
               if ( v72 == 1 )
+              {
                 __debugbreak();
+              }
             }
           }
           else if ( rProperties->m_uDamage )
           {
             v71 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 580, "rProperties.m_uDamage == 0");
             if ( v71 == 1 )
+            {
               __debugbreak();
+            }
           }
         }
         LOBYTE(exceptionBlock) = 15;
@@ -415,34 +437,28 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
           {
             if ( !rProperties->m_uReadyToFireDelay )
             {
-              v68 = BBSupportDbgReport(
-                      2,
-                      "MapObjects\\VehicleProperties.cpp",
-                      596,
-                      "rProperties.m_uReadyToFireDelay > 0");
+              v68 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 596, "rProperties.m_uReadyToFireDelay > 0");
               if ( v68 == 1 )
+              {
                 __debugbreak();
+              }
             }
             if ( rProperties->m_uReadyToFireDelay >= 0x100u )
             {
-              v67 = BBSupportDbgReport(
-                      2,
-                      "MapObjects\\VehicleProperties.cpp",
-                      597,
-                      "rProperties.m_uReadyToFireDelay < 256");
+              v67 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 597, "rProperties.m_uReadyToFireDelay < 256");
               if ( v67 == 1 )
+              {
                 __debugbreak();
+              }
             }
           }
           else if ( rProperties->m_uReadyToFireDelay )
           {
-            v66 = BBSupportDbgReport(
-                    2,
-                    "MapObjects\\VehicleProperties.cpp",
-                    601,
-                    "rProperties.m_uReadyToFireDelay == 0");
+            v66 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 601, "rProperties.m_uReadyToFireDelay == 0");
             if ( v66 == 1 )
+            {
               __debugbreak();
+            }
           }
         }
         LOBYTE(exceptionBlock) = 15;
@@ -463,20 +479,26 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
             {
               v63 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 617, "rProperties.m_uMaxAmmo > 0");
               if ( v63 == 1 )
+              {
                 __debugbreak();
+              }
             }
             if ( rProperties->m_uMaxAmmo >= 0x100u )
             {
               v62 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 618, "rProperties.m_uMaxAmmo < 256");
               if ( v62 == 1 )
+              {
                 __debugbreak();
+              }
             }
           }
           else if ( rProperties->m_uMaxAmmo )
           {
             v61 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 622, "rProperties.m_uMaxAmmo == 0");
             if ( v61 == 1 )
+            {
               __debugbreak();
+            }
           }
         }
         LOBYTE(exceptionBlock) = 15;
@@ -494,13 +516,17 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
           {
             v58 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 636, "iWalkSteps > 0");
             if ( v58 == 1 )
+            {
               __debugbreak();
+            }
           }
           if ( iWalkSteps > 16 )
           {
             v57 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 637, "iWalkSteps <= 16");
             if ( v57 == 1 )
+            {
               __debugbreak();
+            }
           }
           rProperties->m_iWalkSteps = iWalkSteps;
         }

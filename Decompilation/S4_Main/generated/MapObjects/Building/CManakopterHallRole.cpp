@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CManakopterHallRole::New(std::istream & a1) {
   
   if ( operator new(0x198u) )
+  {
     return CManakopterHallRole::CManakopterHallRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -140,17 +144,13 @@ void  CManakopterHallRole::LogicUpdate(class CBuilding * a2) {
   switch ( v15 )
   {
     case 1:
-      if ( BBSupportDbgReportF(
-             2,
-             "MapObjects\\Building\\ManakopterHallRole.cpp",
-             210,
-             "ManakopterHall got into state ORDER_IHABITANT_STATE!") == 1 )
+      if ( BBSupportDbgReportF(2, "MapObjects\\Building\\ManakopterHallRole.cpp", 210, "ManakopterHall got into state ORDER_IHABITANT_STATE!") == 1 )
+      {
         __debugbreak();
+      }
       return 0;
     case 2:
-      if ( *((_DWORD *)this + 95) < *((_DWORD *)this + 96)
-        && *((_DWORD *)this + 95) < *((_DWORD *)this + 97)
-        && *((_DWORD *)this + 95) < CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredMana) )
+      if ( *((_DWORD *)this + 95) < *((_DWORD *)this + 96) && *((_DWORD *)this + 95) < *((_DWORD *)this + 97) && *((_DWORD *)this + 95) < CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredMana) )
       {
         ++*((_DWORD *)this + 95);
       }
@@ -211,9 +211,7 @@ void  CManakopterHallRole::LogicUpdate(class CBuilding * a2) {
         v14 = *((unsigned __int8 *)this + 224) - 2;
         v6 = CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredMana);
         v7 = CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredBoard) + v6;
-        *((_DWORD *)this + 101) = (*((_DWORD *)this + 100) + *((_DWORD *)this + 99) + *((_DWORD *)this + 98))
-                                * v14
-                                / (CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredIron) + v7);
+        *((_DWORD *)this + 101) = (*((_DWORD *)this + 100) + *((_DWORD *)this + 99) + *((_DWORD *)this + 98)) * v14 / (CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredIron) + v7);
         return (CManakopterHallRole *)IAnimatedEntity::RegisterForLogicUpdate(3 * *((unsigned __int8 *)this + 264) - 1);
       }
   }
@@ -222,7 +220,7 @@ void  CManakopterHallRole::LogicUpdate(class CBuilding * a2) {
 
 
 // address=[0x150d170]
-// Decompiled from int __thiscall CManakopterHallRole::FillGfxInfo(  CManakopterHallRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
+// Decompiled from int __thiscall CManakopterHallRole::FillGfxInfo(CManakopterHallRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
 void  CManakopterHallRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
@@ -287,12 +285,10 @@ void  CManakopterHallRole::Init(class CBuilding * a2) {
 // Decompiled from char __thiscall CManakopterHallRole::SettlerEnter(CManakopterHallRole *this, struct CBuilding *a2, int a3)
 bool  CManakopterHallRole::SettlerEnter(class CBuilding * a2, int a3) {
   
-  if ( BBSupportDbgReportF(
-         2,
-         "MapObjects\\Building\\ManakopterHallRole.cpp",
-         194,
-         "[MM] Settler tried to enter ManakopterHall!") == 1 )
+  if ( BBSupportDbgReportF(2, "MapObjects\\Building\\ManakopterHallRole.cpp", 194, "[MM] Settler tried to enter ManakopterHall!") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 
@@ -315,16 +311,11 @@ void  CManakopterHallRole::GoodArrive(int a2) {
   }
   else
   {
-    if ( BBSupportDbgReportF(
-           2,
-           "MapObjects\\Building\\ManakopterHallRole.cpp",
-           413,
-           "Shaman teleported invalid good to MKH. See trace file.") == 1 )
+    if ( BBSupportDbgReportF(2, "MapObjects\\Building\\ManakopterHallRole.cpp", 413, "Shaman teleported invalid good to MKH. See trace file.") == 1 )
+    {
       __debugbreak();
-    return BBSupportTracePrintF(
-             1,
-             "Shaman teleported invalid good %s to ManakopterHall.",
-             (const char *)off_3786468[a2].m_iNr);
+    }
+    return BBSupportTracePrintF(1, "Shaman teleported invalid good %s to ManakopterHall.", (const char *)off_3786468[a2].m_iNr);
   }
   return result;
 }
@@ -350,17 +341,29 @@ int  CManakopterHallRole::GetMostRequiredGood(void) {
   v5 = CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredBoard) - *((_DWORD *)this + 96);
   v4 = CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredIron) - *((_DWORD *)this + 97);
   if ( v5 <= v4 )
+  {
     v6 = 20;
+  }
   else
+  {
     v6 = 7;
+  }
   if ( v6 == 7 )
+  {
     v3 = v5;
+  }
   else
+  {
     v3 = v4;
+  }
   if ( v3 <= 0 )
+  {
     return 0;
+  }
   else
+  {
     return v6;
+  }
 }
 
 
@@ -382,17 +385,11 @@ void  CManakopterHallRole::TeleportGoods(int a2, int a3) {
   }
   else
   {
-    if ( BBSupportDbgReportF(
-           2,
-           "MapObjects\\Building\\ManakopterHallRole.cpp",
-           464,
-           "Shaman teleported invalid good to MKH. See trace file.") == 1 )
+    if ( BBSupportDbgReportF(2, "MapObjects\\Building\\ManakopterHallRole.cpp", 464, "Shaman teleported invalid good to MKH. See trace file.") == 1 )
+    {
       __debugbreak();
-    return BBSupportTracePrintF(
-             1,
-             "Shaman teleported %d invalid goods %s to ManakopterHall.",
-             a3,
-             (const char *)off_3786468[2 * a2]);
+    }
+    return BBSupportTracePrintF(1, "Shaman teleported %d invalid goods %s to ManakopterHall.", a3, (const char *)off_3786468[2 * a2]);
   }
   return result;
 }
@@ -405,16 +402,26 @@ bool  CManakopterHallRole::TryMakingManakopter(class CBuilding * a2) {
   int v3; // eax
 
   if ( *((_BYTE *)this + 4) == 3 )
+  {
     return 1;
+  }
   if ( *((_DWORD *)this + 95) < CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredMana) )
+  {
     return 0;
+  }
   if ( *((_DWORD *)this + 96) < CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredBoard) )
+  {
     return 0;
+  }
   if ( *((_DWORD *)this + 97) < CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredIron) )
+  {
     return 0;
+  }
   v3 = IEntity::OwnerId((unsigned __int8 *)a2);
   if ( CFlyingMgr::GetFirstEntityId((CFlyingMgr *)g_cFlyingMgr, v3, 1) )
+  {
     return 0;
+  }
   *((_BYTE *)this + 4) = 3;
   IAnimatedEntity::RegisterForLogicUpdate(1);
   return 1;
@@ -442,30 +449,24 @@ bool  CManakopterHallRole::CheatIfRequired(class CBuilding * a2) {
   v2 = IEntity::OwnerId((unsigned __int8 *)a2);
   if ( CFlyingMgr::GetFirstEntityId((CFlyingMgr *)g_cFlyingMgr, v2, 1) )
   {
-    if ( BBSupportDbgReportF(
-           2,
-           "MapObjects\\Building\\ManakopterHallRole.cpp",
-           514,
-           "[MM] CheatIfRequired called while Manakopter exists.") == 1 )
+    if ( BBSupportDbgReportF(2, "MapObjects\\Building\\ManakopterHallRole.cpp", 514, "[MM] CheatIfRequired called while Manakopter exists.") == 1 )
+    {
       __debugbreak();
+    }
     return 0;
   }
   else
   {
-    v12 = *((_DWORD *)v13 + 95) < CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredMana)
-       || *((_DWORD *)v13 + 96) < CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredBoard)
-       || *((_DWORD *)v13 + 97) < CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredIron);
+    v12 = *((_DWORD *)v13 + 95) < CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredMana) || *((_DWORD *)v13 + 96) < CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredBoard) || *((_DWORD *)v13 + 97) < CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredIron);
     v15 = v12;
     if ( v12 )
     {
       if ( *((_BYTE *)v13 + 4) == 3 )
       {
-        if ( BBSupportDbgReportF(
-               2,
-               "MapObjects\\Building\\ManakopterHallRole.cpp",
-               534,
-               "[MM] CheatIfRequired called while Manakopter is made.") == 1 )
+        if ( BBSupportDbgReportF(2, "MapObjects\\Building\\ManakopterHallRole.cpp", 534, "[MM] CheatIfRequired called while Manakopter is made.") == 1 )
+        {
           __debugbreak();
+        }
         return 0;
       }
       else
@@ -475,13 +476,7 @@ bool  CManakopterHallRole::CheatIfRequired(class CBuilding * a2) {
         v4 = IEntity::OwnerId((unsigned __int8 *)a2);
         v9 = IAIEnvironment::AlliancesPlayerEnemyBits(v4);
         v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-        if ( (**(unsigned __int8 (__thiscall ***)(void *, int, int, int *, int *, _DWORD))off_3D7A6A8)(
-               off_3D7A6A8,
-               v5,
-               v9,
-               &v10,
-               &v11,
-               0) )
+        if ( (**(unsigned __int8 (__thiscall ***)(void *, int, int, int *, int *, _DWORD))off_3D7A6A8)(off_3D7A6A8, v5, v9, &v10, &v11, 0) )
         {
           return 0;
         }
@@ -500,12 +495,10 @@ bool  CManakopterHallRole::CheatIfRequired(class CBuilding * a2) {
     }
     else
     {
-      if ( BBSupportDbgReportF(
-             2,
-             "MapObjects\\Building\\ManakopterHallRole.cpp",
-             527,
-             "[MM] CheatIfRequired called while enough goods on hand.") == 1 )
+      if ( BBSupportDbgReportF(2, "MapObjects\\Building\\ManakopterHallRole.cpp", 527, "[MM] CheatIfRequired called while enough goods on hand.") == 1 )
+      {
         __debugbreak();
+      }
       return 0;
     }
   }
@@ -548,7 +541,7 @@ int  CManakopterHallRole::GetPileIdWithGood(int a2)const {
 // [Decompilation failed for static unsigned long CManakopterHallRole::m_iClassID]
 
 // address=[0x150dd60]
-// Decompiled from void __thiscall CManakopterHallRole::ConvertEventIntoGoal(  CManakopterHallRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
+// Decompiled from void __thiscall CManakopterHallRole::ConvertEventIntoGoal(CManakopterHallRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CManakopterHallRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;

@@ -46,14 +46,15 @@ void  CAITaskForceSquad::Execute(void) {
   switch ( CAITaskForce::State(this) )
   {
     case 1:
-      if ( !CAITaskForce::GoalIsEntity(this)
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1446, "GoalIsEntity()") == 1 )
+      if ( !CAITaskForce::GoalIsEntity(this) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1446, "GoalIsEntity()") == 1 )
       {
         __debugbreak();
       }
       v8 = CAITaskForce::CmdGoal(this);
       if ( !IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(v8, AI_WARRIOR_TYPE_TOWER_BUILDING) )
+      {
         goto LABEL_7;
+      }
       v6 = IAIEnvironment::BuildingPackedEnsignPosition(v8);
       this->SetDestinationXY(this, v6);
       CAITaskForce::SetStateEx(this, 102, 2);
@@ -65,8 +66,7 @@ void  CAITaskForceSquad::Execute(void) {
       CAITaskForce::SetWaitCounter(this, 0x28u);
       break;
     case 3:
-      if ( !CAITaskForce::GoalIsEntity(this)
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1478, "GoalIsEntity()") == 1 )
+      if ( !CAITaskForce::GoalIsEntity(this) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1478, "GoalIsEntity()") == 1 )
       {
         __debugbreak();
       }
@@ -85,8 +85,7 @@ LABEL_7:
       }
       break;
     case 4:
-      if ( !CAITaskForce::GoalIsEntity(this)
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1501, "GoalIsEntity()") == 1 )
+      if ( !CAITaskForce::GoalIsEntity(this) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1501, "GoalIsEntity()") == 1 )
       {
         __debugbreak();
       }
@@ -129,11 +128,15 @@ LABEL_21:
         {
           v2 = CAIEntityInfo::EntityId(v9);
           if ( (IAIEnvironment::EntityFlags(v2) & ENTITY_FLAG_ON_BOARD) == 0 )
+          {
             v12 = 0;
+          }
           v9 = CAIEntityInfo::Next(v9);
         }
         if ( v12 )
+        {
           CAITaskForce::SetStatus(this, 8);
+        }
       }
       break;
     default:
@@ -163,12 +166,7 @@ bool  CAITaskForceSquad::NewCommand(int a2, int a3, int a4) {
       result = 1;
       break;
     case 2u:
-      if ( !IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(a3, AI_WARRIOR_TYPE_TOWER_BUILDING)
-        && BBSupportDbgReport(
-             2,
-             "AI\\AI_TaskForcesEx.cpp",
-             1329,
-             "g_pAIEnv->EntityIsAliveAndOfGivenWarriorType(_iEntityIdOrPackedXY, AI_WARRIOR_TYPE_TOWER_BUILDING)") == 1 )
+      if ( !IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(a3, AI_WARRIOR_TYPE_TOWER_BUILDING) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1329, "g_pAIEnv->EntityIsAliveAndOfGivenWarriorType(_iEntityIdOrPackedXY, AI_WARRIOR_TYPE_TOWER_BUILDING)") == 1 )
       {
         __debugbreak();
       }
@@ -180,16 +178,13 @@ bool  CAITaskForceSquad::NewCommand(int a2, int a3, int a4) {
       CAITaskForce::MarkGoalAsPosition(this);
       SneakUpPosition = CAITaskForceEx::FindSneakUpPosition(this);
       if ( SneakUpPosition )
+      {
         CAITaskForce::SetNewStatusAndState(this, 2, 102, 6);
+      }
       result = SneakUpPosition;
       break;
     case 4u:
-      if ( !IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(a3, AI_WARRIOR_TYPE_TOWER_BUILDING)
-        && BBSupportDbgReport(
-             2,
-             "AI\\AI_TaskForcesEx.cpp",
-             1361,
-             "g_pAIEnv->EntityIsAliveAndOfGivenWarriorType(_iEntityIdOrPackedXY, AI_WARRIOR_TYPE_TOWER_BUILDING)") == 1 )
+      if ( !IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(a3, AI_WARRIOR_TYPE_TOWER_BUILDING) && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1361, "g_pAIEnv->EntityIsAliveAndOfGivenWarriorType(_iEntityIdOrPackedXY, AI_WARRIOR_TYPE_TOWER_BUILDING)") == 1 )
       {
         __debugbreak();
       }
@@ -207,7 +202,9 @@ bool  CAITaskForceSquad::NewCommand(int a2, int a3, int a4) {
       break;
     default:
       if ( BBSupportDbgReport(1, "AI\\AI_TaskForcesEx.cpp", 1383, "CAITaskForceSquad::NewCommand(): Invalid command!") == 1 )
+      {
         __debugbreak();
+      }
       result = 0;
       break;
   }
@@ -224,9 +221,13 @@ enum CAITaskForce::T_RESULT  CAITaskForceSquad::AddEntity(class CAIEntityInfo * 
 
   v5 = CAITaskForce::AddEntity(this, _pEntityInfo, a3);
   if ( v5 != 3 )
+  {
     return v5;
+  }
   if ( !_pEntityInfo && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1182, "_pEntityInfo != 0") == 1 )
+  {
     __debugbreak();
+  }
   v4 = CAIEntityInfo::EntityId(_pEntityInfo);
   switch ( IAIEnvironment::EntityWarriorType(v4) )
   {
@@ -258,36 +259,36 @@ enum CAITaskForce::T_RESULT  CAITaskForceSquad::RemoveEntity(class CAIEntityInfo
 
   v4 = CAITaskForce::RemoveEntity(this, a2);
   if ( v4 != 4 )
+  {
     return v4;
+  }
   if ( !a2 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1234, "_pEntityInfo != 0") == 1 )
+  {
     __debugbreak();
+  }
   v3 = CAIEntityInfo::EntityId(a2);
   switch ( IAIEnvironment::EntityWarriorType(v3) )
   {
     case 2:
-      if ( --this->m_iNumberOfSwordsmen < 0
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1246, "m_iNumberOfSwordsmen >= 0") == 1 )
+      if ( --this->m_iNumberOfSwordsmen < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1246, "m_iNumberOfSwordsmen >= 0") == 1 )
       {
         __debugbreak();
       }
       break;
     case 3:
-      if ( --this->m_iNumberOfBowmen < 0
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1255, "m_iNumberOfBowmen >= 0") == 1 )
+      if ( --this->m_iNumberOfBowmen < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1255, "m_iNumberOfBowmen >= 0") == 1 )
       {
         __debugbreak();
       }
       break;
     case 4:
-      if ( --this->m_iNumberOfUniqueFighters < 0
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1264, "m_iNumberOfUniqueFighters >= 0") == 1 )
+      if ( --this->m_iNumberOfUniqueFighters < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1264, "m_iNumberOfUniqueFighters >= 0") == 1 )
       {
         __debugbreak();
       }
       break;
     case 5:
-      if ( --this->m_iNumberOfSquadleaders < 0
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1273, "m_iNumberOfSquadleaders >= 0") == 1 )
+      if ( --this->m_iNumberOfSquadleaders < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1273, "m_iNumberOfSquadleaders >= 0") == 1 )
       {
         __debugbreak();
       }
@@ -320,32 +321,28 @@ int  CAITaskForceSquad::NumberOfEntities(enum T_AI_WARRIOR_TYPE a2)const {
   switch ( a2 )
   {
     case AI_WARRIOR_TYPE_SWORDMAN:
-      if ( this->m_iNumberOfSwordsmen < 0
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1138, "m_iNumberOfSwordsmen >= 0") == 1 )
+      if ( this->m_iNumberOfSwordsmen < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1138, "m_iNumberOfSwordsmen >= 0") == 1 )
       {
         __debugbreak();
       }
       result = this->m_iNumberOfSwordsmen;
       break;
     case AI_WARRIOR_TYPE_BOWMAN:
-      if ( this->m_iNumberOfBowmen < 0
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1145, "m_iNumberOfBowmen >= 0") == 1 )
+      if ( this->m_iNumberOfBowmen < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1145, "m_iNumberOfBowmen >= 0") == 1 )
       {
         __debugbreak();
       }
       result = this->m_iNumberOfBowmen;
       break;
     case AI_WARRIOR_TYPE_FIGHTER_UNIQUE:
-      if ( this->m_iNumberOfUniqueFighters < 0
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1152, "m_iNumberOfUniqueFighters >= 0") == 1 )
+      if ( this->m_iNumberOfUniqueFighters < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1152, "m_iNumberOfUniqueFighters >= 0") == 1 )
       {
         __debugbreak();
       }
       result = this->m_iNumberOfUniqueFighters;
       break;
     case AI_WARRIOR_TYPE_SQUAD_LEADER:
-      if ( this->m_iNumberOfSquadleaders < 0
-        && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1159, "m_iNumberOfSquadleaders >= 0") == 1 )
+      if ( this->m_iNumberOfSquadleaders < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 1159, "m_iNumberOfSquadleaders >= 0") == 1 )
       {
         __debugbreak();
       }

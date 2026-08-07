@@ -101,9 +101,13 @@ void  CAnimal::LogicUpdate(void) {
       v2 = IEntity::PackedXY(this);
       v4 = (*(int (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v5 + 16))(v5, v2, 0);
       if ( (v4 & 8) != 0 )
+      {
         (*(void (__thiscall **)(CAnimal *))(*(_DWORD *)this + 124))(this);
+      }
       else
+      {
         CAnimal::TakeWalkJobAndWalkDir(this, v4);
+      }
     }
   }
 }
@@ -114,12 +118,7 @@ void  CAnimal::LogicUpdate(void) {
 struct SGfxObjectInfo *  CAnimal::GetGfxInfos(void) {
   
   this->Update();
-  CGfxManager::GetAnimalGfxInfo(
-    g_pGfxManager,
-    (struct SGfxObjectInfo *)&IEntity::m_sGfxInfo,
-    this->m_iJobPart,
-    (char)this->m_iDirection,
-    this->m_iFrame);
+  CGfxManager::GetAnimalGfxInfo(g_pGfxManager, (struct SGfxObjectInfo *)&IEntity::m_sGfxInfo, this->m_iJobPart, (char)this->m_iDirection, this->m_iFrame);
   MEMORY[0x40FE51D] = this->m_iDirection;
   MEMORY[0x40FE51C] = this->m_iDistance;
   MEMORY[0x40FE518] = this->m_uObjType;
@@ -189,12 +188,7 @@ void  CAnimal::Delete(void) {
     IEntity::SetFlagBits(this, ENTITY_FLAG_ON_BOARD);
     v1 = IEntity::WorldIdx();
     v2 = CWorldManager::MapObjectId(v1);
-    if ( v2 != IEntity::EntityId((unsigned __int16 *)this)
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Animal\\Animal.cpp",
-           700,
-           "g_cWorld.MapObjectId( WorldIdx() ) == EntityId()") == 1 )
+    if ( v2 != IEntity::EntityId((unsigned __int16 *)this) && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 700, "g_cWorld.MapObjectId( WorldIdx() ) == EntityId()") == 1 )
     {
       __debugbreak();
     }
@@ -203,16 +197,22 @@ void  CAnimal::Delete(void) {
   }
   result = IEntity::FlagBits(this, ENTITY_FLAG_Registered);
   if ( !result )
+  {
     return result;
+  }
   v6 = IEntity::EntityId((unsigned __int16 *)this);
   LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(this);
   CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, v6);
   result = IEntity::FlagBits(this, ENTITY_FLAG_Registered);
   if ( !result )
+  {
     return result;
+  }
   result = BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 710, "FlagBits(ENTITY_FLAG_REGISTERED) == 0");
   if ( result == 1 )
+  {
     __debugbreak();
+  }
   return result;
 }
 
@@ -233,7 +233,9 @@ void  CAnimal::Update(void) {
   *((_BYTE *)this + 125) = CStateGame::GetTickCounter(g_pGame) - *((_BYTE *)this + 44);
   result = (int)this;
   if ( !*((_BYTE *)this + 125) || *((_DWORD *)this + 25) == 5 )
+  {
     return result;
+  }
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, TickCounter);
   result = *((unsigned __int8 *)this + 122) - 6;
@@ -247,24 +249,25 @@ void  CAnimal::Update(void) {
       }
       else
       {
-        *((_BYTE *)this + 36) = (*((unsigned __int8 *)this + 125) + *((unsigned __int8 *)this + 36))
-                              % *((unsigned __int8 *)this + 124);
+        *((_BYTE *)this + 36) = (*((unsigned __int8 *)this + 125) + *((unsigned __int8 *)this + 36)) % *((unsigned __int8 *)this + 124);
         if ( *((_BYTE *)this + 121) )
+        {
           v8 = *((unsigned __int8 *)this + 121);
+        }
         else
+        {
           v8 = 1;
+        }
         result = (int)IMovingEntity::DecDistance(this, (*((unsigned __int8 *)this + 125) << 8) / v8);
       }
       break;
     case 0x10:
     case 0x1B:
       result = (int)this;
-      *((_BYTE *)this + 36) = (*((unsigned __int8 *)this + 125) + *((unsigned __int8 *)this + 36))
-                            % *((unsigned __int8 *)this + 124);
+      *((_BYTE *)this + 36) = (*((unsigned __int8 *)this + 125) + *((unsigned __int8 *)this + 36)) % *((unsigned __int8 *)this + 124);
       if ( *(_DWORD *)(*((_DWORD *)this + 29) + 32) )
       {
-        if ( *(_BYTE *)(*((_DWORD *)this + 29) + 36) == 100
-          || (v3 = j__rand() % 100 + 1, result = *(unsigned __int8 *)(*((_DWORD *)this + 29) + 36), v3 <= result) )
+        if ( *(_BYTE *)(*((_DWORD *)this + 29) + 36) == 100 || (v3 = j__rand() % 100 + 1, result = *(unsigned __int8 *)(*((_DWORD *)this + 29) + 36), v3 <= result) )
         {
           result = CSoundManager::IsPlaying((CSoundManager *)g_pSoundManager, *((_DWORD *)this + 33));
           if ( !(_BYTE)result )
@@ -276,12 +279,7 @@ void  CAnimal::Update(void) {
             {
               v6 = IEntity::Y(this);
               v5 = IEntity::X(this);
-              result = CSoundManager::PlayEnvironmentSound(
-                         g_pSoundManager,
-                         *(_DWORD *)(*((_DWORD *)this + 29) + 32),
-                         v5,
-                         v6,
-                         0);
+              result = CSoundManager::PlayEnvironmentSound(g_pSoundManager, *(_DWORD *)(*((_DWORD *)this + 29) + 32), v5, v6, 0);
               *((_DWORD *)this + 33) = result;
             }
           }
@@ -310,9 +308,10 @@ void  CAnimal::NewToDoList(class std::list<class CEntityTask,class std::allocato
 
   v6 = this;
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 407, "_toDo != NULL") == 1 )
+  {
     __debugbreak();
-  if ( IEntity::FlagBits(v6, ENTITY_FLAG_Registered)
-    && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 408, "FlagBits( ENTITY_FLAG_REGISTERED ) == 0") == 1 )
+  }
+  if ( IEntity::FlagBits(v6, ENTITY_FLAG_Registered) && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 408, "FlagBits( ENTITY_FLAG_REGISTERED ) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -430,7 +429,9 @@ void  CAnimal::TakeWalkJob(bool a2) {
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v4);
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v5);
   if ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=((std::_Iterator_base12 *)v5) )
+  {
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(v5);
+  }
   (*(void (__thiscall **)(CAnimal *, bool))(*(_DWORD *)v8 + 128))(v8, a2);
   *((_DWORD *)v8 + 25) = 2;
   v9 = -1;
@@ -461,7 +462,9 @@ void  CAnimal::TakeFleeJob(bool a2) {
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v5);
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v5);
   if ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=((std::_Iterator_base12 *)v5) )
+  {
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(v5);
+  }
   (*(void (__thiscall **)(CAnimal *, bool))(*(_DWORD *)v8 + 128))(v8, a2);
   *((_DWORD *)v8 + 25) = 3;
   v9 = -1;
@@ -508,9 +511,13 @@ void  CAnimal::TakeDeadJob(void) {
   char v2; // [esp+0h] [ebp-8h]
 
   if ( *((_BYTE *)this + 124) )
+  {
     v2 = *((_BYTE *)this + 124) - 1;
+  }
   else
+  {
     v2 = 0;
+  }
   *((_BYTE *)this + 36) = v2;
   *((_DWORD *)this + 25) = 5;
   *((_DWORD *)this + 32) = 0;
@@ -546,11 +553,17 @@ void  CAnimal::TakeJob(bool a2) {
 
   v4 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*(this + 88);
   if ( *(char *)(v4 + 6) >= 0 )
+  {
     *(_BYTE *)(this + 68) = *(_BYTE *)(v4 + 6);
+  }
   if ( *(_BYTE *)(v4 + 20) )
+  {
     IEntity::SetFlagBits((_DWORD *)this, ENTITY_FLAG_Visible);
+  }
   else
+  {
     IEntity::ClearFlagBits((_DWORD *)this, ENTITY_FLAG_Visible);
+  }
   *(_BYTE *)(this + 122) = *(_BYTE *)(v4 + 4);
   *(_BYTE *)(this + 123) = *(_BYTE *)(v4 + 7);
   *(_BYTE *)(this + 124) = *(_BYTE *)(v4 + 8);
@@ -570,9 +583,13 @@ void  CAnimal::TakeJob(bool a2) {
         break;
       case 0x1B:
         if ( *(unsigned __int8 *)(this + 124) <= 1u )
+        {
           v3 = 1;
+        }
         else
+        {
           v3 = *(unsigned __int8 *)(this + 124) - 1;
+        }
         result = IAnimatedEntity::RegisterForLogicUpdate(v3);
         break;
       default:
@@ -602,12 +619,7 @@ void  CAnimal::WalkDir(int a2) {
   v11 = (Y16X16 *)(a2 & 0xF);
   if ( (unsigned int)v11 < 6 )
   {
-    if ( (a2 & 0x20) != 0
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Animal\\Animal.cpp",
-           427,
-           "(_iWalkResult & WALK_RESULT_FLAG_GOAL_REACHED) == 0") == 1 )
+    if ( (a2 & 0x20) != 0 && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 427, "(_iWalkResult & WALK_RESULT_FLAG_GOAL_REACHED) == 0") == 1 )
     {
       __debugbreak();
     }
@@ -643,9 +655,13 @@ void  CAnimal::WalkDirAndRegister(int a2) {
   
   CAnimal::WalkDir(this, a2);
   if ( (*((_BYTE *)this + 120) & 0xFu) >= 6 )
+  {
     return IAnimatedEntity::RegisterForLogicUpdate(1);
+  }
   else
+  {
     return IAnimatedEntity::RegisterForLogicUpdate(*((unsigned __int8 *)this + 121));
+  }
 }
 
 

@@ -10,14 +10,18 @@ class CGameState * __cdecl CStateAOCampaignsSettle::DynamicCreateFunc(void * a1)
 
   C = (CStateAOCampaignsSettle *)operator new(4u);
   if ( C )
+  {
     return CStateAOCampaignsSettle::CStateAOCampaignsSettle(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x14a0b70]
-// Decompiled from CStateAOCampaignsSettle *__thiscall CStateAOCampaignsSettle::CStateAOCampaignsSettle(  CStateAOCampaignsSettle *this,  void *a2)
+// Decompiled from CStateAOCampaignsSettle *__thiscall CStateAOCampaignsSettle::CStateAOCampaignsSettle(CStateAOCampaignsSettle *this, void *a2)
  CStateAOCampaignsSettle::CStateAOCampaignsSettle(void * a2) {
   
   CGuiGameState::CGuiGameState(this);
@@ -68,7 +72,9 @@ bool  CStateAOCampaignsSettle::Perform(void) {
     }
     v2 = dword_402C918 + 30;
     if ( v2 >= timeGetTime() )
+    {
       return 1;
+    }
     dword_402C918 = timeGetTime();
     IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
     IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);

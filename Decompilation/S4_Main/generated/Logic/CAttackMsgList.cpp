@@ -22,7 +22,9 @@ void  CAttackMsgList::SendAttackMessage(int a2, int a3) {
   {
     result = 0;
     if ( v9 >= 15 )
+    {
       break;
+    }
     v7 = (CAttackMsgList *)((char *)this + 16 * v9);
     if ( CAttackMsgFilter::IsActive(v7) )
     {
@@ -30,7 +32,9 @@ void  CAttackMsgList::SendAttackMessage(int a2, int a3) {
       {
         CAttackMsgFilter::Deactivate(v7);
         if ( v8 == 15 )
+        {
           v8 = v9;
+        }
       }
       else
       {
@@ -49,7 +53,9 @@ void  CAttackMsgList::SendAttackMessage(int a2, int a3) {
     ++v9;
   }
   if ( v10 )
+  {
     return result;
+  }
   if ( v8 == 15 )
   {
     return BBSupportTracePrintF(3, "AttackMsgList : Out of filters!!");
@@ -57,7 +63,9 @@ void  CAttackMsgList::SendAttackMessage(int a2, int a3) {
   else
   {
     if ( !CAttackMsgFilter::Activate((CAttackMsgList *)((char *)this + 16 * v8), TickCounter, a2, a3) )
+    {
       BBSupportTracePrintF(3, "AttackMsgList : Tried to activate active filter!!");
+    }
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
     return CTextMsgHandler::AddWarningMsg(2450, LocalPlayerId, a2, a3);
   }

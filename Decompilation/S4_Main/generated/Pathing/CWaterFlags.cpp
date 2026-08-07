@@ -32,9 +32,13 @@ bool __cdecl CWaterFlags::IsWater(int a1) {
 int __cdecl CWaterFlags::WaterFlagsGetDistanceToNearestShip(int a1) {
   
   if ( (a1 & 0xF) != 0 )
+  {
     return 10 - (a1 & 0xF);
+  }
   else
+  {
     return -1;
+  }
 }
 
 
@@ -107,7 +111,9 @@ void __cdecl CWaterFlags::SetWaterFlagBits(int a1, int a2) {
 void __cdecl CWaterFlags::Init(unsigned short * a1) {
   
   if ( !a1 && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 736, "_pWaterFlagsLayer != 0") == 1 )
+  {
     __debugbreak();
+  }
   CWaterFlags::Done();
   CWaterFlags::m_pWaterFlagsLayer = a1;
   CWaterFlagsEx::CalcWaterFlags();
@@ -137,22 +143,24 @@ void __cdecl CWaterFlags::PlaceShip(int a1) {
   int i; // [esp+1Ch] [ebp-4h]
 
   if ( !CWaterFlags::m_iInitialized && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 769, "m_iInitialized") == 1 )
+  {
     __debugbreak();
-  if ( !CWorldManager::InWorldPackedXY(a1)
-    && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 770, "g_cWorld.InWorldPackedXY(_iXY)") == 1 )
+  }
+  if ( !CWorldManager::InWorldPackedXY(a1) && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 770, "g_cWorld.InWorldPackedXY(_iXY)") == 1 )
   {
     __debugbreak();
   }
   v5 = CWorldManager::Index(a1);
   if ( CWorldManager::IsWater(v5) )
   {
-    if ( (CWaterFlags::WaterFlags(v5) & 0x800) != 0
-      && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 781, "(WaterFlags(iWorldIdx) & WATER_FLAG_SHIP) == 0") == 1 )
+    if ( (CWaterFlags::WaterFlags(v5) & 0x800) != 0 && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 781, "(WaterFlags(iWorldIdx) & WATER_FLAG_SHIP) == 0") == 1 )
     {
       __debugbreak();
     }
     CWaterFlags::SetWaterFlagBits(v5, 2048);
-    for ( i = 0; i < 271; ++i )
+    for ( i = 0;
+          i < 271;
+          ++i )
     {
       v1 = v5 + CWorldManager::SurroundingHexPointRelIndex(i);
       if ( CWorldManager::InWorld(v1) )
@@ -165,9 +173,13 @@ void __cdecl CWaterFlags::PlaceShip(int a1) {
           if ( v4 < v3 )
           {
             if ( v4 < (v6 & 0xF0) >> 4 )
+            {
               v2 = (unsigned __int8)v6;
+            }
             else
+            {
               v2 = v3 | (16 * v4);
+            }
           }
           else
           {
@@ -201,23 +213,25 @@ void __cdecl CWaterFlags::RemoveShip(int a1) {
   _BYTE v10[164]; // [esp+14h] [ebp-A8h] BYREF
 
   if ( !CWaterFlags::m_iInitialized && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 828, "m_iInitialized") == 1 )
+  {
     __debugbreak();
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a1)
-    && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 829, "g_cWorld.InWorldPackedXY(_iXY)") == 1 )
+  }
+  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a1) && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 829, "g_cWorld.InWorldPackedXY(_iXY)") == 1 )
   {
     __debugbreak();
   }
   v8 = CWorldManager::Index(a1);
   if ( CWorldManager::IsWater(v8) )
   {
-    if ( (CWaterFlags::WaterFlags(v8) & 0x800) == 0
-      && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 840, "(WaterFlags(iWorldIdx) & WATER_FLAG_SHIP) != 0") == 1 )
+    if ( (CWaterFlags::WaterFlags(v8) & 0x800) == 0 && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 840, "(WaterFlags(iWorldIdx) & WATER_FLAG_SHIP) != 0") == 1 )
     {
       __debugbreak();
     }
     CShipList::CShipList((CShipList *)v10, a1);
     result = CWaterFlags::ClearWaterFlagBits(v8, 2048);
-    for ( i = 0; i < 271; ++i )
+    for ( i = 0;
+          i < 271;
+          ++i )
     {
       v7 = v8 + CWorldManager::SurroundingHexPointRelIndex(i);
       if ( CWorldManager::InWorld(v7) )
@@ -237,13 +251,11 @@ void __cdecl CWaterFlags::RemoveShip(int a1) {
   }
   else
   {
-    result = BBSupportDbgReport(
-               1,
-               "Pathing\\WaterFlags.cpp",
-               835,
-               "CWaterFlags::RemoveShip(): World index is not water!");
+    result = BBSupportDbgReport(1, "Pathing\\WaterFlags.cpp", 835, "CWaterFlags::RemoveShip(): World index is not water!");
     if ( result == 1 )
+    {
       __debugbreak();
+    }
   }
   return result;
 }

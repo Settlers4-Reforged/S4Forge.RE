@@ -31,7 +31,9 @@
     v12 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>::operator!=(v2);
     std::_List_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>(v4);
     if ( !v12 )
+    {
       break;
+    }
     v10 = *(_DWORD *)std::_List_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>::operator*(v6);
     if ( v10 )
     {
@@ -105,7 +107,9 @@ bool  CConfigManager::AddCommandLine(char const * groupName, int argc, char * * 
   std::string::operator+=((int)&v10);
   std::string::operator+=("{");
   std::string::operator+=((int)&v10);
-  for ( i = 0; i < argc; ++i )
+  for ( i = 0;
+        i < argc;
+        ++i )
   {
     std::string::operator+=(argv[i]);
     std::string::operator+=((int)&v10);
@@ -140,14 +144,18 @@ int  CConfigManager::GetIntValue(char const * Str, char const * a3, int a4) {
   v11 = -1;
   std::string::~string(&v10);
   if ( !Section )
+  {
     return a4;
+  }
   std::string::string(&a2, a3);
   v11 = 1;
   Var = CConfigSection::GetVar(Section, &a2);
   v11 = -1;
   std::string::~string(&a2);
   if ( Var )
+  {
     return Var->GetIntValue(Var);
+  }
   std::string::string(&v8, a3);
   v11 = 2;
   CConfigSection::AddVar(Section, &v8, a4);
@@ -158,7 +166,7 @@ int  CConfigManager::GetIntValue(char const * Str, char const * a3, int a4) {
 
 
 // address=[0x2ef16d0]
-// Decompiled from int __thiscall CConfigManager::GetIntValueNoAdd(  CConfigManager *this,  char *_spSection,  char *_spVarName,  int _iDefault)
+// Decompiled from int __thiscall CConfigManager::GetIntValueNoAdd(CConfigManager *this, char *_spSection, char *_spVarName, int _iDefault)
 int  CConfigManager::GetIntValueNoAdd(char const * _spSection, char const * _spVarName, int _iDefault) {
   
   CConfigSection *Section; // [esp+8h] [ebp-50h]
@@ -173,16 +181,22 @@ int  CConfigManager::GetIntValueNoAdd(char const * _spSection, char const * _spV
   v10 = -1;
   std::string::~string(&spSection);
   if ( !Section )
+  {
     return _iDefault;
+  }
   std::string::string(&a2, _spVarName);
   v10 = 1;
   Var = CConfigSection::GetVar(Section, &a2);
   v10 = -1;
   std::string::~string(&a2);
   if ( Var )
+  {
     return Var->GetIntValue(Var);
+  }
   else
+  {
     return _iDefault;
+  }
 }
 
 
@@ -204,7 +218,9 @@ float  CConfigManager::GetFloatValue(char const * Str, char const * a3, float a4
   v11 = -1;
   std::string::~string(&v10);
   if ( !Section )
+  {
     return *(float *)&a4;
+  }
   std::string::string(&a2, a3);
   v11 = 1;
   Var = CConfigSection::GetVar(Section, &a2);
@@ -244,14 +260,18 @@ float  CConfigManager::GetFloatValueNoAdd(char const * Str, char const * a3, flo
   v8 = -1;
   std::string::~string(v7);
   if ( !Section )
+  {
     return a3;
+  }
   std::string::string(v6, a2);
   v8 = 1;
   Var = CConfigSection::GetVar(v6);
   v8 = -1;
   std::string::~string(v6);
   if ( !Var )
+  {
     return a3;
+  }
   (*(void (__thiscall **)(int))(*(_DWORD *)Var + 4))(Var);
   return result;
 }
@@ -326,9 +346,13 @@ std::string  CConfigManager::GetStringValueNoAdd(char const * a2, char const * S
     v9 = -1;
     std::string::~string(v7);
     if ( Var )
+    {
       (*(void (__thiscall **)(int, int))(*(_DWORD *)Var + 8))(Var, a1);
+    }
     else
+    {
       std::string::string(a4);
+    }
     return a1;
   }
   else
@@ -355,7 +379,9 @@ class CConfigVar *  CConfigManager::GetConfigVar(char const * Str, char const * 
   v9 = -1;
   std::string::~string(&v8);
   if ( !Section )
+  {
     return 0;
+  }
   std::string::string(&a2, a3);
   v9 = 1;
   Var = CConfigSection::GetVar(Section, &a2);
@@ -375,7 +401,9 @@ void  CConfigManager::AddDefines(struct SConfigTypeString const * a2, int a3) {
 
   if ( a2 )
   {
-    for ( i = 0; i < a3; ++i )
+    for ( i = 0;
+          i < a3;
+          ++i )
     {
       std::string::string(&v4, a2[2 * i + 1]);
       v5 = 0;
@@ -405,15 +433,15 @@ int  CConfigManager::GetDefineValue(char const * _spDefineName) {
   int v15; // [esp+70h] [ebp-4h]
 
   if ( !_spDefineName || !*_spDefineName )
+  {
     return -1;
+  }
   v12 = 0;
   std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>(v5);
   v15 = 0;
   std::string::string(&v14, _spDefineName);
   LOBYTE(v15) = 1;
-  v10 = std::_Tree<std::_Tmap_traits<std::string,int,std::less<std::string>,std::allocator<std::pair<std::string const,int>>,0>>::find(
-          v4,
-          &v14);
+  v10 = std::_Tree<std::_Tmap_traits<std::string,int,std::less<std::string>,std::allocator<std::pair<std::string const,int>>,0>>::find(v4, &v14);
   v9 = v10;
   LOBYTE(v15) = 2;
   std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::operator=(v10);
@@ -428,10 +456,13 @@ int  CConfigManager::GetDefineValue(char const * _spDefineName) {
   LOBYTE(v15) = 0;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>(v3);
   if ( v13 )
-    v12 = *(_DWORD *)(std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::operator*(v5)
-                    + 28);
+  {
+    v12 = *(_DWORD *)(std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::operator*(v5) + 28);
+  }
   else
+  {
     v12 = -1;
+  }
   v6 = v12;
   v15 = -1;
   std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::~_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>(v5);
@@ -478,7 +509,9 @@ bool  CConfigManager::SaveSection(char const * Str, wchar_t const * FileName) {
   v5 = -1;
   std::string::~string(v4);
   if ( Section )
+  {
     return CConfigSection::Save(FileName);
+  }
   BBSupportTracePrintF(2, "CConfigManager::SaveSection : Section \"%s\" not found!", Str);
   return 0;
 }
@@ -498,9 +531,13 @@ int  CConfigManager::GetSectionEntryCount(char const * Str) {
   v4 = -1;
   std::string::~string(v3);
   if ( Section )
+  {
     return CConfigSection::NumberOfEntries(Section);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -520,9 +557,13 @@ bool  CConfigManager::DoesExist(char const * Str, char const * a3) {
   v7 = -1;
   std::string::~string(v6);
   if ( !Section )
+  {
     return 0;
+  }
   if ( !a2 )
+  {
     return 1;
+  }
   std::string::string(v5, a2);
   v7 = 1;
   Var = CConfigSection::GetVar(v5);
@@ -557,7 +598,9 @@ bool  CConfigManager::ParseData(char * a2, int a3) {
   int v11; // [esp+5Ch] [ebp-4h]
 
   if ( !a2 )
+  {
     return 0;
+  }
   v7 = 0;
   std::string::string(&v10, (char *)&byte_3AB2C99);
   v11 = 0;
@@ -570,7 +613,9 @@ bool  CConfigManager::ParseData(char * a2, int a3) {
     {
       v6 = CConfigManager::GetSection(this, &v10, 1);
       if ( v6 )
+      {
         CConfigManager::ParseAddSectionVars(this, (int)&v7, v6, a2, &v7, &a3);
+      }
     }
   }
   v8 = 1;
@@ -597,7 +642,9 @@ bool  CConfigManager::Parse(class CConfigFile * a2, char const * String2) {
 
   Config = (char *)CConfigFile::GetConfig(a2);
   if ( !Config )
+  {
     return 0;
+  }
   Size = CConfigFile::GetSize(a2);
   v9 = 0;
   std::string::string(&v13, (char *)&byte_3AB2C9A);
@@ -613,7 +660,9 @@ bool  CConfigManager::Parse(class CConfigFile * a2, char const * String2) {
       {
         v7 = CConfigManager::GetSection(this, &v13, 1);
         if ( v7 )
+        {
           CConfigManager::ParseAddSectionVars(this, (int)v7, v7, Config, &v9, &Size);
+        }
       }
     }
   }
@@ -663,7 +712,7 @@ std::string  CConfigManager::ParseFindSection(char * a1, int & a2, int const & a
 
 
 // address=[0x2ef0270]
-// Decompiled from void __thiscall CConfigManager::ParseAddSectionVars(  CConfigManager *this,  struct CConfigSection *pSection,  char *a4,  int *a5,  int *a6)
+// Decompiled from void __thiscall CConfigManager::ParseAddSectionVars(CConfigManager *this, struct CConfigSection *pSection, char *a4, int *a5, int *a6)
 void  CConfigManager::ParseAddSectionVars(class CConfigSection * pSection, char * a4, int & a5, int const & a6) {
   
   char *v5; // eax
@@ -736,7 +785,9 @@ void  CConfigManager::ParseAddSectionVars(class CConfigSection * pSection, char 
       if ( std::string::length(&v25) )
       {
         if ( !std::string::find(&v25, "}", 0) )
+        {
           break;
+        }
         Var = CConfigManager::ParseGetVar(&v25, &a2a, &a1);
         v16 = Var - 1;
         switch ( Var )
@@ -758,24 +809,20 @@ void  CConfigManager::ParseAddSectionVars(class CConfigSection * pSection, char 
             iSize = j__atoi(spValue);
             if ( iSize <= 0 )
             {
-              if ( BBSupportDbgReport(
-                     1,
-                     "Source\\ConfigManager\\ConfigManager.cpp",
-                     802,
-                     "CConfigManager::ParseAddSectionVars(): Invalid array size!") == 1 )
+              if ( BBSupportDbgReport(1, "Source\\ConfigManager\\ConfigManager.cpp", 802, "CConfigManager::ParseAddSectionVars(): Invalid array size!") == 1 )
+              {
                 __debugbreak();
+              }
             }
             else
             {
               if ( iSize > 255 )
               {
                 iSize = 255;
-                if ( BBSupportDbgReport(
-                       1,
-                       "Source\\ConfigManager\\ConfigManager.cpp",
-                       785,
-                       "CConfigManager::ParseAddSectionVars(): Array size too large!") == 1 )
+                if ( BBSupportDbgReport(1, "Source\\ConfigManager\\ConfigManager.cpp", 785, "CConfigManager::ParseAddSectionVars(): Array size too large!") == 1 )
+                {
                   __debugbreak();
+                }
               }
               v15 = 0;
               CConfigManager::ParseGetArrayVars(v17, (int)&v25, (int)Src, &v15, &iSize);
@@ -785,7 +832,9 @@ void  CConfigManager::ParseAddSectionVars(class CConfigSection * pSection, char 
                 std::string::operator=(&v25, v9);
                 std::string::~string(&v20);
                 if ( std::string::length(&v25) )
+                {
                   CConfigManager::ParseGetArrayVars(v17, (int)&v25, (int)Src, &v15, &iSize);
+                }
               }
               CConfigSection::AddVar(pSection, &a2a, Src, iSize);
             }
@@ -827,24 +876,34 @@ std::string  CConfigManager::ParseGetLine(char * a1, int & a2, int const & a3) {
   if ( a2[*a3] == ';' )
   {
     while ( *a3 < *a4 && a2[*a3] != '\r' )
+    {
       ++*a3;
+    }
   }
   else
   {
     while ( *a3 < *a4 && a2[*a3] != '\r' )
     {
       if ( a2[*a3] != ' ' && a2[*a3] != '\t' )
+      {
         v5 = 0;
+      }
       if ( !v5 )
+      {
         std::string::operator+=(&v6, a2[*a3]);
+      }
       ++*a3;
     }
   }
   *a3 += 2;
   if ( v5 )
+  {
     std::string::string(a1, (char *)&byte_3AB2CA3);
+  }
   else
+  {
     std::string::string(&v6);
+  }
   v7 = -1;
   std::string::~string(&v6);
   return a1;
@@ -895,7 +954,9 @@ enum T_CFGVAR_TYPE  CConfigManager::ParseGetVar(std::string & arg0, std::string 
 
   Size = std::string::find(arg0, "=", 0);
   if ( Size < 0 )
+  {
     return 0;
+  }
   v10 = std::string::substr(arg0, &a2, 0, Size);
   std::string::operator=(a1, v10);
   std::string::~string(&a2);
@@ -907,7 +968,9 @@ enum T_CFGVAR_TYPE  CConfigManager::ParseGetVar(std::string & arg0, std::string 
     if ( v28 <= 0 )
     {
       if ( v27 > 0 )
+      {
         v26 = v27;
+      }
     }
     else
     {
@@ -917,9 +980,13 @@ enum T_CFGVAR_TYPE  CConfigManager::ParseGetVar(std::string & arg0, std::string 
   else
   {
     if ( v28 >= v27 )
+    {
       v18 = v27;
+    }
     else
+    {
       v18 = v28;
+    }
     v26 = v18;
   }
   if ( v26 > 0 )
@@ -937,7 +1004,9 @@ enum T_CFGVAR_TYPE  CConfigManager::ParseGetVar(std::string & arg0, std::string 
     std::string::~string(&v38);
     v22 = std::string::c_str(arg8);
     v20 = 0;
-    for ( i = 0; i < std::string::length(arg8); ++i )
+    for ( i = 0;
+          i < std::string::length(arg8);
+          ++i )
     {
       if ( v22[i] != 32 && v22[i] != 9 )
       {
@@ -945,7 +1014,9 @@ enum T_CFGVAR_TYPE  CConfigManager::ParseGetVar(std::string & arg0, std::string 
         break;
       }
     }
-    for ( j = std::string::length(arg8); j > 0; --j )
+    for ( j = std::string::length(arg8);
+          j > 0;
+          --j )
     {
       if ( v22[j] != 32 && v22[j] != 9 )
       {
@@ -960,9 +1031,13 @@ LABEL_36:
     if ( std::string::find(arg8, '"', 0) < 0 )
     {
       if ( std::string::find(arg8, '.', 0) < 0 )
+      {
         return 1;
+      }
       else
+      {
         return 3;
+      }
     }
     else
     {
@@ -988,7 +1063,9 @@ LABEL_36:
     std::string::~string(&v36);
     v19 = std::string::c_str(arg0);
     a3 = 0;
-    for ( k = 0; k < std::string::length(arg0); ++k )
+    for ( k = 0;
+          k < std::string::length(arg0);
+          ++k )
     {
       if ( v19[k] != ' ' && v19[k] != '\t' )
       {
@@ -1007,7 +1084,7 @@ LABEL_36:
 
 
 // address=[0x2ef0ea0]
-// Decompiled from void __thiscall CConfigManager::ParseGetArrayVars(  CConfigManager *this,  std::string *a1,  int *a3,  _DWORD *a4,  _DWORD *a5)
+// Decompiled from void __thiscall CConfigManager::ParseGetArrayVars(CConfigManager *this, std::string *a1, int *a3, _DWORD *a4, _DWORD *a5)
 void  CConfigManager::ParseGetArrayVars(std::string & a1, int * a3, int & a4, int & a5) {
   
   char *v5; // eax
@@ -1026,7 +1103,9 @@ void  CConfigManager::ParseGetArrayVars(std::string & a1, int * a3, int & a4, in
   {
     v9 = std::string::find(a1, 44, v10 + 1);
     if ( v9 < 0 )
+    {
       break;
+    }
     v7 = std::string::substr(a1, &a2, v10 + 1, v9 - (v10 + 1));
     std::string::operator=(&v12, v7);
     std::string::~string(&a2);
@@ -1042,7 +1121,9 @@ void  CConfigManager::ParseGetArrayVars(std::string & a1, int * a3, int & a4, in
     a3[(*a4)++] = DefineVar;
     v10 = std::string::find(a1, ',', v10 + 1);
     if ( v10 < 0 )
+    {
       break;
+    }
   }
   while ( *a4 < *a5 );
   v13 = -1;
@@ -1117,10 +1198,10 @@ class CConfigSection *  CConfigManager::GetSection(std::string const & a2, bool 
     LOBYTE(v23) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>(v6);
     if ( !v22 )
+    {
       break;
-    v20 = *(void **)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>::operator*(
-                      v8,
-                      v5);
+    }
+    v20 = *(void **)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CConfigSection *>>>::operator*(v8, v5);
     v3 = CConfigSection::Name(v20);
     if ( (unsigned __int8)std::operator==<char>(v3, a2) )
     {
@@ -1136,9 +1217,13 @@ class CConfigSection *  CConfigManager::GetSection(std::string const & a2, bool 
     C = (int)operator new(0x28u, 1, "Source\\ConfigManager\\ConfigManager.cpp", 1058);
     LOBYTE(v23) = 3;
     if ( C )
+    {
       v18 = CConfigSection::CConfigSection((CConfigSection *)C, (int)a2);
+    }
     else
+    {
       v18 = 0;
+    }
     v11 = v18;
     LOBYTE(v23) = 0;
     v17 = v18;

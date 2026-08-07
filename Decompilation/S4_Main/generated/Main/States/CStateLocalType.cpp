@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateLocalType::DynamicCreateFunc(void * a1) {
 
   C = (CStateLocalType *)operator new(4u);
   if ( C )
+  {
     return CStateLocalType::CStateLocalType(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -34,8 +38,7 @@ class CGameState * __cdecl CStateLocalType::DynamicCreateFunc(void * a1) {
  CStateLocalType::~CStateLocalType(void) {
   
   *(_DWORD *)this = &CStateLocalType::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 7)
-    && BBSupportDbgReport(2, "main\\states\\StateLocalType.cpp", 61, (const char *)&dword_374C518[1]) == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 7) && BBSupportDbgReport(2, "main\\states\\StateLocalType.cpp", 61, (const char *)&dword_374C518[1]) == 1 )
   {
     __debugbreak();
   }
@@ -60,7 +63,9 @@ bool  CStateLocalType::Perform(void) {
   }
   v1 = dword_4031D04 + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_4031D04 = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -93,26 +98,34 @@ bool  CStateLocalType::OnEvent(class CEvn_Event & a2) {
       break;
     case 0x60:
       if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+      {
         CGameSettings::SetAIDifficulty(s_uAIDifficulty);
+      }
       CGameStateHandler::Switch((int)CStateCampaignDark::DynamicCreateFunc, 0);
       result = 1;
       break;
     case 0x61:
       if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+      {
         CGameSettings::SetAIDifficulty(s_uAIDifficulty);
+      }
       CGameStateHandler::Switch((int)CStateCampaign3X3::DynamicCreateFunc, 0);
       result = 1;
       break;
     case 0x62:
       if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+      {
         CGameSettings::SetAIDifficulty(s_uAIDifficulty);
+      }
       dword_403191C = 0;
       CGameStateHandler::Switch((int)CStateLobbyMapSettings::DynamicCreateFunc, 0);
       result = 1;
       break;
     case 0x63:
       if ( s_uAIDifficulty != CGameSettings::GetAIDifficulty() )
+      {
         CGameSettings::SetAIDifficulty(s_uAIDifficulty);
+      }
       CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
       result = 1;
       break;

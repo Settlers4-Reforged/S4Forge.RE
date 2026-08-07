@@ -18,7 +18,9 @@ void  CAIPlayerEvaluations::Clear(void) {
   int result; // eax
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = 0; i < 9; ++i )
+  for ( i = 0;
+        i < 9;
+        ++i )
   {
     CAIPlayerEvaluation::Clear(&this->m_sPlayerEvaluations[i]);
     result = i + 1;
@@ -36,8 +38,12 @@ void  CAIPlayerEvaluations::EvaluateAllPlayers(void) {
 
   CAIPlayerEvaluations::Clear(this);
   PlayerId = IAIEnvironment::AlliancesLastPlayerId();
-  for ( i = 1; i <= PlayerId; ++i )
+  for ( i = 1;
+        i <= PlayerId;
+        ++i )
+  {
     CAIPlayerEvaluations::EvaluatePlayer(this, i);
+  }
 }
 
 
@@ -49,7 +55,9 @@ void  CAIPlayerEvaluations::DbgPrint(void) {
   int i; // [esp+8h] [ebp-4h]
 
   PlayerId = IAIEnvironment::AlliancesLastPlayerId();
-  for ( i = 1; i <= PlayerId; ++i )
+  for ( i = 1;
+        i <= PlayerId;
+        ++i )
   {
     IAIEnvironment::DbgTracePrintF(byte_367348D);
     IAIEnvironment::DbgTracePrintF("Player %i evaluation...", i);

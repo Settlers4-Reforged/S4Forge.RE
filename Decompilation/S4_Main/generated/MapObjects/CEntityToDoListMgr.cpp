@@ -250,16 +250,26 @@
   int v249; // [esp+B80h] [ebp-4h]
 
   v248 = &v32;
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
-    for ( j = 0; j < 267; ++j )
+    for ( j = 0;
+          j < 267;
+          ++j )
+    {
       this->m_vSettlerJobsList[i][j] = 0;
+    }
   }
   iFirstJobId = 0;
   iFrameCount = 0;
-  for ( i = 0; i < 5; ++i )
+  for ( i = 0;
+        i < 5;
+        ++i )
   {
-    for ( k = SETTLER_CARRIER; k < SETTLER_MAX; ++k )
+    for ( k = SETTLER_CARRIER;
+          k < SETTLER_MAX;
+          ++k )
     {
       iFirstJobId = CGfxManager::GetSettlerFirstJob(i, k);
       if ( !iFirstJobId || this->m_vSettlerJobsList[0][k] )
@@ -271,25 +281,35 @@
         v167 = operator new(0xCu);
         v249 = 0;
         if ( v167 )
+        {
           v174 = (std::list *)std::list<CEntityTask>::list<CEntityTask>(v167);
+        }
         else
+        {
           v174 = 0;
+        }
         v77 = v174;
         v249 = -1;
         this->m_vSettlerJobsList[i][k] = v174;
         std::list<CEntityTask>::clear(this->m_vSettlerJobsList[i][k]);
         iFrameCount = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, i, iFirstJobId, 2u);
         if ( iFrameCount <= 0 && BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 103, "frames>0") == 1 )
+        {
           __debugbreak();
+        }
         v1 = CEntityTask::CEntityTask(&v36, 17, iFirstJobId, 0, 0, 1, iFrameCount, -1, 1, 1, 0, 0, 0, 0);
         std::list<CEntityTask>::push_back(this->m_vSettlerJobsList[i][k], (int)v1);
       }
     }
   }
   iJobListAfterSettlerIter = SETTLER_MAX;
-  for ( m = 1; m < 66; ++m )
+  for ( m = 1;
+        m < 66;
+        ++m )
   {
-    for ( i = 0; i < 5; ++i )
+    for ( i = 0;
+          i < 5;
+          ++i )
     {
       iFirstJobId = CGfxManager::GetSettlerFirstJob(i, m);
       if ( !iFirstJobId || this->m_vSettlerJobsList[0][iJobListAfterSettlerIter] )
@@ -301,9 +321,13 @@
         v175 = operator new(0xCu);
         v249 = 1;
         if ( v175 )
+        {
           v176 = (std::list *)std::list<CEntityTask>::list<CEntityTask>(v175);
+        }
         else
+        {
           v176 = 0;
+        }
         v76 = v176;
         v249 = -1;
         this->m_vSettlerJobsList[i][iJobListAfterSettlerIter] = v176;
@@ -320,7 +344,9 @@
   v210 = 0;
   v214 = (char *)AdvXMLParser::Parser::OpenXMLFile(aGamedataJobinf, &v210);
   if ( !v214 )
+  {
     return this;
+  }
   v249 = 2;
   v50[20] = AdvXMLParser::Parser::Parser(v37);
   LOBYTE(v249) = 3;
@@ -393,7 +419,9 @@
       {
         v55 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 218, "iJobListIdx != -1");
         if ( v55 == 1 )
+        {
           __debugbreak();
+        }
       }
       v50[4] = 0;
       memset(&v50[23], 0, 12);
@@ -432,7 +460,9 @@
         {
           v157 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 239, "iJobNr != -1");
           if ( v157 == 1 )
+          {
             __debugbreak();
+          }
         }
         v156 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v155 = AdvXMLParser::Element::operator()(v156, "x", 0);
@@ -471,9 +501,13 @@
         iDir = j__atoi(v13);
         std::string::~string(v237);
         if ( iDir == -1 )
+        {
           v188 = 0;
+        }
         else
+        {
           v188 = iDir;
+        }
         SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, v212, iJobNr, v188);
         iTaskFrameCount = SettlerJobFrameCount;
         if ( SettlerJobFrameCount == 1 )
@@ -494,10 +528,14 @@
         {
           v138 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 294, "duration < 128");
           if ( v138 == 1 )
+          {
             __debugbreak();
+          }
         }
         if ( !iDuration )
+        {
           iDuration = iTaskFrameCount;
+        }
         v137 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v136 = AdvXMLParser::Element::operator()(v137, "entity", 0);
         v177 = v136;
@@ -508,7 +546,9 @@
         v16 = std::string::c_str(&v242);
         iEntity = v189->GetDefineValue(v189, v16);
         if ( iEntity == -1 )
+        {
           iEntity = 0;
+        }
         v133 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
         v132 = AdvXMLParser::Element::operator()(v133, "task", 0);
         v179 = v132;
@@ -573,21 +613,7 @@
         LOBYTE(v249) = 35;
         v20 = std::string::c_str(v114);
         bForward = j__atoi(v20) != 0;
-        v108 = CEntityTask::CEntityTask(
-                 &v33,
-                 iTask,
-                 iJobNr,
-                 iX,
-                 iY,
-                 iDuration,
-                 iTaskFrameCount,
-                 iDir,
-                 bForward,
-                 bVisible,
-                 iEntity,
-                 0,
-                 0,
-                 iTrigger);
+        v108 = CEntityTask::CEntityTask(&v33, iTask, iJobNr, iX, iY, iDuration, iTaskFrameCount, iDir, bForward, bVisible, iEntity, 0, 0, iTrigger);
         std::list<CEntityTask>::push_back(this->m_vSettlerJobsList[v212][v211], (int)v108);
         LOBYTE(v249) = 34;
         std::string::~string(v229);
@@ -630,7 +656,9 @@
   v210 = 0;
   v214 = (char *)AdvXMLParser::Parser::OpenXMLFile(aGamedataJobsou, &v210);
   if ( !v214 )
+  {
     return this;
+  }
   v249 = 38;
   v50[8] = AdvXMLParser::Parser::Parser(v38);
   LOBYTE(v249) = 39;
@@ -673,7 +701,9 @@
     {
       v94 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 417, "( index > 0) && ( index < SIV_MAX_JOB )");
       if ( v94 == 1 )
+      {
         __debugbreak();
+      }
     }
     v215 = &CEntityToDoListMgr::m_vJobSoundInfo[v204];
     v93 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
@@ -693,7 +723,9 @@
     v87 = v194->GetDefineValue(v194, v24);
     v215->m_iId = v87;
     if ( v215->m_iId == -1 )
+    {
       v215->m_iId = 0;
+    }
     v86 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
     v85 = AdvXMLParser::Element::operator()(v86, "sound", 0);
     v84 = AdvXMLParser::Element::operator()(v85, "frame", 0);
@@ -713,7 +745,9 @@
     v215->m_iRandom = v28;
     std::string::~string(v233);
     if ( !v215->m_iRandom )
+    {
       v215->m_iRandom = 100;
+    }
     LOBYTE(v249) = 47;
     std::string::~string(v243);
     LOBYTE(v249) = 46;
@@ -743,26 +777,36 @@
   int i; // [esp+20h] [ebp-Ch]
   int j; // [esp+24h] [ebp-8h]
 
-  for ( i = 4; i >= 0; --i )
+  for ( i = 4;
+        i >= 0;
+        --i )
   {
-    for ( j = 0; j < 267; ++j )
+    for ( j = 0;
+          j < 267;
+          ++j )
     {
       if ( this->m_vSettlerJobsList[i][j] && this->m_vSettlerJobsList[i][j] != this->m_vSettlerJobsList[0][j] )
       {
         std::list<CEntityTask>::clear(this->m_vSettlerJobsList[i][j]);
         if ( this->m_vSettlerJobsList[i][j] )
+        {
           std::list<CEntityTask>::`scalar deleting destructor'(1);
+        }
         this->m_vSettlerJobsList[i][j] = 0;
       }
     }
   }
-  for ( k = 0; k < 267; ++k )
+  for ( k = 0;
+        k < 267;
+        ++k )
   {
     if ( this->m_vSettlerJobsList[0][k] )
     {
       std::list<CEntityTask>::clear(this->m_vSettlerJobsList[0][k]);
       if ( this->m_vSettlerJobsList[0][k] )
+      {
         std::list<CEntityTask>::`scalar deleting destructor'(1);
+      }
       this->m_vSettlerJobsList[0][k] = 0;
     }
   }
@@ -770,16 +814,14 @@
 
 
 // address=[0x154e220]
-// Decompiled from std::list *__thiscall CEntityToDoListMgr::SettlerJobList(  CEntityToDoListMgr *this,  unsigned int _iRace,  unsigned int _iJob)
+// Decompiled from std::list *__thiscall CEntityToDoListMgr::SettlerJobList(CEntityToDoListMgr *this, unsigned int _iRace, unsigned int _iJob)
 class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *  CEntityToDoListMgr::SettlerJobList(int _iRace, int _iJob) {
   
-  if ( _iRace > 4
-    && BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 507, "_iRace >= 0 && _iRace < RACE_MAX") == 1 )
+  if ( _iRace > 4 && BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 507, "_iRace >= 0 && _iRace < RACE_MAX") == 1 )
   {
     __debugbreak();
   }
-  if ( _iJob > 266
-    && BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 508, "_iJob >= 0 && _iJob < JOB_MAX") == 1 )
+  if ( _iJob > 266 && BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 508, "_iJob >= 0 && _iJob < JOB_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -791,8 +833,7 @@ class std::list<class CEntityTask,class std::allocator<class CEntityTask> > *  C
 // Decompiled from void __cdecl CEntityToDoListMgr::GetJobSoundInfo(int a1, struct SJobSoundInfo *a2)
 void __cdecl CEntityToDoListMgr::GetJobSoundInfo(int a1, struct SJobSoundInfo & a2) {
   
-  if ( (a1 <= 0 || a1 >= 367)
-    && BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 536, "0<_iJobId && _iJobId<SIV_MAX_JOB") == 1 )
+  if ( (a1 <= 0 || a1 >= 367) && BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 536, "0<_iJobId && _iJobId<SIV_MAX_JOB") == 1 )
   {
     __debugbreak();
   }

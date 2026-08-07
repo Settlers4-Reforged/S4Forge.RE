@@ -8,10 +8,10 @@
   
   IRandomMaps::IRandomMaps(this);
   this->__vftable = (IRandomMaps_vtbl *)&CRandomMaps::_vftable_;
-  this->m_bU0 = 0;
-  this->m_iU0 = 0;
-  this->m_iU1 = 0;
-  this->m_iU2 = 0;
+  this->m_bInited = 0;
+  this->m_pMapGeneratorHost = 0;
+  this->m_pPreviewImage = 0;
+  this->m_pMapFile = 0;
   return this;
 }
 
@@ -37,7 +37,9 @@ void  CRandomMaps::CleanUp(void) {
   {
     v2 = *((_DWORD *)this + 2);
     if ( v2 )
+    {
       (*(void (__thiscall **)(int, int))(*(_DWORD *)v2 + 36))(v2, 1);
+    }
     *((_DWORD *)this + 2) = 0;
   }
   if ( *((_DWORD *)this + 3) )
@@ -47,10 +49,14 @@ void  CRandomMaps::CleanUp(void) {
   }
   result = this;
   if ( !*((_DWORD *)this + 4) )
+  {
     return result;
+  }
   result = (CRandomMaps *)*((_DWORD *)this + 4);
   if ( result )
+  {
     result = (CRandomMaps *)(***((int (__thiscall ****)(_DWORD, int))this + 4))(*((_DWORD *)this + 4), 1);
+  }
   *((_DWORD *)this + 4) = 0;
   return result;
 }
@@ -65,32 +71,40 @@ class S4::CMapFile *  CRandomMaps::GetRandomMapFile(void) {
 
 
 // address=[0x14993c0]
-// Decompiled from S4::CMapFile *__thiscall CRandomMaps::InitRandomMap(CRandomMaps *this, struct SRandomMapParams *a2)
+// Decompiled from void __thiscall CRandomMaps::InitRandomMap(CRandomMaps *this, struct SRandomMapParams *a2)
 void  CRandomMaps::InitRandomMap(struct SRandomMapParams & a2) {
   
-  struct CMapFile *v3; // [esp+10h] [ebp-20h]
-  CHandleMap *v4; // [esp+14h] [ebp-1Ch]
-  CMapGeneratorHost *v5; // [esp+18h] [ebp-18h]
+  S4::CMapFile *v2; // [esp+10h] [ebp-20h]
+  S4::CMapFile *v3; // [esp+14h] [ebp-1Ch]
+  struct CMapGeneratorHost *v4; // [esp+18h] [ebp-18h]
   CMapGeneratorHost *C; // [esp+1Ch] [ebp-14h]
 
-  (*(void (__thiscall **)(CRandomMaps *))(*(_DWORD *)this + 4))(this);
-  *((_BYTE *)this + 4) = 1;
+  this->CleanUp(this);
+  this->m_bInited = 1;
   C = (CMapGeneratorHost *)operator new(0x140u);
   if ( C )
-    v5 = CMapGeneratorHost::CMapGeneratorHost(C, a2);
+  {
+    v4 = CMapGeneratorHost::CMapGeneratorHost(C, a2);
+  }
   else
-    v5 = 0;
-  *((_DWORD *)this + 2) = v5;
-  *((_DWORD *)this + 3) = operator new[](0xC800u);
-  v4 = (CHandleMap *)operator new(0x498u);
-  if ( v4 )
-    v3 = S4::CMapFile::CMapFile(v4, 0);
+  {
+    v4 = 0;
+  }
+  this->m_pMapGeneratorHost = v4;
+  this->m_pPreviewImage = (__int16 *)operator new[](51200u);
+  v3 = (S4::CMapFile *)operator new(0x498u);
+  if ( v3 )
+  {
+    v2 = S4::CMapFile::CMapFile(v3, 0);
+  }
   else
-    v3 = 0;
-  *((_DWORD *)this + 4) = v3;
-  InitRandomMap(*((struct IMapGeneratorHost **)this + 2), a2);
-  CreatePreview(*((struct IMapGeneratorHost **)this + 2), *((unsigned __int16 **)this + 3), 160);
-  return S4::CMapFile::Virtualize(*((S4::CMapFile **)this + 4));
+  {
+    v2 = 0;
+  }
+  this->m_pMapFile = v2;
+  InitRandomMap(this->m_pMapGeneratorHost, a2);
+  CreatePreview(this->m_pMapGeneratorHost, (unsigned __int16 *)this->m_pPreviewImage, 160);
+  S4::CMapFile::Virtualize(this->m_pMapFile);
 }
 
 
@@ -99,7 +113,9 @@ void  CRandomMaps::InitRandomMap(struct SRandomMapParams & a2) {
 bool  CRandomMaps::GenerateRandomMap(void) {
   
   if ( !*((_BYTE *)this + 4) )
+  {
     return 0;
+  }
   GenerateRandomMap(*((struct IMapGeneratorHost **)this + 2));
   CMapGeneratorHost::UploadChunks(*((void ***)this + 2), *((struct S4::CMapFile **)this + 4));
   return 1;
@@ -124,12 +140,16 @@ bool  CRandomMaps::GetParamsFromMapKey(struct SRandomMapParams * a1, wchar_t con
   wchar_t Destination[1024]; // [esp+Ch] [ebp-804h] BYREF
 
   if ( !a1 )
+  {
     return 0;
+  }
   memset(a1, 0, 0xB8u);
   wcsncpy(Destination, Source, 0x3FFu);
   Destination[1023] = 0;
   if ( !(unsigned __int8)IsValidMapKey(Destination) )
+  {
     return 0;
+  }
   DecodeMapKey(a1, Destination);
   return 1;
 }
@@ -154,9 +174,13 @@ void  CRandomMaps::GetMapKeyFromParams(struct SRandomMapParams * a2, wchar_t * a
   if ( a3 )
   {
     if ( a2 )
+    {
       GenerateMapKey(a2, a3);
+    }
     else
+    {
       *a3 = 0;
+    }
   }
 }
 
@@ -170,18 +194,24 @@ bool  CRandomMaps::IsRandomMapFileName(wchar_t const * String, std::wstring * a2
   signed int v5; // [esp+4h] [ebp-8h]
 
   if ( !String )
+  {
     goto LABEL_21;
+  }
   v5 = wcslen(String);
   if ( v5 >= 3 && *String == 82 && String[1] == 68 && String[2] == 95 )
   {
     if ( a2 )
+    {
       std::wstring::operator=(a2, String + 3);
+    }
     return 1;
   }
   if ( v5 >= 2 && *String == 91 && String[v5 - 1] == 93 )
   {
     if ( !a2 )
+    {
       return 1;
+    }
     std::wstring::operator=(a2, String + 1);
     v3 = std::wstring::size(a2);
     std::wstring::resize(v3 - 1);
@@ -190,7 +220,9 @@ bool  CRandomMaps::IsRandomMapFileName(wchar_t const * String, std::wstring * a2
   if ( v5 >= 2 && *String == 60 && String[v5 - 1] == 62 )
   {
     if ( !a2 )
+    {
       return 1;
+    }
     std::wstring::operator=(a2, String + 1);
     v4 = std::wstring::size(a2);
     std::wstring::resize(v4 - 1);
@@ -200,7 +232,9 @@ bool  CRandomMaps::IsRandomMapFileName(wchar_t const * String, std::wstring * a2
   {
 LABEL_21:
     if ( a2 )
+    {
       std::wstring::operator=(a2, (wchar_t *)L"random map");
+    }
     return 0;
   }
 }
@@ -213,7 +247,9 @@ bool  CRandomMaps::IsRandomMapFileName(std::wstring const & a2, std::wstring * a
   wchar_t *v5; // [esp+4h] [ebp-4h]
 
   if ( !std::wstring::length(a2) )
+  {
     return this->IsRandomMapFileName2(this, 0, a3);
+  }
   v5 = std::wstring::c_str(a2);
   return this->IsRandomMapFileName2(this, v5, a3);
 }
@@ -232,7 +268,9 @@ void  CRandomMaps::GenerateRandomMapFileName(std::wstring & a1, wchar_t const * 
   int v8; // [esp+7Ch] [ebp-4h]
 
   if ( !String || !*String )
+  {
     String = L"random map";
+  }
   v4 = std::wstring::wstring(v5, String);
   v8 = 0;
   v3 = std::wstring::wstring(v6, (wchar_t *)L"RD_");
@@ -321,7 +359,9 @@ void  CRandomMaps::AdjustRandomMapFileName(std::wstring & arg0) {
     v5 = std::wstring::substr((int)&v15, v9 - 4, 4u);
     v10 = 3;
     if ( (unsigned __int8)std::operator==<wchar_t>(v5, v6) )
+    {
       v8 = 1;
+    }
   }
   if ( (v10 & 2) != 0 )
   {
@@ -330,7 +370,9 @@ void  CRandomMaps::AdjustRandomMapFileName(std::wstring & arg0) {
   }
   v19 = 1;
   if ( (v10 & 1) != 0 )
+  {
     std::wstring::~wstring(&v14);
+  }
   if ( v8 )
   {
     a2 = (std::wstring *)std::wstring::substr((int)&v13, 0, v9 - 4);
@@ -362,9 +404,13 @@ void  CRandomMaps::AdjustRandomMapFileName(std::wstring & arg0) {
 unsigned short const *  CRandomMaps::GetPreviewData(void) {
   
   if ( *((_BYTE *)this + 4) )
+  {
     return *((_DWORD *)this + 3);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -373,9 +419,13 @@ unsigned short const *  CRandomMaps::GetPreviewData(void) {
 struct SRandomMapInfo const *  CRandomMaps::GetRandomMapInfo(void) {
   
   if ( *((_BYTE *)this + 4) && this[2] )
+  {
     return CMapGeneratorHost::GetRandomMapInfo(this[2]);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

@@ -10,12 +10,7 @@ void  AdvXMLParser::Bookmark::GetSubString(std::string & a2, int a3) {
   void *v3; // [esp+0h] [ebp-28h]
   _BYTE v5[28]; // [esp+8h] [ebp-20h] BYREF
 
-  if ( a3 + *((_DWORD *)*this + 2) < (unsigned int)this[1]
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\xml\\Reader.inl",
-         155,
-         "m_reader.m_szSourceCurrent + nNumEndSkip >= m_szSourceCurrent") == 1 )
+  if ( a3 + *((_DWORD *)*this + 2) < (unsigned int)this[1] && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\xml\\Reader.inl", 155, "m_reader.m_szSourceCurrent + nNumEndSkip >= m_szSourceCurrent") == 1 )
   {
     __debugbreak();
   }
@@ -40,7 +35,7 @@ void  AdvXMLParser::Bookmark::Reset(void) {
 
 
 // address=[0x2f27ea0]
-// Decompiled from AdvXMLParser::Bookmark *__thiscall AdvXMLParser::Bookmark::Bookmark(  AdvXMLParser::Bookmark *this,  struct AdvXMLParser::Parser *a2)
+// Decompiled from AdvXMLParser::Bookmark *__thiscall AdvXMLParser::Bookmark::Bookmark(AdvXMLParser::Bookmark *this, struct AdvXMLParser::Parser *a2)
  AdvXMLParser::Bookmark::Bookmark(class AdvXMLParser::Parser & a2) {
   
   *(_DWORD *)this = a2;

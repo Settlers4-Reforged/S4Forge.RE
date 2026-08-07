@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CGeologistRole::New(std::istream & a1) {
   
   if ( operator new(0x54u) )
+  {
     return CGeologistRole::CGeologistRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -44,12 +48,16 @@ void  CGeologistRole::LogicUpdateJob(class CSettler * a2) {
       if ( debug )
       {
         if ( DEBUG_FLAGS[dword_41520CC] )
+        {
           BBSupportTracePrint(0, "LogicUpdateJob RESOURCE_GATHERING");
+        }
       }
       goto LABEL_18;
     case 0x10:
       if ( debug && DEBUG_FLAGS[dword_41520CC] )
+      {
         BBSupportTracePrint(0, "LogicUpdateJob WORK");
+      }
       if ( *((_DWORD *)this + 6) )
       {
         CGeologistRole::SetSign(this, a2);
@@ -62,7 +70,9 @@ void  CGeologistRole::LogicUpdateJob(class CSettler * a2) {
       goto LABEL_18;
     case 0x1F:
       if ( debug && DEBUG_FLAGS[dword_41520CC] )
+      {
         BBSupportTracePrint(0, "LogicUpdateJob SEARCH");
+      }
 LABEL_18:
       result = (*(int (__thiscall **)(CGeologistRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
       break;
@@ -83,13 +93,17 @@ void  CGeologistRole::PostLoadInit(class CSettler * a2) {
 
   CWarMap::AddEntity(a2);
   if ( std::list<CEntityTask>::size((void *)(this + 48)) )
+  {
     IMovingEntity::SetToDoList(a2, this + 48);
+  }
   IMovingEntity::ResetToDoList(this);
   while ( 1 )
   {
     result = *(unsigned __int8 *)(v4 + 12);
     if ( !*(_BYTE *)(v4 + 12) )
+    {
       break;
+    }
     IMovingEntity::IncToDoListIter(a2);
     --*(_BYTE *)(v4 + 12);
   }
@@ -126,7 +140,9 @@ void  CGeologistRole::PostLoadInit(class CSettler * a2) {
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
   operator^<unsigned int>(a2, v4);
-  for ( i = 0; i < v4[0]; ++i )
+  for ( i = 0;
+        i < v4[0];
+        ++i )
   {
     v2 = CEntityTask::Load(a2);
     std::list<CEntityTask>::push_back(v2);
@@ -188,7 +204,9 @@ void  CGeologistRole::Store(std::ostream & a2) {
     LOBYTE(v26) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v8);
     if ( !v24 )
+    {
       break;
+    }
     v20 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(v10, v4, v5);
     (*(void (__thiscall **)(int, struct std::ostream *))(*(_DWORD *)v20 + 4))(v20, a2);
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v10);
@@ -210,7 +228,9 @@ void  CGeologistRole::Store(std::ostream & a2) {
       LOBYTE(v26) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v7);
       if ( !v23 )
+      {
         break;
+      }
       ActualIter = (std::_Iterator_base12 *)IMovingEntity::GetActualIter(v13, (int)v6);
       v11 = ActualIter;
       LOBYTE(v26) = 4;
@@ -218,7 +238,9 @@ void  CGeologistRole::Store(std::ostream & a2) {
       LOBYTE(v26) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v6);
       if ( v22 )
+      {
         break;
+      }
       LOBYTE(v25) = v25 + 1;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v9);
     }
@@ -227,7 +249,9 @@ void  CGeologistRole::Store(std::ostream & a2) {
   }
   v2 = (unsigned __int8)v25;
   if ( v2 >= std::list<CEntityTask>::size(v21 + 12) )
+  {
     LOBYTE(v25) = 0;
+  }
   operator^<unsigned char>(a2, (int)&v25);
   operator^<int>((int)a2, v21 + 15);
   operator^<int>((int)a2, v21 + 16);
@@ -290,7 +314,9 @@ class CGeologistRole * __cdecl CGeologistRole::Load(std::istream & a1) {
   *(_DWORD *)this = &CGeologistRole::_vftable_;
   v3 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
   if ( !IEntity::FlagBits(v3, ENTITY_FLAG_ON_BOARD) )
+  {
     CWarMap::RemoveEntity(v3);
+  }
   if ( *((_DWORD *)this + 6) )
   {
     v1 = Y16X16::UnpackXFast(*((_DWORD *)this + 6));
@@ -313,7 +339,9 @@ void  CGeologistRole::GetNextJob(class CSettler * a2) {
   v3 = this;
   IMovingEntity::IncToDoListIter(a2);
   if ( IMovingEntity::IsEndIter(a2) )
+  {
     IMovingEntity::ResetToDoList(v3);
+  }
   return (*(int (__thiscall **)(CGeologistRole *, struct CSettler *))(*(_DWORD *)v3 + 40))(v3, a2);
 }
 
@@ -341,17 +369,25 @@ void  CGeologistRole::TakeJob(class CSettler * a2) {
     {
       case 7:
         if ( debug && DEBUG_FLAGS[dword_41520CC] )
+        {
           BBSupportTracePrint(0, "TakeJob GO");
+        }
         IAnimatedEntity::SetFrame(1);
         if ( *(__int16 *)(this + 14) > 0 || *(__int16 *)(this + 16) > 0 )
+        {
           ISettlerRole::NewDestination((ISettlerRole *)this, a2, *(__int16 *)(this + 14), *(__int16 *)(this + 16), 0);
+        }
         goto LABEL_27;
       case 0xA:
         if ( debug && DEBUG_FLAGS[dword_41520CC] )
+        {
           BBSupportTracePrint(0, "TakeJob GO");
+        }
         IAnimatedEntity::SetFrame(1);
         if ( *(__int16 *)(this + 14) > 0 || *(__int16 *)(this + 16) > 0 )
+        {
           ISettlerRole::NewDestination((ISettlerRole *)this, a2, *(__int16 *)(this + 14), *(__int16 *)(this + 16), 0);
+        }
 LABEL_27:
         IMovingEntity::WalkToXY(a2, *(_DWORD *)(this + 24), 0);
         *(_BYTE *)(this + 4) = 6;
@@ -360,7 +396,9 @@ LABEL_27:
         return;
       case 0xD:
         if ( debug && DEBUG_FLAGS[dword_41520CC] )
+        {
           BBSupportTracePrint(0, "TakeJob SEARCH");
+        }
         if ( CGeologistRole::SearchPosition((CGeologistRole *)this, a2) )
         {
           (*(void (__thiscall **)(int, COleCmdUI *))(*(_DWORD *)this + 36))(this, a2);
@@ -384,7 +422,9 @@ LABEL_27:
         return;
       case 0x10:
         if ( debug && DEBUG_FLAGS[dword_41520CC] )
+        {
           BBSupportTracePrint(0, "TakeJob WORK");
+        }
         goto LABEL_12;
       case 0x11:
         IMovingEntity::SetDisplacementCosts(0);
@@ -397,15 +437,16 @@ LABEL_27:
         return;
       case 0x1F:
         if ( debug && DEBUG_FLAGS[dword_41520CC] )
+        {
           BBSupportTracePrint(0, "TakeJob SEARCH");
+        }
         if ( (int)++*(_DWORD *)(this + 76) > 5 )
+        {
           *(_DWORD *)(this + 76) = 0;
+        }
         v6 = IEntity::Y(a2);
         v3 = IEntity::X(a2);
-        if ( CGeologistRole::CheckPosition((CGeologistRole *)this, v3, v6, 0, 1)
-          && (v7 = IEntity::Y(a2) - 1,
-              v4 = IEntity::X(a2),
-              CGeologistRole::CheckPosition((CGeologistRole *)this, v4, v7, 1, 1)) )
+        if ( CGeologistRole::CheckPosition((CGeologistRole *)this, v3, v6, 0, 1) && (v7 = IEntity::Y(a2) - 1, v4 = IEntity::X(a2), CGeologistRole::CheckPosition((CGeologistRole *)this, v4, v7, 1, 1)) )
         {
 LABEL_12:
           IMovingEntity::SetDisplacementCosts(10);
@@ -439,17 +480,11 @@ void  CGeologistRole::Init(class CSettler * a2) {
   
   CGeologistRole *result; // eax
 
-  if ( IEntity::FlagBits(a1, ENTITY_FLAG_Offered|ENTITY_FLAG_ATTACHED)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Settler\\GeologistRole.cpp",
-         239,
-         "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED | ENTITY_FLAG_OFFERED )") == 1 )
+  if ( IEntity::FlagBits(a1, ENTITY_FLAG_Offered|ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\GeologistRole.cpp", 239, "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED | ENTITY_FLAG_OFFERED )") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_uHomeEntityId
-    && BBSupportDbgReport(2, "MapObjects\\Settler\\GeologistRole.cpp", 240, "!m_uHomeEntityId") == 1 )
+  if ( this->m_uHomeEntityId && BBSupportDbgReport(2, "MapObjects\\Settler\\GeologistRole.cpp", 240, "!m_uHomeEntityId") == 1 )
   {
     __debugbreak();
   }
@@ -612,12 +647,7 @@ void  CGeologistRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEve
         v32 = *(unsigned __int16 *)(this + 32);
         v24 = IEntity::ID();
         v14 = IEntity::OwnerId((unsigned __int8 *)a2);
-        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(
-                       g_pAI,
-                       18,
-                       v14,
-                       v24,
-                       v32);
+        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v14, v24, v32);
       }
       else
       {
@@ -685,10 +715,16 @@ bool  CGeologistRole::SearchPosition(class CSettler * a2) {
   v15 = IEntity::Y(a2);
   v6 = CWorldManager::SectorId(v14, v15);
   if ( CWorldManager::SectorId(v14, v15) != v6 )
+  {
     return 0;
+  }
   if ( CWorldManager::SectorId(v14, v15 - 1) != v6 )
+  {
     return 0;
-  for ( i = *((_DWORD *)this + 18); i < *((_DWORD *)this + 18) + 64; ++i )
+  }
+  for ( i = *((_DWORD *)this + 18);
+        i < *((_DWORD *)this + 18) + 64;
+        ++i )
   {
     v13 = v14 + CSpiralOffsets::DeltaX(i);
     v12 = v15 + CSpiralOffsets::DeltaY(i);
@@ -705,10 +741,14 @@ bool  CGeologistRole::SearchPosition(class CSettler * a2) {
       }
     }
     if ( v7 > 31 )
+    {
       break;
+    }
   }
   if ( v11 == -1 )
+  {
     return 0;
+  }
   if ( *((_DWORD *)this + 6) )
   {
     v3 = Y16X16::UnpackXFast(*((_DWORD *)this + 6));
@@ -735,27 +775,25 @@ bool  CGeologistRole::CheckResource(class CSettler * a2) {
 
   v4 = IEntity::X(a2);
   v5 = IEntity::Y(a2) - 1;
-  if ( CWorldManager::FlagBits(v4, v5, 0x59u)
-    || (CWorldManager::Ground(v4, v5) & 0xF0) != 0x20
-    || CWorldManager::ObjectId(v4, v5)
-    || CWorldManager::ObjectId(v4 - 1, v5)
-    || CWorldManager::ObjectId(v4 + 1, v5)
-    || CWorldManager::ObjectId(v4, v5 - 1)
-    || CWorldManager::ObjectId(v4, v5 + 1)
-    || CWorldManager::ObjectId(v4 - 1, v5 - 1)
-    || CWorldManager::ObjectId(v4 + 1, v5 + 1) )
+  if ( CWorldManager::FlagBits(v4, v5, 0x59u) || (CWorldManager::Ground(v4, v5) & 0xF0) != 0x20 || CWorldManager::ObjectId(v4, v5) || CWorldManager::ObjectId(v4 - 1, v5) || CWorldManager::ObjectId(v4 + 1, v5) || CWorldManager::ObjectId(v4, v5 - 1) || CWorldManager::ObjectId(v4, v5 + 1) || CWorldManager::ObjectId(v4 - 1, v5 - 1) || CWorldManager::ObjectId(v4 + 1, v5 + 1) )
   {
     if ( debug && DEBUG_FLAGS[dword_41520CC] )
+    {
       BBSupportTracePrint(0, "CheckResource... NO");
+    }
     CGeologistRole::SearchPosition(this, (struct CSettler *)a2);
     return 0;
   }
   else
   {
     if ( !debug )
+    {
       return 1;
+    }
     if ( DEBUG_FLAGS[dword_41520CC] )
+    {
       BBSupportTracePrint(0, "CheckResource... YES");
+    }
     return 1;
   }
 }
@@ -803,11 +841,15 @@ void  CGeologistRole::SetSign(class CSettler * a2) {
   v22 = CWorldManager::ResourceType(v24, v25);
   v32 = CWorldManager::ResourceAmount(v24, v25, v22);
   if ( v32 > 0 )
+  {
     --v32;
+  }
   v33 = v32 / 5;
   v29 = 193;
   if ( v33 >= 3 && BBSupportDbgReport(2, "MapObjects\\Settler\\GeologistRole.cpp", 1062, "iAmountClass < 3") == 1 )
+  {
     __debugbreak();
+  }
   switch ( v22 )
   {
     case 16:
@@ -841,7 +883,9 @@ void  CGeologistRole::SetSign(class CSettler * a2) {
       break;
   }
   if ( v28 == 193 )
+  {
     return LocalPlayerId;
+  }
   v27 = 1;
   v26 = 0;
   v30 = IEntity::X(a2);
@@ -849,15 +893,7 @@ void  CGeologistRole::SetSign(class CSettler * a2) {
   if ( v33 == 2 )
   {
     v21 = CLogic::Effects((DWORD *)g_pLogic);
-    (*(void (__thiscall **)(int, _DWORD, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v21 + 16))(
-      v21,
-      0,
-      38,
-      v30,
-      v31,
-      0,
-      0,
-      0);
+    (*(void (__thiscall **)(int, _DWORD, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v21 + 16))(v21, 0, 38, v30, v31, 0, 0, 0);
   }
   while ( (int)CSpiralOffsets::Radius(v27) < 4 )
   {
@@ -869,9 +905,7 @@ void  CGeologistRole::SetSign(class CSettler * a2) {
       if ( v18 )
       {
         v23 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v18);
-        if ( IEntity::ObjType(v23) == 32
-          && IEntity::Type((unsigned __int16 *)v23) >= v29
-          && IEntity::Type((unsigned __int16 *)v23) <= v29 + 3 )
+        if ( IEntity::ObjType(v23) == 32 && IEntity::Type((unsigned __int16 *)v23) >= v29 && IEntity::Type((unsigned __int16 *)v23) <= v29 + 3 )
         {
           ++v26;
         }
@@ -882,7 +916,9 @@ void  CGeologistRole::SetSign(class CSettler * a2) {
   v5 = IEntity::OwnerId((unsigned __int8 *)a2);
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   if ( v5 != LocalPlayerId )
+  {
     return LocalPlayerId;
+  }
   if ( v26 < 5 )
   {
     if ( v26 )
@@ -961,16 +997,11 @@ bool  CGeologistRole::CheckPosition(int a2, int a3, bool a4, bool a5) {
   unsigned int v7; // [esp+Ch] [ebp-4h]
 
   if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) )
+  {
     return 0;
+  }
   v6 = CWorldManager::Index(a2, a3);
-  if ( (CWorldManager::Ground(a2, a3) & 0xF0) != 0x20
-    || CWorldManager::ObjectId(a2, a3)
-    || CWorldManager::ObjectId(a2 - 1, a3)
-    || CWorldManager::ObjectId(a2 + 1, a3)
-    || CWorldManager::ObjectId(a2, a3 - 1)
-    || CWorldManager::ObjectId(a2, a3 + 1)
-    || CWorldManager::ObjectId(a2 - 1, a3 - 1)
-    || CWorldManager::ObjectId(a2 + 1, a3 + 1) )
+  if ( (CWorldManager::Ground(a2, a3) & 0xF0) != 0x20 || CWorldManager::ObjectId(a2, a3) || CWorldManager::ObjectId(a2 - 1, a3) || CWorldManager::ObjectId(a2 + 1, a3) || CWorldManager::ObjectId(a2, a3 - 1) || CWorldManager::ObjectId(a2, a3 + 1) || CWorldManager::ObjectId(a2 - 1, a3 - 1) || CWorldManager::ObjectId(a2 + 1, a3 + 1) )
   {
     return 0;
   }
@@ -978,15 +1009,15 @@ bool  CGeologistRole::CheckPosition(int a2, int a3, bool a4, bool a5) {
   if ( a5 )
   {
     if ( !CWorldManager::FlagBits(v6, 0x20u) )
+    {
       return 0;
+    }
   }
   else
   {
     v7 = 121;
   }
-  return !CWorldManager::FlagBits(v6, v7)
-      && (!CWorldManager::MapObjectId(a2, a3) || a5)
-      && CWorldManager::ObjectId(a2, a3) == 0;
+  return !CWorldManager::FlagBits(v6, v7) && (!CWorldManager::MapObjectId(a2, a3) || a5) && CWorldManager::ObjectId(a2, a3) == 0;
 }
 
 

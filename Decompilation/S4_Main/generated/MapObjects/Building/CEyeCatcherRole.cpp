@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CEyeCatcherRole::New(std::istream & a1) {
   
   if ( operator new(0x17Cu) )
+  {
     return CEyeCatcherRole::CEyeCatcherRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -92,7 +96,7 @@ void  CEyeCatcherRole::LogicUpdate(class CBuilding * a2) {
 
 
 // address=[0x150a120]
-// Decompiled from CEyeCatcherRole *__thiscall CEyeCatcherRole::FillGfxInfo(  CEyeCatcherRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
+// Decompiled from CEyeCatcherRole *__thiscall CEyeCatcherRole::FillGfxInfo(CEyeCatcherRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
 void  CEyeCatcherRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
@@ -106,13 +110,10 @@ void  CEyeCatcherRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo &
   CGfxManager::GetBuildingGfxInfo((int)a3, v3, v5, 1, (int)this + 76);
   result = this;
   if ( !*((_BYTE *)this + 356) )
+  {
     return result;
-  CGfxManager::GetEffectGfxInfo(
-    (CGfxManager *)g_pGfxManager,
-    (struct SGfxObjectInfo *)v7,
-    *((unsigned __int8 *)this + 356),
-    0,
-    *((unsigned __int8 *)this + 359));
+  }
+  CGfxManager::GetEffectGfxInfo((CGfxManager *)g_pGfxManager, (struct SGfxObjectInfo *)v7, *((unsigned __int8 *)this + 356), 0, *((unsigned __int8 *)this + 359));
   *((_DWORD *)a3 + 26) = v7[0];
   *((_DWORD *)a3 + 27) = v7[1];
   *((_DWORD *)a3 + 28) = *((__int16 *)this + 180);
@@ -131,7 +132,9 @@ void  CEyeCatcherRole::Init(class CBuilding * a2) {
   IBuildingRole::InitCommon((int)a2);
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( result )
+  {
     return (*(int (__thiscall **)(CEyeCatcherRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
+  }
   return result;
 }
 
@@ -180,7 +183,9 @@ void  CEyeCatcherRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cBuildingInfo.? = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
   v8 = 604;
   if ( !a3 )
+  {
     v8 = 602;
+  }
   CEvn_Event::CEvn_Event(&v9, v8, 0, (unsigned int)&g_cBuildingInfo, 0);
   v10 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v9);
@@ -232,7 +237,7 @@ void  CEyeCatcherRole::Store(std::ostream & a2) {
 // [Decompilation failed for static unsigned long CEyeCatcherRole::m_iClassID]
 
 // address=[0x14fd1f0]
-// Decompiled from void __thiscall CEyeCatcherRole::ConvertEventIntoGoal(  CEyeCatcherRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
+// Decompiled from void __thiscall CEyeCatcherRole::ConvertEventIntoGoal(CEyeCatcherRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CEyeCatcherRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;

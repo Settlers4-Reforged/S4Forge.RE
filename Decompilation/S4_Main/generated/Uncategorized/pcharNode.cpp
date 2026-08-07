@@ -13,9 +13,13 @@
     *((_DWORD *)this + 1) = operator new(a3, (struct _HeapManager *)&unk_4731E94, 0);
     *((_DWORD *)this + 2) = a3;
     if ( *((_DWORD *)this + 1) )
+    {
       und_memcpy(*((char **)this + 1), a2, a3);
+    }
     else
+    {
       *((_DWORD *)this + 2) = 0;
+    }
   }
   else
   {
@@ -31,9 +35,13 @@
 char  pcharNode::getLastChar(void)const {
   
   if ( *((_DWORD *)this + 2) )
+  {
     return *(_BYTE *)(*((_DWORD *)this + 1) + *((_DWORD *)this + 2) - 1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

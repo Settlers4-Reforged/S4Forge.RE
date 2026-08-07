@@ -23,7 +23,9 @@ void  CSurfaceV3::Release(void) {
 
   result = this;
   if ( *((_DWORD *)this + 2) )
+  {
     return (CSurfaceV3 *)(*(int (__stdcall **)(_DWORD))(**((_DWORD **)this + 2) + 8))(*((_DWORD *)this + 2));
+  }
   return result;
 }
 
@@ -59,13 +61,7 @@ long  CSurfaceV3::ClearSurface(class CBlitFX * a2) {
       do
       {
         BlitStructPtr = CBlitFX::GetBlitStructPtr(a2);
-        v6 = (*(int (__stdcall **)(_DWORD, _DWORD, _DWORD, _DWORD, int, CBlitFX *))(**((_DWORD **)this + 2) + 20))(
-               *((_DWORD *)this + 2),
-               0,
-               0,
-               0,
-               1536,
-               BlitStructPtr);
+        v6 = (*(int (__stdcall **)(_DWORD, _DWORD, _DWORD, _DWORD, int, CBlitFX *))(**((_DWORD **)this + 2) + 20))(*((_DWORD *)this + 2), 0, 0, 0, 1536, BlitStructPtr);
       }
       while ( v6 == -2005532132 );
     }
@@ -78,13 +74,7 @@ long  CSurfaceV3::ClearSurface(class CBlitFX * a2) {
       do
       {
         v3 = CBlitFX::GetBlitStructPtr((CBlitFX *)&s_cBlitFx);
-        v6 = (*(int (__stdcall **)(_DWORD, _DWORD, _DWORD, _DWORD, int, CBlitFX *))(**((_DWORD **)this + 2) + 20))(
-               *((_DWORD *)this + 2),
-               0,
-               0,
-               0,
-               1536,
-               v3);
+        v6 = (*(int (__stdcall **)(_DWORD, _DWORD, _DWORD, _DWORD, int, CBlitFX *))(**((_DWORD **)this + 2) + 20))(*((_DWORD *)this + 2), 0, 0, 0, 1536, v3);
       }
       while ( v6 == -2005532132 );
     }
@@ -109,14 +99,7 @@ long  CSurfaceV3::ClearSurface(struct tagRECT a2, class CBlitFX * a3) {
       do
       {
         BlitStructPtr = CBlitFX::GetBlitStructPtr(a3);
-        v7 = (*(int (__stdcall **)(_DWORD, struct tagRECT *, _DWORD, _DWORD, int, CBlitFX *))(**((_DWORD **)this + 2)
-                                                                                            + 20))(
-               *((_DWORD *)this + 2),
-               &a2,
-               0,
-               0,
-               1536,
-               BlitStructPtr);
+        v7 = (*(int (__stdcall **)(_DWORD, struct tagRECT *, _DWORD, _DWORD, int, CBlitFX *))(**((_DWORD **)this + 2) + 20))(*((_DWORD *)this + 2), &a2, 0, 0, 1536, BlitStructPtr);
       }
       while ( v7 == -2005532132 );
     }
@@ -129,14 +112,7 @@ long  CSurfaceV3::ClearSurface(struct tagRECT a2, class CBlitFX * a3) {
       do
       {
         v4 = CBlitFX::GetBlitStructPtr((CBlitFX *)&s_cBlitFx);
-        v7 = (*(int (__stdcall **)(_DWORD, struct tagRECT *, _DWORD, _DWORD, int, CBlitFX *))(**((_DWORD **)this + 2)
-                                                                                            + 20))(
-               *((_DWORD *)this + 2),
-               &a2,
-               0,
-               0,
-               1536,
-               v4);
+        v7 = (*(int (__stdcall **)(_DWORD, struct tagRECT *, _DWORD, _DWORD, int, CBlitFX *))(**((_DWORD **)this + 2) + 20))(*((_DWORD *)this + 2), &a2, 0, 0, 1536, v4);
       }
       while ( v7 == -2005532132 );
     }
@@ -147,7 +123,7 @@ long  CSurfaceV3::ClearSurface(struct tagRECT a2, class CBlitFX * a3) {
 
 
 // address=[0x2f870b0]
-// Decompiled from int __thiscall CSurfaceV3::Blt(  CSurfaceV3 *this,  struct tagRECT *a2,  struct CSurface *a3,  struct tagRECT *a4,  unsigned int a5,  struct _DDBLTFX *a6)
+// Decompiled from int __thiscall CSurfaceV3::Blt(CSurfaceV3 *this, struct tagRECT *a2, struct CSurface *a3, struct tagRECT *a4, unsigned int a5, struct _DDBLTFX *a6)
 long  CSurfaceV3::Blt(struct tagRECT * a2, class CSurface * a3, struct tagRECT * a4, unsigned long a5, struct _DDBLTFX * a6) {
   
   int v8; // [esp+4h] [ebp-4h]
@@ -155,13 +131,9 @@ long  CSurfaceV3::Blt(struct tagRECT * a2, class CSurface * a3, struct tagRECT *
   do
   {
     do
-      v8 = (*(int (__stdcall **)(_DWORD, struct tagRECT *, _DWORD, struct tagRECT *, unsigned int, struct _DDBLTFX *))(**((_DWORD **)this + 2) + 20))(
-             *((_DWORD *)this + 2),
-             a2,
-             *((_DWORD *)a3 + 2),
-             a4,
-             a5,
-             a6);
+    {
+      v8 = (*(int (__stdcall **)(_DWORD, struct tagRECT *, _DWORD, struct tagRECT *, unsigned int, struct _DDBLTFX *))(**((_DWORD **)this + 2) + 20))(*((_DWORD *)this + 2), a2, *((_DWORD *)a3 + 2), a4, a5, a6);
+    }
     while ( v8 == -2005532132 );
   }
   while ( v8 == -2005532242 );
@@ -186,12 +158,9 @@ long  CSurfaceV3::Lock(unsigned int & a2, void * & a3, bool a4) {
   do
   {
     do
-      v6 = (*(int (__stdcall **)(_DWORD, _DWORD, void *, int, _DWORD))(**((_DWORD **)this + 2) + 100))(
-             *((_DWORD *)this + 2),
-             0,
-             &unk_46C678C,
-             33,
-             0);
+    {
+      v6 = (*(int (__stdcall **)(_DWORD, _DWORD, void *, int, _DWORD))(**((_DWORD **)this + 2) + 100))(*((_DWORD *)this + 2), 0, &unk_46C678C, 33, 0);
+    }
     while ( v6 == -2005532132 );
   }
   while ( v6 == -2005532242 );
@@ -218,7 +187,9 @@ long  CSurfaceV3::GetDC(struct HDC__ * * a2) {
   do
   {
     do
+    {
       v4 = (*(int (__stdcall **)(_DWORD, HDC *))(**((_DWORD **)this + 2) + 68))(*((_DWORD *)this + 2), a2);
+    }
     while ( v4 == -2005532132 );
   }
   while ( v4 == -2005532242 );
@@ -230,15 +201,12 @@ long  CSurfaceV3::GetDC(struct HDC__ * * a2) {
 // Decompiled from int __thiscall CSurfaceV3::ReleaseDC(CSurfaceV3 *this, HDC a2)
 long  CSurfaceV3::ReleaseDC(struct HDC__ * a2) {
   
-  return (*(int (__thiscall **)(_DWORD, _DWORD, HDC))(**((_DWORD **)this + 2) + 104))(
-           *((_DWORD *)this + 2),
-           *((_DWORD *)this + 2),
-           a2);
+  return (*(int (__thiscall **)(_DWORD, _DWORD, HDC))(**((_DWORD **)this + 2) + 104))(*((_DWORD *)this + 2), *((_DWORD *)this + 2), a2);
 }
 
 
 // address=[0x2f87250]
-// Decompiled from int __thiscall CSurfaceV3::CreateSurface(  CSurfaceV3 *this,  void *a2,  int a3,  int a4,  bool a5,  bool a6,  bool a7,  int a8,  bool a9,  bool a10,  bool a11)
+// Decompiled from int __thiscall CSurfaceV3::CreateSurface(CSurfaceV3 *this, void *a2, int a3, int a4, bool a5, bool a6, bool a7, int a8, bool a9, bool a10, bool a11)
 long  CSurfaceV3::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, bool a7, int a8, bool a9, bool a10, bool a11) {
   
   dword_46C6790 = 1;
@@ -291,11 +259,17 @@ long  CSurfaceV3::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, boo
       dword_46C67F4 = 64;
     }
     if ( a5 )
+    {
       dword_46C67F4 |= 0x4000u;
+    }
     else
+    {
       dword_46C67F4 |= 0x800u;
+    }
     if ( a6 && !a7 )
+    {
       dword_46C67F4 |= 0x2000u;
+    }
     if ( a10 && a11 )
     {
       dword_46C67F4 |= 0x4018u;
@@ -303,11 +277,7 @@ long  CSurfaceV3::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, boo
       dword_46C67A0 = 1;
     }
   }
-  return (*(int (__stdcall **)(void *, void *, char *, _DWORD))(*(_DWORD *)a2 + 24))(
-           a2,
-           &unk_46C678C,
-           (char *)this + 8,
-           0);
+  return (*(int (__stdcall **)(void *, void *, char *, _DWORD))(*(_DWORD *)a2 + 24))(a2, &unk_46C678C, (char *)this + 8, 0);
 }
 
 
@@ -315,10 +285,7 @@ long  CSurfaceV3::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, boo
 // Decompiled from int __thiscall CSurfaceV3::SetColorKey(CSurfaceV3 *this, unsigned int a2, struct _DDCOLORKEY *a3)
 long  CSurfaceV3::SetColorKey(unsigned long a2, struct _DDCOLORKEY * a3) {
   
-  return (*(int (__stdcall **)(_DWORD, unsigned int, struct _DDCOLORKEY *))(**((_DWORD **)this + 2) + 116))(
-           *((_DWORD *)this + 2),
-           a2,
-           a3);
+  return (*(int (__stdcall **)(_DWORD, unsigned int, struct _DDCOLORKEY *))(**((_DWORD **)this + 2) + 116))(*((_DWORD *)this + 2), a2, a3);
 }
 
 
@@ -372,10 +339,7 @@ long  CSurfaceV3::GetSurfaceSize(int & a2, int & a3) {
 // Decompiled from int __thiscall CSurfaceV3::SetClipper(CSurfaceV3 *this, struct IDirectDrawClipper *a2)
 long  CSurfaceV3::SetClipper(struct IDirectDrawClipper * a2) {
   
-  return (*(int (__thiscall **)(_DWORD, _DWORD, struct IDirectDrawClipper *))(**((_DWORD **)this + 2) + 112))(
-           *((_DWORD *)this + 2),
-           *((_DWORD *)this + 2),
-           a2);
+  return (*(int (__thiscall **)(_DWORD, _DWORD, struct IDirectDrawClipper *))(**((_DWORD **)this + 2) + 112))(*((_DWORD *)this + 2), *((_DWORD *)this + 2), a2);
 }
 
 
@@ -410,9 +374,13 @@ void *  CSurfaceV3::GetAttachedSurfacePtr(void) {
   v4[1] = this;
   v4[0] = 4;
   if ( (*(int (__stdcall **)(_DWORD, _DWORD *, int *))(**((_DWORD **)this + 2) + 48))(*((_DWORD *)this + 2), v4, &v2) )
+  {
     return 0;
+  }
   else
+  {
     return v2;
+  }
 }
 
 

@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateVictoryScreen::DynamicCreateFunc(void * a1) {
 
   C = (CStateVictoryScreen *)operator new(4u);
   if ( C )
+  {
     return CStateVictoryScreen::CStateVictoryScreen(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -37,8 +41,7 @@ class CGameState * __cdecl CStateVictoryScreen::DynamicCreateFunc(void * a1) {
   
   *(_DWORD *)this = &CStateVictoryScreen::_vftable_;
   IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 1);
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 12)
-    && BBSupportDbgReport(2, "main\\States\\StateVictoryScreen.cpp", 70, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 12) && BBSupportDbgReport(2, "main\\States\\StateVictoryScreen.cpp", 70, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -63,7 +66,9 @@ bool  CStateVictoryScreen::Perform(void) {
   }
   v1 = dword_4032130 + 30;
   if ( v1 >= timeGetTime() )
+  {
     return 1;
+  }
   dword_4032130 = timeGetTime();
   IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
   IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
@@ -80,7 +85,9 @@ bool  CStateVictoryScreen::OnEvent(class CEvn_Event & a2) {
 
   event = a2->m_iEventId;
   if ( event != 8 && event != 10 && event != 11 )
+  {
     return CGuiGameState::OnEvent(this, a2);
+  }
   CGameStateHandler::Next();
   return 1;
 }

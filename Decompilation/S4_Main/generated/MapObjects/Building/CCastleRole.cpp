@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CCastleRole::New(std::istream & a1) {
   
   if ( operator new(0x1C0u) )
+  {
     return CCastleRole::CCastleRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

@@ -49,8 +49,12 @@ unsigned int  CAIAgentGeologists::Execute(unsigned int a2, unsigned int a3) {
   v3 = CAINormalSectorAgent::SectorAI(v37);
   v33 = CAISectorAI::Reservoir(v3, 7);
   if ( !v33 && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 291, "pReservoir != 0") == 1 )
+  {
     __debugbreak();
-  for ( i = CAITaskForce::FirstEntity(v33); i; i = v20 )
+  }
+  for ( i = CAITaskForce::FirstEntity(v33);
+        i;
+        i = v20 )
   {
     v20 = CAIEntityInfo::Next(i);
     v32 = CAIEntityInfo::EntityId(i);
@@ -62,18 +66,24 @@ unsigned int  CAIAgentGeologists::Execute(unsigned int a2, unsigned int a3) {
     }
   }
   if ( CAITaskForce::NumberOfEntities(v31) <= 0 )
+  {
     return CAIAgent::ExecuteResult(0, 0x80u);
+  }
   v25 = IAIEnvironment::TickCounter();
   v4 = CAINormalSectorAgent::SectorAI(v37);
   v5 = CAISectorAI::PlayerAI(v4);
   v22 = IAIEnvironment::AlliancesPlayerEnemyBits(*(_DWORD *)(v5 + 12));
   v28 = 0;
-  for ( j = (CAIEntityInfo *)CAITaskForce::FirstEntity(v31); ; j = (CAIEntityInfo *)CAIEntityInfo::Next(j) )
+  for ( j = (CAIEntityInfo *)CAITaskForce::FirstEntity(v31);
+        ;
+        j = (CAIEntityInfo *)CAIEntityInfo::Next(j) )
   {
     v27 = j != 0;
     v26 = v28 < 10;
     if ( !v26 || !v27 )
+    {
       break;
+    }
     v34 = CAIEntityInfo::EntityId(j);
     v6 = CAIEntityInfo::TimeStamp(j);
     if ( v6 + 500 <= v25 || IAIEnvironment::MovingEntityIsWaiting(v34) )
@@ -103,7 +113,9 @@ LABEL_15:
           v39 = (struct _Cnd_internal_imp_t *)((char *)v39 + 1);
           v30 = (struct _Cnd_internal_imp_t *)((char *)v39 + 12);
           if ( (int)v30 >= IAIEnvironment::WorldWidth() )
+          {
             v30 = (struct _Cnd_internal_imp_t *)(IAIEnvironment::WorldWidth() - 1);
+          }
           while ( (int)v39 <= (int)v30 )
           {
             v29 = IAIEnvironment::WorldIndex((int)v39, (int)v35);

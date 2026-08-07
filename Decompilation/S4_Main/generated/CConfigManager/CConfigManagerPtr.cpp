@@ -11,17 +11,22 @@ class IConfigManager * __cdecl CConfigManagerPtr::GetInstance(void) {
   CConfigManager *C; // [esp+Ch] [ebp-10h]
 
   if ( CConfigManagerPtr::m_pConfigManager )
+  {
     return CConfigManagerPtr::m_pConfigManager;
-  if ( CConfigManagerPtr::m_bWasDeleted
-    && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1435, "!m_bWasDeleted") == 1 )
+  }
+  if ( CConfigManagerPtr::m_bWasDeleted && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1435, "!m_bWasDeleted") == 1 )
   {
     __debugbreak();
   }
   C = (CConfigManager *)operator new(0x1Cu, 1, "Source\\ConfigManager\\ConfigManager.cpp", 1437);
   if ( C )
+  {
     v1 = CConfigManager::CConfigManager(C);
+  }
   else
+  {
     v1 = 0;
+  }
   CConfigManagerPtr::m_pConfigManager = v1;
   return v1;
 }
@@ -33,15 +38,14 @@ void __cdecl CConfigManagerPtr::DeleteConfigManager(void) {
   
   if ( CConfigManagerPtr::m_pConfigManager )
   {
-    if ( CConfigManagerPtr::m_bWasDeleted
-      && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1452, "!m_bWasDeleted") == 1 )
+    if ( CConfigManagerPtr::m_bWasDeleted && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1452, "!m_bWasDeleted") == 1 )
     {
       __debugbreak();
     }
     if ( CConfigManagerPtr::m_pConfigManager )
-      ((void (__thiscall *)(CConfigManager *, int))CConfigManagerPtr::m_pConfigManager->dtor)(
-        CConfigManagerPtr::m_pConfigManager,
-        1);
+    {
+      ((void (__thiscall *)(CConfigManager *, int))CConfigManagerPtr::m_pConfigManager->dtor)(CConfigManagerPtr::m_pConfigManager, 1);
+    }
     CConfigManagerPtr::m_pConfigManager = 0;
   }
   CConfigManagerPtr::m_bWasDeleted = 1;

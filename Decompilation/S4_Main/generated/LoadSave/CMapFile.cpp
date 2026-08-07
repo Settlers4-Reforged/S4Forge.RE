@@ -4,7 +4,7 @@
 // Definitions for class CMapFile
 
 // address=[0x13da7f0]
-// Decompiled from struct CMapFile *__thiscall S4::CMapFile::CMapFile(S4::CMapFile *this, bool a2)
+// Decompiled from S4::CMapFile *__thiscall S4::CMapFile::CMapFile(S4::CMapFile *this, bool a2)
  S4::CMapFile::CMapFile(bool a2) {
   
   this->vftable = &S4::CMapFile::_vftable_;
@@ -18,7 +18,7 @@
   std::map<unsigned int,int>::map<unsigned int,int>(&this->m_vRefCounts);
   memset(this->m_uData, 0, sizeof(this->m_uData));
   this->m_bCompress = 0;
-  return (struct CMapFile *)this;
+  return this;
 }
 
 
@@ -28,7 +28,9 @@
   
   this->vftable = &S4::CMapFile::_vftable_;
   if ( this->m_b5 )
+  {
     S4::CMapFile::Close(this);
+  }
   std::map<unsigned int,int>::~map<unsigned int,int>(&this->m_vRefCounts);
   std::map<unsigned int,void *>::~map<unsigned int,void *>(&this->m_vLoadedChunks);
   std::wstring::~wstring(&this->m_swName);
@@ -48,7 +50,9 @@ void  S4::CMapFile::Open(std::wstring const & a2, int a3, bool a4) {
 
   v6 = 0;
   if ( this->m_bVirtual && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 143, "! m_bVirtual") == 1 )
+  {
     __debugbreak();
+  }
   std::wstring::operator=(&this->m_swName, a2);
   this->unk_78 = a3;
   this->m_b5 = 1;
@@ -109,9 +113,7 @@ void  S4::CMapFile::Close(void) {
 
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>(v4);
   v14 = 0;
-  v11 = std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::begin(
-          &this->m_vLoadedChunks,
-          (int)v3);
+  v11 = std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::begin(&this->m_vLoadedChunks, (int)v3);
   v10 = v11;
   LOBYTE(v14) = 1;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator=(v11);
@@ -119,20 +121,17 @@ void  S4::CMapFile::Close(void) {
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>(v3);
   while ( 1 )
   {
-    v9 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::end(
-                                    &this->m_vLoadedChunks,
-                                    (int)v2);
+    v9 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::end(&this->m_vLoadedChunks, (int)v2);
     v8 = v9;
     LOBYTE(v14) = 2;
-    v13 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator!=(
-            (std::_Iterator_base12 *)v4,
-            v9);
+    v13 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator!=((std::_Iterator_base12 *)v4, v9);
     LOBYTE(v14) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>(v2);
     if ( !v13 )
+    {
       break;
-    C = *(void **)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator->(v4)
-                 + 4);
+    }
+    C = *(void **)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator->(v4) + 4);
     operator delete[](C);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator++(v4);
   }
@@ -161,7 +160,9 @@ void  S4::CMapFile::Close(void) {
 void  S4::CMapFile::Virtualize(void) {
   
   if ( this->m_bVirtual && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 243, "! m_bVirtual") == 1 )
+  {
     __debugbreak();
+  }
   this->m_bVirtual = 1;
 }
 
@@ -186,7 +187,7 @@ void const *  S4::CMapFile::LoadChunk(unsigned int a2, unsigned int a3) {
 
 
 // address=[0x13dad70]
-// Decompiled from void *__thiscall S4::CMapFile::LoadChunk(  S4::CMapFile *this,  unsigned __int16 a2,  unsigned __int16 a3,  int *a4,  size_t *_uReadSize)
+// Decompiled from void *__thiscall S4::CMapFile::LoadChunk(S4::CMapFile *this, unsigned __int16 a2, unsigned __int16 a3, int *a4, size_t *_uReadSize)
 void const *  S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int & a4, int * _uReadSize) {
   
   void **v6; // eax
@@ -241,46 +242,27 @@ void const *  S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int 
 
   v57 = 0;
   uRequestedType = a2 + (a3 << 16);
-  itEnd = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::end(
-                                     &this->m_vRefCounts,
-                                     (int)v15);
+  itEnd = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::end(&this->m_vRefCounts, (int)v15);
   exceptionBlock = 0;
-  itFound = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::find(
-                                       &this->m_vRefCounts,
-                                       (int)v10,
-                                       (int)&uRequestedType);
+  itFound = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::find(&this->m_vRefCounts, (int)v10, (int)&uRequestedType);
   LOBYTE(exceptionBlock) = 1;
-  refFound = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>::operator!=(
-               itFound,
-               itEnd);
+  refFound = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>::operator!=(itFound, itEnd);
   LOBYTE(exceptionBlock) = 0;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>(v10);
   exceptionBlock = -1;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>(v15);
   if ( refFound )
   {
-    v35 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::end(
-                                     &this->m_vLoadedChunks,
-                                     (int)v13);
+    v35 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::end(&this->m_vLoadedChunks, (int)v13);
     v34 = v35;
     exceptionBlock = 2;
     v57 |= 1u;
     v8 = v35;
-    v33 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::find(
-                                     &this->m_vLoadedChunks,
-                                     (int)v14,
-                                     (int)&uRequestedType);
+    v33 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::find(&this->m_vLoadedChunks, (int)v14, (int)&uRequestedType);
     v32 = v33;
     exceptionBlock = 3;
     v57 |= 2u;
-    v45 = !std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator!=(
-             v33,
-             v8)
-       && BBSupportDbgReport(
-            2,
-            "LoadSave\\CMapFile.cpp",
-            269,
-            "vLoadedChunks.find(uRequestedType) != vLoadedChunks.end()") == 1;
+    v45 = !std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator!=(v33, v8) && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 269, "vLoadedChunks.find(uRequestedType) != vLoadedChunks.end()") == 1;
     v53 = v45;
     exceptionBlock = 2;
     if ( (v57 & 2) != 0 )
@@ -295,40 +277,34 @@ void const *  S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int 
       std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>(v13);
     }
     if ( v53 )
+    {
       __debugbreak();
+    }
     v44 = (_DWORD *)std::map<unsigned int,int>::operator[](&this->m_vRefCounts, (int)&uRequestedType);
     ++*v44;
     if ( a2 < 0x100u && !a3 )
+    {
       *a4 = *(_DWORD *)&this->m_uData[4 * a2];
+    }
     return *(void **)std::map<unsigned int,void *>::operator[]((int)&uRequestedType);
   }
   else
   {
     v49 = 0;
     if ( this->m_bVirtual )
+    {
       return v49;
-    v31 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::end(
-                                     &this->m_vLoadedChunks,
-                                     (int)v11);
+    }
+    v31 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::end(&this->m_vLoadedChunks, (int)v11);
     v30 = v31;
     exceptionBlock = 4;
     v57 |= 4u;
     v9 = v31;
-    v29 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::find(
-                                     &this->m_vLoadedChunks,
-                                     (int)v12,
-                                     (int)&uRequestedType);
+    v29 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::find(&this->m_vLoadedChunks, (int)v12, (int)&uRequestedType);
     v28 = v29;
     exceptionBlock = 5;
     v57 |= 8u;
-    v43 = !std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator==(
-             v29,
-             v9)
-       && BBSupportDbgReport(
-            2,
-            "LoadSave\\CMapFile.cpp",
-            287,
-            "vLoadedChunks.find(uRequestedType) == vLoadedChunks.end()") == 1;
+    v43 = !std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator==(v29, v9) && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 287, "vLoadedChunks.find(uRequestedType) == vLoadedChunks.end()") == 1;
     v52 = v43;
     exceptionBlock = 4;
     if ( (v57 & 8) != 0 )
@@ -343,7 +319,9 @@ void const *  S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int 
       std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>(v11);
     }
     if ( v52 )
+    {
       __debugbreak();
+    }
     Src = 0;
     uReadSize = 0;
     uChunkType = 0;
@@ -372,7 +350,9 @@ void const *  S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int 
     }
     while ( !S4::CSaveFile::Eof(&this->m_cSaveFile) && uReadSize == 24 && uChunkType != uRequestedType );
     if ( !Src )
+    {
       return 0;
+    }
     *a4 = Buffer.m_uSaveIdentifier;
     uCalcCRC = S4::CMapFile::Crc(this, (char *)Src, Buffer.m_uChunkSizeInFile);
     if ( uCalcCRC != Buffer.m_uChunkCRC )
@@ -415,7 +395,9 @@ void const *  S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int 
       j__LZHLDestroyDecompressor(v39);
     }
     if ( _uReadSize )
+    {
       *_uReadSize = Size;
+    }
     if ( Src )
     {
       v17 = Src;
@@ -459,49 +441,30 @@ void  S4::CMapFile::CloseChunk(unsigned short a2, unsigned short a3) {
 
   v22 = 0;
   requestedtype = a2 + (a3 << 16);
-  v17 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::end(
-                                   &this->m_vRefCounts,
-                                   (int)v7);
+  v17 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::end(&this->m_vRefCounts, (int)v7);
   v16 = v17;
   v25 = 0;
   v3 = v17;
-  v15 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::find(
-                                   &this->m_vRefCounts,
-                                   (int)v8,
-                                   (int)&requestedtype);
+  v15 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::find(&this->m_vRefCounts, (int)v8, (int)&requestedtype);
   v14 = v15;
   LOBYTE(v25) = 1;
-  v24 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>::operator!=(
-          v15,
-          v3);
+  v24 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>::operator!=(v15, v3);
   LOBYTE(v25) = 0;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>(v8);
   v25 = -1;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>(v7);
   if ( v24 )
   {
-    v13 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::end(
-                                     &this->m_vLoadedChunks,
-                                     (int)v5);
+    v13 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::end(&this->m_vLoadedChunks, (int)v5);
     v12 = v13;
     v25 = 2;
     v22 |= 1u;
     v4 = v13;
-    v11 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::find(
-                                     &this->m_vLoadedChunks,
-                                     (int)v6,
-                                     (int)&requestedtype);
+    v11 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::find(&this->m_vLoadedChunks, (int)v6, (int)&requestedtype);
     v10 = v11;
     v25 = 3;
     v22 |= 2u;
-    v19 = !std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator!=(
-             v11,
-             v4)
-       && BBSupportDbgReport(
-            2,
-            "LoadSave\\CMapFile.cpp",
-            446,
-            "vLoadedChunks.find(requestedtype) != vLoadedChunks.end()") == 1;
+    v19 = !std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator!=(v11, v4) && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 446, "vLoadedChunks.find(requestedtype) != vLoadedChunks.end()") == 1;
     v23 = v19;
     v25 = 2;
     if ( (v22 & 2) != 0 )
@@ -516,9 +479,10 @@ void  S4::CMapFile::CloseChunk(unsigned short a2, unsigned short a3) {
       std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>(v5);
     }
     if ( v23 )
+    {
       __debugbreak();
-    if ( *(int *)std::map<unsigned int,int>::operator[](&this->m_vRefCounts, (int)&requestedtype) < 1
-      && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 447, "vRefCounts [requestedtype] >= 1") == 1 )
+    }
+    if ( *(int *)std::map<unsigned int,int>::operator[](&this->m_vRefCounts, (int)&requestedtype) < 1 && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 447, "vRefCounts [requestedtype] >= 1") == 1 )
     {
       __debugbreak();
     }
@@ -564,21 +528,14 @@ void  S4::CMapFile::UploadBuffer(unsigned int a2, unsigned int a3, void const * 
   v20 = operator new[](Size);
   v22 = v20;
   memcpy(v20, Src, Size);
-  v19 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::end(
-                                   &this->m_vRefCounts,
-                                   (int)v12);
+  v19 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::end(&this->m_vRefCounts, (int)v12);
   v18 = v19;
   v26 = 0;
   v9 = v19;
-  v17 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::find(
-                                   &this->m_vRefCounts,
-                                   (int)v13,
-                                   (int)&v23);
+  v17 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::find(&this->m_vRefCounts, (int)v13, (int)&v23);
   v16 = v17;
   LOBYTE(v26) = 1;
-  v25 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>::operator!=(
-          v17,
-          v9);
+  v25 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>::operator!=(v17, v9);
   LOBYTE(v26) = 0;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>(v13);
   v26 = -1;
@@ -592,28 +549,25 @@ void  S4::CMapFile::UploadBuffer(unsigned int a2, unsigned int a3, void const * 
     v6 = (void *)std::map<unsigned int,void *>::operator[]((int)&v23);
     *(_DWORD *)v6 = v22;
     if ( a2 < 0x100 && !a3 )
+    {
       this->m_uData[a2] = a6;
+    }
   }
   else
   {
     v14 = 1;
     v7 = std::pair<unsigned int const,int>::pair<unsigned int const,int>((int)&v23, (int)&v14);
-    std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::insert<0,0>(
-      (int)v11,
-      v7);
+    std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::insert<0,0>((int)v11, v7);
     std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>,bool>::~pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,int>>>>,bool>(v11);
     v8 = std::pair<unsigned int const,void *>::pair<unsigned int const,void *>((int)&v23, (int)&v22);
-    std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::insert<0,0>(
-      &this->m_vLoadedChunks,
-      (int)v10,
-      v8);
+    std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::insert<0,0>(&this->m_vLoadedChunks, (int)v10, v8);
     std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>,bool>::~pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>,bool>(v10);
   }
 }
 
 
 // address=[0x13db820]
-// Decompiled from int __thiscall S4::CMapFile::SaveChunk(  S4::CMapFile *this,  unsigned __int16 a2,  unsigned __int16 a3,  unsigned int Size,  const void *Src,  bool a6)
+// Decompiled from int __thiscall S4::CMapFile::SaveChunk(S4::CMapFile *this, unsigned __int16 a2, unsigned __int16 a3, unsigned int Size, const void *Src, bool a6)
 void  S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int a4, void const * a5, bool a6) {
   
   unsigned int v6; // eax
@@ -659,7 +613,7 @@ void  S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int
 
 
 // address=[0x13db990]
-// Decompiled from char __thiscall S4::CMapFile::LoadChunkObject(  S4::CMapFile *this,  T_S4_MAP_CHUNK a2,  unsigned __int16 a3,  struct IS4ChunkObject *a4,  int a5)
+// Decompiled from char __thiscall S4::CMapFile::LoadChunkObject(S4::CMapFile *this, T_S4_MAP_CHUNK a2, unsigned __int16 a3, struct IS4ChunkObject *a4, int a5)
 bool  S4::CMapFile::LoadChunkObject(unsigned short a2, unsigned short a3, class IS4ChunkObject & a4, enum T_S4_MAP_CHUNK_STATUS a5) {
   
   CS4MemChunk v6; // [esp+4h] [ebp-48h] BYREF
@@ -691,7 +645,9 @@ bool  S4::CMapFile::LoadChunkObject(unsigned short a2, unsigned short a3, class 
   else
   {
     if ( a5 )
+    {
       return 0;
+    }
     pExceptionObject = 0;
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
@@ -701,7 +657,7 @@ bool  S4::CMapFile::LoadChunkObject(unsigned short a2, unsigned short a3, class 
 
 
 // address=[0x13dbaa0]
-// Decompiled from void __thiscall S4::CMapFile::SaveChunkObject(  S4::CMapFile *this,  unsigned __int16 a2,  unsigned __int16 a3,  struct IS4ChunkObject *a4,  bool a5)
+// Decompiled from void __thiscall S4::CMapFile::SaveChunkObject(S4::CMapFile *this, unsigned __int16 a2, unsigned __int16 a3, struct IS4ChunkObject *a4, bool a5)
 void  S4::CMapFile::SaveChunkObject(unsigned short a2, unsigned short a3, class IS4ChunkObject & a4, bool a5) {
   
   unsigned int iSize; // eax
@@ -736,8 +692,12 @@ void  S4::CMapFile::SaveDbgInfoChunk(char const * a2) {
   memset(Src, 33, 4);
   if ( a2 )
   {
-    for ( i = 0; i < 20 && a2[i]; ++i )
+    for ( i = 0;
+          i < 20 && a2[i];
+          ++i )
+    {
       Src[i + 8] = a2[i];
+    }
   }
   return S4::CMapFile::SaveChunk(this, 0xFAu, 0, 0x20u, Src, 0);
 }
@@ -757,8 +717,12 @@ void  S4::CMapFile::Cryption(void * a2, unsigned int a3) {
   std::string::string(&v5, "01234567890123456789");
   LOBYTE(v6) = 1;
   Cryptor::Set_Key(v4, (int)&v5);
-  for ( i = 0; i < a3; ++i )
+  for ( i = 0;
+        i < a3;
+        ++i )
+  {
     Cryptor::Transform_Char((Cryptor *)v4, &a2[i]);
+  }
   LOBYTE(v6) = 0;
   std::string::~string(&v5);
   v6 = -1;

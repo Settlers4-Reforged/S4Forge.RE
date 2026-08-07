@@ -15,7 +15,9 @@ bool  CPlayerIterator::Init(int a2) {
   *((_DWORD *)this + 1) = 0;
   *((_DWORD *)this + 2) = 0;
   v4 = IAIEnvironment::AlliancesPlayerBit(1);
-  for ( i = 1; i <= 8; ++i )
+  for ( i = 1;
+        i <= 8;
+        ++i )
   {
     if ( (v4 & a2) != 0 )
     {
@@ -25,7 +27,9 @@ bool  CPlayerIterator::Init(int a2) {
     v4 *= 2;
   }
   v3 = IAIEnvironment::AlliancesPlayerBit(8);
-  for ( j = 8; j >= 1; --j )
+  for ( j = 8;
+        j >= 1;
+        --j )
   {
     if ( (v3 & a2) != 0 )
     {

@@ -15,8 +15,7 @@
   CFile::CFile(&this->CFile);
   this->CFile.__vftable = (IFSNode_vtbl *)&CFileEx::_vftable_;
   *(vbtable::CFileEx **)((char *)&this->m_pVbtable + this->m_pVbtable->offsetIFileEx[0]) = (vbtable::CFileEx *)&CFileEx::`vftable';
-  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->offsetIFileEx[0]) = (FILE *)(this->m_pVbtable->offsetIFileEx[0]
-                                                                                         - 32);
+  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->offsetIFileEx[0]) = (FILE *)(this->m_pVbtable->offsetIFileEx[0] - 32);
   this->CFile.m_bTextMode = 1;
   this->m_hFileMemoryHandle = 0;
   this->m_pFileMemoryMap = 0;
@@ -66,8 +65,7 @@ bool  CFileEx::InLibrary(void)const {
   v9 = 0;
   this->CFile.__vftable = (IFSNode_vtbl *)&CFileEx::_vftable_;
   *(vbtable::CFileEx **)((char *)&this->m_pVbtable + this->m_pVbtable->offsetIFileEx[0]) = (vbtable::CFileEx *)&CFileEx::`vftable';
-  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->offsetIFileEx[0]) = (FILE *)(this->m_pVbtable->offsetIFileEx[0]
-                                                                                         - 32);
+  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->offsetIFileEx[0]) = (FILE *)(this->m_pVbtable->offsetIFileEx[0] - 32);
   v5 = std::wstring::c_str(a2);
   CFileEx::CFileEx(&v8, v5, a3, a4, 1);
   CFileEx::~CFileEx(&v8);
@@ -89,7 +87,9 @@ bool  CFileEx::InLibrary(void)const {
   *(vbtable::CFileEx **)((char *)&this->m_pVbtable + (unsigned int)this->m_pVbtable->offsetIFileEx) = (vbtable::CFileEx *)&CFileEx::`vftable';
   *(FILE **)((char *)&this->CFile.m_hFile + (unsigned int)this->m_pVbtable->offsetIFileEx) = (FILE *)&this->m_pVbtable->offsetIFileEx[-8];
   if ( !a2 )
+  {
     return this;
+  }
   this->m_hFileMemoryHandle = 0;
   this->m_pFileMemoryMap = 0;
   this->m_bFileLibraryHandled = 0;
@@ -103,25 +103,18 @@ bool  CFileEx::InLibrary(void)const {
 
 
 // address=[0x2f01900]
-// Decompiled from int __thiscall CFileEx::Open(  IFileEx *__shifted(CFileEx,0x68) this,  std::wstring *a2,  int a3,  unsigned __int8 a4,  int a5,  int a6)
+// Decompiled from int __thiscall CFileEx::Open(IFileEx *__shifted(CFileEx,0x68) this, std::wstring *a2, int a3, unsigned __int8 a4, int a5, int a6)
 void  CFileEx::Open(std::wstring const & a2, unsigned int a3, bool a4, char * a5, int a6) {
   
   wchar_t *v6; // eax
 
   v6 = std::wstring::c_str(a2);                 // Call to CFileEx->Open with wchar_t*
-  return (**(int (__thiscall ***)(char *, wchar_t *, int, _DWORD, int, int))((char *)&ADJ(this)->m_pVbtable
-                                                                           + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx))(
-           (char *)&ADJ(this)->m_pVbtable + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx,
-           v6,
-           a3,
-           a4,
-           a5,
-           a6);
+  return (**(int (__thiscall ***)(char *, wchar_t *, int, _DWORD, int, int))((char *)&ADJ(this)->m_pVbtable + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx))((char *)&ADJ(this)->m_pVbtable + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx, v6, a3, a4, a5, a6);
 }
 
 
 // address=[0x2f01950]
-// Decompiled from void __thiscall CFileEx::Open(  IFileEx *__shifted(CFileEx,0x68) this,  wchar_t *FileName,  CFile::Mode _uFileMask,  char a4,  char *Str,  int a6)
+// Decompiled from void __thiscall CFileEx::Open(IFileEx *__shifted(CFileEx,0x68) this, wchar_t *FileName, CFile::Mode _uFileMask, char a4, char *Str, int a6)
 void  CFileEx::Open(wchar_t const * FileName, unsigned int _uFileMask, bool a4, char * Str, int a6) {
   
   wchar_t *v6; // eax
@@ -132,12 +125,7 @@ void  CFileEx::Open(wchar_t const * FileName, unsigned int _uFileMask, bool a4, 
   ADJ(this)->m_bFileLibraryHandled = 0;
   if ( a4 )
   {                                             // ->MapFile (?)
-    ((void (__thiscall *)(char *, wchar_t *, char *, int))(*(vbtable::CFileEx **)((char *)&ADJ(this)->m_pVbtable
-                                                                                + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx))->offsetCFile)(
-      (char *)&ADJ(this)->m_pVbtable + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx,
-      FileName,
-      Str,
-      a6);
+    ((void (__thiscall *)(char *, wchar_t *, char *, int))(*(vbtable::CFileEx **)((char *)&ADJ(this)->m_pVbtable + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx))->offsetCFile)((char *)&ADJ(this)->m_pVbtable + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx, FileName, Str, a6);
   }
   else
   {
@@ -239,7 +227,7 @@ void *  CFileEx::GetMapFilePtr(void) {
 
 
 // address=[0x2f01d50]
-// Decompiled from size_t __thiscall CFileEx::Read(  IFileEx *__shifted(CFileEx,0x68) this,  void *Buffer,  int ElementSize,  int ElementCount,  const char *a5,  int a6)
+// Decompiled from size_t __thiscall CFileEx::Read(IFileEx *__shifted(CFileEx,0x68) this, void *Buffer, int ElementSize, int ElementCount, const char *a5, int a6)
 unsigned int  CFileEx::Read(void * Buffer, int ElementSize, int ElementCount, char * a5, int a6) {
   
   int uBytesRead; // [esp+0h] [ebp-238h]
@@ -251,13 +239,7 @@ unsigned int  CFileEx::Read(void * Buffer, int ElementSize, int ElementCount, ch
   {
     if ( uSizeToRead + ADJ(this)->m_uReadOffset > ADJ(this)->m_uSize )
     {
-      DEBUGLIB::Error(
-        "CFileEx::Read : Read in filemapping exceeds map size. Offset %d, to read %d, size %d ",
-        a5,
-        a6,
-        ADJ(this)->m_uReadOffset,
-        uSizeToRead,
-        ADJ(this)->m_uSize);
+      DEBUGLIB::Error("CFileEx::Read : Read in filemapping exceeds map size. Offset %d, to read %d, size %d ", a5, a6, ADJ(this)->m_uReadOffset, uSizeToRead, ADJ(this)->m_uSize);
       uSizeToRead = ADJ(this)->m_uSize - ADJ(this)->m_uReadOffset;
       ElementCount = uSizeToRead / ElementSize;
     }
@@ -265,7 +247,9 @@ unsigned int  CFileEx::Read(void * Buffer, int ElementSize, int ElementCount, ch
     ADJ(this)->m_uReadOffset += uSizeToRead;
   }
   if ( !ADJ(this)->m_bFileLibraryHandled )
+  {
     return CFile::Read(&ADJ(this)->CFile, Buffer, ElementSize, ElementCount, UNUSED_ARG(), UNUSED_ARG());
+  }
   uBytesRead = CFileLibrary::FileRead(&g_cFileLibrary, ADJ(this)->m_uFileLibraryHandle, (char *)Buffer, uSizeToRead);
   if ( uBytesRead == -1 )
   {
@@ -273,19 +257,25 @@ unsigned int  CFileEx::Read(void * Buffer, int ElementSize, int ElementCount, ch
     _CxxThrowException(pExceptionObject, (_ThrowInfo *)&_TI2_AVCBBFileException__);
   }
   if ( uBytesRead != uSizeToRead )
+  {
     return uBytesRead / ElementSize;
+  }
   return ElementCount;
 }
 
 
 // address=[0x2f01ef0]
-// Decompiled from unsigned int __thiscall CFileEx::Write(  IFileEx *__shifted(CFileEx,0x68) this,  void *Buffer,  size_t ElementSize,  size_t ElementCount,  char *a5,  int a6)
+// Decompiled from unsigned int __thiscall CFileEx::Write(IFileEx *__shifted(CFileEx,0x68) this, void *Buffer, size_t ElementSize, size_t ElementCount, char *a5, int a6)
 unsigned int  CFileEx::Write(void const * Buffer, int ElementSize, int ElementCount, char * a5, int a6) {
   
   if ( ADJ(this)->m_bFileLibraryHandled || ADJ(this)->m_bMemoryMapped )
+  {
     return 0;
+  }
   else
+  {
     return CFile::Write(&ADJ(this)->CFile, Buffer, ElementSize, ElementCount, UNUSED_ARG(), UNUSED_ARG());
+  }
 }
 
 
@@ -372,9 +362,13 @@ int  CFileEx::Seek(int Offset, int Origin, char * a4, int a5) {
 int  CFileEx::Size(void)const {
   
   if ( this->m_bFileLibraryHandled || this->m_bMemoryMapped )
+  {
     return this->m_uSize;
+  }
   else
+  {
     return CFile::Size(this);
+  }
 }
 
 
@@ -417,7 +411,9 @@ int  CFileEx::Close(char * a2, int a3) {
 void  CFileEx::Release(void) {
   
   if ( this != (IFileEx *__shifted(CFileEx,0x68))0x68 )
+  {
     ADJ(this)->CFile.dtor(ADJ(this), 1);
+  }
 }
 
 

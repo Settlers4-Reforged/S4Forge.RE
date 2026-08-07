@@ -49,20 +49,19 @@ void  CWheeler::Delete(void) {
   int v4; // [esp+0h] [ebp-8h]
 
   if ( *((int *)this + 43) <= 0 )
+  {
     return CVehicle::Delete(this);
+  }
   v1 = (void **)CMapObjectMgr::EntityPtr(*((_DWORD *)this + 43));
-  if ( !j____RTDynamicCast(v1, 0, &IEntity__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Wheeler.cpp",
-         176,
-         "dynamic_cast<CFerryShip*>(g_pMapObjectMgr->EntityPtr(m_iFerryID))!= NULL") == 1 )
+  if ( !j____RTDynamicCast(v1, 0, &IEntity__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 176, "dynamic_cast<CFerryShip*>(g_pMapObjectMgr->EntityPtr(m_iFerryID))!= NULL") == 1 )
   {
     __debugbreak();
   }
   v4 = CMapObjectMgr::EntityPtr(*((_DWORD *)this + 43));
   if ( !v4 )
+  {
     return CVehicle::Delete(this);
+  }
   v2 = IEntity::ID();
   (*(void (__thiscall **)(int, int))(*(_DWORD *)v4 + 124))(v4, v2);
   return CVehicle::Delete(this);
@@ -79,7 +78,9 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
   BYTE v5; // [esp+8h] [ebp-8h]
 
   if ( (unsigned __int8)CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
+  {
     IAnimatedEntity::BoxSelection();
+  }
   CVehicle::Update(this);
   if ( (unsigned __int8)CVehicle::IsTurning(this) )
   {
@@ -88,15 +89,7 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
   else
   {
     v3 = IEntity::Race((_BYTE *)this);
-    CGfxManager::GetVehicleGfxInfo(
-      g_pGfxManager,
-      &IEntity::m_sGfxInfo,
-      v3,
-      *(unsigned __int16 *)(this + 38),
-      *(char *)(this + 68),
-      *(unsigned __int8 *)(this + 36),
-      0,
-      0);
+    CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v3, *(unsigned __int16 *)(this + 38), *(char *)(this + 68), *(unsigned __int8 *)(this + 36), 0, 0);
   }
   v1 = IEntity::OwnerId((IEntity *)this);
   MEMORY[0x40FE51B] = CPlayerManager::Color(v1);
@@ -105,21 +98,31 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
   MEMORY[0x40FE518] = 4;
   MEMORY[0x40FE51A] = IEntity::IsVisible((_DWORD *)this);
   if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)&dword_F29144[220079]) )
+  {
     MEMORY[0x40FE2AC] = 65534 - *(unsigned __int16 *)(this + 124) * *(unsigned __int16 *)(this + 128);
+  }
   if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
   {
     if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
+    {
       v5 = 73;
+    }
     else
+    {
       v5 = 0;
+    }
     IEntity::m_sGfxInfo.m_uFlags = v5;
   }
   else if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
   {
     if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
+    {
       v4 = 90;
+    }
     else
+    {
       v4 = 0;
+    }
     IEntity::m_sGfxInfo.m_uFlags = v4;
   }
   return &IEntity::m_sGfxInfo;
@@ -149,7 +152,9 @@ void  CWheeler::ConvertEventIntoGoal(class CEntityEvent * a2) {
   int v18; // [esp+1Ch] [ebp-Ch]
 
   if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 241, "_pEvent!=NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 )
   {
     switch ( *((_DWORD *)a2 + 1) )
@@ -166,7 +171,9 @@ void  CWheeler::ConvertEventIntoGoal(class CEntityEvent * a2) {
         break;
       case 0x11:
         if ( *((_DWORD *)a2 + 2) != 13 || *((int *)this + 43) > 0 )
+        {
           goto CWheeler__ConvertEventIntoGoal___def_19B016F;
+        }
         v11 = Y16X16::UnpackXFast(*((_DWORD *)a2 + 5));
         v12 = Y16X16::UnpackYFast(*((_DWORD *)a2 + 5));
         FerryShipAt = (CPropertySheet *)CVehicleMgr::GetFerryShipAt(v11, v12);
@@ -175,12 +182,7 @@ void  CWheeler::ConvertEventIntoGoal(class CEntityEvent * a2) {
           if ( *((int *)this + 43) > 0 )
           {
             v3 = (void **)CMapObjectMgr::EntityPtr(*((_DWORD *)this + 43));
-            if ( !j____RTDynamicCast(v3, 0, &IEntity__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0)
-              && BBSupportDbgReport(
-                   2,
-                   "MapObjects\\Wheeler.cpp",
-                   274,
-                   "dynamic_cast<CFerryShip*>(g_pMapObjectMgr->EntityPtr( m_iFerryID ))!= NULL") == 1 )
+            if ( !j____RTDynamicCast(v3, 0, &IEntity__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 274, "dynamic_cast<CFerryShip*>(g_pMapObjectMgr->EntityPtr( m_iFerryID ))!= NULL") == 1 )
             {
               __debugbreak();
             }
@@ -219,10 +221,14 @@ void  CWheeler::ConvertEventIntoGoal(class CEntityEvent * a2) {
         else
         {
           if ( !v14 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 303, "iFerryID!=0") == 1 )
+          {
             __debugbreak();
+          }
           VehiclePtr = (IEntity *)CVehicleMgr::GetVehiclePtr(v14);
           if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 305, "pFerry!=NULL") == 1 )
+          {
             __debugbreak();
+          }
           *((_DWORD *)this + 42) = 0;
           v7 = IEntity::ID();
           CFerryShip::EmergencyReload(VehiclePtr, v7);
@@ -252,7 +258,9 @@ int  CWheeler::RepairBuildingInRange(void) {
 
   v5 = IEntity::X(this);
   v4 = IEntity::Y(this);
-  for ( i = 0; i < 721; ++i )
+  for ( i = 0;
+        i < 721;
+        ++i )
   {
     v6 = v5 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * i]);
     v7 = v4 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * i]);
@@ -264,7 +272,9 @@ int  CWheeler::RepairBuildingInRange(void) {
       {
         v2 = (unsigned __int16 *)CBuildingMgr::operator[](v9);
         if ( IEntity::Type(v2) == 23 )
+        {
           return v9;
+        }
       }
     }
   }
@@ -279,19 +289,19 @@ void  CWheeler::RepairAt(int a2) {
   CWheeler *result; // eax
   char v3; // dl
 
-  if ( CWheeler::RepairBuildingInRange(this) != a2
-    && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 562, "RepairBuildingInRange()==_iAtBuildingID") == 1 )
+  if ( CWheeler::RepairBuildingInRange(this) != a2 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 562, "RepairBuildingInRange()==_iAtBuildingID") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 25)
-    && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 563, "m_pVehicleProperties!= NULL") == 1 )
+  if ( !*((_DWORD *)this + 25) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 563, "m_pVehicleProperties!= NULL") == 1 )
   {
     __debugbreak();
   }
   result = (CWheeler *)(*(int (__thiscall **)(CWheeler *))(*(_DWORD *)this + 40))(this);
   if ( (unsigned int)result >= *(_DWORD *)(*((_DWORD *)this + 25) + 48) )
+  {
     return result;
+  }
   v3 = CStaticConfigVarInt::operator int(&g_iWheelerRepairRate) + *((_BYTE *)this + 33);
   result = this;
   *((_BYTE *)this + 33) = v3;
@@ -309,7 +319,9 @@ void  CWheeler::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
   if ( a2 )
   {
     if ( BBSupportDbgReport(1, "MapObjects\\Wheeler.cpp", 598, "CWheeler::SetObserverTarget(): Invalid target type!") == 1 )
+    {
       __debugbreak();
+    }
     return 0;
   }
   else
@@ -317,9 +329,13 @@ void  CWheeler::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
     this[43] = a3;
     result = this;
     if ( a3 <= 0 )
+    {
       v4 = this[5] & 0xFFFFFFDF;
+    }
     else
+    {
       v4 = this[5] | 0x20;
+    }
     this[5] = v4;
   }
   return result;
@@ -331,9 +347,13 @@ void  CWheeler::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
 int  CWheeler::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
   
   if ( a2 )
+  {
     return 0;
+  }
   else
+  {
     return this[43];
+  }
 }
 
 
@@ -352,19 +372,26 @@ void  CWheeler::Unload(void) {
   int v9; // [esp+8h] [ebp-14h]
 
   if ( a2 == -1 )
+  {
     v9 = 1;
+  }
   else
+  {
     v9 = a3;
+  }
   if ( a2 == -1 )
+  {
     CVehicle::CVehicle(this, 3, v9, a4, a5, a6, a7, a8);
+  }
   else
+  {
     CVehicle::CVehicle(this, a2, v9, a4, a5, a6, a7, a8);
+  }
   this->__vftable = (CVehicle_vtbl *)&CWheeler::_vftable_;
   this->field_a8 = 0;
   this->field_ac = 0;
   this->field_b0 = 0;
-  if ( this->m_pVehicleProperties->m_uObjectType != CATAPULT_OBJ
-    && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 99, "m_pVehicleProperties->m_uObjectType == CATAPULT_OBJ") == 1 )
+  if ( this->m_pVehicleProperties->m_uObjectType != CATAPULT_OBJ && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 99, "m_pVehicleProperties->m_uObjectType == CATAPULT_OBJ") == 1 )
   {
     __debugbreak();
   }
@@ -446,8 +473,7 @@ void  CWheeler::WalkDir(int a2) {
   v11 = (Y16X16 *)(a2 & 0xF);
   if ( (unsigned int)v11 < 6 )
   {
-    if ( (a2 & 0x20) != 0
-      && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 344, "( _iWalkResult & WALK_RESULT_FLAG_GOAL_REACHED ) == 0") == 1 )
+    if ( (a2 & 0x20) != 0 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 344, "( _iWalkResult & WALK_RESULT_FLAG_GOAL_REACHED ) == 0") == 1 )
     {
       __debugbreak();
     }
@@ -462,7 +488,9 @@ void  CWheeler::WalkDir(int a2) {
     {
       (*(void (__thiscall **)(CWheeler *, struct CPaneContainer *))(*(_DWORD *)this + 196))(this, v10);
       if ( v11 != (Y16X16 *)*((char *)this + 68) )
+      {
         CVehicle::InitTurn(this, (int)v11);
+      }
       IEntity::SetPosition(this, v10);
       IMovingEntity::InitDistance(this);
       CWarMap::NotifyMove(this, v9);
@@ -504,41 +532,40 @@ void  CWheeler::PlaceVehicle(int _iXY) {
   int iWorldIdx; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  if ( !CWorldManager::InWorldPackedXY(_iXY)
-    && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 404, "g_cWorld.InWorldPackedXY( _iXY )") == 1 )
+  if ( !CWorldManager::InWorldPackedXY(_iXY) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 404, "g_cWorld.InWorldPackedXY( _iXY )") == 1 )
   {
     __debugbreak();
   }
   iWorldIdx = CWorldManager::Index(_iXY);
-  if ( CWorldManager::IsBlockedLand(iWorldIdx)
-    && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 408, "!g_cWorld.IsBlockedLand( iWorldIdx )") == 1 )
+  if ( CWorldManager::IsBlockedLand(iWorldIdx) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 408, "!g_cWorld.IsBlockedLand( iWorldIdx )") == 1 )
   {
     __debugbreak();
   }
-  if ( CWorldManager::SettlerId(iWorldIdx)
-    && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 409, "g_cWorld.SettlerId( iWorldIdx ) == 0") == 1 )
+  if ( CWorldManager::SettlerId(iWorldIdx) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 409, "g_cWorld.SettlerId( iWorldIdx ) == 0") == 1 )
   {
     __debugbreak();
   }
   v2 = IEntity::ID(this);
   CWorldManager::SetMapObjectId(iWorldIdx, v2);
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     iNeighborWorldIdx = iWorldIdx + CWorldManager::NeighborRelIndex(i);
-    if ( !CWorldManager::InWorld(iNeighborWorldIdx)
-      && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 419, "g_cWorld.InWorld( iNeighborWorldIdx )") == 1 )
+    if ( !CWorldManager::InWorld(iNeighborWorldIdx) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 419, "g_cWorld.InWorld( iNeighborWorldIdx )") == 1 )
     {
       __debugbreak();
     }
-    if ( CWorldManager::IsBlockedLand(iNeighborWorldIdx)
-      && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 420, "!g_cWorld.IsBlockedLand( iNeighborWorldIdx )") == 1 )
+    if ( CWorldManager::IsBlockedLand(iNeighborWorldIdx) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 420, "!g_cWorld.IsBlockedLand( iNeighborWorldIdx )") == 1 )
     {
       __debugbreak();
     }
     if ( CWorldManager::MapObjectId(iNeighborWorldIdx) )
     {
       if ( BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 421, "g_cWorld.MapObjectId( iNeighborWorldIdx ) == 0") == 1 )
+      {
         __debugbreak();
+      }
     }
     CWorldManager::SetMapObjectId(iNeighborWorldIdx, i + 1);
   }
@@ -554,38 +581,31 @@ void  CWheeler::RemoveVehicle(int a2) {
   unsigned int v4; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2)
-    && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 436, "g_cWorld.InWorldPackedXY( _iXY )") == 1 )
+  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 436, "g_cWorld.InWorldPackedXY( _iXY )") == 1 )
   {
     __debugbreak();
   }
   v3 = CWorldManager::Index(a2);
-  if ( (unsigned __int8)CWorldManager::IsBlockedLand(v3)
-    && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 440, "!g_cWorld.IsBlockedLand( iWorldIdx )") == 1 )
+  if ( (unsigned __int8)CWorldManager::IsBlockedLand(v3) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 440, "!g_cWorld.IsBlockedLand( iWorldIdx )") == 1 )
   {
     __debugbreak();
   }
   IEntity::ID();
   result = CWorldManager::SetMapObjectId(v3, 0);
-  for ( i = 0; i < 6; ++i )
+  for ( i = 0;
+        i < 6;
+        ++i )
   {
     v4 = v3 + CWorldManager::NeighborRelIndex(i);
-    if ( !CWorldManager::InWorld(v4)
-      && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 451, "g_cWorld.InWorld( iNeighborWorldIdx )") == 1 )
+    if ( !CWorldManager::InWorld(v4) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 451, "g_cWorld.InWorld( iNeighborWorldIdx )") == 1 )
     {
       __debugbreak();
     }
-    if ( (unsigned __int8)CWorldManager::IsBlockedLand(v4)
-      && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 452, "!g_cWorld.IsBlockedLand( iNeighborWorldIdx )") == 1 )
+    if ( (unsigned __int8)CWorldManager::IsBlockedLand(v4) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 452, "!g_cWorld.IsBlockedLand( iNeighborWorldIdx )") == 1 )
     {
       __debugbreak();
     }
-    if ( CWorldManager::MapObjectId(v4) != i + 1
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\Wheeler.cpp",
-           453,
-           "g_cWorld.MapObjectId( iNeighborWorldIdx ) == WHEELER_PSEUDO_ID + i") == 1 )
+    if ( CWorldManager::MapObjectId(v4) != i + 1 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 453, "g_cWorld.MapObjectId( iNeighborWorldIdx ) == WHEELER_PSEUDO_ID + i") == 1 )
     {
       __debugbreak();
     }
@@ -619,33 +639,36 @@ void  CWheeler::OnComeToFerry(int a2) {
   int v19; // [esp+8h] [ebp-8h]
 
   if ( a2 <= 0 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 193, "_iFerryID > 0") == 1 )
+  {
     __debugbreak();
+  }
   VehiclePtr = (void **)CVehicleMgr::GetVehiclePtr(a2);
-  if ( !j____RTDynamicCast(VehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Wheeler.cpp",
-         196,
-         "dynamic_cast<CFerryShip*>(g_cVehicleMgr.GetVehiclePtr( _iFerryID ))!= NULL") == 1 )
+  if ( !j____RTDynamicCast(VehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 196, "dynamic_cast<CFerryShip*>(g_cVehicleMgr.GetVehiclePtr( _iFerryID ))!= NULL") == 1 )
   {
     __debugbreak();
   }
   result = (int)CVehicleMgr::GetVehiclePtr(a2);
   v18 = result;
   if ( !result )
+  {
     return result;
+  }
   v19 = result;
   v14 = IEntity::ID();
   v4 = IEntity::ObjType((unsigned __int8 *)this);
   result = (*(int (__thiscall **)(int, int, int))(*(_DWORD *)v19 + 140))(v19, v4, v14);
   *((_DWORD *)this + 42) = result;
   if ( !*((_DWORD *)this + 42) )
+  {
     return result;
+  }
   v17 = CWorldManager::Index(*((_DWORD *)this + 42));
   v5 = (CWalking *)std::auto_ptr<CWalking>::operator->(v17);
   result = CWalking::IsFree(v5, v15);
   if ( !(_BYTE)result )
+  {
     return result;
+  }
   v12 = Y16X16::UnpackYFast(*((_DWORD *)this + 42));
   v6 = Y16X16::UnpackXFast(*((_DWORD *)this + 42));
   v7 = CVehicle::NewDestination(this, v6, v12, 0);

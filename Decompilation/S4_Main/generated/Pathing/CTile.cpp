@@ -91,7 +91,9 @@ int __cdecl CTile::TileTypeOwnerCheckMask(int a1, int a2) {
 
   v3 = 0;
   if ( a2 )
+  {
     return (16 << a1) ^ 0x1FF0;
+  }
   return v3;
 }
 
@@ -100,12 +102,7 @@ int __cdecl CTile::TileTypeOwnerCheckMask(int a1, int a2) {
 // Decompiled from int __cdecl CTile::TileTypeOwnerCheckMaskFromPlayerBits(int a1)
 int __cdecl CTile::TileTypeOwnerCheckMaskFromPlayerBits(int a1) {
   
-  if ( ((32 * a1) & 0xFFFFE00F) != 0
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\Tile.h",
-         292,
-         "(iOwnerBits & ~TILE_TYPE_OWNER_BITS_ALL) == 0") == 1 )
+  if ( ((32 * a1) & 0xFFFFE00F) != 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\Tile.h", 292, "(iOwnerBits & ~TILE_TYPE_OWNER_BITS_ALL) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -130,18 +127,15 @@ void  CTile::SetSize(int a2) {
   if ( a2 >= 0 )
   {
     if ( a2 > 256 )
+    {
       a2 = 256;
+    }
   }
   else
   {
     a2 = 0;
   }
-  if ( ((a2 << 13) & 0xFFC01FFF) != 0
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\Tile.h",
-         311,
-         "((_iSize << TILE_TYPE_SIZE_SHIFT) & ~TILE_TYPE_SIZE_MASK) == 0") == 1 )
+  if ( ((a2 << 13) & 0xFFC01FFF) != 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\pathing\\Tile.h", 311, "((_iSize << TILE_TYPE_SIZE_SHIFT) & ~TILE_TYPE_SIZE_MASK) == 0") == 1 )
   {
     __debugbreak();
   }

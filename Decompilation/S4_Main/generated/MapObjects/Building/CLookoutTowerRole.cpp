@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CLookoutTowerRole::New(std::istream & a1) {
   
   if ( operator new(0x180u) )
+  {
     return CLookoutTowerRole::CLookoutTowerRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -100,13 +104,17 @@ void  CLookoutTowerRole::LogicUpdate(class CBuilding * a2) {
   char v12; // [esp+8h] [ebp-8h]
 
   if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  {
     (*(void (__thiscall **)(CLookoutTowerRole *, struct CBuilding *, int))(*(_DWORD *)this + 88))(this, a2, 1);
+  }
   v12 = *((_BYTE *)this + 4);
   if ( v12 == 1 )
   {
     result = (*(int (__thiscall **)(CLookoutTowerRole *, struct CBuilding *))(*(_DWORD *)this + 120))(this, a2);
     if ( !(_BYTE)result )
+    {
       return IAnimatedEntity::RegisterForLogicUpdate(31);
+    }
     *((_BYTE *)this + 4) = 3;
   }
   else
@@ -114,7 +122,9 @@ void  CLookoutTowerRole::LogicUpdate(class CBuilding * a2) {
     if ( v12 == 3 )
     {
       if ( !*((_BYTE *)this + 29) )
+      {
         return IAnimatedEntity::RegisterForLogicUpdate(31);
+      }
       v9 = IEntity::OwnerId((unsigned __int8 *)a2);
       v7 = IEntity::Y(a2);
       v2 = IEntity::X(a2);
@@ -142,8 +152,7 @@ void  CLookoutTowerRole::LogicUpdate(class CBuilding * a2) {
       }
       return IAnimatedEntity::RegisterForLogicUpdate(31);
     }
-    if ( *((_BYTE *)this + 4) != 2
-      && BBSupportDbgReport(2, "MapObjects\\Building\\LookoutTower.cpp", 227, "m_uState == WAIT_STATE") == 1 )
+    if ( *((_BYTE *)this + 4) != 2 && BBSupportDbgReport(2, "MapObjects\\Building\\LookoutTower.cpp", 227, "m_uState == WAIT_STATE") == 1 )
     {
       __debugbreak();
     }
@@ -155,7 +164,7 @@ void  CLookoutTowerRole::LogicUpdate(class CBuilding * a2) {
 
 
 // address=[0x150c410]
-// Decompiled from IBuildingRole *__thiscall CLookoutTowerRole::FillGfxInfo(  CLookoutTowerRole *this,  struct CBuilding *a2,  struct SGfxObjectInfo *a3)
+// Decompiled from IBuildingRole *__thiscall CLookoutTowerRole::FillGfxInfo(CLookoutTowerRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
 void  CLookoutTowerRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
@@ -183,7 +192,9 @@ void  CLookoutTowerRole::Init(class CBuilding * a2) {
   *((_BYTE *)this + 380) = 0;
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( result )
+  {
     return (*(int (__thiscall **)(CLookoutTowerRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
+  }
   return result;
 }
 
@@ -208,8 +219,7 @@ void  CLookoutTowerRole::PostLoadInit(class CBuilding * a2) {
 // Decompiled from char __thiscall CLookoutTowerRole::SettlerEnter(CLookoutTowerRole *this, struct CBuilding *a2, int a3)
 bool  CLookoutTowerRole::SettlerEnter(class CBuilding * a2, int a3) {
   
-  if ( *((_BYTE *)this + 29)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\LookoutTower.cpp", 143, "!m_bWorkerInHouse") == 1 )
+  if ( *((_BYTE *)this + 29) && BBSupportDbgReport(2, "MapObjects\\Building\\LookoutTower.cpp", 143, "!m_bWorkerInHouse") == 1 )
   {
     __debugbreak();
   }
@@ -245,10 +255,14 @@ void  CLookoutTowerRole::FillDialog(class CBuilding * a2, bool a3) {
   MEMORY[0x3F1E4BC] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
   MEMORY[0x3F1E4B6] = *((_BYTE *)this + 29);
   if ( *((_BYTE *)this + 29) )
+  {
     MEMORY[0x3F1E4BD] = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
+  }
   v8 = 604;
   if ( !a3 )
+  {
     v8 = 602;
+  }
   CEvn_Event::CEvn_Event(&v10, v8, 0, (unsigned int)&g_cBuildingInfo, 0);
   v11 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v10);
@@ -303,7 +317,7 @@ void  CLookoutTowerRole::Store(std::ostream & a2) {
 // [Decompilation failed for static unsigned long CLookoutTowerRole::m_iClassID]
 
 // address=[0x14fd220]
-// Decompiled from void __thiscall CLookoutTowerRole::ConvertEventIntoGoal(  CLookoutTowerRole *this,  struct CBuilding *a2,  struct CEntityEvent *a3)
+// Decompiled from void __thiscall CLookoutTowerRole::ConvertEventIntoGoal(CLookoutTowerRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CLookoutTowerRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
   ;

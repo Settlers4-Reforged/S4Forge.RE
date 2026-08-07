@@ -20,25 +20,33 @@ void  CAIScripting::Init(void) {
   lua_beginblock();
   lua_gAI = lua_getglobal("AI");
   if ( !lua_isnil(lua_gAI) && BBSupportDbgReport(2, "AI\\AI_Script.cpp", 1163, "lua_isnil(lua_getglobal(\"AI\"))") == 1 )
+  {
     __debugbreak();
+  }
   lua_gAITable = lua_createtable();
   lua_pushobject(lua_gAITable);
   lua_rawsetglobal("AI");
-  for ( i = &s_vAILuaDefaults; i->m_spName; ++i )
+  for ( i = &s_vAILuaDefaults;
+        i->m_spName;
+        ++i )
   {
     lua_pushobject(lua_gAITable);
     lua_pushstring(i->m_spName);
     lua_pushnumber((double)i->m_iValue);
     lua_rawsettable();
   }
-  for ( j = &s_AIDebugFunctions; j->m_swpName; ++j )
+  for ( j = &s_AIDebugFunctions;
+        j->m_swpName;
+        ++j )
   {
     lua_pushobject(lua_gAITable);
     lua_pushstring(j->m_swpName);
     lua_pushcclosure(j->m_fpFunction, 0);
     lua_rawsettable();
   }
-  for ( k = &s_AIFunctions; k->m_swpName; ++k )
+  for ( k = &s_AIFunctions;
+        k->m_swpName;
+        ++k )
   {
     lua_pushobject(lua_gAITable);
     lua_pushstring(k->m_swpName);
@@ -122,7 +130,9 @@ void  CAIScripting::InitPlayerScriptVarsDefaultValues(void) {
   SPlayerScriptVar *v10; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i <= 22; ++i )
+  for ( i = 0;
+        i <= 22;
+        ++i )
   {
     v10 = &s_sDefaultScriptVars[i];
     if ( v10->m_pConfig )

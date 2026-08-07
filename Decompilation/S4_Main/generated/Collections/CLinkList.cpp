@@ -29,20 +29,17 @@ void  CLinkList::DbgPrint(void)const {
   char Source[2048]; // [esp+80Ch] [ebp-804h] BYREF
 
   memset(Source, 0, sizeof(Source));
-  snprintf(
-    Source,
-    0x800u,
-    "LinkList %08x: Cnt %2i M %02x Own %4i",
-    this,
-    this->m_uSize,
-    this->m_uMarker,
-    this->m_uOwnerTileId);
+  snprintf(Source, 0x800u, "LinkList %08x: Cnt %2i M %02x Own %4i", this, this->m_uSize, this->m_uMarker, this->m_uOwnerTileId);
   if ( !this->m_uSize )
+  {
     return CTrace::Print(Source);
+  }
   j__strcpy_0(Destination, Source);
   snprintf(Source, 2048u, "%s; %i", Destination, this->m_uLinkTileIds[0].m_uData);
   m_uSize = this->m_uSize;
-  for ( i = 1; i < m_uSize; ++i )
+  for ( i = 1;
+        i < m_uSize;
+        ++i )
   {
     j__strcpy_0(Destination, Source);
     snprintf(Source, 0x800u, "%s,%i", Destination, this->m_uLinkTileIds[i].m_uData);
@@ -59,8 +56,12 @@ class CLinkList &  CLinkList::operator=(class CLinkList const & a2) {
   int i; // [esp+Ch] [ebp-4h]
 
   v3 = (a2->m_uSize + 3) / 2;
-  for ( i = 0; i < v3; ++i )
+  for ( i = 0;
+        i < v3;
+        ++i )
+  {
     this[i] = a2[i];
+  }
   return this;
 }
 
@@ -76,8 +77,12 @@ class CLinkList &  CLinkList::operator=(class CIntLinkList const & a2) {
   this->m_uSize = iSize;
   this->m_uMarker = -3;
   this->m_uOwnerTileId = CIntLinkList::OwnerTileId(a2);
-  for ( i = 0; i < iSize; ++i )
+  for ( i = 0;
+        i < iSize;
+        ++i )
+  {
     this->m_uLinkTileIds[i].m_uData = *(_WORD *)CIntLinkList::operator[](a2, i);
+  }
   return this;
 }
 
@@ -106,10 +111,14 @@ bool  CLinkList::SearchForLinkTileId(int a2)const {
   int v5; // [esp+4h] [ebp-4h]
 
   v5 = 0;
-  for ( i = CLinkList::Size(this); v5 < i; i = CLinkList::Size(this) )
+  for ( i = CLinkList::Size(this);
+        v5 < i;
+        i = CLinkList::Size(this) )
   {
     if ( this->m_uLinkTileIds[v5].m_uData == a2 )
+    {
       return 1;
+    }
     ++v5;
   }
   return 0;

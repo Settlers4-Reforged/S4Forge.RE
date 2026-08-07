@@ -22,14 +22,13 @@ int  CDefineTranslator::GetValueOfDefine(std::string const & a2)const {
 
   v12 = this;
   if ( !std::string::compare(a2, (char *)&byte_369F007) )
+  {
     return 0;
+  }
   std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>(v5);
   v15 = 0;
   v13 = 0;
-  v10 = std::_Tree<std::_Tmap_traits<std::string,int,std::less<std::string>,std::allocator<std::pair<std::string const,int>>,0>>::find(
-          v12,
-          (int)v4,
-          (int)a2);
+  v10 = std::_Tree<std::_Tmap_traits<std::string,int,std::less<std::string>,std::allocator<std::pair<std::string const,int>>,0>>::find(v12, (int)v4, (int)a2);
   v9 = v10;
   LOBYTE(v15) = 1;
   std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::operator=(v10);
@@ -42,10 +41,13 @@ int  CDefineTranslator::GetValueOfDefine(std::string const & a2)const {
   LOBYTE(v15) = 0;
   std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::~_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>(v3);
   if ( v14 )
-    v13 = *(_DWORD *)(std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::operator*(v5)
-                    + 28);
+  {
+    v13 = *(_DWORD *)(std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::operator*(v5) + 28);
+  }
   else
+  {
     v13 = 0;
+  }
   v6 = v13;
   v15 = -1;
   std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>::~_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,int>>>>(v5);
@@ -72,15 +74,23 @@ class std::auto_ptr<class CDefineTranslator> & __cdecl CDefineTranslator::GetIns
   CDefineTranslator *C; // [esp+Ch] [ebp-10h]
 
   if ( dword_3EFEB28 <= *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
+  {
     return &dword_3EFEB24;
+  }
   j___Init_thread_header(&dword_3EFEB28);
   if ( dword_3EFEB28 != -1 )
+  {
     return &dword_3EFEB24;
+  }
   C = (CDefineTranslator *)operator new(0xCu);
   if ( C )
+  {
     v1 = CDefineTranslator::CDefineTranslator(C);
+  }
   else
+  {
     v1 = 0;
+  }
   std::auto_ptr<CDefineTranslator>::auto_ptr<CDefineTranslator>(&dword_3EFEB24, (int)v1);
   j__atexit(sub_3664110);
   j___Init_thread_footer(&dword_3EFEB28);
@@ -1887,7 +1897,9 @@ void __cdecl CDefineTranslator::DestroyInstance(void) {
   Instance = CDefineTranslator::GetInstance();
   result = (CDefineTranslator *)std::auto_ptr<CDefineTranslator>::release(Instance);
   if ( result )
+  {
     return (CDefineTranslator *)delete result;
+  }
   return result;
 }
 

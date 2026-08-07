@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CPioneerRole::New(std::istream & a1) {
   
   if ( operator new(0x4Cu) )
+  {
     return CPioneerRole::CPioneerRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -47,21 +51,27 @@ void  CPioneerRole::LogicUpdateJob(class CSettler * a2) {
       if ( debug )
       {
         if ( DEBUG_FLAGS[dword_4152134] )
+        {
           BBSupportTracePrint(0, "LogicUpdateJob RESOURCE_GATHERING");
+        }
       }
       IMovingEntity::ResetToDoList(v4);
       result = (*(int (__thiscall **)(CPioneerRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
       break;
     case 16:
       if ( debug && DEBUG_FLAGS[dword_4152134] )
+      {
         BBSupportTracePrint(0, "LogicUpdateJob WORK");
+      }
       CPioneerRole::TakeLand(this, a2);
       IMovingEntity::IncToDoListIter(a2);
       result = (*(int (__thiscall **)(CPioneerRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
       break;
     case 31:
       if ( debug && DEBUG_FLAGS[dword_4152134] )
+      {
         BBSupportTracePrint(0, "LogicUpdateJob SEARCH");
+      }
       result = (*(int (__thiscall **)(CPioneerRole *, struct CSettler *))(*(_DWORD *)this + 36))(this, a2);
       break;
     default:
@@ -81,13 +91,17 @@ void  CPioneerRole::PostLoadInit(class CSettler * a2) {
 
   CWarMap::AddEntity(a2);
   if ( std::list<CEntityTask>::size((void *)(this + 64)) )
+  {
     IMovingEntity::SetToDoList(a2, this + 64);
+  }
   IMovingEntity::ResetToDoList(this);
   while ( 1 )
   {
     result = *(unsigned __int8 *)(v4 + 12);
     if ( !*(_BYTE *)(v4 + 12) )
+    {
       break;
+    }
     IMovingEntity::IncToDoListIter(a2);
     --*(_BYTE *)(v4 + 12);
   }
@@ -127,7 +141,9 @@ void  CPioneerRole::PostLoadInit(class CSettler * a2) {
   operator^<int>(a2, (int)(v8 + 14));
   operator^<int>(a2, (int)(v8 + 15));
   operator^<unsigned int>(a2, v4);
-  for ( i = 0; i < v4[0]; ++i )
+  for ( i = 0;
+        i < v4[0];
+        ++i )
   {
     v2 = CEntityTask::Load(a2);
     std::list<CEntityTask>::push_back(v2);
@@ -188,7 +204,9 @@ void  CPioneerRole::Store(std::ostream & a2) {
     LOBYTE(v26) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v8);
     if ( !v24 )
+    {
       break;
+    }
     v20 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(v10, v4, v5);
     (*(void (__thiscall **)(int, struct std::ostream *))(*(_DWORD *)v20 + 4))(v20, a2);
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v10);
@@ -210,7 +228,9 @@ void  CPioneerRole::Store(std::ostream & a2) {
       LOBYTE(v26) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v7);
       if ( !v23 )
+      {
         break;
+      }
       ActualIter = (std::_Iterator_base12 *)IMovingEntity::GetActualIter(v13, (int)v6);
       v11 = ActualIter;
       LOBYTE(v26) = 4;
@@ -218,7 +238,9 @@ void  CPioneerRole::Store(std::ostream & a2) {
       LOBYTE(v26) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v6);
       if ( v22 )
+      {
         break;
+      }
       LOBYTE(v25) = v25 + 1;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v9);
     }
@@ -227,7 +249,9 @@ void  CPioneerRole::Store(std::ostream & a2) {
   }
   v2 = (unsigned __int8)v25;
   if ( v2 >= std::list<CEntityTask>::size(v21 + 16) )
+  {
     LOBYTE(v25) = 0;
+  }
   return operator^<unsigned char>(a2, (int)&v25);
 }
 
@@ -292,7 +316,9 @@ class CPioneerRole * __cdecl CPioneerRole::Load(std::istream & a1) {
   *(_DWORD *)this = &CPioneerRole::_vftable_;
   v4 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
   if ( !IEntity::FlagBits(v4, ENTITY_FLAG_ON_BOARD) )
+  {
     CWarMap::RemoveEntity(v4);
+  }
   if ( *((_DWORD *)this + 6) )
   {
     v3 = Y16X16::UnpackYFast(*((_DWORD *)this + 6));
@@ -303,7 +329,9 @@ class CPioneerRole * __cdecl CPioneerRole::Load(std::istream & a1) {
   {
     VehiclePtr = CVehicleMgr::GetVehiclePtr(*((unsigned __int16 *)this + 16));
     if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Settler\\PioneerRole.cpp", 100, "pVehicle!=NULL") == 1 )
+    {
       __debugbreak();
+    }
     if ( VehiclePtr )
     {
       v2 = IEntity::ID();
@@ -324,7 +352,9 @@ void  CPioneerRole::GetNextJob(class CSettler * a2) {
   v3 = this;
   IMovingEntity::IncToDoListIter(a2);
   if ( IMovingEntity::IsEndIter(a2) )
+  {
     IMovingEntity::ResetToDoList(v3);
+  }
   return (*(int (__thiscall **)(CPioneerRole *, struct CSettler *))(*(_DWORD *)v3 + 40))(v3, a2);
 }
 
@@ -353,10 +383,14 @@ void  CPioneerRole::TakeJob(class CSettler * a2) {
     {
       case 7:
         if ( debug && DEBUG_FLAGS[dword_4152134] )
+        {
           BBSupportTracePrint(0, "TakeJob GO");
+        }
         IAnimatedEntity::SetFrame(1);
         if ( *((__int16 *)this + 7) > 0 || *((__int16 *)this + 8) > 0 )
+        {
           ISettlerRole::NewDestination(this, a2, *((__int16 *)this + 7), *((__int16 *)this + 8), 0);
+        }
         IMovingEntity::WalkToXY(a2, *((_DWORD *)this + 6), 0);
         *((_BYTE *)this + 4) = 6;
         IMovingEntity::SetDisplacementCosts(5);
@@ -367,16 +401,22 @@ void  CPioneerRole::TakeJob(class CSettler * a2) {
         v11 = *((_BYTE *)this + 4) == 37 || v10;
         IAnimatedEntity::SetFrame(1);
         if ( v11 )
+        {
           IMovingEntity::WalkToXY(a2, *((_DWORD *)this + 6), 0x2000);
+        }
         else
+        {
           IMovingEntity::WalkToXY(a2, *((_DWORD *)this + 6), 0);
+        }
         *((_BYTE *)this + 4) = 6;
         IMovingEntity::SetDisplacementCosts(5);
         (*(void (__thiscall **)(ISettlerRole *, COleCmdUI *))(*(_DWORD *)this + 16))(this, a2);
         break;
       case 0xD:
         if ( debug && DEBUG_FLAGS[dword_4152134] )
+        {
           BBSupportTracePrint(0, "TakeJob WORK");
+        }
         if ( CPioneerRole::SearchPosition(this, a2) )
         {
           (*(void (__thiscall **)(ISettlerRole *, COleCmdUI *))(*(_DWORD *)this + 36))(this, a2);
@@ -385,22 +425,27 @@ void  CPioneerRole::TakeJob(class CSettler * a2) {
         {
           *((_DWORD *)this + 15) += 32;
           if ( (int)++*((_DWORD *)this + 14) <= 28 )
+          {
             IAnimatedEntity::RegisterForLogicUpdate(1);
+          }
           else
+          {
             CPioneerRole::WorkIsDone(this, a2);
+          }
         }
         break;
       case 0x10:
         if ( debug && DEBUG_FLAGS[dword_4152134] )
+        {
           BBSupportTracePrint(0, "TakeJob WORK");
+        }
         goto LABEL_13;
       case 0x11:
         IMovingEntity::SetDisplacementCosts(0);
         IAnimatedEntity::RegisterForLogicUpdate(1);
         break;
       case 0x18:
-        if ( !*((_WORD *)this + 16)
-          && BBSupportDbgReport(2, "MapObjects\\Settler\\PioneerRole.cpp", 465, "m_uHomeEntityId") == 1 )
+        if ( !*((_WORD *)this + 16) && BBSupportDbgReport(2, "MapObjects\\Settler\\PioneerRole.cpp", 465, "m_uHomeEntityId") == 1 )
         {
           __debugbreak();
         }
@@ -409,12 +454,7 @@ void  CPioneerRole::TakeJob(class CSettler * a2) {
           v8 = CVehicleMgr::operator[](*((unsigned __int16 *)this + 16));
           v5 = IEntity::ID();
           (*(void (__thiscall **)(int, int))(*(_DWORD *)v8 + 128))(v8, v5);
-          if ( !IEntity::FlagBits(a2, ENTITY_FLAG_ON_BOARD)
-            && BBSupportDbgReport(
-                 2,
-                 "MapObjects\\Settler\\PioneerRole.cpp",
-                 469,
-                 "_pSettler->FlagBits(ENTITY_FLAG_ON_BOARD ) != 0") == 1 )
+          if ( !IEntity::FlagBits(a2, ENTITY_FLAG_ON_BOARD) && BBSupportDbgReport(2, "MapObjects\\Settler\\PioneerRole.cpp", 469, "_pSettler->FlagBits(ENTITY_FLAG_ON_BOARD ) != 0") == 1 )
           {
             __debugbreak();
           }
@@ -422,13 +462,17 @@ void  CPioneerRole::TakeJob(class CSettler * a2) {
         break;
       case 0x1F:
         if ( debug && DEBUG_FLAGS[dword_4152134] )
+        {
           BBSupportTracePrint(0, "TakeJob SEARCH");
+        }
         v6 = IEntity::Y(a2);
         v3 = IEntity::X(a2);
         if ( CPioneerRole::CheckLand(this, v3, v6, a2, 0) )
         {
           if ( debug && DEBUG_FLAGS[dword_4152134] )
+          {
             BBSupportTracePrint(0, "TakeJob SEARCH doit");
+          }
 LABEL_13:
           IMovingEntity::SetDisplacementCosts(10);
           IAnimatedEntity::RegisterForLogicUpdate(*((char *)this + 6));
@@ -458,17 +502,14 @@ LABEL_13:
 // Decompiled from int __thiscall CPioneerRole::Init(_WORD *this, CPropertySet *a2)
 void  CPioneerRole::Init(class CSettler * a2) {
   
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Settler\\PioneerRole.cpp",
-         244,
-         "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED )") == 1 )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\PioneerRole.cpp", 244, "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED )") == 1 )
   {
     __debugbreak();
   }
   if ( this[16] && BBSupportDbgReport(2, "MapObjects\\Settler\\PioneerRole.cpp", 245, "!m_uHomeEntityId") == 1 )
+  {
     __debugbreak();
+  }
   this[9] = IEntity::ID();
   IEntity::SetFlagBits(a2, ENTITY_FLAG_VulnerableMask|ENTITY_FLAG_Selectable);
   return CWarMap::AddEntity(a2);
@@ -624,12 +665,7 @@ void  CPioneerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
         v32 = *((unsigned __int16 *)this + 16);
         v25 = IEntity::ID();
         v16 = IEntity::OwnerId((unsigned __int8 *)a2);
-        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(
-                       g_pAI,
-                       18,
-                       v16,
-                       v25,
-                       v32);
+        LOBYTE(v3) = (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v16, v25, v32);
       }
       else
       {
@@ -698,14 +734,18 @@ bool  CPioneerRole::SearchPosition(class CSettler * a2) {
   v7 = IEntity::Y(a2);
   v2 = IEntity::X(a2);
   v10 = CWorldManager::SectorId(v2, v7);
-  for ( i = *((_DWORD *)this + 15); i < *((_DWORD *)this + 15) + 32; ++i )
+  for ( i = *((_DWORD *)this + 15);
+        i < *((_DWORD *)this + 15) + 32;
+        ++i )
   {
     v3 = IEntity::X(a2);
     v19 = CSpiralOffsets::DeltaX(i) + v3;
     v4 = IEntity::Y(a2);
     v18 = CSpiralOffsets::DeltaY(i) + v4;
     if ( !(unsigned __int8)CWorldManager::InWorld(v19, v18) )
+    {
       return 0;
+    }
     if ( CWorldManager::SectorId(v19, v18) == v10 && CPioneerRole::CheckLand(this, v19, v18, a2, 1) )
     {
       ++v13;
@@ -721,10 +761,14 @@ bool  CPioneerRole::SearchPosition(class CSettler * a2) {
       }
     }
     if ( v13 > 16 )
+    {
       break;
+    }
   }
   if ( v14 == -1 )
+  {
     return 0;
+  }
   v9 = CWorldManager::Index(v14, v12);
   CWorldManager::SetFlagBits(v9, 0x20u);
   *((_DWORD *)this + 6) = Y16X16::PackXYFast(v14, v12);
@@ -752,25 +796,37 @@ bool  CPioneerRole::CheckLand(int a2, int a3, class CSettler * a4, bool a5) {
 
   v15 = 153;
   if ( a5 )
+  {
     v15 = 185;
+  }
   v10 = IEntity::Y(a4);
   v5 = IEntity::X(a4);
   if ( !(unsigned __int8)CWorldManager::InWorld(v5, v10) )
+  {
     return 0;
+  }
   v11 = IEntity::Y(a4);
   v7 = IEntity::X(a4);
   v13 = CWorldManager::Index(v7, v11);
   v16 = CWorldManager::Index(a2, a3);
   v8 = CWorldManager::SectorId(v16);
   if ( v8 != CWorldManager::SectorId(v13) )
+  {
     return 0;
+  }
   if ( CWorldManager::FlagBits(v16, v15) )
+  {
     return 0;
+  }
   if ( CWorldManager::MapObjectId(a2, a3) && a5 )
+  {
     return 0;
+  }
   v14 = CWorldManager::OwnerId(v16);
   if ( !v14 )
+  {
     return 1;
+  }
   v12 = CAlliances::AllianceId(v14);
   v9 = IEntity::OwnerId((unsigned __int8 *)a4);
   return v12 != CAlliances::AllianceId(v9) && *(char *)(CWorldManager::GetLandscapePtr() + 4 * v16 + 3) < 0;
@@ -796,7 +852,9 @@ void  CPioneerRole::TakeLand(class CSettler * a2) {
     v2 = CAlliances::AllianceId(v8);
     v3 = IEntity::OwnerId((unsigned __int8 *)a2);
     if ( v2 == CAlliances::AllianceId(v3) )
+    {
       CPlayerManager::GetLocalPlayerId();
+    }
   }
   v4 = IEntity::OwnerId((unsigned __int8 *)a2);
   CWorldManager::SetOwnerId(v6, v7, v4);

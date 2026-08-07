@@ -44,9 +44,13 @@
 class AdvXMLParser::Text *  AdvXMLParser::Text::Clone(class AdvXMLParser::NodeContainer & a2)const {
   
   if ( operator new(0x40u) )
+  {
     return AdvXMLParser::Text::Text(a2, (char *)this + 36);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -123,9 +127,13 @@ void  AdvXMLParser::Text::GenerateXML(class AdvXMLParser::GenerateContext & a2)c
     AdvXMLParser::Element::Normalize((int)v10);
   }
   if ( AdvXMLParser::GenerateContext::MustPreserve(a2) )
+  {
     v4 = (char *)this + 36;
+  }
   else
+  {
     v4 = v10;
+  }
   v7 = 0;
   for ( i = std::string::find(34, 0);
         i != std::basic_string_char_std::char_traits_char__std::allocator_char___::npos;

@@ -18,10 +18,7 @@ void  COneBuildingTypeIterator::Init(int a2, int a3) {
 // Decompiled from int __thiscall COneBuildingTypeIterator::FirstBuilding(COneBuildingTypeIterator *this)
 int  COneBuildingTypeIterator::FirstBuilding(void) {
   
-  *((_DWORD *)this + 1) = CBuildingMgr::GetFirstBuildingId(
-                            (CBuildingMgr *)g_cBuildingMgr,
-                            *((_DWORD *)this + 2),
-                            *(_DWORD *)this);
+  *((_DWORD *)this + 1) = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 2), *(_DWORD *)this);
   return COneBuildingTypeIterator::NextBuildingIfCurrentIsNotValid(this);
 }
 
@@ -35,7 +32,9 @@ int  COneBuildingTypeIterator::NextBuilding(void) {
   int v5; // [esp+4h] [ebp-4h]
 
   v5 = *((_DWORD *)this + 1);
-  for ( i = CBuildingIteratorBase::BuildingValid(this, v5); !i; i = CBuildingIteratorBase::BuildingValid(this, v5) )
+  for ( i = CBuildingIteratorBase::BuildingValid(this, v5);
+        !i;
+        i = CBuildingIteratorBase::BuildingValid(this, v5) )
   {
     v2 = CBuildingMgr::operator[](v5);
     v5 = IAnimatedEntity::Next(v2);
@@ -50,9 +49,13 @@ int  COneBuildingTypeIterator::NextBuilding(void) {
 int  COneBuildingTypeIterator::NextBuildingIfCurrentIsNotValid(void) {
   
   if ( CBuildingIteratorBase::BuildingValid(this, *((_DWORD *)this + 1)) )
+  {
     return *((_DWORD *)this + 1);
+  }
   else
+  {
     return COneBuildingTypeIterator::NextBuilding(this);
+  }
 }
 
 

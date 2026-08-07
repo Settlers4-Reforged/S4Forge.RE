@@ -4,7 +4,7 @@
 // Definitions for class CAITaskForceDarkGardeners
 
 // address=[0x132a100]
-// Decompiled from CAITaskForceDarkGardeners *__thiscall CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(  CAITaskForceDarkGardeners *this,  int a2,  int a3)
+// Decompiled from CAITaskForceDarkGardeners *__thiscall CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(CAITaskForceDarkGardeners *this, int a2, int a3)
  CAITaskForceDarkGardeners::CAITaskForceDarkGardeners(int a2, int a3) {
   
   CAITaskForceEx::CAITaskForceEx(this, a2, 6, 11, a3);
@@ -48,7 +48,9 @@ bool  CAITaskForceDarkGardeners::NewCommand(int a2, int a3, int a4) {
   
   CAITaskForceEx::SetCommandAndClearStuff(this, a2, a3, a4);
   if ( !a2 )
+  {
     return 1;
+  }
   if ( a2 == 5 )
   {
     CAITaskForce::MarkGoalAsPosition(this);
@@ -58,12 +60,10 @@ bool  CAITaskForceDarkGardeners::NewCommand(int a2, int a3, int a4) {
   }
   else
   {
-    if ( BBSupportDbgReport(
-           1,
-           "AI\\AI_TaskForcesEx.cpp",
-           2551,
-           "CAITaskForceDarkGardeners::NewCommand(): Invalid command!") == 1 )
+    if ( BBSupportDbgReport(1, "AI\\AI_TaskForcesEx.cpp", 2551, "CAITaskForceDarkGardeners::NewCommand(): Invalid command!") == 1 )
+    {
       __debugbreak();
+    }
     return 0;
   }
 }

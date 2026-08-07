@@ -10,7 +10,9 @@ class IExtraCD * __cdecl IExtraCD::CreateMissionCDObject(void) {
 
   C = (CMissionCD *)operator new(0xCu);
   if ( !C )
+  {
     return 0;
+  }
   *(_DWORD *)C = 0;
   *((_DWORD *)C + 1) = 0;
   *((_DWORD *)C + 2) = 0;
@@ -26,7 +28,9 @@ class IExtraCD * __cdecl IExtraCD::CreateAddOnCDObject(void) {
 
   C = (CAddOn *)operator new(0xCu);
   if ( !C )
+  {
     return 0;
+  }
   *(_DWORD *)C = 0;
   *((_DWORD *)C + 1) = 0;
   *((_DWORD *)C + 2) = 0;
@@ -42,7 +46,9 @@ class IExtraCD * __cdecl IExtraCD::CreateMissionCD2Object(void) {
 
   C = (CMissionCD2 *)operator new(0xCu);
   if ( !C )
+  {
     return 0;
+  }
   C->__vftable = 0;
   C->m_u4 = 0;
   *(_DWORD *)&C->m_u8 = 0;
@@ -58,7 +64,9 @@ class IExtraCD * __cdecl IExtraCD::CreateMissionCD3Object(void) {
 
   C = (CMissionCD3 *)operator new(0xCu);
   if ( !C )
+  {
     return 0;
+  }
   *(_DWORD *)C = 0;
   *((_DWORD *)C + 1) = 0;
   *((_DWORD *)C + 2) = 0;

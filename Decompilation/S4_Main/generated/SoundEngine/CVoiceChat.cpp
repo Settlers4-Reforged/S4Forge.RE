@@ -18,8 +18,12 @@
   CVC_EventHandle::RegisterVC((CVC_EventHandle *)&g_cVC_EventHandle, this);
   *((_DWORD *)this + 38) = a3;
   *((_DWORD *)this + 3) = operator new[](4 * *((_DWORD *)this + 2));
-  for ( i = 0; i < *((_DWORD *)this + 2); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 2);
+        ++i )
+  {
     *(_DWORD *)(*((_DWORD *)this + 3) + 4 * i) = 0;
+  }
   *((_DWORD *)this + 36) = 0;
   *((_DWORD *)this + 35) = 0;
   *((_DWORD *)this + 39) = 100;
@@ -37,19 +41,27 @@
   int i; // [esp+1Ch] [ebp-14h]
 
   if ( CVCRecorder::IsRecording((CVCRecorder *)(this + 6)) )
+  {
     CVoiceChat::ToggleRecording((CVoiceChat *)this, 0);
+  }
   CVC_EventHandle::UnregisterVC((CVC_EventHandle *)&g_cVC_EventHandle);
   if ( (int)this[40] >= 0 )
+  {
     CVoiceChat::SetWindowsMicVolume((CVoiceChat *)this, this[40]);
+  }
   if ( this[3] )
   {
-    for ( i = 0; i < (int)this[2]; ++i )
+    for ( i = 0;
+          i < (int)this[2];
+          ++i )
     {
       if ( *((_DWORD *)this[3] + i) )
       {
         v1 = (void (__thiscall ***)(_DWORD, int))*((_DWORD *)this[3] + i);
         if ( v1 )
+        {
           (**v1)(v1, 1);
+        }
         *((_DWORD *)this[3] + i) = 0;
       }
     }
@@ -89,18 +101,26 @@ bool  CVoiceChat::Init(int a2, unsigned int a3, char * Str) {
   this[4] = (int)operator new[](v4 + 1);
   j__strcpy_0((char *)this[4], Str);
   if ( !CVoiceChat::GetWindowsMicVolume((CVoiceChat *)this, this + 40) )
+  {
     this[40] = -1;
+  }
   if ( CVCRecorder::Start((CVCRecorder *)(this + 6), 4, (char *)this[4], *this, (struct _DIG_DRIVER *)this[1]) )
   {
     this[33] = CVCRecorder::GetFrameSize((CVCRecorder *)(this + 6));
     this[35] = (int)operator new[](this[33]);
-    for ( i = 0; i < this[2]; ++i )
+    for ( i = 0;
+          i < this[2];
+          ++i )
     {
       C = (CVCClient *)operator new(0x78u);
       if ( C )
+      {
         v10 = CVCClient::CVCClient(C);
+      }
       else
+      {
         v10 = 0;
+      }
       *(_DWORD *)(this[3] + 4 * i) = v10;
       v9 = (char *)this[4];
       v8 = this[33];
@@ -131,11 +151,15 @@ void  CVoiceChat::Stop(void) {
   result = this;
   if ( this[3] )
   {
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       result = (_DWORD *)i;
       if ( i >= this[2] )
+      {
         break;
+      }
       if ( *(_DWORD *)(this[3] + 4 * i) )
       {
         CVCClient::Shutdown(*(CVCClient **)(this[3] + 4 * i));
@@ -159,9 +183,13 @@ bool  CVoiceChat::ReceivePacket(signed char * Src, int a3) {
   int v4; // [esp+0h] [ebp-8h]
 
   if ( !*(_DWORD *)(this + 12) && BBSupportDbgReport(2, "VoiceChat.cpp", 260, "m_papcClients != NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !*(_BYTE *)(this + 20) )
+  {
     return 0;
+  }
   v4 = a3 - *(_DWORD *)(this + 152);
   if ( v4 >= 0 && v4 < *(_DWORD *)(this + 8) )
   {
@@ -189,7 +217,9 @@ int  CVoiceChat::GetInputSamplingRate(void) {
 void  CVoiceChat::ToggleRecording(bool a2) {
   
   if ( !CVCRecorder::UsesFullDuplex((CVoiceChat *)((char *)this + 24)) )
+  {
     *((_BYTE *)this + 20) = a2;
+  }
   CVCRecorder::ToggleRecording((CVoiceChat *)((char *)this + 24), a2);
 }
 
@@ -210,10 +240,14 @@ void  CVoiceChat::Run(void) {
   int i; // [esp+4h] [ebp-4h]
 
   CVoiceChat::SendPacket(this);
-  for ( i = 0; i < *((_DWORD *)this + 2); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 2);
+        ++i )
   {
     if ( *(_DWORD *)(*((_DWORD *)this + 3) + 4 * i) )
+    {
       CVCClient::Run(*(CVCClient **)(*((_DWORD *)this + 3) + 4 * i));
+    }
     result = i + 1;
   }
   return result;
@@ -292,19 +326,27 @@ void  CVoiceChat::SetVolume(int a2) {
   if ( v5 <= 127 )
   {
     if ( v5 < 0 )
+    {
       v5 = 0;
+    }
   }
   else
   {
     v5 = 127;
   }
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = this;
     if ( i >= *((_DWORD *)this + 2) )
+    {
       break;
+    }
     if ( *(_DWORD *)(*((_DWORD *)this + 3) + 4 * i) )
+    {
       CVCClient::SetVolume(*(CVCClient **)(*((_DWORD *)this + 3) + 4 * i), v5);
+    }
   }
   return result;
 }
@@ -317,12 +359,18 @@ void  CVoiceChat::SetMicVolume(int a2) {
   char result; // al
 
   if ( *((int *)this + 41) < 0 && BBSupportDbgReport(2, "VoiceChat.cpp", 825, "m_iMaxMicVol >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 > 0x64 && BBSupportDbgReport(2, "VoiceChat.cpp", 826, "(_iVolPercent>= 0) && (_iVolPercent<= 100)") == 1 )
+  {
     __debugbreak();
+  }
   result = CVoiceChat::SetWindowsMicVolume(this, (int)(a2 * *((_DWORD *)this + 41)) / 100);
   if ( !result )
+  {
     return BBSupportTracePrintF(0, "VoiceChat :\tCVoiceChat::SetMicVolume() : Failed to set volume");
+  }
   return result;
 }
 
@@ -336,7 +384,9 @@ int  CVoiceChat::GetMicVolume(void) {
 
   v3 = this;
   if ( CVoiceChat::GetWindowsMicVolume(this, &v2) )
+  {
     return 100 * v2 / *((_DWORD *)v3 + 41);
+  }
   BBSupportTracePrintF(0, "VoiceChat :\tCVoiceChat::GetMicVolume() : Failed to get volume");
   return 0;
 }
@@ -352,10 +402,7 @@ void  CVoiceChat::SendPacket(void) {
 
   if ( CVCRecorder::IsRecording((CVoiceChat *)((char *)this + 24)) || *((_DWORD *)this + 36) )
   {
-    *((_DWORD *)this + 36) += CVCRecorder::GetEncodedData(
-                                (CVoiceChat *)((char *)this + 24),
-                                (signed __int8 *)(*((_DWORD *)this + 36) + *((_DWORD *)this + 35)),
-                                *((_DWORD *)this + 33) - *((_DWORD *)this + 36));
+    *((_DWORD *)this + 36) += CVCRecorder::GetEncodedData((CVoiceChat *)((char *)this + 24), (signed __int8 *)(*((_DWORD *)this + 36) + *((_DWORD *)this + 35)), *((_DWORD *)this + 33) - *((_DWORD *)this + 36));
     if ( *((_DWORD *)this + 36) == *((_DWORD *)this + 33) )
     {
       *((_DWORD *)this + 36) = 0;
@@ -417,7 +464,9 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
       else
       {
         pmxl.cbStruct = 168;
-        for ( i = 0; i < pmxcaps.cDestinations; ++i )
+        for ( i = 0;
+              i < pmxcaps.cDestinations;
+              ++i )
         {
           pmxl.dwDestination = i;
           DevCapsA = mixerGetLineInfoA((HMIXEROBJ)phmx, &pmxl, 0);
@@ -430,7 +479,9 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
           if ( pmxl.dwComponentType != 4 )
           {
             cConnections = pmxl.cConnections;
-            for ( j = 0; j < cConnections; ++j )
+            for ( j = 0;
+                  j < cConnections;
+                  ++j )
             {
               pmxl.dwSource = j;
               pmxl.dwDestination = i;
@@ -448,7 +499,9 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
               }
             }
             if ( v12 )
+            {
               break;
+            }
           }
         }
         if ( v12 )
@@ -561,7 +614,9 @@ bool  CVoiceChat::GetWindowsMicVolume(int * a2) {
       else
       {
         pmxl.cbStruct = 168;
-        for ( i = 0; i < pmxcaps.cDestinations; ++i )
+        for ( i = 0;
+              i < pmxcaps.cDestinations;
+              ++i )
         {
           pmxl.dwDestination = i;
           DevCapsA = mixerGetLineInfoA((HMIXEROBJ)phmx, &pmxl, 0);
@@ -574,7 +629,9 @@ bool  CVoiceChat::GetWindowsMicVolume(int * a2) {
           if ( pmxl.dwComponentType != 4 )
           {
             cConnections = pmxl.cConnections;
-            for ( j = 0; j < cConnections; ++j )
+            for ( j = 0;
+                  j < cConnections;
+                  ++j )
             {
               pmxl.dwSource = j;
               pmxl.dwDestination = i;
@@ -592,7 +649,9 @@ bool  CVoiceChat::GetWindowsMicVolume(int * a2) {
               }
             }
             if ( v13 )
+            {
               break;
+            }
           }
         }
         if ( v13 )

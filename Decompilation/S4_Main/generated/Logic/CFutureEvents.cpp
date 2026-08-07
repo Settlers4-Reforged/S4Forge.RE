@@ -23,7 +23,9 @@ void  CFutureEvents::Release(void) {
 
   result = this;
   if ( this )
+  {
     return (CFutureEvents *)(**((int (__thiscall ***)(char *, int))this + 1))((char *)this + 4, 1);
+  }
   return result;
 }
 
@@ -38,54 +40,51 @@ bool  CFutureEvents::AddFutureEvent32(enum T_FUTURE_EVENT a2, unsigned int a3, u
   _BYTE *v11; // [esp+20h] [ebp-4h]
 
   if ( a2 <= 0 && BBSupportDbgReport(2, (int)"Logic\\FutureEvents.cpp", 303, (int)"_tType > FUTURE_EVENT_NONE") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 >= 10 && BBSupportDbgReport(2, (int)"Logic\\FutureEvents.cpp", 304, (int)"_tType < FUTURE_EVENT_MAX") == 1 )
-    __debugbreak();
-  if ( *(_BYTE *)(this + 20)
-    && !a3
-    && BBSupportDbgReport(2, (int)"Logic\\FutureEvents.cpp", 306, (int)"!m_bInExecute || (_uExecutionDelay > 0)") == 1 )
   {
     __debugbreak();
   }
-  if ( a2 == 7
-    && a4
-    && BBSupportDbgReport(
-         2,
-         (int)"Logic\\FutureEvents.cpp",
-         308,
-         (int)"(_tType != FUTURE_EVENT_MOVING_ANIMAL_UPDATE) || (_uId == 0)") == 1 )
+  if ( *(_BYTE *)(this + 20) && !a3 && BBSupportDbgReport(2, (int)"Logic\\FutureEvents.cpp", 306, (int)"!m_bInExecute || (_uExecutionDelay > 0)") == 1 )
   {
     __debugbreak();
   }
-  if ( a2 == 4
-    && a4
-    && BBSupportDbgReport(
-         2,
-         (int)"Logic\\FutureEvents.cpp",
-         309,
-         (int)"(_tType != FUTURE_EVENT_SPELL_TERAINCONVERSION) || (_uId == 0)") == 1 )
+  if ( a2 == 7 && a4 && BBSupportDbgReport(2, (int)"Logic\\FutureEvents.cpp", 308, (int)"(_tType != FUTURE_EVENT_MOVING_ANIMAL_UPDATE) || (_uId == 0)") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( a2 == 4 && a4 && BBSupportDbgReport(2, (int)"Logic\\FutureEvents.cpp", 309, (int)"(_tType != FUTURE_EVENT_SPELL_TERAINCONVERSION) || (_uId == 0)") == 1 )
   {
     __debugbreak();
   }
   *(_DWORD *)(this + 24) = -1;
   if ( !a2 )
+  {
     return 0;
+  }
   v9 = *(unsigned __int16 *)(this + 74);
   if ( !*(_WORD *)(this + 74) )
+  {
     return 0;
+  }
   v7 = a3 + CStateGame::GetTickCounter(g_pGame);
   CFutureEvents::RemoveFutureEventFromList(v9);
   CFutureEvents::AddFutureEventToList(v7 % 0x20 + 2, v9);
   v11 = (_BYTE *)(this + 24 * v9 + 28);
-  if ( *v11
-    && BBSupportDbgReport(2, (int)"Logic\\FutureEvents.cpp", 337, (int)"rFutureEvent.m_uType == FUTURE_EVENT_NONE") == 1 )
+  if ( *v11 && BBSupportDbgReport(2, (int)"Logic\\FutureEvents.cpp", 337, (int)"rFutureEvent.m_uType == FUTURE_EVENT_NONE") == 1 )
   {
     __debugbreak();
   }
   if ( a4 )
+  {
     UniqueId = CMapObjectMgr::GetUniqueId(a4);
+  }
   else
+  {
     UniqueId = 0;
+  }
   *v11 = a2;
   *(_WORD *)(this + 24 * v9 + 30) = a4;
   *(_DWORD *)(this + 24 * v9 + 32) = UniqueId;
@@ -109,16 +108,19 @@ void  CFutureEvents::Execute(void) {
   char v8; // [esp+27h] [ebp-1h]
 
   if ( *((_BYTE *)this + 20) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 362, "!m_bInExecute") == 1 )
+  {
     __debugbreak();
+  }
   *((_BYTE *)this + 20) = 1;
   *((_DWORD *)this + 6) = -1;
   TickCounter = CStateGame::GetTickCounter(g_pGame);
-  for ( i = *((unsigned __int16 *)this + 12 * (TickCounter % 0x20) + 49); i; i = v2 )
+  for ( i = *((unsigned __int16 *)this + 12 * (TickCounter % 0x20) + 49);
+        i;
+        i = v2 )
   {
     v6 = (CFutureEvents *)((char *)this + 24 * i + 28);
     v8 = 0;
-    if ( !*((_WORD *)this + 12 * i + 15)
-      || CMapObjectMgr::GetUniqueId(*((unsigned __int16 *)this + 12 * i + 15)) == *((_DWORD *)this + 6 * i + 8) )
+    if ( !*((_WORD *)this + 12 * i + 15) || CMapObjectMgr::GetUniqueId(*((unsigned __int16 *)this + 12 * i + 15)) == *((_DWORD *)this + 6 * i + 8) )
     {
       if ( *((_DWORD *)this + 6 * i + 9) <= TickCounter )
       {
@@ -126,7 +128,9 @@ void  CFutureEvents::Execute(void) {
         if ( v3 >= 0xA )
         {
           if ( BBSupportDbgReport(1, "Logic\\FutureEvents.cpp", 414, "CFutureEvents::Execute(): Invalid type!") == 1 )
+          {
             __debugbreak();
+          }
         }
         else
         {
@@ -197,10 +201,14 @@ void  CFutureEvents::Load(class IS4Chunk & a2) {
   (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 1972384132);
   result = (*(int (__thiscall **)(CFutureEvents *, _DWORD))(*(_DWORD *)v6 + 20))(v6, 0);
   if ( !result )
+  {
     return result;
+  }
   result = BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 583, "DbgCheckData() == 0");
   if ( result == 1 )
+  {
     __debugbreak();
+  }
   return result;
 }
 
@@ -233,7 +241,9 @@ unsigned int  CFutureEvents::DbgCheckData(int a2) {
 
   BBSupportTracePrintF(1, "CFutureEvents::DbgCheckData()...");
   v11 = 0;
-  for ( i = 0; i < 0x22; ++i )
+  for ( i = 0;
+        i < 0x22;
+        ++i )
   {
     if ( *((_BYTE *)this + 24 * i + 28) )
     {
@@ -270,7 +280,9 @@ unsigned int  CFutureEvents::DbgCheckData(int a2) {
       }
     }
   }
-  for ( j = 34; j < 0x4000; ++j )
+  for ( j = 34;
+        j < 0x4000;
+        ++j )
   {
     if ( *((_WORD *)this + 12 * j + 24) )
     {
@@ -330,7 +342,9 @@ unsigned int  CFutureEvents::DbgCheckData(int a2) {
     }
   }
   memset(v12, 0, sizeof(v12));
-  for ( k = 1; k < 2; ++k )
+  for ( k = 1;
+        k < 2;
+        ++k )
   {
     for ( m = *((unsigned __int16 *)this + 12 * k + 25);
           m && m < 0x4000 && !v12[m];
@@ -344,7 +358,9 @@ unsigned int  CFutureEvents::DbgCheckData(int a2) {
       }
     }
   }
-  for ( n = 0; n < 0x20; ++n )
+  for ( n = 0;
+        n < 0x20;
+        ++n )
   {
     for ( ii = *((unsigned __int16 *)this + 12 * n + 49);
           ii && ii < 0x4000 && !v12[ii];
@@ -355,12 +371,7 @@ unsigned int  CFutureEvents::DbgCheckData(int a2) {
       {
         if ( *((_DWORD *)this + 6 * ii + 9) % 0x20u != n )
         {
-          BBSupportTracePrintF(
-            1,
-            "  Entry %u is in slot %u, but should be in slot %u!",
-            ii,
-            n,
-            *((_DWORD *)this + 6 * ii + 9) % 0x20u);
+          BBSupportTracePrintF(1, "  Entry %u is in slot %u, but should be in slot %u!", ii, n, *((_DWORD *)this + 6 * ii + 9) % 0x20u);
           ++v11;
         }
       }
@@ -371,7 +382,9 @@ unsigned int  CFutureEvents::DbgCheckData(int a2) {
       }
     }
   }
-  for ( jj = 34; jj < 0x4000; ++jj )
+  for ( jj = 34;
+        jj < 0x4000;
+        ++jj )
   {
     if ( !v12[jj] )
     {
@@ -380,9 +393,13 @@ unsigned int  CFutureEvents::DbgCheckData(int a2) {
     }
   }
   if ( v11 )
+  {
     BBSupportTracePrintF(1, "  %u error(s) found.", v11);
+  }
   else
+  {
     BBSupportTracePrintF(1, "  No errors found.");
+  }
   return v11;
 }
 
@@ -408,7 +425,9 @@ void  CFutureEvents::Init(void) {
   *((_WORD *)this + 37) = 34;
   *((_WORD *)this + 432) = 1;
   *((_WORD *)this + 433) = 35;
-  for ( i = 35; i < 0x3FFF; ++i )
+  for ( i = 35;
+        i < 0x3FFF;
+        ++i )
   {
     *((_WORD *)this + 12 * i + 24) = i - 1;
     *((_WORD *)this + 12 * i + 25) = i + 1;
@@ -416,10 +435,14 @@ void  CFutureEvents::Init(void) {
   *((_WORD *)this + 196620) = 16382;
   result = (*(int (__thiscall **)(CFutureEvents *, _DWORD))(*(_DWORD *)this + 20))(this, 0);
   if ( !result )
+  {
     return result;
+  }
   result = BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 227, "DbgCheckData() == 0");
   if ( result == 1 )
+  {
     __debugbreak();
+  }
   return result;
 }
 
@@ -431,20 +454,26 @@ void  CFutureEvents::AddFutureEventToList(unsigned int a2, unsigned int a3) {
   unsigned int result; // eax
 
   if ( !a2 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 237, "_uListHeadId != 0") == 1 )
-    __debugbreak();
-  if ( a2 >= 0x22 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 238, "_uListHeadId < FIRST_REAL_ID") == 1 )
-    __debugbreak();
-  if ( a3 < 0x22 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 240, "_uFutureEventId >= FIRST_REAL_ID") == 1 )
-    __debugbreak();
-  if ( a3 >= 0x4000 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 241, "_uFutureEventId < FUTURE_EVENTS_MAX") == 1 )
-    __debugbreak();
-  if ( *((_WORD *)this + 12 * a3 + 24)
-    && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 245, "rFutureEvent.m_uPrevEvent == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_WORD *)this + 12 * a3 + 25)
-    && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 246, "rFutureEvent.m_uNextEvent == 0") == 1 )
+  if ( a2 >= 0x22 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 238, "_uListHeadId < FIRST_REAL_ID") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( a3 < 0x22 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 240, "_uFutureEventId >= FIRST_REAL_ID") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( a3 >= 0x4000 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 241, "_uFutureEventId < FUTURE_EVENTS_MAX") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( *((_WORD *)this + 12 * a3 + 24) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 245, "rFutureEvent.m_uPrevEvent == 0") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( *((_WORD *)this + 12 * a3 + 25) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 246, "rFutureEvent.m_uNextEvent == 0") == 1 )
   {
     __debugbreak();
   }
@@ -454,7 +483,9 @@ void  CFutureEvents::AddFutureEventToList(unsigned int a2, unsigned int a3) {
   LOWORD(result) = a3;
   *((_WORD *)this + 12 * a2 + 25) = a3;
   if ( !*((_WORD *)this + 12 * a3 + 25) )
+  {
     return result;
+  }
   result = (unsigned int)this;
   *((_WORD *)this + 12 * *((unsigned __int16 *)this + 12 * a3 + 25) + 24) = a3;
   return result;
@@ -468,17 +499,16 @@ void  CFutureEvents::RemoveFutureEventFromList(unsigned int a2) {
   int result; // eax
 
   if ( a2 < 0x22 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 266, "_uFutureEventId >= FIRST_REAL_ID") == 1 )
+  {
     __debugbreak();
+  }
   if ( a2 >= 0x4000 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 267, "_uFutureEventId < FUTURE_EVENTS_MAX") == 1 )
+  {
     __debugbreak();
+  }
   if ( *((_WORD *)this + 12 * a2 + 24) )
   {
-    if ( *((unsigned __int16 *)this + 12 * *((unsigned __int16 *)this + 12 * a2 + 24) + 25) != a2
-      && BBSupportDbgReport(
-           2,
-           "Logic\\FutureEvents.cpp",
-           273,
-           "m_sFutureEvents[rFutureEvent.m_uPrevEvent].m_uNextEvent == _uFutureEventId") == 1 )
+    if ( *((unsigned __int16 *)this + 12 * *((unsigned __int16 *)this + 12 * a2 + 24) + 25) != a2 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 273, "m_sFutureEvents[rFutureEvent.m_uPrevEvent].m_uNextEvent == _uFutureEventId") == 1 )
     {
       __debugbreak();
     }
@@ -486,12 +516,7 @@ void  CFutureEvents::RemoveFutureEventFromList(unsigned int a2) {
   }
   if ( *((_WORD *)this + 12 * a2 + 25) )
   {
-    if ( *((unsigned __int16 *)this + 12 * *((unsigned __int16 *)this + 12 * a2 + 25) + 24) != a2
-      && BBSupportDbgReport(
-           2,
-           "Logic\\FutureEvents.cpp",
-           280,
-           "m_sFutureEvents[rFutureEvent.m_uNextEvent].m_uPrevEvent == _uFutureEventId") == 1 )
+    if ( *((unsigned __int16 *)this + 12 * *((unsigned __int16 *)this + 12 * a2 + 25) + 24) != a2 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 280, "m_sFutureEvents[rFutureEvent.m_uNextEvent].m_uPrevEvent == _uFutureEventId") == 1 )
     {
       __debugbreak();
     }
@@ -514,15 +539,20 @@ unsigned int  CFutureEvents::Compactify(void) {
   unsigned int i; // [esp+8h] [ebp-8h]
 
   if ( *((int *)this + 6) >= 0 )
+  {
     return *((_DWORD *)this + 6);
-  if ( (*(int (__thiscall **)(CFutureEvents *, _DWORD))(*(_DWORD *)this + 20))(this, 0)
-    && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 458, "DbgCheckData() == 0") == 1 )
+  }
+  if ( (*(int (__thiscall **)(CFutureEvents *, _DWORD))(*(_DWORD *)this + 20))(this, 0) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 458, "DbgCheckData() == 0") == 1 )
   {
     __debugbreak();
   }
   v4 = 34;
-  for ( i = 0x3FFF; i >= 0x22 && !*((_BYTE *)this + 24 * i + 28); --i )
+  for ( i = 0x3FFF;
+        i >= 0x22 && !*((_BYTE *)this + 24 * i + 28);
+        --i )
+  {
     ;
+  }
   if ( i >= 0x22 )
   {
     do
@@ -534,39 +564,29 @@ unsigned int  CFutureEvents::Compactify(void) {
           if ( v4 >= --i )
           {
             *((_DWORD *)this + 6) = i - 33;
-            if ( (*(int (__thiscall **)(CFutureEvents *, _DWORD))(*(_DWORD *)this + 20))(this, 0)
-              && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 499, "DbgCheckData() == 0") == 1 )
+            if ( (*(int (__thiscall **)(CFutureEvents *, _DWORD))(*(_DWORD *)this + 20))(this, 0) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 499, "DbgCheckData() == 0") == 1 )
             {
               __debugbreak();
             }
-            if ( *((int *)this + 6) < 0
-              && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 500, "m_iCompactifyNumberOfEvents >= 0") == 1 )
+            if ( *((int *)this + 6) < 0 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 500, "m_iCompactifyNumberOfEvents >= 0") == 1 )
             {
               __debugbreak();
             }
             return *((_DWORD *)this + 6);
           }
         }
-        if ( *((_BYTE *)this + 24 * v4 + 28)
-          && BBSupportDbgReport(
-               2,
-               "Logic\\FutureEvents.cpp",
-               506,
-               "m_sFutureEvents[uFirstUnused].m_uType == FUTURE_EVENT_NONE") == 1 )
+        if ( *((_BYTE *)this + 24 * v4 + 28) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 506, "m_sFutureEvents[uFirstUnused].m_uType == FUTURE_EVENT_NONE") == 1 )
         {
           __debugbreak();
         }
-        if ( !*((_BYTE *)this + 24 * i + 28)
-          && BBSupportDbgReport(
-               2,
-               "Logic\\FutureEvents.cpp",
-               507,
-               "m_sFutureEvents[uLastUsed].m_uType != FUTURE_EVENT_NONE") == 1 )
+        if ( !*((_BYTE *)this + 24 * i + 28) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 507, "m_sFutureEvents[uLastUsed].m_uType != FUTURE_EVENT_NONE") == 1 )
         {
           __debugbreak();
         }
         if ( v4 >= i && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 509, "uFirstUnused < uLastUsed") == 1 )
+        {
           __debugbreak();
+        }
         CFutureEvents::RemoveFutureEventFromList(this, v4);
         CFutureEvents::RemoveFutureEventFromList(this, i);
         v3 = *((_DWORD *)this + 6 * i + 9) % 0x20u;
@@ -586,13 +606,11 @@ unsigned int  CFutureEvents::Compactify(void) {
     }
     while ( v4 < i );
     *((_DWORD *)this + 6) = i - 33;
-    if ( (*(int (__thiscall **)(CFutureEvents *, _DWORD))(*(_DWORD *)this + 20))(this, 0)
-      && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 484, "DbgCheckData() == 0") == 1 )
+    if ( (*(int (__thiscall **)(CFutureEvents *, _DWORD))(*(_DWORD *)this + 20))(this, 0) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 484, "DbgCheckData() == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( *((int *)this + 6) < 0
-      && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 485, "m_iCompactifyNumberOfEvents >= 0") == 1 )
+    if ( *((int *)this + 6) < 0 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 485, "m_iCompactifyNumberOfEvents >= 0") == 1 )
     {
       __debugbreak();
     }
@@ -601,13 +619,11 @@ unsigned int  CFutureEvents::Compactify(void) {
   else
   {
     *((_DWORD *)this + 6) = 0;
-    if ( (*(int (__thiscall **)(CFutureEvents *, _DWORD))(*(_DWORD *)this + 20))(this, 0)
-      && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 527, "DbgCheckData() == 0") == 1 )
+    if ( (*(int (__thiscall **)(CFutureEvents *, _DWORD))(*(_DWORD *)this + 20))(this, 0) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 527, "DbgCheckData() == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( *((int *)this + 6) < 0
-      && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 528, "m_iCompactifyNumberOfEvents >= 0") == 1 )
+    if ( *((int *)this + 6) < 0 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 528, "m_iCompactifyNumberOfEvents >= 0") == 1 )
     {
       __debugbreak();
     }
@@ -633,11 +649,15 @@ void __cdecl CFutureEvents::ExecuteChangeEntityFlags(struct CFutureEvents::SFutu
 
   result = a1;
   if ( !*(_WORD *)(a1 + 2) )
+  {
     return result;
+  }
   v2 = (_DWORD *)CMapObjectMgr::Entity(*(unsigned __int16 *)(a1 + 2));
   result = IEntity::FlagBits(v2, ENTITY_FLAG_AliveMask|0x1000);
   if ( !result )
+  {
     return result;
+  }
   IEntity::SetFlagBits(v2, *(EntityFlag *)(a1 + 12));
   return IEntity::ClearFlagBits(v2, *(EntityFlag *)(a1 + 16));
 }
@@ -656,16 +676,24 @@ void __cdecl CFutureEvents::ExecuteDamageEntity(struct CFutureEvents::SFutureEve
   v3 = result;
   v2 = *((_DWORD *)a1 + 4);
   if ( !*((_WORD *)a1 + 1) )
+  {
     return result;
+  }
   if ( (int)result <= 0 )
+  {
     return result;
+  }
   result = (_DWORD *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)a1 + 1));
   v4 = result;
   if ( !result )
+  {
     return result;
+  }
   result = (_DWORD *)IEntity::FlagBits(result, (EntityFlag)&loc_3000000);
   if ( result )
+  {
     return (_DWORD *)(*(int (__thiscall **)(_DWORD *, _DWORD *, int))(*v4 + 28))(v4, v3, v2);
+  }
   return result;
 }
 
@@ -700,8 +728,7 @@ void __cdecl CFutureEvents::ExecuteSpellTerrainConversion(struct CFutureEvents::
   int i; // [esp+2Ch] [ebp-4h]
 
   v2 = CWorldManager::Width(v1);
-  if ( v2 != CWorldManager::Height(v4, v3)
-    && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1100, "g_cWorld.Width() == g_cWorld.Height()") == 1 )
+  if ( v2 != CWorldManager::Height(v4, v3) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1100, "g_cWorld.Width() == g_cWorld.Height()") == 1 )
   {
     __debugbreak();
   }
@@ -710,13 +737,17 @@ void __cdecl CFutureEvents::ExecuteSpellTerrainConversion(struct CFutureEvents::
   v11 = CFutureEvents::HiWord(*((_DWORD *)a1 + 3));
   result = CWorldManager::InWorld(v12, v11);
   if ( !(_BYTE)result )
+  {
     return result;
+  }
   v13 = CFutureEvents::LoWord(*((_DWORD *)a1 + 4));
   v7 = CFutureEvents::HiWord(*((_DWORD *)a1 + 4));
   v10 = CSpiralOffsets::First(v13);
   result = CSpiralOffsets::Last(v13);
   v9 = result;
-  for ( i = v10; i <= v9; ++i )
+  for ( i = v10;
+        i <= v9;
+        ++i )
   {
     v14 = v12 + CSpiralOffsets::DeltaX(i);
     v15 = v11 + CSpiralOffsets::DeltaY(i);
@@ -739,10 +770,14 @@ void __cdecl CFutureEvents::ExecuteCrushBuilding(struct CFutureEvents::SFutureEv
 
   result = a1;
   if ( !*((_WORD *)a1 + 1) )
+  {
     return result;
+  }
   result = (CBuilding *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)a1 + 1));
   if ( result )
+  {
     return (CBuilding *)CBuilding::CrushBuilding(result);
+  }
   return result;
 }
 
@@ -757,10 +792,14 @@ void __cdecl CFutureEvents::ExecuteVehicleFire(struct CFutureEvents::SFutureEven
   result = CVehicleMgr::GetVehiclePtr(*((unsigned __int16 *)a1 + 1));
   v2 = result;
   if ( !result )
+  {
     return result;
+  }
   result = (struct CVehicle *)IEntity::FlagBits(result, (EntityFlag)((char *)&loc_1FFFFFF + 1));
   if ( result )
+  {
     return (struct CVehicle *)CVehicle::FireMissile(v2, *((_DWORD *)a1 + 3), *((_DWORD *)a1 + 4));
+  }
   return result;
 }
 
@@ -769,12 +808,7 @@ void __cdecl CFutureEvents::ExecuteVehicleFire(struct CFutureEvents::SFutureEven
 // Decompiled from void __cdecl CFutureEvents::ExecuteMovingAnimalUpdate(struct CFutureEvents::SFutureEvent *a1)
 void __cdecl CFutureEvents::ExecuteMovingAnimalUpdate(struct CFutureEvents::SFutureEvent & a1) {
   
-  CAnimalMgr::UpdateMovingEffect(
-    (CAnimalMgr *)&g_cAnimalMgr,
-    (unsigned __int16)*((_DWORD *)a1 + 3),
-    HIWORD(*((_DWORD *)a1 + 3)),
-    (unsigned __int16)*((_DWORD *)a1 + 4),
-    HIWORD(*((_DWORD *)a1 + 4)));
+  CAnimalMgr::UpdateMovingEffect((CAnimalMgr *)&g_cAnimalMgr, (unsigned __int16)*((_DWORD *)a1 + 3), HIWORD(*((_DWORD *)a1 + 3)), (unsigned __int16)*((_DWORD *)a1 + 4), HIWORD(*((_DWORD *)a1 + 4)));
 }
 
 
@@ -807,14 +841,17 @@ void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureE
   SettlerPtr = CSettlerMgr::GetSettlerPtr((struct CSettlerMgr *)g_cSettlerMgr, v15);
   v16 = SettlerPtr;
   if ( !SettlerPtr )
+  {
     return (char)SettlerPtr;
+  }
   SettlerPtr = (IEntity *)IEntity::UniqueId(v16);
   if ( SettlerPtr != v8 )
+  {
     return (char)SettlerPtr;
+  }
   v13 = IEntity::X(v16);
   v14 = IEntity::Y(v16);
-  v10 = IEntity::FlagBits(v16, ENTITY_FLAG_ON_BOARD|ENTITY_FLAG_Visible) == ENTITY_FLAG_Visible
-     && CWorldManager::MapObjectId(v13, v14) == v15;
+  v10 = IEntity::FlagBits(v16, ENTITY_FLAG_ON_BOARD|ENTITY_FLAG_Visible) == ENTITY_FLAG_Visible && CWorldManager::MapObjectId(v13, v14) == v15;
   LOBYTE(SettlerPtr) = v10;
   v18 = v10;
   v17 = 0;
@@ -829,11 +866,12 @@ void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureE
     }
   }
   if ( !v18 )
+  {
     return (char)SettlerPtr;
+  }
   IEntity::ClearFlagBits(v16, ENTITY_FLAG_Visible);
   CSettlerMgr::DeleteSettler((CSettlerMgr *)g_cSettlerMgr, v15);
-  if ( CWorldManager::MapObjectId(v13, v14)
-    && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1235, "g_cWorld.MapObjectId(iTargetX, iTargetY) == 0") == 1 )
+  if ( CWorldManager::MapObjectId(v13, v14) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1235, "g_cWorld.MapObjectId(iTargetX, iTargetY) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -842,11 +880,15 @@ void __cdecl CFutureEvents::ExecuteEnslaveSettler(struct CFutureEvents::SFutureE
   SettlerPtr = (IEntity *)CSettlerMgr::AddSettler((CSettlerMgr *)g_cSettlerMgr, v13, v14, v7, 55, 2);
   v9 = SettlerPtr;
   if ( !v17 )
+  {
     return (char)SettlerPtr;
+  }
   SettlerPtr = CSettlerMgr::GetSettlerPtr((struct CSettlerMgr *)g_cSettlerMgr, (int)v9);
   v11 = SettlerPtr;
   if ( !SettlerPtr )
+  {
     return (char)SettlerPtr;
+  }
   ((void (__thiscall *)(IEntity *, IEntity *))v17->__vftable[1].PostLoadInit)(v17, v9);
   v6 = CEntityEvent::CEntityEvent(&v4, 0x1Cu, 0, v12, 0, 0);
   v5 = v6;
@@ -875,28 +917,29 @@ void __cdecl CFutureEvents::ExecuteFreeServant(struct CFutureEvents::SFutureEven
   v5 = *((unsigned __int16 *)a1 + 1);
   v4 = *((_DWORD *)a1 + 3);
   if ( v4 <= 0 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1286, "iPlayerId > 0") == 1 )
+  {
     __debugbreak();
+  }
   SettlerPtr = CSettlerMgr::GetSettlerPtr(v5);
   if ( SettlerPtr )
   {
     v6 = IEntity::X(SettlerPtr);
     v7 = IEntity::Y(SettlerPtr);
-    v9 = IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_ON_BOARD|ENTITY_FLAG_Visible) == 256
-      && CWorldManager::MapObjectId(v6, v7) == v5;
+    v9 = IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_ON_BOARD|ENTITY_FLAG_Visible) == 256 && CWorldManager::MapObjectId(v6, v7) == v5;
     if ( !v9 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1301, "bOk") == 1 )
+    {
       __debugbreak();
+    }
     result = 0;
     if ( v9 )
     {
-      if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 55
-        && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1308, "pServant->Type() == SETTLER_SLAVED_SETTLER") == 1 )
+      if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 55 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1308, "pServant->Type() == SETTLER_SLAVED_SETTLER") == 1 )
       {
         __debugbreak();
       }
       IEntity::ClearFlagBits(SettlerPtr, ENTITY_FLAG_Visible);
       CSettlerMgr::DeleteSettler((CSettlerMgr *)g_cSettlerMgr, v5);
-      if ( CWorldManager::MapObjectId(v6, v7)
-        && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1313, "g_cWorld.MapObjectId(iServantX, iServantY) == 0") == 1 )
+      if ( CWorldManager::MapObjectId(v6, v7) && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1313, "g_cWorld.MapObjectId(iServantX, iServantY) == 0") == 1 )
       {
         __debugbreak();
       }
@@ -909,7 +952,9 @@ void __cdecl CFutureEvents::ExecuteFreeServant(struct CFutureEvents::SFutureEven
         {
           v2 = CSettlerMgr::GetSettlerPtr(v3);
           if ( !v2 && BBSupportDbgReport(2, "Logic\\FutureEvents.cpp", 1323, "pCarrier != 0") == 1 )
+          {
             __debugbreak();
+          }
           return CSettler::CheckFlee((CSettler *)v2, 0);
         }
       }
@@ -919,7 +964,9 @@ void __cdecl CFutureEvents::ExecuteFreeServant(struct CFutureEvents::SFutureEven
   {
     result = BBSupportDbgReport(1, aLogicFutureeve_36, 1331, "CFutureEvents::ExecuteFreeServant(): Invalid entity id!");
     if ( result == 1 )
+    {
       __debugbreak();
+    }
   }
   return result;
 }

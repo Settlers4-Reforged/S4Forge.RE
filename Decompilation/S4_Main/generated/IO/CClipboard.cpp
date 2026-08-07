@@ -51,7 +51,9 @@ void  CClipboard::GetTextFromClipboard(std::string & a1, int a2) {
   signed int i; // [esp+10h] [ebp-4h]
 
   if ( a2 > 0x4000 )
+  {
     a2 = 0x4000;
+  }
   std::string::operator=(a1, (char *)&off_36BE524 + 2);
   if ( OpenClipboard(0) )
   {
@@ -60,10 +62,16 @@ void  CClipboard::GetTextFromClipboard(std::string & a1, int a2) {
     {
       v3 = strlen(Str);
       if ( v3 > (int)a2 )
+      {
         v3 = a2;
+      }
       std::string::resize(a1, v3);
-      for ( i = 0; i < v3; ++i )
+      for ( i = 0;
+            i < v3;
+            ++i )
+      {
         *(_BYTE *)std::string::operator[](i) = Str[i];
+      }
     }
     CloseClipboard();
   }

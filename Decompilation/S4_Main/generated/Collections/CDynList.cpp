@@ -39,7 +39,9 @@ int  CDynList::addElement(class CDynListEntry * a2) {
   if ( *(_DWORD *)this )
   {
     while ( *(_DWORD *)(v3 + 4) )
+    {
       v3 = *(_DWORD *)(v3 + 4);
+    }
     *(_DWORD *)(v3 + 4) = a2;
     *((_DWORD *)a2 + 1) = 0;
     *((_DWORD *)this + 2) = a2;
@@ -73,9 +75,13 @@ int  CDynList::insertElementAt(class CDynListEntry * a2, int a3) {
       {
         *((_DWORD *)a2 + 1) = v5;
         if ( a3 )
+        {
           *(_DWORD *)(v4 + 4) = a2;
+        }
         else
+        {
           *(_DWORD *)this = a2;
+        }
         break;
       }
       v4 = v5;
@@ -100,13 +106,19 @@ class CDynListEntry *  CDynList::elementAt(int a2) {
   int v3; // [esp+4h] [ebp-4h]
 
   if ( *((_DWORD *)this + 2) && *(_DWORD *)(*((_DWORD *)this + 2) + 8) <= a2 )
+  {
     v3 = *((_DWORD *)this + 2);
+  }
   else
+  {
     v3 = *(_DWORD *)this;
+  }
   while ( v3 )
   {
     if ( a2 == *(_DWORD *)(v3 + 8) )
+    {
       return v3;
+    }
     v3 = *(_DWORD *)(v3 + 4);
   }
   return 0;
@@ -151,23 +163,31 @@ int  CDynList::delElement(int a2) {
     v4 = *(_DWORD *)this;
     *(_DWORD *)this = *(_DWORD *)(*(_DWORD *)this + 4);
     if ( v4 )
+    {
 LABEL_3:
       (**(void (__thiscall ***)(int, int))v4)(v4, 1);
+    }
   }
   else
   {
     while ( 1 )
     {
       if ( !*(_DWORD *)(v3 + 4) )
+      {
         return 0;
+      }
       v4 = *(_DWORD *)(v3 + 4);
       if ( *(_DWORD *)(v4 + 8) == a2 )
+      {
         break;
+      }
       v3 = *(_DWORD *)(v3 + 4);
     }
     *(_DWORD *)(v3 + 4) = *(_DWORD *)(v4 + 4);
     if ( v4 )
+    {
       goto LABEL_3;
+    }
   }
   CDynList::resize(this);
   return 1;
@@ -192,14 +212,15 @@ void  CDynList::ClearDynList(void) {
   int i; // [esp+14h] [ebp-8h]
 
   v3 = 0;
-  for ( i = *(_DWORD *)this; i; i = v2 )
+  for ( i = *(_DWORD *)this;
+        i;
+        i = v2 )
   {
     ++v3;
     v2 = *(_DWORD *)(i + 4);
     (**(void (__thiscall ***)(int, int))i)(i, 1);
   }
-  if ( v3 != *((_DWORD *)this + 1)
-    && BBSupportDbgReport(2, "Source\\DynList.cpp", 230, "iDbgCounter == m_iNumberOfElements") == 1 )
+  if ( v3 != *((_DWORD *)this + 1) && BBSupportDbgReport(2, "Source\\DynList.cpp", 230, "iDbgCounter == m_iNumberOfElements") == 1 )
   {
     __debugbreak();
   }
@@ -224,7 +245,9 @@ int  CDynList::sort(int a2) {
 
   v9 = 1;
   if ( !*(_DWORD *)this || !*(_DWORD *)(*(_DWORD *)this + 4) )
+  {
     return 0;
+  }
   while ( v9 )
   {
     v9 = 0;
@@ -243,9 +266,13 @@ int  CDynList::sort(int a2) {
       else
       {
         if ( v8 == *(_DWORD **)this )
+        {
           *(_DWORD *)this = v7;
+        }
         else
+        {
           v5[1] = v7;
+        }
         v8[1] = v7[1];
         v7[1] = v8;
         v9 = 1;

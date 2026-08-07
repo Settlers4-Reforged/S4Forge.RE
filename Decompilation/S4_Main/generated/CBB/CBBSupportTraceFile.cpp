@@ -3,7 +3,7 @@
 // Definitions for class CBBSupportTraceFile
 
 // address=[0x2f2ee90]
-// Decompiled from BBSupportLib::CBBSupportTraceFile *__thiscall BBSupportLib::CBBSupportTraceFile::CBBSupportTraceFile(  BBSupportLib::CBBSupportTraceFile *this)
+// Decompiled from BBSupportLib::CBBSupportTraceFile *__thiscall BBSupportLib::CBBSupportTraceFile::CBBSupportTraceFile(BBSupportLib::CBBSupportTraceFile *this)
  BBSupportLib::CBBSupportTraceFile::CBBSupportTraceFile(void) {
   
   char v2; // [esp+8h] [ebp-24h]
@@ -21,18 +21,28 @@
   *((_BYTE *)this + 598) = 5;
   *((_BYTE *)this + 599) = 5;
   if ( BBSupportLib::BBSIsDevelopmentMachine() )
+  {
     v3 = 5;
+  }
   else
+  {
     v3 = 1;
+  }
   *((_BYTE *)this + 600) = v3;
   *((_BYTE *)this + 601) = 5;
   v4 = BBSupportDevelopmentMachineId();
-  for ( i = 6; i <= 37; ++i )
+  for ( i = 6;
+        i <= 37;
+        ++i )
   {
     if ( (v4 & 1) != 0 )
+    {
       v2 = 5;
+    }
     else
+    {
       v2 = 1;
+    }
     *((_BYTE *)this + i + 596) = v2;
     v4 >>= 1;
   }
@@ -54,13 +64,17 @@
 
 
 // address=[0x2f2f090]
-// Decompiled from void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(  BBSupportLib::CBBSupportTraceFile *this,  const wchar_t *a2)
+// Decompiled from void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(BBSupportLib::CBBSupportTraceFile *this, const wchar_t *a2)
 void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(wchar_t const * a2) {
   
   if ( a2 && *a2 )
+  {
     CBBSupportLogFile::SetFilePath(this, a2);
+  }
   else
+  {
     CBBSupportLogFile::SetFilePath(this, L"Trace.txt");
+  }
 }
 
 
@@ -73,15 +87,7 @@ void __stdcall BBSupportLib::CBBSupportTraceFile::PrintTime(void) {
 
   dwErrCode = GetLastError();
   GetLocalTime(&SystemTime);
-  (*(void (**)(BBSupportLib::CBBSupportTraceFile *, const char *, ...))(*(_DWORD *)this + 24))(
-    this,
-    "[ %02i/%02i/%04i %02i:%02i:%02i ]",
-    SystemTime.wMonth,
-    SystemTime.wDay,
-    SystemTime.wYear,
-    SystemTime.wHour,
-    SystemTime.wMinute,
-    SystemTime.wSecond);
+  (*(void (**)(BBSupportLib::CBBSupportTraceFile *, const char *, ...))(*(_DWORD *)this + 24))(this, "[ %02i/%02i/%04i %02i:%02i:%02i ]", SystemTime.wMonth, SystemTime.wDay, SystemTime.wYear, SystemTime.wHour, SystemTime.wMinute, SystemTime.wSecond);
   SetLastError(dwErrCode);
 }
 
@@ -94,16 +100,18 @@ void __stdcall BBSupportLib::CBBSupportTraceFile::Open(void) {
 
   result = CBBSupportLogFile::IsOpen(this);
   if ( result )
+  {
     return result;
+  }
   CBBSupportLogFile::Open(this);
   result = CBBSupportLogFile::IsOpen(this);
   if ( !result )
+  {
     return result;
+  }
   (*(void (__cdecl **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 28))(this);
   (*(void (__stdcall **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 52))(this);
-  (*(void (__stdcall **)(BBSupportLib::CBBSupportTraceFile *, const char *))(*(_DWORD *)this + 20))(
-    this,
-    " Trace file opened.\r\n");
+  (*(void (__stdcall **)(BBSupportLib::CBBSupportTraceFile *, const char *))(*(_DWORD *)this + 20))(this, " Trace file opened.\r\n");
   (*(void (__cdecl **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 28))(this);
   return (*(int (__stdcall **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 32))(this);
 }
@@ -117,12 +125,8 @@ void __stdcall BBSupportLib::CBBSupportTraceFile::Close(void) {
   {
     (*(void (__cdecl **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 28))(this);
     (*(void (__stdcall **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 52))(this);
-    (*(void (__stdcall **)(BBSupportLib::CBBSupportTraceFile *, const char *))(*(_DWORD *)this + 20))(
-      this,
-      " Closing trace file...\r\n");
-    (*(void (__thiscall **)(BBSupportLib::CBBSupportTraceFile *, BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 32))(
-      this,
-      this);
+    (*(void (__stdcall **)(BBSupportLib::CBBSupportTraceFile *, const char *))(*(_DWORD *)this + 20))(this, " Closing trace file...\r\n");
+    (*(void (__thiscall **)(BBSupportLib::CBBSupportTraceFile *, BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 32))(this, this);
   }
   CBBSupportLogFile::Close(this);
 }

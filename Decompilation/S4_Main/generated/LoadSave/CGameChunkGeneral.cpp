@@ -85,9 +85,7 @@ void  CGameChunkGeneral::Load(class IS4Chunk & a2) {
       a2->Load(Str, 1024);
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v13);
       v16 = 0;
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes(
-        (int)&v14,
-        Str);
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)&v14, Str);
       v2 = std::wstring::c_str(&v14);
       wcscpy(this->m_swMapName, v2);
       std::wstring::~wstring(&v14);
@@ -101,8 +99,12 @@ void  CGameChunkGeneral::Load(class IS4Chunk & a2) {
     a2->Load(this->m_spSaveDateTime, 26);
     a2->Load(&this->m_iMapMaxNumPlayers, 4);
     a2->Load(&this->m_uiPlayerCount, 4);
-    for ( i = 0; i < 8; ++i )
+    for ( i = 0;
+          i < 8;
+          ++i )
+    {
       CSavedPlayer::Load(&this->m_sPlayers[i], a2);
+    }
     a2->Load(&this->m_uMultiPlayerGameID, 4);
     a2->Load(&this->m_iTeamWon, 4);
     a2->Load(&this->m_uiTickCounter, 4);
@@ -112,7 +114,9 @@ void  CGameChunkGeneral::Load(class IS4Chunk & a2) {
     if ( uCampaignType >= 0x19u )
     {
       if ( BBSupportDbgReport(1, "LoadSave\\GeneralChunk.cpp", 143, "Load(): Invalid campaign type!") == 1 )
+      {
         __debugbreak();
+      }
       uCampaignType = 0;
     }
     this->m_uCampaneID = uCampaignType;
@@ -181,12 +185,7 @@ void  CGameChunkGeneral::Save(class IS4Chunk & a2) {
   int i; // [esp+0h] [ebp-Ch]
   char m_uCampaignType; // [esp+Bh] [ebp-1h] BYREF
 
-  if ( this->m_uCampaneID > 0x18u
-    && BBSupportDbgReport(
-         2,
-         "LoadSave\\GeneralChunk.cpp",
-         206,
-         "m_uCampaneID >= CAMPAIGN_NONE && m_uCampaneID<CAMPAIGN_MAX") == 1 )
+  if ( this->m_uCampaneID > 0x18u && BBSupportDbgReport(2, "LoadSave\\GeneralChunk.cpp", 206, "m_uCampaneID >= CAMPAIGN_NONE && m_uCampaneID<CAMPAIGN_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -203,8 +202,12 @@ void  CGameChunkGeneral::Save(class IS4Chunk & a2) {
   a2->Save(this->m_spSaveDateTime, 26);
   a2->Save(&this->m_iMapMaxNumPlayers, 4);
   a2->Save(&this->m_uiPlayerCount, 4);
-  for ( i = 0; i < 8; ++i )
+  for ( i = 0;
+        i < 8;
+        ++i )
+  {
     CSavedPlayer::Save(&this->m_sPlayers[i], a2);
+  }
   a2->Save(&this->m_uMultiPlayerGameID, 4);
   a2->Save(&this->m_iTeamWon, 4);
   a2->Save(&this->m_uiTickCounter, 4);
@@ -260,7 +263,9 @@ void  CGameChunkGeneral::GenerateCRC(void) {
   cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Process(&v6, (char *)&this->m_uiPlayerCount, 4);
   cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Process(&v6, (char *)&this->m_uiTickCounter, 4);
   cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Process(&v6, (char *)&this->m_iNetworkTimeDelta, 4);
-  for ( i = 0; i < this->m_uiPlayerCount; ++i )
+  for ( i = 0;
+        i < this->m_uiPlayerCount;
+        ++i )
   {
     cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Process(&v6, (char *)&this->m_sPlayers[i], 4);
     cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Process(&v6, (char *)&this->m_sPlayers[i].m_uColor, 4);

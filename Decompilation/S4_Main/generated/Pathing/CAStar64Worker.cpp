@@ -11,7 +11,9 @@ bool __cdecl CAStar64Worker::IsNotBlocked(int a1) {
 
   v3 = ITiling::NormalTileId(a1);
   if ( v3 < 10 )
+  {
     return 0;
+  }
   v1 = (CTile *)ITiling::Tile(v3);
   return CAStar64Worker::m_iEcoSectorId == CTile::EcoSectorId(v1);
 }
@@ -24,7 +26,9 @@ int __cdecl CAStar64Worker::MoveCosts(int a1, int a2) {
   int v2; // esi
 
   if ( a2 >= 7 || !CWorldManager::SettlerId(a1) )
+  {
     return CAStar64::WorldMoveCosts(a1);
+  }
   v2 = CAStar64::WorldMoveCosts(a1);
   return v2 + CAStar64::SettlerDisplacementCosts(a1, a2);
 }

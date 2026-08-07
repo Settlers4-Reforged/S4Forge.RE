@@ -36,11 +36,15 @@ bool  CClientList::ContainsPeerId(unsigned int _uPeerId) {
   char v8; // [esp+33h] [ebp-Dh]
   int exceptionBlock; // [esp+3Ch] [ebp-4h]
 
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     iSize = std::vector<CClient>::size(&this->m_vClients);
     if ( i >= iSize )
+    {
       break;
+    }
     v3 = std::vector<CClient>::operator[](&this->m_vClients, i);
     CClient::CClient(&v5, v3);
     exceptionBlock = 0;
@@ -75,7 +79,9 @@ bool  CClientList::Add(unsigned int _uIp, int _uPlayerId, int _uPeerId) {
   int v17; // [esp+64h] [ebp-4h]
 
   if ( CClientList::ContainsPeerId(this, _uPeerId) )
+  {
     return 0;
+  }
   CClient::CClient(&v7, _uIp, _uPlayerId, _uPeerId);
   v17 = 0;
   v6 = &v7;
@@ -83,9 +89,7 @@ bool  CClientList::Add(unsigned int _uIp, int _uPlayerId, int _uPeerId) {
   v13 = v14;
   LOBYTE(v17) = 1;
   v12 = v5;
-  v11 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(
-          v5,
-          v14);
+  v11 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v5, v14);
   v10 = std::vector<CClient>::insert((int)v9, v5[0], v5[1], v5[2], (int)v6);
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v9);
   LOBYTE(v17) = 0;
@@ -102,8 +106,7 @@ unsigned int  CClientList::GetPlayerPing(unsigned int _id) {
   
   CClient *v3; // [esp+0h] [ebp-8h]
 
-  if ( _id > CClientList::GetSize(this) - 1
-    && BBSupportDbgReport(2, "Net\\ClientList.cpp", 235, "_id <= GetSize() - 1") == 1 )
+  if ( _id > CClientList::GetSize(this) - 1 && BBSupportDbgReport(2, "Net\\ClientList.cpp", 235, "_id <= GetSize() - 1") == 1 )
   {
     __debugbreak();
   }
@@ -152,7 +155,9 @@ bool  CClientList::RemoveClientAt(int a2) {
   int v11; // [esp+38h] [ebp-4h]
 
   if ( a2 > std::vector<CClient>::size(&this->m_vClients) - 1 )
+  {
     return 0;
+  }
   std::vector<CClient>::begin(v5);
   v11 = 0;
   std::advance<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>,int>(v5, a2);
@@ -196,7 +201,9 @@ bool  CClientList::RemoveClientPeerId(unsigned int a2) {
     LOBYTE(v16) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v6);
     if ( !v15 )
+    {
       break;
+    }
     v2 = (CClient *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::operator*(v7);
     if ( CClient::operator==(v2, a2) )
     {
@@ -223,10 +230,14 @@ bool  CClientList::AllClientsReady(void) {
   
   unsigned int a1; // [esp+4h] [ebp-4h]
 
-  for ( a1 = 0; a1 < std::vector<CClient>::size(&this->m_vClients); ++a1 )
+  for ( a1 = 0;
+        a1 < std::vector<CClient>::size(&this->m_vClients);
+        ++a1 )
   {
     if ( !std::vector<CClient>::operator[](&this->m_vClients, a1)->m_bReady )
+    {
       return 0;
+    }
   }
   return 1;
 }
@@ -242,11 +253,15 @@ void  CClientList::SetClientReadyFromPeerId(unsigned int _uPeerId, bool _bReady)
   unsigned int i; // [esp+2Ch] [ebp-10h]
   int v8; // [esp+38h] [ebp-4h]
 
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     v3 = std::vector<CClient>::size(&this->m_vClients);
     if ( i >= v3 )
+    {
       break;
+    }
     v4 = std::vector<CClient>::operator[](&this->m_vClients, i);
     CClient::CClient(&v5, v4);
     v8 = 0;
@@ -261,7 +276,9 @@ void  CClientList::SetClientReadyFromPeerId(unsigned int _uPeerId, bool _bReady)
     CClient::~CClient(&v5);
   }
   if ( BBSupportDbgReportF(2, "Net\\ClientList.cpp", 149, "Client not found !!!") == 1 )
+  {
     __debugbreak();
+  }
 }
 
 
@@ -276,11 +293,15 @@ int  CClientList::GetClientIndexPerPeerId(unsigned int _uPeerId) {
   unsigned int a1; // [esp+30h] [ebp-10h]
   int v9; // [esp+3Ch] [ebp-4h]
 
-  for ( a1 = 0; ; ++a1 )
+  for ( a1 = 0;
+        ;
+        ++a1 )
   {
     v2 = std::vector<CClient>::size(&this->m_vClients);
     if ( a1 >= v2 )
+    {
       break;
+    }
     v3 = std::vector<CClient>::operator[](&this->m_vClients, a1);
     CClient::CClient(&v5, v3);
     v9 = 0;

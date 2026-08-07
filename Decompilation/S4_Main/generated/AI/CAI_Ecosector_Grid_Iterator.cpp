@@ -3,7 +3,7 @@
 // Definitions for class CAI_Ecosector_Grid_Iterator
 
 // address=[0x1339930]
-// Decompiled from CAI_Ecosector_Grid_Iterator *__thiscall CAI_Ecosector_Grid_Iterator::CAI_Ecosector_Grid_Iterator(  CAI_Ecosector_Grid_Iterator *this)
+// Decompiled from CAI_Ecosector_Grid_Iterator *__thiscall CAI_Ecosector_Grid_Iterator::CAI_Ecosector_Grid_Iterator(CAI_Ecosector_Grid_Iterator *this)
  CAI_Ecosector_Grid_Iterator::CAI_Ecosector_Grid_Iterator(void) {
   
   CAI_Ecosector_Grid_Iterator::CESGI::CESGI(this);
@@ -64,11 +64,15 @@ int  CAI_Ecosector_Grid_Iterator::GetNext(void) {
 
   v3 = CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, *(_DWORD *)this);
   if ( !v3 )
+  {
     return -1;
+  }
   v2 = CEcoSector::Owner(v3);
   v5 = COwnerMap::OwnerBit(v2);
   if ( (unsigned __int8)CAI_Ecosector_Grid_Iterator::IsEnd(this) )
+  {
     return -1;
+  }
   v4 = *(unsigned __int16 *)TStaticFIFO<unsigned short,1024>::Top((char *)this + 520, v2);
   TStaticFIFO<unsigned short,1024>::Pop((char *)this + 520);
   v6 = (v4 & 0xFF00) >> 8;
@@ -95,8 +99,7 @@ int  CAI_Ecosector_Grid_Iterator::GetNext(void) {
   v10 = v6 + 1;
   if ( v6 + 1 < *((unsigned __int8 *)this + 7) )
   {
-    if ( (v5 & COwnerMap::OwnerBits1VW((unsigned __int8)v4, v10)) != 0
-      && !CAI_Ecosector_Grid_Iterator::IsChecked(this, (unsigned __int8)v4, v10) )
+    if ( (v5 & COwnerMap::OwnerBits1VW((unsigned __int8)v4, v10)) != 0 && !CAI_Ecosector_Grid_Iterator::IsChecked(this, (unsigned __int8)v4, v10) )
     {
       v13 = (unsigned __int8)v4 + ((_WORD)v10 << 8);
       TStaticFIFO<unsigned short,1024>::Push(&v13);
@@ -105,9 +108,10 @@ int  CAI_Ecosector_Grid_Iterator::GetNext(void) {
   }
   v11 = v6 - 1;
   if ( v6 - 1 <= -1 )
+  {
     return v4;
-  if ( (v5 & COwnerMap::OwnerBits1VW((unsigned __int8)v4, v11)) != 0
-    && !CAI_Ecosector_Grid_Iterator::IsChecked(this, (unsigned __int8)v4, v11) )
+  }
+  if ( (v5 & COwnerMap::OwnerBits1VW((unsigned __int8)v4, v11)) != 0 && !CAI_Ecosector_Grid_Iterator::IsChecked(this, (unsigned __int8)v4, v11) )
   {
     v12 = (unsigned __int8)v4 + ((_WORD)v11 << 8);
     TStaticFIFO<unsigned short,1024>::Push(&v12);
@@ -130,15 +134,23 @@ void  CAI_Ecosector_Grid_Iterator::FindStartPoint(void) {
 
   result = CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, *(_DWORD *)this);
   if ( !result )
+  {
     return result;
+  }
   v4 = CEcoSector::Owner(result);
   v3 = COwnerMap::OwnerBit(v4);
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = *((unsigned __int8 *)this + 6);
     if ( i >= result )
+    {
       break;
-    for ( j = 0; j < (int)*((unsigned __int8 *)this + 7); ++j )
+    }
+    for ( j = 0;
+          j < (int)*((unsigned __int8 *)this + 7);
+          ++j )
     {
       if ( (v3 & COwnerMap::OwnerBits1VW(i, j)) != 0 )
       {
@@ -165,9 +177,13 @@ bool  CAI_Ecosector_Grid_Iterator::IsMyTile(int a2) {
 
   v5 = (struct CTile *)ITiling::Tile(a2);
   if ( CTile::TilingType(v5) )
+  {
     return 0;
+  }
   if ( CTile::EcoSectorId(v5) == *(_DWORD *)this )
+  {
     return 1;
+  }
   SquareTile = CTile::NextSquareTile(v5);
   return SquareTile && CAI_Ecosector_Grid_Iterator::IsMyTile(this, SquareTile);
 }

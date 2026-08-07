@@ -30,9 +30,13 @@
   *((_DWORD *)this + 23) = 0;
   *((_DWORD *)this + 24) = 200;
   if ( *((_DWORD *)this + 11) == 96 )
+  {
     *((_DWORD *)this + 12) = 40;
+  }
   else
+  {
     *((_DWORD *)this + 12) = 0;
+  }
   return this;
 }
 
@@ -43,9 +47,13 @@
   
   *this = (CDynList *)&CResourceManagerTask::_vftable_;
   if ( this[19] )
+  {
     delete this[19];
+  }
   if ( this[21] )
+  {
     (**(void (__thiscall ***)(CDynList *, int))this[21])(this[21], 1);
+  }
   this[18] = 0;
   IScheduleEntry::~IScheduleEntry((IScheduleEntry *)this);
 }
@@ -58,7 +66,9 @@ void  CResourceManagerTask::ClearBuildingPlaces(void) {
   int result; // eax
 
   while ( CDynList::size(*(CDynList **)(this + 76)) > 0 )
+  {
     CDynList::delElement(*(CDynList **)(this + 76), 0);
+  }
   *(_DWORD *)(this + 56) = 0;
   result = this;
   *(_DWORD *)(this + 64) = 0;
@@ -78,11 +88,15 @@ void  CResourceManagerTask::NewBuildingPlace(int a2, int a3, int a4) {
   char v10; // [esp+1Fh] [ebp-Dh]
 
   v10 = 0;
-  for ( i = 0; ; ++i )
+  for ( i = 0;
+        ;
+        ++i )
   {
     result = CDynList::size(this[19]);
     if ( i >= result )
+    {
       break;
+    }
     v8 = (_DWORD *)CDynList::elementAt(this[19], i);
     v8[3] = a2;
     v8[4] = a3;
@@ -90,12 +104,18 @@ void  CResourceManagerTask::NewBuildingPlace(int a2, int a3, int a4) {
     v10 = 1;
   }
   if ( v10 )
+  {
     return result;
+  }
   C = (CResourceManagerTask::CBuildingPlace *)operator new(0x18u);
   if ( C )
+  {
     v5 = (struct CDynListEntry *)CResourceManagerTask::CBuildingPlace::CBuildingPlace(C, a2, a3, a4);
+  }
   else
+  {
     v5 = 0;
+  }
   return CDynList::addElement(this[19], v5);
 }
 
@@ -107,8 +127,12 @@ void  CResourceManagerTask::UpdateBuildingPlaces(void) {
   int result; // eax
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < CDynList::size(*(CDynList **)(this + 76)); ++i )
+  for ( i = 0;
+        i < CDynList::size(*(CDynList **)(this + 76));
+        ++i )
+  {
     CDynList::elementAt(*(CDynList **)(this + 76), i);
+  }
   result = this;
   ++*(_DWORD *)(this + 64);
   return result;
@@ -122,11 +146,15 @@ bool  CResourceManagerTask::AreaHasResource(int a2, int a3) {
   struct IFilterEntry *FilterEntry; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; i < *((_DWORD *)this[21] + 2); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this[21] + 2);
+        ++i )
   {
     FilterEntry = CFilter::GetFilterEntry(this[21], i);
     if ( FilterEntry && a2 - *((_DWORD *)FilterEntry + 3) < 1 && a3 - *((_DWORD *)FilterEntry + 4) < 1 )
+    {
       return 1;
+    }
   }
   return 0;
 }
@@ -139,7 +167,9 @@ int  CResourceManagerTask::FillRareBuildings(class CReserveEntry * a2, int a3) {
   _DWORD *v5; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = 0; i < CDynList::size(this[19]); ++i )
+  for ( i = 0;
+        i < CDynList::size(this[19]);
+        ++i )
   {
     v5 = (_DWORD *)CDynList::elementAt(this[19], i);
     *((_DWORD *)a2 + 11 * i + 11 * a3 + 8) = v5[3];
@@ -234,14 +264,16 @@ bool  CResourceManagerTask::IsShooting(void a2) {
     v21 = (int (__thiscall ***)(_DWORD, int))*((_DWORD *)v63 + 21);
     v57 = v21;
     if ( v21 )
+    {
       v33 = (**v57)(v57, 1);
+    }
     else
+    {
       v33 = 0;
+    }
     *((_DWORD *)v63 + 21) = 0;
   }
-  BuildingForResource = CProductionDataTab::GetBuildingForResource(
-                          *((_DWORD *)v63 + 11),
-                          *(_DWORD *)(*((_DWORD *)v63 + 10) + 24));
+  BuildingForResource = CProductionDataTab::GetBuildingForResource(*((_DWORD *)v63 + 11), *(_DWORD *)(*((_DWORD *)v63 + 10) + 24));
   *((_DWORD *)v63 + 20) = BuildingForResource;
   std::vector<int>::clear();
   CSchedule::CollectWorkingArea(*((CReserveDatabase ***)v63 + 10), *((_DWORD *)v63 + 20), (int)v20);
@@ -254,16 +286,13 @@ bool  CResourceManagerTask::IsShooting(void a2) {
       C = operator new(0x70u);
       LOBYTE(v64) = 3;
       if ( C )
-        v53 = CMainProblemSolveEvent::CMainProblemSolveEvent(
-                (CMainProblemSolveEvent *)C,
-                *((_DWORD *)v63 + 3),
-                9,
-                7,
-                TargetPosition,
-                0,
-                0);
+      {
+        v53 = CMainProblemSolveEvent::CMainProblemSolveEvent((CMainProblemSolveEvent *)C, *((_DWORD *)v63 + 3), 9, 7, TargetPosition, 0, 0);
+      }
       else
+      {
         v53 = 0;
+      }
       v32 = v53;
       LOBYTE(v64) = 2;
       CSchedule::NewSchedEntry(*((CSchedule **)v63 + 10), v53);
@@ -279,25 +308,20 @@ bool  CResourceManagerTask::IsShooting(void a2) {
       v52 = operator new(0x70u);
       LOBYTE(v64) = 4;
       if ( v52 )
-        v51 = CMainProblemSolveEvent::CMainProblemSolveEvent(
-                (CMainProblemSolveEvent *)v52,
-                *((_DWORD *)v63 + 3),
-                9,
-                14,
-                TargetPosition,
-                0,
-                0);
+      {
+        v51 = CMainProblemSolveEvent::CMainProblemSolveEvent((CMainProblemSolveEvent *)v52, *((_DWORD *)v63 + 3), 9, 14, TargetPosition, 0, 0);
+      }
       else
+      {
         v51 = 0;
+      }
       v31 = v51;
       LOBYTE(v64) = 2;
       CSchedule::NewSchedEntry(*((CSchedule **)v63 + 10), v51);
       *((_DWORD *)v63 + 24) = 200;
     }
   }
-  if ( *((_DWORD *)v63 + 11) == 16
-    && *(_DWORD *)(*((_DWORD *)v63 + 10) + 24) == 1
-    && !CSchedule::EnoughNumberOfBuildingType(*((void **)v63 + 10), 25) )
+  if ( *((_DWORD *)v63 + 11) == 16 && *(_DWORD *)(*((_DWORD *)v63 + 10) + 24) == 1 && !CSchedule::EnoughNumberOfBuildingType(*((void **)v63 + 10), 25) )
   {
     --*((_DWORD *)v63 + 24);
     if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)v63 + 10), 44) > 0 && *((int *)v63 + 24) < 0 )
@@ -306,25 +330,20 @@ bool  CResourceManagerTask::IsShooting(void a2) {
       v50 = operator new(0x70u);
       LOBYTE(v64) = 5;
       if ( v50 )
-        v49 = CMainProblemSolveEvent::CMainProblemSolveEvent(
-                (CMainProblemSolveEvent *)v50,
-                *((_DWORD *)v63 + 3),
-                9,
-                25,
-                TargetPosition,
-                0,
-                0);
+      {
+        v49 = CMainProblemSolveEvent::CMainProblemSolveEvent((CMainProblemSolveEvent *)v50, *((_DWORD *)v63 + 3), 9, 25, TargetPosition, 0, 0);
+      }
       else
+      {
         v49 = 0;
+      }
       v30 = v49;
       LOBYTE(v64) = 2;
       CSchedule::NewSchedEntry(*((CSchedule **)v63 + 10), v49);
       *((_DWORD *)v63 + 24) = 200;
     }
   }
-  if ( *((_DWORD *)v63 + 11) == 16
-    && *(_DWORD *)(*((_DWORD *)v63 + 10) + 24) == 4
-    && !CSchedule::EnoughNumberOfBuildingType(*((void **)v63 + 10), 28) )
+  if ( *((_DWORD *)v63 + 11) == 16 && *(_DWORD *)(*((_DWORD *)v63 + 10) + 24) == 4 && !CSchedule::EnoughNumberOfBuildingType(*((void **)v63 + 10), 28) )
   {
     --*((_DWORD *)v63 + 24);
     if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)v63 + 10), 44) > 0 && *((int *)v63 + 24) < 0 )
@@ -333,16 +352,13 @@ bool  CResourceManagerTask::IsShooting(void a2) {
       v48 = operator new(0x70u);
       LOBYTE(v64) = 6;
       if ( v48 )
-        v47 = CMainProblemSolveEvent::CMainProblemSolveEvent(
-                (CMainProblemSolveEvent *)v48,
-                *((_DWORD *)v63 + 3),
-                9,
-                28,
-                TargetPosition,
-                0,
-                0);
+      {
+        v47 = CMainProblemSolveEvent::CMainProblemSolveEvent((CMainProblemSolveEvent *)v48, *((_DWORD *)v63 + 3), 9, 28, TargetPosition, 0, 0);
+      }
       else
+      {
         v47 = 0;
+      }
       v29 = v47;
       LOBYTE(v64) = 2;
       CSchedule::NewSchedEntry(*((CSchedule **)v63 + 10), v47);
@@ -353,13 +369,21 @@ bool  CResourceManagerTask::IsShooting(void a2) {
   if ( v56 == -6 || v56 > -5 && v56 <= -2 )
   {
     if ( *((_DWORD *)v63 + 11) == -4 )
+    {
       v59 = 1;
+    }
     if ( *((_DWORD *)v63 + 11) == -3 )
+    {
       v59 = 5;
+    }
     if ( *((_DWORD *)v63 + 11) == -2 )
+    {
       v59 = 6;
+    }
     if ( *((_DWORD *)v63 + 11) == -6 )
+    {
       v59 = 2;
+    }
     CProfile::Begin((CProfile *)&stru_4689998);
     EcoSector = CSchedule::GetEcoSector(*((CSchedule **)v63 + 10));
     v2 = (*(int (__thiscall **)(struct IAIEcoManager *, int, _BYTE *))(*(_DWORD *)EcoSector + 248))(EcoSector, v59, v34);
@@ -368,18 +392,26 @@ bool  CResourceManagerTask::IsShooting(void a2) {
     v45 = operator new(0x18u);
     LOBYTE(v64) = 7;
     if ( v45 )
+    {
       v44 = CFilter::CFilter((CFilter *)v45, 8);
+    }
     else
+    {
       v44 = 0;
+    }
     v28 = v44;
     LOBYTE(v64) = 2;
     *((_DWORD *)v63 + 21) = v44;
     CProfile::Begin((CProfile *)&stru_4689998);
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       v3 = std::vector<SUNDERGROUNDCONCENTRATIONDATA>::size(v34);
       if ( i >= v3 )
+      {
         break;
+      }
       if ( *(__int16 *)(std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i) + 4) > 0 )
       {
         v43 = operator new(0x18u);
@@ -406,25 +438,30 @@ bool  CResourceManagerTask::IsShooting(void a2) {
   else
   {
     v41 = CSchedule::GetEcoSector(*((CSchedule **)v63 + 10));
-    v5 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, _BYTE *))(*(_DWORD *)v41 + 180))(
-           v41,
-           *((_DWORD *)v63 + 11),
-           v54);
+    v5 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, _BYTE *))(*(_DWORD *)v41 + 180))(v41, *((_DWORD *)v63 + 11), v54);
     *((_DWORD *)v63 + 13) = v5;
     v40 = operator new(0x18u);
     LOBYTE(v64) = 9;
     if ( v40 )
+    {
       v39 = CFilter::CFilter((CFilter *)v40, 8);
+    }
     else
+    {
       v39 = 0;
+    }
     v26 = v39;
     LOBYTE(v64) = 2;
     *((_DWORD *)v63 + 21) = v39;
-    for ( i = 0; ; ++i )
+    for ( i = 0;
+          ;
+          ++i )
     {
       v6 = std::vector<SRESOURCECONCENTRATIONDATA>::size(v54);
       if ( i >= v6 )
+      {
         break;
+      }
       v58 = *(__int16 *)(std::vector<SRESOURCECONCENTRATIONDATA>::operator[](i) + 4);
       v14 = *(__int16 *)(std::vector<SRESOURCECONCENTRATIONDATA>::operator[](i) + 8);
       v7 = std::vector<SRESOURCECONCENTRATIONDATA>::operator[](i);
@@ -442,11 +479,7 @@ bool  CResourceManagerTask::IsShooting(void a2) {
           v38 = CSchedule::GetEcoSector(*((CSchedule **)v63 + 10));
           v14 = *(__int16 *)(std::vector<SRESOURCECONCENTRATIONDATA>::operator[](i) + 8);
           v9 = std::vector<SRESOURCECONCENTRATIONDATA>::operator[](i);
-          v58 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, _DWORD, int))(*(_DWORD *)v38 + 176))(
-                  v38,
-                  *((_DWORD *)v63 + 11),
-                  *(__int16 *)(v9 + 6),
-                  v14);
+          v58 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, _DWORD, int))(*(_DWORD *)v38 + 176))(v38, *((_DWORD *)v63 + 11), *(__int16 *)(v9 + 6), v14);
         }
       }
       v58 -= v23;
@@ -505,12 +538,18 @@ bool  CResourceManagerTask::action(void) {
   CExpandationEvent *C; // [esp+Ch] [ebp-14h]
 
   if ( CSchedule::IsAnyExpandation(this[10]) )
+  {
     return 1;
+  }
   C = (CExpandationEvent *)operator new(0x74u);
   if ( C )
+  {
     v2 = CExpandationEvent::CExpandationEvent(C, this[3], 0, this[11]);
+  }
   else
+  {
     v2 = 0;
+  }
   this[8] = (CDynList **)CSchedule::NewSchedEntry((CSchedule *)this[10], v2);
   return 1;
 }
@@ -529,7 +568,9 @@ bool  CResourceManagerTask::IsAlive(void) {
 bool  CResourceManagerTask::WaitFor(void) {
   
   if ( *(_DWORD *)(CSchedule::GetInvokeEvent(*((_DWORD *)this + 10), *((_DWORD *)this + 20)) + 48) != 2 )
+  {
     return 1;
+  }
   *((_DWORD *)this + 9) = 1;
   return 0;
 }

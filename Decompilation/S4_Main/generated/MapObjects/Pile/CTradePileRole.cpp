@@ -11,9 +11,13 @@ class CPersistence * __cdecl CTradePileRole::New(std::istream & a1) {
 
   C = (CTradePileRole *)operator new(0x14u);
   if ( C )
+  {
     return CTradePileRole::CTradePileRole(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -43,7 +47,9 @@ void  CTradePileRole::Increase(class CPile * _pPile, int a3) {
   int v10; // [esp-4h] [ebp-Ch]
 
   if ( !_pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 226, "_pPile") == 1 )
+  {
     __debugbreak();
+  }
   if ( CTradePileRole::GetTradeRoleType(this) == 1 || CTradePileRole::GetTradeRoleType(this) == 3 )
   {
     v10 = _pPile->GetGoodType();
@@ -78,7 +84,9 @@ void  CTradePileRole::Decrease(class CPile * _pPile, int a3) {
   struct CBuilding *BuildingPtr; // [esp+4h] [ebp-8h]
 
   if ( !_pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 270, "_pPile") == 1 )
+  {
     __debugbreak();
+  }
   if ( CTradePileRole::GetTradeRoleType(this) == 1 )
   {
     BuildingId = CPile::GetBuildingId(_pPile);
@@ -178,8 +186,7 @@ void  CTradePileRole::LogicUpdate(class CPile * a2) {
   int v12; // [esp+4h] [ebp-Ch]
   struct CBuilding *v13; // [esp+8h] [ebp-8h]
 
-  if ( (CTradePileRole::GetTradeRoleType(this) == 1 || CTradePileRole::GetTradeRoleType(this) == 3)
-    && !CPile::GetOfferFlag(a2) )
+  if ( (CTradePileRole::GetTradeRoleType(this) == 1 || CTradePileRole::GetTradeRoleType(this) == 3) && !CPile::GetOfferFlag(a2) )
   {
     if ( CTradePileRole::GetExpectedAmount(this) )
     {
@@ -259,7 +266,9 @@ bool  CTradePileRole::SetFree(class CPile * a2, int a3) {
     }
   }
   if ( CTradePileRole::GetTradeRoleType(this) != 2 )
+  {
     return 0;
+  }
   v4 = a2->Amount(a2);
   CPile::CancelOffer(a2, v4, a3);
   CPile::SetOfferFlag(a2, 0);
@@ -295,13 +304,11 @@ void  CTradePileRole::SubjectDie(class CPile * _pPile, int a1) {
   CStorageBuildingRole *v5; // [esp+4h] [ebp-8h]
   CBuilding *v6; // [esp+8h] [ebp-4h]
 
-  if ( CPile::AmountLeaving(_pPile)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 355, "_pPile->AmountLeaving() == 0") == 1 )
+  if ( CPile::AmountLeaving(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 355, "_pPile->AmountLeaving() == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( CPile::AmountComing(_pPile)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 356, "_pPile->AmountComing() == 0") == 1 )
+  if ( CPile::AmountComing(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 356, "_pPile->AmountComing() == 0") == 1 )
   {
     __debugbreak();
   }
@@ -382,7 +389,9 @@ bool  CTradePileRole::ChangeGoodTypeUnforseen(class CPile * a2, int a3) {
     CStorageBuildingRole::ExecuteUnforseenGoodTypeChange(v8, v4, v10, a3);
   }
   if ( IEntity::Type(v11) != 33 )
+  {
     return v12;
+  }
   v7 = (CTradingBuildingRole *)CBuilding::Role(v11);
   v5 = IEntity::ID(a2);
   CTradingBuildingRole::ExecuteUnforseenGoodTypeChange(v7, v5, v10, a3);
@@ -400,7 +409,9 @@ void  CTradePileRole::SetTradeRoleType(enum CTradePileRole::TRADEPILE_ROLE a2) {
   CPile *v6; // [esp+Ch] [ebp-4h]
 
   if ( this->m_iTradeRoleType == 4 )
+  {
     this->m_iReserveAmount = 0;
+  }
   this->m_iTradeRoleType = a2;
   if ( this->m_iTradeRoleType == 1 || this->m_iTradeRoleType == 3 )
   {
@@ -499,7 +510,9 @@ void  CTradePileRole::DecAmountLeaving(class CPile * a2) {
 void  CTradePileRole::IncAmountComing(class CPile * a2) {
   
   if ( this->m_iExpectedAmount > 0 )
+  {
     --this->m_iExpectedAmount;
+  }
 }
 
 
@@ -511,7 +524,9 @@ void  CTradePileRole::DecAmountComing(class CPile * a2) {
 
   v2 = 8 - a2->Amount(a2);
   if ( this->m_iExpectedAmount < v2 - CPile::AmountComing(a2) )
+  {
     ++this->m_iExpectedAmount;
+  }
 }
 
 
@@ -523,24 +538,27 @@ int  CTradePileRole::ReservesGood(int _iAmount, enum PILE_TYPES a3, class CPile 
   int v6; // [esp+0h] [ebp-8h]
 
   if ( _iAmount < 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 689, "_iAmount >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 690, "pPile!=NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !pPile )
+  {
     return _iAmount;
-  if ( CTradePileRole::GetTradeRoleType(this) != 4
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Pile\\TradePileRole.cpp",
-         691,
-         "this->GetTradeRoleType() == TRADEPILE_EXPORT_RESERVES") == 1 )
+  }
+  if ( CTradePileRole::GetTradeRoleType(this) != 4 && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 691, "this->GetTradeRoleType() == TRADEPILE_EXPORT_RESERVES") == 1 )
   {
     __debugbreak();
   }
   v5 = pPile->Amount(pPile);
   v6 = v5 - this->m_iReserveAmount;
   if ( v6 <= 0 )
+  {
     return 0;
+  }
   if ( v6 < _iAmount )
   {
     this->m_iReserveAmount = v5;
@@ -558,8 +576,7 @@ int  CTradePileRole::ReservesGood(int _iAmount, enum PILE_TYPES a3, class CPile 
 // Decompiled from int __thiscall CTradePileRole::GetReserveAmount(CTradePileRole *this)
 int  CTradePileRole::GetReserveAmount(void) {
   
-  if ( this->m_iTradeRoleType != 4
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 711, "m_iRoleType == TRADEPILE_EXPORT_RESERVES") == 1 )
+  if ( this->m_iTradeRoleType != 4 && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 711, "m_iRoleType == TRADEPILE_EXPORT_RESERVES") == 1 )
   {
     __debugbreak();
   }
@@ -587,7 +604,9 @@ int  CTradePileRole::GetReserveAmount(void) {
     this->m_iTradeRoleType = a2;
     operator^<int>(a1, &this->m_iExpectedAmount);
     if ( v5 == 1 )
+    {
       return this;
+    }
   }
   if ( v5 < 2 )
   {

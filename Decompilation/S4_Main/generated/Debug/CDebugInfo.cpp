@@ -34,14 +34,18 @@ bool __cdecl CDebugInfo::CheckEnvironment(bool _bLogEnv) {
     CTrace::Print("DebugInfo.cpp: Error calling CheckMemory(); LastError: %d", LastError);
   }
   if ( _bLogEnv )
+  {
     CDebugInfo::LogEnvironment();
+  }
   if ( !CDebugInfo::IsWindowsNT40() || CDebugInfo::IsMMX() )
   {
     if ( CDebugInfo::IsTargetPlatform() )
     {
       CDebugInfo::m_EnvInfo.bLoadedWSA = ImportWSAFunctions();
       if ( !CDebugInfo::m_EnvInfo.bLoadedWSA )
+      {
         CTrace::Print("DebugInfo.cpp: Winsock2 not found !!!!");
+      }
       CDebugInfo::CheckGraphicsAdapter();
       return 1;
     }
@@ -64,9 +68,13 @@ bool __cdecl CDebugInfo::CheckEnvironment(bool _bLogEnv) {
 bool __cdecl CDebugInfo::IsTargetPlatform(void) {
   
   if ( CDebugInfo::m_EnvInfo.sPlatformId == 2 )
+  {
     return CDebugInfo::m_EnvInfo.sOSVersionMayor >= 4;
+  }
   if ( CDebugInfo::m_EnvInfo.sPlatformId == 1 )
+  {
     return CDebugInfo::m_EnvInfo.sOSVersionMayor >= 4;
+  }
   return CDebugInfo::m_EnvInfo.sPlatformId != 0;
 }
 
@@ -104,9 +112,13 @@ void __cdecl CDebugInfo::LogEnvironment(void) {
   BBSupportTracePrintF(1, "# of CPUs : %d", CDebugInfo::m_EnvInfo.sProcessorCount);
   BBSupportTracePrintF(1, "CPU Speed : %d", CDebugInfo::m_EnvInfo.sProcessorSpeed);
   if ( CDebugInfo::m_EnvInfo.bIsMMX )
+  {
     BBSupportTracePrintF(1, "MMX Ext.  : %s", "Yes");
+  }
   else
+  {
     BBSupportTracePrintF(1, "MMX Ext.  : %s", "No");
+  }
   BBSupportTracePrintF(1, (char *)&sEmpty4);
   BBSupportTracePrintF(1, "OPERATING SYSTEM INFORMATION");
   BBSupportTracePrintF(1, "---------------------------------------------------------------------");
@@ -145,8 +157,7 @@ bool __cdecl CDebugInfo::CheckOS(void) {
     {
       if ( CDebugInfo::m_EnvInfo.sPlatformId == 1 )
       {
-        if ( CDebugInfo::m_EnvInfo.sOSVersionMayor > 4
-          || CDebugInfo::m_EnvInfo.sOSVersionMayor == 4 && CDebugInfo::m_EnvInfo.sOSVersionMinor > 0 )
+        if ( CDebugInfo::m_EnvInfo.sOSVersionMayor > 4 || CDebugInfo::m_EnvInfo.sOSVersionMayor == 4 && CDebugInfo::m_EnvInfo.sOSVersionMinor > 0 )
         {
           CDebugInfo::m_EnvInfo.sVersion = 4;
         }
@@ -170,9 +181,13 @@ bool __cdecl CDebugInfo::CheckOS(void) {
             break;
           default:
             if ( CDebugInfo::m_EnvInfo.sOSVersionMayor <= 5 )
+            {
               CDebugInfo::m_EnvInfo.sVersion = 0;
+            }
             else
+            {
               CDebugInfo::m_EnvInfo.sVersion = 7;
+            }
             break;
         }
       }
@@ -215,9 +230,13 @@ bool __cdecl CDebugInfo::CheckCPU(void) {
     cbData = 4;
     v6 = RegQueryValueExA(phkResult, "~MHz", 0, 0, Data, &cbData);
     if ( v6 )
+    {
       v6 = RegQueryValueExA(phkResult, "~Mhz", 0, 0, Data, &cbData);
+    }
     if ( v6 )
+    {
       v6 = RegQueryValueExA(phkResult, "~mhz", 0, 0, Data, &cbData);
+    }
     RegCloseKey(phkResult);
   }
   v6 = 1;
@@ -338,25 +357,35 @@ struct SFreqInfo __cdecl CDebugInfo::GetBSFCpuSpeed(unsigned int retstr) {
   memset(&v12, 0, sizeof(v12));
   if ( QueryPerformanceFrequency(&Frequency) )
   {
-    for ( i = 0; i < 10; ++i )
+    for ( i = 0;
+          i < 10;
+          ++i )
     {
       QueryPerformanceCounter(&PerformanceCount);
       v3 = 4000;
       do
+      {
         --v3;
+      }
       while ( v3 );
       QueryPerformanceCounter(&v5);
       v8 = v5.LowPart - PerformanceCount.LowPart;
       if ( v5.LowPart - PerformanceCount.LowPart < v7 )
+      {
         v7 = v8;
+      }
     }
     v11 = 100000 * v7 / (Frequency.LowPart / 0xA);
     if ( v11 % Frequency.LowPart > Frequency.LowPart >> 1 )
+    {
       ++v11;
+    }
     v10 = a1 / v11;
     v12.m_uSpeed2 = a1 / v11;
     if ( a1 % v11 > v11 >> 1 )
+    {
       ++v10;
+    }
     v12.m_uSpeed1 = v11;
     v12.m_uSpeed3 = v10;
     retstr->m_uSpeed0 = a1;
@@ -416,7 +445,9 @@ struct SFreqInfo __cdecl CDebugInfo::GetRDTSCCpuSpeed(void retstr) {
       v12 = PerformanceCount;
       nPriority = GetThreadPriority(hThread);
       if ( nPriority != 0x7FFFFFFF )
+      {
         SetThreadPriority(hThread, 15);
+      }
       while ( v12.LowPart - PerformanceCount.LowPart < 0x32 )
       {
         QueryPerformanceCounter(&v12);
@@ -431,28 +462,38 @@ struct SFreqInfo __cdecl CDebugInfo::GetRDTSCCpuSpeed(void retstr) {
         v6 = v3;
       }
       if ( nPriority != 0x7FFFFFFF )
+      {
         SetThreadPriority(hThread, nPriority);
+      }
       v9 = v6 - v5;
       v19 = 100000 * (v12.LowPart - PerformanceCount.LowPart) / (Frequency.LowPart / 0xA);
       v15 += v19;
       v14 += v6 - v5;
       if ( v19 % Frequency.LowPart > Frequency.LowPart >> 1 )
+      {
         ++v19;
+      }
       v17 = v9 / v19;
       if ( v9 % v19 > v19 >> 1 )
+      {
         ++v17;
+      }
       v8 = v18 + v16 + v17;
     }
     while ( v13 < 3 || v13 < 20 && (j__abs(3 * v17 - v8) > 3 || j__abs(3 * v16 - v8) > 3 || j__abs(3 * v18 - v8) > 3) );
     v18 = 10 * v14 / v15;
     v16 = 100 * v14 / v15;
     if ( v16 - 10 * v18 >= 6 )
+    {
       ++v18;
+    }
     v20.m_uSpeed2 = v14 / v15;
     v20.m_uSpeed3 = v14 / v15;
     v17 = 10 * (v14 / v15);
     if ( v18 - v17 >= 6 )
+    {
       ++v20.m_uSpeed3;
+    }
     v20.m_uSpeed1 = v15;
     retstr->m_uSpeed0 = v14;
     retstr->m_uSpeed1 = v20.m_uSpeed1;
@@ -489,12 +530,16 @@ unsigned short __cdecl CDebugInfo::wincpuid(void) {
       {
         v3 = CDebugInfo::check_80386();
         if ( v3 != 3 )
+        {
           v3 = 4;
+        }
       }
     }
   }
   if ( CDebugInfo::m_iClone )
+  {
     return v3 | 0x8000;
+  }
   return v3;
 }
 
@@ -508,19 +553,27 @@ unsigned int __cdecl CDebugInfo::wincpufeatures(void) {
 
   v11 = 0;
   if ( !(unsigned __int16)CDebugInfo::wincpuidsupport() )
+  {
     return v11;
+  }
   _EAX = 0;
   __asm { cpuid }
   *(_DWORD *)sCPUVendor = _EBX;
   *(_DWORD *)&sCPUVendor[4] = _EDX;
   *(_DWORD *)&sCPUVendor[8] = _ECX;
-  for ( i = 0; i < 12; ++i )
+  for ( i = 0;
+        i < 12;
+        ++i )
   {
     if ( sCPUVendor[i] != aGenuineintel[i] )
+    {
       CDebugInfo::m_iClone = 1;
+    }
   }
   if ( _EAX < 1 )
+  {
     return v11;
+  }
   _EAX = 1;
   __asm { cpuid }
   return _EDX;
@@ -555,7 +608,9 @@ struct SFreqInfo __cdecl CDebugInfo::GetCmosCpuSpeed(void a1) {
   memset(&v19, 0, sizeof(v19));
   nPriority = GetThreadPriority(hThread);
   if ( nPriority != 0x7FFFFFFF )
+  {
     SetThreadPriority(hThread, nPriority + 1);
+  }
   CmosTick = CDebugInfo::GetCmosTick();
   do
   {
@@ -589,19 +644,27 @@ struct SFreqInfo __cdecl CDebugInfo::GetCmosCpuSpeed(void a1) {
   while ( !v9 );
   CDebugInfo::cpuTimeStamp(&v5, &v6);
   if ( nPriority != 0x7FFFFFFF )
+  {
     SetThreadPriority(hThread, nPriority);
+  }
   CDebugInfo::diffTime64(v3, v4, v5, v6, v2, &v7);
   if ( v18 >= CmosTick )
+  {
     v8 = v18 - CmosTick;
+  }
   else
+  {
     v8 = v18 + 10 - CmosTick;
+  }
   v19.m_uSpeed0 = v7;
   v2[1] = v7 / 0x186A0;
   v13 = 10 * (v7 / 0xF4240);
   v16 = v7 / 0xF4240;
   v19.m_uSpeed2 = v7 / 0xF4240;
   if ( v7 / 0x186A0 - v13 >= 6 )
+  {
     ++v16;
+  }
   v19.m_uSpeed3 = v16;
   v19.m_uSpeed1 = 1000000 * (v18 - CmosTick);
   *a1 = v19;
@@ -652,7 +715,9 @@ unsigned short __cdecl CDebugInfo::check_80386(void) {
   v1 = __readeflags();
   v3 = 3;
   if ( v0 != v1 )
+  {
     v3 = -1;
+  }
   __writeeflags(v0);
   return v3;
 }
@@ -674,13 +739,19 @@ unsigned short __cdecl CDebugInfo::check_IDProc(void) {
   v13[0] = _EBX;
   v13[1] = _EDX;
   v13[2] = _ECX;
-  for ( i = 0; i < 12; ++i )
+  for ( i = 0;
+        i < 12;
+        ++i )
   {
     if ( *((unsigned __int8 *)v13 + i) != (unsigned __int8)v12[i] )
+    {
       CDebugInfo::m_iClone = 1;
+    }
   }
   if ( _EAX < 1 )
+  {
     return sCPUFamily;
+  }
   _EAX = 1;
   __asm { cpuid }
   sCPUSteppg = _EAX & 0xF;
@@ -729,7 +800,7 @@ unsigned int __cdecl CDebugInfo::cpuTimeStamp(unsigned long * a1, unsigned long 
 
 
 // address=[0x14809c0]
-// Decompiled from int __cdecl CDebugInfo::diffTime64(  unsigned int a1,  unsigned int a2,  unsigned int a3,  unsigned int a4,  unsigned int *a5,  unsigned int *a6)
+// Decompiled from int __cdecl CDebugInfo::diffTime64(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4, unsigned int *a5, unsigned int *a6)
 unsigned int __cdecl CDebugInfo::diffTime64(unsigned long a1, unsigned long a2, unsigned long a3, unsigned long a4, unsigned long * a5, unsigned long * a6) {
   
   *a6 = a4 - a2;

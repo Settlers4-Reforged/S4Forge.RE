@@ -20,23 +20,29 @@ bool  AdvXMLParser::Dtd::ParseDoctypedecl(class AdvXMLParser::Parser & a2) {
   int v5; // [esp+34h] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseString(a2, "<!DOCTYPE") )
+  {
     return 0;
+  }
   if ( !AdvXMLParser::Parser::ParseSpaces(a2) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 26);
+  }
   std::string::string();
   v5 = 0;
   if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 26);
+  }
   AdvXMLParser::Parser::ParseSpaces(a2);
   if ( AdvXMLParser::Dtd::ParseExternalID(this, a2) )
+  {
     AdvXMLParser::Parser::ParseSpaces(a2);
+  }
   if ( AdvXMLParser::Parser::ParseChar(a2, 91) )
   {
     while ( !AdvXMLParser::Parser::ParseChar(a2, 93) )
     {
-      if ( !AdvXMLParser::Parser::ParseSpaces(a2)
-        && !AdvXMLParser::Dtd::ParseMarkupdecl(this, a2)
-        && !AdvXMLParser::Dtd::ParsePEReference(this, a2) )
+      if ( !AdvXMLParser::Parser::ParseSpaces(a2) && !AdvXMLParser::Dtd::ParseMarkupdecl(this, a2) && !AdvXMLParser::Dtd::ParsePEReference(this, a2) )
       {
         AdvXMLParser::Parser::SyntaxError(a2, 26);
       }
@@ -44,7 +50,9 @@ bool  AdvXMLParser::Dtd::ParseDoctypedecl(class AdvXMLParser::Parser & a2) {
     AdvXMLParser::Parser::ParseSpaces(a2);
   }
   if ( !AdvXMLParser::Parser::ParseChar(a2, 62) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 26);
+  }
   v5 = -1;
   std::string::~string(v4);
   return 1;
@@ -59,11 +67,15 @@ bool  AdvXMLParser::Dtd::ParsePEReference(class AdvXMLParser::Parser & a2) {
   int v4; // [esp+34h] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseChar(a2, 37) )
+  {
     return 0;
+  }
   std::string::string();
   v4 = 0;
   if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v3) || !AdvXMLParser::Parser::ParseChar(a2, 59) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 27);
+  }
   v4 = -1;
   std::string::~string(v3);
   return 1;
@@ -79,16 +91,24 @@ bool  AdvXMLParser::Dtd::ParseSystemLiteral(class AdvXMLParser::Parser & a2) {
 
   Char = AdvXMLParser::Parser::NextChar(a2);
   if ( Char != 39 && Char != 34 )
+  {
     return 0;
+  }
   while ( 1 )
   {
     v4 = AdvXMLParser::Parser::NextChar(a2);
     if ( (char)v4 == Char )
+    {
       break;
+    }
     if ( !v4 )
+    {
       AdvXMLParser::Parser::SyntaxError(a2, 1);
+    }
     if ( !AdvXMLParser::IsXmlChar((AdvXMLParser *)v4) )
+    {
       AdvXMLParser::Parser::SyntaxError(a2, 2);
+    }
   }
   return 1;
 }
@@ -103,16 +123,24 @@ bool  AdvXMLParser::Dtd::ParsePubidLiteral(class AdvXMLParser::Parser & a2) {
 
   Char = AdvXMLParser::Parser::NextChar(a2);
   if ( Char != 39 && Char != 34 )
+  {
     return 0;
+  }
   while ( 1 )
   {
     v4 = AdvXMLParser::Parser::NextChar(a2);
     if ( v4 == Char )
+    {
       break;
+    }
     if ( !v4 )
+    {
       AdvXMLParser::Parser::SyntaxError(a2, 1);
+    }
     if ( !(unsigned __int8)sub_2F26F60(v4) )
+    {
       AdvXMLParser::Parser::SyntaxError(a2, 28);
+    }
   }
   return 1;
 }
@@ -122,10 +150,7 @@ bool  AdvXMLParser::Dtd::ParsePubidLiteral(class AdvXMLParser::Parser & a2) {
 // Decompiled from bool __thiscall AdvXMLParser::Dtd::ParseMarkupdecl(AdvXMLParser::Dtd *this, struct AdvXMLParser::Parser *a2)
 bool  AdvXMLParser::Dtd::ParseMarkupdecl(class AdvXMLParser::Parser & a2) {
   
-  return AdvXMLParser::Dtd::ParseElementDecl(this, a2)
-      || AdvXMLParser::Dtd::ParseAttlistDecl(this, a2)
-      || AdvXMLParser::Dtd::ParseEntityDecl(this, a2)
-      || AdvXMLParser::Dtd::ParseNotationDecl(this, a2);
+  return AdvXMLParser::Dtd::ParseElementDecl(this, a2) || AdvXMLParser::Dtd::ParseAttlistDecl(this, a2) || AdvXMLParser::Dtd::ParseEntityDecl(this, a2) || AdvXMLParser::Dtd::ParseNotationDecl(this, a2);
 }
 
 
@@ -137,19 +162,20 @@ bool  AdvXMLParser::Dtd::ParseElementDecl(class AdvXMLParser::Parser & a2) {
   int v5; // [esp+34h] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseString(a2, "<!ELEMENT") )
+  {
     return 0;
+  }
   std::string::string();
   v5 = 0;
-  if ( !AdvXMLParser::Parser::ParseSpaces(a2)
-    || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4)
-    || !AdvXMLParser::Parser::ParseSpaces(a2)
-    || !AdvXMLParser::Dtd::ParseContentspec(this, a2) )
+  if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseContentspec(this, a2) )
   {
     AdvXMLParser::Parser::SyntaxError(a2, 29);
   }
   AdvXMLParser::Parser::ParseSpaces(a2);
   if ( AdvXMLParser::Parser::NextChar(a2) != 62 )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 29);
+  }
   v5 = -1;
   std::string::~string(v4);
   return 1;
@@ -161,9 +187,13 @@ bool  AdvXMLParser::Dtd::ParseElementDecl(class AdvXMLParser::Parser & a2) {
 bool  AdvXMLParser::Dtd::ParseContentspec(class AdvXMLParser::Parser & a2) {
   
   if ( AdvXMLParser::Parser::ParseString(a2, "EMPTY") )
+  {
     return 1;
+  }
   if ( AdvXMLParser::Parser::ParseString(a2, "ANY") )
+  {
     return 1;
+  }
   return AdvXMLParser::Dtd::ParseMixed(this, a2) || AdvXMLParser::Dtd::ParseChildren(this, a2);
 }
 
@@ -180,7 +210,9 @@ bool  AdvXMLParser::Dtd::ParseMixed(class AdvXMLParser::Parser & a2) {
   v4 = this;
   AdvXMLParser::Bookmark::Bookmark((AdvXMLParser::Bookmark *)v3, a2);
   if ( !AdvXMLParser::Parser::ParseChar(a2, 40) )
+  {
     return 0;
+  }
   AdvXMLParser::Parser::ParseSpaces(a2);
   if ( AdvXMLParser::Parser::ParseString(a2, "#PCDATA") )
   {
@@ -198,14 +230,18 @@ bool  AdvXMLParser::Dtd::ParseMixed(class AdvXMLParser::Parser & a2) {
       while ( 1 )
       {
         if ( !AdvXMLParser::Parser::ParseChar(a2, 124) )
+        {
           AdvXMLParser::Parser::SyntaxError(a2, 30);
+        }
         std::string::string();
         v6 = 0;
         AdvXMLParser::Parser::ParseSpaces(a2);
         AdvXMLParser::Parser::ParseName(v5);
         AdvXMLParser::Parser::ParseSpaces(a2);
         if ( AdvXMLParser::Parser::ParseString(a2, ")*") )
+        {
           break;
+        }
         v6 = -1;
         std::string::~string(v5);
       }
@@ -230,10 +266,14 @@ bool  AdvXMLParser::Dtd::ParseChildren(class AdvXMLParser::Parser & a2) {
   bool v4; // [esp+Bh] [ebp-1h] BYREF
 
   if ( !AdvXMLParser::Dtd::ParseChoiceSeq(this, a2, &v4) )
+  {
     return 0;
+  }
   Char = AdvXMLParser::Parser::NextChar(a2);
   if ( Char < 42 || Char > 43 && Char != 63 )
+  {
     AdvXMLParser::Parser::PreviousChar(a2);
+  }
   return 1;
 }
 
@@ -246,26 +286,36 @@ bool  AdvXMLParser::Dtd::ParseChoiceSeq(class AdvXMLParser::Parser & a2, bool & 
   char Char; // [esp+Fh] [ebp-1h]
 
   if ( !AdvXMLParser::Parser::ParseChar(a2, 40) )
+  {
     return 0;
+  }
   AdvXMLParser::Parser::ParseSpaces(a2);
   if ( !AdvXMLParser::Dtd::ParseCp(this, a2) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 32);
+  }
   AdvXMLParser::Parser::ParseSpaces(a2);
   Char = AdvXMLParser::Parser::NextChar(a2);
   v5 = Char;
   while ( Char != 41 )
   {
     if ( !Char )
+    {
       AdvXMLParser::Parser::SyntaxError(a2, 1);
+    }
     if ( Char != v5 )
     {
       if ( v5 == 124 )
+      {
         AdvXMLParser::Parser::SyntaxError(a2, 30);
+      }
       AdvXMLParser::Parser::SyntaxError(a2, 31);
     }
     AdvXMLParser::Parser::ParseSpaces(a2);
     if ( !AdvXMLParser::Dtd::ParseCp(this, a2) )
+    {
       AdvXMLParser::Parser::SyntaxError(a2, 32);
+    }
     AdvXMLParser::Parser::ParseSpaces(a2);
     Char = AdvXMLParser::Parser::NextChar(a2);
   }
@@ -290,7 +340,9 @@ bool  AdvXMLParser::Dtd::ParseCp(class AdvXMLParser::Parser & a2) {
   {
     Char = AdvXMLParser::Parser::NextChar(a2);
     if ( Char < 42 || Char > 43 && Char != 63 )
+    {
       AdvXMLParser::Parser::PreviousChar(a2);
+    }
     v6 = 1;
     v9 = -1;
     std::string::~string(v8);
@@ -314,16 +366,24 @@ bool  AdvXMLParser::Dtd::ParseAttlistDecl(class AdvXMLParser::Parser & a2) {
   int v5; // [esp+34h] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseString(a2, "<!ATTLIST") )
+  {
     return 0;
+  }
   std::string::string();
   v5 = 0;
   if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 33);
+  }
   while ( AdvXMLParser::Dtd::ParseAttDef(this, a2) )
+  {
     ;
+  }
   AdvXMLParser::Parser::ParseSpaces(a2);
   if ( AdvXMLParser::Parser::NextChar(a2) != 62 )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 33);
+  }
   v5 = -1;
   std::string::~string(v4);
   return 1;
@@ -347,10 +407,7 @@ bool  AdvXMLParser::Dtd::ParseAttDef(class AdvXMLParser::Parser & a2) {
   v8 = 0;
   if ( AdvXMLParser::Parser::ParseSpaces(a2) && (unsigned __int8)AdvXMLParser::Parser::ParseName(v7) )
   {
-    if ( !AdvXMLParser::Parser::ParseSpaces(a2)
-      || !AdvXMLParser::Dtd::ParseAttType(v4, a2)
-      || !AdvXMLParser::Parser::ParseSpaces(a2)
-      || !AdvXMLParser::Dtd::ParseDefaultDecl(v4, a2) )
+    if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseAttType(v4, a2) || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseDefaultDecl(v4, a2) )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 34);
     }
@@ -375,14 +432,10 @@ bool  AdvXMLParser::Dtd::ParseAttDef(class AdvXMLParser::Parser & a2) {
 bool  AdvXMLParser::Dtd::ParseAttType(class AdvXMLParser::Parser & a2) {
   
   if ( AdvXMLParser::Parser::ParseString(a2, "CDATA") )
+  {
     return 1;
-  if ( AdvXMLParser::Parser::ParseString(a2, "IDREFS")
-    || AdvXMLParser::Parser::ParseString(a2, "IDREF")
-    || AdvXMLParser::Parser::ParseString(a2, "ID")
-    || AdvXMLParser::Parser::ParseString(a2, "ENTITIES")
-    || AdvXMLParser::Parser::ParseString(a2, "ENTITY")
-    || AdvXMLParser::Parser::ParseString(a2, "NMTOKENS")
-    || AdvXMLParser::Parser::ParseString(a2, "NMTOKEN") )
+  }
+  if ( AdvXMLParser::Parser::ParseString(a2, "IDREFS") || AdvXMLParser::Parser::ParseString(a2, "IDREF") || AdvXMLParser::Parser::ParseString(a2, "ID") || AdvXMLParser::Parser::ParseString(a2, "ENTITIES") || AdvXMLParser::Parser::ParseString(a2, "ENTITY") || AdvXMLParser::Parser::ParseString(a2, "NMTOKENS") || AdvXMLParser::Parser::ParseString(a2, "NMTOKEN") )
   {
     return 1;
   }
@@ -399,14 +452,20 @@ bool  AdvXMLParser::Dtd::ParseNotationType(class AdvXMLParser::Parser & a2) {
   int v5; // [esp+50h] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseString(a2, "NOTATION") )
+  {
     return 0;
+  }
   if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Parser::ParseChar(a2, 40) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 35);
+  }
   AdvXMLParser::Parser::ParseSpaces(a2);
   std::string::string();
   v5 = 0;
   if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v3) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 35);
+  }
   AdvXMLParser::Parser::ParseSpaces(a2);
   while ( AdvXMLParser::Parser::ParseChar(a2, 124) )
   {
@@ -414,13 +473,17 @@ bool  AdvXMLParser::Dtd::ParseNotationType(class AdvXMLParser::Parser & a2) {
     std::string::string();
     LOBYTE(v5) = 1;
     if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) )
+    {
       AdvXMLParser::Parser::SyntaxError(a2, 35);
+    }
     AdvXMLParser::Parser::ParseSpaces(a2);
     LOBYTE(v5) = 0;
     std::string::~string(v4);
   }
   if ( !AdvXMLParser::Parser::ParseChar(a2, 41) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 35);
+  }
   v5 = -1;
   std::string::~string(v3);
   return 1;
@@ -436,12 +499,16 @@ bool  AdvXMLParser::Dtd::ParseEnumeration(class AdvXMLParser::Parser & a2) {
   int v5; // [esp+50h] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseChar(a2, 40) )
+  {
     return 0;
+  }
   AdvXMLParser::Parser::ParseSpaces(a2);
   std::string::string();
   v5 = 0;
   if ( !(unsigned __int8)AdvXMLParser::Parser::ParseNmtoken(v3) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 36);
+  }
   AdvXMLParser::Parser::ParseSpaces(a2);
   while ( AdvXMLParser::Parser::ParseChar(a2, 124) )
   {
@@ -449,13 +516,17 @@ bool  AdvXMLParser::Dtd::ParseEnumeration(class AdvXMLParser::Parser & a2) {
     std::string::string();
     LOBYTE(v5) = 1;
     if ( !(unsigned __int8)AdvXMLParser::Parser::ParseNmtoken(v4) )
+    {
       AdvXMLParser::Parser::SyntaxError(a2, 36);
+    }
     AdvXMLParser::Parser::ParseSpaces(a2);
     LOBYTE(v5) = 0;
     std::string::~string(v4);
   }
   if ( !AdvXMLParser::Parser::ParseChar(a2, 41) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 36);
+  }
   v5 = -1;
   std::string::~string(v3);
   return 1;
@@ -471,9 +542,13 @@ bool  AdvXMLParser::Dtd::ParseDefaultDecl(class AdvXMLParser::Parser & a2) {
   int v5; // [esp+6Ch] [ebp-4h]
 
   if ( AdvXMLParser::Parser::ParseString(a2, "#REQUIRED") || AdvXMLParser::Parser::ParseString(a2, "#IMPLIED") )
+  {
     return 1;
+  }
   if ( AdvXMLParser::Parser::ParseString(a2, "#FIXED") && !AdvXMLParser::Parser::ParseSpaces(a2) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 37);
+  }
   std::string::string(v4, (char *)byte_3AB88DA);
   v5 = 0;
   AdvXMLParser::Attribute::Attribute(AdvXMLParser::Node::null, v4);
@@ -503,17 +578,18 @@ bool  AdvXMLParser::Dtd::ParseEntityDecl(class AdvXMLParser::Parser & a2) {
   int v6; // [esp+4Ch] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseString(a2, "<!ENTITY") )
+  {
     return 0;
+  }
   if ( !AdvXMLParser::Parser::ParseSpaces(a2) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 38);
+  }
   if ( AdvXMLParser::Parser::ParseChar(a2, 37) )
   {
     std::string::string();
     v6 = 0;
-    if ( !AdvXMLParser::Parser::ParseSpaces(a2)
-      || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v5)
-      || !AdvXMLParser::Parser::ParseSpaces(a2)
-      || !AdvXMLParser::Dtd::ParsePEDef(this, a2) )
+    if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v5) || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParsePEDef(this, a2) )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 38);
     }
@@ -524,9 +600,7 @@ bool  AdvXMLParser::Dtd::ParseEntityDecl(class AdvXMLParser::Parser & a2) {
   {
     std::string::string();
     v6 = 1;
-    if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4)
-      || !AdvXMLParser::Parser::ParseSpaces(a2)
-      || !AdvXMLParser::Dtd::ParseEntityDef(this, a2) )
+    if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseEntityDef(this, a2) )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 38);
     }
@@ -535,7 +609,9 @@ bool  AdvXMLParser::Dtd::ParseEntityDecl(class AdvXMLParser::Parser & a2) {
   }
   AdvXMLParser::Parser::ParseSpaces(a2);
   if ( !AdvXMLParser::Parser::ParseChar(a2, 62) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 38);
+  }
   return 1;
 }
 
@@ -545,9 +621,13 @@ bool  AdvXMLParser::Dtd::ParseEntityDecl(class AdvXMLParser::Parser & a2) {
 bool  AdvXMLParser::Dtd::ParseEntityDef(class AdvXMLParser::Parser & a2) {
   
   if ( AdvXMLParser::Dtd::ParseEntityValue(this, a2) )
+  {
     return 1;
+  }
   if ( !AdvXMLParser::Dtd::ParseExternalID(this, a2) )
+  {
     return 0;
+  }
   AdvXMLParser::Dtd::ParseNDataDecl(this, a2);
   return 1;
 }
@@ -566,13 +646,17 @@ bool  AdvXMLParser::Dtd::ParseNDataDecl(class AdvXMLParser::Parser & a2) {
   v4 = this;
   AdvXMLParser::Bookmark::Bookmark((AdvXMLParser::Bookmark *)v3, a2);
   if ( !AdvXMLParser::Parser::ParseSpaces(a2) )
+  {
     return 0;
+  }
   if ( AdvXMLParser::Parser::ParseString(a2, "NDATA") )
   {
     std::string::string();
     v7 = 0;
     if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v6) )
+    {
       AdvXMLParser::Parser::SyntaxError(a2, 39);
+    }
     v5 = 1;
     v7 = -1;
     std::string::~string(v6);
@@ -614,12 +698,16 @@ bool  AdvXMLParser::Dtd::ParseEntityValue(class AdvXMLParser::Parser & a2) {
     {
       v7 = v8;
       if ( !v8 )
+      {
         AdvXMLParser::Parser::SyntaxError(a2, 1);
+      }
       if ( v7 == 37 )
       {
         AdvXMLParser::Parser::PreviousChar(a2);
         if ( !AdvXMLParser::Dtd::ParsePEReference(this, a2) )
+        {
           AdvXMLParser::Parser::SyntaxError(a2, 6);
+        }
       }
       else if ( v7 == 38 )
       {
@@ -628,7 +716,9 @@ bool  AdvXMLParser::Dtd::ParseEntityValue(class AdvXMLParser::Parser & a2) {
         std::auto_ptr<AdvXMLParser::Reference>::auto_ptr<AdvXMLParser::Reference>(v3);
         v10 = 0;
         if ( !std::auto_ptr<AdvXMLParser::Reference>::get(v6) )
+        {
           AdvXMLParser::Parser::SyntaxError(a2, 6);
+        }
         v10 = -1;
         std::auto_ptr<AdvXMLParser::Reference>::~auto_ptr<AdvXMLParser::Reference>(v6);
       }
@@ -636,7 +726,9 @@ bool  AdvXMLParser::Dtd::ParseEntityValue(class AdvXMLParser::Parser & a2) {
       {
         v4 = AdvXMLParser::Parser::NextChar(a2);
         if ( !AdvXMLParser::IsXmlChar((AdvXMLParser *)v4) )
+        {
           AdvXMLParser::Parser::SyntaxError(a2, 2);
+        }
       }
     }
     return 1;
@@ -657,20 +749,24 @@ bool  AdvXMLParser::Dtd::ParseNotationDecl(class AdvXMLParser::Parser & a2) {
   int v5; // [esp+34h] [ebp-4h]
 
   if ( !AdvXMLParser::Parser::ParseString(a2, "<!NOTATION") )
+  {
     return 0;
+  }
   std::string::string();
   v5 = 0;
-  if ( !AdvXMLParser::Parser::ParseSpaces(a2)
-    || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4)
-    || !AdvXMLParser::Parser::ParseSpaces(a2) )
+  if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) || !AdvXMLParser::Parser::ParseSpaces(a2) )
   {
     AdvXMLParser::Parser::SyntaxError(a2, 40);
   }
   if ( !AdvXMLParser::Dtd::ParseExternalID(this, a2) && !AdvXMLParser::Dtd::ParsePublicID(this, a2) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 40);
+  }
   AdvXMLParser::Parser::ParseSpaces(a2);
   if ( !AdvXMLParser::Parser::ParseChar(a2, 62) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 40);
+  }
   v5 = -1;
   std::string::~string(v4);
   return 1;
@@ -684,16 +780,17 @@ bool  AdvXMLParser::Dtd::ParseExternalID(class AdvXMLParser::Parser & a2) {
   if ( AdvXMLParser::Parser::ParseString(a2, "SYSTEM") )
   {
     if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseSystemLiteral(this, a2) )
+    {
       AdvXMLParser::Parser::SyntaxError(a2, 41);
+    }
   }
   else
   {
     if ( !AdvXMLParser::Parser::ParseString(a2, "PUBLIC") )
+    {
       return 0;
-    if ( !AdvXMLParser::Parser::ParseSpaces(a2)
-      || !AdvXMLParser::Dtd::ParsePubidLiteral(this, a2)
-      || !AdvXMLParser::Parser::ParseSpaces(a2)
-      || !AdvXMLParser::Dtd::ParseSystemLiteral(this, a2) )
+    }
+    if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParsePubidLiteral(this, a2) || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseSystemLiteral(this, a2) )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 41);
     }
@@ -707,9 +804,13 @@ bool  AdvXMLParser::Dtd::ParseExternalID(class AdvXMLParser::Parser & a2) {
 bool  AdvXMLParser::Dtd::ParsePublicID(class AdvXMLParser::Parser & a2) {
   
   if ( !AdvXMLParser::Parser::ParseString(a2, "PUBLIC") )
+  {
     return 0;
+  }
   if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParsePubidLiteral(this, a2) )
+  {
     AdvXMLParser::Parser::SyntaxError(a2, 42);
+  }
   return 1;
 }
 

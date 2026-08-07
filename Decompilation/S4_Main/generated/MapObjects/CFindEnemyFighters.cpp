@@ -51,8 +51,7 @@ bool  CFindEnemyFighters::NextFighter(void) {
     {
       v11 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(EntityIdVW);
       v2 = IEntity::OwnerId(v11);
-      if ( (*(_DWORD *)(this + 244) & CAlliances::PlayerBit(v2)) != 0
-        && (*(_DWORD *)(this + 236) & (1 << IEntity::WarriorType())) != 0 )
+      if ( (*(_DWORD *)(this + 244) & CAlliances::PlayerBit(v2)) != 0 && (*(_DWORD *)(this + 236) & (1 << IEntity::WarriorType())) != 0 )
       {
         v5 = IEntity::X(v11);
         v6 = IEntity::Y(v11);
@@ -67,14 +66,20 @@ bool  CFindEnemyFighters::NextFighter(void) {
       EntityIdVW = CWarMapNode::Next(v4);
     }
     if ( *(_DWORD *)(this + 248) >= CVWList::Size((CVWList *)this) )
+    {
       break;
+    }
     v7 = *(_DWORD *)CVWList::operator[](*(_DWORD *)(this + 248));
     v8 = *(_DWORD *)(CVWList::operator[](*(_DWORD *)(this + 248)) + 4);
     ++*(_DWORD *)(this + 248);
     if ( (int)CInfluMap::EnemyValueVW(v7, v8, *(_DWORD *)(this + 240)) < 16 )
+    {
       EntityIdVW = 0;
+    }
     else
+    {
       EntityIdVW = CWarMap::FirstEntityIdVW(0, v7, v8);
+    }
   }
   *(_DWORD *)(this + 252) = 0;
   *(_DWORD *)(this + 256) = 0;

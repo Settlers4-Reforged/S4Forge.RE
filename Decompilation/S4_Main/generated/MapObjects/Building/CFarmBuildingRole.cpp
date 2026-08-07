@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CFarmBuildingRole::New(std::istream & a1) {
   
   if ( operator new(0x180u) )
+  {
     return CFarmBuildingRole::CFarmBuildingRole(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -117,7 +121,9 @@ void  CFarmBuildingRole::LogicUpdate(class CBuilding * _pBuilding) {
   int v30; // [esp+78h] [ebp-4h]
 
   if ( IEntity::FlagBits(_pBuilding, ENTITY_FLAG_Selected) )
+  {
     this->FillDialog(this, _pBuilding, 1);
+  }
   byte4 = this->m_uLogicState;
   if ( byte4 == 1 )
   {
@@ -131,15 +137,16 @@ void  CFarmBuildingRole::LogicUpdate(class CBuilding * _pBuilding) {
   if ( byte4 != 2 )
   {
     if ( byte4 != 3 )
+    {
       return;
+    }
     if ( this->m_bInhabitants && IEntity::FlagBits(_pBuilding, (EntityFlag)4096) )
     {
       m_iBuildingInhabitant = (char)this->m_pBuildingInfo->m_iBuildingInhabitant;
       v2 = IEntity::Race(_pBuilding);
       SettlerInfo = CSettlerMgr::GetSettlerInfo(v2, m_iBuildingInhabitant);
       this->m_pSearchFkt = std::vector<CSettlerMgr::SSearchInfos>::operator[](&SettlerInfo->m_vSearches, 0)->m_pSearchFkt;
-      if ( !this->m_pSearchFkt
-        && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 268, "m_pSearchFkt != 0") == 1 )
+      if ( !this->m_pSearchFkt && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 268, "m_pSearchFkt != 0") == 1 )
       {
         __debugbreak();
       }
@@ -161,8 +168,7 @@ void  CFarmBuildingRole::LogicUpdate(class CBuilding * _pBuilding) {
       v4 = IEntity::Race(_pBuilding);
       v5 = CSettlerMgr::GetSettlerInfo(v4, v11);
       this->m_pSearchFkt = std::vector<CSettlerMgr::SSearchInfos>::operator[](&v5->m_vSearches, 1u)->m_pSearchFkt;
-      if ( !this->m_pSearchFkt
-        && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 297, "m_pSearchFkt != 0") == 1 )
+      if ( !this->m_pSearchFkt && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 297, "m_pSearchFkt != 0") == 1 )
       {
         __debugbreak();
       }
@@ -230,7 +236,9 @@ void  CFarmBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo
   v5 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
   result = (unsigned __int8)CPile::IsPatchPile(v5);
   if ( !(_BYTE)result )
+  {
     return result;
+  }
   v7 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
   CPile::GetPatchGfx((CPile *)v7, (struct SGfxObjectInfo *)((char *)a3 + 536));
   return 1;
@@ -259,8 +267,7 @@ void  CFarmBuildingRole::Init(class CBuilding * a2) {
   this[4] = 1;
   this[28] = 0;
   *((_WORD *)this + 190) = 0;
-  if ( *(_BYTE *)(*((_DWORD *)this + 94) + 57) != 1
-    && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 133, "m_pBuildingInfo->iPilesNumber == 1") == 1 )
+  if ( *(_BYTE *)(*((_DWORD *)this + 94) + 57) != 1 && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 133, "m_pBuildingInfo->iPilesNumber == 1") == 1 )
   {
     __debugbreak();
   }
@@ -268,19 +275,8 @@ void  CFarmBuildingRole::Init(class CBuilding * a2) {
   v13 = *(char *)(*((_DWORD *)this + 94) + 60) + CWorldManager::X(v2);
   v3 = IEntity::WorldIdx();
   v14 = *(char *)(*((_DWORD *)this + 94) + 61) + CWorldManager::Y(v3);
-  *((_WORD *)this + 190) = CPileMgr::AddPile(
-                             (CPileMgr *)&g_cPileMgr,
-                             v13,
-                             v14,
-                             *(char *)(*((_DWORD *)this + 94) + 62),
-                             0,
-                             *(char *)(*((_DWORD *)this + 94) + 63),
-                             *(char *)(*((_DWORD *)this + 94) + 64),
-                             *(char *)(*((_DWORD *)this + 94) + 65),
-                             *(_DWORD *)(*((_DWORD *)this + 94) + 68),
-                             *(_DWORD *)(*((_DWORD *)this + 94) + 72));
-  if ( !*((_WORD *)this + 190)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 150, "m_uProdPileId != 0") == 1 )
+  *((_WORD *)this + 190) = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v13, v14, *(char *)(*((_DWORD *)this + 94) + 62), 0, *(char *)(*((_DWORD *)this + 94) + 63), *(char *)(*((_DWORD *)this + 94) + 64), *(char *)(*((_DWORD *)this + 94) + 65), *(_DWORD *)(*((_DWORD *)this + 94) + 68), *(_DWORD *)(*((_DWORD *)this + 94) + 72));
+  if ( !*((_WORD *)this + 190) && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 150, "m_uProdPileId != 0") == 1 )
   {
     __debugbreak();
   }
@@ -297,8 +293,7 @@ void  CFarmBuildingRole::Init(class CBuilding * a2) {
   v7 = IEntity::Race(a2);
   CSettlerMgr::GetSettlerInfo(v7, v10);
   *((_DWORD *)this + 8) = *(_DWORD *)std::vector<CSettlerMgr::SSearchInfos>::operator[](0);
-  if ( !*((_DWORD *)this + 8)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 162, "m_pSearchFkt != 0") == 1 )
+  if ( !*((_DWORD *)this + 8) && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 162, "m_pSearchFkt != 0") == 1 )
   {
     __debugbreak();
   }
@@ -306,15 +301,16 @@ void  CFarmBuildingRole::Init(class CBuilding * a2) {
   v8 = IEntity::Race(a2);
   CSettlerMgr::GetSettlerInfo(v8, v11);
   *((_DWORD *)this + 8) = *(_DWORD *)std::vector<CSettlerMgr::SSearchInfos>::operator[](1);
-  if ( !*((_DWORD *)this + 8)
-    && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 165, "m_pSearchFkt != 0") == 1 )
+  if ( !*((_DWORD *)this + 8) && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 165, "m_pSearchFkt != 0") == 1 )
   {
     __debugbreak();
   }
   IAnimatedEntity::RegisterForLogicUpdate(2);
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
   if ( result )
+  {
     return (*(int (__thiscall **)(_BYTE *, _BYTE *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
+  }
   return result;
 }
 
@@ -343,9 +339,13 @@ void  CFarmBuildingRole::LockPiles(class CBuilding * a2, bool a3) {
 
   v3 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
   if ( a3 )
+  {
     return IEntity::SetFlagBits(v3, (EntityFlag)0x10u);
+  }
   else
+  {
     return (_DWORD *)IEntity::ClearFlagBits(v3, (EntityFlag)0x10u);
+  }
 }
 
 
@@ -362,12 +362,13 @@ bool  CFarmBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   _DWORD *v10; // [esp+0h] [ebp-8h]
 
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 185, "_iSettlerId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v10 = (_DWORD *)CSettlerMgr::operator[](a3);
   if ( *((_BYTE *)this + 29) )
   {
-    if ( *((unsigned __int16 *)this + 4) != a3
-      && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 196, "m_uSettlerId == _iSettlerId") == 1 )
+    if ( *((unsigned __int16 *)this + 4) != a3 && BBSupportDbgReport(2, "MapObjects\\Building\\FarmBuildingRole.cpp", 196, "m_uSettlerId == _iSettlerId") == 1 )
     {
       __debugbreak();
     }
@@ -393,12 +394,7 @@ bool  CFarmBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
     v8 = (const char *)type_info::name(v4);
     v5 = IEntity::Type((unsigned __int16 *)a2);
     BuildingName = CS4DefineNames::GetBuildingName(v5);
-    BBSupportTracePrintF(
-      2,
-      "WARNING: Building %s (role %s) of race %s has no production delay!",
-      BuildingName,
-      v8,
-      RaceName);
+    BBSupportTracePrintF(2, "WARNING: Building %s (role %s) of race %s has no production delay!", BuildingName, v8, RaceName);
   }
   *((_BYTE *)this + 4) = 2;
   (*(void (__thiscall **)(CFarmBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 72))(this, a2, 0);
@@ -431,21 +427,21 @@ void  CFarmBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   g_cResourceCollectorInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v6, 0);
   v7 = IEntity::Type(a2);
   v4 = IEntity::OwnerId(a2);
-  g_cResourceCollectorInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings(
-                                                  (CBuildingMgr *)g_cBuildingMgr,
-                                                  v4,
-                                                  v7,
-                                                  1u);
+  g_cResourceCollectorInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
   g_cResourceCollectorInfo.m_bInhabitants = this->m_bInhabitants;
   if ( this->m_bInhabitants )
+  {
     g_cResourceCollectorInfo.m_iSettlerCount = this->m_pBuildingInfo->m_iBuildingInhabitant;
+  }
   v10 = CPileMgr::operator[](this->m_iPileId);
   g_cResourceCollectorInfo.m_uAmount = v10->Amount(v10);
   v9 = CPileMgr::operator[](this->m_iPileId);
   g_cResourceCollectorInfo.m_uGood = v9->GetGoodType();
   v8 = 604;
   if ( !a3 )
+  {
     v8 = 602;
+  }
   CEvn_Event::CEvn_Event(&v12, v8, 0, (unsigned int)&g_cResourceCollectorInfo, 0);
   v13 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, &v12);

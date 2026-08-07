@@ -7,12 +7,7 @@
 // Decompiled from int __thiscall CAIPlayerScriptVars::operator[](CAIPlayerScriptVars *this, unsigned int _tVarIndex)
 int  CAIPlayerScriptVars::operator[](enum T_AI_PLAYER_SCRIPT_VAR_INDEX _tVarIndex)const {
   
-  if ( _tVarIndex > 22
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Script.h",
-         107,
-         "static_cast<unsigned int>(_tVarIndex) <= AI_PLAYER_SCRIPT_VAR_LAST") == 1 )
+  if ( _tVarIndex > 22 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Script.h", 107, "static_cast<unsigned int>(_tVarIndex) <= AI_PLAYER_SCRIPT_VAR_LAST") == 1 )
   {
     __debugbreak();
   }
@@ -40,12 +35,7 @@ enum T_AI_DIFFICULTY_LEVEL  CAIPlayerScriptVars::DifficultyLevel(void)const {
 // Decompiled from void __thiscall CAIPlayerScriptVars::SetDifficultyLevel(CAIPlayerScriptVars *this, int _tDifficultyLevel)
 void  CAIPlayerScriptVars::SetDifficultyLevel(enum T_AI_DIFFICULTY_LEVEL _tDifficultyLevel) {
   
-  if ( (unsigned int)_tDifficultyLevel > 3
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Script.h",
-         138,
-         "static_cast<unsigned int>(_tDifficultyLevel) <= AI_DIFFICULTY_LEVEL_LAST") == 1 )
+  if ( (unsigned int)_tDifficultyLevel > 3 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_Script.h", 138, "static_cast<unsigned int>(_tDifficultyLevel) <= AI_DIFFICULTY_LEVEL_LAST") == 1 )
   {
     __debugbreak();
   }
@@ -63,10 +53,16 @@ void  CAIPlayerScriptVars::Init(void) {
 
   CAIPlayerScriptVars::SetDifficultyLevel(this, 2);
   this->m_iFlags = 0;
-  for ( i = 0; i <= 3; ++i )
+  for ( i = 0;
+        i <= 3;
+        ++i )
   {
-    for ( j = 0; j <= 22; ++j )
+    for ( j = 0;
+          j <= 22;
+          ++j )
+    {
       this->m_vVars[i].m_iVars[j] = s_iDefaultScriptVars[i][j];
+    }
   }
 }
 
@@ -86,10 +82,16 @@ void  CAIPlayerScriptVars::Load(class IS4Chunk & rChunk) {
   CAIPlayerScriptVars::SetDifficultyLevel(this, iDifficultyLevel);
   CAIPlayerScriptVars::SetFlags(this, iFlags);
   iAvailableVars = rChunk->LoadUnsigned32(0, 22);
-  for ( i = 0; i <= 3; ++i )
+  for ( i = 0;
+        i <= 3;
+        ++i )
   {
-    for ( j = 0; j <= iAvailableVars; ++j )
+    for ( j = 0;
+          j <= iAvailableVars;
+          ++j )
+    {
       this->m_vVars[i].m_iVars[j] = rChunk->LoadUnsigned32_(rChunk);
+    }
     while ( j <= 22 )
     {
       this->m_vVars[i].m_iVars[j] = s_iDefaultScriptVars[i][j];
@@ -109,10 +111,16 @@ void  CAIPlayerScriptVars::Save(class IS4Chunk & a2) {
   a2->SaveUnsigned32(this->m_iDifficultyLevel);
   a2->SaveUnsigned32(this->m_iFlags);
   a2->SaveUnsigned32(22);
-  for ( i = 0; i <= 3; ++i )
+  for ( i = 0;
+        i <= 3;
+        ++i )
   {
-    for ( j = 0; j <= 22; ++j )
+    for ( j = 0;
+          j <= 22;
+          ++j )
+    {
       a2->SaveUnsigned32(this->m_vVars[i].m_iVars[j]);
+    }
   }
 }
 

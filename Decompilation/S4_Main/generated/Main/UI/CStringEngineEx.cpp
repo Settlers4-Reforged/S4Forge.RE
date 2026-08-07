@@ -39,8 +39,12 @@
 
   this->__vftable = (CStringEngineEx_vtbl *)&CStringEngineEx::_vftable_;
   if ( !this->m_swpTexts )
+  {
     return CStringEngine::~CStringEngine((CStringEngine *)this);
-  for ( i = 0; i < 3837; ++i )
+  }
+  for ( i = 0;
+        i < 3837;
+        ++i )
   {
     if ( this->m_swpTexts[i] )
     {
@@ -60,12 +64,7 @@ char const *  CStringEngineEx::GetString(int _iId) {
   
   int Language; // [esp+0h] [ebp-8h]
 
-  if ( _iId > 3842
-    && BBSupportDbgReport(
-         2,
-         "Main\\StringEngine.cpp",
-         394,
-         "_iId >= 0 && _iId < STRINGID_MAX || _iId < HACK_STRINGID_MAX") == 1 )
+  if ( _iId > 3842 && BBSupportDbgReport(2, "Main\\StringEngine.cpp", 394, "_iId >= 0 && _iId < STRINGID_MAX || _iId < HACK_STRINGID_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -76,9 +75,13 @@ char const *  CStringEngineEx::GetString(int _iId) {
       if ( _iId >= 0 )
       {
         if ( this->m_swpTexts[_iId] )
+        {
           return this->m_swpTexts[_iId];
+        }
         else
+        {
           return (wchar_t *)&unk_4032214;
+        }
       }
       else
       {
@@ -110,7 +113,7 @@ char const *  CStringEngineEx::GetString(int _iId) {
 
 
 // address=[0x14cea80]
-// Decompiled from bool __thiscall CStringEngineEx::ExtractStrings(  CStringEngineEx *this,  char *sdTextFileData,  int size,  char _bFillEmptyStrings)
+// Decompiled from bool __thiscall CStringEngineEx::ExtractStrings(CStringEngineEx *this, char *sdTextFileData, int size, char _bFillEmptyStrings)
 bool  CStringEngineEx::ExtractStrings(char * sdTextFileData, int size, int _bFillEmptyStrings) {
   
   int i; // [esp+10h] [ebp-18h]
@@ -126,13 +129,11 @@ bool  CStringEngineEx::ExtractStrings(char * sdTextFileData, int size, int _bFil
   {
     if ( *(_DWORD *)sdTextFileData != 0x15 )
     {
-      BBSupportTracePrintF(
-        3,
-        "Wrong version of text dat file! Version is %i, should be %i!",
-        *(_DWORD *)sdTextFileData,
-        0x15);
+      BBSupportTracePrintF(3, "Wrong version of text dat file! Version is %i, should be %i!", *(_DWORD *)sdTextFileData, 0x15);
       if ( BBSupportDbgReport(1, "Main\\StringEngine.cpp", 161, "Version mismatch in text header and dat file!") == 1 )
+      {
         __debugbreak();
+      }
       v11 = 0;
     }
   }
@@ -148,7 +149,9 @@ bool  CStringEngineEx::ExtractStrings(char * sdTextFileData, int size, int _bFil
   {
     uTextSize = *(_DWORD *)&sdTextFileData[uTextSizePointer];
     if ( uTextSize < 0 )
+    {
       uTextSize = 0;
+    }
     uTextPointer = uTextSizePointer + 4;
     if ( size - uTextPointer < uTextSize )
     {
@@ -160,7 +163,9 @@ bool  CStringEngineEx::ExtractStrings(char * sdTextFileData, int size, int _bFil
     {
       this->m_swpTexts[readTxtIndex] = (wchar_t *)operator new[](uTextSize + 1);
       if ( uTextSize > 0 )
+      {
         memcpy(this->m_swpTexts[readTxtIndex], &sdTextFileData[uTextPointer], uTextSize);
+      }
       *((_BYTE *)this->m_swpTexts[readTxtIndex] + uTextSize) = 0;
     }
     uTextSizePointer = uTextSize + uTextPointer;
@@ -170,19 +175,25 @@ bool  CStringEngineEx::ExtractStrings(char * sdTextFileData, int size, int _bFil
   {
     BBSupportTracePrintF(3, "Number of strings mismatch! Got %i, expected %i!", readTxtIndex, 3837);
     if ( BBSupportDbgReport(1, "Main\\StringEngine.cpp", 216, "Version mismatch in text header and dat file!") == 1 )
+    {
       __debugbreak();
+    }
     v11 = 0;
   }
   if ( (_bFillEmptyStrings & 1) == 0 )
   {
-    for ( i = readTxtIndex; i < 3837; ++i )
+    for ( i = readTxtIndex;
+          i < 3837;
+          ++i )
     {
       this->m_swpTexts[i] = (wchar_t *)operator new[](1u);
       *(_BYTE *)this->m_swpTexts[i] = 0;
     }
   }
   if ( !v11 && BBSupportDbgReportF(2, "Main\\StringEngine.cpp", 230, "Invalid text dat file!") == 1 )
+  {
     __debugbreak();
+  }
   return v11;
 }
 
@@ -216,13 +227,7 @@ bool  CStringEngineEx::ImportFile(wchar_t const * FileName, int a3) {
   }
   uLangFileSize = CFileEx::Size(&pFile);
   pLangFileBuffer = operator new[](uLangFileSize);
-  uReadBytes = CFileEx::Read(
-                 &pFile.IFileEx.__vftable,
-                 pLangFileBuffer,
-                 1,
-                 uLangFileSize,
-                 (const char *)UNUSED_ARG(),
-                 UNUSED_ARG());
+  uReadBytes = CFileEx::Read(&pFile.IFileEx.__vftable, pLangFileBuffer, 1, uLangFileSize, (const char *)UNUSED_ARG(), UNUSED_ARG());
   CFileEx::Close(&pFile.IFileEx, UNUSED_ARG(), UNUSED_ARG());
   if ( uReadBytes >= (int)uLangFileSize )
   {
@@ -258,7 +263,9 @@ void  CStringEngineEx::CreateTextForEmptyStrings(void) {
   if ( this->m_swpTexts )
   {
     v3 = 0;
-    for ( i = 0; i < 3837; ++i )
+    for ( i = 0;
+          i < 3837;
+          ++i )
     {
       if ( !this->m_swpTexts[i] )
       {

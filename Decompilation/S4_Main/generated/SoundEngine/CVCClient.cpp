@@ -40,7 +40,9 @@
   CVCClient::Shutdown((CVCClient *)this);
   if ( this[26] )
   {
-    for ( i = 0; i < (int)this[25]; ++i )
+    for ( i = 0;
+          i < (int)this[25];
+          ++i )
     {
       if ( *((_DWORD *)this[26] + i) )
       {
@@ -58,7 +60,9 @@
   }
   if ( this[17] )
   {
-    for ( j = 0; j < (int)this[24]; ++j )
+    for ( j = 0;
+          j < (int)this[24];
+          ++j )
     {
       if ( *((_DWORD *)this[17] + j) )
       {
@@ -84,7 +88,9 @@
     AIL_release_sample_handle(this[28]);
     this[28] = 0;
   }
-  for ( k = 0; k < 2; ++k )
+  for ( k = 0;
+        k < 2;
+        ++k )
   {
     if ( this[k + 12] )
     {
@@ -107,7 +113,9 @@ bool  CVCClient::Start(int a2, struct _DIG_DRIVER * a3, int a4, char * a5) {
   *((_DWORD *)this + 23) = a4;
   *((_DWORD *)this + 28) = AIL_allocate_sample_handle(a3);
   if ( !*((_DWORD *)this + 28) )
+  {
     return 0;
+  }
   AIL_init_sample(*((_DWORD *)this + 28));
   AIL_set_sample_playback_rate(*((_DWORD *)this + 28), 8000);
   AIL_set_sample_type(*((_DWORD *)this + 28), 1, 0);
@@ -128,7 +136,9 @@ void  CVCClient::Shutdown(void) {
 
   result = this;
   if ( !*((_DWORD *)this + 11) )
+  {
     return result;
+  }
   result = (CVCClient *)(*((int (__stdcall **)(_DWORD))this + 4))(*((_DWORD *)this + 11));
   *((_DWORD *)this + 11) = 0;
   return result;
@@ -140,15 +150,23 @@ void  CVCClient::Shutdown(void) {
 bool  CVCClient::ReceivePackage(signed char * Src) {
   
   if ( *(_BYTE *)(this[15] + this[21]) )
+  {
     return 1;
+  }
   memcpy(*(void **)(this[17] + 4 * this[21]), Src, this[23]);
   *(_BYTE *)(this[15] + this[21]) = 1;
   if ( this[20] == -1 )
+  {
     this[20] = 0;
+  }
   if ( this[21] == this[24] - 1 )
+  {
     this[21] = 0;
+  }
   else
+  {
     ++this[21];
+  }
   return 1;
 }
 
@@ -162,19 +180,27 @@ void  CVCClient::PlayStream(void) {
 
   result = (CVCClient *)this;
   if ( (this[19] & 0x80000000) != 0 )
+  {
     return result;
+  }
   result = (CVCClient *)AIL_sample_buffer_ready(this[28]);
   v2 = result;
   if ( result == (CVCClient *)-1 )
+  {
     return result;
+  }
   if ( *(_BYTE *)(this[16] + this[19]) )
   {
     memcpy((void *)this[(_DWORD)result + 12], *(const void **)(this[26] + 4 * this[19]), this[14]);
     *(_BYTE *)(this[16] + this[19]) = 0;
     if ( this[19] == this[25] - 1 )
+    {
       this[19] = 0;
+    }
     else
+    {
       ++this[19];
+    }
   }
   else
   {
@@ -201,11 +227,17 @@ long  CVCClient::CopyDataToDecoder(void * a2, long a3, long a4) {
   int v8; // [esp+18h] [ebp+Ch]
 
   if ( !*(_BYTE *)(this[15] + this[20]) )
+  {
     return 0;
+  }
   if ( a3 >= this[23] - this[22] )
+  {
     v5 = this[23] - this[22];
+  }
   else
+  {
     v5 = a3;
+  }
   Size = v5;
   memcpy(a2, (const void *)(this[22] + *(_DWORD *)(this[17] + 4 * this[20])), v5);
   this[22] += v5;
@@ -214,13 +246,19 @@ long  CVCClient::CopyDataToDecoder(void * a2, long a3, long a4) {
     this[22] = 0;
     *(_BYTE *)(this[15] + this[20]) = 0;
     if ( this[20] == this[24] - 1 )
+    {
       this[20] = 0;
+    }
     else
+    {
       ++this[20];
+    }
   }
   v8 = a3 - v5;
   if ( v8 )
+  {
     return v5 + CVCClient::CopyDataToDecoder(&a2[v5], v8, a4);
+  }
   return Size;
 }
 
@@ -250,21 +288,26 @@ void  CVCClient::DecodeData(void) {
 
   result = (CVCClient *)*((_DWORD *)this + 16);
   if ( *((_BYTE *)result + *((_DWORD *)this + 18)) || *((_DWORD *)this + 20) == -1 )
+  {
     return result;
+  }
   result = (CVCClient *)*((_DWORD *)this + 15);
   if ( !*((_BYTE *)result + *((_DWORD *)this + 20)) )
+  {
     return result;
-  *((_DWORD *)this + 29) += (*((int (__stdcall **)(_DWORD, int, int))this + 2))(
-                              *((_DWORD *)this + 11),
-                              *((_DWORD *)this + 29) + *(_DWORD *)(*((_DWORD *)this + 26) + 4 * *((_DWORD *)this + 18)),
-                              *((_DWORD *)this + 14) - *((_DWORD *)this + 29));
+  }
+  *((_DWORD *)this + 29) += (*((int (__stdcall **)(_DWORD, int, int))this + 2))(*((_DWORD *)this + 11), *((_DWORD *)this + 29) + *(_DWORD *)(*((_DWORD *)this + 26) + 4 * *((_DWORD *)this + 18)), *((_DWORD *)this + 14) - *((_DWORD *)this + 29));
   result = this;
   if ( *((_DWORD *)this + 29) != *((_DWORD *)this + 14) )
+  {
     return result;
+  }
   *((_DWORD *)this + 29) = 0;
   *(_BYTE *)(*((_DWORD *)this + 16) + *((_DWORD *)this + 18)) = 1;
   if ( *((int *)this + 19) < 0 )
+  {
     *((_DWORD *)this + 19) = 0;
+  }
   result = this;
   if ( *((_DWORD *)this + 18) == *((_DWORD *)this + 25) - 1 )
   {
@@ -289,7 +332,9 @@ bool  CVCClient::InitDecoder(int a2, char * a3) {
 
   *((_DWORD *)this + 27) = RIB_find_file_provider("ASI codec", "Input file types", a3);
   if ( !*((_DWORD *)this + 27) )
+  {
     return 0;
+  }
   v7[0] = 0;
   v7[1] = "ASI_stream_attribute";
   v7[2] = (char *)this + 20;
@@ -331,23 +376,26 @@ bool  CVCClient::InitDecoder(int a2, char * a3) {
   v7[38] = (char *)this + 40;
   v7[39] = 0;
   RIB_request_interface(*((_DWORD *)this + 27), "ASI stream", 10, v7);
-  *((_DWORD *)this + 11) = (*((int (__stdcall **)(CVCClient *, int (__stdcall *)(int, void *, int, int), _DWORD))this + 1))(
-                             this,
-                             CVCClient::DecodeDataCB,
-                             0);
+  *((_DWORD *)this + 11) = (*((int (__stdcall **)(CVCClient *, int (__stdcall *)(int, void *, int, int), _DWORD))this + 1))(this, CVCClient::DecodeDataCB, 0);
   if ( !*((_DWORD *)this + 11) )
+  {
     return 0;
+  }
   (*((void (__stdcall **)(_DWORD, _DWORD, char *))this + 6))(*((_DWORD *)this + 11), *((_DWORD *)this + 10), &a2);
   *((_DWORD *)this + 17) = operator new[](4 * *((_DWORD *)this + 24));
   *((_DWORD *)this + 15) = operator new[](*((_DWORD *)this + 24));
-  for ( i = 0; i < *((_DWORD *)this + 24); ++i )
+  for ( i = 0;
+        i < *((_DWORD *)this + 24);
+        ++i )
   {
     *(_DWORD *)(*((_DWORD *)this + 17) + 4 * i) = operator new[](*((_DWORD *)this + 23));
     *(_BYTE *)(*((_DWORD *)this + 15) + i) = 0;
   }
   *((_DWORD *)this + 26) = operator new[](4 * *((_DWORD *)this + 25));
   *((_DWORD *)this + 16) = operator new[](*((_DWORD *)this + 25));
-  for ( j = 0; j < *((_DWORD *)this + 25); ++j )
+  for ( j = 0;
+        j < *((_DWORD *)this + 25);
+        ++j )
   {
     *(_DWORD *)(*((_DWORD *)this + 26) + 4 * j) = operator new[](*((_DWORD *)this + 14));
     *(_BYTE *)(*((_DWORD *)this + 16) + j) = 0;

@@ -3,7 +3,7 @@
 // Definitions for class CHeightBlob
 
 // address=[0x2fccbb0]
-// Decompiled from CHeightBlob *__thiscall CHeightBlob::CHeightBlob(  CHeightBlob *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  struct CCheckLayer *a8)
+// Decompiled from CHeightBlob *__thiscall CHeightBlob::CHeightBlob(CHeightBlob *this, int a2, int a3, int a4, int a5, int a6, int a7, struct CCheckLayer *a8)
  CHeightBlob::CHeightBlob(int a2, int a3, int a4, int a5, int a6, int a7, class CCheckLayer * a8) {
   
   CBlob::CBlob(this, a2, a3, a4, a5, 0, a6, a7, a8);
@@ -44,11 +44,7 @@ void  CHeightBlob::fillBlob(int a2, int a3) {
   v13 = a2;
   v11 = 0;
   v9 = 1;
-  while ( !CCheckLayer::getPoint(
-             this[8],
-             (int)this[v11 + 11] + a2 - (_DWORD)this[9],
-             (int)this[v11 + 17] + a3 - (_DWORD)this[10])
-       && a3 > 0 )
+  while ( !CCheckLayer::getPoint(this[8], (int)this[v11 + 11] + a2 - (_DWORD)this[9], (int)this[v11 + 17] + a3 - (_DWORD)this[10]) && a3 > 0 )
   {
     if ( ++v11 == 6 )
     {
@@ -59,13 +55,21 @@ void  CHeightBlob::fillBlob(int a2, int a3) {
   while ( 1 )
   {
     if ( v13 >= (int)this[3] && BBSupportDbgReport(2, "HeightBlob.cpp", 52, "iCurrentPosX < m_iWorldSize") == 1 )
+    {
       __debugbreak();
+    }
     if ( v13 <= 0 && BBSupportDbgReport(2, "HeightBlob.cpp", 53, "iCurrentPosX > 0") == 1 )
+    {
       __debugbreak();
+    }
     if ( a3 >= (int)this[3] && BBSupportDbgReport(2, "HeightBlob.cpp", 54, "iCurrentPosY < m_iWorldSize") == 1 )
+    {
       __debugbreak();
+    }
     if ( a3 <= 0 && BBSupportDbgReport(2, "HeightBlob.cpp", 55, "iCurrentPosY > 0") == 1 )
+    {
       __debugbreak();
+    }
     LOWORD(v3) = 0;
     v12 = 0;
     v17 = 0;
@@ -74,25 +78,29 @@ void  CHeightBlob::fillBlob(int a2, int a3) {
     {
       if ( v17 )
       {
-        LOWORD(v3) = CCheckLayer::getPoint(
-                       this[8],
-                       (int)this[v12 + 11] + v13 - (_DWORD)this[9],
-                       (int)this[v12 + 17] + a3 - (_DWORD)this[10]);
+        LOWORD(v3) = CCheckLayer::getPoint(this[8], (int)this[v12 + 11] + v13 - (_DWORD)this[9], (int)this[v12 + 17] + a3 - (_DWORD)this[10]);
         if ( !(_WORD)v3 )
+        {
           break;
+        }
       }
       if ( v8 >= 7 )
+      {
         break;
-      LOWORD(v3) = CCheckLayer::getPoint(
-                     this[8],
-                     (int)this[v12 + 11] + v13 - (_DWORD)this[9],
-                     (int)this[v12 + 17] + a3 - (_DWORD)this[10]);
+      }
+      LOWORD(v3) = CCheckLayer::getPoint(this[8], (int)this[v12 + 11] + v13 - (_DWORD)this[9], (int)this[v12 + 17] + a3 - (_DWORD)this[10]);
       if ( (_WORD)v3 )
+      {
         v17 = 1;
+      }
       if ( v12 == 5 )
+      {
         v12 = 0;
+      }
       else
+      {
         ++v12;
+      }
       if ( ++v8 == 7 )
       {
         (*((void (__thiscall **)(CCheckLayer **, int, int))*this + 2))(this, v13, a3);
@@ -103,18 +111,16 @@ void  CHeightBlob::fillBlob(int a2, int a3) {
         v16 = 0;
         while ( i == 6 && !v16 )
         {
-          for ( i = 0; i < 6; ++i )
+          for ( i = 0;
+                i < 6;
+                ++i )
           {
-            LOWORD(v3) = CCheckLayer::getPoint(
-                           this[8],
-                           (int)this[i + 11] + v13 - (_DWORD)this[9],
-                           (int)this[i + 17] + a3 - (_DWORD)this[10]);
+            LOWORD(v3) = CCheckLayer::getPoint(this[8], (int)this[i + 11] + v13 - (_DWORD)this[9], (int)this[i + 17] + a3 - (_DWORD)this[10]);
             if ( !(_WORD)v3 )
+            {
               break;
-            Point = (unsigned __int16)CCheckLayer::getPoint(
-                                        this[8],
-                                        (int)this[i + 11] + v13 - (_DWORD)this[9],
-                                        (int)this[i + 17] + a3 - (_DWORD)this[10]);
+            }
+            Point = (unsigned __int16)CCheckLayer::getPoint(this[8], (int)this[i + 11] + v13 - (_DWORD)this[9], (int)this[i + 17] + a3 - (_DWORD)this[10]);
             v3 = (unsigned __int16)CCheckLayer::getPoint(this[8], v13 - (_DWORD)this[9], a3 - (_DWORD)this[10]) - 1;
             if ( Point == v3 )
             {
@@ -135,12 +141,16 @@ void  CHeightBlob::fillBlob(int a2, int a3) {
             v8 = 0;
           }
           if ( v9 == 1 )
+          {
             v16 = 1;
+          }
         }
       }
     }
     if ( v8 >= 7 )
+    {
       break;
+    }
     (*((void (__thiscall **)(CCheckLayer **, int, int))*this + 2))(this, v13, a3);
     CCheckLayer::setPoint(this[8], v13 - (_DWORD)this[9], a3 - (_DWORD)this[10], v9++);
     v13 += (int)this[v12 + 11];
@@ -160,27 +170,18 @@ void  CHeightBlob::processFillPoint(int a2, int a3) {
 
   result = *(unsigned __int8 *)(g_pMapElement + 4 * (a2 + *((_DWORD *)this + 3) * a3) + 1);
   if ( result != 16 )
+  {
     return result;
+  }
   v5 = 0;
   v4 = 255;
   while ( v5 < 6 )
   {
-    if ( v4 > *(unsigned __int8 *)(g_pMapElement
-                                 + 4
-                                 * (*((_DWORD *)this + 3) * (*((_DWORD *)this + v5 + 17) + a3)
-                                  + *((_DWORD *)this + v5 + 11)
-                                  + a2)) )
+    if ( v4 > *(unsigned __int8 *)(g_pMapElement + 4 * (*((_DWORD *)this + 3) * (*((_DWORD *)this + v5 + 17) + a3) + *((_DWORD *)this + v5 + 11) + a2)) )
     {
-      if ( CCheckLayer::getPoint(
-             *((CCheckLayer **)this + 8),
-             *((_DWORD *)this + v5 + 11) + a2 - *((_DWORD *)this + 9),
-             *((_DWORD *)this + v5 + 17) + a3 - *((_DWORD *)this + 10)) )
+      if ( CCheckLayer::getPoint(*((CCheckLayer **)this + 8), *((_DWORD *)this + v5 + 11) + a2 - *((_DWORD *)this + 9), *((_DWORD *)this + v5 + 17) + a3 - *((_DWORD *)this + 10)) )
       {
-        v4 = *(unsigned __int8 *)(g_pMapElement
-                                + 4
-                                * (*((_DWORD *)this + 3) * (*((_DWORD *)this + v5 + 17) + a3)
-                                 + *((_DWORD *)this + v5 + 11)
-                                 + a2));
+        v4 = *(unsigned __int8 *)(g_pMapElement + 4 * (*((_DWORD *)this + 3) * (*((_DWORD *)this + v5 + 17) + a3) + *((_DWORD *)this + v5 + 11) + a2));
       }
     }
     ++v5;

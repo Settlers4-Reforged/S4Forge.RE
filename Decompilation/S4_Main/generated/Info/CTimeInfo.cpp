@@ -24,20 +24,18 @@ std::string __cdecl CTimeInfo::GetDateTimeString(int a1) {
   else
   {
     if ( (int)v7[2] > 12 )
+    {
       j__strcpy_0(Destination, "PM");
+    }
     if ( (int)v7[2] > 12 )
+    {
       v7[2] -= 12;
+    }
     if ( !v7[2] )
+    {
       v7[2] = 12;
-    sprintf(
-      Str,
-      "%s %dth, %d, %02i:%02i%s",
-      &g_aszMonthNamesEn[6 * v7[4]],
-      v7[3],
-      v7[5] + 1900,
-      v7[2],
-      v7[1],
-      Destination);
+    }
+    sprintf(Str, "%s %dth, %d, %02i:%02i%s", &g_aszMonthNamesEn[6 * v7[4]], v7[3], v7[5] + 1900, v7[2], v7[1], Destination);
   }
   v4 = strlen(Str);
   std::string::string(a1, Str);

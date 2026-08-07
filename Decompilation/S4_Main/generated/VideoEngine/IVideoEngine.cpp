@@ -10,12 +10,18 @@
   CBinkInterface *C; // [esp+10h] [ebp-10h]
 
   if ( g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 36, "g_pVideo == NULL") == 1 )
+  {
     __debugbreak();
+  }
   C = (CBinkInterface *)operator new(8u);
   if ( C )
+  {
     v3 = CBinkInterface::CBinkInterface(C);
+  }
   else
+  {
     v3 = 0;
+  }
   g_pVideo = (int)v3;
   return this;
 }
@@ -29,7 +35,9 @@
   {
     CBinkInterface::CloseBink((CBinkInterface *)g_pVideo);
     if ( g_pVideo )
+    {
       delete (CBinkInterface *)g_pVideo;
+    }
     g_pVideo = 0;
   }
 }
@@ -40,9 +48,13 @@
 bool  IVideoEngine::Init(unsigned int a2) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 59, "g_pVideo") == 1 )
+  {
     __debugbreak();
+  }
   if ( !a2 )
+  {
     return 0;
+  }
   CBinkInterface::UseMiles((CBinkInterface *)g_pVideo, a2);
   return 1;
 }
@@ -86,7 +98,9 @@ void  IVideoEngine::UnPauseVideo(void) {
 int  IVideoEngine::GetVideoHeight(void) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 116, "g_pVideo") == 1 )
+  {
     __debugbreak();
+  }
   return CBinkInterface::GetHeight((CBinkInterface *)g_pVideo);
 }
 
@@ -96,7 +110,9 @@ int  IVideoEngine::GetVideoHeight(void) {
 int  IVideoEngine::GetVideoWidth(void) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 126, "g_pVideo") == 1 )
+  {
     __debugbreak();
+  }
   return CBinkInterface::GetWidth((CBinkInterface *)g_pVideo);
 }
 
@@ -106,7 +122,9 @@ int  IVideoEngine::GetVideoWidth(void) {
 void  IVideoEngine::Set_555_GfxMode(void) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 146, "g_pVideo") == 1 )
+  {
     __debugbreak();
+  }
   return CBinkInterface::Set_555_GfxMode((CBinkInterface *)g_pVideo);
 }
 
@@ -116,7 +134,9 @@ void  IVideoEngine::Set_555_GfxMode(void) {
 void  IVideoEngine::Set_565_GfxMode(void) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 153, "g_pVideo") == 1 )
+  {
     __debugbreak();
+  }
   return CBinkInterface::Set_565_GfxMode((CBinkInterface *)g_pVideo);
 }
 
@@ -126,7 +146,9 @@ void  IVideoEngine::Set_565_GfxMode(void) {
 bool  IVideoEngine::RenderToSurface(unsigned short * a2, unsigned int a3) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 136, "g_pVideo") == 1 )
+  {
     __debugbreak();
+  }
   return CBinkInterface::RenderToSurface((CBinkInterface *)g_pVideo, a2, a3);
 }
 
@@ -136,7 +158,9 @@ bool  IVideoEngine::RenderToSurface(unsigned short * a2, unsigned int a3) {
 bool  IVideoEngine::IsReadyForNextFrame(void) {
   
   if ( !g_pVideo && BBSupportDbgReport(2, "VideoEngine\\VideoEngineInterface.cpp", 163, "g_pVideo") == 1 )
+  {
     __debugbreak();
+  }
   return CBinkInterface::IsReadyForNextFrame((CBinkInterface *)g_pVideo);
 }
 

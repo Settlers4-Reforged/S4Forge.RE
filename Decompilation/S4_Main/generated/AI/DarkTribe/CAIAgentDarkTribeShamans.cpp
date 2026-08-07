@@ -3,7 +3,7 @@
 // Definitions for class CAIAgentDarkTribeShamans
 
 // address=[0x13022a0]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeShamans::Execute(  CAIAgentDarkTribeShamans *this,  unsigned int a2,  unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeShamans::Execute(CAIAgentDarkTribeShamans *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentDarkTribeShamans::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -25,7 +25,9 @@ unsigned int  CAIAgentDarkTribeShamans::Execute(unsigned int a2, unsigned int a3
   v15 = this;
   v3 = CAIDarkTribeSectorAgent::SectorAI(this);
   v4 = CAISectorAI::TaskForceGroup(v3);
-  for ( i = (CUserToolsManager *)CAITaskForceGroup::FirstTaskForce(v4, 7); i; i = TaskForceGroupMemberOfSameClass )
+  for ( i = (CUserToolsManager *)CAITaskForceGroup::FirstTaskForce(v4, 7);
+        i;
+        i = TaskForceGroupMemberOfSameClass )
   {
     TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
     v12 = CAITaskForce::NumberOfEntities(i);
@@ -33,7 +35,9 @@ unsigned int  CAIAgentDarkTribeShamans::Execute(unsigned int a2, unsigned int a3
     {
       v17 = i;
       if ( i )
+      {
         (*(void (__thiscall **)(CUserToolsManager *, int))(*(_DWORD *)v17 + 8))(v17, 1);
+      }
     }
     else
     {
@@ -41,9 +45,7 @@ unsigned int  CAIAgentDarkTribeShamans::Execute(unsigned int a2, unsigned int a3
       CAITaskForce::Status(i);
       if ( v16 != 3 && v16 != 9 && (CAITaskForce::Flags(i) & 0x20000000) == 0 )
       {
-        if ( ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(i)) != 0
-          || CAITaskForce::Command(i) != 1
-          || (v5 = CAITaskForce::CmdTimeStamp(i), v5 + IAIEnvironment::Rand() % 0x200u + 200 <= a2) )
+        if ( ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(i)) != 0 || CAITaskForce::Command(i) != 1 || (v5 = CAITaskForce::CmdTimeStamp(i), v5 + IAIEnvironment::Rand() % 0x200u + 200 <= a2) )
         {
           CAITaskForce::ClearEntityAddedFlag(i);
           if ( CAITaskForce::GetPositionOfFirstEntity(i, &v11, &v10) )

@@ -8,7 +8,9 @@
 class IEntity * __cdecl CMapObjectMgr::EntityPtr(int a1) {
   
   if ( !CMapObjectMgr::ValidEntityId(a1) && BBSupportDbgReport(2, string__2, 212, "ValidEntityId( _iId )") == 1 )
+  {
     __debugbreak();
+  }
   return CMapObjectMgr::m_vEntities[a1];
 }
 
@@ -26,7 +28,9 @@ bool __cdecl CMapObjectMgr::ValidEntityId(int a1) {
 class IEntity & __cdecl CMapObjectMgr::Entity(int a1) {
   
   if ( !CMapObjectMgr::ValidUsedEntityId(a1) && BBSupportDbgReport(2, string__2, 228, "ValidUsedEntityId( _iId )") == 1 )
+  {
     __debugbreak();
+  }
   return CMapObjectMgr::m_vEntities[a1];
 }
 
@@ -46,12 +50,18 @@ int __cdecl CMapObjectMgr::GetUniqueId(int a1) {
   IEntity *v3; // [esp+4h] [ebp-4h]
 
   if ( !CMapObjectMgr::ValidEntityId(a1) && BBSupportDbgReport(2, string__2, 257, "ValidEntityId( _iId )") == 1 )
+  {
     __debugbreak();
+  }
   v3 = CMapObjectMgr::m_vEntities[a1];
   if ( v3 )
+  {
     return v3->m_iUniqueId;
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -61,19 +71,12 @@ class IMovingEntity & __cdecl CMapObjectMgr::MovingEntity(int _iId) {
   
   IEntity *v2; // [esp+0h] [ebp-4h]
 
-  if ( !CMapObjectMgr::ValidUsedEntityId(_iId)
-    && BBSupportDbgReport(2, string__2, 246, "ValidUsedEntityId( _iId )") == 1 )
+  if ( !CMapObjectMgr::ValidUsedEntityId(_iId) && BBSupportDbgReport(2, string__2, 246, "ValidUsedEntityId( _iId )") == 1 )
   {
     __debugbreak();
   }
   v2 = CMapObjectMgr::m_vEntities[_iId];
-  if ( !j____RTDynamicCast(
-          (void **)&v2->__vftable,
-          0,
-          &IEntity__RTTI_Type_Descriptor_,
-          &IMovingEntity__RTTI_Type_Descriptor_,
-          0)
-    && BBSupportDbgReport(2, string__2, 250, "dynamic_cast<IMovingEntity*>( pEntity ) != 0") == 1 )
+  if ( !j____RTDynamicCast((void **)&v2->__vftable, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, string__2, 250, "dynamic_cast<IMovingEntity*>( pEntity ) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -171,24 +174,22 @@ unsigned int __cdecl CMapObjectMgr::CRCLogicUpdate(void) {
   
   int i; // [esp+14h] [ebp-10h]
 
-  if ( CMapObjectMgr::m_vEntities[0]
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 114, "m_vEntities[0] == 0") == 1 )
+  if ( CMapObjectMgr::m_vEntities[0] && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 114, "m_vEntities[0] == 0") == 1 )
   {
     __debugbreak();
   }
   CMapObjectMgr::m_vEntities[0] = 0;
-  for ( i = 1; i < 0xFFFF; ++i )
+  for ( i = 1;
+        i < 0xFFFF;
+        ++i )
   {
     if ( CMapObjectMgr::m_vEntities[i] )
     {                                           // delete[] m_vEntities
-      CMapObjectMgr::m_vEntities[i]->j_??_GIEntity@@UAEPAXI@Z(
-        (Concurrency::details::_Condition_variable *)CMapObjectMgr::m_vEntities[i],
-        1);
+      CMapObjectMgr::m_vEntities[i]->j_??_GIEntity@@UAEPAXI@Z((Concurrency::details::_Condition_variable *)CMapObjectMgr::m_vEntities[i], 1);
       CMapObjectMgr::m_vEntities[i] = 0;
     }
   }
-  if ( CMapObjectMgr::m_vEntities[0xFFFF]
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 132, "m_vEntities[MAX_ENTRIES] == 0") == 1 )
+  if ( CMapObjectMgr::m_vEntities[0xFFFF] && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 132, "m_vEntities[MAX_ENTRIES] == 0") == 1 )
   {
     __debugbreak();
   }
@@ -210,12 +211,13 @@ int __cdecl CMapObjectMgr::GetFreeSlot(void) {
   
   int i; // [esp+8h] [ebp-4h]
 
-  if ( (CMapObjectMgr::m_iMinFreeId < 1 || CMapObjectMgr::m_iMinFreeId > 0xFFFF)
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 328, "m_iMinFreeId >= 1 && m_iMinFreeId <= MAX_ENTRIES") == 1 )
+  if ( (CMapObjectMgr::m_iMinFreeId < 1 || CMapObjectMgr::m_iMinFreeId > 0xFFFF) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 328, "m_iMinFreeId >= 1 && m_iMinFreeId <= MAX_ENTRIES") == 1 )
   {
     __debugbreak();
   }
-  for ( i = CMapObjectMgr::m_iMinFreeId; i < 0xFFFF; ++i )
+  for ( i = CMapObjectMgr::m_iMinFreeId;
+        i < 0xFFFF;
+        ++i )
   {
     if ( !CMapObjectMgr::m_vEntities[i] )
     {
@@ -235,42 +237,34 @@ int __cdecl CMapObjectMgr::GetFreeSlot(void) {
 void __cdecl CMapObjectMgr::RegisterEntity(int _iId, class IEntity * _pEntity, bool a3) {
   
   if ( !_pEntity && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 381, "_pEntity != NULL") == 1 )
-    __debugbreak();
-  if ( (_iId <= 0 || _iId >= 0xFFFF)
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 382, "_iId>0 && _iId<MAX_ENTRIES") == 1 )
   {
     __debugbreak();
   }
-  if ( CMapObjectMgr::m_vEntities[_iId]
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 383, "m_vEntities[ _iId ] == NULL") == 1 )
+  if ( (_iId <= 0 || _iId >= 0xFFFF) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 382, "_iId>0 && _iId<MAX_ENTRIES") == 1 )
+  {
+    __debugbreak();
+  }
+  if ( CMapObjectMgr::m_vEntities[_iId] && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 383, "m_vEntities[ _iId ] == NULL") == 1 )
   {
     __debugbreak();
   }
   if ( a3 )
   {
-    if ( _pEntity->m_iUniqueId != -1
-      && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 389, "_pEntity->m_iUniqueId == -1") == 1 )
+    if ( _pEntity->m_iUniqueId != -1 && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 389, "_pEntity->m_iUniqueId == -1") == 1 )
     {
       __debugbreak();
     }
-    if ( CMapObjectMgr::m_iCurrentUniqueId <= 0
-      && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 390, "m_iCurrentUniqueId > 0") == 1 )
+    if ( CMapObjectMgr::m_iCurrentUniqueId <= 0 && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 390, "m_iCurrentUniqueId > 0") == 1 )
     {
       __debugbreak();
     }
-    if ( (CMapObjectMgr::m_iCurrentUniqueId & 0x20000000) != 0
-      && BBSupportDbgReport(
-           2,
-           "MapObjects\\MapObjectMgr.cpp",
-           391,
-           "(m_iCurrentUniqueId & IEntity::UNIQUE_ID_DEAD_ENTITY_BIT) == 0") == 1 )
+    if ( (CMapObjectMgr::m_iCurrentUniqueId & 0x20000000) != 0 && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 391, "(m_iCurrentUniqueId & IEntity::UNIQUE_ID_DEAD_ENTITY_BIT) == 0") == 1 )
     {
       __debugbreak();
     }
     _pEntity->m_iUniqueId = CMapObjectMgr::m_iCurrentUniqueId++;
   }
-  else if ( _pEntity->m_iUniqueId <= 0
-         && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 397, "_pEntity->m_iUniqueId > 0") == 1 )
+  else if ( _pEntity->m_iUniqueId <= 0 && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 397, "_pEntity->m_iUniqueId > 0") == 1 )
   {
     __debugbreak();
   }
@@ -278,7 +272,9 @@ void __cdecl CMapObjectMgr::RegisterEntity(int _iId, class IEntity * _pEntity, b
   {
     CMapObjectMgr::m_iLastUsedId = _iId;
     if ( _iId > CMapObjectMgr::m_iMaxLastUsedId )
+    {
       CMapObjectMgr::m_iMaxLastUsedId = _iId;
+    }
   }
   CMapObjectMgr::m_vEntities[_iId] = _pEntity;
 }
@@ -296,7 +292,9 @@ void __cdecl CMapObjectMgr::AssignNewUniqueId(int _iId) {
     if ( v1 )
     {
       if ( (v1->m_iUniqueId & 0x20000000) == 0 )
+      {
         v1->m_iUniqueId = CMapObjectMgr::m_iCurrentUniqueId++;
+      }
     }
   }
 }
@@ -318,35 +316,25 @@ void  CMapObjectMgr::Kill(int _iEntityId, int _iAttackerId) {
   IEntity *entity; // [esp+24h] [ebp-8h]
   __int16 v15; // [esp+2Ah] [ebp-2h] BYREF
 
-  if ( (_iEntityId <= 0 || _iEntityId >= 0xFFFF)
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 449, "_iEntityId>0 && _iEntityId<MAX_ENTRIES") == 1 )
+  if ( (_iEntityId <= 0 || _iEntityId >= 0xFFFF) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 449, "_iEntityId>0 && _iEntityId<MAX_ENTRIES") == 1 )
   {
     __debugbreak();
   }
-  if ( !CMapObjectMgr::m_vEntities[_iEntityId]
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 450, "m_vEntities[ _iEntityId ] != 0") == 1 )
+  if ( !CMapObjectMgr::m_vEntities[_iEntityId] && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 450, "m_vEntities[ _iEntityId ] != 0") == 1 )
   {
     __debugbreak();
   }
   entity = CMapObjectMgr::m_vEntities[_iEntityId];
   type = IEntity::Type(entity);
   v5 = IEntity::ObjType(entity);
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "CMapObjectMgr::Kill(): id %u, type %u / %u, attacker %i",
-    _iEntityId,
-    v5,
-    type,
-    (char *)_iAttackerId);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CMapObjectMgr::Kill(): id %u, type %u / %u, attacker %i", _iEntityId, v5, type, (char *)_iAttackerId);
   if ( (entity->m_iUniqueId & 0x20000000) != 0 )
   {
-    if ( IEntity::FlagBits(entity, ENTITY_FLAG_AliveMask)
-      && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 460, "pEntity->FlagBits(ENTITY_FLAG_ALIVE_MASK) == 0") == 1 )
+    if ( IEntity::FlagBits(entity, ENTITY_FLAG_AliveMask) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 460, "pEntity->FlagBits(ENTITY_FLAG_ALIVE_MASK) == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !IEntity::FlagBits(entity, ENTITY_FLAG_Died)
-      && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 461, "pEntity->FlagBits(ENTITY_FLAG_DIED) != 0") == 1 )
+    if ( !IEntity::FlagBits(entity, ENTITY_FLAG_Died) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 461, "pEntity->FlagBits(ENTITY_FLAG_DIED) != 0") == 1 )
     {
       __debugbreak();
     }
@@ -354,26 +342,33 @@ void  CMapObjectMgr::Kill(int _iEntityId, int _iAttackerId) {
   else
   {
     entity->m_iUniqueId |= 0x20000000u;
-    if ( IEntity::FlagBits(entity, ENTITY_FLAG_Died)
-      && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 468, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1 )
+    if ( IEntity::FlagBits(entity, ENTITY_FLAG_Died) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 468, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1 )
     {
       __debugbreak();
     }
     if ( IEntity::FlagBits(entity, ENTITY_FLAG_Birth) )
+    {
       IEntity::SetFlagBits(entity, (EntityFlag)0x100000);
+    }
     else
+    {
       IEntity::ClearFlagBits(entity, (EntityFlag)0x100000);
+    }
     IEntity::ClearFlagBits(entity, ENTITY_FLAG_AliveMask);
     IEntity::SetFlagBits(entity, ENTITY_FLAG_Died);
     if ( CWarMapNode::IsInWarMap(&entity->m_warMapNode) )
+    {
       CWarMap::RemoveEntity(entity);
+    }
     if ( IEntity::FlagBits(entity, ENTITY_FLAG_Selected) || IEntity::FlagBits(entity, (EntityFlag)1024) )
     {
       v3 = IEntity::ID(entity);
       CInputProcessor::DeSelectEntity(&g_cInputProcessor, v3);
     }
     if ( entity->GetGroupFlags() )
+    {
       g_pGroupMgr->DetachEntityFromAllGroups(_iEntityId);
+    }
     if ( _iAttackerId > 0 )
     {
       ownerId = IEntity::OwnerId(entity);
@@ -394,25 +389,20 @@ void  CMapObjectMgr::Kill(int _iEntityId, int _iAttackerId) {
     {
       m_psAIEntityInfo = entity->m_psAIEntityInfo;
       if ( m_psAIEntityInfo )
+      {
         delete m_psAIEntityInfo;
+      }
       entity->m_psAIEntityInfo = 0;
     }
     entity->Delete();
-    pAnimatedEntity = (IAnimatedEntity *)j____RTDynamicCast(
-                                           (void **)&entity->__vftable,
-                                           0,
-                                           &IEntity__RTTI_Type_Descriptor_,
-                                           &IAnimatedEntity__RTTI_Type_Descriptor_,
-                                           0);
+    pAnimatedEntity = (IAnimatedEntity *)j____RTDynamicCast((void **)&entity->__vftable, 0, &IEntity__RTTI_Type_Descriptor_, &IAnimatedEntity__RTTI_Type_Descriptor_, 0);
     if ( pAnimatedEntity )
     {
-      if ( IAnimatedEntity::Previous(pAnimatedEntity)
-        && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 548, "pAnimatedEntity->Previous() == 0") == 1 )
+      if ( IAnimatedEntity::Previous(pAnimatedEntity) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 548, "pAnimatedEntity->Previous() == 0") == 1 )
       {
         __debugbreak();
       }
-      if ( IAnimatedEntity::Next(pAnimatedEntity)
-        && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 549, "pAnimatedEntity->Next() == 0") == 1 )
+      if ( IAnimatedEntity::Next(pAnimatedEntity) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 549, "pAnimatedEntity->Next() == 0") == 1 )
       {
         __debugbreak();
       }
@@ -432,39 +422,42 @@ void  CMapObjectMgr::Destroy(int _iEntityId) {
   IEntity *v2; // [esp+14h] [ebp-Ch]
   int i; // [esp+1Ch] [ebp-4h]
 
-  if ( (_iEntityId <= 0 || _iEntityId >= 0xFFFF)
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 566, "_iEntityId>0 && _iEntityId<MAX_ENTRIES") == 1 )
+  if ( (_iEntityId <= 0 || _iEntityId >= 0xFFFF) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 566, "_iEntityId>0 && _iEntityId<MAX_ENTRIES") == 1 )
   {
     __debugbreak();
   }
-  if ( !CMapObjectMgr::m_vEntities[_iEntityId]
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 567, "m_vEntities[ _iEntityId ] != 0") == 1 )
+  if ( !CMapObjectMgr::m_vEntities[_iEntityId] && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 567, "m_vEntities[ _iEntityId ] != 0") == 1 )
   {
     __debugbreak();
   }
   v2 = CMapObjectMgr::m_vEntities[_iEntityId];
-  if ( v2->m_iEntityId != _iEntityId
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 571, "pEntity->m_uID == _iEntityId") == 1 )
+  if ( v2->m_iEntityId != _iEntityId && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 571, "pEntity->m_uID == _iEntityId") == 1 )
   {
     __debugbreak();
   }
   if ( v2 )
+  {
     v2->j_??_GIEntity@@UAEPAXI@Z((Concurrency::details::_Condition_variable *)v2, 1);
+  }
   CMapObjectMgr::m_vEntities[_iEntityId] = 0;
   if ( _iEntityId < CMapObjectMgr::m_iMinFreeId )
+  {
     CMapObjectMgr::m_iMinFreeId = _iEntityId;
-  if ( CMapObjectMgr::m_iLastUsedId < 0
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 582, "m_iLastUsedId >= 0") == 1 )
+  }
+  if ( CMapObjectMgr::m_iLastUsedId < 0 && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 582, "m_iLastUsedId >= 0") == 1 )
   {
     __debugbreak();
   }
-  if ( CMapObjectMgr::m_vEntities[0]
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 583, "m_vEntities[0] == 0") == 1 )
+  if ( CMapObjectMgr::m_vEntities[0] && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 583, "m_vEntities[0] == 0") == 1 )
   {
     __debugbreak();
   }
-  for ( i = CMapObjectMgr::m_iLastUsedId; CMapObjectMgr::m_vEntities[i] == 0 && i > 0; --i )
+  for ( i = CMapObjectMgr::m_iLastUsedId;
+        CMapObjectMgr::m_vEntities[i] == 0 && i > 0;
+        --i )
+  {
     ;
+  }
   CMapObjectMgr::m_iLastUsedId = i;
 }
 
@@ -497,9 +490,7 @@ void  CMapObjectMgr::LogicUpdate(void) {
   _DWORD v23[32]; // [esp+58h] [ebp-884h] BYREF
   _WORD v24[1024]; // [esp+D8h] [ebp-804h] BYREF
 
-  q = (void *)std::vector<std::deque<unsigned short>>::operator[](
-                (void **)&this->m_vLogicUpdateSlots,
-                this->m_vLogicUpdateListItem);
+  q = (void *)std::vector<std::deque<unsigned short>>::operator[]((void **)&this->m_vLogicUpdateSlots, this->m_vLogicUpdateListItem);
   crc1 = CMapObjectMgr::m_uCRCLogicUpdate;
   crc2 = CMapObjectMgr::m_uCRCLogicUpdate;
   crc3 = CMapObjectMgr::m_uCRCLogicUpdate;
@@ -507,23 +498,35 @@ void  CMapObjectMgr::LogicUpdate(void) {
   {
     v11 = std::deque<unsigned short>::size(q);
     v20 = 0;
-    for ( i = 0; i < v11 / 1024; ++i )
+    for ( i = 0;
+          i < v11 / 1024;
+          ++i )
     {
-      for ( j = 0; j < 1024; ++j )
+      for ( j = 0;
+            j < 1024;
+            ++j )
+      {
         v24[j] = *(_WORD *)std::deque<unsigned short>::operator[](q, v20++);
+      }
       CMapObjectMgr::m_uCRCLogicUpdate = Adler32((unsigned __int8 *)v24, 0x800u, CMapObjectMgr::m_uCRCLogicUpdate);
     }
     crc2 = CMapObjectMgr::m_uCRCLogicUpdate;
     v13 = v11 % 1024;
     if ( v11 % 1024 > 0 )
     {
-      for ( k = 0; k < v13; ++k )
+      for ( k = 0;
+            k < v13;
+            ++k )
+      {
         v24[k] = *(_WORD *)std::deque<unsigned short>::operator[](q, v20++);
+      }
       CMapObjectMgr::m_uCRCLogicUpdate = Adler32((unsigned __int8 *)v24, 2 * v13, CMapObjectMgr::m_uCRCLogicUpdate);
     }
     crc3 = CMapObjectMgr::m_uCRCLogicUpdate;
   }
-  for ( a2 = 0; a2 < 32; ++a2 )
+  for ( a2 = 0;
+        a2 < 32;
+        ++a2 )
   {
     v1 = std::vector<std::deque<unsigned short>>::operator[]((void **)&this->m_vLogicUpdateSlots, a2);
     v23[a2] = std::deque<unsigned short>::size(v1);
@@ -531,19 +534,11 @@ void  CMapObjectMgr::LogicUpdate(void) {
   CMapObjectMgr::m_uCRCLogicUpdate = Adler32((unsigned __int8 *)v23, 0x80u, CMapObjectMgr::m_uCRCLogicUpdate);
   v4 = CMapObjectMgr::m_uCRCLogicUpdate;
   size = std::deque<unsigned short>::size(q);
-  IMessageTracer::PushFormatedInts(
-    g_pMsgTracer,
-    "CMapObjectMgr::LogicUpdate(): size %u, CRCs 0x%08x, 0x%08x, 0x%08x, 0x%08x",
-    size,
-    crc1,
-    crc2,
-    crc3,
-    v4);
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CMapObjectMgr::LogicUpdate(): size %u, CRCs 0x%08x, 0x%08x, 0x%08x, 0x%08x", size, crc1, crc2, crc3, v4);
   while ( !(unsigned __int8)std::deque<unsigned short>::empty(q) )
   {
     iEntity = *(unsigned __int16 *)std::deque<unsigned short>::front(q);
-    if ( ((unsigned __int8)std::deque<unsigned short>::empty(q) || !*(_WORD *)std::deque<unsigned short>::front(q))
-      && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 781, "q.empty() == false && 0 != q.front()") == 1 )
+    if ( ((unsigned __int8)std::deque<unsigned short>::empty(q) || !*(_WORD *)std::deque<unsigned short>::front(q)) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 781, "q.empty() == false && 0 != q.front()") == 1 )
     {
       __debugbreak();
     }
@@ -551,18 +546,11 @@ void  CMapObjectMgr::LogicUpdate(void) {
     pEntity = (IAnimatedEntity *)CMapObjectMgr::EntityPtr(iEntity);
     if ( pEntity )
     {
-      if ( IEntity::ID(pEntity) != iEntity
-        && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 795, "pEntity->ID() == iEntityId") == 1 )
+      if ( IEntity::ID(pEntity) != iEntity && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 795, "pEntity->ID() == iEntityId") == 1 )
       {
         __debugbreak();
       }
-      if ( !j____RTDynamicCast(
-              (void **)&pEntity->__vftable,
-              0,
-              &IEntity__RTTI_Type_Descriptor_,
-              &IAnimatedEntity__RTTI_Type_Descriptor_,
-              0)
-        && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 796, "dynamic_cast<IAnimatedEntity*>(pEntity) != 0") == 1 )
+      if ( !j____RTDynamicCast((void **)&pEntity->__vftable, 0, &IEntity__RTTI_Type_Descriptor_, &IAnimatedEntity__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 796, "dynamic_cast<IAnimatedEntity*>(pEntity) != 0") == 1 )
       {
         __debugbreak();
       }
@@ -574,16 +562,10 @@ void  CMapObjectMgr::LogicUpdate(void) {
     }
     else
     {
-      BBSupportTracePrintF(
-        3,
-        "### CMapObjectMgr::LogicUpdate(): EntityPtr for entity id %i in list %i is NULL! ###",
-        iEntity,
-        this->m_vLogicUpdateListItem);
+      BBSupportTracePrintF(3, "### CMapObjectMgr::LogicUpdate(): EntityPtr for entity id %i in list %i is NULL! ###", iEntity, this->m_vLogicUpdateListItem);
     }
   }
-  v12 = (void *)std::vector<std::deque<unsigned short>>::operator[](
-                  (void **)&this->unk_14,
-                  this->m_vLogicUpdateListItem);
+  v12 = (void *)std::vector<std::deque<unsigned short>>::operator[]((void **)&this->unk_14, this->m_vLogicUpdateListItem);
   while ( !(unsigned __int8)std::deque<unsigned short>::empty(v12) )
   {
     v6 = *(unsigned __int16 *)std::deque<unsigned short>::front(v12);
@@ -610,19 +592,16 @@ int  CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId) {
   IAnimatedEntity *pEntity; // [esp+Ch] [ebp-8h]
   WORD entityToBeUpdated; // [esp+12h] [ebp-2h] BYREF
 
-  if ( (iDeltaTicks <= 0 || iDeltaTicks >= 32)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\MapObjectMgr.cpp",
-         847,
-         "(0 < _iDeltaTicks) && (_iDeltaTicks < MAX_LOGIC_UPDATE_SLOTS)") == 1 )
+  if ( (iDeltaTicks <= 0 || iDeltaTicks >= 32) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 847, "(0 < _iDeltaTicks) && (_iDeltaTicks < MAX_LOGIC_UPDATE_SLOTS)") == 1 )
   {
     __debugbreak();
   }
   if ( iDeltaTicks > 0 )
   {
     if ( iDeltaTicks >= 32 )
+    {
       iDeltaTicks = 31;
+    }
   }
   else
   {
@@ -630,48 +609,29 @@ int  CMapObjectMgr::RegisterForLogicUpdate(int iDeltaTicks, int _iEntityId) {
   }
   logicUpdateSlot = (iDeltaTicks + this->m_vLogicUpdateListItem) % 0x20;
   pEntity = (IAnimatedEntity *)CMapObjectMgr::EntityPtr(_iEntityId);
-  if ( IMessageTracer::RemoveCurrentMsgIfEqual(
-         (const char **)g_pMsgTracer,
-         "LogicUpdate(): id %u, type %u / %u",
-         (const char *)_iEntityId) )
+  if ( IMessageTracer::RemoveCurrentMsgIfEqual((const char **)g_pMsgTracer, "LogicUpdate(): id %u, type %u / %u", (const char *)_iEntityId) )
   {
     type = IEntity::Type(pEntity);
     objType = IEntity::ObjType(pEntity);
-    IMessageTracer::PushFormatedInts(
-      g_pMsgTracer,
-      "LogicUpdate() + RegisterForLogicUpdate(): id %u, type %u / %u, delta ticks %u",
-      _iEntityId,
-      objType,
-      type,
-      (char *)iDeltaTicks);
+    IMessageTracer::PushFormatedInts(g_pMsgTracer, "LogicUpdate() + RegisterForLogicUpdate(): id %u, type %u / %u, delta ticks %u", _iEntityId, objType, type, (char *)iDeltaTicks);
   }
   else
   {
     v9 = IEntity::Type(pEntity);
     v3 = IEntity::ObjType(pEntity);
-    IMessageTracer::PushFormatedInts(
-      g_pMsgTracer,
-      "RegisterForLogicUpdate(): id %u, type %u / %u, delta ticks %u",
-      _iEntityId,
-      v3,
-      v9,
-      (char *)iDeltaTicks);
+    IMessageTracer::PushFormatedInts(g_pMsgTracer, "RegisterForLogicUpdate(): id %u, type %u / %u, delta ticks %u", _iEntityId, v3, v9, (char *)iDeltaTicks);
   }
-  if ( IEntity::FlagBits(pEntity, (EntityFlag)&MEMORY[0x4000000])
-    && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 874, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1 )
+  if ( IEntity::FlagBits(pEntity, (EntityFlag)&MEMORY[0x4000000]) && BBSupportDbgReport(2, "MapObjects\\MapObjectMgr.cpp", 874, "pEntity->FlagBits(ENTITY_FLAG_DIED) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IAnimatedEntity::GetLastLogicUpdateTick(pEntity) != -1
-    && IAnimatedEntity::GetLastLogicUpdateTick(pEntity) != this->m_vLogicUpdateListItem )
+  if ( IAnimatedEntity::GetLastLogicUpdateTick(pEntity) != -1 && IAnimatedEntity::GetLastLogicUpdateTick(pEntity) != this->m_vLogicUpdateListItem )
   {
     LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(pEntity);
     CMapObjectMgr::UnRegisterFromLogicUpdate(this, LastLogicUpdateTick, _iEntityId);
   }
   entityToBeUpdated = _iEntityId;
-  updateQueue = (void *)std::vector<std::deque<unsigned short>>::operator[](
-                          (void **)&this->m_vLogicUpdateSlots,
-                          logicUpdateSlot);
+  updateQueue = (void *)std::vector<std::deque<unsigned short>>::operator[]((void **)&this->m_vLogicUpdateSlots, logicUpdateSlot);
   std::deque<unsigned short>::push_front(updateQueue, &entityToBeUpdated);
   IEntity::SetFlagBits(pEntity, ENTITY_FLAG_Registered);
   return logicUpdateSlot;
@@ -716,7 +676,9 @@ void  CMapObjectMgr::UnRegisterFromLogicUpdate(int slot, int entity) {
       LOBYTE(exceptionBlock) = 0;
       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v8);
       if ( !v18 )
+      {
         break;
+      }
       if ( *(unsigned __int16 *)std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator*(v9) == entity )
       {
         v12 = &v3;
@@ -802,7 +764,9 @@ void  CMapObjectMgr::Store(class S4::CMapFile & a2) {
   operator^<unsigned int>((struct std::ostream *)stringStream, (int *)p_m_vLogicUpdateSlots + 4);
   v30 = 32;
   operator^<unsigned int>((struct std::ostream *)stringStream, &v30);
-  for ( a2 = 0; a2 < v30; ++a2 )
+  for ( a2 = 0;
+        a2 < v30;
+        ++a2 )
   {
     v26 = std::vector<std::deque<unsigned short>>::operator[](p_m_vLogicUpdateSlots, a2);
     v25 = std::deque<unsigned short>::size(v26);
@@ -821,7 +785,9 @@ void  CMapObjectMgr::Store(class S4::CMapFile & a2) {
       LOBYTE(v38) = 2;
       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v6);
       if ( !v34 )
+      {
         break;
+      }
       v20 = (WORD *)std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator*(v9);
       v29 = *v20;
       operator^<unsigned short>((struct std::ostream *)stringStream, &v29);
@@ -831,7 +797,9 @@ void  CMapObjectMgr::Store(class S4::CMapFile & a2) {
     std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v9);
   }
   operator^<unsigned int>((struct std::ostream *)stringStream, &v30);
-  for ( a2 = 0; a2 < v30; ++a2 )
+  for ( a2 = 0;
+        a2 < v30;
+        ++a2 )
   {
     v19 = std::vector<std::deque<unsigned short>>::operator[](p_m_vLogicUpdateSlots + 5, a2);
     v18 = std::deque<unsigned short>::size(v19);
@@ -850,7 +818,9 @@ void  CMapObjectMgr::Store(class S4::CMapFile & a2) {
       LOBYTE(v38) = 4;
       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v5);
       if ( !v32 )
+      {
         break;
+      }
       v13 = (WORD *)std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator*(v8);
       v28 = *v13;
       operator^<unsigned short>((struct std::ostream *)stringStream, &v28);
@@ -928,10 +898,14 @@ void  CMapObjectMgr::Load(class S4::CMapFile & a2) {
     operator^<unsigned int>(v3, &CMapObjectMgr::m_uCRCLogicUpdate);
     operator^<unsigned int>(v3, &this->m_vLogicUpdateListItem);
     operator^<unsigned int>(v3, &v13);
-    for ( a2 = 0; a2 < v13; ++a2 )
+    for ( a2 = 0;
+          a2 < v13;
+          ++a2 )
     {
       operator^<unsigned int>(v3, v7);
-      for ( i = 0; i < v7[0]; ++i )
+      for ( i = 0;
+            i < v7[0];
+            ++i )
       {
         operator^<unsigned short>(v3, v16);
         v6[1] = std::vector<std::deque<unsigned short>>::operator[]((void **)&this->m_vLogicUpdateSlots, a2);
@@ -939,10 +913,14 @@ void  CMapObjectMgr::Load(class S4::CMapFile & a2) {
       }
     }
     operator^<unsigned int>(v3, &v13);
-    for ( a2 = 0; a2 < v13; ++a2 )
+    for ( a2 = 0;
+          a2 < v13;
+          ++a2 )
     {
       operator^<unsigned int>(v3, v6);
-      for ( j = 0; j < v6[0]; ++j )
+      for ( j = 0;
+            j < v6[0];
+            ++j )
       {
         operator^<unsigned short>(v3, v15);
         v5 = std::vector<std::deque<unsigned short>>::operator[]((void **)&this->unk_14, a2);
@@ -960,32 +938,46 @@ void  CMapObjectMgr::Load(class S4::CMapFile & a2) {
 
 
 // address=[0x1557c60]
-// Decompiled from int __thiscall CMapObjectMgr::PrintEntity(  CMapObjectMgr *this,  int _iEntityId,  int _iLogLevel,  const char *_sCustomMessage)
+// Decompiled from int __thiscall CMapObjectMgr::PrintEntity(CMapObjectMgr *this, int _iEntityId, int _iLogLevel, const char *_sCustomMessage)
 void  CMapObjectMgr::PrintEntity(int _iEntityId, int _iLogLevel, char const * _sCustomMessage) {
   
   const char *message; // [esp+4h] [ebp-Ch]
   IEntity *pEntity; // [esp+8h] [ebp-8h]
 
   if ( _sCustomMessage )
+  {
     message = _sCustomMessage;
+  }
   else
+  {
     message = "CMapObjectMgr::PrintEntity()";
+  }
   if ( (unsigned int)_iEntityId >= 0x10000 )
+  {
     return BBSupportTracePrintF(_iLogLevel, "%s: Entity id %i out of range!", message, _iEntityId);
+  }
   if ( !_iEntityId )
+  {
     return BBSupportTracePrintF(_iLogLevel, "%s: Entity id 0 is reserved!", message);
+  }
   if ( _iEntityId > CMapObjectMgr::m_iMaxLastUsedId )
+  {
     return BBSupportTracePrintF(_iLogLevel, "%s: Entity id %i is > MaxLastUsedId!", message, _iEntityId);
+  }
   pEntity = CMapObjectMgr::m_vEntities[_iEntityId];
   if ( pEntity )
+  {
     return pEntity->DbgPrint(_iLogLevel, message);
+  }
   else
+  {
     return BBSupportTracePrintF(_iLogLevel, "%s: Entity id %i is unused!", message, _iEntityId);
+  }
 }
 
 
 // address=[0x1557d40]
-// Decompiled from int __thiscall CMapObjectMgr::DbgPrintEntity(  CMapObjectMgr *this,  int _iEntityId,  int _iLogLevel,  const char *_sCustomMessage)
+// Decompiled from int __thiscall CMapObjectMgr::DbgPrintEntity(CMapObjectMgr *this, int _iEntityId, int _iLogLevel, const char *_sCustomMessage)
 void  CMapObjectMgr::DbgPrintEntity(int _iEntityId, int _iLogLevel, char const * _sCustomMessage) {
   
   return CMapObjectMgr::PrintEntity(this, _iEntityId, _iLogLevel, _sCustomMessage);
@@ -1038,19 +1030,25 @@ void  CMapObjectMgr::PrintAllEntities(int _iLogLevel) {
   BBSupportTracePrintF(_iLogLevel, " Current tick is %u.", g_uDbgTickCounter);
   used = 0;
   alive = 0;
-  for ( i = 0; i <= _iLastUsedId; ++i )
+  for ( i = 0;
+        i <= _iLastUsedId;
+        ++i )
   {
     v13 = CMapObjectMgr::m_vEntities[i];
     if ( v13 )
     {
       ++used;
       if ( !IEntity::FlagBits(v13, ENTITY_FLAG_Died) )
+      {
         ++alive;
+      }
     }
   }
   memset(v35, 255, sizeof(v35));
   memset(v36, 0, sizeof(v36));
-  for ( a2 = 0; (int)a2 < 32; ++a2 )
+  for ( a2 = 0;
+        (int)a2 < 32;
+        ++a2 )
   {
     v14 = std::vector<std::deque<unsigned short>>::operator[](p_m_vLogicUpdateSlots, a2);
     std::deque<unsigned short>::begin(v6);
@@ -1064,17 +1062,23 @@ void  CMapObjectMgr::PrintAllEntities(int _iLogLevel) {
       LOBYTE(v38) = 0;
       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v4);
       if ( !v31 )
+      {
         break;
+      }
       v24 = *(unsigned __int16 *)std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator*(v6);
       if ( (char)v35[v24] != -1 )
+      {
         v36[v24] = 1;
+      }
       v35[v24] = a2;
       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator++(v6);
     }
     v38 = -1;
     std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v6);
   }
-  for ( j = 0; (int)j < 32; ++j )
+  for ( j = 0;
+        (int)j < 32;
+        ++j )
   {
     v19 = std::vector<std::deque<unsigned short>>::operator[](p_m_vLogicUpdateSlots + 5, j);
     std::deque<unsigned short>::begin(v5);
@@ -1088,27 +1092,24 @@ void  CMapObjectMgr::PrintAllEntities(int _iLogLevel) {
       LOBYTE(v38) = 2;
       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v3);
       if ( !v30 )
+      {
         break;
+      }
       v23 = *(unsigned __int16 *)std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator*(v5);
       if ( (char)v35[v23] != -1 )
+      {
         v36[v23] = 1;
+      }
       v35[v23] = j + 32;
       std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::operator++(v5);
     }
     v38 = -1;
     std::_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>::~_Deque_iterator<std::_Deque_val<std::_Deque_simple_types<unsigned short>>>(v5);
   }
-  BBSupportTracePrintF(
-    _iLogLevel,
-    " Used: %5i, Alive: %5i, MinFree: %5i, LastUsed: %5i, MaxLastUsed: %5i, UniqueId: %5i, CRC: 0x%08x",
-    used,
-    alive,
-    CMapObjectMgr::m_iMinFreeId,
-    CMapObjectMgr::m_iLastUsedId,
-    CMapObjectMgr::m_iMaxLastUsedId,
-    CMapObjectMgr::m_iCurrentUniqueId,
-    CMapObjectMgr::m_uCRCLogicUpdate);
-  for ( k = 1; k <= _iLastUsedId; ++k )
+  BBSupportTracePrintF(_iLogLevel, " Used: %5i, Alive: %5i, MinFree: %5i, LastUsed: %5i, MaxLastUsed: %5i, UniqueId: %5i, CRC: 0x%08x", used, alive, CMapObjectMgr::m_iMinFreeId, CMapObjectMgr::m_iLastUsedId, CMapObjectMgr::m_iMaxLastUsedId, CMapObjectMgr::m_iCurrentUniqueId, CMapObjectMgr::m_uCRCLogicUpdate);
+  for ( k = 1;
+        k <= _iLastUsedId;
+        ++k )
   {
     pEntity = CMapObjectMgr::m_vEntities[k];
     if ( pEntity )
@@ -1119,18 +1120,30 @@ void  CMapObjectMgr::PrintAllEntities(int _iLogLevel) {
         v33 = v25 >= 32;
         v34 = v25 >= 32;
         if ( v25 < 32 )
+        {
           v17 = v25;
+        }
         else
+        {
           v17 = v25 - 32;
+        }
         v7 = v17;
         if ( v36[k] )
+        {
           v16 = "#";
+        }
         else
+        {
           v16 = "+";
+        }
         if ( v34 )
+        {
           v15 = "d";
+        }
         else
+        {
           v15 = "s";
+        }
         snprintf(v37, 0x20u, " %05i[%s%02i%s]", k, v15, v7, v16);
       }
       else
@@ -1156,8 +1169,7 @@ void  CMapObjectMgr::DbgPrintAllEntities(int a2) {
 // Decompiled from struct SGfxObjectInfo *__thiscall CMapObjectMgr::GetGfxInfo(CMapObjectMgr *this, unsigned int _iId, int a3)
 struct SGfxObjectInfo *  CMapObjectMgr::GetGfxInfo(int _iId, int a3) {
   
-  if ( !CMapObjectMgr::ValidUsedEntityId(_iId)
-    && BBSupportDbgReport(2, string__2, 205, "ValidUsedEntityId( _iId )") == 1 )
+  if ( !CMapObjectMgr::ValidUsedEntityId(_iId) && BBSupportDbgReport(2, string__2, 205, "ValidUsedEntityId( _iId )") == 1 )
   {
     __debugbreak();
   }

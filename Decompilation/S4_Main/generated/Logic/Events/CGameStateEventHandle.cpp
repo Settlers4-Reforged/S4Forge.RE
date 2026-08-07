@@ -86,18 +86,24 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
     case GENERIC_EVENT_LOAD_CONFIG:
       m_wParam = (unsigned __int16)v43->m_wParam;
       if ( m_wParam == 0x9C49 )
+      {
         CGameStateHandler::LoadAllConfigFiles();
+      }
       goto CGameStateEventHandle__OnEvent___def_188A00A;
     case GENERIC_EVENT_UPDATE_WINDOW_POS:
       Point.x = 0;
       Point.y = 0;
       ClientToScreen((HWND)v43[1].__vftable, &Point);
       if ( g_pGfxEngine )
+      {
         IGfxEngine::SetWindowPosition(g_pGfxEngine, Point.x, Point.y);
+      }
       goto CGameStateEventHandle__OnEvent___def_188A00A;
     case GENERIC_EVENT_REBUILD_GFX:
       if ( g_pGfxEngine )
+      {
         CGameStateHandler::RebuildGfxEngine(0);
+      }
       goto CGameStateEventHandle__OnEvent___def_188A00A;
     case GENERIC_EVENT_QUIT_1:
     case GENERIC_EVENT_QUIT_2:
@@ -110,7 +116,9 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
       {
         case 0:                                 // PrintScreen
           if ( (v43->m_lParam & 4) == 0 || (v43->m_lParam & 8) == 0 )
+          {
             goto CGameStateEventHandle__OnEvent___def_188A00A;
+          }
           CGameStateHandler::m_bGrab = CGameStateHandler::m_bGrab == 0;
           result = 0;
           break;
@@ -184,7 +192,9 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
           break;
         case 68:                                // F2
           if ( (v43->m_lParam & 4) == 0 )       // Shift held
+          {
             ChangeScreenSize(800, 600);
+          }
           goto CGameStateEventHandle__OnEvent___def_188A00A;
         case 69:                                // F3
           ChangeScreenSize(1024, 768);
@@ -207,7 +217,9 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
     case GENERIC_EVENT_SHOW_MANUAL:
       v34 = v43->m_wParam;
       if ( v34 != 63 )
+      {
         goto CGameStateEventHandle__OnEvent___def_188A00A;
+      }
       v16 = &v6;
       v33 = std::string::string(&v6, (char *)&byte_36C34A2);
       v15 = v33;
@@ -224,7 +236,9 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
     case GENERIC_EVENT_KEY_UP:
       v35 = v43->m_wParam;
       if ( v35 != 0x2C )
+      {
         goto CGameStateEventHandle__OnEvent___def_188A00A;
+      }
       if ( (v43->m_lParam & 4) != 0 )
       {
         CGameStateHandler::m_bGrab = CGameStateHandler::m_bGrab == 0;
@@ -243,7 +257,9 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
       {
         CGameStateHandler::m_bAppActive = 1;
         if ( g_pGfxEngine && g_pGUIEngine )
+        {
           IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
+        }
       }
       else                                      // Lost it...
       {
@@ -256,16 +272,19 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
       }
       goto CGameStateEventHandle__OnEvent___def_188A00A;
     case GENERIC_EVENT_START_TICK:
-      if ( !g_pGame
-        && BBSupportDbgReportF(2, "Main\\GameStateEventHandle.cpp", 262, "Start tick receive when there's no game !!!!") == 1 )
+      if ( !g_pGame && BBSupportDbgReportF(2, "Main\\GameStateEventHandle.cpp", 262, "Start tick receive when there's no game !!!!") == 1 )
       {
         __debugbreak();
       }
       if ( !g_pGame )
+      {
         return 1;
+      }
       CStateGame::ReadyToGo(g_pGame);
       if ( !CGameSettings::GetWebHelpMode() )
+      {
         return 1;
+      }
       v25 = std::string::string(&v46, "???");
       v28 = v25;
       v54 = 10;
@@ -280,7 +299,9 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
       v54 = -1;
       std::string::~string(&v46);
       if ( v40 )
+      {
         CGameSettings::SetWebHelpMode(0);
+      }
       return 1;
     case GENERIC_EVENT_REQUEST_QUIT:
       CGameStateHandler::m_bQuitApplication = 1;
@@ -288,9 +309,13 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
     default:
 CGameStateEventHandle__OnEvent___def_188A00A:
       if ( CGameStateHandler::m_s_pCurrentState )
+      {
         result = CGameStateHandler::m_s_pCurrentState->OnEvent(CGameStateHandler::m_s_pCurrentState, a2);
+      }
       else
+      {
         result = 0;
+      }
       break;
   }
   return result;

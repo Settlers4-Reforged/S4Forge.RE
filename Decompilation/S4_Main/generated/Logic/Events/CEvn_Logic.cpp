@@ -12,7 +12,7 @@
 
 
 // address=[0x1334e60]
-// Decompiled from CEvn_Logic *__thiscall CEvn_Logic::CEvn_Logic(  CEvn_Logic *this,  uint a2,  uint a3,  uint a4,  uchar a5,  uint a6,  ushort a7)
+// Decompiled from CEvn_Logic *__thiscall CEvn_Logic::CEvn_Logic(CEvn_Logic *this, uint a2, uint a3, uint a4, uchar a5, uint a6, ushort a7)
  CEvn_Logic::CEvn_Logic(unsigned int a2, unsigned int a3, unsigned int a4, unsigned char a5, unsigned int a6, unsigned short a7) {
   
   CEvn_Event::CEvn_Event(this, a2, a3, a4, 0);
@@ -65,17 +65,7 @@ void  CEvn_Logic::Save(class IS4Chunk & a2) {
   a2->Save(&this->m_wParam, 4);
   if ( this->m_iDataSize )
   {
-    if ( !this->m_iData
-      && BBSupportDbgReportF(
-           2,
-           "EventEngine\\Evn_HandleLogic.cpp",
-           27,
-           "m_iData != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x",
-           this->m_iOwner,
-           this->m_lParam,
-           this->m_iEventId,
-           this->m_wParam,
-           this->m_iDataSize) == 1 )
+    if ( !this->m_iData && BBSupportDbgReportF(2, "EventEngine\\Evn_HandleLogic.cpp", 27, "m_iData != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x", this->m_iOwner, this->m_lParam, this->m_iEventId, this->m_wParam, this->m_iDataSize) == 1 )
     {
       __debugbreak();
     }

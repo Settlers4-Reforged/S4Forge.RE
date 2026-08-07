@@ -7,9 +7,13 @@
 class CPersistence * __cdecl CVikingCatapult::New(std::istream & a1) {
   
   if ( CVikingCatapult::operator new(0xD8u) )
+  {
     return CVikingCatapult::CVikingCatapult(a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -97,7 +101,7 @@ void  CVikingCatapult::IncreaseAmmo(int a2) {
 // [Decompilation failed for static unsigned long CVikingCatapult::m_iClassID]
 
 // address=[0x153f010]
-// Decompiled from CVikingCatapult *__thiscall CVikingCatapult::CVikingCatapult(  CVikingCatapult *this,  int a2,  int a3,  int a4,  int a5,  int a6,  int a7,  bool a8)
+// Decompiled from CVikingCatapult *__thiscall CVikingCatapult::CVikingCatapult(CVikingCatapult *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
  CVikingCatapult::CVikingCatapult(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   CCatapult::CCatapult(this, a2, a3, a4, a5, a6, a7, a8);
@@ -115,9 +119,13 @@ bool  CVikingCatapult::EnoughAmmo(void)const {
   unsigned int v4; // [esp+10h] [ebp-8h]
 
   if ( CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost) <= 0 )
+  {
     v4 = 1;
+  }
   else
+  {
     v4 = CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost);
+  }
   v1 = IEntity::OwnerId((unsigned __int8 *)this);
   return CMagic::GetCurrentManaAmount(v1) >= v4;
 }
@@ -131,9 +139,13 @@ unsigned int  CVikingCatapult::AmmoAmount(void)const {
   unsigned int v4; // [esp+10h] [ebp-4h]
 
   if ( CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost) <= 0 )
+  {
     v4 = 1;
+  }
   else
+  {
     v4 = CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost);
+  }
   v1 = IEntity::OwnerId((unsigned __int8 *)this);
   return CMagic::GetCurrentManaAmount(v1) / v4;
 }

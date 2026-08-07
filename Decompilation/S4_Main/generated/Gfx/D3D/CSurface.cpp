@@ -13,17 +13,25 @@ class CSurface * __cdecl CSurface::CreateSurfacePtr(bool a1) {
   {
     C = (CSurfaceV3 *)operator new(0x10u);
     if ( C )
+    {
       return (CSurfaceV7 *)CSurfaceV3::CSurfaceV3(C);
+    }
     else
+    {
       return 0;
+    }
   }
   else
   {
     v3 = (CSurfaceV7 *)operator new(0x10u);
     if ( v3 )
+    {
       return CSurfaceV7::CSurfaceV7(v3);
+    }
     else
+    {
       return 0;
+    }
   }
 }
 

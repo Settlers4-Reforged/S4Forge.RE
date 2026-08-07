@@ -8,9 +8,13 @@
 bool  CWalking::IsFree(int a2) {
   
   if ( this->IsNotBlocked(this, a2) )
+  {
     return this->IsNotOccupied(this, a2);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -33,38 +37,56 @@ class CWalking * __cdecl CWalking::Create(enum T_WALKING_TYPE a1, int a2) {
     case 0:
       C = (CWalkingNormal *)operator new(0xC0u);
       if ( C )
+      {
         v9 = CWalkingNormal::CWalkingNormal(C, a2);
+      }
       else
+      {
         v9 = 0;
+      }
       result = v9;
       break;
     case 1:
       v8 = (CWalkingWorker *)operator new(0xC0u);
       if ( v8 )
+      {
         v7 = CWalkingWorker::CWalkingWorker(v8, a2);
+      }
       else
+      {
         v7 = 0;
+      }
       result = v7;
       break;
     case 3:
       v6 = (CWalkingCatapult *)operator new(0xC0u);
       if ( v6 )
+      {
         v5 = CWalkingCatapult::CWalkingCatapult(v6);
+      }
       else
+      {
         v5 = 0;
+      }
       result = v5;
       break;
     case 4:
       v4 = (CWalkingShip *)operator new(0xC0u);
       if ( v4 )
+      {
         v3 = CWalkingShip::CWalkingShip(v4);
+      }
       else
+      {
         v3 = 0;
+      }
       result = v3;
       break;
     default:
       if ( BBSupportDbgReportF(1, "Pathing\\Walking.cpp", 2445, "CWalking::Create(): Invalid WalkingType %i!", a1) == 1 )
+      {
         __debugbreak();
+      }
       result = 0;
       break;
   }
@@ -117,9 +139,13 @@ class CWalking * __cdecl CWalking::Create(std::istream & a1) {
   operator^<int>(a1, &v21);
   pNewWalking = (CWalkingBase *)CWalking::Create(v23, v21 & 0xF);
   if ( !pNewWalking && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2476, "pNewWalking!=NULL") == 1 )
+  {
     __debugbreak();
+  }
   if ( !pNewWalking )
+  {
     return 0;
+  }
   Data = CWalkingBase::GetData(pNewWalking);
   Data->m_uFlags = v21;
   v3 = CWalkingBase::GetData(pNewWalking);
@@ -155,7 +181,9 @@ class CWalking * __cdecl CWalking::Create(std::istream & a1) {
   ControllID = 0;
   operator^<int>(a1, &ControllID);
   if ( ControllID != 0x66ED0BD9 && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2501, "ControllID== 0x66ED0BD9") == 1 )
+  {
     __debugbreak();
+  }
   return pNewWalking;
 }
 

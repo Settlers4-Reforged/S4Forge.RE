@@ -19,9 +19,13 @@ class CPersistence * __cdecl CPile::New(std::istream & a1) {
 
   v3 = (CPile *)CPile::operator new(0x7Cu);
   if ( v3 )
+  {
     return CPile::CPile(v3, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -64,12 +68,7 @@ bool  CPile::IsPatchPile(void)const {
 // Decompiled from int __thiscall CPile::NumberOfAvailableGoods(CPile *this)
 int  CPile::NumberOfAvailableGoods(void)const {
   
-  if ( this->m_uAmount < (int)this->m_uAmountLeaving
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\pile\\Pile.h",
-         288,
-         "m_uAmount >= m_uAmountLeaving") == 1 )
+  if ( this->m_uAmount < (int)this->m_uAmountLeaving && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\pile\\Pile.h", 288, "m_uAmount >= m_uAmountLeaving") == 1 )
   {
     __debugbreak();
   }
@@ -137,12 +136,7 @@ void  CPile::SetRoleType(int a2) {
 // Decompiled from int __thiscall CPile::GetBuildingId(CPile *this)
 int  CPile::GetBuildingId(void)const {
   
-  if ( this->m_uPileRole == 3
-    && BBSupportDbgReport(
-         2,
-         "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\pile\\Pile.h",
-         280,
-         "m_uPileRole != IPileRole::PILE_ANYWHERE") == 1 )
+  if ( this->m_uPileRole == 3 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\mapobjects\\pile\\Pile.h", 280, "m_uPileRole != IPileRole::PILE_ANYWHERE") == 1 )
   {
     __debugbreak();
   }
@@ -234,12 +228,10 @@ struct SGfxObjectInfo *  CPile::GetGfxInfos(void) {
   
   memset(&IEntity::m_sGfxInfo, 0, sizeof(IEntity::m_sGfxInfo));
   if ( !this->m_uGood || (unsigned __int8)this->m_uGood >= (unsigned int)GOOD_MAX || !this->m_uAmount )
+  {
     return &IEntity::m_sGfxInfo;
-  CGfxManager::GetPileGfxInfo(
-    (int)&IEntity::m_sGfxInfo,
-    (unsigned __int8)this->m_uGood,
-    this->m_uAmount,
-    (unsigned __int8)this->byte4A);
+  }
+  CGfxManager::GetPileGfxInfo((int)&IEntity::m_sGfxInfo, (unsigned __int8)this->m_uGood, this->m_uAmount, (unsigned __int8)this->byte4A);
   IEntity::m_sGfxInfo.m_uObjType = this->m_uObjType;
   IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
   return &IEntity::m_sGfxInfo;
@@ -252,12 +244,7 @@ void  CPile::GetPatchGfx(struct SGfxPatchObject & _pGfxPatchObject) {
   
   if ( this->m_uGood && (unsigned __int8)this->m_uGood < 0x2Bu && this->m_uAmount )
   {
-    CGfxManager::GetPatchPileGfxInfo(
-      g_pGfxManager,
-      _pGfxPatchObject,
-      (unsigned __int8)this->m_uGood,
-      this->m_uAmount,
-      (unsigned __int8)this->byte4A);
+    CGfxManager::GetPatchPileGfxInfo(g_pGfxManager, _pGfxPatchObject, (unsigned __int8)this->m_uGood, this->m_uAmount, (unsigned __int8)this->byte4A);
   }
   else
   {
@@ -280,8 +267,7 @@ void  CPile::ChangeRole(int _iRoleType) {
   CBuilding *v7; // [esp+10h] [ebp-14h]
   int v9; // [esp+20h] [ebp-4h]
 
-  if ( _iRoleType != 3
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 319, "_iRoleType == IPileRole::PILE_ANYWHERE") == 1 )
+  if ( _iRoleType != 3 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 319, "_iRoleType == IPileRole::PILE_ANYWHERE") == 1 )
   {
     __debugbreak();
   }
@@ -309,36 +295,40 @@ int  CPile::IncreaseUnforeseen(int _iAmount) {
   struct IPileRole *v3; // eax
   int iAvailableSpace; // [esp+4h] [ebp-8h]
 
-  if ( (unsigned int)_iAmount > 8
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 486, "(_iAmount >= 0) && (_iAmount <= MAX_PILE_AMOUNT)") == 1 )
+  if ( (unsigned int)_iAmount > 8 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 486, "(_iAmount >= 0) && (_iAmount <= MAX_PILE_AMOUNT)") == 1 )
   {
     __debugbreak();
   }
   if ( _iAmount <= 0 )
+  {
     return 0;
+  }
   iAvailableSpace = 8 - this->m_uAmount - this->m_uAmountComing;
   if ( iAvailableSpace < 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 495, "iAvailableSpace >= 0") == 1 )
+  {
     __debugbreak();
-  if ( _iAmount > iAvailableSpace
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 496, "_iAmount <= iAvailableSpace") == 1 )
+  }
+  if ( _iAmount > iAvailableSpace && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 496, "_iAmount <= iAvailableSpace") == 1 )
   {
     __debugbreak();
   }
   if ( iAvailableSpace <= 0 )
+  {
     return 0;
+  }
   if ( _iAmount > iAvailableSpace )
+  {
     _iAmount = iAvailableSpace;
+  }
   this->m_uAmount += _iAmount;
   CPile::AdjustStatistic(this, _iAmount, 0);
   v3 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
   v3->Increase(v3, this, _iAmount);
-  if ( this->m_uAmount > 8u
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 514, "m_uAmount <= MAX_PILE_AMOUNT") == 1 )
+  if ( this->m_uAmount > 8u && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 514, "m_uAmount <= MAX_PILE_AMOUNT") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_uAmountComing + this->m_uAmount > 8
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 515, "m_uAmount + m_uAmountComing <= MAX_PILE_AMOUNT") == 1 )
+  if ( this->m_uAmountComing + this->m_uAmount > 8 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 515, "m_uAmount + m_uAmountComing <= MAX_PILE_AMOUNT") == 1 )
   {
     __debugbreak();
   }
@@ -354,8 +344,7 @@ void  CPile::DecreaseUnforeseen(int _iAmount) {
   struct IPileRole *v3; // [esp+4h] [ebp-Ch]
   int iAvailableGoods; // [esp+8h] [ebp-8h]
 
-  if ( (unsigned int)_iAmount > 8
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 527, "(_iAmount >= 0) && (_iAmount <= MAX_PILE_AMOUNT)") == 1 )
+  if ( (unsigned int)_iAmount > 8 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 527, "(_iAmount >= 0) && (_iAmount <= MAX_PILE_AMOUNT)") == 1 )
   {
     __debugbreak();
   }
@@ -363,27 +352,28 @@ void  CPile::DecreaseUnforeseen(int _iAmount) {
   {
     iAvailableGoods = this->m_uAmount - this->m_uAmountLeaving;
     if ( iAvailableGoods < 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 536, "iAvailableGoods >= 0") == 1 )
+    {
       __debugbreak();
-    if ( _iAmount > iAvailableGoods
-      && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 537, "_iAmount <= iAvailableGoods") == 1 )
+    }
+    if ( _iAmount > iAvailableGoods && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 537, "_iAmount <= iAvailableGoods") == 1 )
     {
       __debugbreak();
     }
     if ( iAvailableGoods > 0 )
     {
       if ( _iAmount > iAvailableGoods )
+      {
         _iAmount = iAvailableGoods;
+      }
       this->m_uAmount -= _iAmount;
       CPile::AdjustStatistic(this, -_iAmount, 0);
       v3 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
       v3->Decrease(v3, this, 1);
-      if ( this->m_uAmount > 8u
-        && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 555, "m_uAmount <= MAX_PILE_AMOUNT") == 1 )
+      if ( this->m_uAmount > 8u && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 555, "m_uAmount <= MAX_PILE_AMOUNT") == 1 )
       {
         __debugbreak();
       }
-      if ( this->m_uAmountLeaving > (int)this->m_uAmount
-        && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 556, "m_uAmountLeaving <= m_uAmount") == 1 )
+      if ( this->m_uAmountLeaving > (int)this->m_uAmount && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 556, "m_uAmountLeaving <= m_uAmount") == 1 )
       {
         __debugbreak();
       }
@@ -416,13 +406,19 @@ bool  CPile::ForceAmountLeaving(int a2, int a3) {
   while ( 1 )
   {
     while ( CPile::GoodAvailable(this) )
+    {
       --v13;                                    // Not actually a while - probably an if(!G..A..). Broken output due to hacks to show this
+    }
     v10 = CPileObserverList::NumberOfObservers((CPileObserverList *)&this->m_cPileObserverList);
     if ( !v10 )
+    {
       break;
+    }
     pObservers = CPileObserverList::Observers((CPileObserverList *)&this->m_cPileObserverList);
     if ( !pObservers && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 596, "pObservers") == 1 )
+    {
       __debugbreak();
+    }
     while ( v10 > 0 )
     {
       v11 = (CSettler *)CMapObjectMgr::EntityPtr(pObservers->m_iObserverId);
@@ -436,7 +432,9 @@ bool  CPile::ForceAmountLeaving(int a2, int a3) {
         {
           CSettler::SetFree(v11);
           if ( CPile::GoodAvailable(this) )
+          {
             --v13;
+          }
         }
       }
     }
@@ -452,18 +450,18 @@ void  CPile::SetBuildingId(int _iBuidingId) {
   int v2; // eax
   CBuilding *v3; // [esp+0h] [ebp-8h]
 
-  if ( this->m_uPileRole == 3
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 343, "m_uPileRole != IPileRole::PILE_ANYWHERE") == 1 )
+  if ( this->m_uPileRole == 3 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 343, "m_uPileRole != IPileRole::PILE_ANYWHERE") == 1 )
   {
     __debugbreak();
   }
   if ( _iBuidingId <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 344, "_iBuidingId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v3 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, _iBuidingId);
   v2 = IEntity::EntityId(this);
   v3->Attach(v3, v2);
-  if ( this->m_uBuildingId != _iBuidingId
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 349, "m_uBuildingId == _iBuidingId") == 1 )
+  if ( this->m_uBuildingId != _iBuidingId && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 349, "m_uBuildingId == _iBuidingId") == 1 )
   {
     __debugbreak();
   }
@@ -481,7 +479,9 @@ void  CPile::Occupied(int _iNewEcoSectorId) {
   struct IPileRole *v6; // [esp+8h] [ebp-8h]
 
   if ( _iNewEcoSectorId <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 1176, "_iNewEcoSectorId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v2 = CEcoSectorMgr::operator[](g_cESMgr, _iNewEcoSectorId);
   v3 = CEcoSector::Owner(v2);
   CPlayerManager::Race(v3);
@@ -501,7 +501,9 @@ bool  CPile::SetFree(int _iOldEcoSectorId) {
   struct IPileRole *v3; // [esp+4h] [ebp-8h]
 
   if ( _iOldEcoSectorId <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 1199, "_iOldEcoSectorId > 0") == 1 )
+  {
     __debugbreak();
+  }
   v3 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
   v3->SetFree(v3, this, _iOldEcoSectorId);
   CPile::AdjustStatistic(this, -this->m_uAmount, _iOldEcoSectorId);
@@ -517,11 +519,14 @@ void  CPile::NotifyChangeEcoSector(int _iOldEcoSectorId, int _iNewEcoSectorId) {
   int m_uAmount; // [esp+4h] [ebp-8h]
 
   if ( _iOldEcoSectorId <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 1219, "_iOldEcoSectorId > 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iNewEcoSectorId <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 1220, "_iNewEcoSectorId > 0") == 1 )
+  {
     __debugbreak();
-  if ( _iOldEcoSectorId == _iNewEcoSectorId
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 1221, "_iOldEcoSectorId != _iNewEcoSectorId") == 1 )
+  }
+  if ( _iOldEcoSectorId == _iNewEcoSectorId && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 1221, "_iOldEcoSectorId != _iNewEcoSectorId") == 1 )
   {
     __debugbreak();
   }
@@ -543,7 +548,9 @@ void  CPile::Offer(int a2, int _iEcoSectorId) {
   int v6; // [esp-4h] [ebp-8h]
 
   if ( _iEcoSectorId < 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 762, "_iEcoSectorId >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !_iEcoSectorId )
   {
     v3 = IEntity::WorldIdx(this);
@@ -569,7 +576,9 @@ void  CPile::CancelOffer(int a2, int _iEcoSectorId) {
   int v6; // [esp-4h] [ebp-8h]
 
   if ( _iEcoSectorId < 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 792, "_iEcoSectorId >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !_iEcoSectorId )
   {
     v3 = IEntity::WorldIdx(this);
@@ -590,7 +599,9 @@ void  CPile::CancelOffer(int a2, int _iEcoSectorId) {
 void  CPile::CancelCompleteOfferIfInOfferList(int a2) {
   
   if ( CPile::IsInOfferList(this) )
+  {
     CPile::CancelOffer(this, -1, a2);
+  }
 }
 
 
@@ -672,7 +683,9 @@ void  CPile::Detach(int a2) {
     if ( iDeltaAmount > 0 )
     {
       if ( iDeltaAmount != 1 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 919, "iDeltaAmount == 1") == 1 )
+      {
         __debugbreak();
+      }
       CPile::DecAmountComing(this);
     }
   }
@@ -695,7 +708,9 @@ void  CPile::ChangeAmountAndDetach(int a2) {
     if ( iDeltaAmount > 0 )
     {
       if ( iDeltaAmount != 1 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 941, "iDeltaAmount == 1") == 1 )
+      {
         __debugbreak();
+      }
       CPile::IncreaseEx(this, 1);
     }
   }
@@ -712,20 +727,11 @@ void  CPile::AttachAndIncAmountLeaving(int a2, int _iAmount, enum T_OBSERVER_TAR
   
   int v4; // eax
 
-  if ( (_iAmount < 1 || _iAmount > 8)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 966, "(_iAmount >= 1) && (_iAmount <= 8)") == 1 )
+  if ( (_iAmount < 1 || _iAmount > 8) && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 966, "(_iAmount >= 1) && (_iAmount <= 8)") == 1 )
   {
     __debugbreak();
   }
-  if ( _tTargetType != 2
-    && _tTargetType != 3
-    && _tTargetType != 4
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Pile\\Pile.cpp",
-         967,
-         "(_tTargetType == OBSERVER_TARGET_PILE_SRC) || (_tTargetType == OBSERVER_TARGET_PILE_SRC_2) || (_tTargetType == "
-         "OBSERVER_TARGET_PILE_SRC_3)") == 1 )
+  if ( _tTargetType != 2 && _tTargetType != 3 && _tTargetType != 4 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 967, "(_tTargetType == OBSERVER_TARGET_PILE_SRC) || (_tTargetType == OBSERVER_TARGET_PILE_SRC_2) || (_tTargetType == OBSERVER_TARGET_PILE_SRC_3)") == 1 )
   {
     __debugbreak();
   }
@@ -765,15 +771,16 @@ void  CPile::SetObserverTarget(enum T_OBSERVER_TARGET _tTargetType, int _iTarget
   if ( _tTargetType )
   {
     if ( BBSupportDbgReport(1, "MapObjects\\Pile\\Pile.cpp", 1027, "CPile::SetObserverTarget(): Invalid target type!") == 1 )
+    {
       __debugbreak();
+    }
   }
   else if ( _iTargetId <= 0 )
   {
     this->m_iFlags &= ~0x20u;
     if ( this->m_uBuildingId )
     {
-      if ( CPile::GetRoleType(this) == 3
-        && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 1011, "GetRoleType() != IPileRole::PILE_ANYWHERE") == 1 )
+      if ( CPile::GetRoleType(this) == 3 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 1011, "GetRoleType() != IPileRole::PILE_ANYWHERE") == 1 )
       {
         __debugbreak();
       }
@@ -781,23 +788,20 @@ void  CPile::SetObserverTarget(enum T_OBSERVER_TARGET _tTargetType, int _iTarget
       m_uBuildingId = this->m_uBuildingId;
       this->m_uBuildingId = 0;
       v3 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
-      ((void (__thiscall *)(struct IPileRole *, CPile *, int))v3->j_?SubjectDie@IPileRole@@UAEXPAVCPile@@H@Z)(
-        v3,
-        this,
-        m_uBuildingId);
+      ((void (__thiscall *)(struct IPileRole *, CPile *, int))v3->j_?SubjectDie@IPileRole@@UAEXPAVCPile@@H@Z)(v3, this, m_uBuildingId);
     }
   }
   else
   {
     if ( this->m_uBuildingId && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 997, "m_uBuildingId == 0") == 1 )
-      __debugbreak();
-    if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, _iTargetId)
-      && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 998, "g_cBuildingMgr.GetBuildingPtr(_iTargetId) != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( CPile::GetRoleType(this) == 3
-      && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 999, "GetRoleType() != IPileRole::PILE_ANYWHERE") == 1 )
+    if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, _iTargetId) && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 998, "g_cBuildingMgr.GetBuildingPtr(_iTargetId) != 0") == 1 )
+    {
+      __debugbreak();
+    }
+    if ( CPile::GetRoleType(this) == 3 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 999, "GetRoleType() != IPileRole::PILE_ANYWHERE") == 1 )
     {
       __debugbreak();
     }
@@ -812,9 +816,13 @@ void  CPile::SetObserverTarget(enum T_OBSERVER_TARGET _tTargetType, int _iTarget
 int  CPile::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
   
   if ( a2 )
+  {
     return 0;
+  }
   else
+  {
     return this->m_uBuildingId;
+  }
 }
 
 
@@ -968,17 +976,17 @@ void  CPile::IncreaseEx(int _iAmount) {
   int iAmountComing; // [esp+4h] [ebp-Ch]
   int iFreeSpace; // [esp+8h] [ebp-8h]
 
-  if ( (_iAmount < 1 || _iAmount > 8)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 375, "(_iAmount >= 1) && (_iAmount <= MAX_PILE_AMOUNT)") == 1 )
+  if ( (_iAmount < 1 || _iAmount > 8) && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 375, "(_iAmount >= 1) && (_iAmount <= MAX_PILE_AMOUNT)") == 1 )
   {
     __debugbreak();
   }
   iFreeSpace = 8 - this->m_uAmount;
   iAmountComing = this->m_uAmountComing;
   if ( iFreeSpace < 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 380, "iFreeSpace >= 0") == 1 )
+  {
     __debugbreak();
-  if ( iAmountComing > iFreeSpace
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 381, "iAmountComing <= iFreeSpace") == 1 )
+  }
+  if ( iAmountComing > iFreeSpace && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 381, "iAmountComing <= iFreeSpace") == 1 )
   {
     __debugbreak();
   }
@@ -988,22 +996,30 @@ void  CPile::IncreaseEx(int _iAmount) {
     this->m_uAmount = 8;
   }
   if ( _iAmount > iFreeSpace && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 390, "_iAmount <= iFreeSpace") == 1 )
+  {
     __debugbreak();
-  if ( _iAmount > iAmountComing
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 391, "_iAmount <= iAmountComing") == 1 )
+  }
+  if ( _iAmount > iAmountComing && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 391, "_iAmount <= iAmountComing") == 1 )
   {
     __debugbreak();
   }
   if ( _iAmount > iFreeSpace )
+  {
     _iAmount = iFreeSpace;
+  }
   if ( _iAmount > iAmountComing )
+  {
     _iAmount = iAmountComing;
+  }
   if ( _iAmount < 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 403, "_iAmount >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( _iAmount > iFreeSpace && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 404, "_iAmount <= iFreeSpace") == 1 )
+  {
     __debugbreak();
-  if ( _iAmount > iAmountComing
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 405, "_iAmount <= iAmountComing") == 1 )
+  }
+  if ( _iAmount > iAmountComing && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 405, "_iAmount <= iAmountComing") == 1 )
   {
     __debugbreak();
   }
@@ -1014,18 +1030,15 @@ void  CPile::IncreaseEx(int _iAmount) {
     CPile::AdjustStatistic(this, _iAmount, 0);
     v2 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
     v2->Increase(v2, this, _iAmount);
-    if ( this->m_uAmount > 8u
-      && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 419, "m_uAmount <= MAX_PILE_AMOUNT") == 1 )
+    if ( this->m_uAmount > 8u && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 419, "m_uAmount <= MAX_PILE_AMOUNT") == 1 )
     {
       __debugbreak();
     }
-    if ( this->m_uAmountComing > 8u
-      && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 420, "m_uAmountComing <= MAX_PILE_AMOUNT") == 1 )
+    if ( this->m_uAmountComing > 8u && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 420, "m_uAmountComing <= MAX_PILE_AMOUNT") == 1 )
     {
       __debugbreak();
     }
-    if ( this->m_uAmountComing + this->m_uAmount > 8
-      && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 421, "m_uAmount + m_uAmountComing <= MAX_PILE_AMOUNT") == 1 )
+    if ( this->m_uAmountComing + this->m_uAmount > 8 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 421, "m_uAmount + m_uAmountComing <= MAX_PILE_AMOUNT") == 1 )
     {
       __debugbreak();
     }
@@ -1042,37 +1055,36 @@ void  CPile::DecreaseEx(int _iAmount) {
   int iAmountLeaving; // [esp+8h] [ebp-Ch]
   int iCurrentAmount; // [esp+Ch] [ebp-8h]
 
-  if ( (_iAmount < 1 || _iAmount > 8)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 432, "(_iAmount >= 1) && (_iAmount <= MAX_PILE_AMOUNT)") == 1 )
+  if ( (_iAmount < 1 || _iAmount > 8) && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 432, "(_iAmount >= 1) && (_iAmount <= MAX_PILE_AMOUNT)") == 1 )
   {
     __debugbreak();
   }
   iCurrentAmount = this->m_uAmount;
   iAmountLeaving = this->m_uAmountLeaving;
-  if ( iAmountLeaving > iCurrentAmount
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 437, "iAmountLeaving <= iCurrentAmount") == 1 )
+  if ( iAmountLeaving > iCurrentAmount && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 437, "iAmountLeaving <= iCurrentAmount") == 1 )
   {
     __debugbreak();
   }
-  if ( _iAmount > iCurrentAmount
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 439, "_iAmount <= iCurrentAmount") == 1 )
+  if ( _iAmount > iCurrentAmount && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 439, "_iAmount <= iCurrentAmount") == 1 )
   {
     __debugbreak();
   }
-  if ( _iAmount > iAmountLeaving
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 440, "_iAmount <= iAmountLeaving") == 1 )
+  if ( _iAmount > iAmountLeaving && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 440, "_iAmount <= iAmountLeaving") == 1 )
   {
     __debugbreak();
   }
-  if ( iAmountLeaving > iCurrentAmount
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 442, "iAmountLeaving <= iCurrentAmount") == 1 )
+  if ( iAmountLeaving > iCurrentAmount && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 442, "iAmountLeaving <= iCurrentAmount") == 1 )
   {
     __debugbreak();
   }
   if ( _iAmount > iCurrentAmount )
+  {
     _iAmount = iCurrentAmount;
+  }
   if ( _iAmount > iAmountLeaving )
+  {
     _iAmount = iAmountLeaving;
+  }
   this->m_uAmount -= _iAmount;
   this->m_uAmountLeaving -= _iAmount;
   CPile::AdjustStatistic(this, -_iAmount, 0);
@@ -1084,13 +1096,11 @@ void  CPile::DecreaseEx(int _iAmount) {
     v2 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
     v2->Empty(v2, this);
   }
-  if ( this->m_uAmount > 8u
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 470, "m_uAmount <= MAX_PILE_AMOUNT") == 1 )
+  if ( this->m_uAmount > 8u && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 470, "m_uAmount <= MAX_PILE_AMOUNT") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_uAmountLeaving > (int)this->m_uAmount
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 471, "m_uAmountLeaving <= m_uAmount") == 1 )
+  if ( this->m_uAmountLeaving > (int)this->m_uAmount && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 471, "m_uAmountLeaving <= m_uAmount") == 1 )
   {
     __debugbreak();
   }
@@ -1102,7 +1112,9 @@ void  CPile::DecreaseEx(int _iAmount) {
 int  CPile::Increase(int a2) {
   
   if ( BBSupportDbgReport(1, "MapObjects\\Pile\\Pile.cpp", 647, "CPile::Increase() called!") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 
@@ -1112,7 +1124,9 @@ int  CPile::Increase(int a2) {
 void  CPile::Decrease(int a2) {
   
   if ( BBSupportDbgReport(1, "MapObjects\\Pile\\Pile.cpp", 659, "CPile::Decrease() called!") == 1 )
+  {
     __debugbreak();
+  }
   return 0;
 }
 
@@ -1125,13 +1139,16 @@ void  CPile::IncAmountLeaving(int _iAmount) {
   int i; // [esp+4h] [ebp-8h]
 
   if ( _iAmount <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 670, "_iAmount > 0") == 1 )
-    __debugbreak();
-  if ( this->m_uAmountLeaving >= (int)this->m_uAmount
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 671, "m_uAmountLeaving < m_uAmount") == 1 )
   {
     __debugbreak();
   }
-  for ( i = 0; i < _iAmount; ++i )
+  if ( this->m_uAmountLeaving >= (int)this->m_uAmount && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 671, "m_uAmountLeaving < m_uAmount") == 1 )
+  {
+    __debugbreak();
+  }
+  for ( i = 0;
+        i < _iAmount;
+        ++i )
   {
     ++this->m_uAmountLeaving;
     v2 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
@@ -1149,16 +1166,21 @@ void  CPile::DecAmountLeaving(int _iAmount) {
   int iAmountLeaving; // [esp+8h] [ebp-8h]
 
   if ( _iAmount < 1 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 690, "_iAmount >= 1") == 1 )
+  {
     __debugbreak();
+  }
   iAmountLeaving = this->m_uAmountLeaving;
-  if ( iAmountLeaving < _iAmount
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 694, "iAmountLeaving >= _iAmount") == 1 )
+  if ( iAmountLeaving < _iAmount && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 694, "iAmountLeaving >= _iAmount") == 1 )
   {
     __debugbreak();
   }
   if ( _iAmount > iAmountLeaving )
+  {
     _iAmount = iAmountLeaving;
-  for ( i = 0; i < _iAmount; ++i )
+  }
+  for ( i = 0;
+        i < _iAmount;
+        ++i )
   {
     --this->m_uAmountLeaving;
     v2 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
@@ -1173,8 +1195,7 @@ void  CPile::IncAmountComing(void) {
   
   struct IPileRole *v1; // [esp+0h] [ebp-8h]
 
-  if ( this->m_uAmountComing + this->m_uAmount >= 8
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 716, "(m_uAmount + m_uAmountComing) < MAX_PILE_AMOUNT") == 1 )
+  if ( this->m_uAmountComing + this->m_uAmount >= 8 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 716, "(m_uAmount + m_uAmountComing) < MAX_PILE_AMOUNT") == 1 )
   {
     __debugbreak();
   }
@@ -1190,8 +1211,7 @@ void  CPile::DecAmountComing(void) {
   
   struct IPileRole *v1; // [esp+0h] [ebp-8h]
 
-  if ( !this->m_uAmountComing
-    && BBSupportDbgReportF(2, "MapObjects\\Pile\\Pile.cpp", 733, "AmountComing=0 ! %u", this->m_iEntityId) == 1 )
+  if ( !this->m_uAmountComing && BBSupportDbgReportF(2, "MapObjects\\Pile\\Pile.cpp", 733, "AmountComing=0 ! %u", this->m_iEntityId) == 1 )
   {
     __debugbreak();
   }
@@ -1209,12 +1229,7 @@ void  CPile::AdjustStatistic(int _iDeltaAmount, int _iEcoSectorId) {
   CEcoSector *v4; // [esp+0h] [ebp-Ch]
   int iOwnerId; // [esp+4h] [ebp-8h]
 
-  if ( (_iDeltaAmount < -8 || _iDeltaAmount > 8)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\Pile\\Pile.cpp",
-         1132,
-         "(_iDeltaAmount >= -MAX_PILE_AMOUNT) && (_iDeltaAmount <= MAX_PILE_AMOUNT)") == 1 )
+  if ( (_iDeltaAmount < -8 || _iDeltaAmount > 8) && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 1132, "(_iDeltaAmount >= -MAX_PILE_AMOUNT) && (_iDeltaAmount <= MAX_PILE_AMOUNT)") == 1 )
   {
     __debugbreak();
   }
@@ -1231,11 +1246,17 @@ void  CPile::AdjustStatistic(int _iDeltaAmount, int _iEcoSectorId) {
       CEcoSector::ChangeNumberOfGoodsPile(v4, this->m_uGood, _iDeltaAmount);
       iOwnerId = CEcoSector::Owner(v4);
       if ( iOwnerId <= 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 1155, "iOwnerId > 0") == 1 )
+      {
         __debugbreak();
+      }
       if ( _iDeltaAmount <= 0 )
+      {
         CStatistic::DecGood(&g_cStatistic, iOwnerId, this->m_uGood, -_iDeltaAmount);
+      }
       else
+      {
         CStatistic::AddGood(&g_cStatistic, iOwnerId, (S4_GOOD_ENUM)this->m_uGood, _iDeltaAmount);
+      }
     }
   }
 }
@@ -1248,9 +1269,13 @@ bool  CPile::ExecuteChangeGoodTypeUnforseen(int a2) {
   int iCurrentAmount; // [esp+0h] [ebp-8h]
 
   if ( a2 <= 0 || a2 >= 43 )
+  {
     return 0;
+  }
   if ( this->GetGoodType() == a2 )
+  {
     return 0;
+  }
   CPile::NotifyTargetDieAndDetachAllObservers(this);
   iCurrentAmount = this->m_uAmount;
   CPile::CancelCompleteOfferIfInOfferList(this, 0);
@@ -1258,13 +1283,15 @@ bool  CPile::ExecuteChangeGoodTypeUnforseen(int a2) {
   CPile::SetGoodType(this, a2);
   CPile::AdjustStatistic(this, iCurrentAmount, 0);
   if ( CPile::GetOfferFlag(this) )
+  {
     CPile::OfferCompletePileIfPossible(this, 0);
+  }
   return 1;
 }
 
 
 // address=[0x155dae0]
-// Decompiled from CPile *__thiscall CPile::CPile(  CPile *this,  int _iX,  int _iY,  unsigned int _iGood,  int _iAmount,  int _pRole,  int _iSlot,  char a8,  char a9,  __int16 _iOffsetX,  __int16 _iOffsetY)
+// Decompiled from CPile *__thiscall CPile::CPile(CPile *this, int _iX, int _iY, unsigned int _iGood, int _iAmount, int _pRole, int _iSlot, char a8, char a9, __int16 _iOffsetX, __int16 _iOffsetY)
  CPile::CPile(int _iX, int _iY, int _iGood, int _iAmount, class std::auto_ptr<class IPileRole> _pRole, int _iSlot, int a8, int a9, int _iOffsetX, int _iOffsetY) {
   
   int v11; // eax
@@ -1276,13 +1303,11 @@ bool  CPile::ExecuteChangeGoodTypeUnforseen(int a2) {
   this->__vftable = (IAnimatedEntity_vtbl *)&CPile::_vftable_;
   std::auto_ptr<IPileRole>::auto_ptr<IPileRole>(this->m_pRole, (int)&_pRole);
   CPileObserverList::CPileObserverList((CPileObserverList *)&this->m_cPileObserverList);
-  if ( CWorldManager::FlagBits(_iX, _iY, 1u)
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 81, "g_cWorld.FlagBits(_iX, _iY, FLAG_BLOCKED_LAND) == 0") == 1 )
+  if ( CWorldManager::FlagBits(_iX, _iY, 1u) && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 81, "g_cWorld.FlagBits(_iX, _iY, FLAG_BLOCKED_LAND) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( _iGood >= GOOD_MAX
-    && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 82, "static_cast<unsigned int>(_iGood) < GOOD_MAX") == 1 )
+  if ( _iGood >= GOOD_MAX && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 82, "static_cast<unsigned int>(_iGood) < GOOD_MAX") == 1 )
   {
     __debugbreak();
   }
@@ -1348,12 +1373,10 @@ void  CPile::ConvertEventIntoGoal(class CEntityEvent * a2) {
       v3 = IEntity::EntityId(this);
       CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v3, 0, 0);
       CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, a2->m_iDataA, 0, 0);
-      if ( BBSupportDbgReport(
-             1,
-             "MapObjects\\Pile\\Pile.cpp",
-             894,
-             "CPile::ConvertEventIntoGoal(): Illegal event TARGET_DIE!") == 1 )
+      if ( BBSupportDbgReport(1, "MapObjects\\Pile\\Pile.cpp", 894, "CPile::ConvertEventIntoGoal(): Illegal event TARGET_DIE!") == 1 )
+      {
         __debugbreak();
+      }
       break;
   }
   IEntity::SetFlagBits(this, (EntityFlag)0x80000000);

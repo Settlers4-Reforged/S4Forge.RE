@@ -11,14 +11,18 @@ class CPersistence * __cdecl CPlant::New(std::istream & a1) {
 
   v3 = (CPlant *)CPlant::operator new(0x50u);
   if ( v3 )
+  {
     return CPlant::CPlant(v3, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
 // address=[0x154a040]
-// Decompiled from CPlant *__thiscall CPlant::CPlant(  CPlant *this,  unsigned int a2,  unsigned int a3,  T_OBJECT_TYPE a4,  int a5,  BYTE _iGoodType,  int a7)
+// Decompiled from CPlant *__thiscall CPlant::CPlant(CPlant *this, unsigned int a2, unsigned int a3, T_OBJECT_TYPE a4, int a5, BYTE _iGoodType, int a7)
  CPlant::CPlant(int a2, int a3, int a4, int a5, int _iGoodType, int a7) {
   
   IDecoObject::IDecoObject(this, a2, a3, a4, a5, a7 != 0);
@@ -30,7 +34,9 @@ class CPersistence * __cdecl CPlant::New(std::istream & a1) {
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 89, "m_uCycleFrames") == 1 )
+  {
     __debugbreak();
+  }
   if ( IDecoObject::IsStaticInstance(this) )
   {
     this->m_iFrame = CStateGame::Rand(g_pGame) % this->m_uCycleFrames;
@@ -56,7 +62,9 @@ class CPersistence * __cdecl CPlant::New(std::istream & a1) {
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = a2->m_uCycleFrames;
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 135, "m_uCycleFrames") == 1 )
+  {
     __debugbreak();
+  }
   this->m_iFrame = a2->m_iFrame;
   this->m_uU1 = 1;
   this->m_iGoodType = a2->m_iGoodType;
@@ -89,12 +97,7 @@ void  CPlant::LogicUpdate(void) {
     case 0u:
     case 1u:
     case 2u:
-      if ( ++this->m_uU5 >= 30
-        && (this->m_uU5 = 0,
-            ++this->m_iPhases,
-            this->m_iJobPart = this->m_iPhases
-                             + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType),
-            this->m_iPhases == 3) )
+      if ( ++this->m_uU5 >= 30 && (this->m_uU5 = 0, ++this->m_iPhases, this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType), this->m_iPhases == 3) )
       {
         IEntity::SetFlagBits(this, ENTITY_FLAG_Ready);
         v6 = IEntity::Type(this);
@@ -105,20 +108,16 @@ void  CPlant::LogicUpdate(void) {
       else
       {
         if ( !IEntity::FlagBits(this, (EntityFlag)0x100000) )
+        {
           goto LABEL_14;
+        }
         v2 = CStaticConfigVarInt::operator int(g_pMagicFasterCropsDecrease256);
         IAnimatedEntity::RegisterForLogicUpdate(this, (31 * v2 + 127) >> 8);
       }
       break;
     case 4u:
     case 5u:
-      if ( ++this->m_uU5 >= 30
-        && (this->m_iType == OBJECT_WHEAT1
-         || this->m_iType == OBJECT_WHEAT2
-         || (this->m_uU5 = 0,
-             ++this->m_iFrame,
-             m_cFrame = this->m_iFrame,
-             m_cFrame >= CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart))) )
+      if ( ++this->m_uU5 >= 30 && (this->m_iType == OBJECT_WHEAT1 || this->m_iType == OBJECT_WHEAT2 || (this->m_uU5 = 0, ++this->m_iFrame, m_cFrame = this->m_iFrame, m_cFrame >= CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart))) )
       {
         v4 = IEntity::ID(this);
         CDecoObjMgr::Delete(&g_cDecoObjMgr, v4);
@@ -148,7 +147,9 @@ struct SGfxObjectInfo *  CPlant::GetGfxInfos(void) {
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, v2);
   if ( v4 && this->m_iPhases < 4u )
+  {
     this->m_iFrame = (v4 + (unsigned int)this->m_iFrame) % this->m_uCycleFrames;
+  }
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
   MEMORY[0x40FE518] = 16;
   MEMORY[0x40FE51A] = IEntity::IsVisible(this);
@@ -161,26 +162,11 @@ struct SGfxObjectInfo *  CPlant::GetGfxInfos(void) {
 // Decompiled from int __thiscall CPlant::Take(CPlant *this, int _iAmount)
 void  CPlant::Take(int _iAmount) {
   
-  if ( IDecoObject::IsStaticInstance(this)
-    && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 342, "! IsStaticInstance()") == 1 )
+  if ( IDecoObject::IsStaticInstance(this) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 342, "! IsStaticInstance()") == 1 )
   {
     __debugbreak();
   }
-  if ( (_iAmount + this->m_iPhases > 5
-     || IEntity::Type(this) != OBJECT_WHEAT1
-     && IEntity::Type(this) != OBJECT_WHEAT2
-     && IEntity::Type(this) != OBJECT_SUNFLOWER)
-    && (_iAmount + this->m_iPhases > 4
-     || IEntity::Type(this) == OBJECT_WHEAT1
-     || IEntity::Type(this) == OBJECT_WHEAT2
-     || IEntity::Type(this) == OBJECT_SUNFLOWER)
-    && BBSupportDbgReport(
-         2,
-         "MapObjects\\DecoObj\\Plant.cpp",
-         352,
-         "( m_uStage + _iAmount <= PLANT_STAGES_MAX + 1 && ( Type() == OBJECT_WHEAT1 || Type() == OBJECT_WHEAT2 || Type()"
-         " == OBJECT_SUNFLOWER ) ) || ( m_uStage + _iAmount <= PLANT_STAGES_MAX && !( Type() == OBJECT_WHEAT1 || Type() ="
-         "= OBJECT_WHEAT2 || Type() == OBJECT_SUNFLOWER ) )") == 1 )
+  if ( (_iAmount + this->m_iPhases > 5 || IEntity::Type(this) != OBJECT_WHEAT1 && IEntity::Type(this) != OBJECT_WHEAT2 && IEntity::Type(this) != OBJECT_SUNFLOWER) && (_iAmount + this->m_iPhases > 4 || IEntity::Type(this) == OBJECT_WHEAT1 || IEntity::Type(this) == OBJECT_WHEAT2 || IEntity::Type(this) == OBJECT_SUNFLOWER) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 352, "( m_uStage + _iAmount <= PLANT_STAGES_MAX + 1 && ( Type() == OBJECT_WHEAT1 || Type() == OBJECT_WHEAT2 || Type() == OBJECT_SUNFLOWER ) ) || ( m_uStage + _iAmount <= PLANT_STAGES_MAX && !( Type() == OBJECT_WHEAT1 || Type() == OBJECT_WHEAT2 || Type() == OBJECT_SUNFLOWER ) )") == 1 )
   {
     __debugbreak();
   }
@@ -190,7 +176,9 @@ void  CPlant::Take(int _iAmount) {
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Plant.cpp", 362, "m_uCycleFrames") == 1 )
+  {
     __debugbreak();
+  }
   this->m_uU5 = 0;
   return IAnimatedEntity::RegisterForLogicUpdate(this, 31);
 }

@@ -11,14 +11,22 @@
   *(_DWORD *)this = a2;
   *((_DWORD *)this + 1) = a3;
   if ( a5 >= 0x4B )
+  {
     v5 = CSpiralOffsets::Last(74);
+  }
   else
+  {
     v5 = CSpiralOffsets::Last(a5);
+  }
   *((_DWORD *)this + 2) = v5;
   if ( a4 >= 0x4B && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 69, "_uRadiusFirst < SPIRAL_RADIUS_MAX") == 1 )
+  {
     __debugbreak();
+  }
   if ( a5 >= 0x4B && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 70, "_uRadiusLast < SPIRAL_RADIUS_MAX") == 1 )
+  {
     __debugbreak();
+  }
   *((_DWORD *)this + 3) = CSpiralOffsets::First(a4);
   return this;
 }
@@ -33,14 +41,22 @@
   *this = IAIEnvironment::UnpackXFast(a2);
   this[1] = IAIEnvironment::UnpackYFast(a2);
   if ( a4 >= 0x4B )
+  {
     v4 = CSpiralOffsets::Last(74);
+  }
   else
+  {
     v4 = CSpiralOffsets::Last(a4);
+  }
   this[2] = v4;
   if ( a3 >= 0x4B && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 83, "_uRadiusFirst < SPIRAL_RADIUS_MAX") == 1 )
+  {
     __debugbreak();
+  }
   if ( a4 >= 0x4B && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 84, "_uRadiusLast < SPIRAL_RADIUS_MAX") == 1 )
+  {
     __debugbreak();
+  }
   this[3] = CSpiralOffsets::First(a3);
   return this;
 }

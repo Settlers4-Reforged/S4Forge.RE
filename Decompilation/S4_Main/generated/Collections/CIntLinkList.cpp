@@ -21,10 +21,14 @@ bool  CIntLinkList::SearchBackwards(int a2) {
   
   int i; // [esp+8h] [ebp-4h]
 
-  for ( i = *(_DWORD *)this - 1; i >= 0; --i )
+  for ( i = *(_DWORD *)this - 1;
+        i >= 0;
+        --i )
   {
     if ( *((_DWORD *)this + i + 2) == a2 )
+    {
       return 1;
+    }
   }
   return 0;
 }

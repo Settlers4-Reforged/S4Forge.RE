@@ -10,9 +10,13 @@ class CGameState * __cdecl CStateAOCampaignRoman::DynamicCreateFunc(void * a1) {
 
   C = (CStateAOCampaignRoman *)operator new(4u);
   if ( C )
+  {
     return CStateAOCampaignRoman::CStateAOCampaignRoman(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 
@@ -68,7 +72,9 @@ bool  CStateAOCampaignRoman::Perform(void) {
     }
     v2 = dword_402C908 + 30;
     if ( v2 >= timeGetTime() )
+    {
       return 1;
+    }
     dword_402C908 = timeGetTime();
     IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
     IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);

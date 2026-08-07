@@ -41,9 +41,13 @@ class CPersistence * __cdecl CEntityEvent::New(std::istream & a1) {
 
   C = (CEntityEvent *)operator new(0x18u);
   if ( C )
+  {
     return CEntityEvent::CEntityEvent(C, a1);
+  }
   else
+  {
     return 0;
+  }
 }
 
 

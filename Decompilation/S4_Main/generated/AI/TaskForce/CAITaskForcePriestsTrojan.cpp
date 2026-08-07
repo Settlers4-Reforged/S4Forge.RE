@@ -4,7 +4,7 @@
 // Definitions for class CAITaskForcePriestsTrojan
 
 // address=[0x132be00]
-// Decompiled from int __thiscall CAITaskForcePriestsTrojan::ChooseMilitarySpell(  CAITaskForcePriestsTrojan *this,  const struct SCountFightersResult *a2,  int a3)
+// Decompiled from int __thiscall CAITaskForcePriestsTrojan::ChooseMilitarySpell(CAITaskForcePriestsTrojan *this, const struct SCountFightersResult *a2, int a3)
 int  CAITaskForcePriestsTrojan::ChooseMilitarySpell(struct SCountFightersResult const & a2, int a3) {
   
   unsigned int v4; // esi
@@ -17,26 +17,38 @@ int  CAITaskForcePriestsTrojan::ChooseMilitarySpell(struct SCountFightersResult 
 
   m_uEnemySoldiers = a2->m_uEnemySoldiers;
   if ( m_uEnemySoldiers <= 0 )
+  {
     return -1;
+  }
   if ( m_uEnemySoldiers < 5 )
   {
     v4 = IAIEnvironment::Rand();
     if ( v4 >= m_uEnemySoldiers * CRandom16::PercentValue(0x14u) )
+    {
       return -1;
+    }
   }
   iEnemyNonBowmen = a2->m_uEnemySoldiers - a2->m_uEnemyBowmen;
   if ( iEnemyNonBowmen < 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 2121, "iEnemyNonBowmen >= 0") == 1 )
+  {
     __debugbreak();
+  }
   if ( !iEnemyNonBowmen )
+  {
     a3 &= ~0x10u;
+  }
   if ( m_uEnemySoldiers < 10 )
   {
     v5 = IAIEnvironment::Rand();
     if ( v5 >= CRandom16::PercentValue(0x14u) * (m_uEnemySoldiers - 5) )
+    {
       a3 &= ~0x40u;
+    }
   }
   if ( (a3 & 0x70) == 0 )
+  {
     return -1;
+  }
   v8 = CStaticConfigVarInt::operator int(&s_cAIConfigTrojanMilitarySpellChanceNone);
   v7 = CStaticConfigVarInt::operator int(&s_cAIConfigTrojanMilitarySpellChanceSoldier);
   v6 = CStaticConfigVarInt::operator int(&s_cAIConfigTrojanMilitarySpellChanceDefence);
@@ -45,7 +57,7 @@ int  CAITaskForcePriestsTrojan::ChooseMilitarySpell(struct SCountFightersResult 
 
 
 // address=[0x132bf10]
-// Decompiled from int __thiscall CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(  CAITaskForcePriestsTrojan *this,  int a2,  int a3,  int a4,  int a5)
+// Decompiled from int __thiscall CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(CAITaskForcePriestsTrojan *this, int a2, int a3, int a4, int a5)
 int  CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(int a2, int a3, int a4, int a5) {
   
   int v5; // eax
