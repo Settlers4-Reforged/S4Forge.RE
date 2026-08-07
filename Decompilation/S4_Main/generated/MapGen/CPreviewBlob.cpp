@@ -7,13 +7,11 @@
  CPreviewBlob::CPreviewBlob(int a2, int a3, int a4, int a5, int a6, int a7, int a8, class CCheckLayer * a9) {
   
   CBlob::CBlob(this, a2, a3, a4, a5, a6, a7, a8, a9);
-  *(_DWORD *)this = &CPreviewBlob::_vftable_;
-  *((_DWORD *)this + 11) = (*((_DWORD *)this + 7) - *((_DWORD *)this + 5) + *((_DWORD *)this + 6)
-                                                                          - *((_DWORD *)this + 4))
-                         / 2;
-  *((float *)this + 14) = 12.0 / (float)*((int *)this + 11);
-  *((_DWORD *)this + 12) = *((_DWORD *)this + 4) + (*((_DWORD *)this + 6) - *((_DWORD *)this + 4)) / 2;
-  *((_DWORD *)this + 13) = *((_DWORD *)this + 5) + (*((_DWORD *)this + 7) - *((_DWORD *)this + 5)) / 2;
+  this->__vftable = (CBlob_vtbl *)&CPreviewBlob::_vftable_;
+  this->m_iU7 = (this->m_iMaxY - this->m_iMinY + this->m_iMaxX - this->m_iMinX) / 2;
+  this->m_fU0 = 12.0 / (float)this->m_iU7;
+  this->m_iU8 = this->m_iMinX + (this->m_iMaxX - this->m_iMinX) / 2;
+  this->m_iU9 = this->m_iMinY + (this->m_iMaxY - this->m_iMinY) / 2;
   return this;
 }
 

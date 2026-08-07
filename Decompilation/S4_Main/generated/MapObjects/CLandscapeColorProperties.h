@@ -14,6 +14,11 @@ public:
     // address=[0x2fc5290]
     unsigned short  HiColValue(int a2)const;
 
+    // Type information members
+public:
+    __int16[256] m_vHiColorEntry;
+    CLandscapeColorProperties::SColorEntry[256] m_vColorEntries;
+
 };
 
 

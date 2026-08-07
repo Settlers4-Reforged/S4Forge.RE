@@ -15,10 +15,16 @@ public:
     unsigned short  getPoint(int a2, int a3);
 
     // address=[0x2fc8740]
-    void  setPoint(int a2, int a3, unsigned short a4);
+    void  setPoint(int _iX, int _iY, unsigned short a4);
 
     // address=[0x2fc8820]
     void  clear(void);
+
+    // Type information members
+public:
+    __int16 * m_vLayer;
+    int m_iWidth;
+    int m_iHeight;
 
 };
 

@@ -12,6 +12,13 @@ protected:
     // address=[0x2fccb20]
     virtual void  processFillPoint(int a2, int a3);
 
+    // Type information members
+public:
+    int m_iU7;
+    int m_iU8;
+    int m_iU9;
+    float m_fU0;
+
 };
 
 

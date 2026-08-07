@@ -6,9 +6,9 @@
 // Decompiled from CCheckLayer *__thiscall CCheckLayer::CCheckLayer(CCheckLayer *this, int a2)
  CCheckLayer::CCheckLayer(int a2) {
   
-  *((_DWORD *)this + 1) = a2;
-  *((_DWORD *)this + 2) = a2;
-  *(_DWORD *)this = operator new[](2 * *((_DWORD *)this + 2) * *((_DWORD *)this + 1));
+  this->m_iWidth = a2;
+  this->m_iHeight = a2;
+  this->m_vLayer = (__int16 *)operator new[](2 * this->m_iHeight * this->m_iWidth);
   return this;
 }
 
@@ -41,33 +41,27 @@ unsigned short  CCheckLayer::getPoint(int a2, int a3) {
 
 
 // address=[0x2fc8740]
-// Decompiled from int __thiscall CCheckLayer::setPoint(CCheckLayer *this, int a2, int a3, unsigned __int16 a4)
-void  CCheckLayer::setPoint(int a2, int a3, unsigned short a4) {
+// Decompiled from void __thiscall CCheckLayer::setPoint(CCheckLayer *this, int _iX, int _iY, __int16 a4)
+void  CCheckLayer::setPoint(int _iX, int _iY, unsigned short a4) {
   
-  int result; // eax
-
-  if ( a2 >= *((_DWORD *)this + 1) && BBSupportDbgReport(2, "CCheckLayer.cpp", 59, "_iX < m_iSizeX") == 1 )
+  if ( _iX >= this->m_iWidth && BBSupportDbgReport(2, "CCheckLayer.cpp", 59, "_iX < m_iSizeX") == 1 )
     __debugbreak();
-  if ( a2 < 0 && BBSupportDbgReport(2, "CCheckLayer.cpp", 60, "_iX >= 0") == 1 )
+  if ( _iX < 0 && BBSupportDbgReport(2, "CCheckLayer.cpp", 60, "_iX >= 0") == 1 )
     __debugbreak();
-  if ( a3 >= *((_DWORD *)this + 2) && BBSupportDbgReport(2, "CCheckLayer.cpp", 61, "_iY < m_iSizeY") == 1 )
+  if ( _iY >= this->m_iHeight && BBSupportDbgReport(2, "CCheckLayer.cpp", 61, "_iY < m_iSizeY") == 1 )
     __debugbreak();
-  if ( a3 < 0 && BBSupportDbgReport(2, "CCheckLayer.cpp", 62, "_iY >= 0") == 1 )
+  if ( _iY < 0 && BBSupportDbgReport(2, "CCheckLayer.cpp", 62, "_iY >= 0") == 1 )
     __debugbreak();
-  result = a2;
-  if ( a2 >= *((_DWORD *)this + 1) || a2 < 0 || a3 >= *((_DWORD *)this + 2) || a3 < 0 )
-    return result;
-  result = *(_DWORD *)this;
-  *(_WORD *)(*(_DWORD *)this + 2 * (a2 + *((_DWORD *)this + 1) * a3)) = a4;
-  return result;
+  if ( _iX < this->m_iWidth && _iX >= 0 && _iY < this->m_iHeight && _iY >= 0 )
+    this->m_vLayer[_iX + this->m_iWidth * _iY] = a4;
 }
 
 
 // address=[0x2fc8820]
-// Decompiled from void *__thiscall CCheckLayer::clear(void **this)
+// Decompiled from void *__thiscall CCheckLayer::clear(CCheckLayer *this)
 void  CCheckLayer::clear(void) {
   
-  return memset(*this, 0, 2 * (_DWORD)this[2] * (_DWORD)this[1]);
+  return memset(this->m_vLayer, 0, 2 * this->m_iHeight * this->m_iWidth);
 }
 
 

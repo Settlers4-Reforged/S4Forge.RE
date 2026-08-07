@@ -22,7 +22,20 @@ protected:
     int  getNextDirection(int a2, int a3);
 
     // address=[0x2fc95d0]
-    virtual void  processPoint(int a2, int a3);
+    virtual void  processPoint(int _iX, int _iY);
+
+    // Type information members
+public:
+    int m_iU1;
+    int m_iU2;
+    int m_iWorldSize;
+    int m_iMinX;
+    int m_iMinY;
+    int m_iMaxX;
+    int m_iMaxY;
+    CCheckLayer * m_pCheckLayer;
+    int m_iU3;
+    int m_iU4;
 
 };
 

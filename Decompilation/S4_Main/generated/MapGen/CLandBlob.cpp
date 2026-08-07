@@ -6,8 +6,8 @@
 // Decompiled from CLandBlob *__thiscall CLandBlob::CLandBlob(  CLandBlob *this,  int a2,  int a3,  int a4,  int a5,  bool a6,  int a7,  int a8,  int a9,  struct CCheckLayer *a10)
  CLandBlob::CLandBlob(int a2, int a3, int a4, int a5, bool a6, int a7, int a8, int a9, class CCheckLayer * a10) {
   
-  CBlob::CBlob(this, a2, a3, a4, a5, a7, a8, a9, a10);
-  *(_DWORD *)this = CLandBlob::_vftable_;
+  CBlob::CBlob((CBlob *)this, a2, a3, a4, a5, a7, a8, a9, a10);
+  *(_DWORD *)this = &CLandBlob::_vftable_;
   *((_BYTE *)this + 60) = a6;
   *((_DWORD *)this + 11) = (*((_DWORD *)this + 7) - *((_DWORD *)this + 5) + *((_DWORD *)this + 6)
                                                                           - *((_DWORD *)this + 4))
