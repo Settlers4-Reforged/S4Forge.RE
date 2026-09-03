@@ -5,8 +5,12 @@
 
 extern struct SSurroundingPoint8 const *const g_sSurroundingHexPoints8;
 
+// address=[0x132f920]
+// Decompiled from int __cdecl SurroundingHexPointsCount(int a1)
+int __cdecl SurroundingHexPointsCount(int a1);
+
 class SSurroundingPoint8 {
-public:
+  public:
     // address=[0x132ee80]
     int X(void) const;
 
@@ -20,12 +24,11 @@ public:
     int Radius(void) const;
 
     // Type information members
-public:
+  public:
     char m_iX;
     char m_iY;
     char m_iRadius;
     unsigned char m_uPadding;
 };
-
 
 #endif // SSURROUNDINGPOINT8_H

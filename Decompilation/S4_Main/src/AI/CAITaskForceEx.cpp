@@ -173,7 +173,7 @@ void CAITaskForceEx::Execute(void) {
         if(!this->GoalIsEntity() && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 860, "GoalIsEntity()") == 1) {
             __debugbreak();
         }
-        if((IAIEnvironment::EntityFlags(this->CmdGoal()) & ENTITY_FLAG_Ready) == 0)
+        if((IAIEnvironment::EntityFlags(this->CmdGoal()) & ENTITY_FLAG_READY) == 0)
             goto LABEL_34;
 
         for(CAIEntityInfo *i = this->FirstEntity(); i; i = i->Next())
@@ -183,7 +183,7 @@ void CAITaskForceEx::Execute(void) {
         if(!this->GoalIsEntity() && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 887, "GoalIsEntity()") == 1) {
             __debugbreak();
         }
-        if((IAIEnvironment::EntityFlags(this->CmdGoal()) & ENTITY_FLAG_Ready) != 0)
+        if((IAIEnvironment::EntityFlags(this->CmdGoal()) & ENTITY_FLAG_READY) != 0)
             return;
         goto LABEL_34;
     case 106:

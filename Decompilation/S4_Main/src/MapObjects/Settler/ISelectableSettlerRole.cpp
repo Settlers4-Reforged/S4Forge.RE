@@ -177,14 +177,14 @@ unsigned int ISelectableSettlerRole::ThiefCheckMasquerade(class CSettler *_pSett
 // Decompiled from void __thiscall ISelectableSettlerRole::ThiefExpose(ISelectableSettlerRole *this, struct IEntity *a2)
 void ISelectableSettlerRole::ThiefExpose(class IEntity *_pSettler) {
     _pSettler->ClearFlagBits(ENTITY_FLAG_Ownerless);
-    _pSettler->SetFlagBits(ENTITY_FLAG_VulnerableMask);
+    _pSettler->SetFlagBits(ENTITY_FLAG_VULNERABLE_MASK);
 }
 
 // address=[0x157cfd0]
 // Decompiled from void __thiscall ISelectableSettlerRole::ThiefDisguise(ISelectableSettlerRole *this, struct IEntity *a2)
 void ISelectableSettlerRole::ThiefDisguise(class IEntity *_pSettler) {
     _pSettler->SetFlagBits(ENTITY_FLAG_Ownerless);
-    _pSettler->ClearFlagBits(ENTITY_FLAG_VulnerableMask);
+    _pSettler->ClearFlagBits(ENTITY_FLAG_VULNERABLE_MASK);
 }
 
 // address=[0x15921c0]

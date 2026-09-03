@@ -502,7 +502,7 @@ int IEntity::GetObserverTarget(enum T_OBSERVER_TARGET arg1) {
 // Decompiled from void __thiscall IEntity::AddToWarMap(IEntity *this)
 void IEntity::AddToWarMap(void) {
 
-    if(this->FlagBits(ENTITY_FLAG_Ready))
+    if(this->FlagBits(ENTITY_FLAG_READY))
         CWarMap::AddEntity(*this);
 }
 

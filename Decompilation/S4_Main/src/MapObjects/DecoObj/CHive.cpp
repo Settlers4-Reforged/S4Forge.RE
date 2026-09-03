@@ -85,12 +85,12 @@ void CHive::LogicUpdate(void) {
         this->m_iFrame = 0;
         this->m_iJobPart = g_pGfxManager->GetObjectFirstJob(this->m_iType) + 1;
         this->m_uCycleFrames = g_pGfxManager->GetObjectFrameCount(this->m_iJobPart);
-        this->ClearFlagBits(ENTITY_FLAG_Ready);
+        this->ClearFlagBits(ENTITY_FLAG_READY);
       }
       goto LABEL_24;
     case 3u:
       if(--this->m_uU6 <= 0) {
-        this->ClearFlagBits(ENTITY_FLAG_Ready);
+        this->ClearFlagBits(ENTITY_FLAG_READY);
         ++this->m_iPhases;
         this->m_iFrame = 0;
         this->m_iJobPart = CGfxManager::GetObjectFirstJob(this->m_iType) + 2;
@@ -155,7 +155,7 @@ void CHive::Decrease(int a2) {
     IAnimatedEntity::RegisterForLogicUpdate(31);
     return;
   }
-  IEntity::ClearFlagBits(ENTITY_FLAG_Ready);
+  IEntity::ClearFlagBits(ENTITY_FLAG_READY);
   if(CHive::IsFlowerInSurrounding()) {
     this->m_iPhases = 1;
     this->m_iFrame = 0;

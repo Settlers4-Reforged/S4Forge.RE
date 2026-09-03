@@ -21,13 +21,13 @@ class CFindEnemyBuildings {
     // Type information members
   public:
     CVWList m_cVWList;
-    _DWORD m_iCenterX;
-    _DWORD m_iCenterY;
-    _DWORD m_iMaxDistance;
-    _DWORD m_iEnemyBits;
-    _BYTE m_bOnlyTowers;
-    _DWORD m_iVWIndex;
-    _DWORD m_iBuildingId;
+    int m_iCenterX;
+    int m_iCenterY;
+    int m_iMaxDistance;
+    int m_iEnemyBits;
+    bool m_bOnlyTowers;
+    int m_iVWIndex;
+    int m_iBuildingId;
     class CBuilding *m_pBuilding;
 };
 

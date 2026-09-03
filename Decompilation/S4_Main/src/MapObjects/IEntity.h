@@ -13,10 +13,10 @@ enum EntityFlag : int {
     ENTITY_FLAG_Selected = 0x200,
     ENTITY_FLAG_Selectable = 0x2000,
     ENTITY_FLAG_OnBoard = 0x8000,
-    ENTITY_FLAG_VulnerableMask = 0x30000,
+    ENTITY_FLAG_VULNERABLE_MASK = 0x30000,
     ENTITY_FLAG_MagicInvisible = 0x80000,
     ENTITY_FLAG_Birth = 0x1000000,
-    ENTITY_FLAG_Ready = 0x2000000,
+    ENTITY_FLAG_READY = 0x2000000,
     ENTITY_FLAG_AliveMask = 0x3000000,
     ENTITY_FLAG_Died = 0x4000000,
     ENTITY_FLAG_Ownerless = 0x10000000,  // Maybe? In world checks, where if the flag is set, no owner is asked from - or rather the local player is asked from

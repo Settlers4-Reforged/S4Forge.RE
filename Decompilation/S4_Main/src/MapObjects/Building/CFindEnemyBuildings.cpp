@@ -48,7 +48,7 @@ bool CFindEnemyBuildings::NextBuilding(void) {
         while(iWarMapId) {
             struct CBuilding *pBuilding = g_cBuildingMgr.GetBuildingPtr(iWarMapId);
             if((this->m_iEnemyBits & CAlliances::PlayerBit(pBuilding->OwnerId())) != 0) {
-                if((pBuilding->Flags() & ENTITY_FLAG_Ready) != 0 && (!this->m_bOnlyTowers || pBuilding->WarriorType() == AI_WARRIOR_TYPE_TOWER_BUILDING)) {
+                if((pBuilding->Flags() & ENTITY_FLAG_READY) != 0 && (!this->m_bOnlyTowers || pBuilding->WarriorType() == AI_WARRIOR_TYPE_TOWER_BUILDING)) {
                     if(Grid::DistanceInline(pBuilding->X() - this->m_iCenterX, pBuilding->Y() - this->m_iCenterY) <= this->m_iMaxDistance) {
                         this->m_iBuildingId = iWarMapId;
                         this->m_pBuilding = pBuilding;
