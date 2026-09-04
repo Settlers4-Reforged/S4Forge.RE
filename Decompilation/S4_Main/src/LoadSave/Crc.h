@@ -1,5 +1,5 @@
 // Listing 1
-// CRC.H   Created: 1/08/98 
+// CRC.H   Created: 1/08/98
 // Author: Colin Mahoney (cmahoney@readysoft.es)
 //
 // C++ implementation of CRC error checking
@@ -16,10 +16,10 @@
 namespace cdm_crc {
     static const int CRCMaxBits = 32;
 
-    template<int Width, unsigned long Poly, unsigned long Init,
-        unsigned long XOrOut, bool Ref, bool Direct = true>
+    template <int Width, unsigned long Poly, unsigned long Init,
+              unsigned long XOrOut, bool Ref, bool Direct = true>
     class CRCGenerator {
-    public:
+      public:
         class CRCTable;
         friend class CRCTable;
 
@@ -28,7 +28,7 @@ namespace cdm_crc {
             // Calculate the table entry at 'index'
             //
             unsigned long CalcTableEntry(int index) {
-                unsigned long inbyte = (unsigned long) index;
+                unsigned long inbyte = (unsigned long)index;
                 if(Ref) {
                     inbyte = Reflect(inbyte, 8);
                 }
@@ -47,22 +47,26 @@ namespace cdm_crc {
                 return reg & WidthMask(Width);
             }
 
-        public:
+          public:
             CRCTable() {
                 for(int i = 0; i < 256; i++) {
                     Table[i] = CalcTableEntry(i);
                 }
             }
 
-            unsigned long operator[](int i) const { return Table[i]; }
+            unsigned long operator[](int i) const {
+                return Table[i];
+            }
         };
 
-    private:
+      private:
         static const CRCTable Table;
         // Register holds the current value of the CRC calculation
         unsigned long Register;
         // Return an unsigned long with i'th bit set to one
-        static unsigned long Bitmask(int i) { return 1UL << i; }
+        static unsigned long Bitmask(int i) {
+            return 1UL << i;
+        }
         // Reflect the bottom b bits of val
         static unsigned long Reflect(unsigned long val, int b) {
             unsigned long t = val;
@@ -82,7 +86,7 @@ namespace cdm_crc {
             return (((1UL << (width - 1)) - 1UL) << 1) | 1UL;
         }
 
-    public:
+      public:
         CRCGenerator() : Register(Init) {}
 
         unsigned long GetCRC() const {
@@ -105,14 +109,20 @@ namespace cdm_crc {
             return normCRC;
         }
 
-        bool GetDirect() const { return Direct; }
-        bool GetReflect() const { return Ref; }
-        int  GetWidth() const { return Width; }
+        bool GetDirect() const {
+            return Direct;
+        }
+        bool GetReflect() const {
+            return Ref;
+        }
+        int GetWidth() const {
+            return Width;
+        }
 
         void LoadRegister(unsigned long val) {
             if(Ref) {
                 unsigned long v = 0;
-                int           i;
+                int i;
                 for(i = 0; i < Width - 8; i += 8) {
                     v <<= 8;
                     v |= (val & 0xFF);
@@ -129,8 +139,7 @@ namespace cdm_crc {
         void Process(unsigned char ch) {
             if(!Ref) {
                 if(Direct) {
-                    Register = Table[((Register >> (Width - 8)) ^ ch) & 0xFFL]
-                               ^ (Register << 8);
+                    Register = Table[((Register >> (Width - 8)) ^ ch) & 0xFFL] ^ (Register << 8);
                 } else {
                     Register = Table[(Register >> (Width - 8)) & 0xFFL] ^
                                (Register << 8);
@@ -162,7 +171,7 @@ namespace cdm_crc {
         ///    }
         ///   }
         // Comment out the following version if no member templates
-        template<class InIter>
+        template <class InIter>
         void Process(InIter first, InIter last) {
             while(first != last) {
                 Process(*first);
@@ -177,20 +186,22 @@ namespace cdm_crc {
             if(!Ref) {
                 if(Direct) {
                     Register = Table[((Register >> (Width - count)) ^
-                                      (bits >> (8 - count))) & (0xFF >> (8 - count))] ^
+                                      (bits >> (8 - count))) &
+                                     (0xFF >> (8 - count))] ^
                                (Register << count);
                 } else {
                     Register = Table[(Register >> (Width - count)) &
-                                     (0xFF >> (8 - count))] ^ (Register << count);
+                                     (0xFF >> (8 - count))] ^
+                               (Register << count);
                     Register ^= bits >> (8 - count);
                 }
             } else {
                 if(Direct) {
                     Register = Table[((Register ^ bits) & (0xFF >> (8 - count)))
-                                     << (8 - count)] ^ (Register >> count);
+                                     << (8 - count)] ^
+                               (Register >> count);
                 } else {
-                    Register = Table[(Register & (0xFF >> (8 - count))) <<
-                                     (8 - count)] ^ (Register >> count);
+                    Register = Table[(Register & (0xFF >> (8 - count))) << (8 - count)] ^ (Register >> count);
                     Register ^= bits << (Width - count);
                 }
             }
@@ -203,23 +214,23 @@ namespace cdm_crc {
         void Write(std::ostream &os) const {
             unsigned long ncrc = GetNormalCRC();
             for(int i = 0; i < Width; i += 8) {
-                unsigned char byte = (unsigned char) (ncrc >> (CRCMaxBits - i - 8));
+                unsigned char byte = (unsigned char)(ncrc >> (CRCMaxBits - i - 8));
                 os << byte;
             }
         }
     };
 
-    template<int Width, unsigned long Poly, unsigned long Init,
-        unsigned long XOrOut, bool Ref, bool Direct>
-    const CRCGenerator<Width, Poly, Init, XOrOut, Ref, Direct>::CRCTable
-    CRCGenerator<Width, Poly, Init, XOrOut, Ref, Direct>::Table;
+    template <int Width, unsigned long Poly, unsigned long Init,
+              unsigned long XOrOut, bool Ref, bool Direct>
+    const typename CRCGenerator<Width, Poly, Init, XOrOut, Ref, Direct>::CRCTable
+        CRCGenerator<Width, Poly, Init, XOrOut, Ref, Direct>::Table;
 
-    template<int Width, unsigned long Poly, unsigned long Init,
-        unsigned long XOrOut, bool Ref, bool Direct>
-    std::ostream &operator<<(std::ostream &                                        os,
+    template <int Width, unsigned long Poly, unsigned long Init,
+              unsigned long XOrOut, bool Ref, bool Direct>
+    std::ostream &operator<<(std::ostream &os,
                              CRCGenerator<Width, Poly, Init, XOrOut, Ref, Direct> &crc) {
         crc.Write(os);
         return os;
     }
-};
+}; // namespace cdm_crc
 #endif // __CRC_H
