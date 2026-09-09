@@ -349,6 +349,10 @@ FOLDER_MAP = {
         "IGfxEngine",
     ],
 
+    "GuiEngine": [
+        "IGuiEngine",
+    ],
+
     "Info/": [
         "CAddSoldierSideBarInfo",
         "CAddToolSideBarInfo",
@@ -595,7 +599,6 @@ FOLDER_MAP = {
     ],
 
     "Main/UI/": [
-        "IGuiEngine",
         "CToolTip",
         "CToolTipExt",
         "CSlideshow",
