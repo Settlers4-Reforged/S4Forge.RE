@@ -8,8 +8,12 @@ set(MA_TEST_SOURCE_LIST
 )
 
 add_executable(MA_tests ${MA_TEST_SOURCE_LIST})
+
 add_subdirectory(../S4_Main/src/MapAccess "${CMAKE_BINARY_DIR}/MA-build")
 target_link_libraries(MA_tests PRIVATE MapAccess)
+target_compile_definitions(MA_tests PRIVATE IMPORT_MA)
+
+add_dependencies(MA_tests MapAccess)
 
 target_compile_features(MA_tests PRIVATE cxx_std_17)
 target_compile_options(MA_tests PRIVATE /W4 /permissive-) # later add back /WX
@@ -21,10 +25,11 @@ target_include_directories(MA_tests PRIVATE "${CMAKE_CURRENT_LIST_DIR}/../S4_Mai
 set(MA_FIXTURE_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/MapAccess/fixture")
 set(MA_FIXTURE_DST_DIR "${CMAKE_CURRENT_BINARY_DIR}/MapAccess/fixture")
 
-add_custom_target(copy_MA_fixtures ALL
+add_custom_command(TARGET MA_tests POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E make_directory "${MA_FIXTURE_DST_DIR}"
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${MA_FIXTURE_SRC_DIR}" "${MA_FIXTURE_DST_DIR}"
 )
+
 
 add_custom_command(TARGET MA_tests POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
@@ -32,8 +37,6 @@ add_custom_command(TARGET MA_tests POST_BUILD
         $<TARGET_FILE_DIR:MA_tests>
         COMMAND_EXPAND_LISTS
 )
-
-add_dependencies(MA_tests copy_MA_fixtures)
 
 target_compile_definitions(MA_tests PRIVATE
         MA_TEST_FIXTURE_DIR="${MA_FIXTURE_DST_DIR}"
