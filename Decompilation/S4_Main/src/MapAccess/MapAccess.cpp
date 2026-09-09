@@ -47,6 +47,8 @@ EDITOR_INFO g_sEditorInfo;
 // address=[0x3e3133c]
 int g_iPreviewSize;
 
+constexpr int MAX_TEXT_LENGTH = 0x2001u;
+
 // address=[0x2fbbdb0]
 // Decompiled from unsigned int __cdecl CalcChecksumOfFile(HANDLE hFile, _DWORD *a2)
 unsigned long __cdecl CalcChecksumOfFile(void *hFile, int *a2) {
@@ -88,11 +90,9 @@ void MA_API MA_OpenMapFile(unsigned short *a, int *b, int *c, int d) {
 
 // address=[0x2fbbe60]
 // Decompiled from void __cdecl MA_OpenMapFile(wchar_t *_swpName, int *_pFileBuffer, int *_iErrorCode, int _bReadToBuffer)
-void MA_API MA_OpenMapFile(wchar_t *_swpName, int *_pFileBuffer, int *_iErrorCode, int _bReadToBuffer) {
+void MA_API MA_OpenMapFile(wchar_t *_swpName, int *_pFileCrc, int *_iErrorCode, int _bCalculateChecksum) {
     // eax
-    unsigned int iCalculatedCRC;  // [esp+1CCh] [ebp-A0h]
-    int iFileVersion;             // [esp+224h] [ebp-48h] MAPDST BYREF
-    int iFileCRC;                 // [esp+22Ch] [ebp-40h] BYREF
+    // [esp+1CCh] [ebp-A0h]
     DWORD NumberOfBytesRead;      // [esp+230h] [ebp-3Ch] BYREF
     BOOL bHasData;                // [esp+234h] [ebp-38h]
     SMapChunkHeader sChunkHeader; // [esp+244h] [ebp-28h] BYREF
@@ -103,69 +103,34 @@ void MA_API MA_OpenMapFile(wchar_t *_swpName, int *_pFileBuffer, int *_iErrorCod
     g_bPilesAvailable = 0;
     g_bSettlersAvailable = 0;
     if(g_bMapIsLoaded) {
+        // TODO: this will never run, as it's _behind_ the InitVariables
         *_iErrorCode = 7;
         return;
     }
+    // TODO: these are redundant
     g_bAddOnMap = 0;
     g_bEditorMap = 0;
     g_bCampaign = 0;
-    *_pFileBuffer = 0;
+    *_pFileCrc = 0;
+
+    // TODO: replace with smart pointers
     _bstr_t swName(_swpName);
     unsigned __int8 *lpBuffer = new unsigned __int8[0x40018u];
-    if(!lpBuffer) {
-        *_iErrorCode = 2;
-        return;
-    }
 
-    g_pTextDescription = new char[0x2001u];
-    if(!g_pTextDescription) {
-        operator delete[](lpBuffer);
-        lpBuffer = 0;
-        *_iErrorCode = 2;
-        return;
-    }
-    memset(g_pTextDescription, 0, 0x2001u);
+    g_pTextDescription = new char[MAX_TEXT_LENGTH];
+    memset(g_pTextDescription, 0, MAX_TEXT_LENGTH);
 
-    g_pTextEnglishDescription = new char[0x2001u];
-    if(!g_pTextEnglishDescription) {
-        operator delete[](lpBuffer);
-        operator delete[](g_pTextDescription);
-        lpBuffer = 0;
-        g_pTextDescription = 0;
-        *_iErrorCode = 2;
-        return;
-    }
-    memset(g_pTextEnglishDescription, 0, 0x2001u);
+    g_pTextEnglishDescription = new char[MAX_TEXT_LENGTH];
+    memset(g_pTextEnglishDescription, 0, MAX_TEXT_LENGTH);
 
-    g_pTextTandT = new char[0x2001u];
-    if(!g_pTextTandT) {
-        operator delete[](lpBuffer);
-        operator delete[](g_pTextDescription);
-        operator delete[](g_pTextEnglishDescription);
-        lpBuffer = 0;
-        g_pTextDescription = 0;
-        g_pTextEnglishDescription = 0;
-        *_iErrorCode = 2;
-        return;
-    }
-    memset(g_pTextTandT, 0, 0x2001u);
+    g_pTextTandT = new char[MAX_TEXT_LENGTH];
+    memset(g_pTextTandT, 0, MAX_TEXT_LENGTH);
 
-    g_pTextEnglishTandT = new char[0x2001u];
-    if(!g_pTextEnglishTandT) {
-        operator delete[](lpBuffer);
-        operator delete[](g_pTextDescription);
-        operator delete[](g_pTextEnglishDescription);
-        operator delete[](g_pTextTandT);
-        lpBuffer = 0;
-        g_pTextDescription = 0;
-        g_pTextEnglishDescription = 0;
-        g_pTextTandT = 0;
-        *_iErrorCode = 2;
-        return;
-    }
-    memset(g_pTextEnglishTandT, 0, 0x2001u);
+    g_pTextEnglishTandT = new char[MAX_TEXT_LENGTH];
+    memset(g_pTextEnglishTandT, 0, MAX_TEXT_LENGTH);
+
     HANDLE hFile = CreateFileA(swName, 0x80000000, 1u, 0, 3u, 0x80u, 0);
-    if(hFile == (HANDLE)-1) {
+    if(hFile == INVALID_HANDLE_VALUE) {
         operator delete[](lpBuffer);
         operator delete[](g_pTextDescription);
         operator delete[](g_pTextEnglishDescription);
@@ -180,37 +145,14 @@ void MA_API MA_OpenMapFile(wchar_t *_swpName, int *_pFileBuffer, int *_iErrorCod
         return;
     }
 
+    int iFileCRC; // [esp+22Ch] [ebp-40h] BYREF
     ReadFile(hFile, &iFileCRC, 4u, &NumberOfBytesRead, 0);
-    *_pFileBuffer = iFileCRC;
-    if(!_bReadToBuffer) {
-        goto LABEL_19;
-    }
+    *_pFileCrc = iFileCRC;
 
-    int iChecksumFailed; // [esp+1E4h] [ebp-88h] BYREF
-    iCalculatedCRC = CalcChecksumOfFile(hFile, &iChecksumFailed);
-    if(iChecksumFailed) {
-    LABEL_16:
-        CloseHandle(hFile);
-        operator delete[](lpBuffer);
-        operator delete[](g_pTextDescription);
-        operator delete[](g_pTextEnglishDescription);
-        operator delete[](g_pTextTandT);
-        operator delete[](g_pTextEnglishTandT);
-        lpBuffer = 0;
-        g_pTextDescription = 0;
-        g_pTextEnglishDescription = 0;
-        g_pTextTandT = 0;
-        g_pTextEnglishTandT = 0;
-        *_iErrorCode = 2;
-        return;
-    }
-    if(iCalculatedCRC == iFileCRC) {
-    LABEL_19:
-        SetFilePointer(hFile, 4, 0, FILE_BEGIN);
-        ReadFile(hFile, &iFileVersion, 4u, &NumberOfBytesRead, 0);
-        g_cPlayerAndTeamData.Init();
-        if(iFileVersion != 31 && iFileVersion != 40) {
-        LABEL_59:
+    if(_bCalculateChecksum) {
+        int iChecksumFailed; // [esp+1E4h] [ebp-88h] BYREF
+        unsigned int iCalculatedCRC = CalcChecksumOfFile(hFile, &iChecksumFailed);
+        if(iChecksumFailed) {
             CloseHandle(hFile);
             operator delete[](lpBuffer);
             operator delete[](g_pTextDescription);
@@ -222,168 +164,36 @@ void MA_API MA_OpenMapFile(wchar_t *_swpName, int *_pFileBuffer, int *_iErrorCod
             g_pTextEnglishDescription = 0;
             g_pTextTandT = 0;
             g_pTextEnglishTandT = 0;
-            *_iErrorCode = 4;
+            *_iErrorCode = 2;
             return;
         }
 
-        if(iFileVersion == 40) {
-            g_bAddOnMap = 1;
+        if(iCalculatedCRC != iFileCRC) {
+            CloseHandle(hFile);
+            operator delete[](lpBuffer);
+            operator delete[](g_pTextDescription);
+            operator delete[](g_pTextEnglishDescription);
+            operator delete[](g_pTextTandT);
+            operator delete[](g_pTextEnglishTandT);
+            lpBuffer = 0;
+            g_pTextDescription = 0;
+            g_pTextEnglishDescription = 0;
+            g_pTextTandT = 0;
+            g_pTextEnglishTandT = 0;
+            *_iErrorCode = 1;
+            return;
         }
-        while(2) {
-            bHasData = ReadFile(hFile, &sChunkHeader, sizeof(SMapChunkHeader), &NumberOfBytesRead, 0);
-            Cryption(reinterpret_cast<unsigned __int8 *>(&sChunkHeader), sizeof(SMapChunkHeader));
-            if(bHasData) {
-                switch(sChunkHeader.m_iChunkId) {
-                case MAP_CHUNK_DUMMY:
-                    goto LABEL_72;
-                case MAP_CHUNK_GENERAL:
-                    bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
-                    ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
-                    memcpy(&g_sGeneralMapData, lpBuffer, sizeof(g_sGeneralMapData));
-                    if(!bHasData) {
-                        goto LABEL_46;
-                    }
-                    goto LABEL_72;
-                case MAP_CHUNK_PLAYER:
-                    bHasData = g_cPlayerAndTeamData.Load(lpBuffer, hFile, sChunkHeader);
-                    g_sGeneralMapData.m_uNumberOfPlayers = g_cPlayerAndTeamData.GetNumberOfPlayers();
-                    if(!bHasData) {
-                        goto LABEL_46;
-                    }
-                    goto LABEL_72;
-                case MAP_CHUNK_TEAM:
-                    bHasData = g_cPlayerAndTeamData.LoadTeamData(lpBuffer, hFile, sChunkHeader);
-                    if(!bHasData) {
-                        goto LABEL_46;
-                    }
-                    goto LABEL_72;
-                case MAP_CHUNK_PREVIEW:
-                    if(_bReadToBuffer) {
-                        g_iPreviewSize = sChunkHeader.m_iNumberOfPlayers;
-                        if(sChunkHeader.m_iNumberOfPlayers < 128 || g_iPreviewSize > 1024) {
-                            goto LABEL_46;
-                        }
-                        if(g_pPreviewGfx) {
-                            operator delete[](g_pPreviewGfx);
-                        }
-                        g_pPreviewGfx = new short[g_iPreviewSize * g_iPreviewSize];
-                        if(!g_pPreviewGfx) {
-                            goto LABEL_16;
-                        }
-                        bHasData = ReadFile(hFile, g_pPreviewGfx, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
-                        ReadChunk(g_pPreviewGfx, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
-                        if(!bHasData) {
-                            goto LABEL_46;
-                        }
-                    } else if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1) {
-                        goto LABEL_59;
-                    }
-                LABEL_72:
-                    if(sChunkHeader.m_iChunkId) {
-                        continue;
-                    }
-                LABEL_75:
-                    CloseHandle(hFile);
-                    operator delete[](lpBuffer);
-                    g_bMapIsLoaded = 1;
-                    *_iErrorCode = 0;
-                    break;
-                case MAP_CHUNK_DUMMY_2:
-                    goto LABEL_75;
-                case MAP_CHUNK_SETTLERS:
-                    g_bSettlersAvailable = 1;
-                    if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1) {
-                        goto LABEL_59;
-                    }
-                    goto LABEL_72;
-                case MAP_CHUNK_BUILDINGS:
-                    g_bBuildingsAvailable = 1;
-                    if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1) {
-                        goto LABEL_59;
-                    }
-                    goto LABEL_72;
-                case MAP_CHUNK_PILES:
-                    g_bPilesAvailable = 1;
-                    if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1) {
-                        goto LABEL_59;
-                    }
-                    goto LABEL_72;
-                case MAP_CHUNK_DESCRIPTION:
-                    bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
-                    ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
-                    if(!bHasData) {
-                        goto LABEL_59;
-                    }
-                    memcpy(g_pTextDescription, lpBuffer, sChunkHeader.m_iDecompressedSize);
-                    goto LABEL_72;
-                case MAP_CHUNK_TIPS:
-                    bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
-                    ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
-                    if(!bHasData) {
-                        goto LABEL_59;
-                    }
-                    memcpy(g_pTextTandT, lpBuffer, sChunkHeader.m_iDecompressedSize);
-                    goto LABEL_72;
-                case MAP_CHUNK_ENGLISH_DESCRIPTION:
-                    bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
-                    ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
-                    if(!bHasData) {
-                        goto LABEL_59;
-                    }
-                    memcpy(g_pTextEnglishDescription, lpBuffer, sChunkHeader.m_iDecompressedSize);
-                    goto LABEL_72;
-                case MAP_CHUNK_ENGLISH_TIPS:
-                    bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
-                    ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
-                    if(!bHasData) {
-                        goto LABEL_59;
-                    }
-                    memcpy(g_pTextEnglishTandT, lpBuffer, sChunkHeader.m_iDecompressedSize);
-                    goto LABEL_72;
-                case MAP_CHUNK_IS_EDITOR:
-                    g_bEditorMap = 1;
-                    if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1) {
-                        goto LABEL_59;
-                    }
-                    goto LABEL_72;
-                case MAP_CHUNK_IS_CAMPAIGN:
-                    g_bCampaign = 1;
-                    if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1) {
-                        goto LABEL_59;
-                    }
-                    goto LABEL_72;
-                case MAP_CHUNK_EDITOR_DATA:
-                    bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
-                    ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
-                    memcpy(&g_sEditorInfo, lpBuffer, 0x14u);
-                    if(!bHasData) {
-                        goto LABEL_46;
-                    }
-                    goto LABEL_72;
-                default:
-                    if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == -1) {
-                        goto LABEL_59;
-                    }
-                    goto LABEL_72;
-                }
-            } else {
-            LABEL_46:
-                CloseHandle(hFile);
-                operator delete[](lpBuffer);
-                operator delete[](g_pTextDescription);
-                operator delete[](g_pTextEnglishDescription);
-                operator delete[](g_pTextTandT);
-                operator delete[](g_pTextEnglishTandT);
-                lpBuffer = 0;
-                g_pTextDescription = 0;
-                g_pTextEnglishDescription = 0;
-                g_pTextTandT = 0;
-                g_pTextEnglishTandT = 0;
-                *_iErrorCode = 3;
-            }
-            break;
-        }
-    } else {
+    }
+
+    SetFilePointer(hFile, 4, 0, FILE_BEGIN);
+
+    int iFileVersion; // [esp+224h] [ebp-48h] MAPDST BYREF
+    ReadFile(hFile, &iFileVersion, 4u, &NumberOfBytesRead, 0);
+
+    g_cPlayerAndTeamData.Init();
+
+    if(iFileVersion != 31 && iFileVersion != 40) {
+    ERROR_STATE:
         CloseHandle(hFile);
         operator delete[](lpBuffer);
         operator delete[](g_pTextDescription);
@@ -395,7 +205,169 @@ void MA_API MA_OpenMapFile(wchar_t *_swpName, int *_pFileBuffer, int *_iErrorCod
         g_pTextEnglishDescription = 0;
         g_pTextTandT = 0;
         g_pTextEnglishTandT = 0;
-        *_iErrorCode = 1;
+        *_iErrorCode = 4;
+        return;
+    }
+
+    if(iFileVersion == 40) {
+        g_bAddOnMap = 1;
+    }
+
+    while(true) {
+        bHasData = ReadFile(hFile, &sChunkHeader, sizeof(SMapChunkHeader), &NumberOfBytesRead, 0);
+        Cryption(reinterpret_cast<unsigned __int8 *>(&sChunkHeader), sizeof(SMapChunkHeader));
+
+        if(!bHasData) {
+        MISSING_DATA_ERROR_STATE:
+            CloseHandle(hFile);
+            operator delete[](lpBuffer);
+            operator delete[](g_pTextDescription);
+            operator delete[](g_pTextEnglishDescription);
+            operator delete[](g_pTextTandT);
+            operator delete[](g_pTextEnglishTandT);
+            lpBuffer = 0;
+            g_pTextDescription = 0;
+            g_pTextEnglishDescription = 0;
+            g_pTextTandT = 0;
+            g_pTextEnglishTandT = 0;
+            *_iErrorCode = 3;
+            return;
+        }
+
+        switch(sChunkHeader.m_iChunkId) {
+        case MAP_CHUNK_DUMMY:
+            break;
+        case MAP_CHUNK_GENERAL:
+            bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+            ReadChunk(lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+            memcpy(&g_sGeneralMapData, lpBuffer, sizeof(g_sGeneralMapData));
+            if(!bHasData) {
+                goto MISSING_DATA_ERROR_STATE;
+            }
+            break;
+        case MAP_CHUNK_PLAYER:
+            bHasData = g_cPlayerAndTeamData.Load(lpBuffer, hFile, sChunkHeader);
+            g_sGeneralMapData.m_uNumberOfPlayers = g_cPlayerAndTeamData.GetNumberOfPlayers();
+            if(!bHasData) {
+                goto MISSING_DATA_ERROR_STATE;
+            }
+            break;
+        case MAP_CHUNK_TEAM:
+            bHasData = g_cPlayerAndTeamData.LoadTeamData(lpBuffer, hFile, sChunkHeader);
+            if(!bHasData) {
+                goto MISSING_DATA_ERROR_STATE;
+            }
+            break;
+        case MAP_CHUNK_PREVIEW:
+            if(_bCalculateChecksum) {
+                g_iPreviewSize = sChunkHeader.m_iNumberOfPlayers;
+                if(sChunkHeader.m_iNumberOfPlayers < 128 || g_iPreviewSize > 1024) {
+                    goto MISSING_DATA_ERROR_STATE;
+                }
+                if(g_pPreviewGfx) {
+                    operator delete[](g_pPreviewGfx);
+                }
+                g_pPreviewGfx = new short[g_iPreviewSize * g_iPreviewSize];
+                bHasData = ReadFile(hFile, g_pPreviewGfx, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+                ReadChunk(g_pPreviewGfx, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+                if(!bHasData) {
+                    goto MISSING_DATA_ERROR_STATE;
+                }
+            } else if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == INVALID_SET_FILE_POINTER) {
+                goto ERROR_STATE;
+            }
+            break;
+        case MAP_CHUNK_DUMMY_2:
+            goto LABEL_75;
+        case MAP_CHUNK_SETTLERS:
+            g_bSettlersAvailable = 1;
+            if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == INVALID_SET_FILE_POINTER) {
+                goto ERROR_STATE;
+            }
+            break;
+        case MAP_CHUNK_BUILDINGS:
+            g_bBuildingsAvailable = 1;
+            if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == INVALID_SET_FILE_POINTER) {
+                goto ERROR_STATE;
+            }
+            break;
+        case MAP_CHUNK_PILES:
+            g_bPilesAvailable = 1;
+            if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == INVALID_SET_FILE_POINTER) {
+                goto ERROR_STATE;
+            }
+            break;
+        case MAP_CHUNK_DESCRIPTION:
+            bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+            ReadChunk(lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+            if(!bHasData) {
+                goto ERROR_STATE;
+            }
+            memcpy(g_pTextDescription, lpBuffer, sChunkHeader.m_iDecompressedSize);
+            break;
+        case MAP_CHUNK_TIPS:
+            bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+            ReadChunk(lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+            if(!bHasData) {
+                goto ERROR_STATE;
+            }
+            memcpy(g_pTextTandT, lpBuffer, sChunkHeader.m_iDecompressedSize);
+            break;
+        case MAP_CHUNK_ENGLISH_DESCRIPTION:
+            bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+            ReadChunk(lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+            if(!bHasData) {
+                goto ERROR_STATE;
+            }
+            memcpy(g_pTextEnglishDescription, lpBuffer, sChunkHeader.m_iDecompressedSize);
+            break;
+        case MAP_CHUNK_ENGLISH_TIPS:
+            bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+            ReadChunk(lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+            if(!bHasData) {
+                goto ERROR_STATE;
+            }
+            memcpy(g_pTextEnglishTandT, lpBuffer, sChunkHeader.m_iDecompressedSize);
+            break;
+        case MAP_CHUNK_IS_EDITOR:
+            g_bEditorMap = 1;
+            if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == INVALID_SET_FILE_POINTER) {
+                goto ERROR_STATE;
+            }
+            break;
+        case MAP_CHUNK_IS_CAMPAIGN:
+            g_bCampaign = 1;
+            if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == INVALID_SET_FILE_POINTER) {
+                goto ERROR_STATE;
+            }
+            break;
+        case MAP_CHUNK_EDITOR_DATA:
+            bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
+            ReadChunk(lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
+            memcpy(&g_sEditorInfo, lpBuffer, sizeof(EDITOR_INFO));
+            static_assert(sizeof(EDITOR_INFO) == 0x14, "Size of EDITOR_INFO must match with original.");
+
+            if(!bHasData) {
+                goto MISSING_DATA_ERROR_STATE;
+            }
+            break;
+        default:
+            if(SetFilePointer(hFile, sChunkHeader.m_iSize, 0, FILE_CURRENT) == INVALID_SET_FILE_POINTER) {
+                goto ERROR_STATE;
+            }
+            break;
+        }
+
+        if(sChunkHeader.m_iChunkId) {
+            continue;
+        }
+    LABEL_75:
+        CloseHandle(hFile);
+        operator delete[](lpBuffer);
+        g_bMapIsLoaded = 1;
+        *_iErrorCode = 0;
+        // TODO: this is leaking memory...
+        break;
     }
 }
 
@@ -600,7 +572,7 @@ void __cdecl InitVariables(void) {
     g_bPilesAvailable = 0;
     g_bBuildingsAvailable = 0;
     g_bSettlersAvailable = 0;
-    memset(&g_sEditorInfo, 0, 0x14u);
+    memset(&g_sEditorInfo, 0, sizeof(g_sEditorInfo));
     static_assert(sizeof(g_sEditorInfo) == 0x14u, "g_sEditorInfo size mismatch");
 }
 
