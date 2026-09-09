@@ -32307,63 +32307,63 @@ void __cdecl PlayGuiSound(int a1) {
 
 
 // address=[0x13cc7a0]
-// Decompiled from char __cdecl SetSpecialistProperties(struct SHealthState *a1, int a2, int a3)
+// Decompiled from bool __cdecl SetSpecialistProperties(struct SHealthState *a1, T_S4_GUI a2, T_S4_GUI a3)
 void __cdecl SetSpecialistProperties(struct SHealthState * a1, int a2, int a3) {
   
   unsigned int v4; // [esp+4h] [ebp-3Ch]
   CHAR Str[52]; // [esp+8h] [ebp-38h] BYREF
 
-  v4 = *(_DWORD *)a1 + *((_DWORD *)a1 + 1);
-  if ( *((int *)a1 + 2) <= 0 )
+  v4 = a1->m_iHitpoints + a1->m_iDamageTaken;
+  if ( a1->m_iCount <= 0 )
   {
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 44, a2, 0);
-    return IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 44, a3, 0);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 44, a2, 0);
+    return IGuiEngine::SetControlVisibility(g_pGUIEngine, 44, a3, 0);
   }
   else
   {
-    _wsprintfA(Str, "%u", *((_DWORD *)a1 + 2));
-    IGuiEngine::SetSliderPosition((IGuiEngine *)g_pGUIEngine, 44, a3, 100 * *(_DWORD *)a1 / v4);
-    IGuiEngine::SetText((void *)g_pGUIEngine, 44, a2, Str);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 44, a2, 1);
-    return IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, 44, a3, 1);
+    _wsprintfA(Str, "%u", a1->m_iCount);
+    IGuiEngine::SetSliderPosition(g_pGUIEngine, 44, a3, 100 * a1->m_iHitpoints / v4);
+    IGuiEngine::SetText(g_pGUIEngine, 44, a2, Str);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, 44, a2, 1);
+    return IGuiEngine::SetControlVisibility(g_pGUIEngine, 44, a3, 1);
   }
 }
 
 
 // address=[0x13cc880]
-// Decompiled from char UpdateGuiDlgSpecialistsContext()
+// Decompiled from bool UpdateGuiDlgSpecialistsContext()
 void __cdecl UpdateGuiDlgSpecialistsContext(void) {
   
-  char result; // al
+  bool result; // al
 
   if ( !g_pGUIEngine )
   {
     return result;
   }
-  SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E700], 1455, 1461);
-  SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E70C], 1456, 1462);
-  SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E718], 1457, 1463);
-  SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E724], 1458, 1464);
-  return SetSpecialistProperties((struct SHealthState *)&MEMORY[0x3F1E730], 1470, 1469);
+  SetSpecialistProperties(g_cSpecialistsInfo.m_vSpecialists, GUI_CT_SBMAGIC_TT_EXT, GUI_CT_SPELLS_MAY01_TT_EXT);
+  SetSpecialistProperties(&g_cSpecialistsInfo.m_vSpecialists[1], GUI_CT_SDBAR_TT, GUI_CT_SPELLS_MAY02_TT);
+  SetSpecialistProperties(&g_cSpecialistsInfo.m_vSpecialists[2], GUI_CT_SDBAR_TT_EXT, GUI_CT_SPELLS_MAY02_TT_EXT);
+  SetSpecialistProperties(&g_cSpecialistsInfo.m_vSpecialists[3], GUI_CT_SELBAD_TT, GUI_CT_SPELLS_MAY03_TT);
+  return SetSpecialistProperties(&g_cSpecialistsInfo.m_vSpecialists[4], GUI_CT_SPELLS_MAY06_TT, GUI_CT_SPELLS_MAY05_TT_EXT);
 }
 
 
 // address=[0x13cc910]
-// Decompiled from char __cdecl GuiDlgSpecialistsContextProc(int a1, int a2, int a3)
-bool __cdecl GuiDlgSpecialistsContextProc(int a1, int a2, int a3) {
+// Decompiled from char __cdecl GuiDlgSpecialistsContextProc(int _iUIState, int _iEventId, int _iParam)
+bool __cdecl GuiDlgSpecialistsContextProc(int _iUIState, int _iEventId, int _iParam) {
   
   char *v4; // eax
   char *v5; // eax
   char *v6; // eax
   CEvn_Logic *v7; // [esp+4h] [ebp-D8h]
-  CEvn_Event *v8; // [esp+Ch] [ebp-D0h]
+  struct CEvn_Event *v8; // [esp+Ch] [ebp-D0h]
   CEvn_Logic *v9; // [esp+14h] [ebp-C8h]
   CEvn_Logic *v10; // [esp+1Ch] [ebp-C0h]
   CEvn_Logic *v11; // [esp+24h] [ebp-B8h]
-  _BYTE v12[32]; // [esp+34h] [ebp-A8h] BYREF
-  _BYTE v13[32]; // [esp+54h] [ebp-88h] BYREF
-  _BYTE v14[32]; // [esp+74h] [ebp-68h] BYREF
-  _BYTE v15[32]; // [esp+94h] [ebp-48h] BYREF
+  CEvn_Logic v12; // [esp+34h] [ebp-A8h] BYREF
+  CEvn_Logic v13; // [esp+54h] [ebp-88h] BYREF
+  CEvn_Logic v14; // [esp+74h] [ebp-68h] BYREF
+  CEvn_Logic v15; // [esp+94h] [ebp-48h] BYREF
   CEvn_Event v16; // [esp+B4h] [ebp-28h] BYREF
   int v17; // [esp+D8h] [ebp-4h]
 
@@ -32371,17 +32371,17 @@ bool __cdecl GuiDlgSpecialistsContextProc(int a1, int a2, int a3) {
   {
     return 0;
   }
-  switch ( a1 )
+  switch ( _iUIState )
   {
     case 0:
       v4 = g_pStringEngine->GetString(g_pStringEngine, 886);
-      IGuiEngine::SetText((void *)g_pGUIEngine, 44, 1450, v4);
+      IGuiEngine::SetText(g_pGUIEngine, 44, 1450, v4);
       UpdateGuiDlgSpecialistsContext();
       break;
     case 1:
-      if ( (a3 & 0x10000) != 0 )
+      if ( (_iParam & 0x10000) != 0 )
       {
-        PlayGuiSound(1);
+        PlayGuiSound(1u);
       }
       else
       {
@@ -32389,69 +32389,69 @@ bool __cdecl GuiDlgSpecialistsContextProc(int a1, int a2, int a3) {
       }
       break;
     case 3:
-      switch ( (unsigned __int16)a2 )
+      switch ( (unsigned __int16)_iEventId )
       {
-        case 0x5B9u:
-          v11 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v15, 0x19Fu, 0, 0, 0, 0, 0);
+        case 1465u:
+          v11 = CEvn_Logic::CEvn_Logic(&v15, 0x19Fu, 0, 0, 0, 0, 0);
           v17 = 0;
           IEventEngine::SendAMessage(g_pEvnEngine, v11);
           v17 = -1;
-          CEvn_Logic::~CEvn_Logic(v15);
-          PlayGuiSound(2);
+          CEvn_Logic::~CEvn_Logic(&v15);
+          PlayGuiSound(2u);
           break;
-        case 0x5BAu:
-          if ( (a2 & 0x10000) != 0 )
+        case 1466u:
+          if ( (_iEventId & 0x10000) != 0 )
           {
-            v10 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v14, 0x1C2u, 0, 0, 0, 0, 0);
+            v10 = CEvn_Logic::CEvn_Logic(&v14, 0x1C2u, 0, 0, 0, 0, 0);
             v17 = 1;
             IEventEngine::SendAMessage(g_pEvnEngine, v10);
             v17 = -1;
-            CEvn_Logic::~CEvn_Logic(v14);
+            CEvn_Logic::~CEvn_Logic(&v14);
           }
           else
           {
-            v9 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v13, 0x1CCu, 0, 0, 0, 0, 0);
+            v9 = CEvn_Logic::CEvn_Logic(&v13, 0x1CCu, 0, 0, 0, 0, 0);
             v17 = 2;
             IEventEngine::SendAMessage(g_pEvnEngine, v9);
             v17 = -1;
-            CEvn_Logic::~CEvn_Logic(v13);
+            CEvn_Logic::~CEvn_Logic(&v13);
             v8 = CEvn_Event::CEvn_Event(&v16, 0x260u, 0, 0, 0);
             v17 = 3;
             IEventEngine::SendAMessage(g_pEvnEngine, v8);
             v17 = -1;
             CEvn_Event::~CEvn_Event(&v16);
           }
-          PlayGuiSound(2);
+          PlayGuiSound(2u);
           break;
-        case 0x5BBu:
-          v7 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v12, 0x1A7u, 0, 0, 0, 0, 0);
+        case 1467u:
+          v7 = CEvn_Logic::CEvn_Logic(&v12, 0x1A7u, 0, 0, 0, 0, 0);
           v17 = 4;
           IEventEngine::SendAMessage(g_pEvnEngine, v7);
           v17 = -1;
-          CEvn_Logic::~CEvn_Logic(v12);
-          PlayGuiSound(2);
+          CEvn_Logic::~CEvn_Logic(&v12);
+          PlayGuiSound(2u);
           break;
       }
       break;
     case 8:
-      if ( a3 == -1 )
+      if ( _iParam == -1 )
       {
         IGuiEngine::SetTooltip((char *)&byte_3698EFB);
       }
       else
       {
-        v5 = g_pStringEngine->GetString(g_pStringEngine, a3);
+        v5 = g_pStringEngine->GetString(g_pStringEngine, _iParam);
         IGuiEngine::SetTooltip(v5);
       }
       break;
     case 9:
-      if ( a3 == -1 )
+      if ( _iParam == -1 )
       {
         IGuiEngine::SetTooltipExt((char *)byte_3698EFC);
       }
       else
       {
-        v6 = g_pStringEngine->GetString(g_pStringEngine, a3);
+        v6 = g_pStringEngine->GetString(g_pStringEngine, _iParam);
         IGuiEngine::SetTooltipExt(v6);
       }
       break;
@@ -49359,14 +49359,14 @@ bool __cdecl AddGuiPatches(void) {
     {
       return 1;
     }
-    if ( !sub_2F74710((RECT *)&stru_468DFA4[0].m_uU4) )
+    if ( !sub_2F74710((RECT *)&stru_468DFA4[0].m_iHeight) )
     {
       return 1;
     }
     v2 = D3DObjectPtr->m_pGuiSurfaces[0]->Blt(D3DObjectPtr->m_pGuiSurfaces[0], (struct tagRECT *)byte_468E208, D3DObjectPtr->FinalRenderSurface, (struct tagRECT *)byte_468E128, 0, 0);
     if ( !v2 && D3DObjectPtr->m_pGuiSurfaces[1] && g_bGuiSurfaceVisible[1] )
     {
-      if ( !sub_2F74710((RECT *)&stru_468DFA4[1].m_uU4) )
+      if ( !sub_2F74710((RECT *)&stru_468DFA4[1].m_iHeight) )
       {
         return 1;
       }
@@ -49395,7 +49395,7 @@ bool __cdecl AddGuiPatches(void) {
           i < 0xE;
           ++i )
     {
-      if ( D3DObjectPtr->m_pGuiSurfaces[i] && g_bGuiSurfaceVisible[i] && sub_2F74710((RECT *)&stru_468DFA4[i].m_uU4) )
+      if ( D3DObjectPtr->m_pGuiSurfaces[i] && g_bGuiSurfaceVisible[i] && sub_2F74710((RECT *)&stru_468DFA4[i].m_iHeight) )
       {
         if ( LOBYTE(stru_468DFA4[i].m_sDestinationRect.bottom) )
         {
@@ -54542,30 +54542,30 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
   size_t v10; // esi
   int v11; // eax
   int v12; // eax
+  int v13; // edx
   int SurfaceID; // eax
-  int v14; // eax
-  char v15; // bl
+  int v15; // eax
   char v16; // bl
   char v17; // bl
-  int v18; // eax
-  char v19; // bl
-  int v20; // eax
+  char v18; // bl
+  int v19; // eax
+  char v20; // bl
   int v21; // eax
-  int v22; // esi
-  int v23; // eax
+  int v22; // eax
+  int v23; // esi
   int v24; // eax
   int v25; // eax
-  char v26; // bl
-  char v27; // bl
+  __int64 v26; // rax
+  int v27; // eax
   char v28; // bl
   char v29; // bl
   char v30; // bl
-  int v31; // eax
-  int v32; // eax
+  char v31; // bl
+  char v32; // bl
   int v33; // eax
   int v34; // eax
-  int v35; // [esp-8h] [ebp-108h]
-  int v36; // [esp-8h] [ebp-108h]
+  int v35; // eax
+  int v36; // eax
   int v37; // [esp-8h] [ebp-108h]
   int v38; // [esp-8h] [ebp-108h]
   int v39; // [esp-8h] [ebp-108h]
@@ -54581,10 +54581,10 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
   int v49; // [esp-8h] [ebp-108h]
   int v50; // [esp-8h] [ebp-108h]
   int v51; // [esp-8h] [ebp-108h]
-  int v52; // [esp-4h] [ebp-104h]
-  int v53; // [esp-4h] [ebp-104h]
+  int v52; // [esp-8h] [ebp-108h]
+  int v53; // [esp-8h] [ebp-108h]
   int v54; // [esp-4h] [ebp-104h]
-  int v55; // [esp-4h] [ebp-104h]
+  int m_iTooltipLink; // [esp-4h] [ebp-104h]
   int v56; // [esp-4h] [ebp-104h]
   int v57; // [esp-4h] [ebp-104h]
   int v58; // [esp-4h] [ebp-104h]
@@ -54593,49 +54593,51 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
   int v61; // [esp-4h] [ebp-104h]
   int v62; // [esp-4h] [ebp-104h]
   int v63; // [esp-4h] [ebp-104h]
-  __int64 v64; // [esp+28h] [ebp-D8h]
-  __int64 v65; // [esp+48h] [ebp-B8h]
-  __int64 v66; // [esp+68h] [ebp-98h]
-  __int64 v67; // [esp+70h] [ebp-90h]
-  __int64 v68; // [esp+78h] [ebp-88h]
-  __int64 v69; // [esp+80h] [ebp-80h]
-  int v70; // [esp+8Ch] [ebp-74h] BYREF
-  int v71; // [esp+90h] [ebp-70h] BYREF
-  int v72; // [esp+94h] [ebp-6Ch]
-  int v73; // [esp+98h] [ebp-68h]
-  int v74; // [esp+9Ch] [ebp-64h]
-  int v75; // [esp+A0h] [ebp-60h]
-  size_t v76; // [esp+A4h] [ebp-5Ch]
-  __int64 v77; // [esp+A8h] [ebp-58h]
-  int v78; // [esp+B0h] [ebp-50h]
-  int v79; // [esp+B4h] [ebp-4Ch]
-  int v80; // [esp+B8h] [ebp-48h]
-  int v81; // [esp+BCh] [ebp-44h]
-  int v82; // [esp+C0h] [ebp-40h]
-  int v83; // [esp+C4h] [ebp-3Ch]
-  struct GUI_MENU_DIALOG_HEADER *v84; // [esp+C8h] [ebp-38h] BYREF
+  int m_iTooltipLinkExtra; // [esp-4h] [ebp-104h]
+  int v65; // [esp-4h] [ebp-104h]
+  __int64 v66; // [esp+28h] [ebp-D8h]
+  int v67; // [esp+50h] [ebp-B0h]
+  __int64 v68; // [esp+68h] [ebp-98h]
+  __int64 v69; // [esp+70h] [ebp-90h]
+  __int64 v70; // [esp+78h] [ebp-88h]
+  __int64 v71; // [esp+80h] [ebp-80h]
+  int v72; // [esp+8Ch] [ebp-74h] BYREF
+  int v73; // [esp+90h] [ebp-70h] BYREF
+  int v74; // [esp+94h] [ebp-6Ch]
+  GUI_MENU_DIALOG_HEADER *v75; // [esp+98h] [ebp-68h]
+  int v76; // [esp+9Ch] [ebp-64h]
+  int m_iControlType; // [esp+A0h] [ebp-60h]
+  size_t v78; // [esp+A4h] [ebp-5Ch]
+  __int64 v79; // [esp+A8h] [ebp-58h]
+  GUI_MENU_DIALOG_HEADER *v80; // [esp+B0h] [ebp-50h]
+  int v81; // [esp+B4h] [ebp-4Ch]
+  int v82; // [esp+B8h] [ebp-48h]
+  GUI_MENU_DIALOG_HEADER *Container; // [esp+BCh] [ebp-44h]
+  int v84; // [esp+C0h] [ebp-40h]
+  int v85; // [esp+C4h] [ebp-3Ch]
+  struct GUI_MENU_DIALOG_HEADER *v86; // [esp+C8h] [ebp-38h] BYREF
   int m_wParam; // [esp+CCh] [ebp-34h]
-  int v86; // [esp+D0h] [ebp-30h]
-  unsigned __int16 *v87; // [esp+D4h] [ebp-2Ch]
-  unsigned __int16 *v88; // [esp+D8h] [ebp-28h]
-  WORD *p_width; // [esp+DCh] [ebp-24h]
-  int v90; // [esp+E0h] [ebp-20h]
-  int v91; // [esp+E4h] [ebp-1Ch]
-  int showTexture; // [esp+E8h] [ebp-18h]
-  int v93; // [esp+ECh] [ebp-14h]
-  int v94; // [esp+F0h] [ebp-10h]
-  char v95; // [esp+F5h] [ebp-Bh]
+  int v88; // [esp+D0h] [ebp-30h]
+  unsigned __int16 *v89; // [esp+D4h] [ebp-2Ch]
+  unsigned __int16 *v90; // [esp+D8h] [ebp-28h]
+  struct SGuiControl *v91; // [esp+DCh] [ebp-24h]
+  int v92; // [esp+E0h] [ebp-20h]
+  int v93; // [esp+E4h] [ebp-1Ch]
+  int m_iSliderPosition; // [esp+E8h] [ebp-18h]
+  int v95; // [esp+ECh] [ebp-14h]
+  int v96; // [esp+F0h] [ebp-10h]
+  char v97; // [esp+F5h] [ebp-Bh]
   char ControlUnderCursor; // [esp+F6h] [ebp-Ah]
-  char v97; // [esp+F7h] [ebp-9h]
-  struct SGuiControl *v98; // [esp+F8h] [ebp-8h] BYREF
-  char v99; // [esp+FEh] [ebp-2h]
-  char v100; // [esp+FFh] [ebp-1h]
+  char v99; // [esp+F7h] [ebp-9h]
+  struct SGuiControl *v100; // [esp+F8h] [ebp-8h] BYREF
+  char v101; // [esp+FEh] [ebp-2h]
+  char v102; // [esp+FFh] [ebp-1h]
 
   if ( !g_pGUIEngine || !g_pFileHeader || !g_pGfxEngine )
   {
     return 0;
   }
-  if ( IGfxEngine::IsGfxEngineRebuilded((IGfxEngine *)g_pGfxEngine) )
+  if ( IGfxEngine::IsGfxEngineRebuilded(g_pGfxEngine) )
   {
     BBSupportTracePrintF(0, "GUI ENGINE: Refreshing surfaces!");
     IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
@@ -54644,137 +54646,137 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
   {
     return 0;
   }
-  v100 = 0;
-  v99 = 0;
-  v91 = a1->m_iEventId - 5;
-  switch ( v91 )
+  v102 = 0;
+  v101 = 0;
+  v93 = a1->m_iEventId - 5;
+  switch ( v93 )
   {
     case 0:
       goto GuiEngine2_EventProc___def_339AC41;
     case 2:
-      v77 = sub_2F9E860(a1->m_lParam);
-      if ( !IsNonTransparentGuiArea(v77, SHIDWORD(v77)) )
+      v79 = sub_2F9E860(a1->m_lParam);
+      if ( !IsNonTransparentGuiArea(v79, SHIDWORD(v79)) )
       {
         goto GuiEngine2_EventProc___def_3399920;
       }
-      v99 = 1;
+      v101 = 1;
       currentTickCount = GetTickCount();
       if ( CToolTip::IsOpen((CToolTip *)&g_cToolTip) )
       {
         CToolTip::CloseTooltip((CToolTip *)&g_cToolTip);
         CToolTip::Lock((CToolTip *)&g_cToolTip);
       }
-      ControlUnderCursor = FindControlUnderCursor(v77, SHIDWORD(v77), &v98, &v70, &v71);
-      if ( !ControlUnderCursor || v98->controlType != 16 )
+      ControlUnderCursor = FindControlUnderCursor(v79, SHIDWORD(v79), &v100, &v72, &v73);
+      if ( !ControlUnderCursor || v100->m_iControlType != 16 )
       {
         goto LABEL_95;
       }
-      v98 = (struct SGuiControl *)((char *)v98 + 36);
-      if ( v98->controlType == 7 || v98->controlType == 8 )
+      ++v100;
+      if ( v100->m_iControlType == 7 || v100->m_iControlType == 8 )
       {
-        v94 = v77;
-        v81 = sub_2F9E930(v98->unknownId);
-        p_width = &v98[-1].width;
-        if ( LOBYTE(v98[-1].unknown4) == 16 )
+        v96 = v79;
+        Container = GuiGetContainer(v100->m_iUnknown1F);
+        v91 = v100 - 1;
+        if ( v100[-1].m_iControlType == 16 )
         {
-          v82 = *p_width + *(unsigned __int16 *)(v81 + 2);
-          v83 = p_width[2] + *p_width + *(unsigned __int16 *)(v81 + 2) - v98->width;
-          if ( v94 < v82 )
+          v84 = v91->m_iX + Container->m_iX;
+          v85 = v91->m_iWidth + v91->m_iX + Container->m_iX - v100->m_iWidth;
+          if ( v96 < v84 )
           {
-            v94 = v82;
+            v96 = v84;
           }
-          if ( v94 > v83 )
+          if ( v96 > v85 )
           {
-            v94 = v83;
+            v96 = v85;
           }
-          if ( v98->x != v94 )
+          if ( v100->m_iX != v96 )
           {
-            showTexture = CalcPercentageValue(v82, v83, v94, 0);
-            v98->x = v94 - *(_WORD *)(v81 + 2);
-            v98->showTexture = showTexture;
-            if ( v98->controlType == 8 )
+            m_iSliderPosition = CalcPercentageValue(v84, v85, v96, 0);
+            v100->m_iX = v96 - Container->m_iX;
+            v100->m_iSliderPosition = m_iSliderPosition;
+            if ( v100->m_iControlType == 8 )
             {
-              RestoreMultisliderSettings(v98);
-              ChangeMultisliders(v98, HIBYTE(v98->unknownData[0]) - showTexture);
-              EnsureMultisliders(v98);
-              showTexture = (char)v98->showTexture;
+              RestoreMultisliderSettings(v100);
+              ChangeMultisliders(v100, v100->m_iUnknown21 - m_iSliderPosition);
+              EnsureMultisliders(v100);
+              m_iSliderPosition = (char)v100->m_iSliderPosition;
             }
-            HIBYTE(v98[-1].unknownData[3]) = 1;
-            HIBYTE(v98->unknownData[1]) = 1;
-            v100 = 1;
-            v54 = showTexture;
-            v42 = (v98->effects << 16) + v98->valueLink;
-            SurfaceID = GetSurfaceID(v98);
-            ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[SurfaceID])(2, v42, v54);
-            v55 = showTexture;
-            v43 = (v98->effects << 16) + v98->valueLink;
-            v14 = GetSurfaceID(v98);
-            ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v14])(3, v43, v55);
+            v100[-1].m_iUnknown23 = 1;
+            v100->m_iUnknown23 = 1;
+            v102 = 1;
+            v56 = m_iSliderPosition;
+            v44 = (v100->m_iEffects << 16) + v100->m_iValueLink;
+            SurfaceID = GetSurfaceID(v100);
+            ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[SurfaceID])(2, v44, v56);
+            v57 = m_iSliderPosition;
+            v45 = (v100->m_iEffects << 16) + v100->m_iValueLink;
+            v15 = GetSurfaceID(v100);
+            ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v15])(3, v45, v57);
           }
 LABEL_95:
           if ( g_pCurrentSelectedControl )
           {
-            v75 = *(unsigned __int8 *)(g_pCurrentSelectedControl + 24);
-            switch ( v75 )
+            m_iControlType = g_pCurrentSelectedControl->m_iControlType;
+            switch ( m_iControlType )
             {
               case 0:
               case 13:
               case 19:
-                if ( (*(_BYTE *)(g_pCurrentSelectedControl + 27) & 1) == 0 )
+                if ( (g_pCurrentSelectedControl->m_iEffects & 1) == 0 )
                 {
-                  v15 = v100;
-                  v100 = SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 1) | v15;
-                  g_pCurrentDragControl = g_pCurrentSelectedControl;
+                  v16 = v102;
+                  v102 = SetControlState(g_pCurrentSelectedControl, 1, 1) | v16;
+                  g_pCurrentDragControl = (int)g_pCurrentSelectedControl;
                 }
                 break;
               case 1:
-                v17 = v100;
-                if ( (*(_BYTE *)(g_pCurrentSelectedControl + 27) & 1) != 0 )
+                v18 = v102;
+                if ( (g_pCurrentSelectedControl->m_iEffects & 1) != 0 )
                 {
-                  v100 = SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 0) | v17;
+                  v102 = SetControlState(g_pCurrentSelectedControl, 1, 0) | v18;
                 }
                 else
                 {
-                  v100 = SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 1) | v17;
+                  v102 = SetControlState(g_pCurrentSelectedControl, 1, 1) | v18;
                 }
-                v56 = AddKeyStates(a1->m_wParam);
-                v44 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
-                v18 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
-                ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v18])(3, v44, v56);
+                v58 = AddKeyStates(a1->m_wParam);
+                v46 = (g_pCurrentSelectedControl->m_iEffects << 16) + g_pCurrentSelectedControl->m_iValueLink;
+                v19 = GetSurfaceID(g_pCurrentSelectedControl);
+                ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v19])(3, v46, v58);
                 break;
               case 2:
               case 3:
-                v16 = v100;
-                v100 = SelectRadioGroup((struct SGuiControl *)g_pCurrentSelectedControl) | v16;
+                v17 = v102;
+                v102 = SelectRadioGroup(g_pCurrentSelectedControl) | v17;
                 break;
               case 7:
               case 8:
-                if ( g_pCurrentSelectedControl != g_pCurrentDragControl )
+                if ( g_pCurrentSelectedControl != (struct SGuiControl *)g_pCurrentDragControl )
                 {
-                  if ( *(_BYTE *)(g_pCurrentSelectedControl + 24) == 8 )
+                  if ( g_pCurrentSelectedControl->m_iControlType == 8 )
                   {
-                    StoreMultisliderSettings((struct SGuiControl *)g_pCurrentSelectedControl);
-                    SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 0);
-                    *(_BYTE *)(g_pCurrentSelectedControl + 35) = 1;
-                    *(_BYTE *)(g_pCurrentSelectedControl - 1) = 1;
-                    v100 = 1;
+                    StoreMultisliderSettings(g_pCurrentSelectedControl);
+                    SetControlState(g_pCurrentSelectedControl, 1, 0);
+                    g_pCurrentSelectedControl->m_iUnknown23 = 1;
+                    g_pCurrentSelectedControl[-1].m_iUnknown23 = 1;
+                    v102 = 1;
                   }
-                  g_pCurrentDragControl = g_pCurrentSelectedControl;
+                  g_pCurrentDragControl = (int)g_pCurrentSelectedControl;
                 }
                 break;
               case 17:
               case 18:
-                if ( (*(_BYTE *)(g_pCurrentSelectedControl + 27) & 1) == 0 )
+                if ( (g_pCurrentSelectedControl->m_iEffects & 1) == 0 )
                 {
-                  v19 = v100;
-                  v100 = SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 1) | v19;
+                  v20 = v102;
+                  v102 = SetControlState(g_pCurrentSelectedControl, 1, 1) | v20;
                 }
-                g_pCurrentRepeatControl = g_pCurrentSelectedControl;
+                g_pCurrentRepeatControl = (int)g_pCurrentSelectedControl;
                 dword_4726EBC = GetTickCount() + 300;
-                v57 = AddKeyStates(a1->m_wParam);
-                v45 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
-                v20 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
-                ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v20])(3, v45, v57);
+                v59 = AddKeyStates(a1->m_wParam);
+                v47 = (g_pCurrentSelectedControl->m_iEffects << 16) + g_pCurrentSelectedControl->m_iValueLink;
+                v21 = GetSurfaceID(g_pCurrentSelectedControl);
+                ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v21])(3, v47, v59);
                 break;
               default:
                 goto GuiEngine2_EventProc___def_3399920;
@@ -54790,140 +54792,141 @@ LABEL_95:
     case 3:
       if ( g_pCurrentRepeatControl )
       {
-        v100 |= SetControlState((struct SGuiControl *)g_pCurrentRepeatControl, 1, 0);
+        v102 |= SetControlState((struct SGuiControl *)g_pCurrentRepeatControl, 1, 0);
         g_pCurrentRepeatControl = 0;
       }
-      v67 = sub_2F9E860(a1->m_lParam);
-      if ( !IsNonTransparentGuiArea(v67, SHIDWORD(v67)) && !g_pCurrentDragControl )
+      v69 = sub_2F9E860(a1->m_lParam);
+      if ( !IsNonTransparentGuiArea(v69, SHIDWORD(v69)) && !g_pCurrentDragControl )
       {
         goto GuiEngine2_EventProc___def_3399920;
       }
-      v99 = 1;
+      v101 = 1;
       currentTickCount = GetTickCount();
       if ( !g_pCurrentDragControl || *(_BYTE *)(g_pCurrentDragControl + 24) != 7 && *(_BYTE *)(g_pCurrentDragControl + 24) != 8 )
       {
         goto LABEL_146;
       }
-      v73 = sub_2F9E930(*(unsigned __int8 *)(g_pCurrentDragControl + 31));
-      v88 = (unsigned __int16 *)(g_pCurrentDragControl - 36);
+      v75 = GuiGetContainer(*(unsigned __int8 *)(g_pCurrentDragControl + 31));
+      v90 = (unsigned __int16 *)(g_pCurrentDragControl - 36);
       if ( *(_BYTE *)(g_pCurrentDragControl - 36 + 24) != 16 )
       {
         BBSupportTracePrintF(0, "GUI ENGINE: Illegal data. Can't find slider area.");
         goto GuiEngine2_EventProc___def_3399920;
       }
-      v22 = CalcPercentageValue(*v88 + *(unsigned __int16 *)(v73 + 2), v88[2] + *v88 + *(unsigned __int16 *)(v73 + 2) - *(unsigned __int16 *)(g_pCurrentDragControl + 4), *(unsigned __int16 *)g_pCurrentDragControl, 0);
-      v59 = AddKeyStates(a1->m_wParam) + v22;
-      v47 = (*(unsigned __int8 *)(g_pCurrentDragControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentDragControl + 10);
-      v23 = GetSurfaceID((struct SGuiControl *)g_pCurrentDragControl);
-      ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v23])(3, v47, v59);
+      v23 = CalcPercentageValue(*v90 + v75->m_iX, v90[2] + *v90 + v75->m_iX - *(unsigned __int16 *)(g_pCurrentDragControl + 4), *(unsigned __int16 *)g_pCurrentDragControl, 0);
+      v61 = AddKeyStates(a1->m_wParam) + v23;
+      v49 = (*(unsigned __int8 *)(g_pCurrentDragControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentDragControl + 10);
+      v24 = GetSurfaceID((struct SGuiControl *)g_pCurrentDragControl);
+      ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v24])(3, v49, v61);
 LABEL_146:
       g_pCurrentDragControl = 0;
-      if ( g_pCurrentEditControl && g_pCurrentEditControl != g_pCurrentSelectedControl )
+      if ( g_pCurrentEditControl && (struct SGuiControl *)g_pCurrentEditControl != g_pCurrentSelectedControl )
       {
-        v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 64, 0);
+        v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 64, 0);
         g_pCurrentEditControl = 0;
       }
       if ( g_pCurrentSelectedControl )
       {
-        v72 = *(unsigned __int8 *)(g_pCurrentSelectedControl + 24);
-        switch ( v72 )
+        v74 = g_pCurrentSelectedControl->m_iControlType;
+        switch ( v74 )
         {
           case 0:
           case 13:
           case 19:
-            if ( (*(_BYTE *)(g_pCurrentSelectedControl + 27) & 1) != 0 )
+            if ( (g_pCurrentSelectedControl->m_iEffects & 1) != 0 )
             {
-              v100 |= SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 1, 0);
-              v60 = AddKeyStates(a1->m_wParam);
-              v48 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
-              v24 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
-              ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v24])(3, v48, v60);
+              v102 |= SetControlState(g_pCurrentSelectedControl, 1, 0);
+              v62 = AddKeyStates(a1->m_wParam);
+              v50 = (g_pCurrentSelectedControl->m_iEffects << 16) + g_pCurrentSelectedControl->m_iValueLink;
+              v25 = GetSurfaceID(g_pCurrentSelectedControl);
+              ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v25])(3, v50, v62);
             }
             break;
           case 5:
           case 20:
-            g_pCurrentEditControl = g_pCurrentSelectedControl;
-            v100 |= SelectEditControl((struct SGuiControl *)g_pCurrentSelectedControl, v67);
+            g_pCurrentEditControl = (int)g_pCurrentSelectedControl;
+            v102 |= SelectEditControl(g_pCurrentSelectedControl, v69);
             break;
           default:
             break;
         }
       }
 GuiEngine2_EventProc___def_339AC41:
-      v66 = sub_2F9E860(a1->m_lParam);
-      qword_471F794 = sub_2F9E830(a1->m_lParam);
+      v68 = sub_2F9E860(a1->m_lParam);
+      LODWORD(v26) = sub_2F9E830(a1->m_lParam);
+      qword_471F794 = v26;
       currentTickCount = GetTickCount();
-      v97 = FindControlUnderCursor(v66, SHIDWORD(v66), &v98, &v70, &v71);
+      v99 = FindControlUnderCursor(v68, SHIDWORD(v68), &v100, &v72, &v73);
       if ( g_pCurrentDragControl && (*(_BYTE *)(g_pCurrentDragControl + 24) == 7 || *(_BYTE *)(g_pCurrentDragControl + 24) == 8) )
       {
-        v93 = v66;
-        v78 = sub_2F9E930(*(unsigned __int8 *)(g_pCurrentDragControl + 31));
-        v87 = (unsigned __int16 *)(g_pCurrentDragControl - 36);
+        v95 = v68;
+        v80 = GuiGetContainer(*(unsigned __int8 *)(g_pCurrentDragControl + 31));
+        v89 = (unsigned __int16 *)(g_pCurrentDragControl - 36);
         if ( *(_BYTE *)(g_pCurrentDragControl - 36 + 24) != 16 )
         {
           BBSupportTracePrintF(0, "GUI ENGINE: Illegal data. Can't find slider area.");
           goto GuiEngine2_EventProc___def_3399920;
         }
-        v79 = *v87 + *(unsigned __int16 *)(v78 + 2);
-        v80 = v87[2] + *v87 + *(unsigned __int16 *)(v78 + 2) - *(unsigned __int16 *)(g_pCurrentDragControl + 4);
-        if ( v93 < v79 )
+        v81 = *v89 + v80->m_iX;
+        v82 = v89[2] + *v89 + v80->m_iX - *(unsigned __int16 *)(g_pCurrentDragControl + 4);
+        if ( v95 < v81 )
         {
-          v93 = v79;
+          v95 = v81;
         }
-        if ( v93 > v80 )
+        if ( v95 > v82 )
         {
-          v93 = v80;
+          v95 = v82;
         }
-        if ( *(unsigned __int16 *)g_pCurrentDragControl != v93 )
+        if ( *(unsigned __int16 *)g_pCurrentDragControl != v95 )
         {
-          v86 = CalcPercentageValue(v79, v80, v93, 0);
-          *(_WORD *)g_pCurrentDragControl = v93 - *(_WORD *)(v78 + 2);
-          *(_BYTE *)(g_pCurrentDragControl + 30) = v86;
+          v88 = CalcPercentageValue(v81, v82, v95, 0);
+          *(_WORD *)g_pCurrentDragControl = v95 - v80->m_iX;
+          *(_BYTE *)(g_pCurrentDragControl + 30) = v88;
           if ( *(_BYTE *)(g_pCurrentDragControl + 24) == 8 )
           {
             RestoreMultisliderSettings((struct SGuiControl *)g_pCurrentDragControl);
-            ChangeMultisliders((struct SGuiControl *)g_pCurrentDragControl, *(unsigned __int8 *)(g_pCurrentDragControl + 33) - v86);
+            ChangeMultisliders((struct SGuiControl *)g_pCurrentDragControl, *(unsigned __int8 *)(g_pCurrentDragControl + 33) - v88);
             EnsureMultisliders((struct SGuiControl *)g_pCurrentDragControl);
-            v86 = *(char *)(g_pCurrentDragControl + 30);
+            v88 = *(char *)(g_pCurrentDragControl + 30);
           }
           *(_BYTE *)(g_pCurrentDragControl - 1) = 1;
           *(_BYTE *)(g_pCurrentDragControl + 35) = 1;
-          v100 = 1;
-          v61 = v86;
-          v49 = (*(unsigned __int8 *)(g_pCurrentDragControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentDragControl + 10);
-          v25 = GetSurfaceID((struct SGuiControl *)g_pCurrentDragControl);
-          ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v25])(2, v49, v61);
+          v102 = 1;
+          v63 = v88;
+          v51 = (*(unsigned __int8 *)(g_pCurrentDragControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentDragControl + 10);
+          v27 = GetSurfaceID((struct SGuiControl *)g_pCurrentDragControl);
+          ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v27])(2, v51, v63);
         }
       }
       else
       {
-        if ( g_pCurrentDragControl && ((struct SGuiControl *)g_pCurrentDragControl != v98 || !v97) && (*(_BYTE *)(g_pCurrentDragControl + 27) & 1) != 0 )
+        if ( g_pCurrentDragControl && ((struct SGuiControl *)g_pCurrentDragControl != v100 || !v99) && (*(_BYTE *)(g_pCurrentDragControl + 27) & 1) != 0 )
         {
-          v26 = v100;
-          v100 = SetControlState((struct SGuiControl *)g_pCurrentDragControl, 1, 0) | v26;
+          v28 = v102;
+          v102 = SetControlState((struct SGuiControl *)g_pCurrentDragControl, 1, 0) | v28;
         }
-        if ( (struct SGuiControl *)g_pCurrentDragControl == v98 && v97 && (*(_BYTE *)(g_pCurrentDragControl + 27) & 1) == 0 )
+        if ( (struct SGuiControl *)g_pCurrentDragControl == v100 && v99 && (*(_BYTE *)(g_pCurrentDragControl + 27) & 1) == 0 )
         {
-          v27 = v100;
-          v100 = SetControlState((struct SGuiControl *)g_pCurrentDragControl, 1, 1) | v27;
+          v29 = v102;
+          v102 = SetControlState((struct SGuiControl *)g_pCurrentDragControl, 1, 1) | v29;
         }
       }
-      if ( g_pCurrentSelectedControl && ((struct SGuiControl *)g_pCurrentSelectedControl != v98 || !v97) )
+      if ( g_pCurrentSelectedControl && (g_pCurrentSelectedControl != v100 || !v99) )
       {
-        v28 = v100;
-        v100 = SetControlState((struct SGuiControl *)g_pCurrentSelectedControl, 2, 0) | v28;
+        v30 = v102;
+        v102 = SetControlState(g_pCurrentSelectedControl, 2, 0) | v30;
         g_pCurrentSelectedControl = 0;
         if ( g_pCurrentRepeatControl )
         {
-          v29 = v100;
-          v100 = SetControlState((struct SGuiControl *)g_pCurrentRepeatControl, 1, 0) | v29;
+          v31 = v102;
+          v102 = SetControlState((struct SGuiControl *)g_pCurrentRepeatControl, 1, 0) | v31;
           g_pCurrentRepeatControl = 0;
         }
-        if ( CToolTip::IsOpen((CToolTip *)&g_cToolTipExt) )
+        if ( CToolTip::IsOpen((CToolTip *)g_cToolTipExt) )
         {
-          CToolTipExt::ResetActiveText((CToolTipExt *)&g_cToolTipExt);
-          CToolTip::SetSourceDialogSurfaceID((CToolTip *)&g_cToolTipExt, -1);
-          CToolTipExt::UpdateText((CToolTipExt *)&g_cToolTipExt);
+          CToolTipExt::ResetActiveText((CToolTipExt *)g_cToolTipExt);
+          CToolTip::SetSourceDialogSurfaceID((CToolTip *)g_cToolTipExt, -1);
+          CToolTipExt::UpdateText((CToolTipExt *)g_cToolTipExt);
           dword_3E2F12C = GetTickCount() + 700;
         }
         if ( CToolTip::IsOpen((CToolTip *)&g_cToolTip) )
@@ -54933,87 +54936,87 @@ GuiEngine2_EventProc___def_339AC41:
         CToolTip::CloseTooltip((CToolTip *)&g_cToolTip);
         CToolTip::Unlock((CToolTip *)&g_cToolTip);
       }
-      if ( v97 && v98 != (struct SGuiControl *)g_pCurrentSelectedControl )
+      if ( v99 && v100 != g_pCurrentSelectedControl )
       {
-        if ( !g_pCurrentDragControl || v98 == (struct SGuiControl *)g_pCurrentDragControl )
+        if ( !g_pCurrentDragControl || v100 == (struct SGuiControl *)g_pCurrentDragControl )
         {
-          v30 = v100;
-          v100 = SetControlState(v98, 2, 1) | v30;
-          g_pCurrentSelectedControl = (int)v98;
+          v32 = v102;
+          v102 = SetControlState(v100, 2, 1) | v32;
+          g_pCurrentSelectedControl = v100;
         }
         if ( g_pCurrentSelectedControl )
         {
-          if ( CToolTip::IsOpen((CToolTip *)&g_cToolTipExt) )
+          if ( CToolTip::IsOpen((CToolTip *)g_cToolTipExt) )
           {
-            v62 = *(__int16 *)(g_pCurrentSelectedControl + 22);
-            v50 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
-            v31 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
-            ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v31])(9, v50, v62);
-            if ( CToolTip::GetCurrentLengthOfTooltip((CToolTip *)&g_cToolTipExt) )
+            m_iTooltipLinkExtra = (__int16)g_pCurrentSelectedControl->m_iTooltipLinkExtra;
+            v52 = (g_pCurrentSelectedControl->m_iEffects << 16) + g_pCurrentSelectedControl->m_iValueLink;
+            v33 = GetSurfaceID(g_pCurrentSelectedControl);
+            ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v33])(9, v52, m_iTooltipLinkExtra);
+            if ( CToolTip::GetCurrentLengthOfTooltip((CToolTip *)g_cToolTipExt) )
             {
-              v32 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
-              CToolTip::SetSourceDialogSurfaceID((CToolTip *)&g_cToolTipExt, v32);
-              CToolTipExt::UpdateText((CToolTipExt *)&g_cToolTipExt);
+              v34 = GetSurfaceID(g_pCurrentSelectedControl);
+              CToolTip::SetSourceDialogSurfaceID((CToolTip *)g_cToolTipExt, v34);
+              CToolTipExt::UpdateText((CToolTipExt *)g_cToolTipExt);
               dword_3E2F12C = -1;
             }
             else
             {
-              CToolTip::SetSourceDialogSurfaceID((CToolTip *)&g_cToolTipExt, -1);
-              CToolTipExt::ResetActiveText((CToolTipExt *)&g_cToolTipExt);
+              CToolTip::SetSourceDialogSurfaceID((CToolTip *)g_cToolTipExt, -1);
+              CToolTipExt::ResetActiveText((CToolTipExt *)g_cToolTipExt);
               dword_3E2F12C = GetTickCount() + 700;
             }
           }
           else
           {
-            v63 = *(__int16 *)(g_pCurrentSelectedControl + 22);
-            v51 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
-            v33 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
-            ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v33])(9, v51, v63);
-            v34 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
-            CToolTip::SetSourceDialogSurfaceID((CToolTip *)&g_cToolTipExt, v34);
-            CToolTipExt::OpenTooltip((CToolTipExt *)&g_cToolTipExt);
+            v65 = (__int16)g_pCurrentSelectedControl->m_iTooltipLinkExtra;
+            v53 = (g_pCurrentSelectedControl->m_iEffects << 16) + g_pCurrentSelectedControl->m_iValueLink;
+            v35 = GetSurfaceID(g_pCurrentSelectedControl);
+            ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v35])(9, v53, v65);
+            v36 = GetSurfaceID(g_pCurrentSelectedControl);
+            CToolTip::SetSourceDialogSurfaceID((CToolTip *)g_cToolTipExt, v36);
+            CToolTipExt::OpenTooltip((CToolTipExt *)g_cToolTipExt);
             dword_3E2F12C = -1;
           }
         }
       }
 GuiEngine2_EventProc___def_3399920:
-      if ( v100 )
+      if ( v102 )
       {
         g_bGuiIsDirty = 1;
         UpdateGui(-1);
       }
-      result = v99;
+      result = v101;
       break;
     case 4:
-      v68 = sub_2F9E860(a1->m_lParam);
-      if ( !IsNonTransparentGuiArea(v68, SHIDWORD(v68)) )
+      v70 = sub_2F9E860(a1->m_lParam);
+      if ( !IsNonTransparentGuiArea(v70, SHIDWORD(v70)) )
       {
         goto GuiEngine2_EventProc___def_3399920;
       }
-      v95 = FindControlUnderCursor(v68, SHIDWORD(v68), &v98, &v70, &v71);
-      if ( (struct SGuiControl *)g_pCurrentSelectedControl != v98 || (struct SGuiControl *)g_pCurrentDragControl == v98 )
+      v97 = FindControlUnderCursor(v70, SHIDWORD(v70), &v100, &v72, &v73);
+      if ( g_pCurrentSelectedControl != v100 || (struct SGuiControl *)g_pCurrentDragControl == v100 )
       {
         goto LABEL_127;
       }
-      if ( !v95 || v98->controlType != 16 || (v98 = (struct SGuiControl *)((char *)v98 + 36), v98->controlType == 7) || v98->controlType == 8 )
+      if ( !v97 || v100->m_iControlType != 16 || (++v100, v100->m_iControlType == 7) || v100->m_iControlType == 8 )
       {
-        if ( v98 && v98->controlType == 8 )
+        if ( v100 && v100->m_iControlType == 8 )
         {
-          if ( (v98->effects & 1) != 0 )
+          if ( (v100->m_iEffects & 1) != 0 )
           {
-            SetControlState(v98, 1, 0);
-            HIBYTE(v98[-1].unknownData[3]) = 1;
-            v100 = 1;
+            SetControlState(v100, 1, 0);
+            v100[-1].m_iUnknown23 = 1;
+            v102 = 1;
           }
-          else if ( CanLockMultislider(v98) )
+          else if ( CanLockMultislider(v100) )
           {
-            SetControlState(v98, 1, 1);
-            HIBYTE(v98[-1].unknownData[3]) = 1;
-            v100 = 1;
+            SetControlState(v100, 1, 1);
+            v100[-1].m_iUnknown23 = 1;
+            v102 = 1;
           }
         }
 LABEL_127:
-        v99 = 1;
+        v101 = 1;
         currentTickCount = GetTickCount();
         if ( CToolTip::IsOpen((CToolTip *)&g_cToolTip) )
         {
@@ -55023,15 +55026,15 @@ LABEL_127:
       }
       goto GuiEngine2_EventProc___def_3399920;
     case 5:
-      v64 = sub_2F9E860(a1->m_lParam);
-      if ( IsNonTransparentGuiArea(v64, SHIDWORD(v64)) || g_pCurrentDragControl )
+      v66 = sub_2F9E860(a1->m_lParam);
+      if ( IsNonTransparentGuiArea(v66, SHIDWORD(v66)) || g_pCurrentDragControl )
       {
-        v99 = 1;
+        v101 = 1;
         currentTickCount = GetTickCount();
         if ( g_pCurrentSelectedControl )
         {
-          v74 = *(unsigned __int8 *)(g_pCurrentSelectedControl + 24);
-          switch ( v74 )
+          v76 = g_pCurrentSelectedControl->m_iControlType;
+          switch ( v76 )
           {
             case 0:
             case 1:
@@ -55045,10 +55048,10 @@ LABEL_127:
             case 13:
             case 19:
             case 20:
-              v58 = AddKeyStates(a1->m_wParam);
-              v46 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
-              v21 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
-              ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v21])(7, v46, v58);
+              v60 = AddKeyStates(a1->m_wParam);
+              v48 = (g_pCurrentSelectedControl->m_iEffects << 16) + g_pCurrentSelectedControl->m_iValueLink;
+              v22 = GetSurfaceID(g_pCurrentSelectedControl);
+              ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v22])(7, v48, v60);
               break;
             default:
               goto GuiEngine2_EventProc___def_3399920;
@@ -55059,81 +55062,81 @@ LABEL_127:
     case 6:
       if ( g_pCurrentEditControl )
       {
-        v99 = 1;
-        v90 = a1->m_wParam - 35;
-        switch ( v90 )
+        v101 = 1;
+        v92 = a1->m_wParam - 35;
+        switch ( v92 )
         {
           case 0:
-            v99 = 1;
+            v101 = 1;
             if ( *(char *)(g_pCurrentEditControl + 25) >= 0 )
             {
               v9 = *(unsigned __int8 *)(g_pCurrentEditControl + 33);
               if ( v9 < j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)]) )
               {
                 dword_3E2F124 = 3;
-                v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
-                v76 = j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)]);
-                *(_BYTE *)(g_pCurrentEditControl + 33) = v76;
-                *(_BYTE *)(g_pCurrentEditControl + 33) = v76;
-                v100 = 1;
+                v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
+                v78 = j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)]);
+                *(_BYTE *)(g_pCurrentEditControl + 33) = v78;
+                *(_BYTE *)(g_pCurrentEditControl + 33) = v78;
+                v102 = 1;
                 *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
                 DoScrolling((struct SGuiControl *)g_pCurrentEditControl, 2);
               }
             }
             break;
           case 1:
-            v99 = 1;
+            v101 = 1;
             if ( *(_BYTE *)(g_pCurrentEditControl + 33) )
             {
               dword_3E2F124 = 3;
               SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
               *(_BYTE *)(g_pCurrentEditControl + 34) = 0;
               *(_BYTE *)(g_pCurrentEditControl + 33) = 0;
-              v100 = 1;
+              v102 = 1;
               *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
             }
             break;
           case 2:
-            v99 = 1;
+            v101 = 1;
             if ( *(_BYTE *)(g_pCurrentEditControl + 33) )
             {
               dword_3E2F124 = 3;
-              v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
+              v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
               --*(_BYTE *)(g_pCurrentEditControl + 33);
-              v100 = 1;
+              v102 = 1;
               *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
               DoScrolling((struct SGuiControl *)g_pCurrentEditControl, 0);
             }
             break;
           case 4:
-            v99 = 1;
+            v101 = 1;
             if ( *(char *)(g_pCurrentEditControl + 25) >= 0 )
             {
               v10 = *(unsigned __int8 *)(g_pCurrentEditControl + 33);
               if ( v10 < j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)]) )
               {
                 dword_3E2F124 = 3;
-                v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
+                v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
                 ++*(_BYTE *)(g_pCurrentEditControl + 33);
-                v100 = 1;
+                v102 = 1;
                 *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
                 DoScrolling((struct SGuiControl *)g_pCurrentEditControl, 1);
               }
             }
             break;
           case 11:
-            v99 = 1;
+            v101 = 1;
             v7 = *(unsigned __int8 *)(g_pCurrentEditControl + 33);
             if ( v7 < j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)]) && (unsigned __int8)DeleteCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 33)) )
             {
               dword_3E2F124 = 3;
               SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
               CalcCharWidths(g_pCurrentEditControl);
-              v100 = 1;
+              v102 = 1;
               *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
-              v39 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
+              v41 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
               v8 = GetSurfaceID((struct SGuiControl *)g_pCurrentEditControl);
-              ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v8])(2, v39, 0);
+              ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v8])(2, v41, 0);
             }
             break;
           default:
@@ -55144,43 +55147,43 @@ LABEL_127:
     case 8:
       if ( g_pCurrentEditControl )
       {
-        v99 = 1;
+        v101 = 1;
         m_wParam = a1->m_wParam;
         switch ( m_wParam )
         {
           case 8:
-            v99 = 1;
+            v101 = 1;
             if ( *(_BYTE *)(g_pCurrentEditControl + 33) && (unsigned __int8)DeleteCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 33) - 1) )
             {
               dword_3E2F124 = 3;
-              v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
+              v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
               --*(_BYTE *)(g_pCurrentEditControl + 33);
               CalcCharWidths(g_pCurrentEditControl);
-              v100 = 1;
+              v102 = 1;
               *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
               DoScrolling((struct SGuiControl *)g_pCurrentEditControl, 0);
-              v35 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
+              v37 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
               v2 = GetSurfaceID((struct SGuiControl *)g_pCurrentEditControl);
-              ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v2])(2, v35, 0);
+              ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v2])(2, v37, 0);
             }
             break;
           case 13:
-            v99 = 1;
-            v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 64, 0);
-            v36 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
+            v101 = 1;
+            v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 64, 0);
+            v38 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
             v3 = GetSurfaceID((struct SGuiControl *)g_pCurrentEditControl);
-            ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v3])(3, v36, 0);
+            ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v3])(3, v38, 0);
             if ( (*(_BYTE *)(g_pCurrentEditControl + 27) & 0x40) == 0 )
             {
               g_pCurrentEditControl = 0;
             }
             break;
           case 27:
-            v99 = 1;
-            v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 64, 0);
-            v37 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
+            v101 = 1;
+            v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 64, 0);
+            v39 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
             v4 = GetSurfaceID((struct SGuiControl *)g_pCurrentEditControl);
-            ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v4])(4, v37, 0);
+            ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v4])(4, v39, 0);
             if ( (*(_BYTE *)(g_pCurrentEditControl + 27) & 0x40) == 0 )
             {
               g_pCurrentEditControl = 0;
@@ -55189,19 +55192,19 @@ LABEL_127:
           default:
             if ( IsValidInput(a1->m_wParam, *(_BYTE *)(g_pCurrentEditControl + 13)) )
             {
-              v99 = 1;
+              v101 = 1;
               if ( *(unsigned __int8 *)(g_pCurrentEditControl + 12) >= 0x7Du ? InsertCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], 125, *(unsigned __int8 *)(g_pCurrentEditControl + 33), a1->m_wParam) : (unsigned __int8)InsertCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 12), *(unsigned __int8 *)(g_pCurrentEditControl + 33), a1->m_wParam) )
               {
                 dword_3E2F124 = 3;
-                v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
+                v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
                 ++*(_BYTE *)(g_pCurrentEditControl + 33);
                 CalcCharWidths(g_pCurrentEditControl);
-                v100 = 1;
+                v102 = 1;
                 *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
                 DoScrolling((struct SGuiControl *)g_pCurrentEditControl, 1);
-                v38 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
+                v40 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
                 v6 = GetSurfaceID((struct SGuiControl *)g_pCurrentEditControl);
-                ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v6])(2, v38, 0);
+                ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v6])(2, v40, 0);
               }
             }
             break;
@@ -55209,29 +55212,29 @@ LABEL_127:
       }
       goto GuiEngine2_EventProc___def_3399920;
     case 9:
-      v69 = sub_2F9E860(a1->m_lParam);
-      if ( IsNonTransparentGuiArea(v69, SHIDWORD(v69)) )
+      v71 = sub_2F9E860(a1->m_lParam);
+      if ( IsNonTransparentGuiArea(v71, SHIDWORD(v71)) )
       {
-        v84 = 0;
-        FindDialogUnderCursor(v69, SHIDWORD(v69), &v84);
-        if ( v84 )
+        v86 = 0;
+        FindDialogUnderCursor(v71, SHIDWORD(v71), &v86);
+        if ( v86 )
         {
-          v99 = 1;
-          ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[*(unsigned __int16 *)v84])(10, a1->m_wParam, a1->m_lParam);
+          v101 = 1;
+          ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v86->m_iSurfaceType])(10, a1->m_wParam, a1->m_lParam);
         }
       }
       goto GuiEngine2_EventProc___def_3399920;
     case 16:
       if ( g_pCurrentRepeatControl && GetTickCount() > dword_4726EBC )
       {
-        v52 = AddKeyStates(a1->m_wParam);
-        v40 = (*(unsigned __int8 *)(g_pCurrentRepeatControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentRepeatControl + 10);
+        v54 = AddKeyStates(a1->m_wParam);
+        v42 = (*(unsigned __int8 *)(g_pCurrentRepeatControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentRepeatControl + 10);
         v11 = GetSurfaceID((struct SGuiControl *)g_pCurrentRepeatControl);
-        ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v11])(3, v40, v52);
+        ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v11])(3, v42, v54);
       }
-      if ( GetTickCount() > dword_3E2F12C && CToolTip::IsOpen((CToolTip *)&g_cToolTipExt) )
+      if ( GetTickCount() > dword_3E2F12C && CToolTip::IsOpen((CToolTip *)g_cToolTipExt) )
       {
-        CToolTip::CloseTooltip((CToolTip *)&g_cToolTipExt);
+        CToolTip::CloseTooltip((CToolTip *)g_cToolTipExt);
         dword_3E2F12C = -1;
       }
       if ( --dword_3E2F124 < 0 )
@@ -55241,11 +55244,11 @@ LABEL_127:
         {
           if ( (*(_BYTE *)(g_pCurrentEditControl + 27) & 0x80) != 0 )
           {
-            v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 0);
+            v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 0);
           }
           else
           {
-            v100 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
+            v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
           }
         }
       }
@@ -55261,12 +55264,12 @@ LABEL_127:
         }
         else
         {
-          v53 = *(__int16 *)(g_pCurrentSelectedControl + 20);
-          v41 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
-          v12 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
-          ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v12])(8, v41, v53);
-          v65 = sub_2F9E830(a1->m_lParam);
-          CToolTip::OpenTooltip((CToolTip *)&g_cToolTip, v65, SHIDWORD(v65));
+          m_iTooltipLink = (__int16)g_pCurrentSelectedControl->m_iTooltipLink;
+          v43 = (g_pCurrentSelectedControl->m_iEffects << 16) + g_pCurrentSelectedControl->m_iValueLink;
+          v12 = GetSurfaceID(g_pCurrentSelectedControl);
+          ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[v12])(8, v43, m_iTooltipLink);
+          v67 = sub_2F9E830(a1->m_lParam);
+          CToolTip::OpenTooltip((CToolTip *)&g_cToolTip, v67, v13);
           dword_4726EC4 = GetTickCount();
         }
       }
@@ -55374,7 +55377,7 @@ bool __cdecl HasImage(int a1) {
 // Decompiled from int __cdecl GetSurfaceID(struct SGuiControl *a1)
 int __cdecl GetSurfaceID(struct SGuiControl * a1) {
   
-  return *(unsigned __int16 *)sub_2F9E930(a1->unknownId);
+  return *(unsigned __int16 *)GuiGetContainer(a1->m_iUnknown1F);
 }
 
 
@@ -55386,17 +55389,17 @@ struct SGuiControl * __cdecl GetControlPtr(int container, int valueLink) {
   int i; // [esp+4h] [ebp-8h]
   struct SGuiControl *v5; // [esp+8h] [ebp-4h]
 
-  if ( !sub_2F9E8B0(container) )
+  if ( !GuiIsContainerValid(container) )
   {
     return 0;
   }
-  v3 = sub_2F9E930(container);
+  v3 = GuiGetContainer(container);
   v5 = (struct SGuiControl *)(v3 + 16);
   for ( i = 0;
         i < *(unsigned __int16 *)(v3 + 12);
         ++i )
   {
-    if ( valueLink == v5->valueLink )
+    if ( valueLink == v5->m_iValueLink )
     {
       return v5;
     }
@@ -55481,7 +55484,7 @@ bool __cdecl IsNonTransparentGuiArea(int a1, int a2) {
     }
     if ( g_iOpenDialogs[i] )
     {
-      v4 = (unsigned __int16 *)sub_2F9E930(g_iOpenDialogs[i] - 1);
+      v4 = (unsigned __int16 *)GuiGetContainer(g_iOpenDialogs[i] - 1);
       if ( a1 >= v4[1] && a2 >= v4[2] && a1 <= v4[3] + v4[1] && a2 <= v4[4] + v4[2] )
       {
         break;
@@ -55609,47 +55612,47 @@ void __cdecl DoScrolling(struct SGuiControl * a1, int a2) {
   int v9; // [esp+18h] [ebp-8h]
   int v10; // [esp+1Ch] [ebp-4h]
 
-  CalcTextSize(a1->textStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)a1->id], &psizl, LOBYTE(a1->unknownData[1]), HIBYTE(a1->unknownData[0]) - LOBYTE(a1->unknownData[1]));
+  CalcTextSize(a1->m_iTextStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)a1->m_iId], &psizl, LOBYTE(a1->m_iUnknown20[1]), HIBYTE(a1->m_iUnknown20[0]) - LOBYTE(a1->m_iUnknown20[1]));
   result = a1;
-  if ( psizl.cx > a1->width - 30 && a2 == 1 )
+  if ( psizl.cx > a1->m_iWidth - 30 && a2 == 1 )
   {
     v9 = 0;
     v6 = 30;
-    while ( psizl.cx > v6 && HIBYTE(a1->unknownData[0]) - v9 > 0 )
+    while ( psizl.cx > v6 && HIBYTE(a1->m_iUnknown20[0]) - v9 > 0 )
     {
       ++v9;
-      psizl.cx -= g_iEditWidthTable[HIBYTE(a1->unknownData[0]) - v9];
+      psizl.cx -= g_iEditWidthTable[HIBYTE(a1->m_iUnknown20[0]) - v9];
     }
     result = a1;
-    LOBYTE(a1->unknownData[1]) += v9;
+    LOBYTE(a1->m_iUnknown20[1]) += v9;
   }
   else if ( psizl.cx >= 30 || a2 )
   {
     if ( a2 == 2 )
     {
       v8 = 0;
-      for ( i = a1->width - 30;
-            i > 0 && HIBYTE(a1->unknownData[0]) - v8 > 0;
-            i -= g_iEditWidthTable[HIBYTE(a1->unknownData[0]) - v8] )
+      for ( i = a1->m_iWidth - 30;
+            i > 0 && HIBYTE(a1->m_iUnknown20[0]) - v8 > 0;
+            i -= g_iEditWidthTable[HIBYTE(a1->m_iUnknown20[0]) - v8] )
       {
         ++v8;
       }
-      v3 = j___mbstrlen((const char *)&g_mbstrTextTable[75 * (char)a1->id]);
-      LOBYTE(a1->unknownData[1]) = v3 - v8;
-      return (struct SGuiControl *)LOBYTE(a1->unknownData[1]);
+      v3 = j___mbstrlen((const char *)&g_mbstrTextTable[75 * (char)a1->m_iId]);
+      LOBYTE(a1->m_iUnknown20[1]) = v3 - v8;
+      return (struct SGuiControl *)LOBYTE(a1->m_iUnknown20[1]);
     }
   }
   else
   {
     v10 = 0;
-    v5 = a1->width - 30;
-    while ( psizl.cx < v5 && LOBYTE(a1->unknownData[1]) - v10 > 0 && HIBYTE(a1->unknownData[0]) - v10 > 0 )
+    v5 = a1->m_iWidth - 30;
+    while ( psizl.cx < v5 && LOBYTE(a1->m_iUnknown20[1]) - v10 > 0 && HIBYTE(a1->m_iUnknown20[0]) - v10 > 0 )
     {
       ++v10;
-      psizl.cx += g_iEditWidthTable[HIBYTE(a1->unknownData[0]) - v10];
+      psizl.cx += g_iEditWidthTable[HIBYTE(a1->m_iUnknown20[0]) - v10];
     }
-    result = (struct SGuiControl *)(LOBYTE(a1->unknownData[1]) - v10);
-    LOBYTE(a1->unknownData[1]) = (_BYTE)result;
+    result = (struct SGuiControl *)(LOBYTE(a1->m_iUnknown20[1]) - v10);
+    LOBYTE(a1->m_iUnknown20[1]) = (_BYTE)result;
   }
   return result;
 }
@@ -55677,94 +55680,94 @@ bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGui
   void *v21; // [esp+48h] [ebp-4D0h]
   _WORD v22[256]; // [esp+314h] [ebp-204h] BYREF
 
-  if ( a5->controlType == 9 )
+  if ( a5->m_iControlType == 9 )
   {
     return 0;
   }
-  v14 = (unsigned __int16 *)sub_2F9E930(a5->unknownId);
+  v14 = (unsigned __int16 *)GuiGetContainer(a5->m_iUnknown1F);
   (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(g_pGfxManager, &v20, v14[5]);
   if ( !v20 || !v21 )
   {
     BBSupportTracePrintF(0, "GUI ENGINE: Background gfx not accessible!");
     return 0;
   }
-  if ( a5->controlType != 7 && a5->controlType != 8 )
+  if ( a5->m_iControlType != 7 && a5->m_iControlType != 8 )
   {
     if ( (v14[7] & 1) != 0 )
     {
       if ( (v14[7] & 2) != 0 )
       {
-        FastRasterSolid(a1, a2, a5->x, a5->y, a5->width, a5->height, 0, 31);
+        FastRasterSolid(a1, a2, a5->m_iX, a5->m_iY, a5->m_iWidth, a5->m_iHeight, 0, 31);
       }
       else
       {
         memcpy(v22, v21, sizeof(v22));
         v22[1] = 31;
         v22[0] = 31;
-        FastBlit8Bit(v20 + 6, v14[3], a5->x, a5->y, a5->width, a5->height, a1, a2, a5->x, a5->y, v22);
+        FastBlit8Bit(v20 + 6, v14[3], a5->m_iX, a5->m_iY, a5->m_iWidth, a5->m_iHeight, a1, a2, a5->m_iX, a5->m_iY, v22);
       }
     }
     else
     {
-      FastBlit8Bit(v20 + 6, v14[3], a5->x, a5->y, a5->width, a5->height, a1, a2, a5->x, a5->y, v21);
+      FastBlit8Bit(v20 + 6, v14[3], a5->m_iX, a5->m_iY, a5->m_iWidth, a5->m_iHeight, a1, a2, a5->m_iX, a5->m_iY, v21);
     }
   }
-  v17 = (a5->effects & 8) != 0;
-  if ( HasImage(a5->controlType) && !v17 )
+  v17 = (a5->m_iEffects & 8) != 0;
+  if ( HasImage(a5->m_iControlType) && !v17 )
   {
-    if ( a5->controlType == 10 )
+    if ( a5->m_iControlType == 10 )
     {
-      v7 = CalcSliderPosition(a5->y + 1, a5->y + a5->height - 1, (char)a5->showTexture, 1);
+      v7 = CalcSliderPosition(a5->m_iY + 1, a5->m_iY + a5->m_iHeight - 1, (char)a5->m_iSliderPosition, 1);
       v15 = 0.0;
-      v6 = 16.0 / (float)(a5->width - 2);
-      if ( (char)a5->showTexture > 0 )
+      v6 = 16.0 / (float)(a5->m_iWidth - 2);
+      if ( (char)a5->m_iSliderPosition > 0 )
       {
-        for ( i = a5->x + 1;
-              i < a5->x + a5->width - 1;
+        for ( i = a5->m_iX + 1;
+              i < a5->m_iX + a5->m_iWidth - 1;
               ++i )
         {
-          FastVLine((unsigned __int16 *)a1, a2, i, v7, a5->y + a5->height - 1, g_uShadeTable2[v15]);
+          FastVLine((unsigned __int16 *)a1, a2, i, v7, a5->m_iY + a5->m_iHeight - 1, g_uShadeTable2[v15]);
           v15 = v15 + v6;
         }
       }
       v16 = 0.0;
-      if ( (char)a5->showTexture < 100 )
+      if ( (char)a5->m_iSliderPosition < 100 )
       {
-        for ( j = a5->x + 1;
-              j < a5->x + a5->width - 1;
+        for ( j = a5->m_iX + 1;
+              j < a5->m_iX + a5->m_iWidth - 1;
               ++j )
         {
-          FastVLine((unsigned __int16 *)a1, a2, j, a5->y + 1, v7, g_uShadeTable1[v16]);
+          FastVLine((unsigned __int16 *)a1, a2, j, a5->m_iY + 1, v7, g_uShadeTable1[v16]);
           v16 = v16 + v6;
         }
       }
-      FastVLine((unsigned __int16 *)a1, a2, a5->x, a5->y, a5->y + a5->height - 1, g_iRightShadeColor);
-      FastVLine((unsigned __int16 *)a1, a2, a5->x + a5->width - 1, a5->y, a5->y + a5->height - 1, g_iLeftShadeColor);
-      FastHLine((unsigned __int16 *)a1, a2, a5->x, a5->y, a5->x + a5->width - 1, g_iRightShadeColor);
-      FastHLine((unsigned __int16 *)a1, a2, a5->x, a5->y + a5->height - 1, a5->x + a5->width - 1, g_iLeftShadeColor);
+      FastVLine((unsigned __int16 *)a1, a2, a5->m_iX, a5->m_iY, a5->m_iY + a5->m_iHeight - 1, g_iRightShadeColor);
+      FastVLine((unsigned __int16 *)a1, a2, a5->m_iX + a5->m_iWidth - 1, a5->m_iY, a5->m_iY + a5->m_iHeight - 1, g_iLeftShadeColor);
+      FastHLine((unsigned __int16 *)a1, a2, a5->m_iX, a5->m_iY, a5->m_iX + a5->m_iWidth - 1, g_iRightShadeColor);
+      FastHLine((unsigned __int16 *)a1, a2, a5->m_iX, a5->m_iY + a5->m_iHeight - 1, a5->m_iX + a5->m_iWidth - 1, g_iLeftShadeColor);
       return 1;
     }
     else
     {
-      if ( (char)a5->showTexture == -10 )
+      if ( (char)a5->m_iSliderPosition == -10 )
       {
-        if ( a5->mainTexture >= 8u )
+        if ( a5->m_iMainTexture >= 8u )
         {
           v20 = 0;
           BBSupportTracePrintF(0, "GUI ENGINE: Wrong gfx index for user logo!");
         }
         else
         {
-          (*(void (__thiscall **)(int, unsigned __int16 **, int, _DWORD))(*(_DWORD *)g_pGfxManager + 4))(g_pGfxManager, &v20, a5->mainTexture + 1, 0);
+          (*(void (__thiscall **)(int, unsigned __int16 **, int, _DWORD))(*(_DWORD *)g_pGfxManager + 4))(g_pGfxManager, &v20, a5->m_iMainTexture + 1, 0);
         }
       }
-      else if ( (a5->effects & 1) != 0 )
+      else if ( (a5->m_iEffects & 1) != 0 )
       {
-        (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(g_pGfxManager, &v20, a5->buttonPressedTexture);
+        (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(g_pGfxManager, &v20, a5->m_iPressedTexture);
       }
       else
       {
-        (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(g_pGfxManager, &v20, a5->mainTexture);
+        (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(g_pGfxManager, &v20, a5->m_iMainTexture);
       }
       v19 = v20;
       if ( !v20 )
@@ -55772,7 +55775,7 @@ bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGui
         BBSupportTracePrintF(0, "GUI ENGINE: No gfx for gui control available!");
         return 0;
       }
-      if ( a5->height + a5->y > a4 || a5->width + a5->x > a3 )
+      if ( a5->m_iHeight + a5->m_iY > a4 || a5->m_iWidth + a5->m_iX > a3 )
       {
         BBSupportTracePrintF(0, "GUI ENGINE: Control exceeds container surface!");
         return 0;
@@ -55785,108 +55788,108 @@ bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGui
           return 0;
         }
         v18 = IGfxEngine::GetGfxMode((IGfxEngine *)g_pGfxEngine) == 1;
-        if ( *v19 != a5->width || v19[1] != a5->height )
+        if ( *v19 != a5->m_iWidth || v19[1] != a5->m_iHeight )
         {
-          BBSupportTracePrintF(0, "GUI ENGINE: Control size mismatch or illegal gfx data! ID: %d ", a5->valueLink);
+          BBSupportTracePrintF(0, "GUI ENGINE: Control size mismatch or illegal gfx data! ID: %d ", a5->m_iValueLink);
           return 0;
         }
-        if ( (a5->effects & 2) != 0 )
+        if ( (a5->m_iEffects & 2) != 0 )
         {
           if ( v18 )
           {
-            UnpackGfxTransparentHiLight555(v21, v19 + 6, &a1[2 * a5->x + a2 * a5->y], a2, *v19, v19[1]);
+            UnpackGfxTransparentHiLight555(v21, v19 + 6, &a1[2 * a5->m_iX + a2 * a5->m_iY], a2, *v19, v19[1]);
           }
           else
           {
-            UnpackGfxTransparentHiLight565(v21, v19 + 6, &a1[2 * a5->x + a2 * a5->y], a2, *v19, v19[1]);
+            UnpackGfxTransparentHiLight565(v21, v19 + 6, &a1[2 * a5->m_iX + a2 * a5->m_iY], a2, *v19, v19[1]);
           }
         }
-        else if ( (a5->effects & 4) != 0 )
+        else if ( (a5->m_iEffects & 4) != 0 )
         {
           if ( v18 )
           {
-            UnpackGfxTransparentGrayed555(v21, v19 + 6, &a1[2 * a5->x + a2 * a5->y], a2, *v19, v19[1]);
+            UnpackGfxTransparentGrayed555(v21, v19 + 6, &a1[2 * a5->m_iX + a2 * a5->m_iY], a2, *v19, v19[1]);
           }
           else
           {
-            UnpackGfxTransparentGrayed565(v21, v19 + 6, &a1[2 * a5->x + a2 * a5->y], a2, *v19, v19[1]);
+            UnpackGfxTransparentGrayed565(v21, v19 + 6, &a1[2 * a5->m_iX + a2 * a5->m_iY], a2, *v19, v19[1]);
           }
         }
         else
         {
-          UnpackGfxTransparent(v21, v19 + 6, &a1[2 * a5->x + a2 * a5->y], a2, *v19, v19[1]);
+          UnpackGfxTransparent(v21, v19 + 6, &a1[2 * a5->m_iX + a2 * a5->m_iY], a2, *v19, v19[1]);
         }
       }
-      if ( (a5->effects & 0xC0) != 0xC0 )
+      if ( (a5->m_iEffects & 0xC0) != 0xC0 )
       {
         return 1;
       }
       v8 = 0;
-      for ( k = LOBYTE(a5->unknownData[1]);
-            k < HIBYTE(a5->unknownData[0]);
+      for ( k = LOBYTE(a5->m_iUnknown20[1]);
+            k < HIBYTE(a5->m_iUnknown20[0]);
             ++k )
       {
         v8 += g_iEditWidthTable[k];
       }
-      FastVLine((unsigned __int16 *)&a1[2 * a5->x + a2 * a5->y], a2, v8 + 2, 0, a5->height - 1, 0xFFFFu);
+      FastVLine((unsigned __int16 *)&a1[2 * a5->m_iX + a2 * a5->m_iY], a2, v8 + 2, 0, a5->m_iHeight - 1, 0xFFFFu);
       return 1;
     }
   }
   else
   {
-    if ( (a5->effects & 0xC0) != 0xC0 )
+    if ( (a5->m_iEffects & 0xC0) != 0xC0 )
     {
       return 1;
     }
     v9 = 0;
-    for ( m = LOBYTE(a5->unknownData[1]);
-          m < HIBYTE(a5->unknownData[0]);
+    for ( m = LOBYTE(a5->m_iUnknown20[1]);
+          m < HIBYTE(a5->m_iUnknown20[0]);
           ++m )
     {
       v9 += g_iEditWidthTable[m];
     }
-    FastVLine((unsigned __int16 *)&a1[2 * a5->x + a2 * a5->y], a2, v9 + 2, 0, a5->height - 1, 0xFFFFu);
+    FastVLine((unsigned __int16 *)&a1[2 * a5->m_iX + a2 * a5->m_iY], a2, v9 + 2, 0, a5->m_iHeight - 1, 0xFFFFu);
     return 1;
   }
 }
 
 
 // address=[0x2f9cb10]
-// Decompiled from char __cdecl DrawControlText(HDC hdc, unsigned __int16 *a2)
+// Decompiled from char __cdecl DrawControlText(HDC hdc, struct SGuiControl *a2)
 bool __cdecl DrawControlText(struct HDC__ * hdc, struct SGuiControl * a2) {
   
   size_t v3; // eax
   HGDIOBJ h; // [esp+0h] [ebp-B4h]
-  size_t cchText; // [esp+10h] [ebp-A4h]
+  size_t iTextLength; // [esp+10h] [ebp-A4h]
   LPCSTR lpchText; // [esp+18h] [ebp-9Ch]
-  unsigned int v7; // [esp+1Ch] [ebp-98h]
+  unsigned int iTextStyle; // [esp+1Ch] [ebp-98h]
   struct tagRECT rc; // [esp+20h] [ebp-94h] BYREF
   char Destination[128]; // [esp+30h] [ebp-84h] BYREF
 
-  if ( (*((_BYTE *)a2 + 27) & 8) != 0 )
+  if ( (a2->m_iEffects & 8) != 0 )
   {
     return 0;
   }
-  lpchText = (LPCSTR)&g_mbstrTextTable[75 * *((char *)a2 + 25)];
-  switch ( *((_BYTE *)a2 + 24) )
+  lpchText = (LPCSTR)&g_mbstrTextTable[75 * (char)a2->m_iId];
+  switch ( a2->m_iControlType )
   {
-    case 0xE:
+    case 0xEu:
       lpchText = CToolTip::GetTooltipStringPtr((CToolTip *)&g_cToolTip);
       break;
-    case 0xF:
-      lpchText = CToolTip::GetTooltipStringPtr((CToolTip *)&g_cToolTipExt);
+    case 0xFu:
+      lpchText = CToolTip::GetTooltipStringPtr((CToolTip *)g_cToolTipExt);
       break;
-    case 0x15:
-      if ( !*((_DWORD *)a2 + 4) )
+    case 0x15u:
+      if ( !a2->m_iTextOffset )
       {
         return 0;
       }
-      lpchText = (LPCSTR)*((_DWORD *)a2 + 4);
+      lpchText = (LPCSTR)a2->m_iTextOffset;
       break;
-    case 5:
-    case 0x14:
-      lpchText = (LPCSTR)j___mbsninc((const unsigned __int8 *)lpchText, *((unsigned __int8 *)a2 + 34));
-      if ( (*((_BYTE *)a2 + 13) & 0x80) != 0 )
+    case 5u:
+    case 0x14u:
+      lpchText = (LPCSTR)j___mbsninc((const unsigned __int8 *)lpchText, a2->m_iUnknown22);
+      if ( (a2->unknown & 0x8000u) != 0 )
       {
         j__strcpy(Destination, lpchText);
         v3 = j___mbstrlen(Destination);
@@ -55894,61 +55897,61 @@ bool __cdecl DrawControlText(struct HDC__ * hdc, struct SGuiControl * a2) {
       }
       break;
     default:
-      if ( *((char *)a2 + 25) < 0 )
+      if ( (a2->m_iId & 0x80u) != 0 )
       {
         return 0;
       }
-      if ( !LOBYTE(g_mbstrTextTable[75 * *((char *)a2 + 25)]) || !g_bUsedTexts[*((char *)a2 + 25)] )
+      if ( !LOBYTE(g_mbstrTextTable[75 * (char)a2->m_iId]) || !g_bUsedTexts[(char)a2->m_iId] )
       {
         return 0;
       }
       break;
   }
-  cchText = j___mbstrlen(lpchText);
-  v7 = *((unsigned __int8 *)a2 + 26);
-  if ( v7 >= 0x13 )
+  iTextLength = j___mbstrlen(lpchText);
+  iTextStyle = a2->m_iTextStyle;
+  if ( iTextStyle >= 0x13 )
   {
-    v7 = 0;
+    iTextStyle = 0;
   }
-  h = SelectObject(hdc, g_hFonts[v7]);
-  rc.left = *a2;
-  rc.top = *((char *)a2 + 30) + a2[1];
-  rc.right = a2[2] + *a2;
-  rc.bottom = *((char *)a2 + 30) + a2[3] + a2[1];
-  if ( *((_BYTE *)a2 + 24) != 14 )
+  h = SelectObject(hdc, g_hFonts[iTextStyle]);
+  rc.left = a2->m_iX;
+  rc.top = (char)a2->m_iSliderPosition + a2->m_iY;
+  rc.right = a2->m_iWidth + a2->m_iX;
+  rc.bottom = (char)a2->m_iSliderPosition + a2->m_iHeight + a2->m_iY;
+  if ( a2->m_iControlType != 14 )
   {
     rc.left += 2;
     rc.right -= 2;
   }
-  if ( (*((_BYTE *)a2 + 27) & 1) != 0 )
+  if ( (a2->m_iEffects & 1) != 0 )
   {
-    rc.left += dword_3AD1A20[21 * v7];
-    rc.top += dword_3AD1A24[21 * v7];
-    rc.right += dword_3AD1A20[21 * v7];
-    rc.bottom += dword_3AD1A24[21 * v7];
+    rc.left += dword_3AD1A20[21 * iTextStyle];
+    rc.top += dword_3AD1A24[21 * iTextStyle];
+    rc.right += dword_3AD1A20[21 * iTextStyle];
+    rc.bottom += dword_3AD1A24[21 * iTextStyle];
   }
-  if ( byte_3AD1A29[84 * v7] )
+  if ( byte_3AD1A29[84 * iTextStyle] )
   {
-    rc.left += dword_3AD1A18[21 * v7];
-    rc.top += dword_3AD1A1C[21 * v7];
-    rc.right += dword_3AD1A18[21 * v7];
-    rc.bottom += dword_3AD1A1C[21 * v7];
+    rc.left += dword_3AD1A18[21 * iTextStyle];
+    rc.top += dword_3AD1A1C[21 * iTextStyle];
+    rc.right += dword_3AD1A18[21 * iTextStyle];
+    rc.bottom += dword_3AD1A1C[21 * iTextStyle];
     SetTextColor(hdc, 0);
-    DrawTextA(hdc, lpchText, cchText, &rc, dword_3AD19C8[2 * *((unsigned __int8 *)a2 + 32) + g_iAlignMode]);
-    rc.left -= dword_3AD1A18[21 * v7];
-    rc.top -= dword_3AD1A1C[21 * v7];
-    rc.right -= dword_3AD1A18[21 * v7];
-    rc.bottom -= dword_3AD1A1C[21 * v7];
+    DrawTextA(hdc, lpchText, iTextLength, &rc, dword_3AD19C8[2 * a2->m_iUnknown20 + g_iAlignMode]);
+    rc.left -= dword_3AD1A18[21 * iTextStyle];
+    rc.top -= dword_3AD1A1C[21 * iTextStyle];
+    rc.right -= dword_3AD1A18[21 * iTextStyle];
+    rc.bottom -= dword_3AD1A1C[21 * iTextStyle];
   }
-  if ( (*((_BYTE *)a2 + 27) & 4) != 0 )
+  if ( (a2->m_iEffects & 4) != 0 )
   {
-    SetTextColor(hdc, (int)(float)((float)(unsigned __int8)*(&off_3AD1A14 + 21 * v7) * 0.60000002) + ((int)(float)((float)((int)((unsigned int)&dword_F29144[203695] & (unsigned int)*(&off_3AD1A14 + 21 * v7)) >> 16) * 0.60000002) << 16) + ((int)(float)((float)((int)((unsigned int)*(&off_3AD1A14 + 21 * v7) & 0xFF00) >> 8) * 0.60000002) << 8));
+    SetTextColor(hdc, (int)(float)((float)(unsigned __int8)*(&off_3AD1A14 + 21 * iTextStyle) * 0.60000002) + ((int)(float)((float)((int)((unsigned int)&dword_F29144[203695] & (unsigned int)*(&off_3AD1A14 + 21 * iTextStyle)) >> 16) * 0.60000002) << 16) + ((int)(float)((float)((int)((unsigned int)*(&off_3AD1A14 + 21 * iTextStyle) & 0xFF00) >> 8) * 0.60000002) << 8));
   }
   else
   {
-    SetTextColor(hdc, (COLORREF)*(&off_3AD1A14 + 21 * v7));
+    SetTextColor(hdc, (COLORREF)*(&off_3AD1A14 + 21 * iTextStyle));
   }
-  DrawTextA(hdc, lpchText, cchText, &rc, dword_3AD19C8[2 * *((unsigned __int8 *)a2 + 32) + g_iAlignMode]);
+  DrawTextA(hdc, lpchText, iTextLength, &rc, dword_3AD19C8[2 * a2->m_iUnknown20 + g_iAlignMode]);
   SelectObject(hdc, h);
   return 1;
 }
@@ -55963,31 +55966,31 @@ bool __cdecl SetControlState(struct SGuiControl * a1, int a2, bool a3) {
   int v6; // [esp-8h] [ebp-10h]
   int v7; // [esp-8h] [ebp-10h]
 
-  if ( ((unsigned __int8)a2 & a1->effects) != 0 && a3 || ((unsigned __int8)a2 & a1->effects) == 0 && !a3 )
+  if ( ((unsigned __int8)a2 & a1->m_iEffects) != 0 && a3 || ((unsigned __int8)a2 & a1->m_iEffects) == 0 && !a3 )
   {
     return 0;
   }
-  if ( a2 == 2 && !CanHilightControl(a1->controlType) )
+  if ( a2 == 2 && !CanHilightControl(a1->m_iControlType) )
   {
     return 0;
   }
   if ( a3 )
   {
-    a1->effects |= a2;
+    a1->m_iEffects |= a2;
   }
   else
   {
-    a1->effects &= ~(_BYTE)a2;
+    a1->m_iEffects &= ~(_BYTE)a2;
   }
   g_bGuiIsDirty = 1;
-  HIBYTE(a1->unknownData[1]) = 1;
-  if ( a2 == 64 && LOBYTE(a1->unknownData[1]) )
+  a1->m_iUnknown23 = 1;
+  if ( a2 == 64 && a1->m_iUnknown22 )
   {
-    LOBYTE(a1->unknownData[1]) = 0;
+    a1->m_iUnknown22 = 0;
   }
   if ( a2 == 2 )
   {
-    v6 = (a1->effects << 16) + a1->valueLink;
+    v6 = (a1->m_iEffects << 16) + a1->m_iValueLink;
     SurfaceID = GetSurfaceID(a1);
     if ( a3 )
     {
@@ -56000,7 +56003,7 @@ bool __cdecl SetControlState(struct SGuiControl * a1, int a2, bool a3) {
   }
   else if ( a2 != 128 && a2 != 4 )
   {
-    v7 = (a1->effects << 16) + a1->valueLink;
+    v7 = (a1->m_iEffects << 16) + a1->m_iValueLink;
     v5 = GetSurfaceID(a1);
     ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v5])(1, v7, 0);
   }
@@ -56024,8 +56027,8 @@ void __cdecl ChangeMultisliders(struct SGuiControl * a1, int a2) {
   int v11; // [esp+18h] [ebp-8h]
   char v12; // [esp+1Fh] [ebp-1h]
 
-  v8 = sub_2F9E930(a1->unknownId);
-  unknown4_low = LOBYTE(a1->unknown4);
+  v8 = GuiGetContainer(a1->m_iUnknown1F);
+  unknown4_low = LOBYTE(a1->m_iShowTexture);
   v10 = 1;
   if ( a2 < 0 )
   {
@@ -56118,7 +56121,7 @@ void __cdecl EnsureMultisliders(struct SGuiControl * a1) {
   int v8; // [esp+14h] [ebp-Ch]
   int v9; // [esp+18h] [ebp-8h]
 
-  v8 = sub_2F9E930(a1->unknownId);
+  v8 = GuiGetContainer(a1->m_iUnknown1F);
   v9 = v8 + 16;
   v6 = 0;
   for ( i = 0;
@@ -56127,7 +56130,7 @@ void __cdecl EnsureMultisliders(struct SGuiControl * a1) {
   {
     if ( *(_BYTE *)(v9 + 24) == 8 )
     {
-      if ( *(unsigned __int8 *)(v9 + 28) == LOBYTE(a1->unknown4) )
+      if ( *(unsigned __int8 *)(v9 + 28) == LOBYTE(a1->m_iShowTexture) )
       {
         if ( (struct SGuiControl *)v9 == a1 )
         {
@@ -56153,28 +56156,28 @@ void __cdecl EnsureMultisliders(struct SGuiControl * a1) {
     }
   }
   result = (int)a1;
-  v2 = v6 + (char)a1->showTexture;
+  v2 = v6 + (char)a1->m_iSliderPosition;
   if ( v2 == 100 )
   {
     return result;
   }
-  a1->showTexture += 100 - v2;
-  if ( (a1->showTexture & 0x80u) != 0 )
+  a1->m_iSliderPosition += 100 - v2;
+  if ( (a1->m_iSliderPosition & 0x80u) != 0 )
   {
-    a1->showTexture = 0;
+    a1->m_iSliderPosition = 0;
   }
-  if ( (char)a1->showTexture > 100 )
+  if ( (char)a1->m_iSliderPosition > 100 )
   {
-    a1->showTexture = 100;
+    a1->m_iSliderPosition = 100;
   }
-  a1->x = CalcSliderPosition(a1[-1].width, a1[-1].mainTexture + a1[-1].width - a1->width, (char)a1->showTexture, 0);
+  a1->m_iX = CalcSliderPosition(a1[-1].m_iWidth, a1[-1].m_iMainTexture + a1[-1].m_iWidth - a1->m_iWidth, (char)a1->m_iSliderPosition, 0);
   result = GetSurfaceID(a1);
   if ( !g_pfDialogCallbacks[result] )
   {
     return result;
   }
-  showTexture = (char)a1->showTexture;
-  v4 = (a1->effects << 16) + a1->valueLink;
+  showTexture = (char)a1->m_iSliderPosition;
+  v4 = (a1->m_iEffects << 16) + a1->m_iValueLink;
   SurfaceID = GetSurfaceID(a1);
   return ((int (__cdecl *)(int, int, int))g_pfDialogCallbacks[SurfaceID])(2, v4, showTexture);
 }
@@ -56190,8 +56193,8 @@ bool __cdecl CanLockMultislider(struct SGuiControl * a1) {
   int v5; // [esp+18h] [ebp-8h]
   _BYTE *v6; // [esp+1Ch] [ebp-4h]
 
-  v5 = sub_2F9E930(a1->unknownId);
-  if ( (a1->effects & 1) != 0 )
+  v5 = GuiGetContainer(a1->m_iUnknown1F);
+  if ( (a1->m_iEffects & 1) != 0 )
   {
     return 0;
   }
@@ -56204,7 +56207,7 @@ bool __cdecl CanLockMultislider(struct SGuiControl * a1) {
   {
     if ( v6[24] == 8 )
     {
-      if ( v6[28] == LOBYTE(a1->unknown4) )
+      if ( v6[28] == LOBYTE(a1->m_iShowTexture) )
       {
         if ( (v6[27] & 0xD) != 0 )
         {
@@ -56237,9 +56240,9 @@ void __cdecl StoreMultisliderSettings(struct SGuiControl * a1) {
   int i; // [esp+8h] [ebp-8h]
   _BYTE *v5; // [esp+Ch] [ebp-4h]
 
-  v3 = sub_2F9E930(a1->unknownId);
+  v3 = GuiGetContainer(a1->m_iUnknown1F);
   v5 = (_BYTE *)(v3 + 16);
-  unknown4_low = LOBYTE(a1->unknown4);
+  unknown4_low = LOBYTE(a1->m_iShowTexture);
   for ( i = 0;
         ;
         ++i )
@@ -56284,9 +56287,9 @@ void __cdecl RestoreMultisliderSettings(struct SGuiControl * a1) {
   unsigned __int16 *v5; // [esp+Ch] [ebp-8h]
   int v6; // [esp+10h] [ebp-4h]
 
-  v3 = sub_2F9E930(a1->unknownId);
+  v3 = GuiGetContainer(a1->m_iUnknown1F);
   v6 = v3 + 16;
-  unknown4_low = LOBYTE(a1->unknown4);
+  unknown4_low = LOBYTE(a1->m_iShowTexture);
   for ( i = 0;
         ;
         ++i )
@@ -56349,15 +56352,15 @@ bool __cdecl SelectRadioGroup(struct SGuiControl * a1) {
   int v8; // [esp+8h] [ebp-8h]
   char v9; // [esp+Fh] [ebp-1h]
 
-  if ( (a1->effects & 1) != 0 )
+  if ( (a1->m_iEffects & 1) != 0 )
   {
-    if ( a1->controlType == 2 )
+    if ( a1->m_iControlType == 2 )
     {
       return 0;
     }
     else
     {
-      v4 = ((a1->effects & 0xFE) << 16) + a1->valueLink;
+      v4 = ((a1->m_iEffects & 0xFE) << 16) + a1->m_iValueLink;
       SurfaceID = GetSurfaceID(a1);
       ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[SurfaceID])(3, v4, 0);
       return SetControlState(a1, 1, 0);
@@ -56365,7 +56368,7 @@ bool __cdecl SelectRadioGroup(struct SGuiControl * a1) {
   }
   else
   {
-    v6 = sub_2F9E930(a1->unknownId);
+    v6 = GuiGetContainer(a1->m_iUnknown1F);
     v8 = v6 + 16;
     for ( i = 0;
           i < *(unsigned __int16 *)(v6 + 12);
@@ -56373,7 +56376,7 @@ bool __cdecl SelectRadioGroup(struct SGuiControl * a1) {
     {
       if ( *(_BYTE *)(v8 + 24) == 3 || *(_BYTE *)(v8 + 24) == 2 )
       {
-        if ( (*(_BYTE *)(v8 + 27) & 1) != 0 && *(unsigned __int8 *)(v8 + 28) == LOBYTE(a1->unknown4) && a1 != (struct SGuiControl *)v8 )
+        if ( (*(_BYTE *)(v8 + 27) & 1) != 0 && *(unsigned __int8 *)(v8 + 28) == LOBYTE(a1->m_iShowTexture) && a1 != (struct SGuiControl *)v8 )
         {
           SetControlState((struct SGuiControl *)v8, 1, 0);
         }
@@ -56385,7 +56388,7 @@ bool __cdecl SelectRadioGroup(struct SGuiControl * a1) {
       }
     }
     v9 = SetControlState(a1, 1, 1);
-    v5 = ((a1->effects | 1) << 16) + a1->valueLink;
+    v5 = ((a1->m_iEffects | 1) << 16) + a1->m_iValueLink;
     v3 = GetSurfaceID(a1);
     ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[v3])(3, v5, 0);
     return v9;
@@ -56415,7 +56418,7 @@ bool __cdecl FindControlUnderCursor(int a1, int a2, struct SGuiControl * & a3, i
   {
     if ( g_iOpenDialogs[i] )
     {
-      v8 = (unsigned __int16 *)sub_2F9E930(g_iOpenDialogs[i] - 1);
+      v8 = (unsigned __int16 *)GuiGetContainer(g_iOpenDialogs[i] - 1);
       if ( a1 >= v8[1] && a2 >= v8[2] && a1 <= v8[3] + v8[1] && a2 <= v8[4] + v8[2] )
       {
         v9 = v8 + 8;
@@ -56481,7 +56484,7 @@ bool __cdecl FindDialogUnderCursor(int a1, int a2, struct GUI_MENU_DIALOG_HEADER
   {
     if ( g_iOpenDialogs[i] )
     {
-      v5 = sub_2F9E930(g_iOpenDialogs[i] - 1);
+      v5 = GuiGetContainer(g_iOpenDialogs[i] - 1);
       if ( a1 >= *(unsigned __int16 *)(v5 + 2) && a2 >= *(unsigned __int16 *)(v5 + 4) && a1 <= *(unsigned __int16 *)(v5 + 6) + *(unsigned __int16 *)(v5 + 2) && a2 <= *(unsigned __int16 *)(v5 + 8) + *(unsigned __int16 *)(v5 + 4) )
       {
         *a3 = (struct GUI_MENU_DIALOG_HEADER *)v5;
@@ -56497,28 +56500,28 @@ bool __cdecl FindDialogUnderCursor(int a1, int a2, struct GUI_MENU_DIALOG_HEADER
 // Decompiled from char __cdecl UpdateGui(int surfaceToDraw)
 void __cdecl UpdateGui(int surfaceToDraw) {
   
-  unsigned __int16 *v1; // eax
-  struct SGuiControl *v3; // [esp+0h] [ebp-4FCh]
+  bool v1; // al
+  struct SGuiControl *pControlsStart; // [esp+0h] [ebp-4FCh]
   HDC hdc; // [esp+4h] [ebp-4F8h] BYREF
   unsigned int v5; // [esp+8h] [ebp-4F4h] BYREF
   int j; // [esp+Ch] [ebp-4F0h]
   unsigned int i; // [esp+10h] [ebp-4ECh]
-  unsigned __int16 *v8; // [esp+14h] [ebp-4E8h]
-  unsigned __int16 *v9; // [esp+18h] [ebp-4E4h]
-  struct SGuiControl *v10; // [esp+1Ch] [ebp-4E0h]
-  unsigned __int16 *v11; // [esp+20h] [ebp-4DCh]
+  void *v8; // [esp+14h] [ebp-4E8h]
+  SGfxObjectInfo *v9; // [esp+18h] [ebp-4E4h]
+  struct SGuiControl *pControls; // [esp+1Ch] [ebp-4E0h]
+  GUI_MENU_DIALOG_HEADER *pDialog; // [esp+20h] [ebp-4DCh]
   char v12; // [esp+27h] [ebp-4D5h]
-  unsigned __int16 *v13; // [esp+28h] [ebp-4D4h] BYREF
+  SGfxObjectInfo *v13; // [esp+28h] [ebp-4D4h] BYREF
   void *Src; // [esp+2Ch] [ebp-4D0h]
   _WORD v15[256]; // [esp+2F8h] [ebp-204h] BYREF
 
   g_bGuiIsDirty = 1;
-  if ( surfaceToDraw == -1 && (LOBYTE(v1) = g_bGuiIsDirty) == 0 )
+  if ( surfaceToDraw == -1 && !(v1 = g_bGuiIsDirty) )
   {
-    return (char)v1;
+    return v1;
   }
-  LOBYTE(v1) = sub_2F9E8F0();
-  if ( (_BYTE)v1 )
+  v1 = IsGuiEngineReady();
+  if ( v1 )
   {
     for ( i = 0;
           ;
@@ -56527,120 +56530,117 @@ void __cdecl UpdateGui(int surfaceToDraw) {
       if ( i >= 0xE )
       {
         g_bGuiIsDirty = 0;
-        return (char)v1;
+        return v1;
       }
-      LOBYTE(v1) = i;
+      v1 = i;
       if ( !g_iOpenDialogs[i] )
       {
         continue;
       }
-      v11 = (unsigned __int16 *)sub_2F9E930(g_iOpenDialogs[i] - 1);
-      v10 = (struct SGuiControl *)(v11 + 8);
-      v3 = (struct SGuiControl *)(v11 + 8);
+      pDialog = GuiGetContainer(g_iOpenDialogs[i] - 1);
+      pControls = pDialog->m_sControls;
+      pControlsStart = pDialog->m_sControls;
       v12 = 0;
       if ( surfaceToDraw == i )
       {
-        IGfxEngine::SolidColorFillGuiSurface((IGfxEngine *)g_pGfxEngine, *v11, 0, 0, 0xFFu);
-        if ( (v11[7] & 2) != 0 )
+        IGfxEngine::SolidColorFillGuiSurface(g_pGfxEngine, pDialog->m_iSurfaceType, 0, 0, 0xFFu);
+        if ( (pDialog->m_iTransparency & 2) != 0 )
         {
-          v1 = IGfxEngine::BeginWriteToSurface((IGfxEngine *)g_pGfxEngine, *v11, &v5);
-          v8 = v1;
-          if ( !v1 )
+          *(_DWORD *)&v1 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, pDialog->m_iSurfaceType, &v5);
+          v8 = *(void **)&v1;
+          if ( !*(_DWORD *)&v1 )
           {
-            return (char)v1;
+            return v1;
           }
           v12 = 1;
-          FastRaster(v8, v5, 0, 0, v11[3], v11[4], 0);
+          FastRaster(v8, v5, 0, 0, pDialog->m_iWidth, pDialog->m_iHeight, 0);
         }
         else
         {
-          (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(g_pGfxManager, &v13, v11[5]);
+          g_pGfxManager->GetGuiGfxInfo(&v13, pDialog->m_iMainTexture);
           v9 = v13;
           if ( !v13 )
           {
-            LOBYTE(v1) = BBSupportTracePrintF(0, "GUI ENGINE: Can't get source data from gfx manager.");
-            return (char)v1;
+            return BBSupportTracePrintF(0, "GUI ENGINE: Can't get source data from gfx manager.");
           }
-          if ( v11[3] > (int)*v9 || v11[4] > (int)v9[1] )
+          if ( pDialog->m_iWidth > (int)LOWORD(v9->m_pGfxData) || pDialog->m_iHeight > (int)HIWORD(v9->m_pGfxData) )
           {
-            LOBYTE(v1) = BBSupportTracePrintF(0, "GUI ENGINE: Background gfx is greater than the dialog!");
-            return (char)v1;
+            return BBSupportTracePrintF(0, "GUI ENGINE: Background gfx is greater than the dialog!");
           }
-          if ( (v9[4] & 0x20) == 0 )
+          if ( (v9->m_iU8 & 0x20) == 0 )
           {
-            LOBYTE(v1) = BBSupportTracePrintF(0, "GUI ENGINE: Dialog is packed. Illegal data!");
-            return (char)v1;
+            return BBSupportTracePrintF(0, "GUI ENGINE: Dialog is packed. Illegal data!");
           }
-          v1 = IGfxEngine::BeginWriteToSurface((IGfxEngine *)g_pGfxEngine, *v11, &v5);
-          v8 = v1;
-          if ( !v1 )
+          *(_DWORD *)&v1 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, pDialog->m_iSurfaceType, &v5);
+          v8 = *(void **)&v1;
+          if ( !*(_DWORD *)&v1 )
           {
-            return (char)v1;
+            return v1;
           }
           v12 = 1;
-          if ( (v11[7] & 1) != 0 )
+          if ( (pDialog->m_iTransparency & 1) != 0 )
           {
             memcpy(v15, Src, sizeof(v15));
             v15[1] = 31;
             v15[0] = 31;
-            FastBlit8Bit(v13 + 6, *v9, 0, 0, *v9, v9[1], v8, v5, 0, 0, v15);
+            FastBlit8Bit((char *)&v13->m_pPatchGfxData, LOWORD(v9->m_pGfxData), 0, 0, LOWORD(v9->m_pGfxData), HIWORD(v9->m_pGfxData), (char *)v8, v5, 0, 0, v15);
           }
           else
           {
-            FastBlit8Bit(v13 + 6, *v9, 0, 0, *v9, v9[1], v8, v5, 0, 0, Src);
+            FastBlit8Bit((char *)&v13->m_pPatchGfxData, LOWORD(v9->m_pGfxData), 0, 0, LOWORD(v9->m_pGfxData), HIWORD(v9->m_pGfxData), (char *)v8, v5, 0, 0, Src);
           }
         }
       }
       for ( j = 0;
-            j < v11[6];
+            j < pDialog->m_iElementCount;
             ++j )
       {
         if ( surfaceToDraw == i )
         {
-          v10->effects &= ~2u;
-          HIBYTE(v10->unknownData[1]) = 1;
+          pControls->m_iEffects &= ~2u;
+          pControls->m_iUnknown23 = 1;
         }
-        if ( HIBYTE(v10->unknownData[1]) )
+        if ( pControls->m_iUnknown23 )
         {
           if ( !v12 )
           {
-            v1 = IGfxEngine::BeginWriteToSurface((IGfxEngine *)g_pGfxEngine, *v11, &v5);
-            v8 = v1;
-            if ( !v1 )
+            *(_DWORD *)&v1 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, pDialog->m_iSurfaceType, &v5);
+            v8 = *(void **)&v1;
+            if ( !*(_DWORD *)&v1 )
             {
-              return (char)v1;
+              return v1;
             }
             v12 = 1;
           }
-          DrawControl((char *)v8, v5, v11[3], v11[4], v10);
-          if ( !IsTextControl(v10->controlType) )
+          DrawControl((char *)v8, v5, pDialog->m_iWidth, pDialog->m_iHeight, pControls);
+          if ( !IsTextControl(pControls->m_iControlType) )
           {
-            HIBYTE(v10->unknownData[1]) = 0;
+            pControls->m_iUnknown23 = 0;
           }
         }
-        v10 = (struct SGuiControl *)((char *)v10 + 36);
+        ++pControls;
       }
       if ( v12 )
       {
-        IGfxEngine::EndWriteToSurface((IGfxEngine *)g_pGfxEngine, *v11);
+        IGfxEngine::EndWriteToSurface(g_pGfxEngine, pDialog->m_iSurfaceType);
         v12 = 0;
       }
-      v10 = v3;
+      pControls = pControlsStart;
       hdc = 0;
       for ( j = 0;
             ;
             ++j )
       {
-        LOBYTE(v1) = (_BYTE)v11;
-        if ( j >= v11[6] )
+        v1 = (char)pDialog;
+        if ( j >= pDialog->m_iElementCount )
         {
           break;
         }
-        if ( HIBYTE(v10->unknownData[1]) && IsTextControl(v10->controlType) )
+        if ( pControls->m_iUnknown23 && IsTextControl(pControls->m_iControlType) )
         {
           if ( !v12 )
           {
-            if ( !IGfxEngine::GetGuiSurfaceDC((IGfxEngine *)g_pGfxEngine, *v11, &hdc) )
+            if ( !IGfxEngine::GetGuiSurfaceDC(g_pGfxEngine, pDialog->m_iSurfaceType, &hdc) )
             {
               BBSupportTracePrintF(0, "GUI ENGINE: Can't get text DC.");
               continue;
@@ -56648,19 +56648,19 @@ void __cdecl UpdateGui(int surfaceToDraw) {
             SetBkMode(hdc, 1);
             v12 = 1;
           }
-          DrawControlText(hdc, (int)v10);
-          HIBYTE(v10->unknownData[1]) = 0;
+          DrawControlText(hdc, (int)pControls);
+          pControls->m_iUnknown23 = 0;
         }
-        v10 = (struct SGuiControl *)((char *)v10 + 36);
+        ++pControls;
       }
       if ( v12 )
       {
-        LOBYTE(v1) = IGfxEngine::ReleaseGuiSurfaceDC((IGfxEngine *)g_pGfxEngine, *v11, hdc);
+        v1 = IGfxEngine::ReleaseGuiSurfaceDC(g_pGfxEngine, pDialog->m_iSurfaceType, hdc);
         v12 = 0;
       }
     }
   }
-  return (char)v1;
+  return v1;
 }
 
 
@@ -56733,12 +56733,12 @@ bool __cdecl SelectEditControl(struct SGuiControl * a1, int a2) {
   int v9; // [esp+14h] [ebp-8h]
 
   CalcCharWidths((signed int)a1);
-  v4 = sub_2F9E930(a1->unknownId);
-  v8 = a1->x + *(unsigned __int16 *)(v4 + 2) + 2;
-  String = (char *)j___mbsninc((const unsigned __int8 *)&g_mbstrTextTable[75 * (char)a1->id], LOBYTE(a1->unknownData[1]));
+  v4 = GuiGetContainer(a1->m_iUnknown1F);
+  v8 = a1->m_iX + *(unsigned __int16 *)(v4 + 2) + 2;
+  String = (char *)j___mbsninc((const unsigned __int8 *)&g_mbstrTextTable[75 * (char)a1->m_iId], LOBYTE(a1->m_iUnknown20[1]));
   v7 = j___mbstrlen(String);
-  HIBYTE(a1->unknownData[0]) = a1->unknownData[1];
-  for ( i = HIBYTE(a1->unknownData[0]);
+  HIBYTE(a1->m_iUnknown20[0]) = a1->m_iUnknown20[1];
+  for ( i = HIBYTE(a1->m_iUnknown20[0]);
         ;
         ++i )
   {
@@ -56747,23 +56747,23 @@ bool __cdecl SelectEditControl(struct SGuiControl * a1, int a2) {
     {
       break;
     }
-    ++HIBYTE(a1->unknownData[0]);
+    ++HIBYTE(a1->m_iUnknown20[0]);
     v8 += g_iEditWidthTable[i];
   }
-  if ( HIBYTE(a1->unknownData[0]) && a2 < v8 - dword_471F81C[HIBYTE(a1->unknownData[0])] / 2 )
+  if ( HIBYTE(a1->m_iUnknown20[0]) && a2 < v8 - dword_471F81C[HIBYTE(a1->m_iUnknown20[0])] / 2 )
   {
-    --HIBYTE(a1->unknownData[0]);
+    --HIBYTE(a1->m_iUnknown20[0]);
   }
   SetControlState(a1, 64, 1);
   dword_3E2F124 = 3;
   SetControlState(a1, 128, 1);
-  HIBYTE(a1->unknownData[1]) = 1;
-  v9 = a1->x + *(unsigned __int16 *)(v4 + 2) + 2;
-  if ( a2 < a1->x + *(unsigned __int16 *)(v4 + 2) + 32 )
+  HIBYTE(a1->m_iUnknown20[1]) = 1;
+  v9 = a1->m_iX + *(unsigned __int16 *)(v4 + 2) + 2;
+  if ( a2 < a1->m_iX + *(unsigned __int16 *)(v4 + 2) + 32 )
   {
     DoScrolling(a1, 0);
   }
-  if ( a2 > v9 + a1->width - 32 )
+  if ( a2 > v9 + a1->m_iWidth - 32 )
   {
     DoScrolling(a1, 1);
   }
@@ -58635,7 +58635,7 @@ LABEL_75:
               case MAP_CHUNK_EDITOR_DATA:
                 bHasData = ReadFile(hFile, lpBuffer, sChunkHeader.m_iSize, &NumberOfBytesRead, 0);
                 ReadChunk((char *)lpBuffer, sChunkHeader.m_iSize, sChunkHeader.m_iDecompressedSize);
-                memcpy(&g_sEditorInfo, lpBuffer, 0x14u);
+                memcpy(&g_sEditorInfo, lpBuffer, sizeof(g_sEditorInfo));
                 if ( !bHasData )
                 {
                   goto LABEL_46;
@@ -58749,7 +58749,7 @@ void __cdecl MA_GetNumberOfPlayers(int * a1) {
   
   if ( g_bMapIsLoaded )
   {
-    *a1 = MEMORY[0x4727570];
+    *a1 = g_sGeneralMapData.m_uNumberOfPlayers;
   }
   else
   {
@@ -58850,8 +58850,8 @@ void __cdecl MA_GetDataChecksums(int * a1, int * a2) {
   
   if ( g_bMapIsLoaded )
   {
-    *a1 = g_iMapChecksum1;
-    *a2 = g_iMapChecksum2;
+    *a1 = g_sEditorInfo.m_iMapChecksum1;
+    *a2 = g_sEditorInfo.m_iMapChecksum2;
   }
   else
   {
@@ -59055,50 +59055,50 @@ void __cdecl Cryption(unsigned char * a1, unsigned long a2) {
 // [Decompilation failed for int __cdecl CreateChunk(unsigned short,unsigned short,unsigned int,void *,int)]
 
 // address=[0x2fc0150]
-// Decompiled from bool __cdecl ReadChunk(char *Src, int a2, int a3)
-bool __cdecl ReadChunk(void * Src, int a2, int a3) {
+// Decompiled from bool __cdecl ReadChunk(char *Src, int _iSize, int _iCompressedSize)
+bool __cdecl ReadChunk(void * Src, int _iSize, int _iCompressedSize) {
   
   char *v4; // eax
   char *v5; // [esp+4h] [ebp-24h]
   char *v6; // [esp+8h] [ebp-20h]
   int v7; // [esp+14h] [ebp-14h]
-  int v8; // [esp+18h] [ebp-10h]
+  LZHLDecompressor *a1; // [esp+18h] [ebp-10h]
   char *v9; // [esp+24h] [ebp-4h]
 
-  if ( a3 == -1 )
+  if ( _iCompressedSize == -1 )
   {
     return 1;
   }
-  if ( a2 <= a3 )
+  if ( _iSize <= _iCompressedSize )
   {
-    v4 = (char *)operator new[](a3);
+    v4 = (char *)operator new[](_iCompressedSize);
   }
   else
   {
-    v4 = (char *)operator new[](a2);
+    v4 = (char *)operator new[](_iSize);
   }
   v9 = v4;
   if ( !v4 )
   {
     return 0;
   }
-  if ( a2 <= a3 )
+  if ( _iSize <= _iCompressedSize )
   {
-    memcpy(v4, Src, a3);
+    memcpy(v4, Src, _iCompressedSize);
   }
   else
   {
-    memcpy(v4, Src, a2);
+    memcpy(v4, Src, _iSize);
   }
-  v8 = j__LZHLCreateDecompressor();
-  v5 = &Src[a3];
-  v6 = &v9[a2];
+  a1 = j__LZHLCreateDecompressor();
+  v5 = &Src[_iCompressedSize];
+  v6 = &v9[_iSize];
   do
   {
-    v7 = j__LZHLDecompress(v8, &v5[-a3], &a3, &v6[-a2], &a2);
+    v7 = j__LZHLDecompress(a1, &v5[-_iCompressedSize], &_iCompressedSize, &v6[-_iSize], &_iSize);
   }
-  while ( a2 && v7 );
-  j__LZHLDestroyDecompressor(v8);
+  while ( _iSize && v7 );
+  j__LZHLDestroyDecompressor(a1);
   operator delete[](v9);
   return v7 != 0;
 }

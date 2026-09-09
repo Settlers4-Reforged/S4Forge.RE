@@ -163,17 +163,17 @@ bool  CStateVideo::Perform(void) {
         v3 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, 0, &v2);
         if ( !v3 )
         {
-          LOBYTE(v6.m_uU18) = 0;
-          v6.m_uU0 = 640;
-          v6.m_uU4 = 480;
+          v6.m_uU18 = 0;
+          v6.m_iWidth = 640;
+          v6.m_iHeight = 480;
           v7 = 0;
           v8 = 0;
           v9 = 640;
           v10 = 480;
-          v6.m_sDestinationRect = 0;
-          v6.? = 0;
-          v6.? = 640;
-          v6.? = 480;
+          v6.m_sDestinationRect.left = 0;
+          v6.m_sDestinationRect.top = 0;
+          v6.m_sDestinationRect.right = 640;
+          v6.m_sDestinationRect.bottom = 480;
           if ( !IGfxEngine::CreateGuiSurface(g_pGfxEngine, 0, &v6) )
           {
             CStateVideo::AlignVideoSurface(v4);

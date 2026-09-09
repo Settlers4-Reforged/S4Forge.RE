@@ -1995,16 +1995,16 @@ bool  IGfxEngine::ShowFrame(void) {
 
 
 // address=[0x2f60260]
-// Decompiled from char __thiscall IGfxEngine::SolidColorFillGuiSurface(IGfxEngine *this, int a2, unsigned __int8 a3, unsigned __int8 a4, unsigned __int8 a5)
-bool  IGfxEngine::SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned char a4, unsigned char a5) {
+// Decompiled from char __thiscall IGfxEngine::SolidColorFillGuiSurface(IGfxEngine *this, int _iSurfaceType, unsigned __int8 a3, unsigned __int8 a4, unsigned __int8 a5)
+bool  IGfxEngine::SolidColorFillGuiSurface(int _iSurfaceType, unsigned char a3, unsigned char a4, unsigned char a5) {
   
   int v6; // [esp+8h] [ebp-14h]
 
-  if ( !D3DObjectPtr || (unsigned int)a2 >= 0xE )
+  if ( !D3DObjectPtr || (unsigned int)_iSurfaceType >= 0xE )
   {
     return 0;
   }
-  if ( !D3DObjectPtr->m_pGuiSurfaces[a2] )
+  if ( !D3DObjectPtr->m_pGuiSurfaces[_iSurfaceType] )
   {
     return 0;
   }
@@ -2018,7 +2018,7 @@ bool  IGfxEngine::SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned ch
     }
   }
   CBlitFX::SetFillColor(&s_cSolidFillFX, a3, a4, a5, g_uGfxMode == 1);
-  v6 = D3DObjectPtr->m_pGuiSurfaces[a2]->ClearSurface(D3DObjectPtr->m_pGuiSurfaces[a2], (_BYTE *)&s_cSolidFillFX);
+  v6 = D3DObjectPtr->m_pGuiSurfaces[_iSurfaceType]->ClearSurface(D3DObjectPtr->m_pGuiSurfaces[_iSurfaceType], (_BYTE *)&s_cSolidFillFX);
   if ( !v6 )
   {
     return 1;
@@ -2316,7 +2316,7 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
       m_pDDraw = D3DObjectPtr->m_pDDraw7;
     }
     v4 = j__abs(g_uGfxMode == 1);
-    pSurface = D3DObjectPtr->m_pGuiSurfaces[_iIndex]->CreateSurface(D3DObjectPtr->m_pGuiSurfaces[_iIndex], m_pDDraw, a3->m_uU0, a3->m_uU4, 1, 0, 0, v4, 0, 0, 0);
+    pSurface = D3DObjectPtr->m_pGuiSurfaces[_iIndex]->CreateSurface(D3DObjectPtr->m_pGuiSurfaces[_iIndex], m_pDDraw, a3->m_iWidth, a3->m_iHeight, 1, 0, 0, v4, 0, 0, 0);
     if ( pSurface )
     {
       v8 = D3DObjectPtr->m_pGuiSurfaces[_iIndex];
@@ -2342,7 +2342,7 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
         if ( D3DObjectPtr->m_pGuiSurfaces[i] )
         {
           ++v7;
-          v9 += 2 * stru_468DFA4[i].m_uU0 * g_pGuiSurfaceDescriptors[i].m_uU0;
+          v9 += 2 * stru_468DFA4[i].m_iWidth * g_pGuiSurfaceDescriptors[i].m_iWidth;
         }
       }
       if ( CInterfaceD3D::GetGuiMemorySize(D3DObjectPtr) >= v9 )
@@ -2473,7 +2473,7 @@ bool  IGfxEngine::SetGuiSurfaceDestinationRect(int a2, struct tagRECT const & a3
   {
     return 0;
   }
-  *(struct tagRECT *)&stru_468DFA4[a2].m_uU4 = *a3;
+  *(struct tagRECT *)&stru_468DFA4[a2].m_iHeight = *a3;
   ClipGuiSurface(a2);
   return 1;
 }
@@ -2495,7 +2495,7 @@ bool  IGfxEngine::GetGuiSurfaceDestinationRect(int a1, struct tagRECT & a2) {
   {
     return 0;
   }
-  *a2 = *(struct tagRECT *)&stru_468DFA4[a1].m_uU4;
+  *a2 = *(struct tagRECT *)&stru_468DFA4[a1].m_iHeight;
   return 1;
 }
 
@@ -2518,10 +2518,10 @@ bool  IGfxEngine::GetGuiSurfaceDescription(int a2, struct GFX_ENGINE_GUI_SURFACE
 
 
 // address=[0x2f735c0]
-// Decompiled from int __thiscall IGfxEngine::BeginWriteToSurface(IGfxEngine *this, unsigned int a2, unsigned int *a3)
+// Decompiled from unsigned __int16 *__thiscall IGfxEngine::BeginWriteToSurface(IGfxEngine *this, unsigned int a2, unsigned int *a3)
 unsigned short *  IGfxEngine::BeginWriteToSurface(int a2, unsigned int & a3) {
   
-  int v4; // [esp+8h] [ebp-Ch] BYREF
+  unsigned __int16 *v4; // [esp+8h] [ebp-Ch] BYREF
   int v5; // [esp+Ch] [ebp-8h]
   unsigned int i; // [esp+10h] [ebp-4h]
 
@@ -2560,7 +2560,7 @@ unsigned short *  IGfxEngine::BeginWriteToSurface(int a2, unsigned int & a3) {
     }
     D3DObjectPtr->m_bGfxEngineRebuilded = 1;
   }
-  v5 = D3DObjectPtr->m_pGuiSurfaces[a2]->Lock(D3DObjectPtr->m_pGuiSurfaces[a2], (int *)a3, &v4, 1);
+  v5 = D3DObjectPtr->m_pGuiSurfaces[a2]->Lock(D3DObjectPtr->m_pGuiSurfaces[a2], (int *)a3, (int *)&v4, 1);
   if ( v5 )
   {
     return 0;

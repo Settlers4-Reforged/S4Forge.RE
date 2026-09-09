@@ -27,7 +27,7 @@ public:
      ~IGuiEngine(void);
 
     // address=[0x2f9fff0]
-    bool  Init(class IGfxEngine * a2, class CGfxManager * a3, void * a4, int a5, bool (__cdecl*)(int,int,int) a6, int a7);
+    bool  Init(class IGfxEngine * a2, class CGfxManager * a3, void * a4, int a5, bool (__cdecl*)(int,int,int) a6, int _iLanguage);
 
     // address=[0x2fa0320]
     void  RefreshAllSurfaces(void);

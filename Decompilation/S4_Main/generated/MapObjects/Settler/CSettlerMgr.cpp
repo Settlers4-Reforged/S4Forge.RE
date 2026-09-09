@@ -2232,7 +2232,7 @@ void __cdecl CSettlerMgr::FillSpecialistMenu(class CInfoExchange * _pInfoExchang
   int v10; // [esp+24h] [ebp-40h]
   int i; // [esp+2Ch] [ebp-38h]
   CSettler *SettlerPtr; // [esp+30h] [ebp-34h]
-  CSpecialistsInfo::SSpecialist *m_vSpecialists; // [esp+38h] [ebp-2Ch]
+  SHealthState *m_vSpecialists; // [esp+38h] [ebp-2Ch]
   CEvn_Event v14; // [esp+3Ch] [ebp-28h] BYREF
   int v15; // [esp+60h] [ebp-4h]
 

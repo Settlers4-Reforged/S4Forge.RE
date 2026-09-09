@@ -35,91 +35,91 @@ float  IGuiEngine::GetDialogsRenderScaleY(void)const {
 
 
 // address=[0x2f9b380]
-// Decompiled from char __thiscall IGuiEngine::OpenDialog(IGuiEngine *this, int a2, bool (__cdecl *a3)(int, int, int))
+// Decompiled from char __thiscall IGuiEngine::OpenDialog(IGuiEngine *this, int container, bool (__cdecl *a3)(int, int, int))
 bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
   
-  int v4; // [esp+4h] [ebp-58h]
+  int m_iHeight; // [esp+4h] [ebp-58h]
   float DialogsRenderScaleY; // [esp+8h] [ebp-54h]
   float DialogsRenderScaleX; // [esp+10h] [ebp-4Ch]
   int i; // [esp+1Ch] [ebp-40h]
   int j; // [esp+1Ch] [ebp-40h]
   bool v10; // [esp+20h] [ebp-3Ch]
   bool v11; // [esp+22h] [ebp-3Ah]
-  unsigned __int16 *v12; // [esp+24h] [ebp-38h]
-  struct SGuiControl *v13; // [esp+28h] [ebp-34h]
+  GUI_MENU_DIALOG_HEADER *v12; // [esp+24h] [ebp-38h]
+  struct SGuiControl *m_sControls; // [esp+28h] [ebp-34h]
   struct SGuiControl *v14; // [esp+28h] [ebp-34h]
   struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION v15; // [esp+2Ch] [ebp-30h] BYREF
   struct SEventStruct v16; // [esp+48h] [ebp-14h] BYREF
 
-  if ( !sub_2F9E8F0() || !a3 )
+  if ( !IsGuiEngineReady() || !a3 )
   {
     return 0;
   }
-  if ( !sub_2F9E8B0(a2) )
+  if ( !GuiIsContainerValid(container) )
   {
     return 0;
   }
-  v12 = (unsigned __int16 *)sub_2F9E930(a2);
-  if ( g_iOpenDialogs[*v12] )
+  v12 = GuiGetContainer(container);
+  if ( g_iOpenDialogs[v12->m_iSurfaceType] )
   {
     return 0;
   }
-  v13 = (struct SGuiControl *)(v12 + 8);
+  m_sControls = v12->m_sControls;
   for ( i = 0;
-        i < v12[6];
+        i < v12->m_iElementCount;
         ++i )
   {
-    if ( (v13->effects & 1) != 0 )
+    if ( (m_sControls->m_iEffects & 1) != 0 )
     {
-      v13->effects &= ~1u;
+      m_sControls->m_iEffects &= ~1u;
     }
-    if ( (v13->controlType == 5 || v13->controlType == 20) && (v13->id & 0x80u) != 0 )
+    if ( (m_sControls->m_iControlType == 5 || m_sControls->m_iControlType == 20) && (m_sControls->m_iId & 0x80u) != 0 )
     {
-      if ( !IGuiEngine::SetText(this, a2, v13->valueLink, (char *)&byte_3AD1732) )
+      if ( !IGuiEngine::SetText(this, container, m_sControls->m_iValueLink, (char *)&byte_3AD1732) )
       {
         BBSupportTracePrintF(0, "GUI ENGINE: Cannot open dialog. Not enough string cache!");
         return 0;
       }
-      LOBYTE(g_mbstrTextTable[75 * (char)v13->id]) = 0;
+      LOBYTE(g_mbstrTextTable[75 * (char)m_sControls->m_iId]) = 0;
     }
     if ( g_pfSetEnableStatus )
     {
-      if ( a2 != g_iDialogToIgnore )
+      if ( container != g_iDialogToIgnore )
       {
-        v11 = (unsigned __int8)g_pfSetEnableStatus(a2, v13->valueLink, v13->controlType, (v13->effects & 4) == 0, 3) == 0;
-        SetControlState(v13, 4, v11);
+        v11 = (unsigned __int8)g_pfSetEnableStatus(container, m_sControls->m_iValueLink, m_sControls->m_iControlType, (m_sControls->m_iEffects & 4) == 0, 3) == 0;
+        SetControlState(m_sControls, 4, v11);
       }
     }
-    v13 = (struct SGuiControl *)((char *)v13 + 36);
+    ++m_sControls;
   }
-  LOBYTE(v15.m_uU18) = 1;
-  v4 = v12[4];
-  v15.m_uU0 = v12[3];
-  v15.m_uU4 = v4;
-  v15.m_sDestinationRect.left = v12[1] + IGuiEngine::GetDialogsRenderOffsetX(g_pGUIEngine);
-  v15.m_sDestinationRect.top = v12[2] + IGuiEngine::GetDialogsRenderOffsetY(g_pGUIEngine);
+  v15.m_uU18 = 1;
+  m_iHeight = v12->m_iHeight;
+  v15.m_iWidth = v12->m_iWidth;
+  v15.m_iHeight = m_iHeight;
+  v15.m_sDestinationRect.left = v12->m_iX + IGuiEngine::GetDialogsRenderOffsetX(g_pGUIEngine);
+  v15.m_sDestinationRect.top = v12->m_iY + IGuiEngine::GetDialogsRenderOffsetY(g_pGUIEngine);
   DialogsRenderScaleX = IGuiEngine::GetDialogsRenderScaleX(g_pGUIEngine);
-  v15.m_sDestinationRect.right = v15.m_sDestinationRect.left + (int)(float)((float)((float)v15.m_uU0 * DialogsRenderScaleX) + 0.5);
+  v15.m_sDestinationRect.right = v15.m_sDestinationRect.left + (int)(float)((float)((float)v15.m_iWidth * DialogsRenderScaleX) + 0.5);
   DialogsRenderScaleY = IGuiEngine::GetDialogsRenderScaleY(g_pGUIEngine);
-  v15.m_sDestinationRect.bottom = v15.m_sDestinationRect.top + (int)(float)((float)((float)v4 * DialogsRenderScaleY) + 0.5);
-  IGfxEngine::CreateGuiSurface(g_pGfxEngine, *v12, &v15);
-  IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, *v12, 1);
-  g_iOpenDialogs[*v12] = a2 + 1;
-  g_pfDialogCallbacks[*v12] = (int)a3;
+  v15.m_sDestinationRect.bottom = v15.m_sDestinationRect.top + (int)(float)((float)((float)m_iHeight * DialogsRenderScaleY) + 0.5);
+  IGfxEngine::CreateGuiSurface(g_pGfxEngine, v12->m_iSurfaceType, &v15);
+  IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, v12->m_iSurfaceType, 1);
+  g_iOpenDialogs[v12->m_iSurfaceType] = container + 1;
+  g_pfDialogCallbacks[v12->m_iSurfaceType] = (int)a3;
   a3(0, 0, 0);
-  v14 = (struct SGuiControl *)(v12 + 8);
+  v14 = v12->m_sControls;
   for ( j = 0;
-        j < v12[6];
+        j < v12->m_iElementCount;
         ++j )
   {
-    if ( g_pfSetEnableStatus && a2 != g_iDialogToIgnore )
+    if ( g_pfSetEnableStatus && container != g_iDialogToIgnore )
     {
-      v10 = (unsigned __int8)g_pfSetEnableStatus(a2, v14->valueLink, v14->controlType, (v14->effects & 4) == 0, 1) == 0;
+      v10 = (unsigned __int8)g_pfSetEnableStatus(container, v14->m_iValueLink, v14->m_iControlType, (v14->m_iEffects & 4) == 0, 1) == 0;
       SetControlState(v14, 4, v10);
     }
-    v14 = (struct SGuiControl *)((char *)v14 + 36);
+    ++v14;
   }
-  UpdateGui(*v12);
+  UpdateGui(v12->m_iSurfaceType);
   v16.m_iEventId = 5;
   v16.m_lParam = qword_471F794 + (HIDWORD(qword_471F794) << 16);
   v16.m_wParam = 0;
@@ -186,7 +186,7 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
 
 // address=[0x2f9fff0]
 // Decompiled from char __thiscall IGuiEngine::Init(IGuiEngine *this, struct IGfxEngine *a2, struct CGfxManager *a3, int a4, int a5, bool (__cdecl *a6)(int, int, int), int a7)
-bool  IGuiEngine::Init(class IGfxEngine * a2, class CGfxManager * a3, void * a4, int a5, bool (__cdecl*)(int,int,int) a6, int a7) {
+bool  IGuiEngine::Init(class IGfxEngine * a2, class CGfxManager * a3, void * a4, int a5, bool (__cdecl*)(int,int,int) a6, int _iLanguage) {
   
   int DeviceCaps; // eax
   HFONT FontA; // eax
@@ -311,72 +311,67 @@ void  IGuiEngine::RefreshAllSurfaces(void) {
   
   struct tagRECT v1; // [esp+8h] [ebp-B0h] BYREF
   struct tagRECT v2; // [esp+18h] [ebp-A0h] BYREF
-  int v3; // [esp+28h] [ebp-90h]
-  int v4; // [esp+2Ch] [ebp-8Ch]
+  int m_iWidth; // [esp+28h] [ebp-90h]
+  int m_iHeight; // [esp+2Ch] [ebp-8Ch]
   int j; // [esp+30h] [ebp-88h]
-  struct SGuiControl *v6; // [esp+34h] [ebp-84h]
-  bool GuiSurfaceDescription; // [esp+3Bh] [ebp-7Dh]
+  struct SGuiControl *m_sElements; // [esp+34h] [ebp-84h]
+  char GuiSurfaceDescription; // [esp+3Bh] [ebp-7Dh]
   unsigned int i; // [esp+3Ch] [ebp-7Ch]
-  IGuiEngine *v9; // [esp+40h] [ebp-78h]
   bool v10; // [esp+46h] [ebp-72h]
   bool v11; // [esp+47h] [ebp-71h]
   const struct GUI_MENU_DIALOG_HEADER *v12; // [esp+48h] [ebp-70h]
-  _DWORD v13[7]; // [esp+4Ch] [ebp-6Ch] BYREF
-  _DWORD v14[2]; // [esp+68h] [ebp-50h] BYREF
-  struct tagRECT v15; // [esp+70h] [ebp-48h]
-  char v16; // [esp+80h] [ebp-38h]
-  struct tagRECT v17; // [esp+84h] [ebp-34h] BYREF
-  struct tagRECT v18; // [esp+94h] [ebp-24h]
-  struct tagRECT v19; // [esp+A4h] [ebp-14h]
+  struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION v13; // [esp+4Ch] [ebp-6Ch] BYREF
+  struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION v14; // [esp+68h] [ebp-50h] BYREF
+  struct tagRECT v15; // [esp+84h] [ebp-34h] BYREF
+  RECT v16; // [esp+94h] [ebp-24h]
+  struct tagRECT v17; // [esp+A4h] [ebp-14h]
 
-  v9 = this;
   if ( g_pGfxEngine && g_pFileHeader && g_pGfxManager )
   {
     for ( i = 0;
-          i < 0xE;
+          i < 14;
           ++i )
     {
-      v12 = (const struct GUI_MENU_DIALOG_HEADER *)(*(_DWORD *)(g_pFileHeader + 4 * g_iOpenDialogs[i] + 12) + g_pFileHeader);
-      IGfxEngine::SetVisibilityOfGuiSurface((IGfxEngine *)g_pGfxEngine, i, 0);
+      v12 = (const struct GUI_MENU_DIALOG_HEADER *)((char *)g_pFileHeader + *(&g_pFileHeader->m_iTotalSize + g_iOpenDialogs[i]));
+      IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, i, 0);
       if ( g_iOpenDialogs[i] )
       {
-        GuiSurfaceDescription = IGfxEngine::GetGuiSurfaceDescription((IGfxEngine *)g_pGfxEngine, *(unsigned __int16 *)v12, (struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *)v13);
-        if ( GuiSurfaceDescription && v13[0] == *((unsigned __int16 *)v12 + 3) && v13[1] == *((unsigned __int16 *)v12 + 4) )
+        GuiSurfaceDescription = IGfxEngine::GetGuiSurfaceDescription(g_pGfxEngine, v12->m_iSurfaceType, &v13);
+        if ( GuiSurfaceDescription && v13.m_iWidth == v12->m_iWidth && v13.m_iHeight == v12->m_iHeight )
         {
-          v19 = *IGuiEngine::GetDialogDestinationRect(&v2, v12, *(_DWORD *)v9, *((_DWORD *)v9 + 1), *((float *)v9 + 2), *((float *)v9 + 3));
-          v17 = v19;
-          IGfxEngine::SetGuiSurfaceDestinationRect((IGfxEngine *)g_pGfxEngine, *(unsigned __int16 *)v12, &v17);
+          v17 = *IGuiEngine::GetDialogDestinationRect(&v2, v12, *(_DWORD *)this, *((_DWORD *)this + 1), *((float *)this + 2), *((float *)this + 3));
+          v15 = v17;
+          IGfxEngine::SetGuiSurfaceDestinationRect(g_pGfxEngine, v12->m_iSurfaceType, &v15);
         }
         else
         {
-          IGfxEngine::DestroyGuiSurface((IGfxEngine *)g_pGfxEngine, *(unsigned __int16 *)v12);
-          v16 = 1;
-          v3 = *((unsigned __int16 *)v12 + 3);
-          v4 = *((unsigned __int16 *)v12 + 4);
-          v14[0] = v3;
-          v14[1] = v4;
-          v18 = *IGuiEngine::GetDialogDestinationRect(&v1, v12, *(_DWORD *)v9, *((_DWORD *)v9 + 1), *((float *)v9 + 2), *((float *)v9 + 3));
-          v15 = v18;
-          IGfxEngine::CreateGuiSurface((IGfxEngine *)g_pGfxEngine, *(unsigned __int16 *)v12, (struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *)v14);
+          IGfxEngine::DestroyGuiSurface(g_pGfxEngine, v12->m_iSurfaceType);
+          v14.m_uU18 = 1;
+          m_iWidth = v12->m_iWidth;
+          m_iHeight = v12->m_iHeight;
+          v14.m_iWidth = m_iWidth;
+          v14.m_iHeight = m_iHeight;
+          v16 = *IGuiEngine::GetDialogDestinationRect(&v1, v12, *(_DWORD *)this, *((_DWORD *)this + 1), *((float *)this + 2), *((float *)this + 3));
+          v14.m_sDestinationRect = v16;
+          IGfxEngine::CreateGuiSurface(g_pGfxEngine, v12->m_iSurfaceType, &v14);
         }
-        IGfxEngine::SetVisibilityOfGuiSurface((IGfxEngine *)g_pGfxEngine, *(unsigned __int16 *)v12, 1);
+        IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, v12->m_iSurfaceType, 1);
         if ( g_pfSetEnableStatus )
         {
-          v6 = (struct SGuiControl *)((char *)v12 + 16);
+          m_sElements = v12->m_sControls;
           for ( j = 0;
-                j < *((unsigned __int16 *)v12 + 6);
+                j < v12->m_iElementCount;
                 ++j )
           {
-            v11 = (v6->effects & 4) == 0;
-            v10 = (unsigned __int8)g_pfSetEnableStatus(g_iOpenDialogs[i] - 1, v6->valueLink, v6->controlType, v11, 4) == 0;
-            SetControlState(v6, 4, v10);
-            v6 = (struct SGuiControl *)((char *)v6 + 36);
+            v11 = (m_sElements->m_iEffects & 4) == 0;
+            v10 = (unsigned __int8)g_pfSetEnableStatus(g_iOpenDialogs[i] - 1, m_sElements->m_iValueLink, m_sElements->m_iControlType, v11, 4) == 0;
+            SetControlState(m_sElements++, 4, v10);
           }
         }
         UpdateGui(i);
-        if ( g_pfDialogCallbacks[*(unsigned __int16 *)v12] )
+        if ( g_pfDialogCallbacks[v12->m_iSurfaceType] )
         {
-          ((void (__cdecl *)(int, _DWORD, _DWORD))g_pfDialogCallbacks[*(unsigned __int16 *)v12])(11, 0, 0);
+          ((void (__cdecl *)(int, _DWORD, _DWORD))g_pfDialogCallbacks[v12->m_iSurfaceType])(11, 0, 0);
         }
       }
     }
@@ -522,7 +517,7 @@ void  IGuiEngine::SetDialogsRenderOffset(int a2, int a3, float a4, float a5) {
 // Decompiled from char __thiscall IGuiEngine::GetDialogRect(IGuiEngine *this, int a2, struct SGuiRect *a3)
 bool  IGuiEngine::GetDialogRect(int a2, struct SGuiRect & a3) {
   
-  unsigned __int16 *v4; // eax
+  GUI_MENU_DIALOG_HEADER *v4; // eax
 
   if ( !sub_2FA28C0() )
   {
@@ -532,11 +527,11 @@ bool  IGuiEngine::GetDialogRect(int a2, struct SGuiRect & a3) {
   {
     return 0;
   }
-  v4 = (unsigned __int16 *)sub_2FA2900(a2);
-  *(_DWORD *)a3 = v4[1];
-  *((_DWORD *)a3 + 1) = v4[2];
-  *((_DWORD *)a3 + 2) = v4[1] + v4[3] - 1;
-  *((_DWORD *)a3 + 3) = v4[2] + v4[4] - 1;
+  v4 = (GUI_MENU_DIALOG_HEADER *)sub_2FA2900(a2);
+  *(_DWORD *)a3 = v4->m_iX;
+  *((_DWORD *)a3 + 1) = v4->m_iY;
+  *((_DWORD *)a3 + 2) = v4->m_iX + v4->m_iWidth - 1;
+  *((_DWORD *)a3 + 3) = v4->m_iY + v4->m_iHeight - 1;
   return 1;
 }
 
@@ -634,14 +629,14 @@ void  IGuiEngine::EnableTooltipsExt(bool a2) {
   int SurfaceID; // eax
   int v4; // eax
   int v5; // [esp-8h] [ebp-Ch]
-  int v6; // [esp-4h] [ebp-8h]
+  int m_iTooltipLinkExtra; // [esp-4h] [ebp-8h]
 
-  if ( CToolTip::IsOpen((CToolTip *)&g_cToolTipExt) && !a2 )
+  if ( CToolTip::IsOpen((CToolTip *)g_cToolTipExt) && !a2 )
   {
-    CToolTip::SetSourceDialogSurfaceID((CToolTip *)&g_cToolTipExt, -1);
-    CToolTip::CloseTooltip((CToolTip *)&g_cToolTipExt);
+    CToolTip::SetSourceDialogSurfaceID((CToolTip *)g_cToolTipExt, -1);
+    CToolTip::CloseTooltip((CToolTip *)g_cToolTipExt);
   }
-  CToolTip::SetEnableStatus((CToolTip *)&g_cToolTipExt, a2);
+  CToolTip::SetEnableStatus((CToolTip *)g_cToolTipExt, a2);
   result = a2;
   if ( !a2 )
   {
@@ -651,13 +646,13 @@ void  IGuiEngine::EnableTooltipsExt(bool a2) {
   {
     return result;
   }
-  v6 = *(__int16 *)(g_pCurrentSelectedControl + 22);
-  v5 = (*(unsigned __int8 *)(g_pCurrentSelectedControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentSelectedControl + 10);
-  SurfaceID = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
-  ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[SurfaceID])(9, v5, v6);
-  v4 = GetSurfaceID((struct SGuiControl *)g_pCurrentSelectedControl);
-  CToolTip::SetSourceDialogSurfaceID((CToolTip *)&g_cToolTipExt, v4);
-  return CToolTipExt::OpenTooltip((CToolTipExt *)&g_cToolTipExt);
+  m_iTooltipLinkExtra = (__int16)g_pCurrentSelectedControl->m_iTooltipLinkExtra;
+  v5 = (g_pCurrentSelectedControl->m_iEffects << 16) + g_pCurrentSelectedControl->m_iValueLink;
+  SurfaceID = GetSurfaceID(g_pCurrentSelectedControl);
+  ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[SurfaceID])(9, v5, m_iTooltipLinkExtra);
+  v4 = GetSurfaceID(g_pCurrentSelectedControl);
+  CToolTip::SetSourceDialogSurfaceID((CToolTip *)g_cToolTipExt, v4);
+  return CToolTipExt::OpenTooltip((CToolTipExt *)g_cToolTipExt);
 }
 
 
@@ -730,11 +725,11 @@ bool  IGuiEngine::SetTooltipID(int a2, int a3, int a4, int a5) {
   }
   if ( a4 >= 0 )
   {
-    ControlPtr->tooltipLink = a4;
+    ControlPtr->m_iTooltipLink = a4;
   }
   if ( a5 >= 0 )
   {
-    ControlPtr->tooltipLinkExtra = a5;
+    ControlPtr->m_iTooltipLinkExtra = a5;
   }
   return 1;
 }
@@ -766,8 +761,10 @@ bool  IGuiEngine::DisableDialogControls(int a2) {
 // Decompiled from char __thiscall IGuiEngine::SetText(struct IGuiEngine *this, int _iContainer, int _iControlId, char *Str)
 bool  IGuiEngine::SetText(int _iContainer, int _iControlId, char const * Str) {
   
-  unsigned int id; // [esp+4h] [ebp-14h]
-  unsigned int v6; // [esp+8h] [ebp-10h]
+  int v5; // eax
+  int v6; // ecx
+  unsigned int m_iId; // [esp+4h] [ebp-14h]
+  unsigned int v8; // [esp+8h] [ebp-10h]
   int i; // [esp+Ch] [ebp-Ch]
   int Count; // [esp+10h] [ebp-8h]
   struct SGuiControl *ControlPtr; // [esp+14h] [ebp-4h]
@@ -782,20 +779,20 @@ bool  IGuiEngine::SetText(int _iContainer, int _iControlId, char const * Str) {
     return 0;
   }
   Count = strlen(Str);
-  if ( ControlPtr->controlType == 21 )
+  if ( ControlPtr->m_iControlType == 21 )
   {
-    ControlPtr->textOffset = (DWORD)Str;
+    ControlPtr->m_iTextOffset = (DWORD)Str;
     if ( !Count )
     {
-      ControlPtr->textOffset = 0;
+      ControlPtr->m_iTextOffset = 0;
     }
-    HIBYTE(ControlPtr->unknownData[1]) = 1;
+    ControlPtr->m_iUnknown23 = 1;
     g_bGuiIsDirty = 1;
     return 1;
   }
   else
   {
-    if ( (ControlPtr->id & 0x80u) == 0 )
+    if ( (ControlPtr->m_iId & 0x80u) == 0 )
     {
       goto LABEL_41;
     }
@@ -805,19 +802,19 @@ bool  IGuiEngine::SetText(int _iContainer, int _iControlId, char const * Str) {
     {
       if ( !g_bUsedTexts[i] )
       {
-        ControlPtr->id = i;
+        ControlPtr->m_iId = i;
         g_bUsedTexts[i] = 1;
         break;
       }
     }
-    if ( (ControlPtr->id & 0x80u) != 0 )
+    if ( (ControlPtr->m_iId & 0x80u) != 0 )
     {
       return 0;
     }
     if ( Count )
     {
 LABEL_41:
-      if ( j___mbscmp((const unsigned __int8 *)Str, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id]) )
+      if ( j___mbscmp((const unsigned __int8 *)Str, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->m_iId]) )
       {
         if ( Count )
         {
@@ -825,31 +822,32 @@ LABEL_41:
           {
             Count = 299;
           }
-          j__strncpy((char *)&g_mbstrTextTable[75 * (char)ControlPtr->id], Str, Count);
-          *((_BYTE *)&g_mbstrTextTable[75 * (char)ControlPtr->id] + Count) = 0;
+          j__strncpy((char *)&g_mbstrTextTable[75 * (char)ControlPtr->m_iId], Str, Count);
+          *((_BYTE *)&g_mbstrTextTable[75 * (char)ControlPtr->m_iId] + Count) = 0;
           g_bGuiIsDirty = 1;
-          HIBYTE(ControlPtr->unknownData[1]) = 1;
+          ControlPtr->m_iUnknown23 = 1;
           return 1;
         }
         else
         {
-          if ( ControlPtr->controlType == 5 || ControlPtr->controlType == 20 )
+          if ( ControlPtr->m_iControlType == 5 || ControlPtr->m_iControlType == 20 )
           {
-            LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
+            LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->m_iId]) = 0;
           }
           else
           {
-            LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
-            id = (char)ControlPtr->id;
-            if ( id >= 0x50 )
+            LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->m_iId]) = 0;
+            m_iId = (char)ControlPtr->m_iId;
+            if ( m_iId >= 0x50 )
             {
               report_rangecheckfailure();
             }
-            g_bUsedTexts[id] = 0;
-            ControlPtr->id = -1;
+            v6 = (char)ControlPtr->m_iId;
+            g_bUsedTexts[m_iId] = 0;
+            ControlPtr->m_iId = -1;
           }
           g_bGuiIsDirty = 1;
-          HIBYTE(ControlPtr->unknownData[1]) = 1;
+          ControlPtr->m_iUnknown23 = 1;
           return 1;
         }
       }
@@ -860,20 +858,21 @@ LABEL_41:
     }
     else
     {
-      if ( ControlPtr->controlType == 5 || ControlPtr->controlType == 20 )
+      if ( ControlPtr->m_iControlType == 5 || ControlPtr->m_iControlType == 20 )
       {
-        LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
+        LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->m_iId]) = 0;
       }
       else
       {
-        LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) = 0;
-        v6 = (char)ControlPtr->id;
-        if ( v6 >= 0x50 )
+        LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->m_iId]) = 0;
+        v8 = (char)ControlPtr->m_iId;
+        if ( v8 >= 0x50 )
         {
           report_rangecheckfailure();
         }
-        g_bUsedTexts[v6] = 0;
-        ControlPtr->id = -1;
+        v5 = (char)ControlPtr->m_iId;
+        g_bUsedTexts[v8] = 0;
+        ControlPtr->m_iId = -1;
       }
       return 1;
     }
@@ -897,7 +896,7 @@ bool  IGuiEngine::SetEditProperties(int a2, int a3, unsigned char a4, unsigned c
   {
     return 0;
   }
-  if ( ControlPtr->controlType != 5 && ControlPtr->controlType != 20 )
+  if ( ControlPtr->m_iControlType != 5 && ControlPtr->m_iControlType != 20 )
   {
     return 0;
   }
@@ -930,16 +929,16 @@ bool  IGuiEngine::SetTypeAsButton(int a2, int a3) {
   {
     return 0;
   }
-  ControlPtr->controlType = 13;
-  ControlPtr->width = 161;
-  ControlPtr->height = 30;
-  ControlPtr->mainTexture = 196;
-  ControlPtr->buttonPressedTexture = 197;
-  ControlPtr->textStyle = 6;
-  ControlPtr->unknownId = 2;
-  LOBYTE(ControlPtr->unknownData[0]) = 4;
-  ControlPtr->x = 567;
-  ControlPtr->y = 100;
+  ControlPtr->m_iControlType = 13;
+  ControlPtr->m_iWidth = 161;
+  ControlPtr->m_iHeight = 30;
+  ControlPtr->m_iMainTexture = 196;
+  ControlPtr->m_iPressedTexture = 197;
+  ControlPtr->m_iTextStyle = 6;
+  ControlPtr->m_iUnknown1F = 2;
+  LOBYTE(ControlPtr->m_iUnknown20[0]) = 4;
+  ControlPtr->m_iX = 567;
+  ControlPtr->m_iY = 100;
   return 1;
 }
 
@@ -959,7 +958,7 @@ bool  IGuiEngine::SetTypeAsText(int a2, int a3) {
   {
     return 0;
   }
-  ControlPtr->controlType = 21;
+  ControlPtr->m_iControlType = 21;
   return 1;
 }
 
@@ -979,13 +978,13 @@ bool  IGuiEngine::SetTypeAsRadio(int a2, int a3, int a4, int a5) {
   {
     return 0;
   }
-  ControlPtr->controlType = 3;
-  ControlPtr->mainTexture = a4;
-  ControlPtr->buttonPressedTexture = a5;
-  ControlPtr->width = 20;
-  ControlPtr->height = 20;
-  ControlPtr->tooltipLink = -1;
-  ControlPtr->tooltipLinkExtra = -1;
+  ControlPtr->m_iControlType = 3;
+  ControlPtr->m_iMainTexture = a4;
+  ControlPtr->m_iPressedTexture = a5;
+  ControlPtr->m_iWidth = 20;
+  ControlPtr->m_iHeight = 20;
+  ControlPtr->m_iTooltipLink = -1;
+  ControlPtr->m_iTooltipLinkExtra = -1;
   return 1;
 }
 
@@ -1020,9 +1019,9 @@ char const *  IGuiEngine::GetText(int container, int valueLink) {
   {
     return 0;
   }
-  if ( (ControlPtr->id & 0x80u) == 0 )          // id >= 0
+  if ( (ControlPtr->m_iId & 0x80u) == 0 )       // id >= 0
   {
-    return (char *)&g_mbstrTextTable[75 * (char)ControlPtr->id];
+    return (char *)&g_mbstrTextTable[75 * (char)ControlPtr->m_iId];
   }
   return 0;
 }
@@ -1048,32 +1047,32 @@ int  IGuiEngine::GetWrapPosition(int a2, int a3) {
   {
     return -1;
   }
-  if ( (ControlPtr->id & 0x80u) != 0 )
+  if ( (ControlPtr->m_iId & 0x80u) != 0 )
   {
     return -1;
   }
-  if ( !LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->id]) )
+  if ( !LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->m_iId]) )
   {
     return -1;
   }
-  if ( !CalcTextSize(ControlPtr->textStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id], &psizl, 0, -1) )
+  if ( !CalcTextSize(ControlPtr->m_iTextStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->m_iId], &psizl, 0, -1) )
   {
     return -1;
   }
-  if ( psizl.cx <= ControlPtr->width - 4 )
+  if ( psizl.cx <= ControlPtr->m_iWidth - 4 )
   {
     return -1;
   }
   v7 = 0;
-  CalcTextSize(ControlPtr->textStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id], &psizl, 0, 0);
+  CalcTextSize(ControlPtr->m_iTextStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->m_iId], &psizl, 0, 0);
   v6 = 251;
-  while ( psizl.cx <= ControlPtr->width - 4 )
+  while ( psizl.cx <= ControlPtr->m_iWidth - 4 )
   {
     if ( --v6 < 0 )
     {
       break;
     }
-    CalcTextSize(ControlPtr->textStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->id], &psizl, 0, ++v7);
+    CalcTextSize(ControlPtr->m_iTextStyle, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->m_iId], &psizl, 0, ++v7);
   }
   if ( v6 > 0 )
   {
@@ -1105,13 +1104,13 @@ bool  IGuiEngine::SetFontTemplate(int a2, int a3, int a4) {
   {
     return 0;
   }
-  if ( ControlPtr->textStyle == a4 )
+  if ( ControlPtr->m_iTextStyle == a4 )
   {
     return 1;
   }
-  ControlPtr->textStyle = a4;
+  ControlPtr->m_iTextStyle = a4;
   g_bGuiIsDirty = 1;
-  HIBYTE(ControlPtr->unknownData[1]) = 1;
+  HIBYTE(ControlPtr->m_iUnknown20[1]) = 1;
   return 1;
 }
 
@@ -1136,7 +1135,7 @@ bool  IGuiEngine::EnableControl(int a2, int a3, bool a4) {
   {
     return SetControlState(ControlPtr, 4, !a4);
   }
-  v6 = (unsigned __int8)g_pfSetEnableStatus(a2, ControlPtr->valueLink, ControlPtr->controlType, a4, 8) == 0;
+  v6 = (unsigned __int8)g_pfSetEnableStatus(a2, ControlPtr->m_iValueLink, ControlPtr->m_iControlType, a4, 8) == 0;
   return SetControlState(ControlPtr, 4, v6);
 }
 
@@ -1178,14 +1177,14 @@ bool  IGuiEngine::SetImages(int a2, int a3, int a4, int a5) {
   {
     return 0;
   }
-  if ( ControlPtr->mainTexture == a4 && ControlPtr->buttonPressedTexture == a5 )
+  if ( ControlPtr->m_iMainTexture == a4 && ControlPtr->m_iPressedTexture == a5 )
   {
     return 1;
   }
-  ControlPtr->mainTexture = a4;
-  ControlPtr->buttonPressedTexture = a5;
+  ControlPtr->m_iMainTexture = a4;
+  ControlPtr->m_iPressedTexture = a5;
   g_bGuiIsDirty = 1;
-  HIBYTE(ControlPtr->unknownData[1]) = 1;
+  HIBYTE(ControlPtr->m_iUnknown20[1]) = 1;
   return 1;
 }
 
@@ -1205,10 +1204,10 @@ bool  IGuiEngine::SetUserLogoImage(int a2, int a3, int a4) {
   {
     return 0;
   }
-  ControlPtr->mainTexture = a4;
-  ControlPtr->showTexture = -10;
+  ControlPtr->m_iMainTexture = a4;
+  ControlPtr->m_iSliderPosition = -10;
   g_bGuiIsDirty = 1;
-  HIBYTE(ControlPtr->unknownData[1]) = 1;
+  HIBYTE(ControlPtr->m_iUnknown20[1]) = 1;
   return 1;
 }
 
@@ -1242,7 +1241,7 @@ bool  IGuiEngine::LockOwnerImage(int a2, int a3, struct SGuiRect & a4, unsigned 
   {
     return 0;
   }
-  if ( ControlPtr->controlType != 9 )
+  if ( ControlPtr->m_iControlType != 9 )
   {
     return 0;
   }
@@ -1257,9 +1256,9 @@ bool  IGuiEngine::LockOwnerImage(int a2, int a3, struct SGuiRect & a4, unsigned 
     if ( *a5 )
     {
       dword_3E2F134 = *v7;
-      FastBlit8Bit((void *)(v9 + 12), v7[3], ControlPtr->x, ControlPtr->y, ControlPtr->width, ControlPtr->height, *a5, *a6, ControlPtr->x, ControlPtr->y, v10);
-      *a5 += (*a6 >> 1) * ControlPtr->y;
-      *a5 += ControlPtr->x;
+      FastBlit8Bit((void *)(v9 + 12), v7[3], ControlPtr->m_iX, ControlPtr->m_iY, ControlPtr->m_iWidth, ControlPtr->m_iHeight, *a5, *a6, ControlPtr->m_iX, ControlPtr->m_iY, v10);
+      *a5 += (*a6 >> 1) * ControlPtr->m_iY;
+      *a5 += ControlPtr->m_iX;
       return 1;
     }
     else
@@ -1296,7 +1295,7 @@ bool  IGuiEngine::UnlockOwnerImage(int a2, int a3) {
   {
     return 0;
   }
-  if ( ControlPtr->controlType != 9 )
+  if ( ControlPtr->m_iControlType != 9 )
   {
     return 0;
   }
@@ -1334,7 +1333,7 @@ bool  IGuiEngine::EraseOwnerImage(int a2, int a3) {
   {
     return 0;
   }
-  if ( ControlPtr->controlType != 9 )
+  if ( ControlPtr->m_iControlType != 9 )
   {
     return 0;
   }
@@ -1348,7 +1347,7 @@ bool  IGuiEngine::EraseOwnerImage(int a2, int a3) {
     v5 = IGfxEngine::BeginWriteToSurface((IGfxEngine *)g_pGfxEngine, *v6, &v4);
     if ( v5 )
     {
-      FastBlit8Bit((void *)(v8 + 12), v6[3], ControlPtr->x, ControlPtr->y, ControlPtr->width, ControlPtr->height, v5, v4, ControlPtr->x, ControlPtr->y, v9);
+      FastBlit8Bit((void *)(v8 + 12), v6[3], ControlPtr->m_iX, ControlPtr->m_iY, ControlPtr->m_iWidth, ControlPtr->m_iHeight, v5, v4, ControlPtr->m_iX, ControlPtr->m_iY, v9);
       return IGfxEngine::EndWriteToSurface((IGfxEngine *)g_pGfxEngine, *v6);
     }
     else
@@ -1368,7 +1367,7 @@ bool  IGuiEngine::EraseOwnerImage(int a2, int a3) {
 // Decompiled from char __thiscall IGuiEngine::SetSliderPosition(IGuiEngine *this, int a2, int a3, unsigned int a4)
 bool  IGuiEngine::SetSliderPosition(int a2, int a3, int a4) {
   
-  WORD *p_width; // [esp+4h] [ebp-8h]
+  struct SGuiControl *v5; // [esp+4h] [ebp-8h]
   struct SGuiControl *ControlPtr; // [esp+8h] [ebp-4h]
 
   if ( !sub_2FA28C0() )
@@ -1384,37 +1383,37 @@ bool  IGuiEngine::SetSliderPosition(int a2, int a3, int a4) {
   {
     return 0;
   }
-  if ( ControlPtr->controlType == 8 && g_pCurrentDragControl && *(unsigned __int8 *)(g_pCurrentDragControl + 28) == LOBYTE(ControlPtr->unknown4) )
+  if ( ControlPtr->m_iControlType == 8 && g_pCurrentDragControl && *(unsigned __int8 *)(g_pCurrentDragControl + 28) == LOBYTE(ControlPtr->m_iShowTexture) )
   {
     return 0;
   }
-  if ( (ControlPtr->effects & 1) != 0 )
+  if ( (ControlPtr->m_iEffects & 1) != 0 )
   {
-    ControlPtr->effects &= ~1u;
+    ControlPtr->m_iEffects &= ~1u;
   }
-  if ( ControlPtr->controlType == 7 && g_pCurrentDragControl && (struct SGuiControl *)g_pCurrentDragControl == ControlPtr )
+  if ( ControlPtr->m_iControlType == 7 && g_pCurrentDragControl && (struct SGuiControl *)g_pCurrentDragControl == ControlPtr )
   {
     return 0;
   }
-  if ( (char)ControlPtr->showTexture == a4 )
+  if ( (char)ControlPtr->m_iSliderPosition == a4 )
   {
     return 1;
   }
-  ControlPtr->showTexture = a4;
+  ControlPtr->m_iSliderPosition = a4;
   g_bGuiIsDirty = 1;
-  HIBYTE(ControlPtr->unknownData[1]) = 1;
-  if ( ControlPtr->controlType != 7 && ControlPtr->controlType != 8 )
+  ControlPtr->m_iUnknown23 = 1;
+  if ( ControlPtr->m_iControlType != 7 && ControlPtr->m_iControlType != 8 )
   {
     return 1;
   }
-  p_width = &ControlPtr[-1].width;
-  if ( LOBYTE(ControlPtr[-1].unknown4) != 16 )
+  v5 = ControlPtr - 1;
+  if ( ControlPtr[-1].m_iControlType != 16 )
   {
     BBSupportTracePrintF(0, "GUI ENGINE: No previous control GUI_CNTRL_SLIDERAREA of GUI_CNTRL_SLIDER!");
     return 0;
   }
-  ControlPtr->x = CalcSliderPosition(*p_width, p_width[2] + *p_width - ControlPtr->width, (char)ControlPtr->showTexture, 0);
-  *((_BYTE *)p_width + 35) = 1;
+  ControlPtr->m_iX = CalcSliderPosition(v5->m_iX, v5->m_iWidth + v5->m_iX - ControlPtr->m_iWidth, (char)ControlPtr->m_iSliderPosition, 0);
+  v5->m_iUnknown23 = 1;
   return 1;
 }
 
@@ -1434,9 +1433,9 @@ int  IGuiEngine::GetSliderPosition(int a2, int a3) {
   {
     return -1;
   }
-  if ( ControlPtr->controlType == 7 || ControlPtr->controlType == 8 )
+  if ( ControlPtr->m_iControlType == 7 || ControlPtr->m_iControlType == 8 )
   {
-    return (char)ControlPtr->showTexture;
+    return (char)ControlPtr->m_iSliderPosition;
   }
   return -1;
 }
@@ -1459,28 +1458,28 @@ bool  IGuiEngine::SelectControl(int a2, int _iControlId, bool a4) {
   {
     return 0;
   }
-  if ( ((ControlPtr->effects & 1) == 0 || a4) && ((ControlPtr->effects & 1) != 0 || !a4) )
+  if ( ((ControlPtr->m_iEffects & 1) == 0 || a4) && ((ControlPtr->m_iEffects & 1) != 0 || !a4) )
   {
     return 1;
   }
-  if ( ControlPtr->controlType == 2 && a4 || ControlPtr->controlType == 3 )
+  if ( ControlPtr->m_iControlType == 2 && a4 || ControlPtr->m_iControlType == 3 )
   {
     SelectRadioGroup(ControlPtr);
   }
-  else if ( ControlPtr->controlType == 1 )
+  else if ( ControlPtr->m_iControlType == 1 )
   {
     SetControlState(ControlPtr, 1, a4);
   }
-  else if ( (!ControlPtr->controlType || ControlPtr->controlType == 13) && a4 )
+  else if ( (!ControlPtr->m_iControlType || ControlPtr->m_iControlType == 13) && a4 )
   {
     if ( g_pfDialogCallbacks[GetSurfaceID(ControlPtr)] )
     {
-      v6 = (ControlPtr->effects << 16) + ControlPtr->valueLink;
+      v6 = (ControlPtr->m_iEffects << 16) + ControlPtr->m_iValueLink;
       SurfaceID = GetSurfaceID(ControlPtr);
       ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[SurfaceID])(3, v6, 0);
     }
   }
-  else if ( (ControlPtr->controlType == 5 || ControlPtr->controlType == 20) && a4 )
+  else if ( (ControlPtr->m_iControlType == 5 || ControlPtr->m_iControlType == 20) && a4 )
   {
     g_pCurrentEditControl = (int)ControlPtr;
     SelectEditControl(ControlPtr, (int)&dword_ECC2A8[53078]);
@@ -1508,8 +1507,8 @@ bool  IGuiEngine::ResetRadioGroup(int _iContainer, int _iControlId) {
   {
     return 0;
   }
-  unknown4_low = LOBYTE(ControlPtr->unknown4);
-  v5 = *(_DWORD *)(g_pFileHeader + 4 * ControlPtr->unknownId + 16) + g_pFileHeader;
+  unknown4_low = LOBYTE(ControlPtr->m_iShowTexture);
+  v5 = *(_DWORD *)(g_pFileHeader + 4 * ControlPtr->m_iUnknown1F + 16) + g_pFileHeader;
   v8 = v5 + 16;
   for ( i = 0;
         i < *(unsigned __int16 *)(v5 + 12);
@@ -1540,7 +1539,7 @@ bool  IGuiEngine::SetWidth(int a2, int a3, int a4) {
   {
     return 0;
   }
-  ControlPtr->width = a4;
+  ControlPtr->m_iWidth = a4;
   return 1;
 }
 
@@ -1560,8 +1559,8 @@ bool  IGuiEngine::SetPosition(int a2, int a3, int a4, int a5) {
   {
     return 0;
   }
-  ControlPtr->x = a4;
-  ControlPtr->y = a5;
+  ControlPtr->m_iX = a4;
+  ControlPtr->m_iY = a5;
   return 1;
 }
 
@@ -1644,10 +1643,10 @@ struct tagRECT __cdecl IGuiEngine::GetDialogDestinationRect(struct GUI_MENU_DIAL
   LONG v8; // [esp+8h] [ebp-Ch]
   LONG v9; // [esp+Ch] [ebp-8h]
 
-  v7 = a4 + *((unsigned __int16 *)a2 + 2);
-  v8 = (int)(float)((float)((float)*((unsigned __int16 *)a2 + 3) * a5) + 0.5) + a3 + *((unsigned __int16 *)a2 + 1);
-  v9 = (int)(float)((float)((float)*((unsigned __int16 *)a2 + 4) * a6) + 0.5) + v7;
-  retstr->left = a3 + *((unsigned __int16 *)a2 + 1);
+  v7 = a4 + a2->m_iY;
+  v8 = (int)(float)((float)((float)a2->m_iWidth * a5) + 0.5) + a3 + a2->m_iX;
+  v9 = (int)(float)((float)((float)a2->m_iHeight * a6) + 0.5) + v7;
+  retstr->left = a3 + a2->m_iX;
   retstr->top = v7;
   retstr->right = v8;
   retstr->bottom = v9;

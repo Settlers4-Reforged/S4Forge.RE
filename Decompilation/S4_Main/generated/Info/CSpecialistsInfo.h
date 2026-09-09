@@ -13,7 +13,7 @@ public:
 
     // Type information members
 public:
-    CSpecialistsInfo::SSpecialist[5] m_vSpecialists;
+    SHealthState[5] m_vSpecialists;
 
 };
 

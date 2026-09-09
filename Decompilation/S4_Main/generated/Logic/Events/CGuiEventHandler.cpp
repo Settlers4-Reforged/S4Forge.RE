@@ -902,175 +902,161 @@ bool  CGuiEventHandler::HandleMsgKeyDown(class CEvn_Event & a2) {
 
 
 // address=[0x139cae0]
-// Decompiled from char __thiscall CGuiEventHandler::HandleMsgNewDialog(CGuiEventHandler *this, struct CEvn_Event *a2)
+// Decompiled from void __thiscall CGuiEventHandler::HandleMsgNewDialog(CGuiEventHandler *this, struct CEvn_Event *a2)
 void  CGuiEventHandler::HandleMsgNewDialog(class CEvn_Event & a2) {
   
-  char result; // al
-  int lparam; // [esp+Ch] [ebp-8h]
+  int m_lParam; // [esp+Ch] [ebp-8h]
 
-  result = (char)a2;
-  lparam = a2->m_lParam;
-  if ( !lparam )
+  m_lParam = a2->m_lParam;
+  if ( m_lParam )
   {
-    return result;
+    if ( *((_DWORD *)this + 3) != -1 )
+    {
+      IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 3));
+      *((_DWORD *)this + 3) = -1;
+    }
+    switch ( *(_DWORD *)(m_lParam + 4) )
+    {
+      case 0:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 15, GuiDlgBuildingContextProc);
+        *((_DWORD *)this + 3) = 15;
+        break;
+      case 1:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 14, GuiDlgBuildContextProc);
+        *((_DWORD *)this + 3) = 14;
+        break;
+      case 2:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 18, GuiDlgResourceCollectorContextProc);
+        *((_DWORD *)this + 3) = 18;
+        break;
+      case 3:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 19, GuiDlgResourceUpgradeContextProc);
+        *((_DWORD *)this + 3) = 19;
+        break;
+      case 4:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 16, GuiDlgMilitaryBuildingContextProc);
+        *((_DWORD *)this + 3) = 16;
+        break;
+      case 5:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 17, GuiDlgPortContextProc);
+        *((_DWORD *)this + 3) = 17;
+        break;
+      case 6:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 23, GuiDlgStorageContextProc);
+        *((_DWORD *)this + 3) = 23;
+        break;
+      case 7:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 22, GuiDlgBarracksContextProc);
+        *((_DWORD *)this + 3) = 22;
+        break;
+      case 8:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 20, GuiDlgSmallTempleContextProc);
+        *((_DWORD *)this + 3) = 20;
+        break;
+      case 9:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 24, GuiDlgShipVehicleContextProc);
+        *((_DWORD *)this + 3) = 24;
+        break;
+      case 0xA:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 43, GuiDlgYesNoProc);
+        *((_DWORD *)this + 3) = 43;
+        break;
+      case 0x12:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 45, GuiDlgSoldierContextProc);
+        *((_DWORD *)this + 3) = 45;
+        break;
+      case 0x13:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 44, GuiDlgSpecialistsContextProc);
+        *((_DWORD *)this + 3) = 44;
+        break;
+      case 0x14:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 40, GuiDlgVehiclesContextProc);
+        *((_DWORD *)this + 3) = 40;
+        break;
+      case 0x15:
+      case 0x16:
+      case 0x18:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 41, GuiDlgVehicleLoadContextProc);
+        *((_DWORD *)this + 3) = 41;
+        break;
+      case 0x17:
+        CGuiEventHandler::ResetMainMenuForContext(this);
+        IGuiEngine::OpenDialog(g_pGUIEngine, 42, GuiDlgFerryLoadContextProc);
+        *((_DWORD *)this + 3) = 42;
+        break;
+      case 0x1C:
+        switch ( *(_BYTE *)(m_lParam + 8) )
+        {
+          case 0:
+            IGuiEngine::OpenDialog(g_pGUIEngine, 9, GuiDlgBuildBasicProc);
+            *((_DWORD *)this + 3) = 9;
+            break;
+          case 1:
+            IGuiEngine::OpenDialog(g_pGUIEngine, 11, GuiDlgBuildFoodProc);
+            *((_DWORD *)this + 3) = 11;
+            break;
+          case 2:
+            IGuiEngine::OpenDialog(g_pGUIEngine, 10, GuiDlgBuildMetalProc);
+            *((_DWORD *)this + 3) = 10;
+            break;
+          case 3:
+            IGuiEngine::OpenDialog(g_pGUIEngine, 12, GuiDlgBuildTownProc);
+            *((_DWORD *)this + 3) = 12;
+            break;
+          case 4:
+            IGuiEngine::OpenDialog(g_pGUIEngine, 13, GuiDlgBuildMilitaryProc);
+            *((_DWORD *)this + 3) = 13;
+            break;
+          default:
+            return;
+        }
+        break;
+      case 0x1D:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 31, GuiDlgSettlerStatisticMenuProc);
+        *((_DWORD *)this + 3) = 31;
+        break;
+      case 0x1E:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 30, GuiDlgSettlerProductionMenuProc);
+        *((_DWORD *)this + 3) = 30;
+        break;
+      case 0x1F:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 32, GuiDlgFreeCarrierMenuProc);
+        *((_DWORD *)this + 3) = 32;
+        break;
+      case 0x20:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 27, GuiDlgAvailableGoodsProc);
+        *((_DWORD *)this + 3) = 27;
+        break;
+      case 0x21:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 25, GuiDlgTransportpriorityProc);
+        *((_DWORD *)this + 3) = 25;
+        break;
+      case 0x22:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 26, GuiDlgGoodDistributionProc);
+        *((_DWORD *)this + 3) = 26;
+        break;
+      case 0x24:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 77, GuiDlgEconomyProc);
+        *((_DWORD *)this + 3) = 77;
+        break;
+      default:
+        return;
+    }
   }
-  if ( *((_DWORD *)this + 3) != -1 )
-  {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 3));
-    *((_DWORD *)this + 3) = -1;
-  }
-  result = lparam;
-  switch ( *(_DWORD *)(lparam + 4) )
-  {
-    case 0:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 15, GuiDlgBuildingContextProc);
-      *((_DWORD *)this + 3) = 15;
-      break;
-    case 1:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 14, GuiDlgBuildContextProc);
-      result = (char)this;
-      *((_DWORD *)this + 3) = 14;
-      break;
-    case 2:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 18, GuiDlgResourceCollectorContextProc);
-      *((_DWORD *)this + 3) = 18;
-      break;
-    case 3:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 19, GuiDlgResourceUpgradeContextProc);
-      *((_DWORD *)this + 3) = 19;
-      break;
-    case 4:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 16, GuiDlgMilitaryBuildingContextProc);
-      *((_DWORD *)this + 3) = 16;
-      break;
-    case 5:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 17, GuiDlgPortContextProc);
-      result = (char)this;
-      *((_DWORD *)this + 3) = 17;
-      break;
-    case 6:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 23, GuiDlgStorageContextProc);
-      *((_DWORD *)this + 3) = 23;
-      break;
-    case 7:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 22, GuiDlgBarracksContextProc);
-      *((_DWORD *)this + 3) = 22;
-      break;
-    case 8:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgSmallTempleContextProc);
-      result = (char)this;
-      *((_DWORD *)this + 3) = 20;
-      break;
-    case 9:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 24, GuiDlgShipVehicleContextProc);
-      *((_DWORD *)this + 3) = 24;
-      break;
-    case 0xA:
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 43, GuiDlgYesNoProc);
-      *((_DWORD *)this + 3) = 43;
-      break;
-    case 0x12:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 45, GuiDlgSoldierContextProc);
-      result = (char)this;
-      *((_DWORD *)this + 3) = 45;
-      break;
-    case 0x13:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 44, GuiDlgSpecialistsContextProc);
-      *((_DWORD *)this + 3) = 44;
-      break;
-    case 0x14:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 40, GuiDlgVehiclesContextProc);
-      result = (char)this;
-      *((_DWORD *)this + 3) = 40;
-      break;
-    case 0x15:
-    case 0x16:
-    case 0x18:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 41, GuiDlgVehicleLoadContextProc);
-      *((_DWORD *)this + 3) = 41;
-      break;
-    case 0x17:
-      CGuiEventHandler::ResetMainMenuForContext(this);
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 42, GuiDlgFerryLoadContextProc);
-      *((_DWORD *)this + 3) = 42;
-      break;
-    case 0x1C:
-      result = *(_BYTE *)(lparam + 8);
-      switch ( result )
-      {
-        case 0:
-          result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 9, GuiDlgBuildBasicProc);
-          *((_DWORD *)this + 3) = 9;
-          break;
-        case 1:
-          result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 11, GuiDlgBuildFoodProc);
-          *((_DWORD *)this + 3) = 11;
-          break;
-        case 2:
-          IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 10, GuiDlgBuildMetalProc);
-          result = (char)this;
-          *((_DWORD *)this + 3) = 10;
-          break;
-        case 3:
-          result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 12, GuiDlgBuildTownProc);
-          *((_DWORD *)this + 3) = 12;
-          break;
-        case 4:
-          result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 13, GuiDlgBuildMilitaryProc);
-          *((_DWORD *)this + 3) = 13;
-          break;
-        default:
-          return result;
-      }
-      break;
-    case 0x1D:
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 31, GuiDlgSettlerStatisticMenuProc);
-      *((_DWORD *)this + 3) = 31;
-      break;
-    case 0x1E:
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 30, GuiDlgSettlerProductionMenuProc);
-      result = (char)this;
-      *((_DWORD *)this + 3) = 30;
-      break;
-    case 0x1F:
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 32, GuiDlgFreeCarrierMenuProc);
-      *((_DWORD *)this + 3) = 32;
-      break;
-    case 0x20:
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 27, GuiDlgAvailableGoodsProc);
-      *((_DWORD *)this + 3) = 27;
-      break;
-    case 0x21:
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 25, GuiDlgTransportpriorityProc);
-      *((_DWORD *)this + 3) = 25;
-      break;
-    case 0x22:
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 26, GuiDlgGoodDistributionProc);
-      result = (char)this;
-      *((_DWORD *)this + 3) = 26;
-      break;
-    case 0x24:
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 77, GuiDlgEconomyProc);
-      *((_DWORD *)this + 3) = 77;
-      break;
-    default:
-      return result;
-  }
-  return result;
 }
 
 

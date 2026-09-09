@@ -267,7 +267,7 @@ public:
     bool  ShowFrame(void);
 
     // address=[0x2f60260]
-    bool  SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned char a4, unsigned char a5);
+    bool  SolidColorFillGuiSurface(int _iSurfaceType, unsigned char a3, unsigned char a4, unsigned char a5);
 
     // address=[0x2f603b0]
     bool  SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned char a4, unsigned char a5, struct tagRECT a6);

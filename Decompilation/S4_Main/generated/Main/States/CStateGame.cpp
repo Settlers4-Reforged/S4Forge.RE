@@ -388,11 +388,11 @@ void  CStateGame::PerformCommand(std::string a1) {
 // Decompiled from int __thiscall CStateGame::SetupGUI(CStateGame *this)
 void  CStateGame::SetupGUI(void) {
   
-  int LocalPlayerId; // eax
+  int iPlayerId; // eax
   size_t v2; // eax
   int v3; // eax
   int v5; // [esp+4h] [ebp-94h]
-  int v7; // [esp+14h] [ebp-84h]
+  DWORD iRace; // [esp+14h] [ebp-84h]
   CFileEx v8; // [esp+1Ch] [ebp-7Ch] BYREF
   int v9; // [esp+94h] [ebp-4h]
 
@@ -407,17 +407,17 @@ void  CStateGame::SetupGUI(void) {
   }
   CFileEx::CFileEx(&v8, UNUSED_ARG());
   v9 = 0;
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  v7 = CPlayerManager::Race(LocalPlayerId);
-  switch ( v7 )
+  iPlayerId = CPlayerManager::GetLocalPlayerId();
+  iRace = CPlayerManager::Race(iPlayerId);
+  switch ( iRace )
   {
-    case 1:
+    case 1u:
       CFileEx::Open(&v8.IFileEx, (wchar_t *)L"Menu\\GUISetVikings.DAT", CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
       break;
-    case 2:
+    case 2u:
       CFileEx::Open(&v8.IFileEx, (wchar_t *)L"Menu\\GUISetMayas.DAT", CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
       break;
-    case 4:
+    case 4u:
       CFileEx::Open(&v8.IFileEx, (wchar_t *)L"Menu\\GUISetTrojans.DAT", CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
       break;
     default:
