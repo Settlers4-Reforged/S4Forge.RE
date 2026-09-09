@@ -9,16 +9,18 @@ if (NOT bits EQUAL 32)
 endif ()
 
 file(GLOB_RECURSE COMPRESSION_SOURCES ../Compression/*.cpp)
+#file(GLOB_RECURSE LOADSAVE_SOURCES ../LoadSave/*.cpp)
 #file(GLOB_RECURSE CBB_SOURCES ../CBB/*.cpp)
 
 set(SOURCE_LIST
         MapAccess.cpp
-        "${CMAKE_CURRENT_LIST_DIR}/../LoadSave/Cryptor.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/../LoadSave/SMapChunk.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/../Main/Players/CPlayerData.cpp"
+        CPlayerData.cpp
         SEditorGlobalMapData.cpp
         ${COMPRESSION_SOURCES}
         #        ${CBB_SOURCES}
+        #        ${LOADSAVE_SOURCES_SOURCES}
+        "${CMAKE_CURRENT_LIST_DIR}/../LoadSave/Cryptor.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/../LoadSave/SMapChunk.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/../CBB/CBBSupport.cpp"
 )
 

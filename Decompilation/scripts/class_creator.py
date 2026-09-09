@@ -414,12 +414,6 @@ FOLDER_MAP = {
         "CSavedPlayer",
         "CPersistence",
         "CUnique",
-        "CBlob",
-        "CLandBlob",
-        "CHeightBlob",
-        "CMountainBlob",
-        "CPreviewBlob",
-        "CObjectBlob",
         "Error",
         "SerialError",
         "CRCTable",
@@ -499,11 +493,21 @@ FOLDER_MAP = {
         "IFutureEvents",
     ],
 
+    "MapAccess/": [
+        "CPlayerData",
+    ],
+
     "MapGen/": [
         "IMapGeneratorHost",
         "CMapGeneratorHost",
         "CRandomMaps",
         "IRandomMaps",
+        "CBlob",
+        "CLandBlob",
+        "CHeightBlob",
+        "CMountainBlob",
+        "CPreviewBlob",
+        "CObjectBlob",
         "CGrid",
         "CBasicGrid",
         "CFeatureGrid",
@@ -528,7 +532,6 @@ FOLDER_MAP = {
 
     "Main/Players/": [
         "CPlayerManager",
-        "CPlayerData",
         "CPlayerIterator",
         "CPlayerMagicData",
         "CPlayerStatisticData",

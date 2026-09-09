@@ -1,10 +1,10 @@
 #include "MapAccess.h"
 #include <comutil.h>
 
+#include "CPlayerData.h"
 #include "LoadSave/Crc.h"
 #include "LoadSave/Cryptor.h"
 #include "LoadSave/SMapChunkHeader.h"
-#include "Main/Players/CPlayerData.h"
 #include "SEditorGlobalMapData.h"
 
 struct EDITOR_INFO {
