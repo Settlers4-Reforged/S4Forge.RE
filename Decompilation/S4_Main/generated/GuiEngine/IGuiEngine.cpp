@@ -6,7 +6,7 @@
 // Decompiled from int __thiscall IGuiEngine::GetDialogsRenderOffsetX(IGuiEngine *this)
 int  IGuiEngine::GetDialogsRenderOffsetX(void)const {
   
-  return *(_DWORD *)this;
+  return this->m_iDialogsRenderOffsetX;
 }
 
 
@@ -14,7 +14,7 @@ int  IGuiEngine::GetDialogsRenderOffsetX(void)const {
 // Decompiled from int __thiscall IGuiEngine::GetDialogsRenderOffsetY(IGuiEngine *this)
 int  IGuiEngine::GetDialogsRenderOffsetY(void)const {
   
-  return *((_DWORD *)this + 1);
+  return this->m_iDialogsRenderOffsetY;
 }
 
 
@@ -22,7 +22,7 @@ int  IGuiEngine::GetDialogsRenderOffsetY(void)const {
 // Decompiled from float __thiscall IGuiEngine::GetDialogsRenderScaleX(IGuiEngine *this)
 float  IGuiEngine::GetDialogsRenderScaleX(void)const {
   
-  return *((float *)this + 2);
+  return this->m_fDialogsRenderScaleX;
 }
 
 
@@ -30,7 +30,7 @@ float  IGuiEngine::GetDialogsRenderScaleX(void)const {
 // Decompiled from double __thiscall IGuiEngine::GetDialogsRenderScaleY(IGuiEngine *this)
 float  IGuiEngine::GetDialogsRenderScaleY(void)const {
   
-  return *((float *)this + 3);
+  return this->m_fDialogsRenderScaleY;
 }
 
 
@@ -105,7 +105,7 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
   IGfxEngine::CreateGuiSurface(g_pGfxEngine, v12->m_iSurfaceType, &v15);
   IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, v12->m_iSurfaceType, 1);
   g_iOpenDialogs[v12->m_iSurfaceType] = container + 1;
-  g_pfDialogCallbacks[v12->m_iSurfaceType] = (int)a3;
+  g_pfDialogCallbacks[v12->m_iSurfaceType] = a3;
   a3(0, 0, 0);
   v14 = v12->m_sControls;
   for ( j = 0;
@@ -185,57 +185,57 @@ bool  IGuiEngine::OpenDialog(int a2, bool (__cdecl*)(int,int,int) a3) {
 
 
 // address=[0x2f9fff0]
-// Decompiled from char __thiscall IGuiEngine::Init(IGuiEngine *this, struct IGfxEngine *a2, struct CGfxManager *a3, int a4, int a5, bool (__cdecl *a6)(int, int, int), int a7)
-bool  IGuiEngine::Init(class IGfxEngine * a2, class CGfxManager * a3, void * a4, int a5, bool (__cdecl*)(int,int,int) a6, int _iLanguage) {
+// Decompiled from char __thiscall IGuiEngine::Init(IGuiEngine *this, struct IGfxEngine *_pGfxEngine, struct CGfxManager *_pGfxManager, GUI_MENU_FILE_HEADER *_pFileHeader, int _iStartingDialogId, bool (__cdecl *_fpStartingDialogHandler)(int, int, int), int _iLanguage)
+bool  IGuiEngine::Init(class IGfxEngine * _pGfxEngine, class CGfxManager * _pGfxManager, void * _pFileHeader, int _iStartingDialogId, bool (__cdecl*)(int,int,int) _fpStartingDialogHandler, int _iLanguage) {
   
   int DeviceCaps; // eax
-  HFONT FontA; // eax
+  HFONT hFont; // eax
   int v10; // [esp+4h] [ebp-20h]
   HDC hdc; // [esp+8h] [ebp-1Ch]
-  int nNumber; // [esp+Ch] [ebp-18h]
-  DWORD iCharSet; // [esp+18h] [ebp-Ch]
+  int iFontHeight; // [esp+Ch] [ebp-18h]
+  MACRO_CHARSET iCharSet; // [esp+18h] [ebp-Ch]
   int i; // [esp+1Ch] [ebp-8h]
   char v16; // [esp+23h] [ebp-1h]
 
-  if ( !a2 || !a4 || !a3 )
+  if ( !_pGfxEngine || !_pFileHeader || !_pGfxManager )
   {
     return 0;
   }
   g_iDialogToIgnore = -1;
   g_bDisableEvents = 1;
-  g_pGfxEngine = (int)a2;
+  g_pGfxEngine = _pGfxEngine;
   if ( GetGfxInterfaceVersion() == 229 )
   {
-    iCharSet = 0;
+    iCharSet = ANSI_CHARSET;
     v16 = 0;
     g_iAlignMode = 0;
     v10 = 0;
-    switch ( a7 )
+    switch ( _iLanguage )
     {
       case 5:
       case 11:
       case 13:
-        iCharSet = 238;
+        iCharSet = EASTEUROPE_CHARSET;
         break;
       case 6:
-        iCharSet = 129;
+        iCharSet = HANGEUL_CHARSET;
         v16 = 1;
         v10 = -2;
         break;
       case 7:
-        iCharSet = 136;
+        iCharSet = CHINESEBIG5_CHARSET;
         v16 = 1;
         break;
       case 12:
         g_iAlignMode = 1;
-        iCharSet = 177;
+        iCharSet = HEBREW_CHARSET;
         v16 = 1;
         break;
       case 16:
-        iCharSet = 204;
+        iCharSet = RUSSIAN_CHARSET;
         break;
       case 18:
-        iCharSet = 128;
+        iCharSet = SHIFTJIS_CHARSET;
         v16 = 1;
         break;
       default:
@@ -252,40 +252,40 @@ bool  IGuiEngine::Init(class IGfxEngine * a2, class CGfxManager * a3, void * a4,
         {
           DeleteObject(g_hFonts[i]);
         }
-        nNumber = v10 + dword_3AD2458[21 * i];
+        iFontHeight = v10 + s_sFontSettings[i].m_iHeight;
         if ( v16 )
         {
           DeviceCaps = GetDeviceCaps(hdc, 90);
-          nNumber = MulDiv(nNumber, 4 * DeviceCaps, 374);
+          iFontHeight = MulDiv(iFontHeight, 4 * DeviceCaps, 374);
         }
-        if ( byte_3AD2478[84 * i] )
+        if ( s_sFontSettings[i].m_bUseQualityFont )
         {
-          FontA = CreateFontA(nNumber, dword_3AD245C[21 * i], 0, 0, dword_3AD2460[21 * i], 0, 0, 0, iCharSet, 0, 0, 4u, 0, &aArial_1[84 * i]);
+          hFont = CreateFontA(iFontHeight, s_sFontSettings[i].m_iWidth, 0, 0, s_sFontSettings[i].m_iWeight, 0, 0, 0, iCharSet, 0, 0, 4u, 0, s_sFontSettings[i].m_sFontName);
         }
         else
         {
-          FontA = CreateFontA(nNumber, dword_3AD245C[21 * i], 0, 0, dword_3AD2460[21 * i], 0, 0, 0, iCharSet, 0, 0, 0, 0, &aArial_1[84 * i]);
+          hFont = CreateFontA(iFontHeight, s_sFontSettings[i].m_iWidth, 0, 0, s_sFontSettings[i].m_iWeight, 0, 0, 0, iCharSet, 0, 0, 0, 0, s_sFontSettings[i].m_sFontName);
         }
-        g_hFonts[i] = FontA;
+        g_hFonts[i] = hFont;
         if ( !g_hFonts[i] )
         {
           BBSupportTracePrintF(0, "GUI ENGINE: Cannot create font!");
         }
       }
       ReleaseDC(0, hdc);
-      IGfxEngine::SetWidthOfLeftGuiBorder((IGfxEngine *)g_pGfxEngine, 0);
-      g_pGfxManager = (int)a3;
-      g_pFileHeader = a4;
+      IGfxEngine::SetWidthOfLeftGuiBorder(g_pGfxEngine, 0);
+      g_pGfxManager = _pGfxManager;
+      g_pFileHeader = _pFileHeader;
       g_pCurrentSelectedControl = 0;
       g_pCurrentDragControl = 0;
       g_pCurrentEditControl = 0;
       g_pCurrentRepeatControl = 0;
       memset(g_iOpenDialogs, 0, sizeof(g_iOpenDialogs));
-      memset(g_mbstrTextTable, 0, 0x5DC0u);
+      memset(g_mbstrTextTable, 0, sizeof(g_mbstrTextTable));
       memset(g_bUsedTexts, 0, 0x50u);
       IGuiEngine::InitShadeTables(this);
       g_bGuiIsDirty = 1;
-      IGuiEngine::OpenDialog(this, a5, a6);
+      IGuiEngine::OpenDialog(this, _iStartingDialogId, _fpStartingDialogHandler);
       g_bDisableEvents = 0;
       IGuiEngine::SetTooltipID(this, 45, 1441, 1803, 1804);
       IGuiEngine::DisableDialogControls(this, 36);
@@ -470,14 +470,10 @@ bool  IGuiEngine::RenderGui(void) {
 
 
 // address=[0x2fa08e0]
-// Decompiled from BOOL __thiscall IGuiEngine::EnableEventInput(IGuiEngine *this, bool a2)
+// Decompiled from void __thiscall IGuiEngine::EnableEventInput(IGuiEngine *this, bool a2)
 void  IGuiEngine::EnableEventInput(bool a2) {
   
-  BOOL result; // eax
-
-  result = a2;
   g_bDisableEvents = !a2;
-  return result;
 }
 
 
@@ -514,121 +510,118 @@ void  IGuiEngine::SetDialogsRenderOffset(int a2, int a3, float a4, float a5) {
 
 
 // address=[0x2fa1000]
-// Decompiled from char __thiscall IGuiEngine::GetDialogRect(IGuiEngine *this, int a2, struct SGuiRect *a3)
-bool  IGuiEngine::GetDialogRect(int a2, struct SGuiRect & a3) {
+// Decompiled from char __thiscall IGuiEngine::GetDialogRect(IGuiEngine *this, int a1, struct SGuiRect *a3)
+bool  IGuiEngine::GetDialogRect(int a1, struct SGuiRect & a3) {
   
-  GUI_MENU_DIALOG_HEADER *v4; // eax
+  GUI_MENU_DIALOG_HEADER *pContainer; // eax
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  if ( !(unsigned __int8)sub_2FA2880(a2) )
+  if ( !(unsigned __int8)sub_2FA2880(a1) )
   {
     return 0;
   }
-  v4 = (GUI_MENU_DIALOG_HEADER *)sub_2FA2900(a2);
-  *(_DWORD *)a3 = v4->m_iX;
-  *((_DWORD *)a3 + 1) = v4->m_iY;
-  *((_DWORD *)a3 + 2) = v4->m_iX + v4->m_iWidth - 1;
-  *((_DWORD *)a3 + 3) = v4->m_iY + v4->m_iHeight - 1;
+  pContainer = GuiGetContainer2(a1);
+  a3->m_iTopLeftX = pContainer->m_iX;
+  a3->m_iTopLeftY = pContainer->m_iY;
+  a3->m_iBottomRightX = pContainer->m_iX + pContainer->m_iWidth - 1;
+  a3->m_iBottomRightY = pContainer->m_iY + pContainer->m_iHeight - 1;
   return 1;
 }
 
 
 // address=[0x2fa1090]
-// Decompiled from char __thiscall IGuiEngine::SetDialogRect(_DWORD *this, int a2, int a3, int a4, __int16 a5, __int16 a6)
-bool  IGuiEngine::SetDialogRect(int a2, struct SGuiRect a3) {
+// Decompiled from char __thiscall IGuiEngine::SetDialogRect(_DWORD *this, int a1, struct SGuiRect a3)
+bool  IGuiEngine::SetDialogRect(int a1, struct SGuiRect a3) {
   
-  unsigned __int16 *v8; // [esp+4h] [ebp-4h]
+  GUI_MENU_DIALOG_HEADER *pContainer; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  if ( !(unsigned __int8)sub_2FA2880(a2) )
+  if ( !sub_2FA2880(a1) )
   {
     return 0;
   }
-  v8 = (unsigned __int16 *)sub_2FA2900(a2);
-  v8[1] = a3;
-  v8[2] = a4;
-  v8[3] = a5 + 1 - a3;
-  v8[4] = a6 + 1 - a4;
-  IGfxEngine::SetGuiSurfaceDestinationPosition((IGfxEngine *)g_pGfxEngine, *v8, a3 + *this, a4 + this[1]);
+  pContainer = GuiGetContainer2(a1);
+  pContainer->m_iX = a3.m_iTopLeftX;
+  pContainer->m_iY = a3.m_iTopLeftY;
+  pContainer->m_iWidth = LOWORD(a3.m_iBottomRightX) + 1 - LOWORD(a3.m_iTopLeftX);
+  pContainer->m_iHeight = LOWORD(a3.m_iBottomRightY) + 1 - LOWORD(a3.m_iTopLeftY);
+  IGfxEngine::SetGuiSurfaceDestinationPosition(g_pGfxEngine, pContainer->m_iSurfaceType, a3.m_iTopLeftX + *this, a3.m_iTopLeftY + this[1]);
   return 1;
 }
 
 
 // address=[0x2fa1140]
-// Decompiled from bool __thiscall IGuiEngine::MoveDialogTo(IGuiEngine *this, int a2, int a3, int a4)
+// Decompiled from char __thiscall IGuiEngine::MoveDialogTo(IGuiEngine *this, int a1, int a3, int a4)
 bool  IGuiEngine::MoveDialogTo(int a2, int a3, int a4) {
   
-  unsigned __int16 *v6; // [esp+4h] [ebp-4h]
+  GUI_MENU_DIALOG_HEADER *Container2; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  if ( !(unsigned __int8)sub_2FA2880(a2) )
+  if ( !sub_2FA2880(a1) )
   {
     return 0;
   }
-  v6 = (unsigned __int16 *)sub_2FA2900(a2);
-  v6[1] = a3;
-  v6[2] = a4;
-  return IGfxEngine::SetGuiSurfaceDestinationPosition((IGfxEngine *)g_pGfxEngine, *v6, a3 + *(_DWORD *)this, a4 + *((_DWORD *)this + 1));
+  Container2 = GuiGetContainer2(a1);
+  Container2->m_iX = a3;
+  Container2->m_iY = a4;
+  return IGfxEngine::SetGuiSurfaceDestinationPosition(g_pGfxEngine, Container2->m_iSurfaceType, a3 + this->m_iDialogsRenderOffsetX, a4 + this->m_iDialogsRenderOffsetY);
 }
 
 
 // address=[0x2fa11c0]
-// Decompiled from char __thiscall IGuiEngine::GetDialogRenderRect(IGuiEngine *this, int a2, struct SGuiRect *a3)
+// Decompiled from char __thiscall IGuiEngine::GetDialogRenderRect(IGuiEngine *this, int a1, struct SGuiRect *a3)
 bool  IGuiEngine::GetDialogRenderRect(int a2, struct SGuiRect & a3) {
   
   struct tagRECT v4; // [esp+8h] [ebp-3Ch] BYREF
-  const struct GUI_MENU_DIALOG_HEADER *v5; // [esp+18h] [ebp-2Ch]
-  IGuiEngine *v6; // [esp+1Ch] [ebp-28h]
+  const struct GUI_MENU_DIALOG_HEADER *Container2; // [esp+18h] [ebp-2Ch]
   LONG top; // [esp+24h] [ebp-20h]
   __int64 v8; // [esp+28h] [ebp-1Ch]
   struct tagRECT v9; // [esp+30h] [ebp-14h]
 
-  v6 = this;
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  if ( !(unsigned __int8)sub_2FA2880(a2) )
+  if ( !sub_2FA2880(a1) )
   {
     return 0;
   }
-  v5 = (const struct GUI_MENU_DIALOG_HEADER *)sub_2FA2900(a2);
-  v9 = *IGuiEngine::GetDialogDestinationRect(&v4, v5, *(_DWORD *)v6, *((_DWORD *)v6 + 1), *((float *)v6 + 2), *((float *)v6 + 3));
+  Container2 = GuiGetContainer2(a1);
+  v9 = *IGuiEngine::GetDialogDestinationRect(&v4, Container2, this->m_iDialogsRenderOffsetX, this->m_iDialogsRenderOffsetY, this->m_fDialogsRenderScaleX, this->m_fDialogsRenderScaleY);
   top = v9.top;
   v8 = *(_QWORD *)&v9.right;
-  *(_DWORD *)a3 = v9.left;
-  *((_DWORD *)a3 + 2) = v8;
-  *((_DWORD *)a3 + 1) = top;
-  *((_DWORD *)a3 + 3) = HIDWORD(v8);
+  a3->m_iTopLeftX = v9.left;
+  a3->m_iBottomRightX = v8;
+  a3->m_iTopLeftY = top;
+  a3->m_iBottomRightY = HIDWORD(v8);
   return 1;
 }
 
 
 // address=[0x2fa12b0]
-// Decompiled from bool __thiscall IGuiEngine::SetDialogRenderPos(IGuiEngine *this, int a2, int a3, int a4)
+// Decompiled from char __thiscall IGuiEngine::SetDialogRenderPos(IGuiEngine *this, int a2, int a3, int a4)
 bool  IGuiEngine::SetDialogRenderPos(int a2, int a3, int a4) {
   
-  return IGuiEngine::MoveDialogTo(this, a2, a3 - *(_DWORD *)this, a4 - *((_DWORD *)this + 1));
+  return IGuiEngine::MoveDialogTo(this, a2, a3 - this->m_iDialogsRenderOffsetX, a4 - this->m_iDialogsRenderOffsetY);
 }
 
 
 // address=[0x2fa12e0]
-// Decompiled from char __thiscall IGuiEngine::EnableTooltipsExt(IGuiEngine *this, bool a2)
+// Decompiled from void __thiscall IGuiEngine::EnableTooltipsExt(IGuiEngine *this, bool a2)
 void  IGuiEngine::EnableTooltipsExt(bool a2) {
   
-  char result; // al
   int SurfaceID; // eax
-  int v4; // eax
-  int v5; // [esp-8h] [ebp-Ch]
+  int v3; // eax
+  int v4; // [esp-8h] [ebp-Ch]
   int m_iTooltipLinkExtra; // [esp-4h] [ebp-8h]
 
   if ( CToolTip::IsOpen((CToolTip *)g_cToolTipExt) && !a2 )
@@ -637,48 +630,34 @@ void  IGuiEngine::EnableTooltipsExt(bool a2) {
     CToolTip::CloseTooltip((CToolTip *)g_cToolTipExt);
   }
   CToolTip::SetEnableStatus((CToolTip *)g_cToolTipExt, a2);
-  result = a2;
-  if ( !a2 )
+  if ( a2 )
   {
-    return result;
+    if ( g_pCurrentSelectedControl )
+    {
+      m_iTooltipLinkExtra = (__int16)g_pCurrentSelectedControl->m_iTooltipLinkExtra;
+      v4 = (g_pCurrentSelectedControl->m_iEffects << 16) + g_pCurrentSelectedControl->m_iValueLink;
+      SurfaceID = GetSurfaceID(g_pCurrentSelectedControl);
+      g_pfDialogCallbacks[SurfaceID](9, v4, m_iTooltipLinkExtra);
+      v3 = GetSurfaceID(g_pCurrentSelectedControl);
+      CToolTip::SetSourceDialogSurfaceID((CToolTip *)g_cToolTipExt, v3);
+      CToolTipExt::OpenTooltip((CToolTipExt *)g_cToolTipExt);
+    }
   }
-  if ( !g_pCurrentSelectedControl )
-  {
-    return result;
-  }
-  m_iTooltipLinkExtra = (__int16)g_pCurrentSelectedControl->m_iTooltipLinkExtra;
-  v5 = (g_pCurrentSelectedControl->m_iEffects << 16) + g_pCurrentSelectedControl->m_iValueLink;
-  SurfaceID = GetSurfaceID(g_pCurrentSelectedControl);
-  ((void (__cdecl *)(int, int, int))g_pfDialogCallbacks[SurfaceID])(9, v5, m_iTooltipLinkExtra);
-  v4 = GetSurfaceID(g_pCurrentSelectedControl);
-  CToolTip::SetSourceDialogSurfaceID((CToolTip *)g_cToolTipExt, v4);
-  return CToolTipExt::OpenTooltip((CToolTipExt *)g_cToolTipExt);
 }
 
 
 // address=[0x2fa13a0]
-// Decompiled from int __thiscall IGuiEngine::SetDlgToIgnore(IGuiEngine *this, int a2, bool a3)
+// Decompiled from void __thiscall IGuiEngine::SetDlgToIgnore(IGuiEngine *this, int a2, bool a3)
 void  IGuiEngine::SetDlgToIgnore(int a2, bool a3) {
   
-  int result; // eax
-
-  result = sub_2FA28C0();
-  if ( !(_BYTE)result )
+  if ( GuiEngineReady() && sub_2FA2880(a2) )
   {
-    return result;
+    g_iDialogToIgnore = a2;
+    if ( !a3 )
+    {
+      g_iDialogToIgnore = -1;
+    }
   }
-  result = sub_2FA2880(a2);
-  if ( !(_BYTE)result )
-  {
-    return result;
-  }
-  result = a2;
-  g_iDialogToIgnore = a2;
-  if ( !a3 )
-  {
-    g_iDialogToIgnore = -1;
-  }
-  return result;
 }
 
 
@@ -686,11 +665,11 @@ void  IGuiEngine::SetDlgToIgnore(int a2, bool a3) {
 // Decompiled from char __stdcall IGuiEngine::SetTooltip(char *Str)
 bool  IGuiEngine::SetTooltip(char const * Str) {
   
-  if ( !sub_2FA28C0() || !Str )
+  if ( !GuiEngineReady() || !Str )
   {
     return 0;
   }
-  CToolTip::SetTooltipText(Str);
+  CToolTip::SetTooltipText(g_cToolTip, Str);
   return 1;
 }
 
@@ -699,7 +678,7 @@ bool  IGuiEngine::SetTooltip(char const * Str) {
 // Decompiled from char __stdcall IGuiEngine::SetTooltipExt(char *Str)
 bool  IGuiEngine::SetTooltipExt(char const * Str) {
   
-  if ( !sub_2FA28C0() || !Str )
+  if ( !GuiEngineReady() || !Str )
   {
     return 0;
   }
@@ -712,87 +691,87 @@ bool  IGuiEngine::SetTooltipExt(char const * Str) {
 // Decompiled from char __thiscall IGuiEngine::SetTooltipID(IGuiEngine *this, int a2, int a3, int a4, int a5)
 bool  IGuiEngine::SetTooltipID(int a2, int a3, int a4, int a5) {
   
-  struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
+  struct SGuiControl *pControl; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  ControlPtr = GetControlPtr(a2, a3);
-  if ( !ControlPtr )
+  pControl = GetControlPtr(a2, a3);
+  if ( !pControl )
   {
     return 0;
   }
   if ( a4 >= 0 )
   {
-    ControlPtr->m_iTooltipLink = a4;
+    pControl->m_iTooltipLink = a4;
   }
   if ( a5 >= 0 )
   {
-    ControlPtr->m_iTooltipLinkExtra = a5;
+    pControl->m_iTooltipLinkExtra = a5;
   }
   return 1;
 }
 
 
 // address=[0x2fa14d0]
-// Decompiled from char __thiscall IGuiEngine::DisableDialogControls(IGuiEngine *this, int a2)
+// Decompiled from char __thiscall IGuiEngine::DisableDialogControls(IGuiEngine *this, int a1)
 bool  IGuiEngine::DisableDialogControls(int a2) {
   
   char result; // al
-  int v3; // [esp+4h] [ebp-4h]
+  GUI_MENU_DIALOG_HEADER *Container2; // [esp+4h] [ebp-4h]
 
-  if ( !(unsigned __int8)sub_2FA2880(a2) )
+  if ( !sub_2FA2880(a1) )
   {
     return 0;
   }
-  v3 = sub_2FA2900(a2);
-  if ( !v3 )
+  Container2 = GuiGetContainer2(a1);
+  if ( !Container2 )
   {
     return 0;
   }
   result = 1;
-  *(_WORD *)(v3 + 12) = 0;
+  Container2->m_iElementCount = 0;
   return result;
 }
 
 
 // address=[0x2fa1520]
-// Decompiled from char __thiscall IGuiEngine::SetText(struct IGuiEngine *this, int _iContainer, int _iControlId, char *Str)
-bool  IGuiEngine::SetText(int _iContainer, int _iControlId, char const * Str) {
+// Decompiled from char __thiscall IGuiEngine::SetText(struct IGuiEngine *this, int _iContainer, int _iControlId, char *_spText)
+bool  IGuiEngine::SetText(int _iContainer, int _iControlId, char const * _spText) {
   
   int v5; // eax
   int v6; // ecx
   unsigned int m_iId; // [esp+4h] [ebp-14h]
   unsigned int v8; // [esp+8h] [ebp-10h]
   int i; // [esp+Ch] [ebp-Ch]
-  int Count; // [esp+10h] [ebp-8h]
-  struct SGuiControl *ControlPtr; // [esp+14h] [ebp-4h]
+  int iTextLength; // [esp+10h] [ebp-8h]
+  struct SGuiControl *pControl; // [esp+14h] [ebp-4h]
 
-  if ( !sub_2FA28C0() || !Str )
+  if ( !GuiEngineReady() || !_spText )
   {
     return 0;
   }
-  ControlPtr = GetControlPtr(_iContainer, _iControlId);
-  if ( !ControlPtr )
+  pControl = GetControlPtr(_iContainer, _iControlId);
+  if ( !pControl )
   {
     return 0;
   }
-  Count = strlen(Str);
-  if ( ControlPtr->m_iControlType == 21 )
+  iTextLength = strlen(_spText);
+  if ( pControl->m_iControlType == 21 )
   {
-    ControlPtr->m_iTextOffset = (DWORD)Str;
-    if ( !Count )
+    pControl->m_spText = (DWORD)_spText;
+    if ( !iTextLength )
     {
-      ControlPtr->m_iTextOffset = 0;
+      pControl->m_spText = 0;
     }
-    ControlPtr->m_iUnknown23 = 1;
+    pControl->m_bDirty = 1;
     g_bGuiIsDirty = 1;
     return 1;
   }
   else
   {
-    if ( (ControlPtr->m_iId & 0x80u) == 0 )
+    if ( pControl->m_iId >= 0 )
     {
       goto LABEL_41;
     }
@@ -802,52 +781,52 @@ bool  IGuiEngine::SetText(int _iContainer, int _iControlId, char const * Str) {
     {
       if ( !g_bUsedTexts[i] )
       {
-        ControlPtr->m_iId = i;
+        pControl->m_iId = i;
         g_bUsedTexts[i] = 1;
         break;
       }
     }
-    if ( (ControlPtr->m_iId & 0x80u) != 0 )
+    if ( pControl->m_iId < 0 )
     {
       return 0;
     }
-    if ( Count )
+    if ( iTextLength )
     {
 LABEL_41:
-      if ( j___mbscmp((const unsigned __int8 *)Str, (const unsigned __int8 *)&g_mbstrTextTable[75 * (char)ControlPtr->m_iId]) )
+      if ( j___mbscmp(_spText, g_mbstrTextTable[pControl->m_iId]) )
       {
-        if ( Count )
+        if ( iTextLength )
         {
-          if ( Count >= 299 )
+          if ( iTextLength >= 299 )
           {
-            Count = 299;
+            iTextLength = 299;
           }
-          j__strncpy((char *)&g_mbstrTextTable[75 * (char)ControlPtr->m_iId], Str, Count);
-          *((_BYTE *)&g_mbstrTextTable[75 * (char)ControlPtr->m_iId] + Count) = 0;
+          j__strncpy(g_mbstrTextTable[pControl->m_iId], _spText, iTextLength);
+          g_mbstrTextTable[pControl->m_iId][iTextLength] = 0;
           g_bGuiIsDirty = 1;
-          ControlPtr->m_iUnknown23 = 1;
+          pControl->m_bDirty = 1;
           return 1;
         }
         else
         {
-          if ( ControlPtr->m_iControlType == 5 || ControlPtr->m_iControlType == 20 )
+          if ( pControl->m_iControlType == 5 || pControl->m_iControlType == 20 )
           {
-            LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->m_iId]) = 0;
+            g_mbstrTextTable[pControl->m_iId][0] = 0;
           }
           else
           {
-            LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->m_iId]) = 0;
-            m_iId = (char)ControlPtr->m_iId;
+            g_mbstrTextTable[pControl->m_iId][0] = 0;
+            m_iId = pControl->m_iId;
             if ( m_iId >= 0x50 )
             {
               report_rangecheckfailure();
             }
-            v6 = (char)ControlPtr->m_iId;
+            v6 = pControl->m_iId;
             g_bUsedTexts[m_iId] = 0;
-            ControlPtr->m_iId = -1;
+            pControl->m_iId = -1;
           }
           g_bGuiIsDirty = 1;
-          ControlPtr->m_iUnknown23 = 1;
+          pControl->m_bDirty = 1;
           return 1;
         }
       }
@@ -858,21 +837,21 @@ LABEL_41:
     }
     else
     {
-      if ( ControlPtr->m_iControlType == 5 || ControlPtr->m_iControlType == 20 )
+      if ( pControl->m_iControlType == 5 || pControl->m_iControlType == 20 )
       {
-        LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->m_iId]) = 0;
+        g_mbstrTextTable[pControl->m_iId][0] = 0;
       }
       else
       {
-        LOBYTE(g_mbstrTextTable[75 * (char)ControlPtr->m_iId]) = 0;
-        v8 = (char)ControlPtr->m_iId;
+        g_mbstrTextTable[pControl->m_iId][0] = 0;
+        v8 = pControl->m_iId;
         if ( v8 >= 0x50 )
         {
           report_rangecheckfailure();
         }
-        v5 = (char)ControlPtr->m_iId;
+        v5 = pControl->m_iId;
         g_bUsedTexts[v8] = 0;
-        ControlPtr->m_iId = -1;
+        pControl->m_iId = -1;
       }
       return 1;
     }
@@ -881,84 +860,84 @@ LABEL_41:
 
 
 // address=[0x2fa17e0]
-// Decompiled from char __thiscall IGuiEngine::SetEditProperties(IGuiEngine *this, int a2, int a3, unsigned __int8 a4, unsigned __int8 a5)
-bool  IGuiEngine::SetEditProperties(int a2, int a3, unsigned char a4, unsigned char a5) {
+// Decompiled from char __thiscall IGuiEngine::SetEditProperties(IGuiEngine *this, int _iContainer, int _iControl, unsigned __int8 _iProp1, BYTE _iProp2)
+bool  IGuiEngine::SetEditProperties(int _iContainer, int _iControl, unsigned char _iProp1, unsigned char _iProp2) {
   
-  unsigned __int8 v6; // [esp+4h] [ebp-8h]
-  struct SGuiControl *ControlPtr; // [esp+8h] [ebp-4h]
+  unsigned __int8 iProp1; // [esp+4h] [ebp-8h]
+  struct SGuiControl *pControl; // [esp+8h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  ControlPtr = GetControlPtr(a2, a3);
-  if ( !ControlPtr )
+  pControl = GetControlPtr(_iContainer, _iControl);
+  if ( !pControl )
   {
     return 0;
   }
-  if ( ControlPtr->m_iControlType != 5 && ControlPtr->m_iControlType != 20 )
+  if ( pControl->m_iControlType != 5 && pControl->m_iControlType != 20 )
   {
     return 0;
   }
-  if ( a4 >= 0x73u )
+  if ( _iProp1 >= 115u )
   {
-    v6 = 115;
+    iProp1 = 115;
   }
   else
   {
-    v6 = a4;
+    iProp1 = _iProp1;
   }
-  LOBYTE(ControlPtr->unknown) = v6;
-  HIBYTE(ControlPtr->unknown) = a5;
+  pControl->m_iEditProperty1 = iProp1;
+  pControl->m_iEditProperty2 = _iProp2;
   return 1;
 }
 
 
 // address=[0x2fa1870]
-// Decompiled from char __thiscall IGuiEngine::SetTypeAsButton(IGuiEngine *this, int a2, int a3)
-bool  IGuiEngine::SetTypeAsButton(int a2, int a3) {
+// Decompiled from char __thiscall IGuiEngine::SetTypeAsButton(IGuiEngine *this, int _iContainer, int _iControl)
+bool  IGuiEngine::SetTypeAsButton(int _iContainer, int _iControl) {
   
-  struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
+  struct SGuiControl *pControl; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  ControlPtr = GetControlPtr(a2, a3);
-  if ( !ControlPtr )
+  pControl = GetControlPtr(_iContainer, _iControl);
+  if ( !pControl )
   {
     return 0;
   }
-  ControlPtr->m_iControlType = 13;
-  ControlPtr->m_iWidth = 161;
-  ControlPtr->m_iHeight = 30;
-  ControlPtr->m_iMainTexture = 196;
-  ControlPtr->m_iPressedTexture = 197;
-  ControlPtr->m_iTextStyle = 6;
-  ControlPtr->m_iUnknown1F = 2;
-  LOBYTE(ControlPtr->m_iUnknown20[0]) = 4;
-  ControlPtr->m_iX = 567;
-  ControlPtr->m_iY = 100;
+  pControl->m_iControlType = GUI_CNTRL_BUTTON;
+  pControl->m_iWidth = 161;
+  pControl->m_iHeight = 30;
+  pControl->m_iMainTexture = 196;
+  pControl->m_iPressedTexture = 197;
+  pControl->m_iTextStyle = 6;
+  pControl->m_iParentContainer = 2;
+  pControl->m_iTextFormat = 4;
+  pControl->m_iX = 567;
+  pControl->m_iY = 100;
   return 1;
 }
 
 
 // address=[0x2fa1920]
-// Decompiled from char __thiscall IGuiEngine::SetTypeAsText(IGuiEngine *this, int a2, int a3)
-bool  IGuiEngine::SetTypeAsText(int a2, int a3) {
+// Decompiled from char __thiscall IGuiEngine::SetTypeAsText(IGuiEngine *this, int _iContainer, int _iControl)
+bool  IGuiEngine::SetTypeAsText(int _iContainer, int _iControl) {
   
-  struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
+  struct SGuiControl *pControl; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  ControlPtr = GetControlPtr(a2, a3);
-  if ( !ControlPtr )
+  pControl = GetControlPtr(_iContainer, _iControl);
+  if ( !pControl )
   {
     return 0;
   }
-  ControlPtr->m_iControlType = 21;
+  pControl->m_iControlType = GUI_CNTRL_TEXT;
   return 1;
 }
 
@@ -969,7 +948,7 @@ bool  IGuiEngine::SetTypeAsRadio(int a2, int a3, int a4, int a5) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
@@ -978,7 +957,7 @@ bool  IGuiEngine::SetTypeAsRadio(int a2, int a3, int a4, int a5) {
   {
     return 0;
   }
-  ControlPtr->m_iControlType = 3;
+  ControlPtr->m_iControlType = GUI_CNTRL_RADIO;
   ControlPtr->m_iMainTexture = a4;
   ControlPtr->m_iPressedTexture = a5;
   ControlPtr->m_iWidth = 20;
@@ -995,7 +974,7 @@ bool  IGuiEngine::SetRadioCheckPressedState(int a2, int a3, bool a4) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
@@ -1010,7 +989,7 @@ char const *  IGuiEngine::GetText(int container, int valueLink) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
@@ -1038,7 +1017,7 @@ int  IGuiEngine::GetWrapPosition(int a2, int a3) {
   struct SGuiControl *ControlPtr; // [esp+14h] [ebp-8h]
 
   v5 = this;
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return -1;
   }
@@ -1091,7 +1070,7 @@ bool  IGuiEngine::SetFontTemplate(int a2, int a3, int a4) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
@@ -1110,7 +1089,7 @@ bool  IGuiEngine::SetFontTemplate(int a2, int a3, int a4) {
   }
   ControlPtr->m_iTextStyle = a4;
   g_bGuiIsDirty = 1;
-  HIBYTE(ControlPtr->m_iUnknown20[1]) = 1;
+  HIBYTE(ControlPtr->m_iTextFormat[1]) = 1;
   return 1;
 }
 
@@ -1122,7 +1101,7 @@ bool  IGuiEngine::EnableControl(int a2, int a3, bool a4) {
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-8h]
   bool v6; // [esp+Bh] [ebp-1h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
@@ -1146,7 +1125,7 @@ bool  IGuiEngine::SetControlVisibility(int a2, int a3, bool a4) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-8h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
@@ -1163,28 +1142,28 @@ bool  IGuiEngine::SetControlVisibility(int a2, int a3, bool a4) {
 
 
 // address=[0x2fa1e10]
-// Decompiled from char __thiscall IGuiEngine::SetImages(void *this, int a2, int a3, int a4, int a5)
-bool  IGuiEngine::SetImages(int a2, int a3, int a4, int a5) {
+// Decompiled from char __thiscall IGuiEngine::SetImages(void *this, int _iContainer, int _iControl, int _iMainTextureId, int _iPressedTextureId)
+bool  IGuiEngine::SetImages(int _iContainer, int _iControl, int _iMainTextureId, int _iPressedTextureId) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  ControlPtr = GetControlPtr(a2, a3);
+  ControlPtr = GetControlPtr(_iContainer, _iControl);
   if ( !ControlPtr )
   {
     return 0;
   }
-  if ( ControlPtr->m_iMainTexture == a4 && ControlPtr->m_iPressedTexture == a5 )
+  if ( ControlPtr->m_iMainTexture == _iMainTextureId && ControlPtr->m_iPressedTexture == _iPressedTextureId )
   {
     return 1;
   }
-  ControlPtr->m_iMainTexture = a4;
-  ControlPtr->m_iPressedTexture = a5;
+  ControlPtr->m_iMainTexture = _iMainTextureId;
+  ControlPtr->m_iPressedTexture = _iPressedTextureId;
   g_bGuiIsDirty = 1;
-  HIBYTE(ControlPtr->m_iUnknown20[1]) = 1;
+  ControlPtr->m_bDirty = 1;
   return 1;
 }
 
@@ -1195,7 +1174,7 @@ bool  IGuiEngine::SetUserLogoImage(int a2, int a3, int a4) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
@@ -1205,9 +1184,9 @@ bool  IGuiEngine::SetUserLogoImage(int a2, int a3, int a4) {
     return 0;
   }
   ControlPtr->m_iMainTexture = a4;
-  ControlPtr->m_iSliderPosition = -10;
+  ControlPtr->m_iParam = -10;
   g_bGuiIsDirty = 1;
-  HIBYTE(ControlPtr->m_iUnknown20[1]) = 1;
+  ControlPtr->m_bDirty = 1;
   return 1;
 }
 
@@ -1227,7 +1206,7 @@ bool  IGuiEngine::LockOwnerImage(int a2, int a3, struct SGuiRect & a4, unsigned 
   *(_DWORD *)a4 = 0;
   *((_DWORD *)a4 + 1) = 0;
   *((_DWORD *)a4 + 3) = 0;
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
@@ -1235,7 +1214,7 @@ bool  IGuiEngine::LockOwnerImage(int a2, int a3, struct SGuiRect & a4, unsigned 
   {
     return 0;
   }
-  v7 = (unsigned __int16 *)sub_2FA2900(a2);
+  v7 = (unsigned __int16 *)GuiGetContainer2(a2);
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
   {
@@ -1281,7 +1260,7 @@ bool  IGuiEngine::UnlockOwnerImage(int a2, int a3) {
   unsigned __int16 *v4; // [esp+4h] [ebp-8h]
   struct SGuiControl *ControlPtr; // [esp+8h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
@@ -1289,7 +1268,7 @@ bool  IGuiEngine::UnlockOwnerImage(int a2, int a3) {
   {
     return 0;
   }
-  v4 = (unsigned __int16 *)sub_2FA2900(a2);
+  v4 = (unsigned __int16 *)GuiGetContainer2(a2);
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
   {
@@ -1319,7 +1298,7 @@ bool  IGuiEngine::EraseOwnerImage(int a2, int a3) {
   int v8; // [esp+14h] [ebp-2D4h] BYREF
   void *v9; // [esp+18h] [ebp-2D0h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
@@ -1327,7 +1306,7 @@ bool  IGuiEngine::EraseOwnerImage(int a2, int a3) {
   {
     return 0;
   }
-  v6 = (unsigned __int16 *)sub_2FA2900(a2);
+  v6 = (unsigned __int16 *)GuiGetContainer2(a2);
   ControlPtr = GetControlPtr(a2, a3);
   if ( !ControlPtr )
   {
@@ -1364,96 +1343,96 @@ bool  IGuiEngine::EraseOwnerImage(int a2, int a3) {
 
 
 // address=[0x2fa2390]
-// Decompiled from char __thiscall IGuiEngine::SetSliderPosition(IGuiEngine *this, int a2, int a3, unsigned int a4)
-bool  IGuiEngine::SetSliderPosition(int a2, int a3, int a4) {
+// Decompiled from char __thiscall IGuiEngine::SetSliderPosition(IGuiEngine *this, int _iContainer, int _iControl, unsigned int _iSliderPos)
+bool  IGuiEngine::SetSliderPosition(int _iContainer, int _iControl, int _iSliderPos) {
   
   struct SGuiControl *v5; // [esp+4h] [ebp-8h]
-  struct SGuiControl *ControlPtr; // [esp+8h] [ebp-4h]
+  struct SGuiControl *pControl; // [esp+8h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  ControlPtr = GetControlPtr(a2, a3);
-  if ( !ControlPtr )
+  pControl = GetControlPtr(_iContainer, _iControl);
+  if ( !pControl )
   {
     return 0;
   }
-  if ( a4 > 0x64 )
+  if ( _iSliderPos > 0x64 )
   {
     return 0;
   }
-  if ( ControlPtr->m_iControlType == 8 && g_pCurrentDragControl && *(unsigned __int8 *)(g_pCurrentDragControl + 28) == LOBYTE(ControlPtr->m_iShowTexture) )
+  if ( pControl->m_iControlType == GUI_CNTRL_SLIDER2 && g_pCurrentDragControl && LOBYTE(g_pCurrentDragControl->m_iShowTexture) == LOBYTE(pControl->m_iShowTexture) )
   {
     return 0;
   }
-  if ( (ControlPtr->m_iEffects & 1) != 0 )
+  if ( (pControl->m_iEffects & 1) != 0 )
   {
-    ControlPtr->m_iEffects &= ~1u;
+    pControl->m_iEffects &= ~1u;
   }
-  if ( ControlPtr->m_iControlType == 7 && g_pCurrentDragControl && (struct SGuiControl *)g_pCurrentDragControl == ControlPtr )
+  if ( pControl->m_iControlType == GUI_CNTRL_SLIDER && g_pCurrentDragControl && g_pCurrentDragControl == pControl )
   {
     return 0;
   }
-  if ( (char)ControlPtr->m_iSliderPosition == a4 )
+  if ( pControl->m_iParam == _iSliderPos )
   {
     return 1;
   }
-  ControlPtr->m_iSliderPosition = a4;
+  pControl->m_iParam = _iSliderPos;
   g_bGuiIsDirty = 1;
-  ControlPtr->m_iUnknown23 = 1;
-  if ( ControlPtr->m_iControlType != 7 && ControlPtr->m_iControlType != 8 )
+  pControl->m_bDirty = 1;
+  if ( pControl->m_iControlType != GUI_CNTRL_SLIDER && pControl->m_iControlType != GUI_CNTRL_SLIDER2 )
   {
     return 1;
   }
-  v5 = ControlPtr - 1;
-  if ( ControlPtr[-1].m_iControlType != 16 )
+  v5 = pControl - 1;
+  if ( pControl[-1].m_iControlType != GUI_CNTRL_SLIDERAREA )
   {
     BBSupportTracePrintF(0, "GUI ENGINE: No previous control GUI_CNTRL_SLIDERAREA of GUI_CNTRL_SLIDER!");
     return 0;
   }
-  ControlPtr->m_iX = CalcSliderPosition(v5->m_iX, v5->m_iWidth + v5->m_iX - ControlPtr->m_iWidth, (char)ControlPtr->m_iSliderPosition, 0);
-  v5->m_iUnknown23 = 1;
+  pControl->m_iX = CalcSliderPosition(v5->m_iX, v5->m_iWidth + v5->m_iX - pControl->m_iWidth, pControl->m_iParam, 0);
+  v5->m_bDirty = 1;
   return 1;
 }
 
 
 // address=[0x2fa2510]
-// Decompiled from int __thiscall IGuiEngine::GetSliderPosition(IGuiEngine *this, int a2, int a3)
-int  IGuiEngine::GetSliderPosition(int a2, int a3) {
+// Decompiled from int __thiscall IGuiEngine::GetSliderPosition(IGuiEngine *this, int _iContainer, int _iControl)
+int  IGuiEngine::GetSliderPosition(int _iContainer, int _iControl) {
   
-  struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
+  struct SGuiControl *pControl; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return -1;
   }
-  ControlPtr = GetControlPtr(a2, a3);
-  if ( !ControlPtr )
+  pControl = GetControlPtr(_iContainer, _iControl);
+  if ( !pControl )
   {
     return -1;
   }
-  if ( ControlPtr->m_iControlType == 7 || ControlPtr->m_iControlType == 8 )
+  if ( pControl->m_iControlType == GUI_CNTRL_SLIDER || pControl->m_iControlType == GUI_CNTRL_SLIDER2 )
   {
-    return (char)ControlPtr->m_iSliderPosition;
+    return pControl->m_iParam;
   }
   return -1;
 }
 
 
 // address=[0x2fa2580]
-// Decompiled from char __thiscall IGuiEngine::SelectControl(IGuiEngine *this, int a2, int _iControlId, bool a4)
-bool  IGuiEngine::SelectControl(int a2, int _iControlId, bool a4) {
+// Decompiled from char __thiscall IGuiEngine::SelectControl(IGuiEngine *this, int _iContainer, int _iControlId, bool a4)
+bool  IGuiEngine::SelectControl(int _iContainer, int _iControlId, bool a4) {
   
   int SurfaceID; // eax
   int v6; // [esp-8h] [ebp-10h]
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  ControlPtr = GetControlPtr(a2, _iControlId);
+  ControlPtr = GetControlPtr(_iContainer, _iControlId);
   if ( !ControlPtr )
   {
     return 0;
@@ -1462,7 +1441,7 @@ bool  IGuiEngine::SelectControl(int a2, int _iControlId, bool a4) {
   {
     return 1;
   }
-  if ( ControlPtr->m_iControlType == 2 && a4 || ControlPtr->m_iControlType == 3 )
+  if ( ControlPtr->m_iControlType == 2 && a4 || ControlPtr->m_iControlType == GUI_CNTRL_RADIO )
   {
     SelectRadioGroup(ControlPtr);
   }
@@ -1470,19 +1449,19 @@ bool  IGuiEngine::SelectControl(int a2, int _iControlId, bool a4) {
   {
     SetControlState(ControlPtr, 1, a4);
   }
-  else if ( (!ControlPtr->m_iControlType || ControlPtr->m_iControlType == 13) && a4 )
+  else if ( (!ControlPtr->m_iControlType || ControlPtr->m_iControlType == GUI_CNTRL_BUTTON) && a4 )
   {
     if ( g_pfDialogCallbacks[GetSurfaceID(ControlPtr)] )
     {
       v6 = (ControlPtr->m_iEffects << 16) + ControlPtr->m_iValueLink;
       SurfaceID = GetSurfaceID(ControlPtr);
-      ((void (__cdecl *)(int, int, _DWORD))g_pfDialogCallbacks[SurfaceID])(3, v6, 0);
+      g_pfDialogCallbacks[SurfaceID](3, v6, 0);
     }
   }
   else if ( (ControlPtr->m_iControlType == 5 || ControlPtr->m_iControlType == 20) && a4 )
   {
     g_pCurrentEditControl = (int)ControlPtr;
-    SelectEditControl(ControlPtr, (int)&dword_ECC2A8[53078]);
+    SelectEditControl(ControlPtr, 0xF00000);
   }
   return 1;
 }
@@ -1492,29 +1471,29 @@ bool  IGuiEngine::SelectControl(int a2, int _iControlId, bool a4) {
 // Decompiled from char __thiscall IGuiEngine::ResetRadioGroup(IGuiEngine *this, int _iContainer, int _iControlId)
 bool  IGuiEngine::ResetRadioGroup(int _iContainer, int _iControlId) {
   
-  int unknown4_low; // [esp+4h] [ebp-10h]
-  int v5; // [esp+8h] [ebp-Ch]
+  int m_iShowTexture_low; // [esp+4h] [ebp-10h]
+  struct SGuiControl *v5; // [esp+8h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-8h]
-  struct SGuiControl *ControlPtr; // [esp+10h] [ebp-4h]
-  int v8; // [esp+10h] [ebp-4h]
+  struct SGuiControl *pControl; // [esp+10h] [ebp-4h]
+  char *v8; // [esp+10h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  ControlPtr = GetControlPtr(_iContainer, _iControlId);
-  if ( !ControlPtr )
+  pControl = GetControlPtr(_iContainer, _iControlId);
+  if ( !pControl )
   {
     return 0;
   }
-  unknown4_low = LOBYTE(ControlPtr->m_iShowTexture);
-  v5 = *(_DWORD *)(g_pFileHeader + 4 * ControlPtr->m_iUnknown1F + 16) + g_pFileHeader;
-  v8 = v5 + 16;
+  m_iShowTexture_low = LOBYTE(pControl->m_iShowTexture);
+  v5 = (struct SGuiControl *)((char *)g_pFileHeader + g_pFileHeader->m_iContainerMap[pControl->m_iParentContainer]);
+  v8 = (char *)&v5->m_spText;
   for ( i = 0;
-        i < *(unsigned __int16 *)(v5 + 12);
+        i < *(unsigned __int16 *)&v5->m_iEditProperty1;
         ++i )
   {
-    if ( (*(_BYTE *)(v8 + 27) & 1) != 0 && *(unsigned __int8 *)(v8 + 28) == unknown4_low )
+    if ( (v8[27] & 1) != 0 && (unsigned __int8)v8[28] == m_iShowTexture_low )
     {
       SetControlState((struct SGuiControl *)v8, 1, 0);
     }
@@ -1525,113 +1504,107 @@ bool  IGuiEngine::ResetRadioGroup(int _iContainer, int _iControlId) {
 
 
 // address=[0x2fa27d0]
-// Decompiled from char __thiscall IGuiEngine::SetWidth(IGuiEngine *this, int a2, int a3, WORD a4)
-bool  IGuiEngine::SetWidth(int a2, int a3, int a4) {
+// Decompiled from char __thiscall IGuiEngine::SetWidth(IGuiEngine *this, int _iContainer, int _iControl, WORD _iWidth)
+bool  IGuiEngine::SetWidth(int _iContainer, int _iControl, int _iWidth) {
   
-  struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
+  struct SGuiControl *pControl; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  ControlPtr = GetControlPtr(a2, a3);
-  if ( !ControlPtr )
+  pControl = GetControlPtr(_iContainer, _iControl);
+  if ( !pControl )
   {
     return 0;
   }
-  ControlPtr->m_iWidth = a4;
+  pControl->m_iWidth = _iWidth;
   return 1;
 }
 
 
 // address=[0x2fa2820]
-// Decompiled from char __thiscall IGuiEngine::SetPosition(IGuiEngine *this, int a2, int a3, WORD a4, WORD a5)
-bool  IGuiEngine::SetPosition(int a2, int a3, int a4, int a5) {
+// Decompiled from char __thiscall IGuiEngine::SetPosition(IGuiEngine *this, int _iContainer, int _iControl, WORD _iX, WORD _iY)
+bool  IGuiEngine::SetPosition(int _iContainer, int _iControl, int _iX, int _iY) {
   
   struct SGuiControl *ControlPtr; // [esp+4h] [ebp-4h]
 
-  if ( !sub_2FA28C0() )
+  if ( !GuiEngineReady() )
   {
     return 0;
   }
-  ControlPtr = GetControlPtr(a2, a3);
+  ControlPtr = GetControlPtr(_iContainer, _iControl);
   if ( !ControlPtr )
   {
     return 0;
   }
-  ControlPtr->m_iX = a4;
-  ControlPtr->m_iY = a5;
+  ControlPtr->m_iX = _iX;
+  ControlPtr->m_iY = _iY;
   return 1;
 }
 
 
 // address=[0x2fa0940]
-// Decompiled from unsigned __int16 __thiscall IGuiEngine::InitShadeTables(IGuiEngine *this)
+// Decompiled from void __thiscall IGuiEngine::InitShadeTables(IGuiEngine *this)
 void  IGuiEngine::InitShadeTables(void) {
   
-  unsigned __int16 result; // ax
   int j; // [esp+4h] [ebp-14h]
   int i; // [esp+8h] [ebp-10h]
-  int v4; // [esp+Ch] [ebp-Ch]
-  int v5; // [esp+Ch] [ebp-Ch]
-  int v6; // [esp+10h] [ebp-8h]
-  int v7; // [esp+10h] [ebp-8h]
-  int v8; // [esp+14h] [ebp-4h]
-  int v9; // [esp+14h] [ebp-4h]
+  int iB; // [esp+Ch] [ebp-Ch] MAPDST
+  int iG; // [esp+10h] [ebp-8h] MAPDST
+  int iR; // [esp+14h] [ebp-4h] MAPDST
 
-  v8 = 150;
-  v6 = 4;
-  v4 = 12;
+  iR = 150;
+  iG = 4;
+  iB = 12;
   for ( i = 0;
         i < 16;
         ++i )
   {
-    g_uShadeTable1[i] = IGfxEngine::ConvertRgbToHicol(v8, v6, v4);
-    v8 = (int)(float)((float)((float)((float)i * 0.079999998) + 1.0) * 150.0);
-    v6 = (int)(float)((float)((float)((float)i * 0.079999998) + 1.0) * 4.0);
-    v4 = (int)(float)((float)((float)((float)i * 0.079999998) + 1.0) * 12.0);
-    if ( v8 > 255 )
+    g_uShadeTable1[i] = IGfxEngine::ConvertRgbToHicol(iR, iG, iB);
+    iR = (int)(float)((float)((float)((float)i * 0.079999998) + 1.0) * 150.0);
+    iG = (int)(float)((float)((float)((float)i * 0.079999998) + 1.0) * 4.0);
+    iB = (int)(float)((float)((float)((float)i * 0.079999998) + 1.0) * 12.0);
+    if ( iR > 255 )
     {
-      v8 = 255;
+      iR = 255;
     }
-    if ( v6 > 255 )
+    if ( iG > 255 )
     {
-      v6 = 255;
+      iG = 255;
     }
-    if ( v4 > 255 )
+    if ( iB > 255 )
     {
-      v4 = 255;
+      iB = 255;
     }
   }
-  v9 = 10;
-  v7 = 150;
-  v5 = 3;
+  iR = 10;
+  iG = 150;
+  iB = 3;
   for ( j = 0;
         j < 16;
         ++j )
   {
-    g_uShadeTable2[j] = IGfxEngine::ConvertRgbToHicol(v9, v7, v5);
-    v9 = (int)(float)((float)((float)((float)j * 0.079999998) + 1.0) * 10.0);
-    v7 = (int)(float)((float)((float)((float)j * 0.079999998) + 1.0) * 150.0);
-    v5 = (int)(float)((float)((float)((float)j * 0.079999998) + 1.0) * 3.0);
-    if ( v9 > 255 )
+    g_uShadeTable2[j] = IGfxEngine::ConvertRgbToHicol(iR, iG, iB);
+    iR = (int)(float)((float)((float)((float)j * 0.079999998) + 1.0) * 10.0);
+    iG = (int)(float)((float)((float)((float)j * 0.079999998) + 1.0) * 150.0);
+    iB = (int)(float)((float)((float)((float)j * 0.079999998) + 1.0) * 3.0);
+    if ( iR > 255 )
     {
-      v9 = 255;
+      iR = 255;
     }
-    if ( v7 > 255 )
+    if ( iG > 255 )
     {
-      v7 = 255;
+      iG = 255;
     }
-    if ( v5 > 255 )
+    if ( iB > 255 )
     {
-      v5 = 255;
+      iB = 255;
     }
   }
   g_iLeftShadeColor = IGfxEngine::ConvertRgbToHicol(199, 178, 111);
   g_iRightShadeColor = IGfxEngine::ConvertRgbToHicol(50, 41, 45);
-  result = IGfxEngine::ConvertRgbToHicol(50, 50, 50);
-  g_iStdShadeColor = result;
-  return result;
+  g_iStdShadeColor = IGfxEngine::ConvertRgbToHicol(50, 50, 50);
 }
 
 

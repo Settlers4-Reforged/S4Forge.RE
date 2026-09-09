@@ -20,6 +20,10 @@ public:
     // address=[0x2fa4000]
      ~CToolTipExt(void);
 
+    // Type information members
+public:
+    int m_iContainerId;
+
 };
 
 

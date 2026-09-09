@@ -27,7 +27,7 @@ public:
      ~IGuiEngine(void);
 
     // address=[0x2f9fff0]
-    bool  Init(class IGfxEngine * a2, class CGfxManager * a3, void * a4, int a5, bool (__cdecl*)(int,int,int) a6, int _iLanguage);
+    bool  Init(class IGfxEngine * _pGfxEngine, class CGfxManager * _pGfxManager, void * _pFileHeader, int _iStartingDialogId, bool (__cdecl*)(int,int,int) _fpStartingDialogHandler, int _iLanguage);
 
     // address=[0x2fa0320]
     void  RefreshAllSurfaces(void);
@@ -51,10 +51,10 @@ public:
     void  SetDialogsRenderOffset(int a2, int a3, float a4, float a5);
 
     // address=[0x2fa1000]
-    bool  GetDialogRect(int a2, struct SGuiRect & a3);
+    bool  GetDialogRect(int a1, struct SGuiRect & a3);
 
     // address=[0x2fa1090]
-    bool  SetDialogRect(int a2, struct SGuiRect a3);
+    bool  SetDialogRect(int a1, struct SGuiRect a3);
 
     // address=[0x2fa1140]
     bool  MoveDialogTo(int a2, int a3, int a4);
@@ -84,16 +84,16 @@ public:
     bool  DisableDialogControls(int a2);
 
     // address=[0x2fa1520]
-    bool  SetText(int _iContainer, int _iControlId, char const * Str);
+    bool  SetText(int _iContainer, int _iControlId, char const * _spText);
 
     // address=[0x2fa17e0]
-    bool  SetEditProperties(int a2, int a3, unsigned char a4, unsigned char a5);
+    bool  SetEditProperties(int _iContainer, int _iControl, unsigned char _iProp1, unsigned char _iProp2);
 
     // address=[0x2fa1870]
-    bool  SetTypeAsButton(int a2, int a3);
+    bool  SetTypeAsButton(int _iContainer, int _iControl);
 
     // address=[0x2fa1920]
-    bool  SetTypeAsText(int a2, int a3);
+    bool  SetTypeAsText(int _iContainer, int _iControl);
 
     // address=[0x2fa1970]
     bool  SetTypeAsRadio(int a2, int a3, int a4, int a5);
@@ -117,7 +117,7 @@ public:
     bool  SetControlVisibility(int a2, int a3, bool a4);
 
     // address=[0x2fa1e10]
-    bool  SetImages(int a2, int a3, int a4, int a5);
+    bool  SetImages(int _iContainer, int _iControl, int _iMainTextureId, int _iPressedTextureId);
 
     // address=[0x2fa1ea0]
     bool  SetUserLogoImage(int a2, int a3, int a4);
@@ -132,22 +132,22 @@ public:
     bool  EraseOwnerImage(int a2, int a3);
 
     // address=[0x2fa2390]
-    bool  SetSliderPosition(int a2, int a3, int a4);
+    bool  SetSliderPosition(int _iContainer, int _iControl, int _iSliderPos);
 
     // address=[0x2fa2510]
-    int  GetSliderPosition(int a2, int a3);
+    int  GetSliderPosition(int _iContainer, int _iControl);
 
     // address=[0x2fa2580]
-    bool  SelectControl(int a2, int _iControlId, bool a4);
+    bool  SelectControl(int _iContainer, int _iControlId, bool a4);
 
     // address=[0x2fa2700]
     bool  ResetRadioGroup(int _iContainer, int _iControlId);
 
     // address=[0x2fa27d0]
-    bool  SetWidth(int a2, int a3, int a4);
+    bool  SetWidth(int _iContainer, int _iControl, int _iWidth);
 
     // address=[0x2fa2820]
-    bool  SetPosition(int a2, int a3, int a4, int a5);
+    bool  SetPosition(int _iContainer, int _iControl, int _iX, int _iY);
 
 private:
     // address=[0x2fa0940]
@@ -155,6 +155,13 @@ private:
 
     // address=[0x2fa0b80]
     static struct tagRECT __cdecl GetDialogDestinationRect(struct GUI_MENU_DIALOG_HEADER const & retstr, int a2, int a3, float a4, float a5);
+
+    // Type information members
+public:
+    int m_iDialogsRenderOffsetX;
+    int m_iDialogsRenderOffsetY;
+    float m_fDialogsRenderScaleX;
+    float m_fDialogsRenderScaleY;
 
 };
 

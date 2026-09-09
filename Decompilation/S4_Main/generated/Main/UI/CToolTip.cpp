@@ -6,7 +6,7 @@
 // Decompiled from size_t __thiscall CToolTip::GetCurrentLengthOfTooltip(CToolTip *this)
 int  CToolTip::GetCurrentLengthOfTooltip(void) {
   
-  return j___mbstrlen((const char *)this + 8);
+  return j___mbstrlen(this->m_sText);
 }
 
 
@@ -14,59 +14,47 @@ int  CToolTip::GetCurrentLengthOfTooltip(void) {
 // Decompiled from char *__thiscall CToolTip::GetTooltipStringPtr(CToolTip *this)
 char *  CToolTip::GetTooltipStringPtr(void) {
   
-  return (char *)this + 8;
+  return this->m_sText;
 }
 
 
 // address=[0x2f9fdc0]
-// Decompiled from char __thiscall CToolTip::IsLocked(CToolTip *this)
+// Decompiled from bool __thiscall CToolTip::IsLocked(CToolTip *this)
 bool  CToolTip::IsLocked(void) {
   
-  return *((_BYTE *)this + 337);
+  return this->m_bLocked;
 }
 
 
 // address=[0x2f9fde0]
-// Decompiled from char __thiscall CToolTip::IsOpen(CToolTip *this)
+// Decompiled from bool __thiscall CToolTip::IsOpen(CToolTip *this)
 bool  CToolTip::IsOpen(void) {
   
-  return *((_BYTE *)this + 336);
+  return this->m_bOpen;
 }
 
 
 // address=[0x2f9fe00]
-// Decompiled from CToolTip *__thiscall CToolTip::Lock(CToolTip *this)
+// Decompiled from void __thiscall CToolTip::Lock(CToolTip *this)
 void  CToolTip::Lock(void) {
   
-  CToolTip *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 337) = 1;
-  return result;
+  this->m_bLocked = 1;
 }
 
 
 // address=[0x2f9fe50]
-// Decompiled from CToolTip *__thiscall CToolTip::SetSourceDialogSurfaceID(CToolTip *this, int a2)
+// Decompiled from void __thiscall CToolTip::SetSourceDialogSurfaceID(CToolTip *this, int a2)
 void  CToolTip::SetSourceDialogSurfaceID(int a2) {
   
-  CToolTip *result; // eax
-
-  result = this;
-  *((_DWORD *)this + 1) = a2;
-  return result;
+  this->m_iSourceDialogSurfaceId = a2;
 }
 
 
 // address=[0x2f9fe70]
-// Decompiled from CToolTip *__thiscall CToolTip::Unlock(CToolTip *this)
+// Decompiled from void __thiscall CToolTip::Unlock(CToolTip *this)
 void  CToolTip::Unlock(void) {
   
-  CToolTip *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 337) = 0;
-  return result;
+  this->m_bLocked = 0;
 }
 
 
@@ -74,19 +62,15 @@ void  CToolTip::Unlock(void) {
 // Decompiled from int __thiscall CToolTip::GetSourceDialogSurfaceID(CToolTip *this)
 int  CToolTip::GetSourceDialogSurfaceID(void) {
   
-  return *((_DWORD *)this + 1);
+  return this->m_iSourceDialogSurfaceId;
 }
 
 
 // address=[0x2fa2f70]
-// Decompiled from CToolTip *__thiscall CToolTip::SetEnableStatus(CToolTip *this, bool a2)
+// Decompiled from void __thiscall CToolTip::SetEnableStatus(CToolTip *this, bool a2)
 void  CToolTip::SetEnableStatus(bool a2) {
   
-  CToolTip *result; // eax
-
-  result = this;
-  *((_BYTE *)this + 338) = a2;
-  return result;
+  this->m_bEnableStatus = a2;
 }
 
 
@@ -94,72 +78,62 @@ void  CToolTip::SetEnableStatus(bool a2) {
 // Decompiled from CToolTip *__thiscall CToolTip::CToolTip(CToolTip *this)
  CToolTip::CToolTip(void) {
   
-  memset((char *)this + 8, 0, 0x12Cu);
-  *(_DWORD *)this = 10;
-  *((_BYTE *)this + 332) = 1;
-  *((_BYTE *)this + 337) = 0;
-  *((_BYTE *)this + 336) = 0;
-  *((_BYTE *)this + 338) = 1;
-  *((_DWORD *)this + 1) = -1;
+  memset(this->m_sText, 0, sizeof(this->m_sText));
+  this->m_iSurfaceType = 10;
+  LOBYTE(this->?) = 1;
+  this->m_bLocked = 0;
+  this->m_bOpen = 0;
+  this->m_bEnableStatus = 1;
+  this->m_iSourceDialogSurfaceId = -1;
   return this;
 }
 
 
 // address=[0x2fa30d0]
-// Decompiled from char *__thiscall CToolTip::SetTooltipText(char *this, char *Str)
+// Decompiled from void __thiscall CToolTip::SetTooltipText(CToolTip *this, char *Str)
 void  CToolTip::SetTooltipText(char const * Str) {
   
-  char *result; // eax
   int Count; // [esp+0h] [ebp-8h]
 
   Count = strlen(Str);
-  if ( Count >= CToolTip::GetMaxLengthOfTooltip((CToolTip *)this) - 1 )
+  if ( Count >= CToolTip::GetMaxLengthOfTooltip(this) - 1 )
   {
-    Count = CToolTip::GetMaxLengthOfTooltip((CToolTip *)this) - 1;
+    Count = CToolTip::GetMaxLengthOfTooltip(this) - 1;
   }
-  result = j__strncpy(this + 8, Str, Count);
-  this[Count + 8] = 0;
-  return result;
+  j__strncpy(this->m_sText, Str, Count);
+  this->m_sText[Count] = 0;
 }
 
 
 // address=[0x2fa3130]
-// Decompiled from char __thiscall CToolTip::OpenTooltip(CToolTip *this, int a2, int a3)
+// Decompiled from char __thiscall CToolTip::OpenTooltip(CToolTip *this, LONG a2, int a3)
 bool  CToolTip::OpenTooltip(int a2, int a3) {
   
   CToolTip *v4; // eax
   struct tagRECT v5; // [esp-10h] [ebp-80h]
-  int v6; // [esp+0h] [ebp-70h] BYREF
-  __int16 cx; // [esp+4h] [ebp-6Ch]
-  __int16 cy; // [esp+6h] [ebp-6Ah]
-  char v9; // [esp+18h] [ebp-58h]
-  char v10; // [esp+1Ah] [ebp-56h]
-  char v11; // [esp+1Bh] [ebp-55h]
-  char v12; // [esp+1Eh] [ebp-52h]
-  char v13; // [esp+20h] [ebp-50h]
-  char v14; // [esp+23h] [ebp-4Dh]
-  int v15; // [esp+24h] [ebp-4Ch]
-  int v16; // [esp+28h] [ebp-48h]
-  unsigned int v17; // [esp+2Ch] [ebp-44h] BYREF
-  unsigned __int16 *v18; // [esp+30h] [ebp-40h]
-  int v19; // [esp+34h] [ebp-3Ch]
+  struct SGuiControl v6; // [esp+0h] [ebp-70h] BYREF
+  int v7; // [esp+24h] [ebp-4Ch]
+  int v8; // [esp+28h] [ebp-48h]
+  int v9; // [esp+2Ch] [ebp-44h] BYREF
+  unsigned __int16 *v10; // [esp+30h] [ebp-40h]
+  int v11; // [esp+34h] [ebp-3Ch]
   int OutputHeight; // [esp+38h] [ebp-38h]
-  int v21; // [esp+3Ch] [ebp-34h]
-  int v22; // [esp+40h] [ebp-30h]
+  int v13; // [esp+3Ch] [ebp-34h]
+  int v14; // [esp+40h] [ebp-30h]
   int OutputWidth; // [esp+44h] [ebp-2Ch]
   HDC hdc; // [esp+48h] [ebp-28h] BYREF
   struct tagSIZE psizl; // [esp+4Ch] [ebp-24h] BYREF
-  char v26; // [esp+57h] [ebp-19h]
-  int v28; // [esp+5Ch] [ebp-14h]
-  int v29; // [esp+60h] [ebp-10h]
-  int v30; // [esp+64h] [ebp-Ch]
-  int v31; // [esp+68h] [ebp-8h]
+  char v18; // [esp+57h] [ebp-19h]
+  int v20; // [esp+5Ch] [ebp-14h]
+  int v21; // [esp+60h] [ebp-10h]
+  int v22; // [esp+64h] [ebp-Ch]
+  int v23; // [esp+68h] [ebp-8h]
 
-  if ( !*((_BYTE *)this + 338) )
+  if ( !this->m_bEnableStatus )
   {
     return 1;
   }
-  if ( *((_BYTE *)this + 336) )
+  if ( this->m_bOpen )
   {
     CToolTip::CloseTooltip(this);
   }
@@ -167,112 +141,112 @@ bool  CToolTip::OpenTooltip(int a2, int a3) {
   {
     return 0;
   }
-  if ( !*((_BYTE *)this + 8) )
+  if ( !this->m_sText[0] )
   {
     return 0;
   }
-  CalcTextSize(8, (const unsigned __int8 *)this + 8, &psizl, 0, -1);
-  v15 = psizl.cx + 4;
-  v16 = psizl.cy + 4;
+  CalcTextSize(8, this->m_sText, &psizl, 0, -1);
+  v7 = psizl.cx + 4;
+  v8 = psizl.cy + 4;
   v4 = this;
-  *((_DWORD *)this + 77) = psizl.cx + 4;
-  *((_DWORD *)v4 + 78) = v16;
-  *((_DWORD *)this + 79) = a2;
-  *((_DWORD *)this + 80) = a3 + 18;
-  *((_DWORD *)this + 81) = *((_DWORD *)this + 77) + *((_DWORD *)this + 79);
-  *((_DWORD *)this + 82) = *((_DWORD *)this + 78) + *((_DWORD *)this + 80);
-  OutputWidth = IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
-  OutputHeight = IGfxEngine::GetOutputHeight((IGfxEngine *)g_pGfxEngine);
-  if ( *((_DWORD *)this + 81) > OutputWidth )
+  this->m_sSurfaceDescription.m_iWidth = psizl.cx + 4;
+  v4->m_sSurfaceDescription.m_iHeight = v8;
+  this->m_sSurfaceDescription.m_sDestinationRect.left = a2;
+  this->m_sSurfaceDescription.m_sDestinationRect.top = a3 + 18;
+  this->m_sSurfaceDescription.m_sDestinationRect.right = this->m_sSurfaceDescription.m_iWidth + this->m_sSurfaceDescription.m_sDestinationRect.left;
+  this->m_sSurfaceDescription.m_sDestinationRect.bottom = this->m_sSurfaceDescription.m_iHeight + this->m_sSurfaceDescription.m_sDestinationRect.top;
+  OutputWidth = IGfxEngine::GetOutputWidth(g_pGfxEngine);
+  OutputHeight = IGfxEngine::GetOutputHeight(g_pGfxEngine);
+  if ( this->m_sSurfaceDescription.m_sDestinationRect.right > OutputWidth )
   {
-    v22 = *((_DWORD *)this + 81) - OutputWidth;
-    *((_DWORD *)this + 81) -= v22;
-    *((_DWORD *)this + 79) -= v22;
+    v14 = this->m_sSurfaceDescription.m_sDestinationRect.right - OutputWidth;
+    this->m_sSurfaceDescription.m_sDestinationRect.right -= v14;
+    this->m_sSurfaceDescription.m_sDestinationRect.left -= v14;
   }
-  if ( *((int *)this + 79) < 0 )
+  if ( this->m_sSurfaceDescription.m_sDestinationRect.left < 0 )
   {
-    v21 = abs(*((_DWORD *)this + 79));
-    *((_DWORD *)this + 81) += v21;
-    *((_DWORD *)this + 79) += v21;
+    v13 = abs(this->m_sSurfaceDescription.m_sDestinationRect.left);
+    this->m_sSurfaceDescription.m_sDestinationRect.right += v13;
+    this->m_sSurfaceDescription.m_sDestinationRect.left += v13;
   }
-  if ( *((_DWORD *)this + 82) > OutputHeight )
+  if ( this->m_sSurfaceDescription.m_sDestinationRect.bottom > OutputHeight )
   {
-    v19 = *((_DWORD *)this + 82) - OutputHeight;
-    *((_DWORD *)this + 80) -= v19;
-    *((_DWORD *)this + 82) -= v19;
+    v11 = this->m_sSurfaceDescription.m_sDestinationRect.bottom - OutputHeight;
+    this->m_sSurfaceDescription.m_sDestinationRect.top -= v11;
+    this->m_sSurfaceDescription.m_sDestinationRect.bottom -= v11;
   }
-  if ( IGfxEngine::CreateGuiSurface((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this, (CToolTip *)((char *)this + 308)) == -1 )
+  if ( IGfxEngine::CreateGuiSurface(g_pGfxEngine, this->m_iSurfaceType, &this->m_sSurfaceDescription) == -1 )
   {
     BBSupportTracePrintF(0, "GUI ENGINE: Cannot create tooltip surface!");
     return 0;
   }
   else
   {
-    v26 = IGfxEngine::SolidColorFillGuiSurface((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this, 0, 0, 0xFFu);
-    if ( v26 )
+    v18 = IGfxEngine::SolidColorFillGuiSurface(g_pGfxEngine, this->m_iSurfaceType, 0, 0, 0xFFu);
+    if ( !v18 )
     {
-      v29 = 0;
-      v28 = 0;
-      v30 = psizl.cx + 3;
-      v31 = psizl.cy + 3;
+      BBSupportTracePrintF(0, "GUI ENGINE: Cannot clear tooltip surface!");
+      return 0;
+    }
+    else
+    {
+      v21 = 0;
+      v20 = 0;
+      v22 = psizl.cx + 3;
+      v23 = psizl.cy + 3;
       *(_QWORD *)&v5.left = 0LL;
       v5.right = psizl.cx + 3;
       v5.bottom = psizl.cy + 3;
-      v26 = IGfxEngine::SolidColorFillGuiSurface((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this, 255, 0xFFu, 180, v5);
-      if ( v26 )
-      {
-        v14 = 1;
-        v10 = 8;
-        v6 = 131074;
-        v13 = 4;
-        v9 = 14;
-        cx = psizl.cx;
-        cy = psizl.cy;
-        v12 = 0;
-        v11 = 0;
-        v18 = IGfxEngine::BeginWriteToSurface((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this, &v17);
-        if ( v18 )
-        {
-          FastRectangle(v18, v17, 0, 0, psizl.cx + 3, psizl.cy + 3, 0);
-          IGfxEngine::EndWriteToSurface((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this);
-          if ( IGfxEngine::GetGuiSurfaceDC((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this, &hdc) )
-          {
-            SetBkMode(hdc, 1);
-            DrawControlText(hdc, (int)&v6);
-            IGfxEngine::ReleaseGuiSurfaceDC((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this, hdc);
-            if ( IGfxEngine::SetVisibilityOfGuiSurface((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this, 1) )
-            {
-              *((_BYTE *)this + 336) = 1;
-              return 1;
-            }
-            else
-            {
-              BBSupportTracePrintF(0, "GUI ENGINE: Error while set tooltip visible!");
-              return 0;
-            }
-          }
-          else
-          {
-            BBSupportTracePrintF(0, "GUI ENGINE: Cannot render text into tooltip surface!");
-            return 0;
-          }
-        }
-        else
-        {
-          BBSupportTracePrintF(0, "GUI ENGINE: Cannot lock tooltip surface!");
-          return 0;
-        }
-      }
-      else
+      v18 = IGfxEngine::SolidColorFillGuiSurface(g_pGfxEngine, this->m_iSurfaceType, 255, 0xFFu, 180, v5);
+      if ( !v18 )
       {
         BBSupportTracePrintF(0, "GUI ENGINE: Cannot set tooltip surface!");
         return 0;
       }
-    }
-    else
-    {
-      BBSupportTracePrintF(0, "GUI ENGINE: Cannot clear tooltip surface!");
-      return 0;
+      else
+      {
+        v6.m_bDirty = 1;
+        v6.m_iTextStyle = 8;
+        *(_DWORD *)&v6.m_iX = 0x20002;
+        v6.m_iTextFormat = 4;
+        v6.m_iControlType = GUI_CNTRL_TOOLTIP;
+        v6.m_iWidth = psizl.cx;
+        v6.m_iHeight = psizl.cy;
+        v6.m_iParam = 0;
+        v6.m_iEffects = 0;
+        v10 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, this->m_iSurfaceType, (unsigned int *)&v9);
+        if ( !v10 )
+        {
+          BBSupportTracePrintF(0, "GUI ENGINE: Cannot lock tooltip surface!");
+          return 0;
+        }
+        else
+        {
+          FastRectangle(v10, v9, 0, 0, psizl.cx + 3, psizl.cy + 3, 0);
+          IGfxEngine::EndWriteToSurface(g_pGfxEngine, this->m_iSurfaceType);
+          if ( !IGfxEngine::GetGuiSurfaceDC(g_pGfxEngine, this->m_iSurfaceType, &hdc) )
+          {
+            BBSupportTracePrintF(0, "GUI ENGINE: Cannot render text into tooltip surface!");
+            return 0;
+          }
+          else
+          {
+            SetBkMode(hdc, 1);
+            DrawControlText(hdc, &v6);
+            IGfxEngine::ReleaseGuiSurfaceDC(g_pGfxEngine, this->m_iSurfaceType, hdc);
+            if ( !IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, this->m_iSurfaceType, 1) )
+            {
+              BBSupportTracePrintF(0, "GUI ENGINE: Error while set tooltip visible!");
+              return 0;
+            }
+            else
+            {
+              this->m_bOpen = 1;
+              return 1;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -282,7 +256,7 @@ bool  CToolTip::OpenTooltip(int a2, int a3) {
 // Decompiled from char __thiscall CToolTip::CloseTooltip(CToolTip *this)
 bool  CToolTip::CloseTooltip(void) {
   
-  if ( !*((_BYTE *)this + 336) )
+  if ( !this->m_bOpen )
   {
     return 0;
   }
@@ -290,10 +264,10 @@ bool  CToolTip::CloseTooltip(void) {
   {
     return 0;
   }
-  IGfxEngine::SetVisibilityOfGuiSurface((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this, 0);
-  if ( IGfxEngine::DestroyGuiSurface((IGfxEngine *)g_pGfxEngine, *(_DWORD *)this) )
+  IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, this->m_iSurfaceType, 0);
+  if ( IGfxEngine::DestroyGuiSurface(g_pGfxEngine, this->m_iSurfaceType) )
   {
-    *((_BYTE *)this + 336) = 0;
+    this->m_bOpen = 0;
     return 1;
   }
   else
@@ -305,7 +279,7 @@ bool  CToolTip::CloseTooltip(void) {
 
 
 // address=[0x2fa3fb0]
-// Decompiled from bool __thiscall CToolTip::~CToolTip(CToolTip *this)
+// Decompiled from char __thiscall CToolTip::~CToolTip(CToolTip *this)
  CToolTip::~CToolTip(void) {
   
   return CToolTip::CloseTooltip(this);
