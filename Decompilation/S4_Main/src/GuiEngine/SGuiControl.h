@@ -21,8 +21,9 @@ struct SGuiControl {
     char m_iId;
     BYTE m_iFontTemplate;
     BYTE m_iEffects;
-    WORD m_iShowTexture;
-    char m_iParam;
+    BYTE m_iControlGroupId;
+    char m_iParam1;
+    char m_iParam2;
     BYTE m_iParentContainer;
     BYTE m_iTextFormat;
     BYTE m_iUnknown21;

@@ -171,7 +171,7 @@ bool CToolTip::OpenTooltip(int a2, int a3) {
     sControl.m_iControlType = GUI_CNTRL_TOOLTIP;
     sControl.m_iWidth = psizl.cx;
     sControl.m_iHeight = psizl.cy;
-    sControl.m_iParam = 0;
+    sControl.m_iParam2 = 0;
     sControl.m_iEffects = 0;
     unsigned __int16 *v10 = g_pGfxEngine->BeginWriteToSurface(this->m_iSurfaceType, (unsigned int *)&v9);
     if(!v10) {

@@ -104,7 +104,7 @@ bool CToolTipExt::OpenTooltip(void) {
     sControl.m_iControlType = GUI_CNTRL_TOOLTIP_EXTRA;
     sControl.m_iWidth = pContainer->m_iHeight;
     sControl.m_iHeight = pContainer->m_iMainTexture;
-    sControl.m_iParam = 0;
+    sControl.m_iParam2 = 0;
     sControl.m_iEffects = 0;
     unsigned __int16 *pSurface = g_pGfxEngine->BeginWriteToSurface(this->m_iSurfaceType, uStride);
     if(!pSurface) {
