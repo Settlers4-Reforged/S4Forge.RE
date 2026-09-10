@@ -164,7 +164,7 @@ bool CToolTip::OpenTooltip(int a2, int a3) {
     }
 
     sControl.m_bDirty = 1;
-    sControl.m_iTextStyle = 8;
+    sControl.m_iFontTemplate = 8;
     sControl.m_iX = 0x2;
     sControl.m_iY = 0x2;
     sControl.m_iTextFormat = 4;

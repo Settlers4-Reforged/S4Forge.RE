@@ -97,7 +97,7 @@ bool CToolTipExt::OpenTooltip(void) {
     }
 
     sControl.m_bDirty = 1;
-    sControl.m_iTextStyle = 6;
+    sControl.m_iFontTemplate = 6;
     sControl.m_iX = 0x2;
     sControl.m_iY = 0x2;
     sControl.m_iTextFormat = 6;
@@ -162,7 +162,7 @@ bool CToolTipExt::UpdateText(void) {
     }
 
     sControl.m_bDirty = 1;
-    sControl.m_iTextStyle = 6;
+    sControl.m_iFontTemplate = 6;
     sControl.m_iX = 0x2;
     sControl.m_iY = 0x2;
     sControl.m_iTextFormat = 6;

@@ -19,7 +19,7 @@ struct SGuiControl {
     WORD m_iTooltipLinkExtra;
     T_GUI_CNTRL m_iControlType;
     char m_iId;
-    BYTE m_iTextStyle;
+    BYTE m_iFontTemplate;
     BYTE m_iEffects;
     WORD m_iShowTexture;
     char m_iParam;
