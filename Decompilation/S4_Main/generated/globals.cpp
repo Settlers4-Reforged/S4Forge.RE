@@ -54555,7 +54555,7 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
   int v23; // esi
   int v24; // eax
   int v25; // eax
-  __int64 v26; // rax
+  DWORD v26; // edx
   int v27; // eax
   char v28; // bl
   char v29; // bl
@@ -54596,7 +54596,7 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
   int m_iTooltipLinkExtra; // [esp-4h] [ebp-104h]
   int v65; // [esp-4h] [ebp-104h]
   __int64 v66; // [esp+28h] [ebp-D8h]
-  int v67; // [esp+50h] [ebp-B0h]
+  LONG v67; // [esp+50h] [ebp-B0h]
   __int64 v68; // [esp+68h] [ebp-98h]
   __int64 v69; // [esp+70h] [ebp-90h]
   __int64 v70; // [esp+78h] [ebp-88h]
@@ -54618,12 +54618,12 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
   struct GUI_MENU_DIALOG_HEADER *v86; // [esp+C8h] [ebp-38h] BYREF
   int m_wParam; // [esp+CCh] [ebp-34h]
   int v88; // [esp+D0h] [ebp-30h]
-  unsigned __int16 *v89; // [esp+D4h] [ebp-2Ch]
-  unsigned __int16 *v90; // [esp+D8h] [ebp-28h]
+  struct SGuiControl *v89; // [esp+D4h] [ebp-2Ch]
+  struct SGuiControl *v90; // [esp+D8h] [ebp-28h]
   struct SGuiControl *v91; // [esp+DCh] [ebp-24h]
   int v92; // [esp+E0h] [ebp-20h]
   int v93; // [esp+E4h] [ebp-1Ch]
-  int m_iSliderPosition; // [esp+E8h] [ebp-18h]
+  int m_iParam; // [esp+E8h] [ebp-18h]
   int v95; // [esp+ECh] [ebp-14h]
   int v96; // [esp+F0h] [ebp-10h]
   char v97; // [esp+F5h] [ebp-Bh]
@@ -54661,23 +54661,23 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
       }
       v101 = 1;
       currentTickCount = GetTickCount();
-      if ( CToolTip::IsOpen((CToolTip *)&g_cToolTip) )
+      if ( CToolTip::IsOpen((CToolTip *)g_cToolTip) )
       {
-        CToolTip::CloseTooltip((CToolTip *)&g_cToolTip);
-        CToolTip::Lock((CToolTip *)&g_cToolTip);
+        CToolTip::CloseTooltip((CToolTip *)g_cToolTip);
+        CToolTip::Lock((CToolTip *)g_cToolTip);
       }
       ControlUnderCursor = FindControlUnderCursor(v79, SHIDWORD(v79), &v100, &v72, &v73);
-      if ( !ControlUnderCursor || v100->m_iControlType != 16 )
+      if ( !ControlUnderCursor || v100->m_iControlType != GUI_CNTRL_SLIDERAREA )
       {
         goto LABEL_95;
       }
       ++v100;
-      if ( v100->m_iControlType == 7 || v100->m_iControlType == 8 )
+      if ( v100->m_iControlType == GUI_CNTRL_SLIDER || v100->m_iControlType == GUI_CNTRL_SLIDER2 )
       {
         v96 = v79;
         Container = GuiGetContainer(v100->m_iParentContainer);
         v91 = v100 - 1;
-        if ( v100[-1].m_iControlType == 16 )
+        if ( v100[-1].m_iControlType == GUI_CNTRL_SLIDERAREA )
         {
           v84 = v91->m_iX + Container->m_iX;
           v85 = v91->m_iWidth + v91->m_iX + Container->m_iX - v100->m_iWidth;
@@ -54691,24 +54691,24 @@ bool __cdecl GuiEngine2_EventProc(struct SEventStruct & a1) {
           }
           if ( v100->m_iX != v96 )
           {
-            m_iSliderPosition = CalcPercentageValue(v84, v85, v96, 0);
+            m_iParam = CalcPercentageValue(v84, v85, v96, 0);
             v100->m_iX = v96 - Container->m_iX;
-            v100->m_iParam = m_iSliderPosition;
-            if ( v100->m_iControlType == 8 )
+            v100->m_iParam2 = m_iParam;
+            if ( v100->m_iControlType == GUI_CNTRL_SLIDER2 )
             {
               RestoreMultisliderSettings(v100);
-              ChangeMultisliders(v100, v100->m_iUnknown21 - m_iSliderPosition);
+              ChangeMultisliders(v100, v100->m_iUnknown21 - m_iParam);
               EnsureMultisliders(v100);
-              m_iSliderPosition = (char)v100->m_iParam;
+              m_iParam = v100->m_iParam2;
             }
             v100[-1].m_bDirty = 1;
             v100->m_bDirty = 1;
             v102 = 1;
-            v56 = m_iSliderPosition;
+            v56 = m_iParam;
             v44 = (v100->m_iEffects << 16) + v100->m_iValueLink;
             SurfaceID = GetSurfaceID(v100);
             g_pfDialogCallbacks[SurfaceID](2, v44, v56);
-            v57 = m_iSliderPosition;
+            v57 = m_iParam;
             v45 = (v100->m_iEffects << 16) + v100->m_iValueLink;
             v15 = GetSurfaceID(v100);
             g_pfDialogCallbacks[v15](3, v45, v57);
@@ -54726,7 +54726,7 @@ LABEL_95:
                 {
                   v16 = v102;
                   v102 = SetControlState(g_pCurrentSelectedControl, 1, 1) | v16;
-                  g_pCurrentDragControl = (int)g_pCurrentSelectedControl;
+                  g_pCurrentDragControl = g_pCurrentSelectedControl;
                 }
                 break;
               case 1:
@@ -54751,9 +54751,9 @@ LABEL_95:
                 break;
               case 7:
               case 8:
-                if ( g_pCurrentSelectedControl != (struct SGuiControl *)g_pCurrentDragControl )
+                if ( g_pCurrentSelectedControl != g_pCurrentDragControl )
                 {
-                  if ( g_pCurrentSelectedControl->m_iControlType == 8 )
+                  if ( g_pCurrentSelectedControl->m_iControlType == GUI_CNTRL_SLIDER2 )
                   {
                     StoreMultisliderSettings(g_pCurrentSelectedControl);
                     SetControlState(g_pCurrentSelectedControl, 1, 0);
@@ -54761,7 +54761,7 @@ LABEL_95:
                     g_pCurrentSelectedControl[-1].m_bDirty = 1;
                     v102 = 1;
                   }
-                  g_pCurrentDragControl = (int)g_pCurrentSelectedControl;
+                  g_pCurrentDragControl = g_pCurrentSelectedControl;
                 }
                 break;
               case 17:
@@ -54802,21 +54802,21 @@ LABEL_95:
       }
       v101 = 1;
       currentTickCount = GetTickCount();
-      if ( !g_pCurrentDragControl || *(_BYTE *)(g_pCurrentDragControl + 24) != 7 && *(_BYTE *)(g_pCurrentDragControl + 24) != 8 )
+      if ( !g_pCurrentDragControl || g_pCurrentDragControl->m_iControlType != GUI_CNTRL_SLIDER && g_pCurrentDragControl->m_iControlType != GUI_CNTRL_SLIDER2 )
       {
         goto LABEL_146;
       }
-      v75 = GuiGetContainer(*(unsigned __int8 *)(g_pCurrentDragControl + 31));
-      v90 = (unsigned __int16 *)(g_pCurrentDragControl - 36);
-      if ( *(_BYTE *)(g_pCurrentDragControl - 36 + 24) != 16 )
+      v75 = GuiGetContainer(g_pCurrentDragControl->m_iParentContainer);
+      v90 = g_pCurrentDragControl - 1;
+      if ( g_pCurrentDragControl[-1].m_iControlType != GUI_CNTRL_SLIDERAREA )
       {
         BBSupportTracePrintF(0, "GUI ENGINE: Illegal data. Can't find slider area.");
         goto GuiEngine2_EventProc___def_3399920;
       }
-      v23 = CalcPercentageValue(*v90 + v75->m_iX, v90[2] + *v90 + v75->m_iX - *(unsigned __int16 *)(g_pCurrentDragControl + 4), *(unsigned __int16 *)g_pCurrentDragControl, 0);
+      v23 = CalcPercentageValue(v90->m_iX + v75->m_iX, v90->m_iWidth + v90->m_iX + v75->m_iX - g_pCurrentDragControl->m_iWidth, g_pCurrentDragControl->m_iX, 0);
       v61 = AddKeyStates(a1->m_wParam) + v23;
-      v49 = (*(unsigned __int8 *)(g_pCurrentDragControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentDragControl + 10);
-      v24 = GetSurfaceID((struct SGuiControl *)g_pCurrentDragControl);
+      v49 = (g_pCurrentDragControl->m_iEffects << 16) + g_pCurrentDragControl->m_iValueLink;
+      v24 = GetSurfaceID(g_pCurrentDragControl);
       g_pfDialogCallbacks[v24](3, v49, v61);
 LABEL_146:
       g_pCurrentDragControl = 0;
@@ -54853,22 +54853,22 @@ LABEL_146:
       }
 GuiEngine2_EventProc___def_339AC41:
       v68 = sub_2F9E860(a1->m_lParam);
-      LODWORD(v26) = sub_2F9E830(a1->m_lParam);
-      qword_471F794 = v26;
+      qword_471F794[0] = sub_2F9E830(a1->m_lParam);
+      qword_471F794[1] = v26;
       currentTickCount = GetTickCount();
       v99 = FindControlUnderCursor(v68, SHIDWORD(v68), &v100, &v72, &v73);
-      if ( g_pCurrentDragControl && (*(_BYTE *)(g_pCurrentDragControl + 24) == 7 || *(_BYTE *)(g_pCurrentDragControl + 24) == 8) )
+      if ( g_pCurrentDragControl && (g_pCurrentDragControl->m_iControlType == GUI_CNTRL_SLIDER || g_pCurrentDragControl->m_iControlType == GUI_CNTRL_SLIDER2) )
       {
         v95 = v68;
-        v80 = GuiGetContainer(*(unsigned __int8 *)(g_pCurrentDragControl + 31));
-        v89 = (unsigned __int16 *)(g_pCurrentDragControl - 36);
-        if ( *(_BYTE *)(g_pCurrentDragControl - 36 + 24) != 16 )
+        v80 = GuiGetContainer(g_pCurrentDragControl->m_iParentContainer);
+        v89 = g_pCurrentDragControl - 1;
+        if ( g_pCurrentDragControl[-1].m_iControlType != GUI_CNTRL_SLIDERAREA )
         {
           BBSupportTracePrintF(0, "GUI ENGINE: Illegal data. Can't find slider area.");
           goto GuiEngine2_EventProc___def_3399920;
         }
-        v81 = *v89 + v80->m_iX;
-        v82 = v89[2] + *v89 + v80->m_iX - *(unsigned __int16 *)(g_pCurrentDragControl + 4);
+        v81 = v89->m_iX + v80->m_iX;
+        v82 = v89->m_iWidth + v89->m_iX + v80->m_iX - g_pCurrentDragControl->m_iWidth;
         if ( v95 < v81 )
         {
           v95 = v81;
@@ -54877,38 +54877,38 @@ GuiEngine2_EventProc___def_339AC41:
         {
           v95 = v82;
         }
-        if ( *(unsigned __int16 *)g_pCurrentDragControl != v95 )
+        if ( g_pCurrentDragControl->m_iX != v95 )
         {
           v88 = CalcPercentageValue(v81, v82, v95, 0);
-          *(_WORD *)g_pCurrentDragControl = v95 - v80->m_iX;
-          *(_BYTE *)(g_pCurrentDragControl + 30) = v88;
-          if ( *(_BYTE *)(g_pCurrentDragControl + 24) == 8 )
+          g_pCurrentDragControl->m_iX = v95 - v80->m_iX;
+          g_pCurrentDragControl->m_iParam2 = v88;
+          if ( g_pCurrentDragControl->m_iControlType == GUI_CNTRL_SLIDER2 )
           {
-            RestoreMultisliderSettings((struct SGuiControl *)g_pCurrentDragControl);
-            ChangeMultisliders((struct SGuiControl *)g_pCurrentDragControl, *(unsigned __int8 *)(g_pCurrentDragControl + 33) - v88);
-            EnsureMultisliders((struct SGuiControl *)g_pCurrentDragControl);
-            v88 = *(char *)(g_pCurrentDragControl + 30);
+            RestoreMultisliderSettings(g_pCurrentDragControl);
+            ChangeMultisliders(g_pCurrentDragControl, g_pCurrentDragControl->m_iUnknown21 - v88);
+            EnsureMultisliders(g_pCurrentDragControl);
+            v88 = g_pCurrentDragControl->m_iParam2;
           }
-          *(_BYTE *)(g_pCurrentDragControl - 1) = 1;
-          *(_BYTE *)(g_pCurrentDragControl + 35) = 1;
+          g_pCurrentDragControl[-1].m_bDirty = 1;
+          g_pCurrentDragControl->m_bDirty = 1;
           v102 = 1;
           v63 = v88;
-          v51 = (*(unsigned __int8 *)(g_pCurrentDragControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentDragControl + 10);
-          v27 = GetSurfaceID((struct SGuiControl *)g_pCurrentDragControl);
+          v51 = (g_pCurrentDragControl->m_iEffects << 16) + g_pCurrentDragControl->m_iValueLink;
+          v27 = GetSurfaceID(g_pCurrentDragControl);
           g_pfDialogCallbacks[v27](2, v51, v63);
         }
       }
       else
       {
-        if ( g_pCurrentDragControl && ((struct SGuiControl *)g_pCurrentDragControl != v100 || !v99) && (*(_BYTE *)(g_pCurrentDragControl + 27) & 1) != 0 )
+        if ( g_pCurrentDragControl && (g_pCurrentDragControl != v100 || !v99) && (g_pCurrentDragControl->m_iEffects & 1) != 0 )
         {
           v28 = v102;
-          v102 = SetControlState((struct SGuiControl *)g_pCurrentDragControl, 1, 0) | v28;
+          v102 = SetControlState(g_pCurrentDragControl, 1, 0) | v28;
         }
-        if ( (struct SGuiControl *)g_pCurrentDragControl == v100 && v99 && (*(_BYTE *)(g_pCurrentDragControl + 27) & 1) == 0 )
+        if ( g_pCurrentDragControl == v100 && v99 && (g_pCurrentDragControl->m_iEffects & 1) == 0 )
         {
           v29 = v102;
-          v102 = SetControlState((struct SGuiControl *)g_pCurrentDragControl, 1, 1) | v29;
+          v102 = SetControlState(g_pCurrentDragControl, 1, 1) | v29;
         }
       }
       if ( g_pCurrentSelectedControl && (g_pCurrentSelectedControl != v100 || !v99) )
@@ -54929,16 +54929,16 @@ GuiEngine2_EventProc___def_339AC41:
           CToolTipExt::UpdateText((CToolTipExt *)g_cToolTipExt);
           dword_3E2F12C = GetTickCount() + 700;
         }
-        if ( CToolTip::IsOpen((CToolTip *)&g_cToolTip) )
+        if ( CToolTip::IsOpen((CToolTip *)g_cToolTip) )
         {
           dword_3E2F128 = GetTickCount();
         }
-        CToolTip::CloseTooltip((CToolTip *)&g_cToolTip);
-        CToolTip::Unlock((CToolTip *)&g_cToolTip);
+        CToolTip::CloseTooltip((CToolTip *)g_cToolTip);
+        CToolTip::Unlock((CToolTip *)g_cToolTip);
       }
       if ( v99 && v100 != g_pCurrentSelectedControl )
       {
-        if ( !g_pCurrentDragControl || v100 == (struct SGuiControl *)g_pCurrentDragControl )
+        if ( !g_pCurrentDragControl || v100 == g_pCurrentDragControl )
         {
           v32 = v102;
           v102 = SetControlState(v100, 2, 1) | v32;
@@ -54994,13 +54994,13 @@ GuiEngine2_EventProc___def_3399920:
         goto GuiEngine2_EventProc___def_3399920;
       }
       v97 = FindControlUnderCursor(v70, SHIDWORD(v70), &v100, &v72, &v73);
-      if ( g_pCurrentSelectedControl != v100 || (struct SGuiControl *)g_pCurrentDragControl == v100 )
+      if ( g_pCurrentSelectedControl != v100 || g_pCurrentDragControl == v100 )
       {
         goto LABEL_127;
       }
-      if ( !v97 || v100->m_iControlType != 16 || (++v100, v100->m_iControlType == 7) || v100->m_iControlType == 8 )
+      if ( !v97 || v100->m_iControlType != GUI_CNTRL_SLIDERAREA || (++v100, v100->m_iControlType == GUI_CNTRL_SLIDER) || v100->m_iControlType == GUI_CNTRL_SLIDER2 )
       {
-        if ( v100 && v100->m_iControlType == 8 )
+        if ( v100 && v100->m_iControlType == GUI_CNTRL_SLIDER2 )
         {
           if ( (v100->m_iEffects & 1) != 0 )
           {
@@ -55018,10 +55018,10 @@ GuiEngine2_EventProc___def_3399920:
 LABEL_127:
         v101 = 1;
         currentTickCount = GetTickCount();
-        if ( CToolTip::IsOpen((CToolTip *)&g_cToolTip) )
+        if ( CToolTip::IsOpen((CToolTip *)g_cToolTip) )
         {
-          CToolTip::CloseTooltip((CToolTip *)&g_cToolTip);
-          CToolTip::Lock((CToolTip *)&g_cToolTip);
+          CToolTip::CloseTooltip((CToolTip *)g_cToolTip);
+          CToolTip::Lock((CToolTip *)g_cToolTip);
         }
       }
       goto GuiEngine2_EventProc___def_3399920;
@@ -55071,11 +55071,11 @@ LABEL_127:
             if ( *(char *)(g_pCurrentEditControl + 25) >= 0 )
             {
               v9 = *(unsigned __int8 *)(g_pCurrentEditControl + 33);
-              if ( v9 < j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)]) )
+              if ( v9 < j___mbstrlen(g_mbstrTextTable[*(char *)(g_pCurrentEditControl + 25)]) )
               {
                 dword_3E2F124 = 3;
                 v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
-                v78 = j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)]);
+                v78 = j___mbstrlen(g_mbstrTextTable[*(char *)(g_pCurrentEditControl + 25)]);
                 *(_BYTE *)(g_pCurrentEditControl + 33) = v78;
                 *(_BYTE *)(g_pCurrentEditControl + 33) = v78;
                 v102 = 1;
@@ -55113,7 +55113,7 @@ LABEL_127:
             if ( *(char *)(g_pCurrentEditControl + 25) >= 0 )
             {
               v10 = *(unsigned __int8 *)(g_pCurrentEditControl + 33);
-              if ( v10 < j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)]) )
+              if ( v10 < j___mbstrlen(g_mbstrTextTable[*(char *)(g_pCurrentEditControl + 25)]) )
               {
                 dword_3E2F124 = 3;
                 v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
@@ -55127,11 +55127,11 @@ LABEL_127:
           case 11:
             v101 = 1;
             v7 = *(unsigned __int8 *)(g_pCurrentEditControl + 33);
-            if ( v7 < j___mbstrlen((const char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)]) && (unsigned __int8)DeleteCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 33)) )
+            if ( v7 < j___mbstrlen(g_mbstrTextTable[*(char *)(g_pCurrentEditControl + 25)]) && (unsigned __int8)DeleteCharacter(g_mbstrTextTable[*(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 33)) )
             {
               dword_3E2F124 = 3;
               SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
-              CalcCharWidths(g_pCurrentEditControl);
+              CalcCharWidths((struct SGuiControl *)g_pCurrentEditControl);
               v102 = 1;
               *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
               v41 = (*(unsigned __int8 *)(g_pCurrentEditControl + 27) << 16) + *(unsigned __int16 *)(g_pCurrentEditControl + 10);
@@ -55153,12 +55153,12 @@ LABEL_127:
         {
           case 8:
             v101 = 1;
-            if ( *(_BYTE *)(g_pCurrentEditControl + 33) && (unsigned __int8)DeleteCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 33) - 1) )
+            if ( *(_BYTE *)(g_pCurrentEditControl + 33) && (unsigned __int8)DeleteCharacter(g_mbstrTextTable[*(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 33) - 1) )
             {
               dword_3E2F124 = 3;
               v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
               --*(_BYTE *)(g_pCurrentEditControl + 33);
-              CalcCharWidths(g_pCurrentEditControl);
+              CalcCharWidths((struct SGuiControl *)g_pCurrentEditControl);
               v102 = 1;
               *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
               DoScrolling((struct SGuiControl *)g_pCurrentEditControl, 0);
@@ -55193,12 +55193,12 @@ LABEL_127:
             if ( IsValidInput(a1->m_wParam, *(_BYTE *)(g_pCurrentEditControl + 13)) )
             {
               v101 = 1;
-              if ( *(unsigned __int8 *)(g_pCurrentEditControl + 12) >= 0x7Du ? InsertCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], 125, *(unsigned __int8 *)(g_pCurrentEditControl + 33), a1->m_wParam) : (unsigned __int8)InsertCharacter((char *)&g_mbstrTextTable[75 * *(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 12), *(unsigned __int8 *)(g_pCurrentEditControl + 33), a1->m_wParam) )
+              if ( *(unsigned __int8 *)(g_pCurrentEditControl + 12) >= 0x7Du ? InsertCharacter(g_mbstrTextTable[*(char *)(g_pCurrentEditControl + 25)], 125, *(unsigned __int8 *)(g_pCurrentEditControl + 33), a1->m_wParam) : (unsigned __int8)InsertCharacter(g_mbstrTextTable[*(char *)(g_pCurrentEditControl + 25)], *(unsigned __int8 *)(g_pCurrentEditControl + 12), *(unsigned __int8 *)(g_pCurrentEditControl + 33), a1->m_wParam) )
               {
                 dword_3E2F124 = 3;
                 v102 |= SetControlState((struct SGuiControl *)g_pCurrentEditControl, 128, 1);
                 ++*(_BYTE *)(g_pCurrentEditControl + 33);
-                CalcCharWidths(g_pCurrentEditControl);
+                CalcCharWidths((struct SGuiControl *)g_pCurrentEditControl);
                 v102 = 1;
                 *(_BYTE *)(g_pCurrentEditControl + 35) = 1;
                 DoScrolling((struct SGuiControl *)g_pCurrentEditControl, 1);
@@ -55254,12 +55254,12 @@ LABEL_127:
       }
       if ( g_pCurrentSelectedControl )
       {
-        if ( GetTickCount() <= currentTickCount + 700 && GetTickCount() >= dword_3E2F128 + 400 || CToolTip::IsOpen((CToolTip *)&g_cToolTip) || CToolTip::IsLocked((CToolTip *)&g_cToolTip) )
+        if ( GetTickCount() <= currentTickCount + 700 && GetTickCount() >= dword_3E2F128 + 400 || CToolTip::IsOpen((CToolTip *)g_cToolTip) || CToolTip::IsLocked((CToolTip *)g_cToolTip) )
         {
-          if ( CToolTip::IsOpen((CToolTip *)&g_cToolTip) && GetTickCount() > dword_4726EC4 + 8000 )
+          if ( CToolTip::IsOpen((CToolTip *)g_cToolTip) && GetTickCount() > dword_4726EC4 + 8000 )
           {
-            CToolTip::CloseTooltip((CToolTip *)&g_cToolTip);
-            CToolTip::Lock((CToolTip *)&g_cToolTip);
+            CToolTip::CloseTooltip((CToolTip *)g_cToolTip);
+            CToolTip::Lock((CToolTip *)g_cToolTip);
           }
         }
         else
@@ -55269,7 +55269,7 @@ LABEL_127:
           v12 = GetSurfaceID(g_pCurrentSelectedControl);
           g_pfDialogCallbacks[v12](8, v43, m_iTooltipLink);
           v67 = sub_2F9E830(a1->m_lParam);
-          CToolTip::OpenTooltip((CToolTip *)&g_cToolTip, v67, v13);
+          CToolTip::OpenTooltip((CToolTip *)g_cToolTip, v67, v13);
           dword_4726EC4 = GetTickCount();
         }
       }
@@ -55340,12 +55340,12 @@ bool __cdecl CanHilightControl(int a1) {
 
 
 // address=[0x2f9b7f0]
-// Decompiled from char __cdecl HasImage(int a1)
-bool __cdecl HasImage(int a1) {
+// Decompiled from char __cdecl HasImage(int _iControlType)
+bool __cdecl HasImage(int _iControlType) {
   
   char result; // al
 
-  switch ( a1 )
+  switch ( _iControlType )
   {
     case 0:
     case 1:
@@ -55612,7 +55612,7 @@ void __cdecl DoScrolling(struct SGuiControl * a1, int a2) {
   int v9; // [esp+18h] [ebp-8h]
   int v10; // [esp+1Ch] [ebp-4h]
 
-  CalcTextSize(a1->m_iTextStyle, (const unsigned __int8 *)g_mbstrTextTable[a1->m_iId], &psizl, a1->m_iTextPosition, a1->m_iUnknown21 - a1->m_iTextPosition);
+  CalcTextSize(a1->m_iFontTemplate, (const unsigned __int8 *)g_mbstrTextTable[a1->m_iId], &psizl, a1->m_iTextPosition, a1->m_iUnknown21 - a1->m_iTextPosition);
   if ( psizl.cx > a1->m_iWidth - 30 && a2 == 1 )
   {
     v9 = 0;
@@ -55655,196 +55655,197 @@ void __cdecl DoScrolling(struct SGuiControl * a1, int a2) {
 
 
 // address=[0x2f9c0c0]
-// Decompiled from char __cdecl DrawControl(char *a1, unsigned int a2, int a3, int a4, struct SGuiControl *a5)
-bool __cdecl DrawControl(void * a1, unsigned int a2, int a3, int a4, struct SGuiControl * a5) {
+// Decompiled from char __cdecl DrawControl(void *_pSurface, int _iPitch, int _iContainerWidth, int _iContainerHeight, struct SGuiControl *_pControl)
+bool __cdecl DrawControl(void * _pSurface, unsigned int _iPitch, int _iContainerWidth, int _iContainerHeight, struct SGuiControl * _pControl) {
   
-  float v6; // [esp+8h] [ebp-510h]
-  int v7; // [esp+Ch] [ebp-50Ch]
-  int v8; // [esp+14h] [ebp-504h]
-  int v9; // [esp+18h] [ebp-500h]
+  unsigned int m_iMainTexture; // eax
+  float v7; // [esp+8h] [ebp-510h]
+  int v8; // [esp+Ch] [ebp-50Ch]
+  int v9; // [esp+14h] [ebp-504h]
+  int v10; // [esp+18h] [ebp-500h]
   int k; // [esp+24h] [ebp-4F4h]
   int j; // [esp+28h] [ebp-4F0h]
   int i; // [esp+2Ch] [ebp-4ECh]
   int m; // [esp+30h] [ebp-4E8h]
-  unsigned __int16 *v14; // [esp+34h] [ebp-4E4h]
-  float v15; // [esp+38h] [ebp-4E0h]
+  GUI_MENU_DIALOG_HEADER *Container; // [esp+34h] [ebp-4E4h]
   float v16; // [esp+38h] [ebp-4E0h]
-  bool v17; // [esp+3Eh] [ebp-4DAh]
-  bool v18; // [esp+3Fh] [ebp-4D9h]
-  unsigned __int16 *v19; // [esp+40h] [ebp-4D8h]
-  unsigned __int16 *v20; // [esp+44h] [ebp-4D4h] BYREF
-  void *v21; // [esp+48h] [ebp-4D0h]
-  _WORD v22[256]; // [esp+314h] [ebp-204h] BYREF
+  float v17; // [esp+38h] [ebp-4E0h]
+  bool v18; // [esp+3Eh] [ebp-4DAh]
+  bool bLowColorMode; // [esp+3Fh] [ebp-4D9h]
+  UGfxData *m_pGfxData; // [esp+40h] [ebp-4D8h]
+  SGfxObjectInfo sContainerGfxInfo; // [esp+44h] [ebp-4D4h] BYREF
+  _WORD vPalData[256]; // [esp+314h] [ebp-204h] BYREF
 
-  if ( a5->m_iControlType == 9 )
+  if ( _pControl->m_iControlType == 9 )
   {
     return 0;
   }
-  v14 = (unsigned __int16 *)GuiGetContainer(a5->m_iParentContainer);
-  (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(g_pGfxManager, &v20, v14[5]);
-  if ( !v20 || !v21 )
+  Container = GuiGetContainer(_pControl->m_iParentContainer);
+  g_pGfxManager->GetGuiGfxInfo(&sContainerGfxInfo, Container->m_iMainTexture);
+  if ( !sContainerGfxInfo.m_pGfxData || !sContainerGfxInfo.m_pPalData )
   {
     BBSupportTracePrintF(0, "GUI ENGINE: Background gfx not accessible!");
     return 0;
   }
-  if ( a5->m_iControlType != 7 && a5->m_iControlType != 8 )
+  if ( _pControl->m_iControlType != GUI_CNTRL_SLIDER && _pControl->m_iControlType != GUI_CNTRL_SLIDER2 )
   {
-    if ( (v14[7] & 1) != 0 )
+    if ( (Container->m_iTransparency & 1) != 0 )
     {
-      if ( (v14[7] & 2) != 0 )
+      if ( (Container->m_iTransparency & 2) != 0 )
       {
-        FastRasterSolid(a1, a2, a5->m_iX, a5->m_iY, a5->m_iWidth, a5->m_iHeight, 0, 31);
+        FastRasterSolid(_pSurface, _iPitch, _pControl->m_iX, _pControl->m_iY, _pControl->m_iWidth, _pControl->m_iHeight, 0, 31);
       }
       else
       {
-        memcpy(v22, v21, sizeof(v22));
-        v22[1] = 31;
-        v22[0] = 31;
-        FastBlit8Bit(v20 + 6, v14[3], a5->m_iX, a5->m_iY, a5->m_iWidth, a5->m_iHeight, a1, a2, a5->m_iX, a5->m_iY, v22);
+        memcpy(vPalData, sContainerGfxInfo.m_pPalData, sizeof(vPalData));
+        vPalData[1] = 31;
+        vPalData[0] = 31;
+        FastBlit8Bit(sContainerGfxInfo.m_pGfxData->m_sShort.m_vData, Container->m_iWidth, _pControl->m_iX, _pControl->m_iY, _pControl->m_iWidth, _pControl->m_iHeight, (char *)_pSurface, _iPitch, _pControl->m_iX, _pControl->m_iY, vPalData);
       }
     }
     else
     {
-      FastBlit8Bit(v20 + 6, v14[3], a5->m_iX, a5->m_iY, a5->m_iWidth, a5->m_iHeight, a1, a2, a5->m_iX, a5->m_iY, v21);
+      FastBlit8Bit(sContainerGfxInfo.m_pGfxData->m_sShort.m_vData, Container->m_iWidth, _pControl->m_iX, _pControl->m_iY, _pControl->m_iWidth, _pControl->m_iHeight, (char *)_pSurface, _iPitch, _pControl->m_iX, _pControl->m_iY, (_WORD *)sContainerGfxInfo.m_pPalData);
     }
   }
-  v17 = (a5->m_iEffects & 8) != 0;
-  if ( HasImage(a5->m_iControlType) && !v17 )
+  v18 = (_pControl->m_iEffects & 8) != 0;
+  if ( HasImage(_pControl->m_iControlType) && !v18 )
   {
-    if ( a5->m_iControlType == 10 )
+    if ( _pControl->m_iControlType == 10 )
     {
-      v7 = CalcSliderPosition(a5->m_iY + 1, a5->m_iY + a5->m_iHeight - 1, (char)a5->m_iParam, 1);
-      v15 = 0.0;
-      v6 = 16.0 / (float)(a5->m_iWidth - 2);
-      if ( (char)a5->m_iParam > 0 )
+      v8 = CalcSliderPosition(_pControl->m_iY + 1, _pControl->m_iY + _pControl->m_iHeight - 1, _pControl->m_iParam2, 1);
+      v16 = 0.0;
+      v7 = 16.0 / (float)(_pControl->m_iWidth - 2);
+      if ( _pControl->m_iParam2 > 0 )
       {
-        for ( i = a5->m_iX + 1;
-              i < a5->m_iX + a5->m_iWidth - 1;
+        for ( i = _pControl->m_iX + 1;
+              i < _pControl->m_iX + _pControl->m_iWidth - 1;
               ++i )
         {
-          FastVLine((unsigned __int16 *)a1, a2, i, v7, a5->m_iY + a5->m_iHeight - 1, g_uShadeTable2[v15]);
-          v15 = v15 + v6;
+          FastVLine((unsigned __int16 *)_pSurface, _iPitch, i, v8, _pControl->m_iY + _pControl->m_iHeight - 1, g_uShadeTable2[v16]);
+          v16 = v16 + v7;
         }
       }
-      v16 = 0.0;
-      if ( (char)a5->m_iParam < 100 )
+      v17 = 0.0;
+      if ( _pControl->m_iParam2 < 100 )
       {
-        for ( j = a5->m_iX + 1;
-              j < a5->m_iX + a5->m_iWidth - 1;
+        for ( j = _pControl->m_iX + 1;
+              j < _pControl->m_iX + _pControl->m_iWidth - 1;
               ++j )
         {
-          FastVLine((unsigned __int16 *)a1, a2, j, a5->m_iY + 1, v7, g_uShadeTable1[v16]);
-          v16 = v16 + v6;
+          FastVLine((unsigned __int16 *)_pSurface, _iPitch, j, _pControl->m_iY + 1, v8, g_uShadeTable1[v17]);
+          v17 = v17 + v7;
         }
       }
-      FastVLine((unsigned __int16 *)a1, a2, a5->m_iX, a5->m_iY, a5->m_iY + a5->m_iHeight - 1, g_iRightShadeColor);
-      FastVLine((unsigned __int16 *)a1, a2, a5->m_iX + a5->m_iWidth - 1, a5->m_iY, a5->m_iY + a5->m_iHeight - 1, g_iLeftShadeColor);
-      FastHLine((unsigned __int16 *)a1, a2, a5->m_iX, a5->m_iY, a5->m_iX + a5->m_iWidth - 1, g_iRightShadeColor);
-      FastHLine((unsigned __int16 *)a1, a2, a5->m_iX, a5->m_iY + a5->m_iHeight - 1, a5->m_iX + a5->m_iWidth - 1, g_iLeftShadeColor);
+      FastVLine((unsigned __int16 *)_pSurface, _iPitch, _pControl->m_iX, _pControl->m_iY, _pControl->m_iY + _pControl->m_iHeight - 1, g_iRightShadeColor);
+      FastVLine((unsigned __int16 *)_pSurface, _iPitch, _pControl->m_iX + _pControl->m_iWidth - 1, _pControl->m_iY, _pControl->m_iY + _pControl->m_iHeight - 1, g_iLeftShadeColor);
+      FastHLine((unsigned __int16 *)_pSurface, _iPitch, _pControl->m_iX, _pControl->m_iY, _pControl->m_iX + _pControl->m_iWidth - 1, g_iRightShadeColor);
+      FastHLine((unsigned __int16 *)_pSurface, _iPitch, _pControl->m_iX, _pControl->m_iY + _pControl->m_iHeight - 1, _pControl->m_iX + _pControl->m_iWidth - 1, g_iLeftShadeColor);
       return 1;
     }
     else
     {
-      if ( (char)a5->m_iParam == -10 )
+      if ( _pControl->m_iParam2 == -10 )
       {
-        if ( a5->m_iMainTexture >= 8u )
+        m_iMainTexture = _pControl->m_iMainTexture;
+        if ( m_iMainTexture >= 8 )
         {
-          v20 = 0;
+          sContainerGfxInfo.m_pGfxData = 0;
           BBSupportTracePrintF(0, "GUI ENGINE: Wrong gfx index for user logo!");
         }
         else
         {
-          (*(void (__thiscall **)(int, unsigned __int16 **, int, _DWORD))(*(_DWORD *)g_pGfxManager + 4))(g_pGfxManager, &v20, a5->m_iMainTexture + 1, 0);
+          g_pGfxManager->GetUserLogoGfxInfo(g_pGfxManager, &sContainerGfxInfo, _pControl->m_iMainTexture + 1, 0);
         }
       }
-      else if ( (a5->m_iEffects & 1) != 0 )
+      else if ( (_pControl->m_iEffects & 1) != 0 )
       {
-        (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(g_pGfxManager, &v20, a5->m_iPressedTexture);
+        g_pGfxManager->GetGuiGfxInfo(&sContainerGfxInfo, _pControl->m_iPressedTexture);
       }
       else
       {
-        (**(void (__thiscall ***)(int, unsigned __int16 **, _DWORD))g_pGfxManager)(g_pGfxManager, &v20, a5->m_iMainTexture);
+        g_pGfxManager->GetGuiGfxInfo(&sContainerGfxInfo, _pControl->m_iMainTexture);
       }
-      v19 = v20;
-      if ( !v20 )
+      m_pGfxData = sContainerGfxInfo.m_pGfxData;
+      if ( !sContainerGfxInfo.m_pGfxData )
       {
         BBSupportTracePrintF(0, "GUI ENGINE: No gfx for gui control available!");
         return 0;
       }
-      if ( a5->m_iHeight + a5->m_iY > a4 || a5->m_iWidth + a5->m_iX > a3 )
+      if ( _pControl->m_iHeight + _pControl->m_iY > _iContainerHeight || _pControl->m_iWidth + _pControl->m_iX > _iContainerWidth )
       {
         BBSupportTracePrintF(0, "GUI ENGINE: Control exceeds container surface!");
         return 0;
       }
-      if ( (v20[4] & 0x20) == 0 )
+      if ( (sContainerGfxInfo.m_pGfxData->m_sShort.m_iFlag1 & 0x20) == 0 )
       {
-        if ( !v21 )
+        if ( !sContainerGfxInfo.m_pPalData )
         {
           BBSupportTracePrintF(0, "GUI ENGINE: No palette for gui control available!");
           return 0;
         }
-        v18 = IGfxEngine::GetGfxMode((IGfxEngine *)g_pGfxEngine) == 1;
-        if ( *v19 != a5->m_iWidth || v19[1] != a5->m_iHeight )
+        bLowColorMode = IGfxEngine::GetGfxMode(g_pGfxEngine) == 1;
+        if ( m_pGfxData->m_sShort.m_iWidth != _pControl->m_iWidth || m_pGfxData->m_sShort.m_iHeight != _pControl->m_iHeight )
         {
-          BBSupportTracePrintF(0, "GUI ENGINE: Control size mismatch or illegal gfx data! ID: %d ", a5->m_iValueLink);
+          BBSupportTracePrintF(0, "GUI ENGINE: Control size mismatch or illegal gfx data! ID: %d ", _pControl->m_iValueLink);
           return 0;
         }
-        if ( (a5->m_iEffects & 2) != 0 )
+        if ( (_pControl->m_iEffects & 2) != 0 )
         {
-          if ( v18 )
+          if ( bLowColorMode )
           {
-            UnpackGfxTransparentHiLight555(v21, v19 + 6, &a1[2 * a5->m_iX + a2 * a5->m_iY], a2, *v19, v19[1]);
+            UnpackGfxTransparentHiLight555(sContainerGfxInfo.m_pPalData, m_pGfxData->m_sShort.m_vData, (char *)_pSurface + 2 * _pControl->m_iX + _iPitch * _pControl->m_iY, _iPitch, m_pGfxData->m_sShort.m_iWidth, m_pGfxData->m_sShort.m_iHeight);
           }
           else
           {
-            UnpackGfxTransparentHiLight565(v21, v19 + 6, &a1[2 * a5->m_iX + a2 * a5->m_iY], a2, *v19, v19[1]);
+            UnpackGfxTransparentHiLight565(sContainerGfxInfo.m_pPalData, m_pGfxData->m_sShort.m_vData, (char *)_pSurface + 2 * _pControl->m_iX + _iPitch * _pControl->m_iY, _iPitch, m_pGfxData->m_sShort.m_iWidth, m_pGfxData->m_sShort.m_iHeight);
           }
         }
-        else if ( (a5->m_iEffects & 4) != 0 )
+        else if ( (_pControl->m_iEffects & 4) != 0 )
         {
-          if ( v18 )
+          if ( bLowColorMode )
           {
-            UnpackGfxTransparentGrayed555(v21, v19 + 6, &a1[2 * a5->m_iX + a2 * a5->m_iY], a2, *v19, v19[1]);
+            UnpackGfxTransparentGrayed555(sContainerGfxInfo.m_pPalData, m_pGfxData->m_sShort.m_vData, (char *)_pSurface + 2 * _pControl->m_iX + _iPitch * _pControl->m_iY, _iPitch, m_pGfxData->m_sShort.m_iWidth, m_pGfxData->m_sShort.m_iHeight);
           }
           else
           {
-            UnpackGfxTransparentGrayed565(v21, v19 + 6, &a1[2 * a5->m_iX + a2 * a5->m_iY], a2, *v19, v19[1]);
+            UnpackGfxTransparentGrayed565(sContainerGfxInfo.m_pPalData, m_pGfxData->m_sShort.m_vData, (char *)_pSurface + 2 * _pControl->m_iX + _iPitch * _pControl->m_iY, _iPitch, m_pGfxData->m_sShort.m_iWidth, m_pGfxData->m_sShort.m_iHeight);
           }
         }
         else
         {
-          UnpackGfxTransparent(v21, v19 + 6, &a1[2 * a5->m_iX + a2 * a5->m_iY], a2, *v19, v19[1]);
+          UnpackGfxTransparent(sContainerGfxInfo.m_pPalData, m_pGfxData->m_sShort.m_vData, (char *)_pSurface + 2 * _pControl->m_iX + _iPitch * _pControl->m_iY, _iPitch, m_pGfxData->m_sShort.m_iWidth, m_pGfxData->m_sShort.m_iHeight);
         }
       }
-      if ( (a5->m_iEffects & 0xC0) != 0xC0 )
+      if ( (_pControl->m_iEffects & 0xC0) != 0xC0 )
       {
         return 1;
       }
-      v8 = 0;
-      for ( k = LOBYTE(a5->m_iTextFormat[1]);
-            k < HIBYTE(a5->m_iTextFormat[0]);
+      v9 = 0;
+      for ( k = _pControl->m_iTextPosition;
+            k < _pControl->m_iUnknown21;
             ++k )
       {
-        v8 += g_iEditWidthTable[k];
+        v9 += g_iEditWidthTable[k];
       }
-      FastVLine((unsigned __int16 *)&a1[2 * a5->m_iX + a2 * a5->m_iY], a2, v8 + 2, 0, a5->m_iHeight - 1, 0xFFFFu);
+      FastVLine((unsigned __int16 *)((char *)_pSurface + 2 * _pControl->m_iX + _iPitch * _pControl->m_iY), _iPitch, v9 + 2, 0, _pControl->m_iHeight - 1, 0xFFFF);
       return 1;
     }
   }
   else
   {
-    if ( (a5->m_iEffects & 0xC0) != 0xC0 )
+    if ( (_pControl->m_iEffects & 0xC0) != 0xC0 )
     {
       return 1;
     }
-    v9 = 0;
-    for ( m = LOBYTE(a5->m_iTextFormat[1]);
-          m < HIBYTE(a5->m_iTextFormat[0]);
+    v10 = 0;
+    for ( m = _pControl->m_iTextPosition;
+          m < _pControl->m_iUnknown21;
           ++m )
     {
-      v9 += g_iEditWidthTable[m];
+      v10 += g_iEditWidthTable[m];
     }
-    FastVLine((unsigned __int16 *)&a1[2 * a5->m_iX + a2 * a5->m_iY], a2, v9 + 2, 0, a5->m_iHeight - 1, 0xFFFFu);
+    FastVLine((unsigned __int16 *)((char *)_pSurface + 2 * _pControl->m_iX + _iPitch * _pControl->m_iY), _iPitch, v10 + 2, 0, _pControl->m_iHeight - 1, 0xFFFF);
     return 1;
   }
 }
@@ -55904,16 +55905,16 @@ bool __cdecl DrawControlText(struct HDC__ * hdc, struct SGuiControl * _pControl)
       break;
   }
   iTextLength = j___mbstrlen(lpchText);
-  iTextStyle = _pControl->m_iTextStyle;
+  iTextStyle = _pControl->m_iFontTemplate;
   if ( iTextStyle >= 19 )
   {
     iTextStyle = 0;
   }
   h = SelectObject(hdc, g_hFonts[iTextStyle]);
   rc.left = _pControl->m_iX;
-  rc.top = _pControl->m_iParam + _pControl->m_iY;
+  rc.top = _pControl->m_iParam2 + _pControl->m_iY;
   rc.right = _pControl->m_iWidth + _pControl->m_iX;
-  rc.bottom = _pControl->m_iParam + _pControl->m_iHeight + _pControl->m_iY;
+  rc.bottom = _pControl->m_iParam2 + _pControl->m_iHeight + _pControl->m_iY;
   if ( _pControl->m_iControlType != GUI_CNTRL_TOOLTIP )
   {
     rc.left += 2;
@@ -56024,7 +56025,7 @@ void __cdecl ChangeMultisliders(struct SGuiControl * a1, int a2) {
   char v12; // [esp+1Fh] [ebp-1h]
 
   v8 = GuiGetContainer(a1->m_iParentContainer);
-  unknown4_low = LOBYTE(a1->m_iShowTexture);
+  unknown4_low = LOBYTE(a1->m_iControlGroupId);
   v10 = 1;
   if ( a2 < 0 )
   {
@@ -56126,7 +56127,7 @@ void __cdecl EnsureMultisliders(struct SGuiControl * a1) {
   {
     if ( *(_BYTE *)(v9 + 24) == 8 )
     {
-      if ( *(unsigned __int8 *)(v9 + 28) == LOBYTE(a1->m_iShowTexture) )
+      if ( *(unsigned __int8 *)(v9 + 28) == LOBYTE(a1->m_iControlGroupId) )
       {
         if ( (struct SGuiControl *)v9 == a1 )
         {
@@ -56152,27 +56153,27 @@ void __cdecl EnsureMultisliders(struct SGuiControl * a1) {
     }
   }
   result = (int)a1;
-  v2 = v6 + (char)a1->m_iParam;
+  v2 = v6 + (char)a1->m_iParam2;
   if ( v2 == 100 )
   {
     return result;
   }
-  a1->m_iParam += 100 - v2;
-  if ( (a1->m_iParam & 0x80u) != 0 )
+  a1->m_iParam2 += 100 - v2;
+  if ( (a1->m_iParam2 & 0x80u) != 0 )
   {
-    a1->m_iParam = 0;
+    a1->m_iParam2 = 0;
   }
-  if ( (char)a1->m_iParam > 100 )
+  if ( (char)a1->m_iParam2 > 100 )
   {
-    a1->m_iParam = 100;
+    a1->m_iParam2 = 100;
   }
-  a1->m_iX = CalcSliderPosition(a1[-1].m_iWidth, a1[-1].m_iMainTexture + a1[-1].m_iWidth - a1->m_iWidth, (char)a1->m_iParam, 0);
+  a1->m_iX = CalcSliderPosition(a1[-1].m_iWidth, a1[-1].m_iMainTexture + a1[-1].m_iWidth - a1->m_iWidth, (char)a1->m_iParam2, 0);
   result = GetSurfaceID(a1);
   if ( !g_pfDialogCallbacks[result] )
   {
     return result;
   }
-  showTexture = (char)a1->m_iParam;
+  showTexture = (char)a1->m_iParam2;
   v4 = (a1->m_iEffects << 16) + a1->m_iValueLink;
   SurfaceID = GetSurfaceID(a1);
   return ((int (__cdecl *)(int, int, int))g_pfDialogCallbacks[SurfaceID])(2, v4, showTexture);
@@ -56203,7 +56204,7 @@ bool __cdecl CanLockMultislider(struct SGuiControl * a1) {
   {
     if ( v6[24] == 8 )
     {
-      if ( v6[28] == LOBYTE(a1->m_iShowTexture) )
+      if ( v6[28] == LOBYTE(a1->m_iControlGroupId) )
       {
         if ( (v6[27] & 0xD) != 0 )
         {
@@ -56238,7 +56239,7 @@ void __cdecl StoreMultisliderSettings(struct SGuiControl * a1) {
 
   v3 = GuiGetContainer(a1->m_iParentContainer);
   v5 = (_BYTE *)(v3 + 16);
-  unknown4_low = LOBYTE(a1->m_iShowTexture);
+  unknown4_low = LOBYTE(a1->m_iControlGroupId);
   for ( i = 0;
         ;
         ++i )
@@ -56285,7 +56286,7 @@ void __cdecl RestoreMultisliderSettings(struct SGuiControl * a1) {
 
   Container = GuiGetContainer(a1->m_iParentContainer);
   m_sControls = Container->m_sControls;
-  m_iShowTexture_low = LOBYTE(a1->m_iShowTexture);
+  m_iShowTexture_low = LOBYTE(a1->m_iControlGroupId);
   for ( i = 0;
         ;
         ++i )
@@ -56297,7 +56298,7 @@ void __cdecl RestoreMultisliderSettings(struct SGuiControl * a1) {
     }
     if ( m_sControls->m_iControlType == 8 )
     {
-      if ( LOBYTE(m_sControls->m_iShowTexture) == m_iShowTexture_low )
+      if ( LOBYTE(m_sControls->m_iControlGroupId) == m_iShowTexture_low )
       {
         if ( a1 == m_sControls )
         {
@@ -56309,14 +56310,14 @@ void __cdecl RestoreMultisliderSettings(struct SGuiControl * a1) {
         }
         else
         {
-          m_sControls->m_iParam = m_sControls->m_iUnknown21;
+          m_sControls->m_iParam2 = m_sControls->m_iUnknown21;
           m_sControls->m_bDirty = 1;
           v5 = m_sControls - 1;
           if ( m_sControls[-1].m_iControlType != GUI_CNTRL_SLIDERAREA )
           {
             return (GUI_MENU_DIALOG_HEADER *)BBSupportTracePrintF(0, "GUI ENGINE: No previous control GUI_CNTRL_SLIDERAREA of GUI_CNTRL_SLIDER!");
           }
-          m_sControls->m_iX = CalcSliderPosition(v5->m_iX, v5->m_iWidth + v5->m_iX - m_sControls->m_iWidth, (char)m_sControls->m_iParam, 0);
+          m_sControls->m_iX = CalcSliderPosition(v5->m_iX, v5->m_iWidth + v5->m_iX - m_sControls->m_iWidth, (char)m_sControls->m_iParam2, 0);
           v5->m_bDirty = 1;
           ++m_sControls;
         }
@@ -56372,7 +56373,7 @@ bool __cdecl SelectRadioGroup(struct SGuiControl * a1) {
     {
       if ( *(_BYTE *)(v8 + 24) == 3 || *(_BYTE *)(v8 + 24) == 2 )
       {
-        if ( (*(_BYTE *)(v8 + 27) & 1) != 0 && *(unsigned __int8 *)(v8 + 28) == LOBYTE(a1->m_iShowTexture) && a1 != (struct SGuiControl *)v8 )
+        if ( (*(_BYTE *)(v8 + 27) & 1) != 0 && *(unsigned __int8 *)(v8 + 28) == LOBYTE(a1->m_iControlGroupId) && a1 != (struct SGuiControl *)v8 )
         {
           SetControlState((struct SGuiControl *)v8, 1, 0);
         }
@@ -56493,31 +56494,23 @@ bool __cdecl FindDialogUnderCursor(int a1, int a2, struct GUI_MENU_DIALOG_HEADER
 
 
 // address=[0x2f9dce0]
-// Decompiled from char __cdecl UpdateGui(int surfaceToDraw)
+// Decompiled from void __cdecl UpdateGui(int surfaceToDraw)
 void __cdecl UpdateGui(int surfaceToDraw) {
   
-  bool v1; // al
   struct SGuiControl *pControlsStart; // [esp+0h] [ebp-4FCh]
   HDC hdc; // [esp+4h] [ebp-4F8h] BYREF
-  unsigned int v5; // [esp+8h] [ebp-4F4h] BYREF
+  int iPitch; // [esp+8h] [ebp-4F4h] BYREF
   int j; // [esp+Ch] [ebp-4F0h]
   unsigned int i; // [esp+10h] [ebp-4ECh]
-  void *v8; // [esp+14h] [ebp-4E8h]
-  SGfxObjectInfo *v9; // [esp+18h] [ebp-4E4h]
+  unsigned __int16 *pSurface; // [esp+14h] [ebp-4E8h]
   struct SGuiControl *pControls; // [esp+1Ch] [ebp-4E0h]
   GUI_MENU_DIALOG_HEADER *pDialog; // [esp+20h] [ebp-4DCh]
-  char v12; // [esp+27h] [ebp-4D5h]
-  SGfxObjectInfo *v13; // [esp+28h] [ebp-4D4h] BYREF
-  void *Src; // [esp+2Ch] [ebp-4D0h]
-  _WORD v15[256]; // [esp+2F8h] [ebp-204h] BYREF
+  char bSurfaceOpen; // [esp+27h] [ebp-4D5h]
+  SGfxObjectInfo sGfxInfo; // [esp+28h] [ebp-4D4h] MAPDST BYREF
+  _WORD vCustomPalData[256]; // [esp+2F8h] [ebp-204h] BYREF
 
   g_bGuiIsDirty = 1;
-  if ( surfaceToDraw == -1 && !(v1 = g_bGuiIsDirty) )
-  {
-    return v1;
-  }
-  v1 = IsGuiEngineReady();
-  if ( v1 )
+  if ( (surfaceToDraw != -1 || g_bGuiIsDirty) && IsGuiEngineReady() )
   {
     for ( i = 0;
           ;
@@ -56526,9 +56519,8 @@ void __cdecl UpdateGui(int surfaceToDraw) {
       if ( i >= 0xE )
       {
         g_bGuiIsDirty = 0;
-        return v1;
+        return;
       }
-      v1 = i;
       if ( !g_iOpenDialogs[i] )
       {
         continue;
@@ -56536,54 +56528,54 @@ void __cdecl UpdateGui(int surfaceToDraw) {
       pDialog = GuiGetContainer(g_iOpenDialogs[i] - 1);
       pControls = pDialog->m_sControls;
       pControlsStart = pDialog->m_sControls;
-      v12 = 0;
+      bSurfaceOpen = 0;
       if ( surfaceToDraw == i )
       {
         IGfxEngine::SolidColorFillGuiSurface(g_pGfxEngine, pDialog->m_iSurfaceType, 0, 0, 0xFFu);
         if ( (pDialog->m_iTransparency & 2) != 0 )
         {
-          *(_DWORD *)&v1 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, pDialog->m_iSurfaceType, &v5);
-          v8 = *(void **)&v1;
-          if ( !*(_DWORD *)&v1 )
+          pSurface = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, pDialog->m_iSurfaceType, (unsigned int *)&iPitch);
+          if ( !pSurface )
           {
-            return v1;
+            return;
           }
-          v12 = 1;
-          FastRaster(v8, v5, 0, 0, pDialog->m_iWidth, pDialog->m_iHeight, 0);
+          bSurfaceOpen = 1;
+          FastRaster(pSurface, iPitch, 0, 0, pDialog->m_iWidth, pDialog->m_iHeight, 0);
         }
         else
         {
-          g_pGfxManager->GetGuiGfxInfo(&v13, pDialog->m_iMainTexture);
-          v9 = v13;
-          if ( !v13 )
+          g_pGfxManager->GetGuiGfxInfo(&sGfxInfo, pDialog->m_iMainTexture);
+          if ( !sGfxInfo.m_pGfxData )
           {
-            return BBSupportTracePrintF(0, "GUI ENGINE: Can't get source data from gfx manager.");
+            BBSupportTracePrintF(0, "GUI ENGINE: Can't get source data from gfx manager.");
+            return;
           }
-          if ( pDialog->m_iWidth > (int)LOWORD(v9->m_pGfxData) || pDialog->m_iHeight > (int)HIWORD(v9->m_pGfxData) )
+          if ( pDialog->m_iWidth > (int)sGfxInfo.m_pGfxData->m_sShort.m_iWidth || pDialog->m_iHeight > (int)sGfxInfo.m_pGfxData->m_sShort.m_iHeight )
           {
-            return BBSupportTracePrintF(0, "GUI ENGINE: Background gfx is greater than the dialog!");
+            BBSupportTracePrintF(0, "GUI ENGINE: Background gfx is greater than the dialog!");
+            return;
           }
-          if ( (v9->m_iU8 & 0x20) == 0 )
+          if ( (sGfxInfo.m_pGfxData->m_sShort.m_iFlag1 & 0x20) == 0 )
           {
-            return BBSupportTracePrintF(0, "GUI ENGINE: Dialog is packed. Illegal data!");
+            BBSupportTracePrintF(0, "GUI ENGINE: Dialog is packed. Illegal data!");
+            return;
           }
-          *(_DWORD *)&v1 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, pDialog->m_iSurfaceType, &v5);
-          v8 = *(void **)&v1;
-          if ( !*(_DWORD *)&v1 )
+          pSurface = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, pDialog->m_iSurfaceType, (unsigned int *)&iPitch);
+          if ( !pSurface )
           {
-            return v1;
+            return;
           }
-          v12 = 1;
+          bSurfaceOpen = 1;
           if ( (pDialog->m_iTransparency & 1) != 0 )
           {
-            memcpy(v15, Src, sizeof(v15));
-            v15[1] = 31;
-            v15[0] = 31;
-            FastBlit8Bit((char *)&v13->m_pPatchGfxData, LOWORD(v9->m_pGfxData), 0, 0, LOWORD(v9->m_pGfxData), HIWORD(v9->m_pGfxData), (char *)v8, v5, 0, 0, v15);
+            memcpy(vCustomPalData, sGfxInfo.m_pPalData, sizeof(vCustomPalData));
+            vCustomPalData[1] = 31;
+            vCustomPalData[0] = 31;
+            FastBlit8Bit(sGfxInfo.m_pGfxData->m_sShort.m_vData, sGfxInfo.m_pGfxData->m_sShort.m_iWidth, 0, 0, sGfxInfo.m_pGfxData->m_sShort.m_iWidth, sGfxInfo.m_pGfxData->m_sShort.m_iHeight, (char *)pSurface, iPitch, 0, 0, vCustomPalData);
           }
           else
           {
-            FastBlit8Bit((char *)&v13->m_pPatchGfxData, LOWORD(v9->m_pGfxData), 0, 0, LOWORD(v9->m_pGfxData), HIWORD(v9->m_pGfxData), (char *)v8, v5, 0, 0, Src);
+            FastBlit8Bit(sGfxInfo.m_pGfxData->m_sShort.m_vData, sGfxInfo.m_pGfxData->m_sShort.m_iWidth, 0, 0, sGfxInfo.m_pGfxData->m_sShort.m_iWidth, sGfxInfo.m_pGfxData->m_sShort.m_iHeight, (char *)pSurface, iPitch, 0, 0, (_WORD *)sGfxInfo.m_pPalData);
           }
         }
       }
@@ -56598,17 +56590,16 @@ void __cdecl UpdateGui(int surfaceToDraw) {
         }
         if ( pControls->m_bDirty )
         {
-          if ( !v12 )
+          if ( !bSurfaceOpen )
           {
-            *(_DWORD *)&v1 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, pDialog->m_iSurfaceType, &v5);
-            v8 = *(void **)&v1;
-            if ( !*(_DWORD *)&v1 )
+            pSurface = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, pDialog->m_iSurfaceType, (unsigned int *)&iPitch);
+            if ( !pSurface )
             {
-              return v1;
+              return;
             }
-            v12 = 1;
+            bSurfaceOpen = 1;
           }
-          DrawControl((char *)v8, v5, pDialog->m_iWidth, pDialog->m_iHeight, pControls);
+          DrawControl(pSurface, iPitch, pDialog->m_iWidth, pDialog->m_iHeight, pControls);
           if ( !IsTextControl(pControls->m_iControlType) )
           {
             pControls->m_bDirty = 0;
@@ -56616,25 +56607,20 @@ void __cdecl UpdateGui(int surfaceToDraw) {
         }
         ++pControls;
       }
-      if ( v12 )
+      if ( bSurfaceOpen )
       {
         IGfxEngine::EndWriteToSurface(g_pGfxEngine, pDialog->m_iSurfaceType);
-        v12 = 0;
+        bSurfaceOpen = 0;
       }
       pControls = pControlsStart;
       hdc = 0;
       for ( j = 0;
-            ;
+            j < pDialog->m_iElementCount;
             ++j )
       {
-        v1 = (char)pDialog;
-        if ( j >= pDialog->m_iElementCount )
-        {
-          break;
-        }
         if ( pControls->m_bDirty && IsTextControl(pControls->m_iControlType) )
         {
-          if ( !v12 )
+          if ( !bSurfaceOpen )
           {
             if ( !IGfxEngine::GetGuiSurfaceDC(g_pGfxEngine, pDialog->m_iSurfaceType, &hdc) )
             {
@@ -56642,21 +56628,20 @@ void __cdecl UpdateGui(int surfaceToDraw) {
               continue;
             }
             SetBkMode(hdc, TRANSPARENT);
-            v12 = 1;
+            bSurfaceOpen = 1;
           }
           DrawControlText(hdc, pControls);
           pControls->m_bDirty = 0;
         }
         ++pControls;
       }
-      if ( v12 )
+      if ( bSurfaceOpen )
       {
-        v1 = IGfxEngine::ReleaseGuiSurfaceDC(g_pGfxEngine, pDialog->m_iSurfaceType, hdc);
-        v12 = 0;
+        IGfxEngine::ReleaseGuiSurfaceDC(g_pGfxEngine, pDialog->m_iSurfaceType, hdc);
+        bSurfaceOpen = 0;
       }
     }
   }
-  return v1;
 }
 
 
@@ -56681,7 +56666,7 @@ void __cdecl CalcCharWidths(struct SGuiControl * a1) {
       hdc = CreateCompatibleDC(0);
       if ( hdc )
       {
-        h = SelectObject(hdc, g_hFonts[a1->m_iTextStyle]);
+        h = SelectObject(hdc, g_hFonts[a1->m_iFontTemplate]);
         Source = (unsigned __int8 *)&g_mbstrTextTable[75 * (char)a1->m_iId];
         for ( i = 0;
               i < v4;
@@ -56899,14 +56884,14 @@ void __cdecl InitTables(void) {
         i < 32;
         ++i )
   {
-    byte_47272D0[i] = i;
+    s_i555TransformTable[i] = i;
     if ( i + 4 * i / 10 <= 31 )
     {
-      byte_47272D0[i] += 4 * i / 10;
+      s_i555TransformTable[i] += 4 * i / 10;
     }
     else
     {
-      byte_47272D0[i] = 31;
+      s_i555TransformTable[i] = 31;
     }
     result = i + 1;
   }
@@ -56914,14 +56899,14 @@ void __cdecl InitTables(void) {
         j < 64;
         ++j )
   {
-    byte_47272F0[j] = j;
+    s_i565TransformTable[j] = j;
     if ( j + 4 * j / 10 <= 63 )
     {
-      byte_47272F0[j] += 4 * j / 10;
+      s_i565TransformTable[j] += 4 * j / 10;
     }
     else
     {
-      byte_47272F0[j] = 63;
+      s_i565TransformTable[j] = 63;
     }
     result = j + 1;
   }
@@ -56940,7 +56925,7 @@ void __cdecl InitTables(void) {
 // [Decompilation failed for void __cdecl FastBlit(void *,int,int,int,int,int,void *,int,int,int)]
 
 // address=[0x2fa4300]
-// Decompiled from unsigned __int64 __cdecl FastBlit8Bit(char *a1, int a2, int a3, int a4, int a5, int a6, char *a7, int a8, int a9, int a10, _WORD *a11)
+// Decompiled from unsigned __int64 __cdecl FastBlit8Bit(void *a1, int a2, int a3, int a4, int a5, int a6, void *a7, int a8, int a9, int a10, void *a11)
 void __cdecl FastBlit8Bit(void * a1, int a2, int a3, int a4, int a5, int a6, void * a7, int a8, int a9, int a10, void * a11) {
   
   char *v11; // esi
@@ -56968,6 +56953,7 @@ void __cdecl FastBlit8Bit(void * a1, int a2, int a3, int a4, int a5, int a6, voi
   int v33; // ebx
   int v34; // ebx
   int v35; // ebx
+  unsigned __int64 result; // rax
 
   dword_47274C8 = (int)a1;
   dword_47274CC = a2;
@@ -56980,8 +56966,8 @@ void __cdecl FastBlit8Bit(void * a1, int a2, int a3, int a4, int a5, int a6, voi
   dword_47274E8 = a9;
   dword_47274EC = a10;
   dword_47274C4 = (int)a11;
-  v11 = &a1[a2 * a4 + a3];
-  v12 = &a7[2 * a9 + a8 * a10];
+  v11 = (char *)a1 + a2 * a4 + a3;
+  v12 = (char *)a7 + 2 * a9 + a8 * a10;
   dword_47274F0 = (int)v11;
   dword_47274F4 = (int)v12;
   v13 = 0;
@@ -56995,44 +56981,44 @@ void __cdecl FastBlit8Bit(void * a1, int a2, int a3, int a4, int a5, int a6, voi
       {
         LOBYTE(v13) = v11[1];
         LOBYTE(v14) = *v11;
-        v16 = *(_DWORD *)&a11[v13 - 1];
-        LOWORD(v16) = a11[v14];
+        v16 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+        LOWORD(v16) = *((_WORD *)a11 + v14);
         *(_DWORD *)v12 = v16;
         LOBYTE(v13) = v11[3];
         LOBYTE(v14) = v11[2];
-        v17 = *(_DWORD *)&a11[v13 - 1];
-        LOWORD(v17) = a11[v14];
+        v17 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+        LOWORD(v17) = *((_WORD *)a11 + v14);
         *((_DWORD *)v12 + 1) = v17;
         LOBYTE(v13) = v11[5];
         LOBYTE(v14) = v11[4];
-        v18 = *(_DWORD *)&a11[v13 - 1];
-        LOWORD(v18) = a11[v14];
+        v18 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+        LOWORD(v18) = *((_WORD *)a11 + v14);
         *((_DWORD *)v12 + 2) = v18;
         LOBYTE(v13) = v11[7];
         LOBYTE(v14) = v11[6];
-        v19 = *(_DWORD *)&a11[v13 - 1];
-        LOWORD(v19) = a11[v14];
+        v19 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+        LOWORD(v19) = *((_WORD *)a11 + v14);
         *((_DWORD *)v12 + 3) = v19;
         v15 -= 16;
         LOBYTE(v13) = v11[9];
         LOBYTE(v14) = v11[8];
-        v20 = *(_DWORD *)&a11[v13 - 1];
-        LOWORD(v20) = a11[v14];
+        v20 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+        LOWORD(v20) = *((_WORD *)a11 + v14);
         *((_DWORD *)v12 + 4) = v20;
         LOBYTE(v13) = v11[11];
         LOBYTE(v14) = v11[10];
-        v21 = *(_DWORD *)&a11[v13 - 1];
-        LOWORD(v21) = a11[v14];
+        v21 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+        LOWORD(v21) = *((_WORD *)a11 + v14);
         *((_DWORD *)v12 + 5) = v21;
         LOBYTE(v13) = v11[13];
         LOBYTE(v14) = v11[12];
-        v22 = *(_DWORD *)&a11[v13 - 1];
-        LOWORD(v22) = a11[v14];
+        v22 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+        LOWORD(v22) = *((_WORD *)a11 + v14);
         *((_DWORD *)v12 + 6) = v22;
         LOBYTE(v13) = v11[15];
         LOBYTE(v14) = v11[14];
-        v23 = *(_DWORD *)&a11[v13 - 1];
-        LOWORD(v23) = a11[v14];
+        v23 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+        LOWORD(v23) = *((_WORD *)a11 + v14);
         *((_DWORD *)v12 + 7) = v23;
         v11 += 16;
         v12 += 32;
@@ -57051,24 +57037,24 @@ void __cdecl FastBlit8Bit(void * a1, int a2, int a3, int a4, int a5, int a6, voi
     {
       LOBYTE(v13) = v11[1];
       LOBYTE(v14) = *v11;
-      v24 = *(_DWORD *)&a11[v13 - 1];
-      LOWORD(v24) = a11[v14];
+      v24 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+      LOWORD(v24) = *((_WORD *)a11 + v14);
       *(_DWORD *)v12 = v24;
       LOBYTE(v13) = v11[3];
       LOBYTE(v14) = v11[2];
-      v25 = *(_DWORD *)&a11[v13 - 1];
-      LOWORD(v25) = a11[v14];
+      v25 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+      LOWORD(v25) = *((_WORD *)a11 + v14);
       *((_DWORD *)v12 + 1) = v25;
       v15 -= 8;
       LOBYTE(v13) = v11[5];
       LOBYTE(v14) = v11[4];
-      v26 = *(_DWORD *)&a11[v13 - 1];
-      LOWORD(v26) = a11[v14];
+      v26 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+      LOWORD(v26) = *((_WORD *)a11 + v14);
       *((_DWORD *)v12 + 2) = v26;
       LOBYTE(v13) = v11[7];
       LOBYTE(v14) = v11[6];
-      v27 = *(_DWORD *)&a11[v13 - 1];
-      LOWORD(v27) = a11[v14];
+      v27 = *(_DWORD *)((char *)a11 + 2 * v13 - 2);
+      LOWORD(v27) = *((_WORD *)a11 + v14);
       *((_DWORD *)v12 + 3) = v27;
       v11 += 8;
       v12 += 16;
@@ -57080,47 +57066,47 @@ LABEL_8:
     if ( !v28 )
     {
       LOBYTE(v13) = *v11;
-      *(_WORD *)v12 = a11[v13];
+      *(_WORD *)v12 = *((_WORD *)a11 + v13);
       v28 = v29 < 1;
       v30 = v29 - 1;
       if ( !v28 )
       {
         LOBYTE(v13) = v11[1];
-        *((_WORD *)v12 + 1) = a11[v13];
+        *((_WORD *)v12 + 1) = *((_WORD *)a11 + v13);
         v28 = v30 < 1;
         v31 = v30 - 1;
         if ( !v28 )
         {
           LOBYTE(v13) = v11[2];
-          *((_WORD *)v12 + 2) = a11[v13];
+          *((_WORD *)v12 + 2) = *((_WORD *)a11 + v13);
           v28 = v31 < 1;
           v32 = v31 - 1;
           if ( !v28 )
           {
             LOBYTE(v13) = v11[3];
-            *((_WORD *)v12 + 3) = a11[v13];
+            *((_WORD *)v12 + 3) = *((_WORD *)a11 + v13);
             v28 = v32 < 1;
             v33 = v32 - 1;
             if ( !v28 )
             {
               LOBYTE(v13) = v11[4];
-              *((_WORD *)v12 + 4) = a11[v13];
+              *((_WORD *)v12 + 4) = *((_WORD *)a11 + v13);
               v28 = v33 < 1;
               v34 = v33 - 1;
               if ( !v28 )
               {
                 LOBYTE(v13) = v11[5];
-                *((_WORD *)v12 + 5) = a11[v13];
+                *((_WORD *)v12 + 5) = *((_WORD *)a11 + v13);
                 v28 = v34 < 1;
                 v35 = v34 - 1;
                 if ( !v28 )
                 {
                   LOBYTE(v13) = v11[6];
-                  *((_WORD *)v12 + 6) = a11[v13];
+                  *((_WORD *)v12 + 6) = *((_WORD *)a11 + v13);
                   if ( v35 >= 1 )
                   {
                     LOBYTE(v13) = v11[7];
-                    *((_WORD *)v12 + 7) = a11[v13];
+                    *((_WORD *)v12 + 7) = *((_WORD *)a11 + v13);
                   }
                 }
               }
@@ -57137,36 +57123,43 @@ LABEL_8:
     --dword_47274DC;
   }
   while ( !v28 );
-  return __PAIR64__(a9, a10);
+  LODWORD(result) = a10;
+  HIDWORD(result) = a9;
+  return result;
 }
 
 
 // address=[0x2fa4580]
-// [Decompilation failed for void __cdecl UnpackGfx(void *,void *,void *,int,int,int)]
-
-// address=[0x2fa4990]
-// Decompiled from unsigned __int64 __cdecl UnpackGfxTransparent(_WORD *a1, int a2, int a3, int a4, int a5, int a6)
-void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a5, int a6) {
+// Decompiled from unsigned __int64 __cdecl UnpackGfx(int a1, _BYTE *a2, int a3, unsigned int a4, int a5, unsigned int a6)
+void __cdecl UnpackGfx(void * a1, void * a2, void * a3, int a4, int a5, int a6) {
   
   _BYTE *v6; // esi
-  int v7; // edi
+  int i; // edi
   int v8; // edx
   int v9; // ecx
   int v10; // eax
   unsigned int v11; // ebx
-  unsigned int v12; // ebx
-  int v13; // edx
-  int v14; // edi
-  int v16; // [esp-24h] [ebp-30h]
+  int v12; // edx
+  int v13; // edi
+  int v14; // edx
+  int v15; // edi
+  int v16; // edx
+  int v17; // edi
+  unsigned int v18; // ebx
+  int v19; // edi
+  int v21; // [esp-24h] [ebp-30h]
+  int v22; // [esp-24h] [ebp-30h]
+  int v23; // [esp-24h] [ebp-30h]
+  int v24; // [esp-24h] [ebp-30h]
 
-  dword_4727414 = (int)a1;
-  dword_4727400 = a3;
-  dword_4727404 = a2;
-  dword_4727408 = a4;
-  dword_472740C = a5;
-  dword_4727410 = a6;
-  v6 = (_BYTE *)a2;
-  v7 = a3;
+  dword_47273FC = a1;
+  dword_47273E8 = a3;
+  dword_47273EC = (int)a2;
+  dword_47273F0 = a4;
+  dword_47273F4 = a5;
+  dword_47273F8 = a6;
+  v6 = a2;
+  i = a3;
   v8 = -1;
   v9 = a5;
   v10 = 0;
@@ -57181,7 +57174,331 @@ void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a
       }
       ++v8;
       --v9;
-      *(_WORD *)(v7 + 2 * v8) = a1[v10];
+      *(_WORD *)(i + 2 * v8) = *(_WORD *)(a1 + 2 * v10);
+      if ( !v9 )
+      {
+        goto LABEL_25;
+      }
+    }
+    if ( (_BYTE)v10 == 1 )
+    {
+      break;
+    }
+    v11 = (unsigned __int8)*v6++;
+    if ( v11 > v9 )
+    {
+      v12 = v8 + 1;
+      v11 -= v9;
+      if ( v9 < 16 )
+      {
+        goto LABEL_14;
+      }
+      v21 = i;
+      v13 = i + 2 * v12;
+      if ( (v13 & 3) != 0 )
+      {
+        do
+        {
+          *(_WORD *)v13 = 0;
+          *(_DWORD *)(v13 + 2) = 0;
+          *(_DWORD *)(v13 + 6) = 0;
+          *(_DWORD *)(v13 + 10) = 0;
+          *(_DWORD *)(v13 + 14) = 0;
+          *(_DWORD *)(v13 + 18) = 0;
+          *(_DWORD *)(v13 + 22) = 0;
+          *(_DWORD *)(v13 + 26) = 0;
+          *(_WORD *)(v13 + 30) = 0;
+          v9 -= 16;
+          v13 += 32;
+          v12 += 16;
+        }
+        while ( v9 >= 16 );
+        i = v21;
+        if ( v9 )
+        {
+          goto LABEL_14;
+        }
+        v9 = dword_47273F4;
+        v8 = -1;
+        i = dword_47273F0 + v21;
+      }
+      else
+      {
+        do
+        {
+          *(_DWORD *)v13 = 0;
+          *(_DWORD *)(v13 + 4) = 0;
+          *(_DWORD *)(v13 + 8) = 0;
+          *(_DWORD *)(v13 + 12) = 0;
+          *(_DWORD *)(v13 + 16) = 0;
+          *(_DWORD *)(v13 + 20) = 0;
+          *(_DWORD *)(v13 + 24) = 0;
+          *(_DWORD *)(v13 + 28) = 0;
+          v9 -= 16;
+          v13 += 32;
+          v12 += 16;
+        }
+        while ( v9 >= 16 );
+        i = v21;
+        if ( v9 )
+        {
+          do
+          {
+LABEL_14:
+            *(_WORD *)(i + 2 * v12++) = 0;
+            --v9;
+          }
+          while ( v9 );
+          v9 = dword_47273F4;
+          v8 = -1;
+          i += dword_47273F0;
+          goto LABEL_16;
+        }
+        v9 = dword_47273F4;
+        v8 = -1;
+        i = dword_47273F0 + v21;
+      }
+    }
+LABEL_16:
+    v14 = v8 + 1;
+    v9 -= v11;
+    if ( v11 >= 0x10 )
+    {
+      v22 = i;
+      v15 = i + 2 * v14;
+      if ( (v15 & 3) != 0 )
+      {
+        do
+        {
+          *(_WORD *)v15 = 0;
+          *(_DWORD *)(v15 + 2) = 0;
+          *(_DWORD *)(v15 + 6) = 0;
+          *(_DWORD *)(v15 + 10) = 0;
+          *(_DWORD *)(v15 + 14) = 0;
+          *(_DWORD *)(v15 + 18) = 0;
+          *(_DWORD *)(v15 + 22) = 0;
+          *(_DWORD *)(v15 + 26) = 0;
+          *(_WORD *)(v15 + 30) = 0;
+          v11 -= 16;
+          v15 += 32;
+          v14 += 16;
+        }
+        while ( v11 >= 0x10 );
+        i = v22;
+        if ( !v11 )
+        {
+          goto LABEL_24;
+        }
+      }
+      else
+      {
+        do
+        {
+          *(_DWORD *)v15 = 0;
+          *(_DWORD *)(v15 + 4) = 0;
+          *(_DWORD *)(v15 + 8) = 0;
+          *(_DWORD *)(v15 + 12) = 0;
+          *(_DWORD *)(v15 + 16) = 0;
+          *(_DWORD *)(v15 + 20) = 0;
+          *(_DWORD *)(v15 + 24) = 0;
+          *(_DWORD *)(v15 + 28) = 0;
+          v11 -= 16;
+          v15 += 32;
+          v14 += 16;
+        }
+        while ( v11 >= 0x10 );
+        i = v22;
+        if ( !v11 )
+        {
+          goto LABEL_24;
+        }
+      }
+    }
+    do
+    {
+      *(_WORD *)(i + 2 * v14++) = 0;
+      --v11;
+    }
+    while ( v11 );
+LABEL_24:
+    v8 = v14 - 1;
+    if ( v9 <= 0 )
+    {
+LABEL_25:
+      i += dword_47273F0;
+      v9 = dword_47273F4;
+      v8 = -1;
+    }
+  }
+  v18 = (unsigned __int8)*v6;
+  if ( *v6 )
+  {
+    ++v6;
+    v14 = v8 + 1;
+    v9 -= v18;
+    if ( v18 >= 0x10 )
+    {
+      v24 = i;
+      v19 = i + 2 * v14;
+      if ( (v19 & 3) != 0 )
+      {
+        do
+        {
+          *(_WORD *)v19 = 0;
+          *(_DWORD *)(v19 + 2) = 0;
+          *(_DWORD *)(v19 + 6) = 0;
+          *(_DWORD *)(v19 + 10) = 0;
+          *(_DWORD *)(v19 + 14) = 0;
+          *(_DWORD *)(v19 + 18) = 0;
+          *(_DWORD *)(v19 + 22) = 0;
+          *(_DWORD *)(v19 + 26) = 0;
+          *(_WORD *)(v19 + 30) = 0;
+          v18 -= 16;
+          v19 += 32;
+          v14 += 16;
+        }
+        while ( v18 >= 0x10 );
+        i = v24;
+        if ( !v18 )
+        {
+          goto LABEL_24;
+        }
+      }
+      else
+      {
+        do
+        {
+          *(_DWORD *)v19 = 0;
+          *(_DWORD *)(v19 + 4) = 0;
+          *(_DWORD *)(v19 + 8) = 0;
+          *(_DWORD *)(v19 + 12) = 0;
+          *(_DWORD *)(v19 + 16) = 0;
+          *(_DWORD *)(v19 + 20) = 0;
+          *(_DWORD *)(v19 + 24) = 0;
+          *(_DWORD *)(v19 + 28) = 0;
+          v18 -= 16;
+          v19 += 32;
+          v14 += 16;
+        }
+        while ( v18 >= 0x10 );
+        i = v24;
+        if ( !v18 )
+        {
+          goto LABEL_24;
+        }
+      }
+    }
+    do
+    {
+      *(_WORD *)(i + 2 * v14++) = 0;
+      --v18;
+    }
+    while ( v18 );
+    goto LABEL_24;
+  }
+  if ( !v9 )
+  {
+    return __PAIR64__(a6, a4);
+  }
+  v16 = v8 + 1;
+  if ( (unsigned int)v9 < 0x10 )
+  {
+    goto LABEL_45;
+  }
+  v23 = i;
+  v17 = i + 2 * v16;
+  if ( (v17 & 3) != 0 )
+  {
+    do
+    {
+      *(_WORD *)v17 = 0;
+      *(_DWORD *)(v17 + 2) = 0;
+      *(_DWORD *)(v17 + 6) = 0;
+      *(_DWORD *)(v17 + 10) = 0;
+      *(_DWORD *)(v17 + 14) = 0;
+      *(_DWORD *)(v17 + 18) = 0;
+      *(_DWORD *)(v17 + 22) = 0;
+      *(_DWORD *)(v17 + 26) = 0;
+      *(_WORD *)(v17 + 30) = 0;
+      v9 -= 16;
+      v17 += 32;
+      v16 += 16;
+    }
+    while ( (unsigned int)v9 >= 0x10 );
+    i = v23;
+    if ( v9 )
+    {
+      goto LABEL_45;
+    }
+  }
+  else
+  {
+    do
+    {
+      *(_DWORD *)v17 = 0;
+      *(_DWORD *)(v17 + 4) = 0;
+      *(_DWORD *)(v17 + 8) = 0;
+      *(_DWORD *)(v17 + 12) = 0;
+      *(_DWORD *)(v17 + 16) = 0;
+      *(_DWORD *)(v17 + 20) = 0;
+      *(_DWORD *)(v17 + 24) = 0;
+      *(_DWORD *)(v17 + 28) = 0;
+      v9 -= 16;
+      v17 += 32;
+      v16 += 16;
+    }
+    while ( (unsigned int)v9 >= 0x10 );
+    for ( i = v23;
+          v9;
+          --v9 )
+    {
+LABEL_45:
+      *(_WORD *)(i + 2 * v16++) = 0;
+    }
+  }
+  return __PAIR64__(a6, a4);
+}
+
+
+// address=[0x2fa4990]
+// Decompiled from unsigned __int64 __cdecl UnpackGfxTransparent(void *a1, void *a2, void *a3, int a4, int a5, int a6)
+void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a5, int a6) {
+  
+  _BYTE *v6; // esi
+  char *v7; // edi
+  int v8; // edx
+  int v9; // ecx
+  int v10; // eax
+  unsigned int v11; // ebx
+  unsigned int v12; // ebx
+  int v13; // edx
+  char *v14; // edi
+  unsigned __int64 result; // rax
+  char *v16; // [esp-24h] [ebp-30h]
+
+  dword_4727414 = (int)a1;
+  dword_4727400 = (int)a3;
+  dword_4727404 = (int)a2;
+  dword_4727408 = a4;
+  dword_472740C = a5;
+  dword_4727410 = a6;
+  v6 = a2;
+  v7 = (char *)a3;
+  v8 = -1;
+  v9 = a5;
+  v10 = 0;
+  while ( 1 )
+  {
+    while ( 1 )
+    {
+      LOBYTE(v10) = *v6++;
+      if ( (unsigned __int8)v10 <= 1u )
+      {
+        break;
+      }
+      ++v8;
+      --v9;
+      *(_WORD *)&v7[2 * v8] = *((_WORD *)a1 + v10);
       if ( !v9 )
       {
         goto LABEL_10;
@@ -57204,7 +57521,7 @@ void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a
     v12 = (unsigned __int8)*v6;
     if ( !*v6 )
     {
-      return __PAIR64__(a6, a4);
+      break;
     }
     ++v6;
     v13 = v8 + 1;
@@ -57212,8 +57529,8 @@ void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a
     if ( v12 >= 0x10 )
     {
       v16 = v7;
-      v14 = v7 + 2 * v13;
-      if ( (v14 & 3) != 0 )
+      v14 = &v7[2 * v13];
+      if ( ((unsigned __int8)v14 & 3) != 0 )
       {
         do
         {
@@ -57225,7 +57542,7 @@ void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a
           *(_DWORD *)(v14 + 18) = 0;
           *(_DWORD *)(v14 + 22) = 0;
           *(_DWORD *)(v14 + 26) = 0;
-          *(_WORD *)(v14 + 30) = 0;
+          *((_WORD *)v14 + 15) = 0;
           v12 -= 16;
           v14 += 32;
           v13 += 16;
@@ -57242,13 +57559,13 @@ void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a
         do
         {
           *(_DWORD *)v14 = 0;
-          *(_DWORD *)(v14 + 4) = 0;
-          *(_DWORD *)(v14 + 8) = 0;
-          *(_DWORD *)(v14 + 12) = 0;
-          *(_DWORD *)(v14 + 16) = 0;
-          *(_DWORD *)(v14 + 20) = 0;
-          *(_DWORD *)(v14 + 24) = 0;
-          *(_DWORD *)(v14 + 28) = 0;
+          *((_DWORD *)v14 + 1) = 0;
+          *((_DWORD *)v14 + 2) = 0;
+          *((_DWORD *)v14 + 3) = 0;
+          *((_DWORD *)v14 + 4) = 0;
+          *((_DWORD *)v14 + 5) = 0;
+          *((_DWORD *)v14 + 6) = 0;
+          *((_DWORD *)v14 + 7) = 0;
           v12 -= 16;
           v14 += 32;
           v13 += 16;
@@ -57263,7 +57580,7 @@ void __cdecl UnpackGfxTransparent(void * a1, void * a2, void * a3, int a4, int a
     }
     do
     {
-      *(_WORD *)(v7 + 2 * v13++) = 0;
+      *(_WORD *)&v7[2 * v13++] = 0;
       --v12;
     }
     while ( v12 );
@@ -57278,94 +57595,97 @@ LABEL_10:
       v8 = -1;
     }
   }
+  LODWORD(result) = a4;
+  HIDWORD(result) = a6;
+  return result;
 }
 
 
 // address=[0x2fa4b30]
-// Decompiled from unsigned __int64 __cdecl UnpackGfxTransparentHiLight555(_WORD *a1, int a2, int a3, int a4, int a5, int a6)
-void __cdecl UnpackGfxTransparentHiLight555(void * a1, void * a2, void * a3, int a4, int a5, int a6) {
+// Decompiled from void __cdecl UnpackGfxTransparentHiLight555(void *_pPalData, void *_pGfxData, void *_pSurface, int _iPitch, int _iWidth, int _iHeight)
+void __cdecl UnpackGfxTransparentHiLight555(void * _pPalData, void * _pGfxData, void * _pSurface, int _iPitch, int _iWidth, int _iHeight) {
   
-  _BYTE *v6; // esi
-  int v7; // edi
+  char *pGfxData; // esi
+  _WORD *pSurface; // edi
   int v8; // edx
-  int v9; // ecx
-  int v10; // eax
-  __int16 v11; // bx
-  int v12; // eax
-  int v13; // edx
-  int v14; // ebx
-  unsigned int v15; // ebx
+  int iRemainingWidth; // ecx
+  unsigned int iCurValue; // eax
+  __int16 iPalValue; // bx
+  int iR; // eax
+  int iG; // edx
+  int iB; // ebx
+  unsigned int iCount; // ebx
   unsigned int v16; // ebx
   int v17; // edx
-  int v18; // edi
-  int v20; // [esp-24h] [ebp-30h]
-  int v21; // [esp-24h] [ebp-30h]
+  BYTE *v18; // edi
+  int v19; // [esp-24h] [ebp-30h]
+  char *v20; // [esp-24h] [ebp-30h]
 
-  dword_472742C = (int)a1;
-  dword_4727418 = a3;
-  dword_472741C = a2;
-  dword_4727420 = a4;
-  dword_4727424 = a5;
-  dword_4727428 = a6;
-  v6 = (_BYTE *)a2;
-  v7 = a3;
+  s_pPalDataHiLight555 = (int)_pPalData;
+  s_pSurfaceHiLight555 = (int)_pSurface;
+  s_pGfxDataHiLight555 = (int)_pGfxData;
+  s_iPitchHiLight555 = _iPitch;
+  s_iWidthHiLight555 = _iWidth;
+  s_iHeightHiLight555 = _iHeight;
+  pGfxData = (char *)_pGfxData;
+  pSurface = _pSurface;
   v8 = -1;
-  v9 = a5;
-  v10 = 0;
+  iRemainingWidth = _iWidth;
+  iCurValue = 0;
   while ( 1 )
   {
     while ( 1 )
     {
-      LOBYTE(v10) = *v6++;
-      if ( (unsigned __int8)v10 <= 1u )
+      LOBYTE(iCurValue) = *pGfxData++;
+      if ( (unsigned __int8)iCurValue <= 1u )
       {
         break;
       }
-      v20 = v8 + 1;
-      v11 = a1[v10];
-      v12 = (unsigned __int16)(v11 & 0x7C00) >> 10;
-      v13 = (unsigned __int16)(v11 & 0x3E0) >> 5;
-      v14 = v11 & 0x1F;
-      LOBYTE(v12) = byte_47272D0[v12];
-      LOBYTE(v13) = byte_47272D0[v13];
-      LOBYTE(v14) = byte_47272D0[v14];
-      LOWORD(v14) = 32 * v13 + ((_WORD)v12 << 10) + v14;
-      v8 = v20;
-      v10 = 0;
-      --v9;
-      *(_WORD *)(v7 + 2 * v20) = v14;
-      if ( !v9 )
+      v19 = v8 + 1;
+      iPalValue = *((_WORD *)_pPalData + iCurValue);
+      iR = (unsigned __int16)(iPalValue & 0x7C00) >> 10;
+      iG = (unsigned __int16)(iPalValue & 0x3E0) >> 5;
+      iB = iPalValue & 0x1F;
+      LOBYTE(iR) = s_i555TransformTable[iR];
+      LOBYTE(iG) = s_i555TransformTable[iG];
+      LOBYTE(iB) = s_i555TransformTable[iB];
+      LOWORD(iB) = 32 * iG + ((_WORD)iR << 10) + iB;// Now iB is the 555 color value
+      v8 = v19;
+      iCurValue = 0;
+      --iRemainingWidth;
+      pSurface[v19] = iB;
+      if ( !iRemainingWidth )
       {
         goto LABEL_10;
       }
     }
-    if ( (_BYTE)v10 != 1 )
+    if ( (_BYTE)iCurValue != 1 )
     {
-      v15 = (unsigned __int8)*v6++;
-      if ( v15 > v9 )
+      iCount = (unsigned __int8)*pGfxData++;
+      if ( iCount > iRemainingWidth )
       {
-        v15 -= v9;
+        iCount -= iRemainingWidth;
         v8 = -1;
-        v9 = dword_4727424;
-        v7 += dword_4727420;
+        iRemainingWidth = s_iWidthHiLight555;
+        pSurface = (_WORD *)((char *)pSurface + s_iPitchHiLight555);
       }
-      v8 += v15;
-      v9 -= v15;
+      v8 += iCount;
+      iRemainingWidth -= iCount;
       goto LABEL_9;
     }
-    v16 = (unsigned __int8)*v6;
-    if ( !*v6 )
+    v16 = (unsigned __int8)*pGfxData;
+    if ( !*pGfxData )
     {
-      return __PAIR64__(a6, a4);
+      break;
     }
-    ++v6;
+    ++pGfxData;
     v17 = v8 + 1;
-    v9 -= v16;
+    iRemainingWidth -= v16;
     if ( v16 >= 0x10 )
     {
-      v21 = v7;
-      v18 = v7 + 2 * v17;
-      if ( (v18 & 3) != 0 )
+      v20 = (char *)pSurface;
+      v18 = (BYTE *)&pSurface[v17];
+      if ( ((unsigned __int8)v18 & 3) != 0 )
       {
         do
         {
@@ -57377,13 +57697,13 @@ void __cdecl UnpackGfxTransparentHiLight555(void * a1, void * a2, void * a3, int
           *(_DWORD *)(v18 + 18) = 0;
           *(_DWORD *)(v18 + 22) = 0;
           *(_DWORD *)(v18 + 26) = 0;
-          *(_WORD *)(v18 + 30) = 0;
+          *((_WORD *)v18 + 15) = 0;
           v16 -= 16;
           v18 += 32;
           v17 += 16;
         }
         while ( v16 >= 0x10 );
-        v7 = v21;
+        pSurface = v20;
         if ( !v16 )
         {
           goto LABEL_8;
@@ -57394,19 +57714,19 @@ void __cdecl UnpackGfxTransparentHiLight555(void * a1, void * a2, void * a3, int
         do
         {
           *(_DWORD *)v18 = 0;
-          *(_DWORD *)(v18 + 4) = 0;
-          *(_DWORD *)(v18 + 8) = 0;
-          *(_DWORD *)(v18 + 12) = 0;
-          *(_DWORD *)(v18 + 16) = 0;
-          *(_DWORD *)(v18 + 20) = 0;
-          *(_DWORD *)(v18 + 24) = 0;
-          *(_DWORD *)(v18 + 28) = 0;
+          *((_DWORD *)v18 + 1) = 0;
+          *((_DWORD *)v18 + 2) = 0;
+          *((_DWORD *)v18 + 3) = 0;
+          *((_DWORD *)v18 + 4) = 0;
+          *((_DWORD *)v18 + 5) = 0;
+          *((_DWORD *)v18 + 6) = 0;
+          *((_DWORD *)v18 + 7) = 0;
           v16 -= 16;
           v18 += 32;
           v17 += 16;
         }
-        while ( v16 >= 0x10 );
-        v7 = v21;
+        while ( v16 >= 16 );
+        pSurface = v20;
         if ( !v16 )
         {
           goto LABEL_8;
@@ -57415,18 +57735,18 @@ void __cdecl UnpackGfxTransparentHiLight555(void * a1, void * a2, void * a3, int
     }
     do
     {
-      *(_WORD *)(v7 + 2 * v17++) = 0;
+      pSurface[v17++] = 0;
       --v16;
     }
     while ( v16 );
 LABEL_8:
     v8 = v17 - 1;
 LABEL_9:
-    if ( v9 <= 0 )
+    if ( iRemainingWidth <= 0 )
     {
 LABEL_10:
-      v7 += dword_4727420;
-      v9 = dword_4727424;
+      pSurface = (_WORD *)((char *)pSurface + s_iPitchHiLight555);
+      iRemainingWidth = s_iWidthHiLight555;
       v8 = -1;
     }
   }
@@ -57434,13 +57754,13 @@ LABEL_10:
 
 
 // address=[0x2fa4d10]
-// Decompiled from unsigned __int64 __cdecl UnpackGfxTransparentHiLight565(_WORD *a1, int a2, int a3, int a4, int a5, int a6)
-void __cdecl UnpackGfxTransparentHiLight565(void * a1, void * a2, void * a3, int a4, int a5, int a6) {
+// Decompiled from void __cdecl UnpackGfxTransparentHiLight565(void *_pPalData, void *_pGfxData, void *_pSurface, int _iPitch, int _iWidth, int _iHeight)
+void __cdecl UnpackGfxTransparentHiLight565(void * _pPalData, void * _pGfxData, void * _pSurface, int _iPitch, int _iWidth, int _iHeight) {
   
-  _BYTE *v6; // esi
-  int v7; // edi
+  BYTE *pGfxData; // esi
+  WORD *pSurface; // edi
   int v8; // edx
-  int v9; // ecx
+  int iRemainingWidth; // ecx
   int v10; // eax
   __int16 v11; // bx
   int v12; // eax
@@ -57449,93 +57769,93 @@ void __cdecl UnpackGfxTransparentHiLight565(void * a1, void * a2, void * a3, int
   unsigned int v15; // ebx
   unsigned int v16; // ebx
   int v17; // edx
-  int v18; // edi
-  int v20; // [esp-24h] [ebp-30h]
-  int v21; // [esp-24h] [ebp-30h]
+  WORD *v18; // edi
+  int v19; // [esp-24h] [ebp-30h]
+  WORD *___pSurface; // [esp-24h] [ebp-30h]
 
-  dword_4727444 = (int)a1;
-  dword_4727430 = a3;
-  dword_4727434 = a2;
-  dword_4727438 = a4;
-  dword_472743C = a5;
-  dword_4727440 = a6;
-  v6 = (_BYTE *)a2;
-  v7 = a3;
+  s_pPalDataHiLight565 = (int)_pPalData;
+  s_pSurfaceHiLight565 = (int)_pSurface;
+  s_pGfxDataHiLight565 = (int)_pGfxData;
+  s_iPitchHiLight565 = _iPitch;
+  s_iWidthHiLight565 = _iWidth;
+  s_iHeightHiLight565 = _iHeight;
+  pGfxData = (BYTE *)_pGfxData;
+  pSurface = (WORD *)_pSurface;
   v8 = -1;
-  v9 = a5;
+  iRemainingWidth = _iWidth;
   v10 = 0;
   while ( 1 )
   {
     while ( 1 )
     {
-      LOBYTE(v10) = *v6++;
+      LOBYTE(v10) = *pGfxData++;
       if ( (unsigned __int8)v10 <= 1u )
       {
         break;
       }
-      v20 = v8 + 1;
-      v11 = a1[v10];
+      v19 = v8 + 1;
+      v11 = *((_WORD *)_pPalData + v10);
       v12 = (unsigned __int16)(v11 & 0xF800) >> 11;
       v13 = (unsigned __int16)(v11 & 0x7E0) >> 5;
       v14 = v11 & 0x1F;
-      LOBYTE(v12) = byte_47272D0[v12];
-      LOBYTE(v13) = byte_47272F0[v13];
-      LOBYTE(v14) = byte_47272D0[v14];
+      LOBYTE(v12) = s_i555TransformTable[v12];
+      LOBYTE(v13) = s_i565TransformTable[v13];
+      LOBYTE(v14) = s_i555TransformTable[v14];
       LOWORD(v14) = ((_WORD)v12 << 11) + 32 * v13 + v14;
-      v8 = v20;
+      v8 = v19;
       v10 = 0;
-      --v9;
-      *(_WORD *)(v7 + 2 * v20) = v14;
-      if ( !v9 )
+      --iRemainingWidth;
+      pSurface[v19] = v14;
+      if ( !iRemainingWidth )
       {
         goto LABEL_10;
       }
     }
     if ( (_BYTE)v10 != 1 )
     {
-      v15 = (unsigned __int8)*v6++;
-      if ( v15 > v9 )
+      v15 = *pGfxData++;
+      if ( v15 > iRemainingWidth )
       {
-        v15 -= v9;
+        v15 -= iRemainingWidth;
         v8 = -1;
-        v9 = dword_472743C;
-        v7 += dword_4727438;
+        iRemainingWidth = s_iWidthHiLight565;
+        pSurface = (WORD *)((char *)pSurface + s_iPitchHiLight565);
       }
       v8 += v15;
-      v9 -= v15;
+      iRemainingWidth -= v15;
       goto LABEL_9;
     }
-    v16 = (unsigned __int8)*v6;
-    if ( !*v6 )
+    v16 = *pGfxData;
+    if ( !*pGfxData )
     {
-      return __PAIR64__(a6, a4);
+      break;
     }
-    ++v6;
+    ++pGfxData;
     v17 = v8 + 1;
-    v9 -= v16;
+    iRemainingWidth -= v16;
     if ( v16 >= 0x10 )
     {
-      v21 = v7;
-      v18 = v7 + 2 * v17;
-      if ( (v18 & 3) != 0 )
+      ___pSurface = pSurface;
+      v18 = &pSurface[v17];
+      if ( ((unsigned __int8)v18 & 3) != 0 )
       {
         do
         {
-          *(_WORD *)v18 = 0;
-          *(_DWORD *)(v18 + 2) = 0;
-          *(_DWORD *)(v18 + 6) = 0;
-          *(_DWORD *)(v18 + 10) = 0;
-          *(_DWORD *)(v18 + 14) = 0;
-          *(_DWORD *)(v18 + 18) = 0;
-          *(_DWORD *)(v18 + 22) = 0;
-          *(_DWORD *)(v18 + 26) = 0;
-          *(_WORD *)(v18 + 30) = 0;
+          *v18 = 0;
+          *(_DWORD *)(v18 + 1) = 0;
+          *(_DWORD *)(v18 + 3) = 0;
+          *(_DWORD *)(v18 + 5) = 0;
+          *(_DWORD *)(v18 + 7) = 0;
+          *(_DWORD *)(v18 + 9) = 0;
+          *(_DWORD *)(v18 + 11) = 0;
+          *(_DWORD *)(v18 + 13) = 0;
+          v18[15] = 0;
           v16 -= 16;
-          v18 += 32;
+          v18 += 16;
           v17 += 16;
         }
         while ( v16 >= 0x10 );
-        v7 = v21;
+        pSurface = ___pSurface;
         if ( !v16 )
         {
           goto LABEL_8;
@@ -57546,19 +57866,19 @@ void __cdecl UnpackGfxTransparentHiLight565(void * a1, void * a2, void * a3, int
         do
         {
           *(_DWORD *)v18 = 0;
-          *(_DWORD *)(v18 + 4) = 0;
-          *(_DWORD *)(v18 + 8) = 0;
-          *(_DWORD *)(v18 + 12) = 0;
-          *(_DWORD *)(v18 + 16) = 0;
-          *(_DWORD *)(v18 + 20) = 0;
-          *(_DWORD *)(v18 + 24) = 0;
-          *(_DWORD *)(v18 + 28) = 0;
+          *((_DWORD *)v18 + 1) = 0;
+          *((_DWORD *)v18 + 2) = 0;
+          *((_DWORD *)v18 + 3) = 0;
+          *((_DWORD *)v18 + 4) = 0;
+          *((_DWORD *)v18 + 5) = 0;
+          *((_DWORD *)v18 + 6) = 0;
+          *((_DWORD *)v18 + 7) = 0;
           v16 -= 16;
-          v18 += 32;
+          v18 += 16;
           v17 += 16;
         }
         while ( v16 >= 0x10 );
-        v7 = v21;
+        pSurface = ___pSurface;
         if ( !v16 )
         {
           goto LABEL_8;
@@ -57567,18 +57887,18 @@ void __cdecl UnpackGfxTransparentHiLight565(void * a1, void * a2, void * a3, int
     }
     do
     {
-      *(_WORD *)(v7 + 2 * v17++) = 0;
+      pSurface[v17++] = 0;
       --v16;
     }
     while ( v16 );
 LABEL_8:
     v8 = v17 - 1;
 LABEL_9:
-    if ( v9 <= 0 )
+    if ( iRemainingWidth <= 0 )
     {
 LABEL_10:
-      v7 += dword_4727438;
-      v9 = dword_472743C;
+      pSurface = (WORD *)((char *)pSurface + s_iPitchHiLight565);
+      iRemainingWidth = s_iWidthHiLight565;
       v8 = -1;
     }
   }
@@ -57586,11 +57906,11 @@ LABEL_10:
 
 
 // address=[0x2fa4ef0]
-// Decompiled from unsigned __int64 __cdecl UnpackGfxTransparentGrayed555(_WORD *a1, int a2, int a3, int a4, int a5, int a6)
+// Decompiled from unsigned __int64 __cdecl UnpackGfxTransparentGrayed555(void *a1, void *a2, void *a3, int a4, int a5, int a6)
 void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int a4, int a5, int a6) {
   
   _BYTE *v6; // esi
-  int v7; // edi
+  char *v7; // edi
   int v8; // edx
   int v9; // ecx
   int v10; // eax
@@ -57598,17 +57918,18 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
   unsigned int v12; // ebx
   unsigned int v13; // ebx
   int v14; // edx
-  int v15; // edi
-  int v17; // [esp-24h] [ebp-30h]
+  char *v15; // edi
+  unsigned __int64 result; // rax
+  char *v17; // [esp-24h] [ebp-30h]
 
   dword_472745C = (int)a1;
-  dword_4727448 = a3;
-  dword_472744C = a2;
+  dword_4727448 = (int)a3;
+  dword_472744C = (int)a2;
   dword_4727450 = a4;
   dword_4727454 = a5;
   dword_4727458 = a6;
-  v6 = (_BYTE *)a2;
-  v7 = a3;
+  v6 = a2;
+  v7 = (char *)a3;
   v8 = -1;
   v9 = a5;
   v10 = 0;
@@ -57621,12 +57942,12 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
       {
         break;
       }
-      v11 = ((unsigned __int16)(a1[v10] & 0x3E0) >> 5) + ((unsigned __int16)(a1[v10] & 0x7C00) >> 10) + (a1[v10] & 0x1F);
+      v11 = ((unsigned __int16)(*((_WORD *)a1 + v10) & 0x3E0) >> 5) + ((unsigned __int16)(*((_WORD *)a1 + v10) & 0x7C00) >> 10) + (*((_WORD *)a1 + v10) & 0x1F);
       LOBYTE(v11) = byte_4727330[v11];
       ++v8;
       v10 = 0;
       --v9;
-      *(_WORD *)(v7 + 2 * v8) = 1057 * v11;
+      *(_WORD *)&v7[2 * v8] = 1057 * v11;
       if ( !v9 )
       {
         goto LABEL_10;
@@ -57649,7 +57970,7 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
     v13 = (unsigned __int8)*v6;
     if ( !*v6 )
     {
-      return __PAIR64__(a6, a4);
+      break;
     }
     ++v6;
     v14 = v8 + 1;
@@ -57657,8 +57978,8 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
     if ( v13 >= 0x10 )
     {
       v17 = v7;
-      v15 = v7 + 2 * v14;
-      if ( (v15 & 3) != 0 )
+      v15 = &v7[2 * v14];
+      if ( ((unsigned __int8)v15 & 3) != 0 )
       {
         do
         {
@@ -57670,7 +57991,7 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
           *(_DWORD *)(v15 + 18) = 0;
           *(_DWORD *)(v15 + 22) = 0;
           *(_DWORD *)(v15 + 26) = 0;
-          *(_WORD *)(v15 + 30) = 0;
+          *((_WORD *)v15 + 15) = 0;
           v13 -= 16;
           v15 += 32;
           v14 += 16;
@@ -57687,13 +58008,13 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
         do
         {
           *(_DWORD *)v15 = 0;
-          *(_DWORD *)(v15 + 4) = 0;
-          *(_DWORD *)(v15 + 8) = 0;
-          *(_DWORD *)(v15 + 12) = 0;
-          *(_DWORD *)(v15 + 16) = 0;
-          *(_DWORD *)(v15 + 20) = 0;
-          *(_DWORD *)(v15 + 24) = 0;
-          *(_DWORD *)(v15 + 28) = 0;
+          *((_DWORD *)v15 + 1) = 0;
+          *((_DWORD *)v15 + 2) = 0;
+          *((_DWORD *)v15 + 3) = 0;
+          *((_DWORD *)v15 + 4) = 0;
+          *((_DWORD *)v15 + 5) = 0;
+          *((_DWORD *)v15 + 6) = 0;
+          *((_DWORD *)v15 + 7) = 0;
           v13 -= 16;
           v15 += 32;
           v14 += 16;
@@ -57708,7 +58029,7 @@ void __cdecl UnpackGfxTransparentGrayed555(void * a1, void * a2, void * a3, int 
     }
     do
     {
-      *(_WORD *)(v7 + 2 * v14++) = 0;
+      *(_WORD *)&v7[2 * v14++] = 0;
       --v13;
     }
     while ( v13 );
@@ -57723,15 +58044,18 @@ LABEL_10:
       v8 = -1;
     }
   }
+  LODWORD(result) = a4;
+  HIDWORD(result) = a6;
+  return result;
 }
 
 
 // address=[0x2fa50c0]
-// Decompiled from unsigned __int64 __cdecl UnpackGfxTransparentGrayed565(_WORD *a1, int a2, int a3, int a4, int a5, int a6)
+// Decompiled from unsigned __int64 __cdecl UnpackGfxTransparentGrayed565(void *a1, void *a2, void *a3, int a4, int a5, int a6)
 void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int a4, int a5, int a6) {
   
   _BYTE *v6; // esi
-  int v7; // edi
+  char *v7; // edi
   int v8; // edx
   int v9; // ecx
   int v10; // eax
@@ -57739,17 +58063,18 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
   unsigned int v12; // ebx
   unsigned int v13; // ebx
   int v14; // edx
-  int v15; // edi
-  int v17; // [esp-24h] [ebp-30h]
+  char *v15; // edi
+  unsigned __int64 result; // rax
+  char *v17; // [esp-24h] [ebp-30h]
 
   dword_4727474 = (int)a1;
-  dword_4727460 = a3;
-  dword_4727464 = a2;
+  dword_4727460 = (int)a3;
+  dword_4727464 = (int)a2;
   dword_4727468 = a4;
   dword_472746C = a5;
   dword_4727470 = a6;
-  v6 = (_BYTE *)a2;
-  v7 = a3;
+  v6 = a2;
+  v7 = (char *)a3;
   v8 = -1;
   v9 = a5;
   v10 = 0;
@@ -57762,12 +58087,12 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
       {
         break;
       }
-      v11 = ((unsigned __int16)(a1[v10] & 0x7E0) >> 6) + ((unsigned __int16)(a1[v10] & 0xF800) >> 11) + (a1[v10] & 0x1F);
+      v11 = ((unsigned __int16)(*((_WORD *)a1 + v10) & 0x7E0) >> 6) + ((unsigned __int16)(*((_WORD *)a1 + v10) & 0xF800) >> 11) + (*((_WORD *)a1 + v10) & 0x1F);
       LOBYTE(v11) = byte_4727330[v11];
       ++v8;
       v10 = 0;
       --v9;
-      *(_WORD *)(v7 + 2 * v8) = 2113 * v11;
+      *(_WORD *)&v7[2 * v8] = 2113 * v11;
       if ( !v9 )
       {
         goto LABEL_10;
@@ -57790,7 +58115,7 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
     v13 = (unsigned __int8)*v6;
     if ( !*v6 )
     {
-      return __PAIR64__(a6, a4);
+      break;
     }
     ++v6;
     v14 = v8 + 1;
@@ -57798,8 +58123,8 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
     if ( v13 >= 0x10 )
     {
       v17 = v7;
-      v15 = v7 + 2 * v14;
-      if ( (v15 & 3) != 0 )
+      v15 = &v7[2 * v14];
+      if ( ((unsigned __int8)v15 & 3) != 0 )
       {
         do
         {
@@ -57811,7 +58136,7 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
           *(_DWORD *)(v15 + 18) = 0;
           *(_DWORD *)(v15 + 22) = 0;
           *(_DWORD *)(v15 + 26) = 0;
-          *(_WORD *)(v15 + 30) = 0;
+          *((_WORD *)v15 + 15) = 0;
           v13 -= 16;
           v15 += 32;
           v14 += 16;
@@ -57828,13 +58153,13 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
         do
         {
           *(_DWORD *)v15 = 0;
-          *(_DWORD *)(v15 + 4) = 0;
-          *(_DWORD *)(v15 + 8) = 0;
-          *(_DWORD *)(v15 + 12) = 0;
-          *(_DWORD *)(v15 + 16) = 0;
-          *(_DWORD *)(v15 + 20) = 0;
-          *(_DWORD *)(v15 + 24) = 0;
-          *(_DWORD *)(v15 + 28) = 0;
+          *((_DWORD *)v15 + 1) = 0;
+          *((_DWORD *)v15 + 2) = 0;
+          *((_DWORD *)v15 + 3) = 0;
+          *((_DWORD *)v15 + 4) = 0;
+          *((_DWORD *)v15 + 5) = 0;
+          *((_DWORD *)v15 + 6) = 0;
+          *((_DWORD *)v15 + 7) = 0;
           v13 -= 16;
           v15 += 32;
           v14 += 16;
@@ -57849,7 +58174,7 @@ void __cdecl UnpackGfxTransparentGrayed565(void * a1, void * a2, void * a3, int 
     }
     do
     {
-      *(_WORD *)(v7 + 2 * v14++) = 0;
+      *(_WORD *)&v7[2 * v14++] = 0;
       --v13;
     }
     while ( v13 );
@@ -57864,6 +58189,9 @@ LABEL_10:
       v8 = -1;
     }
   }
+  LODWORD(result) = a4;
+  HIDWORD(result) = a6;
+  return result;
 }
 
 
@@ -57948,7 +58276,7 @@ void __cdecl FastHLine(unsigned short * a1, int a2, int a3, int a4, int a5, unsi
 // Decompiled from unsigned __int64 __cdecl FastVLine(unsigned __int16 *a1, int a2, int a3, int a4, int a5, __int16 a6)
 void __cdecl FastVLine(unsigned short * a1, int a2, int a3, int a4, int a5, unsigned short a6) {
   
-  __int16 *v6; // edi
+  _WORD *v6; // edi
   int v7; // edx
 
   dword_47274BC = a4;
@@ -57957,12 +58285,12 @@ void __cdecl FastVLine(unsigned short * a1, int a2, int a3, int a4, int a5, unsi
   dword_47274B0 = a2;
   word_47274AC = a6;
   dword_47274B4 = (int)a1;
-  v6 = (__int16 *)((char *)a1 + a2 * a4 + dword_47274B8 + dword_47274B8);
+  v6 = (unsigned __int16 *)((char *)a1 + a2 * a4 + dword_47274B8 + dword_47274B8);
   v7 = a5 - a4;
   do
   {
     *v6 = a6;
-    v6 = (__int16 *)((char *)v6 + dword_47274B0);
+    v6 = (_WORD *)((char *)v6 + dword_47274B0);
   }
   while ( v7-- > 1 );
   return __PAIR64__((unsigned int)a1, a2);

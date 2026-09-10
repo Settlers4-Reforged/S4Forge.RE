@@ -163,7 +163,7 @@ bool  CStateVideo::Perform(void) {
         v3 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, 0, &v2);
         if ( !v3 )
         {
-          v6.m_uU18 = 0;
+          v6.m_bDirty = 0;
           v6.m_iWidth = 640;
           v6.m_iHeight = 480;
           v7 = 0;

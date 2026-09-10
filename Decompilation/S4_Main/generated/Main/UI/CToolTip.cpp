@@ -1,3 +1,4 @@
+#if FALSE
 #include "CToolTip.h"
 
 // Definitions for class CToolTip
@@ -80,7 +81,7 @@ void  CToolTip::SetEnableStatus(bool a2) {
   
   memset(this->m_sText, 0, sizeof(this->m_sText));
   this->m_iSurfaceType = 10;
-  LOBYTE(this->?) = 1;
+  this->m_sSurfaceDescription.m_bDirty = 1;
   this->m_bLocked = 0;
   this->m_bOpen = 0;
   this->m_bEnableStatus = 1;
@@ -90,7 +91,7 @@ void  CToolTip::SetEnableStatus(bool a2) {
 
 
 // address=[0x2fa30d0]
-// Decompiled from void __thiscall CToolTip::SetTooltipText(CToolTip *this, char *Str)
+// Decompiled from void __thiscall CToolTip::SetTooltipText(CToolTip *this, const char *Str)
 void  CToolTip::SetTooltipText(char const * Str) {
   
   int Count; // [esp+0h] [ebp-8h]
@@ -206,13 +207,13 @@ bool  CToolTip::OpenTooltip(int a2, int a3) {
       else
       {
         v6.m_bDirty = 1;
-        v6.m_iTextStyle = 8;
+        v6.m_iFontTemplate = 8;
         *(_DWORD *)&v6.m_iX = 0x20002;
         v6.m_iTextFormat = 4;
         v6.m_iControlType = GUI_CNTRL_TOOLTIP;
         v6.m_iWidth = psizl.cx;
         v6.m_iHeight = psizl.cy;
-        v6.m_iParam = 0;
+        v6.m_iParam2 = 0;
         v6.m_iEffects = 0;
         v10 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, this->m_iSurfaceType, (unsigned int *)&v9);
         if ( !v10 )
@@ -294,3 +295,4 @@ int  CToolTip::GetMaxLengthOfTooltip(void) {
 }
 
 
+#endif // Already implemented

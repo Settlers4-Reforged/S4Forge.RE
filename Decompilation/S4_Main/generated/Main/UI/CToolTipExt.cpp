@@ -1,3 +1,4 @@
+#if FALSE
 #include "CToolTipExt.h"
 
 // Definitions for class CToolTipExt
@@ -18,7 +19,7 @@ void  CToolTipExt::ResetActiveText(void) {
   CToolTip::CToolTip(this);
   memset(this->m_sText, 0, sizeof(this->m_sText));
   this->m_iSurfaceType = 7;
-  this->m_sSurfaceDescription.m_uU18 = 1;
+  this->m_sSurfaceDescription.m_bDirty = 1;
   this->m_iContainerId = -1;
   this->m_bLocked = 0;
   this->m_bOpen = 0;
@@ -32,8 +33,8 @@ bool  CToolTipExt::OpenTooltip(void) {
   
   CToolTipExt *v2; // ecx
   struct SGuiControl sControl; // [esp+0h] [ebp-60h] BYREF
-  int v4; // [esp+24h] [ebp-3Ch]
-  int v5; // [esp+28h] [ebp-38h]
+  int m_iHeight; // [esp+24h] [ebp-3Ch]
+  int m_iMainTexture; // [esp+28h] [ebp-38h]
   int v6; // [esp+2Ch] [ebp-34h]
   int v7; // [esp+30h] [ebp-30h] BYREF
   unsigned __int16 *v8; // [esp+34h] [ebp-2Ch]
@@ -44,7 +45,7 @@ bool  CToolTipExt::OpenTooltip(void) {
   int OutputWidth; // [esp+48h] [ebp-18h]
   HDC hdc; // [esp+4Ch] [ebp-14h] BYREF
   int i; // [esp+50h] [ebp-10h]
-  SGuiControl *v16; // [esp+54h] [ebp-Ch]
+  GUI_MENU_DIALOG_HEADER *v16; // [esp+54h] [ebp-Ch]
 
   if ( !this->m_bEnableStatus )
   {
@@ -68,9 +69,9 @@ bool  CToolTipExt::OpenTooltip(void) {
           i >= 0;
           --i )
     {
-      v16 = (SGuiControl *)((char *)g_pFileHeader + g_pFileHeader->m_iContainerMap[i]);
+      v16 = (GUI_MENU_DIALOG_HEADER *)((char *)g_pFileHeader + g_pFileHeader->m_iContainerMap[i]);
       v6 = 7;
-      if ( (v16->m_iPressedTexture & 7) == 7 )
+      if ( (v16->m_iTransparency & 7) == 7 )
       {
         this->m_iContainerId = i;
         break;
@@ -81,16 +82,16 @@ bool  CToolTipExt::OpenTooltip(void) {
   {
     return 0;
   }
-  v16 = (SGuiControl *)((char *)g_pFileHeader + g_pFileHeader->m_iContainerMap[this->m_iContainerId]);
-  v4 = v16->m_iHeight;
-  v5 = v16->m_iMainTexture;
+  v16 = (GUI_MENU_DIALOG_HEADER *)((char *)g_pFileHeader + g_pFileHeader->m_iContainerMap[this->m_iContainerId]);
+  m_iHeight = v16->m_iWidth;
+  m_iMainTexture = v16->m_iHeight;
   v2 = this;
-  this->m_sSurfaceDescription.m_iWidth = v4;
-  v2->m_sSurfaceDescription.m_iHeight = v5;
-  this->m_sSurfaceDescription.m_sDestinationRect.left = v16->m_iY;
-  this->m_sSurfaceDescription.m_sDestinationRect.top = v16->m_iWidth;
-  this->m_sSurfaceDescription.m_sDestinationRect.right = v16->m_iHeight + v16->m_iY;
-  this->m_sSurfaceDescription.m_sDestinationRect.bottom = v16->m_iMainTexture + v16->m_iWidth;
+  this->m_sSurfaceDescription.m_iWidth = m_iHeight;
+  v2->m_sSurfaceDescription.m_iHeight = m_iMainTexture;
+  this->m_sSurfaceDescription.m_sDestinationRect.left = v16->m_iX;
+  this->m_sSurfaceDescription.m_sDestinationRect.top = v16->m_iY;
+  this->m_sSurfaceDescription.m_sDestinationRect.right = v16->m_iWidth + v16->m_iX;
+  this->m_sSurfaceDescription.m_sDestinationRect.bottom = v16->m_iHeight + v16->m_iY;
   OutputWidth = IGfxEngine::GetOutputWidth(g_pGfxEngine);
   OutputHeight = IGfxEngine::GetOutputHeight(g_pGfxEngine);
   if ( this->m_sSurfaceDescription.m_sDestinationRect.right > OutputWidth )
@@ -124,13 +125,13 @@ bool  CToolTipExt::OpenTooltip(void) {
   else
   {
     sControl.m_bDirty = 1;
-    sControl.m_iTextStyle = 6;
+    sControl.m_iFontTemplate = 6;
     *(_DWORD *)&sControl.m_iX = 0x20002;
     sControl.m_iTextFormat = 6;
     sControl.m_iControlType = GUI_CNTRL_TOOLTIP_EXTRA;
-    sControl.m_iWidth = v16->m_iHeight;
-    sControl.m_iHeight = v16->m_iMainTexture;
-    sControl.m_iParam = 0;
+    sControl.m_iWidth = v16->m_iWidth;
+    sControl.m_iHeight = v16->m_iHeight;
+    sControl.m_iParam2 = 0;
     sControl.m_iEffects = 0;
     v8 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, this->m_iSurfaceType, (unsigned int *)&v7);
     if ( !v8 )
@@ -140,7 +141,7 @@ bool  CToolTipExt::OpenTooltip(void) {
     }
     else
     {
-      FastRaster(v8, v7, 0, 0, v16->m_iHeight, v16->m_iMainTexture, 31);
+      FastRaster(v8, v7, 0, 0, v16->m_iWidth, v16->m_iHeight, 31);
       IGfxEngine::EndWriteToSurface(g_pGfxEngine, this->m_iSurfaceType);
       sControl.m_iX += 2;
       sControl.m_iWidth -= 4;
@@ -178,7 +179,7 @@ bool  CToolTipExt::UpdateText(void) {
   int v3; // [esp+24h] [ebp-18h] BYREF
   unsigned __int16 *v4; // [esp+28h] [ebp-14h]
   HDC hdc; // [esp+2Ch] [ebp-10h] BYREF
-  SGuiControl *pControl; // [esp+30h] [ebp-Ch]
+  GUI_MENU_DIALOG_HEADER *pContainer; // [esp+30h] [ebp-Ch]
 
   if ( !this->m_bEnableStatus )
   {
@@ -196,7 +197,7 @@ bool  CToolTipExt::UpdateText(void) {
   {
     return 0;
   }
-  pControl = (SGuiControl *)((char *)g_pFileHeader + g_pFileHeader->m_iContainerMap[this->m_iContainerId]);
+  pContainer = (GUI_MENU_DIALOG_HEADER *)((char *)g_pFileHeader + g_pFileHeader->m_iContainerMap[this->m_iContainerId]);
   if ( !IGfxEngine::SolidColorFillGuiSurface(g_pGfxEngine, this->m_iSurfaceType, 0, 0, 0) )
   {
     BBSupportTracePrintF(0, "GUI ENGINE: Cannot clear tooltip surface!");
@@ -205,13 +206,13 @@ bool  CToolTipExt::UpdateText(void) {
   else
   {
     v2.m_bDirty = 1;
-    v2.m_iTextStyle = 6;
+    v2.m_iFontTemplate = 6;
     *(_DWORD *)&v2.m_iX = 131074;
     v2.m_iTextFormat = 6;
     v2.m_iControlType = GUI_CNTRL_TOOLTIP_EXTRA;
-    v2.m_iWidth = pControl->m_iHeight;
-    v2.m_iHeight = pControl->m_iMainTexture;
-    v2.m_iParam = 0;
+    v2.m_iWidth = pContainer->m_iWidth;
+    v2.m_iHeight = pContainer->m_iHeight;
+    v2.m_iParam2 = 0;
     v2.m_iEffects = 0;
     v4 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, this->m_iSurfaceType, (unsigned int *)&v3);
     if ( !v4 )
@@ -221,7 +222,7 @@ bool  CToolTipExt::UpdateText(void) {
     }
     else
     {
-      FastRaster(v4, v3, 0, 0, pControl->m_iHeight, pControl->m_iMainTexture, 31);
+      FastRaster(v4, v3, 0, 0, pContainer->m_iWidth, pContainer->m_iHeight, 31);
       IGfxEngine::EndWriteToSurface(g_pGfxEngine, this->m_iSurfaceType);
       if ( !this->m_sText[0] )
       {
@@ -260,3 +261,4 @@ bool  CToolTipExt::UpdateText(void) {
 }
 
 
+#endif // Already implemented

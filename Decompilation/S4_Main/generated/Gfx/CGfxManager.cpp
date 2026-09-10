@@ -110,16 +110,16 @@ void  CGfxManager::GetGuiGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3) {
   {
     __debugbreak();
   }
-  if ( (char *)a3 <= this->m_pFileGfxFrames[iGfxFile].m_iCount )
+  if ( a3 <= this->m_pFileGfxFrames[iGfxFile].m_iCount )
   {
-    a2->m_pGfxData = this->m_pFileGfxFrames[iGfxFile].m_pItem[a3 + 5];
+    a2->m_pGfxData = (UGfxData *)this->m_pFileGfxFrames[iGfxFile].m_pItem[a3 + 5];
     a2->m_pPalData = this->m_pFilePalIndex[iGfxFile][a3 + 5];
     sprintf(sGfxDebugBuffer, "Gui Element: %u", a3);
     CGfxManager::Debug_Check_LayerBlock(this, iGfxFile, a2);
   }
   else
   {
-    memset(a2, 0, 0x2D0u);
+    memset(a2, 0, sizeof(struct SGfxObjectInfo));
   }
 }
 
@@ -2889,7 +2889,7 @@ void  CGfxManager::Debug_Check_LayerBlock(unsigned int _iGfxFile, struct SGfxObj
   {
     __debugbreak();
   }
-  if ( (a3->m_pGfxData < this->m_sFileGfx[_iGfxFile].pPileGfx || a3->m_pGfxData >= &this->m_sFileGfx[_iGfxFile].pPileGfx[this->m_sFileGfx[_iGfxFile].iLength]) && BBSupportDbgReportF(2, "GfxManager.cpp", 87, "GfxFile: %u, Base: 0x%x, Len: 0x%x, Access: 0x%x\n%s", _iGfxFile, this->m_sFileGfx[_iGfxFile].pPileGfx, this->m_sFileGfx[_iGfxFile].iLength, a3->m_pGfxData, sGfxDebugBuffer) == 1 )
+  if ( (a3->m_pGfxData < (UGfxData *)this->m_sFileGfx[_iGfxFile].pPileGfx || a3->m_pGfxData >= (UGfxData *)&this->m_sFileGfx[_iGfxFile].pPileGfx[this->m_sFileGfx[_iGfxFile].iLength]) && BBSupportDbgReportF(2, "GfxManager.cpp", 87, "GfxFile: %u, Base: 0x%x, Len: 0x%x, Access: 0x%x\n%s", _iGfxFile, this->m_sFileGfx[_iGfxFile].pPileGfx, this->m_sFileGfx[_iGfxFile].iLength, a3->m_pGfxData, sGfxDebugBuffer) == 1 )
   {
     __debugbreak();
   }
@@ -2900,12 +2900,12 @@ void  CGfxManager::Debug_Check_LayerBlock(unsigned int _iGfxFile, struct SGfxObj
   if ( _iGfxFile < 20 || _iGfxFile > 29 )
   {
     iWidth = *(__int16 *)a3->m_pGfxData;
-    iHeight = *((__int16 *)a3->m_pGfxData + 1);
+    iHeight = a3->m_pGfxData->m_sShort.m_iHeight;
   }
   else
   {
-    iWidth = *a3->m_pGfxData;
-    iHeight = a3->m_pGfxData[1];
+    iWidth = a3->m_pGfxData->m_sByte.m_iWidth;
+    iHeight = a3->m_pGfxData->m_sByte.m_iHeight;
   }
   if ( _iGfxFile && _iGfxFile != 9 && _iGfxFile != 19 && _iGfxFile != 29 && _iGfxFile != 18 && _iGfxFile != 28 && _iGfxFile != 39 && _iGfxFile != 40 && (iWidth > 512 || iHeight > 512) && BBSupportDbgReportF(2, "GfxManager.cpp", 125, "Width or height > 512! [%s]", sGfxDebugBuffer) == 1 )
   {
