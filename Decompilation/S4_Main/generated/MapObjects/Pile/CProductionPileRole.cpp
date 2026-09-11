@@ -10,7 +10,7 @@ class CPersistence * __cdecl CProductionPileRole::New(std::istream & a1) {
   CProductionPileRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CProductionPileRole *)operator new(8u);
-  if ( C )
+  if ( C != 0 )
   {
     CProductionPileRole::CProductionPileRole(C, (int)a1);
   }
@@ -34,13 +34,13 @@ unsigned long  CProductionPileRole::ClassID(void)const {
 
 
 // address=[0x1560400]
-// Decompiled from int __cdecl CProductionPileRole::Load(int a1)
+// Decompiled from int __cdecl CProductionPileRole::Load(struct std::istream *a1)
 class CProductionPileRole * __cdecl CProductionPileRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CProductionPileRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -58,7 +58,7 @@ void  CProductionPileRole::Init(class CPile * a2) {
   CPile::OfferCompletePileIfPossible(a2, 0);
   IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
   _pPile = IEntity::WorldIdx(a2);
-  if ( !CWorldManager::FlagBits(_pPile, 8u) && BBSupportDbgReport(2, "MapObjects\\Pile\\ProductionPileRole.cpp", 94, "g_cWorld.FlagBits(_pPile->WorldIdx(), FLAG_BUILDING) != 0") == 1 )
+  if ( CWorldManager::FlagBits(_pPile, 8u) == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\ProductionPileRole.cpp", 94, "g_cWorld.FlagBits(_pPile->WorldIdx(), FLAG_BUILDING) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -78,15 +78,14 @@ void  CProductionPileRole::LogicUpdate(class CPile * a2) {
   int v3; // eax
   CEcoSector *v4; // eax
 
-  if ( CPile::NumberOfAvailableGoods(a2) < 2 )
+  if ( CPile::NumberOfAvailableGoods(a2) >= 2 )
   {
-    return IAnimatedEntity::RegisterForLogicUpdate(31);
+    v2 = ((int (__stdcall *)())IEntity::WorldIdx)();
+    v3 = CWorldManager::EcoSectorId(v2);
+    v4 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v3);
+    CEcoSector::RequestSpace(v4, a2);
   }
-  v2 = IEntity::WorldIdx();
-  v3 = CWorldManager::EcoSectorId(v2);
-  v4 = (CEcoSector *)CEcoSectorMgr::operator[](v3);
-  CEcoSector::RequestSpace(v4, a2);
-  return IAnimatedEntity::RegisterForLogicUpdate(31);
+  return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
 }
 
 
@@ -125,13 +124,13 @@ void  CProductionPileRole::ReassessDistance(class CPile * a2, int & a3) {
 // Decompiled from _DWORD *__thiscall CProductionPileRole::CProductionPileRole(_DWORD *this, int a2)
  CProductionPileRole::CProductionPileRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   _DWORD *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  IPileRole::IPileRole(a2);
+  ((void (__stdcall *)(int))IPileRole::IPileRole)(a2);
   v6 = 0;
   *v5 = &CProductionPileRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
@@ -154,9 +153,9 @@ void  CProductionPileRole::Store(std::ostream & a2) {
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
   v3[1] = (int)this;
-  IPileRole::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))IPileRole::Store)(a2);
   v3[0] = 1;
-  return operator^<unsigned int>(a2, v3);
+  return operator^<unsigned int>(a2, (unsigned int *)v3);
 }
 
 
@@ -168,7 +167,7 @@ void  CProductionPileRole::Store(std::ostream & a2) {
  CProductionPileRole::CProductionPileRole(void) {
   
   IPileRole::IPileRole(this);
-  *(_DWORD *)this = &CProductionPileRole::_vftable_;
+  this->__vftable = (IPileRole_vtbl *)&CProductionPileRole::_vftable_;
   return this;
 }
 

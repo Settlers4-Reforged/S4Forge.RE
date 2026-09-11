@@ -167,7 +167,7 @@ bool  CMsgStacks::TriggerTime(void) {
           j < this->m_iNumberPlayers;
           ++j )
     {
-      if ( this->m_vStacks[i][j] )
+      if ( this->m_vStacks[i][j] != 0 )
       {
         v2 = this->m_vStacks[i][j];
         (*(void (__thiscall **)(CMsgStack *, int))v2->__vftable)(v2, 1);
@@ -249,7 +249,7 @@ bool  CMsgStacks::AddNewPlayer(void) {
         ++i )
   {
     C = (CMsgStack *)operator new(0x1Cu);
-    if ( C )
+    if ( C != 0 )
     {
       v2 = CMsgStack::CMsgStack(C);
     }
@@ -308,7 +308,7 @@ bool  CMsgStacks::IsEmpty(unsigned int a2) {
         ++i )
   {
     v2 = CMsgStacks::Get(this, a2, i);
-    if ( !(unsigned __int8)std::list<CNet_Event>::empty(&v2->this_list, v2) )
+    if ( (unsigned __int8)std::list<CNet_Event>::empty(&v2->this_list, v2) == 0 )
     {
       return 0;
     }
@@ -331,7 +331,7 @@ class CNet_Event  CMsgStacks::GetMsgToSend(void a2) {
         ++i )
   {
     v2 = CMsgStacks::Get(this, 0, i);
-    if ( !(unsigned __int8)std::list<CNet_Event>::empty(&v2->this_list, v2) )
+    if ( (unsigned __int8)std::list<CNet_Event>::empty(&v2->this_list, v2) == 0 )
     {
       CMsgStack::GetMsg(v4, &v7);
       CNet_Event::CNet_Event((struct boost::exception_detail::clone_base *)&v7);
@@ -479,7 +479,7 @@ void  CMsgStacks::OnEndSaving(int a2, int a3) {
         ++i )
   {
     Time = timeGetTime();
-    CMsgStacks::SetLastMsgTime(i, a3 + Time, 1);
+    ((void (__stdcall *)(int, int, char))CMsgStacks::SetLastMsgTime)(i, a3 + Time, 1);
   }
 }
 
@@ -502,7 +502,7 @@ bool  CMsgStacks::InitStacks(void) {
           ++j )
     {
       C = (CMsgStack *)operator new(0x1Cu);
-      if ( C )
+      if ( C != 0 )
       {
         v2 = CMsgStack::CMsgStack(C);
       }

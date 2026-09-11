@@ -34,7 +34,7 @@ int const *  CConfigVarIntArray::GetIntArray(void)const {
     __debugbreak();
   }
   this->value = (int *)operator new[]((unsigned __int64)(unsigned int)_iSize >> 0x1E != 0 ? -1 : 4 * _iSize, 1, "Source\\ConfigManager\\ConfigManager.cpp", 1355);
-  if ( Src )
+  if ( Src != 0 )
   {
     memcpy(this->value, Src, 4 * _iSize);
   }
@@ -51,7 +51,7 @@ int const *  CConfigVarIntArray::GetIntArray(void)const {
  CConfigVarIntArray::~CConfigVarIntArray(void) {
   
   *this = &CConfigVarIntArray::_vftable_;
-  operator delete(this[2]);
+  operator delete(*(this + 2));
   CDynamicConfigVar::~CDynamicConfigVar((CDynamicConfigVar *)this);
 }
 

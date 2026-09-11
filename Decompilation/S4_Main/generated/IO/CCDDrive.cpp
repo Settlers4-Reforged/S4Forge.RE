@@ -34,10 +34,10 @@ enum T_S4_CDROM_TYPE  CCDDrive::GetCDType(char driveName) {
           ++i )
     {
       v3 = dword_36BB280[i];
-      if ( v3 )
+      if ( v3 != 0 )
       {
         _wsprintfW(FileName, L"%c:\\%s", driveName, v3);
-        if ( CCDDrive::FindFile(FileName) )
+        if ( CCDDrive::FindFile(FileName) != 0 )
         {
           return i;
         }
@@ -111,16 +111,16 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
   {
     a4 |= 0x10000u;
   }
-  if ( !lpFileName )
+  if ( lpFileName == 0 )
   {
     lpFileName = (LPCWSTR)&word_36BB364;
   }
   v9 = 0;
-  if ( (a4 & 1) != 0 && CCDDrive::FindFile(lpFileName) )
+  if ( (a4 & 1) != 0 && CCDDrive::FindFile(lpFileName) != 0 )
   {
     v9 = 64;
   }
-  if ( !v9 )
+  if ( v9 == 0 )
   {
     if ( (a4 & 0x400000) != 0 )
     {
@@ -131,18 +131,15 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
             ++i )
       {
         v8 = this->GetCDDrive(this, i);
-        if ( v8 )
+        if ( v8 != 0 && v12[v8] == 0 )
         {
-          if ( !v12[v8] )
+          v12[v8] = 1;
+          _wsprintfW(Source, L"%c:\\%s\\%s", v8, L"S4", lpFileName);
+          BBSupportTracePrint(1, Source);
+          if ( CCDDrive::FindFile(Source) != 0 )
           {
-            v12[v8] = 1;
-            _wsprintfW(Source, L"%c:\\%s\\%s", v8, L"S4", lpFileName);
-            BBSupportTracePrint(1, Source);
-            if ( CCDDrive::FindFile(Source) )
-            {
-              v9 = v8;
-              break;
-            }
+            v9 = v8;
+            break;
           }
         }
       }
@@ -160,7 +157,7 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
         if ( (a4 & (1 << j)) != 0 )
         {
           v9 = this->GetCDDrive(this, j);
-          if ( v9 )
+          if ( v9 != 0 )
           {
             break;
           }
@@ -168,11 +165,11 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
       }
     }
   }
-  if ( !v9 && (a4 & 0x10000) != 0 )
+  if ( v9 == 0 && (a4 & 0x10000) != 0 )
   {
     v9 = 64;
   }
-  if ( v9 )
+  if ( v9 != 0 )
   {
     if ( v9 == 64 )
     {
@@ -194,12 +191,12 @@ bool  CCDDrive::GetCDPath(std::wstring & a2, wchar_t const * lpFileName, int a4)
       _wsprintfW(String, L"%c:\\%s\\%s", v9, L"S4", lpFileName);
     }
     BBSupportTracePrint(1, String);
-    std::wstring::operator=(a2, String);
+    std::wstring::operator=((std::wstring *)a2, String);
     return 1;
   }
   else
   {
-    std::wstring::operator=(a2, (wchar_t *)&word_36BB37C);
+    std::wstring::operator=((std::wstring *)a2, (wchar_t *)&word_36BB37C);
     return 0;
   }
 }
@@ -212,7 +209,7 @@ bool __cdecl CCDDrive::FindFile(wchar_t const * lpFileName) {
   HANDLE hFindFile; // [esp+0h] [ebp-258h]
   struct _WIN32_FIND_DATAW FindFileData; // [esp+4h] [ebp-254h] BYREF
 
-  if ( !lpFileName || !*lpFileName )
+  if ( lpFileName == 0 || *lpFileName == 0 )
   {
     return 0;
   }
@@ -232,7 +229,7 @@ unsigned int  CCDDrive::GetDriveTypeA(char _cDrive) {
   
   char RootPathName[8]; // [esp+8h] [ebp-Ch] BYREF
 
-  if ( !this->m_uDriveType )
+  if ( this->m_uDriveType == 0 )
   {
     this->m_uDriveType = CCDDrive::DriveTypeExCheck(this);
   }

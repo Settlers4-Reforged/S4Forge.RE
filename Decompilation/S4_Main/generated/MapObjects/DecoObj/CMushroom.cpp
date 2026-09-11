@@ -14,11 +14,11 @@
   this->m_uU0 = 0;
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
-  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 82, "m_uCycleFrames") == 1 )
+  if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 82, "m_uCycleFrames") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_iPhases )
+  if ( this->m_iPhases != 0 )
   {
     this->m_iFrame = CStateGame::Rand(g_pGame) % this->m_uCycleFrames;
     IEntity::SetFlagBits(this, ENTITY_FLAG_Ready);
@@ -42,7 +42,7 @@
   this->m_iPhases = 3;
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = a2->m_uCycleFrames;
-  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 129, "m_uCycleFrames") == 1 )
+  if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 129, "m_uCycleFrames") == 1 )
   {
     __debugbreak();
   }
@@ -98,7 +98,7 @@ void  CMushroom::LogicUpdate(void) {
       IAnimatedEntity::RegisterForLogicUpdate(this, 31);
       break;
     case 4u:
-      if ( ++this->m_uU0 < 5 || (this->m_uU0 = 0, ++this->m_iFrame, m_cFrame = this->m_iFrame, m_cFrame < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart)) )
+      if ( ++this->m_uU0 < 5 || (this->m_uU0 = 0, ++this->m_iFrame, (m_cFrame = this->m_iFrame) < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart)) )
       {
 LABEL_10:
         IAnimatedEntity::RegisterForLogicUpdate(this, 31);
@@ -127,13 +127,13 @@ struct SGfxObjectInfo *  CMushroom::GetGfxInfos(void) {
   v4 = TickCounter - IAnimatedEntity::LastUpdateTick(this);
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, v2);
-  if ( v4 )
+  if ( v4 != 0 )
   {
     this->m_iFrame = (v4 + (unsigned int)this->m_iFrame) % this->m_uCycleFrames;
   }
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
-  MEMORY[0x40FE518] = 16;
-  MEMORY[0x40FE51A] = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_uObjType = 16;
+  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
   IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }
@@ -152,7 +152,7 @@ void  CMushroom::Decrease(int a2) {
   this->m_iFrame = 0;
   this->m_iJobPart = this->m_iPhases + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
-  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 345, "m_uCycleFrames") == 1 )
+  if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "MapObjects\\DecoObj\\Mushroom.cpp", 345, "m_uCycleFrames") == 1 )
   {
     __debugbreak();
   }
@@ -196,7 +196,7 @@ void __cdecl CMushroom::operator delete(void * a1) {
   IDecoObject::IDecoObject(this, a1);
   v6 = 0;
   this->__vftable = (IAnimatedEntity_vtbl *)&CMushroom::_vftable_;
-  operator^<unsigned int>(a1, &fileFormatVersion);
+  operator^<unsigned int>(a1, (unsigned int *)&fileFormatVersion);
   if ( fileFormatVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CMushroom");
@@ -221,7 +221,7 @@ void  CMushroom::Store(std::ostream & a1) {
 
   IDecoObject::Store(this, a1);
   v2 = 1;
-  operator^<unsigned int>(a1, &v2);
+  operator^<unsigned int>(a1, (unsigned int *)&v2);
   operator^<bool>(a1, &this->m_uU1);
   operator^<unsigned char>(a1, &this->m_iPhases);
   operator^<unsigned char>(a1, &this->m_uCycleFrames);

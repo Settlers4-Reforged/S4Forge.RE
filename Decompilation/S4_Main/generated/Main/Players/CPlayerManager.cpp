@@ -167,23 +167,20 @@ int __cdecl CPlayerManager::AddPlayer(int _iPlayerRace, int _iPlayerX, int _iPla
   int v15; // [esp+130h] [ebp-4h]
 
   v15 = 0;
-  if ( !CPlayerManager::m_iInitialized )
+  if ( CPlayerManager::m_iInitialized == 0 )
   {
-    if ( "AddPlayer(): Not initialized!" )
+    if ( "AddPlayer(): Not initialized!" != 0 && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 112, "!\"AddPlayer(): Not initialized!\"") == 1 )
     {
-      if ( BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 112, "!\"AddPlayer(): Not initialized!\"") == 1 )
-      {
-        __debugbreak();
-      }
+      __debugbreak();
     }
 LABEL_15:
     v15 = -1;
     std::wstring::~wstring(&_swPlayerName);
     return 0;
   }
-  if ( CPlayerManager::m_iLocked )
+  if ( CPlayerManager::m_iLocked != 0 )
   {
-    if ( "AddPlayer(): Already locked!" && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 118, "!\"AddPlayer(): Already locked!\"") == 1 )
+    if ( "AddPlayer(): Already locked!" != 0 && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 118, "!\"AddPlayer(): Already locked!\"") == 1 )
     {
       __debugbreak();
     }
@@ -191,7 +188,7 @@ LABEL_15:
   }
   if ( CPlayerManager::LastPlayerId() >= 8 )
   {
-    if ( "AddPlayer(): Player limit reached!" && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 124, "!\"AddPlayer(): Player limit reached!\"") == 1 )
+    if ( "AddPlayer(): Player limit reached!" != 0 && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 124, "!\"AddPlayer(): Player limit reached!\"") == 1 )
     {
       __debugbreak();
     }
@@ -232,17 +229,17 @@ LABEL_15:
 // Decompiled from char CPlayerManager::Lock()
 bool __cdecl CPlayerManager::Lock(void) {
   
-  if ( CPlayerManager::m_iInitialized )
+  if ( CPlayerManager::m_iInitialized != 0 )
   {
-    if ( CPlayerManager::m_iLocked )
+    if ( CPlayerManager::m_iLocked != 0 )
     {
-      if ( "Lock(): Already locked!" && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 177, "!\"Lock(): Already locked!\"") == 1 )
+      if ( "Lock(): Already locked!" != 0 && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 177, "!\"Lock(): Already locked!\"") == 1 )
       {
         __debugbreak();
       }
       return 0;
     }
-    else if ( CPlayerManager::m_iLocalPlayer )
+    else if ( CPlayerManager::m_iLocalPlayer != 0 )
     {
       CPlayerManager::m_iLocked = 1;
       return 1;
@@ -258,11 +255,7 @@ bool __cdecl CPlayerManager::Lock(void) {
   }
   else
   {
-    if ( !"Lock(): Not initialized!" )
-    {
-      return 0;
-    }
-    if ( BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 171, "!\"Lock(): Not initialized!\"") == 1 )
+    if ( "Lock(): Not initialized!" != 0 && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 171, "!\"Lock(): Not initialized!\"") == 1 )
     {
       __debugbreak();
     }
@@ -370,7 +363,7 @@ void __cdecl CPlayerManager::PrintStats(void) {
     {
       std::string::operator=(&v5, "Human");
     }
-    if ( CPlayerManager::IsAlive(i) )
+    if ( CPlayerManager::IsAlive(i) != 0 )
     {
       v2 = "Yes";
     }
@@ -395,15 +388,15 @@ signed char __cdecl CPlayerManager::GetLocalSlot(void) {
   int v2; // eax
   int i; // [esp+0h] [ebp-4h]
 
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 277, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 277, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !g_pGameType && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 278, "g_pGameType != NULL") == 1 )
+  if ( g_pGameType == 0 && BBSupportDbgReport(2, "Main\\PlayerManager.cpp", 278, "g_pGameType != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !g_pNetworkEngine || !g_pGameType )
+  if ( g_pNetworkEngine == 0 || g_pGameType == 0 )
   {
     return -1;
   }

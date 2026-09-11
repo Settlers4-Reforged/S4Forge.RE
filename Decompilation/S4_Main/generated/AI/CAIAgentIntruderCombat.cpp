@@ -6,7 +6,7 @@
 // Decompiled from CAIAgentIntruderCombat *__thiscall CAIAgentIntruderCombat::CAIAgentIntruderCombat(CAIAgentIntruderCombat *this)
  CAIAgentIntruderCombat::CAIAgentIntruderCombat(void) {
   
-  CAINormalSectorAgent::CAINormalSectorAgent(this, "intruder combat");
+  CAINormalSectorAgent::CAINormalSectorAgent((CAINormalSectorAgent *)this, "intruder combat");
   *(_DWORD *)this = &CAIAgentIntruderCombat::_vftable_;
   *((_DWORD *)this + 10) = 0;
   return this;
@@ -14,7 +14,7 @@
 
 
 // address=[0x1304760]
-// Decompiled from unsigned int __thiscall CAIAgentIntruderCombat::Execute(CAIAgentIntruderCombat *this, unsigned int a2, unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentIntruderCombat::Execute(CAINormalSectorAgent *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentIntruderCombat::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -33,8 +33,8 @@ unsigned int  CAIAgentIntruderCombat::Execute(unsigned int a2, unsigned int a3) 
   int v17; // [esp+10h] [ebp-30h]
   int v18; // [esp+14h] [ebp-2Ch]
   int v19; // [esp+18h] [ebp-28h]
-  int v20; // [esp+1Ch] [ebp-24h] BYREF
-  int v21; // [esp+20h] [ebp-20h] BYREF
+  unsigned int v20; // [esp+1Ch] [ebp-24h] BYREF
+  unsigned int v21; // [esp+20h] [ebp-20h] BYREF
   int v22; // [esp+24h] [ebp-1Ch]
   CAITaskForce *v23; // [esp+28h] [ebp-18h]
   int v24; // [esp+2Ch] [ebp-14h]
@@ -45,22 +45,22 @@ unsigned int  CAIAgentIntruderCombat::Execute(unsigned int a2, unsigned int a3) 
 
   v26 = this;
   v3 = CAINormalSectorAgent::SectorAI(this);
-  v4 = (pairNode *)CAISectorAI::PlayerAI(v3);
+  v4 = (pairNode *)CAISectorAI::PlayerAI((CAISectorAI *)v3);
   v18 = CAIPlayerAI::PlayerId(v4);
-  v23 = (struct CAINormalSectorAI *)((char *)CAINormalSectorAgent::SectorAI(v26) + 2404);
+  v23 = (CAITaskForce *)((char *)CAINormalSectorAgent::SectorAI(v26) + 2404);
   v28 = 0;
   for ( i = (CPropertySet *)CAITaskForce::LastEntity(v23);
-        i;
+        i != 0;
         i = v16 )
   {
     v16 = (CPropertySet *)CAIEntityInfo::Prev(i);
-    v24 = CAIEntityInfo::TargetId(i);
-    if ( v24 )
+    v24 = CAIEntityInfo::TargetId((CAIEntityInfo *)i);
+    if ( v24 != 0 )
     {
       v22 = -1;
       if ( IAIEnvironment::EntityIsAlive(v24) )
       {
-        IAIEnvironment::EntityGetPosition(v24, &v20, &v21);
+        IAIEnvironment::EntityGetPosition(v24, (int *)&v20, (int *)&v21);
         v22 = CScanner::IsNearMyLand(v18, v20, v21);
       }
       if ( v22 < 0 )
@@ -72,34 +72,34 @@ unsigned int  CAIAgentIntruderCombat::Execute(unsigned int a2, unsigned int a3) 
       {
         v13 = v21;
         v12 = v20;
-        v5 = CAIEntityInfo::EntityId(i);
+        v5 = CAIEntityInfo::EntityId((CAIEntityInfo *)i);
         IAIEnvironment::MovingEntitySendMoveCommand(v5, v12, v13, 1);
       }
     }
-    if ( !v24 )
+    if ( v24 == 0 )
     {
-      v17 = CAIEntityInfo::EntityId(i);
+      v17 = CAIEntityInfo::EntityId((CAIEntityInfo *)i);
       CAITaskForce::AddEntity(v23, v17, 2);
       ++v28;
     }
   }
-  IntruderType = CAIAgentIntruderCombat::HuntNextIntruderType(v26);
+  IntruderType = CAIAgentIntruderCombat::HuntNextIntruderType((CAIAgentIntruderCombat *)v26);
   v28 -= IntruderType;
-  v7 = CAIAgentIntruderCombat::HuntNextIntruderType(v26);
+  v7 = CAIAgentIntruderCombat::HuntNextIntruderType((CAIAgentIntruderCombat *)v26);
   v28 -= v7;
-  v8 = CAIAgentIntruderCombat::HuntNextIntruderType(v26);
+  v8 = CAIAgentIntruderCombat::HuntNextIntruderType((CAIAgentIntruderCombat *)v26);
   v28 -= v8;
   if ( v28 > 0 )
   {
-    for ( j = (CAIEntityInfo *)CAITaskForce::FirstEntity(v23);
-          j;
+    for ( j = CAITaskForce::FirstEntity(v23);
+          j != 0;
           j = v15 )
     {
-      v15 = (CAIEntityInfo *)CAIEntityInfo::Next(j);
-      if ( !CAIEntityInfo::TargetId(j) )
+      v15 = CAIEntityInfo::Next(j);
+      if ( CAIEntityInfo::TargetId(j) == 0 )
       {
         v9 = CAIEntityInfo::EntityId(j);
-        CAIAgentIntruderCombat::MoveHunterHome(v26, v9);
+        CAIAgentIntruderCombat::MoveHunterHome((CAIAgentIntruderCombat *)v26, v9);
         v19 = CAIEntityInfo::EntityId(j);
         v14 = IAIEnvironment::EntityWarriorType(v19);
         v10 = CAINormalSectorAgent::SectorAI(v26);
@@ -112,7 +112,7 @@ unsigned int  CAIAgentIntruderCombat::Execute(unsigned int a2, unsigned int a3) 
 
 
 // address=[0x13062a0]
-// Decompiled from void __thiscall CAIAgentIntruderCombat::~CAIAgentIntruderCombat(CAIAgentIntruderCombat *this)
+// Decompiled from void __thiscall CAIAgentIntruderCombat::~CAIAgentIntruderCombat(CAIScheduler **this)
  CAIAgentIntruderCombat::~CAIAgentIntruderCombat(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);
@@ -120,15 +120,15 @@ unsigned int  CAIAgentIntruderCombat::Execute(unsigned int a2, unsigned int a3) 
 
 
 // address=[0x1304940]
-// Decompiled from int __thiscall CAIAgentIntruderCombat::MoveHunterHome(CAIAgentIntruderCombat *this, int a2)
+// Decompiled from int __thiscall CAIAgentIntruderCombat::MoveHunterHome(CAINormalSectorAgent *this, int a2)
 void  CAIAgentIntruderCombat::MoveHunterHome(int a2) {
   
   struct CAINormalSectorAI *v2; // eax
   pairNode *v3; // eax
   struct CAISectorAI *v4; // eax
   CAISectorAI *v5; // eax
-  int v7; // [esp+0h] [ebp-1Ch] BYREF
-  int v8; // [esp+4h] [ebp-18h] BYREF
+  unsigned int v7; // [esp+0h] [ebp-1Ch] BYREF
+  unsigned int v8; // [esp+4h] [ebp-18h] BYREF
   int v9; // [esp+8h] [ebp-14h]
   int v10; // [esp+Ch] [ebp-10h] BYREF
   int v11; // [esp+10h] [ebp-Ch] BYREF
@@ -137,19 +137,19 @@ void  CAIAgentIntruderCombat::MoveHunterHome(int a2) {
 
   v13 = this;
   v2 = CAINormalSectorAgent::SectorAI(this);
-  v3 = (pairNode *)CAISectorAI::PlayerAI(v2);
+  v3 = (pairNode *)CAISectorAI::PlayerAI((CAISectorAI *)v2);
   v9 = CAIPlayerAI::PlayerId(v3);
-  v4 = CAINormalSectorAgent::SectorAI(v13);
+  v4 = (struct CAISectorAI *)CAINormalSectorAgent::SectorAI(v13);
   v10 = CAISectorAI::BaseX(v4);
-  v5 = CAINormalSectorAgent::SectorAI(v13);
+  v5 = (CAISectorAI *)CAINormalSectorAgent::SectorAI(v13);
   v11 = CAISectorAI::BaseY(v5);
-  IAIEnvironment::EntityGetPosition(a2, &v7, &v8);
+  IAIEnvironment::EntityGetPosition(a2, (int *)&v7, (int *)&v8);
   NearestOwnTowerInSector = CScanner::FindNearestOwnTowerInSector(v7, v8, 32, v9);
   if ( NearestOwnTowerInSector > 0 )
   {
     IAIEnvironment::BuildingGetEnsignPosition(NearestOwnTowerInSector, &v10, &v11);
   }
-  return IAIEnvironment::MovingEntitySendMoveCommand(a2, v10, v11, 0);
+  return ((int (__cdecl *)(int, int, int, bool))IAIEnvironment::MovingEntitySendMoveCommand)(a2, v10, v11, 0);
 }
 
 
@@ -170,7 +170,7 @@ int  CAIAgentIntruderCombat::HuntNextIntruderType(void) {
 
 
 // address=[0x1304a40]
-// Decompiled from int __thiscall CAIAgentIntruderCombat::HuntIntruders(CAIAgentIntruderCombat *this, int a2)
+// Decompiled from int __thiscall CAIAgentIntruderCombat::HuntIntruders(CAINormalSectorAgent *this, int a2)
 int  CAIAgentIntruderCombat::HuntIntruders(int a2) {
   
   struct CAINormalSectorAI *v2; // eax
@@ -206,8 +206,8 @@ int  CAIAgentIntruderCombat::HuntIntruders(int a2) {
   int v33; // [esp+8Ch] [ebp-28h]
   int v34; // [esp+90h] [ebp-24h]
   int v35; // [esp+94h] [ebp-20h]
-  int v36; // [esp+98h] [ebp-1Ch] BYREF
-  int v37; // [esp+9Ch] [ebp-18h] BYREF
+  unsigned int v36; // [esp+98h] [ebp-1Ch] BYREF
+  unsigned int v37; // [esp+9Ch] [ebp-18h] BYREF
   int k; // [esp+A0h] [ebp-14h]
   CAINormalSectorAgent *v39; // [esp+A4h] [ebp-10h]
   pairNode *j; // [esp+A8h] [ebp-Ch]
@@ -222,27 +222,27 @@ int  CAIAgentIntruderCombat::HuntIntruders(int a2) {
   v8[5] = 40;
   v27 = 0;
   v2 = CAINormalSectorAgent::SectorAI(this);
-  v3 = (pairNode *)CAISectorAI::PlayerAI(v2);
+  v3 = (pairNode *)CAISectorAI::PlayerAI((CAISectorAI *)v2);
   v26 = CAIPlayerAI::PlayerId(v3);
-  v4 = CAINormalSectorAgent::SectorAI(v39);
+  v4 = (CAISectorAI *)CAINormalSectorAgent::SectorAI(v39);
   v17 = CAISectorAI::SectorId(v4);
   v29 = (struct CAINormalSectorAI *)((char *)CAINormalSectorAgent::SectorAI(v39) + 2404);
   CAIEnemySettlerInSectorIterator::CAIEnemySettlerInSectorIterator((CAIEnemySettlerInSectorIterator *)v8, v26, a2, v17);
-  while ( CAIEnemySettlerInSectorIterator::NextEnemySettler(v8, (int *)v28) )
+  while ( CAIEnemySettlerInSectorIterator::NextEnemySettler(v8, (int *)v28) != 0 )
   {
-    IAIEnvironment::EntityGetPosition(*(_DWORD *)v28, &v36, &v37);
+    IAIEnvironment::EntityGetPosition(*(_DWORD *)v28, (int *)&v36, (int *)&v37);
     v16 = CScanner::IsNearMyLand(v26, v36, v37);
     if ( v16 >= 0 )
     {
       v42 = 0;
       v34 = 0;
       v35 = 0x4000;
-      for ( i = (CAIEntityInfo *)CAITaskForce::FirstEntity(v29);
-            i;
-            i = (CAIEntityInfo *)CAIEntityInfo::Next(i) )
+      for ( i = CAITaskForce::FirstEntity((CAITaskForce *)v29);
+            i != 0;
+            i = CAIEntityInfo::Next(i) )
       {
         v25 = CAIEntityInfo::TargetId(i);
-        if ( v25 )
+        if ( v25 != 0 )
         {
           if ( v25 == *(_DWORD *)v28 )
           {
@@ -262,7 +262,7 @@ int  CAIAgentIntruderCombat::HuntIntruders(int a2) {
           }
         }
       }
-      if ( !v42 )
+      if ( v42 == 0 )
       {
         v22 = v34 != 0;
         v21 = v35 < 40;
@@ -271,28 +271,28 @@ int  CAIAgentIntruderCombat::HuntIntruders(int a2) {
           v42 = v34;
           ++v27;
         }
-        else if ( CAITaskForce::NumberOfEntities(v29) < 10 )
+        else if ( CAITaskForce::NumberOfEntities((CAITaskForce *)v29) < 10 )
         {
           v30 = 0;
           v31 = 0x4000;
           v5 = CAINormalSectorAgent::SectorAI(v39);
           v6 = CAISectorAI::TaskForceGroup(v5);
-          for ( j = (pairNode *)CAITaskForceGroup::FirstTaskForce(v6, 2);
-                j;
-                j = CAITaskForce::NextTaskForceGroupMemberOfSameClass(j) )
+          for ( j = (pairNode *)CAITaskForceGroup::FirstTaskForce((CAITaskForceGroup *)v6, 2);
+                j != 0;
+                j = (pairNode *)CAITaskForce::NextTaskForceGroupMemberOfSameClass((CAITaskForce *)j) )
           {
             v13 = CAITaskForce::Type(j);
             if ( v13 == 5 )
             {
-              v12 = CAITaskForce::NumberOfEntities(j);
+              v12 = CAITaskForce::NumberOfEntities((CAITaskForce *)j);
               if ( v12 > 5 )
               {
                 v33 = 0;
-                for ( k = CAITaskForce::FirstEntity(j);
-                      k;
-                      k = CAIEntityInfo::Next(k) )
+                for ( k = (int)CAITaskForce::FirstEntity((CAITaskForce *)j);
+                      k != 0;
+                      k = (int)CAIEntityInfo::Next((CAIEntityInfo *)k) )
                 {
-                  v20 = CAIEntityInfo::EntityId(k);
+                  v20 = CAIEntityInfo::EntityId((CAIEntityInfo *)k);
                   IAIEnvironment::EntityGetWarriorTypeAndPosition(v20, (enum T_AI_WARRIOR_TYPE *)&v11, &v9, &v10);
                   if ( v11 == 2 )
                   {
@@ -304,7 +304,7 @@ int  CAIAgentIntruderCombat::HuntIntruders(int a2) {
                     }
                     HIDWORD(v19) = ++v33 >= 5;
                     LODWORD(v19) = v32 < 30;
-                    if ( v19 )
+                    if ( v19 != 0 )
                     {
                       break;
                     }
@@ -320,14 +320,14 @@ int  CAIAgentIntruderCombat::HuntIntruders(int a2) {
           if ( v30 > 0 )
           {
             v42 = v30;
-            CAITaskForce::AddEntity(v29, v30, 1);
+            CAITaskForce::AddEntity((CAITaskForce *)v29, v30, 1);
           }
         }
       }
-      if ( v42 )
+      if ( v42 != 0 )
       {
         EntityInfo = (CPropertySet *)IAIEnvironment::EntityGetEntityInfo(v42, 0);
-        if ( EntityInfo )
+        if ( EntityInfo != 0 )
         {
           CAIEntityInfo::SetTargetId(EntityInfo, v28[0]);
           IAIEnvironment::MovingEntitySendMoveCommand(v42, v36, v37, 1);

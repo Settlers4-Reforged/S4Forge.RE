@@ -32,8 +32,8 @@ void  CSolutionEdge::show(void) {
   int v4; // [esp-10h] [ebp-14h]
   int v5; // [esp-8h] [ebp-Ch]
 
-  v5 = this[4];
-  v4 = this[3];
+  v5 = *(this + 4);
+  v4 = *(this + 3);
   std::operator<<<std::char_traits<char>>((int)&std::cout, "ActionId = ");
   v1 = std::ostream::operator<<(v4);
   std::operator<<<std::char_traits<char>>(v1, ",PrNr = ");

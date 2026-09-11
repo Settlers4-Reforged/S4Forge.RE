@@ -10,7 +10,7 @@ class CStringEngine * __cdecl CStringEngine::CreateStringEngine(int a1) {
   CStringEngineEx *C; // [esp+Ch] [ebp-10h]
 
   C = (CStringEngineEx *)operator new(8u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStringEngineEx::CStringEngineEx(C, a1);
   }

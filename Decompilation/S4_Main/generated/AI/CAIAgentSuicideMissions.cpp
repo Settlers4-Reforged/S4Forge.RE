@@ -3,11 +3,11 @@
 // Definitions for class CAIAgentSuicideMissions
 
 // address=[0x1303ee0]
-// Decompiled from unsigned int __thiscall CAIAgentSuicideMissions::Execute(CAIAgentSuicideMissions *this, unsigned int a2, unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentSuicideMissions::Execute(CAINormalSectorAgent *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentSuicideMissions::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
-  _DWORD *v4; // eax
+  CAITaskForceGroup *v4; // eax
   unsigned int v5; // eax
   struct CAINormalSectorAI *v7; // eax
   int v8; // eax
@@ -17,28 +17,28 @@ unsigned int  CAIAgentSuicideMissions::Execute(unsigned int a2, unsigned int a3)
   CUserToolsManager *i; // [esp+24h] [ebp-4h]
 
   v3 = CAINormalSectorAgent::SectorAI(this);
-  v4 = (_DWORD *)CAISectorAI::TaskForceGroup(v3);
-  if ( CAITaskForceGroup::NumberOfTaskForcesOfType(v4, 4) )
+  v4 = (CAITaskForceGroup *)CAISectorAI::TaskForceGroup(v3);
+  if ( CAITaskForceGroup::NumberOfTaskForcesOfType(v4, 4) != 0 )
   {
     v7 = CAINormalSectorAgent::SectorAI(this);
     v8 = CAISectorAI::TaskForceGroup(v7);
-    for ( i = (CUserToolsManager *)CAITaskForceGroup::FirstTaskForce(v8, 2);
-          i;
-          i = TaskForceGroupMemberOfSameClass )
+    for ( i = (CUserToolsManager *)CAITaskForceGroup::FirstTaskForce((CAITaskForceGroup *)v8, 2);
+          i != 0;
+          i = (CUserToolsManager *)TaskForceGroupMemberOfSameClass )
     {
-      TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
+      TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass((CAITaskForce *)i);
       if ( CAITaskForce::Type(i) == 4 )
       {
-        if ( CAITaskForce::NumberOfEntities(i) )
+        if ( CAITaskForce::NumberOfEntities((CAITaskForce *)i) != 0 )
         {
           CAINormalSectorAgent::SectorAI(this);
           TargetForSuicideMission = CAINormalSectorAI::FindTargetForSuicideMission(i);
           if ( TargetForSuicideMission <= 0 )
           {
             v9 = CAINormalSectorAgent::SectorAI(this);
-            CAINormalSectorAI::MoveSquadHome(v9, i);
+            CAINormalSectorAI::MoveSquadHome(v9, (struct CAITaskForce *)i);
           }
-          else if ( CAITaskForce::Command(i) != 4 || CAITaskForce::CmdGoal(i) != TargetForSuicideMission || ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(i)) != 0 || a2 >= CAITaskForce::CmdTimeStamp(i) + 1000 )
+          else if ( CAITaskForce::Command((CAITaskForce *)i) != 4 || CAITaskForce::CmdGoal((CAITaskForce *)i) != TargetForSuicideMission || ((unsigned int)&s_iMsgTracer2.m_aMessages[15456] & CAITaskForce::Flags((CAITaskForce *)i)) != 0 || a2 >= CAITaskForce::CmdTimeStamp(i) + 1000 )
           {
             (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)i + 32))(i, 4, TargetForSuicideMission, 0);
           }
@@ -63,14 +63,14 @@ unsigned int  CAIAgentSuicideMissions::Execute(unsigned int a2, unsigned int a3)
 // Decompiled from CAIAgentSuicideMissions *__thiscall CAIAgentSuicideMissions::CAIAgentSuicideMissions(CAIAgentSuicideMissions *this)
  CAIAgentSuicideMissions::CAIAgentSuicideMissions(void) {
   
-  CAINormalSectorAgent::CAINormalSectorAgent(this, string__26);
+  CAINormalSectorAgent::CAINormalSectorAgent((CAINormalSectorAgent *)this, string__26);
   *(_DWORD *)this = &CAIAgentSuicideMissions::_vftable_;
   return this;
 }
 
 
 // address=[0x1325cb0]
-// Decompiled from void __thiscall CAIAgentSuicideMissions::~CAIAgentSuicideMissions(CAIAgentSuicideMissions *this)
+// Decompiled from void __thiscall CAIAgentSuicideMissions::~CAIAgentSuicideMissions(CAIScheduler **this)
  CAIAgentSuicideMissions::~CAIAgentSuicideMissions(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

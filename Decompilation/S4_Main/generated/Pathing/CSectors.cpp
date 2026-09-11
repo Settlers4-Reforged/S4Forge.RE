@@ -28,7 +28,7 @@ int  CSectors::NewSector(unsigned char a2) {
     __debugbreak();
   }
   ++*(_DWORD *)this;
-  while ( *((_BYTE *)this + *((_DWORD *)this + 40961) + 4) )
+  while ( *((_BYTE *)this + *((_DWORD *)this + 40961) + 4) != 0 )
   {
     *((_DWORD *)this + 40961) = ((unsigned __int16)*((_DWORD *)this + 40961) + 1) & 0x7FFF;
   }

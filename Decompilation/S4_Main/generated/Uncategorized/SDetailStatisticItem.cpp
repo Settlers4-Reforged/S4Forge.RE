@@ -6,8 +6,8 @@
 // Decompiled from SDetailStatisticItem *__thiscall SDetailStatisticItem::SDetailStatisticItem(SDetailStatisticItem *this)
  SDetailStatisticItem::SDetailStatisticItem(void) {
   
-  std::string::string();
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
+  ((void (__cdecl *)())std::string::string)();
   return this;
 }
 

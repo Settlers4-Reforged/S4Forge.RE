@@ -63,7 +63,7 @@ bool  CClientList::ContainsPeerId(unsigned int _uPeerId) {
 
 
 // address=[0x15b1e50]
-// Decompiled from char __thiscall CClientList::Add(CClientList *this, int _uIp, int _uPlayerId, int _uPeerId)
+// Decompiled from char __thiscall CClientList::Add(CClientList *this, int _uIp, int _uPlayerId, uint _uPeerId)
 bool  CClientList::Add(unsigned int _uIp, int _uPlayerId, int _uPeerId) {
   
   _DWORD v5[3]; // [esp-10h] [ebp-78h] BYREF
@@ -78,24 +78,23 @@ bool  CClientList::Add(unsigned int _uIp, int _uPlayerId, int _uPeerId) {
   struct std::_Iterator_base12 *v14; // [esp+50h] [ebp-18h]
   int v17; // [esp+64h] [ebp-4h]
 
-  if ( CClientList::ContainsPeerId(this, _uPeerId) )
+  if ( CClientList::ContainsPeerId(this, _uPeerId) == 0 )
   {
-    return 0;
+    CClient::CClient(&v7, _uIp, _uPlayerId, _uPeerId);
+    v17 = 0;
+    v6 = &v7;
+    v14 = (struct std::_Iterator_base12 *)std::vector<CClient>::end(&this->m_vClients, (int)v8);
+    v13 = v14;
+    LOBYTE(v17) = 1;
+    v12 = v5;
+    v11 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v5, v14);
+    v10 = std::vector<CClient>::insert((int)v9, v5[0], v5[1], v5[2], (int)v6);
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v9);
+    LOBYTE(v17) = 0;
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v8);
+    v17 = -1;
+    CClient::~CClient(&v7);
   }
-  CClient::CClient(&v7, _uIp, _uPlayerId, _uPeerId);
-  v17 = 0;
-  v6 = &v7;
-  v14 = (struct std::_Iterator_base12 *)std::vector<CClient>::end(&this->m_vClients, (int)v8);
-  v13 = v14;
-  LOBYTE(v17) = 1;
-  v12 = v5;
-  v11 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v5, v14);
-  v10 = std::vector<CClient>::insert((int)v9, v5[0], v5[1], v5[2], (int)v6);
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v9);
-  LOBYTE(v17) = 0;
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v8);
-  v17 = -1;
-  CClient::~CClient(&v7);
   return 0;
 }
 
@@ -158,12 +157,12 @@ bool  CClientList::RemoveClientAt(int a2) {
   {
     return 0;
   }
-  std::vector<CClient>::begin(v5);
+  std::vector<CClient>::begin((int)v5);
   v11 = 0;
-  std::advance<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>,int>(v5, a2);
+  std::advance<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>,int>((int)v5, a2);
   v8 = v3;
   v7 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>((struct std::_Iterator_base12 *)v5);
-  v6 = std::vector<CClient>::erase(v4, v3[0], v3[1], v3[2]);
+  v6 = std::vector<CClient>::erase((int)v4, v3[0], v3[1], v3[2]);
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v4);
   v10 = 1;
   v11 = -1;
@@ -190,7 +189,7 @@ bool  CClientList::RemoveClientPeerId(unsigned int a2) {
   char v15; // [esp+43h] [ebp-Dh]
   int v16; // [esp+4Ch] [ebp-4h]
 
-  std::vector<CClient>::begin(v7);
+  std::vector<CClient>::begin((int)v7);
   v16 = 0;
   while ( 1 )
   {
@@ -200,7 +199,7 @@ bool  CClientList::RemoveClientPeerId(unsigned int a2) {
     v15 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::operator!=(v12);
     LOBYTE(v16) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v6);
-    if ( !v15 )
+    if ( v15 == 0 )
     {
       break;
     }
@@ -209,7 +208,7 @@ bool  CClientList::RemoveClientPeerId(unsigned int a2) {
     {
       v10 = v4;
       v9 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CClient>>>((struct std::_Iterator_base12 *)v7);
-      v8 = std::vector<CClient>::erase(v5, v4[0], v4[1], v4[2]);
+      v8 = std::vector<CClient>::erase((int)v5, v4[0], v4[1], v4[2]);
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CClient>>>(v5);
       v14 = 1;
       v16 = -1;
@@ -234,7 +233,7 @@ bool  CClientList::AllClientsReady(void) {
         a1 < std::vector<CClient>::size(&this->m_vClients);
         ++a1 )
   {
-    if ( !std::vector<CClient>::operator[](&this->m_vClients, a1)->m_bReady )
+    if ( std::vector<CClient>::operator[](&this->m_vClients, a1)->m_bReady == 0 )
     {
       return 0;
     }

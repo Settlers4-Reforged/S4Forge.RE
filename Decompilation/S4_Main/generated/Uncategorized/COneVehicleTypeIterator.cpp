@@ -27,7 +27,7 @@ int  COneVehicleTypeIterator::FirstVehicle(void) {
 // Decompiled from int __thiscall COneVehicleTypeIterator::NextVehicle(COneVehicleTypeIterator *this)
 int  COneVehicleTypeIterator::NextVehicle(void) {
   
-  int v1; // eax
+  CVehicle *v1; // eax
   int v3; // [esp+0h] [ebp-8h]
 
   do

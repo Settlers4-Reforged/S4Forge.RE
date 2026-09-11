@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CTree::New(int a1)
 class CPersistence * __cdecl CTree::New(std::istream & a1) {
   
-  if ( CTree::operator new(0x50u) )
+  if ( (void *)CTree::operator new(0x50u) != 0 )
   {
-    return CTree::CTree(a1);
+    return ((_DWORD (__stdcall *)(int))CTree::CTree)(a1);
   }
   else
   {
@@ -21,51 +21,51 @@ class CPersistence * __cdecl CTree::New(std::istream & a1) {
 // Decompiled from CTree *__thiscall CTree::CTree(CTree *this, int a2, int a3, int a4, int a5, int a6)
  CTree::CTree(int a2, int a3, int a4, int a5, int a6) {
   
-  IDecoObject::IDecoObject(this, a2, a3, a4, a5, a6 != 0);
+  IDecoObject::IDecoObject((IDecoObject *)this, a2, a3, a4, a5, a6 != 0);
   *(_DWORD *)this = &CTree::_vftable_;
   *((_BYTE *)this + 72) = 1;
   *((_BYTE *)this + 73) = a6;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
-  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19));
-  if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 69, "m_uCycleFrames") == 1 )
+  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, *((unsigned __int16 *)this + 6));
+  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(g_pGfxManager, *((unsigned __int16 *)this + 19));
+  if ( *((_BYTE *)this + 74) == 0 && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 69, "m_uCycleFrames") == 1 )
   {
     __debugbreak();
   }
   *((_DWORD *)this + 19) = 0;
-  if ( IDecoObject::IsStaticInstance(this) )
+  if ( IDecoObject::IsStaticInstance((IDecoObject *)this) )
   {
-    *((_BYTE *)this + 36) = CStateGame::Rand(g_pGame) % (unsigned int)*((unsigned __int8 *)this + 74);
+    *((_BYTE *)this + 36) = CStateGame::Rand(g_pGame) % *((unsigned __int8 *)this + 74);
   }
   else
   {
-    IAnimatedEntity::RegisterForLogicUpdate(31);
+    ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
   }
   return this;
 }
 
 
 // address=[0x15a2f50]
-// Decompiled from CTree *__thiscall CTree::CTree(CTree *this, const struct CTree *a2, int a3, int a4, int a5)
+// Decompiled from CTree *__thiscall CTree::CTree(CTree *this, const struct IDecoObject *a2, int a3, int a4, int a5)
  CTree::CTree(class CTree const & a2, int a3, int a4, int a5) {
   
-  IDecoObject::IDecoObject(this, a2, a3, a4, a5);
+  IDecoObject::IDecoObject((IDecoObject *)this, a2, a3, a4, a5);
   *(_DWORD *)this = &CTree::_vftable_;
   *((_DWORD *)this + 19) = 0;
   *((_BYTE *)this + 73) = 3;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
-  *((_BYTE *)this + 74) = *((_BYTE *)a2 + 74);
-  if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 104, "m_uCycleFrames") == 1 )
+  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, *((unsigned __int16 *)this + 6));
+  *((_BYTE *)this + 74) = BYTE2(a2[1].__vftable);
+  if ( *((_BYTE *)this + 74) == 0 && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 104, "m_uCycleFrames") == 1 )
   {
     __debugbreak();
   }
-  *((_BYTE *)this + 36) = *((_BYTE *)a2 + 36);
+  *((_BYTE *)this + 36) = a2->m_iFrame;
   *((_BYTE *)this + 72) = 1;
   return this;
 }
 
 
 // address=[0x15a3040]
-// Decompiled from void __thiscall CTree::LogicUpdate(CTree *this)
+// Decompiled from void __thiscall CTree::LogicUpdate(IEntity *this)
 void  CTree::LogicUpdate(void) {
   
   int v1; // eax
@@ -90,7 +90,7 @@ void  CTree::LogicUpdate(void) {
       }
       *((_DWORD *)this + 19) = 0;
       ++*((_BYTE *)this + 73);
-      *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
+      *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
       if ( *((_BYTE *)this + 73) != 3 )
       {
         goto LABEL_17;
@@ -98,20 +98,20 @@ void  CTree::LogicUpdate(void) {
       v6 = IEntity::Y(this);
       v1 = IEntity::X(this);
       CWorldManager::SetResource(v1, v6, 112, 1);
-      v8 = IEntity::Type((unsigned __int16 *)this);
+      v8 = IEntity::Type(this);
       v7 = IEntity::Y(this);
       v2 = IEntity::X(this);
-      CDecoObjMgr::ChangeToStaticInstance((CDecoObjMgr *)&g_cDecoObjMgr, v2, v7, v8, 0);
+      CDecoObjMgr::ChangeToStaticInstance(&g_cDecoObjMgr, v2, v7, (T_OBJECT_TYPE)v8, 0);
       break;
     case 4:
       ++*((_BYTE *)this + 73);
       *((_DWORD *)this + 19) = 0;
       *((_BYTE *)this + 36) = 0;
-      *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
-      *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19));
+      *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
+      *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(g_pGfxManager, *((unsigned __int16 *)this + 19));
       v10 = IEntity::Y(this);
       v3 = IEntity::X(this);
-      if ( (*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)g_pFogging + 32))(g_pFogging, v3, v10) )
+      if ( g_pFogging->IsPositionVisible(g_pFogging, v3, v10) )
       {
         v9 = IEntity::Y(this);
         v4 = IEntity::X(this);
@@ -124,24 +124,24 @@ void  CTree::LogicUpdate(void) {
         ++*((_BYTE *)this + 73);
         *((_DWORD *)this + 19) = 0;
         *((_BYTE *)this + 36) = 0;
-        *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
+        *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
         *((_BYTE *)this + 74) = 1;
-        if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 283, "m_uCycleFrames") == 1 )
+        if ( *((_BYTE *)this + 74) == 0 && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 283, "m_uCycleFrames") == 1 )
         {
           __debugbreak();
         }
       }
       goto LABEL_17;
     case 0xA:
-      if ( (int)++*((_DWORD *)this + 19) < 2 || (*((_DWORD *)this + 19) = 0, ++*((_BYTE *)this + 36), *((unsigned __int8 *)this + 36) <= (int)(CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19)) - 1)) )
+      if ( (int)++*((_DWORD *)this + 19) < 2 || (*((_DWORD *)this + 19) = 0, ++*((_BYTE *)this + 36), *((unsigned __int8 *)this + 36) <= CGfxManager::GetObjectFrameCount(g_pGfxManager, *((unsigned __int16 *)this + 19)) - 1) )
       {
 LABEL_17:
-        IAnimatedEntity::RegisterForLogicUpdate(31);
+        ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
       }
       else
       {
-        v5 = IEntity::ID();
-        CDecoObjMgr::Delete((CDecoObjMgr *)&g_cDecoObjMgr, v5);
+        v5 = ((int (__stdcall *)())IEntity::ID)();
+        CDecoObjMgr::Delete(&g_cDecoObjMgr, v5);
       }
       break;
     default:
@@ -151,7 +151,7 @@ LABEL_17:
 
 
 // address=[0x15a3310]
-// Decompiled from void *__thiscall sub_19A3310(int this)
+// Decompiled from SGfxObjectInfo *__thiscall sub_19A3310(int this)
 struct SGfxObjectInfo *  CTree::GetGfxInfos(void) {
   
   int v1; // esi
@@ -159,24 +159,24 @@ struct SGfxObjectInfo *  CTree::GetGfxInfos(void) {
   int v4; // [esp+4h] [ebp-8h]
 
   v1 = CStateGame::GetTickCounter(g_pGame);
-  v4 = v1 - IAnimatedEntity::LastUpdateTick(this);
+  v4 = v1 - IAnimatedEntity::LastUpdateTick((void *)this);
   v2 = CStateGame::GetTickCounter(g_pGame);
-  IAnimatedEntity::SetLastUpdateTick((CMFCCaptionButton *)this, v2);
-  if ( v4 && *(_BYTE *)(this + 73) != 10 )
+  IAnimatedEntity::SetLastUpdateTick((IAnimatedEntity *)this, v2);
+  if ( v4 != 0 && *(_BYTE *)(this + 73) != 10 )
   {
     *(_BYTE *)(this + 36) = (v4 + (unsigned int)*(unsigned __int8 *)(this + 36)) % *(unsigned __int8 *)(this + 74);
   }
-  CGfxManager::GetObjectGfxInfo(&IEntity::m_sGfxInfo, *(unsigned __int16 *)(this + 38), *(unsigned __int8 *)(this + 36), 1);
+  ((void (__stdcall *)(SGfxObjectInfo *, _DWORD, _DWORD, int))CGfxManager::GetObjectGfxInfo)(&IEntity::m_sGfxInfo, *(unsigned __int16 *)(this + 38), *(unsigned __int8 *)(this + 36), 1);
   if ( *(_BYTE *)(this + 73) == 3 )
   {
-    MEMORY[0x40FE518] = *(_BYTE *)(this + 10);
+    IEntity::m_sGfxInfo.m_uObjType = *(_BYTE *)(this + 10);
   }
   else
   {
-    MEMORY[0x40FE518] = 16;
+    IEntity::m_sGfxInfo.m_uObjType = 16;
   }
-  MEMORY[0x40FE51A] = IEntity::IsVisible((void *)this);
-  MEMORY[0x40FE266] = 0;
+  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible((_DWORD *)this);
+  IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }
 
@@ -190,7 +190,7 @@ int  CTree::GetGoodType(void)const {
 
 
 // address=[0x15a33f0]
-// Decompiled from CTree *__thiscall CTree::Decrease(CTree *this, int a2)
+// Decompiled from CTree *__thiscall CTree::Decrease(IDecoObject *this, int a2)
 void  CTree::Decrease(int a2) {
   
   int v2; // eax
@@ -202,25 +202,25 @@ void  CTree::Decrease(int a2) {
   }
   if ( *((_BYTE *)this + 73) == 3 )
   {
-    v2 = IEntity::WorldIdx();
+    v2 = ((int (__stdcall *)())IEntity::WorldIdx)();
     CWorldManager::SetResource(v2, 0, 0);
   }
   ++*((_BYTE *)this + 73);
-  *((_BYTE *)this + 36) = 0;
-  *((_WORD *)this + 19) = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 6));
-  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount((CGfxManager *)g_pGfxManager, *((unsigned __int16 *)this + 19));
-  if ( !*((_BYTE *)this + 74) && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 337, "m_uCycleFrames") == 1 )
+  this->m_iFrame = 0;
+  this->m_iJobPart = *((unsigned __int8 *)this + 73) + (unsigned __int16)CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
+  *((_BYTE *)this + 74) = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
+  if ( *((_BYTE *)this + 74) == 0 && BBSupportDbgReport(2, "MapObjects\\Tree.cpp", 337, "m_uCycleFrames") == 1 )
   {
     __debugbreak();
   }
   if ( *((_BYTE *)this + 73) == 4 )
   {
-    IAnimatedEntity::RegisterForLogicUpdate(*((unsigned __int8 *)this + 74) - 1);
+    ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(*((unsigned __int8 *)this + 74) - 1);
   }
-  result = this;
+  result = (CTree *)this;
   if ( *((_BYTE *)this + 73) == 9 )
   {
-    return (CTree *)IAnimatedEntity::RegisterForLogicUpdate(31);
+    return (CTree *)((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
   }
   return result;
 }
@@ -243,46 +243,45 @@ void  CTree::Take(int a2) {
 
 
 // address=[0x15a3540]
-// Decompiled from int __thiscall CTree::ConvertToDarkOrGreen(CTree *this, bool a2)
+// Decompiled from int __thiscall CTree::ConvertToDarkOrGreen(IDecoObject *this, bool a2)
 int  CTree::ConvertToDarkOrGreen(bool a2) {
   
   int v3; // [esp+0h] [ebp-Ch]
   int v4; // [esp+4h] [ebp-8h]
 
-  v3 = IEntity::Type((unsigned __int16 *)this);
+  v3 = IEntity::Type(this);
   v4 = IDecoObject::ConvertToDarkOrGreen(this, a2);
-  if ( v4 == v3 || IDecoObject::IsStaticInstance(this) )
+  if ( v4 != v3 && !IDecoObject::IsStaticInstance(this) )
   {
-    return v4;
-  }
-  if ( *((_BYTE *)this + 73) && *((_BYTE *)this + 73) == 1 )
-  {
-    if ( *((_BYTE *)this + 73) != 2 && *((_BYTE *)this + 73) != 3 )
+    if ( *((_BYTE *)this + 73) != 0 && *((_BYTE *)this + 73) == 1 )
     {
-      return v3;
+      if ( *((_BYTE *)this + 73) != 2 && *((_BYTE *)this + 73) != 3 )
+      {
+        return v3;
+      }
     }
-  }
-  else
-  {
-    return 0;
+    else
+    {
+      return 0;
+    }
   }
   return v4;
 }
 
 
 // address=[0x15a35d0]
-// Decompiled from unsigned int __cdecl CTree::operator new(unsigned int a1)
+// Decompiled from unsigned int __cdecl CTree::operator new(uint a1)
 void * __cdecl CTree::operator new(unsigned int a1) {
   
-  return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
+  return CDecoObjMgr::Alloc(&g_cDecoObjMgr, a1);
 }
 
 
 // address=[0x15a35f0]
-// Decompiled from void __cdecl CTree::operator delete(void *a1)
+// Decompiled from void __cdecl CTree::operator delete(uint *a1)
 void __cdecl CTree::operator delete(void * a1) {
   
-  CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
+  CDecoObjMgr::Dealloc(&g_cDecoObjMgr, a1);
 }
 
 
@@ -290,13 +289,13 @@ void __cdecl CTree::operator delete(void * a1) {
 // Decompiled from _DWORD *__thiscall CTree::CTree(_DWORD *this, int a2)
  CTree::CTree(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   _DWORD *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  IDecoObject::IDecoObject(a2);
+  ((void (__stdcall *)(int))IDecoObject::IDecoObject)(a2);
   v6 = 0;
   *v5 = &CTree::_vftable_;
   operator^<unsigned int>(a2, &v3);
@@ -308,9 +307,9 @@ void __cdecl CTree::operator delete(void * a1) {
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
   operator^<bool>(a2, v5 + 18);
-  operator^<unsigned char>(a2, (char *)v5 + 73);
-  operator^<unsigned char>(a2, (char *)v5 + 74);
-  operator^<int>(a2, (int)(v5 + 19));
+  operator^<unsigned char>(a2, (unsigned __int8 *)v5 + 73);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v5 + 74);
+  operator^<int>((struct std::istream *)a2, v5 + 19);
   v6 = -1;
   return v5;
 }
@@ -324,21 +323,21 @@ void  CTree::Store(std::ostream & a2) {
   int *v4; // [esp+4h] [ebp-4h]
 
   v4 = this;
-  IDecoObject::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))IDecoObject::Store)(a2);
   v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  operator^<bool>((int)a2, (int)(v4 + 18));
-  operator^<unsigned char>(a2, (int)v4 + 73);
-  operator^<unsigned char>(a2, (int)v4 + 74);
-  return operator^<int>((int)a2, v4 + 19);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
+  operator^<bool>(a2, (bool *)v4 + 72);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v4 + 73);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v4 + 74);
+  return operator^<int>(a2, v4 + 19);
 }
 
 
 // address=[0x15a3a20]
-// Decompiled from void __thiscall CTree::~CTree(CTree *this)
+// Decompiled from void __thiscall CTree::~CTree(IDecoObject *this)
  CTree::~CTree(void) {
   
-  *(_DWORD *)this = &CTree::_vftable_;
+  this->__vftable = (IAnimatedEntity_vtbl *)&CTree::_vftable_;
   IDecoObject::~IDecoObject(this);
 }
 

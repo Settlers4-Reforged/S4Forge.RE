@@ -10,16 +10,15 @@
   _BYTE pExceptionObject[32]; // [esp+8h] [ebp-30h] BYREF
   int v5; // [esp+34h] [ebp-4h]
 
-  AdvXMLParser::Reference::Reference(AdvXMLParser::Node::null, a2);
+  ((void (__stdcall *)(void *, int))AdvXMLParser::Reference::Reference)(AdvXMLParser::Node::null, a2);
   v5 = 0;
   *(_DWORD *)this = &AdvXMLParser::EntityRef::_vftable_;
   *((_BYTE *)this + 36) = 0;
-  if ( AdvXMLParser::EntityRef::MapReferenceName(this) )
+  if ( !AdvXMLParser::EntityRef::MapReferenceName(this) )
   {
-    return this;
+    ((void (__stdcall *)(int))AdvXMLParser::InvalidRefException::InvalidRefException)(a2);
+    _CxxThrowException(pExceptionObject, (_ThrowInfo *)&_TI2_AVInvalidRefException_AdvXMLParser__);
   }
-  AdvXMLParser::InvalidRefException::InvalidRefException(a2);
-  _CxxThrowException(pExceptionObject, (_ThrowInfo *)&_TI2_AVInvalidRefException_AdvXMLParser__);
   return this;
 }
 
@@ -28,7 +27,7 @@
 // Decompiled from AdvXMLParser::EntityRef *__thiscall AdvXMLParser::EntityRef::EntityRef(AdvXMLParser::EntityRef *this, int a2, int a3)
  AdvXMLParser::EntityRef::EntityRef(class AdvXMLParser::NodeContainer & a2, std::string const & a3) {
   
-  AdvXMLParser::Reference::Reference(a2, a3);
+  ((void (__stdcall *)(int, int))AdvXMLParser::Reference::Reference)(a2, a3);
   *(_DWORD *)this = &AdvXMLParser::EntityRef::_vftable_;
   *((_BYTE *)this + 36) = 0;
   AdvXMLParser::EntityRef::MapReferenceName(this);
@@ -49,7 +48,7 @@ class AdvXMLParser::EntityRef *  AdvXMLParser::EntityRef::Clone(class AdvXMLPars
 
   C = (AdvXMLParser::EntityRef *)operator new(0x28u);
   v9 = 0;
-  if ( C )
+  if ( C != 0 )
   {
     Name = AdvXMLParser::Node::GetName(this);
     v6 = AdvXMLParser::EntityRef::EntityRef(C, Name);
@@ -59,7 +58,7 @@ class AdvXMLParser::EntityRef *  AdvXMLParser::EntityRef::Clone(class AdvXMLPars
     v6 = 0;
   }
   v9 = -1;
-  std::auto_ptr<AdvXMLParser::EntityRef>::auto_ptr<AdvXMLParser::EntityRef>(v6);
+  std::auto_ptr<AdvXMLParser::EntityRef>::auto_ptr<AdvXMLParser::EntityRef>((int)v6);
   *(_BYTE *)(std::auto_ptr<AdvXMLParser::EntityRef>::operator->() + 36) = *((_BYTE *)this + 36);
   v4 = std::auto_ptr<AdvXMLParser::EntityRef>::release(v8);
   std::auto_ptr<AdvXMLParser::EntityRef>::~auto_ptr<AdvXMLParser::EntityRef>(v8);
@@ -71,7 +70,7 @@ class AdvXMLParser::EntityRef *  AdvXMLParser::EntityRef::Clone(class AdvXMLPars
 // Decompiled from int __thiscall AdvXMLParser::EntityRef::GetData(char *this, int a2)
 std::string  AdvXMLParser::EntityRef::GetData(void a2)const {
   
-  std::string::string(1u, this[36]);
+  std::string::string(1u, *(this + 36));
   return a2;
 }
 
@@ -80,7 +79,7 @@ std::string  AdvXMLParser::EntityRef::GetData(void a2)const {
 // Decompiled from int __thiscall AdvXMLParser::EntityRef::GetValue(char *this, int a2)
 std::string  AdvXMLParser::EntityRef::GetValue(void a2)const {
   
-  std::string::string(1u, this[36]);
+  std::string::string(1u, *(this + 36));
   return a2;
 }
 
@@ -117,15 +116,15 @@ class AdvXMLParser::EntityRef * __cdecl AdvXMLParser::EntityRef::Parse(class Adv
   {
     return 0;
   }
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v9 = 0;
-  if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v8) || !AdvXMLParser::Parser::ParseChar(a1, 59) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v8) == 0 || !AdvXMLParser::Parser::ParseChar(a1, 59) )
   {
     AdvXMLParser::Parser::SyntaxError(a1, 6);
   }
   C = (AdvXMLParser::EntityRef *)operator new(0x28u);
   LOBYTE(v9) = 1;
-  if ( C )
+  if ( C != 0 )
   {
     v5 = AdvXMLParser::EntityRef::EntityRef(C, (int)a2, (int)v8);
   }
@@ -134,7 +133,7 @@ class AdvXMLParser::EntityRef * __cdecl AdvXMLParser::EntityRef::Parse(class Adv
     v5 = 0;
   }
   LOBYTE(v9) = 0;
-  std::auto_ptr<AdvXMLParser::EntityRef>::auto_ptr<AdvXMLParser::EntityRef>(v5);
+  std::auto_ptr<AdvXMLParser::EntityRef>::auto_ptr<AdvXMLParser::EntityRef>((int)v5);
   LOBYTE(v9) = 2;
   v3 = (AdvXMLParser::EntityRef *)std::auto_ptr<AdvXMLParser::EntityRef>::operator->();
   if ( !AdvXMLParser::EntityRef::MapReferenceName(v3) )
@@ -156,10 +155,10 @@ void  AdvXMLParser::EntityRef::GenerateXML(class AdvXMLParser::GenerateContext &
   
   int Name; // eax
 
-  AdvXMLParser::GenerateContext::operator+=(38);
+  ((void (__stdcall *)(char))AdvXMLParser::GenerateContext::operator+=)(38);
   Name = AdvXMLParser::Node::GetName(this);
-  AdvXMLParser::GenerateContext::operator+=(Name);
-  return AdvXMLParser::GenerateContext::operator+=(59);
+  ((void (__stdcall *)(int))AdvXMLParser::GenerateContext::operator+=)(Name);
+  return ((_DWORD (__stdcall *)(char))AdvXMLParser::GenerateContext::operator+=)(59);
 }
 
 
@@ -182,23 +181,23 @@ bool  AdvXMLParser::EntityRef::MapReferenceName(void) {
   int v14; // [esp+48h] [ebp-4h]
 
   v10 = this;
-  if ( (unsigned __int8)std::_Tree<std::_Tmap_traits<std::string,char,std::less<std::string>,std::allocator<std::pair<std::string const,char>>,0>>::empty(&AdvXMLParser::s_mapReferences) )
+  if ( (unsigned __int8)std::_Tree<std::_Tmap_traits<std::string,char,std::less<std::string>,std::allocator<std::pair<std::string const,char>>,0>>::empty(&AdvXMLParser::s_mapReferences) != 0 )
   {
     AdvXMLParser::FillMap();
   }
-  v9 = std::_Tree<std::_Tmap_traits<std::string,char,std::less<std::string>,std::allocator<std::pair<std::string const,char>>,0>>::find(v4, (char *)v10 + 4);
+  v9 = std::_Tree<std::_Tmap_traits<std::string,char,std::less<std::string>,std::allocator<std::pair<std::string const,char>>,0>>::find((int)v4, (int)v10 + 4);
   v8 = v9;
   v14 = 0;
   std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,char>>>>::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,char>>>>(v9);
   LOBYTE(v14) = 2;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,char>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,char>>>>(v4);
-  v7 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<std::string,char,std::less<std::string>,std::allocator<std::pair<std::string const,char>>,0>>::end(v3);
+  v7 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<std::string,char,std::less<std::string>,std::allocator<std::pair<std::string const,char>>,0>>::end((int)v3);
   v6 = v7;
   LOBYTE(v14) = 3;
   v13 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,char>>>>::operator==(v7);
   LOBYTE(v14) = 2;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,char>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<std::string const,char>>>>(v3);
-  if ( v13 )
+  if ( v13 != 0 )
   {
     v12 = 0;
     v14 = -1;

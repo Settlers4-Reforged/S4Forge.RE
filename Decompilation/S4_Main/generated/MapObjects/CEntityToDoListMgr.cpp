@@ -272,7 +272,7 @@
           ++k )
     {
       iFirstJobId = CGfxManager::GetSettlerFirstJob(i, k);
-      if ( !iFirstJobId || this->m_vSettlerJobsList[0][k] )
+      if ( iFirstJobId == 0 || this->m_vSettlerJobsList[0][k] != 0 )
       {
         this->m_vSettlerJobsList[i][k] = this->m_vSettlerJobsList[0][k];
       }
@@ -280,7 +280,7 @@
       {
         v167 = operator new(0xCu);
         v249 = 0;
-        if ( v167 )
+        if ( v167 != 0 )
         {
           v174 = (std::list *)std::list<CEntityTask>::list<CEntityTask>(v167);
         }
@@ -312,7 +312,7 @@
           ++i )
     {
       iFirstJobId = CGfxManager::GetSettlerFirstJob(i, m);
-      if ( !iFirstJobId || this->m_vSettlerJobsList[0][iJobListAfterSettlerIter] )
+      if ( iFirstJobId == 0 || this->m_vSettlerJobsList[0][iJobListAfterSettlerIter] != 0 )
       {
         this->m_vSettlerJobsList[i][iJobListAfterSettlerIter] = this->m_vSettlerJobsList[0][iJobListAfterSettlerIter];
       }
@@ -320,7 +320,7 @@
       {
         v175 = operator new(0xCu);
         v249 = 1;
-        if ( v175 )
+        if ( v175 != 0 )
         {
           v176 = (std::list *)std::list<CEntityTask>::list<CEntityTask>(v175);
         }
@@ -342,429 +342,427 @@
     ++iJobListAfterSettlerIter;
   }
   v210 = 0;
-  v214 = (char *)AdvXMLParser::Parser::OpenXMLFile(aGamedataJobinf, &v210);
-  if ( !v214 )
+  v214 = (char *)AdvXMLParser::Parser::OpenXMLFile(L"GameData\\JobInfo.xml", &v210);
+  if ( v214 != 0 )
   {
-    return this;
-  }
-  v249 = 2;
-  v50[20] = AdvXMLParser::Parser::Parser(v37);
-  LOBYTE(v249) = 3;
-  v75 = AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v37, v214, v210);
-  std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>(v75);
-  LOBYTE(v249) = 4;
-  v4 = std::auto_ptr<AdvXMLParser::Document>::operator->(v32);
-  Root = (void *)AdvXMLParser::Document::GetRoot(v4);
-  v178 = Root;
-  v73 = (struct CDefineTranslator *)CDefineTranslator::Instance();
-  v207 = v73;
-  v72 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v178, v46);
-  v71 = v72;
-  LOBYTE(v249) = 5;
-  v50[28] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v51, v72);
-  LOBYTE(v249) = 7;
-  AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v46);
-  v70 = AdvXMLParser::NodeContainer::End(v178, v45);
-  v69 = v70;
-  LOBYTE(v249) = 8;
-  v50[27] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v49, v70);
-  LOBYTE(v249) = 10;
-  AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v45);
-  while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v51, (int)v49) )
-  {
-    v68 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v51);
-    v67 = AdvXMLParser::Element::operator[](v68, "id");
-    v173 = v67;
-    v50[26] = v67->GetValue(v67, &v247);
-    LOBYTE(v249) = 11;
-    ValueOfDefine = CDefineTranslator::GetValueOfDefine(v207, &v247);
-    v212 = ValueOfDefine;
-    if ( ValueOfDefine == -1 )
+    v249 = 2;
+    v50[20] = AdvXMLParser::Parser::Parser(v37);
+    LOBYTE(v249) = 3;
+    v75 = AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v37, v214, v210);
+    std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>(v75);
+    LOBYTE(v249) = 4;
+    v4 = std::auto_ptr<AdvXMLParser::Document>::operator->(v32);
+    Root = (void *)AdvXMLParser::Document::GetRoot(v4);
+    v178 = Root;
+    v73 = (struct CDefineTranslator *)CDefineTranslator::Instance();
+    v207 = v73;
+    v72 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v178, v46);
+    v71 = v72;
+    LOBYTE(v249) = 5;
+    v50[28] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v51, v72);
+    LOBYTE(v249) = 7;
+    AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v46);
+    v70 = AdvXMLParser::NodeContainer::End(v178, v45);
+    v69 = v70;
+    LOBYTE(v249) = 8;
+    v50[27] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v49, v70);
+    LOBYTE(v249) = 10;
+    AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v45);
+    while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v51, (int)v49) )
     {
-      v5 = std::string::c_str(&v247);
-      CTrace::Print("This race define: %s used in JobInfo.xml but isn't part of S4_Defines.h", v5);
-    }
-    v65 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v51);
-    v64 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v65, v44);
-    v63 = v64;
-    LOBYTE(v249) = 12;
-    v50[7] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v52, v64);
-    LOBYTE(v249) = 14;
-    AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v44);
-    v62 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v51);
-    v61 = AdvXMLParser::NodeContainer::End(v62, v43);
-    v60 = v61;
-    LOBYTE(v249) = 15;
-    v50[6] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v50, v61);
-    LOBYTE(v249) = 17;
-    AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v43);
-    while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v52, (int)v50) )
-    {
-      v59 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v52);
-      v58 = AdvXMLParser::Element::operator[](v59, "id");
-      v180 = v58;
-      v50[5] = v58->GetValue(v58, &v246);
-      LOBYTE(v249) = 18;
-      Instance = CConfigManagerPtr::GetInstance();
-      v181 = Instance;
-      v6 = std::string::c_str(&v246);
-      v56 = v181->GetDefineValue(v181, v6);
-      v211 = v56;
-      if ( v56 == -1 )
+      v68 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v51);
+      v67 = AdvXMLParser::Element::operator[](v68, "id");
+      v173 = v67;
+      v50[26] = v67->GetValue(v67, &v247);
+      LOBYTE(v249) = 11;
+      ValueOfDefine = CDefineTranslator::GetValueOfDefine(v207, &v247);
+      v212 = ValueOfDefine;
+      if ( ValueOfDefine == -1 )
       {
-        v7 = std::string::c_str(&v246);
-        CTrace::Print("This job list define: %s used in JobInfo.xml but isn't part of S4_AnimListDefines.h", v7);
+        v5 = std::string::c_str(&v247);
+        CTrace::Print("This race define: %s used in JobInfo.xml but isn't part of S4_Defines.h", v5);
       }
-      if ( v211 == -1 )
+      v65 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v51);
+      v64 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v65, v44);
+      v63 = v64;
+      LOBYTE(v249) = 12;
+      v50[7] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v52, v64);
+      LOBYTE(v249) = 14;
+      AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v44);
+      v62 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v51);
+      v61 = AdvXMLParser::NodeContainer::End(v62, v43);
+      v60 = v61;
+      LOBYTE(v249) = 15;
+      v50[6] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v50, v61);
+      LOBYTE(v249) = 17;
+      AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v43);
+      while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v52, (int)v50) )
       {
-        v55 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 218, "iJobListIdx != -1");
-        if ( v55 == 1 )
+        v59 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v52);
+        v58 = AdvXMLParser::Element::operator[](v59, "id");
+        v180 = v58;
+        v50[5] = v58->GetValue(v58, &v246);
+        LOBYTE(v249) = 18;
+        Instance = CConfigManagerPtr::GetInstance();
+        v181 = Instance;
+        v6 = std::string::c_str(&v246);
+        v56 = v181->GetDefineValue(v181, v6);
+        v211 = v56;
+        if ( v56 == -1 )
         {
-          __debugbreak();
+          v7 = std::string::c_str(&v246);
+          CTrace::Print("This job list define: %s used in JobInfo.xml but isn't part of S4_AnimListDefines.h", v7);
         }
-      }
-      v50[4] = 0;
-      memset(&v50[23], 0, 12);
-      v54 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v52);
-      v53 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v54, v42);
-      v165 = v53;
-      LOBYTE(v249) = 19;
-      v50[22] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v200, v53);
-      LOBYTE(v249) = 21;
-      AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v42);
-      v164 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v52);
-      v163 = AdvXMLParser::NodeContainer::End(v164, v41);
-      v162 = v163;
-      LOBYTE(v249) = 22;
-      v50[21] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v47, v163);
-      LOBYTE(v249) = 24;
-      AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v41);
-      while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v200, (int)v47) )
-      {
-        v161 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
-        v160 = AdvXMLParser::Element::operator()(v161, "jobPart", 0);
-        v182 = v160;
-        v50[14] = ((int (__thiscall *)(AdvXMLParser::Element *, std::string *))v160->GetValue)(v160, &v245);
-        LOBYTE(v249) = 25;
-        v159 = CConfigManagerPtr::GetInstance();
-        v183 = v159;
-        v8 = std::string::c_str(&v245);
-        v158 = v183->GetDefineValue(v183, v8);
-        iJobNr = v158;
-        if ( v158 == -1 )
+        if ( v211 == -1 )
         {
-          v9 = std::string::c_str(&v245);
-          CTrace::Print("This job define: %s used in JobInfo.xml but isn't part of SettlerDefines.h", v9);
-        }
-        if ( iJobNr == -1 )
-        {
-          v157 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 239, "iJobNr != -1");
-          if ( v157 == 1 )
+          v55 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 218, "iJobListIdx != -1");
+          if ( v55 == 1 )
           {
             __debugbreak();
           }
         }
-        v156 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
-        v155 = AdvXMLParser::Element::operator()(v156, "x", 0);
-        v184 = v155;
-        v154 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v155->GetValue)(v155, v235);
-        v10 = std::string::c_str(v154);
-        iX = j__atoi(v10);
-        std::string::~string(v235);
-        v153 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
-        v152 = AdvXMLParser::Element::operator()(v153, "y", 0);
-        v185 = v152;
-        v151 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v152->GetValue)(v152, v236);
-        v11 = std::string::c_str(v151);
-        iY = j__atoi(v11);
-        std::string::~string(v236);
-        v150 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
-        v149 = AdvXMLParser::Element::operator()(v150, "task", 0);
-        v186 = v149;
-        v148 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v149->GetValue)(v149, v234);
-        v147 = v148;
-        LOBYTE(v249) = 26;
-        v12 = std::string::c_str(v148);
-        v50[19] = std::string::string(&v239, v12);
-        LOBYTE(v249) = 27;
-        v146 = CDefineTranslator::GetValueOfDefine(v207, &v239);
-        v50[18] = v146;
-        LOBYTE(v249) = 26;
-        std::string::~string(&v239);
-        LOBYTE(v249) = 25;
-        std::string::~string(v234);
-        v145 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
-        v144 = AdvXMLParser::Element::operator()(v145, "dir", 0);
-        v187 = v144;
-        v143 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v144->GetValue)(v144, v237);
-        v13 = std::string::c_str(v143);
-        iDir = j__atoi(v13);
-        std::string::~string(v237);
-        if ( iDir == -1 )
+        v50[4] = 0;
+        memset(&v50[23], 0, 12);
+        v54 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v52);
+        v53 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v54, v42);
+        v165 = v53;
+        LOBYTE(v249) = 19;
+        v50[22] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v200, v53);
+        LOBYTE(v249) = 21;
+        AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v42);
+        v164 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v52);
+        v163 = AdvXMLParser::NodeContainer::End(v164, v41);
+        v162 = v163;
+        LOBYTE(v249) = 22;
+        v50[21] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v47, v163);
+        LOBYTE(v249) = 24;
+        AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v41);
+        while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v200, (int)v47) )
         {
-          v188 = 0;
-        }
-        else
-        {
-          v188 = iDir;
-        }
-        SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, v212, iJobNr, v188);
-        iTaskFrameCount = SettlerJobFrameCount;
-        if ( SettlerJobFrameCount == 1 )
-        {
-          v31 = std::string::c_str(&v245);
-          v30 = std::string::c_str(&v247);
-          v14 = std::string::c_str(&v246);
-          BBSupportTracePrintF(3, "WARNING: There is a problem in job %s of race %s with job part %s!", v14, v30, v31);
-        }
-        v141 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
-        v140 = AdvXMLParser::Element::operator()(v141, "duration", 0);
-        v190 = v140;
-        v139 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v140->GetValue)(v140, v238);
-        v15 = std::string::c_str(v139);
-        iDuration = j__atoi(v15);
-        std::string::~string(v238);
-        if ( iDuration >= 128 )
-        {
-          v138 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 294, "duration < 128");
-          if ( v138 == 1 )
+          v161 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
+          v160 = AdvXMLParser::Element::operator()(v161, "jobPart", 0);
+          v182 = v160;
+          v50[14] = ((int (__thiscall *)(AdvXMLParser::Element *, std::string *))v160->GetValue)(v160, &v245);
+          LOBYTE(v249) = 25;
+          v159 = CConfigManagerPtr::GetInstance();
+          v183 = v159;
+          v8 = std::string::c_str(&v245);
+          v158 = v183->GetDefineValue(v183, v8);
+          iJobNr = v158;
+          if ( v158 == -1 )
           {
-            __debugbreak();
+            v9 = std::string::c_str(&v245);
+            CTrace::Print("This job define: %s used in JobInfo.xml but isn't part of SettlerDefines.h", v9);
           }
-        }
-        if ( !iDuration )
-        {
-          iDuration = iTaskFrameCount;
-        }
-        v137 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
-        v136 = AdvXMLParser::Element::operator()(v137, "entity", 0);
-        v177 = v136;
-        v50[17] = ((int (__thiscall *)(AdvXMLParser::Element *, std::string *))v136->GetValue)(v136, &v242);
-        LOBYTE(v249) = 28;
-        v135 = CConfigManagerPtr::GetInstance();
-        v189 = v135;
-        v16 = std::string::c_str(&v242);
-        iEntity = v189->GetDefineValue(v189, v16);
-        if ( iEntity == -1 )
-        {
-          iEntity = 0;
-        }
-        v133 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
-        v132 = AdvXMLParser::Element::operator()(v133, "task", 0);
-        v179 = v132;
-        v131 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v132->GetValue)(v132, v227);
-        v130 = v131;
-        LOBYTE(v249) = 29;
-        v17 = std::string::c_str(v131);
-        v50[16] = std::string::string(&v240, v17);
-        LOBYTE(v249) = 30;
-        v129 = CDefineTranslator::GetValueOfDefine(v207, &v240);
-        iTask = v129;
-        LOBYTE(v249) = 29;
-        std::string::~string(&v240);
-        LOBYTE(v249) = 28;
-        std::string::~string(v227);
-        v128 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
-        v127 = AdvXMLParser::Element::operator()(v128, "trigger", 0);
-        v172 = v127;
-        v126 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v127->GetValue)(v127, v228);
-        v125 = v126;
-        LOBYTE(v249) = 31;
-        v18 = std::string::c_str(v126);
-        v50[15] = std::string::string(&v241, v18);
-        LOBYTE(v249) = 32;
-        iTrigger = CDefineTranslator::GetValueOfDefine(v207, &v241);
-        LOBYTE(v249) = 31;
-        std::string::~string(&v241);
-        LOBYTE(v249) = 28;
-        std::string::~string(v228);
-        if ( !this->m_vSettlerJobsList[v212][v211] )
-        {
-          v123 = operator new(0xCu);
-          v171 = v123;
-          LOBYTE(v249) = 33;
-          if ( v123 )
+          if ( iJobNr == -1 )
           {
-            v122 = std::list<CEntityTask>::list<CEntityTask>(v171);
-            v170 = (std::list *)v122;
+            v157 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 239, "iJobNr != -1");
+            if ( v157 == 1 )
+            {
+              __debugbreak();
+            }
+          }
+          v156 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
+          v155 = AdvXMLParser::Element::operator()(v156, "x", 0);
+          v184 = v155;
+          v154 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v155->GetValue)(v155, v235);
+          v10 = std::string::c_str(v154);
+          iX = j__atoi(v10);
+          std::string::~string(v235);
+          v153 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
+          v152 = AdvXMLParser::Element::operator()(v153, "y", 0);
+          v185 = v152;
+          v151 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v152->GetValue)(v152, v236);
+          v11 = std::string::c_str(v151);
+          iY = j__atoi(v11);
+          std::string::~string(v236);
+          v150 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
+          v149 = AdvXMLParser::Element::operator()(v150, "task", 0);
+          v186 = v149;
+          v148 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v149->GetValue)(v149, v234);
+          v147 = v148;
+          LOBYTE(v249) = 26;
+          v12 = std::string::c_str(v148);
+          v50[19] = std::string::string(&v239, v12);
+          LOBYTE(v249) = 27;
+          v146 = CDefineTranslator::GetValueOfDefine(v207, &v239);
+          v50[18] = v146;
+          LOBYTE(v249) = 26;
+          std::string::~string(&v239);
+          LOBYTE(v249) = 25;
+          std::string::~string(v234);
+          v145 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
+          v144 = AdvXMLParser::Element::operator()(v145, "dir", 0);
+          v187 = v144;
+          v143 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v144->GetValue)(v144, v237);
+          v13 = std::string::c_str(v143);
+          iDir = j__atoi(v13);
+          std::string::~string(v237);
+          if ( iDir == -1 )
+          {
+            v188 = 0;
           }
           else
           {
-            v170 = 0;
+            v188 = iDir;
           }
-          v121 = v170;
+          SettlerJobFrameCount = CGfxManager::GetSettlerJobFrameCount(g_pGfxManager, v212, iJobNr, v188);
+          iTaskFrameCount = SettlerJobFrameCount;
+          if ( SettlerJobFrameCount == 1 )
+          {
+            v31 = std::string::c_str(&v245);
+            v30 = std::string::c_str(&v247);
+            v14 = std::string::c_str(&v246);
+            BBSupportTracePrintF(3, "WARNING: There is a problem in job %s of race %s with job part %s!", v14, v30, v31);
+          }
+          v141 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
+          v140 = AdvXMLParser::Element::operator()(v141, "duration", 0);
+          v190 = v140;
+          v139 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v140->GetValue)(v140, v238);
+          v15 = std::string::c_str(v139);
+          iDuration = j__atoi(v15);
+          std::string::~string(v238);
+          if ( iDuration >= 128 )
+          {
+            v138 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 294, "duration < 128");
+            if ( v138 == 1 )
+            {
+              __debugbreak();
+            }
+          }
+          if ( iDuration == 0 )
+          {
+            iDuration = iTaskFrameCount;
+          }
+          v137 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
+          v136 = AdvXMLParser::Element::operator()(v137, "entity", 0);
+          v177 = v136;
+          v50[17] = ((int (__thiscall *)(AdvXMLParser::Element *, std::string *))v136->GetValue)(v136, &v242);
           LOBYTE(v249) = 28;
-          this->m_vSettlerJobsList[v212][v211] = v170;
-          std::list<CEntityTask>::clear(this->m_vSettlerJobsList[v212][v211]);
+          v135 = CConfigManagerPtr::GetInstance();
+          v189 = v135;
+          v16 = std::string::c_str(&v242);
+          iEntity = v189->GetDefineValue(v189, v16);
+          if ( iEntity == -1 )
+          {
+            iEntity = 0;
+          }
+          v133 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
+          v132 = AdvXMLParser::Element::operator()(v133, "task", 0);
+          v179 = v132;
+          v131 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v132->GetValue)(v132, v227);
+          v130 = v131;
+          LOBYTE(v249) = 29;
+          v17 = std::string::c_str(v131);
+          v50[16] = std::string::string(&v240, v17);
+          LOBYTE(v249) = 30;
+          v129 = CDefineTranslator::GetValueOfDefine(v207, &v240);
+          iTask = v129;
+          LOBYTE(v249) = 29;
+          std::string::~string(&v240);
+          LOBYTE(v249) = 28;
+          std::string::~string(v227);
+          v128 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
+          v127 = AdvXMLParser::Element::operator()(v128, "trigger", 0);
+          v172 = v127;
+          v126 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v127->GetValue)(v127, v228);
+          v125 = v126;
+          LOBYTE(v249) = 31;
+          v18 = std::string::c_str(v126);
+          v50[15] = std::string::string(&v241, v18);
+          LOBYTE(v249) = 32;
+          iTrigger = CDefineTranslator::GetValueOfDefine(v207, &v241);
+          LOBYTE(v249) = 31;
+          std::string::~string(&v241);
+          LOBYTE(v249) = 28;
+          std::string::~string(v228);
+          if ( this->m_vSettlerJobsList[v212][v211] == 0 )
+          {
+            v123 = operator new(0xCu);
+            v171 = v123;
+            LOBYTE(v249) = 33;
+            if ( v123 != 0 )
+            {
+              v122 = std::list<CEntityTask>::list<CEntityTask>(v171);
+              v170 = (std::list *)v122;
+            }
+            else
+            {
+              v170 = 0;
+            }
+            v121 = v170;
+            LOBYTE(v249) = 28;
+            this->m_vSettlerJobsList[v212][v211] = v170;
+            std::list<CEntityTask>::clear(this->m_vSettlerJobsList[v212][v211]);
+          }
+          v120 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
+          v119 = AdvXMLParser::Element::operator()(v120, "visible", 0);
+          v169 = v119;
+          v118 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v119->GetValue)(v119, v230);
+          v117 = v118;
+          LOBYTE(v249) = 34;
+          v19 = std::string::c_str(v118);
+          bVisible = j__atoi(v19) != 0;
+          v116 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
+          v115 = AdvXMLParser::Element::operator()(v116, "forward", 0);
+          v168 = v115;
+          v114 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v115->GetValue)(v115, v229);
+          v113 = v114;
+          LOBYTE(v249) = 35;
+          v20 = std::string::c_str(v114);
+          bForward = j__atoi(v20) != 0;
+          v108 = CEntityTask::CEntityTask(&v33, iTask, iJobNr, iX, iY, iDuration, iTaskFrameCount, iDir, bForward, bVisible, iEntity, 0, 0, iTrigger);
+          std::list<CEntityTask>::push_back(this->m_vSettlerJobsList[v212][v211], (int)v108);
+          LOBYTE(v249) = 34;
+          std::string::~string(v229);
+          LOBYTE(v249) = 28;
+          std::string::~string(v230);
+          LOBYTE(v249) = 25;
+          std::string::~string(&v242);
+          LOBYTE(v249) = 24;
+          std::string::~string(&v245);
+          AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v200);
         }
-        v120 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
-        v119 = AdvXMLParser::Element::operator()(v120, "visible", 0);
-        v169 = v119;
-        v118 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v119->GetValue)(v119, v230);
-        v117 = v118;
-        LOBYTE(v249) = 34;
-        v19 = std::string::c_str(v118);
-        bVisible = j__atoi(v19) != 0;
-        v116 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v200);
-        v115 = AdvXMLParser::Element::operator()(v116, "forward", 0);
-        v168 = v115;
-        v114 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v115->GetValue)(v115, v229);
-        v113 = v114;
-        LOBYTE(v249) = 35;
-        v20 = std::string::c_str(v114);
-        bForward = j__atoi(v20) != 0;
-        v108 = CEntityTask::CEntityTask(&v33, iTask, iJobNr, iX, iY, iDuration, iTaskFrameCount, iDir, bForward, bVisible, iEntity, 0, 0, iTrigger);
-        std::list<CEntityTask>::push_back(this->m_vSettlerJobsList[v212][v211], (int)v108);
-        LOBYTE(v249) = 34;
-        std::string::~string(v229);
-        LOBYTE(v249) = 28;
-        std::string::~string(v230);
-        LOBYTE(v249) = 25;
-        std::string::~string(&v242);
-        LOBYTE(v249) = 24;
-        std::string::~string(&v245);
-        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v200);
+        LOBYTE(v249) = 21;
+        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v47);
+        LOBYTE(v249) = 18;
+        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v200);
+        LOBYTE(v249) = 17;
+        std::string::~string(&v246);
+        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v52);
       }
-      LOBYTE(v249) = 21;
-      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v47);
-      LOBYTE(v249) = 18;
-      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v200);
-      LOBYTE(v249) = 17;
-      std::string::~string(&v246);
-      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v52);
+      LOBYTE(v249) = 14;
+      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v50);
+      LOBYTE(v249) = 11;
+      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v52);
+      LOBYTE(v249) = 10;
+      std::string::~string(&v247);
+      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v51);
     }
-    LOBYTE(v249) = 14;
-    AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v50);
-    LOBYTE(v249) = 11;
-    AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v52);
-    LOBYTE(v249) = 10;
-    std::string::~string(&v247);
-    AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v51);
-  }
-  LOBYTE(v249) = 7;
-  AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v49);
-  LOBYTE(v249) = 4;
-  AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v51);
-  LOBYTE(v249) = 3;
-  std::auto_ptr<AdvXMLParser::Document>::~auto_ptr<AdvXMLParser::Document>(v199);
-  LOBYTE(v249) = 2;
-  AdvXMLParser::Parser::~Parser(v37);
-  v249 = -1;
-  C = v214;
-  operator delete[](v214);
-  memset(CEntityToDoListMgr::m_vJobSoundInfo, 0, sizeof(CEntityToDoListMgr::m_vJobSoundInfo));
-  v210 = 0;
-  v214 = (char *)AdvXMLParser::Parser::OpenXMLFile(aGamedataJobsou, &v210);
-  if ( !v214 )
-  {
-    return this;
-  }
-  v249 = 38;
-  v50[8] = AdvXMLParser::Parser::Parser(v38);
-  LOBYTE(v249) = 39;
-  v106 = AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v38, v214, v210);
-  std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>(v106);
-  LOBYTE(v249) = 40;
-  v21 = std::auto_ptr<AdvXMLParser::Document>::operator->(v32);
-  v105 = (void *)AdvXMLParser::Document::GetRoot(v21);
-  v198 = v105;
-  v104 = CDefineTranslator::Instance();
-  v50[13] = v104;
-  v50[12] = 0;
-  v103 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v198, v40);
-  v102 = v103;
-  LOBYTE(v249) = 41;
-  v50[11] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v166, v103);
-  LOBYTE(v249) = 43;
-  AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v40);
-  v101 = AdvXMLParser::NodeContainer::End(v198, v39);
-  v100 = v101;
-  LOBYTE(v249) = 44;
-  v50[10] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v48, v101);
-  LOBYTE(v249) = 46;
-  AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v39);
-  while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v166, (int)v48) )
-  {
-    v99 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
-    v50[9] = v99;
-    v98 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
-    v97 = AdvXMLParser::Element::operator[](v98, "id");
-    v197 = v97;
-    v50[30] = v97->GetValue(v97, &v244);
-    LOBYTE(v249) = 47;
-    v96 = CConfigManagerPtr::GetInstance();
-    v196 = v96;
-    v22 = std::string::c_str(&v244);
-    v95 = v196->GetDefineValue(v196, v22);
-    v204 = v95;
-    if ( v95 <= 0 || v204 >= 367 )
+    LOBYTE(v249) = 7;
+    AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v49);
+    LOBYTE(v249) = 4;
+    AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v51);
+    LOBYTE(v249) = 3;
+    std::auto_ptr<AdvXMLParser::Document>::~auto_ptr<AdvXMLParser::Document>(v199);
+    LOBYTE(v249) = 2;
+    AdvXMLParser::Parser::~Parser(v37);
+    v249 = -1;
+    C = v214;
+    operator delete[](v214);
+    memset(CEntityToDoListMgr::m_vJobSoundInfo, 0, sizeof(CEntityToDoListMgr::m_vJobSoundInfo));
+    v210 = 0;
+    v214 = (char *)AdvXMLParser::Parser::OpenXMLFile(L"GameData\\jobSoundList.xml", &v210);
+    if ( v214 != 0 )
     {
-      v94 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 417, "( index > 0) && ( index < SIV_MAX_JOB )");
-      if ( v94 == 1 )
+      v249 = 38;
+      v50[8] = AdvXMLParser::Parser::Parser(v38);
+      LOBYTE(v249) = 39;
+      v106 = AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v38, v214, v210);
+      std::auto_ptr<AdvXMLParser::Document>::auto_ptr<AdvXMLParser::Document>(v106);
+      LOBYTE(v249) = 40;
+      v21 = std::auto_ptr<AdvXMLParser::Document>::operator->(v32);
+      v105 = (void *)AdvXMLParser::Document::GetRoot(v21);
+      v198 = v105;
+      v104 = CDefineTranslator::Instance();
+      v50[13] = v104;
+      v50[12] = 0;
+      v103 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v198, v40);
+      v102 = v103;
+      LOBYTE(v249) = 41;
+      v50[11] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v166, v103);
+      LOBYTE(v249) = 43;
+      AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v40);
+      v101 = AdvXMLParser::NodeContainer::End(v198, v39);
+      v100 = v101;
+      LOBYTE(v249) = 44;
+      v50[10] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v48, v101);
+      LOBYTE(v249) = 46;
+      AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v39);
+      while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v166, (int)v48) )
       {
-        __debugbreak();
+        v99 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
+        v50[9] = v99;
+        v98 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
+        v97 = AdvXMLParser::Element::operator[](v98, "id");
+        v197 = v97;
+        v50[30] = v97->GetValue(v97, &v244);
+        LOBYTE(v249) = 47;
+        v96 = CConfigManagerPtr::GetInstance();
+        v196 = v96;
+        v22 = std::string::c_str(&v244);
+        v95 = v196->GetDefineValue(v196, v22);
+        v204 = v95;
+        if ( v95 <= 0 || v204 >= 367 )
+        {
+          v94 = BBSupportDbgReport(2, "MapObjects\\EntityToDoListMgr.cpp", 417, "( index > 0) && ( index < SIV_MAX_JOB )");
+          if ( v94 == 1 )
+          {
+            __debugbreak();
+          }
+        }
+        v215 = &CEntityToDoListMgr::m_vJobSoundInfo[v204];
+        v93 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
+        v92 = AdvXMLParser::Element::operator()(v93, "sound", 0);
+        v91 = AdvXMLParser::Element::operator[](v92, "id");
+        v195 = v91;
+        v90 = (std::string *)v91->GetValue(v91, &v231);
+        v89 = v90;
+        LOBYTE(v249) = 48;
+        v23 = std::string::c_str(v90);
+        v50[29] = std::string::string((std::string *)v243, v23);
+        LOBYTE(v249) = 50;
+        std::string::~string(&v231);
+        v88 = CConfigManagerPtr::GetInstance();
+        v194 = v88;
+        v24 = std::string::c_str((std::string *)v243);
+        v87 = v194->GetDefineValue(v194, v24);
+        v215->m_iId = v87;
+        if ( v215->m_iId == -1 )
+        {
+          v215->m_iId = 0;
+        }
+        v86 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
+        v85 = AdvXMLParser::Element::operator()(v86, "sound", 0);
+        v84 = AdvXMLParser::Element::operator()(v85, "frame", 0);
+        v193 = v84;
+        v83 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v84->GetValue)(v84, v232);
+        v25 = std::string::c_str(v83);
+        v26 = j__atoi(v25);
+        v215->m_iFrame = v26;
+        std::string::~string(v232);
+        v82 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
+        v81 = AdvXMLParser::Element::operator()(v82, "sound", 0);
+        v80 = AdvXMLParser::Element::operator()(v81, "random", 0);
+        v192 = v80;
+        v79 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v80->GetValue)(v80, v233);
+        v27 = std::string::c_str(v79);
+        v28 = j__atoi(v27);
+        v215->m_iRandom = v28;
+        std::string::~string(v233);
+        if ( v215->m_iRandom == 0 )
+        {
+          v215->m_iRandom = 100;
+        }
+        LOBYTE(v249) = 47;
+        std::string::~string(v243);
+        LOBYTE(v249) = 46;
+        std::string::~string(&v244);
+        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v166);
       }
+      LOBYTE(v249) = 43;
+      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v48);
+      LOBYTE(v249) = 40;
+      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v166);
+      LOBYTE(v249) = 39;
+      std::auto_ptr<AdvXMLParser::Document>::~auto_ptr<AdvXMLParser::Document>(v191);
+      LOBYTE(v249) = 38;
+      AdvXMLParser::Parser::~Parser(v38);
+      v249 = -1;
+      v78 = v214;
+      operator delete[](v214);
     }
-    v215 = &CEntityToDoListMgr::m_vJobSoundInfo[v204];
-    v93 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
-    v92 = AdvXMLParser::Element::operator()(v93, "sound", 0);
-    v91 = AdvXMLParser::Element::operator[](v92, "id");
-    v195 = v91;
-    v90 = (std::string *)v91->GetValue(v91, &v231);
-    v89 = v90;
-    LOBYTE(v249) = 48;
-    v23 = std::string::c_str(v90);
-    v50[29] = std::string::string((std::string *)v243, v23);
-    LOBYTE(v249) = 50;
-    std::string::~string(&v231);
-    v88 = CConfigManagerPtr::GetInstance();
-    v194 = v88;
-    v24 = std::string::c_str((std::string *)v243);
-    v87 = v194->GetDefineValue(v194, v24);
-    v215->m_iId = v87;
-    if ( v215->m_iId == -1 )
-    {
-      v215->m_iId = 0;
-    }
-    v86 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
-    v85 = AdvXMLParser::Element::operator()(v86, "sound", 0);
-    v84 = AdvXMLParser::Element::operator()(v85, "frame", 0);
-    v193 = v84;
-    v83 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v84->GetValue)(v84, v232);
-    v25 = std::string::c_str(v83);
-    v26 = j__atoi(v25);
-    v215->m_iFrame = v26;
-    std::string::~string(v232);
-    v82 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v166);
-    v81 = AdvXMLParser::Element::operator()(v82, "sound", 0);
-    v80 = AdvXMLParser::Element::operator()(v81, "random", 0);
-    v192 = v80;
-    v79 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v80->GetValue)(v80, v233);
-    v27 = std::string::c_str(v79);
-    v28 = j__atoi(v27);
-    v215->m_iRandom = v28;
-    std::string::~string(v233);
-    if ( !v215->m_iRandom )
-    {
-      v215->m_iRandom = 100;
-    }
-    LOBYTE(v249) = 47;
-    std::string::~string(v243);
-    LOBYTE(v249) = 46;
-    std::string::~string(&v244);
-    AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v166);
   }
-  LOBYTE(v249) = 43;
-  AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v48);
-  LOBYTE(v249) = 40;
-  AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v166);
-  LOBYTE(v249) = 39;
-  std::auto_ptr<AdvXMLParser::Document>::~auto_ptr<AdvXMLParser::Document>(v191);
-  LOBYTE(v249) = 38;
-  AdvXMLParser::Parser::~Parser(v38);
-  v249 = -1;
-  v78 = v214;
-  operator delete[](v214);
   return this;
 }
 
@@ -785,10 +783,10 @@
           j < 267;
           ++j )
     {
-      if ( this->m_vSettlerJobsList[i][j] && this->m_vSettlerJobsList[i][j] != this->m_vSettlerJobsList[0][j] )
+      if ( this->m_vSettlerJobsList[i][j] != 0 && this->m_vSettlerJobsList[i][j] != this->m_vSettlerJobsList[0][j] )
       {
         std::list<CEntityTask>::clear(this->m_vSettlerJobsList[i][j]);
-        if ( this->m_vSettlerJobsList[i][j] )
+        if ( this->m_vSettlerJobsList[i][j] != 0 )
         {
           std::list<CEntityTask>::`scalar deleting destructor'(1);
         }
@@ -800,10 +798,10 @@
         k < 267;
         ++k )
   {
-    if ( this->m_vSettlerJobsList[0][k] )
+    if ( this->m_vSettlerJobsList[0][k] != 0 )
     {
       std::list<CEntityTask>::clear(this->m_vSettlerJobsList[0][k]);
-      if ( this->m_vSettlerJobsList[0][k] )
+      if ( this->m_vSettlerJobsList[0][k] != 0 )
       {
         std::list<CEntityTask>::`scalar deleting destructor'(1);
       }

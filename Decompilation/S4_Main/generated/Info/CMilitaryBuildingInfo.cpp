@@ -8,7 +8,7 @@
  CMilitaryBuildingInfo::CMilitaryBuildingInfo(void) {
   
   CBuildingInfo::CBuildingInfo(this);
-  *(_DWORD *)this = &CMilitaryBuildingInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CMilitaryBuildingInfo::_vftable_;
   return this;
 }
 

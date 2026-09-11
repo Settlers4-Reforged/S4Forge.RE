@@ -103,7 +103,7 @@ int  IEntity::WarriorType(void)const {
 // Decompiled from int __thiscall IEntity::X(IEntity *this)
 int  IEntity::X(void)const {
   
-  return Y16X16::UnpackXFast(this->m_uPackedXY);
+  return Y16X16::UnpackXFast((unsigned __int16)this->m_uPackedXY);
 }
 
 
@@ -291,10 +291,10 @@ bool  IEntity::IsSelected(void)const {
   {
     CWarMap::RemoveEntity(this);
   }
-  if ( this->m_psAIEntityInfo )
+  if ( this->m_psAIEntityInfo != 0 )
   {
     m_psAIEntityInfo = this->m_psAIEntityInfo;
-    if ( m_psAIEntityInfo )
+    if ( m_psAIEntityInfo != 0 )
     {
       delete m_psAIEntityInfo;
     }
@@ -310,7 +310,7 @@ bool  IEntity::IsSelected(void)const {
 // Decompiled from struct IEntity *__thiscall IEntity::IEntity(struct IEntity *this, struct std::istream *inputFile)
  IEntity::IEntity(std::istream & inputFile) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   struct IEntity *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
@@ -330,10 +330,10 @@ bool  IEntity::IsSelected(void)const {
   }
   operator^<unsigned short>(inputFile, &v5->m_iEntityId);
   operator^<unsigned short>(inputFile, &v5->m_iType);
-  operator^<int>(inputFile, &v5->m_uPackedXY);
+  operator^<int>(inputFile, (int *)&v5->m_uPackedXY);
   operator^<unsigned char>(inputFile, &v5->m_iLivePoints);
-  operator^<unsigned char>(inputFile, &v5->m_uObjType);
-  operator^<unsigned char>(inputFile, &v5->m_packedTribePlayer);
+  operator^<unsigned char>(inputFile, (unsigned __int8 *)&v5->m_uObjType);
+  operator^<unsigned char>(inputFile, (unsigned __int8 *)&v5->m_packedTribePlayer);
   operator^<int>(inputFile, &v5->m_iFlags);
   operator^<int>(inputFile, &v5->m_iUniqueId);
   v5->m_psAIEntityInfo = 0;
@@ -351,10 +351,10 @@ void  IEntity::Store(std::ostream & a2) {
 
   CPersistence::Store(this, a2);
   v2 = 2;
-  operator^<unsigned int>(a2, &v2);
+  operator^<unsigned int>(a2, (unsigned int *)&v2);
   operator^<unsigned short>(a2, &this->m_iEntityId);
   operator^<unsigned short>(a2, &this->m_iType);
-  operator^<int>(a2, &this->m_uPackedXY);
+  operator^<int>(a2, (int *)&this->m_uPackedXY);
   operator^<unsigned char>(a2, &this->m_iLivePoints);
   operator^<unsigned char>(a2, (BYTE *)&this->m_uObjType);
   operator^<unsigned char>(a2, (BYTE *)&this->m_packedTribePlayer);
@@ -445,7 +445,7 @@ int  IEntity::MaxHitpoints(void)const {
 // Decompiled from void __thiscall IEntity::SetAIEntityInfoPtr(IEntity *this, struct CAIEntityInfo *a2)
 void  IEntity::SetAIEntityInfoPtr(class CAIEntityInfo * a2) {
   
-  if ( this->m_psAIEntityInfo )
+  if ( this->m_psAIEntityInfo != 0 )
   {
     delete this->m_psAIEntityInfo;
   }
@@ -469,7 +469,7 @@ void  IEntity::DbgPrint(int logLevel, char const * customMessage) {
   int y; // [esp-4h] [ebp-Ch]
   const char *message; // [esp+0h] [ebp-8h]
 
-  if ( customMessage )
+  if ( customMessage != 0 )
   {
     message = customMessage;
   }
@@ -520,7 +520,7 @@ void  IEntity::PlaceInMapObjectLayer(int packedXY) {
     __debugbreak();
   }
   worldIndex = CWorldManager::Index(x, y);
-  if ( CWorldManager::MapObjectId(worldIndex) && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 302, "g_cWorld.MapObjectId(iEntityWorldIdx) == 0") == 1 )
+  if ( CWorldManager::MapObjectId(worldIndex) != 0 && BBSupportDbgReport(2, "MapObjects\\Entity.cpp", 302, "g_cWorld.MapObjectId(iEntityWorldIdx) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -622,7 +622,7 @@ int  IEntity::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
 // Decompiled from void __thiscall IEntity::AddToWarMap(IEntity *this)
 void  IEntity::AddToWarMap(void) {
   
-  if ( IEntity::FlagBits(this, ENTITY_FLAG_Ready) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Ready) != 0 )
   {
     CWarMap::AddEntity(this);
   }

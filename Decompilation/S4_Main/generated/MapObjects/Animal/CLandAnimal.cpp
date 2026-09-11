@@ -9,7 +9,7 @@ class CPersistence * __cdecl CLandAnimal::New(std::istream & a1) {
   CLandAnimal *v3; // [esp+Ch] [ebp-10h]
 
   v3 = (CLandAnimal *)CLandAnimal::operator new(0xB0u);
-  if ( v3 )
+  if ( v3 != 0 )
   {
     return CLandAnimal::CLandAnimal(v3, a1);
   }
@@ -39,9 +39,9 @@ void  CLandAnimal::Init(struct SAnimalData * a2) {
   CPropertySet *v15; // [esp+20h] [ebp-10h]
   int v16; // [esp+2Ch] [ebp-4h]
 
-  v15 = this;
-  *((_DWORD *)this + 29) = a2;
-  if ( *(_BYTE *)(*((_DWORD *)v15 + 29) + 4) )
+  v15 = (CPropertySet *)this;
+  *(_DWORD *)&this->unk_74 = a2;
+  if ( *(_BYTE *)(*((_DWORD *)v15 + 29) + 4) != 0 )
   {
     IEntity::SetFlagBits(v15, (EntityFlag)((char *)&loc_20200FC + 4));
   }
@@ -50,23 +50,23 @@ void  CLandAnimal::Init(struct SAnimalData * a2) {
     IEntity::SetFlagBits(v15, (EntityFlag)&byte_20000CA[54]);
   }
   *((_BYTE *)v15 + 70) = 0;
-  v2 = CWalking::Create(0, 0);
-  std::auto_ptr<CWalking>::auto_ptr<CWalking>(v2);
+  v2 = (int)CWalking::Create(0, 0);
+  ((void (__stdcall *)(int))std::auto_ptr<CWalking>::auto_ptr<CWalking>)(v2);
   v16 = 0;
-  std::auto_ptr<CWalking>::operator=(v13);
-  v14 = std::auto_ptr<CWalking>::operator->(v9);
+  std::auto_ptr<CWalking>::operator=((int)v13);
+  v14 = ((_DWORD (__cdecl *)(_DWORD))std::auto_ptr<CWalking>::operator->)(v9);
   (*(void (__thiscall **)(int, int))(*(_DWORD *)v14 + 8))(v14, -1);
   v8 = *((_WORD *)v15 + 4);
   v7 = IEntity::Y(v15);
   v3 = IEntity::X(v15);
   CWorldManager::SetSettlerId(v3, v7, v8);
-  CWarMap::AddEntity(v15);
-  v4 = IEntity::PackedXY(v15);
+  CWarMap::AddEntity((IEntity *)v15);
+  v4 = IEntity::PackedXY((IEntity *)v15);
   *((_DWORD *)v15 + 41) = v4;
-  v12 = std::list<CEntityTask>::begin(v10);
+  v12 = ((int (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v10);
   v11 = v12;
   LOBYTE(v16) = 1;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(v12);
+  ((void (__stdcall *)(int))std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=)(v12);
   LOBYTE(v16) = 0;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v10);
   v5 = CStateGame::Rand(g_pGame);
@@ -82,12 +82,12 @@ void  CLandAnimal::Init(struct SAnimalData * a2) {
 // Decompiled from void *__cdecl CLandAnimal::operator new(unsigned int a1)
 void * __cdecl CLandAnimal::operator new(unsigned int a1) {
   
-  return CAnimalMgr::Alloc((CAnimalMgr *)&g_cAnimalMgr, a1);
+  return (void *)CAnimalMgr::Alloc((CAnimalMgr *)&g_cAnimalMgr, a1);
 }
 
 
 // address=[0x14e1050]
-// Decompiled from void __cdecl CLandAnimal::operator delete(void *a1)
+// Decompiled from void __cdecl CLandAnimal::operator delete(_DWORD *a1)
 void __cdecl CLandAnimal::operator delete(void * a1) {
   
   CAnimalMgr::Dealloc((CAnimalMgr *)&g_cAnimalMgr, a1);
@@ -106,7 +106,7 @@ int  CLandAnimal::GetGoodType(void)const {
 // Decompiled from void __thiscall CLandAnimal::Decrease(CLandAnimal *this, int a2)
 void  CLandAnimal::Decrease(int a2) {
   
-  if ( *((_DWORD *)this + 25) != 5 )
+  if ( *(_DWORD *)&this->unk_64 != 5 )
   {
     IEntity::ClearFlagBits(this, (EntityFlag)&loc_3000000);
     CAnimal::TakeDieJob(this);
@@ -120,7 +120,7 @@ void  CLandAnimal::Take(int a2) {
   
   int v2; // eax
 
-  v2 = IEntity::ID();
+  v2 = ((int (__stdcall *)())IEntity::ID)();
   CAnimalMgr::DeleteAnimal((CAnimalMgr *)&g_cAnimalMgr, v2);
 }
 
@@ -133,45 +133,45 @@ void  CLandAnimal::Take(int a2) {
   int v3; // eax
   int v5; // [esp-4h] [ebp-24h]
   unsigned int v6; // [esp+8h] [ebp-18h] BYREF
-  unsigned __int16 *v7; // [esp+Ch] [ebp-14h]
+  CLandAnimal *v7; // [esp+Ch] [ebp-14h]
   unsigned __int8 v8; // [esp+13h] [ebp-Dh] BYREF
   int v9; // [esp+1Ch] [ebp-4h]
 
-  v7 = this;
-  CAnimal::CAnimal(a2);
+  v7 = (CLandAnimal *)this;
+  ((void (__stdcall *)(int))CAnimal::CAnimal)(a2);
   v9 = 0;
-  *(_DWORD *)v7 = &CLandAnimal::_vftable_;
+  v7->__vftable = (CAnimal_vtbl *)&CLandAnimal::_vftable_;
   operator^<unsigned int>(a2, &v6);
-  if ( v6 )
+  if ( v6 != 0 )
   {
-    operator^<int>(a2, (int)(v7 + 70));
-    operator^<int>(a2, (int)(v7 + 72));
-    operator^<int>(a2, (int)(v7 + 74));
-    operator^<int>(a2, (int)(v7 + 80));
-    operator^<int>(a2, (int)(v7 + 82));
-    operator^<int>(a2, (int)(v7 + 84));
-    *((_DWORD *)v7 + 43) = -1;
-    *((_DWORD *)v7 + 39) = 0;
-    *((_DWORD *)v7 + 38) = 0;
+    operator^<int>((struct std::istream *)a2, (int *)&v7->unk_7c);
+    operator^<int>((struct std::istream *)a2, (int *)&v7->unk_80);
+    operator^<int>((struct std::istream *)a2, (int *)&v7->unk_84);
+    operator^<int>((struct std::istream *)a2, (int *)&v7->unk_90);
+    operator^<int>((struct std::istream *)a2, (int *)&v7->unk_94);
+    operator^<int>((struct std::istream *)a2, (int *)&v7->unk_98);
+    v7->unk_9c = -1;
+    v7->unk_8c = 0;
+    v7->unk_88 = 0;
   }
   if ( v6 >= 2 )
   {
-    operator^<int>(a2, (int)(v7 + 86));
+    operator^<int>((struct std::istream *)a2, (int *)&v7->unk_9c);
     operator^<unsigned char>(a2, &v8);
   }
   if ( v6 >= 3 )
   {
-    operator^<int>(a2, (int)(v7 + 78));
-    operator^<int>(a2, (int)(v7 + 76));
+    operator^<int>((struct std::istream *)a2, (int *)&v7->unk_8c);
+    operator^<int>((struct std::istream *)a2, (int *)&v7->unk_88);
   }
-  std::list<CEntityTask>::clear();
-  *((_DWORD *)v7 + 21) = v7 + 52;
+  ((void (__cdecl *)())std::list<CEntityTask>::clear)();
+  v7->m_pToDoList = (std::list *)&v7->unk_66[2];
   v2 = IEntity::Type(v7);
-  CAnimalMgr::InitAnimalJobs((struct CAnimal *)v7, v2);
+  CAnimalMgr::InitAnimalJobs(v7, v2);
   v5 = v8;
   v3 = IEntity::Type(v7);
-  CLandAnimal::PostLoadInit((CLandAnimal *)v7, (struct SAnimalData *)&CAnimalMgr::m_asAnimalData[10 * v3], v5);
-  return v7;
+  CLandAnimal::PostLoadInit(v7, (struct SAnimalData *)&CAnimalMgr::m_asAnimalData[10 * v3], v5);
+  return (unsigned __int16 *)v7;
 }
 
 
@@ -190,28 +190,28 @@ void  CLandAnimal::Store(std::ostream & a2) {
   int v11; // [esp+38h] [ebp-4h]
 
   v8 = this;
-  CAnimal::Store((int)a2);
+  ((void (__stdcall *)(int))CAnimal::Store)((int)a2);
   v7 = 3;
-  operator^<unsigned int>(a2, &v7);
-  operator^<int>((int)a2, v8 + 35);
-  operator^<int>((int)a2, v8 + 36);
-  operator^<int>((int)a2, v8 + 37);
-  operator^<int>((int)a2, v8 + 40);
-  operator^<int>((int)a2, v8 + 41);
-  operator^<int>((int)a2, v8 + 42);
-  operator^<int>((int)a2, v8 + 43);
+  operator^<unsigned int>(a2, (unsigned int *)&v7);
+  operator^<int>(a2, v8 + 35);
+  operator^<int>(a2, v8 + 36);
+  operator^<int>(a2, v8 + 37);
+  operator^<int>(a2, v8 + 40);
+  operator^<int>(a2, v8 + 41);
+  operator^<int>(a2, v8 + 42);
+  operator^<int>(a2, v8 + 43);
   LOBYTE(v10) = 0;
-  std::list<CEntityTask>::begin(v4);
+  ((void (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v4);
   v11 = 0;
   while ( 1 )
   {
-    v6 = (std::_Iterator_base12 *)std::list<CEntityTask>::end(v3);
+    v6 = (std::_Iterator_base12 *)((std::_Iterator_base12 *(__stdcall *)(_BYTE *))std::list<CEntityTask>::end)(v3);
     v5 = v6;
     LOBYTE(v11) = 1;
     v9 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=(v6);
     LOBYTE(v11) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v3);
-    if ( !v9 || (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==((std::_Iterator_base12 *)(v8 + 22)) )
+    if ( v9 == 0 || (unsigned __int8)((int (__stdcall *)(std::_Iterator_base12 *))std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==)((std::_Iterator_base12 *)(v8 + 22)) != 0 )
     {
       break;
     }
@@ -220,9 +220,9 @@ void  CLandAnimal::Store(std::ostream & a2) {
   }
   v11 = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v4);
-  operator^<unsigned char>(a2, (int)&v10);
-  operator^<int>((int)a2, v8 + 39);
-  return operator^<int>((int)a2, v8 + 38);
+  operator^<unsigned char>(a2, (unsigned __int8 *)&v10);
+  operator^<int>(a2, v8 + 39);
+  return operator^<int>(a2, v8 + 38);
 }
 
 
@@ -242,17 +242,17 @@ unsigned long  CLandAnimal::ClassID(void)const {
  CLandAnimal::CLandAnimal(int a2, int a3, int a4, int a5) {
   
   CAnimal::CAnimal(this, a2, a3, a4, a5);
-  *(_DWORD *)this = &CLandAnimal::_vftable_;
-  *((_DWORD *)this + 43) = 0;
-  std::list<CEntityTask>::clear();
-  *((_DWORD *)this + 21) = (char *)this + 104;
-  *((_DWORD *)this + 36) = 0;
-  *((_DWORD *)this + 37) = 0;
-  *((_DWORD *)this + 42) = -1;
-  *((_DWORD *)this + 35) = 0;
-  *((_DWORD *)this + 38) = 0;
-  *((_DWORD *)this + 39) = 0;
-  *((_DWORD *)this + 40) = 0;
+  this->__vftable = (CAnimal_vtbl *)&CLandAnimal::_vftable_;
+  this->unk_9c = 0;
+  ((void (__cdecl *)())std::list<CEntityTask>::clear)();
+  this->m_pToDoList = (std::list *)&this->unk_66[2];
+  this->unk_80 = 0;
+  this->unk_84 = 0;
+  this->unk_98 = -1;
+  this->unk_7c = 0;
+  this->unk_88 = 0;
+  this->unk_8c = 0;
+  this->unk_90 = 0;
   return this;
 }
 
@@ -261,7 +261,7 @@ unsigned long  CLandAnimal::ClassID(void)const {
 // Decompiled from int __thiscall CLandAnimal::~CLandAnimal(CLandAnimal *this)
  CLandAnimal::~CLandAnimal(void) {
   
-  *(_DWORD *)this = &CLandAnimal::_vftable_;
+  this->__vftable = (CAnimal_vtbl *)&CLandAnimal::_vftable_;
   return CAnimal::~CAnimal(this);
 }
 
@@ -280,22 +280,22 @@ void  CLandAnimal::PostLoadInit(struct SAnimalData * a2, int a3) {
   CPropertySet *v11; // [esp+20h] [ebp-10h]
   int v12; // [esp+2Ch] [ebp-4h]
 
-  v11 = this;
-  *((_DWORD *)this + 29) = a2;
-  v3 = CWalking::Create(0, 0);
-  std::auto_ptr<CWalking>::auto_ptr<CWalking>(v3);
+  v11 = (CPropertySet *)this;
+  *(_DWORD *)&this->unk_74 = a2;
+  v3 = (int)CWalking::Create(0, 0);
+  ((void (__stdcall *)(int))std::auto_ptr<CWalking>::auto_ptr<CWalking>)(v3);
   v12 = 0;
-  std::auto_ptr<CWalking>::operator=(v9);
-  v10 = std::auto_ptr<CWalking>::operator->(v5);
+  std::auto_ptr<CWalking>::operator=((int)v9);
+  v10 = ((_DWORD (__cdecl *)(_DWORD))std::auto_ptr<CWalking>::operator->)(v5);
   (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v10 + 8))(v10, -1, 0);
-  CWarMap::AddEntity(v11);
-  v8 = std::list<CEntityTask>::begin(v6);
+  CWarMap::AddEntity((IEntity *)v11);
+  v8 = ((int (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v6);
   v7 = v8;
   LOBYTE(v12) = 1;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(v8);
+  ((void (__stdcall *)(int))std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=)(v8);
   LOBYTE(v12) = 0;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v6);
-  while ( a3 )
+  while ( a3 != 0 )
   {
     IMovingEntity::IncToDoListIter(v11);
     --a3;
@@ -336,7 +336,7 @@ void  CLandAnimal::LogicUpdateSpec(void) {
   v14 = CWorldManager::Index(v1);
   if ( IEntity::Type(this) == 2 || IEntity::Type(this) == 3 )
   {
-    if ( CWorldManager::FlagBits(v14, 4u) )
+    if ( CWorldManager::FlagBits(v14, 4u) != 0 )
     {
       this->unk_88 = 0;
     }
@@ -351,7 +351,7 @@ void  CLandAnimal::LogicUpdateSpec(void) {
       return;
     }
   }
-  else if ( CWorldManager::FlagBits(v14, 4u) )
+  else if ( CWorldManager::FlagBits(v14, 4u) != 0 )
   {
     if ( (int)++this->unk_88 > 0 )
     {
@@ -368,7 +368,7 @@ void  CLandAnimal::LogicUpdateSpec(void) {
   {
     this->unk_88 = 0;
   }
-  if ( *(_BYTE *)(*(_DWORD *)&this->unk_74 + 5) )
+  if ( *(_BYTE *)(*(_DWORD *)&this->unk_74 + 5) != 0 )
   {
     ++this->unk_7c;
     if ( *(_DWORD *)&this->unk_64 == 3 || (int)this->unk_7c > 1 )
@@ -487,9 +487,9 @@ int  CLandAnimal::GetMoveDir(void) {
   _DWORD v38[14]; // [esp+58h] [ebp-3Ch] BYREF
 
   v1 = (Squares *)IEntity::X(this);
-  v15 = Squares::XYToVW(v1);
+  v15 = Squares::XYToVW((int)v1);
   v2 = (Squares *)IEntity::Y(this);
-  v16 = Squares::XYToVW(v2);
+  v16 = Squares::XYToVW((int)v2);
   Y16X16::PackXYFast(v15, v16);
   CPossibleDirs::CPossibleDirs((CPossibleDirs *)v38);
   v3 = IEntity::PackedXY(this);
@@ -499,11 +499,11 @@ int  CLandAnimal::GetMoveDir(void) {
         ++i )
   {
     v22 = v14 + CWorldManager::NeighborRelIndex(i);
-    if ( CWorldManager::FlagBits(v22, 1u) )
+    if ( CWorldManager::FlagBits(v22, 1u) != 0 )
     {
       v38[i + 8] = 3;
     }
-    else if ( CWorldManager::MapObjectId(v22) )
+    else if ( CWorldManager::MapObjectId(v22) != 0 )
     {
       v38[i + 8] = 2;
     }
@@ -513,60 +513,60 @@ int  CLandAnimal::GetMoveDir(void) {
     }
   }
   TerritoryDir = -1;
-  if ( *((_DWORD *)this + 25) == 3 )
+  if ( *(_DWORD *)&this->unk_64 == 3 )
   {
-    if ( *((int *)this + 37) < 0 || *((_DWORD *)this + 42) == -1 )
+    if ( (this->unk_84 & 0x80000000) != 0 || this->unk_98 == -1 )
     {
-      *((_DWORD *)this + 42) = CLandAnimal::GetFleeDir(this);
+      this->unk_98 = (DWORD)CLandAnimal::GetFleeDir((Y16X16 **)this);
     }
-    TerritoryDir = *((_DWORD *)this + 42);
-    if ( (int)++*((_DWORD *)this + 37) > 4 )
+    TerritoryDir = this->unk_98;
+    if ( (int)++this->unk_84 > 4 )
     {
-      *((_DWORD *)this + 37) = -1;
+      this->unk_84 = -1;
     }
   }
-  else if ( *((int *)this + 36) > 8 )
+  else if ( (int)this->unk_80 > 8 )
   {
     if ( CLandAnimal::CheckTerritory(this) )
     {
-      *((_DWORD *)this + 41) = IEntity::PackedXY(this);
+      this->unk_94 = IEntity::PackedXY(this);
     }
     else
     {
       TerritoryDir = CLandAnimal::GetTerritoryDir(this);
       if ( TerritoryDir < 0 )
       {
-        TerritoryDir = CLandAnimal::GetDirection(this, *((_DWORD *)this + 41));
+        TerritoryDir = CLandAnimal::GetDirection(this, (Y16X16 *)this->unk_94);
       }
     }
-    *((_DWORD *)this + 36) = 0;
+    this->unk_80 = 0;
   }
   v18 = IEntity::X(this);
   v17 = IEntity::Y(this);
   if ( TerritoryDir == -1 )
   {
-    TerritoryDir = *((char *)this + 68);
+    TerritoryDir = this->m_iDirection;
   }
-  v19 = (Y16X16 *)Grid::TurnLeft((Grid *)TerritoryDir);
-  v21 = (Y16X16 *)Grid::TurnRight((Grid *)TerritoryDir);
+  v19 = (Y16X16 *)Grid::TurnLeft(TerritoryDir);
+  v21 = (Y16X16 *)Grid::TurnRight(TerritoryDir);
   v20 = CStateGame::Rand(g_pGame);
   v4 = IEntity::PackedXY(this);
-  v25 = Y16X16::NeighborModifier(v19) + v4;
+  v25 = Y16X16::NeighborModifier((int)v19) + v4;
   v31 = CWorldManager::Index(v25);
   if ( CLandAnimal::CheckTile(this, v31) && !CLandAnimal::IsSettlerAroundTile(this, v25) )
   {
-    CPossibleDirs::PushDir((CPossibleDirs *)v38, v19);
+    CPossibleDirs::PushDir((CPossibleDirs *)v38, (unsigned int)v19);
   }
   v5 = IEntity::PackedXY(this);
-  v26 = Y16X16::NeighborModifier((Y16X16 *)TerritoryDir) + v5;
+  v26 = Y16X16::NeighborModifier(TerritoryDir) + v5;
   v32 = CWorldManager::Index(v26);
   if ( CLandAnimal::CheckTile(this, v32) && !CLandAnimal::IsSettlerAroundTile(this, v26) && v20 < CRandom16::PercentValue(0x46u) )
   {
     v6 = IEntity::PackedXY(this);
-    v7 = Y16X16::NeighborModifier((Y16X16 *)TerritoryDir);
+    v7 = Y16X16::NeighborModifier(TerritoryDir);
     if ( !CLandAnimal::IsSettlerAroundTile(this, v7 + v6) )
     {
-      if ( !v38[TerritoryDir + 8] )
+      if ( v38[TerritoryDir + 8] == 0 )
       {
         return TerritoryDir;
       }
@@ -574,37 +574,37 @@ int  CLandAnimal::GetMoveDir(void) {
     }
   }
   v9 = IEntity::PackedXY(this);
-  v27 = Y16X16::NeighborModifier(v21) + v9;
+  v27 = Y16X16::NeighborModifier((int)v21) + v9;
   v33 = CWorldManager::Index(v27);
   if ( CLandAnimal::CheckTile(this, v33) && !CLandAnimal::IsSettlerAroundTile(this, v27) )
   {
-    CPossibleDirs::PushDir((CPossibleDirs *)v38, v21);
+    CPossibleDirs::PushDir((CPossibleDirs *)v38, (unsigned int)v21);
   }
-  if ( !v38[0] )
+  if ( v38[0] == 0 )
   {
     v24 = v21;
     for ( j = 0;
           j < 3;
           ++j )
     {
-      v24 = (Grid *)Grid::TurnRight(v24);
-      v34 = CWorldManager::Index(g_sNeighborPoints[2 * (_DWORD)v24] + v18, MEMORY[0x37D8C0C][2 * (_DWORD)v24] + v17);
+      v24 = (Grid *)Grid::TurnRight((int)v24);
+      v34 = CWorldManager::Index(g_sNeighborPoints[(_DWORD)v24].x + v18, g_sNeighborPoints[(_DWORD)v24].y + v17);
       if ( CLandAnimal::CheckTile(this, v34) )
       {
-        CPossibleDirs::PushDir((CPossibleDirs *)v38, v24);
+        CPossibleDirs::PushDir((CPossibleDirs *)v38, (unsigned int)v24);
       }
     }
   }
-  if ( !v38[0] )
+  if ( v38[0] == 0 )
   {
     for ( k = 0;
           k < 6;
           ++k )
     {
-      v35 = CWorldManager::Index(g_sNeighborPoints[2 * k] + v18, MEMORY[0x37D8C0C][2 * k] + v17);
+      v35 = CWorldManager::Index(g_sNeighborPoints[k].x + v18, g_sNeighborPoints[k].y + v17);
       if ( CLandAnimal::IsTileFree(this, v35) )
       {
-        v10 = (CWalking *)std::auto_ptr<CWalking>::operator->(v35);
+        v10 = (CWalking *)((_DWORD (__cdecl *)(_DWORD))std::auto_ptr<CWalking>::operator->)(v35);
         if ( CWalking::IsFree(v10, v13) )
         {
           CPossibleDirs::PushDir((CPossibleDirs *)v38, k);
@@ -618,7 +618,7 @@ int  CLandAnimal::GetMoveDir(void) {
   }
   v23 = (Y16X16 *)(v20 < CRandom16::PercentValue(0x46u) && CPossibleDirs::Search((CPossibleDirs *)v38, TerritoryDir) ? TerritoryDir : v38[v20 % v38[0] + 2]);
   v11 = IEntity::PackedXY(this);
-  v12 = Y16X16::NeighborModifier(v23);
+  v12 = Y16X16::NeighborModifier((int)v23);
   if ( CLandAnimal::IsSettlerAroundTile(this, v12 + v11) )
   {
     return -1;
@@ -651,7 +651,7 @@ int  CLandAnimal::GetFleeDir(void) {
   _DWORD v17[6]; // [esp+24h] [ebp-1Ch]
 
   v16 = 0;
-  v14 = CLandAnimal::GetDirection(this, *((_DWORD *)this + 40)) - 3;
+  v14 = CLandAnimal::GetDirection(this, (Y16X16 *)this->unk_90) - 3;
   v15 = (Y16X16 *)(v14 + (v14 < 0 ? 6 : 0));
   v12 = (Y16X16 *)((char *)v15 + ((int)v15 - 1 < 0 ? 6 : 0) - 1);
   v5 = (Y16X16 *)((char *)v15 + 1);
@@ -660,7 +660,7 @@ int  CLandAnimal::GetFleeDir(void) {
     v5 = (Y16X16 *)((char *)v15 - 5);
   }
   v1 = IEntity::PackedXY(this);
-  v9 = Y16X16::NeighborModifier(v15) + v1;
+  v9 = Y16X16::NeighborModifier((int)v15) + v1;
   v6 = CWorldManager::Index(v9);
   if ( CLandAnimal::IsTileFree(this, v6) )
   {
@@ -668,20 +668,20 @@ int  CLandAnimal::GetFleeDir(void) {
     v16 = 1;
   }
   v2 = IEntity::PackedXY(this);
-  v10 = Y16X16::NeighborModifier(v12) + v2;
+  v10 = Y16X16::NeighborModifier((int)v12) + v2;
   v7 = CWorldManager::Index(v10);
   if ( CLandAnimal::IsTileFree(this, v7) )
   {
     v17[v16++] = v12;
   }
   v3 = IEntity::PackedXY(this);
-  v11 = Y16X16::NeighborModifier(v5) + v3;
+  v11 = Y16X16::NeighborModifier((int)v5) + v3;
   v8 = CWorldManager::Index(v11);
   if ( CLandAnimal::IsTileFree(this, v8) )
   {
     v17[v16++] = v5;
   }
-  if ( v16 )
+  if ( v16 != 0 )
   {
     return (Y16X16 *)v17[CStateGame::Rand(g_pGame) % v16];
   }
@@ -705,15 +705,15 @@ int  CLandAnimal::GetTerritoryDir(void) {
   _DWORD v9[7]; // [esp+14h] [ebp-20h]
 
   v1 = (Squares *)IEntity::X(this);
-  v4 = Squares::XYToVW(v1);
+  v4 = Squares::XYToVW((int)v1);
   v2 = (Squares *)IEntity::Y(this);
-  v5 = Squares::XYToVW(v2);
+  v5 = Squares::XYToVW((int)v2);
   v7 = 0;
   for ( i = 0;
         i < 6;
         ++i )
   {
-    if ( CLandAnimal::IsValidSquare(this, g_sNeighborPoints[2 * i] + v4, MEMORY[0x37D8C0C][2 * i] + v5) )
+    if ( CLandAnimal::IsValidSquare(this, g_sNeighborPoints[i].x + v4, g_sNeighborPoints[i].y + v5) )
     {
       v9[++v7] = i;
     }
@@ -724,7 +724,7 @@ int  CLandAnimal::GetTerritoryDir(void) {
   }
   else
   {
-    return v9[CStateGame::Rand(g_pGame) % (unsigned int)v7 + 1];
+    return v9[CStateGame::Rand(g_pGame) % v7 + 1];
   }
 }
 
@@ -741,7 +741,7 @@ int  CLandAnimal::GetDirection(int a2) {
 
   v4 = IEntity::X(this);
   v3 = IEntity::Y(this);
-  Y16X16::UnpackXYFast(a2, &v8, &v7);
+  Y16X16::UnpackXYFast((int)a2, &v8, &v7);
   if ( v8 >= v4 )
   {
     v8 = v8 > v4;
@@ -770,7 +770,7 @@ int  CLandAnimal::GetDirection(int a2) {
         i < 6;
         ++i )
   {
-    if ( v8 == g_sNeighborPoints[2 * i] && v7 == MEMORY[0x37D8C0C][2 * i] )
+    if ( v8 == g_sNeighborPoints[i].x && v7 == g_sNeighborPoints[i].y )
     {
       return i;
     }
@@ -790,7 +790,7 @@ bool  CLandAnimal::CheckForEnemies(void) {
   int v6; // [esp+10h] [ebp-8h]
 
   v6 = 0;
-  if ( *(int *)(*((_DWORD *)this + 29) + 20) < 0 )
+  if ( *(int *)(*(_DWORD *)&this->unk_74 + 20) < 0 )
   {
     v6 = 255;
   }
@@ -801,17 +801,17 @@ bool  CLandAnimal::CheckForEnemies(void) {
           --i )
     {
       v6 *= 2;
-      if ( CPlayerManager::Race(i) != *(_DWORD *)(*((_DWORD *)this + 29) + 20) )
+      if ( CPlayerManager::Race(i) != *(_DWORD *)(*(_DWORD *)&this->unk_74 + 20) )
       {
         ++v6;
       }
     }
   }
-  v4 = *(_DWORD *)(*((_DWORD *)this + 29) + 24);
+  v4 = *(_DWORD *)(*(_DWORD *)&this->unk_74 + 24);
   v3 = IEntity::Y(this);
   v1 = IEntity::X(this);
-  *((_DWORD *)this + 40) = CScanner::FindNearestFighter(v1, v3, v4, 255, v6);
-  return *((_DWORD *)this + 40) != -1;
+  this->unk_90 = CScanner::FindNearestFighter(v1, v3, v4, 255, v6);
+  return this->unk_90 != -1;
 }
 
 
@@ -825,9 +825,9 @@ bool  CLandAnimal::CheckTerritory(void) {
   int v5; // [esp+4h] [ebp-8h]
 
   v1 = (Squares *)IEntity::X(this);
-  v4 = Squares::XYToVW(v1);
+  v4 = Squares::XYToVW((int)v1);
   v2 = (Squares *)IEntity::Y(this);
-  v5 = Squares::XYToVW(v2);
+  v5 = Squares::XYToVW((int)v2);
   return CLandAnimal::IsValidSquare(this, v4, v5);
 }
 
@@ -840,15 +840,15 @@ bool  CLandAnimal::IsValidSquare(int a2, int a3) {
   CAIResourceData *v5; // [esp+14h] [ebp-Ch]
   bool v7; // [esp+1Fh] [ebp-1h]
 
-  v5 = CAIResourceMap::ResourceDataVW(a2, a3);
-  if ( **((_DWORD **)this + 29) == 9 )
+  v5 = (const struct CAIResourceData *)CAIResourceMap::ResourceDataVW(a2, a3);
+  if ( **(_DWORD **)&this->unk_74 == 9 )
   {
     v7 = CWarMap::FirstEntityIdVW(2, a2, a3) > 0;
     return CAIResourceData::GroundInfo1(v5, 0) == 0 && v7;
   }
-  else if ( *(int *)(*((_DWORD *)this + 29) + 8) <= 0 || (v4 = CAIResourceData::ResourceAmount1(v5, 7), v4 >= *(_DWORD *)(*((_DWORD *)this + 29) + 8)) && v4 < *(_DWORD *)(*((_DWORD *)this + 29) + 12) )
+  else if ( *(int *)(*(_DWORD *)&this->unk_74 + 8) <= 0 || (v4 = CAIResourceData::ResourceAmount1(v5, 7)) >= *(_DWORD *)(*(_DWORD *)&this->unk_74 + 8) && v4 < *(_DWORD *)(*(_DWORD *)&this->unk_74 + 12) )
   {
-    if ( **((_DWORD **)this + 29) == 8 )
+    if ( **(_DWORD **)&this->unk_74 == 8 )
     {
       return CAIResourceData::GroundInfo1(v5, 0) > 120;
     }
@@ -876,7 +876,7 @@ bool  CLandAnimal::CheckTile(int a2) {
 // Decompiled from bool __thiscall CLandAnimal::IsTileFree(CLandAnimal *this, int a2)
 bool  CLandAnimal::IsTileFree(int a2) {
   
-  return !(unsigned __int8)CWorldManager::IsBlockedLand(a2) && CWorldManager::ObjectId(a2) <= 0 && CWorldManager::MapObjectId(a2) <= 0;
+  return !CWorldManager::IsBlockedLand(a2) && CWorldManager::ObjectId(a2) <= 0 && CWorldManager::MapObjectId(a2) <= 0;
 }
 
 
@@ -887,13 +887,13 @@ bool  CLandAnimal::CheckGround(int a2) {
   bool result; // al
   bool v3; // [esp+10h] [ebp-8h]
 
-  switch ( **((_DWORD **)this + 29) )
+  switch ( **(_DWORD **)&this->unk_74 )
   {
     case 1:
     case 2:
     case 3:
     case 4:
-      v3 = (CWorldManager::Ground(a2) & 0xF0) == 0x10 && !CWorldManager::FlagBits(a2, 4u);
+      v3 = (CWorldManager::Ground(a2) & 0xF0) == 0x10 && CWorldManager::FlagBits(a2, 4u) == 0;
       result = v3;
       break;
     case 8:
@@ -922,7 +922,7 @@ bool  CLandAnimal::IsSettlerAroundTile(int a2) {
         i < 6;
         ++i )
   {
-    v5 = a2 + Y16X16::NeighborModifier((Y16X16 *)i);
+    v5 = a2 + Y16X16::NeighborModifier(i);
     if ( v5 != IEntity::PackedXY(this) )
     {
       v3 = CWorldManager::Index(v5);

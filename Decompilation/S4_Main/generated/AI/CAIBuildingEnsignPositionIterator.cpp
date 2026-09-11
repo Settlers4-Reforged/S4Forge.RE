@@ -22,16 +22,16 @@ bool  CAIBuildingEnsignPositionIterator::NextXY(int & a2, int & a3) {
   {
     return 0;
   }
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *(_DWORD *)this);
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *(_DWORD *)this);
   *(_DWORD *)this = IAnimatedEntity::Next(BuildingPtr);
   v3 = (Y16X16 *)CBuilding::EnsignPackedXY(BuildingPtr);
-  Y16X16::UnpackXYFast(v3, a2, a3, (int *)BuildingPtr);
+  ((void (__cdecl *)(Y16X16 *, int *, int *, int *))Y16X16::UnpackXYFast)(v3, a2, a3, (int *)BuildingPtr);
   return 1;
 }
 
 
 // address=[0x130d420]
-// Decompiled from char __thiscall CAIBuildingEnsignPositionIterator::NextWorldIdx(int *this, _DWORD *a2)
+// Decompiled from char __thiscall CAIBuildingEnsignPositionIterator::NextWorldIdx(int *this, int *a2)
 bool  CAIBuildingEnsignPositionIterator::NextWorldIdx(int & a2) {
   
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-8h]
@@ -40,9 +40,9 @@ bool  CAIBuildingEnsignPositionIterator::NextWorldIdx(int & a2) {
   {
     return 0;
   }
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *this);
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *this);
   *this = IAnimatedEntity::Next(BuildingPtr);
-  *a2 = CBuilding::EnsignWorldIdx(BuildingPtr);
+  *a2 = CBuilding::EnsignWorldIdx((CBuilding *)BuildingPtr);
   return 1;
 }
 

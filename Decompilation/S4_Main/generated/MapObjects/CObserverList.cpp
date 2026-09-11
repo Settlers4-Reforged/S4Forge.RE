@@ -29,11 +29,11 @@ void  CObserverList::NotifyAndDetachAllObservers(class CEntityEvent const & a2) 
 
 
 // address=[0x1559aa0]
-// Decompiled from int __thiscall CObserverList::Attach(CObserverList *this, int a2, int a3)
+// Decompiled from int __thiscall CObserverList::Attach(CObserverList *this, void *a2, int a3)
 void  CObserverList::Attach(int a2, int a3) {
   
   int result; // eax
-  _DWORD *v5; // [esp+4h] [ebp-8h]
+  IEntity *v5; // [esp+4h] [ebp-8h]
   __int16 v6; // [esp+Ah] [ebp-2h] BYREF
 
   if ( a3 <= 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 29, "_iObserverId > 0") == 1 )
@@ -45,34 +45,33 @@ void  CObserverList::Attach(int a2, int a3) {
     __debugbreak();
   }
   v6 = a3;
-  std::list<unsigned short>::push_back(&v6);
-  v5 = (_DWORD *)CMapObjectMgr::EntityPtr(a3);
-  if ( !v5 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 37, "pObserver != 0") == 1 )
+  std::list<unsigned short>::push_back((int)&v6);
+  v5 = CMapObjectMgr::EntityPtr(a3);
+  if ( v5 == 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 37, "pObserver != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( (*(int (__thiscall **)(_DWORD *, _DWORD))(*v5 + 72))(v5, 0) && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 39, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) == 0") == 1 )
+  if ( v5->GetObserverTarget(v5, 0) != 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 39, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(v5, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 40, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
+  if ( IEntity::FlagBits(v5, ENTITY_FLAG_ATTACHED) != 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 40, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
   {
     __debugbreak();
   }
-  (*(void (__thiscall **)(_DWORD *, _DWORD, int))(*v5 + 68))(v5, 0, a2);
-  if ( (*(int (__thiscall **)(_DWORD *, _DWORD))(*v5 + 72))(v5, 0) != a2 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 44, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) == _iTargetId") == 1 )
+  v5->SetObserverTarget(v5, 0, (int)a2);
+  if ( v5->GetObserverTarget(v5, 0) != a2 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 44, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) == _iTargetId") == 1 )
   {
     __debugbreak();
   }
   result = IEntity::FlagBits(v5, ENTITY_FLAG_ATTACHED);
-  if ( result )
+  if ( result == 0 )
   {
-    return result;
-  }
-  result = BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 45, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0");
-  if ( result == 1 )
-  {
-    __debugbreak();
+    result = BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 45, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0");
+    if ( result == 1 )
+    {
+      __debugbreak();
+    }
   }
   return result;
 }
@@ -83,7 +82,7 @@ void  CObserverList::Attach(int a2, int a3) {
 void  CObserverList::Detach(int a2) {
   
   int result; // eax
-  _DWORD *v4; // [esp+4h] [ebp-8h]
+  IEntity *v4; // [esp+4h] [ebp-8h]
 
   if ( a2 <= 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 55, "_iObserverId > 0") == 1 )
   {
@@ -93,40 +92,39 @@ void  CObserverList::Detach(int a2) {
   {
     __debugbreak();
   }
-  v4 = (_DWORD *)CMapObjectMgr::EntityPtr(a2);
-  if ( !v4 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 63, "pObserver != 0") == 1 )
+  v4 = CMapObjectMgr::EntityPtr(a2);
+  if ( v4 == 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 63, "pObserver != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !(*(int (__thiscall **)(_DWORD *, _DWORD))(*v4 + 72))(v4, 0) && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 65, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) != 0") == 1 )
+  if ( v4->GetObserverTarget(v4, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 65, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !IEntity::FlagBits(v4, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 66, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
+  if ( IEntity::FlagBits(v4, ENTITY_FLAG_ATTACHED) == 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 66, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
   {
     __debugbreak();
   }
-  (*(void (__thiscall **)(_DWORD *, _DWORD, _DWORD))(*v4 + 68))(v4, 0, 0);
-  if ( (*(int (__thiscall **)(_DWORD *, _DWORD))(*v4 + 72))(v4, 0) && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 70, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) == 0") == 1 )
+  v4->SetObserverTarget(v4, 0, 0);
+  if ( v4->GetObserverTarget(v4, 0) != 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 70, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) == 0") == 1 )
   {
     __debugbreak();
   }
   result = IEntity::FlagBits(v4, ENTITY_FLAG_ATTACHED);
-  if ( !result )
+  if ( result != 0 )
   {
-    return result;
-  }
-  result = BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 71, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0");
-  if ( result == 1 )
-  {
-    __debugbreak();
+    result = BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 71, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0");
+    if ( result == 1 )
+    {
+      __debugbreak();
+    }
   }
   return result;
 }
 
 
 // address=[0x1559d80]
-// Decompiled from int __thiscall CObserverList::NotifyAllObservers(void *this, int a2)
+// Decompiled from int __thiscall CObserverList::NotifyAllObservers(void *this, CEntityEvent *a2)
 void  CObserverList::NotifyAllObservers(class CEntityEvent const & a2)const {
   
   _BYTE v3[12]; // [esp+4h] [ebp-3Ch] BYREF
@@ -138,13 +136,13 @@ void  CObserverList::NotifyAllObservers(class CEntityEvent const & a2)const {
   int v9; // [esp+3Ch] [ebp-4h]
 
   v8 = this;
-  std::list<unsigned short>::begin(v3);
+  ((void (__stdcall *)(_BYTE *))std::list<unsigned short>::begin)(v3);
   v9 = 0;
-  std::list<unsigned short>::end(v4);
+  std::list<unsigned short>::end((int)v4);
   LOBYTE(v9) = 1;
-  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v3);
+  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>((int)v3);
   LOBYTE(v9) = 2;
-  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v4) )
+  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v4) != 0 )
   {
     v7 = *(unsigned __int16 *)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator*(v5);
     if ( v7 <= 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 159, "iEntityId > 0") == 1 )
@@ -152,7 +150,7 @@ void  CObserverList::NotifyAllObservers(class CEntityEvent const & a2)const {
       __debugbreak();
     }
     v6 = CMapObjectMgr::Entity(v7);
-    ((void (__thiscall *)(struct IEntity *, int))v6->CPersistence[1].GetNamedEntity)(v6, a2);
+    v6->SetEvent(v6, a2);
     std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator++(v5);
   }
   LOBYTE(v9) = 1;
@@ -165,7 +163,7 @@ void  CObserverList::NotifyAllObservers(class CEntityEvent const & a2)const {
 
 
 // address=[0x1559e90]
-// Decompiled from int __thiscall CObserverList::NotifyAllObservers(CObserverList *this, const struct CEntityEvent *a2, struct INotifyFilter *a3)
+// Decompiled from int __thiscall CObserverList::NotifyAllObservers(CObserverList *this, struct CEntityEvent *a2, struct INotifyFilter *a3)
 void  CObserverList::NotifyAllObservers(class CEntityEvent const & a2, class INotifyFilter & a3)const {
   
   _BYTE v4[12]; // [esp+4h] [ebp-3Ch] BYREF
@@ -177,13 +175,13 @@ void  CObserverList::NotifyAllObservers(class CEntityEvent const & a2, class INo
   int v10; // [esp+3Ch] [ebp-4h]
 
   v8 = this;
-  std::list<unsigned short>::begin(v4);
+  ((void (__stdcall *)(_BYTE *))std::list<unsigned short>::begin)(v4);
   v10 = 0;
-  std::list<unsigned short>::end(v5);
+  std::list<unsigned short>::end((int)v5);
   LOBYTE(v10) = 1;
-  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v4);
+  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>((int)v4);
   LOBYTE(v10) = 2;
-  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v5) )
+  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v5) != 0 )
   {
     v7 = *(unsigned __int16 *)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator*(v6);
     if ( v7 <= 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 181, "iEntityId > 0") == 1 )
@@ -191,9 +189,9 @@ void  CObserverList::NotifyAllObservers(class CEntityEvent const & a2, class INo
       __debugbreak();
     }
     v9 = CMapObjectMgr::Entity(v7);
-    if ( (**(unsigned __int8 (__thiscall ***)(struct INotifyFilter *, struct IEntity *))a3)(a3, v9) )
+    if ( (**(unsigned __int8 (__thiscall ***)(struct INotifyFilter *, struct IEntity *))a3)(a3, v9) != 0 )
     {
-      ((void (__thiscall *)(struct IEntity *, const struct CEntityEvent *))v9->CPersistence[1].GetNamedEntity)(v9, a2);
+      v9->SetEvent(v9, a2);
     }
     std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator++(v6);
   }
@@ -238,12 +236,12 @@ void  CObserverList::DetachAllObservers(void) {
   std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v8);
   LOBYTE(v15) = 5;
   std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::~_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v2);
-  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v4);
+  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>((int)v4);
   LOBYTE(v15) = 6;
-  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v5) )
+  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v5) != 0 )
   {
     v13 = *(unsigned __int16 *)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator*(v6);
-    if ( v13 )
+    if ( v13 != 0 )
     {
       v11 = CMapObjectMgr::EntityPtr(v13);
     }
@@ -252,27 +250,24 @@ void  CObserverList::DetachAllObservers(void) {
       v11 = 0;
     }
     v14 = v11;
-    if ( v11 )
+    if ( v11 != 0 )
     {
-      if ( !v14->GetObserverTarget(v14, 0) && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 92, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) != 0") == 1 )
+      if ( v14->GetObserverTarget(v14, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 92, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) != 0") == 1 )
       {
         __debugbreak();
       }
-      if ( !IEntity::FlagBits(v14, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 93, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
+      if ( IEntity::FlagBits(v14, ENTITY_FLAG_ATTACHED) == 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 93, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
       {
         __debugbreak();
       }
-      ((void (__thiscall *)(IEntity *, _DWORD, _DWORD))v14->SetObserverTarget)(v14, 0, 0);
-      if ( v14->GetObserverTarget(v14, 0) && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 97, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) == 0") == 1 )
+      v14->SetObserverTarget(v14, 0, 0);
+      if ( v14->GetObserverTarget(v14, 0) != 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 97, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) == 0") == 1 )
       {
         __debugbreak();
       }
-      if ( IEntity::FlagBits(v14, ENTITY_FLAG_ATTACHED) )
+      if ( IEntity::FlagBits(v14, ENTITY_FLAG_ATTACHED) != 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 98, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
       {
-        if ( BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 98, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
-        {
-          __debugbreak();
-        }
+        __debugbreak();
       }
     }
     else if ( BBSupportDbgReportF(1, "MapObjects\\ObserverList.cpp", 102, "CObserverList::DetachAllObservers(): Invalid entity id %i in list!", v13) == 1 )
@@ -315,22 +310,22 @@ void  CObserverList::DetachAllNonePileObservers(void) {
   int v19; // [esp+5Ch] [ebp-4h]
 
   v16 = this;
-  std::list<unsigned short>::begin(v7);
+  ((void (__stdcall *)(_BYTE *))std::list<unsigned short>::begin)(v7);
   v19 = 0;
   while ( 1 )
   {
-    v13 = (std::_Iterator_base12 *)std::list<unsigned short>::end(v6);
+    v13 = (std::_Iterator_base12 *)((std::_Iterator_base12 *(__stdcall *)(_BYTE *))std::list<unsigned short>::end)(v6);
     v12 = v13;
     LOBYTE(v19) = 1;
     v18 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=(v13);
     LOBYTE(v19) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::~_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v6);
-    if ( !v18 )
+    if ( v18 == 0 )
     {
       break;
     }
     v15 = *(unsigned __int16 *)std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator*(v7);
-    if ( v15 )
+    if ( v15 != 0 )
     {
       v14 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v15);
     }
@@ -339,9 +334,9 @@ void  CObserverList::DetachAllNonePileObservers(void) {
       v14 = 0;
     }
     v17 = v14;
-    if ( !v14 || IEntity::ObjType(v17) == 16 )
+    if ( v14 == 0 || IEntity::ObjType((IEntity *)v17) == PILE_OBJ )
     {
-      if ( !v17 && BBSupportDbgReportF(2, "MapObjects\\ObserverList.cpp", 138, "CObserverList::DetachAllObservers(): Invalid entity id %i in list!", v15) == 1 )
+      if ( v17 == 0 && BBSupportDbgReportF(2, "MapObjects\\ObserverList.cpp", 138, "CObserverList::DetachAllObservers(): Invalid entity id %i in list!", v15) == 1 )
       {
         __debugbreak();
       }
@@ -349,29 +344,26 @@ void  CObserverList::DetachAllNonePileObservers(void) {
     }
     else
     {
-      if ( !(*(int (__thiscall **)(unsigned __int8 *, _DWORD))(*(_DWORD *)v17 + 72))(v17, 0) && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 126, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) != 0") == 1 )
+      if ( (*(int (__thiscall **)(unsigned __int8 *, _DWORD))(*(_DWORD *)v17 + 72))(v17, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 126, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) != 0") == 1 )
       {
         __debugbreak();
       }
-      if ( !IEntity::FlagBits(v17, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 127, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
+      if ( IEntity::FlagBits((IEntity *)v17, ENTITY_FLAG_ATTACHED) == 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 127, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
       {
         __debugbreak();
       }
       (*(void (__thiscall **)(unsigned __int8 *, _DWORD, _DWORD))(*(_DWORD *)v17 + 68))(v17, 0, 0);
-      if ( (*(int (__thiscall **)(unsigned __int8 *, _DWORD))(*(_DWORD *)v17 + 72))(v17, 0) && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 131, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) == 0") == 1 )
+      if ( (*(int (__thiscall **)(unsigned __int8 *, _DWORD))(*(_DWORD *)v17 + 72))(v17, 0) != 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 131, "pObserver->GetObserverTarget(OBSERVER_TARGET_PRIMARY) == 0") == 1 )
       {
         __debugbreak();
       }
-      if ( IEntity::FlagBits(v17, ENTITY_FLAG_ATTACHED) )
+      if ( IEntity::FlagBits((IEntity *)v17, ENTITY_FLAG_ATTACHED) != 0 && BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 132, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
       {
-        if ( BBSupportDbgReport(2, "MapObjects\\ObserverList.cpp", 132, "pObserver->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
-        {
-          __debugbreak();
-        }
+        __debugbreak();
       }
       v9 = &v2;
-      v8 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v7);
-      v11 = std::list<unsigned short>::erase(v5, v2, v3, v4);
+      v8 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>((int)v7);
+      v11 = std::list<unsigned short>::erase((int)v5, v2, v3, v4);
       v10 = v11;
       LOBYTE(v19) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator=(v11);
@@ -406,13 +398,13 @@ bool  CObserverList::IsInList(int a2)const {
   {
     __debugbreak();
   }
-  std::list<unsigned short>::begin(v3);
+  ((void (__stdcall *)(_BYTE *))std::list<unsigned short>::begin)(v3);
   v10 = 0;
-  std::list<unsigned short>::end(v4);
+  std::list<unsigned short>::end((int)v4);
   LOBYTE(v10) = 1;
-  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v3);
+  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>((int)v3);
   LOBYTE(v10) = 2;
-  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v4) )
+  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v4) != 0 )
   {
     v6 = *(unsigned __int16 *)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator*(v5);
     if ( v6 == a2 )
@@ -440,7 +432,7 @@ bool  CObserverList::IsInList(int a2)const {
 
 
 // address=[0x155a6b0]
-// Decompiled from void *__thiscall CObserverList::CObserverList(void *this, int a2)
+// Decompiled from void *__thiscall CObserverList::CObserverList(void *this, struct std::istream *a2)
  CObserverList::CObserverList(std::istream & a2) {
   
   _DWORD v3[2]; // [esp+4h] [ebp-28h] BYREF
@@ -448,7 +440,7 @@ bool  CObserverList::IsInList(int a2)const {
   int pExceptionObject; // [esp+10h] [ebp-1Ch] BYREF
   unsigned int i; // [esp+14h] [ebp-18h]
   void *v7; // [esp+18h] [ebp-14h]
-  _BYTE v8[4]; // [esp+1Ch] [ebp-10h] BYREF
+  unsigned __int16 v8[2]; // [esp+1Ch] [ebp-10h] BYREF
   int v9; // [esp+28h] [ebp-4h]
 
   v7 = this;
@@ -470,7 +462,7 @@ bool  CObserverList::IsInList(int a2)const {
         ++i )
   {
     operator^<unsigned short>(a2, v8);
-    std::list<unsigned short>::push_back(v8);
+    ((void (__stdcall *)(unsigned __int16 *))std::list<unsigned short>::push_back)(v8);
   }
   v9 = -1;
   return v7;
@@ -492,31 +484,31 @@ void  CObserverList::Store(std::ostream & a2) {
   int v11; // [esp+4Ch] [ebp-1Ch]
   int v12; // [esp+50h] [ebp-18h] BYREF
   void *v13; // [esp+54h] [ebp-14h]
-  __int16 v14; // [esp+58h] [ebp-10h] BYREF
+  WORD v14; // [esp+58h] [ebp-10h] BYREF
   int v15; // [esp+64h] [ebp-4h]
 
   v13 = this;
   Serial::StoreVersion(a2, 1);
   v12 = std::list<unsigned short>::size(v13);
-  operator^<unsigned int>(a2, &v12);
-  v11 = std::list<unsigned short>::begin(v4);
+  operator^<unsigned int>(a2, (unsigned int *)&v12);
+  v11 = ((int (__stdcall *)(_BYTE *))std::list<unsigned short>::begin)(v4);
   v10 = v11;
   v15 = 0;
   std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v11);
   LOBYTE(v15) = 2;
   std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::~_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v4);
-  v9 = std::list<unsigned short>::end(v3);
+  v9 = ((int (__stdcall *)(_BYTE *))std::list<unsigned short>::end)(v3);
   v8 = v9;
   LOBYTE(v15) = 3;
   std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v9);
   LOBYTE(v15) = 5;
   std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::~_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v3);
-  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v5);
+  std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>((int)v5);
   LOBYTE(v15) = 6;
-  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v6) )
+  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v6) != 0 )
   {
     v14 = *(_WORD *)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator*(v7);
-    operator^<unsigned short>((int)a2, &v14);
+    operator^<unsigned short>(a2, &v14);
     std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator++(v7);
   }
   LOBYTE(v15) = 5;
@@ -551,21 +543,21 @@ bool  CObserverList::Remove(int a2) {
 
   v15 = this;
   v17 = 0;
-  std::list<unsigned short>::begin(v8);
+  ((void (__stdcall *)(_BYTE *))std::list<unsigned short>::begin)(v8);
   v18 = 0;
-  std::list<unsigned short>::end(v9);
+  ((void (__stdcall *)(_BYTE *))std::list<unsigned short>::end)(v9);
   LOBYTE(v18) = 1;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v8);
+  std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>((int)v8);
   LOBYTE(v18) = 2;
-  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v9) )
+  while ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator!=((std::_Iterator_base12 *)v9) != 0 )
   {
     v2 = *(unsigned __int16 *)std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::operator*(v10);
     v14 = v2;
     if ( v2 == a2 )
     {
       v13 = &v4;
-      v12 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v10);
-      v11 = std::list<unsigned short>::erase(v7, v4, v5, v6);
+      v12 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>((int)v10);
+      v11 = std::list<unsigned short>::erase((int)v7, v4, v5, v6);
       std::_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>::~_List_iterator<std::_List_val<std::_List_simple_types<unsigned short>>>(v7);
       v17 = 1;
       break;

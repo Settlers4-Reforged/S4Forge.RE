@@ -8,19 +8,18 @@ bool  CHJBMgr::LocalLoadHJBGfxFileIfNecessary(void) {
   
   bool v2; // [esp+Fh] [ebp-1h]
 
-  if ( IHJBMgr::m_iLocalHJBGfxLoaded >= 0 )
+  if ( IHJBMgr::m_iLocalHJBGfxLoaded < 0 )
   {
-    return IHJBMgr::m_iLocalHJBGfxLoaded > 0;
-  }
-  v2 = 0;
-  if ( g_pGfxManager )
-  {
-    v2 = CGfxManager::EnableGfxFile((CGfxManager *)g_pGfxManager, 0x19u, 0, 1, 0x3Au);
-  }
-  IHJBMgr::m_iLocalHJBGfxLoaded = v2;
-  if ( v2 )
-  {
-    g_bGfxHJBLoadSpecialGfx = 1;
+    v2 = 0;
+    if ( g_pGfxManager != 0 )
+    {
+      v2 = CGfxManager::EnableGfxFile(g_pGfxManager, 0x19u, 0, 1, 0x3A);
+    }
+    IHJBMgr::m_iLocalHJBGfxLoaded = v2;
+    if ( v2 )
+    {
+      g_bGfxHJBLoadSpecialGfx = 1;
+    }
   }
   return IHJBMgr::m_iLocalHJBGfxLoaded > 0;
 }
@@ -44,11 +43,11 @@ bool  CHJBMgr::StaticCheckHJBPlayerName(std::wstring const & a1) {
   
   int v2; // [esp+4h] [ebp-28h]
   char v3; // [esp+Bh] [ebp-21h]
-  _BYTE v4[28]; // [esp+Ch] [ebp-20h] BYREF
+  std::wstring v4; // [esp+Ch] [ebp-20h] BYREF
 
-  v2 = std::wstring::wstring(v4, (wchar_t *)L"Jodowein");
+  v2 = std::wstring::wstring(&v4, (wchar_t *)L"Jodowein");
   v3 = std::operator==<wchar_t>(a1, v2);
-  std::wstring::~wstring(v4);
+  std::wstring::~wstring(&v4);
   return v3;
 }
 
@@ -61,13 +60,13 @@ void  CHJBMgr::ProcessHJBRequest(int a2) {
   unsigned int v3; // [esp+0h] [ebp-10h]
   int LocalPlayerId; // [esp+4h] [ebp-Ch]
 
-  if ( a2 >= 1 && a2 <= 8 && !IHJBMgr::m_iHJBPlayerId )
+  if ( a2 >= 1 && a2 <= 8 && IHJBMgr::m_iHJBPlayerId == 0 )
   {
     CHJBMgr::ClearRequest(this);
     *((_DWORD *)this + 1) = a2;
-    LocalPlayerId = CPlayerManager::GetLocalPlayerId(v2);
-    v3 = (**(unsigned __int8 (__thiscall ***)(CHJBMgr *))this)(this) != 0;
-    INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, 0x13BCu, v3, 0, LocalPlayerId);
+    LocalPlayerId = ((int (__cdecl *)(_DWORD))CPlayerManager::GetLocalPlayerId)(v2);
+    v3 = ((unsigned __int8 (__thiscall *)(CHJBMgr *))this->j_?LocalLoadHJBGfxFileIfNecessary@CHJBMgr@@UAE_NXZ)(this) != 0;
+    INetworkEngine::SendNetMessage(g_pNetworkEngine, 0x13BCu, v3, 0, LocalPlayerId);
   }
 }
 
@@ -80,9 +79,9 @@ void  CHJBMgr::ProcessHJBAcknowledgement(int a2, int a3) {
   int i; // [esp+4h] [ebp-Ch]
   char v6; // [esp+Fh] [ebp-1h]
 
-  if ( a2 >= 1 && a2 <= 8 && !IHJBMgr::m_iHJBPlayerId && *((_DWORD *)this + 1) )
+  if ( a2 >= 1 && a2 <= 8 && IHJBMgr::m_iHJBPlayerId == 0 && *((_DWORD *)this + 1) != 0 )
   {
-    if ( a3 )
+    if ( a3 != 0 )
     {
       v6 = 1;
       *((_BYTE *)this + a2 + 8) = 1;
@@ -91,13 +90,13 @@ void  CHJBMgr::ProcessHJBAcknowledgement(int a2, int a3) {
             i <= PlayerId;
             ++i )
       {
-        if ( !*((_BYTE *)this + i + 8) && !CPlayerManager::IsAI(i) )
+        if ( *((_BYTE *)this + i + 8) == 0 && !CPlayerManager::IsAI(i) )
         {
           v6 = 0;
           break;
         }
       }
-      if ( v6 )
+      if ( v6 != 0 )
       {
         CTextMsgHandler::AddTextMsg("Attention! Beware of HJB...", IHJBMgr::m_iHJBPlayerId - 1, 0, 0, 1);
         CHJBMgr::ActivateHJB(this, *((_DWORD *)this + 1));
@@ -143,11 +142,11 @@ bool  CHJBMgr::LocalIsHJBAllowedEx(void) {
   int v2; // [esp+0h] [ebp-Ch]
   char v4; // [esp+Bh] [ebp-1h]
 
-  v4 = (**(int (__thiscall ***)(CHJBMgr *))this)(this);
-  if ( v4 )
+  v4 = ((int (__thiscall *)(CHJBMgr *))this->j_?LocalLoadHJBGfxFileIfNecessary@CHJBMgr@@UAE_NXZ)(this);
+  if ( v4 != 0 )
   {
     v4 = CHJBMgr::CheckHJBDatFile(this);
-    if ( v4 )
+    if ( v4 != 0 )
     {
       v2 = 1;
     }
@@ -169,7 +168,7 @@ bool  CHJBMgr::LocalIsHJBAllowedEx(void) {
 // Decompiled from void __thiscall CHJBMgr::ActivateHJB(CHJBMgr *this, int a2)
 void  CHJBMgr::ActivateHJB(int a2) {
   
-  if ( a2 >= 1 && a2 <= 8 && !IHJBMgr::m_iHJBPlayerId )
+  if ( a2 >= 1 && a2 <= 8 && IHJBMgr::m_iHJBPlayerId == 0 )
   {
     if ( IHJBMgr::m_iHJBEntityId != -1 && BBSupportDbgReport(2, "mapobjects\\settler\\HJBMgr.cpp", 291, "m_iHJBEntityId == -1") == 1 )
     {
@@ -177,7 +176,7 @@ void  CHJBMgr::ActivateHJB(int a2) {
     }
     IHJBMgr::m_iHJBPlayerId = a2;
     IHJBMgr::m_iHJBEntityId = 0;
-    (**(void (__thiscall ***)(CHJBMgr *))this)(this);
+    ((void (__thiscall *)(CHJBMgr *))this->j_?LocalLoadHJBGfxFileIfNecessary@CHJBMgr@@UAE_NXZ)(this);
   }
 }
 
@@ -194,8 +193,8 @@ bool  CHJBMgr::CheckHJBDatFile(void) {
   char v7; // [esp+39h] [ebp-93h]
   char v8; // [esp+3Ah] [ebp-92h]
   char v9; // [esp+3Bh] [ebp-91h]
-  _BYTE v10[72]; // [esp+3Ch] [ebp-90h] BYREF
-  _BYTE v11[28]; // [esp+84h] [ebp-48h] BYREF
+  CFile v10; // [esp+3Ch] [ebp-90h] BYREF
+  std::wstring v11; // [esp+84h] [ebp-48h] BYREF
   _DWORD v12[8]; // [esp+A0h] [ebp-2Ch] BYREF
   int v13; // [esp+C8h] [ebp-4h]
 
@@ -210,23 +209,23 @@ bool  CHJBMgr::CheckHJBDatFile(void) {
   v3[7] = 0x400000;
   v3[6] = 0x4000;
   v3[5] = -1293418438;
-  std::wstring::wstring(v11);
+  std::wstring::wstring(&v11);
   v13 = 0;
-  g_pCDDrive->GetCDPath(g_pCDDrive, v11, (char *)v12, 1048592);
-  if ( std::wstring::length(v11) )
+  g_pCDDrive->GetCDPath(g_pCDDrive, (char *)&v11, (char *)v12, 1048592);
+  if ( std::wstring::length(&v11) != 0 )
   {
     v9 = 1;
     v5 = operator new[](0x4000u);
     Buffer = v5;
     memset(v5, 0, 0x4000u);
     LOBYTE(v13) = 1;
-    v3[4] = CFile::CFile((CFile *)v10);
+    v3[4] = CFile::CFile(&v10);
     LOBYTE(v13) = 2;
-    v2 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v11);
-    CFile::Open(v2, 6, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-    CFile::Seek(0x400000, 0, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-    CFile::Read(Buffer, 1u, 0x4000u, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-    CFile::Close((CFile *)v10, UNUSED_ARG(), UNUSED_ARG());
+    v2 = std::wstring::c_str(&v11);
+    ((void (__stdcall *)(wchar_t *, int, char *, int))CFile::Open)(v2, 6, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
+    ((void (__stdcall *)(int, int, int, int))CFile::Seek)(0x400000, 0, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
+    ((void (__stdcall *)(void *, size_t, size_t, int, int))CFile::Read)(Buffer, 1u, 0x4000u, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
+    CFile::Close(&v10, UNUSED_ARG(), UNUSED_ARG());
     v4 = Adler32((unsigned __int8 *)Buffer, 0x4000u, 1u);
     v3[10] = v4;
     if ( v4 != -1293418438 )
@@ -234,20 +233,20 @@ bool  CHJBMgr::CheckHJBDatFile(void) {
       v9 = 0;
     }
     LOBYTE(v13) = 1;
-    CFile::~CFile();
+    ((void (__cdecl *)())CFile::~CFile)();
     v13 = 0;
     v3[9] = Buffer;
     operator delete[](Buffer);
     v7 = v9;
     v13 = -1;
-    std::wstring::~wstring(v11);
+    std::wstring::~wstring(&v11);
     return v7;
   }
   else
   {
     v8 = 0;
     v13 = -1;
-    std::wstring::~wstring(v11);
+    std::wstring::~wstring(&v11);
     return v8;
   }
 }
@@ -258,7 +257,7 @@ bool  CHJBMgr::CheckHJBDatFile(void) {
 void  CHJBMgr::ClearRequest(void) {
   
   *((_DWORD *)this + 1) = 0;
-  return memset((char *)this + 8, 0, 9u);
+  return memset(this + 2, 0, 9u);
 }
 
 

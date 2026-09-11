@@ -6,7 +6,7 @@
 // Decompiled from CInternationalTrader *__thiscall CInternationalTrader::CInternationalTrader(CInternationalTrader *this)
  CInternationalTrader::CInternationalTrader(void) {
   
-  IS4ChunkObject::IS4ChunkObject(this);
+  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this);
   *(_DWORD *)this = CInternationalTrader::_vftable_;
   *((_DWORD *)this + 2) = 1;
   CInternationalTrader::InitPlayerList();
@@ -42,40 +42,39 @@ void  CInternationalTrader::Load(class IS4Chunk & a2) {
   _BYTE v10[352]; // [esp+20h] [ebp-2C4h] BYREF
   _BYTE v11[352]; // [esp+180h] [ebp-164h] BYREF
 
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 762231707);
-  result = (**(int (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v4, 4);
-  if ( v4 != 1 )
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->LoadSignature)(a2, 762231707);
+  result = ((int (__thiscall *)(struct IS4Chunk *, int *, int))a2->Load)(a2, &v4, 4);
+  if ( v4 == 1 )
   {
-    return result;
-  }
-  result = (**(int (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v3, 4);
-  for ( i = 0;
-        i < v3;
-        ++i )
-  {
-    v5 = *(_DWORD *)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](i);
-    (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, v5 + 28, 9);
-    v8 = 0;
-    (**(void (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v8, 4);
-    for ( j = 0;
-          j < v8;
-          ++j )
+    result = ((int (__thiscall *)(struct IS4Chunk *, int *, int))a2->Load)(a2, &v3, 4);
+    for ( i = 0;
+          i < v3;
+          ++i )
     {
-      CInternationalTrader::CTradeBuildingInfo::CTradeBuildingInfo((CInternationalTrader::CTradeBuildingInfo *)v11);
-      (**(void (__thiscall ***)(struct IS4Chunk *, _BYTE *, int))a2)(a2, v11, 352);
-      std::list<CInternationalTrader::CTradeBuildingInfo>::push_back(v11);
+      v5 = *(_DWORD *)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](i);
+      ((void (__thiscall *)(struct IS4Chunk *, int, int))a2->Load)(a2, v5 + 28, 9);
+      v8 = 0;
+      ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Load)(a2, &v8, 4);
+      for ( j = 0;
+            j < v8;
+            ++j )
+      {
+        CInternationalTrader::CTradeBuildingInfo::CTradeBuildingInfo((CInternationalTrader::CTradeBuildingInfo *)v11);
+        ((void (__thiscall *)(struct IS4Chunk *, _BYTE *, int))a2->Load)(a2, v11, 352);
+        std::list<CInternationalTrader::CTradeBuildingInfo>::push_back((int)v11);
+      }
+      result = ((int (__thiscall *)(struct IS4Chunk *, int *, int))a2->Load)(a2, &v8, 4);
+      for ( k = 0;
+            k < v8;
+            ++k )
+      {
+        CInternationalTrader::CTradeBuildingInfo::CTradeBuildingInfo((CInternationalTrader::CTradeBuildingInfo *)v10);
+        ((void (__thiscall *)(struct IS4Chunk *, _BYTE *, int))a2->Load)(a2, v10, 352);
+        result = std::list<CInternationalTrader::CTradeBuildingInfo>::push_back((int)v10);
+      }
     }
-    result = (**(int (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v8, 4);
-    for ( k = 0;
-          k < v8;
-          ++k )
-    {
-      CInternationalTrader::CTradeBuildingInfo::CTradeBuildingInfo((CInternationalTrader::CTradeBuildingInfo *)v10);
-      (**(void (__thiscall ***)(struct IS4Chunk *, _BYTE *, int))a2)(a2, v10, 352);
-      result = std::list<CInternationalTrader::CTradeBuildingInfo>::push_back(v10);
-    }
+    CInternationalTrader::m_bInit = 1;
   }
-  CInternationalTrader::m_bInit = 1;
   return result;
 }
 
@@ -108,58 +107,58 @@ void  CInternationalTrader::Save(class IS4Chunk & a2) {
 
   v15[1] = this;
   v15[0] = *((_DWORD *)this + 2);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 762231707);
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD *, int))(*(_DWORD *)a2 + 16))(a2, v15, 4);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveSignature)(a2, 762231707);
+  ((void (__thiscall *)(struct IS4Chunk *, _DWORD *, int))a2->Save)(a2, v15, 4);
   v16 = std::vector<CInternationalTrader::CPlayerTradeInfo *>::size(&CInternationalTrader::m_sPlayerList);
-  result = (*(int (__thiscall **)(struct IS4Chunk *, int *, int))(*(_DWORD *)a2 + 16))(a2, &v16, 4);
+  result = ((int (__thiscall *)(struct IS4Chunk *, int *, int))a2->Save)(a2, &v16, 4);
   for ( i = 0;
         i < v16;
         ++i )
   {
     v19 = *(_DWORD *)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](i);
-    (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 16))(a2, v19 + 28, 9);
+    ((void (__thiscall *)(struct IS4Chunk *, int, int))a2->Save)(a2, v19 + 28, 9);
     v17 = std::list<CInternationalTrader::CTradeBuildingInfo>::size(v19);
-    (*(void (__thiscall **)(struct IS4Chunk *, int *, int))(*(_DWORD *)a2 + 16))(a2, &v17, 4);
-    std::list<CInternationalTrader::CTradeBuildingInfo>::begin(v8);
+    ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Save)(a2, &v17, 4);
+    std::list<CInternationalTrader::CTradeBuildingInfo>::begin((int)v8);
     v22 = 0;
     while ( 1 )
     {
-      v14 = (std::_Iterator_base12 *)std::list<CInternationalTrader::CTradeBuildingInfo>::end(v5);
+      v14 = (std::_Iterator_base12 *)std::list<CInternationalTrader::CTradeBuildingInfo>::end((int)v5);
       v13 = v14;
       LOBYTE(v22) = 1;
       v21 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::operator!=(v14);
       LOBYTE(v22) = 0;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>(v5);
-      if ( !v21 )
+      if ( v21 == 0 )
       {
         break;
       }
       v12 = std::_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::operator*(v8);
-      (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 16))(a2, v12, 352);
-      std::_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::operator++(v6, 0);
+      ((void (__thiscall *)(struct IS4Chunk *, int, int))a2->Save)(a2, v12, 352);
+      std::_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::operator++((int)v6, 0);
       std::_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>(v6);
     }
     v22 = -1;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>(v8);
     v17 = std::list<CInternationalTrader::CTradeBuildingInfo>::size(v19 + 12);
-    (*(void (__thiscall **)(struct IS4Chunk *, int *, int))(*(_DWORD *)a2 + 16))(a2, &v17, 4);
-    std::list<CInternationalTrader::CTradeBuildingInfo>::begin(v7);
+    ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Save)(a2, &v17, 4);
+    std::list<CInternationalTrader::CTradeBuildingInfo>::begin((int)v7);
     v22 = 2;
     while ( 1 )
     {
-      v11 = (std::_Iterator_base12 *)std::list<CInternationalTrader::CTradeBuildingInfo>::end(v3);
+      v11 = (std::_Iterator_base12 *)std::list<CInternationalTrader::CTradeBuildingInfo>::end((int)v3);
       v10 = v11;
       LOBYTE(v22) = 3;
       v20 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::operator!=(v11);
       LOBYTE(v22) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>(v3);
-      if ( !v20 )
+      if ( v20 == 0 )
       {
         break;
       }
       v9 = std::_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::operator*(v7);
-      (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 16))(a2, v9, 352);
-      std::_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::operator++(v4, 0);
+      ((void (__thiscall *)(struct IS4Chunk *, int, int))a2->Save)(a2, v9, 352);
+      std::_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::operator++((int)v4, 0);
       std::_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CInternationalTrader::CTradeBuildingInfo>>>(v4);
     }
     v22 = -1;
@@ -194,22 +193,22 @@ void __cdecl CInternationalTrader::ReInit(void) {
   struct std::_Iterator_base12 *v17; // [esp+4Ch] [ebp-10h]
   int v18; // [esp+58h] [ebp-4h]
 
-  if ( !(unsigned __int8)std::vector<CInternationalTrader::CPlayerTradeInfo *>::empty(&CInternationalTrader::m_sPlayerList) )
+  if ( (unsigned __int8)std::vector<CInternationalTrader::CPlayerTradeInfo *>::empty(&CInternationalTrader::m_sPlayerList) == 0 )
   {
-    v17 = (struct std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo *>::end(v5);
+    v17 = (struct std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo *>::end((int)v5);
     v16 = v17;
     v18 = 0;
     v12 = &v2;
     v15 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo *>>>(v17);
     v11 = v15;
     LOBYTE(v18) = 1;
-    v14 = (struct std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo *>::begin(v6);
+    v14 = (struct std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo *>::begin((int)v6);
     v13 = v14;
     LOBYTE(v18) = 2;
     v10 = v1;
     v9 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo *>>>(v14);
     LOBYTE(v18) = 3;
-    v8 = std::vector<CInternationalTrader::CPlayerTradeInfo *>::erase(v7, v1[0], v1[1], v1[2], v2, v3, v4);
+    v8 = std::vector<CInternationalTrader::CPlayerTradeInfo *>::erase((int)v7, v1[0], v1[1], v1[2], v2, v3, v4);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo *>>>(v7);
     LOBYTE(v18) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo *>>>(v6);
@@ -217,7 +216,7 @@ void __cdecl CInternationalTrader::ReInit(void) {
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo *>>>(v5);
   }
   result = std::vector<CInternationalTrader::CPlayerTradeInfo *>::empty(&CInternationalTrader::m_sPlayerList);
-  if ( !(_BYTE)result )
+  if ( (_BYTE)result == 0 )
   {
     result = BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 312, "m_sPlayerList.empty()");
     if ( result == 1 )
@@ -263,92 +262,88 @@ bool  CInternationalTrader::Trade(class CBuilding * a2) {
   int v29; // [esp+74h] [ebp-4h]
 
   v23 = this;
-  if ( !a2 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 19, "_pBuilding!=NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 19, "_pBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 0;
   }
-  if ( *((_DWORD *)v23 + 1) != IEntity::OwnerId((unsigned __int8 *)a2) )
+  if ( *((_DWORD *)v23 + 1) == IEntity::OwnerId(a2) )
   {
-    return 1;
-  }
-  v21 = (CTradingBuildingRole *)CBuilding::Role(a2);
-  v24 = *(CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](*((_DWORD *)v23 + 1));
-  if ( !v24 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 31, "pCurrentPlayer!=NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( !v24 )
-  {
-    return 0;
-  }
-  CInternationalTrader::CPlayerTradeInfo::GetExportListForBuilding(v24, (int)v10, a2);
-  v29 = 0;
-  if ( !std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::size(v10) )
-  {
-    v28 = 1;
-    v29 = -1;
-    std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::~vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>();
-    return v28;
-  }
-  if ( CInternationalTrader::TradeWithSomeone(v23, *((_DWORD *)v23 + 1)) )
-  {
-    std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin(v13);
-    LOBYTE(v29) = 1;
-    while ( 1 )
+    v21 = (CTradingBuildingRole *)CBuilding::Role(a2);
+    v24 = *(CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](*((_DWORD *)v23 + 1));
+    if ( v24 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 31, "pCurrentPlayer!=NULL") == 1 )
     {
-      v19 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end(v11);
-      v18 = v19;
-      LOBYTE(v29) = 2;
-      v27 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator!=(v19);
+      __debugbreak();
+    }
+    if ( v24 == 0 )
+    {
+      return 0;
+    }
+    CInternationalTrader::CPlayerTradeInfo::GetExportListForBuilding(v24, (int)v10, a2);
+    v29 = 0;
+    if ( std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::size(v10) == 0 )
+    {
+      v28 = 1;
+      v29 = -1;
+      std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::~vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>();
+      return v28;
+    }
+    if ( CInternationalTrader::TradeWithSomeone(v23, *((_DWORD *)v23 + 1)) )
+    {
+      std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin((int)v13);
       LOBYTE(v29) = 1;
-      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v11);
-      if ( !v27 )
+      while ( 1 )
+      {
+        v19 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end((int)v11);
+        v18 = v19;
+        LOBYTE(v29) = 2;
+        v27 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator!=(v19);
+        LOBYTE(v29) = 1;
+        std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v11);
+        if ( v27 == 0 )
+        {
+          break;
+        }
+        v3 = (int *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator*(v13);
+        v4 = *v3;
+        v5 = v3[1];
+        v14 = v4;
+        v15 = v5;
+        CTradingBuildingRole::RequestTradingGood(v21, v5);
+        std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++((int)v12, 0);
+        std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v12);
+      }
+      LOBYTE(v29) = 0;
+      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v13);
+    }
+    v22 = 0;
+    for ( i = 1;
+          ;
+          ++i )
+    {
+      v6 = std::vector<CInternationalTrader::CPlayerTradeInfo *>::size(&CInternationalTrader::m_sPlayerList);
+      if ( i >= v6 || v22 != 0 )
       {
         break;
       }
-      v3 = (int *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator*(v13);
-      v4 = *v3;
-      v5 = v3[1];
-      v14 = v4;
-      v15 = v5;
-      CTradingBuildingRole::RequestTradingGood(v21, v5);
-      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++(v12, 0);
-      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v12);
-    }
-    LOBYTE(v29) = 0;
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v13);
-  }
-  v22 = 0;
-  for ( i = 1;
-        ;
-        ++i )
-  {
-    v6 = std::vector<CInternationalTrader::CPlayerTradeInfo *>::size(&CInternationalTrader::m_sPlayerList);
-    if ( i >= v6 || v22 )
-    {
-      break;
-    }
-    PlayerID = CInternationalTrader::CPlayerTradeInfo::GetPlayerID(v24);
-    if ( i != PlayerID )
-    {
-      if ( CInternationalTrader::CPlayerTradeInfo::TradeWithPlayer(v24, i) )
+      PlayerID = CInternationalTrader::CPlayerTradeInfo::GetPlayerID(v24);
+      if ( i != PlayerID && CInternationalTrader::CPlayerTradeInfo::TradeWithPlayer(v24, i) != 0 )
       {
         v20 = *(CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](i);
-        v8 = IEntity::OwnerId((unsigned __int8 *)a2);
-        if ( CInternationalTrader::CPlayerTradeInfo::TradeWithPlayer(v20, v8) )
+        v8 = IEntity::OwnerId(a2);
+        if ( CInternationalTrader::CPlayerTradeInfo::TradeWithPlayer(v20, v8) != 0 )
         {
           v22 = CInternationalTrader::CheckTrade(v23, v24, v20, a2);
-          if ( v22 )
+          if ( v22 != 0 )
           {
             CTradingBuildingRole::SetTradingBuildingID(v21, v22);
             CTradingBuildingRole::RequestVehicle(v21, a2, 1);
-            BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v22);
-            v16 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-            v9 = IEntity::ID();
+            BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v22);
+            v16 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
+            v9 = ((int (__stdcall *)())IEntity::ID)();
             CTradingBuildingRole::SetTradingBuildingID(v16, v9);
             v26 = 1;
             v29 = -1;
@@ -358,9 +353,9 @@ bool  CInternationalTrader::Trade(class CBuilding * a2) {
         }
       }
     }
+    v29 = -1;
+    std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::~vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>();
   }
-  v29 = -1;
-  std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::~vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>();
   return 1;
 }
 
@@ -372,29 +367,28 @@ void  CInternationalTrader::AddBuilding(class CBuilding * a2) {
   CInternationalTrader::CPlayerTradeInfo **result; // eax
   CInternationalTrader::CPlayerTradeInfo *v4; // [esp+4h] [ebp-4h]
 
-  if ( !a2 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 438, "_pOwnerBuilding!= NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 438, "_pOwnerBuilding!= NULL") == 1 )
   {
     __debugbreak();
   }
   result = 0;
-  if ( !a2 )
+  if ( a2 != 0 )
   {
-    return result;
-  }
-  *((_DWORD *)this + 1) = IEntity::OwnerId((unsigned __int8 *)a2);
-  result = (CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](*((_DWORD *)this + 1));
-  v4 = *result;
-  if ( !*result )
-  {
-    result = (CInternationalTrader::CPlayerTradeInfo **)BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 443, "pPlayerInfo!=NULL");
-    if ( result == (CInternationalTrader::CPlayerTradeInfo **)1 )
+    *((_DWORD *)this + 1) = IEntity::OwnerId(a2);
+    result = (CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](*((_DWORD *)this + 1));
+    v4 = *result;
+    if ( *result == 0 )
     {
-      __debugbreak();
+      result = (CInternationalTrader::CPlayerTradeInfo **)BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 443, "pPlayerInfo!=NULL");
+      if ( result == (CInternationalTrader::CPlayerTradeInfo **)1 )
+      {
+        __debugbreak();
+      }
     }
-  }
-  if ( v4 )
-  {
-    return (CInternationalTrader::CPlayerTradeInfo **)CInternationalTrader::CPlayerTradeInfo::AddBuilding(v4, a2);
+    if ( v4 != 0 )
+    {
+      return (CInternationalTrader::CPlayerTradeInfo **)CInternationalTrader::CPlayerTradeInfo::AddBuilding(v4, a2);
+    }
   }
   return result;
 }
@@ -408,25 +402,24 @@ void  CInternationalTrader::RemoveBuilding(class CBuilding * a2) {
   int v3; // [esp+4h] [ebp-8h]
   CInternationalTrader::CPlayerTradeInfo *v4; // [esp+8h] [ebp-4h]
 
-  if ( !a2 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 452, "pBuilding!= NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 452, "pBuilding!= NULL") == 1 )
   {
     __debugbreak();
   }
   result = 0;
-  if ( !a2 )
+  if ( a2 != 0 )
   {
-    return result;
-  }
-  v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-  v4 = *(CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](v3);
-  if ( !v4 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 457, "pPlayerInfo!=NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  result = 0;
-  if ( v4 )
-  {
-    return CInternationalTrader::CPlayerTradeInfo::RemoveBuilding(v4, a2);
+    v3 = IEntity::OwnerId(a2);
+    v4 = *(CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](v3);
+    if ( v4 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 457, "pPlayerInfo!=NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    result = 0;
+    if ( v4 != 0 )
+    {
+      return CInternationalTrader::CPlayerTradeInfo::RemoveBuilding(v4, a2);
+    }
   }
   return result;
 }
@@ -444,7 +437,7 @@ void  CInternationalTrader::SetGoodStatus(int a1, class CBuilding * a2, enum PIL
     __debugbreak();
   }
   result = 0;
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     result = (struct CInternationalTrader::CTradeBuildingInfo *)BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 472, "_pOwnerBuilding!=NULL");
     if ( result == (struct CInternationalTrader::CTradeBuildingInfo *)1 )
@@ -452,27 +445,24 @@ void  CInternationalTrader::SetGoodStatus(int a1, class CBuilding * a2, enum PIL
       __debugbreak();
     }
   }
-  if ( a4 != 4 && a4 != 8 )
+  if ( a4 != 4 && a4 != 8 && a4 != 0 )
   {
-    if ( a4 )
+    result = (struct CInternationalTrader::CTradeBuildingInfo *)BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 473, "_Status == TRADING_IMPORT || _Status == TRADING_EXPORT || _Status==0");
+    if ( result == (struct CInternationalTrader::CTradeBuildingInfo *)1 )
     {
-      result = (struct CInternationalTrader::CTradeBuildingInfo *)BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 473, "_Status == TRADING_IMPORT || _Status == TRADING_EXPORT || _Status==0");
-      if ( result == (struct CInternationalTrader::CTradeBuildingInfo *)1 )
-      {
-        __debugbreak();
-      }
+      __debugbreak();
     }
   }
-  if ( !a2 )
+  if ( a2 != 0 )
   {
-    return result;
+    v5 = *(CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](a1);
+    if ( v5 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 481, "pPlayerInfo!=NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    return CInternationalTrader::CPlayerTradeInfo::SetGoodStatus(v5, a2, a3, a4);
   }
-  v5 = *(CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](a1);
-  if ( !v5 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 481, "pPlayerInfo!=NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  return CInternationalTrader::CPlayerTradeInfo::SetGoodStatus(v5, a2, a3, a4);
+  return result;
 }
 
 
@@ -488,7 +478,7 @@ void  CInternationalTrader::SwitchToNextGoodStatus(int a2, class CBuilding * a3,
     __debugbreak();
   }
   result = 0;
-  if ( !a3 )
+  if ( a3 == 0 )
   {
     result = BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 491, "_pAtBuilding!=NULL");
     if ( result == 1 )
@@ -496,12 +486,12 @@ void  CInternationalTrader::SwitchToNextGoodStatus(int a2, class CBuilding * a3,
       __debugbreak();
     }
   }
-  if ( !a3 )
+  if ( a3 != 0 )
   {
-    return result;
+    v5 = (CInternationalTrader::GetGoodStatus(this, a2, a3, a4) + 1) % 3;
+    return CInternationalTrader::SetGoodStatus(this, a2, a3, a4, v5);
   }
-  v5 = (CInternationalTrader::GetGoodStatus(this, a2, a3, a4) + 1) % 3;
-  return CInternationalTrader::SetGoodStatus(this, a2, a3, a4, v5);
+  return result;
 }
 
 
@@ -597,8 +587,8 @@ bool  CInternationalTrader::CheckGoodMatch(int a2, int a3) {
   std::_Iterator_base12 *v13; // [esp+48h] [ebp-24h]
   std::_Iterator_base12 *v14; // [esp+4Ch] [ebp-20h]
   CInternationalTrader *v15; // [esp+50h] [ebp-1Ch]
-  unsigned __int8 *v16; // [esp+54h] [ebp-18h]
-  unsigned __int8 *BuildingPtr; // [esp+58h] [ebp-14h]
+  IEntity *v16; // [esp+54h] [ebp-18h]
+  IEntity *BuildingPtr; // [esp+58h] [ebp-14h]
   char v18; // [esp+5Dh] [ebp-Fh]
   char v19; // [esp+5Eh] [ebp-Eh]
   char v20; // [esp+5Fh] [ebp-Dh]
@@ -607,44 +597,44 @@ bool  CInternationalTrader::CheckGoodMatch(int a2, int a3) {
   v15 = this;
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
   v16 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a3);
-  if ( !BuildingPtr && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 222, "pAtBuilding!=NULL") == 1 )
+  if ( BuildingPtr == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 222, "pAtBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !BuildingPtr )
+  if ( BuildingPtr == 0 )
   {
     return 0;
   }
-  if ( !v16 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 223, "pWithBuilding!=NULL") == 1 )
+  if ( v16 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 223, "pWithBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !v16 )
+  if ( v16 == 0 )
   {
     return 0;
   }
   v9 = IEntity::OwnerId(BuildingPtr);
   v12 = IEntity::OwnerId(v16);
-  CInternationalTrader::GetExportGoodList(v5, BuildingPtr);
+  CInternationalTrader::GetExportGoodList((int)v5, BuildingPtr);
   v21 = 0;
-  std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin(v8);
+  std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin((int)v8);
   LOBYTE(v21) = 1;
   while ( 1 )
   {
-    v14 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end(v6);
+    v14 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end((int)v6);
     v13 = v14;
     LOBYTE(v21) = 2;
     v20 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator!=(v14);
     LOBYTE(v21) = 1;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v6);
-    if ( !v20 )
+    if ( v20 == 0 )
     {
       break;
     }
     v11 = *(_DWORD *)(std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator*(v8) + 4);
     v10 = *(void **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](v12);
-    v4 = IEntity::Type((unsigned __int16 *)BuildingPtr);
-    if ( CInternationalTrader::CPlayerTradeInfo::ImportGood(v10, v11, v4) )
+    v4 = IEntity::Type(BuildingPtr);
+    if ( CInternationalTrader::CPlayerTradeInfo::ImportGood(v10, v11, v4) != 0 )
     {
       v19 = 1;
       LOBYTE(v21) = 0;
@@ -653,7 +643,7 @@ bool  CInternationalTrader::CheckGoodMatch(int a2, int a3) {
       std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::~vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>();
       return v19;
     }
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++(v7, 0);
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++((int)v7, 0);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v7);
   }
   LOBYTE(v21) = 0;
@@ -681,8 +671,8 @@ bool  CInternationalTrader::CheckGoodMatch(int a2, int a3, enum PILE_TYPES a4) {
   std::_Iterator_base12 *v14; // [esp+48h] [ebp-24h]
   void *v15; // [esp+4Ch] [ebp-20h]
   int v16; // [esp+50h] [ebp-1Ch]
-  unsigned __int8 *v17; // [esp+54h] [ebp-18h]
-  unsigned __int8 *BuildingPtr; // [esp+58h] [ebp-14h]
+  IEntity *v17; // [esp+54h] [ebp-18h]
+  IEntity *BuildingPtr; // [esp+58h] [ebp-14h]
   char v19; // [esp+5Dh] [ebp-Fh]
   char v20; // [esp+5Eh] [ebp-Eh]
   char v21; // [esp+5Fh] [ebp-Dh]
@@ -691,37 +681,37 @@ bool  CInternationalTrader::CheckGoodMatch(int a2, int a3, enum PILE_TYPES a4) {
   v15 = this;
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
   v17 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a3);
-  if ( !BuildingPtr && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 250, "pAtBuilding!=NULL") == 1 )
+  if ( BuildingPtr == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 250, "pAtBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !BuildingPtr )
+  if ( BuildingPtr == 0 )
   {
     return 0;
   }
-  if ( !v17 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 251, "pWithBuilding!=NULL") == 1 )
+  if ( v17 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 251, "pWithBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !v17 )
+  if ( v17 == 0 )
   {
     return 0;
   }
   v10 = IEntity::OwnerId(BuildingPtr);
   v12 = IEntity::OwnerId(v17);
-  CInternationalTrader::GetExportGoodList(v6, BuildingPtr);
+  CInternationalTrader::GetExportGoodList((int)v6, BuildingPtr);
   v22 = 0;
-  std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin(v9);
+  std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin((int)v9);
   LOBYTE(v22) = 1;
   while ( 1 )
   {
-    v14 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end(v7);
+    v14 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end((int)v7);
     v13 = v14;
     LOBYTE(v22) = 2;
     v21 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator!=(v14);
     LOBYTE(v22) = 1;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v7);
-    if ( !v21 )
+    if ( v21 == 0 )
     {
       break;
     }
@@ -729,8 +719,8 @@ bool  CInternationalTrader::CheckGoodMatch(int a2, int a3, enum PILE_TYPES a4) {
     if ( v16 == a4 )
     {
       v11 = *(void **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](v12);
-      v5 = IEntity::Type((unsigned __int16 *)BuildingPtr);
-      if ( CInternationalTrader::CPlayerTradeInfo::ImportGood(v11, v16, v5) )
+      v5 = IEntity::Type(BuildingPtr);
+      if ( CInternationalTrader::CPlayerTradeInfo::ImportGood(v11, v16, v5) != 0 )
       {
         v20 = 1;
         LOBYTE(v22) = 0;
@@ -740,7 +730,7 @@ bool  CInternationalTrader::CheckGoodMatch(int a2, int a3, enum PILE_TYPES a4) {
         return v20;
       }
     }
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++(v8, 0);
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++((int)v8, 0);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v8);
   }
   LOBYTE(v22) = 0;
@@ -762,16 +752,16 @@ enum TGOOD_STATUS  CInternationalTrader::GetGoodStatus(int a1, class CBuilding *
   {
     __debugbreak();
   }
-  if ( !a2 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 507, "_pBuilding!=NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 507, "_pBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 0;
   }
   v4 = *(CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](a1);
-  if ( !v4 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 511, "pPlayerInfo!=NULL") == 1 )
+  if ( v4 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 511, "pPlayerInfo!=NULL") == 1 )
   {
     __debugbreak();
   }
@@ -786,11 +776,11 @@ class std::vector<struct CInternationalTrader::CPlayerTradeInfo::TGoodInfo,class
   int v2; // eax
   CInternationalTrader::CPlayerTradeInfo **v3; // eax
 
-  if ( !a2 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 100, "_pBuilding!=NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 100, "_pBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
-  v2 = IEntity::OwnerId(a2);
+  v2 = IEntity::OwnerId((IEntity *)a2);
   v3 = (CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](v2);
   CInternationalTrader::CPlayerTradeInfo::GetExportListForBuilding(*v3, a1, (struct CBuilding *)a2);
   return a1;
@@ -819,18 +809,18 @@ bool  CInternationalTrader::CanWalk(int a2, int a3) {
   int WorkingAreaPackedXY; // [esp+2Ch] [ebp-4h]
   int v20; // [esp+2Ch] [ebp-4h]
 
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
-  v15 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a3);
-  if ( !BuildingPtr || !v15 )
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
+  v15 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a3);
+  if ( BuildingPtr == 0 || v15 == 0 )
   {
     return 0;
   }
-  v4 = IEntity::Type((unsigned __int16 *)BuildingPtr);
-  if ( v4 != IEntity::Type((unsigned __int16 *)v15) )
+  v4 = IEntity::Type((IEntity *)BuildingPtr);
+  if ( v4 != IEntity::Type((IEntity *)v15) )
   {
     return 0;
   }
-  if ( IEntity::Type((unsigned __int16 *)BuildingPtr) == 32 )
+  if ( IEntity::Type((IEntity *)BuildingPtr) == 32 )
   {
     WorkingAreaPackedXY = CBuilding::GetWorkingAreaPackedXY(BuildingPtr);
     v17 = CBuilding::GetWorkingAreaPackedXY(v15);
@@ -873,35 +863,34 @@ void __cdecl CInternationalTrader::InitPlayerList(void) {
   int i; // [esp+14h] [ebp-10h]
 
   result = (unsigned __int8)CInternationalTrader::m_bInit;
-  if ( CInternationalTrader::m_bInit )
+  if ( CInternationalTrader::m_bInit == 0 )
   {
-    return result;
+    v1 = CPlayerManager::NumberOfPlayers();
+    std::vector<CInternationalTrader::CPlayerTradeInfo *>::resize(v1 + 1);
+    for ( i = 0;
+          ;
+          ++i )
+    {
+      result = CPlayerManager::NumberOfPlayers();
+      if ( i > result )
+      {
+        break;
+      }
+      C = (CInternationalTrader::CPlayerTradeInfo *)operator new(0x28u);
+      if ( C != 0 )
+      {
+        v3 = CInternationalTrader::CPlayerTradeInfo::CPlayerTradeInfo(C);
+      }
+      else
+      {
+        v3 = 0;
+      }
+      *(_DWORD *)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](i) = v3;
+      v2 = (CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](i);
+      CInternationalTrader::CPlayerTradeInfo::SetPlayerID(*v2, i);
+    }
+    CInternationalTrader::m_bInit = 1;
   }
-  v1 = CPlayerManager::NumberOfPlayers();
-  std::vector<CInternationalTrader::CPlayerTradeInfo *>::resize(v1 + 1);
-  for ( i = 0;
-        ;
-        ++i )
-  {
-    result = CPlayerManager::NumberOfPlayers();
-    if ( i > result )
-    {
-      break;
-    }
-    C = (CInternationalTrader::CPlayerTradeInfo *)operator new(0x28u);
-    if ( C )
-    {
-      v3 = CInternationalTrader::CPlayerTradeInfo::CPlayerTradeInfo(C);
-    }
-    else
-    {
-      v3 = 0;
-    }
-    *(_DWORD *)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](i) = v3;
-    v2 = (CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](i);
-    CInternationalTrader::CPlayerTradeInfo::SetPlayerID(*v2, i);
-  }
-  CInternationalTrader::m_bInit = 1;
   return result;
 }
 
@@ -952,27 +941,27 @@ int  CInternationalTrader::CheckTrade(class CInternationalTrader::CPlayerTradeIn
   int v44; // [esp+C8h] [ebp-4h]
 
   v25 = this;
-  if ( !a2 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 110, "pCurrentPlayer!=NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 110, "pCurrentPlayer!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 0;
   }
-  if ( !a3 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 111, "pOtherPlayer!=NULL") == 1 )
+  if ( a3 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 111, "pOtherPlayer!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !a3 )
+  if ( a3 == 0 )
   {
     return 0;
   }
-  if ( !a4 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 112, "_pAtBuilding!=NULL") == 1 )
+  if ( a4 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 112, "_pAtBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !a4 )
+  if ( a4 == 0 )
   {
     return 0;
   }
@@ -980,17 +969,17 @@ int  CInternationalTrader::CheckTrade(class CInternationalTrader::CPlayerTradeIn
   v40 = 0;
   CInternationalTrader::CPlayerTradeInfo::GetExportListForBuilding(a2, (int)v17, a4);
   v44 = 0;
-  std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin(v36);
+  std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin((int)v36);
   LOBYTE(v44) = 1;
   while ( 1 )
   {
-    v29 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end(v14);
+    v29 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end((int)v14);
     v28 = v29;
     LOBYTE(v44) = 2;
     v43 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator!=(v29);
     LOBYTE(v44) = 1;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v14);
-    if ( !v43 )
+    if ( v43 == 0 )
     {
       LOBYTE(v44) = 0;
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v36);
@@ -999,30 +988,30 @@ int  CInternationalTrader::CheckTrade(class CInternationalTrader::CPlayerTradeIn
       std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::~vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>();
       return v19;
     }
-    v10 = IEntity::Type((unsigned __int16 *)a4);
+    v10 = IEntity::Type(a4);
     v5 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator*(v36);
-    if ( CInternationalTrader::CPlayerTradeInfo::ImportGood(a3, *(_DWORD *)(v5 + 4), v10) )
+    if ( CInternationalTrader::CPlayerTradeInfo::ImportGood(a3, *(_DWORD *)(v5 + 4), v10) != 0 )
     {
       break;
     }
 LABEL_39:
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++(v15, 0);
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++((int)v15, 0);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v15);
   }
-  v6 = IEntity::Type((unsigned __int16 *)a4);
+  v6 = IEntity::Type(a4);
   CInternationalTrader::CPlayerTradeInfo::GetExportList(a3, (int)v18, v6);
   LOBYTE(v44) = 3;
-  std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin(v30);
+  std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin((int)v30);
   LOBYTE(v44) = 4;
   while ( 1 )
   {
-    v27 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end(v12);
+    v27 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end((int)v12);
     v26 = v27;
     LOBYTE(v44) = 5;
     v42 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator!=(v27);
     LOBYTE(v44) = 4;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v12);
-    if ( !v42 )
+    if ( v42 == 0 )
     {
       LOBYTE(v44) = 3;
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v30);
@@ -1031,48 +1020,45 @@ LABEL_39:
       goto LABEL_39;
     }
     v39 = -1;
-    v11 = IEntity::Type((unsigned __int16 *)a4);
+    v11 = IEntity::Type(a4);
     v7 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator*(v36);
-    if ( CInternationalTrader::CPlayerTradeInfo::ImportGoodAtBuilding(a3, &v39, *(_DWORD *)(v7 + 4), v11) )
+    if ( CInternationalTrader::CPlayerTradeInfo::ImportGoodAtBuilding(a3, &v39, *(_DWORD *)(v7 + 4), v11) != 0 )
     {
-      if ( v39 == IEntity::ID() && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 145, "ImportBuildingID!= _pAtBuilding->ID()") == 1 )
+      if ( v39 == ((int (__stdcall *)())IEntity::ID)() && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 145, "ImportBuildingID!= _pAtBuilding->ID()") == 1 )
       {
         __debugbreak();
       }
       v41 = 1;
       v38 = *(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator*(v36);
-      if ( v38 != IEntity::ID() && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 149, "ExportBuildingID == _pAtBuilding->ID()") == 1 )
+      if ( v38 != ((int (__stdcall *)())IEntity::ID)() && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 149, "ExportBuildingID == _pAtBuilding->ID()") == 1 )
       {
         __debugbreak();
       }
       if ( CInternationalTrader::CanWalk(v25, v38, v39) )
       {
         v40 = 1;
-        BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v39);
-        v34 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v38);
-        if ( v34 )
+        BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v39);
+        v34 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v38);
+        if ( v34 != 0 && BuildingPtr != 0 )
         {
-          if ( BuildingPtr )
+          v33 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
+          v32 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)v34);
+          v8 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator*(v30);
+          CurrentAmount = CTradingBuildingRole::GetCurrentAmount(v33, *(_DWORD *)(v8 + 4));
+          v9 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator*(v36);
+          v37 = CTradingBuildingRole::GetCurrentAmount(v32, *(_DWORD *)(v9 + 4));
+          NumberOfFreePiles = CTradingBuildingRole::GetNumberOfFreePiles(v33);
+          v23 = CTradingBuildingRole::GetNumberOfFreePiles(v32);
+          v16 = 8;
+          v24 = 16;
+          if ( v37 >= 16 && CurrentAmount >= v37 )
           {
-            v33 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-            v32 = (CTradingBuildingRole *)CBuilding::Role(v34);
-            v8 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator*(v30);
-            CurrentAmount = CTradingBuildingRole::GetCurrentAmount(v33, *(_DWORD *)(v8 + 4));
-            v9 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator*(v36);
-            v37 = CTradingBuildingRole::GetCurrentAmount(v32, *(_DWORD *)(v9 + 4));
-            NumberOfFreePiles = CTradingBuildingRole::GetNumberOfFreePiles(v33);
-            v23 = CTradingBuildingRole::GetNumberOfFreePiles(v32);
-            v16 = 8;
-            v24 = 16;
-            if ( v37 >= 16 && CurrentAmount >= v37 )
-            {
-              break;
-            }
+            break;
           }
         }
       }
     }
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++(v13, 0);
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++((int)v13, 0);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v13);
   }
   if ( 8 * v23 < v37 || 8 * NumberOfFreePiles < CurrentAmount )
@@ -1105,19 +1091,19 @@ LABEL_39:
 
 
 // address=[0x1463850]
-// Decompiled from void __stdcall CInternationalTrader::DisableTrading(_DWORD *a1, int a2, int a3)
+// Decompiled from void __stdcall CInternationalTrader::DisableTrading(CBuilding *a1, int a2, int a3)
 void  CInternationalTrader::DisableTrading(class CBuilding * a1, int a2, int a3) {
   
   CTradingBuildingRole *v3; // [esp+4h] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 211, "_pBuilding!=NULL") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 211, "_pBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( a1 )
+  if ( a1 != 0 )
   {
     v3 = (CTradingBuildingRole *)CBuilding::Role(a1);
-    CTradingBuildingRole::DisableTranding(v3);
+    ((void (__thiscall *)(CTradingBuildingRole *))CTradingBuildingRole::DisableTranding)(v3);
   }
 }
 
@@ -1130,14 +1116,14 @@ bool  CInternationalTrader::IsBuildingAnPort(class CBuilding * a1) {
   struct CInternationalTrader::CTradeBuildingInfo *BuildingInfo; // [esp+8h] [ebp-8h]
   CInternationalTrader::CPlayerTradeInfo *v4; // [esp+Ch] [ebp-4h]
 
-  v1 = IEntity::OwnerId(a1);
+  v1 = IEntity::OwnerId((IEntity *)a1);
   v4 = *(CInternationalTrader::CPlayerTradeInfo **)std::vector<CInternationalTrader::CPlayerTradeInfo *>::operator[](v1);
-  if ( !v4 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 278, "pPlayerInfo!=NULL") == 1 )
+  if ( v4 == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 278, "pPlayerInfo!=NULL") == 1 )
   {
     __debugbreak();
   }
-  BuildingInfo = CInternationalTrader::CPlayerTradeInfo::GetBuildingInfo(v4, (struct CBuilding *)a1);
-  if ( !BuildingInfo && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 280, "pBuldingInfo!=NULL") == 1 )
+  BuildingInfo = (struct CInternationalTrader::CTradeBuildingInfo *)CInternationalTrader::CPlayerTradeInfo::GetBuildingInfo(v4, (struct CBuilding *)a1);
+  if ( BuildingInfo == 0 && BBSupportDbgReport(2, "Logic\\InternationalTrader.cpp", 280, "pBuldingInfo!=NULL") == 1 )
   {
     __debugbreak();
   }

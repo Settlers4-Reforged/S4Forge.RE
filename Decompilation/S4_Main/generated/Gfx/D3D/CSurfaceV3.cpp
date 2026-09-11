@@ -6,7 +6,7 @@
 // Decompiled from CSurfaceV3 *__thiscall CSurfaceV3::CSurfaceV3(CSurfaceV3 *this)
  CSurfaceV3::CSurfaceV3(void) {
   
-  CSurface::CSurface(this);
+  CSurface::CSurface((CSurface *)this);
   *(_DWORD *)this = &CSurfaceV3::_vftable_;
   *((_DWORD *)this + 1) = 0;
   *((_DWORD *)this + 2) = 0;
@@ -22,7 +22,7 @@ void  CSurfaceV3::Release(void) {
   CSurfaceV3 *result; // eax
 
   result = this;
-  if ( *((_DWORD *)this + 2) )
+  if ( *((_DWORD *)this + 2) != 0 )
   {
     return (CSurfaceV3 *)(*(int (__stdcall **)(_DWORD))(**((_DWORD **)this + 2) + 8))(*((_DWORD *)this + 2));
   }
@@ -54,7 +54,7 @@ long  CSurfaceV3::ClearSurface(class CBlitFX * a2) {
   CBlitFX *v3; // eax
   int v6; // [esp+4h] [ebp-4h]
 
-  if ( a2 )
+  if ( a2 != 0 )
   {
     do
     {
@@ -73,7 +73,7 @@ long  CSurfaceV3::ClearSurface(class CBlitFX * a2) {
     {
       do
       {
-        v3 = CBlitFX::GetBlitStructPtr((CBlitFX *)&s_cBlitFx);
+        v3 = CBlitFX::GetBlitStructPtr(&s_cBlitFx);
         v6 = (*(int (__stdcall **)(_DWORD, _DWORD, _DWORD, _DWORD, int, CBlitFX *))(**((_DWORD **)this + 2) + 20))(*((_DWORD *)this + 2), 0, 0, 0, 1536, v3);
       }
       while ( v6 == -2005532132 );
@@ -92,7 +92,7 @@ long  CSurfaceV3::ClearSurface(struct tagRECT a2, class CBlitFX * a3) {
   CBlitFX *v4; // eax
   int v7; // [esp+4h] [ebp-4h]
 
-  if ( a3 )
+  if ( a3 != 0 )
   {
     do
     {
@@ -111,7 +111,7 @@ long  CSurfaceV3::ClearSurface(struct tagRECT a2, class CBlitFX * a3) {
     {
       do
       {
-        v4 = CBlitFX::GetBlitStructPtr((CBlitFX *)&s_cBlitFx);
+        v4 = CBlitFX::GetBlitStructPtr(&s_cBlitFx);
         v7 = (*(int (__stdcall **)(_DWORD, struct tagRECT *, _DWORD, _DWORD, int, CBlitFX *))(**((_DWORD **)this + 2) + 20))(*((_DWORD *)this + 2), &a2, 0, 0, 1536, v4);
       }
       while ( v7 == -2005532132 );
@@ -132,7 +132,7 @@ long  CSurfaceV3::Blt(struct tagRECT * a2, class CSurface * a3, struct tagRECT *
   {
     do
     {
-      v8 = (*(int (__stdcall **)(_DWORD, struct tagRECT *, _DWORD, struct tagRECT *, unsigned int, struct _DDBLTFX *))(**((_DWORD **)this + 2) + 20))(*((_DWORD *)this + 2), a2, *((_DWORD *)a3 + 2), a4, a5, a6);
+      v8 = (*(int (__stdcall **)(_DWORD, struct tagRECT *, CSurfaceV7_vtbl *, struct tagRECT *, unsigned int, struct _DDBLTFX *))(**((_DWORD **)this + 2) + 20))(*((_DWORD *)this + 2), a2, a3[2].__vftable, a4, a5, a6);
     }
     while ( v8 == -2005532132 );
   }
@@ -300,8 +300,8 @@ long  CSurfaceV3::GetPixelFormat(bool & a2) {
   v5[0] = 32;
   v3 = (*(int (__stdcall **)(_DWORD, _DWORD *))(**((_DWORD **)this + 2) + 84))(*((_DWORD *)this + 2), v5);
   *a2 = v5[5] == 992;
-  CBlitFX::SetFillColor((CBlitFX *)&s_cBlitFx, 0, 0, 0, *a2);
-  CBlitFX::SetFillColorAlpha((CBlitFX *)&s_cBlitFxAlpha, 0, 0, 0, 0);
+  CBlitFX::SetFillColor(&s_cBlitFx, 0, 0, 0, *a2);
+  CBlitFX::SetFillColorAlpha(&s_cBlitFxAlpha, 0, 0, 0, 0);
   CBlitFX::SetFillColorAlpha((CBlitFX *)&s_cBlitFxAlphaDebug, 0, 255, 0, 255);
   return v3;
 }
@@ -369,11 +369,13 @@ void  CSurfaceV3::SetSurfacePtr(void * a2) {
 void *  CSurfaceV3::GetAttachedSurfacePtr(void) {
   
   int v2; // [esp+0h] [ebp-10h] BYREF
+  int; // [esp+4h] [ebp-Ch]
   _DWORD v4[2]; // [esp+8h] [ebp-8h] BYREF
 
   v4[1] = this;
   v4[0] = 4;
-  if ( (*(int (__stdcall **)(_DWORD, _DWORD *, int *))(**((_DWORD **)this + 2) + 48))(*((_DWORD *)this + 2), v4, &v2) )
+   = (*(int (__stdcall **)(_DWORD, _DWORD *, int *))(**((_DWORD **)this + 2) + 48))(*((_DWORD *)this + 2), v4, &v2);
+  if (  != 0 )
   {
     return 0;
   }
@@ -401,7 +403,7 @@ long  CSurfaceV3::SetAsRenderTarget(struct IDirect3DDevice7 * a2) {
 
 
 // address=[0x2f8a320]
-// Decompiled from void __thiscall CSurfaceV3::~CSurfaceV3(CSurfaceV3 *this)
+// Decompiled from void __thiscall CSurfaceV3::~CSurfaceV3(CSurface *this)
  CSurfaceV3::~CSurfaceV3(void) {
   
   CSurface::~CSurface(this);

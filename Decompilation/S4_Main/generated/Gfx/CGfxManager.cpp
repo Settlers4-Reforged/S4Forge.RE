@@ -3,20 +3,20 @@
 // Definitions for class CGfxManager
 
 // address=[0x1361470]
-// Decompiled from CGfxManager *__thiscall CGfxManager::CGfxManager(CGfxManager *this, BYTE a2, bool a3, bool a4)
- CGfxManager::CGfxManager(bool a2, bool a3, bool a4) {
+// Decompiled from CGfxManager *__thiscall CGfxManager::CGfxManager(CGfxManager *this, bool arg0, bool a3, bool a4)
+ CGfxManager::CGfxManager(bool arg0, bool a3, bool a4) {
   
-  std::wstring *a2a; // [esp+4h] [ebp-34h]
+  std::wstring *a2; // [esp+4h] [ebp-34h]
   std::wstring v7; // [esp+Ch] [ebp-2Ch] BYREF
   int v8; // [esp+34h] [ebp-4h]
 
   this->__vftable = (CGfxManager_vtbl *)&CGfxManager::_vftable_;
   _vec_ctor_no(this->m_sFilePal, 16u, 42u, (void *(__thiscall *)(void *))CGfxManager::SGFXINFO::SGFXINFO);
-  _vec_ctor_no(this->m_sFileGfx, 0x10u, 42u, (void *(__thiscall *)(void *))CGfxManager::SGFXINFO::SGFXINFO);
+  _vec_ctor_no(this->m_sFileGfx, 16u, 42u, (void *(__thiscall *)(void *))CGfxManager::SGFXINFO::SGFXINFO);
   std::wstring::wstring(&this->m_swGfxFolderName);
   v8 = 1;
   String::String((String *)&this->m_sLastError);
-  this->m_bUse6Palette = a2;
+  this->m_bUse6Palette = arg0;
   memset(this->m_sFileGfx, 0, sizeof(this->m_sFileGfx));
   memset(this->m_sFilePal, 0, sizeof(this->m_sFilePal));
   memset(this->m_pFilePalIndex, 0, sizeof(this->m_pFilePalIndex));
@@ -24,14 +24,14 @@
   memset(this->m_pFileGfxDirections, 0, sizeof(this->m_pFileGfxDirections));
   memset(this->m_pFileGfxJobs, 0, sizeof(this->m_pFileGfxJobs));
   memset(this->m_pFileGfxJobCodes, 0, sizeof(this->m_pFileGfxJobCodes));
-  memset(this->field_B2C, 0, 0xA8u);
-  a2a = (std::wstring *)std::wstring::wstring(&v7, (wchar_t *)L"Gfx");
-  std::wstring::operator=(&this->m_swGfxFolderName, a2a);
+  memset(this->field_B2C, 0, sizeof(this->field_B2C));
+  a2 = (std::wstring *)std::wstring::wstring(&v7, (wchar_t *)L"Gfx");
+  std::wstring::operator=(&this->m_swGfxFolderName, a2);
   std::wstring::~wstring(&v7);
   this->m_iActiveGfxFile = -1;
   memset(byte_3ECDBF4, 0, sizeof(byte_3ECDBF4));
-  this->field_cbc = a3;
-  this->field_cbd = a4;
+  this->m_bHasAddOn = a3;
+  this->m_bHasAnyMissionCD = a4;
   this->m_bUseHighTerrain = 0;
   return this;
 }
@@ -57,7 +57,7 @@ bool  CGfxManager::OpenGFXFiles(void) {
   CGfxManager::EnableGfxFile(this, 21u, 0, 1u, 58);
   CGfxManager::EnableGfxFile(this, 23u, 0, 1u, 58);
   CGfxManager::EnableGfxFile(this, 24u, 0, 1u, 58);
-  if ( g_bGfxHJBLoadSpecialGfx )
+  if ( g_bGfxHJBLoadSpecialGfx != 0 )
   {
     CGfxManager::EnableGfxFile(this, 25u, 0, 1u, 58);
   }
@@ -70,10 +70,10 @@ bool  CGfxManager::OpenGFXFiles(void) {
   CGfxManager::EnableGfxFile(this, 5u, 3, 1u, 85);
   CGfxManager::EnableGfxFile(this, 7u, 6, 1u, 26);
   CGfxManager::EnableGfxFile(this, 8u, 5, 1u, 13);
-  if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) )
+  if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) != 0 )
   {
     CGfxManager::EnableGfxFile(this, 4u, 7, 1u, 33);
-    if ( this->field_cbc || this->field_cbd )
+    if ( this->m_bHasAddOn || this->m_bHasAnyMissionCD )
     {
       CGfxManager::EnableGfxFile(this, 36u, 7, 1u, 12);
     }
@@ -81,7 +81,7 @@ bool  CGfxManager::OpenGFXFiles(void) {
   else
   {
     CGfxManager::EnableGfxFile(this, 6u, 7, 1u, 33);
-    if ( this->field_cbc || this->field_cbd )
+    if ( this->m_bHasAddOn || this->m_bHasAnyMissionCD )
     {
       CGfxManager::EnableGfxFile(this, 37u, 7, 1u, 12);
     }
@@ -90,7 +90,7 @@ bool  CGfxManager::OpenGFXFiles(void) {
   CGfxManager::EnableGfxFile(this, 32u, 4, 1u, 9);
   CGfxManager::EnableGfxFile(this, 31u, 4, 1u, 9);
   CGfxManager::EnableGfxFile(this, 34u, 4, 1u, 9);
-  CGfxManager::Reload(1, 1, this->m_bUse6Palette == 0);
+  CGfxManager::Reload(1, true, this->m_bUse6Palette == 0);
   return 1;
 }
 
@@ -102,11 +102,11 @@ void  CGfxManager::GetGuiGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3) {
   unsigned int iGfxFile; // [esp+0h] [ebp-8h]
 
   iGfxFile = this->m_iActiveGfxFile;
-  if ( !this->m_pFileGfxFrames[iGfxFile].m_pItem && BBSupportDbgReport(2, "GfxManager.cpp", 913, "m_pFileGfxFrames[ iGfxFile ].pItem") == 1 )
+  if ( this->m_pFileGfxFrames[iGfxFile].m_pItem == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 913, "m_pFileGfxFrames[ iGfxFile ].pItem") == 1 )
   {
     __debugbreak();
   }
-  if ( !this->m_pFilePalIndex[iGfxFile] && BBSupportDbgReport(2, "GfxManager.cpp", 914, "m_pFilePalIndex[ iGfxFile ]") == 1 )
+  if ( this->m_pFilePalIndex[iGfxFile] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 914, "m_pFilePalIndex[ iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
@@ -134,16 +134,16 @@ void  CGfxManager::GetUserLogoGfxInfo(struct SGfxObjectInfo & userLogoGfxInfo, u
   {
     __debugbreak();
   }
-  if ( !this->m_pFileGfxFrames[1].m_pItem && BBSupportDbgReport(2, "GfxManager.cpp", 941, "m_pFileGfxFrames[ iGfxFile ].pItem") == 1 )
+  if ( this->m_pFileGfxFrames[1].m_pItem == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 941, "m_pFileGfxFrames[ iGfxFile ].pItem") == 1 )
   {
     __debugbreak();
   }
-  if ( !this->m_pFilePalIndex[1] && BBSupportDbgReport(2, "GfxManager.cpp", 942, "m_pFilePalIndex[ iGfxFile ]") == 1 )
+  if ( this->m_pFilePalIndex[1] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 942, "m_pFilePalIndex[ iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
   logoIndex = logoNr - 1;
-  userLogoGfxInfo->m_pGfxData = (BYTE *)this->m_pFileGfxFrames[1].m_pItem[2 * logoIndex + 5];
+  userLogoGfxInfo->m_pGfxData = (UGfxData *)this->m_pFileGfxFrames[1].m_pItem[2 * logoIndex + 5];
   userLogoGfxInfo->m_pPalData = this->m_pFilePalIndex[1][2 * logoIndex + 5];
   sprintf(sGfxDebugBuffer, "Logo Player Nr: %u, Direction: %u", logoIndex, 0);
   CGfxManager::Debug_Check_LayerBlock(this, 1u, userLogoGfxInfo);
@@ -159,7 +159,7 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned i
   uint iBuilding; // [esp+38h] [ebp+10h]
 
   iGfxFile = _iRace + 10;
-  if ( !this->m_pFileGfxJobs[_iRace + 10].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1330, "m_pFileGfxJobs[ %u ].pItem", iGfxFile) == 1 )
+  if ( this->m_pFileGfxJobs[_iRace + 10].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1330, "m_pFileGfxJobs[ %u ].pItem", iGfxFile) == 1 )
   {
     __debugbreak();
   }
@@ -173,7 +173,7 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned i
   {
     dword_3ECDD74 = *(_DWORD *)(dword_3ECDD6C + 4);
     dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-    _rInfo->m_pGfxData = (BYTE *)dword_3ECDD70;
+    _rInfo->m_pGfxData = (UGfxData *)dword_3ECDD70;
     dword_3ECDD74 = *(_DWORD *)dword_3ECDD6C;
     dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
     _rInfo->m_pBuildLayerGfxData = dword_3ECDD70;
@@ -184,22 +184,22 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned i
     {
       dword_3ECDD74 = *(_DWORD *)(dword_3ECDD6C + 4);
       dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-      _rInfo->m_pGfxData = (BYTE *)dword_3ECDD70;
+      _rInfo->m_pGfxData = (UGfxData *)dword_3ECDD70;
     }
     if ( (_iFlags & 2) != 0 )
     {
       dword_3ECDD74 = *(_DWORD *)dword_3ECDD6C;
       dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-      _rInfo->m_pGfxData = (BYTE *)dword_3ECDD70;
+      _rInfo->m_pGfxData = (UGfxData *)dword_3ECDD70;
     }
   }
-  if ( _argBuildingFX )
+  if ( _argBuildingFX != 0 )
   {
     for ( i = 0;
           i < 10;
           ++i )
     {
-      if ( _argBuildingFX[i].m_iBuildingDefine )
+      if ( _argBuildingFX[i].m_iBuildingDefine != 0 )
       {
         if ( _argBuildingFX[i].m_iBuildingDefine >= (unsigned int)this->m_pFileGfxDirections[iGfxFile].m_iCount && BBSupportDbgReport(2, "GfxManager.cpp", 1379, "_argBuildingFX[ i ].iBuildingDefine < m_pFileGfxDirections[ iGfxFile ].iCount") == 1 )
         {
@@ -223,7 +223,7 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned i
     dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
     _rInfo->m_vFXFrameData[5] = dword_3ECDD70;
   }
-  if ( !this->m_pFilePalIndex[iGfxFile] && BBSupportDbgReportF(2, "GfxManager.cpp", 1407, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
+  if ( this->m_pFilePalIndex[iGfxFile] == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1407, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
   {
     __debugbreak();
   }
@@ -242,7 +242,7 @@ unsigned int  CGfxManager::GetBuildingFirstJob(unsigned int _iRace, unsigned int
   unsigned int v7; // [esp+Ch] [ebp-4h]
 
   v7 = _iRace + 10;
-  if ( !this->m_pFileGfxJobs[_iRace + 10].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1127, "m_pFileGfxJobs[ %u ].pItem", v7) == 1 )
+  if ( this->m_pFileGfxJobs[_iRace + 10].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1127, "m_pFileGfxJobs[ %u ].pItem", v7) == 1 )
   {
     __debugbreak();
   }
@@ -259,7 +259,7 @@ void  CGfxManager::GetObjectGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
   unsigned int v7; // [esp+28h] [ebp+10h]
   int _iAmounta; // [esp+2Ch] [ebp+14h]
 
-  if ( !this->m_pFileGfxJobs[s_iActiveGfx].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1424, "m_pFileGfxJobs[ %u ].pItem", s_iActiveGfx) == 1 )
+  if ( this->m_pFileGfxJobs[s_iActiveGfx].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1424, "m_pFileGfxJobs[ %u ].pItem", s_iActiveGfx) == 1 )
   {
     __debugbreak();
   }
@@ -273,13 +273,13 @@ void  CGfxManager::GetObjectGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
     __debugbreak();
   }
   v7 = a4 >= CGfxManager::GetObjectFrameCount(this, v6) ? 0 : a4;
-  if ( !_iAmount && BBSupportDbgReportF(2, "GfxManager.cpp", 1432, "_iAmount : %u", 0) == 1 )
+  if ( _iAmount == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1432, "_iAmount : %u", 0) == 1 )
   {
     __debugbreak();
   }
   _iAmounta = _iAmount - 1;
-  a2->m_pGfxData = *(BYTE **)(*(_DWORD *)&this->m_pFileGfxJobs[s_iActiveGfx].m_pItem[v6 + 5][4 * _iAmounta] + 4 * v7);
-  if ( !this->m_pFilePalIndex[s_iActiveGfx] && BBSupportDbgReportF(2, "GfxManager.cpp", 1446, "m_pFilePalIndex[ %u ]", s_iActiveGfx) == 1 )
+  a2->m_pGfxData = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[s_iActiveGfx].m_pItem[v6 + 5][4 * _iAmounta] + 4 * v7);
+  if ( this->m_pFilePalIndex[s_iActiveGfx] == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1446, "m_pFilePalIndex[ %u ]", s_iActiveGfx) == 1 )
   {
     __debugbreak();
   }
@@ -293,7 +293,7 @@ void  CGfxManager::GetObjectGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
 // Decompiled from unsigned int __thiscall CGfxManager::GetObjectFirstJob(CGfxManager *this, unsigned int a2)
 unsigned int  CGfxManager::GetObjectFirstJob(unsigned int a2) {
   
-  if ( !this->m_pFileGfxJobCodes[5].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1085, "m_pFileGfxJobCodes[ %u ].pItem", 5) == 1 )
+  if ( this->m_pFileGfxJobCodes[5].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1085, "m_pFileGfxJobCodes[ %u ].pItem", 5) == 1 )
   {
     __debugbreak();
   }
@@ -306,11 +306,11 @@ unsigned int  CGfxManager::GetObjectFirstJob(unsigned int a2) {
 void  CGfxManager::GetSettlerGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned int _iRace, unsigned int _iJob, unsigned int _iFrame, unsigned int _iDir) {
   
   unsigned int iGfxFile; // [esp+Ch] [ebp-8h]
-  int iJob; // [esp+24h] [ebp+10h]
+  unsigned int iJob; // [esp+24h] [ebp+10h]
   unsigned int iFrame; // [esp+28h] [ebp+14h]
 
   iGfxFile = _iRace + 20;
-  if ( !this->m_pFileGfxJobs[_iRace + 20].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 967, "m_pFileGfxJobs[ %u ].pItem", iGfxFile) == 1 )
+  if ( this->m_pFileGfxJobs[_iRace + 20].m_pItem == nullptr && BBSupportDbgReportF(2, "GfxManager.cpp", 967, "m_pFileGfxJobs[ %u ].pItem", iGfxFile) == 1 )
   {
     __debugbreak();
   }
@@ -319,20 +319,20 @@ void  CGfxManager::GetSettlerGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned in
     __debugbreak();
   }
   iJob = _iJob >= 0x16F ? 0 : _iJob;
-  if ( _iFrame >= CGfxManager::GetSettlerJobFrameCount(this, _iRace, iJob, 2) && BBSupportDbgReportF(2, "GfxManager.cpp", 972, "Invalid frame %i, job %i, race %i", _iFrame, iJob, _iRace) == 1 )
+  if ( _iFrame >= CGfxManager::GetSettlerJobFrameCount(this, _iRace, iJob, 2u) && BBSupportDbgReportF(2, "GfxManager.cpp", 972, "Invalid frame %i, job %i, race %i", _iFrame, iJob, _iRace) == 1 )
   {
     __debugbreak();
   }
-  iFrame = _iFrame >= CGfxManager::GetSettlerJobFrameCount(this, _iRace, iJob, 2) ? 0 : _iFrame;
-  dword_3ECDD5C = (int *)this->m_pFileGfxJobs[iGfxFile].m_pItem[iJob + 5];
+  iFrame = _iFrame >= CGfxManager::GetSettlerJobFrameCount(this, _iRace, iJob, 2u) ? 0 : _iFrame;
+  dword_3ECDD5C = this->m_pFileGfxJobs[iGfxFile].m_pItem->20[iJob];
   dword_3ECDD60 = (int *)dword_3ECDD5C[_iDir];
   dword_3ECDD5C = (int *)dword_3ECDD60[iFrame];
-  _rInfo->m_pGfxData = (BYTE *)dword_3ECDD5C;
-  if ( !this->m_pFilePalIndex[iGfxFile] && BBSupportDbgReportF(2, "GfxManager.cpp", 985, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
+  _rInfo->m_pGfxData = (UGfxData *)dword_3ECDD5C;
+  if ( this->m_pFilePalIndex[iGfxFile] == nullptr && BBSupportDbgReportF(2, "GfxManager.cpp", 985, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
   {
     __debugbreak();
   }
-  _rInfo->m_pPalData = this->m_pFilePalIndex[iGfxFile][iJob + 5];
+  _rInfo->m_pPalData = this->m_pFilePalIndex[iGfxFile]->?[iJob];
   sprintf(sGfxDebugBuffer, "Settler Race: %u, Job: %u, Frame: %u, Direction: %u", _iRace, iJob, iFrame, _iDir);
   CGfxManager::Debug_Check_LayerBlock(this, iGfxFile, _rInfo);
 }
@@ -345,9 +345,9 @@ unsigned int  CGfxManager::GetSettlerFirstJob(unsigned int _iRace, unsigned int 
   int v4; // [esp+Ch] [ebp-4h]
 
   v4 = _iRace + 20;
-  if ( this->m_pFileGfxJobCodes[_iRace + 20].m_pItem )
+  if ( this->m_pFileGfxJobCodes[_iRace + 20].m_pItem != 0 )
   {
-    if ( this->m_pFileGfxJobs[v4].m_pItem[((unsigned int)(this->m_pFileGfxJobCodes[v4].m_pItem[a3 + 5] - 20) >> 2) + 5] == (char *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * v4] + 20) )
+    if ( this->m_pFileGfxJobs[v4].m_pItem[((unsigned int)(this->m_pFileGfxJobCodes[v4].m_pItem[a3 + 5] - 20) >> 2) + 5] == (char *)this->m_pFileGfxDirections[v4].m_pItem + 20 )
     {
       return 0;
     }
@@ -358,12 +358,11 @@ unsigned int  CGfxManager::GetSettlerFirstJob(unsigned int _iRace, unsigned int 
   }
   else
   {
-    if ( byte_3ECDBF4[v4] )
+    if ( byte_3ECDBF4[v4] == 0 )
     {
-      return 1;
+      BBSupportTracePrintF(2, "GfxManager.cpp: !!! GetSettlerFirstJob() for unloaded gfx %d file called !!", v4);
+      byte_3ECDBF4[v4] = 1;
     }
-    BBSupportTracePrintF(2, "GfxManager.cpp: !!! GetSettlerFirstJob() for unloaded gfx %d file called !!", v4);
-    byte_3ECDBF4[v4] = 1;
     return 1;
   }
 }
@@ -376,7 +375,7 @@ void  CGfxManager::GetPatchSettlerGfxInfo(struct SGfxPatchObject & a2, unsigned 
   unsigned int iGfxFile; // [esp+4h] [ebp-4h]
 
   iGfxFile = _iRace + 20;
-  if ( !this->m_pFileGfxJobs[_iRace + 20].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1008, "m_pFileGfxJobs[ %u ].pItem", iGfxFile) == 1 )
+  if ( this->m_pFileGfxJobs[_iRace + 20].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1008, "m_pFileGfxJobs[ %u ].pItem", iGfxFile) == 1 )
   {
     __debugbreak();
   }
@@ -389,7 +388,7 @@ void  CGfxManager::GetPatchSettlerGfxInfo(struct SGfxPatchObject & a2, unsigned 
   dword_3ECDD68 = (int *)dword_3ECDD64[_iDir];
   dword_3ECDD64 = (int *)dword_3ECDD68[_iFrame];
   a2->m_pGfxData = (char *)dword_3ECDD64;
-  if ( !this->m_pFilePalIndex[iGfxFile] && BBSupportDbgReportF(2, "GfxManager.cpp", 1025, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
+  if ( this->m_pFilePalIndex[iGfxFile] == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1025, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
   {
     __debugbreak();
   }
@@ -407,11 +406,11 @@ void  CGfxManager::GetPileGfxInfo(struct SGfxObjectInfo & a2, unsigned int iPile
   int _iAmountb; // [esp+24h] [ebp+10h]
   unsigned int v8; // [esp+28h] [ebp+14h]
 
-  if ( !this->m_pFileGfxJobs[s_iActivePileGfx].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1463, "m_pFileGfxJobs[ %u ].pItem", s_iActivePileGfx) == 1 )
+  if ( this->m_pFileGfxJobs[s_iActivePileGfx].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1463, "m_pFileGfxJobs[ %u ].pItem", s_iActivePileGfx) == 1 )
   {
     __debugbreak();
   }
-  if ( !_iAmount && BBSupportDbgReportF(2, "GfxManager.cpp", 1464, "_iAmount %u", 0) == 1 )
+  if ( _iAmount == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1464, "_iAmount %u", 0) == 1 )
   {
     __debugbreak();
   }
@@ -426,8 +425,8 @@ void  CGfxManager::GetPileGfxInfo(struct SGfxObjectInfo & a2, unsigned int iPile
     __debugbreak();
   }
   v8 = a5 >= CGfxManager::GetPileFrameCount(iPile) ? 0 : a5;
-  a2->m_pGfxData = *(char **)(*(_DWORD *)&this->m_pFileGfxJobs[s_iActivePileGfx].m_pItem[iPile + 5][4 * _iAmountb] + 4 * v8);
-  if ( !this->m_pFilePalIndex[s_iActivePileGfx] && BBSupportDbgReport(2, "GfxManager.cpp", 1484, "m_pFilePalIndex[ iGfxFile ]") == 1 )
+  a2->m_pGfxData = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[s_iActivePileGfx].m_pItem[iPile + 5][4 * _iAmountb] + 4 * v8);
+  if ( this->m_pFilePalIndex[s_iActivePileGfx] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 1484, "m_pFilePalIndex[ iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
@@ -444,7 +443,7 @@ void  CGfxManager::GetPatchPileGfxInfo(struct SGfxPatchObject & a2, unsigned int
   unsigned int iAmount; // [esp+24h] [ebp+10h]
   unsigned int iFrame; // [esp+28h] [ebp+14h]
 
-  if ( !_iAmount && BBSupportDbgReportF(2, "GfxManager.cpp", 1501, "_iAmount %u", 0) == 1 )
+  if ( _iAmount == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1501, "_iAmount %u", 0) == 1 )
   {
     __debugbreak();
   }
@@ -453,7 +452,7 @@ void  CGfxManager::GetPatchPileGfxInfo(struct SGfxPatchObject & a2, unsigned int
   {
     __debugbreak();
   }
-  if ( !this->m_pFileGfxJobs[dword_3D7AB20].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1507, "m_pFileGfxJobs[ %u ].pItem", iAmount) == 1 )
+  if ( this->m_pFileGfxJobs[dword_3D7AB20].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1507, "m_pFileGfxJobs[ %u ].pItem", iAmount) == 1 )
   {
     __debugbreak();
   }
@@ -462,12 +461,12 @@ void  CGfxManager::GetPatchPileGfxInfo(struct SGfxPatchObject & a2, unsigned int
     __debugbreak();
   }
   iFrame = a5 >= CGfxManager::GetPileFrameCount(iPile) ? 0 : a5;
-  *(_DWORD *)a2 = *(_DWORD *)(*(_DWORD *)&this->m_pFileGfxJobs[dword_3D7AB20].m_pItem[iPile + 5][4 * iAmount] + 4 * iFrame);
-  if ( !this->m_pFilePalIndex[dword_3D7AB20] && BBSupportDbgReportF(2, "GfxManager.cpp", 1521, "m_pFilePalIndex[ %u ]", dword_3D7AB20) == 1 )
+  a2->m_pGfxData = *(char **)(*(_DWORD *)&this->m_pFileGfxJobs[dword_3D7AB20].m_pItem[iPile + 5][4 * iAmount] + 4 * iFrame);
+  if ( this->m_pFilePalIndex[dword_3D7AB20] == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1521, "m_pFilePalIndex[ %u ]", dword_3D7AB20) == 1 )
   {
     __debugbreak();
   }
-  *((_DWORD *)a2 + 1) = this->m_pFilePalIndex[dword_3D7AB20][iPile + 5];
+  a2->m_pPalData = this->m_pFilePalIndex[dword_3D7AB20][iPile + 5];
   sprintf(sGfxDebugBuffer, "PatchPile: %u, Amount: %u, Frame: %u", iPile, iAmount, iFrame);
   CGfxManager::Debug_Check_PatchLayerBlock(this, dword_3D7AB20, a2);
 }
@@ -481,7 +480,7 @@ void  CGfxManager::GetVehicleGfxInfo(struct SGfxObjectInfo & a2, unsigned int iR
   int iJob; // [esp+34h] [ebp+10h]
 
   iGfxFile = iRace + 30;
-  if ( !this->m_pFileGfxJobs[iRace + 30].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1538, "m_pFileGfxJobs[ %u ].pItem", iGfxFile) == 1 )
+  if ( this->m_pFileGfxJobs[iRace + 30].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1538, "m_pFileGfxJobs[ %u ].pItem", iGfxFile) == 1 )
   {
     __debugbreak();
   }
@@ -495,13 +494,13 @@ void  CGfxManager::GetVehicleGfxInfo(struct SGfxObjectInfo & a2, unsigned int iR
     __debugbreak();
   }
   _iFrame &= (_iFrame >= CGfxManager::GetVehicleFrameCount(this, iRace, iJob)) - 1;
-  a2->m_pGfxData = *(char **)(*(_DWORD *)&this->m_pFileGfxJobs[iGfxFile].m_pItem[iJob + 5][4 * _iDir] + 4 * _iFrame);
-  if ( !this->m_pFilePalIndex[iGfxFile] && BBSupportDbgReportF(2, "GfxManager.cpp", 1555, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
+  a2->m_pGfxData = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[iGfxFile].m_pItem[iJob + 5][4 * _iDir] + 4 * _iFrame);
+  if ( this->m_pFilePalIndex[iGfxFile] == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1555, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
   {
     __debugbreak();
   }
   a2->m_pPalData = this->m_pFilePalIndex[iGfxFile][iJob + 5];
-  if ( _iJobPatch )
+  if ( _iJobPatch != 0 )
   {
     if ( _iJobPatch >= this->m_pFileGfxJobs[iGfxFile].m_iCount && BBSupportDbgReport(2, "GfxManager.cpp", 1561, "_iJobPatch < m_pFileGfxJobs[ iGfxFile ].iCount") == 1 )
     {
@@ -528,7 +527,7 @@ unsigned int  CGfxManager::GetVehicleFirstJob(unsigned int _iRace, unsigned int 
   int v5; // [esp+8h] [ebp-4h]
 
   v5 = _iRace + 30;
-  if ( !this->m_pFileGfxJobCodes[_iRace + 30].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1113, "m_pFileGfxJobCodes[ %u ].pItem", v5) == 1 )
+  if ( this->m_pFileGfxJobCodes[_iRace + 30].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1113, "m_pFileGfxJobCodes[ %u ].pItem", v5) == 1 )
   {
     __debugbreak();
   }
@@ -543,7 +542,7 @@ void  CGfxManager::GetAnimalGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
   uint iAnimal; // [esp+28h] [ebp+Ch]
   uint frame; // [esp+30h] [ebp+14h]
 
-  if ( !this->m_pFileGfxJobs[8].m_pItem && BBSupportDbgReport(2, "GfxManager.cpp", 1593, "m_pFileGfxJobs[ iGfxFile ].pItem") == 1 )
+  if ( this->m_pFileGfxJobs[8].m_pItem == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 1593, "m_pFileGfxJobs[ iGfxFile ].pItem") == 1 )
   {
     __debugbreak();
   }
@@ -562,8 +561,8 @@ void  CGfxManager::GetAnimalGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
     BBSupportTracePrintF(2, "GfxManager: Invalid Animal Job#%d for Direction#%d, Frame#%d", iAnimal, _iDirection, frame);
     iAnimal = 0;
   }
-  a2->m_pGfxData = *(char **)(*(_DWORD *)&this->m_pFileGfxJobs[8].m_pItem[iAnimal + 5][4 * _iDirection] + 4 * frame);
-  if ( !this->m_pFilePalIndex[8] && BBSupportDbgReport(2, "GfxManager.cpp", 1616, "m_pFilePalIndex[ iGfxFile ]") == 1 )
+  a2->m_pGfxData = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[8].m_pItem[iAnimal + 5][4 * _iDirection] + 4 * frame);
+  if ( this->m_pFilePalIndex[8] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 1616, "m_pFilePalIndex[ iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
@@ -577,7 +576,7 @@ void  CGfxManager::GetAnimalGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
 // Decompiled from unsigned int __thiscall CGfxManager::GetAnimalFirstJob(CGfxManager *this, unsigned int a2)
 unsigned int  CGfxManager::GetAnimalFirstJob(unsigned int a2) {
   
-  if ( !this->m_pFileGfxJobCodes[8].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1099, "m_pFileGfxJobCodes[ %u ].pItem", 8) == 1 )
+  if ( this->m_pFileGfxJobCodes[8].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1099, "m_pFileGfxJobCodes[ %u ].pItem", 8) == 1 )
   {
     __debugbreak();
   }
@@ -599,7 +598,7 @@ void  CGfxManager::GetEffectGfxInfo(struct SGfxObjectInfo & a2, unsigned int _iJ
 
   if ( _iJob >= 0x64 )
   {
-    if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) )
+    if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) != 0 )
     {
       v6 = 36;
     }
@@ -611,7 +610,7 @@ void  CGfxManager::GetEffectGfxInfo(struct SGfxObjectInfo & a2, unsigned int _iJ
   }
   else
   {
-    if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) )
+    if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) != 0 )
     {
       v7 = 4;
     }
@@ -621,7 +620,7 @@ void  CGfxManager::GetEffectGfxInfo(struct SGfxObjectInfo & a2, unsigned int _iJ
     }
     v9 = v7;
   }
-  if ( !this->m_pFileGfxJobs[v9].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1686, "m_pFileGfxJobs[%d].pItem", v9) == 1 )
+  if ( this->m_pFileGfxJobs[v9].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1686, "m_pFileGfxJobs[%d].pItem", v9) == 1 )
   {
     __debugbreak();
   }
@@ -655,8 +654,8 @@ void  CGfxManager::GetEffectGfxInfo(struct SGfxObjectInfo & a2, unsigned int _iJ
     __debugbreak();
   }
   _iFramea = _iFrame >= CGfxManager::GetEffectFrameCount(this, iJob) ? 0 : _iFrame;
-  a2->m_pGfxData = *(char **)(*(_DWORD *)&this->m_pFileGfxJobs[v9].m_pItem[v5 + 5][4 * _iDir] + 4 * _iFramea);
-  if ( !this->m_pFilePalIndex[v9] && BBSupportDbgReport(2, "GfxManager.cpp", 1715, "m_pFilePalIndex[ iGfxFile ]") == 1 )
+  a2->m_pGfxData = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[v9].m_pItem[v5 + 5][4 * _iDir] + 4 * _iFramea);
+  if ( this->m_pFilePalIndex[v9] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 1715, "m_pFilePalIndex[ iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
@@ -672,7 +671,7 @@ void  CGfxManager::GetAccessoryGfxInfo(struct SGfxObjectInfo & a2, unsigned int 
   
   unsigned int _iAccessorya; // [esp+20h] [ebp+Ch]
 
-  if ( !this->m_pFileGfxFrames[s_iActiveAccGfx].m_pItem && BBSupportDbgReportF(2, "GfxManager.cpp", 1634, "m_pFileGfxFrames[ %u ].pItem", s_iActiveAccGfx) == 1 )
+  if ( this->m_pFileGfxFrames[s_iActiveAccGfx].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1634, "m_pFileGfxFrames[ %u ].pItem", s_iActiveAccGfx) == 1 )
   {
     __debugbreak();
   }
@@ -681,8 +680,8 @@ void  CGfxManager::GetAccessoryGfxInfo(struct SGfxObjectInfo & a2, unsigned int 
     __debugbreak();
   }
   _iAccessorya = _iAccessory >= 0x60 ? 0 : _iAccessory;
-  a2->m_pGfxData = **(char ***)this->m_pFileGfxJobs[s_iActiveAccGfx].m_pItem[_iAccessorya + 5];
-  if ( !this->m_pFilePalIndex[s_iActiveAccGfx] && BBSupportDbgReport(2, "GfxManager.cpp", 1649, "m_pFilePalIndex[ iGfxFile ]") == 1 )
+  a2->m_pGfxData = **(UGfxData ***)this->m_pFileGfxJobs[s_iActiveAccGfx].m_pItem[_iAccessorya + 5];
+  if ( this->m_pFilePalIndex[s_iActiveAccGfx] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 1649, "m_pFilePalIndex[ iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
@@ -701,10 +700,10 @@ unsigned int  CGfxManager::GetSettlerJobFrameCount(unsigned int iRace, unsigned 
 
 
 // address=[0x1363440]
-// Decompiled from int __thiscall CGfxManager::GetObjectFrameCount(CGfxManager *this, int a2)
-unsigned int  CGfxManager::GetObjectFrameCount(unsigned int a2) {
+// Decompiled from unsigned int __thiscall CGfxManager::GetObjectFrameCount(CGfxManager *this, unsigned int iJob)
+unsigned int  CGfxManager::GetObjectFrameCount(unsigned int iJob) {
   
-  return CGfxManager::GetJobFrameCount(5, a2, 0);
+  return CGfxManager::GetJobFrameCount(this, 5u, iJob, 0);
 }
 
 
@@ -712,7 +711,7 @@ unsigned int  CGfxManager::GetObjectFrameCount(unsigned int a2) {
 // Decompiled from int __stdcall sub_1763470(int a1)
 unsigned int  CGfxManager::GetPileFrameCount(unsigned int a1) {
   
-  return CGfxManager::GetJobFrameCount(3, a1, 0);
+  return ((_DWORD (__stdcall *)(int, int, _DWORD))CGfxManager::GetJobFrameCount)(3, a1, 0);
 }
 
 
@@ -720,7 +719,7 @@ unsigned int  CGfxManager::GetPileFrameCount(unsigned int a1) {
 // Decompiled from int __thiscall CGfxManager::GetVehicleFrameCount(CGfxManager *this, unsigned int a2, int a3)
 unsigned int  CGfxManager::GetVehicleFrameCount(unsigned int a2, unsigned int a3) {
   
-  return CGfxManager::GetJobFrameCount(a2 + 30, a3, 2);
+  return ((int (__stdcall *)(int, int, int))CGfxManager::GetJobFrameCount)(a2 + 30, a3, 2);
 }
 
 
@@ -728,7 +727,7 @@ unsigned int  CGfxManager::GetVehicleFrameCount(unsigned int a2, unsigned int a3
 // Decompiled from int __thiscall CGfxManager::GetAnimalFrameCount(CGfxManager *this, int a2)
 unsigned int  CGfxManager::GetAnimalFrameCount(unsigned int a2) {
   
-  return CGfxManager::GetJobFrameCount(8, a2, 2);
+  return ((int (__stdcall *)(int, int, int))CGfxManager::GetJobFrameCount)(8, a2, 2);
 }
 
 
@@ -742,7 +741,7 @@ unsigned int  CGfxManager::GetEffectFrameCount(unsigned int a2) {
 
   if ( a2 >= 0x64 )
   {
-    if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) )
+    if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) != 0 )
     {
       v5 = 36;
     }
@@ -754,7 +753,7 @@ unsigned int  CGfxManager::GetEffectFrameCount(unsigned int a2) {
   }
   else
   {
-    if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) )
+    if ( IGfxEngine::Use4444Palettes(g_pGfxEngine) != 0 )
     {
       v6 = 4;
     }
@@ -800,9 +799,9 @@ void  CGfxManager::GetBoundingBox(struct SGfxBoundingBox & a2, unsigned int a3, 
     case SETTLER_OBJ:
       CGfxManager::GetSettlerGfxInfo(this, &v11, a4, a5, 1u, 0);
       v9 = FLOAT_25_0;
-      v8 = (float)v11.m_pGfxData[1];
+      v8 = (float)(unsigned __int8)v11.m_pGfxData->m_sByte.m_iHeight;
       v7 = 25.0 / 2.0;
-      v6 = (float)v11.m_pGfxData[3];
+      v6 = (float)v11.m_pGfxData->m_sByte.m_iTop;
       break;
     case SHIP_OBJ:
     case CATAPULT_OBJ:
@@ -815,10 +814,10 @@ void  CGfxManager::GetBoundingBox(struct SGfxBoundingBox & a2, unsigned int a3, 
       {
         CGfxManager::GetVehicleGfxInfo(this, &v11, a4, a5, 0, 0, 0, 0);
       }
-      v9 = (float)*(unsigned __int16 *)v11.m_pGfxData;
-      v8 = (float)*((unsigned __int16 *)v11.m_pGfxData + 1);
-      v7 = (float)*((__int16 *)v11.m_pGfxData + 2);
-      v6 = (float)*((__int16 *)v11.m_pGfxData + 3);
+      v9 = (float)v11.m_pGfxData->m_sShort.m_iWidth;
+      v8 = (float)v11.m_pGfxData->m_sShort.m_iHeight;
+      v7 = (float)(__int16)v11.m_pGfxData->m_sShort.m_iLeft;
+      v6 = (float)(__int16)v11.m_pGfxData->m_sShort.m_iTop;
       break;
     default:
       break;
@@ -834,13 +833,13 @@ void  CGfxManager::GetBoundingBox(struct SGfxBoundingBox & a2, unsigned int a3, 
 
 
 // address=[0x13637e0]
-// Decompiled from char __thiscall CGfxManager::EnableGfxFile(CGfxManager *this, unsigned int _iGfxFile, int _iType, BYTE _bMapFile, int _iFileVersion)
-bool  CGfxManager::EnableGfxFile(unsigned int _iGfxFile, int _iType, bool _bMapFile, unsigned int _iFileVersion) {
+// Decompiled from bool __thiscall CGfxManager::EnableGfxFile(CGfxManager *this, unsigned int iGfxFile, int iType, BYTE bMapFile, int iFileVersion)
+bool  CGfxManager::EnableGfxFile(unsigned int iGfxFile, int iType, bool bMapFile, unsigned int iFileVersion) {
   
-  char result; // al
+  bool result; // al
 
-  BBSupportTracePrintF(2, "GfxManager.cpp: Enabling GfxFile %d", _iGfxFile);
-  switch ( _iType )
+  BBSupportTracePrintF(2, "GfxManager.cpp: Enabling GfxFile %d", iGfxFile);
+  switch ( iType )
   {
     case 0:
     case 1:
@@ -849,127 +848,166 @@ bool  CGfxManager::EnableGfxFile(unsigned int _iGfxFile, int _iType, bool _bMapF
     case 5:
     case 6:
     case 7:
-      if ( !CGfxManager::LoadGfxFile(this, _iGfxFile, _bMapFile, _iFileVersion) )
+      if ( CGfxManager::LoadGfxFile(this, iGfxFile, bMapFile, iFileVersion) != 0 )
       {
-        result = 0;
-      }
-      else if ( !CGfxManager::LoadGilFile(this, _iGfxFile, _iFileVersion) )
-      {
-        result = 0;
-      }
-      else if ( !CGfxManager::LoadDilFile(this, _iGfxFile, _iFileVersion) )
-      {
-        result = 0;
-      }
-      else if ( !CGfxManager::LoadJilFile(this, _iGfxFile, _iFileVersion) )
-      {
-        result = 0;
-      }
-      else if ( !CGfxManager::LoadSilFile(this, _iGfxFile, _iFileVersion) )
-      {
-        result = 0;
-      }
-      else if ( CGfxManager::LoadPalFile(this, _iGfxFile, _iFileVersion, 0) )
-      {
-        if ( CGfxManager::LoadPilFile(this, _iGfxFile, _iFileVersion, 0) )
+        if ( CGfxManager::LoadGilFile(this, iGfxFile, iFileVersion) != 0 )
         {
-          goto LABEL_52;
+          if ( CGfxManager::LoadDilFile(this, iGfxFile, iFileVersion) != 0 )
+          {
+            if ( CGfxManager::LoadJilFile(this, iGfxFile, iFileVersion) != 0 )
+            {
+              if ( CGfxManager::LoadSilFile(this, iGfxFile, iFileVersion) != 0 )
+              {
+                if ( CGfxManager::LoadPalFile(this, iGfxFile, iFileVersion, false) )
+                {
+                  if ( CGfxManager::LoadPilFile(this, iGfxFile, iFileVersion, false) != 0 )
+                  {
+                    goto LABEL_52;
+                  }
+                  result = false;
+                }
+                else
+                {
+                  result = false;
+                }
+              }
+              else
+              {
+                result = false;
+              }
+            }
+            else
+            {
+              result = false;
+            }
+          }
+          else
+          {
+            result = false;
+          }
         }
-        result = 0;
+        else
+        {
+          result = false;
+        }
       }
       else
       {
-        result = 0;
+        result = false;
       }
       break;
     case 2:
-      if ( !CGfxManager::LoadGfxFile(this, _iGfxFile, _bMapFile, _iFileVersion) )
+      if ( CGfxManager::LoadGfxFile(this, iGfxFile, bMapFile, iFileVersion) != 0 )
       {
-        result = 0;
-      }
-      else if ( !CGfxManager::LoadGilFile(this, _iGfxFile, _iFileVersion) )
-      {
-        result = 0;
-      }
-      else if ( !CGfxManager::LoadDilFile(this, _iGfxFile, _iFileVersion) )
-      {
-        result = 0;
-      }
-      else if ( !CGfxManager::LoadJilFile(this, _iGfxFile, _iFileVersion) )
-      {
-        result = 0;
-      }
-      else if ( CGfxManager::LoadPalFile(this, _iGfxFile, _iFileVersion, 0) )
-      {
-        if ( CGfxManager::LoadPilFile(this, _iGfxFile, _iFileVersion, 0) )
+        if ( CGfxManager::LoadGilFile(this, iGfxFile, iFileVersion) != 0 )
         {
-          goto LABEL_52;
+          if ( CGfxManager::LoadDilFile(this, iGfxFile, iFileVersion) != 0 )
+          {
+            if ( CGfxManager::LoadJilFile(this, iGfxFile, iFileVersion) != 0 )
+            {
+              if ( CGfxManager::LoadPalFile(this, iGfxFile, iFileVersion, false) )
+              {
+                if ( CGfxManager::LoadPilFile(this, iGfxFile, iFileVersion, false) != 0 )
+                {
+                  goto LABEL_52;
+                }
+                result = false;
+              }
+              else
+              {
+                result = false;
+              }
+            }
+            else
+            {
+              result = false;
+            }
+          }
+          else
+          {
+            result = false;
+          }
         }
-        result = 0;
+        else
+        {
+          result = false;
+        }
       }
       else
       {
-        result = 0;
+        result = false;
       }
       break;
     case 8:
-      if ( !CGfxManager::LoadGfxFile(this, _iGfxFile, _bMapFile, _iFileVersion) )
+      if ( CGfxManager::LoadGfxFile(this, iGfxFile, bMapFile, iFileVersion) != 0 )
       {
-        result = 0;
-      }
-      else if ( !CGfxManager::LoadGilFile(this, _iGfxFile, _iFileVersion) )
-      {
-        result = 0;
-      }
-      else if ( !CGfxManager::LoadPalFile(this, _iGfxFile, _iFileVersion, 0) )
-      {
-        result = 0;
+        if ( CGfxManager::LoadGilFile(this, iGfxFile, iFileVersion) != 0 )
+        {
+          if ( !CGfxManager::LoadPalFile(this, iGfxFile, iFileVersion, false) )
+          {
+            result = false;
+          }
+          else
+          {
+            if ( CGfxManager::LoadPilFile(this, iGfxFile, iFileVersion, false) != 0 )
+            {
+              goto LABEL_52;
+            }
+            result = false;
+          }
+        }
+        else
+        {
+          result = false;
+        }
       }
       else
       {
-        if ( CGfxManager::LoadPilFile(this, _iGfxFile, _iFileVersion, 0) )
-        {
-          goto LABEL_52;
-        }
-        result = 0;
+        result = false;
       }
       break;
     case 9:
-      if ( !CGfxManager::LoadGfxFile(this, _iGfxFile, _bMapFile, _iFileVersion) )
+      if ( CGfxManager::LoadGfxFile(this, iGfxFile, bMapFile, iFileVersion) != 0 )
       {
-        result = 0;
-      }
-      else if ( !CGfxManager::LoadGilFile(this, _iGfxFile, _iFileVersion) )
-      {
-        result = 0;
-      }
-      else if ( !CGfxManager::LoadPalFile(this, _iGfxFile, _iFileVersion, 1) )
-      {
-        result = 0;
+        if ( CGfxManager::LoadGilFile(this, iGfxFile, iFileVersion) != 0 )
+        {
+          if ( !CGfxManager::LoadPalFile(this, iGfxFile, iFileVersion, true) )
+          {
+            result = false;
+          }
+          else
+          {
+            if ( CGfxManager::LoadPilFile(this, iGfxFile, iFileVersion, true) != 0 )
+            {
+              this->m_iActiveGfxFile = iGfxFile;
+              goto LABEL_52;
+            }
+            result = false;
+          }
+        }
+        else
+        {
+          result = false;
+        }
       }
       else
       {
-        if ( CGfxManager::LoadPilFile(this, _iGfxFile, _iFileVersion, 1) )
-        {
-          this->m_iActiveGfxFile = _iGfxFile;
-          goto LABEL_52;
-        }
-        result = 0;
+        result = false;
       }
       break;
     case 10:
-      if ( CGfxManager::LoadGfxFile(this, _iGfxFile, _bMapFile, _iFileVersion) )
+      if ( CGfxManager::LoadGfxFile(this, iGfxFile, bMapFile, iFileVersion) != 0 )
       {
 LABEL_52:
-        result = 1;
+        result = true;
       }
       else
       {
-        result = 0;
+        result = false;
       }
       break;
     default:
-      result = 0;
+      result = false;
       break;
   }
   return result;
@@ -983,17 +1021,17 @@ void * __cdecl CGfxManager::Reload(int a1, bool a2, bool a3) {
   char *pPileGfx; // [esp+4h] [ebp-4h]
 
   pPileGfx = 0;
-  if ( !g_pGfxManager )
+  if ( g_pGfxManager == 0 )
   {
     return 0;
   }
   g_pGfxManager->m_bUse6Palette = !a3;
   g_pGfxManager->m_bUseHighPalette = a2;
-  if ( g_pGfxManager->m_sFileGfx[7].pPileGfx )
+  if ( g_pGfxManager->m_sFileGfx[7].pFileGfx != 0 )
   {
     CGfxManager::MoveAccessoriesToGfxEngine(g_pGfxManager);
   }
-  if ( g_pGfxManager->m_sFileGfx[5].pPileGfx )
+  if ( g_pGfxManager->m_sFileGfx[5].pFileGfx != 0 )
   {
     CGfxManager::MoveWavesToGfxEngine(g_pGfxManager);
   }
@@ -1001,34 +1039,34 @@ void * __cdecl CGfxManager::Reload(int a1, bool a2, bool a3) {
   {
     if ( g_pGfxManager->m_bUseHighTerrain )
     {
-      if ( !CGfxManager::EnableGfxFile(g_pGfxManager, 0x29u, 10, 1u, -1) && BBSupportDbgReport(1, "GfxManager.cpp", 2234, aCouldNotOpenAl_1) == 1 )
+      if ( CGfxManager::EnableGfxFile(g_pGfxManager, 0x29u, 10, 1u, -1) == 0 && BBSupportDbgReport(1, "GfxManager.cpp", 2234, aCouldNotOpenAl_1) == 1 )
       {
         __debugbreak();
       }
-      pPileGfx = g_pGfxManager->m_sFileGfx[41].pPileGfx;
-      if ( !pPileGfx && BBSupportDbgReport(1, "GfxManager.cpp", 2237, aCouldNotOpenAl_2) == 1 )
+      pPileGfx = g_pGfxManager->m_sFileGfx[41].pFileGfx;
+      if ( pPileGfx == 0 && BBSupportDbgReport(1, "GfxManager.cpp", 2237, aCouldNotOpenAl_2) == 1 )
       {
         __debugbreak();
       }
     }
     else
     {
-      if ( !CGfxManager::EnableGfxFile(g_pGfxManager, 2u, 10, 1u, -1) && BBSupportDbgReport(1, "GfxManager.cpp", 2242, aCouldNotOpenAl) == 1 )
+      if ( CGfxManager::EnableGfxFile(g_pGfxManager, 2u, 10, 1u, -1) == 0 && BBSupportDbgReport(1, "GfxManager.cpp", 2242, aCouldNotOpenAl) == 1 )
       {
         __debugbreak();
       }
-      pPileGfx = g_pGfxManager->m_sFileGfx[2].pPileGfx;
-      if ( !pPileGfx && BBSupportDbgReport(1, "GfxManager.cpp", 2245, aCouldNotOpenAl_0) == 1 )
+      pPileGfx = g_pGfxManager->m_sFileGfx[2].pFileGfx;
+      if ( pPileGfx == 0 && BBSupportDbgReport(1, "GfxManager.cpp", 2245, aCouldNotOpenAl_0) == 1 )
       {
         __debugbreak();
       }
     }
-    if ( pPileGfx )
+    if ( pPileGfx != 0 )
     {
       pPileGfx += 20;
     }
   }
-  else if ( !a1 )
+  else if ( a1 == 0 )
   {
     if ( g_pGfxManager->m_bUseHighTerrain )
     {
@@ -1047,46 +1085,46 @@ void * __cdecl CGfxManager::Reload(int a1, bool a2, bool a3) {
 // Decompiled from unsigned int __thiscall CGfxManager::GetJobFrameCount(CGfxManager *this, unsigned int _iGfxFile, unsigned int _iJob, unsigned int _iDir)
 unsigned int  CGfxManager::GetJobFrameCount(unsigned int _iGfxFile, unsigned int _iJob, unsigned int _iDir) {
   
-  int v6; // [esp+30h] [ebp-28h]
-  char *v7; // [esp+34h] [ebp-24h]
-  char *v8; // [esp+38h] [ebp-20h]
-  char *v9; // [esp+40h] [ebp-18h]
-  char *v10; // [esp+44h] [ebp-14h]
+  int *pDefaultDir; // [esp+30h] [ebp-28h]
+  int *v7; // [esp+34h] [ebp-24h]
+  int *pDefaultJob; // [esp+38h] [ebp-20h]
+  int *v9; // [esp+40h] [ebp-18h]
+  int **v10; // [esp+44h] [ebp-14h]
   unsigned int i; // [esp+48h] [ebp-10h]
   unsigned int iDir; // [esp+4Ch] [ebp-Ch]
-  char *v13; // [esp+50h] [ebp-8h]
-  char *v14; // [esp+50h] [ebp-8h]
+  int *v13; // [esp+50h] [ebp-8h]
+  int **pJob; // [esp+50h] [ebp-8h]
 
   if ( _iGfxFile == this->m_iActiveGfxFile )
   {
     return 1;
   }
-  if ( this->m_pFileGfxJobs[_iGfxFile].m_pItem )
+  if ( this->m_pFileGfxJobs[_iGfxFile].m_pItem != nullptr )
   {
     if ( _iDir >= 6 && BBSupportDbgReport(2, "GfxManager.cpp", 1203, "_iDir < 6") == 1 )
     {
       __debugbreak();
     }
-    if ( _iGfxFile < 0xA || _iGfxFile >= 0x14 )
+    if ( _iGfxFile < 10 || _iGfxFile >= 20 )
     {
       if ( _iJob >= this->m_pFileGfxJobs[_iGfxFile].m_iCount )
       {
         BBSupportTracePrintF(2, "GfxManager: Invalid Job#%d for GfxFile#%d and Direction#%d", _iJob, _iGfxFile, _iDir);
         _iJob = 0;
       }
-      v8 = (char *)*((_DWORD *)this->m_pFileGfxJobs[_iGfxFile].m_pItem + 5);
-      v6 = *((_DWORD *)this->m_pFileGfxDirections[_iGfxFile].m_pItem + 5);
+      pDefaultJob = this->m_pFileGfxJobs[_iGfxFile].m_pItem->20[0];
+      pDefaultDir = this->m_pFileGfxDirections[_iGfxFile].m_pItem->20[0];
       iDir = _iDir;
-      v13 = this->m_pFileGfxJobs[_iGfxFile].m_pItem[_iJob + 5];
-      if ( v13 == v8 )
+      v13 = this->m_pFileGfxJobs[_iGfxFile].m_pItem->20[_iJob];
+      if ( v13 == pDefaultJob )
       {
         return 1;
       }
       else
       {
-        v14 = &v13[4 * _iDir];
-        v10 = v14;
-        if ( *(_DWORD *)v14 == v6 )
+        pJob = (int **)&v13[_iDir];
+        v10 = pJob;
+        if ( *pJob == pDefaultDir )
         {
           return 1;
         }
@@ -1098,28 +1136,28 @@ unsigned int  CGfxManager::GetJobFrameCount(unsigned int _iGfxFile, unsigned int
             {
               if ( ++_iJob >= this->m_pFileGfxJobs[_iGfxFile].m_iCount )
               {
-                return this->m_pFileGfxFrames[_iGfxFile].m_iCount - ((*(_DWORD *)v14 - (unsigned int)(this->m_pFileGfxFrames[_iGfxFile].m_pItem + 5)) >> 2);
+                return this->m_pFileGfxFrames[_iGfxFile].m_iCount - ((unsigned int)((char *)*pJob - (char *)this->m_pFileGfxFrames[_iGfxFile].m_pItem->20) >> 2);
               }
               iDir = 0;
             }
-            v7 = this->m_pFileGfxJobs[_iGfxFile].m_pItem[_iJob + 5];
-            if ( v7 == v8 )
+            v7 = this->m_pFileGfxJobs[_iGfxFile].m_pItem->20[_iJob];
+            if ( v7 == pDefaultJob )
             {
               iDir = -1;
               if ( ++_iJob >= this->m_pFileGfxJobs[_iGfxFile].m_iCount )
               {
-                return this->m_pFileGfxFrames[_iGfxFile].m_iCount - ((*(_DWORD *)v14 - (unsigned int)(this->m_pFileGfxFrames[_iGfxFile].m_pItem + 5)) >> 2);
+                return this->m_pFileGfxFrames[_iGfxFile].m_iCount - ((unsigned int)((char *)*pJob - (char *)this->m_pFileGfxFrames[_iGfxFile].m_pItem->20) >> 2);
               }
             }
             else
             {
-              v10 = &v7[4 * iDir];
+              v10 = (int **)&v7[iDir];
             }
           }
-          while ( *(_DWORD *)v10 == v6 || *(_DWORD *)v10 == *(_DWORD *)v14 );
-          if ( (unsigned int)(*(_DWORD *)v10 - *(_DWORD *)v14) >> 2 )
+          while ( *v10 == pDefaultDir || *v10 == *pJob );
+          if ( (unsigned int)((char *)*v10 - (char *)*pJob) >> 2 != 0 )
           {
-            return (unsigned int)(*(_DWORD *)v10 - *(_DWORD *)v14) >> 2;
+            return (unsigned int)((char *)*v10 - (char *)*pJob) >> 2;
           }
           else
           {
@@ -1135,27 +1173,27 @@ unsigned int  CGfxManager::GetJobFrameCount(unsigned int _iGfxFile, unsigned int
         BBSupportTracePrintF(2, "GfxManager: Invalid Job#%d for GfxFile#%d and Direction#%d", _iJob, _iGfxFile, _iDir);
         _iJob = 0;
       }
-      v9 = 0;
+      v9 = nullptr;
       for ( i = _iJob + 1;
             i < this->m_pFileGfxDirections[_iGfxFile].m_iCount;
             ++i )
       {
-        if ( this->m_pFileGfxDirections[_iGfxFile].m_pItem[i + 5] != (char *)this->m_pFileGfxFrames[_iGfxFile].m_pItem + 20 )
+        if ( this->m_pFileGfxDirections[_iGfxFile].m_pItem->20[i] != (int *)this->m_pFileGfxFrames[_iGfxFile].m_pItem->20 )
         {
-          v9 = this->m_pFileGfxDirections[_iGfxFile].m_pItem[i + 5];
+          v9 = this->m_pFileGfxDirections[_iGfxFile].m_pItem->20[i];
           break;
         }
       }
-      if ( !v9 )
+      if ( v9 == nullptr )
       {
-        v9 = (char *)this->m_pFileGfxFrames[_iGfxFile].m_pItem + this->m_pFileGfxFrames[_iGfxFile].m_iCount + 5;
+        v9 = (int *)((char *)&this->m_pFileGfxFrames[_iGfxFile].m_pItem->m_iFlag0 + this->m_pFileGfxFrames[_iGfxFile].m_iCount + 1);
       }
-      return (unsigned int)(v9 - this->m_pFileGfxDirections[_iGfxFile].m_pItem[_iJob + 5]) >> 2;
+      return (unsigned int)((char *)v9 - (char *)this->m_pFileGfxDirections[_iGfxFile].m_pItem->20[_iJob]) >> 2;
     }
   }
   else
   {
-    if ( byte_3ECDBF4[_iGfxFile] )
+    if ( byte_3ECDBF4[_iGfxFile] != 0 )
     {
       return 1;
     }
@@ -1207,7 +1245,7 @@ void  CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, un
   unsigned int v10; // [esp+10h] [ebp-Ch]
   int v11; // [esp+14h] [ebp-8h]
 
-  if ( !this->m_pFileGfxJobs[a3].m_pItem && BBSupportDbgReport(2, "GfxManager.cpp", 2419, "m_pFileGfxJobs[ _iGfxFile ].pItem") == 1 )
+  if ( this->m_pFileGfxJobs[a3].m_pItem == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 2419, "m_pFileGfxJobs[ _iGfxFile ].pItem") == 1 )
   {
     __debugbreak();
   }
@@ -1220,8 +1258,8 @@ void  CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, un
     dword_3ECDD78 = (int)this->m_pFileGfxJobs[a3].m_pItem[a4 + 5];
     dword_3ECDD7C = *(_DWORD *)(dword_3ECDD78 + 4 * a5);
     dword_3ECDD78 = *(_DWORD *)(dword_3ECDD7C + 4 * a6);
-    a2->m_pGfxData = (BYTE *)dword_3ECDD78;
-    if ( !this->m_pFilePalIndex[a3] && BBSupportDbgReport(2, "GfxManager.cpp", 2454, "m_pFilePalIndex[ _iGfxFile ]") == 1 )
+    a2->m_pGfxData = (UGfxData *)dword_3ECDD78;
+    if ( this->m_pFilePalIndex[a3] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 2454, "m_pFilePalIndex[ _iGfxFile ]") == 1 )
     {
       __debugbreak();
     }
@@ -1229,16 +1267,16 @@ void  CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, un
   }
   else
   {
-    dword_3ECDD78 = *(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * a3] + 4 * a4 + 20);
+    dword_3ECDD78 = (int)this->m_pFileGfxDirections[a3].m_pItem[a4 + 5];
     dword_3ECDD7C = *(_DWORD *)(dword_3ECDD78 + 4 * a6);
     v11 = dword_3ECDD78 + 4 * a6;
     v10 = (signed int)(v11 - (unsigned int)(this->m_pFileGfxFrames[a3].m_pItem + 5)) >> 2;
-    a2->m_pGfxData = (BYTE *)dword_3ECDD7C;
-    if ( !this->m_pFilePalIndex[a3] && BBSupportDbgReport(2, "GfxManager.cpp", 2439, "m_pFilePalIndex[ _iGfxFile ]") == 1 )
+    a2->m_pGfxData = (UGfxData *)dword_3ECDD7C;
+    if ( this->m_pFilePalIndex[a3] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 2439, "m_pFilePalIndex[ _iGfxFile ]") == 1 )
     {
       __debugbreak();
     }
-    CGfxManager::GetImageInfo(this, a3, v10, &v9, &v6, &v7, &v8);
+    CGfxManager::GetImageInfo(this, a3, v10, &v9, (unsigned int *)&v6, (unsigned int *)&v7, &v8);
     a2->m_pPalData = this->m_pFilePalIndex[a3][v9 + 5];
   }
 }
@@ -1259,17 +1297,16 @@ void  CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, un
     __debugbreak();
   }
   *a2 = this->m_pFileGfxFrames[a3].m_pItem[a4 + 5];
-  if ( !this->m_pFilePalIndex[a3] && BBSupportDbgReport(2, "GfxManager.cpp", 2473, "m_pFilePalIndex[ _iGfxFile ]") == 1 )
+  if ( this->m_pFilePalIndex[a3] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 2473, "m_pFilePalIndex[ _iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
-  LOBYTE(v4) = CGfxManager::GetImageInfo(this, a3, a4, &v9, &v6, &v7, &v8);
-  if ( v9 == -1 )
+  LOBYTE(v4) = CGfxManager::GetImageInfo(this, a3, a4, &v9, (unsigned int *)&v6, (unsigned int *)&v7, &v8);
+  if ( v9 != -1 )
   {
-    return (char)v4;
+    v4 = this->m_pFilePalIndex[a3][v9 + 5];
+    a2[1] = v4;
   }
-  v4 = this->m_pFilePalIndex[a3][v9 + 5];
-  a2[1] = v4;
   return (char)v4;
 }
 
@@ -1304,10 +1341,10 @@ LABEL_30:
         if ( *a5 == -1 )
         {
           *a5 = this->m_pFileGfxJobs[_iGfxFile].m_iCount - 1;
-          *a6 = *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4] - 1;
+          *a6 = this->m_pFileGfxDirections[_iGfxFile].m_iCount - 1;
           *a7 = CGfxManager::GetJobFrameCount(this, _iGfxFile, *a5, *a6) - 1;
         }
-        if ( CGfxManager::HasSil(this, _iGfxFile) )
+        if ( CGfxManager::HasSil(this, _iGfxFile) != 0 )
         {
           *a4 = this->m_pFileGfxJobCodes[_iGfxFile].m_iCount - 1;
         }
@@ -1338,7 +1375,7 @@ LABEL_30:
         *a5 = v8;
         if ( v12 != a3 )
         {
-          if ( *a6 )
+          if ( *a6 != 0 )
           {
             --*a6;
           }
@@ -1348,7 +1385,7 @@ LABEL_30:
           }
         }
         *a7 = a3 - (signed int)(*(_DWORD *)&this->m_pFileGfxJobs[_iGfxFile].m_pItem[*a5 + 5][4 * *a6] - (unsigned int)(this->m_pFileGfxFrames[_iGfxFile].m_pItem + 5)) / 4;
-        if ( CGfxManager::HasSil(this, _iGfxFile) )
+        if ( CGfxManager::HasSil(this, _iGfxFile) != 0 )
         {
           for ( j = 0;
                 j < this->m_pFileGfxJobCodes[_iGfxFile].m_iCount;
@@ -1378,15 +1415,15 @@ LABEL_30:
             ;
             ++k )
       {
-        if ( k >= *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4] )
+        if ( k >= this->m_pFileGfxDirections[_iGfxFile].m_iCount )
         {
           if ( *a5 == -1 )
           {
-            *a5 = *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4] - 1;
+            *a5 = this->m_pFileGfxDirections[_iGfxFile].m_iCount - 1;
             *a6 = 0;
             *a7 = CGfxManager::GetJobFrameCount(this, _iGfxFile, *a5, *a6) - 1;
           }
-          if ( CGfxManager::HasSil(this, _iGfxFile) )
+          if ( CGfxManager::HasSil(this, _iGfxFile) != 0 )
           {
             *a4 = this->m_pFileGfxJobs[_iGfxFile].m_iCount - 1;
           }
@@ -1396,7 +1433,7 @@ LABEL_30:
           }
           return 1;
         }
-        v11 = (signed int)(*(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * k + 20) - (unsigned int)(this->m_pFileGfxFrames[_iGfxFile].m_pItem + 5)) / 4;
+        v11 = (this->m_pFileGfxDirections[_iGfxFile].m_pItem[k + 5] - (char *)(this->m_pFileGfxFrames[_iGfxFile].m_pItem + 5)) / 4;
         if ( v11 >= a3 )
         {
           break;
@@ -1406,18 +1443,18 @@ LABEL_30:
       if ( v11 != a3 )
       {
         --*a5;
-        while ( *(char ***)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * *a5 + 20) == this->m_pFileGfxFrames[_iGfxFile].m_pItem + 5 )
+        while ( this->m_pFileGfxDirections[_iGfxFile].m_pItem[*a5 + 5] == (char *)this->m_pFileGfxFrames[_iGfxFile].m_pItem + 20 )
         {
           --*a5;
         }
       }
-      if ( CGfxManager::HasSil(this, _iGfxFile) )
+      if ( CGfxManager::HasSil(this, _iGfxFile) != 0 )
       {
         for ( m = 0;
               m < this->m_pFileGfxJobs[_iGfxFile].m_iCount;
               ++m )
         {
-          if ( (int)&this->m_pFileGfxJobs[_iGfxFile].m_pItem[m + 5][-*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] - 20] / 4 > (int)*a5 )
+          if ( (this->m_pFileGfxJobs[_iGfxFile].m_pItem[m + 5] - (char *)(this->m_pFileGfxDirections[_iGfxFile].m_pItem + 5)) / 4 > (int)*a5 )
           {
             *a4 = m - 1;
             break;
@@ -1433,7 +1470,7 @@ LABEL_30:
         *a4 = -1;
       }
       *a7 = 0;
-      *a7 = (signed int)(*(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * *a5 + 20) - (unsigned int)(this->m_pFileGfxFrames[_iGfxFile].m_pItem + 5)) / 4 - a3;
+      *a7 = (this->m_pFileGfxDirections[_iGfxFile].m_pItem[*a5 + 5] - (char *)(this->m_pFileGfxFrames[_iGfxFile].m_pItem + 5)) / 4 - a3;
       *a6 = 0;
       return 1;
     }
@@ -1442,7 +1479,7 @@ LABEL_30:
 
 
 // address=[0x1364940]
-// Decompiled from char __thiscall CGfxManager::GetImageInfo_0(CGfxManager *this, unsigned int a2, unsigned int a3, int *a4, int *a5, int *a6)
+// Decompiled from char __thiscall CGfxManager::GetImageInfo_0(CGfxManager *this, unsigned int a2, unsigned int a3, unsigned int *a4, unsigned int *a5, int *a6)
 bool  CGfxManager::GetImageInfo(unsigned int a2, unsigned int a3, int & a4, int & a5, int & a6) {
   
   int v7; // [esp+4h] [ebp-4h] BYREF
@@ -1459,7 +1496,7 @@ bool  CGfxManager::GetJobIndices(unsigned int _iGfxFile, unsigned int a3, int & 
   int i; // [esp+0h] [ebp-Ch]
   int j; // [esp+4h] [ebp-8h]
 
-  if ( !g_bSilPerFile[_iGfxFile] && BBSupportDbgReport(2, "GfxManager.cpp", 2271, "g_bSilPerFile[ _iGfxFile ]") == 1 )
+  if ( g_bSilPerFile[_iGfxFile] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 2271, "g_bSilPerFile[ _iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
@@ -1478,7 +1515,7 @@ bool  CGfxManager::GetJobIndices(unsigned int _iGfxFile, unsigned int a3, int & 
           i <= *a5;
           ++i )
     {
-      if ( (char *)*((_DWORD *)this->m_pFileGfxJobs[_iGfxFile].m_pItem + 5) != this->m_pFileGfxJobs[_iGfxFile].m_pItem[i + 5] )
+      if ( this->m_pFileGfxJobs[_iGfxFile].m_pItem[5] != this->m_pFileGfxJobs[_iGfxFile].m_pItem[i + 5] )
       {
         return 1;
       }
@@ -1487,16 +1524,16 @@ bool  CGfxManager::GetJobIndices(unsigned int _iGfxFile, unsigned int a3, int & 
   else
   {
     *a4 = (unsigned int)this->m_pFileGfxJobs[_iGfxFile].m_pItem[a3 + 5];
-    *a4 -= *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 20;
+    *a4 -= (unsigned int)(this->m_pFileGfxDirections[_iGfxFile].m_pItem + 5);
     *a4 = (int)*a4 / 4;
     if ( a3 == this->m_pFileGfxJobs[_iGfxFile].m_iCount - 1 )
     {
-      *a5 = *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile + 4];
+      *a5 = this->m_pFileGfxDirections[_iGfxFile].m_iCount;
     }
     else
     {
       *a5 = (int)this->m_pFileGfxJobs[_iGfxFile].m_pItem[a3 + 6];
-      *a5 -= *(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 20;
+      *a5 -= (int)(this->m_pFileGfxDirections[_iGfxFile].m_pItem + 5);
       *a5 /= 4;
       --*a5;
     }
@@ -1504,7 +1541,7 @@ bool  CGfxManager::GetJobIndices(unsigned int _iGfxFile, unsigned int a3, int & 
           j <= *a5;
           ++j )
     {
-      if ( *(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 20) != *(_DWORD *)(*(_DWORD *)&this->m_pFileGfxDirections[8 * _iGfxFile] + 4 * j + 20) )
+      if ( this->m_pFileGfxDirections[_iGfxFile].m_pItem[5] != this->m_pFileGfxDirections[_iGfxFile].m_pItem[j + 5] )
       {
         return 1;
       }
@@ -1589,58 +1626,58 @@ bool  CGfxManager::RemoveAllGFX(int a2) {
         i < v3;
         ++i )
   {
-    if ( this->m_sFileGfx[i].pPileGfx )
+    if ( this->m_sFileGfx[i].pFileGfx != 0 )
     {
       if ( this->m_sFileGfx[i].m_bFileMapped == 1 )
       {                                         // IFileEx.Close
         ((void (__thiscall *)(char *, const char *, int))(*(vbtable::CFileEx **)((char *)&this->m_sFileGfx[i].m_pFile->m_pVbtable + (unsigned int)this->m_sFileGfx[i].m_pFile->m_pVbtable->offsetIFileEx))[2].offsetCFile)((char *)&this->m_sFileGfx[i].m_pFile->m_pVbtable + (unsigned int)this->m_sFileGfx[i].m_pFile->m_pVbtable->offsetIFileEx, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h", 146);
         m_pFile = this->m_sFileGfx[i].m_pFile;
-        if ( m_pFile )
+        if ( m_pFile != 0 )
         {
           m_pFile->CFile.dtor(m_pFile, 1);
         }
       }
       else
       {
-        operator delete[](this->m_sFileGfx[i].pPileGfx);
+        operator delete[](this->m_sFileGfx[i].pFileGfx);
       }
       this->m_sFileGfx[i].m_bFileMapped = 0;
       this->m_sFileGfx[i].m_pFile = 0;
-      this->m_sFileGfx[i].pPileGfx = 0;
+      this->m_sFileGfx[i].pFileGfx = 0;
     }
-    if ( this->m_sFilePal[i].pPileGfx )
+    if ( this->m_sFilePal[i].pFileGfx != 0 )
     {                                           // Close()
       ((void (__thiscall *)(char *, const char *, int))(*(vbtable::CFileEx **)((char *)&this->m_sFilePal[i].m_pFile->m_pVbtable + (unsigned int)this->m_sFilePal[i].m_pFile->m_pVbtable->offsetIFileEx))[2].offsetCFile)((char *)&this->m_sFilePal[i].m_pFile->m_pVbtable + (unsigned int)this->m_sFilePal[i].m_pFile->m_pVbtable->offsetIFileEx, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h", 146);
       v5 = this->m_sFilePal[i].m_pFile;
-      if ( v5 )
+      if ( v5 != 0 )
       {
         v5->CFile.dtor(v5, 1);
       }
       this->m_sFilePal[i].m_bFileMapped = 0;
       this->m_sFilePal[i].m_pFile = 0;
-      this->m_sFilePal[i].pPileGfx = 0;
+      this->m_sFilePal[i].pFileGfx = 0;
     }
-    if ( this->m_pFilePalIndex[i] )
+    if ( this->m_pFilePalIndex[i] != 0 )
     {
       operator delete[](this->m_pFilePalIndex[i]);
       this->m_pFilePalIndex[i] = 0;
     }
-    if ( this->m_pFileGfxFrames[i].m_pItem )
+    if ( this->m_pFileGfxFrames[i].m_pItem != 0 )
     {
       operator delete[](this->m_pFileGfxFrames[i].m_pItem);
       this->m_pFileGfxFrames[i].m_pItem = 0;
     }
-    if ( this->m_pFileGfxDirections[i].m_pItem )
+    if ( this->m_pFileGfxDirections[i].m_pItem != 0 )
     {
       operator delete[](this->m_pFileGfxDirections[i].m_pItem);
       this->m_pFileGfxDirections[i].m_pItem = 0;
     }
-    if ( this->m_pFileGfxJobs[i].m_pItem )
+    if ( this->m_pFileGfxJobs[i].m_pItem != 0 )
     {
       operator delete[](this->m_pFileGfxJobs[i].m_pItem);
       this->m_pFileGfxJobs[i].m_pItem = 0;
     }
-    if ( this->m_pFileGfxJobCodes[i].m_pItem )
+    if ( this->m_pFileGfxJobCodes[i].m_pItem != 0 )
     {
       operator delete[](this->m_pFileGfxJobCodes[i].m_pItem);
       this->m_pFileGfxJobCodes[i].m_pItem = 0;
@@ -1669,19 +1706,18 @@ void  CGfxManager::ErrorMessageBox(class String a1) {
 
 
 // address=[0x1364ff0]
-// Decompiled from int *__thiscall CGfxManager::LoadFile(CGfxManager *this, std::wstring a2, unsigned int *a3, unsigned int a4)
-void *  CGfxManager::LoadFile(std::wstring a2, unsigned long * a3, unsigned int a4) {
+// Decompiled from void *__thiscall CGfxManager::LoadFile(CGfxManager *this, std::wstring _swPath, unsigned int *_iSize, unsigned int _iFileVersion)
+void *  CGfxManager::LoadFile(std::wstring _swPath, unsigned long * _iSize, unsigned int _iFileVersion) {
   
   wchar_t *v4; // eax
   wchar_t *v5; // eax
   wchar_t *v7; // eax
   char *v8; // eax
   int v9[5]; // [esp-1Ch] [ebp-154h] BYREF
-  unsigned int v10; // [esp-8h] [ebp-140h]
-  int v11; // [esp-4h] [ebp-13Ch]
+  int iActualFileVersion; // [esp-4h] [ebp-13Ch]
   _DWORD v12[7]; // [esp+0h] [ebp-138h] BYREF
-  void *v15; // [esp+28h] [ebp-110h] MAPDST
-  int *v16; // [esp+2Ch] [ebp-10Ch]
+  GFX_ENGINE_FILE_HEADER *v15; // [esp+28h] [ebp-110h] MAPDST
+  void *v16; // [esp+2Ch] [ebp-10Ch]
   signed int v17; // [esp+30h] [ebp-108h]
   size_t Size; // [esp+3Ch] [ebp-FCh]
   char v22[88]; // [esp+44h] [ebp-F4h] BYREF
@@ -1694,42 +1730,41 @@ void *  CGfxManager::LoadFile(std::wstring a2, unsigned long * a3, unsigned int 
   v26 = 1;
   v12[6] = CFileEx::CFileEx(&v23, UNUSED_ARG());
   LOBYTE(v26) = 2;
-  v4 = std::wstring::c_str(&a2);
+  v4 = std::wstring::c_str(&_swPath);
   CFileEx::Open(&v23.IFileEx, v4, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
   v17 = CFileEx::Size(&v23);
   Size = v17;
   if ( v17 > 0 )
   {
-    v15 = operator new[](Size);
+    v15 = (GFX_ENGINE_FILE_HEADER *)operator new[](Size);
     CFileEx::Read(&v23.IFileEx.__vftable, v15, 1, Size, UNUSED_ARG(), UNUSED_ARG());
     CFileEx::Close(&v23.IFileEx, UNUSED_ARG(), UNUSED_ARG());
-    if ( a3 )
+    if ( _iSize != nullptr )
     {
-      *a3 = Size;
+      *_iSize = Size;
     }
     LOBYTE(v26) = 1;
     CFileEx::~CFileEx(&v23);
     v26 = 0;
-    if ( a4 != -1 && *((_DWORD *)v15 + 4) != a4 )
+    if ( _iFileVersion != -1 && v15->m_iFileVersion != _iFileVersion )
     {
-      v11 = *((_DWORD *)v15 + 4);
-      v10 = a4;
-      v7 = std::wstring::c_str(&a2);
-      BBSupportTracePrintF(2, "Version incorrect for file \"%s\"!\nNeeded: %d, Got: %d !", (const char *)v7, v10, v11);
-      if ( !byte_3ECDBF0 )
+      iActualFileVersion = v15->m_iFileVersion;
+      v7 = std::wstring::c_str(&_swPath);
+      BBSupportTracePrintF(2, "Version incorrect for file \"%s\"!\nNeeded: %d, Got: %d !", (const char *)v7, _iFileVersion, iActualFileVersion);
+      if ( s_bGfxHadError == 0 )
       {
         String::operator=(&this->m_sLastError, "Wrong version of file \"");
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v22);
         LOBYTE(v26) = 4;
-        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(&v24, &a2);
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v22, &v24, &_swPath);
         LOBYTE(v26) = 5;
         v8 = std::string::c_str(&v24);
         String::operator+=(&this->m_sLastError, v8);
         String::operator+=(&this->m_sLastError, "\"!");
         v12[5] = v9;
         v12[4] = String::String((String *)v9, (const struct String *)&this->m_sLastError, 0, 0xFFFFFFFF);
-        CGfxManager::ErrorMessageBox(this, v9[0], v9[1], v9[2], v9[3], v9[4], v10, v11);
-        byte_3ECDBF0 = 1;
+        CGfxManager::ErrorMessageBox(this, v9[0], v9[1], v9[2], v9[3], v9[4], _iFileVersion, iActualFileVersion);
+        s_bGfxHadError = 1;
         LOBYTE(v26) = 4;
         std::string::~string(&v24);
         LOBYTE(v26) = 0;
@@ -1737,18 +1772,18 @@ void *  CGfxManager::LoadFile(std::wstring a2, unsigned long * a3, unsigned int 
       }
     }
     v26 = -1;
-    std::wstring::~wstring(&a2);
-    return (int *)v15;
+    std::wstring::~wstring(&_swPath);
+    return v15;
   }
   else
   {
-    v5 = std::wstring::c_str(&a2);
+    v5 = std::wstring::c_str(&_swPath);
     BBSupportTracePrintF(2, "CGfxManager::LoadFile : Couldn't get size of : %s", (const char *)v5);
-    v16 = 0;
+    v16 = nullptr;
     LOBYTE(v26) = 1;
     CFileEx::~CFileEx(&v23);
     v26 = -1;
-    std::wstring::~wstring(&a2);
+    std::wstring::~wstring(&_swPath);
     return v16;
   }
 }
@@ -1792,7 +1827,7 @@ class CFileEx *  CGfxManager::MapFullFile(std::wstring a2, unsigned int _iFileVe
   v34 = 0;
   C = operator new(0x6Cu);
   LOBYTE(v34) = 1;
-  if ( C )
+  if ( C != 0 )
   {
     v24 = CFileEx::CFileEx((CFileEx *)C, UNUSED_ARG());
   }
@@ -1802,10 +1837,10 @@ class CFileEx *  CGfxManager::MapFullFile(std::wstring a2, unsigned int _iFileVe
   }
   LOBYTE(v34) = 2;
   v3 = std::wstring::c_str(&a2);                // Call to IFileEx.Open(std::wstring const &a2, unsigned int a3, bool a4, char *a5, int a6) 
-  (**(void (__thiscall ***)(int, wchar_t *, int, int, const char *, int))((char *)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx))((int)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx, v3, 6, 1, "GfxManager.cpp", 1911);
+  (**(void (__thiscall ***)(char *, wchar_t *, int, int, const char *, int))((char *)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx))((char *)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx, v3, 6, 1, "GfxManager.cpp", 1911);
   v34 = 0;                                      // GetMapFilePtr
-  pMapFile = ((int (__thiscall *)(unsigned int))(*(vbtable::CFileEx **)((char *)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx))[1].topOffset)((int)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx);
-  if ( pMapFile )
+  pMapFile = ((int (__thiscall *)(char *))(*(vbtable::CFileEx **)((char *)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx))[1].topOffset)((char *)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx);
+  if ( pMapFile != 0 )
   {
     if ( _iFileVersion != -1 && *(_DWORD *)(pMapFile + 16) != _iFileVersion )
     {
@@ -1813,12 +1848,12 @@ class CFileEx *  CGfxManager::MapFullFile(std::wstring a2, unsigned int _iFileVe
       v14 = _iFileVersion;
       v7 = std::wstring::c_str(&a2);
       BBSupportTracePrintF(2, "Version incorrect for file \"%s\"!\nNeeded: %d, Got: %d !", (const char *)v7, v14, LastError);
-      if ( !byte_3ECDBF0 )
+      if ( s_bGfxHadError == 0 )
       {
         String::operator=(&v27->m_sLastError, "Wrong version of file \"");
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v29);
         LOBYTE(v34) = 6;
-        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(&v31, &a2);
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes((int)&v31, &a2);
         LOBYTE(v34) = 7;
         v8 = std::string::c_str(&v31);
         String::operator+=(&v27->m_sLastError, v8);
@@ -1826,7 +1861,7 @@ class CFileEx *  CGfxManager::MapFullFile(std::wstring a2, unsigned int _iFileVe
         v16[5] = &v9;
         v16[4] = String::String((String *)&v9, (const struct String *)&v27->m_sLastError, 0, 0xFFFFFFFF);
         CGfxManager::ErrorMessageBox(v27, v9, v10, v11, v12, v13, v14, LastError);
-        byte_3ECDBF0 = 1;
+        s_bGfxHadError = 1;
         LOBYTE(v34) = 6;
         std::string::~string(&v31);
         LOBYTE(v34) = 0;
@@ -1843,10 +1878,10 @@ class CFileEx *  CGfxManager::MapFullFile(std::wstring a2, unsigned int _iFileVe
     LastError = GetLastError();
     v4 = std::wstring::c_str(&a2);
     BBSupportTracePrintF(2, "Unable map view of file %s. LastError was: %d", (const char *)v4, LastError);
-    ((void (__thiscall *)(unsigned int, const char *, int))(*(vbtable::CFileEx **)((char *)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx))[2].offsetCFile)((int)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h", 146);
+    ((void (__thiscall *)(char *, const char *, int))(*(vbtable::CFileEx **)((char *)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx))[2].offsetCFile)((char *)&v24->m_pVbtable + (unsigned int)v24->m_pVbtable->offsetIFileEx, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h", 146);
     v20 = v24;
     v26 = v24;
-    if ( v24 )
+    if ( v24 != 0 )
     {
       v19 = ((int (__thiscall *)(CFileEx *, int))v26->CFile.dtor)(v26, 1);
     }
@@ -1857,7 +1892,7 @@ class CFileEx *  CGfxManager::MapFullFile(std::wstring a2, unsigned int _iFileVe
     String::operator=(&v27->m_sLastError, "Unable to open file \"");
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v30);
     LOBYTE(v34) = 4;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(&v32, &a2);
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes((int)&v32, &a2);
     LOBYTE(v34) = 5;
     v5 = std::string::c_str(&v32);
     String::operator+=(&v27->m_sLastError, v5);
@@ -1878,104 +1913,99 @@ class CFileEx *  CGfxManager::MapFullFile(std::wstring a2, unsigned int _iFileVe
 
 
 // address=[0x1365750]
-// Decompiled from char __thiscall CGfxManager::LoadGfxFile(CGfxManager *this, int a2, BYTE _bMapFile, int _iFileVersion)
-bool  CGfxManager::LoadGfxFile(unsigned int a2, bool _bMapFile, unsigned int _iFileVersion) {
+// Decompiled from bool __thiscall CGfxManager::LoadGfxFile(CGfxManager *this, unsigned int _iGfxFile, bool _bMapFile, unsigned int _iFileVersion)
+bool  CGfxManager::LoadGfxFile(unsigned int _iGfxFile, bool _bMapFile, unsigned int _iFileVersion) {
   
-  WCHAR *v4; // eax
-  WCHAR *v5; // eax
-  WCHAR *v6; // eax
-  WCHAR *v7; // eax
-  WCHAR *v8; // eax
-  void *v9; // eax
-  int v11; // eax
-  std::wstring v12; // [esp-24h] [ebp-280h] OVERLAPPED BYREF
-  unsigned int *v13; // [esp-8h] [ebp-264h]
-  int iFileVersion; // [esp-4h] [ebp-260h]
+  WCHAR *spGh6Path; // eax
+  WCHAR *spGh5Path; // eax
+  WCHAR *spGl6Path; // eax
+  WCHAR *spGl5Path; // eax
+  WCHAR *spGfxPath; // eax
+  char *v9; // eax
+  int iFileLength; // eax
+  int v12; // [esp-24h] [ebp-280h] OVERLAPPED BYREF
+  std::wstring v13; // [esp-20h] [ebp-27Ch] BYREF
   void *v15; // [esp+4h] [ebp-258h]
-  std::wstring *v16; // [esp+8h] [ebp-254h]
+  int *v16; // [esp+8h] [ebp-254h]
   void *v17; // [esp+Ch] [ebp-250h]
-  int *v18; // [esp+10h] [ebp-24Ch]
-  int *File; // [esp+14h] [ebp-248h]
-  CFileEx *v20; // [esp+18h] [ebp-244h]
-  char v21; // [esp+1Eh] [ebp-23Eh]
-  char v22; // [esp+1Fh] [ebp-23Dh]
-  CFileEx *v23; // [esp+20h] [ebp-23Ch]
-  std::wstring v25; // [esp+28h] [ebp-234h] BYREF
+  std::wstring *v18; // [esp+10h] [ebp-24Ch]
+  char *File; // [esp+14h] [ebp-248h]
+  CFileEx *pFile; // [esp+18h] [ebp-244h] MAPDST
+  bool v21; // [esp+1Eh] [ebp-23Eh]
+  bool v22; // [esp+1Fh] [ebp-23Dh]
+  std::wstring swPath; // [esp+28h] [ebp-234h] BYREF
   wchar_t Buffer[260]; // [esp+44h] [ebp-218h] BYREF
   int v27; // [esp+258h] [ebp-4h]
 
-  if ( a2 == 2 || a2 == 41 )
+  if ( _iGfxFile == 2 || _iGfxFile == 41 )
   {
-    if ( this->m_bUseHighPalette )
+    if ( this->m_bUseHighPalette != 0 )
     {
-      if ( this->m_bUse6Palette )
+      if ( this->m_bUse6Palette != 0 )
       {
-        v4 = std::wstring::c_str(&this->m_swGfxFolderName);
-        swprintf(Buffer, L"%s\\%d.gh6", v4, a2);
+        spGh6Path = std::wstring::c_str(&this->m_swGfxFolderName);
+        swprintf(Buffer, L"%s\\%d.gh6", spGh6Path, _iGfxFile);
       }
       else
       {
-        v5 = std::wstring::c_str(&this->m_swGfxFolderName);
-        swprintf(Buffer, L"%s\\%d.gh5", v5, a2);
+        spGh5Path = std::wstring::c_str(&this->m_swGfxFolderName);
+        swprintf(Buffer, L"%s\\%d.gh5", spGh5Path, _iGfxFile);
       }
     }
-    else if ( this->m_bUse6Palette )
+    else if ( this->m_bUse6Palette != 0 )
     {
-      v6 = std::wstring::c_str(&this->m_swGfxFolderName);
-      swprintf(Buffer, L"%s\\%d.gl6", v6, a2);
+      spGl6Path = std::wstring::c_str(&this->m_swGfxFolderName);
+      swprintf(Buffer, L"%s\\%d.gl6", spGl6Path, _iGfxFile);
     }
     else
     {
-      v7 = std::wstring::c_str(&this->m_swGfxFolderName);
-      swprintf(Buffer, L"%s\\%d.gl5", v7, a2);
+      spGl5Path = std::wstring::c_str(&this->m_swGfxFolderName);
+      swprintf(Buffer, L"%s\\%d.gl5", spGl5Path, _iGfxFile);
     }
   }
   else
   {
-    v8 = std::wstring::c_str(&this->m_swGfxFolderName);
-    swprintf(Buffer, L"%s\\%d.gfx", v8, a2);
+    spGfxPath = std::wstring::c_str(&this->m_swGfxFolderName);
+    swprintf(Buffer, L"%s\\%d.gfx", spGfxPath, _iGfxFile);
   }
-  std::wstring::wstring(&v25, Buffer);
+  std::wstring::wstring(&swPath, Buffer);
   v27 = 0;
-  v23 = 0;
-  if ( _bMapFile == 1 )
+  pFile = nullptr;
+  if ( _bMapFile )
   {
-    iFileVersion = _iFileVersion;
-    v18 = &v12.m_u[1];
-    v17 = std::wstring::wstring((std::wstring *)&v12.m_u[1], &v25);
-    v20 = CGfxManager::MapFullFile(this, *(std::wstring *)((char *)&v12 + 4), iFileVersion);
-    v23 = v20;
-    if ( v20 )
-    {
-      v9 = (void *)((int (__thiscall *)(unsigned int))(*(vbtable::CFileEx **)((char *)&v23->m_pVbtable + (unsigned int)v23->m_pVbtable->offsetIFileEx))[1].topOffset)((int)&v23->m_pVbtable + (unsigned int)v23->m_pVbtable->offsetIFileEx);
-      this->m_sFileGfx[a2].pPileGfx = v9;
+    v18 = &v13;
+    v17 = std::wstring::wstring(&v13, &swPath);
+    pFile = CGfxManager::MapFullFile(this, v13, _iFileVersion);
+    if ( pFile != nullptr )
+    {                                           // GetMapFilePtr
+      v9 = (char *)((int (__thiscall *)(unsigned int))(*(vbtable::CFileEx **)((char *)&pFile->m_pVbtable + (unsigned int)pFile->m_pVbtable->offsetIFileEx))[1].topOffset)((int)&pFile->m_pVbtable + (unsigned int)pFile->m_pVbtable->offsetIFileEx);
+      this->m_sFileGfx[_iGfxFile].pFileGfx = v9;
     }
   }
   else
   {
-    iFileVersion = _iFileVersion;
-    v13 = 0;
+    v13.m_u[6] = 0;
     v16 = &v12;
-    v15 = std::wstring::wstring(&v12, &v25);
-    File = CGfxManager::LoadFile(this, v12, v13, iFileVersion);
-    this->m_sFileGfx[a2].pPileGfx = File;
+    v15 = std::wstring::wstring((std::wstring *)&v12, &swPath);
+    File = (char *)CGfxManager::LoadFile(this, *(std::wstring *)&v12, (unsigned int *)v13.m_u[6], _iFileVersion);
+    this->m_sFileGfx[_iGfxFile].pFileGfx = File;
   }
-  if ( this->m_sFileGfx[a2].pPileGfx )
+  if ( this->m_sFileGfx[_iGfxFile].pFileGfx != nullptr )
   {
-    this->m_sFileGfx[a2].m_bFileMapped = _bMapFile;
-    this->m_sFileGfx[a2].m_pFile = v23;
-    v11 = v23->CFile.Size(v23);
-    this->m_sFileGfx[a2].iLength = v11;
-    v21 = 1;
+    this->m_sFileGfx[_iGfxFile].m_bFileMapped = _bMapFile;
+    this->m_sFileGfx[_iGfxFile].m_pFile = pFile;
+    iFileLength = pFile->CFile.Size(pFile);
+    this->m_sFileGfx[_iGfxFile].iLength = iFileLength;
+    v21 = true;
     v27 = -1;
-    std::wstring::~wstring(&v25);
+    std::wstring::~wstring(&swPath);
     return v21;
   }
   else
   {
-    v22 = 0;
+    v22 = false;
     v27 = -1;
-    std::wstring::~wstring(&v25);
+    std::wstring::~wstring(&swPath);
     return v22;
   }
 }
@@ -2007,38 +2037,38 @@ bool  CGfxManager::LoadGfxColorFile(unsigned int a2, bool a3, unsigned int a4) {
   char v24; // [esp+1Eh] [ebp-23Eh]
   char v25; // [esp+1Fh] [ebp-23Dh]
   CFileEx *v26; // [esp+20h] [ebp-23Ch]
-  char *v27; // [esp+24h] [ebp-238h]
+  CGfxManager *v27; // [esp+24h] [ebp-238h]
   char v28[28]; // [esp+28h] [ebp-234h] BYREF
   wchar_t Buffer[260]; // [esp+44h] [ebp-218h] BYREF
   int v30; // [esp+258h] [ebp-4h]
 
-  v27 = (char *)this;
-  if ( *((_BYTE *)this + 3224) )
+  v27 = this;
+  if ( this->m_bUse6Palette != 0 )
   {
     v17 = a2;
-    v4 = (unsigned __int8)std::wstring::c_str((_Cnd_internal_imp_t *)(v27 + 3196));
-    swprintf((char *)Buffer, (char *)L"%s\\%d.gf6", v4);
+    v4 = (unsigned __int8)std::wstring::c_str(&v27->m_swGfxFolderName);
+    swprintf(Buffer, L"%s\\%d.gf6", (WCHAR *)v4);
   }
   else
   {
     v17 = a2;
-    v5 = (unsigned __int8)std::wstring::c_str((_Cnd_internal_imp_t *)(v27 + 3196));
-    swprintf((char *)Buffer, (char *)L"%s\\%d.gf5", v5);
+    v5 = (unsigned __int8)std::wstring::c_str(&v27->m_swGfxFolderName);
+    swprintf(Buffer, L"%s\\%d.gf5", (WCHAR *)v5);
   }
-  std::wstring::wstring(v28, Buffer);
+  std::wstring::wstring((std::wstring *)v28, Buffer);
   v30 = 0;
   v26 = 0;
   if ( a3 == 1 )
   {
     v17 = a4;
     v21 = &v10;
-    v20 = std::wstring::wstring((int)v28);
-    v23 = CGfxManager::MapFullFile(v27, v10, v11, v12, v13, v14, v15, v16, v17);
+    v20 = ((int (__stdcall *)(int))std::wstring::wstring)((int)v28);
+    v23 = ((CFileEx *(__thiscall *)(char *, char, int, int, int, int, int, int, int))CGfxManager::MapFullFile)((char *)v27, v10, v11, v12, v13, v14, v15, v16, v17);
     v26 = v23;
-    if ( v23 )
+    if ( v23 != 0 )
     {
-      v6 = (*(int (__thiscall **)(int))(*(_DWORD *)((char *)v26 + *(_DWORD *)(*((_DWORD *)v26 + 18) + 4) + 72) + 12))((int)v26 + *(_DWORD *)(*((_DWORD *)v26 + 18) + 4) + 72);
-      *(_DWORD *)&v27[16 * a2 + 2188] = v6;
+      v6 = ((int (__thiscall *)(char *))(*(vbtable::CFileEx **)((char *)&v26->m_pVbtable + (unsigned int)v26->m_pVbtable->offsetIFileEx))[1].topOffset)((char *)&v26->m_pVbtable + (unsigned int)v26->m_pVbtable->offsetIFileEx);
+      v27->m_sFileGfx[a2].pFileGfx = (char *)v6;
     }
   }
   else
@@ -2046,527 +2076,449 @@ bool  CGfxManager::LoadGfxColorFile(unsigned int a2, bool a3, unsigned int a4) {
     v17 = a4;
     v16 = 0;
     v19 = &v9;
-    v18 = std::wstring::wstring((int)v28);
-    File = CGfxManager::LoadFile(v9, v10, v11, v12, v13, v14, v15, v16, v17);
-    *(_DWORD *)&v27[16 * a2 + 2188] = File;
+    v18 = ((int (__stdcall *)(int))std::wstring::wstring)((int)v28);
+    File = ((int (__stdcall *)(char, int, int, int, int, int, int, int, int))CGfxManager::LoadFile)(v9, v10, v11, v12, v13, v14, v15, v16, v17);
+    v27->m_sFileGfx[a2].pFileGfx = (char *)File;
   }
-  if ( *(_DWORD *)&v27[16 * a2 + 2188] )
+  if ( v27->m_sFileGfx[a2].pFileGfx != 0 )
   {
-    v27[16 * a2 + 2192] = a3;
-    *(_DWORD *)&v27[16 * a2 + 2196] = v26;
-    v8 = (*(int (__thiscall **)(CFileEx *))(*(_DWORD *)v26 + 16))(v26);
-    *(_DWORD *)&v27[16 * a2 + 2200] = v8;
+    v27->m_sFileGfx[a2].m_bFileMapped = a3;
+    v27->m_sFileGfx[a2].m_pFile = v26;
+    v8 = v26->CFile.Size(v26);
+    v27->m_sFileGfx[a2].iLength = v8;
     v24 = 1;
     v30 = -1;
-    std::wstring::~wstring(v28);
+    std::wstring::~wstring((std::wstring *)v28);
     return v24;
   }
   else
   {
     v25 = 0;
     v30 = -1;
-    std::wstring::~wstring(v28);
+    std::wstring::~wstring((std::wstring *)v28);
     return v25;
   }
 }
 
 
 // address=[0x1365ce0]
-// Decompiled from char __thiscall CGfxManager::LoadGilFile(CGfxManager *this, unsigned int a2, int a3)
-bool  CGfxManager::LoadGilFile(unsigned int a2, unsigned int a3) {
+// Decompiled from char __thiscall CGfxManager::LoadGilFile(CGfxManager *this, unsigned int nGfxFile, unsigned int _iFileVersion)
+bool  CGfxManager::LoadGilFile(unsigned int nGfxFile, unsigned int _iFileVersion) {
   
-  char v3; // al
-  char v5; // [esp-24h] [ebp-288h] BYREF
-  int v6; // [esp-20h] [ebp-284h]
-  int v7; // [esp-1Ch] [ebp-280h]
-  int v8; // [esp-18h] [ebp-27Ch]
-  int v9; // [esp-14h] [ebp-278h]
-  int v10; // [esp-10h] [ebp-274h]
-  int v11; // [esp-Ch] [ebp-270h]
-  int *v12; // [esp-8h] [ebp-26Ch]
-  int v13; // [esp-4h] [ebp-268h]
-  int v14; // [esp+4h] [ebp-260h]
-  char *v15; // [esp+8h] [ebp-25Ch]
-  int v16; // [esp+Ch] [ebp-258h]
-  int v17; // [esp+10h] [ebp-254h] BYREF
-  int File; // [esp+14h] [ebp-250h]
-  int v19; // [esp+18h] [ebp-24Ch]
-  signed int v20; // [esp+1Ch] [ebp-248h]
-  int v21; // [esp+20h] [ebp-244h]
+  WCHAR *v3; // eax
+  std::wstring v5; // [esp-24h] [ebp-288h] BYREF
+  unsigned int *pSize; // [esp-8h] [ebp-26Ch]
+  void *v8; // [esp+4h] [ebp-260h]
+  std::wstring *v9; // [esp+8h] [ebp-25Ch]
+  char *pPileGfx; // [esp+Ch] [ebp-258h]
+  unsigned int iSize; // [esp+10h] [ebp-254h] BYREF
+  GFX_ENGINE_GFX_DESCRIPTION *pFileContent; // [esp+14h] [ebp-250h]
+  signed int iEntryCount; // [esp+1Ch] [ebp-248h]
+  int iGfxOffset; // [esp+20h] [ebp-244h] MAPDST
   signed int i; // [esp+24h] [ebp-240h]
-  char v23; // [esp+2Ah] [ebp-23Ah]
-  char v24; // [esp+2Bh] [ebp-239h]
-  CGfxManager *v25; // [esp+2Ch] [ebp-238h]
-  char v26[28]; // [esp+30h] [ebp-234h] BYREF
+  char v17; // [esp+2Ah] [ebp-23Ah]
+  char v18; // [esp+2Bh] [ebp-239h]
+  std::wstring v20; // [esp+30h] [ebp-234h] BYREF
   wchar_t Buffer[260]; // [esp+4Ch] [ebp-218h] BYREF
-  int v28; // [esp+260h] [ebp-4h]
+  int v22; // [esp+260h] [ebp-4h]
 
-  v25 = this;
-  v3 = (unsigned __int8)std::wstring::c_str((CGfxManager *)((char *)this + 3196));
-  swprintf((char *)Buffer, (char *)L"%s\\%d.gil", v3);
-  std::wstring::wstring(v26, Buffer);
-  v28 = 0;
-  v13 = a3;
-  v12 = &v17;
-  v15 = &v5;
-  v14 = std::wstring::wstring((int)v26);
-  File = CGfxManager::LoadFile(v5, v6, v7, v8, v9, v10, v11, (int)v12, v13);
-  *((_DWORD *)v25 + 2 * a2 + 211) = File;
-  if ( *((_DWORD *)v25 + 2 * a2 + 211) )
+  v3 = std::wstring::c_str(&this->m_swGfxFolderName);
+  swprintf(Buffer, L"%s\\%d.gil", v3, nGfxFile);
+  std::wstring::wstring(&v20, Buffer);
+  v22 = 0;
+  pSize = &iSize;
+  v9 = &v5;
+  v8 = std::wstring::wstring(&v5, &v20);
+  pFileContent = (GFX_ENGINE_GFX_DESCRIPTION *)CGfxManager::LoadFile(this, v5, pSize, _iFileVersion);
+  this->m_pFileGfxFrames[nGfxFile].m_pItem = pFileContent;
+  if ( this->m_pFileGfxFrames[nGfxFile].m_pItem != nullptr )
   {
-    if ( !*((_DWORD *)v25 + 4 * a2 + 547) && BBSupportDbgReport(2, "GfxManager.cpp", 531, "m_sFileGfx[ nGfxFile ].pFileGfx") == 1 )
+    if ( this->m_sFileGfx[nGfxFile].pFileGfx == nullptr && BBSupportDbgReport(2, "GfxManager.cpp", 531, "m_sFileGfx[ nGfxFile ].pFileGfx") == 1 )
     {
       __debugbreak();
     }
-    v16 = *((_DWORD *)v25 + 4 * a2 + 547);
-    v20 = (unsigned int)(v17 - 20) >> 2;
-    *((_DWORD *)v25 + 2 * a2 + 212) = v20;
+    pPileGfx = this->m_sFileGfx[nGfxFile].pFileGfx;
+    iEntryCount = (iSize - 20) >> 2;
+    this->m_pFileGfxFrames[nGfxFile].m_iCount = iEntryCount;
     for ( i = 0;
-          i < v20;
+          i < iEntryCount;
           ++i )
     {
-      v21 = *(_DWORD *)(*((_DWORD *)v25 + 2 * a2 + 211) + 4 * i + 20);
-      if ( v21 )
+      iGfxOffset = this->m_pFileGfxFrames[nGfxFile].m_pItem->?[i];
+      if ( iGfxOffset == 0 )
       {
-        v19 = v21;
+        iGfxOffset = 20;
       }
-      else
-      {
-        v19 = 20;
-      }
-      v21 = v19;
-      *(_DWORD *)(*((_DWORD *)v25 + 2 * a2 + 211) + 4 * i + 20) = v19 + v16;
+      this->m_pFileGfxFrames[nGfxFile].m_pItem->?[i] = &pPileGfx[iGfxOffset];
     }
-    v23 = 1;
-    v28 = -1;
-    std::wstring::~wstring(v26);
-    return v23;
+    v17 = 1;
+    v22 = -1;
+    std::wstring::~wstring(&v20);
+    return v17;
   }
   else
   {
-    v24 = 0;
-    v28 = -1;
-    std::wstring::~wstring(v26);
-    return v24;
+    v18 = 0;
+    v22 = -1;
+    std::wstring::~wstring(&v20);
+    return v18;
   }
 }
 
 
 // address=[0x1365f30]
-// Decompiled from char __thiscall CGfxManager::LoadDilFile(CGfxManager *this, unsigned int a2, int a3)
-bool  CGfxManager::LoadDilFile(unsigned int a2, unsigned int a3) {
+// Decompiled from char __thiscall CGfxManager::LoadDilFile(CGfxManager *this, unsigned int _iGfxFile, unsigned int a4)
+bool  CGfxManager::LoadDilFile(unsigned int _iGfxFile, unsigned int a4) {
   
-  char v3; // al
-  char v5; // [esp-24h] [ebp-288h] BYREF
-  int v6; // [esp-20h] [ebp-284h]
-  int v7; // [esp-1Ch] [ebp-280h]
-  int v8; // [esp-18h] [ebp-27Ch]
-  int v9; // [esp-14h] [ebp-278h]
-  int v10; // [esp-10h] [ebp-274h]
-  int v11; // [esp-Ch] [ebp-270h]
-  int *v12; // [esp-8h] [ebp-26Ch]
-  int v13; // [esp-4h] [ebp-268h]
-  int v14; // [esp+4h] [ebp-260h]
-  char *v15; // [esp+8h] [ebp-25Ch]
-  int v16; // [esp+Ch] [ebp-258h]
-  int v17; // [esp+10h] [ebp-254h] BYREF
-  int File; // [esp+14h] [ebp-250h]
-  int v19; // [esp+18h] [ebp-24Ch]
-  signed int v20; // [esp+1Ch] [ebp-248h]
-  int v21; // [esp+20h] [ebp-244h]
+  WCHAR *v3; // eax
+  std::wstring v5; // [esp-24h] [ebp-288h] BYREF
+  unsigned int *p_iSize; // [esp-8h] [ebp-26Ch]
+  unsigned int v7; // [esp-4h] [ebp-268h]
+  void *v8; // [esp+4h] [ebp-260h]
+  std::wstring *v9; // [esp+8h] [ebp-25Ch]
+  char *pGfxData; // [esp+Ch] [ebp-258h]
+  unsigned int iSize; // [esp+10h] [ebp-254h] BYREF
+  GFX_ENGINE_GFX_DESCRIPTION *File; // [esp+14h] [ebp-250h]
+  signed int v14; // [esp+1Ch] [ebp-248h]
+  int iOffset; // [esp+20h] [ebp-244h] MAPDST
   signed int i; // [esp+24h] [ebp-240h]
-  char v23; // [esp+2Ah] [ebp-23Ah]
-  char v24; // [esp+2Bh] [ebp-239h]
-  CGfxManager *v25; // [esp+2Ch] [ebp-238h]
-  char v26[28]; // [esp+30h] [ebp-234h] BYREF
+  char v17; // [esp+2Ah] [ebp-23Ah]
+  char v18; // [esp+2Bh] [ebp-239h]
+  std::wstring v20; // [esp+30h] [ebp-234h] BYREF
   wchar_t Buffer[260]; // [esp+4Ch] [ebp-218h] BYREF
-  int v28; // [esp+260h] [ebp-4h]
+  int v22; // [esp+260h] [ebp-4h]
 
-  v25 = this;
-  v3 = (unsigned __int8)std::wstring::c_str((CGfxManager *)((char *)this + 3196));
-  swprintf((char *)Buffer, (char *)L"%s\\%d.dil", v3);
-  std::wstring::wstring(v26, Buffer);
-  v28 = 0;
-  v13 = a3;
-  v12 = &v17;
-  v15 = &v5;
-  v14 = std::wstring::wstring((int)v26);
-  File = CGfxManager::LoadFile(v5, v6, v7, v8, v9, v10, v11, (int)v12, v13);
-  *((_DWORD *)v25 + 2 * a2 + 295) = File;
-  if ( *((_DWORD *)v25 + 2 * a2 + 295) )
+  v3 = std::wstring::c_str(&this->m_swGfxFolderName);
+  swprintf(Buffer, L"%s\\%d.dil", v3, _iGfxFile);
+  std::wstring::wstring(&v20, Buffer);
+  v22 = 0;
+  v7 = a4;
+  p_iSize = &iSize;
+  v9 = &v5;
+  v8 = std::wstring::wstring(&v5, &v20);
+  File = (GFX_ENGINE_GFX_DESCRIPTION *)CGfxManager::LoadFile(this, v5, p_iSize, v7);
+  this->m_pFileGfxDirections[_iGfxFile].m_pItem = File;
+  if ( this->m_pFileGfxDirections[_iGfxFile].m_pItem != nullptr )
   {
-    if ( !*((_DWORD *)v25 + 2 * a2 + 211) && BBSupportDbgReport(2, "GfxManager.cpp", 573, "m_pFileGfxFrames[ nGfxFile ].pItem") == 1 )
+    if ( this->m_pFileGfxFrames[_iGfxFile].m_pItem == nullptr && BBSupportDbgReport(2, "GfxManager.cpp", 573, "m_pFileGfxFrames[ nGfxFile ].pItem") == 1 )
     {
       __debugbreak();
     }
-    v16 = *((_DWORD *)v25 + 2 * a2 + 211);
-    v20 = (unsigned int)(v17 - 20) >> 2;
-    *((_DWORD *)v25 + 2 * a2 + 296) = v20;
+    pGfxData = (char *)this->m_pFileGfxFrames[_iGfxFile].m_pItem;
+    v14 = (iSize - 20) >> 2;
+    this->m_pFileGfxDirections[_iGfxFile].m_iCount = v14;
     for ( i = 0;
-          i < v20;
+          i < v14;
           ++i )
     {
-      v21 = *(_DWORD *)(*((_DWORD *)v25 + 2 * a2 + 295) + 4 * i + 20);
-      if ( v21 )
+      iOffset = this->m_pFileGfxDirections[_iGfxFile].m_pItem->?[i];
+      if ( iOffset == 0 )
       {
-        v19 = v21;
+        iOffset = 20;
       }
-      else
-      {
-        v19 = 20;
-      }
-      v21 = v19;
-      *(_DWORD *)(*((_DWORD *)v25 + 2 * a2 + 295) + 4 * i + 20) = v19 + v16;
+      this->m_pFileGfxDirections[_iGfxFile].m_pItem->?[i] = &pGfxData[iOffset];
     }
-    v23 = 1;
-    v28 = -1;
-    std::wstring::~wstring(v26);
-    return v23;
+    v17 = 1;
+    v22 = -1;
+    std::wstring::~wstring(&v20);
+    return v17;
   }
   else
   {
-    v24 = 0;
-    v28 = -1;
-    std::wstring::~wstring(v26);
-    return v24;
+    v18 = 0;
+    v22 = -1;
+    std::wstring::~wstring(&v20);
+    return v18;
   }
 }
 
 
 // address=[0x1366180]
-// Decompiled from char __thiscall CGfxManager::LoadJilFile(CGfxManager *this, unsigned int a2, int a3)
-bool  CGfxManager::LoadJilFile(unsigned int a2, unsigned int a3) {
+// Decompiled from char __thiscall CGfxManager::LoadJilFile(CGfxManager *this, unsigned int nGfxFile, unsigned int a4)
+bool  CGfxManager::LoadJilFile(unsigned int nGfxFile, unsigned int a4) {
   
-  char v3; // al
-  char v5; // [esp-24h] [ebp-288h] BYREF
-  int v6; // [esp-20h] [ebp-284h]
-  int v7; // [esp-1Ch] [ebp-280h]
-  int v8; // [esp-18h] [ebp-27Ch]
-  int v9; // [esp-14h] [ebp-278h]
-  int v10; // [esp-10h] [ebp-274h]
-  int v11; // [esp-Ch] [ebp-270h]
-  int *v12; // [esp-8h] [ebp-26Ch]
-  int v13; // [esp-4h] [ebp-268h]
-  int v14; // [esp+4h] [ebp-260h]
-  char *v15; // [esp+8h] [ebp-25Ch]
-  int v16; // [esp+Ch] [ebp-258h]
-  int v17; // [esp+10h] [ebp-254h] BYREF
-  int File; // [esp+14h] [ebp-250h]
-  int v19; // [esp+18h] [ebp-24Ch]
-  signed int v20; // [esp+1Ch] [ebp-248h]
-  int v21; // [esp+20h] [ebp-244h]
+  WCHAR *v3; // eax
+  std::wstring v5; // [esp-24h] [ebp-288h] BYREF
+  unsigned int *p_iSize; // [esp-8h] [ebp-26Ch]
+  unsigned int v7; // [esp-4h] [ebp-268h]
+  void *v8; // [esp+4h] [ebp-260h]
+  std::wstring *v9; // [esp+8h] [ebp-25Ch]
+  char *pGfxData; // [esp+Ch] [ebp-258h]
+  unsigned int iSize; // [esp+10h] [ebp-254h] BYREF
+  GFX_ENGINE_GFX_DESCRIPTION *File; // [esp+14h] [ebp-250h]
+  signed int iCount; // [esp+1Ch] [ebp-248h]
+  int iJobOffset; // [esp+20h] [ebp-244h] MAPDST
   signed int i; // [esp+24h] [ebp-240h]
-  char v23; // [esp+2Ah] [ebp-23Ah]
-  char v24; // [esp+2Bh] [ebp-239h]
-  CGfxManager *v25; // [esp+2Ch] [ebp-238h]
-  char v26[28]; // [esp+30h] [ebp-234h] BYREF
+  char v17; // [esp+2Ah] [ebp-23Ah]
+  char v18; // [esp+2Bh] [ebp-239h]
+  std::wstring v20; // [esp+30h] [ebp-234h] BYREF
   wchar_t Buffer[260]; // [esp+4Ch] [ebp-218h] BYREF
-  int v28; // [esp+260h] [ebp-4h]
+  int v22; // [esp+260h] [ebp-4h]
 
-  v25 = this;
-  v3 = (unsigned __int8)std::wstring::c_str((CGfxManager *)((char *)this + 3196));
-  swprintf((char *)Buffer, (char *)L"%s\\%d.jil", v3);
-  std::wstring::wstring(v26, Buffer);
-  v28 = 0;
-  v13 = a3;
-  v12 = &v17;
-  v15 = &v5;
-  v14 = std::wstring::wstring((int)v26);
-  File = CGfxManager::LoadFile(v5, v6, v7, v8, v9, v10, v11, (int)v12, v13);
-  *((_DWORD *)v25 + 2 * a2 + 379) = File;
-  if ( *((_DWORD *)v25 + 2 * a2 + 379) )
+  v3 = std::wstring::c_str(&this->m_swGfxFolderName);
+  swprintf(Buffer, L"%s\\%d.jil", v3, nGfxFile);
+  std::wstring::wstring(&v20, Buffer);
+  v22 = 0;
+  v7 = a4;
+  p_iSize = &iSize;
+  v9 = &v5;
+  v8 = std::wstring::wstring(&v5, &v20);
+  File = (GFX_ENGINE_GFX_DESCRIPTION *)CGfxManager::LoadFile(this, v5, p_iSize, v7);
+  this->m_pFileGfxJobs[nGfxFile].m_pItem = File;
+  if ( this->m_pFileGfxJobs[nGfxFile].m_pItem != nullptr )
   {
-    if ( !*((_DWORD *)v25 + 2 * a2 + 295) && BBSupportDbgReport(2, "GfxManager.cpp", 612, "m_pFileGfxDirections[ nGfxFile ].pItem") == 1 )
+    if ( this->m_pFileGfxDirections[nGfxFile].m_pItem == nullptr && BBSupportDbgReport(2, "GfxManager.cpp", 612, "m_pFileGfxDirections[ nGfxFile ].pItem") == 1 )
     {
       __debugbreak();
     }
-    v16 = *((_DWORD *)v25 + 2 * a2 + 295);
-    v20 = (unsigned int)(v17 - 20) >> 2;
-    *((_DWORD *)v25 + 2 * a2 + 380) = v20;
+    pGfxData = (char *)this->m_pFileGfxDirections[nGfxFile].m_pItem;
+    iCount = (iSize - 20) >> 2;
+    this->m_pFileGfxJobs[nGfxFile].m_iCount = iCount;
     for ( i = 0;
-          i < v20;
+          i < iCount;
           ++i )
     {
-      v21 = *(_DWORD *)(*((_DWORD *)v25 + 2 * a2 + 379) + 4 * i + 20);
-      if ( v21 )
+      iJobOffset = this->m_pFileGfxJobs[nGfxFile].m_pItem->?[i];
+      if ( iJobOffset == 0 )
       {
-        v19 = v21;
+        iJobOffset = 20;
       }
-      else
-      {
-        v19 = 20;
-      }
-      v21 = v19;
-      *(_DWORD *)(*((_DWORD *)v25 + 2 * a2 + 379) + 4 * i + 20) = v19 + v16;
+      this->m_pFileGfxJobs[nGfxFile].m_pItem->?[i] = &pGfxData[iJobOffset];
     }
-    v23 = 1;
-    v28 = -1;
-    std::wstring::~wstring(v26);
-    return v23;
+    v17 = 1;
+    v22 = -1;
+    std::wstring::~wstring(&v20);
+    return v17;
   }
   else
   {
-    v24 = 0;
-    v28 = -1;
-    std::wstring::~wstring(v26);
-    return v24;
+    v18 = 0;
+    v22 = -1;
+    std::wstring::~wstring(&v20);
+    return v18;
   }
 }
 
 
 // address=[0x13663d0]
-// Decompiled from char __thiscall CGfxManager::LoadSilFile(CGfxManager *this, unsigned int a2, int a3)
-bool  CGfxManager::LoadSilFile(unsigned int a2, unsigned int a3) {
+// Decompiled from char __thiscall CGfxManager::LoadSilFile(CGfxManager *this, unsigned int _iGfxFile, unsigned int _iFileVersion)
+bool  CGfxManager::LoadSilFile(unsigned int _iGfxFile, unsigned int _iFileVersion) {
   
-  char v3; // al
-  char v5; // [esp-24h] [ebp-274h] BYREF
-  int v6; // [esp-20h] [ebp-270h]
-  int v7; // [esp-1Ch] [ebp-26Ch]
-  int v8; // [esp-18h] [ebp-268h]
-  int v9; // [esp-14h] [ebp-264h]
-  int v10; // [esp-10h] [ebp-260h]
-  int v11; // [esp-Ch] [ebp-25Ch]
-  int *v12; // [esp-8h] [ebp-258h]
-  int v13; // [esp-4h] [ebp-254h]
-  int v14; // [esp+4h] [ebp-24Ch]
-  char *v15; // [esp+8h] [ebp-248h]
-  int v16; // [esp+Ch] [ebp-244h] BYREF
-  int File; // [esp+10h] [ebp-240h]
-  CGfxManager *v18; // [esp+14h] [ebp-23Ch]
-  char v19; // [esp+1Ah] [ebp-236h]
-  char v20; // [esp+1Bh] [ebp-235h]
-  char v21[28]; // [esp+1Ch] [ebp-234h] BYREF
+  WCHAR *v3; // eax
+  std::wstring v5; // [esp-24h] [ebp-274h] BYREF
+  unsigned int *p_iSize; // [esp-8h] [ebp-258h]
+  void *v8; // [esp+4h] [ebp-24Ch]
+  std::wstring *v9; // [esp+8h] [ebp-248h]
+  unsigned int iSize; // [esp+Ch] [ebp-244h] BYREF
+  #3315 *File; // [esp+10h] [ebp-240h]
+  char v13; // [esp+1Ah] [ebp-236h]
+  char v14; // [esp+1Bh] [ebp-235h]
+  std::wstring v15; // [esp+1Ch] [ebp-234h] BYREF
   wchar_t Buffer[260]; // [esp+38h] [ebp-218h] BYREF
-  int v23; // [esp+24Ch] [ebp-4h]
+  int v17; // [esp+24Ch] [ebp-4h]
 
-  v18 = this;
-  v3 = (unsigned __int8)std::wstring::c_str((CGfxManager *)((char *)this + 3196));
-  swprintf((char *)Buffer, (char *)L"%s\\%d.sil", v3);
-  std::wstring::wstring(v21, Buffer);
-  v23 = 0;
-  v13 = a3;
-  v12 = &v16;
-  v15 = &v5;
-  v14 = std::wstring::wstring((int)v21);
-  File = CGfxManager::LoadFile(v5, v6, v7, v8, v9, v10, v11, (int)v12, v13);
-  *((_DWORD *)v18 + 2 * a2 + 463) = File;
-  if ( *((_DWORD *)v18 + 2 * a2 + 463) )
+  v3 = std::wstring::c_str(&this->m_swGfxFolderName);
+  swprintf(Buffer, L"%s\\%d.sil", v3, _iGfxFile);
+  std::wstring::wstring(&v15, Buffer);
+  v17 = 0;
+  p_iSize = &iSize;
+  v9 = &v5;
+  v8 = std::wstring::wstring(&v5, &v15);
+  File = (#3315 *)CGfxManager::LoadFile(this, v5, p_iSize, _iFileVersion);
+  this->m_pFileGfxJobCodes[_iGfxFile].m_pItem = File;
+  if ( this->m_pFileGfxJobCodes[_iGfxFile].m_pItem != nullptr )
   {
-    *((_DWORD *)v18 + 2 * a2 + 464) = (unsigned int)(v16 - 20) >> 2;
-    v19 = 1;
-    v23 = -1;
-    std::wstring::~wstring(v21);
-    return v19;
+    this->m_pFileGfxJobCodes[_iGfxFile].m_iCount = (iSize - 20) >> 2;
+    v13 = 1;
+    v17 = -1;
+    std::wstring::~wstring(&v15);
+    return v13;
   }
   else
   {
-    v20 = 0;
-    v23 = -1;
-    std::wstring::~wstring(v21);
-    return v20;
+    v14 = 0;
+    v17 = -1;
+    std::wstring::~wstring(&v15);
+    return v14;
   }
 }
 
 
 // address=[0x1366520]
-// Decompiled from char __thiscall CGfxManager::LoadPilFile(CGfxManager *this, int a2, int a3, bool a4)
-bool  CGfxManager::LoadPilFile(unsigned int a2, unsigned int a3, bool a4) {
+// Decompiled from char __thiscall CGfxManager::LoadPilFile(CGfxManager *this, int nGfxFile, unsigned int a3, bool a4)
+bool  CGfxManager::LoadPilFile(unsigned int nGfxFile, unsigned int a3, bool a4) {
   
-  char v4; // al
-  char v6; // [esp-24h] [ebp-288h] BYREF
-  int v7; // [esp-20h] [ebp-284h]
-  int v8; // [esp-1Ch] [ebp-280h]
-  int v9; // [esp-18h] [ebp-27Ch]
-  int v10; // [esp-14h] [ebp-278h]
-  int v11; // [esp-10h] [ebp-274h]
-  int v12; // [esp-Ch] [ebp-270h]
-  int *v13; // [esp-8h] [ebp-26Ch]
-  int v14; // [esp-4h] [ebp-268h]
-  int v15; // [esp+4h] [ebp-260h]
-  char *v16; // [esp+8h] [ebp-25Ch]
-  int v17; // [esp+Ch] [ebp-258h]
-  signed int v18; // [esp+10h] [ebp-254h]
-  int v19; // [esp+14h] [ebp-250h] BYREF
-  int File; // [esp+18h] [ebp-24Ch]
-  int v21; // [esp+1Ch] [ebp-248h]
-  int v22; // [esp+20h] [ebp-244h]
+  WCHAR *v4; // eax
+  std::wstring swPath; // [esp-24h] [ebp-288h] BYREF
+  unsigned int *pSize; // [esp-8h] [ebp-26Ch]
+  unsigned int v8; // [esp-4h] [ebp-268h]
+  void *v9; // [esp+4h] [ebp-260h]
+  std::wstring *p_swPath; // [esp+8h] [ebp-25Ch]
+  char *pPaletteData; // [esp+Ch] [ebp-258h]
+  signed int v12; // [esp+10h] [ebp-254h]
+  unsigned int iSize; // [esp+14h] [ebp-250h] BYREF
+  GFX_ENGINE_GFX_DESCRIPTION *File; // [esp+18h] [ebp-24Ch]
+  int iPaletteEntry; // [esp+20h] [ebp-244h] MAPDST
   signed int i; // [esp+24h] [ebp-240h]
-  char v24; // [esp+2Ah] [ebp-23Ah]
-  char v25; // [esp+2Bh] [ebp-239h]
-  CGfxManager *v26; // [esp+2Ch] [ebp-238h]
-  _BYTE v27[28]; // [esp+30h] [ebp-234h] BYREF
+  char v18; // [esp+2Ah] [ebp-23Ah]
+  char v19; // [esp+2Bh] [ebp-239h]
+  std::wstring v21; // [esp+30h] [ebp-234h] BYREF
   wchar_t Buffer[260]; // [esp+4Ch] [ebp-218h] BYREF
-  int v29; // [esp+260h] [ebp-4h]
+  int v23; // [esp+260h] [ebp-4h]
 
-  v26 = this;
-  std::wstring::wstring(v27);
-  v29 = 0;
-  v14 = a2;
-  v4 = (unsigned __int8)std::wstring::c_str((CGfxManager *)((char *)v26 + 3196));
+  std::wstring::wstring(&v21);
+  v23 = 0;
+  v4 = std::wstring::c_str(&this->m_swGfxFolderName);
   if ( a4 )
   {
-    swprintf((char *)Buffer, (char *)L"%s\\%d.pil", v4);
+    swprintf(Buffer, L"%s\\%d.pil", v4, nGfxFile);
   }
   else
   {
-    swprintf((char *)Buffer, (char *)L"%s\\%d.pi2", v4);
+    swprintf(Buffer, L"%s\\%d.pi2", v4, nGfxFile);
   }
-  std::wstring::operator=(v27, Buffer);
-  v14 = a3;
-  v13 = &v19;
-  v16 = &v6;
-  v15 = std::wstring::wstring((int)v27);
-  File = CGfxManager::LoadFile(v6, v7, v8, v9, v10, v11, v12, (int)v13, v14);
-  *((_DWORD *)v26 + a2 + 169) = File;
-  if ( *((_DWORD *)v26 + a2 + 169) )
+  std::wstring::operator=(&v21, Buffer);
+  v8 = a3;
+  pSize = &iSize;
+  p_swPath = &swPath;
+  v9 = std::wstring::wstring(&swPath, &v21);
+  File = (GFX_ENGINE_GFX_DESCRIPTION *)CGfxManager::LoadFile(this, swPath, pSize, v8);
+  this->m_pFilePalIndex[nGfxFile] = File;
+  if ( this->m_pFilePalIndex[nGfxFile] != nullptr )
   {
-    if ( !*((_DWORD *)v26 + 4 * a2 + 1) && BBSupportDbgReport(2, "GfxManager.cpp", 798, "m_sFilePal[ nGfxFile ].pFileGfx") == 1 )
+    if ( this->m_sFilePal[nGfxFile].pFileGfx == nullptr && BBSupportDbgReport(2, "GfxManager.cpp", 798, "m_sFilePal[ nGfxFile ].pFileGfx") == 1 )
     {
       __debugbreak();
     }
-    v17 = *((_DWORD *)v26 + 4 * a2 + 1);
-    v18 = (unsigned int)(v19 - 20) >> 2;
+    pPaletteData = this->m_sFilePal[nGfxFile].pFileGfx;
+    v12 = (iSize - 20) >> 2;
     for ( i = 0;
-          i < v18;
+          i < v12;
           ++i )
     {
-      v22 = *(_DWORD *)(*((_DWORD *)v26 + a2 + 169) + 4 * i + 20);
-      if ( v22 )
+      iPaletteEntry = this->m_pFilePalIndex[nGfxFile]->m_vGfxDataOffset[i];
+      if ( iPaletteEntry == 0 )
       {
-        v21 = v22;
+        iPaletteEntry = 20;
       }
-      else
-      {
-        v21 = 20;
-      }
-      v22 = v21;
-      *(_DWORD *)(*((_DWORD *)v26 + a2 + 169) + 4 * i + 20) = v21 + v17;
+      this->m_pFilePalIndex[nGfxFile]->m_pGfxData[i] = &pPaletteData[iPaletteEntry];
     }
-    v24 = 1;
-    v29 = -1;
-    std::wstring::~wstring(v27);
-    return v24;
+    v18 = 1;
+    v23 = -1;
+    std::wstring::~wstring(&v21);
+    return v18;
   }
   else
   {
-    v25 = 0;
-    v29 = -1;
-    std::wstring::~wstring(v27);
-    return v25;
+    v19 = 0;
+    v23 = -1;
+    std::wstring::~wstring(&v21);
+    return v19;
   }
 }
 
 
 // address=[0x1366790]
-// Decompiled from char __thiscall CGfxManager::LoadPalFile(CGfxManager *this, int a2, int a3, bool a4)
-bool  CGfxManager::LoadPalFile(unsigned int a2, unsigned int a3, bool a4) {
+// Decompiled from bool __thiscall CGfxManager::LoadPalFile(CGfxManager *this, int _iGfxFile, int _iFileVersion, bool _bUseHi)
+bool  CGfxManager::LoadPalFile(unsigned int _iGfxFile, unsigned int _iFileVersion, bool _bUseHi) {
   
-  char v4; // al
-  char v6; // al
-  char v7; // al
-  int v8; // eax
+  WCHAR *swpFolderName; // eax
+  WCHAR *v6; // eax
+  WCHAR *v7; // eax
+  char *v8; // eax
   int v9; // eax
-  char v10; // [esp-20h] [ebp-298h] BYREF
-  int v11; // [esp-1Ch] [ebp-294h]
-  int v12; // [esp-18h] [ebp-290h]
-  int v13; // [esp-14h] [ebp-28Ch]
-  int v14; // [esp-10h] [ebp-288h]
-  int v15; // [esp-Ch] [ebp-284h]
-  int v16; // [esp-8h] [ebp-280h]
-  int v17; // [esp-4h] [ebp-27Ch]
-  _DWORD v18[8]; // [esp+0h] [ebp-278h] BYREF
-  CFileEx *v19; // [esp+20h] [ebp-258h]
-  int v20; // [esp+24h] [ebp-254h]
-  int v21; // [esp+28h] [ebp-250h]
-  CFileEx *v22; // [esp+2Ch] [ebp-24Ch]
-  char v23; // [esp+32h] [ebp-246h]
-  char v24; // [esp+33h] [ebp-245h]
-  CFileEx *v25; // [esp+34h] [ebp-244h]
-  CFileEx *v26; // [esp+38h] [ebp-240h]
-  char *v27; // [esp+3Ch] [ebp-23Ch]
-  char v28[28]; // [esp+40h] [ebp-238h] BYREF
+  std::wstring v10; // [esp-20h] [ebp-298h] BYREF
+  int v11; // [esp-4h] [ebp-27Ch] SPLIT
+  int v13; // [esp-4h] [ebp-27Ch]
+  int v14; // [esp+0h] [ebp-278h] BYREF
+  void *v15; // [esp+10h] [ebp-268h]
+  std::wstring *v16; // [esp+14h] [ebp-264h]
+  void *v17; // [esp+18h] [ebp-260h]
+  std::wstring *v18; // [esp+1Ch] [ebp-25Ch]
+  int iFileLength; // [esp+24h] [ebp-254h]
+  char *pMapFile; // [esp+28h] [ebp-250h]
+  CFileEx *pFile; // [esp+2Ch] [ebp-24Ch] MAPDST
+  bool v23; // [esp+32h] [ebp-246h]
+  bool v24; // [esp+33h] [ebp-245h]
+  std::wstring v28; // [esp+40h] [ebp-238h] BYREF
   wchar_t Buffer[260]; // [esp+5Ch] [ebp-21Ch] BYREF
-  _DWORD *v30; // [esp+268h] [ebp-10h]
+  int *v30; // [esp+268h] [ebp-10h]
   int v31; // [esp+274h] [ebp-4h]
 
-  v30 = v18;
-  v27 = (char *)this;
-  std::wstring::wstring(v28);
+  v30 = &v14;
+  std::wstring::wstring(&v28);
   v31 = 0;
-  if ( (!(unsigned __int8)IGfxEngine::IsGuiMode(g_pGfxEngine, v18[0]) || a2 != 1) && IGfxEngine::Use4444Palettes((IGfxEngine *)g_pGfxEngine) )
+  if ( (!IGfxEngine::IsGuiMode(g_pGfxEngine) || _iGfxFile != 1) && IGfxEngine::Use4444Palettes(g_pGfxEngine) != 0 )
   {
-    v4 = (unsigned __int8)std::wstring::c_str((_Cnd_internal_imp_t *)(v27 + 3196));
-    swprintf((char *)Buffer, (char *)L"%s\\%d.p24", v4);
+    swpFolderName = std::wstring::c_str(&this->m_swGfxFolderName);
+    swprintf(Buffer, L"%s\\%d.p24", swpFolderName, _iGfxFile);
     LOBYTE(v31) = 1;
-    std::wstring::operator=(v28, Buffer);
-    v26 = 0;
-    v17 = a3;
-    v18[7] = &v10;
-    v18[6] = std::wstring::wstring((int)v28);
-    v22 = CGfxManager::MapFullFile(v27, v10, v11, v12, v13, v14, v15, v16, v17);
-    v26 = v22;
-    if ( v22 )
-    {
-      v21 = (*(int (__thiscall **)(int))(*(_DWORD *)((char *)v26 + *(_DWORD *)(*((_DWORD *)v26 + 18) + 4) + 72) + 12))((int)v26 + *(_DWORD *)(*((_DWORD *)v26 + 18) + 4) + 72);
-      *(_DWORD *)&v27[16 * a2 + 4] = v21;
-      *(_DWORD *)&v27[16 * a2 + 12] = v26;
-      v20 = (*(int (__thiscall **)(CFileEx *))(*(_DWORD *)v26 + 16))(v26);
-      *(_DWORD *)&v27[16 * a2 + 16] = v20;
+    std::wstring::operator=(&v28, Buffer);
+    pFile = nullptr;
+    v13 = _iFileVersion;
+    v18 = &v10;
+    v17 = std::wstring::wstring(&v10, &v28);
+    pFile = CGfxManager::MapFullFile(this, v10, v13);
+    if ( pFile != nullptr )
+    {                                           // .GetMapFilePtr
+      pMapFile = (char *)((int (__thiscall *)(unsigned int))(*(vbtable::CFileEx **)((char *)&pFile->m_pVbtable + (unsigned int)pFile->m_pVbtable->offsetIFileEx))[1].topOffset)((int)&pFile->m_pVbtable + (unsigned int)pFile->m_pVbtable->offsetIFileEx);
+      this->m_sFilePal[_iGfxFile].pFileGfx = pMapFile;
+      this->m_sFilePal[_iGfxFile].m_pFile = pFile;
+      iFileLength = pFile->CFile.Size(pFile);
+      this->m_sFilePal[_iGfxFile].iLength = iFileLength;
     }
     v31 = 0;
-    if ( *(_DWORD *)&v27[16 * a2 + 4] )
+    if ( this->m_sFilePal[_iGfxFile].pFileGfx != nullptr )
     {
-      v24 = 1;
+      v24 = true;
       v31 = -1;
-      std::wstring::~wstring(v28);
+      std::wstring::~wstring(&v28);
       return v24;
     }
     BBSupportTracePrintF(2, "WARNING: 4444 RGBA file %s not found!*****************", (const char *)Buffer);
   }
-  if ( v27[3224] )
+  if ( this->m_bUse6Palette != 0 )
   {
-    v17 = a2;
-    v6 = (unsigned __int8)std::wstring::c_str((_Cnd_internal_imp_t *)(v27 + 3196));
-    if ( a4 )
+    v11 = _iGfxFile;
+    v6 = std::wstring::c_str(&this->m_swGfxFolderName);
+    if ( _bUseHi )
     {
-      swprintf((char *)Buffer, (char *)L"%s\\%d.pa6", v6);
+      swprintf(Buffer, L"%s\\%d.pa6", v6, v11);
     }
     else
     {
-      swprintf((char *)Buffer, (char *)L"%s\\%d.p26", v6);
+      swprintf(Buffer, L"%s\\%d.p26", v6, v11);
     }
   }
   else
   {
-    v17 = a2;
-    v7 = (unsigned __int8)std::wstring::c_str((_Cnd_internal_imp_t *)(v27 + 3196));
-    if ( a4 )
+    v13 = _iGfxFile;
+    v7 = std::wstring::c_str(&this->m_swGfxFolderName);
+    if ( _bUseHi )
     {
-      swprintf((char *)Buffer, (char *)L"%s\\%d.pa5", v7);
+      swprintf(Buffer, L"%s\\%d.pa5", v7, v13);
     }
     else
     {
-      swprintf((char *)Buffer, (char *)L"%s\\%d.p25", v7);
+      swprintf(Buffer, L"%s\\%d.p25", v7, v13);
     }
   }
-  std::wstring::operator=(v28, Buffer);
-  v25 = 0;
-  v17 = a3;
-  v18[5] = &v10;
-  v18[4] = std::wstring::wstring((int)v28);
-  v19 = CGfxManager::MapFullFile(v27, v10, v11, v12, v13, v14, v15, v16, v17);
-  v25 = v19;
-  if ( v19 )
-  {
-    v8 = (*(int (__thiscall **)(int))(*(_DWORD *)((char *)v25 + *(_DWORD *)(*((_DWORD *)v25 + 18) + 4) + 72) + 12))((int)v25 + *(_DWORD *)(*((_DWORD *)v25 + 18) + 4) + 72);
-    *(_DWORD *)&v27[16 * a2 + 4] = v8;
-    *(_DWORD *)&v27[16 * a2 + 12] = v25;
-    v9 = (*(int (__thiscall **)(CFileEx *))(*(_DWORD *)v25 + 16))(v25);
-    *(_DWORD *)&v27[16 * a2 + 16] = v9;
+  std::wstring::operator=(&v28, Buffer);
+  pFile = nullptr;
+  v16 = &v10;
+  v15 = std::wstring::wstring(&v10, &v28);
+  pFile = CGfxManager::MapFullFile(this, v10, _iFileVersion);
+  if ( pFile != nullptr )
+  {                                             // .GetMapFilePtr
+    v8 = (char *)((int (__thiscall *)(unsigned int))(*(vbtable::CFileEx **)((char *)&pFile->m_pVbtable + (unsigned int)pFile->m_pVbtable->offsetIFileEx))[1].topOffset)((int)&pFile->m_pVbtable + (unsigned int)pFile->m_pVbtable->offsetIFileEx);
+    this->m_sFilePal[_iGfxFile].pFileGfx = v8;
+    this->m_sFilePal[_iGfxFile].m_pFile = pFile;
+    v9 = pFile->CFile.Size(pFile);
+    this->m_sFilePal[_iGfxFile].iLength = v9;
   }
-  v23 = 1;
+  v23 = true;
   v31 = -1;
-  std::wstring::~wstring(v28);
+  std::wstring::~wstring(&v28);
   return v23;
 }
 
@@ -2577,11 +2529,11 @@ bool  CGfxManager::MoveAccessoriesToGfxEngine(void) {
   
   unsigned int i; // [esp+Ch] [ebp-4h]
 
-  if ( !this->m_pFileGfxFrames[7].m_pItem && BBSupportDbgReport(2, "GfxManager.cpp", 1975, "m_pFileGfxFrames[ iGfxFile ].pItem") == 1 )
+  if ( this->m_pFileGfxFrames[7].m_pItem == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 1975, "m_pFileGfxFrames[ iGfxFile ].pItem") == 1 )
   {
     __debugbreak();
   }
-  if ( !this->m_pFilePalIndex[7] && BBSupportDbgReport(2, "GfxManager.cpp", 1976, "m_pFilePalIndex[ iGfxFile ]") == 1 )
+  if ( this->m_pFilePalIndex[7] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 1976, "m_pFilePalIndex[ iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
@@ -2667,190 +2619,190 @@ bool  CGfxManager::MoveWavesToGfxEngine(void) {
   int v68; // [esp+50h] [ebp-2D8h]
   int v69; // [esp+50h] [ebp-2D8h]
   int v70; // [esp+50h] [ebp-2D8h]
-  void *v71; // [esp+54h] [ebp-2D4h] BYREF
-  void *v72; // [esp+58h] [ebp-2D0h]
+  int v71; // [esp+54h] [ebp-2D4h] BYREF
+  int v72; // [esp+58h] [ebp-2D0h]
 
-  ObjectFrameCount = CGfxManager::GetObjectFrameCount(this, 0x20Du);
-  IGfxEngine::SetIndexWave1((IGfxEngine *)g_pGfxEngine, 4096, ObjectFrameCount);
-  v54 = CGfxManager::GetObjectFrameCount(this, 0x20Du) + 4096;
-  v2 = CGfxManager::GetObjectFrameCount(this, 0x20Cu);
-  IGfxEngine::SetIndexWave2((IGfxEngine *)g_pGfxEngine, v54, v2);
-  v55 = v54 + CGfxManager::GetObjectFrameCount(this, 0x20Cu);
-  v3 = CGfxManager::GetObjectFrameCount(this, 0x211u);
-  IGfxEngine::SetIndexWave3((IGfxEngine *)g_pGfxEngine, v55, v3);
-  v56 = v55 + CGfxManager::GetObjectFrameCount(this, 0x211u);
-  v4 = CGfxManager::GetObjectFrameCount(this, 0x210u);
-  IGfxEngine::SetIndexWave4((IGfxEngine *)g_pGfxEngine, v56, v4);
-  v57 = v56 + CGfxManager::GetObjectFrameCount(this, 0x210u);
-  v5 = CGfxManager::GetObjectFrameCount(this, 0x20Fu);
-  IGfxEngine::SetIndexWave5((IGfxEngine *)g_pGfxEngine, v57, v5);
-  v58 = v57 + CGfxManager::GetObjectFrameCount(this, 0x20Fu);
-  v6 = CGfxManager::GetObjectFrameCount(this, 0x20Eu);
-  IGfxEngine::SetIndexWave6((IGfxEngine *)g_pGfxEngine, v58, v6);
-  v59 = v58 + CGfxManager::GetObjectFrameCount(this, 0x20Eu);
-  v7 = CGfxManager::GetObjectFrameCount(this, 0x212u);
-  IGfxEngine::SetIndexWave7((IGfxEngine *)g_pGfxEngine, v59, v7);
-  v60 = v59 + CGfxManager::GetObjectFrameCount(this, 0x212u);
-  v8 = CGfxManager::GetObjectFrameCount(this, 0x213u);
-  IGfxEngine::SetIndexWave8((IGfxEngine *)g_pGfxEngine, v60, v8);
-  v61 = v60 + CGfxManager::GetObjectFrameCount(this, 0x213u);
-  v9 = CGfxManager::GetObjectFrameCount(this, 0x214u);
-  IGfxEngine::SetIndexWave9((IGfxEngine *)g_pGfxEngine, v61, v9);
-  v62 = v61 + CGfxManager::GetObjectFrameCount(this, 0x214u);
-  v10 = CGfxManager::GetObjectFrameCount(this, 0x205u);
-  IGfxEngine::SetIndexWave10((IGfxEngine *)g_pGfxEngine, v62, v10);
-  v63 = v62 + CGfxManager::GetObjectFrameCount(this, 0x205u);
-  v11 = CGfxManager::GetObjectFrameCount(this, 0x206u);
-  IGfxEngine::SetIndexWave11((IGfxEngine *)g_pGfxEngine, v63, v11);
-  v64 = v63 + CGfxManager::GetObjectFrameCount(this, 0x206u);
-  v12 = CGfxManager::GetObjectFrameCount(this, 0x207u);
-  IGfxEngine::SetIndexWave12((IGfxEngine *)g_pGfxEngine, v64, v12);
-  v65 = v64 + CGfxManager::GetObjectFrameCount(this, 0x207u);
-  v13 = CGfxManager::GetObjectFrameCount(this, 0x208u);
-  IGfxEngine::SetIndexWave13((IGfxEngine *)g_pGfxEngine, v65, v13);
-  v66 = v65 + CGfxManager::GetObjectFrameCount(this, 0x208u);
-  v14 = CGfxManager::GetObjectFrameCount(this, 0x208u);
-  IGfxEngine::SetIndexWave14((IGfxEngine *)g_pGfxEngine, v66, v14);
-  v67 = v66 + CGfxManager::GetObjectFrameCount(this, 0x208u);
-  v15 = CGfxManager::GetObjectFrameCount(this, 0x20Au);
-  IGfxEngine::SetIndexWave15((IGfxEngine *)g_pGfxEngine, v67, v15);
-  v68 = v67 + CGfxManager::GetObjectFrameCount(this, 0x20Au);
-  v16 = CGfxManager::GetObjectFrameCount(this, 0x20Bu);
-  IGfxEngine::SetIndexWave16((IGfxEngine *)g_pGfxEngine, v68, v16);
-  v69 = v68 + CGfxManager::GetObjectFrameCount(this, 0x20Bu);
-  v17 = CGfxManager::GetObjectFrameCount(this, 0x215u);
-  IGfxEngine::SetIndexBorderstone((IGfxEngine *)g_pGfxEngine, v69, v17);
-  CGfxManager::GetObjectFrameCount(this, 0x215u);
+  ObjectFrameCount = CGfxManager::GetObjectFrameCount(this, 0x20D);
+  IGfxEngine::SetIndexWave1(g_pGfxEngine, 4096, ObjectFrameCount);
+  v54 = CGfxManager::GetObjectFrameCount(this, 0x20D) + 4096;
+  v2 = CGfxManager::GetObjectFrameCount(this, 0x20C);
+  IGfxEngine::SetIndexWave2(g_pGfxEngine, v54, v2);
+  v55 = v54 + CGfxManager::GetObjectFrameCount(this, 0x20C);
+  v3 = CGfxManager::GetObjectFrameCount(this, 0x211);
+  IGfxEngine::SetIndexWave3(g_pGfxEngine, v55, v3);
+  v56 = v55 + CGfxManager::GetObjectFrameCount(this, 0x211);
+  v4 = CGfxManager::GetObjectFrameCount(this, 0x210);
+  IGfxEngine::SetIndexWave4(g_pGfxEngine, v56, v4);
+  v57 = v56 + CGfxManager::GetObjectFrameCount(this, 0x210);
+  v5 = CGfxManager::GetObjectFrameCount(this, 0x20F);
+  IGfxEngine::SetIndexWave5(g_pGfxEngine, v57, v5);
+  v58 = v57 + CGfxManager::GetObjectFrameCount(this, 0x20F);
+  v6 = CGfxManager::GetObjectFrameCount(this, 0x20E);
+  IGfxEngine::SetIndexWave6(g_pGfxEngine, v58, v6);
+  v59 = v58 + CGfxManager::GetObjectFrameCount(this, 0x20E);
+  v7 = CGfxManager::GetObjectFrameCount(this, 0x212);
+  IGfxEngine::SetIndexWave7(g_pGfxEngine, v59, v7);
+  v60 = v59 + CGfxManager::GetObjectFrameCount(this, 0x212);
+  v8 = CGfxManager::GetObjectFrameCount(this, 0x213);
+  IGfxEngine::SetIndexWave8(g_pGfxEngine, v60, v8);
+  v61 = v60 + CGfxManager::GetObjectFrameCount(this, 0x213);
+  v9 = CGfxManager::GetObjectFrameCount(this, 0x214);
+  IGfxEngine::SetIndexWave9(g_pGfxEngine, v61, v9);
+  v62 = v61 + CGfxManager::GetObjectFrameCount(this, 0x214);
+  v10 = CGfxManager::GetObjectFrameCount(this, 0x205);
+  IGfxEngine::SetIndexWave10(g_pGfxEngine, v62, v10);
+  v63 = v62 + CGfxManager::GetObjectFrameCount(this, 0x205);
+  v11 = CGfxManager::GetObjectFrameCount(this, 0x206);
+  IGfxEngine::SetIndexWave11(g_pGfxEngine, v63, v11);
+  v64 = v63 + CGfxManager::GetObjectFrameCount(this, 0x206);
+  v12 = CGfxManager::GetObjectFrameCount(this, 0x207);
+  IGfxEngine::SetIndexWave12(g_pGfxEngine, v64, v12);
+  v65 = v64 + CGfxManager::GetObjectFrameCount(this, 0x207);
+  v13 = CGfxManager::GetObjectFrameCount(this, 0x208);
+  IGfxEngine::SetIndexWave13(g_pGfxEngine, v65, v13);
+  v66 = v65 + CGfxManager::GetObjectFrameCount(this, 0x208);
+  v14 = CGfxManager::GetObjectFrameCount(this, 0x208);
+  IGfxEngine::SetIndexWave14(g_pGfxEngine, v66, v14);
+  v67 = v66 + CGfxManager::GetObjectFrameCount(this, 0x208);
+  v15 = CGfxManager::GetObjectFrameCount(this, 0x20A);
+  IGfxEngine::SetIndexWave15(g_pGfxEngine, v67, v15);
+  v68 = v67 + CGfxManager::GetObjectFrameCount(this, 0x20A);
+  v16 = CGfxManager::GetObjectFrameCount(this, 0x20B);
+  IGfxEngine::SetIndexWave16(g_pGfxEngine, v68, v16);
+  v69 = v68 + CGfxManager::GetObjectFrameCount(this, 0x20B);
+  v17 = CGfxManager::GetObjectFrameCount(this, 0x215);
+  IGfxEngine::SetIndexBorderstone(g_pGfxEngine, v69, v17);
+  CGfxManager::GetObjectFrameCount(this, 0x215);
   v70 = 4096;
-  v20 = CGfxManager::GetObjectFrameCount(this, 0x20Du);
+  v20 = CGfxManager::GetObjectFrameCount(this, 0x20D);
   for ( i = 0;
         i < v20;
         ++i )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 525, i, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 525, i, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v21 = CGfxManager::GetObjectFrameCount(this, 0x20Cu);
+  v21 = CGfxManager::GetObjectFrameCount(this, 0x20C);
   for ( j = 0;
         j < v21;
         ++j )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 524, j, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 524, j, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v22 = CGfxManager::GetObjectFrameCount(this, 0x211u);
+  v22 = CGfxManager::GetObjectFrameCount(this, 0x211);
   for ( k = 0;
         k < v22;
         ++k )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 529, k, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 529, k, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v23 = CGfxManager::GetObjectFrameCount(this, 0x210u);
+  v23 = CGfxManager::GetObjectFrameCount(this, 0x210);
   for ( m = 0;
         m < v23;
         ++m )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 528, m, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 528, m, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v24 = CGfxManager::GetObjectFrameCount(this, 0x20Fu);
+  v24 = CGfxManager::GetObjectFrameCount(this, 0x20F);
   for ( n = 0;
         n < v24;
         ++n )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 527, n, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 527, n, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v25 = CGfxManager::GetObjectFrameCount(this, 0x20Eu);
+  v25 = CGfxManager::GetObjectFrameCount(this, 0x20E);
   for ( ii = 0;
         ii < v25;
         ++ii )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 526, ii, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 526, ii, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v26 = CGfxManager::GetObjectFrameCount(this, 0x212u);
+  v26 = CGfxManager::GetObjectFrameCount(this, 0x212);
   for ( jj = 0;
         jj < v26;
         ++jj )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 530, jj, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 530, jj, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v27 = CGfxManager::GetObjectFrameCount(this, 0x213u);
+  v27 = CGfxManager::GetObjectFrameCount(this, 0x213);
   for ( kk = 0;
         kk < v27;
         ++kk )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 531, kk, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 531, kk, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v28 = CGfxManager::GetObjectFrameCount(this, 0x214u);
+  v28 = CGfxManager::GetObjectFrameCount(this, 0x214);
   for ( mm = 0;
         mm < v28;
         ++mm )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 532, mm, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 532, mm, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v29 = CGfxManager::GetObjectFrameCount(this, 0x205u);
+  v29 = CGfxManager::GetObjectFrameCount(this, 0x205);
   for ( nn = 0;
         nn < v29;
         ++nn )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 517, nn, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 517, nn, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v30 = CGfxManager::GetObjectFrameCount(this, 0x206u);
+  v30 = CGfxManager::GetObjectFrameCount(this, 0x206);
   for ( i1 = 0;
         i1 < v30;
         ++i1 )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 518, i1, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 518, i1, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v31 = CGfxManager::GetObjectFrameCount(this, 0x207u);
+  v31 = CGfxManager::GetObjectFrameCount(this, 0x207);
   for ( i2 = 0;
         i2 < v31;
         ++i2 )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 519, i2, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 519, i2, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v32 = CGfxManager::GetObjectFrameCount(this, 0x208u);
+  v32 = CGfxManager::GetObjectFrameCount(this, 0x208);
   for ( i3 = 0;
         i3 < v32;
         ++i3 )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 520, i3, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 520, i3, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v33 = CGfxManager::GetObjectFrameCount(this, 0x209u);
+  v33 = CGfxManager::GetObjectFrameCount(this, 0x209);
   for ( i4 = 0;
         i4 < v33;
         ++i4 )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 521, i4, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 521, i4, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v34 = CGfxManager::GetObjectFrameCount(this, 0x20Au);
+  v34 = CGfxManager::GetObjectFrameCount(this, 0x20A);
   for ( i5 = 0;
         i5 < v34;
         ++i5 )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 522, i5, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 522, i5, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v35 = CGfxManager::GetObjectFrameCount(this, 0x20Bu);
+  v35 = CGfxManager::GetObjectFrameCount(this, 0x20B);
   for ( i6 = 0;
         i6 < v35;
         ++i6 )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 523, i6, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, v70++, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 523, i6, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, v70++, v71, v72);
   }
-  v36 = CGfxManager::GetObjectFrameCount(this, 0x215u);
+  v36 = CGfxManager::GetObjectFrameCount(this, 0x215);
   if ( v36 != 8 )
   {
     BBSupportTracePrintF(2, "GfxManager.cpp: Number of boundary stones != 8 !!!!");
@@ -2859,8 +2811,8 @@ bool  CGfxManager::MoveWavesToGfxEngine(void) {
         i7 < v36 + v70;
         ++i7 )
   {
-    CGfxManager::GetObjectGfxInfo((int)&v71, 533, i7 - v70, 1);
-    IGfxEngine::PutLandscapeObject((IGfxEngine *)g_pGfxEngine, i7, v71, v72);
+    ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v71, 533, i7 - v70, 1);
+    IGfxEngine::PutLandscapeObject(g_pGfxEngine, i7, v71, v72);
   }
   return 1;
 }
@@ -2873,41 +2825,41 @@ void  CGfxManager::Debug_Check_LayerBlock(unsigned int _iGfxFile, struct SGfxObj
   int iHeight; // [esp+0h] [ebp-Ch]
   int iWidth; // [esp+4h] [ebp-8h]
 
-  if ( !this->m_sFileGfx[_iGfxFile].pPileGfx && BBSupportDbgReportF(2, "GfxManager.cpp", 72, "m_sFileGfx[ %u ].pPileGfx", _iGfxFile) == 1 )
+  if ( this->m_sFileGfx[_iGfxFile].pFileGfx == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 72, "m_sFileGfx[ %u ].pPileGfx", _iGfxFile) == 1 )
   {
     __debugbreak();
   }
-  if ( !this->m_sFileGfx[_iGfxFile].iLength && BBSupportDbgReportF(2, "GfxManager.cpp", 73, "m_sFileGfx[ %u ].iLength", _iGfxFile) == 1 )
+  if ( this->m_sFileGfx[_iGfxFile].iLength == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 73, "m_sFileGfx[ %u ].iLength", _iGfxFile) == 1 )
   {
     __debugbreak();
   }
-  if ( !this->m_sFilePal[_iGfxFile].pPileGfx && BBSupportDbgReportF(2, "GfxManager.cpp", 74, "m_sFilePal[ %u ].pPileGfx", _iGfxFile) == 1 )
+  if ( this->m_sFilePal[_iGfxFile].pFileGfx == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 74, "m_sFilePal[ %u ].pPileGfx", _iGfxFile) == 1 )
   {
     __debugbreak();
   }
-  if ( !this->m_sFilePal[_iGfxFile].iLength && BBSupportDbgReportF(2, "GfxManager.cpp", 75, "m_sFilePal[ %u ].iLength", _iGfxFile) == 1 )
+  if ( this->m_sFilePal[_iGfxFile].iLength == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 75, "m_sFilePal[ %u ].iLength", _iGfxFile) == 1 )
   {
     __debugbreak();
   }
-  if ( (a3->m_pGfxData < (UGfxData *)this->m_sFileGfx[_iGfxFile].pPileGfx || a3->m_pGfxData >= (UGfxData *)&this->m_sFileGfx[_iGfxFile].pPileGfx[this->m_sFileGfx[_iGfxFile].iLength]) && BBSupportDbgReportF(2, "GfxManager.cpp", 87, "GfxFile: %u, Base: 0x%x, Len: 0x%x, Access: 0x%x\n%s", _iGfxFile, this->m_sFileGfx[_iGfxFile].pPileGfx, this->m_sFileGfx[_iGfxFile].iLength, a3->m_pGfxData, sGfxDebugBuffer) == 1 )
+  if ( (a3->m_pGfxData < (UGfxData *)this->m_sFileGfx[_iGfxFile].pFileGfx || a3->m_pGfxData >= (UGfxData *)&this->m_sFileGfx[_iGfxFile].pFileGfx[this->m_sFileGfx[_iGfxFile].iLength]) && BBSupportDbgReportF(2, "GfxManager.cpp", 87, "GfxFile: %u, Base: 0x%x, Len: 0x%x, Access: 0x%x\n%s", _iGfxFile, this->m_sFileGfx[_iGfxFile].pFileGfx, this->m_sFileGfx[_iGfxFile].iLength, a3->m_pGfxData, sGfxDebugBuffer) == 1 )
   {
     __debugbreak();
   }
-  if ( (a3->m_pPalData < this->m_sFilePal[_iGfxFile].pPileGfx || a3->m_pPalData >= &this->m_sFilePal[_iGfxFile].pPileGfx[this->m_sFilePal[_iGfxFile].iLength]) && BBSupportDbgReportF(2, "GfxManager.cpp", 98, "PalFile: %u, Base: 0x%x, Len: 0x%x, Access: 0x%x\n%s", _iGfxFile, this->m_sFilePal[_iGfxFile].pPileGfx, this->m_sFilePal[_iGfxFile].iLength, a3->m_pPalData, sGfxDebugBuffer) == 1 )
+  if ( (a3->m_pPalData < this->m_sFilePal[_iGfxFile].pFileGfx || a3->m_pPalData >= &this->m_sFilePal[_iGfxFile].pFileGfx[this->m_sFilePal[_iGfxFile].iLength]) && BBSupportDbgReportF(2, "GfxManager.cpp", 98, "PalFile: %u, Base: 0x%x, Len: 0x%x, Access: 0x%x\n%s", _iGfxFile, this->m_sFilePal[_iGfxFile].pFileGfx, this->m_sFilePal[_iGfxFile].iLength, a3->m_pPalData, sGfxDebugBuffer) == 1 )
   {
     __debugbreak();
   }
   if ( _iGfxFile < 20 || _iGfxFile > 29 )
   {
     iWidth = *(__int16 *)a3->m_pGfxData;
-    iHeight = a3->m_pGfxData->m_sShort.m_iHeight;
+    iHeight = (__int16)a3->m_pGfxData->m_sShort.m_iHeight;
   }
   else
   {
     iWidth = a3->m_pGfxData->m_sByte.m_iWidth;
     iHeight = a3->m_pGfxData->m_sByte.m_iHeight;
   }
-  if ( _iGfxFile && _iGfxFile != 9 && _iGfxFile != 19 && _iGfxFile != 29 && _iGfxFile != 18 && _iGfxFile != 28 && _iGfxFile != 39 && _iGfxFile != 40 && (iWidth > 512 || iHeight > 512) && BBSupportDbgReportF(2, "GfxManager.cpp", 125, "Width or height > 512! [%s]", sGfxDebugBuffer) == 1 )
+  if ( _iGfxFile != 0 && _iGfxFile != 9 && _iGfxFile != 19 && _iGfxFile != 29 && _iGfxFile != 18 && _iGfxFile != 28 && _iGfxFile != 39 && _iGfxFile != 40 && (iWidth > 512 || iHeight > 512) && BBSupportDbgReportF(2, "GfxManager.cpp", 125, "Width or height > 512! [%s]", sGfxDebugBuffer) == 1 )
   {
     __debugbreak();
   }
@@ -2920,38 +2872,33 @@ void  CGfxManager::Debug_Check_PatchLayerBlock(unsigned int a2, struct SGfxPatch
   
   struct SGfxPatchObject *result; // eax
 
-  if ( !*((_DWORD *)this + 4 * a2 + 547) && BBSupportDbgReportF(2, "GfxManager.cpp", 178, "m_sFileGfx[ %u ].pPileGfx", a2) == 1 )
+  if ( this->m_sFileGfx[a2].pFileGfx == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 178, "m_sFileGfx[ %u ].pPileGfx", a2) == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 4 * a2 + 550) && BBSupportDbgReportF(2, "GfxManager.cpp", 179, "m_sFileGfx[ %u ].iLength", a2) == 1 )
+  if ( this->m_sFileGfx[a2].iLength == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 179, "m_sFileGfx[ %u ].iLength", a2) == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 4 * a2 + 1) && BBSupportDbgReportF(2, "GfxManager.cpp", 180, "m_sFilePal[ %u ].pPileGfx", a2) == 1 )
+  if ( this->m_sFilePal[a2].pFileGfx == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 180, "m_sFilePal[ %u ].pPileGfx", a2) == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 4 * a2 + 4) && BBSupportDbgReportF(2, "GfxManager.cpp", 181, "m_sFilePal[ %u ].iLength", a2) == 1 )
+  if ( this->m_sFilePal[a2].iLength == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 181, "m_sFilePal[ %u ].iLength", a2) == 1 )
   {
     __debugbreak();
   }
-  if ( (*(_DWORD *)a3 < *((_DWORD *)this + 4 * a2 + 547) || *(_DWORD *)a3 >= (unsigned int)(*((_DWORD *)this + 4 * a2 + 550) + *((_DWORD *)this + 4 * a2 + 547))) && BBSupportDbgReportF(2, "GfxManager.cpp", 193, "GfxFile: %u, Base: 0x%x, Len: ux%x, Access: 0x%x\n%s", a2, *((_DWORD *)this + 4 * a2 + 547), *((_DWORD *)this + 4 * a2 + 550), *(_DWORD *)a3, sGfxDebugBuffer) == 1 )
+  if ( (a3->m_pGfxData < this->m_sFileGfx[a2].pFileGfx || a3->m_pGfxData >= &this->m_sFileGfx[a2].pFileGfx[this->m_sFileGfx[a2].iLength]) && BBSupportDbgReportF(2, "GfxManager.cpp", 193, "GfxFile: %u, Base: 0x%x, Len: ux%x, Access: 0x%x\n%s", a2, this->m_sFileGfx[a2].pFileGfx, this->m_sFileGfx[a2].iLength, a3->m_pGfxData, sGfxDebugBuffer) == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)a3 + 1) >= *((_DWORD *)this + 4 * a2 + 1) )
+  if ( a3->m_pPalData < this->m_sFilePal[a2].pFileGfx || (result = a3, a3->m_pPalData >= &this->m_sFilePal[a2].pFileGfx[this->m_sFilePal[a2].iLength]) )
   {
-    result = a3;
-    if ( *((_DWORD *)a3 + 1) < (unsigned int)(*((_DWORD *)this + 4 * a2 + 4) + *((_DWORD *)this + 4 * a2 + 1)) )
+    result = (struct SGfxPatchObject *)BBSupportDbgReportF(2, "GfxManager.cpp", 204, "PalFile: %u, Base: 0x%x, Len: ux%x, Access: 0x%x\n%s", a2, this->m_sFilePal[a2].pFileGfx, this->m_sFilePal[a2].iLength, a3->m_pPalData, sGfxDebugBuffer);
+    if ( result == (struct SGfxPatchObject *)1 )
     {
-      return result;
+      __debugbreak();
     }
-  }
-  result = (struct SGfxPatchObject *)BBSupportDbgReportF(2, "GfxManager.cpp", 204, "PalFile: %u, Base: 0x%x, Len: ux%x, Access: 0x%x\n%s", a2, *((_DWORD *)this + 4 * a2 + 1), *((_DWORD *)this + 4 * a2 + 4), *((_DWORD *)a3 + 1), sGfxDebugBuffer);
-  if ( result == (struct SGfxPatchObject *)1 )
-  {
-    __debugbreak();
   }
   return result;
 }

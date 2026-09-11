@@ -10,19 +10,18 @@ void  CCommandQueue::CheckCommand(class CEntityEvent * a2) {
   int v3; // [esp+0h] [ebp-8h]
 
   result = a2;
-  v3 = *((_DWORD *)a2 + 1);
+  v3 = a2->m_iEvent;
   if ( v3 == 16 )
   {
     return (struct CEntityEvent *)CCommandQueue::Push(this, a2);
   }
-  if ( v3 != 17 )
+  if ( v3 == 17 )
   {
-    return result;
-  }
-  result = (struct CEntityEvent *)std::deque<CEntityEvent>::size(this);
-  if ( result )
-  {
-    return (struct CEntityEvent *)std::deque<CEntityEvent>::clear(17, this);
+    result = (struct CEntityEvent *)std::deque<CEntityEvent>::size(this);
+    if ( result != 0 )
+    {
+      return (struct CEntityEvent *)std::deque<CEntityEvent>::clear(17, (int)this);
+    }
   }
   return result;
 }
@@ -37,7 +36,7 @@ void  CCommandQueue::Push(class CEntityEvent * a2) {
   result = std::deque<CEntityEvent>::size(this);
   if ( result < 0x10 )
   {
-    return std::deque<CEntityEvent>::push_back(a2);
+    return std::deque<CEntityEvent>::push_back((int)a2);
   }
   return result;
 }
@@ -47,7 +46,7 @@ void  CCommandQueue::Push(class CEntityEvent * a2) {
 // Decompiled from CEntityEvent *__thiscall CCommandQueue::Pop(void *this, CEntityEvent *a2)
 class CEntityEvent  CCommandQueue::Pop(void a2) {
   
-  _BYTE v3[24]; // [esp+4h] [ebp-30h] BYREF
+  CEntityEvent v3; // [esp+4h] [ebp-30h] BYREF
   void *v4; // [esp+1Ch] [ebp-18h]
   int v5; // [esp+20h] [ebp-14h]
   int v6; // [esp+24h] [ebp-10h]
@@ -55,16 +54,16 @@ class CEntityEvent  CCommandQueue::Pop(void a2) {
 
   v4 = this;
   v5 = 0;
-  if ( std::deque<CEntityEvent>::size(this) )
+  if ( std::deque<CEntityEvent>::size(this) != 0 )
   {
     v6 = std::deque<CEntityEvent>::front();
-    CEntityEvent::CEntityEvent((CEntityEvent *)v3, *(_BYTE *)(v6 + 8), 0, *(_DWORD *)(v6 + 12), *(_DWORD *)(v6 + 16), *(_DWORD *)(v6 + 20));
+    CEntityEvent::CEntityEvent(&v3, *(_BYTE *)(v6 + 8), 0, *(_DWORD *)(v6 + 12), *(_DWORD *)(v6 + 16), *(_DWORD *)(v6 + 20));
     v7 = 0;
     std::deque<CEntityEvent>::pop_front(v4);
-    CEntityEvent::CEntityEvent((struct boost::exception_detail::clone_base *)v3);
+    ((void (__stdcall *)(struct boost::exception_detail::clone_base *))CEntityEvent::CEntityEvent)((struct boost::exception_detail::clone_base *)&v3);
     v5 |= 1u;
     v7 = -1;
-    CEntityEvent::~CEntityEvent(v3);
+    CEntityEvent::~CEntityEvent(&v3);
   }
   else
   {

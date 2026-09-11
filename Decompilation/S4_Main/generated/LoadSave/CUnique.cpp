@@ -32,7 +32,7 @@ class CUnique & __cdecl CUnique::GetObjectA(unsigned long a1) {
   int v3; // [esp+10h] [ebp-10h]
   int v4; // [esp+1Ch] [ebp-4h]
 
-  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find(v2, &a1);
+  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find((int)v2, (int)&a1);
   v4 = 0;
   v3 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator*(v2) + 4);
   v4 = -1;
@@ -54,15 +54,15 @@ class CUnique * __cdecl CUnique::GetObjectPtr(unsigned long a1) {
   char v8; // [esp+2Fh] [ebp-Dh]
   int v9; // [esp+38h] [ebp-4h]
 
-  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find(v3, &a1);
+  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find((int)v3, (int)&a1);
   v9 = 0;
-  v7 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::end(v2);
+  v7 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::end((int)v2);
   v6 = v7;
   LOBYTE(v9) = 1;
   v8 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator==(v7);
   LOBYTE(v9) = 0;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>(v2);
-  if ( v8 )
+  if ( v8 != 0 )
   {
     v5 = 0;
     v9 = -1;
@@ -98,15 +98,15 @@ class CUnique * __cdecl CUnique::GetNextObjectPtr(unsigned long a1) {
   char v14; // [esp+53h] [ebp-Dh]
   int v15; // [esp+5Ch] [ebp-4h]
 
-  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find(v5, &a1);
+  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::find((int)v5, (int)&a1);
   v15 = 0;
-  v12 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::end(v4);
+  v12 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::end((int)v4);
   v11 = v12;
   LOBYTE(v15) = 1;
   v14 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator==(v12);
   LOBYTE(v15) = 0;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>(v4);
-  if ( v14 )
+  if ( v14 != 0 )
   {
     v10 = 0;
     v15 = -1;
@@ -115,15 +115,15 @@ class CUnique * __cdecl CUnique::GetNextObjectPtr(unsigned long a1) {
   }
   else
   {
-    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator++(v3, 0);
+    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator++((int)v3, 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>(v3);
-    v9 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::end(v2);
+    v9 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::end((int)v2);
     v8 = v9;
     LOBYTE(v15) = 2;
     v13 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator==(v9);
     LOBYTE(v15) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>(v2);
-    if ( v13 )
+    if ( v13 != 0 )
     {
       v7 = 0;
       v15 = -1;
@@ -154,15 +154,15 @@ class CUnique * __cdecl CUnique::GetFirstObjectPtr(void) {
   char v7; // [esp+2Fh] [ebp-Dh]
   int v8; // [esp+38h] [ebp-4h]
 
-  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::begin(v2);
+  std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::begin((int)v2);
   v8 = 0;
-  v6 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::end(v1);
+  v6 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::end((int)v1);
   v5 = v6;
   LOBYTE(v8) = 1;
   v7 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::operator==(v6);
   LOBYTE(v8) = 0;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CUnique *>>>>(v1);
-  if ( v7 )
+  if ( v7 != 0 )
   {
     v4 = 0;
     v8 = -1;
@@ -186,12 +186,11 @@ void __cdecl CUnique::Init(std::istream & a1) {
   int result; // eax
 
   result = (unsigned __int8)std::ios_base::operator bool(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1);
-  if ( !(_BYTE)result )
+  if ( (_BYTE)result != 0 )
   {
-    return result;
+    result = CPersistence::LOAD_ID(a1);
+    CUnique::_NextObjID = result;
   }
-  result = CPersistence::LOAD_ID(a1);
-  CUnique::_NextObjID = result;
   return result;
 }
 
@@ -208,10 +207,10 @@ void __cdecl CUnique::Exit(std::ostream & a1) {
 // Decompiled from struct CUnique *__thiscall CUnique::CUnique(struct CUnique *this, int a2)
  CUnique::CUnique(std::istream & a2) {
   
-  CPersistence::CPersistence(this);
+  CPersistence::CPersistence((CPersistence *)this);
   *(_DWORD *)this = &CUnique::_vftable_;
   *((_DWORD *)this + 1) = CPersistence::LOAD_ID(a2);
-  CUnique::_add(*((_DWORD *)this + 1), this);
+  CUnique::_add((char)*((_DWORD *)this + 1), this);
   return this;
 }
 
@@ -224,7 +223,7 @@ void  CUnique::Store(std::ostream & a2) {
   CUnique *v4; // [esp+4h] [ebp-4h]
 
   v4 = this;
-  CPersistence::Store(this, a2);
+  CPersistence::Store((struct CPersistence *)this, a2);
   v3 = CUnique::ObjectID(v4);
   return operator^<unsigned long>(a2, (const unsigned int *)&v3);
 }
@@ -244,7 +243,7 @@ void __cdecl CUnique::_add(unsigned long a1, class CUnique * a2) {
   
   _DWORD *result; // eax
 
-  result = (_DWORD *)std::map<unsigned long,CUnique *>::operator[](&a1);
+  result = (_DWORD *)std::map<unsigned long,CUnique *>::operator[]((int)&a1);
   *result = a2;
   return result;
 }
@@ -254,7 +253,7 @@ void __cdecl CUnique::_add(unsigned long a1, class CUnique * a2) {
 // Decompiled from int __cdecl CUnique::_remove(char a1)
 void __cdecl CUnique::_remove(unsigned long a1) {
   
-  return std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::erase(&a1);
+  return std::_Tree<std::_Tmap_traits<unsigned long,CUnique *,std::less<unsigned long>,std::allocator<std::pair<unsigned long const,CUnique *>>,0>>::erase((int)&a1);
 }
 
 

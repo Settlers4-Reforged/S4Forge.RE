@@ -10,7 +10,7 @@ class CPersistence * __cdecl CAnyWherePileRole::New(std::istream & a1) {
   CAnyWherePileRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CAnyWherePileRole *)operator new(8u);
-  if ( C )
+  if ( C != 0 )
   {
     CAnyWherePileRole::CAnyWherePileRole(C, (int)a1);
   }
@@ -26,7 +26,7 @@ void  CAnyWherePileRole::Init(class CPile * a2) {
   CPile::SetRoleType(a2, 3u);
   CPile::SetOfferFlag(a2, 1u);
   IEntity::SetFlagBits(a2, ENTITY_FLAG_Visible);
-  if ( a2->Amount(a2) )
+  if ( a2->Amount(a2) != 0 )
   {
     CPile::OfferCompletePileIfPossible(a2, 0);
     IAnimatedEntity::RegisterForLogicUpdate(a2, 31);
@@ -84,13 +84,13 @@ bool  CAnyWherePileRole::SetFree(class CPile * a2, int a3) {
 
 
 // address=[0x155b060]
-// Decompiled from CAnyWherePileRole *__thiscall CAnyWherePileRole::CAnyWherePileRole(CAnyWherePileRole *this, int a2)
+// Decompiled from CAnyWherePileRole *__thiscall CAnyWherePileRole::CAnyWherePileRole(CAnyWherePileRole *this, struct std::istream *a2)
  CAnyWherePileRole::CAnyWherePileRole(std::istream & a2) {
   
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   int v5; // [esp+1Ch] [ebp-4h]
 
-  IPileRole::IPileRole(this, a2);
+  IPileRole::IPileRole(this, (int)a2);
   v5 = 0;
   this->__vftable = (IPileRole_vtbl *)&CAnyWherePileRole::_vftable_;
   if ( Serial::LoadVersion(a2) != 1 )
@@ -110,7 +110,7 @@ bool  CAnyWherePileRole::SetFree(class CPile * a2, int a3) {
 void  CAnyWherePileRole::Store(std::ostream & a2) {
   
   IPileRole::Store(this, a2);
-  return Serial::StoreVersion((int)a2, 1);
+  return Serial::StoreVersion(a2, 1);
 }
 
 

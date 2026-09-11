@@ -8,7 +8,7 @@ void __cdecl CStateLoadGame::InitSaveList(void) {
   
   void *result; // eax
 
-  result = memset(&CStateLoadGame::m_stempSavePtr, 0, 0xFA0u);
+  result = memset(CStateLoadGame::m_stempSavePtr, 0, 0xFA0u);
   g_cSaveGameContext = 5;
   return result;
 }
@@ -21,7 +21,7 @@ class CGameState * __cdecl CStateLoadGame::DynamicCreateFunc(void * a1) {
   CStateLoadGame *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateLoadGame *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateLoadGame::CStateLoadGame(C, a1);
   }
@@ -36,12 +36,12 @@ class CGameState * __cdecl CStateLoadGame::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateLoadGame *__thiscall CStateLoadGame::CStateLoadGame(CStateLoadGame *this, void *a2)
  CStateLoadGame::CStateLoadGame(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateLoadGame::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
-  memset(&CStateLoadGame::m_stempSavePtr, 0, 0xFA0u);
-  if ( !(_BYTE)a2 )
+  IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
+  memset(CStateLoadGame::m_stempSavePtr, 0, 0xFA0u);
+  if ( (_BYTE)a2 == 0 )
   {
     *((_DWORD *)this + 1) = 3;
     *((_DWORD *)this + 2) = 4;
@@ -62,18 +62,18 @@ class CGameState * __cdecl CStateLoadGame::DynamicCreateFunc(void * a1) {
     *((_DWORD *)this + 2) = 0;
   }
   CStateLoadGame::BuildSaveList(*((_DWORD *)this + 1), *((_DWORD *)this + 2));
-  CGuiGameState::OpenDialog(this, 6, GuiDlgMainLoadProc);
-  IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
+  CGuiGameState::OpenDialog((CGuiGameState *)this, 6, (bool (__cdecl *)(int, int, int))GuiDlgMainLoadProc);
+  IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
   return this;
 }
 
 
 // address=[0x14b57c0]
-// Decompiled from void __thiscall CStateLoadGame::~CStateLoadGame(CStateLoadGame *this)
+// Decompiled from void __thiscall CStateLoadGame::~CStateLoadGame(CGuiGameState *this)
  CStateLoadGame::~CStateLoadGame(void) {
   
-  *(_DWORD *)this = &CStateLoadGame::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 6) && BBSupportDbgReport(2, "main\\states\\StateLoadGame.cpp", 104, "bRet") == 1 )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateLoadGame::_vftable_;
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 6) && BBSupportDbgReport(2, "main\\states\\StateLoadGame.cpp", 104, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -97,20 +97,19 @@ bool  CStateLoadGame::Perform(void) {
     }
   }
   v1 = dword_40306C4 + 30;
-  if ( v1 >= timeGetTime() )
+  if ( v1 < timeGetTime() )
   {
-    return 1;
+    dword_40306C4 = timeGetTime();
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  dword_40306C4 = timeGetTime();
-  IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-  IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   return 1;
 }
 
 
 // address=[0x14b58e0]
-// Decompiled from char __thiscall CStateLoadGame::OnEvent(CStateLoadGame *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateLoadGame::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateLoadGame::OnEvent(class CEvn_Event & a2) {
   
   char v3; // [esp-1Ch] [ebp-68h] BYREF
@@ -120,6 +119,7 @@ bool  CStateLoadGame::OnEvent(class CEvn_Event & a2) {
   CGuiGameState *v7; // [esp+Ch] [ebp-40h]
   CEvn_Event *v8; // [esp+10h] [ebp-3Ch]
   int event; // [esp+1Ch] [ebp-30h]
+  char; // [esp+23h] [ebp-29h]
   CEvn_Event v11; // [esp+24h] [ebp-28h] BYREF
   int v12; // [esp+48h] [ebp-4h]
 
@@ -128,29 +128,28 @@ bool  CStateLoadGame::OnEvent(class CEvn_Event & a2) {
   switch ( event )
   {
     case 13:
-      if ( a2->m_wParam != 27 )
+      if ( a2->m_wParam == 27 )
       {
-        return 1;
+        v8 = CEvn_Event::CEvn_Event(&v11, 0x5Eu, 0, 0, 0);
+        v12 = 0;
+        IEventEngine::SendAMessage(g_pEvnEngine, v8);
+        v12 = -1;
+        CEvn_Event::~CEvn_Event(&v11);
       }
-      v8 = CEvn_Event::CEvn_Event(&v11, 0x5Eu, 0, 0, 0);
-      v12 = 0;
-      IEventEngine::SendAMessage(g_pEvnEngine, v8);
-      v12 = -1;
-      CEvn_Event::~CEvn_Event(&v11);
       return 1;
     case 94:
-      CGameStateHandler::Switch((int)CStateLoadType::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLoadType::DynamicCreateFunc, 0);
       return 1;
     case 95:
-      IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
+      IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
       v6 = &v3;
-      v5 = std::wstring::wstring((int)&stru_403037C);
-      if ( (unsigned __int8)CStateMainMenu::PreLoadGame(v3, v4) )
+      v5 = ((int (__stdcall *)(int))std::wstring::wstring)((int)&stru_403037C);
+       = ((_DWORD (__cdecl *)(char, int))CStateMainMenu::PreLoadGame)(v3, v4);
+      if (  == 0 )
       {
-        return 1;
+        CGameStateHandler::Queue(CStateMessageBox::DynamicCreateFunc, (void *)2400);
+        CGameStateHandler::Switch(CStateMainMenu::DynamicCreateFunc, 0);
       }
-      CGameStateHandler::Queue((int)CStateMessageBox::DynamicCreateFunc, 2400);
-      CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
       return 1;
     default:
       return CGuiGameState::OnEvent(v7, a2);
@@ -185,20 +184,20 @@ void __cdecl CStateLoadGame::BuildSaveList(enum TGAME_TYPE a1, enum CAMPAIGN_TYP
   int v22; // [esp+52Ch] [ebp-4h]
 
   CStateLoadGame::DestroySaveList();
-  if ( g_pGameType )
+  if ( g_pGameType != 0 )
   {
     byte_4030398 = CGameType::IsMultiplayerGame(g_pGameType);
-    if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
+    if ( CGameType::IsMultiplayerGame(g_pGameType) )
     {
-      std::wstring::wstring(&a2, &g_pGameType[1]);
+      std::wstring::wstring(&a2, &g_pGameType->m_swMapName);
       v22 = 0;
       v2 = std::wstring::rfind((wchar_t *)asc_3743A6C, -1);
       v6 = std::wstring::substr((int)&v15, v2 + 1, 0xFFFFFFFF);
-      std::wstring::operator=(v6);
+      ((void (__stdcall *)(int))std::wstring::operator=)(v6);
       std::wstring::~wstring(&v15);
       N = std::wstring::rfind((wchar_t *)L".map", -1);
       v5 = std::wstring::substr((int)&v14, 0, N);
-      std::wstring::operator=(v5);
+      ((void (__stdcall *)(int))std::wstring::operator=)(v5);
       std::wstring::~wstring(&v14);
       std::wstring::operator=(&stru_403037C, &a2);
       v22 = -1;
@@ -222,10 +221,10 @@ void __cdecl CStateLoadGame::BuildSaveList(enum TGAME_TYPE a1, enum CAMPAIGN_TYP
       std::string::string(&v19);
       LOBYTE(v22) = 5;
       v4 = std::wstring::c_str(&v17);
-      if ( CStateLoadGame::FileMatch(v4, a1, arg4, &v19) )
+      if ( CStateLoadGame::FileMatch(v4, a1, arg4, &v19) != 0 )
       {
         v10 = operator new(0x54u);
-        if ( v10 )
+        if ( v10 != 0 )
         {
           memset(v10, 0, 0x54u);
           v9 = SSaveEntry::SSaveEntry((SSaveEntry *)v10);
@@ -235,15 +234,15 @@ void __cdecl CStateLoadGame::BuildSaveList(enum TGAME_TYPE a1, enum CAMPAIGN_TYP
           v9 = 0;
         }
         CStateLoadGame::m_stempSavePtr[v12] = (int)v9;
-        std::wstring::operator=((void *)CStateLoadGame::m_stempSavePtr[v12], FindData.name);
+        std::wstring::operator=((std::wstring *)CStateLoadGame::m_stempSavePtr[v12], FindData.name);
         wcscpy(Destination, FindData.name);
         v8 = wcsstr(Destination, (wchar_t *)L".sav");
-        if ( v8 )
+        if ( v8 != 0 )
         {
           *v8 = 0;
         }
-        std::wstring::operator=((void *)(CStateLoadGame::m_stempSavePtr[v12] + 28), Destination);
-        std::string::operator=((int)&v19);
+        std::wstring::operator=((std::wstring *)(CStateLoadGame::m_stempSavePtr[v12] + 28), Destination);
+        ((void (__stdcall *)(int))std::string::operator=)((int)&v19);
         ++v12;
       }
       LOBYTE(v22) = 4;
@@ -270,7 +269,7 @@ void __cdecl CStateLoadGame::DestroySaveList(void) {
         i < dword_4030378;
         ++i )
   {
-    if ( CStateLoadGame::m_stempSavePtr[i] )
+    if ( CStateLoadGame::m_stempSavePtr[i] != 0 )
     {
       delete (__ExceptionPtr *)CStateLoadGame::m_stempSavePtr[i];
       CStateLoadGame::m_stempSavePtr[i] = 0;
@@ -283,7 +282,7 @@ void __cdecl CStateLoadGame::DestroySaveList(void) {
 // [Decompilation failed for static struct SSaveEntry * * CStateLoadGame::m_stempSavePtr]
 
 // address=[0x14b5330]
-// Decompiled from bool __cdecl CStateLoadGame::FileMatch(wchar_t *String, int a2, int a3, void *a4)
+// Decompiled from bool __cdecl CStateLoadGame::FileMatch(wchar_t *String, int a2, int a3, std::string *a4)
 bool __cdecl CStateLoadGame::FileMatch(wchar_t const * String, enum TGAME_TYPE a2, enum CAMPAIGN_TYPE a3, std::string & a4) {
   
   bool result; // al
@@ -299,35 +298,37 @@ bool __cdecl CStateLoadGame::FileMatch(wchar_t const * String, enum TGAME_TYPE a
   bool v14; // [esp+2Ch] [ebp-E34h]
   char v15; // [esp+2Dh] [ebp-E33h]
   bool v16; // [esp+2Eh] [ebp-E32h]
+  char; // [esp+2Fh] [ebp-E31h]
   _BYTE v18[8]; // [esp+30h] [ebp-E30h] BYREF
   int v19; // [esp+38h] [ebp-E28h]
   int v20; // [esp+40h] [ebp-E20h]
   char Str[1796]; // [esp+294h] [ebp-BCCh] BYREF
-  _BYTE v22[1176]; // [esp+998h] [ebp-4C8h] BYREF
-  _BYTE v23[28]; // [esp+E30h] [ebp-30h] BYREF
+  S4::CMapFile v22; // [esp+998h] [ebp-4C8h] BYREF
+  std::wstring v23; // [esp+E30h] [ebp-30h] BYREF
   _DWORD *v24; // [esp+E50h] [ebp-10h]
   int v25; // [esp+E5Ch] [ebp-4h]
 
   v24 = v5;
-  if ( !String && BBSupportDbgReport(2, "main\\states\\StateLoadGame.cpp", 287, "_pName!= NULL") == 1 )
+  if ( String == 0 && BBSupportDbgReport(2, "main\\states\\StateLoadGame.cpp", 287, "_pName!= NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !String )
+  if ( String == 0 )
   {
     return 0;
   }
-  S4::CMapFile::CMapFile((CHandleMap *)v22, 0);
+  S4::CMapFile::CMapFile(&v22, 0);
   v25 = 1;
-  v5[4] = std::wstring::wstring(v23, String);
+  v5[4] = std::wstring::wstring(&v23, String);
   LOBYTE(v25) = 2;
-  S4::CMapFile::Open((S4::CMapFile *)v22, (int)v23, 1, 0);
+  S4::CMapFile::Open(&v22, &v23, 1, 0);
   LOBYTE(v25) = 1;
-  std::wstring::~wstring(v23);
+  std::wstring::~wstring(&v23);
   CGameChunkGeneral::CGameChunkGeneral(v18);
-  if ( CGameRun::LoadGeneralInfo((struct S4::CMapFile *)v22, (struct CGameChunkGeneral *)v18) )
+   = CGameRun::LoadGeneralInfo(&v22, (struct CGameChunkGeneral *)v18);
+  if (  != 0 )
   {
-    S4::CMapFile::Close((S4::CMapFile *)v22);
+    S4::CMapFile::Close(&v22);
     std::string::operator=(a4, Str);
     v10 = a2 - 1;
     switch ( a2 )
@@ -335,10 +336,10 @@ bool __cdecl CStateLoadGame::FileMatch(wchar_t const * String, enum TGAME_TYPE a
       case 1:
       case 2:
       case 4:
-        v9 = a2 == v20 && !v19;
+        v9 = a2 == v20 && v19 == 0;
         v16 = v9;
         v25 = -1;
-        S4::CMapFile::~CMapFile((CHandleMap *)v22);
+        S4::CMapFile::~CMapFile((CHandleMap *)&v22);
         result = v16;
         break;
       case 3:
@@ -347,15 +348,15 @@ bool __cdecl CStateLoadGame::FileMatch(wchar_t const * String, enum TGAME_TYPE a
           v7 = v20 == a2;
           v13 = v20 == a2;
           v25 = -1;
-          S4::CMapFile::~CMapFile((CHandleMap *)v22);
+          S4::CMapFile::~CMapFile((CHandleMap *)&v22);
           result = v13;
         }
         else
         {
-          v8 = v20 == a2 && (v15 = (*(int (__thiscall **)(int))(*(_DWORD *)g_pMissionCD + 4))(g_pMissionCD)) != 0;
+          v8 = v20 == a2 && (v15 = g_pMissionCD->IsExtraInstalled(g_pMissionCD)) != 0;
           v14 = v8;
           v25 = -1;
-          S4::CMapFile::~CMapFile((CHandleMap *)v22);
+          S4::CMapFile::~CMapFile((CHandleMap *)&v22);
           result = v14;
         }
         break;
@@ -367,17 +368,17 @@ bool __cdecl CStateLoadGame::FileMatch(wchar_t const * String, enum TGAME_TYPE a
         }
         v12 = 0;
         v25 = -1;
-        S4::CMapFile::~CMapFile((CHandleMap *)v22);
+        S4::CMapFile::~CMapFile((CHandleMap *)&v22);
         result = v12;
         break;
     }
   }
   else
   {
-    S4::CMapFile::Close((S4::CMapFile *)v22);
+    S4::CMapFile::Close(&v22);
     v11 = 0;
     v25 = -1;
-    S4::CMapFile::~CMapFile((CHandleMap *)v22);
+    S4::CMapFile::~CMapFile((CHandleMap *)&v22);
     return v11;
   }
   return result;

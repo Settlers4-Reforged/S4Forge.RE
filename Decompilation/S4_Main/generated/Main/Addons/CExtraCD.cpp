@@ -20,10 +20,10 @@
  CExtraCD::~CExtraCD(void) {
   
   *this = &CExtraCD::_vftable_;
-  if ( this[1] )
+  if ( *(this + 1) != 0 )
   {
-    operator delete[](this[1]);
-    this[1] = 0;
+    operator delete[](*(this + 1));
+    *(this + 1) = 0;
   }
   *((_BYTE *)this + 8) = 0;
   *((_BYTE *)this + 9) = 0;
@@ -32,16 +32,15 @@
 
 
 // address=[0x14817a0]
-// Decompiled from char __thiscall CExtraCD::IsExtraInstalled(CExtraCD *this)
+// Decompiled from bool __thiscall CExtraCD::IsExtraInstalled(CExtraCD *this)
 bool  CExtraCD::IsExtraInstalled(void) {
   
-  if ( *((_BYTE *)this + 8) )
+  if ( !this->m_u8 )
   {
-    return *((_BYTE *)this + 9);
+    this->m_u8 = 1;
+    this->m_u9 = ((int (__thiscall *)(CExtraCD *))this->__vftable[1].j_??_ECExtraCD@@UAEPAXI@Z)(this);
   }
-  *((_BYTE *)this + 8) = 1;
-  *((_BYTE *)this + 9) = (*(int (__thiscall **)(CExtraCD *))(*(_DWORD *)this + 16))(this);
-  return *((_BYTE *)this + 9);
+  return this->m_u9;
 }
 
 
@@ -60,33 +59,27 @@ void  CExtraCD::EnsureGuiEngineHasGfxFileLoaded(unsigned int a2, void * a3, int 
   unsigned int ActiveGUIGFXFile; // eax
   CGUIWrapper *Instance; // [esp+4h] [ebp-4h]
 
-  Instance = (CGUIWrapper *)CGUIWrapper::GetInstance(this);
-  if ( !Instance && BBSupportDbgReportF(2, "main\\ExtraCD.cpp", 286, "CExtraCD::EnsureMainGUI: couldn't get GUIWrapper!") == 1 )
+  Instance = (CGUIWrapper *)((int (__cdecl *)(CExtraCD *))CGUIWrapper::GetInstance)(this);
+  if ( Instance == 0 && BBSupportDbgReportF(2, "main\\ExtraCD.cpp", 286, "CExtraCD::EnsureMainGUI: couldn't get GUIWrapper!") == 1 )
   {
     __debugbreak();
   }
-  if ( !a3 && BBSupportDbgReport(2, "main\\ExtraCD.cpp", 288, "_pMenuData") == 1 )
+  if ( a3 == 0 && BBSupportDbgReport(2, "main\\ExtraCD.cpp", 288, "_pMenuData") == 1 )
   {
     __debugbreak();
   }
-  if ( !a6 )
+  if ( a6 || (ActiveGUIGFXFile = CGUIWrapper::GetActiveGUIGFXFile(Instance)) != a2 )
   {
-    ActiveGUIGFXFile = CGUIWrapper::GetActiveGUIGFXFile(Instance);
-    if ( ActiveGUIGFXFile == a2 )
+    LOBYTE(ActiveGUIGFXFile) = CGUIWrapper::RebuildGuiEngineWithGfxFile(Instance, a2, a3, a4, a5);
+    if ( (_BYTE)ActiveGUIGFXFile == 0 )
     {
-      return ActiveGUIGFXFile;
+      if ( BBSupportDbgReportF(2, "main\\ExtraCD.cpp", 301, "CExtraCD::EnsureMainGUI: couldn't activate Main GUI file!") == 1 )
+      {
+        __debugbreak();
+      }
+      LOBYTE(ActiveGUIGFXFile) = 0;
     }
   }
-  LOBYTE(ActiveGUIGFXFile) = CGUIWrapper::RebuildGuiEngineWithGfxFile(Instance, a2, a3, a4, a5);
-  if ( (_BYTE)ActiveGUIGFXFile )
-  {
-    return ActiveGUIGFXFile;
-  }
-  if ( BBSupportDbgReportF(2, "main\\ExtraCD.cpp", 301, "CExtraCD::EnsureMainGUI: couldn't activate Main GUI file!") == 1 )
-  {
-    __debugbreak();
-  }
-  LOBYTE(ActiveGUIGFXFile) = 0;
   return ActiveGUIGFXFile;
 }
 
@@ -106,8 +99,8 @@ bool __cdecl CExtraCD::ExistsFile(wchar_t const * FileName) {
   v4 = 1;
   CFileEx::CFileEx((CFileEx *)v5, 1);
   v7 = 1;
-  CFileEx::Open(v6, FileName, 6, 0, UNUSED_ARG(), UNUSED_ARG());
-  CFileEx::Close((CFileEx *)v6, UNUSED_ARG(), UNUSED_ARG());
+  CFileEx::Open((IFileEx *)v6, FileName, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
+  CFileEx::Close((IFileEx *)v6, UNUSED_ARG(), UNUSED_ARG());
   v3 = v4;
   v7 = -1;
   CFileEx::~CFileEx(v5);
@@ -122,15 +115,15 @@ bool __cdecl CExtraCD::ExistsFiles(wchar_t const * * a1) {
   wchar_t **i; // [esp+0h] [ebp-4h]
   int v3; // [esp+0h] [ebp-4h]
 
-  if ( !a1 )
+  if ( a1 == 0 )
   {
     return 0;
   }
   for ( i = a1;
-        *i;
+        *i != 0;
         i = (wchar_t **)(v3 + 4) )
   {
-    if ( !(unsigned __int8)CExtraCD::ExistsFile(*i, (int)i) )
+    if ( (unsigned __int8)CExtraCD::ExistsFile(*i, (int)i) == 0 )
     {
       return 0;
     }
@@ -150,23 +143,23 @@ void  CExtraCD::LoadMenuData(wchar_t const * FileName) {
   int v8; // [esp+7Ch] [ebp-14h] BYREF
   int v9; // [esp+8Ch] [ebp-4h]
 
-  if ( this[1] )
+  if ( *(this + 1) != 0 )
   {
-    operator delete[](this[1]);
-    this[1] = 0;
+    operator delete[](*(this + 1));
+    *(this + 1) = 0;
   }
   CFileEx::CFileEx((CFileEx *)v7, 1);
   v9 = 0;
-  CFileEx::Open(&v8, FileName, 6, 0, UNUSED_ARG(), UNUSED_ARG());
-  v2 = CFileEx::Size(v7);
-  this[1] = operator new[](v2);
-  v3 = CFileEx::Size(v7);
-  v5 = CFileEx::Read(&v8, this[1], 1, v3, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h", 110);
-  if ( v5 != CFileEx::Size(v7) && BBSupportDbgReport(2, "main\\ExtraCD.cpp", 246, "iSize == cFile.Size()") == 1 )
+  CFileEx::Open((IFileEx *)&v8, FileName, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
+  v2 = CFileEx::Size((CFileEx *)v7);
+  *(this + 1) = operator new[](v2);
+  v3 = CFileEx::Size((CFileEx *)v7);
+  v5 = CFileEx::Read(&v8, *(this + 1), 1, v3, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h", 110);
+  if ( v5 != CFileEx::Size((CFileEx *)v7) && BBSupportDbgReport(2, "main\\ExtraCD.cpp", 246, "iSize == cFile.Size()") == 1 )
   {
     __debugbreak();
   }
-  CFileEx::Close((CFileEx *)&v8, UNUSED_ARG(), UNUSED_ARG());
+  CFileEx::Close((IFileEx *)&v8, UNUSED_ARG(), UNUSED_ARG());
   v9 = -1;
   return CFileEx::~CFileEx(v7);
 }

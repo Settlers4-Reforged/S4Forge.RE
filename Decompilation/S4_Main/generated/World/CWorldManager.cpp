@@ -106,7 +106,7 @@ bool __cdecl CWorldManager::InWorldPackedXY(int _iXY) {
   unsigned int v3; // [esp-4h] [ebp-4h]
 
   v3 = Y16X16::UnpackYFast(_iXY);
-  v1 = Y16X16::UnpackXFast(_iXY);
+  v1 = Y16X16::UnpackXFast((unsigned __int16)_iXY);
   return CWorldManager::InWorld(v1, v3);
 }
 
@@ -131,7 +131,7 @@ int __cdecl CWorldManager::NeighborRelIndex(int a1) {
 // Decompiled from int __cdecl CWorldManager::SettlerId(int a1, int a2)
 int __cdecl CWorldManager::SettlerId(int a1, int a2) {
   
-  if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * a1 + 2 * CWorldManager::m_iWidthHeight * a2] )
+  if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * a1 + 2 * CWorldManager::m_iWidthHeight * a2] != 0 )
   {
     return CWorldManager::CheckSettlerId(*(unsigned __int16 *)&CWorldManager::m_cMapObjectMap.m_pData[2 * a1 + 2 * CWorldManager::m_iWidthHeight * a2]);
   }
@@ -227,7 +227,7 @@ int __cdecl CWorldManager::ResourceAmount(int _iX, int _iY, int _iResourceType) 
 // Decompiled from int __cdecl CWorldManager::BuildingId(int _iX, int _iY)
 int __cdecl CWorldManager::BuildingId(int _iX, int _iY) {
   
-  if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iX + 2 * CWorldManager::m_iWidthHeight * _iY] )
+  if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iX + 2 * CWorldManager::m_iWidthHeight * _iY] != 0 )
   {
     return CWorldManager::CheckBuildingId(*(unsigned __int16 *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iX + 2 * CWorldManager::m_iWidthHeight * _iY]);
   }
@@ -263,7 +263,7 @@ int __cdecl CWorldManager::Ground(int _iX, int _iY) {
 // Decompiled from int __cdecl CWorldManager::BuildingId(int _iTileId)
 int __cdecl CWorldManager::BuildingId(int _iTileId) {
   
-  if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId] )
+  if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId] != 0 )
   {
     return CWorldManager::CheckBuildingId(*(unsigned __int16 *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId]);
   }
@@ -318,7 +318,7 @@ int __cdecl CWorldManager::ObjectId(int _iTileId) {
 // Decompiled from int __cdecl CWorldManager::OccupyingEntityId(int _iTileId)
 int __cdecl CWorldManager::OccupyingEntityId(int _iTileId) {
   
-  if ( CWorldManager::FlagBits(_iTileId, 1u) )
+  if ( CWorldManager::FlagBits(_iTileId, 1u) != 0 )
   {
     return 0;
   }
@@ -461,7 +461,7 @@ int __cdecl CWorldManager::Index(int _iXY) {
 // Decompiled from int __cdecl CWorldManager::PileId(int _iTileId)
 int __cdecl CWorldManager::PileId(int _iTileId) {
   
-  if ( *(_WORD *)&CWorldManager::m_cDecoObjectMap.m_pData[2 * _iTileId] )
+  if ( *(_WORD *)&CWorldManager::m_cDecoObjectMap.m_pData[2 * _iTileId] != 0 )
   {
     return CWorldManager::CheckPileId(*(unsigned __int16 *)&CWorldManager::m_cDecoObjectMap.m_pData[2 * _iTileId]);
   }
@@ -476,7 +476,7 @@ int __cdecl CWorldManager::PileId(int _iTileId) {
 // Decompiled from int __cdecl CWorldManager::SettlerId(int _iTileId)
 int __cdecl CWorldManager::SettlerId(int _iTileId) {
   
-  if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId] )
+  if ( *(_WORD *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId] != 0 )
   {
     return CWorldManager::CheckSettlerId(*(unsigned __int16 *)&CWorldManager::m_cMapObjectMap.m_pData[2 * _iTileId]);
   }
@@ -525,7 +525,7 @@ void __cdecl CWorldManager::SetHelperObject(int a1, int a2, int a3) {
   char v4; // [esp+3h] [ebp-1h] BYREF
 
   v4 = a3;
-  return TSparseMap<unsigned char>::Set(CWorldManager::m_pHelpObjectMap, a1, a2, &v4);
+  return ((int (__thiscall *)(_DWORD *, unsigned int, int, _BYTE *))TSparseMap<unsigned char>::Set)(CWorldManager::m_pHelpObjectMap, a1, a2, &v4);
 }
 
 
@@ -575,7 +575,7 @@ void __cdecl CWorldManager::SetResource(int _iTileId, int _iResourceType, int _i
 // Decompiled from int __cdecl CWorldManager::PileId(int _iX, int _iY)
 int __cdecl CWorldManager::PileId(int _iX, int _iY) {
   
-  if ( *(_WORD *)&CWorldManager::m_cDecoObjectMap.m_pData[2 * _iX + 2 * CWorldManager::m_iWidthHeight * _iY] )
+  if ( *(_WORD *)&CWorldManager::m_cDecoObjectMap.m_pData[2 * _iX + 2 * CWorldManager::m_iWidthHeight * _iY] != 0 )
   {
     return CWorldManager::CheckPileId(*(unsigned __int16 *)&CWorldManager::m_cDecoObjectMap.m_pData[2 * _iX + 2 * CWorldManager::m_iWidthHeight * _iY]);
   }
@@ -694,7 +694,7 @@ void __cdecl CWorldManager::SetMoveCostsBits(int _iTileId, int _iCost) {
 // Decompiled from int __cdecl CWorldManager::ClearBlockedPosition(int a1, int a2)
 void __cdecl CWorldManager::ClearBlockedPosition(int a1, int a2) {
   
-  return g_pTiling->ClearBlockedLand(g_pTiling, a1, a2);
+  return ((int (__thiscall *)(CTiling *, int, int))g_pTiling->ClearBlockedLand)(g_pTiling, a1, a2);
 }
 
 
@@ -702,7 +702,7 @@ void __cdecl CWorldManager::ClearBlockedPosition(int a1, int a2) {
 // Decompiled from int __cdecl CWorldManager::SetBlockedPosition(int a1, int a2)
 void __cdecl CWorldManager::SetBlockedPosition(int a1, int a2) {
   
-  return g_pTiling->SetBlockedLand(g_pTiling, a1, a2);
+  return ((int (__thiscall *)(CTiling *, int, int))g_pTiling->SetBlockedLand)(g_pTiling, a1, a2);
 }
 
 
@@ -909,7 +909,7 @@ void __cdecl CWorldManager::Destruct(void) {
   TMap<unsigned char>::Done(&CWorldManager::m_cResourceMap);
   TMap<unsigned char>::Done(&CWorldManager::m_cWalkCount5MoveCost3Map);
   TMap<unsigned char>::Done(&CWorldManager::m_cFogMap);
-  if ( CWorldManager::m_pHelpObjectMap )
+  if ( CWorldManager::m_pHelpObjectMap != 0 )
   {
     TSparseMap<unsigned char>::`scalar deleting destructor'(CWorldManager::m_pHelpObjectMap, 1u);
     CWorldManager::m_pHelpObjectMap = 0;
@@ -979,7 +979,7 @@ bool __cdecl CWorldManager::SaveMap(class S4::CMapFile & _pMapFile) {
   }
   TMap<unsigned char>::SaveMap(&mOwnerMap, _pMapFile, 0xD2u, CWorldManager::m_iWidthHeight);
   v7 = -1;
-  TMap<unsigned char>::~TMap<unsigned char>();
+  ((void (__cdecl *)())TMap<unsigned char>::~TMap<unsigned char>)();
   TMap<T_GFX_MAP_ELEMENT>::SaveMap(&CWorldManager::m_cRenderMap, _pMapFile, 0xC8, CWorldManager::m_iWidthHeight);
   TMap<unsigned char>::SaveMap(&CWorldManager::m_cFlagMap, _pMapFile, 0xCDu, CWorldManager::m_iWidthHeight);
   TMap<unsigned short>::SaveMap(&CWorldManager::m_cMapObjectMap, _pMapFile, 0xCA, CWorldManager::m_iWidthHeight);
@@ -1001,7 +1001,7 @@ void __cdecl CWorldManager::LoadGfxData(class S4::CMapFile & a1, int a2, int _iW
   int a4; // [esp+8h] [ebp-28h] BYREF
   int iX; // [esp+14h] [ebp-1Ch] MAPDST
   struct T_GFX_MAP_ELEMENT *GfxMapElements; // [esp+18h] [ebp-18h] MAPDST
-  int iObjectID; // [esp+1Ch] [ebp-14h]
+  T_OBJECT_TYPE iObjectID; // [esp+1Ch] [ebp-14h]
   int iY; // [esp+20h] [ebp-10h]
   int iTileId; // [esp+24h] [ebp-Ch]
   SGroundData *pMapElements; // [esp+28h] [ebp-8h]
@@ -1014,11 +1014,11 @@ void __cdecl CWorldManager::LoadGfxData(class S4::CMapFile & a1, int a2, int _iW
   GfxMapElements = (struct T_GFX_MAP_ELEMENT *)S4::CMapFile::LoadChunk(a1, a2, 0, &a4, 0);
   v5 = 0;
   pMapElements = (SGroundData *)S4::CMapFile::LoadChunk(a1, MAP_CHUNK_ELEMENTS, 0, &v5, 0);
-  if ( !GfxMapElements && BBSupportDbgReport(2, "World\\World.cpp", 878, "pGfxMapElements != NULL") == 1 )
+  if ( GfxMapElements == 0 && BBSupportDbgReport(2, "World\\World.cpp", 878, "pGfxMapElements != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !pMapElements && BBSupportDbgReport(2, "World\\World.cpp", 879, "pMapElements != NULL") == 1 )
+  if ( pMapElements == 0 && BBSupportDbgReport(2, "World\\World.cpp", 879, "pMapElements != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -1082,11 +1082,11 @@ void __cdecl CWorldManager::LoadGfxData(class S4::CMapFile & a1, int a2, int _iW
           ++iX )
     {
       iObjectID = pMapElements->m_iObjectType;
-      if ( iObjectID && iObjectID != OBJECT_WHEAT1 && iObjectID != OBJECT_WHEAT2 && iObjectID != OBJECT_GRAPE && iObjectID != OBJECT_AGAVE )
+      if ( iObjectID != OBJECT_NO_OBJECT && iObjectID != OBJECT_WHEAT1 && iObjectID != OBJECT_WHEAT2 && iObjectID != OBJECT_GRAPE && iObjectID != OBJECT_AGAVE )
       {
         CDecoObjMgr::AddDecoObjWithoutFlags(&g_cDecoObjMgr, iX, iY, iObjectID, 0, 1);
       }
-      if ( pMapElements->m_iResource )
+      if ( pMapElements->m_iResource != 0 )
       {
         CWorldManager::SetResource(iX, iY, pMapElements->m_iResource & 0xF0, pMapElements->m_iResource & 0xF);
       }
@@ -1214,7 +1214,7 @@ int __cdecl CWorldManager::CheckBlockable(int _iX, int _iY) {
     __debugbreak();
   }
   v4 = CWorldManager::Index(_iX, _iY);
-  if ( CWorldManager::MapObjectId(v4) )
+  if ( CWorldManager::MapObjectId(v4) != 0 )
   {
     return 0;
   }
@@ -1240,7 +1240,7 @@ void __cdecl CWorldManager::SetGround(int _iX, int _iY, int _iGroundType) {
 
   iTileId = CWorldManager::Index(_iX, _iY);
   CWorldManager::SetGroundTypeOnly(iTileId, _iGroundType);
-  if ( CLandscapeProperties::IsBlockedLand((CLandscapeProperties *)&s_cLandscapeProperties, _iGroundType) )
+  if ( CLandscapeProperties::IsBlockedLand(&s_cLandscapeProperties, _iGroundType) )
   {
     g_pTiling->SetBlockedLand(g_pTiling, _iX, _iY, iTileId);
   }
@@ -1282,8 +1282,8 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
   unsigned int v25; // [esp+B0h] [ebp-1C6E0h]
   unsigned int v26; // [esp+B4h] [ebp-1C6DCh]
   int v27; // [esp+B8h] [ebp-1C6D8h]
-  int v28; // [esp+BCh] [ebp-1C6D4h]
-  int v29; // [esp+C0h] [ebp-1C6D0h]
+  unsigned int v28; // [esp+BCh] [ebp-1C6D4h]
+  unsigned int v29; // [esp+C0h] [ebp-1C6D0h]
   int v30; // [esp+C4h] [ebp-1C6CCh]
   int v31; // [esp+D0h] [ebp-1C6C0h]
   int v32; // [esp+D4h] [ebp-1C6BCh]
@@ -1372,12 +1372,12 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
         __debugbreak();
       }
       a1 = CWorldManager::BuildingId(iWorldIdx);
-      if ( a1 )
+      if ( a1 != 0 )
       {
-        v40 = (IEntity *)CBuildingMgr::operator[](a1);
+        v40 = ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(a1);
         v35 = 0;
         v22 = 0;
-        if ( (unsigned __int8)CBuilding::HaveInhabitant() )
+        if ( (unsigned __int8)CBuilding::HaveInhabitant() != 0 )
         {
           v10 = (int *)IEntity::Type(v40);
           CWorldManager::GetBuildingInfluenceInfo(v10, &v35, &v22);
@@ -1392,7 +1392,7 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
             {
               __debugbreak();
             }
-            if ( !*(_QWORD *)iDYX )
+            if ( *(_QWORD *)iDYX == 0 )
             {
               v31 = CBuilding::EnsignPackedXY(v40);
               v39 = IEntity::OwnerId(v40);
@@ -1523,10 +1523,10 @@ void __cdecl CWorldManager::SetOwner(int _iX, int _iY) {
       v28 = v41 + _iX;
       v29 = v42 + _iY;
       v27 = CWorldManager::Index(v41 + _iX, v42 + _iY);
-      if ( v30 )
+      if ( v30 != 0 )
       {
         CWorldManager::SetFlagBits(v27, 0x80u);
-        if ( (!v37 || !v51[1111 * v42 + 56100 + 11 * v41 + v37]) && v37 != v30 )
+        if ( (v37 == 0 || v51[1111 * v42 + 56100 + 11 * v41 + v37] == 0) && v37 != v30 )
         {
           v13 = v37 != 0;
           if ( CWorldManager::FlagBits(v27, 8u) != 0 && v13 )
@@ -1718,28 +1718,25 @@ struct SGfxColor * __cdecl CWorldManager::GetMiniMapColor(unsigned int _iTileId)
   if ( v8 > 0 )
   {
     v9 = CMapObjectMgr::EntityPtr(v8);
-    if ( v9 )
+    if ( v9 != 0 && IEntity::OwnerId(v9) > 0 )
     {
-      if ( IEntity::OwnerId(v9) > 0 )
+      if ( IEntity::FlagBits(v9, ENTITY_FLAG_Ownerless) != 0 )
       {
-        if ( IEntity::FlagBits(v9, ENTITY_FLAG_Ownerless) )
+        LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+        v1 = IEntity::ObjType(v9);
+        if ( CMinimapHandler::GetObjectColor(v1, &CWorldManager::m_sMinimapColorBuffer, 0, LocalPlayerId) != 0 )
         {
-          LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-          v1 = IEntity::ObjType(v9);
-          if ( CMinimapHandler::GetObjectColor(v1, &CWorldManager::m_sMinimapColorBuffer, 0, LocalPlayerId) )
-          {
-            return &CWorldManager::m_sMinimapColorBuffer;
-          }
+          return &CWorldManager::m_sMinimapColorBuffer;
         }
-        else
+      }
+      else
+      {
+        v6 = IEntity::OwnerId(v9);
+        v4 = IEntity::WarriorType(v9);
+        v3 = IEntity::ObjType(v9);
+        if ( CMinimapHandler::GetObjectColor(v3, &CWorldManager::m_sMinimapColorBuffer, v4, v6) != 0 )
         {
-          v6 = IEntity::OwnerId(v9);
-          v4 = IEntity::WarriorType(v9);
-          v3 = IEntity::ObjType(v9);
-          if ( CMinimapHandler::GetObjectColor(v3, &CWorldManager::m_sMinimapColorBuffer, v4, v6) )
-          {
-            return &CWorldManager::m_sMinimapColorBuffer;
-          }
+          return &CWorldManager::m_sMinimapColorBuffer;
         }
       }
     }
@@ -1788,7 +1785,7 @@ int __cdecl CWorldManager::WorldOwnerId(int _iTileId) {
 
 
 // address=[0x16a44f0]
-// Decompiled from int __cdecl CWorldManager::WorldOwnerIdColor(int _iTileId)
+// Decompiled from DWORD __cdecl CWorldManager::WorldOwnerIdColor(int _iTileId)
 int __cdecl CWorldManager::WorldOwnerIdColor(int _iTileId) {
   
   int v1; // eax
@@ -1830,12 +1827,12 @@ void __cdecl CWorldManager::Construct(int _iWidthHeight) {
   TMap<unsigned char>::Init(&CWorldManager::m_cResourceMap, CWorldManager::m_iWidthHeight);
   TMap<unsigned char>::Init(&CWorldManager::m_cWalkCount5MoveCost3Map, CWorldManager::m_iWidthHeight);
   TMap<unsigned char>::Init(&CWorldManager::m_cFogMap, CWorldManager::m_iWidthHeight);
-  if ( CWorldManager::m_pHelpObjectMap )
+  if ( CWorldManager::m_pHelpObjectMap != 0 )
   {
     TSparseMap<unsigned char>::`scalar deleting destructor'(CWorldManager::m_pHelpObjectMap, 1u);
   }
   C = (TSparseMap<unsigned char> *)operator new(0x24u);
-  if ( C )
+  if ( C != 0 )
   {
     v1 = (TSparseMap *)TSparseMap<unsigned char>::TSparseMap<unsigned char>(C, CWorldManager::m_iWidthHeight, CWorldManager::m_iWidthHeight, 0);
   }
@@ -1852,7 +1849,7 @@ void __cdecl CWorldManager::Construct(int _iWidthHeight) {
 void __cdecl CWorldManager::SetGroundInit(int a1, int a2) {
   
   CWorldManager::SetGroundTypeOnly(a1, a2);
-  if ( CLandscapeProperties::IsBlockedLand((CLandscapeProperties *)&s_cLandscapeProperties, a2) )
+  if ( CLandscapeProperties::IsBlockedLand(&s_cLandscapeProperties, a2) )
   {
     CWorldManager::SetBlockedLandEx(a1);
   }
@@ -1860,7 +1857,7 @@ void __cdecl CWorldManager::SetGroundInit(int a1, int a2) {
   {
     CWorldManager::ClearBlockedLandEx(a1);
   }
-  if ( CLandscapeProperties::IsSlowType((CLandscapeProperties *)&s_cLandscapeProperties, a2) )
+  if ( CLandscapeProperties::IsSlowType(&s_cLandscapeProperties, a2) )
   {
     CWorldManager::SetMoveCostsBits(a1, 3);
   }
@@ -1909,7 +1906,7 @@ int __cdecl CWorldManager::CheckSettlerId(int a1) {
   IEntity *v3; // [esp+4h] [ebp-4h]
 
   v3 = CMapObjectMgr::EntityPtr(a1);
-  if ( v3 && IEntity::ObjType(v3) == SETTLER_OBJ )
+  if ( v3 != 0 && IEntity::ObjType(v3) == SETTLER_OBJ )
   {
     return a1;
   }
@@ -1927,7 +1924,7 @@ int __cdecl CWorldManager::CheckBuildingId(int a1) {
   IEntity *v3; // [esp+4h] [ebp-4h]
 
   v3 = CMapObjectMgr::EntityPtr(a1);
-  if ( v3 && IEntity::ObjType(v3) == BUILDING_OBJ )
+  if ( v3 != 0 && IEntity::ObjType(v3) == BUILDING_OBJ )
   {
     return a1;
   }
@@ -1945,7 +1942,7 @@ int __cdecl CWorldManager::CheckPileId(int a1) {
   IEntity *v3; // [esp+4h] [ebp-4h]
 
   v3 = CMapObjectMgr::EntityPtr(a1);
-  if ( v3 && IEntity::ObjType(v3) == PILE_OBJ )
+  if ( v3 != 0 && IEntity::ObjType(v3) == PILE_OBJ )
   {
     return a1;
   }

@@ -17,14 +17,14 @@
 // Decompiled from CS4InvalidMapException *__thiscall CS4InvalidMapException::CS4InvalidMapException(CS4InvalidMapException *this)
  CS4InvalidMapException::CS4InvalidMapException(void) {
   
-  CBBException::CBBException(this);
+  CBBException::CBBException((CBBException *)this);
   *(_DWORD *)this = &CS4InvalidMapException::_vftable_;
   return this;
 }
 
 
 // address=[0x1313f80]
-// Decompiled from CBBException *__thiscall CS4InvalidMapException::~CS4InvalidMapException(CS4InvalidMapException *this)
+// Decompiled from CBBException *__thiscall CS4InvalidMapException::~CS4InvalidMapException(CBBException *this)
  CS4InvalidMapException::~CS4InvalidMapException(void) {
   
   *(_DWORD *)this = &CS4InvalidMapException::_vftable_;

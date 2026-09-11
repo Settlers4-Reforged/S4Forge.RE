@@ -7,9 +7,9 @@
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Pi::Pi(_DWORD *this, int a2, int a3)
  AdvXMLParser::Pi::Pi(std::string const & a2, std::string const & a3) {
   
-  AdvXMLParser::Node::Node(AdvXMLParser::Node::null, a2);
+  ((void (__stdcall *)(void *, int))AdvXMLParser::Node::Node)(AdvXMLParser::Node::null, a2);
   *this = &AdvXMLParser::Pi::_vftable_;
-  std::string::string(a3);
+  ((void (__stdcall *)(int))std::string::string)(a3);
   return this;
 }
 
@@ -18,9 +18,9 @@
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Pi::Pi(_DWORD *this, int a2, int a3, int a4)
  AdvXMLParser::Pi::Pi(class AdvXMLParser::NodeContainer & a2, std::string const & a3, std::string const & a4) {
   
-  AdvXMLParser::Node::Node(a2, a3);
+  ((void (__stdcall *)(int, int))AdvXMLParser::Node::Node)(a2, a3);
   *this = &AdvXMLParser::Pi::_vftable_;
-  std::string::string(a4);
+  ((void (__stdcall *)(int))std::string::string)(a4);
   return this;
 }
 
@@ -40,7 +40,7 @@ class AdvXMLParser::Pi *  AdvXMLParser::Pi::Clone(class AdvXMLParser::NodeContai
   v8 = 0;
   C = operator new(0x40u);
   v10 = 0;
-  if ( C )
+  if ( C != 0 )
   {
     v4 = (*(int (__thiscall **)(AdvXMLParser::Pi *, _BYTE *))(*(_DWORD *)this + 4))(this, v9);
     LOBYTE(v10) = 1;
@@ -62,19 +62,19 @@ class AdvXMLParser::Pi *  AdvXMLParser::Pi::Clone(class AdvXMLParser::NodeContai
 
 
 // address=[0x2f16b60]
-// Decompiled from int __thiscall AdvXMLParser::Pi::GetData(char *this, int a2)
+// Decompiled from std::string *__thiscall AdvXMLParser::Pi::GetData(char *this, std::string *a2)
 std::string  AdvXMLParser::Pi::GetData(void a2)const {
   
-  std::string::string(this + 36);
+  ((void (__stdcall *)(char *))std::string::string)(this + 36);
   return a2;
 }
 
 
 // address=[0x2f16ba0]
-// Decompiled from int __thiscall AdvXMLParser::Pi::GetValue(char *this, int a2)
+// Decompiled from std::string *__thiscall AdvXMLParser::Pi::GetValue(char *this, std::string *a2)
 std::string  AdvXMLParser::Pi::GetValue(void a2)const {
   
-  std::string::string(this + 36);
+  ((void (__stdcall *)(char *))std::string::string)(this + 36);
   return a2;
 }
 
@@ -122,9 +122,9 @@ class AdvXMLParser::Pi * __cdecl AdvXMLParser::Pi::Parse(class AdvXMLParser::Par
   {
     return 0;
   }
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v11 = 0;
-  if ( !(unsigned __int8)AdvXMLParser::Pi::ParsePITarget(a1, v9) )
+  if ( AdvXMLParser::Pi::ParsePITarget(a1, (int)v9) == 0 )
   {
     AdvXMLParser::Parser::SyntaxError(a1, 24);
   }
@@ -138,12 +138,12 @@ class AdvXMLParser::Pi * __cdecl AdvXMLParser::Pi::Parse(class AdvXMLParser::Par
       AdvXMLParser::Parser::SyntaxError(a1, 2);
     }
   }
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   LOBYTE(v11) = 1;
-  AdvXMLParser::Bookmark::GetSubString(v10, 2);
+  ((void (__stdcall *)(_BYTE *, int))AdvXMLParser::Bookmark::GetSubString)(v10, 2);
   C = operator new(0x40u);
   LOBYTE(v11) = 2;
-  if ( C )
+  if ( C != 0 )
   {
     v7 = AdvXMLParser::Pi::Pi(C, (int)a2, (int)v9, (int)v10);
   }
@@ -168,16 +168,16 @@ void  AdvXMLParser::Pi::GenerateXML(class AdvXMLParser::GenerateContext & a2)con
   int Name; // eax
 
   AdvXMLParser::GenerateContext::GenerateStartTagIndentation(a2);
-  AdvXMLParser::GenerateContext::operator+=("<?");
+  ((void (__stdcall *)(char *))AdvXMLParser::GenerateContext::operator+=)("<?");
   Name = AdvXMLParser::Node::GetName(this);
-  AdvXMLParser::GenerateContext::operator+=(Name);
-  if ( !(unsigned __int8)std::string::empty((char *)this + 36) )
+  ((void (__stdcall *)(int))AdvXMLParser::GenerateContext::operator+=)(Name);
+  if ( !std::string::empty((std::string *)((char *)this + 36)) )
   {
-    AdvXMLParser::GenerateContext::operator+=(32);
-    AdvXMLParser::GenerateContext::operator+=((char *)this + 36);
+    ((void (__stdcall *)(char))AdvXMLParser::GenerateContext::operator+=)(32);
+    ((void (__stdcall *)(char *))AdvXMLParser::GenerateContext::operator+=)((char *)this + 36);
   }
-  AdvXMLParser::GenerateContext::operator+=("?>");
-  AdvXMLParser::GenerateContext::GenerateNewLine(a2);
+  ((void (__stdcall *)(char *))AdvXMLParser::GenerateContext::operator+=)("?>");
+  ((void (__thiscall *)(AdvXMLParser::GenerateContext *))AdvXMLParser::GenerateContext::GenerateNewLine)(a2);
   AdvXMLParser::GenerateContext::EndTag(a2);
 }
 
@@ -193,28 +193,25 @@ bool __cdecl AdvXMLParser::Pi::ParsePITarget(class AdvXMLParser::Parser & a1, st
   unsigned __int8 *v4; // eax
   unsigned __int8 *v5; // eax
 
-  if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(a2) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(int))AdvXMLParser::Parser::ParseName)(a2) == 0 )
   {
     return 0;
   }
-  if ( std::string::length(a2) != 3 )
+  if ( std::string::length(a2) == 3 )
   {
-    return 1;
-  }
-  v3 = (unsigned __int8 *)std::string::operator[](0);
-  if ( AdvXMLParser::LowCase((AdvXMLParser *)*v3) != 120 )
-  {
-    return 1;
-  }
-  v4 = (unsigned __int8 *)std::string::operator[](1);
-  if ( AdvXMLParser::LowCase((AdvXMLParser *)*v4) != 109 )
-  {
-    return 1;
-  }
-  v5 = (unsigned __int8 *)std::string::operator[](2);
-  if ( AdvXMLParser::LowCase((AdvXMLParser *)*v5) == 108 )
-  {
-    AdvXMLParser::Parser::SyntaxError(a1, 25);
+    v3 = (unsigned __int8 *)std::string::operator[](0);
+    if ( AdvXMLParser::LowCase((AdvXMLParser *)*v3) == 120 )
+    {
+      v4 = (unsigned __int8 *)std::string::operator[](1);
+      if ( AdvXMLParser::LowCase((AdvXMLParser *)*v4) == 109 )
+      {
+        v5 = (unsigned __int8 *)std::string::operator[](2);
+        if ( AdvXMLParser::LowCase((AdvXMLParser *)*v5) == 108 )
+        {
+          AdvXMLParser::Parser::SyntaxError(a1, 25);
+        }
+      }
+    }
   }
   return 1;
 }

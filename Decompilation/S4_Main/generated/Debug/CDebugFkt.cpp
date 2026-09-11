@@ -8,13 +8,13 @@ bool __cdecl CDebugFkt::SetDebugFuncKey(char const * String2, char a2) {
   
   int *i; // [esp+0h] [ebp-4h]
 
-  if ( String2 && (!a2 || a2 >= 97 && a2 <= 122 || a2 >= 65 && a2 <= 90) )
+  if ( String2 != 0 && (a2 == 0 || a2 >= 97 && a2 <= 122 || a2 >= 65 && a2 <= 90) )
   {
     for ( i = &dword_3D7A768;
-          i[1];
+          i[1] != 0;
           i += 4 )
     {
-      if ( !j___strnicmp((const char *)i[2], String2, 0x100u) )
+      if ( j___strnicmp((const char *)i[2], String2, 0x100u) == 0 )
       {
         *(_BYTE *)i = a2;
         return 1;
@@ -36,9 +36,9 @@ int (__cdecl*__cdecl CDebugFkt::SelectDebugFunc(char))(int a1, int a2) {
 
   v2 = -1;
   v4 = &dword_3D7A768;
-  if ( a1 )
+  if ( a1 != 0 )
   {
-    while ( v4[1] )
+    while ( v4[1] != 0 )
     {
       if ( *(char *)v4 == a1 )
       {
@@ -53,13 +53,13 @@ int (__cdecl*__cdecl CDebugFkt::SelectDebugFunc(char))(int a1, int a2) {
     dword_3D7A760 = -1;
     dword_3ECD9D0 = 0;
     v3 = &dword_3D7AA38;
-    if ( a1 )
+    if ( a1 != 0 )
     {
-      while ( v3[1] )
+      while ( v3[1] != 0 )
       {
         if ( *(char *)v3 == a1 )
         {
-          CGameScriptManager::GetScriptEnv((CGameScriptManager *)g_pScriptMgr);
+          CGameScriptManager::GetScriptEnv(g_pScriptMgr);
           CLua::ExecuteString((char *)v3[1]);
           return 0;
         }
@@ -90,11 +90,11 @@ int (__cdecl*__cdecl CDebugFkt::SelectDebugFunc(char))(int a1, int a2) {
     {
       memset(Str, 0, sizeof(Str));
       snprintf(Str, 0x3FFu, "%s (%i)", (const char *)v4[2], dword_3ECD9D0);
-      String::operator=(Str);
+      ((void (__stdcall *)(char *))String::operator=)(Str);
     }
     else
     {
-      String::operator=((char *)v4[2]);
+      ((void (__stdcall *)(char *))String::operator=)((char *)v4[2]);
     }
     return v4[1];
   }
@@ -105,7 +105,7 @@ int (__cdecl*__cdecl CDebugFkt::SelectDebugFunc(char))(int a1, int a2) {
 // Decompiled from const char *CDebugFkt::DebugString()
 char * __cdecl CDebugFkt::DebugString(void) {
   
-  return String::c_str((String *)&CDebugFkt::m_sInfo);
+  return (const char *)String::c_str((String *)&CDebugFkt::m_sInfo);
 }
 
 
@@ -134,7 +134,7 @@ void __cdecl CDebugFkt::SetFrameCounter(float a1, float a2, float a3, float a4, 
   String::operator=(&CDebugFkt::m_sFrame, v9);
   v13 = -1;
   String::~String((String *)v11);
-  v8 = operator+(v10, &CDebugFkt::m_sInfoText, &CDebugFkt::m_sFrame);
+  v8 = (int)operator+((String *)v10, (int)&CDebugFkt::m_sInfoText, (int)&CDebugFkt::m_sFrame);
   v13 = 1;
   String::operator=(&CDebugFkt::m_sInfo, v8);
   v13 = -1;

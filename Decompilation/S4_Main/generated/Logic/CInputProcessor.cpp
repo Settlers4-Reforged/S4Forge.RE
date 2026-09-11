@@ -34,7 +34,7 @@ class std::vector<unsigned short,class std::allocator<unsigned short> > const & 
  CInputProcessor::~CInputProcessor(void) {
   
   this->__vftable = (IEventHandler_vtbl *)&CInputProcessor::_vftable_;
-  if ( this->m_pFSM )
+  if ( this->m_pFSM != 0 )
   {
     delete this->m_pFSM;
     this->m_pFSM = 0;
@@ -48,7 +48,7 @@ class std::vector<unsigned short,class std::allocator<unsigned short> > const & 
 // Decompiled from void __thiscall CInputProcessor::Reset(CInputProcessor *this)
 void  CInputProcessor::Reset(void) {
   
-  if ( this->m_pFSM )
+  if ( this->m_pFSM != 0 )
   {
     delete this->m_pFSM;
     this->m_pFSM = 0;
@@ -71,11 +71,11 @@ void  CInputProcessor::Process(void) {
   CEvn_Logic sGameMessage; // [esp+10h] [ebp-30h] BYREF
   int v3; // [esp+3Ch] [ebp-4h]
 
-  if ( this->m_bBoxSelectAllSettler )
+  if ( this->m_bBoxSelectAllSettler != 0 )
   {
     CInputProcessor::SelectAllVisible(this);
   }
-  else if ( this->m_iSelectionMode )
+  else if ( this->m_iSelectionMode != 0 )
   {
     CInputProcessor::BoxSelection(this);
   }
@@ -125,7 +125,7 @@ LABEL_19:
 // Decompiled from void __thiscall CInputProcessor::DeSelectAllEx(CInputProcessor *this)
 void  CInputProcessor::DeSelectAllEx(void) {
   
-  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
     CInputProcessor::DeSelectAll(this);
     CInputProcessor::CloseSidebarAndShowDefaultMenu(this);
@@ -157,16 +157,16 @@ void  CInputProcessor::DeSelectEntity(int a2) {
   if ( a2 > 0 )
   {
     v16 = CMapObjectMgr::EntityPtr(a2);
-    if ( v16 )
+    if ( v16 != 0 )
     {
       IEntity::ClearFlagBits(v16, ENTITY_FLAG_Selected);
       IEntity::ClearFlagBits(v16, (EntityFlag)1024);
     }
-    if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+    if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
     {
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v6);
       v18 = 0;
-      v14 = std::vector<unsigned short>::begin(v5);
+      v14 = std::vector<unsigned short>::begin((int)v5);
       v13 = v14;
       LOBYTE(v18) = 1;
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator=(v14);
@@ -174,13 +174,13 @@ void  CInputProcessor::DeSelectEntity(int a2) {
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v5);
       while ( 1 )
       {
-        v12 = (std::_Iterator_base12 *)std::vector<unsigned short>::end(v4);
+        v12 = (std::_Iterator_base12 *)std::vector<unsigned short>::end((int)v4);
         v11 = v12;
         LOBYTE(v18) = 2;
         v17 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator!=(v12);
         LOBYTE(v18) = 0;
         std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v4);
-        if ( !v17 )
+        if ( v17 == 0 )
         {
           break;
         }
@@ -189,9 +189,9 @@ void  CInputProcessor::DeSelectEntity(int a2) {
         {
           v9 = v2;
           v8 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>((struct std::_Iterator_base12 *)v6);
-          v7 = std::vector<unsigned short>::erase(v3, v2[0], v2[1], v2[2]);
+          v7 = std::vector<unsigned short>::erase((int)v3, v2[0], v2[1], v2[2]);
           std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v3);
-          if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+          if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) == 0 )
           {
             CInputProcessor::Default(this, 0);
             CInputProcessor::Clear(this);
@@ -217,12 +217,12 @@ void  CInputProcessor::AddToSelection(int _iEntityId) {
   if ( _iEntityId > 0 && (unsigned int)std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) < 100 )
   {
     v3 = CMapObjectMgr::EntityPtr(_iEntityId);
-    if ( v3 )
+    if ( v3 != 0 )
     {
       v4 = _iEntityId;
       std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v4);
       CFsm::GenerateEvent(this->m_pFSM, 484, 0);
-      if ( IEntity::FlagBits(v3, ENTITY_FLAG_Selectable) )
+      if ( IEntity::FlagBits(v3, ENTITY_FLAG_Selectable) != 0 )
       {
         IEntity::SetFlagBits(v3, ENTITY_FLAG_Selected);
       }
@@ -244,13 +244,13 @@ int  CInputProcessor::GetSelectionTypeOfCurrentSelection(void)const {
   int v4; // [esp+4h] [ebp-4h]
 
   v4 = 0;
-  if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
-    return v4;
+    v1 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    v2 = CMapObjectMgr::EntityPtr(*v1);
+    return CInputProcessor::GetEntitySelectionType(v2);
   }
-  v1 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  v2 = CMapObjectMgr::EntityPtr(*v1);
-  return CInputProcessor::GetEntitySelectionType(v2);
+  return v4;
 }
 
 
@@ -306,7 +306,7 @@ int __cdecl CInputProcessor::GetEntitySelectionType(class IEntity const * a1) {
   int type; // [esp+4h] [ebp-8h]
   int warriorType; // [esp+8h] [ebp-4h]
 
-  if ( !a1 )
+  if ( a1 == 0 )
   {
     return 0;
   }
@@ -398,12 +398,12 @@ void  CInputProcessor::InitFSM(void) {
   CFsm *v1; // [esp+8h] [ebp-18h]
   CFsm *C; // [esp+Ch] [ebp-14h]
 
-  if ( this->m_pFSM && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 254, "m_pFsm == 0") == 1 )
+  if ( this->m_pFSM != 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 254, "m_pFsm == 0") == 1 )
   {
     __debugbreak();
   }
   C = (CFsm *)operator new(0x1Cu);
-  if ( C )
+  if ( C != 0 )
   {
     v1 = (CFsm *)CFsm::CFsm(C, this, 1500, 0);
   }
@@ -412,7 +412,7 @@ void  CInputProcessor::InitFSM(void) {
     v1 = 0;
   }
   this->m_pFSM = v1;
-  if ( !this->m_pFSM && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 259, "m_pFsm != 0") == 1 )
+  if ( this->m_pFSM == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 259, "m_pFsm != 0") == 1 )
   {
     __debugbreak();
   }
@@ -679,21 +679,21 @@ bool  CInputProcessor::Default(class CEvn_Logic * a2) {
   this->unk_1C = 0;
   CEvn_Event::CEvn_Event(&v4, 0x260u, 0, 0, 0);
   v6 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 4459, "g_pEvnEngine!= NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 4459, "g_pEvnEngine!= NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v4);
   }
   CEvn_Event::CEvn_Event(&v5, 0x259u, 0, 0, 0);
   LOBYTE(v6) = 1;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 4470, "g_pEvnEngine!= NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 4470, "g_pEvnEngine!= NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v5);
   }
@@ -732,13 +732,13 @@ bool  CInputProcessor::TryBuild(class CEvn_Logic * a2) {
   int LocalPlayerId; // eax
 
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  if ( !CPlayerManager::IsAlive(LocalPlayerId) )
+  if ( CPlayerManager::IsAlive(LocalPlayerId) == 0 )
   {
     return 0;
   }
   CInputProcessor::DeSelectAll(this);
   CWorldManager::ClearHelperObject();
-  this->m_iViewState = 4;
+  this->m_iViewState = TRY_BUILD_STATE;
   this->m_iBuildBuildingType = a2->m_lParam;
   IGfxEngine::EnableIconLayer(g_pGfxEngine, 1);
   IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 3u);
@@ -764,26 +764,25 @@ bool  CInputProcessor::Build(class CEvn_Logic * a2) {
   y = HIWORD(a2->m_lParam);
   iBuildBuildingType = this->m_iBuildBuildingType;
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  if ( CBuildingMgr::CheckForBuild((CBuildingMgr *)g_cBuildingMgr, x, y, LocalPlayerId, iBuildBuildingType, 0) <= 0 )
+  if ( CBuildingMgr::CheckForBuild((CBuildingMgr *)g_cBuildingMgr, x, y, LocalPlayerId, iBuildBuildingType, 0) > 0 )
   {
-    return 1;
+    packedXY = Y16X16::PackXYFast(x, y);
+    cLocalPlayerId = CPlayerManager::GetLocalPlayerId();
+    CEvn_Logic::CEvn_Logic(&v10, 0x13A1u, this->m_iBuildBuildingType, packedXY, cLocalPlayerId, 0, 0);
+    v11 = 0;
+    if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1603, "g_pNetworkEngine != NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    if ( g_pNetworkEngine != 0 )
+    {
+      INetworkEngine::SendNetMessage(g_pNetworkEngine, &v10);
+    }
+    CInputProcessor::Default(this, a2);
+    CFsm::GenerateEvent(this->m_pFSM, 401, 0);
+    v11 = -1;
+    CEvn_Logic::~CEvn_Logic(&v10);
   }
-  packedXY = Y16X16::PackXYFast(x, y);
-  cLocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  CEvn_Logic::CEvn_Logic(&v10, 0x13A1u, this->m_iBuildBuildingType, packedXY, cLocalPlayerId, 0, 0);
-  v11 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1603, "g_pNetworkEngine != NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( g_pNetworkEngine )
-  {
-    INetworkEngine::SendNetMessage(g_pNetworkEngine, &v10);
-  }
-  CInputProcessor::Default(this, a2);
-  CFsm::GenerateEvent(this->m_pFSM, 401, 0);
-  v11 = -1;
-  CEvn_Logic::~CEvn_Logic(&v10);
   return 1;
 }
 
@@ -796,10 +795,10 @@ bool  CInputProcessor::ShowWorkingArea(class CEvn_Logic * a2) {
   IEntity *v3; // eax
   unsigned __int16 *v5; // eax
 
-  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) && (v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0), v3 = CMapObjectMgr::EntityPtr(*v2), IEntity::ObjType(v3) == BUILDING_OBJ) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 && (v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0), v3 = CMapObjectMgr::EntityPtr(*v2), IEntity::ObjType(v3) == BUILDING_OBJ) )
   {
-    this->m_iViewState = 3;
-    v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    this->m_iViewState = SET_WORKINGAREA_STATE;
+    v5 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
     CBuildingMgr::ShowWorkingArea((CBuildingMgr *)g_cBuildingMgr, *v5);
     IGfxEngine::EnableIconLayer(g_pGfxEngine, 1);
     return 1;
@@ -830,28 +829,27 @@ bool  CInputProcessor::SetWorkingArea(class CEvn_Logic * a2) {
   m_lParam = a2->m_lParam;
   iX = Y16X16::UnpackXFast(m_lParam);
   iY = Y16X16::UnpackYFast(m_lParam);
-  v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  if ( !CBuildingMgr::IsGoodWorkingAreaCenter((CBuildingMgr *)g_cBuildingMgr, *v2, &iX, &iY) )
+  v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+  if ( CBuildingMgr::IsGoodWorkingAreaCenter((CBuildingMgr *)g_cBuildingMgr, *v2, &iX, &iY) != 0 )
   {
-    return 1;
+    packedXY = Y16X16::PackXYFast(iX, iY);
+    LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+    v3 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    CEvn_Logic::CEvn_Logic(&v11, 0x1389u, *v3, packedXY, LocalPlayerId, 0, 0);
+    v12 = 0;
+    if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1742, "g_pNetworkEngine != NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    if ( g_pNetworkEngine != 0 )
+    {
+      INetworkEngine::SendNetMessage(g_pNetworkEngine, &v11);
+    }
+    CInputProcessor::Default(this, a2);
+    CFsm::GenerateEvent(this->m_pFSM, 401, 0);
+    v12 = -1;
+    CEvn_Logic::~CEvn_Logic(&v11);
   }
-  packedXY = Y16X16::PackXYFast(iX, iY);
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CEvn_Logic::CEvn_Logic(&v11, 0x1389u, *v3, packedXY, LocalPlayerId, 0, 0);
-  v12 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1742, "g_pNetworkEngine != NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( g_pNetworkEngine )
-  {
-    INetworkEngine::SendNetMessage(g_pNetworkEngine, &v11);
-  }
-  CInputProcessor::Default(this, a2);
-  CFsm::GenerateEvent(this->m_pFSM, 401, 0);
-  v12 = -1;
-  CEvn_Logic::~CEvn_Logic(&v11);
   return 1;
 }
 
@@ -866,16 +864,16 @@ bool  CInputProcessor::TryCrushBuilding(class CEvn_Logic * a2) {
   unsigned __int16 *v5; // eax
   CBuilding *v6; // eax
 
-  v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  v3 = CBuildingMgr::operator[](*v2);
-  v4 = IEntity::OwnerId((IEntity *)v3);
+  v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+  v3 = ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(*v2);
+  v4 = IEntity::OwnerId(v3);
   if ( v4 != CPlayerManager::GetLocalPlayerId() && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1624, "g_cBuildingMgr[ m_vSelection[ 0 ] ].OwnerId() == CPlayerManager::GetLocalPlayerId()") == 1 )
   {
     __debugbreak();
   }
-  v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  v6 = CBuildingMgr::operator[](*v5);
-  CBuilding::TryCrushBuilding((IEntity *)v6);
+  v5 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+  v6 = ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(*v5);
+  CBuilding::TryCrushBuilding(v6);
   return 1;
 }
 
@@ -889,17 +887,17 @@ bool  CInputProcessor::CrushBuilding(class CEvn_Logic * a2) {
   CEvn_Logic v6; // [esp+8h] [ebp-30h] BYREF
   int v7; // [esp+34h] [ebp-4h]
 
-  if ( a2->m_wParam )
+  if ( a2->m_wParam != 0 )
   {
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-    v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
     CEvn_Logic::CEvn_Logic(&v6, 0x138Au, *v2, 0, LocalPlayerId, 0, 0);
     v7 = 0;
-    if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1654, "g_pNetworkEngine != NULL") == 1 )
+    if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1654, "g_pNetworkEngine != NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( g_pNetworkEngine )
+    if ( g_pNetworkEngine != 0 )
     {
       INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
     }
@@ -926,14 +924,14 @@ bool  CInputProcessor::SwitchBuilding(class CEvn_Logic * a2) {
   int v6; // [esp+38h] [ebp-4h]
 
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+  v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
   CEvn_Logic::CEvn_Logic(&v5, 0x138Bu, *v2, 0, LocalPlayerId, 0, 0);
   v6 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1683, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1683, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v5);
   }
@@ -953,14 +951,14 @@ bool  CInputProcessor::PrioBuildingSite(class CEvn_Logic * a2) {
   int v6; // [esp+38h] [ebp-4h]
 
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+  v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
   CEvn_Logic::CEvn_Logic(&v5, 0x138Cu, *v2, 0, LocalPlayerId, 0, 0);
   v6 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1707, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1707, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v5);
   }
@@ -989,54 +987,53 @@ bool  CInputProcessor::SelectNextBuilding(class CEvn_Logic * a2) {
   int v16; // [esp+40h] [ebp-4h]
 
   m_lParam = a2->m_lParam;
-  if ( !m_lParam )
+  if ( m_lParam == 0 )
   {
-    if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 999, "m_vSelection.size() > 0") == 1 )
+    if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 999, "m_vSelection.size() > 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+    if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) == 0 )
     {
       CInputProcessor::Default(this, a2);
       CFsm::GenerateEvent(this->m_pFSM, 401, 0);
       return 0;
     }
-    v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    v3 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
     v4 = CMapObjectMgr::EntityPtr(*v3);
     m_lParam = IEntity::Type(v4);
   }
   CInputProcessor::DeSelectAll(this);
   CInputProcessor::Default(this, a2);
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  NextBuilding = (IEntity *)CBuildingMgr::GetNextBuilding((CBuildingMgr *)g_cBuildingMgr, LocalPlayerId, m_lParam);
-  if ( NextBuilding )
+  NextBuilding = CBuildingMgr::GetNextBuilding((CBuildingMgr *)g_cBuildingMgr, LocalPlayerId, m_lParam);
+  if ( NextBuilding != 0 )
   {
     v13 = IEntity::ID(NextBuilding);
-    if ( !v13 )
+    if ( v13 != 0 )
     {
-      return 0;
+      v12 = v13;
+      std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v12);
+      CInputProcessor::RequestDialog(this);
+      v6 = CMapObjectMgr::EntityPtr(v13);
+      IEntity::SetFlagBits(v6, ENTITY_FLAG_Selected);
+      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v13);
+      CBuilding::NotifySelected(BuildingPtr);
+      v8 = IEntity::X(BuildingPtr);
+      v7 = IEntity::Y(BuildingPtr);
+      CEvn_Event::CEvn_Event(&v15, 0x13u, v7, v8, 0);
+      v16 = 0;
+      if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1047, "g_pEvnEngine != NULL") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( g_pEvnEngine != 0 )
+      {
+        IEventEngine::SendAMessage(g_pEvnEngine, &v15);
+      }
+      v16 = -1;
+      CEvn_Event::~CEvn_Event(&v15);
     }
-    v12 = v13;
-    std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v12);
-    CInputProcessor::RequestDialog(this);
-    v6 = CMapObjectMgr::EntityPtr(v13);
-    IEntity::SetFlagBits(v6, ENTITY_FLAG_Selected);
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v13);
-    CBuilding::NotifySelected(BuildingPtr);
-    v8 = IEntity::X(BuildingPtr);
-    v7 = IEntity::Y(BuildingPtr);
-    CEvn_Event::CEvn_Event(&v15, 0x13u, v7, v8, 0);
-    v16 = 0;
-    if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1047, "g_pEvnEngine != NULL") == 1 )
-    {
-      __debugbreak();
-    }
-    if ( g_pEvnEngine )
-    {
-      IEventEngine::SendAMessage(g_pEvnEngine, &v15);
-    }
-    v16 = -1;
-    CEvn_Event::~CEvn_Event(&v15);
     return 0;
   }
   else
@@ -1066,19 +1063,19 @@ bool  CInputProcessor::SelectBuilding(class CEvn_Logic * a2) {
   int v16; // [esp+40h] [ebp-4h]
 
   m_lParam = a2->m_lParam;
-  if ( !m_lParam )
+  if ( m_lParam == 0 )
   {
-    if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1070, "m_vSelection.size() > 0") == 1 )
+    if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1070, "m_vSelection.size() > 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+    if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) == 0 )
     {
       CInputProcessor::Default(this, a2);
       CFsm::GenerateEvent(this->m_pFSM, 401, 0);
       return 0;
     }
-    v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    v3 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
     v4 = CMapObjectMgr::EntityPtr(*v3);
     m_lParam = IEntity::Type(v4);
   }
@@ -1086,34 +1083,33 @@ bool  CInputProcessor::SelectBuilding(class CEvn_Logic * a2) {
   CInputProcessor::Default(this, a2);
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   Building = (IEntity *)CBuildingMgr::GetBuilding((CBuildingMgr *)g_cBuildingMgr, LocalPlayerId, m_lParam);
-  if ( Building )
+  if ( Building != 0 )
   {
     v13 = IEntity::ID(Building);
-    if ( !v13 )
+    if ( v13 != 0 )
     {
-      return 0;
+      v12 = v13;
+      std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v12);
+      CInputProcessor::RequestDialog(this);
+      v6 = CMapObjectMgr::EntityPtr(v13);
+      IEntity::SetFlagBits(v6, ENTITY_FLAG_Selected);
+      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v13);
+      CBuilding::NotifySelected(BuildingPtr);
+      x = IEntity::X(BuildingPtr);
+      y = IEntity::Y(BuildingPtr);
+      CEvn_Event::CEvn_Event(&v15, 0x13u, y, x, 0);
+      v16 = 0;
+      if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1118, "g_pEvnEngine != NULL") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( g_pEvnEngine != 0 )
+      {
+        IEventEngine::SendAMessage(g_pEvnEngine, &v15);
+      }
+      v16 = -1;
+      CEvn_Event::~CEvn_Event(&v15);
     }
-    v12 = v13;
-    std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v12);
-    CInputProcessor::RequestDialog(this);
-    v6 = CMapObjectMgr::EntityPtr(v13);
-    IEntity::SetFlagBits(v6, ENTITY_FLAG_Selected);
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v13);
-    CBuilding::NotifySelected(BuildingPtr);
-    x = IEntity::X(BuildingPtr);
-    y = IEntity::Y(BuildingPtr);
-    CEvn_Event::CEvn_Event(&v15, 0x13u, y, x, 0);
-    v16 = 0;
-    if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1118, "g_pEvnEngine != NULL") == 1 )
-    {
-      __debugbreak();
-    }
-    if ( g_pEvnEngine )
-    {
-      IEventEngine::SendAMessage(g_pEvnEngine, &v15);
-    }
-    v16 = -1;
-    CEvn_Event::~CEvn_Event(&v15);
     return 0;
   }
   else
@@ -1139,24 +1135,23 @@ bool  CInputProcessor::MarkNextBuilding(class CEvn_Logic * a2) {
   _iBuildingType = a2->m_lParam;
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   NextBuilding = CBuildingMgr::GetNextBuilding((CBuildingMgr *)g_cBuildingMgr, LocalPlayerId, _iBuildingType);
-  if ( !NextBuilding )
+  if ( NextBuilding != 0 )
   {
-    return 0;
+    v5 = IEntity::X(NextBuilding);
+    v3 = IEntity::Y(NextBuilding);
+    CEvn_Event::CEvn_Event(&v8, 0x13u, v3, v5, 0);
+    v9 = 0;
+    if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1148, "g_pEvnEngine != NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    if ( g_pEvnEngine != 0 )
+    {
+      IEventEngine::SendAMessage(g_pEvnEngine, &v8);
+    }
+    v9 = -1;
+    CEvn_Event::~CEvn_Event(&v8);
   }
-  v5 = IEntity::X(NextBuilding);
-  v3 = IEntity::Y(NextBuilding);
-  CEvn_Event::CEvn_Event(&v8, 0x13u, v3, v5, 0);
-  v9 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1148, "g_pEvnEngine != NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( g_pEvnEngine )
-  {
-    IEventEngine::SendAMessage(g_pEvnEngine, &v8);
-  }
-  v9 = -1;
-  CEvn_Event::~CEvn_Event(&v8);
   return 0;
 }
 
@@ -1166,7 +1161,7 @@ bool  CInputProcessor::MarkNextBuilding(class CEvn_Logic * a2) {
 bool  CInputProcessor::InitExtraMenu(class CEvn_Logic * a2) {
   
   CLogic::SwitchExtraInfoMenu(g_pLogic, a2->m_wParam == 1);
-  CStatistic::FillExtraInfo((CStatistic *)&g_cStatistic);
+  CStatistic::FillExtraInfo(&g_cStatistic);
   return 0;
 }
 
@@ -1187,37 +1182,37 @@ bool  CInputProcessor::SelectNextVehicle(class CEvn_Logic * _pEvent) {
   CEvn_Event v13; // [esp+1Ch] [ebp-28h] BYREF
   int v14; // [esp+40h] [ebp-4h]
 
-  if ( !_pEvent && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 878, "_pEvent!= NULL") == 1 )
+  if ( _pEvent == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 878, "_pEvent!= NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !_pEvent )
+  if ( _pEvent == 0 )
   {
     return 0;
   }
   VehiclePtr = 0;
   v7 = 0;
   m_lParam = _pEvent->m_lParam;
-  if ( !m_lParam )
+  if ( m_lParam == 0 )
   {
-    if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 890, "m_vSelection.size() > 0") == 1 )
+    if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 890, "m_vSelection.size() > 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+    if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) == 0 )
     {
       CInputProcessor::Default(this, _pEvent);
       CFsm::GenerateEvent(this->m_pFSM, 401, 0);
       return 0;
     }
-    v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    v3 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
     VehiclePtr = CVehicleMgr::GetVehiclePtr(*v3);
-    v7 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-    if ( !VehiclePtr && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 901, "pVehicle!=NULL") == 1 )
+    v7 = *std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    if ( VehiclePtr == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 901, "pVehicle!=NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( !VehiclePtr )
+    if ( VehiclePtr == 0 )
     {
       return 0;
     }
@@ -1225,11 +1220,11 @@ bool  CInputProcessor::SelectNextVehicle(class CEvn_Logic * _pEvent) {
   }
   CInputProcessor::DeSelectAll(this);
   CInputProcessor::Default(this, _pEvent);
-  if ( !VehiclePtr && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 914, "pVehicle!=NULL") == 1 )
+  if ( VehiclePtr == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 914, "pVehicle!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !VehiclePtr )
+  if ( VehiclePtr == 0 )
   {
     return 0;
   }
@@ -1237,20 +1232,20 @@ bool  CInputProcessor::SelectNextVehicle(class CEvn_Logic * _pEvent) {
   do
   {
     FirstVehicleId = IAnimatedEntity::Next(VehiclePtr);
-    if ( !FirstVehicleId )
+    if ( FirstVehicleId == 0 )
     {
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
       FirstVehicleId = CVehicleMgr::GetFirstVehicleId((CVehicleMgr *)&g_cVehicleMgr, LocalPlayerId, m_lParam);
     }
     VehiclePtr = CVehicleMgr::GetVehiclePtr(FirstVehicleId);
   }
-  while ( FirstVehicleId != v7 && IEntity::FlagBits(VehiclePtr, ENTITY_FLAG_ON_BOARD) );
-  if ( FirstVehicleId && VehiclePtr )
+  while ( FirstVehicleId != v7 && IEntity::FlagBits(VehiclePtr, ENTITY_FLAG_ON_BOARD) != 0 );
+  if ( FirstVehicleId != 0 && VehiclePtr != 0 )
   {
     v9 = FirstVehicleId;
     std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v9);
     CInputProcessor::RequestDialog(this);
-    if ( IEntity::FlagBits(VehiclePtr, (EntityFlag)0x4000) )
+    if ( IEntity::FlagBits(VehiclePtr, (EntityFlag)0x4000) != 0 )
     {
       IEntity::SetFlagBits(VehiclePtr, (EntityFlag)1024);
     }
@@ -1262,11 +1257,11 @@ bool  CInputProcessor::SelectNextVehicle(class CEvn_Logic * _pEvent) {
     v5 = IEntity::Y(VehiclePtr);
     CEvn_Event::CEvn_Event(&v13, 0x13u, v5, v6, 0);
     v14 = 0;
-    if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 971, "g_pEvnEngine != NULL") == 1 )
+    if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 971, "g_pEvnEngine != NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( g_pEvnEngine )
+    if ( g_pEvnEngine != 0 )
     {
       IEventEngine::SendAMessage(g_pEvnEngine, &v13);
     }
@@ -1289,13 +1284,12 @@ bool  CInputProcessor::BuildingAmount(class CEvn_Logic * a2) {
   int m_lParam; // [esp+8h] [ebp-4h]
 
   m_lParam = a2->m_lParam;
-  if ( !m_lParam || *(_DWORD *)(m_lParam + 4) != 28 )
+  if ( m_lParam != 0 && *(_DWORD *)(m_lParam + 4) == 28 )
   {
-    return 0;
+    sBuildingMenuInfo = (struct CInfoExchange *)a2->m_lParam;
+    CBuildingMgr::FillBuildingAmount(sBuildingMenuInfo, 0, this->m_bIsLocal);
+    CLogic::SetFillDialogInfos(g_pLogic, (void (__cdecl *)(struct CInfoExchange *, bool, bool))CBuildingMgr::FillBuildingAmount, sBuildingMenuInfo, this->m_bIsLocal);
   }
-  sBuildingMenuInfo = (struct CInfoExchange *)a2->m_lParam;
-  CBuildingMgr::FillBuildingAmount(sBuildingMenuInfo, 0, this->m_bIsLocal);
-  CLogic::SetFillDialogInfos(g_pLogic, (void (__cdecl *)(struct CInfoExchange *, bool, bool))CBuildingMgr::FillBuildingAmount, sBuildingMenuInfo, this->m_bIsLocal);
   return 0;
 }
 
@@ -1310,24 +1304,24 @@ bool  CInputProcessor::DestroyBuildupVehicle(class CEvn_Logic * a2) {
   CEvn_Logic v7; // [esp+10h] [ebp-30h] BYREF
   int v8; // [esp+3Ch] [ebp-4h]
 
-  if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 5348, "m_vSelection.size()!=0") == 1 )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 5348, "m_vSelection.size()!=0") == 1 )
   {
     __debugbreak();
   }
-  v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+  v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
   if ( !CMapObjectMgr::ValidEntityId(*v2) && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 5349, "g_pMapObjectMgr->ValidEntityId(m_vSelection[0])") == 1 )
   {
     __debugbreak();
   }
-  v6 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+  v6 = *std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v7, 0x13A6u, v6, 0, LocalPlayerId, 0, 0);
   v8 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 5360, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 5360, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v7);
   }
@@ -1350,14 +1344,14 @@ bool  CInputProcessor::FillTower(class CEvn_Logic * a2) {
 
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   m_lParam = a2->m_lParam;
-  v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+  v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
   CEvn_Logic::CEvn_Logic(&v6, 0x13A7u, *v2, m_lParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1772, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1772, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -1378,15 +1372,15 @@ bool  CInputProcessor::EmptyTower(class CEvn_Logic * a2) {
   int v7; // [esp+40h] [ebp-4h]
 
   m_wParam_low = LOWORD(a2->m_wParam);
-  v5 = (*(unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0) << 16) | m_wParam_low;
+  v5 = (*std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0) << 16) | m_wParam_low;
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v6, 0x13A8u, v5, a2->m_lParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1802, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1802, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -1400,7 +1394,7 @@ bool  CInputProcessor::EmptyTower(class CEvn_Logic * a2) {
 // Decompiled from char __thiscall CInputProcessor::ChooseTradeDest(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::ChooseTradeDest(class CEvn_Logic * a2) {
   
-  this->m_iViewState = 7;
+  this->m_iViewState = CHOOSE_TRADE_DEST_STATE;
   this->m_iBuildBuildingType = a2->m_lParam;
   IGfxEngine::EnableIconLayer(g_pGfxEngine, 1);
   IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 6u);
@@ -1442,27 +1436,27 @@ bool  CInputProcessor::SelectTradeDest(class CEvn_Logic * a2) {
     if ( CWorldManager::InWorld(spiralX, spiralY) )
     {
       mapObjectIdAtPos = CWorldManager::MapObjectId(spiralX, spiralY);
-      if ( mapObjectIdAtPos )
+      if ( mapObjectIdAtPos != 0 )
       {
         mapObjectAtPos = CMapObjectMgr::EntityPtr(mapObjectIdAtPos);
         if ( IEntity::ObjType(mapObjectAtPos) == BUILDING_OBJ )
         {
-          v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+          v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
           BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *v2);
-          v8 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
+          v8 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
           v3 = IEntity::ID(mapObjectAtPos);
           if ( CTradingBuildingRole::IsPossibleTradeTarget(v8, v3) )
           {
             LocalPlayerId = CPlayerManager::GetLocalPlayerId();
             v6 = IEntity::ID(mapObjectAtPos);
-            v4 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+            v4 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
             CEvn_Logic::CEvn_Logic(&v19, 0x138Du, *v4, v6, LocalPlayerId, 0, 0);
             v20 = 0;
-            if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1873, "g_pNetworkEngine != NULL") == 1 )
+            if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1873, "g_pNetworkEngine != NULL") == 1 )
             {
               __debugbreak();
             }
-            if ( g_pNetworkEngine )
+            if ( g_pNetworkEngine != 0 )
             {
               INetworkEngine::SendNetMessage(g_pNetworkEngine, &v19);
             }
@@ -1491,15 +1485,15 @@ bool  CInputProcessor::TransportGoods(class CEvn_Logic * a2) {
   int v7; // [esp+40h] [ebp-4h]
 
   m_wParam_low = LOWORD(a2->m_wParam);
-  v5 = (*(unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0) << 16) | m_wParam_low;
+  v5 = (*std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0) << 16) | m_wParam_low;
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v6, 0x138Eu, v5, a2->m_lParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1913, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1913, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -1520,15 +1514,15 @@ bool  CInputProcessor::TradeWith(class CEvn_Logic * a2) {
   int v7; // [esp+40h] [ebp-4h]
 
   m_wParam_low = LOWORD(a2->m_wParam);
-  v5 = (*(unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0) << 16) | m_wParam_low;
+  v5 = (*std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0) << 16) | m_wParam_low;
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v6, 0x138Fu, v5, a2->m_lParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1943, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1943, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -1550,14 +1544,14 @@ bool  CInputProcessor::TradeGoods(class CEvn_Logic * a2) {
 
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   m_wParam = a2->m_wParam;
-  v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+  v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
   CEvn_Logic::CEvn_Logic(&v6, 0x1390u, *v2, m_wParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1967, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1967, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -1576,7 +1570,7 @@ bool  CInputProcessor::SetTradePlayerStatus(class CEvn_Logic * a2) {
   CEvn_Logic v5; // [esp+10h] [ebp-30h] BYREF
   int v6; // [esp+3Ch] [ebp-4h]
 
-  v4 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+  v4 = *std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
   if ( !CMapObjectMgr::ValidEntityId(v4) && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1980, "g_pMapObjectMgr->ValidEntityId(iBuildingID)") == 1 )
   {
     __debugbreak();
@@ -1584,11 +1578,11 @@ bool  CInputProcessor::SetTradePlayerStatus(class CEvn_Logic * a2) {
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v5, 0x13BAu, ((unsigned __int16)v4 << 16) | LOWORD(a2->m_wParam), a2->m_lParam, LocalPlayerId, 0, 0);
   v6 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1990, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1990, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v5);
   }
@@ -1642,7 +1636,7 @@ bool  CInputProcessor::SelectSpellDest(class CEvn_Logic * a2) {
           i < std::vector<unsigned short>::size(&CInputProcessor::m_vSelection);
           ++i )
     {
-      v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, i);
+      v3 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, i);
       v16 = CMapObjectMgr::MovingEntity(*v3);
       if ( IEntity::ObjType(v16) == SETTLER_OBJ && IEntity::Type(v16) == 45 )
       {
@@ -1656,29 +1650,28 @@ bool  CInputProcessor::SelectSpellDest(class CEvn_Logic * a2) {
         }
       }
     }
-    if ( !iPriestId && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2357, "iPriestId != 0") == 1 )
+    if ( iPriestId == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2357, "iPriestId != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !iPriestId )
+    if ( iPriestId != 0 )
     {
-      return 1;
+      v7 = ((unsigned __int16)iPriestId << 16) | LOWORD(this->m_iSpellDestination);
+      v8 = Y16X16::PackXYFast(m_lParam_low, m_lParam_high);
+      LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+      CEvn_Logic::CEvn_Logic(&v17, 0x13B8u, v7, v8, LocalPlayerId, 0, 0);
+      v18 = 0;
+      if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2371, "g_pNetworkEngine != NULL") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( g_pNetworkEngine != 0 )
+      {
+        INetworkEngine::SendNetMessage(g_pNetworkEngine, &v17);
+      }
+      v18 = -1;
+      CEvn_Logic::~CEvn_Logic(&v17);
     }
-    v7 = ((unsigned __int16)iPriestId << 16) | LOWORD(this->m_iSpellDestination);
-    v8 = Y16X16::PackXYFast(m_lParam_low, m_lParam_high);
-    LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-    CEvn_Logic::CEvn_Logic(&v17, 0x13B8u, v7, v8, LocalPlayerId, 0, 0);
-    v18 = 0;
-    if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2371, "g_pNetworkEngine != NULL") == 1 )
-    {
-      __debugbreak();
-    }
-    if ( g_pNetworkEngine )
-    {
-      INetworkEngine::SendNetMessage(g_pNetworkEngine, &v17);
-    }
-    v18 = -1;
-    CEvn_Logic::~CEvn_Logic(&v17);
     return 1;
   }
 }
@@ -1723,11 +1716,11 @@ bool  CInputProcessor::InitSettlerSearch(class CEvn_Logic * a2) {
 
   CEvn_Event::CEvn_Event(&v3, 0x278u, 0, 0, 0);
   v4 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1282, "g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1282, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v3);
   }
@@ -1793,9 +1786,9 @@ bool  CInputProcessor::GoodDeliveringChanged(class CEvn_Logic * a2) {
   m_uU5 = g_cGoodDistributionInfo.m_uU5;
   UserESInMiddleOfTheScreen = CInputProcessor::GetUserESInMiddleOfTheScreen(this);
   sum = 0;
-  if ( UserESInMiddleOfTheScreen )
+  if ( UserESInMiddleOfTheScreen != 0 )
   {
-    v6 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, UserESInMiddleOfTheScreen);
+    v6 = CEcoSectorMgr::operator[](g_cESMgr, UserESInMiddleOfTheScreen);
     CGoodDistributionInfo::CGoodDistributionInfo(&v17);
     v17.m_uU5 = m_uU5;
     CEcoSector::FillGoodDistribution(v6, &v17);
@@ -1812,9 +1805,9 @@ bool  CInputProcessor::GoodDeliveringChanged(class CEvn_Logic * a2) {
     }
     v12 = 100 - v10;
     v14 = 0;
-    while ( v12 )
+    while ( v12 != 0 )
     {
-      if ( v11[v14] )
+      if ( v11[v14] != 0 )
       {
         v13[v14] += sign(v12);
         v12 -= sign(v12);
@@ -1834,11 +1827,11 @@ bool  CInputProcessor::GoodDeliveringChanged(class CEvn_Logic * a2) {
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
       CEvn_Logic::CEvn_Logic(&v18, 5028u, v4, v5, LocalPlayerId, 0, 0);
       v19 = 0;
-      if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2685, "g_pNetworkEngine != NULL") == 1 )
+      if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2685, "g_pNetworkEngine != NULL") == 1 )
       {
         __debugbreak();
       }
-      if ( g_pNetworkEngine )
+      if ( g_pNetworkEngine != 0 )
       {
         INetworkEngine::SendNetMessage(g_pNetworkEngine, &v18);
       }
@@ -1863,34 +1856,32 @@ bool  CInputProcessor::TransportPrioChanged(class CEvn_Logic * _pEvent) {
   CEvn_Logic v7; // [esp+18h] [ebp-30h] BYREF
   int v8; // [esp+44h] [ebp-4h]
 
-  if ( !_pEvent && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2581, "_pEvent != NULL") == 1 )
+  if ( _pEvent == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2581, "_pEvent != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !_pEvent )
+  if ( _pEvent != 0 )
   {
-    return 0;
+    UserESInMiddleOfTheScreen = CInputProcessor::GetUserESInMiddleOfTheScreen(this);
+    if ( UserESInMiddleOfTheScreen != 0 )
+    {
+      CEcoSectorMgr::operator[](g_cESMgr, UserESInMiddleOfTheScreen);
+      v4 = (LOWORD(_pEvent->m_wParam) << 16) | LOWORD(_pEvent->m_lParam);
+      LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+      CEvn_Logic::CEvn_Logic(&v7, 0x13A5u, v4, UserESInMiddleOfTheScreen, LocalPlayerId, 0, 0);
+      v8 = 0;
+      if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2599, "g_pNetworkEngine != NULL") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( g_pNetworkEngine != 0 )
+      {
+        INetworkEngine::SendNetMessage(g_pNetworkEngine, &v7);
+      }
+      v8 = -1;
+      CEvn_Logic::~CEvn_Logic(&v7);
+    }
   }
-  UserESInMiddleOfTheScreen = CInputProcessor::GetUserESInMiddleOfTheScreen(this);
-  if ( !UserESInMiddleOfTheScreen )
-  {
-    return 0;
-  }
-  CEcoSectorMgr::operator[](g_cESMgr, UserESInMiddleOfTheScreen);
-  v4 = (LOWORD(_pEvent->m_wParam) << 16) | LOWORD(_pEvent->m_lParam);
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  CEvn_Logic::CEvn_Logic(&v7, 0x13A5u, v4, UserESInMiddleOfTheScreen, LocalPlayerId, 0, 0);
-  v8 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2599, "g_pNetworkEngine != NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( g_pNetworkEngine )
-  {
-    INetworkEngine::SendNetMessage(g_pNetworkEngine, &v7);
-  }
-  v8 = -1;
-  CEvn_Logic::~CEvn_Logic(&v7);
   return 0;
 }
 
@@ -1910,11 +1901,11 @@ bool  CInputProcessor::UnitProduction(class CEvn_Logic * a2) {
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v6, 0x13B7u, v5, a2->m_lParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1516, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1516, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -1939,11 +1930,11 @@ bool  CInputProcessor::UrgentProduction(class CEvn_Logic * a2) {
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v6, 0x13A9u, v5, a2->m_lParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1484, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1484, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -1968,11 +1959,11 @@ bool  CInputProcessor::WeaponPercent(class CEvn_Logic * a2) {
   v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
   CEvn_Logic::CEvn_Logic(&v6, 0x13AAu, *v2, m_wParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1428, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1428, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -1997,11 +1988,11 @@ bool  CInputProcessor::WeaponAutoproduction(class CEvn_Logic * a2) {
   v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
   CEvn_Logic::CEvn_Logic(&v6, 0x13ABu, *v2, m_lParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1454, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1454, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -2026,11 +2017,11 @@ bool  CInputProcessor::StorageGoodSwitch(class CEvn_Logic * a2) {
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v6, 0x13B4u, v5, a2->m_lParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1404, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1404, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -2055,11 +2046,11 @@ bool  CInputProcessor::VehicleProduction(class CEvn_Logic * a2) {
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v6, 0x13B0u, v5, a2->m_lParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1373, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1373, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -2078,17 +2069,17 @@ bool  CInputProcessor::GotoVehicleGroupMenu(class CEvn_Logic * a2) {
 
   CEvn_Event::CEvn_Event(&v4, 0x260u, 0, 0, 0);
   v5 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3578, "g_pEvnEngine!= NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3578, "g_pEvnEngine!= NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v4);
   }
   CLogic::SetFillDialogInfos(g_pLogic, 0, 0, 0);
-  CVehicleMgr::FillVehicleGroupMenu((struct CInfoExchange *)&g_cVehicleInfo, 0);
-  CLogic::SetFillDialogInfos(g_pLogic, (void (__cdecl *)(struct CInfoExchange *, bool, bool))CVehicleMgr::FillVehicleGroupMenu, (struct CInfoExchange *)&g_cVehicleInfo, this->m_bIsLocal);
+  CVehicleMgr::FillVehicleGroupMenu(&g_cVehicleInfo, 0);
+  CLogic::SetFillDialogInfos(g_pLogic, (void (__cdecl *)(struct CInfoExchange *, bool, bool))CVehicleMgr::FillVehicleGroupMenu, &g_cVehicleInfo, this->m_bIsLocal);
   v5 = -1;
   CEvn_Event::~CEvn_Event(&v4);
   return 0;
@@ -2116,7 +2107,7 @@ bool  CInputProcessor::SpecialistProduction(class CEvn_Logic * a2) {
   int v7; // [esp+40h] [ebp-4h]
 
   UserESInMiddleOfTheScreen = CInputProcessor::GetUserESInMiddleOfTheScreen(this);
-  if ( !UserESInMiddleOfTheScreen )
+  if ( UserESInMiddleOfTheScreen == 0 )
   {
     return 0;
   }
@@ -2124,11 +2115,11 @@ bool  CInputProcessor::SpecialistProduction(class CEvn_Logic * a2) {
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v6, 0x13AFu, v4, a2->m_lParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1549, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 1549, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -2177,7 +2168,7 @@ bool  CInputProcessor::PrepareBoxSelection(class CEvn_Logic * a2) {
   this->m_iSelectionMode = 1;
   this->m_iSelectionLocalPlayerId = CPlayerManager::GetLocalPlayerId();
   SelectionTypeOfCurrentSelection = CInputProcessor::GetSelectionTypeOfCurrentSelection(this);
-  if ( v16 && SelectionTypeOfCurrentSelection )
+  if ( v16 && SelectionTypeOfCurrentSelection != 0 )
   {
     this->m_iSelectionType = SelectionTypeOfCurrentSelection;
     this->m_iSelectionStrict = 1;
@@ -2188,15 +2179,14 @@ bool  CInputProcessor::PrepareBoxSelection(class CEvn_Logic * a2) {
     this->m_iSelectionType = 0;
     this->m_iSelectionStrict = 0;
   }
-  if ( !g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
-    return 1;
+    v7 = CEvn_Event::CEvn_Event(&v18, 0x259u, 0, 0, 0);
+    v19 = 0;
+    IEventEngine::SendAMessage(g_pEvnEngine, v7);
+    v19 = -1;
+    CEvn_Event::~CEvn_Event(&v18);
   }
-  v7 = CEvn_Event::CEvn_Event(&v18, 0x259u, 0, 0, 0);
-  v19 = 0;
-  IEventEngine::SendAMessage(g_pEvnEngine, v7);
-  v19 = -1;
-  CEvn_Event::~CEvn_Event(&v18);
   return 1;
 }
 
@@ -2239,7 +2229,7 @@ bool  CInputProcessor::DotSelection(class CEvn_Logic * a2) {
   {
     entity = CMapObjectMgr::EntityPtr(foundEntityId);
   }
-  if ( entity )
+  if ( entity != 0 )
   {
     CLogic::SetFillDialogInfos(g_pLogic, 0, 0, 0);
     v22 = IEntity::FlagBits(entity, (EntityFlag)0x4000) != 0;
@@ -2248,7 +2238,7 @@ bool  CInputProcessor::DotSelection(class CEvn_Logic * a2) {
     if ( appendToSelection && !v22 )
     {
       EntitySelectionType = 0;
-      if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+      if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
       {
         v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
         v3 = CMapObjectMgr::EntityPtr(*v2);
@@ -2256,19 +2246,19 @@ bool  CInputProcessor::DotSelection(class CEvn_Logic * a2) {
       }
       v4 = CMapObjectMgr::EntityPtr(foundEntityId);
       v10 = CInputProcessor::GetEntitySelectionType(v4);
-      v13 = !EntitySelectionType || EntitySelectionType == 0x10000 || EntitySelectionType != v10;
+      v13 = EntitySelectionType == 0 || EntitySelectionType == 0x10000 || EntitySelectionType != v10;
       v25 = v13;
-      if ( !v13 && IEntity::FlagBits(entity, ENTITY_FLAG_Selected) )
+      if ( !v13 && IEntity::FlagBits(entity, ENTITY_FLAG_Selected) != 0 )
       {
         v21 = 0;
         CInputProcessor::DeSelectEntity(this, foundEntityId);
       }
     }
-    if ( v25 )
+    if ( v25 != 0 )
     {
       CInputProcessor::DeSelectAll(this);
     }
-    if ( v21 && (unsigned int)std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) < 0x64 )
+    if ( v21 != 0 && (unsigned int)std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) < 0x64 )
     {
       v15 = foundEntityId;
       std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v15);
@@ -2296,7 +2286,7 @@ bool  CInputProcessor::DotSelection(class CEvn_Logic * a2) {
     CLogic::SetFillDialogInfos(g_pLogic, 0, 0, 0);
     CInputProcessor::DeSelectAll(this);
     CFsm::GenerateEvent(this->m_pFSM, 401, 0);
-    if ( g_pEvnEngine )
+    if ( g_pEvnEngine != 0 )
     {
       v8 = CEvn_Event::CEvn_Event(&v26, 603u, 0, 0, 0);
       v27 = 0;
@@ -2323,10 +2313,10 @@ bool  CInputProcessor::SelectTypeInSurrounding(class CEvn_Logic * a2) {
   x = LOWORD(a2->m_lParam);
   y = HIWORD(a2->m_lParam);
   CInputProcessor::DeSelectAll(this);
-  if ( !this->unk_C )
+  if ( this->unk_C == 0 )
   {
     v8 = CInputProcessor::SelectOne(this, x, y);
-    if ( v8 )
+    if ( v8 != 0 )
     {
       this->m_iSelectionType = CInputProcessor::GetEntitySelectionType(v8);
       this->m_iSelectionStrict = 2;
@@ -2360,7 +2350,7 @@ bool  CInputProcessor::SelectGroup(class CEvn_Logic * _pEvent) {
   __int16 v13; // [esp+30h] [ebp-4h] BYREF
   bool v14; // [esp+33h] [ebp-1h]
 
-  if ( !_pEvent && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3203, "_pEvent!=0") == 1 )
+  if ( _pEvent == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3203, "_pEvent!=0") == 1 )
   {
     __debugbreak();
   }
@@ -2372,36 +2362,35 @@ bool  CInputProcessor::SelectGroup(class CEvn_Logic * _pEvent) {
   }
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   v8 = g_pGroupMgr->GetGroupSize(g_pGroupMgr, LocalPlayerId, m_wParam);
-  if ( v8 <= 0 )
+  if ( v8 > 0 )
   {
-    return 0;
-  }
-  this->unk_18 = m_wParam;
-  v7 = g_pGroupMgr->GetGroupEntityIds(g_pGroupMgr, LocalPlayerId, m_wParam);
-  v14 = 1;
-  if ( m_lParam )
-  {
-    SelectionTypeOfCurrentSelection = CInputProcessor::GetSelectionTypeOfCurrentSelection(this);
-    v14 = SelectionTypeOfCurrentSelection != CInputProcessor::GetEntitySelectionType(*v7);
-  }
-  if ( v14 )
-  {
-    CInputProcessor::DeSelectAll(this);
-  }
-  for ( i = 0;
-        i < v8 && (unsigned int)std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) < 0x64;
-        ++i )
-  {
-    v5 = v7[i];
-    v6 = CMapObjectMgr::Entity(v5);
-    if ( IEntity::FlagBits(v6, ENTITY_FLAG_Selectable) )
+    this->unk_18 = m_wParam;
+    v7 = g_pGroupMgr->GetGroupEntityIds(g_pGroupMgr, LocalPlayerId, m_wParam);
+    v14 = 1;
+    if ( m_lParam != 0 )
     {
-      IEntity::SetFlagBits(v6, ENTITY_FLAG_Selected);
-      v13 = v5;
-      std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v13);
+      SelectionTypeOfCurrentSelection = CInputProcessor::GetSelectionTypeOfCurrentSelection(this);
+      v14 = SelectionTypeOfCurrentSelection != CInputProcessor::GetEntitySelectionType(*v7);
     }
+    if ( v14 )
+    {
+      CInputProcessor::DeSelectAll(this);
+    }
+    for ( i = 0;
+          i < v8 && (unsigned int)std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) < 0x64;
+          ++i )
+    {
+      v5 = v7[i];
+      v6 = CMapObjectMgr::Entity(v5);
+      if ( IEntity::FlagBits(v6, ENTITY_FLAG_Selectable) != 0 )
+      {
+        IEntity::SetFlagBits(v6, ENTITY_FLAG_Selected);
+        v13 = v5;
+        std::vector<unsigned short>::push_back(&CInputProcessor::m_vSelection, &v13);
+      }
+    }
+    CInputProcessor::RequestDialog(this);
   }
-  CInputProcessor::RequestDialog(this);
   return 0;
 }
 
@@ -2458,11 +2447,11 @@ bool  CInputProcessor::DefineGroup(class CEvn_Logic * a2) {
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v8, 0x13B1u, iGroupId, 0, LocalPlayerId, (uint)v4, (unsigned __int8)(2 * iSelectionSize));
   v9 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3131, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3131, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v8);
   }
@@ -2492,48 +2481,46 @@ bool  CInputProcessor::FocusGroup(class CEvn_Logic * a2) {
   {
     __debugbreak();
   }
-  if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
-    return 0;
-  }
-  v9 = 0;
-  v8 = 0;
-  v10 = 0;
-  for ( i = 0;
-        i < std::vector<unsigned short>::size(&CInputProcessor::m_vSelection);
-        ++i )
-  {
-    v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, i);
-    v3 = CMapObjectMgr::EntityPtr(*v2);
-    if ( IEntity::ObjType(v3) != BUILDING_OBJ )
+    v9 = 0;
+    v8 = 0;
+    v10 = 0;
+    for ( i = 0;
+          i < std::vector<unsigned short>::size(&CInputProcessor::m_vSelection);
+          ++i )
     {
-      v4 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, i);
-      v7 = CMapObjectMgr::MovingEntity(*v4);
-      v5 = IEntity::OwnerId(v7);
-      if ( v5 == CPlayerManager::GetLocalPlayerId() )
+      v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, i);
+      v3 = CMapObjectMgr::EntityPtr(*v2);
+      if ( IEntity::ObjType(v3) != BUILDING_OBJ )
       {
-        v9 += IEntity::X(v7);
-        v8 += IEntity::Y(v7);
-        ++v10;
+        v4 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, i);
+        v7 = CMapObjectMgr::MovingEntity(*v4);
+        v5 = IEntity::OwnerId(v7);
+        if ( v5 == CPlayerManager::GetLocalPlayerId() )
+        {
+          v9 += IEntity::X(v7);
+          v8 += IEntity::Y(v7);
+          ++v10;
+        }
       }
     }
+    if ( v10 != 0 )
+    {
+      CEvn_Event::CEvn_Event(&v12, 0x13u, v8 / v10, v9 / v10, 0);
+      v13 = 0;
+      if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3184, "g_pEvnEngine != NULL") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( g_pEvnEngine != 0 )
+      {
+        IEventEngine::SendAMessage(g_pEvnEngine, &v12);
+      }
+      v13 = -1;
+      CEvn_Event::~CEvn_Event(&v12);
+    }
   }
-  if ( !v10 )
-  {
-    return 0;
-  }
-  CEvn_Event::CEvn_Event(&v12, 0x13u, v8 / v10, v9 / v10, 0);
-  v13 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3184, "g_pEvnEngine != NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( g_pEvnEngine )
-  {
-    IEventEngine::SendAMessage(g_pEvnEngine, &v12);
-  }
-  v13 = -1;
-  CEvn_Event::~CEvn_Event(&v12);
   return 0;
 }
 
@@ -2578,7 +2565,7 @@ bool  CInputProcessor::SendTo(class CEvn_Logic * a2) {
   v8 = v11 | v12 | ((a2->m_wParam & 8) != 0);
   if ( m_lParam >= 0 )
   {
-    if ( !m_lParam || !CWorldManager::InWorldPackedXY(m_lParam) )
+    if ( m_lParam == 0 || !CWorldManager::InWorldPackedXY(m_lParam) )
     {
       return 1;
     }
@@ -2588,41 +2575,40 @@ bool  CInputProcessor::SendTo(class CEvn_Logic * a2) {
     v8 = 8;
   }
   iSelectionSize = std::vector<unsigned short>::size(&CInputProcessor::m_vSelection);
-  if ( iSelectionSize <= 0 )
+  if ( iSelectionSize > 0 )
   {
-    return 1;
+    v3 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    v4 = CMapObjectMgr::EntityPtr(*v3);
+    if ( IEntity::ObjType(v4) == BUILDING_OBJ || (v5 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0), v6 = CMapObjectMgr::EntityPtr(*v5), IEntity::FlagBits(v6, (EntityFlag)0x4000) != 0) )
+    {
+      CInputProcessor::Clear(this);
+      return 0;
+    }
+    if ( iSelectionSize > MAX_SELECTED_ENTITIES && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3352, "iSelectionSize <= MAX_SELECTED_ENTITIES") == 1 )
+    {
+      __debugbreak();
+    }
+    if ( iSelectionSize > MAX_SELECTED_ENTITIES )
+    {
+      iSelectionSize = MAX_SELECTED_ENTITIES;
+    }
+    v9 = operator new[](2 * iSelectionSize);
+    for ( i = 0;
+          i < iSelectionSize;
+          ++i )
+    {
+      v9[i] = *std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, i);
+    }
+    if ( g_pNetworkEngine != 0 )
+    {
+      CEvn_Logic::CEvn_Logic(&v16, 0x1396u, m_lParam, v8, LocalPlayerId, (uint)v9, 2 * iSelectionSize);
+      v17 = 0;
+      INetworkEngine::SendNetMessage(g_pNetworkEngine, &v16);
+      v17 = -1;
+      CEvn_Logic::~CEvn_Logic(&v16);
+    }
+    CSoundManager::PlaySoundFX(g_pSoundManager, 10);
   }
-  v3 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  v4 = CMapObjectMgr::EntityPtr(*v3);
-  if ( IEntity::ObjType(v4) == BUILDING_OBJ || (v5 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0), v6 = CMapObjectMgr::EntityPtr(*v5), IEntity::FlagBits(v6, (EntityFlag)0x4000)) )
-  {
-    CInputProcessor::Clear(this);
-    return 0;
-  }
-  if ( iSelectionSize > MAX_SELECTED_ENTITIES && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3352, "iSelectionSize <= MAX_SELECTED_ENTITIES") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( iSelectionSize > MAX_SELECTED_ENTITIES )
-  {
-    iSelectionSize = MAX_SELECTED_ENTITIES;
-  }
-  v9 = operator new[](2 * iSelectionSize);
-  for ( i = 0;
-        i < iSelectionSize;
-        ++i )
-  {
-    v9[i] = *std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, i);
-  }
-  if ( g_pNetworkEngine )
-  {
-    CEvn_Logic::CEvn_Logic(&v16, 0x1396u, m_lParam, v8, LocalPlayerId, (uint)v9, 2 * iSelectionSize);
-    v17 = 0;
-    INetworkEngine::SendNetMessage(g_pNetworkEngine, &v16);
-    v17 = -1;
-    CEvn_Logic::~CEvn_Logic(&v16);
-  }
-  CSoundManager::PlaySoundFX(g_pSoundManager, 10);
   return 1;
 }
 
@@ -2648,7 +2634,7 @@ bool  CInputProcessor::StandGround(class CEvn_Logic * a2) {
 // Decompiled from char __thiscall CInputProcessor::ChooseSecondPatrolPos(CInputProcessor *this, struct CEvn_Logic *a2)
 bool  CInputProcessor::ChooseSecondPatrolPos(class CEvn_Logic * a2) {
   
-  this->m_iViewState = 9;
+  this->m_iViewState = SET_SECOND_PATROL_POS_STATE;
   IGfxEngine::EnableIconLayer(g_pGfxEngine, 1);
   return 1;
 }
@@ -2698,57 +2684,56 @@ bool  CInputProcessor::InjuredOut(class CEvn_Logic * a2) {
 
   m_iOwner = a2->m_iOwner;
   v28 = a2->m_wParam != 0;
-  if ( m_iOwner != CPlayerManager::GetLocalPlayerId() || !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( m_iOwner == CPlayerManager::GetLocalPlayerId() && std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
-    return 0;
-  }
-  std::vector<unsigned short>::begin(v6);
-  v29 = 0;
-  while ( 1 )
-  {
-    v19 = (std::_Iterator_base12 *)std::vector<unsigned short>::end(v5);
-    v18 = v19;
-    LOBYTE(v29) = 1;
-    v25 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator!=(v19);
-    LOBYTE(v29) = 0;
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v5);
-    if ( !v25 )
+    std::vector<unsigned short>::begin((int)v6);
+    v29 = 0;
+    while ( 1 )
     {
-      break;
-    }
-    v26 = 0;
-    v17 = *(unsigned __int16 *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator*(v6);
-    SettlerPtr = CSettlerMgr::GetSettlerPtr((struct CSettlerMgr *)g_cSettlerMgr, v17);
-    if ( SettlerPtr )
-    {
-      v15 = IEntity::Race(SettlerPtr);
-      v16 = IEntity::Type(SettlerPtr);
-      SettlerInfo = CSettlerMgr::GetSettlerInfo(v15, v16);
-      iMaxHealth = SettlerInfo->m_iMaxLifePoints;
-      iHitpoints = IEntity::Hitpoints(SettlerPtr);
-      iIsInjuredFlag = iHitpoints < iMaxHealth >> 1;
-      v21 = iIsInjuredFlag == v28;
-      v26 = iIsInjuredFlag == v28;
-    }
-    if ( v26 )
-    {
-      IEntity::ClearFlagBits(SettlerPtr, (EntityFlag)0x600);
-      v8 = v3;
-      v7 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>((struct std::_Iterator_base12 *)v6);
-      v11 = std::vector<unsigned short>::erase(v4, v3[0], v3[1], v3[2]);
-      v10 = v11;
-      LOBYTE(v29) = 2;
-      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator=(v11);
+      v19 = (std::_Iterator_base12 *)std::vector<unsigned short>::end((int)v5);
+      v18 = v19;
+      LOBYTE(v29) = 1;
+      v25 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator!=(v19);
       LOBYTE(v29) = 0;
-      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v4);
+      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v5);
+      if ( v25 == 0 )
+      {
+        break;
+      }
+      v26 = 0;
+      v17 = *(unsigned __int16 *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator*(v6);
+      SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, v17);
+      if ( SettlerPtr != 0 )
+      {
+        v15 = IEntity::Race(SettlerPtr);
+        v16 = IEntity::Type(SettlerPtr);
+        SettlerInfo = CSettlerMgr::GetSettlerInfo(v15, v16);
+        iMaxHealth = SettlerInfo->m_iMaxLifePoints;
+        iHitpoints = IEntity::Hitpoints(SettlerPtr);
+        iIsInjuredFlag = iHitpoints < iMaxHealth >> 1;
+        v21 = iIsInjuredFlag == v28;
+        v26 = iIsInjuredFlag == v28;
+      }
+      if ( v26 )
+      {
+        IEntity::ClearFlagBits(SettlerPtr, (EntityFlag)0x600);
+        v8 = v3;
+        v7 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>((struct std::_Iterator_base12 *)v6);
+        v11 = std::vector<unsigned short>::erase((int)v4, v3[0], v3[1], v3[2]);
+        v10 = v11;
+        LOBYTE(v29) = 2;
+        std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator=(v11);
+        LOBYTE(v29) = 0;
+        std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v4);
+      }
+      else
+      {
+        std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator++(v6);
+      }
     }
-    else
-    {
-      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator++(v6);
-    }
+    v29 = -1;
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v6);
   }
-  v29 = -1;
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v6);
   return 0;
 }
 
@@ -2783,11 +2768,11 @@ bool  CInputProcessor::MorphToCarrier(class CEvn_Logic * a2) {
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v7, 0x139Du, 0, 0, LocalPlayerId, (uint)v4, (unsigned __int8)(2 * v5));
   v8 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3557, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3557, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v7);
   }
@@ -2849,7 +2834,7 @@ bool  CInputProcessor::SearchUnit(class CEvn_Logic * a2) {
   int v49; // [esp+94h] [ebp-4h]
 
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  if ( !CPlayerManager::IsAlive(LocalPlayerId) )
+  if ( CPlayerManager::IsAlive(LocalPlayerId) == 0 )
   {
     return 0;
   }
@@ -2859,7 +2844,7 @@ bool  CInputProcessor::SearchUnit(class CEvn_Logic * a2) {
     __debugbreak();
   }
   m_lParam = a2->m_lParam;
-  if ( m_lParam )
+  if ( m_lParam != 0 )
   {
     if ( m_lParam == 1 )
     {
@@ -2946,7 +2931,7 @@ CInputProcessor__SearchUnit___def_185AC66:
           }
         }
       }
-      if ( v46 )
+      if ( v46 != 0 )
       {
         v28 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
         v34 = CMapObjectMgr::EntityPtr(*v28);
@@ -2979,31 +2964,31 @@ CInputProcessor__SearchUnit___def_185AC66:
     }
     do
     {
-      if ( !FirstSettlerId )
+      if ( FirstSettlerId == 0 )
       {
         v5 = CPlayerManager::GetLocalPlayerId();
-        FirstSettlerId = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, v5, iSettlerType);
+        FirstSettlerId = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, v5, iSettlerType);
       }
-      if ( !FirstSettlerId && (iSettlerType == SETTLER_SWORDSMAN_01 || iSettlerType == SETTLER_SWORDSMAN_02 || iSettlerType == SETTLER_BOWMAN_01 || iSettlerType == SETTLER_BOWMAN_02 || iSettlerType == SETTLER_MEDIC_01 || iSettlerType == SETTLER_MEDIC_02 || iSettlerType == SETTLER_AXEWARRIOR_01 || iSettlerType == SETTLER_AXEWARRIOR_02 || iSettlerType == SETTLER_BLOWGUNWARRIOR_01 || iSettlerType == SETTLER_BLOWGUNWARRIOR_02) )
+      if ( FirstSettlerId == 0 && (iSettlerType == SETTLER_SWORDSMAN_01 || iSettlerType == SETTLER_SWORDSMAN_02 || iSettlerType == SETTLER_BOWMAN_01 || iSettlerType == SETTLER_BOWMAN_02 || iSettlerType == SETTLER_MEDIC_01 || iSettlerType == SETTLER_MEDIC_02 || iSettlerType == SETTLER_AXEWARRIOR_01 || iSettlerType == SETTLER_AXEWARRIOR_02 || iSettlerType == SETTLER_BLOWGUNWARRIOR_01 || iSettlerType == SETTLER_BLOWGUNWARRIOR_02) )
       {
         ++iSettlerType;
       }
-      if ( !FirstSettlerId )
+      if ( FirstSettlerId == 0 )
       {
         v6 = CPlayerManager::GetLocalPlayerId();
-        FirstSettlerId = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, v6, iSettlerType);
+        FirstSettlerId = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, v6, iSettlerType);
       }
     }
-    while ( !FirstSettlerId && (iSettlerType == SETTLER_SWORDSMAN_01 || iSettlerType == SETTLER_SWORDSMAN_02 || iSettlerType == SETTLER_BOWMAN_01 || iSettlerType == SETTLER_BOWMAN_02 || iSettlerType == SETTLER_MEDIC_01 || iSettlerType == SETTLER_MEDIC_02 || iSettlerType == SETTLER_AXEWARRIOR_01 || iSettlerType == SETTLER_AXEWARRIOR_02 || iSettlerType == SETTLER_BLOWGUNWARRIOR_01 || iSettlerType == SETTLER_BLOWGUNWARRIOR_02) );
+    while ( FirstSettlerId == 0 && (iSettlerType == SETTLER_SWORDSMAN_01 || iSettlerType == SETTLER_SWORDSMAN_02 || iSettlerType == SETTLER_BOWMAN_01 || iSettlerType == SETTLER_BOWMAN_02 || iSettlerType == SETTLER_MEDIC_01 || iSettlerType == SETTLER_MEDIC_02 || iSettlerType == SETTLER_AXEWARRIOR_01 || iSettlerType == SETTLER_AXEWARRIOR_02 || iSettlerType == SETTLER_BLOWGUNWARRIOR_01 || iSettlerType == SETTLER_BLOWGUNWARRIOR_02) );
     if ( FirstSettlerId > 0 )
     {
       CInputProcessor::DeSelectAll(this);
-      pSettler = CSettlerMgr::GetSettlerPtr((struct CSettlerMgr *)g_cSettlerMgr, FirstSettlerId);
-      if ( !pSettler && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2908, "pSettler != NULL") == 1 )
+      pSettler = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, FirstSettlerId);
+      if ( pSettler == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2908, "pSettler != NULL") == 1 )
       {
         __debugbreak();
       }
-      if ( pSettler )
+      if ( pSettler != 0 )
       {
         IEntity::SetFlagBits(pSettler, ENTITY_FLAG_Selected);
         v39 = FirstSettlerId;
@@ -3036,7 +3021,7 @@ bool  CInputProcessor::UnitReservation(class CEvn_Logic * a2) {
   int v7; // [esp+40h] [ebp-4h]
 
   UserESInMiddleOfTheScreen = CInputProcessor::GetUserESInMiddleOfTheScreen(this);
-  if ( !UserESInMiddleOfTheScreen )
+  if ( UserESInMiddleOfTheScreen == 0 )
   {
     return 0;
   }
@@ -3044,11 +3029,11 @@ bool  CInputProcessor::UnitReservation(class CEvn_Logic * a2) {
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   CEvn_Logic::CEvn_Logic(&v6, 0x13A3u, v4, a2->m_lParam, LocalPlayerId, 0, 0);
   v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2767, "g_pNetworkEngine != NULL") == 1 )
+  if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2767, "g_pNetworkEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
   }
@@ -3223,28 +3208,27 @@ bool  CInputProcessor::Morph2FoundationCart(class CEvn_Logic * a2) {
   CEvn_Logic v6; // [esp+Ch] [ebp-30h] BYREF
   int v7; // [esp+38h] [ebp-4h]
 
-  if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
-    return 0;
-  }
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CEvn_Logic::CEvn_Logic(&v6, 0x1394u, *v2, 0, LocalPlayerId, 0, 0);
-  v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3699, "g_pNetworkEngine != NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( g_pNetworkEngine )
-  {
-    INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
+    LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+    v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    CEvn_Logic::CEvn_Logic(&v6, 0x1394u, *v2, 0, LocalPlayerId, 0, 0);
+    v7 = 0;
+    if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3699, "g_pNetworkEngine != NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    if ( g_pNetworkEngine != 0 )
+    {
+      INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
+      v7 = -1;
+      CEvn_Logic::~CEvn_Logic(&v6);
+      return 1;
+    }
+    CInputProcessor::Clear(this);
     v7 = -1;
     CEvn_Logic::~CEvn_Logic(&v6);
-    return 1;
   }
-  CInputProcessor::Clear(this);
-  v7 = -1;
-  CEvn_Logic::~CEvn_Logic(&v6);
   return 0;
 }
 
@@ -3258,25 +3242,24 @@ bool  CInputProcessor::CreateSettlement(class CEvn_Logic * a2) {
   CEvn_Logic v6; // [esp+8h] [ebp-30h] BYREF
   int v7; // [esp+34h] [ebp-4h]
 
-  if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
-    return 1;
+    LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+    v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    CEvn_Logic::CEvn_Logic(&v6, 0x1393u, *v2, 0, LocalPlayerId, 0, 0);
+    v7 = 0;
+    if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3757, "g_pNetworkEngine != NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    if ( g_pNetworkEngine != 0 )
+    {
+      INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
+    }
+    CInputProcessor::Clear(this);
+    v7 = -1;
+    CEvn_Logic::~CEvn_Logic(&v6);
   }
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CEvn_Logic::CEvn_Logic(&v6, 0x1393u, *v2, 0, LocalPlayerId, 0, 0);
-  v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3757, "g_pNetworkEngine != NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( g_pNetworkEngine )
-  {
-    INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
-  }
-  CInputProcessor::Clear(this);
-  v7 = -1;
-  CEvn_Logic::~CEvn_Logic(&v6);
   return 1;
 }
 
@@ -3290,29 +3273,28 @@ bool  CInputProcessor::Morph2Cart(class CEvn_Logic * a2) {
   CEvn_Logic v6; // [esp+Ch] [ebp-30h] BYREF
   int v7; // [esp+38h] [ebp-4h]
 
-  if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
-    return 0;
-  }
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-  CEvn_Logic::CEvn_Logic(&v6, 0x1395u, *v2, 0, LocalPlayerId, 0, 0);
-  v7 = 0;
-  if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3723, "g_pNetworkEngine != NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( g_pNetworkEngine )
-  {
-    INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
+    LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+    v2 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
+    CEvn_Logic::CEvn_Logic(&v6, 0x1395u, *v2, 0, LocalPlayerId, 0, 0);
+    v7 = 0;
+    if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3723, "g_pNetworkEngine != NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    if ( g_pNetworkEngine != 0 )
+    {
+      INetworkEngine::SendNetMessage(g_pNetworkEngine, &v6);
+      v7 = -1;
+      CEvn_Logic::~CEvn_Logic(&v6);
+      return 1;
+    }
+    CInputProcessor::DeSelectAll(this);
+    CFsm::GenerateEvent(this->m_pFSM, 401, 0);
     v7 = -1;
     CEvn_Logic::~CEvn_Logic(&v6);
-    return 1;
   }
-  CInputProcessor::DeSelectAll(this);
-  CFsm::GenerateEvent(this->m_pFSM, 401, 0);
-  v7 = -1;
-  CEvn_Logic::~CEvn_Logic(&v6);
   return 0;
 }
 
@@ -3334,52 +3316,51 @@ bool  CInputProcessor::VehicleUnload(class CEvn_Logic * a2) {
   CEvn_Logic v14; // [esp+44h] [ebp-30h] BYREF
   int v15; // [esp+70h] [ebp-4h]
 
-  if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3777, "m_vSelection.size() > 0") == 1 )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3777, "m_vSelection.size() > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
-    return 1;
-  }
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v7);
-  v15 = 0;
-  v12 = std::vector<unsigned short>::begin(v5);
-  v11 = v12;
-  LOBYTE(v15) = 1;
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator=(v12);
-  LOBYTE(v15) = 0;
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v5);
-  while ( 1 )
-  {
-    v10 = (std::_Iterator_base12 *)std::vector<unsigned short>::end(v4);
-    v9 = v10;
-    LOBYTE(v15) = 2;
-    v13 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator!=(v10);
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v7);
+    v15 = 0;
+    v12 = std::vector<unsigned short>::begin((int)v5);
+    v11 = v12;
+    LOBYTE(v15) = 1;
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator=(v12);
     LOBYTE(v15) = 0;
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v4);
-    if ( !v13 )
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v5);
+    while ( 1 )
     {
-      break;
+      v10 = (std::_Iterator_base12 *)std::vector<unsigned short>::end((int)v4);
+      v9 = v10;
+      LOBYTE(v15) = 2;
+      v13 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator!=(v10);
+      LOBYTE(v15) = 0;
+      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v4);
+      if ( v13 == 0 )
+      {
+        break;
+      }
+      v8 = *(unsigned __int16 *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator*(v7);
+      LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+      CEvn_Logic::CEvn_Logic(&v14, 0x1391u, v8, 0, LocalPlayerId, 0, 0);
+      LOBYTE(v15) = 3;
+      if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3794, "g_pNetworkEngine != NULL") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( g_pNetworkEngine != 0 )
+      {
+        INetworkEngine::SendNetMessage(g_pNetworkEngine, &v14);
+      }
+      LOBYTE(v15) = 0;
+      CEvn_Logic::~CEvn_Logic(&v14);
+      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator++(v7);
     }
-    v8 = *(unsigned __int16 *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator*(v7);
-    LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-    CEvn_Logic::CEvn_Logic(&v14, 0x1391u, v8, 0, LocalPlayerId, 0, 0);
-    LOBYTE(v15) = 3;
-    if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3794, "g_pNetworkEngine != NULL") == 1 )
-    {
-      __debugbreak();
-    }
-    if ( g_pNetworkEngine )
-    {
-      INetworkEngine::SendNetMessage(g_pNetworkEngine, &v14);
-    }
-    LOBYTE(v15) = 0;
-    CEvn_Logic::~CEvn_Logic(&v14);
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator++(v7);
+    v15 = -1;
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v7);
   }
-  v15 = -1;
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v7);
   return 1;
 }
 
@@ -3401,52 +3382,51 @@ bool  CInputProcessor::CatapultLoad(class CEvn_Logic * a2) {
   CEvn_Logic v14; // [esp+44h] [ebp-30h] BYREF
   int v15; // [esp+70h] [ebp-4h]
 
-  if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3806, "m_vSelection.size() > 0") == 1 )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3806, "m_vSelection.size() > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
-    return 1;
-  }
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v7);
-  v15 = 0;
-  v12 = std::vector<unsigned short>::begin(v5);
-  v11 = v12;
-  LOBYTE(v15) = 1;
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator=(v12);
-  LOBYTE(v15) = 0;
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v5);
-  while ( 1 )
-  {
-    v10 = (std::_Iterator_base12 *)std::vector<unsigned short>::end(v4);
-    v9 = v10;
-    LOBYTE(v15) = 2;
-    v13 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator!=(v10);
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v7);
+    v15 = 0;
+    v12 = std::vector<unsigned short>::begin((int)v5);
+    v11 = v12;
+    LOBYTE(v15) = 1;
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator=(v12);
     LOBYTE(v15) = 0;
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v4);
-    if ( !v13 )
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v5);
+    while ( 1 )
     {
-      break;
+      v10 = (std::_Iterator_base12 *)std::vector<unsigned short>::end((int)v4);
+      v9 = v10;
+      LOBYTE(v15) = 2;
+      v13 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator!=(v10);
+      LOBYTE(v15) = 0;
+      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v4);
+      if ( v13 == 0 )
+      {
+        break;
+      }
+      v8 = *(unsigned __int16 *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator*(v7);
+      LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+      CEvn_Logic::CEvn_Logic(&v14, 0x1392u, v8, 0, LocalPlayerId, 0, 0);
+      LOBYTE(v15) = 3;
+      if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3822, "g_pNetworkEngine != NULL") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( g_pNetworkEngine != 0 )
+      {
+        INetworkEngine::SendNetMessage(g_pNetworkEngine, &v14);
+      }
+      LOBYTE(v15) = 0;
+      CEvn_Logic::~CEvn_Logic(&v14);
+      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator++(v7);
     }
-    v8 = *(unsigned __int16 *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator*(v7);
-    LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-    CEvn_Logic::CEvn_Logic(&v14, 0x1392u, v8, 0, LocalPlayerId, 0, 0);
-    LOBYTE(v15) = 3;
-    if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 3822, "g_pNetworkEngine != NULL") == 1 )
-    {
-      __debugbreak();
-    }
-    if ( g_pNetworkEngine )
-    {
-      INetworkEngine::SendNetMessage(g_pNetworkEngine, &v14);
-    }
-    LOBYTE(v15) = 0;
-    CEvn_Logic::~CEvn_Logic(&v14);
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::operator++(v7);
+    v15 = -1;
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v7);
   }
-  v15 = -1;
-  std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>(v7);
   return 1;
 }
 
@@ -3469,11 +3449,11 @@ bool  CInputProcessor::DestroyWarMachine(class CEvn_Logic * a2) {
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
     CEvn_Logic::CEvn_Logic(&v7, 0x13B9u, v5, 0, LocalPlayerId, 0, 0);
     v8 = 0;
-    if ( !g_pNetworkEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 5335, "g_pNetworkEngine != NULL") == 1 )
+    if ( g_pNetworkEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 5335, "g_pNetworkEngine != NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( g_pNetworkEngine )
+    if ( g_pNetworkEngine != 0 )
     {
       INetworkEngine::SendNetMessage(g_pNetworkEngine, &v7);
     }
@@ -3534,10 +3514,10 @@ bool  CInputProcessor::CamSelection(class CEvn_Logic * a2) {
     if ( CWorldManager::InWorld(v14, iY + v3) )
     {
       v12 = CWorldManager::MapObjectId(v14, v13);
-      if ( v12 )
+      if ( v12 != 0 )
       {
         v16 = CMapObjectMgr::EntityPtr(v12);
-        if ( IEntity::ObjType(v16) == 128 || (v4 = IEntity::OwnerId(v16), v4 == CPlayerManager::GetLocalPlayerId()) && (IEntity::ObjType(v16) == SETTLER_OBJ || IEntity::ObjType(v16) == SHIP_OBJ || IEntity::ObjType(v16) == CATAPULT_OBJ) )
+        if ( IEntity::ObjType(v16) == 128 || (v4 = IEntity::OwnerId(v16)) == CPlayerManager::GetLocalPlayerId() && (IEntity::ObjType(v16) == SETTLER_OBJ || IEntity::ObjType(v16) == SHIP_OBJ || IEntity::ObjType(v16) == CATAPULT_OBJ) )
         {
           v17 = v12;
           std::vector<unsigned short>::push_back(v6, &v17);
@@ -3554,12 +3534,12 @@ bool  CInputProcessor::CamSelection(class CEvn_Logic * a2) {
       }
     }
   }
-  if ( !(unsigned __int8)std::vector<unsigned short>::empty(v6) )
+  if ( (unsigned __int8)std::vector<unsigned short>::empty(v6) == 0 )
   {
     TheBestEntity = CInputProcessor::GetTheBestEntity((CInputProcessor *)v6, iX, iY);
     v16 = CMapObjectMgr::EntityPtr(TheBestEntity);
   }
-  if ( v16 )
+  if ( v16 != 0 )
   {
     g_uCamWndEntityId = IEntity::EntityId(v16);
     g_iCamWndUniqueId = IEntity::UniqueId(v16);
@@ -3591,7 +3571,7 @@ void  CInputProcessor::TraceStates(class CEvn_Logic const & a2) {
   {
     m_iEventId = a2->m_iEventId - 400;
   }
-  v2 = CFsm::CurrentState(this->m_pFSM);
+  v2 = (T_INPUT_STATE)CFsm::CurrentState(this->m_pFSM);
   return CTrace::Print("IP - process type: %s actState: %s", off_3D89628[m_iEventId], off_3D895F4[v2]);
 }
 
@@ -3610,11 +3590,11 @@ void  CInputProcessor::BoxSelection(void) {
   signed int i; // [esp+28h] [ebp-Ch]
   __int16 v10; // [esp+32h] [ebp-2h] BYREF
 
-  if ( CGameData::IsLastFrameRendered(g_pGameData) )
+  if ( CGameData::IsLastFrameRendered(g_pGameData) != 0 )
   {
     v5 = std::vector<unsigned short>::size(&this->m_pEntityCandidates);
     std::vector<unsigned short>::size(&CInputProcessor::m_vSelection);
-    if ( !this->m_iSelectionType )
+    if ( this->m_iSelectionType == 0 )
     {
       for ( i = 0;
             i < v5;
@@ -3630,7 +3610,7 @@ void  CInputProcessor::BoxSelection(void) {
     }
     if ( (int)this->m_iSelectionType > 0 )
     {
-      if ( this->m_iSelectionType == 0x10000 && std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+      if ( this->m_iSelectionType == 0x10000 && std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
       {
         v5 = 0;
       }
@@ -3645,11 +3625,11 @@ void  CInputProcessor::BoxSelection(void) {
         v3 = this->m_iSelectionType & 0xFFFF00;
         v2 = std::vector<unsigned short>::operator[](&this->m_pEntityCandidates, j);
         v6 = CMapObjectMgr::EntityPtr(*v2);
-        if ( (CInputProcessor::GetEntitySelectionType(v6) & 0xFFFF00) == v3 && !IEntity::FlagBits(v6, ENTITY_FLAG_Selected) )
+        if ( (CInputProcessor::GetEntitySelectionType(v6) & 0xFFFF00) == v3 && IEntity::FlagBits(v6, ENTITY_FLAG_Selected) == 0 )
         {
           IEntity::SetFlagBits(v6, ENTITY_FLAG_Selected);
           v10 = IEntity::EntityId(v6);
-          std::vector<unsigned short>::push_back(&v10);
+          std::vector<unsigned short>::push_back((int)&v10);
           if ( this->m_iSelectionType == 0x10000 )
           {
             break;
@@ -3657,9 +3637,9 @@ void  CInputProcessor::BoxSelection(void) {
         }
       }
     }
-    if ( !this->m_bBoxSelectAllSettler )
+    if ( this->m_bBoxSelectAllSettler == 0 )
     {
-      if ( !std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+      if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) == 0 )
       {
         CInputProcessor::Clear(this);
       }
@@ -3715,11 +3695,11 @@ int  CInputProcessor::SelectOne(int x, int y) {
     if ( CWorldManager::InWorld(v16, v17) )
     {
       v23 = CWorldManager::MapObjectId(v16, v17);
-      if ( v23 )
+      if ( v23 != 0 )
       {
         v24 = CMapObjectMgr::EntityPtr(v23);
         v3 = IEntity::OwnerId(v24);
-        if ( v3 == CPlayerManager::GetLocalPlayerId() && (IEntity::FlagBits(v24, ENTITY_FLAG_Selectable) || IEntity::FlagBits(v24, (EntityFlag)0x4000)) )
+        if ( v3 == CPlayerManager::GetLocalPlayerId() && (IEntity::FlagBits(v24, ENTITY_FLAG_Selectable) != 0 || IEntity::FlagBits(v24, (EntityFlag)0x4000) != 0) )
         {
           v27 = v23;
           std::vector<unsigned short>::push_back(&v7, &v27);
@@ -3728,7 +3708,7 @@ int  CInputProcessor::SelectOne(int x, int y) {
     }
   }
   TheBestEntity = CInputProcessor::GetTheBestEntity((CInputProcessor *)&v7, x, y);
-  if ( TheBestEntity )
+  if ( TheBestEntity != 0 )
   {
     v12 = TheBestEntity;
     v28 = -1;
@@ -3757,10 +3737,10 @@ LABEL_13:
     ;
   }
   v21 = CWorldManager::MapObjectId(v19, v20);
-  if ( !v21 )
+  if ( v21 == 0 )
   {
     v18 = CWorldManager::ObjectId(v19, v20);
-    if ( v18 )
+    if ( v18 != 0 )
     {
       v14 = CMapObjectMgr::EntityPtr(v18);
       v6 = IEntity::OwnerId(v14);
@@ -3776,7 +3756,7 @@ LABEL_13:
   }
   v25 = CMapObjectMgr::EntityPtr(v21);
   v5 = IEntity::OwnerId(v25);
-  if ( v5 != CPlayerManager::GetLocalPlayerId() || !IEntity::FlagBits(v25, ENTITY_FLAG_Selectable) && !IEntity::FlagBits(v25, (EntityFlag)0x4000) && IEntity::ObjType(v25) != BUILDING_OBJ )
+  if ( v5 != CPlayerManager::GetLocalPlayerId() || IEntity::FlagBits(v25, ENTITY_FLAG_Selectable) == 0 && IEntity::FlagBits(v25, (EntityFlag)0x4000) == 0 && IEntity::ObjType(v25) != BUILDING_OBJ )
   {
     goto LABEL_13;
   }
@@ -3846,7 +3826,7 @@ int  CInputProcessor::GetTheBestEntity(class std::vector<unsigned short,class st
     }
     v4 = std::vector<unsigned short>::operator[](a1, i);
     v28 = CMapObjectMgr::MovingEntity(*v4);
-    if ( IMovingEntity::GetJobPart((IMovingEntity *)v28) )
+    if ( IMovingEntity::GetJobPart((IMovingEntity *)v28) != 0 )
     {
       JobPart = IMovingEntity::GetJobPart((IMovingEntity *)v28);
       v13 = IEntity::Race(v28);
@@ -3912,7 +3892,7 @@ int  CInputProcessor::SelectAllInSurrounding(int a2, int a3) {
   {
     return 0;
   }
-  if ( this->m_iSelectionType == 0x10000 && std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( this->m_iSelectionType == 0x10000 && std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
     return 0;
   }
@@ -3920,7 +3900,7 @@ int  CInputProcessor::SelectAllInSurrounding(int a2, int a3) {
   {
     return 0;
   }
-  if ( dword_3F1F608 )
+  if ( dword_3F1F608 != 0 )
   {
     v11 = 19823;
   }
@@ -3941,21 +3921,18 @@ int  CInputProcessor::SelectAllInSurrounding(int a2, int a3) {
       if ( v8 > 0 )
       {
         v13 = CMapObjectMgr::EntityPtr(v8);
-        if ( v13 )
+        if ( v13 != 0 && IEntity::OwnerId(v13) == LocalPlayerId && IEntity::FlagBits(v13, (EntityFlag)&loc_3000000) != 0 && (IEntity::FlagBits(v13, ENTITY_FLAG_Selectable) != 0 || IEntity::ObjType(v13) == BUILDING_OBJ) && CInputProcessor::GetEntitySelectionType(v13) == this->m_iSelectionType )
         {
-          if ( IEntity::OwnerId(v13) == LocalPlayerId && IEntity::FlagBits(v13, (EntityFlag)&loc_3000000) && (IEntity::FlagBits(v13, ENTITY_FLAG_Selectable) || IEntity::ObjType(v13) == BUILDING_OBJ) && CInputProcessor::GetEntitySelectionType(v13) == this->m_iSelectionType )
+          v5 = IEntity::Y(v13);
+          v4 = IEntity::X(v13);
+          if ( CWorldManager::SectorId(v4, v5) == dword_3F1F60C )
           {
-            v5 = IEntity::Y(v13);
-            v4 = IEntity::X(v13);
-            if ( CWorldManager::SectorId(v4, v5) == dword_3F1F60C )
+            IEntity::SetFlagBits(v13, ENTITY_FLAG_Selected);
+            v14 = IEntity::EntityId(v13);
+            std::vector<unsigned short>::push_back((int)&v14);
+            if ( IEntity::ObjType(v13) == BUILDING_OBJ || (unsigned int)std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) >= 0x64 )
             {
-              IEntity::SetFlagBits(v13, ENTITY_FLAG_Selected);
-              v14 = IEntity::EntityId(v13);
-              std::vector<unsigned short>::push_back(&v14);
-              if ( IEntity::ObjType(v13) == BUILDING_OBJ || (unsigned int)std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) >= 0x64 )
-              {
-                break;
-              }
+              break;
             }
           }
         }
@@ -3992,16 +3969,16 @@ bool  CInputProcessor::SelectAtSector(enum SETTLER_TYPES _SettlerType, int a2) {
   }
   v9 = 0;
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  for ( i = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, LocalPlayerId, _SettlerType);
+  for ( i = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, LocalPlayerId, _SettlerType);
         i > 0;
         i = IAnimatedEntity::Next(SettlerPtr) )
   {
-    SettlerPtr = CSettlerMgr::GetSettlerPtr((struct CSettlerMgr *)g_cSettlerMgr, i);
-    if ( !SettlerPtr && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2799, "pSettler!=NULL") == 1 )
+    SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, i);
+    if ( SettlerPtr == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 2799, "pSettler!=NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( SettlerPtr )
+    if ( SettlerPtr != 0 )
     {
       v5 = IEntity::Y(SettlerPtr);
       v4 = IEntity::X(SettlerPtr);
@@ -4054,9 +4031,9 @@ int  CInputProcessor::GetUserESInMiddleOfTheScreen(void) {
     if ( CWorldManager::InWorld(x, screenCenterY + spiralOffsetY) )
     {
       centerEcoSectorId = CWorldManager::EcoSectorId(x, y);
-      if ( centerEcoSectorId )
+      if ( centerEcoSectorId != 0 )
       {
-        centerEcoSector = CEcoSectorMgr::operator[](g_cESMgr, centerEcoSectorId);
+        centerEcoSector = (int)CEcoSectorMgr::operator[](g_cESMgr, centerEcoSectorId);
         centerEcoSectorOwner = CEcoSector::Owner(centerEcoSector);
         if ( centerEcoSectorOwner == CPlayerManager::GetLocalPlayerId() )
         {
@@ -4114,7 +4091,7 @@ void  CInputProcessor::WorkOnBuildingSites(void) {
     case TRY_BUILD_STATE_EX:
       iBuildBuildingType = this->m_iBuildBuildingType;
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-      if ( CInputProcessor::GetPossibleBuildingSites(this, LocalPlayerId, iBuildBuildingType, 0) )
+      if ( CInputProcessor::GetPossibleBuildingSites(this, LocalPlayerId, iBuildBuildingType, 0) != 0 )
       {
         this->m_iViewState = TRY_BUILD_STATE_SEARCH;
         byte_3F1F79C = 1;
@@ -4132,6 +4109,8 @@ void  CInputProcessor::WorkOnBuildingSites(void) {
       }
 LABEL_11:
       CInputProcessor::ShowPossibleBuildingType(this);
+      break;
+    default:
       break;
   }
 }
@@ -4245,7 +4224,7 @@ bool  CInputProcessor::UpdateScreenPossibleBuildingSites(int _iOwner, int _iBuil
   {
     v8 = 74;
   }
-  if ( a4 )
+  if ( a4 != 0 )
   {
     this->unk_20 = 0;
     OutputWidth = IGfxEngine::GetOutputWidth(g_pGfxEngine);
@@ -4262,7 +4241,7 @@ bool  CInputProcessor::UpdateScreenPossibleBuildingSites(int _iOwner, int _iBuil
   {
     return 1;
   }
-  if ( byte_3F1F7B0 )
+  if ( byte_3F1F7B0 != 0 )
   {
     dword_3F1F7AC = (((signed int)(this->unk_20 & 2) >> 1) | (2 * (this->unk_20 & 1)) | this->unk_20 & 0xFFFFFFFC) + this->m_iScreenMapStartY;
     byte_3F1F7B0 = 0;
@@ -4345,7 +4324,7 @@ void  CInputProcessor::ShowPossibleBuildingType(void) {
   }
   if ( s_iPrevMouseHoverX != iMouseHoverX || s_iPrevMouseHoverY != iMouseHoverY )
   {
-    if ( this->unk_1C )
+    if ( this->unk_1C != 0 )
     {
       CWorldManager::SetHelperObject(s_iPrevMouseHoverX, s_iPrevMouseHoverY, this->unk_1C);
       this->unk_1C = 0;
@@ -4384,7 +4363,7 @@ void  CInputProcessor::ShowPossibleBuildingType(void) {
     }
   }
   CWorldManager::WorldSetNumberOfNextLine(iMouseHoverY);
-  if ( CWorldManager::WorldGetIconObjectByX(iMouseHoverX) )
+  if ( CWorldManager::WorldGetIconObjectByX(iMouseHoverX) != 0 )
   {
     IconObjectByX = CWorldManager::WorldGetIconObjectByX(iMouseHoverX);
     if ( (unsigned int)IconObjectByX < 0xA || IconObjectByX > 17 )
@@ -4444,7 +4423,7 @@ void  CInputProcessor::DeSelectAll(void) {
   IEntity *v3; // [esp+Ch] [ebp-8h]
   unsigned int i; // [esp+10h] [ebp-4h]
 
-  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
     for ( i = 0;
           i < std::vector<unsigned short>::size(&CInputProcessor::m_vSelection);
@@ -4452,7 +4431,7 @@ void  CInputProcessor::DeSelectAll(void) {
     {
       v2 = *std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, i);
       v3 = CMapObjectMgr::EntityPtr(v2);
-      if ( v3 )
+      if ( v3 != 0 )
       {
         IEntity::ClearFlagBits(v3, ENTITY_FLAG_Selected);
         IEntity::ClearFlagBits(v3, (EntityFlag)1024);
@@ -4488,15 +4467,15 @@ void  CInputProcessor::RequestDialog(void) {
   CEvn_Event v15; // [esp+30h] [ebp-28h] BYREF
   int v16; // [esp+54h] [ebp-4h]
 
-  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
     CEvn_Event::CEvn_Event(&v15, 0x260u, 0, 0, 0);
     v16 = 0;
-    if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 5151, "g_pEvnEngine!= NULL") == 1 )
+    if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 5151, "g_pEvnEngine!= NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( g_pEvnEngine )
+    if ( g_pEvnEngine != 0 )
     {
       IEventEngine::SendAMessage(g_pEvnEngine, &v15);
     }
@@ -4565,12 +4544,12 @@ LABEL_25:
         goto CInputProcessor__RequestDialog___def_185D591;
       case BUILDING_OBJ:
         v3 = std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
-        v7 = CBuildingMgr::operator[](*v3);
-        if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 5169, "g_pEvnEngine!= NULL") == 1 )
+        v7 = ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(*v3);
+        if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 5169, "g_pEvnEngine!= NULL") == 1 )
         {
           __debugbreak();
         }
-        if ( g_pEvnEngine )
+        if ( g_pEvnEngine != 0 )
         {
           CBuilding::FillDialog(v7);
         }
@@ -4593,11 +4572,11 @@ bool  CInputProcessor::Clear(void) {
   CInputProcessor::DeSelectAll(this);
   CEvn_Event::CEvn_Event(&v3, 0x25Bu, 0, 0, 0);
   v4 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 4533, "g_pEvnEngine!= NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 4533, "g_pEvnEngine!= NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v3);
   }
@@ -4615,13 +4594,13 @@ void  CInputProcessor::TidyUp(void) {
   IEntity *BuildingPtr; // [esp+8h] [ebp-4h]
 
   this->m_iViewState = WAIT_STATE;
-  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) )
+  if ( std::vector<unsigned short>::size(&CInputProcessor::m_vSelection) != 0 )
   {
     v1 = *std::vector<unsigned short>::operator[](&CInputProcessor::m_vSelection, 0);
     BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v1);
-    if ( BuildingPtr )
+    if ( BuildingPtr != 0 )
     {
-      if ( !IEntity::FlagBits(BuildingPtr, ENTITY_FLAG_Selected) && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 4498, "pBuilding->FlagBits(ENTITY_FLAG_SELECTED) != 0") == 1 )
+      if ( IEntity::FlagBits(BuildingPtr, ENTITY_FLAG_Selected) == 0 && BBSupportDbgReport(2, "Logic\\InputProcessor.cpp", 4498, "pBuilding->FlagBits(ENTITY_FLAG_SELECTED) != 0") == 1 )
       {
         __debugbreak();
       }
@@ -4648,15 +4627,15 @@ void  CInputProcessor::CloseSidebarAndShowDefaultMenu(void) {
 
   CInputProcessor::TidyUp(this);
   result = CInputProcessor::Default(this, 0);
-  if ( !g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
-    return result;
+    v2 = CEvn_Event::CEvn_Event(&v4, 0x25Bu, 0, 0, 0);
+    v5 = 0;
+    IEventEngine::SendAMessage(g_pEvnEngine, v2);
+    v5 = -1;
+    return (unsigned __int8)CEvn_Event::~CEvn_Event(&v4);
   }
-  v2 = CEvn_Event::CEvn_Event(&v4, 0x25Bu, 0, 0, 0);
-  v5 = 0;
-  IEventEngine::SendAMessage(g_pEvnEngine, v2);
-  v5 = -1;
-  return (unsigned __int8)CEvn_Event::~CEvn_Event(&v4);
+  return result;
 }
 
 

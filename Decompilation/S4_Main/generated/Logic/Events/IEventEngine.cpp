@@ -9,7 +9,7 @@
   
   this->__vftable = &IEventEngine::_vftable_;
   this->m_pEventHandleList = 0;
-  if ( g_pEvnEngine && BBSupportDbgReport(2, "EventEngine\\EventEngine.cpp", 336, "g_pEvnEngine == 0") == 1 )
+  if ( g_pEvnEngine != 0 && BBSupportDbgReport(2, "EventEngine\\EventEngine.cpp", 336, "g_pEvnEngine == 0") == 1 )
   {
     __debugbreak();
   }
@@ -36,9 +36,9 @@
 
   this->__vftable = &IEventEngine::_vftable_;
   g_pEvnEngine = 0;
-  if ( this->m_pEventHandleList )
+  if ( this->m_pEventHandleList != 0 )
   {
-    while ( !(unsigned __int8)std::list<IEvn_Handle *>::empty((char *)this->m_pEventHandleList + 4) )
+    while ( (unsigned __int8)std::list<IEvn_Handle *>::empty((char *)this->m_pEventHandleList + 4) == 0 )
     {
       std::list<IEvn_Handle *>::begin((char *)this->m_pEventHandleList + 4, (int)v1);
       v4 = *(_DWORD *)std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*((std::_Iterator_base12 *)v1);
@@ -46,7 +46,7 @@
       std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v1);
     }
     pEventHandleList = this->m_pEventHandleList;
-    if ( pEventHandleList )
+    if ( pEventHandleList != 0 )
     {
       v2 = (**(int (__thiscall ***)(struct CEvn_HandleList *, int))pEventHandleList)(pEventHandleList, 1);
     }
@@ -86,57 +86,56 @@ bool  IEventEngine::OnEvent(class CEvn_Event & a2) {
   CEvn_Window Buffer; // [esp+4Ch] [ebp-2Ch] BYREF
   int v17; // [esp+74h] [ebp-4h]
 
-  if ( this->m_bIsEventRecording && a2->m_iEventId < 0x7Au && a2->m_iEventId != 1 && this->m_pTick )
+  if ( this->m_bIsEventRecording != 0 && a2->m_iEventId < 0x7Au && a2->m_iEventId != 1 && this->m_pTick != 0 )
   {
     CEvn_Window::CEvn_Window(&Buffer, 0, a2->m_iEventId, a2->m_wParam, a2->m_lParam);
     WriteFile(this->m_hReplayFile, this->m_pTick, 4u, &NumberOfBytesWritten, 0);
     WriteFile(this->m_hReplayFile, &Buffer, 0x1Cu, &NumberOfBytesWritten, 0);
     CEvn_Window::~CEvn_Window(&Buffer);
   }
-  if ( this->m_pGuiEventProc )
+  if ( this->m_pGuiEventProc != 0 )
   {
-    v12 = a2 ? &a2->SEventStruct : 0;
+    v12 = a2 != 0 ? &a2->SEventStruct : 0;
     if ( this->m_pGuiEventProc(v12) )
     {
       return 1;
     }
   }
-  if ( !this->m_pEventHandleList || (unsigned __int8)std::list<IEvn_Handle *>::empty((char *)this->m_pEventHandleList + 4) )
+  if ( this->m_pEventHandleList != 0 && (unsigned __int8)std::list<IEvn_Handle *>::empty((char *)this->m_pEventHandleList + 4) == 0 )
   {
-    return 0;
-  }
-  std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v10);
-  v17 = 0;
-  v8 = std::list<IEvn_Handle *>::begin(v4);
-  v7 = v8;
-  LOBYTE(v17) = 1;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator=(v8);
-  LOBYTE(v17) = 0;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v4);
-  while ( 1 )
-  {
-    v6 = (std::_Iterator_base12 *)std::list<IEvn_Handle *>::end(v3);
-    v5 = v6;
-    LOBYTE(v17) = 2;
-    v14 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator!=(v6);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v10);
+    v17 = 0;
+    v8 = ((int (__stdcall *)(_BYTE *))std::list<IEvn_Handle *>::begin)(v4);
+    v7 = v8;
+    LOBYTE(v17) = 1;
+    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator=(v8);
     LOBYTE(v17) = 0;
-    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v3);
-    if ( !v14 )
+    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v4);
+    while ( 1 )
     {
-      break;
+      v6 = (std::_Iterator_base12 *)std::list<IEvn_Handle *>::end((int)v3);
+      v5 = v6;
+      LOBYTE(v17) = 2;
+      v14 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator!=(v6);
+      LOBYTE(v17) = 0;
+      std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v3);
+      if ( v14 == 0 )
+      {
+        break;
+      }
+      v11 = *(unsigned __int8 (__thiscall ****)(_DWORD, struct CEvn_Event *))std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*((std::_Iterator_base12 *)v10);
+      if ( (**v11)(v11, a2) != 0 )
+      {
+        v13 = 1;
+        v17 = -1;
+        std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v10);
+        return v13;
+      }
+      std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator++(v10);
     }
-    v11 = *(unsigned __int8 (__thiscall ****)(_DWORD, struct CEvn_Event *))std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*(v10);
-    if ( (**v11)(v11, a2) )
-    {
-      v13 = 1;
-      v17 = -1;
-      std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v10);
-      return v13;
-    }
-    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator++(v10);
+    v17 = -1;
+    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v10);
   }
-  v17 = -1;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v10);
   return 0;
 }
 
@@ -160,7 +159,7 @@ bool  IEventEngine::SendRawWindowEvent(unsigned int a2, unsigned int a3, unsigne
   s_sRawWindowEvent.m_iEventId = a3;
   s_sRawWindowEvent.m_wParam = a4;
   s_sRawWindowEvent.m_iMsgNr = 0;
-  if ( this->m_pTick )
+  if ( this->m_pTick != 0 )
   {
     s_sRawWindowEvent.m_iTick = *this->m_pTick;
   }
@@ -189,7 +188,7 @@ bool  IEventEngine::SendRawLogicEvent(unsigned int a2, unsigned int a3, unsigned
   s_sRawLogicEvent.m_iEventId = a2;
   s_sRawLogicEvent.m_wParam = a3;
   s_sRawLogicEvent.m_iMsgNr = 0;
-  if ( this->m_pTick )
+  if ( this->m_pTick != 0 )
   {
     s_sRawLogicEvent.m_iTick = *this->m_pTick;
   }
@@ -215,7 +214,7 @@ bool  IEventEngine::SendRawEvent(unsigned int a2, unsigned int a3, unsigned int 
   s_sRawEvent.m_iEventId = a2;
   s_sRawEvent.m_wParam = a3;
   s_sRawEvent.m_iMsgNr = 0;
-  if ( this->m_pTick )
+  if ( this->m_pTick != 0 )
   {
     s_sRawEvent.m_iTick = *this->m_pTick;
   }
@@ -241,15 +240,15 @@ bool  IEventEngine::RegisterHandle(class IEvn_Handle * a2) {
   CDaoIndexFieldInfo *v14; // [esp+38h] [ebp-14h]
   int v16; // [esp+48h] [ebp-4h]
 
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 0;
   }
-  if ( !this->m_pEventHandleList )
+  if ( this->m_pEventHandleList == 0 )
   {
     v14 = (CDaoIndexFieldInfo *)operator new(0x10u);
     v16 = 0;
-    if ( v14 )
+    if ( v14 != 0 )
     {
       v13 = CEvn_HandleList::CEvn_HandleList(v14);
     }
@@ -261,7 +260,7 @@ bool  IEventEngine::RegisterHandle(class IEvn_Handle * a2) {
     v16 = -1;
     this->m_pEventHandleList = v13;
   }
-  if ( !this->m_pEventHandleList )
+  if ( this->m_pEventHandleList == 0 )
   {
     return 0;
   }
@@ -303,43 +302,42 @@ bool  IEventEngine::UnRegisterHandle(class IEvn_Handle * a2) {
   char v13; // [esp+43h] [ebp-Dh]
   int v14; // [esp+4Ch] [ebp-4h]
 
-  if ( !a2 || (unsigned __int8)std::list<IEvn_Handle *>::empty((char *)this->m_pEventHandleList + 4) )
+  if ( a2 != 0 && (unsigned __int8)std::list<IEvn_Handle *>::empty((char *)this->m_pEventHandleList + 4) == 0 )
   {
-    return 0;
-  }
-  std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v5);
-  v14 = 0;
-  v9 = std::list<IEvn_Handle *>::begin(v4);
-  v8 = v9;
-  LOBYTE(v14) = 1;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator=(v9);
-  LOBYTE(v14) = 0;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v4);
-  while ( 1 )
-  {
-    v7 = (std::_Iterator_base12 *)std::list<IEvn_Handle *>::end(v3);
-    v6 = v7;
-    LOBYTE(v14) = 2;
-    v13 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator!=(v7);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v5);
+    v14 = 0;
+    v9 = ((int (__stdcall *)(_BYTE *))std::list<IEvn_Handle *>::begin)(v4);
+    v8 = v9;
+    LOBYTE(v14) = 1;
+    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator=(v9);
     LOBYTE(v14) = 0;
-    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v3);
-    if ( !v13 )
+    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v4);
+    while ( 1 )
     {
-      break;
+      v7 = (std::_Iterator_base12 *)std::list<IEvn_Handle *>::end((int)v3);
+      v6 = v7;
+      LOBYTE(v14) = 2;
+      v13 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator!=(v7);
+      LOBYTE(v14) = 0;
+      std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v3);
+      if ( v13 == 0 )
+      {
+        break;
+      }
+      v10 = *(struct IEvn_Handle **)std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*((std::_Iterator_base12 *)v5);
+      if ( v10 == a2 )
+      {
+        ((void (__stdcall *)(struct IEvn_Handle **))std::list<IEvn_Handle *>::remove)(&v10);
+        v12 = 1;
+        v14 = -1;
+        std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v5);
+        return v12;
+      }
+      std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator++(v5);
     }
-    v10 = *(struct IEvn_Handle **)std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*(v5);
-    if ( v10 == a2 )
-    {
-      std::list<IEvn_Handle *>::remove(&v10);
-      v12 = 1;
-      v14 = -1;
-      std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v5);
-      return v12;
-    }
-    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator++(v5);
+    v14 = -1;
+    std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v5);
   }
-  v14 = -1;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v5);
   return 0;
 }
 
@@ -371,77 +369,76 @@ bool  IEventEngine::DispatchSystemMessages(void) {
     TranslateMessage(&Msg);
     DispatchMessageA(&Msg);
   }
-  if ( !this->m_bIsEventPlaying )
+  if ( this->m_bIsEventPlaying != 0 )
   {
-    return 1;
-  }
-  CEvn_Window::CEvn_Window(&v12, 0, 0, 0, 0);
-  ExceptionBlock = 0;
-  ReadFile(this->m_hReplayFile, &Buffer, 4u, &NumberOfBytesRead, 0);
-  if ( NumberOfBytesRead != 4 )
-  {
-    this->m_bIsEventPlaying = 0;
-    CloseHandle(this->m_hReplayFile);
-    this->m_hReplayFile = 0;
-    v10 = 1;
-    ExceptionBlock = -1;
-    CEvn_Window::~CEvn_Window(&v12);
-    return v10;
-  }
-  if ( this->m_pTick )
-  {
-    if ( *this->m_pTick > (unsigned int)this->field_20 )
+    CEvn_Window::CEvn_Window(&v12, 0, 0, 0, 0);
+    ExceptionBlock = 0;
+    ReadFile(this->m_hReplayFile, &Buffer, 4u, &NumberOfBytesRead, 0);
+    if ( NumberOfBytesRead != 4 )
     {
       this->m_bIsEventPlaying = 0;
       CloseHandle(this->m_hReplayFile);
       this->m_hReplayFile = 0;
-      v4 = CEvn_Event::CEvn_Event(&v13, 0xBu, 0x6Eu, 0, 0);
-      v3 = &v4->__vftable;
-      LOBYTE(ExceptionBlock) = 1;
-      IEventEngine::SendAMessage(this, v4);
-      LOBYTE(ExceptionBlock) = 0;
-      CEvn_Event::~CEvn_Event(&v13);
-      v9 = 1;
+      v10 = 1;
       ExceptionBlock = -1;
       CEvn_Window::~CEvn_Window(&v12);
-      return v9;
+      return v10;
     }
-    while ( Buffer <= *this->m_pTick )
+    if ( this->m_pTick != 0 )
     {
-      ReadFile(this->m_hReplayFile, &v12, 0x1Cu, &NumberOfBytesRead, 0);
-      if ( NumberOfBytesRead != 28 )
+      if ( *this->m_pTick > (unsigned int)this->field_20 )
       {
         this->m_bIsEventPlaying = 0;
         CloseHandle(this->m_hReplayFile);
         this->m_hReplayFile = 0;
-        v8 = 1;
+        v4 = CEvn_Event::CEvn_Event(&v13, 0xBu, 0x6Eu, 0, 0);
+        v3 = &v4->__vftable;
+        LOBYTE(ExceptionBlock) = 1;
+        IEventEngine::SendAMessage(this, v4);
+        LOBYTE(ExceptionBlock) = 0;
+        CEvn_Event::~CEvn_Event(&v13);
+        v9 = 1;
         ExceptionBlock = -1;
         CEvn_Window::~CEvn_Window(&v12);
-        return v8;
+        return v9;
       }
-      v12.m_hWnd = this->m_hWnd;
-      if ( v12.m_iEventId != 3 && v12.m_iEventId != 2 )
+      while ( Buffer <= *this->m_pTick )
       {
-        if ( v12.m_iEventId == 5 )
+        ReadFile(this->m_hReplayFile, &v12, 0x1Cu, &NumberOfBytesRead, 0);
+        if ( NumberOfBytesRead != 28 )
         {
-          Point.x = LOWORD(v12.m_lParam);
-          Point.y = HIWORD(v12.m_lParam);
-          ClientToScreen((HWND)this->m_hWnd, &Point);
-          SetCursorPos(Point.x, Point.y);
+          this->m_bIsEventPlaying = 0;
+          CloseHandle(this->m_hReplayFile);
+          this->m_hReplayFile = 0;
+          v8 = 1;
+          ExceptionBlock = -1;
+          CEvn_Window::~CEvn_Window(&v12);
+          return v8;
         }
-        IEventEngine::SendAMessage(this, &v12);
-      }
-      ReadFile(this->m_hReplayFile, &Buffer, 4u, &NumberOfBytesRead, 0);
-      if ( NumberOfBytesRead != 4 )
-      {
-        this->m_bIsEventPlaying = 0;
-        break;
+        v12.m_hWnd = this->m_hWnd;
+        if ( v12.m_iEventId != 3 && v12.m_iEventId != 2 )
+        {
+          if ( v12.m_iEventId == 5 )
+          {
+            Point.x = LOWORD(v12.m_lParam);
+            Point.y = HIWORD(v12.m_lParam);
+            ClientToScreen((HWND)this->m_hWnd, &Point);
+            SetCursorPos(Point.x, Point.y);
+          }
+          IEventEngine::SendAMessage(this, &v12);
+        }
+        ReadFile(this->m_hReplayFile, &Buffer, 4u, &NumberOfBytesRead, 0);
+        if ( NumberOfBytesRead != 4 )
+        {
+          this->m_bIsEventPlaying = 0;
+          break;
+        }
       }
     }
+    SetFilePointer(this->m_hReplayFile, -4, 0, FILE_CURRENT);
+    ExceptionBlock = -1;
+    CEvn_Window::~CEvn_Window(&v12);
   }
-  SetFilePointer(this->m_hReplayFile, -4, 0, FILE_CURRENT);
-  ExceptionBlock = -1;
-  CEvn_Window::~CEvn_Window(&v12);
   return 1;
 }
 
@@ -474,7 +471,7 @@ bool  IEventEngine::PlayEvents(std::string const & _pReplayFile, int a3) {
   DWORD NumberOfBytesRead; // [esp+Ch] [ebp-10Ch] BYREF
   char Buffer[256]; // [esp+14h] [ebp-104h] BYREF
 
-  if ( std::string::length(_pReplayFile) && !this->m_hReplayFile )
+  if ( std::string::length(_pReplayFile) != 0 && this->m_hReplayFile == 0 )
   {
     v3 = std::string::c_str(_pReplayFile);
     this->m_hReplayFile = CreateFileA(v3, 0x80000000, 0, 0, 3u, 0x80u, 0);
@@ -487,7 +484,7 @@ bool  IEventEngine::PlayEvents(std::string const & _pReplayFile, int a3) {
     else
     {
       ReadFile(this->m_hReplayFile, Buffer, 19u, &NumberOfBytesRead, 0);
-      if ( strstr(Buffer, "RECORDED S4 EVENTS") && NumberOfBytesRead == 19 )
+      if ( strstr(Buffer, "RECORDED S4 EVENTS") != 0 && NumberOfBytesRead == 19 )
       {
         ReadFile(this->m_hReplayFile, &replayFileVersion, 4u, &NumberOfBytesRead, 0);
         if ( replayFileVersion == 0x1C )
@@ -529,20 +526,19 @@ bool  IEventEngine::PlayEvents(std::string const & _pReplayFile, int a3) {
   else
   {
     this->m_bIsEventPlaying = 0;
-    if ( !this->m_hReplayFile )
+    if ( this->m_hReplayFile != 0 )
     {
-      return 1;
+      CloseHandle(this->m_hReplayFile);
+      this->m_hReplayFile = 0;
+      BBSupportTracePrintF(2, "EventEngine.cpp: Replay of events stopped!", 0);
     }
-    CloseHandle(this->m_hReplayFile);
-    this->m_hReplayFile = 0;
-    BBSupportTracePrintF(2, "EventEngine.cpp: Replay of events stopped!", 0);
     return 1;
   }
 }
 
 
 // address=[0x1353a60]
-// Decompiled from char __thiscall IEventEngine::RecordEvents(IEventEngine *this, void *_pTargetFile)
+// Decompiled from char __thiscall IEventEngine::RecordEvents(IEventEngine *this, std::string *_pTargetFile)
 bool  IEventEngine::RecordEvents(std::string const & _pTargetFile) {
   
   const CHAR *v3; // eax
@@ -550,9 +546,9 @@ bool  IEventEngine::RecordEvents(std::string const & _pTargetFile) {
   int replayFileVersion; // [esp+0h] [ebp-Ch] BYREF
   DWORD NumberOfBytesWritten; // [esp+4h] [ebp-8h] BYREF
 
-  if ( std::string::length(_pTargetFile) && !this->m_hReplayFile )
+  if ( std::string::length(_pTargetFile) != 0 && this->m_hReplayFile == 0 )
   {
-    v3 = (const CHAR *)std::string::c_str(_pTargetFile);
+    v3 = std::string::c_str(_pTargetFile);
     this->m_hReplayFile = CreateFileA(v3, 0x40000000u, 0, 0, 2u, 0x80u, 0);
     if ( this->m_hReplayFile == (HANDLE)-1 )
     {
@@ -567,7 +563,7 @@ bool  IEventEngine::RecordEvents(std::string const & _pTargetFile) {
   else
   {
     this->m_bIsEventRecording = 0;
-    if ( !this->m_hReplayFile )
+    if ( this->m_hReplayFile == 0 )
     {
       return 1;
     }
@@ -575,7 +571,7 @@ bool  IEventEngine::RecordEvents(std::string const & _pTargetFile) {
     this->m_hReplayFile = 0;
     BBSupportTracePrint(2, "EventEngine.cpp: Event recording stopped!");
   }
-  v4 = (const char *)std::string::c_str(_pTargetFile);
+  v4 = std::string::c_str(_pTargetFile);
   BBSupportTracePrintF(2, "Recording successfully started into file \"%s\"!", v4);
   return 1;
 }

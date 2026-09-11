@@ -45,8 +45,8 @@ bool  CExpandationManagerTask::GetExpandationPermission(class CExpandationEvent 
   struct CDynListEntry *i; // [esp+8h] [ebp-8h]
 
   *((_DWORD *)this + 11) = 0;
-  for ( i = CDynList::FirstEntry(*(CDynList **)(*((_DWORD *)this + 10) + 4));
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(CDynList **)(*((_DWORD *)this + 10) + 4));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 4) == 7 && *((_DWORD *)i + 3) != *((_DWORD *)a2 + 3) )
@@ -69,7 +69,7 @@ bool  CExpandationManagerTask::IsBorderElement(int a2, int a3) {
   int v4; // [esp+0h] [ebp-Ch]
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  v4 = CReserveDatabase::PackPosition(*this[10], a2, a3);
+  v4 = CReserveDatabase::PackPosition(**(this + 10), a2, a3);
   for ( i = 0;
         i < std::vector<int>::size(this + 13);
         ++i )
@@ -92,44 +92,44 @@ bool  CExpandationManagerTask::IsShooting(void) {
   CExpandationEvent *C; // [esp+Ch] [ebp-18h]
 
   std::vector<int>::clear();
-  EcoSector = CSchedule::GetEcoSector(this[10]);
-  (*(void (__thiscall **)(struct IAIEcoManager *, char *))(*(_DWORD *)EcoSector + 256))(EcoSector, (char *)this + 52);
-  if ( this[17] )
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
+  (*(void (__thiscall **)(struct IAIEcoManager *, CSchedule **))(*(_DWORD *)EcoSector + 256))(EcoSector, this + 13);
+  if ( *(this + 17) != 0 )
   {
-    if ( this[17] == (CSchedule *)1 )
+    if ( *(this + 17) == (CSchedule *)1 )
     {
       *((_BYTE *)this + 76) = 1;
-      this[20] = (CSchedule *)((char *)this[20] + 1);
-      if ( (int)this[20] > 4 )
+      *(this + 20) = (CSchedule *)((char *)*(this + 20) + 1);
+      if ( (int)*(this + 20) > 4 )
       {
-        this[20] = 0;
+        *(this + 20) = 0;
       }
     }
-    if ( *((_BYTE *)this + 76) && (int)this[18] < 490 && !CSchedule::IsAnyExpandation((CDynList **)this[10]) )
+    if ( *((_BYTE *)this + 76) != 0 && (int)*(this + 18) < 490 && CSchedule::IsAnyExpandation((CDynList **)*(this + 10)) == 0 )
     {
       C = (CExpandationEvent *)operator new(0x74u);
-      if ( C )
+      if ( C != 0 )
       {
-        v3 = CExpandationEvent::CExpandationEvent(C, this[3], 0, this[(_DWORD)this[20] + 21]);
+        v3 = CExpandationEvent::CExpandationEvent(C, (int)*(this + 3), 0, (int)*(this + (_DWORD)*(this + 20) + 21));
       }
       else
       {
         v3 = 0;
       }
-      this[8] = (CSchedule *)CSchedule::NewSchedEntry(this[10], v3);
-      this[17] = 0;
-      this[18] = (CSchedule *)500;
+      *(this + 8) = (CSchedule *)CSchedule::NewSchedEntry((CDynList **)*(this + 10), v3);
+      *(this + 17) = 0;
+      *(this + 18) = (CSchedule *)500;
       *((_BYTE *)this + 76) = 0;
     }
   }
-  else if ( (int)this[18] < 10 )
+  else if ( (int)*(this + 18) < 10 )
   {
-    this[17] = (CSchedule *)1;
+    *(this + 17) = (CSchedule *)1;
     *((_BYTE *)this + 76) = 1;
-    this[18] = (CSchedule *)500;
-    this[20] = (CSchedule *)((char *)this[20] + 1);
+    *(this + 18) = (CSchedule *)500;
+    *(this + 20) = (CSchedule *)((char *)*(this + 20) + 1);
   }
-  this[18] = (CSchedule *)((char *)this[18] - 1);
+  *(this + 18) = (CSchedule *)((char *)*(this + 18) - 1);
   return 0;
 }
 

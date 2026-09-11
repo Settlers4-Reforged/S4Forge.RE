@@ -60,10 +60,10 @@ void  CMirrorBasicGrid::initGrid(void) {
     v9 = 0;
     v10 = 0;
     v18 = 0;
-    while ( !v18 )
+    while ( v18 == 0 )
     {
-      CMirrorBasicGrid::getMirrorBasisPoint(v19, &v9, &v10, 1);
-      if ( !*(_BYTE *)(*((_DWORD *)v19 + 1) + v9 + *((_DWORD *)v19 + 2) * v10) )
+      CMirrorBasicGrid::getMirrorBasisPoint(v19, (unsigned int *)&v9, &v10, 1);
+      if ( *(_BYTE *)(*((_DWORD *)v19 + 1) + v9 + *((_DWORD *)v19 + 2) * v10) == 0 )
       {
         v18 = 1;
       }
@@ -85,10 +85,10 @@ void  CMirrorBasicGrid::initGrid(void) {
     v16 = 0;
     v15 = 0;
     for ( j = 0;
-          !v17 && j < 40;
+          v17 == 0 && j < 40;
           ++j )
     {
-      CMirrorBasicGrid::getMirrorBasisPoint(v19, &v16, &v15, 0);
+      CMirrorBasicGrid::getMirrorBasisPoint(v19, (unsigned int *)&v16, &v15, 0);
       if ( *(_BYTE *)(*((_DWORD *)v19 + 1) + v16 + *((_DWORD *)v19 + 2) * v15) != 101 && *(_BYTE *)(*((_DWORD *)v19 + 1) + v16 + *((_DWORD *)v19 + 2) * v15) != 1 )
       {
         v17 = 1;
@@ -142,7 +142,7 @@ void  CMirrorBasicGrid::initGrid(void) {
     {
       if ( v22[4 * k + m] != -1 )
       {
-        CPlayerData::setStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * v3++), v21[v22[4 * k + m]], v21[v22[4 * k + m] + 8]);
+        CPlayerData::setStartPos_Basic(g_pPlayerData[v3++], v21[v22[4 * k + m]], v21[v22[4 * k + m] + 8]);
       }
       result = m + 1;
     }
@@ -167,15 +167,15 @@ void  CMirrorBasicGrid::getMirrorBasisPoint(int & a2, int & a3, bool a4) {
   {
     if ( a4 )
     {
-      *a2 = CRandom16::Rand((CRandom16 *)g_pRand) % *((_DWORD *)this + 2);
-      v5 = CRandom16::Rand((CRandom16 *)g_pRand) % (*((_DWORD *)this + 2) - *a2);
+      *a2 = CRandom16::Rand(g_pRand) % *((_DWORD *)this + 2);
+      v5 = CRandom16::Rand(g_pRand) % (*((_DWORD *)this + 2) - *a2);
       result = (int *)a2;
       *a3 = *a2 + v5;
     }
     else
     {
-      *a2 = CRandom16::Rand((CRandom16 *)g_pRand) % (*((_DWORD *)this + 2) - 1);
-      v6 = CRandom16::Rand((CRandom16 *)g_pRand) % (*((_DWORD *)this + 2) - *a2 - 1) + *a2 + 1;
+      *a2 = CRandom16::Rand(g_pRand) % (*((_DWORD *)this + 2) - 1);
+      v6 = CRandom16::Rand(g_pRand) % (*((_DWORD *)this + 2) - *a2 - 1) + *a2 + 1;
       result = a3;
       *a3 = v6;
     }
@@ -184,34 +184,33 @@ void  CMirrorBasicGrid::getMirrorBasisPoint(int & a2, int & a3, bool a4) {
   {
     if ( a4 )
     {
-      *a2 = CRandom16::Rand((CRandom16 *)g_pRand) % *((_DWORD *)this + 2);
-      v7 = CRandom16::Rand((CRandom16 *)g_pRand) % (*((_DWORD *)this + 2) - *a2);
+      *a2 = CRandom16::Rand(g_pRand) % *((_DWORD *)this + 2);
+      v7 = CRandom16::Rand(g_pRand) % (*((_DWORD *)this + 2) - *a2);
     }
     else
     {
-      *a2 = CRandom16::Rand((CRandom16 *)g_pRand) % (*((_DWORD *)this + 2) - 1);
-      v7 = CRandom16::Rand((CRandom16 *)g_pRand) % (*((_DWORD *)this + 2) - *a2 - 1);
+      *a2 = CRandom16::Rand(g_pRand) % (*((_DWORD *)this + 2) - 1);
+      v7 = CRandom16::Rand(g_pRand) % (*((_DWORD *)this + 2) - *a2 - 1);
     }
     result = a3;
     *a3 = v7;
   }
-  if ( (g_iFlags & 2) == 0 || (g_iFlags & 1) == 0 )
+  if ( (g_iFlags & 2) != 0 && (g_iFlags & 1) != 0 )
   {
-    return result;
-  }
-  if ( a4 )
-  {
-    *a2 = CRandom16::Rand((CRandom16 *)g_pRand) % (*((_DWORD *)this + 2) / 2);
-    v8 = CRandom16::Rand((CRandom16 *)g_pRand) % (*((_DWORD *)this + 2) - 2 * *a2);
-    result = (int *)a2;
-    *a3 = *a2 + v8;
-  }
-  else
-  {
-    *a2 = CRandom16::Rand((CRandom16 *)g_pRand) % ((*((_DWORD *)this + 2) - 1) / 2);
-    v9 = CRandom16::Rand((CRandom16 *)g_pRand) % (*((_DWORD *)this + 2) - (2 * *a2 + 2)) + *a2 + 1;
-    result = a3;
-    *a3 = v9;
+    if ( a4 )
+    {
+      *a2 = CRandom16::Rand(g_pRand) % (*((_DWORD *)this + 2) / 2);
+      v8 = CRandom16::Rand(g_pRand) % (*((_DWORD *)this + 2) - 2 * *a2);
+      result = (int *)a2;
+      *a3 = *a2 + v8;
+    }
+    else
+    {
+      *a2 = CRandom16::Rand(g_pRand) % ((*((_DWORD *)this + 2) - 1) / 2);
+      v9 = CRandom16::Rand(g_pRand) % (*((_DWORD *)this + 2) - (2 * *a2 + 2)) + *a2 + 1;
+      result = a3;
+      *a3 = v9;
+    }
   }
   return result;
 }

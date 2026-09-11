@@ -8,7 +8,7 @@
  CGoodsStatisticInfo::CGoodsStatisticInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CGoodsStatisticInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CGoodsStatisticInfo::_vftable_;
   return this;
 }
 

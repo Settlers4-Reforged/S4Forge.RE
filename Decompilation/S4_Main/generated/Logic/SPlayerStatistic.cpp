@@ -50,7 +50,7 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int _iOwnerId) {
   {
     if ( this->m_iOffenceStrengthBase256 != 256 && !v11 )
     {
-      if ( g_pGameType && CPlayerManager::IsAI(_iOwnerId) && g_pAI->IsInitialised(g_pAI) && IAIDifficultyLevels::GetDifficultyLevel(_iOwnerId) >= 2 )
+      if ( g_pGameType != 0 && CPlayerManager::IsAI(_iOwnerId) && g_pAI->IsInitialised(g_pAI) != 0 && IAIDifficultyLevels::GetDifficultyLevel(_iOwnerId) >= 2 )
       {
         v8 = this->m_iTotalBuildStone + this->m_iTotalBuiltWood + 2 * this->m_iTotalBuiltGold;
         v5 = v8;
@@ -120,7 +120,7 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int _iOwnerId) {
   {
     iEffectiveOffenceStrength256 = this->m_iOffenceStrength100_2;
   }
-  if ( g_pGameData && CGameData::GetMode(g_pGameData) == 3 )
+  if ( g_pGameData != 0 && CGameData::GetMode(g_pGameData) == 3 )
   {
     if ( iEffectiveOffenceStrength256 < 4 )
     {
@@ -149,8 +149,8 @@ void  CStatistic::SPlayerStatistic::CalculateFightingStrength(int _iOwnerId) {
   {
     this->m_iEffectiveDefenceStrength256 = (this->m_iEffectiveOffenceStrength256 - 256) / 2 + 256;
   }
-  this->m_iDefenceStrength100 = *(_DWORD *)std::max<int>(&this->m_iDefenceStrength100, &this->m_iEffectiveDefenceStrength256);
-  this->m_iOffenceStrength100 = *(_DWORD *)std::max<int>(&this->m_iOffenceStrength100, &this->m_iEffectiveOffenceStrength256);
+  this->m_iDefenceStrength100 = *(_DWORD *)std::max<int>((int)&this->m_iDefenceStrength100, (int)&this->m_iEffectiveDefenceStrength256);
+  this->m_iOffenceStrength100 = *(_DWORD *)std::max<int>((int)&this->m_iOffenceStrength100, (int)&this->m_iEffectiveOffenceStrength256);
 }
 
 

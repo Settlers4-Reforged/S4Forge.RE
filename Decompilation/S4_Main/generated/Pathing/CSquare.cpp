@@ -114,11 +114,11 @@ void  CSquare::InitAndFillTypeMapCatapult(int a2, int a3) {
       else
       {
         v15 = 0;
-        if ( v13 )
+        if ( v13 != 0 )
         {
           v15 = 1;
         }
-        else if ( v14 )
+        else if ( v14 != 0 )
         {
           for ( k = 1;
                 k < 19;
@@ -147,7 +147,7 @@ void  CSquare::InitAndFillTypeMapCatapult(int a2, int a3) {
           }
         }
         v13 = 0;
-        if ( v15 )
+        if ( v15 != 0 )
         {
           v14 = 1;
           *((_DWORD *)this + CSquare::Index(j, i) + 6) = -1;
@@ -243,7 +243,7 @@ void  CSquare::ConnectAreas(int a2, int a3) {
             i < v3;
             ++i )
       {
-        v4 = *(_DWORD *)TStaticArray<int,63>::operator[](i);
+        v4 = *(_DWORD *)((_DWORD *(__stdcall *)(int))TStaticArray<int,63>::operator[])(i);
         *((_DWORD *)this + v4 + 518) = v5;
         CAreaList::PushBack((CSquare *)((char *)this + 256 * v5 + 3096), v4);
       }
@@ -282,7 +282,7 @@ void  CSquare::CalcComponentTileIndices(int a2) {
     {
       break;
     }
-    if ( (unsigned __int8)TStaticArray<int,63>::Empty((char *)this + 256 * i + 3096) )
+    if ( (unsigned __int8)TStaticArray<int,63>::Empty((char *)this + 256 * i + 3096) != 0 )
     {
       *((_DWORD *)this + i + 8967) = 0;
     }

@@ -12,10 +12,10 @@ unsigned int  CInstallationInfo::GetConfigChecksum(void) {
 
   ConfigFileCRC = 1;
   for ( i = s_sConfigFiles;
-        i->m_sName;
+        i->m_sName != 0;
         ++i )
   {
-    if ( LOBYTE(i->m_uId) )
+    if ( LOBYTE(i->m_uId) != 0 )
     {
       ConfigFileCRC = CInstallationInfo::GetConfigFileCRC((wchar_t *)i->m_sName, ConfigFileCRC);
     }
@@ -42,13 +42,13 @@ unsigned int  CInstallationInfo::GetGfxChecksum(void) {
   SGfxFile *i; // [esp+28h] [ebp-4h]
 
   CPerformanceCounter::CPerformanceCounter((CPerformanceCounter *)v3);
-  CPerformanceCounter::Start(v3);
+  CPerformanceCounter::Start((CPerformanceCounter *)v3);
   GfxFileCRC = 1;
   for ( i = s_sGfxFiles;
         i->m_uId >= 0;
         ++i )
   {
-    if ( LOBYTE(i->m_uU) )
+    if ( LOBYTE(i->m_uU) != 0 )
     {
       GfxFileCRC = CInstallationInfo::GetGfxFileCRC(i->m_uId, GfxFileCRC);
     }
@@ -72,7 +72,7 @@ bool  CInstallationInfo::CheckInstallation(int a2) {
   v2 = CInstallationInfo::CheckConfigFiles(a2) & 1;
   v3 = CInstallationInfo::CheckGfxFiles(a2) & v2;
   v6 = CInstallationInfo::CheckWithLuaScript(a2) & v3;
-  if ( v6 )
+  if ( v6 != 0 )
   {
     BBSupportTracePrintF(1, "Installation check: %s!", "Ok");
   }
@@ -99,7 +99,7 @@ bool  CInstallationInfo::IsOptionalGameConfigFile(wchar_t const * String2) {
     {
       j___wassert(L"false", L"main\\InstallationInfo.cpp", 0x271u);
     }
-    if ( !j__wcscmp(i->m_sName, String2) )
+    if ( j__wcscmp(i->m_sName, String2) == 0 )
     {
       break;
     }
@@ -122,7 +122,7 @@ bool  CInstallationInfo::IsOptionalGameConfigFile(wchar_t const * String2) {
 // Decompiled from void __thiscall CInstallationInfo::~CInstallationInfo(CInstallationInfo *this)
  CInstallationInfo::~CInstallationInfo(void) {
   
-  IInstallationInfo::~IInstallationInfo(this);
+  IInstallationInfo::~IInstallationInfo((IInstallationInfo *)this);
 }
 
 
@@ -141,31 +141,30 @@ bool __cdecl CInstallationInfo::GetFileProperties(wchar_t const * String, struct
   v9 = &v3;
   memset(a2, 0, sizeof(SFileProperties));
   v7 = 0;
-  if ( !String || !*String )
+  if ( String != 0 && *String != 0 )
   {
-    return v7;
+    CFileEx::CFileEx(&v8, UNUSED_ARG());
+    v10 = 1;
+    CFileEx::Open(&v8.IFileEx, String, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
+    v4 = CFileEx::Size(&v8);
+    a2->m_uSize = v4;
+    if ( CFileEx::InLibrary(&v8) )
+    {
+      a2->m_bOutsideLibrary = 0;
+      a2->m_bInLib = 1;
+    }
+    else
+    {
+      a2->m_bOutsideLibrary = 1;
+      DoesFileExistInLib = CFileLibrary::DoesFileExistInLib(String);
+      a2->m_bInLib = DoesFileExistInLib;
+    }
+    v7 = 1;
+    v10 = 0;
+    CFileEx::Close(&v8.IFileEx, UNUSED_ARG(), UNUSED_ARG());
+    v10 = -1;
+    CFileEx::~CFileEx(&v8);
   }
-  CFileEx::CFileEx(&v8, UNUSED_ARG());
-  v10 = 1;
-  CFileEx::Open(&v8.IFileEx, String, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
-  v4 = CFileEx::Size(&v8);
-  a2->m_uSize = v4;
-  if ( CFileEx::InLibrary(&v8) )
-  {
-    a2->m_bOutsideLibrary = 0;
-    a2->m_bInLib = 1;
-  }
-  else
-  {
-    a2->m_bOutsideLibrary = 1;
-    DoesFileExistInLib = CFileLibrary::DoesFileExistInLib(String);
-    a2->m_bInLib = DoesFileExistInLib;
-  }
-  v7 = 1;
-  v10 = 0;
-  CFileEx::Close(&v8.IFileEx, UNUSED_ARG(), UNUSED_ARG());
-  v10 = -1;
-  CFileEx::~CFileEx(&v8);
   return v7;
 }
 
@@ -188,7 +187,7 @@ unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const * FileName, uns
   int v14; // [esp+ACh] [ebp-4h]
 
   v13 = &v3;
-  if ( !FileName || !*FileName )
+  if ( FileName == 0 || *FileName == 0 )
   {
     return a2;
   }
@@ -200,7 +199,7 @@ unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const * FileName, uns
   CFileEx::Open(&v12.IFileEx, FileName, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
   v8 = CFileEx::Size(&v12);
   ElementCount = v8;
-  if ( v8 )
+  if ( v8 != 0 )
   {
     v7 = operator new[](ElementCount + 8);
     v6 = v7;
@@ -210,14 +209,11 @@ unsigned int __cdecl CInstallationInfo::GetFileCRC(wchar_t const * FileName, uns
   }
   v14 = 0;
   CFileEx::Close(&v12.IFileEx, UNUSED_ARG(), UNUSED_ARG());
-  if ( v11 )
+  if ( v11 != 0 && Buffer != 0 )
   {
-    if ( Buffer )
-    {
-      a2 = Adler32((unsigned __int8 *)Buffer, ElementCount, a2);
-      C = Buffer;
-      operator delete[](Buffer);
-    }
+    a2 = Adler32((unsigned __int8 *)Buffer, ElementCount, a2);
+    C = Buffer;
+    operator delete[](Buffer);
   }
   v4 = a2;
   v14 = -1;
@@ -235,7 +231,7 @@ unsigned int __cdecl CInstallationInfo::GetConfigFileCRC(wchar_t const * String,
   std::wstring ret; // [esp+8h] [ebp-2Ch] BYREF
   int v6; // [esp+30h] [ebp-4h]
 
-  if ( !String || !*String )
+  if ( String == 0 || *String == 0 )
   {
     return a2;
   }
@@ -289,16 +285,16 @@ bool __cdecl CInstallationInfo::CheckFile(wchar_t const * a1, int a2) {
   FileProperties = CInstallationInfo::GetFileProperties(a1, &v3);
   if ( (a2 & 0x10000) != 0 )
   {
-    if ( FileProperties )
+    if ( FileProperties != 0 )
     {
       BBSupportTracePrintF(1, "File should not exist: %s!", (const char *)a1);
     }
     v4 = FileProperties == 0;
     return FileProperties == 0;
   }
-  else if ( FileProperties )
+  else if ( FileProperties != 0 )
   {
-    if ( !v3.m_uSize )
+    if ( v3.m_uSize == 0 )
     {
       FileProperties = 0;
       BBSupportTracePrintF(1, "File is empty: %s!", (const char *)a1);
@@ -308,7 +304,7 @@ bool __cdecl CInstallationInfo::CheckFile(wchar_t const * a1, int a2) {
       FileProperties = 0;
       BBSupportTracePrintF(1, "File exists inside and outside of file library: %s!", (const char *)a1);
     }
-    if ( (a2 & 0x20000) != 0 && v3.m_bInLib )
+    if ( (a2 & 0x20000) != 0 && v3.m_bInLib != 0 )
     {
       FileProperties = 0;
       BBSupportTracePrintF(1, "File exists inside file library: %s!", (const char *)a1);
@@ -367,7 +363,7 @@ bool __cdecl CInstallationInfo::CheckConfigFiles(int a1) {
 
   v3 = 1;
   for ( i = s_sConfigFiles;
-        i->m_sName;
+        i->m_sName != 0;
         ++i )
   {
     v3 &= CInstallationInfo::CheckConfigFile((wchar_t *)i->m_sName, i->m_uFlags | a1);
@@ -420,179 +416,176 @@ void  CInstallationInfo::CheckTrojanVehicleGfx(void) {
       SetFileAttributesW(L"Gfx\\34.gfx", dwFileAttributes ^ 1);
     }
     hFile = CreateFileW(L"Gfx\\34.gfx", 0xC0000000, 0, 0, 3u, 0x80u, 0);
-    if ( hFile )
+    if ( hFile != 0 && GetFileSize(hFile, 0) == 0x365FEE )
     {
-      if ( GetFileSize(hFile, 0) == 0x365FEE )
+      for ( i = 0;
+            i < 1;
+            ++i )
       {
-        for ( i = 0;
-              i < 1;
-              ++i )
+        for ( j = 0;
+              j < 1;
+              ++j )
         {
-          for ( j = 0;
-                j < 1;
-                ++j )
+          NumberOfBytesRead = 0;
+          for ( k = 0;
+                s_cTrojanVehicleGfxCheckpoints[k].m_uAtOffset != 0;
+                ++k )
           {
-            NumberOfBytesRead = 0;
-            for ( k = 0;
-                  s_cTrojanVehicleGfxCheckpoints[k].m_uAtOffset;
-                  ++k )
-            {
-              SetFilePointer(hFile, s_cTrojanVehicleGfxCheckpoints[k].m_uAtOffset, 0, FILE_BEGIN);
-              ReadFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
-              ReadFile(hFile, &v9, 2u, &NumberOfBytesRead, 0);
-              if ( v10 != s_cTrojanVehicleGfxCheckpoints[k].m_uExpectedData[2] || v9 != s_cTrojanVehicleGfxCheckpoints[k].m_uExpectedData[3] )
-              {
-                goto LABEL_61;
-              }
-            }
-            v1 = 0;
-            SetFilePointer(hFile, 0, 0, FILE_BEGIN);
-            v11 = 0;
-            ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-            if ( !NumberOfBytesRead )
-            {
-              v11 = 1;
-            }
-            while ( !v11 )
-            {
-              if ( Buffer == 161 )
-              {
-                ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                if ( NumberOfBytesRead )
-                {
-                  if ( !Buffer )
-                  {
-                    ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                    if ( NumberOfBytesRead )
-                    {
-                      if ( Buffer == 30 )
-                      {
-                        ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                        if ( NumberOfBytesRead )
-                        {
-                          if ( !Buffer )
-                          {
-                            ++v1;
-                            ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                            if ( !NumberOfBytesRead )
-                            {
-                              v11 = 1;
-                            }
-                          }
-                        }
-                        else
-                        {
-                          v11 = 1;
-                        }
-                      }
-                    }
-                    else
-                    {
-                      v11 = 1;
-                    }
-                  }
-                }
-                else
-                {
-                  v11 = 1;
-                }
-              }
-              else
-              {
-                ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                if ( !NumberOfBytesRead )
-                {
-                  v11 = 1;
-                }
-              }
-            }
-            if ( v1 != 96 )
+            SetFilePointer(hFile, s_cTrojanVehicleGfxCheckpoints[k].m_uAtOffset, 0, FILE_BEGIN);
+            ReadFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
+            ReadFile(hFile, &v9, 2u, &NumberOfBytesRead, 0);
+            if ( v10 != s_cTrojanVehicleGfxCheckpoints[k].m_uExpectedData[2] || v9 != s_cTrojanVehicleGfxCheckpoints[k].m_uExpectedData[3] )
             {
               goto LABEL_61;
             }
-            for ( m = 0;
-                  s_cTrojanVehicleGfxCheckpoints[m].m_uAtOffset;
-                  ++m )
+          }
+          v1 = 0;
+          SetFilePointer(hFile, 0, 0, FILE_BEGIN);
+          v11 = 0;
+          ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+          if ( NumberOfBytesRead == 0 )
+          {
+            v11 = 1;
+          }
+          while ( v11 == 0 )
+          {
+            if ( Buffer == 161 )
             {
-              SetFilePointer(hFile, s_cTrojanVehicleGfxCheckpoints[m].m_uAtOffset, 0, FILE_BEGIN);
-              v10 = s_cTrojanVehicleGfxCheckpoints[m].m_uExpectedData[0];
-              v9 = s_cTrojanVehicleGfxCheckpoints[m].m_uExpectedData[1];
-              WriteFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
-              NumberOfBytesRead = 0;
-              WriteFile(hFile, &v9, 2u, &NumberOfBytesRead, 0);
-            }
-            Buffer = 0;
-            SetFilePointer(hFile, 0, 0, FILE_BEGIN);
-            v11 = 0;
-            ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-            if ( !NumberOfBytesRead )
-            {
-              v11 = 1;
-            }
-            v10 = 'x';
-            v9 = ';';
-            while ( !v11 )
-            {
-              if ( Buffer == 0xA1 )
+              ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+              if ( NumberOfBytesRead != 0 )
               {
-                ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                if ( NumberOfBytesRead )
+                if ( Buffer == 0 )
                 {
-                  if ( !Buffer )
+                  ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                  if ( NumberOfBytesRead != 0 )
                   {
-                    ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                    if ( NumberOfBytesRead )
+                    if ( Buffer == 30 )
                     {
-                      if ( Buffer == 30 )
+                      ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                      if ( NumberOfBytesRead != 0 )
                       {
-                        ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                        if ( NumberOfBytesRead )
+                        if ( Buffer == 0 )
                         {
-                          if ( !Buffer )
+                          ++v1;
+                          ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                          if ( NumberOfBytesRead == 0 )
                           {
-                            SetFilePointer(hFile, -4, 0, FILE_CURRENT);
-                            NumberOfBytesRead = 0;
-                            WriteFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
-                            NumberOfBytesRead = 0;
-                            WriteFile(hFile, &v9, 2u, &NumberOfBytesRead, 0);
-                            ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                            if ( !NumberOfBytesRead )
-                            {
-                              v11 = 1;
-                            }
+                            v11 = 1;
                           }
                         }
-                        else
-                        {
-                          v11 = 1;
-                        }
+                      }
+                      else
+                      {
+                        v11 = 1;
                       }
                     }
-                    else
-                    {
-                      v11 = 1;
-                    }
                   }
-                }
-                else
-                {
-                  v11 = 1;
+                  else
+                  {
+                    v11 = 1;
+                  }
                 }
               }
               else
               {
-                ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
-                if ( !NumberOfBytesRead )
+                v11 = 1;
+              }
+            }
+            else
+            {
+              ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+              if ( NumberOfBytesRead == 0 )
+              {
+                v11 = 1;
+              }
+            }
+          }
+          if ( v1 != 96 )
+          {
+            goto LABEL_61;
+          }
+          for ( m = 0;
+                s_cTrojanVehicleGfxCheckpoints[m].m_uAtOffset != 0;
+                ++m )
+          {
+            SetFilePointer(hFile, s_cTrojanVehicleGfxCheckpoints[m].m_uAtOffset, 0, FILE_BEGIN);
+            v10 = s_cTrojanVehicleGfxCheckpoints[m].m_uExpectedData[0];
+            v9 = s_cTrojanVehicleGfxCheckpoints[m].m_uExpectedData[1];
+            WriteFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
+            NumberOfBytesRead = 0;
+            WriteFile(hFile, &v9, 2u, &NumberOfBytesRead, 0);
+          }
+          Buffer = 0;
+          SetFilePointer(hFile, 0, 0, FILE_BEGIN);
+          v11 = 0;
+          ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+          if ( NumberOfBytesRead == 0 )
+          {
+            v11 = 1;
+          }
+          v10 = 'x';
+          v9 = ';';
+          while ( v11 == 0 )
+          {
+            if ( Buffer == 0xA1 )
+            {
+              ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+              if ( NumberOfBytesRead != 0 )
+              {
+                if ( Buffer == 0 )
                 {
-                  v11 = 1;
+                  ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                  if ( NumberOfBytesRead != 0 )
+                  {
+                    if ( Buffer == 30 )
+                    {
+                      ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                      if ( NumberOfBytesRead != 0 )
+                      {
+                        if ( Buffer == 0 )
+                        {
+                          SetFilePointer(hFile, -4, 0, FILE_CURRENT);
+                          NumberOfBytesRead = 0;
+                          WriteFile(hFile, &v10, 2u, &NumberOfBytesRead, 0);
+                          NumberOfBytesRead = 0;
+                          WriteFile(hFile, &v9, 2u, &NumberOfBytesRead, 0);
+                          ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+                          if ( NumberOfBytesRead == 0 )
+                          {
+                            v11 = 1;
+                          }
+                        }
+                      }
+                      else
+                      {
+                        v11 = 1;
+                      }
+                    }
+                  }
+                  else
+                  {
+                    v11 = 1;
+                  }
                 }
+              }
+              else
+              {
+                v11 = 1;
+              }
+            }
+            else
+            {
+              ReadFile(hFile, &Buffer, 1u, &NumberOfBytesRead, 0);
+              if ( NumberOfBytesRead == 0 )
+              {
+                v11 = 1;
               }
             }
           }
         }
-LABEL_61:
-        CloseHandle(hFile);
       }
+LABEL_61:
+      CloseHandle(hFile);
     }
   }
 }
@@ -608,26 +601,25 @@ bool __cdecl CInstallationInfo::CheckWithLuaScript(int a1) {
 
   CInstallationInfo::m_iLuaCheckFlags = a1;
   CInstallationInfo::m_bLuaCheckOk = CInstallationInfo::CheckFile((wchar_t *)L"Script\\Internal\\CheckInstallation.txt", a1);
-  if ( !CInstallationInfo::m_bLuaCheckOk )
+  if ( CInstallationInfo::m_bLuaCheckOk != 0 )
   {
-    return CInstallationInfo::m_bLuaCheckOk;
+    CLua::CLua((CLua *)&v2);
+    v4 = 0;
+    CLua::ExportGlobalVar("MUST_NOT_EXIST", DOUBLE_65536_0);
+    CLua::ExportGlobalVar("NOT_INTERNAL", DOUBLE_131072_0);
+    CLua::ExportGlobalVar("OPTIONAL", DOUBLE_262144_0);
+    CLua::ExportGlobalVar("PROD_NOT_EXTERNAL", DOUBLE_524288_0);
+    ((void (__stdcall *)(int, char *))CLua::ExportFunction)((int)CInstallationInfo::LuaCheckFile, "CheckFile");
+    ((void (__stdcall *)(int, char *))CLua::ExportFunction)((int)CInstallationInfo::LuaCheckFiles, "CheckFiles");
+    v3 = CLua::ExecuteScript((wchar_t *)L"Script\\Internal\\CheckInstallation.txt");
+    if ( v3 == 0 )
+    {
+      BBSupportTracePrintF(1, "Failed to execute script!");
+    }
+    CInstallationInfo::m_bLuaCheckOk &= v3;
+    v4 = -1;
+    CLua::~CLua(&v2);
   }
-  CLua::CLua((CLua *)&v2);
-  v4 = 0;
-  CLua::ExportGlobalVar("MUST_NOT_EXIST", DOUBLE_65536_0);
-  CLua::ExportGlobalVar("NOT_INTERNAL", DOUBLE_131072_0);
-  CLua::ExportGlobalVar("OPTIONAL", DOUBLE_262144_0);
-  CLua::ExportGlobalVar("PROD_NOT_EXTERNAL", DOUBLE_524288_0);
-  CLua::ExportFunction((int)CInstallationInfo::LuaCheckFile, "CheckFile");
-  CLua::ExportFunction((int)CInstallationInfo::LuaCheckFiles, "CheckFiles");
-  v3 = CLua::ExecuteScript((wchar_t *)L"Script\\Internal\\CheckInstallation.txt");
-  if ( !v3 )
-  {
-    BBSupportTracePrintF(1, "Failed to execute script!");
-  }
-  CInstallationInfo::m_bLuaCheckOk &= v3;
-  v4 = -1;
-  CLua::~CLua(&v2);
   return CInstallationInfo::m_bLuaCheckOk;
 }
 
@@ -651,7 +643,7 @@ void __cdecl CInstallationInfo::LuaCheckFile(void) {
   Str = (char *)CInstallationInfo::LuaGetString(v0);
   v1 = j__lua_lua2C(2);
   IntegerZeroIfNoObject = CInstallationInfo::LuaGetIntegerZeroIfNoObject(v1);
-  if ( Str && *Str && IntegerZeroIfNoObject >= 0 )
+  if ( Str != 0 && *Str != 0 && IntegerZeroIfNoObject >= 0 )
   {
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v8);
     v10 = 0;
@@ -703,7 +695,7 @@ void __cdecl CInstallationInfo::LuaCheckFiles(void) {
   v8 = CInstallationInfo::LuaGetInteger(v2);
   v3 = j__lua_lua2C(4);
   IntegerZeroIfNoObject = CInstallationInfo::LuaGetIntegerZeroIfNoObject(v3);
-  if ( Format && *Format && Integer >= 0 && v8 >= 0 && IntegerZeroIfNoObject >= 0 )
+  if ( Format != 0 && *Format != 0 && Integer >= 0 && v8 >= 0 && IntegerZeroIfNoObject >= 0 )
   {
     Str[511] = 0;
     for ( i = Integer;
@@ -734,10 +726,10 @@ void __cdecl CInstallationInfo::LuaCheckFiles(void) {
 
 
 // address=[0x1496980]
-// Decompiled from int __cdecl CInstallationInfo::LuaGetInteger(unsigned int a1)
+// Decompiled from int __cdecl CInstallationInfo::LuaGetInteger(int a1)
 int __cdecl CInstallationInfo::LuaGetInteger(unsigned int a1) {
   
-  if ( j__lua_isnumber(a1) )
+  if ( j__lua_isnumber(a1) != 0 )
   {
     return (int)j__lua_getnumber(a1);
   }
@@ -752,7 +744,7 @@ int __cdecl CInstallationInfo::LuaGetInteger(unsigned int a1) {
 // Decompiled from int __cdecl CInstallationInfo::LuaGetIntegerZeroIfNoObject(unsigned int a1)
 int __cdecl CInstallationInfo::LuaGetIntegerZeroIfNoObject(unsigned int a1) {
   
-  if ( a1 )
+  if ( a1 != 0 )
   {
     return CInstallationInfo::LuaGetInteger(a1);
   }
@@ -764,10 +756,10 @@ int __cdecl CInstallationInfo::LuaGetIntegerZeroIfNoObject(unsigned int a1) {
 
 
 // address=[0x1496a10]
-// Decompiled from int __cdecl CInstallationInfo::LuaGetString(unsigned int a1)
+// Decompiled from char *__cdecl CInstallationInfo::LuaGetString(int a1)
 char const * __cdecl CInstallationInfo::LuaGetString(unsigned int a1) {
   
-  if ( j__lua_isstring(a1) )
+  if ( j__lua_isstring(a1) != 0 )
   {
     return j__lua_getstring(a1);
   }

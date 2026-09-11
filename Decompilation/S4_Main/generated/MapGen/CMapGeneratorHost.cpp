@@ -9,24 +9,24 @@ void  CMapGeneratorHost::Init(int a2) {
   void *result; // eax
   int i; // [esp+8h] [ebp-8h]
 
-  CMapGeneratorHost::CleanUp((CMapGeneratorHost *)this);
+  CMapGeneratorHost::CleanUp(this);
   *((_BYTE *)this + 4) = 1;
-  this[2] = (void *)((_DWORD)this[5] * (_DWORD)this[5]);
+  *(this + 2) = (void *)((_DWORD)*(this + 5) * (_DWORD)*(this + 5));
   CMapGeneratorHost::ClearRandomMapInfo((CMapGeneratorHost *)this);
-  this[52] = this[5];
-  this[53] = this[11];
+  *(this + 52) = *(this + 5);
+  *(this + 53) = *(this + 11);
   memset(this + 72, 0, 0x18u);
-  this[75] = this[5];
-  this[73] = this[11];
-  this[78] = operator new[](4 * (_DWORD)this[2]);
-  memset(this[78], 0, 4 * (_DWORD)this[2]);
-  this[79] = operator new[](4 * (_DWORD)this[2]);
-  result = memset(this[79], 0, 4 * (_DWORD)this[2]);
+  *(this + 75) = *(this + 5);
+  *(this + 73) = *(this + 11);
+  *(this + 78) = operator new[](4 * (_DWORD)*(this + 2));
+  memset(*(this + 78), 0, 4 * (_DWORD)*(this + 2));
+  *(this + 79) = operator new[](4 * (_DWORD)*(this + 2));
+  result = memset(*(this + 79), 0, 4 * (_DWORD)*(this + 2));
   for ( i = 0;
-        i < (int)this[2];
+        i < (int)*(this + 2);
         ++i )
   {
-    *((_BYTE *)this[78] + 4 * i + 1) = 7;
+    *((_BYTE *)*(this + 78) + 4 * i + 1) = 7;
     result = (void *)(i + 1);
   }
   return result;
@@ -43,32 +43,31 @@ void  CMapGeneratorHost::UpdateGroundInformation(void) {
   int i; // [esp+8h] [ebp-8h]
 
   result = (CMapGeneratorHost *)this;
-  if ( !*((_BYTE *)this + 4) )
+  if ( *((_BYTE *)this + 4) != 0 )
   {
-    return result;
-  }
-  result = this[78];
-  v2 = result;
-  v3 = this[79];
-  for ( i = 0;
-        i < (int)this[2];
-        ++i )
-  {
-    CMapGeneratorHost::RefreshShading((CMapGeneratorHost *)this, i);
-    if ( CLandscapeProperties::IsBlockedLand((CLandscapeProperties *)&s_cLandscapeProperties, *((unsigned __int8 *)v2 + 1)) )
+    result = *(this + 78);
+    v2 = result;
+    v3 = *(this + 79);
+    for ( i = 0;
+          i < (int)*(this + 2);
+          ++i )
     {
-      *((_BYTE *)v3 + 2) |= 1u;
+      CMapGeneratorHost::RefreshShading((CMapGeneratorHost *)this, i);
+      if ( CLandscapeProperties::IsBlockedLand(&s_cLandscapeProperties, *((unsigned __int8 *)v2 + 1)) )
+      {
+        *((_BYTE *)v3 + 2) |= 1u;
+      }
+      v2 = (CMapGeneratorHost *)((char *)v2 + 4);
+      v3 = (CMapGeneratorHost *)((char *)v3 + 4);
+      result = (CMapGeneratorHost *)(i + 1);
     }
-    v2 = (CMapGeneratorHost *)((char *)v2 + 4);
-    v3 = (CMapGeneratorHost *)((char *)v3 + 4);
-    result = (CMapGeneratorHost *)(i + 1);
   }
   return result;
 }
 
 
 // address=[0x1498720]
-// Decompiled from char __thiscall CMapGeneratorHost::SetObject(CMapGeneratorHost *this, Grid *a2, unsigned int a3, int a4)
+// Decompiled from char __thiscall CMapGeneratorHost::SetObject(CMapGeneratorHost *this, Grid *a2, unsigned int a3, T_OBJECT_TYPE a4)
 bool  CMapGeneratorHost::SetObject(int a2, int a3, int a4) {
   
   char *v5; // [esp+4h] [ebp-6Ch]
@@ -103,7 +102,7 @@ bool  CMapGeneratorHost::SetObject(int a2, int a3, int a4) {
     return 0;
   }
   v23 = (char *)a2 + *((_DWORD *)v28 + 52) * a3;
-  if ( *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (_DWORD)v23) )
+  if ( *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * (_DWORD)v23) != 0 )
   {
     return 0;
   }
@@ -111,7 +110,7 @@ bool  CMapGeneratorHost::SetObject(int a2, int a3, int a4) {
   {
     return 0;
   }
-  CDecoObjMgr::GetDecoObjectFlagsInfo((CDecoObjMgr *)&g_cDecoObjMgr, a4, &v29, &v27, &v15);
+  CDecoObjMgr::GetDecoObjectFlagsInfo(&g_cDecoObjMgr, a4, (BYTE *)&v29, &v27, &v15);
   if ( v29 )
   {
     if ( v27 != 1 && BBSupportDbgReport(2, "main\\RandomMapHost.cpp", 317, (const char *)&dword_37039A0[1]) == 1 )
@@ -133,7 +132,7 @@ bool  CMapGeneratorHost::SetObject(int a2, int a3, int a4) {
         return 0;
       }
       v19 = v20 + *((_DWORD *)v28 + 52) * v21;
-      if ( *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * v19) )
+      if ( *(_BYTE *)(*((_DWORD *)v28 + 79) + 4 * v19) != 0 )
       {
         return 0;
       }
@@ -254,10 +253,10 @@ void  CMapGeneratorHost::SetPlayerStartPosition(int a2, int a3, int a4) {
 
 
 // address=[0x1498c30]
-// Decompiled from void __thiscall CMapGeneratorHost::~CMapGeneratorHost(CMapGeneratorHost *this)
+// Decompiled from void __thiscall CMapGeneratorHost::~CMapGeneratorHost(void **this)
  CMapGeneratorHost::~CMapGeneratorHost(void) {
   
-  *(_DWORD *)this = &CMapGeneratorHost::_vftable_;
+  *this = &CMapGeneratorHost::_vftable_;
   CMapGeneratorHost::CleanUp(this);
 }
 
@@ -269,24 +268,23 @@ void  CMapGeneratorHost::CleanUp(void) {
   CMapGeneratorHost *result; // eax
 
   result = (CMapGeneratorHost *)this;
-  if ( !*((_BYTE *)this + 4) )
+  if ( *((_BYTE *)this + 4) != 0 )
   {
-    return result;
+    if ( *(this + 79) != 0 )
+    {
+      operator delete[](*(this + 79));
+      *(this + 79) = 0;
+    }
+    if ( *(this + 78) != 0 )
+    {
+      operator delete[](*(this + 78));
+      *(this + 78) = 0;
+    }
+    CMapGeneratorHost::ClearRandomMapInfo((CMapGeneratorHost *)this);
+    result = (CMapGeneratorHost *)this;
+    *(this + 2) = 0;
+    *((_BYTE *)this + 4) = 0;
   }
-  if ( this[79] )
-  {
-    operator delete[](this[79]);
-    this[79] = 0;
-  }
-  if ( this[78] )
-  {
-    operator delete[](this[78]);
-    this[78] = 0;
-  }
-  CMapGeneratorHost::ClearRandomMapInfo((CMapGeneratorHost *)this);
-  result = (CMapGeneratorHost *)this;
-  this[2] = 0;
-  *((_BYTE *)this + 4) = 0;
   return result;
 }
 
@@ -311,8 +309,8 @@ void  CMapGeneratorHost::ClearRandomMapInfo(void) {
 void  CMapGeneratorHost::UploadChunks(class S4::CMapFile & a2) {
   
   S4::CMapFile::UploadBuffer(1, 0, this + 72, 0x18u, 0);
-  S4::CMapFile::UploadBuffer(13, 0, this[78], 4 * (_DWORD)this[2], 0);
-  S4::CMapFile::UploadBuffer(6, 0, this[79], 4 * (_DWORD)this[2], 0);
+  S4::CMapFile::UploadBuffer(13, 0, *(this + 78), 4 * (_DWORD)*(this + 2), 0);
+  S4::CMapFile::UploadBuffer(6, 0, *(this + 79), 4 * (_DWORD)*(this + 2), 0);
   return S4::CMapFile::UploadBuffer(220, 0, this + 49, 0x5Cu, 0);
 }
 

@@ -34,8 +34,8 @@ void  CWheeler::RemoveFromWorld(void) {
   int result; // eax
 
   v1 = IEntity::PackedXY(this);
-  result = (*(int (__thiscall **)(CWheeler *, int))(*(_DWORD *)this + 200))(this, v1);
-  *((_DWORD *)this + 6) = 0;
+  result = ((int (__thiscall *)(CWheeler *, int))this->RemoveVehicle)(this, v1);
+  this->m_uPackedXY = 0;
   return result;
 }
 
@@ -48,23 +48,21 @@ void  CWheeler::Delete(void) {
   int v2; // eax
   int v4; // [esp+0h] [ebp-8h]
 
-  if ( *((int *)this + 43) <= 0 )
+  if ( (int)this->field_ac > 0 )
   {
-    return CVehicle::Delete(this);
+    v1 = (void **)CMapObjectMgr::EntityPtr(this->field_ac);
+    if ( j____RTDynamicCast(v1, 0, &IEntity__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 176, "dynamic_cast<CFerryShip*>(g_pMapObjectMgr->EntityPtr(m_iFerryID))!= NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    v4 = (int)CMapObjectMgr::EntityPtr(this->field_ac);
+    if ( v4 != 0 )
+    {
+      v2 = ((int (__stdcall *)())IEntity::ID)();
+      (*(void (__thiscall **)(int, int))(*(_DWORD *)v4 + 124))(v4, v2);
+    }
   }
-  v1 = (void **)CMapObjectMgr::EntityPtr(*((_DWORD *)this + 43));
-  if ( !j____RTDynamicCast(v1, 0, &IEntity__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 176, "dynamic_cast<CFerryShip*>(g_pMapObjectMgr->EntityPtr(m_iFerryID))!= NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  v4 = CMapObjectMgr::EntityPtr(*((_DWORD *)this + 43));
-  if ( !v4 )
-  {
-    return CVehicle::Delete(this);
-  }
-  v2 = IEntity::ID();
-  (*(void (__thiscall **)(int, int))(*(_DWORD *)v4 + 124))(v4, v2);
-  return CVehicle::Delete(this);
+  return ((int (__thiscall *)(CVehicle *))CVehicle::Delete)(this);
 }
 
 
@@ -77,12 +75,12 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
   BYTE v4; // [esp+4h] [ebp-Ch]
   BYTE v5; // [esp+8h] [ebp-8h]
 
-  if ( (unsigned __int8)CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
+  if ( CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
   {
     IAnimatedEntity::BoxSelection();
   }
   CVehicle::Update(this);
-  if ( (unsigned __int8)CVehicle::IsTurning(this) )
+  if ( (unsigned __int8)CVehicle::IsTurning(this) != 0 )
   {
     (*(void (__thiscall **)(int))(*(_DWORD *)this + 184))(this);
   }
@@ -92,18 +90,18 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
     CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v3, *(unsigned __int16 *)(this + 38), *(char *)(this + 68), *(unsigned __int8 *)(this + 36), 0, 0);
   }
   v1 = IEntity::OwnerId((IEntity *)this);
-  MEMORY[0x40FE51B] = CPlayerManager::Color(v1);
-  MEMORY[0x40FE51D] = *(_BYTE *)(this + 68);
-  MEMORY[0x40FE51C] = *(_BYTE *)(this + 69);
-  MEMORY[0x40FE518] = 4;
-  MEMORY[0x40FE51A] = IEntity::IsVisible((_DWORD *)this);
-  if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)&dword_F29144[220079]) )
+  IEntity::m_sGfxInfo.m_iColor = CPlayerManager::Color(v1);
+  IEntity::m_sGfxInfo.m_iDirection = *(_BYTE *)(this + 68);
+  IEntity::m_sGfxInfo.m_iDistance = *(_BYTE *)(this + 69);
+  IEntity::m_sGfxInfo.m_uObjType = 4;
+  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible((_DWORD *)this);
+  if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)&dword_F29144[220079]) != 0 )
   {
-    MEMORY[0x40FE2AC] = 65534 - *(unsigned __int16 *)(this + 124) * *(unsigned __int16 *)(this + 128);
+    IEntity::m_sGfxInfo.uConstructionProgress = 65534 - *(unsigned __int16 *)(this + 124) * *(unsigned __int16 *)(this + 128);
   }
-  if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) != 0 )
   {
-    if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
+    if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) != 0 )
     {
       v5 = 73;
     }
@@ -113,9 +111,9 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
     }
     IEntity::m_sGfxInfo.m_uFlags = v5;
   }
-  else if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
+  else if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) != 0 )
   {
-    if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
+    if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) != 0 )
     {
       v4 = 90;
     }
@@ -151,13 +149,13 @@ void  CWheeler::ConvertEventIntoGoal(class CEntityEvent * a2) {
   int v17; // [esp+18h] [ebp-10h]
   int v18; // [esp+1Ch] [ebp-Ch]
 
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 241, "_pEvent!=NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 241, "_pEvent!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( a2 )
+  if ( a2 != 0 )
   {
-    switch ( *((_DWORD *)a2 + 1) )
+    switch ( a2->m_iEvent )
     {
       case 7:
         IEntity::SetFlagBits(this, ENTITY_FLAG_Selectable);
@@ -166,71 +164,71 @@ void  CWheeler::ConvertEventIntoGoal(class CEntityEvent * a2) {
         v8 = IEntity::X(this);
         v9 = CVehicle::NewDestination(this, v8, v10, 0);
         CVehicle::NotifyCallTakeJob(v9);
-        *((_DWORD *)this + 43) = 0;
-        *((_DWORD *)this + 42) = 0;
+        this->field_ac = 0;
+        this->field_a8 = 0;
         break;
       case 0x11:
-        if ( *((_DWORD *)a2 + 2) != 13 || *((int *)this + 43) > 0 )
+        if ( a2->m_iType != 13 || (int)this->field_ac > 0 )
         {
           goto CWheeler__ConvertEventIntoGoal___def_19B016F;
         }
-        v11 = Y16X16::UnpackXFast(*((_DWORD *)a2 + 5));
-        v12 = Y16X16::UnpackYFast(*((_DWORD *)a2 + 5));
+        v11 = Y16X16::UnpackXFast(a2->m_iDataC);
+        v12 = Y16X16::UnpackYFast(a2->m_iDataC);
         FerryShipAt = (CPropertySheet *)CVehicleMgr::GetFerryShipAt(v11, v12);
-        if ( !FerryShipAt )
+        if ( FerryShipAt == 0 )
         {
-          if ( *((int *)this + 43) > 0 )
+          if ( (int)this->field_ac > 0 )
           {
-            v3 = (void **)CMapObjectMgr::EntityPtr(*((_DWORD *)this + 43));
-            if ( !j____RTDynamicCast(v3, 0, &IEntity__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 274, "dynamic_cast<CFerryShip*>(g_pMapObjectMgr->EntityPtr( m_iFerryID ))!= NULL") == 1 )
+            v3 = (void **)CMapObjectMgr::EntityPtr(this->field_ac);
+            if ( j____RTDynamicCast(v3, 0, &IEntity__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 274, "dynamic_cast<CFerryShip*>(g_pMapObjectMgr->EntityPtr( m_iFerryID ))!= NULL") == 1 )
             {
               __debugbreak();
             }
-            v18 = CMapObjectMgr::EntityPtr(*((_DWORD *)this + 43));
-            if ( v18 )
+            v18 = (int)CMapObjectMgr::EntityPtr(this->field_ac);
+            if ( v18 != 0 )
             {
-              v4 = IEntity::ID();
+              v4 = ((int (__stdcall *)())IEntity::ID)();
               (*(void (__thiscall **)(int, int))(*(_DWORD *)v18 + 124))(v18, v4);
-              *((_DWORD *)this + 43) = 0;
-              *((_DWORD *)this + 42) = 0;
+              this->field_ac = 0;
+              this->field_a8 = 0;
             }
           }
           goto CWheeler__ConvertEventIntoGoal___def_19B016F;
         }
-        v2 = IEntity::EntityId((unsigned __int16 *)this);
-        CFerryShip::Request(FerryShipAt, v2);
+        v2 = IEntity::EntityId(this);
+        CFerryShip::Request((IEntity *)FerryShipAt, v2);
         break;
       case 0x18:
-        (*(void (__thiscall **)(CWheeler *, _DWORD))(*(_DWORD *)this + 224))(this, *((_DWORD *)a2 + 3));
+        ((void (__thiscall *)(CWheeler *, int))this->__vftable[1].Store)(this, a2->m_iDataA);
         break;
       case 0x19:
-        v14 = *((_DWORD *)a2 + 3);
-        v16 = *((_DWORD *)a2 + 4);
-        v17 = *((_DWORD *)a2 + 5);
-        v5 = IEntity::ObjType((unsigned __int8 *)this);
+        v14 = a2->m_iDataA;
+        v16 = a2->m_iDataB;
+        v17 = a2->m_iDataC;
+        v5 = IEntity::ObjType(this);
         if ( CVehicleMgr::IsPositionFreeForVehicle((CVehicleMgr *)&g_cVehicleMgr, v16, v17, v5) )
         {
           v6 = Y16X16::PackXYFast(v16, v17);
-          (*(void (__thiscall **)(CWheeler *, int))(*(_DWORD *)this + 196))(this, v6);
-          IEntity::SetPosition((IEntity *)this, v16, v17);
+          ((void (__thiscall *)(CWheeler *, int))this->PlaceVehicle)(this, v6);
+          IEntity::SetPosition(this, v16, v17);
           IEntity::SetFlagBits(this, ENTITY_FLAG_Selectable);
           IEntity::ClearFlagBits(this, ENTITY_FLAG_ON_BOARD);
           IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
-          *((_DWORD *)this + 42) = 0;
+          this->field_a8 = 0;
         }
         else
         {
-          if ( !v14 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 303, "iFerryID!=0") == 1 )
+          if ( v14 == 0 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 303, "iFerryID!=0") == 1 )
           {
             __debugbreak();
           }
-          VehiclePtr = (IEntity *)CVehicleMgr::GetVehiclePtr(v14);
-          if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 305, "pFerry!=NULL") == 1 )
+          VehiclePtr = CVehicleMgr::GetVehiclePtr(v14);
+          if ( VehiclePtr == 0 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 305, "pFerry!=NULL") == 1 )
           {
             __debugbreak();
           }
-          *((_DWORD *)this + 42) = 0;
-          v7 = IEntity::ID();
+          this->field_a8 = 0;
+          v7 = ((int (__stdcall *)())IEntity::ID)();
           CFerryShip::EmergencyReload(VehiclePtr, v7);
         }
         break;
@@ -262,16 +260,16 @@ int  CWheeler::RepairBuildingInRange(void) {
         i < 721;
         ++i )
   {
-    v6 = v5 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * i]);
-    v7 = v4 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * i]);
-    if ( (unsigned __int8)CWorldManager::InWorld(v6, v7) )
+    v6 = v5 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[i]);
+    v7 = v4 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[i]);
+    if ( CWorldManager::InWorld(v6, v7) )
     {
       v3 = CWorldManager::Index(v6, v7);
       v9 = CWorldManager::BuildingId(v3);
-      if ( v9 )
+      if ( v9 != 0 )
       {
-        v2 = (unsigned __int16 *)CBuildingMgr::operator[](v9);
-        if ( IEntity::Type(v2) == 23 )
+        v2 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(int))CBuildingMgr::operator[])(v9);
+        if ( IEntity::Type((IEntity *)v2) == 23 )
         {
           return v9;
         }
@@ -287,24 +285,23 @@ int  CWheeler::RepairBuildingInRange(void) {
 void  CWheeler::RepairAt(int a2) {
   
   CWheeler *result; // eax
-  char v3; // dl
+  BYTE v3; // dl
 
   if ( CWheeler::RepairBuildingInRange(this) != a2 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 562, "RepairBuildingInRange()==_iAtBuildingID") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 25) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 563, "m_pVehicleProperties!= NULL") == 1 )
+  if ( this->m_pVehicleProperties == 0 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 563, "m_pVehicleProperties!= NULL") == 1 )
   {
     __debugbreak();
   }
-  result = (CWheeler *)(*(int (__thiscall **)(CWheeler *))(*(_DWORD *)this + 40))(this);
-  if ( (unsigned int)result >= *(_DWORD *)(*((_DWORD *)this + 25) + 48) )
+  result = (CWheeler *)this->Amount(this);
+  if ( (unsigned int)result < this->m_pVehicleProperties->m_uHitpoints )
   {
-    return result;
+    v3 = CStaticConfigVarInt::operator int(&g_iWheelerRepairRate) + this->m_iLivePoints;
+    result = this;
+    this->m_iLivePoints = v3;
   }
-  v3 = CStaticConfigVarInt::operator int(&g_iWheelerRepairRate) + *((_BYTE *)this + 33);
-  result = this;
-  *((_BYTE *)this + 33) = v3;
   return result;
 }
 
@@ -316,7 +313,7 @@ void  CWheeler::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
   _DWORD *result; // eax
   unsigned int v4; // ecx
 
-  if ( a2 )
+  if ( a2 != 0 )
   {
     if ( BBSupportDbgReport(1, "MapObjects\\Wheeler.cpp", 598, "CWheeler::SetObserverTarget(): Invalid target type!") == 1 )
     {
@@ -326,17 +323,17 @@ void  CWheeler::SetObserverTarget(enum T_OBSERVER_TARGET a2, int a3) {
   }
   else
   {
-    this[43] = a3;
+    *(this + 43) = a3;
     result = this;
     if ( a3 <= 0 )
     {
-      v4 = this[5] & 0xFFFFFFDF;
+      v4 = *(this + 5) & 0xFFFFFFDF;
     }
     else
     {
-      v4 = this[5] | 0x20;
+      v4 = *(this + 5) | 0x20;
     }
-    this[5] = v4;
+    *(this + 5) = v4;
   }
   return result;
 }
@@ -410,18 +407,18 @@ void  CWheeler::Unload(void) {
 
 
 // address=[0x15b07e0]
-// Decompiled from _DWORD *__thiscall CWheeler::CWheeler(_DWORD *this, int a2)
+// Decompiled from int *__thiscall CWheeler::CWheeler(CVehicle *this, int a2)
  CWheeler::CWheeler(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
-  _DWORD *v5; // [esp+10h] [ebp-10h]
+  int *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
-  v5 = this;
+  v5 = (int *)this;
   CVehicle::CVehicle(this, a2);
   v6 = 0;
-  *v5 = &CWheeler::_vftable_;
+  *v5 = (int)&CWheeler::_vftable_;
   operator^<unsigned int>(a2, &v3);
   if ( v3 != 1 )
   {
@@ -430,9 +427,9 @@ void  CWheeler::Unload(void) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<int>(a2, (int)(v5 + 42));
-  operator^<int>(a2, (int)(v5 + 43));
-  operator^<int>(a2, (int)(v5 + 44));
+  operator^<int>((struct std::istream *)a2, v5 + 42);
+  operator^<int>((struct std::istream *)a2, v5 + 43);
+  operator^<int>((struct std::istream *)a2, v5 + 44);
   v6 = -1;
   return v5;
 }
@@ -446,23 +443,23 @@ void  CWheeler::Store(std::ostream & a2) {
   int *v4; // [esp+4h] [ebp-4h]
 
   v4 = this;
-  CVehicle::Store(this, a2);
+  CVehicle::Store((CVehicle *)this, a2);
   v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  operator^<int>((int)a2, v4 + 42);
-  operator^<int>((int)a2, v4 + 43);
-  return operator^<int>((int)a2, v4 + 44);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
+  operator^<int>(a2, v4 + 42);
+  operator^<int>(a2, v4 + 43);
+  return operator^<int>(a2, v4 + 44);
 }
 
 
 // address=[0x15b0950]
-// Decompiled from char __thiscall CWheeler::WalkDir(CWheeler *this, char a2)
+// Decompiled from unsigned __int8 __thiscall CWheeler::WalkDir(CWheeler *this, unsigned __int8 a2)
 void  CWheeler::WalkDir(int a2) {
   
   int v2; // esi
   CWalking *v3; // eax
   int v4; // eax
-  char result; // al
+  unsigned __int8 result; // al
   int v6; // [esp-4h] [ebp-24h]
   int v7; // [esp+8h] [ebp-18h]
   struct CVehicle *VehiclePtr; // [esp+Ch] [ebp-14h]
@@ -478,47 +475,41 @@ void  CWheeler::WalkDir(int a2) {
       __debugbreak();
     }
     v9 = IEntity::PackedXY(this);
-    IEntity::WorldIdx();
+    ((void (__stdcall *)())IEntity::WorldIdx)();
     v2 = IEntity::PackedXY(this);
-    v10 = (struct CPaneContainer *)(Y16X16::NeighborModifier(v11) + v2);
+    v10 = (struct CPaneContainer *)(Y16X16::NeighborModifier((int)v11) + v2);
     v7 = CWorldManager::Index((int)v10);
-    (*(void (__thiscall **)(CWheeler *, int))(*(_DWORD *)this + 200))(this, v9);
-    v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(v7);
+    this->RemoveVehicle(this, v9);
+    v3 = (CWalking *)((_DWORD (__cdecl *)(_DWORD))std::auto_ptr<CWalking>::operator->)(v7);
     if ( CWalking::IsFree(v3, v6) )
     {
-      (*(void (__thiscall **)(CWheeler *, struct CPaneContainer *))(*(_DWORD *)this + 196))(this, v10);
-      if ( v11 != (Y16X16 *)*((char *)this + 68) )
+      ((void (__thiscall *)(CWheeler *, struct CPaneContainer *))this->PlaceVehicle)(this, v10);
+      if ( v11 != (Y16X16 *)this->m_iDirection )
       {
         CVehicle::InitTurn(this, (int)v11);
       }
-      IEntity::SetPosition(this, v10);
+      IEntity::SetPosition(this, (int)v10);
       IMovingEntity::InitDistance(this);
       CWarMap::NotifyMove(this, v9);
     }
     else
     {
-      (*(void (__thiscall **)(CWheeler *, int))(*(_DWORD *)this + 196))(this, v9);
+      ((void (__thiscall *)(CWheeler *, int))this->PlaceVehicle)(this, v9);
       a2 |= 0x88u;
     }
   }
-  if ( (a2 & 0x20) != 0 )
+  if ( (a2 & 0x20) != 0 && this->field_ac != 0 && IEntity::PackedXY(this) == this->field_a8 )
   {
-    if ( *((_DWORD *)this + 43) )
+    VehiclePtr = (struct CVehicle *)CVehicleMgr::GetVehiclePtr(this->field_ac);
+    if ( VehiclePtr != 0 )
     {
-      if ( IEntity::PackedXY(this) == *((_DWORD *)this + 42) )
-      {
-        VehiclePtr = CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 43));
-        if ( VehiclePtr )
-        {
-          v4 = IEntity::ID();
-          (*(void (__thiscall **)(struct CVehicle *, int))(*(_DWORD *)VehiclePtr + 128))(VehiclePtr, v4);
-          *((_DWORD *)this + 43) = 0;
-        }
-      }
+      v4 = ((int (__stdcall *)())IEntity::ID)();
+      VehiclePtr->EntityEnter(VehiclePtr, v4);
+      this->field_ac = 0;
     }
   }
   result = a2;
-  *((_BYTE *)this + 104) = a2;
+  this->m_uWalkResult = a2;
   return result;
 }
 
@@ -541,7 +532,7 @@ void  CWheeler::PlaceVehicle(int _iXY) {
   {
     __debugbreak();
   }
-  if ( CWorldManager::SettlerId(iWorldIdx) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 409, "g_cWorld.SettlerId( iWorldIdx ) == 0") == 1 )
+  if ( CWorldManager::SettlerId(iWorldIdx) != 0 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 409, "g_cWorld.SettlerId( iWorldIdx ) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -560,12 +551,9 @@ void  CWheeler::PlaceVehicle(int _iXY) {
     {
       __debugbreak();
     }
-    if ( CWorldManager::MapObjectId(iNeighborWorldIdx) )
+    if ( CWorldManager::MapObjectId(iNeighborWorldIdx) != 0 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 421, "g_cWorld.MapObjectId( iNeighborWorldIdx ) == 0") == 1 )
     {
-      if ( BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 421, "g_cWorld.MapObjectId( iNeighborWorldIdx ) == 0") == 1 )
-      {
-        __debugbreak();
-      }
+      __debugbreak();
     }
     CWorldManager::SetMapObjectId(iNeighborWorldIdx, i + 1);
   }
@@ -581,16 +569,16 @@ void  CWheeler::RemoveVehicle(int a2) {
   unsigned int v4; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 436, "g_cWorld.InWorldPackedXY( _iXY )") == 1 )
+  if ( !CWorldManager::InWorldPackedXY(a2) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 436, "g_cWorld.InWorldPackedXY( _iXY )") == 1 )
   {
     __debugbreak();
   }
   v3 = CWorldManager::Index(a2);
-  if ( (unsigned __int8)CWorldManager::IsBlockedLand(v3) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 440, "!g_cWorld.IsBlockedLand( iWorldIdx )") == 1 )
+  if ( CWorldManager::IsBlockedLand(v3) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 440, "!g_cWorld.IsBlockedLand( iWorldIdx )") == 1 )
   {
     __debugbreak();
   }
-  IEntity::ID();
+  ((void (__stdcall *)())IEntity::ID)();
   result = CWorldManager::SetMapObjectId(v3, 0);
   for ( i = 0;
         i < 6;
@@ -601,7 +589,7 @@ void  CWheeler::RemoveVehicle(int a2) {
     {
       __debugbreak();
     }
-    if ( (unsigned __int8)CWorldManager::IsBlockedLand(v4) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 452, "!g_cWorld.IsBlockedLand( iNeighborWorldIdx )") == 1 )
+    if ( CWorldManager::IsBlockedLand(v4) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 452, "!g_cWorld.IsBlockedLand( iNeighborWorldIdx )") == 1 )
     {
       __debugbreak();
     }
@@ -643,50 +631,48 @@ void  CWheeler::OnComeToFerry(int a2) {
     __debugbreak();
   }
   VehiclePtr = (void **)CVehicleMgr::GetVehiclePtr(a2);
-  if ( !j____RTDynamicCast(VehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 196, "dynamic_cast<CFerryShip*>(g_cVehicleMgr.GetVehiclePtr( _iFerryID ))!= NULL") == 1 )
+  if ( j____RTDynamicCast(VehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\Wheeler.cpp", 196, "dynamic_cast<CFerryShip*>(g_cVehicleMgr.GetVehiclePtr( _iFerryID ))!= NULL") == 1 )
   {
     __debugbreak();
   }
   result = (int)CVehicleMgr::GetVehiclePtr(a2);
   v18 = result;
-  if ( !result )
+  if ( result != 0 )
   {
-    return result;
+    v19 = result;
+    v14 = ((int (__stdcall *)())IEntity::ID)();
+    v4 = IEntity::ObjType(this);
+    result = (*(int (__thiscall **)(int, int, int))(*(_DWORD *)v19 + 140))(v19, v4, v14);
+    this->field_a8 = result;
+    if ( this->field_a8 != 0 )
+    {
+      v17 = CWorldManager::Index(this->field_a8);
+      v5 = (CWalking *)((_DWORD (__cdecl *)(_DWORD))std::auto_ptr<CWalking>::operator->)(v17);
+      result = (bool)CWalking::IsFree(v5, v15);
+      if ( (_BYTE)result != 0 )
+      {
+        v12 = Y16X16::UnpackYFast(this->field_a8);
+        v6 = Y16X16::UnpackXFast(this->field_a8);
+        v7 = CVehicle::NewDestination(this, v6, v12, 0);
+        CVehicle::NotifyCallTakeJob(v7);
+        v8 = ((int (__stdcall *)())IEntity::ID)();
+        (*(void (__thiscall **)(int, int))(*(_DWORD *)v18 + 164))(v18, v8);
+        v9 = ((int (__stdcall *)())IEntity::ID)();
+        ((void (__thiscall *)(CGroupMgr *, int))g_pGroupMgr->DetachEntityFromAllGroups)(g_pGroupMgr, v9);
+        if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) != 0 )
+        {
+          v10 = ((int (__stdcall *)())IEntity::ID)();
+          CInputProcessor::DeSelectEntity(&g_cInputProcessor, v10);
+        }
+        IEntity::ClearFlagBits(this, ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
+        v16 = ((int (__stdcall *)())IEntity::ID)();
+        v13 = ((int (__stdcall *)())IEntity::ID)();
+        v11 = IEntity::OwnerId(this);
+        return g_pAI->PostAIEvent(g_pAI, 18, v11, v13, v16);
+      }
+    }
   }
-  v19 = result;
-  v14 = IEntity::ID();
-  v4 = IEntity::ObjType((unsigned __int8 *)this);
-  result = (*(int (__thiscall **)(int, int, int))(*(_DWORD *)v19 + 140))(v19, v4, v14);
-  *((_DWORD *)this + 42) = result;
-  if ( !*((_DWORD *)this + 42) )
-  {
-    return result;
-  }
-  v17 = CWorldManager::Index(*((_DWORD *)this + 42));
-  v5 = (CWalking *)std::auto_ptr<CWalking>::operator->(v17);
-  result = CWalking::IsFree(v5, v15);
-  if ( !(_BYTE)result )
-  {
-    return result;
-  }
-  v12 = Y16X16::UnpackYFast(*((_DWORD *)this + 42));
-  v6 = Y16X16::UnpackXFast(*((_DWORD *)this + 42));
-  v7 = CVehicle::NewDestination(this, v6, v12, 0);
-  CVehicle::NotifyCallTakeJob(v7);
-  v8 = IEntity::ID();
-  (*(void (__thiscall **)(int, int))(*(_DWORD *)v18 + 164))(v18, v8);
-  v9 = IEntity::ID();
-  (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, v9);
-  if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) )
-  {
-    v10 = IEntity::ID();
-    CInputProcessor::DeSelectEntity(&g_cInputProcessor, v10);
-  }
-  IEntity::ClearFlagBits(this, ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
-  v16 = IEntity::ID();
-  v13 = IEntity::ID();
-  v11 = IEntity::OwnerId((unsigned __int8 *)this);
-  return (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v11, v13, v16);
+  return result;
 }
 
 

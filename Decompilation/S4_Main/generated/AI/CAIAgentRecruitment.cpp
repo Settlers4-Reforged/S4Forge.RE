@@ -6,7 +6,7 @@
 // Decompiled from CAIAgentRecruitment *__thiscall CAIAgentRecruitment::CAIAgentRecruitment(CAIAgentRecruitment *this)
  CAIAgentRecruitment::CAIAgentRecruitment(void) {
   
-  CAINormalSectorAgent::CAINormalSectorAgent(this, "recruitment");
+  CAINormalSectorAgent::CAINormalSectorAgent((CAINormalSectorAgent *)this, "recruitment");
   *(_DWORD *)this = &CAIAgentRecruitment::_vftable_;
   *((_DWORD *)this + 10) = 0;
   return this;
@@ -14,7 +14,7 @@
 
 
 // address=[0x1305540]
-// Decompiled from unsigned int __thiscall CAIAgentRecruitment::Execute(CAIAgentRecruitment *this, unsigned int a2, unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentRecruitment::Execute(CAINormalSectorAgent *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentRecruitment::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -31,14 +31,14 @@ unsigned int  CAIAgentRecruitment::Execute(unsigned int a2, unsigned int a3) {
   bool v16; // [esp+27h] [ebp-1h]
 
   v3 = CAINormalSectorAgent::SectorAI(this);
-  v4 = (pairNode *)CAISectorAI::PlayerAI(v3);
+  v4 = (pairNode *)CAISectorAI::PlayerAI((CAISectorAI *)v3);
   v14 = CAIPlayerAI::PlayerId(v4);
   v5 = CAINormalSectorAgent::SectorAI(this);
-  v6 = (CAIPlayerAI *)CAISectorAI::PlayerAI(v5);
+  v6 = (CAIPlayerAI *)CAISectorAI::PlayerAI((CAISectorAI *)v5);
   v10 = CAIPlayerAI::Race(v6);
-  v7 = CAINormalSectorAgent::SectorAI(this);
+  v7 = (CAISectorAI *)CAINormalSectorAgent::SectorAI(this);
   v12 = CAISectorAI::SectorId(v7);
-  v8 = (void *)CAIPlayersScriptVars::operator[](v14);
+  v8 = (void *)((void *(__stdcall *)(int))CAIPlayersScriptVars::operator[])(v14);
   v11 = CAIPlayerScriptVars::DifficultyLevel(v8);
   FirstBuildingId = IAIEnvironment::BuildingGetFirstBuildingId(v14, 24);
   v16 = (IAIEnvironment::Rand() & 1) != 0;
@@ -99,7 +99,7 @@ unsigned int  CAIAgentRecruitment::Execute(unsigned int a2, unsigned int a3) {
 
 
 // address=[0x13062e0]
-// Decompiled from void __thiscall CAIAgentRecruitment::~CAIAgentRecruitment(CAIAgentRecruitment *this)
+// Decompiled from void __thiscall CAIAgentRecruitment::~CAIAgentRecruitment(CAIScheduler **this)
  CAIAgentRecruitment::~CAIAgentRecruitment(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

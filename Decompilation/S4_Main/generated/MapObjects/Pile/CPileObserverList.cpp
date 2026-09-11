@@ -16,7 +16,7 @@
 // Decompiled from void __thiscall CPileObserverList::NotifyAndDetachAllObservers(CPileObserverList *this, const struct CEntityEvent *a2)
 void  CPileObserverList::NotifyAndDetachAllObservers(class CEntityEvent const & a2) {
   
-  CPileObserverList::NotifyAllObservers(this, a2);
+  CPileObserverList::NotifyAllObservers(this, (struct CEntityEvent *)a2);
   CPileObserverList::DetachAllObservers(this);
 }
 
@@ -59,7 +59,7 @@ void  CPileObserverList::Attach(enum T_OBSERVER_TARGET _tTargetType, int _iTarge
   {
     __debugbreak();
   }
-  if ( !_iDeltaAmount && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 33, "_iDeltaAmount != 0") == 1 )
+  if ( _iDeltaAmount == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 33, "_iDeltaAmount != 0") == 1 )
   {
     __debugbreak();
   }
@@ -75,16 +75,16 @@ void  CPileObserverList::Attach(enum T_OBSERVER_TARGET _tTargetType, int _iTarge
   this->m_vPileObserver[this->m_uNumberOfObservers].m_iDeltaAmount = _iDeltaAmount;
   this->m_vPileObserver[this->m_uNumberOfObservers++].m_tTargetType = _tTargetType;
   pObserver = CMapObjectMgr::EntityPtr(_iObserverId);
-  if ( !pObserver && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 47, "pObserver != 0") == 1 )
+  if ( pObserver == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 47, "pObserver != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( pObserver->GetObserverTarget(pObserver, _tTargetType) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 49, "pObserver->GetObserverTarget(_tTargetType) == 0") == 1 )
+  if ( pObserver->GetObserverTarget(pObserver, _tTargetType) != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 49, "pObserver->GetObserverTarget(_tTargetType) == 0") == 1 )
   {
     __debugbreak();
   }
   pObserver->SetObserverTarget(pObserver, _tTargetType, _iTargetId);
-  if ( !pObserver->GetObserverTarget(pObserver, _tTargetType) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 53, "pObserver->GetObserverTarget(_tTargetType) != 0") == 1 )
+  if ( pObserver->GetObserverTarget(pObserver, _tTargetType) == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 53, "pObserver->GetObserverTarget(_tTargetType) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -116,7 +116,7 @@ int  CPileObserverList::Detach(int _iObserverId) {
   }
   else
   {
-    if ( !this->m_uNumberOfObservers && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 71, "m_uNumberOfObservers > 0") == 1 )
+    if ( this->m_uNumberOfObservers == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 71, "m_uNumberOfObservers > 0") == 1 )
     {
       __debugbreak();
     }
@@ -133,16 +133,16 @@ int  CPileObserverList::Detach(int _iObserverId) {
       this->m_vPileObserver[iIndex] = this->m_vPileObserver[iNewNumberOfObservers];
     }
     pObserver = CMapObjectMgr::EntityPtr(_iObserverId);
-    if ( !pObserver && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 88, "pObserver != 0") == 1 )
+    if ( pObserver == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 88, "pObserver != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !pObserver->GetObserverTarget(pObserver, tTargetType) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 90, "pObserver->GetObserverTarget(tTargetType) != 0") == 1 )
+    if ( pObserver->GetObserverTarget(pObserver, tTargetType) == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 90, "pObserver->GetObserverTarget(tTargetType) != 0") == 1 )
     {
       __debugbreak();
     }
     pObserver->SetObserverTarget(pObserver, tTargetType, 0);
-    if ( pObserver->GetObserverTarget(pObserver, tTargetType) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 94, "pObserver->GetObserverTarget(tTargetType) == 0") == 1 )
+    if ( pObserver->GetObserverTarget(pObserver, tTargetType) != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 94, "pObserver->GetObserverTarget(tTargetType) == 0") == 1 )
     {
       __debugbreak();
     }
@@ -166,7 +166,7 @@ void  CPileObserverList::NotifyAllObservers(class CEntityEvent const & a2)const 
         ++i )
   {
     iObserverId = this->m_vPileObserver[i].m_iObserverId;
-    if ( this->m_vPileObserver[i].m_iObserverId )
+    if ( this->m_vPileObserver[i].m_iObserverId != 0 )
     {
       v3 = CMapObjectMgr::EntityPtr(iObserverId);
     }
@@ -174,7 +174,7 @@ void  CPileObserverList::NotifyAllObservers(class CEntityEvent const & a2)const 
     {
       v3 = 0;
     }
-    if ( v3 )
+    if ( v3 != 0 )
     {
       v3->SetEvent(v3, a2);
     }
@@ -202,7 +202,7 @@ void  CPileObserverList::DetachAllObservers(void) {
         ++i )
   {
     iObserverId = this->m_vPileObserver[i].m_iObserverId;
-    if ( this->m_vPileObserver[i].m_iObserverId )
+    if ( this->m_vPileObserver[i].m_iObserverId != 0 )
     {
       pObserver = CMapObjectMgr::EntityPtr(iObserverId);
     }
@@ -210,20 +210,17 @@ void  CPileObserverList::DetachAllObservers(void) {
     {
       pObserver = 0;
     }
-    if ( pObserver )
+    if ( pObserver != 0 )
     {
       tTargetType = this->m_vPileObserver[i].m_tTargetType;
-      if ( !pObserver->GetObserverTarget(pObserver, tTargetType) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 149, "pObserver->GetObserverTarget(tTargetType) != 0") == 1 )
+      if ( pObserver->GetObserverTarget(pObserver, tTargetType) == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 149, "pObserver->GetObserverTarget(tTargetType) != 0") == 1 )
       {
         __debugbreak();
       }
       pObserver->SetObserverTarget(pObserver, tTargetType, 0);
-      if ( pObserver->GetObserverTarget(pObserver, tTargetType) )
+      if ( pObserver->GetObserverTarget(pObserver, tTargetType) != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 153, "pObserver->GetObserverTarget(tTargetType) == 0") == 1 )
       {
-        if ( BBSupportDbgReport(2, "MapObjects\\Pile\\PileObserverList.cpp", 153, "pObserver->GetObserverTarget(tTargetType) == 0") == 1 )
-        {
-          __debugbreak();
-        }
+        __debugbreak();
       }
     }
     else if ( BBSupportDbgReportF(1, "MapObjects\\Pile\\PileObserverList.cpp", 157, "CPileObserverList::DetachAllObservers(): Invalid observer %i in list!", iObserverId) == 1 )
@@ -239,7 +236,7 @@ void  CPileObserverList::DetachAllObservers(void) {
 // Decompiled from CPileObserverList *__thiscall CPileObserverList::CPileObserverList(CPileObserverList *this, int _rStream)
  CPileObserverList::CPileObserverList(std::istream & _rStream) {
   
-  int v3; // [esp+4h] [ebp-10h] BYREF
+  unsigned int v3; // [esp+4h] [ebp-10h] BYREF
   int pExceptionObject; // [esp+8h] [ebp-Ch] BYREF
   unsigned int i; // [esp+Ch] [ebp-8h]
 
@@ -277,7 +274,7 @@ void  CPileObserverList::Store(std::ostream & _rStream) {
   unsigned int i; // [esp+8h] [ebp-4h]
 
   v2 = 1;
-  operator^<unsigned int>(_rStream, &v2);
+  operator^<unsigned int>(_rStream, (unsigned int *)&v2);
   operator^<unsigned char>(_rStream, &this->m_uNumberOfObservers);
   for ( i = 0;
         i < this->m_uNumberOfObservers;

@@ -24,8 +24,8 @@ bool  AdvXMLParser::Node::IsNull(void)const {
  AdvXMLParser::Node::Node(class AdvXMLParser::NodeContainer & a2, std::string const & a3) {
   
   *this = &AdvXMLParser::Node::_vftable_;
-  std::string::string(a3);
-  this[8] = a2;
+  ((void (__stdcall *)(int))std::string::string)(a3);
+  *(this + 8) = a2;
   return this;
 }
 

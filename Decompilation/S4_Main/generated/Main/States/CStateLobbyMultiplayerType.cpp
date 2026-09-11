@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(void * 
   CStateLobbyMultiplayerType *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateLobbyMultiplayerType *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(C, a1);
   }
@@ -24,20 +24,20 @@ class CGameState * __cdecl CStateLobbyMultiplayerType::DynamicCreateFunc(void * 
 // Decompiled from CStateLobbyMultiplayerType *__thiscall CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(CStateLobbyMultiplayerType *this, void *a2)
  CStateLobbyMultiplayerType::CStateLobbyMultiplayerType(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateLobbyMultiplayerType::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  CGuiGameState::OpenDialog(this, 1, GuiDlgMultiplayerTypeMenuProc);
+  CGuiGameState::OpenDialog((CGuiGameState *)this, 1, (bool (__cdecl *)(int, int, int))GuiDlgMultiplayerTypeMenuProc);
   return this;
 }
 
 
 // address=[0x14c0ac0]
-// Decompiled from void __thiscall CStateLobbyMultiplayerType::~CStateLobbyMultiplayerType(CStateLobbyMultiplayerType *this)
+// Decompiled from void __thiscall CStateLobbyMultiplayerType::~CStateLobbyMultiplayerType(CGuiGameState *this)
  CStateLobbyMultiplayerType::~CStateLobbyMultiplayerType(void) {
   
-  *(_DWORD *)this = &CStateLobbyMultiplayerType::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 1) && BBSupportDbgReport(2, "main\\states\\StateLobbyMultiplayerType.cpp", 68, "bRet") == 1 )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateLobbyMultiplayerType::_vftable_;
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 1) && BBSupportDbgReport(2, "main\\states\\StateLobbyMultiplayerType.cpp", 68, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -61,20 +61,19 @@ bool  CStateLobbyMultiplayerType::Perform(void) {
     }
   }
   v1 = dword_4031CF0 + 30;
-  if ( v1 >= timeGetTime() )
+  if ( v1 < timeGetTime() )
   {
-    return 1;
+    dword_4031CF0 = timeGetTime();
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  dword_4031CF0 = timeGetTime();
-  IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-  IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   return 1;
 }
 
 
 // address=[0x14c0be0]
-// Decompiled from char __thiscall CStateLobbyMultiplayerType::OnEvent(CStateLobbyMultiplayerType *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateLobbyMultiplayerType::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateLobbyMultiplayerType::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
@@ -121,22 +120,22 @@ bool  CStateLobbyMultiplayerType::OnEvent(class CEvn_Event & a2) {
       result = 1;
       break;
     case 41:
-      IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
+      IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
       v25 = 0;
-      if ( CGameSettings::GetWebHelpMode() )
+      if ( CGameSettings::GetWebHelpMode() != 0 )
       {
         if ( CGameSettings::GetLanguage() == 1 )
         {
           v17 = &v3;
           HelpURLgerman = CGameSettings::GetHelpURLgerman((int)&v3);
-          v24 = CStateLobbyMultiplayerType::LaunchWebLobby(v3, v4, v5, v6, v7, v8, v9);
+          v24 = ((_DWORD (__stdcall *)(char, int, int, int, int, int, int))CStateLobbyMultiplayerType::LaunchWebLobby)(v3, v4, v5, v6, v7, v8, v9);
           v25 = v24;
         }
         else
         {
           v15 = &v3;
           HelpURLenglish = CGameSettings::GetHelpURLenglish((int)&v3);
-          v23 = CStateLobbyMultiplayerType::LaunchWebLobby(v3, v4, v5, v6, v7, v8, v9);
+          v23 = ((_DWORD (__stdcall *)(char, int, int, int, int, int, int))CStateLobbyMultiplayerType::LaunchWebLobby)(v3, v4, v5, v6, v7, v8, v9);
           v25 = v23;
         }
       }
@@ -144,30 +143,30 @@ bool  CStateLobbyMultiplayerType::OnEvent(class CEvn_Event & a2) {
       {
         v13 = &v3;
         NormURLgerman = CGameSettings::GetNormURLgerman((int)&v3);
-        v22 = CStateLobbyMultiplayerType::LaunchWebLobby(v3, v4, v5, v6, v7, v8, v9);
+        v22 = ((_DWORD (__stdcall *)(char, int, int, int, int, int, int))CStateLobbyMultiplayerType::LaunchWebLobby)(v3, v4, v5, v6, v7, v8, v9);
         v25 = v22;
       }
       else
       {
         v11 = &v3;
         NormURLenglish = CGameSettings::GetNormURLenglish((int)&v3);
-        v21 = CStateLobbyMultiplayerType::LaunchWebLobby(v3, v4, v5, v6, v7, v8, v9);
+        v21 = ((_DWORD (__stdcall *)(char, int, int, int, int, int, int))CStateLobbyMultiplayerType::LaunchWebLobby)(v3, v4, v5, v6, v7, v8, v9);
         v25 = v21;
       }
-      if ( v25 )
+      if ( v25 != 0 )
       {
         PostQuitMessage(0);
       }
-      IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
+      IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
       result = 1;
       break;
     case 42:
-      IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
-      CGameStateHandler::Switch((int)CStateLobbyConnect::DynamicCreateFunc, 1);
+      IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
+      CGameStateHandler::Switch(CStateLobbyConnect::DynamicCreateFunc, (void *)1);
       result = 1;
       break;
     case 43:
-      CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch(CStateMainMenu::DynamicCreateFunc, 0);
       result = 1;
       break;
     default:
@@ -193,55 +192,57 @@ bool  CStateLobbyMultiplayerType::LaunchWebLobby(std::string a2) {
   char v16[32]; // [esp-1Ch] [ebp-174h] BYREF
   int v17; // [esp+4h] [ebp-154h]
   char *v18; // [esp+8h] [ebp-150h]
-  void *v19; // [esp+Ch] [ebp-14Ch]
+  struct std::string *v19; // [esp+Ch] [ebp-14Ch]
   void *v20; // [esp+10h] [ebp-148h]
-  void *v21; // [esp+14h] [ebp-144h]
+  struct std::string *v21; // [esp+14h] [ebp-144h]
   char *v22; // [esp+18h] [ebp-140h]
-  void *v23; // [esp+1Ch] [ebp-13Ch]
+  struct std::string *v23; // [esp+1Ch] [ebp-13Ch]
   void *v24; // [esp+20h] [ebp-138h]
   DWORD Type[2]; // [esp+24h] [ebp-134h] BYREF
-  void *v26; // [esp+2Ch] [ebp-12Ch]
-  void *v27; // [esp+30h] [ebp-128h]
+  struct std::string *v26; // [esp+2Ch] [ebp-12Ch]
+  struct std::string *v27; // [esp+30h] [ebp-128h]
   HKEY phkResult; // [esp+34h] [ebp-124h] BYREF
   DWORD cbData; // [esp+38h] [ebp-120h] BYREF
   LSTATUS v30; // [esp+3Ch] [ebp-11Ch]
   char v31; // [esp+40h] [ebp-118h]
   char v32; // [esp+41h] [ebp-117h]
   char v33; // [esp+42h] [ebp-116h]
+  char; // [esp+43h] [ebp-115h]
   BYTE Data[260]; // [esp+44h] [ebp-114h] BYREF
   int v36; // [esp+154h] [ebp-4h]
 
   Type[1] = (DWORD)this;
   v36 = 0;
-  v30 = RegCreateKeyExA(HKEY_LOCAL_MACHINE, aSoftwareMicros, 0, 0, 0, 0x20019u, 0, &phkResult, 0);
-  if ( v30 )
+  v30 = RegCreateKeyExA(HKEY_LOCAL_MACHINE, "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\BBGChan.exe", 0, 0, 0, 0x20019u, 0, &phkResult, 0);
+  if ( v30 != 0 )
   {
     goto LABEL_5;
   }
   cbData = 260;
   v30 = RegQueryValueExA(phkResult, 0, 0, Type, Data, &cbData);
-  if ( v30 )
+  if ( v30 != 0 )
   {
     goto LABEL_5;
   }
   v24 = v16;
-  v27 = std::string::string(v16, aLobbys4Ini);
+  v27 = std::string::string((std::string *)v16, "LobbyS4.ini");
   v23 = v27;
   LOBYTE(v36) = 1;
   v22 = &v9;
-  v21 = std::string::string(&v9, (char *)Data);
+  v21 = std::string::string((std::string *)&v9, (char *)Data);
   LOBYTE(v36) = 0;
-  if ( !CGameStateHandler::ShowHTMLPage(v9, v10, v11, v12, v13, v14, v15, v16[0]) )
+   = ((char (__cdecl *)(char, int, int, int, int, int, int, char))CGameStateHandler::ShowHTMLPage)(v9, v10, v11, v12, v13, v14, v15, v16[0]);
+  if (  == 0 )
   {
 LABEL_5:
     v20 = v16;
-    v26 = std::string::string(v16, (char *)byte_374C4CD);
+    v26 = std::string::string((std::string *)v16, (char *)byte_374C4CD);
     v19 = v26;
     LOBYTE(v36) = 2;
     v18 = &v9;
-    v17 = std::string::string(&a2);
+    v17 = ((int (__stdcall *)(char *))std::string::string)(&a2);
     LOBYTE(v36) = 0;
-    v32 = CGameStateHandler::ShowHTMLPage(v9, v10, v11, v12, v13, v14, v15, v16[0]);
+    v32 = ((char (__cdecl *)(char, int, int, int, int, int, int, char))CGameStateHandler::ShowHTMLPage)(v9, v10, v11, v12, v13, v14, v15, v16[0]);
     v31 = v32;
     v36 = -1;
     std::string::~string(&a2);

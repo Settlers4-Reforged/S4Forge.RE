@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CHunterRole::New(int a1)
 class CPersistence * __cdecl CHunterRole::New(std::istream & a1) {
   
-  if ( operator new(0x30u) )
+  if ( operator new(0x30u) != 0 )
   {
-    return CHunterRole::CHunterRole(a1);
+    return ((_DWORD (__stdcall *)(int))CHunterRole::CHunterRole)(a1);
   }
   else
   {
@@ -24,8 +24,8 @@ class CWalking *  CHunterRole::InitWalking(class CSettler * a2) {
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
 
-  v2 = IEntity::OwnerId((unsigned __int8 *)a2);
-  v4 = CWalking::Create(1, v2);
+  v2 = IEntity::OwnerId(a2);
+  v4 = (int)CWalking::Create(1, v2);
   (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v4 + 8))(v4, -1, 0);
   return v4;
 }
@@ -66,7 +66,7 @@ void  CHunterRole::LogicUpdateJob(class CSettler * a2) {
   IEntity *AnimalPtr; // [esp+2Ch] [ebp-Ch]
   int VictimPosition; // [esp+30h] [ebp-8h]
 
-  if ( this->CheckHome(this, a2) )
+  if ( this->CheckHome(this, a2) != 0 )
   {
     switch ( this->m_iTask )
     {
@@ -74,7 +74,7 @@ void  CHunterRole::LogicUpdateJob(class CSettler * a2) {
         if ( CHunterRole::AreWeChasing(this, a2) )
         {
           VictimPosition = CHunterRole::GetVictimPosition(this);
-          if ( !VictimPosition )
+          if ( VictimPosition == 0 )
           {
             goto LABEL_5;
           }
@@ -107,12 +107,12 @@ void  CHunterRole::LogicUpdateJob(class CSettler * a2) {
         this->Go(this, a2);
         break;
       case 0xD:
-        if ( !this->m_uEntityId && BBSupportDbgReport(2, "MapObjects\\Settler\\HunterRole.cpp", 294, "m_uEntityId != 0") == 1 )
+        if ( this->m_uEntityId == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\HunterRole.cpp", 294, "m_uEntityId != 0") == 1 )
         {
           __debugbreak();
         }
         v27 = CHunterRole::GetVictimPosition(this);
-        if ( !v27 )
+        if ( v27 == 0 )
         {
           goto LABEL_5;
         }
@@ -120,16 +120,16 @@ void  CHunterRole::LogicUpdateJob(class CSettler * a2) {
         v22 = Y16X16::DirectionFast(v9, v27);
         IMovingEntity::SetDirection(a2, v22);
         v28 = CMapObjectMgr::EntityPtr(this->m_uEntityId);
-        if ( !v28 && BBSupportDbgReport(2, "MapObjects\\Settler\\HunterRole.cpp", 309, "pSupplier != 0") == 1 )
+        if ( v28 == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\HunterRole.cpp", 309, "pSupplier != 0") == 1 )
         {
           __debugbreak();
         }
         this->m_uGood = v28->GetGoodType();
-        if ( !this->m_uGood && BBSupportDbgReport(2, "MapObjects\\Settler\\HunterRole.cpp", 311, "m_uGood") == 1 )
+        if ( this->m_uGood == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\HunterRole.cpp", 311, "m_uGood") == 1 )
         {
           __debugbreak();
         }
-        if ( this->m_uGood )
+        if ( this->m_uGood != 0 )
         {
           v26 = CMapObjectMgr::EntityPtr(this->m_uEntityId);
           ((void (__thiscall *)(IEntity *, int))v26->Take)(v26, 1);
@@ -168,17 +168,17 @@ LABEL_9:
         }
         break;
       case 0x1C:
-        if ( !this->m_uEntityId && BBSupportDbgReport(2, "MapObjects\\Settler\\HunterRole.cpp", 341, "m_uEntityId") == 1 )
+        if ( this->m_uEntityId == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\HunterRole.cpp", 341, "m_uEntityId") == 1 )
         {
           __debugbreak();
         }
-        if ( this->m_uEntityId )
+        if ( this->m_uEntityId != 0 )
         {
           AnimalPtr = CAnimalMgr::GetAnimalPtr(this->m_uEntityId);
-          if ( AnimalPtr )
+          if ( AnimalPtr != 0 )
           {
             ((void (__thiscall *)(IEntity *, int))AnimalPtr->Decrease)(AnimalPtr, 1);
-            if ( IEntity::FlagBits(AnimalPtr, (EntityFlag)&loc_3000000) )
+            if ( IEntity::FlagBits(AnimalPtr, (EntityFlag)&loc_3000000) != 0 )
             {
               v19 = IEntity::ID(AnimalPtr);
               v12 = IEntity::ID(a2);
@@ -202,7 +202,7 @@ LABEL_9:
         }
         break;
       default:
-        if ( debug && DEBUG_FLAGS[dword_4152130] )
+        if ( debug != 0 && DEBUG_FLAGS[dword_4152130] != 0 )
         {
           m_iTask = this->m_iTask;
           v14 = IEntity::ID(a2);
@@ -220,31 +220,31 @@ void  CHunterRole::UpdateJob(class CSettler * a2) {
   
   int v3; // [esp+0h] [ebp-10h]
   int v4; // [esp+4h] [ebp-Ch]
-  char v6; // [esp+Ch] [ebp-4h]
+  CHAR v6; // [esp+Ch] [ebp-4h]
 
-  v6 = *((_BYTE *)this + 4);
+  v6 = this->m_iTask;
   if ( v6 != 4 && v6 != 21 )
   {
     return CTrace::Print("HunterJob - Update unknown task");
   }
   v4 = IAnimatedEntity::Frame(a2);
-  v3 = *((unsigned __int16 *)this + 4);
+  v3 = this->m_uTick;
   if ( v4 <= v3 )
   {
-    return IAnimatedEntity::SetFrame(0);
+    return ((int (__stdcall *)(char))IAnimatedEntity::SetFrame)(0);
   }
   else
   {
-    return IAnimatedEntity::SetFrame(v4 - v3);
+    return ((int (__stdcall *)(char))IAnimatedEntity::SetFrame)(v4 - v3);
   }
 }
 
 
 // address=[0x1577860]
-// Decompiled from int __stdcall CHunterRole::PostLoadInit(CPropertySet *a1)
+// Decompiled from int __stdcall CHunterRole::PostLoadInit(IEntity *a1)
 void  CHunterRole::PostLoadInit(class CSettler * a1) {
   
-  return CWarMap::AddEntity(a1);
+  return ((int (__cdecl *)(CPropertySet *))CWarMap::AddEntity)((CPropertySet *)a1);
 }
 
 
@@ -252,13 +252,13 @@ void  CHunterRole::PostLoadInit(class CSettler * a1) {
 // Decompiled from char *__thiscall CHunterRole::CHunterRole(char *this, int a2)
  CHunterRole::CHunterRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   char *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  ISettlerRole::ISettlerRole(this, a2);
+  ISettlerRole::ISettlerRole((ISettlerRole *)this, (struct std::istream *)a2);
   v6 = 0;
   *(_DWORD *)v5 = &CHunterRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
@@ -269,7 +269,7 @@ void  CHunterRole::PostLoadInit(class CSettler * a1) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned char>(a2, v5 + 44);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v5 + 44);
   v6 = -1;
   return v5;
 }
@@ -283,10 +283,10 @@ void  CHunterRole::Store(std::ostream & a2) {
   struct CPersistence *v4; // [esp+4h] [ebp-4h]
 
   v4 = this;
-  ISettlerRole::Store(this, a2);
+  ISettlerRole::Store((ISettlerRole *)this, a2);
   v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  return operator^<unsigned char>(a2, (int)v4 + 44);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
+  return (int)operator^<unsigned char>(a2, (unsigned __int8 *)&v4[11]);
 }
 
 
@@ -307,13 +307,13 @@ int  CHunterRole::GetSettlerRole(void)const {
 
 
 // address=[0x1588740]
-// Decompiled from int __cdecl CHunterRole::Load(int a1)
+// Decompiled from int __cdecl CHunterRole::Load(struct std::istream *a1)
 class CHunterRole * __cdecl CHunterRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CHunterRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -325,7 +325,7 @@ class CHunterRole * __cdecl CHunterRole::Load(std::istream & a1) {
 // Decompiled from ISettlerRole *__thiscall CHunterRole::~CHunterRole(CHunterRole *this)
  CHunterRole::~CHunterRole(void) {
   
-  *(_DWORD *)this = &CHunterRole::_vftable_;
+  this->__vftable = (ISettlerRole_vtbl *)&CHunterRole::_vftable_;
   return ISettlerRole::~ISettlerRole(this);
 }
 
@@ -338,11 +338,11 @@ void  CHunterRole::GetNextJob(class CSettler * a2) {
 
   IMovingEntity::IncToDoListIter(a2);
   result = IMovingEntity::IsEndIter(a2);
-  if ( !(_BYTE)result )
+  if ( (_BYTE)result == 0 )
   {
-    return (*(int (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 40))(this, a2);
+    return ((int (__thiscall *)(CHunterRole *, struct CSettler *))this->TakeJob)(this, a2);
   }
-  *((_BYTE *)this + 4) = 17;
+  this->m_iTask = 17;
   return result;
 }
 
@@ -369,99 +369,99 @@ void  CHunterRole::TakeJob(class CSettler * a2) {
   int v17; // [esp+Ch] [ebp-10h]
   int VictimPosition; // [esp+10h] [ebp-Ch]
 
-  ActualTask = (const struct CEntityTask *)IMovingEntity::GetActualTask(a2);
+  ActualTask = IMovingEntity::GetActualTask(a2);
   ISettlerRole::InitCommonTaskValues(this, a2, ActualTask);
-  switch ( *((_BYTE *)this + 4) )
+  switch ( this->m_iTask )
   {
     case 4:
     case 0x15:
-      if ( (*(unsigned __int8 (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2) )
+      if ( this->CheckHome(this, a2) != 0 )
       {
-        IMovingEntity::SetDisplacementCosts(10);
-        IAnimatedEntity::SetFrame(*((_BYTE *)this + 7) - 1);
-        IAnimatedEntity::RegisterForLogicUpdate(*((char *)this + 6) / 2);
+        ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(10);
+        ((void (__stdcall *)(char))IAnimatedEntity::SetFrame)(this->m_uCycleFrames - 1);
+        ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(this->m_iWalkspeed / 2);
       }
       break;
     case 7:
-      IAnimatedEntity::SetFrame(1);
-      IMovingEntity::WalkToXY(a2, *((_DWORD *)this + 6), 0);
-      *((_BYTE *)this + 4) = 6;
-      IMovingEntity::SetDisplacementCosts(5);
-      (*(void (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
+      ((void (__stdcall *)(char))IAnimatedEntity::SetFrame)(1);
+      IMovingEntity::WalkToXY(a2, this->m_iDestinationPosition, 0);
+      this->m_iTask = 6;
+      ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(5);
+      this->Go(this, a2);
       break;
     case 0xA:
-      IAnimatedEntity::SetFrame(1);
-      IMovingEntity::WalkToXY(a2, *((_DWORD *)this + 6), 4096);
-      *((_BYTE *)this + 4) = 6;
-      IMovingEntity::SetDisplacementCosts(5);
-      (*(void (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
+      ((void (__stdcall *)(char))IAnimatedEntity::SetFrame)(1);
+      IMovingEntity::WalkToXY(a2, this->m_iDestinationPosition, 4096);
+      this->m_iTask = 6;
+      ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(5);
+      this->Go(this, a2);
       break;
     case 0xD:
-      if ( (*(unsigned __int8 (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2) )
+      if ( this->CheckHome(this, a2) != 0 )
       {
-        IMovingEntity::SetDisplacementCosts(10);
-        IAnimatedEntity::RegisterForLogicUpdate(*((char *)this + 6));
+        ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(10);
+        ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(this->m_iWalkspeed);
       }
       break;
     case 0xE:
-      if ( (*(unsigned __int8 (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2) )
+      if ( this->CheckHome(this, a2) != 0 )
       {
-        IAnimatedEntity::SetFrame(0);
-        v5 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
-        v6 = CBuilding::DoorPackedXY(v5);
+        ((void (__stdcall *)(char))IAnimatedEntity::SetFrame)(0);
+        v5 = (CMFCToolBarButton *)((CMFCToolBarButton *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(this->m_uHomeEntityId);
+        v6 = CBuilding::DoorPackedXY((CBuilding *)v5);
         IMovingEntity::WalkToXY(a2, v6, 0);
-        *((_BYTE *)this + 4) = 6;
-        IMovingEntity::SetDisplacementCosts(5);
-        (*(void (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
+        this->m_iTask = 6;
+        ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(5);
+        this->Go(this, a2);
       }
       break;
     case 0x10:
       return;
     case 0x11:
-      IMovingEntity::SetDisplacementCosts(0);
-      IAnimatedEntity::RegisterForLogicUpdate(1);
+      ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(0);
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
       break;
     case 0x13:
-      if ( (*(unsigned __int8 (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2) )
+      if ( this->CheckHome(this, a2) != 0 )
       {
-        v12 = *((unsigned __int8 *)this + 44);
-        v7 = (CBuilding *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
+        v12 = this->m_uGood;
+        v7 = (CBuilding *)((CBuilding *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(this->m_uHomeEntityId);
         PileIdWithGood = CBuilding::GetPileIdWithGood(v7, v12);
-        v8 = CMapObjectMgr::EntityPtr(PileIdWithGood);
-        v14 = IEntity::PackedXY(v8);
+        v8 = (int)CMapObjectMgr::EntityPtr(PileIdWithGood);
+        v14 = IEntity::PackedXY((IEntity *)v8);
         IMovingEntity::WalkToXY(a2, v14, 4096);
-        *((_BYTE *)this + 4) = 6;
-        IMovingEntity::SetDisplacementCosts(5);
-        (*(void (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
+        this->m_iTask = 6;
+        ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(5);
+        this->Go(this, a2);
       }
       break;
     case 0x18:
-      if ( (*(unsigned __int8 (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2) )
+      if ( this->CheckHome(this, a2) != 0 )
       {
-        *((_DWORD *)this + 9) = 0;
-        *((_DWORD *)this + 10) = 0;
-        *((_DWORD *)this + 6) = 0;
-        IMovingEntity::SetDisplacementCosts(10);
-        v13 = IEntity::ID();
-        v9 = (CBuilding *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
+        this->m_fOffsetX = 0.0;
+        this->m_fOffsetY = 0.0;
+        this->m_iDestinationPosition = 0;
+        ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(10);
+        v13 = ((int (__stdcall *)())IEntity::ID)();
+        v9 = (CBuilding *)((CBuilding *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(this->m_uHomeEntityId);
         CBuilding::SettlerEnter(v9, v13);
       }
       break;
     case 0x1C:
-      IMovingEntity::SetDisplacementCosts(10);
-      if ( debug && DEBUG_FLAGS[dword_4152130] )
+      ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(10);
+      if ( debug != 0 && DEBUG_FLAGS[dword_4152130] != 0 )
       {
         BBSupportTracePrint(0, "LogicUpdateJob WORK");
       }
       VictimPosition = CHunterRole::GetVictimPosition(this);
-      if ( VictimPosition )
+      if ( VictimPosition != 0 )
       {
         v3 = (Y16X16 *)IEntity::PackedXY(a2);
-        v16 = Y16X16::DirectionFast(v3, VictimPosition);
+        v16 = Y16X16::DirectionFast((int)v3, VictimPosition);
         IMovingEntity::SetDirection(a2, v16);
-        IAnimatedEntity::RegisterForLogicUpdate(*((char *)this + 6));
-        v17 = CLogic::Effects((DWORD *)g_pLogic);
-        v11 = *((char *)this + 6) - 3;
+        ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(this->m_iWalkspeed);
+        v17 = (int)CLogic::Effects(g_pLogic);
+        v11 = this->m_iWalkspeed - 3;
         v10 = CHunterRole::GetVictimPosition(this);
         v4 = IEntity::PackedXY(a2);
         (*(void (__thiscall **)(int, _DWORD, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v17 + 24))(v17, 0, v4, v10, v11, 0, 0);
@@ -479,13 +479,13 @@ void  CHunterRole::TakeJob(class CSettler * a2) {
 
 
 // address=[0x1577e00]
-// Decompiled from int __thiscall CHunterRole::Init(_BYTE *this, CPropertySet *a2)
+// Decompiled from int __thiscall CHunterRole::Init(_BYTE *this, IEntity *a2)
 void  CHunterRole::Init(class CSettler * a2) {
   
   int result; // eax
 
-  result = CWarMap::AddEntity(a2);
-  this[44] = 0;
+  result = ((int (__cdecl *)(CPropertySet *))CWarMap::AddEntity)((CPropertySet *)a2);
+  *(this + 44) = 0;
   return result;
 }
 
@@ -500,18 +500,18 @@ void  CHunterRole::GoHomeEmpty(class CSettler * a2) {
   int v5; // eax
   CMFCToolBarButton *v6; // [esp+0h] [ebp-8h]
 
-  result = (*(int (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2);
-  if ( !(_BYTE)result )
+  result = ((int (__thiscall *)(CHunterRole *, struct CSettler *))this->CheckHome)(this, a2);
+  if ( (_BYTE)result != 0 )
   {
-    return result;
+    this->SetEntity(this, 0);
+    v6 = (CMFCToolBarButton *)((CMFCToolBarButton *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(this->m_uHomeEntityId);
+    v3 = CBuilding::DoorPackedXY((CBuilding *)v6);
+    ISettlerRole::NewDestination(this, a2, v3, 0);
+    v4 = IEntity::Race(a2);
+    v5 = ((int (__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v4, 77);
+    return a2->NewToDoList(a2, v5, 77);
   }
-  (*(void (__thiscall **)(CHunterRole *, _DWORD))(*(_DWORD *)this + 52))(this, 0);
-  v6 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
-  v3 = CBuilding::DoorPackedXY(v6);
-  ISettlerRole::NewDestination(this, a2, v3, 0);
-  v4 = IEntity::Race(a2);
-  v5 = CEntityToDoListMgr::SettlerJobList(v4, 77);
-  return (*(int (__thiscall **)(struct CSettler *, int, int))(*(_DWORD *)a2 + 112))(a2, v5, 77);
+  return result;
 }
 
 
@@ -529,12 +529,12 @@ void  CHunterRole::HarvestDeadAnimal(class CSettler * a2) {
   int VictimPosition; // [esp+8h] [ebp-4h]
 
   VictimPosition = CHunterRole::GetVictimPosition(this);
-  if ( VictimPosition && (v7 = Y16X16::UnpackYFast(VictimPosition), v2 = Y16X16::UnpackXFast(VictimPosition), v3 = CWorldManager::EcoSectorId(v2, v7), v8 = IEntity::Y(a2), v4 = IEntity::X(a2), v3 == CWorldManager::EcoSectorId(v4, v8)) )
+  if ( VictimPosition != 0 && (v7 = Y16X16::UnpackYFast(VictimPosition), v2 = Y16X16::UnpackXFast(VictimPosition), v3 = CWorldManager::EcoSectorId(v2, v7), v8 = IEntity::Y(a2), v4 = IEntity::X(a2), v3 == CWorldManager::EcoSectorId(v4, v8)) )
   {
     ISettlerRole::NewDestination(this, a2, VictimPosition, 0);
     v5 = IEntity::Race(a2);
-    v6 = CEntityToDoListMgr::SettlerJobList(v5, 181);
-    (*(void (__thiscall **)(struct CSettler *, int, int))(*(_DWORD *)a2 + 112))(a2, v6, 181);
+    v6 = ((int (__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v5, 181);
+    a2->NewToDoList(a2, v6, 181);
   }
   else
   {
@@ -549,17 +549,17 @@ bool  CHunterRole::AreWeChasing(class CSettler * a2) {
   
   struct CAnimal *AnimalPtr; // [esp+0h] [ebp-Ch]
 
-  if ( !*((_WORD *)this + 17) )
+  if ( this->m_uEntityId == 0 )
   {
     return 0;
   }
-  AnimalPtr = CAnimalMgr::GetAnimalPtr(*((unsigned __int16 *)this + 17));
-  if ( AnimalPtr )
+  AnimalPtr = (struct CAnimal *)CAnimalMgr::GetAnimalPtr(this->m_uEntityId);
+  if ( AnimalPtr != 0 )
   {
     return IEntity::FlagBits(AnimalPtr, (EntityFlag)&loc_3000000) != 0;
   }
   CTrace::Print("No more animal in chasing mode! This may not happen! Trace file -> Thomas or Stefan");
-  (*(void (__thiscall **)(CHunterRole *, _DWORD))(*(_DWORD *)this + 52))(this, 0);
+  this->SetEntity(this, 0);
   CHunterRole::GoHomeEmpty(this, a2);
   return 0;
 }
@@ -573,12 +573,12 @@ int  CHunterRole::GetVictimPosition(void) {
   int v3; // [esp-4h] [ebp-Ch]
   struct CAnimal *AnimalPtr; // [esp+4h] [ebp-4h]
 
-  if ( !*((_WORD *)this + 17) && BBSupportDbgReport(2, "MapObjects\\Settler\\HunterRole.cpp", 871, "m_uEntityId") == 1 )
+  if ( this->m_uEntityId == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\HunterRole.cpp", 871, "m_uEntityId") == 1 )
   {
     __debugbreak();
   }
-  AnimalPtr = CAnimalMgr::GetAnimalPtr(*((unsigned __int16 *)this + 17));
-  if ( !AnimalPtr )
+  AnimalPtr = (struct CAnimal *)CAnimalMgr::GetAnimalPtr(this->m_uEntityId);
+  if ( AnimalPtr == 0 )
   {
     return 0;
   }
@@ -613,61 +613,61 @@ void  CHunterRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent 
   CMFCToolBarButton *v21; // [esp+8h] [ebp-Ch]
   int v22; // [esp+Ch] [ebp-8h]
 
-  v22 = *((_DWORD *)a3 + 1);
+  v22 = a3->m_iEvent;
   switch ( v22 )
   {
     case 1:
-      v16 = IEntity::Type((unsigned __int16 *)a2);
+      v16 = IEntity::Type(a2);
       v4 = IEntity::Race(a2);
       CSettlerMgr::GetSettlerInfo(v4, v16);
-      v21 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((_DWORD *)a3 + 3));
-      *((_WORD *)this + 16) = IEntity::ID();
-      result = (*(int (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2);
-      if ( (_BYTE)result )
+      v21 = (CMFCToolBarButton *)((CMFCToolBarButton *(__stdcall *)(int))CBuildingMgr::operator[])(a3->m_iDataA);
+      this->m_uHomeEntityId = ((int (__stdcall *)())IEntity::ID)();
+      result = ((int (__thiscall *)(CHunterRole *, struct CSettler *))this->CheckHome)(this, a2);
+      if ( (_BYTE)result != 0 )
       {
-        v5 = CBuilding::DoorPackedXY(v21);
+        v5 = CBuilding::DoorPackedXY((CBuilding *)v21);
         ISettlerRole::NewDestination(this, a2, v5, 0);
-        v17 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](0);
-        v13 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](0);
+        v17 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))std::vector<unsigned short>::operator[])(0);
+        v13 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))std::vector<unsigned short>::operator[])(0);
         v6 = IEntity::Race(a2);
-        v7 = CEntityToDoListMgr::SettlerJobList(v6, v13);
-        return (*(int (__thiscall **)(struct CSettler *, int, int))(*(_DWORD *)a2 + 112))(a2, v7, v17);
+        v7 = ((int (__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v6, v13);
+        return a2->NewToDoList(a2, v7, v17);
       }
       break;
     case 5:
-      v18 = IEntity::Type((unsigned __int16 *)a2);
+      v18 = IEntity::Type(a2);
       v8 = IEntity::Race(a2);
       CSettlerMgr::GetSettlerInfo(v8, v18);
-      ISettlerRole::NewDestination(this, a2, *((_DWORD *)a3 + 5), 0);
-      v14 = Y16X16::UnpackYFast(*((_DWORD *)this + 6));
-      v9 = Y16X16::UnpackXFast(*((_DWORD *)this + 6));
+      ISettlerRole::NewDestination(this, a2, a3->m_iDataC, 0);
+      v14 = Y16X16::UnpackYFast(this->m_iDestinationPosition);
+      v9 = Y16X16::UnpackXFast(this->m_iDestinationPosition);
       CWorldManager::ClearFlagBits(v9, v14, 32);
-      result = (*(unsigned __int8 (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2);
-      if ( (_BYTE)result )
+      result = this->CheckHome(this, a2);
+      if ( (_BYTE)result != 0 )
       {
-        (*(void (__thiscall **)(CHunterRole *, _DWORD))(*(_DWORD *)this + 52))(this, *((_DWORD *)a3 + 4));
-        v19 = *((_DWORD *)a3 + 4);
-        v10 = IEntity::ID();
+        this->SetEntity(this, a3->m_iDataB);
+        v19 = a3->m_iDataB;
+        v10 = ((int (__stdcall *)())IEntity::ID)();
         CTrace::Print("HunterRole: GATHER was sent to Hunter %d for Entity %d", v10, v19);
-        v20 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](1);
-        v15 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](1);
+        v20 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(int))std::vector<unsigned short>::operator[])(1);
+        v15 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(int))std::vector<unsigned short>::operator[])(1);
         v11 = IEntity::Race(a2);
-        v12 = CEntityToDoListMgr::SettlerJobList(v11, v15);
-        return (*(int (__thiscall **)(struct CSettler *, int, int))(*(_DWORD *)a2 + 112))(a2, v12, v20);
+        v12 = ((int (__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v11, v15);
+        return a2->NewToDoList(a2, v12, v20);
       }
       break;
     case 9:
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Visible);
-      return (*(int (__thiscall **)(CHunterRole *, struct CSettler *, int))(*(_DWORD *)this + 64))(this, a2, -1);
+      return ((int (__thiscall *)(CHunterRole *, struct CSettler *, int))this->SetFree)(this, a2, -1);
     default:
-      result = (*(int (__thiscall **)(CHunterRole *, struct CSettler *))(*(_DWORD *)this + 124))(this, a2);
-      if ( (_BYTE)result )
+      result = ((int (__thiscall *)(CHunterRole *, struct CSettler *))this->CheckHome)(this, a2);
+      if ( (_BYTE)result != 0 )
       {
         result = IEntity::FlagBits(a2, ENTITY_FLAG_Registered);
-        if ( !result )
+        if ( result == 0 )
         {
-          CTrace::Print("ConvertEventIntoGoal HunterRole - unknown event %u", *((_DWORD *)a3 + 1));
-          return IAnimatedEntity::RegisterForLogicUpdate(1);
+          CTrace::Print("ConvertEventIntoGoal HunterRole - unknown event %u", a3->m_iEvent);
+          return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
         }
       }
       break;
@@ -684,14 +684,13 @@ bool  CHunterRole::SetFree(class CSettler * a2, int a3) {
   int v5; // [esp-Ch] [ebp-10h]
   unsigned int v6; // [esp-8h] [ebp-Ch]
 
-  if ( !*((_BYTE *)this + 44) )
+  if ( this->m_uGood != 0 )
   {
-    return ISettlerRole::SetFree(this, a2, a3);
+    v6 = this->m_uGood;
+    v5 = IEntity::Y(a2);
+    v3 = IEntity::X(a2);
+    CPileMgr::SearchSpaceForGoods(&g_cPileMgr, v3, v5, v6, 1u);
   }
-  v6 = *((unsigned __int8 *)this + 44);
-  v5 = IEntity::Y(a2);
-  v3 = IEntity::X(a2);
-  CPileMgr::SearchSpaceForGoods((CPileMgr *)&g_cPileMgr, v3, v5, v6, 1u);
   return ISettlerRole::SetFree(this, a2, a3);
 }
 

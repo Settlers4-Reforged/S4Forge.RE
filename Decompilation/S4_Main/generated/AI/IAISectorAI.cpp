@@ -7,7 +7,7 @@
  IAISectorAI::IAISectorAI(void) {
   
   IAIUnknown::IAIUnknown(this);
-  *(_DWORD *)this = IAISectorAI::_vftable_;
+  this->__vftable = (IAIUnknown_vtbl *)IAISectorAI::_vftable_;
   return this;
 }
 

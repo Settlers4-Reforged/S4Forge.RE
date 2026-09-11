@@ -7,16 +7,16 @@
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Comment::Comment(_DWORD *this, int a2)
  AdvXMLParser::Comment::Comment(std::string const & a2) {
   
-  _BYTE v4[28]; // [esp+8h] [ebp-2Ch] BYREF
+  std::string v4; // [esp+8h] [ebp-2Ch] BYREF
   int v5; // [esp+30h] [ebp-4h]
 
-  std::string::string(v4, "#comment");
+  std::string::string(&v4, "#comment");
   v5 = 0;
-  AdvXMLParser::Node::Node(AdvXMLParser::Node::null, v4);
+  ((void (__stdcall *)(void *, std::string *))AdvXMLParser::Node::Node)(AdvXMLParser::Node::null, &v4);
   LOBYTE(v5) = 2;
-  std::string::~string(v4);
+  std::string::~string(&v4);
   *this = &AdvXMLParser::Comment::_vftable_;
-  std::string::string(a2);
+  ((void (__stdcall *)(int))std::string::string)(a2);
   return this;
 }
 
@@ -25,16 +25,16 @@
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Comment::Comment(_DWORD *this, int a2, int a3)
  AdvXMLParser::Comment::Comment(class AdvXMLParser::NodeContainer & a2, std::string const & a3) {
   
-  _BYTE v5[28]; // [esp+8h] [ebp-2Ch] BYREF
+  std::string v5; // [esp+8h] [ebp-2Ch] BYREF
   int v6; // [esp+30h] [ebp-4h]
 
-  std::string::string(v5, "#comment");
+  std::string::string(&v5, "#comment");
   v6 = 0;
-  AdvXMLParser::Node::Node(a2, v5);
+  ((void (__stdcall *)(int, std::string *))AdvXMLParser::Node::Node)(a2, &v5);
   LOBYTE(v6) = 2;
-  std::string::~string(v5);
+  std::string::~string(&v5);
   *this = &AdvXMLParser::Comment::_vftable_;
-  std::string::string(a3);
+  ((void (__stdcall *)(int))std::string::string)(a3);
   return this;
 }
 
@@ -51,12 +51,12 @@ class AdvXMLParser::Comment *  AdvXMLParser::Comment::Clone(class AdvXMLParser::
 
   v6 = 0;
   v8 = 0;
-  if ( operator new(0x40u) )
+  if ( operator new(0x40u) != 0 )
   {
     v3 = (*(int (__thiscall **)(AdvXMLParser::Comment *, _BYTE *))(*(_DWORD *)this + 4))(this, v7);
     LOBYTE(v8) = 1;
     v6 = 1;
-    v4 = AdvXMLParser::Comment::Comment(a2, v3);
+    v4 = ((int (__stdcall *)(struct AdvXMLParser::NodeContainer *, int))AdvXMLParser::Comment::Comment)(a2, v3);
   }
   else
   {
@@ -72,19 +72,19 @@ class AdvXMLParser::Comment *  AdvXMLParser::Comment::Clone(class AdvXMLParser::
 
 
 // address=[0x2f168b0]
-// Decompiled from int __thiscall AdvXMLParser::Comment::GetData(char *this, int a2)
+// Decompiled from std::string *__thiscall AdvXMLParser::Comment::GetData(char *this, std::string *a2)
 std::string  AdvXMLParser::Comment::GetData(void a2)const {
   
-  std::string::string(this + 36);
+  ((void (__stdcall *)(char *))std::string::string)(this + 36);
   return a2;
 }
 
 
 // address=[0x2f168f0]
-// Decompiled from int __thiscall AdvXMLParser::Comment::GetValue(char *this, int a2)
+// Decompiled from std::string *__thiscall AdvXMLParser::Comment::GetValue(char *this, std::string *a2)
 std::string  AdvXMLParser::Comment::GetValue(void a2)const {
   
-  std::string::string(this + 36);
+  ((void (__stdcall *)(char *))std::string::string)(this + 36);
   return a2;
 }
 
@@ -145,15 +145,15 @@ class AdvXMLParser::Comment * __cdecl AdvXMLParser::Comment::Parse(class AdvXMLP
   {
     AdvXMLParser::Parser::SyntaxError(a1, 23);
   }
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v11 = 0;
-  AdvXMLParser::Bookmark::GetSubString(v10, 3);
+  ((void (__stdcall *)(_BYTE *, int))AdvXMLParser::Bookmark::GetSubString)(v10, 3);
   v4 = operator new(0x40u);
   C = v4;
   LOBYTE(v11) = 1;
-  if ( v4 )
+  if ( v4 != 0 )
   {
-    v8 = AdvXMLParser::Comment::Comment(a2, v10);
+    v8 = ((int (__stdcall *)(struct AdvXMLParser::NodeContainer *, _BYTE *))AdvXMLParser::Comment::Comment)(a2, v10);
   }
   else
   {
@@ -172,10 +172,10 @@ class AdvXMLParser::Comment * __cdecl AdvXMLParser::Comment::Parse(class AdvXMLP
 void  AdvXMLParser::Comment::GenerateXML(class AdvXMLParser::GenerateContext & a2)const {
   
   AdvXMLParser::GenerateContext::GenerateStartTagIndentation(a2);
-  AdvXMLParser::GenerateContext::operator+=("<!--");
-  AdvXMLParser::GenerateContext::operator+=((char *)this + 36);
-  AdvXMLParser::GenerateContext::operator+=("-->");
-  AdvXMLParser::GenerateContext::GenerateNewLine(a2);
+  ((void (__stdcall *)(char *))AdvXMLParser::GenerateContext::operator+=)("<!--");
+  ((void (__stdcall *)(char *))AdvXMLParser::GenerateContext::operator+=)((char *)this + 36);
+  ((void (__stdcall *)(char *))AdvXMLParser::GenerateContext::operator+=)("-->");
+  ((void (__thiscall *)(AdvXMLParser::GenerateContext *))AdvXMLParser::GenerateContext::GenerateNewLine)(a2);
   AdvXMLParser::GenerateContext::EndTag(a2);
 }
 

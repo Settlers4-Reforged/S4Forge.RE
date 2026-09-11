@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateMD2Campaigns::DynamicCreateFunc(void * a1) {
   CStateMD2Campaigns *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateMD2Campaigns *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateMD2Campaigns::CStateMD2Campaigns(C, a1);
   }
@@ -24,10 +24,10 @@ class CGameState * __cdecl CStateMD2Campaigns::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateMD2Campaigns *__thiscall CStateMD2Campaigns::CStateMD2Campaigns(CStateMD2Campaigns *this, void *a2)
  CStateMD2Campaigns::CStateMD2Campaigns(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateMD2Campaigns::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  CGuiGameState::SetupExtraGui(g_pMissionCD2, 0, (int)GuiDlgMD2CampaignsProc);
+  CGuiGameState::SetupExtraGui((int)g_pMissionCD2, 0, (int)GuiDlgMD2CampaignsProc);
   g_cCampaignSettings = 24;
   dword_402CBBC[17] = CGameSettings::GetCampaignStatus(17);
   dword_402CBBC[19] = CGameSettings::GetCampaignStatus(19);
@@ -37,17 +37,17 @@ class CGameState * __cdecl CStateMD2Campaigns::DynamicCreateFunc(void * a1) {
   dword_402CBBC[19] = 5;
   dword_402CBBC[18] = 5;
   dword_402CBBC[20] = 5;
-  CGuiGameState::OpenDialog(this, 0, GuiDlgMD2CampaignsProc);
+  CGuiGameState::OpenDialog((CGuiGameState *)this, 0, (bool (__cdecl *)(int, int, int))GuiDlgMD2CampaignsProc);
   return this;
 }
 
 
 // address=[0x14c47d0]
-// Decompiled from void __thiscall CStateMD2Campaigns::~CStateMD2Campaigns(CStateMD2Campaigns *this)
+// Decompiled from void __thiscall CStateMD2Campaigns::~CStateMD2Campaigns(CGuiGameState *this)
  CStateMD2Campaigns::~CStateMD2Campaigns(void) {
   
-  *(_DWORD *)this = &CStateMD2Campaigns::_vftable_;
-  IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0);
+  this->__vftable = (CGuiGameState_vtbl *)&CStateMD2Campaigns::_vftable_;
+  IGuiEngine::CloseDialog(g_pGUIEngine, 0);
   CGuiGameState::~CGuiGameState(this);
 }
 
@@ -59,16 +59,16 @@ bool  CStateMD2Campaigns::Perform(void) {
   DWORD v2; // esi
   int Instance; // [esp+8h] [ebp-4h]
 
-  Instance = UPlay::UPlayManager::GetInstance();
-  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) )
+  Instance = (int)UPlay::UPlayManager::GetInstance();
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) != 0 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0);
-    if ( !g_pMissionCD2 && BBSupportDbgReport(2, "main\\states\\StateMD2Campaigns.cpp", 182, "g_pMissionCD2") == 1 )
+    IGuiEngine::CloseDialog(g_pGUIEngine, 0);
+    if ( g_pMissionCD2 == 0 && BBSupportDbgReport(2, "main\\states\\StateMD2Campaigns.cpp", 182, "g_pMissionCD2") == 1 )
     {
       __debugbreak();
     }
-    (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD2 + 12))(g_pMissionCD2, 0, GuiDlgMainscreenProc);
-    CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
+    ((void (__thiscall *)(CMissionCD2 *, _DWORD, char (__cdecl *)(int, int, int)))g_pMissionCD2->j_?EnsureMainGUI@CExtraCD@@UAEXHP6A_NHHH@Z@Z)(g_pMissionCD2, 0, GuiDlgMainscreenProc);
+    CGameStateHandler::Switch(CStateMainMenu::DynamicCreateFunc, 0);
     return 1;
   }
   else
@@ -83,21 +83,20 @@ bool  CStateMD2Campaigns::Perform(void) {
       }
     }
     v2 = dword_4031E34 + 30;
-    if ( v2 >= timeGetTime() )
+    if ( v2 < timeGetTime() )
     {
-      return 1;
+      dword_4031E34 = timeGetTime();
+      IGuiEngine::RenderGui(g_pGUIEngine);
+      IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+      IGfxEngine::ShowFrame(g_pGfxEngine);
     }
-    dword_4031E34 = timeGetTime();
-    IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-    IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-    IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
     return 1;
   }
 }
 
 
 // address=[0x14c4960]
-// Decompiled from char __thiscall CStateMD2Campaigns::OnEvent(CStateMD2Campaigns *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateMD2Campaigns::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateMD2Campaigns::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
@@ -116,7 +115,7 @@ bool  CStateMD2Campaigns::OnEvent(class CEvn_Event & a2) {
         {
           CGameSettings::SetAIDifficulty(s_uAIDifficulty);
         }
-        CGameStateHandler::Switch((int)CStateMD2Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x12);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMD2Briefing::DynamicCreateFunc, (void *)((a2->m_wParam << 16) | 0x12));
         result = 1;
         break;
       case 0x232Cu:
@@ -124,7 +123,7 @@ bool  CStateMD2Campaigns::OnEvent(class CEvn_Event & a2) {
         {
           CGameSettings::SetAIDifficulty(s_uAIDifficulty);
         }
-        CGameStateHandler::Switch((int)CStateMD2Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x13);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMD2Briefing::DynamicCreateFunc, (void *)((a2->m_wParam << 16) | 0x13));
         result = 1;
         break;
       case 0x232Du:
@@ -132,17 +131,17 @@ bool  CStateMD2Campaigns::OnEvent(class CEvn_Event & a2) {
         {
           CGameSettings::SetAIDifficulty(s_uAIDifficulty);
         }
-        CGameStateHandler::Switch((int)CStateMD2Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x14);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMD2Briefing::DynamicCreateFunc, (void *)((a2->m_wParam << 16) | 0x14));
         result = 1;
         break;
       case 0x232Fu:
-        IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0);
-        if ( !g_pMissionCD2 && BBSupportDbgReport(2, "main\\states\\StateMD2Campaigns.cpp", 114, (const char *)&dword_3750EB0[1]) == 1 )
+        IGuiEngine::CloseDialog(g_pGUIEngine, 0);
+        if ( g_pMissionCD2 == 0 && BBSupportDbgReport(2, "main\\states\\StateMD2Campaigns.cpp", 114, (const char *)&dword_3750EB0[1]) == 1 )
         {
           __debugbreak();
         }
-        (*(void (__thiscall **)(int, _DWORD, char (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD2 + 12))(g_pMissionCD2, 0, GuiDlgMainscreenProc);
-        CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
+        ((void (__thiscall *)(CMissionCD2 *, _DWORD, char (__cdecl *)(int, int, int)))g_pMissionCD2->j_?EnsureMainGUI@CExtraCD@@UAEXHP6A_NHHH@Z@Z)(g_pMissionCD2, 0, GuiDlgMainscreenProc);
+        CGameStateHandler::Switch(CStateMainMenu::DynamicCreateFunc, 0);
         result = 1;
         break;
       default:
@@ -155,7 +154,7 @@ bool  CStateMD2Campaigns::OnEvent(class CEvn_Event & a2) {
     {
       CGameSettings::SetAIDifficulty(s_uAIDifficulty);
     }
-    CGameStateHandler::Switch((int)CStateMD2Briefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0x11);
+    CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMD2Briefing::DynamicCreateFunc, (void *)((a2->m_wParam << 16) | 0x11));
     return 1;
   }
   else if ( event == 11 && (unsigned __int16)a2->m_wParam == 27 )

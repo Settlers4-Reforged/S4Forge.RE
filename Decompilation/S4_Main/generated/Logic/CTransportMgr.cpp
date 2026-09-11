@@ -29,7 +29,7 @@ class IMovingEntity * __cdecl CTransportMgr::GetNearestEntity(int a1, int a2, in
   v16 = 0;
   v17 = 0xFFFF;
   v5 = Y16X16::PackXYFast(a4, a5);
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(v5) && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 42, "g_cWorld.InWorldPackedXY( Y16X16::PackXYFast(_iX,_iY) )") == 1 )
+  if ( !CWorldManager::InWorldPackedXY(v5) && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 42, "g_cWorld.InWorldPackedXY( Y16X16::PackXYFast(_iX,_iY) )") == 1 )
   {
     __debugbreak();
   }
@@ -47,33 +47,30 @@ class IMovingEntity * __cdecl CTransportMgr::GetNearestEntity(int a1, int a2, in
   }
   if ( a1 == 1 )
   {
-    for ( i = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, a3, a2);
-          i;
+    for ( i = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, a3, a2);
+          i != 0;
           i = IAnimatedEntity::Next(SettlerPtr) )
     {
-      SettlerPtr = CSettlerMgr::GetSettlerPtr(i);
-      if ( !SettlerPtr && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 59, "pSettler!= NULL") == 1 )
+      SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(i);
+      if ( SettlerPtr == 0 && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 59, "pSettler!= NULL") == 1 )
       {
         __debugbreak();
       }
-      v21 = 0;
-      if ( SettlerPtr )
+      v21 = false;
+      if ( SettlerPtr != 0 )
       {
-        v6 = IEntity::WorldIdx();
+        v6 = ((int (__stdcall *)())IEntity::WorldIdx)();
         v7 = CWorldManager::SectorId(v6);
-        if ( v7 == CWorldManager::SectorId(a4, a5) )
+        if ( v7 == CWorldManager::SectorId(a4, a5) && (*(unsigned __int8 (__thiscall **)(unsigned __int8 *))(*(_DWORD *)SettlerPtr + 116))(SettlerPtr) != 0 )
         {
-          if ( (*(unsigned __int8 (__thiscall **)(unsigned __int8 *))(*(_DWORD *)SettlerPtr + 116))(SettlerPtr) )
-          {
-            v21 = 1;
-          }
+          v21 = true;
         }
       }
-      if ( v21 && !CSettler::Strike((CSettler *)SettlerPtr) && (*(unsigned __int8 (__thiscall **)(unsigned __int8 *))(*(_DWORD *)SettlerPtr + 116))(SettlerPtr) )
+      if ( v21 && !CSettler::Strike((CSettler *)SettlerPtr) && (*(unsigned __int8 (__thiscall **)(unsigned __int8 *))(*(_DWORD *)SettlerPtr + 116))(SettlerPtr) != 0 )
       {
         v14 = a5 - IEntity::Y(SettlerPtr);
         v8 = IEntity::X(SettlerPtr);
-        v20 = Grid::Distance((Grid *)(a4 - v8), v14);
+        v20 = Grid::Distance(a4 - v8, v14);
         if ( v20 < v17 )
         {
           v17 = v20;
@@ -85,30 +82,27 @@ class IMovingEntity * __cdecl CTransportMgr::GetNearestEntity(int a1, int a2, in
   else
   {
     for ( j = CVehicleMgr::GetFirstVehicleId((CVehicleMgr *)&g_cVehicleMgr, a3, a2);
-          j;
+          j != 0;
           j = IAnimatedEntity::Next(VehiclePtr) )
     {
-      VehiclePtr = CVehicleMgr::GetVehiclePtr(j);
-      if ( !VehiclePtr && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 95, "pVehicle!= NULL") == 1 )
+      VehiclePtr = (struct CVehicle *)CVehicleMgr::GetVehiclePtr(j);
+      if ( VehiclePtr == 0 && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 95, "pVehicle!= NULL") == 1 )
       {
         __debugbreak();
       }
-      if ( VehiclePtr )
+      if ( VehiclePtr != 0 )
       {
-        v9 = IEntity::WorldIdx();
+        v9 = ((int (__stdcall *)())IEntity::WorldIdx)();
         v10 = CWorldManager::SectorId(v9);
-        if ( v10 == CWorldManager::SectorId(a4, a5) )
+        if ( v10 == CWorldManager::SectorId(a4, a5) && ((unsigned __int8 (__thiscall *)(struct CVehicle *))VehiclePtr->IsUnEmployed)(VehiclePtr) != 0 )
         {
-          if ( (*(unsigned __int8 (__thiscall **)(struct CVehicle *))(*(_DWORD *)VehiclePtr + 116))(VehiclePtr) )
+          v15 = a5 - IEntity::Y(VehiclePtr);
+          v11 = IEntity::X(VehiclePtr);
+          v18 = Grid::Distance(a4 - v11, v15);
+          if ( v18 < v17 )
           {
-            v15 = a5 - IEntity::Y(VehiclePtr);
-            v11 = IEntity::X(VehiclePtr);
-            v18 = Grid::Distance((Grid *)(a4 - v11), v15);
-            if ( v18 < v17 )
-            {
-              v17 = v18;
-              v16 = j;
-            }
+            v17 = v18;
+            v16 = j;
           }
         }
       }
@@ -119,11 +113,11 @@ class IMovingEntity * __cdecl CTransportMgr::GetNearestEntity(int a1, int a2, in
     return 0;
   }
   v12 = (void **)CMapObjectMgr::EntityPtr(v16);
-  if ( !j____RTDynamicCast(v12, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 121, "dynamic_cast<IMovingEntity*> ( g_pMapObjectMgr->EntityPtr( sBestFit.EntityID ) )!= NULL") == 1 )
+  if ( j____RTDynamicCast(v12, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 121, "dynamic_cast<IMovingEntity*> ( g_pMapObjectMgr->EntityPtr( sBestFit.EntityID ) )!= NULL") == 1 )
   {
     __debugbreak();
   }
-  return CMapObjectMgr::EntityPtr(v16);
+  return (int)CMapObjectMgr::EntityPtr(v16);
 }
 
 
@@ -153,36 +147,31 @@ class IMovingEntity * __cdecl CTransportMgr::GetNearestTransportEntity(int a1, i
   v8 = CWorldManager::Index(a3, a4);
   v16 = CWorldManager::EcoSectorId(v8);
   v9 = CWorldManager::Index(a5, a6);
-  v15 = CWorldManager::EcoSectorId(v9) == v16 && a7;
+  v15 = CWorldManager::EcoSectorId(v9) == v16 && a7 != 0;
   if ( a1 >= 16 )
   {
-    NearestEntity = CTransportMgr::GetNearestEntity(4, 5, a2, a3, a4);
-    if ( NearestEntity )
+    NearestEntity = (struct IMovingEntity *)CTransportMgr::GetNearestEntity(4, 5, a2, a3, a4);
+    if ( NearestEntity != 0 )
     {
       return (unsigned __int8 *)NearestEntity;
     }
   }
-  if ( a1 >= 7 || !a7 )
+  if ( a1 >= 7 || a7 == 0 )
   {
-    v13 = CTransportMgr::GetNearestEntity(1, 60, a2, a3, a4);
-    if ( v13 )
+    v13 = (struct IMovingEntity *)CTransportMgr::GetNearestEntity(1, 60, a2, a3, a4);
+    if ( v13 != 0 )
     {
       return (unsigned __int8 *)v13;
     }
   }
-  if ( !v15 )
+  if ( v15 && v16 != 0 )
   {
-    return 0;
-  }
-  if ( !v16 )
-  {
-    return 0;
-  }
-  v10 = (CEcoSector *)CEcoSectorMgr::operator[](v16);
-  NearestSettler = CEcoSector::GetNearestSettler(v10, 1, a3, a4);
-  if ( NearestSettler )
-  {
-    return CSettlerMgr::GetSettlerPtr(NearestSettler);
+    v10 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v16);
+    NearestSettler = CEcoSector::GetNearestSettler(v10, 1, a3, a4);
+    if ( NearestSettler != 0 )
+    {
+      return ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(NearestSettler);
+    }
   }
   return 0;
 }
@@ -203,18 +192,18 @@ class CSettler * __cdecl CTransportMgr::GetNearestCarrier(int a1, int a2, int a3
   {
     return 0;
   }
-  v7 = (CEcoSector *)CEcoSectorMgr::operator[](v5);
+  v7 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v5);
   if ( CEcoSector::Owner(v7) != a1 )
   {
     return 0;
   }
   NearestSettler = CEcoSector::GetNearestSettler(v7, 1, a2, a3);
-  if ( !NearestSettler )
+  if ( NearestSettler == 0 )
   {
     return 0;
   }
   CEcoSector::GetSettlerOutOfOffer(v7, NearestSettler);
-  return CSettlerMgr::GetSettlerPtr(NearestSettler);
+  return ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(NearestSettler);
 }
 
 
@@ -236,15 +225,15 @@ class IMovingEntity * __cdecl CTransportMgr::GetVehicleCargoLoader(int a1, int a
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorld(a3, a4) && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 235, "g_cWorld.InWorld(_iSourceX,_iSourceY)") == 1 )
+  if ( !CWorldManager::InWorld(a3, a4) && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 235, "g_cWorld.InWorld(_iSourceX,_iSourceY)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorld(a5, a6) && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 236, "g_cWorld.InWorld(_iDestX,_iDestY)") == 1 )
+  if ( !CWorldManager::InWorld(a5, a6) && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 236, "g_cWorld.InWorld(_iDestX,_iDestY)") == 1 )
   {
     __debugbreak();
   }
-  if ( a1 == 4 && (NearestEntity = CTransportMgr::GetNearestEntity(1, 60, a2, a3, a4)) != 0 )
+  if ( a1 == 4 && (NearestEntity = (struct IMovingEntity *)CTransportMgr::GetNearestEntity(1, 60, a2, a3, a4)) != 0 )
   {
     *a7 = 8;
     return (unsigned __int8 *)NearestEntity;
@@ -255,18 +244,18 @@ class IMovingEntity * __cdecl CTransportMgr::GetVehicleCargoLoader(int a1, int a
     v16 = CWorldManager::EcoSectorId(v8);
     v9 = CWorldManager::Index(a5, a6);
     v12 = CWorldManager::EcoSectorId(v9);
-    if ( v16 && v12 == v16 && (v10 = (CEcoSector *)CEcoSectorMgr::operator[](v16), (NearestSettler = CEcoSector::GetNearestSettler(v10, 1, a3, a4)) != 0) )
+    if ( v16 != 0 && v12 == v16 && (v10 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v16), (NearestSettler = CEcoSector::GetNearestSettler(v10, 1, a3, a4)) != 0) )
     {
-      SettlerPtr = CSettlerMgr::GetSettlerPtr(NearestSettler);
-      if ( !SettlerPtr && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 263, "pSettler!=NULL") == 1 )
+      SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(NearestSettler);
+      if ( SettlerPtr == 0 && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 263, "pSettler!=NULL") == 1 )
       {
         __debugbreak();
       }
-      if ( IEntity::OwnerId(SettlerPtr) != a2 && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 264, "pSettler->OwnerId() == _iOwnerID") == 1 )
+      if ( IEntity::OwnerId((IEntity *)SettlerPtr) != a2 && BBSupportDbgReport(2, "Logic\\TransportMgr.cpp", 264, "pSettler->OwnerId() == _iOwnerID") == 1 )
       {
         __debugbreak();
       }
-      v11 = (CEcoSector *)CEcoSectorMgr::operator[](v12);
+      v11 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v12);
       CEcoSector::GetSettlerOutOfOffer(v11, NearestSettler);
       *a7 = 1;
       return SettlerPtr;

@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CEyeCatcherRole::New(int a1)
 class CPersistence * __cdecl CEyeCatcherRole::New(std::istream & a1) {
   
-  if ( operator new(0x17Cu) )
+  if ( operator new(0x17Cu) != 0 )
   {
-    return CEyeCatcherRole::CEyeCatcherRole(a1);
+    return ((_DWORD (__stdcall *)(int))CEyeCatcherRole::CEyeCatcherRole)(a1);
   }
   else
   {
@@ -21,7 +21,7 @@ class CPersistence * __cdecl CEyeCatcherRole::New(std::istream & a1) {
 // Decompiled from CEyeCatcherRole *__thiscall CEyeCatcherRole::CEyeCatcherRole(CEyeCatcherRole *this)
  CEyeCatcherRole::CEyeCatcherRole(void) {
   
-  IBuildingRole::IBuildingRole(this);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this);
   *(_DWORD *)this = &CEyeCatcherRole::_vftable_;
   return this;
 }
@@ -76,13 +76,13 @@ void  CEyeCatcherRole::GoodArrive(int a2) {
 
 
 // address=[0x14fd9b0]
-// Decompiled from int __cdecl CEyeCatcherRole::Load(int a1)
+// Decompiled from int __cdecl CEyeCatcherRole::Load(struct std::istream *a1)
 class CEyeCatcherRole * __cdecl CEyeCatcherRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CEyeCatcherRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -105,20 +105,19 @@ void  CEyeCatcherRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo &
   _DWORD v7[180]; // [esp+4h] [ebp-2D4h] BYREF
 
   (*(void (__thiscall **)(CEyeCatcherRole *, struct CBuilding *))(*(_DWORD *)this + 16))(this, a2);
-  v5 = IEntity::Type((unsigned __int16 *)a2);
+  v5 = IEntity::Type(a2);
   v3 = IEntity::Race(a2);
-  CGfxManager::GetBuildingGfxInfo((int)a3, v3, v5, 1, (int)this + 76);
+  ((void (__stdcall *)(int, int, int, int, int))CGfxManager::GetBuildingGfxInfo)((int)a3, v3, v5, 1, (int)this + 76);
   result = this;
-  if ( !*((_BYTE *)this + 356) )
+  if ( *((_BYTE *)this + 356) != 0 )
   {
-    return result;
+    CGfxManager::GetEffectGfxInfo(g_pGfxManager, (struct SGfxObjectInfo *)v7, *((unsigned __int8 *)this + 356), 0, *((unsigned __int8 *)this + 359));
+    *(_DWORD *)&a3->gap_60[8] = v7[0];
+    *(_DWORD *)&a3->gap_60[12] = v7[1];
+    *(_DWORD *)&a3->gap_60[16] = *((__int16 *)this + 180);
+    result = 0;
+    *(_DWORD *)&a3->gap_60[20] = *((__int16 *)this + 181);
   }
-  CGfxManager::GetEffectGfxInfo((CGfxManager *)g_pGfxManager, (struct SGfxObjectInfo *)v7, *((unsigned __int8 *)this + 356), 0, *((unsigned __int8 *)this + 359));
-  *((_DWORD *)a3 + 26) = v7[0];
-  *((_DWORD *)a3 + 27) = v7[1];
-  *((_DWORD *)a3 + 28) = *((__int16 *)this + 180);
-  result = 0;
-  *((_DWORD *)a3 + 29) = *((__int16 *)this + 181);
   return result;
 }
 
@@ -129,9 +128,9 @@ void  CEyeCatcherRole::Init(class CBuilding * a2) {
   
   int result; // eax
 
-  IBuildingRole::InitCommon((int)a2);
+  IBuildingRole::InitCommon(a2);
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
-  if ( result )
+  if ( result != 0 )
   {
     return (*(int (__thiscall **)(CEyeCatcherRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   }
@@ -147,9 +146,9 @@ void  CEyeCatcherRole::PostLoadInit(class CBuilding * a2) {
   int result; // eax
   int v4; // [esp-4h] [ebp-8h]
 
-  v4 = IEntity::Type((unsigned __int16 *)a2);
+  v4 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
-  result = CBuildingInfoMgr::GetBuildingInfo(v2, v4);
+  result = (int)CBuildingInfoMgr::GetBuildingInfo(v2, v4);
   *((_DWORD *)this + 94) = result;
   return result;
 }
@@ -168,19 +167,19 @@ void  CEyeCatcherRole::FillDialog(class CBuilding * a2, bool a3) {
   int v10; // [esp+34h] [ebp-4h]
 
   g_cBuildingInfo.m_iUnknown = 0;
-  g_cBuildingInfo.? = IEntity::Race(a2);
-  g_cBuildingInfo.? = IEntity::Type(a2);
-  MEMORY[0x3F1E4CB] = 0;
-  MEMORY[0x3F1E4CC] = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
-  g_cBuildingInfo.? = 0;
-  g_cBuildingInfo.? = 0;
-  g_cBuildingInfo.? = -1;
+  g_cBuildingInfo.m_cRace = IEntity::Race(a2);
+  g_cBuildingInfo.m_cType = IEntity::Type(a2);
+  g_cBuildingSiteInfo.m_unknownB = 0;
+  g_cBuildingSiteInfo.m_bSomeFlagBits = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+  g_cBuildingInfo.m_bHasWorkingArea = 0;
+  g_cBuildingInfo.m_bInhabitants = 0;
+  g_cBuildingInfo.m_iBuildingProgress = -1;
   v6 = IEntity::Type(a2);
   v3 = IEntity::OwnerId(a2);
-  g_cBuildingInfo.? = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v6, 0);
+  g_cBuildingInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, (S4_BUILDING_ENUM)v6, 0);
   v7 = IEntity::Type(a2);
   v4 = IEntity::OwnerId(a2);
-  g_cBuildingInfo.? = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
+  g_cBuildingInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, (S4_BUILDING_ENUM)v7, 1u);
   v8 = 604;
   if ( !a3 )
   {
@@ -198,13 +197,13 @@ void  CEyeCatcherRole::FillDialog(class CBuilding * a2, bool a3) {
 // Decompiled from char *__thiscall CEyeCatcherRole::CEyeCatcherRole(char *this, int a2)
  CEyeCatcherRole::CEyeCatcherRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   char *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  IBuildingRole::IBuildingRole(this, a2);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this, (struct std::istream *)a2);
   v6 = 0;
   *(_DWORD *)v5 = &CEyeCatcherRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
@@ -229,7 +228,7 @@ void  CEyeCatcherRole::Store(std::ostream & a2) {
   v3[1] = (int)this;
   IBuildingRole::Store(this, a2);
   v3[0] = 1;
-  return operator^<unsigned int>(a2, v3);
+  return operator^<unsigned int>(a2, (unsigned int *)v3);
 }
 
 

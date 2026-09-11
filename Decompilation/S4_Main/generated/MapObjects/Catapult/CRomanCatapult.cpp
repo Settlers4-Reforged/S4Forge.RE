@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CRomanCatapult::New(int a1)
 class CPersistence * __cdecl CRomanCatapult::New(std::istream & a1) {
   
-  if ( CRomanCatapult::operator new(0xD8u) )
+  if ( (void *)CRomanCatapult::operator new(0xD8u) != 0 )
   {
-    return CRomanCatapult::CRomanCatapult(a1);
+    return ((_DWORD (__stdcall *)(int))CRomanCatapult::CRomanCatapult)(a1);
   }
   else
   {
@@ -26,7 +26,7 @@ void * __cdecl CRomanCatapult::operator new(unsigned int a1) {
 
 
 // address=[0x153eb70]
-// Decompiled from void __cdecl CRomanCatapult::operator delete(void *a1)
+// Decompiled from void __cdecl CRomanCatapult::operator delete(_DWORD *a1)
 void __cdecl CRomanCatapult::operator delete(void * a1) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -37,13 +37,13 @@ void __cdecl CRomanCatapult::operator delete(void * a1) {
 // Decompiled from _DWORD *__thiscall CRomanCatapult::CRomanCatapult(_DWORD *this, int a2)
  CRomanCatapult::CRomanCatapult(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   _DWORD *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  CCatapult::CCatapult(a2);
+  ((void (__stdcall *)(int))CCatapult::CCatapult)(a2);
   v6 = 0;
   *v5 = &CRomanCatapult::_vftable_;
   v5[45] = &CRomanCatapult::`vftable';
@@ -67,9 +67,9 @@ void  CRomanCatapult::Store(std::ostream & a2) {
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
   v3[1] = (int)this;
-  CCatapult::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))CCatapult::Store)(a2);
   v3[0] = 1;
-  return operator^<unsigned int>(a2, v3);
+  return operator^<unsigned int>(a2, (unsigned int *)v3);
 }
 
 

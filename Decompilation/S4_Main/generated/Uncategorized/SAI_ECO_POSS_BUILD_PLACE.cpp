@@ -7,8 +7,8 @@
  SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE && a2) {
   
   *this = *a2;
-  std::vector<int>::vector<int>(a2 + 2);
-  std::vector<signed char>::vector<signed char>(a2 + 10);
+  std::vector<int>::vector<int>((int)(a2 + 2));
+  std::vector<signed char>::vector<signed char>((int)(a2 + 10));
   return this;
 }
 
@@ -18,8 +18,8 @@
  SAI_ECO_POSS_BUILD_PLACE::SAI_ECO_POSS_BUILD_PLACE(struct SAI_ECO_POSS_BUILD_PLACE const & a2) {
   
   *(_WORD *)this = *(_WORD *)a2;
-  std::vector<int>::vector<int>((char *)a2 + 4);
-  std::vector<signed char>::vector<signed char>((char *)a2 + 20);
+  std::vector<int>::vector<int>((int)a2 + 4);
+  std::vector<signed char>::vector<signed char>((int)a2 + 20);
   return this;
 }
 

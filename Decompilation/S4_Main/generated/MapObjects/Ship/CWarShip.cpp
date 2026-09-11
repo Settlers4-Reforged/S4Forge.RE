@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CWarShip::New(int a1)
 class CPersistence * __cdecl CWarShip::New(std::istream & a1) {
   
-  if ( CWarShip::operator new(0xC8u) )
+  if ( (void *)CWarShip::operator new(0xC8u) != 0 )
   {
-    return CWarShip::CWarShip(a1);
+    return ((_DWORD (__stdcall *)(int))CWarShip::CWarShip)(a1);
   }
   else
   {
@@ -26,8 +26,8 @@ int  CWarShip::WarriorTaskWalkOneStep(class IMovingEntity & a2) {
   struct CWalking *v5; // [esp+0h] [ebp-8h]
 
   v5 = IMovingEntity::Walking((CWarShip *)((char *)this - 172));
-  v2 = IEntity::PackedXY((char *)this - 172);
-  v3 = (*(int (__thiscall **)(struct CWalking *, int))(*(_DWORD *)v5 + 12))(v5, v2);
+  v2 = IEntity::PackedXY((CWarShip *)((char *)this - 172));
+  v3 = v5->Walk(v5, v2);
   CVehicle::WalkDirAndRegister((CWarShip *)((char *)this - 172), v3, 0);
   return *((unsigned __int8 *)this - 68);
 }
@@ -40,9 +40,9 @@ void  CWarShip::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WARRI
   int v4; // eax
 
   CVehicle::AttackTarget((CVehicle *)(this - 172), a3);
-  CVehicle::TakeJobPart((CVehicle *)(this - 172), 1u);
+  CVehicle::TakeJobPart((CVehicle *)(this - 172), 1);
   v4 = CVehicle::TurnCounter((CVehicle *)(this - 172));
-  return CVehicle::RegisterNewTask((CVehicle *)(this - 172), 16, (unsigned __int8)*(this - 63) + v4);
+  return CVehicle::RegisterNewTask((CVehicle *)(this - 172), 16u, (unsigned __int8)*(this - 63) + v4);
 }
 
 
@@ -63,8 +63,8 @@ int  CWarShip::WarriorTaskIdleWalk(class IMovingEntity & a2) {
   struct CWalking *v5; // [esp+0h] [ebp-8h]
 
   v5 = IMovingEntity::Walking((CWarShip *)((char *)this - 172));
-  v2 = IEntity::PackedXY((char *)this - 172);
-  v3 = (*(int (__thiscall **)(struct CWalking *, int, _DWORD))(*(_DWORD *)v5 + 16))(v5, v2, 0);
+  v2 = IEntity::PackedXY((CWarShip *)((char *)this - 172));
+  v3 = v5->IdleWalk((CWalkingBase *)v5, (Y16X16 *)v2, 0);
   CVehicle::WalkDirAndRegister((CWarShip *)((char *)this - 172), v3, 0);
   return *((unsigned __int8 *)this - 68);
 }
@@ -79,7 +79,7 @@ void * __cdecl CWarShip::operator new(unsigned int a1) {
 
 
 // address=[0x15a0b40]
-// Decompiled from void __cdecl CWarShip::operator delete(void *a1)
+// Decompiled from void __cdecl CWarShip::operator delete(_DWORD *a1)
 void __cdecl CWarShip::operator delete(void * a1) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -94,11 +94,11 @@ void  CWarShip::ConvertEventIntoGoal(class CEntityEvent * a2) {
   int v3; // [esp+4h] [ebp-10h]
   int v5; // [esp+10h] [ebp-4h]
 
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 164, "_pEvent!=NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 164, "_pEvent!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !a2 || *((_DWORD *)a2 + 1) != 17 || *((_DWORD *)a2 + 2) != 13 || (v5 = *((_DWORD *)a2 + 4), v2 = Y16X16::UnpackXFast(v5), v3 = Y16X16::UnpackYFast(v5), !CWarShip::AttackTargetAt(this, v2, v3)) )
+  if ( a2 == 0 || a2->m_iEvent != 17 || a2->m_iType != 13 || (v5 = a2->m_iDataB, v2 = Y16X16::UnpackXFast(v5), v3 = Y16X16::UnpackYFast(v5), !CWarShip::AttackTargetAt(this, v2, v3)) )
   {
     CVehicle::ConvertEventIntoGoal(this, a2);
   }
@@ -109,7 +109,7 @@ void  CWarShip::ConvertEventIntoGoal(class CEntityEvent * a2) {
 // Decompiled from struct IMovingEntity *__thiscall CWarShip::CWarShip(struct IMovingEntity *this, int a2)
  CWarShip::CWarShip(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-20h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-20h] BYREF
   int v4; // [esp+Ch] [ebp-1Ch] BYREF
   int v5; // [esp+10h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+14h] [ebp-14h] BYREF
@@ -117,11 +117,11 @@ void  CWarShip::ConvertEventIntoGoal(class CEntityEvent * a2) {
   int v8; // [esp+24h] [ebp-4h]
 
   v7 = this;
-  CShip::CShip(a2);
+  ((void (__stdcall *)(int))CShip::CShip)(a2);
   v8 = 0;
-  CWarriorBehavior::CWarriorBehavior((struct IMovingEntity *)((char *)v7 + 172));
-  *(_DWORD *)v7 = &CWarShip::_vftable_;
-  *((_DWORD *)v7 + 43) = &CWarShip::`vftable';
+  CWarriorBehavior::CWarriorBehavior((CWarriorBehavior *)&v7[1].m_iToDoSize);
+  v7->__vftable = (IMovingEntity_vtbl *)&CWarShip::_vftable_;
+  *(_DWORD *)&v7[1].m_iToDoSize = &CWarShip::`vftable';
   operator^<unsigned int>(a2, &v3);
   v4 = 0;
   v5 = 0;
@@ -132,10 +132,10 @@ void  CWarShip::ConvertEventIntoGoal(class CEntityEvent * a2) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<bool>(a2, (char *)v7 + 196);
-  operator^<int>(a2, (int)&v4);
-  operator^<int>(a2, (int)&v5);
-  CWarriorBehavior::WarriorInit((struct IMovingEntity *)((char *)v7 + 172), v7, v4, v5);
+  operator^<bool>(a2, &v7[1].m_cCurrentToDoItemIter.c);
+  operator^<int>((struct std::istream *)a2, &v4);
+  operator^<int>((struct std::istream *)a2, &v5);
+  CWarriorBehavior::WarriorInit((CWarriorBehavior *)&v7[1].m_iToDoSize, v7, v4, v5);
   v8 = -1;
   return v7;
 }
@@ -151,14 +151,14 @@ void  CWarShip::Store(std::ostream & a2) {
   char *v6; // [esp+4h] [ebp-4h]
 
   v6 = this;
-  CShip::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))CShip::Store)(a2);
   v5 = 1;
-  operator^<unsigned int>(a2, &v5);
-  operator^<bool>((int)a2, (int)(v6 + 196));
+  operator^<unsigned int>(a2, (unsigned int *)&v5);
+  operator^<bool>(a2, (bool *)v6 + 196);
   WarriorBehaviorData = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)(v6 + 172));
-  operator^<int>((int)a2, (int *)WarriorBehaviorData + 2);
+  operator^<int>(a2, &WarriorBehaviorData->m_iDestinationXYOrId);
   v3 = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)(v6 + 172));
-  return operator^<unsigned int>(a2, (int *)v3 + 3);
+  return operator^<unsigned int>(a2, (unsigned int *)&v3->m_iFlags);
 }
 
 
@@ -195,8 +195,8 @@ unsigned long  CWarShip::ClassID(void)const {
 // Decompiled from void __thiscall CWarShip::~CWarShip(CWarShip *this)
  CWarShip::~CWarShip(void) {
   
-  *(_DWORD *)this = &CWarShip::_vftable_;
-  *((_DWORD *)this + 43) = &CWarShip::`vftable';
+  this->CShip::CVehicle::IMovingEntity::IAnimatedEntity::IEntity::CPersistence::__vftable = (CShip_vtbl *)&CWarShip::_vftable_;
+  this->CWarriorBehavior::__vftable = (CWarriorBehavior_vtbl *)&CWarShip::`vftable';
   CShip::~CShip(this);
 }
 
@@ -212,7 +212,7 @@ void  CWarShip::VehicleLogicUpdate(void) {
 
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   v3 = !CVehicle::ReadyToFire(this, TickCounter);
-  if ( (*(unsigned __int8 (__thiscall **)(CWarShip *))(*(_DWORD *)this + 204))(this) )
+  if ( ((unsigned __int8 (__thiscall *)(CWarShip *))this->j_?EnoughAmmo@CVehicle@@MBE_NXZ)(this) != 0 )
   {
     v2 = 0;
   }
@@ -220,17 +220,17 @@ void  CWarShip::VehicleLogicUpdate(void) {
   {
     v2 = 2;
   }
-  if ( CShip::FULL_UPDATE_DELAY + *((_DWORD *)this + 42) < TickCounter )
+  if ( CShip::FULL_UPDATE_DELAY + this->m_uU2 < TickCounter )
   {
-    CWarShip::TakeAmmo(this);
+    ((void (__thiscall *)(CWarShip *))CWarShip::TakeAmmo)(this);
     v1 = CShip::RepairBuildingInRange(this);
-    if ( v1 )
+    if ( v1 != 0 )
     {
       CShip::RepairAt(this, v1);
     }
-    *((_DWORD *)this + 42) = TickCounter;
+    this->m_uU2 = TickCounter;
   }
-  CWarriorBehavior::WarriorVehicleLogicUpdate((CWarShip *)((char *)this + 172), this, TickCounter, v2 | v3);
+  CWarriorBehavior::WarriorVehicleLogicUpdate(&this->CWarriorBehavior, this, TickCounter, v2 | v3);
 }
 
 
@@ -246,34 +246,34 @@ void  CWarShip::TakeJob(void) {
 
   CVehicle::InitCommonTaskValues(this, 0);
   CurrentTaskPtr = CVehicle::GetCurrentTaskPtr(this);
-  if ( CurrentTaskPtr )
+  if ( CurrentTaskPtr != 0 )
   {
     switch ( *(_BYTE *)(CurrentTaskPtr + 4) )
     {
       case 6:
         v1 = Y16X16::PackXYFast(*(__int16 *)(CurrentTaskPtr + 10), *(__int16 *)(CurrentTaskPtr + 12));
-        (**((void (__thiscall ***)(char *, CWarShip *, int, int))this + 43))((char *)this + 172, this, v1, 0x200000);
-        return (struct CVehicle *)(*(int (__thiscall **)(CWarShip *))(*(_DWORD *)this + 144))(this);
+        ((void (__thiscall *)(CWarriorBehavior *, CWarShip *, int, int))this->WarriorInit)(&this->CWarriorBehavior, this, v1, 0x200000);
+        return (struct CVehicle *)((int (__thiscall *)(CWarShip *))this->j_?VehicleLogicUpdate@CShip@@UAEXXZ)(this);
       case 7:
         goto LABEL_7;
       case 8:
         HIDWORD(v5) = *(__int16 *)(CurrentTaskPtr + 10) < 0;
         LODWORD(v5) = *(__int16 *)(CurrentTaskPtr + 12) < 0;
-        if ( v5 )
+        if ( v5 != 0 )
         {
           *(_WORD *)(CurrentTaskPtr + 10) = IEntity::X(this);
           *(_WORD *)(CurrentTaskPtr + 12) = IEntity::Y(this);
         }
 LABEL_7:
         v2 = Y16X16::PackXYFast(*(__int16 *)(CurrentTaskPtr + 10), *(__int16 *)(CurrentTaskPtr + 12));
-        (**((void (__thiscall ***)(char *, CWarShip *, int, int))this + 43))((char *)this + 172, this, v2, 0x100000);
-        return (struct CVehicle *)(*(int (__thiscall **)(CWarShip *))(*(_DWORD *)this + 144))(this);
+        ((void (__thiscall *)(CWarriorBehavior *, CWarShip *, int, int))this->WarriorInit)(&this->CWarriorBehavior, this, v2, 0x100000);
+        return (struct CVehicle *)((int (__thiscall *)(CWarShip *))this->j_?VehicleLogicUpdate@CShip@@UAEXXZ)(this);
       case 0xA:
-        (**((void (__thiscall ***)(char *, CWarShip *, _DWORD, int *))this + 43))((char *)this + 172, this, *(unsigned __int16 *)(CurrentTaskPtr + 16), dword_600000);
-        return (struct CVehicle *)(*(int (__thiscall **)(CWarShip *))(*(_DWORD *)this + 144))(this);
+        ((void (__thiscall *)(CWarriorBehavior *, CWarShip *, _DWORD, int *))this->WarriorInit)(&this->CWarriorBehavior, this, *(unsigned __int16 *)(CurrentTaskPtr + 16), dword_600000);
+        return (struct CVehicle *)((int (__thiscall *)(_DWORD))this->j_?VehicleLogicUpdate@CShip@@UAEXXZ)(this);
       case 0x24:
         IEntity::ClearFlagBits(this, ENTITY_FLAG_Visible);
-        v3 = IEntity::EntityId((unsigned __int16 *)this);
+        v3 = IEntity::EntityId(this);
         return CVehicleMgr::DeleteVehicle((CVehicleMgr *)&g_cVehicleMgr, v3);
       default:
         if ( BBSupportDbgReport(1, "MapObjects\\Ship\\WarShip.cpp", 335, "CWarShip::TakeJob(): Invalid task!") == 1 )
@@ -283,22 +283,21 @@ LABEL_7:
         break;
     }
   }
-  (**((void (__thiscall ***)(char *, CWarShip *, int, _DWORD))this + 43))((char *)this + 172, this, -1, 0);
-  return (struct CVehicle *)(*(int (__thiscall **)(CWarShip *))(*(_DWORD *)this + 144))(this);
+  ((void (__thiscall *)(CWarriorBehavior *, CWarShip *, int, _DWORD))this->WarriorInit)(&this->CWarriorBehavior, this, -1, 0);
+  return (struct CVehicle *)((int (__thiscall *)(_DWORD))this->j_?VehicleLogicUpdate@CShip@@UAEXXZ)(this);
 }
 
 
 // address=[0x15a1240]
-// Decompiled from void *__thiscall CWarShip::GetGfxInfos(CWarShip *this)
+// Decompiled from SGfxObjectInfo *__thiscall CWarShip::GetGfxInfos(CWarShip *this)
 struct SGfxObjectInfo *  CWarShip::GetGfxInfos(void) {
   
   CShip::GetGfxInfos((int)this);
-  if ( !IEntity::FlagBits(this, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) != 0 )
   {
-    return &IEntity::m_sGfxInfo;
+    IEntity::m_sGfxInfo.m_uDecorator = CShip::GetHealthDisplayID(this);
+    IEntity::m_sGfxInfo.m_u0 = CWarShip::GetAmmoDisplayID(this);
   }
-  MEMORY[0x40FE264] = CShip::GetHealthDisplayID(this);
-  MEMORY[0x40FE265] = CWarShip::GetAmmoDisplayID(this);
   return &IEntity::m_sGfxInfo;
 }
 
@@ -314,74 +313,73 @@ int  CWarShip::GetAmmoDisplayID(void) {
   signed int v7; // [esp+14h] [ebp-8h]
   signed int v8; // [esp+18h] [ebp-4h]
 
-  if ( !*((_DWORD *)this + 25) && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 192, "m_pVehicleProperties!=NULL") == 1 )
+  if ( this->m_pVehicleProperties == 0 && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 192, "m_pVehicleProperties!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 25) )
+  if ( this->m_pVehicleProperties != 0 )
   {
-    return 0;
-  }
-  if ( IEntity::Race(this) != 1 )
-  {
-    v8 = 4 - 4 * (unsigned int)*((unsigned __int8 *)this + 111) / *(_DWORD *)(*((_DWORD *)this + 25) + 84);
-    if ( (unsigned int)v8 > 4 && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 198, "iIndex>=0 && iIndex<=MAX_AMMO_DISPLAY_INDEX") == 1 )
+    if ( IEntity::Race(this) != 1 )
     {
-      __debugbreak();
-    }
-    if ( v8 >= 0 )
-    {
-      if ( v8 > 4 )
+      v8 = 4 - 4 * (unsigned int)this->m_iAmmo / this->m_pVehicleProperties->m_uMaxAmmo;
+      if ( (unsigned int)v8 > 4 && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 198, "iIndex>=0 && iIndex<=MAX_AMMO_DISPLAY_INDEX") == 1 )
       {
-        v8 = 4;
+        __debugbreak();
       }
+      if ( v8 >= 0 )
+      {
+        if ( v8 > 4 )
+        {
+          v8 = 4;
+        }
+      }
+      else
+      {
+        v8 = 0;
+      }
+      return dword_3D8BFF4[v8];
+    }
+    if ( CStaticConfigVarInt::operator int((CStaticConfigVarInt *)g_pMagicVikingWarmachineShotCost) <= 0 )
+    {
+      v3 = 1;
     }
     else
     {
-      v8 = 0;
+      v3 = CStaticConfigVarInt::operator int((CStaticConfigVarInt *)g_pMagicVikingWarmachineShotCost);
     }
-    return dword_3D8BFF4[v8];
-  }
-  if ( CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost) <= 0 )
-  {
-    v3 = 1;
-  }
-  else
-  {
-    v3 = CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost);
-  }
-  v2 = IEntity::OwnerId((unsigned __int8 *)this);
-  CurrentManaAmount = CMagic::GetCurrentManaAmount(v2);
-  v5 = 40 * v3;
-  if ( !(40 * v3) && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 207, "iMaxAmmo != 0") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( !v5 )
-  {
-    return 0;
-  }
-  if ( CurrentManaAmount > v5 )
-  {
-    CurrentManaAmount = 40 * v3;
-  }
-  v7 = 4 - 4 * CurrentManaAmount / v5;
-  if ( (unsigned int)v7 > 4 && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 213, "iIndex>=0 && iIndex<=MAX_AMMO_DISPLAY_INDEX") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( v7 >= 0 )
-  {
-    if ( v7 > 4 )
+    v2 = IEntity::OwnerId(this);
+    CurrentManaAmount = CMagic::GetCurrentManaAmount(v2);
+    v5 = 40 * v3;
+    if ( 40 * v3 == 0 && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 207, "iMaxAmmo != 0") == 1 )
     {
-      v7 = 4;
+      __debugbreak();
+    }
+    if ( v5 != 0 )
+    {
+      if ( CurrentManaAmount > v5 )
+      {
+        CurrentManaAmount = 40 * v3;
+      }
+      v7 = 4 - 4 * CurrentManaAmount / v5;
+      if ( (unsigned int)v7 > 4 && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 213, "iIndex>=0 && iIndex<=MAX_AMMO_DISPLAY_INDEX") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( v7 >= 0 )
+      {
+        if ( v7 > 4 )
+        {
+          v7 = 4;
+        }
+      }
+      else
+      {
+        v7 = 0;
+      }
+      return dword_3D8BFF4[v7];
     }
   }
-  else
-  {
-    v7 = 0;
-  }
-  return dword_3D8BFF4[v7];
+  return 0;
 }
 
 
@@ -396,7 +394,7 @@ bool  CWarShip::AttackTargetAt(int a2, int a3) {
   int v8; // [esp+10h] [ebp-Ch]
   int i; // [esp+18h] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 411, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Ship\\WarShip.cpp", 411, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -407,15 +405,15 @@ bool  CWarShip::AttackTargetAt(int a2, int a3) {
   {
     v6 = a2 + CSpiralOffsets::DeltaX(i);
     v7 = a3 + CSpiralOffsets::DeltaY(i);
-    if ( (unsigned __int8)CWorldManager::InWorld(v6, v7) )
+    if ( CWorldManager::InWorld(v6, v7) )
     {
       v8 = CWorldManager::MapObjectId(v6, v7);
-      if ( v8 )
+      if ( v8 != 0 )
       {
         v4 = CMapObjectMgr::Entity(v8);
-        if ( CWarriorBehavior::IsValidTarget((CWarShip *)((char *)this + 172), this, v4) )
+        if ( CWarriorBehavior::IsValidTarget(&this->CWarriorBehavior, this, v4) )
         {
-          (**((void (__thiscall ***)(char *, CWarShip *, int, int *))this + 43))((char *)this + 172, this, v8, &dword_6FC800[3584]);
+          ((void (__thiscall *)(CWarriorBehavior *, CWarShip *, int, int *))this->WarriorInit)(&this->CWarriorBehavior, this, v8, &dword_6FC800[3584]);
           return 1;
         }
       }
@@ -437,35 +435,32 @@ void  CWarShip::TakeAmmo(void) {
   int v6; // [esp+14h] [ebp-Ch]
 
   result = (unsigned int)this;
-  if ( !*((_BYTE *)this + 196) )
+  if ( this->m_bU0 )
   {
-    return result;
+    result = this->m_iAmmo;
+    if ( result < this->m_pVehicleProperties->m_uMaxAmmo )
+    {
+      result = CWarShip::SearchForAmmo(this);
+      if ( result != 0 )
+      {
+        v4 = (unsigned __int8 *)CPileMgr::operator[](result);
+        v2 = CPile::NumberOfAvailableGoods((CPile *)v4);
+        v6 = ((int (__thiscall *)(CWarShip *))this->CShip::CVehicle::IMovingEntity::IAnimatedEntity::IEntity::CPersistence::__vftable[1].j_?ClassID@CPersistence@@UBEKXZ)(this) * v2;
+        if ( v6 >= this->m_pVehicleProperties->m_uMaxAmmo - this->m_iAmmo )
+        {
+          v5 = this->m_pVehicleProperties->m_uMaxAmmo - this->m_iAmmo;
+        }
+        else
+        {
+          v5 = v6;
+        }
+        v3 = ((int (__thiscall *)(CWarShip *))this->CShip::CVehicle::IMovingEntity::IAnimatedEntity::IEntity::CPersistence::__vftable[1].j_?ClassID@CPersistence@@UBEKXZ)(this);
+        CPile::DecreaseUnforeseen((CPile *)v4, v5 / v3);
+        result = v5 + this->m_iAmmo;
+        this->m_iAmmo = result;
+      }
+    }
   }
-  result = *((unsigned __int8 *)this + 111);
-  if ( result >= *(_DWORD *)(*((_DWORD *)this + 25) + 84) )
-  {
-    return result;
-  }
-  result = CWarShip::SearchForAmmo(this);
-  if ( !result )
-  {
-    return result;
-  }
-  v4 = CPileMgr::operator[](result);
-  v2 = CPile::NumberOfAvailableGoods((CPile *)v4);
-  v6 = (*(int (__thiscall **)(CWarShip *))(*(_DWORD *)this + 220))(this) * v2;
-  if ( v6 >= *(_DWORD *)(*((_DWORD *)this + 25) + 84) - *((unsigned __int8 *)this + 111) )
-  {
-    v5 = *(_DWORD *)(*((_DWORD *)this + 25) + 84) - *((unsigned __int8 *)this + 111);
-  }
-  else
-  {
-    v5 = v6;
-  }
-  v3 = (*(int (__thiscall **)(CWarShip *))(*(_DWORD *)this + 220))(this);
-  CPile::DecreaseUnforeseen((CPile *)v4, v5 / v3);
-  result = v5 + *((unsigned __int8 *)this + 111);
-  *((_BYTE *)this + 111) = result;
   return result;
 }
 
@@ -494,42 +489,35 @@ int  CWarShip::SearchForAmmo(void) {
 
   v8 = 0;
   v10 = 0x4000;
-  if ( IEntity::Race(this) == 1 )
+  if ( IEntity::Race(this) != 1 )
   {
-    return v8;
-  }
-  v14 = *(_DWORD *)(*((_DWORD *)this + 25) + 80);
-  v12 = IEntity::X(this);
-  v13 = IEntity::Y(this);
-  v5 = IEntity::Race(this);
-  CFindBuildings::CFindBuildings((CFindBuildings *)v19, v12, v13, 20);
-  while ( CFindBuildings::NextBuilding((CFindBuildings *)v19) )
-  {
-    v17 = (unsigned __int16 *)CFindBuildings::BuildingPtr((CFindBuildings *)v19);
-    v7 = IEntity::Type(v17);
-    v6 = IEntity::Race(v17);
-    if ( v7 == 31 && v6 == v5 )
+    v14 = *(_DWORD *)this->m_pVehicleProperties->gap_50;
+    v12 = IEntity::X(this);
+    v13 = IEntity::Y(this);
+    v5 = IEntity::Race(this);
+    CFindBuildings::CFindBuildings((CFindBuildings *)v19, v12, v13, 20);
+    while ( CFindBuildings::NextBuilding((CPropertySet **)v19) )
     {
-      v1 = (void **)CBuilding::Role(v17);
-      v15 = j____RTDynamicCast(v1, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CWorkshopBuildingRole__RTTI_Type_Descriptor_, 0);
-      if ( v15 )
+      v17 = (unsigned __int16 *)CFindBuildings::BuildingPtr((CFindBuildings *)v19);
+      v7 = IEntity::Type((IEntity *)v17);
+      v6 = IEntity::Race(v17);
+      if ( v7 == 31 && v6 == v5 )
       {
-        if ( (*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v15 + 60))(v15, v14) )
+        v1 = (void **)CBuilding::Role((CBuilding *)v17);
+        v15 = j____RTDynamicCast(v1, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CWorkshopBuildingRole__RTTI_Type_Descriptor_, 0);
+        if ( v15 != 0 && (*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v15 + 60))(v15, v14) != 0 )
         {
           PileIdWithGood = CBuilding::GetPileIdWithGood((CBuilding *)v17, v14);
           PilePtr = CPileMgr::GetPilePtr(PileIdWithGood);
-          if ( PilePtr )
+          if ( PilePtr != 0 && CPile::NumberOfAvailableGoods(PilePtr) > 0 )
           {
-            if ( CPile::NumberOfAvailableGoods(PilePtr) > 0 )
+            v3 = IEntity::X(PilePtr);
+            v4 = IEntity::Y(PilePtr);
+            v11 = Grid::Distance(v3 - v12, v4 - v13);
+            if ( v11 < v10 )
             {
-              v3 = IEntity::X(PilePtr);
-              v4 = IEntity::Y(PilePtr);
-              v11 = Grid::Distance((Grid *)(v3 - v12), v4 - v13);
-              if ( v11 < v10 )
-              {
-                v10 = v11;
-                v8 = PileIdWithGood;
-              }
+              v10 = v11;
+              v8 = PileIdWithGood;
             }
           }
         }

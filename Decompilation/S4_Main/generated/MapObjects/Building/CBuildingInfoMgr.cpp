@@ -48,7 +48,7 @@ void  CBuildingInfoMgr::LoadInfo(bool a2) {
   {
     CBuildingInfoMgr::ClearInfo(this);
   }
-  if ( !CBuildingInfoMgr::m_bInit )
+  if ( CBuildingInfoMgr::m_bInit == 0 )
   {
     CBuildingInfoMgr::ReadBuildingInfo(this);
     CBuildingInfoMgr::m_bInit = 1;
@@ -137,7 +137,7 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
   v54 = &CBuildingInfoMgr::m_vBuildingInfos[_iRace][_iBuildingType];
   bAllInside = 1;
   CBuildingFlagsWalk::CBuildingFlagsWalk(&cDigWalk, 0, 0, v54->m_iHotSpotX, v54->m_iHotSpotY, &v54->m_vDigPosLines);
-  while ( CBuildingFlagsWalk::NextPosition(&cDigWalk) )
+  while ( CBuildingFlagsWalk::NextPosition(&cDigWalk) != 0 )
   {
     iY = CBuildingFlagsWalk::CurrentY(&cDigWalk) + 15;
     iX = CBuildingFlagsWalk::CurrentX(&cDigWalk);
@@ -147,13 +147,13 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
       break;
     }
   }
-  if ( !bAllInside )
+  if ( bAllInside == 0 )
   {
     v53 = 0;
     BBSupportTracePrintF(3, "Invalid digging bits for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
   }
   v39 = 1;
-  if ( !v54->m_bIsPort && (v54->m_iBBRMinX < -15 || v54->m_iBBRMaY > 15 || v54->m_iBBRMinY < -15 || v54->m_iBBRMaxY > 15) )
+  if ( v54->m_bIsPort == 0 && (v54->m_iBBRMinX < -15 || v54->m_iBBRMaY > 15 || v54->m_iBBRMinY < -15 || v54->m_iBBRMaxY > 15) )
   {
     v39 = 0;
     BBSupportTracePrintF(3, "Invalid size of bounding box for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
@@ -161,12 +161,12 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
   v47 = 1;
   v46 = 1;
   CBuildingFlagsWalk::CBuildingFlagsWalk(&cBuildPosWalk, 0, 0, v54->m_iHotSpotX, v54->m_iHotSpotY, &v54->m_vBuildingPosLines);
-  while ( CBuildingFlagsWalk::NextPosition(&cBuildPosWalk) )
+  while ( CBuildingFlagsWalk::NextPosition(&cBuildPosWalk) != 0 )
   {
     v4 = cBuildingBits.m_iBits[CBuildingFlagsWalk::CurrentY(&cBuildPosWalk) + 40];
     v4[CBuildingFlagsWalk::CurrentX(&cBuildPosWalk) + 40] = 1;
     v5 = CBuildingFlagsWalk::CurrentX(&cBuildPosWalk);
-    if ( v5 < v54->m_iBBRMinX || (v6 = CBuildingFlagsWalk::CurrentX(&cBuildPosWalk), v6 > v54->m_iBBRMaY) || (v7 = CBuildingFlagsWalk::CurrentY(&cBuildPosWalk), v7 < v54->m_iBBRMinY) || (v8 = CBuildingFlagsWalk::CurrentY(&cBuildPosWalk), v8 > v54->m_iBBRMaxY) )
+    if ( v5 < v54->m_iBBRMinX || (v6 = CBuildingFlagsWalk::CurrentX(&cBuildPosWalk)) > v54->m_iBBRMaY || (v7 = CBuildingFlagsWalk::CurrentY(&cBuildPosWalk)) < v54->m_iBBRMinY || (v8 = CBuildingFlagsWalk::CurrentY(&cBuildPosWalk)) > v54->m_iBBRMaxY )
     {
       v47 = 0;
     }
@@ -175,12 +175,12 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
       v46 = 0;
     }
   }
-  if ( !v47 )
+  if ( v47 == 0 )
   {
     v53 = 0;
     BBSupportTracePrintF(3, "Invalid bounding box for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
   }
-  if ( !v46 )
+  if ( v46 == 0 )
   {
     v53 = 0;
     BBSupportTracePrintF(3, "Building bits out of range (-15..15) for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
@@ -188,12 +188,12 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
   bValidBlockPosBits = 1;
   bHotspotBlocked = 0;
   CBuildingFlagsWalk::CBuildingFlagsWalk(&cBlockPosWalk, 0, 0, v54->m_iHotSpotX, v54->m_iHotSpotY, &v54->m_vBlockPosLines);
-  while ( CBuildingFlagsWalk::NextPosition(&cBlockPosWalk) )
+  while ( CBuildingFlagsWalk::NextPosition(&cBlockPosWalk) != 0 )
   {
     v35 = CBuildingFlagsWalk::CurrentX(&cBlockPosWalk);
     v36 = CBuildingFlagsWalk::CurrentY(&cBlockPosWalk);
     cBlockingBots.m_iBits[v36 + 40][v35 + 40] = 1;
-    v34 = !v35 && !v36;
+    v34 = v35 == 0 && v36 == 0;
     bHotspotBlocked |= v34;
     for ( i = 0;
           i <= 6;
@@ -203,19 +203,19 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
       v31 = v35 + v9;
       v10 = CSpiralOffsets::DeltaY(i);
       v25 = v36 + v10;
-      if ( !cBuildingBits.m_iBits[v36 + 40][80 * v10 + 40 + v31] )
+      if ( cBuildingBits.m_iBits[v36 + 40][80 * v10 + 40 + v31] == 0 )
       {
         BBSupportTracePrintF(3, "No building bits around blocking bit at (%i, %i)!", v35, v36);
         bValidBlockPosBits = 0;
       }
     }
   }
-  if ( !bHotspotBlocked )
+  if ( bHotspotBlocked == 0 )
   {
     BBSupportTracePrintF(3, "Hotspot not blocked!");
     bValidBlockPosBits = 0;
   }
-  if ( !bValidBlockPosBits )
+  if ( bValidBlockPosBits == 0 )
   {
     v53 = 0;
     BBSupportTracePrintF(3, "Invalid blocking bits for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
@@ -229,28 +229,37 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
     m_iGood = v54->m_vPileSpots[j].m_iGood;
     m_uXOffset = v54->m_vPileSpots[j].m_uXOffset;
     m_uYOffset = v54->m_vPileSpots[j].m_uYOffset;
-    if ( (m_iGood <= 0 || m_iGood >= 43) && _iBuildingType != 13 )
+    if ( m_iGood > 0 && m_iGood < 43 || _iBuildingType == 13 )
+    {
+      if ( m_uXOffset >= -15 && m_uXOffset <= 15 && m_uYOffset >= -15 && m_uYOffset <= 15 )
+      {
+        if ( cBuildingBits.m_iBits[m_uYOffset + 40][m_uXOffset + 40] != 0 )
+        {
+          if ( cBlockingBots.m_iBits[m_uYOffset + 40][m_uXOffset + 40] != 0 )
+          {
+            BBSupportTracePrintF(3, "Pile %i, good %i, position (%i, %i): Position is blocked!", j, m_iGood, m_uXOffset, m_uYOffset);
+            v51 = 0;
+          }
+        }
+        else
+        {
+          BBSupportTracePrintF(3, "Pile %i, good %i, position (%i, %i): No building bit at position!", j, m_iGood, m_uXOffset, m_uYOffset);
+          v51 = 0;
+        }
+      }
+      else
+      {
+        BBSupportTracePrintF(3, "Pile %i, good %i, position (%i, %i): Out of area!", j, m_iGood, m_uXOffset, m_uYOffset);
+        v51 = 0;
+      }
+    }
+    else
     {
       BBSupportTracePrintF(3, "Pile %i, good %i, position (%i, %i): Invalid good type!", j, m_iGood, m_uXOffset, m_uYOffset);
       v51 = 0;
     }
-    else if ( m_uXOffset < -15 || m_uXOffset > 15 || m_uYOffset < -15 || m_uYOffset > 15 )
-    {
-      BBSupportTracePrintF(3, "Pile %i, good %i, position (%i, %i): Out of area!", j, m_iGood, m_uXOffset, m_uYOffset);
-      v51 = 0;
-    }
-    else if ( !cBuildingBits.m_iBits[m_uYOffset + 40][m_uXOffset + 40] )
-    {
-      BBSupportTracePrintF(3, "Pile %i, good %i, position (%i, %i): No building bit at position!", j, m_iGood, m_uXOffset, m_uYOffset);
-      v51 = 0;
-    }
-    else if ( cBlockingBots.m_iBits[m_uYOffset + 40][m_uXOffset + 40] )
-    {
-      BBSupportTracePrintF(3, "Pile %i, good %i, position (%i, %i): Position is blocked!", j, m_iGood, m_uXOffset, m_uYOffset);
-      v51 = 0;
-    }
   }
-  if ( !v51 )
+  if ( v51 == 0 )
   {
     v53 = 0;
     BBSupportTracePrintF(3, "Invalid piles for building %i (%s) of race %i!", _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
@@ -260,32 +269,32 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
   iFlagY = (char)v54->m_iFlagY;
   if ( iFlagX >= -15 && iFlagX <= 15 && iFlagY >= -15 && iFlagY <= 15 )
   {
-    if ( !cBuildingBits.m_iBits[iFlagY + 40][iFlagX + 39] )
+    if ( cBuildingBits.m_iBits[iFlagY + 40][iFlagX + 39] == 0 )
     {
       BBSupportTracePrintF(3, "No building bit at flag position (-1, 0)!");
       v52 = 0;
     }
-    if ( !cBuildingBits.m_iBits[iFlagY + 40][iFlagX + 41] )
+    if ( cBuildingBits.m_iBits[iFlagY + 40][iFlagX + 41] == 0 )
     {
       BBSupportTracePrintF(3, "No building bit at flag position (+1, 0)!");
       v52 = 0;
     }
-    if ( !cBuildingBits.m_iBits[iFlagY + 40][iFlagX + 40] )
+    if ( cBuildingBits.m_iBits[iFlagY + 40][iFlagX + 40] == 0 )
     {
       BBSupportTracePrintF(3, "No building bit at flag position!");
       v52 = 0;
     }
-    if ( cBlockingBots.m_iBits[iFlagY + 40][iFlagX + 39] )
+    if ( cBlockingBots.m_iBits[iFlagY + 40][iFlagX + 39] != 0 )
     {
       BBSupportTracePrintF(3, "Flag position (-1, 0) is blocked!");
       v52 = 0;
     }
-    if ( cBlockingBots.m_iBits[iFlagY + 40][iFlagX + 41] )
+    if ( cBlockingBots.m_iBits[iFlagY + 40][iFlagX + 41] != 0 )
     {
       BBSupportTracePrintF(3, "Flag position (+1, 0) is blocked!");
       v52 = 0;
     }
-    if ( cBlockingBots.m_iBits[iFlagY + 40][iFlagX + 40] )
+    if ( cBlockingBots.m_iBits[iFlagY + 40][iFlagX + 40] != 0 )
     {
       BBSupportTracePrintF(3, "Flag position is blocked!");
       v52 = 0;
@@ -296,17 +305,17 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
     BBSupportTracePrintF(3, "Invalid flag position!");
     v52 = 0;
   }
-  if ( !v52 )
+  if ( v52 == 0 )
   {
     v53 = 0;
   }
-  if ( v54->m_bIsPort )
+  if ( v54->m_bIsPort != 0 )
   {
     v45 = 0;
     m_iWorkPosXOffset = (char)v54->m_iWorkPosXOffset;
     m_iWorkPosYOffset = (char)v54->m_iWorkPosYOffset;
     CBuildingFlagsWalk::CBuildingFlagsWalk(&v20, 0, 0, v54->m_iHotSpotX, v54->m_iHotSpotY, &v54->m_vBlockPosLines);
-    while ( CBuildingFlagsWalk::NextPosition(&v20) )
+    while ( CBuildingFlagsWalk::NextPosition(&v20) != 0 )
     {
       v29 = CBuildingFlagsWalk::CurrentX(&v20);
       v28 = CBuildingFlagsWalk::CurrentY(&v20);
@@ -316,16 +325,16 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
         break;
       }
     }
-    if ( v45 )
+    if ( v45 != 0 )
     {
       BBSupportTracePrintF(3, "Invalid working position (%i, %i) for building %i (%s) of race %i!", m_iWorkPosXOffset, m_iWorkPosYOffset, _iBuildingType, s_sBuildingDefines[_iBuildingType].m_spName, _iRace);
       v53 = 0;
     }
   }
-  if ( v54->m_bIsPort )
+  if ( v54->m_bIsPort != 0 )
   {
     CBuildingFlagsWalk::CBuildingFlagsWalk(&v19, 0, 0, v54->m_iHotSpotX, v54->m_iHotSpotY, &v54->m_vWaterRepealingPosLines);
-    while ( CBuildingFlagsWalk::NextPosition(&v19) )
+    while ( CBuildingFlagsWalk::NextPosition(&v19) != 0 )
     {
       v26 = CBuildingFlagsWalk::CurrentX(&v19);
       v27 = CBuildingFlagsWalk::CurrentY(&v19);
@@ -343,15 +352,14 @@ bool  CBuildingInfoMgr::DbgCheckBuildingBits(int _iRace, int _iBuildingType) {
   BBSupportTracePrintF(-2147483641, "%s (%s)", v12, v17);
   BBSupportTracePrintF(-2147483641, "B L O C K I N G   B I T S");
   CBuildingBits::PrintToTraceFile(&cBlockingBots, -2147483641);
-  if ( !v54->m_bIsPort )
+  if ( v54->m_bIsPort != 0 )
   {
-    return v53;
+    v18 = CS4DefineNames::GetRaceName(_iRace);
+    v13 = CS4DefineNames::GetBuildingName(_iBuildingType);
+    BBSupportTracePrintF(-2147483641, "%s (%s)", v13, v18);
+    BBSupportTracePrintF(-2147483641, "W A T E R   B I T S");
+    CBuildingBits::PrintToTraceFile(&cWaterBits, -2147483641);
   }
-  v18 = CS4DefineNames::GetRaceName(_iRace);
-  v13 = CS4DefineNames::GetBuildingName(_iBuildingType);
-  BBSupportTracePrintF(-2147483641, "%s (%s)", v13, v18);
-  BBSupportTracePrintF(-2147483641, "W A T E R   B I T S");
-  CBuildingBits::PrintToTraceFile(&cWaterBits, -2147483641);
   return v53;
 }
 
@@ -436,7 +444,7 @@ void  CBuildingInfoMgr::ClearInfo(void) {
           ++j )
     {
       v4 = &CBuildingInfoMgr::m_vBuildingInfos[i][j];
-      memset(v4, 0, (char *)&CBuildingInfoMgr::m_vBuildingInfos[0][0].m_vAnimationList - (char *)CBuildingInfoMgr::m_vBuildingInfos);
+      memset((void *)v4, 0, (char *)&CBuildingInfoMgr::m_vBuildingInfos[0][0].m_vAnimationList - (char *)CBuildingInfoMgr::m_vBuildingInfos);
       std::vector<unsigned char>::clear(&v4->m_vAnimationList);
       std::vector<unsigned int>::clear(&v4->m_vBuildingPosLines);
       std::vector<unsigned int>::clear(&v4->m_vDigPosLines);
@@ -635,9 +643,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   _DWORD v176[4]; // [esp+188h] [ebp-19A8h] BYREF
   _DWORD v177[4]; // [esp+198h] [ebp-1998h] BYREF
   _DWORD v178[39]; // [esp+1A8h] [ebp-1988h] BYREF
-  _DWORD v179[4]; // [esp+244h] [ebp-18ECh] BYREF
-  _DWORD v180[4]; // [esp+254h] [ebp-18DCh] BYREF
-  _DWORD v181[4]; // [esp+264h] [ebp-18CCh] BYREF
+  char v179[16]; // [esp+244h] [ebp-18ECh] BYREF
+  char v180[16]; // [esp+254h] [ebp-18DCh] BYREF
+  char v181[16]; // [esp+264h] [ebp-18CCh] BYREF
   const struct AdvXMLParser::Element *v182; // [esp+274h] [ebp-18BCh]
   std::string *v183; // [esp+278h] [ebp-18B8h]
   AdvXMLParser::Element *v184; // [esp+27Ch] [ebp-18B4h]
@@ -740,7 +748,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   std::string *v281; // [esp+400h] [ebp-1730h]
   AdvXMLParser::Element *v282; // [esp+404h] [ebp-172Ch]
   AdvXMLParser::Element *v283; // [esp+408h] [ebp-1728h]
-  _DWORD v284[4]; // [esp+40Ch] [ebp-1724h] BYREF
+  char v284[16]; // [esp+40Ch] [ebp-1724h] BYREF
   std::string *v285; // [esp+41Ch] [ebp-1714h]
   AdvXMLParser::Element *v286; // [esp+420h] [ebp-1710h]
   std::string *v287; // [esp+424h] [ebp-170Ch]
@@ -832,7 +840,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   AdvXMLParser::Element *v373; // [esp+57Ch] [ebp-15B4h]
   _DWORD *v374; // [esp+580h] [ebp-15B0h]
   _DWORD *v375; // [esp+584h] [ebp-15ACh]
-  void *v376; // [esp+588h] [ebp-15A8h]
+  AdvXMLParser::Element *v376; // [esp+588h] [ebp-15A8h]
   _DWORD *v377; // [esp+58Ch] [ebp-15A4h]
   _DWORD *v378; // [esp+590h] [ebp-15A0h]
   int v379; // [esp+594h] [ebp-159Ch]
@@ -1071,7 +1079,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   AdvXMLParser::Element *v612; // [esp+938h] [ebp-11F8h]
   _DWORD *v613; // [esp+93Ch] [ebp-11F4h]
   _DWORD *v614; // [esp+940h] [ebp-11F0h]
-  void *v615; // [esp+944h] [ebp-11ECh]
+  AdvXMLParser::Element *v615; // [esp+944h] [ebp-11ECh]
   _DWORD *v616; // [esp+948h] [ebp-11E8h]
   _DWORD *v617; // [esp+94Ch] [ebp-11E4h]
   int v618; // [esp+950h] [ebp-11E0h]
@@ -1201,7 +1209,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int v743; // [esp+B54h] [ebp-FDCh]
   int v744; // [esp+B58h] [ebp-FD8h]
   int v745; // [esp+B5Ch] [ebp-FD4h]
-  _DWORD v746[4]; // [esp+B60h] [ebp-FD0h] BYREF
+  char v746[16]; // [esp+B60h] [ebp-FD0h] BYREF
   int v747; // [esp+B70h] [ebp-FC0h]
   int v749; // [esp+B78h] [ebp-FB8h] BYREF
   unsigned int iMaxDistance; // [esp+B7Ch] [ebp-FB4h]
@@ -1213,6 +1221,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   char *v757; // [esp+B98h] [ebp-F98h]
   int iProductionDelay; // [esp+B9Ch] [ebp-F94h]
   int v759; // [esp+BA0h] [ebp-F90h]
+  char; // [esp+BA6h] [ebp-F8Ah]
   char v765; // [esp+BA9h] [ebp-F87h] BYREF
   bool IsPort; // [esp+BACh] [ebp-F84h]
   bool IsShipyard; // [esp+BADh] [ebp-F83h]
@@ -1220,7 +1229,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
   int iBuildingType; // [esp+BB4h] [ebp-F7Ch]
   int v774; // [esp+BB8h] [ebp-F78h]
   int n; // [esp+BBCh] [ebp-F74h]
-  _DWORD v776[4]; // [esp+BC0h] [ebp-F70h] BYREF
+  char v776[16]; // [esp+BC0h] [ebp-F70h] BYREF
   int m; // [esp+BD0h] [ebp-F60h]
   CBuildingInfoMgr::STriggerInfos *v778; // [esp+BD4h] [ebp-F5Ch]
   CBuildingInfoMgr::SBuildingInfos *v779; // [esp+BD8h] [ebp-F58h]
@@ -1329,8 +1338,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
 
   v880 = &v155;
   v749 = 0;
-  v757 = (char *)AdvXMLParser::Parser::OpenXMLFile(aGamedataBuildi, &v749);
-  if ( v757 )
+  v757 = (char *)AdvXMLParser::Parser::OpenXMLFile(L"GameData\\BuildingInfo.xml", &v749);
+  if ( v757 != 0 )
   {
     exceptionBlock = 0;
     v178[25] = AdvXMLParser::Parser::Parser(v156);
@@ -1357,7 +1366,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
     AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v170);
     while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v284, (int)v176) )
     {
-      v625 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v284);
+      v625 = (int)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v284);
       v745 = v625;
       Name = AdvXMLParser::Node::GetName(v625);
       if ( std::operator==<char>(Name, "BuildingXMLVersion") )
@@ -1370,23 +1379,23 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
       }
       else
       {
-        v622 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v284);
+        v622 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v284);
         v621 = AdvXMLParser::Element::operator[](v622, "id");
         v741 = v621;
-        v178[23] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, std::string *))(*(_DWORD *)v621 + 8))(v621, &v877);
+        v178[23] = v621->GetValue(v621, &v877);
         LOBYTE(exceptionBlock) = 9;
-        if ( std::string::length(&v877) )
+        if ( std::string::length(&v877) != 0 )
         {
           ValueOfDefine = CDefineTranslator::GetValueOfDefine(v620, &v877);
           iRace = ValueOfDefine;
-          v618 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v284);
+          v618 = (int)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v284);
           v617 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v618, v160);
           v616 = v617;
           LOBYTE(exceptionBlock) = 10;
           v178[22] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v776, v617);
           LOBYTE(exceptionBlock) = 12;
           AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v160);
-          v615 = (void *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v284);
+          v615 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v284);
           v614 = AdvXMLParser::NodeContainer::End(v615, v169);
           v613 = v614;
           LOBYTE(exceptionBlock) = 13;
@@ -1395,12 +1404,12 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
           AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v169);
           while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v776, (int)v177) )
           {
-            v612 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
+            v612 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
             v611 = AdvXMLParser::Element::operator[](v612, "id");
             v740 = v611;
-            v178[19] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, std::string *))(*(_DWORD *)v611 + 8))(v611, &v879);
+            v178[19] = v611->GetValue(v611, &v879);
             LOBYTE(exceptionBlock) = 16;
-            if ( !std::string::length(&v879) )
+            if ( std::string::length(&v879) == 0 )
             {
               v610 = BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 609, "strBuildingName.length() > 0");
               if ( v610 == 1 )
@@ -1408,7 +1417,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 __debugbreak();
               }
             }
-            if ( !std::string::length(&v879) )
+            if ( std::string::length(&v879) == 0 )
             {
               goto LABEL_16;
             }
@@ -1428,31 +1437,31 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
             if ( iBuildingType > 0 )
             {
               v779 = &CBuildingInfoMgr::m_vBuildingInfos[iRace][iBuildingType];
-              v606 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v605 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v606, "iHotSpotX", 0);
+              v606 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v605 = AdvXMLParser::Element::operator()(v606, "iHotSpotX", 0);
               v738 = v605;
               v604 = v605->GetValue(v605);
               v5 = std::string::c_str(v604);
               v6 = j__atoi(v5);
               v779->m_iHotSpotX = v6;
               std::string::~string(v812);
-              v603 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v602 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v603, "iHotSpotY", 0);
+              v603 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v602 = AdvXMLParser::Element::operator()(v603, "iHotSpotY", 0);
               v737 = v602;
               v601 = v602->GetValue(v602);
               v7 = std::string::c_str(v601);
               v8 = j__atoi(v7);
               v779->m_iHotSpotY = v8;
               std::string::~string(v813);
-              v600 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v599 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v600, "stone", 0);
+              v600 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v599 = AdvXMLParser::Element::operator()(v600, "stone", 0);
               v736 = v599;
               v598 = v599->GetValue(v599);
               v9 = std::string::c_str(v598);
               v10 = j__atoi(v9);
               v779->m_iStone = v10;
               std::string::~string(v814);
-              v597 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
+              v597 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
               v596 = AdvXMLParser::Element::operator()(v597, "boards", 0);
               v735 = v596;
               v595 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v596->GetValue)(v596, v815);
@@ -1460,7 +1469,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v12 = j__atoi(v11);
               v779->m_iBoards = v12;
               std::string::~string(v815);
-              v594 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
+              v594 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
               v593 = AdvXMLParser::Element::operator()(v594, "gold", 0);
               v734 = v593;
               v592 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v593->GetValue)(v593, v816);
@@ -1468,7 +1477,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v14 = j__atoi(v13);
               v779->m_iGold = v14;
               std::string::~string(v816);
-              v591 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
+              v591 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
               v590 = AdvXMLParser::Element::operator()(v591, "lines", 0);
               v733 = v590;
               v589 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v590->GetValue)(v590, v817);
@@ -1480,9 +1489,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                     i < (unsigned __int8)v779->m_iLines;
                     ++i )
               {
-                v588 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v587 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v588, "buildingPosLines", 0);
-                v586 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v587, "value", i);
+                v588 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v587 = AdvXMLParser::Element::operator()(v588, "buildingPosLines", 0);
+                v586 = AdvXMLParser::Element::operator()(v587, "value", i);
                 v732 = v586;
                 v585 = v586->GetValue(v586);
                 v17 = std::string::c_str(v585);
@@ -1490,9 +1499,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 std::string::~string(v818);
                 v584 = v759;
                 std::vector<unsigned int>::push_back(&v779->m_vBuildingPosLines, (int)&v584);
-                v583 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v582 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v583, "digPosLines", 0);
-                v581 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v582, "value", i);
+                v583 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v582 = AdvXMLParser::Element::operator()(v583, "digPosLines", 0);
+                v581 = AdvXMLParser::Element::operator()(v582, "value", i);
                 v731 = v581;
                 v580 = v581->GetValue(v581);
                 v18 = std::string::c_str(v580);
@@ -1500,9 +1509,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 std::string::~string(v819);
                 v579 = v759;
                 std::vector<unsigned int>::push_back(&v779->m_vDigPosLines, (int)&v579);
-                v578 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v577 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v578, "blockPosLines", 0);
-                v576 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v577, "value", i);
+                v578 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v577 = AdvXMLParser::Element::operator()(v578, "blockPosLines", 0);
+                v576 = AdvXMLParser::Element::operator()(v577, "value", i);
                 v730 = v576;
                 v575 = v576->GetValue(v576);
                 v19 = std::string::c_str(v575);
@@ -1510,9 +1519,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 std::string::~string(v820);
                 v574 = v759;
                 std::vector<unsigned int>::push_back(&v779->m_vBlockPosLines, (int)&v574);
-                v573 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v572 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v573, "repealingPosLines", 0);
-                v571 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v572, "value", i);
+                v573 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v572 = AdvXMLParser::Element::operator()(v573, "repealingPosLines", 0);
+                v571 = AdvXMLParser::Element::operator()(v572, "value", i);
                 v729 = v571;
                 v570 = v571->GetValue(v571);
                 v20 = std::string::c_str(v570);
@@ -1529,9 +1538,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                       j < (unsigned __int8)v779->m_iLines;
                       ++j )
                 {
-                  v568 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                  v567 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v568, "waterPosLines", 0);
-                  v566 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v567, "value", j);
+                  v568 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                  v567 = AdvXMLParser::Element::operator()(v568, "waterPosLines", 0);
+                  v566 = AdvXMLParser::Element::operator()(v567, "value", j);
                   v728 = v566;
                   v565 = v566->GetValue(v566);
                   v21 = std::string::c_str(v565);
@@ -1539,9 +1548,9 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                   std::string::~string(v822);
                   v564 = v726;
                   std::vector<unsigned int>::push_back(&v779->m_vWaterPosLines, (int)&v564);
-                  v563 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                  v562 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v563, "waterBlockPosLines", 0);
-                  v561 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v562, "value", j);
+                  v563 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                  v562 = AdvXMLParser::Element::operator()(v563, "waterBlockPosLines", 0);
+                  v561 = AdvXMLParser::Element::operator()(v562, "value", j);
                   v727 = v561;
                   v560 = v561->GetValue(v561);
                   v22 = std::string::c_str(v560);
@@ -1550,10 +1559,10 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                   v559 = v725;
                   std::vector<unsigned int>::push_back(&v779->m_vWaterBlockPosLines, (int)&v559);
                   v558 = v725 | v726;
-                  std::vector<unsigned int>::push_back(&v558);
-                  v557 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                  v556 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v557, "waterFreePosLines", 0);
-                  v555 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v556, "value", j);
+                  std::vector<unsigned int>::push_back((int)&v558);
+                  v557 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                  v556 = AdvXMLParser::Element::operator()(v557, "waterFreePosLines", 0);
+                  v555 = AdvXMLParser::Element::operator()(v556, "value", j);
                   v724 = v555;
                   v554 = v555->GetValue(v555);
                   v23 = std::string::c_str(v554);
@@ -1563,8 +1572,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                   std::vector<unsigned int>::push_back(&v779->m_vWaterFreePosLines, (int)&v552);
                 }
               }
-              v551 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v550 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v551, "builderNumber", 0);
+              v551 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v550 = AdvXMLParser::Element::operator()(v551, "builderNumber", 0);
               v723 = v550;
               v549 = v550->GetValue(v550);
               v24 = std::string::c_str(v549);
@@ -1572,30 +1581,30 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v779->m_iBuilderNumber = v25;
               std::string::~string(v825);
               for ( k = 0;
-                    k < (char)v779->m_iBuilderNumber;
+                    k < v779->m_iBuilderNumber;
                     ++k )
               {
-                v548 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v547 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v548, "builderInfo", k);
-                v546 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v547, "xOffset", 0);
+                v548 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v547 = AdvXMLParser::Element::operator()(v548, "builderInfo", k);
+                v546 = AdvXMLParser::Element::operator()(v547, "xOffset", 0);
                 v722 = v546;
                 v545 = v546->GetValue(v546);
                 v26 = std::string::c_str(v545);
                 v27 = j__atoi(v26);
                 v779->m_vBuilder[k].m_iXOffset = v27;
                 std::string::~string(v826);
-                v544 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v543 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v544, "builderInfo", k);
-                v542 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v543, "yOffset", 0);
+                v544 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v543 = AdvXMLParser::Element::operator()(v544, "builderInfo", k);
+                v542 = AdvXMLParser::Element::operator()(v543, "yOffset", 0);
                 v721 = v542;
                 v541 = v542->GetValue(v542);
                 v28 = std::string::c_str(v541);
                 v29 = j__atoi(v28);
                 v779->m_vBuilder[k].m_iYOffset = v29;
                 std::string::~string(v827);
-                v540 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v539 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v540, "builderInfo", k);
-                v538 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v539, "dir", 0);
+                v540 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v539 = AdvXMLParser::Element::operator()(v540, "builderInfo", k);
+                v538 = AdvXMLParser::Element::operator()(v539, "dir", 0);
                 v720 = v538;
                 v537 = v538->GetValue(v538);
                 v30 = std::string::c_str(v537);
@@ -1603,71 +1612,71 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v779->m_vBuilder[k].m_iDirection = v31;
                 std::string::~string(v828);
               }
-              v536 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v535 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v536, "flag", 0);
-              v534 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v535, "xOffset", 0);
+              v536 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v535 = AdvXMLParser::Element::operator()(v536, "flag", 0);
+              v534 = AdvXMLParser::Element::operator()(v535, "xOffset", 0);
               v719 = v534;
               v533 = v534->GetValue(v534);
               v32 = std::string::c_str(v533);
               v33 = j__atoi(v32);
               v779->m_iFlagX = v33;
               std::string::~string(v829);
-              v532 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v531 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v532, "flag", 0);
-              v530 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v531, "yOffset", 0);
+              v532 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v531 = AdvXMLParser::Element::operator()(v532, "flag", 0);
+              v530 = AdvXMLParser::Element::operator()(v531, "yOffset", 0);
               v718 = v530;
               v529 = v530->GetValue(v530);
               v34 = std::string::c_str(v529);
               v35 = j__atoi(v34);
               v779->m_iFlagY = v35;
               std::string::~string(v830);
-              v528 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v527 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v528, "door", 0);
-              v526 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v527, "xOffset", 0);
+              v528 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v527 = AdvXMLParser::Element::operator()(v528, "door", 0);
+              v526 = AdvXMLParser::Element::operator()(v527, "xOffset", 0);
               v717 = v526;
               v525 = v526->GetValue(v526);
               v36 = std::string::c_str(v525);
               v37 = j__atoi(v36);
               v779->m_iDoorXOffset = v37;
               std::string::~string(v831);
-              v524 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v523 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v524, "door", 0);
-              v522 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v523, "yOffset", 0);
+              v524 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v523 = AdvXMLParser::Element::operator()(v524, "door", 0);
+              v522 = AdvXMLParser::Element::operator()(v523, "yOffset", 0);
               v716 = v522;
               v521 = v522->GetValue(v522);
               v38 = std::string::c_str(v521);
               v39 = j__atoi(v38);
               v779->m_iDoorYOffset = v39;
               std::string::~string(v832);
-              v520 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v519 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v520, "workingpos", 0);
-              v518 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v519, "xOffset", 0);
+              v520 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v519 = AdvXMLParser::Element::operator()(v520, "workingpos", 0);
+              v518 = AdvXMLParser::Element::operator()(v519, "xOffset", 0);
               v715 = v518;
               v517 = v518->GetValue(v518);
               v40 = std::string::c_str(v517);
               v41 = j__atoi(v40);
               v779->m_iWorkPosXOffset = v41;
               std::string::~string(v833);
-              v516 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v515 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v516, "workingpos", 0);
-              v514 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v515, "yOffset", 0);
+              v516 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v515 = AdvXMLParser::Element::operator()(v516, "workingpos", 0);
+              v514 = AdvXMLParser::Element::operator()(v515, "yOffset", 0);
               v714 = v514;
               v513 = v514->GetValue(v514);
               v42 = std::string::c_str(v513);
               v43 = j__atoi(v42);
               v779->m_iWorkPosYOffset = v43;
               std::string::~string(v834);
-              v512 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v511 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v512, "bitBoundingRect", 0);
-              v510 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v511, "minX", 0);
+              v512 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v511 = AdvXMLParser::Element::operator()(v512, "bitBoundingRect", 0);
+              v510 = AdvXMLParser::Element::operator()(v511, "minX", 0);
               v713 = v510;
               v509 = v510->GetValue(v510);
               v44 = std::string::c_str(v509);
               v45 = j__atoi(v44);
               v779->m_iBBRMinX = v45;
               std::string::~string(v835);
-              v508 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v507 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v508, "bitBoundingRect", 0);
+              v508 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v507 = AdvXMLParser::Element::operator()(v508, "bitBoundingRect", 0);
               v506 = AdvXMLParser::Element::operator()(v507, "maxX", 0);
               v712 = v506;
               v505 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v506->GetValue)(v506, v836);
@@ -1675,8 +1684,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v47 = j__atoi(v46);
               v779->m_iBBRMaY = v47;
               std::string::~string(v836);
-              v504 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v503 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v504, "bitBoundingRect", 0);
+              v504 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v503 = AdvXMLParser::Element::operator()(v504, "bitBoundingRect", 0);
               v502 = AdvXMLParser::Element::operator()(v503, "minY", 0);
               v711 = v502;
               v501 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v502->GetValue)(v502, v837);
@@ -1684,8 +1693,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v49 = j__atoi(v48);
               v779->m_iBBRMinY = v49;
               std::string::~string(v837);
-              v500 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v499 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v500, "bitBoundingRect", 0);
+              v500 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v499 = AdvXMLParser::Element::operator()(v500, "bitBoundingRect", 0);
               v182 = AdvXMLParser::Element::operator()(v499, "maxY", 0);
               v710 = v182;
               v183 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v182->GetValue)(v182, v838);
@@ -1693,7 +1702,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v51 = j__atoi(v50);
               v779->m_iBBRMaxY = v51;
               std::string::~string(v838);
-              v184 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
+              v184 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
               v185 = AdvXMLParser::Element::operator()(v184, "pileNumber", 0);
               v709 = v185;
               v186 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v185->GetValue)(v185, v839);
@@ -1705,27 +1714,27 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                     m < v779->m_iPileNumber;
                     ++m )
               {
-                v187 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v188 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v187, "pile", m);
-                v189 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v188, "xOffset", 0);
+                v187 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v188 = AdvXMLParser::Element::operator()(v187, "pile", m);
+                v189 = AdvXMLParser::Element::operator()(v188, "xOffset", 0);
                 v708 = v189;
                 v190 = v189->GetValue(v189);
                 v54 = std::string::c_str(v190);
                 v55 = j__atoi(v54);
                 v779->m_vPileSpots[m].m_uXOffset = v55;
                 std::string::~string(v840);
-                v191 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v192 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v191, "pile", m);
-                v193 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v192, "yOffset", 0);
+                v191 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v192 = AdvXMLParser::Element::operator()(v191, "pile", m);
+                v193 = AdvXMLParser::Element::operator()(v192, "yOffset", 0);
                 v707 = v193;
                 v194 = v193->GetValue(v193);
                 v56 = std::string::c_str(v194);
                 v57 = j__atoi(v56);
                 v779->m_vPileSpots[m].m_uYOffset = v57;
                 std::string::~string(v841);
-                v195 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v196 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v195, "pile", m);
-                v197 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v196, "good", 0);
+                v195 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v196 = AdvXMLParser::Element::operator()(v195, "pile", m);
+                v197 = AdvXMLParser::Element::operator()(v196, "good", 0);
                 v706 = v197;
                 v198 = CConfigManagerPtr::GetInstance();
                 v705 = v198;
@@ -1737,35 +1746,35 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v779->m_vPileSpots[m].m_iGood = v201;
                 LOBYTE(exceptionBlock) = 16;
                 std::string::~string(v842);
-                v202 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v203 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v202, "pile", m);
-                v204 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v203, "type", 0);
+                v202 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v203 = AdvXMLParser::Element::operator()(v202, "pile", m);
+                v204 = AdvXMLParser::Element::operator()(v203, "type", 0);
                 v704 = v204;
                 v205 = v204->GetValue(v204);
                 v59 = std::string::c_str(v205);
                 v60 = j__atoi(v59);
                 v779->m_vPileSpots[m].m_iType = v60;
                 std::string::~string(v843);
-                v206 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v207 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v206, "pile", m);
-                v208 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v207, "patch", 0);
+                v206 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v207 = AdvXMLParser::Element::operator()(v206, "pile", m);
+                v208 = AdvXMLParser::Element::operator()(v207, "patch", 0);
                 v703 = v208;
                 v209 = v208->GetValue(v208);
                 v61 = std::string::c_str(v209);
                 v62 = j__atoi(v61);
                 v779->m_vPileSpots[m].m_iPatch = v62;
                 std::string::~string(v845);
-                v210 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v211 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v210, "pile", m);
-                v212 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v211, "appearance", 0);
+                v210 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v211 = AdvXMLParser::Element::operator()(v210, "pile", m);
+                v212 = AdvXMLParser::Element::operator()(v211, "appearance", 0);
                 v702 = v212;
                 v213 = v212->GetValue(v212);
                 v63 = std::string::c_str(v213);
                 v64 = j__atoi(v63);
                 v779->m_vPileSpots[m].m_iAppearance = v64;
                 std::string::~string(v810);
-                v214 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v215 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v214, "pile", m);
+                v214 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v215 = AdvXMLParser::Element::operator()(v214, "pile", m);
                 v216 = AdvXMLParser::Element::operator()(v215, "xPixelOffset", 0);
                 v701 = v216;
                 v217 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v216->GetValue)(v216, v846);
@@ -1773,8 +1782,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v66 = j__atoi(v65);
                 v779->m_vPileSpots[m].m_iXPixelOffset = v66;
                 std::string::~string(v846);
-                v218 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v219 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v218, "pile", m);
+                v218 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v219 = AdvXMLParser::Element::operator()(v218, "pile", m);
                 v220 = AdvXMLParser::Element::operator()(v219, "yPixelOffset", 0);
                 v700 = v220;
                 v221 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v220->GetValue)(v220, v847);
@@ -1783,8 +1792,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v779->m_vPileSpots[m].m_iYPixelOffset = v68;
                 std::string::~string(v847);
               }
-              v222 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v223 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v222, "settlerNumber", 0);
+              v222 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v223 = AdvXMLParser::Element::operator()(v222, "settlerNumber", 0);
               v699 = v223;
               v224 = v223->GetValue(v223);
               v69 = std::string::c_str(v224);
@@ -1803,17 +1812,17 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                     n < v779->m_uWarriorNumber;
                     ++n )
               {
-                v226 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v227 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v226, "settler", n);
-                v228 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v227, "xOffset", 0);
+                v226 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v227 = AdvXMLParser::Element::operator()(v226, "settler", n);
+                v228 = AdvXMLParser::Element::operator()(v227, "xOffset", 0);
                 v698 = v228;
                 v229 = v228->GetValue(v228);
                 v71 = std::string::c_str(v229);
                 v72 = j__atoi(v71);
                 v779->m_vSettlerSpots[n].m_iXOffset = v72;
                 std::string::~string(v849);
-                v230 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v231 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v230, "settler", n);
+                v230 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v231 = AdvXMLParser::Element::operator()(v230, "settler", n);
                 v232 = AdvXMLParser::Element::operator()(v231, "yOffset", 0);
                 v697 = v232;
                 v233 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v232->GetValue)(v232, v850);
@@ -1821,8 +1830,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v74 = j__atoi(v73);
                 v779->m_vSettlerSpots[n].m_iYOffset = v74;
                 std::string::~string(v850);
-                v234 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v235 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v234, "settler", n);
+                v234 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v235 = AdvXMLParser::Element::operator()(v234, "settler", n);
                 v236 = AdvXMLParser::Element::operator()(v235, "direction", 0);
                 v696 = v236;
                 v237 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v236->GetValue)(v236, v851);
@@ -1832,12 +1841,12 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 std::string::~string(v851);
                 v178[18] = std::string::string(&v864, "true");
                 LOBYTE(exceptionBlock) = 18;
-                v238 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-                v239 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v238, "settler", n);
-                v240 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v239, "top", 0);
+                v238 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+                v239 = AdvXMLParser::Element::operator()(v238, "settler", n);
+                v240 = AdvXMLParser::Element::operator()(v239, "top", 0);
                 v695 = v240;
                 v241 = v240->GetValue(v240);
-                v694 = std::string::compare(v241) == 0;
+                v694 = std::string::compare((int)v241) == 0;
                 v779->m_vSettlerSpots[n].m_bTop = v694;
                 std::string::~string(v852);
                 LOBYTE(exceptionBlock) = 16;
@@ -1866,7 +1875,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                     ++v779->m_uSwordsmanNumber;
                   }
                 }
-                if ( !v779->m_uBowmanNumber )
+                if ( v779->m_uBowmanNumber == 0 )
                 {
                   v152 = iRace;
                   v77 = std::string::c_str(&v879);
@@ -1876,7 +1885,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                     __debugbreak();
                   }
                 }
-                if ( !v779->m_uSwordsmanNumber )
+                if ( v779->m_uSwordsmanNumber == 0 )
                 {
                   v153 = iRace;
                   v78 = std::string::c_str(&v879);
@@ -1887,34 +1896,34 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                   }
                 }
               }
-              v244 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v283 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v244, "patchSettlerSlot", 0);
+              v244 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v283 = AdvXMLParser::Element::operator()(v244, "patchSettlerSlot", 0);
               v692 = v283;
               v246 = v283->GetValue(v283);
               v79 = std::string::c_str(v246);
               v80 = j__atoi(v79);
               v779->m_iPatchSettlerSlot = v80;
               std::string::~string(v853);
-              v247 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v248 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v247, "miniflag", 0);
-              v249 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v248, "xOffset", 0);
+              v247 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v248 = AdvXMLParser::Element::operator()(v247, "miniflag", 0);
+              v249 = AdvXMLParser::Element::operator()(v248, "xOffset", 0);
               v691 = v249;
               v250 = v249->GetValue(v249);
               v81 = std::string::c_str(v250);
               v82 = j__atoi(v81);
               v779->m_iMiniFlagXOffset = v82;
               std::string::~string(v854);
-              v251 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v252 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v251, "miniflag", 0);
-              v253 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v252, "yOffset", 0);
+              v251 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v252 = AdvXMLParser::Element::operator()(v251, "miniflag", 0);
+              v253 = AdvXMLParser::Element::operator()(v252, "yOffset", 0);
               v690 = v253;
               v254 = v253->GetValue(v253);
               v83 = std::string::c_str(v254);
               v84 = j__atoi(v83);
               v779->m_iMiniFlagYOffset = v84;
               std::string::~string(v855);
-              v255 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v256 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v255, "kind", 0);
+              v255 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v256 = AdvXMLParser::Element::operator()(v255, "kind", 0);
               v689 = v256;
               v257 = v256->GetValue(v256);
               v258 = v257;
@@ -1929,8 +1938,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               std::string::~string(&v865);
               LOBYTE(exceptionBlock) = 16;
               std::string::~string(v856);
-              v261 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v262 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v261, "inhabitant", 0);
+              v261 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v262 = AdvXMLParser::Element::operator()(v261, "inhabitant", 0);
               v688 = v262;
               v263 = v262->GetValue(v262);
               v264 = v263;
@@ -1951,8 +1960,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v266 = v687->GetDefineValue(v687, v87);
                 v779->m_iBuildingInhabitant = v266;
               }
-              v267 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v268 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v267, "tool", 0);
+              v267 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v268 = AdvXMLParser::Element::operator()(v267, "tool", 0);
               v686 = v268;
               v269 = CConfigManagerPtr::GetInstance();
               v685 = v269;
@@ -1964,8 +1973,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v779->m_iTool = v272;
               LOBYTE(exceptionBlock) = 23;
               std::string::~string(v858);
-              v273 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v275 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v273, "productiondelay", 0);
+              v273 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v275 = AdvXMLParser::Element::operator()(v273, "productiondelay", 0);
               v684 = v275;
               v276 = v275->GetValue(v275);
               v277 = v276;
@@ -1996,40 +2005,40 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 iProductionDelay = 0;
               }
               v779->m_iProductionDelay = iProductionDelay;
-              v279 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v280 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v279, "dummyValue", 0);
+              v279 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v280 = AdvXMLParser::Element::operator()(v279, "dummyValue", 0);
               v683 = v280;
               v281 = v280->GetValue(v280);
               v91 = std::string::c_str(v281);
               v92 = j__atoi(v91);
               v779->m_iDummyValue = v92;
               std::string::~string(v860);
-              v282 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v286 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v282, "influenceRadius", 0);
+              v282 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v286 = AdvXMLParser::Element::operator()(v282, "influenceRadius", 0);
               v633[4] = v286;
               v287 = v286->GetValue(v286);
               v93 = std::string::c_str(v287);
               v94 = j__atoi(v93);
               v779->m_iInfluenceRadius = v94;
               std::string::~string(v861);
-              v309 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v274 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v309, "explorerRadius", 0);
+              v309 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v274 = AdvXMLParser::Element::operator()(v309, "explorerRadius", 0);
               v682 = v274;
               v285 = v274->GetValue(v274);
               v95 = std::string::c_str(v285);
               v96 = j__atoi(v95);
               v779->m_iExplorerRadius = v96;
               std::string::~string(v780);
-              v498 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v497 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v498, "workingAreaRadius", 0);
+              v498 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v497 = AdvXMLParser::Element::operator()(v498, "workingAreaRadius", 0);
               v681 = v497;
               v496 = v497->GetValue(v497);
               v97 = std::string::c_str(v496);
               v98 = j__atoi(v97);
               v779->m_iWorkingAreaRadius = v98;
               std::string::~string(v781);
-              v495 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v494 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v495, "searchType", 0);
+              v495 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v494 = AdvXMLParser::Element::operator()(v495, "searchType", 0);
               v680 = v494;
               v493 = v494->GetValue(v494);
               v492 = v493;
@@ -2044,27 +2053,27 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               std::string::~string(&v866);
               LOBYTE(exceptionBlock) = 27;
               std::string::~string(v782);
-              v489 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v488 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v489, "Hitpoints", 0);
+              v489 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v488 = AdvXMLParser::Element::operator()(v489, "Hitpoints", 0);
               v679 = v488;
               v487 = v488->GetValue(v488);
               v100 = std::string::c_str(v487);
               v101 = j__atoi(v100);
               v779->m_iHealth = v101 / 2;
               std::string::~string(v783);
-              v486 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v485 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v486, "Armor", 0);
+              v486 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v485 = AdvXMLParser::Element::operator()(v486, "Armor", 0);
               v678 = v485;
               v484 = v485->GetValue(v485);
               v102 = std::string::c_str(v484);
               v103 = j__atoi(v102);
               v779->m_iArmor = v103;
               std::string::~string(v784);
-              if ( !v779->m_iHealth )
+              if ( v779->m_iHealth == 0 )
               {
-                m_iStone = (char)v779->m_iStone;
-                m_iBoards = (char)v779->m_iBoards;
-                m_iGold = (char)v779->m_iGold;
+                m_iStone = v779->m_iStone;
+                m_iBoards = v779->m_iBoards;
+                m_iGold = v779->m_iGold;
                 iTotalResources = m_iGold + m_iBoards + m_iStone;
                 v677 = 8 * iTotalResources / 2;
                 if ( v677 >= 250 )
@@ -2077,7 +2086,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 }
                 v779->m_iHealth = v676;
               }
-              v479 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
+              v479 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
               v478 = AdvXMLParser::Element::operator()(v479, "animLists", 0);
               v477 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v478, v168);
               v476 = v477;
@@ -2085,8 +2094,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v178[13] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v179, v477);
               LOBYTE(exceptionBlock) = 32;
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v168);
-              v475 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v474 = (struct AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v475, "animLists", 0);
+              v475 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v474 = AdvXMLParser::Element::operator()(v475, "animLists", 0);
               v473 = AdvXMLParser::NodeContainer::End(v474, v167);
               v472 = v473;
               LOBYTE(exceptionBlock) = 33;
@@ -2095,7 +2104,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v167);
               while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v179, (int)v178) )
               {
-                v471 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v179);
+                v471 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v179);
                 v675 = v471;
                 v470 = (std::string *)((int (__thiscall *)(AdvXMLParser::Element *, _BYTE *))v471->GetValue)(v471, v785);
                 v469 = v470;
@@ -2113,10 +2122,10 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 std::vector<unsigned char>::push_back(&v779->m_vAnimationList, (int)&v765);
                 LOBYTE(exceptionBlock) = 35;
                 std::string::~string(&v867);
-                AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++((char *)v179);
+                AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v179);
               }
               v774 = 0;
-              v465 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
+              v465 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
               v464 = AdvXMLParser::Element::operator()(v465, "patches", 0);
               v463 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v464, v166);
               v462 = v463;
@@ -2124,8 +2133,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v178[31] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v633, v463);
               LOBYTE(exceptionBlock) = 41;
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v166);
-              v461 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v460 = (struct AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v461, "patches", 0);
+              v461 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v460 = AdvXMLParser::Element::operator()(v461, "patches", 0);
               v459 = AdvXMLParser::NodeContainer::End(v460, v165);
               v458 = v459;
               LOBYTE(exceptionBlock) = 42;
@@ -2134,8 +2143,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v165);
               while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v633, (int)v172) )
               {
-                v457 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
-                v456 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v457, "job", 0);
+                v457 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
+                v456 = AdvXMLParser::Element::operator()(v457, "job", 0);
                 v673 = v456;
                 v455 = v456->GetValue(v456);
                 v454 = v455;
@@ -2144,7 +2153,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v178[8] = std::string::string(&v878, v106);
                 LOBYTE(exceptionBlock) = 47;
                 std::string::~string(v786);
-                if ( !std::string::length(&v878) )
+                if ( std::string::length(&v878) == 0 )
                 {
                   v453 = BBSupportDbgReport(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 864, "patchName.length() > 0");
                   if ( v453 == 1 )
@@ -2152,8 +2161,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                     __debugbreak();
                   }
                 }
-                v452 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
-                v451 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v452, "job", 0);
+                v452 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
+                v451 = AdvXMLParser::Element::operator()(v452, "job", 0);
                 v672 = v451;
                 v450 = CConfigManagerPtr::GetInstance();
                 v671 = v450;
@@ -2166,7 +2175,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 std::string::~string(v787);
                 if ( jobDefineValue < 0 )
                 {
-                  v670 = std::string::length(&v878) ? std::string::c_str(&v878) : (char *)&unk_3778527;
+                  v670 = std::string::length(&v878) != 0 ? std::string::c_str(&v878) : (char *)&unk_3778527;
                   v154 = std::string::c_str(&v877);
                   v108 = std::string::c_str(&v879);
                   v446 = BBSupportDbgReportF(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 868, "Patch job \"%s\" not valid for building %s for race %s!", v670, v108, v154);
@@ -2176,8 +2185,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                   }
                 }
                 v779->m_vPatches[v774].m_iJob = jobDefineValue;
-                v445 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
-                v444 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v445, "type", 0);
+                v445 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
+                v444 = AdvXMLParser::Element::operator()(v445, "type", 0);
                 v669 = v444;
                 v443 = v444->GetValue(v444);
                 v442 = v443;
@@ -2195,25 +2204,25 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 LOBYTE(exceptionBlock) = 47;
                 std::string::~string(&v863);
                 v779->m_vPatches[v774].m_iType = jobDefineValue;
-                v439 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
-                v438 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v439, "ticks", 0);
+                v439 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
+                v438 = AdvXMLParser::Element::operator()(v439, "ticks", 0);
                 v668 = v438;
                 v437 = v438->GetValue(v438);
                 v111 = std::string::c_str(v437);
                 v112 = j__atoi(v111);
                 v779->m_vPatches[v774].m_iTicks = v112;
                 std::string::~string(v789);
-                v436 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
-                v435 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v436, "slot", 0);
+                v436 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
+                v435 = AdvXMLParser::Element::operator()(v436, "slot", 0);
                 v667 = v435;
                 v434 = v435->GetValue(v435);
                 v113 = std::string::c_str(v434);
                 v114 = j__atoi(v113);
                 v779->m_vPatches[v774].m_iSlot = v114;
                 std::string::~string(v790);
-                v433 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
-                v432 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v433, "sound", 0);
-                v431 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v432, "def", 0);
+                v433 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
+                v432 = AdvXMLParser::Element::operator()(v433, "sound", 0);
+                v431 = AdvXMLParser::Element::operator()(v432, "def", 0);
                 v666 = v431;
                 v430 = CConfigManagerPtr::GetInstance();
                 v665 = v430;
@@ -2230,25 +2239,25 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                   v744 = 0;
                 }
                 v779->m_vPatches[v774].m_iSound = v744;
-                v426 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
-                v425 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v426, "sound", 0);
-                v424 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v425, "frame", 0);
+                v426 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
+                v425 = AdvXMLParser::Element::operator()(v426, "sound", 0);
+                v424 = AdvXMLParser::Element::operator()(v425, "frame", 0);
                 v664 = v424;
                 v423 = v424->GetValue(v424);
                 v116 = std::string::c_str(v423);
                 v117 = j__atoi(v116);
                 v779->m_vPatches[v774].m_iSoundFrame = v117;
                 std::string::~string(v792);
-                v422 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
-                v421 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v422, "sound", 0);
-                v420 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v421, "random", 0);
+                v422 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v633);
+                v421 = AdvXMLParser::Element::operator()(v422, "sound", 0);
+                v420 = AdvXMLParser::Element::operator()(v421, "random", 0);
                 v663 = v420;
                 v419 = v420->GetValue(v420);
                 v118 = std::string::c_str(v419);
                 v119 = j__atoi(v118);
                 v779->m_vPatches[v774].m_iSoundRandomness = v119;
                 std::string::~string(v793);
-                if ( !v779->m_vPatches[v774].m_iSoundRandomness )
+                if ( v779->m_vPatches[v774].m_iSoundRandomness == 0 )
                 {
                   v779->m_vPatches[v774].m_iSoundRandomness = 100;
                 }
@@ -2257,7 +2266,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 std::string::~string(&v878);
                 AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++((char *)v633);
               }
-              v418 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
+              v418 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
               v417 = AdvXMLParser::Element::operator()(v418, "triggers", 0);
               v416 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v417, v164);
               v415 = v416;
@@ -2265,8 +2274,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               v178[6] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v180, v416);
               LOBYTE(exceptionBlock) = 54;
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v164);
-              v414 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v776);
-              v413 = (struct AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v414, "triggers", 0);
+              v414 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v776);
+              v413 = AdvXMLParser::Element::operator()(v414, "triggers", 0);
               v412 = AdvXMLParser::NodeContainer::End(v413, v163);
               v411 = v412;
               LOBYTE(exceptionBlock) = 55;
@@ -2275,14 +2284,14 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
               AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v163);
               while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v180, (int)v173) )
               {
-                v410 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v180);
+                v410 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v180);
                 v409 = AdvXMLParser::Element::operator()(v410, "slot", 0);
                 v662 = v409;
                 v408 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v409->GetValue)(v409, v794);
                 v120 = std::string::c_str(v408);
                 v401 = j__atoi(v120);
                 std::string::~string(v794);
-                v407 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v180);
+                v407 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v180);
                 v406 = AdvXMLParser::Element::operator()(v407, "job", 0);
                 v661 = v406;
                 v405 = (std::string *)((int (__thiscall *)(const struct AdvXMLParser::Element *, _BYTE *))v406->GetValue)(v406, v795);
@@ -2303,7 +2312,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v779->m_vTriggers[v401] = v400;
                 LOBYTE(exceptionBlock) = 57;
                 std::string::~string(&v869);
-                AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++((char *)v180);
+                AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v180);
               }
               iMaxDistance = 0;
               v396 = -v779->m_iHotSpotX;
@@ -2317,7 +2326,7 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 v747 = *v398;
                 v395 = a2 + v397;
                 v743 = v396;
-                while ( v747 )
+                while ( v747 != 0 )
                 {
                   if ( v747 < 0 )
                   {
@@ -2341,7 +2350,8 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 }
               }
               v779->m_iMaxDistance = iMaxDistance;
-              if ( !CBuildingInfoMgr::DbgCheckBuildingBits(this, iRace, iBuildingType) )
+               = CBuildingInfoMgr::DbgCheckBuildingBits(this, iRace, iBuildingType);
+              if (  == 0 )
               {
                 RaceName = CS4DefineNames::GetRaceName(iRace);
                 v391 = BBSupportDbgReportF(2, "MapObjects\\Building\\BuildingInfoMgr.cpp", 956, "Invalid building info for building %i (%s) of race %i (%s)!", iBuildingType, s_sBuildingDefines[iBuildingType].m_spName, iRace, RaceName);
@@ -2351,17 +2361,17 @@ void  CBuildingInfoMgr::ReadBuildingInfo(void) {
                 }
               }
               LOBYTE(exceptionBlock) = 54;
-              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v173);
+              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v173);
               LOBYTE(exceptionBlock) = 44;
-              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v180);
+              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v180);
               LOBYTE(exceptionBlock) = 41;
-              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v172);
+              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v172);
               LOBYTE(exceptionBlock) = 35;
-              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v633);
+              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v633);
               LOBYTE(exceptionBlock) = 32;
-              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v178);
+              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v178);
               LOBYTE(exceptionBlock) = 27;
-              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v179);
+              AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v179);
               LOBYTE(exceptionBlock) = 23;
               std::string::~string(&v870);
               LOBYTE(exceptionBlock) = 16;
@@ -2375,12 +2385,12 @@ LABEL_16:
               LOBYTE(exceptionBlock) = 15;
               std::string::~string(&v879);
             }
-            AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++((char *)v776);
+            AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v776);
           }
           LOBYTE(exceptionBlock) = 12;
-          AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v177);
+          AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v177);
           LOBYTE(exceptionBlock) = 9;
-          AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v776);
+          AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v776);
           LOBYTE(exceptionBlock) = 8;
           std::string::~string(&v877);
         }
@@ -2390,12 +2400,12 @@ LABEL_16:
           std::string::~string(&v877);
         }
       }
-      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++((char *)v284);
+      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v284);
     }
     LOBYTE(exceptionBlock) = 5;
-    AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v176);
+    AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v176);
     LOBYTE(exceptionBlock) = 2;
-    AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v284);
+    AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v284);
     LOBYTE(exceptionBlock) = 1;
     std::auto_ptr<AdvXMLParser::Document>::~auto_ptr<AdvXMLParser::Document>(v658);
     LOBYTE(exceptionBlock) = 0;
@@ -2501,8 +2511,8 @@ LABEL_16:
     }
     memset(CBuildingInfoMgr::m_vTriggerInfos, 0, sizeof(CBuildingInfoMgr::m_vTriggerInfos));
     v749 = 0;
-    v757 = (char *)AdvXMLParser::Parser::OpenXMLFile(aGamedataBuildi_0, &v749);
-    if ( v757 )
+    v757 = (char *)AdvXMLParser::Parser::OpenXMLFile(L"GameData\\BuildingTrigger.xml", &v749);
+    if ( v757 != 0 )
     {
       exceptionBlock = 64;
       v178[37] = AdvXMLParser::Parser::Parser(v157);
@@ -2530,21 +2540,21 @@ LABEL_16:
       AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v161);
       while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v181, (int)v174) )
       {
-        v382 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v181);
+        v382 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v181);
         v381 = AdvXMLParser::Element::operator[](v382, "id");
         v656 = v381;
-        v178[33] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, struct std::string *))(*(_DWORD *)v381 + 8))(v381, &v862);
+        v178[33] = v381->GetValue(v381, &v862);
         LOBYTE(exceptionBlock) = 73;
         v380 = CDefineTranslator::GetValueOfDefine(v654, &v862);
         v369 = v380;
-        v379 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v181);
+        v379 = (int)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v181);
         v378 = (_DWORD *)AdvXMLParser::NodeContainer::Begin(v379, v158);
         v377 = v378;
         LOBYTE(exceptionBlock) = 74;
         v178[32] = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::ConstIterator<AdvXMLParser::Element>(v746, v378);
         LOBYTE(exceptionBlock) = 76;
         AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v158);
-        v376 = (void *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v181);
+        v376 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v181);
         v375 = AdvXMLParser::NodeContainer::End(v376, v159);
         v374 = v375;
         LOBYTE(exceptionBlock) = 77;
@@ -2553,17 +2563,17 @@ LABEL_16:
         AdvXMLParser::Node::ConstIteratorRef::~ConstIteratorRef((CDaoIndexFieldInfo *)v159);
         while ( AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator<(v746, (int)v175) )
         {
-          v373 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
+          v373 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
           v372 = AdvXMLParser::Element::operator[](v373, "id");
           v655 = v372;
-          v178[10] = (*(int (__thiscall **)(const struct AdvXMLParser::Attribute *, struct std::string *))(*(_DWORD *)v372 + 8))(v372, &v875);
+          v178[10] = v372->GetValue(v372, &v875);
           LOBYTE(exceptionBlock) = 80;
           v371 = CDefineTranslator::GetValueOfDefine(v654, &v875);
           v370 = v371;
           v778 = &CBuildingInfoMgr::m_vTriggerInfos[v369][v371];
-          v368 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v367 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v368, "patch", 0);
-          v366 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v367, "def", 0);
+          v368 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v367 = AdvXMLParser::Element::operator()(v368, "patch", 0);
+          v366 = AdvXMLParser::Element::operator()(v367, "def", 0);
           v653 = v366;
           v365 = v366->GetValue(v366);
           v364 = v365;
@@ -2577,26 +2587,26 @@ LABEL_16:
           v125 = std::string::c_str(&v874);
           v362 = v652->GetDefineValue(v652, v125);
           v778->m_iPatchDefine = v362;
-          v361 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v360 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v361, "patch", 0);
-          v359 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v360, "slot", 0);
+          v361 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v360 = AdvXMLParser::Element::operator()(v361, "patch", 0);
+          v359 = AdvXMLParser::Element::operator()(v360, "slot", 0);
           v651 = v359;
           v358 = v359->GetValue(v359);
           v126 = std::string::c_str(v358);
           v127 = j__atoi(v126);
           v778->m_iSlot = v127;
           std::string::~string(v844);
-          v357 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v356 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v357, "patch", 0);
-          v355 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v356, "duration", 0);
+          v357 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v356 = AdvXMLParser::Element::operator()(v357, "patch", 0);
+          v355 = AdvXMLParser::Element::operator()(v356, "duration", 0);
           v650 = v355;
           v354 = v355->GetValue(v355);
           v128 = std::string::c_str(v354);
           v129 = j__atoi(v128);
           v778->m_iDuration = v129;
           std::string::~string(v797);
-          v353 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v352 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v353, "type", 0);
+          v353 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v352 = AdvXMLParser::Element::operator()(v353, "type", 0);
           v649 = v352;
           v351 = v352->GetValue(v352);
           v350 = v351;
@@ -2613,10 +2623,10 @@ LABEL_16:
           v778->m_iType = v348;
           LOBYTE(exceptionBlock) = 86;
           std::string::~string(&v871);
-          v347 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v346 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v347, "patch", 0);
-          v345 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v346, "sound", 0);
-          v344 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v345, "def", 0);
+          v347 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v346 = AdvXMLParser::Element::operator()(v347, "patch", 0);
+          v345 = AdvXMLParser::Element::operator()(v346, "sound", 0);
+          v344 = AdvXMLParser::Element::operator()(v345, "def", 0);
           v648 = v344;
           v343 = v344->GetValue(v344);
           v342 = v343;
@@ -2634,33 +2644,33 @@ LABEL_16:
           {
             v778->m_iPatchSoundId = 0;
           }
-          v339 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v338 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v339, "patch", 0);
-          v337 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v338, "sound", 0);
-          v336 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v337, "random", 0);
+          v339 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v338 = AdvXMLParser::Element::operator()(v339, "patch", 0);
+          v337 = AdvXMLParser::Element::operator()(v338, "sound", 0);
+          v336 = AdvXMLParser::Element::operator()(v337, "random", 0);
           v646 = v336;
           v335 = v336->GetValue(v336);
           v134 = std::string::c_str(v335);
           v135 = j__atoi(v134);
           v778->m_iPatchSoundRandomness = v135;
           std::string::~string(v800);
-          if ( !v778->m_iPatchSoundRandomness )
+          if ( v778->m_iPatchSoundRandomness == 0 )
           {
             v778->m_iPatchSoundRandomness = 100;
           }
-          v334 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v333 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v334, "patch", 0);
-          v332 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v333, "sound", 0);
-          v331 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v332, "frame", 0);
+          v334 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v333 = AdvXMLParser::Element::operator()(v334, "patch", 0);
+          v332 = AdvXMLParser::Element::operator()(v333, "sound", 0);
+          v331 = AdvXMLParser::Element::operator()(v332, "frame", 0);
           v645 = v331;
           v330 = v331->GetValue(v331);
           v136 = std::string::c_str(v330);
           v137 = j__atoi(v136);
           v778->m_iPatchSoundFrame = v137;
           std::string::~string(v801);
-          v329 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v328 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v329, "effect", 0);
-          v327 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v328, "def", 0);
+          v329 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v328 = AdvXMLParser::Element::operator()(v329, "effect", 0);
+          v327 = AdvXMLParser::Element::operator()(v328, "def", 0);
           v644 = v327;
           v326 = CConfigManagerPtr::GetInstance();
           v643 = v326;
@@ -2672,46 +2682,46 @@ LABEL_16:
           v778->m_iEffectId = v323;
           LOBYTE(exceptionBlock) = 90;
           std::string::~string(v802);
-          v322 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v321 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v322, "effect", 0);
-          v320 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v321, "x", 0);
+          v322 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v321 = AdvXMLParser::Element::operator()(v322, "effect", 0);
+          v320 = AdvXMLParser::Element::operator()(v321, "x", 0);
           v642 = v320;
           v319 = v320->GetValue(v320);
           v139 = std::string::c_str(v319);
           v140 = j__atoi(v139);
           v778->m_iEffectX = v140;
           std::string::~string(v803);
-          v318 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v317 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v318, "effect", 0);
-          v316 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v317, "y", 0);
+          v318 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v317 = AdvXMLParser::Element::operator()(v318, "effect", 0);
+          v316 = AdvXMLParser::Element::operator()(v317, "y", 0);
           v641 = v316;
           v315 = v316->GetValue(v316);
           v141 = std::string::c_str(v315);
           v142 = j__atoi(v141);
           v778->m_iEffectY = v142;
           std::string::~string(v804);
-          v314 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v313 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v314, "effect", 0);
-          v312 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v313, "smoke", 0);
+          v314 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v313 = AdvXMLParser::Element::operator()(v314, "effect", 0);
+          v312 = AdvXMLParser::Element::operator()(v313, "smoke", 0);
           v640 = v312;
           v311 = v312->GetValue(v312);
           v143 = std::string::c_str(v311);
           v144 = j__atoi(v143);
           v778->m_bEffectSmoke = v144;
           std::string::~string(v805);
-          v310 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v245 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v310, "effect", 0);
-          v308 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v245, "duration", 0);
+          v310 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v245 = AdvXMLParser::Element::operator()(v310, "effect", 0);
+          v308 = AdvXMLParser::Element::operator()(v245, "duration", 0);
           v639 = v308;
           v307 = v308->GetValue(v308);
           v145 = std::string::c_str(v307);
           v146 = j__atoi(v145);
           v778->m_iEffectDuration = v146;
           std::string::~string(v806);
-          v306 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v305 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v306, "effect", 0);
-          v304 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v305, "sound", 0);
-          v303 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v304, "def", 0);
+          v306 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v305 = AdvXMLParser::Element::operator()(v306, "effect", 0);
+          v304 = AdvXMLParser::Element::operator()(v305, "sound", 0);
+          v303 = AdvXMLParser::Element::operator()(v304, "def", 0);
           v638 = v303;
           v302 = CConfigManagerPtr::GetInstance();
           v637 = v302;
@@ -2727,24 +2737,24 @@ LABEL_16:
           {
             v778->m_iEffectSoundId = 0;
           }
-          v298 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v297 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v298, "effect", 0);
-          v296 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v297, "sound", 0);
-          v295 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v296, "random", 0);
+          v298 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v297 = AdvXMLParser::Element::operator()(v298, "effect", 0);
+          v296 = AdvXMLParser::Element::operator()(v297, "sound", 0);
+          v295 = AdvXMLParser::Element::operator()(v296, "random", 0);
           v636 = v295;
           v294 = v295->GetValue(v295);
           v148 = std::string::c_str(v294);
           v149 = j__atoi(v148);
           v778->m_iEffectSoundRandomness = v149;
           std::string::~string(v808);
-          if ( !v778->m_iPatchSoundRandomness )
+          if ( v778->m_iPatchSoundRandomness == 0 )
           {
             v778->m_iPatchSoundRandomness = 100;
           }
-          v293 = (AdvXMLParser::Element *)AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*((char *)v746);
-          v292 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v293, "effect", 0);
-          v291 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v292, "sound", 0);
-          v290 = (AdvXMLParser::Element *)AdvXMLParser::Element::operator()(v291, "frame", 0);
+          v293 = AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator*(v746);
+          v292 = AdvXMLParser::Element::operator()(v293, "effect", 0);
+          v291 = AdvXMLParser::Element::operator()(v292, "sound", 0);
+          v290 = AdvXMLParser::Element::operator()(v291, "frame", 0);
           v635 = v290;
           v289 = v290->GetValue(v290);
           v150 = std::string::c_str(v289);
@@ -2759,20 +2769,20 @@ LABEL_16:
           std::string::~string(&v874);
           LOBYTE(exceptionBlock) = 79;
           std::string::~string(&v875);
-          AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++((char *)v746);
+          AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v746);
         }
         LOBYTE(exceptionBlock) = 76;
-        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v175);
+        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v175);
         LOBYTE(exceptionBlock) = 73;
-        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v746);
+        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v746);
         LOBYTE(exceptionBlock) = 72;
         std::string::~string(&v862);
-        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++((char *)v181);
+        AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v181);
       }
       LOBYTE(exceptionBlock) = 69;
-      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v174);
+      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v174);
       LOBYTE(exceptionBlock) = 66;
-      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>((CDaoIndexFieldInfo *)v181);
+      AdvXMLParser::ConstIterator<AdvXMLParser::Element>::~ConstIterator<AdvXMLParser::Element>(v181);
       LOBYTE(exceptionBlock) = 65;
       std::auto_ptr<AdvXMLParser::Document>::~auto_ptr<AdvXMLParser::Document>(v634);
       LOBYTE(exceptionBlock) = 64;

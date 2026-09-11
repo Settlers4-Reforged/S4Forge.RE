@@ -8,7 +8,7 @@
  CFreeCarrierInfo::CFreeCarrierInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CFreeCarrierInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CFreeCarrierInfo::_vftable_;
   return this;
 }
 

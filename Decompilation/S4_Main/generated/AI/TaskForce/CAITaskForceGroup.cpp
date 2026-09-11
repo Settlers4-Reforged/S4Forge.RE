@@ -42,7 +42,7 @@ int  CAITaskForceGroup::NumberOfTaskForcesOfClass(enum T_AI_TASK_FORCE_CLASS a2)
 // Decompiled from void __thiscall CAITaskForceGroup::~CAITaskForceGroup(CAITaskForceGroup *this)
  CAITaskForceGroup::~CAITaskForceGroup(void) {
   
-  *(_DWORD *)this = CAITaskForceGroup::_vftable_;
+  this->vftable = CAITaskForceGroup::_vftable_;
   CAITaskForceGroup::DeleteAllTaskForces(this);
 }
 
@@ -54,7 +54,7 @@ class CAITaskForce *  CAITaskForceGroup::CreateTaskForce(enum T_AI_TASK_FORCE_TY
   struct CAITaskForce *TaskForce; // [esp+4h] [ebp-4h]
 
   TaskForce = CAITaskForces::CreateTaskForce(this->m_sData.m_iPlayerId, a2);
-  if ( TaskForce )
+  if ( TaskForce != 0 )
   {
     CAITaskForceGroup::AddTaskForce(this, TaskForce);
   }
@@ -75,18 +75,15 @@ void  CAITaskForceGroup::DeleteAllTaskForces(void) {
         ++tTaskForceClass )
   {
     for ( i = CAITaskForceGroup::FirstTaskForce(this, tTaskForceClass);
-          i;
+          i != 0;
           i = TaskForceGroupMemberOfSameClass )
     {
       TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
       i->dtor(i, 1);
     }
-    if ( CAITaskForceGroup::FirstTaskForce(this, tTaskForceClass) )
+    if ( CAITaskForceGroup::FirstTaskForce(this, tTaskForceClass) != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 880, "FirstTaskForce(tTaskForceClass) == 0") == 1 )
     {
-      if ( BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 880, "FirstTaskForce(tTaskForceClass) == 0") == 1 )
-      {
-        __debugbreak();
-      }
+      __debugbreak();
     }
   }
 }
@@ -124,8 +121,8 @@ void  CAITaskForceGroup::Load(class IS4Chunk & a2) {
     {
       v4 = a2->LoadUnsigned32(0, 13);
       a2->LoadUnsigned32_(a2);
-      pTaskForce = CAITaskForceGroup::CreateTaskForce(this, v4);
-      if ( !pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1012, "pTaskForce != 0") == 1 )
+      pTaskForce = CAITaskForceGroup::CreateTaskForce(this, (T_AI_TASK_FORCE_TYPE)v4);
+      if ( pTaskForce == 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1012, "pTaskForce != 0") == 1 )
       {
         __debugbreak();
       }
@@ -135,11 +132,11 @@ void  CAITaskForceGroup::Load(class IS4Chunk & a2) {
       if ( v6 >= 0 && v6 < i )
       {
         pAssociatedTaskForce = v5[v6];
-        if ( !pAssociatedTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1028, "pAssociatedTaskForce != 0") == 1 )
+        if ( pAssociatedTaskForce == 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1028, "pAssociatedTaskForce != 0") == 1 )
         {
           __debugbreak();
         }
-        if ( pAssociatedTaskForce )
+        if ( pAssociatedTaskForce != 0 )
         {
           pTaskForce->m_pAssociatedTaskForce = pAssociatedTaskForce;
           pAssociatedTaskForce->m_pAssociatedTaskForce = pTaskForce;
@@ -179,7 +176,7 @@ void  CAITaskForceGroup::Save(class IS4Chunk & a2) {
         ++i )
   {
     for ( j = CAITaskForceGroup::FirstTaskForce(this, i);
-          j;
+          j != 0;
           j = CAITaskForce::NextTaskForceGroupMemberOfSameClass(j) )
     {
       j->m_iAssociatedId = iNumberOfTaskForces++;
@@ -194,7 +191,7 @@ void  CAITaskForceGroup::Save(class IS4Chunk & a2) {
           ++k )
     {
       for ( m = CAITaskForceGroup::FirstTaskForce(this, k);
-            m;
+            m != 0;
             m = CAITaskForce::NextTaskForceGroupMemberOfSameClass(m) )
       {
         if ( v6 >= iNumberOfTaskForces && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1103, "iTaskForceCounter < iNumberOfTaskForces") == 1 )
@@ -207,7 +204,7 @@ void  CAITaskForceGroup::Save(class IS4Chunk & a2) {
         m->Save(m, a2);
         v4 = -1;
         pAssociatedTaskForce = CAITaskForce::AssociatedTaskForce(m);
-        if ( pAssociatedTaskForce )
+        if ( pAssociatedTaskForce != 0 )
         {
           if ( CAITaskForce::TaskForceGroup(pAssociatedTaskForce) != this && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 1122, "pAssociatedTaskForce->TaskForceGroup() == this") == 1 )
           {
@@ -254,11 +251,11 @@ void  CAITaskForceGroup::AddTaskForce(class CAITaskForce * _pTaskForce) {
   int v2; // eax
   int iTaskForceClass; // [esp+Ch] [ebp-8h]
 
-  if ( !_pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 891, "_pTaskForce != 0") == 1 )
+  if ( _pTaskForce == 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 891, "_pTaskForce != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( _pTaskForce->m_pTaskForceGroup && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 892, "_pTaskForce->m_pTaskForceGroup == 0") == 1 )
+  if ( _pTaskForce->m_pTaskForceGroup != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 892, "_pTaskForce->m_pTaskForceGroup == 0") == 1 )
   {
     __debugbreak();
   }
@@ -270,15 +267,15 @@ void  CAITaskForceGroup::AddTaskForce(class CAITaskForce * _pTaskForce) {
   _pTaskForce->m_pPrevTaskForceGroupMember = 0;
   _pTaskForce->m_pNextTaskForceGroupMember = this->m_sData.m_pTaskForces[iTaskForceClass];
   _pTaskForce->m_pTaskForceGroup = this;
-  if ( this->m_sData.m_pTaskForces[iTaskForceClass] )
+  if ( this->m_sData.m_pTaskForces[iTaskForceClass] != 0 )
   {
-    if ( this->m_sData.m_pTaskForces[iTaskForceClass]->m_pPrevTaskForceGroupMember && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 905, "m_sData.m_pTaskForces[iTaskForceClass]->m_pPrevTaskForceGroupMember == 0") == 1 )
+    if ( this->m_sData.m_pTaskForces[iTaskForceClass]->m_pPrevTaskForceGroupMember != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 905, "m_sData.m_pTaskForces[iTaskForceClass]->m_pPrevTaskForceGroupMember == 0") == 1 )
     {
       __debugbreak();
     }
     this->m_sData.m_pTaskForces[iTaskForceClass]->m_pPrevTaskForceGroupMember = _pTaskForce;
   }
-  else if ( this->m_sData.m_iNumberOfTaskForcesOfClass[iTaskForceClass] && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 911, "m_sData.m_iNumberOfTaskForcesOfClass[iTaskForceClass] == 0") == 1 )
+  else if ( this->m_sData.m_iNumberOfTaskForcesOfClass[iTaskForceClass] != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 911, "m_sData.m_iNumberOfTaskForcesOfClass[iTaskForceClass] == 0") == 1 )
   {
     __debugbreak();
   }
@@ -297,7 +294,7 @@ void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce * _pTaskForce) {
   int v2; // eax
   int iTaskForceClass; // [esp+Ch] [ebp-8h]
 
-  if ( !_pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 928, "_pTaskForce != 0") == 1 )
+  if ( _pTaskForce == 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 928, "_pTaskForce != 0") == 1 )
   {
     __debugbreak();
   }
@@ -310,7 +307,7 @@ void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce * _pTaskForce) {
   {
     __debugbreak();
   }
-  if ( _pTaskForce->m_pPrevTaskForceGroupMember )
+  if ( _pTaskForce->m_pPrevTaskForceGroupMember != 0 )
   {
     if ( _pTaskForce->m_pPrevTaskForceGroupMember->m_pNextTaskForceGroupMember != _pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 937, "_pTaskForce->m_pPrevTaskForceGroupMember->m_pNextTaskForceGroupMember == _pTaskForce") == 1 )
     {
@@ -326,7 +323,7 @@ void  CAITaskForceGroup::RemoveTaskForce(class CAITaskForce * _pTaskForce) {
     }
     this->m_sData.m_pTaskForces[iTaskForceClass] = _pTaskForce->m_pNextTaskForceGroupMember;
   }
-  if ( _pTaskForce->m_pNextTaskForceGroupMember )
+  if ( _pTaskForce->m_pNextTaskForceGroupMember != 0 )
   {
     if ( _pTaskForce->m_pNextTaskForceGroupMember->m_pPrevTaskForceGroupMember != _pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 950, "_pTaskForce->m_pNextTaskForceGroupMember->m_pPrevTaskForceGroupMember == _pTaskForce") == 1 )
     {

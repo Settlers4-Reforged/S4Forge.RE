@@ -10,7 +10,7 @@ class CPersistence * __cdecl CEntityTask::New(std::istream & a1) {
   CEntityTask *C; // [esp+Ch] [ebp-10h]
 
   C = (CEntityTask *)operator new(24u);
-  if ( C )
+  if ( C != 0 )
   {
     return CEntityTask::CEntityTask(C, a1);
   }
@@ -79,7 +79,7 @@ unsigned long  CEntityTask::ClassID(void)const {
 // Decompiled from CEntityTask *__thiscall CEntityTask::CEntityTask(CEntityTask *this, int a2)
  CEntityTask::CEntityTask(std::istream & a2) {
   
-  int v3; // [esp+4h] [ebp-Ch] BYREF
+  unsigned int v3; // [esp+4h] [ebp-Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-8h] BYREF
 
   CPersistence::CPersistence(this);
@@ -92,14 +92,14 @@ unsigned long  CEntityTask::ClassID(void)const {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned char>(a2, &this->m_iTask);
+  operator^<unsigned char>(a2, (unsigned __int8 *)&this->m_iTask);
   operator^<unsigned char>(a2, &this->m_iEntity);
   operator^<signed char>(a2, &this->m_iDir);
   operator^<signed char>(a2, &this->m_iDuration);
   operator^<signed char>(a2, &this->m_iFrameCount);
   operator^<unsigned char>(a2, &this->m_iTrigger);
-  operator^<short>(a2, &this->m_iX);
-  operator^<short>(a2, &this->m_iY);
+  operator^<short>(a2, (int)&this->m_iX);
+  operator^<short>(a2, (int)&this->m_iY);
   operator^<unsigned short>(a2, &this->m_iJobNr);
   operator^<unsigned short>(a2, &this->m_uData9);
   operator^<unsigned short>(a2, &this->m_uData10);
@@ -117,8 +117,8 @@ void  CEntityTask::Store(std::ostream & a1) {
 
   CPersistence::Store(this, a1);
   v2 = 1;
-  operator^<unsigned int>(a1, &v2);
-  operator^<unsigned char>(a1, &this->m_iTask);
+  operator^<unsigned int>(a1, (unsigned int *)&v2);
+  operator^<unsigned char>(a1, (BYTE *)&this->m_iTask);
   operator^<unsigned char>(a1, &this->m_iEntity);
   operator^<signed char>(a1, &this->m_iDir);
   operator^<signed char>(a1, &this->m_iDuration);

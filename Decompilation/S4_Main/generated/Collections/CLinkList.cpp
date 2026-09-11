@@ -30,19 +30,18 @@ void  CLinkList::DbgPrint(void)const {
 
   memset(Source, 0, sizeof(Source));
   snprintf(Source, 0x800u, "LinkList %08x: Cnt %2i M %02x Own %4i", this, this->m_uSize, this->m_uMarker, this->m_uOwnerTileId);
-  if ( !this->m_uSize )
-  {
-    return CTrace::Print(Source);
-  }
-  j__strcpy_0(Destination, Source);
-  snprintf(Source, 2048u, "%s; %i", Destination, this->m_uLinkTileIds[0].m_uData);
-  m_uSize = this->m_uSize;
-  for ( i = 1;
-        i < m_uSize;
-        ++i )
+  if ( this->m_uSize != 0 )
   {
     j__strcpy_0(Destination, Source);
-    snprintf(Source, 0x800u, "%s,%i", Destination, this->m_uLinkTileIds[i].m_uData);
+    snprintf(Source, 2048u, "%s; %i", Destination, this->m_uLinkTileIds[0].m_uData);
+    m_uSize = this->m_uSize;
+    for ( i = 1;
+          i < m_uSize;
+          ++i )
+    {
+      j__strcpy_0(Destination, Source);
+      snprintf(Source, 0x800u, "%s,%i", Destination, this->m_uLinkTileIds[i].m_uData);
+    }
   }
   return CTrace::Print(Source);
 }

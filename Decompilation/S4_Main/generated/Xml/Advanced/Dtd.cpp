@@ -27,9 +27,9 @@ bool  AdvXMLParser::Dtd::ParseDoctypedecl(class AdvXMLParser::Parser & a2) {
   {
     AdvXMLParser::Parser::SyntaxError(a2, 26);
   }
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v5 = 0;
-  if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v4) == 0 )
   {
     AdvXMLParser::Parser::SyntaxError(a2, 26);
   }
@@ -70,9 +70,9 @@ bool  AdvXMLParser::Dtd::ParsePEReference(class AdvXMLParser::Parser & a2) {
   {
     return 0;
   }
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v4 = 0;
-  if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v3) || !AdvXMLParser::Parser::ParseChar(a2, 59) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v3) == 0 || !AdvXMLParser::Parser::ParseChar(a2, 59) )
   {
     AdvXMLParser::Parser::SyntaxError(a2, 27);
   }
@@ -101,7 +101,7 @@ bool  AdvXMLParser::Dtd::ParseSystemLiteral(class AdvXMLParser::Parser & a2) {
     {
       break;
     }
-    if ( !v4 )
+    if ( v4 == 0 )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 1);
     }
@@ -133,11 +133,11 @@ bool  AdvXMLParser::Dtd::ParsePubidLiteral(class AdvXMLParser::Parser & a2) {
     {
       break;
     }
-    if ( !v4 )
+    if ( v4 == 0 )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 1);
     }
-    if ( !(unsigned __int8)sub_2F26F60(v4) )
+    if ( (unsigned __int8)sub_2F26F60(v4) == 0 )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 28);
     }
@@ -165,9 +165,9 @@ bool  AdvXMLParser::Dtd::ParseElementDecl(class AdvXMLParser::Parser & a2) {
   {
     return 0;
   }
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v5 = 0;
-  if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseContentspec(this, a2) )
+  if ( !AdvXMLParser::Parser::ParseSpaces(a2) || (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v4) == 0 || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseContentspec(this, a2) )
   {
     AdvXMLParser::Parser::SyntaxError(a2, 29);
   }
@@ -233,10 +233,10 @@ bool  AdvXMLParser::Dtd::ParseMixed(class AdvXMLParser::Parser & a2) {
         {
           AdvXMLParser::Parser::SyntaxError(a2, 30);
         }
-        std::string::string();
+        ((void (__cdecl *)())std::string::string)();
         v6 = 0;
         AdvXMLParser::Parser::ParseSpaces(a2);
-        AdvXMLParser::Parser::ParseName(v5);
+        ((void (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v5);
         AdvXMLParser::Parser::ParseSpaces(a2);
         if ( AdvXMLParser::Parser::ParseString(a2, ")*") )
         {
@@ -272,7 +272,7 @@ bool  AdvXMLParser::Dtd::ParseChildren(class AdvXMLParser::Parser & a2) {
   Char = AdvXMLParser::Parser::NextChar(a2);
   if ( Char < 42 || Char > 43 && Char != 63 )
   {
-    AdvXMLParser::Parser::PreviousChar(a2);
+    AdvXMLParser::Parser::PreviousChar((AdvXMLParser::Parser **)a2);
   }
   return 1;
 }
@@ -299,7 +299,7 @@ bool  AdvXMLParser::Dtd::ParseChoiceSeq(class AdvXMLParser::Parser & a2, bool & 
   v5 = Char;
   while ( Char != 41 )
   {
-    if ( !Char )
+    if ( Char == 0 )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 1);
     }
@@ -334,14 +334,14 @@ bool  AdvXMLParser::Dtd::ParseCp(class AdvXMLParser::Parser & a2) {
   _BYTE v8[28]; // [esp+10h] [ebp-2Ch] BYREF
   int v9; // [esp+38h] [ebp-4h]
 
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v9 = 0;
-  if ( (unsigned __int8)AdvXMLParser::Parser::ParseName(v8) || AdvXMLParser::Dtd::ParseChoiceSeq(this, a2, &v5) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v8) != 0 || AdvXMLParser::Dtd::ParseChoiceSeq(this, a2, &v5) )
   {
     Char = AdvXMLParser::Parser::NextChar(a2);
     if ( Char < 42 || Char > 43 && Char != 63 )
     {
-      AdvXMLParser::Parser::PreviousChar(a2);
+      AdvXMLParser::Parser::PreviousChar((AdvXMLParser::Parser **)a2);
     }
     v6 = 1;
     v9 = -1;
@@ -369,9 +369,9 @@ bool  AdvXMLParser::Dtd::ParseAttlistDecl(class AdvXMLParser::Parser & a2) {
   {
     return 0;
   }
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v5 = 0;
-  if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) )
+  if ( !AdvXMLParser::Parser::ParseSpaces(a2) || (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v4) == 0 )
   {
     AdvXMLParser::Parser::SyntaxError(a2, 33);
   }
@@ -403,9 +403,9 @@ bool  AdvXMLParser::Dtd::ParseAttDef(class AdvXMLParser::Parser & a2) {
 
   v4 = this;
   AdvXMLParser::Bookmark::Bookmark((AdvXMLParser::Bookmark *)v3, a2);
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v8 = 0;
-  if ( AdvXMLParser::Parser::ParseSpaces(a2) && (unsigned __int8)AdvXMLParser::Parser::ParseName(v7) )
+  if ( AdvXMLParser::Parser::ParseSpaces(a2) && (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v7) != 0 )
   {
     if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseAttType(v4, a2) || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseDefaultDecl(v4, a2) )
     {
@@ -460,9 +460,9 @@ bool  AdvXMLParser::Dtd::ParseNotationType(class AdvXMLParser::Parser & a2) {
     AdvXMLParser::Parser::SyntaxError(a2, 35);
   }
   AdvXMLParser::Parser::ParseSpaces(a2);
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v5 = 0;
-  if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v3) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v3) == 0 )
   {
     AdvXMLParser::Parser::SyntaxError(a2, 35);
   }
@@ -470,9 +470,9 @@ bool  AdvXMLParser::Dtd::ParseNotationType(class AdvXMLParser::Parser & a2) {
   while ( AdvXMLParser::Parser::ParseChar(a2, 124) )
   {
     AdvXMLParser::Parser::ParseSpaces(a2);
-    std::string::string();
+    ((void (__cdecl *)())std::string::string)();
     LOBYTE(v5) = 1;
-    if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) )
+    if ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v4) == 0 )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 35);
     }
@@ -503,9 +503,9 @@ bool  AdvXMLParser::Dtd::ParseEnumeration(class AdvXMLParser::Parser & a2) {
     return 0;
   }
   AdvXMLParser::Parser::ParseSpaces(a2);
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v5 = 0;
-  if ( !(unsigned __int8)AdvXMLParser::Parser::ParseNmtoken(v3) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseNmtoken)(v3) == 0 )
   {
     AdvXMLParser::Parser::SyntaxError(a2, 36);
   }
@@ -513,9 +513,9 @@ bool  AdvXMLParser::Dtd::ParseEnumeration(class AdvXMLParser::Parser & a2) {
   while ( AdvXMLParser::Parser::ParseChar(a2, 124) )
   {
     AdvXMLParser::Parser::ParseSpaces(a2);
-    std::string::string();
+    ((void (__cdecl *)())std::string::string)();
     LOBYTE(v5) = 1;
-    if ( !(unsigned __int8)AdvXMLParser::Parser::ParseNmtoken(v4) )
+    if ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseNmtoken)(v4) == 0 )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 36);
     }
@@ -538,7 +538,7 @@ bool  AdvXMLParser::Dtd::ParseEnumeration(class AdvXMLParser::Parser & a2) {
 bool  AdvXMLParser::Dtd::ParseDefaultDecl(class AdvXMLParser::Parser & a2) {
   
   _BYTE v3[56]; // [esp+Ch] [ebp-64h] BYREF
-  _BYTE v4[28]; // [esp+44h] [ebp-2Ch] BYREF
+  std::string v4; // [esp+44h] [ebp-2Ch] BYREF
   int v5; // [esp+6Ch] [ebp-4h]
 
   if ( AdvXMLParser::Parser::ParseString(a2, "#REQUIRED") || AdvXMLParser::Parser::ParseString(a2, "#IMPLIED") )
@@ -549,11 +549,11 @@ bool  AdvXMLParser::Dtd::ParseDefaultDecl(class AdvXMLParser::Parser & a2) {
   {
     AdvXMLParser::Parser::SyntaxError(a2, 37);
   }
-  std::string::string(v4, (char *)byte_3AB88DA);
+  std::string::string(&v4, (char *)byte_3AB88DA);
   v5 = 0;
-  AdvXMLParser::Attribute::Attribute(AdvXMLParser::Node::null, v4);
+  ((void (__stdcall *)(void *, std::string *))AdvXMLParser::Attribute::Attribute)(AdvXMLParser::Node::null, &v4);
   LOBYTE(v5) = 2;
-  std::string::~string(v4);
+  std::string::~string(&v4);
   if ( AdvXMLParser::Attribute::ParseAttValue((AdvXMLParser::Attribute *)v3, a2) )
   {
     v5 = -1;
@@ -587,9 +587,9 @@ bool  AdvXMLParser::Dtd::ParseEntityDecl(class AdvXMLParser::Parser & a2) {
   }
   if ( AdvXMLParser::Parser::ParseChar(a2, 37) )
   {
-    std::string::string();
+    ((void (__cdecl *)())std::string::string)();
     v6 = 0;
-    if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v5) || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParsePEDef(this, a2) )
+    if ( !AdvXMLParser::Parser::ParseSpaces(a2) || (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v5) == 0 || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParsePEDef(this, a2) )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 38);
     }
@@ -598,9 +598,9 @@ bool  AdvXMLParser::Dtd::ParseEntityDecl(class AdvXMLParser::Parser & a2) {
   }
   else
   {
-    std::string::string();
+    ((void (__cdecl *)())std::string::string)();
     v6 = 1;
-    if ( !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseEntityDef(this, a2) )
+    if ( (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v4) == 0 || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseEntityDef(this, a2) )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 38);
     }
@@ -651,9 +651,9 @@ bool  AdvXMLParser::Dtd::ParseNDataDecl(class AdvXMLParser::Parser & a2) {
   }
   if ( AdvXMLParser::Parser::ParseString(a2, "NDATA") )
   {
-    std::string::string();
+    ((void (__cdecl *)())std::string::string)();
     v7 = 0;
-    if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v6) )
+    if ( !AdvXMLParser::Parser::ParseSpaces(a2) || (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v6) == 0 )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 39);
     }
@@ -697,13 +697,13 @@ bool  AdvXMLParser::Dtd::ParseEntityValue(class AdvXMLParser::Parser & a2) {
     while ( v8 != Char )
     {
       v7 = v8;
-      if ( !v8 )
+      if ( v8 == 0 )
       {
         AdvXMLParser::Parser::SyntaxError(a2, 1);
       }
       if ( v7 == 37 )
       {
-        AdvXMLParser::Parser::PreviousChar(a2);
+        AdvXMLParser::Parser::PreviousChar((AdvXMLParser::Parser **)a2);
         if ( !AdvXMLParser::Dtd::ParsePEReference(this, a2) )
         {
           AdvXMLParser::Parser::SyntaxError(a2, 6);
@@ -711,11 +711,11 @@ bool  AdvXMLParser::Dtd::ParseEntityValue(class AdvXMLParser::Parser & a2) {
       }
       else if ( v7 == 38 )
       {
-        AdvXMLParser::Parser::PreviousChar(a2);
+        AdvXMLParser::Parser::PreviousChar((AdvXMLParser::Parser **)a2);
         v3 = AdvXMLParser::Reference::Parse(a2, (struct AdvXMLParser::NodeContainer *)AdvXMLParser::Node::null);
-        std::auto_ptr<AdvXMLParser::Reference>::auto_ptr<AdvXMLParser::Reference>(v3);
+        std::auto_ptr<AdvXMLParser::Reference>::auto_ptr<AdvXMLParser::Reference>((int)v3);
         v10 = 0;
-        if ( !std::auto_ptr<AdvXMLParser::Reference>::get(v6) )
+        if ( std::auto_ptr<AdvXMLParser::Reference>::get(v6) == 0 )
         {
           AdvXMLParser::Parser::SyntaxError(a2, 6);
         }
@@ -735,7 +735,7 @@ bool  AdvXMLParser::Dtd::ParseEntityValue(class AdvXMLParser::Parser & a2) {
   }
   else
   {
-    AdvXMLParser::Parser::PreviousChar(a2);
+    AdvXMLParser::Parser::PreviousChar((AdvXMLParser::Parser **)a2);
     return 0;
   }
 }
@@ -752,9 +752,9 @@ bool  AdvXMLParser::Dtd::ParseNotationDecl(class AdvXMLParser::Parser & a2) {
   {
     return 0;
   }
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v5 = 0;
-  if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !(unsigned __int8)AdvXMLParser::Parser::ParseName(v4) || !AdvXMLParser::Parser::ParseSpaces(a2) )
+  if ( !AdvXMLParser::Parser::ParseSpaces(a2) || (unsigned __int8)((_DWORD (__stdcall *)(_BYTE *))AdvXMLParser::Parser::ParseName)(v4) == 0 || !AdvXMLParser::Parser::ParseSpaces(a2) )
   {
     AdvXMLParser::Parser::SyntaxError(a2, 40);
   }
@@ -779,7 +779,7 @@ bool  AdvXMLParser::Dtd::ParseExternalID(class AdvXMLParser::Parser & a2) {
   
   if ( AdvXMLParser::Parser::ParseString(a2, "SYSTEM") )
   {
-    if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseSystemLiteral(this, a2) )
+    if ( !AdvXMLParser::Parser::ParseSpaces(a2) || AdvXMLParser::Dtd::ParseSystemLiteral(this, a2) == 0 )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 41);
     }
@@ -790,7 +790,7 @@ bool  AdvXMLParser::Dtd::ParseExternalID(class AdvXMLParser::Parser & a2) {
     {
       return 0;
     }
-    if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParsePubidLiteral(this, a2) || !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParseSystemLiteral(this, a2) )
+    if ( !AdvXMLParser::Parser::ParseSpaces(a2) || AdvXMLParser::Dtd::ParsePubidLiteral(this, a2) == 0 || !AdvXMLParser::Parser::ParseSpaces(a2) || AdvXMLParser::Dtd::ParseSystemLiteral(this, a2) == 0 )
     {
       AdvXMLParser::Parser::SyntaxError(a2, 41);
     }
@@ -807,7 +807,7 @@ bool  AdvXMLParser::Dtd::ParsePublicID(class AdvXMLParser::Parser & a2) {
   {
     return 0;
   }
-  if ( !AdvXMLParser::Parser::ParseSpaces(a2) || !AdvXMLParser::Dtd::ParsePubidLiteral(this, a2) )
+  if ( !AdvXMLParser::Parser::ParseSpaces(a2) || AdvXMLParser::Dtd::ParsePubidLiteral(this, a2) == 0 )
   {
     AdvXMLParser::Parser::SyntaxError(a2, 42);
   }

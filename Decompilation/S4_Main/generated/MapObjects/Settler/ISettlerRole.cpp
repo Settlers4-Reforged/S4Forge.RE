@@ -181,7 +181,7 @@ void  ISettlerRole::Go(class CSettler * settler) {
       {
         this->m_iWalkspeed = 8;
       }
-      else if ( !moveCosts )
+      else if ( moveCosts == 0 )
       {
         this->m_iWalkspeed = 7;
       }
@@ -201,11 +201,7 @@ void  ISettlerRole::LogicUpdate(class CSettler * pSettler) {
   CWalking *v5; // [esp+14h] [ebp-Ch]
   CWalking *v6; // [esp+18h] [ebp-8h]
 
-  if ( this->m_iTask != WAIT )
-  {
-    this->LogicUpdateJob(this, pSettler);
-  }
-  else
+  if ( this->m_iTask == WAIT )
   {
     pSettler->m_iDistance = 0;
     this->m_uCycleFrames = 1;
@@ -224,7 +220,7 @@ void  ISettlerRole::LogicUpdate(class CSettler * pSettler) {
     {
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*(&pSettler->m_cCurrentToDoItemIter);
       this->m_uCycleFrames = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(&pSettler->m_cCurrentToDoItemIter)->m_iFrameCount;
-      if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 191, "m_iCycleFrames > 0") == 1 )
+      if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 191, "m_iCycleFrames > 0") == 1 )
       {
         __debugbreak();
       }
@@ -244,6 +240,10 @@ void  ISettlerRole::LogicUpdate(class CSettler * pSettler) {
       pSettler->m_iDistance = -1;
       IAnimatedEntity::RegisterForLogicUpdate(pSettler, v4);
     }
+  }
+  else
+  {
+    this->LogicUpdateJob(this, pSettler);
   }
 }
 
@@ -270,7 +270,7 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
 
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   this->m_uTick = TickCounter - IAnimatedEntity::LastUpdateTick(_pSettler);
-  if ( this->m_uTick )
+  if ( this->m_uTick != 0 )
   {
     v3 = CStateGame::GetTickCounter(g_pGame);
     IAnimatedEntity::SetLastUpdateTick(_pSettler, v3);
@@ -288,16 +288,16 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
       case 30:
         if ( this->m_bForward )
         {
-          _pSettler->m_iFrame = (this->m_uTick + IAnimatedEntity::Frame(_pSettler)) % (unsigned __int8)this->m_uCycleFrames;
+          _pSettler->m_iFrame = (this->m_uTick + IAnimatedEntity::Frame(_pSettler)) % this->m_uCycleFrames;
         }
         else
         {
-          m_iCycleFrames = (unsigned __int8)this->m_uCycleFrames;
+          m_iCycleFrames = this->m_uCycleFrames;
           m_iFrame = _pSettler->m_iFrame;
           v14 = this->m_uTick % m_iCycleFrames;
           if ( m_iFrame < v14 )
           {
-            _pSettler->m_iFrame = (m_iCycleFrames + m_iFrame - v14) % (unsigned __int8)this->m_uCycleFrames;
+            _pSettler->m_iFrame = (m_iCycleFrames + m_iFrame - v14) % this->m_uCycleFrames;
           }
           else
           {
@@ -305,18 +305,15 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
           }
         }
         CEntityToDoListMgr::GetJobSoundInfo(_pSettler->m_iJobPart, &sJobSoundInfo);
-        if ( sJobSoundInfo.m_iId > 0 && sJobSoundInfo.m_iFrame == _pSettler->m_iFrame )
+        if ( sJobSoundInfo.m_iId > 0 && sJobSoundInfo.m_iFrame == _pSettler->m_iFrame && (sJobSoundInfo.m_iRandom == 100 || (m_iRandom = sJobSoundInfo.m_iRandom) >= j__rand() % 100) )
         {
-          if ( sJobSoundInfo.m_iRandom == 100 || (m_iRandom = sJobSoundInfo.m_iRandom, m_iRandom >= j__rand() % 100) )
+          v8 = IEntity::Y(_pSettler);
+          v5 = IEntity::X(_pSettler);
+          if ( g_pFogging->IsPositionVisible(g_pFogging, v5, v8) )
           {
-            v8 = IEntity::Y(_pSettler);
-            v5 = IEntity::X(_pSettler);
-            if ( g_pFogging->IsPositionVisible(g_pFogging, v5, v8) )
-            {
-              v7 = IEntity::Y(_pSettler);
-              v6 = IEntity::X(_pSettler);
-              CSoundManager::PlayEnvironmentSound(g_pSoundManager, sJobSoundInfo.m_iId, v6, v7, 0);
-            }
+            v7 = IEntity::Y(_pSettler);
+            v6 = IEntity::X(_pSettler);
+            CSoundManager::PlayEnvironmentSound(g_pSoundManager, sJobSoundInfo.m_iId, v6, v7, 0);
           }
         }
         v10 = IEntity::WarriorType(_pSettler);
@@ -332,8 +329,8 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
         }
         else
         {
-          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % (unsigned __int8)this->m_uCycleFrames;
-          if ( !_pSettler->m_iFrame )
+          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % this->m_uCycleFrames;
+          if ( _pSettler->m_iFrame == 0 )
           {
             _pSettler->m_iFrame = 1;
           }
@@ -347,14 +344,14 @@ void  ISettlerRole::Update(class CSettler * _pSettler) {
         }
         else
         {
-          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % (unsigned __int8)this->m_uCycleFrames;
-          if ( !_pSettler->m_iFrame )
+          _pSettler->m_iFrame = (this->m_uTick + _pSettler->m_iFrame) % this->m_uCycleFrames;
+          if ( _pSettler->m_iFrame == 0 )
           {
             _pSettler->m_iFrame = 1;
           }
-          if ( (unsigned __int8)this->m_uCycleFrames > 1u )
+          if ( this->m_uCycleFrames > 1u )
           {
-            v13 = (unsigned __int8)this->m_uCycleFrames - 1;
+            v13 = this->m_uCycleFrames - 1;
           }
           else
           {
@@ -430,7 +427,7 @@ bool  ISettlerRole::SearchPosition(class CSettler * a2, int a3) {
   v7 = IEntity::Race(a2);
   v8 = CSettlerMgr::GetSettlerInfo(v7, v12);
   pSearchFkt = std::vector<CSettlerMgr::SSearchInfos>::operator[](&v8->m_vSearches, a3)->m_pSearchFkt;
-  if ( !pSearchFkt && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 594, "pSearchFkt != 0") == 1 )
+  if ( pSearchFkt == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 594, "pSearchFkt != 0") == 1 )
   {
     __debugbreak();
   }
@@ -504,7 +501,7 @@ bool  ISettlerRole::ESChanged(class CSettler * _pSettler) {
     v2 = IEntity::X(_pSettler);
     v7 = CWorldManager::EcoSectorId(v2, v6);
     v8 = CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, v7);
-    if ( v8 )
+    if ( v8 != 0 )
     {
       v3 = CEcoSector::Owner(v8);
       if ( v3 == IEntity::OwnerId(_pSettler) )
@@ -548,9 +545,9 @@ bool  ISettlerRole::SetFree(class CSettler * settler, int a3) {
   ISettlerRole::DetachFromPile(this, settler, 2, 0);
   ISettlerRole::DetachFromPile(this, settler, 3, 0);
   ISettlerRole::DetachFromPile(this, settler, 4, 0);
-  if ( this->m_uHomeEntityId )
+  if ( this->m_uHomeEntityId != 0 )
   {
-    if ( !IEntity::FlagBits(settler, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 798, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED )") == 1 )
+    if ( IEntity::FlagBits(settler, ENTITY_FLAG_ATTACHED) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 798, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED )") == 1 )
     {
       __debugbreak();
     }
@@ -566,11 +563,11 @@ bool  ISettlerRole::SetFree(class CSettler * settler, int a3) {
     ((void (__thiscall *)(struct IEntity *, int))homeEntityId->Detach)(homeEntityId, settlerId);
     this->m_uHomeEntityId = 0;
   }
-  if ( IEntity::FlagBits(settler, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 808, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED ) == 0") == 1 )
+  if ( IEntity::FlagBits(settler, ENTITY_FLAG_ATTACHED) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 808, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED ) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_iDestinationPosition )
+  if ( this->m_iDestinationPosition != 0 )
   {
     settlerId = 32;
     v6 = CWorldManager::Index(this->m_iDestinationPosition);
@@ -578,7 +575,7 @@ bool  ISettlerRole::SetFree(class CSettler * settler, int a3) {
   }
   v7 = IEntity::WorldIdx(settler);
   CWorldManager::EcoSectorId(v7);
-  if ( IEntity::WarriorType(settler) )
+  if ( IEntity::WarriorType(settler) != AI_WARRIOR_TYPE_NONE )
   {
     goto LABEL_22;
   }
@@ -588,12 +585,12 @@ bool  ISettlerRole::SetFree(class CSettler * settler, int a3) {
   {
     v10 = IEntity::WorldIdx(settler);
     v19 = CWorldManager::EcoSectorId(v10);
-    if ( !IEntity::FlagBits(settler, ENTITY_FLAG_Offered) )
+    if ( IEntity::FlagBits(settler, ENTITY_FLAG_Offered) == 0 )
     {
       settlerId = IEntity::ID(settler);
       v14 = IEntity::Type(settler);
       v11 = (unsigned __int16 *)CEcoSectorMgr::operator[](g_cESMgr, v19);
-      CEcoSector::SetSettlerOffer(v11, v14, settlerId);
+      CEcoSector::SetSettlerOffer((CEcoSector *)v11, v14, settlerId);
     }
 LABEL_22:
     CSettler::TakeWaitList(settler);
@@ -601,7 +598,7 @@ LABEL_22:
   }
   v22 = (CFleeRole *)operator new(0x2Cu);
   v26 = 0;
-  if ( v22 )
+  if ( v22 != 0 )
   {
     v21 = CFleeRole::CFleeRole(v22);
   }
@@ -628,7 +625,7 @@ LABEL_22:
 // Decompiled from void __thiscall ISettlerRole::SetObserverTarget(ISettlerRole *this, int observerTargetType, WORD target)
 void  ISettlerRole::SetObserverTarget(enum T_OBSERVER_TARGET observerTargetType, int target) {
   
-  if ( observerTargetType )
+  if ( observerTargetType != 0 )
   {
     if ( observerTargetType == 2 )
     {
@@ -672,38 +669,37 @@ int  ISettlerRole::GetObserverTarget(enum T_OBSERVER_TARGET a2) {
   CPersistence::CPersistence(this);
   this->__vftable = (ISettlerRole_vtbl *)&ISettlerRole::_vftable_;
   operator^<unsigned int>(a1, &v4);
-  if ( v4 )
+  if ( v4 != 0 )
   {
     operator^<signed char>(a1, &this->m_iTask);
     operator^<unsigned char>(a1, &this->m_uSettlerWalk);
     operator^<signed char>(a1, &this->m_iWalkspeed);
     operator^<unsigned char>(a1, &this->m_uCycleFrames);
     operator^<unsigned short>(a1, &this->m_uTick);
-    operator^<unsigned char>(a1, &this->m_bForward);
+    operator^<unsigned char>(a1, (unsigned __int8 *)&this->m_bForward);
     operator^<unsigned char>(a1, &this->unk_0B);
-    operator^<short>(a1, &this->m_iDestinationOffsetX);
-    operator^<short>(a1, &this->m_iDestinationOffsetY);
+    operator^<short>((int)a1, (int)&this->m_iDestinationOffsetX);
+    operator^<short>((int)a1, (int)&this->m_iDestinationOffsetY);
     operator^<unsigned short>(a1, &this->m_uAttachedSettlerId);
     operator^<int>(a1, &this->m_iDestinationPosition);
     operator^<int>(a1, &this->m_iStartPosition);
     operator^<unsigned short>(a1, &this->m_uHomeEntityId);
     operator^<unsigned short>(a1, &this->m_uEntityId);
-    operator^<float>(a1, &this->m_fOffsetX);
-    operator^<float>(a1, &this->m_fOffsetY);
+    operator^<float>((int)a1, (int)&this->m_fOffsetX);
+    operator^<float>((int)a1, (int)&this->m_fOffsetY);
   }
   if ( v4 >= 2 )
   {
     operator^<unsigned short>(a1, &this->m_uSourcePileId);
     operator^<unsigned char>(a1, &this->m_uToDoCount);
   }
-  if ( v4 && v4 < 3 )
+  if ( v4 == 0 || v4 >= 3 )
   {
-    return this;
+    BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for ISettlerRole");
+    pExceptionObject = 0;
+    CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for ISettlerRole");
-  pExceptionObject = 0;
-  CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   return this;
 }
 
@@ -716,13 +712,13 @@ void  ISettlerRole::Store(std::ostream & _rStream) {
 
   CPersistence::Store(this, _rStream);
   v2 = 2;
-  operator^<unsigned int>(_rStream, &v2);
+  operator^<unsigned int>(_rStream, (unsigned int *)&v2);
   operator^<signed char>(_rStream, &this->m_iTask);
   operator^<unsigned char>(_rStream, &this->m_uSettlerWalk);
   operator^<signed char>(_rStream, &this->m_iWalkspeed);
   operator^<unsigned char>(_rStream, &this->m_uCycleFrames);
   operator^<unsigned short>(_rStream, &this->m_uTick);
-  operator^<unsigned char>(_rStream, &this->m_bForward);
+  operator^<unsigned char>(_rStream, (unsigned __int8 *)&this->m_bForward);
   operator^<unsigned char>(_rStream, &this->unk_0B);
   operator^<short>(_rStream, &this->m_iDestinationOffsetX);
   operator^<short>(_rStream, &this->m_iDestinationOffsetY);
@@ -731,8 +727,8 @@ void  ISettlerRole::Store(std::ostream & _rStream) {
   operator^<int>(_rStream, &this->m_iStartPosition);
   operator^<unsigned short>(_rStream, &this->m_uHomeEntityId);
   operator^<unsigned short>(_rStream, &this->m_uEntityId);
-  operator^<float>((int)_rStream, &this->m_fOffsetX);
-  operator^<float>((int)_rStream, &this->m_fOffsetY);
+  operator^<float>(_rStream, &this->m_fOffsetX);
+  operator^<float>(_rStream, &this->m_fOffsetY);
   operator^<unsigned short>(_rStream, &this->m_uSourcePileId);
   operator^<unsigned char>(_rStream, &this->m_uToDoCount);
 }
@@ -750,9 +746,9 @@ int  ISettlerRole::GetKindOfSelection(class CSettler * a2)const {
 // Decompiled from void __thiscall ISettlerRole::MarkPileAsUnused(ISettlerRole *this, int a2)
 void  ISettlerRole::MarkPileAsUnused(enum T_OBSERVER_TARGET a2) {
   
-  if ( a2 )
+  if ( a2 != 0 )
   {
-    if ( this->GetObserverTarget(this, a2) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 923, "GetObserverTarget(_tObserverTarget) == 0") == 1 )
+    if ( this->GetObserverTarget(this, a2) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 923, "GetObserverTarget(_tObserverTarget) == 0") == 1 )
     {
       __debugbreak();
     }
@@ -777,14 +773,14 @@ void  ISettlerRole::DetachFromPile(class CSettler * _pSettler, enum T_OBSERVER_T
   int v5; // [esp+4h] [ebp-Ch]
   int v6; // [esp+8h] [ebp-8h]
 
-  if ( !_pSettler && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 943, "_pSettler != 0") == 1 )
+  if ( _pSettler == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 943, "_pSettler != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( _tTarget )
+  if ( _tTarget != 0 )
   {
     v6 = this->GetObserverTarget(this, _tTarget);
-    if ( v6 )
+    if ( v6 != 0 )
     {
       if ( v6 != 0xFFFF )
       {
@@ -794,7 +790,7 @@ void  ISettlerRole::DetachFromPile(class CSettler * _pSettler, enum T_OBSERVER_T
           __debugbreak();
         }
         v4 = CPileMgr::operator[](v6);
-        if ( _bChangeAmount )
+        if ( _bChangeAmount != 0 )
         {
           CPile::ChangeAmountAndDetach(v4, v5);
         }
@@ -802,17 +798,14 @@ void  ISettlerRole::DetachFromPile(class CSettler * _pSettler, enum T_OBSERVER_T
         {
           v4->Detach(v5);
         }
-        if ( this->GetObserverTarget(this, _tTarget) )
+        if ( this->GetObserverTarget(this, _tTarget) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 968, "GetObserverTarget(_tObserverTarget) == 0") == 1 )
         {
-          if ( BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 968, "GetObserverTarget(_tObserverTarget) == 0") == 1 )
-          {
-            __debugbreak();
-          }
+          __debugbreak();
         }
       }
       this->SetObserverTarget(this, _tTarget, 0);
     }
-    else if ( _bChangeAmount && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 975, "!_bChangeAmount") == 1 )
+    else if ( _bChangeAmount != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 975, "!_bChangeAmount") == 1 )
     {
       __debugbreak();
     }
@@ -878,7 +871,7 @@ bool  ISettlerRole::SearchRestingPlace(class CSettler * a2, int a3) {
     if ( CWorldManager::InWorld(v10, v11) )
     {
       v3 = CWorldManager::EcoSectorId(v8, v9);
-      if ( v3 == CWorldManager::EcoSectorId(v10, v11) && !CWorldManager::FlagBits(v10, v11, 0x77u) )
+      if ( v3 == CWorldManager::EcoSectorId(v10, v11) && CWorldManager::FlagBits(v10, v11, 0x77u) == 0 )
       {
         this->m_iStartPosition = Y16X16::PackXYFast(v10, v11);
         return 1;
@@ -893,7 +886,7 @@ bool  ISettlerRole::SearchRestingPlace(class CSettler * a2, int a3) {
 // Decompiled from char __thiscall ISettlerRole::CheckHome(ISettlerRole *this, struct CSettler *a2)
 bool  ISettlerRole::CheckHome(class CSettler * a2) {
   
-  if ( this->m_uHomeEntityId )
+  if ( this->m_uHomeEntityId != 0 )
   {
     return 1;
   }
@@ -911,7 +904,7 @@ void  ISettlerRole::InitCommonTaskValues(class CSettler * a2, class CEntityTask 
   IBuildingRole *v5; // [esp+0h] [ebp-Ch]
   CBuilding *BuildingPtr; // [esp+4h] [ebp-8h]
 
-  if ( !a3->m_iTask || a3->m_iTask == 1 || a3->m_iTask == 29 || a3->m_iTask == 2 || a3->m_iTask == 5 || a3->m_iTask == 4 || a3->m_iTask == 30 )
+  if ( a3->m_iTask == 0 || a3->m_iTask == 1 || a3->m_iTask == 29 || a3->m_iTask == 2 || a3->m_iTask == 5 || a3->m_iTask == 4 || a3->m_iTask == 30 )
   {
     IEntity::SetFlagBits(a2, (EntityFlag)2048);
     a2->m_iDistance = 0;
@@ -937,20 +930,20 @@ void  ISettlerRole::InitCommonTaskValues(class CSettler * a2, class CEntityTask 
   {
     IEntity::ClearFlagBits(a2, ENTITY_FLAG_Visible);
   }
-  if ( a3->m_iTrigger )
+  if ( a3->m_iTrigger != 0 )
   {
-    if ( !this->m_uHomeEntityId && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 493, "m_uHomeEntityId != 0") == 1 )
+    if ( this->m_uHomeEntityId == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 493, "m_uHomeEntityId != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( this->m_uHomeEntityId )
+    if ( this->m_uHomeEntityId != 0 )
     {
       BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, this->m_uHomeEntityId);
-      if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 498, "pBuilding != NULL") == 1 )
+      if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 498, "pBuilding != NULL") == 1 )
       {
         __debugbreak();
       }
-      if ( BuildingPtr )
+      if ( BuildingPtr != 0 )
       {
         v5 = CBuilding::Role(BuildingPtr);
         IBuildingRole::TakeJobTrigger(v5, a3->m_iTrigger);
@@ -967,15 +960,15 @@ void  ISettlerRole::InitCommonTaskValues(class CSettler * a2, class CEntityTask 
     iType = IEntity::Type(a2);
     BBSupportTracePrintF(3, "ISettlerRole::InitCommonTaskValues(): Invalid number of frames (%i) for settler type %s, job %s!", this->m_uCycleFrames, s_sSettlerDefines2[iType].m_spName, spName);
   }
-  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 526, "m_iCycleFrames >= 1") == 1 )
+  if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerRole.cpp", 526, "m_iCycleFrames >= 1") == 1 )
   {
     __debugbreak();
   }
-  if ( a3->m_uData9 )
+  if ( a3->m_uData9 != 0 )
   {
     this->m_uEntityId = a3->m_uData9;
   }
-  if ( a3->m_iEntity )
+  if ( a3->m_iEntity != 0 )
   {
     this->unk_0B = a3->m_iEntity;
   }
@@ -1011,7 +1004,7 @@ void  ISettlerRole::NewDestinationEx(class CSettler * pSettler, class std::list<
   int SettlerFirstJob; // [esp+44h] [ebp-8h]
   bool v19; // [esp+4Bh] [ebp-1h]
 
-  if ( std::list<CEntityTask>::size(a3) )
+  if ( std::list<CEntityTask>::size(a3) != 0 )
   {
     ActualTask = IMovingEntity::GetActualTask(pSettler);
     v17 = ActualTask->m_iTask == 17;

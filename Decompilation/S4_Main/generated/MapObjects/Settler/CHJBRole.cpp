@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CHJBRole::New(int a1)
 class CPersistence * __cdecl CHJBRole::New(std::istream & a1) {
   
-  if ( operator new(0x80u) )
+  if ( operator new(0x80u) != 0 )
   {
-    return CHJBRole::CHJBRole(a1);
+    return ((_DWORD (__stdcall *)(int))CHJBRole::CHJBRole)(a1);
   }
   else
   {
@@ -18,18 +18,18 @@ class CPersistence * __cdecl CHJBRole::New(std::istream & a1) {
 
 
 // address=[0x1574e20]
-// Decompiled from _DWORD *__thiscall CHJBRole::CHJBRole(_DWORD *this, int a2)
+// Decompiled from unsigned int *__thiscall CHJBRole::CHJBRole(unsigned int *this, struct std::istream *a2)
  CHJBRole::CHJBRole(std::istream & a2) {
   
   int pExceptionObject; // [esp+8h] [ebp-14h] BYREF
-  _DWORD *v4; // [esp+Ch] [ebp-10h]
+  unsigned int *v4; // [esp+Ch] [ebp-10h]
   int v5; // [esp+18h] [ebp-4h]
 
   v4 = this;
-  CSquadLeaderRole::CSquadLeaderRole(a2);
+  ((void (__stdcall *)(struct std::istream *))CSquadLeaderRole::CSquadLeaderRole)(a2);
   v5 = 0;
-  *v4 = &CHJBRole::_vftable_;
-  v4[12] = &CHJBRole::`vftable';
+  *v4 = (unsigned int)&CHJBRole::_vftable_;
+  v4[12] = (unsigned int)&CHJBRole::`vftable';
   if ( Serial::LoadVersion(a2) != 1 )
   {
     BBSupportTracePrintF(3, (char *)&dword_37AE128[1]);
@@ -49,16 +49,16 @@ class CPersistence * __cdecl CHJBRole::New(std::istream & a1) {
 // Decompiled from int __thiscall CHJBRole::Store(int *this, struct std::ostream *a2)
 void  CHJBRole::Store(std::ostream & a2) {
   
-  CSquadLeaderRole::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))CSquadLeaderRole::Store)(a2);
   Serial::StoreVersion(a2, 1);
-  operator^<unsigned int>(a2, this + 29);
-  operator^<unsigned int>(a2, this + 30);
-  return operator^<unsigned int>(a2, this + 31);
+  operator^<unsigned int>(a2, (unsigned int *)this + 29);
+  operator^<unsigned int>(a2, (unsigned int *)this + 30);
+  return operator^<unsigned int>(a2, (unsigned int *)this + 31);
 }
 
 
 // address=[0x1575030]
-// Decompiled from void __thiscall CHJBRole::LogicUpdateJob(CHJBRole *this, struct CSettler *a2)
+// Decompiled from void __thiscall CHJBRole::LogicUpdateJob(CSoldierRole *this, struct CSettler *a2)
 void  CHJBRole::LogicUpdateJob(class CSettler * a2) {
   
   int v2; // eax
@@ -83,7 +83,7 @@ void  CHJBRole::LogicUpdateJob(class CSettler * a2) {
   int NearestEnemyFighter; // [esp+1Ch] [ebp-Ch]
   unsigned int TickCounter; // [esp+20h] [ebp-8h]
 
-  if ( !*((_DWORD *)this + 20) || (*((_DWORD *)this + 20) = 0, (*(void (__thiscall **)(CHJBRole *, struct CSettler *))(*(_DWORD *)this + 40))(this, a2), *((_BYTE *)this + 4) == 27) )
+  if ( this->m_iU3 == 0 || (this->m_iU3 = 0, ((void (__thiscall *)(CSoldierRole *, struct CSettler *))this->ISelectableSettlerRole::ISettlerRole::CPersistence::__vftable[2].j_?WarriorInit@CWarriorBehavior@@UAEXAAVIMovingEntity@@HH@Z)(this, a2), this->m_iTask == 27) )
   {
     TickCounter = CStateGame::GetTickCounter(g_pGame);
     if ( TickCounter > *((_DWORD *)this + 30) )
@@ -93,20 +93,20 @@ void  CHJBRole::LogicUpdateJob(class CSettler * a2) {
       {
         *((_DWORD *)this + 30) = TickCounter + 10;
       }
-      (*(void (__thiscall **)(struct CSettler *, int))(*(_DWORD *)a2 + 24))(a2, 1);
+      ((void (__thiscall *)(struct CSettler *, int))a2->j_?Increase@CSettler@@UAEHH@Z)(a2, 1);
     }
     if ( TickCounter <= *((_DWORD *)this + 31) )
     {
       goto LABEL_13;
     }
-    v2 = IEntity::OwnerId((unsigned __int8 *)a2);
+    v2 = IEntity::OwnerId(a2);
     v14 = CAlliances::AllianceId(v2);
     v13 = IEntity::Y(a2);
     v3 = IEntity::X(a2);
-    if ( (int)CInfluMap::EnemyValueXY(v3, v13, v14) <= 0 || (v15 = IEntity::OwnerId((unsigned __int8 *)a2), v12 = IEntity::Y(a2), v4 = IEntity::X(a2), NearestEnemyFighter = CScanner::FindNearestEnemyFighter(v4, v12, 13, v15), NearestEnemyFighter <= 0) )
+    if ( (int)CInfluMap::EnemyValueXY(v3, v13, v14) <= 0 || (v15 = IEntity::OwnerId(a2), v12 = IEntity::Y(a2), v4 = IEntity::X(a2), (NearestEnemyFighter = CScanner::FindNearestEnemyFighter(v4, v12, 13, v15)) <= 0) )
     {
 LABEL_13:
-      if ( IEntity::Hitpoints((IEntity *)a2) >= 8 )
+      if ( IEntity::Hitpoints(a2) >= 8 )
       {
         if ( ((unsigned int)&byte_C00000 & IEntity::Flags(a2)) != 0 )
         {
@@ -115,9 +115,9 @@ LABEL_13:
         else
         {
           v9 = CGameData::GetTickCounter(g_pGameData);
-          CWarriorBehavior::WarriorLogicUpdate((CHJBRole *)((char *)this + 48), a2, v9, 16);
+          CWarriorBehavior::WarriorLogicUpdate(&this->CWarriorBehavior, a2, v9, 16);
         }
-        if ( *((_BYTE *)CWarriorBehavior::GetWarriorBehaviorData((CHJBRole *)((char *)this + 48)) + 4) || *((int *)this + 28) <= 0 )
+        if ( CWarriorBehavior::GetWarriorBehaviorData(&this->CWarriorBehavior)->m_uState != 0 || *((int *)this + 28) <= 0 )
         {
           *((_DWORD *)this + 28) = IEntity::PackedXY(a2);
         }
@@ -125,19 +125,19 @@ LABEL_13:
       else
       {
         v6 = CStateGame::Rand(g_pGame);
-        (*(void (__thiscall **)(struct CSettler *, int))(*(_DWORD *)a2 + 24))(a2, (v6 & 0x40) + 24);
-        v18 = CLogic::Effects((DWORD *)g_pLogic);
+        ((void (__thiscall *)(struct CSettler *, int))a2->j_?Increase@CSettler@@UAEHH@Z)(a2, (v6 & 0x40) + 24);
+        v18 = (int)CLogic::Effects(g_pLogic);
         v10 = IEntity::Y(a2);
         v7 = IEntity::X(a2);
         (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v18 + 16))(v18, 76, 0, v7, v10, 0, 0, 0);
-        (*(void (__thiscall **)(struct CSettler *))(*(_DWORD *)a2 + 56))(a2);
-        NewHJBPosition = CHJBRole::FindNewHJBPosition(this, a2);
-        (*(void (__thiscall **)(struct CSettler *, int))(*(_DWORD *)a2 + 52))(a2, NewHJBPosition);
-        v17 = CLogic::Effects((DWORD *)g_pLogic);
+        a2->j_?RemoveFromMapObjectLayer@IEntity@@UAEXXZ((CPropertySet *)a2);
+        NewHJBPosition = CHJBRole::FindNewHJBPosition((CHJBRole *)this, a2);
+        a2->PlaceInMapObjectLayer(a2, NewHJBPosition);
+        v17 = (int)CLogic::Effects(g_pLogic);
         v11 = IEntity::Y(a2);
         v8 = IEntity::X(a2);
         (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v17 + 16))(v17, 76, 0, v8, v11, 0, 0, 0);
-        (*(void (__thiscall **)(char *, struct CSettler *))(*((_DWORD *)this + 12) + 16))((char *)this + 48, a2);
+        this->WarriorTaskFinished(&this->CWarriorBehavior, a2);
       }
     }
     else
@@ -150,15 +150,15 @@ LABEL_13:
       v19 = Y16X16::UnpackXFast(NearestEnemyFighter);
       v20 = Y16X16::UnpackYFast(NearestEnemyFighter);
       v5 = CWorldManager::MapObjectId(v19, v20);
-      (*(void (__thiscall **)(char *, struct CSettler *, int, int))(*((_DWORD *)this + 12) + 12))((char *)this + 48, a2, v5, 4);
-      CHJBRole::ExecuteAttackSpell(this, a2, v19, v20);
+      this->WarriorTaskAttack(&this->CWarriorBehavior, a2, v5, 4);
+      CHJBRole::ExecuteAttackSpell((CHJBRole *)this, a2, v19, v20);
     }
   }
 }
 
 
 // address=[0x1575310]
-// Decompiled from int __thiscall CHJBRole::Decrease(CHJBRole *this, int a2)
+// Decompiled from int __thiscall CHJBRole::Decrease(ISelectableSettlerRole *this, int a2)
 int  CHJBRole::Decrease(int a2) {
   
   int v4; // [esp+4h] [ebp-8h]
@@ -178,8 +178,8 @@ int  CHJBRole::Decrease(int a2) {
   {
     v4 = v6 - 3;
   }
-  v5 = (IEntity *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 9));
-  if ( !v5 )
+  v5 = CMapObjectMgr::EntityPtr(this->m_uAttachedSettlerId);
+  if ( v5 == 0 )
   {
     return 0;
   }
@@ -212,13 +212,13 @@ bool  CHJBRole::IsHJB(void) {
 
 
 // address=[0x15886c0]
-// Decompiled from int __cdecl CHJBRole::Load(int a1)
+// Decompiled from int __cdecl CHJBRole::Load(struct std::istream *a1)
 class CHJBRole * __cdecl CHJBRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CHJBRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -247,24 +247,24 @@ void  CHJBRole::PostLoadInit(class CSettler * a2) {
   struct CFrameWnd *v2; // eax
   struct CFrameWnd *v3; // eax
 
-  if ( a2 )
+  if ( a2 != 0 )
   {
     CSoldierRole::PostLoadInit(a2);
-    if ( !IEntity::FlagBits(a2, (EntityFlag)&MEMORY[0x4000000]) )
+    if ( IEntity::FlagBits((IEntity *)a2, (EntityFlag)&s_iMsgTracer2.m_aMessages[15456]) == 0 )
     {
-      if ( IHJBMgr::GetHJBPlayerId(this) && BBSupportDbgReport(2, "mapobjects\\settler\\HJBRole.cpp", 95, "g_pHJBMgr->GetHJBPlayerId() == PLAYER_NO_PLAYER") == 1 )
+      if ( ((int (__cdecl *)(void *))IHJBMgr::GetHJBPlayerId)(this) != 0 && BBSupportDbgReport(2, "mapobjects\\settler\\HJBRole.cpp", 95, "g_pHJBMgr->GetHJBPlayerId() == PLAYER_NO_PLAYER") == 1 )
       {
         __debugbreak();
       }
-      if ( IHJBMgr::GetHJBEntityId(0) != -1 && BBSupportDbgReport(2, "mapobjects\\settler\\HJBRole.cpp", 96, "g_pHJBMgr->GetHJBEntityId() == -1") == 1 )
+      if ( ((int (__thiscall *)(_DWORD))IHJBMgr::GetHJBEntityId)(0) != -1 && BBSupportDbgReport(2, "mapobjects\\settler\\HJBRole.cpp", 96, "g_pHJBMgr->GetHJBEntityId() == -1") == 1 )
       {
         __debugbreak();
       }
-      v2 = (struct CFrameWnd *)IEntity::OwnerId((unsigned __int8 *)a2);
+      v2 = (struct CFrameWnd *)IEntity::OwnerId((IEntity *)a2);
       IHJBMgr::SetHJBPlayerId(v2);
-      v3 = (struct CFrameWnd *)IEntity::EntityId((unsigned __int16 *)a2);
+      v3 = (struct CFrameWnd *)IEntity::EntityId((IEntity *)a2);
       IHJBMgr::SetHJBEntityId(v3);
-      (**(void (__thiscall ***)(void *))g_pHJBMgr)(g_pHJBMgr);
+      ((void (__thiscall *)(CHJBMgr *))g_pHJBMgr->j_?LocalLoadHJBGfxFileIfNecessary@CHJBMgr@@UAE_NXZ)(g_pHJBMgr);
     }
   }
 }
@@ -314,11 +314,11 @@ int  CHJBRole::FindNewHJBPosition(class CSettler * a2) {
     {
       v18 = Y16X16::UnpackXFast(v16);
       v17 = Y16X16::UnpackYFast(v16);
-      v2 = IEntity::OwnerId((unsigned __int8 *)a2);
+      v2 = IEntity::OwnerId(a2);
       CScanner::EvaluateFighters((struct SEvalFightersResult *)v21, v18, v17, 15, v2);
-      v3 = IEntity::OwnerId((unsigned __int8 *)a2);
+      v3 = IEntity::OwnerId(a2);
       CScanner::EvaluateTowers((struct SEvalTowersResult *)v24, v18, v17, 15, v3);
-      v4 = Grid::Distance((Grid *)(v14 - v18), v15 - v17);
+      v4 = Grid::Distance(v14 - v18, v15 - v17);
       if ( v22 + v4 - 2 * v23 - v25 > v10 )
       {
         v13 = v18;
@@ -363,7 +363,7 @@ int  CHJBRole::FindNearFreePositionInSector(int a2, int a3, int a4) {
   v8 = -1;
   while ( CSectorSpiralWalk::NextXY((CSectorSpiralWalk *)v5, &v10, &v9) )
   {
-    if ( !CWorldManager::MapObjectId(v10, v9) )
+    if ( CWorldManager::MapObjectId(v10, v9) == 0 )
     {
       if ( CWorldManager::CatapultTileId(v10, v9) > 0 )
       {
@@ -409,9 +409,9 @@ void  CHJBRole::ExecuteAttackSpell(class CSettler * a2, int a3, int a4) {
   struct IEntity *v17; // [esp+4Ch] [ebp-4h] BYREF
 
   v11[12] = this;
-  v15 = CLogic::Effects((DWORD *)g_pLogic);
+  v15 = (int)CLogic::Effects(g_pLogic);
   (*(void (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v15 + 16))(v15, 42, 0, a3, a4, 0, 0, 0);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
+  v4 = IEntity::OwnerId(a2);
   v13 = CAlliances::PlayerEnemyBits(v4);
   v11[11] = 252;
   v11[10] = 12;
@@ -422,20 +422,20 @@ void  CHJBRole::ExecuteAttackSpell(class CSettler * a2, int a3, int a4) {
   do
   {
     result = CWarriorEntitySpiralWalk::NextEntity((CWarriorEntitySpiralWalk *)v11, &v17);
-    if ( !result )
+    if ( result == 0 )
     {
       break;
     }
-    v12 = CStateGame::Rand(g_pGame) % 8u + 12;
-    v6 = IEntity::OwnerId((unsigned __int8 *)v17);
+    v12 = CStateGame::Rand(g_pGame) % 8 + 12;
+    v6 = IEntity::OwnerId(v17);
     if ( v6 == CPlayerManager::GetLocalPlayerId() )
     {
       v10 = IEntity::Y(v17);
       v7 = IEntity::X(v17);
       CAttackMsgList::SendAttackMessage((CAttackMsgList *)&g_cAttackMsgList, v7, v10);
     }
-    ((void (__thiscall *)(struct IEntity *, unsigned int))v17->NamedEntities)(v17, v12);
-    v14 = CLogic::Effects((DWORD *)g_pLogic);
+    ((void (__thiscall *)(struct IEntity *, unsigned int))v17->Decrease)(v17, v12);
+    v14 = (int)CLogic::Effects(g_pLogic);
     v9 = CSettlerSpiralWalk::CurrentY(v11);
     v8 = CSettlerSpiralWalk::CurrentX(v11);
     result = (*(int (__thiscall **)(int, int, _DWORD, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v14 + 16))(v14, 56, 0, v8, v9, 0, 0, 0);

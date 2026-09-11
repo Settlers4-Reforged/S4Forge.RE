@@ -7,7 +7,7 @@
  CEcoSectorAI::CEcoSectorAI(void) {
   
   IAIEcoSectorAI::IAIEcoSectorAI(this);
-  *(_DWORD *)this = CEcoSectorAI::_vftable_;
+  *(_DWORD *)this = &CEcoSectorAI::_vftable_;
   *((_DWORD *)this + 8) = 0;
   return this;
 }
@@ -27,10 +27,10 @@
   CReserveDatabase *C; // [esp+30h] [ebp-14h]
 
   IAIEcoSectorAI::IAIEcoSectorAI(this);
-  *(_DWORD *)this = CEcoSectorAI::_vftable_;
+  *(_DWORD *)this = &CEcoSectorAI::_vftable_;
   *((_DWORD *)this + 8) = 0;
   C = (CReserveDatabase *)operator new(0x1Cu);
-  if ( C )
+  if ( C != 0 )
   {
     v12 = CReserveDatabase::CReserveDatabase(C);
   }
@@ -40,7 +40,7 @@
   }
   *((_DWORD *)this + 3) = v12;
   v11 = (CProductionTab *)operator new(1u);
-  if ( v11 )
+  if ( v11 != 0 )
   {
     v10 = CProductionTab::CProductionTab(v11);
   }
@@ -50,7 +50,7 @@
   }
   *((_DWORD *)this + 4) = v10;
   v9 = (CProductionDataTab *)operator new(1u);
-  if ( v9 )
+  if ( v9 != 0 )
   {
     v8 = CProductionDataTab::CProductionDataTab(v9);
   }
@@ -62,7 +62,7 @@
   *((_DWORD *)this + 6) = a2;
   *((_DWORD *)this + 7) = a3;
   v7 = (CSchedule *)operator new(0x7Cu);
-  if ( v7 )
+  if ( v7 != 0 )
   {
     v6 = CSchedule::CSchedule(v7, this, a4, a5);
   }
@@ -71,7 +71,7 @@
     v6 = 0;
   }
   *((_DWORD *)this + 1) = v6;
-  CSchedule::Settings(*((CSchedule **)this + 1));
+  CSchedule::Settings(*((CDynList ***)this + 1));
   return this;
 }
 
@@ -82,23 +82,23 @@
   
   CReserveDatabase *result; // eax
 
-  *this = (CReserveDatabase *)CEcoSectorAI::_vftable_;
-  if ( this[3] )
+  *this = (CReserveDatabase *)&CEcoSectorAI::_vftable_;
+  if ( *(this + 3) != 0 )
   {
-    delete this[3];
+    delete *(this + 3);
   }
-  if ( this[4] )
+  if ( *(this + 4) != 0 )
   {
-    delete this[4];
+    delete *(this + 4);
   }
-  if ( this[5] )
+  if ( *(this + 5) != 0 )
   {
-    delete this[5];
+    delete *(this + 5);
   }
-  result = this[1];
-  if ( result )
+  result = *(this + 1);
+  if ( result != 0 )
   {
-    return (CReserveDatabase *)delete this[1];
+    return (CReserveDatabase *)delete *(this + 1);
   }
   return result;
 }
@@ -111,7 +111,7 @@ void  CEcoSectorAI::Release(void) {
   CEcoSectorAI *result; // eax
 
   result = this;
-  if ( this )
+  if ( this != 0 )
   {
     return (CEcoSectorAI *)delete this;
   }
@@ -140,7 +140,7 @@ void  CEcoSectorAI::ReadConfigFile(void) {
 // Decompiled from bool __thiscall CEcoSectorAI::Execute(CSchedule **this)
 void  CEcoSectorAI::Execute(void) {
   
-  return CSchedule::trigger(this[1]);
+  return CSchedule::trigger(*(this + 1));
 }
 
 
@@ -152,9 +152,9 @@ enum T_AI_BUILD_RESULT  CEcoSectorAI::PutUpBuilding(int a2, int a3, int a4, int 
   struct IScheduleEntry *v8; // [esp+18h] [ebp-14h]
   CMainProblemSolveEvent *C; // [esp+1Ch] [ebp-10h]
 
-  v6 = CReserveDatabase::PackPosition(this[3], a3, a4);
+  v6 = CReserveDatabase::PackPosition(*(this + 3), a3, a4);
   C = (CMainProblemSolveEvent *)operator new(0x70u);
-  if ( C )
+  if ( C != 0 )
   {
     v8 = CMainProblemSolveEvent::CMainProblemSolveEvent(C, -1, 9, a2, v6, 0, 0);
   }
@@ -162,7 +162,7 @@ enum T_AI_BUILD_RESULT  CEcoSectorAI::PutUpBuilding(int a2, int a3, int a4, int 
   {
     v8 = 0;
   }
-  CSchedule::NewSchedEntry(this[1], v8);
+  CSchedule::NewSchedEntry((CDynList **)*(this + 1), v8);
   return 1;
 }
 

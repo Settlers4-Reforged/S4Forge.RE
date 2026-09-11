@@ -30,7 +30,7 @@ void __cdecl CGameSettings::Save(void) {
 void __cdecl CGameSettings::SetGfxFullscreenEnabled(bool a1) {
   
   CStaticConfigVarInt::operator=(&CGameSettings::m_iFullscreenEnabled, a1);
-  return CGameSettings::Save();
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -42,7 +42,7 @@ void __cdecl CGameSettings::SetWindowsDimensions(int a1, int a2, int a3, int a4)
   CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowPosY, a2);
   CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowWidth, a3);
   CStaticConfigVarInt::operator=(&CGameSettings::m_iWindowHeight, a4);
-  return CGameSettings::Save();
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -58,7 +58,7 @@ int __cdecl CGameSettings::GetGfxFullscreenEnabled(void) {
 // Decompiled from int CGameSettings::GetGfxHeight()
 int __cdecl CGameSettings::GetGfxHeight(void) {
   
-  return CStaticConfigVarInt::operator int(CGameSettings::m_iWindowHeight);
+  return CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowHeight);
 }
 
 
@@ -82,7 +82,7 @@ int __cdecl CGameSettings::GetLanguage(void) {
 // Decompiled from int CGameSettings::GetWindowsPosX()
 int __cdecl CGameSettings::GetWindowsPosX(void) {
   
-  return CStaticConfigVarInt::operator int(CGameSettings::m_iWindowPosX);
+  return CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowPosX);
 }
 
 
@@ -90,7 +90,7 @@ int __cdecl CGameSettings::GetWindowsPosX(void) {
 // Decompiled from int CGameSettings::GetWindowsPosY()
 int __cdecl CGameSettings::GetWindowsPosY(void) {
   
-  return CStaticConfigVarInt::operator int(CGameSettings::m_iWindowPosY);
+  return CStaticConfigVarInt::operator int(&CGameSettings::m_iWindowPosY);
 }
 
 
@@ -98,7 +98,7 @@ int __cdecl CGameSettings::GetWindowsPosY(void) {
 // Decompiled from int CGameSettings::GetUserMP3()
 int __cdecl CGameSettings::GetUserMP3(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iUserMP3);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iUserMP3);
 }
 
 
@@ -252,12 +252,12 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   std::string::~string(&v99);
   LOBYTE(v113) = 0;
   std::string::~string(&v98);
-  if ( !std::string::compare(&v110, "Player1") )
+  if ( std::string::compare(&v110, "Player1") == 0 )
   {
     memset(Buffer, 0, sizeof(Buffer));
     pcbBuffer = 256;
     GetUserNameA(Buffer, &pcbBuffer);
-    if ( strlen(Buffer) )
+    if ( strlen(Buffer) != 0 )
     {
       std::string::operator=(&v110, Buffer);
     }
@@ -290,7 +290,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v47 = std::string::string(&v94, (char *)&byte_36C2641);
   v76 = std::operator==<char>((int)&CGameSettings::m_strHelpURLenglish, (int)v47);
   std::string::~string(&v94);
-  if ( v76 )
+  if ( v76 != 0 )
   {
     CTrace::Print("GameSettings.cpp: No 'HelpURLenglish' given! Check 'Web.cfg'!");
   }
@@ -305,7 +305,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v43 = std::string::string(&v91, (char *)&byte_36C2643);
   v75 = std::operator==<char>((int)&CGameSettings::m_strNormURLenglish, (int)v43);
   std::string::~string(&v91);
-  if ( v75 )
+  if ( v75 != 0 )
   {
     CTrace::Print("GameSettings.cpp: No 'm_strNormURLenglish' given! Check 'Web.cfg'!");
   }
@@ -320,7 +320,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v39 = std::string::string(&v88, (char *)&byte_36C264B);
   v74 = std::operator==<char>((int)&CGameSettings::m_strHelpURLgerman, (int)v39);
   std::string::~string(&v88);
-  if ( v74 )
+  if ( v74 != 0 )
   {
     CTrace::Print("GameSettings.cpp: No 'm_strHelpURLgerman' given! Check 'Web.cfg'!");
   }
@@ -335,7 +335,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v35 = std::string::string(&v86, (char *)&byte_36C2673);
   v73 = std::operator==<char>((int)&CGameSettings::m_strNormURLgerman, (int)v35);
   std::string::~string(&v86);
-  if ( v73 )
+  if ( v73 != 0 )
   {
     CTrace::Print("GameSettings.cpp: No 'm_strNormURLgerman' given! Check 'Web.cfg'!");
   }
@@ -350,7 +350,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v30 = std::string::string(&v83, (char *)&byte_36C267E);
   v72 = std::operator==<char>((int)&CGameSettings::m_strManualURL_DE, (int)v30);
   std::string::~string(&v83);
-  if ( v72 )
+  if ( v72 != 0 )
   {
     CTrace::Print("GameSettings.cpp: No 'm_strManualURL_DE' given! Check 'Web.cfg'!");
   }
@@ -365,7 +365,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v26 = std::string::string(&v80, (char *)&byte_36C268A);
   v67 = std::operator==<char>((int)&CGameSettings::m_strManualURL_FR, (int)v26);
   std::string::~string(&v80);
-  if ( v67 )
+  if ( v67 != 0 )
   {
     CTrace::Print("GameSettings.cpp: No 'm_strManualURL_FR' given! Check 'Web.cfg'!");
   }
@@ -380,7 +380,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v22 = std::string::string(&v101, (char *)&byte_36C269A);
   v71 = std::operator==<char>((int)&CGameSettings::m_strManualURL_EN, (int)v22);
   std::string::~string(&v101);
-  if ( v71 )
+  if ( v71 != 0 )
   {
     CTrace::Print("GameSettings.cpp: No 'm_strManualURL_EN' given! Check 'Web.cfg'!");
   }
@@ -395,7 +395,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v64 = std::string::string(&v108, (char *)&byte_36C26CE);
   v70 = std::operator==<char>((int)&CGameSettings::m_strTipsURL_DE, (int)v64);
   std::string::~string(&v108);
-  if ( v70 )
+  if ( v70 != 0 )
   {
     CTrace::Print("GameSettings.cpp: No 'TipsURL_DE' given! Check 'Web.cfg'!");
   }
@@ -410,7 +410,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v60 = std::string::string(&v89, (char *)&byte_36C26E6);
   v69 = std::operator==<char>((int)&CGameSettings::m_strTipsURL_FR, (int)v60);
   std::string::~string(&v89);
-  if ( v69 )
+  if ( v69 != 0 )
   {
     CTrace::Print("GameSettings.cpp: No 'TipsURL_FR' given! Check 'Web.cfg'!");
   }
@@ -425,7 +425,7 @@ void __cdecl CGameSettings::LoadCommandLineValues(void) {
   v56 = std::string::string(&v102, (char *)&byte_36C26EF);
   v68 = std::operator==<char>((int)&CGameSettings::m_strTipsURL_EN, (int)v56);
   std::string::~string(&v102);
-  if ( v68 )
+  if ( v68 != 0 )
   {
     CTrace::Print("GameSettings.cpp: No 'TipsURL_EN' given! Check 'Web.cfg'!");
   }
@@ -447,7 +447,7 @@ void __cdecl CGameSettings::Validate(void) {
 // Decompiled from void CGameSettings::DetermineHighestResolution()
 void __cdecl CGameSettings::DetermineHighestResolution(void) {
   
-  if ( !g_pGfxEngine && BBSupportDbgReport(2, "main\\GameSettings.cpp", 227, "g_pGfxEngine") == 1 )
+  if ( g_pGfxEngine == 0 && BBSupportDbgReport(2, "main\\GameSettings.cpp", 227, "g_pGfxEngine") == 1 )
   {
     __debugbreak();
   }
@@ -455,7 +455,7 @@ void __cdecl CGameSettings::DetermineHighestResolution(void) {
         CGameSettings::m_iHighestPossibleResolution <= 3;
         ++CGameSettings::m_iHighestPossibleResolution )
   {
-    if ( !IGfxEngine::IsResolutionPossible(g_pGfxEngine, CGameSettings::m_iHighestPossibleResolution) )
+    if ( IGfxEngine::IsResolutionPossible(g_pGfxEngine, CGameSettings::m_iHighestPossibleResolution) == 0 )
     {
       --CGameSettings::m_iHighestPossibleResolution;
       return;
@@ -497,7 +497,7 @@ std::wstring __cdecl CGameSettings::GetConfigFilePath(wchar_t const * ret, bool 
   std::wstring a1a; // [esp+7Ch] [ebp-2Ch] BYREF
   int v12; // [esp+A4h] [ebp-4h]
 
-  if ( bAlsoCheckUserConfig && g_pInstallationInfo->IsOptionalGameConfigFile(g_pInstallationInfo, swpConfig) )
+  if ( bAlsoCheckUserConfig != 0 && g_pInstallationInfo->IsOptionalGameConfigFile(g_pInstallationInfo, swpConfig) != 0 )
   {
     a2 = CGameSettings::GetUserConfigDirectory(&v10);
     v12 = 0;
@@ -591,7 +591,7 @@ std::string __cdecl CGameSettings::GetManualURL(void a1) {
 
 
 // address=[0x1488970]
-// Decompiled from int __cdecl CGameSettings::GetTipsURL(int a1)
+// Decompiled from std::string *__cdecl CGameSettings::GetTipsURL(std::string *a1)
 std::string __cdecl CGameSettings::GetTipsURL(void a1) {
   
   int Language; // [esp+0h] [ebp-8h]
@@ -599,18 +599,18 @@ std::string __cdecl CGameSettings::GetTipsURL(void a1) {
   Language = CGameSettings::GetLanguage();
   if ( Language == 1 )
   {
-    std::string::string(&CGameSettings::m_strTipsURL_DE);
+    ((void (__stdcall *)(void *))std::string::string)(&CGameSettings::m_strTipsURL_DE);
     return a1;
   }
   else
   {
     if ( Language == 2 )
     {
-      std::string::string(&CGameSettings::m_strTipsURL_FR);
+      ((void (__stdcall *)(void *))std::string::string)(&CGameSettings::m_strTipsURL_FR);
     }
     else
     {
-      std::string::string(&CGameSettings::m_strTipsURL_EN);
+      ((void (__stdcall *)(void *))std::string::string)(&CGameSettings::m_strTipsURL_EN);
     }
     return a1;
   }
@@ -635,7 +635,7 @@ int __cdecl CGameSettings::GetCampaignStatus(int _iCampaignType) {
       {
         if ( _iCampaignType < 21 || _iCampaignType >= 25 )
         {
-          if ( (!_iCampaignType || _iCampaignType >= 5) && BBSupportDbgReport(2, "main\\GameSettings.cpp", 345, "_iCampaignType && _iCampaignType < CAMPAIGN_MAX_MAIN") == 1 )
+          if ( (_iCampaignType == 0 || _iCampaignType >= 5) && BBSupportDbgReport(2, "main\\GameSettings.cpp", 345, "_iCampaignType && _iCampaignType < CAMPAIGN_MAX_MAIN") == 1 )
           {
             __debugbreak();
           }
@@ -651,7 +651,7 @@ int __cdecl CGameSettings::GetCampaignStatus(int _iCampaignType) {
           {
             v5 |= *((_BYTE *)CGameSettings::m_uiCampaignSave + i);
           }
-          if ( v5 )
+          if ( v5 != 0 )
           {
             CGameSettings::Cryption((unsigned __int8 *)CGameSettings::m_uiCampaignSave, 0x10u);
             v3[0] = 0;
@@ -766,7 +766,7 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
     {
       if ( a1 < 17 || a1 >= 21 )
       {
-        if ( (!a1 || a1 >= 5) && BBSupportDbgReport(2, "main\\GameSettings.cpp", 487, "_iCampaignType && _iCampaignType < CAMPAIGN_MAX_MAIN") == 1 )
+        if ( (a1 == 0 || a1 >= 5) && BBSupportDbgReport(2, "main\\GameSettings.cpp", 487, "_iCampaignType && _iCampaignType < CAMPAIGN_MAX_MAIN") == 1 )
         {
           __debugbreak();
         }
@@ -787,13 +787,13 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
         BYTE1(CGameSettings::m_uiCampaignSave[2]) = v29[2];
         BYTE2(CGameSettings::m_uiCampaignSave[3]) = v29[3];
         CGameSettings::Cryption((unsigned __int8 *)CGameSettings::m_uiCampaignSave, 0x10u);
-        v19 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
+        v19 = ((CConfigVar *(__thiscall *)(CConfigManager *, const char *))g_pCfgMgr->GetConfigVar)(g_pCfgMgr, "MISCDATA2");
         v19->SetValueI(v19, CGameSettings::m_uiCampaignSave[0]);
-        v18 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
+        v18 = ((CConfigVar *(__thiscall *)(CConfigManager *, const char *))g_pCfgMgr->GetConfigVar)(g_pCfgMgr, "MISCDATA2");
         v18->SetValueI(v18, CGameSettings::m_uiCampaignSave[1]);
-        v17 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
+        v17 = ((CConfigVar *(__thiscall *)(CConfigManager *, const char *))g_pCfgMgr->GetConfigVar)(g_pCfgMgr, "MISCDATA2");
         v17->SetValueI(v17, CGameSettings::m_uiCampaignSave[2]);
-        v16 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
+        v16 = ((CConfigVar *(__thiscall *)(CConfigManager *, const char *))g_pCfgMgr->GetConfigVar)(g_pCfgMgr, "MISCDATA2");
         v16->SetValueI(v16, CGameSettings::m_uiCampaignSave[3]);
         ConfigFilePath = CGameSettings::GetConfigFilePath(&v34, L"MiscData2", 1);
         v35 = 4;
@@ -807,7 +807,7 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
         v11 = 15 << (4 * a1 - 68);
         CGameSettings::m_uiMD2CampaignSave &= ~v11;
         CGameSettings::m_uiMD2CampaignSave |= a2 << (4 * a1 - 68);
-        v24 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
+        v24 = ((CConfigVar *(__thiscall *)(CConfigManager *, const char *))g_pCfgMgr->GetConfigVar)(g_pCfgMgr, "MISCDATA2");
         v24->SetValueI(v24, CGameSettings::m_uiMD2CampaignSave);
         v10 = CGameSettings::GetConfigFilePath(&v33, L"MiscData2", 1);
         v9[2] = v10;
@@ -823,7 +823,7 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
       v14 = 15 << (4 * a1 - 44);
       CGameSettings::m_uiAOCampaignSave &= ~v14;
       CGameSettings::m_uiAOCampaignSave |= a2 << (4 * a1 - 44);
-      v25 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
+      v25 = ((CConfigVar *(__thiscall *)(CConfigManager *, const char *))g_pCfgMgr->GetConfigVar)(g_pCfgMgr, "MISCDATA2");
       v25->SetValueI(v25, CGameSettings::m_uiAOCampaignSave);
       v13 = CGameSettings::GetConfigFilePath(&v32, L"MiscData2", 1);
       v12 = v13;
@@ -836,10 +836,10 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
   }
   else if ( a1 == 10 )
   {
-    if ( a2 )
+    if ( a2 != 0 )
     {
       CGameSettings::m_uiMDCampaignSave |= 0x80000000;
-      v27 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
+      v27 = ((CConfigVar *(__thiscall *)(CConfigManager *, const char *))g_pCfgMgr->GetConfigVar)(g_pCfgMgr, "MISCDATA2");
       v27->SetValueI(v27, CGameSettings::m_uiMDCampaignSave);
       v7 = CGameSettings::GetConfigFilePath(&ret, L"MiscData2", 1);
       v35 = 0;
@@ -853,7 +853,7 @@ void __cdecl CGameSettings::SetCampaignStatus(int a1, int a2) {
   {
     CGameSettings::m_uiMDCampaignSave &= ~(15 << (4 * a1 - 20));
     CGameSettings::m_uiMDCampaignSave |= a2 << (4 * a1 - 20);
-    v26 = g_pCfgMgr->GetConfigVar(g_pCfgMgr, "MISCDATA2");
+    v26 = ((CConfigVar *(__thiscall *)(CConfigManager *, const char *))g_pCfgMgr->GetConfigVar)(g_pCfgMgr, "MISCDATA2");
     v26->SetValueI(v26, CGameSettings::m_uiMDCampaignSave);
     v15 = CGameSettings::GetConfigFilePath(&v31, L"MiscData2", 1);
     v35 = 1;
@@ -1018,19 +1018,19 @@ void __cdecl CGameSettings::SetGfxTextureQuality(int a1) {
 
 
 // address=[0x1494480]
-// Decompiled from int __cdecl CGameSettings::GetAIName(int a1, int a2)
+// Decompiled from std::wstring *__cdecl CGameSettings::GetAIName(std::wstring *a1, int a2)
 std::wstring __cdecl CGameSettings::GetAIName(int a1) {
   
-  std::wstring::wstring((int)&CGameSettings::m_wstrAINames + 28 * a2);
+  ((void (__stdcall *)(int))std::wstring::wstring)((int)&CGameSettings::m_wstrAINames[28 * a2]);
   return a1;
 }
 
 
 // address=[0x149f540]
-// Decompiled from int __cdecl CGameSettings::GetPlayerName(int a1)
+// Decompiled from std::wstring *__cdecl CGameSettings::GetPlayerName(std::wstring *a1)
 std::wstring __cdecl CGameSettings::GetPlayerName(void a1) {
   
-  std::wstring::wstring((int)&CGameSettings::m_wstrPlayerName);
+  ((void (__stdcall *)(int))std::wstring::wstring)((int)&CGameSettings::m_wstrPlayerName);
   return a1;
 }
 
@@ -1080,7 +1080,7 @@ bool __cdecl CGameSettings::GetBorderScrollEnabled(void) {
 // Decompiled from int CGameSettings::GetChatMessageFilter()
 int __cdecl CGameSettings::GetChatMessageFilter(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iChatMessageFilter);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iChatMessageFilter);
 }
 
 
@@ -1088,7 +1088,7 @@ int __cdecl CGameSettings::GetChatMessageFilter(void) {
 // Decompiled from int CGameSettings::GetExtendedTooltip()
 int __cdecl CGameSettings::GetExtendedTooltip(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iExtendedTooltip);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iExtendedTooltip);
 }
 
 
@@ -1104,7 +1104,7 @@ int __cdecl CGameSettings::GetGfxHighestResolution(void) {
 // Decompiled from int CGameSettings::GetMsgHistory()
 int __cdecl CGameSettings::GetMsgHistory(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iMsgHistory);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iMsgHistory);
 }
 
 
@@ -1112,7 +1112,7 @@ int __cdecl CGameSettings::GetMsgHistory(void) {
 // Decompiled from int CGameSettings::GetMsgLevelMask()
 int __cdecl CGameSettings::GetMsgLevelMask(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iMsgLevelMask);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iMsgLevelMask);
 }
 
 
@@ -1120,7 +1120,7 @@ int __cdecl CGameSettings::GetMsgLevelMask(void) {
 // Decompiled from int CGameSettings::GetMusicOn()
 int __cdecl CGameSettings::GetMusicOn(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iMusicOn);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iMusicOn);
 }
 
 
@@ -1128,7 +1128,7 @@ int __cdecl CGameSettings::GetMusicOn(void) {
 // Decompiled from int CGameSettings::GetMusicVolume()
 int __cdecl CGameSettings::GetMusicVolume(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iMusicVolume);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iMusicVolume);
 }
 
 
@@ -1144,7 +1144,7 @@ int __cdecl CGameSettings::GetScrollStepValue(void) {
 // Decompiled from int CGameSettings::GetSoundFXVolume()
 int __cdecl CGameSettings::GetSoundFXVolume(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iSoundFXVolume);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iSoundFXVolume);
 }
 
 
@@ -1152,7 +1152,7 @@ int __cdecl CGameSettings::GetSoundFXVolume(void) {
 // Decompiled from int CGameSettings::GetSoundFxOn()
 int __cdecl CGameSettings::GetSoundFxOn(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iSoundFXOn);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iSoundFXOn);
 }
 
 
@@ -1160,7 +1160,7 @@ int __cdecl CGameSettings::GetSoundFxOn(void) {
 // Decompiled from int CGameSettings::GetVoiceChatMicro()
 int __cdecl CGameSettings::GetVoiceChatMicro(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iVoiceChatMicro);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iVoiceChatMicro);
 }
 
 
@@ -1168,7 +1168,7 @@ int __cdecl CGameSettings::GetVoiceChatMicro(void) {
 // Decompiled from int CGameSettings::GetVoiceChatOn()
 int __cdecl CGameSettings::GetVoiceChatOn(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iVoiceChatOn);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iVoiceChatOn);
 }
 
 
@@ -1176,7 +1176,7 @@ int __cdecl CGameSettings::GetVoiceChatOn(void) {
 // Decompiled from int CGameSettings::GetVoiceChatVolume()
 int __cdecl CGameSettings::GetVoiceChatVolume(void) {
   
-  return CStaticConfigVarInt::operator int(&CGameSettings::m_iVoiceChatVolume);
+  return CStaticConfigVarInt::operator int((CStaticConfigVarInt *)CGameSettings::m_iVoiceChatVolume);
 }
 
 
@@ -1192,8 +1192,8 @@ void __cdecl CGameSettings::SetAlwaysUrgentMsg(bool a1) {
 // Decompiled from int __cdecl CGameSettings::SetBorderScrollEnabled(bool a1)
 void __cdecl CGameSettings::SetBorderScrollEnabled(bool a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iBorderScroll, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iBorderScroll, a1);
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -1201,7 +1201,7 @@ void __cdecl CGameSettings::SetBorderScrollEnabled(bool a1) {
 // Decompiled from _DWORD *__cdecl CGameSettings::SetChatMessageFilter(int a1)
 void __cdecl CGameSettings::SetChatMessageFilter(int a1) {
   
-  return CStaticConfigVarInt::operator=(CGameSettings::m_iChatMessageFilter, a1);
+  return ((_DWORD *(__thiscall *)(_DWORD *, int))CStaticConfigVarInt::operator=)(CGameSettings::m_iChatMessageFilter, a1);
 }
 
 
@@ -1209,7 +1209,7 @@ void __cdecl CGameSettings::SetChatMessageFilter(int a1) {
 // Decompiled from _DWORD *__cdecl CGameSettings::SetExtendedTooltip(int a1)
 void __cdecl CGameSettings::SetExtendedTooltip(int a1) {
   
-  return CStaticConfigVarInt::operator=(CGameSettings::m_iExtendedTooltip, a1);
+  return ((_DWORD *(__thiscall *)(_DWORD *, int))CStaticConfigVarInt::operator=)(CGameSettings::m_iExtendedTooltip, a1);
 }
 
 
@@ -1217,8 +1217,8 @@ void __cdecl CGameSettings::SetExtendedTooltip(int a1) {
 // Decompiled from int __cdecl CGameSettings::SetMsgHistory(int a1)
 void __cdecl CGameSettings::SetMsgHistory(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iMsgHistory, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=((CStaticConfigVarInt *)CGameSettings::m_iMsgHistory, a1);
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -1226,8 +1226,8 @@ void __cdecl CGameSettings::SetMsgHistory(int a1) {
 // Decompiled from int __cdecl CGameSettings::SetMsgLevelMask(int a1)
 void __cdecl CGameSettings::SetMsgLevelMask(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iMsgLevelMask, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=((CStaticConfigVarInt *)CGameSettings::m_iMsgLevelMask, a1);
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -1235,8 +1235,8 @@ void __cdecl CGameSettings::SetMsgLevelMask(int a1) {
 // Decompiled from int __cdecl CGameSettings::SetMusicOn(int a1)
 void __cdecl CGameSettings::SetMusicOn(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iMusicOn, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=((CStaticConfigVarInt *)CGameSettings::m_iMusicOn, a1);
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -1244,8 +1244,8 @@ void __cdecl CGameSettings::SetMusicOn(int a1) {
 // Decompiled from int __cdecl CGameSettings::SetMusicVolume(int a1)
 void __cdecl CGameSettings::SetMusicVolume(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iMusicVolume, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=((CStaticConfigVarInt *)CGameSettings::m_iMusicVolume, a1);
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -1253,8 +1253,8 @@ void __cdecl CGameSettings::SetMusicVolume(int a1) {
 // Decompiled from int __cdecl CGameSettings::SetScrollStepValue(int a1)
 void __cdecl CGameSettings::SetScrollStepValue(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iScrollStepValue, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=(&CGameSettings::m_iScrollStepValue, a1);
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -1262,8 +1262,8 @@ void __cdecl CGameSettings::SetScrollStepValue(int a1) {
 // Decompiled from int __cdecl CGameSettings::SetSoundFXOn(int a1)
 void __cdecl CGameSettings::SetSoundFXOn(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iSoundFXOn, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=((CStaticConfigVarInt *)CGameSettings::m_iSoundFXOn, a1);
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -1271,8 +1271,8 @@ void __cdecl CGameSettings::SetSoundFXOn(int a1) {
 // Decompiled from int __cdecl CGameSettings::SetSoundFXVolume(int a1)
 void __cdecl CGameSettings::SetSoundFXVolume(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iSoundFXVolume, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=((CStaticConfigVarInt *)CGameSettings::m_iSoundFXVolume, a1);
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -1280,7 +1280,7 @@ void __cdecl CGameSettings::SetSoundFXVolume(int a1) {
 // Decompiled from _DWORD *__cdecl CGameSettings::SetUserMP3(int a1)
 void __cdecl CGameSettings::SetUserMP3(int a1) {
   
-  return CStaticConfigVarInt::operator=(CGameSettings::m_iUserMP3, a1);
+  return ((_DWORD *(__thiscall *)(_DWORD *, int))CStaticConfigVarInt::operator=)(CGameSettings::m_iUserMP3, a1);
 }
 
 
@@ -1288,8 +1288,8 @@ void __cdecl CGameSettings::SetUserMP3(int a1) {
 // Decompiled from int __cdecl CGameSettings::SetVoiceChatMicro(int a1)
 void __cdecl CGameSettings::SetVoiceChatMicro(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iVoiceChatMicro, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=((CStaticConfigVarInt *)CGameSettings::m_iVoiceChatMicro, a1);
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -1297,8 +1297,8 @@ void __cdecl CGameSettings::SetVoiceChatMicro(int a1) {
 // Decompiled from int __cdecl CGameSettings::SetVoiceChatOn(int a1)
 void __cdecl CGameSettings::SetVoiceChatOn(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iVoiceChatOn, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=((CStaticConfigVarInt *)CGameSettings::m_iVoiceChatOn, a1);
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
@@ -1306,43 +1306,43 @@ void __cdecl CGameSettings::SetVoiceChatOn(int a1) {
 // Decompiled from int __cdecl CGameSettings::SetVoiceChatVolume(int a1)
 void __cdecl CGameSettings::SetVoiceChatVolume(int a1) {
   
-  CStaticConfigVarInt::operator=(CGameSettings::m_iVoiceChatVolume, a1);
-  return CGameSettings::Save();
+  CStaticConfigVarInt::operator=((CStaticConfigVarInt *)CGameSettings::m_iVoiceChatVolume, a1);
+  return ((int (*)(void))CGameSettings::Save)();
 }
 
 
 // address=[0x14c1000]
-// Decompiled from int __cdecl CGameSettings::GetHelpURLenglish(int a1)
+// Decompiled from std::string *__cdecl CGameSettings::GetHelpURLenglish(std::string *a1)
 std::string __cdecl CGameSettings::GetHelpURLenglish(void a1) {
   
-  std::string::string(&CGameSettings::m_strHelpURLenglish);
+  ((void (__stdcall *)(std::string *))std::string::string)(&CGameSettings::m_strHelpURLenglish);
   return a1;
 }
 
 
 // address=[0x14c1040]
-// Decompiled from int __cdecl CGameSettings::GetHelpURLgerman(int a1)
+// Decompiled from std::string *__cdecl CGameSettings::GetHelpURLgerman(std::string *a1)
 std::string __cdecl CGameSettings::GetHelpURLgerman(void a1) {
   
-  std::string::string(&CGameSettings::m_strHelpURLgerman);
+  ((void (__stdcall *)(std::string *))std::string::string)(&CGameSettings::m_strHelpURLgerman);
   return a1;
 }
 
 
 // address=[0x14c1080]
-// Decompiled from int __cdecl CGameSettings::GetNormURLenglish(int a1)
+// Decompiled from std::string *__cdecl CGameSettings::GetNormURLenglish(std::string *a1)
 std::string __cdecl CGameSettings::GetNormURLenglish(void a1) {
   
-  std::string::string(&CGameSettings::m_strNormURLenglish);
+  ((void (__stdcall *)(void *))std::string::string)(&CGameSettings::m_strNormURLenglish);
   return a1;
 }
 
 
 // address=[0x14c10c0]
-// Decompiled from int __cdecl CGameSettings::GetNormURLgerman(int a1)
+// Decompiled from std::string *__cdecl CGameSettings::GetNormURLgerman(std::string *a1)
 std::string __cdecl CGameSettings::GetNormURLgerman(void a1) {
   
-  std::string::string(&CGameSettings::m_strNormURLgerman);
+  ((void (__stdcall *)(void *))std::string::string)(&CGameSettings::m_strNormURLgerman);
   return a1;
 }
 
@@ -1408,7 +1408,7 @@ void __cdecl CGameSettings::LoadAINames(void) {
     }
     Dest[v8] = 0;
     v5 = std::wstring::wstring(&v10, Dest);
-    std::wstring::operator=(v5);
+    ((void (__stdcall *)(int))std::wstring::operator=)(v5);
     std::wstring::~wstring(&v10);
     v17 = -1;
     std::string::~string(&v13);

@@ -76,13 +76,13 @@ void __cdecl COwnerMapEx::NotifyCreateTile(int a1, int a2) {
   int v15; // [esp+2Ch] [ebp-8h]
   int v16; // [esp+30h] [ebp-4h]
 
-  if ( a2 )
+  if ( a2 != 0 )
   {
     v14 = COwnerMap::OwnerBit(a2);
     v2 = (Squares *)Y16X16::UnpackXFast(a1);
-    v16 = Squares::XYToVW(v2);
+    v16 = Squares::XYToVW((int)v2);
     v3 = (Squares *)Y16X16::UnpackYFast(a1);
-    v15 = Squares::XYToVW(v3);
+    v15 = Squares::XYToVW((int)v3);
     if ( (v14 & COwnerMap::OwnerBits1VW(v16, v15)) == 0 )
     {
       v13 = COwnerMap::OwnerBits1VWRef(v16, v15);
@@ -130,19 +130,19 @@ void __cdecl COwnerMapEx::NotifyDeleteTile(int a1, int a2) {
   int v9; // [esp+10h] [ebp-8h]
   int v10; // [esp+14h] [ebp-4h]
 
-  if ( a2 )
+  if ( a2 != 0 )
   {
     v2 = (Squares *)Y16X16::UnpackXFast(a1);
-    v10 = Squares::XYToVW(v2);
+    v10 = Squares::XYToVW((int)v2);
     v3 = (Squares *)Y16X16::UnpackYFast(a1);
-    v9 = Squares::XYToVW(v3);
+    v9 = Squares::XYToVW((int)v3);
     v5 = 16 << a2;
     for ( i = ITiling::FirstTileOfSquareVW(v10, v9);
-          i;
+          i != 0;
           i = CTile::NextSquareTile(v7) )
     {
-      v7 = (struct CTile *)ITiling::Tile(i);
-      v4 = CTile::Type(v7, v5);
+      v7 = ITiling::Tile(i);
+      v4 = ((int (__thiscall *)(void *, int))CTile::Type)(v7, v5);
       if ( (v5 & v4) != 0 )
       {
         return;

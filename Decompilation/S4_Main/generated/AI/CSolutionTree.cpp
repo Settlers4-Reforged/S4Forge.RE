@@ -17,13 +17,13 @@
  CSolutionTree::~CSolutionTree(void) {
   
   *this = (CDynList *)&CSolutionTree::_vftable_;
-  if ( this[5] )
+  if ( *(this + 5) != 0 )
   {
-    delete this[5];
+    delete *(this + 5);
   }
-  if ( this[3] )
+  if ( *(this + 3) != 0 )
   {
-    (**(void (__thiscall ***)(CDynList *, int))this[3])(this[3], 1);
+    (**(void (__thiscall ***)(_DWORD, int))*(this + 3))(*(this + 3), 1);
   }
   CDynListEntry::~CDynListEntry((CDynListEntry *)this);
 }
@@ -41,7 +41,7 @@
   CDynListEntry::CDynListEntry(this);
   *(_DWORD *)this = &CSolutionTree::_vftable_;
   C = (CParam *)operator new(0x1Cu);
-  if ( C )
+  if ( C != 0 )
   {
     v6 = CParam::CParam(C, a3);
   }
@@ -52,7 +52,7 @@
   *((_DWORD *)this + 3) = v6;
   *((_DWORD *)this + 4) = a2;
   v5 = (CDynList *)operator new(0xCu);
-  if ( v5 )
+  if ( v5 != 0 )
   {
     v4 = CDynList::CDynList(v5);
   }
@@ -73,7 +73,7 @@ void  CSolutionTree::NewSubSolution(int a2, class CParam * a3) {
   CSolutionTree *C; // [esp+10h] [ebp-10h]
 
   C = (CSolutionTree *)operator new(0x18u);
-  if ( C )
+  if ( C != 0 )
   {
     v5 = CSolutionTree::CSolutionTree(C, a2, a3);
   }
@@ -81,7 +81,7 @@ void  CSolutionTree::NewSubSolution(int a2, class CParam * a3) {
   {
     v5 = 0;
   }
-  return CDynList::addElement(this[5], v5);
+  return CDynList::addElement(*(this + 5), v5);
 }
 
 
@@ -89,7 +89,7 @@ void  CSolutionTree::NewSubSolution(int a2, class CParam * a3) {
 // Decompiled from int __thiscall CSolutionTree::NewSubSolution(CDynList **this, struct CSolutionTree *a2)
 void  CSolutionTree::NewSubSolution(class CSolutionTree * a2) {
   
-  return CDynList::addElement(this[5], a2);
+  return CDynList::addElement(*(this + 5), a2);
 }
 
 

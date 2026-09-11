@@ -35,10 +35,10 @@ void  IA_ColorReduction_Node::AddColor(class IA_ColorReduction_Color & a2) {
   
   IA_ColorReduction_Node *result; // eax
 
-  *((_DWORD *)this + 3) += IA_ColorReduction_Color::GetRed(a2);
-  *((_DWORD *)this + 4) += IA_ColorReduction_Color::GetGreen(a2);
-  *((_DWORD *)this + 5) += IA_ColorReduction_Color::GetBlue(a2);
-  *((_DWORD *)this + 6) += IA_ColorReduction_Color::GetAlpha(a2);
+  *((_DWORD *)this + 3) += (unsigned __int8)IA_ColorReduction_Color::GetRed(a2);
+  *((_DWORD *)this + 4) += (unsigned __int8)IA_ColorReduction_Color::GetGreen(a2);
+  *((_DWORD *)this + 5) += (unsigned __int8)IA_ColorReduction_Color::GetBlue(a2);
+  *((_DWORD *)this + 6) += (unsigned __int8)IA_ColorReduction_Color::GetAlpha(a2);
   result = this;
   ++*((_DWORD *)this + 2);
   return result;

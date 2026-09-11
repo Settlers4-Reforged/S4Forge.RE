@@ -22,7 +22,7 @@
   this->m_iAdditionalLocalAddress = 0;
   this->m_iLastSenderPeerId = -1;
   CSimpleNet::ClearErrorString(this);
-  if ( CSimpleNet::LaunchWinsock(this) && CSimpleNet::EnumerateLocalIP(this) )
+  if ( CSimpleNet::LaunchWinsock(this) && CSimpleNet::EnumerateLocalIP(this) != 0 )
   {
     CSimpleNet::ConnectSocket(this);
   }
@@ -76,19 +76,18 @@ bool  CSimpleNet::Run(void) {
   DWORD Time; // [esp+20h] [ebp-8h]
 
   Time = timeGetTime();
-  if ( this->m_iLastTraceRun + 20000 >= Time )
+  if ( this->m_iLastTraceRun + 20000 < Time )
   {
-    return 1;
+    iElapsedTimeMS = Time - this->m_iLastTraceRun;
+    v1 = (float)(unsigned int)this->m_iSentBytes;
+    iBytesPerSecond = (int)(float)(v1 / (float)((float)iElapsedTimeMS / 1000.0));
+    v2 = (float)(unsigned int)this->m_iSentCompressedBytes;
+    this->m_iCompressedBytesPerSecond = (unsigned int)(float)(v2 / (float)((float)iElapsedTimeMS / 1000.0));
+    this->m_iSentBytes = 0;
+    this->m_iSentCompressedBytes = 0;
+    this->m_iLastTraceRun = Time;
+    BBSupportTracePrintF(1, "SimpleNet: Bytes/sec: Uncompressed %u, Compressed %u", iBytesPerSecond, this->m_iCompressedBytesPerSecond);
   }
-  iElapsedTimeMS = Time - this->m_iLastTraceRun;
-  v1 = (float)(unsigned int)this->m_iSentBytes;
-  iBytesPerSecond = (int)(float)(v1 / (float)((float)iElapsedTimeMS / 1000.0));
-  v2 = (float)(unsigned int)this->m_iSentCompressedBytes;
-  this->m_iCompressedBytesPerSecond = (unsigned int)(float)(v2 / (float)((float)iElapsedTimeMS / 1000.0));
-  this->m_iSentBytes = 0;
-  this->m_iSentCompressedBytes = 0;
-  this->m_iLastTraceRun = Time;
-  BBSupportTracePrintF(1, "SimpleNet: Bytes/sec: Uncompressed %u, Compressed %u", iBytesPerSecond, this->m_iCompressedBytesPerSecond);
   return 1;
 }
 
@@ -124,7 +123,7 @@ bool  CSimpleNet::PopMessage(void * & _rMessage, unsigned int & a3, unsigned int
   Instance = (OnlineManager *)OnlineManager::GetInstance();
   OnlineManager::Receive(Instance, iReceivedData, &v10, _iPeerId, (_DWORD *)v8);
   this->m_iLastSenderPeerId = *_iPeerId;
-  if ( v10 && v10 != -1 )
+  if ( v10 != 0 && v10 != -1 )
   {
     if ( ((this->m_vRawMessageBuffer.m_iSize >> 12) & 0x3FF) != 0 )// (m_iSize / 4096) % 1024
     {
@@ -133,7 +132,7 @@ bool  CSimpleNet::PopMessage(void * & _rMessage, unsigned int & a3, unsigned int
       this->m_iLastDataLength = iCompressedSize;
       this->m_pDecompressor = j__LZHLCreateDecompressor();
       memset(this->m_vCompressedMessageBuffer, 0, sizeof(this->m_vCompressedMessageBuffer));
-      j__LZHLDecompress(this->m_pDecompressor, this->m_vCompressedMessageBuffer, &iCompressedSize, this->m_vRawMessageBuffer.m_cDataBuffer, &v8);
+      j__LZHLDecompress(this->m_pDecompressor, this->m_vCompressedMessageBuffer, &iCompressedSize, (char *)this->m_vRawMessageBuffer.m_cDataBuffer, &v8);
       j__LZHLDestroyDecompressor(this->m_pDecompressor);
       *_rMessage = this->m_vCompressedMessageBuffer;
       *a3 = (this->m_vRawMessageBuffer.m_iSize >> 12) & 0x3FF;
@@ -171,7 +170,7 @@ bool  CSimpleNet::PushMessage(unsigned int _iPeerId, unsigned int _iIp, unsigned
   {
     __debugbreak();
   }
-  if ( _bCompress )
+  if ( _bCompress != 0 )
   {
     if ( _iDataLength > 1024 )
     {
@@ -245,13 +244,13 @@ void  CSimpleNet::RemoveMsgsForIP(unsigned int _iAddress) {
   int ex; // [esp+70h] [ebp-4h]
 
   v20 = 0;
-  if ( std::list<SMessage>::size(&this->m_vResendMessages) )
+  if ( std::list<SMessage>::size(&this->m_vResendMessages) != 0 )
   {
-    std::list<SMessage>::begin(pIt);
+    std::list<SMessage>::begin((int)pIt);
     ex = 0;
     while ( 1 )
     {
-      pEnd2 = (std::_Iterator_base12 *)std::list<SMessage>::end(pEnd);
+      pEnd2 = (std::_Iterator_base12 *)std::list<SMessage>::end((int)pEnd);
       LOBYTE(ex) = 1;
       bIsAtEnd = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::operator!=((std::_Iterator_base12 *)pIt, pEnd2);
       LOBYTE(ex) = 0;
@@ -263,14 +262,14 @@ void  CSimpleNet::RemoveMsgsForIP(unsigned int _iAddress) {
       if ( std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::operator->(pIt)->m_iIp == _iAddress )
       {
         v15 = &v5;
-        v14 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>(pIt);
+        v14 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>((int)pIt);
         v13 = std::list<SMessage>::erase((int)v10, v5, v6, v7);
         std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>(v10);
-        if ( !std::list<SMessage>::size(&this->m_vResendMessages) )
+        if ( std::list<SMessage>::size(&this->m_vResendMessages) == 0 )
         {
           break;
         }
-        v17 = std::list<SMessage>::begin(v9);
+        v17 = std::list<SMessage>::begin((int)v9);
         v16 = v17;
         LOBYTE(ex) = 2;
         std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::operator=(pIt, v17);
@@ -280,14 +279,14 @@ void  CSimpleNet::RemoveMsgsForIP(unsigned int _iAddress) {
       }
       else
       {
-        std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::operator++(v8, 0);
+        std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::operator++((int)v8, 0);
         std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>(v8);
       }
     }
     ex = -1;
     std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>(pIt);
   }
-  if ( v20 )
+  if ( v20 != 0 )
   {
     v2 = this->GetIPString(this, _iAddress);
     return CTrace::Print("SimpleNet.cpp: Removed %d msgs for IP %s!", v20, v2);
@@ -314,38 +313,37 @@ bool  CSimpleNet::IsLocalIP(unsigned int _iAddress) {
   bool v12; // [esp+3Fh] [ebp-Dh]
   int v13; // [esp+48h] [ebp-4h]
 
-  if ( !std::list<SLocalAddress>::size(&this->m_vLocalAddresses) )
+  if ( std::list<SLocalAddress>::size(&this->m_vLocalAddresses) != 0 )
   {
-    return this->m_iAdditionalLocalAddress && _iAddress == this->m_iAdditionalLocalAddress;
-  }
-  std::list<SLocalAddress>::begin(&this->m_vLocalAddresses, (int)v5);
-  v13 = 0;
-  while ( 1 )
-  {
-    v8 = (std::_Iterator_base12 *)std::list<SLocalAddress>::end(&this->m_vLocalAddresses, (int)v3);
-    v7 = v8;
-    LOBYTE(v13) = 1;
-    v12 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator!=((std::_Iterator_base12 *)v5, v8);
-    LOBYTE(v13) = 0;
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v3);
-    if ( !v12 )
+    std::list<SLocalAddress>::begin(&this->m_vLocalAddresses, (int)v5);
+    v13 = 0;
+    while ( 1 )
     {
-      break;
+      v8 = (std::_Iterator_base12 *)std::list<SLocalAddress>::end(&this->m_vLocalAddresses, (int)v3);
+      v7 = v8;
+      LOBYTE(v13) = 1;
+      v12 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator!=((std::_Iterator_base12 *)v5, v8);
+      LOBYTE(v13) = 0;
+      std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v3);
+      if ( !v12 )
+      {
+        break;
+      }
+      v6 = std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator*(v5);
+      if ( v6->m_iAddress.S_un.S_addr == _iAddress )
+      {
+        v11 = 1;
+        v13 = -1;
+        std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v5);
+        return v11;
+      }
+      std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator++((int)v4, 0);
+      std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v4);
     }
-    v6 = std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator*(v5);
-    if ( v6->m_iAddress.S_un.S_addr == _iAddress )
-    {
-      v11 = 1;
-      v13 = -1;
-      std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v5);
-      return v11;
-    }
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::operator++((int)v4, 0);
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v4);
+    v13 = -1;
+    std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v5);
   }
-  v13 = -1;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(v5);
-  return this->m_iAdditionalLocalAddress && _iAddress == this->m_iAdditionalLocalAddress;
+  return this->m_iAdditionalLocalAddress != 0 && _iAddress == this->m_iAdditionalLocalAddress;
 }
 
 
@@ -353,7 +351,7 @@ bool  CSimpleNet::IsLocalIP(unsigned int _iAddress) {
 // Decompiled from void __thiscall CSimpleNet::Delete(CSimpleNet *this)
 void  CSimpleNet::Delete(void) {
   
-  if ( this )
+  if ( this != 0 )
   {
     delete this;
   }
@@ -428,7 +426,7 @@ unsigned int  CSimpleNet::GetLastSenderPeerId(void) {
 void  CSimpleNet::RemoveAllResendMsgs(void) {
   
   CTrace::Print("SimpleNet: Clearing resend list!");
-  if ( std::list<SMessage>::size(&this->m_vResendMessages) )
+  if ( std::list<SMessage>::size(&this->m_vResendMessages) != 0 )
   {
     std::list<SMessage>::clear(&this->m_vResendMessages);
   }
@@ -511,15 +509,15 @@ bool  CSimpleNet::RemoveMsgFromResendList(unsigned short a2) {
   bool v17; // [esp+4Fh] [ebp-Dh]
   int v18; // [esp+58h] [ebp-4h]
 
-  if ( !std::list<SMessage>::size(&this->m_vResendMessages) )
+  if ( std::list<SMessage>::size(&this->m_vResendMessages) == 0 )
   {
     return 1;
   }
-  std::list<SMessage>::begin(v9);
+  std::list<SMessage>::begin((int)v9);
   v18 = 0;
   while ( 1 )
   {
-    v14 = (std::_Iterator_base12 *)std::list<SMessage>::end(v8);
+    v14 = (std::_Iterator_base12 *)std::list<SMessage>::end((int)v8);
     v13 = v14;
     LOBYTE(v18) = 1;
     v17 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::operator!=((std::_Iterator_base12 *)v9, v14);
@@ -532,7 +530,7 @@ bool  CSimpleNet::RemoveMsgFromResendList(unsigned short a2) {
     if ( ((std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::operator->(v9)->m_sMessage.m_iSize >> 2) & 0x3FF) == a2 )
     {
       v12 = &v3;
-      v11 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>(v9);
+      v11 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::_List_const_iterator<std::_List_val<std::_List_simple_types<SMessage>>>((int)v9);
       v10 = std::list<SMessage>::erase((int)v7, v3, v4, v5);
       std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>(v7);
       v16 = 1;
@@ -540,7 +538,7 @@ bool  CSimpleNet::RemoveMsgFromResendList(unsigned short a2) {
       std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>(v9);
       return v16;
     }
-    std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::operator++(v6, 0);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::operator++((int)v6, 0);
     std::_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SMessage>>>(v6);
   }
   v18 = -1;
@@ -675,7 +673,7 @@ bool  CSimpleNet::ConnectSocket(void) {
   }
   exceptionBlock = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SLocalAddress>>>(pIt);
-  if ( this->m_iNumberReceiverSockets )
+  if ( this->m_iNumberReceiverSockets != 0 )
   {
     this->m_pSenderSocket = socket(2, 2, 0);
     if ( this->m_pSenderSocket == -1 )

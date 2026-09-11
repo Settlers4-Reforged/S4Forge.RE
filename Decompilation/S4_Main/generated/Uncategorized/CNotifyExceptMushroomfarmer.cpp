@@ -16,7 +16,7 @@
 // Decompiled from bool __thiscall CNotifyExceptMushroomfarmer::NotifyEntity(CNotifyExceptMushroomfarmer *this, struct IEntity *a2)
 bool  CNotifyExceptMushroomfarmer::NotifyEntity(class IEntity const & a2) {
   
-  return IEntity::ObjType((unsigned __int8 *)a2) != 1 || IEntity::Type((unsigned __int16 *)a2) != 53;
+  return IEntity::ObjType(a2) != SETTLER_OBJ || IEntity::Type(a2) != 53;
 }
 
 

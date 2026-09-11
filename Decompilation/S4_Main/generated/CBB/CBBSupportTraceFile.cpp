@@ -64,10 +64,10 @@
 
 
 // address=[0x2f2f090]
-// Decompiled from void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(BBSupportLib::CBBSupportTraceFile *this, const wchar_t *a2)
+// Decompiled from void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(BBSupportLib::CBBSupportTraceFile *this, wchar_t *a2)
 void __stdcall BBSupportLib::CBBSupportTraceFile::SetFilePath(wchar_t const * a2) {
   
-  if ( a2 && *a2 )
+  if ( a2 != 0 && *a2 != 0 )
   {
     CBBSupportLogFile::SetFilePath(this, a2);
   }
@@ -99,21 +99,20 @@ void __stdcall BBSupportLib::CBBSupportTraceFile::Open(void) {
   char result; // al
 
   result = CBBSupportLogFile::IsOpen(this);
-  if ( result )
+  if ( result == 0 )
   {
-    return result;
+    CBBSupportLogFile::Open(this);
+    result = CBBSupportLogFile::IsOpen(this);
+    if ( result != 0 )
+    {
+      (*(void (__cdecl **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 28))(this);
+      (*(void (__stdcall **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 52))(this);
+      (*(void (__stdcall **)(BBSupportLib::CBBSupportTraceFile *, const char *))(*(_DWORD *)this + 20))(this, " Trace file opened.\r\n");
+      (*(void (__cdecl **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 28))(this);
+      return (*(int (__stdcall **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 32))(this);
+    }
   }
-  CBBSupportLogFile::Open(this);
-  result = CBBSupportLogFile::IsOpen(this);
-  if ( !result )
-  {
-    return result;
-  }
-  (*(void (__cdecl **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 28))(this);
-  (*(void (__stdcall **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 52))(this);
-  (*(void (__stdcall **)(BBSupportLib::CBBSupportTraceFile *, const char *))(*(_DWORD *)this + 20))(this, " Trace file opened.\r\n");
-  (*(void (__cdecl **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 28))(this);
-  return (*(int (__stdcall **)(BBSupportLib::CBBSupportTraceFile *))(*(_DWORD *)this + 32))(this);
+  return result;
 }
 
 

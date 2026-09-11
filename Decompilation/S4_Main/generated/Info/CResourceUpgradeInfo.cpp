@@ -6,7 +6,7 @@
 // Decompiled from CResourceUpgradeInfo *__thiscall CResourceUpgradeInfo::CResourceUpgradeInfo(CResourceUpgradeInfo *this)
  CResourceUpgradeInfo::CResourceUpgradeInfo(void) {
   
-  CBuildingInfo::CBuildingInfo(this);
+  CBuildingInfo::CBuildingInfo((CBuildingInfo *)this);
   *(_DWORD *)this = &CResourceUpgradeInfo::_vftable_;
   return this;
 }

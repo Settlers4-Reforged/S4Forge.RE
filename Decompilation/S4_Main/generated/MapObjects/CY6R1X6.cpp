@@ -27,7 +27,7 @@ int __cdecl CY6R1X6::Distance(int a1, int a2) {
 
   v3 = (Grid *)CY6R1X6::DeltaX(a1, a2);
   v4 = CY6R1X6::DeltaY(a1, a2);
-  return Grid::Distance(v3, v4);
+  return Grid::Distance((int)v3, v4);
 }
 
 

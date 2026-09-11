@@ -19,7 +19,7 @@
 // Decompiled from int __thiscall LZHLEncoderStat::~LZHLEncoderStat(void **this)
  LZHLEncoderStat::~LZHLEncoderStat(void) {
   
-  operator delete[](this[2]);
+  operator delete[](*(this + 2));
   return HuffStat::~HuffStat(this);
 }
 
@@ -84,13 +84,13 @@ void  LZHLEncoderStat::calcStat(int * a2) {
       {
         v24 += (__int16)v30[2 * v20++ + 1 + 2 * v28];
       }
-      if ( v8 || j >= 8 || v24 > v11 )
+      if ( v8 != 0 || j >= 8 || v24 > v11 )
       {
         break;
       }
       v16 = v24;
     }
-    if ( j && (v2 = j__abs(v16 - v11), v2 <= j__abs(v24 - v11)) )
+    if ( j != 0 && (v2 = j__abs(v16 - v11)) <= j__abs(v24 - v11) )
     {
       --j;
     }

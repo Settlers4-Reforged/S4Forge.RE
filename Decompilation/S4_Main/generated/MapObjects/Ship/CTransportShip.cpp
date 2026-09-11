@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CTransportShip::New(int a1)
 class CPersistence * __cdecl CTransportShip::New(std::istream & a1) {
   
-  if ( CTransportShip::operator new(0x12Cu) )
+  if ( (void *)CTransportShip::operator new(0x12Cu) != 0 )
   {
-    return CTransportShip::CTransportShip(a1);
+    return ((_DWORD (__stdcall *)(int))CTransportShip::CTransportShip)(a1);
   }
   else
   {
@@ -59,10 +59,10 @@ void  CTransportShip::FillDialog(bool a2) {
         i < 8;
         ++i )
   {
-    MEMORY[0x3F1E790][3 * i] = *((_DWORD *)this + 3 * i + 49);
-    MEMORY[0x3F1E794][3 * i] = *((_DWORD *)this + 3 * i + 50);
+    g_cVehicleLoadInfo.m_vSlots[i].m_iGood = *((_DWORD *)this + 3 * i + 49);
+    g_cVehicleLoadInfo.m_vSlots[i].m_iAmount = *((_DWORD *)this + 3 * i + 50);
   }
-  MEMORY[0x3F1E78C] = 22;
+  g_cVehicleLoadInfo.m_iUnknown = 22;
   v3 = 604;
   if ( !a2 )
   {
@@ -98,7 +98,7 @@ int  CTransportShip::GetGoodAmount(int a2) {
 
 
 // address=[0x159eab0]
-// Decompiled from int __thiscall CTransportShip::AddGood(CTransportShip *this, int a2, int a3)
+// Decompiled from int __thiscall CTransportShip::AddGood(IEntity *this, int a2, int a3)
 int  CTransportShip::AddGood(int a2, int a3) {
   
   int v4; // [esp+0h] [ebp-18h]
@@ -124,13 +124,13 @@ int  CTransportShip::AddGood(int a2, int a3) {
       a3 -= v5;
     }
   }
-  if ( a3 )
+  if ( a3 != 0 )
   {
     for ( j = 0;
           j < 8;
           ++j )
     {
-      if ( !*((_DWORD *)this + 3 * j + 49) && a3 )
+      if ( *((_DWORD *)this + 3 * j + 49) == 0 && a3 != 0 )
       {
         if ( a3 <= 8 )
         {
@@ -146,16 +146,16 @@ int  CTransportShip::AddGood(int a2, int a3) {
       }
     }
   }
-  if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  if ( IEntity::FlagBits(this, (EntityFlag)1024) != 0 )
   {
-    (*(void (__thiscall **)(CTransportShip *, int))(*(_DWORD *)this + 148))(this, 1);
+    ((void (__thiscall *)(IEntity *, int))this->__vftable[1].DbgPrint)(this, 1);
   }
   return a3;
 }
 
 
 // address=[0x159ec10]
-// Decompiled from int __thiscall CTransportShip::RemoveGood(CTransportShip *this, int a2, int a3)
+// Decompiled from int __thiscall CTransportShip::RemoveGood(IEntity *this, int a2, int a3)
 int  CTransportShip::RemoveGood(int a2, int a3) {
   
   int v4; // [esp+8h] [ebp-Ch]
@@ -176,16 +176,16 @@ int  CTransportShip::RemoveGood(int a2, int a3) {
         v4 = *((_DWORD *)this + 3 * i + 50);
       }
       *((_DWORD *)this + 3 * i + 50) -= v4;
-      if ( !*((_DWORD *)this + 3 * i + 50) )
+      if ( *((_DWORD *)this + 3 * i + 50) == 0 )
       {
         *((_DWORD *)this + 3 * i + 49) = 0;
       }
       a3 -= v4;
     }
   }
-  if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  if ( IEntity::FlagBits(this, (EntityFlag)1024) != 0 )
   {
-    (*(void (__thiscall **)(CTransportShip *, int))(*(_DWORD *)this + 148))(this, 1);
+    ((void (__thiscall *)(IEntity *, int))this->__vftable[1].DbgPrint)(this, 1);
   }
   return a3;
 }
@@ -291,7 +291,7 @@ bool  CTransportShip::IsFull(void) {
           j < 8;
           ++j )
     {
-      if ( !*((_DWORD *)this + 3 * j + 49) )
+      if ( *((_DWORD *)this + 3 * j + 49) == 0 )
       {
         return 0;
       }
@@ -375,25 +375,25 @@ void  CTransportShip::TargetHarbourDestroyed(void) {
   unsigned __int8 *BuildingPtr; // [esp+Ch] [ebp-Ch]
   unsigned __int8 *v8; // [esp+10h] [ebp-8h]
 
-  if ( *((_DWORD *)this + 43) )
+  if ( *((_DWORD *)this + 43) != 0 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 43));
-    v6 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-    v1 = IEntity::ID();
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 43));
+    v6 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
+    v1 = ((int (__stdcall *)())IEntity::ID)();
     CTradingBuildingRole::UnregisterIncomingTrader(v6, v1, 1);
   }
   CTransportShip::SetTargetHarbourID(this, 0);
-  if ( *((_DWORD *)this + 44) )
+  if ( *((_DWORD *)this + 44) != 0 )
   {
-    v8 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 44));
-    if ( v8 )
+    v8 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 44));
+    if ( v8 != 0 )
     {
       v5 = *((_DWORD *)this + 44);
       CTransportShip::SetDepartHarbourID(this, 0);
       CTransportShip::SetTargetHarbourID(this, v5);
-      v4 = (CTradingBuildingRole *)CBuilding::Role(v8);
+      v4 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)v8);
       IsNeutralTrader = CTransportShip::IsNeutralTrader(this);
-      v2 = IEntity::ID();
+      v2 = ((int (__stdcall *)())IEntity::ID)();
       CTradingBuildingRole::RegisterIncomingTrader(v4, v2, 1, IsNeutralTrader);
       CTransportShip::MoveToTarget(this);
     }
@@ -401,13 +401,13 @@ void  CTransportShip::TargetHarbourDestroyed(void) {
     {
       CTransportShip::SetFree(this);
       CTransportShip::SetJobType(this, 0);
-      CTransportShip::TryToGoHome(this);
+      CTransportShip::TryToGoHome((Y16X16 **)this);
     }
   }
   else
   {
     CTransportShip::SetJobType(this, 0);
-    CTransportShip::TryToGoHome(this);
+    CTransportShip::TryToGoHome((Y16X16 **)this);
   }
 }
 
@@ -443,14 +443,14 @@ void  CTransportShip::DepartHarbourDestroyed(void) {
 
   v4 = *((_DWORD *)this + 44);
   CTransportShip::SetDepartHarbourID(this, 0);
-  if ( *((_BYTE *)this + 184) )
+  if ( *((_BYTE *)this + 184) != 0 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v4);
-    v2 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-    v1 = IEntity::ID();
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v4);
+    v2 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
+    v1 = ((int (__stdcall *)())IEntity::ID)();
     CTradingBuildingRole::UnregisterIncomingTrader(v2, v1, 1);
     CTransportShip::SetJobType(this, 0);
-    CTransportShip::TryToGoHome(this);
+    CTransportShip::TryToGoHome((Y16X16 **)this);
   }
 }
 
@@ -477,47 +477,44 @@ void  CTransportShip::ShipArrived(void) {
   unsigned __int8 *v8; // [esp+Ch] [ebp-8h]
   unsigned __int8 *v9; // [esp+Ch] [ebp-8h]
 
-  if ( *((_BYTE *)this + 184) )
+  if ( *((_BYTE *)this + 184) != 0 && *((_DWORD *)this + 44) != 0 )
   {
-    if ( *((_DWORD *)this + 44) )
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 44));
+    if ( BuildingPtr != 0 )
     {
-      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 44));
-      if ( BuildingPtr )
-      {
-        v6 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-        v1 = IEntity::ID();
-        CTradingBuildingRole::VehicleArrived(v6, v1, 1);
-      }
+      v6 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
+      v1 = ((int (__stdcall *)())IEntity::ID)();
+      CTradingBuildingRole::VehicleArrived(v6, v1, 1);
     }
   }
-  if ( *((_BYTE *)this + 185) )
+  if ( *((_BYTE *)this + 185) != 0 )
   {
-    if ( *((_DWORD *)this + 43) )
+    if ( *((_DWORD *)this + 43) != 0 )
     {
-      v8 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 43));
-      if ( v8 )
+      v8 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 43));
+      if ( v8 != 0 )
       {
-        v5 = (CTradingBuildingRole *)CBuilding::Role(v8);
-        v2 = IEntity::ID();
+        v5 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)v8);
+        v2 = ((int (__stdcall *)())IEntity::ID)();
         CTradingBuildingRole::VehicleArrived(v5, v2, 1);
       }
     }
-    if ( *((_DWORD *)this + 44) )
+    if ( *((_DWORD *)this + 44) != 0 )
     {
-      v9 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 44));
-      if ( v9 )
+      v9 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 44));
+      if ( v9 != 0 )
       {
-        if ( IEntity::Type((unsigned __int16 *)v9) != 32 && BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 743, "pBuilding->Type() == BUILDING_PORT") == 1 )
+        if ( IEntity::Type((IEntity *)v9) != 32 && BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 743, "pBuilding->Type() == BUILDING_PORT") == 1 )
         {
           __debugbreak();
         }
-        v4 = (CTradingBuildingRole *)CBuilding::Role(v9);
-        v3 = IEntity::ID();
+        v4 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)v9);
+        v3 = ((int (__stdcall *)())IEntity::ID)();
         CTradingBuildingRole::VehicleArrivedAtTarget(v4, v3, 1);
       }
     }
   }
-  if ( *((_BYTE *)this + 296) )
+  if ( *((_BYTE *)this + 296) != 0 )
   {
     *((_BYTE *)this + 296) = 0;
     CTransportShip::SetFree(this);
@@ -538,20 +535,20 @@ void  CTransportShip::MoveToTarget(void) {
 
   v6 = this;
   result = this;
-  if ( !*((_DWORD *)this + 43) )
+  if ( *((_DWORD *)this + 43) != 0 )
   {
-    return result;
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)v6 + 43));
+    if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 771, "pTargetBuilding") == 1 )
+    {
+      __debugbreak();
+    }
+    WorkingAreaPackedXY = (Y16X16 *)CBuilding::GetWorkingAreaPackedXY(BuildingPtr);
+    Y16X16::UnpackXYFast((int)WorkingAreaPackedXY, &v3, &v4);
+    CTransportShip::SetGoToSource(v6, 0);
+    CTransportShip::SetGoToTarget(v6, 1);
+    return (CTransportShip *)((int (__thiscall *)(CVehicle *, int, int, int))CVehicle::MoveTo)((CVehicle *)v6, v3, v4, 0);
   }
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)v6 + 43));
-  if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 771, "pTargetBuilding") == 1 )
-  {
-    __debugbreak();
-  }
-  WorkingAreaPackedXY = (Y16X16 *)CBuilding::GetWorkingAreaPackedXY(BuildingPtr);
-  Y16X16::UnpackXYFast(WorkingAreaPackedXY, &v3, &v4);
-  CTransportShip::SetGoToSource(v6, 0);
-  CTransportShip::SetGoToTarget(v6, 1);
-  return (CTransportShip *)CVehicle::MoveTo(v6, v3, v4, 0);
+  return result;
 }
 
 
@@ -578,12 +575,12 @@ void  CTransportShip::DropGoods(void) {
         ++i )
   {
     GoodAmount = CTransportShip::GetGoodAmount(this, i);
-    if ( GoodAmount )
+    if ( GoodAmount != 0 )
     {
-      CTransportShip::RemoveGood(this, i, GoodAmount);
+      CTransportShip::RemoveGood((IEntity *)this, i, GoodAmount);
     }
   }
-  return IEntity::ClearFlagBits(this, ENTITY_FLAG_VulnerableMask);
+  return IEntity::ClearFlagBits((IEntity *)this, ENTITY_FLAG_VulnerableMask);
 }
 
 
@@ -597,7 +594,7 @@ void  CTransportShip::TryToGoHome(void) {
   Y16X16 **v4; // [esp+8h] [ebp-4h]
 
   v4 = this;
-  Y16X16::UnpackXYFast(this[45], &v2, &v3);
+  Y16X16::UnpackXYFast((int)*(this + 45), &v2, &v3);
   CTransportShip::SetFree((CTransportShip *)v4);
   CVehicle::MoveTo((CVehicle *)v4, v2, v3, 0);
   CTransportShip::SetGoToSource((CTransportShip *)v4, 0);
@@ -624,19 +621,19 @@ void  CTransportShip::GoToHomeTradingBuilding(void) {
   CTransportShip *v8; // [esp+10h] [ebp-4h]
 
   v8 = this;
-  v7 = (Y16X16 *)*((_DWORD *)this + 45);
-  if ( *((_DWORD *)this + 73) == 1 && *((_DWORD *)v8 + 44) )
+  v7 = *((Y16X16 **)this + 45);
+  if ( *((_DWORD *)this + 73) == 1 && *((_DWORD *)v8 + 44) != 0 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)v8 + 44));
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)v8 + 44));
     v7 = (Y16X16 *)CBuilding::EnsignPackedXY(BuildingPtr);
   }
-  if ( *((_DWORD *)v8 + 73) == 2 && *((_DWORD *)v8 + 43) )
+  if ( *((_DWORD *)v8 + 73) == 2 && *((_DWORD *)v8 + 43) != 0 )
   {
-    v2 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)v8 + 43));
+    v2 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)v8 + 43));
     v7 = (Y16X16 *)CBuilding::EnsignPackedXY(v2);
   }
-  Y16X16::UnpackXYFast(v7, &v5, &v6);
-  CVehicle::MoveTo(v8, v5, v6, 0);
+  Y16X16::UnpackXYFast((int)v7, &v5, &v6);
+  CVehicle::MoveTo((CVehicle *)v8, v5, v6, 0);
   v4 = *((_DWORD *)v8 + 44);
   *((_DWORD *)v8 + 44) = *((_DWORD *)v8 + 43);
   *((_DWORD *)v8 + 43) = v4;
@@ -653,7 +650,7 @@ void  CTransportShip::SetHomeID(int a2) {
   unsigned __int8 *result; // eax
   unsigned __int8 *v4; // [esp+4h] [ebp-4h]
 
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 812, "_iHomeBuildingID!=0") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 812, "_iHomeBuildingID!=0") == 1 )
   {
     __debugbreak();
   }
@@ -661,9 +658,9 @@ void  CTransportShip::SetHomeID(int a2) {
   {
     __debugbreak();
   }
-  result = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
+  result = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
   v4 = result;
-  if ( !result )
+  if ( result == 0 )
   {
     result = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Ship\\TransportShip.cpp", 815, "pBuilding!=NULL");
     if ( result == (unsigned __int8 *)1 )
@@ -671,12 +668,11 @@ void  CTransportShip::SetHomeID(int a2) {
       __debugbreak();
     }
   }
-  if ( !v4 )
+  if ( v4 != 0 )
   {
-    return result;
+    result = (unsigned __int8 *)CBuilding::EnsignPackedXY(v4);
+    *((_DWORD *)this + 45) = result;
   }
-  result = (unsigned __int8 *)CBuilding::EnsignPackedXY(v4);
-  *((_DWORD *)this + 45) = result;
   return result;
 }
 
@@ -726,7 +722,7 @@ void  CTransportShip::SetGoToTarget(bool a2) {
 
 
 // address=[0x159f720]
-// Decompiled from CTransportShip *__thiscall CTransportShip::VehicleLogicUpdate(CTransportShip *this)
+// Decompiled from CTransportShip *__thiscall CTransportShip::VehicleLogicUpdate(CShip *this)
 void  CTransportShip::VehicleLogicUpdate(void) {
   
   int v1; // eax
@@ -739,55 +735,57 @@ void  CTransportShip::VehicleLogicUpdate(void) {
   int v8; // [esp+4h] [ebp-14h]
   unsigned int TickCounter; // [esp+8h] [ebp-10h]
   int v10; // [esp+Ch] [ebp-Ch]
-  char v11; // [esp+10h] [ebp-8h]
+  unsigned __int8 v11; // [esp+10h] [ebp-8h]
 
   TickCounter = CStateGame::GetTickCounter(g_pGame);
-  if ( CShip::FULL_UPDATE_DELAY + *((_DWORD *)this + 42) < TickCounter )
+  if ( CShip::FULL_UPDATE_DELAY + this->m_uU2 < TickCounter )
   {
     v10 = CShip::RepairBuildingInRange(this);
-    if ( v10 )
+    if ( v10 != 0 )
     {
       CShip::RepairAt(this, v10);
     }
-    *((_DWORD *)this + 42) = TickCounter;
+    this->m_uU2 = TickCounter;
   }
-  if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  if ( IEntity::FlagBits(this, (EntityFlag)1024) != 0 )
   {
-    (*(void (__thiscall **)(CTransportShip *, int))(*(_DWORD *)this + 148))(this, 1);
+    ((void (__thiscall *)(CShip *, int))this->j_?FillDialog@CShip@@UAEX_N@Z)(this, 1);
   }
-  v11 = *((_BYTE *)this + 107);
+  v11 = this->m_uCurrentTask;
   switch ( v11 )
   {
-    case 6:
-      *((_BYTE *)this + 192) = *((_BYTE *)this + 107);
-      v7 = std::auto_ptr<CWalking>::operator->(v6);
+    case 6u:
+      *((_BYTE *)this + 192) = this->m_uCurrentTask;
+      v7 = ((_DWORD (__cdecl *)(_DWORD))std::auto_ptr<CWalking>::operator->)(v6);
       v3 = IEntity::PackedXY(this);
       v4 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v7 + 12))(v7, v3);
       CVehicle::WalkDirAndRegister(this, v4, 1);
       break;
-    case 17:
-      if ( CTransportShip::GetJobType(this) != 3 && CTransportShip::GetJobType(this) != 4 )
+    case 0x11u:
+      if ( CTransportShip::GetJobType((CTransportShip *)this) != 3 && CTransportShip::GetJobType((CTransportShip *)this) != 4 )
       {
-        v8 = std::auto_ptr<CWalking>::operator->(v6);
+        v8 = ((_DWORD (__cdecl *)(_DWORD))std::auto_ptr<CWalking>::operator->)(v6);
         v1 = IEntity::PackedXY(this);
         v2 = (*(int (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v8 + 16))(v8, v1, 0);
         CVehicle::WalkDirAndRegister(this, v2, 0);
       }
       break;
-    case 27:
+    case 0x1Bu:
       CVehicle::GetNextJob(this);
       break;
+    default:
+      break;
   }
-  if ( *((unsigned __int8 *)this + 107) != *((unsigned __int8 *)this + 192) && *((_BYTE *)this + 192) == 6 )
+  if ( this->m_uCurrentTask != *((unsigned __int8 *)this + 192) && *((_BYTE *)this + 192) == 6 )
   {
-    CTransportShip::ShipArrived(this);
+    CTransportShip::ShipArrived((CTransportShip *)this);
   }
-  if ( (*((_BYTE *)this + 104) & 0x40) != 0 )
+  if ( (this->m_uWalkResult & 0x40) != 0 )
   {
-    CTransportShip::TargetHarbourDestroyed(this);
+    CTransportShip::TargetHarbourDestroyed((CTransportShip *)this);
   }
-  result = this;
-  *((_BYTE *)this + 192) = *((_BYTE *)this + 107);
+  result = (CTransportShip *)this;
+  *((_BYTE *)this + 192) = this->m_uCurrentTask;
   return result;
 }
 
@@ -796,42 +794,42 @@ void  CTransportShip::VehicleLogicUpdate(void) {
 // Decompiled from void __thiscall CTransportShip::ConvertEventIntoGoal(CTransportShip *this, struct CEntityEvent *a2)
 void  CTransportShip::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
-  if ( *((_DWORD *)a2 + 1) == 9 || *((_DWORD *)a2 + 1) == 7 )
+  if ( a2->m_iEvent == 9 || a2->m_iEvent == 7 )
   {
-    if ( *((_DWORD *)a2 + 3) == *((_DWORD *)this + 43) )
+    if ( a2->m_iDataA == *((_DWORD *)this + 43) )
     {
       CTransportShip::TargetHarbourDestroyed(this);
     }
-    if ( *((_DWORD *)a2 + 3) == *((_DWORD *)this + 44) )
+    if ( a2->m_iDataA == *((_DWORD *)this + 44) )
     {
-      CTransportShip::DepartHarbourDestroyed(this);
+      CTransportShip::DepartHarbourDestroyed((IEntity *)this);
     }
   }
-  CVehicle::ConvertEventIntoGoal(this, a2);
+  CVehicle::ConvertEventIntoGoal((CVehicle *)this, a2);
 }
 
 
 // address=[0x159f910]
-// Decompiled from CTransportShip *__thiscall CTransportShip::TakeJob(CTransportShip *this)
+// Decompiled from CTransportShip *__thiscall CTransportShip::TakeJob(CShip *this)
 void  CTransportShip::TakeJob(void) {
   
   CTransportShip *result; // eax
 
   CShip::TakeJob(this);
-  result = this;
-  *((_BYTE *)this + 192) = *((_BYTE *)this + 107);
+  result = (CTransportShip *)this;
+  *((_BYTE *)this + 192) = this->m_uCurrentTask;
   return result;
 }
 
 
 // address=[0x159f940]
-// Decompiled from void *__thiscall CTransportShip::GetGfxInfos(CTransportShip *this)
+// Decompiled from SGfxObjectInfo *__thiscall CTransportShip::GetGfxInfos(CShip *this)
 struct SGfxObjectInfo *  CTransportShip::GetGfxInfos(void) {
   
   CShip::GetGfxInfos((int)this);
-  if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  if ( IEntity::FlagBits(this, (EntityFlag)1024) != 0 )
   {
-    MEMORY[0x40FE264] = CShip::GetHealthDisplayID(this);
+    IEntity::m_sGfxInfo.m_uDecorator = CShip::GetHealthDisplayID(this);
   }
   return &IEntity::m_sGfxInfo;
 }
@@ -846,9 +844,9 @@ void  CTransportShip::SetNeutralTraderStatus(bool a2) {
   *((_BYTE *)this + 193) = a2;
   if ( a2 )
   {
-    IEntity::ClearFlagBits(this, ENTITY_FLAG_VulnerableMask);
+    IEntity::ClearFlagBits((IEntity *)this, ENTITY_FLAG_VulnerableMask);
     result = this;
-    if ( !*((_DWORD *)this + 73) || *((_DWORD *)this + 73) == 2 )
+    if ( *((_DWORD *)this + 73) == 0 || *((_DWORD *)this + 73) == 2 )
     {
       *((_DWORD *)this + 73) = 1;
       result = this;
@@ -892,7 +890,7 @@ void * __cdecl CTransportShip::operator new(unsigned int a1) {
 
 
 // address=[0x159fa80]
-// Decompiled from void __cdecl CTransportShip::operator delete(void *a1)
+// Decompiled from void __cdecl CTransportShip::operator delete(_DWORD *a1)
 void __cdecl CTransportShip::operator delete(void * a1) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -905,7 +903,7 @@ void __cdecl CTransportShip::operator delete(void * a1) {
   
   int v3; // [esp+4h] [ebp-34h] BYREF
   int v4; // [esp+8h] [ebp-30h] BYREF
-  int v5; // [esp+Ch] [ebp-2Ch] BYREF
+  unsigned int v5; // [esp+Ch] [ebp-2Ch] BYREF
   _DWORD pExceptionObject[2]; // [esp+10h] [ebp-28h] BYREF
   int m; // [esp+18h] [ebp-20h]
   int k; // [esp+1Ch] [ebp-1Ch]
@@ -915,7 +913,7 @@ void __cdecl CTransportShip::operator delete(void * a1) {
   int v12; // [esp+34h] [ebp-4h]
 
   v11 = this;
-  CShip::CShip(a2);
+  ((void (__stdcall *)(int))CShip::CShip)(a2);
   v12 = 0;
   *(_DWORD *)v11 = &CTransportShip::_vftable_;
   v11[193] = 0;
@@ -925,79 +923,79 @@ void __cdecl CTransportShip::operator delete(void * a1) {
   pExceptionObject[1] = v5 - 1;
   switch ( v5 )
   {
-    case 1:
-      operator^<int>(a2, (int)(v11 + 172));
-      operator^<int>(a2, (int)(v11 + 176));
-      operator^<int>(a2, (int)(v11 + 180));
+    case 1u:
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 43);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 44);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 45);
       operator^<bool>(a2, v11 + 184);
       operator^<bool>(a2, v11 + 185);
-      operator^<int>(a2, (int)(v11 + 188));
-      operator^<unsigned char>(a2, v11 + 192);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 47);
+      operator^<unsigned char>(a2, (unsigned __int8 *)v11 + 192);
       for ( i = 0;
             i < 8;
             ++i )
       {
-        operator^<int>(a2, (int)&v11[12 * i + 200]);
-        operator^<int>(a2, (int)&v11[12 * i + 204]);
-        operator^<int>(a2, (int)&v11[12 * i + 196]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * i + 200]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * i + 204]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * i + 196]);
       }
       break;
-    case 2:
-      operator^<int>(a2, (int)(v11 + 172));
-      operator^<int>(a2, (int)(v11 + 176));
-      operator^<int>(a2, (int)(v11 + 180));
+    case 2u:
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 43);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 44);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 45);
       operator^<bool>(a2, v11 + 184);
       operator^<bool>(a2, v11 + 185);
-      operator^<int>(a2, (int)(v11 + 188));
-      operator^<unsigned char>(a2, v11 + 192);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 47);
+      operator^<unsigned char>(a2, (unsigned __int8 *)v11 + 192);
       for ( j = 0;
             j < 8;
             ++j )
       {
-        operator^<int>(a2, (int)&v11[12 * j + 200]);
-        operator^<int>(a2, (int)&v11[12 * j + 204]);
-        operator^<int>(a2, (int)&v11[12 * j + 196]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * j + 200]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * j + 204]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * j + 196]);
       }
       operator^<bool>(a2, v11 + 193);
       break;
-    case 3:
-      operator^<int>(a2, (int)(v11 + 172));
-      operator^<int>(a2, (int)(v11 + 176));
-      operator^<int>(a2, (int)(v11 + 180));
+    case 3u:
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 43);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 44);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 45);
       operator^<bool>(a2, v11 + 184);
       operator^<bool>(a2, v11 + 185);
-      operator^<int>(a2, (int)(v11 + 188));
-      operator^<unsigned char>(a2, v11 + 192);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 47);
+      operator^<unsigned char>(a2, (unsigned __int8 *)v11 + 192);
       for ( k = 0;
             k < 8;
             ++k )
       {
-        operator^<int>(a2, (int)&v11[12 * k + 200]);
-        operator^<int>(a2, (int)&v11[12 * k + 204]);
-        operator^<int>(a2, (int)&v11[12 * k + 196]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * k + 200]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * k + 204]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * k + 196]);
       }
       operator^<bool>(a2, v11 + 193);
-      operator^<int>(a2, (int)&v4);
+      operator^<int>((struct std::istream *)a2, &v4);
       *((_DWORD *)v11 + 73) = v4;
       break;
-    case 4:
-      operator^<int>(a2, (int)(v11 + 172));
-      operator^<int>(a2, (int)(v11 + 176));
-      operator^<int>(a2, (int)(v11 + 180));
+    case 4u:
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 43);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 44);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 45);
       operator^<bool>(a2, v11 + 184);
       operator^<bool>(a2, v11 + 185);
-      operator^<int>(a2, (int)(v11 + 188));
-      operator^<unsigned char>(a2, v11 + 192);
+      operator^<int>((struct std::istream *)a2, (int *)v11 + 47);
+      operator^<unsigned char>(a2, (unsigned __int8 *)v11 + 192);
       for ( m = 0;
             m < 8;
             ++m )
       {
-        operator^<int>(a2, (int)&v11[12 * m + 200]);
-        operator^<int>(a2, (int)&v11[12 * m + 204]);
-        operator^<int>(a2, (int)&v11[12 * m + 196]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * m + 200]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * m + 204]);
+        operator^<int>((struct std::istream *)a2, (int *)&v11[12 * m + 196]);
       }
       operator^<bool>(a2, v11 + 193);
-      operator^<int>(a2, (int)&v3);
+      operator^<int>((struct std::istream *)a2, &v3);
       *((_DWORD *)v11 + 73) = v3;
       operator^<bool>(a2, v11 + 296);
       break;
@@ -1021,28 +1019,28 @@ void  CTransportShip::Store(std::ostream & a2) {
   int *v6; // [esp+Ch] [ebp-4h]
 
   v6 = this;
-  CShip::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))CShip::Store)(a2);
   v4 = 4;
-  operator^<unsigned int>(a2, &v4);
-  operator^<int>((int)a2, v6 + 43);
-  operator^<int>((int)a2, v6 + 44);
-  operator^<int>((int)a2, v6 + 45);
-  operator^<bool>((int)a2, (int)(v6 + 46));
-  operator^<bool>((int)a2, (int)v6 + 185);
-  operator^<int>((int)a2, v6 + 47);
-  operator^<unsigned char>(a2, (int)(v6 + 48));
+  operator^<unsigned int>(a2, (unsigned int *)&v4);
+  operator^<int>(a2, v6 + 43);
+  operator^<int>(a2, v6 + 44);
+  operator^<int>(a2, v6 + 45);
+  operator^<bool>(a2, (bool *)v6 + 184);
+  operator^<bool>(a2, (bool *)v6 + 185);
+  operator^<int>(a2, v6 + 47);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v6 + 192);
   for ( i = 0;
         i < 8;
         ++i )
   {
-    operator^<int>((int)a2, &v6[3 * i + 50]);
-    operator^<int>((int)a2, &v6[3 * i + 51]);
-    operator^<int>((int)a2, &v6[3 * i + 49]);
+    operator^<int>(a2, &v6[3 * i + 50]);
+    operator^<int>(a2, &v6[3 * i + 51]);
+    operator^<int>(a2, &v6[3 * i + 49]);
   }
-  operator^<bool>((int)a2, (int)v6 + 193);
+  operator^<bool>(a2, (bool *)v6 + 193);
   v3 = v6[73];
-  operator^<int>((int)a2, &v3);
-  return operator^<bool>((int)a2, (int)(v6 + 74));
+  operator^<int>(a2, &v3);
+  return (int)operator^<bool>(a2, (bool *)v6 + 296);
 }
 
 
@@ -1058,12 +1056,12 @@ unsigned long  CTransportShip::ClassID(void)const {
 // [Decompilation failed for static unsigned long CTransportShip::m_iClassID]
 
 // address=[0x15a01e0]
-// Decompiled from CTransportShip *__thiscall CTransportShip::CTransportShip(CTransportShip *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
+// Decompiled from CTransportShip *__thiscall CTransportShip::CTransportShip(CTransportShip *this, int a2, int a3, int a4, int a5, int a6, DWORD a7, bool a8)
  CTransportShip::CTransportShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
   int i; // [esp+0h] [ebp-8h]
 
-  CShip::CShip(this, a2, a3, a4, a5, a6, a7, a8);
+  CShip::CShip((CShip *)this, a2, a3, a4, a5, a6, a7, a8);
   *(_DWORD *)this = &CTransportShip::_vftable_;
   *((_BYTE *)this + 193) = 0;
   *((_DWORD *)this + 73) = 0;
@@ -1086,10 +1084,10 @@ unsigned long  CTransportShip::ClassID(void)const {
 
 
 // address=[0x15a02d0]
-// Decompiled from void __thiscall CTransportShip::~CTransportShip(CTransportShip *this)
+// Decompiled from void __thiscall CTransportShip::~CTransportShip(CShip *this)
  CTransportShip::~CTransportShip(void) {
   
-  *(_DWORD *)this = &CTransportShip::_vftable_;
+  this->__vftable = (CShip_vtbl *)&CTransportShip::_vftable_;
   CShip::~CShip(this);
 }
 

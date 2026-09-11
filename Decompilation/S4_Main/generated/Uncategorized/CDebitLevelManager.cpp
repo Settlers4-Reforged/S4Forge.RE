@@ -27,32 +27,32 @@ bool  CDebitLevelManager::AddDebitLevel(int a2, enum PILE_TYPES a3, bool a4, int
   int i; // [esp+0h] [ebp-Ch]
   int v12; // [esp+4h] [ebp-8h]
 
-  v12 = this[200];
+  v12 = *(this + 200);
   for ( i = 0;
-        i < this[200];
+        i < *(this + 200);
         ++i )
   {
-    if ( this[10 * i] == a2 && this[10 * i + 1] == a3 && LOBYTE(this[10 * i + 2]) == a4 && this[10 * i + 3] == a5 )
+    if ( *(this + 10 * i) == a2 && *(this + 10 * i + 1) == a3 && *((unsigned __int8 *)this + 40 * i + 8) == a4 && *(this + 10 * i + 3) == a5 )
     {
       v12 = i;
-      --this[200];
+      --*(this + 200);
     }
   }
-  this[10 * v12] = a2;
-  this[10 * v12 + 1] = a3;
-  LOBYTE(this[10 * v12 + 2]) = a4;
-  this[10 * v12 + 3] = a5;
-  this[10 * v12 + 4] = a6;
-  this[10 * v12 + 5] = a7;
-  this[10 * v12 + 6] = a8;
-  this[10 * v12 + 7] = a9;
-  this[10 * v12 + 8] = a10;
-  ++this[200];
+  *(this + 10 * v12) = a2;
+  *(this + 10 * v12 + 1) = a3;
+  *((_BYTE *)this + 40 * v12 + 8) = a4;
+  *(this + 10 * v12 + 3) = a5;
+  *(this + 10 * v12 + 4) = a6;
+  *(this + 10 * v12 + 5) = a7;
+  *(this + 10 * v12 + 6) = a8;
+  *(this + 10 * v12 + 7) = a9;
+  *(this + 10 * v12 + 8) = a10;
+  ++*(this + 200);
   if ( v12 >= 20 && BBSupportDbgReport(2, "Source\\EcoAI_MaterialControl.cpp", 2189, "iDebitIndex < MAX_DEBIT_LEVEL") == 1 )
   {
     __debugbreak();
   }
-  if ( (int)this[200] >= 20 && BBSupportDbgReport(2, "Source\\EcoAI_MaterialControl.cpp", 2190, "m_iLastDebitLevelEntry < MAX_DEBIT_LEVEL") == 1 )
+  if ( (int)*(this + 200) >= 20 && BBSupportDbgReport(2, "Source\\EcoAI_MaterialControl.cpp", 2190, "m_iLastDebitLevelEntry < MAX_DEBIT_LEVEL") == 1 )
   {
     __debugbreak();
   }
@@ -74,7 +74,7 @@ int  CDebitLevelManager::GetDebitValue(int a2, enum PILE_TYPES a3, bool a4, int 
   {
     if ( *((_DWORD *)this + 10 * i) == a2 && *((_DWORD *)this + 10 * i + 1) == a3 && *((unsigned __int8 *)this + 40 * i + 8) == a4 )
     {
-      if ( a5 > *((_DWORD *)this + 10 * i + 5) && !CDebitLevelManager::DebitPreCondition(this, *((_DWORD *)this + 10 * i + 6)) )
+      if ( a5 > *((_DWORD *)this + 10 * i + 5) && CDebitLevelManager::DebitPreCondition(this, *((_DWORD *)this + 10 * i + 6)) == 0 )
       {
         v6 = *((_DWORD *)this + 10 * i + 4);
       }
@@ -143,7 +143,7 @@ int  CDebitLevelManager::DebitPreCondition(int a2) {
       result = 0;
       break;
     case 8:
-      EcoSector = CSchedule::GetEcoSector(*((CSchedule **)this + 201));
+      EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)this + 201));
       if ( (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 152))(EcoSector, 45) <= 0 )
       {
         if ( CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 201), 44) <= 0 )
@@ -162,7 +162,7 @@ int  CDebitLevelManager::DebitPreCondition(int a2) {
       {
         result = 0;
       }
-      else if ( *(_DWORD *)(*((_DWORD *)this + 201) + 24) || CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 201), 35) <= 0 )
+      else if ( *(_DWORD *)(*((_DWORD *)this + 201) + 24) != 0 || CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 201), 35) <= 0 )
       {
         if ( *(_DWORD *)(*((_DWORD *)this + 201) + 24) == 1 && CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 201), 39) > 0 )
         {

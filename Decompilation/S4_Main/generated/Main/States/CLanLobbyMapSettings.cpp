@@ -6,9 +6,9 @@
 // Decompiled from CLanLobbyMapSettings *__thiscall CLanLobbyMapSettings::CLanLobbyMapSettings(CLanLobbyMapSettings *this)
  CLanLobbyMapSettings::CLanLobbyMapSettings(void) {
   
-  std::string::string();
-  std::wstring::wstring((char *)this + 80);
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
+  std::wstring::wstring((std::wstring *)((char *)this + 80));
+  ((void (__cdecl *)())std::string::string)();
   return this;
 }
 
@@ -18,7 +18,7 @@
  CLanLobbyMapSettings::~CLanLobbyMapSettings(void) {
   
   std::string::~string((char *)this + 108);
-  std::wstring::~wstring((char *)this + 80);
+  std::wstring::~wstring((std::wstring *)((char *)this + 80));
   std::string::~string((char *)this + 44);
 }
 

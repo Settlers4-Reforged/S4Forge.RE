@@ -28,7 +28,7 @@
   char v26; // [esp+47h] [ebp-1h]
 
   v25 = this;
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 76, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 76, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -64,7 +64,7 @@
   if ( v22 > 0 && (a5 & 1) != 0 )
   {
     CSpiralWalk::CSpiralWalk((CSpiralWalk *)v13, a2, a3, 15);
-    while ( CSpiralWalk::NextXY(v13, &a2, &a3) )
+    while ( CSpiralWalk::NextXY(v13, &a2, &a3) != 0 )
     {
       v15 = v21(a2, a3);
       if ( v15 == v22 )
@@ -75,41 +75,39 @@
       }
     }
   }
-  if ( !v26 )
+  if ( v26 != 0 )
   {
-    return v25;
-  }
-  v8 = Y16X16::PackXYFast(a2, a3);
-  *((_DWORD *)v25 + 2) = v8;
+    v8 = Y16X16::PackXYFast(a2, a3);
+    *((_DWORD *)v25 + 2) = v8;
 LABEL_21:
-  if ( a4 <= 1 )
-  {
-    return v25;
-  }
-  if ( a4 > 100 )
-  {
-    a4 = 100;
-  }
-  v23 = 1;
-  for ( i = 1;
-        v23 < a4 && i < 100;
-        ++i )
-  {
-    v9 = CSpiralOffsets::DeltaX(i);
-    v18 = a2 + 2 * v9;
-    v10 = CSpiralOffsets::DeltaY(i);
-    v19 = a3 + 2 * v10;
-    if ( (unsigned __int8)CWorldManager::InWorld(v18, v19) )
+    if ( a4 > 1 )
     {
-      v14 = v21(v18, v19);
-      if ( v14 == v20 )
+      if ( a4 > 100 )
       {
-        v11 = Y16X16::PackXYFast(v18, v19);
-        *((_DWORD *)v25 + v23++ + 2) = v11;
+        a4 = 100;
       }
+      v23 = 1;
+      for ( i = 1;
+            v23 < a4 && i < 100;
+            ++i )
+      {
+        v9 = CSpiralOffsets::DeltaX(i);
+        v18 = a2 + 2 * v9;
+        v10 = CSpiralOffsets::DeltaY(i);
+        v19 = a3 + 2 * v10;
+        if ( CWorldManager::InWorld(v18, v19) )
+        {
+          v14 = v21(v18, v19);
+          if ( v14 == v20 )
+          {
+            v11 = Y16X16::PackXYFast(v18, v19);
+            *((_DWORD *)v25 + v23++ + 2) = v11;
+          }
+        }
+      }
+      *(_DWORD *)v25 = v23 - 1;
     }
   }
-  *(_DWORD *)v25 = v23 - 1;
   return v25;
 }
 

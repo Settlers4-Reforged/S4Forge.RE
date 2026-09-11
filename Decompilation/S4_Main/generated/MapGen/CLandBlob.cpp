@@ -23,13 +23,13 @@ void  CLandBlob::processPoint(int a2, int a3) {
   
   int result; // eax
 
-  CCheckLayer::setPoint(this[8], a2 - (_DWORD)this[9], a3 - (_DWORD)this[10], 1u);
-  if ( (CCheckLayer *)*(unsigned __int8 *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3) + 1) != this[1] )
+  CCheckLayer::setPoint(*(this + 8), a2 - (_DWORD)*(this + 9), a3 - (_DWORD)*(this + 10), 1);
+  if ( (CCheckLayer *)*(unsigned __int8 *)(g_pMapElement + 4 * (a2 + (_DWORD)*(this + 3) * a3) + 1) != *(this + 1) )
   {
-    *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3) + 1) = *((_BYTE *)this + 4);
+    *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)*(this + 3) * a3) + 1) = *((_BYTE *)this + 4);
   }
   result = g_pMapElement;
-  ++*(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3));
+  ++*(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)*(this + 3) * a3));
   return result;
 }
 
@@ -45,30 +45,29 @@ void  CLandBlob::processFillPoint(int a2, int a3) {
   float v7; // [esp+Ch] [ebp-10h]
   int v8; // [esp+14h] [ebp-8h]
 
-  CCheckLayer::setPoint(this[8], a2 - (_DWORD)this[9], a3 - (_DWORD)this[10], 1u);
-  if ( (CCheckLayer *)*(unsigned __int8 *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3) + 1) != this[1] )
+  CCheckLayer::setPoint(*(this + 8), a2 - (_DWORD)*(this + 9), a3 - (_DWORD)*(this + 10), 1);
+  if ( (CCheckLayer *)*(unsigned __int8 *)(g_pMapElement + 4 * (a2 + (_DWORD)*(this + 3) * a3) + 1) != *(this + 1) )
   {
-    *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3) + 1) = *((_BYTE *)this + 4);
+    *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)*(this + 3) * a3) + 1) = *((_BYTE *)this + 4);
   }
   result = *((unsigned __int8 *)this + 60);
-  if ( !*((_BYTE *)this + 60) )
+  if ( *((_BYTE *)this + 60) != 0 )
   {
-    return result;
-  }
-  v4 = j__abs(a2 - (_DWORD)this[12]);
-  v8 = j__abs(a3 - (_DWORD)this[13]) + v4;
-  if ( (float)((float)v8 * *((float *)this + 14)) < 20.0 )
-  {
-    v5 = a2 + (_DWORD)this[3] * a3;
-    v7 = 20.0 - (float)((float)v8 * *((float *)this + 14));
-    v6 = (double)(CRandom16::Rand((CRandom16 *)g_pRand) % 3) + 0.0;
-    result = a2 + (_DWORD)this[3] * a3;
-    *(_BYTE *)(g_pMapElement + 4 * result) = (int)(float)((float)*(unsigned __int8 *)(g_pMapElement + 4 * v5) + (float)(v7 + v6));
-  }
-  else
-  {
-    result = *(unsigned __int8 *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3)) + 1;
-    *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3)) = result;
+    v4 = j__abs(a2 - (_DWORD)*(this + 12));
+    v8 = j__abs(a3 - (_DWORD)*(this + 13)) + v4;
+    if ( (float)((float)v8 * *((float *)this + 14)) < 20.0 )
+    {
+      v5 = a2 + (_DWORD)*(this + 3) * a3;
+      v7 = 20.0 - (float)((float)v8 * *((float *)this + 14));
+      v6 = (double)(CRandom16::Rand(g_pRand) % 3) + 0.0;
+      result = a2 + (_DWORD)*(this + 3) * a3;
+      *(_BYTE *)(g_pMapElement + 4 * result) = (int)(float)((float)*(unsigned __int8 *)(g_pMapElement + 4 * v5) + (float)(v7 + v6));
+    }
+    else
+    {
+      result = *(unsigned __int8 *)(g_pMapElement + 4 * (a2 + (_DWORD)*(this + 3) * a3)) + 1;
+      *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)*(this + 3) * a3)) = result;
+    }
   }
   return result;
 }

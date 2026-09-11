@@ -7,7 +7,7 @@
 // Decompiled from Cryptor *__thiscall Cryptor::Cryptor(Cryptor *this)
  Cryptor::Cryptor(void) {
   
-  std::string::string(this);
+  std::string::string((std::string *)this);
   *((_DWORD *)this + 7) = 324508639;
   *((_DWORD *)this + 8) = 610839776;
   *((_DWORD *)this + 9) = -38177487;
@@ -42,51 +42,51 @@ void  Cryptor::Set_Key(std::string const & a2) {
   int v5; // [esp+Ch] [ebp-38h]
   int v6; // [esp+10h] [ebp-34h]
   int i; // [esp+10h] [ebp-34h]
-  _BYTE v9[28]; // [esp+18h] [ebp-2Ch] BYREF
+  std::string v9; // [esp+18h] [ebp-2Ch] BYREF
   int v10; // [esp+40h] [ebp-4h]
 
-  std::string::operator=(a2);
-  std::string::string(this);
+  ((void (__stdcall *)(int))std::string::operator=)(a2);
+  ((void (__stdcall *)(_DWORD *))std::string::string)(this);
   v10 = 0;
-  if ( !std::string::length(v9) )
+  if ( std::string::length(&v9) == 0 )
   {
-    std::string::operator=(v9, aDefaultSeed);
+    std::string::operator=(&v9, aDefaultSeed);
   }
   v6 = 0;
-  while ( (unsigned int)std::string::length(v9) < 0xC )
+  while ( (unsigned int)std::string::length(&v9) < 0xC )
   {
     v2 = (char *)std::string::operator[](v6);
-    std::string::operator+=(*v2);
+    ((void (__stdcall *)(char))std::string::operator+=)(*v2);
     ++v6;
   }
   for ( i = 0;
         i < 4;
         ++i )
   {
-    v5 = this[7] << 8;
-    this[7] = v5;
-    this[7] = v5 | *(char *)std::string::operator[](i);
-    v4 = this[8] << 8;
-    this[8] = v4;
-    this[8] = v4 | *(char *)std::string::operator[](i + 4);
-    v3 = this[9] << 8;
-    this[9] = v3;
-    this[9] = v3 | *(char *)std::string::operator[](i + 8);
+    v5 = *(this + 7) << 8;
+    *(this + 7) = v5;
+    *(this + 7) = v5 | *(char *)std::string::operator[](i);
+    v4 = *(this + 8) << 8;
+    *(this + 8) = v4;
+    *(this + 8) = v4 | *(char *)std::string::operator[](i + 4);
+    v3 = *(this + 9) << 8;
+    *(this + 9) = v3;
+    *(this + 9) = v3 | *(char *)std::string::operator[](i + 8);
   }
-  if ( !this[7] )
+  if ( *(this + 7) == 0 )
   {
-    this[7] = 324508639;
+    *(this + 7) = 324508639;
   }
-  if ( !this[8] )
+  if ( *(this + 8) == 0 )
   {
-    this[8] = 610839776;
+    *(this + 8) = 610839776;
   }
-  if ( !this[9] )
+  if ( *(this + 9) == 0 )
   {
-    this[9] = -38177487;
+    *(this + 9) = -38177487;
   }
   v10 = -1;
-  std::string::~string(v9);
+  std::string::~string(&v9);
 }
 
 
@@ -144,7 +144,7 @@ void  Cryptor::Transform_Char(unsigned char & a2) {
 
 
 // address=[0x2f02d60]
-// Decompiled from int __thiscall Cryptor::Transform_File(Cryptor *this, int a2, void *a3)
+// Decompiled from int __thiscall Cryptor::Transform_File(Cryptor *this, int a2, std::string *a3)
 void  Cryptor::Transform_File(std::string const & a2, std::string const & a3) {
   
   char *v3; // eax
@@ -162,15 +162,15 @@ void  Cryptor::Transform_File(std::string const & a2, std::string const & a3) {
   v11 = this;
   v12 = 88;
   v13 = 1;
-  v3 = (char *)std::string::c_str(a3);
+  v3 = std::string::c_str(a3);
   std::ifstream::ifstream(v3, 35, 64, 1);
   v14 = 0;
   v4 = std::ifstream::rdbuf(v7);
-  std::ostream::ostream(v4, 0, 1);
+  ((void (__stdcall *)(int, char, int))std::ostream::ostream)(v4, 0, 1);
   LOBYTE(v14) = 1;
-  if ( v13 )
+  if ( v13 != 0 )
   {
-    Cryptor::Set_Key(a2);
+    ((void (__stdcall *)(int))Cryptor::Set_Key)(a2);
     while ( 1 )
     {
       v12 = std::istream::peek(v6, v7[0]);
@@ -179,11 +179,11 @@ void  Cryptor::Transform_File(std::string const & a2, std::string const & a3) {
         break;
       }
       std::ios::rdbuf((CUserToolsManager *)((char *)v10 + *(_DWORD *)(v10[0] + 4)));
-      std::streambuf::pubseekoff(v9, 0, 0, 1, 3);
+      std::streambuf::pubseekoff((int)v9, 0, 0, 1, 3);
       Cryptor::Transform_Char(v11, (unsigned __int8 *)&v12);
       std::ostream::put(v12);
       std::ifstream::rdbuf(v7);
-      std::streambuf::pubseekoff(v8, 0, 0, 1, 3);
+      std::streambuf::pubseekoff((int)v8, 0, 0, 1, 3);
     }
   }
   LOBYTE(v14) = 0;
@@ -202,7 +202,7 @@ void  Cryptor::Transform_String(std::string const & a2, std::string & a3) {
   int v6; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  Cryptor::Set_Key(a2);
+  ((void (__stdcall *)(int))Cryptor::Set_Key)(a2);
   result = std::string::length(a3);
   v6 = result;
   for ( i = 0;

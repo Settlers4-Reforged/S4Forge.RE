@@ -4,10 +4,10 @@
 // Definitions for class CConfigVarString
 
 // address=[0x2efa0f0]
-// Decompiled from int __thiscall CConfigVarString::GetStringValue(char *this, int a2)
+// Decompiled from std::string *__thiscall CConfigVarString::GetStringValue(char *this, std::string *a2)
 std::string  CConfigVarString::GetStringValue(void a2)const {
   
-  std::string::string(this + 8);
+  ((void (__stdcall *)(char *))std::string::string)(this + 8);
   return a2;
 }
 
@@ -16,7 +16,7 @@ std::string  CConfigVarString::GetStringValue(void a2)const {
 // Decompiled from void __thiscall CConfigVarString::SetValue(CConfigVarString *this, void *a1)
 void  CConfigVarString::SetValue(std::string const & a1) {
   
-  std::string::operator=(&this->value, a1);
+  std::string::operator=(&this->value, (std::string *)a1);
 }
 
 

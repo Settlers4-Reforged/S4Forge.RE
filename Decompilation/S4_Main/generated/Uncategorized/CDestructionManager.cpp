@@ -43,9 +43,9 @@ void  CDestructionManager::DestroyObjects(void) {
   v12 = this;
   v6 = v14;
   v10 = v5;
-  v9 = std::vector<CDestructor *>::end(v5);
+  v9 = std::vector<CDestructor *>::end((int)v5);
   v8 = &v2;
-  v7 = std::vector<CDestructor *>::begin(&v2);
+  v7 = std::vector<CDestructor *>::begin((int)&v2);
   std::sort<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CDestructor *>>>,greater_ptr<CDestructor>>(v2, v3, v4, v5[0], v5[1], v5[2], v6);
   for ( i = 0;
         ;
@@ -70,27 +70,25 @@ class std::auto_ptr<class CDestructionManager> & __cdecl CDestructionManager::Ge
   CDestructionManager *v1; // [esp+8h] [ebp-14h]
   CDestructionManager *C; // [esp+Ch] [ebp-10h]
 
-  if ( dword_46853C4 <= *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
+  if ( dword_46853C4 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
   {
-    return &unk_46853C0;
+    j___Init_thread_header(&dword_46853C4);
+    if ( dword_46853C4 == -1 )
+    {
+      C = (CDestructionManager *)operator new(0x10u);
+      if ( C != 0 )
+      {
+        v1 = CDestructionManager::CDestructionManager(C);
+      }
+      else
+      {
+        v1 = 0;
+      }
+      std::auto_ptr<CDestructionManager>::auto_ptr<CDestructionManager>((int)v1);
+      j__atexit(sub_3667EB0);
+      j___Init_thread_footer(&dword_46853C4);
+    }
   }
-  j___Init_thread_header(&dword_46853C4);
-  if ( dword_46853C4 != -1 )
-  {
-    return &unk_46853C0;
-  }
-  C = (CDestructionManager *)operator new(0x10u);
-  if ( C )
-  {
-    v1 = CDestructionManager::CDestructionManager(C);
-  }
-  else
-  {
-    v1 = 0;
-  }
-  std::auto_ptr<CDestructionManager>::auto_ptr<CDestructionManager>(v1);
-  j__atexit(sub_3667EB0);
-  j___Init_thread_footer(&dword_46853C4);
   return &unk_46853C0;
 }
 

@@ -10,7 +10,7 @@ class IEffects * __cdecl IEffects::CreateEffects(void) {
   CEffects *C; // [esp+Ch] [ebp-10h]
 
   C = (CEffects *)operator new(0x44394u);
-  if ( C )
+  if ( C != 0 )
   {
     return CEffects::CEffects(C);
   }

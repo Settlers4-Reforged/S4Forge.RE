@@ -6,7 +6,7 @@
 // Decompiled from CSoundSystem::SSoundCardData *__thiscall CSoundSystem::SSoundCardData::SSoundCardData(CSoundSystem::SSoundCardData *this)
  CSoundSystem::SSoundCardData::SSoundCardData(void) {
   
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   return this;
 }
 

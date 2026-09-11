@@ -7,7 +7,7 @@
 // Decompiled from void __thiscall CEntityEvent::CEntityEvent(CEntityEvent *this, unsigned __int8 a2, int a3, int a4, int a5, int a6)
  CEntityEvent::CEntityEvent(unsigned char a2, int a3, int a4, int a5, int a6) {
   
-  CPersistence::CPersistence(&this->CPersistence);
+  CPersistence::CPersistence(this);
   this->__vftable = (CEntityEvent_vtbl *)&CEntityEvent::_vftable_;
   this->m_iEvent = a2;
   this->m_iType = a3;
@@ -34,13 +34,13 @@ unsigned long  CEntityEvent::ClassID(void)const {
 
 
 // address=[0x1400720]
-// Decompiled from CEntityEvent *__cdecl CEntityEvent::New(int a1)
+// Decompiled from CEntityEvent *__cdecl CEntityEvent::New(struct std::istream *a1)
 class CPersistence * __cdecl CEntityEvent::New(std::istream & a1) {
   
   CEntityEvent *C; // [esp+Ch] [ebp-10h]
 
   C = (CEntityEvent *)operator new(0x18u);
-  if ( C )
+  if ( C != 0 )
   {
     return CEntityEvent::CEntityEvent(C, a1);
   }
@@ -70,12 +70,12 @@ class CPersistence * __cdecl CEntityEvent::New(std::istream & a1) {
 // Decompiled from _DWORD *__thiscall CEntityEvent::operator=(_DWORD *this, _DWORD *a2)
 class CEntityEvent &  CEntityEvent::operator=(class CEntityEvent const & a2) {
   
-  CPersistence::operator=(a2);
-  this[1] = a2[1];
-  this[2] = a2[2];
-  this[3] = a2[3];
-  this[4] = a2[4];
-  this[5] = a2[5];
+  ((void (__stdcall *)(_DWORD *))CPersistence::operator=)(a2);
+  *(this + 1) = a2[1];
+  *(this + 2) = a2[2];
+  *(this + 3) = a2[3];
+  *(this + 4) = a2[4];
+  *(this + 5) = a2[5];
   return this;
 }
 
@@ -95,11 +95,11 @@ class CEntityEvent * __cdecl CEntityEvent::Load(std::istream & a1) {
 // Decompiled from CEntityEvent *__thiscall CEntityEvent::CEntityEvent(CEntityEvent *this, struct std::istream *a1)
  CEntityEvent::CEntityEvent(std::istream & a2) {
   
-  int v3; // [esp+4h] [ebp-Ch] BYREF
+  unsigned int v3; // [esp+4h] [ebp-Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-8h] BYREF
 
   CPersistence::CPersistence(this);
-  this->__vftable = (CPersistence_vtbl *)&CEntityEvent::_vftable_;
+  this->__vftable = (CEntityEvent_vtbl *)&CEntityEvent::_vftable_;
   operator^<unsigned int>(a1, &v3);
   if ( v3 != 1 )
   {
@@ -125,7 +125,7 @@ void  CEntityEvent::Store(std::ostream & a2) {
 
   CPersistence::Store(this, a2);
   fileVersion = 1;
-  operator^<unsigned int>(a2, &fileVersion);
+  operator^<unsigned int>(a2, (unsigned int *)&fileVersion);
   operator^<int>(a2, &this->m_iEvent);
   operator^<int>(a2, &this->m_iType);
   operator^<int>(a2, &this->m_iDataA);

@@ -18,7 +18,7 @@ bool __cdecl CTextMsgHandler::AddChatMsg(char const * Str, int a2) {
   int PlayerIcon; // [esp+4h] [ebp-Ch]
   _DWORD *v5; // [esp+Ch] [ebp-4h]
 
-  if ( !Str && BBSupportDbgReport(2, "Main\\TextMsgHandler.cpp", 128, "_pcacMessage") == 1 )
+  if ( Str == 0 && BBSupportDbgReport(2, "Main\\TextMsgHandler.cpp", 128, "_pcacMessage") == 1 )
   {
     __debugbreak();
   }
@@ -66,13 +66,13 @@ bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, int a3, int a4, bool a5
     return 0;
   }
   Format = g_pStringEngine->GetString(g_pStringEngine, a1);
-  if ( Format )
+  if ( Format != 0 )
   {
     v11 = operator new(0x24u);
     memset(v11, 0, 0x24u);
     *(_DWORD *)v11 = a1;
     *((_DWORD *)v11 + 1) = a2;
-    if ( v12 )
+    if ( v12 != 0 )
     {
       v9 = -1;
     }
@@ -93,7 +93,7 @@ bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, int a3, int a4, bool a5
       BBSupportTracePrintF(0, "CTextMsgHandler::AddWarningMsg (multiple args) : Array for msg too small.");
       *(_BYTE *)(*((_DWORD *)v11 + 8) + 511) = 0;
     }
-    if ( !(unsigned __int8)CTextMsgHandler::CheckExists(v11) || a6 )
+    if ( (unsigned __int8)CTextMsgHandler::CheckExists(v11) == 0 || a6 )
     {
       CTextMsgHandler::AddMsgToVector((char)v11);
       CTextMsgHandler::SendAllMessages(a6, 1, 1);
@@ -132,7 +132,7 @@ bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, bool a3, bool a4, ... a
     return 0;
   }
   Format = g_pStringEngine->GetString(g_pStringEngine, a1);
-  if ( Format )
+  if ( Format != 0 )
   {
     v9 = operator new(0x24u);
     memset(v9, 0, 0x24u);
@@ -149,7 +149,7 @@ bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, bool a3, bool a4, ... a
       BBSupportTracePrintF(0, "CTextMsgHandler::AddWarningMsg (multiple args) : Array for msg too small.");
       *(_BYTE *)(*((_DWORD *)v9 + 8) + 511) = 0;
     }
-    if ( !(unsigned __int8)CTextMsgHandler::CheckExists(v9) || a4 )
+    if ( (unsigned __int8)CTextMsgHandler::CheckExists(v9) == 0 || a4 )
     {
       CTextMsgHandler::AddMsgToVector((char)v9);
       CTextMsgHandler::SendAllMessages(a4, 1, 1);
@@ -177,7 +177,7 @@ bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, bool a3) {
   int *v5; // [esp+14h] [ebp-4h]
 
   StringName = (const char *)CS4DefineNames::GetStringName(a1);
-  if ( g_pStringEngine->GetString(g_pStringEngine, a1) )
+  if ( g_pStringEngine->GetString(g_pStringEngine, a1) != 0 )
   {
     v5 = (int *)operator new(0x24u);
     memset(v5, 0, 0x24u);
@@ -185,7 +185,7 @@ bool __cdecl CTextMsgHandler::AddTextMsg(int a1, int a2, bool a3) {
     v5[1] = a2;
     v5[3] = CStaticConfigVarInt::operator int(&g_iDefaultMessageTimeOut) / 2;
     v5[6] = 165;
-    if ( !(unsigned __int8)CTextMsgHandler::CheckExists(v5) || a3 )
+    if ( (unsigned __int8)CTextMsgHandler::CheckExists(v5) == 0 || a3 )
     {
       CTextMsgHandler::AddMsgToVector((char)v5);
       CTextMsgHandler::SendAllMessages(a3, 1, 1);
@@ -213,7 +213,7 @@ bool __cdecl CTextMsgHandler::AddTextMsg(char const * Str, int a2, int a3, int a
   int PlayerIcon; // [esp+4h] [ebp-Ch]
   _DWORD *v8; // [esp+Ch] [ebp-4h]
 
-  if ( !Str && BBSupportDbgReport(2, "Main\\TextMsgHandler.cpp", 159, "_pcacMessage") == 1 )
+  if ( Str == 0 && BBSupportDbgReport(2, "Main\\TextMsgHandler.cpp", 159, "_pcacMessage") == 1 )
   {
     __debugbreak();
   }
@@ -242,15 +242,17 @@ bool __cdecl CTextMsgHandler::AddWarningMsg(int a1, int a2, int a3, int a4) {
   int v5; // eax
   int v6; // [esp+4h] [ebp-14h] BYREF
   void *v7; // [esp+8h] [ebp-10h]
+  char *; // [esp+Ch] [ebp-Ch]
   const char *StringName; // [esp+10h] [ebp-8h]
   void *v10; // [esp+14h] [ebp-4h]
 
   StringName = (const char *)CS4DefineNames::GetStringName(a1);
-  if ( !(unsigned __int8)CTextMsgHandler::CheckWarning(StringName, &v6) )
+  if ( !CTextMsgHandler::CheckWarning(StringName, &v6) )
   {
     return 0;
   }
-  if ( (*(int (__thiscall **)(int, int))(*(_DWORD *)g_pStringEngine + 4))(g_pStringEngine, a1) )
+   = g_pStringEngine->GetString(g_pStringEngine, a1);
+  if (  != 0 )
   {
     v7 = operator new(0x24u);
     v10 = v7;
@@ -264,7 +266,7 @@ bool __cdecl CTextMsgHandler::AddWarningMsg(int a1, int a2, int a3, int a4) {
     *((_BYTE *)v10 + 28) = 1;
     *((_BYTE *)v10 + 29) = 1;
     *((_DWORD *)v10 + 6) = v6;
-    if ( (unsigned __int8)CTextMsgHandler::CheckExists(v10) )
+    if ( (unsigned __int8)CTextMsgHandler::CheckExists(v10) != 0 )
     {
       operator delete(v10);
     }
@@ -290,6 +292,7 @@ bool __cdecl CTextMsgHandler::AddWarningMsg(int a1, int a2) {
   int v3; // eax
   int v4; // [esp+4h] [ebp-14h] BYREF
   void *v5; // [esp+8h] [ebp-10h]
+  char *; // [esp+Ch] [ebp-Ch]
   const char *StringName; // [esp+10h] [ebp-8h]
   void *v8; // [esp+14h] [ebp-4h]
 
@@ -298,7 +301,8 @@ bool __cdecl CTextMsgHandler::AddWarningMsg(int a1, int a2) {
   {
     return 0;
   }
-  if ( g_pStringEngine->GetString(g_pStringEngine, a1) )
+   = g_pStringEngine->GetString(g_pStringEngine, a1);
+  if (  != 0 )
   {
     v5 = operator new(0x24u);
     v8 = v5;
@@ -309,7 +313,7 @@ bool __cdecl CTextMsgHandler::AddWarningMsg(int a1, int a2) {
     *((_DWORD *)v8 + 3) = v3 / 2;
     *((_BYTE *)v8 + 29) = 1;
     *((_DWORD *)v8 + 6) = v4;
-    if ( (unsigned __int8)CTextMsgHandler::CheckExists(v8) )
+    if ( (unsigned __int8)CTextMsgHandler::CheckExists(v8) != 0 )
     {
       operator delete(v8);
     }
@@ -341,20 +345,20 @@ void __cdecl CTextMsgHandler::ExecuteMsg(int a1) {
   int v7; // [esp+40h] [ebp-4h]
 
   v3 = std::vector<STextMessage *>::size(&CTextMsgHandler::m_vMsgs);
-  if ( a1 < v3 && a1 >= 0 && v3 )
+  if ( a1 < v3 && a1 >= 0 && v3 != 0 )
   {
     v5 = -1;
     v2 = -1;
     while ( ++v5 < v3 )
     {
-      if ( !*(_BYTE *)(*(_DWORD *)std::vector<STextMessage *>::operator[](v5) + 30) )
+      if ( *(_BYTE *)(*(_DWORD *)std::vector<STextMessage *>::operator[](v5) + 30) == 0 )
       {
         ++v2;
       }
       if ( v2 == a1 )
       {
         v4 = *(_DWORD *)std::vector<STextMessage *>::operator[](v5);
-        if ( *(_BYTE *)(v4 + 28) )
+        if ( *(_BYTE *)(v4 + 28) != 0 )
         {
           v1 = CEvn_Event::CEvn_Event((CEvn_Event *)v6, 0x13u, *(_DWORD *)(v4 + 20), *(_DWORD *)(v4 + 16), 0);
           v7 = 0;
@@ -362,12 +366,11 @@ void __cdecl CTextMsgHandler::ExecuteMsg(int a1) {
           v7 = -1;
           CEvn_Event::~CEvn_Event(v6);
         }
-        if ( *(_DWORD *)(v4 + 12) == -1 )
+        if ( *(_DWORD *)(v4 + 12) != -1 )
         {
-          return;
+          *(_BYTE *)(v4 + 30) = 1;
+          CTextMsgHandler::SendAllMessages(0, 0, 1);
         }
-        *(_BYTE *)(v4 + 30) = 1;
-        CTextMsgHandler::SendAllMessages(0, 0, 1);
         return;
       }
     }
@@ -387,7 +390,7 @@ void __cdecl CTextMsgHandler::ExecuteLastMsg(void) {
   int v1; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  if ( std::vector<STextMessage *>::size(&CTextMsgHandler::m_vMsgs) )
+  if ( std::vector<STextMessage *>::size(&CTextMsgHandler::m_vMsgs) != 0 )
   {
     v0 = std::vector<STextMessage *>::size(&CTextMsgHandler::m_vMsgs);
     v1 = -1;
@@ -395,7 +398,7 @@ void __cdecl CTextMsgHandler::ExecuteLastMsg(void) {
           i < v0;
           ++i )
     {
-      if ( !*(_BYTE *)(*(_DWORD *)std::vector<STextMessage *>::operator[](i) + 30) )
+      if ( *(_BYTE *)(*(_DWORD *)std::vector<STextMessage *>::operator[](i) + 30) == 0 )
       {
         ++v1;
       }
@@ -433,17 +436,17 @@ void __cdecl CTextMsgHandler::Update(void) {
 
   v14 = 0;
   v17 = 0;
-  std::vector<STextMessage *>::begin(v5);
+  std::vector<STextMessage *>::begin((int)v5);
   v18 = 0;
   while ( 1 )
   {
-    v13 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end(v4);
+    v13 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end((int)v4);
     v12 = v13;
     LOBYTE(v18) = 1;
     v16 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator!=(v13);
     LOBYTE(v18) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v4);
-    if ( !v16 )
+    if ( v16 == 0 )
     {
       break;
     }
@@ -452,20 +455,20 @@ void __cdecl CTextMsgHandler::Update(void) {
     {
       --*((_DWORD *)v15 + 3);
     }
-    if ( *((_DWORD *)v15 + 3) )
+    if ( *((_DWORD *)v15 + 3) != 0 )
     {
       ++v14;
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator++(v5);
     }
     else
     {
-      if ( !*((_BYTE *)v15 + 30) )
+      if ( *((_BYTE *)v15 + 30) == 0 )
       {
         v17 = 1;
       }
-      if ( *((_DWORD *)v15 + 8) )
+      if ( *((_DWORD *)v15 + 8) != 0 )
       {
-        C = (void *)*((_DWORD *)v15 + 8);
+        C = *((void **)v15 + 8);
         operator delete[](C);
         *((_DWORD *)v15 + 8) = 0;
       }
@@ -474,7 +477,7 @@ void __cdecl CTextMsgHandler::Update(void) {
       operator delete(v15);
       v7 = v1;
       v6 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>((struct std::_Iterator_base12 *)v5);
-      v9 = std::vector<STextMessage *>::erase(v3, v1[0], v1[1], v2);
+      v9 = std::vector<STextMessage *>::erase((int)v3, v1[0], v1[1], v2);
       v8 = v9;
       LOBYTE(v18) = 2;
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator=(v9);
@@ -482,7 +485,7 @@ void __cdecl CTextMsgHandler::Update(void) {
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v3);
     }
   }
-  if ( v17 )
+  if ( v17 != 0 )
   {
     CTextMsgHandler::SendAllMessages(0, 0, 1);
   }
@@ -528,25 +531,25 @@ void __cdecl CTextMsgHandler::SendAllMessages(bool a1, bool a2, bool a3) {
     __debugbreak();
   }
   v24 = 0;
-  std::vector<STextMessage *>::begin(v21);
+  std::vector<STextMessage *>::begin((int)v21);
   v29 = 0;
-  std::vector<STextMessage *>::end(v10);
+  std::vector<STextMessage *>::end((int)v10);
   LOBYTE(v29) = 1;
   while ( 1 )
   {
-    v16 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end(v9);
+    v16 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end((int)v9);
     v15 = v16;
     LOBYTE(v29) = 2;
     v26 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator!=(v16);
     LOBYTE(v29) = 1;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v9);
-    if ( !v26 )
+    if ( v26 == 0 )
     {
       break;
     }
-    if ( !*(_BYTE *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v21) + 30) )
+    if ( *(_BYTE *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v21) + 30) == 0 )
     {
-      if ( *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v21) + 32) )
+      if ( *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v21) + 32) != 0 )
       {
         v3 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v21);
         dword_4032248[2 * v24] = *(_DWORD *)(*(_DWORD *)v3 + 32);
@@ -560,14 +563,14 @@ void __cdecl CTextMsgHandler::SendAllMessages(bool a1, bool a2, bool a3) {
       v6 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v21);
       dword_403224C[2 * v24++] = *(_DWORD *)(*(_DWORD *)v6 + 24);
     }
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator=(v21);
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator=((int)v21);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator++(v21);
   }
-  v14 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end(v8);
+  v14 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end((int)v8);
   v13 = v14;
   LOBYTE(v29) = 3;
   v23 |= 1u;
-  v20 = (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator!=(v14) && (**(_DWORD **)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v10) == 2261 || **(_DWORD **)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v10) == 679);
+  v20 = (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator!=(v14) != 0 && (**(_DWORD **)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v10) == 2261 || **(_DWORD **)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v10) == 679);
   v25 = v20;
   v29 = 1;
   if ( (v23 & 1) != 0 )
@@ -578,7 +581,7 @@ void __cdecl CTextMsgHandler::SendAllMessages(bool a1, bool a2, bool a3) {
   v19 = a3 && !v25;
   v27 = v19;
   v22 = 0;
-  if ( (unsigned __int8)CGameSettings::GetAlwaysUrgentMsg() || a1 )
+  if ( CGameSettings::GetAlwaysUrgentMsg() || a1 )
   {
     if ( v27 )
     {
@@ -639,27 +642,27 @@ void __cdecl CTextMsgHandler::RefreshList(void) {
   int v18; // [esp+58h] [ebp-4h]
 
   v17 = 0;
-  std::vector<STextMessage *>::begin(v6);
+  std::vector<STextMessage *>::begin((int)v6);
   v18 = 0;
   while ( 1 )
   {
-    v15 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end(v5);
+    v15 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end((int)v5);
     v14 = v15;
     LOBYTE(v18) = 1;
     v16 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator!=(v15);
     LOBYTE(v18) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v5);
-    if ( !v16 )
+    if ( v16 == 0 )
     {
       break;
     }
-    if ( !*(_BYTE *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6) + 29) || (v0 = (int **)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6), StringName = (const char *)CS4DefineNames::GetStringName(**v0), CTextMsgHandler::CheckWarning(StringName, 0)) )
+    if ( *(_BYTE *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6) + 29) == 0 || (v0 = (int **)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6), StringName = (const char *)CS4DefineNames::GetStringName(**v0), CTextMsgHandler::CheckWarning(StringName, 0)) )
     {
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator++(v6);
     }
     else
     {
-      if ( *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6) + 32) )
+      if ( *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6) + 32) != 0 )
       {
         C = *(void **)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6) + 32);
         operator delete[](C);
@@ -670,7 +673,7 @@ void __cdecl CTextMsgHandler::RefreshList(void) {
       operator delete(v11);
       v8 = v2;
       v7 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>((struct std::_Iterator_base12 *)v6);
-      v10 = std::vector<STextMessage *>::erase(v4, v2[0], v2[1], v3);
+      v10 = std::vector<STextMessage *>::erase((int)v4, v2[0], v2[1], v3);
       v9 = v10;
       LOBYTE(v18) = 2;
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator=(v10);
@@ -679,7 +682,7 @@ void __cdecl CTextMsgHandler::RefreshList(void) {
       v17 = 1;
     }
   }
-  if ( v17 )
+  if ( v17 != 0 )
   {
     CTextMsgHandler::SendAllMessages(0, 0, 1);
   }
@@ -707,13 +710,13 @@ void __cdecl CTextMsgHandler::Kill(void) {
   while ( 1 )
   {
     result = std::vector<STextMessage *>::size(&CTextMsgHandler::m_vMsgs);
-    if ( !result )
+    if ( result == 0 )
     {
       break;
     }
-    std::vector<STextMessage *>::begin(v4);
+    std::vector<STextMessage *>::begin((int)v4);
     v10 = 0;
-    if ( *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v4) + 32) )
+    if ( *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v4) + 32) != 0 )
     {
       C = *(void **)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v4) + 32);
       operator delete[](C);
@@ -723,7 +726,7 @@ void __cdecl CTextMsgHandler::Kill(void) {
     operator delete(v8);
     v7 = v1;
     v6 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>((struct std::_Iterator_base12 *)v4);
-    v5 = std::vector<STextMessage *>::erase(v3, v1[0], v1[1], v2);
+    v5 = std::vector<STextMessage *>::erase((int)v3, v1[0], v1[1], v2);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v3);
     v10 = -1;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v4);
@@ -757,56 +760,55 @@ void __cdecl CTextMsgHandler::SetMaxMsgCount(int a1) {
 
   v16 = 0;
   result = CTextMsgHandler::m_iMaxMsgs;
-  if ( CTextMsgHandler::m_iMaxMsgs == a1 )
+  if ( CTextMsgHandler::m_iMaxMsgs != a1 )
   {
-    return result;
-  }
-  CTextMsgHandler::m_iMaxMsgs = a1;
-  result = std::vector<STextMessage *>::size(&CTextMsgHandler::m_vMsgs);
-  if ( result < CTextMsgHandler::m_iMaxMsgs )
-  {
-    return result;
-  }
-  std::vector<STextMessage *>::begin(v6);
-  v18 = 0;
-  while ( 1 )
-  {
-    v14 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end(v5);
-    v13 = v14;
-    LOBYTE(v18) = 1;
-    v16 |= 1u;
-    v15 = (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator!=(v14) && std::vector<STextMessage *>::size(&CTextMsgHandler::m_vMsgs) > (unsigned int)CTextMsgHandler::m_iMaxMsgs;
-    v17 = v15;
-    v18 = 0;
-    if ( (v16 & 1) != 0 )
+    CTextMsgHandler::m_iMaxMsgs = a1;
+    result = std::vector<STextMessage *>::size(&CTextMsgHandler::m_vMsgs);
+    if ( result >= CTextMsgHandler::m_iMaxMsgs )
     {
-      v16 &= ~1u;
-      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v5);
+      std::vector<STextMessage *>::begin((int)v6);
+      v18 = 0;
+      while ( 1 )
+      {
+        v14 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end((int)v5);
+        v13 = v14;
+        LOBYTE(v18) = 1;
+        v16 |= 1u;
+        v15 = (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator!=(v14) != 0 && std::vector<STextMessage *>::size(&CTextMsgHandler::m_vMsgs) > (unsigned int)CTextMsgHandler::m_iMaxMsgs;
+        v17 = v15;
+        v18 = 0;
+        if ( (v16 & 1) != 0 )
+        {
+          v16 &= ~1u;
+          std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v5);
+        }
+        if ( !v17 )
+        {
+          break;
+        }
+        if ( *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6) + 32) != 0 )
+        {
+          C = *(void **)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6) + 32);
+          operator delete[](C);
+          *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6) + 32) = 0;
+        }
+        v11 = *(void **)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6);
+        v3 = 36;
+        operator delete(v11);
+        v8 = v2;
+        v7 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>((struct std::_Iterator_base12 *)v6);
+        v10 = std::vector<STextMessage *>::erase((int)v4, v2[0], v2[1], v3);
+        v9 = v10;
+        LOBYTE(v18) = 2;
+        std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator=(v10);
+        LOBYTE(v18) = 0;
+        std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v4);
+      }
+      v18 = -1;
+      return std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v6);
     }
-    if ( !v17 )
-    {
-      break;
-    }
-    if ( *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6) + 32) )
-    {
-      C = *(void **)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6) + 32);
-      operator delete[](C);
-      *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6) + 32) = 0;
-    }
-    v11 = *(void **)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v6);
-    v3 = 36;
-    operator delete(v11);
-    v8 = v2;
-    v7 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>((struct std::_Iterator_base12 *)v6);
-    v10 = std::vector<STextMessage *>::erase(v4, v2[0], v2[1], v3);
-    v9 = v10;
-    LOBYTE(v18) = 2;
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator=(v10);
-    LOBYTE(v18) = 0;
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v4);
   }
-  v18 = -1;
-  return std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v6);
+  return result;
 }
 
 
@@ -822,7 +824,7 @@ void *  CTextMsgHandler::GetEventFunction(void) {
 // Decompiled from CTextMsgHandler *__thiscall CTextMsgHandler::CTextMsgHandler(CTextMsgHandler *this)
  CTextMsgHandler::CTextMsgHandler(void) {
   
-  IEvn_Handle::IEvn_Handle(this);
+  IEvn_Handle::IEvn_Handle((IEvn_Handle *)this);
   *(_DWORD *)this = &CTextMsgHandler::_vftable_;
   return this;
 }
@@ -844,10 +846,10 @@ bool __cdecl CTextMsgHandler::CheckWarning(char const * a1, int * a2) {
   int MsgLevelMask; // [esp+0h] [ebp-8h]
   unsigned int v4; // [esp+4h] [ebp-4h]
 
-  if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, const char *))g_pCfgMgr->DoesExist)(g_pCfgMgr, "WARNINGMSG_CLASSIFICATION", a1) )
+  if ( ((unsigned __int8 (__thiscall *)(CConfigManager *, const char *, const char *))g_pCfgMgr->DoesExist)(g_pCfgMgr, "WARNINGMSG_CLASSIFICATION", a1) != 0 )
   {
     v4 = g_pCfgMgr->GetIntValue(g_pCfgMgr, "WARNINGMSG_CLASSIFICATION", a1, 0);
-    if ( a2 )
+    if ( a2 != 0 )
     {
       if ( ((unsigned int)&dword_F29144[220079] & v4) != 0 )
       {
@@ -891,17 +893,17 @@ bool __cdecl CTextMsgHandler::CheckExists(struct STextMessage * a1) {
   char v9; // [esp+33h] [ebp-Dh]
   int v10; // [esp+3Ch] [ebp-4h]
 
-  std::vector<STextMessage *>::begin(v4);
+  std::vector<STextMessage *>::begin((int)v4);
   v10 = 0;
   while ( 1 )
   {
-    v6 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end(v3);
+    v6 = (std::_Iterator_base12 *)std::vector<STextMessage *>::end((int)v3);
     v5 = v6;
     LOBYTE(v10) = 1;
     v9 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator!=(v6);
     LOBYTE(v10) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v3);
-    if ( !v9 )
+    if ( v9 == 0 )
     {
       break;
     }
@@ -912,7 +914,7 @@ bool __cdecl CTextMsgHandler::CheckExists(struct STextMessage * a1) {
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v4);
       return v8;
     }
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator++(v2, 0);
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator++((int)v2, 0);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v2);
   }
   v7 = 0;
@@ -931,12 +933,12 @@ bool  CTextMsgHandler::OnEvent(class CEvn_Event & a2) {
   event = a2->m_iEventId;
   if ( event > 0x1773 )
   {
-    if ( event != 6004 )
+    if ( event == 6004 )
     {
-      return 0;
+      CTextMsgHandler::RefreshList(this);
+      return 1;
     }
-    CTextMsgHandler::RefreshList(this);
-    return 1;
+    return 0;
   }
   if ( event == 6003 )
   {
@@ -945,19 +947,18 @@ bool  CTextMsgHandler::OnEvent(class CEvn_Event & a2) {
   }
   if ( event != 21 )
   {
-    if ( event != 6001 )
+    if ( event == 6001 )
     {
-      return 0;
+      CTextMsgHandler::ExecuteMsg(a2->m_wParam);
+      return 1;
     }
-    CTextMsgHandler::ExecuteMsg(a2->m_wParam);
-    return 1;
-  }
-  if ( ++CTextMsgHandler::m_iUpdateTrigger < 20 )
-  {
     return 0;
   }
-  CTextMsgHandler::m_iUpdateTrigger = 0;
-  CTextMsgHandler::Update();
+  if ( ++CTextMsgHandler::m_iUpdateTrigger >= 20 )
+  {
+    CTextMsgHandler::m_iUpdateTrigger = 0;
+    CTextMsgHandler::Update();
+  }
   return 0;
 }
 
@@ -980,9 +981,9 @@ void __cdecl CTextMsgHandler::AddMsgToVector(struct STextMessage * a1) {
 
   if ( std::vector<STextMessage *>::size(&CTextMsgHandler::m_vMsgs) >= (unsigned int)CTextMsgHandler::m_iMaxMsgs )
   {
-    std::vector<STextMessage *>::begin(v4);
+    std::vector<STextMessage *>::begin((int)v4);
     v11 = 0;
-    if ( *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v4) + 32) )
+    if ( *(_DWORD *)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v4) + 32) != 0 )
     {
       C = *(void **)(*(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator*(v4) + 32);
       operator delete[](C);
@@ -993,7 +994,7 @@ void __cdecl CTextMsgHandler::AddMsgToVector(struct STextMessage * a1) {
     operator delete(v9);
     v6 = v1;
     v5 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>((struct std::_Iterator_base12 *)v4);
-    v8 = std::vector<STextMessage *>::erase(v3, v1[0], v1[1], v2);
+    v8 = std::vector<STextMessage *>::erase((int)v3, v1[0], v1[1], v2);
     v7 = v8;
     LOBYTE(v11) = 1;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::operator=(v8);
@@ -1002,7 +1003,7 @@ void __cdecl CTextMsgHandler::AddMsgToVector(struct STextMessage * a1) {
     v11 = -1;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<STextMessage *>>>(v4);
   }
-  std::vector<STextMessage *>::push_back(&a1);
+  std::vector<STextMessage *>::push_back((int)&a1);
   CTextMsgHandler::SendAllMessages(0, 1, 1);
 }
 

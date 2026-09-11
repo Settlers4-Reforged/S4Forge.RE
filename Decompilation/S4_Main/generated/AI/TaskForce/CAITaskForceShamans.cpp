@@ -7,14 +7,14 @@
 // Decompiled from CAITaskForceShamans *__thiscall CAITaskForceShamans::CAITaskForceShamans(CAITaskForceShamans *this, int iOwnerId, int iFlags)
  CAITaskForceShamans::CAITaskForceShamans(int iOwnerId, int iFlags) {
   
-  CAITaskForceEx::CAITaskForceEx((CAITaskForceEx *)this, iOwnerId, 7, 12, iFlags);
-  *(_DWORD *)this = CAITaskForceShamans::_vftable_;
+  CAITaskForceEx::CAITaskForceEx(this, iOwnerId, 7, 12, iFlags);
+  this->__vftable = (CAITaskForceEx_vtbl *)CAITaskForceShamans::_vftable_;
   return this;
 }
 
 
 // address=[0x132a2c0]
-// Decompiled from void __thiscall CAITaskForceShamans::~CAITaskForceShamans(CAITaskForceShamans *this)
+// Decompiled from void __thiscall CAITaskForceShamans::~CAITaskForceShamans(CAITaskForce **this)
  CAITaskForceShamans::~CAITaskForceShamans(void) {
   
   CAITaskForceEx::~CAITaskForceEx(this);
@@ -43,9 +43,9 @@ void  CAITaskForceShamans::Execute(void) {
   {
     case 0x6B:
       Entity = CAITaskForce::FirstEntity(this);
-      if ( Entity && CAITaskForce::CmdGoal(this) > 0 )
+      if ( Entity != 0 && CAITaskForce::CmdGoal(this) > 0 )
       {
-        while ( Entity )
+        while ( Entity != 0 )
         {
           v6 = CAIEntityInfo::EntityId(Entity);
           v1 = CAITaskForce::CmdGoal(this);
@@ -58,9 +58,9 @@ void  CAITaskForceShamans::Execute(void) {
     case 0x6C:
       v9 = CAITaskForce::FirstEntity(this);
       v13 = 1;
-      if ( v9 && CAITaskForce::CmdGoal(this) > 0 )
+      if ( v9 != 0 && CAITaskForce::CmdGoal(this) > 0 )
       {
-        while ( v9 )
+        while ( v9 != 0 )
         {
           v5 = CAIEntityInfo::EntityId(v9);
           if ( (IAIEnvironment::EntityFlags(v5) & ENTITY_FLAG_ON_BOARD) == 0 )
@@ -70,7 +70,7 @@ void  CAITaskForceShamans::Execute(void) {
           }
           v9 = CAIEntityInfo::Next(v9);
         }
-        if ( v13 )
+        if ( v13 != 0 )
         {
           CAITaskForce::SetStatus(this, 8);
         }
@@ -79,9 +79,9 @@ void  CAITaskForceShamans::Execute(void) {
     case 0x6F:
       v8 = CAITaskForce::FirstEntity(this);
       v12 = 1;
-      if ( v8 )
+      if ( v8 != 0 )
       {
-        while ( v8 )
+        while ( v8 != 0 )
         {
           v4 = CAIEntityInfo::EntityId(v8);
           if ( !IAIEnvironment::EntityIsShamanOutOfMana(v4) )
@@ -98,13 +98,13 @@ void  CAITaskForceShamans::Execute(void) {
       break;
     case 0x70:
       v7 = CAITaskForce::FirstEntity(this);
-      if ( v7 )
+      if ( v7 != 0 )
       {
-        while ( v7 )
+        while ( v7 != 0 )
         {
           v3 = CAIEntityInfo::EntityId(v7);
           v2 = CAITaskForce::CmdGoal(this);
-          if ( !IAIEnvironment::EntitySendShamanWorkEvent(v3, v2) )
+          if ( IAIEnvironment::EntitySendShamanWorkEvent(v3, v2) == 0 )
           {
             return;
           }
@@ -143,7 +143,7 @@ bool  CAITaskForceShamans::NewCommand(int a2, int a3, int a4) {
     case 3u:
       CAITaskForce::MarkGoalAsPosition(this);
       SneakUpPosition = CAITaskForceEx::FindSneakUpPosition(this);
-      if ( SneakUpPosition )
+      if ( SneakUpPosition != 0 )
       {
         CAITaskForce::SetNewStatusAndState(this, 2, 102, 0);
       }

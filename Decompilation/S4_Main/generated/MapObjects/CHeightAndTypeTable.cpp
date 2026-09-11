@@ -467,7 +467,7 @@ int  CHeightAndTypeTable::GetObjectFog(int a2, int a3, int a4) {
         {
           v3 = (unsigned __int8)byte_3ACD720[j];
           v3 += ((unsigned __int8)byte_3ACD720[j] << 8) + ((unsigned __int8)byte_3ACD720[j] << 16);
-          if ( !j )
+          if ( j == 0 )
           {
             v3 = -12114871;
           }

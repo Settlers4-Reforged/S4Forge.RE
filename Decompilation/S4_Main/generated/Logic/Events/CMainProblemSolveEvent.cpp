@@ -39,11 +39,11 @@
  CMainProblemSolveEvent::~CMainProblemSolveEvent(void) {
   
   *(_DWORD *)this = &CMainProblemSolveEvent::_vftable_;
-  if ( *((_DWORD *)this + 17) )
+  if ( *((_DWORD *)this + 17) != 0 )
   {
     (***((void (__thiscall ****)(_DWORD, int))this + 17))(*((_DWORD *)this + 17), 1);
   }
-  if ( *((_DWORD *)this + 25) )
+  if ( *((_DWORD *)this + 25) != 0 )
   {
     delete *((CSiedlerAI **)this + 25);
   }
@@ -58,7 +58,7 @@ bool  CMainProblemSolveEvent::IsShooting(void) {
   int LockedSchedNr; // [esp+0h] [ebp-8h]
 
   LockedSchedNr = CReserveDatabase::GetLockedSchedNr(**((CReserveDatabase ***)this + 10));
-  if ( LockedSchedNr )
+  if ( LockedSchedNr != 0 )
   {
     if ( LockedSchedNr != *((_DWORD *)this + 3) )
     {
@@ -70,12 +70,12 @@ bool  CMainProblemSolveEvent::IsShooting(void) {
   {
     CReserveDatabase::LockReserveDatabase(**((CReserveDatabase ***)this + 10), *((_DWORD *)this + 3));
   }
-  if ( *((_DWORD *)this + 17) )
+  if ( *((_DWORD *)this + 17) != 0 )
   {
     *((_DWORD *)this + 9) = 1;
     return 0;
   }
-  else if ( CSchedule::AllSubProblemsSolved(*((CDynList ***)this + 10), *((_DWORD *)this + 3)) )
+  else if ( CSchedule::AllSubProblemsSolved(*((CDynList ***)this + 10), *((_DWORD *)this + 3)) != 0 )
   {
     return 1;
   }
@@ -102,14 +102,14 @@ bool  CMainProblemSolveEvent::action(void) {
 
   v8 = 0;
   v10 = 0;
-  if ( *((_BYTE *)this + 72) )
+  if ( *((_BYTE *)this + 72) != 0 )
   {
     *(_DWORD *)(*((_DWORD *)this + 25) + 28) = *((_DWORD *)this + 3);
   }
   else
   {
     C = (CSiedlerAI *)operator new(0x48u);
-    if ( C )
+    if ( C != 0 )
     {
       v5 = CSiedlerAI::CSiedlerAI(C, *(struct CEcoSectorAI **)(*((_DWORD *)this + 10) + 36), *((_DWORD *)this + 3));
     }
@@ -122,20 +122,20 @@ bool  CMainProblemSolveEvent::action(void) {
   }
   CSiedlerAI::GetInvokeBuildingType(*((CSiedlerAI **)this + 25), this, (CMainProblemSolveEvent *)((char *)this + 76));
   for ( i = 0;
-        *((_DWORD *)this + i + 19);
+        *((_DWORD *)this + i + 19) != 0;
         ++i )
   {
     v8 = (_DWORD *)CSchedule::GetInvokeEvent(*((_DWORD *)this + 10), *((_DWORD *)this + i + 19));
-    if ( v8 )
+    if ( v8 != 0 )
     {
       if ( v8[12] == 2 )
       {
-        if ( !*((_BYTE *)this + 104) )
+        if ( *((_BYTE *)this + 104) == 0 )
         {
           CInvokeEvent::AddInvokePositionAroundResource(v8, *((_DWORD *)this + 19), *((_DWORD *)this + 27));
           *((_BYTE *)this + 104) = 1;
         }
-        if ( !i )
+        if ( i == 0 )
         {
           v10 = 1;
         }
@@ -144,7 +144,7 @@ bool  CMainProblemSolveEvent::action(void) {
     else
     {
       v4 = operator new(0x50u);
-      if ( v4 )
+      if ( v4 != 0 )
       {
         v3 = (struct IScheduleEntry *)CInvokeEvent::CInvokeEvent(v4, *((_DWORD *)this + i + 19));
       }
@@ -152,32 +152,32 @@ bool  CMainProblemSolveEvent::action(void) {
       {
         v3 = 0;
       }
-      CSchedule::NewSchedEntry(*((CSchedule **)this + 10), v3);
-      if ( !i )
+      CSchedule::NewSchedEntry(*((CDynList ***)this + 10), v3);
+      if ( i == 0 )
       {
         v10 = 1;
       }
     }
   }
-  if ( v10 )
+  if ( v10 != 0 )
   {
     *((_DWORD *)this + 9) = 1;
     return 0;
   }
-  else if ( CSchedule::AllSubProblemsSolved(*((CDynList ***)this + 10), *((_DWORD *)this + 3)) )
+  else if ( CSchedule::AllSubProblemsSolved(*((CDynList ***)this + 10), *((_DWORD *)this + 3)) != 0 )
   {
     *(_DWORD *)(*((_DWORD *)this + 25) + 36) = 0;
     BBSupportTracePrintF(0, "MainCall ProbNr:%i von EventNr: %i", *((_DWORD *)this + 15), *((_DWORD *)this + 3));
     *((_DWORD *)this + 17) = IAI_Module::Problem(*((IAI_Module **)this + 25), *((_DWORD *)this + 15), *((_DWORD *)this + 11), *((_DWORD *)this + 12), *((_DWORD *)this + 13), *((_DWORD *)this + 14));
-    if ( *((_DWORD *)this + 17) )
+    if ( *((_DWORD *)this + 17) != 0 )
     {
       BBSupportTracePrintF(0, "Main OK ProbNr:%i von EventNr: %i", *((_DWORD *)this + 15), *((_DWORD *)this + 3));
-      IAI_Module::Execute(*((IAI_Module **)this + 25), *((struct CSolutionTree **)this + 17));
+      IAI_Module::Execute(*((IAI_Module **)this + 25), *((CDynList ***)this + 17));
       CReserveDatabase::UnLockReserveDatabase(**((CReserveDatabase ***)this + 10), *((_DWORD *)this + 3));
       *((_DWORD *)this + 5) = 1;
-      CSchedule::MarkSolvedProblem(*((CSchedule **)this + 10), *((_DWORD *)this + 8), 1);
+      CSchedule::MarkSolvedProblem(*((CDynList ***)this + 10), *((_DWORD *)this + 8), 1);
       *((_DWORD *)this + 5) = 3;
-      if ( v8 )
+      if ( v8 != 0 )
       {
         v8[5] = 3;
       }
@@ -189,21 +189,21 @@ bool  CMainProblemSolveEvent::action(void) {
       {
         BBSupportTracePrintF(0, "Main Reject ProbNr:%i von EventNr: %i", *((_DWORD *)this + 15), *((_DWORD *)this + 3));
         *((_DWORD *)this + 16) = 1;
-        CSchedule::MarkSolvedProblem(*((CSchedule **)this + 10), *((_DWORD *)this + 8), 0);
+        CSchedule::MarkSolvedProblem(*((CDynList ***)this + 10), *((_DWORD *)this + 8), 0);
         CReserveDatabase::UnLockReserveDatabase(**((CReserveDatabase ***)this + 10), *((_DWORD *)this + 3));
         *((_DWORD *)this + 5) = 3;
-        if ( v8 )
+        if ( v8 != 0 )
         {
           v8[5] = 3;
-          SpecialTask = CSchedule::GetSpecialTask(*((CSchedule **)this + 10), 3);
+          SpecialTask = CSchedule::GetSpecialTask(*((CDynList ***)this + 10), 3);
           CBuildingManagerTask::RemoveBuildingAtPlanning(SpecialTask, v8[11]);
         }
       }
-      if ( !*(_DWORD *)(*((_DWORD *)this + 25) + 36) )
+      if ( *(_DWORD *)(*((_DWORD *)this + 25) + 36) == 0 )
       {
         *((_DWORD *)this + 16) = 2;
         CReserveDatabase::UnLockReserveDatabase(**((CReserveDatabase ***)this + 10), *((_DWORD *)this + 3));
-        CSchedule::MarkSolvedProblem(*((CSchedule **)this + 10), *((_DWORD *)this + 8), 0);
+        CSchedule::MarkSolvedProblem(*((CDynList ***)this + 10), *((_DWORD *)this + 8), 0);
       }
     }
     return 0;
@@ -224,12 +224,12 @@ bool  CMainProblemSolveEvent::IsAlive(void) {
   {
     *((_DWORD *)this + 5) = 3;
     CReserveDatabase::UnLockReserveDatabase(**((CReserveDatabase ***)this + 10), *((_DWORD *)this + 3));
-    CSchedule::MarkSolvedProblem(*((CSchedule **)this + 10), *((_DWORD *)this + 8), 0);
+    CSchedule::MarkSolvedProblem(*((CDynList ***)this + 10), *((_DWORD *)this + 8), 0);
     return 0;
   }
   else if ( *((_DWORD *)this + 16) == 2 )
   {
-    CSchedule::MarkSolvedProblem(*((CSchedule **)this + 10), *((_DWORD *)this + 8), 1);
+    CSchedule::MarkSolvedProblem(*((CDynList ***)this + 10), *((_DWORD *)this + 8), 1);
     CReserveDatabase::UnLockReserveDatabase(**((CReserveDatabase ***)this + 10), *((_DWORD *)this + 3));
     *((_DWORD *)this + 5) = 3;
     return 0;

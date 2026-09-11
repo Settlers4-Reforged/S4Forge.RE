@@ -3,7 +3,7 @@
 // Definitions for class CAIAgentTowerOccupation
 
 // address=[0x1303df0]
-// Decompiled from unsigned int __thiscall CAIAgentTowerOccupation::Execute(CAIAgentTowerOccupation *this, unsigned int a2, unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentTowerOccupation::Execute(CAINormalSectorAgent *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentTowerOccupation::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -18,30 +18,30 @@ unsigned int  CAIAgentTowerOccupation::Execute(unsigned int a2, unsigned int a3)
 
   v11 = 0;
   v3 = CAINormalSectorAgent::SectorAI(this);
-  for ( i = (CAIEntityInfo *)CAITaskForce::FirstEntity((char *)v3 + 2564);
-        i;
+  for ( i = CAITaskForce::FirstEntity((CAITaskForce *)((char *)v3 + 2564));
+        i != 0;
         i = (CAIEntityInfo *)v6 )
   {
-    v6 = CAIEntityInfo::Next(i);
+    v6 = (int)CAIEntityInfo::Next(i);
     v8 = CAIEntityInfo::EntityId(i);
     v13 = 1;
     v10 = CAIEntityInfo::TargetId(i);
     if ( v10 > 0 )
     {
-      EntityInfo = (CAIEntityInfo *)IAIEnvironment::EntityGetEntityInfo(v10, 0);
-      if ( EntityInfo )
+      EntityInfo = IAIEnvironment::EntityGetEntityInfo(v10, 0);
+      if ( EntityInfo != 0 )
       {
         v13 = CAIEntityInfo::TargetId(EntityInfo) != v8;
       }
     }
     if ( v13 )
     {
-      v4 = CAINormalSectorAgent::SectorAI(this);
+      v4 = (CAISectorAI *)CAINormalSectorAgent::SectorAI(this);
       CAISectorAI::AddEntityToReservoir(v4, v8);
     }
     ++v11;
   }
-  if ( v11 )
+  if ( v11 != 0 )
   {
     return CAIAgent::ExecuteResult(0, 0);
   }
@@ -56,14 +56,14 @@ unsigned int  CAIAgentTowerOccupation::Execute(unsigned int a2, unsigned int a3)
 // Decompiled from CAIAgentTowerOccupation *__thiscall CAIAgentTowerOccupation::CAIAgentTowerOccupation(CAIAgentTowerOccupation *this)
  CAIAgentTowerOccupation::CAIAgentTowerOccupation(void) {
   
-  CAINormalSectorAgent::CAINormalSectorAgent(this, string__25);
+  CAINormalSectorAgent::CAINormalSectorAgent((CAINormalSectorAgent *)this, string__25);
   *(_DWORD *)this = &CAIAgentTowerOccupation::_vftable_;
   return this;
 }
 
 
 // address=[0x1325cf0]
-// Decompiled from void __thiscall CAIAgentTowerOccupation::~CAIAgentTowerOccupation(CAIAgentTowerOccupation *this)
+// Decompiled from void __thiscall CAIAgentTowerOccupation::~CAIAgentTowerOccupation(CAIScheduler **this)
  CAIAgentTowerOccupation::~CAIAgentTowerOccupation(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

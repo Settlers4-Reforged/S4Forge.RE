@@ -45,14 +45,13 @@ void  CAIChambers::Push(int a2, int a3) {
     v7 = v8 >> 3;
   }
   result = this;
-  if ( *((int *)this + v7 + 2) >= 40 )
+  if ( *((int *)this + v7 + 2) < 40 )
   {
-    return result;
+    v6 = *((CAIChambers **)this + v7 + 2);
+    *((_DWORD *)this + v7 + 2) = (char *)v6 + 1;
+    result = v6;
+    *((_DWORD *)this + 40 * v7 + (_DWORD)v6 + 82) = a3;
   }
-  v6 = (CAIChambers *)*((_DWORD *)this + v7 + 2);
-  *((_DWORD *)this + v7 + 2) = (char *)v6 + 1;
-  result = v6;
-  *((_DWORD *)this + 40 * v7 + (_DWORD)v6 + 82) = a3;
   return result;
 }
 
@@ -66,15 +65,15 @@ void  CAIChambers::PushTaskForce(class CAITaskForce & a2) {
   int v5; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  result = CAITaskForce::FirstEntity(a2);
+  result = (int)CAITaskForce::FirstEntity(a2);
   for ( i = result;
-        i;
+        i != 0;
         i = result )
   {
-    v5 = CAIEntityInfo::EntityId(i);
+    v5 = CAIEntityInfo::EntityId((CAIEntityInfo *)i);
     v4 = IAIEnvironment::EntityPackedPosition(v5);
     CAIChambers::Push(this, v4, v5);
-    result = CAIEntityInfo::Next(i);
+    result = (int)CAIEntityInfo::Next((CAIEntityInfo *)i);
   }
   return result;
 }
@@ -89,18 +88,18 @@ void  CAIChambers::PushTaskForceEx(class CAITaskForce & a2, int a3) {
   int v6; // [esp+10h] [ebp-8h]
   int i; // [esp+14h] [ebp-4h]
 
-  result = CAITaskForce::FirstEntity(a2);
+  result = (int)CAITaskForce::FirstEntity(a2);
   for ( i = result;
-        i;
+        i != 0;
         i = result )
   {
-    v6 = CAIEntityInfo::EntityId(i);
+    v6 = CAIEntityInfo::EntityId((CAIEntityInfo *)i);
     v5 = IAIEnvironment::EntityPackedPosition(v6);
     if ( (a3 & (1 << IAIEnvironment::EntityWarriorType(v6))) != 0 )
     {
       CAIChambers::Push(this, v5, v6);
     }
-    result = CAIEntityInfo::Next(i);
+    result = (int)CAIEntityInfo::Next((CAIEntityInfo *)i);
   }
   return result;
 }

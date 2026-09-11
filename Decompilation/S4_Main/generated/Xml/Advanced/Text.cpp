@@ -7,16 +7,16 @@
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Text::Text(_DWORD *this, int a2)
  AdvXMLParser::Text::Text(std::string const & a2) {
   
-  _BYTE v4[28]; // [esp+8h] [ebp-2Ch] BYREF
+  std::string v4; // [esp+8h] [ebp-2Ch] BYREF
   int v5; // [esp+30h] [ebp-4h]
 
-  std::string::string(v4, "#text");
+  std::string::string(&v4, "#text");
   v5 = 0;
-  AdvXMLParser::Node::Node(AdvXMLParser::Node::null, v4);
+  ((void (__stdcall *)(void *, std::string *))AdvXMLParser::Node::Node)(AdvXMLParser::Node::null, &v4);
   LOBYTE(v5) = 2;
-  std::string::~string(v4);
+  std::string::~string(&v4);
   *this = &AdvXMLParser::Text::_vftable_;
-  std::string::string(a2);
+  ((void (__stdcall *)(int))std::string::string)(a2);
   return this;
 }
 
@@ -25,16 +25,16 @@
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Text::Text(_DWORD *this, int a2, int a3)
  AdvXMLParser::Text::Text(class AdvXMLParser::NodeContainer & a2, std::string const & a3) {
   
-  _BYTE v5[28]; // [esp+8h] [ebp-2Ch] BYREF
+  std::string v5; // [esp+8h] [ebp-2Ch] BYREF
   int v6; // [esp+30h] [ebp-4h]
 
-  std::string::string(v5, "#text");
+  std::string::string(&v5, "#text");
   v6 = 0;
-  AdvXMLParser::Node::Node(a2, v5);
+  ((void (__stdcall *)(int, std::string *))AdvXMLParser::Node::Node)(a2, &v5);
   LOBYTE(v6) = 2;
-  std::string::~string(v5);
+  std::string::~string(&v5);
   *this = &AdvXMLParser::Text::_vftable_;
-  std::string::string(a3);
+  ((void (__stdcall *)(int))std::string::string)(a3);
   return this;
 }
 
@@ -43,9 +43,9 @@
 // Decompiled from int __thiscall AdvXMLParser::Text::Clone(AdvXMLParser::Text *this, struct AdvXMLParser::NodeContainer *a2)
 class AdvXMLParser::Text *  AdvXMLParser::Text::Clone(class AdvXMLParser::NodeContainer & a2)const {
   
-  if ( operator new(0x40u) )
+  if ( operator new(0x40u) != 0 )
   {
-    return AdvXMLParser::Text::Text(a2, (char *)this + 36);
+    return ((_DWORD (__stdcall *)(struct AdvXMLParser::NodeContainer *, char *))AdvXMLParser::Text::Text)(a2, (char *)this + 36);
   }
   else
   {
@@ -55,19 +55,19 @@ class AdvXMLParser::Text *  AdvXMLParser::Text::Clone(class AdvXMLParser::NodeCo
 
 
 // address=[0x2f13680]
-// Decompiled from int __thiscall AdvXMLParser::Text::GetData(char *this, int a2)
+// Decompiled from std::string *__thiscall AdvXMLParser::Text::GetData(char *this, std::string *a2)
 std::string  AdvXMLParser::Text::GetData(void a2)const {
   
-  std::string::string(this + 36);
+  ((void (__stdcall *)(char *))std::string::string)(this + 36);
   return a2;
 }
 
 
 // address=[0x2f136c0]
-// Decompiled from int __thiscall AdvXMLParser::Text::GetValue(char *this, int a2)
+// Decompiled from std::string *__thiscall AdvXMLParser::Text::GetValue(char *this, std::string *a2)
 std::string  AdvXMLParser::Text::GetValue(void a2)const {
   
-  std::string::string(this + 36);
+  ((void (__stdcall *)(char *))std::string::string)(this + 36);
   return a2;
 }
 
@@ -114,19 +114,19 @@ void  AdvXMLParser::Text::GenerateXML(class AdvXMLParser::GenerateContext & a2)c
   char *v4; // [esp+18h] [ebp-78h]
   int i; // [esp+20h] [ebp-70h]
   int v7; // [esp+28h] [ebp-68h]
-  _BYTE v8[28]; // [esp+2Ch] [ebp-64h] BYREF
-  _BYTE v9[28]; // [esp+48h] [ebp-48h] BYREF
+  std::string v8; // [esp+2Ch] [ebp-64h] BYREF
+  std::string v9; // [esp+48h] [ebp-48h] BYREF
   _BYTE v10[28]; // [esp+64h] [ebp-2Ch] BYREF
   int v11; // [esp+8Ch] [ebp-4h]
 
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v11 = 0;
-  if ( !AdvXMLParser::GenerateContext::MustPreserve(a2) )
+  if ( !(bool)AdvXMLParser::GenerateContext::MustPreserve(a2) )
   {
-    std::string::operator=((int)this + 36);
+    ((void (__stdcall *)(int))std::string::operator=)((int)this + 36);
     AdvXMLParser::Element::Normalize((int)v10);
   }
-  if ( AdvXMLParser::GenerateContext::MustPreserve(a2) )
+  if ( (bool)AdvXMLParser::GenerateContext::MustPreserve(a2) )
   {
     v4 = (char *)this + 36;
   }
@@ -135,25 +135,25 @@ void  AdvXMLParser::Text::GenerateXML(class AdvXMLParser::GenerateContext & a2)c
     v4 = v10;
   }
   v7 = 0;
-  for ( i = std::string::find(34, 0);
+  for ( i = ((int (__stdcall *)(char, int))std::string::find)(34, 0);
         i != std::basic_string_char_std::char_traits_char__std::allocator_char___::npos;
-        i = std::string::find(34, i + 1) )
+        i = ((int (__stdcall *)(char, int))std::string::find)(34, i + 1) )
   {
-    v3 = std::string::substr(v9, v7, i - v7);
+    v3 = ((int (__stdcall *)(std::string *, int, size_t))std::string::substr)(&v9, v7, i - v7);
     LOBYTE(v11) = 1;
-    AdvXMLParser::GenerateContext::operator+=(v3);
+    ((void (__stdcall *)(int))AdvXMLParser::GenerateContext::operator+=)(v3);
     LOBYTE(v11) = 0;
-    std::string::~string(v9);
-    AdvXMLParser::GenerateContext::operator+=("&quote;");
+    std::string::~string(&v9);
+    ((void (__stdcall *)(char *))AdvXMLParser::GenerateContext::operator+=)("&quote;");
     v7 = i + 1;
   }
-  if ( AdvXMLParser::GenerateContext::MustPreserve(a2) || (unsigned __int8)std::operator!=<char>(v4, " ") )
+  if ( (bool)AdvXMLParser::GenerateContext::MustPreserve(a2) || (unsigned __int8)std::operator!=<char>((int)v4, " ") != 0 )
   {
-    v2 = std::string::substr(v8, v7, std::basic_string_char_std::char_traits_char__std::allocator_char___::npos);
+    v2 = ((int (__stdcall *)(std::string *, int, size_t))std::string::substr)(&v8, v7, std::basic_string_char_std::char_traits_char__std::allocator_char___::npos);
     LOBYTE(v11) = 2;
-    AdvXMLParser::GenerateContext::operator+=(v2);
+    ((void (__stdcall *)(int))AdvXMLParser::GenerateContext::operator+=)(v2);
     LOBYTE(v11) = 0;
-    std::string::~string(v8);
+    std::string::~string(&v8);
   }
   v11 = -1;
   std::string::~string(v10);

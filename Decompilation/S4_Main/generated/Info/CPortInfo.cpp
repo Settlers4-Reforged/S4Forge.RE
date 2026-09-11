@@ -6,7 +6,7 @@
 // Decompiled from CPortInfo *__thiscall CPortInfo::CPortInfo(CPortInfo *this)
  CPortInfo::CPortInfo(void) {
   
-  CBuildingInfo::CBuildingInfo(this);
+  CBuildingInfo::CBuildingInfo((CBuildingInfo *)this);
   *(_DWORD *)this = &CPortInfo::_vftable_;
   return this;
 }

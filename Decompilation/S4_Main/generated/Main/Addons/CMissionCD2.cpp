@@ -14,11 +14,11 @@ bool  CMissionCD2::IsExtraInstalledEx(void) {
 // Decompiled from char __thiscall CMissionCD2::EnsureExtraGUI(CMissionCD2 *this, int a2, bool (__cdecl *a3)(int, int, int))
 void  CMissionCD2::EnsureExtraGUI(int a2, bool (__cdecl*)(int,int,int) a3) {
   
-  if ( !*((_DWORD *)this + 1) )
+  if ( this->m_u4 == 0 )
   {
-    CExtraCD::LoadMenuData((wchar_t *)L"Menu\\GuiSetMD2Startscreens.dat");
+    ((void (__stdcall *)(wchar_t *))CExtraCD::LoadMenuData)((wchar_t *)L"Menu\\GuiSetMD2Startscreens.dat");
   }
-  return CExtraCD::EnsureGuiEngineHasGfxFileLoaded(this, 0x28u, *((_DWORD *)this + 1), a2, a3, 0);
+  return CExtraCD::EnsureGuiEngineHasGfxFileLoaded(this, 0x28u, this->m_u4, a2, a3, 0);
 }
 
 

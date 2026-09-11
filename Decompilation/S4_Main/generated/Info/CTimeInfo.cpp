@@ -3,7 +3,7 @@
 // Definitions for class CTimeInfo
 
 // address=[0x14d31b0]
-// Decompiled from void *__cdecl CTimeInfo::GetDateTimeString(void *a1, int a2)
+// Decompiled from std::string *__cdecl CTimeInfo::GetDateTimeString(std::string *a1, int a2)
 std::string __cdecl CTimeInfo::GetDateTimeString(int a1) {
   
   __time64_t Time; // [esp+0h] [ebp-11Ch] BYREF
@@ -17,7 +17,7 @@ std::string __cdecl CTimeInfo::GetDateTimeString(int a1) {
   strcpy(Destination, "AM");
   sub_14D3360(&Time);
   v7 = (_DWORD *)sub_14D33F0(&Time);
-  if ( a2 )
+  if ( a2 != 0 )
   {
     sprintf(Str, "%d. %s, %d, %02i:%02i", v7[3], &g_aszMonthNamesDe[6 * v7[4]], v7[5] + 1900, v7[2], v7[1]);
   }
@@ -31,7 +31,7 @@ std::string __cdecl CTimeInfo::GetDateTimeString(int a1) {
     {
       v7[2] -= 12;
     }
-    if ( !v7[2] )
+    if ( v7[2] == 0 )
     {
       v7[2] = 12;
     }

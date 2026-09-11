@@ -38,11 +38,11 @@ bool  CSettlerSpiralWalk::NextSettlerId(int & a2) {
   _DWORD *v7; // [esp+10h] [ebp-4h]
 
   v7 = this;
-  while ( CSpiralWalk::NextXY(v7, &v6, &v5) )
+  while ( CSpiralWalk::NextXY(v7, &v6, &v5) != 0 )
   {
     v3 = CWorldManager::Index(v6, v5);
     v4 = CWorldManager::SettlerId(v3);
-    if ( v4 )
+    if ( v4 != 0 )
     {
       v7[4] = v6;
       v7[5] = v5;

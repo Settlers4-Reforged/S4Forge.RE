@@ -115,7 +115,7 @@ CAITaskForcePriestsViking__ChooseMilitarySpellDestination___def_172BB45:
 
 
 // address=[0x132e690]
-// Decompiled from void __thiscall CAITaskForcePriestsViking::~CAITaskForcePriestsViking(CAITaskForcePriestsViking *this)
+// Decompiled from void __thiscall CAITaskForcePriestsViking::~CAITaskForcePriestsViking(CAITaskForce **this)
  CAITaskForcePriestsViking::~CAITaskForcePriestsViking(void) {
   
   CAITaskForcePriests::~CAITaskForcePriests(this);

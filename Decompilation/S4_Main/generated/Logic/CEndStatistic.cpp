@@ -6,10 +6,10 @@
 // Decompiled from CEndStatistic *__thiscall CEndStatistic::CEndStatistic(CEndStatistic *this)
  CEndStatistic::CEndStatistic(void) {
   
-  CStatistic::CStatistic(this);
+  CStatistic::CStatistic((CStatistic *)this);
   *(_DWORD *)this = CEndStatistic::_vftable_;
-  std::wstring::wstring((char *)this + 39544);
-  _vec_ctor((char *)this + 39572, 0x1Cu, 9u, std::wstring::wstring, std::wstring::~wstring);
+  std::wstring::wstring((std::wstring *)((char *)this + 39544));
+  _vec_ctor((char *)this + 39572, 0x1Cu, 9u, (void (__thiscall *)(void *))std::wstring::wstring, (void (__thiscall *)(void *))std::wstring::~wstring);
   CEndStatistic::Clear(this);
   return this;
 }
@@ -22,10 +22,10 @@ void  CEndStatistic::Clear(void) {
   CEndStatistic *result; // eax
   int i; // [esp+0h] [ebp-8h]
 
-  CStatistic::Clear(this);
+  CStatistic::Clear((CStatistic *)this);
   *((_DWORD *)this + 9957) = 0;
   *((_DWORD *)this + 9956) = 0;
-  std::wstring::operator=((char *)this + 39544, (wchar_t *)&word_36AD034);
+  std::wstring::operator=((std::wstring *)((char *)this + 39544), (wchar_t *)&word_36AD034);
   *((_BYTE *)this + 39536) = 0;
   result = this;
   *((_DWORD *)this + 9885) = 0;
@@ -59,16 +59,16 @@ void  CEndStatistic::Init(void) {
 void  CEndStatistic::Update(class CStatistic a1) {
   
   int result; // eax
-  int v65; // [esp+0h] [ebp-2Ch]
+  std::wstring *v65; // [esp+0h] [ebp-2Ch]
   int i; // [esp+4h] [ebp-28h]
-  _BYTE v68[28]; // [esp+Ch] [ebp-20h] BYREF
+  std::wstring v68; // [esp+Ch] [ebp-20h] BYREF
 
   CStatistic::Update((CStatistic *)a1, (struct CStatistic *)&a2);
   *(_DWORD *)(a1 + 39824) = CPlayerManager::NumberOfPlayers();
   *(_DWORD *)(a1 + 39828) = CGameData::GetTickCounter(g_pGameData);
-  std::wstring::operator=(g_pGameType + 28);
+  ((void (__stdcall *)(int))std::wstring::operator=)((int)g_pGameType->m_swMapName.m_u);
   *(_BYTE *)(a1 + 39536) = CGameData::IsGameWon(g_pGameData);
-  if ( *(_BYTE *)(a1 + 39536) )
+  if ( *(_BYTE *)(a1 + 39536) != 0 )
   {
     *(_DWORD *)(a1 + 39540) = CGameData::TeamWon(g_pGameData);
   }
@@ -81,9 +81,9 @@ void  CEndStatistic::Update(class CStatistic a1) {
     {
       break;
     }
-    v65 = CPlayerManager::Name(v68, i);
-    std::wstring::operator=(v65);
-    std::wstring::~wstring(v68);
+    v65 = CPlayerManager::Name(&v68, i);
+    ((void (__stdcall *)(std::wstring *))std::wstring::operator=)(v65);
+    std::wstring::~wstring(&v68);
     *(_DWORD *)(a1 + 4 * i + 39832) = CPlayerManager::Race(i);
     *(_DWORD *)(a1 + 4 * i + 39868) = CPlayerManager::Color(i);
     *(_DWORD *)(a1 + 4 * i + 39904) = CAlliances::AllianceId(i);
@@ -93,22 +93,22 @@ void  CEndStatistic::Update(class CStatistic a1) {
 
 
 // address=[0x144fb00]
-// Decompiled from _DWORD *__thiscall CEndStatistic::GetMapName(CEndStatistic *this)
+// Decompiled from wchar_t *__thiscall CEndStatistic::GetMapName(CEndStatistic *this)
 wchar_t const *  CEndStatistic::GetMapName(void) {
   
-  return std::wstring::c_str((CEndStatistic *)((char *)this + 39544));
+  return std::wstring::c_str((std::wstring *)((char *)this + 39544));
 }
 
 
 // address=[0x144fb20]
-// Decompiled from int __thiscall CEndStatistic::GetPlayerName(void *this, int a2, int a3)
+// Decompiled from std::wstring *__thiscall CEndStatistic::GetPlayerName(void *this, std::wstring *a2, int a3)
 std::wstring  CEndStatistic::GetPlayerName(int a2) {
   
   if ( (a3 <= 0 || a3 >= 9) && BBSupportDbgReport(2, "Logic\\EndStatistic.cpp", 112, "_iPlayerId > 0 && _iPlayerId < PLAYER_MAX") == 1 )
   {
     __debugbreak();
   }
-  std::wstring::wstring((int)this + 28 * a3 + 39572);
+  ((void (__stdcall *)(int))std::wstring::wstring)((int)this + 28 * a3 + 39572);
   return a2;
 }
 
@@ -185,8 +185,8 @@ unsigned int  CEndStatistic::GetTickCounter(void) {
 // Decompiled from void __thiscall CEndStatistic::~CEndStatistic(CEndStatistic *this)
  CEndStatistic::~CEndStatistic(void) {
   
-  `eh vector destructor iterator'((char *)this + 39572, 0x1Cu, 9u, std::wstring::~wstring);
-  std::wstring::~wstring((char *)this + 39544);
+  `eh vector destructor iterator'((char *)this + 39572, 0x1Cu, 9u, (void (__thiscall *)(void *))std::wstring::~wstring);
+  std::wstring::~wstring((std::wstring *)((char *)this + 39544));
 }
 
 

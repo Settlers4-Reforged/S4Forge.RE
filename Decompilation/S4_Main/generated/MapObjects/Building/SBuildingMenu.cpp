@@ -6,7 +6,7 @@
 // Decompiled from SBuildingMenu *__thiscall SBuildingMenu::SBuildingMenu(SBuildingMenu *this)
  SBuildingMenu::SBuildingMenu(void) {
   
-  CInfoExchange::CInfoExchange(this);
+  CInfoExchange::CInfoExchange((CInfoExchange *)this);
   *(_DWORD *)this = &SBuildingMenu::_vftable_;
   return this;
 }

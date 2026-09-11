@@ -27,9 +27,9 @@ bool  CWarriorEntitySpiralWalk::NextEntity(class IEntity * & a2) {
   while ( CSettlerSpiralWalk::NextSettlerId(v6, &v5) )
   {
     v7 = (unsigned __int8 *)CMapObjectMgr::Entity(v5);
-    if ( (((unsigned int)&loc_1FFFFFF + 1) & IEntity::Flags(v7)) != 0 && (*((_DWORD *)v6 + 7) & (1 << IEntity::WarriorType())) != 0 )
+    if ( (((unsigned int)&loc_1FFFFFF + 1) & IEntity::Flags(v7)) != 0 && (*((_DWORD *)v6 + 7) & (1 << ((int (__stdcall *)())IEntity::WarriorType)())) != 0 )
     {
-      v4 = IEntity::OwnerId(v7);
+      v4 = IEntity::OwnerId((IEntity *)v7);
       v2 = CAlliances::PlayerBit(v4);
       if ( (*((_DWORD *)v6 + 6) & v2) != 0 )
       {

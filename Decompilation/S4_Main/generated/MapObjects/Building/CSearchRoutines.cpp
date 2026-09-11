@@ -36,7 +36,7 @@ int __cdecl CSearchRoutines::SearchTree(int a1, int a2, int a3) {
   int v7; // [esp+14h] [ebp-14h]
   IDecoObject *v8; // [esp+18h] [ebp-10h]
 
-  if ( CWorldManager::FlagBits(a1, a2, 0x24u) )
+  if ( CWorldManager::FlagBits(a1, a2, 0x24u) != 0 )
   {
     return 0;
   }
@@ -45,7 +45,7 @@ int __cdecl CSearchRoutines::SearchTree(int a1, int a2, int a3) {
     return 0;
   }
   v7 = CWorldManager::ObjectId(a1, a2);
-  if ( !v7 )
+  if ( v7 == 0 )
   {
     return 0;
   }
@@ -53,15 +53,15 @@ int __cdecl CSearchRoutines::SearchTree(int a1, int a2, int a3) {
   IsStaticInstance = IDecoObject::IsStaticInstance(v8);
   if ( !IsStaticInstance )
   {
-    v4 = IEntity::Type((unsigned __int16 *)v8);
+    v4 = IEntity::Type(v8);
     BBSupportTracePrintF(0, "CSearchRoutines::SearchTree(): Tree %u, X: %u, Y: %u, Type: %u was already dynamic instance!", v7, a1, a2, v4);
     return 0;
   }
-  FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
+  FreeSlot = ((int (__thiscall *)(bool))CMapObjectMgr::GetFreeSlot)(IsStaticInstance);
   v6 = (CTree *)CTree::operator new(0x50u);
-  if ( v6 )
+  if ( v6 != 0 )
   {
-    CTree::CTree(v6, v8, FreeSlot, a1, a2);
+    CTree::CTree(v6, (const struct CTree *)v8, FreeSlot, a1, a2);
   }
   return FreeSlot;
 }
@@ -78,19 +78,19 @@ int __cdecl CSearchRoutines::SearchTreeSeedPos(int a1, int a2, int a3) {
   int i; // [esp+24h] [ebp-4h]
 
   v6 = CWorldManager::Index(a1, a2);
-  if ( CWorldManager::MapObjectId(v6) )
+  if ( CWorldManager::MapObjectId(v6) != 0 )
   {
     return 0;
   }
   if ( (a3 & 0xF) != 0 )
   {
-    v7 = ((unsigned int)CGameData::Rand(g_pGameData) & 3) == 0;
+    v7 = (CGameData::Rand(g_pGameData) & 3) == 0;
   }
   else
   {
-    v7 = dword_378D7E0[(unsigned int)CGameData::Rand(g_pGameData) & 7];
+    v7 = dword_378D7E0[CGameData::Rand(g_pGameData) & 7];
   }
-  if ( !CDecoObjMgr::IsAddDecoObjOk((CDecoObjMgr *)&g_cDecoObjMgr, a1, a2, 1, 0, v7) )
+  if ( CDecoObjMgr::IsAddDecoObjOk(&g_cDecoObjMgr, a1, a2, OBJECT_TREE01A, 0, v7) == 0 )
   {
     return 0;
   }
@@ -125,19 +125,19 @@ int __cdecl CSearchRoutines::SearchTreeSeedPosMaya(int a1, int a2, int a3) {
   int i; // [esp+24h] [ebp-4h]
 
   v7 = CWorldManager::Index(a1, a2);
-  if ( CWorldManager::MapObjectId(v7) )
+  if ( CWorldManager::MapObjectId(v7) != 0 )
   {
     return 0;
   }
   if ( (a3 & 0xF) != 0 )
   {
-    v8 = ((unsigned int)CGameData::Rand(g_pGameData) & 3) == 0;
+    v8 = (CGameData::Rand(g_pGameData) & 3) == 0;
   }
   else
   {
-    v8 = dword_378D7E0[(unsigned int)CGameData::Rand(g_pGameData) & 7];
+    v8 = dword_378D7E0[CGameData::Rand(g_pGameData) & 7];
   }
-  if ( !CDecoObjMgr::IsAddDecoObjOk((CDecoObjMgr *)&g_cDecoObjMgr, a1, a2, 1, 0, v8) )
+  if ( CDecoObjMgr::IsAddDecoObjOk(&g_cDecoObjMgr, a1, a2, OBJECT_TREE01A, 0, v8) == 0 )
   {
     return 0;
   }
@@ -173,20 +173,20 @@ int __cdecl CSearchRoutines::SearchAgave(int a1, int a2, int a3) {
   int FreeSlot; // [esp+18h] [ebp-10h]
 
   v7 = CWorldManager::ObjectId(a1, a2);
-  if ( !v7 )
+  if ( v7 == 0 )
   {
     return 0;
   }
   v6 = (unsigned __int8 *)CMapObjectMgr::Entity(v7);
-  if ( IEntity::ObjType(v6) != 32 )
+  if ( IEntity::ObjType((IEntity *)v6) != DECO_OBJ_2 )
   {
     return 0;
   }
-  if ( IEntity::Type((unsigned __int16 *)v6) != 211 )
+  if ( IEntity::Type((IEntity *)v6) != 211 )
   {
     return 0;
   }
-  if ( !IEntity::FlagBits(v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  if ( IEntity::FlagBits((IEntity *)v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) == 0 )
   {
     return 0;
   }
@@ -196,11 +196,11 @@ int __cdecl CSearchRoutines::SearchAgave(int a1, int a2, int a3) {
   {
     return 0;
   }
-  FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
+  FreeSlot = ((int (__thiscall *)(bool))CMapObjectMgr::GetFreeSlot)(IsStaticInstance);
   v4 = (CPlant *)CPlant::operator new(0x50u);
-  if ( v4 )
+  if ( v4 != 0 )
   {
-    CPlant::CPlant(v4, v5, FreeSlot, a1, a2);
+    CPlant::CPlant(v4, (const struct CPlant *)v5, FreeSlot, a1, a2);
   }
   return FreeSlot;
 }
@@ -235,7 +235,7 @@ int __cdecl CSearchRoutines::SearchAgaveSeedPos(int a1, int a2, int a3) {
     v3 = a1 + CSpiralOffsets::DeltaX(v5);
     v4 = a2 + CSpiralOffsets::DeltaY(v5);
     v7 = CWorldManager::Index(v3, v4);
-    if ( CWorldManager::FlagBits(v7, 0x7Fu) )
+    if ( CWorldManager::FlagBits(v7, 0x7Fu) != 0 )
     {
       return 0;
     }
@@ -257,20 +257,20 @@ int __cdecl CSearchRoutines::SearchSunflower(int a1, int a2, int a3) {
   int FreeSlot; // [esp+18h] [ebp-10h]
 
   v7 = CWorldManager::ObjectId(a1, a2);
-  if ( !v7 )
+  if ( v7 == 0 )
   {
     return 0;
   }
   v6 = (unsigned __int8 *)CMapObjectMgr::Entity(v7);
-  if ( IEntity::ObjType(v6) != 32 )
+  if ( IEntity::ObjType((IEntity *)v6) != DECO_OBJ_2 )
   {
     return 0;
   }
-  if ( IEntity::Type((unsigned __int16 *)v6) != 255 )
+  if ( IEntity::Type((IEntity *)v6) != 255 )
   {
     return 0;
   }
-  if ( !IEntity::FlagBits(v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  if ( IEntity::FlagBits((IEntity *)v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) == 0 )
   {
     return 0;
   }
@@ -280,11 +280,11 @@ int __cdecl CSearchRoutines::SearchSunflower(int a1, int a2, int a3) {
   {
     return 0;
   }
-  FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
+  FreeSlot = ((int (__thiscall *)(bool))CMapObjectMgr::GetFreeSlot)(IsStaticInstance);
   v4 = (CPlant *)CPlant::operator new(0x50u);
-  if ( v4 )
+  if ( v4 != 0 )
   {
-    CPlant::CPlant(v4, v5, FreeSlot, a1, a2);
+    CPlant::CPlant(v4, (const struct CPlant *)v5, FreeSlot, a1, a2);
   }
   return FreeSlot;
 }
@@ -319,7 +319,7 @@ int __cdecl CSearchRoutines::SearchSunflowerSeedPos(int a1, int a2, int a3) {
     v3 = a1 + CSpiralOffsets::DeltaX(v5);
     v4 = a2 + CSpiralOffsets::DeltaY(v5);
     v7 = CWorldManager::Index(v3, v4);
-    if ( CWorldManager::FlagBits(v7, 0x7Fu) )
+    if ( CWorldManager::FlagBits(v7, 0x7Fu) != 0 )
     {
       return 0;
     }
@@ -341,20 +341,20 @@ int __cdecl CSearchRoutines::SearchVine(int a1, int a2, int a3) {
   int FreeSlot; // [esp+18h] [ebp-10h]
 
   v7 = CWorldManager::ObjectId(a1, a2);
-  if ( !v7 )
+  if ( v7 == 0 )
   {
     return 0;
   }
   v6 = (unsigned __int8 *)CMapObjectMgr::Entity(v7);
-  if ( IEntity::ObjType(v6) != 32 )
+  if ( IEntity::ObjType((IEntity *)v6) != DECO_OBJ_2 )
   {
     return 0;
   }
-  if ( IEntity::Type((unsigned __int16 *)v6) != 162 )
+  if ( IEntity::Type((IEntity *)v6) != 162 )
   {
     return 0;
   }
-  if ( !IEntity::FlagBits(v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  if ( IEntity::FlagBits((IEntity *)v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) == 0 )
   {
     return 0;
   }
@@ -364,11 +364,11 @@ int __cdecl CSearchRoutines::SearchVine(int a1, int a2, int a3) {
   {
     return 0;
   }
-  FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
+  FreeSlot = ((int (__thiscall *)(bool))CMapObjectMgr::GetFreeSlot)(IsStaticInstance);
   v4 = (CPlant *)CPlant::operator new(0x50u);
-  if ( v4 )
+  if ( v4 != 0 )
   {
-    CPlant::CPlant(v4, v5, FreeSlot, a1, a2);
+    CPlant::CPlant(v4, (const struct CPlant *)v5, FreeSlot, a1, a2);
   }
   return FreeSlot;
 }
@@ -404,7 +404,7 @@ int __cdecl CSearchRoutines::SearchVineSeedPos(int a1, int a2, int a3) {
     v4 = a1 + CSpiralOffsets::DeltaX(i);
     v5 = a2 + CSpiralOffsets::DeltaY(i);
     v3 = CWorldManager::Index(v4, v5);
-    if ( CWorldManager::FlagBits(v3, 0x7Fu) )
+    if ( CWorldManager::FlagBits(v3, 0x7Fu) != 0 )
     {
       return 0;
     }
@@ -425,16 +425,16 @@ int __cdecl CSearchRoutines::SearchGrain(int a1, int a2, int a3) {
   int FreeSlot; // [esp+18h] [ebp-10h]
 
   v7 = CWorldManager::ObjectId(a1, a2);
-  if ( !v7 )
+  if ( v7 == 0 )
   {
     return 0;
   }
   v6 = (unsigned __int8 *)CMapObjectMgr::Entity(v7);
-  if ( IEntity::ObjType(v6) != 32 || IEntity::Type((unsigned __int16 *)v6) != 209 && IEntity::Type((unsigned __int16 *)v6) != 210 )
+  if ( IEntity::ObjType((IEntity *)v6) != DECO_OBJ_2 || IEntity::Type((IEntity *)v6) != 209 && IEntity::Type((IEntity *)v6) != 210 )
   {
     return 0;
   }
-  if ( !IEntity::FlagBits(v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  if ( IEntity::FlagBits((IEntity *)v6, (EntityFlag)((char *)&loc_1FFFFFF + 1)) == 0 )
   {
     return 0;
   }
@@ -444,11 +444,11 @@ int __cdecl CSearchRoutines::SearchGrain(int a1, int a2, int a3) {
   {
     return 0;
   }
-  FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
+  FreeSlot = ((int (__thiscall *)(bool))CMapObjectMgr::GetFreeSlot)(IsStaticInstance);
   v4 = (CPlant *)CPlant::operator new(0x50u);
-  if ( v4 )
+  if ( v4 != 0 )
   {
-    CPlant::CPlant(v4, v5, FreeSlot, a1, a2);
+    CPlant::CPlant(v4, (const struct CPlant *)v5, FreeSlot, a1, a2);
   }
   return FreeSlot;
 }
@@ -483,7 +483,7 @@ int __cdecl CSearchRoutines::SearchGrainSeedPos(int a1, int a2, int a3) {
     v3 = a1 + CSpiralOffsets::DeltaX(v5);
     v4 = a2 + CSpiralOffsets::DeltaY(v5);
     v7 = CWorldManager::Index(v3, v4);
-    if ( CWorldManager::FlagBits(v7, 0x7Fu) )
+    if ( CWorldManager::FlagBits(v7, 0x7Fu) != 0 )
     {
       return 0;
     }
@@ -502,25 +502,25 @@ int __cdecl CSearchRoutines::SearchBeehive(int a1, int a2, int a3) {
   unsigned __int8 *v5; // [esp+Ch] [ebp-4h]
 
   v4 = CWorldManager::ObjectId(a1, a2);
-  if ( !v4 )
+  if ( v4 == 0 )
   {
     return 0;
   }
   v3 = CWorldManager::Index(a1, a2);
-  if ( CWorldManager::FlagBits(v3, 0x20u) )
+  if ( CWorldManager::FlagBits(v3, 0x20u) != 0 )
   {
     return 0;
   }
   v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v4);
-  if ( IEntity::ObjType(v5) != 32 )
+  if ( IEntity::ObjType((IEntity *)v5) != DECO_OBJ_2 )
   {
     return 0;
   }
-  if ( IEntity::Type((unsigned __int16 *)v5) != 217 )
+  if ( IEntity::Type((IEntity *)v5) != 217 )
   {
     return 0;
   }
-  if ( IEntity::FlagBits(v5, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  if ( IEntity::FlagBits((IEntity *)v5, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0 )
   {
     return v4;
   }
@@ -535,8 +535,8 @@ int __cdecl CSearchRoutines::SearchBeehivePos(int a1, int a2, int a3) {
   unsigned int v2; // eax
 
   CWorldManager::Index(a1, a2);
-  v2 = (unsigned int)CGameData::Rand(g_pGameData);
-  if ( CDecoObjMgr::IsAddDecoObjOk((CDecoObjMgr *)&g_cDecoObjMgr, a1, a2, 217, 0, v2 % 3) )
+  v2 = CGameData::Rand(g_pGameData);
+  if ( CDecoObjMgr::IsAddDecoObjOk(&g_cDecoObjMgr, a1, a2, OBJECT_HIVE, 0, v2 % 3) != 0 )
   {
     return -1;
   }
@@ -556,7 +556,7 @@ int __cdecl CSearchRoutines::SearchMushroom(int a1, int a2, int a3) {
   unsigned __int8 *v5; // [esp+8h] [ebp-4h]
 
   v4 = CWorldManager::ObjectId(a1, a2);
-  if ( v4 && (v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v4), IEntity::ObjType(v5) == 32) && (IEntity::Type((unsigned __int16 *)v5) == 212 || IEntity::Type((unsigned __int16 *)v5) == 213 || IEntity::Type((unsigned __int16 *)v5) == 214) && IEntity::FlagBits(v5, (EntityFlag)((char *)&loc_1FFFFFF + 1)) && (v3 = (IDecoObject *)CMapObjectMgr::EntityPtr(v4), IDecoObject::IsStaticInstance(v3)) )
+  if ( v4 != 0 && (v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v4), IEntity::ObjType((IEntity *)v5) == DECO_OBJ_2) && (IEntity::Type((IEntity *)v5) == 212 || IEntity::Type((IEntity *)v5) == 213 || IEntity::Type((IEntity *)v5) == 214) && IEntity::FlagBits((IEntity *)v5, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0 && (v3 = (IDecoObject *)CMapObjectMgr::EntityPtr(v4), IDecoObject::IsStaticInstance(v3)) )
   {
     return v4;
   }
@@ -574,11 +574,11 @@ int __cdecl CSearchRoutines::SearchMushroomSeedPos(int a1, int a2, int a3) {
   int v3; // [esp+0h] [ebp-4h]
 
   v3 = CWorldManager::Index(a1, a2);
-  if ( !CWorldManager::FlagBits(v3, 4u) )
+  if ( CWorldManager::FlagBits(v3, 4u) == 0 )
   {
     return 0;
   }
-  if ( CDecoObjMgr::IsAddDecoObjOk((CDecoObjMgr *)&g_cDecoObjMgr, a1, a2, 212, 0, 0) )
+  if ( CDecoObjMgr::IsAddDecoObjOk(&g_cDecoObjMgr, a1, a2, OBJECT_MUSHROOM_DARK1, 0, 0) != 0 )
   {
     return -1;
   }
@@ -595,7 +595,7 @@ int __cdecl CSearchRoutines::SearchVenison(int a1, int a2, int a3) {
   unsigned __int8 *v5; // [esp+4h] [ebp-4h]
 
   v4 = CWorldManager::MapObjectId(a1, a2);
-  if ( v4 && (v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v4), IEntity::ObjType(v5) == 128) && (v2 = IEntity::Type((unsigned __int16 *)v5), CAnimalMgr::IsHuntable((CAnimalMgr *)&g_cAnimalMgr, v2)) && IEntity::FlagBits(v5, (EntityFlag)&loc_3000000) )
+  if ( v4 != 0 && (v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v4), IEntity::ObjType((IEntity *)v5) == 128) && (v2 = IEntity::Type((IEntity *)v5), CAnimalMgr::IsHuntable((CAnimalMgr *)&g_cAnimalMgr, v2) == 1) && IEntity::FlagBits((IEntity *)v5, (EntityFlag)&loc_3000000) != 0 )
   {
     return v4;
   }
@@ -624,7 +624,7 @@ int __cdecl CSearchRoutines::SearchStone(int a1, int a2, int a3) {
   CStone *v6; // [esp+10h] [ebp-14h]
   IDecoObject *v7; // [esp+14h] [ebp-10h]
 
-  if ( CWorldManager::FlagBits(a1, a2, 4u) )
+  if ( CWorldManager::FlagBits(a1, a2, 4u) != 0 )
   {
     return 0;
   }
@@ -634,11 +634,11 @@ int __cdecl CSearchRoutines::SearchStone(int a1, int a2, int a3) {
   }
   v3 = CWorldManager::ObjectId(a1, a2);
   v7 = (IDecoObject *)CMapObjectMgr::EntityPtr(v3);
-  if ( !v7 && BBSupportDbgReport(2, "MapObjects\\Building\\SearchRoutines.cpp", 483, "pSrcStone") == 1 )
+  if ( v7 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\SearchRoutines.cpp", 483, "pSrcStone") == 1 )
   {
     __debugbreak();
   }
-  if ( !v7 )
+  if ( v7 == 0 )
   {
     return 0;
   }
@@ -647,11 +647,11 @@ int __cdecl CSearchRoutines::SearchStone(int a1, int a2, int a3) {
   {
     return 0;
   }
-  FreeSlot = CMapObjectMgr::GetFreeSlot(IsStaticInstance);
+  FreeSlot = ((int (__thiscall *)(bool))CMapObjectMgr::GetFreeSlot)(IsStaticInstance);
   v6 = (CStone *)CStone::operator new(0x48u);
-  if ( v6 )
+  if ( v6 != 0 )
   {
-    CStone::CStone(v6, v7, FreeSlot, a1, a2);
+    CStone::CStone(v6, (const struct CStone *)v7, FreeSlot, a1, a2);
   }
   return FreeSlot;
 }
@@ -683,7 +683,7 @@ int __cdecl CSearchRoutines::SearchFish(int a1, int a2, int a3) {
     }
     v8 = v5 + CWorldManager::SurroundingHexPointRelIndex(i);
     iFishAmount = CWorldManager::Resource(v8);
-    if ( (unsigned int)(iFishAmount - 1) <= 0xE && !CWorldManager::FlagBits(v8, 4u) )
+    if ( (unsigned int)(iFishAmount - 1) <= 0xE && CWorldManager::FlagBits(v8, 4u) == 0 )
     {
       v7 = CWorldManager::Ground(v8) & 0xF0;
       if ( v7 == 96 || v7 == 0 )
@@ -788,7 +788,7 @@ int __cdecl CSearchRoutines::SearchDarkLand(int a1, int a2, int a3) {
   int v3; // [esp+0h] [ebp-4h]
 
   v3 = CWorldManager::Index(a1, a2);
-  if ( CWorldManager::FlagBits(v3, 4u) )
+  if ( CWorldManager::FlagBits(v3, 4u) != 0 )
   {
     return -1;
   }
@@ -806,7 +806,7 @@ int __cdecl CSearchRoutines::SearchGreenLand(int a1, int a2, int a3) {
   int v3; // [esp+0h] [ebp-4h]
 
   v3 = CWorldManager::Index(a1, a2);
-  if ( CWorldManager::FlagBits(v3, 4u) )
+  if ( CWorldManager::FlagBits(v3, 4u) != 0 )
   {
     return 0;
   }
@@ -833,7 +833,7 @@ int __cdecl CSearchRoutines::CalcRawness(int a1) {
   int v13; // [esp+14h] [ebp-8h]
   int v14; // [esp+18h] [ebp-4h]
 
-  v14 = CWorldManager::Width(v1);
+  v14 = ((int (__thiscall *)(int))CWorldManager::Width)(v1);
   v2 = CWorldManager::GroundHeight(a1 - 1);
   v3 = CWorldManager::GroundHeight(a1 + 1);
   v12 = j__abs(v2 - v3);

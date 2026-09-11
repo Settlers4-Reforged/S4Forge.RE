@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CDiggerRole::New(int a1)
 class CPersistence * __cdecl CDiggerRole::New(std::istream & a1) {
   
-  if ( operator new(0x30u) )
+  if ( operator new(0x30u) != 0 )
   {
-    return CDiggerRole::CDiggerRole(a1);
+    return ((_DWORD (__stdcall *)(int))CDiggerRole::CDiggerRole)(a1);
   }
   else
   {
@@ -46,7 +46,7 @@ void  CDiggerRole::LogicUpdateJob(class CSettler * a2) {
   else if ( m_iTask == 16 )
   {
     this->m_uCycleFrames = IMovingEntity::GetActualTask(a2)->m_iFrameCount;
-    if ( CDiggerRole::CheckDig(this, a2) )
+    if ( CDiggerRole::CheckDig(this, a2) != 0 )
     {
       IAnimatedEntity::RegisterForLogicUpdate(a2, this->m_uCycleFrames);
     }
@@ -55,10 +55,10 @@ void  CDiggerRole::LogicUpdateJob(class CSettler * a2) {
 
 
 // address=[0x15689d0]
-// Decompiled from int __stdcall CDiggerRole::PostLoadInit(CPropertySet *a1)
+// Decompiled from int __stdcall CDiggerRole::PostLoadInit(IEntity *a1)
 void  CDiggerRole::PostLoadInit(class CSettler * a1) {
   
-  return CWarMap::AddEntity(a1);
+  return ((int (__cdecl *)(CPropertySet *))CWarMap::AddEntity)((CPropertySet *)a1);
 }
 
 
@@ -73,22 +73,22 @@ bool  CDiggerRole::SetFree(class CSettler * a2, int a3) {
   CBuilding *v8; // [esp+4h] [ebp-Ch]
   IBuildingRole *v9; // [esp+8h] [ebp-8h]
 
-  if ( this->m_uHomeEntityId )
+  if ( this->m_uHomeEntityId != 0 )
   {
-    if ( !IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\DiggerRole.cpp", 460, "_pSettler->FlagBits( ENTITY_FLAG_ATTACHED )") == 1 )
+    if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\DiggerRole.cpp", 460, "_pSettler->FlagBits( ENTITY_FLAG_ATTACHED )") == 1 )
     {
       __debugbreak();
     }
     v8 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_uHomeEntityId);
     v9 = CBuilding::Role(v8);
-    if ( !v9->GetBuildingRole(v9) )
+    if ( v9->GetBuildingRole(v9) == 0 )
     {
       v7 = (CBuildingSiteRole *)CBuilding::Role(v8);
       v3 = IEntity::ID(a2);
       CBuildingSiteRole::BuilderLeft(v7, v3);
     }
   }
-  if ( debug && DEBUG_FLAGS[dword_41520A4] )
+  if ( debug != 0 && DEBUG_FLAGS[dword_41520A4] != 0 )
   {
     m_uHomeEntityId = this->m_uHomeEntityId;
     v4 = IEntity::ID(a2);
@@ -187,7 +187,7 @@ class CDiggerRole * __cdecl CDiggerRole::Load(std::istream & a1) {
 // Decompiled from void __thiscall CDiggerRole::~CDiggerRole(CDiggerRole *this)
  CDiggerRole::~CDiggerRole(void) {
   
-  *(_DWORD *)this = &CDiggerRole::_vftable_;
+  this->__vftable = (ISettlerRole_vtbl *)&CDiggerRole::_vftable_;
   ISettlerRole::~ISettlerRole(this);
 }
 
@@ -248,7 +248,7 @@ void  CDiggerRole::TakeJob(class CSettler * a2) {
       v13 = CWorldManager::X(v15);
       v9 = CWorldManager::Y(v15) - v11 + 15;
       this->m_uDigMapPos = s_iDigMap[IEntity::OwnerId(a2)][v10->m_iDigMap].m_vCells[v13 - v12 + 15][v9];
-      if ( CDiggerRole::CheckDig(this, a2) )
+      if ( CDiggerRole::CheckDig(this, a2) != 0 )
       {
         IMovingEntity::SetDisplacementCosts(a2, 10);
         IAnimatedEntity::RegisterForLogicUpdate(a2, this->m_iWalkspeed);
@@ -277,11 +277,11 @@ void  CDiggerRole::TakeJob(class CSettler * a2) {
 // Decompiled from void __thiscall CDiggerRole::Init(CDiggerRole *this, IEntity *a1)
 void  CDiggerRole::Init(class CSettler * a1) {
   
-  if ( IEntity::FlagBits(a1, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\DiggerRole.cpp", 138, "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED )") == 1 )
+  if ( IEntity::FlagBits(a1, ENTITY_FLAG_ATTACHED) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\DiggerRole.cpp", 138, "!_pSettler->FlagBits( ENTITY_FLAG_ATTACHED )") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_uHomeEntityId && BBSupportDbgReport(2, "MapObjects\\Settler\\DiggerRole.cpp", 139, "!m_uHomeEntityId") == 1 )
+  if ( this->m_uHomeEntityId != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\DiggerRole.cpp", 139, "!m_uHomeEntityId") == 1 )
   {
     __debugbreak();
   }
@@ -312,9 +312,9 @@ void  CDiggerRole::ConvertEventIntoGoal(class CSettler * _pSettler, class CEntit
   {
     this->m_uU1 = 0;
     v12 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, a3->m_iDataA);
-    if ( IEntity::FlagBits(v12, (EntityFlag)4096) )
+    if ( IEntity::FlagBits(v12, (EntityFlag)4096) != 0 )
     {
-      if ( debug && DEBUG_FLAGS[dword_41520A4] )
+      if ( debug != 0 && DEBUG_FLAGS[dword_41520A4] != 0 )
       {
         m_iDataA = a3->m_iDataA;
         v4 = IEntity::ID(_pSettler);
@@ -325,7 +325,7 @@ void  CDiggerRole::ConvertEventIntoGoal(class CSettler * _pSettler, class CEntit
       v5 = IEntity::Race(_pSettler);
       v6 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v5, 0x44u);
       _pSettler->NewToDoList(_pSettler, (int)v6, 68);
-      if ( debug && DEBUG_FLAGS[dword_41520A4] )
+      if ( debug != 0 && DEBUG_FLAGS[dword_41520A4] != 0 )
       {
         m_uHomeEntityId = this->m_uHomeEntityId;
         v7 = IEntity::ID(_pSettler);
@@ -335,20 +335,17 @@ void  CDiggerRole::ConvertEventIntoGoal(class CSettler * _pSettler, class CEntit
   }
   else if ( m_iEvent == 7 || m_iEvent == 9 )
   {
-    if ( debug )
+    if ( debug != 0 && DEBUG_FLAGS[dword_41520A4] != 0 )
     {
-      if ( DEBUG_FLAGS[dword_41520A4] )
-      {
-        v9 = this->m_uHomeEntityId;
-        v3 = IEntity::ID(_pSettler);
-        BBSupportTracePrintF(0, "Digger %u cancel order of building %u", v3, v9);
-      }
+      v9 = this->m_uHomeEntityId;
+      v3 = IEntity::ID(_pSettler);
+      BBSupportTracePrintF(0, "Digger %u cancel order of building %u", v3, v9);
     }
     this->SetFree(this, _pSettler, a3->m_iDataC);
   }
-  else if ( !IEntity::FlagBits(_pSettler, ENTITY_FLAG_Registered) )
+  else if ( IEntity::FlagBits(_pSettler, ENTITY_FLAG_Registered) == 0 )
   {
-    if ( debug && DEBUG_FLAGS[dword_41520A4] )
+    if ( debug != 0 && DEBUG_FLAGS[dword_41520A4] != 0 )
     {
       BBSupportTracePrintF(0, "ConvertEventIntoGoal DiggerRole - unknown event %u", a3->m_iEvent);
     }
@@ -406,12 +403,12 @@ void  CDiggerRole::SearchDig(class CSettler * _pSettler) {
     }
     iOwner = IEntity::OwnerId(_pSettler);
     v13 = s_iDigMap[iOwner][v14->m_iDigMap].m_vCells[iMapX][iMapY];
-    if ( s_iDigMap[iOwner][v14->m_iDigMap].m_vCells[iMapX][iMapY] )
+    if ( s_iDigMap[iOwner][v14->m_iDigMap].m_vCells[iMapX][iMapY] != 0 )
     {
       v19 = iMapX + v10 - 15;
       v20 = iMapY + v9 - 15;
       v17 = CWorldManager::GroundHeight(v19, v20);
-      if ( v13 != v17 && !CWorldManager::FlagBits(v19, v20, 0x20u) )
+      if ( v13 != v17 && CWorldManager::FlagBits(v19, v20, 0x20u) == 0 )
       {
         if ( v13 >= v17 )
         {
@@ -427,11 +424,11 @@ void  CDiggerRole::SearchDig(class CSettler * _pSettler) {
       }
     }
   }
-  while ( !v11 && v12 <= 961 );
+  while ( v11 == 0 && v12 <= 961 );
   if ( v12 <= 961 )
   {
     CWorldManager::SetFlagBits(v19, v20, 32);
-    if ( CWorldManager::FlagBits(v19, v20, 1u) )
+    if ( CWorldManager::FlagBits(v19, v20, 1u) != 0 )
     {
       BBSupportTracePrintF(0, "Digger trouble %u %u", this->m_uHomeEntityId, v14->m_iDigMap);
     }
@@ -441,7 +438,7 @@ void  CDiggerRole::SearchDig(class CSettler * _pSettler) {
   }
   else
   {
-    if ( debug && DEBUG_FLAGS[dword_41520A4] )
+    if ( debug != 0 && DEBUG_FLAGS[dword_41520A4] != 0 )
     {
       m_uHomeEntityId = this->m_uHomeEntityId;
       v6 = IEntity::ID(_pSettler);
@@ -449,12 +446,9 @@ void  CDiggerRole::SearchDig(class CSettler * _pSettler) {
     }
     if ( v14->m_uDiggerAct == 1 )
     {
-      if ( debug )
+      if ( debug != 0 && DEBUG_FLAGS[dword_41520A4] != 0 )
       {
-        if ( DEBUG_FLAGS[dword_41520A4] )
-        {
-          BBSupportTracePrintF(0, "Building digging is done %u", this->m_uHomeEntityId);
-        }
+        BBSupportTracePrintF(0, "Building digging is done %u", this->m_uHomeEntityId);
       }
       v7 = IEntity::OwnerId(_pSettler);
       CBuildingSiteRole::DiggingIsReady(v14, v7);
@@ -484,7 +478,7 @@ bool  CDiggerRole::CheckDig(class CSettler * _pSettler) {
   m_uDigMapPos = this->m_uDigMapPos;
   v2 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_uHomeEntityId);
   v9 = (CBuildingSiteRole *)CBuilding::Role(v2);
-  if ( v11 == m_uDigMapPos || !m_uDigMapPos )
+  if ( v11 == m_uDigMapPos || m_uDigMapPos == 0 )
   {
     v4 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_uHomeEntityId);
     v7 = v12 + 15 - IEntity::X(v4);
@@ -503,33 +497,29 @@ bool  CDiggerRole::CheckDig(class CSettler * _pSettler) {
       CWorldManager::DecreaseGroundHeight(v12, SHIDWORD(v12));
       IGfxEngine::UpdateWorldPosition(g_pGfxEngine, v12, SHIDWORD(v12));
       --v9->m_iDiggingNeeded;
-      if ( !IGfxEngine::CanChangeGround(g_pGfxEngine, v12, SHIDWORD(v12), 28) )
+      if ( IGfxEngine::CanChangeGround(g_pGfxEngine, v12, SHIDWORD(v12), 28) )
       {
-        return 1;
+        CWorldManager::SetGround(v12, SHIDWORD(v12), 28);
+        IGfxEngine::UpdateWorldPosition(g_pGfxEngine, v12, SHIDWORD(v12));
       }
-      CWorldManager::SetGround(v12, SHIDWORD(v12), 28);
-      IGfxEngine::UpdateWorldPosition(g_pGfxEngine, v12, SHIDWORD(v12));
       return 1;
     }
-    goto LABEL_19;
   }
-  if ( CWorldManager::GroundHeight(v12 - 1, HIDWORD(v12) - 1) == v11 - 5 || CWorldManager::GroundHeight(v12, (unsigned __int64)(v12 - 0x100000000LL) >> 32) == v11 - 5 || CWorldManager::GroundHeight(v12, (unsigned __int64)(v12 + 0x100000000LL) >> 32) == v11 - 7 || CWorldManager::GroundHeight(v12 + 1, HIDWORD(v12) + 1) == v11 - 7 )
+  else if ( CWorldManager::GroundHeight(v12 - 1, HIDWORD(v12) - 1) != v11 - 5 && CWorldManager::GroundHeight(v12, (unsigned __int64)(v12 - 0x100000000LL) >> 32) != v11 - 5 && CWorldManager::GroundHeight(v12, (unsigned __int64)(v12 + 0x100000000LL) >> 32) != v11 - 7 && CWorldManager::GroundHeight(v12 + 1, HIDWORD(v12) + 1) != v11 - 7 )
   {
-LABEL_19:
-    CWorldManager::ClearFlagBits(v12, SHIDWORD(v12), 32);
-    CDiggerRole::SearchDig(this, _pSettler);
-    return 0;
-  }
-  CWorldManager::IncreaseGroundHeight(v12, SHIDWORD(v12));
-  IGfxEngine::UpdateWorldPosition(g_pGfxEngine, v12, SHIDWORD(v12));
-  --v9->m_iDiggingNeeded;
-  if ( !IGfxEngine::CanChangeGround(g_pGfxEngine, v12, SHIDWORD(v12), 28) )
-  {
+    CWorldManager::IncreaseGroundHeight(v12, SHIDWORD(v12));
+    IGfxEngine::UpdateWorldPosition(g_pGfxEngine, v12, SHIDWORD(v12));
+    --v9->m_iDiggingNeeded;
+    if ( IGfxEngine::CanChangeGround(g_pGfxEngine, v12, SHIDWORD(v12), 28) )
+    {
+      CWorldManager::SetGround(v12, SHIDWORD(v12), 28);
+      IGfxEngine::UpdateWorldPosition(g_pGfxEngine, v12, SHIDWORD(v12));
+    }
     return 1;
   }
-  CWorldManager::SetGround(v12, SHIDWORD(v12), 28);
-  IGfxEngine::UpdateWorldPosition(g_pGfxEngine, v12, SHIDWORD(v12));
-  return 1;
+  CWorldManager::ClearFlagBits(v12, SHIDWORD(v12), 32);
+  CDiggerRole::SearchDig(this, _pSettler);
+  return 0;
 }
 
 

@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateEndStatistic::DynamicCreateFunc(void * a1) {
   CStateEndStatistic *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateEndStatistic *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateEndStatistic::CStateEndStatistic(C, a1);
   }
@@ -26,22 +26,22 @@ class CGameState * __cdecl CStateEndStatistic::DynamicCreateFunc(void * a1) {
   
   wchar_t *v2; // eax
   int Instance; // [esp+4h] [ebp-34h]
-  _BYTE v6[28]; // [esp+Ch] [ebp-2Ch] BYREF
+  std::wstring v6; // [esp+Ch] [ebp-2Ch] BYREF
   int v7; // [esp+34h] [ebp-4h]
 
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   v7 = 0;
   *(_DWORD *)this = &CStateEndStatistic::_vftable_;
-  Instance = UPlay::UPlayManager::GetInstance();
+  Instance = (int)UPlay::UPlayManager::GetInstance();
   (*(void (__thiscall **)(int, int))(*(_DWORD *)Instance + 52))(Instance, 1);
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  CGuiGameState::SetupGui(this, (const wchar_t *)&dword_373E218[1], 13, GuiDlgMainStatisticProc);
-  IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
-  std::wstring::wstring(v6);
+  CGuiGameState::SetupGui((CGuiGameState *)this, (const wchar_t *)&dword_373E218[1], 13, (bool (__cdecl *)(int, int, int))GuiDlgMainStatisticProc);
+  IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
+  std::wstring::wstring(&v6);
   LOBYTE(v7) = 1;
-  if ( (*(unsigned __int8 (__thiscall **)(void *, _BYTE *, const wchar_t *, int))(*(_DWORD *)g_pCDDrive + 8))(g_pCDDrive, v6, L"Snd\\Romans*.mp3", 131073) )
+  if ( g_pCDDrive->GetCDPath(g_pCDDrive, (char *)&v6, (char *)L"Snd\\Romans*.mp3", 131073) != 0 )
   {
-    v2 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v6);
+    v2 = std::wstring::c_str(&v6);
     CSoundManager::PlayBackgroundMusic(5, 4, v2);
   }
   else
@@ -49,17 +49,17 @@ class CGameState * __cdecl CStateEndStatistic::DynamicCreateFunc(void * a1) {
     CSoundManager::StopMusic(g_pSoundManager);
   }
   LOBYTE(v7) = 0;
-  std::wstring::~wstring(v6);
+  std::wstring::~wstring(&v6);
   return this;
 }
 
 
 // address=[0x14a4dc0]
-// Decompiled from void __thiscall CStateEndStatistic::~CStateEndStatistic(CStateEndStatistic *this)
+// Decompiled from void __thiscall CStateEndStatistic::~CStateEndStatistic(CGuiGameState *this)
  CStateEndStatistic::~CStateEndStatistic(void) {
   
-  *(_DWORD *)this = &CStateEndStatistic::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 13) && BBSupportDbgReport(2, "main\\States\\StateEndStatistic.cpp", 91, "bRet") == 1 )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateEndStatistic::_vftable_;
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 13) && BBSupportDbgReport(2, "main\\States\\StateEndStatistic.cpp", 91, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -83,20 +83,19 @@ bool  CStateEndStatistic::Perform(void) {
     }
   }
   v1 = dword_402CC58 + 30;
-  if ( v1 >= timeGetTime() )
+  if ( v1 < timeGetTime() )
   {
-    return 1;
+    dword_402CC58 = timeGetTime();
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  dword_402CC58 = timeGetTime();
-  IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-  IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   return 1;
 }
 
 
 // address=[0x14a4ee0]
-// Decompiled from char __thiscall CStateEndStatistic::OnEvent(CStateEndStatistic *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateEndStatistic::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateEndStatistic::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
@@ -149,8 +148,8 @@ bool  CStateEndStatistic::OnEvent(class CEvn_Event & a2) {
       }
       break;
     case 0x73:
-      IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 13);
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 21, GuiDlgMainDetailStatisticProc);
+      IGuiEngine::CloseDialog(g_pGUIEngine, 13);
+      IGuiEngine::OpenDialog(g_pGUIEngine, 21, (bool (__cdecl *)(int, int, int))GuiDlgMainDetailStatisticProc);
       UpdateGuiDlgMainDetailStatistic(a2->m_wParam);
       iScreenFlag = 1;
       result = 1;
@@ -160,8 +159,8 @@ bool  CStateEndStatistic::OnEvent(class CEvn_Event & a2) {
       result = 1;
       break;
     case 0x75:
-      IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 21);
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 13, GuiDlgMainStatisticProc);
+      IGuiEngine::CloseDialog(g_pGUIEngine, 21);
+      IGuiEngine::OpenDialog(g_pGUIEngine, 13, (bool (__cdecl *)(int, int, int))GuiDlgMainStatisticProc);
       iScreenFlag = 0;
       result = 1;
       break;

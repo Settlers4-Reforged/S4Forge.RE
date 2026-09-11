@@ -21,7 +21,7 @@
   v5 = a3;
   Size = CGrid::getSize((CGrid *)g_pFeatureGrid);
   v9 = 0;
-  if ( a2 && a2 != Size - 2 && a3 && a3 != Size - 2 )
+  if ( a2 != 0 && a2 != Size - 2 && a3 != 0 && a3 != Size - 2 )
   {
     v9 = !CFeatureGrid::findNearestElement((CFeatureGrid *)g_pFeatureGrid, &v4, &v5, 0, 0);
   }
@@ -31,7 +31,7 @@
   }
   else
   {
-    Border = CRiver::findBorder(v8, (int)(float)((float)((float)((float)v4 * *(float *)&g_fScaleFactor) + 50.0) + *(float *)&g_fScaleFactor), (int)(float)((float)((float)((float)v5 * *(float *)&g_fScaleFactor) + 50.0) + *(float *)&g_fScaleFactor));
+    Border = CRiver::findBorder(v8, (int)(float)((float)((float)((float)v4 * g_fScaleFactor) + 50.0) + g_fScaleFactor), (int)(float)((float)((float)((float)v5 * g_fScaleFactor) + 50.0) + g_fScaleFactor));
     if ( Border == -1 )
     {
       *(_DWORD *)v8 = 0;
@@ -40,8 +40,8 @@
     {
       *(_DWORD *)(*((_DWORD *)v8 + 1) + 4) = Border % g_iWorldSize;
       *(_DWORD *)(*((_DWORD *)v8 + 2) + 4) = Border / g_iWorldSize;
-      **((_DWORD **)v8 + 1) = (int)(float)((float)((float)((float)a2 * *(float *)&g_fScaleFactor) + 50.0) + *(float *)&g_fScaleFactor);
-      **((_DWORD **)v8 + 2) = (int)(float)((float)((float)((float)a3 * *(float *)&g_fScaleFactor) + 50.0) + *(float *)&g_fScaleFactor);
+      **((_DWORD **)v8 + 1) = (int)(float)((float)((float)((float)a2 * g_fScaleFactor) + 50.0) + g_fScaleFactor);
+      **((_DWORD **)v8 + 2) = (int)(float)((float)((float)((float)a3 * g_fScaleFactor) + 50.0) + g_fScaleFactor);
     }
   }
   return v8;
@@ -67,7 +67,7 @@
   if ( CFeatureGrid::findNearestElement((CFeatureGrid *)g_pFeatureGrid, &v10, &v9, 0, 0) )
   {
     Size = CGrid::getSize((CGrid *)g_pFeatureGrid);
-    Border = CRiver::findBorder(this, (int)(float)((float)((float)((float)v10 * *(float *)&g_fScaleFactor) + 50.0) + (float)(*(float *)&g_fScaleFactor / 2.0)), (int)(float)((float)((float)((float)v9 * *(float *)&g_fScaleFactor) + 50.0) + (float)(*(float *)&g_fScaleFactor / 2.0)));
+    Border = CRiver::findBorder(this, (int)(float)((float)((float)((float)v10 * g_fScaleFactor) + 50.0) + (float)(g_fScaleFactor / 2.0)), (int)(float)((float)((float)((float)v9 * g_fScaleFactor) + 50.0) + (float)(g_fScaleFactor / 2.0)));
     *(_DWORD *)(*((_DWORD *)this + 1) + 4 * *(_DWORD *)this - 4) = Border % g_iWorldSize;
     *(_DWORD *)(*((_DWORD *)this + 2) + 4 * *(_DWORD *)this - 4) = Border / g_iWorldSize;
     if ( CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9) == 1 )
@@ -91,22 +91,22 @@
       {
         __debugbreak();
       }
-      if ( !v11 && v10 + 1 < Size && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 + 1, v9) && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 + 1, v9) != 102 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 + 1, v9) != 106 )
+      if ( v11 == 0 && v10 + 1 < Size && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 + 1, v9) != 0 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 + 1, v9) != 102 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 + 1, v9) != 106 )
       {
         ++v10;
         v11 = 1;
       }
-      if ( !v11 && v9 + 1 < Size && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 + 1) && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 + 1) != 102 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 + 1) != 106 )
+      if ( v11 == 0 && v9 + 1 < Size && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 + 1) != 0 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 + 1) != 102 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 + 1) != 106 )
       {
         ++v9;
         v11 = 1;
       }
-      if ( !v11 && v10 - 1 > 0 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 - 1, v9) && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 - 1, v9) != 102 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 - 1, v9) != 106 )
+      if ( v11 == 0 && v10 - 1 > 0 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 - 1, v9) != 0 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 - 1, v9) != 102 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10 - 1, v9) != 106 )
       {
         --v10;
         v11 = 1;
       }
-      if ( !v11 && v9 - 1 > 0 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 - 1) && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 - 1) != 102 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 - 1) != 106 )
+      if ( v11 == 0 && v9 - 1 > 0 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 - 1) != 0 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 - 1) != 102 && CGrid::getElement((CGrid *)g_pFeatureGrid, v10, v9 - 1) != 106 )
       {
         --v9;
         v11 = 1;
@@ -115,9 +115,9 @@
       {
         CGrid::setElement((CGrid *)g_pFeatureGrid, v10, v9, 103);
       }
-      *(_DWORD *)(*((_DWORD *)this + 1) + 4 * i) = (int)(float)((float)((float)((float)v10 * *(float *)&g_fScaleFactor) + 50.0) + (float)(*(float *)&g_fScaleFactor / 2.0));
-      *(_DWORD *)(*((_DWORD *)this + 2) + 4 * i) = (int)(float)((float)((float)((float)v9 * *(float *)&g_fScaleFactor) + 50.0) + (float)(*(float *)&g_fScaleFactor / 2.0));
-      if ( !v11 )
+      *(_DWORD *)(*((_DWORD *)this + 1) + 4 * i) = (int)(float)((float)((float)((float)v10 * g_fScaleFactor) + 50.0) + (float)(g_fScaleFactor / 2.0));
+      *(_DWORD *)(*((_DWORD *)this + 2) + 4 * i) = (int)(float)((float)((float)((float)v9 * g_fScaleFactor) + 50.0) + (float)(g_fScaleFactor / 2.0));
+      if ( v11 == 0 )
       {
         *(_DWORD *)this = 0;
       }
@@ -135,8 +135,8 @@
 // Decompiled from int __thiscall CRiver::~CRiver(void **this)
  CRiver::~CRiver(void) {
   
-  operator delete[](this[1]);
-  return operator delete[](this[2]);
+  operator delete[](*(this + 1));
+  return operator delete[](*(this + 2));
 }
 
 
@@ -151,7 +151,7 @@ void  CRiver::drawRiver(void) {
         i < *(_DWORD *)this - 1;
         ++i )
   {
-    CRiver::drawRiverPart(this, *(_DWORD *)(*((_DWORD *)this + 1) + 4 * i), *(_DWORD *)(*((_DWORD *)this + 2) + 4 * i), *(_DWORD *)(*((_DWORD *)this + 1) + 4 * i + 4), *(_DWORD *)(*((_DWORD *)this + 2) + 4 * i + 4));
+    ((void (__thiscall *)(CRiver *, _DWORD, _DWORD, _DWORD, _DWORD))CRiver::drawRiverPart)(this, *(_DWORD *)(*((_DWORD *)this + 1) + 4 * i), *(_DWORD *)(*((_DWORD *)this + 2) + 4 * i), *(_DWORD *)(*((_DWORD *)this + 1) + 4 * i + 4), *(_DWORD *)(*((_DWORD *)this + 2) + 4 * i + 4));
     result = i + 1;
   }
   return result;
@@ -232,13 +232,13 @@ void  CRiver::drawRiverPart(int a2, int a3, int a4, int a4) {
       if ( v10 < v15 )
       {
         v15 = v10;
-        if ( !v14 )
+        if ( v14 == 0 )
         {
           v16 = i;
         }
       }
     }
-    if ( !(CRandom16::Rand((CRandom16 *)g_pRand) % 4) && !v14 && v15 > 8 )
+    if ( CRandom16::Rand(g_pRand) % 4 == 0 && v14 == 0 && v15 > 8 )
     {
       if ( ++v16 == -1 )
       {
@@ -254,26 +254,23 @@ void  CRiver::drawRiverPart(int a2, int a3, int a4, int a4) {
     {
       ++v12;
     }
-    if ( *(_BYTE *)(g_pMapElement + 4 * (v18 + g_iWorldSize * HIDWORD(v18)) + 1) != 16 || v17 )
+    if ( *(_BYTE *)(g_pMapElement + 4 * (v18 + g_iWorldSize * HIDWORD(v18)) + 1) != 16 || v17 != 0 )
     {
       v17 = 0;
     }
     else
     {
       *(_BYTE *)(g_pMapElement + 4 * (v18 + g_iWorldSize * HIDWORD(v18)) + 1) = v12 + 96;
-      *(_BYTE *)(g_pEditorLayer + 4 * (v18 + g_iWorldSize * HIDWORD(v18)) + 3) = CRandom16::Rand((CRandom16 *)g_pRand) % (unsigned __int8)g_uResourceWealth;
+      *(_BYTE *)(g_pEditorLayer + 4 * (v18 + g_iWorldSize * HIDWORD(v18)) + 3) = CRandom16::Rand(g_pRand) % (unsigned __int8)g_uResourceWealth;
     }
     v9 = v18;
     LODWORD(v18) = v22[v16] + v18;
     HIDWORD(v18) += v21[v16];
-    if ( v14 )
+    if ( v14 != 0 )
     {
-      if ( v14 % 2 )
+      if ( v14 % 2 != 0 && --v16 == -1 )
       {
-        if ( --v16 == -1 )
-        {
-          v16 = 5;
-        }
+        v16 = 5;
       }
       --v14;
     }
@@ -288,7 +285,7 @@ void  CRiver::drawRiverPart(int a2, int a3, int a4, int a4) {
               k < 6;
               ++k )
         {
-          if ( !*(_BYTE *)(g_pMapElement + 4 * (g_iWorldSize * (v22[k] + v21[j] + HIDWORD(v18)) + v22[k] + v22[j] + v18) + 1) )
+          if ( *(_BYTE *)(g_pMapElement + 4 * (g_iWorldSize * (v22[k] + v21[j] + HIDWORD(v18)) + v22[k] + v22[j] + v18) + 1) == 0 )
           {
             v15 = 0;
             *(_BYTE *)(g_pMapElement + 4 * (v9 + g_iWorldSize * HIDWORD(v9)) + 1) = 99;
@@ -297,7 +294,7 @@ void  CRiver::drawRiverPart(int a2, int a3, int a4, int a4) {
         }
         *(_BYTE *)(g_pMapElement + 4 * (g_iWorldSize * (v21[j] + HIDWORD(v18)) + v22[j] + v18) + 1) = 16;
       }
-      if ( !*(_BYTE *)(g_pMapElement + 4 * (g_iWorldSize * (v21[j] + HIDWORD(v18)) + v22[j] + v18) + 1) )
+      if ( *(_BYTE *)(g_pMapElement + 4 * (g_iWorldSize * (v21[j] + HIDWORD(v18)) + v22[j] + v18) + 1) == 0 )
       {
         *(_BYTE *)(g_pMapElement + 4 * (v18 + g_iWorldSize * HIDWORD(v18)) + 1) = 99;
         v15 = 0;
@@ -345,9 +342,9 @@ int  CRiver::findBorder(int a2, int a3) {
   Block = j__malloc(Size);
   memset(Block, 0, Size);
   v4[0] = a2 + g_iWorldSize * a3;
-  TStaticFIFO<int,1024>::Push(v4);
+  ((void (__stdcall *)(_DWORD *))TStaticFIFO<int,1024>::Push)(v4);
   *((_BYTE *)Block + a2 + g_iWorldSize * a3) = 1;
-  while ( !(unsigned __int8)TStaticFIFO<int,1024>::Empty(v10) )
+  while ( (unsigned __int8)TStaticFIFO<int,1024>::Empty(v10) == 0 )
   {
     v9 = *(_DWORD *)TStaticFIFO<int,1024>::Top(v10);
     TStaticFIFO<int,1024>::Pop(v10);
@@ -398,11 +395,11 @@ int  CRiver::findBorder(int a2, int a3) {
         default:
           break;
       }
-      if ( !*((_BYTE *)Block + v8) )
+      if ( *((_BYTE *)Block + v8) == 0 )
       {
-        TStaticFIFO<int,1024>::Push(&v8);
+        ((void (__stdcall *)(int *))TStaticFIFO<int,1024>::Push)(&v8);
         *((_BYTE *)Block + v8) = 1;
-        if ( !*(_BYTE *)(g_pMapElement + 4 * v8 + 1) )
+        if ( *(_BYTE *)(g_pMapElement + 4 * v8 + 1) == 0 )
         {
           j__free(Block);
           return v8;

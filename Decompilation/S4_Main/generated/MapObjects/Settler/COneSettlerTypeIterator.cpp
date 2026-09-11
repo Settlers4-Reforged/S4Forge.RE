@@ -27,7 +27,7 @@ void  COneSettlerTypeIterator::Init(int a2, int a3) {
 // Decompiled from int __thiscall COneSettlerTypeIterator::FirstSettler(COneSettlerTypeIterator *this)
 int  COneSettlerTypeIterator::FirstSettler(void) {
   
-  *((_DWORD *)this + 1) = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, *((_DWORD *)this + 2), *(_DWORD *)this);
+  *((_DWORD *)this + 1) = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, *((_DWORD *)this + 2), *(_DWORD *)this);
   return COneSettlerTypeIterator::NextSettlerIfCurrentIsNotValid(this);
 }
 
@@ -36,7 +36,7 @@ int  COneSettlerTypeIterator::FirstSettler(void) {
 // Decompiled from int __thiscall COneSettlerTypeIterator::NextSettler(COneSettlerTypeIterator *this)
 int  COneSettlerTypeIterator::NextSettler(void) {
   
-  int v1; // eax
+  CSettler *v1; // eax
   int v4; // [esp+4h] [ebp-4h]
 
   v4 = *((_DWORD *)this + 1);

@@ -27,7 +27,7 @@
  S4::CMapFile::~CMapFile(void) {
   
   this->vftable = &S4::CMapFile::_vftable_;
-  if ( this->m_b5 )
+  if ( this->m_b5 != 0 )
   {
     S4::CMapFile::Close(this);
   }
@@ -49,7 +49,7 @@ void  S4::CMapFile::Open(std::wstring const & a2, int a3, bool a4) {
   int Buffer; // [esp+10h] [ebp-8h] BYREF
 
   v6 = 0;
-  if ( this->m_bVirtual && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 143, "! m_bVirtual") == 1 )
+  if ( this->m_bVirtual != 0 && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 143, "! m_bVirtual") == 1 )
   {
     __debugbreak();
   }
@@ -71,7 +71,7 @@ void  S4::CMapFile::Open(std::wstring const & a2, int a3, bool a4) {
     }
     FileSize = S4::CSaveFile::GetFileSize(&this->m_cSaveFile);
     S4::CSaveFile::SetFilePos(this->unk_74 + 8, 0);
-    if ( a4 )
+    if ( a4 != 0 )
     {
       v6 = S4::CMapFile::FileCRC(this, this->unk_74 + 8, FileSize);
       if ( v6 != this->m_iChecksum )
@@ -159,7 +159,7 @@ void  S4::CMapFile::Close(void) {
 // Decompiled from void __thiscall S4::CMapFile::Virtualize(S4::CMapFile *this)
 void  S4::CMapFile::Virtualize(void) {
   
-  if ( this->m_bVirtual && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 243, "! m_bVirtual") == 1 )
+  if ( this->m_bVirtual != 0 && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 243, "! m_bVirtual") == 1 )
   {
     __debugbreak();
   }
@@ -176,7 +176,7 @@ unsigned int  S4::CMapFile::GetChecksum(void)const {
 
 
 // address=[0x13dad40]
-// Decompiled from void *__thiscall S4::CMapFile::LoadChunk(S4::CMapFile *this, unsigned __int16 a2, unsigned __int16 a3)
+// Decompiled from void *__thiscall S4::CMapFile::LoadChunk(S4::CMapFile *this, T_S4_MAP_CHUNK a2, unsigned __int16 a3)
 void const *  S4::CMapFile::LoadChunk(unsigned int a2, unsigned int a3) {
   
   int v4; // [esp+4h] [ebp-4h] BYREF
@@ -202,6 +202,7 @@ void const *  S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int 
   void *v16; // [esp+4Ch] [ebp-CCh]
   void *v17; // [esp+50h] [ebp-C8h]
   void *v18; // [esp+54h] [ebp-C4h]
+  int; // [esp+58h] [ebp-C0h]
   char *v20; // [esp+5Ch] [ebp-BCh]
   char *v21; // [esp+60h] [ebp-B8h]
   std::_Iterator_base12 *itEnd; // [esp+64h] [ebp-B4h] MAPDST
@@ -282,131 +283,131 @@ void const *  S4::CMapFile::LoadChunk(unsigned short a2, unsigned short a3, int 
     }
     v44 = (_DWORD *)std::map<unsigned int,int>::operator[](&this->m_vRefCounts, (int)&uRequestedType);
     ++*v44;
-    if ( a2 < 0x100u && !a3 )
+    if ( a2 < 0x100u && a3 == 0 )
     {
-      *a4 = *(_DWORD *)&this->m_uData[4 * a2];
+      *a4 = this->m_uData[a2];
     }
     return *(void **)std::map<unsigned int,void *>::operator[]((int)&uRequestedType);
   }
   else
   {
     v49 = 0;
-    if ( this->m_bVirtual )
+    if ( this->m_bVirtual == 0 )
     {
-      return v49;
-    }
-    v31 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::end(&this->m_vLoadedChunks, (int)v11);
-    v30 = v31;
-    exceptionBlock = 4;
-    v57 |= 4u;
-    v9 = v31;
-    v29 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::find(&this->m_vLoadedChunks, (int)v12, (int)&uRequestedType);
-    v28 = v29;
-    exceptionBlock = 5;
-    v57 |= 8u;
-    v43 = !std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator==(v29, v9) && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 287, "vLoadedChunks.find(uRequestedType) == vLoadedChunks.end()") == 1;
-    v52 = v43;
-    exceptionBlock = 4;
-    if ( (v57 & 8) != 0 )
-    {
-      v57 &= ~8u;
-      std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>(v12);
-    }
-    exceptionBlock = -1;
-    if ( (v57 & 4) != 0 )
-    {
-      v57 &= ~4u;
-      std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>(v11);
-    }
-    if ( v52 )
-    {
-      __debugbreak();
-    }
-    Src = 0;
-    uReadSize = 0;
-    uChunkType = 0;
-    S4::CSaveFile::SetFilePos(this->unk_74 + 8, 0);
-    do
-    {
-      uReadSize = S4::CSaveFile::Read(&Buffer, 0x18u);
-      S4::CMapFile::Cryption(this, (unsigned __int8 *)&Buffer, 0x18u);
-      uChunkType = Buffer.m_uChunkTypeA + (Buffer.m_uChunkTypeB << 16);
-      if ( uReadSize == 0x18 && uChunkType == uRequestedType )
+      v31 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::end(&this->m_vLoadedChunks, (int)v11);
+      v30 = v31;
+      exceptionBlock = 4;
+      v57 |= 4u;
+      v9 = v31;
+      v29 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::find(&this->m_vLoadedChunks, (int)v12, (int)&uRequestedType);
+      v28 = v29;
+      exceptionBlock = 5;
+      v57 |= 8u;
+      v43 = !std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::operator==(v29, v9) && BBSupportDbgReport(2, "LoadSave\\CMapFile.cpp", 287, "vLoadedChunks.find(uRequestedType) == vLoadedChunks.end()") == 1;
+      v52 = v43;
+      exceptionBlock = 4;
+      if ( (v57 & 8) != 0 )
       {
-        v27 = operator new[](Buffer.m_uChunkSizeInFile);
-        Src = v27;
-        v26 = S4::CSaveFile::Read(v27, Buffer.m_uChunkSizeInFile);
-        if ( v26 != Buffer.m_uChunkSizeInFile )
-        {
-          C = Src;
-          operator delete[](Src);
-          Src = 0;
-        }
+        v57 &= ~8u;
+        std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>(v12);
       }
-      else if ( uReadSize == 0x18 )
+      exceptionBlock = -1;
+      if ( (v57 & 4) != 0 )
       {
-        S4::CSaveFile::SetFilePos(Buffer.m_uChunkSizeInFile, 1);
+        v57 &= ~4u;
+        std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned int const,void *>>>>(v11);
       }
-    }
-    while ( !S4::CSaveFile::Eof(&this->m_cSaveFile) && uReadSize == 24 && uChunkType != uRequestedType );
-    if ( !Src )
-    {
-      return 0;
-    }
-    *a4 = Buffer.m_uSaveIdentifier;
-    uCalcCRC = S4::CMapFile::Crc(this, (char *)Src, Buffer.m_uChunkSizeInFile);
-    if ( uCalcCRC != Buffer.m_uChunkCRC )
-    {
-      BBSupportTracePrintF(3, "Invalid chunk CRC!");
-      pExceptionObject = 0;
-      CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
-      _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
-    }
-    Size = 0;
-    if ( Buffer.m_uUncompressedSize == -1 )
-    {
-      Size = Buffer.m_uChunkSizeInFile;
-      v18 = operator new[](Buffer.m_uChunkSizeInFile);
-      v49 = v18;
-      memcpy(v18, Src, Size);
-    }
-    else
-    {
-      Size = Buffer.m_uUncompressedSize;
-      v23 = (char *)operator new[](Buffer.m_uUncompressedSize);
-      v49 = v23;
-      v16 = Src;
-      m_uCompressedSize = Buffer.m_uUncompressedSize;
-      m_uChunkSize = Buffer.m_uChunkSizeInFile;
-      v20 = &v23[Buffer.m_uUncompressedSize];
-      v21 = (char *)Src + Buffer.m_uChunkSizeInFile;
-      v39 = j__LZHLCreateDecompressor();
+      if ( v52 )
+      {
+        __debugbreak();
+      }
+      Src = 0;
+      uReadSize = 0;
+      uChunkType = 0;
+      S4::CSaveFile::SetFilePos(this->unk_74 + 8, 0);
       do
       {
-        if ( !j__LZHLDecompress(v39, &v20[-m_uCompressedSize], &m_uCompressedSize, &v21[-m_uChunkSize], &m_uChunkSize) )
+        uReadSize = S4::CSaveFile::Read(&Buffer, 0x18u);
+        S4::CMapFile::Cryption(this, &Buffer, 0x18u);
+        uChunkType = Buffer.m_uChunkTypeA + (Buffer.m_uChunkTypeB << 16);
+        if ( uReadSize == 0x18 && uChunkType == uRequestedType )
         {
-          BBSupportTracePrintF(3, "Decompression of chunk failed!");
-          v40 = 0;
-          CS4InvalidMapException::CS4InvalidMapException(&v40);
-          _CxxThrowException(&v40, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
+          v27 = operator new[](Buffer.m_uChunkSizeInFile);
+          Src = v27;
+          v26 = S4::CSaveFile::Read(v27, Buffer.m_uChunkSizeInFile);
+          if ( v26 != Buffer.m_uChunkSizeInFile )
+          {
+            C = Src;
+            operator delete[](Src);
+            Src = 0;
+          }
+        }
+        else if ( uReadSize == 0x18 )
+        {
+          S4::CSaveFile::SetFilePos(Buffer.m_uChunkSizeInFile, 1);
         }
       }
-      while ( m_uChunkSize );
-      j__LZHLDestroyDecompressor(v39);
+      while ( !S4::CSaveFile::Eof(&this->m_cSaveFile) && uReadSize == 24 && uChunkType != uRequestedType );
+      if ( Src == 0 )
+      {
+        return 0;
+      }
+      *a4 = Buffer.m_uSaveIdentifier;
+      uCalcCRC = S4::CMapFile::Crc(this, (char *)Src, Buffer.m_uChunkSizeInFile);
+      if ( uCalcCRC != Buffer.m_uChunkCRC )
+      {
+        BBSupportTracePrintF(3, "Invalid chunk CRC!");
+        pExceptionObject = 0;
+        CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
+        _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
+      }
+      Size = 0;
+      if ( Buffer.m_uUncompressedSize == -1 )
+      {
+        Size = Buffer.m_uChunkSizeInFile;
+        v18 = operator new[](Buffer.m_uChunkSizeInFile);
+        v49 = v18;
+        memcpy(v18, Src, Size);
+      }
+      else
+      {
+        Size = Buffer.m_uUncompressedSize;
+        v23 = (char *)operator new[](Buffer.m_uUncompressedSize);
+        v49 = v23;
+        v16 = Src;
+        m_uCompressedSize = Buffer.m_uUncompressedSize;
+        m_uChunkSize = Buffer.m_uChunkSizeInFile;
+        v20 = &v23[Buffer.m_uUncompressedSize];
+        v21 = (char *)Src + Buffer.m_uChunkSizeInFile;
+        v39 = (int)j__LZHLCreateDecompressor();
+        do
+        {
+           = j__LZHLDecompress((LZHLDecompressor *)v39, &v20[-m_uCompressedSize], &m_uCompressedSize, &v21[-m_uChunkSize], &m_uChunkSize);
+          if (  == 0 )
+          {
+            BBSupportTracePrintF(3, "Decompression of chunk failed!");
+            v40 = 0;
+            CS4InvalidMapException::CS4InvalidMapException(&v40);
+            _CxxThrowException(&v40, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
+          }
+        }
+        while ( m_uChunkSize != 0 );
+        j__LZHLDestroyDecompressor((LZHLDecompressor *)v39);
+      }
+      if ( _uReadSize != 0 )
+      {
+        *_uReadSize = Size;
+      }
+      if ( Src != 0 )
+      {
+        v17 = Src;
+        operator delete[](Src);
+        Src = 0;
+      }
+      v6 = (void **)std::map<unsigned int,void *>::operator[]((int)&uRequestedType);
+      *v6 = v49;
+      *(_DWORD *)std::map<unsigned int,int>::operator[](&this->m_vRefCounts, (int)&uRequestedType) = 1;
     }
-    if ( _uReadSize )
-    {
-      *_uReadSize = Size;
-    }
-    if ( Src )
-    {
-      v17 = Src;
-      operator delete[](Src);
-      Src = 0;
-    }
-    v6 = (void **)std::map<unsigned int,void *>::operator[]((int)&uRequestedType);
-    *v6 = v49;
-    *(_DWORD *)std::map<unsigned int,int>::operator[](&this->m_vRefCounts, (int)&uRequestedType) = 1;
     return v49;
   }
 }
@@ -488,12 +489,12 @@ void  S4::CMapFile::CloseChunk(unsigned short a2, unsigned short a3) {
     }
     v18 = (_DWORD *)std::map<unsigned int,int>::operator[](&this->m_vRefCounts, (int)&requestedtype);
     --*v18;
-    if ( !*(_DWORD *)std::map<unsigned int,int>::operator[](&this->m_vRefCounts, (int)&requestedtype) )
+    if ( *(_DWORD *)std::map<unsigned int,int>::operator[](&this->m_vRefCounts, (int)&requestedtype) == 0 )
     {
-      C = *(void **)std::map<unsigned int,void *>::operator[](&requestedtype);
+      C = *(void **)std::map<unsigned int,void *>::operator[]((int)&requestedtype);
       operator delete[](C);
-      std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::erase(&requestedtype);
-      std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::erase(&requestedtype);
+      std::_Tree<std::_Tmap_traits<unsigned int,void *,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,void *>>,0>>::erase((int)&requestedtype);
+      std::_Tree<std::_Tmap_traits<unsigned int,int,std::less<unsigned int>,std::allocator<std::pair<unsigned int const,int>>,0>>::erase((int)&requestedtype);
     }
   }
 }
@@ -548,7 +549,7 @@ void  S4::CMapFile::UploadBuffer(unsigned int a2, unsigned int a3, void const * 
     ++*v21;
     v6 = (void *)std::map<unsigned int,void *>::operator[]((int)&v23);
     *(_DWORD *)v6 = v22;
-    if ( a2 < 0x100 && !a3 )
+    if ( a2 < 0x100 && a3 == 0 )
     {
       this->m_uData[a2] = a6;
     }
@@ -577,12 +578,12 @@ void  S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int
   char *v12; // [esp+20h] [ebp-24h]
   SSaveFileChunk Buffer; // [esp+28h] [ebp-1Ch] BYREF
 
-  if ( !Src )
+  if ( Src == 0 )
   {
     Size = 0;
     Src = &unk_369A12A;
   }
-  if ( a6 | this->m_bCompress )
+  if ( (a6 | this->m_bCompress) != 0 )
   {
     v8 = j__LZHLCompressorCalcMaxBuf(Size) + 32;
     v12 = (char *)operator new[](v8);
@@ -604,7 +605,7 @@ void  S4::CMapFile::SaveChunk(unsigned short a2, unsigned short a3, unsigned int
   Buffer.m_uUncompressedSize = v9;
   Buffer.m_uChunkCRC = v6;
   Buffer.x = 0;
-  S4::CMapFile::Cryption(this, (unsigned __int8 *)&Buffer, 0x18u);
+  S4::CMapFile::Cryption(this, &Buffer, 0x18u);
   S4::CSaveFile::SetFilePos(0, 2);
   S4::CSaveFile::Write(&Buffer, 0x18u);
   S4::CSaveFile::Write(v12, ElementSize);
@@ -644,13 +645,12 @@ bool  S4::CMapFile::LoadChunkObject(unsigned short a2, unsigned short a3, class 
   }
   else
   {
-    if ( a5 )
+    if ( a5 == 0 )
     {
-      return 0;
+      pExceptionObject = 0;
+      CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
+      _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
     }
-    pExceptionObject = 0;
-    CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
-    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
     return 0;
   }
 }
@@ -690,10 +690,10 @@ void  S4::CMapFile::SaveDbgInfoChunk(char const * a2) {
 
   memset(Src, 32, sizeof(Src));
   memset(Src, 33, 4);
-  if ( a2 )
+  if ( a2 != 0 )
   {
     for ( i = 0;
-          i < 20 && a2[i];
+          i < 20 && a2[i] != 0;
           ++i )
     {
       Src[i + 8] = a2[i];

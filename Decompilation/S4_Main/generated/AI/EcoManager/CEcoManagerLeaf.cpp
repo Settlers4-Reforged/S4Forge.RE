@@ -28,7 +28,7 @@
         v3 < i;
         i = CEcoManagerLeaf::GetNrChilds(this) )
   {
-    if ( CEcoManagerLeaf::GetChild(this, v3) )
+    if ( (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(this, v3) != 0 )
     {
       CEcoManagerLeaf::RemoveChild(this, v3);
     }
@@ -80,8 +80,8 @@ bool  CEcoManagerLeaf::Update(void) {
         v9 < i;
         i = CEcoManagerLeaf::GetNrChilds(this) )
   {
-    Child = CEcoManagerLeaf::GetChild(this, v9);
-    if ( Child )
+    Child = (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(this, v9);
+    if ( Child != 0 )
     {
       CEcoManagerLeaf::Update(Child);
     }
@@ -121,8 +121,8 @@ bool  CEcoManagerLeaf::Update(void) {
           n < CEcoManagerLeaf::GetNrChilds(this);
           ++n )
     {
-      v4 = CEcoManagerLeaf::GetChild(this, n);
-      if ( v4 )
+      v4 = (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(this, n);
+      if ( v4 != 0 )
       {
         for ( ii = 0;
               ii < 8;
@@ -237,7 +237,7 @@ bool  CEcoManagerLeaf::AddPosition(int a2, int a3, class std::vector<struct SPOS
         else
         {
           C = (CEcoManagerLeaf::CEMLD *)operator new(0x68u);
-          if ( C )
+          if ( C != 0 )
           {
             v9 = CEcoManagerLeaf::CEcoManagerLeaf(C, *((int *)this + 3) >> 1, *((_DWORD *)this + 2), v16, v17);
           }
@@ -246,7 +246,7 @@ bool  CEcoManagerLeaf::AddPosition(int a2, int a3, class std::vector<struct SPOS
             v9 = 0;
           }
           *((_DWORD *)this + FreeChildPos + 19) = v9;
-          v8 = CEcoManagerLeaf::GetChild(this, FreeChildPos);
+          v8 = (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(this, FreeChildPos);
           CEcoManagerLeaf::AddPosition(v8, a2, a3, a4);
           CEcoManagerLeaf::Update(this);
           return 1;
@@ -254,7 +254,7 @@ bool  CEcoManagerLeaf::AddPosition(int a2, int a3, class std::vector<struct SPOS
       }
       else
       {
-        v7 = CEcoManagerLeaf::GetChild(this, Child);
+        v7 = (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(this, Child);
         v20 = CEcoManagerLeaf::AddPosition(v7, a2, a3, a4);
         CEcoManagerLeaf::Update(this);
         return v20;
@@ -290,7 +290,7 @@ int  CEcoManagerLeaf::GetNrValidChilds(void) {
         v5 < i;
         i = CEcoManagerLeaf::GetNrChilds(this) )
   {
-    if ( CEcoManagerLeaf::GetChild(this, v5) )
+    if ( (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(this, v5) != 0 )
     {
       ++v4;
     }
@@ -344,8 +344,8 @@ int  CEcoManagerLeaf::GetChild(int a2, int a3) {
     {
       break;
     }
-    Child = CEcoManagerLeaf::GetChild(v8, i);
-    if ( Child )
+    Child = (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(v8, i);
+    if ( Child != 0 )
     {
       CEcoManagerLeaf::GetPosition(Child, &v6, &v5);
       if ( v6 == a2 && v5 == a3 )
@@ -362,11 +362,11 @@ int  CEcoManagerLeaf::GetChild(int a2, int a3) {
 // Decompiled from char __thiscall CEcoManagerLeaf::RemoveChild(CEcoManagerLeaf *this, int a2)
 bool  CEcoManagerLeaf::RemoveChild(int a2) {
   
-  if ( !CEcoManagerLeaf::GetChild(this, a2) )
+  if ( (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(this, a2) == 0 )
   {
     return 0;
   }
-  if ( *((_DWORD *)this + a2 + 19) )
+  if ( *((_DWORD *)this + a2 + 19) != 0 )
   {
     delete *((CEcoManagerLeaf **)this + a2 + 19);
   }
@@ -387,7 +387,7 @@ int  CEcoManagerLeaf::GetFreeChildPos(void) {
         v4 < i;
         i = CEcoManagerLeaf::GetNrChilds(this) )
   {
-    if ( !CEcoManagerLeaf::GetChild(this, v4) )
+    if ( (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(this, v4) == 0 )
     {
       return v4;
     }

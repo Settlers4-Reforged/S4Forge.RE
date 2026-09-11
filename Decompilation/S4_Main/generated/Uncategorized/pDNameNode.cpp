@@ -6,9 +6,9 @@
 // Decompiled from char __thiscall pDNameNode::getLastChar(DName **this)
 char  pDNameNode::getLastChar(void)const {
   
-  if ( this[1] )
+  if ( *(this + 1) != 0 )
   {
-    return DName::getLastChar(this[1]);
+    return DName::getLastChar(*(this + 1));
   }
   else
   {
@@ -21,9 +21,9 @@ char  pDNameNode::getLastChar(void)const {
 // Decompiled from char *__thiscall pDNameNode::getString(DName **this, char *a2, char *a3)
 char *  pDNameNode::getString(char * a2, char * a3)const {
   
-  if ( this[1] )
+  if ( *(this + 1) != 0 )
   {
-    return DName::getString(this[1], a2, a3);
+    return DName::getString(*(this + 1), a2, a3);
   }
   else
   {
@@ -36,9 +36,9 @@ char *  pDNameNode::getString(char * a2, char * a3)const {
 // Decompiled from int __thiscall pDNameNode::length(DName **this)
 int  pDNameNode::length(void)const {
   
-  if ( this[1] )
+  if ( *(this + 1) != 0 )
   {
-    return DName::length(this[1]);
+    return DName::length(*(this + 1));
   }
   else
   {

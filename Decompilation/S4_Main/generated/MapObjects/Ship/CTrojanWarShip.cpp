@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CTrojanWarShip::New(int a1)
 class CPersistence * __cdecl CTrojanWarShip::New(std::istream & a1) {
   
-  if ( CWarShip::operator new(0xC8u) )
+  if ( (void *)CWarShip::operator new(0xC8u) != 0 )
   {
-    return CTrojanWarShip::CTrojanWarShip(a1);
+    return ((_DWORD (__stdcall *)(int))CTrojanWarShip::CTrojanWarShip)(a1);
   }
   else
   {
@@ -21,13 +21,13 @@ class CPersistence * __cdecl CTrojanWarShip::New(std::istream & a1) {
 // Decompiled from _DWORD *__thiscall CTrojanWarShip::CTrojanWarShip(_DWORD *this, int a2)
  CTrojanWarShip::CTrojanWarShip(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   _DWORD *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  CWarShip::CWarShip(a2);
+  ((void (__stdcall *)(int))CWarShip::CWarShip)(a2);
   v6 = 0;
   *v5 = &CTrojanWarShip::_vftable_;
   v5[43] = &CTrojanWarShip::`vftable';
@@ -51,14 +51,14 @@ void  CTrojanWarShip::Store(std::ostream & a2) {
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
   v3[1] = (int)this;
-  CWarShip::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))CWarShip::Store)(a2);
   v3[0] = 1;
-  return operator^<unsigned int>(a2, v3);
+  return operator^<unsigned int>(a2, (unsigned int *)v3);
 }
 
 
 // address=[0x15a2440]
-// Decompiled from void __thiscall CTrojanWarShip::~CTrojanWarShip(CTrojanWarShip *this)
+// Decompiled from void __thiscall CTrojanWarShip::~CTrojanWarShip(CWarShip *this)
  CTrojanWarShip::~CTrojanWarShip(void) {
   
   CWarShip::~CWarShip(this);
@@ -80,7 +80,7 @@ unsigned long  CTrojanWarShip::ClassID(void)const {
 // Decompiled from CTrojanWarShip *__thiscall CTrojanWarShip::CTrojanWarShip(CTrojanWarShip *this, int a2, int a3, int a4, int a5, int a6, int a7, bool a8)
  CTrojanWarShip::CTrojanWarShip(int a2, int a3, int a4, int a5, int a6, int a7, bool a8) {
   
-  CWarShip::CWarShip(this, a2, a3, a4, a5, a6, a7, a8);
+  CWarShip::CWarShip((CWarShip *)this, a2, a3, a4, a5, a6, a7, a8);
   *(_DWORD *)this = &CTrojanWarShip::_vftable_;
   *((_DWORD *)this + 43) = &CTrojanWarShip::`vftable';
   return this;

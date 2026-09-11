@@ -31,18 +31,18 @@ void  CLogicRingBuffer::Load(class IS4Chunk & a2) {
   _BYTE v5[32]; // [esp+14h] [ebp-30h] BYREF
   int v6; // [esp+40h] [ebp-4h]
 
-  if ( (*(unsigned __int8 (__thiscall **)(char *))(*((_DWORD *)this - 6) + 12))((char *)this - 24) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\LogicRingBuffer.h", 33, (const char *)&dword_36C2338[1]) == 1 )
+  if ( (*(unsigned __int8 (__thiscall **)(char *))(*((_DWORD *)this - 6) + 12))((char *)this - 24) != 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\Main\\LogicRingBuffer.h", 33, (const char *)&dword_36C2338[1]) == 1 )
   {
     __debugbreak();
   }
   CEvn_Logic::CEvn_Logic(v5);
   v6 = 0;
-  v2 = (*(int (__thiscall **)(struct IS4Chunk *))(*(_DWORD *)a2 + 8))(a2);
+  v2 = a2->LoadUnsigned32_(a2);
   for ( i = 0;
         i < v2;
         ++i )
   {
-    if ( !(*(unsigned __int8 (__thiscall **)(char *, _BYTE *))(*((_DWORD *)this - 6) + 4))((char *)this - 24, v5) )
+    if ( (*(unsigned __int8 (__thiscall **)(char *, _BYTE *))(*((_DWORD *)this - 6) + 4))((char *)this - 24, v5) == 0 )
     {
       BBSupportTracePrint(3, "FATAL ERROR: Can't write to logic ringbuffer during load!");
       BBSupportTracePrintF(3, "->          Event#: %d", i);
@@ -67,17 +67,17 @@ void  CLogicRingBuffer::Save(class IS4Chunk & a2) {
 
   (*(void (__thiscall **)(char *))(*((_DWORD *)this - 6) + 16))((char *)this - 24);
   v4 = 0;
-  while ( (*(unsigned __int8 (__thiscall **)(char *))(*((_DWORD *)this - 6) + 20))((char *)this - 24) )
+  while ( (*(unsigned __int8 (__thiscall **)(char *))(*((_DWORD *)this - 6) + 20))((char *)this - 24) != 0 )
   {
     (*(void (__thiscall **)(char *))(*((_DWORD *)this - 6) + 24))((char *)this - 24);
     ++v4;
   }
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, v4);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, v4);
   (*(void (__thiscall **)(char *))(*((_DWORD *)this - 6) + 16))((char *)this - 24);
   while ( 1 )
   {
     result = (*(unsigned __int8 (__thiscall **)(char *))(*((_DWORD *)this - 6) + 20))((char *)this - 24);
-    if ( !(_BYTE)result )
+    if ( (_BYTE)result == 0 )
     {
       break;
     }

@@ -22,7 +22,7 @@ bool  CProductionDataTab::BuildingMustBeControl(enum BUILDING_TYPES a2, int a3) 
 // Decompiled from int __thiscall CProductionDataTab::GetInputTypePile(void *this, int a2, int a3, int a4)
 enum PILE_TYPES  CProductionDataTab::GetInputTypePile(enum BUILDING_TYPES a2, int a3, int a4) {
   
-  if ( a3 )
+  if ( a3 != 0 )
   {
     return *(_DWORD *)(CProductionDataTab::GetBuildData(this, a2, a4) + 28);
   }
@@ -69,58 +69,57 @@ enum PILE_TYPES  CProductionDataTab::GetTool(enum BUILDING_TYPES a2) {
 // Decompiled from CProductionDataTab *__thiscall CProductionDataTab::CProductionDataTab(CProductionDataTab *this)
  CProductionDataTab::CProductionDataTab(void) {
   
-  if ( CProductionDataTab::m_iNumberOfEntries )
+  if ( CProductionDataTab::m_iNumberOfEntries == 0 )
   {
-    return this;
+    memset(CProductionDataTab::m_aBuildingTypeToTabIndexMap, 0, 0x67Cu);
+    CProductionDataTab::m_iNumberOfEntries = 1;
+    CProductionDataTab::PDT(this, 5, 1, 70, 20, 8000, 2, 0, 0, 22, 4, 112, 4, 22, 0, 1);
+    CProductionDataTab::PDT(this, 5, 2, 20, 5, 10, 1, 0, 0, 0, 0, -1, 6, 50, 0, 1);
+    CProductionDataTab::PDT(this, 5, 3, 70, 0, 8000, 3, 22, 0, 7, 28, -1, 12, 51, 0, 1);
+    CProductionDataTab::PDT(this, 5, 4, 40, 0, 8000, 1, 0, 0, 32, 25, 96, 5, 20, 0, 1);
+    CProductionDataTab::PDT(this, 5, 5, 200, 0, 8000, 2, 0, 0, 36, 0, -1, 10, 83, 0, 1);
+    CProductionDataTab::PDT(this, 5, 6, 20, 0, 8000, 1, 0, 0, 11, 27, 0, 9, 42, 0, 1);
+    CProductionDataTab::PDT(this, 2, 8, 140, 0, 8000, 2, 13, 0, 24, 4, -1, 18, 91, 0, 1);
+    CProductionDataTab::PDT(this, 1, 8, 140, 0, 8000, 2, 26, 0, 24, 4, -1, 18, 91, 0, 1);
+    CProductionDataTab::PDT(this, 0, 8, 140, 0, 8000, 2, 30, 0, 24, 4, -1, 18, 91, 0, 1);
+    CProductionDataTab::PDT(this, 4, 8, 140, 0, 8000, 2, 39, 0, 24, 4, -1, 18, 91, 0, 1);
+    CProductionDataTab::PDT(this, 5, 7, 20, 10, 8000, 1, 0, 0, 24, 8, 112, 11, 40, 0, 1);
+    CProductionDataTab::PDT(this, 5, 9, 40, 0, 8000, 1, 16, 0, 12, 0, -1, 16, 111, 0, 1);
+    CProductionDataTab::PDT(this, 5, 10, 140, 0, 8000, 5, 12, 36, 9, 0, -1, 17, 30, 0, 1);
+    CProductionDataTab::PDT(this, 5, 11, 40, 0, 8000, 5, 0, 0, 16, 29, -3, 7, 25, 0, 1);
+    CProductionDataTab::PDT(this, 2, 12, 40, 0, 8000, 3, 16, 36, 13, 0, -1, 8, 40, 0, 1);
+    CProductionDataTab::PDT(this, 1, 12, 40, 0, 8000, 3, 16, 36, 26, 0, -1, 8, 40, 0, 1);
+    CProductionDataTab::PDT(this, 0, 12, 40, 0, 8000, 3, 16, 36, 30, 0, -1, 8, 40, 0, 1);
+    CProductionDataTab::PDT(this, 4, 12, 40, 0, 8000, 3, 16, 36, 30, 0, -1, 8, 40, 0, 1);
+    CProductionDataTab::PDT(this, 5, 14, 80, 0, 8000, 1, 0, 0, 32, 25, 80, 14, 50, 0, 1);
+    CProductionDataTab::PDT(this, 5, 15, 200, 0, 8000, 3, 0, 0, 21, 25, 32, 14, 59, 0, 1);
+    CProductionDataTab::PDT(this, 5, 16, 200, 0, 8000, 5, 0, 0, 15, 25, 48, 14, 71, 0, 1);
+    CProductionDataTab::PDT(this, 5, 17, 200, 0, 8000, 5, 0, 0, 10, 25, 16, 14, 77, 0, 1);
+    CProductionDataTab::PDT(this, 5, 18, 20, 0, 8000, 5, 0, 0, 33, 25, 64, 14, 67, 0, 1);
+    CProductionDataTab::PDT(this, 5, 19, 200, 0, 8000, 3, 15, 10, 14, 0, -1, 13, 43, 0, 1);
+    CProductionDataTab::PDT(this, 5, 20, 60, 0, 8000, 3, 10, 21, 20, 0, -1, 13, 48, 0, 1);
+    CProductionDataTab::PDT(this, 5, 21, 80, 0, 8000, 1, 10, 21, 0, 18, -1, 15, 50, 0, 1);
+    CProductionDataTab::PDT(this, 5, 22, 200, 0, 8000, 3, 20, 10, 34, 18, -1, 15, 37, 0, 1);
+    CProductionDataTab::PDT(this, 5, 24, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
+    CProductionDataTab::PDT(this, 5, 25, 20, 0, 8000, 3, 22, 0, 10, 0, -1, 21, 500, 0, 1);
+    CProductionDataTab::PDT(this, 5, 28, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 22, 500, 0, 1);
+    CProductionDataTab::PDT(this, 5, 31, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 19, 500, 0, 1);
+    CProductionDataTab::PDT(this, 5, 32, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
+    CProductionDataTab::PDT(this, 5, 33, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
+    CProductionDataTab::PDT(this, 0, 35, 20, 0, 8000, 5, 0, 0, 37, 0, -2, 24, 17, 0, 1);
+    CProductionDataTab::PDT(this, 2, 36, 70, 0, 8000, 5, 0, 0, 1, 0, -6, 27, 500, 0, 1);
+    CProductionDataTab::PDT(this, 2, 37, 70, 0, 8000, 5, 1, 36, 35, 0, -1, 28, 500, 0, 1);
+    CProductionDataTab::PDT(this, 1, 38, 70, 0, 8000, 3, 0, 0, 19, 0, -4, 25, 500, 0, 1);
+    CProductionDataTab::PDT(this, 1, 39, 70, 0, 8000, 3, 19, 36, 23, 0, -1, 26, 500, 0, 1);
+    CProductionDataTab::PDT(this, 4, 82, 70, 0, 8000, 5, 0, 0, 42, 0, -4, 64, 500, 0, 1);
+    CProductionDataTab::PDT(this, 4, 81, 70, 0, 8000, 5, 42, 0, 41, 0, -1, 65, 500, 0, 1);
+    CProductionDataTab::PDT(this, 5, 40, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
+    CProductionDataTab::PDT(this, 5, 41, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
+    CProductionDataTab::PDT(this, 5, 42, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
+    CProductionDataTab::PDT(this, 5, 43, 200, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
+    CProductionDataTab::PDT(this, 5, 44, 200, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
+    CProductionDataTab::PDT(this, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0);
   }
-  memset(&CProductionDataTab::m_aBuildingTypeToTabIndexMap, 0, 0x67Cu);
-  CProductionDataTab::m_iNumberOfEntries = 1;
-  CProductionDataTab::PDT(this, 5, 1, 70, 20, 8000, 2, 0, 0, 22, 4, 112, 4, 22, 0, 1);
-  CProductionDataTab::PDT(this, 5, 2, 20, 5, 10, 1, 0, 0, 0, 0, -1, 6, 50, 0, 1);
-  CProductionDataTab::PDT(this, 5, 3, 70, 0, 8000, 3, 22, 0, 7, 28, -1, 12, 51, 0, 1);
-  CProductionDataTab::PDT(this, 5, 4, 40, 0, 8000, 1, 0, 0, 32, 25, 96, 5, 20, 0, 1);
-  CProductionDataTab::PDT(this, 5, 5, 200, 0, 8000, 2, 0, 0, 36, 0, -1, 10, 83, 0, 1);
-  CProductionDataTab::PDT(this, 5, 6, 20, 0, 8000, 1, 0, 0, 11, 27, 0, 9, 42, 0, 1);
-  CProductionDataTab::PDT(this, 2, 8, 140, 0, 8000, 2, 13, 0, 24, 4, -1, 18, 91, 0, 1);
-  CProductionDataTab::PDT(this, 1, 8, 140, 0, 8000, 2, 26, 0, 24, 4, -1, 18, 91, 0, 1);
-  CProductionDataTab::PDT(this, 0, 8, 140, 0, 8000, 2, 30, 0, 24, 4, -1, 18, 91, 0, 1);
-  CProductionDataTab::PDT(this, 4, 8, 140, 0, 8000, 2, 39, 0, 24, 4, -1, 18, 91, 0, 1);
-  CProductionDataTab::PDT(this, 5, 7, 20, 10, 8000, 1, 0, 0, 24, 8, 112, 11, 40, 0, 1);
-  CProductionDataTab::PDT(this, 5, 9, 40, 0, 8000, 1, 16, 0, 12, 0, -1, 16, 111, 0, 1);
-  CProductionDataTab::PDT(this, 5, 10, 140, 0, 8000, 5, 12, 36, 9, 0, -1, 17, 30, 0, 1);
-  CProductionDataTab::PDT(this, 5, 11, 40, 0, 8000, 5, 0, 0, 16, 29, -3, 7, 25, 0, 1);
-  CProductionDataTab::PDT(this, 2, 12, 40, 0, 8000, 3, 16, 36, 13, 0, -1, 8, 40, 0, 1);
-  CProductionDataTab::PDT(this, 1, 12, 40, 0, 8000, 3, 16, 36, 26, 0, -1, 8, 40, 0, 1);
-  CProductionDataTab::PDT(this, 0, 12, 40, 0, 8000, 3, 16, 36, 30, 0, -1, 8, 40, 0, 1);
-  CProductionDataTab::PDT(this, 4, 12, 40, 0, 8000, 3, 16, 36, 30, 0, -1, 8, 40, 0, 1);
-  CProductionDataTab::PDT(this, 5, 14, 80, 0, 8000, 1, 0, 0, 32, 25, 80, 14, 50, 0, 1);
-  CProductionDataTab::PDT(this, 5, 15, 200, 0, 8000, 3, 0, 0, 21, 25, 32, 14, 59, 0, 1);
-  CProductionDataTab::PDT(this, 5, 16, 200, 0, 8000, 5, 0, 0, 15, 25, 48, 14, 71, 0, 1);
-  CProductionDataTab::PDT(this, 5, 17, 200, 0, 8000, 5, 0, 0, 10, 25, 16, 14, 77, 0, 1);
-  CProductionDataTab::PDT(this, 5, 18, 20, 0, 8000, 5, 0, 0, 33, 25, 64, 14, 67, 0, 1);
-  CProductionDataTab::PDT(this, 5, 19, 200, 0, 8000, 3, 15, 10, 14, 0, -1, 13, 43, 0, 1);
-  CProductionDataTab::PDT(this, 5, 20, 60, 0, 8000, 3, 10, 21, 20, 0, -1, 13, 48, 0, 1);
-  CProductionDataTab::PDT(this, 5, 21, 80, 0, 8000, 1, 10, 21, 0, 18, -1, 15, 50, 0, 1);
-  CProductionDataTab::PDT(this, 5, 22, 200, 0, 8000, 3, 20, 10, 34, 18, -1, 15, 37, 0, 1);
-  CProductionDataTab::PDT(this, 5, 24, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
-  CProductionDataTab::PDT(this, 5, 25, 20, 0, 8000, 3, 22, 0, 10, 0, -1, 21, 500, 0, 1);
-  CProductionDataTab::PDT(this, 5, 28, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 22, 500, 0, 1);
-  CProductionDataTab::PDT(this, 5, 31, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 19, 500, 0, 1);
-  CProductionDataTab::PDT(this, 5, 32, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
-  CProductionDataTab::PDT(this, 5, 33, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
-  CProductionDataTab::PDT(this, 0, 35, 20, 0, 8000, 5, 0, 0, 37, 0, -2, 24, 17, 0, 1);
-  CProductionDataTab::PDT(this, 2, 36, 70, 0, 8000, 5, 0, 0, 1, 0, -6, 27, 500, 0, 1);
-  CProductionDataTab::PDT(this, 2, 37, 70, 0, 8000, 5, 1, 36, 35, 0, -1, 28, 500, 0, 1);
-  CProductionDataTab::PDT(this, 1, 38, 70, 0, 8000, 3, 0, 0, 19, 0, -4, 25, 500, 0, 1);
-  CProductionDataTab::PDT(this, 1, 39, 70, 0, 8000, 3, 19, 36, 23, 0, -1, 26, 500, 0, 1);
-  CProductionDataTab::PDT(this, 4, 82, 70, 0, 8000, 5, 0, 0, 42, 0, -4, 64, 500, 0, 1);
-  CProductionDataTab::PDT(this, 4, 81, 70, 0, 8000, 5, 42, 0, 41, 0, -1, 65, 500, 0, 1);
-  CProductionDataTab::PDT(this, 5, 40, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
-  CProductionDataTab::PDT(this, 5, 41, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
-  CProductionDataTab::PDT(this, 5, 42, 20, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
-  CProductionDataTab::PDT(this, 5, 43, 200, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
-  CProductionDataTab::PDT(this, 5, 44, 200, 0, 8000, 1, 0, 0, 0, 0, -1, 0, 500, 0, 1);
-  CProductionDataTab::PDT(this, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0);
   return this;
 }
 

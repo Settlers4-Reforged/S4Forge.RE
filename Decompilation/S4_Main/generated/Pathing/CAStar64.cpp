@@ -46,15 +46,15 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
   CDirCache::Init(a4);
   s_pIsNotBlocked = 0;
   s_pMoveCost = 0;
-  if ( sub_15D5300(a2, a3) )
+  if ( sub_15D5300(a2, a3) != 0 )
   {
-    if ( (**(unsigned __int8 (__thiscall ***)(CAStar64 *))this)(this) )
+    if ( (**(unsigned __int8 (__thiscall ***)(CAStar64 *))this)(this) != 0 )
     {
-      if ( !s_pIsNotBlocked && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 1999, "s_pIsNotBlocked != 0") == 1 )
+      if ( s_pIsNotBlocked == 0 && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 1999, "s_pIsNotBlocked != 0") == 1 )
       {
         __debugbreak();
       }
-      if ( !s_pMoveCost && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 2000, "s_pMoveCost != 0") == 1 )
+      if ( s_pMoveCost == 0 && BBSupportDbgReport(2, "Pathing\\AStar.cpp", 2000, "s_pMoveCost != 0") == 1 )
       {
         __debugbreak();
       }
@@ -77,11 +77,11 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
             v17 = i;
             v8 = COpenListEntry24::G((COpenListEntry24 *)v21);
             CG24Closed1Parent7::Set((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v40), v8, 0, v17);
-            sub_15D5530(a4);
+            sub_15D5530((int)a4);
             return 1;
           }
           v32 = dword_4174BC0 + CY6R1X6::WorldIdx(v40);
-          if ( (unsigned __int8)s_pIsNotBlocked(v32) )
+          if ( (unsigned __int8)s_pIsNotBlocked(v32) != 0 )
           {
             v9 = COpenListEntry24::G((COpenListEntry24 *)v21);
             v31 = v9 + 8 * s_pMoveCost(v32, 0) + 1;
@@ -94,7 +94,7 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
         }
       }
       v35 = 3;
-      while ( !(unsigned __int8)TPriorityQueue<COpenListEntry24,8192>::Empty(dword_415C788) )
+      while ( (unsigned __int8)TPriorityQueue<COpenListEntry24,8192>::Empty(dword_415C788) == 0 )
       {
         v10 = (_DWORD *)TPriorityQueue<COpenListEntry24,8192>::Top(dword_415C788);
         v11 = v10[1];
@@ -116,11 +116,11 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
               v18 = v38;
               v13 = COpenListEntry24::G((COpenListEntry24 *)v22);
               CG24Closed1Parent7::Set((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v41), v13, 0, v18);
-              sub_15D5530(a4);
+              sub_15D5530((int)a4);
               return 1;
             }
             v27 = dword_4174BC0 + CY6R1X6::WorldIdx(v41);
-            if ( (unsigned __int8)s_pIsNotBlocked(v27) )
+            if ( (unsigned __int8)s_pIsNotBlocked(v27) != 0 )
             {
               v37 = v38 - v30;
               v37 += v37 < 0 ? 6 : 0;
@@ -136,7 +136,7 @@ bool  CAStar64::FindPath(int a2, int a3, class CDirCache & a4) {
               {
                 __debugbreak();
               }
-              if ( sub_15D55E0(v41, iNeighborG) )
+              if ( sub_15D55E0(v41, iNeighborG) != 0 )
               {
                 TBitArray<8192>::Set(dword_416C7C0, v41);
                 CG24Closed1Parent7::Set((CG24Closed1Parent7 *)((char *)&unk_416CBC0 + 4 * v41), iNeighborG, 0, v38);

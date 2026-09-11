@@ -119,7 +119,7 @@ int  CSquareVisited::WorldPackedXYIndex(int a2)const {
   Y16X16 *v4; // [esp+8h] [ebp-4h]
 
   v4 = (Y16X16 *)(a2 - *(_DWORD *)this);
-  if ( !Y16X16::XYNotNegative(v4) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 1171, "Y16X16::XYNotNegative(iPackedXY)") == 1 )
+  if ( !Y16X16::XYNotNegative((unsigned int)v4) && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 1171, "Y16X16::XYNotNegative(iPackedXY)") == 1 )
   {
     __debugbreak();
   }

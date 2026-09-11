@@ -3,7 +3,7 @@
 // Definitions for class COneBuildingTypeIterator
 
 // address=[0x1315a50]
-// Decompiled from int __thiscall COneBuildingTypeIterator::Init(COneBuildingTypeIterator *this, int a2, int a3)
+// Decompiled from int __thiscall COneBuildingTypeIterator::Init(CBuildingIteratorBase *this, int a2, int a3)
 void  COneBuildingTypeIterator::Init(int a2, int a3) {
   
   int result; // eax
@@ -24,37 +24,37 @@ int  COneBuildingTypeIterator::FirstBuilding(void) {
 
 
 // address=[0x1315ab0]
-// Decompiled from int __thiscall COneBuildingTypeIterator::NextBuilding(COneBuildingTypeIterator *this)
+// Decompiled from int __thiscall COneBuildingTypeIterator::NextBuilding(CBuildingIteratorBase *this)
 int  COneBuildingTypeIterator::NextBuilding(void) {
   
   bool i; // al
   int v2; // eax
   int v5; // [esp+4h] [ebp-4h]
 
-  v5 = *((_DWORD *)this + 1);
+  v5 = this->m_iBuildingId;
   for ( i = CBuildingIteratorBase::BuildingValid(this, v5);
         !i;
         i = CBuildingIteratorBase::BuildingValid(this, v5) )
   {
-    v2 = CBuildingMgr::operator[](v5);
+    v2 = ((int (__stdcall *)(int))CBuildingMgr::operator[])(v5);
     v5 = IAnimatedEntity::Next(v2);
   }
-  *((_DWORD *)this + 1) = v5;
+  this->m_iBuildingId = v5;
   return v5;
 }
 
 
 // address=[0x1315b00]
-// Decompiled from int __thiscall COneBuildingTypeIterator::NextBuildingIfCurrentIsNotValid(COneBuildingTypeIterator *this)
+// Decompiled from int __thiscall COneBuildingTypeIterator::NextBuildingIfCurrentIsNotValid(CBuildingIteratorBase *this)
 int  COneBuildingTypeIterator::NextBuildingIfCurrentIsNotValid(void) {
   
-  if ( CBuildingIteratorBase::BuildingValid(this, *((_DWORD *)this + 1)) )
+  if ( CBuildingIteratorBase::BuildingValid(this, this->m_iBuildingId) )
   {
-    return *((_DWORD *)this + 1);
+    return this->m_iBuildingId;
   }
   else
   {
-    return COneBuildingTypeIterator::NextBuilding(this);
+    return COneBuildingTypeIterator::NextBuilding((COneBuildingTypeIterator *)this);
   }
 }
 

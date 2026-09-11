@@ -32,16 +32,16 @@ void  CAIPlayerAI::Execute(void) {
   CAIPlayerAI::CalculateSectorAndEcoSectorIds(this);
   CAIPlayerAI::ProcessEvents(this);
   CAIPlayerAI::MoveEntitiesToSectorReservoirs(this);
-  (*(void (__thiscall **)(char *, int, int))(*((_DWORD *)this + 7) + 4))((char *)this + 28, v2, 511);
-  result = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)this + 72);
+  this->m_cScheduler.Execute(&this->m_cScheduler, v2, 511);
+  result = TAIStaticPtrVector<CAISectorAI,8>::Size(this + 1);
   v3 = result;
   for ( i = 0;
         i < v3;
         ++i )
   {
-    v4 = TAIStaticPtrVector<CAISectorAI,8>::operator[](i);
+    v4 = ((int (__stdcall *)(int))TAIStaticPtrVector<CAISectorAI,8>::operator[])(i);
     (*(void (__thiscall **)(int))(*(_DWORD *)v4 + 4))(v4);
-    if ( TAIStaticPtrVector<CAISectorAI,8>::Size((char *)this + 72) != v3 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 853, "m_cSectorAIs.Size() == iNumberOfSectorAIs") == 1 )
+    if ( TAIStaticPtrVector<CAISectorAI,8>::Size(this + 1) != v3 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 853, "m_cSectorAIs.Size() == iNumberOfSectorAIs") == 1 )
     {
       __debugbreak();
     }
@@ -63,7 +63,7 @@ void  CAIPlayerAI::Release(void) {
 // Decompiled from void __thiscall CAIPlayerAI::PostAIEvent(CAIPlayerAI *this, int a2, int a3, int a4, int a5)
 void  CAIPlayerAI::PostAIEvent(int a2, int a3, int a4, int a5) {
   
-  CAIEventQueue::PostAIEvent((CAIPlayerAI *)((char *)this + 108), a2, a3, a4, a5);
+  CAIEventQueue::PostAIEvent((CAIEventQueue *)((char *)this + 108), a2, a3, a4, a5);
 }
 
 
@@ -81,17 +81,17 @@ void  CAIPlayerAI::PostAIEvent(int a2, int a3, int a4, int a5) {
   this->m_pRaceBasedTable1 = off_3D7A4E0[this->m_iRace];
   this->m_pRaceBasedTable2 = off_3D7A50C[this->m_iRace];
   CAIScheduler::CAIScheduler(&this->m_cScheduler);
-  TAIStaticPtrVector<CAISectorAI,8>::TAIStaticPtrVector<CAISectorAI,8>(&this[1]);
-  CAIEventQueue::CAIEventQueue((std::bad_function_call *)&this[1].m_cScheduler.m_uDefaultExecutionDelay);
-  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)&this[1].m_cScheduler.m_spName, a2);
-  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)&this[2].m_cScheduler.m_pFirstAgent, a2);
-  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)&this[4].IS4ChunkObject, a2);
-  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)&this[5].m_uU, a2);
-  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)&this[6].m_pRaceBasedTable1, a2);
-  CAIAgentGlobalSuicideMission::CAIAgentGlobalSuicideMission((CAIAgentGlobalSuicideMission *)&this[7].m_cScheduler, "global suicide");
-  CAITaskForceSquad::CAITaskForceSquad(&this[7].m_cScheduler.m_pFirstAgent, a2, 4, 0);
-  CAIAgentPlayerBase::AttachPlayerAI((CAIAgentPlayerBase *)&this[7].m_cScheduler, this);
-  CAIScheduler::AddAgent(&this->m_cScheduler, &this[7].m_cScheduler, 150, 256, 8);
+  TAIStaticPtrVector<CAISectorAI,8>::TAIStaticPtrVector<CAISectorAI,8>(this + 1);
+  CAIEventQueue::CAIEventQueue((CAIEventQueue *)((char *)this + 108));
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)this + 132), a2);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)this + 212), a2);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)this + 292), a2);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)this + 372), a2);
+  CAITaskForceReservoir::CAITaskForceReservoir((CAITaskForceReservoir *)((char *)this + 452), a2);
+  CAIAgentGlobalSuicideMission::CAIAgentGlobalSuicideMission((CAIAgentGlobalSuicideMission *)((char *)this + 532), "global suicide");
+  CAITaskForceSquad::CAITaskForceSquad((CAITaskForceSquad *)((char *)this + 572), a2, 4, 0);
+  CAIAgentPlayerBase::AttachPlayerAI((CAIAgentPlayerBase *)((char *)this + 532), this);
+  CAIScheduler::AddAgent(&this->m_cScheduler, (CAIAgent *)((char *)this + 532), 150, 256, 8);
   return this;
 }
 
@@ -102,18 +102,18 @@ void  CAIPlayerAI::PostAIEvent(int a2, int a3, int a4, int a5) {
   
   int v2; // [esp+0h] [ebp-4h]
 
-  *(_DWORD *)this = CAIPlayerAI::_vftable_;
-  *((_DWORD *)this + 1) = &CAIPlayerAI::`vftable';
-  CAITaskForceSquad::~CAITaskForceSquad((CAIPlayerAI *)((char *)this + 572));
-  CAIAgentGlobalSuicideMission::~CAIAgentGlobalSuicideMission((CAIPlayerAI *)((char *)this + 532));
-  CAITaskForceReservoir::~CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 452));
-  CAITaskForceReservoir::~CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 372));
-  CAITaskForceReservoir::~CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 292));
-  CAITaskForceReservoir::~CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 212));
-  CAITaskForceReservoir::~CAITaskForceReservoir((CAIPlayerAI *)((char *)this + 132));
-  CAIEventQueue::~CAIEventQueue((CAIPlayerAI *)((char *)this + 108));
+  this->IAIUnknown::__vftable = (IAIUnknown_vtbl *)CAIPlayerAI::_vftable_;
+  this->IS4ChunkObject::__vftable = (IS4ChunkObject_vtbl *)&CAIPlayerAI::`vftable';
+  CAITaskForceSquad::~CAITaskForceSquad((CAITaskForce **)this + 143);
+  CAIAgentGlobalSuicideMission::~CAIAgentGlobalSuicideMission((CAIScheduler **)this + 133);
+  CAITaskForceReservoir::~CAITaskForceReservoir((CAITaskForce **)this + 113);
+  CAITaskForceReservoir::~CAITaskForceReservoir((CAITaskForce **)this + 93);
+  CAITaskForceReservoir::~CAITaskForceReservoir((CAITaskForce **)this + 73);
+  CAITaskForceReservoir::~CAITaskForceReservoir((CAITaskForce **)this + 53);
+  CAITaskForceReservoir::~CAITaskForceReservoir((CAITaskForce **)this + 33);
+  CAIEventQueue::~CAIEventQueue((CDHtmlElementEventSink *)((char *)this + 108));
   TAIStaticPtrVector<CAISectorAI,8>::~TAIStaticPtrVector<CAISectorAI,8>(this);
-  CAIScheduler::~CAIScheduler((CAIScheduler *)(v2 + 28));
+  CAIScheduler::~CAIScheduler((struct CAIAgent **)(v2 + 28));
 }
 
 
@@ -139,9 +139,9 @@ class CAIPlayerAI * __cdecl CAIPlayerAI::CreatePlayerAI(int a1, class IS4Chunk *
 
   if ( IAIEnvironment::PlayerRace(a1) == 3 )
   {
-    Memory = (void *)TAIStaticMemoryPool<692,9>::AllocateMemory(692);
+    Memory = (void *)((void *(__stdcall *)(int))TAIStaticMemoryPool<692,9>::AllocateMemory)(692);
     v6 = (CAIDarkTribePlayerAI *)operator new(0x2B4u, Memory);
-    if ( v6 )
+    if ( v6 != 0 )
     {
       v5 = CAIDarkTribePlayerAI::CAIDarkTribePlayerAI(v6, a1);
     }
@@ -153,9 +153,9 @@ class CAIPlayerAI * __cdecl CAIPlayerAI::CreatePlayerAI(int a1, class IS4Chunk *
   }
   else
   {
-    v4 = (void *)TAIStaticMemoryPool<692,9>::AllocateMemory(684);
+    v4 = (void *)((void *(__stdcall *)(int))TAIStaticMemoryPool<692,9>::AllocateMemory)(684);
     v8 = (CAINormalPlayerAI *)operator new(0x2ACu, v4);
-    if ( v8 )
+    if ( v8 != 0 )
     {
       v7 = CAINormalPlayerAI::CAINormalPlayerAI(v8, a1);
     }
@@ -165,13 +165,13 @@ class CAIPlayerAI * __cdecl CAIPlayerAI::CreatePlayerAI(int a1, class IS4Chunk *
     }
     v9 = v7;
   }
-  if ( !v9 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 238, "pPlayerAI != 0") == 1 )
+  if ( v9 == 0 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 238, "pPlayerAI != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( a2 )
+  if ( a2 != 0 )
   {
-    (**((void (__thiscall ***)(int, struct IS4Chunk *))v9 + 1))((int)v9 + 4, a2);
+    (**((void (__thiscall ***)(char *, struct IS4Chunk *))v9 + 1))((char *)v9 + 4, a2);
   }
   else
   {
@@ -193,7 +193,7 @@ void  CAIPlayerAI::DbgPrint(void) {
         ;
         ++i )
   {
-    result = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)this + 72);
+    result = TAIStaticPtrVector<CAISectorAI,8>::Size(this + 1);
     if ( i >= result )
     {
       break;
@@ -212,7 +212,7 @@ int  CAIPlayerAI::GetNumberOfOwnBuildings(int a2, int a3) {
   int v3; // eax
 
   v3 = CAIPlayerAI::PlayerId(this);
-  return IAIEnvironment::BuildingGetNumberOfBuildings(v3, a2, a3);
+  return IAIEnvironment::BuildingGetNumberOfBuildings(v3, (S4_BUILDING_ENUM)a2, a3);
 }
 
 
@@ -240,15 +240,15 @@ void  CAIPlayerAI::MoveEntitiesToSectorReservoirs(void) {
   int i; // [esp+14h] [ebp-4h]
 
   v4 = this;
-  result = CAITaskForce::FirstEntity((char *)this + 132);
+  result = (int)CAITaskForce::FirstEntity((CAITaskForce *)((char *)this + 132));
   for ( i = result;
-        i;
+        i != 0;
         i = v2 )
   {
-    v2 = CAIEntityInfo::Next(i);
-    v5 = CAIEntityInfo::EntityId(i);
+    v2 = (int)CAIEntityInfo::Next((CAIEntityInfo *)i);
+    v5 = CAIEntityInfo::EntityId((CAIEntityInfo *)i);
     IAIEnvironment::EntityGetWarriorTypeAndSectorId(v5, &v6, &v3);
-    if ( !v6 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 821, "tWarriorType != AI_WARRIOR_TYPE_NONE") == 1 )
+    if ( v6 == 0 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 821, "tWarriorType != AI_WARRIOR_TYPE_NONE") == 1 )
     {
       __debugbreak();
     }
@@ -284,79 +284,78 @@ void  CAIPlayerAI::ScanForNewSectors(void) {
   pairNode *v20; // [esp+28h] [ebp-2Ch]
   _BYTE v21[36]; // [esp+2Ch] [ebp-28h] BYREF
 
-  v20 = this;
+  v20 = (pairNode *)this;
   TStaticArray<int,8>::TStaticArray<int,8>(v21);
   result = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)v20 + 72);
-  if ( result >= 8 )
+  if ( result < 8 )
   {
-    return result;
-  }
-  for ( i = 0;
-        ;
-        ++i )
-  {
-    v2 = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)v20 + 72);
-    if ( i >= v2 )
+    for ( i = 0;
+          ;
+          ++i )
     {
-      break;
-    }
-    v3 = (CAISectorAI *)TAIStaticPtrVector<CAISectorAI,8>::operator[](i);
-    v13 = CAISectorAI::SectorId(v3);
-    TStaticArray<int,8>::PushBack(&v13);
-  }
-  v4 = CAIPlayerAI::PlayerId(v20);
-  CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator((CAIBuildingEnsignPositionIterator *)v12, v4, 48);
-  while ( CAIBuildingEnsignPositionIterator::NextXY((CAIBuildingEnsignPositionIterator *)v12, (int *)&v18, (int *)&v19) )
-  {
-    v16 = IAIEnvironment::WorldSectorId((int)v18, (int)v19);
-    if ( !(unsigned __int8)TStaticArray<int,8>::SearchBackwards(&v16) )
-    {
-      TStaticArray<int,8>::PushBack(&v16);
-      NormalSectorAI = CAISectorAI::CreateNormalSectorAI(v20, (int)v18, (int)v19);
-      TAIStaticPtrVector<CAISectorAI,8>::PushBack(NormalSectorAI);
-      result = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)v20 + 72);
-      if ( result >= 8 )
-      {
-        return result;
-      }
-    }
-  }
-  v6 = CAIPlayerAI::PlayerId(v20);
-  CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator((CAIBuildingEnsignPositionIterator *)v11, v6, 47);
-  while ( CAIBuildingEnsignPositionIterator::NextXY((CAIBuildingEnsignPositionIterator *)v11, (int *)&v18, (int *)&v19) )
-  {
-    v15 = IAIEnvironment::WorldSectorId((int)v18, (int)v19);
-    if ( !(unsigned __int8)TStaticArray<int,8>::SearchBackwards(&v15) )
-    {
-      TStaticArray<int,8>::PushBack(&v15);
-      v7 = CAISectorAI::CreateNormalSectorAI(v20, (int)v18, (int)v19);
-      TAIStaticPtrVector<CAISectorAI,8>::PushBack(v7);
-      result = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)v20 + 72);
-      if ( result >= 8 )
-      {
-        return result;
-      }
-    }
-  }
-  v8 = CAIPlayerAI::PlayerId(v20);
-  CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator((CAIBuildingEnsignPositionIterator *)v10, v8, 46);
-  while ( 1 )
-  {
-    result = CAIBuildingEnsignPositionIterator::NextXY((CAIBuildingEnsignPositionIterator *)v10, (int *)&v18, (int *)&v19);
-    if ( !(_BYTE)result )
-    {
-      break;
-    }
-    v14 = IAIEnvironment::WorldSectorId((int)v18, (int)v19);
-    if ( !(unsigned __int8)TStaticArray<int,8>::SearchBackwards(&v14) )
-    {
-      TStaticArray<int,8>::PushBack(&v14);
-      v9 = CAISectorAI::CreateNormalSectorAI(v20, (int)v18, (int)v19);
-      TAIStaticPtrVector<CAISectorAI,8>::PushBack(v9);
-      result = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)v20 + 72);
-      if ( result >= 8 )
+      v2 = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)v20 + 72);
+      if ( i >= v2 )
       {
         break;
+      }
+      v3 = (CAISectorAI *)((CAISectorAI *(__stdcall *)(int))TAIStaticPtrVector<CAISectorAI,8>::operator[])(i);
+      v13 = CAISectorAI::SectorId(v3);
+      ((void (__stdcall *)(int *))TStaticArray<int,8>::PushBack)(&v13);
+    }
+    v4 = CAIPlayerAI::PlayerId(v20);
+    CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator((CAIBuildingEnsignPositionIterator *)v12, v4, 48);
+    while ( CAIBuildingEnsignPositionIterator::NextXY((CAIBuildingEnsignPositionIterator *)v12, (int *)&v18, (int *)&v19) )
+    {
+      v16 = IAIEnvironment::WorldSectorId((int)v18, (int)v19);
+      if ( (unsigned __int8)((_DWORD (__stdcall *)(int *))TStaticArray<int,8>::SearchBackwards)(&v16) == 0 )
+      {
+        ((void (__stdcall *)(int *))TStaticArray<int,8>::PushBack)(&v16);
+        NormalSectorAI = CAISectorAI::CreateNormalSectorAI(v20, (int)v18, (int)v19);
+        ((void (__stdcall *)(int))TAIStaticPtrVector<CAISectorAI,8>::PushBack)(NormalSectorAI);
+        result = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)v20 + 72);
+        if ( result >= 8 )
+        {
+          return result;
+        }
+      }
+    }
+    v6 = CAIPlayerAI::PlayerId(v20);
+    CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator((CAIBuildingEnsignPositionIterator *)v11, v6, 47);
+    while ( CAIBuildingEnsignPositionIterator::NextXY((CAIBuildingEnsignPositionIterator *)v11, (int *)&v18, (int *)&v19) )
+    {
+      v15 = IAIEnvironment::WorldSectorId((int)v18, (int)v19);
+      if ( (unsigned __int8)((_DWORD (__stdcall *)(int *))TStaticArray<int,8>::SearchBackwards)(&v15) == 0 )
+      {
+        ((void (__stdcall *)(int *))TStaticArray<int,8>::PushBack)(&v15);
+        v7 = CAISectorAI::CreateNormalSectorAI(v20, (int)v18, (int)v19);
+        ((void (__stdcall *)(int))TAIStaticPtrVector<CAISectorAI,8>::PushBack)(v7);
+        result = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)v20 + 72);
+        if ( result >= 8 )
+        {
+          return result;
+        }
+      }
+    }
+    v8 = CAIPlayerAI::PlayerId(v20);
+    CAIBuildingEnsignPositionIterator::CAIBuildingEnsignPositionIterator((CAIBuildingEnsignPositionIterator *)v10, v8, 46);
+    while ( 1 )
+    {
+      result = CAIBuildingEnsignPositionIterator::NextXY((CAIBuildingEnsignPositionIterator *)v10, (int *)&v18, (int *)&v19);
+      if ( (_BYTE)result == 0 )
+      {
+        break;
+      }
+      v14 = IAIEnvironment::WorldSectorId((int)v18, (int)v19);
+      if ( (unsigned __int8)((_DWORD (__stdcall *)(int *))TStaticArray<int,8>::SearchBackwards)(&v14) == 0 )
+      {
+        ((void (__stdcall *)(int *))TStaticArray<int,8>::PushBack)(&v14);
+        v9 = CAISectorAI::CreateNormalSectorAI(v20, (int)v18, (int)v19);
+        ((void (__stdcall *)(int))TAIStaticPtrVector<CAISectorAI,8>::PushBack)(v9);
+        result = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)v20 + 72);
+        if ( result >= 8 )
+        {
+          break;
+        }
       }
     }
   }
@@ -370,22 +369,21 @@ void  CAIPlayerAI::Load(class IS4Chunk & a2) {
   
   unsigned int v3; // [esp+0h] [ebp-8h]
 
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1517223936);
-  v3 = (*(int (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, 2);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1517223934);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->LoadSignature)(a2, -1517223936);
+  v3 = ((int (__thiscall *)(struct IS4Chunk *, int, int))a2->LoadUnsigned32)(a2, 1, 2);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->LoadSignature)(a2, -1517223934);
   (**((void (__thiscall ***)(char *, struct IS4Chunk *))this + 26))((char *)this + 104, a2);
   (**((void (__thiscall ***)(char *, struct IS4Chunk *))this + 32))((char *)this + 128, a2);
   (**((void (__thiscall ***)(char *, struct IS4Chunk *))this + 52))((char *)this + 208, a2);
-  (**((void (__thiscall ***)(char *, struct IS4Chunk *))this + 72))((char *)this + 288, a2);
+  (**((void (__thiscall ***)(CAIPlayerAI *, struct IS4Chunk *))this + 72))(this + 4, a2);
   (**((void (__thiscall ***)(char *, struct IS4Chunk *))this + 92))((char *)this + 368, a2);
-  if ( v3 < 2 )
+  if ( v3 >= 2 )
   {
-    return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1517223935);
+    (**((void (__thiscall ***)(char *, struct IS4Chunk *))this + 112))((char *)this + 448, a2);
+    (*(void (__thiscall **)(char *, struct IS4Chunk *))(*((_DWORD *)this + 132) + 12))((char *)this + 528, a2);
+    (**((void (__thiscall ***)(char *, struct IS4Chunk *))this + 142))((char *)this + 568, a2);
   }
-  (**((void (__thiscall ***)(char *, struct IS4Chunk *))this + 112))((char *)this + 448, a2);
-  (*(void (__thiscall **)(char *, struct IS4Chunk *))(*((_DWORD *)this + 132) + 12))((char *)this + 528, a2);
-  (**((void (__thiscall ***)(char *, struct IS4Chunk *))this + 142))((char *)this + 568, a2);
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, -1517223935);
+  return ((int (__thiscall *)(struct IS4Chunk *, int))a2->LoadSignature)(a2, -1517223935);
 }
 
 
@@ -393,18 +391,18 @@ void  CAIPlayerAI::Load(class IS4Chunk & a2) {
 // Decompiled from int __thiscall CAIPlayerAI::Save(CAIPlayerAI *this, struct IS4Chunk *a2)
 void  CAIPlayerAI::Save(class IS4Chunk & a2) {
   
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1517223936);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 2);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1517223934);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveSignature)(a2, -1517223936);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, 2);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveSignature)(a2, -1517223934);
   (*(void (__thiscall **)(char *, struct IS4Chunk *))(*((_DWORD *)this + 26) + 4))((char *)this + 104, a2);
   (*(void (__thiscall **)(char *, struct IS4Chunk *))(*((_DWORD *)this + 32) + 4))((char *)this + 128, a2);
   (*(void (__thiscall **)(char *, struct IS4Chunk *))(*((_DWORD *)this + 52) + 4))((char *)this + 208, a2);
-  (*(void (__thiscall **)(char *, struct IS4Chunk *))(*((_DWORD *)this + 72) + 4))((char *)this + 288, a2);
+  (*(void (__thiscall **)(CAIPlayerAI *, struct IS4Chunk *))(*((_DWORD *)this + 72) + 4))(this + 4, a2);
   (*(void (__thiscall **)(char *, struct IS4Chunk *))(*((_DWORD *)this + 92) + 4))((char *)this + 368, a2);
   (*(void (__thiscall **)(char *, struct IS4Chunk *))(*((_DWORD *)this + 112) + 4))((char *)this + 448, a2);
   (*(void (__thiscall **)(char *, struct IS4Chunk *))(*((_DWORD *)this + 132) + 16))((char *)this + 528, a2);
   (*(void (__thiscall **)(char *, struct IS4Chunk *))(*((_DWORD *)this + 142) + 4))((char *)this + 568, a2);
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1517223935);
+  return ((int (__thiscall *)(struct IS4Chunk *, int))a2->SaveSignature)(a2, -1517223935);
 }
 
 
@@ -459,21 +457,21 @@ void  CAIPlayerAI::ProcessEvents(void) {
   pairNode *i; // [esp+7Ch] [ebp-8h]
   pairNode *v46; // [esp+80h] [ebp-4h]
 
-  v46 = this;
-  v24 = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)this + 72);
-  result = CAIEventQueue::PeekAIEvent((pairNode *)((char *)v46 + 108), 1);
+  v46 = (pairNode *)this;
+  v24 = TAIStaticPtrVector<CAISectorAI,8>::Size(this + 1);
+  result = (pairNode *)CAIEventQueue::PeekAIEvent((CAIEventQueue *)((char *)v46 + 108), 1);
   for ( i = result;
-        i;
+        i != 0;
         i = result )
   {
     v44 = 0;
-    v2 = CAIEvent::Type(i);
+    v2 = CAIEvent::Type((CAIEvent *)i);
     v41 = v2 - 18;
     switch ( v2 )
     {
       case 18:
-        v23 = CAIEvent::Data1(i);
-        v37 = CAIEvent::Data2(i);
+        v23 = CAIEvent::Data1((CAIEvent *)i);
+        v37 = CAIEvent::Data2((CAIEvent *)i);
         v3 = CAIPlayerAI::PlayerId(v46);
         if ( v23 != v3 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 561, "iPlayerId == PlayerId()") == 1 )
         {
@@ -483,24 +481,24 @@ void  CAIPlayerAI::ProcessEvents(void) {
         {
           __debugbreak();
         }
-        if ( IAIEnvironment::EntityWarriorType(v37) )
+        if ( IAIEnvironment::EntityWarriorType(v37) != AI_WARRIOR_TYPE_NONE )
         {
-          CAITaskForce::AddEntity((char *)v46 + 372, v37, 0);
+          CAITaskForce::AddEntity((CAITaskForce *)((char *)v46 + 372), v37, 0);
         }
         break;
       case 19:
-        v22 = CAIEvent::Data1(i);
-        v34 = CAIEvent::Data2(i);
+        v22 = CAIEvent::Data1((CAIEvent *)i);
+        v34 = CAIEvent::Data2((CAIEvent *)i);
         v4 = CAIPlayerAI::PlayerId(v46);
-        if ( v22 == v4 && IAIEnvironment::EntityWarriorType(v34) )
+        if ( v22 == v4 && IAIEnvironment::EntityWarriorType(v34) != AI_WARRIOR_TYPE_NONE )
         {
-          CAITaskForce::AddEntity((char *)v46 + 132, v34, 0);
+          CAITaskForce::AddEntity((CAITaskForce *)((char *)v46 + 132), v34, 0);
         }
         break;
       case 20:
-        v21 = CAIEvent::Data1(i);
-        v40 = CAIEvent::Data2(i);
-        v33 = CAIEvent::Data3(i);
+        v21 = CAIEvent::Data1((CAIEvent *)i);
+        v40 = CAIEvent::Data2((CAIEvent *)i);
+        v33 = CAIEvent::Data3((struct CAIEvent *)i);
         v5 = CAIPlayerAI::PlayerId(v46);
         if ( v21 != v5 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 596, "iPlayerId == PlayerId()") == 1 )
         {
@@ -511,24 +509,24 @@ void  CAIPlayerAI::ProcessEvents(void) {
           __debugbreak();
         }
         v44 = IAIEnvironment::EntitySectorId(v40);
-        if ( v33 != 1 || v44 <= 0 || CAIPlayerAI::ExistsSectorAI(v46, v44) )
+        if ( v33 != 1 || v44 <= 0 || CAIPlayerAI::ExistsSectorAI((CAIPlayerAI *)v46, v44) )
         {
           if ( v33 == 2 || v44 <= 0 )
           {
             v44 = -1;
-            CAITaskForce::AddEntity((char *)v46 + 132, v40, 0);
+            CAITaskForce::AddEntity((CAITaskForce *)((char *)v46 + 132), v40, 0);
           }
         }
         else
         {
-          CAITaskForce::AddEntity((char *)v46 + 452, v40, 0);
+          CAITaskForce::AddEntity((CAITaskForce *)((char *)v46 + 452), v40, 0);
           v44 = -1;
         }
         break;
       case 21:
       case 22:
-        v20 = CAIEvent::Data1(i);
-        v36 = CAIEvent::Data2(i);
+        v20 = CAIEvent::Data1((CAIEvent *)i);
+        v36 = CAIEvent::Data2((CAIEvent *)i);
         v6 = CAIPlayerAI::PlayerId(v46);
         if ( v20 != v6 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 629, "iPlayerId == PlayerId()") == 1 )
         {
@@ -538,26 +536,26 @@ void  CAIPlayerAI::ProcessEvents(void) {
         {
           __debugbreak();
         }
-        if ( IAIEnvironment::EntityWarriorType(v36) )
+        if ( IAIEnvironment::EntityWarriorType(v36) != AI_WARRIOR_TYPE_NONE )
         {
-          CAITaskForce::AddEntity((char *)v46 + 132, v36, 0);
+          CAITaskForce::AddEntity((CAITaskForce *)((char *)v46 + 132), v36, 0);
         }
         break;
       case 25:
-        v38 = CAIEvent::Data2(i);
-        v19 = CAIEvent::Data3(i);
+        v38 = CAIEvent::Data2((CAIEvent *)i);
+        v19 = CAIEvent::Data3((struct CAIEvent *)i);
         IAIEnvironment::EntityGetWarriorTypeAndSectorId(v38, &v39, &v29);
         HIDWORD(v32) = v39 == 10;
         LODWORD(v32) = v39 == 11;
-        if ( v32 )
+        if ( v32 != 0 )
         {
           if ( v19 == 1 )
           {
-            CAITaskForce::AddEntity((char *)v46 + 292, v38, 0);
+            CAITaskForce::AddEntity((CAITaskForce *)((char *)v46 + 292), v38, 0);
           }
           else
           {
-            CAITaskForce::AddEntity((char *)v46 + 212, v38, 0);
+            CAITaskForce::AddEntity((CAITaskForce *)((char *)v46 + 212), v38, 0);
           }
         }
         else
@@ -571,16 +569,16 @@ void  CAIPlayerAI::ProcessEvents(void) {
         }
         break;
       case 28:
-        if ( *((_BYTE *)v46 + 8) )
+        if ( *((_BYTE *)v46 + 8) != 0 )
         {
           v44 = -1;
         }
         else
         {
-          v35 = CAIEvent::Data2(i);
-          v7 = CAIEvent::Data3(i);
+          v35 = CAIEvent::Data2((CAIEvent *)i);
+          v7 = CAIEvent::Data3((struct CAIEvent *)i);
           v27 = CAIEvent::UnpackA(v7);
-          v8 = CAIEvent::Data3(i);
+          v8 = CAIEvent::Data3((struct CAIEvent *)i);
           v28 = CAIEvent::UnpackB(v8);
           if ( v35 == 8 || v35 == 13 )
           {
@@ -590,21 +588,21 @@ void  CAIPlayerAI::ProcessEvents(void) {
             }
             v44 = -1;
             v43 = v35 == 8;
-            CAIPlayerAI::MoveNewWarShips(v46, v27, v28, v35 == 8);
+            CAIPlayerAI::MoveNewWarShips((CAIPlayerAI *)v46, v27, v28, v35 == 8);
           }
           else
           {
-            CAIPlayerAI::MoveToSuicideSquad(v46);
-            if ( CAITaskForce::GetPositionOfFirstEntity((pairNode *)((char *)v46 + 572), &v16, &v17) )
+            CAIPlayerAI::MoveToSuicideSquad((CAIPlayerAI *)v46);
+            if ( CAITaskForce::GetPositionOfFirstEntity((CAITaskForce *)((char *)v46 + 572), &v16, &v17) )
             {
               v9 = IAIEnvironment::TickCounter();
-              CAIAgent::UpdateScheduleTimeIfLess((pairNode *)((char *)v46 + 532), v9);
+              CAIAgent::UpdateScheduleTimeIfLess((CAIAgent *)((char *)v46 + 532), v9);
             }
           }
         }
         break;
       case 29:
-        if ( !*((_BYTE *)v46 + 8) )
+        if ( *((_BYTE *)v46 + 8) == 0 )
         {
           v44 = -1;
         }
@@ -618,17 +616,17 @@ void  CAIPlayerAI::ProcessEvents(void) {
             j < v24;
             ++j )
       {
-        v18 = (CAISectorAI *)TAIStaticPtrVector<CAISectorAI,8>::operator[](j);
+        v18 = (CAISectorAI *)((CAISectorAI *(__stdcall *)(int))TAIStaticPtrVector<CAISectorAI,8>::operator[])(j);
         v10 = CAISectorAI::SectorId(v18);
         HIDWORD(v26) = v10 == v44;
         LODWORD(v26) = v44 == 0;
-        if ( v26 )
+        if ( v26 != 0 )
         {
-          v25 = TAIStaticPtrVector<CAISectorAI,8>::operator[](j);
-          v15 = CAIEvent::Data3(i);
-          v14 = CAIEvent::Data2(i);
-          v13 = CAIEvent::Data1(i);
-          v11 = CAIEvent::Type(i);
+          v25 = ((int (__stdcall *)(int))TAIStaticPtrVector<CAISectorAI,8>::operator[])(j);
+          v15 = CAIEvent::Data3((struct CAIEvent *)i);
+          v14 = CAIEvent::Data2((CAIEvent *)i);
+          v13 = CAIEvent::Data1((CAIEvent *)i);
+          v11 = CAIEvent::Type((CAIEvent *)i);
           (*(void (__thiscall **)(int, int, int, int, int))(*(_DWORD *)v25 + 28))(v25, v11, v13, v14, v15);
         }
         v12 = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)v46 + 72);
@@ -638,7 +636,7 @@ void  CAIPlayerAI::ProcessEvents(void) {
         }
       }
     }
-    result = CAIEventQueue::PeekAIEvent((pairNode *)((char *)v46 + 108), 1);
+    result = (pairNode *)CAIEventQueue::PeekAIEvent((CAIEventQueue *)((char *)v46 + 108), 1);
   }
   return result;
 }
@@ -653,15 +651,15 @@ void  CAIPlayerAI::CalculateSectorAndEcoSectorIds(void) {
   int v3; // [esp+0h] [ebp-Ch]
   int i; // [esp+8h] [ebp-4h]
 
-  result = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)this + 72);
+  result = TAIStaticPtrVector<CAISectorAI,8>::Size(this + 1);
   v3 = result;
   for ( i = 0;
         i < v3;
         ++i )
   {
-    v2 = (CAISectorAI *)TAIStaticPtrVector<CAISectorAI,8>::operator[](i);
+    v2 = (CAISectorAI *)((CAISectorAI *(__stdcall *)(int))TAIStaticPtrVector<CAISectorAI,8>::operator[])(i);
     CAISectorAI::CalculateSectorIdAndEcoSectorIds(v2);
-    if ( TAIStaticPtrVector<CAISectorAI,8>::Size((char *)this + 72) != v3 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 423, "m_cSectorAIs.Size() == iSectorAINumber") == 1 )
+    if ( TAIStaticPtrVector<CAISectorAI,8>::Size(this + 1) != v3 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 423, "m_cSectorAIs.Size() == iSectorAINumber") == 1 )
     {
       __debugbreak();
     }
@@ -685,35 +683,35 @@ int  CAIPlayerAI::FillGeneralReservoir(void) {
   int j; // [esp+1Ch] [ebp-8h]
 
   v5 = 0;
-  for ( i = (int *)*((_DWORD *)this + 5);
-        *i;
+  for ( i = this->m_pRaceBasedTable1;
+        *i != 0;
         ++i )
   {
-    for ( j = IAIEnvironment::SettlerGetFirstReadyAndCheckedOutSettlerId(*((_DWORD *)this + 3), *i);
-          j;
+    for ( j = IAIEnvironment::SettlerGetFirstReadyAndCheckedOutSettlerId(this->m_uU, *i);
+          j != 0;
           j = IAIEnvironment::SettlerGetNextReadyAndCheckedOutSettlerId(j) )
     {
-      EntityInfo = IAIEnvironment::EntityGetEntityInfo(j, 0);
-      if ( !EntityInfo || !CAIEntityInfo::TaskForce(EntityInfo) )
+      EntityInfo = (int)IAIEnvironment::EntityGetEntityInfo(j, 0);
+      if ( EntityInfo == 0 || (int)CAIEntityInfo::TaskForce((CAIEntityInfo *)EntityInfo) == 0 )
       {
-        CAITaskForce::AddEntity((char *)this + 132, j, 0);
+        CAITaskForce::AddEntity((CAITaskForce *)((char *)this + 132), j, 0);
         ++v5;
       }
     }
   }
   v4 = 0;
-  for ( k = (int *)*((_DWORD *)this + 6);
-        *k;
+  for ( k = this->m_pRaceBasedTable2;
+        *k != 0;
         ++k )
   {
-    for ( m = IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(*((_DWORD *)this + 3), *k);
-          m;
+    for ( m = IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(this->m_uU, *k);
+          m != 0;
           m = IAIEnvironment::VehicleGetNextReadyAndCheckedOutVehicleId(m) )
     {
-      v2 = IAIEnvironment::EntityGetEntityInfo(m, 0);
-      if ( !v2 || !CAIEntityInfo::TaskForce(v2) )
+      v2 = (int)IAIEnvironment::EntityGetEntityInfo(m, 0);
+      if ( v2 == 0 || (int)CAIEntityInfo::TaskForce((CAIEntityInfo *)v2) == 0 )
       {
-        CAITaskForce::AddEntity((char *)this + 132, m, 0);
+        CAITaskForce::AddEntity((CAITaskForce *)((char *)this + 132), m, 0);
         ++v4;
       }
     }
@@ -732,7 +730,7 @@ void  CAIPlayerAI::AddEntityToSectorReservoir(int a2, enum T_AI_WARRIOR_TYPE a3,
   int v7; // [esp+4h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-4h]
 
-  if ( !a3 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 434, "_tWarriorType != AI_WARRIOR_TYPE_NONE") == 1 )
+  if ( a3 == 0 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 434, "_tWarriorType != AI_WARRIOR_TYPE_NONE") == 1 )
   {
     __debugbreak();
   }
@@ -750,10 +748,10 @@ void  CAIPlayerAI::AddEntityToSectorReservoir(int a2, enum T_AI_WARRIOR_TYPE a3,
     {
       break;
     }
-    v6 = (CAISectorAI *)TAIStaticPtrVector<CAISectorAI,8>::operator[](i);
+    v6 = (CAISectorAI *)((CAISectorAI *(__stdcall *)(int))TAIStaticPtrVector<CAISectorAI,8>::operator[])(i);
     if ( CAISectorAI::SectorId(v6) == a4 )
     {
-      v5 = TAIStaticPtrVector<CAISectorAI,8>::operator[](i);
+      v5 = ((int (__stdcall *)(int))TAIStaticPtrVector<CAISectorAI,8>::operator[])(i);
       return CAISectorAI::AddEntityToReservoir(v5, a2, a3);
     }
     if ( TAIStaticPtrVector<CAISectorAI,8>::Size(this + 72) != v7 && BBSupportDbgReport(2, "AI\\AI_PlayerAI.cpp", 450, "m_cSectorAIs.Size() == iSectorAINumber") == 1 )
@@ -774,13 +772,13 @@ void  CAIPlayerAI::MoveNewWarShips(int a2, int a3, bool a4) {
   int v6; // [esp+4h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-4h]
 
-  result = CAITaskForce::FirstEntity((char *)this + 292);
+  result = (int)CAITaskForce::FirstEntity((CAITaskForce *)((char *)this + 292));
   for ( i = result;
-        i;
+        i != 0;
         i = v5 )
   {
-    v5 = CAIEntityInfo::Next(i);
-    v6 = CAIEntityInfo::EntityId(i);
+    v5 = (int)CAIEntityInfo::Next((CAIEntityInfo *)i);
+    v6 = CAIEntityInfo::EntityId((CAIEntityInfo *)i);
     IAIEnvironment::MovingEntitySendMoveCommand(v6, a2, a3, 1);
     if ( a4 )
     {
@@ -800,12 +798,12 @@ bool  CAIPlayerAI::ExistsSectorAI(int a2) {
   int v4; // [esp+4h] [ebp-Ch]
   int i; // [esp+Ch] [ebp-4h]
 
-  v4 = TAIStaticPtrVector<CAISectorAI,8>::Size((char *)this + 72);
+  v4 = TAIStaticPtrVector<CAISectorAI,8>::Size(this + 1);
   for ( i = 0;
         i < v4;
         ++i )
   {
-    v3 = (CAISectorAI *)TAIStaticPtrVector<CAISectorAI,8>::operator[](i);
+    v3 = (CAISectorAI *)((CAISectorAI *(__stdcall *)(int))TAIStaticPtrVector<CAISectorAI,8>::operator[])(i);
     if ( CAISectorAI::SectorId(v3) == a2 )
     {
       return 1;
@@ -828,14 +826,14 @@ void  CAIPlayerAI::MoveToSuicideSquad(void) {
   CAIPlayerAI *v7; // [esp+18h] [ebp-4h]
 
   v7 = this;
-  TAIStaticPtrVector<CAISectorAI,8>::Size((char *)this + 72);
-  result = CAITaskForce::FirstEntity((char *)v7 + 452);
+  TAIStaticPtrVector<CAISectorAI,8>::Size(this + 1);
+  result = (int)CAITaskForce::FirstEntity((CAITaskForce *)&v7[6].m_pRaceBasedTable1);
   for ( i = result;
-        i;
+        i != 0;
         i = v2 )
   {
-    v2 = CAIEntityInfo::Next(i);
-    v4 = CAIEntityInfo::EntityId(i);
+    v2 = (int)CAIEntityInfo::Next((CAIEntityInfo *)i);
+    v4 = CAIEntityInfo::EntityId((CAIEntityInfo *)i);
     IAIEnvironment::EntityGetWarriorTypeAndSectorId(v4, &v3, &v5);
     if ( CAIPlayerAI::ExistsSectorAI(v7, v5) )
     {
@@ -843,7 +841,7 @@ void  CAIPlayerAI::MoveToSuicideSquad(void) {
     }
     else
     {
-      result = (*(int (__thiscall **)(char *, int, _DWORD))(*((_DWORD *)v7 + 143) + 20))((char *)v7 + 572, i, 0);
+      result = ((int (__thiscall *)(CAIAgent **, int, _DWORD))v7[7].m_cScheduler.m_pFirstAgent->m_pScheduler)(&v7[7].m_cScheduler.m_pFirstAgent, i, 0);
     }
   }
   return result;

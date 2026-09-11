@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CTradingBuildingRole::New(int a1)
 class CPersistence * __cdecl CTradingBuildingRole::New(std::istream & a1) {
   
-  if ( operator new(0x2B4u) )
+  if ( operator new(0x2B4u) != 0 )
   {
-    return CTradingBuildingRole::CTradingBuildingRole(a1);
+    return ((_DWORD (__stdcall *)(int))CTradingBuildingRole::CTradingBuildingRole)(a1);
   }
   else
   {
@@ -18,13 +18,13 @@ class CPersistence * __cdecl CTradingBuildingRole::New(std::istream & a1) {
 
 
 // address=[0x14fdcb0]
-// Decompiled from int __cdecl CTradingBuildingRole::Load(int a1)
+// Decompiled from int __cdecl CTradingBuildingRole::Load(struct std::istream *a1)
 class CTradingBuildingRole * __cdecl CTradingBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CTradingBuildingRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -36,7 +36,7 @@ class CTradingBuildingRole * __cdecl CTradingBuildingRole::Load(std::istream & a
   CInternationalTrader *v2; // [esp+8h] [ebp-18h]
   CInternationalTrader *C; // [esp+Ch] [ebp-14h]
 
-  IBuildingRole::IBuildingRole(this);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this);
   *(_DWORD *)this = &CTradingBuildingRole::_vftable_;
   std::vector<unsigned short>::vector<unsigned short>((char *)this + 608);
   std::vector<CTradingBuildingRole::STradersEx>::vector<CTradingBuildingRole::STradersEx>();
@@ -54,11 +54,11 @@ class CTradingBuildingRole * __cdecl CTradingBuildingRole::Load(std::istream & a
   *((_BYTE *)this + 661) = 0;
   *((_DWORD *)this + 166) = 0;
   *((_BYTE *)this + 624) = 0;
-  std::vector<unsigned short>::clear();
+  ((void (__cdecl *)())std::vector<unsigned short>::clear)();
   *((_WORD *)this + 190) = 0;
   *((_WORD *)this + 191) = 0;
   C = (CInternationalTrader *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     v2 = CInternationalTrader::CInternationalTrader(C);
   }
@@ -77,11 +77,11 @@ class CTradingBuildingRole * __cdecl CTradingBuildingRole::Load(std::istream & a
  CTradingBuildingRole::~CTradingBuildingRole(void) {
   
   *(_DWORD *)this = &CTradingBuildingRole::_vftable_;
-  if ( !*((_DWORD *)this + 171) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 93, "m_pTrader!= NULL") == 1 )
+  if ( *((_DWORD *)this + 171) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 93, "m_pTrader!= NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 171) )
+  if ( *((_DWORD *)this + 171) != 0 )
   {
     delete *((CInternationalTrader **)this + 171);
     *((_DWORD *)this + 171) = 0;
@@ -96,22 +96,22 @@ class CTradingBuildingRole * __cdecl CTradingBuildingRole::Load(std::istream & a
 // Decompiled from void __thiscall CTradingBuildingRole::LogicUpdate(CInternationalTrader **this, struct CBuilding *a2)
 void  CTradingBuildingRole::LogicUpdate(class CBuilding * a2) {
   
-  _DWORD *v2; // eax
+  IEntity *v2; // eax
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-Ch]
   char v4; // [esp+4h] [ebp-8h]
 
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) != 0 )
   {
     (*((void (__thiscall **)(CInternationalTrader **, struct CBuilding *, int))*this + 22))(this, a2, 1);
-    if ( !*((_BYTE *)this + 624) )
+    if ( *((_BYTE *)this + 624) == 0 )
     {
       CTradingBuildingRole::ShowTradeRoute((CTradingBuildingRole *)this);
       *((_BYTE *)this + 624) = 1;
     }
   }
-  else if ( *((_BYTE *)this + 624) )
+  else if ( *((_BYTE *)this + 624) != 0 )
   {
-    IGfxEngine::EnableIconLayer((IGfxEngine *)g_pGfxEngine, 0);
+    IGfxEngine::EnableIconLayer(g_pGfxEngine, 0);
     CWorldManager::ClearHelperObject();
     *((_BYTE *)this + 624) = 0;
   }
@@ -119,9 +119,9 @@ void  CTradingBuildingRole::LogicUpdate(class CBuilding * a2) {
   switch ( v4 )
   {
     case 1:
-      if ( *((_BYTE *)this[94] + 478) )
+      if ( *((_BYTE *)*(this + 94) + 478) != 0 )
       {
-        if ( (*((unsigned __int8 (__thiscall **)(CInternationalTrader **, struct CBuilding *))*this + 30))(this, a2) )
+        if ( (*((unsigned __int8 (__thiscall **)(CInternationalTrader **, struct CBuilding *))*this + 30))(this, a2) != 0 )
         {
           *((_BYTE *)this + 4) = 3;
           *((_BYTE *)this + 5) = 0;
@@ -132,25 +132,27 @@ void  CTradingBuildingRole::LogicUpdate(class CBuilding * a2) {
         *((_BYTE *)this + 4) = 3;
         *((_BYTE *)this + 5) = 0;
       }
-      IAnimatedEntity::RegisterForLogicUpdate(14);
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
       break;
     case 2:
       *((_BYTE *)this + 5) = 0;
       *((_BYTE *)this + 4) = 3;
-      IAnimatedEntity::RegisterForLogicUpdate(14);
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
       break;
     case 3:
       *((_BYTE *)this + 5) = 0;
-      IAnimatedEntity::RegisterForLogicUpdate(14);
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
+      break;
+    default:
       break;
   }
-  v2 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  if ( IEntity::FlagBits(v2, (EntityFlag)0x1000u) )
+  v2 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+  if ( IEntity::FlagBits(v2, (EntityFlag)4096) != 0 )
   {
-    if ( this[171] )
+    if ( *(this + 171) != 0 )
     {
-      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-      CInternationalTrader::Trade(this[171], (struct CBuilding *)BuildingPtr);
+      BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+      CInternationalTrader::Trade(*(this + 171), (struct CBuilding *)BuildingPtr);
     }
     CTradingBuildingRole::TransportHandling((CTradingBuildingRole *)this, a2);
   }
@@ -158,7 +160,7 @@ void  CTradingBuildingRole::LogicUpdate(class CBuilding * a2) {
 
 
 // address=[0x151ff10]
-// Decompiled from unsigned int __thiscall CTradingBuildingRole::FillGfxInfo(CTradingBuildingRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
+// Decompiled from unsigned int __thiscall CTradingBuildingRole::FillGfxInfo(IBuildingRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
 void  CTradingBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
@@ -170,11 +172,11 @@ void  CTradingBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectI
   CPile *PilePtr; // [esp+4h] [ebp-Ch]
   unsigned int i; // [esp+8h] [ebp-8h]
 
-  (*(void (__thiscall **)(CTradingBuildingRole *, struct CBuilding *))(*(_DWORD *)this + 16))(this, a2);
-  v7 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
+  this->Update(this, a2);
+  v7 = CBuilding::BuildingTypeEx(a2);
   v3 = IEntity::Race(a2);
-  CGfxManager::GetBuildingGfxInfo((int)a3, v3, v7, 1, (int)this + 76);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
+  ((void (__stdcall *)(int, int, int, int, int))CGfxManager::GetBuildingGfxInfo)((int)a3, v3, v7, 1, (int)this->m_vPatchPairs);
+  v4 = IEntity::OwnerId(a2);
   IBuildingRole::MiniFlag(this, a3, v4);
   v8 = 0;
   for ( i = 0;
@@ -186,14 +188,11 @@ void  CTradingBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectI
     {
       break;
     }
-    v6 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v6 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v6);
-    if ( PilePtr )
+    if ( PilePtr != 0 && CPile::IsPatchPile(PilePtr) )
     {
-      if ( (unsigned __int8)CPile::IsPatchPile(PilePtr) )
-      {
-        CPile::GetPatchGfx(PilePtr, (struct SGfxObjectInfo *)((char *)a3 + 16 * v8++ + 536));
-      }
+      CPile::GetPatchGfx(PilePtr, &a3->m_vPatches2[v8++]);
     }
   }
   return result;
@@ -222,12 +221,12 @@ void  CTradingBuildingRole::Init(class CBuilding * a2) {
   int j; // [esp+24h] [ebp-Ch]
   __int16 v19; // [esp+2Eh] [ebp-2h] BYREF
 
-  IBuildingRole::InitCommon((int)a2);
+  IBuildingRole::InitCommon(a2);
   for ( i = 0;
         i < 9;
         ++i )
   {
-    *((_BYTE *)this + i + 599) = IEntity::OwnerId((unsigned __int8 *)a2) == 1;
+    *((_BYTE *)this + i + 599) = IEntity::OwnerId(a2) == 1;
   }
   for ( j = 0;
         j < 43;
@@ -245,47 +244,47 @@ void  CTradingBuildingRole::Init(class CBuilding * a2) {
         k < *(char *)(*((_DWORD *)this + 94) + 57);
         ++k )
   {
-    v2 = IEntity::WorldIdx();
+    v2 = ((int (__stdcall *)())IEntity::WorldIdx)();
     v12 = *(char *)(*((_DWORD *)this + 94) + 16 * k + 60) + CWorldManager::X(v2);
-    v3 = IEntity::WorldIdx();
+    v3 = ((int (__stdcall *)())IEntity::WorldIdx)();
     v13 = *(char *)(*((_DWORD *)this + 94) + 16 * k + 61) + CWorldManager::Y(v3);
-    v14 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v12, v13, 0, 0, *(char *)(*((_DWORD *)this + 94) + 16 * k + 63), *(char *)(*((_DWORD *)this + 94) + 16 * k + 64), *(char *)(*((_DWORD *)this + 94) + 16 * k + 65), *(_DWORD *)(*((_DWORD *)this + 94) + 16 * k + 68), *(_DWORD *)(*((_DWORD *)this + 94) + 16 * k + 72));
-    v8 = IEntity::ID();
-    v4 = CPileMgr::operator[](v14);
+    v14 = CPileMgr::AddPile(&g_cPileMgr, v12, v13, 0, 0, *(char *)(*((_DWORD *)this + 94) + 16 * k + 63), *(char *)(*((_DWORD *)this + 94) + 16 * k + 64), *(char *)(*((_DWORD *)this + 94) + 16 * k + 65), *(_DWORD *)(*((_DWORD *)this + 94) + 16 * k + 68), *(_DWORD *)(*((_DWORD *)this + 94) + 16 * k + 72));
+    v8 = ((int (__stdcall *)())IEntity::ID)();
+    v4 = (unsigned __int8 *)CPileMgr::operator[](v14);
     CPile::SetBuildingId((CPile *)v4, v8);
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * k + 65) == 1 )
     {
-      v5 = CPileMgr::operator[](v14);
-      IEntity::ClearFlagBits(v5, ENTITY_FLAG_Visible);
+      v5 = (unsigned __int8 *)CPileMgr::operator[](v14);
+      IEntity::ClearFlagBits((IEntity *)v5, ENTITY_FLAG_Visible);
     }
     if ( *(_BYTE *)(*((_DWORD *)this + 94) + 16 * k + 63) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 667, "m_pBuildingInfo->piles[p].type == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v19 = v14;
-    std::vector<unsigned short>::push_back(&v19);
+    ((void (__stdcall *)(__int16 *))std::vector<unsigned short>::push_back)(&v19);
   }
-  if ( !std::vector<unsigned short>::size((char *)this + 608) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 672, "m_vTradePileId.size()>0") == 1 )
+  if ( std::vector<unsigned short>::size((char *)this + 608) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 672, "m_vTradePileId.size()>0") == 1 )
   {
     __debugbreak();
   }
-  v6 = IEntity::WorldIdx();
+  v6 = ((int (__stdcall *)())IEntity::WorldIdx)();
   v10 = *(char *)(*((_DWORD *)this + 94) + 42) + CWorldManager::X(v6);
-  v7 = IEntity::WorldIdx();
+  v7 = ((int (__stdcall *)())IEntity::WorldIdx)();
   v11 = *(char *)(*((_DWORD *)this + 94) + 43) + CWorldManager::Y(v7);
   v9 = Y16X16::PackXYFast(v10, v11);
   CBuilding::SetWorkingAreaPackedXY(a2, v9);
   *((_BYTE *)this + 4) = 1;
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) != 0 )
   {
     (*(void (__thiscall **)(CTradingBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   }
-  IAnimatedEntity::RegisterForLogicUpdate(14);
-  if ( !*((_DWORD *)this + 171) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 693, "m_pTrader!=NULL") == 1 )
+  ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
+  if ( *((_DWORD *)this + 171) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 693, "m_pTrader!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 171) )
+  if ( *((_DWORD *)this + 171) != 0 )
   {
     CInternationalTrader::AddBuilding(*((CInternationalTrader **)this + 171), a2);
   }
@@ -299,14 +298,14 @@ void  CTradingBuildingRole::PostLoadInit(class CBuilding * a2) {
   int v2; // eax
   int v3; // [esp-4h] [ebp-8h]
 
-  v3 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
+  v3 = CBuilding::BuildingTypeEx(a2);
   v2 = IEntity::Race(a2);
   *((_DWORD *)this + 94) = CBuildingInfoMgr::GetBuildingInfo(v2, v3);
-  if ( !*((_DWORD *)this + 171) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 299, "m_pTrader!=NULL") == 1 )
+  if ( *((_DWORD *)this + 171) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 299, "m_pTrader!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 171) )
+  if ( *((_DWORD *)this + 171) != 0 )
   {
     CInternationalTrader::AddBuilding(*((CInternationalTrader **)this + 171), a2);
   }
@@ -317,7 +316,7 @@ void  CTradingBuildingRole::PostLoadInit(class CBuilding * a2) {
 // Decompiled from int __thiscall CTradingBuildingRole::Switch(CTradingBuildingRole *this)
 void  CTradingBuildingRole::Switch(void) {
   
-  _DWORD *v1; // eax
+  IEntity *v1; // eax
   unsigned __int8 *BuildingPtr; // eax
   int v3; // eax
   void *v4; // eax
@@ -325,17 +324,17 @@ void  CTradingBuildingRole::Switch(void) {
   int v7; // [esp+0h] [ebp-8h]
 
   IBuildingRole::Switch((unsigned __int16 *)this);
-  v1 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  if ( !IEntity::FlagBits(v1, (EntityFlag)0x1000u) )
+  v1 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+  if ( IEntity::FlagBits(v1, (EntityFlag)4096) == 0 )
   {
     CTradingBuildingRole::CancelIncomingChargeTraders(this);
     CTradingBuildingRole::CancelIncomingDeliverTraders(this);
   }
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-  v3 = CBuilding::EnsignWorldIdx(BuildingPtr);
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+  v3 = CBuilding::EnsignWorldIdx((CBuilding *)BuildingPtr);
   v7 = CWorldManager::EcoSectorId(v3);
   v6 = *((unsigned __int16 *)this + 3);
-  v4 = (void *)CEcoSectorMgr::operator[](v7);
+  v4 = (void *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v7);
   return CEcoSector::CleanUpBuildingNeed(v4, v6);
 }
 
@@ -344,20 +343,20 @@ void  CTradingBuildingRole::Switch(void) {
 // Decompiled from void __thiscall CTradingBuildingRole::NotifySelected(CTradingBuildingRole *this)
 void  CTradingBuildingRole::NotifySelected(void) {
   
-  _DWORD *v1; // eax
+  IEntity *v1; // eax
 
-  v1 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  if ( IEntity::FlagBits(v1, ENTITY_FLAG_Selected) )
+  v1 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+  if ( IEntity::FlagBits(v1, ENTITY_FLAG_Selected) != 0 )
   {
-    if ( !*((_BYTE *)this + 624) )
+    if ( *((_BYTE *)this + 624) == 0 )
     {
       CTradingBuildingRole::ShowTradeRoute(this);
       *((_BYTE *)this + 624) = 1;
     }
   }
-  else if ( *((_BYTE *)this + 624) )
+  else if ( *((_BYTE *)this + 624) != 0 )
   {
-    IGfxEngine::EnableIconLayer((IGfxEngine *)g_pGfxEngine, 0);
+    IGfxEngine::EnableIconLayer(g_pGfxEngine, 0);
     CWorldManager::ClearHelperObject();
     *((_BYTE *)this + 624) = 0;
   }
@@ -380,20 +379,20 @@ int  CTradingBuildingRole::GetPileIdWithGood(int a2)const {
   {
     return 0;
   }
-  v3 = (unsigned __int8 *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  v4 = IEntity::OwnerId(v3);
+  v3 = (unsigned __int8 *)((unsigned __int8 *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+  v4 = IEntity::OwnerId((IEntity *)v3);
   CPlayerManager::Race(v4);
-  v7 = CPileMgr::ConvertGoodType((CPileMgr *)&g_cPileMgr, a2);
+  v7 = CPileMgr::ConvertGoodType(&g_cPileMgr, a2);
   for ( i = 0;
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
+    v5 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(int))std::vector<unsigned short>::operator[])(i);
     PilePtr = CPileMgr::GetPilePtr(*v5);
     v6 = (pairNode *)CPile::Role(PilePtr);
-    if ( (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == v7 && CTradePileRole::GetExpectedAmount(v6) )
+    if ( ((int (__thiscall *)(struct CPile *))PilePtr->GetGoodType)(PilePtr) == v7 && CTradePileRole::GetExpectedAmount((CTradePileRole *)v6) != 0 )
     {
-      return *(unsigned __int16 *)std::vector<unsigned short>::operator[](i);
+      return *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(int))std::vector<unsigned short>::operator[])(i);
     }
   }
   return 0;
@@ -405,7 +404,7 @@ int  CTradingBuildingRole::GetPileIdWithGood(int a2)const {
 int  CTradingBuildingRole::GetNumberOfFreePiles(void) {
   
   unsigned __int16 *v1; // eax
-  void *v3; // [esp+0h] [ebp-14h]
+  CTradePileRole *v3; // [esp+0h] [ebp-14h]
   struct CPile *PilePtr; // [esp+4h] [ebp-10h]
   int v6; // [esp+Ch] [ebp-8h]
   signed int i; // [esp+10h] [ebp-4h]
@@ -415,10 +414,10 @@ int  CTradingBuildingRole::GetNumberOfFreePiles(void) {
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v1 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v1 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v1);
-    v3 = (void *)CPile::Role(PilePtr);
-    if ( !CTradePileRole::GetTradeRoleType(v3) )
+    v3 = (CTradePileRole *)CPile::Role(PilePtr);
+    if ( CTradePileRole::GetTradeRoleType(v3) == 0 )
     {
       ++v6;
     }
@@ -433,17 +432,16 @@ void  CTradingBuildingRole::GoodArrive(int a2) {
   
   char result; // al
 
-  if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(a2, 2) && (char)this[a2 + 384] > 0 && this[a2 + 384] != 100 )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(int, int))CTradingBuildingRole::HasGoodState)(a2, 2) != 0 && (char)*(this + a2 + 384) > 0 && *(this + a2 + 384) != 100 )
   {
-    --this[a2 + 384];
+    --*(this + a2 + 384);
   }
-  result = CTradingBuildingRole::HasGoodState(a2, 8);
-  if ( !result )
+  result = ((_DWORD (__stdcall *)(int, int))CTradingBuildingRole::HasGoodState)(a2, 8);
+  if ( result != 0 )
   {
-    return result;
+    result = *(this + a2 + 513) - 1;
+    *(this + a2 + 513) = result;
   }
-  result = this[a2 + 513] - 1;
-  this[a2 + 513] = result;
   return result;
 }
 
@@ -462,7 +460,7 @@ void  CTradingBuildingRole::ReservePileForGood(int a2, int a3) {
   
   signed int result; // eax
   unsigned __int16 *v4; // eax
-  void *v5; // [esp+0h] [ebp-10h]
+  CTradePileRole *v5; // [esp+0h] [ebp-10h]
   CPile *PilePtr; // [esp+8h] [ebp-8h]
   signed int i; // [esp+Ch] [ebp-4h]
 
@@ -470,30 +468,27 @@ void  CTradingBuildingRole::ReservePileForGood(int a2, int a3) {
         ;
         ++i )
   {
-    result = *(char *)(this[94] + 57);
+    result = *(char *)(*(this + 94) + 57);
     if ( i >= result )
     {
       break;
     }
-    if ( *(unsigned __int16 *)std::vector<unsigned short>::operator[](this + 152, i) == a2 )
+    if ( *std::vector<unsigned short>::operator[](this + 152, i) == a2 )
     {
-      v4 = (unsigned __int16 *)std::vector<unsigned short>::operator[](this + 152, i);
+      v4 = std::vector<unsigned short>::operator[](this + 152, i);
       PilePtr = CPileMgr::GetPilePtr(*v4);
       if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 464, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
       {
         __debugbreak();
       }
-      v5 = (void *)CPile::Role(PilePtr);
-      if ( CTradePileRole::GetTradeRoleType(v5) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 467, "rTradePileRole.GetTradeRoleType() == CTradePileRole::TRADEPILE_FREE") == 1 )
+      v5 = (CTradePileRole *)CPile::Role(PilePtr);
+      if ( CTradePileRole::GetTradeRoleType(v5) != 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 467, "rTradePileRole.GetTradeRoleType() == CTradePileRole::TRADEPILE_FREE") == 1 )
       {
         __debugbreak();
       }
-      if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) )
+      if ( ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) != 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 468, "pPile->GetGoodType() == 0") == 1 )
       {
-        if ( BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 468, "pPile->GetGoodType() == 0") == 1 )
-        {
-          __debugbreak();
-        }
+        __debugbreak();
       }
       CPile::SetGoodType(PilePtr, a3);
       CTradePileRole::SetTradeRoleType(v5, 1);
@@ -523,28 +518,28 @@ int  CTradingBuildingRole::GetGoodSpaceAmount(int a2) {
   {
     return 0;
   }
-  v3 = (unsigned __int8 *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  v4 = IEntity::OwnerId(v3);
+  v3 = (unsigned __int8 *)((unsigned __int8 *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+  v4 = IEntity::OwnerId((IEntity *)v3);
   CPlayerManager::Race(v4);
-  v6 = CPileMgr::ConvertGoodType((CPileMgr *)&g_cPileMgr, a2);
+  v6 = CPileMgr::ConvertGoodType(&g_cPileMgr, a2);
   for ( i = 0;
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v5 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v5);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 504, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v7 = (pairNode *)CPile::Role(PilePtr);
-    if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == v6 )
+    if ( ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) == v6 )
     {
-      v12 = v11 + 8 - CTradePileRole::GetExpectedAmount(v7);
-      v13 = v12 - (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
+      v12 = v11 + 8 - CTradePileRole::GetExpectedAmount((CTradePileRole *)v7);
+      v13 = v12 - PilePtr->Amount(PilePtr);
       v11 = v13 - CPile::AmountComing(PilePtr);
     }
-    if ( !CTradePileRole::GetTradeRoleType(v7) || CTradePileRole::GetTradeRoleType(v7) == 5 )
+    if ( CTradePileRole::GetTradeRoleType((CTradePileRole *)v7) == 0 || CTradePileRole::GetTradeRoleType((CTradePileRole *)v7) == 5 )
     {
       v11 += 8;
     }
@@ -642,40 +637,40 @@ bool  CTradingBuildingRole::IsPossibleTradeTarget(int a2) {
 
   v14 = this;
   v17 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a2);
-  if ( IEntity::ObjType(v17) != 8 )
+  if ( IEntity::ObjType((IEntity *)v17) != BUILDING_OBJ )
   {
     return 0;
   }
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)v14 + 3));
-  v15 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
-  if ( !IEntity::FlagBits(v15, (EntityFlag)((char *)&loc_1FFFFFF + 1)) || !IEntity::FlagBits(BuildingPtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)v14 + 3));
+  v15 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
+  if ( IEntity::FlagBits((IEntity *)v15, (EntityFlag)((char *)&loc_1FFFFFF + 1)) == 0 || IEntity::FlagBits((IEntity *)BuildingPtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) == 0 )
   {
     return 0;
   }
   v7 = IEntity::Y(BuildingPtr);
   v3 = IEntity::X(BuildingPtr);
-  if ( !(*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)g_pFogging + 32))(g_pFogging, v3, v7) )
+  if ( !g_pFogging->IsPositionVisible(g_pFogging, v3, v7) )
   {
     return 0;
   }
   v8 = IEntity::Y(v17);
   v4 = IEntity::X(v17);
-  if ( !(*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)g_pFogging + 32))(g_pFogging, v4, v8) )
+  if ( !g_pFogging->IsPositionVisible(g_pFogging, v4, v8) )
   {
     return 0;
   }
-  if ( IEntity::Type((unsigned __int16 *)v17) == 32 && IEntity::Type((unsigned __int16 *)BuildingPtr) == 32 )
+  if ( IEntity::Type((IEntity *)v17) == 32 && IEntity::Type((IEntity *)BuildingPtr) == 32 )
   {
     return 1;
   }
-  if ( IEntity::Type((unsigned __int16 *)v17) != 32 && IEntity::Type((unsigned __int16 *)v17) != 33 )
+  if ( IEntity::Type((IEntity *)v17) != 32 && IEntity::Type((IEntity *)v17) != 33 )
   {
     return 0;
   }
   v5 = (Y16X16 *)CBuilding::EnsignPackedXY(BuildingPtr);
-  Y16X16::UnpackXYFast(v5, &v12, &v13);
+  Y16X16::UnpackXYFast((int)v5, &v12, &v13);
   v6 = (Y16X16 *)CBuilding::EnsignPackedXY(v15);
-  Y16X16::UnpackXYFast(v6, &v10, &v11);
+  Y16X16::UnpackXYFast((int)v6, &v10, &v11);
   v9 = CWorldManager::SectorId(v12, v13);
   return v9 == CWorldManager::SectorId(v10, v11);
 }
@@ -691,18 +686,18 @@ void  CTradingBuildingRole::SetTradeTarget(int a2) {
   int v5; // [esp+4h] [ebp-Ch]
   unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-8h]
 
-  v2 = (unsigned __int16 *)CBuildingMgr::operator[](a2);
-  if ( IEntity::Type(v2) != 32 )
+  v2 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(int))CBuildingMgr::operator[])(a2);
+  if ( IEntity::Type((IEntity *)v2) != 32 )
   {
-    v3 = (unsigned __int16 *)CBuildingMgr::operator[](a2);
-    if ( IEntity::Type(v3) != 33 && BBSupportDbgReportF(2, "MapObjects\\Building\\TradingBuilding.cpp", 894, "Target is no trading building!") == 1 )
+    v3 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(int))CBuildingMgr::operator[])(a2);
+    if ( IEntity::Type((IEntity *)v3) != 33 && BBSupportDbgReportF(2, "MapObjects\\Building\\TradingBuilding.cpp", 894, "Target is no trading building!") == 1 )
     {
       __debugbreak();
     }
   }
-  if ( *((_WORD *)this + 190) )
+  if ( *((_WORD *)this + 190) != 0 )
   {
-    v5 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 190));
+    v5 = ((int (__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 190));
     (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v5 + 64))(v5, *((unsigned __int16 *)this + 3));
   }
   if ( *((unsigned __int16 *)this + 3) == a2 )
@@ -715,19 +710,16 @@ void  CTradingBuildingRole::SetTradeTarget(int a2) {
   {
     *((_WORD *)this + 190) = a2;
     CTradingBuildingRole::SetNewTraderTarget((struct CWnd *)*((unsigned __int16 *)this + 190));
-    v4 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 190));
+    v4 = ((int (__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 190));
     (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v4 + 116))(v4, *((unsigned __int16 *)this + 3));
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-    if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 907, "pBulding!=NULL") == 1 )
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+    if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 907, "pBulding!=NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( BuildingPtr )
+    if ( BuildingPtr != 0 && IEntity::IsSelected((IEntity *)BuildingPtr) )
     {
-      if ( IEntity::IsSelected((IEntity *)BuildingPtr) )
-      {
-        CTradingBuildingRole::ShowTradeRoute(this);
-      }
+      CTradingBuildingRole::ShowTradeRoute(this);
     }
   }
 }
@@ -745,11 +737,11 @@ int  CTradingBuildingRole::GetTradeTargetID(void) {
 // Decompiled from void __thiscall CTradingBuildingRole::TransportGood(CTradingBuildingRole *this, int a2, int a3)
 void  CTradingBuildingRole::TransportGood(int a2, int a3) {
   
-  _DWORD *v3; // eax
-  _DWORD *v4; // eax
-  _DWORD *v5; // eax
+  IEntity *v3; // eax
+  IEntity *v4; // eax
+  IEntity *v5; // eax
 
-  if ( a3 )
+  if ( a3 != 0 )
   {
     if ( a3 == 100 )
     {
@@ -763,8 +755,8 @@ void  CTradingBuildingRole::TransportGood(int a2, int a3) {
       {
         *((_BYTE *)this + a2 + 384) += a3;
         *((_BYTE *)this + a2 + 427) += a3;
-        v5 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-        if ( !IEntity::FlagBits(v5, (EntityFlag)0x1000u) && !*((_BYTE *)this + a2 + 427) )
+        v5 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+        if ( IEntity::FlagBits(v5, (EntityFlag)4096) == 0 && *((_BYTE *)this + a2 + 427) == 0 )
         {
           CTradingBuildingRole::ClearExpectedAmounts(this, a2);
         }
@@ -774,8 +766,8 @@ void  CTradingBuildingRole::TransportGood(int a2, int a3) {
         CTradingBuildingRole::ClearGoodState(this, a2, 2);
         *((_BYTE *)this + a2 + 384) = 0;
         *((_BYTE *)this + a2 + 427) = 0;
-        v4 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-        if ( !IEntity::FlagBits(v4, (EntityFlag)0x1000u) )
+        v4 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+        if ( IEntity::FlagBits(v4, (EntityFlag)4096) == 0 )
         {
           CTradingBuildingRole::ClearExpectedAmounts(this, a2);
         }
@@ -801,8 +793,8 @@ void  CTradingBuildingRole::TransportGood(int a2, int a3) {
     CTradingBuildingRole::ClearGoodState(this, a2, 2);
     *((_BYTE *)this + a2 + 384) = 0;
     *((_BYTE *)this + a2 + 427) = 0;
-    v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-    if ( !IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
+    v3 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+    if ( IEntity::FlagBits(v3, (EntityFlag)4096) == 0 )
     {
       CTradingBuildingRole::ClearExpectedAmounts(this, a2);
     }
@@ -821,17 +813,17 @@ void  CTradingBuildingRole::TradeWith(int a2) {
   {
     __debugbreak();
   }
-  if ( this[171] )
+  if ( *(this + 171) != 0 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-    if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1248, "pBuilding!=NULL") == 1 )
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+    if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1248, "pBuilding!=NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( BuildingPtr )
+    if ( BuildingPtr != 0 )
     {
-      v2 = IEntity::OwnerId(BuildingPtr);
-      CInternationalTrader::SwitchPlayerTradeStatus(this[171], v2, a2);
+      v2 = IEntity::OwnerId((IEntity *)BuildingPtr);
+      CInternationalTrader::SwitchPlayerTradeStatus(*(this + 171), v2, a2);
     }
   }
 }
@@ -849,14 +841,14 @@ void  CTradingBuildingRole::TradeGood(int a2) {
   int TradingStatus; // [esp+Ch] [ebp-8h]
 
   TradingStatus = CTradingBuildingRole::GetTradingStatus(this, *((char *)this + a2 + 470));
-  if ( TradingStatus && TradingStatus != 4 && TradingStatus != 8 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1265, "OldStatus==0 || OldStatus == TRADING_IMPORT || OldStatus == TRADING_EXPORT") == 1 )
+  if ( TradingStatus != 0 && TradingStatus != 4 && TradingStatus != 8 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1265, "OldStatus==0 || OldStatus == TRADING_IMPORT || OldStatus == TRADING_EXPORT") == 1 )
   {
     __debugbreak();
   }
   CTradingBuildingRole::ClearGoodState(this, a2, TradingStatus);
   if ( TradingStatus < 8 )
   {
-    if ( TradingStatus )
+    if ( TradingStatus != 0 )
     {
       CTradingBuildingRole::SetGoodState(this, a2, 8);
     }
@@ -874,13 +866,13 @@ void  CTradingBuildingRole::TradeGood(int a2) {
   {
     __debugbreak();
   }
-  if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3)) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1285, "g_cBuildingMgr.GetBuildingPtr(m_uBuildingId)!=NULL") == 1 )
+  if ( (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3)) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1285, "g_cBuildingMgr.GetBuildingPtr(m_uBuildingId)!=NULL") == 1 )
   {
     __debugbreak();
   }
-  result = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+  result = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
   v6 = result;
-  if ( !result )
+  if ( result == 0 )
   {
     result = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1287, "pOwnerBuilding!=NULL");
     if ( result == (unsigned __int8 *)1 )
@@ -888,13 +880,13 @@ void  CTradingBuildingRole::TradeGood(int a2) {
       __debugbreak();
     }
   }
-  if ( v6 )
+  if ( v6 != 0 )
   {
     v4 = CTradingBuildingRole::GetTradingStatus(this, v5);
-    v3 = IEntity::OwnerId(v6);
+    v3 = IEntity::OwnerId((IEntity *)v6);
     result = (unsigned __int8 *)CInternationalTrader::SetGoodStatus(*((_DWORD *)this + 171), v3, v6, a2, v4);
   }
-  if ( TradingStatus )
+  if ( TradingStatus != 0 )
   {
     return (unsigned __int8 *)CTradingBuildingRole::ClearTradingPiles(this, a2, TradingStatus);
   }
@@ -914,22 +906,22 @@ void  CTradingBuildingRole::ShowTradeRoute(void) {
   int v6; // [esp-4h] [ebp-24h]
   int v7; // [esp-4h] [ebp-24h]
   int v8; // [esp-4h] [ebp-24h]
-  _DWORD *v9; // [esp+0h] [ebp-20h]
+  IEntity *v9; // [esp+0h] [ebp-20h]
   int v10; // [esp+4h] [ebp-1Ch]
   int v11; // [esp+4h] [ebp-1Ch]
   int v12; // [esp+8h] [ebp-18h]
   int v13; // [esp+8h] [ebp-18h]
-  _DWORD *v14; // [esp+Ch] [ebp-14h]
-  _DWORD *v15; // [esp+10h] [ebp-10h]
-  _DWORD *v16; // [esp+14h] [ebp-Ch]
+  IEntity *v14; // [esp+Ch] [ebp-14h]
+  IEntity *v15; // [esp+10h] [ebp-10h]
+  IEntity *v16; // [esp+14h] [ebp-Ch]
   Y16X16 *WorkingAreaPackedXY; // [esp+1Ch] [ebp-4h]
   Y16X16 *v19; // [esp+1Ch] [ebp-4h]
 
-  if ( *((_WORD *)this + 190) )
+  if ( *((_WORD *)this + 190) != 0 )
   {
-    v15 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 190));
-    v16 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-    if ( IEntity::Type((unsigned __int16 *)v16) == 32 && IEntity::Type((unsigned __int16 *)v15) == 32 )
+    v15 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 190));
+    v16 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+    if ( IEntity::Type(v16) == 32 && IEntity::Type(v15) == 32 )
     {
       WorkingAreaPackedXY = (Y16X16 *)CBuilding::GetWorkingAreaPackedXY(v16);
       v10 = CBuilding::GetWorkingAreaPackedXY(v15);
@@ -941,21 +933,21 @@ void  CTradingBuildingRole::ShowTradeRoute(void) {
       v10 = CBuilding::EnsignPackedXY(v15);
       v12 = 0;
     }
-    Y16X16::UnpackXYFast(WorkingAreaPackedXY, &CTradingBuildingRole::m_iLastX, &CTradingBuildingRole::m_iLastY);
+    Y16X16::UnpackXYFast((int)WorkingAreaPackedXY, &CTradingBuildingRole::m_iLastX, &CTradingBuildingRole::m_iLastY);
     v5 = IEntity::Y(v16);
     v1 = IEntity::X(v16);
     CWorldManager::TraceLine(CTradingBuildingRole::m_iLastX, CTradingBuildingRole::m_iLastY, v1, v5);
-    CAStarCallback::FindPath(WorkingAreaPackedXY, v10, (void (__cdecl *)(int, int))CTradingBuildingRole::PathCallback, v12);
+    CAStarCallback::FindPath((int)WorkingAreaPackedXY, v10, (void (__cdecl *)(int, int))CTradingBuildingRole::PathCallback, v12);
     v6 = IEntity::Y(v15);
     v2 = IEntity::X(v15);
     CWorldManager::TraceLine(CTradingBuildingRole::m_iLastX, CTradingBuildingRole::m_iLastY, v2, v6);
-    IGfxEngine::EnableIconLayer((IGfxEngine *)g_pGfxEngine, 1);
+    IGfxEngine::EnableIconLayer(g_pGfxEngine, 1);
   }
-  if ( *((_WORD *)this + 191) )
+  if ( *((_WORD *)this + 191) != 0 )
   {
-    v9 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 191));
-    v14 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-    if ( IEntity::Type((unsigned __int16 *)v14) == 32 && IEntity::Type((unsigned __int16 *)v9) == 32 )
+    v9 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 191));
+    v14 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+    if ( IEntity::Type(v14) == 32 && IEntity::Type(v9) == 32 )
     {
       v19 = (Y16X16 *)CBuilding::GetWorkingAreaPackedXY(v14);
       v11 = CBuilding::GetWorkingAreaPackedXY(v9);
@@ -967,15 +959,15 @@ void  CTradingBuildingRole::ShowTradeRoute(void) {
       v11 = CBuilding::EnsignPackedXY(v9);
       v13 = 0;
     }
-    Y16X16::UnpackXYFast(v19, &CTradingBuildingRole::m_iLastX, &CTradingBuildingRole::m_iLastY);
+    Y16X16::UnpackXYFast((int)v19, &CTradingBuildingRole::m_iLastX, &CTradingBuildingRole::m_iLastY);
     v7 = IEntity::Y(v14);
     v3 = IEntity::X(v14);
     CWorldManager::TraceLine(CTradingBuildingRole::m_iLastX, CTradingBuildingRole::m_iLastY, v3, v7);
-    CAStarCallback::FindPath(v19, v11, (void (__cdecl *)(int, int))CTradingBuildingRole::PathCallback, v13);
+    CAStarCallback::FindPath((int)v19, v11, (void (__cdecl *)(int, int))CTradingBuildingRole::PathCallback, v13);
     v8 = IEntity::Y(v9);
     v4 = IEntity::X(v9);
     CWorldManager::TraceLine(CTradingBuildingRole::m_iLastX, CTradingBuildingRole::m_iLastY, v4, v8);
-    IGfxEngine::EnableIconLayer((IGfxEngine *)g_pGfxEngine, 1);
+    IGfxEngine::EnableIconLayer(g_pGfxEngine, 1);
   }
 }
 
@@ -999,19 +991,16 @@ void  CTradingBuildingRole::ClearExpectedAmounts(int a2) {
     {
       break;
     }
-    v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v3 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v3);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1043, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v4 = (pairNode *)CPile::Role(PilePtr);
-    if ( CTradePileRole::GetExpectedAmount(v4) )
+    if ( CTradePileRole::GetExpectedAmount((CTradePileRole *)v4) != 0 && *((_BYTE *)this + a2 + 427) == 0 )
     {
-      if ( !*((_BYTE *)this + a2 + 427) )
-      {
-        CTradePileRole::SetExpectedAmount(v4, 0);
-      }
+      CTradePileRole::SetExpectedAmount(v4, 0);
     }
   }
   return result;
@@ -1054,14 +1043,14 @@ bool  CTradingBuildingRole::RegisterIncomingTrader(int a2, int a3, bool a4) {
   CTradingBuildingRole *v7; // [esp+Ch] [ebp-4h]
 
   v7 = this;
-  if ( CTradingBuildingRole::IsRegisteredAsIncomingTrader(this, a2, a3) )
+  if ( CTradingBuildingRole::IsRegisteredAsIncomingTrader(this, a2, a3) != 0 )
   {
     return 0;
   }
   v5[0] = a2;
   v5[1] = a3;
   v6 = a4;
-  std::vector<CTradingBuildingRole::STradersEx>::push_back(v5);
+  std::vector<CTradingBuildingRole::STradersEx>::push_back((int)v5);
   return 1;
 }
 
@@ -1076,7 +1065,7 @@ bool  CTradingBuildingRole::UnregisterIncomingTrader(int a2, int a3) {
   int v7; // [esp+4h] [ebp-Ch]
   unsigned int i; // [esp+8h] [ebp-8h]
 
-  if ( !CTradingBuildingRole::IsRegisteredAsIncomingTrader(this, a2, a3) )
+  if ( CTradingBuildingRole::IsRegisteredAsIncomingTrader(this, a2, a3) == 0 )
   {
     return 0;
   }
@@ -1132,20 +1121,20 @@ int  CTradingBuildingRole::GetNrRegisteredIncomingTraders(int a2, bool a3) {
 int  CTradingBuildingRole::GetNextFreePile(void) {
   
   unsigned __int16 *v1; // eax
-  void *v3; // [esp+0h] [ebp-10h]
+  CTradePileRole *v3; // [esp+0h] [ebp-10h]
   struct CPile *PilePtr; // [esp+4h] [ebp-Ch]
   signed int i; // [esp+Ch] [ebp-4h]
 
   for ( i = 0;
-        i < *(char *)(this[94] + 57);
+        i < *(char *)(*(this + 94) + 57);
         ++i )
   {
-    v1 = (unsigned __int16 *)std::vector<unsigned short>::operator[](this + 152, i);
+    v1 = std::vector<unsigned short>::operator[](this + 152, i);
     PilePtr = CPileMgr::GetPilePtr(*v1);
-    v3 = (void *)CPile::Role(PilePtr);
-    if ( !CTradePileRole::GetTradeRoleType(v3) )
+    v3 = (CTradePileRole *)CPile::Role(PilePtr);
+    if ( CTradePileRole::GetTradeRoleType(v3) == 0 )
     {
-      return *(unsigned __int16 *)std::vector<unsigned short>::operator[](this + 152, i);
+      return *std::vector<unsigned short>::operator[](this + 152, i);
     }
   }
   return 0;
@@ -1159,7 +1148,7 @@ void  CTradingBuildingRole::ExecuteUnforseenGoodTypeChange(int a2, int a3, int a
   CPile *PilePtr; // [esp+4h] [ebp-8h]
   pairNode *v6; // [esp+8h] [ebp-4h]
 
-  if ( a3 )
+  if ( a3 != 0 )
   {
     PilePtr = CPileMgr::GetPilePtr(a2);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 413, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
@@ -1167,9 +1156,9 @@ void  CTradingBuildingRole::ExecuteUnforseenGoodTypeChange(int a2, int a3, int a
       __debugbreak();
     }
     v6 = (pairNode *)CPile::Role(PilePtr);
-    if ( CTradePileRole::GetExpectedAmount(v6) )
+    if ( CTradePileRole::GetExpectedAmount((CTradePileRole *)v6) != 0 )
     {
-      *((_BYTE *)this + a3 + 384) += CTradePileRole::GetExpectedAmount(v6);
+      *((_BYTE *)this + a3 + 384) += CTradePileRole::GetExpectedAmount((CTradePileRole *)v6);
       CTradePileRole::SetExpectedAmount(v6, 0);
     }
   }
@@ -1177,7 +1166,7 @@ void  CTradingBuildingRole::ExecuteUnforseenGoodTypeChange(int a2, int a3, int a
 
 
 // address=[0x1521990]
-// Decompiled from _DWORD *__thiscall CTradingBuildingRole::FillDialog(int this, unsigned __int8 *a2, char a3)
+// Decompiled from _DWORD *__thiscall CTradingBuildingRole::FillDialog(int this, IEntity *a2, char a3)
 void  CTradingBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   
   int v3; // eax
@@ -1195,64 +1184,64 @@ void  CTradingBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   unsigned __int8 *v16; // [esp+8h] [ebp-48h]
   unsigned __int8 *v17; // [esp+Ch] [ebp-44h]
   unsigned __int8 *v18; // [esp+10h] [ebp-40h]
-  void *v19; // [esp+1Ch] [ebp-34h]
+  CTradePileRole *v19; // [esp+1Ch] [ebp-34h]
   unsigned int i; // [esp+24h] [ebp-2Ch]
   CEvn_Event v22; // [esp+28h] [ebp-28h] BYREF
   int v23; // [esp+4Ch] [ebp-4h]
 
-  CInfoExchange::Clear(&g_cPortInfo);
+  CInfoExchange::Clear((CInfoExchange *)&g_cPortInfo);
   dword_3F1E570 = 5;
   byte_3F1E575 = IEntity::Race(a2);
-  if ( IEntity::Type((unsigned __int16 *)a2) == 32 )
+  if ( IEntity::Type(a2) == 32 )
   {
     byte_3F1E574 = 32;
     byte_3F1E577 = 1;
-    byte_3F1E578 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+    byte_3F1E578 = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
     byte_3F1E579 = 0;
     v3 = IEntity::OwnerId(a2);
-    byte_3F1E57B = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, 32, 0);
+    byte_3F1E57B = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, BUILDING_PORT, 0);
     v4 = IEntity::OwnerId(a2);
-    byte_3F1E57C = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, 32, 1u);
+    byte_3F1E57C = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, BUILDING_PORT, 1u);
     byte_3F1E576 = *(_BYTE *)(this + 29);
-    if ( *(_BYTE *)(this + 29) )
+    if ( *(_BYTE *)(this + 29) != 0 )
     {
       byte_3F1E57D = *(_BYTE *)(*(_DWORD *)(this + 376) + 478);
     }
   }
-  else if ( IEntity::Type((unsigned __int16 *)a2) == 33 )
+  else if ( IEntity::Type(a2) == 33 )
   {
     byte_3F1E574 = 33;
     byte_3F1E577 = 1;
-    byte_3F1E578 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+    byte_3F1E578 = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
     byte_3F1E579 = 0;
-    v13 = IEntity::Type((unsigned __int16 *)a2);
+    v13 = IEntity::Type(a2);
     v5 = IEntity::OwnerId(a2);
-    byte_3F1E57B = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v5, v13, 0);
-    v14 = IEntity::Type((unsigned __int16 *)a2);
+    byte_3F1E57B = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v5, (S4_BUILDING_ENUM)v13, 0);
+    v14 = IEntity::Type(a2);
     v6 = IEntity::OwnerId(a2);
-    byte_3F1E57C = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v6, v14, 1u);
+    byte_3F1E57C = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v6, (S4_BUILDING_ENUM)v14, 1u);
     byte_3F1E57D = 0;
   }
   for ( i = 0;
         i < std::vector<unsigned short>::size(this + 608);
         ++i )
   {
-    v7 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((void *)(this + 608), i);
-    v8 = CPileMgr::operator[](*v7);
-    v19 = (void *)CPile::Role(v8);
+    v7 = std::vector<unsigned short>::operator[]((void *)(this + 608), i);
+    v8 = (unsigned __int8 *)CPileMgr::operator[](*v7);
+    v19 = (CTradePileRole *)CPile::Role(v8);
     if ( CTradePileRole::GetTradeRoleType(v19) == 5 )
     {
       byte_3F1E581[2 * i] += 30;
     }
-    v9 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((void *)(this + 608), i);
-    v18 = CPileMgr::operator[](*v9);
-    if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v18 + 40))(v18) )
+    v9 = std::vector<unsigned short>::operator[]((void *)(this + 608), i);
+    v18 = (unsigned __int8 *)CPileMgr::operator[](*v9);
+    if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v18 + 40))(v18) != 0 )
     {
-      v10 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((void *)(this + 608), i);
-      v17 = CPileMgr::operator[](*v10);
+      v10 = std::vector<unsigned short>::operator[]((void *)(this + 608), i);
+      v17 = (unsigned __int8 *)CPileMgr::operator[](*v10);
       byte_3F1E581[2 * i] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v17 + 40))(v17);
-      v11 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((void *)(this + 608), i);
-      v16 = CPileMgr::operator[](*v11);
+      v11 = std::vector<unsigned short>::operator[]((void *)(this + 608), i);
+      v16 = (unsigned __int8 *)CPileMgr::operator[](*v11);
       byte_3F1E580[2 * i] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v16 + 60))(v16);
     }
     if ( CTradePileRole::GetTradeRoleType(v19) == 3 )
@@ -1263,7 +1252,7 @@ void  CTradingBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
     {
       byte_3F1E581[2 * i] += 20;
     }
-    if ( !CTradePileRole::GetTradeRoleType(v19) )
+    if ( CTradePileRole::GetTradeRoleType(v19) == 0 )
     {
       byte_3F1E581[2 * i] += 40;
     }
@@ -1277,7 +1266,7 @@ void  CTradingBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
     }
   }
   v15 = 604;
-  if ( !a3 )
+  if ( a3 == 0 )
   {
     v15 = 602;
   }
@@ -1304,7 +1293,7 @@ void  CTradingBuildingRole::FillTradeSideBar(class CPortGoodsTradeBarInfo * a2, 
   int v12; // [esp+38h] [ebp-4h]
 
   result = (CTradingBuildingRole *)this;
-  if ( !this[171] )
+  if ( *(this + 171) == 0 )
   {
     result = (CTradingBuildingRole *)BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1315, "m_pTrader!=NULL");
     if ( result == (CTradingBuildingRole *)1 )
@@ -1312,53 +1301,52 @@ void  CTradingBuildingRole::FillTradeSideBar(class CPortGoodsTradeBarInfo * a2, 
       __debugbreak();
     }
   }
-  if ( !this[171] )
+  if ( *(this + 171) != 0 )
   {
-    return result;
+    *((_DWORD *)a2 + 1) = 13;
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+    if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1321, "pBuilding!=NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    result = 0;
+    if ( BuildingPtr != 0 )
+    {
+      memset((char *)a2 + 8, 0, 9u);
+      for ( i = 1;
+            i <= CPlayerManager::NumberOfPlayers();
+            ++i )
+      {
+        v4 = IEntity::OwnerId((IEntity *)BuildingPtr);
+        *((_BYTE *)a2 + i + 8) = CInternationalTrader::GetPlayerTradeStatus(*(this + 171), v4, i);
+      }
+      for ( j = 0;
+            j < 43;
+            ++j )
+      {
+        v5 = IEntity::OwnerId((IEntity *)BuildingPtr);
+        *((_BYTE *)a2 + j + 17) = CInternationalTrader::GetGoodStatus(*(this + 171), v5, BuildingPtr, j);
+      }
+      v6 = 606;
+      if ( !a3 )
+      {
+        v6 = 607;
+      }
+      CEvn_Event::CEvn_Event(&v11, v6, 0, (unsigned int)a2, 0);
+      v12 = 0;
+      if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1347, "g_pEvnEngine != NULL") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( g_pEvnEngine != 0 )
+      {
+        IEventEngine::SendAMessage(g_pEvnEngine, &v11);
+      }
+      v12 = -1;
+      return (CTradingBuildingRole *)CEvn_Event::~CEvn_Event(&v11);
+    }
   }
-  *((_DWORD *)a2 + 1) = 13;
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-  if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1321, "pBuilding!=NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  result = 0;
-  if ( !BuildingPtr )
-  {
-    return result;
-  }
-  memset((char *)a2 + 8, 0, 9u);
-  for ( i = 1;
-        i <= CPlayerManager::NumberOfPlayers();
-        ++i )
-  {
-    v4 = IEntity::OwnerId(BuildingPtr);
-    *((_BYTE *)a2 + i + 8) = CInternationalTrader::GetPlayerTradeStatus(this[171], v4, i);
-  }
-  for ( j = 0;
-        j < 43;
-        ++j )
-  {
-    v5 = IEntity::OwnerId(BuildingPtr);
-    *((_BYTE *)a2 + j + 17) = CInternationalTrader::GetGoodStatus(this[171], v5, BuildingPtr, j);
-  }
-  v6 = 606;
-  if ( !a3 )
-  {
-    v6 = 607;
-  }
-  CEvn_Event::CEvn_Event(&v11, v6, 0, (unsigned int)a2, 0);
-  v12 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1347, "g_pEvnEngine != NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( g_pEvnEngine )
-  {
-    IEventEngine::SendAMessage(g_pEvnEngine, &v11);
-  }
-  v12 = -1;
-  return (CTradingBuildingRole *)CEvn_Event::~CEvn_Event(&v11);
+  return result;
 }
 
 
@@ -1377,7 +1365,7 @@ void  CTradingBuildingRole::FillGoodsOutSideBar(class CPortGoodsOutBarInfo * a2,
         i < 43;
         ++i )
   {
-    if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, i, 2) )
+    if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, i, 2) != 0 )
     {
       *((_BYTE *)a2 + i + 8) = *((_BYTE *)this + i + 427);
     }
@@ -1389,11 +1377,11 @@ void  CTradingBuildingRole::FillGoodsOutSideBar(class CPortGoodsOutBarInfo * a2,
   }
   CEvn_Event::CEvn_Event(&v7, v4, 0, (unsigned int)a2, 0);
   v8 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1387, "g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1387, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v7);
   }
@@ -1403,7 +1391,7 @@ void  CTradingBuildingRole::FillGoodsOutSideBar(class CPortGoodsOutBarInfo * a2,
 
 
 // address=[0x15220a0]
-// Decompiled from unsigned __int8 *__thiscall CTradingBuildingRole::ChangeTradeStatus(CTradingBuildingRole *this, unsigned int a2, bool a3)
+// Decompiled from unsigned __int8 *__thiscall CTradingBuildingRole::ChangeTradeStatus(CInternationalTrader **this, unsigned int a2, bool a3)
 void  CTradingBuildingRole::ChangeTradeStatus(int a2, bool a3) {
   
   unsigned __int8 *result; // eax
@@ -1415,31 +1403,30 @@ void  CTradingBuildingRole::ChangeTradeStatus(int a2, bool a3) {
     __debugbreak();
   }
   result = 0;
-  if ( !*((_DWORD *)this + 171) )
+  if ( *(this + 171) != 0 )
   {
-    return result;
-  }
-  result = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-  v5 = result;
-  if ( !result )
-  {
-    result = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4695, "pBuilding!=NULL");
-    if ( result == (unsigned __int8 *)1 )
+    result = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+    v5 = result;
+    if ( result == 0 )
     {
-      __debugbreak();
+      result = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4695, "pBuilding!=NULL");
+      if ( result == (unsigned __int8 *)1 )
+      {
+        __debugbreak();
+      }
+    }
+    if ( v5 != 0 )
+    {
+      v4 = IEntity::OwnerId((IEntity *)v5);
+      CInternationalTrader::SetPlayerTradeStatus(*(this + 171), v4, a2, a3);
+      if ( !CInternationalTrader::TradeWithSomeone(*(this + 171), v4) )
+      {
+        ((void (__thiscall *)(CTradingBuildingRole *))CTradingBuildingRole::DisableTranding)((CTradingBuildingRole *)this);
+      }
+      return (unsigned __int8 *)((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
     }
   }
-  if ( !v5 )
-  {
-    return result;
-  }
-  v4 = IEntity::OwnerId(v5);
-  CInternationalTrader::SetPlayerTradeStatus(*((CInternationalTrader **)this + 171), v4, a2, a3);
-  if ( !CInternationalTrader::TradeWithSomeone(*((CInternationalTrader **)this + 171), v4) )
-  {
-    CTradingBuildingRole::DisableTranding(this);
-  }
-  return (unsigned __int8 *)IAnimatedEntity::RegisterForLogicUpdate(1);
+  return result;
 }
 
 
@@ -1479,14 +1466,14 @@ void __cdecl CTradingBuildingRole::PathCallback(int a1, int a2) {
   int v19; // [esp+54h] [ebp-4h]
 
   v17 = this;
-  IBuildingRole::IBuildingRole(this, a2);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this, (struct std::istream *)a2);
   v19 = 0;
   *(_DWORD *)v17 = &CTradingBuildingRole::_vftable_;
   std::vector<unsigned short>::vector<unsigned short>(v17 + 608);
   std::vector<CTradingBuildingRole::STradersEx>::vector<CTradingBuildingRole::STradersEx>();
   C = operator new(0xCu);
   LOBYTE(v19) = 3;
-  if ( C )
+  if ( C != 0 )
   {
     v11 = CInternationalTrader::CInternationalTrader((CInternationalTrader *)C);
   }
@@ -1507,41 +1494,41 @@ void __cdecl CTradingBuildingRole::PathCallback(int a1, int a2) {
     v17[i + 513] = 0;
     v17[i + 556] = 0;
   }
-  if ( !v15 || v15 > 4 )
+  if ( v15 == 0 || v15 > 4 )
   {
     goto LABEL_23;
   }
-  operator^<unsigned short>(a2, v17 + 380);
-  LoadArray<signed char>(a2, v17 + 384, 43);
-  LoadArray<signed char>(a2, v17 + 427, 43);
+  operator^<unsigned short>(a2, (unsigned __int16 *)v17 + 190);
+  LoadArray<signed char>(a2, (int)(v17 + 384), 43);
+  LoadArray<signed char>(a2, (int)(v17 + 427), 43);
   for ( j = 0;
         j < 8;
         operator^<bool>(a2, &v17[j++ + 599]) )
   {
     ;
   }
-  LoadArray<signed char>(a2, v17 + 470, 43);
+  LoadArray<signed char>(a2, (int)(v17 + 470), 43);
   operator^<unsigned int>(a2, &v13);
   for ( j = 0;
         j < v13;
         ++j )
   {
-    operator^<unsigned short>(a2, v18);
-    std::vector<unsigned short>::push_back(v18);
+    operator^<unsigned short>(a2, (unsigned __int16 *)v18);
+    ((void (__stdcall *)(char *))std::vector<unsigned short>::push_back)(v18);
   }
-  operator^<int>(a2, (int)(v17 + 628));
-  operator^<int>(a2, (int)(v17 + 632));
+  operator^<int>((struct std::istream *)a2, (int *)v17 + 157);
+  operator^<int>((struct std::istream *)a2, (int *)v17 + 158);
   operator^<bool>(a2, v17 + 636);
   operator^<bool>(a2, v17 + 637);
-  operator^<int>(a2, (int)(v17 + 640));
-  operator^<int>(a2, (int)(v17 + 644));
+  operator^<int>((struct std::istream *)a2, (int *)v17 + 160);
+  operator^<int>((struct std::istream *)a2, (int *)v17 + 161);
   operator^<bool>(a2, v17 + 648);
   operator^<bool>(a2, v17 + 649);
-  operator^<int>(a2, (int)(v17 + 652));
-  operator^<int>(a2, (int)(v17 + 656));
+  operator^<int>((struct std::istream *)a2, (int *)v17 + 163);
+  operator^<int>((struct std::istream *)a2, (int *)v17 + 164);
   operator^<bool>(a2, v17 + 660);
   operator^<bool>(a2, v17 + 661);
-  operator^<int>(a2, (int)(v17 + 664));
+  operator^<int>((struct std::istream *)a2, (int *)v17 + 166);
   operator^<unsigned int>(a2, &v13);
   for ( j = 0;
         j < v13;
@@ -1549,19 +1536,19 @@ void __cdecl CTradingBuildingRole::PathCallback(int a1, int a2) {
   {
     if ( v15 > 2 )
     {
-      operator^<int>(a2, (int)v3);
-      operator^<int>(a2, (int)v4);
+      operator^<int>((struct std::istream *)a2, (int *)v3);
+      operator^<int>((struct std::istream *)a2, (int *)v4);
       operator^<bool>(a2, v5);
-      std::vector<CTradingBuildingRole::STradersEx>::push_back(v3);
+      std::vector<CTradingBuildingRole::STradersEx>::push_back((int)v3);
     }
     else
     {
-      operator^<int>(a2, (int)&v8);
-      operator^<int>(a2, (int)v9);
+      operator^<int>((struct std::istream *)a2, &v8);
+      operator^<int>((struct std::istream *)a2, v9);
       v6[0] = v8;
       v6[1] = v9[0];
       v7 = 0;
-      std::vector<CTradingBuildingRole::STradersEx>::push_back(v6);
+      std::vector<CTradingBuildingRole::STradersEx>::push_back((int)v6);
     }
   }
   if ( v15 == 1 )
@@ -1578,15 +1565,15 @@ LABEL_23:
       CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
       _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
     }
-    operator^<unsigned short>(a2, v17 + 382);
+    operator^<unsigned short>(a2, (unsigned __int16 *)v17 + 191);
     if ( v15 >= 3 )
     {
-      LoadArray<signed char>(a2, v17 + 513, 43);
-      LoadArray<signed char>(a2, v17 + 556, 43);
+      LoadArray<signed char>(a2, (int)(v17 + 513), 43);
+      LoadArray<signed char>(a2, (int)(v17 + 556), 43);
     }
     if ( v15 >= 4 )
     {
-      operator^<int>(a2, (int)(v17 + 688));
+      operator^<int>((struct std::istream *)a2, (int *)v17 + 172);
     }
   }
   return v17;
@@ -1603,62 +1590,62 @@ void  CTradingBuildingRole::Store(std::ostream & a2) {
   int v5; // eax
   int v7; // [esp+0h] [ebp-10h] BYREF
   int v8; // [esp+4h] [ebp-Ch] BYREF
-  unsigned int i; // [esp+8h] [ebp-8h]
+  int i; // [esp+8h] [ebp-8h]
   struct IBuildingRole *v10; // [esp+Ch] [ebp-4h]
 
   v10 = this;
   IBuildingRole::Store(this, a2);
   v7 = 4;
-  operator^<unsigned int>(a2, &v7);
-  operator^<unsigned short>((int)a2, (__int16 *)v10 + 190);
-  StoreArray<signed char>(a2, (char *)v10 + 384, 43);
-  StoreArray<signed char>(a2, (char *)v10 + 427, 43);
+  operator^<unsigned int>(a2, (unsigned int *)&v7);
+  operator^<unsigned short>(a2, (WORD *)&v10[1]);
+  StoreArray<signed char>((int)a2, (int)&v10[1].m_uLogicState, 43u);
+  StoreArray<signed char>((int)a2, (int)&v10[1].gap_24[11], 43u);
   for ( i = 0;
-        (int)i < 8;
+        i < 8;
         ++i )
   {
-    operator^<bool>((int)a2, (int)v10 + i + 599);
+    operator^<bool>(a2, (bool *)&v10[1].m_vPatches[3].m_uTicks2 + i);
   }
-  StoreArray<signed char>(a2, (char *)v10 + 470, 43);
-  v8 = std::vector<unsigned short>::size((char *)v10 + 608);
-  operator^<unsigned int>(a2, &v8);
+  StoreArray<signed char>((int)a2, (int)&v10[1].m_vPatchPairs[1].m_iJobFrame + 2, 43u);
+  v8 = std::vector<unsigned short>::size(&v10[1].m_vPatches[3].m_uSoundId);
+  operator^<unsigned int>(a2, (unsigned int *)&v8);
   for ( i = 0;
-        i < v8;
+        i < (unsigned int)v8;
         ++i )
   {
-    v2 = (__int16 *)std::vector<unsigned short>::operator[]((char *)v10 + 608, i);
-    operator^<unsigned short>((int)a2, v2);
+    v2 = (__int16 *)std::vector<unsigned short>::operator[](&v10[1].m_vPatches[3].m_uSoundId, i);
+    operator^<unsigned short>(a2, (WORD *)v2);
   }
-  operator^<int>((int)a2, (int *)v10 + 157);
-  operator^<int>((int)a2, (int *)v10 + 158);
-  operator^<bool>((int)a2, (int)v10 + 636);
-  operator^<bool>((int)a2, (int)v10 + 637);
-  operator^<int>((int)a2, (int *)v10 + 160);
-  operator^<int>((int)a2, (int *)v10 + 161);
-  operator^<bool>((int)a2, (int)v10 + 648);
-  operator^<bool>((int)a2, (int)v10 + 649);
-  operator^<int>((int)a2, (int *)v10 + 163);
-  operator^<int>((int)a2, (int *)v10 + 164);
-  operator^<bool>((int)a2, (int)v10 + 660);
-  operator^<bool>((int)a2, (int)v10 + 661);
-  operator^<int>((int)a2, (int *)v10 + 166);
-  v8 = std::vector<CTradingBuildingRole::STradersEx>::size((char *)v10 + 668);
-  operator^<unsigned int>(a2, &v8);
+  operator^<int>(a2, (int *)&v10[1].m_vPatches[4].m_uSoundId);
+  operator^<int>(a2, (int *)&v10[1].m_vPatches[4].m_uSoundRandomness);
+  operator^<bool>(a2, (bool *)&v10[1].m_vPatches[5]);
+  operator^<bool>(a2, (bool *)&v10[1].m_vPatches[5].m_uTicks);
+  operator^<int>(a2, (int *)&v10[1].m_vPatches[5].m_uJob);
+  operator^<int>(a2, (int *)&v10[1].m_vPatches[5].m_uDuration);
+  operator^<bool>(a2, (bool *)&v10[1].m_vPatches[5].m_uSoundId);
+  operator^<bool>(a2, (bool *)&v10[1].m_vPatches[5].m_uSoundId + 1);
+  operator^<int>(a2, (int *)&v10[1].m_vPatches[5].m_uSoundRandomness);
+  operator^<int>(a2, (int *)&v10[1].m_vPatches[6]);
+  operator^<bool>(a2, (bool *)&v10[1].m_vPatches[6].m_uJob);
+  operator^<bool>(a2, (bool *)&v10[1].m_vPatches[6].m_uJob + 1);
+  operator^<int>(a2, (int *)&v10[1].m_vPatches[6].m_uDuration);
+  v8 = std::vector<CTradingBuildingRole::STradersEx>::size(&v10[1].m_vPatches[6].m_uSoundId);
+  operator^<unsigned int>(a2, (unsigned int *)&v8);
   for ( i = 0;
-        i < v8;
+        i < (unsigned int)v8;
         ++i )
   {
     v3 = (int *)std::vector<CTradingBuildingRole::STradersEx>::operator[](i);
-    operator^<int>((int)a2, v3);
+    operator^<int>(a2, v3);
     v4 = std::vector<CTradingBuildingRole::STradersEx>::operator[](i);
-    operator^<int>((int)a2, (int *)(v4 + 4));
+    operator^<int>(a2, (int *)(v4 + 4));
     v5 = std::vector<CTradingBuildingRole::STradersEx>::operator[](i);
-    operator^<bool>((int)a2, v5 + 8);
+    operator^<bool>(a2, (bool *)(v5 + 8));
   }
-  operator^<unsigned short>((int)a2, (__int16 *)v10 + 191);
-  StoreArray<signed char>(a2, (char *)v10 + 513, 43);
-  StoreArray<signed char>(a2, (char *)v10 + 556, 43);
-  return operator^<int>((int)a2, (int *)v10 + 172);
+  operator^<unsigned short>(a2, (WORD *)&v10[1].__vftable + 1);
+  StoreArray<signed char>((int)a2, (int)&v10[1].m_vPatchPairs[7].m_uJobId + 1, 43u);
+  StoreArray<signed char>((int)a2, (int)&v10[1].m_vPatches[1], 43u);
+  return operator^<int>(a2, (int *)&v10[1].m_vPatches[7].m_uSoundId);
 }
 
 
@@ -1710,7 +1697,7 @@ bool  CTradingBuildingRole::CheckTransport(class CBuilding * a2, int a3) {
   int v18; // [esp+18h] [ebp-38h]
   int v19; // [esp+1Ch] [ebp-34h]
   int v20; // [esp+24h] [ebp-2Ch]
-  void *v21; // [esp+28h] [ebp-28h]
+  CTradePileRole *v21; // [esp+28h] [ebp-28h]
   int v22; // [esp+2Ch] [ebp-24h]
   int v23; // [esp+2Ch] [ebp-24h]
   pairNode *v24; // [esp+30h] [ebp-20h]
@@ -1728,7 +1715,7 @@ bool  CTradingBuildingRole::CheckTransport(class CBuilding * a2, int a3) {
   {
     return 0;
   }
-  if ( !*((_BYTE *)this + a3 + 384) )
+  if ( *((_BYTE *)this + a3 + 384) == 0 )
   {
     return 0;
   }
@@ -1743,52 +1730,49 @@ bool  CTradingBuildingRole::CheckTransport(class CBuilding * a2, int a3) {
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v4 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v4 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v4);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1535, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
-    v21 = (void *)CPile::Role(PilePtr);
-    if ( CTradePileRole::GetTradeRoleType(v21) == 2 && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a3 )
+    v21 = (CTradePileRole *)CPile::Role(PilePtr);
+    if ( CTradePileRole::GetTradeRoleType(v21) == 2 && ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) == a3 )
     {
-      v5 = IEntity::WorldIdx();
-      if ( !CWorldManager::EcoSectorId(v5) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1545, "m_iESId != 0") == 1 )
+      v5 = ((int (__stdcall *)())IEntity::WorldIdx)();
+      if ( CWorldManager::EcoSectorId(v5) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1545, "m_iESId != 0") == 1 )
       {
         __debugbreak();
       }
-      if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) )
+      if ( PilePtr->Amount(PilePtr) != 0 )
       {
-        if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 2) )
+        if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 2) != 0 )
         {
           CTradePileRole::SetTradeRoleType(v21, 1);
         }
-        if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 8) )
+        if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 8) != 0 )
         {
           CTradePileRole::SetTradeRoleType(v21, 3);
         }
-        v20 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) >= v29 ? v29 : (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
+        v20 = PilePtr->Amount(PilePtr) >= v29 ? v29 : PilePtr->Amount(PilePtr);
         if ( *((_BYTE *)this + a3 + 384) != 100 )
         {
           *((_BYTE *)this + a3 + 384) -= v20;
           v29 -= v20;
         }
-        IAnimatedEntity::RegisterForLogicUpdate(1);
-        if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 2) )
+        ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
+        if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 2) != 0 && ((int)CTradingBuildingRole::GetNrDeliveryPilesOfGood(this, a3) >= 3 || *((_BYTE *)this + a3 + 384) == 0) )
         {
-          if ( (int)CTradingBuildingRole::GetNrDeliveryPilesOfGood(this, a3) >= 3 || !*((_BYTE *)this + a3 + 384) )
-          {
-            return 1;
-          }
+          return 1;
         }
       }
     }
   }
-  if ( !v29 )
+  if ( v29 == 0 )
   {
     return 1;
   }
-  if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 2) && (int)CTradingBuildingRole::GetNrDeliveryPilesOfGood(this, a3) >= 3 )
+  if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 2) != 0 && (int)CTradingBuildingRole::GetNrDeliveryPilesOfGood(this, a3) >= 3 )
   {
     return 0;
   }
@@ -1796,33 +1780,33 @@ bool  CTradingBuildingRole::CheckTransport(class CBuilding * a2, int a3) {
         j < *(char *)(*((_DWORD *)this + 94) + 57);
         ++j )
   {
-    v6 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, j);
+    v6 = std::vector<unsigned short>::operator[]((char *)this + 608, j);
     v32 = CPileMgr::GetPilePtr(*v6);
     if ( CPile::GetRoleType(v32) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1595, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v24 = (pairNode *)CPile::Role(v32);
-    if ( (CTradePileRole::GetTradeRoleType(v24) == 1 || CTradePileRole::GetTradeRoleType(v24) == 3) && (*(int (__thiscall **)(CPile *))(*(_DWORD *)v32 + 60))(v32) == a3 )
+    if ( (CTradePileRole::GetTradeRoleType((CTradePileRole *)v24) == 1 || CTradePileRole::GetTradeRoleType((CTradePileRole *)v24) == 3) && ((int (__thiscall *)(CPile *))v32->GetGoodType)(v32) == a3 )
     {
-      v7 = 8 - (*(int (__thiscall **)(CPile *))(*(_DWORD *)v32 + 40))(v32);
+      v7 = 8 - v32->Amount(v32);
       v8 = v7 - CPile::AmountComing(v32);
-      v22 = v8 - CTradePileRole::GetExpectedAmount(v24);
+      v22 = v8 - CTradePileRole::GetExpectedAmount((CTradePileRole *)v24);
       v19 = v29 >= v22 ? v22 : v29;
-      if ( v19 )
+      if ( v19 != 0 )
       {
-        ExpectedAmount = CTradePileRole::GetExpectedAmount(v24);
+        ExpectedAmount = CTradePileRole::GetExpectedAmount((CTradePileRole *)v24);
         CTradePileRole::SetExpectedAmount(v24, (struct CPaneDivider *)(v19 + ExpectedAmount));
-        IAnimatedEntity::RegisterForLogicUpdate(1);
+        ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
         v29 -= v19;
       }
     }
   }
-  if ( !v29 )
+  if ( v29 == 0 )
   {
     return 1;
   }
-  if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 2) && (int)CTradingBuildingRole::GetNrDeliveryPilesOfGood(this, a3) >= 3 )
+  if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 2) != 0 && (int)CTradingBuildingRole::GetNrDeliveryPilesOfGood(this, a3) >= 3 )
   {
     return 0;
   }
@@ -1831,36 +1815,36 @@ bool  CTradingBuildingRole::CheckTransport(class CBuilding * a2, int a3) {
         k < *(char *)(*((_DWORD *)this + 94) + 57);
         ++k )
   {
-    v10 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, k);
+    v10 = std::vector<unsigned short>::operator[]((char *)this + 608, k);
     v33 = CPileMgr::GetPilePtr(*v10);
     if ( CPile::GetRoleType(v33) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1633, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v25 = (pairNode *)CPile::Role(v33);
-    if ( !CTradePileRole::GetTradeRoleType(v25) )
+    if ( CTradePileRole::GetTradeRoleType((CTradePileRole *)v25) == 0 )
     {
-      v11 = IEntity::WorldIdx();
+      v11 = ((int (__stdcall *)())IEntity::WorldIdx)();
       v18 = CWorldManager::EcoSectorId(v11);
-      if ( !v18 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1642, "m_iESId != 0") == 1 )
+      if ( v18 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1642, "m_iESId != 0") == 1 )
       {
         __debugbreak();
       }
-      v12 = (CEcoSector *)CEcoSectorMgr::operator[](v18);
-      if ( CEcoSector::GetGoodOffer(v12, a3) )
+      v12 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v18);
+      if ( CEcoSector::GetGoodOffer(v12, a3) != 0 )
       {
-        v13 = 8 - (*(int (__thiscall **)(CPile *))(*(_DWORD *)v33 + 40))(v33);
+        v13 = 8 - v33->Amount(v33);
         v14 = v13 - CPile::AmountComing(v33);
-        v23 = v14 - CTradePileRole::GetExpectedAmount(v25);
+        v23 = v14 - CTradePileRole::GetExpectedAmount((CTradePileRole *)v25);
         v17 = v29 >= v23 ? v23 : v29;
-        if ( v17 )
+        if ( v17 != 0 )
         {
-          if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)v33 + 60))(v33) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1653, "pPile->GetGoodType() == 0") == 1 )
+          if ( ((int (__thiscall *)(CPile *))v33->GetGoodType)(v33) != 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1653, "pPile->GetGoodType() == 0") == 1 )
           {
             __debugbreak();
           }
           CPile::SetGoodType(v33, a3);
-          if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 2) )
+          if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, a3, 2) != 0 )
           {
             CTradePileRole::SetTradeRoleType(v25, 1);
           }
@@ -1868,15 +1852,15 @@ bool  CTradingBuildingRole::CheckTransport(class CBuilding * a2, int a3) {
           {
             CTradePileRole::SetTradeRoleType(v25, 3);
           }
-          v15 = CTradePileRole::GetExpectedAmount(v25);
+          v15 = CTradePileRole::GetExpectedAmount((CTradePileRole *)v25);
           CTradePileRole::SetExpectedAmount(v25, (struct CPaneDivider *)(v17 + v15));
-          IAnimatedEntity::RegisterForLogicUpdate(1);
+          ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
           v34 = 1;
           if ( *((_BYTE *)this + a3 + 384) != 100 )
           {
             v29 -= v17;
           }
-          if ( (int)CTradingBuildingRole::GetNrDeliveryPilesOfGood(this, a3) >= 3 || !*((_BYTE *)this + a3 + 384) )
+          if ( (int)CTradingBuildingRole::GetNrDeliveryPilesOfGood(this, a3) >= 3 || *((_BYTE *)this + a3 + 384) == 0 )
           {
             return 1;
           }
@@ -1893,7 +1877,7 @@ bool  CTradingBuildingRole::CheckTransport(class CBuilding * a2, int a3) {
 int  CTradingBuildingRole::GetCurrentAmount(int a2) {
   
   unsigned __int16 *v3; // eax
-  void *v4; // [esp+0h] [ebp-14h]
+  CTradePileRole *v4; // [esp+0h] [ebp-14h]
   int v6; // [esp+8h] [ebp-Ch]
   signed int i; // [esp+Ch] [ebp-8h]
   CPile *PilePtr; // [esp+10h] [ebp-4h]
@@ -1907,16 +1891,16 @@ int  CTradingBuildingRole::GetCurrentAmount(int a2) {
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v3 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v3);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1705, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
-    v4 = (void *)CPile::Role(PilePtr);
-    if ( (CTradePileRole::GetTradeRoleType(v4) == 1 || CTradePileRole::GetTradeRoleType(v4) == 3) && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 )
+    v4 = (CTradePileRole *)CPile::Role(PilePtr);
+    if ( (CTradePileRole::GetTradeRoleType(v4) == 1 || CTradePileRole::GetTradeRoleType(v4) == 3) && ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) == a2 )
     {
-      v6 += (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
+      v6 += PilePtr->Amount(PilePtr);
     }
   }
   return v6;
@@ -1928,7 +1912,7 @@ int  CTradingBuildingRole::GetCurrentAmount(int a2) {
 int  CTradingBuildingRole::GetRequestedAmount(int a2, bool a3) {
   
   unsigned __int16 *v4; // eax
-  void *v5; // [esp+0h] [ebp-18h]
+  CTradePileRole *v5; // [esp+0h] [ebp-18h]
   int v6; // [esp+4h] [ebp-14h]
   signed int i; // [esp+Ch] [ebp-Ch]
   CPile *PilePtr; // [esp+10h] [ebp-8h]
@@ -1939,7 +1923,7 @@ int  CTradingBuildingRole::GetRequestedAmount(int a2, bool a3) {
   {
     return 0;
   }
-  if ( !*((_BYTE *)this + a2 + 384) && !*((_BYTE *)this + a2 + 513) )
+  if ( *((_BYTE *)this + a2 + 384) == 0 && *((_BYTE *)this + a2 + 513) == 0 )
   {
     return 0;
   }
@@ -1947,13 +1931,13 @@ int  CTradingBuildingRole::GetRequestedAmount(int a2, bool a3) {
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v4 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v4 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v4);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1854, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
-    v5 = (void *)CPile::Role(PilePtr);
+    v5 = (CTradePileRole *)CPile::Role(PilePtr);
     if ( a3 )
     {
       v10 = CTradePileRole::GetTradeRoleType(v5) == 3;
@@ -1962,7 +1946,7 @@ int  CTradingBuildingRole::GetRequestedAmount(int a2, bool a3) {
     {
       v10 = CTradePileRole::GetTradeRoleType(v5) == 1;
     }
-    if ( v10 && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 )
+    if ( v10 && ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) == a2 )
     {
       v6 += CPile::AmountComing(PilePtr);
     }
@@ -1991,7 +1975,7 @@ int  CTradingBuildingRole::GetExpectedAmount(int a2, bool a3) {
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v4 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v4 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v4);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1907, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
@@ -2000,15 +1984,15 @@ int  CTradingBuildingRole::GetExpectedAmount(int a2, bool a3) {
     v7 = (pairNode *)CPile::Role(PilePtr);
     if ( a3 )
     {
-      v10 = CTradePileRole::GetTradeRoleType(v7) == 3;
+      v10 = CTradePileRole::GetTradeRoleType((CTradePileRole *)v7) == 3;
     }
     else
     {
-      v10 = CTradePileRole::GetTradeRoleType(v7) == 1;
+      v10 = CTradePileRole::GetTradeRoleType((CTradePileRole *)v7) == 1;
     }
-    if ( v10 && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 )
+    if ( v10 && ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) == a2 )
     {
-      v6 += CTradePileRole::GetExpectedAmount(v7);
+      v6 += CTradePileRole::GetExpectedAmount((CTradePileRole *)v7);
     }
   }
   return v6;
@@ -2031,19 +2015,19 @@ int  CTradingBuildingRole::GetExpectedAmountForAllPikes(int a2) {
     return 0;
   }
   for ( i = 0;
-        i < *(char *)(this[94] + 57);
+        i < *(char *)(*(this + 94) + 57);
         ++i )
   {
-    v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](this + 152, i);
+    v3 = std::vector<unsigned short>::operator[](this + 152, i);
     PilePtr = CPileMgr::GetPilePtr(*v3);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1955, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v4 = (pairNode *)CPile::Role(PilePtr);
-    if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 )
+    if ( ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) == a2 )
     {
-      v6 += CTradePileRole::GetExpectedAmount(v4);
+      v6 += CTradePileRole::GetExpectedAmount((CTradePileRole *)v4);
     }
   }
   return v6;
@@ -2066,19 +2050,19 @@ int  CTradingBuildingRole::GetGoodAmount(int a2) {
     return 0;
   }
   for ( i = 0;
-        i < *(char *)(this[94] + 57);
+        i < *(char *)(*(this + 94) + 57);
         ++i )
   {
-    v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](this + 152, i);
+    v3 = std::vector<unsigned short>::operator[](this + 152, i);
     PilePtr = CPileMgr::GetPilePtr(*v3);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1812, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v4 = CPile::Role(PilePtr);
-    if ( (*(int (__thiscall **)(CPile *, int))(*(_DWORD *)PilePtr + 60))(PilePtr, v4) == a2 )
+    if ( ((int (__thiscall *)(CPile *, int))PilePtr->GetGoodType)(PilePtr, v4) == a2 )
     {
-      v6 += (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
+      v6 += PilePtr->Amount(PilePtr);
     }
   }
   return v6;
@@ -2090,7 +2074,7 @@ int  CTradingBuildingRole::GetGoodAmount(int a2) {
 int  CTradingBuildingRole::GetExportGoodAmount(int a2) {
   
   unsigned __int16 *v3; // eax
-  void *v4; // [esp+0h] [ebp-18h]
+  CTradePileRole *v4; // [esp+0h] [ebp-18h]
   int v5; // [esp+4h] [ebp-14h]
   int v6; // [esp+8h] [ebp-10h]
   signed int i; // [esp+10h] [ebp-8h]
@@ -2105,17 +2089,17 @@ int  CTradingBuildingRole::GetExportGoodAmount(int a2) {
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v3 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v3);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1742, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
-    v4 = (void *)CPile::Role(PilePtr);
-    v5 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
-    if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, v5, 8) && CTradePileRole::GetTradeRoleType(v4) == 3 && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 )
+    v4 = (CTradePileRole *)CPile::Role(PilePtr);
+    v5 = ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr);
+    if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, v5, 8) != 0 && CTradePileRole::GetTradeRoleType(v4) == 3 && ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) == a2 )
     {
-      v6 += (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
+      v6 += PilePtr->Amount(PilePtr);
     }
   }
   return v6;
@@ -2127,7 +2111,7 @@ int  CTradingBuildingRole::GetExportGoodAmount(int a2) {
 int  CTradingBuildingRole::GetExportResGoodAmount(int a2) {
   
   unsigned __int16 *v3; // eax
-  void *v4; // [esp+0h] [ebp-18h]
+  CTradePileRole *v4; // [esp+0h] [ebp-18h]
   int v5; // [esp+4h] [ebp-14h]
   int v6; // [esp+8h] [ebp-10h]
   signed int i; // [esp+10h] [ebp-8h]
@@ -2142,17 +2126,17 @@ int  CTradingBuildingRole::GetExportResGoodAmount(int a2) {
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v3 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v3);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 1773, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
-    v4 = (void *)CPile::Role(PilePtr);
-    v5 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
-    if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, v5, 8) && CTradePileRole::GetTradeRoleType(v4) == 4 && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 )
+    v4 = (CTradePileRole *)CPile::Role(PilePtr);
+    v5 = ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr);
+    if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, v5, 8) != 0 && CTradePileRole::GetTradeRoleType(v4) == 4 && ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) == a2 )
     {
-      v6 += (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
+      v6 += PilePtr->Amount(PilePtr);
     }
   }
   return v6;
@@ -2165,12 +2149,12 @@ void  CTradingBuildingRole::CheckTradingStatus(void) {
   
   bool CanWalk; // [esp+6h] [ebp-2h]
 
-  if ( *((_WORD *)this + 191) )
+  if ( *((_WORD *)this + 191) != 0 )
   {
-    CanWalk = CInternationalTrader::CanWalk(this[171], *((unsigned __int16 *)this + 3), *((unsigned __int16 *)this + 191));
-    if ( !CInternationalTrader::CheckGoodMatch(this[171], *((unsigned __int16 *)this + 3), *((unsigned __int16 *)this + 191)) || !CanWalk )
+    CanWalk = CInternationalTrader::CanWalk(*(this + 171), *((unsigned __int16 *)this + 3), *((unsigned __int16 *)this + 191));
+    if ( !CInternationalTrader::CheckGoodMatch(*(this + 171), *((unsigned __int16 *)this + 3), *((unsigned __int16 *)this + 191)) || !CanWalk )
     {
-      CTradingBuildingRole::DisableTranding((CTradingBuildingRole *)this);
+      ((void (__thiscall *)(CTradingBuildingRole *))CTradingBuildingRole::DisableTranding)((CTradingBuildingRole *)this);
     }
   }
 }
@@ -2185,12 +2169,12 @@ void  CTradingBuildingRole::CheckPiles(void) {
   int v3; // [esp+0h] [ebp-18h]
   unsigned __int8 *v4; // [esp+4h] [ebp-14h]
   signed int i; // [esp+8h] [ebp-10h]
-  void *v7; // [esp+10h] [ebp-8h]
+  CTradePileRole *v7; // [esp+10h] [ebp-8h]
   CPile *PilePtr; // [esp+14h] [ebp-4h]
 
-  result = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+  result = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
   v4 = result;
-  if ( !result )
+  if ( result == 0 )
   {
     result = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2005, "pBuilding!=NULL");
     if ( result == (unsigned __int8 *)1 )
@@ -2198,41 +2182,40 @@ void  CTradingBuildingRole::CheckPiles(void) {
       __debugbreak();
     }
   }
-  if ( !v4 )
+  if ( v4 != 0 )
   {
-    return result;
-  }
-  v3 = IEntity::OwnerId(v4);
-  for ( i = 0;
-        ;
-        ++i )
-  {
-    result = (unsigned __int8 *)*(char *)(*((_DWORD *)this + 94) + 57);
-    if ( i >= (int)result )
+    v3 = IEntity::OwnerId((IEntity *)v4);
+    for ( i = 0;
+          ;
+          ++i )
     {
-      break;
-    }
-    v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
-    PilePtr = CPileMgr::GetPilePtr(*v2);
-    if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2013, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
-    {
-      __debugbreak();
-    }
-    v7 = (void *)CPile::Role(PilePtr);
-    if ( !(*(int (__thiscall **)(CPile *, int))(*(_DWORD *)PilePtr + 40))(PilePtr, v3) && CTradePileRole::GetTradeRoleType(v7) == 2 )
-    {
-      CTradePileRole::SetTradeRoleType(v7, 0);
-      IAnimatedEntity::RegisterForLogicUpdate(1);
-      CPile::SetGoodType(PilePtr, 0);
-    }
-    if ( !CTradePileRole::GetTradeRoleType(v7) && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) > 0 && !*((_WORD *)this + 191) )
-    {
-      CTradePileRole::SetTradeRoleType(v7, 2);
-    }
-    if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) && !*((_BYTE *)this + (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) + 427) && CTradePileRole::GetTradeRoleType(v7) == 1 )
-    {
-      CTradePileRole::SetTradeRoleType(v7, 2);
-      IAnimatedEntity::RegisterForLogicUpdate(1);
+      result = (unsigned __int8 *)*(char *)(*((_DWORD *)this + 94) + 57);
+      if ( i >= (int)result )
+      {
+        break;
+      }
+      v2 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
+      PilePtr = CPileMgr::GetPilePtr(*v2);
+      if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2013, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
+      {
+        __debugbreak();
+      }
+      v7 = (CTradePileRole *)CPile::Role(PilePtr);
+      if ( ((int (__thiscall *)(CPile *, int))PilePtr->Amount)(PilePtr, v3) == 0 && CTradePileRole::GetTradeRoleType(v7) == 2 )
+      {
+        CTradePileRole::SetTradeRoleType(v7, 0);
+        ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
+        CPile::SetGoodType(PilePtr, 0);
+      }
+      if ( CTradePileRole::GetTradeRoleType(v7) == 0 && PilePtr->Amount(PilePtr) > 0 && *((_WORD *)this + 191) == 0 )
+      {
+        CTradePileRole::SetTradeRoleType(v7, 2);
+      }
+      if ( PilePtr->Amount(PilePtr) != 0 && *((_BYTE *)this + ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) + 427) == 0 && CTradePileRole::GetTradeRoleType(v7) == 1 )
+      {
+        CTradePileRole::SetTradeRoleType(v7, 2);
+        ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
+      }
     }
   }
   return result;
@@ -2266,27 +2249,27 @@ void  CTradingBuildingRole::SetNewTraderTarget(int a2) {
     switch ( v4 )
     {
       case 1:
-        VehiclePtr = CVehicleMgr::GetVehiclePtr(v3);
+        VehiclePtr = (CTransportShip *)CVehicleMgr::GetVehiclePtr(v3);
         if ( !CTransportShip::IsNeutralTrader(VehiclePtr) && CTransportShip::GetJobType(VehiclePtr) == 2 )
         {
-          CTransportShip::SetTargetHarbourID(VehiclePtr, a2);
+          CTransportShip::SetTargetHarbourID(VehiclePtr, (int)a2);
         }
         break;
       case 2:
-        SettlerPtr = CSettlerMgr::GetSettlerPtr(v3);
-        v10 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
+        SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(v3);
+        v10 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
         if ( !CDonkeyRole::IsNeutralTrader(v10) && CDonkeyRole::GetJobType(v10) == 2 )
         {
           CDonkeyRole::SetTargetBuildingID(v10, (int)a2);
         }
         break;
       case 3:
-        v12 = CVehicleMgr::GetVehiclePtr(v3);
-        if ( v12 )
+        v12 = (struct CVehicle *)CVehicleMgr::GetVehiclePtr(v3);
+        if ( v12 != 0 )
         {
-          if ( CCart::GetJobType(v12) == 2 )
+          if ( CCart::GetJobType((CCart *)v12) == 2 )
           {
-            CCart::SetTargetBuildingID(v12, a2);
+            CCart::SetTargetBuildingID((CMFCPopupMenu *)v12, a2);
           }
         }
         else
@@ -2294,25 +2277,27 @@ void  CTradingBuildingRole::SetNewTraderTarget(int a2) {
           CTradingBuildingRole::UnregisterIncomingTrader((CTradingBuildingRole *)this, v3, v4);
         }
         break;
+      default:
+        break;
     }
   }
-  if ( *(_BYTE *)(this + 636) )
+  if ( *(_BYTE *)(this + 636) != 0 )
   {
-    v7 = CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 632));
-    CTransportShip::SetTargetHarbourID(v7, a2);
+    v7 = (CTransportShip *)CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 632));
+    CTransportShip::SetTargetHarbourID(v7, (int)a2);
   }
-  else if ( *(_BYTE *)(this + 660) )
+  else if ( *(_BYTE *)(this + 660) != 0 )
   {
-    v9 = CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 656));
-    if ( v9 )
+    v9 = (struct CVehicle *)CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 656));
+    if ( v9 != 0 )
     {
-      CCart::SetTargetBuildingID(v9, a2);
+      CCart::SetTargetBuildingID((CMFCPopupMenu *)v9, a2);
     }
   }
-  else if ( *(_BYTE *)(this + 648) )
+  else if ( *(_BYTE *)(this + 648) != 0 )
   {
-    v6 = CSettlerMgr::GetSettlerPtr(*(_DWORD *)(this + 644));
-    v5 = (CDonkeyRole *)CSettler::Role(v6);
+    v6 = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*(_DWORD *)(this + 644));
+    v5 = (CDonkeyRole *)CSettler::Role((CSettler *)v6);
     CDonkeyRole::SetTargetBuildingID(v5, (int)a2);
   }
 }
@@ -2325,12 +2310,12 @@ int  CTradingBuildingRole::GetTargetBuildingAvailableSpace(int a2, int a3) {
   CTradingBuildingRole *v4; // [esp+4h] [ebp-8h]
   unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-4h]
 
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 0;
   }
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
-  v4 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
+  v4 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
   return CTradingBuildingRole::GetGoodSpaceAmount(v4, a3);
 }
 
@@ -2368,52 +2353,51 @@ bool  CTradingBuildingRole::RequestVehicle(class CBuilding * a2, bool a3) {
     }
   }
   TargetBuildingID = CTradingBuildingRole::GetTargetBuildingID(this, a3);
-  if ( !TargetBuildingID )
+  if ( TargetBuildingID != 0 )
   {
-    return v12;
-  }
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, TargetBuildingID);
-  v6 = IEntity::Type((unsigned __int16 *)BuildingPtr);
-  v5 = IEntity::Type((unsigned __int16 *)a2);
-  if ( v6 == 32 && v5 == 32 )
-  {
-    if ( CTradingBuildingRole::RequestTradeShip(this, a2, (struct CBuilding *)BuildingPtr, a3) )
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, TargetBuildingID);
+    v6 = IEntity::Type((IEntity *)BuildingPtr);
+    v5 = IEntity::Type(a2);
+    if ( v6 == 32 && v5 == 32 )
     {
-      return 1;
-    }
-  }
-  else if ( v6 == 33 || v5 == 33 )
-  {
-    if ( a3 )
-    {
-      if ( CTradingBuildingRole::RequestDonkey(this, a2, (struct CBuilding *)BuildingPtr, a3) )
+      if ( CTradingBuildingRole::RequestTradeShip(this, a2, (struct CBuilding *)BuildingPtr, a3) )
       {
         return 1;
       }
     }
-    else
+    else if ( v6 == 33 || v5 == 33 )
     {
-      v4 = CTradingBuildingRole::CalcNrExportGoods(this, 0);
-      if ( v4 )
+      if ( a3 )
       {
-        if ( v4 <= 16 )
+        if ( CTradingBuildingRole::RequestDonkey(this, a2, (struct CBuilding *)BuildingPtr, a3) )
         {
-          if ( CTradingBuildingRole::RequestDonkey(this, a2, (struct CBuilding *)BuildingPtr, 0) )
+          return 1;
+        }
+      }
+      else
+      {
+        v4 = CTradingBuildingRole::CalcNrExportGoods(this, 0);
+        if ( v4 != 0 )
+        {
+          if ( v4 <= 16 )
           {
-            return 1;
+            if ( CTradingBuildingRole::RequestDonkey(this, a2, (struct CBuilding *)BuildingPtr, 0) )
+            {
+              return 1;
+            }
+            else if ( CTradingBuildingRole::RequestCart(this, a2, (struct CBuilding *)BuildingPtr, 0) )
+            {
+              return 1;
+            }
           }
           else if ( CTradingBuildingRole::RequestCart(this, a2, (struct CBuilding *)BuildingPtr, 0) )
           {
             return 1;
           }
-        }
-        else if ( CTradingBuildingRole::RequestCart(this, a2, (struct CBuilding *)BuildingPtr, 0) )
-        {
-          return 1;
-        }
-        else if ( !CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 3, 0) && CTradingBuildingRole::RequestDonkey(this, a2, (struct CBuilding *)BuildingPtr, 0) )
-        {
-          return 1;
+          else if ( CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 3, 0) == 0 && CTradingBuildingRole::RequestDonkey(this, a2, (struct CBuilding *)BuildingPtr, 0) )
+          {
+            return 1;
+          }
         }
       }
     }
@@ -2431,36 +2415,35 @@ bool  CTradingBuildingRole::IsVehicleRequested(class CBuilding * a2, bool a3) {
   unsigned __int8 *BuildingPtr; // [esp+10h] [ebp-Ch]
   char v9; // [esp+1Bh] [ebp-1h]
 
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2251, "_pBuilding!=NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2251, "_pBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 0;
   }
   v9 = 0;
   if ( a3 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
   }
   else
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 190));
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 190));
   }
-  if ( !BuildingPtr )
+  if ( BuildingPtr != 0 )
   {
-    return v9;
-  }
-  v6 = IEntity::Type((unsigned __int16 *)BuildingPtr);
-  v5 = IEntity::Type((unsigned __int16 *)a2);
-  if ( v6 == 32 && v5 == 32 )
-  {
-    return CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 1, a3) != 0;
-  }
-  else if ( v6 == 33 || v5 == 33 )
-  {
-    return CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 3, a3) || CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 2, a3);
+    v6 = IEntity::Type((IEntity *)BuildingPtr);
+    v5 = IEntity::Type(a2);
+    if ( v6 == 32 && v5 == 32 )
+    {
+      return CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 1, a3) != 0;
+    }
+    else if ( v6 == 33 || v5 == 33 )
+    {
+      return CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 3, a3) != 0 || CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 2, a3) != 0;
+    }
   }
   return v9;
 }
@@ -2476,20 +2459,19 @@ bool  CTradingBuildingRole::IsVehicleAtBuilding(class CBuilding * a2) {
   char v7; // [esp+13h] [ebp-1h]
 
   v7 = 0;
-  if ( !*((_WORD *)this + 190) )
+  if ( *((_WORD *)this + 190) != 0 )
   {
-    return v7;
-  }
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 190));
-  v5 = IEntity::Type((unsigned __int16 *)BuildingPtr);
-  v4 = IEntity::Type(a2);
-  if ( v5 == 32 && v4 == 32 )
-  {
-    return CTradingBuildingRole::IsShipInHarbour(this, (struct CBuilding *)a2);
-  }
-  else if ( (v5 == 33 || v4 == 33) && (CTradingBuildingRole::IsDonkeyAtBuilding(this, (struct CBuilding *)a2) || CTradingBuildingRole::IsCartAtBuilding(this, (struct CBuilding *)a2)) )
-  {
-    return 1;
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 190));
+    v5 = IEntity::Type((IEntity *)BuildingPtr);
+    v4 = IEntity::Type((IEntity *)a2);
+    if ( v5 == 32 && v4 == 32 )
+    {
+      return CTradingBuildingRole::IsShipInHarbour(this, (struct CBuilding *)a2);
+    }
+    else if ( (v5 == 33 || v4 == 33) && (CTradingBuildingRole::IsDonkeyAtBuilding(this, (struct CBuilding *)a2) || CTradingBuildingRole::IsCartAtBuilding(this, (struct CBuilding *)a2)) )
+    {
+      return 1;
+    }
   }
   return v7;
 }
@@ -2502,7 +2484,7 @@ void  CTradingBuildingRole::LoadVehicle(void) {
   int v2; // [esp+4h] [ebp-4h]
 
   v2 = CTradingBuildingRole::DetermineTransportType(this);
-  if ( v2 )
+  if ( v2 != 0 )
   {
     if ( v2 == 1 )
     {
@@ -2552,18 +2534,18 @@ bool  CTradingBuildingRole::IsLoadingFinished(void) {
   IsNeutralTrader = 0;
   v23 = 1;
   v18 = 0;
-  if ( !*((_BYTE *)this + 636) && !*((_BYTE *)this + 648) && !*((_BYTE *)this + 660) )
+  if ( *((_BYTE *)this + 636) == 0 && *((_BYTE *)this + 648) == 0 && *((_BYTE *)this + 660) == 0 )
   {
     return 0;
   }
-  if ( *((_BYTE *)this + 636) )
+  if ( *((_BYTE *)this + 636) != 0 )
   {
-    VehiclePtr = CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 158));
-    if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2394, "pShip") == 1 )
+    VehiclePtr = (CTransportShip *)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 158));
+    if ( VehiclePtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2394, "pShip") == 1 )
     {
       __debugbreak();
     }
-    if ( VehiclePtr )
+    if ( VehiclePtr != 0 )
     {
       IsNeutralTrader = CTransportShip::IsNeutralTrader(VehiclePtr);
       if ( CTransportShip::IsFull(VehiclePtr) )
@@ -2572,44 +2554,44 @@ bool  CTradingBuildingRole::IsLoadingFinished(void) {
       }
     }
   }
-  else if ( *((_BYTE *)this + 648) )
+  else if ( *((_BYTE *)this + 648) != 0 )
   {
     if ( !CMapObjectMgr::ValidEntityId(*((_DWORD *)this + 161)) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2405, "g_pMapObjectMgr->ValidEntityId(m_iDonkeyId)") == 1 )
     {
       __debugbreak();
     }
-    SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 161));
-    if ( !SettlerPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2407, "pDonkey!=NULL") == 1 )
+    SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*((_DWORD *)this + 161));
+    if ( SettlerPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2407, "pDonkey!=NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2409, "pDonkey->Type() == SETTLER_DONKEY") == 1 )
+    if ( IEntity::Type((IEntity *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2409, "pDonkey->Type() == SETTLER_DONKEY") == 1 )
     {
       __debugbreak();
     }
-    v10 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
+    v10 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
     IsNeutralTrader = CDonkeyRole::IsNeutralTrader(v10);
-    if ( CDonkeyRole::IsFull(v10) )
+    if ( CDonkeyRole::IsFull(v10) != 0 )
     {
       return 1;
     }
   }
-  else if ( *((_BYTE *)this + 660) )
+  else if ( *((_BYTE *)this + 660) != 0 )
   {
-    v16 = CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 164));
-    if ( !v16 )
+    v16 = (CCart *)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 164));
+    if ( v16 == 0 )
     {
       *((_DWORD *)this + 164) = 0;
       *((_BYTE *)this + 660) = 0;
       return 0;
     }
     IsNeutralTrader = CCart::IsNeutralTrader(v16);
-    if ( CCart::IsFull(v16) )
+    if ( CCart::IsFull(v16) != 0 )
     {
       return 1;
     }
   }
-  if ( IsNeutralTrader )
+  if ( IsNeutralTrader != 0 )
   {
     v11 = *((unsigned __int16 *)this + 191);
   }
@@ -2621,65 +2603,65 @@ bool  CTradingBuildingRole::IsLoadingFinished(void) {
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v2 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v2);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2445, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
-    v17 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
+    v17 = ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr);
     v14 = (pairNode *)CPile::Role(PilePtr);
-    if ( CTradePileRole::GetTradeRoleType(v14) == 1 && *((_BYTE *)this + v17 + 470) && *((_BYTE *)this + v17 + 427) )
+    if ( CTradePileRole::GetTradeRoleType((CTradePileRole *)v14) == 1 && *((_BYTE *)this + v17 + 470) != 0 && *((_BYTE *)this + v17 + 427) != 0 )
     {
       IsSpaceAvailable = 1;
-      if ( *((_BYTE *)this + 636) )
+      if ( *((_BYTE *)this + 636) != 0 )
       {
-        if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2457, "pShip") == 1 )
+        if ( VehiclePtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2457, "pShip") == 1 )
         {
           __debugbreak();
         }
-        if ( VehiclePtr )
+        if ( VehiclePtr != 0 )
         {
           IsSpaceAvailable = CTransportShip::IsSpaceAvailable(VehiclePtr, v17);
         }
       }
-      else if ( *((_BYTE *)this + 648) )
+      else if ( *((_BYTE *)this + 648) != 0 )
       {
-        v12 = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 161));
-        if ( !v12 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2465, "pDonkey!=NULL") == 1 )
+        v12 = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*((_DWORD *)this + 161));
+        if ( v12 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2465, "pDonkey!=NULL") == 1 )
         {
           __debugbreak();
         }
-        if ( v12 )
+        if ( v12 != 0 )
         {
-          v8 = (CDonkeyRole *)CSettler::Role(v12);
+          v8 = (CDonkeyRole *)CSettler::Role((CSettler *)v12);
           IsSpaceAvailable = CDonkeyRole::IsSpaceAvailable(v8, v17);
         }
       }
-      else if ( *((_BYTE *)this + 660) )
+      else if ( *((_BYTE *)this + 660) != 0 )
       {
         IsSpaceAvailable = CCart::IsSpaceAvailable(v16, v17);
       }
-      if ( IsSpaceAvailable && CTradingBuildingRole::GetTargetBuildingAvailableSpace(this, v11, v17) )
+      if ( IsSpaceAvailable != 0 && CTradingBuildingRole::GetTargetBuildingAvailableSpace(this, v11, v17) != 0 )
       {
-        v19 = v18 + (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
+        v19 = v18 + PilePtr->Amount(PilePtr);
         v18 = v19 + CPile::AmountComing(PilePtr);
-        if ( CTradePileRole::GetExpectedAmount(v14) )
+        if ( CTradePileRole::GetExpectedAmount((CTradePileRole *)v14) != 0 )
         {
-          v3 = IEntity::WorldIdx();
+          v3 = ((int (__stdcall *)())IEntity::WorldIdx)();
           v7 = CWorldManager::EcoSectorId(v3);
-          v6 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
-          v4 = (CEcoSector *)CEcoSectorMgr::operator[](v7);
+          v6 = ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr);
+          v4 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v7);
           GoodOffer = CEcoSector::GetGoodOffer(v4, v6);
-          if ( GoodOffer >= CTradePileRole::GetExpectedAmount(v14) )
+          if ( GoodOffer >= CTradePileRole::GetExpectedAmount((CTradePileRole *)v14) )
           {
-            v18 += CTradePileRole::GetExpectedAmount(v14);
+            v18 += CTradePileRole::GetExpectedAmount((CTradePileRole *)v14);
           }
         }
       }
     }
   }
-  if ( v18 )
+  if ( v18 != 0 )
   {
     return 0;
   }
@@ -2694,7 +2676,7 @@ void  CTradingBuildingRole::SendVehicle(void) {
   int v2; // [esp+4h] [ebp-4h]
 
   v2 = CTradingBuildingRole::DetermineTransportType(this);
-  if ( v2 )
+  if ( v2 != 0 )
   {
     if ( v2 == 1 )
     {
@@ -2716,15 +2698,15 @@ void  CTradingBuildingRole::SendVehicle(void) {
 // Decompiled from void __thiscall CTradingBuildingRole::UnloadVehicle(CTradingBuildingRole *this)
 void  CTradingBuildingRole::UnloadVehicle(void) {
   
-  if ( *((_BYTE *)this + 637) )
+  if ( *((_BYTE *)this + 637) != 0 )
   {
     CTradingBuildingRole::UnloadShip(this);
   }
-  if ( *((_BYTE *)this + 649) )
+  if ( *((_BYTE *)this + 649) != 0 )
   {
     CTradingBuildingRole::UnloadDonkey(this);
   }
-  if ( *((_BYTE *)this + 661) )
+  if ( *((_BYTE *)this + 661) != 0 )
   {
     CTradingBuildingRole::UnloadCart(this);
   }
@@ -2736,46 +2718,34 @@ void  CTradingBuildingRole::UnloadVehicle(void) {
 void  CTradingBuildingRole::TransportHandling(class CBuilding * a2) {
   
   unsigned __int8 *result; // eax
-  _DWORD *v3; // eax
+  IEntity *v3; // eax
   int RequestedAmount; // [esp+0h] [ebp-10h]
   int CurrentAmount; // [esp+4h] [ebp-Ch]
   signed int i; // [esp+8h] [ebp-8h]
 
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2568, "_pBuilding") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2568, "_pBuilding") == 1 )
   {
     __debugbreak();
   }
-  result = (unsigned __int8 *)IEntity::FlagBits(a2, (EntityFlag)0x1000u);
-  if ( !result )
+  result = (unsigned __int8 *)IEntity::FlagBits(a2, (EntityFlag)4096);
+  if ( result != 0 && ((unsigned __int8)CBuilding::HaveInhabitant() != 0 || (result = (unsigned __int8 *)IEntity::Type(a2)) == (unsigned __int8 *)33) )
   {
-    return result;
-  }
-  if ( !(unsigned __int8)CBuilding::HaveInhabitant() )
-  {
-    result = (unsigned __int8 *)IEntity::Type((unsigned __int16 *)a2);
-    if ( result != (unsigned __int8 *)33 )
+    for ( i = 0;
+          i < 43;
+          ++i )
     {
-      return result;
-    }
-  }
-  for ( i = 0;
-        i < 43;
-        ++i )
-  {
-    if ( *((_BYTE *)this + i + 470) )
-    {
-      CTradingBuildingRole::CheckTransport(this, a2, i);
-      CTradingBuildingRole::CheckTradingTransport(this, a2, i);
-      if ( *((_WORD *)this + 190) )
+      if ( *((_BYTE *)this + i + 470) != 0 )
       {
-        CurrentAmount = CTradingBuildingRole::GetCurrentAmount(this, i);
-        RequestedAmount = CTradingBuildingRole::GetRequestedAmount(this, i, 0);
-        if ( CurrentAmount > 0 || RequestedAmount > 0 )
+        CTradingBuildingRole::CheckTransport(this, a2, i);
+        CTradingBuildingRole::CheckTradingTransport(this, a2, i);
+        if ( *((_WORD *)this + 190) != 0 )
         {
-          v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 190));
-          if ( IEntity::FlagBits(v3, (EntityFlag)0x1000u) )
+          CurrentAmount = CTradingBuildingRole::GetCurrentAmount(this, i);
+          RequestedAmount = CTradingBuildingRole::GetRequestedAmount(this, i, 0);
+          if ( CurrentAmount > 0 || RequestedAmount > 0 )
           {
-            if ( !CTradingBuildingRole::IsVehicleRequested(this, a2, 0) )
+            v3 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 190));
+            if ( IEntity::FlagBits(v3, (EntityFlag)4096) != 0 && !CTradingBuildingRole::IsVehicleRequested(this, a2, 0) )
             {
               CTradingBuildingRole::RequestVehicle(this, a2, 0);
             }
@@ -2783,15 +2753,16 @@ void  CTradingBuildingRole::TransportHandling(class CBuilding * a2) {
         }
       }
     }
+    CTradingBuildingRole::LoadVehicle(this);
+    if ( CTradingBuildingRole::IsLoadingFinished(this) != 0 )
+    {
+      CTradingBuildingRole::SendVehicle(this);
+    }
+    CTradingBuildingRole::CheckTradingStatus((CInternationalTrader **)this);
+    CTradingBuildingRole::UnloadVehicle(this);
+    return (unsigned __int8 *)CTradingBuildingRole::CheckPiles(this);
   }
-  CTradingBuildingRole::LoadVehicle(this);
-  if ( CTradingBuildingRole::IsLoadingFinished(this) )
-  {
-    CTradingBuildingRole::SendVehicle(this);
-  }
-  CTradingBuildingRole::CheckTradingStatus((CInternationalTrader **)this);
-  CTradingBuildingRole::UnloadVehicle(this);
-  return CTradingBuildingRole::CheckPiles(this);
+  return result;
 }
 
 
@@ -2826,18 +2797,18 @@ void  CTradingBuildingRole::CancelIncomingChargeTraders(void) {
     {
       case 1:
         v6 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v3);
-        if ( IEntity::ObjType(v6) == 2 )
+        if ( IEntity::ObjType((IEntity *)v6) == SHIP_OBJ )
         {
-          VehiclePtr = CVehicleMgr::GetVehiclePtr(v3);
-          if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2641, "pShip != NULL") == 1 )
+          VehiclePtr = (CTransportShip *)CVehicleMgr::GetVehiclePtr(v3);
+          if ( VehiclePtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2641, "pShip != NULL") == 1 )
           {
             __debugbreak();
           }
-          if ( VehiclePtr )
+          if ( VehiclePtr != 0 )
           {
             if ( CTransportShip::GetJobType(VehiclePtr) == 2 )
             {
-              CTransportShip::DepartHarbourDestroyed(VehiclePtr);
+              CTransportShip::DepartHarbourDestroyed((IEntity *)VehiclePtr);
               CTransportShip::TargetHarbourDestroyed(VehiclePtr);
               CTradingBuildingRole::UnregisterIncomingTrader(this, v3, 1);
               --i;
@@ -2851,8 +2822,8 @@ void  CTradingBuildingRole::CancelIncomingChargeTraders(void) {
         }
         break;
       case 2:
-        SettlerPtr = CSettlerMgr::GetSettlerPtr(v3);
-        v8 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
+        SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(v3);
+        v8 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
         if ( CDonkeyRole::GetJobType(v8) == 2 )
         {
           CDonkeyRole::DepartBuildingDestroyed(v8);
@@ -2869,17 +2840,16 @@ void  CTradingBuildingRole::CancelIncomingChargeTraders(void) {
         }
         break;
       case 3:
-        v7 = CVehicleMgr::GetVehiclePtr(v3);
-        if ( v7 )
+        v7 = (CCart *)CVehicleMgr::GetVehiclePtr(v3);
+        if ( v7 != 0 && CCart::GetJobType(v7) == 2 )
         {
-          if ( CCart::GetJobType(v7) == 2 )
-          {
-            CCart::DepartBuildingDestroyed(v7);
-            CCart::TargetBuildingDestroyed(v7);
-            CTradingBuildingRole::UnregisterIncomingTrader(this, v3, v4);
-            --i;
-          }
+          CCart::DepartBuildingDestroyed(v7);
+          CCart::TargetBuildingDestroyed(v7);
+          CTradingBuildingRole::UnregisterIncomingTrader(this, v3, v4);
+          --i;
         }
+        break;
+      default:
         break;
     }
   }
@@ -2916,7 +2886,7 @@ void  CTradingBuildingRole::CancelIncomingDeliverTraders(void) {
     switch ( v4 )
     {
       case 1:
-        VehiclePtr = CVehicleMgr::GetVehiclePtr(v3);
+        VehiclePtr = (CTransportShip *)CVehicleMgr::GetVehiclePtr(v3);
         if ( CTransportShip::GetJobType(VehiclePtr) == 1 )
         {
           CTransportShip::TargetHarbourDestroyed(VehiclePtr);
@@ -2925,8 +2895,8 @@ void  CTradingBuildingRole::CancelIncomingDeliverTraders(void) {
         }
         break;
       case 2:
-        SettlerPtr = CSettlerMgr::GetSettlerPtr(v3);
-        v6 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
+        SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(v3);
+        v6 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
         if ( CDonkeyRole::GetJobType(v6) == 1 )
         {
           CDonkeyRole::TargetBuildingDestroyed(v6);
@@ -2935,8 +2905,8 @@ void  CTradingBuildingRole::CancelIncomingDeliverTraders(void) {
         }
         break;
       case 3:
-        v8 = CVehicleMgr::GetVehiclePtr(v3);
-        if ( v8 )
+        v8 = (CCart *)CVehicleMgr::GetVehiclePtr(v3);
+        if ( v8 != 0 )
         {
           if ( CCart::GetJobType(v8) == 1 )
           {
@@ -2950,6 +2920,8 @@ void  CTradingBuildingRole::CancelIncomingDeliverTraders(void) {
           CTradingBuildingRole::UnregisterIncomingTrader(this, v3, v4);
         }
         break;
+      default:
+        break;
     }
   }
   return result;
@@ -2960,7 +2932,7 @@ void  CTradingBuildingRole::CancelIncomingDeliverTraders(void) {
 // Decompiled from void __thiscall CTradingBuildingRole::CancelLoadingVehicle(CTradingBuildingRole *this)
 void  CTradingBuildingRole::CancelLoadingVehicle(void) {
   
-  _DWORD *v1; // eax
+  IEntity *v1; // eax
   CDonkeyRole *v2; // [esp+0h] [ebp-18h]
   unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-14h]
   CCart *v4; // [esp+8h] [ebp-10h]
@@ -2968,12 +2940,12 @@ void  CTradingBuildingRole::CancelLoadingVehicle(void) {
   bool v7; // [esp+17h] [ebp-1h]
 
   v7 = 0;
-  if ( *((_WORD *)this + 190) )
+  if ( *((_WORD *)this + 190) != 0 )
   {
-    v1 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 190));
+    v1 = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 190));
     v7 = IEntity::FlagBits(v1, (EntityFlag)&loc_3000000) != 0;
   }
-  if ( *((_BYTE *)this + 636) )
+  if ( *((_BYTE *)this + 636) != 0 )
   {
     if ( v7 )
     {
@@ -2981,11 +2953,11 @@ void  CTradingBuildingRole::CancelLoadingVehicle(void) {
     }
     else
     {
-      VehiclePtr = CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 158));
-      CTransportShip::TryToGoHome(VehiclePtr);
+      VehiclePtr = (CTransportShip *)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 158));
+      CTransportShip::TryToGoHome((Y16X16 **)VehiclePtr);
     }
   }
-  else if ( *((_BYTE *)this + 660) )
+  else if ( *((_BYTE *)this + 660) != 0 )
   {
     if ( v7 )
     {
@@ -2993,11 +2965,11 @@ void  CTradingBuildingRole::CancelLoadingVehicle(void) {
     }
     else
     {
-      v4 = CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 164));
+      v4 = (CCart *)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 164));
       CCart::TryToGoHome(v4);
     }
   }
-  else if ( *((_BYTE *)this + 648) )
+  else if ( *((_BYTE *)this + 648) != 0 )
   {
     if ( v7 )
     {
@@ -3005,8 +2977,8 @@ void  CTradingBuildingRole::CancelLoadingVehicle(void) {
     }
     else
     {
-      SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 161));
-      v2 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
+      SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*((_DWORD *)this + 161));
+      v2 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
       CDonkeyRole::SetFree(v2);
     }
   }
@@ -3022,20 +2994,20 @@ int  CTradingBuildingRole::GetVehicleAtBuildingFreeSpaceGood(int a2) {
   unsigned __int8 *SettlerPtr; // [esp+8h] [ebp-Ch]
   CTransportShip *VehiclePtr; // [esp+Ch] [ebp-8h]
 
-  if ( *(_BYTE *)(this + 636) )
+  if ( *(_BYTE *)(this + 636) != 0 )
   {
-    VehiclePtr = CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 632));
+    VehiclePtr = (CTransportShip *)CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 632));
     return CTransportShip::GetAvailableSpace(VehiclePtr, a2);
   }
-  else if ( *(_BYTE *)(this + 648) )
+  else if ( *(_BYTE *)(this + 648) != 0 )
   {
-    SettlerPtr = CSettlerMgr::GetSettlerPtr(*(_DWORD *)(this + 644));
-    v3 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
+    SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*(_DWORD *)(this + 644));
+    v3 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
     return CDonkeyRole::GetAvailableSpace(v3, a2);
   }
-  else if ( *(_BYTE *)(this + 660) )
+  else if ( *(_BYTE *)(this + 660) != 0 )
   {
-    v4 = CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 656));
+    v4 = (CCart *)CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 656));
     return CCart::GetAvailableSpace(v4, a2);
   }
   else
@@ -3054,20 +3026,20 @@ int  CTradingBuildingRole::GetVehicleAtBuildingFreeSpace(void) {
   unsigned __int8 *SettlerPtr; // [esp+8h] [ebp-Ch]
   CTransportShip *VehiclePtr; // [esp+Ch] [ebp-8h]
 
-  if ( *(_BYTE *)(this + 636) )
+  if ( *(_BYTE *)(this + 636) != 0 )
   {
-    VehiclePtr = CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 632));
+    VehiclePtr = (CTransportShip *)CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 632));
     return CTransportShip::GetAvailableSpace(VehiclePtr);
   }
-  else if ( *(_BYTE *)(this + 648) )
+  else if ( *(_BYTE *)(this + 648) != 0 )
   {
-    SettlerPtr = CSettlerMgr::GetSettlerPtr(*(_DWORD *)(this + 644));
-    v3 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
+    SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*(_DWORD *)(this + 644));
+    v3 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
     return CDonkeyRole::GetAvailableSpace(v3);
   }
-  else if ( *(_BYTE *)(this + 660) )
+  else if ( *(_BYTE *)(this + 660) != 0 )
   {
-    v2 = CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 656));
+    v2 = (CCart *)CVehicleMgr::GetVehiclePtr(*(_DWORD *)(this + 656));
     return CCart::GetAvailableSpace(v2);
   }
   else
@@ -3086,16 +3058,16 @@ void  CTradingBuildingRole::ClearRegisterTargetBuildings(void) {
   CTradingBuildingRole *v3; // [esp+0h] [ebp-Ch]
   unsigned __int8 *BuildingPtr; // [esp+4h] [ebp-8h]
 
-  if ( *((_WORD *)this + 191) )
+  if ( *((_WORD *)this + 191) != 0 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
-    if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4775, "pBuilding!=NULL") == 1 )
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
+    if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4775, "pBuilding!=NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( BuildingPtr )
+    if ( BuildingPtr != 0 )
     {
-      v3 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
+      v3 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
       BuildingID = CTradingBuildingRole::GetBuildingID(this);
       CTradingBuildingRole::DeteachTradingBuilding(v3, BuildingID);
     }
@@ -3117,12 +3089,11 @@ void  CTradingBuildingRole::DeteachTradingBuilding(int a2) {
     __debugbreak();
   }
   result = this;
-  if ( *((unsigned __int16 *)this + 191) != a2 )
+  if ( *((unsigned __int16 *)this + 191) == a2 )
   {
-    return result;
+    result = this;
+    *((_WORD *)this + 191) = 0;
   }
-  result = this;
-  *((_WORD *)this + 191) = 0;
   return result;
 }
 
@@ -3141,22 +3112,19 @@ void  CTradingBuildingRole::SetTradingBuildingID(int a2) {
   }
   CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
   TickCounter = CGameData::GetTickCounter(g_pGameData);
-  v2 = IEntity::ID();
+  v2 = ((int (__stdcall *)())IEntity::ID)();
   BBSupportTracePrintF(0, "SetTradungBuilding %d for building %d at tick %d", a2, v2, TickCounter);
-  if ( !*((_WORD *)this + 191) )
+  if ( *((_WORD *)this + 191) == 0 )
   {
     *((_WORD *)this + 191) = a2;
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-    if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4813, "pBuilding!= NULL") == 1 )
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+    if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4813, "pBuilding!= NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( BuildingPtr )
+    if ( BuildingPtr != 0 && IEntity::IsSelected((IEntity *)BuildingPtr) )
     {
-      if ( IEntity::IsSelected((IEntity *)BuildingPtr) )
-      {
-        CTradingBuildingRole::ShowTradeRoute(this);
-      }
+      CTradingBuildingRole::ShowTradeRoute(this);
     }
   }
 }
@@ -3175,7 +3143,7 @@ bool  CTradingBuildingRole::RequestTradeShip(class CBuilding * a2, class CBuildi
   int v11; // eax
   int v12; // [esp-8h] [ebp-54h]
   int v13; // [esp-4h] [ebp-50h]
-  _BYTE v14[24]; // [esp+4h] [ebp-48h] BYREF
+  CEntityEvent v14; // [esp+4h] [ebp-48h] BYREF
   CEntityEvent *v15; // [esp+1Ch] [ebp-30h]
   CEntityEvent *v16; // [esp+20h] [ebp-2Ch]
   CTradingBuildingRole *v17; // [esp+24h] [ebp-28h]
@@ -3188,7 +3156,7 @@ bool  CTradingBuildingRole::RequestTradeShip(class CBuilding * a2, class CBuildi
   int v24; // [esp+48h] [ebp-4h]
 
   v21 = this;
-  if ( IEntity::Type((unsigned __int16 *)a2) != 32 )
+  if ( IEntity::Type(a2) != 32 )
   {
     return 1;
   }
@@ -3200,7 +3168,7 @@ bool  CTradingBuildingRole::RequestTradeShip(class CBuilding * a2, class CBuildi
       return 1;
     }
   }
-  if ( CTradingBuildingRole::GetNrRegisteredIncomingTraders(v21, 1, a4) )
+  if ( CTradingBuildingRole::GetNrRegisteredIncomingTraders(v21, 1, a4) != 0 )
   {
     return 0;
   }
@@ -3210,7 +3178,7 @@ bool  CTradingBuildingRole::RequestTradeShip(class CBuilding * a2, class CBuildi
   if ( v19 )
   {
     ShipIDInHarbour = CTradingBuildingRole::GetShipIDInHarbour(v21, a2);
-    if ( ShipIDInHarbour )
+    if ( ShipIDInHarbour != 0 )
     {
       NearestEntity = (CTransportShip *)CMapObjectMgr::EntityPtr(ShipIDInHarbour);
     }
@@ -3221,35 +3189,35 @@ bool  CTradingBuildingRole::RequestTradeShip(class CBuilding * a2, class CBuildi
     v13 = Y16X16::UnpackYFast(WorkingAreaPackedXY);
     v6 = CBuilding::GetWorkingAreaPackedXY(a2);
     v12 = Y16X16::UnpackXFast(v6);
-    v7 = IEntity::OwnerId((unsigned __int8 *)a2);
-    NearestEntity = CTransportMgr::GetNearestEntity(2, 3, v7, v12, v13);
+    v7 = IEntity::OwnerId(a2);
+    NearestEntity = (CTransportShip *)CTransportMgr::GetNearestEntity(2, 3, v7, v12, v13);
   }
-  if ( !NearestEntity )
+  if ( NearestEntity == 0 )
   {
     return 0;
   }
   v22 = NearestEntity;
-  if ( CTransportShip::GetJobType(NearestEntity) )
+  if ( CTransportShip::GetJobType(NearestEntity) != 0 )
   {
     return 0;
   }
-  v8 = IEntity::ID();
+  v8 = ((int (__stdcall *)())IEntity::ID)();
   CTransportShip::SetDepartHarbourID(v22, v8);
-  v9 = IEntity::ID();
+  v9 = ((int (__stdcall *)())IEntity::ID)();
   CTransportShip::SetTargetHarbourID(v22, v9);
   CTransportShip::SetJobType(v22, 2);
-  v10 = IEntity::ID();
+  v10 = ((int (__stdcall *)())IEntity::ID)();
   CTradingBuildingRole::RegisterIncomingTrader(v21, v10, 1, a4);
   CTransportShip::MemHomePosition(v22);
   CTransportShip::SetGoToSource(v22, 1);
   CTransportShip::SetGoToTarget(v22, 0);
   v11 = CBuilding::GetWorkingAreaPackedXY(a2);
-  v16 = CEntityEvent::CEntityEvent((CEntityEvent *)v14, 0x11u, 13, 0, v11, 0);
+  v16 = CEntityEvent::CEntityEvent(&v14, 0x11u, 13, 0, v11, 0);
   v15 = v16;
   v24 = 0;
   (*(void (__thiscall **)(CTransportShip *, CEntityEvent *))(*(_DWORD *)v22 + 80))(v22, v16);
   v24 = -1;
-  CEntityEvent::~CEntityEvent(v14);
+  CEntityEvent::~CEntityEvent(&v14);
   CTransportShip::SetNeutralTraderStatus(v22, a4);
   ++*((_DWORD *)v21 + 172);
   return 1;
@@ -3270,30 +3238,30 @@ int  CTradingBuildingRole::GetShipIDInHarbour(class CBuilding * a2) {
 
   v9 = this;
   WorkingAreaPackedXY = (Y16X16 *)CBuilding::GetWorkingAreaPackedXY(a2);
-  Y16X16::UnpackXYFast(WorkingAreaPackedXY, &v6, (int *)&v7);
-  if ( CWarMap::NumberOfEntitiesXY(1, v6, v7) )
+  Y16X16::UnpackXYFast((int)WorkingAreaPackedXY, (int *)&v6, (int *)&v7);
+  if ( CWarMap::NumberOfEntitiesXY(1, v6, v7) != 0 )
   {
     EntityIdXY = CWarMap::FirstEntityIdXY(1, v6, v7);
-    if ( !EntityIdXY && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2999, "iEntityID != 0") == 1 )
+    if ( EntityIdXY == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 2999, "iEntityID != 0") == 1 )
     {
       __debugbreak();
     }
     VehiclePtr = (unsigned __int16 *)CVehicleMgr::GetVehiclePtr(EntityIdXY);
-    if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3001, "pVehicle != NULL") == 1 )
+    if ( VehiclePtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3001, "pVehicle != NULL") == 1 )
     {
       __debugbreak();
     }
-    v3 = IEntity::Type(VehiclePtr);
+    v3 = IEntity::Type((IEntity *)VehiclePtr);
     if ( CTradingBuildingRole::IsShip(v9, v3) )
     {
       return EntityIdXY;
     }
   }
-  if ( *((_DWORD *)v9 + 160) )
+  if ( *((_DWORD *)v9 + 160) != 0 )
   {
     return *((_DWORD *)v9 + 160);
   }
-  if ( *((_DWORD *)v9 + 158) )
+  if ( *((_DWORD *)v9 + 158) != 0 )
   {
     return *((_DWORD *)v9 + 158);
   }
@@ -3315,29 +3283,28 @@ bool  CTradingBuildingRole::IsShipInHarbour(class CBuilding * a2) {
 
   v9 = this;
   WorkingAreaPackedXY = (Y16X16 *)CBuilding::GetWorkingAreaPackedXY(a2);
-  Y16X16::UnpackXYFast(WorkingAreaPackedXY, &v7, (int *)&v8);
-  if ( *((_DWORD *)v9 + 160) || *((_DWORD *)v9 + 158) )
+  Y16X16::UnpackXYFast((int)WorkingAreaPackedXY, (int *)&v7, (int *)&v8);
+  if ( *((_DWORD *)v9 + 160) != 0 || *((_DWORD *)v9 + 158) != 0 )
   {
     return 1;
   }
-  if ( !CWarMap::NumberOfEntitiesXY(1, v7, v8) )
+  if ( CWarMap::NumberOfEntitiesXY(1, v7, v8) != 0 )
   {
-    return 0;
-  }
-  EntityIdXY = CWarMap::FirstEntityIdXY(1, v7, v8);
-  if ( !EntityIdXY && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3039, "iEntityID != 0") == 1 )
-  {
-    __debugbreak();
-  }
-  VehiclePtr = (unsigned __int16 *)CVehicleMgr::GetVehiclePtr(EntityIdXY);
-  if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3041, "pVehicle != NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  v4 = IEntity::Type(VehiclePtr);
-  if ( CTradingBuildingRole::IsShip(v9, v4) )
-  {
-    return 1;
+    EntityIdXY = CWarMap::FirstEntityIdXY(1, v7, v8);
+    if ( EntityIdXY == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3039, "iEntityID != 0") == 1 )
+    {
+      __debugbreak();
+    }
+    VehiclePtr = (unsigned __int16 *)CVehicleMgr::GetVehiclePtr(EntityIdXY);
+    if ( VehiclePtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3041, "pVehicle != NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    v4 = IEntity::Type((IEntity *)VehiclePtr);
+    if ( CTradingBuildingRole::IsShip(v9, v4) )
+    {
+      return 1;
+    }
   }
   return 0;
 }
@@ -3354,22 +3321,22 @@ bool  CTradingBuildingRole::IsTradeShipInHarbour(class CBuilding * a2) {
   Squares *v7; // [esp+10h] [ebp-4h] BYREF
 
   WorkingAreaPackedXY = (Y16X16 *)CBuilding::GetWorkingAreaPackedXY(a2);
-  Y16X16::UnpackXYFast(WorkingAreaPackedXY, &v6, (int *)&v7);
-  if ( !CWarMap::NumberOfEntitiesXY(1, v6, v7) )
+  Y16X16::UnpackXYFast((int)WorkingAreaPackedXY, (int *)&v6, (int *)&v7);
+  if ( CWarMap::NumberOfEntitiesXY(1, v6, v7) == 0 )
   {
     return 0;
   }
   EntityIdXY = CWarMap::FirstEntityIdXY(1, v6, v7);
-  if ( !EntityIdXY && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3067, "iEntityID != 0") == 1 )
+  if ( EntityIdXY == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3067, "iEntityID != 0") == 1 )
   {
     __debugbreak();
   }
   VehiclePtr = (unsigned __int16 *)CVehicleMgr::GetVehiclePtr(EntityIdXY);
-  if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3069, "pVehicle != NULL") == 1 )
+  if ( VehiclePtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3069, "pVehicle != NULL") == 1 )
   {
     __debugbreak();
   }
-  return IEntity::Type(VehiclePtr) == 3;
+  return IEntity::Type((IEntity *)VehiclePtr) == 3;
 }
 
 
@@ -3389,7 +3356,7 @@ void  CTradingBuildingRole::StartLoadingShip(int a2) {
 
   *((_BYTE *)this + 636) = 1;
   *((_DWORD *)this + 158) = a2;
-  VehiclePtr = CVehicleMgr::GetVehiclePtr(a2);
+  VehiclePtr = (CTransportShip *)CVehicleMgr::GetVehiclePtr(a2);
   CTransportShip::SetJobType(VehiclePtr, 4);
 }
 
@@ -3402,13 +3369,13 @@ void  CTradingBuildingRole::StartUnloadingShip(int a2) {
 
   *((_BYTE *)this + 637) = 1;
   *((_DWORD *)this + 160) = a2;
-  VehiclePtr = CVehicleMgr::GetVehiclePtr(a2);
+  VehiclePtr = (CTransportShip *)CVehicleMgr::GetVehiclePtr(a2);
   CTransportShip::SetJobType(VehiclePtr, 3);
 }
 
 
 // address=[0x1525450]
-// Decompiled from struct CVehicle *__thiscall CTradingBuildingRole::LoadShip(CTradingBuildingRole *this)
+// Decompiled from struct CVehicle *__thiscall CTradingBuildingRole::LoadShip(struct CVehicle *this)
 void  CTradingBuildingRole::LoadShip(void) {
   
   struct CVehicle *result; // eax
@@ -3426,7 +3393,7 @@ void  CTradingBuildingRole::LoadShip(void) {
   int v13; // [esp+38h] [ebp-28h]
   signed int i; // [esp+3Ch] [ebp-24h]
   int v15; // [esp+40h] [ebp-20h]
-  void *v16; // [esp+44h] [ebp-1Ch]
+  CTradePileRole *v16; // [esp+44h] [ebp-1Ch]
   int ReserveAmount; // [esp+48h] [ebp-18h]
   CPile *PilePtr; // [esp+4Ch] [ebp-14h]
   CMFCBaseTabCtrl *v19; // [esp+50h] [ebp-10h]
@@ -3436,117 +3403,116 @@ void  CTradingBuildingRole::LoadShip(void) {
   char v24; // [esp+5Fh] [ebp-1h]
 
   result = this;
-  if ( !*((_BYTE *)this + 636) )
+  if ( *((_BYTE *)this + 636) != 0 )
   {
-    return result;
-  }
-  if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3)) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3140, "pBuilding") == 1 )
-  {
-    __debugbreak();
-  }
-  result = CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 158));
-  v19 = result;
-  if ( !result )
-  {
-    result = (struct CVehicle *)BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3144, "pShip");
-    if ( result == (struct CVehicle *)1 )
+    if ( (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, HIWORD(this->m_iUniqueId)) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3140, "pBuilding") == 1 )
     {
       __debugbreak();
     }
-  }
-  if ( v19 )
-  {
-    for ( i = 0;
-          ;
-          ++i )
+    result = (struct CVehicle *)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 158));
+    v19 = (CMFCBaseTabCtrl *)result;
+    if ( result == 0 )
     {
-      result = this;
-      if ( i >= *(char *)(*((_DWORD *)this + 94) + 57) )
+      result = (struct CVehicle *)BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3144, "pShip");
+      if ( result == (struct CVehicle *)1 )
       {
-        break;
+        __debugbreak();
       }
-      v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
-      PilePtr = CPileMgr::GetPilePtr(*v2);
-      v16 = (void *)CPile::Role(PilePtr);
-      v20 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
-      v3 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
-      v12 = v3 - CPile::AmountLeaving(PilePtr);
-      if ( CTransportShip::IsNeutralTrader(v19) )
+    }
+    if ( v19 != 0 )
+    {
+      for ( i = 0;
+            ;
+            ++i )
       {
-        v13 = *((unsigned __int16 *)this + 191);
-        v15 = *((char *)this + v20 + 556);
-      }
-      else
-      {
-        v13 = *((unsigned __int16 *)this + 190);
-        v15 = *((char *)this + v20 + 427);
-      }
-      if ( v15 > 0 && v12 > 0 && CTradingBuildingRole::GetTargetBuildingAvailableSpace(this, v13, v20) )
-      {
-        v22 = 0;
+        result = this;
+        if ( i >= *(char *)(*((_DWORD *)this + 94) + 57) )
+        {
+          break;
+        }
+        v2 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
+        PilePtr = CPileMgr::GetPilePtr(*v2);
+        v16 = (CTradePileRole *)CPile::Role(PilePtr);
+        v20 = ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr);
+        v3 = PilePtr->Amount(PilePtr);
+        v12 = v3 - CPile::AmountLeaving(PilePtr);
         if ( CTransportShip::IsNeutralTrader(v19) )
         {
-          if ( CTransportShip::GetTradingState(v19) == 1 )
-          {
-            v22 = CTradePileRole::GetTradeRoleType(v16) == 3;
-          }
-          if ( CTransportShip::GetTradingState(v19) == 2 )
-          {
-            v22 = CTradePileRole::GetTradeRoleType(v16) == 4;
-          }
-          v4 = IEntity::ID();
-          v24 = CInternationalTrader::CheckGoodMatch(*((_DWORD *)this + 171), v4, v13, v20) & v22;
-          v10 = CTradingBuildingRole::GetExportGoodAmount(this, v20) == 16 || CTradingBuildingRole::GetExportResGoodAmount(this, v20) == 16 || (unsigned __int8)CTransportShip::HasLoadGood(v19, v20);
-          v23 = v10 & v24;
+          v13 = *((unsigned __int16 *)this + 191);
+          v15 = *((char *)this + v20 + 556);
         }
         else
         {
-          v23 = CTradePileRole::GetTradeRoleType(v16) == 1;
+          v13 = *((unsigned __int16 *)this + 190);
+          v15 = *((char *)this + v20 + 427);
         }
-        if ( v23 && CTransportShip::IsSpaceAvailable(v19, v20) && !CTransportShip::IsFull(v19) )
+        if ( v15 > 0 && v12 > 0 && CTradingBuildingRole::GetTargetBuildingAvailableSpace((CTradingBuildingRole *)this, v13, v20) != 0 )
         {
-          if ( v12 >= v15 )
+          v22 = 0;
+          if ( CTransportShip::IsNeutralTrader(v19) )
           {
-            v9 = v15;
+            if ( CTransportShip::GetTradingState(v19) == 1 )
+            {
+              v22 = CTradePileRole::GetTradeRoleType(v16) == 3;
+            }
+            if ( CTransportShip::GetTradingState(v19) == 2 )
+            {
+              v22 = CTradePileRole::GetTradeRoleType(v16) == 4;
+            }
+            v4 = ((int (__stdcall *)())IEntity::ID)();
+            v24 = CInternationalTrader::CheckGoodMatch(*((_DWORD *)this + 171), v4, v13, v20) & v22;
+            v10 = CTradingBuildingRole::GetExportGoodAmount((CTradingBuildingRole *)this, v20) == 16 || CTradingBuildingRole::GetExportResGoodAmount((CTradingBuildingRole *)this, v20) == 16 || (unsigned __int8)CTransportShip::HasLoadGood(v19, v20) != 0;
+            v23 = v10 & v24;
           }
           else
           {
-            v9 = v12;
+            v23 = CTradePileRole::GetTradeRoleType(v16) == 1;
           }
-          ReserveAmount = v9;
-          if ( CTradePileRole::GetTradeRoleType(v16) == 4 )
+          if ( v23 != 0 && CTransportShip::IsSpaceAvailable(v19, v20) && !CTransportShip::IsFull(v19) )
           {
-            ReserveAmount = CTradePileRole::GetReserveAmount((CTradePileRole *)v16);
-          }
-          if ( CTradePileRole::GetTradeRoleType(v16) == 3 )
-          {
-            BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
-            TotalExportedGoodAmount = CTradingBuildingRole::GetTotalExportedGoodAmount(this, (struct CBuilding *)BuildingPtr);
-            if ( TotalExportedGoodAmount < ReserveAmount )
+            if ( v12 >= v15 )
             {
-              ReserveAmount = TotalExportedGoodAmount;
+              v9 = v15;
             }
-          }
-          v11 = ReserveAmount - CTransportShip::AddGood(v19, v20, ReserveAmount);
-          CPile::DecreaseUnforeseen(PilePtr, v11);
-          if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) && !CTransportShip::IsNeutralTrader(v19) )
-          {
-            CTradePileRole::SetTradeRoleType(v16, 3);
-          }
-          if ( !CTransportShip::IsNeutralTrader(v19) && *((_BYTE *)this + v20 + 427) != 100 )
-          {
-            *((_BYTE *)this + v20 + 427) -= v11;
-          }
-          if ( CTransportShip::IsNeutralTrader(v19) )
-          {
-            *((_BYTE *)this + v20 + 556) -= v11;
-            if ( CTransportShip::GetTradingState(v19) == 1 )
+            else
             {
-              v6 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
-              v7 = (CTradingBuildingRole *)CBuilding::Role(v6);
-              CTradingBuildingRole::ReserveExportPile(v7, *((unsigned __int16 *)this + 3), v20, ReserveAmount);
-              CTradingBuildingRole::ReserveImportPile(v7, ReserveAmount);
-              CTradingBuildingRole::ReserveImportPile(this, ReserveAmount);
+              v9 = v12;
+            }
+            ReserveAmount = v9;
+            if ( CTradePileRole::GetTradeRoleType(v16) == 4 )
+            {
+              ReserveAmount = CTradePileRole::GetReserveAmount(v16);
+            }
+            if ( CTradePileRole::GetTradeRoleType(v16) == 3 )
+            {
+              BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
+              TotalExportedGoodAmount = CTradingBuildingRole::GetTotalExportedGoodAmount((CTradingBuildingRole *)this, (struct CBuilding *)BuildingPtr);
+              if ( TotalExportedGoodAmount < ReserveAmount )
+              {
+                ReserveAmount = TotalExportedGoodAmount;
+              }
+            }
+            v11 = ReserveAmount - CTransportShip::AddGood((IEntity *)v19, v20, ReserveAmount);
+            CPile::DecreaseUnforeseen(PilePtr, v11);
+            if ( PilePtr->Amount(PilePtr) != 0 && !CTransportShip::IsNeutralTrader(v19) )
+            {
+              CTradePileRole::SetTradeRoleType(v16, 3);
+            }
+            if ( !CTransportShip::IsNeutralTrader(v19) && *((_BYTE *)this + v20 + 427) != 100 )
+            {
+              *((_BYTE *)this + v20 + 427) -= v11;
+            }
+            if ( CTransportShip::IsNeutralTrader(v19) )
+            {
+              *((_BYTE *)this + v20 + 556) -= v11;
+              if ( CTransportShip::GetTradingState(v19) == 1 )
+              {
+                v6 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
+                v7 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)v6);
+                CTradingBuildingRole::ReserveExportPile(v7, HIWORD(this->m_iUniqueId), v20, ReserveAmount);
+                CTradingBuildingRole::ReserveImportPile(v7, ReserveAmount);
+                CTradingBuildingRole::ReserveImportPile((CTradingBuildingRole *)this, ReserveAmount);
+              }
             }
           }
         }
@@ -3564,44 +3530,42 @@ void  CTradingBuildingRole::SendShip(void) {
   unsigned __int8 *result; // eax
   bool IsNeutralTrader; // al
   bool v3; // al
-  int BuildingID; // eax
+  unsigned int BuildingID; // eax
   CTradingBuildingRole *v5; // [esp+0h] [ebp-14h]
   int TargetBuildingID; // [esp+4h] [ebp-10h]
   unsigned __int8 *v7; // [esp+8h] [ebp-Ch]
   CTransportShip *VehiclePtr; // [esp+Ch] [ebp-8h]
 
   result = (unsigned __int8 *)this;
-  if ( !*((_DWORD *)this + 158) )
+  if ( *((_DWORD *)this + 158) != 0 )
   {
-    return result;
-  }
-  VehiclePtr = CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 158));
-  IsNeutralTrader = CTransportShip::IsNeutralTrader(VehiclePtr);
-  TargetBuildingID = CTradingBuildingRole::GetTargetBuildingID(this, IsNeutralTrader);
-  result = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, TargetBuildingID);
-  v7 = result;
-  if ( !result )
-  {
-    result = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3270, "pBuilding!=NULL");
-    if ( result == (unsigned __int8 *)1 )
+    VehiclePtr = (CTransportShip *)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 158));
+    IsNeutralTrader = CTransportShip::IsNeutralTrader(VehiclePtr);
+    TargetBuildingID = CTradingBuildingRole::GetTargetBuildingID(this, IsNeutralTrader);
+    result = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, TargetBuildingID);
+    v7 = result;
+    if ( result == 0 )
     {
-      __debugbreak();
+      result = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3270, "pBuilding!=NULL");
+      if ( result == (unsigned __int8 *)1 )
+      {
+        __debugbreak();
+      }
+    }
+    if ( v7 != 0 )
+    {
+      v5 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)v7);
+      v3 = CTransportShip::IsNeutralTrader(VehiclePtr);
+      CTradingBuildingRole::RegisterIncomingTrader(v5, *((_DWORD *)this + 158), 1, v3);
+      CTransportShip::SetJobType(VehiclePtr, 1);
+      BuildingID = CTradingBuildingRole::GetBuildingID(this);
+      CTransportShip::SetHomeID(VehiclePtr, BuildingID);
+      CTransportShip::MoveToTarget(VehiclePtr);
+      result = (unsigned __int8 *)this;
+      *((_DWORD *)this + 158) = 0;
+      *((_BYTE *)this + 636) = 0;
     }
   }
-  if ( !v7 )
-  {
-    return result;
-  }
-  v5 = (CTradingBuildingRole *)CBuilding::Role(v7);
-  v3 = CTransportShip::IsNeutralTrader(VehiclePtr);
-  CTradingBuildingRole::RegisterIncomingTrader(v5, *((_DWORD *)this + 158), 1, v3);
-  CTransportShip::SetJobType(VehiclePtr, 1);
-  BuildingID = CTradingBuildingRole::GetBuildingID(this);
-  CTransportShip::SetHomeID(VehiclePtr, BuildingID);
-  CTransportShip::MoveToTarget(VehiclePtr);
-  result = (unsigned __int8 *)this;
-  *((_DWORD *)this + 158) = 0;
-  *((_BYTE *)this + 636) = 0;
   return result;
 }
 
@@ -3634,17 +3598,17 @@ void  CTradingBuildingRole::UnloadShip(void) {
   unsigned __int8 *VehiclePtr; // [esp+30h] [ebp-Ch]
 
   v18 = 0;
-  if ( *((_DWORD *)this + 160) )
+  if ( *((_DWORD *)this + 160) != 0 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
     VehiclePtr = (unsigned __int8 *)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 160));
-    v13 = 0;
+    v13 = false;
     if ( CTransportShip::IsNeutralTrader((CTransportShip *)VehiclePtr) )
     {
-      v1 = IEntity::OwnerId(VehiclePtr);
-      if ( v1 != IEntity::OwnerId(BuildingPtr) )
+      v1 = IEntity::OwnerId((IEntity *)VehiclePtr);
+      if ( v1 != IEntity::OwnerId((IEntity *)BuildingPtr) )
       {
-        v13 = 1;
+        v13 = true;
       }
     }
     for ( i = 0;
@@ -3652,26 +3616,26 @@ void  CTradingBuildingRole::UnloadShip(void) {
           ++i )
     {
       GoodAmount = CTransportShip::GetGoodAmount((CTransportShip *)VehiclePtr, i);
-      if ( GoodAmount )
+      if ( GoodAmount != 0 )
       {
         IsNeutralTrader = CTransportShip::IsNeutralTrader((CTransportShip *)VehiclePtr);
         v10 = CTradingBuildingRole::AddGood(this, i, GoodAmount, IsNeutralTrader);
-        CTransportShip::RemoveGood((CTransportShip *)VehiclePtr, i, GoodAmount - v10);
+        CTransportShip::RemoveGood((IEntity *)VehiclePtr, i, GoodAmount - v10);
       }
       v18 += CTransportShip::GetGoodAmount((CTransportShip *)VehiclePtr, i);
     }
-    if ( v18 )
+    if ( v18 != 0 )
     {
       v19 = 0;
-      v15 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+      v15 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
       for ( j = 0;
             j < 43;
             ++j )
       {
         v17 = CTransportShip::GetGoodAmount((CTransportShip *)VehiclePtr, j);
-        if ( v17 && !CTradingBuildingRole::GetGoodSpaceAmount(this, j) )
+        if ( v17 != 0 && CTradingBuildingRole::GetGoodSpaceAmount(this, j) == 0 )
         {
-          while ( v17 )
+          while ( v17 != 0 )
           {
             if ( v17 > 8 )
             {
@@ -3685,28 +3649,28 @@ void  CTradingBuildingRole::UnloadShip(void) {
             v9 = Y16X16::UnpackYFast(v5);
             v6 = CBuilding::EnsignPackedXY(v15);
             v7 = Y16X16::UnpackXFast(v6);
-            CPileMgr::SearchSpaceForGoods((CPileMgr *)&g_cPileMgr, v7, v9, j, v12);
-            CTransportShip::RemoveGood((CTransportShip *)VehiclePtr, j, v12);
+            CPileMgr::SearchSpaceForGoods(&g_cPileMgr, v7, v9, j, v12);
+            CTransportShip::RemoveGood((IEntity *)VehiclePtr, j, v12);
             v17 -= v12;
           }
         }
         v19 += CTransportShip::GetGoodAmount((CTransportShip *)VehiclePtr, j);
       }
-      if ( !v19 )
+      if ( v19 == 0 )
       {
         CTransportShip::SetJobType((CTransportShip *)VehiclePtr, 0);
         *((_DWORD *)this + 160) = 0;
         *((_BYTE *)this + 637) = 0;
-        v16 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+        v16 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
         if ( v13 )
         {
           CTradingBuildingRole::TransportHandling(this, (struct CBuilding *)v16);
         }
         else
         {
-          v8 = IEntity::ID();
+          v8 = ((int (__stdcall *)())IEntity::ID)();
           CTradingBuildingRole::UnregisterIncomingTrader(this, v8, 1);
-          CTransportShip::TryToGoHome((CTransportShip *)VehiclePtr);
+          CTransportShip::TryToGoHome((Y16X16 **)VehiclePtr);
         }
       }
     }
@@ -3716,10 +3680,10 @@ void  CTradingBuildingRole::UnloadShip(void) {
       *((_BYTE *)this + 637) = 0;
       if ( v13 )
       {
-        v3 = IEntity::ID();
+        v3 = ((int (__stdcall *)())IEntity::ID)();
         CTradingBuildingRole::UnregisterIncomingTrader(this, v3, 1);
         CTransportShip::SetJobType((CTransportShip *)VehiclePtr, 0);
-        v4 = IEntity::ID();
+        v4 = ((int (__stdcall *)())IEntity::ID)();
         CTradingBuildingRole::StartLoadIntTraderShip(this, v4);
       }
       else
@@ -3727,7 +3691,7 @@ void  CTradingBuildingRole::UnloadShip(void) {
         CTradingBuildingRole::CancelIncomingChargeTraders(this);
         CTransportShip::SetJobType((CTransportShip *)VehiclePtr, 0);
         --*((_DWORD *)this + 172);
-        CTransportShip::TryToGoHome((CTransportShip *)VehiclePtr);
+        CTransportShip::TryToGoHome((Y16X16 **)VehiclePtr);
       }
     }
   }
@@ -3740,11 +3704,11 @@ void  CTradingBuildingRole::ShipArrived(int a2) {
   
   CMFCBaseTabCtrl *VehiclePtr; // [esp+4h] [ebp-8h]
 
-  if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3)) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3396, "pBuilding") == 1 )
+  if ( (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3)) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3396, "pBuilding") == 1 )
   {
     __debugbreak();
   }
-  VehiclePtr = CVehicleMgr::GetVehiclePtr(a2);
+  VehiclePtr = (CMFCBaseTabCtrl *)CVehicleMgr::GetVehiclePtr(a2);
   CTradingBuildingRole::UnregisterIncomingTrader(this, a2, 1);
   if ( CTransportShip::GetJobType(VehiclePtr) == 2 )
   {
@@ -3799,7 +3763,7 @@ bool  CTradingBuildingRole::RequestDonkey(class CBuilding * a2, class CBuilding 
   int v11; // eax
   int v13; // [esp-8h] [ebp-60h]
   int v14; // [esp-4h] [ebp-5Ch]
-  _BYTE v15[24]; // [esp+4h] [ebp-54h] BYREF
+  CEntityEvent v15; // [esp+4h] [ebp-54h] BYREF
   int v16; // [esp+1Ch] [ebp-3Ch]
   _BYTE v17[4]; // [esp+20h] [ebp-38h] BYREF
   int v18[2]; // [esp+24h] [ebp-34h] BYREF
@@ -3813,7 +3777,7 @@ bool  CTradingBuildingRole::RequestDonkey(class CBuilding * a2, class CBuilding 
   int v27; // [esp+54h] [ebp-4h]
 
   v24 = this;
-  if ( CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 2, a4) )
+  if ( CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 2, a4) != 0 )
   {
     return 1;
   }
@@ -3821,7 +3785,7 @@ bool  CTradingBuildingRole::RequestDonkey(class CBuilding * a2, class CBuilding 
   if ( CTradingBuildingRole::IsDonkeyAtBuilding(v24, a2) )
   {
     DonkeyIDAtBuilding = CTradingBuildingRole::GetDonkeyIDAtBuilding(v24, a2);
-    if ( DonkeyIDAtBuilding )
+    if ( DonkeyIDAtBuilding != 0 )
     {
       NearestEntity = (struct IMovingEntity *)CMapObjectMgr::EntityPtr(DonkeyIDAtBuilding);
     }
@@ -3832,45 +3796,43 @@ bool  CTradingBuildingRole::RequestDonkey(class CBuilding * a2, class CBuilding 
     v14 = Y16X16::UnpackYFast(v4);
     v5 = CBuilding::EnsignPackedXY(a2);
     v13 = Y16X16::UnpackXFast(v5);
-    v6 = IEntity::OwnerId((unsigned __int8 *)a2);
-    NearestEntity = CTransportMgr::GetNearestEntity(1, 60, v6, v13, v14);
+    v6 = IEntity::OwnerId(a2);
+    NearestEntity = (struct IMovingEntity *)CTransportMgr::GetNearestEntity(1, 60, v6, v13, v14);
   }
-  if ( !NearestEntity )
+  if ( NearestEntity == 0 )
   {
     return 0;
   }
   v22 = NearestEntity;
-  v25 = (CMFCToolBarImages *)CSettler::Role(NearestEntity);
-  if ( CDonkeyRole::GetJobType(v25) )
+  v25 = (CMFCToolBarImages *)CSettler::Role((CSettler *)NearestEntity);
+  if ( CDonkeyRole::GetJobType((CDonkeyRole *)v25) == 0 )
   {
-    return 1;
-  }
-  v7 = (Y16X16 *)CBuilding::EnsignPackedXY(a2);
-  Y16X16::UnpackXYFast(v7, v17, v18);
-  v8 = IEntity::ID();
-  CDonkeyRole::SetDepartBuildingID(v25, v8);
-  v9 = IEntity::ID();
-  CDonkeyRole::SetTargetBuildingID(v25, v9);
-  CDonkeyRole::SetJobType(v25, 2);
-  CDonkeyRole::MemHomePosition(v25);
-  v10 = IEntity::ID();
-  CTradingBuildingRole::RegisterIncomingTrader(v24, v10, 2, a4);
-  v11 = IEntity::ID();
-  v19 = CEntityEvent::CEntityEvent((CEntityEvent *)v15, 0xAu, 0, 0, 0, v11);
-  v18[1] = (int)v19;
-  v27 = 0;
-  (*(void (__thiscall **)(struct IMovingEntity *, CEntityEvent *))(*(_DWORD *)v22 + 80))(v22, v19);
-  v27 = -1;
-  CEntityEvent::~CEntityEvent(v15);
-  CDonkeyRole::SetNeutralTraderStatus(v25, a4);
-  if ( !*((_WORD *)v24 + 191) )
-  {
-    return 1;
-  }
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)v24 + 191));
-  if ( BuildingPtr )
-  {
-    v16 = CBuilding::Role(BuildingPtr);
+    v7 = (Y16X16 *)CBuilding::EnsignPackedXY(a2);
+    Y16X16::UnpackXYFast((int)v7, (int *)v17, v18);
+    v8 = ((int (__stdcall *)())IEntity::ID)();
+    CDonkeyRole::SetDepartBuildingID((CDonkeyRole *)v25, v8);
+    v9 = ((int (__stdcall *)())IEntity::ID)();
+    CDonkeyRole::SetTargetBuildingID((CDonkeyRole *)v25, v9);
+    CDonkeyRole::SetJobType((CDonkeyRole *)v25, 2);
+    CDonkeyRole::MemHomePosition((CDonkeyRole *)v25);
+    v10 = ((int (__stdcall *)())IEntity::ID)();
+    CTradingBuildingRole::RegisterIncomingTrader(v24, v10, 2, a4);
+    v11 = ((int (__stdcall *)())IEntity::ID)();
+    v19 = CEntityEvent::CEntityEvent(&v15, 0xAu, 0, 0, 0, v11);
+    v18[1] = (int)v19;
+    v27 = 0;
+    v22->j_?SetEvent@IAnimatedEntity@@UAEXABVCEntityEvent@@@Z((unsigned __int16 *)v22, (int)v19);
+    v27 = -1;
+    CEntityEvent::~CEntityEvent(&v15);
+    CDonkeyRole::SetNeutralTraderStatus((CDonkeyRole *)v25, a4);
+    if ( *((_WORD *)v24 + 191) != 0 )
+    {
+      BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)v24 + 191));
+      if ( BuildingPtr != 0 )
+      {
+        v16 = (int)CBuilding::Role((CBuilding *)BuildingPtr);
+      }
+    }
   }
   return 1;
 }
@@ -3888,27 +3850,27 @@ bool  CTradingBuildingRole::IsDonkeyAtBuilding(class CBuilding * a2) {
   int v8; // [esp+14h] [ebp-4h]
 
   v2 = (Y16X16 *)CBuilding::EnsignPackedXY(a2);
-  Y16X16::UnpackXYFast(v2, &v6, &v7);
-  if ( !CWorldManager::MapObjectId(v6, v7) )
+  Y16X16::UnpackXYFast((int)v2, &v6, &v7);
+  if ( CWorldManager::MapObjectId(v6, v7) == 0 )
   {
     return 0;
   }
   v8 = CWorldManager::MapObjectId(v6, v7);
-  if ( !v8 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3546, "iEntityID != 0") == 1 )
+  if ( v8 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3546, "iEntityID != 0") == 1 )
   {
     __debugbreak();
   }
   v4 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v8);
-  if ( IEntity::ObjType(v4) != 1 )
+  if ( IEntity::ObjType((IEntity *)v4) != SETTLER_OBJ )
   {
     return 0;
   }
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(v8);
-  if ( !SettlerPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3551, "pSettler != NULL") == 1 )
+  SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(v8);
+  if ( SettlerPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3551, "pSettler != NULL") == 1 )
   {
     __debugbreak();
   }
-  return IEntity::Type((unsigned __int16 *)SettlerPtr) == 60;
+  return IEntity::Type((IEntity *)SettlerPtr) == 60;
 }
 
 
@@ -3924,27 +3886,27 @@ int  CTradingBuildingRole::GetDonkeyIDAtBuilding(class CBuilding * a2) {
   int v8; // [esp+14h] [ebp-4h]
 
   v2 = (Y16X16 *)CBuilding::EnsignPackedXY(a2);
-  Y16X16::UnpackXYFast(v2, &v6, &v7);
-  if ( !CWorldManager::MapObjectId(v6, v7) )
+  Y16X16::UnpackXYFast((int)v2, &v6, &v7);
+  if ( CWorldManager::MapObjectId(v6, v7) == 0 )
   {
     return 0;
   }
   v8 = CWorldManager::MapObjectId(v6, v7);
-  if ( !v8 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3581, "iEntityID != 0") == 1 )
+  if ( v8 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3581, "iEntityID != 0") == 1 )
   {
     __debugbreak();
   }
   v4 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v8);
-  if ( IEntity::ObjType(v4) != 1 )
+  if ( IEntity::ObjType((IEntity *)v4) != SETTLER_OBJ )
   {
     return 0;
   }
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(v8);
-  if ( !SettlerPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3586, "pSettler != NULL") == 1 )
+  SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(v8);
+  if ( SettlerPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3586, "pSettler != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::Type((unsigned __int16 *)SettlerPtr) == 60 )
+  if ( IEntity::Type((IEntity *)SettlerPtr) == 60 )
   {
     return v8;
   }
@@ -3964,12 +3926,12 @@ void  CTradingBuildingRole::StartLoadingDonkey(int a2) {
 
   *((_BYTE *)this + 648) = 1;
   *((_DWORD *)this + 161) = a2;
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(a2);
-  if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3611, "pSettler->Type() == SETTLER_DONKEY") == 1 )
+  SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(a2);
+  if ( IEntity::Type((IEntity *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3611, "pSettler->Type() == SETTLER_DONKEY") == 1 )
   {
     __debugbreak();
   }
-  v2 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
+  v2 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
   CDonkeyRole::SetJobType(v2, 4);
 }
 
@@ -3983,12 +3945,12 @@ void  CTradingBuildingRole::StartUnloadingDonkey(int a2) {
 
   *((_BYTE *)this + 649) = 1;
   *((_DWORD *)this + 163) = a2;
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(a2);
-  if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3628, "pSettler->Type() == SETTLER_DONKEY") == 1 )
+  SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(a2);
+  if ( IEntity::Type((IEntity *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3628, "pSettler->Type() == SETTLER_DONKEY") == 1 )
   {
     __debugbreak();
   }
-  v2 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
+  v2 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
   CDonkeyRole::SetJobType(v2, 3);
 }
 
@@ -4013,7 +3975,7 @@ void  CTradingBuildingRole::LoadDonkey(void) {
   int v14; // [esp+3Ch] [ebp-28h]
   signed int i; // [esp+40h] [ebp-24h]
   int v16; // [esp+44h] [ebp-20h]
-  void *v17; // [esp+48h] [ebp-1Ch]
+  CTradePileRole *v17; // [esp+48h] [ebp-1Ch]
   int ReserveAmount; // [esp+4Ch] [ebp-18h]
   CPile *PilePtr; // [esp+50h] [ebp-14h]
   CDonkeyRole *v20; // [esp+54h] [ebp-10h]
@@ -4023,111 +3985,110 @@ void  CTradingBuildingRole::LoadDonkey(void) {
   char v25; // [esp+63h] [ebp-1h]
 
   result = this;
-  if ( !*((_BYTE *)this + 648) )
+  if ( *((_BYTE *)this + 648) != 0 )
   {
-    return result;
-  }
-  if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3)) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3651, "pBuilding") == 1 )
-  {
-    __debugbreak();
-  }
-  for ( i = 0;
-        ;
-        ++i )
-  {
-    result = this;
-    if ( i >= *(char *)(*((_DWORD *)this + 94) + 57) )
-    {
-      break;
-    }
-    v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
-    PilePtr = CPileMgr::GetPilePtr(*v2);
-    v17 = (void *)CPile::Role(PilePtr);
-    v21 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
-    v3 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
-    v13 = v3 - CPile::AmountLeaving(PilePtr);
-    SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 161));
-    if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3664, "pSettler->Type() == SETTLER_DONKEY") == 1 )
+    if ( (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3)) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3651, "pBuilding") == 1 )
     {
       __debugbreak();
     }
-    v20 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
-    if ( CDonkeyRole::IsNeutralTrader(v20) )
+    for ( i = 0;
+          ;
+          ++i )
     {
-      v14 = *((unsigned __int16 *)this + 191);
-      v16 = *((char *)this + v21 + 556);
-    }
-    else
-    {
-      v14 = *((unsigned __int16 *)this + 190);
-      v16 = *((char *)this + v21 + 427);
-    }
-    if ( v16 > 0 && v13 > 0 && CTradingBuildingRole::GetTargetBuildingAvailableSpace(this, v14, v21) )
-    {
-      v23 = 0;
+      result = this;
+      if ( i >= *(char *)(*((_DWORD *)this + 94) + 57) )
+      {
+        break;
+      }
+      v2 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
+      PilePtr = CPileMgr::GetPilePtr(*v2);
+      v17 = (CTradePileRole *)CPile::Role(PilePtr);
+      v21 = ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr);
+      v3 = PilePtr->Amount(PilePtr);
+      v13 = v3 - CPile::AmountLeaving(PilePtr);
+      SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*((_DWORD *)this + 161));
+      if ( IEntity::Type((IEntity *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3664, "pSettler->Type() == SETTLER_DONKEY") == 1 )
+      {
+        __debugbreak();
+      }
+      v20 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
       if ( CDonkeyRole::IsNeutralTrader(v20) )
       {
-        if ( CDonkeyRole::GetTradingState(v20) == 1 )
-        {
-          v23 = CTradePileRole::GetTradeRoleType(v17) == 3;
-        }
-        if ( CDonkeyRole::GetTradingState(v20) == 2 )
-        {
-          v23 = CTradePileRole::GetTradeRoleType(v17) == 4;
-        }
-        v4 = IEntity::ID();
-        v25 = CInternationalTrader::CheckGoodMatch(*((_DWORD *)this + 171), v4, v14, v21) & v23;
-        v10 = CTradingBuildingRole::GetExportGoodAmount(this, v21) == 16 || CTradingBuildingRole::GetExportResGoodAmount(this, v21) == 16 || CDonkeyRole::HasLoadGood((int *)v20, v21);
-        v24 = v10 & v25;
+        v14 = *((unsigned __int16 *)this + 191);
+        v16 = *((char *)this + v21 + 556);
       }
       else
       {
-        v24 = CTradePileRole::GetTradeRoleType(v17) == 1;
+        v14 = *((unsigned __int16 *)this + 190);
+        v16 = *((char *)this + v21 + 427);
       }
-      if ( v24 && CDonkeyRole::IsSpaceAvailable(v20, v21) )
+      if ( v16 > 0 && v13 > 0 && CTradingBuildingRole::GetTargetBuildingAvailableSpace(this, v14, v21) != 0 )
       {
-        if ( v13 >= v16 )
+        v23 = 0;
+        if ( CDonkeyRole::IsNeutralTrader(v20) )
         {
-          v9 = v16;
+          if ( CDonkeyRole::GetTradingState(v20) == 1 )
+          {
+            v23 = CTradePileRole::GetTradeRoleType(v17) == 3;
+          }
+          if ( CDonkeyRole::GetTradingState(v20) == 2 )
+          {
+            v23 = CTradePileRole::GetTradeRoleType(v17) == 4;
+          }
+          v4 = ((int (__stdcall *)())IEntity::ID)();
+          v25 = CInternationalTrader::CheckGoodMatch(*((_DWORD *)this + 171), v4, v14, v21) & v23;
+          v10 = CTradingBuildingRole::GetExportGoodAmount(this, v21) == 16 || CTradingBuildingRole::GetExportResGoodAmount(this, v21) == 16 || CDonkeyRole::HasLoadGood(v20, v21) != 0;
+          v24 = v10 & v25;
         }
         else
         {
-          v9 = v13;
+          v24 = CTradePileRole::GetTradeRoleType(v17) == 1;
         }
-        ReserveAmount = v9;
-        if ( CTradePileRole::GetTradeRoleType(v17) == 4 )
+        if ( v24 != 0 && CDonkeyRole::IsSpaceAvailable(v20, v21) != 0 )
         {
-          ReserveAmount = CTradePileRole::GetReserveAmount((CTradePileRole *)v17);
-        }
-        if ( CTradePileRole::GetTradeRoleType(v17) == 3 )
-        {
-          BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
-          TotalExportedGoodAmount = CTradingBuildingRole::GetTotalExportedGoodAmount(this, (struct CBuilding *)BuildingPtr);
-          if ( TotalExportedGoodAmount < ReserveAmount )
+          if ( v13 >= v16 )
           {
-            ReserveAmount = TotalExportedGoodAmount;
+            v9 = v16;
           }
-        }
-        v12 = ReserveAmount - CDonkeyRole::AddGood(v20, v21, ReserveAmount);
-        CPile::DecreaseUnforeseen(PilePtr, v12);
-        if ( !CDonkeyRole::IsNeutralTrader(v20) && *((_BYTE *)this + v21 + 427) != 100 )
-        {
-          *((_BYTE *)this + v21 + 427) -= v12;
-        }
-        if ( CDonkeyRole::IsNeutralTrader(v20) )
-        {
-          *((_BYTE *)this + v21 + 556) -= v12;
-          if ( CDonkeyRole::GetTradingState(v20) == 1 )
+          else
           {
-            v6 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
-            v7 = (CTradingBuildingRole *)CBuilding::Role(v6);
-            CTradingBuildingRole::ReserveExportPile(v7, *((unsigned __int16 *)this + 3), v21, ReserveAmount);
-            CTradingBuildingRole::ReserveImportPile(v7, ReserveAmount);
-            CTradingBuildingRole::ReserveImportPile(this, ReserveAmount);
+            v9 = v13;
           }
-          if ( CTradePileRole::GetTradeRoleType(v17) == 4 && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) > 0 )
+          ReserveAmount = v9;
+          if ( CTradePileRole::GetTradeRoleType(v17) == 4 )
           {
-            CTradePileRole::SetTradeRoleType(v17, 3);
+            ReserveAmount = CTradePileRole::GetReserveAmount(v17);
+          }
+          if ( CTradePileRole::GetTradeRoleType(v17) == 3 )
+          {
+            BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
+            TotalExportedGoodAmount = CTradingBuildingRole::GetTotalExportedGoodAmount(this, (struct CBuilding *)BuildingPtr);
+            if ( TotalExportedGoodAmount < ReserveAmount )
+            {
+              ReserveAmount = TotalExportedGoodAmount;
+            }
+          }
+          v12 = ReserveAmount - CDonkeyRole::AddGood(v20, v21, ReserveAmount);
+          CPile::DecreaseUnforeseen(PilePtr, v12);
+          if ( !CDonkeyRole::IsNeutralTrader(v20) && *((_BYTE *)this + v21 + 427) != 100 )
+          {
+            *((_BYTE *)this + v21 + 427) -= v12;
+          }
+          if ( CDonkeyRole::IsNeutralTrader(v20) )
+          {
+            *((_BYTE *)this + v21 + 556) -= v12;
+            if ( CDonkeyRole::GetTradingState(v20) == 1 )
+            {
+              v6 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 191));
+              v7 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)v6);
+              CTradingBuildingRole::ReserveExportPile(v7, *((unsigned __int16 *)this + 3), v21, ReserveAmount);
+              CTradingBuildingRole::ReserveImportPile(v7, ReserveAmount);
+              CTradingBuildingRole::ReserveImportPile(this, ReserveAmount);
+            }
+            if ( CTradePileRole::GetTradeRoleType(v17) == 4 && PilePtr->Amount(PilePtr) > 0 )
+            {
+              CTradePileRole::SetTradeRoleType(v17, 3);
+            }
           }
         }
       }
@@ -4148,25 +4109,24 @@ void  CTradingBuildingRole::SendDonkey(void) {
   CMFCToolBarImages *v5; // [esp+8h] [ebp-8h]
 
   result = this;
-  if ( !*((_DWORD *)this + 161) )
+  if ( *((_DWORD *)this + 161) != 0 )
   {
-    return result;
+    SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*((_DWORD *)this + 161));
+    if ( IEntity::Type((IEntity *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3779, "pSettler->Type() == SETTLER_DONKEY") == 1 )
+    {
+      __debugbreak();
+    }
+    v5 = (CMFCToolBarImages *)CSettler::Role((CSettler *)SettlerPtr);
+    IsNeutralTrader = CDonkeyRole::IsNeutralTrader((CDonkeyRole *)v5);
+    TargetBuildingID = CTradingBuildingRole::GetTargetBuildingID(this, IsNeutralTrader);
+    CDonkeyRole::SetTargetBuildingID((CDonkeyRole *)v5, TargetBuildingID);
+    CDonkeyRole::SetDepartBuildingID((CDonkeyRole *)v5, *((unsigned __int16 *)this + 3));
+    CDonkeyRole::SetJobType((CDonkeyRole *)v5, 1);
+    CDonkeyRole::NextStep((CDonkeyRole *)v5);
+    *((_DWORD *)this + 161) = 0;
+    result = this;
+    *((_BYTE *)this + 648) = 0;
   }
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 161));
-  if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3779, "pSettler->Type() == SETTLER_DONKEY") == 1 )
-  {
-    __debugbreak();
-  }
-  v5 = (CMFCToolBarImages *)CSettler::Role(SettlerPtr);
-  IsNeutralTrader = CDonkeyRole::IsNeutralTrader(v5);
-  TargetBuildingID = CTradingBuildingRole::GetTargetBuildingID(this, IsNeutralTrader);
-  CDonkeyRole::SetTargetBuildingID(v5, TargetBuildingID);
-  CDonkeyRole::SetDepartBuildingID(v5, *((unsigned __int16 *)this + 3));
-  CDonkeyRole::SetJobType(v5, 1);
-  CDonkeyRole::NextStep(v5);
-  *((_DWORD *)this + 161) = 0;
-  result = this;
-  *((_BYTE *)this + 648) = 0;
   return result;
 }
 
@@ -4194,27 +4154,27 @@ void  CTradingBuildingRole::UnloadDonkey(void) {
   int j; // [esp+2Ch] [ebp-10h]
   CDonkeyRole *v19; // [esp+34h] [ebp-8h]
 
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-  if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3802, "pBuilding !=NULL") == 1 )
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+  if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3802, "pBuilding !=NULL") == 1 )
   {
     __debugbreak();
   }
   v14 = 0;
-  if ( *((_DWORD *)this + 163) )
+  if ( *((_DWORD *)this + 163) != 0 )
   {
-    SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 163));
-    if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3812, "pSettler->Type() == SETTLER_DONKEY") == 1 )
+    SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*((_DWORD *)this + 163));
+    if ( IEntity::Type((IEntity *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3812, "pSettler->Type() == SETTLER_DONKEY") == 1 )
     {
       __debugbreak();
     }
-    v19 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
-    v8 = 0;
+    v19 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
+    v8 = false;
     if ( CDonkeyRole::IsNeutralTrader(v19) )
     {
-      v1 = IEntity::OwnerId(BuildingPtr);
+      v1 = IEntity::OwnerId((IEntity *)BuildingPtr);
       if ( v1 != CDonkeyRole::OwnerId(v19) )
       {
-        v8 = 1;
+        v8 = true;
       }
     }
     for ( i = 0;
@@ -4222,7 +4182,7 @@ void  CTradingBuildingRole::UnloadDonkey(void) {
           ++i )
     {
       GoodAmount = CDonkeyRole::GetGoodAmount(v19, i);
-      if ( GoodAmount )
+      if ( GoodAmount != 0 )
       {
         IsNeutralTrader = CDonkeyRole::IsNeutralTrader(v19);
         v6 = CTradingBuildingRole::AddGood(this, i, GoodAmount, IsNeutralTrader);
@@ -4230,7 +4190,7 @@ void  CTradingBuildingRole::UnloadDonkey(void) {
       }
       v14 += CDonkeyRole::GetGoodAmount(v19, i);
     }
-    if ( v14 )
+    if ( v14 != 0 )
     {
       v15 = 0;
       for ( j = 0;
@@ -4238,9 +4198,9 @@ void  CTradingBuildingRole::UnloadDonkey(void) {
             ++j )
       {
         v12 = CDonkeyRole::GetGoodAmount(v19, j);
-        if ( v12 && !CTradingBuildingRole::GetGoodSpaceAmount(this, j) )
+        if ( v12 != 0 && CTradingBuildingRole::GetGoodSpaceAmount(this, j) == 0 )
         {
-          while ( v12 )
+          while ( v12 != 0 )
           {
             if ( v12 > 8 )
             {
@@ -4252,20 +4212,20 @@ void  CTradingBuildingRole::UnloadDonkey(void) {
             }
             v5 = IEntity::Y(SettlerPtr);
             v4 = IEntity::X(SettlerPtr);
-            CPileMgr::SearchSpaceForGoods((CPileMgr *)&g_cPileMgr, v4, v5, j, v7);
+            CPileMgr::SearchSpaceForGoods(&g_cPileMgr, v4, v5, j, v7);
             CDonkeyRole::RemoveGood(v19, j, v7);
             v12 -= v7;
           }
         }
         v15 += CDonkeyRole::GetGoodAmount(v19, j);
       }
-      if ( !v15 )
+      if ( v15 == 0 )
       {
         CDonkeyRole::SetJobType(v19, 0);
         CDonkeyRole::NextStep(v19);
         *((_DWORD *)this + 163) = 0;
         *((_BYTE *)this + 649) = 0;
-        v11 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+        v11 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
         if ( v8 )
         {
           CTradingBuildingRole::TransportHandling(this, (struct CBuilding *)v11);
@@ -4278,14 +4238,14 @@ void  CTradingBuildingRole::UnloadDonkey(void) {
     }
     else
     {
-      CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 163));
+      ((void (__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*((_DWORD *)this + 163));
       *((_DWORD *)this + 163) = 0;
       *((_BYTE *)this + 649) = 0;
-      if ( v8 && *((_WORD *)this + 191) )
+      if ( v8 && *((_WORD *)this + 191) != 0 )
       {
         CDonkeyRole::SetJobType(v19, 0);
         CDonkeyRole::NextStep(v19);
-        v3 = IEntity::ID();
+        v3 = ((int (__stdcall *)())IEntity::ID)();
         CTradingBuildingRole::StartLoadIntTraderDonkey(this, v3);
       }
       else
@@ -4307,17 +4267,17 @@ void  CTradingBuildingRole::DonkeyArrived(int a2) {
   unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-Ch]
   unsigned __int8 *SettlerPtr; // [esp+Ch] [ebp-8h]
 
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(a2);
-  if ( IEntity::Type((unsigned __int16 *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3903, "pDonkey->Type() == SETTLER_DONKEY") == 1 )
+  SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(a2);
+  if ( IEntity::Type((IEntity *)SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3903, "pDonkey->Type() == SETTLER_DONKEY") == 1 )
   {
     __debugbreak();
   }
-  v2 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
+  v2 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
   CTradingBuildingRole::UnregisterIncomingTrader(this, a2, 2);
   if ( CDonkeyRole::GetJobType(v2) == 2 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-    if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3913, "pBuilding") == 1 )
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+    if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 3913, "pBuilding") == 1 )
     {
       __debugbreak();
     }
@@ -4373,7 +4333,7 @@ bool  CTradingBuildingRole::RequestCart(class CBuilding * a2, class CBuilding * 
   int v15; // [esp-Ch] [ebp-B8h]
   int v16; // [esp-8h] [ebp-B4h]
   int v17; // [esp-4h] [ebp-B0h]
-  _BYTE v18[24]; // [esp+4h] [ebp-A8h] BYREF
+  CEntityEvent v18; // [esp+4h] [ebp-A8h] BYREF
   CEntityEvent *v19; // [esp+1Ch] [ebp-90h]
   CEntityEvent *v20; // [esp+20h] [ebp-8Ch]
   BOOL v21; // [esp+24h] [ebp-88h]
@@ -4384,11 +4344,11 @@ bool  CTradingBuildingRole::RequestCart(class CBuilding * a2, class CBuilding * 
   bool IsCartAtBuilding; // [esp+3Bh] [ebp-71h]
   CMFCPopupMenu *v27; // [esp+3Ch] [ebp-70h]
   bool v28; // [esp+43h] [ebp-69h]
-  _BYTE v29[88]; // [esp+44h] [ebp-68h] BYREF
+  struct CWaypoints v29; // [esp+44h] [ebp-68h] BYREF
   int v30; // [esp+A8h] [ebp-4h]
 
   v25 = this;
-  if ( CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 3, a4) || *((_DWORD *)v25 + 164) )
+  if ( CTradingBuildingRole::GetNrRegisteredIncomingTraders(this, 3, a4) != 0 || *((_DWORD *)v25 + 164) != 0 )
   {
     return 0;
   }
@@ -4396,7 +4356,7 @@ bool  CTradingBuildingRole::RequestCart(class CBuilding * a2, class CBuilding * 
   if ( IsCartAtBuilding )
   {
     CartIDAtBuilding = CTradingBuildingRole::GetCartIDAtBuilding(v25, a2);
-    if ( CartIDAtBuilding )
+    if ( CartIDAtBuilding != 0 )
     {
       NearestEntity = (CCart *)CMapObjectMgr::EntityPtr(CartIDAtBuilding);
     }
@@ -4407,55 +4367,55 @@ bool  CTradingBuildingRole::RequestCart(class CBuilding * a2, class CBuilding * 
     v17 = Y16X16::UnpackYFast(v4);
     v5 = CBuilding::EnsignPackedXY(a2);
     v16 = Y16X16::UnpackXFast(v5);
-    v6 = IEntity::OwnerId((unsigned __int8 *)a2);
-    NearestEntity = CTransportMgr::GetNearestEntity(4, 5, v6, v16, v17);
+    v6 = IEntity::OwnerId(a2);
+    NearestEntity = (CCart *)CTransportMgr::GetNearestEntity(4, 5, v6, v16, v17);
   }
-  if ( !NearestEntity )
+  if ( NearestEntity == 0 )
   {
     return 0;
   }
-  v27 = NearestEntity;
-  if ( CCart::GetJobType(NearestEntity) )
+  v27 = (CMFCPopupMenu *)NearestEntity;
+  if ( CCart::GetJobType(NearestEntity) != 0 )
   {
     return 0;
   }
   v14 = IEntity::PackedXY(a2);
-  v7 = IEntity::PackedXY(v27);
-  v22 = CAStarTiling::FindPath(v7, v14, (struct CWaypoints *)v29, 2) != 0;
+  v7 = IEntity::PackedXY((IEntity *)v27);
+  v22 = CAStarTiling::FindPath(v7, v14, &v29, 2) != 0;
   v15 = IEntity::PackedXY(a3);
   v8 = IEntity::PackedXY(a2);
-  v21 = CAStarTiling::FindPath(v8, v15, (struct CWaypoints *)v29, 2) != 0;
+  v21 = CAStarTiling::FindPath(v8, v15, &v29, 2) != 0;
   v28 = v21 || v22;
   if ( !v21 && !v22 )
   {
     return 0;
   }
-  v10 = IEntity::ID();
+  v10 = ((int (__stdcall *)())IEntity::ID)();
   CTradingBuildingRole::RegisterIncomingTrader(v25, v10, 3, a4);
-  v11 = IEntity::ID();
-  CCart::SetDepartBuildingID(v27, v11);
-  v12 = (struct CWnd *)IEntity::ID();
+  v11 = ((int (__stdcall *)())IEntity::ID)();
+  CCart::SetDepartBuildingID((CCart *)v27, v11);
+  v12 = (struct CWnd *)((int (__stdcall *)())IEntity::ID)();
   CCart::SetTargetBuildingID(v27, v12);
-  CCart::SetJobType(v27, 2);
+  CCart::SetJobType((CCart *)v27, 2);
   if ( IsCartAtBuilding )
   {
-    CCart::SetGoToSource(v27, 0);
-    CCart::CartArrived(v27);
-    CCart::SetNeutralTraderStatus(v27, a4);
+    CCart::SetGoToSource((CCart *)v27, 0);
+    CCart::CartArrived((CCart *)v27);
+    CCart::SetNeutralTraderStatus((CCart *)v27, a4);
   }
   else
   {
-    CCart::MemHomePosition(v27);
-    CCart::SetGoToSource(v27, 1);
-    CCart::SetGoToTarget(v27, 0);
+    CCart::MemHomePosition((CCart *)v27);
+    CCart::SetGoToSource((CCart *)v27, 1);
+    CCart::SetGoToTarget((CCart *)v27, 0);
     v13 = CBuilding::EnsignPackedXY(a2);
-    v20 = CEntityEvent::CEntityEvent((CEntityEvent *)v18, 0x11u, 13, 0, v13, 0);
+    v20 = CEntityEvent::CEntityEvent(&v18, 0x11u, 13, 0, v13, 0);
     v19 = v20;
     v30 = 0;
     (*(void (__thiscall **)(CMFCPopupMenu *, CEntityEvent *))(*(_DWORD *)v27 + 80))(v27, v20);
     v30 = -1;
-    CEntityEvent::~CEntityEvent(v18);
-    CCart::SetNeutralTraderStatus(v27, a4);
+    CEntityEvent::~CEntityEvent(&v18);
+    CCart::SetNeutralTraderStatus((CCart *)v27, a4);
   }
   return 1;
 }
@@ -4482,32 +4442,32 @@ int  CTradingBuildingRole::GetCartIDAtBuilding(class CBuilding * a2) {
   int v9; // [esp+14h] [ebp-4h]
 
   v8 = this;
-  if ( *((_DWORD *)this + 164) )
+  if ( *((_DWORD *)this + 164) != 0 )
   {
     return *((_DWORD *)v8 + 164);
   }
   v3 = (Y16X16 *)CBuilding::EnsignPackedXY(a2);
-  Y16X16::UnpackXYFast(v3, &v6, &v7);
-  if ( !CWorldManager::MapObjectId(v6, v7) )
+  Y16X16::UnpackXYFast((int)v3, &v6, &v7);
+  if ( CWorldManager::MapObjectId(v6, v7) == 0 )
   {
     return 0;
   }
   v9 = CWorldManager::MapObjectId(v6, v7);
-  if ( !v9 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4072, "iEntityID != 0") == 1 )
+  if ( v9 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4072, "iEntityID != 0") == 1 )
   {
     __debugbreak();
   }
   v4 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v9);
-  if ( IEntity::ObjType(v4) != 4 )
+  if ( IEntity::ObjType((IEntity *)v4) != CATAPULT_OBJ )
   {
     return 0;
   }
   VehiclePtr = (unsigned __int16 *)CVehicleMgr::GetVehiclePtr(v9);
-  if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4077, "pVehicle != NULL") == 1 )
+  if ( VehiclePtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4077, "pVehicle != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::Type(VehiclePtr) == 5 )
+  if ( IEntity::Type((IEntity *)VehiclePtr) == 5 )
   {
     return v9;
   }
@@ -4526,7 +4486,7 @@ void  CTradingBuildingRole::StartLoadingCart(int a2) {
 
   *((_BYTE *)this + 660) = 1;
   *((_DWORD *)this + 164) = a2;
-  VehiclePtr = CVehicleMgr::GetVehiclePtr(a2);
+  VehiclePtr = (CCart *)CVehicleMgr::GetVehiclePtr(a2);
   CCart::SetJobType(VehiclePtr, 4);
 }
 
@@ -4539,7 +4499,7 @@ void  CTradingBuildingRole::StartUnloadingCart(int a2) {
 
   *((_BYTE *)this + 661) = 1;
   *((_DWORD *)this + 166) = a2;
-  VehiclePtr = CVehicleMgr::GetVehiclePtr(a2);
+  VehiclePtr = (CCart *)CVehicleMgr::GetVehiclePtr(a2);
   CCart::SetJobType(VehiclePtr, 3);
 }
 
@@ -4551,7 +4511,7 @@ void  CTradingBuildingRole::LoadCart(void) {
   CTradingBuildingRole *result; // eax
   unsigned __int16 *v2; // eax
   int v3; // esi
-  void *v4; // [esp+8h] [ebp-2Ch]
+  CTradePileRole *v4; // [esp+8h] [ebp-2Ch]
   int v5; // [esp+10h] [ebp-24h]
   CCart *VehiclePtr; // [esp+18h] [ebp-1Ch]
   int v7; // [esp+1Ch] [ebp-18h]
@@ -4560,55 +4520,53 @@ void  CTradingBuildingRole::LoadCart(void) {
   CPile *PilePtr; // [esp+28h] [ebp-Ch]
   int v11; // [esp+2Ch] [ebp-8h]
 
-  if ( !CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 164)) )
+  if ( (struct CVehicle *)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 164)) == 0 )
   {
     *((_BYTE *)this + 660) = 0;
   }
   result = this;
-  if ( !*((_BYTE *)this + 660) )
+  if ( *((_BYTE *)this + 660) != 0 )
   {
-    return result;
-  }
-  if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3)) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4144, "pBuilding") == 1 )
-  {
-    __debugbreak();
-  }
-  VehiclePtr = CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 164));
-  for ( i = 0;
-        ;
-        ++i )
-  {
-    result = (CTradingBuildingRole *)*((_DWORD *)this + 94);
-    if ( i >= *((char *)result + 57) )
+    if ( (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3)) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4144, "pBuilding") == 1 )
     {
-      break;
+      __debugbreak();
     }
-    v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
-    PilePtr = CPileMgr::GetPilePtr(*v2);
-    v4 = (void *)CPile::Role(PilePtr);
-    v11 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
-    v3 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
-    v8 = v3 - CPile::AmountLeaving(PilePtr);
-    if ( CTradePileRole::GetTradeRoleType(v4) == 1 && *((_BYTE *)this + v11 + 470) == 2 && *((char *)this + v11 + 427) > 0 && v8 > 0 && CTradingBuildingRole::GetTargetBuildingAvailableSpace(this, *((unsigned __int16 *)this + 190), v11) && CCart::IsSpaceAvailable(VehiclePtr, v11) )
+    VehiclePtr = (CCart *)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 164));
+    for ( i = 0;
+          ;
+          ++i )
     {
-      if ( v8 >= *((char *)this + v11 + 427) )
+      result = *((CTradingBuildingRole **)this + 94);
+      if ( i >= *((char *)result + 57) )
       {
-        v7 = *((char *)this + v11 + 427);
+        break;
       }
-      else
+      v2 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
+      PilePtr = CPileMgr::GetPilePtr(*v2);
+      v4 = (CTradePileRole *)CPile::Role(PilePtr);
+      v11 = ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr);
+      v3 = PilePtr->Amount(PilePtr);
+      v8 = v3 - CPile::AmountLeaving(PilePtr);
+      if ( CTradePileRole::GetTradeRoleType(v4) == 1 && *((_BYTE *)this + v11 + 470) == 2 && *((char *)this + v11 + 427) > 0 && v8 > 0 && CTradingBuildingRole::GetTargetBuildingAvailableSpace(this, *((unsigned __int16 *)this + 190), v11) != 0 && CCart::IsSpaceAvailable(VehiclePtr, v11) != 0 )
       {
-        v7 = v8;
-      }
-      v5 = v7 - CCart::AddGood(VehiclePtr, v11, v7);
-      CPile::DecreaseUnforeseen(PilePtr, v5);
-      result = (CTradingBuildingRole *)*((char *)this + v11 + 427);
-      if ( result == (CTradingBuildingRole *)100 )
-      {
+        if ( v8 >= *((char *)this + v11 + 427) )
+        {
+          v7 = *((char *)this + v11 + 427);
+        }
+        else
+        {
+          v7 = v8;
+        }
+        v5 = v7 - CCart::AddGood(VehiclePtr, v11, v7);
+        CPile::DecreaseUnforeseen(PilePtr, v5);
+        result = (CTradingBuildingRole *)*((char *)this + v11 + 427);
+        if ( result != (CTradingBuildingRole *)100 )
+        {
+          result = (CTradingBuildingRole *)((char *)this + v11);
+          *((_BYTE *)this + v11 + 427) -= v5;
+        }
         return result;
       }
-      result = (CTradingBuildingRole *)((char *)this + v11);
-      *((_BYTE *)this + v11 + 427) -= v5;
-      return result;
     }
   }
   return result;
@@ -4636,57 +4594,56 @@ void  CTradingBuildingRole::SendCart(void) {
   _BYTE v16[88]; // [esp+28h] [ebp-5Ch] BYREF
 
   result = this;
-  if ( !*((_DWORD *)this + 164) )
+  if ( *((_DWORD *)this + 164) != 0 )
   {
-    return result;
-  }
-  VehiclePtr = CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 164));
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 190));
-  v7 = CBuilding::EnsignPackedXY(BuildingPtr);
-  v2 = IEntity::PackedXY(VehiclePtr);
-  if ( CAStarTiling::FindPath(v2, v7, (struct CWaypoints *)v16, 2) )
-  {
-    v9 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-    IsNeutralTrader = CCart::IsNeutralTrader(VehiclePtr);
-    CTradingBuildingRole::RegisterIncomingTrader(v9, *((_DWORD *)this + 164), 3, IsNeutralTrader);
-    CCart::SetJobType(VehiclePtr, 1);
-    CCart::MoveToTarget(VehiclePtr);
-    IAnimatedEntity::RegisterForLogicUpdate(1);
-  }
-  else
-  {
-    for ( i = 0;
-          i < 43;
-          ++i )
+    VehiclePtr = (CCart *)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 164));
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 190));
+    v7 = CBuilding::EnsignPackedXY(BuildingPtr);
+    v2 = IEntity::PackedXY(VehiclePtr);
+    if ( CAStarTiling::FindPath(v2, v7, (struct CWaypoints *)v16, 2) != 0 )
     {
-      GoodAmount = CCart::GetGoodAmount(VehiclePtr, i);
-      if ( GoodAmount && !CTradingBuildingRole::GetGoodSpaceAmount(this, i) )
+      v9 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
+      IsNeutralTrader = CCart::IsNeutralTrader(VehiclePtr);
+      CTradingBuildingRole::RegisterIncomingTrader(v9, *((_DWORD *)this + 164), 3, IsNeutralTrader);
+      CCart::SetJobType(VehiclePtr, 1);
+      CCart::MoveToTarget(VehiclePtr);
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
+    }
+    else
+    {
+      for ( i = 0;
+            i < 43;
+            ++i )
       {
-        while ( GoodAmount )
+        GoodAmount = CCart::GetGoodAmount(VehiclePtr, i);
+        if ( GoodAmount != 0 && CTradingBuildingRole::GetGoodSpaceAmount(this, i) == 0 )
         {
-          if ( GoodAmount > 8 )
+          while ( GoodAmount != 0 )
           {
-            v10 = 8;
+            if ( GoodAmount > 8 )
+            {
+              v10 = 8;
+            }
+            else
+            {
+              v10 = GoodAmount;
+            }
+            v4 = CBuilding::EnsignPackedXY(BuildingPtr);
+            v8 = Y16X16::UnpackYFast(v4);
+            v5 = CBuilding::EnsignPackedXY(BuildingPtr);
+            v6 = Y16X16::UnpackXFast(v5);
+            CPileMgr::SearchSpaceForGoods(&g_cPileMgr, v6, v8, i, v10);
+            CCart::RemoveGood(VehiclePtr, i, v10);
+            GoodAmount -= v10;
           }
-          else
-          {
-            v10 = GoodAmount;
-          }
-          v4 = CBuilding::EnsignPackedXY(BuildingPtr);
-          v8 = Y16X16::UnpackYFast(v4);
-          v5 = CBuilding::EnsignPackedXY(BuildingPtr);
-          v6 = Y16X16::UnpackXFast(v5);
-          CPileMgr::SearchSpaceForGoods((CPileMgr *)&g_cPileMgr, v6, v8, i, v10);
-          CCart::RemoveGood(VehiclePtr, i, v10);
-          GoodAmount -= v10;
         }
       }
+      CCart::TryToGoHome(VehiclePtr);
     }
-    CCart::TryToGoHome(VehiclePtr);
+    result = this;
+    *((_DWORD *)this + 164) = 0;
+    *((_BYTE *)this + 660) = 0;
   }
-  result = this;
-  *((_DWORD *)this + 164) = 0;
-  *((_BYTE *)this + 660) = 0;
   return result;
 }
 
@@ -4711,21 +4668,21 @@ void  CTradingBuildingRole::UnloadCart(void) {
   CCart *VehiclePtr; // [esp+28h] [ebp-4h]
 
   v10 = 0;
-  if ( *((_DWORD *)this + 166) )
+  if ( *((_DWORD *)this + 166) != 0 )
   {
-    VehiclePtr = CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 166));
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-    if ( !VehiclePtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4252, "pVehicle!=NULL") == 1 )
+    VehiclePtr = (CCart *)CVehicleMgr::GetVehiclePtr(*((_DWORD *)this + 166));
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+    if ( VehiclePtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4252, "pVehicle!=NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( VehiclePtr )
+    if ( VehiclePtr != 0 )
     {
-      if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4253, "pBuilding!=NULL") == 1 )
+      if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4253, "pBuilding!=NULL") == 1 )
       {
         __debugbreak();
       }
-      if ( BuildingPtr )
+      if ( BuildingPtr != 0 )
       {
         CCart::ClearNeutralTraderStatus(VehiclePtr);
         for ( i = 0;
@@ -4733,13 +4690,13 @@ void  CTradingBuildingRole::UnloadCart(void) {
               v10 += CCart::GetGoodAmount(VehiclePtr, i++) )
         {
           GoodAmount = CCart::GetGoodAmount(VehiclePtr, i);
-          if ( GoodAmount )
+          if ( GoodAmount != 0 )
           {
             v5 = CTradingBuildingRole::AddGood(this, i, GoodAmount, 0);
             CCart::RemoveGood(VehiclePtr, i, GoodAmount - v5);
           }
         }
-        if ( !v10 )
+        if ( v10 == 0 )
         {
           goto LABEL_27;
         }
@@ -4749,9 +4706,9 @@ void  CTradingBuildingRole::UnloadCart(void) {
               v11 += CCart::GetGoodAmount(VehiclePtr, j++) )
         {
           v9 = CCart::GetGoodAmount(VehiclePtr, j);
-          if ( v9 && !CTradingBuildingRole::GetGoodSpaceAmount(this, j) )
+          if ( v9 != 0 && CTradingBuildingRole::GetGoodSpaceAmount(this, j) == 0 )
           {
-            while ( v9 )
+            while ( v9 != 0 )
             {
               if ( v9 > 8 )
               {
@@ -4765,13 +4722,13 @@ void  CTradingBuildingRole::UnloadCart(void) {
               v4 = Y16X16::UnpackYFast(v1);
               v2 = CBuilding::EnsignPackedXY(BuildingPtr);
               v3 = Y16X16::UnpackXFast(v2);
-              CPileMgr::SearchSpaceForGoods((CPileMgr *)&g_cPileMgr, v3, v4, j, v6);
+              CPileMgr::SearchSpaceForGoods(&g_cPileMgr, v3, v4, j, v6);
               CCart::RemoveGood(VehiclePtr, j, v6);
               v9 -= v6;
             }
           }
         }
-        if ( !v11 )
+        if ( v11 == 0 )
         {
 LABEL_27:
           CCart::SetJobType(VehiclePtr, 0);
@@ -4791,11 +4748,11 @@ void  CTradingBuildingRole::CartArrived(int a2) {
   
   CCart *VehiclePtr; // [esp+4h] [ebp-8h]
 
-  if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3)) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4326, "pBuilding") == 1 )
+  if ( (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3)) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4326, "pBuilding") == 1 )
   {
     __debugbreak();
   }
-  VehiclePtr = CVehicleMgr::GetVehiclePtr(a2);
+  VehiclePtr = (CCart *)CVehicleMgr::GetVehiclePtr(a2);
   CTradingBuildingRole::UnregisterIncomingTrader(this, a2, 3);
   if ( CCart::GetJobType(VehiclePtr) == 2 )
   {
@@ -4845,40 +4802,40 @@ int  CTradingBuildingRole::AddGood(int a2, int a3, bool a4) {
   pairNode *v19; // [esp+30h] [ebp-2Ch]
   int m; // [esp+3Ch] [ebp-20h]
   int j; // [esp+44h] [ebp-18h]
-  void *v23; // [esp+48h] [ebp-14h]
+  CTradePileRole *v23; // [esp+48h] [ebp-14h]
   signed int i; // [esp+50h] [ebp-Ch]
   signed int k; // [esp+50h] [ebp-Ch]
   CPile *PilePtr; // [esp+54h] [ebp-8h]
   CPile *v28; // [esp+54h] [ebp-8h]
 
-  v4 = (unsigned __int8 *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  v5 = IEntity::OwnerId(v4);
+  v4 = (unsigned __int8 *)((unsigned __int8 *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+  v5 = IEntity::OwnerId((IEntity *)v4);
   CPlayerManager::Race(v5);
-  v13 = CPileMgr::ConvertGoodType((CPileMgr *)&g_cPileMgr, a2);
+  v13 = CPileMgr::ConvertGoodType(&g_cPileMgr, a2);
   for ( i = 0;
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v6 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v6 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v6);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4386, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v19 = (pairNode *)CPile::Role(PilePtr);
-    if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == v13 && !a4 )
+    if ( ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) == v13 && !a4 )
     {
-      if ( !CTradePileRole::GetTradeRoleType(v19) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4393, "rTradePileRole.GetTradeRoleType() != CTradePileRole::TRADEPILE_FREE") == 1 )
+      if ( CTradePileRole::GetTradeRoleType((CTradePileRole *)v19) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4393, "rTradePileRole.GetTradeRoleType() != CTradePileRole::TRADEPILE_FREE") == 1 )
       {
         __debugbreak();
       }
-      v7 = IEntity::WorldIdx();
+      v7 = ((int (__stdcall *)())IEntity::WorldIdx)();
       CWorldManager::EcoSectorId(v7);
-      v8 = 8 - (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
+      v8 = 8 - PilePtr->Amount(PilePtr);
       v9 = v8 - CPile::AmountComing(PilePtr);
-      v18 = v9 - CTradePileRole::GetExpectedAmount(v19);
+      v18 = v9 - CTradePileRole::GetExpectedAmount((CTradePileRole *)v19);
       v17 = a3 >= v18 ? v18 : a3;
-      if ( v17 )
+      if ( v17 != 0 )
       {
         for ( j = 0;
               j < v17;
@@ -4886,7 +4843,7 @@ int  CTradingBuildingRole::AddGood(int a2, int a3, bool a4) {
         {
           CPile::IncreaseUnforeseen(PilePtr, 1);
         }
-        IAnimatedEntity::RegisterForLogicUpdate(1);
+        ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
         return a3 - v17;
       }
     }
@@ -4899,25 +4856,25 @@ int  CTradingBuildingRole::AddGood(int a2, int a3, bool a4) {
     {
       return a3;
     }
-    v11 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, k);
+    v11 = std::vector<unsigned short>::operator[]((char *)this + 608, k);
     v28 = CPileMgr::GetPilePtr(*v11);
     if ( CPile::GetRoleType(v28) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4417, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
-    v16 = (v23 = (void *)CPile::Role(v28), !a4) && !CTradePileRole::GetTradeRoleType(v23) || a4 && (CTradePileRole::GetTradeRoleType(v23) == 5 || CTradePileRole::GetTradeRoleType(v23) == 1) || a4 && !*((_WORD *)this + 191) && !CTradePileRole::GetTradeRoleType(v23);
-    v12 = 8 - (*(int (__thiscall **)(CPile *))(*(_DWORD *)v28 + 40))(v28);
+    v16 = (v23 = (CTradePileRole *)CPile::Role(v28), !a4) && CTradePileRole::GetTradeRoleType(v23) == 0 || a4 && (CTradePileRole::GetTradeRoleType(v23) == 5 || CTradePileRole::GetTradeRoleType(v23) == 1) || a4 && *((_WORD *)this + 191) == 0 && CTradePileRole::GetTradeRoleType(v23) == 0;
+    v12 = 8 - v28->Amount(v28);
     v15 = a3 <= 8 ? a3 : 8;
-    if ( v12 >= v15 && v16 && !(*(int (__thiscall **)(CPile *))(*(_DWORD *)v28 + 40))(v28) )
+    if ( v12 >= v15 && v16 && v28->Amount(v28) == 0 )
     {
       v14 = a3 >= 8 ? 8 : a3;
-      if ( v14 )
+      if ( v14 != 0 )
       {
         break;
       }
     }
   }
-  if ( (*(int (__thiscall **)(CPile *))(*(_DWORD *)v28 + 60))(v28) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4446, "pPile->GetGoodType() == 0") == 1 )
+  if ( ((int (__thiscall *)(CPile *))v28->GetGoodType)(v28) != 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4446, "pPile->GetGoodType() == 0") == 1 )
   {
     __debugbreak();
   }
@@ -4929,7 +4886,7 @@ int  CTradingBuildingRole::AddGood(int a2, int a3, bool a4) {
   {
     CPile::IncreaseUnforeseen(v28, 1);
   }
-  IAnimatedEntity::RegisterForLogicUpdate(1);
+  ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
   return a3 - v14;
 }
 
@@ -4939,7 +4896,7 @@ int  CTradingBuildingRole::AddGood(int a2, int a3, bool a4) {
 int  CTradingBuildingRole::GetNrDeliveryPilesOfGood(int a2) {
   
   unsigned __int16 *v2; // eax
-  void *v4; // [esp+0h] [ebp-14h]
+  CTradePileRole *v4; // [esp+0h] [ebp-14h]
   int v6; // [esp+8h] [ebp-Ch]
   CPile *PilePtr; // [esp+Ch] [ebp-8h]
   signed int i; // [esp+10h] [ebp-4h]
@@ -4949,14 +4906,14 @@ int  CTradingBuildingRole::GetNrDeliveryPilesOfGood(int a2) {
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v2 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v2);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4483, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
-    v4 = (void *)CPile::Role(PilePtr);
-    if ( (CTradePileRole::GetTradeRoleType(v4) == 1 || CTradePileRole::GetTradeRoleType(v4) == 3) && (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) == a2 )
+    v4 = (CTradePileRole *)CPile::Role(PilePtr);
+    if ( (CTradePileRole::GetTradeRoleType(v4) == 1 || CTradePileRole::GetTradeRoleType(v4) == 3) && ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) == a2 )
     {
       ++v6;
     }
@@ -4976,9 +4933,9 @@ int  CTradingBuildingRole::CalcNrExportGoods(bool a2) {
   signed int i; // [esp+14h] [ebp-4h]
 
   BuildingPtr = 0;
-  if ( *((_WORD *)this + 190) )
+  if ( *((_WORD *)this + 190) != 0 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 190));
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 190));
   }
   v6 = 0;
   for ( i = 0;
@@ -4995,19 +4952,19 @@ int  CTradingBuildingRole::CalcNrExportGoods(bool a2) {
     }
     if ( ExportGoodAmount > 0 )
     {
-      if ( BuildingPtr )
+      if ( BuildingPtr != 0 )
       {
-        v3 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-        if ( CTradingBuildingRole::GetGoodSpaceAmount(v3, i) )
+        v3 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
+        if ( CTradingBuildingRole::GetGoodSpaceAmount(v3, i) != 0 )
         {
           if ( a2 )
           {
-            if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, i, 8) )
+            if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, i, 8) != 0 )
             {
               v6 += *((char *)this + i + 427);
             }
           }
-          else if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, i, 2) )
+          else if ( (unsigned __int8)CTradingBuildingRole::HasGoodState(this, i, 2) != 0 )
           {
             v6 += *((char *)this + i + 427);
           }
@@ -5034,22 +4991,22 @@ int  CTradingBuildingRole::GetPileIDWithGoodToTransport(void) {
   CPile *PilePtr; // [esp+10h] [ebp-4h]
 
   for ( i = 0;
-        i < *(char *)(this[94] + 57);
+        i < *(char *)(*(this + 94) + 57);
         ++i )
   {
-    v1 = (unsigned __int16 *)std::vector<unsigned short>::operator[](this + 152, i);
+    v1 = std::vector<unsigned short>::operator[](this + 152, i);
     PilePtr = CPileMgr::GetPilePtr(*v1);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4581, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v4 = (pairNode *)CPile::Role(PilePtr);
-    if ( CTradePileRole::GetTradeRoleType(v4) == 1 )
+    if ( CTradePileRole::GetTradeRoleType((CTradePileRole *)v4) == 1 )
     {
-      v2 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
-      if ( CTradePileRole::GetExpectedAmount(v4) + v2 )
+      v2 = PilePtr->Amount(PilePtr);
+      if ( CTradePileRole::GetExpectedAmount((CTradePileRole *)v4) + v2 != 0 )
       {
-        return IEntity::ID();
+        return ((int (__stdcall *)())IEntity::ID)();
       }
     }
   }
@@ -5086,21 +5043,21 @@ bool  CTradingBuildingRole::CrushBuilding(void) {
   int v6; // [esp+0h] [ebp-Ch]
   unsigned __int8 *BuildingPtr; // [esp+4h] [ebp-8h]
 
-  CTradingBuildingRole::DisableTranding((CTradingBuildingRole *)this);
+  ((void (__thiscall *)(CTradingBuildingRole *))CTradingBuildingRole::DisableTranding)((CTradingBuildingRole *)this);
   CTradingBuildingRole::CancelIncomingChargeTraders((CTradingBuildingRole *)this);
   CTradingBuildingRole::CancelIncomingDeliverTraders((CTradingBuildingRole *)this);
   CTradingBuildingRole::CancelLoadingVehicle((CTradingBuildingRole *)this);
-  if ( this[171] )
+  if ( *(this + 171) != 0 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-    CInternationalTrader::RemoveBuilding(this[171], (struct CBuilding *)BuildingPtr);
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+    CInternationalTrader::RemoveBuilding(*(this + 171), (struct CBuilding *)BuildingPtr);
   }
   CTradingBuildingRole::ClearRegisterTargetBuildings((CTradingBuildingRole *)this);
-  v1 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-  v2 = CBuilding::EnsignWorldIdx(v1);
+  v1 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+  v2 = CBuilding::EnsignWorldIdx((CBuilding *)v1);
   v6 = CWorldManager::EcoSectorId(v2);
   v5 = *((unsigned __int16 *)this + 3);
-  v3 = (void *)CEcoSectorMgr::operator[](v6);
+  v3 = (void *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v6);
   CEcoSector::CleanUpBuildingNeed(v3, v5);
   return 1;
 }
@@ -5110,14 +5067,13 @@ bool  CTradingBuildingRole::CrushBuilding(void) {
 // Decompiled from int __thiscall CTradingBuildingRole::ConvertEventIntoGoal(CTradingBuildingRole *this, struct CBuilding *a2, struct CEntityEvent *a3)
 void  CTradingBuildingRole::ConvertEventIntoGoal(class CBuilding * a2, class CEntityEvent * a3) {
   
-  if ( *((_DWORD *)a3 + 1) != 9 || *((_DWORD *)a3 + 3) != *((unsigned __int16 *)this + 190) )
+  if ( a3->m_iEvent == 9 && a3->m_iDataA == *((unsigned __int16 *)this + 190) )
   {
-    return IAnimatedEntity::RegisterForLogicUpdate(14);
+    *((_WORD *)this + 190) = 0;
+    CTradingBuildingRole::CancelIncomingChargeTraders(this);
+    ((void (__thiscall *)(CTradingBuildingRole *))CTradingBuildingRole::DisableTranding)(this);
   }
-  *((_WORD *)this + 190) = 0;
-  CTradingBuildingRole::CancelIncomingChargeTraders(this);
-  CTradingBuildingRole::DisableTranding(this);
-  return IAnimatedEntity::RegisterForLogicUpdate(14);
+  return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
 }
 
 
@@ -5130,48 +5086,46 @@ int  CTradingBuildingRole::DetermineTransportType(void) {
   int v4; // [esp+0h] [ebp-10h]
   unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-8h]
 
-  if ( !*((_WORD *)this + 190) && !*((_WORD *)this + 191) )
+  if ( *((_WORD *)this + 190) == 0 && *((_WORD *)this + 191) == 0 )
   {
     return 0;
   }
   v4 = 0;
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-  if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4658, "pBuilding") == 1 )
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+  if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4658, "pBuilding") == 1 )
   {
     __debugbreak();
   }
-  if ( !BuildingPtr )
+  if ( BuildingPtr == 0 )
   {
     return 0;
   }
-  if ( CTradingBuildingRole::GetCartIDAtBuilding(this, (struct CBuilding *)BuildingPtr) )
+  if ( CTradingBuildingRole::GetCartIDAtBuilding(this, (struct CBuilding *)BuildingPtr) != 0 )
   {
     return 3;
   }
-  if ( CTradingBuildingRole::GetDonkeyIDAtBuilding(this, (struct CBuilding *)BuildingPtr) )
+  if ( CTradingBuildingRole::GetDonkeyIDAtBuilding(this, (struct CBuilding *)BuildingPtr) != 0 )
   {
     return 2;
   }
-  if ( IEntity::Type((unsigned __int16 *)BuildingPtr) != 32 )
+  if ( IEntity::Type((IEntity *)BuildingPtr) == 32 )
   {
-    return v4;
-  }
-  if ( *((_WORD *)this + 190) )
-  {
-    v2 = (unsigned __int16 *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 190));
-    if ( IEntity::Type(v2) == 32 )
+    if ( *((_WORD *)this + 190) != 0 )
     {
-      return 1;
+      v2 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 190));
+      if ( IEntity::Type((IEntity *)v2) == 32 )
+      {
+        return 1;
+      }
     }
-  }
-  if ( !*((_WORD *)this + 191) )
-  {
-    return v4;
-  }
-  v3 = (unsigned __int16 *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 191));
-  if ( IEntity::Type(v3) == 32 )
-  {
-    return 1;
+    if ( *((_WORD *)this + 191) != 0 )
+    {
+      v3 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 191));
+      if ( IEntity::Type((IEntity *)v3) == 32 )
+      {
+        return 1;
+      }
+    }
   }
   return v4;
 }
@@ -5200,7 +5154,7 @@ void  CTradingBuildingRole::StartLoadIntTraderDonkey(int a2) {
   int DepartBuildingID; // eax
   int v4; // eax
   char IsNeutralTrader; // [esp-4h] [ebp-40h]
-  _BYTE v7[24]; // [esp+4h] [ebp-38h] BYREF
+  CEntityEvent v7; // [esp+4h] [ebp-38h] BYREF
   CEntityEvent *v8; // [esp+1Ch] [ebp-20h]
   CEntityEvent *v9; // [esp+20h] [ebp-1Ch]
   unsigned __int8 *SettlerPtr; // [esp+24h] [ebp-18h]
@@ -5213,33 +5167,32 @@ void  CTradingBuildingRole::StartLoadIntTraderDonkey(int a2) {
   {
     __debugbreak();
   }
-  if ( !*((_WORD *)v11 + 191) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4713, "m_uTargetTradingBuilding!=0") == 1 )
+  if ( *((_WORD *)v11 + 191) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4713, "m_uTargetTradingBuilding!=0") == 1 )
   {
     __debugbreak();
   }
   *((_DWORD *)v11 + 161) = a2;
   *((_BYTE *)v11 + 648) = 1;
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(a2);
-  v12 = (CMFCToolBarImages *)CSettler::Role(SettlerPtr);
-  JobType = CDonkeyRole::GetJobType(v12);
-  if ( JobType )
+  SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(a2);
+  v12 = (CMFCToolBarImages *)CSettler::Role((CSettler *)SettlerPtr);
+  JobType = CDonkeyRole::GetJobType((CDonkeyRole *)v12);
+  if ( JobType == 0 )
   {
-    return JobType;
+    DepartBuildingID = CDonkeyRole::GetDepartBuildingID(v12);
+    CDonkeyRole::SetTargetBuildingID((CDonkeyRole *)v12, DepartBuildingID);
+    CDonkeyRole::SetDepartBuildingID((CDonkeyRole *)v12, *((unsigned __int16 *)v11 + 3));
+    CDonkeyRole::SetJobType((CDonkeyRole *)v12, 2);
+    IsNeutralTrader = CDonkeyRole::IsNeutralTrader((CDonkeyRole *)v12);
+    v4 = ((int (__stdcall *)())IEntity::ID)();
+    CTradingBuildingRole::RegisterIncomingTrader(v11, v4, 2, IsNeutralTrader);
+    v9 = CEntityEvent::CEntityEvent(&v7, 0xAu, 0, 0, 0, *((unsigned __int16 *)v11 + 3));
+    v8 = v9;
+    v13 = 0;
+    (*(void (__thiscall **)(unsigned __int8 *, CEntityEvent *))(*(_DWORD *)SettlerPtr + 80))(SettlerPtr, v9);
+    v13 = -1;
+    CEntityEvent::~CEntityEvent(&v7);
+    LOBYTE(JobType) = ((char (__thiscall *)(CDonkeyRole *, bool))CDonkeyRole::SetNeutralTraderStatus)((CDonkeyRole *)v12, 1);
   }
-  DepartBuildingID = CDonkeyRole::GetDepartBuildingID(v12);
-  CDonkeyRole::SetTargetBuildingID(v12, DepartBuildingID);
-  CDonkeyRole::SetDepartBuildingID(v12, *((unsigned __int16 *)v11 + 3));
-  CDonkeyRole::SetJobType(v12, 2);
-  IsNeutralTrader = CDonkeyRole::IsNeutralTrader(v12);
-  v4 = IEntity::ID();
-  CTradingBuildingRole::RegisterIncomingTrader(v11, v4, 2, IsNeutralTrader);
-  v9 = CEntityEvent::CEntityEvent((CEntityEvent *)v7, 0xAu, 0, 0, 0, *((unsigned __int16 *)v11 + 3));
-  v8 = v9;
-  v13 = 0;
-  (*(void (__thiscall **)(unsigned __int8 *, CEntityEvent *))(*(_DWORD *)SettlerPtr + 80))(SettlerPtr, v9);
-  v13 = -1;
-  CEntityEvent::~CEntityEvent(v7);
-  LOBYTE(JobType) = CDonkeyRole::SetNeutralTraderStatus(v12, 1);
   return JobType;
 }
 
@@ -5259,15 +5212,15 @@ void  CTradingBuildingRole::StartLoadIntTraderShip(int a2) {
   }
   *((_DWORD *)this + 158) = a2;
   *((_BYTE *)this + 636) = 1;
-  VehiclePtr = CVehicleMgr::GetVehiclePtr(a2);
-  if ( !CTransportShip::GetJobType(VehiclePtr) )
+  VehiclePtr = (CTransportShip *)CVehicleMgr::GetVehiclePtr(a2);
+  if ( CTransportShip::GetJobType(VehiclePtr) == 0 )
   {
     DepartHarbourID = CTransportShip::GetDepartHarbourID(VehiclePtr);
     CTransportShip::SetTargetHarbourID(VehiclePtr, DepartHarbourID);
     CTransportShip::SetDepartHarbourID(VehiclePtr, *((unsigned __int16 *)this + 3));
     CTransportShip::SetJobType(VehiclePtr, 2);
     IsNeutralTrader = CTransportShip::IsNeutralTrader(VehiclePtr);
-    v3 = IEntity::ID();
+    v3 = ((int (__stdcall *)())IEntity::ID)();
     CTradingBuildingRole::RegisterIncomingTrader(this, v3, 1, IsNeutralTrader);
     CTransportShip::SetNeutralTraderStatus(VehiclePtr, 1);
   }
@@ -5280,7 +5233,7 @@ void  CTradingBuildingRole::ReserveExportPile(int a2, int a3, int a4) {
   
   signed int result; // eax
   unsigned __int16 *v5; // eax
-  _DWORD *v7; // [esp+4h] [ebp-Ch]
+  CTradePileRole *v7; // [esp+4h] [ebp-Ch]
   signed int i; // [esp+8h] [ebp-8h]
   struct CPile *PilePtr; // [esp+Ch] [ebp-4h]
 
@@ -5293,17 +5246,17 @@ void  CTradingBuildingRole::ReserveExportPile(int a2, int a3, int a4) {
     {
       break;
     }
-    v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v5 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v5);
-    if ( !PilePtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4828, "pPile!=NULL") == 1 )
+    if ( PilePtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4828, "pPile!=NULL") == 1 )
     {
       __debugbreak();
     }
-    v7 = (_DWORD *)CPile::Role(PilePtr);
-    if ( CTradePileRole::GetTradeRoleType(v7) == 3 && a4 > 0 && (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr) > 0 )
+    v7 = (CTradePileRole *)CPile::Role(PilePtr);
+    if ( CTradePileRole::GetTradeRoleType(v7) == 3 && a4 > 0 && PilePtr->Amount(PilePtr) > 0 )
     {
       CTradePileRole::SetTradeRoleType(v7, 4);
-      a4 -= CTradePileRole::ReservesGood(v7, a4, a3, (int)PilePtr);
+      a4 -= CTradePileRole::ReservesGood(v7, a4, a3, PilePtr);
     }
   }
   return result;
@@ -5316,7 +5269,7 @@ void  CTradingBuildingRole::ReserveImportPile(int a2) {
   
   signed int result; // eax
   unsigned __int16 *v3; // eax
-  void *v4; // [esp+0h] [ebp-10h]
+  CTradePileRole *v4; // [esp+0h] [ebp-10h]
   struct CPile *PilePtr; // [esp+4h] [ebp-Ch]
   signed int i; // [esp+Ch] [ebp-4h]
 
@@ -5331,14 +5284,14 @@ void  CTradingBuildingRole::ReserveImportPile(int a2) {
     }
     if ( a2 > 0 )
     {
-      v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+      v3 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
       PilePtr = CPileMgr::GetPilePtr(*v3);
-      if ( !PilePtr && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4860, "pPile!=NULL") == 1 )
+      if ( PilePtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4860, "pPile!=NULL") == 1 )
       {
         __debugbreak();
       }
-      v4 = (void *)CPile::Role(PilePtr);
-      if ( !CTradePileRole::GetTradeRoleType(v4) )
+      v4 = (CTradePileRole *)CPile::Role(PilePtr);
+      if ( CTradePileRole::GetTradeRoleType(v4) == 0 )
       {
         CTradePileRole::SetTradeRoleType(v4, 5);
         a2 -= 8;
@@ -5354,22 +5307,22 @@ void  CTradingBuildingRole::ReserveImportPile(int a2) {
 int  CTradingBuildingRole::CalcExportedGoods(void) {
   
   unsigned __int16 *v1; // eax
-  void *v3; // [esp+0h] [ebp-14h]
+  CTradePileRole *v3; // [esp+0h] [ebp-14h]
   int v5; // [esp+8h] [ebp-Ch]
   struct CPile *PilePtr; // [esp+Ch] [ebp-8h]
   signed int i; // [esp+10h] [ebp-4h]
 
   v5 = 0;
   for ( i = 0;
-        i < *(char *)(this[94] + 57);
+        i < *(char *)(*(this + 94) + 57);
         ++i )
   {
-    v1 = (unsigned __int16 *)std::vector<unsigned short>::operator[](this + 152, i);
+    v1 = std::vector<unsigned short>::operator[](this + 152, i);
     PilePtr = CPileMgr::GetPilePtr(*v1);
-    v3 = (void *)CPile::Role(PilePtr);
+    v3 = (CTradePileRole *)CPile::Role(PilePtr);
     if ( CTradePileRole::GetTradeRoleType(v3) == 3 )
     {
-      v5 += (*(int (__thiscall **)(struct CPile *, void *))(*(_DWORD *)PilePtr + 40))(PilePtr, v3);
+      v5 += ((int (__thiscall *)(struct CPile *, CTradePileRole *))PilePtr->Amount)(PilePtr, v3);
     }
   }
   return v5;
@@ -5403,36 +5356,36 @@ int  CTradingBuildingRole::GetTotalExportedGoodAmount(class CBuilding * a2) {
   int v23; // [esp+6Ch] [ebp-4h]
 
   v21 = this;
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4891, "pBuilding!=NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4891, "pBuilding!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 0;
   }
-  if ( !*((_DWORD *)v21 + 171) && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4893, "m_pTrader!=NULL") == 1 )
+  if ( *((_DWORD *)v21 + 171) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 4893, "m_pTrader!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)v21 + 171) )
+  if ( *((_DWORD *)v21 + 171) == 0 )
   {
     return 0;
   }
   v18 = 0;
-  CInternationalTrader::GetExportGoodList(v8, a2);
+  CInternationalTrader::GetExportGoodList((int)v8, a2);
   v23 = 0;
-  std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin(v11);
+  std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::begin((int)v11);
   LOBYTE(v23) = 1;
   while ( 1 )
   {
-    v17 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end(v9);
+    v17 = (std::_Iterator_base12 *)std::vector<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>::end((int)v9);
     v16 = v17;
     LOBYTE(v23) = 2;
     v22 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator!=(v17);
     LOBYTE(v23) = 1;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v9);
-    if ( !v22 )
+    if ( v22 == 0 )
     {
       break;
     }
@@ -5440,21 +5393,21 @@ int  CTradingBuildingRole::GetTotalExportedGoodAmount(class CBuilding * a2) {
     v4 = v3[1];
     v12 = *v3;
     v13 = v4;
-    v15 = CBuilding::Role(a2);
+    v15 = (int)CBuilding::Role(a2);
     for ( i = 0;
           i < *(char *)(*((_DWORD *)v21 + 94) + 57);
           ++i )
     {
-      v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((void *)(v15 + 608), i);
+      v5 = std::vector<unsigned short>::operator[]((void *)(v15 + 608), i);
       PilePtr = CPileMgr::GetPilePtr(*v5);
-      v6 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
+      v6 = ((int (__thiscall *)(struct CPile *))PilePtr->GetGoodType)(PilePtr);
       if ( v6 == v13 )
       {
-        v7 = (*(int (__thiscall **)(struct CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
+        v7 = PilePtr->Amount(PilePtr);
         v18 += v7;
       }
     }
-    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++(v10, 0);
+    std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::operator++((int)v10, 0);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CInternationalTrader::CPlayerTradeInfo::TGoodInfo>>>(v10);
   }
   LOBYTE(v23) = 0;
@@ -5472,7 +5425,7 @@ void  CTradingBuildingRole::DisableTranding(void) {
   
   int result; // eax
   int v2; // eax
-  _DWORD *v3; // eax
+  CBuilding *v3; // eax
   unsigned __int8 *v4; // eax
   int v5; // eax
   void *v6; // eax
@@ -5485,62 +5438,61 @@ void  CTradingBuildingRole::DisableTranding(void) {
   int v13; // [esp+Ch] [ebp-14h]
   signed int i; // [esp+10h] [ebp-10h]
   CPile *PilePtr; // [esp+14h] [ebp-Ch]
-  void *v16; // [esp+18h] [ebp-8h]
+  CTradePileRole *v16; // [esp+18h] [ebp-8h]
 
   result = (int)this;
-  if ( !*((_WORD *)this + 191) )
+  if ( *((_WORD *)this + 191) != 0 )
   {
-    return result;
-  }
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-  v8 = *((unsigned __int16 *)this + 191);
-  v2 = IEntity::ID();
-  BBSupportTracePrintF(0, "Disable trading for building %d with Building %d", v2, v8);
-  v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 191));
-  v10 = CBuilding::Role(v3);
-  CTradingBuildingRole::CancelLoadingVehicle(this);
-  CTradingBuildingRole::CancelIncomingChargeTraders(this);
-  CTradingBuildingRole::CancelIncomingDeliverTraders(this);
-  *((_WORD *)this + 191) = 0;
-  CTradingBuildingRole::ShowTradeRoute(this);
-  v4 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-  v5 = CBuilding::EnsignWorldIdx(v4);
-  v11 = CWorldManager::EcoSectorId(v5);
-  v9 = *((unsigned __int16 *)this + 3);
-  v6 = (void *)CEcoSectorMgr::operator[](v11);
-  CEcoSector::CleanUpBuildingNeed(v6, v9);
-  for ( i = 0;
-        ;
-        ++i )
-  {
-    result = *(char *)(*((_DWORD *)this + 94) + 57);
-    if ( i >= result )
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+    v8 = *((unsigned __int16 *)this + 191);
+    v2 = ((int (__stdcall *)())IEntity::ID)();
+    BBSupportTracePrintF(0, "Disable trading for building %d with Building %d", v2, v8);
+    v3 = (CBuilding *)((CBuilding *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 191));
+    v10 = (int)CBuilding::Role(v3);
+    CTradingBuildingRole::CancelLoadingVehicle(this);
+    CTradingBuildingRole::CancelIncomingChargeTraders(this);
+    CTradingBuildingRole::CancelIncomingDeliverTraders(this);
+    *((_WORD *)this + 191) = 0;
+    CTradingBuildingRole::ShowTradeRoute(this);
+    v4 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
+    v5 = CBuilding::EnsignWorldIdx((CBuilding *)v4);
+    v11 = CWorldManager::EcoSectorId(v5);
+    v9 = *((unsigned __int16 *)this + 3);
+    v6 = (void *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v11);
+    CEcoSector::CleanUpBuildingNeed(v6, v9);
+    for ( i = 0;
+          ;
+          ++i )
     {
-      break;
-    }
-    v7 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
-    PilePtr = CPileMgr::GetPilePtr(*v7);
-    v16 = (void *)CPile::Role(PilePtr);
-    if ( CTradePileRole::GetTradeRoleType(v16) == 3 )
-    {
-      CPile::NotifyTargetDieAndDetachAllObservers(PilePtr);
-    }
-    if ( CTradePileRole::GetTradeRoleType(v16) == 3 || CTradePileRole::GetTradeRoleType(v16) == 4 || CTradePileRole::GetTradeRoleType(v16) == 5 )
-    {
-      if ( (*(int (__thiscall **)(CPile *, int, int, unsigned __int8 *))(*(_DWORD *)PilePtr + 40))(PilePtr, v10, v11, BuildingPtr) <= 0 )
+      result = *(char *)(*((_DWORD *)this + 94) + 57);
+      if ( i >= result )
       {
-        CTradePileRole::SetTradeRoleType(v16, 0);
+        break;
       }
-      else
+      v7 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
+      PilePtr = CPileMgr::GetPilePtr(*v7);
+      v16 = (CTradePileRole *)CPile::Role(PilePtr);
+      if ( CTradePileRole::GetTradeRoleType(v16) == 3 )
       {
-        CTradePileRole::SetTradeRoleType(v16, 1);
+        CPile::NotifyTargetDieAndDetachAllObservers(PilePtr);
       }
-      v13 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
-      CTradingBuildingRole::ClearGoodState(this, v13, 8);
-      CTradingBuildingRole::ClearGoodState(this, v13, 4);
-      *((_BYTE *)this + v13 + 513) = 0;
-      *((_BYTE *)this + v13 + 556) = 0;
-      *((_DWORD *)this + 172) = 0;
+      if ( CTradePileRole::GetTradeRoleType(v16) == 3 || CTradePileRole::GetTradeRoleType(v16) == 4 || CTradePileRole::GetTradeRoleType(v16) == 5 )
+      {
+        if ( ((int (__thiscall *)(CPile *, int, int, unsigned __int8 *))PilePtr->Amount)(PilePtr, v10, v11, BuildingPtr) <= 0 )
+        {
+          CTradePileRole::SetTradeRoleType(v16, 0);
+        }
+        else
+        {
+          CTradePileRole::SetTradeRoleType(v16, 1);
+        }
+        v13 = ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr);
+        CTradingBuildingRole::ClearGoodState(this, v13, 8);
+        CTradingBuildingRole::ClearGoodState(this, v13, 4);
+        *((_BYTE *)this + v13 + 513) = 0;
+        *((_BYTE *)this + v13 + 556) = 0;
+        *((_DWORD *)this + 172) = 0;
+      }
     }
   }
   return result;
@@ -5566,24 +5518,22 @@ void  CTradingBuildingRole::RequestTradingGood(enum PILE_TYPES a2) {
 
   v5 = *((char *)this + a2 + 556) + CTradingBuildingRole::GetExportGoodAmount(this, a2);
   result = CTradingBuildingRole::GetMaxTradingGoodAmount(this);
-  if ( v5 >= result )
+  if ( v5 < result )
   {
-    return result;
-  }
-  v4 = CTradingBuildingRole::GetMaxTradingGoodAmount(this) - v5;
-  *((_BYTE *)this + a2 + 513) = v4;
-  CTradingBuildingRole::SetGoodState(this, a2, 8);
-  *((_BYTE *)this + a2 + 556) += v4;
-  v3 = *((char *)this + a2 + 556);
-  result = CTradingBuildingRole::GetMaxTradingGoodAmount(this);
-  if ( v3 <= result )
-  {
-    return result;
-  }
-  result = BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 5027, "m_vTradingGoodTransportAmount[ _GoodType ] <= GetMaxTradingGoodAmount()");
-  if ( result == 1 )
-  {
-    __debugbreak();
+    v4 = CTradingBuildingRole::GetMaxTradingGoodAmount(this) - v5;
+    *((_BYTE *)this + a2 + 513) = v4;
+    CTradingBuildingRole::SetGoodState(this, a2, 8);
+    *((_BYTE *)this + a2 + 556) += v4;
+    v3 = *((char *)this + a2 + 556);
+    result = CTradingBuildingRole::GetMaxTradingGoodAmount(this);
+    if ( v3 > result )
+    {
+      result = BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 5027, "m_vTradingGoodTransportAmount[ _GoodType ] <= GetMaxTradingGoodAmount()");
+      if ( result == 1 )
+      {
+        __debugbreak();
+      }
+    }
   }
   return result;
 }
@@ -5609,7 +5559,7 @@ bool  CTradingBuildingRole::CheckTradingTransport(class CBuilding * a2, int a3) 
   CPile *PilePtr; // [esp+30h] [ebp-8h]
   char v19; // [esp+37h] [ebp-1h]
 
-  if ( a3 > 0x2A || !*((_BYTE *)this + a3 + 513) )
+  if ( a3 > 0x2A || *((_BYTE *)this + a3 + 513) == 0 )
   {
     return 0;
   }
@@ -5625,29 +5575,29 @@ bool  CTradingBuildingRole::CheckTradingTransport(class CBuilding * a2, int a3) 
         i < *(char *)(*((_DWORD *)this + 94) + 57);
         ++i )
   {
-    v4 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 608, i);
+    v4 = std::vector<unsigned short>::operator[]((char *)this + 608, i);
     PilePtr = CPileMgr::GetPilePtr(*v4);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 5074, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v15 = (pairNode *)CPile::Role(PilePtr);
-    if ( !CTradePileRole::GetTradeRoleType(v15) )
+    if ( CTradePileRole::GetTradeRoleType((CTradePileRole *)v15) == 0 )
     {
-      v5 = IEntity::WorldIdx();
+      v5 = ((int (__stdcall *)())IEntity::WorldIdx)();
       v13 = CWorldManager::EcoSectorId(v5);
-      if ( !v13 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 5083, "m_iESId != 0") == 1 )
+      if ( v13 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 5083, "m_iESId != 0") == 1 )
       {
         __debugbreak();
       }
-      if ( v13 )
+      if ( v13 != 0 )
       {
-        v6 = (CEcoSector *)CEcoSectorMgr::operator[](v13);
-        if ( CEcoSector::GetGoodOffer(v6, a3) )
+        v6 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v13);
+        if ( CEcoSector::GetGoodOffer(v6, a3) != 0 )
         {
-          v7 = 8 - (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 40))(PilePtr);
+          v7 = 8 - PilePtr->Amount(PilePtr);
           v8 = v7 - CPile::AmountComing(PilePtr);
-          v12 = v8 - CTradePileRole::GetExpectedAmount(v15);
+          v12 = v8 - CTradePileRole::GetExpectedAmount((CTradePileRole *)v15);
           if ( v16 >= v12 )
           {
             v11 = v12;
@@ -5656,18 +5606,15 @@ bool  CTradingBuildingRole::CheckTradingTransport(class CBuilding * a2, int a3) 
           {
             v11 = v16;
           }
-          if ( v11 )
+          if ( v11 != 0 && ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr) == 0 )
           {
-            if ( !(*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr) )
-            {
-              CPile::SetGoodType(PilePtr, a3);
-              CTradePileRole::SetTradeRoleType(v15, 3);
-              ExpectedAmount = CTradePileRole::GetExpectedAmount(v15);
-              CTradePileRole::SetExpectedAmount(v15, (struct CPaneDivider *)(v11 + ExpectedAmount));
-              IAnimatedEntity::RegisterForLogicUpdate(1);
-              v19 = 1;
-              v16 -= v11;
-            }
+            CPile::SetGoodType(PilePtr, a3);
+            CTradePileRole::SetTradeRoleType(v15, 3);
+            ExpectedAmount = CTradePileRole::GetExpectedAmount((CTradePileRole *)v15);
+            CTradePileRole::SetExpectedAmount(v15, (struct CPaneDivider *)(v11 + ExpectedAmount));
+            ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
+            v19 = 1;
+            v16 -= v11;
           }
         }
       }
@@ -5696,21 +5643,21 @@ void  CTradingBuildingRole::ClearTradingPiles(int a2, enum TGOOD_STATUS a3) {
         ;
         ++i )
   {
-    result = this[94];
+    result = *(this + 94);
     if ( i >= *(char *)(result + 57) )
     {
       break;
     }
-    v4 = (unsigned __int16 *)std::vector<unsigned short>::operator[](this + 152, i);
+    v4 = std::vector<unsigned short>::operator[](this + 152, i);
     PilePtr = CPileMgr::GetPilePtr(*v4);
     if ( CPile::GetRoleType(PilePtr) != 4 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 5121, "pPile->GetRoleType() == IPileRole::PILE_TRADE") == 1 )
     {
       __debugbreak();
     }
     v6 = (CPaneContainer *)CPile::Role(PilePtr);
-    if ( a3 == 8 && CTradePileRole::GetTradeRoleType(v6) == 3 )
+    if ( a3 == 8 && CTradePileRole::GetTradeRoleType((CTradePileRole *)v6) == 3 )
     {
-      v5 = (*(int (__thiscall **)(CPile *))(*(_DWORD *)PilePtr + 60))(PilePtr);
+      v5 = ((int (__thiscall *)(CPile *))PilePtr->GetGoodType)(PilePtr);
       if ( v5 == a2 )
       {
         CPile::NotifyTargetDieAndDetachAllObservers(PilePtr);
@@ -5722,7 +5669,7 @@ void  CTradingBuildingRole::ClearTradingPiles(int a2, enum TGOOD_STATUS a3) {
     }
     if ( a3 == 4 )
     {
-      CTradePileRole::GetTradeRoleType(v6);
+      CTradePileRole::GetTradeRoleType((CTradePileRole *)v6);
     }
   }
   return result;
@@ -5772,7 +5719,7 @@ enum TGOOD_STATUS  CTradingBuildingRole::GetTradingStatus(int a1) {
   char v2; // [esp+7h] [ebp-1h]
 
   v2 = a1 & 0xFC;
-  if ( (a1 & 4) == 0 && (a1 & 8) == 0 && v2 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 5170, "((tmpStatus & TRADING_IMPORT)!=0) || ((tmpStatus & TRADING_EXPORT)!=0) || (tmpStatus ==0)") == 1 )
+  if ( (a1 & 4) == 0 && (a1 & 8) == 0 && v2 != 0 && BBSupportDbgReport(2, "MapObjects\\Building\\TradingBuilding.cpp", 5170, "((tmpStatus & TRADING_IMPORT)!=0) || ((tmpStatus & TRADING_EXPORT)!=0) || (tmpStatus ==0)") == 1 )
   {
     __debugbreak();
   }
@@ -5785,7 +5732,7 @@ enum TGOOD_STATUS  CTradingBuildingRole::GetTradingStatus(int a1) {
 int  CTradingBuildingRole::GetBuildingID(void) {
   
   CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((unsigned __int16 *)this + 3));
-  return IEntity::ID();
+  return ((int (__stdcall *)())IEntity::ID)();
 }
 
 

@@ -26,14 +26,13 @@ void  CPossibleDirs::PushDir(int a2) {
     __debugbreak();
   }
   result = this;
-  if ( ((1 << a2) & *((_DWORD *)this + 1)) != 0 )
+  if ( ((1 << a2) & *((_DWORD *)this + 1)) == 0 )
   {
-    return result;
+    *((_DWORD *)this + 1) |= 1 << a2;
+    *((_DWORD *)this + *(_DWORD *)this + 2) = a2;
+    result = this;
+    ++*(_DWORD *)this;
   }
-  *((_DWORD *)this + 1) |= 1 << a2;
-  *((_DWORD *)this + *(_DWORD *)this + 2) = a2;
-  result = this;
-  ++*(_DWORD *)this;
   return result;
 }
 

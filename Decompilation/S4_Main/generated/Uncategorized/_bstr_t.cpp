@@ -10,7 +10,7 @@
   BSTR *C; // [esp+Ch] [ebp-14h]
 
   C = (BSTR *)_bstr_t::Data_t::operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     v3 = _bstr_t::Data_t::Data_t(C, psz);
   }
@@ -19,7 +19,7 @@
     v3 = 0;
   }
   *this = v3;
-  if ( !*this )
+  if ( *this == 0 )
   {
     _com_issue_error(-2147024882);
   }
@@ -28,7 +28,7 @@
 
 
 // address=[0x2fbedb0]
-// Decompiled from void __thiscall _bstr_t::~_bstr_t(_bstr_t *this)
+// Decompiled from void __thiscall _bstr_t::~_bstr_t(_bstr_t::Data_t **this)
  _bstr_t::~_bstr_t(void) {
   
   _bstr_t::_Free(this);
@@ -39,7 +39,7 @@
 // Decompiled from int __thiscall _bstr_t::operator char const *(_bstr_t::Data_t **this)
  _bstr_t::operator char const *(void)const {
   
-  if ( *this )
+  if ( *this != 0 )
   {
     return _bstr_t::Data_t::GetString(*this);
   }
@@ -57,12 +57,11 @@ void  _bstr_t::_Free(void) {
   _bstr_t::Data_t **result; // eax
 
   result = this;
-  if ( !*this )
+  if ( *this != 0 )
   {
-    return result;
+    result = (_bstr_t::Data_t **)_bstr_t::Data_t::Release(*this);
+    *this = 0;
   }
-  result = (_bstr_t::Data_t **)_bstr_t::Data_t::Release(*this);
-  *this = 0;
   return result;
 }
 

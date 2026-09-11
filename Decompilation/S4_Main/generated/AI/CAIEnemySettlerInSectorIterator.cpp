@@ -25,16 +25,16 @@
   }
   v5 = IAIEnvironment::AlliancesAllianceId(a2);
   *(_DWORD *)this = IAIEnvironment::AlliancesEnemyPlayerIds(v5);
-  if ( !*(_DWORD *)this && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1939, "m_pEnemyPlayerIds != 0") == 1 )
+  if ( *(_DWORD *)this == 0 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1939, "m_pEnemyPlayerIds != 0") == 1 )
   {
     __debugbreak();
   }
   v6 = **(_DWORD **)this;
-  if ( v6 && !IAIEnvironment::AlliancesIsValidUsedPlayerId(v6) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1943, "(iEnemyPlayerId == PLAYER_NO_PLAYER) || g_pAIEnv->AlliancesIsValidUsedPlayerId(iEnemyPlayerId)") == 1 )
+  if ( v6 != 0 && !IAIEnvironment::AlliancesIsValidUsedPlayerId(v6) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1943, "(iEnemyPlayerId == PLAYER_NO_PLAYER) || g_pAIEnv->AlliancesIsValidUsedPlayerId(iEnemyPlayerId)") == 1 )
   {
     __debugbreak();
   }
-  if ( v6 )
+  if ( v6 != 0 )
   {
     *((_DWORD *)this + 3) = -1;
     *((_DWORD *)this + 4) = 0;
@@ -49,11 +49,11 @@
 
 
 // address=[0x130d5e0]
-// Decompiled from char __thiscall CAIEnemySettlerInSectorIterator::NextEnemySettler(_DWORD *this, int *a2)
+// Decompiled from char __thiscall CAIEnemySettlerInSectorIterator::NextEnemySettler(int *this, int *a2)
 bool  CAIEnemySettlerInSectorIterator::NextEnemySettler(int & a2) {
   
   int v3; // [esp+4h] [ebp-28h]
-  int v4; // [esp+8h] [ebp-24h]
+  CSettler *v4; // [esp+8h] [ebp-24h]
   int v5; // [esp+Ch] [ebp-20h]
   bool v6; // [esp+14h] [ebp-18h]
   int v7; // [esp+18h] [ebp-14h]
@@ -61,10 +61,10 @@ bool  CAIEnemySettlerInSectorIterator::NextEnemySettler(int & a2) {
   unsigned __int8 *v9; // [esp+20h] [ebp-Ch]
   int FirstSettlerId; // [esp+24h] [ebp-8h]
 
-  FirstSettlerId = this[4];
+  FirstSettlerId = *(this + 4);
   if ( FirstSettlerId >= 0 )
   {
-    if ( (int)this[3] >= 0 && !*(_DWORD *)(*this + 4 * this[3]) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1973, "(m_iCurrentPlayerIdx < 0) || (m_pEnemyPlayerIds[m_iCurrentPlayerIdx] != PLAYER_NO_PLAYER)") == 1 )
+    if ( *(this + 3) >= 0 && *(_DWORD *)(*this + 4 * *(this + 3)) == 0 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1973, "(m_iCurrentPlayerIdx < 0) || (m_pEnemyPlayerIds[m_iCurrentPlayerIdx] != PLAYER_NO_PLAYER)") == 1 )
     {
       __debugbreak();
     }
@@ -75,23 +75,23 @@ bool  CAIEnemySettlerInSectorIterator::NextEnemySettler(int & a2) {
     }
     while ( 1 )
     {
-      while ( FirstSettlerId )
+      while ( FirstSettlerId != 0 )
       {
         v9 = (unsigned __int8 *)CSettlerMgr::operator[](FirstSettlerId);
-        if ( IEntity::ObjType(v9) != 1 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1988, "rSettler.ObjType() == SETTLER_OBJ") == 1 )
+        if ( IEntity::ObjType((IEntity *)v9) != SETTLER_OBJ && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1988, "rSettler.ObjType() == SETTLER_OBJ") == 1 )
         {
           __debugbreak();
         }
-        if ( IEntity::Type((unsigned __int16 *)v9) != this[1] && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1989, "rSettler.Type() == m_iSettlerType") == 1 )
+        if ( IEntity::Type((IEntity *)v9) != *(this + 1) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1989, "rSettler.Type() == m_iSettlerType") == 1 )
         {
           __debugbreak();
         }
-        v6 = IEntity::FlagBits(v9, ENTITY_FLAG_AliveMask) != 0;
-        if ( IEntity::FlagBits(v9, ENTITY_FLAG_ON_BOARD) == 0 && v6 )
+        v6 = IEntity::FlagBits((IEntity *)v9, ENTITY_FLAG_AliveMask) != 0;
+        if ( IEntity::FlagBits((IEntity *)v9, ENTITY_FLAG_ON_BOARD) == 0 && v6 )
         {
           v7 = IEntity::X(v9);
           v8 = IEntity::Y(v9);
-          if ( !(unsigned __int8)CWorldManager::InWorld(v7, v8) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1996, "g_cWorld.InWorld(iX, iY)") == 1 )
+          if ( !CWorldManager::InWorld(v7, v8) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1996, "g_cWorld.InWorld(iX, iY)") == 1 )
           {
             __debugbreak();
           }
@@ -100,25 +100,25 @@ bool  CAIEnemySettlerInSectorIterator::NextEnemySettler(int & a2) {
             __debugbreak();
           }
           v3 = CWorldManager::Index(v7, v8);
-          if ( ITiling::SectorId(v3) == this[2] )
+          if ( ITiling::SectorId(v3) == *(this + 2) )
           {
             *a2 = FirstSettlerId;
-            this[4] = FirstSettlerId;
+            *(this + 4) = FirstSettlerId;
             return 1;
           }
         }
         FirstSettlerId = IAnimatedEntity::Next(v9);
       }
-      ++this[3];
-      v5 = *(_DWORD *)(*this + 4 * this[3]);
-      if ( !v5 )
+      ++*(this + 3);
+      v5 = *(_DWORD *)(*this + 4 * *(this + 3));
+      if ( v5 == 0 )
       {
         break;
       }
-      FirstSettlerId = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, v5, this[1]);
+      FirstSettlerId = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, v5, *(this + 1));
     }
     *a2 = 0;
-    this[4] = -1;
+    *(this + 4) = -1;
     return 0;
   }
   else

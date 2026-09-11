@@ -13,7 +13,7 @@ int  CClassNetGameIniBuffer::GetIntValue(char const * SubStr, int a3) {
 
   v6 = a3;
   String = (char *)CClassNetGameIniBuffer::GetStartOfEntry(this, SubStr);
-  if ( String )
+  if ( String != 0 )
   {
     return j__strtol(String, (char **)&EndPtr, 10);
   }
@@ -27,19 +27,18 @@ char const *  CClassNetGameIniBuffer::GetStartOfEntry(char const * SubStr) {
   
   const char *Str; // [esp+4h] [ebp-4h]
 
-  if ( !SubStr || !*SubStr )
+  if ( SubStr == 0 || *SubStr == 0 )
   {
     return 0;
   }
   Str = j__strstr(this->m_spBuffer, SubStr);
-  if ( !Str )
+  if ( Str != 0 )
   {
-    return Str;
-  }
-  Str = j__strstr(Str, "=");
-  if ( Str )
-  {
-    ++Str;
+    Str = j__strstr(Str, "=");
+    if ( Str != 0 )
+    {
+      ++Str;
+    }
   }
   return Str;
 }

@@ -34,9 +34,9 @@ unsigned int __cdecl LZHLCompressor::calcMaxBuf(unsigned int a1) {
 // Decompiled from void __thiscall LZHLCompressor::~LZHLCompressor(void **this)
  LZHLCompressor::~LZHLCompressor(void) {
   
-  operator delete[](this[5]);
-  LZHLEncoderStat::~LZHLEncoderStat((LZHLEncoderStat *)(this + 2));
-  LZBuffer::~LZBuffer((LZBuffer *)this);
+  operator delete[](*(this + 5));
+  LZHLEncoderStat::~LZHLEncoderStat(this + 2);
+  LZBuffer::~LZBuffer(this);
 }
 
 
@@ -170,7 +170,7 @@ LABEL_5:
         v6 = LZBuffer::_wrap(v52 + v48);
         if ( v6 == v45 )
         {
-          if ( !v52 && BBSupportDbgReport(2, "Source\\compression\\lz.cpp", 194, "matchLen != 0") == 1 )
+          if ( v52 == 0 && BBSupportDbgReport(2, "Source\\compression\\lz.cpp", 194, "matchLen != 0") == 1 )
           {
             __debugbreak();
           }
@@ -282,7 +282,7 @@ LABEL_5:
       }
       if ( (int)v52 >= 4 )
       {
-        if ( v38 )
+        if ( v38 != 0 )
         {
           v11 = LZBuffer::_distance(v45 - v48);
           LZHLEncoder::putMatch((LZHLEncoder *)v14, Src, v53, v52 - 4, v11);
@@ -305,7 +305,7 @@ LABEL_5:
         v18 = *((_DWORD *)v51 + 1);
         v17 = updated;
       }
-      if ( v38 && BBSupportDbgReport(2, "Source\\compression\\lz.cpp", 290, "!lazyForceMatch") == 1 )
+      if ( v38 != 0 && BBSupportDbgReport(2, "Source\\compression\\lz.cpp", 290, "!lazyForceMatch") == 1 )
       {
         __debugbreak();
       }
@@ -347,7 +347,7 @@ LABEL_5:
       Src += v47 + v53;
     }
   }
-  if ( v49 )
+  if ( v49 != 0 )
   {
     LZBuffer::_toBuf(Src, v49);
     LZHLEncoder::putRaw((LZHLEncoder *)v14, Src, v49);

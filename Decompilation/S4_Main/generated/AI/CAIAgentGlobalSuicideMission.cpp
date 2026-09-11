@@ -28,7 +28,7 @@ unsigned int  CAIAgentGlobalSuicideMission::Execute(unsigned int a2, unsigned in
 
   v14 = CAIAgentPlayerBase::PlayerAI(this);
   p_m_pFirstAgent = (CUserToolsManager *)&v14[7].m_cScheduler.m_pFirstAgent;
-  if ( CAITaskForce::NumberOfEntities((pairNode *)&v14[7].m_cScheduler.m_pFirstAgent) > 0 )
+  if ( CAITaskForce::NumberOfEntities((CAITaskForce *)&v14[7].m_cScheduler.m_pFirstAgent) > 0 )
   {
     v22 = 0;
     CAITaskForce::GetPositionOfFirstEntity((CAITaskForce *)p_m_pFirstAgent, (int *)&v17, (int *)&v18);
@@ -44,7 +44,7 @@ unsigned int  CAIAgentGlobalSuicideMission::Execute(unsigned int a2, unsigned in
       {
         __debugbreak();
       }
-      if ( IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(iGoalId, 12) )
+      if ( IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(iGoalId, AI_WARRIOR_TYPE_TOWER_BUILDING) )
       {
         IAIEnvironment::BuildingGetEnsignPosition(iGoalId, &v12, &v13);
         v16 = IAIEnvironment::GridDistance(v12 - (_DWORD)v17, v13 - (_DWORD)v18);
@@ -53,13 +53,13 @@ unsigned int  CAIAgentGlobalSuicideMission::Execute(unsigned int a2, unsigned in
     if ( v16 > 10 )
     {
       v5 = CAIPlayerAI::PlayerId((pairNode *)v14);
-      if ( CScanner::FindNearestEnemyTowerInSector((struct SFindNearestResult *)&v9, (int)v17, (int)v18, 32, v5) )
+      if ( CScanner::FindNearestEnemyTowerInSector((struct SFindNearestResult *)&v9, (unsigned int)v17, (unsigned int)v18, 32, v5) )
       {
         if ( v9 <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentsPlayer.cpp", 132, "sResult.m_iEntityId > 0") == 1 )
         {
           __debugbreak();
         }
-        if ( !IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(v9, 12) && BBSupportDbgReport(2, "AI\\AI_AgentsPlayer.cpp", 133, "g_pAIEnv->EntityIsAliveAndOfGivenWarriorType(sResult.m_iEntityId, AI_WARRIOR_TYPE_TOWER_BUILDING)") == 1 )
+        if ( !IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(v9, AI_WARRIOR_TYPE_TOWER_BUILDING) && BBSupportDbgReport(2, "AI\\AI_AgentsPlayer.cpp", 133, "g_pAIEnv->EntityIsAliveAndOfGivenWarriorType(sResult.m_iEntityId, AI_WARRIOR_TYPE_TOWER_BUILDING)") == 1 )
         {
           __debugbreak();
         }
@@ -74,10 +74,10 @@ unsigned int  CAIAgentGlobalSuicideMission::Execute(unsigned int a2, unsigned in
     {
       v22 = 1;
       iGoalId = CAIAgentGlobalSuicideMission::FindNearestBuildingInSector(1, 46, (int)v17, (int)v18);
-      if ( !iGoalId )
+      if ( iGoalId == 0 )
       {
         iGoalId = CAIAgentGlobalSuicideMission::FindNearestBuildingInSector(1, 47, (int)v17, (int)v18);
-        if ( !iGoalId )
+        if ( iGoalId == 0 )
         {
           iGoalId = CAIAgentGlobalSuicideMission::FindNearestBuildingInSector(1, 48, (int)v17, (int)v18);
         }
@@ -88,11 +88,11 @@ unsigned int  CAIAgentGlobalSuicideMission::Execute(unsigned int a2, unsigned in
       v7 = IAIEnvironment::PackXYFast((int)v17, (int)v18);
       (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)p_m_pFirstAgent + 32))(p_m_pFirstAgent, 1, v7, 0);
     }
-    else if ( CAITaskForce::Command((CAITaskForce *)p_m_pFirstAgent) != 4 || (v6 = CAITaskForce::CmdGoal((CAITaskForce *)p_m_pFirstAgent), v6 != iGoalId) || ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags((CAITaskForce *)p_m_pFirstAgent)) != 0 || a2 >= CAITaskForce::CmdTimeStamp(p_m_pFirstAgent) + 1000 )
+    else if ( CAITaskForce::Command((CAITaskForce *)p_m_pFirstAgent) != 4 || (v6 = CAITaskForce::CmdGoal((CAITaskForce *)p_m_pFirstAgent)) != iGoalId || ((unsigned int)&s_iMsgTracer2.m_aMessages[15456] & CAITaskForce::Flags((CAITaskForce *)p_m_pFirstAgent)) != 0 || a2 >= CAITaskForce::CmdTimeStamp(p_m_pFirstAgent) + 1000 )
     {
       (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)p_m_pFirstAgent + 32))(p_m_pFirstAgent, 4, iGoalId, 0);
     }
-    if ( v22 )
+    if ( v22 != 0 )
     {
       v8 = CAIAgent::DefaultExecutionDelay(this);
       return CAIAgent::ExecuteResult(10 * v8, 0x200u);
@@ -145,7 +145,7 @@ void  CAIAgentGlobalSuicideMission::Save(class IS4Chunk & a2) {
 
 
 // address=[0x1319260]
-// Decompiled from void __thiscall CAIAgentGlobalSuicideMission::~CAIAgentGlobalSuicideMission(CAIAgentGlobalSuicideMission *this)
+// Decompiled from void __thiscall CAIAgentGlobalSuicideMission::~CAIAgentGlobalSuicideMission(CAIScheduler **this)
  CAIAgentGlobalSuicideMission::~CAIAgentGlobalSuicideMission(void) {
   
   CAIAgentPlayerBase::~CAIAgentPlayerBase(this);
@@ -170,16 +170,16 @@ int __cdecl CAIAgentGlobalSuicideMission::FindNearestBuildingInSector(int arg0, 
   v8 = 0x4000;
   v5 = IAIEnvironment::WorldSectorId(a3, a4);
   for ( a1 = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, arg0, a2);
-        a1;
+        a1 != 0;
         a1 = IAnimatedEntity::Next(v13) )
   {
-    v13 = (IEntity *)CBuildingMgr::operator[](a1);
+    v13 = ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(a1);
     v10 = CBuilding::EnsignX(v13);
     v11 = CBuilding::EnsignY(v13);
     v6 = IAIEnvironment::WorldSectorId(v10, v11);
-    if ( IEntity::FlagBits(v13, ENTITY_FLAG_Ready) && v6 == v5 )
+    if ( IEntity::FlagBits(v13, ENTITY_FLAG_Ready) != 0 && v6 == v5 )
     {
-      v9 = IAIEnvironment::GridDistance((Grid *)(v10 - a3), v11 - a4);
+      v9 = IAIEnvironment::GridDistance(v10 - a3, v11 - a4);
       if ( v9 < v8 )
       {
         v7 = a1;

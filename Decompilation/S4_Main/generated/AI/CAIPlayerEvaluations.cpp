@@ -61,7 +61,7 @@ void  CAIPlayerEvaluations::DbgPrint(void) {
   {
     IAIEnvironment::DbgTracePrintF(byte_367348D);
     IAIEnvironment::DbgTracePrintF("Player %i evaluation...", i);
-    CAIPlayerEvaluation::DbgPrint(&this[i]);
+    CAIPlayerEvaluation::DbgPrint(this + i);
   }
 }
 

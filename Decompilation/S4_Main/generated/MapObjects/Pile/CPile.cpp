@@ -18,7 +18,7 @@ class CPersistence * __cdecl CPile::New(std::istream & a1) {
   CPile *v3; // [esp+Ch] [ebp-10h]
 
   v3 = (CPile *)CPile::operator new(0x7Cu);
-  if ( v3 )
+  if ( v3 != 0 )
   {
     return CPile::CPile(v3, a1);
   }
@@ -112,7 +112,7 @@ bool  CPile::HasSpace(void)const {
 // Decompiled from void __thiscall CPile::OfferCompletePileIfPossible(CPile *this, _DWORD *a2)
 void  CPile::OfferCompletePileIfPossible(int a2) {
   
-  CPile::Offer(this, -1, a2);
+  CPile::Offer(this, -1, (int)a2);
 }
 
 
@@ -195,15 +195,12 @@ void  CPile::Delete(void) {
   LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(this);
   CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, m_nEntityId);
   v6 = IEntity::ID(this);
-  CPileMgr::CheckOutPile((CPileMgr *)&g_cPileMgr, v6);
-  if ( debug )
+  CPileMgr::CheckOutPile(&g_cPileMgr, v6);
+  if ( debug != 0 && DEBUG_FLAGS[s_iPileDebugSection] != 0 )
   {
-    if ( DEBUG_FLAGS[s_iPileDebugSection] )
-    {
-      spGoodName = s_sGoodTypeMap[(unsigned __int8)this->m_uGood].m_spName;
-      v7 = IEntity::ID(this);
-      BBSupportTracePrintF(0, "Pile %u deleted goodType %s", v7, spGoodName);
-    }
+    spGoodName = s_sGoodTypeMap[this->m_uGood].m_spName;
+    v7 = IEntity::ID(this);
+    BBSupportTracePrintF(0, "Pile %u deleted goodType %s", v7, spGoodName);
   }
 }
 
@@ -227,13 +224,12 @@ void  CPile::LogicUpdate(void) {
 struct SGfxObjectInfo *  CPile::GetGfxInfos(void) {
   
   memset(&IEntity::m_sGfxInfo, 0, sizeof(IEntity::m_sGfxInfo));
-  if ( !this->m_uGood || (unsigned __int8)this->m_uGood >= (unsigned int)GOOD_MAX || !this->m_uAmount )
+  if ( this->m_uGood != 0 && this->m_uGood < (unsigned int)GOOD_MAX && this->m_uAmount != 0 )
   {
-    return &IEntity::m_sGfxInfo;
+    CGfxManager::GetPileGfxInfo((int)&IEntity::m_sGfxInfo, this->m_uGood, this->m_uAmount, (unsigned __int8)this->byte4A);
+    IEntity::m_sGfxInfo.m_uObjType = this->m_uObjType;
+    IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
   }
-  CGfxManager::GetPileGfxInfo((int)&IEntity::m_sGfxInfo, (unsigned __int8)this->m_uGood, this->m_uAmount, (unsigned __int8)this->byte4A);
-  IEntity::m_sGfxInfo.m_uObjType = this->m_uObjType;
-  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
   return &IEntity::m_sGfxInfo;
 }
 
@@ -242,9 +238,9 @@ struct SGfxObjectInfo *  CPile::GetGfxInfos(void) {
 // Decompiled from void __thiscall CPile::GetPatchGfx(CPile *this, struct SGfxPatchObject *_pGfxPatchObject)
 void  CPile::GetPatchGfx(struct SGfxPatchObject & _pGfxPatchObject) {
   
-  if ( this->m_uGood && (unsigned __int8)this->m_uGood < 0x2Bu && this->m_uAmount )
+  if ( this->m_uGood != 0 && this->m_uGood < 0x2Bu && this->m_uAmount != 0 )
   {
-    CGfxManager::GetPatchPileGfxInfo(g_pGfxManager, _pGfxPatchObject, (unsigned __int8)this->m_uGood, this->m_uAmount, (unsigned __int8)this->byte4A);
+    CGfxManager::GetPatchPileGfxInfo(g_pGfxManager, _pGfxPatchObject, this->m_uGood, this->m_uAmount, (unsigned __int8)this->byte4A);
   }
   else
   {
@@ -271,16 +267,16 @@ void  CPile::ChangeRole(int _iRoleType) {
   {
     __debugbreak();
   }
-  if ( this->m_uBuildingId )
+  if ( this->m_uBuildingId != 0 )
   {
     v7 = CBuildingMgr::operator[]((CBuildingMgr *)g_cBuildingMgr, this->m_uBuildingId);
     v2 = IEntity::ID(this);
-    v7->Detach(v2);
+    ((void (__stdcall *)(int))v7->Detach)(v2);
   }
   PileRole = CPileMgr::CreatePileRole(_iRoleType);
-  std::auto_ptr<IPileRole>::auto_ptr<IPileRole>(PileRole);
+  std::auto_ptr<IPileRole>::auto_ptr<IPileRole>((int)PileRole);
   v9 = 0;
-  std::auto_ptr<IPileRole>::operator=(v5);
+  std::auto_ptr<IPileRole>::operator=((int)v5);
   v6 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
   v6->Init(v6, this);
   v9 = -1;
@@ -377,7 +373,7 @@ void  CPile::DecreaseUnforeseen(int _iAmount) {
       {
         __debugbreak();
       }
-      if ( !this->m_uAmount )
+      if ( this->m_uAmount == 0 )
       {
         this->m_uAmountLeaving = 0;
         v2 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
@@ -410,12 +406,12 @@ bool  CPile::ForceAmountLeaving(int a2, int a3) {
       --v13;                                    // Not actually a while - probably an if(!G..A..). Broken output due to hacks to show this
     }
     v10 = CPileObserverList::NumberOfObservers((CPileObserverList *)&this->m_cPileObserverList);
-    if ( !v10 )
+    if ( v10 == 0 )
     {
       break;
     }
     pObservers = CPileObserverList::Observers((CPileObserverList *)&this->m_cPileObserverList);
-    if ( !pObservers && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 596, "pObservers") == 1 )
+    if ( pObservers == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 596, "pObservers") == 1 )
     {
       __debugbreak();
     }
@@ -486,7 +482,7 @@ void  CPile::Occupied(int _iNewEcoSectorId) {
   v3 = CEcoSector::Owner(v2);
   CPlayerManager::Race(v3);
   v4 = this->GetGoodType();
-  v5 = CPileMgr::ConvertGoodType((CPileMgr *)&g_cPileMgr, v4);
+  v5 = CPileMgr::ConvertGoodType(&g_cPileMgr, v4);
   CPile::SetGoodType(this, v5);
   v6 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
   v6->Occupied(v6, this);
@@ -551,7 +547,7 @@ void  CPile::Offer(int a2, int _iEcoSectorId) {
   {
     __debugbreak();
   }
-  if ( !_iEcoSectorId )
+  if ( _iEcoSectorId == 0 )
   {
     v3 = IEntity::WorldIdx(this);
     _iEcoSectorId = CWorldManager::EcoSectorId(v3);
@@ -579,7 +575,7 @@ void  CPile::CancelOffer(int a2, int _iEcoSectorId) {
   {
     __debugbreak();
   }
-  if ( !_iEcoSectorId )
+  if ( _iEcoSectorId == 0 )
   {
     v3 = IEntity::WorldIdx(this);
     _iEcoSectorId = CWorldManager::EcoSectorId(v3);
@@ -640,13 +636,13 @@ void  CPile::NotifyTargetDieAndDetachAllObservers(void) {
   CPileObserverList::NotifyAndDetachAllObservers((CPileObserverList *)&this->m_cPileObserverList, v4);
   v8 = -1;
   CEntityEvent::~CEntityEvent(&v2);
-  if ( this->m_uAmountComing )
+  if ( this->m_uAmountComing != 0 )
   {
     this->m_uAmountComing = 0;
     v6 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
     v6->DecAmountComing(v6, this);
   }
-  if ( this->m_uAmountLeaving )
+  if ( this->m_uAmountLeaving != 0 )
   {
     this->m_uAmountLeaving = 0;
     v5 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
@@ -656,10 +652,10 @@ void  CPile::NotifyTargetDieAndDetachAllObservers(void) {
 
 
 // address=[0x155cab0]
-// Decompiled from unsigned int __cdecl CPile::operator new(unsigned int a1)
+// Decompiled from uint __cdecl CPile::operator new(uint a1)
 void * __cdecl CPile::operator new(unsigned int a1) {
   
-  return CPileMgr::Alloc((CPileMgr *)&g_cPileMgr, a1);
+  return CPileMgr::Alloc(&g_cPileMgr, a1);
 }
 
 
@@ -667,7 +663,7 @@ void * __cdecl CPile::operator new(unsigned int a1) {
 // Decompiled from int __cdecl CPile::operator delete(_DWORD *a1)
 void __cdecl CPile::operator delete(void * a1) {
   
-  return CPileMgr::Dealloc((CPileMgr *)&g_cPileMgr, a1);
+  return ((int (__thiscall *)(CPileMgr *, _DWORD *))CPileMgr::Dealloc)(&g_cPileMgr, a1);
 }
 
 
@@ -757,7 +753,7 @@ void  CPile::AttachAndIncAmountComing(int _iAmount) {
 // Decompiled from int __thiscall CPile::Notify(CPile *this, const struct CEntityEvent *a2)
 void  CPile::Notify(class CEntityEvent const & a2)const {
   
-  return CPileObserverList::NotifyAllObservers((CPileObserverList *)&this->m_cPileObserverList, a2);
+  return ((int (__thiscall *)(CPileObserverList *, const struct CEntityEvent *))CPileObserverList::NotifyAllObservers)((CPileObserverList *)&this->m_cPileObserverList, a2);
 }
 
 
@@ -768,7 +764,7 @@ void  CPile::SetObserverTarget(enum T_OBSERVER_TARGET _tTargetType, int _iTarget
   struct IPileRole *v3; // eax
   int m_uBuildingId; // [esp+0h] [ebp-Ch]
 
-  if ( _tTargetType )
+  if ( _tTargetType != 0 )
   {
     if ( BBSupportDbgReport(1, "MapObjects\\Pile\\Pile.cpp", 1027, "CPile::SetObserverTarget(): Invalid target type!") == 1 )
     {
@@ -778,7 +774,7 @@ void  CPile::SetObserverTarget(enum T_OBSERVER_TARGET _tTargetType, int _iTarget
   else if ( _iTargetId <= 0 )
   {
     this->m_iFlags &= ~0x20u;
-    if ( this->m_uBuildingId )
+    if ( this->m_uBuildingId != 0 )
     {
       if ( CPile::GetRoleType(this) == 3 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 1011, "GetRoleType() != IPileRole::PILE_ANYWHERE") == 1 )
       {
@@ -793,11 +789,11 @@ void  CPile::SetObserverTarget(enum T_OBSERVER_TARGET _tTargetType, int _iTarget
   }
   else
   {
-    if ( this->m_uBuildingId && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 997, "m_uBuildingId == 0") == 1 )
+    if ( this->m_uBuildingId != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 997, "m_uBuildingId == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, _iTargetId) && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 998, "g_cBuildingMgr.GetBuildingPtr(_iTargetId) != 0") == 1 )
+    if ( CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, _iTargetId) == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 998, "g_cBuildingMgr.GetBuildingPtr(_iTargetId) != 0") == 1 )
     {
       __debugbreak();
     }
@@ -838,13 +834,10 @@ void  CPile::RequestSpaceIfPossible(void) {
   v3 = IEntity::Y(this);
   v1 = IEntity::X(this);
   v4 = CWorldManager::EcoSectorId(v1, v3);
-  if ( v4 > 0 )
+  if ( v4 > 0 && CPile::GoodAvailable(this) )
   {
-    if ( (unsigned __int8)CPile::GoodAvailable(this) )
-    {
-      v2 = CEcoSectorMgr::operator[](g_cESMgr, v4);
-      CEcoSector::RequestSpace(v2, this);
-    }
+    v2 = CEcoSectorMgr::operator[](g_cESMgr, v4);
+    CEcoSector::RequestSpace(v2, this);
   }
 }
 
@@ -865,7 +858,7 @@ void  CPile::RequestSpaceIfPossible(void) {
   std::auto_ptr<IPileRole>::auto_ptr<IPileRole>(0);
   LOBYTE(exceptionBlock) = 1;
   CPileObserverList::CPileObserverList((CPileObserverList *)&this->m_cPileObserverList, (int)_rStream);
-  operator^<unsigned int>(_rStream, &fileFormatVersion);
+  operator^<unsigned int>(_rStream, (unsigned int *)&fileFormatVersion);
   if ( fileFormatVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CPile");
@@ -880,13 +873,13 @@ void  CPile::RequestSpaceIfPossible(void) {
   operator^<unsigned char>(_rStream, &this->m_uPileRole);
   operator^<unsigned char>(_rStream, &this->m_bIsPatchPile);
   operator^<unsigned char>(_rStream, &this->byte4A);
-  operator^<short>(_rStream, &this->m_iOffsetX);
-  operator^<short>(_rStream, &this->m_iOffsetY);
+  operator^<short>((int)_rStream, (int)&this->m_iOffsetX);
+  operator^<short>((int)_rStream, (int)&this->m_iOffsetY);
   operator^<unsigned short>(_rStream, &this->m_uBuildingId);
   operator^<bool>(_rStream, &this->m_bOfferFlag);
   iPileRole = CPileMgr::LoadPileRole((int)_rStream, this->m_uPileRole);
   std::auto_ptr<IPileRole>::auto_ptr<IPileRole>(iPileRole);
-  std::auto_ptr<IPileRole>::operator=(v5);
+  std::auto_ptr<IPileRole>::operator=((int)v5);
   std::auto_ptr<IPileRole>::~auto_ptr<IPileRole>(v5);
   exceptionBlock = -1;
   return this;
@@ -905,7 +898,7 @@ void  CPile::Store(std::ostream & _rStream) {
   IAnimatedEntity::Store(this, _rStream);
   CPileObserverList::Store((CPileObserverList *)&v4->m_cPileObserverList, _rStream);
   v2 = 1;
-  operator^<unsigned int>(_rStream, &v2);
+  operator^<unsigned int>(_rStream, (unsigned int *)&v2);
   operator^<unsigned char>(_rStream, &v4->m_uGood);
   operator^<unsigned char>(_rStream, &v4->m_uAmount);
   operator^<unsigned char>(_rStream, &v4->m_uAmountLeaving);
@@ -1090,7 +1083,7 @@ void  CPile::DecreaseEx(int _iAmount) {
   CPile::AdjustStatistic(this, -_iAmount, 0);
   v3 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
   v3->Decrease(v3, this, 1);
-  if ( !this->m_uAmount )
+  if ( this->m_uAmount == 0 )
   {
     this->m_uAmountLeaving = 0;
     v2 = std::auto_ptr<IPileRole>::operator->(this->m_pRole);
@@ -1211,7 +1204,7 @@ void  CPile::DecAmountComing(void) {
   
   struct IPileRole *v1; // [esp+0h] [ebp-8h]
 
-  if ( !this->m_uAmountComing && BBSupportDbgReportF(2, "MapObjects\\Pile\\Pile.cpp", 733, "AmountComing=0 ! %u", this->m_iEntityId) == 1 )
+  if ( this->m_uAmountComing == 0 && BBSupportDbgReportF(2, "MapObjects\\Pile\\Pile.cpp", 733, "AmountComing=0 ! %u", this->m_iEntityId) == 1 )
   {
     __debugbreak();
   }
@@ -1233,7 +1226,7 @@ void  CPile::AdjustStatistic(int _iDeltaAmount, int _iEcoSectorId) {
   {
     __debugbreak();
   }
-  if ( _iDeltaAmount )
+  if ( _iDeltaAmount != 0 )
   {
     if ( _iEcoSectorId <= 0 )
     {
@@ -1282,7 +1275,7 @@ bool  CPile::ExecuteChangeGoodTypeUnforseen(int a2) {
   CPile::AdjustStatistic(this, -iCurrentAmount, 0);
   CPile::SetGoodType(this, a2);
   CPile::AdjustStatistic(this, iCurrentAmount, 0);
-  if ( CPile::GetOfferFlag(this) )
+  if ( CPile::GetOfferFlag(this) != 0 )
   {
     CPile::OfferCompletePileIfPossible(this, 0);
   }
@@ -1303,7 +1296,7 @@ bool  CPile::ExecuteChangeGoodTypeUnforseen(int a2) {
   this->__vftable = (IAnimatedEntity_vtbl *)&CPile::_vftable_;
   std::auto_ptr<IPileRole>::auto_ptr<IPileRole>(this->m_pRole, (int)&_pRole);
   CPileObserverList::CPileObserverList((CPileObserverList *)&this->m_cPileObserverList);
-  if ( CWorldManager::FlagBits(_iX, _iY, 1u) && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 81, "g_cWorld.FlagBits(_iX, _iY, FLAG_BLOCKED_LAND) == 0") == 1 )
+  if ( CWorldManager::FlagBits(_iX, _iY, 1u) != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\Pile.cpp", 81, "g_cWorld.FlagBits(_iX, _iY, FLAG_BLOCKED_LAND) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -1377,6 +1370,8 @@ void  CPile::ConvertEventIntoGoal(class CEntityEvent * a2) {
       {
         __debugbreak();
       }
+      break;
+    default:
       break;
   }
   IEntity::SetFlagBits(this, (EntityFlag)0x80000000);

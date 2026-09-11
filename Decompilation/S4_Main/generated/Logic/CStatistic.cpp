@@ -77,7 +77,7 @@ void  CStatistic::Update(void) {
   CStatistic::CalculateLandSize(this);
   CStatistic::CalculateMana(this);
   CStatistic::CalculateFightingStrengths(this);
-  if ( (int)g_pGameType->m_iTeamWon > 0 && !CStatistic::m_bWonStateSaved )
+  if ( (int)g_pGameType->m_iTeamWon > 0 && CStatistic::m_bWonStateSaved == 0 )
   {
     CStatistic::m_bWonStateSaved = 1;
     for ( i = 0;
@@ -371,7 +371,7 @@ int  CStatistic::GetBuildingProductivity(int _iPlayerId, int _iBuildingType)cons
 
 
 // address=[0x14767f0]
-// Decompiled from void __thiscall CStatistic::AddBuilding(CStatistic *this, int a2, int a3, int a4)
+// Decompiled from void __thiscall CStatistic::AddBuilding(CStatistic *this, int a2, S4_BUILDING_ENUM a3, int a4)
 void  CStatistic::AddBuilding(int a2, int a3, int a4) {
   
   DWORD v4; // eax
@@ -561,7 +561,7 @@ void  CStatistic::ChangeResidenceSpace(int a2, int a3) {
 
 
 // address=[0x1476f00]
-// Decompiled from int __thiscall CStatistic::GetResidenceSpace(CStatistic *this, int _iPlayerId)
+// Decompiled from DWORD __thiscall CStatistic::GetResidenceSpace(CStatistic *this, int _iPlayerId)
 int  CStatistic::GetResidenceSpace(int _iPlayerId)const {
   
   return CEcoSectorMgr::GetNrOfCurrentTotalBeds((CEcoSectorMgr *)g_cESMgr, _iPlayerId);
@@ -582,7 +582,7 @@ void  CStatistic::AddGood(int _iPlayerId, int _iGood, int a4) {
   }
   this->m_sPlayerStats[_iPlayerId].m_iNrOfGood[_iGood] += a4;
   this->m_sPlayerStats[_iPlayerId].m_iTotalGoods += a4;
-  if ( !CStatistic::m_bWonStateSaved )
+  if ( CStatistic::m_bWonStateSaved == 0 )
   {
     this->m_sPlayerStats[_iPlayerId].m_iWinGoods[_iGood] = this->m_sPlayerStats[_iPlayerId].m_iNrOfGood[_iGood];
   }
@@ -1215,11 +1215,11 @@ void  CStatistic::FillExtraInfo(void) {
   v30 = CPlayerManager::PlayerGameData(a1);
   CPlayerGameData::ResetIterator(v30);
   for ( i = CPlayerGameData::GetNextEcoSectorId(v30);
-        i;
+        i != 0;
         i = CPlayerGameData::GetNextEcoSectorId(v30) )
   {
-    EcoSectorPtr = (CEcoSector *)CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, i);
-    if ( EcoSectorPtr && CEcoSector::Owner(EcoSectorPtr) == a1 )
+    EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, i);
+    if ( EcoSectorPtr != 0 && CEcoSector::Owner(EcoSectorPtr) == a1 )
     {
       v1 = CEcoSector::NrOfSettler(EcoSectorPtr, SETTLER_CARRIER);
       v27 = v1 - CEcoSector::MinCarrier(EcoSectorPtr);
@@ -1242,36 +1242,36 @@ void  CStatistic::FillExtraInfo(void) {
   v6 = CStatistic::GetGood(this, a1, GOOD_BREAD);
   v7 = CStatistic::GetGood(this, a1, GOOD_MEAT) + v6;
   g_cExtendedMenuInfo.m_uGoodsFood = CStatistic::GetGood(this, a1, GOOD_FISH) + v7;
-  NumberOfSettlers = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_SWORDSMAN_01);
-  v9 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_SWORDSMAN_02) + NumberOfSettlers;
-  v10 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_SWORDSMAN_03) + v9;
-  v11 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BOWMAN_01) + v10;
-  v12 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BOWMAN_02) + v11;
-  v13 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BOWMAN_03) + v12;
-  v14 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_AXEWARRIOR_01) + v13;
-  v15 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_AXEWARRIOR_02) + v14;
-  v16 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_AXEWARRIOR_03) + v15;
-  v17 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BLOWGUNWARRIOR_01) + v16;
-  v18 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BLOWGUNWARRIOR_02) + v17;
-  v19 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BLOWGUNWARRIOR_03) + v18;
-  v20 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_MEDIC_01) + v19;
-  v21 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_MEDIC_02) + v20;
-  v22 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_MEDIC_03) + v21;
-  v23 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BACKPACKCATAPULTIST_01) + v22;
-  v24 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BACKPACKCATAPULTIST_02) + v23;
-  v25 = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_BACKPACKCATAPULTIST_03) + v24;
-  g_cExtendedMenuInfo.m_uSoldierCount = CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, SETTLER_SQUADLEADER) + v25;
+  NumberOfSettlers = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_SWORDSMAN_01);
+  v9 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_SWORDSMAN_02) + NumberOfSettlers;
+  v10 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_SWORDSMAN_03) + v9;
+  v11 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_BOWMAN_01) + v10;
+  v12 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_BOWMAN_02) + v11;
+  v13 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_BOWMAN_03) + v12;
+  v14 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_AXEWARRIOR_01) + v13;
+  v15 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_AXEWARRIOR_02) + v14;
+  v16 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_AXEWARRIOR_03) + v15;
+  v17 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_BLOWGUNWARRIOR_01) + v16;
+  v18 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_BLOWGUNWARRIOR_02) + v17;
+  v19 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_BLOWGUNWARRIOR_03) + v18;
+  v20 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_MEDIC_01) + v19;
+  v21 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_MEDIC_02) + v20;
+  v22 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_MEDIC_03) + v21;
+  v23 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_BACKPACKCATAPULTIST_01) + v22;
+  v24 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_BACKPACKCATAPULTIST_02) + v23;
+  v25 = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_BACKPACKCATAPULTIST_03) + v24;
+  g_cExtendedMenuInfo.m_uSoldierCount = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, SETTLER_SQUADLEADER) + v25;
   g_cExtendedMenuInfo.m_uOffenseStrength = CStatistic::OffenceStrength100(this, a1);
   g_cExtendedMenuInfo.m_uDefenceStrength = CStatistic::DefenceStrength100(this, a1);
   g_cExtendedMenuInfo.m_uMana = CStatistic::GetMana(this, a1);
   g_cExtendedMenuInfo.m_iUnknown = 0x25;
   CEvn_Event::CEvn_Event(&v34, 0x25Cu, 0, (unsigned int)&g_cExtendedMenuInfo, 0);
   v35 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1701, "g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "Logic\\Statistic.cpp", 1701, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v34);
   }
@@ -1327,7 +1327,7 @@ void  CStatistic::FreezeEcoStatistic(void) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  if ( !CStatistic::m_bWonStateSaved )
+  if ( CStatistic::m_bWonStateSaved == 0 )
   {
     CStatistic::m_bWonStateSaved = 1;
     for ( i = 0;
@@ -1508,7 +1508,7 @@ void  CStatistic::CalculateLandSize(void) {
     this->m_sPlayerStats[i].m_iLandSize = g_pTiling->NumberOfOwnedLandElements(g_pTiling, i);
     v1 = 100 * this->m_sPlayerStats[i].m_iLandSize;
     this->m_sPlayerStats[i].m_iLandSize = v1 / g_pTiling->NumberOfLandElements(g_pTiling);
-    this->m_sPlayerStats[i].m_iMaxLandSize = *(_DWORD *)std::max<long>(&this->m_sPlayerStats[i].m_iMaxLandSize, &this->m_sPlayerStats[i].m_iLandSize);
+    this->m_sPlayerStats[i].m_iMaxLandSize = *(_DWORD *)std::max<long>((int)&this->m_sPlayerStats[i].m_iMaxLandSize, (int)&this->m_sPlayerStats[i].m_iLandSize);
   }
 }
 

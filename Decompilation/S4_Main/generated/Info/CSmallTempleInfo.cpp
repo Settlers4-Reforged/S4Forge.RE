@@ -6,7 +6,7 @@
 // Decompiled from CSmallTempleInfo *__thiscall CSmallTempleInfo::CSmallTempleInfo(CSmallTempleInfo *this)
  CSmallTempleInfo::CSmallTempleInfo(void) {
   
-  CBuildingInfo::CBuildingInfo(this);
+  CBuildingInfo::CBuildingInfo((CBuildingInfo *)this);
   *(_DWORD *)this = &CSmallTempleInfo::_vftable_;
   return this;
 }

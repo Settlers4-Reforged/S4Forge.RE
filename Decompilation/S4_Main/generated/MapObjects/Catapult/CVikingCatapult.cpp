@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CVikingCatapult::New(int a1)
 class CPersistence * __cdecl CVikingCatapult::New(std::istream & a1) {
   
-  if ( CVikingCatapult::operator new(0xD8u) )
+  if ( (void *)CVikingCatapult::operator new(0xD8u) != 0 )
   {
-    return CVikingCatapult::CVikingCatapult(a1);
+    return ((_DWORD (__stdcall *)(int))CVikingCatapult::CVikingCatapult)(a1);
   }
   else
   {
@@ -26,7 +26,7 @@ void * __cdecl CVikingCatapult::operator new(unsigned int a1) {
 
 
 // address=[0x153eed0]
-// Decompiled from void __cdecl CVikingCatapult::operator delete(void *a1)
+// Decompiled from void __cdecl CVikingCatapult::operator delete(_DWORD *a1)
 void __cdecl CVikingCatapult::operator delete(void * a1) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -37,13 +37,13 @@ void __cdecl CVikingCatapult::operator delete(void * a1) {
 // Decompiled from _DWORD *__thiscall CVikingCatapult::CVikingCatapult(_DWORD *this, int a2)
  CVikingCatapult::CVikingCatapult(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   _DWORD *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  CCatapult::CCatapult(a2);
+  ((void (__stdcall *)(int))CCatapult::CCatapult)(a2);
   v6 = 0;
   *v5 = &CVikingCatapult::_vftable_;
   v5[45] = &CVikingCatapult::`vftable';
@@ -67,9 +67,9 @@ void  CVikingCatapult::Store(std::ostream & a2) {
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
   v3[1] = (int)this;
-  CCatapult::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))CCatapult::Store)(a2);
   v3[0] = 1;
-  return operator^<unsigned int>(a2, v3);
+  return operator^<unsigned int>(a2, (unsigned int *)v3);
 }
 
 
@@ -112,52 +112,52 @@ void  CVikingCatapult::IncreaseAmmo(int a2) {
 
 
 // address=[0x153f060]
-// Decompiled from bool __thiscall CVikingCatapult::EnoughAmmo(CVikingCatapult *this)
+// Decompiled from bool __thiscall CVikingCatapult::EnoughAmmo(IEntity *this)
 bool  CVikingCatapult::EnoughAmmo(void)const {
   
   int v1; // eax
   unsigned int v4; // [esp+10h] [ebp-8h]
 
-  if ( CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost) <= 0 )
+  if ( CStaticConfigVarInt::operator int((CStaticConfigVarInt *)g_pMagicVikingWarmachineShotCost) <= 0 )
   {
     v4 = 1;
   }
   else
   {
-    v4 = CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost);
+    v4 = CStaticConfigVarInt::operator int((CStaticConfigVarInt *)g_pMagicVikingWarmachineShotCost);
   }
-  v1 = IEntity::OwnerId((unsigned __int8 *)this);
+  v1 = IEntity::OwnerId(this);
   return CMagic::GetCurrentManaAmount(v1) >= v4;
 }
 
 
 // address=[0x153f0d0]
-// Decompiled from int __thiscall CVikingCatapult::AmmoAmount(CVikingCatapult *this)
+// Decompiled from int __thiscall CVikingCatapult::AmmoAmount(IEntity *this)
 unsigned int  CVikingCatapult::AmmoAmount(void)const {
   
   int v1; // eax
   unsigned int v4; // [esp+10h] [ebp-4h]
 
-  if ( CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost) <= 0 )
+  if ( CStaticConfigVarInt::operator int((CStaticConfigVarInt *)g_pMagicVikingWarmachineShotCost) <= 0 )
   {
     v4 = 1;
   }
   else
   {
-    v4 = CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost);
+    v4 = CStaticConfigVarInt::operator int((CStaticConfigVarInt *)g_pMagicVikingWarmachineShotCost);
   }
-  v1 = IEntity::OwnerId((unsigned __int8 *)this);
+  v1 = IEntity::OwnerId(this);
   return CMagic::GetCurrentManaAmount(v1) / v4;
 }
 
 
 // address=[0x153f130]
-// Decompiled from void __thiscall CVikingCatapult::DecreaseAmmo(CVikingCatapult *this)
+// Decompiled from void __thiscall CVikingCatapult::DecreaseAmmo(IEntity *this)
 void  CVikingCatapult::DecreaseAmmo(void) {
   
   int v1; // eax
 
-  v1 = IEntity::OwnerId((unsigned __int8 *)this);
+  v1 = IEntity::OwnerId(this);
   CMagic::DecreaseManaAfterWarmachineShot(v1);
 }
 

@@ -22,33 +22,32 @@ int  CProductionTab::GetProdIdForGoodType(enum PILE_TYPES a1, int a2) {
 // Decompiled from CProductionTab *__thiscall CProductionTab::CProductionTab(CProductionTab *this)
  CProductionTab::CProductionTab(void) {
   
-  if ( CProductionTab::m_iNumberOfEntries )
+  if ( CProductionTab::m_iNumberOfEntries == 0 )
   {
-    return this;
+    memset(CProductionTab::m_aRaceAndGoodToProdIdMap, 0, 0x35Cu);
+    CProductionTab::m_iNumberOfEntries = 1;
+    CProductionTab::PT(this, "Holzproduktion", 5, 7, 1, 3, 0, 0, 0);
+    CProductionTab::PT(this, "Steinproduktion", 5, 32, 4, 0, 0, 0, 0);
+    CProductionTab::PT(this, "Waffenproduktion", 5, 34, 17, 20, 22, 0, 0);
+    CProductionTab::PT(this, "Eisenproduktion", 5, 20, 17, 20, 0, 0, 0);
+    CProductionTab::PT(this, "Goldproduktion", 5, 14, 16, 19, 0, 0, 0);
+    CProductionTab::PT(this, "Fischproduktion", 5, 11, 6, 0, 0, 0, 0);
+    CProductionTab::PT(this, "Brotproduktion", 5, 9, 11, 9, 10, 0, 0);
+    CProductionTab::PT(this, "Ziegenproduktion", 2, 24, 11, 12, 8, 0, 0);
+    CProductionTab::PT(this, "Schweineproduktion", 1, 24, 11, 12, 8, 0, 0);
+    CProductionTab::PT(this, "Schafproduktion", 0, 24, 11, 12, 8, 0, 0);
+    CProductionTab::PT(this, &unk_3AC387C, 4, 24, 11, 12, 8, 0, 0);
+    CProductionTab::PT(this, "Alcoholproduktion", 2, 35, 36, 37, 0, 0, 0);
+    CProductionTab::PT(this, "Alcoholproduktion", 0, 37, 35, 0, 0, 0, 0);
+    CProductionTab::PT(this, "Alcoholproduktion", 1, 23, 38, 39, 0, 0, 0);
+    CProductionTab::PT(this, "Alcoholproduktion", 4, 41, 82, 81, 0, 0, 0);
+    CProductionTab::PT(this, "Munitionsproduktion", 2, 2, 18, 28, 0, 0, 0);
+    CProductionTab::PT(this, "Munitionsproduktion", 0, 2, 4, 28, 0, 0, 0);
+    CProductionTab::PT(this, "Munitionsproduktion", 1, 2, 28, 0, 0, 0, 0);
+    CProductionTab::PT(this, "Munitionsproduktion", 4, 2, 1, 3, 17, 18, 28);
+    CProductionTab::PT(this, "Baumstammproduktion", 5, 22, 1, 0, 0, 0, 0);
+    CProductionTab::PT(this, "End", 0, 0, 0, 0, 0, 0, 0);
   }
-  memset(CProductionTab::m_aRaceAndGoodToProdIdMap, 0, 0x35Cu);
-  CProductionTab::m_iNumberOfEntries = 1;
-  CProductionTab::PT(this, "Holzproduktion", 5, 7, 1, 3, 0, 0, 0);
-  CProductionTab::PT(this, "Steinproduktion", 5, 32, 4, 0, 0, 0, 0);
-  CProductionTab::PT(this, "Waffenproduktion", 5, 34, 17, 20, 22, 0, 0);
-  CProductionTab::PT(this, "Eisenproduktion", 5, 20, 17, 20, 0, 0, 0);
-  CProductionTab::PT(this, "Goldproduktion", 5, 14, 16, 19, 0, 0, 0);
-  CProductionTab::PT(this, "Fischproduktion", 5, 11, 6, 0, 0, 0, 0);
-  CProductionTab::PT(this, "Brotproduktion", 5, 9, 11, 9, 10, 0, 0);
-  CProductionTab::PT(this, "Ziegenproduktion", 2, 24, 11, 12, 8, 0, 0);
-  CProductionTab::PT(this, "Schweineproduktion", 1, 24, 11, 12, 8, 0, 0);
-  CProductionTab::PT(this, "Schafproduktion", 0, 24, 11, 12, 8, 0, 0);
-  CProductionTab::PT(this, &unk_3AC387C, 4, 24, 11, 12, 8, 0, 0);
-  CProductionTab::PT(this, "Alcoholproduktion", 2, 35, 36, 37, 0, 0, 0);
-  CProductionTab::PT(this, "Alcoholproduktion", 0, 37, 35, 0, 0, 0, 0);
-  CProductionTab::PT(this, "Alcoholproduktion", 1, 23, 38, 39, 0, 0, 0);
-  CProductionTab::PT(this, "Alcoholproduktion", 4, 41, 82, 81, 0, 0, 0);
-  CProductionTab::PT(this, "Munitionsproduktion", 2, 2, 18, 28, 0, 0, 0);
-  CProductionTab::PT(this, "Munitionsproduktion", 0, 2, 4, 28, 0, 0, 0);
-  CProductionTab::PT(this, "Munitionsproduktion", 1, 2, 28, 0, 0, 0, 0);
-  CProductionTab::PT(this, "Munitionsproduktion", 4, 2, 1, 3, 17, 18, 28);
-  CProductionTab::PT(this, "Baumstammproduktion", 5, 22, 1, 0, 0, 0, 0);
-  CProductionTab::PT(this, "End", 0, 0, 0, 0, 0, 0, 0);
   return this;
 }
 

@@ -24,26 +24,26 @@ wchar_t const *  CBBFileException::FileName(void)const {
   
   CBBException::CBBException((boost::exception_detail::clone_base *)this, a2);
   *this = &CBBFileException::_vftable_;
-  this[1] = *((_DWORD *)a2 + 1);
+  *(this + 1) = *((_DWORD *)a2 + 1);
   qmemcpy(this + 2, (char *)a2 + 8, 0x220u);
   return this;
 }
 
 
 // address=[0x2f309f0]
-// Decompiled from CBBFileException *__thiscall CBBFileException::CBBFileException(CBBFileException *this, int a2, const wchar_t *a3)
+// Decompiled from CBBFileException *__thiscall CBBFileException::CBBFileException(CBBFileException *this, int a2, wchar_t *a3)
  CBBFileException::CBBFileException(int a2, wchar_t const * a3) {
   
-  CBBException::CBBException(this);
+  CBBException::CBBException((CBBException *)this);
   *(_DWORD *)this = &CBBFileException::_vftable_;
   *((_DWORD *)this + 1) = a2;
-  BBSupportLib::BBSCopyString<wchar_t>((char *)this + 8, a3, 544);
+  BBSupportLib::BBSCopyString<wchar_t>((int)this + 8, a3, 544);
   return this;
 }
 
 
 // address=[0x2f30a70]
-// Decompiled from CBBException *__thiscall CBBFileException::~CBBFileException(CBBFileException *this)
+// Decompiled from CBBException *__thiscall CBBFileException::~CBBFileException(CBBException *this)
  CBBFileException::~CBBFileException(void) {
   
   *(_DWORD *)this = &CBBFileException::_vftable_;
@@ -52,31 +52,31 @@ wchar_t const *  CBBFileException::FileName(void)const {
 
 
 // address=[0x2f30a90]
-// Decompiled from char __thiscall CBBFileException::GetErrorMessage(CBBFileException *this, char *a2, unsigned int a3)
+// Decompiled from char __thiscall CBBFileException::GetErrorMessage(CBBFileException *this, char *a2, int a3)
 bool  CBBFileException::GetErrorMessage(char * a2, unsigned int a3) {
   
   const char *v3; // eax
   const char *v4; // eax
   int v6; // [esp+4h] [ebp-498h]
   char v8[88]; // [esp+10h] [ebp-48Ch] BYREF
-  _BYTE v9[28]; // [esp+68h] [ebp-434h] BYREF
+  std::string v9; // [esp+68h] [ebp-434h] BYREF
   char Buffer[1032]; // [esp+84h] [ebp-418h] BYREF
   int v11; // [esp+498h] [ebp-4h]
 
   memset(Buffer, 0, sizeof(Buffer));
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v8);
   v11 = 0;
-  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v9, (char *)this + 8);
+  ((void (__stdcall *)(std::string *, char *))std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes)(&v9, (char *)this + 8);
   LOBYTE(v11) = 1;
   v6 = *((_DWORD *)this + 1);
   if ( v6 == 2 )
   {
-    v3 = (const char *)std::string::c_str(v9);
+    v3 = std::string::c_str(&v9);
     sprintf(Buffer, "File \"%s\" not found!", v3);
   }
   else
   {
-    v4 = (const char *)std::string::c_str(v9);
+    v4 = std::string::c_str(&v9);
     if ( v6 == 3 )
     {
       sprintf(Buffer, "Error reading file \"%s\"!", v4);
@@ -86,9 +86,9 @@ bool  CBBFileException::GetErrorMessage(char * a2, unsigned int a3) {
       sprintf(Buffer, "An file error occurred (\"%s\")!", v4);
     }
   }
-  BBSupportLib::BBSCopyString<char>(a2, Buffer, a3);
+  BBSupportLib::BBSCopyString<char>((int)a2, Buffer, a3);
   LOBYTE(v11) = 0;
-  std::string::~string(v9);
+  std::string::~string(&v9);
   v11 = -1;
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v8);
   return 1;

@@ -12,7 +12,7 @@
   CDynListEntry::CDynListEntry(this);
   *(_DWORD *)this = &CSolutionSet::_vftable_;
   C = (CDynList *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     v2 = CDynList::CDynList(C);
   }
@@ -30,9 +30,9 @@
  CSolutionSet::~CSolutionSet(void) {
   
   *this = (CDynList *)&CSolutionSet::_vftable_;
-  if ( this[3] )
+  if ( *(this + 3) != 0 )
   {
-    delete this[3];
+    delete *(this + 3);
   }
   CDynListEntry::~CDynListEntry((CDynListEntry *)this);
 }
@@ -42,7 +42,7 @@
 // Decompiled from int __thiscall CSolutionSet::size(CDynList **this)
 int  CSolutionSet::size(void) {
   
-  return CDynList::size(this[3]);
+  return CDynList::size(*(this + 3));
 }
 
 
@@ -54,7 +54,7 @@ void  CSolutionSet::NewSolution(int a2, class CParam * a3) {
   CSolution *C; // [esp+10h] [ebp-10h]
 
   C = (CSolution *)operator new(0x14u);
-  if ( C )
+  if ( C != 0 )
   {
     v5 = CSolution::CSolution(C, a2, a3);
   }
@@ -62,7 +62,7 @@ void  CSolutionSet::NewSolution(int a2, class CParam * a3) {
   {
     v5 = 0;
   }
-  return CDynList::addElement(this[3], v5);
+  return CDynList::addElement(*(this + 3), v5);
 }
 
 

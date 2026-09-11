@@ -14,8 +14,8 @@ bool  CAddOn::IsExtraInstalledEx(void) {
 // Decompiled from char __thiscall CAddOn::EnsureExtraGUI(CAddOn *this, int a2, bool (__cdecl *a3)(int, int, int))
 void  CAddOn::EnsureExtraGUI(int a2, bool (__cdecl*)(int,int,int) a3) {
   
-  CExtraCD::LoadMenuData((wchar_t *)L"Menu\\GuiSetAOStartscreens.dat");
-  return CExtraCD::EnsureGuiEngineHasGfxFileLoaded(this, 0x1Cu, *((_DWORD *)this + 1), a2, a3, 1);
+  ((void (__stdcall *)(wchar_t *))CExtraCD::LoadMenuData)((wchar_t *)L"Menu\\GuiSetAOStartscreens.dat");
+  return CExtraCD::EnsureGuiEngineHasGfxFileLoaded(this, 0x1Cu, this->m_u4, a2, a3, 1);
 }
 
 

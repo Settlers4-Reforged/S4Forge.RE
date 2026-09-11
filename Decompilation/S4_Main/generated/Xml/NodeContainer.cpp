@@ -18,7 +18,7 @@ struct AdvXMLParser::Node::ConstIteratorRef  AdvXMLParser::NodeContainer::Begin(
   v9 = this;
   v8 = 0;
   v7 = &v3;
-  v6 = std::vector<AdvXMLParser::Node *>::begin(&v3);
+  v6 = std::vector<AdvXMLParser::Node *>::begin((int)&v3);
   AdvXMLParser::Node::ConstIteratorRef::ConstIteratorRef(a2, (int)v9 + 36, v3, v4, v5);
   return a2;
 }
@@ -39,7 +39,7 @@ struct AdvXMLParser::Node::ConstIteratorRef  AdvXMLParser::NodeContainer::End(vo
   v9 = this;
   v8 = 0;
   v7 = &v3;
-  v6 = std::vector<AdvXMLParser::Node *>::end(&v3);
+  v6 = std::vector<AdvXMLParser::Node *>::end((int)&v3);
   AdvXMLParser::Node::ConstIteratorRef::ConstIteratorRef(a2, (int)v9 + 36, v3, v4, v5);
   return a2;
 }
@@ -51,7 +51,7 @@ struct AdvXMLParser::Node::ConstIteratorRef  AdvXMLParser::NodeContainer::End(vo
   
   int v5; // [esp+0h] [ebp-4h]
 
-  AdvXMLParser::Node::Node(a2, a3);
+  ((void (__stdcall *)(int, int))AdvXMLParser::Node::Node)(a2, a3);
   *this = &AdvXMLParser::NodeContainer::_vftable_;
   std::vector<AdvXMLParser::Node *>::vector<AdvXMLParser::Node *>(this);
   *(_DWORD *)(v5 + 52) = 0;
@@ -74,19 +74,19 @@ struct AdvXMLParser::Node::ConstIteratorRef  AdvXMLParser::NodeContainer::End(vo
 
   v7 = this;
   *(_DWORD *)this = &AdvXMLParser::NodeContainer::_vftable_;
-  std::vector<AdvXMLParser::Node *>::begin(v3);
+  std::vector<AdvXMLParser::Node *>::begin((int)v3);
   while ( 1 )
   {
-    v1 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v2);
-    v8 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v1);
+    v1 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v2);
+    v8 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v1);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v2);
-    if ( !v8 )
+    if ( v8 == 0 )
     {
       break;
     }
     v5 = *(int (__thiscall ****)(_DWORD, int))std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(v3);
     v6 = v5;
-    if ( v5 )
+    if ( v5 != 0 )
     {
       v4 = (**v6)(v6, 1);
     }
@@ -116,15 +116,15 @@ void  AdvXMLParser::NodeContainer::AddText(std::string const & a2) {
   
   struct Node *v2; // [esp+8h] [ebp-18h]
 
-  if ( *((_DWORD *)this + 13) )
+  if ( *((_DWORD *)this + 13) != 0 )
   {
     AdvXMLParser::Text::Concatenate(a2);
   }
   else
   {
-    if ( operator new(0x40u) )
+    if ( operator new(0x40u) != 0 )
     {
-      v2 = (struct Node *)AdvXMLParser::Text::Text(this, a2);
+      v2 = (struct Node *)((struct Node *(__stdcall *)(AdvXMLParser::NodeContainer *, int))AdvXMLParser::Text::Text)(this, a2);
     }
     else
     {
@@ -142,9 +142,9 @@ void  AdvXMLParser::NodeContainer::AddText(class AdvXMLParser::Bookmark & a2, in
   _BYTE v4[28]; // [esp+8h] [ebp-2Ch] BYREF
   int v5; // [esp+30h] [ebp-4h]
 
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v5 = 0;
-  AdvXMLParser::Bookmark::GetSubString(v4, a3);
+  ((void (__stdcall *)(_BYTE *, int))AdvXMLParser::Bookmark::GetSubString)(v4, a3);
   AdvXMLParser::Bookmark::Reset(a2);
   AdvXMLParser::NodeContainer::AddText(this, (int)v4);
   v5 = -1;
@@ -168,23 +168,23 @@ void  AdvXMLParser::NodeContainer::DeleteChildren(void) {
   int v11; // [esp+40h] [ebp-4h]
 
   v8 = this;
-  std::vector<AdvXMLParser::Node *>::begin(v3);
+  std::vector<AdvXMLParser::Node *>::begin((int)v3);
   v11 = 0;
   while ( 1 )
   {
-    v7 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v2);
+    v7 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v2);
     v6 = v7;
     LOBYTE(v11) = 1;
-    v10 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v7);
+    v10 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v7);
     LOBYTE(v11) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v2);
-    if ( !v10 )
+    if ( v10 == 0 )
     {
       break;
     }
     v5 = *(int (__thiscall ****)(_DWORD, int))std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(v3);
     v9 = v5;
-    if ( v5 )
+    if ( v5 != 0 )
     {
       v4 = (**v9)(v9, 1);
     }
@@ -214,13 +214,13 @@ void  AdvXMLParser::NodeContainer::DeleteChild(class AdvXMLParser::Node const & 
   int v10; // [esp+24h] [ebp-4h]
 
   v9 = this;
-  std::vector<AdvXMLParser::Node *>::begin(v6);
+  std::vector<AdvXMLParser::Node *>::begin((int)v6);
   v10 = 0;
-  if ( (unsigned __int8)AdvXMLParser::NodeContainer::FindChild(a2, v6) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(const struct Node *, _BYTE *))AdvXMLParser::NodeContainer::FindChild)(a2, v6) != 0 )
   {
     v8 = &v3;
-    v7 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v6);
-    AdvXMLParser::NodeContainer::DeleteChild(v3, v4, v5);
+    v7 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>((int)v6);
+    ((void (__stdcall *)(char, int, int))AdvXMLParser::NodeContainer::DeleteChild)(v3, v4, v5);
     v10 = -1;
     return std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v6);
   }
@@ -264,13 +264,13 @@ class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(int a2, int a3
   int v10; // [esp+2Ch] [ebp-4h]
 
   v8 = this;
-  std::vector<AdvXMLParser::Node *>::begin(v4);
+  std::vector<AdvXMLParser::Node *>::begin((int)v4);
   v10 = 0;
   for ( i = 0;
         i < a2;
         ++i )
   {
-    if ( !(unsigned __int8)AdvXMLParser::NodeContainer::FindChild(a3, v4) )
+    if ( (unsigned __int8)((_DWORD (__stdcall *)(int, _BYTE *))AdvXMLParser::NodeContainer::FindChild)(a3, v4) == 0 )
     {
       v7 = AdvXMLParser::Node::null;
       v10 = -1;
@@ -279,9 +279,9 @@ class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(int a2, int a3
     }
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator++(v4);
   }
-  if ( (unsigned __int8)AdvXMLParser::NodeContainer::FindChild(a3, v4) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(int, _BYTE *))AdvXMLParser::NodeContainer::FindChild)(a3, v4) != 0 )
   {
-    v5 = *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(v4);
+    v5 = *(_DWORD *)((int (__thiscall *)(_BYTE *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*)(v4);
     v10 = -1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v4);
     return (void *)v5;
@@ -309,13 +309,13 @@ class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(char const * a
   int v11; // [esp+2Ch] [ebp-4h]
 
   v9 = this;
-  std::vector<AdvXMLParser::Node *>::begin(v5);
+  std::vector<AdvXMLParser::Node *>::begin((int)v5);
   v11 = 0;
   for ( i = 0;
         i < a3;
         ++i )
   {
-    if ( !(unsigned __int8)AdvXMLParser::NodeContainer::FindChild(a2, a4, v5) )
+    if ( (unsigned __int8)((_DWORD (__stdcall *)(char *, int, _BYTE *))AdvXMLParser::NodeContainer::FindChild)(a2, a4, v5) == 0 )
     {
       v8 = AdvXMLParser::Node::null;
       v11 = -1;
@@ -324,9 +324,9 @@ class AdvXMLParser::Node &  AdvXMLParser::NodeContainer::GetChild(char const * a
     }
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator++(v5);
   }
-  if ( (unsigned __int8)AdvXMLParser::NodeContainer::FindChild(a2, a4, v5) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(char *, int, _BYTE *))AdvXMLParser::NodeContainer::FindChild)(a2, a4, v5) != 0 )
   {
-    v6 = *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(v5);
+    v6 = *(_DWORD *)((int (__thiscall *)(_BYTE *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*)(v5);
     v11 = -1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v5);
     return (void *)v6;
@@ -347,13 +347,13 @@ void  AdvXMLParser::NodeContainer::Add(class AdvXMLParser::Node * a2) {
   
   int result; // eax
 
-  if ( this != AdvXMLParser::Node::GetParent((AdvXMLParser::Node *)a2) && BBSupportDbgReport(2, "Source\\Xml\\elements.cpp", 198, "this == &pNode->GetParent()") == 1 )
+  if ( this != (struct AdvXMLParser::NodeContainer *)AdvXMLParser::Node::GetParent((AdvXMLParser::Node *)a2) && BBSupportDbgReport(2, "Source\\Xml\\elements.cpp", 198, "this == &pNode->GetParent()") == 1 )
   {
     __debugbreak();
   }
-  std::vector<AdvXMLParser::Node *>::push_back(&a2);
+  std::vector<AdvXMLParser::Node *>::push_back((int)&a2);
   result = ((unsigned __int8 (__thiscall *)(struct Node *, int))a2->lpVtbl->GetTypeInfoCount)(a2, 3);
-  if ( !(_BYTE)result )
+  if ( (_BYTE)result == 0 )
   {
     *((_DWORD *)this + 13) = 0;
   }
@@ -378,14 +378,14 @@ void  AdvXMLParser::NodeContainer::InsertBefore(class AdvXMLParser::Node const &
   int v14; // [esp+34h] [ebp-4h]
 
   v13 = this;
-  std::vector<AdvXMLParser::Node *>::begin(v9);
+  std::vector<AdvXMLParser::Node *>::begin((int)v9);
   v14 = 0;
-  if ( (unsigned __int8)AdvXMLParser::NodeContainer::FindChild(a2, v9) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(const struct Node *, _BYTE *))AdvXMLParser::NodeContainer::FindChild)(a2, v9) != 0 )
   {
     v7 = &a3;
     v12 = &v4;
     v11 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>((struct std::_Iterator_base12 *)v9);
-    v10 = std::vector<AdvXMLParser::Node *>::insert(v8, v4, v5, v6, v7);
+    v10 = std::vector<AdvXMLParser::Node *>::insert((int)v8, v4, v5, v6, (int)v7);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v8);
     v14 = -1;
     return std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v9);
@@ -427,15 +427,15 @@ void  AdvXMLParser::NodeContainer::InsertAfter(class AdvXMLParser::Node const & 
 
   v18 = this;
   v19 = 0;
-  std::vector<AdvXMLParser::Node *>::begin(v11);
+  std::vector<AdvXMLParser::Node *>::begin((int)v11);
   v21 = 0;
-  if ( (unsigned __int8)AdvXMLParser::NodeContainer::FindChild(a2, v11) )
+  if ( (unsigned __int8)((_DWORD (__stdcall *)(const struct Node *, _BYTE *))AdvXMLParser::NodeContainer::FindChild)(a2, v11) != 0 )
   {
-    v16 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v10);
+    v16 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v10);
     v15 = v16;
     LOBYTE(v21) = 1;
     v19 |= 1u;
-    v17 = !(unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator!=(v16) && BBSupportDbgReport(2, "Source\\Xml\\elements.cpp", 249, "it != m_children.end()") == 1;
+    v17 = (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator!=(v16) == 0 && BBSupportDbgReport(2, "Source\\Xml\\elements.cpp", 249, "it != m_children.end()") == 1;
     v20 = v17;
     v21 = 0;
     if ( (v19 & 1) != 0 )
@@ -451,7 +451,7 @@ void  AdvXMLParser::NodeContainer::InsertAfter(class AdvXMLParser::Node const & 
     v4 = (struct std::_Iterator_base12 *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator++(v11);
     v14 = &v5;
     v13 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v4);
-    v12 = std::vector<AdvXMLParser::Node *>::insert(v9, v5, v6, v7, v8);
+    v12 = std::vector<AdvXMLParser::Node *>::insert((int)v9, v5, v6, v7, (int)v8);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v9);
     v21 = -1;
     return std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v11);
@@ -483,27 +483,27 @@ void  AdvXMLParser::NodeContainer::CloneChildren(class AdvXMLParser::NodeContain
   int v11; // [esp+38h] [ebp-4h]
 
   v9 = this;
-  std::vector<AdvXMLParser::Node *>::begin(v5);
+  std::vector<AdvXMLParser::Node *>::begin((int)v5);
   v11 = 0;
   while ( 1 )
   {
-    v7 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v4);
+    v7 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v4);
     v6 = v7;
     LOBYTE(v11) = 1;
-    v10 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v7);
+    v10 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v7);
     LOBYTE(v11) = 0;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v4);
-    if ( !v10 )
+    if ( v10 == 0 )
     {
       break;
     }
-    v8 = *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(v5);
+    v8 = *(_DWORD *)((int (__thiscall *)(_BYTE *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*)(v5);
     v2 = (struct Node *)(*(int (__thiscall **)(int, struct AdvXMLParser::NodeContainer *))(*(_DWORD *)v8 + 16))(v8, a2);
     AdvXMLParser::NodeContainer::Add(a2, v2);
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator++(v5);
   }
   v11 = -1;
-  return std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v5);
+  return ((int (__thiscall *)(_DWORD))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>)(v5);
 }
 
 
@@ -531,11 +531,11 @@ void  AdvXMLParser::NodeContainer::DeleteChild(class std::_Vector_iterator<class
   v15 = this;
   v18 = 0;
   v20 = 0;
-  v14 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v7);
+  v14 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v7);
   v13 = v14;
   LOBYTE(v20) = 1;
   v18 |= 1u;
-  v16 = !(unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator!=(v14) && BBSupportDbgReport(2, "Source\\Xml\\elements.cpp", 255, "it != m_children.end()") == 1;
+  v16 = (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator!=(v14) == 0 && BBSupportDbgReport(2, "Source\\Xml\\elements.cpp", 255, "it != m_children.end()") == 1;
   v19 = v16;
   v20 = 0;
   if ( (v18 & 1) != 0 )
@@ -549,7 +549,7 @@ void  AdvXMLParser::NodeContainer::DeleteChild(class std::_Vector_iterator<class
   }
   v12 = *(int (__thiscall ****)(_DWORD, int))std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(&a2);
   v17 = v12;
-  if ( v12 )
+  if ( v12 != 0 )
   {
     v11 = (**v17)(v17, 1);
   }
@@ -559,7 +559,7 @@ void  AdvXMLParser::NodeContainer::DeleteChild(class std::_Vector_iterator<class
   }
   v10 = v5;
   v9 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>((struct std::_Iterator_base12 *)&a2);
-  v8 = std::vector<AdvXMLParser::Node *>::erase(v6, v5[0], v5[1], v5[2]);
+  v8 = std::vector<AdvXMLParser::Node *>::erase((int)v6, v5[0], v5[1], v5[2]);
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v6);
   v20 = -1;
   return std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(&a2);
@@ -581,18 +581,18 @@ bool  AdvXMLParser::NodeContainer::FindChild(int a2, class std::_Vector_iterator
   v7 = this;
   while ( 1 )
   {
-    v6 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v4);
+    v6 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v4);
     v5 = v6;
     v10 = 0;
-    v9 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v6);
+    v9 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v6);
     v10 = -1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v4);
-    if ( !v9 )
+    if ( v9 == 0 )
     {
       break;
     }
     v8 = *(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(a3);
-    if ( (*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v8 + 12))(v8, a2) )
+    if ( (*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v8 + 12))(v8, a2) != 0 )
     {
       return 1;
     }
@@ -618,13 +618,13 @@ bool  AdvXMLParser::NodeContainer::FindChild(char const * Str, class std::_Vecto
   v9 = this;
   while ( 1 )
   {
-    v8 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v6);
+    v8 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v6);
     v7 = v8;
     v11 = 0;
-    v10 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v8);
+    v10 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v8);
     v11 = -1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v6);
-    if ( !v10 )
+    if ( v10 == 0 )
     {
       break;
     }
@@ -657,13 +657,13 @@ bool  AdvXMLParser::NodeContainer::FindChild(char const * Str, int a3, class std
   v10 = this;
   while ( 1 )
   {
-    v9 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v7);
+    v9 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v7);
     v8 = v9;
     v13 = 0;
-    v12 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v9);
+    v12 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v9);
     v13 = -1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v7);
-    if ( !v12 )
+    if ( v12 == 0 )
     {
       break;
     }
@@ -672,7 +672,7 @@ bool  AdvXMLParser::NodeContainer::FindChild(char const * Str, int a3, class std
     if ( std::operator==<char>(Name, Str) )
     {
       v11 = *(_DWORD *)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(a4);
-      if ( (*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v11 + 12))(v11, a3) )
+      if ( (*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v11 + 12))(v11, a3) != 0 )
       {
         return 1;
       }
@@ -697,13 +697,13 @@ bool  AdvXMLParser::NodeContainer::FindChild(class AdvXMLParser::Node const & a2
   v7 = this;
   while ( 1 )
   {
-    v6 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v4);
+    v6 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v4);
     v5 = v6;
     v9 = 0;
-    v8 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v6);
+    v8 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v6);
     v9 = -1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v4);
-    if ( !v8 )
+    if ( v8 == 0 )
     {
       break;
     }
@@ -732,18 +732,18 @@ bool  AdvXMLParser::NodeContainer::FindChild(int a2, class std::_Vector_const_it
   v7 = this;
   while ( 1 )
   {
-    v6 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v4);
+    v6 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v4);
     v5 = v6;
     v10 = 0;
-    v9 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v6);
+    v9 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v6);
     v10 = -1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v4);
-    if ( !v9 )
+    if ( v9 == 0 )
     {
       break;
     }
-    v8 = *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(a3);
-    if ( (*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v8 + 12))(v8, a2) )
+    v8 = *(_DWORD *)((int (__thiscall *)(int))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*)(a3);
+    if ( (*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v8 + 12))(v8, a2) != 0 )
     {
       return 1;
     }
@@ -769,17 +769,17 @@ bool  AdvXMLParser::NodeContainer::FindChild(char const * Str, class std::_Vecto
   v9 = this;
   while ( 1 )
   {
-    v8 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v6);
+    v8 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v6);
     v7 = v8;
     v11 = 0;
-    v10 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v8);
+    v10 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v8);
     v11 = -1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v6);
-    if ( !v10 )
+    if ( v10 == 0 )
     {
       break;
     }
-    v3 = (_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(a3);
+    v3 = (_DWORD *)((int (__thiscall *)(int))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*)(a3);
     Name = AdvXMLParser::Node::GetName(*v3);
     if ( std::operator==<char>(Name, Str) )
     {
@@ -808,22 +808,22 @@ bool  AdvXMLParser::NodeContainer::FindChild(char const * Str, int a3, class std
   v10 = this;
   while ( 1 )
   {
-    v9 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v7);
+    v9 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v7);
     v8 = v9;
     v13 = 0;
-    v12 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v9);
+    v12 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v9);
     v13 = -1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v7);
-    if ( !v12 )
+    if ( v12 == 0 )
     {
       break;
     }
-    v4 = (_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(a4);
+    v4 = (_DWORD *)((int (__thiscall *)(int))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*)(a4);
     Name = AdvXMLParser::Node::GetName(*v4);
     if ( std::operator==<char>(Name, Str) )
     {
-      v11 = *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(a4);
-      if ( (*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v11 + 12))(v11, a3) )
+      v11 = *(_DWORD *)((int (__thiscall *)(int))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*)(a4);
+      if ( (*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v11 + 12))(v11, a3) != 0 )
       {
         return 1;
       }
@@ -848,17 +848,17 @@ bool  AdvXMLParser::NodeContainer::FindChild(class AdvXMLParser::Node const & a2
   v7 = this;
   while ( 1 )
   {
-    v6 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v4);
+    v6 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v4);
     v5 = v6;
     v9 = 0;
-    v8 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v6);
+    v8 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v6);
     v9 = -1;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v4);
-    if ( !v8 )
+    if ( v8 == 0 )
     {
       break;
     }
-    if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(a3) == a2 )
+    if ( *(_DWORD *)((int (__thiscall *)(int))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*)(a3) == a2 )
     {
       return 1;
     }
@@ -882,26 +882,26 @@ void  AdvXMLParser::NodeContainer::GenerateXML(class AdvXMLParser::GenerateConte
   int v10; // [esp+38h] [ebp-4h]
 
   v8 = this;
-  std::vector<AdvXMLParser::Node *>::begin(v4);
+  std::vector<AdvXMLParser::Node *>::begin((int)v4);
   v10 = 0;
   while ( 1 )
   {
-    v6 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end(v3);
+    v6 = (std::_Iterator_base12 *)std::vector<AdvXMLParser::Node *>::end((int)v3);
     v5 = v6;
     LOBYTE(v10) = 1;
-    v9 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<(v6);
+    v9 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator<)(v6);
     LOBYTE(v10) = 0;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v3);
-    if ( !v9 )
+    if ( v9 == 0 )
     {
       break;
     }
-    v7 = *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*(v4);
+    v7 = *(_DWORD *)((int (__thiscall *)(_BYTE *))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator*)(v4);
     (*(void (__thiscall **)(int, struct AdvXMLParser::GenerateContext *))(*(_DWORD *)v7 + 20))(v7, a2);
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::operator++(v4);
   }
   v10 = -1;
-  return std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>(v4);
+  return ((int (__thiscall *)(_DWORD))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<AdvXMLParser::Node *>>>)(v4);
 }
 
 

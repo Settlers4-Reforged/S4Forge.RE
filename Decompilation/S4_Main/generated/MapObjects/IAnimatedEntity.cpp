@@ -102,7 +102,7 @@ void  IAnimatedEntity::SetEvent(class CEntityEvent const & a1) {
   m_iEvent = a1->m_iEvent;
   v2 = IEntity::EntityId(this);
   IMessageTracer::PushFormatedInts(g_pMsgTracer, "SetEvent(): id %u, event %u, type %u", v2, m_iEvent, m_iType);
-  if ( !IEntity::FlagBits(this, ENTITY_FLAG_Registered) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Registered) == 0 )
   {
     IAnimatedEntity::RegisterForLogicUpdate(this, 1);
   }
@@ -147,10 +147,10 @@ void  IAnimatedEntity::BoxSelection(void) {
     }
     EntitySelectionType = CInputProcessor::GetEntitySelectionType(this);
     SelectionType = CInputProcessor::GetSelectionType(&g_cInputProcessor);
-    if ( IEntity::FlagBits(this, ENTITY_FLAG_Selectable) || IEntity::ObjType(this) == BUILDING_OBJ )
+    if ( IEntity::FlagBits(this, ENTITY_FLAG_Selectable) != 0 || IEntity::ObjType(this) == BUILDING_OBJ )
     {
       v11 = 0;
-      if ( v7 )
+      if ( v7 != 0 )
       {
         v11 = (mask & EntitySelectionType) == (mask & SelectionType);
       }
@@ -171,17 +171,14 @@ void  IAnimatedEntity::BoxSelection(void) {
         yScreenOffset = -1;
         v3 = IEntity::Y(this);
         v1 = IEntity::X(this);
-        if ( IGfxEngine::GetScreenOffsetsByMapIndices(v1, v3, &xScreenOffset, &yScreenOffset) )
+        if ( IGfxEngine::GetScreenOffsetsByMapIndices(v1, v3, &xScreenOffset, &yScreenOffset) != 0 && g_cInputProcessor.m_iSelectionXStart <= xScreenOffset && g_cInputProcessor.m_iSelectionXEnd >= xScreenOffset && g_cInputProcessor.m_iSelectionYStart <= yScreenOffset && g_cInputProcessor.m_iSelectionYEnd >= yScreenOffset )
         {
-          if ( g_cInputProcessor.m_iSelectionXStart <= xScreenOffset && g_cInputProcessor.m_iSelectionXEnd >= xScreenOffset && g_cInputProcessor.m_iSelectionYStart <= yScreenOffset && g_cInputProcessor.m_iSelectionYEnd >= yScreenOffset )
+          if ( CInputProcessor::BoxSelectAllSettler(&g_cInputProcessor) == 0 )
           {
-            if ( !CInputProcessor::BoxSelectAllSettler(&g_cInputProcessor) )
-            {
-              CInputProcessor::SetSelectionType(&g_cInputProcessor, EntitySelectionType);
-            }
-            v2 = IEntity::EntityId(this);
-            CInputProcessor::NewCandidate(&g_cInputProcessor, v2);
+            CInputProcessor::SetSelectionType(&g_cInputProcessor, EntitySelectionType);
           }
+          v2 = IEntity::EntityId(this);
+          CInputProcessor::NewCandidate(&g_cInputProcessor, v2);
         }
       }
     }
@@ -195,7 +192,7 @@ void  IAnimatedEntity::BoxSelection(void) {
   
   _DWORD *v2; // [esp+0h] [ebp-4h]
 
-  *(_DWORD *)this = &IAnimatedEntity::_vftable_;
+  this->__vftable = (IAnimatedEntity_vtbl *)&IAnimatedEntity::_vftable_;
   std::vector<CEntityEvent>::~vector<CEntityEvent>(this);
   return IEntity::~IEntity(v2);
 }
@@ -283,7 +280,7 @@ void  IAnimatedEntity::SetJobPart(int a2) {
   this->__vftable = (IAnimatedEntity_vtbl *)&IAnimatedEntity::_vftable_;
   std::vector<CEntityEvent>::vector<CEntityEvent>(&this->m_iEventQueue);
   LOBYTE(ExceptionBlock) = 1;
-  operator^<unsigned int>(a1, &fileVersion);
+  operator^<unsigned int>(a1, (unsigned int *)&fileVersion);
   if ( fileVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect IAnimatedEntity::IAnimatedEntity");
@@ -327,27 +324,27 @@ void  IAnimatedEntity::Store(std::ostream & a2) {
 
   IEntity::Store((char *)this, (int)a2);
   v8 = 1;
-  operator^<unsigned int>(a2, &v8);
+  operator^<unsigned int>(a2, (unsigned int *)&v8);
   operator^<unsigned char>(a2, &this->m_iFrame);
   operator^<unsigned char>(a2, &this->m_iAttackerPlayerId);
   operator^<unsigned short>(a2, &this->m_iJobPart);
   operator^<unsigned short>(a2, &this->m_iPrevEntity);
   operator^<unsigned short>(a2, &this->m_iNextEntity);
-  operator^<unsigned int>(a2, (int *)&this->m_uLastUpdateTick);
+  operator^<unsigned int>(a2, &this->m_uLastUpdateTick);
   operator^<int>(a2, &this->m_uLastLogicUpdate);
   iQueueSize = std::vector<CEntityEvent>::size(&this->m_iEventQueue);
-  operator^<unsigned int>(a2, &iQueueSize);
+  operator^<unsigned int>(a2, (unsigned int *)&iQueueSize);
   std::vector<CEntityEvent>::begin(&this->m_iEventQueue, (int)v4);
   v12 = 0;
   while ( 1 )
   {
-    v6 = (std::_Iterator_base12 *)std::vector<CEntityEvent>::end(v3);
+    v6 = (std::_Iterator_base12 *)std::vector<CEntityEvent>::end((int)v3);
     v5 = v6;
     LOBYTE(v12) = 1;
     v11 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::operator!=(v6);
     LOBYTE(v12) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityEvent>>>(v3);
-    if ( !v11 )
+    if ( v11 == 0 )
     {
       break;
     }
@@ -378,7 +375,7 @@ bool  IAnimatedEntity::ProcessAllEvents(void) {
   int v15; // [esp+5Ch] [ebp-4h]
 
   v14 = 0;
-  while ( !(unsigned __int8)std::vector<CEntityEvent>::empty(&this->m_iEventQueue) )
+  while ( (unsigned __int8)std::vector<CEntityEvent>::empty(&this->m_iEventQueue) == 0 )
   {
     v1 = std::vector<CEntityEvent>::front(&this->m_iEventQueue);
     CEntityEvent::CEntityEvent(&v4, v1);

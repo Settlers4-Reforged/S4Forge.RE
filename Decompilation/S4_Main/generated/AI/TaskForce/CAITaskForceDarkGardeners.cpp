@@ -47,7 +47,7 @@ void  CAITaskForceDarkGardeners::Execute(void) {
 bool  CAITaskForceDarkGardeners::NewCommand(int a2, int a3, int a4) {
   
   CAITaskForceEx::SetCommandAndClearStuff(this, a2, a3, a4);
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 1;
   }

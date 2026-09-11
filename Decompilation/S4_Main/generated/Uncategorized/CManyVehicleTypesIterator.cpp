@@ -8,7 +8,7 @@ void  CManyVehicleTypesIterator::Init(int a2, int a3, int a4) {
   
   int result; // eax
 
-  if ( !a4 )
+  if ( a4 == 0 )
   {
     a4 = a3;
   }
@@ -45,7 +45,7 @@ int  CManyVehicleTypesIterator::FirstVehicle(void) {
 // Decompiled from int __thiscall CManyVehicleTypesIterator::NextVehicle(CManyVehicleTypesIterator *this)
 int  CManyVehicleTypesIterator::NextVehicle(void) {
   
-  int v1; // eax
+  CVehicle *v1; // eax
   int i; // [esp+0h] [ebp-8h]
 
   i = *((_DWORD *)this + 1);
@@ -53,7 +53,7 @@ int  CManyVehicleTypesIterator::NextVehicle(void) {
   {
     v1 = CVehicleMgr::operator[](i);
     for ( i = IAnimatedEntity::Next(v1);
-          !i;
+          i == 0;
           i = CVehicleMgr::GetFirstVehicleId((CVehicleMgr *)&g_cVehicleMgr, *((_DWORD *)this + 2), *(_DWORD *)this) )
     {
       if ( ++*(_DWORD *)this > *((_DWORD *)this + 4) )

@@ -7,8 +7,8 @@
 // Decompiled from CBuildingSiteInfo *__thiscall CBuildingSiteInfo::CBuildingSiteInfo(CBuildingSiteInfo *this)
  CBuildingSiteInfo::CBuildingSiteInfo(void) {
   
-  CBuildingInfo::CBuildingInfo((CBuildingInfo *)this);
-  *(_DWORD *)this = &CBuildingSiteInfo::_vftable_;
+  CBuildingInfo::CBuildingInfo(this);
+  this->__vftable = (CInfoExchange_vtbl *)&CBuildingSiteInfo::_vftable_;
   return this;
 }
 

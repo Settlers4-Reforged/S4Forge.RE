@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CCart::New(int a1)
 class CPersistence * __cdecl CCart::New(std::istream & a1) {
   
-  if ( CCart::operator new(0x144u) )
+  if ( (void *)CCart::operator new(0x144u) != 0 )
   {
-    return CCart::CCart(a1);
+    return ((_DWORD (__stdcall *)(int))CCart::CCart)(a1);
   }
   else
   {
@@ -45,21 +45,21 @@ void  CCart::Delete(void) {
   CTradingBuildingRole *v2; // [esp+0h] [ebp-10h]
   unsigned __int8 *BuildingPtr; // [esp+4h] [ebp-Ch]
 
-  if ( *((_DWORD *)this + 78) )
+  if ( *((_DWORD *)this + 78) != 0 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 78));
-    if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 2021, "pTradingBuilding!=NULL") == 1 )
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 78));
+    if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 2021, "pTradingBuilding!=NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( BuildingPtr )
+    if ( BuildingPtr != 0 )
     {
-      v2 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-      v1 = IEntity::ID();
+      v2 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
+      v1 = ((int (__stdcall *)())IEntity::ID)();
       CTradingBuildingRole::VehicleArriveCancel(v2, v1, 2);
     }
   }
-  if ( IEntity::FlagBits(this, ENTITY_FLAG_ON_BOARD) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_ON_BOARD) != 0 )
   {
     CCart::KillAllLoadedSettlers(this);
   }
@@ -75,7 +75,7 @@ void  CCart::Delete(void) {
 // Decompiled from bool __thiscall CCart::IsUnEmployed(CCart *this)
 bool  CCart::IsUnEmployed(void)const {
   
-  return CVehicle::IsUnEmployed(this) && !*((_BYTE *)this + 216);
+  return CVehicle::IsUnEmployed(this) && *((_BYTE *)this + 216) == 0;
 }
 
 
@@ -83,13 +83,13 @@ bool  CCart::IsUnEmployed(void)const {
 // Decompiled from int __thiscall CCart::Detach(CCart *this, int a2)
 void  CCart::Detach(int a2) {
   
-  (*(void (__thiscall **)(CCart *, int))(*(_DWORD *)this + 124))(this, a2);
-  return CVehicle::Detach(this, a2);
+  ((void (__thiscall *)(CCart *, int))this->j_?EntityOrderCanceled@CCart@@UAEXH@Z)(this, a2);
+  return ((int (__thiscall *)(CVehicle *, int))CVehicle::Detach)(this, a2);
 }
 
 
 // address=[0x1530c90]
-// Decompiled from int __thiscall CCart::GetMeetingPointXY(int this, int a2, int a3)
+// Decompiled from int __thiscall CCart::GetMeetingPointXY(IEntity *this, int a2, int a3)
 int const  CCart::GetMeetingPointXY(enum OBJ_TYPE a2, int a3) {
   
   int v3; // esi
@@ -102,27 +102,26 @@ int const  CCart::GetMeetingPointXY(enum OBJ_TYPE a2, int a3) {
   int i; // [esp+18h] [ebp-4h]
   int v13; // [esp+18h] [ebp-4h]
 
-  if ( IEntity::FlagBits((_DWORD *)this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  if ( IEntity::FlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0 )
   {
-    for ( i = *(char *)(this + 68);
-          i < *(char *)(this + 68) + 6;
+    for ( i = *((char *)this + 68);
+          i < *((char *)this + 68) + 6;
           i = v13 + 1 )
     {
       v13 = i % 6;
       v9 = 2 * ((v13 + 3) % 6) + 8;
-      v3 = IEntity::X((_DWORD *)this);
+      v3 = IEntity::X(this);
       v7 = CSpiralOffsets::DeltaX(v9) + v3;
-      v4 = IEntity::Y((void *)this);
+      v4 = IEntity::Y(this);
       v8 = CSpiralOffsets::DeltaY(v9) + v4;
       v10 = CWorldManager::MapObjectId(v7, v8);
-      if ( !v10 )
+      if ( v10 != 0 )
       {
-        return Y16X16::PackXYFast(v7, v8);
-      }
-      v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v10);
-      if ( !IEntity::ObjType(v5) )
-      {
-        continue;
+        v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v10);
+        if ( IEntity::ObjType((IEntity *)v5) == NONE_OBJ )
+        {
+          continue;
+        }
       }
       return Y16X16::PackXYFast(v7, v8);
     }
@@ -156,14 +155,13 @@ int const  CCart::GetFrontMeetingPointXY(enum OBJ_TYPE a2, int a3) {
     v4 = IEntity::Y((void *)this);
     v8 = CSpiralOffsets::DeltaY(v9) + v4;
     v10 = CWorldManager::MapObjectId(v7, v8);
-    if ( !v10 )
+    if ( v10 != 0 )
     {
-      return Y16X16::PackXYFast(v7, v8);
-    }
-    v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v10);
-    if ( !IEntity::ObjType(v5) )
-    {
-      continue;
+      v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v10);
+      if ( IEntity::ObjType((IEntity *)v5) == NONE_OBJ )
+      {
+        continue;
+      }
     }
     return Y16X16::PackXYFast(v7, v8);
   }
@@ -182,36 +180,36 @@ struct SGfxObjectInfo *  CCart::GetGfxInfos(void) {
   BYTE v6; // [esp+8h] [ebp-Ch]
   BOOL v7; // [esp+Ch] [ebp-8h]
 
-  if ( (unsigned __int8)CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
+  if ( CInputProcessor::IsBoxSelection(&g_cInputProcessor) )
   {
     IAnimatedEntity::BoxSelection();
   }
   CVehicle::Update(this);
-  if ( (unsigned __int8)CVehicle::IsTurning(this) )
+  if ( (unsigned __int8)CVehicle::IsTurning(this) != 0 )
   {
-    (*(void (__thiscall **)(CCart *))(*(_DWORD *)this + 184))(this);
+    ((void (__thiscall *)(CCart *))this->j_?GetTurnGfxInfo@CCart@@MAEXXZ)(this);
   }
   else
   {
     v4 = IEntity::Race(this);
     v7 = CCart::HasLoadedSomething(this) == 0;
-    CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v4, v7 + *((unsigned __int16 *)this + 19), *((char *)this + 68), *((unsigned __int8 *)this + 36), 0, 0);
+    CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v4, v7 + this->m_iJobPart, this->m_iDirection, this->m_iFrame, 0, 0);
   }
-  v1 = IEntity::OwnerId((IEntity *)this);
+  v1 = IEntity::OwnerId(this);
   IEntity::m_sGfxInfo.m_iColor = CPlayerManager::Color(v1);
-  MEMORY[0x40FE51D] = *((_BYTE *)this + 68);
-  MEMORY[0x40FE51C] = *((_BYTE *)this + 69);
-  IEntity::m_sGfxInfo.uConstructionProgress[620] = 4;
+  IEntity::m_sGfxInfo.m_iDirection = this->m_iDirection;
+  IEntity::m_sGfxInfo.m_iDistance = this->m_iDistance;
+  IEntity::m_sGfxInfo.m_uObjType = 4;
   IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
-  if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)&dword_F29144[220079]) )
+  if ( IEntity::FlagBits(this, (EntityFlag)&dword_F29144[220079]) != 0 )
   {
     v2 = IEntity::Race(this);
     CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v2, 0x2Eu, 2u, 0, 0, 0);
-    *(_DWORD *)IEntity::m_sGfxInfo.uConstructionProgress = 65534 - *((unsigned __int16 *)this + 62) * *((unsigned __int16 *)this + 64);
+    IEntity::m_sGfxInfo.uConstructionProgress = 65534 - this->m_uMaterialSupplied * this->word80;
   }
-  if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) != 0 )
   {
-    if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) )
+    if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) != 0 )
     {
       v6 = 73;
     }
@@ -221,9 +219,9 @@ struct SGfxObjectInfo *  CCart::GetGfxInfos(void) {
     }
     IEntity::m_sGfxInfo.m_uFlags = v6;
   }
-  else if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
+  else if ( IEntity::FlagBits(this, (EntityFlag)1024) != 0 )
   {
-    if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) )
+    if ( IEntity::FlagBits(this, (EntityFlag)1024) != 0 )
     {
       v5 = 90;
     }
@@ -258,12 +256,12 @@ void  CCart::FillDialog(bool a2) {
 
   v14 = this;
   byte_3F1E880 = CCart::CanWalk(this);
-  byte_3F1E881 = *((_BYTE *)v14 + 216);
-  v11 = *((_BYTE *)v14 + 217) && !*((_BYTE *)v14 + 216) && CCart::HasEnoughGoodToCreateFoundationCart(v14);
+  byte_3F1E881 = v14[1].m_iFrame;
+  v11 = v14[1].m_iAttackerPlayerId != 0 && v14[1].m_iFrame == 0 && CCart::HasEnoughGoodToCreateFoundationCart(v14);
   byte_3F1E882 = v11;
-  if ( *((_BYTE *)v14 + 216) )
+  if ( v14[1].m_iFrame != 0 )
   {
-    dword_3F1E884 = *((unsigned __int8 *)v14 + 213) + *((unsigned __int8 *)v14 + 212);
+    dword_3F1E884 = v14[1].m_iLivePoints + v14[1].m_packedTribePlayer.Packed;
     v2 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfPioneers);
     dword_3F1E888 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfCarrier) + v2;
     byte_3F1E880 = CCart::CanTakeLand(v14);
@@ -271,16 +269,16 @@ void  CCart::FillDialog(bool a2) {
           ;
           ++i )
     {
-      v3 = std::vector<CCart::CFoundationCardCargo>::size((char *)v14 + 196);
+      v3 = std::vector<CCart::CFoundationCardCargo>::size(&v14[1].m_psAIEntityInfo);
       if ( i >= v3 )
       {
         break;
       }
       v4 = (const struct CCart::CFoundationCardCargo *)std::vector<CCart::CFoundationCardCargo>::operator[](i);
       CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v6, v4);
-      MEMORY[0x3F1E798][3 * i] = v9;
-      MEMORY[0x3F1E794][3 * i] = v8;
-      MEMORY[0x3F1E790][3 * i] = v7;
+      g_cVehicleLoadInfo.m_vSlots[i].m_iUnknown = v9;
+      g_cVehicleLoadInfo.m_vSlots[i].m_iAmount = v8;
+      g_cVehicleLoadInfo.m_vSlots[i].m_iGood = v7;
     }
   }
   else
@@ -292,11 +290,11 @@ void  CCart::FillDialog(bool a2) {
           j < 6;
           ++j )
     {
-      MEMORY[0x3F1E794][3 * j] = *((_DWORD *)v14 + 3 * j + 58);
-      MEMORY[0x3F1E790][3 * j] = *((_DWORD *)v14 + 3 * j + 57);
+      g_cVehicleLoadInfo.m_vSlots[j].m_iAmount = *(&v14[1].m_iEventQueue.u0 + 3 * j);
+      g_cVehicleLoadInfo.m_vSlots[j].m_iGood = *(&v14[1].m_uLastLogicUpdate + 3 * j);
     }
   }
-  MEMORY[0x3F1E78C] = 21;
+  g_cVehicleLoadInfo.m_iUnknown = 21;
   v10 = 604;
   if ( !a2 )
   {
@@ -318,26 +316,26 @@ void  CCart::VehicleLogicUpdate(void) {
   int v2; // eax
   int v3; // [esp+0h] [ebp-Ch]
   int v4; // [esp+0h] [ebp-Ch]
-  char v5; // [esp+4h] [ebp-8h]
+  unsigned __int8 v5; // [esp+4h] [ebp-8h]
 
   *((_BYTE *)this + 217) = CCart::IsOnOwnEcoSector(this);
-  (*(void (__thiscall **)(CCart *))(*(_DWORD *)this + 172))(this);
-  if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) || IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  ((void (__thiscall *)(CCart *))this->j_?SetSelectable@CCart@@UAEXXZ)(this);
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) != 0 || IEntity::FlagBits(this, (EntityFlag)1024) != 0 )
   {
-    (*(void (__thiscall **)(CCart *, int))(*(_DWORD *)this + 148))(this, 1);
+    ((void (__thiscall *)(CCart *, int))this->j_?FillDialog@CCart@@UAEX_N@Z)(this, 1);
   }
-  v5 = *((_BYTE *)this + 107);
+  v5 = this->m_uCurrentTask;
   if ( v5 == 17 )
   {
-    if ( *((_BYTE *)this + 216) )
+    if ( *((_BYTE *)this + 216) != 0 )
     {
       CCart::OnRequestSettlers(this);
       CCart::OnRequestCargo(this);
-      IAnimatedEntity::RegisterForLogicUpdate(16);
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(16);
     }
     else
     {
-      v4 = std::auto_ptr<CWalking>::operator->(v3);
+      v4 = ((_DWORD (__cdecl *)(_DWORD))std::auto_ptr<CWalking>::operator->)(v3);
       v1 = IEntity::PackedXY(this);
       v2 = (*(int (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v4 + 16))(v4, v1, 0);
       CVehicle::WalkDirAndRegister(this, v2, 0);
@@ -345,24 +343,24 @@ void  CCart::VehicleLogicUpdate(void) {
   }
   else if ( v5 == 27 )
   {
-    if ( *((_BYTE *)this + 216) )
+    if ( *((_BYTE *)this + 216) != 0 )
     {
       CCart::OnRequestSettlers(this);
       CCart::OnRequestCargo(this);
-      IAnimatedEntity::RegisterForLogicUpdate(16);
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(16);
     }
   }
   else
   {
-    if ( IEntity::FlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+    if ( IEntity::FlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0 )
     {
       CVehicle::VehicleLogicUpdate(this);
     }
-    if ( *((unsigned __int8 *)this + 107) != *((unsigned __int8 *)this + 320) && *((_BYTE *)this + 320) == 6 )
+    if ( this->m_uCurrentTask != *((unsigned __int8 *)this + 320) && *((_BYTE *)this + 320) == 6 )
     {
       CCart::CartArrived(this);
     }
-    *((_BYTE *)this + 320) = *((_BYTE *)this + 107);
+    *((_BYTE *)this + 320) = this->m_uCurrentTask;
   }
 }
 
@@ -382,14 +380,14 @@ void  CCart::EntityEnter(int a2) {
   unsigned int i; // [esp+Ch] [ebp-Ch]
   CPropertySet *v11; // [esp+10h] [ebp-8h]
 
-  if ( *((_BYTE *)this + 216) )
+  if ( *((_BYTE *)this + 216) != 0 )
   {
     for ( i = 0;
-          i < std::vector<CCart::CSettlerStatus>::size((char *)this + 180);
+          i < std::vector<CCart::CSettlerStatus>::size(this + 1);
           ++i )
     {
       v7 = *(_DWORD *)(std::vector<CCart::CSettlerStatus>::operator[](i) + 8);
-      if ( v7 && *(_DWORD *)(std::vector<CCart::CSettlerStatus>::operator[](i) + 8) == a2 )
+      if ( v7 != 0 && *(_DWORD *)(std::vector<CCart::CSettlerStatus>::operator[](i) + 8) == a2 )
       {
         *(_BYTE *)(std::vector<CCart::CSettlerStatus>::operator[](i) + 4) = 1;
         if ( CCart::IsPioner(this, a2) )
@@ -401,41 +399,41 @@ void  CCart::EntityEnter(int a2) {
           ++*((_BYTE *)this + 213);
         }
         v11 = (CPropertySet *)CSettlerMgr::operator[](v7);
-        CWarMap::RemoveEntity(v11);
-        v2 = IEntity::WorldIdx();
+        CWarMap::RemoveEntity((IEntity *)v11);
+        v2 = ((int (__stdcall *)())IEntity::WorldIdx)();
         CWorldManager::SetSettlerId(v2, 0);
         IEntity::SetFlagBits(v11, ENTITY_FLAG_ON_BOARD);
-        v3 = IEntity::ID();
+        v3 = ((int (__stdcall *)())IEntity::ID)();
         if ( CCart::IsCarrier(this, v3) )
         {
-          v4 = IEntity::WorldIdx();
+          v4 = ((int (__stdcall *)())IEntity::WorldIdx)();
           v9 = CWorldManager::EcoSectorId(v4);
-          if ( !v9 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1643, "iESId!= 0") == 1 )
+          if ( v9 == 0 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1643, "iESId!= 0") == 1 )
           {
             __debugbreak();
           }
-          if ( !v9 )
+          if ( v9 == 0 )
           {
             return;
           }
           EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v9);
-          if ( !EcoSectorPtr && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1646, "pSector!=NULL") == 1 )
+          if ( EcoSectorPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1646, "pSector!=NULL") == 1 )
           {
             __debugbreak();
           }
-          if ( EcoSectorPtr )
+          if ( EcoSectorPtr != 0 )
           {
-            v5 = IEntity::Type((unsigned __int16 *)v11);
+            v5 = IEntity::Type((IEntity *)v11);
             CEcoSector::ChangeNrOfSettler(EcoSectorPtr, v5, -1);
           }
         }
-        if ( IEntity::FlagBits(v11, ENTITY_FLAG_Selected) )
+        if ( IEntity::FlagBits((IEntity *)v11, ENTITY_FLAG_Selected) != 0 )
         {
-          v6 = IEntity::ID();
+          v6 = ((int (__stdcall *)())IEntity::ID)();
           CInputProcessor::DeSelectEntity(&g_cInputProcessor, v6);
         }
-        CObserverList::Detach((CCart *)((char *)this + 156), v7);
-        (*(void (__thiscall **)(CCart *, int))(*(_DWORD *)this + 148))(this, 1);
+        CObserverList::Detach((CObserverList *)&this->m_cObserverList, v7);
+        ((void (__thiscall *)(CCart *, int))this->j_?FillDialog@CCart@@UAEX_N@Z)(this, 1);
       }
     }
   }
@@ -474,23 +472,23 @@ void  CCart::EntityOrderCanceled(int a2) {
   {
     if ( CCart::IsPioner(v16, a2) )
     {
-      ++*((_BYTE *)v16 + 214);
+      ++*(&v16[1].m_iLivePoints + 1);
     }
     if ( CCart::IsCarrier(v16, a2) )
     {
-      ++*((_BYTE *)v16 + 215);
+      ++*(&v16[1].m_iLivePoints + 2);
     }
-    std::vector<CCart::CSettlerStatus>::begin(v7);
+    std::vector<CCart::CSettlerStatus>::begin((int)v7);
     v18 = 0;
     while ( 1 )
     {
-      v15 = (std::_Iterator_base12 *)std::vector<CCart::CSettlerStatus>::end(v5);
+      v15 = (std::_Iterator_base12 *)std::vector<CCart::CSettlerStatus>::end((int)v5);
       v14 = v15;
       LOBYTE(v18) = 1;
       v17 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::operator<(v15);
       LOBYTE(v18) = 0;
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v5);
-      if ( !v17 )
+      if ( v17 == 0 )
       {
         break;
       }
@@ -499,16 +497,16 @@ void  CCart::EntityOrderCanceled(int a2) {
       {
         v10 = v2;
         v9 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>((struct std::_Iterator_base12 *)v7);
-        v8 = std::vector<CCart::CSettlerStatus>::erase(v4, v2[0], v2[1], v2[2]);
+        v8 = std::vector<CCart::CSettlerStatus>::erase((int)v4, v2[0], v2[1], v2[2]);
         std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v4);
-        v12 = std::vector<CCart::CSettlerStatus>::end(v3);
+        v12 = std::vector<CCart::CSettlerStatus>::end((int)v3);
         v11 = v12;
         LOBYTE(v18) = 2;
         std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::operator=(v12);
         LOBYTE(v18) = 0;
         std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v3);
       }
-      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::operator++(v6, 0);
+      std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::operator++((int)v6, 0);
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v6);
     }
     v18 = -1;
@@ -579,13 +577,12 @@ void  CCart::GoodArrived(int a2, int a3) {
       {
         __debugbreak();
       }
-      if ( v6[2] > *v6 )
+      if ( v6[2] <= *v6 )
       {
-        return (*(int (__thiscall **)(CCart *, int))(*(_DWORD *)this + 148))(this, 1);
+        v6[2] += a3;
+        *((_BYTE *)this + 218) += a3;
       }
-      v6[2] += a3;
-      *((_BYTE *)this + 218) += a3;
-      return (*(int (__thiscall **)(CCart *, int))(*(_DWORD *)this + 148))(this, 1);
+      return ((int (__thiscall *)(CCart *, int))this->j_?FillDialog@CCart@@UAEX_N@Z)(this, 1);
     }
   }
   return result;
@@ -622,7 +619,7 @@ void  CCart::SupplyCanceled(int a2, int a3) {
       {
         __debugbreak();
       }
-      return (*(int (__thiscall **)(CCart *, int))(*(_DWORD *)this + 148))(this, 1);
+      return ((int (__thiscall *)(CCart *, int))this->j_?FillDialog@CCart@@UAEX_N@Z)(this, 1);
     }
   }
   return result;
@@ -656,7 +653,7 @@ bool  CCart::CreateFoundationCart(void) {
   char v22; // [esp-10h] [ebp-F0h] BYREF
   int v23; // [esp-Ch] [ebp-ECh]
   int v24; // [esp-8h] [ebp-E8h]
-  int v25; // [esp-4h] [ebp-E4h]
+  CCart::CFoundationCardCargo *v25; // [esp-4h] [ebp-E4h]
   int v26; // [esp+0h] [ebp-E0h]
   int v27; // [esp+4h] [ebp-DCh]
   _BYTE v28[20]; // [esp+Ch] [ebp-D4h] BYREF
@@ -684,125 +681,122 @@ bool  CCart::CreateFoundationCart(void) {
   struct std::_Iterator_base12 *v50; // [esp+C4h] [ebp-1Ch]
   struct std::_Iterator_base12 *v51; // [esp+C8h] [ebp-18h]
   int v52; // [esp+CCh] [ebp-14h]
-  _DWORD *v53; // [esp+D0h] [ebp-10h]
+  IEntity *v53; // [esp+D0h] [ebp-10h]
   int v54; // [esp+DCh] [ebp-4h]
 
   v53 = this;
-  if ( *((_BYTE *)this + 216) || !*((_BYTE *)v53 + 217) )
+  if ( *((_BYTE *)this + 216) != 0 || BYTE1(v53[6].__vftable) == 0 )
   {
     return 0;
   }
-  v1 = IEntity::WorldIdx();
+  v1 = ((int (__stdcall *)())IEntity::WorldIdx)();
   v52 = CWorldManager::EcoSectorId(v1);
-  if ( !v52 )
+  if ( v52 == 0 )
   {
     return 0;
   }
-  v3 = (CEcoSector *)CEcoSectorMgr::operator[](v52);
-  v4 = CEcoSector::NrOfGoods(v3, 7);
-  if ( v4 >= CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfBoard) )
+  v3 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v52);
+  v4 = CEcoSector::NrOfGoods(v3, GOOD_BOARD);
+  if ( v4 >= CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfBoard) )
   {
-    v7 = (CEcoSector *)CEcoSectorMgr::operator[](v52);
-    v8 = CEcoSector::NrOfGoods(v7, 32);
-    if ( v8 >= CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfStone) )
+    v7 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v52);
+    v8 = CEcoSector::NrOfGoods(v7, GOOD_STONE);
+    if ( v8 >= CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfStone) )
     {
-      v11 = (CEcoSector *)CEcoSectorMgr::operator[](v52);
-      v12 = CEcoSector::NrOfGoods(v11, 18);
-      if ( v12 >= CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfHammer) )
+      v11 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v52);
+      v12 = CEcoSector::NrOfGoods(v11, GOOD_HAMMER);
+      if ( v12 >= CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfHammer) )
       {
-        *((_BYTE *)v53 + 214) = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfPioneers);
-        *((_BYTE *)v53 + 215) = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfCarrier);
-        *((_BYTE *)v53 + 218) = 0;
-        *((_BYTE *)v53 + 216) = 1;
-        std::vector<CCart::CSettlerStatus>::clear(v26, v27);
-        std::vector<CCart::CFoundationCardCargo>::clear(v26, v27);
-        IntValue = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfBoard);
+        *(&v53[5].m_iLivePoints + 1) = CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfPioneers);
+        *(&v53[5].m_iLivePoints + 2) = CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfCarrier);
+        BYTE2(v53[6].__vftable) = 0;
+        LOBYTE(v53[6].__vftable) = 1;
+        ((void (__cdecl *)(int, int))std::vector<CCart::CSettlerStatus>::clear)(v26, v27);
+        ((void (__cdecl *)(int, int))std::vector<CCart::CFoundationCardCargo>::clear)(v26, v27);
+        IntValue = CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfBoard);
         v25 = CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v30, 7, IntValue, 0, 0);
-        v51 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end(v35);
+        v51 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end((int)v35);
         v50 = v51;
         v54 = 0;
         v45 = &v22;
         v44 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v51);
-        v43 = std::vector<CCart::CFoundationCardCargo>::insert(v36, v22, v23, v24, v25);
+        v43 = std::vector<CCart::CFoundationCardCargo>::insert((int)v36, v22, v23, v24, (int)v25);
         std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v36);
         v54 = -1;
         std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v35);
         v25 = 0;
         v24 = 0;
-        v16 = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfStone);
-        v25 = CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v29, 32, v16, v24, v25);
-        v49 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end(v33);
+        v16 = CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfStone);
+        v25 = CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v29, 32, v16, v24, (int)v25);
+        v49 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end((int)v33);
         v48 = v49;
         v54 = 1;
         v42 = &v22;
         v41 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v49);
-        v40 = std::vector<CCart::CFoundationCardCargo>::insert(v34, v22, v23, v24, v25);
+        v40 = std::vector<CCart::CFoundationCardCargo>::insert((int)v34, v22, v23, v24, (int)v25);
         std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v34);
         v54 = -1;
         std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v33);
         v25 = 0;
         v24 = 0;
-        v17 = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfHammer);
-        v25 = CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v28, 18, v17, v24, v25);
-        v47 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end(v31);
+        v17 = CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfHammer);
+        v25 = CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v28, 18, v17, v24, (int)v25);
+        v47 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end((int)v31);
         v46 = v47;
         v54 = 2;
         v39 = &v22;
         v38 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v47);
-        v37 = std::vector<CCart::CFoundationCardCargo>::insert(v32, v22, v23, v24, v25);
+        v37 = std::vector<CCart::CFoundationCardCargo>::insert((int)v32, v22, v23, v24, (int)v25);
         std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v32);
         v54 = -1;
         std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v31);
-        v18 = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfBoard);
-        v19 = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfStone) + v18;
-        v20 = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfHammer);
-        *((_BYTE *)v53 + 219) = v20 + v19;
+        v18 = CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfBoard);
+        v19 = CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfStone) + v18;
+        v20 = CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfHammer);
+        HIBYTE(v53[6].__vftable) = v20 + v19;
         IEntity::SetFlagBits(v53, ENTITY_FLAG_VulnerableMask);
-        v21 = IEntity::ID();
+        v21 = ((int (__stdcall *)())IEntity::ID)();
         CInputProcessor::DeSelectEntity(&g_cInputProcessor, v21);
-        IAnimatedEntity::RegisterForLogicUpdate(16);
-        *((_BYTE *)v53 + 107) = 27;
+        ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(16);
+        *(&v53[2].m_iLivePoints + 2) = 27;
         return 1;
       }
       else
       {
-        v13 = IEntity::OwnerId((unsigned __int8 *)v53);
-        if ( v13 != CPlayerManager::GetLocalPlayerId() )
+        v13 = IEntity::OwnerId(v53);
+        if ( v13 == CPlayerManager::GetLocalPlayerId() )
         {
-          return 0;
+          v25 = (CCart::CFoundationCardCargo *)IEntity::Y(v53);
+          v24 = IEntity::X(v53);
+          v14 = IEntity::OwnerId(v53);
+          CTextMsgHandler::AddWarningMsg(2464, v14, v24, (int)v25);
         }
-        v25 = IEntity::Y(v53);
-        v24 = IEntity::X(v53);
-        v14 = IEntity::OwnerId((unsigned __int8 *)v53);
-        CTextMsgHandler::AddWarningMsg(2464, v14, v24, v25);
         return 0;
       }
     }
     else
     {
-      v9 = IEntity::OwnerId((unsigned __int8 *)v53);
-      if ( v9 != CPlayerManager::GetLocalPlayerId() )
+      v9 = IEntity::OwnerId(v53);
+      if ( v9 == CPlayerManager::GetLocalPlayerId() )
       {
-        return 0;
+        v25 = (CCart::CFoundationCardCargo *)IEntity::Y(v53);
+        v24 = IEntity::X(v53);
+        v10 = IEntity::OwnerId(v53);
+        CTextMsgHandler::AddWarningMsg(2467, v10, v24, (int)v25);
       }
-      v25 = IEntity::Y(v53);
-      v24 = IEntity::X(v53);
-      v10 = IEntity::OwnerId((unsigned __int8 *)v53);
-      CTextMsgHandler::AddWarningMsg(2467, v10, v24, v25);
       return 0;
     }
   }
   else
   {
-    v5 = IEntity::OwnerId((unsigned __int8 *)v53);
-    if ( v5 != CPlayerManager::GetLocalPlayerId() )
+    v5 = IEntity::OwnerId(v53);
+    if ( v5 == CPlayerManager::GetLocalPlayerId() )
     {
-      return 0;
+      v25 = (CCart::CFoundationCardCargo *)IEntity::Y(v53);
+      v24 = IEntity::X(v53);
+      v6 = IEntity::OwnerId(v53);
+      CTextMsgHandler::AddWarningMsg(2466, v6, v24, (int)v25);
     }
-    v25 = IEntity::Y(v53);
-    v24 = IEntity::X(v53);
-    v6 = IEntity::OwnerId((unsigned __int8 *)v53);
-    CTextMsgHandler::AddWarningMsg(2466, v6, v24, v25);
     return 0;
   }
 }
@@ -814,17 +808,17 @@ bool  CCart::CreateNormalCart(void) {
   
   unsigned int v1; // eax
   int v2; // eax
-  _BYTE v4[24]; // [esp+4h] [ebp-3Ch] BYREF
+  CEntityEvent v4; // [esp+4h] [ebp-3Ch] BYREF
   CEntityEvent *v5; // [esp+1Ch] [ebp-24h]
   CEntityEvent *v6; // [esp+20h] [ebp-20h]
-  int v7; // [esp+24h] [ebp-1Ch]
+  CSettler *v7; // [esp+24h] [ebp-1Ch]
   int v8; // [esp+28h] [ebp-18h]
   unsigned int i; // [esp+2Ch] [ebp-14h]
   CCart *v10; // [esp+30h] [ebp-10h]
   int v11; // [esp+3Ch] [ebp-4h]
 
   v10 = this;
-  if ( !*((_BYTE *)this + 216) )
+  if ( *((_BYTE *)this + 216) == 0 )
   {
     return 0;
   }
@@ -832,25 +826,22 @@ bool  CCart::CreateNormalCart(void) {
         ;
         ++i )
   {
-    v1 = std::vector<CCart::CSettlerStatus>::size((char *)v10 + 180);
+    v1 = std::vector<CCart::CSettlerStatus>::size(&v10[1]);
     if ( i >= v1 )
     {
       break;
     }
     v8 = std::vector<CCart::CSettlerStatus>::operator[](i);
-    if ( !*(_BYTE *)(v8 + 4) )
+    if ( *(_BYTE *)(v8 + 4) == 0 && *(_DWORD *)v8 != 0 )
     {
-      if ( *(_DWORD *)v8 )
-      {
-        v7 = CSettlerMgr::operator[](*(_DWORD *)(v8 + 8));
-        v2 = IEntity::ID();
-        v6 = CEntityEvent::CEntityEvent((CEntityEvent *)v4, 9u, 0, v2, 0, 0);
-        v5 = v6;
-        v11 = 0;
-        (*(void (__thiscall **)(int, CEntityEvent *))(*(_DWORD *)v7 + 80))(v7, v6);
-        v11 = -1;
-        CEntityEvent::~CEntityEvent(v4);
-      }
+      v7 = CSettlerMgr::operator[](*(_DWORD *)(v8 + 8));
+      v2 = ((int (__stdcall *)())IEntity::ID)();
+      v6 = CEntityEvent::CEntityEvent(&v4, 9u, 0, v2, 0, 0);
+      v5 = v6;
+      v11 = 0;
+      v7->SetEvent(v7, v6);
+      v11 = -1;
+      CEntityEvent::~CEntityEvent(&v4);
     }
   }
   return CCart::OnUnload(v10);
@@ -861,7 +852,7 @@ bool  CCart::CreateNormalCart(void) {
 // Decompiled from char __thiscall CCart::CreateSettlement(CCart *this)
 bool  CCart::CreateSettlement(void) {
   
-  if ( !*((_BYTE *)this + 216) || !CCart::CanTakeLand(this) )
+  if ( *((_BYTE *)this + 216) == 0 || !CCart::CanTakeLand(this) )
   {
     return 0;
   }
@@ -876,18 +867,18 @@ bool  CCart::CreateSettlement(void) {
 // Decompiled from void __thiscall CCart::ConvertEventIntoGoal(CCart *this, struct CEntityEvent *a2)
 void  CCart::ConvertEventIntoGoal(class CEntityEvent * a2) {
   
-  if ( *((_DWORD *)a2 + 1) == 9 || *((_DWORD *)a2 + 1) == 7 )
+  if ( a2->m_iEvent == 9 || a2->m_iEvent == 7 )
   {
-    if ( *((_DWORD *)a2 + 3) == *((_DWORD *)this + 77) )
+    if ( a2->m_iDataA == *((_DWORD *)this + 77) )
     {
       CCart::TargetBuildingDestroyed(this);
     }
-    if ( *((_DWORD *)a2 + 3) == *((_DWORD *)this + 78) )
+    if ( a2->m_iDataA == *((_DWORD *)this + 78) )
     {
       CCart::DepartBuildingDestroyed(this);
     }
   }
-  if ( *((_DWORD *)a2 + 1) == 17 && *((_DWORD *)a2 + 2) == 13 )
+  if ( a2->m_iEvent == 17 && a2->m_iType == 13 )
   {
     *((_DWORD *)this + 76) = IEntity::PackedXY(this);
   }
@@ -899,9 +890,9 @@ void  CCart::ConvertEventIntoGoal(class CEntityEvent * a2) {
 // Decompiled from void __thiscall CCart::Decrease(CCart *this, int a2)
 void  CCart::Decrease(int a2) {
   
-  if ( *((_BYTE *)this + 216) )
+  if ( *((_BYTE *)this + 216) != 0 )
   {
-    IEntity::Decrease((int)this, a2);
+    IEntity::Decrease(this, a2);
   }
   else if ( CCart::HasLoadedSomething(this) )
   {
@@ -964,13 +955,13 @@ int  CCart::AddGood(int a2, int a3) {
       a3 -= v5;
     }
   }
-  if ( a3 )
+  if ( a3 != 0 )
   {
     for ( j = 0;
           j < 6;
           ++j )
     {
-      if ( !*((_DWORD *)this + 3 * j + 57) && a3 )
+      if ( *((_DWORD *)this + 3 * j + 57) == 0 && a3 != 0 )
       {
         if ( a3 <= 8 )
         {
@@ -990,11 +981,11 @@ int  CCart::AddGood(int a2, int a3) {
       }
     }
   }
-  if ( IEntity::FlagBits(this, (EntityFlag)0x600u) )
+  if ( IEntity::FlagBits(this, (EntityFlag)1536) != 0 )
   {
-    (*(void (__thiscall **)(CCart *, int))(*(_DWORD *)this + 148))(this, 1);
+    ((void (__thiscall *)(CCart *, int))this->j_?FillDialog@CCart@@UAEX_N@Z)(this, 1);
   }
-  if ( !CCart::HasLoadedSomething(this) || *((_BYTE *)this + 321) )
+  if ( !CCart::HasLoadedSomething(this) || *((_BYTE *)this + 321) != 0 )
   {
     IEntity::ClearFlagBits(this, ENTITY_FLAG_VulnerableMask);
   }
@@ -1028,16 +1019,16 @@ int  CCart::RemoveGood(int a2, int a3) {
         v4 = *((_DWORD *)this + 3 * i + 58);
       }
       *((_DWORD *)this + 3 * i + 58) -= v4;
-      if ( !*((_DWORD *)this + 3 * i + 58) )
+      if ( *((_DWORD *)this + 3 * i + 58) == 0 )
       {
         *((_DWORD *)this + 3 * i + 57) = 0;
       }
       a3 -= v4;
     }
   }
-  if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) != 0 )
   {
-    (*(void (__thiscall **)(CCart *, int))(*(_DWORD *)this + 148))(this, 1);
+    ((void (__thiscall *)(CCart *, int))this->j_?FillDialog@CCart@@UAEX_N@Z)(this, 1);
   }
   if ( !CCart::HasLoadedSomething(this) )
   {
@@ -1146,19 +1137,19 @@ bool  CCart::HasLoadedSomething(void) {
 
   v6 = 0;
   for ( i = 0;
-        i < 6 && !v6;
+        i < 6 && v6 == 0;
         ++i )
   {
     v6 = *((_DWORD *)this + 3 * i + 58) != 0;
   }
   for ( j = 0;
-        j < std::vector<CCart::CFoundationCardCargo>::size((char *)this + 196) && !v6;
+        j < std::vector<CCart::CFoundationCardCargo>::size((char *)this + 196) && v6 == 0;
         ++j )
   {
     v6 = *(_DWORD *)(std::vector<CCart::CFoundationCardCargo>::operator[](j) + 8) > 0;
   }
   for ( k = 0;
-        k < std::vector<CCart::CSettlerStatus>::size((char *)this + 180) && !v6;
+        k < std::vector<CCart::CSettlerStatus>::size(this + 1) && v6 == 0;
         ++k )
   {
     v6 = *(_BYTE *)(std::vector<CCart::CSettlerStatus>::operator[](k) + 4);
@@ -1196,29 +1187,29 @@ void  CCart::TargetBuildingDestroyed(void) {
   unsigned __int8 *BuildingPtr; // [esp+Ch] [ebp-Ch]
   unsigned __int8 *v8; // [esp+10h] [ebp-8h]
 
-  if ( *((_DWORD *)this + 77) )
+  if ( *((_DWORD *)this + 77) != 0 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 77));
-    v6 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-    v1 = IEntity::ID();
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 77));
+    v6 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
+    v1 = ((int (__stdcall *)())IEntity::ID)();
     CTradingBuildingRole::UnregisterIncomingTrader(v6, v1, 3);
   }
-  CCart::SetTargetBuildingID(this, 0);
-  if ( *((_DWORD *)this + 78) )
+  CCart::SetTargetBuildingID((CMFCPopupMenu *)this, 0);
+  if ( *((_DWORD *)this + 78) != 0 )
   {
-    v5 = (struct CWnd *)*((_DWORD *)this + 78);
-    v8 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, (int)v5);
-    if ( *((_BYTE *)this + 302) )
+    v5 = *((struct CWnd **)this + 78);
+    v8 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, (int)v5);
+    if ( *((_BYTE *)this + 302) != 0 )
     {
       CCart::SetGoToTarget(this, 0);
     }
     CCart::SetDepartBuildingID(this, 0);
-    CCart::SetTargetBuildingID(this, v5);
-    if ( v8 )
+    CCart::SetTargetBuildingID((CMFCPopupMenu *)this, v5);
+    if ( v8 != 0 )
     {
-      v4 = (CTradingBuildingRole *)CBuilding::Role(v8);
+      v4 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)v8);
       IsNeutralTrader = CCart::IsNeutralTrader(this);
-      v2 = IEntity::ID();
+      v2 = ((int (__stdcall *)())IEntity::ID)();
       CTradingBuildingRole::RegisterIncomingTrader(v4, v2, 3, IsNeutralTrader);
       CCart::MoveToTarget(this);
     }
@@ -1268,11 +1259,11 @@ void  CCart::DepartBuildingDestroyed(void) {
 
   v4 = *((_DWORD *)this + 78);
   CCart::SetDepartBuildingID(this, 0);
-  if ( *((_BYTE *)this + 300) )
+  if ( *((_BYTE *)this + 300) != 0 )
   {
-    BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v4);
-    v2 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-    v1 = IEntity::ID();
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v4);
+    v2 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
+    v1 = ((int (__stdcall *)())IEntity::ID)();
     CTradingBuildingRole::UnregisterIncomingTrader(v2, v1, 3);
     CCart::SetJobType(this, 0);
     CCart::TryToGoHome(this);
@@ -1294,39 +1285,36 @@ void  CCart::CartArrived(void) {
   unsigned __int8 *v8; // [esp+Ch] [ebp-8h]
   unsigned __int8 *v9; // [esp+Ch] [ebp-8h]
 
-  if ( *((_BYTE *)this + 300) )
+  if ( *((_BYTE *)this + 300) != 0 && *((_DWORD *)this + 78) != 0 )
   {
-    if ( *((_DWORD *)this + 78) )
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 78));
+    if ( BuildingPtr != 0 )
     {
-      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 78));
-      if ( BuildingPtr )
-      {
-        v6 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
-        v1 = IEntity::ID();
-        CTradingBuildingRole::VehicleArrived(v6, v1, 3);
-      }
+      v6 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)BuildingPtr);
+      v1 = ((int (__stdcall *)())IEntity::ID)();
+      CTradingBuildingRole::VehicleArrived(v6, v1, 3);
     }
   }
-  if ( *((_BYTE *)this + 302) )
+  if ( *((_BYTE *)this + 302) != 0 )
   {
-    if ( *((_DWORD *)this + 77) )
+    if ( *((_DWORD *)this + 77) != 0 )
     {
-      v8 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 77));
-      if ( v8 )
+      v8 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 77));
+      if ( v8 != 0 )
       {
-        v5 = (CTradingBuildingRole *)CBuilding::Role(v8);
-        v2 = IEntity::ID();
+        v5 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)v8);
+        v2 = ((int (__stdcall *)())IEntity::ID)();
         CTradingBuildingRole::VehicleArrived(v5, v2, 3);
         CCart::SetGoToTarget(this, 0);
       }
     }
-    if ( *((_DWORD *)this + 78) )
+    if ( *((_DWORD *)this + 78) != 0 )
     {
-      v9 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 78));
-      if ( v9 )
+      v9 = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)this + 78));
+      if ( v9 != 0 )
       {
-        v4 = (CTradingBuildingRole *)CBuilding::Role(v9);
-        v3 = IEntity::ID();
+        v4 = (CTradingBuildingRole *)CBuilding::Role((CBuilding *)v9);
+        v3 = ((int (__stdcall *)())IEntity::ID)();
         CTradingBuildingRole::VehicleArrivedAtTarget(v4, v3, 3);
       }
     }
@@ -1347,20 +1335,20 @@ void  CCart::MoveToTarget(void) {
 
   v6 = this;
   result = this;
-  if ( !*((_DWORD *)this + 77) )
+  if ( *((_DWORD *)this + 77) != 0 )
   {
-    return result;
+    BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *(_DWORD *)&v6[1].word80);
+    if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1492, "pTargetBuilding") == 1 )
+    {
+      __debugbreak();
+    }
+    v2 = (Y16X16 *)CBuilding::EnsignPackedXY(BuildingPtr);
+    Y16X16::UnpackXYFast((int)v2, &v3, &v4);
+    CCart::SetGoToSource(v6, 0);
+    CCart::SetGoToTarget(v6, 1);
+    return (CCart *)((int (__thiscall *)(CVehicle *, int, int, int))CVehicle::MoveTo)(v6, v3, v4, 0);
   }
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *((_DWORD *)v6 + 77));
-  if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1492, "pTargetBuilding") == 1 )
-  {
-    __debugbreak();
-  }
-  v2 = (Y16X16 *)CBuilding::EnsignPackedXY(BuildingPtr);
-  Y16X16::UnpackXYFast(v2, &v3, &v4);
-  CCart::SetGoToSource(v6, 0);
-  CCart::SetGoToTarget(v6, 1);
-  return (CCart *)CVehicle::MoveTo(v6, v3, v4, 0);
+  return result;
 }
 
 
@@ -1375,7 +1363,7 @@ void  CCart::TryToGoHome(void) {
   int v5; // [esp+8h] [ebp-8h] BYREF
   CMFCPopupMenu *v6; // [esp+Ch] [ebp-4h]
 
-  v6 = this;
+  v6 = (CMFCPopupMenu *)this;
   if ( *((int *)this + 76) <= 0 )
   {
     v4 = IEntity::X(v6);
@@ -1383,23 +1371,23 @@ void  CCart::TryToGoHome(void) {
   }
   else
   {
-    Y16X16::UnpackXYFast(*((Y16X16 **)v6 + 76), &v4, &v5);
+    Y16X16::UnpackXYFast(*((_DWORD *)v6 + 76), &v4, &v5);
   }
   v1 = CWorldManager::Index(v4, v5);
   v2 = CWorldManager::EcoSectorId(v1);
-  v3 = IEntity::WorldIdx();
+  v3 = ((int (__stdcall *)())IEntity::WorldIdx)();
   if ( v2 == CWorldManager::EcoSectorId(v3) )
   {
-    CCart::SetFree(v6);
-    CVehicle::MoveTo(v6, v4, v5, 0);
-    CCart::SetGoToSource(v6, 0);
-    CCart::SetGoToTarget(v6, 0);
+    CCart::SetFree((CCart *)v6);
+    CVehicle::MoveTo((CVehicle *)v6, v4, v5, 0);
+    CCart::SetGoToSource((CCart *)v6, 0);
+    CCart::SetGoToTarget((CCart *)v6, 0);
     CCart::SetTargetBuildingID(v6, 0);
-    CCart::SetDepartBuildingID(v6, 0);
+    CCart::SetDepartBuildingID((CCart *)v6, 0);
   }
   else
   {
-    CVehicle::MoveTo(v6, v4, v5, 0);
+    CVehicle::MoveTo((CVehicle *)v6, v4, v5, 0);
     *((_DWORD *)v6 + 76) = -1;
   }
 }
@@ -1411,12 +1399,12 @@ void  CCart::SetJobType(int a2) {
   
   CCart *result; // eax
 
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     result = this;
-    if ( *((_DWORD *)this + 77) )
+    if ( *((_DWORD *)this + 77) != 0 )
     {
-      CCart::SetTargetBuildingID(this, 0);
+      CCart::SetTargetBuildingID((CMFCPopupMenu *)this, 0);
     }
   }
   *((_DWORD *)this + 79) = a2;
@@ -1508,32 +1496,32 @@ void  CCart::OnBuildReady(void) {
   v18 = 0;
   v14 = IEntity::Y(this);
   v12 = IEntity::X(this);
-  v1 = IEntity::OwnerId((unsigned __int8 *)this);
+  v1 = IEntity::OwnerId(this);
   NearestEntity = (void **)CTransportMgr::GetNearestEntity(1, 60, v1, v12, v14);
-  if ( NearestEntity )
+  if ( NearestEntity != 0 )
   {
     v19 = j____RTDynamicCast(NearestEntity, 0, &IMovingEntity__RTTI_Type_Descriptor_, &CSettler__RTTI_Type_Descriptor_, 0);
-    if ( !v19 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 2059, "pDonkey != 0") == 1 )
+    if ( v19 == 0 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 2059, "pDonkey != 0") == 1 )
     {
       __debugbreak();
     }
   }
-  if ( v19 )
+  if ( v19 != 0 )
   {
-    v2 = (void **)CSettler::Role(v19);
+    v2 = (void **)CSettler::Role((CSettler *)v19);
     v18 = (CDonkeyRole *)j____RTDynamicCast(v2, 0, &ISettlerRole__RTTI_Type_Descriptor_, &CDonkeyRole__RTTI_Type_Descriptor_, 0);
-    if ( !v18 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 2066, "pDonkeyRole != 0") == 1 )
+    if ( v18 == 0 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 2066, "pDonkeyRole != 0") == 1 )
     {
       __debugbreak();
     }
   }
-  if ( v18 )
+  if ( v18 != 0 )
   {
-    v15 = IEntity::ID();
-    v3 = IEntity::ID();
-    v4 = (*(int (__thiscall **)(CCart *, int, int))(*(_DWORD *)this + 228))(this, 1, v3);
+    v15 = ((int (__stdcall *)())IEntity::ID)();
+    v3 = ((int (__stdcall *)())IEntity::ID)();
+    v4 = ((int (__thiscall *)(CCart *, int, int))this->j_?GetFrontMeetingPointXY@CCart@@UAE?BHW4OBJ_TYPE@@H@Z)(this, 1, v3);
     CDonkeyRole::ComeToBuildUpCart(v18, v4, v15);
-    v5 = IEntity::OwnerId((unsigned __int8 *)this);
+    v5 = IEntity::OwnerId(this);
     result = CPlayerManager::GetLocalPlayerId();
     if ( v5 == result )
     {
@@ -1545,16 +1533,15 @@ void  CCart::OnBuildReady(void) {
   }
   else
   {
-    v8 = IEntity::OwnerId((unsigned __int8 *)this);
-    if ( v8 != CPlayerManager::GetLocalPlayerId() )
+    v8 = IEntity::OwnerId(this);
+    if ( v8 == CPlayerManager::GetLocalPlayerId() )
     {
-      return IAnimatedEntity::RegisterForLogicUpdate(16);
+      v16 = IEntity::Y(this);
+      v13 = IEntity::X(this);
+      v9 = CPlayerManager::GetLocalPlayerId();
+      CTextMsgHandler::AddWarningMsg(2528, v9, v13, v16);
     }
-    v16 = IEntity::Y(this);
-    v13 = IEntity::X(this);
-    v9 = CPlayerManager::GetLocalPlayerId();
-    CTextMsgHandler::AddWarningMsg(2528, v9, v13, v16);
-    return IAnimatedEntity::RegisterForLogicUpdate(16);
+    return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(16);
   }
   return result;
 }
@@ -1573,18 +1560,18 @@ void  CCart::DonkeyArrived(int a2) {
     __debugbreak();
   }
   v6 = (CPropertySet *)CSettlerMgr::operator[](a2);
-  CWarMap::RemoveEntity(v6);
-  v2 = IEntity::WorldIdx();
+  CWarMap::RemoveEntity((IEntity *)v6);
+  v2 = ((int (__stdcall *)())IEntity::WorldIdx)();
   CWorldManager::SetSettlerId(v2, 0);
   IEntity::SetFlagBits(v6, ENTITY_FLAG_ON_BOARD);
-  if ( IEntity::FlagBits(v6, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits((IEntity *)v6, ENTITY_FLAG_Selected) != 0 )
   {
-    v3 = IEntity::ID();
+    v3 = ((int (__stdcall *)())IEntity::ID)();
     CInputProcessor::DeSelectEntity(&g_cInputProcessor, v3);
   }
-  IEntity::ClearFlagBits(v6, ENTITY_FLAG_Visible);
-  IAnimatedEntity::UnRegisterFromLogicUpdate(v6);
-  CSettlerMgr::DeleteSettler((CSettlerMgr *)g_cSettlerMgr, a2);
+  IEntity::ClearFlagBits((IEntity *)v6, ENTITY_FLAG_Visible);
+  IAnimatedEntity::UnRegisterFromLogicUpdate((IAnimatedEntity *)v6);
+  CSettlerMgr::DeleteSettler(&g_cSettlerMgr, a2);
   IEntity::ClearFlagBits(this, ENTITY_FLAG_VulnerableMask);
   return CVehicle::OnBuildReady((int)this);
 }
@@ -1598,32 +1585,31 @@ void  CCart::SetSelectable(void) {
   bool v2; // [esp+0h] [ebp-Ch]
   bool v4; // [esp+9h] [ebp-3h]
 
-  v4 = IEntity::FlagBits(this, (EntityFlag)0x400u) != 0;
-  v2 = *((_BYTE *)this + 300) || *((_BYTE *)this + 301) || *((_BYTE *)this + 302);
+  v4 = IEntity::FlagBits(this, (EntityFlag)1024) != 0;
+  v2 = *((_BYTE *)this + 300) != 0 || *((_BYTE *)this + 301) != 0 || *((_BYTE *)this + 302) != 0;
   result = (_DWORD *)IEntity::FlagBits(this, (EntityFlag)&dword_F29144[220079]);
-  if ( result )
+  if ( result == 0 )
   {
-    return result;
-  }
-  (*(void (__thiscall **)(CCart *))(*(_DWORD *)this + 176))(this);
-  if ( !*((_BYTE *)this + 216) || !CCart::CanWalk(this) || v2 || *((_DWORD *)this + 43) )
-  {
-    if ( IEntity::FlagBits(this, (EntityFlag)&dword_F29144[220079]) )
+    ((void (__thiscall *)(CCart *))this->j_?DeleteSelectable@CCart@@UAEXXZ)(this);
+    if ( *((_BYTE *)this + 216) == 0 || !CCart::CanWalk(this) || v2 || this->field_ac != 0 )
     {
-      return 0;
+      if ( IEntity::FlagBits(this, (EntityFlag)&dword_F29144[220079]) != 0 )
+      {
+        return 0;
+      }
+      else
+      {
+        result = IEntity::SetFlagBits(this, (EntityFlag)0x4000);
+        if ( v4 )
+        {
+          return IEntity::SetFlagBits(this, (EntityFlag)1024);
+        }
+      }
     }
     else
     {
-      result = IEntity::SetFlagBits(this, (EntityFlag)0x4000u);
-      if ( v4 )
-      {
-        return IEntity::SetFlagBits(this, (EntityFlag)0x400u);
-      }
+      return IEntity::SetFlagBits(this, ENTITY_FLAG_Selectable);
     }
-  }
-  else
-  {
-    return IEntity::SetFlagBits(this, ENTITY_FLAG_Selectable);
   }
   return result;
 }
@@ -1633,13 +1619,13 @@ void  CCart::SetSelectable(void) {
 // Decompiled from int __thiscall CCart::DeleteSelectable(CCart *this)
 void  CCart::DeleteSelectable(void) {
   
-  if ( IEntity::FlagBits(this, (EntityFlag)0x400u) )
+  if ( IEntity::FlagBits(this, (EntityFlag)1024) != 0 )
   {
-    return IEntity::ClearFlagBits(this, (EntityFlag)0x4400u);
+    return IEntity::ClearFlagBits(this, (EntityFlag)17408);
   }
   else
   {
-    return IEntity::ClearFlagBits(this, (EntityFlag)0x2400u);
+    return IEntity::ClearFlagBits(this, (EntityFlag)9216);
   }
 }
 
@@ -1651,7 +1637,7 @@ void  CCart::DeleteSelectable(void) {
   char v3; // [esp-10h] [ebp-B8h] BYREF
   int v4; // [esp-Ch] [ebp-B4h]
   int v5; // [esp-8h] [ebp-B0h]
-  _BYTE *v6; // [esp-4h] [ebp-ACh]
+  int *v6; // [esp-4h] [ebp-ACh]
   int v7; // [esp+0h] [ebp-A8h]
   _DWORD v8[3]; // [esp+4h] [ebp-A4h] BYREF
   _BYTE v9[12]; // [esp+10h] [ebp-98h] BYREF
@@ -1663,13 +1649,13 @@ void  CCart::DeleteSelectable(void) {
   int v15; // [esp+40h] [ebp-68h]
   int v16; // [esp+44h] [ebp-64h]
   char *v17; // [esp+48h] [ebp-60h]
-  _BYTE v18[4]; // [esp+4Ch] [ebp-5Ch] BYREF
-  _BYTE v19[4]; // [esp+50h] [ebp-58h] BYREF
-  _BYTE v20[4]; // [esp+54h] [ebp-54h] BYREF
-  _BYTE v21[8]; // [esp+58h] [ebp-50h] BYREF
-  _BYTE v22[4]; // [esp+60h] [ebp-48h] BYREF
+  int v18; // [esp+4Ch] [ebp-5Ch] BYREF
+  int v19; // [esp+50h] [ebp-58h] BYREF
+  int v20; // [esp+54h] [ebp-54h] BYREF
+  int v21[2]; // [esp+58h] [ebp-50h] BYREF
+  int v22; // [esp+60h] [ebp-48h] BYREF
   _BYTE v23[4]; // [esp+64h] [ebp-44h] BYREF
-  _BYTE v24[4]; // [esp+68h] [ebp-40h] BYREF
+  int v24; // [esp+68h] [ebp-40h] BYREF
   int v25; // [esp+6Ch] [ebp-3Ch]
   struct std::_Iterator_base12 *v26; // [esp+70h] [ebp-38h]
   struct std::_Iterator_base12 *v27; // [esp+74h] [ebp-34h]
@@ -1686,97 +1672,97 @@ void  CCart::DeleteSelectable(void) {
   int v38; // [esp+A4h] [ebp-4h]
 
   v37 = this;
-  CWheeler::CWheeler(a2);
+  ((void (__stdcall *)(int))CWheeler::CWheeler)(a2);
   v38 = 0;
-  *(_DWORD *)v37 = &CCart::_vftable_;
-  std::vector<CCart::CSettlerStatus>::vector<CCart::CSettlerStatus>(v7, v8[0]);
-  std::vector<CCart::CFoundationCardCargo>::vector<CCart::CFoundationCardCargo>(v7, v8[0]);
+  v37->__vftable = (CCart_vtbl *)&CCart::_vftable_;
+  ((void (__cdecl *)(int, _DWORD))std::vector<CCart::CSettlerStatus>::vector<CCart::CSettlerStatus>)(v7, v8[0]);
+  ((void (__cdecl *)(int, _DWORD))std::vector<CCart::CFoundationCardCargo>::vector<CCart::CFoundationCardCargo>)(v7, v8[0]);
   LOBYTE(v38) = 2;
   operator^<unsigned int>(a2, &v32);
-  if ( !v32 || v32 > 2 )
+  if ( v32 == 0 || v32 > 2 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CCart");
     pExceptionObject = 0;
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned char>(a2, (char *)v37 + 212);
-  operator^<unsigned char>(a2, (char *)v37 + 213);
-  operator^<unsigned char>(a2, (char *)v37 + 214);
-  operator^<unsigned char>(a2, (char *)v37 + 215);
-  operator^<bool>(a2, (char *)v37 + 216);
-  operator^<bool>(a2, (char *)v37 + 217);
-  operator^<unsigned char>(a2, (char *)v37 + 218);
-  operator^<unsigned char>(a2, (char *)v37 + 219);
-  operator^<int>(a2, (int)v37 + 224);
-  operator^<unsigned char>(a2, (char *)v37 + 120);
-  operator^<unsigned char>(a2, (char *)v37 + 121);
-  operator^<unsigned char>(a2, (char *)v37 + 122);
-  operator^<unsigned char>(a2, (char *)v37 + 123);
-  operator^<unsigned short>(a2, (char *)v37 + 124);
-  operator^<unsigned short>(a2, (char *)v37 + 126);
-  operator^<unsigned short>(a2, (char *)v37 + 128);
-  operator^<unsigned short>(a2, (char *)v37 + 130);
-  operator^<unsigned short>(a2, (char *)v37 + 132);
-  operator^<float>(a2, (char *)v37 + 136);
-  operator^<bool>(a2, (char *)v37 + 300);
-  operator^<bool>(a2, (char *)v37 + 301);
-  operator^<bool>(a2, (char *)v37 + 302);
-  operator^<int>(a2, (int)v37 + 304);
-  operator^<int>(a2, (int)v37 + 308);
-  operator^<int>(a2, (int)v37 + 312);
-  operator^<int>(a2, (int)v37 + 316);
-  operator^<unsigned char>(a2, (char *)v37 + 320);
+  operator^<unsigned char>(a2, (unsigned __int8 *)&v37[1].m_packedTribePlayer);
+  operator^<unsigned char>(a2, &v37[1].m_iLivePoints);
+  operator^<unsigned char>(a2, &v37[1].m_iLivePoints + 1);
+  operator^<unsigned char>(a2, &v37[1].m_iLivePoints + 2);
+  operator^<bool>(a2, &v37[1].m_iFrame);
+  operator^<bool>(a2, &v37[1].m_iAttackerPlayerId);
+  operator^<unsigned char>(a2, (unsigned __int8 *)&v37[1].m_iJobPart);
+  operator^<unsigned char>(a2, (unsigned __int8 *)&v37[1].m_iJobPart + 1);
+  operator^<int>((struct std::istream *)a2, (int *)&v37[1].m_uLastUpdateTick);
+  operator^<unsigned char>(a2, &v37->word78);
+  operator^<unsigned char>(a2, &v37->m_uBoardsNeed);
+  operator^<unsigned char>(a2, &v37->word7A);
+  operator^<unsigned char>(a2, &v37->m_uIronNeed);
+  operator^<unsigned short>(a2, &v37->m_uMaterialSupplied);
+  operator^<unsigned short>(a2, &v37->word7E);
+  operator^<unsigned short>(a2, &v37->word80);
+  operator^<unsigned short>(a2, &v37->word82);
+  operator^<unsigned short>(a2, &v37->word84);
+  operator^<float>(a2, (int)&v37->m_iBuildingProgress);
+  operator^<bool>(a2, &v37[1].word78);
+  operator^<bool>(a2, &v37[1].m_uBoardsNeed);
+  operator^<bool>(a2, &v37[1].word7A);
+  operator^<int>((struct std::istream *)a2, (int *)&v37[1].m_uMaterialSupplied);
+  operator^<int>((struct std::istream *)a2, (int *)&v37[1].word80);
+  operator^<int>((struct std::istream *)a2, (int *)&v37[1].word84);
+  operator^<int>((struct std::istream *)a2, (int *)&v37[1].m_iBuildingProgress);
+  operator^<unsigned char>(a2, (unsigned __int8 *)&v37[1].m_vTasks);
   operator^<unsigned char>(a2, &v36);
   for ( i = 0;
         i < v36;
         ++i )
   {
-    CCart::CSettlerStatus::CSettlerStatus((CCart::CSettlerStatus *)v22);
+    CCart::CSettlerStatus::CSettlerStatus((CCart::CSettlerStatus *)&v22);
     LOBYTE(v38) = 3;
-    operator^<int>(a2, (int)v22);
+    operator^<int>((struct std::istream *)a2, &v22);
     operator^<bool>(a2, v23);
-    operator^<int>(a2, (int)v24);
-    operator^<int>(a2, (int)&v30);
+    operator^<int>((struct std::istream *)a2, &v24);
+    operator^<int>((struct std::istream *)a2, &v30);
     v25 = v30;
-    v6 = v22;
-    v29 = (struct std::_Iterator_base12 *)std::vector<CCart::CSettlerStatus>::end(v10);
+    v6 = &v22;
+    v29 = (struct std::_Iterator_base12 *)std::vector<CCart::CSettlerStatus>::end((int)v10);
     v28 = v29;
     LOBYTE(v38) = 4;
     v17 = &v3;
     v16 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v29);
-    v15 = std::vector<CCart::CSettlerStatus>::insert(v11, v3, v4, v5, v6);
+    v15 = std::vector<CCart::CSettlerStatus>::insert((int)v11, v3, v4, v5, (int)v6);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v11);
     LOBYTE(v38) = 3;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v10);
     LOBYTE(v38) = 2;
-    CCart::CSettlerStatus::~CSettlerStatus((CCart::CSettlerStatus *)v22);
+    CCart::CSettlerStatus::~CSettlerStatus((CCart::CSettlerStatus *)&v22);
   }
   operator^<unsigned char>(a2, &v35);
   for ( j = 0;
         j < v35;
         ++j )
   {
-    CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v18);
-    operator^<int>(a2, (int)v18);
-    operator^<int>(a2, (int)v19);
-    operator^<int>(a2, (int)v20);
-    operator^<int>(a2, (int)v21);
-    v6 = v18;
-    v27 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end(v8);
+    CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)&v18);
+    operator^<int>((struct std::istream *)a2, &v18);
+    operator^<int>((struct std::istream *)a2, &v19);
+    operator^<int>((struct std::istream *)a2, &v20);
+    operator^<int>((struct std::istream *)a2, v21);
+    v6 = &v18;
+    v27 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end((int)v8);
     v26 = v27;
     LOBYTE(v38) = 5;
     v14 = &v3;
     v13 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v27);
-    v12 = std::vector<CCart::CFoundationCardCargo>::insert(v9, v3, v4, v5, v6);
+    v12 = std::vector<CCart::CFoundationCardCargo>::insert((int)v9, v3, v4, v5, (int)v6);
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v9);
     LOBYTE(v38) = 2;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v8);
   }
-  LoadArray<SLoadInfo>(a2, (char *)v37 + 228, 72);
+  LoadArray<SLoadInfo>(a2, (int)&v37[1].m_uLastLogicUpdate, 72u);
   if ( v32 == 2 )
   {
-    operator^<bool>(a2, (char *)v37 + 321);
+    operator^<bool>(a2, (char *)&v37[1].m_vTasks.u0 + 1);
   }
   CCart::SetSelectable(v37);
   v38 = -1;
@@ -1795,7 +1781,7 @@ void  CCart::Store(std::ostream & a2) {
   int v7; // [esp+Ch] [ebp-40h] BYREF
   int v8; // [esp+10h] [ebp-3Ch] BYREF
   int v9; // [esp+18h] [ebp-34h] BYREF
-  char v10[4]; // [esp+1Ch] [ebp-30h] BYREF
+  bool v10[4]; // [esp+1Ch] [ebp-30h] BYREF
   int v11[2]; // [esp+20h] [ebp-2Ch] BYREF
   int v12; // [esp+28h] [ebp-24h] BYREF
   int v13; // [esp+2Ch] [ebp-20h] BYREF
@@ -1807,38 +1793,38 @@ void  CCart::Store(std::ostream & a2) {
   int v19; // [esp+48h] [ebp-4h]
 
   v16 = this;
-  CWheeler::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))CWheeler::Store)(a2);
   v13 = 2;
-  operator^<unsigned int>(a2, &v13);
-  operator^<unsigned char>(a2, (int)(v16 + 212));
-  operator^<unsigned char>(a2, (int)(v16 + 213));
-  operator^<unsigned char>(a2, (int)(v16 + 214));
-  operator^<unsigned char>(a2, (int)(v16 + 215));
-  operator^<bool>((int)a2, (int)(v16 + 216));
-  operator^<bool>((int)a2, (int)(v16 + 217));
-  operator^<unsigned char>(a2, (int)(v16 + 218));
-  operator^<unsigned char>(a2, (int)(v16 + 219));
-  operator^<int>((int)a2, (int *)v16 + 56);
-  operator^<unsigned char>(a2, (int)(v16 + 120));
-  operator^<unsigned char>(a2, (int)(v16 + 121));
-  operator^<unsigned char>(a2, (int)(v16 + 122));
-  operator^<unsigned char>(a2, (int)(v16 + 123));
-  operator^<unsigned short>((int)a2, (__int16 *)v16 + 62);
-  operator^<unsigned short>((int)a2, (__int16 *)v16 + 63);
-  operator^<unsigned short>((int)a2, (__int16 *)v16 + 64);
-  operator^<unsigned short>((int)a2, (__int16 *)v16 + 65);
-  operator^<unsigned short>((int)a2, (__int16 *)v16 + 66);
-  operator^<float>(a2, v16 + 136);
-  operator^<bool>((int)a2, (int)(v16 + 300));
-  operator^<bool>((int)a2, (int)(v16 + 301));
-  operator^<bool>((int)a2, (int)(v16 + 302));
-  operator^<int>((int)a2, (int *)v16 + 76);
-  operator^<int>((int)a2, (int *)v16 + 77);
-  operator^<int>((int)a2, (int *)v16 + 78);
-  operator^<int>((int)a2, (int *)v16 + 79);
-  operator^<unsigned char>(a2, (int)(v16 + 320));
+  operator^<unsigned int>(a2, (unsigned int *)&v13);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v16 + 212);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v16 + 213);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v16 + 214);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v16 + 215);
+  operator^<bool>(a2, (bool *)v16 + 216);
+  operator^<bool>(a2, (bool *)v16 + 217);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v16 + 218);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v16 + 219);
+  operator^<int>(a2, (int *)v16 + 56);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v16 + 120);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v16 + 121);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v16 + 122);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v16 + 123);
+  operator^<unsigned short>(a2, (WORD *)v16 + 62);
+  operator^<unsigned short>(a2, (WORD *)v16 + 63);
+  operator^<unsigned short>(a2, (WORD *)v16 + 64);
+  operator^<unsigned short>(a2, (WORD *)v16 + 65);
+  operator^<unsigned short>(a2, (WORD *)v16 + 66);
+  operator^<float>(a2, (float *)v16 + 34);
+  operator^<bool>(a2, (bool *)v16 + 300);
+  operator^<bool>(a2, (bool *)v16 + 301);
+  operator^<bool>(a2, (bool *)v16 + 302);
+  operator^<int>(a2, (int *)v16 + 76);
+  operator^<int>(a2, (int *)v16 + 77);
+  operator^<int>(a2, (int *)v16 + 78);
+  operator^<int>(a2, (int *)v16 + 79);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v16 + 320);
   v18 = std::vector<CCart::CSettlerStatus>::size(v16 + 180);
-  operator^<unsigned char>(a2, (int)&v18);
+  operator^<unsigned char>(a2, &v18);
   for ( i = 0;
         i < v18;
         ++i )
@@ -1846,29 +1832,29 @@ void  CCart::Store(std::ostream & a2) {
     v2 = (const struct CCart::CSettlerStatus *)std::vector<CCart::CSettlerStatus>::operator[](i);
     CCart::CSettlerStatus::CSettlerStatus((CCart::CSettlerStatus *)&v9, v2);
     v19 = 0;
-    operator^<int>((int)a2, &v9);
-    operator^<bool>((int)a2, (int)v10);
-    operator^<int>((int)a2, v11);
+    operator^<int>(a2, &v9);
+    operator^<bool>(a2, v10);
+    operator^<int>(a2, v11);
     v12 = v11[1];
-    operator^<int>((int)a2, &v12);
+    operator^<int>(a2, &v12);
     v19 = -1;
     CCart::CSettlerStatus::~CSettlerStatus((CCart::CSettlerStatus *)&v9);
   }
   v17 = std::vector<CCart::CFoundationCardCargo>::size(v16 + 196);
-  operator^<unsigned char>(a2, (int)&v17);
+  operator^<unsigned char>(a2, &v17);
   for ( j = 0;
         j < v17;
         ++j )
   {
     v3 = (const struct CCart::CFoundationCardCargo *)std::vector<CCart::CFoundationCardCargo>::operator[](j);
     CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)&v5, v3);
-    operator^<int>((int)a2, &v5);
-    operator^<int>((int)a2, &v6);
-    operator^<int>((int)a2, &v7);
-    operator^<int>((int)a2, &v8);
+    operator^<int>(a2, &v5);
+    operator^<int>(a2, &v6);
+    operator^<int>(a2, &v7);
+    operator^<int>(a2, &v8);
   }
-  StoreArray<SLoadInfo>(a2, v16 + 228, 72);
-  return operator^<bool>((int)a2, (int)(v16 + 321));
+  StoreArray<SLoadInfo>((int)a2, (int)(v16 + 228), 72u);
+  return (int)operator^<bool>(a2, (bool *)v16 + 321);
 }
 
 
@@ -1884,11 +1870,11 @@ unsigned long  CCart::ClassID(void)const {
 // Decompiled from int __thiscall CCart::UnloadToPosition(CPaneContainer *this, struct CPaneContainer *a2)
 void  CCart::UnloadToPosition(int a2) {
   
-  IEntity::SetPosition(this, a2);
+  IEntity::SetPosition((IEntity *)this, (int)a2);
   (*(void (__thiscall **)(CPaneContainer *, struct CPaneContainer *))(*(_DWORD *)this + 196))(this, a2);
-  CWarMap::AddEntity(this);
+  CWarMap::AddEntity((IEntity *)this);
   IEntity::SetFlagBits(this, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
-  return IEntity::ClearFlagBits(this, ENTITY_FLAG_ON_BOARD);
+  return IEntity::ClearFlagBits((IEntity *)this, ENTITY_FLAG_ON_BOARD);
 }
 
 
@@ -1912,37 +1898,37 @@ void  CCart::UnloadToPosition(int a2) {
   this->__vftable = (CCart_vtbl *)&CCart::_vftable_;
   std::vector<CCart::CSettlerStatus>::vector<CCart::CSettlerStatus>();
   std::vector<CCart::CFoundationCardCargo>::vector<CCart::CFoundationCardCargo>();
-  this[1].m_packedTribePlayer.Packed = 0;
-  this[1].m_iLivePoints = 0;
-  *(&this[1].m_iLivePoints + 1) = 0;
-  *(&this[1].m_iLivePoints + 2) = 0;
-  this[1].m_iFrame = 0;
-  this[1].m_iAttackerPlayerId = 0;
-  LOBYTE(this[1].m_iJobPart) = 0;
-  HIBYTE(this[1].m_iJobPart) = 0;
-  this[1].m_uLastUpdateTick = 0;
-  this[1].m_uBoardsNeed = 0;
-  *(_DWORD *)&this[1].m_uMaterialSupplied = -1;
-  BYTE1(this[1].m_vTasks.u0) = 0;
+  *((_BYTE *)this + 212) = 0;
+  *((_BYTE *)this + 213) = 0;
+  *((_BYTE *)this + 214) = 0;
+  *((_BYTE *)this + 215) = 0;
+  *((_BYTE *)this + 216) = 0;
+  *((_BYTE *)this + 217) = 0;
+  *((_BYTE *)this + 218) = 0;
+  *((_BYTE *)this + 219) = 0;
+  *((_DWORD *)this + 56) = 0;
+  *((_BYTE *)this + 301) = 0;
+  *((_DWORD *)this + 76) = -1;
+  *((_BYTE *)this + 321) = 0;
   if ( !a8 )
   {
     IEntity::SetFlagBits(this, (EntityFlag)&byte_20000CA[54]);
   }
-  this[1].m_iAttackerPlayerId = CCart::IsOnOwnEcoSector(this);
+  *((_BYTE *)this + 217) = CCart::IsOnOwnEcoSector(this);
   for ( i = 0;
         i < 6;
         ++i )
   {
-    *(&this[1].m_uLastLogicUpdate + 3 * i) = 0;
-    *(&this[1].m_iEventQueue.u0 + 3 * i) = 0;
+    *((_DWORD *)this + 3 * i + 57) = 0;
+    *((_DWORD *)this + 3 * i + 58) = 0;
   }
   IEntity::ClearFlagBits(this, ENTITY_FLAG_VulnerableMask);
-  LOBYTE(this[1].m_vTasks.u0) = this->m_uCurrentTask;
-  *(_DWORD *)&this[1].word84 = 0;
-  *(_DWORD *)&this[1].word80 = 0;
-  this[1].m_iBuildingProgress = 0.0;
-  this[1].word78 = 0;
-  this[1].word7A = 0;
+  *((_BYTE *)this + 320) = this->m_uCurrentTask;
+  *((_DWORD *)this + 78) = 0;
+  *((_DWORD *)this + 77) = 0;
+  *((_DWORD *)this + 79) = 0;
+  *((_BYTE *)this + 300) = 0;
+  *((_BYTE *)this + 302) = 0;
   CCart::SetSelectable(this);
   if ( a6 == 1030 )
   {
@@ -1961,7 +1947,7 @@ void  CCart::UnloadToPosition(int a2) {
   int v3; // [esp+0h] [ebp-4h]
   CWheeler *v4; // [esp+0h] [ebp-4h]
 
-  *(_DWORD *)this = &CCart::_vftable_;
+  this->__vftable = (CCart_vtbl *)&CCart::_vftable_;
   std::vector<CCart::CFoundationCardCargo>::clear(this);
   std::vector<CCart::CSettlerStatus>::clear(v1);
   std::vector<CCart::CFoundationCardCargo>::~vector<CCart::CFoundationCardCargo>(v2);
@@ -1977,31 +1963,31 @@ void  CCart::TakeJob(void) {
   int v2; // [esp+0h] [ebp-14h]
   int v3; // [esp+0h] [ebp-14h]
   int v4; // [esp+4h] [ebp-10h]
-  char v5; // [esp+8h] [ebp-Ch]
+  unsigned __int8 v5; // [esp+8h] [ebp-Ch]
   __int16 *CurrentTaskPtr; // [esp+Ch] [ebp-8h]
 
   CurrentTaskPtr = (__int16 *)CVehicle::GetCurrentTaskPtr(this);
   CVehicle::InitCommonTaskValues(this, (const struct CEntityTask *)CurrentTaskPtr);
-  v5 = *((_BYTE *)this + 107);
+  v5 = this->m_uCurrentTask;
   if ( v5 == 7 )
   {
     v2 = Y16X16::PackXYFast(CurrentTaskPtr[5], CurrentTaskPtr[6]);
     if ( CCart::CanWalk(this) )
     {
-      *((_BYTE *)this + 107) = *(_BYTE *)(*((_DWORD *)this + 25) + 36);
-      v4 = std::auto_ptr<CWalking>::operator->(v2);
+      this->m_uCurrentTask = this->m_pVehicleProperties->m_uU24;
+      v4 = ((_DWORD (__cdecl *)(_DWORD))std::auto_ptr<CWalking>::operator->)(v2);
       (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v4 + 8))(v4, v3, 0);
     }
     else
     {
-      *((_BYTE *)this + 107) = 17;
+      this->m_uCurrentTask = 17;
     }
   }
   else if ( v5 != 17 )
   {
     CVehicle::InitCommonTaskValues(this, 0);
   }
-  return (*(int (__thiscall **)(CCart *))(*(_DWORD *)this + 144))(this);
+  return ((int (__thiscall *)(CCart *))this->j_?VehicleLogicUpdate@CCart@@UAEXXZ)(this);
 }
 
 
@@ -2031,7 +2017,7 @@ void  CCart::DropGoods(void) {
         ++i )
   {
     for ( j = CCart::GetGoodAmount(this, i);
-          j;
+          j != 0;
           j -= v4 )
     {
       if ( j > 8 )
@@ -2044,7 +2030,7 @@ void  CCart::DropGoods(void) {
       }
       v3 = IEntity::Y(this);
       v1 = IEntity::X(this);
-      CPileMgr::SearchSpaceForGoods((CPileMgr *)&g_cPileMgr, v1, v3, i, v4);
+      CPileMgr::SearchSpaceForGoods(&g_cPileMgr, v1, v3, i, v4);
       CCart::RemoveGood(this, i, v4);
     }
   }
@@ -2068,21 +2054,21 @@ void  CCart::GetTurnGfxInfo(void) {
 
   v1 = IEntity::Race(this);
   v6 = CVehicle::TurnDirEx(this);
-  v5 = MEMORY[0x37BEC10][5 * v6];
-  if ( v5 )
+  v5 = g_sVehicleDirExInfos[v6].m_uTurnId;
+  if ( v5 != 0 )
   {
-    v4 = *(_DWORD *)(*((_DWORD *)this + 25) + 32) + v5 - 1;
+    v4 = this->m_pVehicleProperties->m_uTurnGfx + v5 - 1;
   }
   else
   {
-    v4 = *(_DWORD *)(*((_DWORD *)this + 25) + 28);
+    v4 = this->m_pVehicleProperties->m_uBaseGfx;
   }
   v7 = v4;
-  v2 = MEMORY[0x37BEC14][5 * v6];
-  v3 = MEMORY[0x37BEC18][5 * v6];
+  v2 = g_sVehicleDirExInfos[v6].m_iDir;
+  v3 = g_sVehicleDirExInfos[v6].m_iFrame;
   if ( !CCart::HasLoadedSomething(this) )
   {
-    if ( v5 )
+    if ( v5 != 0 )
     {
       v7 = v4 + 8;
     }
@@ -2091,8 +2077,8 @@ void  CCart::GetTurnGfxInfo(void) {
       v7 = v4 + 1;
     }
   }
-  CGfxManager::GetVehicleGfxInfo((CGfxManager *)g_pGfxManager, (struct SGfxObjectInfo *)&IEntity::m_sGfxInfo, v1, v7, v2, v3, 0, 0);
-  MEMORY[0x40FE25C] = 0;
+  CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v1, v7, v2, v3, 0, 0);
+  IEntity::m_sGfxInfo.m_pPatchGfxData = 0;
 }
 
 
@@ -2105,7 +2091,7 @@ void * __cdecl CCart::operator new(unsigned int a1) {
 
 
 // address=[0x1533580]
-// Decompiled from void __cdecl CCart::operator delete(void *a1)
+// Decompiled from void __cdecl CCart::operator delete(_DWORD *a1)
 void __cdecl CCart::operator delete(void * a1) {
   
   CVehicleMgr::Dealloc((CVehicleMgr *)&g_cVehicleMgr, a1);
@@ -2162,66 +2148,66 @@ void  CCart::ChangeToFoundationCart(void) {
   int v44; // [esp+E8h] [ebp-1Ch]
   unsigned __int8 *i; // [esp+ECh] [ebp-18h]
   IAnimatedEntity *v46; // [esp+F0h] [ebp-14h]
-  _DWORD *v47; // [esp+F4h] [ebp-10h]
+  IEntity *v47; // [esp+F4h] [ebp-10h]
   int v48; // [esp+100h] [ebp-4h]
 
   v47 = this;
-  *((_BYTE *)this + 214) = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfPioneers);
-  *((_BYTE *)v47 + 215) = CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfCarrier);
-  *((_BYTE *)v47 + 216) = 1;
+  *((_BYTE *)this + 214) = CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfPioneers);
+  *(&v47[5].m_iLivePoints + 2) = CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfCarrier);
+  LOBYTE(v47[6].__vftable) = 1;
   std::vector<CCart::CSettlerStatus>::clear(v15);
   std::vector<CCart::CFoundationCardCargo>::clear(v15);
   v14 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfBoard);
   v13 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfBoard);
   v1 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfBoard);
-  v14 = CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v18, 7, v1, v13, v14);
-  v43 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end(v24);
+  v14 = (int)CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v18, 7, v1, v13, v14);
+  v43 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end((int)v24);
   v42 = v43;
   v48 = 0;
   v34 = &v11;
   v33 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v43);
-  v32 = std::vector<CCart::CFoundationCardCargo>::insert(v25, v11, v12, v13, v14);
+  v32 = std::vector<CCart::CFoundationCardCargo>::insert((int)v25, v11, v12, v13, v14);
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v25);
   v48 = -1;
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v24);
   v14 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfStone);
   v13 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfStone);
   v2 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfStone);
-  v14 = CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v17, 32, v2, v13, v14);
-  v41 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end(v22);
+  v14 = (int)CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v17, 32, v2, v13, v14);
+  v41 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end((int)v22);
   v40 = v41;
   v48 = 1;
   v31 = &v11;
   v30 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v41);
-  v29 = std::vector<CCart::CFoundationCardCargo>::insert(v23, v11, v12, v13, v14);
+  v29 = std::vector<CCart::CFoundationCardCargo>::insert((int)v23, v11, v12, v13, v14);
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v23);
   v48 = -1;
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v22);
   v14 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfHammer);
   v13 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfHammer);
   v3 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfHammer);
-  v14 = CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v16, 18, v3, v13, v14);
-  v39 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end(v20);
+  v14 = (int)CCart::CFoundationCardCargo::CFoundationCardCargo((CCart::CFoundationCardCargo *)v16, 18, v3, v13, v14);
+  v39 = (struct std::_Iterator_base12 *)std::vector<CCart::CFoundationCardCargo>::end((int)v20);
   v38 = v39;
   v48 = 2;
   v28 = &v11;
   v27 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v39);
-  v26 = std::vector<CCart::CFoundationCardCargo>::insert(v21, v11, v12, v13, v14);
+  v26 = std::vector<CCart::CFoundationCardCargo>::insert((int)v21, v11, v12, v13, v14);
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v21);
   v48 = -1;
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CFoundationCardCargo>>>(v20);
   v4 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfBoard);
   v5 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfStone) + v4;
   v6 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfHammer);
-  *((_BYTE *)v47 + 219) = v6 + v5;
-  *((_BYTE *)v47 + 218) = *((_BYTE *)v47 + 219);
+  HIBYTE(v47[6].__vftable) = v6 + v5;
+  BYTE2(v47[6].__vftable) = HIBYTE(v47[6].__vftable);
   IEntity::SetFlagBits(v47, ENTITY_FLAG_VulnerableMask);
-  IAnimatedEntity::RegisterForLogicUpdate(1);
-  *((_BYTE *)v47 + 107) = 27;
-  *((_BYTE *)v47 + 214) = 0;
-  *((_BYTE *)v47 + 215) = 0;
-  *((_BYTE *)v47 + 212) = 0;
-  *((_BYTE *)v47 + 213) = 0;
+  ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
+  *(&v47[2].m_iLivePoints + 2) = 27;
+  *(&v47[5].m_iLivePoints + 1) = 0;
+  *(&v47[5].m_iLivePoints + 2) = 0;
+  v47[5].m_packedTribePlayer.Packed = 0;
+  v47[5].m_iLivePoints = 0;
   v7 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfPioneers);
   v37 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfCarrier) + v7;
   for ( i = 0;
@@ -2235,27 +2221,27 @@ void  CCart::ChangeToFoundationCart(void) {
     }
     v14 = 0;
     v13 = 47;
-    v9 = IEntity::OwnerId((unsigned __int8 *)v47);
-    v44 = CSettlerMgr::AddSettler((CSettlerMgr *)g_cSettlerMgr, 1, 1, v9, v13, v14);
-    result = CSettlerMgr::GetSettlerPtr(v44);
+    v9 = IEntity::OwnerId(v47);
+    v44 = CSettlerMgr::AddSettler(&g_cSettlerMgr, 1, 1, v9, v13, v14);
+    result = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(v44);
     v46 = (IAnimatedEntity *)result;
-    if ( !result )
+    if ( result == 0 )
     {
       break;
     }
-    CSettler::TakeWaitList(v46);
-    (*(void (__thiscall **)(IAnimatedEntity *))(*(_DWORD *)v46 + 56))(v46);
+    CSettler::TakeWaitList((CSettler *)v46);
+    v46->RemoveFromMapObjectLayer((CPropertySet *)v46);
     IAnimatedEntity::UnRegisterFromLogicUpdate(v46);
     IEntity::ClearFlagBits(v46, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
     v14 = 1;
-    v10 = IEntity::Type((unsigned __int16 *)v46);
+    v10 = IEntity::Type(v46);
     v36 = CCart::CSettlerStatus::CSettlerStatus(v19, v44, v10, v14);
     v35 = v36;
     v48 = 3;
     std::vector<CCart::CSettlerStatus>::push_back(v36);
     v48 = -1;
     CCart::CSettlerStatus::~CSettlerStatus((CCart::CSettlerStatus *)v19);
-    ++*((_BYTE *)v47 + 212);
+    ++v47[5].m_packedTribePlayer.Packed;
   }
   return result;
 }
@@ -2273,7 +2259,7 @@ bool  CCart::OnRequestSettlers(void) {
   int v7; // [esp-Ch] [ebp-E0h]
   int v8; // [esp-8h] [ebp-DCh]
   int v9; // [esp-4h] [ebp-D8h]
-  _BYTE v10[24]; // [esp+4h] [ebp-D0h] BYREF
+  CEntityEvent v10; // [esp+4h] [ebp-D0h] BYREF
   _BYTE v11[16]; // [esp+1Ch] [ebp-B8h] BYREF
   _BYTE v12[16]; // [esp+2Ch] [ebp-A8h] BYREF
   _BYTE v13[12]; // [esp+3Ch] [ebp-98h] BYREF
@@ -2302,30 +2288,30 @@ bool  CCart::OnRequestSettlers(void) {
   CEcoSector *EcoSectorPtr; // [esp+B8h] [ebp-1Ch]
   unsigned __int8 *SettlerPtr; // [esp+BCh] [ebp-18h]
   int i; // [esp+C0h] [ebp-14h]
-  _BYTE *v39; // [esp+C4h] [ebp-10h]
+  IEntity *v39; // [esp+C4h] [ebp-10h]
   int v40; // [esp+D0h] [ebp-4h]
 
   v39 = this;
   for ( i = 0;
-        i < (unsigned __int8)v39[214];
+        i < *(&v39[5].m_iLivePoints + 1);
         ++i )
   {
     v9 = 47;
-    v1 = IEntity::ID();
-    v34 = CSettlerMgr::OrderSpecialist((CSettlerMgr *)g_cSettlerMgr, v1, v9);
+    v1 = ((int (__stdcall *)())IEntity::ID)();
+    v34 = CSettlerMgr::OrderSpecialist(&g_cSettlerMgr, v1, v9);
     if ( v34 > 0 )
     {
-      --v39[214];
+      --*(&v39[5].m_iLivePoints + 1);
       v32 = CCart::CSettlerStatus::CSettlerStatus(v12, v34, 47, 0);
       v31 = v32;
       v40 = 0;
       v9 = v32;
-      v30 = (struct std::_Iterator_base12 *)std::vector<CCart::CSettlerStatus>::end(v15);
+      v30 = (struct std::_Iterator_base12 *)std::vector<CCart::CSettlerStatus>::end((int)v15);
       v29 = v30;
       LOBYTE(v40) = 1;
       v22 = &v6;
       v21 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v30);
-      v20 = std::vector<CCart::CSettlerStatus>::insert(v16, v6, v7, v8, v9);
+      v20 = std::vector<CCart::CSettlerStatus>::insert((int)v16, v6, v7, v8, v9);
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v16);
       LOBYTE(v40) = 0;
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v15);
@@ -2334,21 +2320,21 @@ bool  CCart::OnRequestSettlers(void) {
     }
   }
   for ( i = 0;
-        i < (unsigned __int8)v39[215];
+        i < *(&v39[5].m_iLivePoints + 2);
         ++i )
   {
-    v2 = IEntity::WorldIdx();
+    v2 = ((int (__stdcall *)())IEntity::WorldIdx)();
     v33 = CWorldManager::EcoSectorId(v2);
-    if ( !v33 )
+    if ( v33 == 0 )
     {
       return 0;
     }
     EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v33);
-    if ( !EcoSectorPtr && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1578, "pEcoSector!= NULL") == 1 )
+    if ( EcoSectorPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1578, "pEcoSector!= NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( !EcoSectorPtr )
+    if ( EcoSectorPtr == 0 )
     {
       return 0;
     }
@@ -2358,36 +2344,36 @@ bool  CCart::OnRequestSettlers(void) {
     if ( NearestSettler > 0 )
     {
       CEcoSector::GetSettlerOutOfOffer(EcoSectorPtr, NearestSettler);
-      SettlerPtr = CSettlerMgr::GetSettlerPtr(NearestSettler);
-      if ( !SettlerPtr && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1591, "pSettler!=NULL") == 1 )
+      SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(NearestSettler);
+      if ( SettlerPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1591, "pSettler!=NULL") == 1 )
       {
         __debugbreak();
       }
-      if ( !SettlerPtr )
+      if ( SettlerPtr == 0 )
       {
         return 0;
       }
       v9 = 0;
       v8 = 0;
-      v5 = IEntity::ID();
-      v28 = CEntityEvent::CEntityEvent((CEntityEvent *)v10, 0x18u, 0, v5, v8, v9);
+      v5 = ((int (__stdcall *)())IEntity::ID)();
+      v28 = CEntityEvent::CEntityEvent(&v10, 0x18u, 0, v5, v8, v9);
       v27 = v28;
       v40 = 2;
       (*(void (__thiscall **)(unsigned __int8 *, CEntityEvent *))(*(_DWORD *)SettlerPtr + 80))(SettlerPtr, v28);
       v40 = -1;
-      CEntityEvent::~CEntityEvent(v10);
-      IEntity::ClearFlagBits(SettlerPtr, ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
-      --v39[215];
+      CEntityEvent::~CEntityEvent(&v10);
+      IEntity::ClearFlagBits((IEntity *)SettlerPtr, ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
+      --*(&v39[5].m_iLivePoints + 2);
       v26 = CCart::CSettlerStatus::CSettlerStatus(v11, NearestSettler, 1, 0);
       v25 = v26;
       v40 = 3;
       v9 = v26;
-      v24 = (struct std::_Iterator_base12 *)std::vector<CCart::CSettlerStatus>::end(v13);
+      v24 = (struct std::_Iterator_base12 *)std::vector<CCart::CSettlerStatus>::end((int)v13);
       v23 = v24;
       LOBYTE(v40) = 4;
       v19 = &v6;
       v18 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v24);
-      v17 = std::vector<CCart::CSettlerStatus>::insert(v14, v6, v7, v8, v9);
+      v17 = std::vector<CCart::CSettlerStatus>::insert((int)v14, v6, v7, v8, v9);
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v14);
       LOBYTE(v40) = 3;
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CCart::CSettlerStatus>>>(v13);
@@ -2412,9 +2398,9 @@ bool  CCart::OnRequestCargo(void) {
   unsigned int i; // [esp+10h] [ebp-8h]
   _DWORD *v10; // [esp+14h] [ebp-4h]
 
-  v1 = IEntity::WorldIdx();
+  v1 = ((int (__stdcall *)())IEntity::WorldIdx)();
   v6 = CWorldManager::EcoSectorId(v1);
-  if ( !v6 )
+  if ( v6 == 0 )
   {
     return 0;
   }
@@ -2430,8 +2416,8 @@ bool  CCart::OnRequestCargo(void) {
             ++j )
       {
         v5 = v10[1];
-        v4 = IEntity::ID();
-        v3 = (CEcoSector *)CEcoSectorMgr::operator[](v6);
+        v4 = ((int (__stdcall *)())IEntity::ID)();
+        v3 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v6);
         CEcoSector::RequestGoodToVehicle(v3, v4, v5);
         v10[4] = CStateGame::GetTickCounter(g_pGame);
       }
@@ -2463,9 +2449,9 @@ bool  CCart::UnLoadSettler(void) {
   int v6; // eax
   int v7; // eax
   int v9; // [esp+0h] [ebp-A0h]
-  _BYTE v10[24]; // [esp+8h] [ebp-98h] BYREF
-  _BYTE v11[24]; // [esp+20h] [ebp-80h] BYREF
-  _BYTE v12[24]; // [esp+38h] [ebp-68h] BYREF
+  CEntityEvent v10; // [esp+8h] [ebp-98h] BYREF
+  CEntityEvent v11; // [esp+20h] [ebp-80h] BYREF
+  CEntityEvent v12; // [esp+38h] [ebp-68h] BYREF
   CEntityEvent *v13; // [esp+50h] [ebp-50h]
   CEntityEvent *v14; // [esp+54h] [ebp-4Ch]
   CEntityEvent *v15; // [esp+58h] [ebp-48h]
@@ -2481,73 +2467,73 @@ bool  CCart::UnLoadSettler(void) {
   int v25; // [esp+80h] [ebp-20h]
   unsigned __int16 *EcoSectorPtr; // [esp+84h] [ebp-1Ch]
   unsigned int i; // [esp+88h] [ebp-18h]
-  char *v28; // [esp+8Ch] [ebp-14h]
-  unsigned __int16 *v29; // [esp+90h] [ebp-10h]
+  IEntity *v28; // [esp+8Ch] [ebp-14h]
+  CSettler *v29; // [esp+90h] [ebp-10h]
   int v30; // [esp+9Ch] [ebp-4h]
 
-  v28 = (char *)this;
+  v28 = this;
   for ( i = 0;
         ;
         ++i )
   {
-    v1 = std::vector<CCart::CSettlerStatus>::size(v28 + 180);
+    v1 = std::vector<CCart::CSettlerStatus>::size(&v28[5]);
     if ( i >= v1 )
     {
       break;
     }
     v25 = std::vector<CCart::CSettlerStatus>::operator[](i);
     v21 = *(_DWORD *)(v25 + 8);
-    v29 = (unsigned __int16 *)CSettlerMgr::operator[](v21);
-    if ( *(_BYTE *)(v25 + 4) )
+    v29 = CSettlerMgr::operator[](v21);
+    if ( *(_BYTE *)(v25 + 4) != 0 )
     {
-      v24 = (v28[68] + 3) % 6 + 8;
+      v24 = ((char)v28[1].m_packedTribePlayer.Packed + 3) % 6 + 8;
       v2 = IEntity::X(v28);
       v19 = CSpiralOffsets::DeltaX(v24) + v2;
       v3 = IEntity::Y(v28);
       v20 = CSpiralOffsets::DeltaY(v24) + v3;
       v23 = Y16X16::PackXYFast(v19, v20);
-      v18 = CEntityEvent::CEntityEvent((CEntityEvent *)v12, 0x19u, 0, 0, v23, 0);
+      v18 = CEntityEvent::CEntityEvent(&v12, 0x19u, 0, 0, v23, 0);
       v17 = v18;
       v30 = 0;
-      (*(void (__thiscall **)(unsigned __int16 *, CEntityEvent *))(*(_DWORD *)v29 + 80))(v29, v18);
+      v29->SetEvent(v29, v18);
       v30 = -1;
-      CEntityEvent::~CEntityEvent(v12);
-      v16 = CEntityEvent::CEntityEvent((CEntityEvent *)v11, 0x11u, 13, 0, v23, 0);
+      CEntityEvent::~CEntityEvent(&v12);
+      v16 = CEntityEvent::CEntityEvent(&v11, 0x11u, 13, 0, v23, 0);
       v15 = v16;
       v30 = 1;
-      (*(void (__thiscall **)(unsigned __int16 *, CEntityEvent *))(*(_DWORD *)v29 + 80))(v29, v16);
+      v29->SetEvent(v29, v16);
       v30 = -1;
-      CEntityEvent::~CEntityEvent(v11);
+      CEntityEvent::~CEntityEvent(&v11);
     }
     else
     {
-      v4 = IEntity::ID();
-      v14 = CEntityEvent::CEntityEvent((CEntityEvent *)v10, 9u, 0, v4, 0, 0);
+      v4 = ((int (__stdcall *)())IEntity::ID)();
+      v14 = CEntityEvent::CEntityEvent(&v10, 9u, 0, v4, 0, 0);
       v13 = v14;
       v30 = 2;
-      (*(void (__thiscall **)(unsigned __int16 *, CEntityEvent *))(*(_DWORD *)v29 + 80))(v29, v14);
+      v29->SetEvent(v29, v14);
       v30 = -1;
-      CEntityEvent::~CEntityEvent(v10);
+      CEntityEvent::~CEntityEvent(&v10);
       if ( IEntity::Type(v29) == 1 )
       {
-        v5 = IEntity::WorldIdx();
+        v5 = ((int (__stdcall *)())IEntity::WorldIdx)();
         v22 = CWorldManager::EcoSectorId(v5);
         if ( v22 <= 0 )
         {
-          v7 = IEntity::ID();
-          CSettlerMgr::DeleteSettler((CSettlerMgr *)g_cSettlerMgr, v7);
+          v7 = ((int (__stdcall *)())IEntity::ID)();
+          CSettlerMgr::DeleteSettler(&g_cSettlerMgr, v7);
         }
         else
         {
           EcoSectorPtr = (unsigned __int16 *)CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v22);
-          if ( !EcoSectorPtr && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1805, "pSector != NULL") == 1 )
+          if ( EcoSectorPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Cart.cpp", 1805, "pSector != NULL") == 1 )
           {
             __debugbreak();
           }
-          if ( EcoSectorPtr )
+          if ( EcoSectorPtr != 0 )
           {
-            v6 = IEntity::ID();
-            CEcoSector::SetSettlerOffer(EcoSectorPtr, 1, v6);
+            v6 = ((int (__stdcall *)())IEntity::ID)();
+            CEcoSector::SetSettlerOffer((CEcoSector *)EcoSectorPtr, 1, v6);
           }
         }
       }
@@ -2576,7 +2562,7 @@ bool  CCart::UnLoadCargo(void) {
         ++i )
   {
     v10 = (_DWORD *)std::vector<CCart::CFoundationCardCargo>::operator[](i);
-    if ( v10[2] && *v10 )
+    if ( v10[2] != 0 && *v10 != 0 )
     {
       for ( j = 0;
             j < *v10;
@@ -2594,7 +2580,7 @@ bool  CCart::UnLoadCargo(void) {
         v4 = v10[1];
         v3 = IEntity::Y(this);
         v1 = IEntity::X(this);
-        CPileMgr::SearchSpaceForGoods((CPileMgr *)&g_cPileMgr, v1, v3, v4, v6);
+        CPileMgr::SearchSpaceForGoods(&g_cPileMgr, v1, v3, v4, v6);
       }
       *v10 = 0;
     }
@@ -2620,7 +2606,7 @@ bool  CCart::CanTakeLand(void) {
   int v10; // [esp+20h] [ebp-10h]
   int v11; // [esp+24h] [ebp-Ch] BYREF
   int v12; // [esp+28h] [ebp-8h] BYREF
-  _DWORD *v13; // [esp+2Ch] [ebp-4h]
+  IEntity *v13; // [esp+2Ch] [ebp-4h]
 
   v13 = this;
   v6 = IEntity::Y(this);
@@ -2635,7 +2621,7 @@ bool  CCart::CanTakeLand(void) {
   while ( CSectorSpiralWalk::NextXY((CSectorSpiralWalk *)v7, &v11, &v12) )
   {
     v9 = CWorldManager::OwnerId(v11, v12);
-    v3 = IEntity::OwnerId((unsigned __int8 *)v13);
+    v3 = IEntity::OwnerId(v13);
     if ( (v9 == v3 || v9 <= 0) && CWorldManager::IsPositionFreeForSettler(v11, v12) )
     {
       ++v10;
@@ -2662,7 +2648,7 @@ void  CCart::TakeLand(void) {
   int v11; // [esp+1Ch] [ebp-10h]
   int v12; // [esp+20h] [ebp-Ch] BYREF
   int v13; // [esp+24h] [ebp-8h] BYREF
-  _DWORD *v14; // [esp+28h] [ebp-4h]
+  IEntity *v14; // [esp+28h] [ebp-4h]
 
   v14 = this;
   v7 = IEntity::Y(this);
@@ -2682,10 +2668,10 @@ void  CCart::TakeLand(void) {
       break;
     }
     v11 = CWorldManager::OwnerId(v12, v13);
-    v4 = IEntity::OwnerId((unsigned __int8 *)v14);
+    v4 = IEntity::OwnerId(v14);
     if ( v11 == v4 || v11 <= 0 )
     {
-      v5 = IEntity::OwnerId((unsigned __int8 *)v14);
+      v5 = IEntity::OwnerId(v14);
       CWorldManager::SetOwnerId(v12, v13, v5);
     }
   }
@@ -2702,12 +2688,12 @@ bool  CCart::OnDestroyFoundationCart(void) {
   int v4; // [esp-20h] [ebp-24h]
   int v5; // [esp-18h] [ebp-1Ch]
 
-  v5 = CStaticConfigVarInt::operator int(&CCart::m_iAmountOfRecycledBoard);
+  v5 = CStaticConfigVarInt::operator int((CStaticConfigVarInt *)&CCart::m_iAmountOfRecycledBoard);
   v4 = IEntity::Y(this);
   v1 = IEntity::X(this);
-  CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v1, v4, 7, v5, 3, 0, 0, 0, 0);
+  CPileMgr::AddPile(&g_cPileMgr, v1, v4, 7, v5, 3, 0, 0, 0, 0);
   IEntity::ClearFlagBits(this, ENTITY_FLAG_Visible);
-  v2 = IEntity::ID();
+  v2 = ((int (__stdcall *)())IEntity::ID)();
   CVehicleMgr::DeleteVehicle((CVehicleMgr *)&g_cVehicleMgr, v2);
   return 1;
 }
@@ -2727,30 +2713,28 @@ bool  CCart::HasEnoughGoodToCreateFoundationCart(void) {
   int v8; // esi
   int v9; // [esp+8h] [ebp-4h]
 
-  v1 = IEntity::WorldIdx();
+  v1 = ((int (__stdcall *)())IEntity::WorldIdx)();
   v9 = CWorldManager::EcoSectorId(v1);
-  if ( !v9 )
+  if ( v9 == 0 )
   {
     return 0;
   }
-  v3 = (CEcoSector *)CEcoSectorMgr::operator[](v9);
-  v4 = CEcoSector::NrOfGoods(v3, 7);
-  result = 0;
-  if ( v4 < CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfBoard) )
+  v3 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v9);
+  v4 = CEcoSector::NrOfGoods(v3, GOOD_BOARD);
+  result = false;
+  if ( v4 >= CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfBoard) )
   {
-    return result;
-  }
-  v5 = (CEcoSector *)CEcoSectorMgr::operator[](v9);
-  v6 = CEcoSector::NrOfGoods(v5, 32);
-  if ( v6 < CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfStone) )
-  {
-    return result;
-  }
-  v7 = (CEcoSector *)CEcoSectorMgr::operator[](v9);
-  v8 = CEcoSector::NrOfGoods(v7, 18);
-  if ( v8 >= CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfHammer) )
-  {
-    return 1;
+    v5 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v9);
+    v6 = CEcoSector::NrOfGoods(v5, GOOD_STONE);
+    if ( v6 >= CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfStone) )
+    {
+      v7 = (CEcoSector *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v9);
+      v8 = CEcoSector::NrOfGoods(v7, GOOD_HAMMER);
+      if ( v8 >= CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfHammer) )
+      {
+        return true;
+      }
+    }
   }
   return result;
 }
@@ -2770,7 +2754,7 @@ bool  CCart::WeAreWaitFor(int a2) {
         ;
         ++i )
   {
-    if ( i >= std::vector<CCart::CSettlerStatus>::size((char *)this + 180) )
+    if ( i >= std::vector<CCart::CSettlerStatus>::size(this + 1) )
     {
       return 0;
     }
@@ -2779,7 +2763,7 @@ bool  CCart::WeAreWaitFor(int a2) {
       break;
     }
   }
-  return *(_DWORD *)std::vector<CCart::CSettlerStatus>::operator[](i) && !*(_BYTE *)(std::vector<CCart::CSettlerStatus>::operator[](i) + 4);
+  return *(_DWORD *)std::vector<CCart::CSettlerStatus>::operator[](i) != 0 && *(_BYTE *)(std::vector<CCart::CSettlerStatus>::operator[](i) + 4) == 0;
 }
 
 
@@ -2790,7 +2774,7 @@ bool  CCart::IsPioner(int a2) {
   unsigned int i; // [esp+4h] [ebp-4h]
 
   for ( i = 0;
-        i < std::vector<CCart::CSettlerStatus>::size((char *)this + 180);
+        i < std::vector<CCart::CSettlerStatus>::size(this + 1);
         ++i )
   {
     if ( *(_DWORD *)(std::vector<CCart::CSettlerStatus>::operator[](i) + 8) == a2 && *(_DWORD *)(std::vector<CCart::CSettlerStatus>::operator[](i) + 12) == 47 )
@@ -2809,7 +2793,7 @@ bool  CCart::IsCarrier(int a2) {
   unsigned int i; // [esp+4h] [ebp-4h]
 
   for ( i = 0;
-        i < std::vector<CCart::CSettlerStatus>::size((char *)this + 180);
+        i < std::vector<CCart::CSettlerStatus>::size(this + 1);
         ++i )
   {
     if ( *(_DWORD *)(std::vector<CCart::CSettlerStatus>::operator[](i) + 8) == a2 && *(_DWORD *)(std::vector<CCart::CSettlerStatus>::operator[](i) + 12) == 1 )
@@ -2828,15 +2812,14 @@ bool  CCart::CanWalk(void) {
   int v1; // esi
   bool v3; // [esp+4h] [ebp-Ch]
 
-  v3 = 1;
-  if ( !*((_BYTE *)this + 216) )
+  v3 = true;
+  if ( *((_BYTE *)this + 216) != 0 )
   {
-    return v3;
-  }
-  v1 = *((unsigned __int8 *)this + 212);
-  if ( v1 < CStaticConfigVarInt::GetIntValue((CStaticConfigVarInt *)&CCart::m_iAmountOfPioneers) || *((unsigned __int8 *)this + 218) < (int)*((unsigned __int8 *)this + 219) )
-  {
-    return 0;
+    v1 = *((unsigned __int8 *)this + 212);
+    if ( v1 < CStaticConfigVarInt::GetIntValue(&CCart::m_iAmountOfPioneers) || *((unsigned __int8 *)this + 218) < (int)*((unsigned __int8 *)this + 219) )
+    {
+      return false;
+    }
   }
   return v3;
 }
@@ -2846,21 +2829,21 @@ bool  CCart::CanWalk(void) {
 // Decompiled from int __thiscall CCart::KillAllLoadedSettlers(CCart *this)
 void  CCart::KillAllLoadedSettlers(void) {
   
-  int v2; // [esp+0h] [ebp-14h]
+  CSettler *v2; // [esp+0h] [ebp-14h]
   int v3; // [esp+4h] [ebp-10h]
   int v4; // [esp+8h] [ebp-Ch]
   unsigned int i; // [esp+10h] [ebp-4h]
 
   for ( i = 0;
-        i < std::vector<CCart::CSettlerStatus>::size((char *)this + 180);
+        i < std::vector<CCart::CSettlerStatus>::size(this + 1);
         ++i )
   {
     v4 = std::vector<CCart::CSettlerStatus>::operator[](i);
     v3 = *(_DWORD *)(v4 + 8);
     v2 = CSettlerMgr::operator[](v3);
-    if ( *(_BYTE *)(v4 + 4) )
+    if ( *(_BYTE *)(v4 + 4) != 0 )
     {
-      CSettlerMgr::DeleteSettler((CSettlerMgr *)g_cSettlerMgr, v3);
+      CSettlerMgr::DeleteSettler(&g_cSettlerMgr, v3);
     }
   }
   return std::vector<CCart::CSettlerStatus>::clear(v2);
@@ -2877,18 +2860,17 @@ bool  CCart::IsOnOwnEcoSector(void) {
   char v5; // [esp+4h] [ebp-Ch]
   int v7; // [esp+Ch] [ebp-4h]
 
-  v1 = IEntity::WorldIdx();
+  v1 = ((int (__stdcall *)())IEntity::WorldIdx)();
   v7 = CWorldManager::EcoSectorId(v1);
-  v5 = 0;
-  if ( !v7 )
+  v5 = false;
+  if ( v7 != 0 )
   {
-    return v5;
-  }
-  v2 = CEcoSectorMgr::operator[](v7);
-  v3 = CEcoSector::Owner(v2);
-  if ( v3 == IEntity::OwnerId((unsigned __int8 *)this) )
-  {
-    return 1;
+    v2 = ((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v7);
+    v3 = CEcoSector::Owner(v2);
+    if ( v3 == IEntity::OwnerId(this) )
+    {
+      return true;
+    }
   }
   return v5;
 }

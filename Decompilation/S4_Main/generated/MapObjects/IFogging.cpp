@@ -6,7 +6,7 @@
 // Decompiled from IFogging *__thiscall IFogging::IFogging(IFogging *this)
  IFogging::IFogging(void) {
   
-  IS4ChunkObject::IS4ChunkObject(this);
+  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this);
   *(_DWORD *)this = IFogging::_vftable_;
   return this;
 }

@@ -26,11 +26,11 @@
 struct OnlineManager::PlayerMessage &  OnlineManager::PlayerMessage::operator=(struct OnlineManager::PlayerMessage const & a2) {
   
   *(_BYTE *)this = *(_BYTE *)a2;
-  this[1] = *(_DWORD *)(a2 + 4);
-  this[2] = *(_DWORD *)(a2 + 8);
-  this[3] = *(_DWORD *)(a2 + 12);
-  this[4] = *(_DWORD *)(a2 + 16);
-  this[5] = *(_DWORD *)(a2 + 20);
+  *(this + 1) = *(_DWORD *)(a2 + 4);
+  *(this + 2) = *(_DWORD *)(a2 + 8);
+  *(this + 3) = *(_DWORD *)(a2 + 12);
+  *(this + 4) = *(_DWORD *)(a2 + 16);
+  *(this + 5) = *(_DWORD *)(a2 + 20);
   std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::operator=(a2 + 24);
   std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::operator=(a2 + 52);
   return this;

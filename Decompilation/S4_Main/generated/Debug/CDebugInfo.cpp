@@ -18,17 +18,17 @@ bool __cdecl CDebugInfo::CheckEnvironment(bool _bLogEnv) {
   DWORD LastError; // eax MAPDST
 
   memset(&CDebugInfo::m_EnvInfo, 0, sizeof(CDebugInfo::m_EnvInfo));
-  if ( !CDebugInfo::CheckOS() )
+  if ( CDebugInfo::CheckOS() == 0 )
   {
     LastError = GetLastError();
     CTrace::Print("DebugInfo.cpp: Error calling CheckOS(); LastError: %d", LastError);
   }
-  if ( !CDebugInfo::CheckCPU() )
+  if ( CDebugInfo::CheckCPU() == 0 )
   {
     LastError = GetLastError();
     CTrace::Print("DebugInfo.cpp: Error calling CheckCPU(); LastError: %d", LastError);
   }
-  if ( !CDebugInfo::CheckMemory() )
+  if ( CDebugInfo::CheckMemory() == 0 )
   {
     LastError = GetLastError();
     CTrace::Print("DebugInfo.cpp: Error calling CheckMemory(); LastError: %d", LastError);
@@ -105,7 +105,7 @@ void __cdecl CDebugInfo::LogEnvironment(void) {
   BBSupportTracePrintF(1, "=====================================================================");
   BBSupportTracePrintF(1, "SYSTEM INFORMATION");
   BBSupportTracePrintF(1, "---------------------------------------------------------------------");
-  BBSupportTracePrintF(1, "CPU Vendor: %s", sCPUVendor);
+  BBSupportTracePrintF(1, "CPU Vendor: %s", "------------");
   BBSupportTracePrintF(1, "CPU Family: %d", sCPUFamily);
   BBSupportTracePrintF(1, "CPU Model : %d", sCPUModel);
   BBSupportTracePrintF(1, "CPU Steppg: %d", sCPUSteppg);
@@ -153,7 +153,7 @@ bool __cdecl CDebugInfo::CheckOS(void) {
     CDebugInfo::m_EnvInfo.sOSVersionMayor = VersionInformation.dwMajorVersion;
     CDebugInfo::m_EnvInfo.sOSVersionMinor = VersionInformation.dwMinorVersion;
     std::string::operator=(&CDebugInfo::m_EnvInfo.sOSAdditionalInfo, VersionInformation.szCSDVersion);
-    if ( CDebugInfo::m_EnvInfo.sPlatformId )
+    if ( CDebugInfo::m_EnvInfo.sPlatformId != 0 )
     {
       if ( CDebugInfo::m_EnvInfo.sPlatformId == 1 )
       {
@@ -224,16 +224,16 @@ bool __cdecl CDebugInfo::CheckCPU(void) {
   LSTATUS v6; // [esp+50h] [ebp-2Ch]
   SFreqInfo v7; // [esp+68h] [ebp-14h]
 
-  if ( !RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, 0x20019u, &phkResult) )
+  if ( RegOpenKeyExA(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, 0x20019u, &phkResult) == 0 )
   {
     *(_DWORD *)Data = 0;
     cbData = 4;
     v6 = RegQueryValueExA(phkResult, "~MHz", 0, 0, Data, &cbData);
-    if ( v6 )
+    if ( v6 != 0 )
     {
       v6 = RegQueryValueExA(phkResult, "~Mhz", 0, 0, Data, &cbData);
     }
-    if ( v6 )
+    if ( v6 != 0 )
     {
       v6 = RegQueryValueExA(phkResult, "~mhz", 0, 0, Data, &cbData);
     }
@@ -259,7 +259,7 @@ bool __cdecl CDebugInfo::CheckGraphicsAdapter(void) {
 
 
 // address=[0x147fd90]
-// Decompiled from struct SFreqInfo *__cdecl CDebugInfo::CPUSpeed(struct SFreqInfo *__return_ptr retstr, int a1)
+// Decompiled from static struct SFreqInfo *__cdecl CDebugInfo::CPUSpeed(struct SFreqInfo *__return_ptr retstr, int a1)
 struct SFreqInfo __cdecl CDebugInfo::CPUSpeed(int retstr) {
   
   SFreqInfo v3; // [esp+0h] [ebp-84h] BYREF
@@ -290,7 +290,7 @@ struct SFreqInfo __cdecl CDebugInfo::CPUSpeed(int retstr) {
   {
     v7 = 4000000;
   }
-  if ( (v6 & 0x10) == 0 || v8 )
+  if ( (v6 & 0x10) == 0 || v8 != 0 )
   {
     if ( v9 < 3u )
     {
@@ -305,7 +305,7 @@ struct SFreqInfo __cdecl CDebugInfo::CPUSpeed(int retstr) {
   }
   else
   {
-    if ( a1 )
+    if ( a1 != 0 )
     {
       v12 = *CDebugInfo::GetCmosCpuSpeed(&v4);
       *retstr = v12;
@@ -337,7 +337,7 @@ bool __cdecl CDebugInfo::CheckMemory(void) {
 
 
 // address=[0x147ff80]
-// Decompiled from struct SFreqInfo *__cdecl CDebugInfo::GetBSFCpuSpeed(struct SFreqInfo *__return_ptr retstr, unsigned int a1)
+// Decompiled from static struct SFreqInfo *__cdecl CDebugInfo::GetBSFCpuSpeed(struct SFreqInfo *__return_ptr retstr, unsigned int a1)
 struct SFreqInfo __cdecl CDebugInfo::GetBSFCpuSpeed(unsigned int retstr) {
   
   __int16 v3; // bx
@@ -362,12 +362,12 @@ struct SFreqInfo __cdecl CDebugInfo::GetBSFCpuSpeed(unsigned int retstr) {
           ++i )
     {
       QueryPerformanceCounter(&PerformanceCount);
-      v3 = 4000;
-      do
+      for ( v3 = 4000;
+            v3 != 0;
+            --v3 )
       {
-        --v3;
+        ;
       }
-      while ( v3 );
       QueryPerformanceCounter(&v5);
       v8 = v5.LowPart - PerformanceCount.LowPart;
       if ( v5.LowPart - PerformanceCount.LowPart < v7 )
@@ -403,7 +403,7 @@ struct SFreqInfo __cdecl CDebugInfo::GetBSFCpuSpeed(unsigned int retstr) {
 
 
 // address=[0x14800f0]
-// Decompiled from struct SFreqInfo *__cdecl CDebugInfo::GetRDTSCCpuSpeed(struct SFreqInfo *__return_ptr retstr)
+// Decompiled from static struct SFreqInfo *__cdecl CDebugInfo::GetRDTSCCpuSpeed(struct SFreqInfo *__return_ptr retstr)
 struct SFreqInfo __cdecl CDebugInfo::GetRDTSCCpuSpeed(void retstr) {
   
   unsigned __int64 v2; // rax
@@ -515,7 +515,7 @@ unsigned short __cdecl CDebugInfo::wincpuid(void) {
   
   __int16 v3; // [esp+0h] [ebp-4h]
 
-  if ( (unsigned __int16)CDebugInfo::wincpuidsupport() )
+  if ( (unsigned __int16)CDebugInfo::wincpuidsupport() != 0 )
   {
     v3 = CDebugInfo::check_IDProc(this);
   }
@@ -523,7 +523,7 @@ unsigned short __cdecl CDebugInfo::wincpuid(void) {
   {
     CDebugInfo::m_iClone = (unsigned __int16)CDebugInfo::check_clone(this);
     v3 = CDebugInfo::check_8086();
-    if ( v3 )
+    if ( v3 != 0 )
     {
       v3 = CDebugInfo::check_80286();
       if ( v3 != 2 )
@@ -536,7 +536,7 @@ unsigned short __cdecl CDebugInfo::wincpuid(void) {
       }
     }
   }
-  if ( CDebugInfo::m_iClone )
+  if ( CDebugInfo::m_iClone != 0 )
   {
     return v3 | 0x8000;
   }
@@ -548,35 +548,41 @@ unsigned short __cdecl CDebugInfo::wincpuid(void) {
 // Decompiled from int CDebugInfo::wincpufeatures()
 unsigned int __cdecl CDebugInfo::wincpufeatures(void) {
   
+  int _EAX; // eax
+  int _EAX; // eax
+  int _EDX; // edx
+  int _ECX; // ecx
+  int _EBX; // ebx
+  int _EAX; // eax
+  int _EDX; // edx
   int v11; // [esp+10h] [ebp-8h]
   int i; // [esp+14h] [ebp-4h]
 
   v11 = 0;
-  if ( !(unsigned __int16)CDebugInfo::wincpuidsupport() )
+  if ( (unsigned __int16)CDebugInfo::wincpuidsupport() != 0 )
   {
-    return v11;
-  }
-  _EAX = 0;
-  __asm { cpuid }
-  *(_DWORD *)sCPUVendor = _EBX;
-  *(_DWORD *)&sCPUVendor[4] = _EDX;
-  *(_DWORD *)&sCPUVendor[8] = _ECX;
-  for ( i = 0;
-        i < 12;
-        ++i )
-  {
-    if ( sCPUVendor[i] != aGenuineintel[i] )
+    _EAX = 0;
+    __asm { cpuid }
+    *(_DWORD *)"------------" = _EBX;
+    *(_DWORD *)"--------" = _EDX;
+    *(_DWORD *)"----" = _ECX;
+    for ( i = 0;
+          i < 12;
+          ++i )
     {
-      CDebugInfo::m_iClone = 1;
+      if ( sCPUVendor[i] != aGenuineintel[i] )
+      {
+        CDebugInfo::m_iClone = 1;
+      }
+    }
+    if ( _EAX >= 1 )
+    {
+      _EAX = 1;
+      __asm { cpuid }
+      return _EDX;
     }
   }
-  if ( _EAX < 1 )
-  {
-    return v11;
-  }
-  _EAX = 1;
-  __asm { cpuid }
-  return _EDX;
+  return v11;
 }
 
 
@@ -625,7 +631,7 @@ struct SFreqInfo __cdecl CDebugInfo::GetCmosCpuSpeed(void a1) {
       v11 = v18 + 10 - CmosTick;
     }
   }
-  while ( !v11 );
+  while ( v11 == 0 );
   CDebugInfo::cpuTimeStamp(&v3, &v4);
   CmosTick = v18;
   do
@@ -641,7 +647,7 @@ struct SFreqInfo __cdecl CDebugInfo::GetCmosCpuSpeed(void a1) {
       v9 = v18 + 10 - CmosTick;
     }
   }
-  while ( !v9 );
+  while ( v9 == 0 );
   CDebugInfo::cpuTimeStamp(&v5, &v6);
   if ( nPriority != 0x7FFFFFFF )
   {
@@ -727,6 +733,13 @@ unsigned short __cdecl CDebugInfo::check_80386(void) {
 // Decompiled from unsigned __int16 CDebugInfo::check_IDProc()
 unsigned short __cdecl CDebugInfo::check_IDProc(void) {
   
+  int _EAX; // eax
+  int _EAX; // eax
+  int _EDX; // edx
+  int _ECX; // ecx
+  int _EBX; // ebx
+  int _EAX; // eax
+  int _EAX; // eax
   int i; // [esp+10h] [ebp-28h]
   char v12[16]; // [esp+14h] [ebp-24h] BYREF
   _DWORD v13[3]; // [esp+24h] [ebp-14h]
@@ -748,16 +761,15 @@ unsigned short __cdecl CDebugInfo::check_IDProc(void) {
       CDebugInfo::m_iClone = 1;
     }
   }
-  if ( _EAX < 1 )
+  if ( _EAX >= 1 )
   {
-    return sCPUFamily;
+    _EAX = 1;
+    __asm { cpuid }
+    sCPUSteppg = _EAX & 0xF;
+    LOBYTE(_EAX) = (unsigned __int8)(_EAX & 0xF0) >> 4;
+    sCPUModel = _EAX;
+    sCPUFamily = ((unsigned __int16)(_EAX & 0xF00) >> 8) & 0xF;
   }
-  _EAX = 1;
-  __asm { cpuid }
-  sCPUSteppg = _EAX & 0xF;
-  LOBYTE(_EAX) = (unsigned __int8)(_EAX & 0xF0) >> 4;
-  sCPUModel = _EAX;
-  sCPUFamily = ((unsigned __int16)(_EAX & 0xF00) >> 8) & 0xF;
   return sCPUFamily;
 }
 

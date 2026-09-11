@@ -8,7 +8,7 @@ bool __cdecl IHJBMgr::LocalIsHJBAllowed(void) {
   
   if ( IHJBMgr::m_iLocalHJBAllowed < 0 )
   {
-    return (*(int (__thiscall **)(void *))(*(_DWORD *)g_pHJBMgr + 24))(g_pHJBMgr);
+    return ((int (__thiscall *)(CHJBMgr *))g_pHJBMgr->j_?LocalIsHJBAllowedEx@CHJBMgr@@MAE_NXZ)(g_pHJBMgr);
   }
   else
   {

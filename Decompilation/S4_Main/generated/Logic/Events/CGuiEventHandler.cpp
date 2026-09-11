@@ -6,7 +6,7 @@
 // Decompiled from CGuiEventHandler *__thiscall CGuiEventHandler::CGuiEventHandler(CGuiEventHandler *this, bool a2)
  CGuiEventHandler::CGuiEventHandler(bool a2) {
   
-  IEvn_Handle::IEvn_Handle(this);
+  IEvn_Handle::IEvn_Handle((IEvn_Handle *)this);
   *(_DWORD *)this = &CGuiEventHandler::_vftable_;
   *((_DWORD *)this + 7) = -1;
   *((_DWORD *)this + 5) = -1;
@@ -81,6 +81,7 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
   CEvn_Logic *v6; // [esp+14h] [ebp-138h]
   struct CEvn_Event *v7; // [esp+1Ch] [ebp-130h]
   int v8[2]; // [esp+24h] [ebp-128h] BYREF
+  unsigned int; // [esp+2Ch] [ebp-120h]
   struct CEvn_Event *v10; // [esp+30h] [ebp-11Ch]
   struct CEvn_Event *v11; // [esp+38h] [ebp-114h]
   int v12; // [esp+40h] [ebp-10Ch]
@@ -109,9 +110,9 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
   switch ( a2->m_iEventId )
   {
     case 0x15:
-      if ( g_pGfxEngine )
+      if ( g_pGfxEngine != 0 )
       {
-        if ( *((_BYTE *)v23 + 64) && *((_DWORD *)v23 + 14) == 57 )
+        if ( *((_BYTE *)v23 + 64) != 0 && *((_DWORD *)v23 + 14) == 57 )
         {
           UpdateGuiDlgTutorialCursor();
         }
@@ -124,29 +125,20 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
             *((_DWORD *)v23 + 2) = TickCounter;
           }
         }
-        if ( *((_DWORD *)v23 + 13) == -1 )
+        if ( *((_DWORD *)v23 + 13) != -1 && *((_BYTE *)v23 + 65) != 0 && --dword_3D891A8 <= 0 )
         {
-          return 0;
+          if ( byte_3ED2029 != 0 )
+          {
+            IGuiEngine::SetImages(g_pGUIEngine, 59, 891, 328, 329);
+            byte_3ED2029 = 0;
+          }
+          else
+          {
+            IGuiEngine::SetImages(g_pGUIEngine, 59, 891, 330, 331);
+            byte_3ED2029 = 1;
+          }
+          dword_3D891A8 = 5;
         }
-        if ( !*((_BYTE *)v23 + 65) )
-        {
-          return 0;
-        }
-        if ( --dword_3D891A8 > 0 )
-        {
-          return 0;
-        }
-        if ( byte_3ED2029 )
-        {
-          IGuiEngine::SetImages(g_pGUIEngine, 59, 891, 328, 329);
-          byte_3ED2029 = 0;
-        }
-        else
-        {
-          IGuiEngine::SetImages(g_pGUIEngine, 59, 891, 330, 331);
-          byte_3ED2029 = 1;
-        }
-        dword_3D891A8 = 5;
         return 0;
       }
       else
@@ -159,14 +151,14 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
       return CGuiEventHandler::HandleMsgKeyDown(v23, a2);
     case 0x27:
       *((_DWORD *)v23 + 5) = 0;
-      IGuiEngine::OpenDialog(g_pGUIEngine, 9, (bool (__cdecl *)(int, int, int))GuiDlgBuildBasicProc);
+      IGuiEngine::OpenDialog(g_pGUIEngine, 9, GuiDlgBuildBasicProc);
       *((_DWORD *)v23 + 3) = -1;
-      if ( *((_BYTE *)v23 + 64) )
+      if ( *((_BYTE *)v23 + 64) != 0 )
       {
         IGuiEngine::SetDlgToIgnore(g_pGUIEngine, 36, 1);
       }
       CGuiEventHandler::ResetMainMenu(v23);
-      if ( *((_BYTE *)v23 + 5) )
+      if ( *((_BYTE *)v23 + 5) != 0 )
       {
         v15 = CEvn_Logic::CEvn_Logic(&v24, 0x1E2u, 1u, 0, 0, 0, 0);
         v32 = 0;
@@ -174,13 +166,12 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
         v32 = -1;
         CEvn_Logic::~CEvn_Logic(&v24);
       }
-      if ( *((_DWORD *)v23 + 13) != -1 )
+      if ( *((_DWORD *)v23 + 13) == -1 )
       {
-        return 0;
+        IGuiEngine::OpenDialog(g_pGUIEngine, 59, (bool (__cdecl *)(int, int, int))GuiDlgIncomingMessageProc);
+        *((_DWORD *)v23 + 13) = 59;
+        CGuiEventHandler::RecalcDialogPos(v23, 1);
       }
-      IGuiEngine::OpenDialog(g_pGUIEngine, 59, (bool (__cdecl *)(int, int, int))GuiDlgIncomingMessageProc);
-      *((_DWORD *)v23 + 13) = 59;
-      CGuiEventHandler::RecalcDialogPos(v23, 1);
       return 0;
     default:
       if ( a2->m_iEventId >= 0x258u && a2->m_iEventId <= 0x27Bu )
@@ -192,17 +183,16 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
         }
         else if ( a2->m_iEventId == 609 )
         {
-          if ( *((_DWORD *)v23 + 7) != -1 )
+          if ( *((_DWORD *)v23 + 7) == -1 )
           {
-            return 1;
+            IGuiEngine::OpenDialog(g_pGUIEngine, 72, (bool (__cdecl *)(int, int, int))GuiDlgWinLossProc);
+            *((_DWORD *)v23 + 7) = 72;
+            IGuiEngine::GetDialogRenderRect(g_pGUIEngine, 72, (struct SGuiRect *)v31);
+            v5 = v31[2] - v31[0] + 1;
+            OutputWidth = IGfxEngine::GetOutputWidth(g_pGfxEngine);
+            IGuiEngine::SetDialogRenderPos(g_pGUIEngine, 72, (OutputWidth - 210) / 2 - v5 / 2 + 210, 10);
+            UpdateGuiDlgWinLoss(a2->m_wParam);
           }
-          IGuiEngine::OpenDialog(g_pGUIEngine, 72, (bool (__cdecl *)(int, int, int))GuiDlgWinLossProc);
-          *((_DWORD *)v23 + 7) = 72;
-          IGuiEngine::GetDialogRenderRect(g_pGUIEngine, 72, (struct SGuiRect *)v31);
-          v5 = v31[2] - v31[0] + 1;
-          OutputWidth = IGfxEngine::GetOutputWidth(g_pGfxEngine);
-          IGuiEngine::SetDialogRenderPos(g_pGUIEngine, 72, (OutputWidth - 210) / 2 - v5 / 2 + 210, 10);
-          UpdateGuiDlgWinLoss(a2->m_wParam);
           return 1;
         }
         else
@@ -287,15 +277,14 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
               CGuiEventHandler::HandleMsgOpenSidebar(v23, a2);
               return 1;
             case 7:
-              if ( *((_DWORD *)v23 + 4) == -1 )
+              if ( *((_DWORD *)v23 + 4) != -1 )
               {
-                return 1;
+                IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)v23 + 4));
+                *((_DWORD *)v23 + 4) = -1;
               }
-              IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)v23 + 4));
-              *((_DWORD *)v23 + 4) = -1;
               return 1;
             case 10:
-              if ( *((_DWORD *)v23 + 10) == -1 && g_pEvnEngine )
+              if ( *((_DWORD *)v23 + 10) == -1 && g_pEvnEngine != 0 )
               {
                 v14 = CEvn_Event::CEvn_Event(&v27, 0x269u, 1u, 0, 0);
                 v13 = v14;
@@ -305,7 +294,7 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
                 CEvn_Event::~CEvn_Event(&v27);
               }
               PlayGuiSound(1u);
-              if ( a2->m_lParam )
+              if ( a2->m_lParam != 0 )
               {
                 v16 = 1712;
               }
@@ -318,27 +307,27 @@ bool  CGuiEventHandler::OnEvent(class CEvn_Event & a2) {
               IGuiEngine::SetText(g_pGUIEngine, *((_DWORD *)v23 + 10), v16, v4);
               return 1;
             case 11:
-              if ( *((_BYTE *)v23 + 64) )
+              if ( *((_BYTE *)v23 + 64) == 0 )
               {
-                return 0;
+                if ( *((_DWORD *)v23 + 10) != -1 )
+                {
+                  PlayGuiSound(5u);
+                  goto LABEL_115;
+                }
+                if ( g_pEvnEngine != 0 )
+                {
+                  v11 = CEvn_Event::CEvn_Event(&v28, 0x269u, 1u, 0, 0);
+                  v32 = 5;
+                  IEventEngine::SendAMessage(g_pEvnEngine, v11);
+                  v32 = -1;
+                  CEvn_Event::~CEvn_Event(&v28);
+                }
+                goto CGuiEventHandler__OnEvent___def_179DF97;
               }
-              if ( *((_DWORD *)v23 + 10) != -1 )
-              {
-                PlayGuiSound(5u);
-                goto LABEL_115;
-              }
-              if ( g_pEvnEngine )
-              {
-                v11 = CEvn_Event::CEvn_Event(&v28, 0x269u, 1u, 0, 0);
-                v32 = 5;
-                IEventEngine::SendAMessage(g_pEvnEngine, v11);
-                v32 = -1;
-                CEvn_Event::~CEvn_Event(&v28);
-              }
-              goto CGuiEventHandler__OnEvent___def_179DF97;
+              return 0;
             case 12:
 LABEL_115:
-              if ( *((_BYTE *)v23 + 64) )
+              if ( *((_BYTE *)v23 + 64) != 0 )
               {
                 return 0;
               }
@@ -346,17 +335,16 @@ LABEL_115:
               {
                 goto LABEL_118;
               }
-              if ( *((_DWORD *)v23 + 13) != -1 )
+              if ( *((_DWORD *)v23 + 13) == -1 )
               {
-                return 1;
+                PlayGuiSound(4u);
+                IGuiEngine::OpenDialog(g_pGUIEngine, 59, (bool (__cdecl *)(int, int, int))GuiDlgIncomingMessageProc);
+                *((_DWORD *)v23 + 13) = 59;
+                CGuiEventHandler::RecalcDialogPos(v23, 1);
               }
-              PlayGuiSound(4u);
-              IGuiEngine::OpenDialog(g_pGUIEngine, 59, (bool (__cdecl *)(int, int, int))GuiDlgIncomingMessageProc);
-              *((_DWORD *)v23 + 13) = 59;
-              CGuiEventHandler::RecalcDialogPos(v23, 1);
               return 1;
             case 13:
-              if ( *((_BYTE *)v23 + 64) )
+              if ( *((_BYTE *)v23 + 64) != 0 )
               {
                 return 0;
               }
@@ -373,13 +361,13 @@ LABEL_118:
               goto LABEL_134;
             case 15:
             case 32:
-              if ( *((_BYTE *)v23 + 64) )
+              if ( *((_BYTE *)v23 + 64) != 0 )
               {
                 result = 0;
               }
               else if ( *((_DWORD *)v23 + 10) == -1 )
               {
-                if ( g_pEvnEngine )
+                if ( g_pEvnEngine != 0 )
                 {
                   v10 = CEvn_Event::CEvn_Event(&v29, 0x269u, 0, 0, 0);
                   v32 = 6;
@@ -397,11 +385,11 @@ CGuiEventHandler__OnEvent___def_179DF97:
                   PlayGuiSound(5u);
                 }
 LABEL_134:
-                if ( (unsigned __int16)a2->m_lParam )
+                if ( (unsigned __int16)a2->m_lParam != 0 )
                 {
                   *((_BYTE *)v23 + 65) = 1;
                 }
-                if ( *((_BYTE *)v23 + 64) )
+                if ( *((_BYTE *)v23 + 64) != 0 )
                 {
                   result = 0;
                 }
@@ -409,12 +397,10 @@ LABEL_134:
                 {
                   if ( a2->m_iEventId != 616 && a2->m_iEventId != 633 )
                   {
-                    if ( HIWORD(a2->m_lParam) )
+                     = HIWORD(a2->m_lParam);
+                    if (  != 0 && a2->m_iEventId != 634 )
                     {
-                      if ( a2->m_iEventId != 634 )
-                      {
-                        PlayGuiSound(4u);
-                      }
+                      PlayGuiSound(4u);
                     }
                   }
                   if ( *((_DWORD *)v23 + 10) == -1 )
@@ -440,41 +426,39 @@ LABEL_134:
                 *((_DWORD *)v23 + 13) = -1;
                 *((_BYTE *)v23 + 65) = 0;
               }
-              if ( *((_DWORD *)v23 + 10) != -1 )
-              {
-                return 1;
-              }
-              CGuiEventHandler::GetTextMessageDialogParameters(v23, v8);
-              *((_DWORD *)v23 + 10) = v8[0];
-              IGuiEngine::OpenDialog(g_pGUIEngine, v8[0], (bool (__cdecl *)(int, int, int))v8[1]);
-              if ( !*((_BYTE *)v23 + 64) )
-              {
-                v18 = a2->m_wParam != 0;
-                v22 = v18;
-                v17 = v18;
-                CEvn_Event::CEvn_Event(&v30, 0x1773u, v17, 0, 0);
-                v32 = 3;
-                IEventEngine::SendAMessage(g_pEvnEngine, &v30);
-                v32 = -1;
-                CEvn_Event::~CEvn_Event(&v30);
-              }
-              CGuiEventHandler::RecalcDialogPos(v23, 1);
-              return 1;
-            case 17:
               if ( *((_DWORD *)v23 + 10) == -1 )
               {
-                return 1;
+                CGuiEventHandler::GetTextMessageDialogParameters(v23, v8);
+                *((_DWORD *)v23 + 10) = v8[0];
+                IGuiEngine::OpenDialog(g_pGUIEngine, v8[0], (bool (__cdecl *)(int, int, int))v8[1]);
+                if ( *((_BYTE *)v23 + 64) == 0 )
+                {
+                  v18 = a2->m_wParam != 0;
+                  v22 = v18;
+                  v17 = v18;
+                  CEvn_Event::CEvn_Event(&v30, 0x1773u, v17, 0, 0);
+                  v32 = 3;
+                  IEventEngine::SendAMessage(g_pEvnEngine, &v30);
+                  v32 = -1;
+                  CEvn_Event::~CEvn_Event(&v30);
+                }
+                CGuiEventHandler::RecalcDialogPos(v23, 1);
               }
-              IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)v23 + 10));
-              *((_DWORD *)v23 + 10) = -1;
-              IGuiEngine::OpenDialog(g_pGUIEngine, 59, (bool (__cdecl *)(int, int, int))GuiDlgIncomingMessageProc);
-              *((_DWORD *)v23 + 13) = 59;
-              IGuiEngine::SetImages(g_pGUIEngine, 59, 891, 328, 329);
-              CGuiEventHandler::RecalcDialogPos(v23, 1);
-              *((_BYTE *)v23 + 65) = 0;
+              return 1;
+            case 17:
+              if ( *((_DWORD *)v23 + 10) != -1 )
+              {
+                IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)v23 + 10));
+                *((_DWORD *)v23 + 10) = -1;
+                IGuiEngine::OpenDialog(g_pGUIEngine, 59, (bool (__cdecl *)(int, int, int))GuiDlgIncomingMessageProc);
+                *((_DWORD *)v23 + 13) = 59;
+                IGuiEngine::SetImages(g_pGUIEngine, 59, 891, 328, 329);
+                CGuiEventHandler::RecalcDialogPos(v23, 1);
+                *((_BYTE *)v23 + 65) = 0;
+              }
               return 1;
             case 18:
-              if ( *((_BYTE *)v23 + 4) && *((_DWORD *)v23 + 3) != -1 )
+              if ( *((_BYTE *)v23 + 4) != 0 && *((_DWORD *)v23 + 3) != -1 )
               {
                 CGuiEventHandler::HandleMsgRefreshSettingsDialog(v23, a2);
               }
@@ -487,23 +471,22 @@ LABEL_134:
               CGuiEventHandler::HandleMsgCloseAllDialogs(v23);
               return 1;
             case 21:
-              if ( !*((_BYTE *)v23 + 64) )
+              if ( *((_BYTE *)v23 + 64) != 0 )
               {
-                return 1;
-              }
-              if ( a2->m_lParam == 1 )
-              {
-                if ( *((_DWORD *)v23 + 14) == -1 )
+                if ( a2->m_lParam == 1 )
                 {
-                  IGuiEngine::OpenDialog(g_pGUIEngine, 57, (bool (__cdecl *)(int, int, int))GuiDlgTutorialCursorProc);
-                  *((_DWORD *)v23 + 14) = 57;
+                  if ( *((_DWORD *)v23 + 14) == -1 )
+                  {
+                    IGuiEngine::OpenDialog(g_pGUIEngine, 57, (bool (__cdecl *)(int, int, int))GuiDlgTutorialCursorProc);
+                    *((_DWORD *)v23 + 14) = 57;
+                  }
+                  IGuiEngine::MoveDialogTo(g_pGUIEngine, 57, HIWORD(a2->m_wParam), (unsigned __int16)a2->m_wParam);
                 }
-                IGuiEngine::MoveDialogTo(g_pGUIEngine, 57, HIWORD(a2->m_wParam), (unsigned __int16)a2->m_wParam);
-              }
-              else if ( *((_DWORD *)v23 + 14) == 57 )
-              {
-                IGuiEngine::CloseDialog(g_pGUIEngine, 57);
-                *((_DWORD *)v23 + 14) = -1;
+                else if ( *((_DWORD *)v23 + 14) == 57 )
+                {
+                  IGuiEngine::CloseDialog(g_pGUIEngine, 57);
+                  *((_DWORD *)v23 + 14) = -1;
+                }
               }
               return 1;
             case 22:
@@ -513,21 +496,19 @@ LABEL_134:
               }
               return 1;
             case 26:
-              if ( *((_DWORD *)v23 + 15) != -1 )
-              {
-                return 1;
-              }
-              IGuiEngine::OpenDialog(g_pGUIEngine, 74, (bool (__cdecl *)(int, int, int))GuiDlgClockProc);
-              *((_DWORD *)v23 + 15) = 74;
-              CGuiEventHandler::RecalcDialogPos(v23, 1);
-              return 1;
-            case 27:
               if ( *((_DWORD *)v23 + 15) == -1 )
               {
-                return 1;
+                IGuiEngine::OpenDialog(g_pGUIEngine, 74, (bool (__cdecl *)(int, int, int))GuiDlgClockProc);
+                *((_DWORD *)v23 + 15) = 74;
+                CGuiEventHandler::RecalcDialogPos(v23, 1);
               }
-              IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)v23 + 15));
-              *((_DWORD *)v23 + 15) = -1;
+              return 1;
+            case 27:
+              if ( *((_DWORD *)v23 + 15) != -1 )
+              {
+                IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)v23 + 15));
+                *((_DWORD *)v23 + 15) = -1;
+              }
               return 1;
             case 30:
               v19 = *((_DWORD *)v23 + 3);
@@ -541,6 +522,8 @@ LABEL_134:
                   break;
                 case 76:
                   UpdateGuiDlgStatisticGoods();
+                  break;
+                default:
                   break;
               }
               goto CGuiEventHandler__OnEvent___def_179DF97;
@@ -594,7 +577,7 @@ void  CGuiEventHandler::RecalcDialogPos(bool a2) {
   int v28; // [esp+E4h] [ebp-14h]
   int v29; // [esp+F4h] [ebp-4h]
 
-  if ( !a2 && *((_DWORD *)this + 10) != -1 && g_pEvnEngine )
+  if ( !a2 && *((_DWORD *)this + 10) != -1 && g_pEvnEngine != 0 )
   {
     v15 = CEvn_Event::CEvn_Event(&v24, 0x26Au, 0, 0, 0);
     v29 = 0;
@@ -616,7 +599,7 @@ void  CGuiEventHandler::RecalcDialogPos(bool a2) {
   v18 = sub_139F260(1, OutputHeight);
   if ( v18 != (*((_DWORD *)this + 8) != -1) )
   {
-    if ( v18 )
+    if ( v18 != 0 )
     {
       IGuiEngine::OpenDialog(g_pGUIEngine, 1, (bool (__cdecl *)(int, int, int))GuiDlgMainBarExt1Proc);
       *((_DWORD *)this + 8) = 1;
@@ -643,7 +626,7 @@ void  CGuiEventHandler::RecalcDialogPos(bool a2) {
   result = v17;
   if ( v17 != (*((_DWORD *)this + 9) != -1) )
   {
-    if ( v17 )
+    if ( v17 != 0 )
     {
       IGuiEngine::OpenDialog(g_pGUIEngine, 2, (bool (__cdecl *)(int, int, int))GuiDlgMainBarExt2Proc);
       *((_DWORD *)this + 9) = 2;
@@ -683,16 +666,16 @@ void  CGuiEventHandler::RecalcDialogPos(bool a2) {
     IGuiEngine::GetDialogRenderRect(g_pGUIEngine, *((_DWORD *)this + 10), (struct SGuiRect *)&v25);
     result = IGuiEngine::SetDialogRenderPos(g_pGUIEngine, *((_DWORD *)this + 10), 209, OutputHeight - (v28 - v26 + 1));
   }
-  if ( !g_pGame->m_bExtendedTooltip )
+  if ( g_pGame->m_bExtendedTooltip != 0 )
   {
-    return result;
+    IGuiEngine::GetDialogRenderRect(g_pGUIEngine, 73, (struct SGuiRect *)&v25);
+    v8 = v27 - v25 + 1;
+    v5 = IGfxEngine::GetOutputHeight(g_pGfxEngine);
+    v7 = v5 - (v28 - v26 + 1);
+    v6 = IGfxEngine::GetOutputWidth(g_pGfxEngine);
+    return IGuiEngine::SetDialogRenderPos(g_pGUIEngine, 73, v6 - v8, v7);
   }
-  IGuiEngine::GetDialogRenderRect(g_pGUIEngine, 73, (struct SGuiRect *)&v25);
-  v8 = v27 - v25 + 1;
-  v5 = IGfxEngine::GetOutputHeight(g_pGfxEngine);
-  v7 = v5 - (v28 - v26 + 1);
-  v6 = IGfxEngine::GetOutputWidth(g_pGfxEngine);
-  return IGuiEngine::SetDialogRenderPos(g_pGUIEngine, 73, v6 - v8, v7);
+  return result;
 }
 
 
@@ -709,9 +692,9 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event & a2) {
   CEvn_Event v8; // [esp+5Ch] [ebp-28h] BYREF
   int v9; // [esp+80h] [ebp-4h]
 
-  if ( a2->m_wParam != 13 || (a2->m_lParam & 4) != 0 || (a2->m_lParam & 8) != 0 || *((_BYTE *)this + 64) || !g_pEvnEngine )
+  if ( a2->m_wParam != 13 || (a2->m_lParam & 4) != 0 || (a2->m_lParam & 8) != 0 || *((_BYTE *)this + 64) != 0 || g_pEvnEngine == 0 )
   {
-    if ( *((_BYTE *)this + 64) )
+    if ( *((_BYTE *)this + 64) != 0 )
     {
       return 0;
     }
@@ -755,7 +738,7 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event & a2) {
           break;
         case 'M':
         case 'm':
-          if ( std::string::size(&stru_402C9B4) || CGameData::GetMode(g_pGameData) == 3 )
+          if ( std::string::size(&stru_402C9B4) != 0 || CGameData::GetMode(g_pGameData) == 3 )
           {
             IGuiEngine::SelectControl(g_pGUIEngine, 0, 611, 1);
             IGuiEngine::SelectControl(g_pGUIEngine, 8, 929, 1);
@@ -822,7 +805,7 @@ bool  CGuiEventHandler::HandleMsgKeyPress(class CEvn_Event & a2) {
   }
   else
   {
-    if ( CGameData::IsNetworkGame(g_pGameData) )
+    if ( CGameData::IsNetworkGame(g_pGameData) != 0 )
     {
       v5 = CEvn_Event::CEvn_Event(&v8, 0x269u, 1u, 0, 0);
       v9 = 0;
@@ -861,38 +844,36 @@ bool  CGuiEventHandler::HandleMsgKeyDown(class CEvn_Event & a2) {
   switch ( wparam )
   {
     case 27:
-      IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 611, 1);
-      IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 8, 930, 1);
+      IGuiEngine::SelectControl(g_pGUIEngine, 0, 611, 1);
+      IGuiEngine::SelectControl(g_pGUIEngine, 8, 930, 1);
       return 1;
     case 117:
-      if ( *((_BYTE *)this + 64) )
+      if ( *((_BYTE *)this + 64) == 0 )
       {
-        return 1;
+        IGuiEngine::SelectControl(g_pGUIEngine, 0, 611, 1);
+        IGuiEngine::SelectControl(g_pGUIEngine, 8, 931, 1);
       }
-      IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 611, 1);
-      IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 8, 931, 1);
       return 1;
     case 118:
-      if ( *((_BYTE *)this + 66) )
+      if ( *((_BYTE *)this + 66) == 0 )
       {
-        return 1;
-      }
-      if ( *((_DWORD *)this + 15) == -1 )
-      {
-        v3 = CEvn_Event::CEvn_Event(&v6, 0x273u, 0, 0, 0);
-        v8 = 1;
-        IEventEngine::SendAMessage(g_pEvnEngine, v3);
-        v8 = -1;
-        CEvn_Event::~CEvn_Event(&v6);
-        GuiDlgClockSetCountdown(0);
-      }
-      else
-      {
-        v4 = CEvn_Event::CEvn_Event(&v7, 0x274u, 0, 0, 0);
-        v8 = 0;
-        IEventEngine::SendAMessage(g_pEvnEngine, v4);
-        v8 = -1;
-        CEvn_Event::~CEvn_Event(&v7);
+        if ( *((_DWORD *)this + 15) == -1 )
+        {
+          v3 = CEvn_Event::CEvn_Event(&v6, 0x273u, 0, 0, 0);
+          v8 = 1;
+          IEventEngine::SendAMessage(g_pEvnEngine, v3);
+          v8 = -1;
+          CEvn_Event::~CEvn_Event(&v6);
+          GuiDlgClockSetCountdown(0);
+        }
+        else
+        {
+          v4 = CEvn_Event::CEvn_Event(&v7, 0x274u, 0, 0, 0);
+          v8 = 0;
+          IEventEngine::SendAMessage(g_pEvnEngine, v4);
+          v8 = -1;
+          CEvn_Event::~CEvn_Event(&v7);
+        }
       }
       return 1;
     default:
@@ -908,7 +889,7 @@ void  CGuiEventHandler::HandleMsgNewDialog(class CEvn_Event & a2) {
   int m_lParam; // [esp+Ch] [ebp-8h]
 
   m_lParam = a2->m_lParam;
-  if ( m_lParam )
+  if ( m_lParam != 0 )
   {
     if ( *((_DWORD *)this + 3) != -1 )
     {
@@ -1069,46 +1050,45 @@ void  CGuiEventHandler::HandleMsgOpenSettings(class CEvn_Event & a2) {
 
   result = (char)a2;
   lparam = (_DWORD *)a2->m_lParam;
-  if ( !lparam )
+  if ( lparam != 0 )
   {
-    return result;
-  }
-  if ( *((_DWORD *)this + 3) != -1 )
-  {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 3));
-    *((_DWORD *)this + 3) = -1;
-  }
-  result = (char)lparam;
-  switch ( *lparam )
-  {
-    case 0:
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 36, GuiDlgSettingsGraphicProc);
-      result = (char)this;
-      *((_DWORD *)this + 3) = 36;
-      break;
-    case 1:
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 37, GuiDlgSettingsSoundProc);
-      *((_DWORD *)this + 3) = 37;
-      break;
-    case 2:
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 38, GuiDlgSettingsGameProc);
-      *((_DWORD *)this + 3) = 38;
-      break;
-    case 3:
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 39, GuiDlgSettingsMessagesProc);
-      result = (char)this;
-      *((_DWORD *)this + 3) = 39;
-      break;
-    case 4:
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 58, GuiDlgChatProc);
-      *((_DWORD *)this + 3) = 58;
-      break;
-    case 5:
-      result = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 33, GuiDlgLoadSaveProc);
-      *((_DWORD *)this + 3) = 33;
-      break;
-    default:
-      return result;
+    if ( *((_DWORD *)this + 3) != -1 )
+    {
+      IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 3));
+      *((_DWORD *)this + 3) = -1;
+    }
+    result = (char)lparam;
+    switch ( *lparam )
+    {
+      case 0:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 36, (bool (__cdecl *)(int, int, int))GuiDlgSettingsGraphicProc);
+        result = (char)this;
+        *((_DWORD *)this + 3) = 36;
+        break;
+      case 1:
+        result = IGuiEngine::OpenDialog(g_pGUIEngine, 37, (bool (__cdecl *)(int, int, int))GuiDlgSettingsSoundProc);
+        *((_DWORD *)this + 3) = 37;
+        break;
+      case 2:
+        result = IGuiEngine::OpenDialog(g_pGUIEngine, 38, (bool (__cdecl *)(int, int, int))GuiDlgSettingsGameProc);
+        *((_DWORD *)this + 3) = 38;
+        break;
+      case 3:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 39, (bool (__cdecl *)(int, int, int))GuiDlgSettingsMessagesProc);
+        result = (char)this;
+        *((_DWORD *)this + 3) = 39;
+        break;
+      case 4:
+        result = IGuiEngine::OpenDialog(g_pGUIEngine, 58, (bool (__cdecl *)(int, int, int))GuiDlgChatProc);
+        *((_DWORD *)this + 3) = 58;
+        break;
+      case 5:
+        result = IGuiEngine::OpenDialog(g_pGUIEngine, 33, (bool (__cdecl *)(int, int, int))GuiDlgLoadSaveProc);
+        *((_DWORD *)this + 3) = 33;
+        break;
+      default:
+        return result;
+    }
   }
   return result;
 }
@@ -1123,63 +1103,62 @@ void  CGuiEventHandler::HandleMsgOpenSidebar(class CEvn_Event & a2) {
 
   LOBYTE(v2) = (_BYTE)a2;
   lparam = a2->m_lParam;
-  if ( !lparam )
+  if ( lparam != 0 )
   {
-    return v2;
-  }
-  if ( *((_DWORD *)this + 4) != -1 )
-  {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 4));
-    *((_DWORD *)this + 4) = -1;
-  }
-  v2 = *(_DWORD *)(lparam + 4) - 11;
-  switch ( *(_DWORD *)(lparam + 4) )
-  {
-    case 0xB:
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 46, GuiDlgWeaponsmithBarProc);
-      LOBYTE(v2) = (_BYTE)this;
-      *((_DWORD *)this + 4) = 46;
-      break;
-    case 0xC:
-      LOBYTE(v2) = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 47, GuiDlgAddToolBarProc);
-      *((_DWORD *)this + 4) = 47;
-      break;
-    case 0xD:
-      LOBYTE(v2) = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 54, GuiDlgGoodstradeBarProc);
-      *((_DWORD *)this + 4) = 54;
-      break;
-    case 0xE:
-      LOBYTE(v2) = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 53, GuiDlgGoodsoutBarProc);
-      *((_DWORD *)this + 4) = 53;
-      break;
-    case 0xF:
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 50, GuiDlgAddStorageBarProc);
-      LOBYTE(v2) = (_BYTE)this;
-      *((_DWORD *)this + 4) = 50;
-      break;
-    case 0x10:
-      LOBYTE(v2) = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 48, GuiDlgAddSoldierBarProc);
-      *((_DWORD *)this + 4) = 48;
-      break;
-    case 0x11:
-      LOBYTE(v2) = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 51, GuiDlgAddVehicleBarProc);
-      *((_DWORD *)this + 4) = 51;
-      break;
-    case 0x19:
-      IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 55, GuiDlgGroupProc);
-      LOBYTE(v2) = (_BYTE)this;
-      *((_DWORD *)this + 4) = 55;
-      break;
-    case 0x1A:
-      LOBYTE(v2) = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 56, GuiDlgMagicSpellBarProc);
-      *((_DWORD *)this + 4) = 56;
-      break;
-    case 0x1B:
-      LOBYTE(v2) = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 52, GuiDlgBuildEyecatcherProc);
-      *((_DWORD *)this + 4) = 52;
-      break;
-    default:
-      return v2;
+    if ( *((_DWORD *)this + 4) != -1 )
+    {
+      IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 4));
+      *((_DWORD *)this + 4) = -1;
+    }
+    v2 = *(_DWORD *)(lparam + 4) - 11;
+    switch ( *(_DWORD *)(lparam + 4) )
+    {
+      case 0xB:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 46, (bool (__cdecl *)(int, int, int))GuiDlgWeaponsmithBarProc);
+        LOBYTE(v2) = (_BYTE)this;
+        *((_DWORD *)this + 4) = 46;
+        break;
+      case 0xC:
+        LOBYTE(v2) = IGuiEngine::OpenDialog(g_pGUIEngine, 47, (bool (__cdecl *)(int, int, int))GuiDlgAddToolBarProc);
+        *((_DWORD *)this + 4) = 47;
+        break;
+      case 0xD:
+        LOBYTE(v2) = IGuiEngine::OpenDialog(g_pGUIEngine, 54, (bool (__cdecl *)(int, int, int))GuiDlgGoodstradeBarProc);
+        *((_DWORD *)this + 4) = 54;
+        break;
+      case 0xE:
+        LOBYTE(v2) = IGuiEngine::OpenDialog(g_pGUIEngine, 53, (bool (__cdecl *)(int, int, int))GuiDlgGoodsoutBarProc);
+        *((_DWORD *)this + 4) = 53;
+        break;
+      case 0xF:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 50, (bool (__cdecl *)(int, int, int))GuiDlgAddStorageBarProc);
+        LOBYTE(v2) = (_BYTE)this;
+        *((_DWORD *)this + 4) = 50;
+        break;
+      case 0x10:
+        LOBYTE(v2) = IGuiEngine::OpenDialog(g_pGUIEngine, 48, (bool (__cdecl *)(int, int, int))GuiDlgAddSoldierBarProc);
+        *((_DWORD *)this + 4) = 48;
+        break;
+      case 0x11:
+        LOBYTE(v2) = IGuiEngine::OpenDialog(g_pGUIEngine, 51, (bool (__cdecl *)(int, int, int))GuiDlgAddVehicleBarProc);
+        *((_DWORD *)this + 4) = 51;
+        break;
+      case 0x19:
+        IGuiEngine::OpenDialog(g_pGUIEngine, 55, (bool (__cdecl *)(int, int, int))GuiDlgGroupProc);
+        LOBYTE(v2) = (_BYTE)this;
+        *((_DWORD *)this + 4) = 55;
+        break;
+      case 0x1A:
+        LOBYTE(v2) = IGuiEngine::OpenDialog(g_pGUIEngine, 56, (bool (__cdecl *)(int, int, int))GuiDlgMagicSpellBarProc);
+        *((_DWORD *)this + 4) = 56;
+        break;
+      case 0x1B:
+        LOBYTE(v2) = IGuiEngine::OpenDialog(g_pGUIEngine, 52, (bool (__cdecl *)(int, int, int))GuiDlgBuildEyecatcherProc);
+        *((_DWORD *)this + 4) = 52;
+        break;
+      default:
+        return v2;
+    }
   }
   return v2;
 }
@@ -1191,83 +1170,82 @@ void  CGuiEventHandler::HandleMsgCloseAllDialogs(void) {
   
   CGuiEventHandler *result; // eax
   CEvn_Logic *v2; // [esp+4h] [ebp-3Ch]
-  _BYTE v4[32]; // [esp+10h] [ebp-30h] BYREF
+  CEvn_Logic v4; // [esp+10h] [ebp-30h] BYREF
   int v5; // [esp+3Ch] [ebp-4h]
 
   if ( *((_DWORD *)this + 13) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 13));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 13));
     *((_DWORD *)this + 13) = -1;
   }
   if ( *((_DWORD *)this + 4) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 4));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 4));
     *((_DWORD *)this + 4) = -1;
   }
   if ( *((_DWORD *)this + 3) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 3));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 3));
     *((_DWORD *)this + 3) = 0;
   }
   if ( *((_DWORD *)this + 7) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 7));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 7));
     *((_DWORD *)this + 7) = -1;
   }
   if ( *((_DWORD *)this + 6) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 6));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 6));
     *((_DWORD *)this + 6) = -1;
   }
   if ( *((_DWORD *)this + 5) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 5));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 5));
     *((_DWORD *)this + 5) = -1;
   }
   if ( *((_DWORD *)this + 8) != -1 )
   {
-    v2 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v4, 0x1E2u, 0, 0, 0, 0, 0);
+    v2 = CEvn_Logic::CEvn_Logic(&v4, 0x1E2u, 0, 0, 0, 0, 0);
     v5 = 0;
     IEventEngine::SendAMessage(g_pEvnEngine, v2);
     v5 = -1;
-    CEvn_Logic::~CEvn_Logic(v4);
+    CEvn_Logic::~CEvn_Logic(&v4);
     *((_BYTE *)this + 5) = 0;
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 8));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 8));
     *((_DWORD *)this + 8) = -1;
   }
   if ( *((_DWORD *)this + 9) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 9));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 9));
     *((_DWORD *)this + 9) = -1;
   }
   if ( *((_DWORD *)this + 10) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 10));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 10));
     *((_DWORD *)this + 10) = -1;
   }
   if ( *((_DWORD *)this + 11) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 11));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 11));
     *((_DWORD *)this + 11) = -1;
   }
   if ( *((_DWORD *)this + 12) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 12));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 12));
     *((_DWORD *)this + 12) = -1;
   }
   if ( *((_DWORD *)this + 14) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 14));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 14));
     *((_DWORD *)this + 14) = -1;
   }
   result = this;
-  if ( *((_DWORD *)this + 15) == -1 )
+  if ( *((_DWORD *)this + 15) != -1 )
   {
-    return result;
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 15));
+    result = this;
+    *((_DWORD *)this + 15) = -1;
   }
-  IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 15));
-  result = this;
-  *((_DWORD *)this + 15) = -1;
   return result;
 }
 
@@ -1279,7 +1257,7 @@ void  CGuiEventHandler::HandleMsgRefreshDialog(class CEvn_Event & a2) {
   int lparam; // [esp+10h] [ebp-4h]
 
   lparam = a2->m_lParam;
-  if ( lparam )
+  if ( lparam != 0 )
   {
     switch ( *(_DWORD *)(lparam + 4) )
     {
@@ -1332,7 +1310,7 @@ void  CGuiEventHandler::HandleMsgRefreshDialog(class CEvn_Event & a2) {
         UpdateGuiDlgAddSoldierBar();
         break;
       case 0x11:
-        UpdateGuiDlgAddVehicleBar();
+        ((void (__cdecl *)())UpdateGuiDlgAddVehicleBar)();
         break;
       case 0x12:
         UpdateGuiDlgSoldierContext();
@@ -1423,7 +1401,7 @@ void  CGuiEventHandler::HandleMsgRefreshSettingsDialog(class CEvn_Event & a2) {
   _DWORD *lparam; // [esp+8h] [ebp-4h]
 
   lparam = (_DWORD *)a2->m_lParam;
-  if ( lparam )
+  if ( lparam != 0 )
   {
     switch ( *lparam )
     {
@@ -1462,7 +1440,7 @@ void  CGuiEventHandler::ResetMainMenu(void) {
   result = (char)this;
   if ( *((_DWORD *)this + 5) != -1 )
   {
-    return IGuiEngine::SelectControl((IGuiEngine *)g_pGUIEngine, 0, 606, 1);
+    return IGuiEngine::SelectControl(g_pGUIEngine, 0, 606, 1);
   }
   return result;
 }
@@ -1475,15 +1453,15 @@ void  CGuiEventHandler::ResetMainMenuForContext(void) {
   CGuiEventHandler *result; // eax
   CEvn_Event *v2; // [esp+4h] [ebp-5Ch]
   CEvn_Logic *v3; // [esp+Ch] [ebp-54h]
-  _BYTE v5[32]; // [esp+18h] [ebp-48h] BYREF
+  CEvn_Logic v5; // [esp+18h] [ebp-48h] BYREF
   CEvn_Event v6; // [esp+38h] [ebp-28h] BYREF
   int v7; // [esp+5Ch] [ebp-4h]
 
-  v3 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v5, 0x1CCu, 0, 0, 0, 0, 0);
+  v3 = CEvn_Logic::CEvn_Logic(&v5, 0x1CCu, 0, 0, 0, 0, 0);
   v7 = 0;
   IEventEngine::SendAMessage(g_pEvnEngine, v3);
   v7 = -1;
-  CEvn_Logic::~CEvn_Logic(v5);
+  CEvn_Logic::~CEvn_Logic(&v5);
   v2 = CEvn_Event::CEvn_Event(&v6, 0x260u, 0, 0, 0);
   v7 = 1;
   IEventEngine::SendAMessage(g_pEvnEngine, v2);
@@ -1491,21 +1469,20 @@ void  CGuiEventHandler::ResetMainMenuForContext(void) {
   CEvn_Event::~CEvn_Event(&v6);
   if ( *((_DWORD *)this + 5) != -1 )
   {
-    IGuiEngine::ResetRadioGroup((IGuiEngine *)g_pGUIEngine, 0, 606);
+    IGuiEngine::ResetRadioGroup(g_pGUIEngine, 0, 606);
   }
   if ( *((_DWORD *)this + 3) != -1 )
   {
-    IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 3));
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 3));
     *((_DWORD *)this + 3) = -1;
   }
   result = this;
-  if ( *((_DWORD *)this + 6) == -1 )
+  if ( *((_DWORD *)this + 6) != -1 )
   {
-    return result;
+    IGuiEngine::CloseDialog(g_pGUIEngine, *((_DWORD *)this + 6));
+    result = this;
+    *((_DWORD *)this + 6) = -1;
   }
-  IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 6));
-  result = this;
-  *((_DWORD *)this + 6) = -1;
   return result;
 }
 
@@ -1514,13 +1491,13 @@ void  CGuiEventHandler::ResetMainMenuForContext(void) {
 // Decompiled from _DWORD *__thiscall CGuiEventHandler::GetTextMessageDialogParameters(_BYTE *this, _DWORD *a2)
 struct CGuiEventHandler::GuiDialogParameters  CGuiEventHandler::GetTextMessageDialogParameters(void a2)const {
   
-  if ( IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine) < 1280 )
+  if ( IGfxEngine::GetOutputWidth(g_pGfxEngine) < 1280 )
   {
-    if ( IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine) < 1024 )
+    if ( IGfxEngine::GetOutputWidth(g_pGfxEngine) < 1024 )
     {
-      if ( *(_DWORD *)(g_pGame + 360) )
+      if ( g_pGame->m_bExtendedTooltip != 0 )
       {
-        if ( this[64] )
+        if ( *(this + 64) != 0 )
         {
           *a2 = 66;
           a2[1] = GuiDlgTutorialProc;
@@ -1534,7 +1511,7 @@ struct CGuiEventHandler::GuiDialogParameters  CGuiEventHandler::GetTextMessageDi
       }
       else
       {
-        if ( this[64] )
+        if ( *(this + 64) != 0 )
         {
           *a2 = 67;
           a2[1] = GuiDlgTutorialProc;
@@ -1547,9 +1524,9 @@ struct CGuiEventHandler::GuiDialogParameters  CGuiEventHandler::GetTextMessageDi
         return a2;
       }
     }
-    else if ( *(_DWORD *)(g_pGame + 360) )
+    else if ( g_pGame->m_bExtendedTooltip != 0 )
     {
-      if ( this[64] )
+      if ( *(this + 64) != 0 )
       {
         *a2 = 68;
         a2[1] = GuiDlgTutorialProc;
@@ -1563,7 +1540,7 @@ struct CGuiEventHandler::GuiDialogParameters  CGuiEventHandler::GetTextMessageDi
     }
     else
     {
-      if ( this[64] )
+      if ( *(this + 64) != 0 )
       {
         *a2 = 69;
         a2[1] = GuiDlgTutorialProc;
@@ -1576,9 +1553,9 @@ struct CGuiEventHandler::GuiDialogParameters  CGuiEventHandler::GetTextMessageDi
       return a2;
     }
   }
-  else if ( *(_DWORD *)(g_pGame + 360) )
+  else if ( g_pGame->m_bExtendedTooltip != 0 )
   {
-    if ( this[64] )
+    if ( *(this + 64) != 0 )
     {
       *a2 = 70;
       a2[1] = GuiDlgTutorialProc;
@@ -1592,7 +1569,7 @@ struct CGuiEventHandler::GuiDialogParameters  CGuiEventHandler::GetTextMessageDi
   }
   else
   {
-    if ( this[64] )
+    if ( *(this + 64) != 0 )
     {
       *a2 = 71;
       a2[1] = GuiDlgTutorialProc;

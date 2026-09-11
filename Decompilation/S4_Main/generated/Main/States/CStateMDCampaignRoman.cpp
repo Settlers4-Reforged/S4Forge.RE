@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateMDCampaignRoman::DynamicCreateFunc(void * a1) {
   CStateMDCampaignRoman *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateMDCampaignRoman *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateMDCampaignRoman::CStateMDCampaignRoman(C, a1);
   }
@@ -24,24 +24,24 @@ class CGameState * __cdecl CStateMDCampaignRoman::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateMDCampaignRoman *__thiscall CStateMDCampaignRoman::CStateMDCampaignRoman(CStateMDCampaignRoman *this, void *a2)
  CStateMDCampaignRoman::CStateMDCampaignRoman(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateMDCampaignRoman::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  CGuiGameState::SetupExtraGui(g_pMissionCD, 1, (int)GuiDlgMDCampaignRomanProc);
+  CGuiGameState::SetupExtraGui((int)g_pMissionCD, 1, (int)GuiDlgMDCampaignRomanProc);
   g_cCampaignSettings = 14;
   dword_402CBBC[5] = CGameSettings::GetCampaignStatus(5);
   dword_402CBBC[5] = 5;
-  CGuiGameState::OpenDialog(this, 1, GuiDlgMDCampaignRomanProc);
+  CGuiGameState::OpenDialog((CGuiGameState *)this, 1, (bool (__cdecl *)(int, int, int))GuiDlgMDCampaignRomanProc);
   return this;
 }
 
 
 // address=[0x14c6c00]
-// Decompiled from void __thiscall CStateMDCampaignRoman::~CStateMDCampaignRoman(CStateMDCampaignRoman *this)
+// Decompiled from void __thiscall CStateMDCampaignRoman::~CStateMDCampaignRoman(CGuiGameState *this)
  CStateMDCampaignRoman::~CStateMDCampaignRoman(void) {
   
-  *(_DWORD *)this = &CStateMDCampaignRoman::_vftable_;
-  IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 1);
+  this->__vftable = (CGuiGameState_vtbl *)&CStateMDCampaignRoman::_vftable_;
+  IGuiEngine::CloseDialog(g_pGUIEngine, 1);
   CGuiGameState::~CGuiGameState(this);
 }
 
@@ -53,10 +53,10 @@ bool  CStateMDCampaignRoman::Perform(void) {
   DWORD v2; // esi
   int Instance; // [esp+8h] [ebp-4h]
 
-  Instance = UPlay::UPlayManager::GetInstance();
-  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) )
+  Instance = (int)UPlay::UPlayManager::GetInstance();
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) != 0 )
   {
-    CGameStateHandler::Switch((int)CStateMDCampaigns::DynamicCreateFunc, 1);
+    CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDCampaigns::DynamicCreateFunc, (void *)1);
     return 1;
   }
   else
@@ -71,21 +71,20 @@ bool  CStateMDCampaignRoman::Perform(void) {
       }
     }
     v2 = dword_4031F5C + 30;
-    if ( v2 >= timeGetTime() )
+    if ( v2 < timeGetTime() )
     {
-      return 1;
+      dword_4031F5C = timeGetTime();
+      IGuiEngine::RenderGui(g_pGUIEngine);
+      IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+      IGfxEngine::ShowFrame(g_pGfxEngine);
     }
-    dword_4031F5C = timeGetTime();
-    IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-    IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-    IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
     return 1;
   }
 }
 
 
 // address=[0x14c6d40]
-// Decompiled from char __thiscall CStateMDCampaignRoman::OnEvent(CStateMDCampaignRoman *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateMDCampaignRoman::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateMDCampaignRoman::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
@@ -108,11 +107,13 @@ bool  CStateMDCampaignRoman::OnEvent(class CEvn_Event & a2) {
       }
       break;
     case 7008:
-      CGameStateHandler::Switch((int)CStateMDBriefing::DynamicCreateFunc, (a2->m_wParam << 16) | 5);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDBriefing::DynamicCreateFunc, (void *)((a2->m_wParam << 16) | 5));
       return 1;
     case 7009:
-      CGameStateHandler::Switch((int)CStateMDCampaigns::DynamicCreateFunc, 1);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDCampaigns::DynamicCreateFunc, (void *)1);
       return 1;
+    default:
+      break;
   }
   return CGuiGameState::OnEvent(this, a2);
 }

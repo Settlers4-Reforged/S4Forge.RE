@@ -8,11 +8,11 @@
   
   DNameNode::DNameNode(this);
   *(_DWORD *)this = &pcharNode::_vftable_;
-  if ( a3 && a2 )
+  if ( a3 != 0 && a2 != 0 )
   {
     *((_DWORD *)this + 1) = operator new(a3, (struct _HeapManager *)&unk_4731E94, 0);
     *((_DWORD *)this + 2) = a3;
-    if ( *((_DWORD *)this + 1) )
+    if ( *((_DWORD *)this + 1) != 0 )
     {
       und_memcpy(*((char **)this + 1), a2, a3);
     }

@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CGatherBuildingRole::New(int a1)
 class CPersistence * __cdecl CGatherBuildingRole::New(std::istream & a1) {
   
-  if ( operator new(0x180u) )
+  if ( operator new(0x180u) != 0 )
   {
-    return CGatherBuildingRole::CGatherBuildingRole(a1);
+    return ((_DWORD (__stdcall *)(int))CGatherBuildingRole::CGatherBuildingRole)(a1);
   }
   else
   {
@@ -21,7 +21,7 @@ class CPersistence * __cdecl CGatherBuildingRole::New(std::istream & a1) {
 // Decompiled from CGatherBuildingRole *__thiscall CGatherBuildingRole::CGatherBuildingRole(CGatherBuildingRole *this)
  CGatherBuildingRole::CGatherBuildingRole(void) {
   
-  IBuildingRole::IBuildingRole(this);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this);
   *(_DWORD *)this = &CGatherBuildingRole::_vftable_;
   return this;
 }
@@ -76,13 +76,13 @@ void  CGatherBuildingRole::GoodArrive(int a2) {
 
 
 // address=[0x14fda30]
-// Decompiled from int __cdecl CGatherBuildingRole::Load(int a1)
+// Decompiled from int __cdecl CGatherBuildingRole::Load(struct std::istream *a1)
 class CGatherBuildingRole * __cdecl CGatherBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CGatherBuildingRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -102,8 +102,8 @@ void  CGatherBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v10; // [esp-8h] [ebp-74h]
   int v11; // [esp-4h] [ebp-70h]
   int v12; // [esp-4h] [ebp-70h]
-  _BYTE v13[24]; // [esp+4h] [ebp-68h] BYREF
-  _BYTE v14[24]; // [esp+1Ch] [ebp-50h] BYREF
+  CEntityEvent v13; // [esp+4h] [ebp-68h] BYREF
+  CEntityEvent v14; // [esp+1Ch] [ebp-50h] BYREF
   CEntityEvent *v15; // [esp+34h] [ebp-38h]
   CEntityEvent *v16; // [esp+38h] [ebp-34h]
   CEntityEvent *v17; // [esp+3Ch] [ebp-30h]
@@ -113,13 +113,13 @@ void  CGatherBuildingRole::LogicUpdate(class CBuilding * a2) {
   unsigned __int8 *v21; // [esp+4Ch] [ebp-20h]
   char v22; // [esp+50h] [ebp-1Ch]
   int NearestAnimal; // [esp+54h] [ebp-18h]
-  _DWORD *v24; // [esp+58h] [ebp-14h]
+  CSettler *v24; // [esp+58h] [ebp-14h]
   CGatherBuildingRole *v25; // [esp+5Ch] [ebp-10h]
   int v26; // [esp+68h] [ebp-4h]
 
   v25 = this;
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
-  if ( result )
+  if ( result != 0 )
   {
     result = (*(int (__thiscall **)(CGatherBuildingRole *, struct CBuilding *, int))(*(_DWORD *)v25 + 88))(v25, a2, 1);
   }
@@ -127,12 +127,12 @@ void  CGatherBuildingRole::LogicUpdate(class CBuilding * a2) {
   if ( v22 == 1 )
   {
     result = (*(unsigned __int8 (__thiscall **)(CGatherBuildingRole *, struct CBuilding *))(*(_DWORD *)v25 + 120))(v25, a2);
-    if ( !(_BYTE)result )
+    if ( (_BYTE)result != 0 )
     {
-      return IAnimatedEntity::RegisterForLogicUpdate(31);
+      *((_BYTE *)v25 + 4) = 3;
+      return result;
     }
-    *((_BYTE *)v25 + 4) = 3;
-    return result;
+    return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
   }
   if ( v22 != 2 )
   {
@@ -142,90 +142,83 @@ void  CGatherBuildingRole::LogicUpdate(class CBuilding * a2) {
     }
     *((_WORD *)v25 + 6) = 0;
     *((_DWORD *)v25 + 4) = 0;
-    if ( *((_BYTE *)v25 + 29) )
+    if ( *((_BYTE *)v25 + 29) != 0 && IEntity::FlagBits(a2, (EntityFlag)4096) != 0 )
     {
-      if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+      v20 = (unsigned __int8 *)CPileMgr::operator[](*((unsigned __int16 *)v25 + 190));
+      if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v20 + 40))(v20) < 8 )
       {
-        v20 = CPileMgr::operator[](*((unsigned __int16 *)v25 + 190));
-        if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v20 + 40))(v20) < 8 )
+        if ( IEntity::Type(a2) == 7 )
         {
-          if ( IEntity::Type((unsigned __int16 *)a2) == 7 )
+          v11 = CBuilding::EcoSectorId(a2);
+          v9 = *(_DWORD *)(*((_DWORD *)v25 + 94) + 492);
+          WorkingAreaPackedXY = CBuilding::GetWorkingAreaPackedXY(a2);
+          v8 = Y16X16::UnpackYFast(WorkingAreaPackedXY);
+          v4 = CBuilding::GetWorkingAreaPackedXY(a2);
+          v5 = Y16X16::UnpackXFast(v4);
+          NearestAnimal = CScanner::FindNearestAnimal(v5, v8, v9, 1, v11);
+          if ( NearestAnimal != -1 )
           {
-            v11 = CBuilding::EcoSectorId(a2);
-            v9 = *(_DWORD *)(*((_DWORD *)v25 + 94) + 492);
-            WorkingAreaPackedXY = CBuilding::GetWorkingAreaPackedXY(a2);
-            v8 = Y16X16::UnpackYFast(WorkingAreaPackedXY);
-            v4 = CBuilding::GetWorkingAreaPackedXY(a2);
-            v5 = Y16X16::UnpackXFast(v4);
-            NearestAnimal = CScanner::FindNearestAnimal(v5, v8, v9, 1, v11);
-            if ( NearestAnimal != -1 )
+            v12 = Y16X16::UnpackYFast(NearestAnimal);
+            v6 = Y16X16::UnpackXFast(NearestAnimal);
+            v19 = CWorldManager::MapObjectId(v6, v12);
+            v21 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v19);
+            if ( v21 != 0 && IEntity::ObjType((IEntity *)v21) == 128 && IEntity::FlagBits((IEntity *)v21, (EntityFlag)&loc_3000000) != 0 )
             {
-              v12 = Y16X16::UnpackYFast(NearestAnimal);
-              v6 = Y16X16::UnpackXFast(NearestAnimal);
-              v19 = CWorldManager::MapObjectId(v6, v12);
-              v21 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v19);
-              if ( v21 )
-              {
-                if ( IEntity::ObjType(v21) == 128 && IEntity::FlagBits(v21, (EntityFlag)&loc_3000000) )
-                {
-                  *((_WORD *)v25 + 6) = v19;
-                  *((_DWORD *)v25 + 4) = NearestAnimal;
-                }
-              }
+              *((_WORD *)v25 + 6) = v19;
+              *((_DWORD *)v25 + 4) = NearestAnimal;
             }
           }
-          else
-          {
-            (*(void (__thiscall **)(CGatherBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)v25 + 104))(v25, a2, 0);
-          }
+        }
+        else
+        {
+          (*(void (__thiscall **)(CGatherBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)v25 + 104))(v25, a2, 0);
         }
       }
     }
-    if ( !*((_DWORD *)v25 + 4) )
+    if ( *((_DWORD *)v25 + 4) != 0 )
     {
-      return IAnimatedEntity::RegisterForLogicUpdate(31);
+      v24 = CSettlerMgr::operator[](*((unsigned __int16 *)v25 + 4));
+      IEntity::ClearFlagBits(v24, ENTITY_FLAG_Visible);
+      v10 = Y16X16::UnpackYFast(*((_DWORD *)v25 + 4));
+      v7 = Y16X16::UnpackXFast(*((_DWORD *)v25 + 4));
+      CWorldManager::SetFlagBits(v7, v10, 32);
+      if ( *((_WORD *)v25 + 6) != 0 )
+      {
+        v16 = CEntityEvent::CEntityEvent(&v13, 5u, 0, 0, *((unsigned __int16 *)v25 + 6), *((_DWORD *)v25 + 4));
+        v15 = v16;
+        v26 = 1;
+        v24->SetEvent(v24, v16);
+        v26 = -1;
+        return CEntityEvent::~CEntityEvent(&v13);
+      }
+      else
+      {
+        v18 = CEntityEvent::CEntityEvent(&v14, 6u, 0, 0, 0, *((_DWORD *)v25 + 4));
+        v17 = v18;
+        v26 = 0;
+        v24->SetEvent(v24, v18);
+        v26 = -1;
+        return CEntityEvent::~CEntityEvent(&v14);
+      }
     }
-    v24 = (_DWORD *)CSettlerMgr::operator[](*((unsigned __int16 *)v25 + 4));
-    IEntity::ClearFlagBits(v24, ENTITY_FLAG_Visible);
-    v10 = Y16X16::UnpackYFast(*((_DWORD *)v25 + 4));
-    v7 = Y16X16::UnpackXFast(*((_DWORD *)v25 + 4));
-    CWorldManager::SetFlagBits(v7, v10, 32);
-    if ( *((_WORD *)v25 + 6) )
-    {
-      v16 = CEntityEvent::CEntityEvent((CEntityEvent *)v13, 5u, 0, 0, *((unsigned __int16 *)v25 + 6), *((_DWORD *)v25 + 4));
-      v15 = v16;
-      v26 = 1;
-      (*(void (__thiscall **)(_DWORD *, CEntityEvent *))(*v24 + 80))(v24, v16);
-      v26 = -1;
-      return CEntityEvent::~CEntityEvent(v13);
-    }
-    else
-    {
-      v18 = CEntityEvent::CEntityEvent((CEntityEvent *)v14, 6u, 0, 0, 0, *((_DWORD *)v25 + 4));
-      v17 = v18;
-      v26 = 0;
-      (*(void (__thiscall **)(_DWORD *, CEntityEvent *))(*v24 + 80))(v24, v18);
-      v26 = -1;
-      return CEntityEvent::~CEntityEvent(v14);
-    }
-    return IAnimatedEntity::RegisterForLogicUpdate(31);
+    return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
   }
   if ( *((unsigned __int8 *)v25 + 5) > (int)*(unsigned __int8 *)(*((_DWORD *)v25 + 94) + 480) )
   {
     *((_BYTE *)v25 + 5) = 0;
     *((_BYTE *)v25 + 4) = 3;
-    return IAnimatedEntity::RegisterForLogicUpdate(1);
+    return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
   }
   else
   {
     ++*((_BYTE *)v25 + 5);
-    return IAnimatedEntity::RegisterForLogicUpdate(14);
+    return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
   }
 }
 
 
 // address=[0x150b910]
-// Decompiled from CPile *__thiscall CGatherBuildingRole::FillGfxInfo(CGatherBuildingRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
+// Decompiled from CPile *__thiscall CGatherBuildingRole::FillGfxInfo(IBuildingRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
 void  CGatherBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
@@ -235,20 +228,20 @@ void  CGatherBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectIn
   unsigned __int8 *v7; // eax
   int v8; // [esp-Ch] [ebp-10h]
 
-  (*(void (__thiscall **)(CGatherBuildingRole *, struct CBuilding *))(*(_DWORD *)this + 16))(this, a2);
-  v8 = IEntity::Type((unsigned __int16 *)a2);
+  this->Update(this, a2);
+  v8 = IEntity::Type(a2);
   v3 = IEntity::Race(a2);
-  CGfxManager::GetBuildingGfxInfo((int)a3, v3, v8, 1, (int)this + 76);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
+  ((void (__stdcall *)(int, int, int, int, int))CGfxManager::GetBuildingGfxInfo)((int)a3, v3, v8, 1, (int)this->m_vPatchPairs);
+  v4 = IEntity::OwnerId(a2);
   IBuildingRole::MiniFlag(this, a3, v4);
-  v5 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
-  result = (CPile *)(unsigned __int8)CPile::IsPatchPile(v5);
-  if ( !(_BYTE)result )
+  v5 = (unsigned __int8 *)CPileMgr::operator[](*((unsigned __int16 *)this + 190));
+  result = (CPile *)CPile::IsPatchPile(v5);
+  if ( (_BYTE)result != 0 )
   {
-    return result;
+    v7 = (unsigned __int8 *)CPileMgr::operator[](*((unsigned __int16 *)this + 190));
+    return ((CPile *(__thiscall *)(CPile *, struct SGfxPatchObject *))CPile::GetPatchGfx)((CPile *)v7, a3->m_vPatches2);
   }
-  v7 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
-  return CPile::GetPatchGfx((CPile *)v7, (struct SGfxObjectInfo *)((char *)a3 + 536));
+  return result;
 }
 
 
@@ -266,7 +259,7 @@ void  CGatherBuildingRole::Init(class CBuilding * a2) {
   int v9; // [esp-4h] [ebp-10h]
   int v10; // [esp+0h] [ebp-Ch]
 
-  IBuildingRole::InitCommon((int)a2);
+  IBuildingRole::InitCommon(a2);
   *((_BYTE *)this + 4) = 1;
   *((_BYTE *)this + 28) = 0;
   *((_WORD *)this + 190) = 0;
@@ -274,29 +267,29 @@ void  CGatherBuildingRole::Init(class CBuilding * a2) {
   {
     __debugbreak();
   }
-  v2 = IEntity::WorldIdx();
+  v2 = ((int (__stdcall *)())IEntity::WorldIdx)();
   v10 = *(char *)(*((_DWORD *)this + 94) + 60) + CWorldManager::X(v2);
-  v3 = IEntity::WorldIdx();
+  v3 = ((int (__stdcall *)())IEntity::WorldIdx)();
   v4 = CWorldManager::Y(v3);
-  *((_WORD *)this + 190) = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v10, *(char *)(*((_DWORD *)this + 94) + 61) + v4, *(char *)(*((_DWORD *)this + 94) + 62), 0, *(char *)(*((_DWORD *)this + 94) + 63), 0, 0, 0, 0);
-  if ( !*((_WORD *)this + 190) && BBSupportDbgReport(2, "MapObjects\\Building\\GatherBuilding.cpp", 137, "m_uProdPileId != 0") == 1 )
+  *((_WORD *)this + 190) = CPileMgr::AddPile(&g_cPileMgr, v10, *(char *)(*((_DWORD *)this + 94) + 61) + v4, *(char *)(*((_DWORD *)this + 94) + 62), 0, *(char *)(*((_DWORD *)this + 94) + 63), 0, 0, 0, 0);
+  if ( *((_WORD *)this + 190) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\GatherBuilding.cpp", 137, "m_uProdPileId != 0") == 1 )
   {
     __debugbreak();
   }
-  v9 = IEntity::ID();
-  v5 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
+  v9 = ((int (__stdcall *)())IEntity::ID)();
+  v5 = (unsigned __int8 *)CPileMgr::operator[](*((unsigned __int16 *)this + 190));
   CPile::SetBuildingId((CPile *)v5, v9);
   v8 = *(char *)(*((_DWORD *)this + 94) + 478);
   v6 = IEntity::Race(a2);
   CSettlerMgr::GetSettlerInfo(v6, v8);
-  *((_DWORD *)this + 8) = *(_DWORD *)std::vector<CSettlerMgr::SSearchInfos>::operator[](0);
-  if ( !*((_DWORD *)this + 8) && BBSupportDbgReport(2, "MapObjects\\Building\\GatherBuilding.cpp", 144, "m_pSearchFkt != 0") == 1 )
+  *((_DWORD *)this + 8) = *(_DWORD *)((int (__stdcall *)(int))std::vector<CSettlerMgr::SSearchInfos>::operator[])(0);
+  if ( *((_DWORD *)this + 8) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\GatherBuilding.cpp", 144, "m_pSearchFkt != 0") == 1 )
   {
     __debugbreak();
   }
-  IAnimatedEntity::RegisterForLogicUpdate(2);
+  ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(2);
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
-  if ( result )
+  if ( result != 0 )
   {
     return (*(int (__thiscall **)(CGatherBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   }
@@ -321,7 +314,7 @@ void  CGatherBuildingRole::PostLoadInit(class CBuilding * a2) {
   v3 = IEntity::Race(a2);
   SettlerInfo = CSettlerMgr::GetSettlerInfo(v3, v5);
   *((_DWORD *)this + 8) = std::vector<CSettlerMgr::SSearchInfos>::operator[](&SettlerInfo->m_vSearches, 0)->m_pSearchFkt;
-  if ( !*((_DWORD *)this + 8) && BBSupportDbgReport(2, "MapObjects\\Building\\GatherBuilding.cpp", 112, "m_pSearchFkt != 0") == 1 )
+  if ( *((_DWORD *)this + 8) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\GatherBuilding.cpp", 112, "m_pSearchFkt != 0") == 1 )
   {
     __debugbreak();
   }
@@ -333,31 +326,31 @@ void  CGatherBuildingRole::PostLoadInit(class CBuilding * a2) {
 bool  CGatherBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   int v3; // eax
-  void *v4; // eax
+  struct type_info *v4; // eax
   int v5; // eax
   const char *BuildingName; // eax
   const char *v8; // [esp-8h] [ebp-10h]
   const char *RaceName; // [esp-4h] [ebp-Ch]
-  _DWORD *v10; // [esp+0h] [ebp-8h]
+  CSettler *v10; // [esp+0h] [ebp-8h]
 
   *((_BYTE *)this + 29) = 1;
   *((_WORD *)this + 4) = a3;
-  v10 = (_DWORD *)CSettlerMgr::operator[](a3);
+  v10 = CSettlerMgr::operator[](a3);
   IEntity::ClearFlagBits(v10, ENTITY_FLAG_Visible);
-  if ( *(_BYTE *)(*((_DWORD *)this + 94) + 480) )
+  if ( *(_BYTE *)(*((_DWORD *)this + 94) + 480) != 0 )
   {
     *((_BYTE *)this + 5) = 0;
-    IAnimatedEntity::RegisterForLogicUpdate(14);
+    ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
     *((_BYTE *)this + 4) = 2;
   }
   else
   {
-    IAnimatedEntity::RegisterForLogicUpdate(31);
+    ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
     v3 = IEntity::Race(a2);
     RaceName = CS4DefineNames::GetRaceName(v3);
-    v4 = (void *)typeid(this);
-    v8 = (const char *)type_info::name(v4);
-    v5 = IEntity::Type((unsigned __int16 *)a2);
+    v4 = typeid(this);
+    v8 = type_info::name(v4);
+    v5 = IEntity::Type(a2);
     BuildingName = CS4DefineNames::GetBuildingName(v5);
     BBSupportTracePrintF(2, "WARNING: Building %s (role %s) of race %s has no production delay!", BuildingName, v8, RaceName);
   }
@@ -379,28 +372,28 @@ void  CGatherBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   CEvn_Event v12; // [esp+18h] [ebp-28h] BYREF
   int v13; // [esp+3Ch] [ebp-4h]
 
-  MEMORY[0x3F1E4E8] = 2;
-  MEMORY[0x3F1E4ED] = IEntity::Race(a2);
-  MEMORY[0x3F1E4EC] = IEntity::Type((unsigned __int16 *)a2);
-  MEMORY[0x3F1E4EF] = 1;
-  MEMORY[0x3F1E4F0] = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
-  MEMORY[0x3F1E4F1] = 1;
-  v6 = IEntity::Type((unsigned __int16 *)a2);
-  v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-  MEMORY[0x3F1E4F3] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v6, 0);
-  v7 = IEntity::Type((unsigned __int16 *)a2);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  MEMORY[0x3F1E4F4] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
-  MEMORY[0x3F1E4F2] = -1;
-  MEMORY[0x3F1E4EE] = *((_BYTE *)this + 29);
-  if ( *((_BYTE *)this + 29) )
+  g_cResourceCollectorInfo.m_iUnknown = 2;
+  g_cResourceCollectorInfo.m_cRace = IEntity::Race(a2);
+  g_cResourceCollectorInfo.m_cType = IEntity::Type(a2);
+  g_cResourceCollectorInfo.m_unknownB = 1;
+  g_cResourceCollectorInfo.m_bSomeFlagBits = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+  g_cResourceCollectorInfo.m_bHasWorkingArea = 1;
+  v6 = IEntity::Type(a2);
+  v3 = IEntity::OwnerId(a2);
+  g_cResourceCollectorInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, (S4_BUILDING_ENUM)v6, 0);
+  v7 = IEntity::Type(a2);
+  v4 = IEntity::OwnerId(a2);
+  g_cResourceCollectorInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, (S4_BUILDING_ENUM)v7, 1u);
+  g_cResourceCollectorInfo.m_iBuildingProgress = -1;
+  g_cResourceCollectorInfo.m_bInhabitants = *((_BYTE *)this + 29);
+  if ( *((_BYTE *)this + 29) != 0 )
   {
-    MEMORY[0x3F1E4F5] = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
+    g_cResourceCollectorInfo.m_iSettlerCount = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
   }
-  v10 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
-  MEMORY[0x3F1E4F9] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v10 + 40))(v10);
-  v9 = CPileMgr::operator[](*((unsigned __int16 *)this + 190));
-  MEMORY[0x3F1E4F8] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v9 + 60))(v9);
+  v10 = (unsigned __int8 *)CPileMgr::operator[](*((unsigned __int16 *)this + 190));
+  g_cResourceCollectorInfo.m_uAmount = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v10 + 40))(v10);
+  v9 = (unsigned __int8 *)CPileMgr::operator[](*((unsigned __int16 *)this + 190));
+  g_cResourceCollectorInfo.m_uGood = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v9 + 60))(v9);
   v8 = 604;
   if ( !a3 )
   {
@@ -418,13 +411,13 @@ void  CGatherBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
 // Decompiled from char *__thiscall CGatherBuildingRole::CGatherBuildingRole(char *this, int a2)
  CGatherBuildingRole::CGatherBuildingRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   char *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  IBuildingRole::IBuildingRole(this, a2);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this, (struct std::istream *)a2);
   v6 = 0;
   *(_DWORD *)v5 = &CGatherBuildingRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
@@ -435,7 +428,7 @@ void  CGatherBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned short>(a2, v5 + 380);
+  operator^<unsigned short>(a2, (unsigned __int16 *)v5 + 190);
   v6 = -1;
   return v5;
 }
@@ -451,8 +444,8 @@ void  CGatherBuildingRole::Store(std::ostream & a2) {
   v4 = this;
   IBuildingRole::Store(this, a2);
   v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  return operator^<unsigned short>((int)a2, (__int16 *)v4 + 190);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
+  return operator^<unsigned short>(a2, (WORD *)&v4[1]);
 }
 
 

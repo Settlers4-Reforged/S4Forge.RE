@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CResidenceBuildingRole::New(int a1)
 class CPersistence * __cdecl CResidenceBuildingRole::New(std::istream & a1) {
   
-  if ( operator new(0x180u) )
+  if ( operator new(0x180u) != 0 )
   {
-    return CResidenceBuildingRole::CResidenceBuildingRole(a1);
+    return ((_DWORD (__stdcall *)(int))CResidenceBuildingRole::CResidenceBuildingRole)(a1);
   }
   else
   {
@@ -21,7 +21,7 @@ class CPersistence * __cdecl CResidenceBuildingRole::New(std::istream & a1) {
 // Decompiled from CResidenceBuildingRole *__thiscall CResidenceBuildingRole::CResidenceBuildingRole(CResidenceBuildingRole *this)
  CResidenceBuildingRole::CResidenceBuildingRole(void) {
   
-  IBuildingRole::IBuildingRole(this);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this);
   *(_DWORD *)this = &CResidenceBuildingRole::_vftable_;
   return this;
 }
@@ -76,13 +76,13 @@ void  CResidenceBuildingRole::GoodArrive(int a2) {
 
 
 // address=[0x14fdbb0]
-// Decompiled from int __cdecl CResidenceBuildingRole::Load(int a1)
+// Decompiled from int __cdecl CResidenceBuildingRole::Load(struct std::istream *a1)
 class CResidenceBuildingRole * __cdecl CResidenceBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CResidenceBuildingRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -100,7 +100,7 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding * a2) {
   int v8; // esi
   int v9; // esi
   int v10; // eax
-  void *v11; // eax
+  struct type_info *v11; // eax
   int v12; // eax
   const char *BuildingName; // eax
   int v15; // [esp-8h] [ebp-34h]
@@ -119,7 +119,7 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding * a2) {
 
   v26 = this;
   LocalPlayerId = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
-  if ( LocalPlayerId )
+  if ( LocalPlayerId != 0 )
   {
     LOBYTE(LocalPlayerId) = (*(int (__thiscall **)(_DWORD *, struct CBuilding *, int))(*v26 + 88))(v26, a2, 1);
   }
@@ -138,7 +138,7 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding * a2) {
     v22 = CBuilding::DoorX(a2);
     v23 = CBuilding::DoorY(a2);
     v19 = CWorldManager::EcoSectorId(v22, v23);
-    if ( !v19 && BBSupportDbgReport(2, "MapObjects\\Building\\ResidenceBuilding.cpp", 197, "iEcoSectorId != 0") == 1 )
+    if ( v19 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\ResidenceBuilding.cpp", 197, "iEcoSectorId != 0") == 1 )
     {
       __debugbreak();
     }
@@ -147,8 +147,8 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding * a2) {
           i < 67;
           ++i )
     {
-      v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-      v24 += CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, v3, i);
+      v3 = IEntity::OwnerId(a2);
+      v24 += CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, v3, (S4_SETTLER_ENUM)i);
     }
     if ( CPlayerManager::NumberOfPlayers() > 4 )
     {
@@ -158,63 +158,59 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding * a2) {
     {
       v20 = 2500;
     }
-    if ( v24 < v20 )
+    if ( v24 < v20 && CSettlerMgr::SearchFreePositionInEcoSector(&g_cSettlerMgr, &v22, &v23, v19) != 0 )
     {
-      if ( CSettlerMgr::SearchFreePositionInEcoSector((CSettlerMgr *)g_cSettlerMgr, &v22, &v23, v19) )
+      v15 = *(char *)(v26[94] + 478);
+      v4 = IEntity::OwnerId(a2);
+      if ( (int)CSettlerMgr::AddSettler(&g_cSettlerMgr, v22, v23, v4, v15, 0) > 0 )
       {
-        v15 = *(char *)(v26[94] + 478);
-        v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-        if ( (int)CSettlerMgr::AddSettler((CSettlerMgr *)g_cSettlerMgr, v22, v23, v4, v15, 0) > 0 )
+        v5 = IEntity::OwnerId(a2);
+        CStatistic::AddProducedSettler(&g_cStatistic, v5, 1);
+        v27 = *((_BYTE *)v26 + 380) + 1;
+        *((_BYTE *)v26 + 380) = v27;
+        if ( v27 >= *(int *)(v26[94] + 496) )
         {
-          v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-          CStatistic::AddProducedSettler((CStatistic *)&g_cStatistic, v5, 1);
-          v27 = *((_BYTE *)v26 + 380) + 1;
-          *((_BYTE *)v26 + 380) = v27;
-          if ( v27 >= *(int *)(v26[94] + 496) )
+          v16 = ((int (__stdcall *)())IEntity::ID)();
+          v6 = IEntity::OwnerId(a2);
+          g_pAI->PostAIEvent(g_pAI, 8, v6, v16, 0);
+          v7 = ((int (__stdcall *)())IEntity::ID)();
+          BBSupportTracePrintF(0, "Residence: last settler left the buiding %u", v7);
+          LOBYTE(LocalPlayerId) = IEntity::IsSelected(a2);
+          if ( (_BYTE)LocalPlayerId != 0 )
           {
-            v16 = IEntity::ID();
-            v6 = IEntity::OwnerId((unsigned __int8 *)a2);
-            (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 8, v6, v16, 0);
-            v7 = IEntity::ID();
-            BBSupportTracePrintF(0, "Residence: last settler left the buiding %u", v7);
-            LOBYTE(LocalPlayerId) = IEntity::IsSelected((IEntity *)a2);
-            if ( !(_BYTE)LocalPlayerId )
-            {
-              return LocalPlayerId;
-            }
-            v8 = IEntity::OwnerId((unsigned __int8 *)a2);
+            v8 = IEntity::OwnerId(a2);
             LocalPlayerId = CPlayerManager::GetLocalPlayerId();
             if ( v8 == LocalPlayerId )
             {
               LOBYTE(LocalPlayerId) = (*(int (__thiscall **)(_DWORD *, struct CBuilding *, int))(*v26 + 88))(v26, a2, 1);
             }
-            return LocalPlayerId;
           }
-          if ( IEntity::IsSelected((IEntity *)a2) )
+          return LocalPlayerId;
+        }
+        if ( IEntity::IsSelected(a2) )
+        {
+          v9 = IEntity::OwnerId(a2);
+          if ( v9 == CPlayerManager::GetLocalPlayerId() )
           {
-            v9 = IEntity::OwnerId((unsigned __int8 *)a2);
-            if ( v9 == CPlayerManager::GetLocalPlayerId() )
-            {
-              (*(void (__thiscall **)(_DWORD *, struct CBuilding *, int))(*v26 + 88))(v26, a2, 1);
-            }
+            (*(void (__thiscall **)(_DWORD *, struct CBuilding *, int))(*v26 + 88))(v26, a2, 1);
           }
         }
       }
     }
-    if ( *(_BYTE *)(v26[94] + 480) )
+    if ( *(_BYTE *)(v26[94] + 480) != 0 )
     {
       *((_BYTE *)v26 + 5) = 0;
-      LOBYTE(LocalPlayerId) = IAnimatedEntity::RegisterForLogicUpdate(14);
+      LOBYTE(LocalPlayerId) = ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
       *((_BYTE *)v26 + 4) = 2;
     }
     else
     {
-      IAnimatedEntity::RegisterForLogicUpdate(31);
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
       v10 = IEntity::Race(a2);
       RaceName = CS4DefineNames::GetRaceName(v10);
-      v11 = (void *)typeid(v26);
-      v17 = (const char *)type_info::name(v11);
-      v12 = CBuilding::BuildingTypeEx((unsigned __int8 *)a2);
+      v11 = typeid(v26);
+      v17 = type_info::name(v11);
+      v12 = CBuilding::BuildingTypeEx(a2);
       BuildingName = CS4DefineNames::GetBuildingName(v12);
       LOBYTE(LocalPlayerId) = BBSupportTracePrintF(2, "WARNING: Building %s (role %s) of race %s has no production delay!", BuildingName, v17, RaceName);
     }
@@ -227,13 +223,13 @@ void  CResidenceBuildingRole::LogicUpdate(class CBuilding * a2) {
     {
       *((_BYTE *)v26 + 5) = 0;
       *((_BYTE *)v26 + 4) = 3;
-      LOBYTE(LocalPlayerId) = IAnimatedEntity::RegisterForLogicUpdate(1);
+      LOBYTE(LocalPlayerId) = ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
     }
   }
   else
   {
     ++*((_BYTE *)v26 + 5);
-    LOBYTE(LocalPlayerId) = IAnimatedEntity::RegisterForLogicUpdate(14);
+    LOBYTE(LocalPlayerId) = ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
   }
   return LocalPlayerId;
 }
@@ -247,9 +243,9 @@ void  CResidenceBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjec
   int v5; // [esp-Ch] [ebp-10h]
 
   (*(void (__thiscall **)(CResidenceBuildingRole *, struct CBuilding *))(*(_DWORD *)this + 16))(this, a2);
-  v5 = IEntity::Type((unsigned __int16 *)a2);
+  v5 = IEntity::Type(a2);
   v3 = IEntity::Race(a2);
-  return CGfxManager::GetBuildingGfxInfo((int)a3, v3, v5, 1, (int)this + 76);
+  return ((int (__stdcall *)(int, int, int, int, int))CGfxManager::GetBuildingGfxInfo)((int)a3, v3, v5, 1, (int)this + 76);
 }
 
 
@@ -266,16 +262,16 @@ void  CResidenceBuildingRole::Init(class CBuilding * a2) {
   int v8; // [esp-4h] [ebp-Ch]
   int NrStrikingCarriers; // [esp+0h] [ebp-8h]
 
-  IBuildingRole::InitCommon((int)a2);
+  IBuildingRole::InitCommon(a2);
   *((_BYTE *)this + 4) = 3;
   *((_BYTE *)this + 380) = 0;
   v8 = *(_DWORD *)(*((_DWORD *)this + 94) + 496);
-  v2 = IEntity::OwnerId((unsigned __int8 *)a2);
-  CStatistic::ChangeResidenceSpace((CStatistic *)&g_cStatistic, v2, v8);
-  v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-  if ( CEcoSectorMgr::GetNrStrikingCarriers((CEcoSectorMgr *)g_cESMgr, v3) )
+  v2 = IEntity::OwnerId(a2);
+  CStatistic::ChangeResidenceSpace(&g_cStatistic, v2, v8);
+  v3 = IEntity::OwnerId(a2);
+  if ( CEcoSectorMgr::GetNrStrikingCarriers((CEcoSectorMgr *)g_cESMgr, v3) != 0 )
   {
-    v4 = IEntity::OwnerId((unsigned __int8 *)a2);
+    v4 = IEntity::OwnerId(a2);
     NrStrikingCarriers = CEcoSectorMgr::GetNrStrikingCarriers((CEcoSectorMgr *)g_cESMgr, v4);
     if ( NrStrikingCarriers < *(_DWORD *)(*((_DWORD *)this + 94) + 496) )
     {
@@ -284,20 +280,20 @@ void  CResidenceBuildingRole::Init(class CBuilding * a2) {
     else
     {
       *((_BYTE *)this + 380) = *(_DWORD *)(*((_DWORD *)this + 94) + 496) + 1;
-      v7 = IEntity::ID();
-      v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-      (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 8, v5, v7, 0);
+      v7 = ((int (__stdcall *)())IEntity::ID)();
+      v5 = IEntity::OwnerId(a2);
+      g_pAI->PostAIEvent(g_pAI, 8, v5, v7, 0);
     }
   }
-  CEcoSectorMgr::UpdateStrikeSettlers(g_cESMgr);
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  CEcoSectorMgr::UpdateStrikeSettlers((CEcoSectorMgr *)g_cESMgr);
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) != 0 )
   {
     (*(void (__thiscall **)(CResidenceBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   }
   result = this;
   if ( *((unsigned __int8 *)this + 380) < *(int *)(*((_DWORD *)this + 94) + 496) )
   {
-    return (CResidenceBuildingRole *)IAnimatedEntity::RegisterForLogicUpdate(31);
+    return (CResidenceBuildingRole *)((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
   }
   return result;
 }
@@ -311,9 +307,9 @@ void  CResidenceBuildingRole::PostLoadInit(class CBuilding * a2) {
   int result; // eax
   int v4; // [esp-4h] [ebp-8h]
 
-  v4 = IEntity::Type((unsigned __int16 *)a2);
+  v4 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
-  result = CBuildingInfoMgr::GetBuildingInfo(v2, v4);
+  result = (int)CBuildingInfoMgr::GetBuildingInfo(v2, v4);
   *((_DWORD *)this + 94) = result;
   return result;
 }
@@ -332,20 +328,20 @@ void  CResidenceBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   int v11; // [esp+34h] [ebp-4h]
 
   g_cBuildingInfo.m_iUnknown = 0;
-  g_cBuildingInfo.? = IEntity::Race(a2);
-  g_cBuildingInfo.? = IEntity::Type(a2);
-  MEMORY[0x3F1E4CC] = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
-  g_cBuildingInfo.? = 0;
-  g_cBuildingInfo.? = 0;
-  g_cBuildingInfo.? = 0;
-  g_cBuildingInfo.? = -1;
-  g_cBuildingInfo.? = CResidenceBuildingRole::ReturnRemainingSettlers(this);
+  g_cBuildingInfo.m_cRace = IEntity::Race(a2);
+  g_cBuildingInfo.m_cType = IEntity::Type(a2);
+  g_cBuildingSiteInfo.m_bSomeFlagBits = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
+  g_cBuildingInfo.m_unknownB = 0;
+  g_cBuildingInfo.m_bHasWorkingArea = 0;
+  g_cBuildingInfo.m_bInhabitants = 0;
+  g_cBuildingInfo.m_iBuildingProgress = -1;
+  g_cBuildingInfo.m_bRemainingSettlers = CResidenceBuildingRole::ReturnRemainingSettlers(this);
   v6 = IEntity::Type(a2);
   v3 = IEntity::OwnerId(a2);
-  g_cBuildingInfo.? = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v6, 0);
+  g_cBuildingInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, (S4_BUILDING_ENUM)v6, 0);
   v7 = IEntity::Type(a2);
   v4 = IEntity::OwnerId(a2);
-  g_cBuildingInfo.? = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
+  g_cBuildingInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, (S4_BUILDING_ENUM)v7, 1u);
   v9 = 604;
   if ( !a3 )
   {
@@ -378,13 +374,13 @@ int  CResidenceBuildingRole::ReturnRemainingSettlers(void) {
 // Decompiled from char *__thiscall CResidenceBuildingRole::CResidenceBuildingRole(char *this, int a2)
  CResidenceBuildingRole::CResidenceBuildingRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   char *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  IBuildingRole::IBuildingRole(this, a2);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this, (struct std::istream *)a2);
   v6 = 0;
   *(_DWORD *)v5 = &CResidenceBuildingRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
@@ -395,7 +391,7 @@ int  CResidenceBuildingRole::ReturnRemainingSettlers(void) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned char>(a2, v5 + 380);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v5 + 380);
   v6 = -1;
   return v5;
 }
@@ -411,8 +407,8 @@ void  CResidenceBuildingRole::Store(std::ostream & a2) {
   v4 = this;
   IBuildingRole::Store(this, a2);
   v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  return operator^<unsigned char>(a2, (int)v4 + 380);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
+  return (int)operator^<unsigned char>(a2, (unsigned __int8 *)&v4[1]);
 }
 
 
@@ -444,9 +440,9 @@ bool  CResidenceBuildingRole::CrushBuilding(void) {
   int v4; // [esp-4h] [ebp-8h]
 
   v4 = -*(_DWORD *)(*((_DWORD *)this + 94) + 496);
-  v1 = (unsigned __int8 *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  v2 = IEntity::OwnerId(v1);
-  CStatistic::ChangeResidenceSpace((CStatistic *)&g_cStatistic, v2, v4);
+  v1 = (unsigned __int8 *)((unsigned __int8 *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+  v2 = IEntity::OwnerId((IEntity *)v1);
+  CStatistic::ChangeResidenceSpace(&g_cStatistic, v2, v4);
   return 1;
 }
 

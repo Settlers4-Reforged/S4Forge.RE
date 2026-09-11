@@ -84,7 +84,7 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
   dword_416C7AC = CTileIdRef::TileId((CTileIdRef *)v51, v4);
   v5 = CWorldManager::Index(_iEndXY);
   dword_416C7B0 = CTileIdRef::TileId((CTileIdRef *)v51, v5);
-  if ( dword_416C7AC && (v50 = (a4 & 0x40) == 0, v49 = dword_416C7B0 == 0, !v49 || !v50) )
+  if ( dword_416C7AC != 0 && (v50 = (a4 & 0x40) == 0, !(v49 = dword_416C7B0 == 0) || !v50) )
   {
     if ( dword_416C7AC == dword_416C7B0 )
     {
@@ -170,8 +170,8 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
       {
         dword_416C798 = (int (__cdecl *)(_DWORD, _DWORD))sub_15D4EA0;
       }
-      v7 = (struct CTile *)ITiling::Tile(dword_416C7AC);
-      if ( (*(_DWORD *)dword_416C79C & CTile::Type(v7, v29[0])) != 0 )
+      v7 = ITiling::Tile(dword_416C7AC);
+      if ( (*(_DWORD *)dword_416C79C & ((int (__thiscall *)(void *, int))CTile::Type)(v7, v29[0])) != 0 )
       {
         CTrace::Print("AStarTiling::FindPath() failed: Start tile failed type check!");
         return 0;
@@ -194,10 +194,10 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
         CG24Closed1Parent16::Set((CG24Closed1Parent16 *)&v64[dword_416C7AC], 0, 0, 0, 0);
         v8 = ITiling::Tile(dword_416C7AC);
         v9 = (Y16X16 *)CTile::CenterXY(v8);
-        v10 = Y16X16::DistanceFast(v9, _iEndXY);
+        v10 = Y16X16::DistanceFast((int)v9, _iEndXY);
         COpenListEntry16::Set((COpenListEntry16 *)v30, dword_416C7AC, 0, v10);
         TPriorityQueue<COpenListEntry16,32768>::Push(v63, v30);
-        while ( !(unsigned __int8)TPriorityQueue<COpenListEntry16,32768>::Empty(v63) )
+        while ( (unsigned __int8)TPriorityQueue<COpenListEntry16,32768>::Empty(v63) == 0 )
         {
           v11 = (_DWORD *)TPriorityQueue<COpenListEntry16,32768>::Top(v63);
           v12 = v11[1];
@@ -211,20 +211,20 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
           v14 = COpenListEntry16::Index((COpenListEntry16 *)v39);
           v44 = CG24Closed1Parent16::State((CG24Closed1Parent16 *)&v64[v14]);
           v32 = *(_DWORD *)(dword_416C79C + 4 * v44);
-          v15 = (struct CTile *)ITiling::Tile(v56);
+          v15 = ITiling::Tile(v56);
           v45 = (unsigned __int8 *)CTile::LinkList(v15);
           for ( i = 0;
                 ;
                 ++i )
           {
-            v16 = CLinkList::Size(v45);
+            v16 = CLinkList::Size((struct CLinkList *)v45);
             if ( i >= v16 )
             {
               break;
             }
-            v60 = *(unsigned __int16 *)CLinkList::operator[](v45, i);
-            v17 = (struct CTile *)ITiling::Tile(v60);
-            v18 = CTile::Type(v17, v29[0]);
+            v60 = *CLinkList::operator[]((struct CLinkList *)v45, i);
+            v17 = ITiling::Tile(v60);
+            v18 = ((int (__thiscall *)(void *, int))CTile::Type)(v17, v29[0]);
             if ( (v32 & v18) == 0 )
             {
               v19 = dword_416C790(v56, v60);
@@ -244,7 +244,7 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
                   if ( v55 < v20 )
                   {
                     v61 = 1;
-                    if ( !CG24Closed1Parent16::Closed((CG24Closed1Parent16 *)&v64[v60]) )
+                    if ( CG24Closed1Parent16::Closed((CG24Closed1Parent16 *)&v64[v60]) == 0 )
                     {
                       for ( j = TPriorityQueue<COpenListEntry16,32768>::Last(v63);
                             j >= TPriorityQueue<COpenListEntry16,32768>::First();
@@ -269,11 +269,11 @@ int __cdecl CAStarTiling::FindPath(int _iStartXY, int _iEndXY, class CWaypoints 
                   v61 = 1;
                 }
               }
-              if ( v61 )
+              if ( v61 != 0 )
               {
                 v23 = ITiling::Tile(v60);
                 v24 = (Y16X16 *)CTile::CenterXY(v23);
-                v53 = Y16X16::DistanceFast(v24, _iEndXY);
+                v53 = Y16X16::DistanceFast((int)v24, _iEndXY);
                 if ( v53 < v43 )
                 {
                   v58 = v60;

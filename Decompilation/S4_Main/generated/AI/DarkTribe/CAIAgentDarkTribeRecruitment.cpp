@@ -3,7 +3,7 @@
 // Definitions for class CAIAgentDarkTribeRecruitment
 
 // address=[0x1301f00]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeRecruitment::Execute(CAIAgentDarkTribeRecruitment *this, unsigned int a2, unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeRecruitment::Execute(CAIDarkTribeSectorAgent *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -47,21 +47,21 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned in
   int v43; // [esp+5Ch] [ebp-8h]
 
   v3 = CAIDarkTribeSectorAgent::SectorAI(this);
-  v4 = (pairNode *)CAISectorAI::PlayerAI(v3);
+  v4 = (pairNode *)CAISectorAI::PlayerAI((CAISectorAI *)v3);
   v43 = CAIPlayerAI::PlayerId(v4);
   v31 = IAIEnvironment::MagicCurrentManaAmount(v43);
   if ( v31 < 20 )
   {
     return CAIAgent::ExecuteResult(0, 1u);
   }
-  v5 = (CAIPlayerScriptVars *)CAIPlayersScriptVars::operator[](v43);
+  v5 = (CAIPlayerScriptVars *)((CAIPlayerScriptVars *(__stdcall *)(int))CAIPlayersScriptVars::operator[])(v43);
   v35 = CAIPlayerScriptVars::Flags(v5);
-  NumberOfSettlers = IAIEnvironment::SettlerGetNumberOfSettlers(v43, 29);
-  v41 = IAIEnvironment::SettlerGetNumberOfSettlers(v43, 32);
-  v29 = IAIEnvironment::SettlerGetNumberOfSettlers(v43, 52);
-  v27 = IAIEnvironment::SettlerGetNumberOfSettlers(v43, 54);
-  IAIEnvironment::SettlerGetNumberOfSettlers(v43, 55);
-  IAIEnvironment::BuildingGetNumberOfBuildings(v43, 49, 2u);
+  NumberOfSettlers = IAIEnvironment::SettlerGetNumberOfSettlers(v43, SETTLER_SWORDSMAN_01);
+  v41 = IAIEnvironment::SettlerGetNumberOfSettlers(v43, SETTLER_BOWMAN_01);
+  v29 = IAIEnvironment::SettlerGetNumberOfSettlers(v43, SETTLER_DARKGARDENER);
+  v27 = IAIEnvironment::SettlerGetNumberOfSettlers(v43, SETTLER_SHAMAN);
+  IAIEnvironment::SettlerGetNumberOfSettlers(v43, SETTLER_SLAVED_SETTLER);
+  IAIEnvironment::BuildingGetNumberOfBuildings(v43, BUILDING_MUSHROOMFARM, 2u);
   v39 = v41 + NumberOfSettlers;
   v6 = CStaticConfigVarInt::operator int(&s_iDTFightersMin);
   v33 = 0;
@@ -80,7 +80,7 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned in
     }
     if ( (v35 & 0x20000000) == 0 )
     {
-      v26 = CStaticConfigVarInt::operator int(&s_iDTShamanMax);
+      v26 = CStaticConfigVarInt::operator int((CStaticConfigVarInt *)&s_iDTShamanMax);
       v24 = CStaticConfigVarInt::operator int(&s_iDTShamanMax2B);
       v22 = CStaticConfigVarInt::operator int(&s_iDTShamanMax2A256);
       v20 = CStaticConfigVarInt::operator int(&s_iDTShamanMax1B);
@@ -109,27 +109,26 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned in
   {
     v36 = sub_1303080(((v38 * NumberOfSettlers + 128) >> 8) - v41, 0, 10);
   }
-  v10 = CAIDarkTribeSectorAgent::SectorAI(this);
+  v10 = (CAISectorAI *)CAIDarkTribeSectorAgent::SectorAI(this);
   v11 = CAISectorAI::HeadquarterId(v10);
   IAIEnvironment::EventSendDarkTribeProductionMsg(v43, v11, 52, v33);
-  v12 = CAIDarkTribeSectorAgent::SectorAI(this);
+  v12 = (CAISectorAI *)CAIDarkTribeSectorAgent::SectorAI(this);
   v13 = CAISectorAI::HeadquarterId(v12);
   IAIEnvironment::EventSendDarkTribeProductionMsg(v43, v13, 54, v32);
-  if ( v39 >= CAIPlayersScriptVars::GetValue(g_cAIPlayersScriptVars, v43, 5) )
+  if ( v39 < CAIPlayersScriptVars::GetValue((CAIPlayersScriptVars *)g_cAIPlayersScriptVars, v43, 5) )
   {
-    return CAIAgent::ExecuteResult(0, 0);
+    if ( v31 >= 50 )
+    {
+      v37 += 4;
+      v36 += (4 * v38 + 128) >> 8;
+    }
+    v14 = (CAISectorAI *)CAIDarkTribeSectorAgent::SectorAI(this);
+    v15 = CAISectorAI::HeadquarterId(v14);
+    IAIEnvironment::EventSendDarkTribeProductionMsg(v43, v15, 29, v37);
+    v16 = (CAISectorAI *)CAIDarkTribeSectorAgent::SectorAI(this);
+    v17 = CAISectorAI::HeadquarterId(v16);
+    IAIEnvironment::EventSendDarkTribeProductionMsg(v43, v17, 32, v36);
   }
-  if ( v31 >= 50 )
-  {
-    v37 += 4;
-    v36 += (4 * v38 + 128) >> 8;
-  }
-  v14 = CAIDarkTribeSectorAgent::SectorAI(this);
-  v15 = CAISectorAI::HeadquarterId(v14);
-  IAIEnvironment::EventSendDarkTribeProductionMsg(v43, v15, 29, v37);
-  v16 = CAIDarkTribeSectorAgent::SectorAI(this);
-  v17 = CAISectorAI::HeadquarterId(v16);
-  IAIEnvironment::EventSendDarkTribeProductionMsg(v43, v17, 32, v36);
   return CAIAgent::ExecuteResult(0, 0);
 }
 
@@ -138,14 +137,14 @@ unsigned int  CAIAgentDarkTribeRecruitment::Execute(unsigned int a2, unsigned in
 // Decompiled from CAIAgentDarkTribeRecruitment *__thiscall CAIAgentDarkTribeRecruitment::CAIAgentDarkTribeRecruitment(CAIAgentDarkTribeRecruitment *this)
  CAIAgentDarkTribeRecruitment::CAIAgentDarkTribeRecruitment(void) {
   
-  CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "dark tribe recruitment");
+  CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent((CAIDarkTribeSectorAgent *)this, "dark tribe recruitment");
   *(_DWORD *)this = &CAIAgentDarkTribeRecruitment::_vftable_;
   return this;
 }
 
 
 // address=[0x1322f60]
-// Decompiled from void __thiscall CAIAgentDarkTribeRecruitment::~CAIAgentDarkTribeRecruitment(CAIAgentDarkTribeRecruitment *this)
+// Decompiled from void __thiscall CAIAgentDarkTribeRecruitment::~CAIAgentDarkTribeRecruitment(CAIScheduler **this)
  CAIAgentDarkTribeRecruitment::~CAIAgentDarkTribeRecruitment(void) {
   
   CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(this);

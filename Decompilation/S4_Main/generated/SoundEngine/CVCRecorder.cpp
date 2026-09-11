@@ -36,20 +36,20 @@
 
   *this = &CVCRecorder::_vftable_;
   CVCRecorder::Shutdown((CVCRecorder *)this);
-  if ( this[1] )
+  if ( *(this + 1) != 0 )
   {
     for ( i = 0;
-          i < (int)this[9];
+          i < (int)*(this + 9);
           ++i )
     {
-      if ( *((_DWORD *)this[1] + i) )
+      if ( *((_DWORD *)*(this + 1) + i) != 0 )
       {
-        operator delete[](*((void **)this[1] + i));
-        *((_DWORD *)this[1] + i) = 0;
+        operator delete[](*((void **)*(this + 1) + i));
+        *((_DWORD *)*(this + 1) + i) = 0;
       }
     }
-    operator delete[](this[1]);
-    this[1] = 0;
+    operator delete[](*(this + 1));
+    *(this + 1) = 0;
   }
 }
 
@@ -102,14 +102,14 @@ void __stdcall CVCRecorder::RecordInputCB(void const * Src, long Size, unsigned 
 
 
 // address=[0x2fd74e0]
-// Decompiled from int __thiscall CVCRecorder::CopyDataToEncoder(int this, void *a2, int a3, int a4)
+// Decompiled from size_t __thiscall CVCRecorder::CopyDataToEncoder(int this, void *a2, int a3, int a4)
 long  CVCRecorder::CopyDataToEncoder(void * a2, long a3, long a4) {
   
   size_t v5; // [esp+4h] [ebp-Ch]
 
   if ( *(_DWORD *)(this + 8) == *(_DWORD *)(this + 12) || *(_DWORD *)(this + 8) == -1 )
   {
-    if ( *(_BYTE *)(this + 98) )
+    if ( *(_BYTE *)(this + 98) != 0 )
     {
       return 0;
     }
@@ -131,19 +131,18 @@ long  CVCRecorder::CopyDataToEncoder(void * a2, long a3, long a4) {
     }
     memcpy(a2, (const void *)(*(_DWORD *)(this + 20) + *(_DWORD *)(*(_DWORD *)(this + 4) + 4 * *(_DWORD *)(this + 8))), v5);
     *(_DWORD *)(this + 20) += v5;
-    if ( *(_DWORD *)(this + 20) != *(_DWORD *)(this + 16) )
+    if ( *(_DWORD *)(this + 20) == *(_DWORD *)(this + 16) )
     {
-      return v5;
+      if ( *(_DWORD *)(this + 8) == *(_DWORD *)(this + 36) - 1 )
+      {
+        *(_DWORD *)(this + 8) = 0;
+      }
+      else
+      {
+        ++*(_DWORD *)(this + 8);
+      }
+      *(_DWORD *)(this + 20) = 0;
     }
-    if ( *(_DWORD *)(this + 8) == *(_DWORD *)(this + 36) - 1 )
-    {
-      *(_DWORD *)(this + 8) = 0;
-    }
-    else
-    {
-      ++*(_DWORD *)(this + 8);
-    }
-    *(_DWORD *)(this + 20) = 0;
     return v5;
   }
 }
@@ -153,7 +152,7 @@ long  CVCRecorder::CopyDataToEncoder(void * a2, long a3, long a4) {
 // Decompiled from int __thiscall CVCRecorder::GetEncodedData(CVCRecorder *this, signed __int8 *a2, int a3)
 int  CVCRecorder::GetEncodedData(signed char * a2, int a3) {
   
-  if ( !*((_DWORD *)this + 20) && BBSupportDbgReport(2, "VCRecorder.cpp", 425, "m_hTransmitStream") == 1 )
+  if ( *((_DWORD *)this + 20) == 0 && BBSupportDbgReport(2, "VCRecorder.cpp", 425, "m_hTransmitStream") == 1 )
   {
     __debugbreak();
   }
@@ -176,20 +175,19 @@ void  CVCRecorder::Shutdown(void) {
 
   result = this;
   *((_BYTE *)this + 98) = 0;
-  if ( *((_DWORD *)this + 20) )
+  if ( *((_DWORD *)this + 20) != 0 )
   {
     (*((void (__stdcall **)(_DWORD))this + 22))(*((_DWORD *)this + 20));
     result = this;
     *((_DWORD *)this + 20) = 0;
   }
-  if ( !*((_DWORD *)this + 12) )
+  if ( *((_DWORD *)this + 12) != 0 )
   {
-    return result;
+    AIL_set_input_state(*((_DWORD *)this + 12), 0);
+    AIL_close_input(*((_DWORD *)this + 12));
+    result = this;
+    *((_DWORD *)this + 12) = 0;
   }
-  AIL_set_input_state(*((_DWORD *)this + 12), 0);
-  AIL_close_input(*((_DWORD *)this + 12));
-  result = this;
-  *((_DWORD *)this + 12) = 0;
   return result;
 }
 
@@ -209,60 +207,59 @@ void  CVCRecorder::ToggleRecording(bool a2) {
   CVCRecorder *result; // eax
 
   result = this;
-  if ( *((_BYTE *)this + 98) == a2 )
-  {
-    return result;
-  }
-  result = this;
-  if ( *((_BYTE *)this + 97) )
-  {
-    if ( *((_DWORD *)this + 12) )
-    {
-      if ( a2 )
-      {
-        if ( !AIL_set_input_state(*((_DWORD *)this + 12), 1) )
-        {
-          AIL_close_input(*((_DWORD *)this + 12));
-          *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
-          if ( !*((_DWORD *)this + 12) )
-          {
-            BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Failed to re-open input driver");
-          }
-          if ( !AIL_set_input_state(*((_DWORD *)this + 12), 1) )
-          {
-            BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Failed to start recording");
-          }
-        }
-        *((_BYTE *)this + 98) = 1;
-        return (CVCRecorder *)BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Recording started");
-      }
-      else
-      {
-        *((_BYTE *)this + 98) = 0;
-      }
-    }
-  }
-  else if ( a2 )
-  {
-    *((_BYTE *)this + 98) = 1;
-    AIL_digital_handle_release(*((_DWORD *)this + 13));
-    *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
-    result = (CVCRecorder *)AIL_set_input_state(*((_DWORD *)this + 12), 1);
-    if ( !result )
-    {
-      return (CVCRecorder *)BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Failed to start recording ( half duplex )");
-    }
-  }
-  else
+  if ( *((_BYTE *)this + 98) != a2 )
   {
     result = this;
-    if ( *((_DWORD *)this + 12) )
+    if ( *((_BYTE *)this + 97) != 0 )
     {
-      *((_BYTE *)this + 98) = 0;
-      AIL_set_input_state(*((_DWORD *)this + 12), 0);
-      AIL_close_input(*((_DWORD *)this + 12));
-      *((_DWORD *)this + 12) = 0;
-      return (CVCRecorder *)AIL_digital_handle_reacquire(*((_DWORD *)this + 13));
+      if ( *((_DWORD *)this + 12) != 0 )
+      {
+        if ( a2 )
+        {
+          if ( AIL_set_input_state(*((_DWORD *)this + 12), 1) == 0 )
+          {
+            AIL_close_input(*((_DWORD *)this + 12));
+            *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
+            if ( *((_DWORD *)this + 12) == 0 )
+            {
+              BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Failed to re-open input driver");
+            }
+            if ( AIL_set_input_state(*((_DWORD *)this + 12), 1) == 0 )
+            {
+              BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Failed to start recording");
+            }
+          }
+          *((_BYTE *)this + 98) = 1;
+          return (CVCRecorder *)BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Recording started");
+        }
+        else
+        {
+          *((_BYTE *)this + 98) = 0;
+        }
+      }
+    }
+    else if ( a2 )
+    {
+      *((_BYTE *)this + 98) = 1;
+      AIL_digital_handle_release(*((_DWORD *)this + 13));
+      *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
+      result = (CVCRecorder *)AIL_set_input_state(*((_DWORD *)this + 12), 1);
+      if ( result == 0 )
+      {
+        return (CVCRecorder *)BBSupportTracePrintF(0, "VoiceChat : VCRecorder::ToggleRecording : Failed to start recording ( half duplex )");
+      }
+    }
+    else
+    {
+      result = this;
+      if ( *((_DWORD *)this + 12) != 0 )
+      {
+        *((_BYTE *)this + 98) = 0;
+        AIL_set_input_state(*((_DWORD *)this + 12), 0);
+        AIL_close_input(*((_DWORD *)this + 12));
+        *((_DWORD *)this + 12) = 0;
+        return (CVCRecorder *)AIL_digital_handle_reacquire(*((_DWORD *)this + 13));
+      }
     }
   }
   return result;
@@ -300,7 +297,7 @@ void  CVCRecorder::CalcNoiseVol(void) {
   int result; // eax
 
   *((_DWORD *)this + 26) = 40;
-  while ( *((_DWORD *)this + 26) )
+  while ( *((_DWORD *)this + 26) != 0 )
   {
     Sleep(5u);
   }
@@ -336,7 +333,7 @@ bool  CVCRecorder::InitEncoder(char * a2) {
 
   v8 = this;
   *((_DWORD *)this + 11) = RIB_find_file_provider("ASI codec", "Output file types", a2);
-  if ( *((_DWORD *)v8 + 11) )
+  if ( *((_DWORD *)v8 + 11) != 0 )
   {
     v9[0] = 0;
     v9[1] = "ASI_stream_open";
@@ -350,7 +347,7 @@ bool  CVCRecorder::InitEncoder(char * a2) {
     v9[9] = "ASI_stream_process";
     v9[10] = (char *)v8 + 92;
     v9[11] = 0;
-    if ( RIB_request_interface(*((_DWORD *)v8 + 11), "ASI stream", 3, v9) )
+    if ( RIB_request_interface(*((_DWORD *)v8 + 11), "ASI stream", 3, v9) != 0 )
     {
       BBSupportTracePrintF(0, "VoiceChat : CVCRecorder::InitEncoder : Failed getting first RIB_INTERFACE");
       return 0;
@@ -365,7 +362,7 @@ bool  CVCRecorder::InitEncoder(char * a2) {
       v5[5] = "Maximum frame size";
       v5[6] = &v7;
       v5[7] = 0;
-      if ( RIB_request_interface(*((_DWORD *)v8 + 11), "ASI codec", 2, v5) )
+      if ( RIB_request_interface(*((_DWORD *)v8 + 11), "ASI codec", 2, v5) != 0 )
       {
         BBSupportTracePrintF(0, "VoiceChat : CVCRecorder::InitEncoder : Failed getting second RIB_INTERFACE");
         return 0;
@@ -376,7 +373,7 @@ bool  CVCRecorder::InitEncoder(char * a2) {
         *((_DWORD *)v8 + 8) = v3;
         v4 = (*((int (__stdcall **)(CVCRecorder *, int (__stdcall *)(int, void *, size_t, int), _DWORD))v8 + 21))(v8, CVCRecorder::EncodeDataCB, 0);
         *((_DWORD *)v8 + 20) = v4;
-        if ( *((_DWORD *)v8 + 20) )
+        if ( *((_DWORD *)v8 + 20) != 0 )
         {
           return 1;
         }
@@ -408,18 +405,18 @@ void  CVCRecorder::RecordInput(void const * Src, long Size) {
   char v10; // [esp+17h] [ebp-1h]
 
   v10 = 0;
-  if ( !*(_BYTE *)(this + 98) )
+  if ( *(_BYTE *)(this + 98) == 0 )
   {
     AIL_set_input_state(*(_DWORD *)(this + 48), 0);
     BBSupportTracePrintF(0, "VoiceChat : VCRecorder::RecordInput : Recording ended");
     v10 = 1;
   }
-  if ( !*(_BYTE *)(this + 99) )
+  if ( *(_BYTE *)(this + 99) == 0 )
   {
     goto LABEL_13;
   }
   v8 = 0;
-  if ( !v10 )
+  if ( v10 == 0 )
   {
     v6 = Src;
     for ( i = 0;
@@ -429,56 +426,51 @@ void  CVCRecorder::RecordInput(void const * Src, long Size) {
       v8 += j__abs(*v6++);
     }
     v8 /= Size;
-    if ( *(_DWORD *)(this + 104) )
+    if ( *(_DWORD *)(this + 104) != 0 )
     {
       *(_DWORD *)(this + 100) += v8;
       --*(_DWORD *)(this + 104);
     }
   }
-  if ( v8 < *(_DWORD *)(this + 100) )
+  if ( v8 >= *(_DWORD *)(this + 100) || (LOBYTE(v3) = this, *(_DWORD *)(this + 20) != 0) )
   {
-    LOBYTE(v3) = this;
-    if ( !*(_DWORD *)(this + 20) )
-    {
-      return v3;
-    }
-  }
 LABEL_13:
-  if ( !*(_BYTE *)(this + 96) || v10 )
-  {
-    v5 = *(void **)(*(_DWORD *)(this + 4) + 4 * *(_DWORD *)(this + 12));
-    if ( Size < *(_DWORD *)(this + 16) )
+    if ( *(_BYTE *)(this + 96) == 0 || v10 != 0 )
     {
-      memset(v5, 0, *(_DWORD *)(this + 16));
-    }
-    if ( v10 )
-    {
-      memset(v5, 0, Size);
-    }
-    else
-    {
-      memcpy(v5, Src, Size);
-    }
-    LOBYTE(v3) = this;
-    if ( *(_DWORD *)(this + 12) == *(_DWORD *)(this + 36) - 1 )
-    {
-      *(_DWORD *)(this + 12) = 0;
-    }
-    else
-    {
-      v3 = *(_DWORD *)(this + 12) + 1;
-      *(_DWORD *)(this + 12) = v3;
-    }
-    if ( *(_DWORD *)(this + 8) == -1 )
-    {
+      v5 = *(void **)(*(_DWORD *)(this + 4) + 4 * *(_DWORD *)(this + 12));
+      if ( Size < *(_DWORD *)(this + 16) )
+      {
+        memset(v5, 0, *(_DWORD *)(this + 16));
+      }
+      if ( v10 != 0 )
+      {
+        memset(v5, 0, Size);
+      }
+      else
+      {
+        memcpy(v5, Src, Size);
+      }
       LOBYTE(v3) = this;
-      *(_DWORD *)(this + 8) = 0;
-      *(_DWORD *)(this + 20) = 0;
+      if ( *(_DWORD *)(this + 12) == *(_DWORD *)(this + 36) - 1 )
+      {
+        *(_DWORD *)(this + 12) = 0;
+      }
+      else
+      {
+        v3 = *(_DWORD *)(this + 12) + 1;
+        *(_DWORD *)(this + 12) = v3;
+      }
+      if ( *(_DWORD *)(this + 8) == -1 )
+      {
+        LOBYTE(v3) = this;
+        *(_DWORD *)(this + 8) = 0;
+        *(_DWORD *)(this + 20) = 0;
+      }
     }
-  }
-  else
-  {
-    LOBYTE(v3) = CVCRecorder::Downsample((CVCRecorder *)this, Src, Size);
+    else
+    {
+      LOBYTE(v3) = CVCRecorder::Downsample((CVCRecorder *)this, Src, Size);
+    }
   }
   return v3;
 }
@@ -505,10 +497,10 @@ bool  CVCRecorder::Downsample(void const * a2, int a3) {
   v12 = a2;
   v8 = a3;
   v5 = *((_DWORD *)this + 6) + *(_DWORD *)(*((_DWORD *)this + 1) + 4 * *((_DWORD *)this + 3));
-  while ( v8 )
+  while ( v8 != 0 )
   {
     v4 = AIL_process_digital_audio(v5, *((_DWORD *)this + 4) - *((_DWORD *)this + 6), 8000, 1, 1, v7);
-    if ( !v4 )
+    if ( v4 == 0 )
     {
       return 0;
     }
@@ -553,7 +545,7 @@ bool  CVCRecorder::InitInputDriver(int a2) {
   *((_DWORD *)this + 19) = this;
   *((_DWORD *)this + 16) = 8000;
   *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
-  if ( *((_DWORD *)this + 12) )
+  if ( *((_DWORD *)this + 12) != 0 )
   {
     *((_DWORD *)this + 7) = 8000;
     return 1;
@@ -564,7 +556,7 @@ bool  CVCRecorder::InitInputDriver(int a2) {
     *((_DWORD *)this + 16) = a2;
     *((_DWORD *)this + 18) = CVCRecorder::CalcInputBufferSize(this, a2);
     *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
-    if ( *((_DWORD *)this + 12) )
+    if ( *((_DWORD *)this + 12) != 0 )
     {
       *((_DWORD *)this + 7) = a2;
       if ( *((int *)this + 7) > 8000 )
@@ -581,7 +573,7 @@ bool  CVCRecorder::InitInputDriver(int a2) {
       *((_DWORD *)this + 16) = 8000;
       *((_DWORD *)this + 18) = *((_DWORD *)this + 4);
       *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
-      if ( *((_DWORD *)this + 12) )
+      if ( *((_DWORD *)this + 12) != 0 )
       {
         *((_DWORD *)this + 7) = 8000;
         AIL_close_input(*((_DWORD *)this + 12));
@@ -595,7 +587,7 @@ bool  CVCRecorder::InitInputDriver(int a2) {
         *((_DWORD *)this + 16) = a2;
         *((_DWORD *)this + 18) = CVCRecorder::CalcInputBufferSize(this, a2);
         *((_DWORD *)this + 12) = AIL_open_input((char *)this + 56);
-        if ( *((_DWORD *)this + 12) )
+        if ( *((_DWORD *)this + 12) != 0 )
         {
           *((_DWORD *)this + 7) = a2;
           if ( *((int *)this + 7) > 8000 )
@@ -640,8 +632,8 @@ int  CVCRecorder::CalcInputBufferSize(int a2) {
   v12 = 16;
   v13 = 1;
   v8 = 1;
-  v9 = (void *)**((_DWORD **)this + 1);
-  v14 = (void *)**((_DWORD **)this + 1);
+  v9 = **((void ***)this + 1);
+  v14 = **((void ***)this + 1);
   v10 = *((_DWORD *)this + 4);
   Size = AIL_size_processed_digital_audio(a2, 1, 1, &v8);
   v4 = operator new[](Size);

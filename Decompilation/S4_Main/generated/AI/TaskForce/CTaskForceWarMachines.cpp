@@ -14,7 +14,7 @@
 
 
 // address=[0x132a2e0]
-// Decompiled from void __thiscall CTaskForceWarMachines::~CTaskForceWarMachines(CTaskForceWarMachines *this)
+// Decompiled from void __thiscall CTaskForceWarMachines::~CTaskForceWarMachines(CAITaskForce **this)
  CTaskForceWarMachines::~CTaskForceWarMachines(void) {
   
   CAITaskForceEx::~CAITaskForceEx(this);
@@ -57,7 +57,7 @@ void  CTaskForceWarMachines::InitWarMachineWalk(bool a2) {
   CAIEntityInfo *Entity; // [esp+Ch] [ebp-8h]
 
   Entity = CAITaskForce::FirstEntity(this);
-  if ( Entity )
+  if ( Entity != 0 )
   {
     v4 = CAIEntityInfo::EntityId(Entity);
     if ( (int)CAITaskForceEx::WaypointXY(this) > 0 )
@@ -84,17 +84,17 @@ int  CTaskForceWarMachines::CatapultSectorId(void)const {
 
   v5 = 0;
   Entity = CAITaskForce::FirstEntity(this);
-  if ( !Entity )
+  if ( Entity != 0 )
   {
-    return v5;
+    iEntityId = CAIEntityInfo::EntityId(Entity);
+    if ( iEntityId <= 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 2305, "iEntityId > 0") == 1 )
+    {
+      __debugbreak();
+    }
+    IAIEnvironment::EntityGetPosition(iEntityId, &v2, &v3);
+    return IAIEnvironment::WorldCatapultSectorId(v2, v3);
   }
-  iEntityId = CAIEntityInfo::EntityId(Entity);
-  if ( iEntityId <= 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 2305, "iEntityId > 0") == 1 )
-  {
-    __debugbreak();
-  }
-  IAIEnvironment::EntityGetPosition(iEntityId, &v2, &v3);
-  return IAIEnvironment::WorldCatapultSectorId(v2, v3);
+  return v5;
 }
 
 
@@ -108,17 +108,16 @@ int  CTaskForceWarMachines::CalculateBuildingDestination(int a2) {
   int v7; // [esp+10h] [ebp-4h]
 
   v6 = -1;
-  if ( a2 <= 0 )
+  if ( a2 > 0 )
   {
-    return v6;
+    v7 = CTaskForceWarMachines::CatapultSectorId(this);
+    if ( v7 > 0 )
+    {
+      IAIEnvironment::BuildingGetEnsignPosition(a2, &v3, &v4);
+      return IAIEnvironment::FindNearestCatapultSectorPosition(v7, v3, v4, 15);
+    }
   }
-  v7 = CTaskForceWarMachines::CatapultSectorId(this);
-  if ( v7 <= 0 )
-  {
-    return v6;
-  }
-  IAIEnvironment::BuildingGetEnsignPosition(a2, &v3, &v4);
-  return IAIEnvironment::FindNearestCatapultSectorPosition(v7, v3, v4, 15);
+  return v6;
 }
 
 
@@ -188,21 +187,20 @@ void  CTaskForceWarMachines::Execute(void) {
           return;
         case 101:
           Entity = CAITaskForce::FirstEntity(this);
-          if ( !Entity )
+          if ( Entity != 0 )
           {
-            return;
+            iEntityId = CAIEntityInfo::EntityId(Entity);
+            if ( iEntityId <= 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 2388, "iEntityId > 0") == 1 )
+            {
+              __debugbreak();
+            }
+            if ( IAIEnvironment::MovingEntityWalkingState(iEntityId) < 64 )
+            {
+              CAITaskForce::SetState(this, 103);
+              goto LABEL_2;
+            }
           }
-          iEntityId = CAIEntityInfo::EntityId(Entity);
-          if ( iEntityId <= 0 && BBSupportDbgReport(2, "AI\\AI_TaskForcesEx.cpp", 2388, "iEntityId > 0") == 1 )
-          {
-            __debugbreak();
-          }
-          if ( IAIEnvironment::MovingEntityWalkingState(iEntityId) >= 64 )
-          {
-            return;
-          }
-          CAITaskForce::SetState(this, 103);
-          goto LABEL_2;
+          return;
         case 102:
           CAITaskForceEx::FindWaypoints(this);
           CTaskForceWarMachines::InitWarMachineWalk(this, 0);

@@ -40,8 +40,8 @@ void  CAIPlayerEvaluation::EvaluatePlayer(int a2) {
   DWORD NumberOfRandCalls; // [esp-4h] [ebp-8h]
 
   this->m_uAITick = IAIEnvironment::TickCounter();
-  NumberOfRandCalls = CRandom16::GetNumberOfRandCalls((CRandom16 *)&g_pGameData->m_sRandom);
-  Seed = CRandom16::GetSeed((CRandom16 *)&g_pGameData->m_sRandom);
+  NumberOfRandCalls = CRandom16::GetNumberOfRandCalls(&g_pGameData->m_sRandom);
+  Seed = CRandom16::GetSeed(&g_pGameData->m_sRandom);
   IMessageTracer::PushFormatedInts(g_pMsgTracer2, "==> Evaluation: AI_tick %u, seed 0x%08x, counter %u", this->m_uAITick, Seed, NumberOfRandCalls);
   CAIPlayerEvaluation::EvaluateGoods(this, a2);
   CAIPlayerEvaluation::EvaluateWarriors(this, a2);
@@ -67,25 +67,25 @@ void  CAIPlayerEvaluation::EvaluateGoods(int a2) {
   int iRace; // [esp+0h] [ebp-Ch]
 
   iRace = IAIEnvironment::PlayerRace(a2);
-  this->m_uSwordCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_SWORD);
-  this->m_uBowCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_BOW);
+  this->m_uSwordCount = CStatistic::GetGood(&g_cStatistic, a2, GOOD_SWORD);
+  this->m_uBowCount = CStatistic::GetGood(&g_cStatistic, a2, GOOD_BOW);
   switch ( iRace )
   {
     case 1:
-      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_BATTLEAXE);
+      this->m_uSpecialWeaponCount = CStatistic::GetGood(&g_cStatistic, a2, GOOD_BATTLEAXE);
       break;
     case 2:
-      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_BLOWGUN);
+      this->m_uSpecialWeaponCount = CStatistic::GetGood(&g_cStatistic, a2, GOOD_BLOWGUN);
       break;
     case 4:
-      this->m_uSpecialWeaponCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_BACKPACKCATAPULT);
+      this->m_uSpecialWeaponCount = CStatistic::GetGood(&g_cStatistic, a2, GOOD_BACKPACKCATAPULT);
       break;
     default:
       this->m_uSpecialWeaponCount = 0;
       break;
   }
   this->m_uTotalWeaponCount = this->m_uSpecialWeaponCount + this->m_uBowCount + this->m_uSwordCount;
-  this->m_uGoldCount = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, GOOD_GOLDBAR);
+  this->m_uGoldCount = CStatistic::GetGood(&g_cStatistic, a2, GOOD_GOLDBAR);
   IMessageTracer::PushFormatedInts(g_pMsgTracer2, "CAIPlayerEvaluation(Goods): Player %i: %i %i %i %i", a2, this->m_uSwordCount, this->m_uBowCount, this->m_uSpecialWeaponCount, this->m_uGoldCount);
 }
 
@@ -108,7 +108,7 @@ void  CAIPlayerEvaluation::EvaluateWarriors(int _iPlayerId) {
 
   memset(aSettlerWeights, 0, sizeof(aSettlerWeights));
   for ( i = 0;
-        s_sAISettlerEvalWeights[i].m_iType;
+        s_sAISettlerEvalWeights[i].m_iType != SETTLER_NO_SETTLER;
         ++i )
   {
     uNumberOfSettlers = IAIEnvironment::SettlerGetNumberOfSettlers(_iPlayerId, s_sAISettlerEvalWeights[i].m_iType);
@@ -118,10 +118,10 @@ void  CAIPlayerEvaluation::EvaluateWarriors(int _iPlayerId) {
     aSettlerWeights[2 * iEvalType + 1] += s_sAISettlerEvalWeights[i].m_iWeight * uNumberOfSettlers;
   }
   for ( j = 0;
-        s_sAIOfferedSettlerEvalWeights[j].m_iType;
+        s_sAIOfferedSettlerEvalWeights[j].m_iType != SETTLER_NO_SETTLER;
         ++j )
   {
-    NumberOfOfferedSettlers = CSettlerMgr::GetNumberOfOfferedSettlers((CSettlerMgr *)g_cSettlerMgr, _iPlayerId, s_sAIOfferedSettlerEvalWeights[j].m_iType);
+    NumberOfOfferedSettlers = CSettlerMgr::GetNumberOfOfferedSettlers(&g_cSettlerMgr, _iPlayerId, s_sAIOfferedSettlerEvalWeights[j].m_iType);
     iEvalType = s_sAIOfferedSettlerEvalWeights[j].m_iEvalType;
     IMessageTracer::PushFormatedInts(g_pMsgTracer2, "SettlerEvalsEx %i, Eval type %i number: %i", j, iEvalType, NumberOfOfferedSettlers);
     aSettlerWeights[2 * iEvalType] += NumberOfOfferedSettlers;
@@ -166,7 +166,7 @@ void  CAIPlayerEvaluation::EvaluateBuildings(int a2) {
   this->m_uSmallTowerCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, BUILDING_GUARDTOWERSMALL, 2u);
   this->m_uBigTowerCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, BUILDING_GUARDTOWERBIG, 2u);
   this->m_uCastleCount = IAIEnvironment::BuildingGetNumberOfBuildings(a2, BUILDING_CASTLE, 2u);
-  while ( s_sAIBuildingEvalWeights[i].m_iType )
+  while ( s_sAIBuildingEvalWeights[i].m_iType != BUILDING_NO_BUILDING )
   {
     NumberOfBuildings = IAIEnvironment::BuildingGetNumberOfBuildings(a2, s_sAIBuildingEvalWeights[i].m_iType, 2u);
     uTotalWarBuildingCount += NumberOfBuildings;

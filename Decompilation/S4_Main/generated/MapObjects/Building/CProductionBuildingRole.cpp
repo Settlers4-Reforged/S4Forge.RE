@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CProductionBuildingRole::New(int a1)
 class CPersistence * __cdecl CProductionBuildingRole::New(std::istream & a1) {
   
-  if ( operator new(0x1B0u) )
+  if ( operator new(0x1B0u) != 0 )
   {
-    return CProductionBuildingRole::CProductionBuildingRole(a1);
+    return ((_DWORD (__stdcall *)(int))CProductionBuildingRole::CProductionBuildingRole)(a1);
   }
   else
   {
@@ -21,7 +21,7 @@ class CPersistence * __cdecl CProductionBuildingRole::New(std::istream & a1) {
 // Decompiled from CProductionBuildingRole *__thiscall CProductionBuildingRole::CProductionBuildingRole(CProductionBuildingRole *this)
  CProductionBuildingRole::CProductionBuildingRole(void) {
   
-  IBuildingRole::IBuildingRole(this);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this);
   *(_DWORD *)this = &CProductionBuildingRole::_vftable_;
   std::vector<unsigned short>::vector<unsigned short>((char *)this + 384);
   std::vector<unsigned short>::vector<unsigned short>((char *)this + 400);
@@ -58,48 +58,48 @@ int  CProductionBuildingRole::GetBuildingRole(void) {
 
 
 // address=[0x14fdb70]
-// Decompiled from int __cdecl CProductionBuildingRole::Load(int a1)
+// Decompiled from int __cdecl CProductionBuildingRole::Load(struct std::istream *a1)
 class CProductionBuildingRole * __cdecl CProductionBuildingRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CProductionBuildingRole__RTTI_Type_Descriptor_, 1);
 }
 
 
 // address=[0x1516150]
-// Decompiled from int __thiscall CProductionBuildingRole::LogicUpdate(_BYTE *this, _DWORD *a2)
+// Decompiled from EntityFlag __thiscall CProductionBuildingRole::LogicUpdate(_BYTE *this, IEntity *a2)
 void  CProductionBuildingRole::LogicUpdate(class CBuilding * a2) {
   
-  int result; // eax
+  EntityFlag result; // eax
   unsigned __int8 *v3; // eax
   char v4[24]; // [esp+4h] [ebp-3Ch] BYREF
-  int v5; // [esp+1Ch] [ebp-24h]
-  int v6; // [esp+20h] [ebp-20h]
-  _DWORD *SettlerPtr; // [esp+24h] [ebp-1Ch]
-  int v8; // [esp+28h] [ebp-18h]
+  struct CEntityEvent *v5; // [esp+1Ch] [ebp-24h]
+  struct CEntityEvent *v6; // [esp+20h] [ebp-20h]
+  IEntity *SettlerPtr; // [esp+24h] [ebp-1Ch]
+  CSettler *v8; // [esp+28h] [ebp-18h]
   char v9; // [esp+2Ch] [ebp-14h]
   _BYTE *v10; // [esp+30h] [ebp-10h]
   int v11; // [esp+3Ch] [ebp-4h]
 
   v10 = this;
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
-  if ( result )
+  if ( result != 0 )
   {
-    result = (*(int (__thiscall **)(_BYTE *, _DWORD *, int))(*(_DWORD *)v10 + 88))(v10, a2, 1);
+    result = (*(int (__thiscall **)(_BYTE *, IEntity *, int))(*(_DWORD *)v10 + 88))(v10, a2, 1);
   }
   v9 = v10[4];
   if ( v9 == 1 )
   {
-    result = (*(int (__thiscall **)(_BYTE *, _DWORD *))(*(_DWORD *)v10 + 120))(v10, a2);
-    if ( !(_BYTE)result )
+    result = (*(int (__thiscall **)(_BYTE *, IEntity *))(*(_DWORD *)v10 + 120))(v10, a2);
+    if ( (_BYTE)result != 0 )
     {
-      return IAnimatedEntity::RegisterForLogicUpdate(31);
+      v10[4] = 3;
+      return result;
     }
-    v10[4] = 3;
-    return result;
+    return ((_DWORD (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
   }
   if ( v9 == 2 )
   {
@@ -107,39 +107,36 @@ void  CProductionBuildingRole::LogicUpdate(class CBuilding * a2) {
     {
       v10[5] = 0;
       v10[4] = 3;
-      return IAnimatedEntity::RegisterForLogicUpdate(1);
+      return ((_DWORD (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
     }
     else
     {
       ++v10[5];
-      return IAnimatedEntity::RegisterForLogicUpdate(14);
+      return ((_DWORD (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
     }
   }
   if ( v9 != 3 )
   {
     return result;
   }
-  if ( !v10[29] || !IEntity::FlagBits(a2, (EntityFlag)0x1000u) || !(unsigned __int8)CProductionBuildingRole::HaveFreeSlotForProduct(a2) || !(unsigned __int8)CProductionBuildingRole::HaveMaterial(a2) || !(unsigned __int8)CProductionBuildingRole::HaveProductionOrder(v10) )
+  if ( v10[29] == 0 || IEntity::FlagBits(a2, (EntityFlag)4096) == 0 || (unsigned __int8)((_DWORD (__stdcall *)(IEntity *))CProductionBuildingRole::HaveFreeSlotForProduct)(a2) == 0 || (unsigned __int8)((_DWORD (__stdcall *)(IEntity *))CProductionBuildingRole::HaveMaterial)(a2) == 0 || (unsigned __int8)CProductionBuildingRole::HaveProductionOrder(v10) == 0 )
   {
-    return IAnimatedEntity::RegisterForLogicUpdate(31);
+    return ((_DWORD (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
   }
-  SettlerPtr = (_DWORD *)CSettlerMgr::GetSettlerPtr(*((unsigned __int16 *)v10 + 4));
-  if ( IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Visible) )
+  SettlerPtr = (IEntity *)((IEntity *(__stdcall *)(_DWORD))CSettlerMgr::GetSettlerPtr)(*((unsigned __int16 *)v10 + 4));
+  if ( IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Visible) != 0 && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 384, "pSettler->FlagBits(ENTITY_FLAG_VISIBLE)==0") == 1 )
   {
-    if ( BBSupportDbgReport(2, (int)"MapObjects\\Building\\ProductionBuilding.cpp", 384, (int)"pSettler->FlagBits(ENTITY_FLAG_VISIBLE)==0") == 1 )
-    {
-      __debugbreak();
-    }
+    __debugbreak();
   }
   v8 = CSettlerMgr::operator[](*((unsigned __int16 *)v10 + 4));
-  v3 = (unsigned __int8 *)std::vector<unsigned char>::operator[](0);
-  v6 = CEntityEvent::CEntityEvent(3, 0, 0, *v3, 0);
+  v3 = std::vector<unsigned char>::operator[](0);
+  v6 = (struct CEntityEvent *)((struct CEntityEvent *(__stdcall *)(char, _DWORD, _DWORD, _DWORD, _DWORD))CEntityEvent::CEntityEvent)(3, 0, 0, *v3, 0);
   v5 = v6;
   v11 = 0;
-  (*(void (__thiscall **)(int, int))(*(_DWORD *)v8 + 80))(v8, v6);
+  v8->SetEvent(v8, v6);
   v11 = -1;
   CEntityEvent::~CEntityEvent(v4);
-  return (*(int (__thiscall **)(_BYTE *, _DWORD *, int))(*(_DWORD *)v10 + 72))(v10, a2, 1);
+  return (*(int (__thiscall **)(_BYTE *, IEntity *, int))(*(_DWORD *)v10 + 72))(v10, a2, 1);
 }
 
 
@@ -167,38 +164,38 @@ void  CProductionBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObje
   _DWORD v21[180]; // [esp+10h] [ebp-2D4h] BYREF
 
   (*(void (__thiscall **)(CProductionBuildingRole *, struct CBuilding *))(*(_DWORD *)this + 16))(this, a2);
-  v16 = IEntity::Type((unsigned __int16 *)a2);
+  v16 = IEntity::Type(a2);
   v3 = IEntity::Race(a2);
-  CGfxManager::GetBuildingGfxInfo((int)a3, v3, v16, 1, (int)this + 76);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  *((_BYTE *)a3 + 715) = CPlayerManager::Color(v4);
-  if ( *((_BYTE *)this + 356) )
+  ((void (__stdcall *)(int, int, int, int, int))CGfxManager::GetBuildingGfxInfo)((int)a3, v3, v16, 1, (int)this + 76);
+  v4 = IEntity::OwnerId(a2);
+  a3->m_iColor = CPlayerManager::Color(v4);
+  if ( *((_BYTE *)this + 356) != 0 )
   {
-    CGfxManager::GetEffectGfxInfo((CGfxManager *)g_pGfxManager, (struct SGfxObjectInfo *)v21, *((unsigned __int8 *)this + 356), 0, *((unsigned __int8 *)this + 359));
-    *((_DWORD *)a3 + 26) = v21[0];
-    *((_DWORD *)a3 + 27) = v21[1];
-    *((_DWORD *)a3 + 28) = *((__int16 *)this + 180);
-    *((_DWORD *)a3 + 29) = *((__int16 *)this + 181);
+    CGfxManager::GetEffectGfxInfo(g_pGfxManager, (struct SGfxObjectInfo *)v21, *((unsigned __int8 *)this + 356), 0, *((unsigned __int8 *)this + 359));
+    *(_DWORD *)&a3->gap_60[8] = v21[0];
+    *(_DWORD *)&a3->gap_60[12] = v21[1];
+    *(_DWORD *)&a3->gap_60[16] = *((__int16 *)this + 180);
+    *(_DWORD *)&a3->gap_60[20] = *((__int16 *)this + 181);
   }
-  v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-  IBuildingRole::MiniFlag(this, a3, v5);
+  v5 = IEntity::OwnerId(a2);
+  IBuildingRole::MiniFlag((IBuildingRole *)this, a3, v5);
   if ( *((_BYTE *)this + 29) == 1 )
   {
-    v6 = (CSettler *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 4));
-    CSettler::GetPatchGfx(v6, (struct SGfxObjectInfo *)((char *)a3 + 200));
+    v6 = CSettlerMgr::operator[](*((unsigned __int16 *)this + 4));
+    CSettler::GetPatchGfx(v6, a3->m_vPatches);
   }
   v17 = 0;
   for ( i = 0;
         i < std::vector<unsigned short>::size((char *)this + 384);
         ++i )
   {
-    v7 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
-    v8 = CPileMgr::operator[](*v7);
-    if ( (unsigned __int8)CPile::IsPatchPile(v8) )
+    v7 = std::vector<unsigned short>::operator[]((char *)this + 384, i);
+    v8 = (unsigned __int8 *)CPileMgr::operator[](*v7);
+    if ( CPile::IsPatchPile(v8) )
     {
-      v9 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
-      v10 = CPileMgr::operator[](*v9);
-      CPile::GetPatchGfx((CPile *)v10, (struct SGfxObjectInfo *)((char *)a3 + 16 * v17++ + 536));
+      v9 = std::vector<unsigned short>::operator[]((char *)this + 384, i);
+      v10 = (unsigned __int8 *)CPileMgr::operator[](*v9);
+      CPile::GetPatchGfx((CPile *)v10, &a3->m_vPatches2[v17++]);
     }
   }
   for ( j = 0;
@@ -210,13 +207,13 @@ void  CProductionBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObje
     {
       break;
     }
-    v12 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 400, j);
-    v13 = CPileMgr::operator[](*v12);
-    if ( (unsigned __int8)CPile::IsPatchPile(v13) )
+    v12 = std::vector<unsigned short>::operator[]((char *)this + 400, j);
+    v13 = (unsigned __int8 *)CPileMgr::operator[](*v12);
+    if ( CPile::IsPatchPile(v13) )
     {
-      v14 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 400, j);
-      v15 = CPileMgr::operator[](*v14);
-      CPile::GetPatchGfx((CPile *)v15, (struct SGfxObjectInfo *)((char *)a3 + 16 * v17++ + 536));
+      v14 = std::vector<unsigned short>::operator[]((char *)this + 400, j);
+      v15 = (unsigned __int8 *)CPileMgr::operator[](*v14);
+      CPile::GetPatchGfx((CPile *)v15, &a3->m_vPatches2[v17++]);
     }
   }
   return result;
@@ -249,7 +246,7 @@ void  CProductionBuildingRole::Init(class CBuilding * a2) {
   __int16 v22; // [esp+30h] [ebp-4h] BYREF
   char v23; // [esp+33h] [ebp-1h] BYREF
 
-  IBuildingRole::InitCommon((int)a2);
+  IBuildingRole::InitCommon(a2);
   *((_BYTE *)this + 4) = 1;
   v18 = 0;
   for ( i = 0;
@@ -257,18 +254,18 @@ void  CProductionBuildingRole::Init(class CBuilding * a2) {
         ++i )
   {
     v17 = *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 63);
-    if ( v17 )
+    if ( v17 != 0 )
     {
       if ( v17 == 1 )
       {
         v11 = *(char *)(*((_DWORD *)this + 94) + 16 * i + 60) + IEntity::X(a2);
         v12 = *(char *)(*((_DWORD *)this + 94) + 16 * i + 61) + IEntity::Y(a2);
-        v15 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v11, v12, *(char *)(*((_DWORD *)this + 94) + 16 * i + 62), 0, *(char *)(*((_DWORD *)this + 94) + 16 * i + 63), 0, 0, 0, 0);
-        v10 = IEntity::ID();
-        v7 = CPileMgr::operator[](v15);
+        v15 = CPileMgr::AddPile(&g_cPileMgr, v11, v12, *(char *)(*((_DWORD *)this + 94) + 16 * i + 62), 0, *(char *)(*((_DWORD *)this + 94) + 16 * i + 63), 0, 0, 0, 0);
+        v10 = ((int (__stdcall *)())IEntity::ID)();
+        v7 = (unsigned __int8 *)CPileMgr::operator[](v15);
         CPile::SetBuildingId((CPile *)v7, v10);
         v21 = v15;
-        std::vector<unsigned short>::push_back(&v21);
+        ((void (__stdcall *)(__int16 *))std::vector<unsigned short>::push_back)(&v21);
       }
     }
     else
@@ -279,30 +276,30 @@ void  CProductionBuildingRole::Init(class CBuilding * a2) {
       v4 = CBuilding::EnsignPackedXY(a2);
       v5 = Y16X16::UnpackYFast(v4);
       v14 = CSpiralOffsets::DeltaY(v18) + v5;
-      v16 = CPileMgr::AddPile((CPileMgr *)&g_cPileMgr, v13, v14, *(char *)(*((_DWORD *)this + 94) + 16 * i + 62), 0, *(char *)(*((_DWORD *)this + 94) + 16 * i + 63), 0, 0, 0, 0);
-      v9 = IEntity::ID();
-      v6 = CPileMgr::operator[](v16);
+      v16 = CPileMgr::AddPile(&g_cPileMgr, v13, v14, *(char *)(*((_DWORD *)this + 94) + 16 * i + 62), 0, *(char *)(*((_DWORD *)this + 94) + 16 * i + 63), 0, 0, 0, 0);
+      v9 = ((int (__stdcall *)())IEntity::ID)();
+      v6 = (unsigned __int8 *)CPileMgr::operator[](v16);
       CPile::SetBuildingId((CPile *)v6, v9);
       v22 = v16;
-      std::vector<unsigned short>::push_back(&v22);
+      ((void (__stdcall *)(__int16 *))std::vector<unsigned short>::push_back)(&v22);
       v23 = *(_BYTE *)(*((_DWORD *)this + 94) + 16 * i + 62);
-      std::vector<unsigned char>::push_back(&v23);
+      ((void (__stdcall *)(char *))std::vector<unsigned char>::push_back)(&v23);
       ++v18;
     }
   }
-  if ( !std::vector<unsigned short>::size((char *)this + 384) && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 232, "m_vProdPileId.size() > 0") == 1 )
+  if ( std::vector<unsigned short>::size((char *)this + 384) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 232, "m_vProdPileId.size() > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !std::vector<unsigned short>::size((char *)this + 400) && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 233, "m_vDeliverPileId.size() > 0") == 1 )
+  if ( std::vector<unsigned short>::size((char *)this + 400) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 233, "m_vDeliverPileId.size() > 0") == 1 )
   {
     __debugbreak();
   }
   *((_BYTE *)this + 380) = 0;
   *((_BYTE *)this + 381) = 0;
-  IAnimatedEntity::RegisterForLogicUpdate(2);
+  ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(2);
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
-  if ( result )
+  if ( result != 0 )
   {
     return (*(int (__thiscall **)(CProductionBuildingRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   }
@@ -318,9 +315,9 @@ void  CProductionBuildingRole::PostLoadInit(class CBuilding * a2) {
   int result; // eax
   int v4; // [esp-4h] [ebp-8h]
 
-  v4 = IEntity::Type((unsigned __int16 *)a2);
+  v4 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
-  result = CBuildingInfoMgr::GetBuildingInfo(v2, v4);
+  result = (int)CBuildingInfoMgr::GetBuildingInfo(v2, v4);
   *((_DWORD *)this + 94) = result;
   return result;
 }
@@ -342,15 +339,15 @@ void  CProductionBuildingRole::LockPiles(class CBuilding * a2, bool a3) {
         i < std::vector<unsigned short>::size((char *)this + 384);
         ++i )
   {
-    v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
-    v4 = CPileMgr::operator[](*v3);
+    v3 = std::vector<unsigned short>::operator[]((char *)this + 384, i);
+    v4 = (unsigned __int8 *)CPileMgr::operator[](*v3);
     if ( a3 )
     {
-      IEntity::SetFlagBits(v4, (EntityFlag)0x10u);
+      IEntity::SetFlagBits(v4, (EntityFlag)16);
     }
     else
     {
-      IEntity::ClearFlagBits(v4, (EntityFlag)0x10u);
+      IEntity::ClearFlagBits((IEntity *)v4, (EntityFlag)16);
     }
   }
   for ( j = 0;
@@ -362,15 +359,15 @@ void  CProductionBuildingRole::LockPiles(class CBuilding * a2, bool a3) {
     {
       break;
     }
-    v6 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 400, j);
-    v7 = CPileMgr::operator[](*v6);
+    v6 = std::vector<unsigned short>::operator[]((char *)this + 400, j);
+    v7 = (unsigned __int8 *)CPileMgr::operator[](*v6);
     if ( a3 )
     {
-      IEntity::SetFlagBits(v7, (EntityFlag)0x10u);
+      IEntity::SetFlagBits(v7, (EntityFlag)16);
     }
     else
     {
-      IEntity::ClearFlagBits(v7, (EntityFlag)0x10u);
+      IEntity::ClearFlagBits((IEntity *)v7, (EntityFlag)16);
     }
   }
   return result;
@@ -378,7 +375,7 @@ void  CProductionBuildingRole::LockPiles(class CBuilding * a2, bool a3) {
 
 
 // address=[0x1516af0]
-// Decompiled from char __thiscall CProductionBuildingRole::SettlerEnter(_DWORD *this, unsigned __int8 *a2, int a3)
+// Decompiled from char __thiscall CProductionBuildingRole::SettlerEnter(_DWORD *this, CBuilding *a2, int a3)
 bool  CProductionBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   int v3; // eax
@@ -388,12 +385,12 @@ bool  CProductionBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   float v7; // xmm0_4
   int v8; // eax
   int v9; // eax
-  void *v10; // eax
+  struct type_info *v10; // eax
   int v11; // eax
   const char *BuildingName; // eax
   const char *v14; // [esp+0h] [ebp-60h]
   const char *RaceName; // [esp+4h] [ebp-5Ch]
-  _BYTE v16[24]; // [esp+Ch] [ebp-54h] BYREF
+  CEntityEvent v16; // [esp+Ch] [ebp-54h] BYREF
   int v17; // [esp+24h] [ebp-3Ch]
   int v18; // [esp+28h] [ebp-38h]
   float v19; // [esp+2Ch] [ebp-34h]
@@ -401,7 +398,7 @@ bool  CProductionBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   int v21; // [esp+34h] [ebp-2Ch]
   int v22; // [esp+38h] [ebp-28h]
   int v23; // [esp+3Ch] [ebp-24h]
-  _BYTE *v24; // [esp+40h] [ebp-20h]
+  CEntityEvent *v24; // [esp+40h] [ebp-20h]
   int v25; // [esp+44h] [ebp-1Ch]
   CMFCToolBarButton *v26; // [esp+48h] [ebp-18h]
   CSettler *v27; // [esp+4Ch] [ebp-14h]
@@ -413,12 +410,12 @@ bool  CProductionBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   {
     __debugbreak();
   }
-  v27 = (CSettler *)CSettlerMgr::operator[](a3);
-  if ( IEntity::FlagBits(v27, ENTITY_FLAG_Visible) == 256 && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 258, "rSettler.FlagBits(ENTITY_FLAG_VISIBLE)!=ENTITY_FLAG_VISIBLE") == 1 )
+  v27 = CSettlerMgr::operator[](a3);
+  if ( IEntity::FlagBits(v27, ENTITY_FLAG_Visible) == ENTITY_FLAG_Visible && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 258, "rSettler.FlagBits(ENTITY_FLAG_VISIBLE)!=ENTITY_FLAG_VISIBLE") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_BYTE *)v28 + 29) )
+  if ( *((_BYTE *)v28 + 29) != 0 )
   {
     if ( *((unsigned __int16 *)v28 + 4) != a3 && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 275, "m_uSettlerId == _iSettlerId") == 1 )
     {
@@ -429,23 +426,23 @@ bool  CProductionBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   {
     *((_BYTE *)v28 + 29) = 1;
     *((_WORD *)v28 + 4) = a3;
-    if ( IEntity::FlagBits(a2, (EntityFlag)0x1000u) )
+    if ( IEntity::FlagBits(a2, (EntityFlag)4096) != 0 )
     {
-      CEntityEvent::CEntityEvent((CEntityEvent *)v16, 8u, 0, *((unsigned __int16 *)v28 + 3), 0, 0);
+      CEntityEvent::CEntityEvent(&v16, 8u, 0, *((unsigned __int16 *)v28 + 3), 0, 0);
       v29 = 0;
-      v24 = v16;
-      (*(void (__thiscall **)(unsigned __int8 *, _BYTE *))(*(_DWORD *)a2 + 124))(a2, v16);
+      v24 = &v16;
+      ((void (__thiscall *)(CBuilding *, CEntityEvent *))a2->Notify)(a2, &v16);
       v29 = -1;
-      CEntityEvent::~CEntityEvent(v16);
+      CEntityEvent::~CEntityEvent(&v16);
     }
   }
   IEntity::ClearFlagBits(v27, ENTITY_FLAG_Visible);
   IEntity::SetFlagBits(v27, ENTITY_FLAG_MagicInvisible);
-  IMovingEntity::SetDisplacementCosts(10);
-  v26 = (CMFCToolBarButton *)CBuildingMgr::operator[](*((unsigned __int16 *)v28 + 3));
-  v3 = CBuilding::DoorPackedXY(v26);
+  ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(10);
+  v26 = (CMFCToolBarButton *)((CMFCToolBarButton *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)v28 + 3));
+  v3 = CBuilding::DoorPackedXY((CBuilding *)v26);
   v23 = Y16X16::UnpackXFast(v3);
-  v4 = CBuilding::DoorPackedXY(v26);
+  v4 = CBuilding::DoorPackedXY((CBuilding *)v26);
   v22 = Y16X16::UnpackYFast(v4);
   v5 = IEntity::X(v26);
   v21 = v23 - v5;
@@ -457,25 +454,25 @@ bool  CProductionBuildingRole::SettlerEnter(class CBuilding * a2, int a3) {
   CSettler::SetOffset(v27, v19, v7);
   v8 = CBuilding::EnsignWorldIdx(a2);
   v18 = CWorldManager::EcoSectorId(v8);
-  v17 = CEcoSectorMgr::operator[](v18);
-  if ( *(_BYTE *)(v28[94] + 480) )
+  v17 = ((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v18);
+  if ( *(_BYTE *)(v28[94] + 480) != 0 )
   {
     *((_BYTE *)v28 + 5) = 0;
-    IAnimatedEntity::RegisterForLogicUpdate(14);
+    ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
     *((_BYTE *)v28 + 4) = 2;
   }
   else
   {
-    IAnimatedEntity::RegisterForLogicUpdate(31);
+    ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
     v9 = IEntity::Race(a2);
     RaceName = CS4DefineNames::GetRaceName(v9);
-    v10 = (void *)typeid(v28);
-    v14 = (const char *)type_info::name(v10);
+    v10 = typeid(v28);
+    v14 = type_info::name(v10);
     v11 = CBuilding::BuildingTypeEx(a2);
     BuildingName = CS4DefineNames::GetBuildingName(v11);
     BBSupportTracePrintF(2, "WARNING: Building %s (role %s) of race %s has no production delay!", BuildingName, v14, RaceName);
   }
-  (*(void (__cdecl **)(unsigned __int8 *))(*v28 + 72))(a2);
+  (*(void (__cdecl **)(CBuilding *))(*v28 + 72))(a2);
   return 1;
 }
 
@@ -492,11 +489,11 @@ int  CProductionBuildingRole::GetBuildingNeed(int a2)const {
         i < std::vector<unsigned short>::size((char *)this + 400);
         ++i )
   {
-    v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
-    v3 = CPileMgr::operator[](*v2);
+    v2 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(unsigned int))std::vector<unsigned short>::operator[])(i);
+    v3 = (unsigned __int8 *)CPileMgr::operator[](*v2);
     if ( (*(int (__thiscall **)(unsigned __int8 *, unsigned __int8 *))(*(_DWORD *)v3 + 60))(v3, v3) == a2 )
     {
-      return *(unsigned __int16 *)std::vector<unsigned short>::operator[](i);
+      return *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(unsigned int))std::vector<unsigned short>::operator[])(i);
     }
   }
   BBSupportTracePrintF(0, "TROUBLE: illegal goodcheck good %u", a2);
@@ -521,27 +518,27 @@ int  CProductionBuildingRole::GetPileIdWithGood(int a2)const {
         i < std::vector<unsigned short>::size((char *)this + 400);
         ++i )
   {
-    v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
-    v9 = CPileMgr::operator[](*v2);
+    v2 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(unsigned int))std::vector<unsigned short>::operator[])(i);
+    v9 = (unsigned __int8 *)CPileMgr::operator[](*v2);
     if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v9 + 60))(v9) == a2 )
     {
-      return *(unsigned __int16 *)std::vector<unsigned short>::operator[](i);
+      return *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(unsigned int))std::vector<unsigned short>::operator[])(i);
     }
   }
   for ( i = 0;
         i < std::vector<unsigned short>::size((char *)this + 384);
         ++i )
   {
-    v4 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
-    v5 = CPileMgr::operator[](*v4);
+    v4 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(unsigned int))std::vector<unsigned short>::operator[])(i);
+    v5 = (unsigned __int8 *)CPileMgr::operator[](*v4);
     if ( (*(int (__thiscall **)(unsigned __int8 *, unsigned __int8 *))(*(_DWORD *)v5 + 60))(v5, v5) == a2 )
     {
-      return *(unsigned __int16 *)std::vector<unsigned short>::operator[](i);
+      return *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(unsigned int))std::vector<unsigned short>::operator[])(i);
     }
   }
   v8 = *((unsigned __int16 *)this + 3);
-  v6 = (unsigned __int16 *)CBuildingMgr::operator[](v8);
-  v7 = IEntity::Type(v6);
+  v6 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(int))CBuildingMgr::operator[])(v8);
+  v7 = IEntity::Type((IEntity *)v6);
   BBSupportTracePrintF(0, "Wrong good check: look for %s at %s nr %u", (&off_378B694)[2 * a2], (&off_378BA3C)[2 * v7], v8);
   return 0;
 }
@@ -568,10 +565,10 @@ void  CProductionBuildingRole::FillToolSideBar(class CAddToolSideBarInfo * a2, b
   CEvn_Event v11; // [esp+1Ch] [ebp-28h] BYREF
   int v12; // [esp+40h] [ebp-4h]
 
-  v3 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
+  v3 = ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
   v4 = CBuilding::EnsignWorldIdx(v3);
   v6 = CWorldManager::EcoSectorId(v4);
-  v9 = (CEcoSector *)CEcoSectorMgr::operator[](g_cESMgr, v6);
+  v9 = CEcoSectorMgr::operator[](g_cESMgr, v6);
   a2->m_iUnknown = 12;
   for ( i = 0;
         i < std::vector<unsigned char>::size((char *)this + 416);
@@ -611,11 +608,11 @@ void  CProductionBuildingRole::FillToolSideBar(class CAddToolSideBarInfo * a2, b
   }
   CEvn_Event::CEvn_Event(&v11, iEventId, 0, (unsigned int)a2, 0);
   v12 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 818, "g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 818, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v11);
   }
@@ -628,7 +625,7 @@ void  CProductionBuildingRole::FillToolSideBar(class CAddToolSideBarInfo * a2, b
 // Decompiled from int __thiscall CProductionBuildingRole::FillWeaponSideBar(unsigned __int16 *this, int a2, char a3)
 void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo * a2, bool a3) {
   
-  int v3; // eax
+  CBuilding *v3; // eax
   int v4; // eax
   int v6; // [esp+4h] [ebp-40h]
   int v7; // [esp+8h] [ebp-3Ch]
@@ -637,37 +634,37 @@ void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo * a2, 
   _BYTE v11[24]; // [esp+1Ch] [ebp-28h] BYREF
   int v12; // [esp+40h] [ebp-4h]
 
-  v3 = CBuildingMgr::operator[](this[3]);
+  v3 = (CBuilding *)((CBuilding *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*(this + 3));
   v4 = CBuilding::EnsignWorldIdx(v3);
   v6 = CWorldManager::EcoSectorId(v4);
-  v8 = CEcoSectorMgr::operator[](v6);
+  v8 = ((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v6);
   for ( i = 0;
         i < std::vector<unsigned char>::size(this + 208);
         ++i )
   {
     *(_BYTE *)(a2 + 12 * i + 12) = *(_BYTE *)std::vector<unsigned char>::operator[](i);
-    *(_DWORD *)(a2 + 12 * i + 16) = CEcoSector::GetNrOfWeaponOrder(i);
-    *(_BYTE *)(a2 + 12 * i + 20) = CEcoSector::WeaponPercentage(i);
+    *(_DWORD *)(a2 + 12 * i + 16) = ((_DWORD (__stdcall *)(unsigned int))CEcoSector::GetNrOfWeaponOrder)(i);
+    *(_BYTE *)(a2 + 12 * i + 20) = ((_DWORD (__stdcall *)(unsigned int))CEcoSector::WeaponPercentage)(i);
   }
   *(_DWORD *)(a2 + 4) = 11;
   *(_BYTE *)(a2 + 8) = CEcoSector::WeaponAutoProduction(v8) == 100;
   v7 = 606;
-  if ( !a3 )
+  if ( a3 == 0 )
   {
     v7 = 607;
   }
-  CEvn_Event::CEvn_Event(v7, 0, a2, 0);
+  ((void (__stdcall *)(int, _DWORD, int, char))CEvn_Event::CEvn_Event)(v7, 0, a2, 0);
   v12 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, (int)"MapObjects\\Building\\ProductionBuilding.cpp", 860, (int)"g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\ProductionBuilding.cpp", 860, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
-    IEventEngine::SendAMessage((int)v11);
+    ((void (__stdcall *)(int))IEventEngine::SendAMessage)((int)v11);
   }
   v12 = -1;
-  return CEvn_Event::~CEvn_Event(v11);
+  return (int)CEvn_Event::~CEvn_Event(v11);
 }
 
 
@@ -675,17 +672,17 @@ void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo * a2, 
 // Decompiled from char *__thiscall CProductionBuildingRole::CProductionBuildingRole(char *this, int a2)
  CProductionBuildingRole::CProductionBuildingRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-28h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-28h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-24h] BYREF
   unsigned int v5; // [esp+10h] [ebp-20h] BYREF
   char *v6; // [esp+14h] [ebp-1Ch]
   unsigned int i; // [esp+18h] [ebp-18h]
   _BYTE v8[7]; // [esp+1Ch] [ebp-14h] BYREF
-  char v9; // [esp+23h] [ebp-Dh] BYREF
+  unsigned __int8 v9; // [esp+23h] [ebp-Dh] BYREF
   int v10; // [esp+2Ch] [ebp-4h]
 
   v6 = this;
-  IBuildingRole::IBuildingRole(this, a2);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this, (struct std::istream *)a2);
   v10 = 0;
   *(_DWORD *)v6 = &CProductionBuildingRole::_vftable_;
   std::vector<unsigned short>::vector<unsigned short>(v6 + 384);
@@ -700,23 +697,23 @@ void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo * a2, 
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned char>(a2, v6 + 380);
-  operator^<unsigned char>(a2, v6 + 381);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v6 + 380);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v6 + 381);
   operator^<unsigned int>(a2, &v5);
   for ( i = 0;
         i < v5;
         ++i )
   {
-    operator^<unsigned short>(a2, v8);
-    std::vector<unsigned short>::push_back(v8);
+    operator^<unsigned short>(a2, (unsigned __int16 *)v8);
+    ((void (__stdcall *)(_BYTE *))std::vector<unsigned short>::push_back)(v8);
   }
   operator^<unsigned int>(a2, &v5);
   for ( i = 0;
         i < v5;
         ++i )
   {
-    operator^<unsigned short>(a2, v8);
-    std::vector<unsigned short>::push_back(v8);
+    operator^<unsigned short>(a2, (unsigned __int16 *)v8);
+    ((void (__stdcall *)(_BYTE *))std::vector<unsigned short>::push_back)(v8);
   }
   operator^<unsigned int>(a2, &v5);
   for ( i = 0;
@@ -724,7 +721,7 @@ void  CProductionBuildingRole::FillWeaponSideBar(class CWeaponSideBarInfo * a2, 
         ++i )
   {
     operator^<unsigned char>(a2, &v9);
-    std::vector<unsigned char>::push_back(&v9);
+    ((void (__stdcall *)(unsigned __int8 *))std::vector<unsigned char>::push_back)(&v9);
   }
   v10 = -1;
   return v6;
@@ -747,35 +744,35 @@ void  CProductionBuildingRole::Store(std::ostream & a2) {
   v8 = this;
   IBuildingRole::Store(this, a2);
   v6 = 2;
-  operator^<unsigned int>(a2, &v6);
-  operator^<unsigned char>(a2, (int)v8 + 380);
-  operator^<unsigned char>(a2, (int)v8 + 381);
-  v7 = std::vector<unsigned short>::size((char *)v8 + 384);
-  operator^<unsigned int>(a2, &v7);
+  operator^<unsigned int>(a2, (unsigned int *)&v6);
+  operator^<unsigned char>(a2, (unsigned __int8 *)&v8[1]);
+  operator^<unsigned char>(a2, (unsigned __int8 *)&v8[1].__vftable + 1);
+  v7 = std::vector<unsigned short>::size(&v8[1].m_uLogicState);
+  operator^<unsigned int>(a2, (unsigned int *)&v7);
   for ( i = 0;
         i < v7;
         ++i )
   {
-    v2 = (__int16 *)std::vector<unsigned short>::operator[]((char *)v8 + 384, i);
-    operator^<unsigned short>((int)a2, v2);
+    v2 = (__int16 *)std::vector<unsigned short>::operator[](&v8[1].m_uLogicState, i);
+    operator^<unsigned short>(a2, (WORD *)v2);
   }
-  v7 = std::vector<unsigned short>::size((char *)v8 + 400);
-  operator^<unsigned int>(a2, &v7);
+  v7 = std::vector<unsigned short>::size(v8[1].m_vWorkingArea);
+  operator^<unsigned int>(a2, (unsigned int *)&v7);
   for ( i = 0;
         i < v7;
         ++i )
   {
-    v3 = (__int16 *)std::vector<unsigned short>::operator[]((char *)v8 + 400, i);
-    operator^<unsigned short>((int)a2, v3);
+    v3 = (__int16 *)std::vector<unsigned short>::operator[](v8[1].m_vWorkingArea, i);
+    operator^<unsigned short>(a2, (WORD *)v3);
   }
-  v7 = std::vector<unsigned char>::size((char *)v8 + 416);
-  result = operator^<unsigned int>(a2, &v7);
+  v7 = std::vector<unsigned char>::size(v8[1].gap_24);
+  result = operator^<unsigned int>(a2, (unsigned int *)&v7);
   for ( i = 0;
         i < v7;
         ++i )
   {
     v5 = std::vector<unsigned char>::operator[](i);
-    operator^<unsigned char>(a2, v5);
+    operator^<unsigned char>(a2, (unsigned __int8 *)v5);
     result = i + 1;
   }
   return result;
@@ -821,9 +818,9 @@ bool  CProductionBuildingRole::HaveMaterial(class CBuilding * a2) {
         i < std::vector<unsigned short>::size((char *)this + 400);
         ++i )
   {
-    v3 = *(unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 400, i);
-    v4 = CPileMgr::operator[](v3);
-    if ( !(*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v4 + 40))(v4) )
+    v3 = *std::vector<unsigned short>::operator[]((char *)this + 400, i);
+    v4 = (unsigned __int8 *)CPileMgr::operator[](v3);
+    if ( (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v4 + 40))(v4) == 0 )
     {
       return 0;
     }
@@ -846,8 +843,8 @@ bool  CProductionBuildingRole::HaveFreeSlotForProduct(class CBuilding * a2) {
         i < std::vector<unsigned short>::size((char *)this + 384);
         ++i )
   {
-    v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, i);
-    v3 = CPileMgr::operator[](*v2);
+    v2 = std::vector<unsigned short>::operator[]((char *)this + 384, i);
+    v3 = (unsigned __int8 *)CPileMgr::operator[](*v2);
     v6 += (*(int (__thiscall **)(unsigned __int8 *, unsigned __int8 *))(*(_DWORD *)v3 + 40))(v3, v3);
   }
   return v6 < 8;
@@ -858,7 +855,7 @@ bool  CProductionBuildingRole::HaveFreeSlotForProduct(class CBuilding * a2) {
 // Decompiled from char __thiscall CProductionBuildingRole::HaveProductionOrder(CProductionBuildingRole *this)
 bool  CProductionBuildingRole::HaveProductionOrder(void) {
   
-  int v1; // eax
+  CBuilding *v1; // eax
   int v2; // eax
   unsigned __int16 *v3; // eax
   unsigned __int16 *v5; // eax
@@ -874,13 +871,13 @@ bool  CProductionBuildingRole::HaveProductionOrder(void) {
   int v15; // [esp+28h] [ebp-Ch]
   CMFCTasksPane *v17; // [esp+30h] [ebp-4h]
 
-  v1 = CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
+  v1 = (CBuilding *)((CBuilding *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
   v2 = CBuilding::EnsignWorldIdx(v1);
   v6 = CWorldManager::EcoSectorId(v2);
-  v17 = (CMFCTasksPane *)CEcoSectorMgr::operator[](v6);
+  v17 = (CMFCTasksPane *)((int (__stdcall *)(int))CEcoSectorMgr::operator[])(v6);
   v11 = std::vector<unsigned char>::size((char *)this + 416);
-  v3 = (unsigned __int16 *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-  if ( IEntity::Type(v3) == 22 )
+  v3 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+  if ( IEntity::Type((IEntity *)v3) == 22 )
   {
     for ( i = 1;
           i < v11 + 1;
@@ -912,12 +909,11 @@ bool  CProductionBuildingRole::HaveProductionOrder(void) {
       {
         if ( CEcoSector::WeaponPercentage(v17, 2) <= 0 || ArmorsCounter > v10 * CEcoSector::WeaponPercentage(v17, 2) / 0x64u )
         {
-          if ( std::vector<unsigned char>::size((char *)this + 416) != 4 || CEcoSector::WeaponPercentage(v17, 3) <= 0 )
+          if ( std::vector<unsigned char>::size((char *)this + 416) == 4 && CEcoSector::WeaponPercentage(v17, 3) > 0 )
           {
-            return 1;
+            *((_BYTE *)this + 380) = *(_BYTE *)std::vector<unsigned char>::operator[](3);
+            CEcoSector::IncSpecialCounter(v17);
           }
-          *((_BYTE *)this + 380) = *(_BYTE *)std::vector<unsigned char>::operator[](3);
-          CEcoSector::IncSpecialCounter(v17);
           return 1;
         }
         else
@@ -943,8 +939,8 @@ bool  CProductionBuildingRole::HaveProductionOrder(void) {
   }
   else
   {
-    v5 = (unsigned __int16 *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-    if ( IEntity::Type(v5) == 21 )
+    v5 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+    if ( IEntity::Type((IEntity *)v5) == 21 )
     {
       for ( j = 1;
             j < v11 + 1;
@@ -990,21 +986,21 @@ void  CProductionBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
   CEvn_Event v20; // [esp+24h] [ebp-28h] BYREF
   int v21; // [esp+48h] [ebp-4h]
 
-  CInfoExchange::Clear(&g_cResourceUpgradeInfo);
+  CInfoExchange::Clear((CInfoExchange *)&g_cResourceUpgradeInfo);
   dword_3F1E500 = 3;
   byte_3F1E505 = IEntity::Race(a2);
-  byte_3F1E504 = IEntity::Type((unsigned __int16 *)a2);
+  byte_3F1E504 = IEntity::Type(a2);
   byte_3F1E507 = 1;
-  byte_3F1E508 = IEntity::FlagBits(a2, (EntityFlag)0x1000u) != 0;
+  byte_3F1E508 = IEntity::FlagBits(a2, (EntityFlag)4096) != 0;
   byte_3F1E509 = 0;
-  v10 = IEntity::Type((unsigned __int16 *)a2);
-  v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E50B = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v10, 0);
-  v11 = IEntity::Type((unsigned __int16 *)a2);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  byte_3F1E50C = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v11, 1u);
+  v10 = IEntity::Type(a2);
+  v3 = IEntity::OwnerId(a2);
+  byte_3F1E50B = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, (S4_BUILDING_ENUM)v10, 0);
+  v11 = IEntity::Type(a2);
+  v4 = IEntity::OwnerId(a2);
+  byte_3F1E50C = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, (S4_BUILDING_ENUM)v11, 1u);
   byte_3F1E506 = *((_BYTE *)this + 29);
-  if ( *((_BYTE *)this + 29) )
+  if ( *((_BYTE *)this + 29) != 0 )
   {
     byte_3F1E50D = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
   }
@@ -1012,22 +1008,22 @@ void  CProductionBuildingRole::FillDialog(class CBuilding * a2, bool a3) {
         i < std::vector<unsigned short>::size((char *)this + 400);
         ++i )
   {
-    v5 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 400, i);
-    v16 = CPileMgr::operator[](*v5);
+    v5 = std::vector<unsigned short>::operator[]((char *)this + 400, i);
+    v16 = (unsigned __int8 *)CPileMgr::operator[](*v5);
     byte_3F1E511[2 * i] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v16 + 40))(v16);
-    v6 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 400, i);
-    v15 = CPileMgr::operator[](*v6);
+    v6 = std::vector<unsigned short>::operator[]((char *)this + 400, i);
+    v15 = (unsigned __int8 *)CPileMgr::operator[](*v6);
     byte_3F1E510[2 * i] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v15 + 60))(v15);
   }
   for ( j = 0;
         j < std::vector<unsigned short>::size((char *)this + 384);
         ++j )
   {
-    v7 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, j);
-    v14 = CPileMgr::operator[](*v7);
+    v7 = std::vector<unsigned short>::operator[]((char *)this + 384, j);
+    v14 = (unsigned __int8 *)CPileMgr::operator[](*v7);
     byte_3F1E51B[2 * j] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v14 + 40))(v14);
-    v8 = (unsigned __int16 *)std::vector<unsigned short>::operator[]((char *)this + 384, j);
-    v13 = CPileMgr::operator[](*v8);
+    v8 = std::vector<unsigned short>::operator[]((char *)this + 384, j);
+    v13 = (unsigned __int8 *)CPileMgr::operator[](*v8);
     byte_3F1E51A[2 * j] = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v13 + 60))(v13);
   }
   v12 = 604;

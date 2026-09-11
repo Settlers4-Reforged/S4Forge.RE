@@ -10,16 +10,16 @@ class IConfigManager * __cdecl CConfigManagerPtr::GetInstance(void) {
   CConfigManager *v1; // [esp+8h] [ebp-14h]
   CConfigManager *C; // [esp+Ch] [ebp-10h]
 
-  if ( CConfigManagerPtr::m_pConfigManager )
+  if ( CConfigManagerPtr::m_pConfigManager != 0 )
   {
     return CConfigManagerPtr::m_pConfigManager;
   }
-  if ( CConfigManagerPtr::m_bWasDeleted && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1435, "!m_bWasDeleted") == 1 )
+  if ( CConfigManagerPtr::m_bWasDeleted != 0 && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1435, "!m_bWasDeleted") == 1 )
   {
     __debugbreak();
   }
   C = (CConfigManager *)operator new(0x1Cu, 1, "Source\\ConfigManager\\ConfigManager.cpp", 1437);
-  if ( C )
+  if ( C != 0 )
   {
     v1 = CConfigManager::CConfigManager(C);
   }
@@ -36,13 +36,13 @@ class IConfigManager * __cdecl CConfigManagerPtr::GetInstance(void) {
 // Decompiled from void CConfigManagerPtr::DeleteConfigManager()
 void __cdecl CConfigManagerPtr::DeleteConfigManager(void) {
   
-  if ( CConfigManagerPtr::m_pConfigManager )
+  if ( CConfigManagerPtr::m_pConfigManager != 0 )
   {
-    if ( CConfigManagerPtr::m_bWasDeleted && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1452, "!m_bWasDeleted") == 1 )
+    if ( CConfigManagerPtr::m_bWasDeleted != 0 && BBSupportDbgReport(2, "Source\\ConfigManager\\ConfigManager.cpp", 1452, "!m_bWasDeleted") == 1 )
     {
       __debugbreak();
     }
-    if ( CConfigManagerPtr::m_pConfigManager )
+    if ( CConfigManagerPtr::m_pConfigManager != 0 )
     {
       ((void (__thiscall *)(CConfigManager *, int))CConfigManagerPtr::m_pConfigManager->dtor)(CConfigManagerPtr::m_pConfigManager, 1);
     }

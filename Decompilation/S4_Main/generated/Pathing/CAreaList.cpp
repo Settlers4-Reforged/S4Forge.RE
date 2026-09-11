@@ -32,7 +32,7 @@ void  CAreaList::PushBack(int a2) {
   {
     __debugbreak();
   }
-  return TStaticArray<int,63>::PushBack(&a2);
+  return ((_DWORD (__stdcall *)(int *))TStaticArray<int,63>::PushBack)(&a2);
 }
 
 

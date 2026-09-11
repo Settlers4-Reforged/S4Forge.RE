@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateAOCampaignViking::DynamicCreateFunc(void * a1) 
   CStateAOCampaignViking *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateAOCampaignViking *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateAOCampaignViking::CStateAOCampaignViking(C, a1);
   }
@@ -24,24 +24,24 @@ class CGameState * __cdecl CStateAOCampaignViking::DynamicCreateFunc(void * a1) 
 // Decompiled from CStateAOCampaignViking *__thiscall CStateAOCampaignViking::CStateAOCampaignViking(CStateAOCampaignViking *this, void *a2)
  CStateAOCampaignViking::CStateAOCampaignViking(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateAOCampaignViking::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  CGuiGameState::SetupExtraGui(g_pAddOn, 2, (int)GuiDlgAOCampaignVikingProc);
+  CGuiGameState::SetupExtraGui((int)g_pAddOn, 2, (int)GuiDlgAOCampaignVikingProc);
   g_cCampaignSettings = 20;
   dword_402CBBC[12] = CGameSettings::GetCampaignStatus(12);
   dword_402CBBC[12] = 5;
-  CGuiGameState::OpenDialog(this, 2, GuiDlgAOCampaignVikingProc);
+  CGuiGameState::OpenDialog((CGuiGameState *)this, 2, (bool (__cdecl *)(int, int, int))GuiDlgAOCampaignVikingProc);
   return this;
 }
 
 
 // address=[0x14a15f0]
-// Decompiled from void __thiscall CStateAOCampaignViking::~CStateAOCampaignViking(CStateAOCampaignViking *this)
+// Decompiled from void __thiscall CStateAOCampaignViking::~CStateAOCampaignViking(CGuiGameState *this)
  CStateAOCampaignViking::~CStateAOCampaignViking(void) {
   
-  *(_DWORD *)this = &CStateAOCampaignViking::_vftable_;
-  IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 2);
+  this->__vftable = (CGuiGameState_vtbl *)&CStateAOCampaignViking::_vftable_;
+  IGuiEngine::CloseDialog(g_pGUIEngine, 2);
   CGuiGameState::~CGuiGameState(this);
 }
 
@@ -53,10 +53,10 @@ bool  CStateAOCampaignViking::Perform(void) {
   DWORD v2; // esi
   int Instance; // [esp+8h] [ebp-4h]
 
-  Instance = UPlay::UPlayManager::GetInstance();
-  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) )
+  Instance = (int)UPlay::UPlayManager::GetInstance();
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) != 0 )
   {
-    CGameStateHandler::Switch((int)CStateAOCampaigns::DynamicCreateFunc, 1);
+    CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaigns::DynamicCreateFunc, (void *)1);
     return 1;
   }
   else
@@ -71,21 +71,20 @@ bool  CStateAOCampaignViking::Perform(void) {
       }
     }
     v2 = dword_402C928 + 30;
-    if ( v2 >= timeGetTime() )
+    if ( v2 < timeGetTime() )
     {
-      return 1;
+      dword_402C928 = timeGetTime();
+      IGuiEngine::RenderGui(g_pGUIEngine);
+      IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+      IGfxEngine::ShowFrame(g_pGfxEngine);
     }
-    dword_402C928 = timeGetTime();
-    IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-    IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-    IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
     return 1;
   }
 }
 
 
 // address=[0x14a1730]
-// Decompiled from char __thiscall CStateAOCampaignViking::OnEvent(CStateAOCampaignViking *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateAOCampaignViking::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateAOCampaignViking::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+Ch] [ebp-38h]
@@ -108,11 +107,13 @@ bool  CStateAOCampaignViking::OnEvent(class CEvn_Event & a2) {
       }
       break;
     case 8013:
-      CGameStateHandler::Switch((int)CStateAOBriefing::DynamicCreateFunc, (a2->m_wParam << 16) | 0xC);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOBriefing::DynamicCreateFunc, (void *)((a2->m_wParam << 16) | 0xC));
       return 1;
     case 8014:
-      CGameStateHandler::Switch((int)CStateAOCampaigns::DynamicCreateFunc, 1);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaigns::DynamicCreateFunc, (void *)1);
       return 1;
+    default:
+      break;
   }
   return CGuiGameState::OnEvent(this, a2);
 }

@@ -9,7 +9,7 @@ class IAIDarkTribeEcoAI * __cdecl IAIDarkTribeEcoAI::CreateEcoAI(struct SAIDarkT
   std::bad_function_call *v3; // [esp+Ch] [ebp-10h]
 
   v3 = (std::bad_function_call *)operator new(0x4084u);
-  if ( v3 )
+  if ( v3 != 0 )
   {
     return CAIDarkTribe::CAIDarkTribe(v3, *(_DWORD *)a1);
   }
@@ -24,7 +24,7 @@ class IAIDarkTribeEcoAI * __cdecl IAIDarkTribeEcoAI::CreateEcoAI(struct SAIDarkT
 // Decompiled from IAIDarkTribeEcoAI *__thiscall IAIDarkTribeEcoAI::IAIDarkTribeEcoAI(IAIDarkTribeEcoAI *this)
  IAIDarkTribeEcoAI::IAIDarkTribeEcoAI(void) {
   
-  IAIUnknown::IAIUnknown(this);
+  IAIUnknown::IAIUnknown((IAIUnknown *)this);
   *(_DWORD *)this = IAIDarkTribeEcoAI::_vftable_;
   return this;
 }

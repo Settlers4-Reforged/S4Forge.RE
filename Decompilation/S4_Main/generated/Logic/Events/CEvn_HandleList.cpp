@@ -24,11 +24,11 @@
 
   v5 = this;
   *(_DWORD *)this = &CEvn_HandleList::_vftable_;
-  while ( !(unsigned __int8)std::list<IEvn_Handle *>::empty((char *)v5 + 4) )
+  while ( (unsigned __int8)std::list<IEvn_Handle *>::empty((char *)v5 + 4) == 0 )
   {
-    std::list<IEvn_Handle *>::begin(v2);
-    v4 = *(void **)std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*(v2);
-    std::list<IEvn_Handle *>::remove(&v4);
+    ((void (__stdcall *)(_BYTE *))std::list<IEvn_Handle *>::begin)(v2);
+    v4 = *(void **)std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::operator*((std::_Iterator_base12 *)v2);
+    ((void (__stdcall *)(void **))std::list<IEvn_Handle *>::remove)(&v4);
     C = v4;
     operator delete(v4);
     std::_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>::~_List_iterator<std::_List_val<std::_List_simple_types<IEvn_Handle *>>>(v2);

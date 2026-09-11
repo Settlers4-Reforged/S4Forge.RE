@@ -95,7 +95,7 @@ int __cdecl CTilingWorld::WorldIsGroundTypeWater(int a1) {
 // Decompiled from bool __cdecl CTilingWorld::WorldIsWater(int a1)
 bool __cdecl CTilingWorld::WorldIsWater(int a1) {
   
-  return CLandscapeProperties::IsWater(*(unsigned __int8 *)(m_pWorldGfxMapElements + 4 * a1 + 1));
+  return CLandscapeProperties::IsWater(m_pWorldGfxMapElements[a1].m_uGroundType);
 }
 
 
@@ -183,19 +183,19 @@ void __cdecl CTilingWorld::WorldInterfaceInit(int _iWorldWidthHeight, struct T_G
   {
     __debugbreak();
   }
-  if ( _iWorldWidthHeight % 16 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 319, "(_iWorldWidthHeight % Squares::SQUARE_WIDTH_HEIGHT) == 0") == 1 )
+  if ( _iWorldWidthHeight % 16 != 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 319, "(_iWorldWidthHeight % Squares::SQUARE_WIDTH_HEIGHT) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !_pGfxMapElements && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 321, "_pGfxMapElements != 0") == 1 )
+  if ( _pGfxMapElements == 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 321, "_pGfxMapElements != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !_pFlagBitsLayer && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 322, "_pFlagBitsLayer != 0") == 1 )
+  if ( _pFlagBitsLayer == 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 322, "_pFlagBitsLayer != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !_pFogLayer && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 323, "_pFogLayer != 0") == 1 )
+  if ( _pFogLayer == 0 && BBSupportDbgReport(2, "Pathing\\Tiling.cpp", 323, "_pFogLayer != 0") == 1 )
   {
     __debugbreak();
   }

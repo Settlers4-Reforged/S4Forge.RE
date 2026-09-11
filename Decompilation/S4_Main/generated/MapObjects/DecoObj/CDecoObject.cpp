@@ -7,9 +7,9 @@
 // Decompiled from int __cdecl CDecoObject::New(int a1)
 class CPersistence * __cdecl CDecoObject::New(std::istream & a1) {
   
-  if ( CDecoObject::operator new(0x50u) )
+  if ( (void *)CDecoObject::operator new(0x50u) != 0 )
   {
-    return CDecoObject::CDecoObject(a1);
+    return ((_DWORD (__stdcall *)(int))CDecoObject::CDecoObject)(a1);
   }
   else
   {
@@ -22,14 +22,14 @@ class CPersistence * __cdecl CDecoObject::New(std::istream & a1) {
 // Decompiled from CDecoObject *__thiscall CDecoObject::CDecoObject(CDecoObject *this, unsigned int a2, unsigned int a3, unsigned int a4, int a5, int a6, int a7)
  CDecoObject::CDecoObject(int a2, int a3, int a4, int a5, int a6, int a7) {
   
-  IDecoObject::IDecoObject(this, a2, a3, a4, a5, 1);
+  IDecoObject::IDecoObject(this, a2, a3, a4, a5, true);
   this->__vftable = (IAnimatedEntity_vtbl *)&CDecoObject::_vftable_;
   this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, a4);
-  if ( this->m_iJobPart >= 0x228u && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 264, "m_uJobPart<SIV_OBJECT_MAX") == 1 )
+  if ( this->m_iJobPart >= 552u && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 264, "m_uJobPart<SIV_OBJECT_MAX") == 1 )
   {
     __debugbreak();
   }
-  this->m_uU1 = 1;
+  this->m_uU1 = true;
   this->m_iPhases = a7 == 0;
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   this->m_iFrame = a6 % this->m_uCycleFrames;
@@ -46,7 +46,7 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
 
   v2 = (unsigned __int16)CStateGame::GetTickCounter(g_pGame) - this->m_uTickCounter;
   this->m_uTickCounter = CStateGame::GetTickCounter(g_pGame);
-  if ( v2 && this->m_uCycleFrames > 1u )
+  if ( v2 != 0 && this->m_uCycleFrames > 1u )
   {
     if ( this->m_iPhases == 1 )
     {
@@ -68,7 +68,7 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
         {
           this->m_iFrame = 0;
         }
-        if ( !this->m_iFrame )
+        if ( this->m_iFrame == 0 )
         {
           this->m_uU1 = !this->m_uU1;
         }
@@ -82,31 +82,31 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
   if ( this->m_iType == 123 )
   {
-    MEMORY[0x40FE518] = 16;
+    IEntity::m_sGfxInfo.m_uObjType = 16;
   }
   else
   {
-    MEMORY[0x40FE518] = this->m_uObjType;
+    IEntity::m_sGfxInfo.m_uObjType = this->m_uObjType;
   }
-  MEMORY[0x40FE51A] = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
   IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }
 
 
 // address=[0x1541e20]
-// Decompiled from unsigned int __cdecl CDecoObject::operator new(unsigned int a1)
+// Decompiled from unsigned int __cdecl CDecoObject::operator new(uint a1)
 void * __cdecl CDecoObject::operator new(unsigned int a1) {
   
-  return CDecoObjMgr::Alloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
+  return CDecoObjMgr::Alloc(&g_cDecoObjMgr, a1);
 }
 
 
 // address=[0x1541e40]
-// Decompiled from void __cdecl CDecoObject::operator delete(void *a1)
+// Decompiled from void __cdecl CDecoObject::operator delete(uint *a1)
 void __cdecl CDecoObject::operator delete(void * a1) {
   
-  CDecoObjMgr::Dealloc((CDecoObjMgr *)&g_cDecoObjMgr, a1);
+  CDecoObjMgr::Dealloc(&g_cDecoObjMgr, a1);
 }
 
 
@@ -121,7 +121,7 @@ void __cdecl CDecoObject::operator delete(void * a1) {
   IDecoObject::IDecoObject(this, a2);
   v6 = 0;
   this->__vftable = (IAnimatedEntity_vtbl *)&CDecoObject::_vftable_;
-  operator^<unsigned int>(a2, &fileFormatVersion);
+  operator^<unsigned int>(a2, (unsigned int *)&fileFormatVersion);
   if ( fileFormatVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CDecoObject");
@@ -146,7 +146,7 @@ void  CDecoObject::Store(std::ostream & a1) {
 
   IDecoObject::Store(this, a1);
   v2 = 1;
-  operator^<unsigned int>(a1, &v2);
+  operator^<unsigned int>(a1, (unsigned int *)&v2);
   operator^<bool>(a1, &this->m_uU1);
   operator^<bool>(a1, (bool *)&this->m_iPhases);
   operator^<unsigned char>(a1, &this->m_uCycleFrames);

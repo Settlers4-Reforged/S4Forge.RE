@@ -6,7 +6,7 @@
 // Decompiled from CStorageSideBarInfo *__thiscall CStorageSideBarInfo::CStorageSideBarInfo(CStorageSideBarInfo *this)
  CStorageSideBarInfo::CStorageSideBarInfo(void) {
   
-  CInfoExchange::CInfoExchange(this);
+  CInfoExchange::CInfoExchange((CInfoExchange *)this);
   *(_DWORD *)this = &CStorageSideBarInfo::_vftable_;
   return this;
 }

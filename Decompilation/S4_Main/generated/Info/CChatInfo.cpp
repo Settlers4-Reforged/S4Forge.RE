@@ -6,7 +6,7 @@
 // Decompiled from CChatInfo *__thiscall CChatInfo::CChatInfo(CChatInfo *this)
  CChatInfo::CChatInfo(void) {
   
-  _vec_ctor((char *)this + 16, 0x28u, 8u, SPlayerInfo::SPlayerInfo, SPlayerInfo::~SPlayerInfo);
+  _vec_ctor((char *)this->m_asPlayerInfo, 0x28u, 8u, (void (__thiscall *)(void *))SPlayerInfo::SPlayerInfo, SPlayerInfo::~SPlayerInfo);
   return this;
 }
 
@@ -15,7 +15,7 @@
 // Decompiled from void __thiscall CChatInfo::~CChatInfo(CChatInfo *this)
  CChatInfo::~CChatInfo(void) {
   
-  `eh vector destructor iterator'((char *)this + 16, 0x28u, 8u, SPlayerInfo::~SPlayerInfo);
+  `eh vector destructor iterator'(this->m_asPlayerInfo, 0x28u, 8u, SPlayerInfo::~SPlayerInfo);
 }
 
 

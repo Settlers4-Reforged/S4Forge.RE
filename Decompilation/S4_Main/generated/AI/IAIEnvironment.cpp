@@ -151,8 +151,8 @@ int __cdecl IAIEnvironment::ClipMax(int a1, int a2) {
 // Decompiled from bool __cdecl IAIEnvironment::WorldInWorldPackedXY(int a1)
 bool __cdecl IAIEnvironment::WorldInWorldPackedXY(int a1) {
   
-  int v1; // eax
-  int v3; // [esp-4h] [ebp-4h]
+  unsigned int v1; // eax
+  unsigned int v3; // [esp-4h] [ebp-4h]
 
   v3 = IAIEnvironment::UnpackYFast(a1);
   v1 = IAIEnvironment::UnpackXFast(a1);
@@ -225,7 +225,7 @@ int __cdecl IAIEnvironment::WorldEcoSectorIdPackedXY(int a1) {
   
   int v1; // eax
 
-  v1 = IAIEnvironment::WorldIndexPackedXY(a1);
+  v1 = IAIEnvironment::WorldIndexPackedXY((int)a1);
   IAIEnvironment::WorldEcoSectorId(v1);
 }
 
@@ -344,7 +344,7 @@ class CRandom16 * __cdecl IAIEnvironment::RandomPtr(void) {
 
 
 // address=[0x130add0]
-// Decompiled from int __cdecl IAIEnvironment::GridDistance(int a1, int a2)
+// Decompiled from static int __cdecl IAIEnvironment::GridDistance(int a1, int a2)
 int __cdecl IAIEnvironment::GridDistance(int a1, int a2) {
   
   return Grid::DistanceInline(a1, a2);
@@ -417,7 +417,7 @@ int __cdecl IAIEnvironment::EntityType(int a1) {
   unsigned __int16 *v1; // eax
 
   v1 = (unsigned __int16 *)CMapObjectMgr::Entity(a1);
-  return IEntity::Type(v1);
+  return IEntity::Type((IEntity *)v1);
 }
 
 
@@ -443,13 +443,13 @@ int __cdecl IAIEnvironment::EntitySectorId(int a1) {
 
   v4 = 0;
   v5 = CMapObjectMgr::EntityPtr(a1);
-  if ( !v5 )
+  if ( v5 != 0 )
   {
-    return v4;
+    v1 = IEntity::PackedXY(v5);
+    v3 = IAIEnvironment::WorldIndexPackedXY(v1);
+    return ITiling::SectorId(v3);
   }
-  v1 = IEntity::PackedXY(v5);
-  v3 = IAIEnvironment::WorldIndexPackedXY(v1);
-  return ITiling::SectorId(v3);
+  return v4;
 }
 
 
@@ -483,34 +483,28 @@ class CAIEntityInfo * __cdecl IAIEnvironment::EntityGetEntityInfo(int _iEntityId
   }
   v5 = 0;
   pEntity = CMapObjectMgr::EntityPtr(_iEntityId);
-  if ( !pEntity )
+  if ( pEntity != 0 )
   {
-    return v5;
+    v5 = IEntity::AIEntityInfoPtr(pEntity);
+    if ( v5 == 0 && _bCreate && IEntity::FlagBits(pEntity, ENTITY_FLAG_AliveMask) != 0 )
+    {
+      if ( IEntity::ID(pEntity) != _iEntityId && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 369, "pEntity->ID() == _iEntityId") == 1 )
+      {
+        __debugbreak();
+      }
+      C = (CAIEntityInfo *)operator new(0x18u);
+      if ( C != 0 )
+      {
+        v3 = CAIEntityInfo::CAIEntityInfo(C, _iEntityId);
+      }
+      else
+      {
+        v3 = 0;
+      }
+      v5 = v3;
+      IEntity::SetAIEntityInfoPtr(pEntity, v3);
+    }
   }
-  v5 = IEntity::AIEntityInfoPtr(pEntity);
-  if ( v5 != 0 || !_bCreate )
-  {
-    return v5;
-  }
-  if ( !IEntity::FlagBits(pEntity, ENTITY_FLAG_AliveMask) )
-  {
-    return v5;
-  }
-  if ( IEntity::ID(pEntity) != _iEntityId && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 369, "pEntity->ID() == _iEntityId") == 1 )
-  {
-    __debugbreak();
-  }
-  C = (CAIEntityInfo *)operator new(0x18u);
-  if ( C )
-  {
-    v3 = CAIEntityInfo::CAIEntityInfo(C, _iEntityId);
-  }
-  else
-  {
-    v3 = 0;
-  }
-  v5 = v3;
-  IEntity::SetAIEntityInfoPtr(pEntity, v3);
   return v5;
 }
 
@@ -533,7 +527,7 @@ int __cdecl IAIEnvironment::EntityOwnerId(int a1) {
   unsigned __int8 *v1; // eax
 
   v1 = (unsigned __int8 *)CMapObjectMgr::Entity(a1);
-  return IEntity::OwnerId(v1);
+  return IEntity::OwnerId((IEntity *)v1);
 }
 
 
@@ -552,15 +546,15 @@ void __cdecl IAIEnvironment::EntitySetFlagBits(int a1, int a2) {
 // Decompiled from int __cdecl IAIEnvironment::EntityClearFlagBits(int a1, EntityFlag a2)
 void __cdecl IAIEnvironment::EntityClearFlagBits(int a1, int a2) {
   
-  _DWORD *v2; // eax
+  IEntity *v2; // eax
 
-  v2 = (_DWORD *)CMapObjectMgr::Entity(a1);
+  v2 = CMapObjectMgr::Entity(a1);
   return IEntity::ClearFlagBits(v2, a2);
 }
 
 
 // address=[0x130b160]
-// Decompiled from int __cdecl IAIEnvironment::EntityGetEntityTypeAndPosition(int a1, int *a2, int *a3, int *a4)
+// Decompiled from int __cdecl IAIEnvironment::EntityGetEntityTypeAndPosition(int a1, T_SETTLER_OBJ_TYPE *a2, int *a3, int *a4)
 void __cdecl IAIEnvironment::EntityGetEntityTypeAndPosition(int a1, int & a2, int & a3, int & a4) {
   
   int result; // eax
@@ -571,9 +565,9 @@ void __cdecl IAIEnvironment::EntityGetEntityTypeAndPosition(int a1, int & a2, in
     __debugbreak();
   }
   v5 = (unsigned __int8 *)CMapObjectMgr::Entity(a1);
-  *a2 = IEntity::ObjType(v5);
-  *a3 = IEntity::Type((unsigned __int16 *)v5);
-  result = IEntity::PackedXY(v5);
+  *a2 = IEntity::ObjType((IEntity *)v5);
+  *a3 = IEntity::Type((IEntity *)v5);
+  result = IEntity::PackedXY((IEntity *)v5);
   *a4 = result;
   return result;
 }
@@ -605,17 +599,17 @@ void __cdecl IAIEnvironment::EntityGetWarriorTypeAndSectorId(int a1, enum T_AI_W
   int v5; // [esp+8h] [ebp-Ch]
   unsigned int v6; // [esp+10h] [ebp-4h]
 
-  if ( a1 <= 0 && BBSupportDbgReport(2, (int)"AI\\AI_Environment.cpp", 441, (int)"_iEntityId > 0") == 1 )
+  if ( a1 <= 0 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 441, "_iEntityId > 0") == 1 )
   {
     __debugbreak();
   }
   CMapObjectMgr::Entity(a1);
-  v6 = IEntity::WarriorType();
-  if ( v6 > 0xE && BBSupportDbgReport(2, (int)"AI\\AI_Environment.cpp", 447, (int)"uWarriorType <= AI_WARRIOR_TYPE_LAST") == 1 )
+  v6 = ((int (__stdcall *)())IEntity::WarriorType)();
+  if ( v6 > 0xE && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 447, "uWarriorType <= AI_WARRIOR_TYPE_LAST") == 1 )
   {
     __debugbreak();
   }
-  v5 = IEntity::WorldIdx();
+  v5 = ((int (__stdcall *)())IEntity::WorldIdx)();
   v4 = ITiling::SectorId(v5);
   result = v6;
   *a2 = v6;
@@ -653,7 +647,7 @@ bool __cdecl IAIEnvironment::EntityIsAlive(int a1) {
   IEntity *v2; // [esp+0h] [ebp-8h]
 
   v2 = CMapObjectMgr::EntityPtr(a1);
-  return v2 && IEntity::FlagBits(v2, ENTITY_FLAG_AliveMask) != 0;
+  return v2 != 0 && IEntity::FlagBits(v2, ENTITY_FLAG_AliveMask) != 0;
 }
 
 
@@ -664,7 +658,7 @@ bool __cdecl IAIEnvironment::EntityIsReady(int a1) {
   IEntity *v2; // [esp+0h] [ebp-8h]
 
   v2 = CMapObjectMgr::EntityPtr(a1);
-  return v2 && IEntity::FlagBits(v2, ENTITY_FLAG_Ready) != 0;
+  return v2 != 0 && IEntity::FlagBits(v2, ENTITY_FLAG_Ready) != 0;
 }
 
 
@@ -676,7 +670,7 @@ bool __cdecl IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(int a1, int a2) {
   bool v4; // [esp+5h] [ebp-3h]
 
   v3 = CMapObjectMgr::EntityPtr(a1);
-  if ( !v3 )
+  if ( v3 == 0 )
   {
     return 0;
   }
@@ -689,16 +683,16 @@ bool __cdecl IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(int a1, int a2) {
 // Decompiled from bool __cdecl IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(int a1, int a2)
 bool __cdecl IAIEnvironment::EntityIsAliveAndOfGivenWarriorType(int a1, enum T_AI_WARRIOR_TYPE a2) {
   
-  _DWORD *v3; // [esp+0h] [ebp-8h]
+  IEntity *v3; // [esp+0h] [ebp-8h]
   bool v4; // [esp+5h] [ebp-3h]
 
-  v3 = (_DWORD *)CMapObjectMgr::EntityPtr(a1);
-  if ( !v3 )
+  v3 = CMapObjectMgr::EntityPtr(a1);
+  if ( v3 == 0 )
   {
     return 0;
   }
   v4 = IEntity::FlagBits(v3, ENTITY_FLAG_AliveMask) != 0;
-  return IEntity::WarriorType() == a2 && v4;
+  return ((int (__stdcall *)())IEntity::WarriorType)() == a2 && v4;
 }
 
 
@@ -712,20 +706,20 @@ class CAIEntityInfoTower * __cdecl IAIEnvironment::EntityGetEntityInfoTower(int 
 
   v2 = 0;
   EntityInfo = IAIEnvironment::EntityGetEntityInfo(a1, 1);
-  if ( !EntityInfo )
+  if ( EntityInfo != 0 )
   {
-    return v2;
+    pEntityInfoEx = (CAIEntityInfoTower *)CAIEntityInfo::ExtendedInfo(EntityInfo, 0);
+    if ( pEntityInfoEx == 0 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 473, "pEntityInfoEx != 0") == 1 )
+    {
+      __debugbreak();
+    }
+    if ( j____RTDynamicCast((void **)&pEntityInfoEx->vftable, 0, &CAIEntityInfoEx__RTTI_Type_Descriptor_, &CAIEntityInfoTower__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 474, "dynamic_cast<CAIEntityInfoTower*>(pEntityInfoEx) != 0") == 1 )
+    {
+      __debugbreak();
+    }
+    return pEntityInfoEx;
   }
-  pEntityInfoEx = (CAIEntityInfoTower *)CAIEntityInfo::ExtendedInfo(EntityInfo, 0);
-  if ( !pEntityInfoEx && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 473, "pEntityInfoEx != 0") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( !j____RTDynamicCast((void **)&pEntityInfoEx->vftable, 0, &CAIEntityInfoEx__RTTI_Type_Descriptor_, &CAIEntityInfoTower__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 474, "dynamic_cast<CAIEntityInfoTower*>(pEntityInfoEx) != 0") == 1 )
-  {
-    __debugbreak();
-  }
-  return pEntityInfoEx;
+  return v2;
 }
 
 
@@ -740,8 +734,8 @@ void __cdecl IAIEnvironment::EntitySendCastSpellCommand(int a1, int a2, int _iDs
   IEntity *SettlerPtr; // [esp+24h] [ebp-10h]
   int v8; // [esp+30h] [ebp-4h]
 
-  SettlerPtr = CSettlerMgr::GetSettlerPtr((struct CSettlerMgr *)g_cSettlerMgr, a1);
-  if ( SettlerPtr && IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Ready) && IEntity::Type(SettlerPtr) == 45 )
+  SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, a1);
+  if ( SettlerPtr != 0 && IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Ready) != 0 && IEntity::Type(SettlerPtr) == 45 )
   {
     v3 = IEntity::OwnerId(SettlerPtr);
     v6 = CEntityEvent::CEntityEvent(&v4, 3u, a2, v3, 0, _iDstXY);
@@ -770,7 +764,7 @@ void __cdecl IAIEnvironment::MovingEntitySendMoveCommand(int a1, int a2, int a3,
 
   v9 = (void **)CMapObjectMgr::EntityPtr(a1);
   v11 = (IEntity *)j____RTDynamicCast(v9, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0);
-  if ( v11 )
+  if ( v11 != 0 )
   {
     if ( a4 )
     {
@@ -799,7 +793,7 @@ bool __cdecl IAIEnvironment::MovingEntityIsWaiting(int a1) {
   IMovingEntity *v1; // eax
 
   v1 = CMapObjectMgr::MovingEntity(a1);
-  return *((_BYTE *)IMovingEntity::GetActualTask(v1) + 4) == 17;
+  return IMovingEntity::GetActualTask(v1)->m_iTask == 17;
 }
 
 
@@ -813,9 +807,9 @@ int __cdecl IAIEnvironment::MovingEntityWalkingState(int a1) {
 
   v2 = CMapObjectMgr::EntityPtr(a1);
   v3 = (IMovingEntity *)j____RTDynamicCast((void **)&v2->__vftable, 0, &IEntity__RTTI_Type_Descriptor_, &IMovingEntity__RTTI_Type_Descriptor_, 0);
-  if ( v3 && (v4 = IMovingEntity::Walking(v3)) != 0 )
+  if ( v3 != 0 && (v4 = IMovingEntity::Walking(v3)) != 0 )
   {
-    return (*(int (__thiscall **)(struct CWalking *, _DWORD))(*(_DWORD *)v4 + 52))(v4, 0);
+    return ((int (__thiscall *)(struct CWalking *, _DWORD))v4->State)(v4, 0);
   }
   else
   {
@@ -829,7 +823,7 @@ int __cdecl IAIEnvironment::MovingEntityWalkingState(int a1) {
 void __cdecl IAIEnvironment::EntityEnterManakopter(int a1, int a2) {
   
   int result; // eax
-  _BYTE v3[24]; // [esp+4h] [ebp-34h] BYREF
+  CEntityEvent v3; // [esp+4h] [ebp-34h] BYREF
   CEntityEvent *v4; // [esp+1Ch] [ebp-1Ch]
   CEntityEvent *v5; // [esp+20h] [ebp-18h]
   void **v6; // [esp+24h] [ebp-14h]
@@ -839,16 +833,16 @@ void __cdecl IAIEnvironment::EntityEnterManakopter(int a1, int a2) {
   v6 = (void **)CMapObjectMgr::EntityPtr(a1);
   result = j____RTDynamicCast(v6, 0, &IEntity__RTTI_Type_Descriptor_, &IAnimatedEntity__RTTI_Type_Descriptor_, 0);
   v7 = result;
-  if ( !result )
+  if ( result != 0 )
   {
-    return result;
+    v5 = CEntityEvent::CEntityEvent(&v3, 0x1Cu, 0, a2, 0, 0);
+    v4 = v5;
+    v8 = 0;
+    (*(void (__thiscall **)(int, CEntityEvent *))(*(_DWORD *)v7 + 80))(v7, v5);
+    v8 = -1;
+    return CEntityEvent::~CEntityEvent(&v3);
   }
-  v5 = CEntityEvent::CEntityEvent((CEntityEvent *)v3, 0x1Cu, 0, a2, 0, 0);
-  v4 = v5;
-  v8 = 0;
-  (*(void (__thiscall **)(int, CEntityEvent *))(*(_DWORD *)v7 + 80))(v7, v5);
-  v8 = -1;
-  return CEntityEvent::~CEntityEvent(v3);
+  return result;
 }
 
 
@@ -858,8 +852,8 @@ void __cdecl IAIEnvironment::EntityManakopterUnload(int a1) {
   
   CManakopter *ManakopterPtr; // [esp+0h] [ebp-4h]
 
-  ManakopterPtr = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, a1);
-  if ( ManakopterPtr )
+  ManakopterPtr = (struct CManakopter *)CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, a1);
+  if ( ManakopterPtr != 0 )
   {
     CManakopter::UnloadSettlers(ManakopterPtr);
   }
@@ -872,8 +866,8 @@ void __cdecl IAIEnvironment::EntityManakopterFlyTo(int a1, int a2, int a3) {
   
   IFlyingEntity *result; // eax
 
-  result = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, a1);
-  if ( result )
+  result = (struct CManakopter *)CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, a1);
+  if ( result != 0 )
   {
     return (IFlyingEntity *)IFlyingEntity::FlyTo(result, a2, a3);
   }
@@ -887,12 +881,12 @@ bool __cdecl IAIEnvironment::EntityIsManakopterMoving(int a1) {
   
   IFlyingEntity *ManakopterPtr; // [esp+0h] [ebp-4h]
 
-  ManakopterPtr = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, a1);
-  if ( !ManakopterPtr && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 634, "pManakopter != NULL") == 1 )
+  ManakopterPtr = (struct CManakopter *)CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, a1);
+  if ( ManakopterPtr == 0 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 634, "pManakopter != NULL") == 1 )
   {
     __debugbreak();
   }
-  return ManakopterPtr && IFlyingEntity::FlyingFlagBits(ManakopterPtr, 1);
+  return ManakopterPtr != 0 && IFlyingEntity::FlyingFlagBits(ManakopterPtr, 1) != 0;
 }
 
 
@@ -918,16 +912,16 @@ bool __cdecl IAIEnvironment::EntityIsShamanOutOfMana(int a1) {
   CShamanRole *v2; // [esp+0h] [ebp-8h]
   unsigned __int8 *SettlerPtr; // [esp+4h] [ebp-4h]
 
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(a1);
-  if ( !SettlerPtr && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 675, "pSettler != NULL") == 1 )
+  SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(a1);
+  if ( SettlerPtr == 0 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 675, "pSettler != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !SettlerPtr || IEntity::Type((unsigned __int16 *)SettlerPtr) != 54 )
+  if ( SettlerPtr == 0 || IEntity::Type((IEntity *)SettlerPtr) != 54 )
   {
     return 0;
   }
-  v2 = (CShamanRole *)CSettler::Role(SettlerPtr);
+  v2 = (CShamanRole *)CSettler::Role((CSettler *)SettlerPtr);
   return CShamanRole::IsManaPoolEmpty(v2);
 }
 
@@ -936,25 +930,25 @@ bool __cdecl IAIEnvironment::EntityIsShamanOutOfMana(int a1) {
 // Decompiled from char __cdecl IAIEnvironment::EntitySendShamanWorkEvent(int a1, int a2)
 bool __cdecl IAIEnvironment::EntitySendShamanWorkEvent(int a1, int a2) {
   
-  _BYTE v3[24]; // [esp+4h] [ebp-34h] BYREF
+  CEntityEvent v3; // [esp+4h] [ebp-34h] BYREF
   CEntityEvent *v4; // [esp+1Ch] [ebp-1Ch]
   CEntityEvent *v5; // [esp+20h] [ebp-18h]
   void **v6; // [esp+24h] [ebp-14h]
-  unsigned __int16 *v7; // [esp+28h] [ebp-10h]
+  IEntity *v7; // [esp+28h] [ebp-10h]
   int v8; // [esp+34h] [ebp-4h]
 
   v6 = (void **)CMapObjectMgr::EntityPtr(a1);
-  v7 = (unsigned __int16 *)j____RTDynamicCast(v6, 0, &IEntity__RTTI_Type_Descriptor_, &IAnimatedEntity__RTTI_Type_Descriptor_, 0);
-  if ( !v7 || IEntity::Type(v7) != 54 )
+  v7 = (IEntity *)j____RTDynamicCast(v6, 0, &IEntity__RTTI_Type_Descriptor_, &IAnimatedEntity__RTTI_Type_Descriptor_, 0);
+  if ( v7 == 0 || IEntity::Type(v7) != 54 )
   {
     return 0;
   }
-  v5 = CEntityEvent::CEntityEvent((CEntityEvent *)v3, 3u, 0, a2, 0, 0);
+  v5 = CEntityEvent::CEntityEvent(&v3, 3u, 0, a2, 0, 0);
   v4 = v5;
   v8 = 0;
-  (*(void (__thiscall **)(unsigned __int16 *, CEntityEvent *))(*(_DWORD *)v7 + 80))(v7, v5);
+  v7->SetEvent(v7, v5);
   v8 = -1;
-  CEntityEvent::~CEntityEvent(v3);
+  CEntityEvent::~CEntityEvent(&v3);
   return 1;
 }
 
@@ -965,8 +959,8 @@ int __cdecl IAIEnvironment::BuildingPackedEnsignPosition(int a1) {
   
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-4h]
 
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
-  if ( BuildingPtr )
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
+  if ( BuildingPtr != 0 )
   {
     return CBuilding::EnsignPackedXY(BuildingPtr);
   }
@@ -995,11 +989,11 @@ int __cdecl IAIEnvironment::BuildingGetNumberOfAllyBuildings(int a1, int a2, int
 
   v5 = 0;
   v4 = IAIEnvironment::AlliancesAllianceId(a1);
-  for ( i = (int *)IAIEnvironment::AlliancesAllyPlayerIds(v4);
-        *i;
+  for ( i = IAIEnvironment::AlliancesAllyPlayerIds(v4);
+        *i != 0;
         ++i )
   {
-    v5 += CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, *i, a2, a3);
+    v5 += CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, *i, (S4_BUILDING_ENUM)a2, a3);
   }
   return v5;
 }
@@ -1015,11 +1009,11 @@ int __cdecl IAIEnvironment::BuildingGetNumberOfEnemyBuildings(int a1, int a2, in
 
   v5 = 0;
   v4 = IAIEnvironment::AlliancesAllianceId(a1);
-  for ( i = (int *)IAIEnvironment::AlliancesEnemyPlayerIds(v4);
-        *i;
+  for ( i = IAIEnvironment::AlliancesEnemyPlayerIds(v4);
+        *i != 0;
         ++i )
   {
-    v5 += CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, *i, a2, a3);
+    v5 += CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, *i, (S4_BUILDING_ENUM)a2, a3);
   }
   return v5;
 }
@@ -1041,12 +1035,12 @@ bool __cdecl IAIEnvironment::BuildingIsReadyAndInSector(int a1, int a2) {
   int v4; // eax
   unsigned __int8 *BuildingPtr; // [esp+4h] [ebp-8h]
 
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
-  if ( !BuildingPtr )
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
+  if ( BuildingPtr == 0 )
   {
     return 0;
   }
-  if ( !IEntity::FlagBits(BuildingPtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  if ( IEntity::FlagBits((IEntity *)BuildingPtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) == 0 )
   {
     return 0;
   }
@@ -1085,7 +1079,7 @@ bool __cdecl IAIEnvironment::BuildingSearchNearestBuildingInSector(int a1, int a
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorld(a3, a4) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 959, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(a3, a4) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 959, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -1096,19 +1090,19 @@ bool __cdecl IAIEnvironment::BuildingSearchNearestBuildingInSector(int a1, int a
   v16 = 0;
   v14 = 0x4000;
   for ( i = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, a1, a2);
-        i;
+        i != 0;
         i = IAnimatedEntity::Next(v18) )
   {
-    v18 = CBuildingMgr::Building((CBuildingMgr *)g_cBuildingMgr, i);
-    if ( IEntity::ObjType(v18) != 8 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 972, "rBuilding.ObjType() == BUILDING_OBJ") == 1 )
+    v18 = (unsigned __int8 *)CBuildingMgr::Building((CBuildingMgr *)g_cBuildingMgr, i);
+    if ( IEntity::ObjType((IEntity *)v18) != BUILDING_OBJ && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 972, "rBuilding.ObjType() == BUILDING_OBJ") == 1 )
     {
       __debugbreak();
     }
-    if ( IEntity::Type((unsigned __int16 *)v18) != a2 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 973, "rBuilding.Type() == _iBuildingType") == 1 )
+    if ( IEntity::Type((IEntity *)v18) != a2 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 973, "rBuilding.Type() == _iBuildingType") == 1 )
     {
       __debugbreak();
     }
-    v11 = CBuilding::EnsignWorldIdx(v18);
+    v11 = CBuilding::EnsignWorldIdx((CBuilding *)v18);
     v13 = ITiling::SectorId(v11);
     if ( v13 <= 0 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 978, "iEnsignSectorId > 0") == 1 )
     {
@@ -1118,7 +1112,7 @@ bool __cdecl IAIEnvironment::BuildingSearchNearestBuildingInSector(int a1, int a
     {
       v9 = IEntity::X(v18);
       v10 = IEntity::X(v18);
-      v12 = Grid::Distance((Grid *)(v9 - a3), v10 - a4);
+      v12 = Grid::Distance(v9 - a3, v10 - a4);
       if ( v12 < v14 )
       {
         v14 = v12;
@@ -1126,9 +1120,9 @@ bool __cdecl IAIEnvironment::BuildingSearchNearestBuildingInSector(int a1, int a
       }
     }
   }
-  if ( v16 )
+  if ( v16 != 0 )
   {
-    v15 = CBuildingMgr::Building((CBuildingMgr *)g_cBuildingMgr, v16);
+    v15 = (unsigned __int8 *)CBuildingMgr::Building((CBuildingMgr *)g_cBuildingMgr, v16);
     *(_DWORD *)a6 = v16;
     *((_DWORD *)a6 + 1) = IEntity::X(v15);
     *((_DWORD *)a6 + 2) = IEntity::Y(v15);
@@ -1151,7 +1145,7 @@ bool __cdecl IAIEnvironment::BuildingSearchNearestBuildingInSector(int a1, int a
 // Decompiled from int __cdecl IAIEnvironment::BuildingHasInhabitant(int a1)
 int __cdecl IAIEnvironment::BuildingHasInhabitant(int a1) {
   
-  if ( CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1) )
+  if ( (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1) != 0 )
   {
     return (unsigned __int8)CBuilding::HaveInhabitant() != 0;
   }
@@ -1168,8 +1162,8 @@ int __cdecl IAIEnvironment::BuildingGetNextBuildingOfSameType(int a1) {
   
   unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-4h]
 
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
-  if ( BuildingPtr )
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
+  if ( BuildingPtr != 0 )
   {
     return IAnimatedEntity::Next(BuildingPtr);
   }
@@ -1188,8 +1182,8 @@ int __cdecl IAIEnvironment::BuildingGetEnsignSectorId(int a1) {
   int v2; // eax
   unsigned __int8 *BuildingPtr; // [esp+8h] [ebp-4h]
 
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
-  if ( !BuildingPtr )
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
+  if ( BuildingPtr == 0 )
   {
     return 0;
   }
@@ -1218,7 +1212,7 @@ int __cdecl IAIEnvironment::VehicleGetNumberOfAllyVehicles(int a1, int a2, int a
   v5 = 0;
   v4 = IAIEnvironment::AlliancesAllianceId(a1);
   for ( i = IAIEnvironment::AlliancesAllyPlayerIds(v4);
-        *i;
+        *i != 0;
         ++i )
   {
     v5 += CVehicleMgr::GetNumberOfVehicles((CVehicleMgr *)&g_cVehicleMgr, *i, a2, a3);
@@ -1237,8 +1231,8 @@ int __cdecl IAIEnvironment::VehicleGetNumberOfEnemyVehicles(int a1, int a2, int 
 
   v5 = 0;
   v4 = IAIEnvironment::AlliancesAllianceId(a1);
-  for ( i = (int *)IAIEnvironment::AlliancesEnemyPlayerIds(v4);
-        *i;
+  for ( i = IAIEnvironment::AlliancesEnemyPlayerIds(v4);
+        *i != 0;
         ++i )
   {
     v5 += IAIEnvironment::VehicleGetNumberOfVehicles(*i, a2, a3);
@@ -1251,14 +1245,14 @@ int __cdecl IAIEnvironment::VehicleGetNumberOfEnemyVehicles(int a1, int a2, int 
 // Decompiled from int __cdecl IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(int a1, int a2)
 int __cdecl IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(int a1, int a2) {
   
-  _DWORD *v3; // [esp+0h] [ebp-8h]
+  CVehicle *v3; // [esp+0h] [ebp-8h]
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = CVehicleMgr::GetFirstVehicleId(a1, a2);
+  for ( i = ((int (__stdcall *)(int, int))CVehicleMgr::GetFirstVehicleId)(a1, a2);
         i > 0;
         i = IAnimatedEntity::Next(v3) )
   {
-    v3 = (_DWORD *)CVehicleMgr::operator[](i);
+    v3 = CVehicleMgr::operator[](i);
     if ( (_UNKNOWN *)IEntity::FlagBits(v3, ENTITY_FLAG_Ready|ENTITY_FLAG_ON_BOARD) == &loc_1C00000 )
     {
       return i;
@@ -1272,11 +1266,11 @@ int __cdecl IAIEnvironment::VehicleGetFirstReadyAndCheckedOutVehicleId(int a1, i
 // Decompiled from int __cdecl IAIEnvironment::VehicleGetNextReadyAndCheckedOutVehicleId(int a1)
 int __cdecl IAIEnvironment::VehicleGetNextReadyAndCheckedOutVehicleId(int a1) {
   
-  int v2; // [esp+0h] [ebp-Ch]
-  _DWORD *v3; // [esp+4h] [ebp-8h]
+  CVehicle *v2; // [esp+0h] [ebp-Ch]
+  CVehicle *v3; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  if ( !a1 )
+  if ( a1 == 0 )
   {
     return 0;
   }
@@ -1285,7 +1279,7 @@ int __cdecl IAIEnvironment::VehicleGetNextReadyAndCheckedOutVehicleId(int a1) {
         i > 0;
         i = IAnimatedEntity::Next(v3) )
   {
-    v3 = (_DWORD *)CVehicleMgr::operator[](i);
+    v3 = CVehicleMgr::operator[](i);
     if ( (_UNKNOWN *)IEntity::FlagBits(v3, (EntityFlag)&loc_2008000) == (_UNKNOWN *)((char *)&loc_1FFFFFF + 1) )
     {
       return i;
@@ -1300,24 +1294,24 @@ int __cdecl IAIEnvironment::VehicleGetNextReadyAndCheckedOutVehicleId(int a1) {
 void __cdecl IAIEnvironment::VehicleSendQueuedVanishCommand(int a1) {
   
   struct CVehicle *result; // eax
-  _BYTE v2[24]; // [esp+4h] [ebp-30h] BYREF
+  CEntityEvent v2; // [esp+4h] [ebp-30h] BYREF
   CEntityEvent *v3; // [esp+1Ch] [ebp-18h]
   CEntityEvent *v4; // [esp+20h] [ebp-14h]
   struct CVehicle *v5; // [esp+24h] [ebp-10h]
   int v6; // [esp+30h] [ebp-4h]
 
-  result = CVehicleMgr::GetVehiclePtr(a1);
+  result = (struct CVehicle *)CVehicleMgr::GetVehiclePtr(a1);
   v5 = result;
-  if ( !result )
+  if ( result != 0 )
   {
-    return result;
+    v4 = CEntityEvent::CEntityEvent(&v2, 0x11u, 13, 18, 0, 0);
+    v3 = v4;
+    v6 = 0;
+    v5->SetEvent(v5, v4);
+    v6 = -1;
+    return (struct CVehicle *)CEntityEvent::~CEntityEvent(&v2);
   }
-  v4 = CEntityEvent::CEntityEvent((CEntityEvent *)v2, 0x11u, 13, 18, 0, 0);
-  v3 = v4;
-  v6 = 0;
-  (*(void (__thiscall **)(struct CVehicle *, CEntityEvent *))(*(_DWORD *)v5 + 80))(v5, v4);
-  v6 = -1;
-  return (struct CVehicle *)CEntityEvent::~CEntityEvent(v2);
+  return result;
 }
 
 
@@ -1325,7 +1319,7 @@ void __cdecl IAIEnvironment::VehicleSendQueuedVanishCommand(int a1) {
 // Decompiled from int __cdecl IAIEnvironment::SettlerGetNumberOfSettlers(int a1, S4_SETTLER_ENUM a2)
 int __cdecl IAIEnvironment::SettlerGetNumberOfSettlers(int a1, int a2) {
   
-  return CSettlerMgr::GetNumberOfSettlers((CSettlerMgr *)g_cSettlerMgr, a1, a2);
+  return CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, a1, a2);
 }
 
 
@@ -1333,14 +1327,14 @@ int __cdecl IAIEnvironment::SettlerGetNumberOfSettlers(int a1, int a2) {
 // Decompiled from int __cdecl IAIEnvironment::SettlerGetFirstReadyAndCheckedOutSettlerId(int a1, int a2)
 int __cdecl IAIEnvironment::SettlerGetFirstReadyAndCheckedOutSettlerId(int a1, int a2) {
   
-  _DWORD *v3; // [esp+0h] [ebp-8h]
+  CSettler *v3; // [esp+0h] [ebp-8h]
   int i; // [esp+4h] [ebp-4h]
 
-  for ( i = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, a1, a2);
+  for ( i = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, a1, a2);
         i > 0;
         i = IAnimatedEntity::Next(v3) )
   {
-    v3 = (_DWORD *)CSettlerMgr::operator[](i);
+    v3 = CSettlerMgr::operator[](i);
     if ( (_UNKNOWN *)IEntity::FlagBits(v3, (EntityFlag)&loc_2008000) == (_UNKNOWN *)((char *)&loc_1FFFFFF + 1) )
     {
       return i;
@@ -1354,11 +1348,11 @@ int __cdecl IAIEnvironment::SettlerGetFirstReadyAndCheckedOutSettlerId(int a1, i
 // Decompiled from int __cdecl IAIEnvironment::SettlerGetNextReadyAndCheckedOutSettlerId(int a1)
 int __cdecl IAIEnvironment::SettlerGetNextReadyAndCheckedOutSettlerId(int a1) {
   
-  int v2; // [esp+0h] [ebp-Ch]
-  _DWORD *v3; // [esp+4h] [ebp-8h]
+  CSettler *v2; // [esp+0h] [ebp-Ch]
+  CSettler *v3; // [esp+4h] [ebp-8h]
   int i; // [esp+8h] [ebp-4h]
 
-  if ( !a1 )
+  if ( a1 == 0 )
   {
     return 0;
   }
@@ -1367,7 +1361,7 @@ int __cdecl IAIEnvironment::SettlerGetNextReadyAndCheckedOutSettlerId(int a1) {
         i > 0;
         i = IAnimatedEntity::Next(v3) )
   {
-    v3 = (_DWORD *)CSettlerMgr::operator[](i);
+    v3 = CSettlerMgr::operator[](i);
     if ( (_UNKNOWN *)IEntity::FlagBits(v3, (EntityFlag)&loc_2008000) == (_UNKNOWN *)((char *)&loc_1FFFFFF + 1) )
     {
       return i;
@@ -1402,7 +1396,7 @@ void __cdecl IAIEnvironment::MagicDecreaseMana(int a1, int a2) {
 
 
 // address=[0x130c3c0]
-// Decompiled from int __cdecl IAIEnvironment::PlayerRace(int a1)
+// Decompiled from DWORD __cdecl IAIEnvironment::PlayerRace(int a1)
 int __cdecl IAIEnvironment::PlayerRace(int a1) {
   
   return CPlayerManager::Race(a1);
@@ -1410,15 +1404,15 @@ int __cdecl IAIEnvironment::PlayerRace(int a1) {
 
 
 // address=[0x130c3e0]
-// Decompiled from bool __cdecl IAIEnvironment::EcoSectorCheckId(int a1)
+// Decompiled from bool __cdecl IAIEnvironment::EcoSectorCheckId(unsigned int a1)
 bool __cdecl IAIEnvironment::EcoSectorCheckId(int a1) {
   
-  return CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, a1) != 0;
+  return (struct CEcoSector *)CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, a1) != 0;
 }
 
 
 // address=[0x130c410]
-// Decompiled from bool __cdecl IAIEnvironment::EcoSectorCheckId(int a1, int a2)
+// Decompiled from bool __cdecl IAIEnvironment::EcoSectorCheckId(unsigned int a1, int a2)
 bool __cdecl IAIEnvironment::EcoSectorCheckId(int a1, int a2) {
   
   return CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, a1, a2) != 0;
@@ -1426,13 +1420,13 @@ bool __cdecl IAIEnvironment::EcoSectorCheckId(int a1, int a2) {
 
 
 // address=[0x130c450]
-// Decompiled from int __cdecl IAIEnvironment::EcoSectorGetUniqueId(int a1)
+// Decompiled from int __cdecl IAIEnvironment::EcoSectorGetUniqueId(unsigned int a1)
 int __cdecl IAIEnvironment::EcoSectorGetUniqueId(int a1) {
   
   struct CEcoSector *EcoSectorPtr; // [esp+4h] [ebp-4h]
 
-  EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, a1);
-  if ( EcoSectorPtr )
+  EcoSectorPtr = (struct CEcoSector *)CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, a1);
+  if ( EcoSectorPtr != 0 )
   {
     return CEcoSector::GetUniqueId(EcoSectorPtr);
   }
@@ -1444,13 +1438,13 @@ int __cdecl IAIEnvironment::EcoSectorGetUniqueId(int a1) {
 
 
 // address=[0x130c490]
-// Decompiled from int __cdecl IAIEnvironment::EcoSectorOwnerId(int a1)
+// Decompiled from int __cdecl IAIEnvironment::EcoSectorOwnerId(unsigned int a1)
 int __cdecl IAIEnvironment::EcoSectorOwnerId(int a1) {
   
   struct CEcoSector *EcoSectorPtr; // [esp+4h] [ebp-4h]
 
-  EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, a1);
-  if ( EcoSectorPtr )
+  EcoSectorPtr = (struct CEcoSector *)CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, a1);
+  if ( EcoSectorPtr != 0 )
   {
     return CEcoSector::Owner(EcoSectorPtr);
   }
@@ -1462,15 +1456,15 @@ int __cdecl IAIEnvironment::EcoSectorOwnerId(int a1) {
 
 
 // address=[0x130c4d0]
-// Decompiled from int __cdecl IAIEnvironment::EcoSectorNumberOfPossibleCarriers(int a1)
+// Decompiled from int __cdecl IAIEnvironment::EcoSectorNumberOfPossibleCarriers(unsigned int a1)
 int __cdecl IAIEnvironment::EcoSectorNumberOfPossibleCarriers(int a1) {
   
   CEcoSector *EcoSectorPtr; // [esp+4h] [ebp-4h]
 
-  EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, a1);
-  if ( EcoSectorPtr )
+  EcoSectorPtr = (struct CEcoSector *)CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, a1);
+  if ( EcoSectorPtr != 0 )
   {
-    return CEcoSector::NrOfSettler(EcoSectorPtr, 1);
+    return CEcoSector::NrOfSettler(EcoSectorPtr, SETTLER_CARRIER);
   }
   else
   {
@@ -1487,7 +1481,7 @@ bool __cdecl IAIEnvironment::EcoSectorGetPosition(int a1, int & a2, int & a3) {
   int v5; // [esp+0h] [ebp-4h]
   int v6; // [esp+0h] [ebp-4h]
 
-  v5 = (*(int (__thiscall **)(void *, int, int))(*(_DWORD *)g_pTiling + 44))(g_pTiling, a1, v3);
+  v5 = ((int (__thiscall *)(CTiling *, int, int))g_pTiling->EcoSectorPackedPosition)(g_pTiling, a1, v3);
   if ( v5 <= 0 )
   {
     *a2 = 0;
@@ -1512,7 +1506,7 @@ int __cdecl IAIEnvironment::EcoSectorGetSectorId(int a1) {
 
   v2 = 0;
   v3 = 0;
-  if ( IAIEnvironment::EcoSectorGetPosition(a1, &v2, &v3) )
+  if ( IAIEnvironment::EcoSectorGetPosition(a1, &v2, &v3) != 0 )
   {
     return CWorldManager::SectorId(v2, v3);
   }
@@ -1534,7 +1528,7 @@ int __cdecl IAIEnvironment::EcoSectorGetNextEcoSectorInSector(int a1, int a2) {
   int i; // [esp+18h] [ebp-4h]
 
   UsedEcoSectorId = CEcoSectorMgr::LastUsedEcoSectorId((CEcoSectorMgr *)g_cESMgr);
-  if ( !a2 || a2 >= UsedEcoSectorId )
+  if ( a2 == 0 || a2 >= UsedEcoSectorId )
   {
     return 0;
   }
@@ -1550,9 +1544,9 @@ int __cdecl IAIEnvironment::EcoSectorGetNextEcoSectorInSector(int a1, int a2) {
         i <= UsedEcoSectorId;
         ++i )
   {
-    if ( CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, i) )
+    if ( (struct CEcoSector *)CEcoSectorMgr::GetEcoSectorPtrEx((CEcoSectorMgr *)g_cESMgr, i) != 0 )
     {
-      v4 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pTiling + 44))(g_pTiling, i);
+      v4 = ((int (__thiscall *)(CTiling *, int))g_pTiling->EcoSectorPackedPosition)(g_pTiling, i);
       v3 = IAIEnvironment::WorldIndexPackedXY(v4);
       if ( ITiling::SectorId(v3) == a1 )
       {
@@ -1576,7 +1570,7 @@ void __cdecl IAIEnvironment::EventSendDarkTribeProductionMsg(int a1, int a2, int
   {
     __debugbreak();
   }
-  return INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, 0x13B7u, a3 | (a2 << 16), a4 + 10000, a1);
+  return INetworkEngine::SendNetMessage(g_pNetworkEngine, 0x13B7u, a3 | (a2 << 16), (char *)(a4 + 10000), a1);
 }
 
 
@@ -1590,10 +1584,10 @@ void __cdecl IAIEnvironment::EventSendSettlerProductionMsg(int a1, int a2, int a
   {
     a3 = 67;
   }
-  result = INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, 0x13B7u, a3 | (a2 << 16), 0, a1);
+  result = INetworkEngine::SendNetMessage(g_pNetworkEngine, 0x13B7u, a3 | (a2 << 16), 0, a1);
   if ( a4 > 0 )
   {
-    return INetworkEngine::SendNetMessage((INetworkEngine *)g_pNetworkEngine, 0x13B7u, a3 | (a2 << 16), a4, a1);
+    return INetworkEngine::SendNetMessage(g_pNetworkEngine, 0x13B7u, a3 | (a2 << 16), (char *)a4, a1);
   }
   return result;
 }
@@ -1634,7 +1628,7 @@ int __cdecl IAIEnvironment::GetNearestGreenBorderElement(int & a1, int & a2, int
   }
   v22 = *a1;
   v21 = *a2;
-  if ( !(unsigned __int8)CWorldManager::InWorld(*a1, *a2) )
+  if ( !CWorldManager::InWorld(*a1, *a2) )
   {
     return 0;
   }
@@ -1650,15 +1644,15 @@ int __cdecl IAIEnvironment::GetNearestGreenBorderElement(int & a1, int & a2, int
   {
     v11 = v22 + CSpiralOffsets::DeltaX(i);
     v12 = v21 + CSpiralOffsets::DeltaY(i);
-    if ( (unsigned __int8)CWorldManager::InWorld(v11, v12) )
+    if ( CWorldManager::InWorld(v11, v12) )
     {
       v18 = CWorldManager::Index(v11, v12);
-      if ( !CWorldManager::FlagBits(v18, 0x25u) )
+      if ( CWorldManager::FlagBits(v18, 0x25u) == 0 )
       {
         v10 = CWorldManager::Ground(v18) & 0xF0;
         HIDWORD(v9) = v10 == 32;
         LODWORD(v9) = v10 == 48;
-        if ( !v9 && ITiling::SectorId(v18) == v17 )
+        if ( v9 == 0 && ITiling::SectorId(v18) == v17 )
         {
           break;
         }
@@ -1670,22 +1664,22 @@ int __cdecl IAIEnvironment::GetNearestGreenBorderElement(int & a1, int & a2, int
   {
     v16 = v22 + CSpiralOffsets::DeltaX(i);
     v15 = v21 + CSpiralOffsets::DeltaY(i);
-    if ( (unsigned __int8)CWorldManager::InWorld(v16, v15) )
+    if ( CWorldManager::InWorld(v16, v15) )
     {
       v19 = CWorldManager::Index(v16, v15);
-      if ( !CWorldManager::FlagBits(v19, 0x25u) )
+      if ( CWorldManager::FlagBits(v19, 0x25u) == 0 )
       {
         v8 = CWorldManager::Ground(v19) & 0xF0;
         HIDWORD(v7) = v8 == 32;
         LODWORD(v7) = v8 == 48;
-        if ( !v7 && ITiling::SectorId(v19) == v17 )
+        if ( v7 == 0 && ITiling::SectorId(v19) == v17 )
         {
           for ( j = 0;
                 j < 6;
                 ++j )
           {
             v6 = v19 + CWorldManager::NeighborRelIndex(j);
-            if ( CWorldManager::FlagBits(v6, 4u) )
+            if ( CWorldManager::FlagBits(v6, 4u) != 0 )
             {
               *a1 = v16;
               *a2 = v15;
@@ -1710,7 +1704,7 @@ int __cdecl IAIEnvironment::GetNearestGreenBorderElement(int & a1, int & a2, int
 
 
 // address=[0x130cab0]
-// Decompiled from int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(int *a1, int *a2)
+// Decompiled from static int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(int *a1, int *a2)
 int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(int & a1, int & a2) {
   
   int result; // eax
@@ -1734,7 +1728,7 @@ int __cdecl IAIEnvironment::GetNearestNoneBlockedPosition(int & a1, int & a2) {
       v3 = CWorldManager::Index((int)v7, v6);
       if ( !CWorldManager::IsBlockedLand(v3) )
       {
-        result = Grid::Distance(v7, v6, *a1, *a2);
+        result = Grid::Distance((int)v7, v6, *a1, *a2);
         *a1 = (int)v7;
         *a2 = v6;
         return result;
@@ -1760,7 +1754,7 @@ bool __cdecl IAIEnvironment::FindNearestSectorPosition(int & a1, int & a2, int a
     return 0;
   }
   CSpiralWalk::CSpiralWalk((CSpiralWalk *)v5, *a1, *a2, a4);
-  while ( CSpiralWalk::NextXY(v5, &v8, &v9) )
+  while ( CSpiralWalk::NextXY(v5, &v8, &v9) != 0 )
   {
     v7 = CWorldManager::Index(v8, v9);
     v6 = ITiling::SectorId(v7);
@@ -1784,7 +1778,7 @@ int __cdecl IAIEnvironment::FindNearestCatapultSectorPosition(int a1, int a2, in
   int v9; // [esp+1Ch] [ebp-4h] BYREF
 
   CSpiralWalk::CSpiralWalk((CSpiralWalk *)v5, a2, a3, a4);
-  while ( CSpiralWalk::NextXY(v5, &v8, &v9) )
+  while ( CSpiralWalk::NextXY(v5, &v8, &v9) != 0 )
   {
     v7 = CWorldManager::Index(v8, v9);
     v6 = ITiling::CatapultSectorId(v7);
@@ -1803,29 +1797,28 @@ int __cdecl IAIEnvironment::CalculateRoughlyDistanceToEnemyPosition(int a1, int 
   
   int v4; // [esp+4h] [ebp-64h]
   int v5; // [esp+8h] [ebp-60h]
-  _BYTE v6[88]; // [esp+Ch] [ebp-5Ch] BYREF
+  CWaypoints v6; // [esp+Ch] [ebp-5Ch] BYREF
 
   if ( a1 <= 0 && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1624, "_iPlayerId > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a2) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1625, "g_cWorld.InWorldPackedXY(_iStartXY)") == 1 )
+  if ( !CWorldManager::InWorldPackedXY(a2) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1625, "g_cWorld.InWorldPackedXY(_iStartXY)") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a3) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1626, "g_cWorld.InWorldPackedXY(_iEnemyXY)") == 1 )
+  if ( !CWorldManager::InWorldPackedXY(a3) && BBSupportDbgReport(2, "AI\\AI_Environment.cpp", 1626, "g_cWorld.InWorldPackedXY(_iEnemyXY)") == 1 )
   {
     __debugbreak();
   }
   v4 = 0;
-  if ( !CAStarTiling::FindPath(a3, a2, (struct CWaypoints *)v6, a1 | 0x2C000600) )
+  if ( CAStarTiling::FindPath(a3, a2, &v6, a1 | 0x2C000600) != 0 )
   {
-    return v4;
-  }
-  v5 = CWaypoints::GoalDistance((CWaypoints *)v6);
-  if ( v5 > 0 )
-  {
-    return v5;
+    v5 = CWaypoints::GoalDistance(&v6);
+    if ( v5 > 0 )
+    {
+      return v5;
+    }
   }
   return v4;
 }
@@ -1859,8 +1852,8 @@ void __cdecl IAIEnvironment::EvaluateOwnerMap(int a1, int a2, int a3, struct SAI
   int j; // [esp+58h] [ebp-8h]
   int i; // [esp+5Ch] [ebp-4h]
 
-  v22 = Squares::XYToVW(a2);
-  v21 = Squares::XYToVW(a3);
+  v22 = Squares::XYToVW((int)a2);
+  v21 = Squares::XYToVW((int)a3);
   v20 = IAIEnvironment::AlliancesPlayerBit(a1);
   v19 = IAIEnvironment::AlliancesPlayerEnemyBits(a1);
   v16 = COwnerMap::OwnerBits1VW(v22, v21);
@@ -1874,10 +1867,10 @@ void __cdecl IAIEnvironment::EvaluateOwnerMap(int a1, int a2, int a3, struct SAI
   {
     v14 = (Squares *)(dword_36706E8[2 * i] + v22);
     v15 = (Squares *)(dword_36706EC[2 * i] + v21);
-    valid = Squares::ValidVW(v14, v7);
-    if ( Squares::ValidVW(v15, v8) && valid )
+    valid = ((bool (__cdecl *)(Squares *, int))Squares::ValidVW)(v14, v7);
+    if ( ((bool (__cdecl *)(Squares *, int))Squares::ValidVW)(v15, v8) && valid )
     {
-      v13 = COwnerMap::OwnerBits1VW(v14, v15);
+      v13 = COwnerMap::OwnerBits1VW((int)v14, (int)v15);
       v24 += (v20 & v13) != 0;
       v23 += (v19 & v13) != 0;
     }
@@ -1892,10 +1885,10 @@ void __cdecl IAIEnvironment::EvaluateOwnerMap(int a1, int a2, int a3, struct SAI
   {
     v11 = (Squares *)(dword_36706E8[2 * j] + v22);
     v12 = (Squares *)(dword_36706EC[2 * j] + v21);
-    v5 = Squares::ValidVW(v11, v7);
-    if ( Squares::ValidVW(v12, v9) && v5 )
+    v5 = ((bool (__cdecl *)(Squares *, int))Squares::ValidVW)(v11, v7);
+    if ( ((bool (__cdecl *)(Squares *, int))Squares::ValidVW)(v12, v9) && v5 )
     {
-      v10 = COwnerMap::OwnerBits1VW(v11, v12);
+      v10 = COwnerMap::OwnerBits1VW((int)v11, (int)v12);
       v18 += (v20 & v10) != 0;
       v17 += (v19 & v10) != 0;
     }
@@ -1925,8 +1918,8 @@ void __cdecl IAIEnvironment::EvaluateInfluenceMap(int a1, int a2, int a3, struct
   int i; // [esp+20h] [ebp-8h]
   int j; // [esp+24h] [ebp-4h]
 
-  v7 = Squares::XYToVW(a2);
-  v6 = Squares::XYToVW(a3);
+  v7 = Squares::XYToVW((int)a2);
+  v6 = Squares::XYToVW((int)a3);
   v8 = IAIEnvironment::AlliancesAllianceId(a1);
   v10 = 0;
   v9 = 0;
@@ -1940,8 +1933,8 @@ void __cdecl IAIEnvironment::EvaluateInfluenceMap(int a1, int a2, int a3, struct
     {
       v11 = j + v7;
       v12 = i + v6;
-      valid = Squares::ValidVW((Squares *)(j + v7));
-      if ( Squares::ValidVW((Squares *)(i + v6)) && valid )
+      valid = Squares::ValidVW(j + v7);
+      if ( Squares::ValidVW(i + v6) && valid )
       {
         v10 += CInfluMap::AllyValueVW(v11, v12, v8);
         v9 += CInfluMap::EnemyValueVW(v11, v12, v8);
@@ -2028,7 +2021,7 @@ int __cdecl IAIEnvironment::AlliancesAllPlayersBits(void) {
 // Decompiled from int IAIEnvironment::AlliancesLastAllianceId()
 int __cdecl IAIEnvironment::AlliancesLastAllianceId(void) {
   
-  return CAlliances::LastAllianceId();
+  return ((int (*)(void))CAlliances::LastAllianceId)();
 }
 
 
@@ -2063,7 +2056,7 @@ int __cdecl IAIEnvironment::WorldCatapultSectorId(int a1, int a2) {
 
 
 // address=[0x132edf0]
-// Decompiled from int __cdecl IAIEnvironment::WorldCatapultSectorIdPackedXY(int a1)
+// Decompiled from static int __cdecl IAIEnvironment::WorldCatapultSectorIdPackedXY(int a1)
 int __cdecl IAIEnvironment::WorldCatapultSectorIdPackedXY(int a1) {
   
   int v1; // eax
@@ -2085,7 +2078,7 @@ bool __cdecl IAIEnvironment::WorldIsBlockedLand(int a1, int a2) {
 
 
 // address=[0x132ee40]
-// Decompiled from bool __cdecl IAIEnvironment::WorldIsBlockedLandPackedXY(int a1)
+// Decompiled from static bool __cdecl IAIEnvironment::WorldIsBlockedLandPackedXY(int a1)
 bool __cdecl IAIEnvironment::WorldIsBlockedLandPackedXY(int a1) {
   
   int v1; // eax

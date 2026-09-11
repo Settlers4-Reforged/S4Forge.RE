@@ -6,7 +6,7 @@
 // Decompiled from bool __cdecl CAStar64Normal::IsNotBlocked(int a1)
 bool __cdecl CAStar64Normal::IsNotBlocked(int a1) {
   
-  return (unsigned __int8)CWorldManager::IsBlockedLand(a1) == 0;
+  return !CWorldManager::IsBlockedLand(a1);
 }
 
 
@@ -16,7 +16,7 @@ int __cdecl CAStar64Normal::MoveCosts(int a1, int a2) {
   
   int v2; // esi
 
-  if ( a2 >= 7 || !CWorldManager::SettlerId(a1) )
+  if ( a2 >= 7 || CWorldManager::SettlerId(a1) == 0 )
   {
     return CAStar64::WorldMoveCostsNoRoad(a1);
   }

@@ -20,13 +20,14 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
   int v13; // eax
   void **v14; // eax
   int v15; // [esp-10h] [ebp-2D4h]
-  _BYTE v16[24]; // [esp+4h] [ebp-2C0h] BYREF
-  _BYTE v17[24]; // [esp+1Ch] [ebp-2A8h] BYREF
-  _BYTE v18[24]; // [esp+34h] [ebp-290h] BYREF
+  CEntityEvent v16; // [esp+4h] [ebp-2C0h] BYREF
+  CEntityEvent v17; // [esp+1Ch] [ebp-2A8h] BYREF
+  CEntityEvent v18; // [esp+34h] [ebp-290h] BYREF
   CNetInputProcessor *v19; // [esp+4Ch] [ebp-278h]
   void *v20; // [esp+50h] [ebp-274h]
   unsigned int v21; // [esp+5Ch] [ebp-268h]
   unsigned int v22; // [esp+60h] [ebp-264h]
+  int; // [esp+64h] [ebp-260h]
   CEntityEvent *v24; // [esp+68h] [ebp-25Ch]
   CEntityEvent *v25; // [esp+6Ch] [ebp-258h]
   int v26; // [esp+70h] [ebp-254h]
@@ -80,7 +81,7 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
   int v74; // [esp+148h] [ebp-17Ch]
   int v75; // [esp+14Ch] [ebp-178h]
   int v76; // [esp+150h] [ebp-174h]
-  int v77; // [esp+154h] [ebp-170h]
+  unsigned int v77; // [esp+154h] [ebp-170h]
   int v78; // [esp+158h] [ebp-16Ch]
   unsigned int v79; // [esp+15Ch] [ebp-168h]
   int v80; // [esp+160h] [ebp-164h]
@@ -118,7 +119,7 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
   int v112; // [esp+1ECh] [ebp-D8h]
   int v113; // [esp+1F0h] [ebp-D4h]
   int v114; // [esp+1F4h] [ebp-D0h]
-  void *v115; // [esp+1F8h] [ebp-CCh]
+  BYTE *v115; // [esp+1F8h] [ebp-CCh]
   CCart *v116; // [esp+1FCh] [ebp-C8h]
   CCart *v117; // [esp+200h] [ebp-C4h]
   CCart *ReadyCartPtr; // [esp+204h] [ebp-C0h]
@@ -126,7 +127,7 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
   void **v120; // [esp+20Ch] [ebp-B8h]
   CTradingBuildingRole *v121; // [esp+210h] [ebp-B4h]
   struct CBuilding *v122; // [esp+214h] [ebp-B0h]
-  CTradingBuildingRole *v123; // [esp+218h] [ebp-ACh]
+  CInternationalTrader **v123; // [esp+218h] [ebp-ACh]
   struct CBuilding *v124; // [esp+21Ch] [ebp-A8h]
   CTradingBuildingRole *v125; // [esp+220h] [ebp-A4h]
   struct CBuilding *v126; // [esp+224h] [ebp-A0h]
@@ -136,12 +137,12 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
   struct CBuilding *v130; // [esp+234h] [ebp-90h]
   CBuilding *v131; // [esp+23Ch] [ebp-88h]
   int v132; // [esp+240h] [ebp-84h]
-  unsigned __int16 *v133; // [esp+244h] [ebp-80h]
+  BYTE *v133; // [esp+244h] [ebp-80h]
   int v134; // [esp+248h] [ebp-7Ch]
   CEcoSector *BuildingEcoSectorPtr; // [esp+24Ch] [ebp-78h]
   struct CBuilding *v136; // [esp+250h] [ebp-74h]
   struct CBuilding *v137; // [esp+254h] [ebp-70h]
-  unsigned __int16 *v138; // [esp+258h] [ebp-6Ch]
+  BYTE *v138; // [esp+258h] [ebp-6Ch]
   struct CVehicle *ReadyVehiclePtr; // [esp+25Ch] [ebp-68h]
   int v140; // [esp+260h] [ebp-64h]
   struct CBuilding *v141; // [esp+264h] [ebp-60h]
@@ -160,27 +161,27 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
   int v154; // [esp+2C0h] [ebp-4h]
 
   v19 = this;
-  v132 = *((_DWORD *)a2 + 1);
-  v152 = *((unsigned __int8 *)a2 + 30);
+  v132 = a2->m_iEventId;
+  v152 = a2->m_iOwner;
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-  IMessageTracer::PushFormatedInts((IMessageTracer *)g_pMsgTracer, "CNetInputProcessor::Process(): msg %i, owner %i, wparam 0x%08x, lparam 0x%08x", v132, v152, *((_DWORD *)a2 + 2), *((_DWORD *)a2 + 3));
+  IMessageTracer::PushFormatedInts(g_pMsgTracer, "CNetInputProcessor::Process(): msg %i, owner %i, wparam 0x%08x, lparam 0x%08x", v132, v152, a2->m_wParam, a2->m_lParam);
   v145 = v132 - 5001;
   switch ( v132 )
   {
     case 5001:
-      v52 = *((_DWORD *)a2 + 2);
-      v86 = *((_DWORD *)a2 + 3);
-      AliveBuildingPtrOfPlayer = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v52, v152);
-      if ( AliveBuildingPtrOfPlayer )
+      v52 = a2->m_wParam;
+      v86 = a2->m_lParam;
+      AliveBuildingPtrOfPlayer = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v52, v152);
+      if ( AliveBuildingPtrOfPlayer != 0 )
       {
         CBuilding::SetWorkingAreaPackedXY(AliveBuildingPtrOfPlayer, v86);
         if ( v152 == LocalPlayerId )
         {
           CEvn_Logic::CEvn_Logic((CEvn_Logic *)v153, 0x193u, 0, 0, 0, 0, 0);
           v154 = 0;
-          if ( g_pEvnEngine )
+          if ( g_pEvnEngine != 0 )
           {
-            IEventEngine::SendAMessage(g_pEvnEngine, v153);
+            IEventEngine::SendAMessage(g_pEvnEngine, (struct CEvn_Event *)v153);
           }
           v154 = -1;
           CEvn_Logic::~CEvn_Logic(v153);
@@ -188,150 +189,141 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       }
       break;
     case 5002:
-      v131 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(*((_DWORD *)a2 + 2), v152);
-      if ( v131 )
+      v131 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(a2->m_wParam, v152);
+      if ( v131 != 0 )
       {
         CBuilding::CrushBuilding(v131);
       }
       break;
     case 5003:
-      if ( CNetInputProcessor::GetAliveBuildingPtrOfPlayer(*((_DWORD *)a2 + 2), v152) )
+      if ( (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(a2->m_wParam, v152) != 0 )
       {
         CBuilding::Switch();
       }
       break;
     case 5004:
-      v84 = *((_DWORD *)a2 + 2);
-      v141 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v84, v152);
-      if ( v141 )
+      v84 = a2->m_wParam;
+      v141 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v84, v152);
+      if ( v141 != 0 && (unsigned __int8)CBuilding::IsBuildUp(v141) == 0 )
       {
-        if ( !(unsigned __int8)CBuilding::IsBuildUp(v141) )
+        v2 = (void **)CBuilding::Role(v141);
+        v140 = j____RTDynamicCast(v2, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CBuildingSiteRole__RTTI_Type_Descriptor_, 0);
+        if ( v140 != 0 )
         {
-          v2 = (void **)CBuilding::Role(v141);
-          v140 = j____RTDynamicCast(v2, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CBuildingSiteRole__RTTI_Type_Descriptor_, 0);
-          if ( v140 )
-          {
-            (*(void (__thiscall **)(int))(*(_DWORD *)v140 + 36))(v140);
-          }
+          (*(void (__thiscall **)(int))(*(_DWORD *)v140 + 36))(v140);
         }
       }
       break;
     case 5005:
-      v83 = *((_DWORD *)a2 + 2);
-      v128 = *((_DWORD *)a2 + 3);
-      v130 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v83, v152);
-      AliveBuildingPtr = CNetInputProcessor::GetAliveBuildingPtr(v128);
-      if ( v130 )
+      v83 = a2->m_wParam;
+      v128 = a2->m_lParam;
+      v130 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v83, v152);
+      AliveBuildingPtr = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtr(v128);
+      if ( v130 != 0 && AliveBuildingPtr != 0 )
       {
-        if ( AliveBuildingPtr )
+        v3 = (void **)CBuilding::Role(v130);
+        v127 = (CTradingBuildingRole *)j____RTDynamicCast(v3, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
+        v4 = (void **)CBuilding::Role(AliveBuildingPtr);
+        v82 = j____RTDynamicCast(v4, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
+        if ( v127 != 0 && v82 != 0 )
         {
-          v3 = (void **)CBuilding::Role(v130);
-          v127 = (CTradingBuildingRole *)j____RTDynamicCast(v3, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
-          v4 = (void **)CBuilding::Role(AliveBuildingPtr);
-          v82 = j____RTDynamicCast(v4, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
-          if ( v127 )
-          {
-            if ( v82 )
-            {
-              CTradingBuildingRole::SetTradeTarget(v127, v128);
-            }
-          }
+          CTradingBuildingRole::SetTradeTarget(v127, v128);
         }
       }
       break;
     case 5006:
-      v81 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v79 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
-      v80 = *((_DWORD *)a2 + 3);
-      v126 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v81, v152);
-      if ( v126 )
+      v81 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v79 = CNetInputProcessor::UnpackLoValue(a2->m_wParam);
+      v80 = a2->m_lParam;
+      v126 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v81, v152);
+      if ( v126 != 0 )
       {
         v5 = (void **)CBuilding::Role(v126);
         v125 = (CTradingBuildingRole *)j____RTDynamicCast(v5, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
-        if ( v125 )
+        if ( v125 != 0 )
         {
           CTradingBuildingRole::TransportGood(v125, v79, v80);
         }
       }
       break;
     case 5007:
-      v78 = *((_DWORD *)a2 + 2);
-      v77 = *((_DWORD *)a2 + 3);
-      v124 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v78, v152);
-      if ( v124 )
+      v78 = a2->m_wParam;
+      v77 = a2->m_lParam;
+      v124 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v78, v152);
+      if ( v124 != 0 )
       {
         v6 = (void **)CBuilding::Role(v124);
-        v123 = (CTradingBuildingRole *)j____RTDynamicCast(v6, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
-        if ( v123 )
+        v123 = (CInternationalTrader **)j____RTDynamicCast(v6, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
+        if ( v123 != 0 )
         {
           CTradingBuildingRole::TradeWith(v123, v77);
         }
       }
       break;
     case 5008:
-      v76 = *((_DWORD *)a2 + 2);
-      v75 = *((_DWORD *)a2 + 3);
-      v122 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v76, v152);
-      if ( v122 )
+      v76 = a2->m_wParam;
+      v75 = a2->m_lParam;
+      v122 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v76, v152);
+      if ( v122 != 0 )
       {
         v7 = (void **)CBuilding::Role(v122);
         v121 = (CTradingBuildingRole *)j____RTDynamicCast(v7, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
-        if ( v121 )
+        if ( v121 != 0 )
         {
           CTradingBuildingRole::TradeGood(v121, v75);
         }
       }
       break;
     case 5009:
-      v74 = *((_DWORD *)a2 + 2);
-      ReadyVehiclePtr = CNetInputProcessor::GetReadyVehiclePtr(v74);
-      if ( ReadyVehiclePtr )
+      v74 = a2->m_wParam;
+      ReadyVehiclePtr = (struct CVehicle *)CNetInputProcessor::GetReadyVehiclePtr(v74);
+      if ( ReadyVehiclePtr != 0 )
       {
-        (*(void (__thiscall **)(struct CVehicle *))(*(_DWORD *)ReadyVehiclePtr + 152))(ReadyVehiclePtr);
+        ((void (__thiscall *)(struct CVehicle *))ReadyVehiclePtr->Unload)(ReadyVehiclePtr);
       }
       break;
     case 5010:
-      v120 = (void **)CNetInputProcessor::GetReadyVehiclePtr(*((_DWORD *)a2 + 2));
-      if ( v120 )
+      v120 = (void **)CNetInputProcessor::GetReadyVehiclePtr(a2->m_wParam);
+      if ( v120 != 0 )
       {
         v119 = (CCatapult *)j____RTDynamicCast(v120, 0, &CVehicle__RTTI_Type_Descriptor_, &CCatapult__RTTI_Type_Descriptor_, 0);
-        if ( v119 )
+        if ( v119 != 0 )
         {
           CCatapult::RequestAmmoDonkey(v119);
         }
       }
       break;
     case 5011:
-      ReadyCartPtr = CNetInputProcessor::GetReadyCartPtr(*((_DWORD *)a2 + 2));
-      if ( ReadyCartPtr )
+      ReadyCartPtr = (struct CCart *)CNetInputProcessor::GetReadyCartPtr(a2->m_wParam);
+      if ( ReadyCartPtr != 0 )
       {
         CCart::CreateSettlement(ReadyCartPtr);
       }
       break;
     case 5012:
-      v117 = CNetInputProcessor::GetReadyCartPtr(*((_DWORD *)a2 + 2));
-      if ( v117 )
+      v117 = (struct CCart *)CNetInputProcessor::GetReadyCartPtr(a2->m_wParam);
+      if ( v117 != 0 )
       {
         CCart::CreateFoundationCart(v117);
       }
       break;
     case 5013:
-      v116 = CNetInputProcessor::GetReadyCartPtr(*((_DWORD *)a2 + 2));
-      if ( v116 )
+      v116 = (struct CCart *)CNetInputProcessor::GetReadyCartPtr(a2->m_wParam);
+      if ( v116 != 0 )
       {
         CCart::CreateNormalCart(v116);
       }
       break;
     case 5014:
-      if ( !*((_DWORD *)a2 + 6) && BBSupportDbgReport(2, "Logic\\NetInputProcessor.cpp", 621, "_rEvent.m_iData != 0") == 1 )
+      if ( a2->m_iData == 0 && BBSupportDbgReport(2, "Logic\\NetInputProcessor.cpp", 621, "_rEvent.m_iData != 0") == 1 )
       {
         __debugbreak();
       }
-      v71 = *((unsigned __int16 *)a2 + 14) >> 1;
-      v115 = (void *)*((_DWORD *)a2 + 6);
-      v72 = Y16X16::UnpackXFast(*((_DWORD *)a2 + 2));
-      v73 = Y16X16::UnpackYFast(*((_DWORD *)a2 + 2));
-      (*(void (__thiscall **)(void *, int, void *, int, int, _DWORD))(*(_DWORD *)g_pGroupMgr + 40))(g_pGroupMgr, v71, v115, v72, v73, *((_DWORD *)a2 + 3));
+      v71 = a2->m_iDataSize >> 1;
+      v115 = a2->m_iData;
+      v72 = Y16X16::UnpackXFast(a2->m_wParam);
+      v73 = Y16X16::UnpackYFast(a2->m_wParam);
+      ((void (__thiscall *)(CGroupMgr *, int, BYTE *, int, int, int))g_pGroupMgr->j_?SendGroupCommand@CGroupMgr@@UAEXHPBGHHH@Z)(g_pGroupMgr, v71, v115, v72, v73, a2->m_lParam);
       C = v115;
       operator delete[](v115);
       break;
@@ -372,35 +364,32 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       }
       break;
     case 5021:
-      v138 = (unsigned __int16 *)*((_DWORD *)a2 + 6);
-      v69 = *((unsigned __int16 *)a2 + 14);
+      v138 = a2->m_iData;
+      v69 = a2->m_iDataSize;
       v68 = v69 >> 1;
-      if ( v138 )
+      if ( v138 != 0 )
       {
         for ( i = 0;
               i < v68;
               ++i )
         {
-          v67 = v138[i];
+          v67 = *(unsigned __int16 *)&v138[2 * i];
           ReadySettlerPtr = (CPropertySet *)CNetInputProcessor::GetReadySettlerPtr(v67);
-          if ( ReadySettlerPtr )
+          if ( ReadySettlerPtr != 0 && IEntity::OwnerId((IEntity *)ReadySettlerPtr) == v152 && IEntity::FlagBits((IEntity *)ReadySettlerPtr, ENTITY_FLAG_ON_BOARD) == 0 && ((int (__stdcall *)())IEntity::WarriorType)() == 7 )
           {
-            if ( IEntity::OwnerId((unsigned __int8 *)ReadySettlerPtr) == v152 && !IEntity::FlagBits(ReadySettlerPtr, ENTITY_FLAG_ON_BOARD) && IEntity::WarriorType() == 7 )
+            v113 = IEntity::X(ReadySettlerPtr);
+            v114 = IEntity::Y(ReadySettlerPtr);
+            if ( CWorldManager::InWorld(v113, v114) )
             {
-              v113 = IEntity::X(ReadySettlerPtr);
-              v114 = IEntity::Y(ReadySettlerPtr);
-              if ( (unsigned __int8)CWorldManager::InWorld(v113, v114) )
+              v112 = CWorldManager::EcoSectorId(v113, v114);
+              if ( v112 > 0 )
               {
-                v112 = CWorldManager::EcoSectorId(v113, v114);
-                if ( v112 > 0 )
+                EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v112);
+                v110 = EcoSectorPtr != 0 ? CEcoSector::Owner(EcoSectorPtr) : 0;
+                v66 = v110;
+                if ( v110 == v152 )
                 {
-                  EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, v112);
-                  v110 = EcoSectorPtr ? CEcoSector::Owner(EcoSectorPtr) : 0;
-                  v66 = v110;
-                  if ( v110 == v152 )
-                  {
-                    CSettler::ChangeType(ReadySettlerPtr, 1, 1, 0);
-                  }
+                  CSettler::ChangeType((CSettler *)ReadySettlerPtr, 1u, 1, 0);
                 }
               }
             }
@@ -429,11 +418,11 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       }
       break;
     case 5025:
-      v64 = *((_DWORD *)a2 + 2);
-      v109 = *((_DWORD *)a2 + 3);
+      v64 = a2->m_wParam;
+      v109 = a2->m_lParam;
       v62 = Y16X16::UnpackXFast(v109);
       v63 = Y16X16::UnpackYFast(v109);
-      CBuildingMgr::CheckForBuild((CBuildingMgr *)g_cBuildingMgr, v62, v63, *((unsigned __int8 *)a2 + 30), v64, 1);
+      CBuildingMgr::CheckForBuild((CBuildingMgr *)g_cBuildingMgr, v62, v63, a2->m_iOwner, v64, 1);
       break;
     case 5026:
       if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 776, "CNetInputProcessor::Process(): Unsupported message %s!", "NET_LOGIC_MSG_SEARCH_UNIT") == 1 )
@@ -442,106 +431,103 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       }
       break;
     case 5027:
-      v61 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v59 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
-      v60 = *((_DWORD *)a2 + 3);
+      v61 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v59 = CNetInputProcessor::UnpackLoValue(a2->m_wParam);
+      v60 = a2->m_lParam;
       EcoSectorPtrOfPlayer = CNetInputProcessor::GetEcoSectorPtrOfPlayer(v61, v152);
-      if ( EcoSectorPtrOfPlayer )
+      if ( EcoSectorPtrOfPlayer != 0 )
       {
         CEcoSector::ChangeMinMaxValues(EcoSectorPtrOfPlayer, v59, v60);
       }
       break;
     case 5028:
-      v56 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
-      v55 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v57 = CNetInputProcessor::UnpackSignedLoValue(*((_DWORD *)a2 + 3));
-      v58 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 3));
+      v56 = CNetInputProcessor::UnpackLoValue(a2->m_wParam);
+      v55 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v57 = CNetInputProcessor::UnpackSignedLoValue(a2->m_lParam);
+      v58 = CNetInputProcessor::UnpackHiValue(a2->m_lParam);
       v107 = CNetInputProcessor::GetEcoSectorPtrOfPlayer(v58, v152);
-      if ( v107 )
+      if ( v107 != 0 )
       {
         CEcoSector::ChangeBuildingSupplyPrio(v107, v55, v56, (unsigned __int8)v57);
       }
       break;
     case 5029:
-      v54 = CNetInputProcessor::UnpackSignedLoValue(*((_DWORD *)a2 + 2));
-      v53 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v106 = *((_DWORD *)a2 + 3);
-      if ( CNetInputProcessor::GetEcoSectorPtrOfPlayer(v106, v152) )
+      v54 = CNetInputProcessor::UnpackSignedLoValue(a2->m_wParam);
+      v53 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v106 = a2->m_lParam;
+      if ( CNetInputProcessor::GetEcoSectorPtrOfPlayer(v106, v152) != 0 )
       {
         CEcoSectorMgr::ChangeTransportPrio(v53, v54, v106);
       }
       break;
     case 5030:
-      v33 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(*((_DWORD *)a2 + 2), v152);
+      v33 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(a2->m_wParam, v152);
       v8 = (void **)CBuilding::Role(v33);
       v105 = (CWorkshopBuildingRole *)j____RTDynamicCast(v8, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CWorkshopBuildingRole__RTTI_Type_Descriptor_, 0);
-      if ( v105 )
+      if ( v105 != 0 )
       {
         CWorkshopBuildingRole::CancelCurrentProduction(v105);
       }
       break;
     case 5031:
-      v51 = *((_DWORD *)a2 + 2);
-      v50 = *((_DWORD *)a2 + 3);
-      v137 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v51, v152);
-      if ( v137 && v50 == -1 )
+      v51 = a2->m_wParam;
+      v50 = a2->m_lParam;
+      v137 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v51, v152);
+      if ( v137 != 0 && v50 == -1 )
       {
-        CEntityEvent::CEntityEvent((CEntityEvent *)v18, 0x12u, 0, 0, 0, 0);
+        CEntityEvent::CEntityEvent(&v18, 0x12u, 0, 0, 0, 0);
         v154 = 1;
-        (*(void (__thiscall **)(struct CBuilding *, _BYTE *))(*(_DWORD *)v137 + 80))(v137, v18);
+        v137->j_?SetEvent@IAnimatedEntity@@UAEXABVCEntityEvent@@@Z((unsigned __int16 *)v137, (int)&v18);
         v154 = -1;
-        CEntityEvent::~CEntityEvent(v18);
+        CEntityEvent::~CEntityEvent(&v18);
       }
       break;
     case 5032:
-      v47 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
-      v49 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v48 = *((_DWORD *)a2 + 3);
-      v136 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v49, v152);
-      if ( v136 )
+      v47 = CNetInputProcessor::UnpackLoValue(a2->m_wParam);
+      v49 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v48 = a2->m_lParam;
+      v136 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v49, v152);
+      if ( v136 != 0 )
       {
-        CEntityEvent::CEntityEvent((CEntityEvent *)v17, 0x13u, v47, v48, 0, 0);
+        CEntityEvent::CEntityEvent(&v17, 0x13u, v47, v48, 0, 0);
         v154 = 2;
-        (*(void (__thiscall **)(struct CBuilding *, _BYTE *))(*(_DWORD *)v136 + 80))(v136, v17);
+        v136->j_?SetEvent@IAnimatedEntity@@UAEXABVCEntityEvent@@@Z((unsigned __int16 *)v136, (int)&v17);
         v154 = -1;
-        CEntityEvent::~CEntityEvent(v17);
+        CEntityEvent::~CEntityEvent(&v17);
       }
       break;
     case 5033:
-      v46 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v95 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
-      v104 = *((_DWORD *)a2 + 3);
-      v149 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v46, v152);
-      if ( v149 )
+      v46 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v95 = CNetInputProcessor::UnpackLoValue(a2->m_wParam);
+      v104 = a2->m_lParam;
+      v149 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v46, v152);
+      if ( v149 != 0 && IEntity::FlagBits(v149, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0 )
       {
-        if ( IEntity::FlagBits(v149, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+        v9 = (int)CBuilding::Role(v149);
+        if ( (*(int (__thiscall **)(int))(*(_DWORD *)v9 + 112))(v9) == 4 )
         {
-          v9 = CBuilding::Role(v149);
-          if ( (*(int (__thiscall **)(int))(*(_DWORD *)v9 + 112))(v9) == 4 )
+          BuildingEcoSectorPtr = (struct CEcoSector *)CNetInputProcessor::GetBuildingEcoSectorPtr(v149);
+          if ( BuildingEcoSectorPtr != 0 )
           {
-            BuildingEcoSectorPtr = CNetInputProcessor::GetBuildingEcoSectorPtr(v149);
-            if ( BuildingEcoSectorPtr )
+            if ( IEntity::Type(v149) == 21 )
             {
-              if ( IEntity::Type((unsigned __int16 *)v149) == 21 )
-              {
-                CEcoSector::TakeToolOrder(BuildingEcoSectorPtr, v95, v104);
-              }
-              else if ( IEntity::Type((unsigned __int16 *)v149) == 22 )
-              {
-                CEcoSector::TakeWeaponOrder(BuildingEcoSectorPtr, v95, v104);
-              }
+              CEcoSector::TakeToolOrder(BuildingEcoSectorPtr, v95, v104);
+            }
+            else if ( IEntity::Type(v149) == 22 )
+            {
+              CEcoSector::TakeWeaponOrder(BuildingEcoSectorPtr, v95, v104);
             }
           }
         }
       }
       break;
     case 5034:
-      v45 = *((_DWORD *)a2 + 2);
-      v44 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v45, v152);
-      v148 = CNetInputProcessor::GetBuildingEcoSectorPtr(v44);
-      if ( v148 )
+      v45 = a2->m_wParam;
+      v44 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v45, v152);
+      v148 = (struct CEcoSector *)CNetInputProcessor::GetBuildingEcoSectorPtr(v44);
+      if ( v148 != 0 )
       {
-        CEcoSector::SetWeaponPercentage(v148, *((_DWORD *)a2 + 3));
+        CEcoSector::SetWeaponPercentage(v148, a2->m_lParam);
         CEcoSector::SetProducedSwords(v148, 0);
         CEcoSector::SetProducedBows(v148, 0);
         CEcoSector::SetProducedArmors(v148, 0);
@@ -549,11 +535,11 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       }
       break;
     case 5035:
-      v43 = *((_DWORD *)a2 + 2);
-      v41 = *((_DWORD *)a2 + 3);
-      v42 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v43, v152);
-      v102 = CNetInputProcessor::GetBuildingEcoSectorPtr(v42);
-      if ( v102 )
+      v43 = a2->m_wParam;
+      v41 = a2->m_lParam;
+      v42 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v43, v152);
+      v102 = (struct CEcoSector *)CNetInputProcessor::GetBuildingEcoSectorPtr(v42);
+      if ( v102 != 0 )
       {
         CEcoSector::SetWeaponAutoProduction(v102, v41 != 1);
       }
@@ -577,46 +563,46 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       }
       break;
     case 5039:
-      v38 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
-      v40 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v39 = *((_DWORD *)a2 + 3);
+      v38 = CNetInputProcessor::UnpackLoValue(a2->m_wParam);
+      v40 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v39 = a2->m_lParam;
       v101 = CNetInputProcessor::GetEcoSectorPtrOfPlayer(v40, v152);
-      if ( v101 )
+      if ( v101 != 0 )
       {
         CEcoSector::ChangeSpecialistWish(v101, v38, v39);
       }
       break;
     case 5040:
-      v35 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
-      v37 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v36 = *((_DWORD *)a2 + 3);
-      v100 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v37, v152);
-      if ( v100 )
+      v35 = CNetInputProcessor::UnpackLoValue(a2->m_wParam);
+      v37 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v36 = a2->m_lParam;
+      v100 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v37, v152);
+      if ( v100 != 0 )
       {
         v10 = (void **)CBuilding::Role(v100);
         v99 = (CWorkshopBuildingRole *)j____RTDynamicCast(v10, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CWorkshopBuildingRole__RTTI_Type_Descriptor_, 0);
-        if ( v99 )
+        if ( v99 != 0 )
         {
           CWorkshopBuildingRole::TakeOrder(v99, v35, v36);
         }
       }
       break;
     case 5041:
-      v133 = (unsigned __int16 *)*((_DWORD *)a2 + 6);
-      if ( v133 )
+      v133 = a2->m_iData;
+      if ( v133 != 0 )
       {
-        v98 = *((_DWORD *)a2 + 2);
-        v34 = *((unsigned __int16 *)a2 + 14) >> 1;
-        (*(void (__thiscall **)(void *, int, int))(*(_DWORD *)g_pGroupMgr + 32))(g_pGroupMgr, v152, v98);
+        v98 = a2->m_wParam;
+        v34 = a2->m_iDataSize >> 1;
+        ((void (__thiscall *)(CGroupMgr *, int, int))g_pGroupMgr->j_?DetachAllEntitiesFromGroup@CGroupMgr@@UAEXHH@Z)(g_pGroupMgr, v152, v98);
         for ( j = 0;
               j < v34;
               ++j )
         {
-          v134 = v133[j];
+          v134 = *(unsigned __int16 *)&v133[2 * j];
           if ( CNetInputProcessor::IsReadyEntityOfPlayer(v134, v152) )
           {
-            (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, v134);
-            (*(void (__thiscall **)(void *, int, int, int))(*(_DWORD *)g_pGroupMgr + 20))(g_pGroupMgr, v152, v98, v134);
+            ((void (__thiscall *)(CGroupMgr *, int))g_pGroupMgr->DetachEntityFromAllGroups)(g_pGroupMgr, v134);
+            ((void (__thiscall *)(CGroupMgr *, int, int, int))g_pGroupMgr->j_?AttachEntity@CGroupMgr@@UAE_NHHH@Z)(g_pGroupMgr, v152, v98, v134);
           }
         }
         v20 = v133;
@@ -636,15 +622,15 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       }
       break;
     case 5044:
-      v30 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
-      v32 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v31 = *((_DWORD *)a2 + 3);
-      v97 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v32, v152);
-      if ( v97 )
+      v30 = CNetInputProcessor::UnpackLoValue(a2->m_wParam);
+      v32 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v31 = a2->m_lParam;
+      v97 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v32, v152);
+      if ( v97 != 0 )
       {
         v11 = (void **)CBuilding::Role(v97);
         v96 = (CStorageBuildingRole *)j____RTDynamicCast(v11, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CStorageBuildingRole__RTTI_Type_Descriptor_, 0);
-        if ( v96 )
+        if ( v96 != 0 )
         {
           CStorageBuildingRole::SwitchGood(v96, v30, v31);
         }
@@ -663,84 +649,82 @@ void  CNetInputProcessor::Process(class CEvn_Logic & a2) {
       }
       break;
     case 5047:
-      v93 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
-      v29 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v94 = *((_DWORD *)a2 + 3);
-      v142 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v29, v152);
-      if ( v142 )
+      v93 = CNetInputProcessor::UnpackLoValue(a2->m_wParam);
+      v29 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v94 = a2->m_lParam;
+      v142 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v29, v152);
+      if ( v142 != 0 )
       {
         if ( IEntity::Race(v142) == 3 )
         {
           v12 = (void **)CBuilding::Role(v142);
           v87 = (CDarkTempleRole *)j____RTDynamicCast(v12, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CDarkTempleRole__RTTI_Type_Descriptor_, 0);
-          if ( v87 )
+          if ( v87 != 0 )
           {
             CDarkTempleRole::TakeOrder(v87, v93, v94);
           }
         }
         else
         {
-          v92 = CNetInputProcessor::GetBuildingEcoSectorPtr(v142);
-          if ( v92 )
+          v92 = (struct CEcoSector *)CNetInputProcessor::GetBuildingEcoSectorPtr(v142);
+          if ( v92 != 0 )
           {
-            CEcoSector::TakeSoldierOrder(v92, v93, v94);
+            ((void (__thiscall *)(CEcoSector *, unsigned int, int))CEcoSector::TakeSoldierOrder)(v92, v93, v94);
           }
         }
       }
       break;
     case 5048:
-      v26 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
-      v28 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v27 = *((_DWORD *)a2 + 3);
+      v26 = CNetInputProcessor::UnpackLoValue(a2->m_wParam);
+      v28 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v27 = a2->m_lParam;
       v146 = (unsigned __int16 *)CNetInputProcessor::GetReadySettlerPtr(v28);
-      if ( v146 && IEntity::Type(v146) == 45 && IEntity::OwnerId((unsigned __int8 *)v146) == v152 )
+      if ( v146 != 0 && IEntity::Type((IEntity *)v146) == 45 && IEntity::OwnerId((IEntity *)v146) == v152 )
       {
-        v25 = CEntityEvent::CEntityEvent((CEntityEvent *)v16, 3u, v26, *((unsigned __int8 *)a2 + 30), 0, v27);
+        v25 = CEntityEvent::CEntityEvent(&v16, 3u, v26, a2->m_iOwner, 0, v27);
         v24 = v25;
         v154 = 3;
         (*(void (__thiscall **)(unsigned __int16 *, CEntityEvent *))(*(_DWORD *)v146 + 80))(v146, v25);
         v154 = -1;
-        CEntityEvent::~CEntityEvent(v16);
+        CEntityEvent::~CEntityEvent(&v16);
       }
       break;
     case 5049:
-      v90 = *((_DWORD *)a2 + 2);
+      v90 = a2->m_wParam;
       VehiclePtr = (void **)CVehicleMgr::GetVehiclePtr(v90);
-      if ( VehiclePtr )
+      if ( VehiclePtr != 0 && IEntity::FlagBits((IEntity *)VehiclePtr, (EntityFlag)&s_iMsgTracer2.m_aMessages[15456]) == 0 && IEntity::OwnerId((IEntity *)VehiclePtr) == v152 )
       {
-        if ( !IEntity::FlagBits(VehiclePtr, (EntityFlag)&MEMORY[0x4000000]) && IEntity::OwnerId((unsigned __int8 *)VehiclePtr) == v152 )
+         = j____RTDynamicCast(VehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CWheeler__RTTI_Type_Descriptor_, 0);
+        if (  != 0 )
         {
-          if ( j____RTDynamicCast(VehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CWheeler__RTTI_Type_Descriptor_, 0) )
-          {
-            v91 = CLogic::Effects((DWORD *)g_pLogic);
-            v15 = IEntity::Y(VehiclePtr);
-            v13 = IEntity::X(VehiclePtr);
-            (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v91 + 16))(v91, 62, 3, v13, v15, 0, 0, 0);
-            CVehicleMgr::DeleteVehicle((CVehicleMgr *)&g_cVehicleMgr, v90);
-          }
+          v91 = (int)CLogic::Effects(g_pLogic);
+          v15 = IEntity::Y(VehiclePtr);
+          v13 = IEntity::X(VehiclePtr);
+          (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v91 + 16))(v91, 62, 3, v13, v15, 0, 0, 0);
+          CVehicleMgr::DeleteVehicle((CVehicleMgr *)&g_cVehicleMgr, v90);
         }
       }
       break;
     case 5050:
-      v21 = CNetInputProcessor::UnpackLoValue(*((_DWORD *)a2 + 2));
-      v22 = CNetInputProcessor::UnpackHiValue(*((_DWORD *)a2 + 2));
-      v151 = *((_DWORD *)a2 + 3) != 0;
-      v89 = CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v22, v152);
-      if ( v89 )
+      v21 = CNetInputProcessor::UnpackLoValue(a2->m_wParam);
+      v22 = CNetInputProcessor::UnpackHiValue(a2->m_wParam);
+      v151 = a2->m_lParam != 0;
+      v89 = (struct CBuilding *)CNetInputProcessor::GetAliveBuildingPtrOfPlayer(v22, v152);
+      if ( v89 != 0 )
       {
         v14 = (void **)CBuilding::Role(v89);
         v88 = (CTradingBuildingRole *)j____RTDynamicCast(v14, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CTradingBuildingRole__RTTI_Type_Descriptor_, 0);
-        if ( v88 )
+        if ( v88 != 0 )
         {
           CTradingBuildingRole::ChangeTradeStatus(v88, v21, v151);
         }
       }
       break;
     case 5051:
-      (*(void (__thiscall **)(void *, _DWORD))(*(_DWORD *)g_pHJBMgr + 12))(g_pHJBMgr, *((unsigned __int8 *)a2 + 30));
+      ((void (__thiscall *)(CHJBMgr *, _DWORD))g_pHJBMgr->j_?ProcessHJBRequest@CHJBMgr@@UAEXH@Z)(g_pHJBMgr, a2->m_iOwner);
       break;
     case 5052:
-      (*(void (__thiscall **)(void *, _DWORD, _DWORD))(*(_DWORD *)g_pHJBMgr + 16))(g_pHJBMgr, *((unsigned __int8 *)a2 + 30), *((_DWORD *)a2 + 2));
+      ((void (__thiscall *)(CHJBMgr *, _DWORD, int))g_pHJBMgr->j_?ProcessHJBAcknowledgement@CHJBMgr@@UAEXHH@Z)(g_pHJBMgr, a2->m_iOwner, a2->m_wParam);
       break;
     default:
       if ( BBSupportDbgReportF(1, "Logic\\NetInputProcessor.cpp", 1228, "CNetInputProcessor::Process(): Unsupported message %i!", v132) == 1 )
@@ -779,13 +763,13 @@ char * __cdecl CNetInputProcessor::DbgMsgName(int a1) {
 
 
 // address=[0x1470ec0]
-// Decompiled from _DWORD *__cdecl CNetInputProcessor::GetReadySettlerPtr(int a1)
+// Decompiled from IEntity *__cdecl CNetInputProcessor::GetReadySettlerPtr(int a1)
 class CSettler * __cdecl CNetInputProcessor::GetReadySettlerPtr(int a1) {
   
-  _DWORD *SettlerPtr; // [esp+0h] [ebp-4h]
+  IEntity *SettlerPtr; // [esp+0h] [ebp-4h]
 
-  SettlerPtr = (_DWORD *)CSettlerMgr::GetSettlerPtr(a1);
-  if ( SettlerPtr && IEntity::FlagBits(SettlerPtr, (EntityFlag)&loc_1C00000) )
+  SettlerPtr = (IEntity *)((int (__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(a1);
+  if ( SettlerPtr != 0 && IEntity::FlagBits(SettlerPtr, (EntityFlag)&loc_1C00000) != 0 )
   {
     return SettlerPtr;
   }
@@ -802,8 +786,8 @@ class CSettler * __cdecl CNetInputProcessor::GetReadySettlerPtrOfType(int a1, in
   
   unsigned __int16 *SettlerPtr; // [esp+0h] [ebp-4h]
 
-  SettlerPtr = (unsigned __int16 *)CSettlerMgr::GetSettlerPtr(a1);
-  if ( SettlerPtr && IEntity::FlagBits(SettlerPtr, ENTITY_FLAG_Ready) && IEntity::Type(SettlerPtr) == a2 )
+  SettlerPtr = (unsigned __int16 *)((int (__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(a1);
+  if ( SettlerPtr != 0 && IEntity::FlagBits((IEntity *)SettlerPtr, ENTITY_FLAG_Ready) != 0 && IEntity::Type((IEntity *)SettlerPtr) == a2 )
   {
     return SettlerPtr;
   }
@@ -820,8 +804,8 @@ class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtr(int a1) {
   
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-4h]
 
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
-  if ( !BuildingPtr || IEntity::FlagBits(BuildingPtr, (EntityFlag)&MEMORY[0x4000000]) )
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
+  if ( BuildingPtr == 0 || IEntity::FlagBits((IEntity *)BuildingPtr, (EntityFlag)&s_iMsgTracer2.m_aMessages[15456]) != 0 )
   {
     return 0;
   }
@@ -838,8 +822,8 @@ class CBuilding * __cdecl CNetInputProcessor::GetAliveBuildingPtrOfPlayer(int a1
   
   unsigned __int8 *BuildingPtr; // [esp+0h] [ebp-4h]
 
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
-  if ( BuildingPtr && !IEntity::FlagBits(BuildingPtr, (EntityFlag)&MEMORY[0x4000000]) && IEntity::OwnerId(BuildingPtr) == a2 )
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a1);
+  if ( BuildingPtr != 0 && IEntity::FlagBits((IEntity *)BuildingPtr, (EntityFlag)&s_iMsgTracer2.m_aMessages[15456]) == 0 && IEntity::OwnerId((IEntity *)BuildingPtr) == a2 )
   {
     return BuildingPtr;
   }
@@ -856,8 +840,8 @@ class CVehicle * __cdecl CNetInputProcessor::GetReadyVehiclePtr(int a1) {
   
   struct CVehicle *VehiclePtr; // [esp+0h] [ebp-4h]
 
-  VehiclePtr = CVehicleMgr::GetVehiclePtr(a1);
-  if ( VehiclePtr && IEntity::FlagBits(VehiclePtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+  VehiclePtr = (struct CVehicle *)CVehicleMgr::GetVehiclePtr(a1);
+  if ( VehiclePtr != 0 && IEntity::FlagBits(VehiclePtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0 )
   {
     return VehiclePtr;
   }
@@ -875,7 +859,7 @@ class CCart * __cdecl CNetInputProcessor::GetReadyCartPtr(int a1) {
   void **ReadyVehiclePtr; // [esp+4h] [ebp-4h]
 
   ReadyVehiclePtr = (void **)CNetInputProcessor::GetReadyVehiclePtr(a1);
-  if ( ReadyVehiclePtr )
+  if ( ReadyVehiclePtr != 0 )
   {
     return j____RTDynamicCast(ReadyVehiclePtr, 0, &CVehicle__RTTI_Type_Descriptor_, &CCart__RTTI_Type_Descriptor_, 0);
   }
@@ -897,7 +881,7 @@ class CEcoSector * __cdecl CNetInputProcessor::GetEcoSectorPtrOfPlayer(int a1, i
     return 0;
   }
   EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, a1);
-  if ( EcoSectorPtr && CEcoSector::Owner(EcoSectorPtr) == a2 )
+  if ( EcoSectorPtr != 0 && CEcoSector::Owner(EcoSectorPtr) == a2 )
   {
     return EcoSectorPtr;
   }
@@ -915,7 +899,7 @@ class CEcoSector * __cdecl CNetInputProcessor::GetBuildingEcoSectorPtr(class CBu
   int v1; // eax
   int v4; // [esp+8h] [ebp-4h]
 
-  if ( !a1 )
+  if ( a1 == 0 )
   {
     return 0;
   }
@@ -939,7 +923,7 @@ bool __cdecl CNetInputProcessor::IsReadyEntityOfPlayer(int a1, int a2) {
   unsigned __int8 *v4; // [esp+4h] [ebp-4h]
 
   v4 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a1);
-  return v4 && IEntity::FlagBits(v4, (EntityFlag)((char *)&loc_1FFFFFF + 1)) && IEntity::OwnerId(v4) == a2;
+  return v4 != 0 && IEntity::FlagBits((IEntity *)v4, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0 && IEntity::OwnerId((IEntity *)v4) == a2;
 }
 
 

@@ -10,7 +10,7 @@ class CPersistence * __cdecl CShadowHerb::New(std::istream & a1) {
   CShadowHerb *v3; // [esp+Ch] [ebp-10h]
 
   v3 = (CShadowHerb *)CShadowHerb::operator new(0x50u);
-  if ( v3 )
+  if ( v3 != 0 )
   {
     return CShadowHerb::CShadowHerb(v3, a1);
   }
@@ -32,7 +32,7 @@ class CPersistence * __cdecl CShadowHerb::New(std::istream & a1) {
   this->m_iPhases = 0;
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   this->m_uU5 = 0;
-  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\DecoObj\\ShadowHerb.cpp", 77, "m_uCycleFrames > 0") == 1 )
+  if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "MapObjects\\DecoObj\\ShadowHerb.cpp", 77, "m_uCycleFrames > 0") == 1 )
   {
     __debugbreak();
   }
@@ -111,13 +111,13 @@ struct SGfxObjectInfo *  CShadowHerb::GetGfxInfos(void) {
   v4 = TickCounter - IAnimatedEntity::LastUpdateTick(this);
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, v2);
-  if ( v4 && this->m_iPhases != 1 && this->m_iPhases != 2 )
+  if ( v4 != 0 && this->m_iPhases != 1 && this->m_iPhases != 2 )
   {
     this->m_iFrame = (v4 + (unsigned int)this->m_iFrame) % this->m_uCycleFrames;
   }
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
-  MEMORY[0x40FE518] = 16;
-  MEMORY[0x40FE51A] = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_uObjType = 16;
+  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
   IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }
@@ -174,7 +174,7 @@ int  CShadowHerb::ConvertToDarkOrGreen(bool a2) {
   IDecoObject::IDecoObject(this, a1);
   v6 = 0;
   this->__vftable = (IAnimatedEntity_vtbl *)&CShadowHerb::_vftable_;
-  operator^<unsigned int>(a1, &fileFormatVersion);
+  operator^<unsigned int>(a1, (unsigned int *)&fileFormatVersion);
   if ( fileFormatVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CShadowHerb");
@@ -201,7 +201,7 @@ void  CShadowHerb::Store(std::ostream & a1) {
   v3 = this;
   IDecoObject::Store(this, a1);
   v2 = 1;
-  operator^<unsigned int>(a1, &v2);
+  operator^<unsigned int>(a1, (unsigned int *)&v2);
   operator^<bool>(a1, &v3->m_uU1);
   operator^<unsigned char>(a1, &v3->m_iPhases);
   operator^<unsigned char>(a1, &v3->m_uCycleFrames);

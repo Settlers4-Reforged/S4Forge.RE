@@ -39,9 +39,9 @@
  CSubProblemSolveEvent::~CSubProblemSolveEvent(void) {
   
   *this = (COptimizeOptions *)&CSubProblemSolveEvent::_vftable_;
-  if ( this[25] )
+  if ( *(this + 25) != 0 )
   {
-    delete this[25];
+    delete *(this + 25);
   }
   IScheduleEntry::~IScheduleEntry((IScheduleEntry *)this);
 }
@@ -54,14 +54,14 @@ bool  CSubProblemSolveEvent::IsShooting(void) {
   int LockedSchedNr; // esi
 
   LockedSchedNr = CReserveDatabase::GetLockedSchedNr(**((CReserveDatabase ***)this + 10));
-  if ( LockedSchedNr == CSchedule::GetMainProblemSolve(*((CSchedule **)this + 10), *((_DWORD *)this + 3)) )
+  if ( LockedSchedNr == CSchedule::GetMainProblemSolve(*((CDynList ***)this + 10), *((_DWORD *)this + 3)) )
   {
-    if ( *((_DWORD *)this + 17) )
+    if ( *((_DWORD *)this + 17) != 0 )
     {
       *((_DWORD *)this + 9) = 1;
       return 0;
     }
-    else if ( CSchedule::AllSubProblemsSolved(*((CDynList ***)this + 10), *((_DWORD *)this + 3)) )
+    else if ( CSchedule::AllSubProblemsSolved(*((CDynList ***)this + 10), *((_DWORD *)this + 3)) != 0 )
     {
       return 1;
     }
@@ -99,14 +99,14 @@ bool  CSubProblemSolveEvent::action(void) {
   *(_DWORD *)(*((_DWORD *)this + 18) + 28) = *((_DWORD *)this + 3);
   v5 = 0;
   v6 = 0;
-  if ( *((_DWORD *)v10 + 19) )
+  if ( *((_DWORD *)v10 + 19) != 0 )
   {
     v9 = CSchedule::GetInvokeEvent(*((_DWORD *)v10 + 10), *((_DWORD *)v10 + 19));
-    if ( !v9 )
+    if ( v9 == 0 )
     {
       C = operator new(0x50u);
       v11 = 0;
-      if ( C )
+      if ( C != 0 )
       {
         v7 = (struct IScheduleEntry *)CInvokeEvent::CInvokeEvent(C, *((_DWORD *)v10 + 19));
       }
@@ -116,10 +116,10 @@ bool  CSubProblemSolveEvent::action(void) {
       }
       v4[1] = (int)v7;
       v11 = -1;
-      CSchedule::NewSchedEntry(*((CSchedule **)v10 + 10), v7);
+      CSchedule::NewSchedEntry(*((CDynList ***)v10 + 10), v7);
       return 0;
     }
-    if ( *(_DWORD *)(v9 + 48) == 2 && !*((_BYTE *)v10 + 104) )
+    if ( *(_DWORD *)(v9 + 48) == 2 && *((_BYTE *)v10 + 104) == 0 )
     {
       v6 = CSiedlerAI::GetInvokePosition(*((CSiedlerAI **)v10 + 18), *((_DWORD *)v10 + 15), *((_DWORD *)v10 + 11), *((_DWORD *)v10 + 12), *((_DWORD *)v10 + 13), *((_DWORD *)v10 + 14));
       CReserveDatabase::UnpackPosition(**((CReserveDatabase ***)v10 + 10), v6, &v3, v4);
@@ -131,17 +131,17 @@ bool  CSubProblemSolveEvent::action(void) {
     }
     if ( *(_DWORD *)(v9 + 48) == 1 )
     {
-      MainProblemSolve = CSchedule::GetMainProblemSolve(*((CSchedule **)v10 + 10), *((_DWORD *)v10 + 3));
-      *((_DWORD *)CSchedule::GetSchedEntry(*((CSchedule **)v10 + 10), MainProblemSolve) + 16) = 1;
+      MainProblemSolve = CSchedule::GetMainProblemSolve(*((CDynList ***)v10 + 10), *((_DWORD *)v10 + 3));
+      *((_DWORD *)CSchedule::GetSchedEntry(*((CDynList ***)v10 + 10), MainProblemSolve) + 16) = 1;
       return 0;
     }
   }
-  if ( CSchedule::AllSubProblemsSolved(*((CDynList ***)v10 + 10), *((_DWORD *)v10 + 3)) )
+  if ( CSchedule::AllSubProblemsSolved(*((CDynList ***)v10 + 10), *((_DWORD *)v10 + 3)) != 0 )
   {
     BBSupportTracePrintF(0, "SubCall ProbNr:%i von EventNr: %i from Event: %i", *((_DWORD *)v10 + 15), *((_DWORD *)v10 + 3), *((_DWORD *)v10 + 8));
     *(_DWORD *)(*((_DWORD *)v10 + 18) + 36) = 0;
     *((_DWORD *)v10 + 17) = IAI_Module::Problem(*((IAI_Module **)v10 + 18), *((_DWORD *)v10 + 15), *((_DWORD *)v10 + 11), *((_DWORD *)v10 + 12), *((_DWORD *)v10 + 13), *((_DWORD *)v10 + 14));
-    if ( *((_DWORD *)v10 + 17) )
+    if ( *((_DWORD *)v10 + 17) != 0 )
     {
       *((_DWORD *)v10 + 16) = 2;
       *((_DWORD *)v10 + 5) = 1;
@@ -157,12 +157,11 @@ bool  CSubProblemSolveEvent::action(void) {
         *((_DWORD *)v10 + 16) = 1;
         CSchedule::TerminateSubProblems(*((CDynList ***)v10 + 10), *((_DWORD *)v10 + 3));
       }
-      if ( *(_DWORD *)(*((_DWORD *)v10 + 18) + 36) )
+      if ( *(_DWORD *)(*((_DWORD *)v10 + 18) + 36) == 0 )
       {
-        return 0;
+        *((_DWORD *)v10 + 16) = 2;
+        *((_DWORD *)v10 + 5) = 1;
       }
-      *((_DWORD *)v10 + 16) = 2;
-      *((_DWORD *)v10 + 5) = 1;
       return 0;
     }
   }
@@ -178,7 +177,7 @@ bool  CSubProblemSolveEvent::action(void) {
 // Decompiled from char __thiscall CSubProblemSolveEvent::IsAlive(CSubProblemSolveEvent *this)
 bool  CSubProblemSolveEvent::IsAlive(void) {
   
-  if ( CSchedule::GetMainProblemSolve(*((CSchedule **)this + 10), *((_DWORD *)this + 8)) )
+  if ( CSchedule::GetMainProblemSolve(*((CDynList ***)this + 10), *((_DWORD *)this + 8)) != 0 )
   {
     return 1;
   }
@@ -191,7 +190,7 @@ bool  CSubProblemSolveEvent::IsAlive(void) {
 // Decompiled from bool __thiscall CSubProblemSolveEvent::WaitFor(CSubProblemSolveEvent *this)
 bool  CSubProblemSolveEvent::WaitFor(void) {
   
-  return CSchedule::AllSubProblemsSolved(*((CDynList ***)this + 10), *((_DWORD *)this + 3)) && !*((_DWORD *)this + 17);
+  return CSchedule::AllSubProblemsSolved(*((CDynList ***)this + 10), *((_DWORD *)this + 3)) != 0 && *((_DWORD *)this + 17) == 0;
 }
 
 

@@ -6,14 +6,14 @@
 // Decompiled from CBBMemoryException *__thiscall CBBMemoryException::CBBMemoryException(CBBMemoryException *this)
  CBBMemoryException::CBBMemoryException(void) {
   
-  CBBException::CBBException(this);
+  CBBException::CBBException((CBBException *)this);
   *(_DWORD *)this = &CBBMemoryException::_vftable_;
   return this;
 }
 
 
 // address=[0x2f309a0]
-// Decompiled from void __thiscall CBBMemoryException::~CBBMemoryException(_AFX_OLE_STATE *this)
+// Decompiled from void __thiscall CBBMemoryException::~CBBMemoryException(CBBException *this)
  CBBMemoryException::~CBBMemoryException(void) {
   
   *(_DWORD *)this = &CBBMemoryException::_vftable_;
@@ -22,10 +22,10 @@
 
 
 // address=[0x2f309c0]
-// Decompiled from char __thiscall CBBMemoryException::GetErrorMessage(CBBMemoryException *this, char *a2, unsigned int a3)
+// Decompiled from char __thiscall CBBMemoryException::GetErrorMessage(CBBMemoryException *this, char *a2, int a3)
 bool  CBBMemoryException::GetErrorMessage(char * a2, unsigned int a3) {
   
-  BBSupportLib::BBSCopyString<char>(a2, "Out of memory!", a3);
+  BBSupportLib::BBSCopyString<char>((int)a2, "Out of memory!", a3);
   return 1;
 }
 

@@ -14,14 +14,14 @@ unsigned int  CAIAgentThieves::Execute(unsigned int a2, unsigned int a3) {
 // Decompiled from CAIAgentThieves *__thiscall CAIAgentThieves::CAIAgentThieves(CAIAgentThieves *this)
  CAIAgentThieves::CAIAgentThieves(void) {
   
-  CAINormalSectorAgent::CAINormalSectorAgent(this, "thieves");
+  CAINormalSectorAgent::CAINormalSectorAgent((CAINormalSectorAgent *)this, "thieves");
   *(_DWORD *)this = &CAIAgentThieves::_vftable_;
   return this;
 }
 
 
 // address=[0x1325cd0]
-// Decompiled from void __thiscall CAIAgentThieves::~CAIAgentThieves(CAIAgentThieves *this)
+// Decompiled from void __thiscall CAIAgentThieves::~CAIAgentThieves(CAIScheduler **this)
  CAIAgentThieves::~CAIAgentThieves(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

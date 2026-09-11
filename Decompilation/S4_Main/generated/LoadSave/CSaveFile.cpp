@@ -51,7 +51,7 @@ bool  S4::CSaveFile::Open(std::wstring const & a1, int a3) {
 // Decompiled from char __thiscall S4::CSaveFile::Close(S4::CSaveFile *this)
 bool  S4::CSaveFile::Close(void) {
   
-  CFile::Close((S4::CSaveFile *)((char *)this + 4), "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
+  CFile::Close(&this->m_cFile, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
   return 1;
 }
 
@@ -63,7 +63,7 @@ int  S4::CSaveFile::Read(void * Buffer, int ElementSize) {
   size_t v4; // [esp+0h] [ebp-8h]
 
   v4 = CFile::Read(&this->m_cFile, Buffer, ElementSize, 1u, UNUSED_ARG(), UNUSED_ARG());
-  if ( this->m_i2 )
+  if ( this->m_i2 != 0 )
   {
     return -1;
   }
@@ -94,7 +94,7 @@ void  S4::CSaveFile::SetFilePos(int Offset, int Origin) {
 // Decompiled from int __thiscall S4::CSaveFile::GetFileSize(S4::CSaveFile *this)
 unsigned int  S4::CSaveFile::GetFileSize(void) {
   
-  return this->m_cFile.Size(&this->m_cFile, this);
+  return ((int (__thiscall *)(CFile *, S4::CSaveFile *))this->m_cFile.Size)(&this->m_cFile, this);
 }
 
 

@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CSquadLeaderRole::New(int a1)
 class CPersistence * __cdecl CSquadLeaderRole::New(std::istream & a1) {
   
-  if ( operator new(0x74u) )
+  if ( operator new(0x74u) != 0 )
   {
-    return CSquadLeaderRole::CSquadLeaderRole(a1);
+    return ((_DWORD (__stdcall *)(int))CSquadLeaderRole::CSquadLeaderRole)(a1);
   }
   else
   {
@@ -48,35 +48,34 @@ void  CSquadLeaderRole::Init(class CSettler * a2) {
   _DWORD *result; // eax
 
   CSoldierRole::Init(a2);
-  this[25] = 0;
-  this[26] = 0;
+  *(this + 25) = 0;
+  *(this + 26) = 0;
   result = this;
-  this[27] = 0;
-  this[28] = -1;
+  *(this + 27) = 0;
+  *(this + 28) = -1;
   return result;
 }
 
 
 // address=[0x15923d0]
-// Decompiled from struct CWarriorBehavior::SWarriorBehaviorData *__thiscall CSquadLeaderRole::LogicUpdateJob(CSquadLeaderRole *this, struct CSettler *a2)
+// Decompiled from struct CWarriorBehavior::SWarriorBehaviorData *__thiscall CSquadLeaderRole::LogicUpdateJob(CSoldierRole *this, struct CSettler *a2)
 void  CSquadLeaderRole::LogicUpdateJob(class CSettler * a2) {
   
   struct CWarriorBehavior::SWarriorBehaviorData *result; // eax
 
   CSoldierRole::LogicUpdateJob(this, a2);
-  result = CWarriorBehavior::GetWarriorBehaviorData((CSquadLeaderRole *)((char *)this + 48));
-  if ( !*((_BYTE *)result + 4) && *((int *)this + 28) > 0 )
+  result = CWarriorBehavior::GetWarriorBehaviorData(&this->CWarriorBehavior);
+  if ( result->m_uState != 0 || *((int *)this + 28) <= 0 )
   {
-    return result;
+    result = (struct CWarriorBehavior::SWarriorBehaviorData *)IEntity::PackedXY(a2);
+    *((_DWORD *)this + 28) = result;
   }
-  result = (struct CWarriorBehavior::SWarriorBehaviorData *)IEntity::PackedXY(a2);
-  *((_DWORD *)this + 28) = result;
   return result;
 }
 
 
 // address=[0x1592420]
-// Decompiled from int __thiscall CSquadLeaderRole::WarriorInit(CSquadLeaderRole *this, struct IMovingEntity *a2, int a3, int a4)
+// Decompiled from int __thiscall CSquadLeaderRole::WarriorInit(CWarriorBehavior *this, struct IMovingEntity *a2, int a3, int a4)
 void  CSquadLeaderRole::WarriorInit(class IMovingEntity & a2, int a3, int a4) {
   
   int result; // eax
@@ -100,18 +99,18 @@ void  CSquadLeaderRole::WarriorInit(class IMovingEntity & a2, int a3, int a4) {
   int v5; // [esp+18h] [ebp-4h]
 
   v4 = this;
-  CSoldierRole::CSoldierRole(this, (int)a1);
+  CSoldierRole::CSoldierRole((CSoldierRole *)this, (int)a1);
   v5 = 0;
   *(_DWORD *)v4 = &CSquadLeaderRole::_vftable_;
   *((_DWORD *)v4 + 12) = &CSquadLeaderRole::`vftable';
-  if ( Serial::LoadVersion((int)a1) != 2 )
+  if ( Serial::LoadVersion(a1) != 2 )
   {
     BBSupportTracePrintF(3, "Unknown file format version for CSquadLeaderRole!");
     pExceptionObject = 0;
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<unsigned int>(a1, (char *)v4 + 100);
+  operator^<unsigned int>(a1, (unsigned int *)v4 + 25);
   operator^<int>(a1, (int *)v4 + 26);
   operator^<int>(a1, (int *)v4 + 27);
   *((_DWORD *)v4 + 28) = -1;
@@ -124,11 +123,11 @@ void  CSquadLeaderRole::WarriorInit(class IMovingEntity & a2, int a3, int a4) {
 // Decompiled from int __thiscall CSquadLeaderRole::Store(int *this, struct std::ostream *a2)
 void  CSquadLeaderRole::Store(std::ostream & a2) {
   
-  CSoldierRole::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))CSoldierRole::Store)(a2);
   Serial::StoreVersion(a2, 2);
-  operator^<unsigned int>(a2, this + 25);
-  operator^<int>((int)a2, this + 26);
-  return operator^<int>((int)a2, this + 27);
+  operator^<unsigned int>(a2, (unsigned int *)this + 25);
+  operator^<int>(a2, this + 26);
+  return operator^<int>(a2, this + 27);
 }
 
 
@@ -136,17 +135,17 @@ void  CSquadLeaderRole::Store(std::ostream & a2) {
 // [Decompilation failed for static unsigned long CSquadLeaderRole::m_iClassID]
 
 // address=[0x1575ab0]
-// Decompiled from void __thiscall CSquadLeaderRole::~CSquadLeaderRole(CSquadLeaderRole *this)
+// Decompiled from void __thiscall CSquadLeaderRole::~CSquadLeaderRole(CSoldierRole *this)
  CSquadLeaderRole::~CSquadLeaderRole(void) {
   
-  *(_DWORD *)this = &CSquadLeaderRole::_vftable_;
-  *((_DWORD *)this + 12) = &CSquadLeaderRole::`vftable';
+  this->ISelectableSettlerRole::ISettlerRole::CPersistence::__vftable = (CSoldierRole_vtbl *)&CSquadLeaderRole::_vftable_;
+  this->CWarriorBehavior::__vftable = (CWarriorBehavior_vtbl *)&CSquadLeaderRole::`vftable';
   CSoldierRole::~CSoldierRole(this);
 }
 
 
 // address=[0x1592470]
-// Decompiled from int __thiscall CSquadLeaderRole::WarriorTaskWalkOneStep(CSquadLeaderRole *this, struct IMovingEntity *a2)
+// Decompiled from int __thiscall CSquadLeaderRole::WarriorTaskWalkOneStep(CSoldierRole *this, struct IMovingEntity *a2)
 int  CSquadLeaderRole::WarriorTaskWalkOneStep(class IMovingEntity & a2) {
   
   Y16X16 *v2; // eax
@@ -160,31 +159,31 @@ int  CSquadLeaderRole::WarriorTaskWalkOneStep(class IMovingEntity & a2) {
   struct CWalking *v11; // [esp+10h] [ebp-8h]
 
   v10 = CSoldierRole::WarriorTaskWalkOneStep(this, a2);
-  if ( (v10 & 0x10) != 0 && (int)ISelectableSettlerRole::GetPrimaryGroupId((CSquadLeaderRole *)((char *)this - 48)) > 0 && IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) )
+  if ( (v10 & 0x10) != 0 && (int)ISelectableSettlerRole::GetPrimaryGroupId((CSoldierRole *)((char *)this - 48)) > 0 && IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) != 0 )
   {
-    if ( *((int *)this + 16) <= 0 )
+    if ( this->m_sWarriorBehaviorData.m_iFlags <= 0 )
     {
-      *((_DWORD *)this + 16) = IEntity::PackedXY(a2);
+      this->m_sWarriorBehaviorData.m_iFlags = IEntity::PackedXY(a2);
     }
     else
     {
-      v7 = *((_DWORD *)this + 16);
+      v7 = this->m_sWarriorBehaviorData.m_iFlags;
       v2 = (Y16X16 *)IEntity::PackedXY(a2);
-      if ( (int)Y16X16::DistanceFast(v2, v7) >= 3 )
+      if ( Y16X16::DistanceFast((int)v2, v7) >= 3 )
       {
         v3 = IEntity::PackedXY(a2);
         v4 = CWorldManager::Index(v3);
         v9 = CWorldManager::SectorId(v4);
-        v5 = CWorldManager::Index(*((_DWORD *)this + 16));
+        v5 = CWorldManager::Index(this->m_sWarriorBehaviorData.m_iFlags);
         if ( v9 == CWorldManager::SectorId(v5) )
         {
-          v8 = *((_DWORD *)CWarriorBehavior::GetWarriorBehaviorData(this) + 3) & 0x1060 | 0x2000;
+          v8 = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)this)->m_iFlags & 0x1060 | 0x2000;
           v11 = IMovingEntity::Walking(a2);
-          (*(void (__thiscall **)(struct CWalking *, _DWORD, int))(*(_DWORD *)v11 + 8))(v11, *((_DWORD *)this + 16), v8);
+          v11->InitB((CWalkingBase *)v11, this->m_sWarriorBehaviorData.m_iFlags, v8);
         }
         else
         {
-          *((_DWORD *)this + 16) = IEntity::PackedXY(a2);
+          this->m_sWarriorBehaviorData.m_iFlags = IEntity::PackedXY(a2);
         }
       }
     }
@@ -195,7 +194,7 @@ int  CSquadLeaderRole::WarriorTaskWalkOneStep(class IMovingEntity & a2) {
 
 
 // address=[0x15925a0]
-// Decompiled from int __thiscall CSquadLeaderRole::WarriorTaskIdleWalk(CSquadLeaderRole *this, struct IMovingEntity *a2)
+// Decompiled from int __thiscall CSquadLeaderRole::WarriorTaskIdleWalk(CSoldierRole *this, struct IMovingEntity *a2)
 int  CSquadLeaderRole::WarriorTaskIdleWalk(class IMovingEntity & a2) {
   
   int v3; // [esp+0h] [ebp-8h]
@@ -216,7 +215,7 @@ void  CSquadLeaderRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum
 
 
 // address=[0x1592600]
-// Decompiled from int __thiscall CSquadLeaderRole::WarriorTaskFinished(CSquadLeaderRole *this, struct IMovingEntity *a2)
+// Decompiled from int __thiscall CSquadLeaderRole::WarriorTaskFinished(CSoldierRole *this, struct IMovingEntity *a2)
 void  CSquadLeaderRole::WarriorTaskFinished(class IMovingEntity & a2) {
   
   return CSoldierRole::WarriorTaskFinished(this, a2);
@@ -227,7 +226,7 @@ void  CSquadLeaderRole::WarriorTaskFinished(class IMovingEntity & a2) {
 // Decompiled from CSquadLeaderRole *__thiscall CSquadLeaderRole::CSquadLeaderRole(CSquadLeaderRole *this)
  CSquadLeaderRole::CSquadLeaderRole(void) {
   
-  CSoldierRole::CSoldierRole(this);
+  CSoldierRole::CSoldierRole((CSoldierRole *)this);
   *(_DWORD *)this = &CSquadLeaderRole::_vftable_;
   *((_DWORD *)this + 12) = &CSquadLeaderRole::`vftable';
   *((_DWORD *)this + 25) = 0;
@@ -268,73 +267,72 @@ void  CSquadLeaderRole::CommandGroupMembers(class IMovingEntity & a2) {
 
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   result = (int)this;
-  if ( TickCounter < *((_DWORD *)this + 25) )
+  if ( TickCounter >= *((_DWORD *)this + 25) )
   {
-    return result;
-  }
-  v15 = IEntity::OwnerId((unsigned __int8 *)a2);
-  result = ISelectableSettlerRole::GetPrimaryGroupId(this);
-  v19 = result;
-  if ( result <= 0 )
-  {
-    *((_DWORD *)this + 27) = 0;
-  }
-  else
-  {
-    result = (*(int (__thiscall **)(void *, int, int))(*(_DWORD *)g_pGroupMgr + 12))(g_pGroupMgr, v15, result);
-    v22 = result;
-    if ( result <= 1 )
+    v15 = IEntity::OwnerId(a2);
+    result = ISelectableSettlerRole::GetPrimaryGroupId((ISelectableSettlerRole *)this);
+    v19 = result;
+    if ( result <= 0 )
     {
       *((_DWORD *)this + 27) = 0;
     }
     else
     {
-      if ( (*((_DWORD *)CWarriorBehavior::GetWarriorBehaviorData((CSquadLeaderRole *)((char *)this + 48)) + 3) & 0x200000) != 0 )
+      result = g_pGroupMgr->GetGroupSize(g_pGroupMgr, v15, result);
+      v22 = result;
+      if ( result <= 1 )
       {
-        v17 = 0x200000;
+        *((_DWORD *)this + 27) = 0;
       }
       else
       {
-        v17 = 0x100000;
-      }
-      v5 = sqrt<int>(v22);
-      v12 = (int)(v5 * 0.75 + 3.0);
-      v24 = *((_DWORD *)this + 27) <= 0;
-      v16 = IMovingEntity::Walking(a2);
-      v23 = (*(int (__thiscall **)(struct CWalking *, _DWORD, _DWORD))(*(_DWORD *)v16 + 32))(v16, LODWORD(v5), HIDWORD(v5));
-      if ( v23 < 0 )
-      {
-        v23 = IEntity::PackedXY(a2);
-      }
-      v8 = Y16X16::UnpackXFast(v23);
-      v9 = Y16X16::UnpackYFast(v23);
-      v3 = IEntity::PackedXY(a2);
-      CGroupDestinations::CGroupDestinations((CGroupDestinations *)v26, v8, v9, v22, 0, v3);
-      v6 = IEntity::EntityId((unsigned __int16 *)a2);
-      v7 = (*(int (__thiscall **)(void *, int, int))(*(_DWORD *)g_pGroupMgr + 16))(g_pGroupMgr, v15, v19);
-      for ( i = 0;
-            i < v22;
-            ++i )
-      {
-        v14 = *(unsigned __int16 *)(v7 + 2 * i);
-        if ( v14 != v6 )
+        if ( (CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)this + 2)->m_iFlags & 0x200000) != 0 )
         {
-          SettlerPtr = CSettlerMgr::GetSettlerPtr(v14);
-          v20 = (pairNode *)(*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)SettlerPtr + 120))(SettlerPtr);
-          if ( v20 )
+          v17 = 0x200000;
+        }
+        else
+        {
+          v17 = 0x100000;
+        }
+        v5 = sqrt<int>(v22);
+        v12 = (int)(v5 * 0.75 + 3.0);
+        v24 = *((_DWORD *)this + 27) <= 0;
+        v16 = IMovingEntity::Walking(a2);
+        v23 = ((int (__thiscall *)(struct CWalking *, _DWORD, _DWORD))v16->GetNextWaypoint)(v16, LODWORD(v5), HIDWORD(v5));
+        if ( v23 < 0 )
+        {
+          v23 = IEntity::PackedXY(a2);
+        }
+        v8 = Y16X16::UnpackXFast(v23);
+        v9 = Y16X16::UnpackYFast(v23);
+        v3 = IEntity::PackedXY(a2);
+        CGroupDestinations::CGroupDestinations((CGroupDestinations *)v26, v8, v9, v22, 0, v3);
+        v6 = IEntity::EntityId(a2);
+        v7 = (int)g_pGroupMgr->GetGroupEntityIds(g_pGroupMgr, v15, v19);
+        for ( i = 0;
+              i < v22;
+              ++i )
+        {
+          v14 = *(unsigned __int16 *)(v7 + 2 * i);
+          if ( v14 != v6 )
           {
-            v13 = (Y16X16 *)CWarriorBehavior::WarriorDestinationXY(v20);
-            NextDestination = CGroupDestinations::GetNextDestination(v26);
-            if ( v24 || (v4 = IEntity::PackedXY(a2), Y16X16::DistanceFast(v13, v4) > v12) && Y16X16::DistanceFast(v13, NextDestination) > v12 )
+            SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(v14);
+            v20 = (pairNode *)(*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)SettlerPtr + 120))(SettlerPtr);
+            if ( v20 != 0 )
             {
-              (**(void (__thiscall ***)(pairNode *, unsigned __int8 *, int, int))v20)(v20, SettlerPtr, NextDestination, v17);
+              v13 = (Y16X16 *)CWarriorBehavior::WarriorDestinationXY((CWarriorBehavior *)v20);
+              NextDestination = CGroupDestinations::GetNextDestination((CGroupDestinations *)v26);
+              if ( v24 || (v4 = IEntity::PackedXY(a2), Y16X16::DistanceFast((int)v13, v4) > v12) && Y16X16::DistanceFast((int)v13, NextDestination) > v12 )
+              {
+                (**(void (__thiscall ***)(pairNode *, unsigned __int8 *, int, int))v20)(v20, SettlerPtr, NextDestination, v17);
+              }
             }
           }
         }
+        *((_DWORD *)this + 27) = v23;
+        result = (int)this;
+        *((_DWORD *)this + 25) = TickCounter + 45;
       }
-      *((_DWORD *)this + 27) = v23;
-      result = (int)this;
-      *((_DWORD *)this + 25) = TickCounter + 45;
     }
   }
   return result;

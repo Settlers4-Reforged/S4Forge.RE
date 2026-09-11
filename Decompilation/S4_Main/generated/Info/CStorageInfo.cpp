@@ -6,7 +6,7 @@
 // Decompiled from CStorageInfo *__thiscall CStorageInfo::CStorageInfo(CStorageInfo *this)
  CStorageInfo::CStorageInfo(void) {
   
-  CBuildingInfo::CBuildingInfo(this);
+  CBuildingInfo::CBuildingInfo((CBuildingInfo *)this);
   *(_DWORD *)this = &CStorageInfo::_vftable_;
   return this;
 }

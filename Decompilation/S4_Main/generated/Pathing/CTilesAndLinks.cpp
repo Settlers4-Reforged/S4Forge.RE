@@ -374,17 +374,17 @@ class CLinkList & __cdecl CTilesAndLinks::PushLinksUndef(int a1) {
   int v2; // [esp+0h] [ebp-4h]
 
   v2 = CLinks::PushLinksUndef(a1);
-  if ( v2 )
+  if ( v2 != 0 )
   {
     return CLinks::LinkList(v2);
   }
   CTilesAndLinks::LinksGarbageCollection(16);
-  if ( CLinks::PushLinksUndef(a1) )
+  if ( CLinks::PushLinksUndef(a1) != 0 )
   {
     CTilesAndLinks::LinksGarbageCollection(0x7FFFFFFF);
   }
   v2 = CLinks::PushLinksUndef(a1);
-  if ( v2 )
+  if ( v2 != 0 )
   {
     return CLinks::LinkList(v2);
   }
@@ -422,7 +422,7 @@ void __cdecl CTilesAndLinks::AddLink(int _iOwnerTileId, int _iLinkTileId) {
   int v6; // [esp+4h] [ebp-8h]
   struct CLinkList *pLinkList; // [esp+8h] [ebp-4h]
 
-  if ( !CTilesEx::IsUsedRealTile(_iOwnerTileId) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1400, "IsUsedRealTile(_iOwnerTileId)") == 1 )
+  if ( CTilesEx::IsUsedRealTile(_iOwnerTileId) == 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1400, "IsUsedRealTile(_iOwnerTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -432,11 +432,11 @@ void __cdecl CTilesAndLinks::AddLink(int _iOwnerTileId, int _iLinkTileId) {
   }
   v2 = CTiles::TileEx(_iOwnerTileId);
   pLinkList = CTile::LinkList(v2);
-  if ( !(unsigned __int8)CLinks::IsValidUsedLinkList(pLinkList) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1405, "IsValidUsedLinkList(*pLinkList)") == 1 )
+  if ( !CLinks::IsValidUsedLinkList(pLinkList) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1405, "IsValidUsedLinkList(*pLinkList)") == 1 )
   {
     __debugbreak();
   }
-  if ( CLinkList::SearchForLinkTileId(pLinkList, _iLinkTileId) )
+  if ( CLinkList::SearchForLinkTileId(pLinkList, _iLinkTileId) != 0 )
   {
     CTrace::Print("CTilesAndLinks::AddLink: TileEx %i found in link list 0x%08x!", _iLinkTileId, pLinkList);
     CLinkList::DbgPrint(pLinkList);
@@ -449,7 +449,7 @@ void __cdecl CTilesAndLinks::AddLink(int _iOwnerTileId, int _iLinkTileId) {
     {
       v5 = pLinkList;
       pLinkList = CTilesAndLinks::PushLinksUndef(v6 + 1);
-      if ( !CLinks::IsValidRealLinkList(pLinkList) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1417, "IsValidRealLinkList(*pLinkList)") == 1 )
+      if ( !CLinks::IsValidRealLinkList((const struct CLink *)pLinkList) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1417, "IsValidRealLinkList(*pLinkList)") == 1 )
       {
         __debugbreak();
       }
@@ -465,13 +465,13 @@ void __cdecl CTilesAndLinks::AddLink(int _iOwnerTileId, int _iLinkTileId) {
 
 
 // address=[0x15e5d40]
-// Decompiled from char __cdecl CTilesAndLinks::DeleteLink(int a1, int a2)
+// Decompiled from bool __cdecl CTilesAndLinks::DeleteLink(int a1, int a2)
 void __cdecl CTilesAndLinks::DeleteLink(int a1, int a2) {
   
   CTile *v2; // eax
   struct CLinkList *v4; // [esp+0h] [ebp-4h]
 
-  if ( !CTilesEx::IsUsedRealTile(a1) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1484, "IsUsedRealTile(_iOwnerTileId)") == 1 )
+  if ( CTilesEx::IsUsedRealTile(a1) == 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1484, "IsUsedRealTile(_iOwnerTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -500,7 +500,7 @@ void __cdecl CTilesAndLinks::ReplaceLink(int a1, int a2, int a3) {
   CTile *v3; // eax
   CLinkList *v4; // [esp+0h] [ebp-4h]
 
-  if ( !CTilesEx::IsUsedRealTile(a1) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1454, "IsUsedRealTile(_iOwnerTileId)") == 1 )
+  if ( CTilesEx::IsUsedRealTile(a1) == 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1454, "IsUsedRealTile(_iOwnerTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -577,14 +577,14 @@ void __cdecl CTilesAndLinks::DeleteTile(int a1) {
   CTile *v1; // eax
   struct CLinkList *v2; // eax
 
-  if ( CTilesEx::IsUsedRealTile((int)a1) )
+  if ( CTilesEx::IsUsedRealTile((int)a1) != 0 )
   {
     v1 = CTiles::TileEx((int)a1);
     v2 = CTile::LinkList(v1);
     CTilesAndLinks::DeleteLinkList(v2);
     CTilesEx::DeleteTile((int)a1);
   }
-  else if ( !"DeleteTile(): Not a used real tile!" && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1551, "\"DeleteTile(): Not a used real tile!\"") == 1 )
+  else if ( "DeleteTile(): Not a used real tile!" == 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 1551, "\"DeleteTile(): Not a used real tile!\"") == 1 )
   {
     __debugbreak();
   }

@@ -47,14 +47,7 @@ int  IMovingEntity::GetJobPart(void)const {
 // Decompiled from bool __thiscall IMovingEntity::IsFree(IMovingEntity *this, int a2)
 bool  IMovingEntity::IsFree(int a2) {
   
-  if ( IMovingEntity::IsNotBlocked(this, a2) )
-  {
-    return IMovingEntity::IsNotOccupied(this, a2);
-  }
-  else
-  {
-    return 0;
-  }
+  return IMovingEntity::IsNotBlocked(this, a2) && IMovingEntity::IsNotOccupied(this, a2);
 }
 
 
@@ -126,7 +119,7 @@ void  IMovingEntity::WalkToXY(int a2, int a3) {
   
   CWalking *v3; // eax
 
-  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
+  v3 = std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
   v3->InitB((CWalkingBase *)v3, a2, a3);
 }
 
@@ -140,7 +133,7 @@ void  IMovingEntity::NewToDoList(class std::list<class CEntityTask,class std::al
   int v5; // [esp+14h] [ebp-14h]
   int v7; // [esp+24h] [ebp-4h]
 
-  if ( !_toDo && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 152, "_toDo != NULL") == 1 )
+  if ( _toDo == 0 && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 152, "_toDo != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -165,11 +158,11 @@ void  IMovingEntity::ResetToDoList(void) {
   int v7; // [esp+28h] [ebp-14h] MAPDST
   int exceptionBlock; // [esp+38h] [ebp-4h]
 
-  if ( !this->m_pToDoList && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 183, "m_toDoList != NULL") == 1 )
+  if ( this->m_pToDoList == 0 && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 183, "m_toDoList != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_pToDoList )
+  if ( this->m_pToDoList != 0 )
   {
     v7 = std::list<CEntityTask>::begin(this->m_pToDoList);
     exceptionBlock = 0;
@@ -199,7 +192,7 @@ void  IMovingEntity::SetToDoList(class std::list<class CEntityTask,class std::al
 
   this->m_pToDoList = (std::list *)a2;
   this->m_iToDoSize = -1;
-  if ( !this->m_pToDoList && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 171, "m_toDoList != nullptr") == 1 )
+  if ( this->m_pToDoList == 0 && BBSupportDbgReport(2, "MapObjects\\MovingEntity.cpp", 171, "m_toDoList != nullptr") == 1 )
   {
     __debugbreak();
   }
@@ -218,7 +211,7 @@ bool  IMovingEntity::IsNotOccupied(int a2) {
   
   CWalking *v3; // [esp+4h] [ebp-4h]
 
-  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
+  v3 = std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
   return v3->IsNotOccupied(v3, a2);
 }
 
@@ -229,7 +222,7 @@ bool  IMovingEntity::IsNotBlocked(int a2) {
   
   CWalking *v3; // [esp+4h] [ebp-4h]
 
-  v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
+  v3 = std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
   return v3->IsNotBlocked(v3, a2);
 }
 
@@ -264,7 +257,7 @@ void  IMovingEntity::SetDistance(int a2) {
 // Decompiled from int __thiscall IMovingEntity::GetActualIter(IMovingEntity *this, int a2)
 class std::_List_iterator<class std::_List_val<struct std::_List_simple_types<class CEntityTask> > > const  IMovingEntity::GetActualIter(void a2)const {
   
-  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(&this->m_cCurrentToDoItemIter);
+  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>((int)&this->m_cCurrentToDoItemIter);
   return a2;
 }
 
@@ -291,10 +284,10 @@ void  IMovingEntity::SetPositionAndDir(int a2, int a3) {
  IMovingEntity::IMovingEntity(std::istream & _pStream) {
   
   CWalkingBase *v2; // eax
-  _DWORD *v3; // eax
+  int *v3; // eax
   _BYTE v5[4]; // [esp+4h] [ebp-2Ch] BYREF
   _DWORD v6[3]; // [esp+8h] [ebp-28h] BYREF
-  int v7; // [esp+14h] [ebp-1Ch] BYREF
+  unsigned int v7; // [esp+14h] [ebp-1Ch] BYREF
   int pExceptionObject; // [esp+18h] [ebp-18h] BYREF
   char v10; // [esp+23h] [ebp-Dh] BYREF
   int exceptionBlock; // [esp+2Ch] [ebp-4h]
@@ -321,11 +314,11 @@ void  IMovingEntity::SetPositionAndDir(int a2, int a3) {
   operator^<int>(_pStream, &this->unk_4c);
   v10 = 0;
   operator^<bool>(_pStream, &v10);
-  if ( v10 )
+  if ( v10 != 0 )
   {
     v2 = CWalking::Create(_pStream);
     v6[1] = std::auto_ptr<CWalking>::auto_ptr<CWalking>(v6, (int)v2);
-    v3 = (_DWORD *)std::auto_ptr<CWalking>::operator<CWalking> std::auto_ptr_ref<CWalking>(v5);
+    v3 = (int *)std::auto_ptr<CWalking>::operator<CWalking> std::auto_ptr_ref<CWalking>((int)v5);
     std::auto_ptr<CWalking>::operator=(*v3);
     std::auto_ptr<CWalking>::~auto_ptr<CWalking>(v6);
   }
@@ -345,7 +338,7 @@ void  IMovingEntity::Store(std::ostream & a1) {
 
   IAnimatedEntity::Store(this, a1);
   v2 = 1;
-  operator^<unsigned int>(a1, &v2);
+  operator^<unsigned int>(a1, (unsigned int *)&v2);
   operator^<signed char>(a1, &this->m_iDirection);
   operator^<unsigned char>(a1, &this->m_iDistance);
   operator^<unsigned char>(a1, &this->m_iDisplacementCosts);

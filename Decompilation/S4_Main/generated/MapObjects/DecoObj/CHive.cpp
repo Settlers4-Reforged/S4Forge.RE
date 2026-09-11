@@ -9,7 +9,7 @@
   
   IDecoObject::IDecoObject(this, _iX, _iY, _iDecoObjectType, _iId, _iPhases != 0);
   this->__vftable = (IAnimatedEntity_vtbl *)&CHive::_vftable_;
-  if ( _iPhases && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 70, "_iPhases == GROW1") == 1 )
+  if ( _iPhases != 0 && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 70, "_iPhases == GROW1") == 1 )
   {
     __debugbreak();
   }
@@ -17,7 +17,7 @@
   this->m_uU1 = 1;
   this->m_iPhases = _iPhases;
   this->m_uU5 = 0;
-  if ( CHive::IsFlowerInSurrounding(this) )
+  if ( CHive::IsFlowerInSurrounding(this) != 0 )
   {
     ++this->m_iPhases;
     this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType);
@@ -27,7 +27,7 @@
     this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType) + 1;
   }
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
-  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 98, "m_uCycleFrames") == 1 )
+  if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 98, "m_uCycleFrames") == 1 )
   {
     __debugbreak();
   }
@@ -47,7 +47,7 @@
   this->m_iPhases = a2->m_iPhases;
   this->m_iJobPart = a2->m_iJobPart;
   this->m_uCycleFrames = a2->m_uCycleFrames;
-  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 135, "m_uCycleFrames") == 1 )
+  if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 135, "m_uCycleFrames") == 1 )
   {
     __debugbreak();
   }
@@ -76,7 +76,7 @@ void  CHive::LogicUpdate(void) {
   int v3; // [esp+8h] [ebp-8h]
 
   v3 = 1;
-  if ( CHive::IsFlowerInSurrounding(this) )
+  if ( CHive::IsFlowerInSurrounding(this) != 0 )
   {
     v3 = 3;
   }
@@ -120,7 +120,7 @@ void  CHive::LogicUpdate(void) {
         this->m_iFrame = 0;
         this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, this->m_iType) + 2;
         this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
-        if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 334, "m_uCycleFrames") == 1 )
+        if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "mapobjects\\decoobj\\hive.cpp", 334, "m_uCycleFrames") == 1 )
         {
           __debugbreak();
         }
@@ -137,7 +137,7 @@ void  CHive::LogicUpdate(void) {
       }
       goto LABEL_24;
     case 5u:
-      if ( ++this->m_uU5 < 20 || (this->m_uU5 = 0, ++this->m_iFrame, m_cFrame = this->m_iFrame, m_cFrame < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart)) )
+      if ( ++this->m_uU5 < 20 || (this->m_uU5 = 0, ++this->m_iFrame, (m_cFrame = this->m_iFrame) < CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart)) )
       {
 LABEL_24:
         IAnimatedEntity::RegisterForLogicUpdate(this, 31);
@@ -166,13 +166,13 @@ struct SGfxObjectInfo *  CHive::GetGfxInfos(void) {
   v4 = TickCounter - IAnimatedEntity::LastUpdateTick(this);
   v2 = CStateGame::GetTickCounter(g_pGame);
   IAnimatedEntity::SetLastUpdateTick(this, v2);
-  if ( v4 )
+  if ( v4 != 0 )
   {
     this->m_iFrame = (v4 + (unsigned int)this->m_iFrame) % this->m_uCycleFrames;
   }
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
-  MEMORY[0x40FE518] = 16;
-  MEMORY[0x40FE51A] = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_uObjType = 16;
+  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
   IEntity::m_sGfxInfo.m_uFlags = 0;
   return &IEntity::m_sGfxInfo;
 }
@@ -193,7 +193,7 @@ void  CHive::Decrease(int a2) {
     return IAnimatedEntity::RegisterForLogicUpdate(this, 31);
   }
   IEntity::ClearFlagBits(this, ENTITY_FLAG_Ready);
-  if ( CHive::IsFlowerInSurrounding(this) )
+  if ( CHive::IsFlowerInSurrounding(this) != 0 )
   {
     this->m_iPhases = 1;
     this->m_iFrame = 0;
@@ -262,7 +262,7 @@ bool  CHive::IsFlowerInSurrounding(void) {
     {
       v5 = CWorldManager::ObjectId(v7, v8);
       DecoObjPtr = CDecoObjMgr::GetDecoObjPtr(v5);
-      if ( DecoObjPtr )
+      if ( DecoObjPtr != 0 )
       {
         v4 = IEntity::Type(DecoObjPtr);
         if ( CDecoObjMgr::IsFlower(&g_cDecoObjMgr, v4) )
@@ -280,7 +280,7 @@ bool  CHive::IsFlowerInSurrounding(void) {
 // Decompiled from CHive *__thiscall CHive::CHive(CHive *this, struct std::istream *a1)
  CHive::CHive(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   int v6; // [esp+1Ch] [ebp-4h]
 
@@ -313,7 +313,7 @@ void  CHive::Store(std::ostream & a1) {
 
   IDecoObject::Store(this, a1);
   v2 = 1;
-  operator^<unsigned int>(a1, &v2);
+  operator^<unsigned int>(a1, (unsigned int *)&v2);
   operator^<bool>(a1, &this->m_uU1);
   operator^<unsigned char>(a1, &this->m_iPhases);
   operator^<unsigned char>(a1, &this->m_uCycleFrames);

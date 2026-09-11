@@ -6,11 +6,11 @@
 // Decompiled from CProfile *__thiscall CProfile::CProfile(CProfile *this)
  CProfile::CProfile(void) {
   
-  if ( !s_bPerfFrequencyCalculated )
+  if ( s_bPerfFrequencyCalculated == 0 )
   {
     CalcPerfFrequency();
   }
-  CProfile::Clear(this);
+  CProfile::Clear((LARGE_INTEGER *)this);
   return this;
 }
 
@@ -22,7 +22,7 @@ void  CProfile::Clear(void) {
   BOOL result; // eax
 
   result = QueryPerformanceCounter(this);
-  this[20].LowPart = 0;
+  *((_DWORD *)this + 40) = 0;
   return result;
 }
 
@@ -44,12 +44,12 @@ void  CProfile::End(void) {
   LARGE_INTEGER *result; // eax
 
   QueryPerformanceCounter(this + 3);
-  v2 = (unsigned __int64)(this[3].QuadPart - this[2].QuadPart) >> 32;
-  v1 = this[3].LowPart - this[2].LowPart;
-  this[1].QuadPart = __PAIR64__(this[1].HighPart, v1) + this[3].QuadPart - this[2].QuadPart;
-  this[(this[20].LowPart & 0xF) + 4].QuadPart = __PAIR64__(v2, v1);
+  v2 = (*((_QWORD *)this + 3) - *((_QWORD *)this + 2)) >> 32;
+  v1 = *((_DWORD *)this + 6) - *((_DWORD *)this + 4);
+  *((_QWORD *)this + 1) = __PAIR64__(*((_DWORD *)this + 3), v1) + *((_QWORD *)this + 3) - *((_QWORD *)this + 2);
+  *((_QWORD *)this + (*(_DWORD *)(this + 20) & 0xF) + 4) = __PAIR64__(v2, v1);
   result = this;
-  ++this[20].LowPart;
+  ++*((_DWORD *)this + 40);
   return result;
 }
 
@@ -85,10 +85,10 @@ char const *  CProfile::InfoStr(void)const {
   v6 = PerformanceCount.QuadPart - *(_QWORD *)v7;
   if ( v6 <= 0 )
   {
-    v6 = 1LL;
+    v6 = 1;
   }
   v4 = (double)*((__int64 *)v7 + 1) / (double)v6 * 100.0;
-  v3 = (double)*((__int64 *)v7 + 1) * *(double *)&s_dPerfFrequency;
+  v3 = (double)*((__int64 *)v7 + 1) * s_dPerfFrequency;
   v1 = CProfile::TimeMs(v7);
   snprintf(byte_46851F8, 0x40u, "%5i x %6.3f ms = %9.1f ms, %5.2f%%", *((_DWORD *)v7 + 40), v1, v3, v4);
   return byte_46851F8;
@@ -127,26 +127,26 @@ char const *  CProfile::TraceStr(void)const {
   v22 = PerformanceCount.QuadPart - *(_QWORD *)v23;
   if ( v22 <= 0 )
   {
-    v22 = 1LL;
+    v22 = 1;
   }
-  v20 = (double)*((__int64 *)v23 + (*((_DWORD *)v23 + 40) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v19 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 1) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v18 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 2) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v17 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 3) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v16 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 4) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v15 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 5) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v14 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 6) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v13 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 7) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v12 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 8) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v11 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 9) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v10 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 10) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v9 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 11) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v8 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 12) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v7 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 13) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v6 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 14) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
-  v5 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 15) & 0xF) + 4) * *(double *)&s_dPerfFrequency;
+  v20 = (double)*((__int64 *)v23 + (*((_DWORD *)v23 + 40) & 0xF) + 4) * s_dPerfFrequency;
+  v19 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 1) & 0xF) + 4) * s_dPerfFrequency;
+  v18 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 2) & 0xF) + 4) * s_dPerfFrequency;
+  v17 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 3) & 0xF) + 4) * s_dPerfFrequency;
+  v16 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 4) & 0xF) + 4) * s_dPerfFrequency;
+  v15 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 5) & 0xF) + 4) * s_dPerfFrequency;
+  v14 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 6) & 0xF) + 4) * s_dPerfFrequency;
+  v13 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 7) & 0xF) + 4) * s_dPerfFrequency;
+  v12 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 8) & 0xF) + 4) * s_dPerfFrequency;
+  v11 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 9) & 0xF) + 4) * s_dPerfFrequency;
+  v10 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 10) & 0xF) + 4) * s_dPerfFrequency;
+  v9 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 11) & 0xF) + 4) * s_dPerfFrequency;
+  v8 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 12) & 0xF) + 4) * s_dPerfFrequency;
+  v7 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 13) & 0xF) + 4) * s_dPerfFrequency;
+  v6 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 14) & 0xF) + 4) * s_dPerfFrequency;
+  v5 = (double)*((__int64 *)v23 + (((unsigned __int8)*((_DWORD *)v23 + 40) + 15) & 0xF) + 4) * s_dPerfFrequency;
   v4 = (double)*((__int64 *)v23 + 1) / (double)v22 * 100.0;
-  v3 = (double)*((__int64 *)v23 + 1) * *(double *)&s_dPerfFrequency;
+  v3 = (double)*((__int64 *)v23 + 1) * s_dPerfFrequency;
   v1 = CProfile::TimeMs(v23);
   snprintf(byte_4685248, 0x100u, "%i x %.3f ms = %.1f ms, %5.2f%% (%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f)", *((_DWORD *)v23 + 40), v1, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20);
   return byte_4685248;

@@ -41,7 +41,7 @@ class CAIEntityInfoEx * __cdecl CAIEntityInfoEx::CreateExtendedInfo(enum T_AI_EN
   CAIEntityInfoTower *C; // [esp+14h] [ebp-10h]
 
   v2 = 0;
-  if ( a1 )
+  if ( a1 != 0 )
   {
     if ( BBSupportDbgReport(1, "AI\\AI_EntityInfo.cpp", 135, "CAIEntityInfoEx::CreateExtendedInfo(): Invalid class!") == 1 )
     {
@@ -51,7 +51,7 @@ class CAIEntityInfoEx * __cdecl CAIEntityInfoEx::CreateExtendedInfo(enum T_AI_EN
   else
   {
     C = (CAIEntityInfoTower *)operator new(0x14u);
-    if ( C )
+    if ( C != 0 )
     {
       return CAIEntityInfoTower::CAIEntityInfoTower(C);
     }

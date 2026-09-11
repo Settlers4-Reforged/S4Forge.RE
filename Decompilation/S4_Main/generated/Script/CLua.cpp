@@ -26,7 +26,7 @@ void  CLua::BeginBlock(void) {
 void  CLua::CallFunction(unsigned int a2) {
   
   lua_state = this->state;
-  if ( !j__lua_isfunction(a2) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 407, "lua_isfunction(_FuncObj)") == 1 )
+  if ( j__lua_isfunction(a2) == 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 407, "lua_isfunction(_FuncObj)") == 1 )
   {
     __debugbreak();
   }
@@ -41,11 +41,11 @@ void  CLua::CallFunction(char const * Str) {
   int result; // eax
   int v3; // [esp+4h] [ebp-4h]
 
-  if ( Str )
+  if ( Str != 0 )
   {
     lua_state = this->state;
     v3 = lua_getglobal(Str);
-    if ( j__lua_isfunction(v3) )
+    if ( j__lua_isfunction(v3) != 0 )
     {
       return j__lua_callfunction(v3);
     }
@@ -85,7 +85,7 @@ void  CLua::CreateTable(char const * _pName) {
   
   int v2; // eax
 
-  if ( !_pName && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 444, "_pName != NULL") == 1 )
+  if ( _pName == 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 444, "_pName != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -106,7 +106,7 @@ void  CLua::EndBlock(void) {
 
 
 // address=[0x16023b0]
-// Decompiled from int __thiscall CLua::GetCurrentLine(void **this, unsigned int a2)
+// Decompiled from int __thiscall CLua::GetCurrentLine(void **this, int a2)
 int  CLua::GetCurrentLine(unsigned int a2) {
   
   lua_state = *this;
@@ -127,7 +127,7 @@ void  CLua::GetFuncInfo(unsigned int a2, char * * a3, int * a4) {
 // Decompiled from int __thiscall CLua::GetGlobal(CLua *this, char *Str)
 unsigned int  CLua::GetGlobal(char const * Str) {
   
-  if ( !Str && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 614, "_pName != NULL") == 1 )
+  if ( Str == 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 614, "_pName != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -163,7 +163,7 @@ char *  CLua::GetObjName(unsigned int a2, char * * a3) {
 unsigned int  CLua::GetParam(int a2) {
   
   lua_state = this->state;
-  CLua::dbgCheckParam((void **)&this->state, a2);
+  CLua::dbgCheckParam(this, a2);
   return j__lua_lua2C(a2);
 }
 
@@ -193,7 +193,7 @@ char *  CLua::GetString(int a2) {
   int v2; // eax
 
   lua_state = this->state;
-  CLua::dbgCheckParam((void **)&this->state, a2);
+  CLua::dbgCheckParam(this, a2);
   v2 = j__lua_lua2C(a2);
   return j__lua_getstring(v2);
 }
@@ -224,7 +224,7 @@ void  CLua::PushInt(int a2) {
 // Decompiled from int __thiscall CLua::SetGlobal(void **this, char *Str)
 void  CLua::SetGlobal(char const * Str) {
   
-  if ( !Str && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 624, "_pName != NULL") == 1 )
+  if ( Str == 0 && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\script\\Lua.h", 624, "_pName != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -242,7 +242,7 @@ void  CLua::SetGlobal(char const * Str) {
   j__lua_iolibopen();
   j__lua_strlibopen();
   j__lua_setdebug(1);
-  *(_DWORD *)this = lua_state;
+  this->state = (struct lua_State *)lua_state;
   return this;
 }
 
@@ -281,7 +281,7 @@ bool  CLua::ExecuteScript(wchar_t const * FileName) {
 
   v15 = &v3;
   v8 = this;
-  if ( !FileName || !*FileName )
+  if ( FileName == 0 || *FileName == 0 )
   {
     return 0;
   }
@@ -294,7 +294,7 @@ bool  CLua::ExecuteScript(wchar_t const * FileName) {
   CFileEx::Open(&v14.IFileEx, FileName, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
   v7 = CFileEx::Size(&v14);
   ElementCount = v7;
-  if ( v7 )
+  if ( v7 != 0 )
   {
     v6 = operator new[](ElementCount + 8);
     v5 = v6;
@@ -303,11 +303,11 @@ bool  CLua::ExecuteScript(wchar_t const * FileName) {
   }
   v16 = 0;
   CFileEx::Close(&v14.IFileEx, UNUSED_ARG(), UNUSED_ARG());
-  if ( Buffer )
+  if ( Buffer != 0 )
   {
-    if ( v13 )
+    if ( v13 != 0 )
     {
-      v9 = j__lua_dobuffer(Buffer, ElementCount, 0) == 0;
+      v9 = j__lua_dobuffer((int)Buffer, ElementCount, 0) == 0;
       v13 = v9;
     }
     C = Buffer;
@@ -327,22 +327,22 @@ bool  CLua::ExecuteScript(class IScriptFile & _rScriptFile) {
   const char *spFile; // eax
   int iSize; // [esp-8h] [ebp-10h]
 
-  lua_state = *(void **)this;
-  if ( !_rScriptFile->GetScript(_rScriptFile) )
+  lua_state = this->state;
+  if ( _rScriptFile->GetScript(_rScriptFile) == 0 )
   {
     return 0;
   }
   iSize = _rScriptFile->GetSize(_rScriptFile);
   spFile = _rScriptFile->GetScript(_rScriptFile);
-  return j__lua_dobuffer(spFile, iSize, 0) == 0;
+  return j__lua_dobuffer((int)spFile, iSize, 0) == 0;
 }
 
 
 // address=[0x1602aa0]
-// Decompiled from bool __thiscall CLua::ExecuteScript(CLua *this, void *a2, int a3, char *a4)
+// Decompiled from bool __thiscall CLua::ExecuteScript(CLua *this, int a2, int a3, char *a4)
 bool  CLua::ExecuteScript(void * a2, int a3, char * a4) {
   
-  return j__lua_dobuffer(a2, a3, a4) == 0;
+  return j__lua_dobuffer(a2, a3, (int)a4) == 0;
 }
 
 
@@ -374,20 +374,20 @@ void  CLua::ExportTableFunction(char const * a2, void (__cdecl*)(void) a3, char 
   lua_state = this->state;
   lua_beginblock();
   v6 = lua_getglobal((char *)a2);
-  if ( lua_isnil(v6) )
+  if ( lua_isnil(v6) != 0 )
   {
     v6 = lua_createtable();
     lua_pushobject(v6);
     j__lua_setglobal((char *)a2);
   }
-  if ( !lua_istable(v6) && BBSupportDbgReport(2, "Script\\Lua.cpp", 253, "lua_istable(TableObj)") == 1 )
+  if ( lua_istable(v6) == 0 && BBSupportDbgReport(2, "Script\\Lua.cpp", 253, "lua_istable(TableObj)") == 1 )
   {
     __debugbreak();
   }
   lua_pushobject(v6);
   lua_pushstring((char *)Str);
   lua_pushcclosure(a3, 0);
-  lua_settable(this);
+  ((void (__cdecl *)(CLua *))lua_settable)(this);
   return lua_endblock();
 }
 
@@ -396,11 +396,11 @@ void  CLua::ExportTableFunction(char const * a2, void (__cdecl*)(void) a3, char 
 // Decompiled from void __thiscall CLua::ExportFunctions(CLua *this, CLua::SFuncInfo *a1)
 void  CLua::ExportFunctions(struct CLua::SFuncInfo * a2) {
   
-  if ( !a1 && BBSupportDbgReport(2, "Script\\Lua.cpp", 280, "_pFuncInfo != NULL") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "Script\\Lua.cpp", 280, "_pFuncInfo != NULL") == 1 )
   {
     __debugbreak();
   }
-  while ( a1->m_fpFunction && a1->m_swpName )
+  while ( a1->m_fpFunction != 0 && a1->m_swpName != 0 )
   {
     CLua::ExportFunction(this, a1->m_fpFunction, a1->m_swpName);
     ++a1;
@@ -412,15 +412,15 @@ void  CLua::ExportFunctions(struct CLua::SFuncInfo * a2) {
 // Decompiled from void __thiscall CLua::ExportTableFunctions(CLua *this, const char *a2, struct CLua::SFuncInfo *a3)
 void  CLua::ExportTableFunctions(char const * a2, struct CLua::SFuncInfo * a3) {
   
-  if ( !a2 && BBSupportDbgReport(2, "Script\\Lua.cpp", 303, "_pTableName != NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "Script\\Lua.cpp", 303, "_pTableName != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !a3 && BBSupportDbgReport(2, "Script\\Lua.cpp", 304, "_pFuncInfo != NULL") == 1 )
+  if ( a3 == 0 && BBSupportDbgReport(2, "Script\\Lua.cpp", 304, "_pFuncInfo != NULL") == 1 )
   {
     __debugbreak();
   }
-  while ( a3->m_fpFunction && a3->m_swpName )
+  while ( a3->m_fpFunction != 0 && a3->m_swpName != 0 )
   {
     CLua::ExportTableFunction(this, a2, a3->m_fpFunction, a3->m_swpName);
     ++a3;
@@ -434,24 +434,24 @@ void  CLua::ExportTableVar(char const * _pTableName, char const * _pVarName, dou
   
   int TableObj; // [esp+Ch] [ebp-4h]
 
-  if ( !_pTableName && BBSupportDbgReport(2, "Script\\Lua.cpp", 323, "_pTableName != NULL") == 1 )
+  if ( _pTableName == 0 && BBSupportDbgReport(2, "Script\\Lua.cpp", 323, "_pTableName != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !_pVarName && BBSupportDbgReport(2, "Script\\Lua.cpp", 324, "_pVarName != NULL") == 1 )
+  if ( _pVarName == 0 && BBSupportDbgReport(2, "Script\\Lua.cpp", 324, "_pVarName != NULL") == 1 )
   {
     __debugbreak();
   }
   lua_state = this->state;
   lua_beginblock();
   TableObj = lua_getglobal(_pTableName);
-  if ( lua_isnil(TableObj) )
+  if ( lua_isnil(TableObj) != 0 )
   {
     TableObj = lua_createtable();
     lua_pushobject(TableObj);
     j__lua_setglobal(_pTableName);
   }
-  if ( !lua_istable(TableObj) && BBSupportDbgReport(2, "Script\\Lua.cpp", 340, "lua_istable(TableObj)") == 1 )
+  if ( lua_istable(TableObj) == 0 && BBSupportDbgReport(2, "Script\\Lua.cpp", 340, "lua_istable(TableObj)") == 1 )
   {
     __debugbreak();
   }
@@ -467,11 +467,11 @@ void  CLua::ExportTableVar(char const * _pTableName, char const * _pVarName, dou
 // Decompiled from void __thiscall CLua::ExportTableVars(CLua *this, char *_pTableName, struct CLua::SVarInfo *a3)
 void  CLua::ExportTableVars(char const * _pTableName, struct CLua::SVarInfo * a3) {
   
-  if ( !_pTableName && BBSupportDbgReport(2, "Script\\Lua.cpp", 359, "_pTableName != NULL") == 1 )
+  if ( _pTableName == 0 && BBSupportDbgReport(2, "Script\\Lua.cpp", 359, "_pTableName != NULL") == 1 )
   {
     __debugbreak();
   }
-  while ( a3->m_swpName )
+  while ( a3->m_swpName != 0 )
   {
     CLua::ExportTableVar(_pTableName, (char *)a3->m_swpName, a3->m_dDefault);
     ++a3;
@@ -487,12 +487,12 @@ void  CLua::ExportTableTypes(char const * _pTableName, char const * _pDefinePref
   unsigned int i; // [esp+14h] [ebp-8h]
   signed int uPrefixLength; // [esp+18h] [ebp-4h]
 
-  if ( !_pTableName && BBSupportDbgReport(2, "Script\\Lua.cpp", 374, "_pTableName != 0") == 1 )
+  if ( _pTableName == 0 && BBSupportDbgReport(2, "Script\\Lua.cpp", 374, "_pTableName != 0") == 1 )
   {
     __debugbreak();
   }
   uPrefixLength = 0;
-  if ( _pDefinePrefix )
+  if ( _pDefinePrefix != 0 )
   {
     uPrefixLength = strlen(_pDefinePrefix);
   }
@@ -514,7 +514,7 @@ void  CLua::ExportTableTypes(char const * _pTableName, char const * _pDefinePref
 // Decompiled from void __thiscall CLua::ExportGlobalVar(void **this, char *Str, double a3)
 void  CLua::ExportGlobalVar(char const * Str, double a3) {
   
-  if ( Str )
+  if ( Str != 0 )
   {
     lua_state = *this;
     lua_pushnumber(a3);
@@ -561,7 +561,7 @@ void __cdecl CLua::Push(enum EScriptType a1, ... a1) {
       case 3u:
         v9 = (CLua::SFuncInfo *)((char *)v9 + 4);
         v5 = v9[-1].m_fpFunction;
-        j__lua_pushusertag(v5, 0);
+        j__lua_pushusertag((int)v5, 0);
         break;
       case 4u:
         v9 = (CLua::SFuncInfo *)((char *)v9 + 4);
@@ -613,7 +613,7 @@ void __cdecl CLua::Get(enum EScriptType a1, ... a2) {
   while ( v7 != 6 )
   {
     v16 = j__lua_lua2C(v15);
-    if ( !v16 && BBSupportDbgReport(2, "Script\\Lua.cpp", 514, "Param != LUA_NOOBJECT") == 1 )
+    if ( v16 == 0 && BBSupportDbgReport(2, "Script\\Lua.cpp", 514, "Param != LUA_NOOBJECT") == 1 )
     {
       __debugbreak();
     }
@@ -622,32 +622,32 @@ void __cdecl CLua::Get(enum EScriptType a1, ... a2) {
     {
       case 0:
         v17 += 4;
-        v13 = (_DWORD *)*((_DWORD *)v17 - 1);
+        v13 = *((_DWORD **)v17 - 1);
         v2 = j__lua_getnumber(v16);
         *v13 = (int)v2;
         break;
       case 1:
         v17 += 4;
-        v12 = (float *)*((_DWORD *)v17 - 1);
+        v12 = *((float **)v17 - 1);
         v3 = j__lua_getnumber(v16);
         *v12 = v3;
         break;
       case 2:
         v17 += 4;
-        v11 = (double *)*((_DWORD *)v17 - 1);
+        v11 = *((double **)v17 - 1);
         v4 = j__lua_getnumber(v16);
         *v11 = v4;
         break;
       case 3:
         v17 += 4;
-        v10 = (_DWORD *)*((_DWORD *)v17 - 1);
+        v10 = *((_DWORD **)v17 - 1);
         v5 = j__lua_getuserdata(v16);
         *v10 = v5;
         break;
       case 4:
         v17 += 4;
-        Destination = (char *)*((_DWORD *)v17 - 1);
-        v6 = (const char *)j__lua_getstring(v16);
+        Destination = *((char **)v17 - 1);
+        v6 = j__lua_getstring(v16);
         j__strcpy_0(Destination, v6);
         break;
       case 5:
@@ -683,15 +683,15 @@ bool  CLua::EqualObjects(unsigned int a2, unsigned int a3) {
 
 
 // address=[0x1603340]
-// Decompiled from int __thiscall CLua::DbgDumpTable(void **this, char *Str)
+// Decompiled from int __thiscall CLua::DbgDumpTable(CLua *this, char *Str)
 void  CLua::DbgDumpTable(char const * Str) {
   
   int v3; // [esp+0h] [ebp-8h]
 
-  lua_state = *this;
+  lua_state = this->state;
   lua_beginblock();
   v3 = lua_getglobal(Str);
-  if ( lua_istable(v3) )
+  if ( lua_istable(v3) != 0 )
   {
     CLua::s_pLua = (int)this;
     lua_pushobject(v3);
@@ -713,7 +713,7 @@ double  CLua::GetDouble(int a2) {
   
   int v2; // eax
 
-  lua_state = *(void **)this;
+  lua_state = this->state;
   CLua::dbgCheckParam(this, a2);
   v2 = j__lua_lua2C(a2);
   j__lua_getnumber(v2);
@@ -726,7 +726,7 @@ float  CLua::GetFloat(int a2) {
   
   int v2; // eax
 
-  lua_state = *(void **)this;
+  lua_state = this->state;
   CLua::dbgCheckParam(this, a2);
   v2 = j__lua_lua2C(a2);
   return (float)j__lua_getnumber(v2);
@@ -740,11 +740,11 @@ void  CLua::GetString(int a2, std::string & a3) {
   int v3; // eax
   char *result; // eax
 
-  lua_state = *(void **)this;
+  lua_state = this->state;
   CLua::dbgCheckParam(this, a2);
   v3 = j__lua_lua2C(a2);
-  result = (char *)j__lua_getstring(v3);
-  if ( result )
+  result = j__lua_getstring(v3);
+  if ( result != 0 )
   {
     return (char *)std::string::operator+=(result);
   }
@@ -757,7 +757,7 @@ void  CLua::GetString(int a2, std::string & a3) {
 void  CLua::PushDouble(double a2) {
   
   lua_state = *this;
-  return lua_pushnumber(a2);
+  return ((_DWORD (__cdecl *)(__int64))lua_pushnumber)(a2);
 }
 
 
@@ -792,17 +792,16 @@ void  CLua::dbgCheckParam(int a2) {
   v4 = j__lua_lua2C(a2);
   v2 = j__lua_stackedfunction(1);
   result = j__lua_currentline(v2);
-  if ( v4 )
+  if ( v4 == 0 )
   {
-    return result;
-  }
-  if ( result == -1 )
-  {
-    return BBSupportTracePrintF(0, "ScriptErr: Missing parameter (no debuginfo available)");
-  }
-  else
-  {
-    return BBSupportTracePrintF(0, "ScriptErr: Missing parameter %d at line %d", a2, result);
+    if ( result == -1 )
+    {
+      return BBSupportTracePrintF(0, "ScriptErr: Missing parameter (no debuginfo available)");
+    }
+    else
+    {
+      return BBSupportTracePrintF(0, "ScriptErr: Missing parameter %d at line %d", a2, result);
+    }
   }
   return result;
 }
@@ -814,7 +813,7 @@ void __cdecl CLua::scrDbgDumpTableEntry(void) {
   
   char *Str; // [esp+14h] [ebp-4h]
 
-  Str = (char *)CLua::GetString((void **)CLua::s_pLua, 1);
+  Str = CLua::GetString((CLua *)CLua::s_pLua, 1);
   CLua::GetDouble((void **)CLua::s_pLua, 2);
   strlen(Str);
   return BBSupportTracePrintF(0, "%s %f", Str);
@@ -837,16 +836,16 @@ int  CLua::CountTableEntries(char const * Str) {
   int v4; // [esp+4h] [ebp-4h]
 
   lua_state = *this;
-  lua_beginblock(this);
+  ((void (__cdecl *)(_DWORD))lua_beginblock)(this);
   CLua::s_iTableEntryCount = 0;
   v4 = lua_getglobal(Str);
-  if ( lua_istable(v4) )
+  if ( lua_istable(v4) != 0 )
   {
     lua_pushobject(v4);
     lua_pushcclosure(CLua::scrIncTableEntryCount, 0);
-    CLua::CallFunction(v3, "foreach");
+    CLua::CallFunction((CLua *)v3, "foreach");
   }
-  lua_endblock(v3);
+  ((void (__cdecl *)(void **))lua_endblock)(v3);
   return CLua::s_iTableEntryCount;
 }
 

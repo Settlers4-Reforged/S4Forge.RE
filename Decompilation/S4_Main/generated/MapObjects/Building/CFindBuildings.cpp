@@ -14,7 +14,7 @@ class CBuilding *  CFindBuildings::BuildingPtr(void)const {
 // Decompiled from CFindBuildings *__thiscall CFindBuildings::CFindBuildings(CFindBuildings *this, int a2, int a3, int a4)
  CFindBuildings::CFindBuildings(int a2, int a3, int a4) {
   
-  CVWList::CVWList(this, a2, a3, a4);
+  CVWList::CVWList((CVWList *)this, a2, a3, a4);
   *((_DWORD *)this + 56) = a2;
   *((_DWORD *)this + 57) = a3;
   *((_DWORD *)this + 58) = a4;
@@ -39,10 +39,10 @@ bool  CFindBuildings::NextBuilding(void) {
   int EntityIdVW; // [esp+1Ch] [ebp-Ch]
   unsigned __int8 *BuildingPtr; // [esp+20h] [ebp-8h]
 
-  if ( this[61] )
+  if ( *(this + 61) != 0 )
   {
-    v1 = IEntity::WarMapNode(this[61]);
-    v8 = CWarMapNode::Next(v1);
+    v1 = (struct CPtrList *)IEntity::WarMapNode((IEntity *)*(this + 61));
+    v8 = CWarMapNode::Next((CWarMapNode *)v1);
   }
   else
   {
@@ -51,34 +51,34 @@ bool  CFindBuildings::NextBuilding(void) {
   EntityIdVW = v8;
   while ( 1 )
   {
-    while ( EntityIdVW )
+    while ( EntityIdVW != 0 )
     {
-      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, EntityIdVW);
+      BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, EntityIdVW);
       if ( (((unsigned int)&loc_1FFFFFF + 1) & IEntity::Flags(BuildingPtr)) != 0 )
       {
         v6 = IEntity::X(BuildingPtr);
         v7 = IEntity::Y(BuildingPtr);
-        if ( Grid::DistanceInline((Grid *)(v6 - (_DWORD)this[56]), v7 - (_DWORD)this[57]) <= (int)this[58] )
+        if ( Grid::DistanceInline(v6 - (_DWORD)*(this + 56), v7 - (_DWORD)*(this + 57)) <= (int)*(this + 58) )
         {
-          this[60] = (CPropertySet *)EntityIdVW;
-          this[61] = (CPropertySet *)BuildingPtr;
+          *(this + 60) = (CPropertySet *)EntityIdVW;
+          *(this + 61) = (CPropertySet *)BuildingPtr;
           return 1;
         }
       }
-      v3 = IEntity::WarMapNode((CPropertySet *)BuildingPtr);
-      EntityIdVW = CWarMapNode::Next(v3);
+      v3 = (struct CPtrList *)IEntity::WarMapNode((IEntity *)BuildingPtr);
+      EntityIdVW = CWarMapNode::Next((CWarMapNode *)v3);
     }
-    if ( (int)this[59] >= CVWList::Size((CVWList *)this) )
+    if ( (int)*(this + 59) >= CVWList::Size((CVWList *)this) )
     {
       break;
     }
-    v4 = *(_DWORD *)CVWList::operator[](this[59]);
-    v5 = *(_DWORD *)(CVWList::operator[](this[59]) + 4);
+    v4 = *(_DWORD *)((_DWORD *(__stdcall *)(_DWORD))CVWList::operator[])(*(this + 59));
+    v5 = *(_DWORD *)(((_DWORD (__stdcall *)(_DWORD))CVWList::operator[])(*(this + 59)) + 4);
     EntityIdVW = CWarMap::FirstEntityIdVW(2, v4, v5);
-    this[59] = (CPropertySet *)((char *)this[59] + 1);
+    *(this + 59) = (CPropertySet *)((char *)*(this + 59) + 1);
   }
-  this[60] = 0;
-  this[61] = 0;
+  *(this + 60) = 0;
+  *(this + 61) = 0;
   return 0;
 }
 

@@ -7,8 +7,8 @@
 void __cdecl CGrabber::DoGrab(std::wstring a1) {
   
   wchar_t *v1; // eax
-  int v2; // [esp+18h] [ebp-D8h]
-  void *v3; // [esp+1Ch] [ebp-D4h]
+  std::wstring *v2; // [esp+18h] [ebp-D8h]
+  std::wstring *v3; // [esp+1Ch] [ebp-D4h]
   std::wstring *a2; // [esp+20h] [ebp-D0h]
   DWORD nNumberOfBytesToWrite; // [esp+28h] [ebp-C8h]
   int v6; // [esp+2Ch] [ebp-C4h] BYREF
@@ -31,14 +31,14 @@ void __cdecl CGrabber::DoGrab(std::wstring a1) {
   {
     a2 = FilePaths::GetUserDirectoryPath();
     LOBYTE(v19) = 1;
-    v3 = std::operator+<wchar_t>(&a1a, a2, (wchar_t *)L"Grab\\frame%6d.bmp");
-    std::wstring::operator=(v3);
+    v3 = (std::wstring *)std::operator+<wchar_t>(&a1a, a2, (wchar_t *)L"Grab\\frame%6d.bmp");
+    ((void (__stdcall *)(std::wstring *))std::wstring::operator=)(v3);
     std::wstring::~wstring(&a1a);
     LOBYTE(v19) = 0;
     std::wstring::~wstring(&v13);
   }
-  v2 = sub_1494C50(&v12, &a1);
-  std::wstring::operator=(v2);
+  v2 = (std::wstring *)sub_1494C50(&v12, &a1);
+  ((void (__stdcall *)(std::wstring *))std::wstring::operator=)(v2);
   std::wstring::~wstring(&v12);
   FilePaths::EnsurePathExists(&a1);
   memset(v18, 0, sizeof(v18));
@@ -60,7 +60,7 @@ void __cdecl CGrabber::DoGrab(std::wstring a1) {
   WriteFile(hFile, v11, 0x28u, &NumberOfBytesWritten, 0);
   WriteFile(hFile, lpBuffer, nNumberOfBytesToWrite, &NumberOfBytesWritten, 0);
   CloseHandle(hFile);
-  if ( lpBuffer )
+  if ( lpBuffer != 0 )
   {
     operator delete[]((void *)lpBuffer);
   }
@@ -96,7 +96,7 @@ void * __cdecl CGrabber::GetScreenBits(void * lpvBits, void * a2, int * a3, int 
 
   v16 = a2;
   hdc = GetDC(g_hWnd);
-  if ( !hdc )
+  if ( hdc == 0 )
   {
     return 0;
   }
@@ -104,12 +104,12 @@ void * __cdecl CGrabber::GetScreenBits(void * lpvBits, void * a2, int * a3, int 
   v17 = Rect.right - Rect.left;
   cy = Rect.bottom - Rect.top;
   CompatibleDC = CreateCompatibleDC(hdc);
-  if ( !CompatibleDC )
+  if ( CompatibleDC == 0 )
   {
     return 0;
   }
   h = CreateCompatibleBitmap(hdc, v17, cy);
-  if ( h )
+  if ( h != 0 )
   {
     v19 = SelectObject(CompatibleDC, h);
     if ( BitBlt(CompatibleDC, 0, 0, v17, cy, hdc, 0, 0, (DWORD)&dword_C20408[163590]) )
@@ -117,21 +117,21 @@ void * __cdecl CGrabber::GetScreenBits(void * lpvBits, void * a2, int * a3, int 
       GetObjectA(h, 24, pv);
       v15 = v8;
       cLines = v9;
-      if ( a3 )
+      if ( a3 != 0 )
       {
         *a3 = v15;
       }
-      if ( a4 )
+      if ( a4 != 0 )
       {
         *a4 = cLines;
       }
       Size = sub_1494AB0(v8, v9, a5);
-      if ( !lpvBits )
+      if ( lpvBits == 0 )
       {
         v12 = operator new[](Size);
         lpvBits = v12;
       }
-      if ( v16 )
+      if ( v16 != 0 )
       {
         lpbmi = v16;
       }
@@ -142,7 +142,7 @@ void * __cdecl CGrabber::GetScreenBits(void * lpvBits, void * a2, int * a3, int 
       memset(lpbmi, 0, sizeof(struct tagBITMAPINFO));
       lpbmi->bmiHeader.biSize = 40;
       lpbmi->bmiHeader.biWidth = v15;
-      if ( a6 )
+      if ( a6 != 0 )
       {
         v14 = -cLines;
       }
@@ -159,7 +159,7 @@ void * __cdecl CGrabber::GetScreenBits(void * lpvBits, void * a2, int * a3, int 
       lpbmi->bmiHeader.biYPelsPerMeter = 0;
       lpbmi->bmiHeader.biClrUsed = 0;
       lpbmi->bmiHeader.biClrImportant = 0;
-      if ( !lpvBits || GetDIBits(hdc, (HBITMAP)h, 0, cLines, lpvBits, lpbmi, 0) )
+      if ( lpvBits == 0 || GetDIBits(hdc, (HBITMAP)h, 0, cLines, lpvBits, lpbmi, 0) != 0 )
       {
         SelectObject(CompatibleDC, v19);
         ReleaseDC(g_hWnd, hdc);

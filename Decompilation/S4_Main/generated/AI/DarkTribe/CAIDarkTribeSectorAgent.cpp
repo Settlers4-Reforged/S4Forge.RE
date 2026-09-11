@@ -33,11 +33,11 @@ class CAIDarkTribeSectorAI *  CAIDarkTribeSectorAgent::SectorAI(void)const {
 // Decompiled from void __thiscall CAIDarkTribeSectorAgent::AttachSectorAI(CAIDarkTribeSectorAgent *this, struct CAIDarkTribeSectorAI *a2)
 void  CAIDarkTribeSectorAgent::AttachSectorAI(class CAIDarkTribeSectorAI * a2) {
   
-  if ( !a2 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 127, "_pSectorAI != 0") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 127, "_pSectorAI != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_pSectorAI && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 128, "m_pSectorAI == 0") == 1 )
+  if ( this->m_pSectorAI != 0 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 128, "m_pSectorAI == 0") == 1 )
   {
     __debugbreak();
   }

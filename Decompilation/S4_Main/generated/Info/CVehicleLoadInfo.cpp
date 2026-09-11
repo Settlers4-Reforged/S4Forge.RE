@@ -7,7 +7,7 @@
  CVehicleLoadInfo::CVehicleLoadInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CVehicleLoadInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CVehicleLoadInfo::_vftable_;
   return this;
 }
 

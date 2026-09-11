@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CLookoutTowerRole::New(int a1)
 class CPersistence * __cdecl CLookoutTowerRole::New(std::istream & a1) {
   
-  if ( operator new(0x180u) )
+  if ( operator new(0x180u) != 0 )
   {
-    return CLookoutTowerRole::CLookoutTowerRole(a1);
+    return ((_DWORD (__stdcall *)(int))CLookoutTowerRole::CLookoutTowerRole)(a1);
   }
   else
   {
@@ -21,7 +21,7 @@ class CPersistence * __cdecl CLookoutTowerRole::New(std::istream & a1) {
 // Decompiled from CLookoutTowerRole *__thiscall CLookoutTowerRole::CLookoutTowerRole(CLookoutTowerRole *this)
  CLookoutTowerRole::CLookoutTowerRole(void) {
   
-  IBuildingRole::IBuildingRole(this);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this);
   *(_DWORD *)this = &CLookoutTowerRole::_vftable_;
   return this;
 }
@@ -76,13 +76,13 @@ void  CLookoutTowerRole::GoodArrive(int a2) {
 
 
 // address=[0x14fda70]
-// Decompiled from int __cdecl CLookoutTowerRole::Load(int a1)
+// Decompiled from int __cdecl CLookoutTowerRole::Load(struct std::istream *a1)
 class CLookoutTowerRole * __cdecl CLookoutTowerRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CLookoutTowerRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -92,7 +92,7 @@ class CLookoutTowerRole * __cdecl CLookoutTowerRole::Load(std::istream & a1) {
 void  CLookoutTowerRole::LogicUpdate(class CBuilding * a2) {
   
   int v2; // eax
-  _DWORD *v3; // eax
+  CBuilding *v3; // eax
   int v4; // esi
   int v5; // eax
   int result; // eax
@@ -103,7 +103,7 @@ void  CLookoutTowerRole::LogicUpdate(class CBuilding * a2) {
   IBuildingRole *v11; // [esp+4h] [ebp-Ch]
   char v12; // [esp+8h] [ebp-8h]
 
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) != 0 )
   {
     (*(void (__thiscall **)(CLookoutTowerRole *, struct CBuilding *, int))(*(_DWORD *)this + 88))(this, a2, 1);
   }
@@ -111,9 +111,9 @@ void  CLookoutTowerRole::LogicUpdate(class CBuilding * a2) {
   if ( v12 == 1 )
   {
     result = (*(int (__thiscall **)(CLookoutTowerRole *, struct CBuilding *))(*(_DWORD *)this + 120))(this, a2);
-    if ( !(_BYTE)result )
+    if ( (_BYTE)result == 0 )
     {
-      return IAnimatedEntity::RegisterForLogicUpdate(31);
+      return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
     }
     *((_BYTE *)this + 4) = 3;
   }
@@ -121,62 +121,61 @@ void  CLookoutTowerRole::LogicUpdate(class CBuilding * a2) {
   {
     if ( v12 == 3 )
     {
-      if ( !*((_BYTE *)this + 29) )
+      if ( *((_BYTE *)this + 29) != 0 )
       {
-        return IAnimatedEntity::RegisterForLogicUpdate(31);
-      }
-      v9 = IEntity::OwnerId((unsigned __int8 *)a2);
-      v7 = IEntity::Y(a2);
-      v2 = IEntity::X(a2);
-      if ( CScanner::FindAnyEnemyFighter(v2, v7, 32, 60, v9) )
-      {
-        if ( !*((_BYTE *)this + 380) )
+        v9 = IEntity::OwnerId(a2);
+        v7 = IEntity::Y(a2);
+        v2 = IEntity::X(a2);
+        if ( CScanner::FindAnyEnemyFighter(v2, v7, 32, 60, v9) != 0 )
         {
-          v3 = (_DWORD *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 3));
-          v11 = (IBuildingRole *)CBuilding::Role(v3);
-          IBuildingRole::TakeJobTrigger(v11, 16);
-          v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-          if ( v4 == CPlayerManager::GetLocalPlayerId() )
+          if ( *((_BYTE *)this + 380) == 0 )
           {
-            v10 = IEntity::Y(a2);
-            v8 = IEntity::X(a2);
-            v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-            CTextMsgHandler::AddWarningMsg(2450, v5, v8, v10);
+            v3 = (CBuilding *)((CBuilding *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(*((unsigned __int16 *)this + 3));
+            v11 = CBuilding::Role(v3);
+            IBuildingRole::TakeJobTrigger(v11, 16);
+            v4 = IEntity::OwnerId(a2);
+            if ( v4 == CPlayerManager::GetLocalPlayerId() )
+            {
+              v10 = IEntity::Y(a2);
+              v8 = IEntity::X(a2);
+              v5 = IEntity::OwnerId(a2);
+              CTextMsgHandler::AddWarningMsg(2450, v5, v8, v10);
+            }
+            *((_BYTE *)this + 380) = 1;
           }
-          *((_BYTE *)this + 380) = 1;
+        }
+        else
+        {
+          *((_BYTE *)this + 380) = 0;
         }
       }
-      else
-      {
-        *((_BYTE *)this + 380) = 0;
-      }
-      return IAnimatedEntity::RegisterForLogicUpdate(31);
+      return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
     }
     if ( *((_BYTE *)this + 4) != 2 && BBSupportDbgReport(2, "MapObjects\\Building\\LookoutTower.cpp", 227, "m_uState == WAIT_STATE") == 1 )
     {
       __debugbreak();
     }
     *((_BYTE *)this + 4) = 3;
-    return IAnimatedEntity::RegisterForLogicUpdate(31);
+    return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
   }
   return result;
 }
 
 
 // address=[0x150c410]
-// Decompiled from IBuildingRole *__thiscall CLookoutTowerRole::FillGfxInfo(CLookoutTowerRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
+// Decompiled from IBuildingRole *__thiscall CLookoutTowerRole::FillGfxInfo(IBuildingRole *this, struct CBuilding *a2, struct SGfxObjectInfo *a3)
 void  CLookoutTowerRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   
   int v3; // eax
   int v4; // eax
   int v6; // [esp-Ch] [ebp-10h]
 
-  (*(void (__thiscall **)(CLookoutTowerRole *, struct CBuilding *))(*(_DWORD *)this + 16))(this, a2);
-  v6 = IEntity::Type((unsigned __int16 *)a2);
+  this->Update(this, a2);
+  v6 = IEntity::Type(a2);
   v3 = IEntity::Race(a2);
-  CGfxManager::GetBuildingGfxInfo((int)a3, v3, v6, 1, (int)this + 76);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  return IBuildingRole::MiniFlag(this, a3, v4);
+  ((void (__stdcall *)(int, int, int, int, int))CGfxManager::GetBuildingGfxInfo)((int)a3, v3, v6, 1, (int)this->m_vPatchPairs);
+  v4 = IEntity::OwnerId(a2);
+  return ((IBuildingRole *(__thiscall *)(IBuildingRole *, struct SGfxObjectInfo *, int))IBuildingRole::MiniFlag)(this, a3, v4);
 }
 
 
@@ -186,12 +185,12 @@ void  CLookoutTowerRole::Init(class CBuilding * a2) {
   
   int result; // eax
 
-  IBuildingRole::InitCommon((int)a2);
+  IBuildingRole::InitCommon(a2);
   *((_BYTE *)this + 4) = 1;
-  IAnimatedEntity::RegisterForLogicUpdate(2);
+  ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(2);
   *((_BYTE *)this + 380) = 0;
   result = IEntity::FlagBits(a2, ENTITY_FLAG_Selected);
-  if ( result )
+  if ( result != 0 )
   {
     return (*(int (__thiscall **)(CLookoutTowerRole *, struct CBuilding *, _DWORD))(*(_DWORD *)this + 88))(this, a2, 0);
   }
@@ -207,9 +206,9 @@ void  CLookoutTowerRole::PostLoadInit(class CBuilding * a2) {
   int result; // eax
   int v4; // [esp-4h] [ebp-8h]
 
-  v4 = IEntity::Type((unsigned __int16 *)a2);
+  v4 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
-  result = CBuildingInfoMgr::GetBuildingInfo(v2, v4);
+  result = (int)CBuildingInfoMgr::GetBuildingInfo(v2, v4);
   *((_DWORD *)this + 94) = result;
   return result;
 }
@@ -219,13 +218,13 @@ void  CLookoutTowerRole::PostLoadInit(class CBuilding * a2) {
 // Decompiled from char __thiscall CLookoutTowerRole::SettlerEnter(CLookoutTowerRole *this, struct CBuilding *a2, int a3)
 bool  CLookoutTowerRole::SettlerEnter(class CBuilding * a2, int a3) {
   
-  if ( *((_BYTE *)this + 29) && BBSupportDbgReport(2, "MapObjects\\Building\\LookoutTower.cpp", 143, "!m_bWorkerInHouse") == 1 )
+  if ( *((_BYTE *)this + 29) != 0 && BBSupportDbgReport(2, "MapObjects\\Building\\LookoutTower.cpp", 143, "!m_bWorkerInHouse") == 1 )
   {
     __debugbreak();
   }
   *((_BYTE *)this + 29) = 1;
   *((_BYTE *)this + 4) = 3;
-  IAnimatedEntity::RegisterForLogicUpdate(31);
+  ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
   return 1;
 }
 
@@ -242,21 +241,21 @@ void  CLookoutTowerRole::FillDialog(class CBuilding * a2, bool a3) {
   CEvn_Event v10; // [esp+Ch] [ebp-28h] BYREF
   int v11; // [esp+30h] [ebp-4h]
 
-  MEMORY[0x3F1E4B0] = 0;
-  MEMORY[0x3F1E4B5] = IEntity::Race(a2);
-  MEMORY[0x3F1E4B4] = IEntity::Type((unsigned __int16 *)a2);
-  MEMORY[0x3F1E4B7] = 0;
-  MEMORY[0x3F1E4B9] = 0;
-  v6 = IEntity::Type((unsigned __int16 *)a2);
-  v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-  MEMORY[0x3F1E4BB] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, v6, 0);
-  v7 = IEntity::Type((unsigned __int16 *)a2);
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
-  MEMORY[0x3F1E4BC] = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v7, 1u);
-  MEMORY[0x3F1E4B6] = *((_BYTE *)this + 29);
-  if ( *((_BYTE *)this + 29) )
+  g_cBuildingInfo.m_iUnknown = 0;
+  g_cBuildingInfo.m_cRace = IEntity::Race(a2);
+  g_cBuildingInfo.m_cType = IEntity::Type(a2);
+  g_cBuildingInfo.m_unknownB = 0;
+  g_cBuildingInfo.m_bHasWorkingArea = 0;
+  v6 = IEntity::Type(a2);
+  v3 = IEntity::OwnerId(a2);
+  g_cBuildingInfo.m_cTotalCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, (S4_BUILDING_ENUM)v6, 0);
+  v7 = IEntity::Type(a2);
+  v4 = IEntity::OwnerId(a2);
+  g_cBuildingInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, (S4_BUILDING_ENUM)v7, 1u);
+  g_cBuildingInfo.m_bInhabitants = *((_BYTE *)this + 29);
+  if ( *((_BYTE *)this + 29) != 0 )
   {
-    MEMORY[0x3F1E4BD] = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
+    g_cBuildingInfo.m_iSettlerCount = *(_BYTE *)(*((_DWORD *)this + 94) + 478);
   }
   v8 = 604;
   if ( !a3 )
@@ -275,13 +274,13 @@ void  CLookoutTowerRole::FillDialog(class CBuilding * a2, bool a3) {
 // Decompiled from char *__thiscall CLookoutTowerRole::CLookoutTowerRole(char *this, int a2)
  CLookoutTowerRole::CLookoutTowerRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   char *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  IBuildingRole::IBuildingRole(this, a2);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this, (struct std::istream *)a2);
   v6 = 0;
   *(_DWORD *)v5 = &CLookoutTowerRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
@@ -308,8 +307,8 @@ void  CLookoutTowerRole::Store(std::ostream & a2) {
   v4 = this;
   IBuildingRole::Store(this, a2);
   v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  return operator^<bool>((int)a2, (int)v4 + 380);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
+  return (int)operator^<bool>(a2, (bool *)&v4[1]);
 }
 
 

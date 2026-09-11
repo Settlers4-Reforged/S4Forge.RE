@@ -56,7 +56,7 @@ int __cdecl ITiling::EcoSectorId(int a1) {
 
   v1 = ITiling::NormalTileId(a1);
   v2 = ITiling::Tile(v1);
-  return CTile::EcoSectorId(v2);
+  return CTile::EcoSectorId((CTile *)v2);
 }
 
 
@@ -76,7 +76,7 @@ int __cdecl ITiling::OwnerId(int a1) {
   CTile *v2; // eax
 
   v1 = ITiling::NormalTileId(a1);
-  v2 = (CTile *)ITiling::Tile(v1);
+  v2 = ITiling::Tile(v1);
   return CTile::OwnerId(v2);
 }
 

@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateCampaignDark::DynamicCreateFunc(void * a1) {
   CStateCampaignDark *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateCampaignDark *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateCampaignDark::CStateCampaignDark(C, a1);
   }
@@ -24,22 +24,22 @@ class CGameState * __cdecl CStateCampaignDark::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateCampaignDark *__thiscall CStateCampaignDark::CStateCampaignDark(CStateCampaignDark *this, void *a2)
  CStateCampaignDark::CStateCampaignDark(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateCampaignDark::_vftable_;
   g_cCampaignSettings = 7;
   dword_402CBBC[4] = CGameSettings::GetCampaignStatus(4);
   dword_402CBBC[4] = 11;
-  CGuiGameState::OpenDialog(this, 9, GuiDlgMainDarktribeCampaignProc);
+  CGuiGameState::OpenDialog((CGuiGameState *)this, 9, (bool (__cdecl *)(int, int, int))GuiDlgMainDarktribeCampaignProc);
   return this;
 }
 
 
 // address=[0x14a3be0]
-// Decompiled from void __thiscall CStateCampaignDark::~CStateCampaignDark(CStateCampaignDark *this)
+// Decompiled from void __thiscall CStateCampaignDark::~CStateCampaignDark(CGuiGameState *this)
  CStateCampaignDark::~CStateCampaignDark(void) {
   
-  *(_DWORD *)this = &CStateCampaignDark::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 9) && BBSupportDbgReport(2, "main\\states\\StateCampaignDark.cpp", 65, (const char *)&dword_373DFA8[1]) == 1 )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateCampaignDark::_vftable_;
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 9) && BBSupportDbgReport(2, "main\\states\\StateCampaignDark.cpp", 65, (const char *)&dword_373DFA8[1]) == 1 )
   {
     __debugbreak();
   }
@@ -63,20 +63,19 @@ bool  CStateCampaignDark::Perform(void) {
     }
   }
   v1 = dword_402CC3C + 30;
-  if ( v1 >= timeGetTime() )
+  if ( v1 < timeGetTime() )
   {
-    return 1;
+    dword_402CC3C = timeGetTime();
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  dword_402CC3C = timeGetTime();
-  IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-  IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   return 1;
 }
 
 
 // address=[0x14a3d00]
-// Decompiled from char __thiscall CStateCampaignDark::OnEvent(CStateCampaignDark *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateCampaignDark::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateCampaignDark::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+8h] [ebp-3Ch]
@@ -88,50 +87,52 @@ bool  CStateCampaignDark::OnEvent(class CEvn_Event & a2) {
   event = a2->m_iEventId;
   if ( event == 11 )
   {
-    if ( (unsigned __int16)a2->m_wParam != 27 )
+    if ( (unsigned __int16)a2->m_wParam == 27 )
     {
-      return CGuiGameState::OnEvent(this, a2);
+      v3 = CEvn_Event::CEvn_Event(&v6, 0x65u, 0, 0, 0);
+      v7 = 0;
+      IEventEngine::SendAMessage(g_pEvnEngine, v3);
+      v7 = -1;
+      CEvn_Event::~CEvn_Event(&v6);
+      return 1;
     }
-    v3 = CEvn_Event::CEvn_Event(&v6, 0x65u, 0, 0, 0);
-    v7 = 0;
-    IEventEngine::SendAMessage(g_pEvnEngine, v3);
-    v7 = -1;
-    CEvn_Event::~CEvn_Event(&v6);
-    return 1;
+    return CGuiGameState::OnEvent(this, a2);
   }
   if ( event != 100 )
   {
-    if ( event != 101 )
+    if ( event == 101 )
     {
-      return CGuiGameState::OnEvent(this, a2);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLocalType::DynamicCreateFunc, 0);
+      return 1;
     }
-    CGameStateHandler::Switch((int)CStateLocalType::DynamicCreateFunc, 0);
-    return 1;
+    return CGuiGameState::OnEvent(this, a2);
   }
   wparam = a2->m_wParam;
-  if ( (unsigned __int8)CGameSettings::GetShowVideos() )
+  if ( (unsigned __int8)CGameSettings::GetShowVideos() != 0 )
   {
-    if ( wparam )
+    if ( wparam != 0 )
     {
       switch ( wparam )
       {
         case 2:
-          CGameStateHandler::Queue((int)CStateVideo::DynamicCreateFunc, 3);
+          CGameStateHandler::Queue((CStateMessageBox *(__cdecl *)(int))CStateVideo::DynamicCreateFunc, (void *)3);
           break;
         case 4:
-          CGameStateHandler::Queue((int)CStateVideo::DynamicCreateFunc, 4);
+          CGameStateHandler::Queue((CStateMessageBox *(__cdecl *)(int))CStateVideo::DynamicCreateFunc, (void *)4);
           break;
         case 9:
-          CGameStateHandler::Queue((int)CStateVideo::DynamicCreateFunc, 5);
+          CGameStateHandler::Queue((CStateMessageBox *(__cdecl *)(int))CStateVideo::DynamicCreateFunc, (void *)5);
+          break;
+        default:
           break;
       }
     }
     else
     {
-      CGameStateHandler::Queue((int)CStateVideo::DynamicCreateFunc, 2);
+      CGameStateHandler::Queue((CStateMessageBox *(__cdecl *)(int))CStateVideo::DynamicCreateFunc, (void *)2);
     }
   }
-  CGameStateHandler::Switch((int)CStateBriefing::DynamicCreateFunc, (wparam << 16) | 4);
+  CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateBriefing::DynamicCreateFunc, (void *)((wparam << 16) | 4));
   return 1;
 }
 

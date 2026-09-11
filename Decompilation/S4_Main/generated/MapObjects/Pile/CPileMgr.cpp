@@ -10,7 +10,7 @@ class CPile * __cdecl CPileMgr::GetPilePtr(int iPileId) {
   CPile *v3; // [esp+8h] [ebp-4h]
 
   v3 = (CPile *)CMapObjectMgr::EntityPtr(iPileId);
-  if ( v3 && IEntity::ObjType(v3) == PILE_OBJ )
+  if ( v3 != 0 && IEntity::ObjType(v3) == PILE_OBJ )
   {
     return v3;
   }
@@ -28,7 +28,7 @@ class CPile &  CPileMgr::operator[](int iPileId) {
   CPile *pEntity; // [esp+4h] [ebp-4h]
 
   pEntity = (CPile *)CMapObjectMgr::EntityPtr(iPileId);
-  if ( !pEntity && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Pile\\PileMgr.h", 174, "pEntity != 0") == 1 )
+  if ( pEntity == 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Pile\\PileMgr.h", 174, "pEntity != 0") == 1 )
   {
     __debugbreak();
   }
@@ -135,7 +135,7 @@ int  CPileMgr::AddPile(int _iX, int _iY, int _iGood, int _iAmount, int _iType, i
   {
     __debugbreak();
   }
-  if ( debug && DEBUG_FLAGS[s_iPileMgrAddPileDebugSection] )
+  if ( debug != 0 && DEBUG_FLAGS[s_iPileMgrAddPileDebugSection] != 0 )
   {
     BBSupportTracePrintF(0, "New pile  at %u %u good %u type %u", _iX, _iY, _iGood, _iType);
   }
@@ -148,11 +148,11 @@ int  CPileMgr::AddPile(int _iX, int _iY, int _iGood, int _iAmount, int _iType, i
   {
     ++this->m_iPileCount;
     PileRole = CPileMgr::CreatePileRole(_iType);
-    std::auto_ptr<IPileRole>::auto_ptr<IPileRole>(PileRole);
+    std::auto_ptr<IPileRole>::auto_ptr<IPileRole>((int)PileRole);
     v28 = 1;
     _pRole = CMapObjectMgr::GetFreeSlot();
     v26 = (CPile *)CPile::operator new(0x7Cu);
-    if ( v26 )
+    if ( v26 != 0 )
     {
       v16 = a11;
       v15 = a9;
@@ -189,22 +189,22 @@ void  CPileMgr::DeletePile(int _iPileId) {
   {
     __debugbreak();
   }
-  v2 = (CPile *)CPileMgr::operator[](_iPileId);
-  if ( CPile::AmountLeaving(v2) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileMgr.cpp", 511, "g_cPileMgr[_iPileId].AmountLeaving() == 0") == 1 )
+  v2 = CPileMgr::operator[](_iPileId);
+  if ( CPile::AmountLeaving(v2) != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileMgr.cpp", 511, "g_cPileMgr[_iPileId].AmountLeaving() == 0") == 1 )
   {
     __debugbreak();
   }
-  v3 = (CPile *)CPileMgr::operator[](_iPileId);
-  if ( CPile::AmountComing(v3) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileMgr.cpp", 512, "g_cPileMgr[_iPileId].AmountComing() == 0") == 1 )
+  v3 = CPileMgr::operator[](_iPileId);
+  if ( CPile::AmountComing(v3) != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileMgr.cpp", 512, "g_cPileMgr[_iPileId].AmountComing() == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( debug && DEBUG_FLAGS[s_iPileMgrDeletePileDebugSection] )
+  if ( debug != 0 && DEBUG_FLAGS[s_iPileMgrDeletePileDebugSection] != 0 )
   {
     BBSupportTracePrintF(0, "DeletePile");
     CPileMgr::TracePile(this, _iPileId);
   }
-  if ( _iPileId )
+  if ( _iPileId != 0 )
   {
     --this->m_iPileCount;
     CMapObjectMgr::Kill(g_pMapObjectMgr, _iPileId, 0);
@@ -220,12 +220,12 @@ void  CPileMgr::DeletePileUnforeseen(int _iPileId) {
   {
     __debugbreak();
   }
-  if ( debug && DEBUG_FLAGS[s_iPileMgrDeletePileDebugSection] )
+  if ( debug != 0 && DEBUG_FLAGS[s_iPileMgrDeletePileDebugSection] != 0 )
   {
     BBSupportTracePrintF(0, "DeletePile");
     CPileMgr::TracePile(this, _iPileId);
   }
-  if ( _iPileId )
+  if ( _iPileId != 0 )
   {
     --this->m_iPileCount;
     CMapObjectMgr::Kill(g_pMapObjectMgr, _iPileId, 0);
@@ -246,7 +246,7 @@ int  CPileMgr::GetNearestPile(int a2, int a3, int a4) {
   int v11; // [esp+14h] [ebp-8h]
   CPile *pPile; // [esp+18h] [ebp-4h]
 
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 0;
   }
@@ -254,12 +254,12 @@ int  CPileMgr::GetNearestPile(int a2, int a3, int a4) {
   v10 = 0;
   v8 = 0;
   v9 = -1;
-  pPile = (CPile *)CPileMgr::GetPilePtr(a2);
-  if ( !pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\PileMgr.cpp", 582, "pPile != 0") == 1 )
+  pPile = CPileMgr::GetPilePtr(a2);
+  if ( pPile == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileMgr.cpp", 582, "pPile != 0") == 1 )
   {
     __debugbreak();
   }
-  while ( pPile )
+  while ( pPile != 0 )
   {
     v5 = pPile->Amount(pPile);
     if ( v5 != CPile::AmountLeaving(pPile) )
@@ -275,9 +275,9 @@ int  CPileMgr::GetNearestPile(int a2, int a3, int a4) {
       }
     }
     v11 = IAnimatedEntity::Next(pPile);
-    if ( v11 )
+    if ( v11 != 0 )
     {
-      pPile = (CPile *)CPileMgr::GetPilePtr(v11);
+      pPile = CPileMgr::GetPilePtr(v11);
     }
     else
     {
@@ -323,23 +323,23 @@ void  CPileMgr::SearchSpaceForGoods(int _iX, int _iY, int _iGood, int _iAmount) 
   }
   v19 = 0;
   iAmount = _iAmount;
-  while ( iAmount && v19 <= 9999 )
+  while ( iAmount != 0 && v19 <= 9999 )
   {
     v10 = _iX + CSpiralOffsets::DeltaX(v19);
     v11 = _iY + CSpiralOffsets::DeltaY(v19);
     if ( CWorldManager::InWorld(v10, v11) )
     {
       v12 = CWorldManager::PileId(v10, v11);
-      if ( v12 )
+      if ( v12 != 0 )
       {
         v17 = _iGood;
         v13 = CWorldManager::OwnerId(v10, v11);
-        if ( v13 )
+        if ( v13 != 0 )
         {
           CPlayerManager::Race(v13);
           v17 = CPileMgr::ConvertGoodType(this, _iGood);
         }
-        v21 = (CPile *)CPileMgr::operator[](v12);
+        v21 = CPileMgr::operator[](v12);
         if ( v21->GetGoodType() == v17 && CPile::GetRoleType(v21) == 3 )
         {
           v5 = v21->Amount(v21);
@@ -365,27 +365,24 @@ void  CPileMgr::SearchSpaceForGoods(int _iX, int _iY, int _iGood, int _iAmount) 
     {
       __debugbreak();
     }
-    if ( iAmount )
+    if ( iAmount != 0 && v19 >= 50 )
     {
-      if ( v19 >= 50 )
+      v15 = _iX + CSpiralOffsets::DeltaX(v19 - 50);
+      v16 = _iY + CSpiralOffsets::DeltaY(v19 - 50);
+      if ( CWorldManager::InWorld(v15, v16) && CWorldManager::FlagBits(v15, v16, 0x39u) == 0 && CWorldManager::ObjectId(v15, v16) == 0 && CWorldManager::MapObjectId(v15, v16) == 0 && CWorldManager::SectorId(v15, v16) != 0 )
       {
-        v15 = _iX + CSpiralOffsets::DeltaX(v19 - 50);
-        v16 = _iY + CSpiralOffsets::DeltaY(v19 - 50);
-        if ( CWorldManager::InWorld(v15, v16) && !CWorldManager::FlagBits(v15, v16, 0x39u) && !CWorldManager::ObjectId(v15, v16) && !CWorldManager::MapObjectId(v15, v16) && CWorldManager::SectorId(v15, v16) )
+        v18 = _iGood;
+        v14 = CWorldManager::OwnerId(v15, v16);
+        if ( v14 != 0 )
         {
-          v18 = _iGood;
-          v14 = CWorldManager::OwnerId(v15, v16);
-          if ( v14 )
-          {
-            CPlayerManager::Race(v14);
-            v18 = CPileMgr::ConvertGoodType(this, _iGood);
-          }
-          if ( !CPileMgr::AddPile(this, v15, v16, v18, iAmount, 3, 0, 0, 0, 0) && BBSupportDbgReport(2, "MapObjects\\Pile\\PileMgr.cpp", 717, "iActPileId != 0") == 1 )
-          {
-            __debugbreak();
-          }
-          iAmount = 0;
+          CPlayerManager::Race(v14);
+          v18 = CPileMgr::ConvertGoodType(this, _iGood);
         }
+        if ( CPileMgr::AddPile(this, v15, v16, v18, iAmount, 3, 0, 0, 0, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\PileMgr.cpp", 717, "iActPileId != 0") == 1 )
+        {
+          __debugbreak();
+        }
+        iAmount = 0;
       }
     }
     ++v19;
@@ -419,13 +416,13 @@ void  CPileMgr::Store(class S4::CMapFile & _rMapFile) {
 
   v19 = &v3;
   v4.v4[42] = (DWORD)this;
-  std::ostrstream::ostrstream(v4.v4, 0, 0x40000LL, 2, 1);
+  std::ostrstream::ostrstream(v4.v4, 0, 0x40000, 2, 1);
   v20 = 0;
   v5 = std::ios_base::exceptions((char *)&v4 + *(_DWORD *)(v4.v4[0] + 4));
   std::ios_base::exceptions((std::ios_base *)((char *)&v4 + *(_DWORD *)(v4.v4[0] + 4)), 6);
   LOBYTE(v20) = 1;
   v13 = 1;
-  operator^<unsigned int>(&v4, &v13);
+  operator^<unsigned int>(&v4, (unsigned int *)&v13);
   UsedId = CMapObjectMgr::LastUsedId();
   v14 = UsedId;
   v16 = 0;
@@ -435,7 +432,7 @@ void  CPileMgr::Store(class S4::CMapFile & _rMapFile) {
   {
     v11 = CMapObjectMgr::EntityPtr(i);
     v15 = v11;
-    if ( v11 )
+    if ( v11 != 0 )
     {
       v10 = IEntity::ObjType(v15);
       if ( v10 == PILE_OBJ )
@@ -444,14 +441,14 @@ void  CPileMgr::Store(class S4::CMapFile & _rMapFile) {
       }
     }
   }
-  operator^<unsigned int>(&v4, &v16);
+  operator^<unsigned int>(&v4, (unsigned int *)&v16);
   for ( i = 0;
         i <= v14;
         ++i )
   {
     v9 = CMapObjectMgr::EntityPtr(i);
     v17 = v9;
-    if ( v9 )
+    if ( v9 != 0 )
     {
       v8 = IEntity::ObjType(v17);
       if ( v8 == PILE_OBJ )
@@ -492,15 +489,15 @@ void  CPileMgr::Load(class S4::CMapFile & _rMapFile) {
 
   a4 = 0;
   Str = (char *)S4::CMapFile::LoadChunk(_rMapFile, MAP_CHUNK_SAVE_PILES, 0, &a4, 0);
-  if ( Str )
+  if ( Str != 0 )
   {
     std::string::string(&v12, Str);
     v13 = 0;
-    std::istringstream::istringstream(&v12, 1, 1);
+    std::istringstream::istringstream((int)&v12, 1, 1);
     LOBYTE(v13) = 1;
     v3 = std::ios_base::exceptions((char *)v2 + *(_DWORD *)(v2[0] + 4));
     std::ios_base::exceptions((std::ios_base *)((char *)v2 + *(_DWORD *)(v2[0] + 4)), 6);
-    operator^<unsigned int>(v2, &v5);
+    operator^<unsigned int>(v2, (unsigned int *)&v5);
     v4 = v5;
     if ( v5 != 1 )
     {
@@ -546,19 +543,19 @@ int  CPileMgr::DbgCheckPiles(int a2) {
         ++i )
   {
     PilePtr = CPileMgr::GetPilePtr(i);
-    if ( PilePtr )
+    if ( PilePtr != 0 )
     {
       ++v6;
       IEntity::FlagBits(PilePtr, ENTITY_FLAG_AliveMask);
     }
   }
-  if ( this->m_iPileCount )
+  if ( this->m_iPileCount != 0 )
   {
     v8 = 1;
     BBSupportTracePrintF(3, " Invalid number of piles: Is %i, should be %i!", this->m_iPileCount, 0);
   }
   BBSupportTracePrintF(1, " %i pile(s) checked.", 0);
-  if ( v8 )
+  if ( v8 != 0 )
   {
     BBSupportTracePrintF(1, " %i error(s).", v8);
   }
@@ -589,7 +586,7 @@ int  CPileMgr::ConvertGoodType(int a2, int _iTargetRace) {
   iGood = 0;
   iNewGoodType = a2;
   bFoundCustomGoodConversion = 0;
-  while ( s_sGoodConversionMap[_iTargetRace][iGood].m_iFromGood && !bFoundCustomGoodConversion )
+  while ( s_sGoodConversionMap[_iTargetRace][iGood].m_iFromGood != 0 && bFoundCustomGoodConversion == 0 )
   {                                             // NOTE: this here can infinite loop...
     if ( s_sGoodConversionMap[_iTargetRace][iGood].m_iFromGood == a2 )
     {
@@ -627,7 +624,7 @@ class IPileRole * __cdecl CPileMgr::CreatePileRole(int _iRole) {
   {
     case 0:
       v11 = (CProductionPileRole *)operator new(8u);
-      if ( v11 )
+      if ( v11 != 0 )
       {
         v10 = CProductionPileRole::CProductionPileRole(v11);
       }
@@ -639,9 +636,9 @@ class IPileRole * __cdecl CPileMgr::CreatePileRole(int _iRole) {
       break;
     case 1:
       v9 = (CDeliverPileRole *)operator new(8u);
-      if ( v9 )
+      if ( v9 != 0 )
       {
-        v8 = CDeliverPileRole::CDeliverPileRole(v9);
+        v8 = (CProductionPileRole *)CDeliverPileRole::CDeliverPileRole(v9);
       }
       else
       {
@@ -651,9 +648,9 @@ class IPileRole * __cdecl CPileMgr::CreatePileRole(int _iRole) {
       break;
     case 2:
       v7 = (CStoragePileRole *)operator new(8u);
-      if ( v7 )
+      if ( v7 != 0 )
       {
-        v6 = CStoragePileRole::CStoragePileRole(v7);
+        v6 = (CProductionPileRole *)CStoragePileRole::CStoragePileRole(v7);
       }
       else
       {
@@ -663,7 +660,7 @@ class IPileRole * __cdecl CPileMgr::CreatePileRole(int _iRole) {
       break;
     case 3:
       C = (CAnyWherePileRole *)operator new(8u);
-      if ( C )
+      if ( C != 0 )
       {
         v12 = (CProductionPileRole *)CAnyWherePileRole::CAnyWherePileRole(C);
       }
@@ -675,9 +672,9 @@ class IPileRole * __cdecl CPileMgr::CreatePileRole(int _iRole) {
       break;
     case 4:
       v5 = (CTradePileRole *)operator new(0x14u);
-      if ( v5 )
+      if ( v5 != 0 )
       {
-        v4 = CTradePileRole::CTradePileRole(v5);
+        v4 = (CProductionPileRole *)CTradePileRole::CTradePileRole(v5);
       }
       else
       {
@@ -687,9 +684,9 @@ class IPileRole * __cdecl CPileMgr::CreatePileRole(int _iRole) {
       break;
     case 5:
       v3 = (CBuildingSitePileRole *)operator new(8u);
-      if ( v3 )
+      if ( v3 != 0 )
       {
-        v2 = CBuildingSitePileRole::CBuildingSitePileRole(v3);
+        v2 = (CProductionPileRole *)CBuildingSitePileRole::CBuildingSitePileRole(v3);
       }
       else
       {
@@ -745,7 +742,7 @@ void  CPileMgr::TracePile(int iPileId) {
   int iNext; // [esp-4h] [ebp-Ch]
   CPile *v12; // [esp+4h] [ebp-4h]
 
-  v12 = (CPile *)CPileMgr::operator[](iPileId);
+  v12 = CPileMgr::operator[](iPileId);
   iNext = IAnimatedEntity::Next(v12);
   iPrev = IAnimatedEntity::Previous(v12);
   v8 = IEntity::Y(v12);
@@ -761,7 +758,7 @@ void  CPileMgr::TracePile(int iPileId) {
 
 
 // address=[0x155fb30]
-// Decompiled from int __cdecl CPileMgr::LoadPileRole(int _rStream, int _iRole)
+// Decompiled from int __cdecl CPileMgr::LoadPileRole(struct std::istream *_rStream, int _iRole)
 class IPileRole * __cdecl CPileMgr::LoadPileRole(std::istream & _rStream, int _iRole) {
   
   int result; // eax
@@ -771,19 +768,19 @@ class IPileRole * __cdecl CPileMgr::LoadPileRole(std::istream & _rStream, int _i
   switch ( _iRole )
   {
     case 0:
-      result = CProductionPileRole::Load(_rStream);
+      result = CProductionPileRole::Load((int)_rStream);
       break;
     case 1:
       result = CDeliverPileRole::Load(_rStream);
       break;
     case 2:
-      result = CStoragePileRole::Load(_rStream);
+      result = CStoragePileRole::Load((int)_rStream);
       break;
     case 3:
       result = CAnyWherePileRole::Load(_rStream);
       break;
     case 4:
-      result = CTradePileRole::Load(_rStream);
+      result = CTradePileRole::Load((int)_rStream);
       break;
     case 5:
       result = CBuildingSitePileRole::Load(_rStream);

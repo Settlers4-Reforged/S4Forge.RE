@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
   CStateXMD3Briefing *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateXMD3Briefing *)operator new(0x10u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateXMD3Briefing::CStateXMD3Briefing(C, a1);
   }
@@ -57,7 +57,7 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
   int v33; // [esp+25Ch] [ebp-4h]
 
   v30 = (int *)this;
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   v33 = 0;
   *v30 = (int)&CStateXMD3Briefing::_vftable_;
   CSoundManager::StopMusic(g_pSoundManager);
@@ -84,7 +84,7 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
     byte_402C9F4 = 1;
   }
   byte_402C9F5 = 0;
-  if ( byte_402C9F4 )
+  if ( byte_402C9F4 != 0 )
   {
     CStateXMD3Briefing::InitBriefingTexts(v30[1], v30[2]);
   }
@@ -99,7 +99,7 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
   IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
   C = operator new(0x620u);
   LOBYTE(v33) = 1;
-  if ( C )
+  if ( C != 0 )
   {
     v24 = CGameType::CGameType((CGameType *)C);
   }
@@ -117,7 +117,7 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
   snwprintf(Buffer, 0xFFu, (const char *const)v2, bIsClanGame);
   std::wstring::wstring(&v31);
   LOBYTE(v33) = 2;
-  if ( g_pCDDrive->GetCDPath(g_pCDDrive, (char *)&v31, Buffer, 3145984) )
+  if ( g_pCDDrive->GetCDPath(g_pCDDrive, (char *)&v31, Buffer, 3145984) != 0 )
   {
     bIsClanGame = 0;
     bIsLadderGame = 0;
@@ -142,24 +142,24 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
     v4 = std::wstring::c_str(&v31);
     BBSupportTracePrint(1, v4);
   }
-  if ( !v29 )
+  if ( v29 == 0 )
   {
     v5 = g_pStringEngine->GetString(g_pStringEngine, 3785);
     std::string::operator=(&g_iMessageBoxStringID, v5);
     v28 = IGuiEngine::CloseDialog(g_pGUIEngine, 1);
-    if ( !g_pMissionCD3 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 266, "g_pMissionCD3") == 1 )
+    if ( g_pMissionCD3 == 0 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 266, "g_pMissionCD3") == 1 )
     {
       __debugbreak();
     }
     ((void (__thiscall *)(CMissionCD3 *, _DWORD, char (__cdecl *)(int, int, int)))g_pMissionCD3->j_?EnsureMainGUI@CExtraCD@@UAEXHP6A_NHHH@Z@Z)(g_pMissionCD3, 0, GuiDlgMainscreenProc);
     v28 = IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
-    if ( !v28 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 269, "bRet") == 1 )
+    if ( v28 == 0 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 269, "bRet") == 1 )
     {
       __debugbreak();
     }
     BBSupportTracePrintF(3, "MissionCD3 Map '%s' not found!", Buffer);
     IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
-    if ( g_pGameType )
+    if ( g_pGameType != 0 )
     {
       v21 = g_pGameType;
       v23 = g_pGameType;
@@ -174,11 +174,11 @@ class CGameState * __cdecl CStateXMD3Briefing::DynamicCreateFunc(void * a1) {
 
 
 // address=[0x14cd0b0]
-// Decompiled from void __thiscall CStateXMD3Briefing::~CStateXMD3Briefing(CStateXMD3Briefing *this)
+// Decompiled from void __thiscall CStateXMD3Briefing::~CStateXMD3Briefing(CGuiGameState *this)
  CStateXMD3Briefing::~CStateXMD3Briefing(void) {
   
-  *(_DWORD *)this = &CStateXMD3Briefing::_vftable_;
-  IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 1);
+  this->__vftable = (CGuiGameState_vtbl *)&CStateXMD3Briefing::_vftable_;
+  IGuiEngine::CloseDialog(g_pGUIEngine, 1);
   CGuiGameState::~CGuiGameState(this);
 }
 
@@ -191,18 +191,18 @@ bool  CStateXMD3Briefing::Perform(void) {
   int v4; // [esp+10h] [ebp-Ch]
   int Instance; // [esp+18h] [ebp-4h]
 
-  Instance = UPlay::UPlayManager::GetInstance();
-  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) )
+  Instance = (int)UPlay::UPlayManager::GetInstance();
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) != 0 )
   {
     CSoundManager::StopMusic(g_pSoundManager);
-    CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
-    if ( !byte_402C9F4 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 548, "g_cBriefingSettings.m_bIsCampaign") == 1 )
+    CSoundManager::StopSounds(g_pSoundManager);
+    if ( byte_402C9F4 == 0 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 548, "g_cBriefingSettings.m_bIsCampaign") == 1 )
     {
       __debugbreak();
     }
-    if ( g_pGameType )
+    if ( g_pGameType != 0 )
     {
-      delete (CGameType *)g_pGameType;
+      delete g_pGameType;
     }
     g_pGameType = 0;
     v4 = *((_DWORD *)this + 1);
@@ -212,7 +212,7 @@ bool  CStateXMD3Briefing::Perform(void) {
     }
     else
     {
-      CGameStateHandler::Switch((int)CStateXMD3Campaigns::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateXMD3Campaigns::DynamicCreateFunc, 0);
       return 1;
     }
   }
@@ -228,14 +228,13 @@ bool  CStateXMD3Briefing::Perform(void) {
       }
     }
     v2 = dword_4032204 + 30;
-    if ( v2 >= timeGetTime() )
+    if ( v2 < timeGetTime() )
     {
-      return 1;
+      dword_4032204 = timeGetTime();
+      IGuiEngine::RenderGui(g_pGUIEngine);
+      IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+      IGfxEngine::ShowFrame(g_pGfxEngine);
     }
-    dword_4032204 = timeGetTime();
-    IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-    IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-    IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
     return 1;
   }
 }
@@ -254,7 +253,7 @@ bool  CStateXMD3Briefing::OnEvent(class CEvn_Event & a2) {
   int v9; // [esp+38h] [ebp-60h]
   int i; // [esp+48h] [ebp-50h]
   unsigned int event; // [esp+4Ch] [ebp-4Ch]
-  _BYTE v13[28]; // [esp+54h] [ebp-44h] BYREF
+  std::wstring v13; // [esp+54h] [ebp-44h] BYREF
   CEvn_Event v14; // [esp+70h] [ebp-28h] BYREF
   int v15; // [esp+94h] [ebp-4h]
 
@@ -278,24 +277,26 @@ bool  CStateXMD3Briefing::OnEvent(class CEvn_Event & a2) {
         }
         break;
       case 0x72u:
-        IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 20);
-        CGuiGameState::SetupExtraGui(g_pMissionCD3, 1, (int)GuiDlgXMD3BriefingProc);
-        CGuiGameState::OpenDialog(this, 1, GuiDlgXMD3BriefingProc);
+        IGuiEngine::CloseDialog(g_pGUIEngine, 20);
+        CGuiGameState::SetupExtraGui((int)g_pMissionCD3, 1, (int)GuiDlgXMD3BriefingProc);
+        CGuiGameState::OpenDialog((CGuiGameState *)this, 1, (bool (__cdecl *)(int, int, int))GuiDlgXMD3BriefingProc);
         return 1;
+      default:
+        break;
     }
-    return CGuiGameState::OnEvent(this, a2);
+    return CGuiGameState::OnEvent((CGuiGameState *)this, a2);
   }
   if ( event == 9507 )
   {
     CSoundManager::StopMusic(g_pSoundManager);
-    CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
-    if ( !byte_402C9F4 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 327, "g_cBriefingSettings.m_bIsCampaign") == 1 )
+    CSoundManager::StopSounds(g_pSoundManager);
+    if ( byte_402C9F4 == 0 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 327, "g_cBriefingSettings.m_bIsCampaign") == 1 )
     {
       __debugbreak();
     }
-    if ( g_pGameType )
+    if ( g_pGameType != 0 )
     {
-      delete (CGameType *)g_pGameType;
+      delete g_pGameType;
     }
     g_pGameType = 0;
     v9 = *((_DWORD *)this + 1);
@@ -305,7 +306,7 @@ bool  CStateXMD3Briefing::OnEvent(class CEvn_Event & a2) {
     }
     else
     {
-      CGameStateHandler::Switch((int)CStateXMD3Campaigns::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateXMD3Campaigns::DynamicCreateFunc, 0);
       return 1;
     }
   }
@@ -313,33 +314,33 @@ bool  CStateXMD3Briefing::OnEvent(class CEvn_Event & a2) {
   {
     if ( event != 9508 )
     {
-      return CGuiGameState::OnEvent(this, a2);
+      return CGuiGameState::OnEvent((CGuiGameState *)this, a2);
     }
     Instance = (CGUIWrapper *)CGUIWrapper::GetInstance();
     CGUIWrapper::ReleaseGUIGFXFile(Instance);
-    CSoundManager::StopSounds((CSoundManager *)g_pSoundManager);
-    IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
-    CGfxManager::DisableGfxFile((CGfxManager *)g_pGfxManager, 1);
-    if ( (unsigned __int8)CStateLobbyGameSettings::CopyDefaultUserFlags() )
+    CSoundManager::StopSounds(g_pSoundManager);
+    IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
+    CGfxManager::DisableGfxFile(g_pGfxManager, 1);
+    if ( (unsigned __int8)CStateLobbyGameSettings::CopyDefaultUserFlags() != 0 )
     {
-      CGfxManager::EnableGfxFile((CGfxManager *)g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
-      if ( !g_pGameType && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 406, "g_pGameType") == 1 )
+      CGfxManager::EnableGfxFile(g_pGfxManager, 1u, 8, 1, 0xFFFFFFFF);
+      if ( g_pGameType == 0 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 406, "g_pGameType") == 1 )
       {
         __debugbreak();
       }
-      if ( !CGameType::IsCampaignMap((CGameType *)g_pGameType) && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 450, "g_pGameType->IsCampaignMap()") == 1 )
+      if ( CGameType::IsCampaignMap(g_pGameType) == 0 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 450, "g_pGameType->IsCampaignMap()") == 1 )
       {
         __debugbreak();
       }
-      IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 0);
-      if ( g_pNetworkEngine )
+      IGuiEngine::EnableEventInput(g_pGUIEngine, 0);
+      if ( g_pNetworkEngine != 0 )
       {
-        (**(void (__thiscall ***)(int, int))g_pNetworkEngine)(g_pNetworkEngine, 1);
+        (**(void (__thiscall ***)(INetworkEngine *, int))g_pNetworkEngine)(g_pNetworkEngine, 1);
         g_pNetworkEngine = 0;
       }
       C = (INetworkEngine *)operator new(0x18u);
       v15 = 1;
-      if ( C )
+      if ( C != 0 )
       {
         v7 = INetworkEngine::INetworkEngine(C, 0);
       }
@@ -348,38 +349,38 @@ bool  CStateXMD3Briefing::OnEvent(class CEvn_Event & a2) {
         v7 = 0;
       }
       v15 = -1;
-      g_pNetworkEngine = (int)v7;
-      *(_DWORD *)(g_pGameType + 112) = *(_DWORD *)(g_pGameType + 852);
-      *(_DWORD *)(g_pGameType + 188) = INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
+      g_pNetworkEngine = v7;
+      g_pGameType->m_iActualPlayerCount = g_pGameType->m_iMapMaxNumPlayers;
+      g_pGameType->m_uiIPPlayer[0] = (DWORD)INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
       v4 = (OnlineManager *)OnlineManager::GetInstance();
-      *(_DWORD *)(g_pGameType + 224) = OnlineManager::GetLocalPeerId(v4);
-      PlayerName = CGameSettings::GetPlayerName((int)v13);
+      g_pGameType->m_sPlayerPeerId[0] = OnlineManager::GetLocalPeerId(v4);
+      PlayerName = CGameSettings::GetPlayerName((int)&v13);
       v15 = 2;
-      CGameType::SetPlayerName(0, PlayerName);
+      ((void (__stdcall *)(unsigned int, int))CGameType::SetPlayerName)(0, PlayerName);
       v15 = -1;
-      std::wstring::~wstring(v13);
-      *(_DWORD *)(g_pGameType + 740) = *((_DWORD *)this + 1);
-      *(_DWORD *)(g_pGameType + 744) = *((_DWORD *)this + 2);
-      *(_DWORD *)(g_pGameType + 692) = 3;
+      std::wstring::~wstring(&v13);
+      g_pGameType->m_iCampaignType = *((_DWORD *)this + 1);
+      g_pGameType->m_iMissionId = *((_DWORD *)this + 2);
+      g_pGameType->m_iGameType = 3;
       for ( i = 0;
-            i < *(_DWORD *)(g_pGameType + 852);
+            i < g_pGameType->m_iMapMaxNumPlayers;
             ++i )
       {
-        *(_BYTE *)(i + g_pGameType + 440) = 0;
+        g_pGameType->m_sPlayerExclusiveColor[i] = 0;
       }
-      INetworkEngine::Start(1, 1, *(_DWORD *)(g_pGameType + 852), 0);
-      CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
+      INetworkEngine::Start(1, 1, g_pGameType->m_iMapMaxNumPlayers, 0);
+      CGameStateHandler::Switch(CStateGame::DynamicCreateFunc, 0);
       return 1;
     }
     else
     {
-      IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 1);
-      if ( !g_pMissionCD3 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 397, "g_pMissionCD3") == 1 )
+      IGuiEngine::CloseDialog(g_pGUIEngine, 1);
+      if ( g_pMissionCD3 == 0 && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 397, "g_pMissionCD3") == 1 )
       {
         __debugbreak();
       }
-      (*(void (__thiscall **)(int, int, bool (__cdecl *)(int, int, int)))(*(_DWORD *)g_pMissionCD3 + 12))(g_pMissionCD3, 20, GuiDlgMainMessageBoxProc);
-      CGameStateHandler::Switch((int)CStateMessageBox::DynamicCreateFunc, 2398);
+      ((void (__thiscall *)(CMissionCD3 *, int, char (__cdecl *)(int, unsigned int, int)))g_pMissionCD3->j_?EnsureMainGUI@CExtraCD@@UAEXHP6A_NHHH@Z@Z)(g_pMissionCD3, 20, GuiDlgMainMessageBoxProc);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMessageBox::DynamicCreateFunc, (void *)2398);
       return 1;
     }
   }
@@ -408,7 +409,7 @@ void __cdecl CStateXMD3Briefing::InitBriefingTexts(int a1, int a2) {
   char *v17; // eax
   char *v18; // eax
 
-  if ( (!a1 || a1 >= 25) && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 641, "( _iCampaignType ) && ( _iCampaignType < CAMPAIGN_MAX )") == 1 )
+  if ( (a1 == 0 || a1 >= 25) && BBSupportDbgReport(2, "main\\states\\statexmd3briefing.cpp", 641, "( _iCampaignType ) && ( _iCampaignType < CAMPAIGN_MAX )") == 1 )
   {
     __debugbreak();
   }
@@ -494,23 +495,22 @@ void  CStateXMD3Briefing::PaintMap(bool a1) {
   _BYTE v4[16]; // [esp+Ch] [ebp-14h] BYREF
 
   result = a1;
-  if ( !a1 )
+  if ( a1 == 0 )
   {
-    return IGuiEngine::EraseOwnerImage((IGuiEngine *)g_pGUIEngine, 1, 2926);
+    return IGuiEngine::EraseOwnerImage(g_pGUIEngine, 1, 2926);
   }
-  if ( !g_pGameType || !*(_DWORD *)(g_pGameType + 1016) )
+  if ( g_pGameType != 0 && g_pGameType->m_pMapPreview != 0 )
   {
-    return result;
+    v3 = 0;
+    v2 = 0;
+    result = IGuiEngine::LockOwnerImage(g_pGUIEngine, 1, 2926, (struct SGuiRect *)v4, &v3, &v2);
+    if ( v3 != 0 )
+    {
+      CStateLobbyGameSettings::DrawMap((unsigned __int16 *)g_pGameType->m_pMapPreview, v3, v2, g_pGameType->m_iMapPreviewWidth, g_pGameType->m_iMapPreviewHeight);
+      return IGuiEngine::UnlockOwnerImage(g_pGUIEngine, 1, 2926);
+    }
   }
-  v3 = 0;
-  v2 = 0;
-  result = IGuiEngine::LockOwnerImage((IGuiEngine *)g_pGUIEngine, 1, 2926, (struct SGuiRect *)v4, &v3, &v2);
-  if ( !v3 )
-  {
-    return result;
-  }
-  CStateLobbyGameSettings::DrawMap(*(unsigned __int16 **)(g_pGameType + 1016), v3, v2, *(_DWORD *)(g_pGameType + 1020), *(_DWORD *)(g_pGameType + 1024));
-  return IGuiEngine::UnlockOwnerImage((IGuiEngine *)g_pGUIEngine, 1, 2926);
+  return result;
 }
 
 

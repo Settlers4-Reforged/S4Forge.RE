@@ -50,7 +50,7 @@ void  CConfigVarInt::SetValue(float a2) {
 // Decompiled from void __thiscall CConfigVarInt::~CConfigVarInt(CConfigVarInt *this)
  CConfigVarInt::~CConfigVarInt(void) {
   
-  *(_DWORD *)this = &CConfigVarInt::_vftable_;
+  this->__vftable = (CConfigVar_vtbl *)&CConfigVarInt::_vftable_;
   CDynamicConfigVar::~CDynamicConfigVar(this);
 }
 

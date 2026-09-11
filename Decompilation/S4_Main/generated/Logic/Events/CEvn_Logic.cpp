@@ -18,7 +18,7 @@
   CEvn_Event::CEvn_Event(this, a2, a3, a4, 0);
   this->__vftable = (CEvn_Event_vtbl *)CEvn_Logic::_vftable_;
   this->m_iOwner = a5;
-  this->m_iData = a6;
+  this->m_iData = (BYTE *)a6;
   this->m_iDataSize = a7;
   return this;
 }
@@ -46,7 +46,7 @@ void  CEvn_Logic::Load(class IS4Chunk & a2) {
   a2->Load(&this->m_lParam, 4);
   a2->Load(&this->SEventStruct, 4);             // saves m_iEventId
   a2->Load(&this->m_wParam, 4);
-  if ( this->m_iDataSize )
+  if ( this->m_iDataSize != 0 )
   {
     this->m_iData = (BYTE *)operator new[](this->m_iDataSize);
     a2->Load(this->m_iData, this->m_iDataSize);
@@ -63,9 +63,9 @@ void  CEvn_Logic::Save(class IS4Chunk & a2) {
   a2->Save(&this->m_lParam, 4);
   a2->Save(&this->SEventStruct, 4);
   a2->Save(&this->m_wParam, 4);
-  if ( this->m_iDataSize )
+  if ( this->m_iDataSize != 0 )
   {
-    if ( !this->m_iData && BBSupportDbgReportF(2, "EventEngine\\Evn_HandleLogic.cpp", 27, "m_iData != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x", this->m_iOwner, this->m_lParam, this->m_iEventId, this->m_wParam, this->m_iDataSize) == 1 )
+    if ( this->m_iData == 0 && BBSupportDbgReportF(2, "EventEngine\\Evn_HandleLogic.cpp", 27, "m_iData != 0: m_iOwner: 0x%x, m_lParam: 0x%x, m_Message: 0x%x, m_wParam: 0x%x, m_iDataSize: 0x%x", this->m_iOwner, this->m_lParam, this->m_iEventId, this->m_wParam, this->m_iDataSize) == 1 )
     {
       __debugbreak();
     }

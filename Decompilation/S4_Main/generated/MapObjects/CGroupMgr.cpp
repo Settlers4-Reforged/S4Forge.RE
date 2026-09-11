@@ -83,11 +83,11 @@ bool  CGroupMgr::AttachEntity(int playerId, int groupId, int entityIdToAttach) {
     __debugbreak();
   }
   entityToAttach = CMapObjectMgr::EntityPtr(entityIdToAttach);
-  if ( !entityToAttach && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 251, "pEntity != 0") == 1 )
+  if ( entityToAttach == 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 251, "pEntity != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !entityToAttach )
+  if ( entityToAttach == 0 )
   {
     return 0;
   }
@@ -114,19 +114,19 @@ bool  CGroupMgr::AttachEntity(int playerId, int groupId, int entityIdToAttach) {
   }
   if ( !IEntity::CheckType(entityToAttach, 1, 44) )
   {
-    if ( (groupFlagBits & (unsigned int)entityToAttach->SetGroupFlagBits(groupFlagBits)) == 0 )
+    if ( (groupFlagBits & (unsigned int)entityToAttach->SetGroupFlagBits(groupFlagBits)) != 0 )
     {
-      return 0;
+      v16 = entityIdToAttach;
+      TStaticArray<unsigned short,100>::PushBack(groupList, &v16);
+      return 1;
     }
-    v16 = entityIdToAttach;
-    TStaticArray<unsigned short,100>::PushBack(groupList, &v16);
-    return 1;
+    return 0;
   }
   if ( (this->m_bGroupFlags[11 * playerId + groupId] & 1) != 0 )
   {
     return 0;
   }
-  if ( v13 )
+  if ( v13 != 0 )
   {
     return 0;
   }
@@ -141,7 +141,7 @@ bool  CGroupMgr::AttachEntity(int playerId, int groupId, int entityIdToAttach) {
   {
     v5 = *TStaticArray<unsigned short,100>::operator[](groupList, i);
     v8 = CMapObjectMgr::EntityPtr(v5);
-    if ( v8 )
+    if ( v8 != 0 )
     {
       ((void (__thiscall *)(IEntity *, int))v8->SetGroupFlagBits)(v8, 0x800);
     }
@@ -178,11 +178,11 @@ bool  CGroupMgr::DetachEntity(int playerId, int groupId, int entityId) {
     __debugbreak();
   }
   entity = CMapObjectMgr::EntityPtr(entityId);
-  if ( !entity && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 344, "pEntity != 0") == 1 )
+  if ( entity == 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 344, "pEntity != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !entity )
+  if ( entity == 0 )
   {
     return 0;
   }
@@ -193,7 +193,7 @@ bool  CGroupMgr::DetachEntity(int playerId, int groupId, int entityId) {
   }
   v10 = &this->m_vEntries[11 * owner + groupId];
   groupFlags = 1 << groupId;
-  if ( ((1 << groupId) & entity->GetGroupFlags(entity)) == 0 )
+  if ( ((1 << groupId) & ((int (__thiscall *)(IEntity *))entity->GetGroupFlags)(entity)) == 0 )
   {
     a1 = entityId;
     if ( TStaticArray<unsigned short,100>::FindEntry(v10, &a1) >= 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 402, "rGroupArray.FindEntry(_iEntityId) < 0") == 1 )
@@ -203,8 +203,8 @@ bool  CGroupMgr::DetachEntity(int playerId, int groupId, int entityId) {
     return 0;
   }
   _entityId = entityId;
-  entityFound = TStaticArray<unsigned short,100>::RemoveEntry(&_entityId);
-  if ( !entityFound && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 362, "bEntityFound") == 1 )
+  entityFound = ((_DWORD (__stdcall *)(__int16 *))TStaticArray<unsigned short,100>::RemoveEntry)(&_entityId);
+  if ( entityFound == 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 362, "bEntityFound") == 1 )
   {
     __debugbreak();
   }
@@ -223,7 +223,7 @@ bool  CGroupMgr::DetachEntity(int playerId, int groupId, int entityId) {
     {
       v5 = *TStaticArray<unsigned short,100>::operator[](v10, i);
       v8 = CMapObjectMgr::EntityPtr(v5);
-      if ( v8 )
+      if ( v8 != 0 )
       {
         v8->ClearGroupFlagBits(v8, 2048);
       }
@@ -232,7 +232,7 @@ bool  CGroupMgr::DetachEntity(int playerId, int groupId, int entityId) {
   else
   {
     entity->ClearGroupFlagBits(entity, groupFlags);
-    if ( (groupFlags & entity->GetGroupFlags(entity)) != 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 370, "(pEntity->GetGroupFlags() & iGroupBit) == 0") == 1 )
+    if ( (groupFlags & ((int (__thiscall *)(IEntity *))entity->GetGroupFlags)(entity)) != 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 370, "(pEntity->GetGroupFlags() & iGroupBit) == 0") == 1 )
     {
       __debugbreak();
     }
@@ -251,14 +251,14 @@ void  CGroupMgr::DetachEntityFromAllGroups(int entityId) {
   IEntity *v6; // [esp+14h] [ebp-4h]
 
   v6 = CMapObjectMgr::EntityPtr(entityId);
-  if ( !v6 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 419, "pEntity != 0") == 1 )
+  if ( v6 == 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 419, "pEntity != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( v6 )
+  if ( v6 != 0 )
   {
     owner = IEntity::OwnerId(v6);
-    groupFlags = v6->GetGroupFlags(v6);
+    groupFlags = ((int (__thiscall *)(IEntity *))v6->GetGroupFlags)(v6);
     for ( i = 1;
           i <= 10;
           ++i )
@@ -268,7 +268,7 @@ void  CGroupMgr::DetachEntityFromAllGroups(int entityId) {
         this->DetachEntity(this, owner, i, entityId);
       }
     }
-    if ( (v6->GetGroupFlags(v6) & 0xFFFFF7FF) != 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 436, "(pEntity->GetGroupFlags() & ~GROUP_FLAG_IN_GROUP_WITH_SQUAD_LEADER) == 0") == 1 )
+    if ( (((int (__thiscall *)(IEntity *))v6->GetGroupFlags)(v6) & 0xFFFFF7FF) != 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 436, "(pEntity->GetGroupFlags() & ~GROUP_FLAG_IN_GROUP_WITH_SQUAD_LEADER) == 0") == 1 )
     {
       __debugbreak();
     }
@@ -347,8 +347,8 @@ bool  CGroupMgr::HasSquadLeader(int a2, int a3) {
 void  CGroupMgr::SendGroupCommand(int groupSize, unsigned short const * group, int x, int y, int sendFlags) {
   
   int firstGroupMemberPackedXY; // [esp-4h] [ebp-234h]
-  _BYTE v7[24]; // [esp+4h] [ebp-22Ch] BYREF
-  _BYTE v8[24]; // [esp+1Ch] [ebp-214h] BYREF
+  CEntityEvent v7; // [esp+4h] [ebp-22Ch] BYREF
+  CEntityEvent v8; // [esp+1Ch] [ebp-214h] BYREF
   CEntityEvent *v12; // [esp+40h] [ebp-1F0h]
   CEntityEvent *v13; // [esp+44h] [ebp-1ECh]
   int packedXY; // [esp+48h] [ebp-1E8h]
@@ -368,7 +368,7 @@ void  CGroupMgr::SendGroupCommand(int groupSize, unsigned short const * group, i
   _BYTE v30[408]; // [esp+88h] [ebp-1A8h] BYREF
   int v31; // [esp+22Ch] [ebp-4h]
 
-  if ( groupSize > 0 && group )
+  if ( groupSize > 0 && group != 0 )
   {
     i = -1;
     for ( i = 0;
@@ -377,7 +377,7 @@ void  CGroupMgr::SendGroupCommand(int groupSize, unsigned short const * group, i
     {
       v21 = group[i];
       v24 = CMapObjectMgr::EntityPtr(v21);
-      if ( v24 && IEntity::FlagBits(v24, ENTITY_FLAG_Ready|ENTITY_FLAG_ON_BOARD) == 0x2000000 )
+      if ( v24 != 0 && IEntity::FlagBits(v24, ENTITY_FLAG_Ready|ENTITY_FLAG_ON_BOARD) == 0x2000000 )
       {
         break;
       }
@@ -390,17 +390,14 @@ void  CGroupMgr::SendGroupCommand(int groupSize, unsigned short const * group, i
         {
           v20 = group[i];
           v27 = CMapObjectMgr::EntityPtr(v20);
-          if ( v27 )
+          if ( v27 != 0 && IEntity::FlagBits(v27, ENTITY_FLAG_Ready|ENTITY_FLAG_ON_BOARD) == ENTITY_FLAG_Ready )
           {
-            if ( IEntity::FlagBits(v27, ENTITY_FLAG_Ready|ENTITY_FLAG_ON_BOARD) == ENTITY_FLAG_Ready )
-            {
-              v19 = CEntityEvent::CEntityEvent((CEntityEvent *)v8, 0x11u, 13, sendFlags, 0, 0);
-              v18 = v19;
-              v31 = 0;
-              v27->SetEvent(v27, v19);
-              v31 = -1;
-              CEntityEvent::~CEntityEvent(v8);
-            }
+            v19 = CEntityEvent::CEntityEvent(&v8, 0x11u, 13, sendFlags, 0, 0);
+            v18 = v19;
+            v31 = 0;
+            v27->SetEvent(v27, v19);
+            v31 = -1;
+            CEntityEvent::~CEntityEvent(&v8);
           }
           ++i;
         }
@@ -410,11 +407,11 @@ void  CGroupMgr::SendGroupCommand(int groupSize, unsigned short const * group, i
         packedXY = Y16X16::PackXYFast(x, y);
         firstGroupMemberId = group[i];
         firstGroupMember = CMapObjectMgr::EntityPtr(firstGroupMemberId);
-        if ( !firstGroupMember && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 697, "pFirstEntity != 0") == 1 )
+        if ( firstGroupMember == 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 697, "pFirstEntity != 0") == 1 )
         {
           __debugbreak();
         }
-        if ( IEntity::ObjType(firstGroupMember) == 4 )
+        if ( IEntity::ObjType(firstGroupMember) == CATAPULT_OBJ )
         {
           v23 = 3;
         }
@@ -428,19 +425,19 @@ void  CGroupMgr::SendGroupCommand(int groupSize, unsigned short const * group, i
         {
           groupMemberId = group[i];
           groupMember = CMapObjectMgr::EntityPtr(groupMemberId);
-          if ( groupMember && IEntity::FlagBits(groupMember, ENTITY_FLAG_Ready|ENTITY_FLAG_ON_BOARD) == ENTITY_FLAG_Ready )
+          if ( groupMember != 0 && IEntity::FlagBits(groupMember, ENTITY_FLAG_Ready|ENTITY_FLAG_ON_BOARD) == ENTITY_FLAG_Ready )
           {
             NextDestination = CGroupDestinations::GetNextDestination((CGroupDestinations *)v30);
-            if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(NextDestination) && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 713, "g_cWorld.InWorldPackedXY(iDestXY)") == 1 )
+            if ( !CWorldManager::InWorldPackedXY(NextDestination) && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 713, "g_cWorld.InWorldPackedXY(iDestXY)") == 1 )
             {
               __debugbreak();
             }
-            v13 = CEntityEvent::CEntityEvent((CEntityEvent *)v7, 0x11u, 13, sendFlags, NextDestination, packedXY);
+            v13 = CEntityEvent::CEntityEvent(&v7, 0x11u, 13, sendFlags, NextDestination, packedXY);
             v12 = v13;
             v31 = 1;
             groupMember->SetEvent(groupMember, v13);
             v31 = -1;
-            CEntityEvent::~CEntityEvent(v7);
+            CEntityEvent::~CEntityEvent(&v7);
           }
           ++i;
         }
@@ -541,16 +538,16 @@ void  CGroupMgr::FillGroupSideBarEx(class CInfoExchange * _pInfoExchange, bool a
   CEvn_Event v13; // [esp+3Ch] [ebp-28h] BYREF
   int v14; // [esp+60h] [ebp-4h]
 
-  if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 494, "_pInfoExchange != 0") == 1 )
+  if ( _pInfoExchange == 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 494, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
   pGroupSideBarInfo = (CGroupSideBarInfo *)j____RTDynamicCast((void **)&_pInfoExchange->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CGroupSideBarInfo__RTTI_Type_Descriptor_, 0);
-  if ( !pGroupSideBarInfo && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 498, "pGroupSideBar != 0") == 1 )
+  if ( pGroupSideBarInfo == 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 498, "pGroupSideBar != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( pGroupSideBarInfo )
+  if ( pGroupSideBarInfo != 0 )
   {
     pGroupSideBarInfo->Clear(pGroupSideBarInfo);
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
@@ -562,7 +559,7 @@ void  CGroupMgr::FillGroupSideBarEx(class CInfoExchange * _pInfoExchange, bool a
       {
         v4 = TStaticArray<unsigned short,100>::operator[](&this->m_vEntries[11 * LocalPlayerId + i], 0);
         v10 = CMapObjectMgr::EntityPtr(*v4);
-        if ( v10 )
+        if ( v10 != 0 )
         {
           v9 = IEntity::WarriorType(v10);
         }
@@ -600,11 +597,11 @@ void  CGroupMgr::FillGroupSideBarEx(class CInfoExchange * _pInfoExchange, bool a
     {
       v8 = 607;
     }
-    if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 564, "g_pEvnEngine != 0") == 1 )
+    if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 564, "g_pEvnEngine != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( g_pEvnEngine )
+    if ( g_pEvnEngine != 0 )
     {
       v5 = CEvn_Event::CEvn_Event(&v13, v8, 0, (unsigned int)pGroupSideBarInfo, 0);
       v14 = 0;
@@ -632,16 +629,16 @@ void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange * _pInfoExchange, bool _
   CEvn_Event v12; // [esp+38h] [ebp-28h] BYREF
   int v13; // [esp+5Ch] [ebp-4h]
 
-  if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 587, "_pInfoExchange != 0") == 1 )
+  if ( _pInfoExchange == 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 587, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
   pMagicSpellSideBarInfo = (CMagicSpellSideBarInfo *)j____RTDynamicCast((void **)&_pInfoExchange->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CMagicSpellSideBarInfo__RTTI_Type_Descriptor_, 0);
-  if ( !pMagicSpellSideBarInfo && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 591, "pMagicSpellSideBar != 0") == 1 )
+  if ( pMagicSpellSideBarInfo == 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 591, "pMagicSpellSideBar != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( pMagicSpellSideBarInfo )
+  if ( pMagicSpellSideBarInfo != 0 )
   {
     pMagicSpellSideBarInfo->Clear(pMagicSpellSideBarInfo);
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
@@ -674,11 +671,11 @@ void  CGroupMgr::FillMagicSideBarEx(class CInfoExchange * _pInfoExchange, bool _
     {
       v5 = 607;
     }
-    if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 620, "g_pEvnEngine != 0") == 1 )
+    if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\GroupMgr.cpp", 620, "g_pEvnEngine != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( g_pEvnEngine )
+    if ( g_pEvnEngine != 0 )
     {
       v3 = CEvn_Event::CEvn_Event(&v12, v5, 0, (unsigned int)pMagicSpellSideBarInfo, 0);
       v13 = 0;

@@ -10,7 +10,7 @@
   CDynList *C; // [esp+10h] [ebp-10h]
 
   C = (CDynList *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     v3 = CDynList::CDynList(C);
   }
@@ -30,7 +30,7 @@
   CDynList **result; // eax
 
   result = this;
-  if ( *this )
+  if ( *this != 0 )
   {
     return (CDynList **)delete *this;
   }
@@ -55,14 +55,14 @@ class CCondition *  CConditionSet::elementAt(int a2) {
 
 
 // address=[0x2f3ef40]
-// Decompiled from void __thiscall CConditionSet::NewMayProblem(CConditionSet *this, int a2, struct CParam *a3)
+// Decompiled from void __thiscall CConditionSet::NewMayProblem(CDynList **this, int a2, struct CParam *a3)
 void  CConditionSet::NewMayProblem(int a2, class CParam * a3) {
   
   COptimizeOptions *v4; // [esp+10h] [ebp-14h]
   COptimizeOptions *C; // [esp+14h] [ebp-10h]
 
   C = (COptimizeOptions *)operator new(0x18u);
-  if ( C )
+  if ( C != 0 )
   {
     v4 = COptimizeOptions::COptimizeOptions(C);
   }
@@ -76,7 +76,7 @@ void  CConditionSet::NewMayProblem(int a2, class CParam * a3) {
 
 
 // address=[0x2f3efe0]
-// Decompiled from void __thiscall CConditionSet::NewMayProblem_0(CConditionSet *this, int a2, struct CParam *a3, struct COptimizeOptions *a4)
+// Decompiled from void __thiscall CConditionSet::NewMayProblem_0(CDynList **this, int a2, struct CParam *a3, struct COptimizeOptions *a4)
 void  CConditionSet::NewMayProblem(int a2, class CParam * a3, class COptimizeOptions * a4) {
   
   *((_DWORD *)a4 + 4) = 0;
@@ -85,14 +85,14 @@ void  CConditionSet::NewMayProblem(int a2, class CParam * a3, class COptimizeOpt
 
 
 // address=[0x2f3f010]
-// Decompiled from void __thiscall CConditionSet::NewProblem(CConditionSet *this, int a2, struct CParam *a3)
+// Decompiled from void __thiscall CConditionSet::NewProblem(CDynList **this, int a2, struct CParam *a3)
 void  CConditionSet::NewProblem(int a2, class CParam * a3) {
   
   struct COptimizeOptions *v4; // [esp+10h] [ebp-14h]
   COptimizeOptions *C; // [esp+14h] [ebp-10h]
 
   C = (COptimizeOptions *)operator new(0x18u);
-  if ( C )
+  if ( C != 0 )
   {
     v4 = COptimizeOptions::COptimizeOptions(C);
   }
@@ -117,7 +117,7 @@ void  CConditionSet::NewProblem(int a2, class CParam * a3, class COptimizeOption
   if ( CDynList::size(*this) <= 0 )
   {
     v6 = (CCondition *)operator new(0x18u);
-    if ( v6 )
+    if ( v6 != 0 )
     {
       v5 = CCondition::CCondition(v6, a2, a3, a4);
     }
@@ -136,7 +136,7 @@ void  CConditionSet::NewProblem(int a2, class CParam * a3, class COptimizeOption
       ;
     }
     C = (CCondition *)operator new(0x18u);
-    if ( C )
+    if ( C != 0 )
     {
       v7 = CCondition::CCondition(C, a2, a3, a4);
     }

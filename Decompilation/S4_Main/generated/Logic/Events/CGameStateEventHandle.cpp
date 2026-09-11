@@ -94,13 +94,13 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
       Point.x = 0;
       Point.y = 0;
       ClientToScreen((HWND)v43[1].__vftable, &Point);
-      if ( g_pGfxEngine )
+      if ( g_pGfxEngine != 0 )
       {
         IGfxEngine::SetWindowPosition(g_pGfxEngine, Point.x, Point.y);
       }
       goto CGameStateEventHandle__OnEvent___def_188A00A;
     case GENERIC_EVENT_REBUILD_GFX:
-      if ( g_pGfxEngine )
+      if ( g_pGfxEngine != 0 )
       {
         CGameStateHandler::RebuildGfxEngine(0);
       }
@@ -126,7 +126,7 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
           if ( (v43->m_lParam & 8) != 0 )       // CTRL held down
           {
             v37 = DialogBoxParamA(g_hInstance, (LPCSTR)0x79, g_hWnd, DlgProc, 0);
-            if ( v37 )
+            if ( v37 != 0 )
             {
               if ( v37 == 2 )
               {
@@ -253,54 +253,52 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
       }
       break;
     case GENERIC_EVENT_FOCUS:
-      if ( v43->m_wParam )                      // Gained Focus
+      if ( v43->m_wParam != 0 )
       {
         CGameStateHandler::m_bAppActive = 1;
-        if ( g_pGfxEngine && g_pGUIEngine )
+        if ( g_pGfxEngine != 0 && g_pGUIEngine != 0 )
         {
           IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
         }
       }
-      else                                      // Lost it...
+      else
       {
         CGameStateHandler::m_bAppActive = 0;
       }
-      if ( g_pSoundManager )
+      if ( g_pSoundManager != 0 )
       {
         v41 = CGameStateHandler::m_bAppActive == 0;
         CSoundManager::Mute(g_pSoundManager, CGameStateHandler::m_bAppActive == 0);
       }
       goto CGameStateEventHandle__OnEvent___def_188A00A;
     case GENERIC_EVENT_START_TICK:
-      if ( !g_pGame && BBSupportDbgReportF(2, "Main\\GameStateEventHandle.cpp", 262, "Start tick receive when there's no game !!!!") == 1 )
+      if ( g_pGame == 0 && BBSupportDbgReportF(2, "Main\\GameStateEventHandle.cpp", 262, "Start tick receive when there's no game !!!!") == 1 )
       {
         __debugbreak();
       }
-      if ( !g_pGame )
+      if ( g_pGame != 0 )
       {
-        return 1;
-      }
-      CStateGame::ReadyToGo(g_pGame);
-      if ( !CGameSettings::GetWebHelpMode() )
-      {
-        return 1;
-      }
-      v25 = std::string::string(&v46, "???");
-      v28 = v25;
-      v54 = 10;
-      v26 = std::string::string(&v45, "???");
-      v27 = v26;
-      LOBYTE(v54) = 11;
-      v29 = g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v49, "COMMANDLINE", "netgame", v26);
-      v40 = std::operator!=<char>(v29, v28);
-      std::string::~string(v49);
-      LOBYTE(v54) = 10;
-      std::string::~string(&v45);
-      v54 = -1;
-      std::string::~string(&v46);
-      if ( v40 )
-      {
-        CGameSettings::SetWebHelpMode(0);
+        CStateGame::ReadyToGo(g_pGame);
+        if ( CGameSettings::GetWebHelpMode() != 0 )
+        {
+          v25 = std::string::string(&v46, "???");
+          v28 = v25;
+          v54 = 10;
+          v26 = std::string::string(&v45, "???");
+          v27 = v26;
+          LOBYTE(v54) = 11;
+          v29 = g_pCfgMgr->GetStringValue(g_pCfgMgr, (std::string *)v49, "COMMANDLINE", "netgame", v26);
+          v40 = std::operator!=<char>(v29, (int)v28);
+          std::string::~string(v49);
+          LOBYTE(v54) = 10;
+          std::string::~string(&v45);
+          v54 = -1;
+          std::string::~string(&v46);
+          if ( v40 != 0 )
+          {
+            CGameSettings::SetWebHelpMode(0);
+          }
+        }
       }
       return 1;
     case GENERIC_EVENT_REQUEST_QUIT:
@@ -308,7 +306,7 @@ bool  CGameStateEventHandle::OnEvent(class CEvn_Event & a2) {
       return 1;
     default:
 CGameStateEventHandle__OnEvent___def_188A00A:
-      if ( CGameStateHandler::m_s_pCurrentState )
+      if ( CGameStateHandler::m_s_pCurrentState != 0 )
       {
         result = CGameStateHandler::m_s_pCurrentState->OnEvent(CGameStateHandler::m_s_pCurrentState, a2);
       }
@@ -320,6 +318,10 @@ CGameStateEventHandle__OnEvent___def_188A00A:
   }
   return result;
 }
+/* Orphan comments:
+Lost it...
+Gained Focus
+*/
 
 
 #endif // Already implemented

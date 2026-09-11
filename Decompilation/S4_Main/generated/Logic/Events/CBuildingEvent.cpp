@@ -16,14 +16,7 @@
   *(_DWORD *)(this + 68) = a6;
   *(_DWORD *)(this + 72) = a3;
   *(_DWORD *)(this + 56) = 4;
-  if ( a7 )
-  {
-    *(_BYTE *)(this + 84) = 1;
-  }
-  else
-  {
-    *(_BYTE *)(this + 84) = 0;
-  }
+  *(_BYTE *)(this + 84) = a7 != 0;
   *(_DWORD *)(this + 48) = a7;
   *(_DWORD *)(this + 52) = a8;
   *(_BYTE *)(this + 85) = 0;
@@ -60,20 +53,20 @@ bool  CBuildingEvent::IsShooting(void) {
   int v13; // [esp+3Ch] [ebp-4h]
 
   v12 = this;
-  SpecialTask = (CSchedule **)CSchedule::GetSpecialTask(this[10], 3);
+  SpecialTask = (CSchedule **)CSchedule::GetSpecialTask((CDynList **)*(this + 10), 3);
   ProductivityControll = 0;
   if ( v12[13] != (CSchedule *)1 )
   {
-    EcoSector = CSchedule::GetEcoSector(v12[10]);
-    if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, CSchedule *))(*(_DWORD *)EcoSector + 304))(EcoSector, v12[12]) )
+    EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(v12[10]);
+    if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, CSchedule *))(*(_DWORD *)EcoSector + 304))(EcoSector, v12[12]) == 0 )
     {
       v12[5] = (CSchedule *)3;
       return 0;
     }
     if ( v12[14] == (CSchedule *)5 || v12[14] == (CSchedule *)4 )
     {
-      v5 = CSchedule::GetEcoSector(v12[10]);
-      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, CSchedule *))(*(_DWORD *)v5 + 80))(v5, v12[12]) )
+      v5 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v12[10]);
+      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, CSchedule *))(*(_DWORD *)v5 + 80))(v5, v12[12]) != 0 )
       {
         v12[14] = (CSchedule *)4;
       }
@@ -83,7 +76,7 @@ bool  CBuildingEvent::IsShooting(void) {
       }
     }
   }
-  if ( !*((_BYTE *)v12 + 84) )
+  if ( *((_BYTE *)v12 + 84) == 0 )
   {
     v12[12] = v12[3];
     v12[13] = (CSchedule *)1;
@@ -92,7 +85,7 @@ bool  CBuildingEvent::IsShooting(void) {
     {
       C = operator new(0x70u);
       v13 = 0;
-      if ( C )
+      if ( C != 0 )
       {
         v3 = (struct IScheduleEntry *)CProductivityControll::CProductivityControll(C, v12[12], 1, v12[11], v12[17], 0);
       }
@@ -101,7 +94,7 @@ bool  CBuildingEvent::IsShooting(void) {
         v3 = 0;
       }
       v13 = -1;
-      CSchedule::NewSchedEntry(v12[10], v3);
+      CSchedule::NewSchedEntry((CDynList **)v12[10], v3);
     }
     *((_BYTE *)v12 + 84) = 1;
   }
@@ -109,13 +102,13 @@ bool  CBuildingEvent::IsShooting(void) {
   switch ( v9 )
   {
     case 0:
-      CReserveDatabase::UnpackPosition(*(CReserveDatabase **)v12[10], v12[17], &v7, &v8);
+      CReserveDatabase::UnpackPosition(*(CReserveDatabase **)v12[10], (int)v12[17], &v7, &v8);
       CBuildingManagerTask::RemoveBuildingAtPlanning(SpecialTask, v12[11]);
-      v2 = CSchedule::GetEcoSector(v12[10]);
-      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, CSchedule *, int, int))(*(_DWORD *)v2 + 36))(v2, v12[11], v7, v8) )
+      v2 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v12[10]);
+      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, CSchedule *, int, int))(*(_DWORD *)v2 + 36))(v2, v12[11], v7, v8) != 0 )
       {
         v12[20] = (CSchedule *)10;
-        if ( !CBuildingManagerTask::GetBuildingPermission(SpecialTask, (struct CBuildingEvent *)v12) )
+        if ( CBuildingManagerTask::GetBuildingPermission(SpecialTask, (struct CBuildingEvent *)v12) == 0 )
         {
           goto CBuildingEvent__IsShooting___def_3351498;
         }
@@ -127,7 +120,7 @@ bool  CBuildingEvent::IsShooting(void) {
         BBSupportTracePrintF(3, "AI BuildingEvent::PlayerNr %i can`t build a %s on position %i,%i", *((_DWORD *)v12[10] + 5), (&off_3ABF5D4)[2 * (_DWORD)v12[11]], v7, v8);
         CBuildingManagerTask::SetRejectedBuilding(SpecialTask, (int)v12[11]);
         ProductivityControll = CSchedule::GetProductivityControll((CDynList **)v12[10], (int)v12[12], (int)v12[13]);
-        if ( ProductivityControll )
+        if ( ProductivityControll != 0 )
         {
           *((_DWORD *)ProductivityControll + 5) = 3;
         }
@@ -135,9 +128,9 @@ bool  CBuildingEvent::IsShooting(void) {
       }
       break;
     case 1:
-      CReserveDatabase::UnpackPosition(*(CReserveDatabase **)v12[10], v12[17], &v7, &v8);
+      CReserveDatabase::UnpackPosition(*(CReserveDatabase **)v12[10], (int)v12[17], &v7, &v8);
       v12[20] = (CSchedule *)((char *)v12[20] - 1);
-      if ( v12[20] )
+      if ( v12[20] != 0 )
       {
         goto CBuildingEvent__IsShooting___def_3351498;
       }
@@ -145,7 +138,7 @@ bool  CBuildingEvent::IsShooting(void) {
       BBSupportTracePrintF(3, "AI BuildingEvent::PlayerNr %i can`t build a %s on position %i,%i", *((_DWORD *)v12[10] + 5), (&off_3ABF5D4)[2 * (_DWORD)v12[11]], v7, v8);
       CBuildingManagerTask::SetRejectedBuilding(SpecialTask, (int)v12[11]);
       ProductivityControll = CSchedule::GetProductivityControll((CDynList **)v12[10], (int)v12[12], (int)v12[13]);
-      if ( ProductivityControll )
+      if ( ProductivityControll != 0 )
       {
         *((_DWORD *)ProductivityControll + 5) = 3;
       }
@@ -155,14 +148,14 @@ bool  CBuildingEvent::IsShooting(void) {
       result = 1;
       break;
     case 3:
-      if ( CBuildingManagerTask::GetBuildingPermission(SpecialTask, (struct CBuildingEvent *)v12) )
+      if ( CBuildingManagerTask::GetBuildingPermission(SpecialTask, (struct CBuildingEvent *)v12) != 0 )
       {
         goto CBuildingEvent__IsShooting___def_3351498;
       }
       result = 1;
       break;
     case 4:
-      if ( !CBuildingManagerTask::GetBuildingPermission(SpecialTask, (struct CBuildingEvent *)v12) )
+      if ( CBuildingManagerTask::GetBuildingPermission(SpecialTask, (struct CBuildingEvent *)v12) == 0 )
       {
         goto CBuildingEvent__IsShooting___def_3351498;
       }
@@ -203,7 +196,7 @@ bool  CBuildingEvent::action(void) {
   {
     case 1:
       CReserveDatabase::UnpackPosition(**((CReserveDatabase ***)v9 + 10), *((_DWORD *)v9 + 17), &v5, &v6);
-      EcoSector = CSchedule::GetEcoSector(*((CSchedule **)v9 + 10));
+      EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v9 + 10));
       (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int, int))(*(_DWORD *)EcoSector + 100))(EcoSector, *((_DWORD *)v9 + 11), v5, v6);
       *((_DWORD *)v9 + 14) = 2;
       BBSupportTracePrintF(3, "AI_BuildingEvent::PlayerNr %i construct %s on position, %i, %i", *(_DWORD *)(*((_DWORD *)v9 + 10) + 20), (&off_3ABF5D4)[2 * *((_DWORD *)v9 + 11)], v5, v6);
@@ -213,12 +206,12 @@ bool  CBuildingEvent::action(void) {
       *((_DWORD *)v9 + 14) = 4;
       break;
     case 4:
-      v4 = CSchedule::GetEcoSector(*((CSchedule **)v9 + 10));
+      v4 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v9 + 10));
       (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v4 + 276))(v4, *((_DWORD *)v9 + 12));
       *((_DWORD *)v9 + 14) = 5;
       break;
     case 5:
-      v2 = CSchedule::GetEcoSector(*((CSchedule **)v9 + 10));
+      v2 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v9 + 10));
       (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v2 + 276))(v2, *((_DWORD *)v9 + 12));
       *((_DWORD *)v9 + 14) = 4;
       break;
@@ -245,8 +238,8 @@ bool  CBuildingEvent::IsAlive(void) {
   {
     return 1;
   }
-  EcoSector = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
-  if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 304))(EcoSector, *((_DWORD *)this + 12)) )
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)this + 10));
+  if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 304))(EcoSector, *((_DWORD *)this + 12)) != 0 )
   {
     return 1;
   }
@@ -265,8 +258,8 @@ bool  CBuildingEvent::WaitFor(void) {
   CReserveDatabase ***v5; // [esp+Ch] [ebp-4h]
 
   v5 = this;
-  CReserveDatabase::UnpackPosition(*this[10], this[17], &v2, &v3);
-  EcoSector = CSchedule::GetEcoSector((CSchedule *)v5[10]);
+  CReserveDatabase::UnpackPosition(**(this + 10), (int)*(this + 17), &v2, &v3);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v5[10]);
   return (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, CReserveDatabase **, int, int))(*(_DWORD *)EcoSector + 36))(EcoSector, v5[11], v2, v3) != 0;
 }
 

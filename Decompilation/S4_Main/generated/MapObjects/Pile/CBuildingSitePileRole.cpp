@@ -10,7 +10,7 @@ class CPersistence * __cdecl CBuildingSitePileRole::New(std::istream & a1) {
   CBuildingSitePileRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CBuildingSitePileRole *)operator new(8u);
-  if ( C )
+  if ( C != 0 )
   {
     CBuildingSitePileRole::CBuildingSitePileRole(C, (int)a1);
   }
@@ -35,7 +35,7 @@ void  CBuildingSitePileRole::Increase(class CPile * _pPile, int _iAmount) {
   CBuilding *v4; // eax
   int v5; // [esp-4h] [ebp-8h]
 
-  if ( !_pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 141, "_pPile != 0") == 1 )
+  if ( _pPile == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 141, "_pPile != 0") == 1 )
   {
     __debugbreak();
   }
@@ -47,11 +47,11 @@ void  CBuildingSitePileRole::Increase(class CPile * _pPile, int _iAmount) {
   {
     __debugbreak();
   }
-  if ( CPile::GetOfferFlag(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 145, "!_pPile->GetOfferFlag()") == 1 )
+  if ( CPile::GetOfferFlag(_pPile) != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 145, "!_pPile->GetOfferFlag()") == 1 )
   {
     __debugbreak();
   }
-  if ( !CPile::GetBuildingId(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 146, "_pPile->GetBuildingId() != 0") == 1 )
+  if ( CPile::GetBuildingId(_pPile) == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 146, "_pPile->GetBuildingId() != 0") == 1 )
   {
     __debugbreak();
   }
@@ -66,7 +66,7 @@ void  CBuildingSitePileRole::Increase(class CPile * _pPile, int _iAmount) {
 // Decompiled from void __thiscall CBuildingSitePileRole::SubjectStopped(CBuildingSitePileRole *this, struct CPile *_pPile)
 void  CBuildingSitePileRole::SubjectStopped(class CPile * _pPile) {
   
-  if ( CPile::AmountLeaving(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 105, "_pPile->AmountLeaving() == 0") == 1 )
+  if ( CPile::AmountLeaving(_pPile) != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 105, "_pPile->AmountLeaving() == 0") == 1 )
   {
     __debugbreak();
   }
@@ -80,7 +80,7 @@ void  CBuildingSitePileRole::SubjectStopped(class CPile * _pPile) {
 // Decompiled from void __thiscall CBuildingSitePileRole::SubjectStarted(CBuildingSitePileRole *this, struct CPile *_pPile)
 void  CBuildingSitePileRole::SubjectStarted(class CPile * _pPile) {
   
-  if ( CPile::AmountComing(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 123, "_pPile->AmountComing() == 0") == 1 )
+  if ( CPile::AmountComing(_pPile) != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\BuildingSitePileRole.cpp", 123, "_pPile->AmountComing() == 0") == 1 )
   {
     __debugbreak();
   }
@@ -94,7 +94,7 @@ void  CBuildingSitePileRole::SubjectStarted(class CPile * _pPile) {
 // Decompiled from CBuildingSitePileRole *__thiscall CBuildingSitePileRole::CBuildingSitePileRole(CBuildingSitePileRole *this, int a2)
  CBuildingSitePileRole::CBuildingSitePileRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   int v6; // [esp+1Ch] [ebp-4h]
 
@@ -122,7 +122,7 @@ void  CBuildingSitePileRole::Store(std::ostream & a2) {
 
   IPileRole::Store(this, a2);
   v2 = 1;
-  operator^<unsigned int>(a2, &v2);
+  operator^<unsigned int>(a2, (unsigned int *)&v2);
 }
 
 

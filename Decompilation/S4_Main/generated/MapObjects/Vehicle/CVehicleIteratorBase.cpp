@@ -38,15 +38,14 @@ bool  CVehicleIteratorBase::VehicleValid(int a2) {
   struct IEntity *v2; // eax
   bool v4; // [esp+4h] [ebp-4h]
 
-  v4 = 1;
-  if ( !a2 )
+  v4 = true;
+  if ( a2 != 0 )
   {
-    return v4;
-  }
-  v2 = CMapObjectMgr::Entity(a2);
-  if ( ((unsigned int)&loc_3000000 & IEntity::Flags(v2)) == 0 )
-  {
-    return 0;
+    v2 = CMapObjectMgr::Entity(a2);
+    if ( ((unsigned int)&loc_3000000 & IEntity::Flags(v2)) == 0 )
+    {
+      return false;
+    }
   }
   return v4;
 }

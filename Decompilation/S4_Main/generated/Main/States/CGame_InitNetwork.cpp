@@ -3,13 +3,13 @@
 // Definitions for class CGame_InitNetwork
 
 // address=[0x15c7f60]
-// Decompiled from CGame_InitNetwork *__cdecl CGame_InitNetwork::DynamicCreateFunc(void *a1)
+// Decompiled from CGame_InitNetwork *__cdecl CGame_InitNetwork::DynamicCreateFunc(wchar_t *a1)
 class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
   
   CGame_InitNetwork *C; // [esp+Ch] [ebp-10h]
 
   C = (CGame_InitNetwork *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CGame_InitNetwork::CGame_InitNetwork(C, a1);
   }
@@ -39,16 +39,16 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
   _BYTE v16[28]; // [esp+80h] [ebp-2Ch] BYREF
   int v17; // [esp+A8h] [ebp-4h]
 
-  CGameState::CGameState(this);
+  CGameState::CGameState((CGameState *)this);
   v17 = 0;
   *(_DWORD *)this = &CGame_InitNetwork::_vftable_;
-  if ( a2 )
+  if ( a2 != 0 )
   {
-    if ( !g_pGameType )
+    if ( g_pGameType == 0 )
     {
       C = (CGameType *)operator new(0x620u);
       LOBYTE(v17) = 1;
-      if ( C )
+      if ( C != 0 )
       {
         v10 = CGameType::CGameType(C);
       }
@@ -57,11 +57,11 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
         v10 = 0;
       }
       LOBYTE(v17) = 0;
-      g_pGameType = (std::wstring *)v10;
+      g_pGameType = v10;
     }
     v9 = (INetworkEngine *)operator new(0x18u);
     LOBYTE(v17) = 2;
-    if ( v9 )
+    if ( v9 != 0 )
     {
       v8 = INetworkEngine::INetworkEngine(v9, 1);
     }
@@ -70,7 +70,7 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
       v8 = 0;
     }
     LOBYTE(v17) = 0;
-    g_pNetworkEngine = (int)v8;
+    g_pNetworkEngine = v8;
     INetworkEngine::Start(1, 0, 0, a2);
   }
   else
@@ -86,11 +86,11 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
     std::string::~string(&v15);
     LOBYTE(v17) = 0;
     std::string::~string(&v14);
-    if ( v13 )
+    if ( v13 != 0 )
     {
       v7 = (INetworkEngine *)operator new(0x18u);
       LOBYTE(v17) = 5;
-      if ( v7 )
+      if ( v7 != 0 )
       {
         v6 = INetworkEngine::INetworkEngine(v7, (bool)a2);
       }
@@ -99,7 +99,7 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
         v6 = 0;
       }
       LOBYTE(v17) = 0;
-      g_pNetworkEngine = (int)v6;
+      g_pNetworkEngine = v6;
       INetworkEngine::Start(1, 0, 0, 0);
     }
   }
@@ -108,10 +108,10 @@ class CGameState * __cdecl CGame_InitNetwork::DynamicCreateFunc(void * a1) {
 
 
 // address=[0x15c8280]
-// Decompiled from void __thiscall CGame_InitNetwork::~CGame_InitNetwork(CGame_InitNetwork *this)
+// Decompiled from void __thiscall CGame_InitNetwork::~CGame_InitNetwork(CGameState *this)
  CGame_InitNetwork::~CGame_InitNetwork(void) {
   
-  *(_DWORD *)this = &CGame_InitNetwork::_vftable_;
+  this->__vftable = (CGameState_vtbl *)&CGame_InitNetwork::_vftable_;
   CGameState::~CGameState(this);
 }
 
@@ -123,11 +123,11 @@ bool  CGame_InitNetwork::Perform(void) {
   if ( ++dword_415B7C8 > 1000 )
   {
     dword_415B7C8 = 0;
-    IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
-    INetworkEngine::CheckForMsg((INetworkEngine *)g_pNetworkEngine);
+    INetworkEngine::CheckForMsg((CGameHost **)g_pNetworkEngine);
   }
   return 1;
 }
@@ -145,7 +145,7 @@ bool  CGame_InitNetwork::OnEvent(class CEvn_Event & a2) {
   {
     return 0;
   }
-  CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
+  CGameStateHandler::Switch(CStateGame::DynamicCreateFunc, 0);
   return 1;
 }
 

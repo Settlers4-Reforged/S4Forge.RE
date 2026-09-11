@@ -108,13 +108,13 @@ void  CTrace::TracePrintHeader(void) {
   _BYTE v21[16]; // [esp+30h] [ebp-14h] BYREF
 
   uTraces = s_uTraces;
-  v16 = std::setw(v21, 6LL);
+  v16 = std::setw(v21, 6);
   iId = this->m_iId;
-  v14 = std::setw(v20, 6LL);
+  v14 = std::setw(v20, 6);
   uThreadId = j____threadid();
-  v12 = std::setw(v19, 9LL);
+  v12 = std::setw(v19, 9);
   Time = timeGetTime();
-  v1 = std::setw(v18, 8LL);
+  v1 = std::setw(v18, 8);
   v2 = (struct std::ostream *)std::operator<<<char,std::char_traits<char>,__int64>((int)byte_40329E0, (int)v1);
   v3 = (char *)std::ostream::operator<<(v2, Time);
   v4 = std::ostream::operator<<(v3, (void (__cdecl *)(char *))std::hex);
@@ -126,7 +126,7 @@ void  CTrace::TracePrintHeader(void) {
   std::operator<<<char,std::char_traits<char>,__int64>(v8, (int)v16);
   v9 = std::ostream::operator<<(uTraces);
   std::operator<<<std::char_traits<char>>(v9, "  ");
-  if ( this->spType )
+  if ( this->spType != 0 )
   {
     return std::operator<<<std::char_traits<char>>((int)byte_40329E0, this->spType);
   }

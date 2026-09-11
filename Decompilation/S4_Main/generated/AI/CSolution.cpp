@@ -13,7 +13,7 @@
   *(_DWORD *)this = &CSolution::_vftable_;
   *((_DWORD *)this + 3) = a2;
   C = (CParam *)operator new(0x1Cu);
-  if ( C )
+  if ( C != 0 )
   {
     v4 = CParam::CParam(C, *((_DWORD *)a3 + 3), *((_DWORD *)a3 + 4), *((_DWORD *)a3 + 5), *((_DWORD *)a3 + 6));
   }
@@ -31,7 +31,7 @@
  CSolution::~CSolution(void) {
   
   *(_DWORD *)this = &CSolution::_vftable_;
-  if ( *((_DWORD *)this + 4) )
+  if ( *((_DWORD *)this + 4) != 0 )
   {
     (***((void (__thiscall ****)(_DWORD, int))this + 4))(*((_DWORD *)this + 4), 1);
   }

@@ -21,33 +21,27 @@ bool  CS4ErrorException::GetErrorMessage(char * a2, unsigned int a3) {
   const char *v4; // [esp+4h] [ebp-8h]
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  if ( !a2 )
+  if ( a2 != 0 && a3 != 0 )
   {
-    return 1;
+    *a2 = 0;
+    v4 = (const char *)g_pErrorMessages->GetErrorMessage(g_pErrorMessages, &this->m_cErrorId);
+    if ( v4 != 0 )
+    {
+      for ( i = 0;
+            i < a3 - 1 || v4[i] != 0;
+            ++i )
+      {
+        a2[i] = v4[i];
+      }
+      a2[i] = 0;
+    }
   }
-  if ( !a3 )
-  {
-    return 1;
-  }
-  *a2 = 0;
-  v4 = (const char *)g_pErrorMessages->GetErrorMessage(g_pErrorMessages, &this->m_cErrorId);
-  if ( !v4 )
-  {
-    return 1;
-  }
-  for ( i = 0;
-        i < a3 - 1 || v4[i];
-        ++i )
-  {
-    a2[i] = v4[i];
-  }
-  a2[i] = 0;
   return 1;
 }
 
 
 // address=[0x14813b0]
-// Decompiled from CBBException *__thiscall CS4ErrorException::~CS4ErrorException(CS4ErrorException *this)
+// Decompiled from CBBException *__thiscall CS4ErrorException::~CS4ErrorException(CBBException *this)
  CS4ErrorException::~CS4ErrorException(void) {
   
   return CBBException::~CBBException(this);

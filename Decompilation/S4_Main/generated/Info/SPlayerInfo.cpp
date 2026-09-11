@@ -6,7 +6,7 @@
 // Decompiled from SPlayerInfo *__thiscall SPlayerInfo::SPlayerInfo(SPlayerInfo *this)
  SPlayerInfo::SPlayerInfo(void) {
   
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   return this;
 }
 

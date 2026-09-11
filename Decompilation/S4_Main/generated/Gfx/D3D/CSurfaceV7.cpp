@@ -6,8 +6,8 @@
 // Decompiled from CSurfaceV7 *__thiscall CSurfaceV7::CSurfaceV7(CSurfaceV7 *this)
  CSurfaceV7::CSurfaceV7(void) {
   
-  CSurface::CSurface((CSurface *)this);
-  this->CSurface = (CSurfaceV7_vtbl *)&CSurfaceV7::_vftable_;
+  CSurface::CSurface(this);
+  this->__vftable = (CSurfaceV7_vtbl *)&CSurfaceV7::_vftable_;
   this->field_8 = 0;
   this->innerSurface = 0;
   this->field_C = 0;
@@ -22,7 +22,7 @@ void  CSurfaceV7::Release(void) {
   CSurfaceV7 *result; // eax
 
   result = this;
-  if ( this->innerSurface )
+  if ( this->innerSurface != 0 )
   {
     return (CSurfaceV7 *)this->innerSurface->lpVtbl->Release(this->innerSurface);
   }
@@ -54,7 +54,7 @@ long  CSurfaceV7::ClearSurface(class CBlitFX * a2) {
   DDBLTFX *v3; // eax
   HRESULT v6; // [esp+4h] [ebp-4h]
 
-  if ( a2 )
+  if ( a2 != 0 )
   {
     do
     {
@@ -73,7 +73,7 @@ long  CSurfaceV7::ClearSurface(class CBlitFX * a2) {
     {
       do
       {
-        v3 = (DDBLTFX *)CBlitFX::GetBlitStructPtr((CBlitFX *)&s_cBlitFx);
+        v3 = (DDBLTFX *)CBlitFX::GetBlitStructPtr(&s_cBlitFx);
         v6 = this->innerSurface->lpVtbl->Blt(this->innerSurface, 0, 0, 0, 1536, v3);
       }
       while ( v6 == -2005532132 );
@@ -92,7 +92,7 @@ long  CSurfaceV7::ClearSurface(struct tagRECT a2, class CBlitFX * a3) {
   DDBLTFX *v4; // eax
   HRESULT v7; // [esp+4h] [ebp-4h]
 
-  if ( a3 )
+  if ( a3 != 0 )
   {
     do
     {
@@ -111,7 +111,7 @@ long  CSurfaceV7::ClearSurface(struct tagRECT a2, class CBlitFX * a3) {
     {
       do
       {
-        v4 = (DDBLTFX *)CBlitFX::GetBlitStructPtr((CBlitFX *)&s_cBlitFx);
+        v4 = (DDBLTFX *)CBlitFX::GetBlitStructPtr(&s_cBlitFx);
         v7 = this->innerSurface->lpVtbl->Blt(this->innerSurface, &a2, 0, 0, 1536, v4);
       }
       while ( v7 == -2005532132 );
@@ -215,79 +215,79 @@ long  CSurfaceV7::ReleaseDC(struct HDC__ * a2) {
 // Decompiled from int __thiscall CSurfaceV7::CreateSurface(CSurfaceV7 *this, void *a2, int a3, int a4, bool a5, bool a6, bool a7, int a8, bool a9, bool a10, bool a11)
 long  CSurfaceV7::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, bool a7, int a8, bool a9, bool a10, bool a11) {
   
-  MEMORY[0x46C6714] = 1;
+  s_cSurfaceDescription.dwFlags = 1;
   if ( a9 )
   {
-    MEMORY[0x46C6778] = 512;
+    s_cSurfaceDescription.ddsCaps.dwCaps = 512;
     if ( a11 )
     {
-      MEMORY[0x46C6778] |= 0x18u;
-      MEMORY[0x46C6714] |= 0x20u;
-      MEMORY[0x46C6724] = 1;
+      s_cSurfaceDescription.ddsCaps.dwCaps |= 0x18u;
+      s_cSurfaceDescription.dwFlags |= 0x20u;
+      s_cSurfaceDescription.dwBackBufferCount = 1;
       if ( a6 )
       {
-        MEMORY[0x46C6778] |= 0x2000u;
+        s_cSurfaceDescription.ddsCaps.dwCaps |= 0x2000u;
       }
     }
   }
   else
   {
-    MEMORY[0x46C6714] |= 0x1000u;
-    MEMORY[0x46C6714] |= 4u;
-    MEMORY[0x46C6714] |= 2u;
-    MEMORY[0x46C671C] = a3;
-    MEMORY[0x46C6718] = a4;
-    MEMORY[0x46C675C] = 64;
-    MEMORY[0x46C6760] = 0;
-    MEMORY[0x46C6764] = 16;
+    s_cSurfaceDescription.dwFlags |= 0x1000u;
+    s_cSurfaceDescription.dwFlags |= 4u;
+    s_cSurfaceDescription.dwFlags |= 2u;
+    s_cSurfaceDescription.dwWidth = a3;
+    s_cSurfaceDescription.dwHeight = a4;
+    s_cSurfaceDescription.ddpfPixelFormat.dwFlags = 64;
+    s_cSurfaceDescription.ddpfPixelFormat.dwFourCC = 0;
+    s_cSurfaceDescription.ddpfPixelFormat.dwRGBBitCount = 16;
     if ( a8 == 1 )
     {
-      MEMORY[0x46C6768] = 31744;
-      MEMORY[0x46C676C] = 992;
+      s_cSurfaceDescription.ddpfPixelFormat.dwRBitMask = 31744;
+      s_cSurfaceDescription.ddpfPixelFormat.dwGBitMask = 992;
     }
     else
     {
-      MEMORY[0x46C6768] = 63488;
-      MEMORY[0x46C676C] = 2016;
+      s_cSurfaceDescription.ddpfPixelFormat.dwRBitMask = 63488;
+      s_cSurfaceDescription.ddpfPixelFormat.dwGBitMask = 2016;
     }
-    MEMORY[0x46C6770] = 31;
-    MEMORY[0x46C6774] = 0;
+    s_cSurfaceDescription.ddpfPixelFormat.dwBBitMask = 31;
+    s_cSurfaceDescription.ddpfPixelFormat.dwRGBAlphaBitMask = 0;
     if ( a7 )
     {
       if ( a8 == 2 )
       {
-        MEMORY[0x46C6768] = 3840;
-        MEMORY[0x46C676C] = 240;
-        MEMORY[0x46C6770] = 15;
-        MEMORY[0x46C6774] = 61440;
-        MEMORY[0x46C675C] |= 1u;
+        s_cSurfaceDescription.ddpfPixelFormat.dwRBitMask = 3840;
+        s_cSurfaceDescription.ddpfPixelFormat.dwGBitMask = 240;
+        s_cSurfaceDescription.ddpfPixelFormat.dwBBitMask = 15;
+        s_cSurfaceDescription.ddpfPixelFormat.dwRGBAlphaBitMask = 61440;
+        s_cSurfaceDescription.ddpfPixelFormat.dwFlags |= 1u;
       }
-      MEMORY[0x46C6778] = 4096;
+      s_cSurfaceDescription.ddsCaps.dwCaps = 4096;
     }
     else
     {
-      MEMORY[0x46C6778] = 64;
+      s_cSurfaceDescription.ddsCaps.dwCaps = 64;
     }
     if ( a5 )
     {
-      MEMORY[0x46C6778] |= 0x4000u;
+      s_cSurfaceDescription.ddsCaps.dwCaps |= 0x4000u;
     }
     else
     {
-      MEMORY[0x46C6778] |= 0x800u;
+      s_cSurfaceDescription.ddsCaps.dwCaps |= 0x800u;
     }
     if ( a6 && !a7 )
     {
-      MEMORY[0x46C6778] |= 0x2000u;
+      s_cSurfaceDescription.ddsCaps.dwCaps |= 0x2000u;
     }
     if ( a10 && a11 )
     {
-      MEMORY[0x46C6778] |= 0x4018u;
-      MEMORY[0x46C6714] |= 0x20u;
-      MEMORY[0x46C6724] = 1;
+      s_cSurfaceDescription.ddsCaps.dwCaps |= 0x4018u;
+      s_cSurfaceDescription.dwFlags |= 0x20u;
+      s_cSurfaceDescription.dwBackBufferCount = 1;
     }
   }
-  return (*(int (__stdcall **)(void *, void *, LPDIRECTDRAWSURFACE7 *, _DWORD))(*(_DWORD *)a2 + 24))(a2, &s_cSurfaceDescription, &this->innerSurface, 0);
+  return (*(int (__stdcall **)(void *, DDSURFACEDESC2 *, LPDIRECTDRAWSURFACE7 *, _DWORD))(*(_DWORD *)a2 + 24))(a2, &s_cSurfaceDescription, &this->innerSurface, 0);
 }
 
 
@@ -310,8 +310,8 @@ long  CSurfaceV7::GetPixelFormat(bool & a2) {
   v5[0] = 32;
   v3 = this->innerSurface->lpVtbl->GetPixelFormat(this->innerSurface, (LPDDPIXELFORMAT)v5);
   *a2 = 0;
-  CBlitFX::SetFillColor((CBlitFX *)&s_cBlitFx, 0, 0, 0, *a2);
-  CBlitFX::SetFillColorAlpha((CBlitFX *)&s_cBlitFxAlpha, 0, 0, 0, 0);
+  CBlitFX::SetFillColor(&s_cBlitFx, 0, 0, 0, *a2);
+  CBlitFX::SetFillColorAlpha(&s_cBlitFxAlpha, 0, 0, 0, 0);
   CBlitFX::SetFillColorAlpha((CBlitFX *)&s_cBlitFxAlphaDebug, 0, 255, 0, 255);
   return v3;
 }
@@ -379,13 +379,15 @@ void  CSurfaceV7::SetSurfacePtr(void * a2) {
 void *  CSurfaceV7::GetAttachedSurfacePtr(void) {
   
   int v2; // [esp+0h] [ebp-20h] BYREF
+  int; // [esp+4h] [ebp-1Ch]
   CSurfaceV7 *v4; // [esp+8h] [ebp-18h]
   _DWORD v5[4]; // [esp+Ch] [ebp-14h] BYREF
 
   v4 = this;
   v5[0] = 4;
   memset(&v5[1], 0, 12);
-  if ( ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, _DWORD *, int *))this->innerSurface->lpVtbl->GetAttachedSurface)(this->innerSurface, this->innerSurface, v5, &v2) )
+   = ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, _DWORD *, int *))this->innerSurface->lpVtbl->GetAttachedSurface)(this->innerSurface, this->innerSurface, v5, &v2);
+  if (  != 0 )
   {
     return 0;
   }
@@ -408,11 +410,11 @@ bool  CSurfaceV7::IsBackBufferReference(void) {
 // Decompiled from int __thiscall CSurfaceV7::SetAsRenderTarget(CSurfaceV7 *this, struct IDirect3DDevice7 *a2)
 long  CSurfaceV7::SetAsRenderTarget(struct IDirect3DDevice7 * a2) {
   
-  if ( !this->innerSurface )
+  if ( this->innerSurface == 0 )
   {
     j___wassert(L"m_pSurfaceV7 != nullptr", L"DirectXHelperClasses.cpp", 0x56Au);
   }
-  return (*(int (__stdcall **)(struct IDirect3DDevice7 *, LPDIRECTDRAWSURFACE7, _DWORD))(*(_DWORD *)a2 + 32))(a2, this->innerSurface, 0);
+  return a2->SetRenderTarget(a2, this->innerSurface, 0);
 }
 
 
@@ -420,7 +422,7 @@ long  CSurfaceV7::SetAsRenderTarget(struct IDirect3DDevice7 * a2) {
 // Decompiled from void __thiscall CSurfaceV7::~CSurfaceV7(CSurfaceV7 *this)
  CSurfaceV7::~CSurfaceV7(void) {
   
-  CSurface::~CSurface((CSurface *)this);
+  CSurface::~CSurface(this);
 }
 
 

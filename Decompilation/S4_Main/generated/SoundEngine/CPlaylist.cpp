@@ -49,12 +49,12 @@ void  CPlaylist::Init(int a2) {
 void  CPlaylist::AddTitle(std::string const * a2, int a3) {
   
   int result; // eax
-  int v4; // [esp+0h] [ebp-10h]
+  CPlaylist::SEntry *v4; // [esp+0h] [ebp-10h]
   CPlaylist::SEntry *v5; // [esp+4h] [ebp-Ch]
-  int v7; // [esp+Ch] [ebp-4h] BYREF
+  CPlaylist::SEntry *v7; // [esp+Ch] [ebp-4h] BYREF
 
   v5 = (CPlaylist::SEntry *)operator new(0x20u);
-  if ( v5 )
+  if ( v5 != 0 )
   {
     v4 = CPlaylist::SEntry::SEntry(v5);
   }
@@ -63,11 +63,11 @@ void  CPlaylist::AddTitle(std::string const * a2, int a3) {
     v4 = 0;
   }
   v7 = v4;
-  std::string::operator=(a2);
-  *(_DWORD *)(v4 + 28) = a3;
-  std::vector<CPlaylist::SEntry *>::push_back(&v7);
-  result = this[5] + 1;
-  this[5] = result;
+  ((void (__stdcall *)(int))std::string::operator=)(a2);
+  *((_DWORD *)v4 + 7) = a3;
+  std::vector<CPlaylist::SEntry *>::push_back((int)&v7);
+  result = *(this + 5) + 1;
+  *(this + 5) = result;
   return result;
 }
 
@@ -86,19 +86,17 @@ void  CPlaylist::TitleEnded(void) {
   {
     *((_DWORD *)this + 6) += j__rand() % (*((_DWORD *)this + 5) - 1) + 1;
   }
-  result = (CPlaylist *)*((_DWORD *)this + 6);
-  if ( (int)result < *((_DWORD *)this + 5) )
+  result = *((CPlaylist **)this + 6);
+  if ( (int)result >= *((_DWORD *)this + 5) )
   {
-    return result;
+    result = (CPlaylist *)(*((_DWORD *)this + 6) - *((_DWORD *)this + 5));
+    *((_DWORD *)this + 6) = result;
+    if ( *((_DWORD *)this + 8) != 0 )
+    {
+      result = this;
+      ++*((_DWORD *)this + 7);
+    }
   }
-  result = (CPlaylist *)(*((_DWORD *)this + 6) - *((_DWORD *)this + 5));
-  *((_DWORD *)this + 6) = result;
-  if ( !*((_DWORD *)this + 8) )
-  {
-    return result;
-  }
-  result = this;
-  ++*((_DWORD *)this + 7);
   return result;
 }
 
@@ -107,7 +105,7 @@ void  CPlaylist::TitleEnded(void) {
 // Decompiled from int __thiscall CPlaylist::GetStreamPos(_DWORD *this)
 int  CPlaylist::GetStreamPos(void) {
   
-  return AIL_stream_position(this[11]);
+  return AIL_stream_position(*(this + 11));
 }
 
 
@@ -115,7 +113,7 @@ int  CPlaylist::GetStreamPos(void) {
 // Decompiled from int __thiscall CPlaylist::SetStreamPos(_DWORD *this, int a2)
 void  CPlaylist::SetStreamPos(int a2) {
   
-  return AIL_set_stream_position(this[11], a2);
+  return AIL_set_stream_position(*(this + 11), a2);
 }
 
 
@@ -153,12 +151,12 @@ char const *  CPlaylist::GetTitle(int a2) {
   
   void **v2; // eax
 
-  if ( a2 >= this[5] )
+  if ( a2 >= *(this + 5) )
   {
     return 0;
   }
   v2 = (void **)std::vector<CPlaylist::SEntry *>::operator[](a2);
-  return std::string::c_str(*v2);
+  return (int)std::string::c_str((std::string *)*v2);
 }
 
 
@@ -168,12 +166,12 @@ char const *  CPlaylist::GetActiveTitle(void) {
   
   void **v1; // eax
 
-  if ( !*((_DWORD *)this + 5) )
+  if ( *((_DWORD *)this + 5) == 0 )
   {
     return 0;
   }
   v1 = (void **)std::vector<CPlaylist::SEntry *>::operator[](*((_DWORD *)this + 6));
-  return std::string::c_str(*v1);
+  return (int)std::string::c_str((std::string *)*v1);
 }
 
 
@@ -278,23 +276,23 @@ void  CPlaylist::FreeMemory(void) {
   int v17; // [esp+5Ch] [ebp-4h]
 
   v15 = this;
-  std::vector<CPlaylist::SEntry *>::begin(v5);
+  std::vector<CPlaylist::SEntry *>::begin((int)v5);
   v17 = 0;
   while ( 1 )
   {
-    v13 = (std::_Iterator_base12 *)std::vector<CPlaylist::SEntry *>::end(v4);
+    v13 = (std::_Iterator_base12 *)std::vector<CPlaylist::SEntry *>::end((int)v4);
     v12 = v13;
     LOBYTE(v17) = 1;
     v16 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>::operator!=(v13);
     LOBYTE(v17) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>(v4);
-    if ( !v16 )
+    if ( v16 == 0 )
     {
       break;
     }
     v11 = *(CPlaylist::SEntry **)std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>::operator*(v5);
     v14 = v11;
-    if ( v11 )
+    if ( v11 != 0 )
     {
       v10 = CPlaylist::delete v14;
     }
@@ -304,7 +302,7 @@ void  CPlaylist::FreeMemory(void) {
     }
     v7 = v2;
     v6 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>((struct std::_Iterator_base12 *)v5);
-    v9 = std::vector<CPlaylist::SEntry *>::erase(v3, v2[0], v2[1], v2[2]);
+    v9 = std::vector<CPlaylist::SEntry *>::erase((int)v3, v2[0], v2[1], v2[2]);
     v8 = v9;
     LOBYTE(v17) = 2;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CPlaylist::SEntry *>>>::operator=(v9);

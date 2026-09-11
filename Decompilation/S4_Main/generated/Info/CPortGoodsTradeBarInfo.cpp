@@ -6,7 +6,7 @@
 // Decompiled from CPortGoodsTradeBarInfo *__thiscall CPortGoodsTradeBarInfo::CPortGoodsTradeBarInfo(CPortGoodsTradeBarInfo *this)
  CPortGoodsTradeBarInfo::CPortGoodsTradeBarInfo(void) {
   
-  CInfoExchange::CInfoExchange(this);
+  CInfoExchange::CInfoExchange((CInfoExchange *)this);
   *(_DWORD *)this = &CPortGoodsTradeBarInfo::_vftable_;
   return this;
 }

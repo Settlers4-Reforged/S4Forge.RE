@@ -59,7 +59,7 @@ void  CDebugGridTest::Test(void) {
         i < 6;
         ++i )
   {
-    if ( SPoint::operator*(&g_sNeighborPoints[i].x, &g_sNeighborOrthos[i].x) && BBSupportDbgReport(2, "Pathing\\Grid.cpp", 1433, "g_sNeighborPoints[i] * g_sNeighborOrthos[i] == 0") == 1 )
+    if ( SPoint::operator*(&g_sNeighborPoints[i], &g_sNeighborOrthos[i]) != 0 && BBSupportDbgReport(2, "Pathing\\Grid.cpp", 1433, "g_sNeighborPoints[i] * g_sNeighborOrthos[i] == 0") == 1 )
     {
       __debugbreak();
     }
@@ -84,8 +84,8 @@ void  CDebugGridTest::Test(void) {
         j < 721;
         ++j )
   {
-    v1 = (char *)SSurroundingPoint8::Point((SSurroundingPoint8 *)&g_sSurroundingHexPoints8[4 * j]);
-    SPoint::operator=(&v25, v1);
+    v1 = (char *)SSurroundingPoint8::Point(&g_sSurroundingHexPoints8[j]);
+    SPoint::operator=(&v25, (SPoint8 *)v1);
     if ( j < 37 && !SPoint::operator==(&g_sSurroundingHexPoints[j], &v25) && BBSupportDbgReport(2, "Pathing\\Grid.cpp", 1461, "g_sSurroundingHexPoints[i] == sPoint") == 1 )
     {
       __debugbreak();
@@ -93,8 +93,8 @@ void  CDebugGridTest::Test(void) {
     iDX = SPoint::X(&v25);
     iDY = SPoint::Y(&v25);
     v23 = (Y16X16 *)Y16X16::PackXYFast(iDX + 15, iDY + 15);
-    iRadius = SSurroundingPoint8::Radius((SSurroundingPoint8 *)&g_sSurroundingHexPoints8[4 * j]);
-    if ( j )
+    iRadius = SSurroundingPoint8::Radius(&g_sSurroundingHexPoints8[j]);
+    if ( j != 0 )
     {
       if ( iRadius <= 0 && BBSupportDbgReport(2, "Pathing\\Grid.cpp", 1481, "iRadius > 0") == 1 )
       {
@@ -111,7 +111,7 @@ void  CDebugGridTest::Test(void) {
         __debugbreak();
       }
     }
-    else if ( iRadius && BBSupportDbgReport(2, "Pathing\\Grid.cpp", 1477, "iRadius == 0") == 1 )
+    else if ( iRadius != 0 && BBSupportDbgReport(2, "Pathing\\Grid.cpp", 1477, "iRadius == 0") == 1 )
     {
       __debugbreak();
     }
@@ -145,12 +145,12 @@ void  CDebugGridTest::Test(void) {
     {
       __debugbreak();
     }
-    v10 = Y16X16::DistanceFast(v24, v23);
+    v10 = Y16X16::DistanceFast((int)v24, (int)v23);
     if ( v10 != iRadius && BBSupportDbgReport(2, "Pathing\\Grid.cpp", 1499, "DistanceFast(iXY0, iXY1) == iRadius") == 1 )
     {
       __debugbreak();
     }
-    v11 = Y16X16::DistanceFast(v23, v24);
+    v11 = Y16X16::DistanceFast((int)v23, (int)v24);
     if ( v11 != iRadius && BBSupportDbgReport(2, "Pathing\\Grid.cpp", 1500, "DistanceFast(iXY1, iXY0) == iRadius") == 1 )
     {
       __debugbreak();
@@ -188,7 +188,7 @@ void  CDebugGridTest::Test(void) {
   {
     v40[k] = j__rand() - 0x3FFF;
   }
-  CPerformanceCounter::Start(v21);
+  CPerformanceCounter::Start((CPerformanceCounter *)v21);
   for ( m = 0;
         m < 20000;
         ++m )
@@ -211,9 +211,9 @@ void  CDebugGridTest::Test(void) {
     dword_41799E0 = Grid::Distance(v31, v32);
   }
   CPerformanceCounter::Measure(v21);
-  v17 = CPerformanceCounter::TimeMsStr((CPerformanceCounter *)v21, 0x300000000LL);
+  v17 = ((char *(__thiscall *)(CPerformanceCounter *, __int64))CPerformanceCounter::TimeMsStr)((CPerformanceCounter *)v21, 0x300000000LL);
   CTrace::Print("Distance test: %s ms", v17);
-  CPerformanceCounter::Start(v21);
+  CPerformanceCounter::Start((CPerformanceCounter *)v21);
   for ( n = 0;
         n < 20000;
         ++n )
@@ -236,7 +236,7 @@ void  CDebugGridTest::Test(void) {
     dword_41799E0 = Y16X16::Distance2(v29, v30);
   }
   CPerformanceCounter::Measure(v21);
-  v18 = CPerformanceCounter::TimeMsStr((CPerformanceCounter *)v21, 0x300000000LL);
+  v18 = ((char *(__thiscall *)(CPerformanceCounter *, __int64))CPerformanceCounter::TimeMsStr)((CPerformanceCounter *)v21, 0x300000000LL);
   return CTrace::Print("Distance2 test: %s ms", v18);
 }
 

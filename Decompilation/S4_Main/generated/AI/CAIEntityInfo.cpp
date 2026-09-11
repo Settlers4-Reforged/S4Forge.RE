@@ -86,24 +86,24 @@ unsigned int  CAIEntityInfo::TimeStamp(void)const {
 // Decompiled from void __thiscall CAIEntityInfo::~CAIEntityInfo(CAIEntityInfo *this)
  CAIEntityInfo::~CAIEntityInfo(void) {
   
-  if ( this->m_pTaskForce )
+  if ( this->m_pTaskForce != 0 )
   {
     this->m_pTaskForce->RemoveEntity(this->m_pTaskForce, this);
     this->m_pTaskForce = 0;
   }
-  if ( this->m_pTaskForce && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 66, "m_pTaskForce == 0") == 1 )
+  if ( this->m_pTaskForce != 0 && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 66, "m_pTaskForce == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_pPrevEntity && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 67, "m_pPrevEntity == 0") == 1 )
+  if ( this->m_pPrevEntity != 0 && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 67, "m_pPrevEntity == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_pNextEntity && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 68, "m_pNextEntity == 0") == 1 )
+  if ( this->m_pNextEntity != 0 && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 68, "m_pNextEntity == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_pInfoEx )
+  if ( this->m_pInfoEx != 0 )
   {
     this->m_pInfoEx->vftable->dtor(this->m_pInfoEx, 1);
     this->m_pInfoEx = 0;
@@ -117,7 +117,7 @@ class CAIEntityInfoEx *  CAIEntityInfo::ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CL
   
   CAIEntityInfoEx *m_pInfoEx; // [esp+8h] [ebp-8h]
 
-  if ( this->m_pInfoEx )
+  if ( this->m_pInfoEx != 0 )
   {
     if ( CAIEntityInfoEx::Class(this->m_pInfoEx) == a2 )
     {
@@ -128,18 +128,18 @@ class CAIEntityInfoEx *  CAIEntityInfo::ExtendedInfo(enum T_AI_ENTITY_INFO_EX_CL
       __debugbreak();
     }
     m_pInfoEx = this->m_pInfoEx;
-    if ( m_pInfoEx )
+    if ( m_pInfoEx != 0 )
     {
       m_pInfoEx->vftable->dtor(m_pInfoEx, 1);
     }
     this->m_pInfoEx = 0;
   }
-  if ( this->m_pInfoEx && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 101, "m_pInfoEx == 0") == 1 )
+  if ( this->m_pInfoEx != 0 && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 101, "m_pInfoEx == 0") == 1 )
   {
     __debugbreak();
   }
   this->m_pInfoEx = CAIEntityInfoEx::CreateExtendedInfo(a2);
-  if ( !this->m_pInfoEx && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 105, "m_pInfoEx != 0") == 1 )
+  if ( this->m_pInfoEx == 0 && BBSupportDbgReport(2, "AI\\AI_EntityInfo.cpp", 105, "m_pInfoEx != 0") == 1 )
   {
     __debugbreak();
   }

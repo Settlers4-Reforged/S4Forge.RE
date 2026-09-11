@@ -16,7 +16,7 @@ void  CInfoExchange::Clear(void) {
   }
   if ( uSize > 4 )
   {
-    memset(this->m_iUnknown, 0, uSize - 4);
+    memset(&this->m_iUnknown, 0, uSize - 4);
   }
 }
 

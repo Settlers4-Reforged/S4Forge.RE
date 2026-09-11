@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CDoorRole::New(int a1)
 class CPersistence * __cdecl CDoorRole::New(std::istream & a1) {
   
-  if ( operator new(0x2Cu) )
+  if ( operator new(0x2Cu) != 0 )
   {
-    return CDoorRole::CDoorRole(a1);
+    return ((_DWORD (__stdcall *)(int))CDoorRole::CDoorRole)(a1);
   }
   else
   {
@@ -29,35 +29,35 @@ void  CDoorRole::LogicUpdate(class CSettler * a2) {
 
   v4 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
-  SettlerInfo = CSettlerMgr::GetSettlerInfo(v2, v4);
+  SettlerInfo = (int)CSettlerMgr::GetSettlerInfo(v2, v4);
   result = a2->Amount();
-  if ( result >= *(unsigned __int8 *)(SettlerInfo + 2) )
+  if ( result < *(unsigned __int8 *)(SettlerInfo + 2) )
   {
-    return result;
+    v6 = IEntity::Hitpoints(a2);
+    if ( v6 < CStaticConfigVarInt::operator int(&g_iMaxTowerDoorHealth) )
+    {
+      IEntity::SetHitpoints(a2, v6 + 1);
+    }
+    return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(15);
   }
-  v6 = IEntity::Hitpoints(a2);
-  if ( v6 < CStaticConfigVarInt::operator int(&g_iMaxTowerDoorHealth) )
-  {
-    IEntity::SetHitpoints(a2, v6 + 1);
-  }
-  return IAnimatedEntity::RegisterForLogicUpdate(15);
+  return result;
 }
 
 
 // address=[0x156cef0]
-// Decompiled from int __stdcall CDoorRole::PostLoadInit(CPropertySet *a1)
+// Decompiled from int __stdcall CDoorRole::PostLoadInit(IEntity *a1)
 void  CDoorRole::PostLoadInit(class CSettler * a1) {
   
   int result; // eax
 
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Settler\\DoorRole.cpp", 114, "_pSettler!=NULL") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\DoorRole.cpp", 114, "_pSettler!=NULL") == 1 )
   {
     __debugbreak();
   }
   result = 0;
-  if ( a1 )
+  if ( a1 != 0 )
   {
-    return CWarMap::AddEntity(a1);
+    return ((int (__cdecl *)(CPropertySet *))CWarMap::AddEntity)((CPropertySet *)a1);
   }
   return result;
 }
@@ -71,18 +71,17 @@ bool  CDoorRole::SetFree(class CSettler * a2, int a3) {
   int v5; // [esp+0h] [ebp-10h]
   CBuilding *v6; // [esp+8h] [ebp-8h]
 
-  if ( !*((_WORD *)this + 16) )
+  if ( this->m_uHomeEntityId != 0 )
   {
-    return 0;
+    v6 = (CBuilding *)((CBuilding *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(this->m_uHomeEntityId);
+    v3 = (void **)CBuilding::Role(v6);
+    if ( j____RTDynamicCast(v3, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CMilitaryBuildingRole__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\DoorRole.cpp", 183, "dynamic_cast<CMilitaryBuildingRole*>(&rBuilding.Role()) != 0") == 1 )
+    {
+      __debugbreak();
+    }
+    v5 = IEntity::EntityId(a2);
+    CBuilding::InhabitantFlee(v6, v5);
   }
-  v6 = (CBuilding *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
-  v3 = (void **)CBuilding::Role(v6);
-  if ( !j____RTDynamicCast(v3, 0, &IBuildingRole__RTTI_Type_Descriptor_, &CMilitaryBuildingRole__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Settler\\DoorRole.cpp", 183, "dynamic_cast<CMilitaryBuildingRole*>(&rBuilding.Role()) != 0") == 1 )
-  {
-    __debugbreak();
-  }
-  v5 = IEntity::EntityId((unsigned __int16 *)a2);
-  CBuilding::InhabitantFlee(v6, v5);
   return 0;
 }
 
@@ -91,16 +90,15 @@ bool  CDoorRole::SetFree(class CSettler * a2, int a3) {
 // Decompiled from int __thiscall CDoorRole::Decrease(CDoorRole *this, int a2)
 int  CDoorRole::Decrease(int a2) {
   
-  _DWORD *v3; // [esp+4h] [ebp-4h]
+  CSettler *v3; // [esp+4h] [ebp-4h]
 
-  if ( a2 <= 0 )
+  if ( a2 > 0 )
   {
-    return a2;
-  }
-  v3 = (_DWORD *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  if ( !IEntity::FlagBits(v3, ENTITY_FLAG_Registered) )
-  {
-    IAnimatedEntity::RegisterForLogicUpdate(15);
+    v3 = CSettlerMgr::operator[](this->m_uAttachedSettlerId);
+    if ( IEntity::FlagBits(v3, ENTITY_FLAG_Registered) == 0 )
+    {
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(15);
+    }
   }
   return a2;
 }
@@ -110,13 +108,13 @@ int  CDoorRole::Decrease(int a2) {
 // Decompiled from char *__thiscall CDoorRole::CDoorRole(char *this, int a2)
  CDoorRole::CDoorRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   char *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  ISettlerRole::ISettlerRole(this, a2);
+  ISettlerRole::ISettlerRole((ISettlerRole *)this, (struct std::istream *)a2);
   v6 = 0;
   *(_DWORD *)v5 = &CDoorRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
@@ -139,9 +137,9 @@ void  CDoorRole::Store(std::ostream & a2) {
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
   v3[1] = (int)this;
-  ISettlerRole::Store(this, a2);
+  ISettlerRole::Store((ISettlerRole *)this, a2);
   v3[0] = 1;
-  return operator^<unsigned int>(a2, v3);
+  return operator^<unsigned int>(a2, (unsigned int *)v3);
 }
 
 
@@ -186,13 +184,13 @@ void  CDoorRole::LogicUpdateJob(class CSettler * a2) {
 
 
 // address=[0x1588580]
-// Decompiled from int __cdecl CDoorRole::Load(int a1)
+// Decompiled from int __cdecl CDoorRole::Load(struct std::istream *a1)
 class CDoorRole * __cdecl CDoorRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CDoorRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -201,25 +199,25 @@ class CDoorRole * __cdecl CDoorRole::Load(std::istream & a1) {
 // [Decompilation failed for static unsigned long CDoorRole::m_iClassID]
 
 // address=[0x156d110]
-// Decompiled from IEntity *__thiscall CDoorRole::Init(_WORD *this, CPropertySet *a2)
+// Decompiled from IEntity *__thiscall CDoorRole::Init(_WORD *this, IEntity *a2)
 void  CDoorRole::Init(class CSettler * a2) {
   
   IEntity *result; // eax
   char v3; // al
 
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Settler\\DoorRole.cpp", 97, "_pSettler!= NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\DoorRole.cpp", 97, "_pSettler!= NULL") == 1 )
   {
     __debugbreak();
   }
   result = 0;
-  if ( !a2 )
+  if ( a2 != 0 )
   {
-    return result;
+    *(this + 9) = IEntity::EntityId(a2);
+    CWarMap::AddEntity(a2);
+    v3 = CStaticConfigVarInt::operator int(&g_iMaxTowerDoorHealth);
+    return ((IEntity *(__thiscall *)(IEntity *, char))IEntity::SetHitpoints)(a2, v3);
   }
-  this[9] = IEntity::EntityId((unsigned __int16 *)a2);
-  CWarMap::AddEntity(a2);
-  v3 = CStaticConfigVarInt::operator int(&g_iMaxTowerDoorHealth);
-  return IEntity::SetHitpoints((IEntity *)a2, v3);
+  return result;
 }
 
 
@@ -227,7 +225,7 @@ void  CDoorRole::Init(class CSettler * a2) {
 // Decompiled from ISettlerRole *__thiscall CDoorRole::~CDoorRole(CDoorRole *this)
  CDoorRole::~CDoorRole(void) {
   
-  *(_DWORD *)this = &CDoorRole::_vftable_;
+  this->__vftable = (ISettlerRole_vtbl *)&CDoorRole::_vftable_;
   return ISettlerRole::~ISettlerRole(this);
 }
 

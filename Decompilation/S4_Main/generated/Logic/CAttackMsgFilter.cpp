@@ -6,7 +6,7 @@
 // Decompiled from bool __thiscall CAttackMsgFilter::IsInRadius(Grid **this, int a2, int a3)
 bool  CAttackMsgFilter::IsInRadius(int a2, int a3) {
   
-  return Grid::Distance(this[1], this[2], a2, a3) <= 25;
+  return Grid::Distance((int)*(this + 1), (int)*(this + 2), a2, a3) <= 25;
 }
 
 

@@ -11,7 +11,7 @@
 
   *(_DWORD *)this = &CFilter::_vftable_;
   C = (CDynList *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     v3 = CDynList::CDynList(C);
   }
@@ -34,8 +34,8 @@
   void *result; // eax
 
   *(_DWORD *)this = &CFilter::_vftable_;
-  result = (void *)*((_DWORD *)this + 1);
-  if ( result )
+  result = *((void **)this + 1);
+  if ( result != 0 )
   {
     return delete *((CDynList **)this + 1);
   }
@@ -56,35 +56,35 @@ bool  CFilter::AddFilterEntry(class IFilterEntry * a2) {
 
   v6 = 1;
   v10 = 0;
-  Entry = CDynList::FirstEntry(this[1]);
-  v5 = CDynList::FirstEntry(this[1]);
+  Entry = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+  v5 = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
   (*(void (__thiscall **)(struct IFilterEntry *))(*(_DWORD *)a3 + 8))(a3);
   v4 = (int)a2;
-  if ( (int)a2 >= (int)this[4] )
+  if ( (int)a2 >= (int)*(this + 4) )
   {
-    while ( Entry )
+    while ( Entry != 0 )
     {
       v7 = (int)((double (__thiscall *)(struct CDynListEntry *))*(_DWORD *)(*(_DWORD *)Entry + 8))(Entry);
-      if ( v7 < v4 && !v10 )
+      if ( v7 < v4 && v10 == 0 )
       {
         *((_DWORD *)a3 + 1) = Entry;
-        if ( Entry == *(struct CDynListEntry **)this[1] )
+        if ( Entry == *(struct CDynListEntry **)*(this + 1) )
         {
-          *(_DWORD *)this[1] = a3;
+          *(_DWORD *)*(this + 1) = a3;
         }
         else
         {
           *((_DWORD *)v5 + 1) = a3;
         }
-        ++*((_DWORD *)this[1] + 1);
+        ++*((_DWORD *)*(this + 1) + 1);
         v10 = 1;
       }
       v5 = Entry;
-      Entry = (struct CDynListEntry *)*((_DWORD *)Entry + 1);
-      if ( v6 > (int)this[3] )
+      Entry = *((struct CDynListEntry **)Entry + 1);
+      if ( v6 > (int)*(this + 3) )
       {
-        this[4] = (CDynList *)v7;
-        if ( !v10 && a3 )
+        *(this + 4) = (CDynList *)v7;
+        if ( v10 == 0 && a3 != 0 )
         {
           (**(void (__thiscall ***)(struct IFilterEntry *, int))a3)(a3, 1);
         }
@@ -92,28 +92,28 @@ bool  CFilter::AddFilterEntry(class IFilterEntry * a2) {
       }
       ++v6;
     }
-    if ( !v10 )
+    if ( v10 == 0 )
     {
-      if ( *(_DWORD *)this[1] )
+      if ( *(_DWORD *)*(this + 1) != 0 )
       {
         *((_DWORD *)v5 + 1) = a3;
       }
       else
       {
-        *(_DWORD *)this[1] = a3;
+        *(_DWORD *)*(this + 1) = a3;
       }
-      ++*((_DWORD *)this[1] + 1);
+      ++*((_DWORD *)*(this + 1) + 1);
       v10 = 1;
     }
-    if ( *((_DWORD *)this[1] + 1) <= (int)this[3] )
+    if ( *((_DWORD *)*(this + 1) + 1) <= (int)*(this + 3) )
     {
-      this[2] = (CDynList *)*((_DWORD *)this[1] + 1);
+      *(this + 2) = *((CDynList **)*(this + 1) + 1);
     }
     return v10;
   }
   else
   {
-    if ( a3 )
+    if ( a3 != 0 )
     {
       (**(void (__thiscall ***)(struct IFilterEntry *, int))a3)(a3, 1);
     }
@@ -129,16 +129,16 @@ class IFilterEntry *  CFilter::GetFilterEntry(int a2) {
   int v3; // [esp+4h] [ebp-8h]
   struct CDynListEntry *Entry; // [esp+8h] [ebp-4h]
 
-  Entry = CDynList::FirstEntry(this[1]);
+  Entry = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
   v3 = 0;
-  while ( Entry )
+  while ( Entry != 0 )
   {
     if ( v3 == a2 )
     {
       return Entry;
     }
     ++v3;
-    Entry = (struct CDynListEntry *)*((_DWORD *)Entry + 1);
+    Entry = *((struct CDynListEntry **)Entry + 1);
   }
   return 0;
 }

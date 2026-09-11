@@ -9,7 +9,7 @@ bool  CGenericSettlerIterator::Init(int a2, int a3, int a4) {
   CSettlerIteratorBase::Init((CGenericSettlerIterator *)((char *)this + 20), 0);
   if ( CPlayerIterator::Init(this, a2) )
   {
-    if ( !a4 )
+    if ( a4 == 0 )
     {
       a4 = a3;
     }
@@ -33,13 +33,13 @@ int  CGenericSettlerIterator::FirstSettler(void) {
   int v2; // eax
   int v3; // [esp-4h] [ebp-8h]
 
-  if ( CPlayerIterator::FirstPlayer(this) )
+  if ( CPlayerIterator::FirstPlayer(this) != 0 )
   {
     *((_DWORD *)this + 5) = *((_DWORD *)this + 7);
     v3 = CSettlerIteratorBase::SettlerType((CGenericSettlerIterator *)((char *)this + 20));
     v2 = CPlayerIterator::PlayerId(this);
-    *((_DWORD *)this + 6) = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, v2, v3);
-    if ( *((_DWORD *)this + 6) )
+    *((_DWORD *)this + 6) = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, v2, v3);
+    if ( *((_DWORD *)this + 6) != 0 )
     {
       return *((_DWORD *)this + 6);
     }
@@ -61,21 +61,21 @@ int  CGenericSettlerIterator::FirstSettler(void) {
 // Decompiled from int __thiscall CGenericSettlerIterator::NextSettler(CGenericSettlerIterator *this)
 int  CGenericSettlerIterator::NextSettler(void) {
   
-  int v1; // eax
+  CSettler *v1; // eax
   int v3; // eax
-  _DWORD *v4; // eax
+  CSettler *v4; // eax
   int v5; // [esp-4h] [ebp-8h]
 
   do
   {
     v1 = CSettlerMgr::operator[](*((_DWORD *)this + 6));
     for ( *((_DWORD *)this + 6) = IAnimatedEntity::Next(v1);
-          !*((_DWORD *)this + 6);
-          *((_DWORD *)this + 6) = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, v3, v5) )
+          *((_DWORD *)this + 6) == 0;
+          *((_DWORD *)this + 6) = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, v3, v5) )
     {
       if ( ++*((_DWORD *)this + 5) > *((_DWORD *)this + 8) )
       {
-        if ( !CPlayerIterator::NextPlayer(this) )
+        if ( CPlayerIterator::NextPlayer(this) == 0 )
         {
           return 0;
         }
@@ -84,20 +84,20 @@ int  CGenericSettlerIterator::NextSettler(void) {
       v5 = CSettlerIteratorBase::SettlerType((CGenericSettlerIterator *)((char *)this + 20));
       v3 = CPlayerIterator::PlayerId(this);
     }
-    v4 = (_DWORD *)CSettlerMgr::operator[](*((_DWORD *)this + 6));
+    v4 = CSettlerMgr::operator[](*((_DWORD *)this + 6));
   }
-  while ( ((unsigned int)&MEMORY[0x4000000] & IEntity::Flags(v4)) != 0 );
+  while ( ((unsigned int)&s_iMsgTracer2.m_aMessages[15456] & IEntity::Flags(v4)) != 0 );
   return *((_DWORD *)this + 6);
 }
 
 
 // address=[0x1315520]
-// Decompiled from int __thiscall CGenericSettlerIterator::NextSettlerIfCurrentIsNotValid(_DWORD *this)
+// Decompiled from int __thiscall CGenericSettlerIterator::NextSettlerIfCurrentIsNotValid(int *this)
 int  CGenericSettlerIterator::NextSettlerIfCurrentIsNotValid(void) {
   
-  if ( CSettlerIteratorBase::SettlerValid((CSettlerIteratorBase *)(this + 5), this[6]) )
+  if ( CSettlerIteratorBase::SettlerValid((CSettlerIteratorBase *)(this + 5), *(this + 6)) )
   {
-    return this[6];
+    return *(this + 6);
   }
   else
   {
@@ -110,7 +110,7 @@ int  CGenericSettlerIterator::NextSettlerIfCurrentIsNotValid(void) {
 // Decompiled from int __thiscall CGenericSettlerIterator::NextSettlerOrFirstIfCurrentIsEndOfList(CGenericSettlerIterator *this)
 int  CGenericSettlerIterator::NextSettlerOrFirstIfCurrentIsEndOfList(void) {
   
-  if ( *((_DWORD *)this + 6) )
+  if ( *((_DWORD *)this + 6) != 0 )
   {
     return CGenericSettlerIterator::NextSettler(this);
   }

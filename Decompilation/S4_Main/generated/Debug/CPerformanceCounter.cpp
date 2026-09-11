@@ -7,7 +7,7 @@
 // Decompiled from CPerformanceCounter *__thiscall CPerformanceCounter::CPerformanceCounter(CPerformanceCounter *this)
  CPerformanceCounter::CPerformanceCounter(void) {
   
-  if ( !s_bPerfFrequencyCalculated )
+  if ( s_bPerfFrequencyCalculated == 0 )
   {
     CalcPerfFrequency();
   }

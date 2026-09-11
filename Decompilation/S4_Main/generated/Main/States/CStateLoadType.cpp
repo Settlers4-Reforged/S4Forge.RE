@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateLoadType::DynamicCreateFunc(void * a1) {
   CStateLoadType *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateLoadType *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateLoadType::CStateLoadType(C, a1);
   }
@@ -24,20 +24,20 @@ class CGameState * __cdecl CStateLoadType::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateLoadType *__thiscall CStateLoadType::CStateLoadType(CStateLoadType *this, void *a2)
  CStateLoadType::CStateLoadType(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateLoadType::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  CGuiGameState::OpenDialog(this, 5, GuiDlgMainLoadTypeProc);
+  CGuiGameState::OpenDialog((CGuiGameState *)this, 5, (bool (__cdecl *)(int, int, int))GuiDlgMainLoadTypeProc);
   return this;
 }
 
 
 // address=[0x14b6570]
-// Decompiled from void __thiscall CStateLoadType::~CStateLoadType(CStateLoadType *this)
+// Decompiled from void __thiscall CStateLoadType::~CStateLoadType(CGuiGameState *this)
  CStateLoadType::~CStateLoadType(void) {
   
-  *(_DWORD *)this = &CStateLoadType::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 5) && BBSupportDbgReport(2, "main\\states\\StateLoadType.cpp", 57, "bRet") == 1 )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateLoadType::_vftable_;
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 5) && BBSupportDbgReport(2, "main\\states\\StateLoadType.cpp", 57, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -61,20 +61,19 @@ bool  CStateLoadType::Perform(void) {
     }
   }
   v1 = dword_40306CC + 30;
-  if ( v1 >= timeGetTime() )
+  if ( v1 < timeGetTime() )
   {
-    return 1;
+    dword_40306CC = timeGetTime();
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  dword_40306CC = timeGetTime();
-  IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-  IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   return 1;
 }
 
 
 // address=[0x14b6690]
-// Decompiled from char __thiscall CStateLoadType::OnEvent(CStateLoadType *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateLoadType::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateLoadType::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
@@ -97,23 +96,23 @@ bool  CStateLoadType::OnEvent(class CEvn_Event & a2) {
       result = 1;
       break;
     case 0x59:
-      CGameStateHandler::Switch((int)CStateLoadGame::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLoadGame::DynamicCreateFunc, 0);
       result = 1;
       break;
     case 0x5A:
-      CGameStateHandler::Switch((int)CStateLoadGame::DynamicCreateFunc, 1);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLoadGame::DynamicCreateFunc, (void *)1);
       result = 1;
       break;
     case 0x5B:
-      CGameStateHandler::Switch((int)CStateLoadGame::DynamicCreateFunc, 2);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLoadGame::DynamicCreateFunc, (void *)2);
       result = 1;
       break;
     case 0x5C:
-      CGameStateHandler::Switch((int)CStateLoadGame::DynamicCreateFunc, 3);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLoadGame::DynamicCreateFunc, (void *)3);
       result = 1;
       break;
     case 0x5D:
-      CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch(CStateMainMenu::DynamicCreateFunc, 0);
       result = 1;
       break;
     default:

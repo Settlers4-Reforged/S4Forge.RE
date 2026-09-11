@@ -18,7 +18,7 @@ class CGameState * __cdecl CGameState::DynamicCreateFunc(void * a1) {
   CGameState *v3; // [esp+Ch] [ebp-10h]
 
   v3 = (CGameState *)operator new(4u);
-  if ( v3 )
+  if ( v3 != 0 )
   {
     return CGameState::CGameState(v3, a1);
   }

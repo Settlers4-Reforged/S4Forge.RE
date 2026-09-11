@@ -7,12 +7,12 @@
 void  CVC_EventHandle::RegisterVC(class CVoiceChat * a2) {
   
   *((_DWORD *)this + 1) = a2;
-  return IEventEngine::RegisterHandle(g_pEvnEngine, this);
+  return IEventEngine::RegisterHandle(g_pEvnEngine, (struct IEvn_Handle *)this);
 }
 
 
 // address=[0x2fd4fe0]
-// Decompiled from bool __thiscall CVC_EventHandle::UnregisterVC(CVC_EventHandle *this)
+// Decompiled from bool __thiscall CVC_EventHandle::UnregisterVC(struct IEvn_Handle *this)
 void  CVC_EventHandle::UnregisterVC(void) {
   
   return IEventEngine::UnRegisterHandle(g_pEvnEngine, this);
@@ -23,7 +23,7 @@ void  CVC_EventHandle::UnregisterVC(void) {
 // Decompiled from char __thiscall CVC_EventHandle::OnEvent(CVoiceChat **this, struct CEvn_Event *a2)
 bool  CVC_EventHandle::OnEvent(class CEvn_Event & a2) {
   
-  return CVoiceChat::OnEvent(this[1], a2);
+  return CVoiceChat::OnEvent(*(this + 1), a2);
 }
 
 
@@ -31,7 +31,7 @@ bool  CVC_EventHandle::OnEvent(class CEvn_Event & a2) {
 // Decompiled from CVC_EventHandle *__thiscall CVC_EventHandle::CVC_EventHandle(CVC_EventHandle *this)
  CVC_EventHandle::CVC_EventHandle(void) {
   
-  IEvn_Handle::IEvn_Handle(this);
+  IEvn_Handle::IEvn_Handle((IEvn_Handle *)this);
   *(_DWORD *)this = &CVC_EventHandle::_vftable_;
   return this;
 }

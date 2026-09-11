@@ -29,7 +29,7 @@
 // Decompiled from FilePaths::PathSplitResult *__thiscall FilePaths::PathSplitResult::PathSplitResult(FilePaths::PathSplitResult *this)
  FilePaths::PathSplitResult::PathSplitResult(void) {
   
-  std::wstring::wstring(this);
+  std::wstring::wstring(&this->m_swpDrive);
   std::vector<std::wstring>::vector<std::wstring>(&this->m_vSplits);
   std::wstring::wstring(&this->m_swpDirectoryName);
   this->m_bSplit = 0;

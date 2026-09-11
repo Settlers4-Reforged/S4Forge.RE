@@ -88,14 +88,13 @@ void  CAIGoalCache::Insert(int a2, int a3) {
     }
   }
   result = this;
-  if ( *((_DWORD *)this + 1) <= 31 && *((_DWORD *)this + 1) >= 0 )
+  if ( *((_DWORD *)this + 1) > 31 || *((_DWORD *)this + 1) < 0 )
   {
-    return result;
-  }
-  result = (CAIGoalCache *)BBSupportDbgReport(2, "AI\\AI_Military.cpp", 159, "(m_iSize >= 0) & (m_iSize <= (AI_GOAL_CACHE_MAX - 1))");
-  if ( result == (CAIGoalCache *)1 )
-  {
-    __debugbreak();
+    result = (CAIGoalCache *)BBSupportDbgReport(2, "AI\\AI_Military.cpp", 159, "(m_iSize >= 0) & (m_iSize <= (AI_GOAL_CACHE_MAX - 1))");
+    if ( result == (CAIGoalCache *)1 )
+    {
+      __debugbreak();
+    }
   }
   return result;
 }
@@ -108,7 +107,7 @@ void  CAIGoalCache::Delete(int a2) {
   int v3; // [esp+4h] [ebp-4h]
 
   v3 = CAIGoalCache::Search(this, a2);
-  if ( v3 )
+  if ( v3 != 0 )
   {
     CAIGoalCache::DeleteIdx(this, v3);
   }
@@ -129,7 +128,7 @@ void  CAIGoalCache::DbgPrint(char const * const a2) {
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + 1) )
+  if ( *((_DWORD *)this + 1) != 0 )
   {
     if ( *((_DWORD *)this + 1) == 1 )
     {
@@ -210,11 +209,11 @@ void  CAIGoalCache::DeleteInvalidGoalsIfNecessary(void) {
 // Decompiled from int __thiscall CAIGoalCache::Load(CAIGoalCache *this, struct IS4Chunk *a2)
 void  CAIGoalCache::Load(class IS4Chunk & a2) {
   
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 1, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 32, 32);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 4))(a2, 12, 12);
-  *((_DWORD *)this + 1) = (*(int (__thiscall **)(struct IS4Chunk *, _DWORD, int))(*(_DWORD *)a2 + 4))(a2, 0, 32);
-  return (**(int (__thiscall ***)(struct IS4Chunk *, char *, int))a2)(a2, (char *)this + 8, 384);
+  ((void (__thiscall *)(struct IS4Chunk *, int, int))a2->LoadUnsigned32)(a2, 1, 1);
+  ((void (__thiscall *)(struct IS4Chunk *, int, int))a2->LoadUnsigned32)(a2, 32, 32);
+  ((void (__thiscall *)(struct IS4Chunk *, int, int))a2->LoadUnsigned32)(a2, 12, 12);
+  *((_DWORD *)this + 1) = ((int (__thiscall *)(struct IS4Chunk *, _DWORD, int))a2->LoadUnsigned32)(a2, 0, 32);
+  return ((int (__thiscall *)(struct IS4Chunk *, char *, int))a2->Load)(a2, (char *)this + 8, 384);
 }
 
 
@@ -222,11 +221,11 @@ void  CAIGoalCache::Load(class IS4Chunk & a2) {
 // Decompiled from int __thiscall CAIGoalCache::Save(CAIGoalCache *this, struct IS4Chunk *a2)
 void  CAIGoalCache::Save(class IS4Chunk & a2) {
   
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 32);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 12);
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 1));
-  return (*(int (__thiscall **)(struct IS4Chunk *, char *, int))(*(_DWORD *)a2 + 16))(a2, (char *)this + 8, 384);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, 1);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, 32);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, 12);
+  ((void (__thiscall *)(struct IS4Chunk *, _DWORD))a2->SaveUnsigned32)(a2, *((_DWORD *)this + 1));
+  return ((int (__thiscall *)(struct IS4Chunk *, char *, int))a2->Save)(a2, (char *)this + 8, 384);
 }
 
 
@@ -234,7 +233,7 @@ void  CAIGoalCache::Save(class IS4Chunk & a2) {
 // Decompiled from CAIGoalCache *__thiscall CAIGoalCache::CAIGoalCache(CAIGoalCache *this)
  CAIGoalCache::CAIGoalCache(void) {
   
-  IS4ChunkObject::IS4ChunkObject(this);
+  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this);
   *(_DWORD *)this = CAIGoalCache::_vftable_;
   CAIGoalCache::Init(this);
   return this;

@@ -48,9 +48,9 @@ void  AdvXMLParser::GenerateContext::operator=(class AdvXMLParser::GenerateConte
   _DWORD *result; // eax
 
   *this = *(_DWORD *)a2;
-  this[1] = *(_DWORD *)(a2 + 4);
-  std::string::operator=(*(_DWORD *)(a2 + 8));
-  this[3] = *(_DWORD *)(a2 + 12);
+  *(this + 1) = *(_DWORD *)(a2 + 4);
+  ((void (__stdcall *)(int))std::string::operator=)(*(_DWORD *)(a2 + 8));
+  *(this + 3) = *(_DWORD *)(a2 + 12);
   *((_BYTE *)this + 16) = *(_BYTE *)(a2 + 16);
   result = this;
   *((_BYTE *)this + 17) = *(_BYTE *)(a2 + 17);
@@ -66,13 +66,12 @@ void  AdvXMLParser::GenerateContext::GenerateStartTagIndentation(void) {
 
   ++*((_DWORD *)this + 3);
   result = this;
-  if ( (*(_DWORD *)this & 1) != 0 )
+  if ( (*(_DWORD *)this & 1) == 0 )
   {
-    return result;
+    ((void (__thiscall *)(AdvXMLParser::GenerateContext *))AdvXMLParser::GenerateContext::GenerateNewLine)(this);
+    AdvXMLParser::GenerateContext::GenerateIndentation(this);
+    *((_BYTE *)this + 16) = 0;
   }
-  AdvXMLParser::GenerateContext::GenerateNewLine(this);
-  AdvXMLParser::GenerateContext::GenerateIndentation(this);
-  *((_BYTE *)this + 16) = 0;
   return result;
 }
 
@@ -88,18 +87,17 @@ void  AdvXMLParser::GenerateContext::GenerateEndTagIndentation(void) {
     __debugbreak();
   }
   result = (AdvXMLParser::GenerateContext *)(*(_DWORD *)this & 1);
-  if ( result )
+  if ( result == 0 )
   {
-    return result;
+    if ( *((_BYTE *)this + 16) != 0 )
+    {
+      ((void (__thiscall *)(AdvXMLParser::GenerateContext *))AdvXMLParser::GenerateContext::GenerateNewLine)(this);
+      AdvXMLParser::GenerateContext::GenerateIndentation(this);
+    }
+    --*((_DWORD *)this + 3);
+    result = this;
+    *((_BYTE *)this + 16) = 1;
   }
-  if ( *((_BYTE *)this + 16) )
-  {
-    AdvXMLParser::GenerateContext::GenerateNewLine(this);
-    AdvXMLParser::GenerateContext::GenerateIndentation(this);
-  }
-  --*((_DWORD *)this + 3);
-  result = this;
-  *((_BYTE *)this + 16) = 1;
   return result;
 }
 
@@ -128,17 +126,15 @@ void  AdvXMLParser::GenerateContext::GenerateNewLine(void) {
   AdvXMLParser::GenerateContext *result; // eax
 
   result = this;
-  if ( (*(_DWORD *)this & 1) != 0 )
+  if ( (*(_DWORD *)this & 1) == 0 )
   {
-    return result;
+    result = (AdvXMLParser::GenerateContext *)*((unsigned __int8 *)this + 17);
+    if ( *((_BYTE *)this + 17) == 0 )
+    {
+      result = (AdvXMLParser::GenerateContext *)((AdvXMLParser::GenerateContext *(__stdcall *)(char))std::string::operator+=)(10);
+      *((_BYTE *)this + 17) = 1;
+    }
   }
-  result = (AdvXMLParser::GenerateContext *)*((unsigned __int8 *)this + 17);
-  if ( *((_BYTE *)this + 17) )
-  {
-    return result;
-  }
-  result = (AdvXMLParser::GenerateContext *)std::string::operator+=(10);
-  *((_BYTE *)this + 17) = 1;
   return result;
 }
 
@@ -147,7 +143,7 @@ void  AdvXMLParser::GenerateContext::GenerateNewLine(void) {
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::operator+=(_BYTE *this, int a2)
 void  AdvXMLParser::GenerateContext::operator+=(std::string const & a2) {
   
-  this[17] = 0;
+  *(this + 17) = 0;
   return std::string::operator+=(a2);
 }
 
@@ -156,8 +152,8 @@ void  AdvXMLParser::GenerateContext::operator+=(std::string const & a2) {
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::operator+=(_BYTE *this, char a2)
 void  AdvXMLParser::GenerateContext::operator+=(char a2) {
   
-  this[17] = 0;
-  return std::string::operator+=(a2);
+  *(this + 17) = 0;
+  return ((_DWORD (__stdcall *)(char))std::string::operator+=)(a2);
 }
 
 
@@ -165,7 +161,7 @@ void  AdvXMLParser::GenerateContext::operator+=(char a2) {
 // Decompiled from int __thiscall AdvXMLParser::GenerateContext::operator+=(_BYTE *this, char *Str)
 void  AdvXMLParser::GenerateContext::operator+=(char const * Str) {
   
-  this[17] = 0;
+  *(this + 17) = 0;
   return std::string::operator+=(Str);
 }
 

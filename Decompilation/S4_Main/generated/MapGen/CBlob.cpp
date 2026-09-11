@@ -18,7 +18,7 @@
   DWORD v10; // [esp+4h] [ebp-Ch]
   DWORD v11; // [esp+8h] [ebp-8h]
 
-  this->__vftable = (CBlob_vtbl *)&CBlob::_vftable_;
+  this->__vftable = (CBlob_vtbl *)CBlob::_vftable_;
   this->m_pCheckLayer = a9;
   CCheckLayer::clear(this->m_pCheckLayer);
   this->m_iU1 = a6;
@@ -224,6 +224,8 @@ void  CBlob::drawBlob(void) {
               --iCurrentX;
             }
             break;
+          default:
+            break;
         }
         if ( iCurrentX >= this->m_iWorldSize && BBSupportDbgReport(2, "Blob.cpp", 195, "iCurrentX < m_iWorldSize") == 1 )
         {
@@ -267,7 +269,7 @@ void  CBlob::fillBlob(int a2, int a3) {
   v3[0] = a2 + this->m_iWorldSize * a3;
   TStaticFIFO<int,512>::Push(v11, v3);
   this->processFillPoint(this, a2, a3);
-  while ( !(unsigned __int8)TStaticFIFO<int,512>::Empty(v11) )
+  while ( (unsigned __int8)TStaticFIFO<int,512>::Empty(v11) == 0 )
   {
     v9 = *(_DWORD *)TStaticFIFO<int,512>::Top(v11);
     TStaticFIFO<int,512>::Pop(v11);
@@ -336,7 +338,7 @@ void  CBlob::fillBlob(int a2, int a3) {
       {
         __debugbreak();
       }
-      if ( !CCheckLayer::getPoint(this->m_pCheckLayer, iCurrentX - this->m_iU3, iCurrentY - this->m_iU4) )
+      if ( CCheckLayer::getPoint(this->m_pCheckLayer, iCurrentX - this->m_iU3, iCurrentY - this->m_iU4) == 0 )
       {
         TStaticFIFO<int,512>::Push(v11, &v8);
         this->processFillPoint(this, iCurrentX, iCurrentY);

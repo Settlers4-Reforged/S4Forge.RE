@@ -354,7 +354,6 @@ public:
     _DWORD m_bV3Available;
     _BYTE m_bHardwareObjectPossible;
     _BYTE m_bLockCursorShape;
-    _BYTE[2] gap22;
     struct SurfaceClipper * m_pSurfaceClipper;
 
 };

@@ -6,7 +6,7 @@
 // Decompiled from CWeaponSideBarInfo *__thiscall CWeaponSideBarInfo::CWeaponSideBarInfo(CWeaponSideBarInfo *this)
  CWeaponSideBarInfo::CWeaponSideBarInfo(void) {
   
-  CInfoExchange::CInfoExchange(this);
+  CInfoExchange::CInfoExchange((CInfoExchange *)this);
   *(_DWORD *)this = &CWeaponSideBarInfo::_vftable_;
   return this;
 }

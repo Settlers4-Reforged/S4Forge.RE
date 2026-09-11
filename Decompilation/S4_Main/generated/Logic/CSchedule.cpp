@@ -17,7 +17,7 @@
   *(_DWORD *)this = *((_DWORD *)a2 + 3);
   *((_DWORD *)this + 10) = *((_DWORD *)a2 + 5);
   C = (CDebitLevelManager *)operator new(0x328u);
-  if ( C )
+  if ( C != 0 )
   {
     v5 = CDebitLevelManager::CDebitLevelManager(C, this);
   }
@@ -39,14 +39,14 @@
   
   CDynList **result; // eax
 
-  if ( this[1] )
+  if ( *(this + 1) != 0 )
   {
-    delete this[1];
+    delete *(this + 1);
   }
   result = this;
-  if ( this[2] )
+  if ( *(this + 2) != 0 )
   {
-    return (CDynList **)delete this[2];
+    return (CDynList **)delete *(this + 2);
   }
   return result;
 }
@@ -114,7 +114,7 @@ void  CSchedule::InitSchedule(void) {
   *((_DWORD *)this + 4) = 0;
   *((_DWORD *)this + 3) = 0;
   C = (CDynList *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     v54 = CDynList::CDynList(C);
   }
@@ -124,7 +124,7 @@ void  CSchedule::InitSchedule(void) {
   }
   *((_DWORD *)this + 1) = v54;
   v53 = (CPeopleManagerTask *)operator new(0x44u);
-  if ( v53 )
+  if ( v53 != 0 )
   {
     v52 = CPeopleManagerTask::CPeopleManagerTask(v53);
   }
@@ -132,9 +132,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v52 = 0;
   }
-  CSchedule::NewSchedEntry(this, v52);
+  CSchedule::NewSchedEntry((CDynList **)this, v52);
   v51 = (CBuildingManagerTask *)operator new(0x14Cu);
-  if ( v51 )
+  if ( v51 != 0 )
   {
     v50 = CBuildingManagerTask::CBuildingManagerTask(v51);
   }
@@ -142,9 +142,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v50 = 0;
   }
-  CSchedule::NewSchedEntry(this, v50);
+  CSchedule::NewSchedEntry((CDynList **)this, v50);
   v49 = (CExpandationManagerTask *)operator new(0x70u);
-  if ( v49 )
+  if ( v49 != 0 )
   {
     v48 = CExpandationManagerTask::CExpandationManagerTask(v49);
   }
@@ -152,9 +152,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v48 = 0;
   }
-  CSchedule::NewSchedEntry(this, v48);
+  CSchedule::NewSchedEntry((CDynList **)this, v48);
   v47 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v47 )
+  if ( v47 != 0 )
   {
     v46 = CResourceManagerTask::CResourceManagerTask(v47, 112);
   }
@@ -162,9 +162,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v46 = 0;
   }
-  CSchedule::NewSchedEntry(this, v46);
+  CSchedule::NewSchedEntry((CDynList **)this, v46);
   v45 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v45 )
+  if ( v45 != 0 )
   {
     v44 = CResourceManagerTask::CResourceManagerTask(v45, 96);
   }
@@ -172,9 +172,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v44 = 0;
   }
-  CSchedule::NewSchedEntry(this, v44);
+  CSchedule::NewSchedEntry((CDynList **)this, v44);
   v43 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v43 )
+  if ( v43 != 0 )
   {
     v42 = CResourceManagerTask::CResourceManagerTask(v43, 0);
   }
@@ -182,9 +182,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v42 = 0;
   }
-  CSchedule::NewSchedEntry(this, v42);
+  CSchedule::NewSchedEntry((CDynList **)this, v42);
   v41 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v41 )
+  if ( v41 != 0 )
   {
     v40 = CResourceManagerTask::CResourceManagerTask(v41, 16);
   }
@@ -192,9 +192,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v40 = 0;
   }
-  CSchedule::NewSchedEntry(this, v40);
+  CSchedule::NewSchedEntry((CDynList **)this, v40);
   v39 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v39 )
+  if ( v39 != 0 )
   {
     v38 = CResourceManagerTask::CResourceManagerTask(v39, 32);
   }
@@ -202,9 +202,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v38 = 0;
   }
-  CSchedule::NewSchedEntry(this, v38);
+  CSchedule::NewSchedEntry((CDynList **)this, v38);
   v37 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v37 )
+  if ( v37 != 0 )
   {
     v36 = CResourceManagerTask::CResourceManagerTask(v37, -3);
   }
@@ -212,9 +212,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v36 = 0;
   }
-  CSchedule::NewSchedEntry(this, v36);
+  CSchedule::NewSchedEntry((CDynList **)this, v36);
   v35 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v35 )
+  if ( v35 != 0 )
   {
     v34 = CResourceManagerTask::CResourceManagerTask(v35, -4);
   }
@@ -222,9 +222,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v34 = 0;
   }
-  CSchedule::NewSchedEntry(this, v34);
+  CSchedule::NewSchedEntry((CDynList **)this, v34);
   v33 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v33 )
+  if ( v33 != 0 )
   {
     v32 = CResourceManagerTask::CResourceManagerTask(v33, 48);
   }
@@ -232,9 +232,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v32 = 0;
   }
-  CSchedule::NewSchedEntry(this, v32);
+  CSchedule::NewSchedEntry((CDynList **)this, v32);
   v31 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     v30 = CResourceManagerTask::CResourceManagerTask(v31, 64);
   }
@@ -242,9 +242,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v30 = 0;
   }
-  CSchedule::NewSchedEntry(this, v30);
+  CSchedule::NewSchedEntry((CDynList **)this, v30);
   v29 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v29 )
+  if ( v29 != 0 )
   {
     v28 = CResourceManagerTask::CResourceManagerTask(v29, -2);
   }
@@ -252,9 +252,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v28 = 0;
   }
-  CSchedule::NewSchedEntry(this, v28);
+  CSchedule::NewSchedEntry((CDynList **)this, v28);
   v27 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v27 )
+  if ( v27 != 0 )
   {
     v26 = CResourceManagerTask::CResourceManagerTask(v27, -6);
   }
@@ -262,9 +262,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v26 = 0;
   }
-  CSchedule::NewSchedEntry(this, v26);
+  CSchedule::NewSchedEntry((CDynList **)this, v26);
   v25 = (CResourceManagerTask *)operator new(0x64u);
-  if ( v25 )
+  if ( v25 != 0 )
   {
     v24 = CResourceManagerTask::CResourceManagerTask(v25, 80);
   }
@@ -272,9 +272,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v24 = 0;
   }
-  CSchedule::NewSchedEntry(this, v24);
+  CSchedule::NewSchedEntry((CDynList **)this, v24);
   v23 = operator new(0x44u);
-  if ( v23 )
+  if ( v23 != 0 )
   {
     v22 = (struct IScheduleEntry *)CMaterialManagerTask::CMaterialManagerTask(v23, 32, 0);
   }
@@ -282,9 +282,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v22 = 0;
   }
-  CSchedule::NewSchedEntry(this, v22);
+  CSchedule::NewSchedEntry((CDynList **)this, v22);
   v21 = operator new(0x44u);
-  if ( v21 )
+  if ( v21 != 0 )
   {
     v20 = (struct IScheduleEntry *)CMaterialManagerTask::CMaterialManagerTask(v21, 7, 0);
   }
@@ -292,9 +292,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v20 = 0;
   }
-  CSchedule::NewSchedEntry(this, v20);
+  CSchedule::NewSchedEntry((CDynList **)this, v20);
   v19 = operator new(0x44u);
-  if ( v19 )
+  if ( v19 != 0 )
   {
     v18 = (struct IScheduleEntry *)CMaterialManagerTask::CMaterialManagerTask(v19, 34, 0);
   }
@@ -302,11 +302,11 @@ void  CSchedule::InitSchedule(void) {
   {
     v18 = 0;
   }
-  CSchedule::NewSchedEntry(this, v18);
+  CSchedule::NewSchedEntry((CDynList **)this, v18);
   if ( *((_DWORD *)this + 6) == 2 )
   {
     v17 = operator new(0x44u);
-    if ( v17 )
+    if ( v17 != 0 )
     {
       v16 = (struct IScheduleEntry *)CMaterialManagerTask::CMaterialManagerTask(v17, 35, 0);
     }
@@ -314,12 +314,12 @@ void  CSchedule::InitSchedule(void) {
     {
       v16 = 0;
     }
-    CSchedule::NewSchedEntry(this, v16);
+    CSchedule::NewSchedEntry((CDynList **)this, v16);
   }
-  if ( !*((_DWORD *)this + 6) )
+  if ( *((_DWORD *)this + 6) == 0 )
   {
     v15 = operator new(0x44u);
-    if ( v15 )
+    if ( v15 != 0 )
     {
       v14 = (struct IScheduleEntry *)CMaterialManagerTask::CMaterialManagerTask(v15, 37, 0);
     }
@@ -327,12 +327,12 @@ void  CSchedule::InitSchedule(void) {
     {
       v14 = 0;
     }
-    CSchedule::NewSchedEntry(this, v14);
+    CSchedule::NewSchedEntry((CDynList **)this, v14);
   }
   if ( *((_DWORD *)this + 6) == 1 )
   {
     v13 = operator new(0x44u);
-    if ( v13 )
+    if ( v13 != 0 )
     {
       v12 = (struct IScheduleEntry *)CMaterialManagerTask::CMaterialManagerTask(v13, 23, 0);
     }
@@ -340,12 +340,12 @@ void  CSchedule::InitSchedule(void) {
     {
       v12 = 0;
     }
-    CSchedule::NewSchedEntry(this, v12);
+    CSchedule::NewSchedEntry((CDynList **)this, v12);
   }
   if ( *((_DWORD *)this + 6) == 4 )
   {
     v11 = operator new(0x44u);
-    if ( v11 )
+    if ( v11 != 0 )
     {
       v10 = (struct IScheduleEntry *)CMaterialManagerTask::CMaterialManagerTask(v11, 41, 0);
     }
@@ -353,10 +353,10 @@ void  CSchedule::InitSchedule(void) {
     {
       v10 = 0;
     }
-    CSchedule::NewSchedEntry(this, v10);
+    CSchedule::NewSchedEntry((CDynList **)this, v10);
   }
   v9 = operator new(0x44u);
-  if ( v9 )
+  if ( v9 != 0 )
   {
     v8 = (struct IScheduleEntry *)CMaterialManagerTask::CMaterialManagerTask(v9, 14, 0);
   }
@@ -364,9 +364,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v8 = 0;
   }
-  CSchedule::NewSchedEntry(this, v8);
+  CSchedule::NewSchedEntry((CDynList **)this, v8);
   v7 = operator new(0x44u);
-  if ( v7 )
+  if ( v7 != 0 )
   {
     v6 = (struct IScheduleEntry *)CMaterialManagerTask::CMaterialManagerTask(v7, 9, 0);
   }
@@ -374,9 +374,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v6 = 0;
   }
-  CSchedule::NewSchedEntry(this, v6);
+  CSchedule::NewSchedEntry((CDynList **)this, v6);
   v5 = operator new(0x44u);
-  if ( v5 )
+  if ( v5 != 0 )
   {
     v4 = (struct IScheduleEntry *)CMaterialManagerTask::CMaterialManagerTask(v5, 24, 0);
   }
@@ -384,9 +384,9 @@ void  CSchedule::InitSchedule(void) {
   {
     v4 = 0;
   }
-  CSchedule::NewSchedEntry(this, v4);
+  CSchedule::NewSchedEntry((CDynList **)this, v4);
   v3 = operator new(0x44u);
-  if ( v3 )
+  if ( v3 != 0 )
   {
     v2 = (struct IScheduleEntry *)CMaterialManagerTask::CMaterialManagerTask(v3, 11, 0);
   }
@@ -394,7 +394,7 @@ void  CSchedule::InitSchedule(void) {
   {
     v2 = 0;
   }
-  return CSchedule::NewSchedEntry(this, v2);
+  return CSchedule::NewSchedEntry((CDynList **)this, v2);
 }
 
 
@@ -420,7 +420,7 @@ void  CSchedule::InitLevelManager(void) {
     CDebitLevelManager::AddDebitLevel(*((_DWORD *)this + 2), *((_DWORD *)this + 6), 7, 0, 0, 102, 0, 0, 10000, 0);
     CDebitLevelManager::AddDebitLevel(*((_DWORD *)this + 2), *((_DWORD *)this + 6), 41, 0, 0, 25, 20000, 4, 10000, 0);
   }
-  if ( !*((_DWORD *)this + 6) )
+  if ( *((_DWORD *)this + 6) == 0 )
   {
     CDebitLevelManager::AddDebitLevel(*((_DWORD *)this + 2), *((_DWORD *)this + 6), 32, 0, 0, 60, 0, 0, 10000, 0);
     CDebitLevelManager::AddDebitLevel(*((_DWORD *)this + 2), *((_DWORD *)this + 6), 7, 0, 0, 155, 0, 0, 10000, 0);
@@ -480,11 +480,11 @@ int  CSchedule::Settings(void) {
   v33 = 0;
   SpecialTask = 0;
   for ( i = 1;
-        dword_46878FC[15 * i];
+        dword_46878FC[15 * i] != 0;
         ++i )
   {
     std::vector<int>::clear();
-    EcoSector = CSchedule::GetEcoSector(v32);
+    EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(v32);
     (*(void (__thiscall **)(struct IAIEcoManager *, int, _BYTE *))(*(_DWORD *)EcoSector + 160))(EcoSector, dword_46878FC[15 * i], v12);
     for ( j = 0;
           ;
@@ -495,11 +495,11 @@ int  CSchedule::Settings(void) {
       {
         break;
       }
-      v27 = CSchedule::GetEcoSector(v32);
+      v27 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v32);
       v2 = (_DWORD *)std::vector<int>::operator[](j);
       (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int *, int *))(*(_DWORD *)v27 + 52))(v27, *v2, &v24, &v25);
       v21 = CReserveDatabase::PackPosition(*(CReserveDatabase **)v32, v24, v25);
-      v26 = CSchedule::GetEcoSector(v32);
+      v26 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v32);
       v3 = (_DWORD *)std::vector<int>::operator[](j);
       if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v26 + 68))(v26, *v3) >= 100 )
       {
@@ -510,7 +510,7 @@ int  CSchedule::Settings(void) {
         v20 = 2;
         C = operator new(0x58u);
         LOBYTE(v33) = 1;
-        if ( C )
+        if ( C != 0 )
         {
           v4 = (_DWORD *)std::vector<int>::operator[](j);
           v22 = (struct IScheduleEntry *)CBuildingEvent::CBuildingEvent(C, dword_46878FC[15 * i], 0, v24 / 16, v25 / 16, v21, *v4, 2);
@@ -521,13 +521,13 @@ int  CSchedule::Settings(void) {
         }
         v15 = v22;
         LOBYTE(v33) = 0;
-        CSchedule::NewSchedEntry(v32, v22);
+        CSchedule::NewSchedEntry((CDynList **)v32, v22);
       }
       if ( CProductionDataTab::BuildingMustBeControl(*((void **)v32 + 10), dword_46878FC[15 * i], *((_DWORD *)v32 + 6)) )
       {
         v19 = operator new(0x70u);
         LOBYTE(v33) = 2;
-        if ( v19 )
+        if ( v19 != 0 )
         {
           v11 = v21;
           v10 = dword_46878FC[15 * i];
@@ -541,16 +541,16 @@ int  CSchedule::Settings(void) {
         }
         v14 = v18;
         LOBYTE(v33) = 0;
-        CSchedule::NewSchedEntry(v32, v18);
+        CSchedule::NewSchedEntry((CDynList **)v32, v18);
       }
       if ( dword_46878FC[15 * i] == 40 || dword_46878FC[15 * i] == 41 || dword_46878FC[15 * i] == 42 )
       {
-        v17 = CSchedule::GetEcoSector(v32);
+        v17 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v32);
         v6 = (_DWORD *)std::vector<int>::operator[](j);
-        if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v17 + 68))(v17, *v6) < 100 || (v16 = CSchedule::GetEcoSector(v32), v7 = (_DWORD *)std::vector<int>::operator[](j), (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v16 + 92))(v16, *v7) > 0) )
+        if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v17 + 68))(v17, *v6) < 100 || (v16 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v32), v7 = (_DWORD *)std::vector<int>::operator[](j), (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v16 + 92))(v16, *v7) > 0) )
         {
-          SpecialTask = CSchedule::GetSpecialTask(v32, 8);
-          if ( SpecialTask )
+          SpecialTask = CSchedule::GetSpecialTask((CDynList **)v32, 8);
+          if ( SpecialTask != 0 )
           {
             *((_BYTE *)SpecialTask + 60) = 0;
           }
@@ -580,13 +580,13 @@ bool  CSchedule::trigger(void) {
   v8 = 0;
   ++*((_DWORD *)this + 4);
   v5 = 0;
-  CProfile::Begin((CProfile *)&stru_46871A0);
-  if ( CSchedule::ReadMessages(this) )
+  CProfile::Begin(stru_46871A0);
+  if ( CSchedule::ReadMessages((CDynList **)this) == 1 )
   {
     return 1;
   }
   v4 = (CPerformanceCounter *)operator new(0x18u);
-  if ( v4 )
+  if ( v4 != 0 )
   {
     v3 = CPerformanceCounter::CPerformanceCounter(v4);
   }
@@ -601,19 +601,19 @@ bool  CSchedule::trigger(void) {
   }
   while ( !v8 )
   {
-    if ( *((_DWORD *)this + 8) )
+    if ( *((_DWORD *)this + 8) != 0 )
     {
-      SchedEntry = CSchedule::GetSchedEntry(this, *((_DWORD *)this + 8));
+      SchedEntry = CSchedule::GetSchedEntry((CDynList **)this, *((_DWORD *)this + 8));
       *((_DWORD *)this + 3) = CDynListEntry::GetIndex(SchedEntry);
     }
     else
     {
       SchedEntry = (struct IScheduleEntry *)CDynList::elementAt(*((CDynList **)this + 1), *((_DWORD *)this + 3));
     }
-    if ( SchedEntry )
+    if ( SchedEntry != 0 )
     {
       *((_DWORD *)SchedEntry + 9) = 0;
-      if ( *((_DWORD *)SchedEntry + 5) == 1 && (*(unsigned __int8 (__thiscall **)(struct IScheduleEntry *))(*(_DWORD *)SchedEntry + 16))(SchedEntry) && (*(unsigned __int8 (__thiscall **)(struct IScheduleEntry *))(*(_DWORD *)SchedEntry + 20))(SchedEntry) )
+      if ( *((_DWORD *)SchedEntry + 5) == 1 && (*(unsigned __int8 (__thiscall **)(struct IScheduleEntry *))(*(_DWORD *)SchedEntry + 16))(SchedEntry) != 0 && (*(unsigned __int8 (__thiscall **)(struct IScheduleEntry *))(*(_DWORD *)SchedEntry + 20))(SchedEntry) != 0 )
       {
         *((_DWORD *)SchedEntry + 5) = 2;
       }
@@ -662,13 +662,13 @@ int  CSchedule::NewSchedEntry(class IScheduleEntry * a2) {
   
   *((_DWORD *)a2 + 3) = CSchedule::GenerateSchedKey((CSchedule *)this);
   *((_DWORD *)a2 + 10) = this;
-  CDynList::addElement(this[1], a2);
+  CDynList::addElement(*(this + 1), a2);
   return *((_DWORD *)a2 + 3);
 }
 
 
 // address=[0x2f432a0]
-// Decompiled from int __thiscall CSchedule::NewSchedEntry(CSchedule *this, struct IScheduleEntry *a2, int a3)
+// Decompiled from int __thiscall CSchedule::NewSchedEntry(CDynList **this, struct IScheduleEntry *a2, int a3)
 int  CSchedule::NewSchedEntry(class IScheduleEntry * a2, int a3) {
   
   *((_DWORD *)a2 + 8) = a3;
@@ -682,8 +682,8 @@ class IScheduleEntry *  CSchedule::GetSchedEntry(int a2) {
   
   struct CDynListEntry *i; // [esp+Ch] [ebp-4h]
 
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 3) == a2 )
@@ -701,8 +701,8 @@ class IScheduleEntry *  CSchedule::GetSpecialTask(int a2) {
   
   struct CDynListEntry *i; // [esp+8h] [ebp-4h]
 
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 4) == a2 )
@@ -720,8 +720,8 @@ class CMaterialManagerTask *  CSchedule::GetMaterialManager(enum PILE_TYPES a2) 
   
   struct CDynListEntry *i; // [esp+10h] [ebp-4h]
 
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 4) == 4 && *((_DWORD *)i + 13) == a2 )
@@ -739,8 +739,8 @@ class CResourceManagerTask *  CSchedule::GetResourceManager(int a2) {
   
   struct CDynListEntry *i; // [esp+10h] [ebp-4h]
 
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 4) == 5 && *((_DWORD *)i + 11) == a2 )
@@ -758,8 +758,8 @@ class CProductivityControll *  CSchedule::GetProductivityControll(struct SBuildI
   
   struct CDynListEntry *i; // [esp+Ch] [ebp-4h]
 
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 5) != 3 && *((_DWORD *)i + 4) == 2 && *((_DWORD *)i + 11) == a2 && *((_DWORD *)i + 12) == a3 )
@@ -777,8 +777,8 @@ class CExpandationEvent *  CSchedule::GetExpandationEvent(int a2) {
   
   struct CDynListEntry *i; // [esp+Ch] [ebp-4h]
 
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 4) == 7 && *((_DWORD *)i + 22) == a2 )
@@ -791,13 +791,13 @@ class CExpandationEvent *  CSchedule::GetExpandationEvent(int a2) {
 
 
 // address=[0x2f43550]
-// Decompiled from bool __thiscall CSchedule::IsBorderElement(CSchedule *this, int a2, int a3)
+// Decompiled from bool __thiscall CSchedule::IsBorderElement(CDynList **this, int a2, int a3)
 bool  CSchedule::IsBorderElement(int a2, int a3) {
   
   CExpandationManagerTask *SpecialTask; // eax
 
   SpecialTask = CSchedule::GetSpecialTask(this, 6);
-  return CExpandationManagerTask::IsBorderElement(SpecialTask, a2, a3);
+  return CExpandationManagerTask::IsBorderElement((CReserveDatabase ***)SpecialTask, a2, a3);
 }
 
 
@@ -807,8 +807,8 @@ class CBuildingEvent *  CSchedule::GetBuildingEvent(int a2, enum T_BUILD_LEVEL a
   
   struct CDynListEntry *i; // [esp+Ch] [ebp-4h]
 
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 5) != 3 && *((_DWORD *)i + 4) == 9 && *((_DWORD *)i + 12) == a2 && *((_DWORD *)i + 13) == a3 )
@@ -830,12 +830,12 @@ bool  CSchedule::GetBuildingInPlannedStatus(class CReserveEntry * a2) {
 
   v4 = 0;
   v5 = 0;
-  while ( *((_DWORD *)a2 + 11 * v4 + 3) )
+  while ( *((_DWORD *)a2 + 11 * v4 + 3) != 0 )
   {
     ++v4;
   }
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 5) != 3 && *((_DWORD *)i + 4) == 9 )
@@ -866,8 +866,8 @@ class CBuildingEvent *  CSchedule::GetBuildingAtPosition(int a2, int a3) {
 
   v6 = this;
   v7 = 0;
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (CDynListEntry *)CDynListEntry::Next(i) )
   {
     v8 = i;
@@ -928,7 +928,7 @@ int  CSchedule::GetTmpMaxNumberOfBuildingType(enum BUILDING_TYPES a2) {
         {
           v7 = 2;
         }
-        if ( !*(_DWORD *)(this + 24) )
+        if ( *(_DWORD *)(this + 24) == 0 )
         {
           v7 = 1;
         }
@@ -1005,102 +1005,101 @@ int  CSchedule::GetSumResourceAmount(enum BUILDING_TYPES a2, int a3, int a4, int
   v14 = 0;
   ResourceManager = 0;
   ResourceForBuilding = CProductionDataTab::GetResourceForBuilding(*(void **)(this + 40), a2, *(_DWORD *)(this + 24));
-  if ( ResourceForBuilding == -1 )
+  if ( ResourceForBuilding != -1 )
   {
-    return v25;
-  }
-  CReserveDatabase::UnpackPosition(*v27, a3, &v22, &v20);
-  if ( a5 != 1 )
-  {
-    v22 = a5 / 2 + a5 * v22;
-    v20 = a5 / 2 + a5 * v22;
-  }
-  v18 = a2 - 1;
-  switch ( a2 )
-  {
-    case 1:
-    case 4:
-    case 6:
-    case 7:
-      ResourceManager = CSchedule::GetResourceManager(v27, ResourceForBuilding);
-      if ( ResourceManager )
-      {
-        for ( i = 0;
-              i < *(_DWORD *)(*((_DWORD *)ResourceManager + 21) + 8);
-              ++i )
+    CReserveDatabase::UnpackPosition(*v27, a3, &v22, &v20);
+    if ( a5 != 1 )
+    {
+      v22 = a5 / 2 + a5 * v22;
+      v20 = a5 / 2 + a5 * v22;
+    }
+    v18 = a2 - 1;
+    switch ( a2 )
+    {
+      case 1:
+      case 4:
+      case 6:
+      case 7:
+        ResourceManager = CSchedule::GetResourceManager(v27, ResourceForBuilding);
+        if ( ResourceManager != 0 )
         {
-          FilterEntry = CFilter::GetFilterEntry(*((CFilter **)ResourceManager + 21), i);
-          v21 = CSchedule::CalcDistance((CSchedule *)v27, v22, v20, 16 * *((_DWORD *)FilterEntry + 3) + 8, 16 * *((_DWORD *)FilterEntry + 4) + 8);
-          if ( v21 < 20 )
+          for ( i = 0;
+                i < *(_DWORD *)(*((_DWORD *)ResourceManager + 21) + 8);
+                ++i )
           {
-            v17 = *((_DWORD *)FilterEntry + 5);
-            if ( 20 * v17 - v21 > 0 )
+            FilterEntry = CFilter::GetFilterEntry(*((CDynList ***)ResourceManager + 21), i);
+            v21 = CSchedule::CalcDistance((CSchedule *)v27, v22, v20, 16 * *((_DWORD *)FilterEntry + 3) + 8, 16 * *((_DWORD *)FilterEntry + 4) + 8);
+            if ( v21 < 20 )
             {
-              v25 += 20 * v17 - v21;
+              v17 = *((_DWORD *)FilterEntry + 5);
+              if ( 20 * v17 - v21 > 0 )
+              {
+                v25 += 20 * v17 - v21;
+              }
             }
           }
         }
-      }
-      if ( !v25 )
-      {
-        EcoSector = CSchedule::GetEcoSector((CSchedule *)v27);
-        v25 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)EcoSector + 176))(EcoSector, ResourceForBuilding, v22 / 16, v20 / 16);
-      }
-      break;
-    case 5:
-      v10 = CSchedule::GetEcoSector((CSchedule *)v27);
-      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v10 + 228))(v10, v22, v20) )
-      {
-        v25 = 1000;
-      }
-      break;
-    case 11:
-    case 35:
-    case 36:
-    case 38:
-      ResourceManager = CSchedule::GetResourceManager(v27, ResourceForBuilding);
-      if ( ResourceManager )
-      {
-        for ( i = 0;
-              i < *(_DWORD *)(*((_DWORD *)ResourceManager + 21) + 8);
-              ++i )
+        if ( v25 == 0 )
         {
-          FilterEntry = CFilter::GetFilterEntry(*((CFilter **)ResourceManager + 21), i);
-          v25 = 10 * *((_DWORD *)FilterEntry + 5);
-          v21 = CSchedule::CalcDistance((CSchedule *)v27, v22, v20, 16 * *((_DWORD *)FilterEntry + 3) + 8, 16 * *((_DWORD *)FilterEntry + 4) + 8);
-          MaxDistance = CProductionDataTab::GetMaxDistance(v27[10], a2, v27[6]);
-          if ( v21 > MaxDistance )
+          EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v27);
+          v25 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)EcoSector + 176))(EcoSector, ResourceForBuilding, v22 / 16, v20 / 16);
+        }
+        break;
+      case 5:
+        v10 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v27);
+        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v10 + 228))(v10, v22, v20) != 0 )
+        {
+          v25 = 1000;
+        }
+        break;
+      case 11:
+      case 35:
+      case 36:
+      case 38:
+        ResourceManager = CSchedule::GetResourceManager(v27, ResourceForBuilding);
+        if ( ResourceManager != 0 )
+        {
+          for ( i = 0;
+                i < *(_DWORD *)(*((_DWORD *)ResourceManager + 21) + 8);
+                ++i )
           {
-            v25 -= v21;
-          }
-          if ( v25 > v11 )
-          {
-            v11 = v25;
-            CReserveDatabase::PackPosition(*v27, 16 * *((_DWORD *)FilterEntry + 3) + 8, 16 * *((_DWORD *)FilterEntry + 4) + 8);
+            FilterEntry = CFilter::GetFilterEntry(*((CDynList ***)ResourceManager + 21), i);
+            v25 = 10 * *((_DWORD *)FilterEntry + 5);
+            v21 = CSchedule::CalcDistance((CSchedule *)v27, v22, v20, 16 * *((_DWORD *)FilterEntry + 3) + 8, 16 * *((_DWORD *)FilterEntry + 4) + 8);
+            MaxDistance = CProductionDataTab::GetMaxDistance(v27[10], a2, v27[6]);
+            if ( v21 > MaxDistance )
+            {
+              v25 -= v21;
+            }
+            if ( v25 > v11 )
+            {
+              v11 = v25;
+              CReserveDatabase::PackPosition(*v27, 16 * *((_DWORD *)FilterEntry + 3) + 8, 16 * *((_DWORD *)FilterEntry + 4) + 8);
+            }
           }
         }
-      }
-      break;
-    case 14:
-    case 15:
-    case 16:
-    case 17:
-    case 18:
-      v15 = CSchedule::GetEcoSector((CSchedule *)v27);
-      v14 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v15 + 296))(v15, 3);
-      for ( i = 0;
-            i < v14;
-            ++i )
-      {
-        v13 = CSchedule::GetEcoSector((CSchedule *)v27);
-        (*(void (__thiscall **)(struct IAIEcoManager *, int, int *, int *))(*(_DWORD *)v13 + 300))(v13, i, &v8, &v9);
-        v12 = CSchedule::GetEcoSector((CSchedule *)v27);
-        v5 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v12 + 236))(v12, ResourceForBuilding, v8 + v22, v9 + v20);
-        v25 += v5;
-      }
-      break;
-    default:
-      return v25;
+        break;
+      case 14:
+      case 15:
+      case 16:
+      case 17:
+      case 18:
+        v15 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v27);
+        v14 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v15 + 296))(v15, 3);
+        for ( i = 0;
+              i < v14;
+              ++i )
+        {
+          v13 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v27);
+          (*(void (__thiscall **)(struct IAIEcoManager *, int, int *, int *))(*(_DWORD *)v13 + 300))(v13, i, &v8, &v9);
+          v12 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v27);
+          v5 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v12 + 236))(v12, ResourceForBuilding, v8 + v22, v9 + v20);
+          v25 += v5;
+        }
+        break;
+      default:
+        return v25;
+    }
   }
   return v25;
 }
@@ -1119,31 +1118,31 @@ int  CSchedule::AreaHasOtherResource(enum BUILDING_TYPES a2, int a3, int a4) {
   v10 = 0;
   if ( a2 < 5 || a2 > 6 && a2 != 46 )
   {
-    EcoSector = CSchedule::GetEcoSector((CSchedule *)this);
-    if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)EcoSector + 232))(EcoSector, a3, a4) )
+    EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)this);
+    if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)EcoSector + 232))(EcoSector, a3, a4) != 0 )
     {
       v10 = 2;
     }
-    v6 = CSchedule::GetEcoSector((CSchedule *)this);
-    if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v6 + 224))(v6, a3, a4) )
+    v6 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)this);
+    if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v6 + 224))(v6, a3, a4) != 0 )
     {
       v10 = 2;
     }
-    if ( CSchedule::IsBorderElement((CSchedule *)this, a3, a4) )
+    if ( CSchedule::IsBorderElement(this, a3, a4) )
     {
       v10 += 10;
     }
   }
-  v4 = CSchedule::GetEcoSector((CSchedule *)this);
+  v4 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)this);
   if ( (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v4 + 244))(v4, 2, a3, a4) > 0 )
   {
     v10 += 30;
   }
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
-    if ( *((_DWORD *)i + 4) == 5 && CResourceManagerTask::AreaHasResource(i, a3, a4) )
+    if ( *((_DWORD *)i + 4) == 5 && CResourceManagerTask::AreaHasResource((CFilter **)i, a3, a4) )
     {
       ++v10;
       switch ( *((_DWORD *)i + 11) )
@@ -1207,7 +1206,7 @@ int  CSchedule::AreaHasOtherResource(enum BUILDING_TYPES a2, int a3, int a4) {
 int  CSchedule::GetNearExpandationPositionOutside(int a2, int a3, class std::vector<int,class std::allocator<int> > & a4) {
   
   unsigned int v4; // eax
-  _DWORD *v5; // eax
+  int *v5; // eax
   int v6; // eax
   int v7; // eax
   int v8; // eax
@@ -1244,10 +1243,10 @@ int  CSchedule::GetNearExpandationPositionOutside(int a2, int a3, class std::vec
   v35 = 0;
   FilterEntry = 0;
   v13 = 0;
-  SpecialTask = CSchedule::GetSpecialTask(this, 6);
+  SpecialTask = CSchedule::GetSpecialTask((CDynList **)this, 6);
   C = operator new(0x18u);
   v36 = 0;
-  if ( C )
+  if ( C != 0 )
   {
     v25 = CFilter::CFilter((CFilter *)C, 5);
   }
@@ -1266,7 +1265,7 @@ int  CSchedule::GetNearExpandationPositionOutside(int a2, int a3, class std::vec
     {
       break;
     }
-    v5 = (_DWORD *)std::vector<int>::operator[](i);
+    v5 = (int *)std::vector<int>::operator[](i);
     CReserveDatabase::UnpackPosition(*v32, *v5, &v24, &v23);
     v35 = 0;
     for ( j = v24 - 2;
@@ -1277,30 +1276,30 @@ int  CSchedule::GetNearExpandationPositionOutside(int a2, int a3, class std::vec
             k < v23 + 2;
             ++k )
       {
-        EcoSector = CSchedule::GetEcoSector((CSchedule *)v32);
-        if ( !(*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)EcoSector + 196))(EcoSector, 16 * j + 8, 16 * k + 8) )
+        EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v32);
+        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)EcoSector + 196))(EcoSector, 16 * j + 8, 16 * k + 8) == 0 )
         {
-          v21 = CSchedule::GetEcoSector((CSchedule *)v32);
+          v21 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v32);
           v6 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v21 + 236))(v21, 16, j, k);
           v35 += v6;
-          v20 = CSchedule::GetEcoSector((CSchedule *)v32);
+          v20 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v32);
           v7 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v20 + 236))(v20, 48, j, k);
           v35 += v7;
-          v19 = CSchedule::GetEcoSector((CSchedule *)v32);
+          v19 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v32);
           v8 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v19 + 236))(v19, 32, j, k);
           v35 += v8;
-          v18 = CSchedule::GetEcoSector((CSchedule *)v32);
+          v18 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v32);
           v9 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v18 + 228))(v18, j, k);
           v35 += 20 * v9;
-          v17 = CSchedule::GetEcoSector((CSchedule *)v32);
+          v17 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v32);
           v10 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v17 + 236))(v17, 96, j, k);
           v35 += v10;
-          v16 = CSchedule::GetEcoSector((CSchedule *)v32);
+          v16 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v32);
           v11 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v16 + 236))(v16, 80, j, k);
           v35 += v11;
           v15 = operator new(0x18u);
           v36 = 1;
-          if ( v15 )
+          if ( v15 != 0 )
           {
             v14 = CResourceFilter::CResourceFilter((CResourceFilter *)v15, j, k, v35);
           }
@@ -1309,7 +1308,7 @@ int  CSchedule::GetNearExpandationPositionOutside(int a2, int a3, class std::vec
             v14 = 0;
           }
           v36 = -1;
-          CFilter::AddFilterEntry(v30, v14);
+          ((void (__thiscall *)(CFilter *, struct IFilterEntry *))CFilter::AddFilterEntry)(v30, v14);
         }
       }
     }
@@ -1318,12 +1317,12 @@ int  CSchedule::GetNearExpandationPositionOutside(int a2, int a3, class std::vec
         (signed int)i < *((_DWORD *)v30 + 2);
         ++i )
   {
-    FilterEntry = CFilter::GetFilterEntry(v30, i);
+    FilterEntry = CFilter::GetFilterEntry((CDynList **)v30, i);
     v13 = CReserveDatabase::PackPosition(*v32, *((_DWORD *)FilterEntry + 3), *((_DWORD *)FilterEntry + 4));
-    std::vector<int>::push_back(&v13);
+    std::vector<int>::push_back((int)&v13);
   }
   v27 = v30;
-  if ( v30 )
+  if ( v30 != 0 )
   {
     (**(void (__thiscall ***)(CFilter *, int))v27)(v27, 1);
   }
@@ -1380,20 +1379,20 @@ int  CSchedule::PreSelect16Grid(enum BUILDING_TYPES a2, struct SBUILDINFODATA * 
 
 
 // address=[0x2f444e0]
-// Decompiled from int __thiscall CSchedule::GetMainProblemSolve(CSchedule *this, int a2)
+// Decompiled from int __thiscall CSchedule::GetMainProblemSolve(CDynList **this, int a2)
 int  CSchedule::GetMainProblemSolve(int a2) {
   
   struct IScheduleEntry *SchedEntry; // [esp+4h] [ebp-4h]
 
   SchedEntry = CSchedule::GetSchedEntry(this, a2);
-  if ( !SchedEntry )
+  if ( SchedEntry == 0 )
   {
     return 0;
   }
   while ( *((_DWORD *)SchedEntry + 4) == 11 )
   {
     SchedEntry = CSchedule::GetSchedEntry(this, *((_DWORD *)SchedEntry + 8));
-    if ( !SchedEntry )
+    if ( SchedEntry == 0 )
     {
       break;
     }
@@ -1422,7 +1421,7 @@ void  CSchedule::UpdateExpandationEvents(int a2) {
   v6 = 10;
   v9 = 0;
   v8 = 0;
-  EcoSector = CSchedule::GetEcoSector((CSchedule *)this);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)this);
   (*(void (__thiscall **)(struct IAIEcoManager *, int, _BYTE *, _BYTE *))(*(_DWORD *)EcoSector + 52))(EcoSector, a2, v4, v5);
   for ( i = 0;
         ;
@@ -1438,10 +1437,10 @@ void  CSchedule::UpdateExpandationEvents(int a2) {
     {
       v8 = v9;
       *(_DWORD *)(v9 + 20) = 3;
-      CSchedule::MarkSolvedProblem((CSchedule *)v11, *(_DWORD *)(v8 + 32), 1);
+      CSchedule::MarkSolvedProblem(v11, *(_DWORD *)(v8 + 32), 1);
     }
   }
-  result = CSchedule::GetSpecialTask((CSchedule *)v11, 6);
+  result = CSchedule::GetSpecialTask(v11, 6);
   *((_BYTE *)result + 76) = 1;
   return result;
 }
@@ -1453,8 +1452,8 @@ bool  CSchedule::IsAnyExpandation(void) {
   
   struct CDynListEntry *i; // [esp+10h] [ebp-4h]
 
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 4) == 7 )
@@ -1467,14 +1466,14 @@ bool  CSchedule::IsAnyExpandation(void) {
 
 
 // address=[0x2f44660]
-// Decompiled from char __thiscall CSchedule::SetPositionOfTower(CSchedule *this, int a2, int a3, int a4, int a5)
+// Decompiled from char __thiscall CSchedule::SetPositionOfTower(CDynList **this, int a2, int a3, int a4, int a5)
 bool  CSchedule::SetPositionOfTower(int a2, int a3, int a4, int a5) {
   
   struct IScheduleEntry *SchedEntry; // [esp+14h] [ebp-8h]
   struct IScheduleEntry *v8; // [esp+18h] [ebp-4h]
 
   SchedEntry = CSchedule::GetSchedEntry(this, a2);
-  if ( !SchedEntry )
+  if ( SchedEntry == 0 )
   {
     return 0;
   }
@@ -1483,7 +1482,7 @@ bool  CSchedule::SetPositionOfTower(int a2, int a3, int a4, int a5) {
     return 0;
   }
   v8 = CSchedule::GetSchedEntry(this, *((_DWORD *)SchedEntry + 8));
-  if ( !v8 || *((_DWORD *)v8 + 4) != 7 )
+  if ( v8 == 0 || *((_DWORD *)v8 + 4) != 7 )
   {
     return 0;
   }
@@ -1546,37 +1545,37 @@ bool  CSchedule::ProduceWeapons(int a2, int a3) {
   std::vector<int>::vector<int>(v12);
   v42 = 0;
   std::vector<int>::clear();
-  EcoSector = CSchedule::GetEcoSector(v41);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
   if ( (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 156))(EcoSector, 22) > 0 )
   {
-    v32 = CSchedule::GetEcoSector(v41);
+    v32 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
     (*(void (__thiscall **)(struct IAIEcoManager *, int, _BYTE *))(*(_DWORD *)v32 + 160))(v32, 22, v12);
     CReserveDatabase::UnpackPosition(*(CReserveDatabase **)v41, a2, &v36, &v35);
-    v31 = CSchedule::GetEcoSector(v41);
+    v31 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
     v3 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v31 + 144))(v31, 34);
     v36 -= v3;
-    v30 = CSchedule::GetEcoSector(v41);
+    v30 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
     v4 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v30 + 144))(v30, 8);
     v35 -= v4;
     CReserveDatabase::UnpackPosition(*(CReserveDatabase **)v41, a3, &v39, &v34);
-    v29 = CSchedule::GetEcoSector(v41);
+    v29 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
     v5 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v29 + 144))(v29, 3);
     v34 -= v5;
     if ( *((_DWORD *)v41 + 6) == 1 )
     {
-      v28 = CSchedule::GetEcoSector(v41);
+      v28 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
       v6 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v28 + 144))(v28, 5);
       v39 -= v6;
     }
     if ( *((_DWORD *)v41 + 6) == 2 )
     {
-      v27 = CSchedule::GetEcoSector(v41);
+      v27 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
       v7 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v27 + 144))(v27, 6);
       v39 -= v7;
     }
     if ( *((_DWORD *)v41 + 6) == 4 )
     {
-      v26 = CSchedule::GetEcoSector(v41);
+      v26 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
       v8 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v26 + 144))(v26, 38);
       v39 -= v8;
     }
@@ -1589,65 +1588,65 @@ bool  CSchedule::ProduceWeapons(int a2, int a3) {
       {
         break;
       }
-      v25 = CSchedule::GetEcoSector(v41);
+      v25 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
       v10 = (_DWORD *)std::vector<int>::operator[](i);
-      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v25 + 76))(v25, *v10) )
+      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v25 + 76))(v25, *v10) != 0 )
       {
         v40 = *(_DWORD *)std::vector<int>::operator[](i);
         break;
       }
     }
-    if ( std::vector<int>::size(v12) && v40 )
+    if ( std::vector<int>::size(v12) != 0 && v40 != 0 )
     {
-      v24 = CSchedule::GetEcoSector(v41);
+      v24 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
       (*(void (__thiscall **)(struct IAIEcoManager *, int, int, _DWORD))(*(_DWORD *)v24 + 268))(v24, v40, 34, 0);
-      v23 = CSchedule::GetEcoSector(v41);
+      v23 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
       (*(void (__thiscall **)(struct IAIEcoManager *, int, int, _DWORD))(*(_DWORD *)v23 + 268))(v23, v40, 8, 0);
-      v22 = CSchedule::GetEcoSector(v41);
+      v22 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
       (*(void (__thiscall **)(struct IAIEcoManager *, int, int, _DWORD))(*(_DWORD *)v22 + 268))(v22, v40, 3, 0);
       if ( *((_DWORD *)v41 + 6) == 1 )
       {
-        v21 = CSchedule::GetEcoSector(v41);
+        v21 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, int, _DWORD))(*(_DWORD *)v21 + 268))(v21, v40, 5, 0);
       }
       if ( *((_DWORD *)v41 + 6) == 2 )
       {
-        v20 = CSchedule::GetEcoSector(v41);
+        v20 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, int, _DWORD))(*(_DWORD *)v20 + 268))(v20, v40, 6, 0);
       }
       if ( *((_DWORD *)v41 + 6) == 4 )
       {
-        v19 = CSchedule::GetEcoSector(v41);
+        v19 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, int, _DWORD))(*(_DWORD *)v19 + 268))(v19, v40, 38, 0);
       }
       if ( v36 > 0 )
       {
-        v18 = CSchedule::GetEcoSector(v41);
+        v18 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v18 + 268))(v18, v40, 34, v36);
       }
       if ( v35 > 0 )
       {
-        v17 = CSchedule::GetEcoSector(v41);
+        v17 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v17 + 268))(v17, v40, 8, v35);
       }
       if ( v34 > 0 )
       {
-        v16 = CSchedule::GetEcoSector(v41);
+        v16 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v16 + 268))(v16, v40, 3, v34);
       }
       if ( *((_DWORD *)v41 + 6) == 1 && v39 > 0 )
       {
-        v15 = CSchedule::GetEcoSector(v41);
+        v15 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v15 + 268))(v15, v40, 5, v39);
       }
       if ( *((_DWORD *)v41 + 6) == 2 && v39 > 0 )
       {
-        v14 = CSchedule::GetEcoSector(v41);
+        v14 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v14 + 268))(v14, v40, 6, v39);
       }
       if ( *((_DWORD *)v41 + 6) == 4 && v39 > 0 )
       {
-        v13 = CSchedule::GetEcoSector(v41);
+        v13 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v41);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v13 + 268))(v13, v40, 38, v39);
       }
     }
@@ -1667,11 +1666,11 @@ bool  CSchedule::AllSubProblemsSolved(int a2) {
   int i; // [esp+Ch] [ebp-4h]
 
   for ( i = 0;
-        i < CDynList::size(this[1]);
+        i < CDynList::size(*(this + 1));
         ++i )
   {
-    v4 = (_DWORD *)CDynList::elementAt(this[1], i);
-    if ( v4[4] == 11 && v4[8] == a2 && !v4[17] && !v4[16] )
+    v4 = (_DWORD *)CDynList::elementAt(*(this + 1), i);
+    if ( v4[4] == 11 && v4[8] == a2 && v4[17] == 0 && v4[16] == 0 )
     {
       return 0;
     }
@@ -1731,22 +1730,22 @@ int  CSchedule::GetTargetPosition(int a2) {
     default:
       break;
   }
-  if ( v15 && CSchedule::GetAllBuildingOfTypeInProdControl(v13, v15, v17) )
+  if ( v15 != 0 && CSchedule::GetAllBuildingOfTypeInProdControl(v13, v15, v17) != 0 )
   {
     for ( i = 0;
-          v17[2 * i] && i < 2;
+          v17[2 * i] != 0 && i < 2;
           ++i )
     {
-      EcoSector = CSchedule::GetEcoSector(v13);
-      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 304))(EcoSector, v17[2 * i]) )
+      EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(v13);
+      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 304))(EcoSector, v17[2 * i]) != 0 )
       {
         if ( v17[2 * i + 1] == 1 )
         {
-          CSchedule::GetPlannedBuildingPosition(v13, v17[2 * i], &v7, &v6);
+          CSchedule::GetPlannedBuildingPosition((CDynList **)v13, v17[2 * i], &v7, &v6);
         }
         else
         {
-          v8 = CSchedule::GetEcoSector(v13);
+          v8 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v13);
           (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int *, int *))(*(_DWORD *)v8 + 52))(v8, v17[2 * i], &v7, &v6);
         }
       }
@@ -1772,14 +1771,14 @@ int  CSchedule::isDepSchedSolved(int a2) {
   
   struct IScheduleEntry *SchedEntry; // [esp+Ch] [ebp-4h]
 
-  SchedEntry = CSchedule::GetSchedEntry(this, a2);
-  if ( !SchedEntry )
+  SchedEntry = CSchedule::GetSchedEntry((CDynList **)this, a2);
+  if ( SchedEntry == 0 )
   {
     return 1;
   }
   if ( *((_DWORD *)SchedEntry + 4) == 11 )
   {
-    if ( *((_DWORD *)SchedEntry + 17) )
+    if ( *((_DWORD *)SchedEntry + 17) != 0 )
     {
       return 2;
     }
@@ -1792,11 +1791,11 @@ int  CSchedule::isDepSchedSolved(int a2) {
   {
     return 0;
   }
-  if ( *((_DWORD *)SchedEntry + 17) )
+  if ( *((_DWORD *)SchedEntry + 17) != 0 )
   {
     return 2;
   }
-  return *((_DWORD *)SchedEntry + 25) && *(_DWORD *)(*((_DWORD *)SchedEntry + 25) + 36) == 3;
+  return *((_DWORD *)SchedEntry + 25) != 0 && *(_DWORD *)(*((_DWORD *)SchedEntry + 25) + 36) == 3;
 }
 
 
@@ -1808,10 +1807,10 @@ bool  CSchedule::TerminateSubProblems(int a2) {
   int i; // [esp+Ch] [ebp-4h]
 
   for ( i = 0;
-        i < CDynList::size(this[1]);
+        i < CDynList::size(*(this + 1));
         ++i )
   {
-    v4 = (_DWORD *)CDynList::elementAt(this[1], i);
+    v4 = (_DWORD *)CDynList::elementAt(*(this + 1), i);
     if ( v4[4] == 11 && v4[8] == a2 )
     {
       v4[5] = 3;
@@ -1822,14 +1821,14 @@ bool  CSchedule::TerminateSubProblems(int a2) {
 
 
 // address=[0x2f45070]
-// Decompiled from char __thiscall CSchedule::MarkSolvedProblem(CSchedule *this, int a2, bool a3)
+// Decompiled from char __thiscall CSchedule::MarkSolvedProblem(CDynList **this, int a2, bool a3)
 bool  CSchedule::MarkSolvedProblem(int a2, bool a3) {
   
   char result; // al
   struct IScheduleEntry *SchedEntry; // [esp+24h] [ebp-4h]
 
   SchedEntry = CSchedule::GetSchedEntry(this, a2);
-  if ( !SchedEntry )
+  if ( SchedEntry == 0 )
   {
     return 0;
   }
@@ -1935,17 +1934,17 @@ int  CSchedule::SearchExternSolution(int a2, int a3, int a4, int a5, int a6, int
         ;
         ++i )
   {
-    if ( i >= CDynList::size(this[1]) )
+    if ( i >= CDynList::size(*(this + 1)) )
     {
       return 0;
     }
-    v10 = (_DWORD *)CDynList::elementAt(this[1], i);
+    v10 = (_DWORD *)CDynList::elementAt(*(this + 1), i);
     if ( v10[4] == 11 && v10[8] == a2 && a3 == v10[15] && v10[11] == a4 && v10[12] == a5 && v10[13] == a6 && v10[14] == a7 )
     {
       break;
     }
   }
-  if ( v10[16] )
+  if ( v10[16] != 0 )
   {
     return v10[3];
   }
@@ -1957,13 +1956,13 @@ int  CSchedule::SearchExternSolution(int a2, int a3, int a4, int a5, int a6, int
 
 
 // address=[0x2f45310]
-// Decompiled from int __thiscall CSchedule::GetSolution(CSchedule *this, int a2)
+// Decompiled from int __thiscall CSchedule::GetSolution(CDynList **this, int a2)
 class CSolutionTree *  CSchedule::GetSolution(int a2) {
   
   struct IScheduleEntry *SchedEntry; // [esp+Ch] [ebp-4h]
 
   SchedEntry = CSchedule::GetSchedEntry(this, a2);
-  if ( !SchedEntry )
+  if ( SchedEntry == 0 )
   {
     return 0;
   }
@@ -1991,14 +1990,14 @@ bool  CSchedule::InvokeNeeded(enum BUILDING_TYPES a2) {
   int v7; // [esp+18h] [ebp-4h]
 
   for ( i = 0;
-        i < CDynList::size(this[1]);
+        i < CDynList::size(*(this + 1));
         ++i )
   {
-    v7 = CDynList::elementAt(this[1], i);
+    v7 = CDynList::elementAt(*(this + 1), i);
     if ( *(_DWORD *)(v7 + 16) == 11 )
     {
       for ( j = 0;
-            *(_DWORD *)(v7 + 4 * j + 76);
+            *(_DWORD *)(v7 + 4 * j + 76) != 0;
             ++j )
       {
         if ( *(_DWORD *)(v7 + 4 * j + 76) == a2 )
@@ -2010,7 +2009,7 @@ bool  CSchedule::InvokeNeeded(enum BUILDING_TYPES a2) {
     if ( *(_DWORD *)(v7 + 16) == 10 )
     {
       for ( k = 0;
-            *(_DWORD *)(v7 + 4 * k + 76);
+            *(_DWORD *)(v7 + 4 * k + 76) != 0;
             ++k )
       {
         if ( *(_DWORD *)(v7 + 4 * k + 76) == a2 )
@@ -2032,10 +2031,10 @@ class CInvokeEvent *  CSchedule::GetInvokeEvent(enum BUILDING_TYPES a2) {
   int i; // [esp+Ch] [ebp-4h]
 
   for ( i = 0;
-        i < CDynList::size(this[1]);
+        i < CDynList::size(*(this + 1));
         ++i )
   {
-    v4 = CDynList::elementAt(this[1], i);
+    v4 = CDynList::elementAt(*(this + 1), i);
     if ( *(_DWORD *)(v4 + 16) == 12 && *(_DWORD *)(v4 + 44) == a2 )
     {
       return v4;
@@ -2063,7 +2062,7 @@ int  CSchedule::GetContentOfWorkingArea(int a2, enum BUILDING_TYPES a3) {
 
   v14 = this;
   ContentOfWorkingArea = 0;
-  EcoSector = CSchedule::GetEcoSector(this);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(this);
   (*(void (__thiscall **)(struct IAIEcoManager *, int, int *, int *))(*(_DWORD *)EcoSector + 120))(EcoSector, a2, &v4, &v5);
   v7 = v4 / 16;
   v8 = v5 / 16;
@@ -2080,12 +2079,12 @@ int  CSchedule::GetContentOfWorkingArea(int a2, enum BUILDING_TYPES a3) {
     case 16:
     case 32:
     case 80:
-      v6 = CSchedule::GetEcoSector(v14);
+      v6 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v14);
       ContentOfWorkingArea = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v6 + 164))(v6, ResourceForBuilding, v7, v8);
       break;
     case 96:
     case 112:
-      v9 = CSchedule::GetEcoSector(v14);
+      v9 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v14);
       ContentOfWorkingArea = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v9 + 176))(v9, ResourceForBuilding, v7, v8);
       break;
     default:
@@ -2120,22 +2119,22 @@ int  CSchedule::GetContentOfWorkingArea(enum BUILDING_TYPES a2, int a3, int a4) 
   v21 = this;
   v19 = 0;
   v18 = 0;
-  EcoSector = CSchedule::GetEcoSector(this);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(this);
   v14 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 124))(EcoSector, a2);
   ResourceForBuilding = CProductionDataTab::GetResourceForBuilding(*((void **)v21 + 10), a2, *((_DWORD *)v21 + 6));
   if ( ResourceForBuilding == -6 )
   {
-    v9 = CSchedule::GetEcoSector(v21);
+    v9 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v21);
     v18 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v9 + 296))(v9, 20);
     v19 = 0;
     for ( i = 0;
           i < v18;
           ++i )
     {
-      v8 = CSchedule::GetEcoSector(v21);
+      v8 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v21);
       (*(void (__thiscall **)(struct IAIEcoManager *, int, int *, int *))(*(_DWORD *)v8 + 300))(v8, i, &v16, &v17);
-      v7 = CSchedule::GetEcoSector(v21);
-      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v7 + 240))(v7, 5, v16 + a3, v17 + a4) )
+      v7 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v21);
+      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v7 + 240))(v7, 5, v16 + a3, v17 + a4) != 0 )
       {
         ++v19;
       }
@@ -2143,24 +2142,24 @@ int  CSchedule::GetContentOfWorkingArea(enum BUILDING_TYPES a2, int a3, int a4) 
   }
   else if ( ResourceForBuilding <= -4 || ResourceForBuilding > -2 )
   {
-    v5 = CSchedule::GetEcoSector(v21);
+    v5 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v21);
     return (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v5 + 176))(v5, ResourceForBuilding, a3 / 16, a4 / 16);
   }
   else
   {
-    v13 = CSchedule::GetEcoSector(v21);
+    v13 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v21);
     v18 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v13 + 296))(v13, v14);
     for ( i = 0;
           i < v18;
           ++i )
     {
-      v12 = CSchedule::GetEcoSector(v21);
+      v12 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v21);
       (*(void (__thiscall **)(struct IAIEcoManager *, int, int *, int *))(*(_DWORD *)v12 + 300))(v12, i, &v16, &v17);
-      v11 = CSchedule::GetEcoSector(v21);
-      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v11 + 240))(v11, 2, v16 + a3, v17 + a4) )
+      v11 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v21);
+      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v11 + 240))(v11, 2, v16 + a3, v17 + a4) != 0 )
       {
-        v10 = CSchedule::GetEcoSector(v21);
-        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v10 + 196))(v10, v16 + a3, v17 + a4) )
+        v10 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v21);
+        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v10 + 196))(v10, v16 + a3, v17 + a4) != 0 )
         {
           ++v19;
         }
@@ -2216,13 +2215,13 @@ bool  CSchedule::SetBestWorkingAreaPosition(int a2, enum BUILDING_TYPES a3, int 
   ContentOfWorkingArea = 0;
   v38 = 0;
   v32 = 1;
-  EcoSector = CSchedule::GetEcoSector(this);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(this);
   (*(void (__thiscall **)(struct IAIEcoManager *, int, int *, int *))(*(_DWORD *)EcoSector + 52))(EcoSector, a2, &v15, &v16);
   ResourceForBuilding = CProductionDataTab::GetResourceForBuilding(*((void **)v39 + 10), a3, *((_DWORD *)v39 + 6));
   ContentOfWorkingArea = CSchedule::GetContentOfWorkingArea(v39, a2, a3);
-  v26 = CSchedule::GetEcoSector(v39);
+  v26 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
   (*(void (__thiscall **)(struct IAIEcoManager *, int, int *, int *))(*(_DWORD *)v26 + 120))(v26, a2, &v9, &v8);
-  if ( ContentOfWorkingArea )
+  if ( ContentOfWorkingArea != 0 )
   {
     v34 = v9;
     v33 = v8;
@@ -2242,53 +2241,53 @@ bool  CSchedule::SetBestWorkingAreaPosition(int a2, enum BUILDING_TYPES a3, int 
       switch ( ResourceForBuilding )
       {
         case -6:
-          v12 = CSchedule::GetEcoSector(v39);
+          v12 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
           v35 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v12 + 244))(v12, 2, i, j);
           break;
         case -3:
-          v14 = CSchedule::GetEcoSector(v39);
+          v14 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
           v35 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v14 + 244))(v14, 5, i, j);
           break;
         case -2:
-          v13 = CSchedule::GetEcoSector(v39);
+          v13 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
           v35 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v13 + 244))(v13, 6, i, j);
           break;
         case -1:
           if ( a3 == 5 )
           {
-            v19 = CSchedule::GetEcoSector(v39);
-            if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v19 + 232))(v19, i, j) )
+            v19 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
+            if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v19 + 232))(v19, i, j) != 0 )
             {
               v35 = 500;
             }
-            v18 = CSchedule::GetEcoSector(v39);
-            if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v18 + 228))(v18, i, j) )
+            v18 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
+            if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v18 + 228))(v18, i, j) != 0 )
             {
               v35 = 1000;
             }
-            v17 = CSchedule::GetEcoSector(v39);
+            v17 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
             v28 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v17 + 260))(v17, i, j);
             v7 = CReserveDatabase::PackPosition(*(CReserveDatabase **)v39, v15, v16);
-            v5 = CSchedule::CalcDistance(v39, v28, v7);
+            v5 = CSchedule::CalcDistance((CReserveDatabase **)v39, v28, v7);
             v35 -= v5;
           }
           break;
         case 0:
-          if ( CSchedule::IsBorderElement(v39, i, j) || (v22 = CSchedule::GetEcoSector(v39), (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v22 + 228))(v22, i, j)) )
+          if ( CSchedule::IsBorderElement((CDynList **)v39, i, j) || (v22 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39), (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v22 + 228))(v22, i, j) != 0) )
           {
-            v21 = CSchedule::GetEcoSector(v39);
+            v21 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
             v35 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v21 + 164))(v21, ResourceForBuilding, i, j);
           }
           break;
         case 16:
         case 32:
         case 80:
-          v20 = CSchedule::GetEcoSector(v39);
+          v20 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
           v35 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v20 + 164))(v20, ResourceForBuilding, i, j);
           break;
         case 96:
         case 112:
-          v23 = CSchedule::GetEcoSector(v39);
+          v23 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
           v35 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v23 + 176))(v23, ResourceForBuilding, i, j);
           break;
         default:
@@ -2301,7 +2300,7 @@ bool  CSchedule::SetBestWorkingAreaPosition(int a2, enum BUILDING_TYPES a3, int 
         ContentOfWorkingArea = v35;
         if ( a3 == 5 )
         {
-          v11 = CSchedule::GetEcoSector(v39);
+          v11 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
           v28 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v11 + 260))(v11, i, j);
           CReserveDatabase::UnpackPosition(*(CReserveDatabase **)v39, v28, &v34, &v33);
         }
@@ -2309,15 +2308,14 @@ bool  CSchedule::SetBestWorkingAreaPosition(int a2, enum BUILDING_TYPES a3, int 
       }
     }
   }
-  if ( !v38 )
+  if ( v38 != 0 )
   {
-    return v38;
+    BBSupportTracePrintF(3, "AI_BuildingEvent::Building %i change working area to %i, %i", a2, v34, v33);
+    v10 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v39);
+    (*(void (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v10 + 116))(v10, a2, v34, v33);
+    v9 = v34;
+    v8 = v33;
   }
-  BBSupportTracePrintF(3, "AI_BuildingEvent::Building %i change working area to %i, %i", a2, v34, v33);
-  v10 = CSchedule::GetEcoSector(v39);
-  (*(void (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v10 + 116))(v10, a2, v34, v33);
-  v9 = v34;
-  v8 = v33;
   return v38;
 }
 
@@ -2353,16 +2351,16 @@ bool  CSchedule::SetSpecialWorkingAreaPosition(int a2, enum BUILDING_TYPES a3, i
   v17 = 0;
   v26 = 0;
   v28 = 0;
-  EcoSector = CSchedule::GetEcoSector(this);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(this);
   v10 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 124))(EcoSector, a3);
-  v13 = CSchedule::GetEcoSector(v27);
+  v13 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v27);
   (*(void (__thiscall **)(struct IAIEcoManager *, int, int *, int *))(*(_DWORD *)v13 + 52))(v13, a2, &v20, &v19);
   ResourceForBuilding = CProductionDataTab::GetResourceForBuilding(*((void **)v27 + 10), a3, *((_DWORD *)v27 + 6));
-  v12 = CSchedule::GetEcoSector(v27);
+  v12 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v27);
   (*(void (__thiscall **)(struct IAIEcoManager *, int, int *, int *))(*(_DWORD *)v12 + 120))(v12, a2, &v16, &v15);
-  v11 = CSchedule::GetEcoSector(v27);
+  v11 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v27);
   v26 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v11 + 108))(v11, a3, v16, v15);
-  if ( v26 )
+  if ( v26 != 0 )
   {
     v23 = v16;
     v22 = v15;
@@ -2398,7 +2396,7 @@ bool  CSchedule::SetSpecialWorkingAreaPosition(int a2, enum BUILDING_TYPES a3, i
       v18 = ResourceForBuilding;
       if ( ResourceForBuilding == -6 || v18 > -4 && v18 <= -2 )
       {
-        v9 = CSchedule::GetEcoSector(v27);
+        v9 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v27);
         v17 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v9 + 108))(v9, a3, i, j);
       }
       if ( v17 > v26 )
@@ -2410,15 +2408,14 @@ bool  CSchedule::SetSpecialWorkingAreaPosition(int a2, enum BUILDING_TYPES a3, i
       }
     }
   }
-  if ( !v28 )
+  if ( v28 != 0 )
   {
-    return v28;
+    BBSupportTracePrintF(3, "AI_BuildingEvent::Building %i change working area to %i, %i", a2, v23, v22);
+    v8 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v27);
+    (*(void (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v8 + 116))(v8, a2, v23, v22);
+    v16 = v23;
+    v15 = v22;
   }
-  BBSupportTracePrintF(3, "AI_BuildingEvent::Building %i change working area to %i, %i", a2, v23, v22);
-  v8 = CSchedule::GetEcoSector(v27);
-  (*(void (__thiscall **)(struct IAIEcoManager *, int, int, int))(*(_DWORD *)v8 + 116))(v8, a2, v23, v22);
-  v16 = v23;
-  v15 = v22;
   return v28;
 }
 
@@ -2443,8 +2440,8 @@ void  CSchedule::UnmarkBuildings(void) {
   v9 = 0;
   i = 0;
   v3 = 0;
-  for ( i = CDynList::FirstEntry(*((CDynList **)v5 + 1));
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*((CDynList **)v5 + 1));
+        i != 0;
         i = (CDynListEntry *)CDynListEntry::Next(i) )
   {
     v7 = i;
@@ -2481,15 +2478,15 @@ class CProductivityControll *  CSchedule::GetUnmarkBuildings(enum BUILDING_TYPES
   v12 = 0;
   i = 0;
   v4 = 0;
-  for ( i = CDynList::FirstEntry(v8[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(v8[1]);
+        i != 0;
         i = (CDynListEntry *)CDynListEntry::Next(i) )
   {
     v9 = i;
     if ( *((_DWORD *)i + 5) != 3 && *((_DWORD *)v9 + 4) == 2 )
     {
       v10 = v9;
-      if ( *((_DWORD *)v9 + 21) == a2 && !*((_BYTE *)v10 + 100) )
+      if ( *((_DWORD *)v9 + 21) == a2 && *((_BYTE *)v10 + 100) == 0 )
       {
         v7 = v10;
         v12 = -1;
@@ -2525,8 +2522,8 @@ bool  CSchedule::VerifyAllBuildingIds(void) {
   v9 = 0;
   v8 = 0;
   i = 0;
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (CDynListEntry *)CDynListEntry::Next(i) )
   {
     v11 = i;
@@ -2537,7 +2534,7 @@ bool  CSchedule::VerifyAllBuildingIds(void) {
         v9 = v11;
         if ( *((_DWORD *)v11 + 12) != 1 )
         {
-          EcoSector = CSchedule::GetEcoSector(v10);
+          EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(v10);
           (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int *, int *))(*(_DWORD *)EcoSector + 52))(EcoSector, *((_DWORD *)v9 + 11), &v6, &v7);
           v1 = CReserveDatabase::PackPosition(*(CReserveDatabase **)v10, v6, v7);
           if ( *((_DWORD *)v9 + 17) != v1 && BBSupportDbgReport(2, "Source\\EcoAI_Schedule.cpp", 1244, "pProdControl->m_iPackedWorldPos == m_pResData->PackPosition (riBuildPosX, riBuildPosY)") == 1 )
@@ -2551,7 +2548,7 @@ bool  CSchedule::VerifyAllBuildingIds(void) {
         v8 = v11;
         if ( *((_DWORD *)v11 + 13) != 1 )
         {
-          v4 = CSchedule::GetEcoSector(v10);
+          v4 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v10);
           (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int *, int *))(*(_DWORD *)v4 + 52))(v4, *((_DWORD *)v8 + 12), &v6, &v7);
           v2 = CReserveDatabase::PackPosition(*(CReserveDatabase **)v10, v6, v7);
           if ( *((_DWORD *)v8 + 17) != v2 && BBSupportDbgReport(2, "Source\\EcoAI_Schedule.cpp", 1259, "pBuildEvent->m_iPackWorldPosition == m_pResData->PackPosition (riBuildPosX, riBuildPosY)") == 1 )
@@ -2587,19 +2584,19 @@ int  CSchedule::GetBuildingTypeInGroup(enum BUILDING_TYPES a2, int a3, int a4, c
   v14 = 0;
   i = 0;
   v9 = 0;
-  for ( i = CDynList::FirstEntry(v10[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(v10[1]);
+        i != 0;
         i = (CDynListEntry *)CDynListEntry::Next(i) )
   {
     v11 = i;
     if ( *((_DWORD *)i + 5) != 3 && *((_DWORD *)v11 + 4) == 2 )
     {
       v13 = v11;
-      if ( *((_DWORD *)v11 + 21) == a2 && !*((_BYTE *)v13 + 100) && CSchedule::CalcDistance((CSchedule *)v10, *((_DWORD *)v13 + 17), a3) < a4 )
+      if ( *((_DWORD *)v11 + 21) == a2 && *((_BYTE *)v13 + 100) == 0 && CSchedule::CalcDistance(v10, *((_DWORD *)v13 + 17), a3) < a4 )
       {
-        std::vector<SBuildId>::push_back((char *)v13 + 44);
+        std::vector<SBuildId>::push_back((int)v13 + 44);
         *((_BYTE *)v13 + 100) = 1;
-        CSchedule::GetBuildingTypeInGroup(a2, *((_DWORD *)v13 + 17), a4, a5);
+        ((void (__stdcall *)(int, _DWORD, int, int))CSchedule::GetBuildingTypeInGroup)(a2, *((_DWORD *)v13 + 17), a4, a5);
         ++v9;
       }
     }
@@ -2653,65 +2650,64 @@ int  CSchedule::GetNearestInputBuildings(struct SBuildId a2, int a3, struct SBui
   InputTypePile = CProductionDataTab::GetInputTypePile(v29[10], *((_DWORD *)ProductivityControll + 21), a4, (int)v9);
   v22 = CProductionDataTab::GoodTypeProducedBy(v29[10], InputTypePile, 0, v9);
   MaxDistance = CProductionDataTab::GetMaxDistance(v29[10], v22, v29[6]);
-  if ( !CSchedule::GetAllBuildingOfTypeInProdControl(v29, v22, v30) )
+  if ( CSchedule::GetAllBuildingOfTypeInProdControl(v29, v22, v30) != 0 )
   {
-    return v20;
-  }
-  C = operator new(0x18u);
-  v31 = 0;
-  if ( C )
-  {
-    MaxBuildingInGroup = CProductionDataTab::GetMaxBuildingInGroup(v29[10], v22, (int)v29[6]);
-    v18 = CFilter::CFilter((CFilter *)C, MaxBuildingInGroup);
-  }
-  else
-  {
-    v18 = 0;
-  }
-  v14[1] = (int)v18;
-  v31 = -1;
-  v24 = v18;
-  for ( i = 0;
-        v30[2 * i];
-        ++i )
-  {
-    v26 = CSchedule::GetProductivityControll(v29, v30[2 * i], v30[2 * i + 1]);
-    if ( v26 )
+    C = operator new(0x18u);
+    v31 = 0;
+    if ( C != 0 )
     {
-      CReserveDatabase::UnpackPosition(*v29, *((_DWORD *)v26 + 17), &v11, &v12);
-      v17 = CSchedule::CalcDistance((CSchedule *)v29, v11, v12, v13, v14[0]);
-      if ( v17 <= MaxDistance )
+      MaxBuildingInGroup = CProductionDataTab::GetMaxBuildingInGroup(v29[10], v22, (int)v29[6]);
+      v18 = CFilter::CFilter((CFilter *)C, MaxBuildingInGroup);
+    }
+    else
+    {
+      v18 = 0;
+    }
+    v14[1] = (int)v18;
+    v31 = -1;
+    v24 = v18;
+    for ( i = 0;
+          v30[2 * i] != 0;
+          ++i )
+    {
+      v26 = CSchedule::GetProductivityControll(v29, v30[2 * i], v30[2 * i + 1]);
+      if ( v26 != 0 )
       {
-        v16 = operator new(0x1Cu);
-        v31 = 1;
-        if ( v16 )
+        CReserveDatabase::UnpackPosition(*v29, *((_DWORD *)v26 + 17), &v11, &v12);
+        v17 = CSchedule::CalcDistance((CSchedule *)v29, v11, v12, v13, v14[0]);
+        if ( v17 <= MaxDistance )
         {
-          v7 = CProductivityControll::CalcPotentialOutput(v26);
-          v15 = (struct IFilterEntry *)CFilterNearCustomer::CFilterNearCustomer(v16, v17, v30[2 * i], v30[2 * i + 1], v7);
+          v16 = operator new(0x1Cu);
+          v31 = 1;
+          if ( v16 != 0 )
+          {
+            v7 = CProductivityControll::CalcPotentialOutput(v26);
+            v15 = (struct IFilterEntry *)CFilterNearCustomer::CFilterNearCustomer(v16, v17, v30[2 * i], v30[2 * i + 1], v7);
+          }
+          else
+          {
+            v15 = 0;
+          }
+          v31 = -1;
+          ((void (__thiscall *)(CFilter *, struct IFilterEntry *))CFilter::AddFilterEntry)(v24, v15);
         }
-        else
-        {
-          v15 = 0;
-        }
-        v31 = -1;
-        CFilter::AddFilterEntry(v24, v15);
       }
     }
-  }
-  for ( i = 0;
-        i < *((_DWORD *)v24 + 2);
-        ++i )
-  {
-    FilterEntry = CFilter::GetFilterEntry(v24, i);
-    *(_DWORD *)(a5 + 8 * v27) = *((_DWORD *)FilterEntry + 4);
-    *(_DWORD *)(a5 + 8 * v27++ + 4) = *((_DWORD *)FilterEntry + 5);
-    v20 += *((_DWORD *)FilterEntry + 6);
-    *(_DWORD *)(a5 + 8 * v27) = 0;
-  }
-  v21 = v24;
-  if ( v24 )
-  {
-    (**(void (__thiscall ***)(CFilter *, int))v21)(v21, 1);
+    for ( i = 0;
+          i < *((_DWORD *)v24 + 2);
+          ++i )
+    {
+      FilterEntry = CFilter::GetFilterEntry((CDynList **)v24, i);
+      *(_DWORD *)(a5 + 8 * v27) = *((_DWORD *)FilterEntry + 4);
+      *(_DWORD *)(a5 + 8 * v27++ + 4) = *((_DWORD *)FilterEntry + 5);
+      v20 += *((_DWORD *)FilterEntry + 6);
+      *(_DWORD *)(a5 + 8 * v27) = 0;
+    }
+    v21 = v24;
+    if ( v24 != 0 )
+    {
+      (**(void (__thiscall ***)(CFilter *, int))v21)(v21, 1);
+    }
   }
   return v20;
 }
@@ -2754,12 +2750,9 @@ bool  CSchedule::GetNearestBuildingType(enum BUILDING_TYPES a2, int a3, int a4, 
         {
           CReserveDatabase::UnpackPosition(*v13, v10[17], &v7, &v8);
           v14 = CSchedule::CalcDistance((CSchedule *)v13, v7, v8, a3, a4);
-          if ( v14 < *a5 || !*a5 )
+          if ( (v14 < *a5 || *a5 == 0) && v14 != 0 )
           {
-            if ( v14 )
-            {
-              *a5 = v14;
-            }
+            *a5 = v14;
           }
         }
       }
@@ -2770,12 +2763,9 @@ bool  CSchedule::GetNearestBuildingType(enum BUILDING_TYPES a2, int a3, int a4, 
         {
           CReserveDatabase::UnpackPosition(*v13, v9[17], &v7, &v8);
           v14 = CSchedule::CalcDistance((CSchedule *)v13, v7, v8, a3, a4);
-          if ( v14 < *a5 || !*a5 )
+          if ( (v14 < *a5 || *a5 == 0) && v14 != 0 )
           {
-            if ( v14 )
-            {
-              *a5 = v14;
-            }
+            *a5 = v14;
           }
         }
       }
@@ -2839,7 +2829,7 @@ int  CSchedule::CollectWorkingArea(int a2, class std::vector<int,class std::allo
                 ++k )
           {
             v7 = CReserveDatabase::PackPosition(*v11, j, k);
-            std::vector<int>::push_back(&v7);
+            std::vector<int>::push_back((int)&v7);
           }
         }
         ++v8;
@@ -2895,11 +2885,11 @@ bool  CSchedule::ResourceNearAtWork(enum BUILDING_TYPES a2, enum BUILDING_TYPES 
 
   v10 = 0;
   v9 = 0;
-  if ( CSchedule::GetNearestBuildingType(this, a3, a4, a5, &v9) && v9 < a6 )
+  if ( CSchedule::GetNearestBuildingType((CDynList **)this, a3, a4, a5, &v9) && v9 < a6 )
   {
     return 1;
   }
-  SpecialTask = CSchedule::GetSpecialTask(this, 3);
+  SpecialTask = CSchedule::GetSpecialTask((CDynList **)this, 3);
   return (unsigned __int8)CBuildingManagerTask::IsBuildingAtPlanning(SpecialTask, a3) != 0;
 }
 
@@ -2920,19 +2910,19 @@ int  CSchedule::GetBuildingTypeAroundAt(enum BUILDING_TYPES a2, int a3, int a4, 
   ProductivityControll = 0;
   v9 = 0;
   std::vector<SBuildId>::clear(v7, v8);
-  if ( CSchedule::GetAllBuildingOfTypeInProdControl(v11, a2, v13) )
+  if ( CSchedule::GetAllBuildingOfTypeInProdControl(v11, a2, v13) != 0 )
   {
     for ( i = 0;
-          v13[2 * i];
+          v13[2 * i] != 0;
           ++i )
     {
       ProductivityControll = CSchedule::GetProductivityControll(v11, v13[2 * i], v13[2 * i + 1]);
-      if ( ProductivityControll )
+      if ( ProductivityControll != 0 )
       {
         CReserveDatabase::UnpackPosition(*v11, *((_DWORD *)ProductivityControll + 17), &v7, &v8);
         if ( CSchedule::CalcDistance((CSchedule *)v11, a3, a4, v7, v8) <= a5 )
         {
-          std::vector<SBuildId>::push_back((char *)ProductivityControll + 44);
+          std::vector<SBuildId>::push_back((int)ProductivityControll + 44);
           ++v9;
         }
       }
@@ -2954,13 +2944,13 @@ void  CSchedule::ChangeBuildingLevel(int a2, int a3, enum T_BUILD_LEVEL a4) {
         ;
         ++i )
   {
-    result = CDynList::size(this[1]);
+    result = CDynList::size(*(this + 1));
     if ( i >= result )
     {
       break;
     }
-    v6 = (_DWORD *)CDynList::elementAt(this[1], i);
-    if ( v6[5] != 3 && v6[4] == 2 && v6 && v6[11] == a2 )
+    v6 = (_DWORD *)CDynList::elementAt(*(this + 1), i);
+    if ( v6[5] != 3 && v6[4] == 2 && v6 != 0 && v6[11] == a2 )
     {
       v6[11] = a3;
       v6[12] = a4;
@@ -3070,22 +3060,22 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES a2, class std::vector<struc
     v54[129 * i - 1] = 0;
     std::vector<SMakroEntry>::clear();
   }
-  while ( v39 )
+  while ( v39 != 0 )
   {
     v39 = 0;
     v42 = 1;
-    while ( v42 )
+    while ( v42 != 0 )
     {
       v42 = 0;
-      for ( j = CDynList::FirstEntry(*((CDynList **)v41 + 1));
-            j;
+      for ( j = (struct CDynListEntry *)CDynList::FirstEntry(*((CDynList **)v41 + 1));
+            j != 0;
             j = (CDynListEntry *)CDynListEntry::Next(j) )
       {
         v25 = j;
         if ( *((_DWORD *)j + 5) != 3 && *((_DWORD *)v25 + 4) == 2 )
         {
           v36 = v25;
-          if ( !*((_BYTE *)v25 + 100) )
+          if ( *((_BYTE *)v25 + 100) == 0 )
           {
             i = CSchedule::GetMakroIndex(v41, v50, *((_DWORD *)v36 + 21));
             if ( i != 7 )
@@ -3103,13 +3093,13 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES a2, class std::vector<struc
                 MaxDistance = CProductionDataTab::GetMaxDistance(*((_DWORD *)v41 + 10), v51, *((_DWORD *)v41 + 6));
                 v22 = *((_DWORD *)v36 + 17);
                 v7 = std::vector<SMakroEntry>::operator[](k);
-                if ( CSchedule::CalcDistance(v41, *(_DWORD *)(v7 + 12), v22) < MaxDistance )
+                if ( CSchedule::CalcDistance((CReserveDatabase **)v41, *(_DWORD *)(v7 + 12), v22) < MaxDistance )
                 {
                   v40 = 1;
                   break;
                 }
               }
-              if ( !v40 && std::vector<SMakroEntry>::size(v24) )
+              if ( v40 == 0 && std::vector<SMakroEntry>::size(v24) != 0 )
               {
                 v39 = 1;
               }
@@ -3119,7 +3109,7 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES a2, class std::vector<struc
                 v45[1] = *((_DWORD *)v36 + 12);
                 v45[2] = *((_DWORD *)v36 + 21);
                 v45[3] = *((_DWORD *)v36 + 17);
-                std::vector<SMakroEntry>::push_back(v45);
+                std::vector<SMakroEntry>::push_back((int)v45);
                 *((_BYTE *)v36 + 100) = 1;
                 v8 = 129 * i;
                 v9 = CProductivityControll::CalcPotentialOutput(v36);
@@ -3129,9 +3119,9 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES a2, class std::vector<struc
                   v10 = 129 * *(&v52 + 129 * i);
                   v11 = CProductivityControll::CalcPotentialOutput(v36);
                   v54[129 * *(&v52 + 129 * i) - 1] = v54[v10 - 1] + v11;
-                  std::vector<SMakroEntry>::push_back(v45);
+                  std::vector<SMakroEntry>::push_back((int)v45);
                 }
-                std::vector<SMakroEntry>::push_back(v45);
+                std::vector<SMakroEntry>::push_back((int)v45);
                 v42 = 1;
               }
             }
@@ -3139,7 +3129,7 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES a2, class std::vector<struc
         }
       }
     }
-    if ( !std::vector<SMakroEntry>::size(v24) )
+    if ( std::vector<SMakroEntry>::size(v24) == 0 )
     {
       v33 = 0;
       LOBYTE(v56) = 0;
@@ -3152,9 +3142,9 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES a2, class std::vector<struc
     v34 = 0;
     v35 = 0;
     v38 = 0;
-    if ( WeakIndex )
+    if ( WeakIndex != 0 )
     {
-      if ( std::vector<SMakroEntry>::size(&v50[516 * ((WeakIndex - 1) / 2) + 480]) )
+      if ( std::vector<SMakroEntry>::size(&v50[516 * ((WeakIndex - 1) / 2) + 480]) != 0 )
       {
         for ( k = 0;
               ;
@@ -3175,7 +3165,7 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES a2, class std::vector<struc
     }
     else
     {
-      if ( std::vector<SMakroEntry>::size(&v55) )
+      if ( std::vector<SMakroEntry>::size(&v55) != 0 )
       {
         for ( k = 0;
               ;
@@ -3193,7 +3183,7 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES a2, class std::vector<struc
           ++v38;
         }
       }
-      if ( std::vector<SMakroEntry>::size(&v50[1032 * WeakIndex + 1512]) )
+      if ( std::vector<SMakroEntry>::size(&v50[1032 * WeakIndex + 1512]) != 0 )
       {
         for ( k = 0;
               ;
@@ -3214,7 +3204,7 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES a2, class std::vector<struc
     }
     if ( v38 <= 0 )
     {
-      if ( std::vector<SMakroEntry>::size(v24) )
+      if ( std::vector<SMakroEntry>::size(v24) != 0 )
       {
         for ( k = 0;
               ;
@@ -3236,7 +3226,7 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES a2, class std::vector<struc
         v47 = *(_DWORD *)(std::vector<SMakroEntry>::operator[](0) + 4);
         v48 = *(&v51 + 129 * WeakIndex);
         v49 = v26;
-        std::vector<SMakroEntry>::push_back(&v46);
+        std::vector<SMakroEntry>::push_back((int)&v46);
       }
     }
     else
@@ -3246,7 +3236,7 @@ bool  CSchedule::GetWeakBuilding(enum BUILDING_TYPES a2, class std::vector<struc
       v47 = 3;
       v48 = *(&v51 + 129 * WeakIndex);
       v49 = v26;
-      std::vector<SMakroEntry>::push_back(&v46);
+      std::vector<SMakroEntry>::push_back((int)&v46);
     }
     for ( i = 0;
           i < 7;
@@ -3304,7 +3294,7 @@ int  CSchedule::GetWeakIndex(class CProductionMakroData * a2, int a3, enum PILE_
         i >= 0;
         --i )
   {
-    if ( *(_DWORD *)(a2 + 516 * i + 500) )
+    if ( *(_DWORD *)(a2 + 516 * i + 500) != 0 )
     {
       v11 = *(_DWORD *)(a2 + 516 * i + 504);
       if ( v11 == 7 )
@@ -3322,7 +3312,7 @@ int  CSchedule::GetWeakIndex(class CProductionMakroData * a2, int a3, enum PILE_
         }
         *(_DWORD *)(a2 + 516 * i + 512) = (int)(float)((float)*(int *)(a2 + 516 * i + 508) * v9);
       }
-      if ( !*(_DWORD *)(a2 + 516 * i + 508) && *(_DWORD *)(a2 + 516 * i + 504) == 7 )
+      if ( *(_DWORD *)(a2 + 516 * i + 508) == 0 && *(_DWORD *)(a2 + 516 * i + 504) == 7 )
       {
         return i;
       }
@@ -3332,7 +3322,7 @@ int  CSchedule::GetWeakIndex(class CProductionMakroData * a2, int a3, enum PILE_
               j < 3;
               ++j )
         {
-          if ( *(_DWORD *)(a2 + 516 * (j + 2 * i) + 500) )
+          if ( *(_DWORD *)(a2 + 516 * (j + 2 * i) + 500) != 0 )
           {
             if ( *(_DWORD *)(a2 + 516 * (j + 2 * i) + 512) < *(_DWORD *)(a2 + 516 * i + 512) )
             {
@@ -3348,7 +3338,7 @@ int  CSchedule::GetWeakIndex(class CProductionMakroData * a2, int a3, enum PILE_
           }
         }
       }
-      if ( a4 && a4 == CProductionDataTab::GetOutputTypePile(*(void **)(this + 40), *(_DWORD *)(a2 + 516 * i + 500), *(_DWORD *)(this + 24)) )
+      if ( a4 != 0 && a4 == CProductionDataTab::GetOutputTypePile(*(void **)(this + 40), *(_DWORD *)(a2 + 516 * i + 500), *(_DWORD *)(this + 24)) )
       {
         *a5 += *(_DWORD *)(a2 + 516 * i + 512);
       }
@@ -3374,7 +3364,7 @@ int  CSchedule::GetPotentialGoodCapacity(enum PILE_TYPES a2) {
   std::vector<SMakroEntry>::vector<SMakroEntry>();
   v8 = 0;
   v5 = CProductionDataTab::GoodTypeProducedBy(v7[10], a2, 0, v7[6]);
-  CSchedule::GetWeakBuilding(v5, v3, a2, &v6);
+  ((void (__stdcall *)(int, char *, int, int *))CSchedule::GetWeakBuilding)(v5, v3, a2, &v6);
   v4 = v6;
   v8 = -1;
   std::vector<SMakroEntry>::~vector<SMakroEntry>();
@@ -3394,7 +3384,7 @@ void  CSchedule::CopyMakroBuildings(struct SBuildId * a1, struct SBuildId * a2, 
   while ( 1 )
   {
     result = a2;
-    if ( !*(_DWORD *)(a2 + 8 * v4) || v4 >= a3 )
+    if ( *(_DWORD *)(a2 + 8 * v4) == 0 || v4 >= a3 )
     {
       break;
     }
@@ -3472,19 +3462,19 @@ int  CSchedule::GetGoodPositionForBuilding(enum BUILDING_TYPES a2) {
   v13 = a2;
   if ( a2 == 21 )
   {
-    if ( CSchedule::GetAllBuildingOfType(v20, 20, v22) )
+    if ( CSchedule::GetAllBuildingOfType(v20, 20, v22) != 0 )
     {
       for ( i = 0;
-            v22[2 * i] && i < 2;
+            v22[2 * i] != 0 && i < 2;
             ++i )
       {
         if ( v22[2 * i + 1] == 1 )
         {
-          CSchedule::GetPlannedBuildingPosition(v20, v22[2 * i], &v16, &v15);
+          CSchedule::GetPlannedBuildingPosition((CDynList **)v20, v22[2 * i], &v16, &v15);
         }
         else
         {
-          EcoSector = CSchedule::GetEcoSector(v20);
+          EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(v20);
           (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int *, int *))(*(_DWORD *)EcoSector + 52))(EcoSector, v22[2 * i], &v16, &v15);
         }
         v17 += v16;
@@ -3502,19 +3492,19 @@ int  CSchedule::GetGoodPositionForBuilding(enum BUILDING_TYPES a2) {
     v12 = *((_DWORD *)v20 + 6);
     if ( v12 >= 0 && (v12 <= 2 || v12 == 4) )
     {
-      if ( CSchedule::GetAllBuildingOfType(v20, 3, v22) )
+      if ( CSchedule::GetAllBuildingOfType(v20, 3, v22) != 0 )
       {
         for ( i = 0;
-              v22[2 * i] && i < 2;
+              v22[2 * i] != 0 && i < 2;
               ++i )
         {
           if ( v22[2 * i + 1] == 1 )
           {
-            CSchedule::GetPlannedBuildingPosition(v20, v22[2 * i], &v16, &v15);
+            CSchedule::GetPlannedBuildingPosition((CDynList **)v20, v22[2 * i], &v16, &v15);
           }
           else
           {
-            v10 = CSchedule::GetEcoSector(v20);
+            v10 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v20);
             (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int *, int *))(*(_DWORD *)v10 + 52))(v10, v22[2 * i], &v16, &v15);
           }
           v17 += v16;
@@ -3524,11 +3514,11 @@ int  CSchedule::GetGoodPositionForBuilding(enum BUILDING_TYPES a2) {
       }
       if ( v19 <= 0 )
       {
-        v9 = CSchedule::GetEcoSector(v20);
+        v9 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v20);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, _BYTE *))(*(_DWORD *)v9 + 160))(v9, 46, v4);
-        if ( std::vector<int>::size(v4) )
+        if ( std::vector<int>::size(v4) != 0 )
         {
-          v8 = CSchedule::GetEcoSector(v20);
+          v8 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v20);
           v2 = (_DWORD *)std::vector<int>::operator[](0);
           (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int *, int *))(*(_DWORD *)v8 + 52))(v8, *v2, &v6, &v7);
           v14 = CReserveDatabase::PackPosition(*(CReserveDatabase **)v20, v6, v7);
@@ -3553,7 +3543,7 @@ enum BUILDING_TYPES  CSchedule::GetResidenceBuildingLevel(void) {
   
   struct IAIEcoManager *EcoSector; // [esp+0h] [ebp-8h]
 
-  EcoSector = CSchedule::GetEcoSector(this);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(this);
   if ( (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 156))(EcoSector, 41) > 2 )
   {
     return 42;
@@ -3600,14 +3590,14 @@ bool  CSchedule::DestroySeveralBuildings(void) {
   v15 = 0;
   std::vector<int>::vector<int>(v4);
   v23 = 0;
-  EcoSector = CSchedule::GetEcoSector(v19);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(v19);
   v5 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)EcoSector + 284))(EcoSector);
-  v13 = CSchedule::GetEcoSector(v19);
+  v13 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v19);
   v6 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)v13 + 288))(v13);
-  while ( !v22 && v17 < 10 )
+  while ( v22 == 0 && v17 < 10 )
   {
     v16 = v17;
-    if ( v17 )
+    if ( v17 != 0 )
     {
       if ( v16 == 1 )
       {
@@ -3619,13 +3609,13 @@ bool  CSchedule::DestroySeveralBuildings(void) {
       v15 = v6 - v5;
       if ( v6 - v5 > 40 )
       {
-        v12 = CSchedule::GetEcoSector(v19);
+        v12 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v19);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, _BYTE *))(*(_DWORD *)v12 + 160))(v12, 42, v4);
-        if ( std::vector<int>::size(v4) )
+        if ( std::vector<int>::size(v4) != 0 )
         {
-          v11 = CSchedule::GetEcoSector(v19);
+          v11 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v19);
           v1 = (_DWORD *)std::vector<int>::operator[](0);
-          if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v11 + 76))(v11, *v1) )
+          if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v11 + 76))(v11, *v1) != 0 )
           {
             goto LABEL_10;
           }
@@ -3633,13 +3623,13 @@ bool  CSchedule::DestroySeveralBuildings(void) {
       }
       if ( v15 > 15 )
       {
-        v10 = CSchedule::GetEcoSector(v19);
+        v10 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v19);
         (*(void (__thiscall **)(struct IAIEcoManager *, int, _BYTE *))(*(_DWORD *)v10 + 160))(v10, 41, v4);
-        if ( std::vector<int>::size(v4) )
+        if ( std::vector<int>::size(v4) != 0 )
         {
-          v9 = CSchedule::GetEcoSector(v19);
+          v9 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v19);
           v2 = (_DWORD *)std::vector<int>::operator[](0);
-          if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v9 + 76))(v9, *v2) )
+          if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v9 + 76))(v9, *v2) != 0 )
           {
 LABEL_10:
             v18 = *(_DWORD *)std::vector<int>::operator[](0);
@@ -3651,10 +3641,10 @@ LABEL_10:
     }
     ++v17;
   }
-  if ( v18 )
+  if ( v18 != 0 )
   {
     BBSupportTracePrintF(3, "AI_BuildingEvent::PlayerNr %i destroy %s with ID %i for getting require material", *((_DWORD *)v19 + 5), (&off_3ABC174)[2 * v8], v18);
-    v7 = CSchedule::GetEcoSector(v19);
+    v7 = (struct IAIEcoManager *)CSchedule::GetEcoSector(v19);
     (*(void (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v7 + 104))(v7, v18);
     v21 = 1;
     v23 = -1;
@@ -3719,7 +3709,7 @@ int  CSchedule::GetAllBuildingOfType(enum BUILDING_TYPES a2, struct SBuildId * a
   v12 = 0;
   std::vector<int>::vector<int>(v7);
   v15 = 0;
-  EcoSector = CSchedule::GetEcoSector((CSchedule *)v11);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v11);
   (*(void (__thiscall **)(struct IAIEcoManager *, int, _BYTE *))(*(_DWORD *)EcoSector + 160))(EcoSector, a2, v7);
   *a3 = 0;
   for ( i = 0;
@@ -3783,8 +3773,8 @@ int  CSchedule::GetAllBuildingOfTypeInProdControl(enum BUILDING_TYPES a2, struct
   v8 = 0;
   std::vector<int>::vector<int>(v4);
   v11 = 0;
-  for ( i = CDynList::FirstEntry(v6[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(v6[1]);
+        i != 0;
         i = (CDynListEntry *)CDynListEntry::Next(i) )
   {
     v7 = i;
@@ -3856,8 +3846,8 @@ int  CSchedule::GetNumberOfBuildingType(enum BUILDING_TYPES a2) {
   struct CDynListEntry *i; // [esp+10h] [ebp-4h]
 
   v3 = 0;
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 5) != 3 && *((_DWORD *)i + 4) == 2 && *((_DWORD *)i + 21) == a2 )
@@ -3879,18 +3869,18 @@ int  CSchedule::GetNumberOfBuildingTypeAtBuilding(enum BUILDING_TYPES a2, int a3
   int i; // [esp+10h] [ebp-8h]
 
   NumberOfBuildingTypeAtWork = 0;
-  if ( a4 )
+  if ( a4 != 0 )
   {
     NumberOfBuildingTypeAtWork = CSchedule::GetNumberOfBuildingTypeAtWork(this, a2);
   }
   for ( i = 0;
-        i < CDynList::size(this[1]);
+        i < CDynList::size(*(this + 1));
         ++i )
   {
-    v6 = (_DWORD *)CDynList::elementAt(this[1], i);
-    if ( v6[5] != 3 && v6[4] == 9 && v6[11] == a2 && (int)v6[14] > 1 && v6[13] != 1 && a3 )
+    v6 = (_DWORD *)CDynList::elementAt(*(this + 1), i);
+    if ( v6[5] != 3 && v6[4] == 9 && v6[11] == a2 && (int)v6[14] > 1 && v6[13] != 1 && a3 != 0 )
     {
-      EcoSector = CSchedule::GetEcoSector((CSchedule *)this);
+      EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)this);
       if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)EcoSector + 68))(EcoSector, v6[12]) > a3 )
       {
         ++NumberOfBuildingTypeAtWork;
@@ -3909,8 +3899,8 @@ int  CSchedule::GetNumberOfBuildingTypeAtWork(enum BUILDING_TYPES a2) {
   struct CDynListEntry *i; // [esp+10h] [ebp-4h]
 
   v3 = 0;
-  for ( i = CDynList::FirstEntry(this[1]);
-        i;
+  for ( i = (struct CDynListEntry *)CDynList::FirstEntry(*(this + 1));
+        i != 0;
         i = (struct CDynListEntry *)CDynListEntry::Next(i) )
   {
     if ( *((_DWORD *)i + 5) != 3 && *((_DWORD *)i + 4) == 2 && *((_DWORD *)i + 21) == a2 && *((_DWORD *)i + 12) == 3 )
@@ -3930,10 +3920,10 @@ void  CSchedule::GetPlannedBuildingPosition(int a2, int & a3, int & a4) {
   int i; // [esp+Ch] [ebp-4h]
 
   for ( i = 0;
-        i < CDynList::size(this[1]);
+        i < CDynList::size(*(this + 1));
         ++i )
   {
-    v5 = (_DWORD *)CDynList::elementAt(this[1], i);
+    v5 = (_DWORD *)CDynList::elementAt(*(this + 1), i);
     if ( v5[5] != 3 && v5[4] == 9 && v5[12] == a2 )
     {
       CReserveDatabase::UnpackPosition(*this, v5[17], a3, a4);
@@ -3953,16 +3943,16 @@ int  CSchedule::CollectPlannedBuildingPlaces(class CReserveEntry * a2) {
   int v7; // [esp+18h] [ebp-4h]
 
   v4 = 0;
-  while ( *((_DWORD *)a2 + 3) )
+  while ( *((_DWORD *)a2 + 3) != 0 )
   {
     ++v4;
   }
   v7 = v4;
   for ( i = 0;
-        i < CDynList::size(this[1]);
+        i < CDynList::size(*(this + 1));
         ++i )
   {
-    v5 = CDynList::elementAt(this[1], i);
+    v5 = CDynList::elementAt(*(this + 1), i);
     if ( *(_DWORD *)(v5 + 20) != 3 && *(_DWORD *)(v5 + 16) == 9 && *(_DWORD *)(v5 + 56) == 1 )
     {
       *((_DWORD *)a2 + 11 * v7 + 3) = *(_DWORD *)(v5 + 44);
@@ -3978,11 +3968,11 @@ int  CSchedule::CollectPlannedBuildingPlaces(class CReserveEntry * a2) {
 
 
 // address=[0x2f48da0]
-// Decompiled from int __thiscall CSchedule::GetNextPositionInside(CSchedule *this, int a2, int a3)
+// Decompiled from int __thiscall CSchedule::GetNextPositionInside(CDynList **this, int a2, int a3)
 int  CSchedule::GetNextPositionInside(int a2, int a3) {
   
   unsigned int v3; // eax
-  _DWORD *v4; // eax
+  int *v4; // eax
   int v6; // [esp+18h] [ebp-34h]
   int v7; // [esp+1Ch] [ebp-30h]
   int v8; // [esp+20h] [ebp-2Ch]
@@ -3991,7 +3981,7 @@ int  CSchedule::GetNextPositionInside(int a2, int a3) {
   int v11; // [esp+2Ch] [ebp-20h]
   struct IScheduleEntry *SpecialTask; // [esp+30h] [ebp-1Ch]
   int v13; // [esp+34h] [ebp-18h]
-  CSchedule *v14; // [esp+38h] [ebp-14h]
+  CDynList **v14; // [esp+38h] [ebp-14h]
   unsigned int i; // [esp+3Ch] [ebp-10h]
   int v16; // [esp+48h] [ebp-4h]
 
@@ -4012,9 +4002,9 @@ int  CSchedule::GetNextPositionInside(int a2, int a3) {
     {
       break;
     }
-    v4 = (_DWORD *)std::vector<int>::operator[](i);
-    CReserveDatabase::UnpackPosition(*(CReserveDatabase **)v14, *v4, &v10, &v9);
-    v13 = CSchedule::CalcDistance(v14, a2, a3, v10, v9);
+    v4 = (int *)std::vector<int>::operator[](i);
+    CReserveDatabase::UnpackPosition(*v14, *v4, &v10, &v9);
+    v13 = CSchedule::CalcDistance((CSchedule *)v14, a2, a3, v10, v9);
     if ( v13 < v11 )
     {
       v11 = v13;
@@ -4022,7 +4012,7 @@ int  CSchedule::GetNextPositionInside(int a2, int a3) {
       v8 = v9;
     }
   }
-  v6 = CReserveDatabase::PackPosition(*(CReserveDatabase **)v14, v7, v8);
+  v6 = CReserveDatabase::PackPosition(*v14, v7, v8);
   v16 = -1;
   std::vector<SUNDERGROUNDCONCENTRATIONDATA>::~vector<SUNDERGROUNDCONCENTRATIONDATA>();
   return v6;
@@ -4069,7 +4059,7 @@ bool  CSchedule::BestAndPossiblePlaceOf8Grid(enum BUILDING_TYPES a2, struct SBUI
   v19 = a2;
   if ( a2 == 5 )
   {
-    EcoSector = CSchedule::GetEcoSector((CSchedule *)v25);
+    EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v25);
     a8 = (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, _DWORD))(*(_DWORD *)EcoSector + 260))(EcoSector, *a3, a3[1]);
   }
   for ( i = 0;
@@ -4077,8 +4067,8 @@ bool  CSchedule::BestAndPossiblePlaceOf8Grid(enum BUILDING_TYPES a2, struct SBUI
         i += v18 )
   {
     v12 = *(_DWORD *)std::vector<SPOSS_BUILD_PLACE>::operator[](i);
-    v9 = CSchedule::GetEcoSector((CSchedule *)v25);
-    if ( CReserveDatabase::IsBuildingPlaceAvailable(*v25, (int)v9, a2, v12, a4) )
+    v9 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v25);
+    if ( CReserveDatabase::IsBuildingPlaceAvailable(*v25, (int)v9, a2, v12, a4) != 0 )
     {
       v13 = *(char *)(std::vector<SPOSS_BUILD_PLACE>::operator[](i) + 4);
       v10 = (_DWORD *)std::vector<SPOSS_BUILD_PLACE>::operator[](i);
@@ -4213,16 +4203,16 @@ int  CSchedule::GeneralValuation(enum BUILDING_TYPES a2, int a3, int a4, int a5,
     case 5:
       CReserveDatabase::UnpackPosition(*v40, a4, &v37, &v38);
       CReserveDatabase::UnpackPosition(*v40, a5, &v34, &v35);
-      if ( a6 )
+      if ( a6 != 0 )
       {
-        v33 = CSchedule::CalcDistance((CSchedule *)v40, a4, a6);
+        v33 = CSchedule::CalcDistance(v40, a4, a6);
       }
-      EcoSector = CSchedule::GetEcoSector((CSchedule *)v40);
-      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)EcoSector + 228))(EcoSector, v37 / 16, v38 / 16) )
+      EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v40);
+      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)EcoSector + 228))(EcoSector, v37 / 16, v38 / 16) != 0 )
       {
-        v26 = CSchedule::GetEcoSector((CSchedule *)v40);
+        v26 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v40);
         v42 = (*(int (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v26 + 260))(v26, v37 / 16, v38 / 16);
-        v33 = CSchedule::CalcDistance((CSchedule *)v40, a4, v42);
+        v33 = CSchedule::CalcDistance(v40, a4, v42);
       }
       else
       {
@@ -4234,13 +4224,13 @@ int  CSchedule::GeneralValuation(enum BUILDING_TYPES a2, int a3, int a4, int a5,
         v37 /= 16;
         v38 /= 16;
       }
-      v25 = CSchedule::GetEcoSector((CSchedule *)v40);
-      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v25 + 232))(v25, v37, v38) )
+      v25 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v40);
+      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v25 + 232))(v25, v37, v38) != 0 )
       {
         v39 = 1500 - v36 - 25 * v33;
       }
-      v24 = CSchedule::GetEcoSector((CSchedule *)v40);
-      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v24 + 228))(v24, v37, v38) )
+      v24 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v40);
+      if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int, int))(*(_DWORD *)v24 + 228))(v24, v37, v38) != 0 )
       {
         v39 = 2000 - v36 - 25 * v33;
       }
@@ -4257,7 +4247,7 @@ int  CSchedule::GeneralValuation(enum BUILDING_TYPES a2, int a3, int a4, int a5,
       CReserveDatabase::UnpackPosition(*v40, a4, &v37, &v38);
       v39 = 1000 - 3 * a8;
       CReserveDatabase::UnpackPosition(*v40, a6, &v29, &v30);
-      v23 = CSchedule::GetEcoSector((CSchedule *)v40);
+      v23 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v40);
       (*(void (__thiscall **)(struct IAIEcoManager *, int, _BYTE *))(*(_DWORD *)v23 + 160))(v23, a2, v16);
       for ( i = 0;
             ;
@@ -4268,7 +4258,7 @@ int  CSchedule::GeneralValuation(enum BUILDING_TYPES a2, int a3, int a4, int a5,
         {
           break;
         }
-        v22 = CSchedule::GetEcoSector((CSchedule *)v40);
+        v22 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v40);
         v13 = (_DWORD *)std::vector<int>::operator[](i);
         (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, int *, int *))(*(_DWORD *)v22 + 52))(v22, *v13, &v34, &v35);
         v21 = CSchedule::CalcDistance((CSchedule *)v40, v34, v35, v37, v38);
@@ -4354,7 +4344,7 @@ bool  CSchedule::ReadMessages(void) {
   int v47; // [esp+70h] [ebp-44h]
   int v48; // [esp+74h] [ebp-40h]
   int v49; // [esp+78h] [ebp-3Ch]
-  _BYTE v50[16]; // [esp+7Ch] [ebp-38h] BYREF
+  CAIEvent v50; // [esp+7Ch] [ebp-38h] BYREF
   int v51; // [esp+8Ch] [ebp-28h]
   int v52; // [esp+90h] [ebp-24h]
   struct CDynListEntry *ProductivityControll; // [esp+94h] [ebp-20h]
@@ -4365,64 +4355,64 @@ bool  CSchedule::ReadMessages(void) {
   int v58; // [esp+B0h] [ebp-4h]
 
   v56 = this;
-  CAIEvent::CAIEvent((CAIEvent *)v50, 0, 0, 0, 0);
-  EcoSector = CSchedule::GetEcoSector((CSchedule *)v56);
+  CAIEvent::CAIEvent(&v50, 0, 0, 0, 0);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
   v48 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)EcoSector + 336))(EcoSector);
   ProductivityControll = 0;
   SpecialTask = 0;
   v57 = 0;
-  if ( !v48 )
+  if ( v48 == 0 )
   {
     return 0;
   }
-  while ( (*(unsigned __int8 (__thiscall **)(int, _BYTE *, int))(*(_DWORD *)v48 + 8))(v48, v50, 1) )
+  while ( (*(unsigned __int8 (__thiscall **)(int, CAIEvent *, int))(*(_DWORD *)v48 + 8))(v48, &v50, 1) != 0 )
   {
-    v2 = CAIEvent::Type((CAIEvent *)v50);
+    v2 = CAIEvent::Type(&v50);
     v49 = v2 - 4;
     switch ( v2 )
     {
       case 4:
-        v51 = CAIEvent::Data2((CAIEvent *)v50);
-        v33 = CSchedule::GetEcoSector((CSchedule *)v56);
-        v34 = CSchedule::GetEcoSector((CSchedule *)v56);
+        v51 = CAIEvent::Data2(&v50);
+        v33 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
+        v34 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
         v8 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)v34 + 132))(v34);
-        v9 = CAIEvent::Data2((CAIEvent *)v50);
+        v9 = CAIEvent::Data2(&v50);
         if ( (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v33 + 96))(v33, v9) == v8 )
         {
           v52 = 3;
           BuildingEvent = CSchedule::GetBuildingEvent(v56, v51, 2);
-          if ( BuildingEvent )
+          if ( BuildingEvent != 0 )
           {
             v52 = 2;
             *((_DWORD *)BuildingEvent + 5) = 3;
           }
           ProductivityControll = CSchedule::GetProductivityControll(v56, v51, v52);
-          if ( ProductivityControll )
+          if ( ProductivityControll != 0 )
           {
             *((_DWORD *)ProductivityControll + 5) = 3;
           }
-          v19 = CAIEvent::Data1((CAIEvent *)v50);
-          v10 = CAIEvent::Data2((CAIEvent *)v50);
+          v19 = CAIEvent::Data1(&v50);
+          v10 = CAIEvent::Data2(&v50);
           BBSupportTracePrintF(3, "AI Building %i died from PlayerNr %i", v10, v19);
           v57 = 1;
         }
         break;
       case 5:
-        v55 = CAIEvent::Data2((CAIEvent *)v50);
-        v3 = CAIEvent::Data1((CAIEvent *)v50);
+        v55 = CAIEvent::Data2(&v50);
+        v3 = CAIEvent::Data1(&v50);
         BBSupportTracePrintF(3, "AI Building %i birth from PlayerNr %i", v55, v3);
-        v44 = CSchedule::GetEcoSector((CSchedule *)v56);
-        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v44 + 304))(v44, v55) )
+        v44 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
+        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v44 + 304))(v44, v55) != 0 )
         {
-          v42 = CSchedule::GetEcoSector((CSchedule *)v56);
-          v43 = CSchedule::GetEcoSector((CSchedule *)v56);
+          v42 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
+          v43 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
           v4 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)v43 + 132))(v43);
           if ( (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v42 + 96))(v42, v55) == v4 )
           {
-            v41 = CSchedule::GetEcoSector((CSchedule *)v56);
+            v41 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
             (*(void (__thiscall **)(struct IAIEcoManager *, int, int *, int *))(*(_DWORD *)v41 + 52))(v41, v55, &v38, &v39);
             BuildingEvent = CSchedule::GetBuildingAtPosition(v56, v38, v39);
-            if ( BuildingEvent )
+            if ( BuildingEvent != 0 )
             {
               CSchedule::ChangeBuildingLevel(v56, *((_DWORD *)BuildingEvent + 12), v55, 2);
               *((_DWORD *)BuildingEvent + 12) = v55;
@@ -4431,16 +4421,16 @@ bool  CSchedule::ReadMessages(void) {
             }
             v51 = v55;
             v52 = 2;
-            v40 = CSchedule::GetEcoSector((CSchedule *)v56);
+            v40 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
             v47 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v40 + 72))(v40, v55);
-            v5 = CAIEvent::Data1((CAIEvent *)v50);
+            v5 = CAIEvent::Data1(&v50);
             BBSupportTracePrintF(3, "AI BuildingType %s birth from PlayerNr %i", (&off_3ABC174)[2 * v47], v5);
             ProductivityControll = CSchedule::GetProductivityControll(v56, v51, v52);
-            if ( !ProductivityControll && CProductionDataTab::BuildingMustBeControl(v56[10], v47, (int)v56[6]) )
+            if ( ProductivityControll == 0 && CProductionDataTab::BuildingMustBeControl(v56[10], v47, (int)v56[6]) )
             {
               C = operator new(0x70u);
               v58 = 0;
-              if ( C )
+              if ( C != 0 )
               {
                 v6 = CReserveDatabase::PackPosition(*v56, v38, v39);
                 v23 = (struct IScheduleEntry *)CProductivityControll::CProductivityControll(C, v55, 2, v47, v6, 0);
@@ -4450,24 +4440,24 @@ bool  CSchedule::ReadMessages(void) {
                 v23 = 0;
               }
               v58 = -1;
-              CSchedule::NewSchedEntry((CSchedule *)v56, v23);
+              CSchedule::NewSchedEntry(v56, v23);
             }
             v57 = 1;
           }
         }
         break;
       case 6:
-        v55 = CAIEvent::Data2((CAIEvent *)v50);
-        v37 = CSchedule::GetEcoSector((CSchedule *)v56);
-        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v37 + 304))(v37, v55) )
+        v55 = CAIEvent::Data2(&v50);
+        v37 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
+        if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v37 + 304))(v37, v55) != 0 )
         {
-          v35 = CSchedule::GetEcoSector((CSchedule *)v56);
-          v36 = CSchedule::GetEcoSector((CSchedule *)v56);
+          v35 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
+          v36 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
           v7 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)v36 + 132))(v36);
           if ( (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v35 + 96))(v35, v55) == v7 )
           {
             BuildingEvent = CSchedule::GetBuildingEvent(v56, v55, 2);
-            if ( BuildingEvent )
+            if ( BuildingEvent != 0 )
             {
               v52 = 2;
               *((_DWORD *)BuildingEvent + 14) = 7;
@@ -4479,50 +4469,50 @@ bool  CSchedule::ReadMessages(void) {
         }
         break;
       case 7:
-        v51 = CAIEvent::Data2((CAIEvent *)v50);
+        v51 = CAIEvent::Data2(&v50);
         v52 = 3;
-        v26 = CSchedule::GetEcoSector((CSchedule *)v56);
-        v27 = CSchedule::GetEcoSector((CSchedule *)v56);
+        v26 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
+        v27 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
         v16 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)v27 + 132))(v27);
-        v17 = CAIEvent::Data2((CAIEvent *)v50);
+        v17 = CAIEvent::Data2(&v50);
         if ( (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v26 + 96))(v26, v17) == v16 )
         {
           ProductivityControll = CSchedule::GetProductivityControll(v56, v51, v52);
-          if ( ProductivityControll )
+          if ( ProductivityControll != 0 )
           {
             v57 = 1;
           }
         }
         break;
       case 8:
-        SpecialTask = CSchedule::GetSpecialTask((CSchedule *)v56, 8);
-        v28 = CSchedule::GetEcoSector((CSchedule *)v56);
-        v29 = CSchedule::GetEcoSector((CSchedule *)v56);
+        SpecialTask = CSchedule::GetSpecialTask(v56, 8);
+        v28 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
+        v29 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
         v13 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)v29 + 132))(v29);
-        v14 = CAIEvent::Data2((CAIEvent *)v50);
+        v14 = CAIEvent::Data2(&v50);
         if ( (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v28 + 96))(v28, v14) == v13 )
         {
-          if ( SpecialTask )
+          if ( SpecialTask != 0 )
           {
             *((_BYTE *)SpecialTask + 60) = 1;
           }
           v57 = 1;
-          v21 = CAIEvent::Data1((CAIEvent *)v50);
-          v15 = CAIEvent::Data2((CAIEvent *)v50);
+          v21 = CAIEvent::Data1(&v50);
+          v15 = CAIEvent::Data2(&v50);
           BBSupportTracePrintF(3, "AI Residence %i empty from PlayerNr %i", v15, v21);
         }
         break;
       case 10:
-        v30 = CAIEvent::Data2((CAIEvent *)v50);
-        v31 = CSchedule::GetEcoSector((CSchedule *)v56);
-        v32 = CSchedule::GetEcoSector((CSchedule *)v56);
+        v30 = CAIEvent::Data2(&v50);
+        v31 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
+        v32 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
         v11 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)v32 + 132))(v32);
         if ( (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v31 + 96))(v31, v30) == v11 )
         {
           CSchedule::UpdateExpandationEvents(v56, v30);
           v57 = 1;
-          v20 = CAIEvent::Data1((CAIEvent *)v50);
-          v12 = CAIEvent::Data2((CAIEvent *)v50);
+          v20 = CAIEvent::Data1(&v50);
+          v12 = CAIEvent::Data2(&v50);
           BBSupportTracePrintF(3, "AI Tower %i  occupied from PlayerNr %i", v12, v20);
         }
         break;
@@ -4530,10 +4520,10 @@ bool  CSchedule::ReadMessages(void) {
         v57 = 1;
         break;
       case 30:
-        v25 = CSchedule::GetEcoSector((CSchedule *)v56);
+        v25 = (struct IAIEcoManager *)CSchedule::GetEcoSector((CSchedule *)v56);
         (*(void (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)v25 + 132))(v25);
-        v22 = CAIEvent::Data2((CAIEvent *)v50);
-        v18 = CAIEvent::Data1((CAIEvent *)v50);
+        v22 = CAIEvent::Data2(&v50);
+        v18 = CAIEvent::Data1(&v50);
         CSchedule::ProduceWeapons((CSchedule *)v56, v18, v22);
         v57 = 1;
         break;

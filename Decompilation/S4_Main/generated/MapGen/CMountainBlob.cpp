@@ -7,7 +7,7 @@
  CMountainBlob::CMountainBlob(int a2, int a3, int a4, int a5, int a6, int a7, class CCheckLayer * a8) {
   
   CHeightBlob::CHeightBlob(this, a2, a3, a4, a5, a6, a7, a8);
-  *(_DWORD *)this = CMountainBlob::_vftable_;
+  *(_DWORD *)this = &CMountainBlob::_vftable_;
   return this;
 }
 
@@ -24,12 +24,9 @@ void  CMountainBlob::processFillPoint(int a2, int a3) {
   v4 = 255;
   while ( v5 < 6 )
   {
-    if ( v4 > *(unsigned __int8 *)(g_pMapElement + 4 * (*((_DWORD *)this + 3) * (*((_DWORD *)this + v5 + 17) + a3) + *((_DWORD *)this + v5 + 11) + a2)) )
+    if ( v4 > *(unsigned __int8 *)(g_pMapElement + 4 * (*((_DWORD *)this + 3) * (*((_DWORD *)this + v5 + 17) + a3) + *((_DWORD *)this + v5 + 11) + a2)) && CCheckLayer::getPoint(*((CCheckLayer **)this + 8), *((_DWORD *)this + v5 + 11) + a2 - *((_DWORD *)this + 9), *((_DWORD *)this + v5 + 17) + a3 - *((_DWORD *)this + 10)) != 0 )
     {
-      if ( CCheckLayer::getPoint(*((CCheckLayer **)this + 8), *((_DWORD *)this + v5 + 11) + a2 - *((_DWORD *)this + 9), *((_DWORD *)this + v5 + 17) + a3 - *((_DWORD *)this + 10)) )
-      {
-        v4 = *(unsigned __int8 *)(g_pMapElement + 4 * (*((_DWORD *)this + 3) * (*((_DWORD *)this + v5 + 17) + a3) + *((_DWORD *)this + v5 + 11) + a2));
-      }
+      v4 = *(unsigned __int8 *)(g_pMapElement + 4 * (*((_DWORD *)this + 3) * (*((_DWORD *)this + v5 + 17) + a3) + *((_DWORD *)this + v5 + 11) + a2));
     }
     ++v5;
   }
@@ -39,7 +36,7 @@ void  CMountainBlob::processFillPoint(int a2, int a3) {
   }
   else
   {
-    *(_BYTE *)(g_pMapElement + 4 * (a2 + *((_DWORD *)this + 3) * a3)) = v4 + CRandom16::Rand((CRandom16 *)g_pRand) % 2 + 3;
+    *(_BYTE *)(g_pMapElement + 4 * (a2 + *((_DWORD *)this + 3) * a3)) = v4 + CRandom16::Rand(g_pRand) % 2 + 3;
   }
   result = this;
   if ( *(unsigned __int8 *)(g_pMapElement + 4 * (a2 + *((_DWORD *)this + 3) * a3)) >= (int)(unsigned __int8)g_uSnowLimit )
@@ -58,13 +55,12 @@ void  CMountainBlob::processFillPoint(int a2, int a3) {
 // Decompiled from int __thiscall CMountainBlob::processPoint(CCheckLayer **this, int a2, int a3)
 void  CMountainBlob::processPoint(int a2, int a3) {
   
-  if ( *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3) + 1) != 16 && *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3) + 1) != 7 )
+  if ( *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)*(this + 3) * a3) + 1) == 16 || *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)*(this + 3) * a3) + 1) == 7 )
   {
-    return CCheckLayer::setPoint(this[8], a2 - (_DWORD)this[9], a3 - (_DWORD)this[10], 1u);
+    *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)*(this + 3) * a3) + 1) = 16;
+    *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)*(this + 3) * a3)) += 5;
   }
-  *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3) + 1) = 16;
-  *(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)this[3] * a3)) += 5;
-  return CCheckLayer::setPoint(this[8], a2 - (_DWORD)this[9], a3 - (_DWORD)this[10], 1u);
+  return ((int (__thiscall *)(CCheckLayer *, int, int, unsigned __int16))CCheckLayer::setPoint)(*(this + 8), a2 - (_DWORD)*(this + 9), a3 - (_DWORD)*(this + 10), 1u);
 }
 
 

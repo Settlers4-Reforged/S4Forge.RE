@@ -3,7 +3,7 @@
 // Definitions for class CAIAgentDarkTribeShamans
 
 // address=[0x13022a0]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeShamans::Execute(CAIAgentDarkTribeShamans *this, unsigned int a2, unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeShamans::Execute(CAIDarkTribeSectorAgent *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentDarkTribeShamans::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -25,39 +25,36 @@ unsigned int  CAIAgentDarkTribeShamans::Execute(unsigned int a2, unsigned int a3
   v15 = this;
   v3 = CAIDarkTribeSectorAgent::SectorAI(this);
   v4 = CAISectorAI::TaskForceGroup(v3);
-  for ( i = (CUserToolsManager *)CAITaskForceGroup::FirstTaskForce(v4, 7);
-        i;
+  for ( i = (CUserToolsManager *)CAITaskForceGroup::FirstTaskForce((CAITaskForceGroup *)v4, 7);
+        i != 0;
         i = TaskForceGroupMemberOfSameClass )
   {
-    TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
-    v12 = CAITaskForce::NumberOfEntities(i);
+    TaskForceGroupMemberOfSameClass = (CUserToolsManager *)CAITaskForce::NextTaskForceGroupMemberOfSameClass((CAITaskForce *)i);
+    v12 = CAITaskForce::NumberOfEntities((CAITaskForce *)i);
     if ( v12 <= 0 )
     {
       v17 = i;
-      if ( i )
+      if ( i != 0 )
       {
         (*(void (__thiscall **)(CUserToolsManager *, int))(*(_DWORD *)v17 + 8))(v17, 1);
       }
     }
     else
     {
-      v16 = CAITaskForce::Command(i);
+      v16 = CAITaskForce::Command((CAITaskForce *)i);
       CAITaskForce::Status(i);
-      if ( v16 != 3 && v16 != 9 && (CAITaskForce::Flags(i) & 0x20000000) == 0 )
+      if ( v16 != 3 && v16 != 9 && (CAITaskForce::Flags((CAITaskForce *)i) & 0x20000000) == 0 && (((unsigned int)&s_iMsgTracer2.m_aMessages[15456] & CAITaskForce::Flags((CAITaskForce *)i)) != 0 || CAITaskForce::Command((CAITaskForce *)i) != 1 || (v5 = CAITaskForce::CmdTimeStamp(i)) + IAIEnvironment::Rand() % 0x200 + 200 <= a2) )
       {
-        if ( ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(i)) != 0 || CAITaskForce::Command(i) != 1 || (v5 = CAITaskForce::CmdTimeStamp(i), v5 + IAIEnvironment::Rand() % 0x200u + 200 <= a2) )
+        CAITaskForce::ClearEntityAddedFlag((CAITaskForce *)i);
+        if ( CAITaskForce::GetPositionOfFirstEntity((CAITaskForce *)i, &v11, &v10) )
         {
-          CAITaskForce::ClearEntityAddedFlag(i);
-          if ( CAITaskForce::GetPositionOfFirstEntity(i, &v11, &v10) )
+          v13 = v11;
+          v14 = v10;
+          v6 = CAIDarkTribeSectorAgent::SectorAI(v15);
+          if ( CAIDarkTribeSectorAI::FindMushroomFarm(v6, (struct _Cnd_internal_imp_t **)&v13, (struct _Mtx_internal_imp_t **)&v14, 15, 120) )
           {
-            v13 = v11;
-            v14 = v10;
-            v6 = CAIDarkTribeSectorAgent::SectorAI(v15);
-            if ( CAIDarkTribeSectorAI::FindMushroomFarm(v6, &v13, &v14, 15, 120) )
-            {
-              v7 = IAIEnvironment::PackXYFast(v13, v14);
-              (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)i + 32))(i, 1, v7, 0);
-            }
+            v7 = IAIEnvironment::PackXYFast(v13, v14);
+            (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)i + 32))(i, 1, v7, 0);
           }
         }
       }
@@ -71,14 +68,14 @@ unsigned int  CAIAgentDarkTribeShamans::Execute(unsigned int a2, unsigned int a3
 // Decompiled from CAIAgentDarkTribeShamans *__thiscall CAIAgentDarkTribeShamans::CAIAgentDarkTribeShamans(CAIAgentDarkTribeShamans *this)
  CAIAgentDarkTribeShamans::CAIAgentDarkTribeShamans(void) {
   
-  CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "shamans");
+  CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent((CAIDarkTribeSectorAgent *)this, "shamans");
   *(_DWORD *)this = &CAIAgentDarkTribeShamans::_vftable_;
   return this;
 }
 
 
 // address=[0x1322f80]
-// Decompiled from void __thiscall CAIAgentDarkTribeShamans::~CAIAgentDarkTribeShamans(CAIAgentDarkTribeShamans *this)
+// Decompiled from void __thiscall CAIAgentDarkTribeShamans::~CAIAgentDarkTribeShamans(CAIScheduler **this)
  CAIAgentDarkTribeShamans::~CAIAgentDarkTribeShamans(void) {
   
   CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(this);

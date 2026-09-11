@@ -26,8 +26,8 @@ void  CTutorial::Kill(void) {
   *((_DWORD *)this + 1) = 0;
   CTutorial::EnableAllGUIControls(this);
   CTutorial::RefreshGUIControlStatus(this);
-  IGuiEngine::SetDlgToIgnore((IGuiEngine *)g_pGUIEngine, 36, 0);
-  IGuiEngine::SetCtrlStatusCallback((IGuiEngine *)g_pGUIEngine, 0);
+  IGuiEngine::SetDlgToIgnore(g_pGUIEngine, 36, 0);
+  IGuiEngine::SetCtrlStatusCallback(g_pGUIEngine, 0);
   return IEventEngine::UnRegisterHandle(g_pEvnEngine, (struct IEvn_Handle *)&g_cTutorial);
 }
 
@@ -36,7 +36,7 @@ void  CTutorial::Kill(void) {
 // Decompiled from int __thiscall CTutorial::RefreshGUIControlStatus(CTutorial *this)
 void  CTutorial::RefreshGUIControlStatus(void) {
   
-  return IGuiEngine::RefreshAllSurfaces(g_pGUIEngine);
+  return ((int (__thiscall *)(struct IGuiEngine *))IGuiEngine::RefreshAllSurfaces)(g_pGUIEngine);
 }
 
 
@@ -105,13 +105,13 @@ void  CTutorial::SetWorldTutorialCursor(int a2, int a3) {
   int result; // eax
   unsigned int v6; // [esp-4h] [ebp-Ch]
 
-  if ( *((_DWORD *)this + 2) )
+  if ( *((_DWORD *)this + 2) != 0 )
   {
     v6 = *((_DWORD *)this + 2);
-    v3 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
+    v3 = CLogic::Effects(g_pLogic);
     IEffects::DeleteMovingEffect(v3, v6);
   }
-  v4 = CLogic::Effects((DWORD *)g_pLogic);
+  v4 = (int)CLogic::Effects(g_pLogic);
   result = (*(int (__thiscall **)(int, int, int, int))(*(_DWORD *)v4 + 40))(v4, 57, a2, a3);
   *((_DWORD *)this + 2) = result;
   return result;
@@ -127,15 +127,14 @@ void  CTutorial::DeleteWorldTutorialCursor(void) {
   unsigned int v3; // [esp-4h] [ebp-8h]
 
   result = this;
-  if ( !*((_DWORD *)this + 2) )
+  if ( *((_DWORD *)this + 2) != 0 )
   {
-    return result;
+    v3 = *((_DWORD *)this + 2);
+    v2 = CLogic::Effects(g_pLogic);
+    IEffects::DeleteMovingEffect(v2, v3);
+    result = this;
+    *((_DWORD *)this + 2) = 0;
   }
-  v3 = *((_DWORD *)this + 2);
-  v2 = (IEffects *)CLogic::Effects((DWORD *)g_pLogic);
-  IEffects::DeleteMovingEffect(v2, v3);
-  result = this;
-  *((_DWORD *)this + 2) = 0;
   return result;
 }
 
@@ -144,7 +143,7 @@ void  CTutorial::DeleteWorldTutorialCursor(void) {
 // Decompiled from CTutorial *__thiscall CTutorial::CTutorial(CTutorial *this)
  CTutorial::CTutorial(void) {
   
-  IEvn_Handle::IEvn_Handle(this);
+  IEvn_Handle::IEvn_Handle((IEvn_Handle *)this);
   *(_DWORD *)this = &CTutorial::_vftable_;
   return this;
 }
@@ -180,7 +179,7 @@ bool  CTutorial::OnEvent(class CEvn_Event & a2) {
         return 0;
       }
       SelectedBuilding = CTutorial::GetSelectedBuilding(this);
-      CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 12, SelectedBuilding);
+      CGameScriptManager::SendGameEvent(g_pScriptMgr, 12u, SelectedBuilding);
     }
     else
     {
@@ -190,29 +189,28 @@ bool  CTutorial::OnEvent(class CEvn_Event & a2) {
         {
           case 0x193u:
             v7 = CTutorial::GetSelectedBuilding(this);
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 14, v7);
+            CGameScriptManager::SendGameEvent(g_pScriptMgr, 14u, v7);
             return 0;
           case 0x195u:
-            if ( !a2->m_wParam )
+            if ( a2->m_wParam != 0 )
             {
-              return 0;
+              v4 = CTutorial::GetSelectedBuilding(this);
+              CGameScriptManager::SendGameEvent(g_pScriptMgr, 10u, v4);
             }
-            v4 = CTutorial::GetSelectedBuilding(this);
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 10, v4);
             return 0;
           case 0x197u:
             v3 = CTutorial::GetSelectedBuilding(this);
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 11, v3);
+            CGameScriptManager::SendGameEvent(g_pScriptMgr, 11u, v3);
             return 0;
           case 0x199u:
 LABEL_32:
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 16, 1061);
+            CGameScriptManager::SendGameEvent(g_pScriptMgr, 16u, 1061);
             return 0;
           case 0x1A3u:
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 0x14u);
+            CGameScriptManager::SendGameEvent(g_pScriptMgr, 0x14u);
             return 0;
           case 0x1ACu:
-            CGameScriptManager::SetGlobal((CGameScriptManager *)g_pScriptMgr, "gActiveMenu", byte_3F1E908 + 8 * a2->m_iEventId);
+            CGameScriptManager::SetGlobal(g_pScriptMgr, "gActiveMenu", byte_3F1E908 + 8 * a2->m_iEventId);
             return 0;
           case 0x1ADu:
           case 0x1AEu:
@@ -231,41 +229,41 @@ LABEL_32:
           case 0x1C9u:
           case 0x1CAu:
           case 0x1CBu:
-            CGameScriptManager::SetGlobal((CGameScriptManager *)g_pScriptMgr, "gActiveMenu", 8 * a2->m_iEventId);
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 19, 8 * a2->m_iEventId, a2->m_wParam, a2->m_lParam);
+            CGameScriptManager::SetGlobal(g_pScriptMgr, "gActiveMenu", 8 * a2->m_iEventId);
+            CGameScriptManager::SendGameEvent(g_pScriptMgr, 19u, 8 * a2->m_iEventId, a2->m_wParam, a2->m_lParam);
             return 0;
           case 0x1B5u:
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 8, a2->m_lParam);
+            CGameScriptManager::SendGameEvent(g_pScriptMgr, 8u, a2->m_lParam);
             return 0;
           case 0x1CEu:
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 0x15u, a2->m_wParam, a2->m_lParam);
+            CGameScriptManager::SendGameEvent(g_pScriptMgr, 0x15u, a2->m_wParam, a2->m_lParam);
             return 0;
           case 0x25Au:
             goto LABEL_35;
           case 0x25Du:
 LABEL_30:
             *((_DWORD *)this + 1) = a2->m_lParam;
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 15, a2->m_lParam);
+            CGameScriptManager::SendGameEvent(g_pScriptMgr, 15u, a2->m_lParam);
             return 0;
           case 0x275u:
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 16, 1712);
+            CGameScriptManager::SendGameEvent(g_pScriptMgr, 16u, 1712);
             return 0;
           case 0x276u:
-            CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 16, 1711);
+            CGameScriptManager::SendGameEvent(g_pScriptMgr, 16u, 1711);
             return 0;
           default:
             return 0;
         }
       }
       v6 = CTutorial::GetSelectedBuilding(this);
-      CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 13, v6);
+      CGameScriptManager::SendGameEvent(g_pScriptMgr, 13u, v6);
     }
     return 0;
   }
   if ( event == 402 )
   {
 LABEL_35:
-    CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 16, 0);
+    CGameScriptManager::SendGameEvent(g_pScriptMgr, 16u, 0);
     return 0;
   }
   switch ( event )
@@ -273,16 +271,16 @@ LABEL_35:
     case 9u:
       if ( CTutorial::IsWarriorSelected(this) )
       {
-        CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 9u);
+        CGameScriptManager::SendGameEvent(g_pScriptMgr, 9u);
       }
       return 0;
     case 0xBu:
-      if ( a2->m_wParam != 32 || byte_3F44E66 )
+      if ( a2->m_wParam != 32 || byte_3F44E66 != 0 )
       {
         return 0;
       }
       byte_3F44E66 = 1;
-      CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 7u);
+      CGameScriptManager::SendGameEvent(g_pScriptMgr, 7u);
       result = 0;
       break;
     case 0x12u:
@@ -296,7 +294,7 @@ LABEL_35:
       result = 0;
       break;
     case 0x6Au:
-      CGameScriptManager::SendGameEvent((CGameScriptManager *)g_pScriptMgr, 16, a2->m_wParam);
+      CGameScriptManager::SendGameEvent(g_pScriptMgr, 16u, a2->m_wParam);
       goto LABEL_32;
     default:
       return 0;
@@ -314,16 +312,17 @@ bool  CTutorial::IsWarriorSelected(void) {
   unsigned __int16 *v3; // eax
   _BYTE v5[16]; // [esp+4h] [ebp-2Ch] BYREF
   CTutorial *v6; // [esp+14h] [ebp-1Ch]
+  unsigned __int8 *; // [esp+18h] [ebp-18h]
   unsigned int i; // [esp+1Ch] [ebp-14h]
   char v9; // [esp+22h] [ebp-Eh]
   char v10; // [esp+23h] [ebp-Dh]
   int v11; // [esp+2Ch] [ebp-4h]
 
   v6 = this;
-  v1 = CInputProcessor::Selection();
+  v1 = (int)CInputProcessor::Selection();
   std::vector<unsigned short>::vector<unsigned short>(v1);
   v11 = 0;
-  if ( std::vector<unsigned short>::size(v5) )
+  if ( std::vector<unsigned short>::size(v5) != 0 )
   {
     for ( i = 0;
           ;
@@ -334,8 +333,9 @@ bool  CTutorial::IsWarriorSelected(void) {
       {
         break;
       }
-      v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
-      if ( CSettlerMgr::GetSettlerPtr(*v3) )
+      v3 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(unsigned int))std::vector<unsigned short>::operator[])(i);
+       = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*v3);
+      if (  != 0 )
       {
         v10 = 1;
         v11 = -1;
@@ -367,10 +367,10 @@ int  CTutorial::GetSelectedBuilding(void) {
   int v11; // [esp+30h] [ebp-4h]
 
   v6 = this;
-  v1 = CInputProcessor::Selection();
+  v1 = (int)CInputProcessor::Selection();
   std::vector<unsigned short>::vector<unsigned short>(v1);
   v11 = 0;
-  if ( std::vector<unsigned short>::size(v5) )
+  if ( std::vector<unsigned short>::size(v5) != 0 )
   {
     for ( i = 0;
           ;
@@ -381,11 +381,11 @@ int  CTutorial::GetSelectedBuilding(void) {
       {
         break;
       }
-      v3 = (unsigned __int16 *)std::vector<unsigned short>::operator[](i);
-      BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *v3);
-      if ( BuildingPtr )
+      v3 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(unsigned int))std::vector<unsigned short>::operator[])(i);
+      BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *v3);
+      if ( BuildingPtr != 0 )
       {
-        v8 = IEntity::Type((unsigned __int16 *)BuildingPtr);
+        v8 = IEntity::Type((IEntity *)BuildingPtr);
         v11 = -1;
         std::vector<unsigned short>::~vector<unsigned short>(v5);
         return v8;

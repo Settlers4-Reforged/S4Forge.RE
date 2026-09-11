@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateEcoStatistic::DynamicCreateFunc(void * a1) {
   CStateEcoStatistic *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateEcoStatistic *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateEcoStatistic::CStateEcoStatistic(C, a1);
   }
@@ -24,21 +24,21 @@ class CGameState * __cdecl CStateEcoStatistic::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateEcoStatistic *__thiscall CStateEcoStatistic::CStateEcoStatistic(CStateEcoStatistic *this, void *a2)
  CStateEcoStatistic::CStateEcoStatistic(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateEcoStatistic::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  CGuiGameState::SetupGui(this, (const wchar_t *)&dword_373E188[1], 22, GuiDlgMainStatisticEcoProc);
-  IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
+  CGuiGameState::SetupGui((CGuiGameState *)this, (const wchar_t *)&dword_373E188[1], 22, (bool (__cdecl *)(int, int, int))GuiDlgMainStatisticEcoProc);
+  IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
   return this;
 }
 
 
 // address=[0x14a48c0]
-// Decompiled from void __thiscall CStateEcoStatistic::~CStateEcoStatistic(CStateEcoStatistic *this)
+// Decompiled from void __thiscall CStateEcoStatistic::~CStateEcoStatistic(CGuiGameState *this)
  CStateEcoStatistic::~CStateEcoStatistic(void) {
   
-  *(_DWORD *)this = &CStateEcoStatistic::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 22) && BBSupportDbgReport(2, "main\\States\\StateEcoStatistic.cpp", 62, "bRet") == 1 )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateEcoStatistic::_vftable_;
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 22) && BBSupportDbgReport(2, "main\\States\\StateEcoStatistic.cpp", 62, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -62,20 +62,19 @@ bool  CStateEcoStatistic::Perform(void) {
     }
   }
   v1 = dword_402CC4C + 30;
-  if ( v1 >= timeGetTime() )
+  if ( v1 < timeGetTime() )
   {
-    return 1;
+    dword_402CC4C = timeGetTime();
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  dword_402CC4C = timeGetTime();
-  IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-  IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   return 1;
 }
 
 
 // address=[0x14a49e0]
-// Decompiled from char __thiscall CStateEcoStatistic::OnEvent(CStateEcoStatistic *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateEcoStatistic::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateEcoStatistic::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+8h] [ebp-5Ch]
@@ -88,35 +87,34 @@ bool  CStateEcoStatistic::OnEvent(class CEvn_Event & a2) {
   event = a2->m_iEventId;
   if ( event == 11 )
   {
-    if ( (unsigned __int16)a2->m_wParam != 27 )
+    if ( (unsigned __int16)a2->m_wParam == 27 )
     {
-      return CGuiGameState::OnEvent(this, a2);
+      v4 = CEvn_Event::CEvn_Event(&v7, 0x5Du, 0, 0, 0);
+      v8 = 0;
+      IEventEngine::SendAMessage(g_pEvnEngine, v4);
+      v8 = -1;
+      CEvn_Event::~CEvn_Event(&v7);
+      return 1;
     }
-    v4 = CEvn_Event::CEvn_Event(&v7, 0x5Du, 0, 0, 0);
-    v8 = 0;
-    IEventEngine::SendAMessage(g_pEvnEngine, v4);
-    v8 = -1;
-    CEvn_Event::~CEvn_Event(&v7);
-    return 1;
+    return CGuiGameState::OnEvent(this, a2);
   }
   if ( event != 13 )
   {
-    if ( event != 119 )
+    if ( event == 119 )
     {
-      return CGuiGameState::OnEvent(this, a2);
+      CGameStateHandler::Next();
+      return 1;
     }
-    CGameStateHandler::Next();
-    return 1;
+    return CGuiGameState::OnEvent(this, a2);
   }
-  if ( a2->m_wParam != 27 )
+  if ( a2->m_wParam == 27 )
   {
-    return 1;
+    v3 = CEvn_Event::CEvn_Event(&v6, 0x77u, 0, 0, 0);
+    v8 = 1;
+    IEventEngine::SendAMessage(g_pEvnEngine, v3);
+    v8 = -1;
+    CEvn_Event::~CEvn_Event(&v6);
   }
-  v3 = CEvn_Event::CEvn_Event(&v6, 0x77u, 0, 0, 0);
-  v8 = 1;
-  IEventEngine::SendAMessage(g_pEvnEngine, v3);
-  v8 = -1;
-  CEvn_Event::~CEvn_Event(&v6);
   return 1;
 }
 

@@ -19,16 +19,16 @@
   std::list<CEntityTask>::list<CEntityTask>(v5 + 26);
   LOBYTE(v7) = 1;
   operator^<unsigned int>(a2, &v4);
-  if ( v4 )
+  if ( v4 != 0 )
   {
-    operator^<unsigned char>(a2, v5 + 30);
-    operator^<unsigned char>(a2, (char *)v5 + 121);
-    operator^<unsigned char>(a2, (char *)v5 + 122);
-    operator^<unsigned char>(a2, (char *)v5 + 123);
-    operator^<unsigned char>(a2, v5 + 31);
-    operator^<unsigned char>(a2, (char *)v5 + 125);
-    operator^<int>(a2, (int)(v5 + 34));
-    operator^<int>(a2, (int)(v5 + 32));
+    operator^<unsigned char>(a2, (unsigned __int8 *)v5 + 120);
+    operator^<unsigned char>(a2, (unsigned __int8 *)v5 + 121);
+    operator^<unsigned char>(a2, (unsigned __int8 *)v5 + 122);
+    operator^<unsigned char>(a2, (unsigned __int8 *)v5 + 123);
+    operator^<unsigned char>(a2, (unsigned __int8 *)v5 + 124);
+    operator^<unsigned char>(a2, (unsigned __int8 *)v5 + 125);
+    operator^<int>((struct std::istream *)a2, v5 + 34);
+    operator^<int>((struct std::istream *)a2, v5 + 32);
   }
   if ( v4 < 2 )
   {
@@ -37,7 +37,7 @@
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<short>(a2, &v6);
+  operator^<short>(a2, (int)&v6);
   v5[25] = v6;
   v7 = -1;
   return v5;
@@ -51,9 +51,9 @@ void  CAnimal::Store(std::ostream & a1) {
   int v2; // [esp+0h] [ebp-Ch] BYREF
   __int16 unk_64; // [esp+Ah] [ebp-2h] BYREF
 
-  IMovingEntity::Store(this, a1);
+  IMovingEntity::Store((CSettler *)this, a1);
   v2 = 2;
-  operator^<unsigned int>(a1, &v2);
+  operator^<unsigned int>(a1, (unsigned int *)&v2);
   operator^<unsigned char>(a1, &this->unk_78);
   operator^<unsigned char>(a1, &this->unk_79);
   operator^<unsigned char>(a1, &this->unk_7a);
@@ -79,30 +79,30 @@ void  CAnimal::LogicUpdate(void) {
 
   if ( !IAnimatedEntity::ProcessAllEvents(this) )
   {
-    if ( *((_DWORD *)this + 25) == 5 )
+    if ( *(_DWORD *)&this->unk_64 == 5 )
     {
-      if ( !IEntity::FlagBits(this, (EntityFlag)&MEMORY[0x4000000]) )
+      if ( IEntity::FlagBits(this, (EntityFlag)&s_iMsgTracer2.m_aMessages[15456]) == 0 )
       {
-        *((_DWORD *)this + 32) += 15;
-        if ( *((int *)this + 32) < 450 )
+        this->unk_80 += 15;
+        if ( this->unk_80 < 450 )
         {
-          IAnimatedEntity::RegisterForLogicUpdate(15);
+          ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(15);
         }
         else
         {
-          v1 = IEntity::EntityId((unsigned __int16 *)this);
+          v1 = IEntity::EntityId(this);
           CAnimalMgr::DeleteAnimal((CAnimalMgr *)&g_cAnimalMgr, v1);
         }
       }
     }
     else
     {
-      v5 = std::auto_ptr<CWalking>::operator->(v3);
+      v5 = ((_DWORD (__cdecl *)(_DWORD))std::auto_ptr<CWalking>::operator->)(v3);
       v2 = IEntity::PackedXY(this);
       v4 = (*(int (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v5 + 16))(v5, v2, 0);
       if ( (v4 & 8) != 0 )
       {
-        (*(void (__thiscall **)(CAnimal *))(*(_DWORD *)this + 124))(this);
+        ((void (__thiscall *)(CAnimal *))this->j___purecall)(this);
       }
       else
       {
@@ -114,15 +114,15 @@ void  CAnimal::LogicUpdate(void) {
 
 
 // address=[0x14d6420]
-// Decompiled from void *__thiscall CAnimal::GetGfxInfos(struct CAnimal *this)
+// Decompiled from SGfxObjectInfo *__thiscall CAnimal::GetGfxInfos(struct CAnimal *this)
 struct SGfxObjectInfo *  CAnimal::GetGfxInfos(void) {
   
   this->Update();
-  CGfxManager::GetAnimalGfxInfo(g_pGfxManager, (struct SGfxObjectInfo *)&IEntity::m_sGfxInfo, this->m_iJobPart, (char)this->m_iDirection, this->m_iFrame);
-  MEMORY[0x40FE51D] = this->m_iDirection;
-  MEMORY[0x40FE51C] = this->m_iDistance;
-  MEMORY[0x40FE518] = this->m_uObjType;
-  MEMORY[0x40FE51A] = IEntity::IsVisible(this);
+  CGfxManager::GetAnimalGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iDirection, this->m_iFrame);
+  IEntity::m_sGfxInfo.m_iDirection = this->m_iDirection;
+  IEntity::m_sGfxInfo.m_iDistance = this->m_iDistance;
+  IEntity::m_sGfxInfo.m_uObjType = this->m_uObjType;
+  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
   return &IEntity::m_sGfxInfo;
 }
 
@@ -131,7 +131,7 @@ struct SGfxObjectInfo *  CAnimal::GetGfxInfos(void) {
 // Decompiled from int __thiscall CAnimal::AddTask(CAnimal *this, struct CEntityTask *a2)
 void  CAnimal::AddTask(class CEntityTask & a2) {
   
-  return std::list<CEntityTask>::push_back(a2);
+  return std::list<CEntityTask>::push_back((int)a2);
 }
 
 
@@ -172,7 +172,7 @@ void  CAnimal::Take(int a2) {
 
 
 // address=[0x14d65a0]
-// Decompiled from int __thiscall CAnimal::Delete(CPropertySet *this)
+// Decompiled from int __thiscall CAnimal::Delete(IAnimatedEntity *this)
 void  CAnimal::Delete(void) {
   
   int v1; // eax
@@ -183,35 +183,33 @@ void  CAnimal::Delete(void) {
   int v6; // [esp-4h] [ebp-Ch]
 
   CWarMap::RemoveEntity(this);
-  if ( !IEntity::FlagBits(this, ENTITY_FLAG_ON_BOARD) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_ON_BOARD) == 0 )
   {
     IEntity::SetFlagBits(this, ENTITY_FLAG_ON_BOARD);
-    v1 = IEntity::WorldIdx();
+    v1 = ((int (__stdcall *)())IEntity::WorldIdx)();
     v2 = CWorldManager::MapObjectId(v1);
-    if ( v2 != IEntity::EntityId((unsigned __int16 *)this) && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 700, "g_cWorld.MapObjectId( WorldIdx() ) == EntityId()") == 1 )
+    if ( v2 != IEntity::EntityId(this) && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 700, "g_cWorld.MapObjectId( WorldIdx() ) == EntityId()") == 1 )
     {
       __debugbreak();
     }
-    v3 = IEntity::WorldIdx();
+    v3 = ((int (__stdcall *)())IEntity::WorldIdx)();
     CWorldManager::SetMapObjectId(v3, 0);
   }
   result = IEntity::FlagBits(this, ENTITY_FLAG_Registered);
-  if ( !result )
+  if ( result != 0 )
   {
-    return result;
-  }
-  v6 = IEntity::EntityId((unsigned __int16 *)this);
-  LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(this);
-  CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, v6);
-  result = IEntity::FlagBits(this, ENTITY_FLAG_Registered);
-  if ( !result )
-  {
-    return result;
-  }
-  result = BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 710, "FlagBits(ENTITY_FLAG_REGISTERED) == 0");
-  if ( result == 1 )
-  {
-    __debugbreak();
+    v6 = IEntity::EntityId(this);
+    LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(this);
+    CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, v6);
+    result = IEntity::FlagBits(this, ENTITY_FLAG_Registered);
+    if ( result != 0 )
+    {
+      result = BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 710, "FlagBits(ENTITY_FLAG_REGISTERED) == 0");
+      if ( result == 1 )
+      {
+        __debugbreak();
+      }
+    }
   }
   return result;
 }
@@ -230,99 +228,98 @@ void  CAnimal::Update(void) {
   int v7; // [esp-4h] [ebp-14h]
   int v8; // [esp+4h] [ebp-Ch]
 
-  *((_BYTE *)this + 125) = CStateGame::GetTickCounter(g_pGame) - *((_BYTE *)this + 44);
+  this->unk_7d = CStateGame::GetTickCounter(g_pGame) - LOBYTE(this->m_uLastUpdateTick);
   result = (int)this;
-  if ( !*((_BYTE *)this + 125) || *((_DWORD *)this + 25) == 5 )
+  if ( this->unk_7d != 0 && *(_DWORD *)&this->unk_64 != 5 )
   {
-    return result;
-  }
-  TickCounter = CStateGame::GetTickCounter(g_pGame);
-  IAnimatedEntity::SetLastUpdateTick(this, TickCounter);
-  result = *((unsigned __int8 *)this + 122) - 6;
-  switch ( *((_BYTE *)this + 122) )
-  {
-    case 6:
-      result = (int)this;
-      if ( (*((_BYTE *)this + 120) & 8) != 0 )
-      {
-        *((_BYTE *)this + 36) = 0;
-      }
-      else
-      {
-        *((_BYTE *)this + 36) = (*((unsigned __int8 *)this + 125) + *((unsigned __int8 *)this + 36)) % *((unsigned __int8 *)this + 124);
-        if ( *((_BYTE *)this + 121) )
+    TickCounter = CStateGame::GetTickCounter(g_pGame);
+    IAnimatedEntity::SetLastUpdateTick(this, TickCounter);
+    result = this->unk_7a - 6;
+    switch ( this->unk_7a )
+    {
+      case 6u:
+        result = (int)this;
+        if ( (this->unk_78 & 8) != 0 )
         {
-          v8 = *((unsigned __int8 *)this + 121);
+          this->m_iFrame = 0;
         }
         else
         {
-          v8 = 1;
-        }
-        result = (int)IMovingEntity::DecDistance(this, (*((unsigned __int8 *)this + 125) << 8) / v8);
-      }
-      break;
-    case 0x10:
-    case 0x1B:
-      result = (int)this;
-      *((_BYTE *)this + 36) = (*((unsigned __int8 *)this + 125) + *((unsigned __int8 *)this + 36)) % *((unsigned __int8 *)this + 124);
-      if ( *(_DWORD *)(*((_DWORD *)this + 29) + 32) )
-      {
-        if ( *(_BYTE *)(*((_DWORD *)this + 29) + 36) == 100 || (v3 = j__rand() % 100 + 1, result = *(unsigned __int8 *)(*((_DWORD *)this + 29) + 36), v3 <= result) )
-        {
-          result = CSoundManager::IsPlaying((CSoundManager *)g_pSoundManager, *((_DWORD *)this + 33));
-          if ( !(_BYTE)result )
+          this->m_iFrame = (this->unk_7d + this->m_iFrame) % this->unk_7c;
+          if ( this->unk_79 != 0 )
           {
-            v7 = IEntity::Y(this);
-            v4 = IEntity::X(this);
-            result = (*(int (__thiscall **)(void *, int, int))(*(_DWORD *)g_pFogging + 32))(g_pFogging, v4, v7);
-            if ( (_BYTE)result )
+            v8 = this->unk_79;
+          }
+          else
+          {
+            v8 = 1;
+          }
+          result = (int)((IMovingEntity *(__thiscall *)(IMovingEntity *, unsigned int))IMovingEntity::DecDistance)(this, (this->unk_7d << 8) / v8);
+        }
+        break;
+      case 0x10u:
+      case 0x1Bu:
+        result = (int)this;
+        this->m_iFrame = (this->unk_7d + this->m_iFrame) % this->unk_7c;
+        if ( *(_DWORD *)(*(_DWORD *)&this->unk_74 + 32) != 0 )
+        {
+          if ( *(_BYTE *)(*(_DWORD *)&this->unk_74 + 36) == 100 || (v3 = j__rand() % 100 + 1, result = *(unsigned __int8 *)(*(_DWORD *)&this->unk_74 + 36), v3 <= result) )
+          {
+            result = CSoundManager::IsPlaying(g_pSoundManager, this->unk_84);
+            if ( (_BYTE)result == 0 )
             {
-              v6 = IEntity::Y(this);
-              v5 = IEntity::X(this);
-              result = CSoundManager::PlayEnvironmentSound(g_pSoundManager, *(_DWORD *)(*((_DWORD *)this + 29) + 32), v5, v6, 0);
-              *((_DWORD *)this + 33) = result;
+              v7 = IEntity::Y(this);
+              v4 = IEntity::X(this);
+              result = ((int (__thiscall *)(CFogging *, int, int))g_pFogging->IsPositionVisible)(g_pFogging, v4, v7);
+              if ( (_BYTE)result != 0 )
+              {
+                v6 = IEntity::Y(this);
+                v5 = IEntity::X(this);
+                result = CSoundManager::PlayEnvironmentSound(g_pSoundManager, *(_DWORD *)(*(_DWORD *)&this->unk_74 + 32), v5, v6, 0);
+                this->unk_84 = result;
+              }
             }
           }
         }
-      }
-      break;
-    case 0x11:
-      *((_BYTE *)this + 36) = 0;
-      break;
-    default:
-      return result;
+        break;
+      case 0x11u:
+        this->m_iFrame = 0;
+        break;
+      default:
+        return result;
+    }
   }
   return result;
 }
 
 
 // address=[0x14d6890]
-// Decompiled from int __thiscall CAnimal::NewToDoList(_DWORD *this, int a2)
+// Decompiled from int __thiscall CAnimal::NewToDoList(IEntity *this, int a2)
 void  CAnimal::NewToDoList(class std::list<class CEntityTask,class std::allocator<class CEntityTask> > * a2) {
   
   _BYTE v3[12]; // [esp+4h] [ebp-24h] BYREF
   int v4; // [esp+10h] [ebp-18h]
   int v5; // [esp+14h] [ebp-14h]
-  _DWORD *v6; // [esp+18h] [ebp-10h]
+  IEntity *v6; // [esp+18h] [ebp-10h]
   int v7; // [esp+24h] [ebp-4h]
 
   v6 = this;
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 407, "_toDo != NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 407, "_toDo != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(v6, ENTITY_FLAG_Registered) && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 408, "FlagBits( ENTITY_FLAG_REGISTERED ) == 0") == 1 )
+  if ( IEntity::FlagBits(v6, ENTITY_FLAG_Registered) != 0 && BBSupportDbgReport(2, "MapObjects\\Animal\\Animal.cpp", 408, "FlagBits( ENTITY_FLAG_REGISTERED ) == 0") == 1 )
   {
     __debugbreak();
   }
-  v6[21] = a2;
-  v5 = std::list<CEntityTask>::begin(v3);
+  *(_DWORD *)&v6[2].m_iType = a2;
+  v5 = ((int (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v3);
   v4 = v5;
   v7 = 0;
-  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(v5);
+  ((void (__stdcall *)(int))std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=)(v5);
   v7 = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v3);
-  return (*(int (__cdecl **)(int))(*v6 + 128))(1);
+  return ((int (__cdecl *)(int))v6->__vftable[1].j_?Decrease@IEntity@@UAEXHH@Z)(1);
 }
 
 
@@ -355,18 +352,18 @@ void  CAnimal::TakeWaitJob(bool a2) {
   int v5; // [esp+1Ch] [ebp-4h]
 
   v4 = this;
-  std::list<CEntityTask>::begin(v3);
+  ((void (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v3);
   v5 = 0;
-  if ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=((std::_Iterator_base12 *)v3) )
+  if ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=((std::_Iterator_base12 *)v3) != 0 )
   {
-    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(v3);
-    (*(void (__thiscall **)(CAnimal *, bool))(*(_DWORD *)v4 + 128))(v4, a2);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=((int)v3);
+    ((void (__thiscall *)(CAnimal *, bool))v4->j_?TakeJob@CAnimal@@MAEX_N@Z)(v4, a2);
   }
   else if ( a2 )
   {
-    (*(void (__thiscall **)(CAnimal *, int))(*(_DWORD *)v4 + 128))(v4, 1);
+    ((void (__thiscall *)(CAnimal *, int))v4->j_?TakeJob@CAnimal@@MAEX_N@Z)(v4, 1);
   }
-  *((_DWORD *)v4 + 25) = 0;
+  *(_DWORD *)&v4->unk_64 = 0;
   v5 = -1;
   return std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v3);
 }
@@ -385,23 +382,23 @@ void  CAnimal::TakeEatJob(bool a2) {
   int v9; // [esp+30h] [ebp-4h]
 
   v8 = this;
-  v7 = std::list<CEntityTask>::begin(v4);
+  v7 = ((int (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v4);
   v6 = v7;
   v9 = 0;
   v2 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v7);
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v2);
   LOBYTE(v9) = 2;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v4);
-  if ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=((std::_Iterator_base12 *)v5) )
+  if ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=((std::_Iterator_base12 *)v5) != 0 )
   {
-    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(v5);
-    (*(void (__thiscall **)(CAnimal *, bool))(*(_DWORD *)v8 + 128))(v8, a2);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=((int)v5);
+    ((void (__thiscall *)(CAnimal *, bool))v8->j_?TakeJob@CAnimal@@MAEX_N@Z)(v8, a2);
   }
   else if ( a2 )
   {
-    (*(void (__thiscall **)(CAnimal *, int))(*(_DWORD *)v8 + 128))(v8, 1);
+    ((void (__thiscall *)(CAnimal *, int))v8->j_?TakeJob@CAnimal@@MAEX_N@Z)(v8, 1);
   }
-  *((_DWORD *)v8 + 25) = 1;
+  *(_DWORD *)&v8->unk_64 = 1;
   v9 = -1;
   return std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v5);
 }
@@ -420,7 +417,7 @@ void  CAnimal::TakeWalkJob(bool a2) {
   int v9; // [esp+30h] [ebp-4h]
 
   v8 = this;
-  v7 = std::list<CEntityTask>::begin(v4);
+  v7 = ((int (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v4);
   v6 = v7;
   v9 = 0;
   v2 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v7);
@@ -428,12 +425,12 @@ void  CAnimal::TakeWalkJob(bool a2) {
   LOBYTE(v9) = 2;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v4);
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v5);
-  if ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=((std::_Iterator_base12 *)v5) )
+  if ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=((std::_Iterator_base12 *)v5) != 0 )
   {
-    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(v5);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=((int)v5);
   }
-  (*(void (__thiscall **)(CAnimal *, bool))(*(_DWORD *)v8 + 128))(v8, a2);
-  *((_DWORD *)v8 + 25) = 2;
+  ((void (__thiscall *)(CAnimal *, bool))v8->j_?TakeJob@CAnimal@@MAEX_N@Z)(v8, a2);
+  *(_DWORD *)&v8->unk_64 = 2;
   v9 = -1;
   return std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v5);
 }
@@ -452,7 +449,7 @@ void  CAnimal::TakeFleeJob(bool a2) {
   int v9; // [esp+30h] [ebp-4h]
 
   v8 = this;
-  v7 = std::list<CEntityTask>::begin(v4);
+  v7 = ((int (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v4);
   v6 = v7;
   v9 = 0;
   v2 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v7);
@@ -461,12 +458,12 @@ void  CAnimal::TakeFleeJob(bool a2) {
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v4);
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v5);
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v5);
-  if ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=((std::_Iterator_base12 *)v5) )
+  if ( (unsigned __int8)std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=((std::_Iterator_base12 *)v5) != 0 )
   {
-    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(v5);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=((int)v5);
   }
-  (*(void (__thiscall **)(CAnimal *, bool))(*(_DWORD *)v8 + 128))(v8, a2);
-  *((_DWORD *)v8 + 25) = 3;
+  ((void (__thiscall *)(CAnimal *, bool))v8->j_?TakeJob@CAnimal@@MAEX_N@Z)(v8, a2);
+  *(_DWORD *)&v8->unk_64 = 3;
   v9 = -1;
   return std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v5);
 }
@@ -485,7 +482,7 @@ void  CAnimal::TakeDieJob(void) {
   int v8; // [esp+30h] [ebp-4h]
 
   v7 = this;
-  v6 = std::list<CEntityTask>::begin(v3);
+  v6 = ((int (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v3);
   v5 = v6;
   v8 = 0;
   v1 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v6);
@@ -495,10 +492,10 @@ void  CAnimal::TakeDieJob(void) {
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v4);
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v4);
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v4);
-  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=(v4);
-  *((_DWORD *)v7 + 25) = 4;
-  (*(void (__thiscall **)(CAnimal *, int))(*(_DWORD *)v7 + 128))(v7, 1);
-  *((_BYTE *)v7 + 70) = 10;
+  std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator=((int)v4);
+  *(_DWORD *)&v7->unk_64 = 4;
+  ((void (__thiscall *)(CAnimal *, int))v7->j_?TakeJob@CAnimal@@MAEX_N@Z)(v7, 1);
+  v7->m_iDisplacementCosts = 10;
   v8 = -1;
   return std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v4);
 }
@@ -508,20 +505,20 @@ void  CAnimal::TakeDieJob(void) {
 // Decompiled from int __thiscall CAnimal::TakeDeadJob(CAnimal *this)
 void  CAnimal::TakeDeadJob(void) {
   
-  char v2; // [esp+0h] [ebp-8h]
+  BYTE v2; // [esp+0h] [ebp-8h]
 
-  if ( *((_BYTE *)this + 124) )
+  if ( this->unk_7c != 0 )
   {
-    v2 = *((_BYTE *)this + 124) - 1;
+    v2 = this->unk_7c - 1;
   }
   else
   {
     v2 = 0;
   }
-  *((_BYTE *)this + 36) = v2;
-  *((_DWORD *)this + 25) = 5;
-  *((_DWORD *)this + 32) = 0;
-  return IAnimatedEntity::RegisterForLogicUpdate(1);
+  this->m_iFrame = v2;
+  *(_DWORD *)&this->unk_64 = 5;
+  this->unk_80 = 0;
+  return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
 }
 
 
@@ -530,7 +527,7 @@ void  CAnimal::TakeDeadJob(void) {
 void  CAnimal::TakeWaitJobAndDoNothing(int a2) {
   
   CAnimal::TakeWaitJob(this, 0);
-  return IAnimatedEntity::RegisterForLogicUpdate(a2);
+  return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(a2);
 }
 
 
@@ -556,13 +553,13 @@ void  CAnimal::TakeJob(bool a2) {
   {
     *(_BYTE *)(this + 68) = *(_BYTE *)(v4 + 6);
   }
-  if ( *(_BYTE *)(v4 + 20) )
+  if ( *(_BYTE *)(v4 + 20) != 0 )
   {
     IEntity::SetFlagBits((_DWORD *)this, ENTITY_FLAG_Visible);
   }
   else
   {
-    IEntity::ClearFlagBits((_DWORD *)this, ENTITY_FLAG_Visible);
+    IEntity::ClearFlagBits((IEntity *)this, ENTITY_FLAG_Visible);
   }
   *(_BYTE *)(this + 122) = *(_BYTE *)(v4 + 4);
   *(_BYTE *)(this + 123) = *(_BYTE *)(v4 + 7);
@@ -573,13 +570,13 @@ void  CAnimal::TakeJob(bool a2) {
   result = this;
   *(_BYTE *)(this + 120) = 72;
   *(_BYTE *)(this + 70) = 0;
-  if ( a2 )
+  if ( a2 != 0 )
   {
     switch ( *(_BYTE *)(this + 122) )
     {
       case 6:
       case 0x10:
-        result = IAnimatedEntity::RegisterForLogicUpdate(*(unsigned __int8 *)(this + 124));
+        result = ((int (__stdcall *)(_DWORD))IAnimatedEntity::RegisterForLogicUpdate)(*(unsigned __int8 *)(this + 124));
         break;
       case 0x1B:
         if ( *(unsigned __int8 *)(this + 124) <= 1u )
@@ -590,10 +587,10 @@ void  CAnimal::TakeJob(bool a2) {
         {
           v3 = *(unsigned __int8 *)(this + 124) - 1;
         }
-        result = IAnimatedEntity::RegisterForLogicUpdate(v3);
+        result = ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(v3);
         break;
       default:
-        result = IAnimatedEntity::RegisterForLogicUpdate(1);
+        result = ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
         break;
     }
   }
@@ -602,13 +599,13 @@ void  CAnimal::TakeJob(bool a2) {
 
 
 // address=[0x14d7040]
-// Decompiled from char __thiscall CAnimal::WalkDir(CAnimal *this, char a2)
+// Decompiled from BYTE __thiscall CAnimal::WalkDir(CAnimal *this, BYTE a2)
 void  CAnimal::WalkDir(int a2) {
   
   int v2; // esi
   CWalking *v3; // eax
   int v4; // eax
-  char result; // al
+  BYTE result; // al
   int v6; // [esp-4h] [ebp-20h]
   int v7; // [esp+4h] [ebp-18h]
   int v8; // [esp+8h] [ebp-14h]
@@ -624,17 +621,17 @@ void  CAnimal::WalkDir(int a2) {
       __debugbreak();
     }
     v7 = IEntity::PackedXY(this);
-    v8 = IEntity::WorldIdx();
+    v8 = ((int (__stdcall *)())IEntity::WorldIdx)();
     v2 = IEntity::PackedXY(this);
-    v9 = Y16X16::NeighborModifier(v11) + v2;
+    v9 = Y16X16::NeighborModifier((int)v11) + v2;
     v10 = CWorldManager::Index(v9);
-    v3 = (CWalking *)std::auto_ptr<CWalking>::operator->(v10);
+    v3 = (CWalking *)((_DWORD (__cdecl *)(_DWORD))std::auto_ptr<CWalking>::operator->)(v10);
     if ( CWalking::IsFree(v3, v6) )
     {
       CWorldManager::SetSettlerId(v8, 0);
-      v4 = IEntity::ID();
+      v4 = ((int (__stdcall *)())IEntity::ID)();
       CWorldManager::SetSettlerId(v10, v4);
-      IMovingEntity::SetPositionAndDir(this, v9, (char)v11);
+      IMovingEntity::SetPositionAndDir(this, v9, (BYTE)v11);
       IMovingEntity::InitDistance(this);
       CWarMap::NotifyMove(this, v7);
     }
@@ -644,7 +641,7 @@ void  CAnimal::WalkDir(int a2) {
     }
   }
   result = a2;
-  *((_BYTE *)this + 120) = a2;
+  this->unk_78 = a2;
   return result;
 }
 
@@ -654,13 +651,13 @@ void  CAnimal::WalkDir(int a2) {
 void  CAnimal::WalkDirAndRegister(int a2) {
   
   CAnimal::WalkDir(this, a2);
-  if ( (*((_BYTE *)this + 120) & 0xFu) >= 6 )
+  if ( (this->unk_78 & 0xFu) >= 6 )
   {
-    return IAnimatedEntity::RegisterForLogicUpdate(1);
+    return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
   }
   else
   {
-    return IAnimatedEntity::RegisterForLogicUpdate(*((unsigned __int8 *)this + 121));
+    return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(this->unk_79);
   }
 }
 
@@ -669,7 +666,7 @@ void  CAnimal::WalkDirAndRegister(int a2) {
 // Decompiled from void __thiscall CAnimal::~CAnimal(CAnimal *this)
  CAnimal::~CAnimal(void) {
   
-  *(_DWORD *)this = &CAnimal::_vftable_;
+  this->__vftable = (CAnimal_vtbl *)&CAnimal::_vftable_;
   std::list<CEntityTask>::~list<CEntityTask>();
   IMovingEntity::~IMovingEntity(this);
 }

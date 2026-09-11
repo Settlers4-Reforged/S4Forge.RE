@@ -9,25 +9,25 @@
   int v3; // eax
   CEcoSector *EcoSectorPtr; // [esp+4h] [ebp-14h]
 
-  IAIUnknown::IAIUnknown(this);
-  *(_DWORD *)this = CAIEcoSectorAIEx::_vftable_;
-  CAIEventQueue::CAIEventQueue((CAIEcoSectorAIEx *)((char *)this + 16));
+  IAIUnknown::IAIUnknown((IAIUnknown *)this);
+  *(_DWORD *)this = &CAIEcoSectorAIEx::_vftable_;
+  CAIEventQueue::CAIEventQueue((CAIEventQueue *)((char *)this + 16));
   *((_DWORD *)this + 1) = a3;
   *((_DWORD *)this + 2) = IAIEnvironment::EcoSectorGetUniqueId(a3);
   EcoSectorPtr = CEcoSectorMgr::GetEcoSectorPtr((CEcoSectorMgr *)g_cESMgr, *((_DWORD *)this + 1));
-  if ( EcoSectorPtr )
+  if ( EcoSectorPtr != 0 )
   {
     CEcoSector::SetWeaponAutoProduction(EcoSectorPtr, 0);
   }
   *((_DWORD *)this + 3) = IAIEnvironment::TickCounter();
   BBSupportTracePrintF(0, "CAIEcoSectorAIEx::CAIEcoSectorAIEx(): eco-sector id %i, unique id 0x%08x.", *((_DWORD *)this + 1), *((_DWORD *)this + 2));
-  *((_DWORD *)this + 10) = IAIEcoManager::CreateEcoManager(a3, a2, (CAIEcoSectorAIEx *)((char *)this + 16));
+  *((_DWORD *)this + 10) = IAIEcoManager::CreateEcoManager(a3, a2, (struct IAIEventQueue *)this + 4);
   *((_DWORD *)this + 11) = IAIEcoSectorAI::CreateEcoSectorAI(*((struct IAIEcoManager **)this + 10));
-  if ( !*((_DWORD *)this + 11) && BBSupportDbgReport(2, "AI\\AI_EcoSectorAIEx.cpp", 54, "m_pEcoSectorAI != 0") == 1 )
+  if ( *((_DWORD *)this + 11) == 0 && BBSupportDbgReport(2, "AI\\AI_EcoSectorAIEx.cpp", 54, "m_pEcoSectorAI != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !off_3D7A214 && BBSupportDbgReport(2, "AI\\AI_EcoSectorAIEx.cpp", 55, "g_pAIEnv != 0") == 1 )
+  if ( off_3D7A214 == 0 && BBSupportDbgReport(2, "AI\\AI_EcoSectorAIEx.cpp", 55, "g_pAIEnv != 0") == 1 )
   {
     __debugbreak();
   }
@@ -41,19 +41,19 @@
 // Decompiled from void __thiscall CAIEcoSectorAIEx::~CAIEcoSectorAIEx(CAIEcoSectorAIEx *this)
  CAIEcoSectorAIEx::~CAIEcoSectorAIEx(void) {
   
-  *(_DWORD *)this = CAIEcoSectorAIEx::_vftable_;
+  *(_DWORD *)this = &CAIEcoSectorAIEx::_vftable_;
   BBSupportTracePrintF(0, "CAIEcoSectorAIEx::~CAIEcoSectorAIEx(): eco-sector id %i, unique id 0x%08x.", *((_DWORD *)this + 1), *((_DWORD *)this + 2));
-  if ( *((_DWORD *)this + 11) )
+  if ( *((_DWORD *)this + 11) != 0 )
   {
     (***((void (__thiscall ****)(_DWORD))this + 11))(*((_DWORD *)this + 11));
     *((_DWORD *)this + 11) = 0;
   }
-  if ( *((_DWORD *)this + 10) )
+  if ( *((_DWORD *)this + 10) != 0 )
   {
     (*(void (__thiscall **)(_DWORD, int))(**((_DWORD **)this + 10) + 4))(*((_DWORD *)this + 10), 1);
     *((_DWORD *)this + 10) = 0;
   }
-  CAIEventQueue::Clear((CAIEcoSectorAIEx *)((char *)this + 16));
+  CAIEventQueue::Clear((CAIEventQueue *)((char *)this + 16));
   CAIEventQueue::~CAIEventQueue((CAIEcoSectorAIEx *)((char *)this + 16));
 }
 
@@ -65,9 +65,9 @@ class CAIEcoSectorAIEx * __cdecl CAIEcoSectorAIEx::CreateEcoSectorAIEx(class IAI
   void *Memory; // [esp+8h] [ebp-18h]
   CAIEcoSectorAIEx *v5; // [esp+10h] [ebp-10h]
 
-  Memory = (void *)TAIStaticMemoryPool<48,512>::AllocateMemory(48);
+  Memory = (void *)((void *(__stdcall *)(int))TAIStaticMemoryPool<48,512>::AllocateMemory)(48);
   v5 = (CAIEcoSectorAIEx *)operator new(0x30u, Memory);
-  if ( v5 )
+  if ( v5 != 0 )
   {
     return CAIEcoSectorAIEx::CAIEcoSectorAIEx(v5, a1, a2);
   }
@@ -87,7 +87,7 @@ void  CAIEcoSectorAIEx::Execute(void) {
   CRandom16 *v3; // eax
   int v4; // eax
 
-  if ( *((_DWORD *)this + 11) )
+  if ( *((_DWORD *)this + 11) != 0 )
   {
     if ( IAIEnvironment::EcoSectorCheckId(*((_DWORD *)this + 1), *((_DWORD *)this + 2)) )
     {
@@ -139,7 +139,7 @@ bool  CAIEcoSectorAIEx::IsEcoSectorValid(void)const {
 // Decompiled from void __thiscall CAIEcoSectorAIEx::ClearEventQueue(CAIEcoSectorAIEx *this)
 void  CAIEcoSectorAIEx::ClearEventQueue(void) {
   
-  CAIEventQueue::Clear((CAIEcoSectorAIEx *)((char *)this + 16));
+  CAIEventQueue::Clear((CAIEventQueue *)((char *)this + 16));
 }
 
 
@@ -163,7 +163,7 @@ int  CAIEcoSectorAIEx::EcoSectorId(void)const {
 // Decompiled from void __thiscall CAIEcoSectorAIEx::PostAIEvent(CAIEcoSectorAIEx *this, int a2, int a3, int a4, int a5)
 void  CAIEcoSectorAIEx::PostAIEvent(int a2, int a3, int a4, int a5) {
   
-  CAIEventQueue::PostAIEvent((CAIEcoSectorAIEx *)((char *)this + 16), a2, a3, a4, a5);
+  CAIEventQueue::PostAIEvent((CAIEventQueue *)((char *)this + 16), a2, a3, a4, a5);
 }
 
 

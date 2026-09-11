@@ -8,7 +8,7 @@
  CAddVehicleBarInfo::CAddVehicleBarInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CAddVehicleBarInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CAddVehicleBarInfo::_vftable_;
   return this;
 }
 

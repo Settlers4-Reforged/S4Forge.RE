@@ -42,7 +42,7 @@ void  CMsgStack::Clear(void) {
   while ( 1 )
   {
     result = (unsigned __int8)std::list<CNet_Event>::empty(&this->this_list, this);
-    if ( (_BYTE)result )
+    if ( (_BYTE)result != 0 )
     {
       break;
     }
@@ -75,7 +75,7 @@ class CNet_Event  CMsgStack::GetMsg(void retstr) {
 // Decompiled from void __thiscall CMsgStack::AddMsg(CMsgStack *this, struct CNet_Event *a2)
 void  CMsgStack::AddMsg(class CNet_Event & a2) {
   
-  std::list<CNet_Event>::push_back(a2);
+  std::list<CNet_Event>::push_back((int)a2);
   this->m_iChangeTime = timeGetTime();
 }
 
@@ -133,13 +133,13 @@ bool  CMsgStack::IsInStack(unsigned char _iId) {
   v11 = 0;
   while ( 1 )
   {
-    v6 = (std::_Iterator_base12 *)std::list<CNet_Event>::end(v4);
+    v6 = (std::_Iterator_base12 *)std::list<CNet_Event>::end((int)v4);
     v5[3] = v6;
     LOBYTE(v11) = 1;
     v10 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>::operator!=(v6);
     LOBYTE(v11) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>(v4);
-    if ( !v10 )
+    if ( v10 == 0 )
     {
       break;
     }
@@ -150,7 +150,7 @@ bool  CMsgStack::IsInStack(unsigned char _iId) {
       std::_List_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>(v5);
       return v9;
     }
-    std::_List_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>::operator++(v3, 0);
+    std::_List_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>::operator++((int)v3, 0);
     std::_List_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CNet_Event>>>(v3);
   }
   v8 = 0;

@@ -114,6 +114,8 @@ void  CWarriorBehavior::WarriorInit(class IMovingEntity & a2, int a3, int a4) {
       case 0x300000:
         v7 = 4;
         break;
+      default:
+        break;
     }
   }
   this->m_sWarriorBehaviorData.m_uState = v7;
@@ -168,7 +170,7 @@ LABEL_64:
             goto LABEL_54;
           }
           m_uLastTargetId = this->m_sWarriorBehaviorData.m_uLastTargetId;
-          if ( !m_uLastTargetId )
+          if ( m_uLastTargetId == 0 )
           {
             this->WarriorTaskWalkOneStep(this, a2);
             return;
@@ -177,7 +179,7 @@ LABEL_64:
           {
 LABEL_54:
             CWarriorBehavior::WarriorSetNextFullUpdate(this, a3, 0x1Eu);
-            if ( this->m_sWarriorBehaviorData.m_pProperties->m_fpInfluenceCheck(this, a2) && (v15 = CWarriorBehavior::WarriorAttackCheck(this, a2), v15 > 0) )
+            if ( this->m_sWarriorBehaviorData.m_pProperties->m_fpInfluenceCheck(this, a2) != 0 && (v15 = CWarriorBehavior::WarriorAttackCheck(this, a2)) > 0 )
             {
               this->m_sWarriorBehaviorData.m_uLastTargetId = v15;
               CWarriorBehavior::WarriorAttackTarget(this, a2, v15);
@@ -194,7 +196,7 @@ LABEL_54:
           }
           return;
         case 7:
-          if ( this->m_sWarriorBehaviorData.m_pProperties->m_fpInfluenceCheck(this, a2) && (v18 = CWarriorBehavior::WarriorAttackCheck(this, a2), v18 > 0) )
+          if ( this->m_sWarriorBehaviorData.m_pProperties->m_fpInfluenceCheck(this, a2) != 0 && (v18 = CWarriorBehavior::WarriorAttackCheck(this, a2)) > 0 )
           {
             this->m_sWarriorBehaviorData.m_uLastTargetId = v18;
             CWarriorBehavior::WarriorAttackTarget(this, a2, v18);
@@ -224,6 +226,8 @@ LABEL_54:
             }
           }
           return;
+        default:
+          break;
       }
     }
 LABEL_62:
@@ -250,7 +254,7 @@ LABEL_62:
     if ( !IsFullUpdate )
     {
       v21 = this->m_sWarriorBehaviorData.m_uLastTargetId;
-      if ( v21 )
+      if ( v21 != 0 )
       {
         if ( (a4 & 0x10) != 0 )
         {
@@ -272,37 +276,34 @@ LABEL_62:
     {
       this->m_sWarriorBehaviorData.m_iU01 &= ~2u;
       CWarriorBehavior::WarriorSetNextFullUpdate(this, a3, 0x1Eu);
-      if ( this->m_sWarriorBehaviorData.m_pProperties->m_fpInfluenceCheck(this, a2) )
+      if ( this->m_sWarriorBehaviorData.m_pProperties->m_fpInfluenceCheck(this, a2) != 0 && (a4 & 0x10) == 0 )
       {
-        if ( (a4 & 0x10) == 0 )
+        v20 = CWarriorBehavior::WarriorAttackCheck(this, a2);
+        if ( v20 > 0 )
         {
-          v20 = CWarriorBehavior::WarriorAttackCheck(this, a2);
-          if ( v20 > 0 )
+          this->m_sWarriorBehaviorData.m_uLastTargetId = v20;
+          CWarriorBehavior::WarriorAttackTarget(this, a2, v20);
+          return;
+        }
+        v22 = this->m_sWarriorBehaviorData.m_pProperties->m_fpAttackScan(this, a2, &v12);
+        v14 = v22 == 0;
+        v13 = this->m_sWarriorBehaviorData.m_pProperties->m_iRadiusFirst > 1;
+        if ( v13 && v14 )
+        {
+          v22 = CWarriorBehavior::WarriorEvadeScan15a(this, a2, &v12);
+        }
+        if ( v22 > 0 )
+        {
+          this->m_sWarriorBehaviorData.m_iU01 |= 2u;
+          this->m_sWarriorBehaviorData.m_uLastTargetId = v22;
+          iDistance = CWarriorBehavior::WarriorPseudoInitWalk(this, a2, v12);
+          if ( iDistance <= 8 )
           {
-            this->m_sWarriorBehaviorData.m_uLastTargetId = v20;
-            CWarriorBehavior::WarriorAttackTarget(this, a2, v20);
-            return;
-          }
-          v22 = this->m_sWarriorBehaviorData.m_pProperties->m_fpAttackScan(this, a2, &v12);
-          v14 = v22 == 0;
-          v13 = this->m_sWarriorBehaviorData.m_pProperties->m_iRadiusFirst > 1;
-          if ( v13 && v14 )
-          {
-            v22 = CWarriorBehavior::WarriorEvadeScan15a(this, a2, &v12);
-          }
-          if ( v22 > 0 )
-          {
-            this->m_sWarriorBehaviorData.m_iU01 |= 2u;
-            this->m_sWarriorBehaviorData.m_uLastTargetId = v22;
-            iDistance = CWarriorBehavior::WarriorPseudoInitWalk(this, a2, v12);
-            if ( iDistance <= 8 )
+            if ( iDistance <= 0 && BBSupportDbgReport(2, "MapObjects\\WarriorBehavior.cpp", 961, "iDistance > 0") == 1 )
             {
-              if ( iDistance <= 0 && BBSupportDbgReport(2, "MapObjects\\WarriorBehavior.cpp", 961, "iDistance > 0") == 1 )
-              {
-                __debugbreak();
-              }
-              CWarriorBehavior::WarriorSetNextFullUpdate(this, a3, 4 * iDistance - 4);
+              __debugbreak();
             }
+            CWarriorBehavior::WarriorSetNextFullUpdate(this, a3, 4 * iDistance - 4);
           }
         }
       }
@@ -370,7 +371,7 @@ void  CWarriorBehavior::WarriorVehicleLogicUpdate(class IMovingEntity & a2, unsi
     case 0:
     case 1:
     case 7:
-      if ( this->m_sWarriorBehaviorData.m_uState )
+      if ( this->m_sWarriorBehaviorData.m_uState != 0 )
       {
         if ( this->m_sWarriorBehaviorData.m_uState == 1 )
         {
@@ -393,11 +394,11 @@ void  CWarriorBehavior::WarriorVehicleLogicUpdate(class IMovingEntity & a2, unsi
       }
       IsFullUpdate = CWarriorBehavior::WarriorIsFullUpdate(this, a3);
       uLastTargetId = this->m_sWarriorBehaviorData.m_uLastTargetId;
-      if ( uLastTargetId )
+      if ( uLastTargetId != 0 )
       {
         v21 = CMapObjectMgr::EntityPtr(uLastTargetId);
         CWarriorBehavior::WarriorGetEnemyBitsAndScanMask(this, a2, &v8, &v9);
-        if ( v21 && CWarriorBehavior::WarriorCheckTarget(v21, v8, v9) )
+        if ( v21 != 0 && CWarriorBehavior::WarriorCheckTarget(v21, v8, v9) )
         {
           v7 = IEntity::PackedXY(v21);
           v4 = IEntity::PackedXY(a2);
@@ -423,7 +424,7 @@ void  CWarriorBehavior::WarriorVehicleLogicUpdate(class IMovingEntity & a2, unsi
       }
       if ( (a4 & 1) != 0 )
       {
-        if ( uLastTargetId )
+        if ( uLastTargetId != 0 )
         {
           this->WarriorTaskIdleWalk(this, a2);
         }
@@ -437,13 +438,13 @@ void  CWarriorBehavior::WarriorVehicleLogicUpdate(class IMovingEntity & a2, unsi
       {
         CWarriorBehavior::WarriorVehicleAttackScan31(this, a2, &v28);
         m_iEntityId = v28.m_iEntityId;
-        if ( v28.m_iEntityId )
+        if ( v28.m_iEntityId != 0 )
         {
           CWarriorBehavior::WarriorSetNextFullUpdate(this, a3, 0x14u);
           m_iOtherDistance = v28.m_iOtherDistance;
           if ( v28.m_iOtherDistance > 10u )
           {
-            if ( uLastTargetId )
+            if ( uLastTargetId != 0 )
             {
               v11 = v19 >= m_iOtherDistance;
               v10 = v12 <= 2 * v28.m_iDistance;
@@ -466,7 +467,7 @@ LABEL_36:
         v22(this, a2);
         return;
       }
-      if ( !uLastTargetId || v19 <= 0xA )
+      if ( uLastTargetId == 0 || v19 <= 0xA )
       {
         goto LABEL_36;
       }
@@ -485,7 +486,7 @@ LABEL_36:
         goto LABEL_39;
       }
       v18 = CMapObjectMgr::Entity(this->m_sWarriorBehaviorData.m_uLastTargetId);
-      if ( !this->m_sWarriorBehaviorData.m_iDestinationXYOrId )
+      if ( this->m_sWarriorBehaviorData.m_iDestinationXYOrId == 0 )
       {
         this->m_sWarriorBehaviorData.m_iDestinationXYOrId = CWarriorBehavior::FindAttackWayPoint(this, a2, v18);
       }
@@ -494,22 +495,20 @@ LABEL_36:
         this->m_sWarriorBehaviorData.m_iU01 |= 1u;
         CWarriorBehavior::WarriorInitWalk(this, a2, this->m_sWarriorBehaviorData.m_iDestinationXYOrId);
       }
-      if ( !CWarriorBehavior::WarriorIsFullUpdate(this, a3) )
+      if ( CWarriorBehavior::WarriorIsFullUpdate(this, a3) )
       {
-        goto LABEL_51;
+        if ( !CMapObjectMgr::ValidUsedEntityId(this->m_sWarriorBehaviorData.m_uLastTargetId) || IEntity::FlagBits(v18, ENTITY_FLAG_Ready) == 0 )
+        {
+          goto LABEL_39;
+        }
+        AttackWayPoint = CWarriorBehavior::FindAttackWayPoint(this, a2, v18);
+        if ( AttackWayPoint != 0 && AttackWayPoint != this->m_sWarriorBehaviorData.m_iDestinationXYOrId )
+        {
+          this->m_sWarriorBehaviorData.m_iDestinationXYOrId = AttackWayPoint;
+          this->m_sWarriorBehaviorData.m_iU01 |= 1u;
+          CWarriorBehavior::WarriorInitWalk(this, a2, this->m_sWarriorBehaviorData.m_iDestinationXYOrId);
+        }
       }
-      if ( !CMapObjectMgr::ValidUsedEntityId(this->m_sWarriorBehaviorData.m_uLastTargetId) || !IEntity::FlagBits(v18, ENTITY_FLAG_Ready) )
-      {
-        goto LABEL_39;
-      }
-      AttackWayPoint = CWarriorBehavior::FindAttackWayPoint(this, a2, v18);
-      if ( AttackWayPoint && AttackWayPoint != this->m_sWarriorBehaviorData.m_iDestinationXYOrId )
-      {
-        this->m_sWarriorBehaviorData.m_iDestinationXYOrId = AttackWayPoint;
-        this->m_sWarriorBehaviorData.m_iU01 |= 1u;
-        CWarriorBehavior::WarriorInitWalk(this, a2, this->m_sWarriorBehaviorData.m_iDestinationXYOrId);
-      }
-LABEL_51:
       if ( this->m_sWarriorBehaviorData.m_iDestinationXYOrId > 0 && (a4 & 2) == 0 )
       {
         if ( CWarriorBehavior::IsTargetInAtackRange(this, a2, v18) )
@@ -598,11 +597,11 @@ bool  CWarriorBehavior::WarriorValidLastTargetMedic(class IMovingEntity & a2, in
   v6 = CAlliances::PlayerAllyBits(v7);
   v3 = CSettler::Role(a2);
   v9 = (CSoldierRole *)j____RTDynamicCast((void **)&v3->__vftable, 0, &ISettlerRole__RTTI_Type_Descriptor_, &CSoldierRole__RTTI_Type_Descriptor_, 0);
-  if ( !v9 || CSoldierRole::GetNumberOfHealings(v9) <= 0 )
+  if ( v9 == 0 || CSoldierRole::GetNumberOfHealings(v9) <= 0 )
   {
     return 0;
   }
-  return (unsigned __int8)MedicCanHeal(v6, a3) || CWarriorBehavior::WarriorCheckTargetAndDistance(this, a2, a3);
+  return MedicCanHeal(v6, a3) || CWarriorBehavior::WarriorCheckTargetAndDistance(this, a2, a3);
 }
 
 
@@ -661,7 +660,7 @@ int  CWarriorBehavior::WarriorAttackCheck1(class IMovingEntity & a2) {
   {
     v2 = CWorldManager::SurroundingHexPointRelIndex(i);
     v19 = CWorldManager::MapObjectId(v12 + v2);
-    if ( v19 )
+    if ( v19 != 0 )
     {
       if ( v19 <= 6 )
       {
@@ -685,20 +684,19 @@ int  CWarriorBehavior::WarriorAttackCheck1(class IMovingEntity & a2) {
       }
     }
   }
-  if ( v21 != -2 )
+  if ( v21 == -2 )
   {
-    return v21;
-  }
-  v21 = -1;
-  for ( j = 7;
-        j < 19;
-        ++j )
-  {
-    v4 = CWorldManager::SurroundingHexPointRelIndex(j);
-    v9 = CWorldManager::MapObjectId(v12 + v4);
-    if ( CWarriorBehavior::WarriorCheckTarget(v9, v10, v11) )
+    v21 = -1;
+    for ( j = 7;
+          j < 19;
+          ++j )
     {
-      return v9;
+      v4 = CWorldManager::SurroundingHexPointRelIndex(j);
+      v9 = CWorldManager::MapObjectId(v12 + v4);
+      if ( CWarriorBehavior::WarriorCheckTarget(v9, v10, v11) )
+      {
+        return v9;
+      }
     }
   }
   return v21;
@@ -822,7 +820,7 @@ int  CWarriorBehavior::WarriorAttackCheckBowman(class IMovingEntity & a2) {
     if ( CPlayerManager::Race(i) == 3 && (v9 & CAlliances::PlayerAllyBits(i)) == 0 )
     {
       NearestEntity = CFlyingMgr::GetNearestEntity((CFlyingMgr *)g_cFlyingMgr, i, 1, v14, v15, 0);
-      if ( NearestEntity )
+      if ( NearestEntity != 0 )
       {
         v2 = CFlyingMgr::operator[](NearestEntity);
         if ( (IEntity::Flags(v2) & ENTITY_FLAG_Ready) != 0 )
@@ -841,19 +839,18 @@ int  CWarriorBehavior::WarriorAttackCheckBowman(class IMovingEntity & a2) {
       }
     }
   }
-  if ( v16 == -1 )
+  if ( v16 != -1 )
   {
-    return v18;
-  }
-  v11 = 0;
-  if ( v18 != -1 )
-  {
-    v5 = CMapObjectMgr::Entity(v18);
-    v11 = this->m_sWarriorBehaviorData.m_pProperties->m_iRanges[IEntity::WarriorType(v5)];
-  }
-  if ( v11 <= 3 )
-  {
-    return v16;
+    v11 = 0;
+    if ( v18 != -1 )
+    {
+      v5 = CMapObjectMgr::Entity(v18);
+      v11 = this->m_sWarriorBehaviorData.m_pProperties->m_iRanges[IEntity::WarriorType(v5)];
+    }
+    if ( v11 <= 3 )
+    {
+      return v16;
+    }
   }
   return v18;
 }
@@ -884,7 +881,7 @@ int  CWarriorBehavior::WarriorAttackCheckMedic(class IMovingEntity & a2) {
   v9 = CWorldManager::Index(v10, v11);
   v2 = CSettler::Role(a2);
   v13 = (CSoldierRole *)j____RTDynamicCast((void **)&v2->__vftable, 0, &ISettlerRole__RTTI_Type_Descriptor_, &CSoldierRole__RTTI_Type_Descriptor_, 0);
-  if ( v13 && CSoldierRole::GetNumberOfHealings(v13) > 0 )
+  if ( v13 != 0 && CSoldierRole::GetNumberOfHealings(v13) > 0 )
   {
     for ( i = 1;
           i < 19;
@@ -938,7 +935,7 @@ int  CWarriorBehavior::WarriorAttackCheckSaboteur(class IMovingEntity & a2) {
   
   int v4; // [esp+8h] [ebp-4h]
 
-  v4 = FindNearestEnemyBuilding(a2, 15, 0, 0, 0);
+  v4 = FindNearestEnemyBuilding(a2, 15u, 0, 0, 0);
   if ( v4 <= 0 )
   {
     return -1;
@@ -1003,7 +1000,7 @@ int  CWarriorBehavior::WarriorAttackScan15(class IMovingEntity & a2, int * a3) {
       }
     }
   }
-  if ( a3 )
+  if ( a3 != 0 )
   {
     *a3 = Y16X16::PackXYFast(v15, v16);
   }
@@ -1045,7 +1042,7 @@ int  CWarriorBehavior::WarriorAttackScanBowman(class IMovingEntity & a2, int * a
     if ( CPlayerManager::Race(i) == 3 && (v7 & CAlliances::PlayerAllyBits(i)) == 0 )
     {
       NearestEntity = CFlyingMgr::GetNearestEntity((CFlyingMgr *)g_cFlyingMgr, i, 1, v14, v15, 0);
-      if ( NearestEntity )
+      if ( NearestEntity != 0 )
       {
         v3 = CFlyingMgr::operator[](NearestEntity);
         if ( (IEntity::Flags(v3) & ENTITY_FLAG_Ready) != 0 )
@@ -1130,13 +1127,13 @@ int  CWarriorBehavior::WarriorAttackScanMedic(class IMovingEntity & a2, int * a3
     if ( CWorldManager::InWorld(v19, v10 + v5) )
     {
       v22 = CWorldManager::MapObjectId(v19, v20);
-      if ( v22 > 0 && (CWarriorBehavior::WarriorCheckTarget(v22, v8, v9) || v17 && CSoldierRole::GetNumberOfHealings(v17) > 0 && MedicCanHeal(v7, v22)) )
+      if ( v22 > 0 && (CWarriorBehavior::WarriorCheckTarget(v22, v8, v9) || v17 != 0 && CSoldierRole::GetNumberOfHealings(v17) > 0 && MedicCanHeal(v7, v22)) )
       {
         break;
       }
     }
   }
-  if ( a3 )
+  if ( a3 != 0 )
   {
     *a3 = Y16X16::PackXYFast(v19, v20);
   }
@@ -1229,11 +1226,11 @@ int  CWarriorBehavior::WarriorEvadeScan15a(class IMovingEntity & a2, int * a3) {
   uPadding = g_sSurroundingHexPoints8[i].m_uPadding;
   v16 = (uPadding + CStateGame::Rand(g_pGame) % 3 + 2) % 6;
   CSectorSpiralWalk::CSectorSpiralWalk((CSectorSpiralWalk *)v7, v21 + 6 * g_sNeighborPoints[v16].x, v22 + 6 * g_sNeighborPoints[v16].y, 4, v10);
-  if ( !CSectorSpiralWalk::NextXY((CSectorSpiralWalk *)v7, &v8, &v9) )
+  if ( CSectorSpiralWalk::NextXY((CSectorSpiralWalk *)v7, &v8, &v9) == 0 )
   {
     return 0;
   }
-  if ( a3 )
+  if ( a3 != 0 )
   {
     *a3 = Y16X16::PackXYFast(v8, v9);
   }
@@ -1304,7 +1301,7 @@ void  CWarriorBehavior::WarriorVehicleAttackScan31(class IMovingEntity & _pEntit
     m_iV = CVWList::operator[](&cVWList, i)->m_iV;
     v3 = CVWList::operator[](&cVWList, i);
     for ( j = CWarMap::FirstEntityIdVW(1, m_iV, v3->m_iW);
-          j;
+          j != 0;
           j = CWarMapNode::Next(v4) )
     {
       v39 = CTmpEntitiesRef::operator[]((CTmpEntitiesRef *)v23, j);
@@ -1329,7 +1326,7 @@ void  CWarriorBehavior::WarriorVehicleAttackScan31(class IMovingEntity & _pEntit
         }
         HIDWORD(v24) = v25 + iRange > v42;
         LODWORD(v24) = v40 < iFoundDistance;
-        if ( v24 )
+        if ( v24 != 0 )
         {
           iFoundEntityId = j;
           v42 = v25 + iRange;
@@ -1352,7 +1349,7 @@ void  CWarriorBehavior::WarriorVehicleAttackScan31(class IMovingEntity & _pEntit
       v11 = CVWList::operator[](&cVWList, k)->m_iV;
       v5 = CVWList::operator[](&cVWList, k);
       for ( iEntityIdIter = CWarMap::FirstEntityIdVW(2, v11, v5->m_iW);
-            iEntityIdIter;
+            iEntityIdIter != 0;
             iEntityIdIter = CWarMapNode::Next(pNodeIter) )
       {
         rFoundEntity = CTmpEntitiesRef::operator[]((CTmpEntitiesRef *)v23, iEntityIdIter);
@@ -1644,7 +1641,7 @@ bool __cdecl CWarriorBehavior::WarriorCheckTarget(int a1, int a2, int a3) {
   
   struct IEntity *v4; // [esp+0h] [ebp-8h]
 
-  if ( !a1 )
+  if ( a1 == 0 )
   {
     return 0;
   }
@@ -1730,25 +1727,19 @@ bool __cdecl CWarriorBehavior::WarriorTargetAllowableAndVulnerable(class IEntity
   }
   v4 = IEntity::Flags(_rTarget) & 0x2030100 ^ 0x2030100;
   v3 = 1 << IEntity::WarriorType(_rTarget);
-  if ( (IEntity::WarriorType(_rTarget) || IEntity::ObjType(_rTarget) == SETTLER_OBJ) && (IEntity::Flags(_rTarget) & 0x8000000) == 0 )
+  if ( (IEntity::WarriorType(_rTarget) != AI_WARRIOR_TYPE_NONE || IEntity::ObjType(_rTarget) == SETTLER_OBJ) && (IEntity::Flags(_rTarget) & 0x8000000) == 0 )
   {
     bResult = (a2 & (v3 | v4)) == 0;
   }
-  if ( !bResult )
+  if ( bResult )
   {
-    return bResult;
-  }
-  if ( IEntity::FlagBits(_rTarget, ENTITY_FLAG_Ready) )
-  {
-    v5 = IEntity::FlagBits(_rTarget, ENTITY_FLAG_VulnerableMask) != 0;
-    if ( (IEntity::WarriorType(_rTarget) == AI_WARRIOR_TYPE_NONE) != v5 )
+    if ( IEntity::FlagBits(_rTarget, ENTITY_FLAG_Ready) == 0 || (v5 = IEntity::FlagBits(_rTarget, ENTITY_FLAG_VulnerableMask) != 0, (IEntity::WarriorType(_rTarget) == AI_WARRIOR_TYPE_NONE) == v5) )
     {
-      return bResult;
+      if ( BBSupportDbgReport(2, "MapObjects\\WarriorBehavior.cpp", 496, "!bResult || ((_rTarget.FlagBits(ENTITY_FLAG_READY) != 0) && ((_rTarget.FlagBits(ENTITY_FLAG_VULNERABLE_MASK) != 0) ^ (_rTarget.WarriorType() == WARRIOR_TYPE_NONE)))") == 1 )
+      {
+        __debugbreak();
+      }
     }
-  }
-  if ( BBSupportDbgReport(2, "MapObjects\\WarriorBehavior.cpp", 496, "!bResult || ((_rTarget.FlagBits(ENTITY_FLAG_READY) != 0) && ((_rTarget.FlagBits(ENTITY_FLAG_VULNERABLE_MASK) != 0) ^ (_rTarget.WarriorType() == WARRIOR_TYPE_NONE)))") == 1 )
-  {
-    __debugbreak();
   }
   return bResult;
 }

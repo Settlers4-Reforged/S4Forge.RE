@@ -3,11 +3,11 @@
 // Definitions for class CAIAgentMovingHome
 
 // address=[0x1304050]
-// Decompiled from unsigned int __thiscall CAIAgentMovingHome::Execute(CAIAgentMovingHome *this, unsigned int a2, unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentMovingHome::Execute(CAINormalSectorAgent *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentMovingHome::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
-  _DWORD *v4; // eax
+  CAITaskForceGroup *v4; // eax
   unsigned int v5; // eax
   struct CAINormalSectorAI *v7; // eax
   int v8; // eax
@@ -26,19 +26,19 @@ unsigned int  CAIAgentMovingHome::Execute(unsigned int a2, unsigned int a3) {
   char v22; // [esp+3Bh] [ebp-1h]
 
   v3 = CAINormalSectorAgent::SectorAI(this);
-  v4 = (_DWORD *)CAISectorAI::TaskForceGroup(v3);
-  if ( CAITaskForceGroup::NumberOfTaskForcesOfType(v4, 3) )
+  v4 = (CAITaskForceGroup *)CAISectorAI::TaskForceGroup(v3);
+  if ( CAITaskForceGroup::NumberOfTaskForcesOfType(v4, 3) != 0 )
   {
     v7 = CAINormalSectorAgent::SectorAI(this);
     v8 = CAISectorAI::TaskForceGroup(v7);
-    for ( i = (pairNode *)CAITaskForceGroup::FirstTaskForce(v8, 2);
-          i;
-          i = TaskForceGroupMemberOfSameClass )
+    for ( i = (pairNode *)CAITaskForceGroup::FirstTaskForce((CAITaskForceGroup *)v8, 2);
+          i != 0;
+          i = (pairNode *)TaskForceGroupMemberOfSameClass )
     {
-      TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
+      TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass((CAITaskForce *)i);
       if ( CAITaskForce::Type(i) == 3 )
       {
-        if ( CAITaskForce::NumberOfEntities(i) )
+        if ( CAITaskForce::NumberOfEntities((CAITaskForce *)i) != 0 )
         {
           v9 = CAINormalSectorAgent::SectorAI(this);
           v10 = (struct _iobuf *)CAISectorAI::BasePackedXY(v9);
@@ -49,12 +49,12 @@ unsigned int  CAIAgentMovingHome::Execute(unsigned int a2, unsigned int a3) {
             __debugbreak();
           }
           v22 = 1;
-          for ( j = (pairNode *)CAITaskForce::LastEntity(i);
-                j;
+          for ( j = (pairNode *)CAITaskForce::LastEntity((CAITaskForce *)i);
+                j != 0;
                 j = (pairNode *)v16 )
           {
             v16 = CAIEntityInfo::Prev(j);
-            v17 = CAIEntityInfo::EntityId(j);
+            v17 = CAIEntityInfo::EntityId((CAIEntityInfo *)j);
             v12 = (struct _iobuf *)IAIEnvironment::EntityPackedPosition(v17);
             IAIEnvironment::WorldEcoSectorIdPackedXY(v12);
             if ( v13 != v18 )
@@ -64,7 +64,7 @@ unsigned int  CAIAgentMovingHome::Execute(unsigned int a2, unsigned int a3) {
               break;
             }
           }
-          if ( v22 )
+          if ( v22 != 0 )
           {
             CAITaskForce::ChangeType(i, 5);
             (*(void (__thiscall **)(pairNode *, _DWORD, _DWORD, _DWORD))(*(_DWORD *)i + 32))(i, 0, 0, 0);
@@ -72,7 +72,7 @@ unsigned int  CAIAgentMovingHome::Execute(unsigned int a2, unsigned int a3) {
           else
           {
             v14 = CAINormalSectorAgent::SectorAI(this);
-            CAINormalSectorAI::MoveSquadHome(v14, i);
+            CAINormalSectorAI::MoveSquadHome(v14, (struct CAITaskForce *)i);
           }
         }
         else
@@ -95,14 +95,14 @@ unsigned int  CAIAgentMovingHome::Execute(unsigned int a2, unsigned int a3) {
 // Decompiled from CAIAgentMovingHome *__thiscall CAIAgentMovingHome::CAIAgentMovingHome(CAIAgentMovingHome *this)
  CAIAgentMovingHome::CAIAgentMovingHome(void) {
   
-  CAINormalSectorAgent::CAINormalSectorAgent(this, "moving home");
+  CAINormalSectorAgent::CAINormalSectorAgent((CAINormalSectorAgent *)this, "moving home");
   *(_DWORD *)this = &CAIAgentMovingHome::_vftable_;
   return this;
 }
 
 
 // address=[0x1325c90]
-// Decompiled from void __thiscall CAIAgentMovingHome::~CAIAgentMovingHome(CAIAgentMovingHome *this)
+// Decompiled from void __thiscall CAIAgentMovingHome::~CAIAgentMovingHome(CAIScheduler **this)
  CAIAgentMovingHome::~CAIAgentMovingHome(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

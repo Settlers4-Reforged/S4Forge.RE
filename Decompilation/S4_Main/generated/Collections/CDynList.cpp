@@ -36,9 +36,9 @@ int  CDynList::addElement(class CDynListEntry * a2) {
   int v3; // [esp+4h] [ebp-4h]
 
   v3 = *(_DWORD *)this;
-  if ( *(_DWORD *)this )
+  if ( *(_DWORD *)this != 0 )
   {
-    while ( *(_DWORD *)(v3 + 4) )
+    while ( *(_DWORD *)(v3 + 4) != 0 )
     {
       v3 = *(_DWORD *)(v3 + 4);
     }
@@ -69,12 +69,12 @@ int  CDynList::insertElementAt(class CDynListEntry * a2, int a3) {
   *((_DWORD *)a2 + 1) = 0;
   if ( *((_DWORD *)this + 1) > a3 )
   {
-    while ( v5 )
+    while ( v5 != 0 )
     {
       if ( *(_DWORD *)(v5 + 8) == a3 )
       {
         *((_DWORD *)a2 + 1) = v5;
-        if ( a3 )
+        if ( a3 != 0 )
         {
           *(_DWORD *)(v4 + 4) = a2;
         }
@@ -162,7 +162,7 @@ int  CDynList::delElement(int a2) {
   {
     v4 = *(_DWORD *)this;
     *(_DWORD *)this = *(_DWORD *)(*(_DWORD *)this + 4);
-    if ( v4 )
+    if ( v4 != 0 )
     {
 LABEL_3:
       (**(void (__thiscall ***)(int, int))v4)(v4, 1);
@@ -172,7 +172,7 @@ LABEL_3:
   {
     while ( 1 )
     {
-      if ( !*(_DWORD *)(v3 + 4) )
+      if ( *(_DWORD *)(v3 + 4) == 0 )
       {
         return 0;
       }
@@ -184,7 +184,7 @@ LABEL_3:
       v3 = *(_DWORD *)(v3 + 4);
     }
     *(_DWORD *)(v3 + 4) = *(_DWORD *)(v4 + 4);
-    if ( v4 )
+    if ( v4 != 0 )
     {
       goto LABEL_3;
     }
@@ -213,7 +213,7 @@ void  CDynList::ClearDynList(void) {
 
   v3 = 0;
   for ( i = *(_DWORD *)this;
-        i;
+        i != 0;
         i = v2 )
   {
     ++v3;
@@ -244,16 +244,16 @@ int  CDynList::sort(int a2) {
   char v9; // [esp+1Fh] [ebp-1h]
 
   v9 = 1;
-  if ( !*(_DWORD *)this || !*(_DWORD *)(*(_DWORD *)this + 4) )
+  if ( *(_DWORD *)this == 0 || *(_DWORD *)(*(_DWORD *)this + 4) == 0 )
   {
     return 0;
   }
-  while ( v9 )
+  while ( v9 != 0 )
   {
     v9 = 0;
     v5 = *(_DWORD **)this;
     v8 = *(_DWORD **)this;
-    while ( v8[1] )
+    while ( v8[1] != 0 )
     {
       v7 = (_DWORD *)v8[1];
       v4 = ((double (__thiscall *)(_DWORD *, int))*(_DWORD *)(*v8 + 4))(v8, a2);

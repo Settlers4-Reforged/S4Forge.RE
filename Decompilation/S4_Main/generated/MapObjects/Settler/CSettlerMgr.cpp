@@ -10,7 +10,7 @@ class CSettler &  CSettlerMgr::operator[](int a1) {
   IEntity *pEntity; // [esp+4h] [ebp-4h]
 
   pEntity = CMapObjectMgr::EntityPtr(a1);
-  if ( !pEntity && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Settler\\SettlerMgr.h", 299, "pEntity != 0") == 1 )
+  if ( pEntity == 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Settler\\SettlerMgr.h", 299, "pEntity != 0") == 1 )
   {
     __debugbreak();
   }
@@ -45,7 +45,7 @@ class CSettler *  CSettlerMgr::GetSettlerPtr(int a1) {
   CSettler *pEntity; // [esp+Ch] [ebp-4h]
 
   pEntity = (CSettler *)CMapObjectMgr::EntityPtr(a1);
-  if ( pEntity && IEntity::ObjType(pEntity) == SETTLER_OBJ )
+  if ( pEntity != 0 && IEntity::ObjType(pEntity) == SETTLER_OBJ )
   {
     return pEntity;
   }
@@ -84,7 +84,7 @@ struct CSettlerMgr::SSettlerInfos const & __cdecl CSettlerMgr::GetSettlerInfo(in
 // Decompiled from int __cdecl CSettlerMgr::SettlerWarriorType(int a1)
 int __cdecl CSettlerMgr::SettlerWarriorType(int a1) {
   
-  if ( !CSettlerMgr::m_uSettlerWarriorTypes[SETTLER_SWORDSMAN_01] && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Settler\\SettlerMgr.h", 347, "m_uSettlerWarriorTypes[SETTLER_SWORDSMAN_01] != 0") == 1 )
+  if ( CSettlerMgr::m_uSettlerWarriorTypes[SETTLER_SWORDSMAN_01] == 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Settler\\SettlerMgr.h", 347, "m_uSettlerWarriorTypes[SETTLER_SWORDSMAN_01] != 0") == 1 )
   {
     __debugbreak();
   }
@@ -105,7 +105,7 @@ int __cdecl CSettlerMgr::SettlerWarriorType(int a1) {
   memset(CSettlerMgr::m_uSettlerWarriorLevels, 0, 0x46u);
   memset(CSettlerMgr::m_vSettlerInfos, 0, sizeof(CSettlerMgr::m_vSettlerInfos));
   for ( i = s_sDefaultSettlerInfos;
-        i->m_uType;
+        i->m_uType != 0;
         ++i )
   {
     if ( i->m_uType >= 0x43u && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 219, "pInfo->m_uType < SETTLER_MAX") == 1 )
@@ -116,16 +116,13 @@ int __cdecl CSettlerMgr::SettlerWarriorType(int a1) {
     {
       __debugbreak();
     }
-    if ( CSettlerMgr::m_uSettlerWarriorTypes[i->m_uType] && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 221, "m_uSettlerWarriorTypes[pInfo->m_uType] == 0") == 1 )
+    if ( CSettlerMgr::m_uSettlerWarriorTypes[i->m_uType] != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 221, "m_uSettlerWarriorTypes[pInfo->m_uType] == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( CSettlerMgr::m_uSettlerWarriorLevels[i->m_uType] )
+    if ( CSettlerMgr::m_uSettlerWarriorLevels[i->m_uType] != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 222, "m_uSettlerWarriorLevels[pInfo->m_uType] == 0") == 1 )
     {
-      if ( BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 222, "m_uSettlerWarriorLevels[pInfo->m_uType] == 0") == 1 )
-      {
-        __debugbreak();
-      }
+      __debugbreak();
     }
     CSettlerMgr::m_uSettlerWarriorTypes[i->m_uType] = i->m_uWarriorType;
     CSettlerMgr::m_uSettlerWarriorLevels[i->m_uType] = i->m_uWarriorLevel;
@@ -175,7 +172,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
   {
     case 1u:
       result = (struct ISettlerRole *)operator new(0x38u);
-      if ( result )
+      if ( result != 0 )
       {
         result = CCarrierRole::CCarrierRole((CCarrierRole *)result);
       }
@@ -186,7 +183,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 2u:
       result = (struct ISettlerRole *)operator new(0x30u);
-      if ( result )
+      if ( result != 0 )
       {
         result = CDiggerRole::CDiggerRole((CDiggerRole *)result);
       }
@@ -197,7 +194,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 3u:
       result = (struct ISettlerRole *)operator new(0x30u);
-      if ( result )
+      if ( result != 0 )
       {
         result = CBuilderRole::CBuilderRole((CBuilderRole *)result);
       }
@@ -208,7 +205,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 4u:
       result = (struct ISettlerRole *)operator new(0x34u);
-      if ( result )
+      if ( result != 0 )
       {
         result = (struct ISettlerRole *)CHouseWorkerRole::CHouseWorkerRole((CHouseWorkerRole *)result);
       }
@@ -219,9 +216,9 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 5u:
       result = (struct ISettlerRole *)operator new(0x38u);
-      if ( result )
+      if ( result != 0 )
       {
-        result = (struct ISettlerRole *)CFreeWorkerRole::CFreeWorkerRole((CFreeWorkerRole *)result);
+        result = CFreeWorkerRole::CFreeWorkerRole((CFreeWorkerRole *)result);
       }
       else
       {
@@ -230,7 +227,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 7u:
       result = (struct ISettlerRole *)operator new(0x64u);
-      if ( result )
+      if ( result != 0 )
       {
         result = CSoldierRole::CSoldierRole((CSoldierRole *)result);
       }
@@ -241,9 +238,9 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 8u:
       result = (struct ISettlerRole *)operator new(0x30u);
-      if ( result )
+      if ( result != 0 )
       {
-        result = (struct ISettlerRole *)CHunterRole::CHunterRole((CHunterRole *)result);
+        result = CHunterRole::CHunterRole((CHunterRole *)result);
       }
       else
       {
@@ -252,7 +249,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 9u:
       result = (struct ISettlerRole *)operator new(0x40u);
-      if ( result )
+      if ( result != 0 )
       {
         result = (struct ISettlerRole *)CPriestRole::CPriestRole((CPriestRole *)result);
       }
@@ -263,7 +260,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 0xAu:
       result = (struct ISettlerRole *)operator new(0x68u);
-      if ( result )
+      if ( result != 0 )
       {
         result = (struct ISettlerRole *)CSaboteurRole::CSaboteurRole((CSaboteurRole *)result);
       }
@@ -274,7 +271,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 0xBu:
       result = (struct ISettlerRole *)operator new(0x4Cu);
-      if ( result )
+      if ( result != 0 )
       {
         result = (struct ISettlerRole *)CPioneerRole::CPioneerRole((CPioneerRole *)result);
       }
@@ -285,9 +282,9 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 0xCu:
       result = (struct ISettlerRole *)operator new(0x54u);
-      if ( result )
+      if ( result != 0 )
       {
-        result = (struct ISettlerRole *)CGeologistRole::CGeologistRole((CGeologistRole *)result);
+        result = CGeologistRole::CGeologistRole((CGeologistRole *)result);
       }
       else
       {
@@ -296,7 +293,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 0xDu:
       result = (struct ISettlerRole *)operator new(0x54u);
-      if ( result )
+      if ( result != 0 )
       {
         result = CGardenerRole::CGardenerRole((CGardenerRole *)result);
       }
@@ -307,7 +304,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 0xEu:
       result = (struct ISettlerRole *)operator new(0x50u);
-      if ( result )
+      if ( result != 0 )
       {
         result = (struct ISettlerRole *)CDarkGardenerRole::CDarkGardenerRole((CDarkGardenerRole *)result);
       }
@@ -318,7 +315,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 0xFu:
       result = (struct ISettlerRole *)operator new(0x30u);
-      if ( result )
+      if ( result != 0 )
       {
         result = (struct ISettlerRole *)CMushroomFarmerRole::CMushroomFarmerRole((CMushroomFarmerRole *)result);
       }
@@ -329,7 +326,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 0x10u:
       result = (struct ISettlerRole *)operator new(0x74u);
-      if ( result )
+      if ( result != 0 )
       {
         result = (struct ISettlerRole *)CShamanRole::CShamanRole((CShamanRole *)result);
       }
@@ -340,9 +337,9 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 0x11u:
       result = (struct ISettlerRole *)operator new(0x38u);
-      if ( result )
+      if ( result != 0 )
       {
-        result = (struct ISettlerRole *)CSlaveRole::CSlaveRole((CSlaveRole *)result);
+        result = CSlaveRole::CSlaveRole((CSlaveRole *)result);
       }
       else
       {
@@ -351,7 +348,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 0x13u:
       result = (struct ISettlerRole *)operator new(0x44u);
-      if ( result )
+      if ( result != 0 )
       {
         result = (struct ISettlerRole *)CThiefRole::CThiefRole((CThiefRole *)result);
       }
@@ -362,7 +359,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 0x14u:
       result = (struct ISettlerRole *)operator new(0x7Cu);
-      if ( result )
+      if ( result != 0 )
       {
         result = CDonkeyRole::CDonkeyRole((CDonkeyRole *)result);
       }
@@ -373,7 +370,7 @@ class ISettlerRole *  CSettlerMgr::CreateSettlerRole(int _iRace, int _iType) {
       break;
     case 0x17u:
       result = (struct ISettlerRole *)operator new(0x74u);
-      if ( result )
+      if ( result != 0 )
       {
         result = (struct ISettlerRole *)CSquadLeaderRole::CSquadLeaderRole((CSquadLeaderRole *)result);
       }
@@ -404,10 +401,10 @@ class ISettlerRole * __cdecl CSettlerMgr::LoadSettlerRole(std::istream & a1, int
   switch ( a2 )
   {
     case 1:
-      result = (struct ISettlerRole *)CCarrierRole::Load((int)a1);
+      result = (struct ISettlerRole *)CCarrierRole::Load(a1);
       break;
     case 2:
-      result = (struct ISettlerRole *)CDiggerRole::Load((int)a1);
+      result = (struct ISettlerRole *)CDiggerRole::Load(a1);
       break;
     case 3:
       result = (struct ISettlerRole *)CBuilderRole::Load((int)a1);
@@ -437,7 +434,7 @@ class ISettlerRole * __cdecl CSettlerMgr::LoadSettlerRole(std::istream & a1, int
       result = (struct ISettlerRole *)CGeologistRole::Load((int)a1);
       break;
     case 13:
-      result = (struct ISettlerRole *)CGardenerRole::Load((int)a1);
+      result = (struct ISettlerRole *)CGardenerRole::Load(a1);
       break;
     case 14:
       result = (struct ISettlerRole *)CDarkGardenerRole::Load((int)a1);
@@ -452,13 +449,13 @@ class ISettlerRole * __cdecl CSettlerMgr::LoadSettlerRole(std::istream & a1, int
       result = (struct ISettlerRole *)CSlaveRole::Load((int)a1);
       break;
     case 18:
-      result = (struct ISettlerRole *)CFleeRole::Load((int)a1);
+      result = (struct ISettlerRole *)CFleeRole::Load(a1);
       break;
     case 19:
       result = (struct ISettlerRole *)CThiefRole::Load((int)a1);
       break;
     case 20:
-      result = (struct ISettlerRole *)CDonkeyRole::Load((int)a1);
+      result = (struct ISettlerRole *)CDonkeyRole::Load(a1);
       break;
     case 21:
       result = (struct ISettlerRole *)CDoorRole::Load((int)a1);
@@ -666,6 +663,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
   CSettlerMgr::SSearchInfos v144; // [esp+31Ch] [ebp-478h] BYREF
   char v145; // [esp+323h] [ebp-471h]
   CConfigManager *v146; // [esp+324h] [ebp-470h]
+  int; // [esp+328h] [ebp-46Ch]
   char v148[4]; // [esp+32Ch] [ebp-468h] BYREF
   AdvXMLParser::Element *v151; // [esp+338h] [ebp-45Ch]
   int v152; // [esp+33Ch] [ebp-458h]
@@ -704,8 +702,8 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
   {
     v154 = 0;
     v160 = 0;
-    v160 = (char *)(isMP ? AdvXMLParser::Parser::OpenXMLFile(aGamedataSettle, &v154) : AdvXMLParser::Parser::OpenXMLFile(aGamedataSettle_0, &v154));
-    if ( v160 )
+    v160 = (char *)(isMP != 0 ? AdvXMLParser::Parser::OpenXMLFile(L"GameData\\settlerValuesMp.xml", &v154) : AdvXMLParser::Parser::OpenXMLFile(L"GameData\\settlerValues.xml", &v154));
+    if ( v160 != 0 )
     {
       v186 = 0;
       v36[18] = AdvXMLParser::Parser::Parser(v24);
@@ -909,7 +907,7 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
             v144.m_iOffsetX = v39.m_iOffsetX;
             v144.m_iOffsetY = v39.m_iOffsetY;
             v145 = 0;
-            std::vector<CSettlerMgr::SSearchInfos>::push_back(&v144);
+            std::vector<CSettlerMgr::SSearchInfos>::push_back((int)&v144);
             LOBYTE(v186) = 26;
             std::string::~string(&v183);
             AdvXMLParser::ConstIterator<AdvXMLParser::Element>::operator++(v37);
@@ -999,14 +997,14 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
               j < 5;
               ++j )
         {
-          if ( !CSettlerMgr::m_vSettlerInfos[j][i].m_uRole )// If info not set, replace with info from first tribe
+          if ( CSettlerMgr::m_vSettlerInfos[j][i].m_uRole == 0 )
           {
             CSettlerMgr::SSettlerInfos::operator=(&CSettlerMgr::m_vSettlerInfos[j][i], &CSettlerMgr::m_vSettlerInfos[0][i]);
           }
         }
       }
       m_bMisc = CSettlerMgr::m_vSettlerInfos[0][44].m_bMisc;
-      if ( !m_bMisc )
+      if ( m_bMisc == 0 )
       {
         m_bMisc = 10;
       }
@@ -1015,10 +1013,10 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
             k < 5;
             ++k )
       {
-        if ( k )
+        if ( k != 0 )
         {
-          if ( CSettlerMgr::m_vSettlerInfos[k][44].m_bMisc )// Seems like squad leader boni are set here, with the id coming from the config.
-                                                // misc is either squad bonus attack in % or medic healing per animation and it seems like other special troops
+           = CSettlerMgr::m_vSettlerInfos[k][44].m_bMisc;
+          if (  != 0 )
           {
             CSettlerMgr::m_iSquadLeaderBoni256[k] = CSettlerMgr::m_iSquadLeaderBoni256[0];
           }
@@ -1028,52 +1026,57 @@ void  CSettlerMgr::LoadInfo(bool isMP) {
           }
         }
       }
-      if ( !CSettlerMgr::m_vSettlerInfos[0][35].m_bMisc )
+      if ( CSettlerMgr::m_vSettlerInfos[0][35].m_bMisc == 0 )
       {
         CSettlerMgr::m_vSettlerInfos[0][35].m_bMisc = 3;
       }
-      if ( !CSettlerMgr::m_vSettlerInfos[0][36].m_bMisc )
+      if ( CSettlerMgr::m_vSettlerInfos[0][36].m_bMisc == 0 )
       {
         CSettlerMgr::m_vSettlerInfos[0][36].m_bMisc = 5;
       }
-      if ( !CSettlerMgr::m_vSettlerInfos[0][37].m_bMisc )
+      if ( CSettlerMgr::m_vSettlerInfos[0][37].m_bMisc == 0 )
       {
         CSettlerMgr::m_vSettlerInfos[0][37].m_bMisc = 7;
       }
-      if ( CSettlerMgr::m_vSettlerInfos[2][41].m_bMisc )
+      if ( CSettlerMgr::m_vSettlerInfos[2][41].m_bMisc != 0 )
       {
         g_iBlowgunWarriorFreezeChange = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[2][41].m_bMisc);
       }
-      if ( CSettlerMgr::m_vSettlerInfos[2][42].m_bMisc )
+      if ( CSettlerMgr::m_vSettlerInfos[2][42].m_bMisc != 0 )
       {
         *(&g_iBlowgunWarriorFreezeChange + 1) = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[2][42].m_bMisc);
       }
-      if ( CSettlerMgr::m_vSettlerInfos[2][43].m_bMisc )
+      if ( CSettlerMgr::m_vSettlerInfos[2][43].m_bMisc != 0 )
       {
         *(&g_iBlowgunWarriorFreezeChange + 2) = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[2][43].m_bMisc);
       }
-      if ( !CSettlerMgr::m_vSettlerInfos[2][61].m_bMisc )
+      if ( CSettlerMgr::m_vSettlerInfos[2][61].m_bMisc == 0 )
       {
         CSettlerMgr::m_vSettlerInfos[2][61].m_bMisc = 55;
       }
       g_iBackPackCatapultistPercent[0] = CSettlerMgr::m_vSettlerInfos[2][61].m_bMisc;
-      if ( !CSettlerMgr::m_vSettlerInfos[2][62].m_bMisc )
+      if ( CSettlerMgr::m_vSettlerInfos[2][62].m_bMisc == 0 )
       {
         CSettlerMgr::m_vSettlerInfos[2][62].m_bMisc = 65;
       }
       g_iBackPackCatapultistPercent[1] = CSettlerMgr::m_vSettlerInfos[2][62].m_bMisc;
-      if ( !CSettlerMgr::m_vSettlerInfos[2][63].m_bMisc )
+      if ( CSettlerMgr::m_vSettlerInfos[2][63].m_bMisc == 0 )
       {
         CSettlerMgr::m_vSettlerInfos[2][63].m_bMisc = 75;
       }
       g_iBackPackCatapultistPercent[2] = CSettlerMgr::m_vSettlerInfos[2][63].m_bMisc;
-      if ( CSettlerMgr::m_vSettlerInfos[0][46].m_bMisc )
+      if ( CSettlerMgr::m_vSettlerInfos[0][46].m_bMisc != 0 )
       {
         g_uSaboteurHitChange = CRandom16::PercentValue(CSettlerMgr::m_vSettlerInfos[0][46].m_bMisc);
       }
     }
   }
 }
+/* Orphan comments:
+If info not set, replace with info from first tribe
+Seems like squad leader boni are set here, with the id coming from the config.
+misc is either squad bonus attack in % or medic healing per animation and it seems like other special troops
+*/
 
 
 // address=[0x1582460]
@@ -1087,6 +1090,7 @@ int  CSettlerMgr::AddSettler(int _iX, int _iY, int _iOwnerId, int _iSettlerType,
   auto_ptr_ISettlerRole *v11; // [esp+4h] [ebp-50h]
   auto_ptr_ISettlerRole *v12; // [esp+8h] [ebp-4Ch]
   int v13; // [esp+Ch] [ebp-48h]
+  int; // [esp+10h] [ebp-44h]
   CSettler *pNewSettler; // [esp+18h] [ebp-3Ch] MAPDST
   DWORD race; // [esp+1Ch] [ebp-38h]
   auto_ptr_ISettlerRole a2; // [esp+24h] [ebp-30h] BYREF
@@ -1127,9 +1131,9 @@ int  CSettlerMgr::AddSettler(int _iX, int _iY, int _iOwnerId, int _iSettlerType,
     {
       v25 = (ISettlerRole *)operator new(0x2Cu);
       v29 = 0;
-      if ( v25 )
+      if ( v25 != 0 )
       {
-        v25 = (ISettlerRole *)CFleeRole::CFleeRole((CFleeRole *)v25);
+        v25 = CFleeRole::CFleeRole((CFleeRole *)v25);
       }
       else
       {
@@ -1142,7 +1146,7 @@ int  CSettlerMgr::AddSettler(int _iX, int _iY, int _iOwnerId, int _iSettlerType,
     settlerRole = CMapObjectMgr::GetFreeSlot();
     settler = (CSettler *)CSettler::operator new(0x68u);
     LOBYTE(v29) = 2;
-    if ( settler )
+    if ( settler != 0 )
     {
       freeSlot = settlerRole;
       v9.ptr = (ISettlerRole *)settlerRole;
@@ -1160,7 +1164,8 @@ int  CSettlerMgr::AddSettler(int _iX, int _iY, int _iOwnerId, int _iSettlerType,
     {
       __debugbreak();
     }
-    if ( CSettlerMgr::SettlerWarriorType(_iSettlerType) )
+     = CSettlerMgr::SettlerWarriorType(_iSettlerType);
+    if (  != 0 )
     {
       CSettlerMgr::AttachSettler(this, pNewSettler);
       if ( a6 > 0 )
@@ -1188,15 +1193,15 @@ bool  CSettlerMgr::IsAddSettlerOk(int _iX, int _iY, int _iOwnerId) {
     return 0;
   }
   iIdx = CWorldManager::Index(_iX, _iY);
-  if ( CWorldManager::FlagBits(iIdx, 1u) )
+  if ( CWorldManager::FlagBits(iIdx, 1u) != 0 )
   {
     return 0;
   }
-  if ( CWorldManager::MapObjectId(iIdx) )
+  if ( CWorldManager::MapObjectId(iIdx) != 0 )
   {
     return 0;
   }
-  return !_iOwnerId || ITiling::OwnerId(iIdx) == _iOwnerId;
+  return _iOwnerId == 0 || ITiling::OwnerId(iIdx) == _iOwnerId;
 }
 
 
@@ -1228,17 +1233,14 @@ void  CSettlerMgr::AddSettlers(int _iX, int _iY, int _iOwnerId, int _iSettlerTyp
   }
   iOffsetStep = 0;
   iAmountLeft = _iAmount;
-  while ( iAmountLeft && iOffsetStep < 20000 )
+  while ( iAmountLeft != 0 && iOffsetStep < 20000 )
   {
     iOffsetX = _iX + CSpiralOffsets::DeltaX(iOffsetStep);
     iOffsetY = _iY + CSpiralOffsets::DeltaY(iOffsetStep);
     iIdx = CWorldManager::Index(iOffsetX, iOffsetY);
-    if ( CWorldManager::InWorld(iOffsetX, iOffsetY) && !CWorldManager::MapObjectId(iIdx) && !CWorldManager::FlagBits(iIdx, 0x39u) )
+    if ( CWorldManager::InWorld(iOffsetX, iOffsetY) && CWorldManager::MapObjectId(iIdx) == 0 && CWorldManager::FlagBits(iIdx, 0x39u) == 0 && CSettlerMgr::AddSettler(this, iOffsetX, iOffsetY, _iOwnerId, _iSettlerType, a7) != 0 )
     {
-      if ( CSettlerMgr::AddSettler(this, iOffsetX, iOffsetY, _iOwnerId, _iSettlerType, a7) )
-      {
-        --iAmountLeft;
-      }
+      --iAmountLeft;
     }
     ++iOffsetStep;
   }
@@ -1260,7 +1262,7 @@ int  CSettlerMgr::AddGuardSettler(int iX, int iY, int iOwnerId) {
   int FreeSlot; // [esp+24h] [ebp-28h] MAPDST
   CSettler *v16; // [esp+28h] [ebp-24h]
   CSettler *v17; // [esp+2Ch] [ebp-20h]
-  ISettlerRole *pDoorRole; // [esp+30h] [ebp-1Ch] MAPDST
+  CDoorRole *pDoorRole; // [esp+30h] [ebp-1Ch] MAPDST
   void *C; // [esp+34h] [ebp-18h]
   int exceptionBlock; // [esp+48h] [ebp-4h]
 
@@ -1282,9 +1284,9 @@ int  CSettlerMgr::AddGuardSettler(int iX, int iY, int iOwnerId) {
     ++this->m_uTotalSettlers;
     C = operator new(0x2Cu);
     exceptionBlock = 0;
-    if ( C )
+    if ( C != 0 )
     {
-      pDoorRole = (ISettlerRole *)CDoorRole::CDoorRole((CDoorRole *)C);
+      pDoorRole = CDoorRole::CDoorRole((CDoorRole *)C);
     }
     else
     {
@@ -1296,7 +1298,7 @@ int  CSettlerMgr::AddGuardSettler(int iX, int iY, int iOwnerId) {
     FreeSlot = CMapObjectMgr::GetFreeSlot();
     v17 = (CSettler *)CSettler::operator new(0x68u);
     LOBYTE(exceptionBlock) = 2;
-    if ( v17 )
+    if ( v17 != 0 )
     {
       v5.ptr = (ISettlerRole *)FreeSlot;
       v8 = &v5;
@@ -1368,7 +1370,7 @@ bool  CSettlerMgr::SearchSpaceForSettler(int _iSettlerId, int _iX, int _iY) {
     v10 = _iX + CSpiralOffsets::DeltaX(i);
     v11 = _iY + CSpiralOffsets::DeltaY(i);
     v9 = CWorldManager::Index(v10, v11);
-    if ( CWorldManager::InWorld(v10, v11) && !CWorldManager::MapObjectId(v9) && CWorldManager::SectorId(v9) )
+    if ( CWorldManager::InWorld(v10, v11) && CWorldManager::MapObjectId(v9) == 0 && CWorldManager::SectorId(v9) != 0 )
     {
       CWorldManager::SetSettlerId(v9, _iSettlerId);
       rSettler = CSettlerMgr::operator[](_iSettlerId);
@@ -1376,7 +1378,7 @@ bool  CSettlerMgr::SearchSpaceForSettler(int _iSettlerId, int _iX, int _iY) {
       v8 = IEntity::Type(rSettler);
       v7 = IEntity::Type(rSettler);
       v4 = IEntity::Race(rSettler);
-      v5 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v4, v7);
+      v5 = (int)CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v4, v7);
       rSettler->NewToDoList(rSettler, v5, v8);
       return 1;
     }
@@ -1411,10 +1413,10 @@ bool  CSettlerMgr::SearchFreePositionInSector(int & _rX, int & _rY, int _iSector
   a5a = a5 | 1;
   v7 = 15;
   CSpiralWalk::CSpiralWalk((CSpiralWalk *)v6, *_rX, *_rY, 15);
-  while ( CSpiralWalk::NextXY(v6, &iX, &iY) )
+  while ( CSpiralWalk::NextXY(v6, &iX, &iY) != 0 )
   {
     iIdx = CWorldManager::Index(iX, iY);
-    if ( !CWorldManager::FlagBits(iIdx, a5a) && !CWorldManager::MapObjectId(iIdx) && ITiling::SectorId(iIdx) == _iSectorId )
+    if ( CWorldManager::FlagBits(iIdx, a5a) == 0 && CWorldManager::MapObjectId(iIdx) == 0 && ITiling::SectorId(iIdx) == _iSectorId )
     {
       *_rX = iX;
       *_rY = iY;
@@ -1441,10 +1443,10 @@ bool  CSettlerMgr::SearchFreePositionInEcoSector(int & _rX, int & _rY, int _iEco
   }
   v6 = 15;
   CSpiralWalk::CSpiralWalk((CSpiralWalk *)v5, *_rX, *_rY, 15);
-  while ( CSpiralWalk::NextXY(v5, &iOffsetX, &iOffsetY) )
+  while ( CSpiralWalk::NextXY(v5, &iOffsetX, &iOffsetY) != 0 )
   {
     iIdx = CWorldManager::Index(iOffsetX, iOffsetY);
-    if ( !CWorldManager::FlagBits(iIdx, 0x21u) && !CWorldManager::MapObjectId(iIdx) && ITiling::EcoSectorId(iIdx) == _iEcoSectorId )
+    if ( CWorldManager::FlagBits(iIdx, 0x21u) == 0 && CWorldManager::MapObjectId(iIdx) == 0 && ITiling::EcoSectorId(iIdx) == _iEcoSectorId )
     {
       *_rX = iOffsetX;
       *_rY = iOffsetY;
@@ -1497,18 +1499,18 @@ int  CSettlerMgr::OrderWarrior(int _iBuildingId, int _iSettlerType, int _iMaxDis
   int exceptionBlock; // [esp+58h] [ebp-4h]
 
   iSmallestDistance = -1;
-  rBuilding = CBuildingMgr::operator[](_iBuildingId);
+  rBuilding = ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(_iBuildingId);
   v4 = CBuilding::EnsignWorldIdx(rBuilding);
   iBuildingSector = CWorldManager::SectorId(v4);
-  iOwnerId = IEntity::OwnerId((IEntity *)rBuilding);
+  iOwnerId = IEntity::OwnerId(rBuilding);
   iSettlerIdIter = CSettlerMgr::GetFirstSettlerId(this, iOwnerId, _iSettlerType);
   iNearestFreeSoldierId = 0;
-  while ( iSettlerIdIter )
+  while ( iSettlerIdIter != 0 )
   {
     rSettlerIter = CSettlerMgr::operator[](iSettlerIdIter);
-    if ( IEntity::FlagBits(rSettlerIter, ENTITY_FLAG_Selectable) )
+    if ( IEntity::FlagBits(rSettlerIter, ENTITY_FLAG_Selectable) != 0 )
     {
-      iIdx = IEntity::WorldIdx();
+      iIdx = ((int (__stdcall *)())IEntity::WorldIdx)();
       if ( CWorldManager::SectorId(iIdx) == iBuildingSector )
       {
         iBuildingY = IEntity::Y(rBuilding);
@@ -1526,7 +1528,7 @@ int  CSettlerMgr::OrderWarrior(int _iBuildingId, int _iSettlerType, int _iMaxDis
     v9 = CSettlerMgr::operator[](iSettlerIdIter);
     iSettlerIdIter = IAnimatedEntity::Next(v9);
   }
-  if ( !iNearestFreeSoldierId )
+  if ( iNearestFreeSoldierId == 0 )
   {
     return 0;
   }
@@ -1567,12 +1569,12 @@ int  CSettlerMgr::OrderAIWarrior(int _iBuildingId, int _iWarriorType) {
   int exceptionBlock; // [esp+50h] [ebp-4h]
 
   pBuilding = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, _iBuildingId);
-  if ( !pBuilding )
+  if ( pBuilding == 0 )
   {
     return 0;
   }
-  pAIEntityInfo = IEntity::AIEntityInfoPtr((IEntity *)pBuilding);
-  if ( !pAIEntityInfo )
+  pAIEntityInfo = IEntity::AIEntityInfoPtr(pBuilding);
+  if ( pAIEntityInfo == 0 )
   {
     return 0;
   }
@@ -1582,7 +1584,7 @@ int  CSettlerMgr::OrderAIWarrior(int _iBuildingId, int _iWarriorType) {
     return 0;
   }
   pSettler = CSettlerMgr::GetSettlerPtr(this, iTargetId);
-  if ( !pSettler || IEntity::FlagBits(pSettler, ENTITY_FLAG_Ready|ENTITY_FLAG_ON_BOARD|ENTITY_FLAG_Selectable) != (ENTITY_FLAG_Ready|ENTITY_FLAG_Selectable) || IEntity::WarriorType(pSettler) != AI_WARRIOR_TYPE_SWORDMAN && IEntity::WarriorType(pSettler) != AI_WARRIOR_TYPE_BOWMAN )
+  if ( pSettler == 0 || IEntity::FlagBits(pSettler, ENTITY_FLAG_Ready|ENTITY_FLAG_ON_BOARD|ENTITY_FLAG_Selectable) != (ENTITY_FLAG_Ready|ENTITY_FLAG_Selectable) || IEntity::WarriorType(pSettler) != AI_WARRIOR_TYPE_SWORDMAN && IEntity::WarriorType(pSettler) != AI_WARRIOR_TYPE_BOWMAN )
   {
     goto LABEL_18;
   }
@@ -1590,9 +1592,9 @@ int  CSettlerMgr::OrderAIWarrior(int _iBuildingId, int _iWarriorType) {
   {
     return 0;
   }
-  iBuildingOwnerId = IEntity::OwnerId((IEntity *)pBuilding);
+  iBuildingOwnerId = IEntity::OwnerId(pBuilding);
   iOwnerId = IEntity::OwnerId(pSettler);
-  if ( iBuildingOwnerId == iOwnerId && (v4 = CBuilding::EnsignWorldIdx(pBuilding), v10 = ITiling::SectorId(v4), v5 = IEntity::WorldIdx(), v9 = ITiling::SectorId(v5), v10 == v9) )
+  if ( iBuildingOwnerId == iOwnerId && (v4 = CBuilding::EnsignWorldIdx(pBuilding), v10 = ITiling::SectorId(v4), v5 = ((int (__stdcall *)())IEntity::WorldIdx)(), v9 = ITiling::SectorId(v5), v10 == v9) )
   {
     IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_Selectable);
     if ( iOwnerId == CPlayerManager::GetLocalPlayerId() )
@@ -1646,33 +1648,33 @@ int  CSettlerMgr::OrderSpecialist(int a2, int _iSettlerType) {
   }
   iShortestDistance = 4294967295;
   pWheeler = CVehicleMgr::GetVehiclePtr(a2);
-  if ( !pWheeler && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1369, "pWheeler!= NULL") == 1 )
+  if ( pWheeler == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1369, "pWheeler!= NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !pWheeler )
+  if ( pWheeler == 0 )
   {
     return 0;
   }
-  v4 = IEntity::WorldIdx();
+  v4 = ((int (__stdcall *)())IEntity::WorldIdx)();
   iSectorId = CWorldManager::SectorId(v4);
-  if ( !iSectorId && BBSupportDbgReportF(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1376, "Stand on sector 0!") == 1 )
+  if ( iSectorId == 0 && BBSupportDbgReportF(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1376, "Stand on sector 0!") == 1 )
   {
     __debugbreak();
   }
   iOwnerId = IEntity::OwnerId(pWheeler);
-  if ( !iOwnerId && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1379, "iOwnerId != 0") == 1 )
+  if ( iOwnerId == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1379, "iOwnerId != 0") == 1 )
   {
     __debugbreak();
   }
   iSettlerIdIter = CSettlerMgr::GetFirstSettlerId(this, iOwnerId, _iSettlerType);
   iClosestSettlerId = 0;
-  while ( iSettlerIdIter )
+  while ( iSettlerIdIter != 0 )
   {
     rSettlerIter = CSettlerMgr::operator[](iSettlerIdIter);
-    if ( IEntity::FlagBits(rSettlerIter, ENTITY_FLAG_Selectable) )
+    if ( IEntity::FlagBits(rSettlerIter, ENTITY_FLAG_Selectable) != 0 )
     {
-      iIdx = IEntity::WorldIdx();
+      iIdx = ((int (__stdcall *)())IEntity::WorldIdx)();
       if ( CWorldManager::SectorId(iIdx) == iSectorId )
       {
         v6 = IEntity::Y(pWheeler);
@@ -1689,7 +1691,7 @@ int  CSettlerMgr::OrderSpecialist(int a2, int _iSettlerType) {
     }
     iSettlerIdIter = IAnimatedEntity::Next(rSettlerIter);
   }
-  if ( !iClosestSettlerId )
+  if ( iClosestSettlerId == 0 )
   {
     return 0;
   }
@@ -1727,7 +1729,7 @@ void  CSettlerMgr::OrderWarriorToTower(int _iBuildingId, int _iSettlerId) {
     __debugbreak();
   }
   pSettler = CSettlerMgr::GetSettlerPtr(this, _iSettlerId);
-  if ( !pSettler && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1228, "pSettler != 0") == 1 )
+  if ( pSettler == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 1228, "pSettler != 0") == 1 )
   {
     __debugbreak();
   }
@@ -1769,16 +1771,16 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * _pInfoExchange
   CEvn_Event v28; // [esp+44h] [ebp-28h] BYREF
   int v29; // [esp+68h] [ebp-4h]
 
-  if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2033, "_pInfoExchange != 0") == 1 )
+  if ( _pInfoExchange == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2033, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
   pSettlerMenu = (CSettlerStatisticInfo *)j____RTDynamicCast((void **)&_pInfoExchange->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CSettlerStatisticInfo__RTTI_Type_Descriptor_, 0);
-  if ( !pSettlerMenu && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2037, "pSettlerMenu != 0") == 1 )
+  if ( pSettlerMenu == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2037, "pSettlerMenu != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( pSettlerMenu )
+  if ( pSettlerMenu != 0 )
   {
     pSettlerMenu->m_bInEcoSector = _bInEcoSector;
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
@@ -1793,7 +1795,7 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * _pInfoExchange
       }
       else
       {
-        v8 = CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, LocalPlayerEcoSectorIdAtCenter);
+        v8 = (int)CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, LocalPlayerEcoSectorIdAtCenter);
       }
       v10 = (CEcoSector *)v8;
     }
@@ -1802,7 +1804,7 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * _pInfoExchange
           ++i )
     {
       _iSettlerType = pSettlerMenu->m_vSettlerCounts[i].m_iSettlerType;
-      if ( _iSettlerType )
+      if ( _iSettlerType != SETTLER_NO_SETTLER )
       {
         iTotalCount = 0;
         switch ( _iSettlerType )
@@ -1851,11 +1853,11 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * _pInfoExchange
             break;
           default:
             v4 = CSettlerMgr::SettlerWarriorType(_iSettlerType);
-            if ( !_bInEcoSector || v4 )
+            if ( !_bInEcoSector || v4 != 0 )
             {
               iTotalCount = CSettlerMgr::GetNumberOfSettlers(&g_cSettlerMgr, LocalPlayerId, _iSettlerType);
             }
-            else if ( v10 )
+            else if ( v10 != 0 )
             {
               iTotalCount = CEcoSector::NrOfSettler(v10, _iSettlerType);
             }
@@ -1872,7 +1874,7 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * _pInfoExchange
     pSettlerMenu->m_iWorkingSettlers = v3 - pSettlerMenu->m_iStrikingSettlers;
     if ( _bInEcoSector )
     {
-      if ( v10 )
+      if ( v10 != 0 )
       {
         v7 = CEcoSector::NrOfSettler(v10, SETTLER_CARRIER);
       }
@@ -1904,11 +1906,11 @@ void __cdecl CSettlerMgr::FillSettlerAmount(class CInfoExchange * _pInfoExchange
     }
     CEvn_Event::CEvn_Event(&v28, iEventId, 0, (unsigned int)pSettlerMenu, 0);
     v29 = 0;
-    if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2186, "g_pEvnEngine != NULL") == 1 )
+    if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2186, "g_pEvnEngine != NULL") == 1 )
     {
       __debugbreak();
     }
-    if ( g_pEvnEngine )
+    if ( g_pEvnEngine != 0 )
     {
       IEventEngine::SendAMessage(g_pEvnEngine, &v28);
     }
@@ -1930,18 +1932,18 @@ void __cdecl CSettlerMgr::FillFreeCarrier(class CInfoExchange * _pInfoExchange, 
   CEvn_Event cEvent; // [esp+1Ch] [ebp-28h] BYREF
   int exceptionBlock; // [esp+40h] [ebp-4h]
 
-  if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2304, "_pInfoExchange != 0") == 1 )
+  if ( _pInfoExchange == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2304, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !j____RTDynamicCast((void **)&_pInfoExchange->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CFreeCarrierInfo__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2305, "dynamic_cast<CFreeCarrierInfo*>(_pInfoExchange) != 0") == 1 )
+  if ( j____RTDynamicCast((void **)&_pInfoExchange->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CFreeCarrierInfo__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2305, "dynamic_cast<CFreeCarrierInfo*>(_pInfoExchange) != 0") == 1 )
   {
     __debugbreak();
   }
   _pInfoExchange->Clear(_pInfoExchange);
   bInOwnedES = 0;
   UserESInMiddleOfTheScreen = CSettlerMgr::GetUserESInMiddleOfTheScreen();
-  if ( UserESInMiddleOfTheScreen )
+  if ( UserESInMiddleOfTheScreen != 0 )
   {
     rEcoSector = CEcoSectorMgr::operator[](g_cESMgr, UserESInMiddleOfTheScreen);
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
@@ -1977,17 +1979,17 @@ void __cdecl CSettlerMgr::FillFreeCarrier(class CInfoExchange * _pInfoExchange, 
   }
   _pInfoExchange->m_iUnknown = 31;
   iEventId = 604;
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     iEventId = 602;
   }
   CEvn_Event::CEvn_Event(&cEvent, iEventId, 0, (unsigned int)_pInfoExchange, 0);
   exceptionBlock = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2377, "g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2377, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &cEvent);
   }
@@ -2016,11 +2018,11 @@ void __cdecl CSettlerMgr::FillSpecialistProduction(class CInfoExchange * pInfoEx
   _DWORD vSpecialists[5]; // [esp+4Ch] [ebp-24h]
   int v17; // [esp+6Ch] [ebp-4h]
 
-  if ( !pInfoExchange && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2206, "_pInfoExchange != 0") == 1 )
+  if ( pInfoExchange == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2206, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !j____RTDynamicCast((void **)&pInfoExchange->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CSettlerProductionInfo__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2207, "dynamic_cast<CSettlerProductionInfo*>(_pInfoExchange) != 0") == 1 )
+  if ( j____RTDynamicCast((void **)&pInfoExchange->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CSettlerProductionInfo__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2207, "dynamic_cast<CSettlerProductionInfo*>(_pInfoExchange) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -2032,7 +2034,7 @@ void __cdecl CSettlerMgr::FillSpecialistProduction(class CInfoExchange * pInfoEx
   vSpecialists[3] = SETTLER_SABOTEUR;
   vSpecialists[4] = SETTLER_PIONEER;
   bUserESInMiddleOfTheScreen = CSettlerMgr::GetUserESInMiddleOfTheScreen();
-  if ( bUserESInMiddleOfTheScreen )
+  if ( bUserESInMiddleOfTheScreen != 0 )
   {
     pEcoSector = CEcoSectorMgr::operator[](g_cESMgr, bUserESInMiddleOfTheScreen);
     LocalPlayerId = CPlayerManager::GetLocalPlayerId();
@@ -2062,7 +2064,7 @@ void __cdecl CSettlerMgr::FillSpecialistProduction(class CInfoExchange * pInfoEx
       bInOwnedES = 1;
     }
   }
-  if ( !bInOwnedES )
+  if ( bInOwnedES == 0 )
   {
     pInfoExchange->m_iFreeCarriers = 0;
     for ( j = 0;
@@ -2082,11 +2084,11 @@ void __cdecl CSettlerMgr::FillSpecialistProduction(class CInfoExchange * pInfoEx
   }
   CEvn_Event::CEvn_Event(&v15, v6, 0, (unsigned int)pInfoExchange, 0);
   v17 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2284, "g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2284, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v15);
   }
@@ -2115,11 +2117,11 @@ void __cdecl CSettlerMgr::FillSoldierMenu(class CInfoExchange * _pInfoExchange, 
   CEvn_Event cEvent; // [esp+40h] [ebp-28h] BYREF
   int exceptionBlock; // [esp+64h] [ebp-4h]
 
-  if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2397, "_pInfoExchange != 0") == 1 )
+  if ( _pInfoExchange == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2397, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !j____RTDynamicCast((void **)&_pInfoExchange->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CSoldierInfo__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2398, "dynamic_cast<CSoldierInfo*>(_pInfoExchange) != 0") == 1 )
+  if ( j____RTDynamicCast((void **)&_pInfoExchange->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CSoldierInfo__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2398, "dynamic_cast<CSoldierInfo*>(_pInfoExchange) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -2130,9 +2132,9 @@ void __cdecl CSettlerMgr::FillSoldierMenu(class CInfoExchange * _pInfoExchange, 
         a1 < iSelectionSize;
         ++a1 )
   {
-    v2 = std::vector<unsigned short>::operator[](a1);
+    v2 = ((unsigned __int16 *(__stdcall *)(int))std::vector<unsigned short>::operator[])(a1);
     SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, *v2);
-    if ( SettlerPtr )
+    if ( SettlerPtr != 0 )
     {
       iType = IEntity::Type(SettlerPtr);
       v15 = 0;
@@ -2177,7 +2179,7 @@ void __cdecl CSettlerMgr::FillSoldierMenu(class CInfoExchange * _pInfoExchange, 
         default:
           break;
       }
-      if ( v15 )
+      if ( v15 != 0 )
       {
         v4 = IEntity::Race(SettlerPtr);
         v5 = IEntity::Type(SettlerPtr);
@@ -2199,17 +2201,17 @@ void __cdecl CSettlerMgr::FillSoldierMenu(class CInfoExchange * _pInfoExchange, 
   _pInfoExchange->m_iMana = CStatistic::GetMana(&g_cStatistic, LocalPlayerId);
   _pInfoExchange->m_iUnknown = 18;
   iEventId = 604;
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     iEventId = 602;
   }
   CEvn_Event::CEvn_Event(&cEvent, iEventId, 0, (unsigned int)_pInfoExchange, 0);
   exceptionBlock = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2529, "g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2529, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &cEvent);
   }
@@ -2236,11 +2238,11 @@ void __cdecl CSettlerMgr::FillSpecialistMenu(class CInfoExchange * _pInfoExchang
   CEvn_Event v14; // [esp+3Ch] [ebp-28h] BYREF
   int v15; // [esp+60h] [ebp-4h]
 
-  if ( !_pInfoExchange && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2550, "_pInfoExchange != 0") == 1 )
+  if ( _pInfoExchange == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2550, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !j____RTDynamicCast((void **)&_pInfoExchange->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CSpecialistsInfo__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2551, "dynamic_cast<CSpecialistsInfo*>(_pInfoExchange) != 0") == 1 )
+  if ( j____RTDynamicCast((void **)&_pInfoExchange->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &CSpecialistsInfo__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2551, "dynamic_cast<CSpecialistsInfo*>(_pInfoExchange) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -2251,9 +2253,9 @@ void __cdecl CSettlerMgr::FillSpecialistMenu(class CInfoExchange * _pInfoExchang
         i < iSelectionSize;
         ++i )
   {
-    v2 = std::vector<unsigned short>::operator[](i);
+    v2 = ((unsigned __int16 *(__stdcall *)(int))std::vector<unsigned short>::operator[])(i);
     SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, *v2);
-    if ( SettlerPtr )
+    if ( SettlerPtr != 0 )
     {
       m_vSpecialists = 0;
       switch ( IEntity::Type(SettlerPtr) )
@@ -2276,7 +2278,7 @@ void __cdecl CSettlerMgr::FillSpecialistMenu(class CInfoExchange * _pInfoExchang
         default:
           break;
       }
-      if ( m_vSpecialists )
+      if ( m_vSpecialists != 0 )
       {
         v4 = IEntity::Race(SettlerPtr);
         v5 = IEntity::Type(SettlerPtr);
@@ -2294,17 +2296,17 @@ void __cdecl CSettlerMgr::FillSpecialistMenu(class CInfoExchange * _pInfoExchang
   }
   _pInfoExchange->m_iUnknown = 19;
   v7 = 604;
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     v7 = 602;
   }
   CEvn_Event::CEvn_Event(&v14, v7, 0, (unsigned int)_pInfoExchange, 0);
   v15 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2635, "g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 2635, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v14);
   }
@@ -2323,6 +2325,7 @@ void  CSettlerMgr::Store(class S4::CMapFile & a2) {
   size_t Size; // [esp+BCh] [ebp-278h]
   void *Src; // [esp+C0h] [ebp-274h]
   CSettler *pSettler; // [esp+C4h] [ebp-270h] MAPDST
+  CSettler *; // [esp+CCh] [ebp-268h] MAPDST
   int iLastUsedId; // [esp+D0h] [ebp-264h] MAPDST
   int iVersion; // [esp+D4h] [ebp-260h] BYREF
   int iSettlerCount; // [esp+E0h] [ebp-254h] BYREF
@@ -2334,31 +2337,32 @@ void  CSettlerMgr::Store(class S4::CMapFile & a2) {
   int exceptionBlock; // [esp+330h] [ebp-4h]
 
   v20 = &v3;
-  std::ostrstream::ostrstream(stream.v4, 0, 0x40000LL, 2, 1);
+  std::ostrstream::ostrstream(stream.v4, 0, 0x40000, 2, 1);
   exceptionBlock = 0;
   stream.v4[42] = std::ios_base::exceptions((char *)&stream + *(_DWORD *)(stream.v4[0] + 4));
   std::ios_base::exceptions((std::ios_base *)((char *)&stream + *(_DWORD *)(stream.v4[0] + 4)), 6);
   LOBYTE(exceptionBlock) = 1;
   iVersion = 1;
-  operator^<unsigned int>(&stream, &iVersion);
+  operator^<unsigned int>(&stream, (unsigned int *)&iVersion);
   iLastUsedId = CMapObjectMgr::LastUsedId();
   iSettlerCount = 0;
   for ( i = 1;
         i <= iLastUsedId;
         ++i )
   {
-    if ( CSettlerMgr::GetSettlerPtr(this, i) )
+     = CSettlerMgr::GetSettlerPtr(this, i);
+    if (  != 0 )
     {
       ++iSettlerCount;
     }
   }
-  operator^<unsigned int>(&stream, &iSettlerCount);
+  operator^<unsigned int>(&stream, (unsigned int *)&iSettlerCount);
   for ( j = 1;
         j <= iLastUsedId;
         ++j )
   {
     pSettler = CSettlerMgr::GetSettlerPtr(this, j);
-    if ( pSettler )
+    if ( pSettler != 0 )
     {
       pSettler->Store((int)&stream);
     }
@@ -2418,8 +2422,8 @@ void  CSettlerMgr::Load(class S4::CMapFile & a2) {
   unsigned int v4; // [esp+C0h] [ebp-40h]
   IEntity *v5; // [esp+C4h] [ebp-3Ch]
   IEntity *v6; // [esp+C8h] [ebp-38h]
-  int v7; // [esp+CCh] [ebp-34h]
-  int v8; // [esp+D0h] [ebp-30h] BYREF
+  unsigned int v7; // [esp+CCh] [ebp-34h]
+  unsigned int v8; // [esp+D0h] [ebp-30h] BYREF
   int a4; // [esp+D4h] [ebp-2Ch] BYREF
   unsigned int v10; // [esp+D8h] [ebp-28h] BYREF
   int pExceptionObject; // [esp+DCh] [ebp-24h] BYREF
@@ -2434,7 +2438,7 @@ void  CSettlerMgr::Load(class S4::CMapFile & a2) {
   CSettlerMgr::Clear(this);
   a4 = 0;
   Str = (char *)S4::CMapFile::LoadChunk(a2, MAP_CHUNK_SAVE_SETTLERS, 0, &a4, 0);
-  if ( Str )
+  if ( Str != 0 )
   {
     std::istrstream::istrstream(Str, 1);
     v17 = 0;
@@ -2550,7 +2554,7 @@ class CSettler &  CSettlerMgr::Settler(int iSettlerId) {
   CSettler *pEntity; // [esp+4h] [ebp-4h]
 
   pEntity = (CSettler *)CMapObjectMgr::EntityPtr(iSettlerId);
-  if ( !pEntity && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Settler\\SettlerMgr.h", 314, "pEntity != 0") == 1 )
+  if ( pEntity == 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Settler\\SettlerMgr.h", 314, "pEntity != 0") == 1 )
   {
     __debugbreak();
   }
@@ -2574,7 +2578,7 @@ int __cdecl CSettlerMgr::GetSquadLeaderBonus256(int a1) {
 // Decompiled from int __cdecl CSettlerMgr::SettlerWarriorLevel(int a1)
 int __cdecl CSettlerMgr::SettlerWarriorLevel(int a1) {
   
-  if ( !CSettlerMgr::m_uSettlerWarriorLevels[SETTLER_SWORDSMAN_01] && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Settler\\SettlerMgr.h", 359, "m_uSettlerWarriorLevels[SETTLER_SWORDSMAN_01] != 0") == 1 )
+  if ( CSettlerMgr::m_uSettlerWarriorLevels[SETTLER_SWORDSMAN_01] == 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Settler\\SettlerMgr.h", 359, "m_uSettlerWarriorLevels[SETTLER_SWORDSMAN_01] != 0") == 1 )
   {
     __debugbreak();
   }
@@ -2592,19 +2596,19 @@ void  CSettlerMgr::AttachSettler(class CSettler & _rSettler) {
   int iSettlerType; // [esp+10h] [ebp-8h]
   int iPlayerId; // [esp+14h] [ebp-4h]
 
-  if ( IEntity::FlagBits(_rSettler, ENTITY_FLAG_Offered) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 806, "_rSettler.FlagBits(ENTITY_FLAG_OFFERED) == 0") == 1 )
+  if ( IEntity::FlagBits(_rSettler, ENTITY_FLAG_Offered) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 806, "_rSettler.FlagBits(ENTITY_FLAG_OFFERED) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(_rSettler, ENTITY_FLAG_GlobalOffered) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 807, "_rSettler.FlagBits(ENTITY_FLAG_GLOBAL_OFFERED) == 0") == 1 )
+  if ( IEntity::FlagBits(_rSettler, ENTITY_FLAG_GlobalOffered) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 807, "_rSettler.FlagBits(ENTITY_FLAG_GLOBAL_OFFERED) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IAnimatedEntity::Previous(_rSettler) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 808, "_rSettler.Previous() == 0") == 1 )
+  if ( IAnimatedEntity::Previous(_rSettler) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 808, "_rSettler.Previous() == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IAnimatedEntity::Next(_rSettler) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 809, "_rSettler.Next() == 0") == 1 )
+  if ( IAnimatedEntity::Next(_rSettler) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 809, "_rSettler.Next() == 0") == 1 )
   {
     __debugbreak();
   }
@@ -2642,19 +2646,16 @@ void  CSettlerMgr::AttachSettler(class CSettler & _rSettler) {
   this->m_vFirstSettlerId[iPlayerId][iSettlerType] = iSettlerId;
   IAnimatedEntity::SetPrevious(_rSettler, 0);
   IAnimatedEntity::SetNext(_rSettler, iOldHeadId);
-  if ( iOldHeadId )
+  if ( iOldHeadId != 0 )
   {
     pOldHead = CSettlerMgr::GetSettlerPtr(this, iOldHeadId);
-    if ( !pOldHead && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 839, "pOldHead != 0") == 1 )
+    if ( pOldHead == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 839, "pOldHead != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( IAnimatedEntity::Previous(pOldHead) )
+    if ( IAnimatedEntity::Previous(pOldHead) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 841, "pOldHead->Previous() == 0") == 1 )
     {
-      if ( BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 841, "pOldHead->Previous() == 0") == 1 )
-      {
-        __debugbreak();
-      }
+      __debugbreak();
     }
     IAnimatedEntity::SetPrevious(pOldHead, iSettlerId);
   }
@@ -2673,11 +2674,11 @@ void  CSettlerMgr::DetachSettler(class CSettler & _rSettler) {
   int iSettlerType; // [esp+18h] [ebp-8h]
   int iPlayerId; // [esp+1Ch] [ebp-4h]
 
-  if ( IEntity::FlagBits(_rSettler, ENTITY_FLAG_Offered) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 889, "_rSettler.FlagBits(ENTITY_FLAG_OFFERED) == 0") == 1 )
+  if ( IEntity::FlagBits(_rSettler, ENTITY_FLAG_Offered) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 889, "_rSettler.FlagBits(ENTITY_FLAG_OFFERED) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !IEntity::FlagBits(_rSettler, ENTITY_FLAG_GlobalOffered) && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 890, "_rSettler.FlagBits(ENTITY_FLAG_GLOBAL_OFFERED) != 0") == 1 )
+  if ( IEntity::FlagBits(_rSettler, ENTITY_FLAG_GlobalOffered) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 890, "_rSettler.FlagBits(ENTITY_FLAG_GLOBAL_OFFERED) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -2715,10 +2716,10 @@ void  CSettlerMgr::DetachSettler(class CSettler & _rSettler) {
   }
   iPrevSettlerId = IAnimatedEntity::Previous(_rSettler);
   iNextSettlerId = IAnimatedEntity::Next(_rSettler);
-  if ( iPrevSettlerId )
+  if ( iPrevSettlerId != 0 )
   {
     pPrevSettler = CSettlerMgr::GetSettlerPtr(this, iPrevSettlerId);
-    if ( !pPrevSettler && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 918, "pPrevSettler != 0") == 1 )
+    if ( pPrevSettler == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 918, "pPrevSettler != 0") == 1 )
     {
       __debugbreak();
     }
@@ -2736,10 +2737,10 @@ void  CSettlerMgr::DetachSettler(class CSettler & _rSettler) {
     }
     this->m_vFirstSettlerId[iPlayerId][iSettlerType] = iNextSettlerId;
   }
-  if ( iNextSettlerId )
+  if ( iNextSettlerId != 0 )
   {
     pNextSettler = CSettlerMgr::GetSettlerPtr(this, iNextSettlerId);
-    if ( !pNextSettler && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 934, "pNextSettler != 0") == 1 )
+    if ( pNextSettler == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SettlerMgr.cpp", 934, "pNextSettler != 0") == 1 )
     {
       __debugbreak();
     }
@@ -2788,13 +2789,13 @@ void  CSettlerMgr::CheckOutSettler(int _iSettlerId) {
   iType = IEntity::Type(pSettler);
   if ( iType < SETTLER_MAX )
   {
-    if ( IEntity::WarriorType(pSettler) )
+    if ( IEntity::WarriorType(pSettler) != AI_WARRIOR_TYPE_NONE )
     {
       CSettlerMgr::DetachSettler(this, pSettler);
     }
     else
     {
-      v2 = IEntity::WorldIdx();
+      v2 = ((int (__stdcall *)())IEntity::WorldIdx)();
       v6 = CWorldManager::EcoSectorId(v2);
       if ( v6 > 0 )
       {
@@ -2802,12 +2803,12 @@ void  CSettlerMgr::CheckOutSettler(int _iSettlerId) {
         v3 = CEcoSector::Owner(v8);
         if ( v3 == IEntity::OwnerId(pSettler) )
         {
-          if ( IEntity::FlagBits(pSettler, ENTITY_FLAG_Offered) )
+          if ( IEntity::FlagBits(pSettler, ENTITY_FLAG_Offered) != 0 )
           {
             CEcoSector::GetSettlerOutOfOffer(v8, _iSettlerId);
           }
           v5 = CSettler::Role(pSettler);
-          if ( v5->GetSettlerRole(v5) != 18 && !IEntity::FlagBits(pSettler, (EntityFlag)128) && (!IEntity::FlagBits(pSettler, ENTITY_FLAG_ON_BOARD) || IEntity::FlagBits(pSettler, ENTITY_FLAG_Ownerless)) )
+          if ( v5->GetSettlerRole(v5) != 18 && IEntity::FlagBits(pSettler, (EntityFlag)128) == 0 && (IEntity::FlagBits(pSettler, ENTITY_FLAG_ON_BOARD) == 0 || IEntity::FlagBits(pSettler, ENTITY_FLAG_Ownerless) != 0) )
           {
             CEcoSector::ChangeNrOfSettler(v8, iType, -1);
             IEntity::ClearFlagBits(pSettler, ENTITY_FLAG_Ownerless);
@@ -2857,7 +2858,7 @@ int __cdecl CSettlerMgr::GetUserESInMiddleOfTheScreen(void) {
     if ( CWorldManager::InWorld(iX, iCenterY + iOffsetY) )
     {
       iEcoSectorId = CWorldManager::EcoSectorId(iX, iY);
-      if ( iEcoSectorId )
+      if ( iEcoSectorId != 0 )
       {
         rEcoSector = CEcoSectorMgr::operator[](g_cESMgr, iEcoSectorId);
         iOwnerId = CEcoSector::Owner(rEcoSector);

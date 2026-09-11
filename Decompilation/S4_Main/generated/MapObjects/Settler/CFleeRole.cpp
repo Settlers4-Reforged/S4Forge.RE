@@ -4,13 +4,13 @@
 // Definitions for class CFleeRole
 
 // address=[0x1400a40]
-// Decompiled from CFleeRole *__cdecl CFleeRole::New(int a1)
+// Decompiled from CFleeRole *__cdecl CFleeRole::New(struct std::istream *a1)
 class CPersistence * __cdecl CFleeRole::New(std::istream & a1) {
   
   CFleeRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CFleeRole *)operator new(0x2Cu);
-  if ( C )
+  if ( C != 0 )
   {
     return CFleeRole::CFleeRole(C, a1);
   }
@@ -95,11 +95,11 @@ void  CFleeRole::LogicUpdate(class CSettler * pSettler) {
     p_iY = &iY;
     v13 = std::auto_ptr<ISettlerRole>::auto_ptr<ISettlerRole>((auto_ptr_ISettlerRole *)&iY, &a2);
     CSettler::NewRole(pSettler, (auto_ptr_ISettlerRole)iY);
-    if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_Offered) )
+    if ( IEntity::FlagBits(pSettler, ENTITY_FLAG_Offered) == 0 )
     {
       iY = IEntity::EntityId(pSettler);
       v8 = IEntity::Type(pSettler);
-      CEcoSector::SetSettlerOffer(v26, v8, iY);
+      CEcoSector::SetSettlerOffer((CEcoSector *)v26, v8, iY);
     }
     CSettler::TakeWaitList(pSettler);
     v32 = -1;
@@ -118,7 +118,7 @@ void  CFleeRole::LogicUpdate(class CSettler * pSettler) {
       {
         v9 = IEntity::OwnerId(pSettler);
         NearestPlayerLand = CScanner::FindNearestPlayerLand(v9, &v27, &v28);
-        if ( !NearestPlayerLand )
+        if ( NearestPlayerLand == 0 )
         {
           v30 = 1;
           iSectorId = ITiling::SectorId(v25);
@@ -143,9 +143,9 @@ void  CFleeRole::LogicUpdate(class CSettler * pSettler) {
           }
         }
       }
-      if ( NearestPlayerLand )
+      if ( NearestPlayerLand != 0 )
       {
-        if ( v30 )
+        if ( v30 != 0 )
         {
           v20 = 0x2000;
         }
@@ -222,7 +222,7 @@ bool  CFleeRole::ESChanged(class CSettler * a2) {
   ISettlerRole::ISettlerRole(this, a2);
   v6 = 0;
   this->__vftable = (ISettlerRole_vtbl *)&CFleeRole::_vftable_;
-  operator^<unsigned int>(a2, &fileFormatVersion);
+  operator^<unsigned int>(a2, (unsigned int *)&fileFormatVersion);
   if ( fileFormatVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CFleeRole");
@@ -243,7 +243,7 @@ void  CFleeRole::Store(std::ostream & a2) {
 
   ISettlerRole::Store(this, a2);
   fileFormatVersion = 1;
-  operator^<unsigned int>(a2, &fileFormatVersion);
+  operator^<unsigned int>(a2, (unsigned int *)&fileFormatVersion);
 }
 
 
@@ -296,10 +296,10 @@ class CFleeRole * __cdecl CFleeRole::Load(std::istream & a1) {
 
 
 // address=[0x156d890]
-// Decompiled from void __thiscall CFleeRole::~CFleeRole(_AFX_OLE_STATE *this)
+// Decompiled from void __thiscall CFleeRole::~CFleeRole(ISettlerRole *this)
  CFleeRole::~CFleeRole(void) {
   
-  *(_DWORD *)this = &CFleeRole::_vftable_;
+  this->__vftable = (ISettlerRole_vtbl *)&CFleeRole::_vftable_;
   ISettlerRole::~ISettlerRole(this);
 }
 
@@ -319,7 +319,7 @@ void  CFleeRole::TakeJob(class CSettler * a2) {
   CEntityTask *pActualTask; // eax
 
   pActualTask = IMovingEntity::GetActualTask(a2);
-  ISettlerRole::InitCommonTaskValues(this, a2, pActualTask);
+  ISettlerRole::InitCommonTaskValues(this, (struct CSettler *)a2, pActualTask);
   if ( this->m_iTask == 17 )
   {
     IMovingEntity::SetDisplacementCosts(a2, 0);
@@ -331,17 +331,17 @@ void  CFleeRole::TakeJob(class CSettler * a2) {
 // Decompiled from void __thiscall CFleeRole::Init(ISettlerRole *this, IAnimatedEntity *a1)
 void  CFleeRole::Init(class CSettler * a1) {
   
-  if ( IEntity::FlagBits(a1, ENTITY_FLAG_Offered|ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\FleeRole.cpp", 125, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED | ENTITY_FLAG_OFFERED) == 0") == 1 )
+  if ( IEntity::FlagBits(a1, ENTITY_FLAG_Offered|ENTITY_FLAG_ATTACHED) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\FleeRole.cpp", 125, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED | ENTITY_FLAG_OFFERED) == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( ISettlerRole::HomeEntityId(this) && BBSupportDbgReport(2, "MapObjects\\Settler\\FleeRole.cpp", 126, "HomeEntityId() == 0") == 1 )
+  if ( ISettlerRole::HomeEntityId(this) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\FleeRole.cpp", 126, "HomeEntityId() == 0") == 1 )
   {
     __debugbreak();
   }
   CWarMap::AddEntity(a1);
   this->InitWalking(this, (CSettler *)a1);
-  CSettler::TakeWaitList(a1);
+  CSettler::TakeWaitList((CSettler *)a1);
   IAnimatedEntity::RegisterForLogicUpdate(a1, 1);
   this->m_iWalkspeed = 1;
 }
@@ -351,7 +351,7 @@ void  CFleeRole::Init(class CSettler * a1) {
 // Decompiled from void __thiscall CFleeRole::ConvertEventIntoGoal(CFleeRole *this, IAnimatedEntity *a2, struct CEntityEvent *a3)
 void  CFleeRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
-  if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Registered) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Registered) == 0 )
   {
     IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
   }

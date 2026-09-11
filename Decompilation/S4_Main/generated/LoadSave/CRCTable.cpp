@@ -13,7 +13,7 @@
         i < 256;
         ++i )
   {
-    this[i] = cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::CalcTableEntry(i);
+    *(this + i) = cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::CalcTableEntry(i);
   }
   return this;
 }
@@ -28,14 +28,14 @@ unsigned long  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::operator[](int
 
 
 // address=[0x13e6470]
-// Decompiled from int __stdcall cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::CalcTableEntry(int a1)
+// Decompiled from int __stdcall cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::CalcTableEntry(unsigned int a1)
 unsigned long  cdm_crc::CRCGenerator<16,32773,0,0,1,1>::CRCTable::CalcTableEntry(int a1) {
   
   int v2; // [esp+4h] [ebp-10h]
   int i; // [esp+8h] [ebp-Ch]
-  int v4; // [esp+Ch] [ebp-8h]
+  unsigned int v4; // [esp+Ch] [ebp-8h]
   int v5; // [esp+10h] [ebp-4h]
-  int v6; // [esp+10h] [ebp-4h]
+  unsigned int v6; // [esp+10h] [ebp-4h]
 
   v4 = cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Reflect(a1, 8);
   v2 = cdm_crc::CRCGenerator<16,32773,0,0,1,1>::Bitmask(15);

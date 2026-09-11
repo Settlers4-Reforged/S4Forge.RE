@@ -3,13 +3,13 @@
 // Definitions for class CStateLobbyLoadMP
 
 // address=[0x14bce60]
-// Decompiled from CStateLobbyLoadMP *__cdecl CStateLobbyLoadMP::DynamicCreateFunc(void *a1)
+// Decompiled from CStateLobbyLoadMP *__cdecl CStateLobbyLoadMP::DynamicCreateFunc(int a1)
 class CGameState * __cdecl CStateLobbyLoadMP::DynamicCreateFunc(void * a1) {
   
   CStateLobbyLoadMP *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateLobbyLoadMP *)operator new(0xAFA0u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateLobbyLoadMP::CStateLobbyLoadMP(C, a1);
   }
@@ -25,7 +25,7 @@ class CGameState * __cdecl CStateLobbyLoadMP::DynamicCreateFunc(void * a1) {
  CStateLobbyLoadMP::CStateLobbyLoadMP(void * a2) {
   
   int v3; // [esp+4h] [ebp-38h]
-  _BYTE v5[28]; // [esp+10h] [ebp-2Ch] BYREF
+  std::wstring v5; // [esp+10h] [ebp-2Ch] BYREF
   int v6; // [esp+38h] [ebp-4h]
 
   CStateLobbyGameSettings::CStateLobbyGameSettings(a2);
@@ -33,11 +33,11 @@ class CGameState * __cdecl CStateLobbyLoadMP::DynamicCreateFunc(void * a1) {
   *(_DWORD *)this = &CStateLobbyLoadMP::_vftable_;
   *((_BYTE *)this + 44956) = 0;
   CStateLobbyLoadMP::UpdateGameTypeData(this);
-  v3 = CGameType::ConvertMapNameToMPGameName((char *)g_pGameType, (int)v5);
+  v3 = (int)CGameType::ConvertMapNameToMPGameName(g_pGameType, &v5);
   LOBYTE(v6) = 1;
-  CStateLobbyLoadMP::CreateLobbyGameInfo(&g_cLobbyGameInfo, v3);
+  ((void (__stdcall *)(void *, int))CStateLobbyLoadMP::CreateLobbyGameInfo)(&g_cLobbyGameInfo, v3);
   LOBYTE(v6) = 0;
-  std::wstring::~wstring(v5);
+  std::wstring::~wstring(&v5);
   return this;
 }
 
@@ -70,22 +70,20 @@ bool  CStateLobbyLoadMP::Perform(void) {
   if ( v1 < timeGetTime() )
   {
     dword_4030930 = timeGetTime();
-    IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-    IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-    IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  if ( !g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
-    return 1;
+    INetworkEngine::CheckForMsg((CGameHost **)g_pNetworkEngine);
+    if ( INetworkEngine::StormDidEnterSession(g_pNetworkEngine) != 0 )
+    {
+      CStateLobbyLoadMP::UpdateGameTypeData(this);
+      (*(void (__thiscall **)(CStateLobbyLoadMP *, int))(*(_DWORD *)this + 16))(this, 1);
+      INetworkEngine::StormResetEnterSessionFlag(g_pNetworkEngine);
+    }
   }
-  INetworkEngine::CheckForMsg((INetworkEngine *)g_pNetworkEngine);
-  if ( !INetworkEngine::StormDidEnterSession((INetworkEngine *)g_pNetworkEngine) )
-  {
-    return 1;
-  }
-  CStateLobbyLoadMP::UpdateGameTypeData(this);
-  (*(void (__thiscall **)(CStateLobbyLoadMP *, int))(*(_DWORD *)this + 16))(this, 1);
-  INetworkEngine::StormResetEnterSessionFlag((INetworkEngine *)g_pNetworkEngine);
   return 1;
 }
 
@@ -106,24 +104,24 @@ void  CStateLobbyLoadMP::CreateLobbyGameInfo(class CLanLobbyGameSettings & a2, s
   unsigned int i; // [esp+4h] [ebp-28h]
   _BYTE v6[28]; // [esp+Ch] [ebp-20h] BYREF
 
-  CStateLobbyGameSettings::CreateLobbyGameInfo(a2, a3);
+  ((void (__stdcall *)(int, int))CStateLobbyGameSettings::CreateLobbyGameInfo)(a2, a3);
   *(_BYTE *)(a2 + 217) = 1;
   *(_BYTE *)(a2 + 216) = 0;
   *(_BYTE *)(a2 + 137) = 1;
   *(_BYTE *)(a2 + 136) = 1;
   *(_DWORD *)(a2 + 120) = 1;
   for ( i = 0;
-        i < *(_DWORD *)(g_pGameType + 112);
+        i < g_pGameType->m_iActualPlayerCount;
         ++i )
   {
     *(_BYTE *)(*(_DWORD *)(a2 + 116) + 2116 * i) = 1;
   }
   *(_BYTE *)(*(_DWORD *)(a2 + 116) + 2116 * CGameType::GetLocalSlot(g_pGameType)) = 0;
-  if ( this[16932] )
+  if ( *(this + 16932) != 0 )
   {
-    this[2116 * CGameType::GetLocalSlot(g_pGameType) + 68] = 1;
+    *(this + 2116 * CGameType::GetLocalSlot(g_pGameType) + 68) = 1;
   }
-  v3 = (void *)INetworkEngine::ConvertIPAddress((int)v6, *(_DWORD *)(g_pGameType + 68));
+  v3 = (void *)((int (__stdcall *)(int, int))INetworkEngine::ConvertIPAddress)((int)v6, g_pGameType->m_iHostAddress);
   std::string::operator=((void *)(a2 + 60), v3);
   std::string::~string(v6);
   (*(void (__thiscall **)(_BYTE *, int))(*(_DWORD *)this + 16))(this, 1);
@@ -140,71 +138,71 @@ void  CStateLobbyLoadMP::UpdateGameTypeData(void) {
   int result; // eax
   int AIName; // [esp+Ch] [ebp-38h]
   unsigned int i; // [esp+14h] [ebp-30h]
-  _BYTE v6[28]; // [esp+18h] [ebp-2Ch] BYREF
+  std::wstring v6; // [esp+18h] [ebp-2Ch] BYREF
   int v7; // [esp+40h] [ebp-4h]
 
-  if ( !g_pGameType && BBSupportDbgReport(2, "main\\States\\StateLobbyLoadMP.cpp", 129, "g_pGameType!=NULL") == 1 )
+  if ( g_pGameType == 0 && BBSupportDbgReport(2, "main\\States\\StateLobbyLoadMP.cpp", 129, "g_pGameType!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( *(_BYTE *)(g_pGameType + 732) && BBSupportDbgReport(2, "main\\States\\StateLobbyLoadMP.cpp", 130, "!g_pGameType->m_bLocalGame") == 1 )
+  if ( g_pGameType->m_bAIActive != 0 && BBSupportDbgReport(2, "main\\States\\StateLobbyLoadMP.cpp", 130, "!g_pGameType->m_bLocalGame") == 1 )
   {
     __debugbreak();
   }
-  if ( !*(_BYTE *)(g_pGameType + 696) && BBSupportDbgReport(2, "main\\States\\StateLobbyLoadMP.cpp", 131, "g_pGameType->m_bSavedGame") == 1 )
+  if ( g_pGameType->m_bIsSaveGame == 0 && BBSupportDbgReport(2, "main\\States\\StateLobbyLoadMP.cpp", 131, "g_pGameType->m_bSavedGame") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CGameType::IsWebGame(g_pGameType) )
+  if ( CGameType::IsWebGame(g_pGameType) == 0 )
   {
-    CGameType::SetHost((CGameType *)g_pGameType, 1);
-    *(_DWORD *)(g_pGameType + 68) = INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
-    memset((void *)(g_pGameType + 188), 0, 0x24u);
-    *(_DWORD *)(g_pGameType + 4 * CGameType::GetLocalSlot(g_pGameType) + 188) = *(_DWORD *)(g_pGameType + 68);
-    memset((void *)(g_pGameType + 224), -1, 0x24u);
+    CGameType::SetHost(g_pGameType, 1);
+    g_pGameType->m_iHostAddress = INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
+    memset(g_pGameType->m_uiIPPlayer, 0, sizeof(g_pGameType->m_uiIPPlayer));
+    g_pGameType->m_uiIPPlayer[CGameType::GetLocalSlot(g_pGameType)] = g_pGameType->m_iHostAddress;
+    memset(g_pGameType->m_sPlayerPeerId, -1, sizeof(g_pGameType->m_sPlayerPeerId));
     Instance = (OnlineManager *)OnlineManager::GetInstance();
     LocalPeerId = OnlineManager::GetLocalPeerId(Instance);
-    *(_DWORD *)(g_pGameType + 4 * CGameType::GetLocalSlot(g_pGameType) + 224) = LocalPeerId;
+    g_pGameType->m_sPlayerPeerId[CGameType::GetLocalSlot(g_pGameType)] = LocalPeerId;
   }
   for ( i = 0;
-        i < *(_DWORD *)(g_pGameType + 112);
+        i < g_pGameType->m_iActualPlayerCount;
         ++i )
   {
-    if ( *(_DWORD *)(g_pGameType + 4 * i + 116) == 2 || *(_DWORD *)(g_pGameType + 4 * i + 116) == 3 )
+    if ( g_pGameType->m_sPlayerType[i] == 2 || g_pGameType->m_sPlayerType[i] == 3 )
     {
-      *(_DWORD *)(g_pGameType + 4 * i + 452) = 6;
+      g_pGameType->m_sPlayerMapUploadStarted[i] = 6;
     }
     else
     {
-      *(_DWORD *)(g_pGameType + 4 * i + 452) = 0;
+      g_pGameType->m_sPlayerMapUploadStarted[i] = 0;
     }
-    if ( (unsigned __int8)CGameType::IsSaveGame((void *)g_pGameType) )
+    if ( CGameType::IsSaveGame(g_pGameType) != 0 )
     {
-      if ( *(_DWORD *)(g_pGameType + 4 * i + 116) == 2 || *(_DWORD *)(g_pGameType + 4 * i + 116) == 3 )
+      if ( g_pGameType->m_sPlayerType[i] == 2 || g_pGameType->m_sPlayerType[i] == 3 )
       {
-        AIName = CGameSettings::GetAIName((int)v6, i);
+        AIName = CGameSettings::GetAIName((int)&v6, i);
         v7 = 0;
-        CGameType::SetPlayerName(i, AIName);
+        ((void (__stdcall *)(unsigned int, int))CGameType::SetPlayerName)(i, AIName);
         v7 = -1;
-        std::wstring::~wstring(v6);
+        std::wstring::~wstring(&v6);
       }
       else
       {
-        *(_BYTE *)(i + g_pGameType + 440) = 1;
+        g_pGameType->m_sPlayerExclusiveColor[i] = 1;
       }
     }
     else
     {
-      *(_DWORD *)(g_pGameType + 4 * i + 116) = 1;
+      g_pGameType->m_sPlayerType[i] = 1;
     }
-    if ( (unsigned __int8)CGameType::IsHost(g_pGameType) && (*(_DWORD *)(g_pGameType + 4 * i + 116) != 2 && *(_DWORD *)(g_pGameType + 4 * i + 116) != 3 || *(_DWORD *)(g_pGameType + 4 * i + 404) != 3) )
+    if ( CGameType::IsHost(g_pGameType) != 0 && (g_pGameType->m_sPlayerType[i] != 2 && g_pGameType->m_sPlayerType[i] != 3 || g_pGameType->m_sPlayerRaces[i] != 3) )
     {
-      *(_BYTE *)(i + g_pGameType + 998) = 1;
+      g_pGameType->m_bPlayerSlotEmpty[i] = 1;
     }
   }
-  *(_BYTE *)(g_pGameType + 609) = 0;
+  g_pGameType->byte261 = 0;
   result = CGameType::GetLocalSlot(g_pGameType);
-  *(_BYTE *)(g_pGameType + result + 440) = 0;
+  g_pGameType->m_sPlayerExclusiveColor[result] = 0;
   return result;
 }
 

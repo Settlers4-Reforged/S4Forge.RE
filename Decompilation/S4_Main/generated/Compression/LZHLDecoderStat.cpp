@@ -19,7 +19,7 @@
 // Decompiled from int __thiscall LZHLDecoderStat::~LZHLDecoderStat(void **this)
  LZHLDecoderStat::~LZHLDecoderStat(void) {
   
-  operator delete[](this[33]);
+  operator delete[](*(this + 33));
   return HuffStat::~HuffStat(this);
 }
 

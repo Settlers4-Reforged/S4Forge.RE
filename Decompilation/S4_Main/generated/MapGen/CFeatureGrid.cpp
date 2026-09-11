@@ -3,7 +3,7 @@
 // Definitions for class CFeatureGrid
 
 // address=[0x2fc5180]
-// Decompiled from void __thiscall CFeatureGrid::~CFeatureGrid(CFeatureGrid *this)
+// Decompiled from void __thiscall CFeatureGrid::~CFeatureGrid(void **this)
  CFeatureGrid::~CFeatureGrid(void) {
   
   CGrid::~CGrid(this);
@@ -101,7 +101,7 @@ void  CFeatureGrid::initGrid(void) {
 
   v59 = this;
   v48 = 0;
-  Size = CGrid::getSize((CGrid *)(g_pBasicGrid + 4));
+  Size = CGrid::getSize((CBasicGrid *)((char *)g_pBasicGrid + 4));
   for ( i = 0;
         i < Size;
         ++i )
@@ -110,18 +110,18 @@ void  CFeatureGrid::initGrid(void) {
           j < Size;
           ++j )
     {
-      if ( CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j, i) == 1 )
+      if ( CGrid::getElement((CBasicGrid *)((char *)g_pBasicGrid + 4), j, i) == 1 )
       {
         v38 = 100;
         if ( j + 1 >= Size || j - 1 < 0 || i + 1 >= Size || i - 1 < 0 )
         {
-          v38 = CRandom16::Rand((CRandom16 *)g_pRand) % 6;
+          v38 = CRandom16::Rand(g_pRand) % 6;
         }
-        else if ( !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j + 1, i) || !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j - 1, i) || !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j, i + 1) || !CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j, i - 1) )
+        else if ( CGrid::getElement((CBasicGrid *)((char *)g_pBasicGrid + 4), j + 1, i) == 0 || CGrid::getElement((CBasicGrid *)((char *)g_pBasicGrid + 4), j - 1, i) == 0 || CGrid::getElement((CBasicGrid *)((char *)g_pBasicGrid + 4), j, i + 1) == 0 || CGrid::getElement((CBasicGrid *)((char *)g_pBasicGrid + 4), j, i - 1) == 0 )
         {
-          v38 = CRandom16::Rand((CRandom16 *)g_pRand) % 6;
+          v38 = CRandom16::Rand(g_pRand) % 6;
         }
-        if ( v38 )
+        if ( v38 != 0 )
         {
           *(_BYTE *)(*(_DWORD *)v59 + 2 * *((_DWORD *)v59 + 1) * i + 2 * j) = 1;
           ++v48;
@@ -146,7 +146,7 @@ void  CFeatureGrid::initGrid(void) {
           __debugbreak();
         }
       }
-      if ( CGrid::getElement((CGrid *)(g_pBasicGrid + 4), j, i) == 101 )
+      if ( CGrid::getElement((CBasicGrid *)((char *)g_pBasicGrid + 4), j, i) == 101 )
       {
         *(_BYTE *)(*(_DWORD *)v59 + 2 * *((_DWORD *)v59 + 1) * i + 2 * j) = 101;
         *(_BYTE *)(*(_DWORD *)v59 + 2 * *((_DWORD *)v59 + 1) * i + 2 * j + 1) = 101;
@@ -173,17 +173,17 @@ void  CFeatureGrid::initGrid(void) {
         k < *((_DWORD *)v59 + 2);
         ++k )
   {
-    v1 = CRandom16::Rand((CRandom16 *)g_pRand);
+    v1 = CRandom16::Rand(g_pRand);
     v31 = v1 % *((_DWORD *)v59 + 1);
-    v2 = CRandom16::Rand((CRandom16 *)g_pRand);
+    v2 = CRandom16::Rand(g_pRand);
     v30 = v2 % *((_DWORD *)v59 + 1);
     for ( m = 0;
           !CFeatureGrid::findNearestElement(v59, (int *)&v31, (int *)&v30, 1, 1) && m < 5;
           ++m )
     {
-      v3 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v3 = CRandom16::Rand(g_pRand);
       v31 = v3 % *((_DWORD *)v59 + 1);
-      v4 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v4 = CRandom16::Rand(g_pRand);
       v30 = v4 % *((_DWORD *)v59 + 1);
     }
     if ( m < 5 )
@@ -204,22 +204,22 @@ void  CFeatureGrid::initGrid(void) {
         {
           __debugbreak();
         }
-        if ( !v58 && v46 + 1 < *((_DWORD *)v59 + 1) && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * v47 + 1) == 1 )
+        if ( v58 == 0 && v46 + 1 < *((_DWORD *)v59 + 1) && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * v47 + 1) == 1 )
         {
           ++v46;
           v58 = 1;
         }
-        if ( !v58 && v47 + 1 < *((_DWORD *)v59 + 1) && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * (v47 + 1)) == 1 )
+        if ( v58 == 0 && v47 + 1 < *((_DWORD *)v59 + 1) && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * (v47 + 1)) == 1 )
         {
           ++v47;
           v58 = 1;
         }
-        if ( !v58 && v46 - 1 > 0 && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * v47 - 1) == 1 )
+        if ( v58 == 0 && v46 - 1 > 0 && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * v47 - 1) == 1 )
         {
           --v46;
           v58 = 1;
         }
-        if ( !v58 && v47 - 1 > 0 && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * (v47 - 1)) == 1 )
+        if ( v58 == 0 && v47 - 1 > 0 && *(_BYTE *)(*(_DWORD *)v59 + v46 + *((_DWORD *)v59 + 1) * (v47 - 1)) == 1 )
         {
           --v47;
           v58 = 1;
@@ -234,7 +234,7 @@ void  CFeatureGrid::initGrid(void) {
   {
     v50 = 0;
     v51 = 0;
-    CPlayerData::getStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * ii), &v50, &v51);
+    CPlayerData::getStartPos_Basic((CPlayerData *)g_pPlayerData[ii], &v50, &v51);
     v50 *= 2;
     v51 *= 2;
     v25 = v50;
@@ -245,7 +245,7 @@ void  CFeatureGrid::initGrid(void) {
       v5 = j__abs(v25 - v50);
       if ( j__abs(v26 - v51) + v5 <= 2 )
       {
-        CPlayerData::setNearestMountain(*(CPlayerData **)(g_pPlayerData + 4 * ii), v25, v26);
+        CPlayerData::setNearestMountain(g_pPlayerData[ii], v25, v26);
       }
       else
       {
@@ -256,9 +256,9 @@ void  CFeatureGrid::initGrid(void) {
     {
       v49 = 1;
     }
-    if ( v49 )
+    if ( v49 != 0 )
     {
-      v29 = CRandom16::Rand((CRandom16 *)g_pRand) % 8;
+      v29 = CRandom16::Rand(g_pRand) % 8;
       if ( (int)(v29 + 1) <= 7 )
       {
         v57 = v29 + 1;
@@ -271,7 +271,7 @@ void  CFeatureGrid::initGrid(void) {
       }
       v57 = v19;
       v45 = 0;
-      if ( !v50 )
+      if ( v50 == 0 )
       {
         v50 = 1;
       }
@@ -279,7 +279,7 @@ void  CFeatureGrid::initGrid(void) {
       {
         --v50;
       }
-      if ( !v51 )
+      if ( v51 == 0 )
       {
         v51 = 1;
       }
@@ -287,7 +287,7 @@ void  CFeatureGrid::initGrid(void) {
       {
         --v51;
       }
-      while ( v57 != v29 && !v45 )
+      while ( v57 != v29 && v45 == 0 )
       {
         if ( (g_iFlags & 1) != 0 && (g_iFlags & 2) != 0 && v57 == 4 && v29 != 5 )
         {
@@ -297,7 +297,7 @@ void  CFeatureGrid::initGrid(void) {
         {
           v45 = 1;
           *(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v57 + 13) + v51) + *((_DWORD *)v59 + v57 + 5) + v50) = 102;
-          CPlayerData::setNearestMountain(*(CPlayerData **)(g_pPlayerData + 4 * ii), *((_DWORD *)v59 + v57 + 5) + v50, *((_DWORD *)v59 + v57 + 13) + v51);
+          CPlayerData::setNearestMountain(g_pPlayerData[ii], *((_DWORD *)v59 + v57 + 5) + v50, *((_DWORD *)v59 + v57 + 13) + v51);
         }
         if ( ++v57 == 8 )
         {
@@ -314,9 +314,9 @@ void  CFeatureGrid::initGrid(void) {
   {
     if ( v23 <= *((_DWORD *)v59 + 3) )
     {
-      v6 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v6 = CRandom16::Rand(g_pRand);
       v17 = v6 % *((_DWORD *)v59 + 1);
-      v7 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v7 = CRandom16::Rand(g_pRand);
       v18 = v7 % *((_DWORD *)v59 + 1);
       if ( CFeatureGrid::findNearestElement(v59, (int *)&v17, (int *)&v18, 1, 0) )
       {
@@ -326,9 +326,9 @@ void  CFeatureGrid::initGrid(void) {
     }
     if ( v22 <= *((_DWORD *)v59 + 4) )
     {
-      v8 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v8 = CRandom16::Rand(g_pRand);
       v15 = v8 % *((_DWORD *)v59 + 1);
-      v9 = CRandom16::Rand((CRandom16 *)g_pRand);
+      v9 = CRandom16::Rand(g_pRand);
       v16 = v9 % *((_DWORD *)v59 + 1);
       if ( CFeatureGrid::findNearestElement(v59, (int *)&v15, (int *)&v16, 1, 0) )
       {
@@ -341,7 +341,7 @@ void  CFeatureGrid::initGrid(void) {
         ii < (unsigned __int8)g_iNumPlayers;
         ++ii )
   {
-    v10 = CRandom16::Rand((CRandom16 *)g_pRand);
+    v10 = CRandom16::Rand(g_pRand);
     v21 = v10 % 3 + 3;
     if ( (int)(v10 % 3 + 4) <= 7 )
     {
@@ -356,11 +356,11 @@ void  CFeatureGrid::initGrid(void) {
     v52 = v14;
     v40 = 0;
     v39 = 0;
-    CPlayerData::getStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * ii), &v40, &v39);
+    CPlayerData::getStartPos_Basic((CPlayerData *)g_pPlayerData[ii], &v40, &v39);
     v40 *= 2;
     v39 *= 2;
     v44 = 0;
-    while ( v52 != v21 && !v44 )
+    while ( v52 != v21 && v44 == 0 )
     {
       if ( *((_DWORD *)v59 + v52 + 5) + v40 >= 0 && *((_DWORD *)v59 + v52 + 5) + v40 < *((_DWORD *)v59 + 1) && *((_DWORD *)v59 + v52 + 13) + v39 >= 0 && *((_DWORD *)v59 + v52 + 13) + v39 < *((_DWORD *)v59 + 1) && *(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v52 + 13) + v39) + *((_DWORD *)v59 + v52 + 5) + v40) == 101 )
       {
@@ -379,7 +379,7 @@ void  CFeatureGrid::initGrid(void) {
   {
     v37 = 0;
     v36 = 0;
-    CPlayerData::getStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * ii), &v37, &v36);
+    CPlayerData::getStartPos_Basic((CPlayerData *)g_pPlayerData[ii], &v37, &v36);
     v37 *= 2;
     v36 *= 2;
     v34 = v37;
@@ -401,7 +401,7 @@ void  CFeatureGrid::initGrid(void) {
     {
       break;
     }
-    v20 = CRandom16::Rand((CRandom16 *)g_pRand) % 8;
+    v20 = CRandom16::Rand(g_pRand) % 8;
     if ( (int)(v20 + 1) <= 7 )
     {
       v53 = v20 + 1;
@@ -415,11 +415,11 @@ void  CFeatureGrid::initGrid(void) {
     v53 = v13;
     v42 = 0;
     v41 = 0;
-    CPlayerData::getStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * ii), &v42, &v41);
+    CPlayerData::getStartPos_Basic((CPlayerData *)g_pPlayerData[ii], &v42, &v41);
     v42 *= 2;
     v41 *= 2;
     v43 = 0;
-    while ( v53 != v20 && !v43 )
+    while ( v53 != v20 && v43 == 0 )
     {
       if ( *((_DWORD *)v59 + v53 + 5) + v42 >= 0 && *((_DWORD *)v59 + v53 + 5) + v42 < *((_DWORD *)v59 + 1) && *((_DWORD *)v59 + v53 + 13) + v41 >= 0 && *((_DWORD *)v59 + v53 + 13) + v41 < *((_DWORD *)v59 + 1) && (*(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v53 + 13) + v41) + *((_DWORD *)v59 + v53 + 5) + v42) == 1 || *(_BYTE *)(*(_DWORD *)v59 + *((_DWORD *)v59 + 1) * (*((_DWORD *)v59 + v53 + 13) + v41) + *((_DWORD *)v59 + v53 + 5) + v42) == 101) )
       {
@@ -469,9 +469,9 @@ bool  CFeatureGrid::findNearestElement(int & a2, int & a3, int a4, bool a5) {
   memset(v11, 0, Size);
   TStaticFIFO<int,256>::TStaticFIFO<int,256>(v22);
   v10 = v21 + *((_DWORD *)v19 + 1) * v20;
-  TStaticFIFO<int,256>::Push(&v10);
+  ((void (__stdcall *)(int *))TStaticFIFO<int,256>::Push)(&v10);
   *((_BYTE *)v18 + v21 + *((_DWORD *)v19 + 1) * v20) = 1;
-  while ( !(unsigned __int8)TStaticFIFO<int,256>::Empty(v22) )
+  while ( (unsigned __int8)TStaticFIFO<int,256>::Empty(v22) == 0 )
   {
     v13 = *(_DWORD *)TStaticFIFO<int,256>::Top(v22);
     TStaticFIFO<int,256>::Pop(v22);
@@ -539,7 +539,7 @@ bool  CFeatureGrid::findNearestElement(int & a2, int & a3, int a4, bool a5) {
         default:
           break;
       }
-      if ( !*((_BYTE *)v18 + v21 + *((_DWORD *)v19 + 1) * v20) )
+      if ( *((_BYTE *)v18 + v21 + *((_DWORD *)v19 + 1) * v20) == 0 )
       {
         if ( v21 >= *((_DWORD *)v19 + 1) && BBSupportDbgReport(2, "FeatureGrid.cpp", 499, "iCurrentX < m_iSize") == 1 )
         {
@@ -558,10 +558,10 @@ bool  CFeatureGrid::findNearestElement(int & a2, int & a3, int a4, bool a5) {
           __debugbreak();
         }
         *((_BYTE *)v18 + v21 + *((_DWORD *)v19 + 1) * v20) = 1;
-        if ( !a5 || *(_BYTE *)(*(_DWORD *)v19 + v21 + *((_DWORD *)v19 + 1) * v20) )
+        if ( !a5 || *(_BYTE *)(*(_DWORD *)v19 + v21 + *((_DWORD *)v19 + 1) * v20) != 0 )
         {
           v9 = v21 + *((_DWORD *)v19 + 1) * v20;
-          TStaticFIFO<int,256>::Push(&v9);
+          ((void (__stdcall *)(int *))TStaticFIFO<int,256>::Push)(&v9);
           if ( *(unsigned __int8 *)(*(_DWORD *)v19 + v21 + *((_DWORD *)v19 + 1) * v20) == a4 )
           {
             v5 = j__abs(v21 - *a2);

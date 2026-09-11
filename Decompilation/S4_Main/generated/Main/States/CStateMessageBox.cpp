@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void * a1) {
   CStateMessageBox *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateMessageBox *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateMessageBox::CStateMessageBox(C, (T_S4_TRANSLATION)a1);
   }
@@ -26,7 +26,7 @@ class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void * a1) {
   
   char *v2; // eax
 
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateMessageBox::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
   if ( Str >= (TGO_PRIVATE_LOBBY_LBL|AO_BONUS_BRIEFING_02) )
@@ -38,18 +38,18 @@ class CGameState * __cdecl CStateMessageBox::DynamicCreateFunc(void * a1) {
     v2 = g_pStringEngine->GetString(g_pStringEngine, Str);
     std::string::operator=(&g_iMessageBoxStringID, v2);
   }
-  CGuiGameState::SetupGui(this, L"Menu\\GUISetStartscreens.dat", 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
+  CGuiGameState::SetupGui((CGuiGameState *)this, L"Menu\\GUISetStartscreens.dat", 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
   IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
   return this;
 }
 
 
 // address=[0x14ca560]
-// Decompiled from void __thiscall CStateMessageBox::~CStateMessageBox(CStateMessageBox *this)
+// Decompiled from void __thiscall CStateMessageBox::~CStateMessageBox(CGuiGameState *this)
  CStateMessageBox::~CStateMessageBox(void) {
   
-  *(_DWORD *)this = &CStateMessageBox::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 20) && BBSupportDbgReport(2, "main\\States\\StateMessageBox.cpp", 75, "bRet") == 1 )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateMessageBox::_vftable_;
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 20) && BBSupportDbgReport(2, "main\\States\\StateMessageBox.cpp", 75, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -73,20 +73,19 @@ bool  CStateMessageBox::Perform(void) {
     }
   }
   v1 = dword_40320A4 + 30;
-  if ( v1 >= timeGetTime() )
+  if ( v1 < timeGetTime() )
   {
-    return 1;
+    dword_40320A4 = timeGetTime();
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  dword_40320A4 = timeGetTime();
-  IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-  IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   return 1;
 }
 
 
 // address=[0x14ca680]
-// Decompiled from char __thiscall CStateMessageBox::OnEvent(CStateMessageBox *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateMessageBox::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateMessageBox::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+8h] [ebp-38h]

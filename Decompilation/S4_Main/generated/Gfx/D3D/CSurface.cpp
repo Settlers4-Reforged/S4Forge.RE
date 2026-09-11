@@ -12,7 +12,7 @@ class CSurface * __cdecl CSurface::CreateSurfacePtr(bool a1) {
   if ( a1 )
   {
     C = (CSurfaceV3 *)operator new(0x10u);
-    if ( C )
+    if ( C != 0 )
     {
       return (CSurfaceV7 *)CSurfaceV3::CSurfaceV3(C);
     }
@@ -24,7 +24,7 @@ class CSurface * __cdecl CSurface::CreateSurfacePtr(bool a1) {
   else
   {
     v3 = (CSurfaceV7 *)operator new(0x10u);
-    if ( v3 )
+    if ( v3 != 0 )
     {
       return CSurfaceV7::CSurfaceV7(v3);
     }

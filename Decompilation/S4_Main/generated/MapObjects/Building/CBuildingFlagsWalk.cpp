@@ -37,7 +37,7 @@ void  CBuildingFlagsWalk::Init(void) {
   
   this->m_iCurrentX = this->m_iU0;
   this->m_iCurrentY = this->m_iU1;
-  if ( std::vector<unsigned int>::size(this->m_v0) )
+  if ( std::vector<unsigned int>::size(this->m_v0) != 0 )
   {
     this->m_pFirst = *(_DWORD *)std::vector<unsigned int>::operator[](this->m_v0, 0);
   }
@@ -56,7 +56,7 @@ bool  CBuildingFlagsWalk::NextPosition(void) {
   DWORD m_iCurrentX; // [esp+0h] [ebp-Ch]
   signed int i; // [esp+4h] [ebp-8h]
 
-  while ( !this->m_pFirst )
+  while ( this->m_pFirst == 0 )
   {
     if ( this->m_iSteps >= std::vector<unsigned int>::size(this->m_v0) )
     {

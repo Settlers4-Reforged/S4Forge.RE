@@ -15,7 +15,7 @@ class CAITaskForce *  CAITaskForceClassWalk::CurrentTaskForce(void)const {
 // Decompiled from char __thiscall CAITaskForceClassWalk::NextTaskForce(CAITaskForceClassWalk *this, int a2)
 bool  CAITaskForceClassWalk::NextTaskForce(enum T_AI_TASK_FORCE_CMD a2) {
   
-  while ( CAITaskForceClassWalk::NextTaskForce(this) )
+  while ( CAITaskForceClassWalk::NextTaskForce(this) != 0 )
   {
     if ( CAITaskForce::Command(this->m_pCurrentTaskForce) == a2 )
     {
@@ -30,7 +30,7 @@ bool  CAITaskForceClassWalk::NextTaskForce(enum T_AI_TASK_FORCE_CMD a2) {
 // Decompiled from char __thiscall CAITaskForceClassWalk::NextTaskForce(CAITaskForceClassWalk *this, int a2)
 bool  CAITaskForceClassWalk::NextTaskForce(enum T_AI_TASK_FORCE_TYPE a2) {
   
-  while ( CAITaskForceClassWalk::NextTaskForce(this) )
+  while ( CAITaskForceClassWalk::NextTaskForce(this) != 0 )
   {
     if ( CAITaskForce::Type(this->m_pCurrentTaskForce) == a2 )
     {
@@ -58,7 +58,7 @@ bool  CAITaskForceClassWalk::NextTaskForce(void) {
   CAITaskForce *i; // [esp+4h] [ebp-4h]
 
   for ( i = this->m_pNextTaskForce;
-        i;
+        i != 0;
         i = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i) )
   {
     if ( CAITaskForce::NumberOfEntities(i) > 0 )

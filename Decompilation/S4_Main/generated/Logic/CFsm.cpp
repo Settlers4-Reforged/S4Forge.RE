@@ -20,7 +20,7 @@ int  CFsm::CurrentState(void)const {
   this->m_pEventHandler = a2;
   this->m_iCurrentState = a4;
   this->m_pTransitions = 0;
-  this->m_pTransitions = (DWORD *)operator new[](16 * this->m_iSize);
+  this->m_pTransitions = (CFsm::Transition *)operator new[](16 * this->m_iSize);
   memset(this->m_pTransitions, -1, 16 * this->m_iSize);
   return this;
 }
@@ -30,7 +30,7 @@ int  CFsm::CurrentState(void)const {
 // Decompiled from int __thiscall CFsm::~CFsm(CFsm *this)
  CFsm::~CFsm(void) {
   
-  if ( this->m_pTransitions )
+  if ( this->m_pTransitions != 0 )
   {
     operator delete[](this->m_pTransitions);
   }
@@ -45,14 +45,13 @@ int  CFsm::DefineTransition(int a2, int a3, int a4, int a5) {
   int v7; // [esp+4h] [ebp-4h]
 
   v7 = CFsm::Hash(this, a2, a4);
-  if ( v7 == -1 )
+  if ( v7 != -1 )
   {
-    return v7;
+    this->m_pTransitions[v7].m_iStartState = a2;
+    this->m_pTransitions[v7].m_iTransitionToState = a3;
+    this->m_pTransitions[v7].m_iEventId = a4;
+    this->m_pTransitions[v7].m_iHandlerId = a5;
   }
-  this->m_pTransitions[v7].m_iStartState = a2;
-  this->m_pTransitions[v7].m_iTransitionToState = a3;
-  this->m_pTransitions[v7].m_iEventId = a4;
-  this->m_pTransitions[v7].m_iHandlerId = a5;
   return v7;
 }
 
@@ -68,7 +67,7 @@ int  CFsm::Control(int _iEventId, void * _pEvent) {
   v4 = 0;
   CFsm::InsertInQueue(this, _iEventId, _pEvent);
   i = *std::list<CFsm::SEvent *>::front(&this->m_pEventQueue);
-  while ( i )
+  while ( i != 0 )
   {
     hash = CFsm::Hash(this, i->m_iId);
     if ( hash < 0 || this->m_pTransitions[hash].m_iHandlerId == -1 )
@@ -82,7 +81,7 @@ int  CFsm::Control(int _iEventId, void * _pEvent) {
     }
     std::list<CFsm::SEvent *>::pop_front(&this->m_pEventQueue);
     operator delete(i);
-    if ( std::list<CFsm::SEvent *>::size(&this->m_pEventQueue) )
+    if ( std::list<CFsm::SEvent *>::size(&this->m_pEventQueue) != 0 )
     {
       i = *std::list<CFsm::SEvent *>::front(&this->m_pEventQueue);
     }
@@ -110,7 +109,7 @@ void  CFsm::InsertInQueue(int a1, void * a2) {
   CFsm::SEvent *sSEvent; // [esp+Ch] [ebp-4h] MAPDST BYREF
 
   sSEvent = (CFsm::SEvent *)operator new(8u);
-  if ( sSEvent )
+  if ( sSEvent != 0 )
   {
     sSEvent->m_iId = 0;
     sSEvent->m_pPayload = 0;
@@ -119,7 +118,7 @@ void  CFsm::InsertInQueue(int a1, void * a2) {
   {
     sSEvent = 0;
   }
-  if ( sSEvent )
+  if ( sSEvent != 0 )
   {
     sSEvent->m_iId = a1;
     sSEvent->m_pPayload = a2;

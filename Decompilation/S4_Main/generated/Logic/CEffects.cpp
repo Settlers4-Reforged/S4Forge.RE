@@ -37,7 +37,7 @@
   this->m_iTickCounter = 0;
   memset(this->m_iMovingEffectCounters, 0, sizeof(this->m_iMovingEffectCounters));
   memset(&CEffects::m_sGfxInfo, 0, sizeof(CEffects::m_sGfxInfo));
-  if ( !g_pGfxEngine && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1696, "g_pGfxEngine != 0") == 1 )
+  if ( g_pGfxEngine == 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 1696, "g_pGfxEngine != 0") == 1 )
   {
     __debugbreak();
   }
@@ -50,14 +50,14 @@
 // Decompiled from void __thiscall CEffects::~CEffects(CEffects *this)
  CEffects::~CEffects(void) {
   
-  *(_DWORD *)this = &CEffects::_vftable_;
-  *((_DWORD *)this + 1) = &CEffects::`vftable';
-  *((_DWORD *)this + 2) = &CEffects::`vftable';
-  if ( g_pGfxEngine )
+  this->IEffects::IGfxEffects::__vftable = (CEffects_vtbl *)&CEffects::_vftable_;
+  this->IEffects::IS4ChunkObject::__vftable = (IS4ChunkObject_vtbl *)&CEffects::`vftable';
+  this->vtable = &CEffects::`vftable';
+  if ( g_pGfxEngine != 0 )
   {
-    IGfxEngine::SetEffectSystemInterfacePtr((IGfxEngine *)g_pGfxEngine, 0);
+    IGfxEngine::SetEffectSystemInterfacePtr(g_pGfxEngine, 0);
   }
-  CBBObject::~CBBObject((CEffects *)((char *)this + 8));
+  CBBObject::~CBBObject(&this->CBBObject);
 }
 
 
@@ -162,7 +162,7 @@ struct SGfxObjectInfo *  CEffects::FirstEffect(int _iY) {
           ++i )
     {
       for ( j = *CEffects::EffectSquareListHeadVW(this, i, v7);
-            j;
+            j != 0;
             j = m_uNextEffect )
       {
         v13 = &this->m_cEffects[j];
@@ -175,15 +175,15 @@ struct SGfxObjectInfo *  CEffects::FirstEffect(int _iY) {
             goto LABEL_40;
           }
           tSoundId = this->m_cEffects[j].m_tSoundId;
-          if ( this->m_cEffects[j].m_tSoundId )
+          if ( this->m_cEffects[j].m_tSoundId != 0 )
           {
             this->m_cEffects[j].m_tSoundId = 0;
-            if ( !v6 )
+            if ( v6 == 0 )
             {
               CSoundManager::PlayEnvironmentSound(g_pSoundManager, tSoundId, this->m_cEffects[j].uAngel.m_iX, this->m_cEffects[j].uAngel.m_iY, 0);
             }
           }
-          if ( !this->m_cEffects[j].m_iEffect )
+          if ( this->m_cEffects[j].m_iEffect == 0 )
           {
 LABEL_40:
             CEffects::MoveEffectFromSquareListToFreeList(this, j);
@@ -326,14 +326,14 @@ unsigned int  CEffects::AddEffect(int _iEffect, enum SIV_SOUNDS _tSound, int iX,
   if ( CWorldManager::InWorld(iX, iY) )
   {
     FreeEffectId = CEffects::FirstFreeEffectId(this);
-    if ( FreeEffectId )
+    if ( FreeEffectId != 0 )
     {
       CEffects::RemoveEffectFromList(this, FreeEffectId);
       CEffect::InitEffect(&this->m_cEffects[FreeEffectId], _iEffect, _tSound, iX, iY, _uStartDelay, _iDuration, bTopEffect);
       CEffects::AddEffectToSquareList(this, FreeEffectId);
       return this->m_cEffects[FreeEffectId].uAngel.m_iDuration + _uStartDelay;// Just duration
     }
-    else if ( _uStartDelay )
+    else if ( _uStartDelay != 0 )
     {
       return _uStartDelay;
     }
@@ -342,7 +342,7 @@ unsigned int  CEffects::AddEffect(int _iEffect, enum SIV_SOUNDS _tSound, int iX,
       return 1;
     }
   }
-  else if ( _uStartDelay )
+  else if ( _uStartDelay != 0 )
   {
     return _uStartDelay;
   }
@@ -410,7 +410,7 @@ unsigned int  CEffects::AddMissile(enum T_EFFECT_MISSILE _tMissile, int _iAttack
     __debugbreak();
   }
   FreeEffectId = CEffects::FirstFreeEffectId(this);
-  if ( !FreeEffectId )
+  if ( FreeEffectId == 0 )
   {
     return _uStartDelay;
   }
@@ -446,7 +446,7 @@ unsigned int  CEffects::AddSporeCloud(int _iSrcXY, int _iDstXY, unsigned int _uS
   iY = Y16X16::UnpackYFast(_iSrcXY);
   iNextTick = this->AddEffect(this, 20, 0, iX, iY, _uStartDelay, 0, 0);
   FreeEffectId = CEffects::FirstFreeEffectId(this);
-  if ( !FreeEffectId )
+  if ( FreeEffectId == 0 )
   {
     return iNextTick;
   }
@@ -463,7 +463,7 @@ unsigned int  CEffects::AddStagnantAnimal(enum SIV_ANIMALS _tAnimalJob, enum SIV
   
   unsigned int FreeEffectId; // [esp+8h] [ebp-4h]
 
-  if ( !_tAnimalJob && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2328, "_tAnimalJob != ANIMAL_NO_ANIMAL_WALK") == 1 )
+  if ( _tAnimalJob == 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2328, "_tAnimalJob != ANIMAL_NO_ANIMAL_WALK") == 1 )
   {
     __debugbreak();
   }
@@ -484,7 +484,7 @@ unsigned int  CEffects::AddStagnantAnimal(enum SIV_ANIMALS _tAnimalJob, enum SIV
     __debugbreak();
   }
   FreeEffectId = CEffects::FirstFreeEffectId(this);
-  if ( !FreeEffectId )
+  if ( FreeEffectId == 0 )
   {
     return _uStartDelay;
   }
@@ -499,11 +499,11 @@ unsigned int  CEffects::AddStagnantAnimal(enum SIV_ANIMALS _tAnimalJob, enum SIV
 // Decompiled from void __thiscall CEffects::DeleteEffect(CEffects *this, unsigned int _uEffectId)
 void  CEffects::DeleteEffect(unsigned int _uEffectId) {
   
-  if ( (!_uEffectId || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2395, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
+  if ( (_uEffectId == 0 || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2395, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
   {
     __debugbreak();
   }
-  if ( _uEffectId && _uEffectId < 0x1000 && this->m_cEffects[_uEffectId].m_uVisualizeFunc )
+  if ( _uEffectId != 0 && _uEffectId < 0x1000 && this->m_cEffects[_uEffectId].m_uVisualizeFunc != 0 )
   {
     if ( this->m_cEffects[_uEffectId].m_uVisualizeFunc == 8 )
     {
@@ -525,14 +525,13 @@ unsigned int  CEffects::CreateMovingEffect(int _iEffect, int a3, int a4) {
     __debugbreak();
   }
   FreeEffectId = CEffects::FirstFreeEffectId(this);
-  if ( !FreeEffectId )
+  if ( FreeEffectId != 0 )
   {
-    return FreeEffectId;
+    CEffects::RemoveEffectFromList(this, FreeEffectId);
+    CEffect::InitMovingEffect(&this->m_cEffects[FreeEffectId], _iEffect, a3, a4);
+    CEffects::AddEffectToSquareList(this, FreeEffectId);
+    CEffects::IncreaseMovingEffectCounter(this, _iEffect);
   }
-  CEffects::RemoveEffectFromList(this, FreeEffectId);
-  CEffect::InitMovingEffect(&this->m_cEffects[FreeEffectId], _iEffect, a3, a4);
-  CEffects::AddEffectToSquareList(this, FreeEffectId);
-  CEffects::IncreaseMovingEffectCounter(this, _iEffect);
   return FreeEffectId;
 }
 
@@ -543,7 +542,7 @@ void  CEffects::ChangeMovingEffectType(unsigned int _uEffectId, int _iEffect) {
   
   CEffect *rEffect; // [esp+Ch] [ebp-4h]
 
-  if ( (!_uEffectId || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2447, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
+  if ( (_uEffectId == 0 || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2447, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -590,7 +589,7 @@ void  CEffects::GetMovingEffectInfo(unsigned int _uEffectId, int & _rEffect, int
   unsigned int TickCounter; // [esp+8h] [ebp-10h]
   int uDelay; // [esp+Ch] [ebp-Ch]
 
-  if ( (!_uEffectId || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2489, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
+  if ( (_uEffectId == 0 || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2489, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -660,23 +659,22 @@ unsigned int  CEffects::SetMovingEffectDestination(unsigned int _uEffectId, int 
   int v6; // [esp+0h] [ebp-Ch]
   CEffect *rEffect; // [esp+4h] [ebp-8h]
 
-  if ( (!_uEffectId || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2551, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
+  if ( (_uEffectId == 0 || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2551, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
   {
     __debugbreak();
   }
   v6 = 0;
-  if ( !_uEffectId )
+  if ( _uEffectId != 0 )
   {
-    return v6;
+    CEffects::RemoveEffectFromList(this, _uEffectId);
+    rEffect = &this->m_cEffects[_uEffectId];
+    if ( rEffect->m_uVisualizeFunc != 8 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2561, "rEffect.m_uVisualizeFunc == VISUALIZE_FUNC_MOVING_EFFECT") == 1 )
+    {
+      __debugbreak();
+    }
+    v6 = CEffect::SetNewDestinationForMovingEffect(rEffect, a3, a4, a5);
+    CEffects::AddEffectToSquareList(this, _uEffectId);
   }
-  CEffects::RemoveEffectFromList(this, _uEffectId);
-  rEffect = &this->m_cEffects[_uEffectId];
-  if ( rEffect->m_uVisualizeFunc != 8 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2561, "rEffect.m_uVisualizeFunc == VISUALIZE_FUNC_MOVING_EFFECT") == 1 )
-  {
-    __debugbreak();
-  }
-  v6 = CEffect::SetNewDestinationForMovingEffect(rEffect, a3, a4, a5);
-  CEffects::AddEffectToSquareList(this, _uEffectId);
   return v6;
 }
 
@@ -715,7 +713,7 @@ void  CEffects::SetMovingEffectDirection(unsigned int _iEffectId, int _iDir) {
 // Decompiled from int __thiscall CEffects::GetMovingEffectSoundId(CEffects *this, unsigned int _uEffectId)
 int  CEffects::GetMovingEffectSoundId(unsigned int _uEffectId) {
   
-  if ( (!_uEffectId || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2637, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
+  if ( (_uEffectId == 0 || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2637, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -727,7 +725,7 @@ int  CEffects::GetMovingEffectSoundId(unsigned int _uEffectId) {
 // Decompiled from void __thiscall CEffects::SetMovingEffectSoundId(CEffects *this, unsigned int _uEffectId, int _tSoundId)
 void  CEffects::SetMovingEffectSoundId(unsigned int _uEffectId, int _tSoundId) {
   
-  if ( (!_uEffectId || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2625, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
+  if ( (_uEffectId == 0 || _uEffectId >= 0x1000) && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2625, "(_uEffectId > 0) && (_uEffectId < EFFECTS_MAX)") == 1 )
   {
     __debugbreak();
   }
@@ -750,13 +748,12 @@ unsigned int  CEffects::CreateAttachedEffect(int a2, unsigned int a3, int a4) {
     return 0;
   }
   FreeEffectId = CEffects::FirstFreeEffectId(this);
-  if ( !FreeEffectId )
+  if ( FreeEffectId != 0 )
   {
-    return FreeEffectId;
+    CEffects::RemoveEffectFromList(this, FreeEffectId);
+    CEffect::InitAttachedEffect(&this->m_cEffects[FreeEffectId], a2, a3, &this->m_cEffects[a3], a4);
+    CEffects::AddEffectToSquareList(this, FreeEffectId);
   }
-  CEffects::RemoveEffectFromList(this, FreeEffectId);
-  CEffect::InitAttachedEffect(&this->m_cEffects[FreeEffectId], a2, a3, &this->m_cEffects[a3], a4);
-  CEffects::AddEffectToSquareList(this, FreeEffectId);
   return FreeEffectId;
 }
 
@@ -780,18 +777,15 @@ void  CEffects::UpdateAttachedEffect(unsigned int _uEffectId) {
   const struct CEffect *rParent; // [esp+0h] [ebp-Ch]
   CEffect *rEffect; // [esp+4h] [ebp-8h]
 
-  if ( _uEffectId )
+  if ( _uEffectId != 0 && _uEffectId < 0x1000 )
   {
-    if ( _uEffectId < 0x1000 )
+    rEffect = &this->m_cEffects[_uEffectId];
+    if ( rEffect->m_uVisualizeFunc == VISUALIZE_FUNC_ATTACHED_EFFECT && CEffects::CheckParentEffect(this, this->m_cEffects[_uEffectId].uAttached.m_iParentId) )
     {
-      rEffect = &this->m_cEffects[_uEffectId];
-      if ( rEffect->m_uVisualizeFunc == VISUALIZE_FUNC_ATTACHED_EFFECT && CEffects::CheckParentEffect(this, this->m_cEffects[_uEffectId].uAttached.m_iParentId) )
-      {
-        rParent = &this->m_cEffects[this->m_cEffects[_uEffectId].uAttached.m_iParentId];
-        CEffects::RemoveEffectFromList(this, _uEffectId);
-        CEffect::UpdateAttachedEffect(rEffect, rParent);
-        CEffects::AddEffectToSquareList(this, _uEffectId);
-      }
+      rParent = &this->m_cEffects[this->m_cEffects[_uEffectId].uAttached.m_iParentId];
+      CEffects::RemoveEffectFromList(this, _uEffectId);
+      CEffect::UpdateAttachedEffect(rEffect, rParent);
+      CEffects::AddEffectToSquareList(this, _uEffectId);
     }
   }
 }
@@ -879,7 +873,7 @@ void  CEffects::Execute(void) {
       __debugbreak();
     }
     for ( j = *CEffects::EffectSquareListHeadVW(this, iV, iW);
-          j;
+          j != 0;
           j = m_uNextEffect )
     {
       m_uNextEffect = this->m_cEffects[j].m_uNextEffect;
@@ -899,7 +893,7 @@ void  CEffects::Execute(void) {
 // Decompiled from void __thiscall CEffects::Release(CEffects *this)
 void  CEffects::Release(void) {
   
-  if ( this )
+  if ( this != 0 )
   {
     (*(void (__thiscall **)(CBBObject *, int))this->vtable)(&this->CBBObject, 1);
   }
@@ -928,11 +922,11 @@ void  CEffects::AddEffectToFreeList(unsigned int _uEffectId) {
   {
     __debugbreak();
   }
-  if ( this->m_cEffects[_uEffectId].m_uPrevEffect && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2060, "rEffect.m_uPrevEffect == 0") == 1 )
+  if ( this->m_cEffects[_uEffectId].m_uPrevEffect != 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2060, "rEffect.m_uPrevEffect == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_cEffects[_uEffectId].m_uNextEffect && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2061, "rEffect.m_uNextEffect == 0") == 1 )
+  if ( this->m_cEffects[_uEffectId].m_uNextEffect != 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2061, "rEffect.m_uNextEffect == 0") == 1 )
   {
     __debugbreak();
   }
@@ -941,7 +935,7 @@ void  CEffects::AddEffectToFreeList(unsigned int _uEffectId) {
   this->m_cEffects[1].m_uNextEffect = _uEffectId;
   this->m_cEffects[_uEffectId].m_uNextEffect = uNextEffect;
   this->m_cEffects[_uEffectId].m_uPrevEffect = 1;
-  if ( uNextEffect )
+  if ( uNextEffect != 0 )
   {
     if ( this->m_cEffects[uNextEffect].m_uPrevEffect != 1 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2074, "m_cEffects[uNextEffectId].m_uPrevEffect == FREE_EFFECTS_LIST_HEAD") == 1 )
     {
@@ -969,7 +963,7 @@ void  CEffects::AddEffectToSquareList(unsigned int _uEffectId) {
   {
     __debugbreak();
   }
-  if ( !this->m_cEffects[_uEffectId].m_uVisualizeFunc )
+  if ( this->m_cEffects[_uEffectId].m_uVisualizeFunc == 0 )
   {
     if ( BBSupportDbgReport(1, "Logic\\Effects.cpp", 2094, "CEffects::AddEffectToSquareList(): Invalid visualize function!") == 1 )
     {
@@ -977,11 +971,11 @@ void  CEffects::AddEffectToSquareList(unsigned int _uEffectId) {
     }
     CEffect::SetVisualizeFunc(&this->m_cEffects[_uEffectId], 1);
   }
-  if ( this->m_cEffects[_uEffectId].m_uPrevEffect && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2099, "rEffect.m_uPrevEffect == 0") == 1 )
+  if ( this->m_cEffects[_uEffectId].m_uPrevEffect != 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2099, "rEffect.m_uPrevEffect == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_cEffects[_uEffectId].m_uNextEffect && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2100, "rEffect.m_uNextEffect == 0") == 1 )
+  if ( this->m_cEffects[_uEffectId].m_uNextEffect != 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2100, "rEffect.m_uNextEffect == 0") == 1 )
   {
     __debugbreak();
   }
@@ -996,14 +990,11 @@ void  CEffects::AddEffectToSquareList(unsigned int _uEffectId) {
   *v2 = _uEffectId;
   this->m_cEffects[_uEffectId].m_uPrevEffect = 0;
   this->m_cEffects[_uEffectId].m_uNextEffect = uOldHeadEffectId;
-  if ( uOldHeadEffectId )
+  if ( uOldHeadEffectId != 0 )
   {
-    if ( this->m_cEffects[uOldHeadEffectId].m_uPrevEffect )
+    if ( this->m_cEffects[uOldHeadEffectId].m_uPrevEffect != 0 && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2118, "m_cEffects[uOldHeadEffectId].m_uPrevEffect == 0") == 1 )
     {
-      if ( BBSupportDbgReport(2, "Logic\\Effects.cpp", 2118, "m_cEffects[uOldHeadEffectId].m_uPrevEffect == 0") == 1 )
-      {
-        __debugbreak();
-      }
+      __debugbreak();
     }
     this->m_cEffects[uOldHeadEffectId].m_uPrevEffect = _uEffectId;
   }
@@ -1026,7 +1017,7 @@ void  CEffects::RemoveEffectFromList(unsigned int _uEffectId) {
   {
     __debugbreak();
   }
-  if ( this->m_cEffects[_uEffectId].m_uPrevEffect )
+  if ( this->m_cEffects[_uEffectId].m_uPrevEffect != 0 )
   {
     if ( this->m_cEffects[this->m_cEffects[_uEffectId].m_uPrevEffect].m_uNextEffect != _uEffectId && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2138, "m_cEffects[rEffect.m_uPrevEffect].m_uNextEffect == _uEffectId") == 1 )
     {
@@ -1049,7 +1040,7 @@ void  CEffects::RemoveEffectFromList(unsigned int _uEffectId) {
     }
     *rSquareListHead = this->m_cEffects[_uEffectId].m_uNextEffect;
   }
-  if ( this->m_cEffects[_uEffectId].m_uNextEffect )
+  if ( this->m_cEffects[_uEffectId].m_uNextEffect != 0 )
   {
     if ( this->m_cEffects[this->m_cEffects[_uEffectId].m_uNextEffect].m_uPrevEffect != _uEffectId && BBSupportDbgReport(2, "Logic\\Effects.cpp", 2158, "m_cEffects[rEffect.m_uNextEffect].m_uPrevEffect == _uEffectId") == 1 )
     {
@@ -1084,7 +1075,7 @@ void  CEffects::CleanUp(void) {
   {
     v4 = &this->m_cEffects[i];
     v7 = v4->m_uVisualizeFunc == VISUALIZE_FUNC_NOP_1;
-    if ( v4->m_uVisualizeFunc )
+    if ( v4->m_uVisualizeFunc != VISUALIZE_FUNC_NOP_1 )
     {
       v1 = CEffect::TimeIndex(v4, TickCounter);
       if ( CEffect::IsOutOfDate(v4, v1) )

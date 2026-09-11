@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateMainMenu::DynamicCreateFunc(void * a1) {
   CStateMainMenu *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateMainMenu *)operator new(0x14u);
-  if ( C )
+  if ( C != 0 )
   {
     return (struct CGameState *)CStateMainMenu::CStateMainMenu(C, a1);
   }
@@ -25,22 +25,22 @@ class CGameState * __cdecl CStateMainMenu::DynamicCreateFunc(void * a1) {
 bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   
   OnlineManager *Instance; // eax
-  char IsMultiplayerGame; // al
+  bool IsMultiplayerGame; // al
   _DWORD v4[10]; // [esp+0h] [ebp-E88h] BYREF
   _BYTE v5[4]; // [esp+2Ch] [ebp-E5Ch] BYREF
   struct CGameChunkGeneral *v6; // [esp+30h] [ebp-E58h]
-  void *v7; // [esp+34h] [ebp-E54h]
+  std::wstring *v7; // [esp+34h] [ebp-E54h]
   INetworkEngine *v8; // [esp+38h] [ebp-E50h]
   void *v9; // [esp+3Ch] [ebp-E4Ch]
   BOOL v10; // [esp+40h] [ebp-E48h]
   CGameType *v11; // [esp+44h] [ebp-E44h]
   void *C; // [esp+48h] [ebp-E40h]
   CGameType *v13; // [esp+4Ch] [ebp-E3Ch]
-  int (__thiscall ***v14)(_DWORD, int); // [esp+50h] [ebp-E38h]
+  INetworkEngine *v14; // [esp+50h] [ebp-E38h]
   char v15; // [esp+55h] [ebp-E33h]
   char v16[1324]; // [esp+58h] [ebp-E30h] BYREF
   char Str[1084]; // [esp+584h] [ebp-904h] BYREF
-  _BYTE v18[1176]; // [esp+9C0h] [ebp-4C8h] BYREF
+  S4::CMapFile v18; // [esp+9C0h] [ebp-4C8h] BYREF
   std::wstring v19; // [esp+E58h] [ebp-30h] BYREF
   _DWORD *v20; // [esp+E78h] [ebp-10h]
   int v21; // [esp+E84h] [ebp-4h]
@@ -50,19 +50,19 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   CGameChunkGeneral::CGameChunkGeneral(v16);
   v6 = (struct CGameChunkGeneral *)v16;
   CGfxManager::DisableGfxFile(g_pGfxManager, 1);
-  v7 = SaveFilePath::BuildSaveFilePathWithExtension(&v19, (int)&a1);
-  std::wstring::operator=(v7);
+  v7 = (std::wstring *)SaveFilePath::BuildSaveFilePathWithExtension(&v19, (int)&a1);
+  ((void (__stdcall *)(std::wstring *))std::wstring::operator=)(v7);
   std::wstring::~wstring(&v19);
-  S4::CMapFile::CMapFile((CHandleMap *)v18, 0);
+  S4::CMapFile::CMapFile(&v18, 0);
   LOBYTE(v21) = 1;
   CUserLogoChunk::CUserLogoChunk((CUserLogoChunk *)v5);
   LOBYTE(v21) = 2;
-  S4::CMapFile::Open((S4::CMapFile *)v18, (int)&a1, 1, 1);
-  CGameRun::LoadGeneralInfo((struct S4::CMapFile *)v18, v6);
-  S4::CMapFile::LoadChunkObject(v18, 136, 0, (int)v5, 0);
-  S4::CMapFile::Close((S4::CMapFile *)v18);
+  S4::CMapFile::Open(&v18, &a1, 1, 1);
+  CGameRun::LoadGeneralInfo(&v18, v6);
+  S4::CMapFile::LoadChunkObject(&v18, 136, 0, (int)v5, 0);
+  S4::CMapFile::Close(&v18);
   v21 = 1;
-  if ( g_pGameType )
+  if ( g_pGameType != 0 )
   {
     v4[9] = g_pGameType;
     v13 = g_pGameType;
@@ -71,7 +71,7 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   }
   C = operator new(0x620u);
   LOBYTE(v21) = 4;
-  if ( C )
+  if ( C != 0 )
   {
     v11 = CGameType::CGameType((CGameType *)C);
   }
@@ -82,23 +82,23 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   v4[7] = v11;
   LOBYTE(v21) = 1;
   g_pGameType = v11;
-  CGameRun::FillGameType(&a1, v11, v16);
+  CGameRun::FillGameType(&a1, v11, (CGameChunkGeneral *)v16);
   g_pGameType->m_bIsSaveGame = 1;
   v10 = std::wstring::find((wchar_t *)L"_autoSave", 0) != -1;
   g_pGameType->bIsAutosave = v10;
   Instance = (OnlineManager *)OnlineManager::GetInstance();
   OnlineManager::SetPrivate(Instance, 0);
   std::string::operator=(&stru_402C9B4, Str);
-  if ( g_pNetworkEngine )
+  if ( g_pNetworkEngine != 0 )
   {
     v4[6] = g_pNetworkEngine;
-    v14 = (int (__thiscall ***)(_DWORD, int))g_pNetworkEngine;
-    v4[5] = (**v14)(v14, 1);
+    v14 = g_pNetworkEngine;
+    v4[5] = (**(int (__thiscall ***)(INetworkEngine *, int))v14)(v14, 1);
     g_pNetworkEngine = 0;
   }
   v9 = operator new(0x18u);
   LOBYTE(v21) = 5;
-  if ( v9 )
+  if ( v9 != 0 )
   {
     IsMultiplayerGame = CGameType::IsMultiplayerGame(g_pGameType);
     v8 = INetworkEngine::INetworkEngine((INetworkEngine *)v9, IsMultiplayerGame);
@@ -109,22 +109,22 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   }
   v4[4] = v8;
   LOBYTE(v21) = 1;
-  g_pNetworkEngine = (int)v8;
-  if ( (unsigned __int8)CGameType::IsMultiplayerGame(g_pGameType) )
+  g_pNetworkEngine = v8;
+  if ( CGameType::IsMultiplayerGame(g_pGameType) )
   {
     INetworkEngine::Start(1, 0, 0, 0);
     CGameType::SetHost(g_pGameType, 1);
-    CGameStateHandler::Switch((int)CStateLobbyLoadMP::DynamicCreateFunc, 1);
+    CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLobbyLoadMP::DynamicCreateFunc, (void *)1);
     CLanLobby::Communicate(1051, 0);
   }
   else
   {
     INetworkEngine::Start(1, 1, g_pGameType->m_iActualPlayerCount, 0);
-    CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
+    CGameStateHandler::Switch(CStateGame::DynamicCreateFunc, 0);
   }
   v15 = 1;
   LOBYTE(v21) = 0;
-  S4::CMapFile::~CMapFile((CHandleMap *)v18);
+  S4::CMapFile::~CMapFile((CHandleMap *)&v18);
   v21 = -1;
   std::wstring::~wstring(&a1);
   return v15;
@@ -158,26 +158,26 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
   int Instance; // [esp+4Ch] [ebp-A0h]
   char v24; // [esp+53h] [ebp-99h]
   _BYTE *v25; // [esp+54h] [ebp-98h]
-  _BYTE v26[28]; // [esp+58h] [ebp-94h] BYREF
-  _BYTE v27[72]; // [esp+74h] [ebp-78h] BYREF
-  _BYTE v28[28]; // [esp+BCh] [ebp-30h] BYREF
+  std::wstring v26; // [esp+58h] [ebp-94h] BYREF
+  CFile v27; // [esp+74h] [ebp-78h] BYREF
+  std::wstring v28; // [esp+BCh] [ebp-30h] BYREF
   _DWORD *v29; // [esp+DCh] [ebp-10h]
   int v30; // [esp+E8h] [ebp-4h]
 
   v29 = v8;
   v25 = this;
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   v30 = 0;
   *(_DWORD *)v25 = &CStateMainMenu::_vftable_;
   v25[16] = 0;
-  Instance = UPlay::UPlayManager::GetInstance();
+  Instance = (int)UPlay::UPlayManager::GetInstance();
   (*(void (__thiscall **)(int))(*(_DWORD *)Instance + 60))(Instance);
-  v22 = UPlay::UPlayManager::GetInstance();
+  v22 = (int)UPlay::UPlayManager::GetInstance();
   (*(void (__thiscall **)(int, int))(*(_DWORD *)v22 + 52))(v22, 1);
   *((_DWORD *)v25 + 3) = 0;
-  if ( g_pSoundManager )
+  if ( g_pSoundManager != 0 )
   {
-    if ( CGameSettings::GetMusicOn() )
+    if ( CGameSettings::GetMusicOn() != 0 )
     {
       MusicVolume = CGameSettings::GetMusicVolume();
     }
@@ -185,8 +185,8 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
     {
       MusicVolume = 0;
     }
-    CSoundManager::SetMusicVolume((CSoundManager *)g_pSoundManager, MusicVolume);
-    if ( CGameSettings::GetSoundFxOn() )
+    CSoundManager::SetMusicVolume(g_pSoundManager, MusicVolume);
+    if ( CGameSettings::GetSoundFxOn() != 0 )
     {
       SoundFXVolume = CGameSettings::GetSoundFXVolume();
     }
@@ -194,30 +194,30 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
     {
       SoundFXVolume = 0;
     }
-    CSoundManager::SetSoundVolume((CSoundManager *)g_pSoundManager, SoundFXVolume);
+    CSoundManager::SetSoundVolume(g_pSoundManager, SoundFXVolume);
   }
   *((_DWORD *)v25 + 1) = a2;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(v25);
   CStateMainMenu::SetupGUI((CStateMainMenu *)v25);
-  IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
+  IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
   v19 = *((_DWORD *)v25 + 1);
   switch ( v19 )
   {
     case 0:
       goto LABEL_46;
     case 1:
-      CGameStateHandler::Switch((int)CStateCampaignDark::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateCampaignDark::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 2:
-      CGameStateHandler::Switch((int)CStateCampaign3X3::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateCampaign3X3::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 3:
-      CGameStateHandler::Switch((int)CStateTutorial::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateTutorial::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 5:
       C = operator new(0x620u);
       LOBYTE(v30) = 1;
-      if ( C )
+      if ( C != 0 )
       {
         v17 = CGameType::CGameType((CGameType *)C);
       }
@@ -227,30 +227,30 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
       }
       v12 = v17;
       LOBYTE(v30) = 0;
-      g_pGameType = (int)v17;
+      g_pGameType = v17;
       v24 = 0;
-      CFile::CFile((CFile *)v27);
+      CFile::CFile(&v27);
       LOBYTE(v30) = 3;
-      v11 = std::wstring::wstring(v26, (wchar_t *)L"netgame.ini");
+      v11 = std::wstring::wstring(&v26, (wchar_t *)L"netgame.ini");
       v10 = v11;
       LOBYTE(v30) = 4;
-      CFile::Open(v11, 5, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
+      ((void (__stdcall *)(int, int, char *, int))CFile::Open)(v11, 5, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
       LOBYTE(v30) = 3;
-      std::wstring::~wstring(v26);
+      std::wstring::~wstring(&v26);
       v30 = 2;
-      v2 = CFile::Size(v27);
+      v2 = CFile::Size(&v27);
       v9 = operator new[](v2);
       Buffer = v9;
-      v3 = CFile::Size(v27);
-      CFile::Read(Buffer, v3, 1u, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-      CFile::Close((CFile *)v27, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
-      if ( strstr((char *)Buffer, "LocalPlayerCreator=true") )
+      v3 = CFile::Size(&v27);
+      ((void (__stdcall *)(void *, size_t, size_t, int, int))CFile::Read)(Buffer, v3, 1u, (int)"d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
+      CFile::Close(&v27, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\File.h", 0);
+      if ( strstr((char *)Buffer, "LocalPlayerCreator=true") != 0 )
       {
         v24 = 1;
       }
       v15 = operator new(0x18u);
       LOBYTE(v30) = 6;
-      if ( v15 )
+      if ( v15 != 0 )
       {
         v14 = INetworkEngine::INetworkEngine((INetworkEngine *)v15, 1);
       }
@@ -260,38 +260,38 @@ bool __cdecl CStateMainMenu::PreLoadGame(std::wstring a1) {
       }
       v8[4] = v14;
       LOBYTE(v30) = 2;
-      g_pNetworkEngine = (int)v14;
-      if ( (unsigned __int8)INetworkEngine::Start(v24, 0, 0, (wchar_t *)L"netgame.ini") )
+      g_pNetworkEngine = v14;
+      if ( (unsigned __int8)INetworkEngine::Start(v24, 0, 0, (wchar_t *)L"netgame.ini") != 0 )
       {
-        if ( (unsigned __int8)CGameType::IsSaveGame((void *)g_pGameType) )
+        if ( CGameType::IsSaveGame(g_pGameType) != 0 )
         {
-          (*(void (__thiscall **)(void *))(*(_DWORD *)g_pRandomMaps + 4))(g_pRandomMaps);
-          IsHost = INetworkEngine::IsHost((INetworkEngine *)g_pNetworkEngine);
-          CGameStateHandler::Switch((int)CStateLobbyLoadMP::DynamicCreateFunc, IsHost);
+          g_pRandomMaps->CleanUp(g_pRandomMaps);
+          IsHost = INetworkEngine::IsHost(g_pNetworkEngine);
+          CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLobbyLoadMP::DynamicCreateFunc, (void *)IsHost);
           LOBYTE(v30) = 0;
-          CFile::~CFile();
+          ((void (__cdecl *)())CFile::~CFile)();
         }
         else
         {
-          if ( INetworkEngine::IsHost((INetworkEngine *)g_pNetworkEngine) )
+          if ( INetworkEngine::IsHost(g_pNetworkEngine) != 0 )
           {
             CLanLobby::Communicate(1051, (void *)1);
           }
           else
           {
-            IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
+            IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
           }
-          v5 = INetworkEngine::IsHost((INetworkEngine *)g_pNetworkEngine);
-          CGameStateHandler::Switch((int)CStateLobbyGameSettings::DynamicCreateFunc, v5);
+          v5 = INetworkEngine::IsHost(g_pNetworkEngine);
+          CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLobbyGameSettings::DynamicCreateFunc, (void *)v5);
           LOBYTE(v30) = 0;
-          CFile::~CFile();
+          ((void (__cdecl *)())CFile::~CFile)();
         }
 LABEL_46:
-        std::wstring::wstring(v28);
+        std::wstring::wstring(&v28);
         LOBYTE(v30) = 7;
-        if ( (*(unsigned __int8 (__thiscall **)(void *, _BYTE *, const wchar_t *, int))(*(_DWORD *)g_pCDDrive + 8))(g_pCDDrive, v28, L"Snd\\Romans*.mp3", 131073) )
+        if ( g_pCDDrive->GetCDPath(g_pCDDrive, (char *)&v28, (char *)L"Snd\\Romans*.mp3", 131073) != 0 )
         {
-          v6 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v28);
+          v6 = std::wstring::c_str(&v28);
           CSoundManager::PlayBackgroundMusic(5, 4, v6);
         }
         else
@@ -300,60 +300,60 @@ LABEL_46:
         }
         v25[8] = 0;
         LOBYTE(v30) = 0;
-        std::wstring::~wstring(v28);
+        std::wstring::~wstring(&v28);
       }
       else
       {
         CTrace::Print("GameHost: Unrecoverable network error while starting network for multiplayer webgame!");
-        CGameStateHandler::Queue((int)CStateMessageBox::DynamicCreateFunc, 2402);
-        CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
+        CGameStateHandler::Queue(CStateMessageBox::DynamicCreateFunc, (void *)2402);
+        CGameStateHandler::Switch(CStateMainMenu::DynamicCreateFunc, 0);
         LOBYTE(v30) = 0;
-        CFile::~CFile();
+        ((void (__cdecl *)())CFile::~CFile)();
       }
       return (CStateMainMenu *)v25;
     case 6:
-      CGameStateHandler::Switch((int)CStateMDCampaignRoman::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDCampaignRoman::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 7:
-      CGameStateHandler::Switch((int)CStateMDCampaignMayan::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDCampaignMayan::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 8:
-      CGameStateHandler::Switch((int)CStateMDCampaignViking::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDCampaignViking::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 9:
-      CGameStateHandler::Switch((int)CStateMDCampaignsEcoConflict::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDCampaignsEcoConflict::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 10:
-      CGameStateHandler::Switch((int)CStateMDRandomMapParameters::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDRandomMapParameters::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 11:
-      CGameStateHandler::Switch((int)CStateAOCampaignRoman::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaignRoman::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 12:
-      CGameStateHandler::Switch((int)CStateAOCampaignMayan::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaignMayan::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 13:
-      CGameStateHandler::Switch((int)CStateAOCampaignViking::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaignViking::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 14:
-      CGameStateHandler::Switch((int)CStateAOCampaignTrojan::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaignTrojan::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 15:
-      CGameStateHandler::Switch((int)CStateAOCampaignsSettle::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaignsSettle::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 16:
-      CGameStateHandler::Switch((int)CStateMD2Campaigns::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMD2Campaigns::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 17:
-      CGameStateHandler::Switch((int)CStateXMD3Campaigns::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateXMD3Campaigns::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 18:
       v25[16] = 1;
-      CGameStateHandler::Switch((int)CStateLobbyConnect::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch(CStateLobbyConnect::DynamicCreateFunc, 0);
       goto LABEL_46;
     case 19:
-      v13 = UPlay::UPlayManager::GetInstance();
-      if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v13 + 36))(v13) )
+      v13 = (int)UPlay::UPlayManager::GetInstance();
+      if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v13 + 36))(v13) != 0 )
       {
         CGameStateHandler::Next();
       }
@@ -370,11 +370,11 @@ LABEL_46:
 
 
 // address=[0x14c22a0]
-// Decompiled from void __thiscall CStateMainMenu::~CStateMainMenu(CStateMainMenu *this)
+// Decompiled from void __thiscall CStateMainMenu::~CStateMainMenu(CGuiGameState *this)
  CStateMainMenu::~CStateMainMenu(void) {
   
-  *(_DWORD *)this = &CStateMainMenu::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0) && BBSupportDbgReport(2, "main\\states\\StateMainMenu.cpp", 340, "bRet") == 1 )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateMainMenu::_vftable_;
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 0) && BBSupportDbgReport(2, "main\\states\\StateMainMenu.cpp", 340, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -389,44 +389,42 @@ bool  CStateMainMenu::Perform(void) {
   DWORD v2; // esi
   int Instance; // [esp+4h] [ebp-8h]
 
-  Instance = UPlay::UPlayManager::GetInstance();
-  if ( !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) || *((_BYTE *)this + 16) )
+  Instance = (int)UPlay::UPlayManager::GetInstance();
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) == 0 || *((_BYTE *)this + 16) != 0 )
   {
-    if ( *((_DWORD *)this + 1) )
+    if ( *((_DWORD *)this + 1) == 0 )
     {
-      return *((_BYTE *)this + 8) == 0;
-    }
-    if ( dword_4031D58 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
-    {
-      j___Init_thread_header(&dword_4031D58);
-      if ( dword_4031D58 == -1 )
+      if ( dword_4031D58 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
+      {
+        j___Init_thread_header(&dword_4031D58);
+        if ( dword_4031D58 == -1 )
+        {
+          dword_4031D54 = timeGetTime();
+          j___Init_thread_footer(&dword_4031D58);
+        }
+      }
+      v2 = dword_4031D54 + 30;
+      if ( v2 < timeGetTime() )
       {
         dword_4031D54 = timeGetTime();
-        j___Init_thread_footer(&dword_4031D58);
+        IGuiEngine::RenderGui(g_pGUIEngine);
+        IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+        IGfxEngine::ShowFrame(g_pGfxEngine);
       }
     }
-    v2 = dword_4031D54 + 30;
-    if ( v2 >= timeGetTime() )
-    {
-      return *((_BYTE *)this + 8) == 0;
-    }
-    dword_4031D54 = timeGetTime();
-    IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-    IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-    IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
     return *((_BYTE *)this + 8) == 0;
   }
   else
   {
     *((_BYTE *)this + 16) = 1;
-    CGameStateHandler::Switch((int)CStateLobbyConnect::DynamicCreateFunc, 0);
+    CGameStateHandler::Switch(CStateLobbyConnect::DynamicCreateFunc, 0);
     return 1;
   }
 }
 
 
 // address=[0x14c2420]
-// Decompiled from char __thiscall CStateMainMenu::OnEvent(CStateMainMenu *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateMainMenu::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
@@ -441,20 +439,21 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
   char v11[32]; // [esp-1Ch] [ebp-70h] BYREF
   int TipsURL; // [esp+4h] [ebp-50h]
   char *v13; // [esp+8h] [ebp-4Ch]
-  void *v14; // [esp+Ch] [ebp-48h]
+  struct std::string *v14; // [esp+Ch] [ebp-48h]
   void *v15; // [esp+10h] [ebp-44h]
   int ManualURL; // [esp+14h] [ebp-40h]
   char *v17; // [esp+18h] [ebp-3Ch]
-  void *v18; // [esp+1Ch] [ebp-38h]
+  struct std::string *v18; // [esp+1Ch] [ebp-38h]
   void *v19; // [esp+20h] [ebp-34h]
-  void *v20; // [esp+24h] [ebp-30h]
-  void *v21; // [esp+28h] [ebp-2Ch]
+  struct std::string *v20; // [esp+24h] [ebp-30h]
+  struct std::string *v21; // [esp+28h] [ebp-2Ch]
   int v22; // [esp+2Ch] [ebp-28h]
   int wparam; // [esp+30h] [ebp-24h]
   int Language; // [esp+34h] [ebp-20h]
   CGuiGameState *v25; // [esp+38h] [ebp-1Ch]
   unsigned int event; // [esp+3Ch] [ebp-18h]
   bool v27; // [esp+41h] [ebp-13h]
+  char; // [esp+42h] [ebp-12h]
   char v29; // [esp+44h] [ebp-10h]
   bool v30; // [esp+46h] [ebp-Eh]
   bool v31; // [esp+47h] [ebp-Dh]
@@ -467,13 +466,13 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
     switch ( event )
     {
       case 0x1F41u:
-        CGameStateHandler::Switch((int)CStateAOCampaigns::DynamicCreateFunc, 1);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateAOCampaigns::DynamicCreateFunc, (void *)1);
         return 1;
       case 0x2329u:
-        CGameStateHandler::Switch((int)CStateMD2Campaigns::DynamicCreateFunc, 1);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMD2Campaigns::DynamicCreateFunc, (void *)1);
         return 1;
       case 0x251Du:
-        CGameStateHandler::Switch((int)CStateXMD3Campaigns::DynamicCreateFunc, 1);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateXMD3Campaigns::DynamicCreateFunc, (void *)1);
         return 1;
       default:
         return CGuiGameState::OnEvent(v25, a2);
@@ -481,7 +480,7 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
   }
   else if ( event == 7001 )
   {
-    CGameStateHandler::Switch((int)CStateMDCampaigns::DynamicCreateFunc, 1);
+    CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDCampaigns::DynamicCreateFunc, (void *)1);
     return 1;
   }
   else
@@ -493,21 +492,21 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
         wparam = a2->m_wParam;
         v31 = (a2->m_lParam & 0xC) == 12;
         v30 = v31;
-        if ( *((int *)v25 + 3) < 2 )
+        if ( (int)v25[3].__vftable < 2 )
         {
           if ( wparam == 2 && v30 )
           {
-            ++*((_DWORD *)v25 + 3);
+            ++v25[3].__vftable;
           }
           else
           {
-            *((_DWORD *)v25 + 3) = 0;
+            v25[3].__vftable = 0;
           }
         }
         v22 = a2->m_wParam;
-        if ( v22 == 3 && *((_DWORD *)v25 + 3) == 2 && v30 )
+        if ( v22 == 3 && v25[3].__vftable == (CGuiGameState_vtbl *)2 && v30 )
         {
-          if ( (*(unsigned __int8 (__thiscall **)(void *, _DWORD))(*(_DWORD *)g_pInstallationInfo + 16))(g_pInstallationInfo, 0) )
+          if ( g_pInstallationInfo->CheckInstallation(g_pInstallationInfo, 0) != 0 )
           {
             MessageBoxA(g_hWnd, "Check successful.", "Installation check", 0x40u);
           }
@@ -519,7 +518,7 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
         result = 1;
         break;
       case 0x1Eu:
-        CGameStateHandler::Switch((int)CStateLocalType::DynamicCreateFunc, 0);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLocalType::DynamicCreateFunc, 0);
         result = 1;
         break;
       case 0x1Fu:
@@ -528,14 +527,14 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
         {
           if ( CDebugInfo::IsNetworkAvailable() )
           {
-            CGameStateHandler::Switch((int)CStateLobbyConnect::DynamicCreateFunc, 1);
+            CGameStateHandler::Switch(CStateLobbyConnect::DynamicCreateFunc, (void *)1);
             result = 1;
           }
           else
           {
             std::string::operator=(&g_iMessageBoxStringID, aNetzwerkfehler);
-            IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0);
-            if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc) && BBSupportDbgReport(2, "main\\states\\StateMainMenu.cpp", 441, "bRet") == 1 )
+            IGuiEngine::CloseDialog(g_pGUIEngine, 0);
+            if ( IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc) == 0 && BBSupportDbgReport(2, "main\\states\\StateMainMenu.cpp", 441, "bRet") == 1 )
             {
               __debugbreak();
             }
@@ -557,39 +556,40 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
           {
             std::string::operator=(&g_iMessageBoxStringID, "The Ubisoft services are not available.Please try again later.");
           }
-          IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0);
-          IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc);
+          IGuiEngine::CloseDialog(g_pGUIEngine, 0);
+          IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
           result = 1;
         }
         break;
       case 0x20u:
-        CGameStateHandler::Switch((int)CStateSlideshow::DynamicCreateFunc, 1);
+        CGameStateHandler::Switch(CStateSlideshow::DynamicCreateFunc, (void *)1);
         return CGuiGameState::OnEvent(v25, a2);
       case 0x21u:
-        CGameStateHandler::Switch((int)CStateLoadType::DynamicCreateFunc, 1);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLoadType::DynamicCreateFunc, (void *)1);
         result = 1;
         break;
       case 0x22u:
-        CGameStateHandler::Switch((int)CStateTutorial::DynamicCreateFunc, 1);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateTutorial::DynamicCreateFunc, (void *)1);
         result = 1;
         break;
       case 0x24u:
-        CGameStateHandler::Switch((int)CStateCredits::DynamicCreateFunc, 1);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateCredits::DynamicCreateFunc, (void *)1);
         result = 1;
         break;
       case 0x25u:
         v19 = v11;
-        v21 = std::string::string(v11, (char *)&byte_374C9A5);
+        v21 = std::string::string((std::string *)v11, (char *)&byte_374C9A5);
         v18 = v21;
         v32 = 0;
         v17 = &v4;
-        ManualURL = CGameSettings::GetManualURL((int)&v4);
+        ManualURL = (int)CGameSettings::GetManualURL((std::string *)&v4);
         v32 = -1;
-        if ( !CGameStateHandler::ShowHTMLPage(v4, v5, v6, v7, v8, v9, v10, v11[0]) )
+         = ((char (__cdecl *)(char, int, int, int, int, int, int, char))CGameStateHandler::ShowHTMLPage)(v4, v5, v6, v7, v8, v9, v10, v11[0]);
+        if (  == 0 )
         {
-          v29 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 0);
-          v29 = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc);
-          if ( !v29 && BBSupportDbgReport(2, "main\\states\\StateMainMenu.cpp", 468, "bRet") == 1 )
+          v29 = IGuiEngine::CloseDialog(g_pGUIEngine, 0);
+          v29 = IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
+          if ( v29 == 0 && BBSupportDbgReport(2, "main\\states\\StateMainMenu.cpp", 468, "bRet") == 1 )
           {
             __debugbreak();
           }
@@ -598,18 +598,18 @@ bool  CStateMainMenu::OnEvent(class CEvn_Event & a2) {
         break;
       case 0x26u:
         v15 = v11;
-        v20 = std::string::string(v11, (char *)byte_374C9A6);
+        v20 = std::string::string((std::string *)v11, (char *)byte_374C9A6);
         v14 = v20;
         v32 = 1;
         v13 = &v4;
         TipsURL = CGameSettings::GetTipsURL((int)&v4);
         v32 = -1;
-        CGameStateHandler::ShowHTMLPage(v4, v5, v6, v7, v8, v9, v10, v11[0]);
+        ((void (__cdecl *)(char, int, int, int, int, int, int, char))CGameStateHandler::ShowHTMLPage)(v4, v5, v6, v7, v8, v9, v10, v11[0]);
         result = 1;
         break;
       case 0x65u:
-        v27 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 20);
-        CStateMainMenu::SetupGUI(v25);
+        v27 = IGuiEngine::CloseDialog(g_pGUIEngine, 20);
+        CStateMainMenu::SetupGUI((CStateMainMenu *)v25);
         result = 1;
         break;
       default:
@@ -629,7 +629,7 @@ bool  CStateMainMenu::CanProcessInvites(void) {
 
 
 // address=[0x14c1720]
-// Decompiled from void __thiscall CStateMainMenu::SetupGUI(CStateMainMenu *this)
+// Decompiled from void __thiscall CStateMainMenu::SetupGUI(CGuiGameState *this)
 void  CStateMainMenu::SetupGUI(void) {
   
   CGuiGameState::SetupGui(this, L"Menu\\GUISetStartscreens.dat", 0, (bool (__cdecl *)(int, int, int))GuiDlgMainscreenProc);

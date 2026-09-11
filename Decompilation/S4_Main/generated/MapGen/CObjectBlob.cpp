@@ -6,8 +6,8 @@
 // Decompiled from CObjectBlob *__thiscall CObjectBlob::CObjectBlob(CObjectBlob *this, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11, struct CCheckLayer *a12)
  CObjectBlob::CObjectBlob(int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11, class CCheckLayer * a12) {
   
-  CBlob::CBlob(this, a2, a3, a4, a5, a9, a10, a11, a12);
-  *(_DWORD *)this = &CObjectBlob::_vftable_;
+  CBlob::CBlob((CBlob *)this, a2, a3, a4, a5, a9, a10, a11, a12);
+  *(_DWORD *)this = CObjectBlob::_vftable_;
   *((_DWORD *)this + 11) = a6;
   *((_DWORD *)this + 12) = a7;
   *((_DWORD *)this + 13) = a8;
@@ -32,57 +32,54 @@ void  CObjectBlob::processFillPoint(int a2, int a3) {
   char v13; // [esp+1Bh] [ebp-1h]
 
   v12 = this;
-  CCheckLayer::setPoint(this[8], a2 - (_DWORD)this[9], a3 - (_DWORD)this[10], 1u);
-  v3 = CRandom16::Rand((CRandom16 *)g_pRand);
+  CCheckLayer::setPoint(*(this + 8), a2 - (_DWORD)*(this + 9), a3 - (_DWORD)*(this + 10), 1);
+  v3 = CRandom16::Rand(g_pRand);
   v4 = 100 - (_DWORD)v12[13];
   v6 = v3 % v4;
   result = v3 / v4;
-  if ( v6 )
+  if ( v6 == 0 )
   {
-    return result;
-  }
-  v13 = 0;
-  for ( i = 0;
-        ;
-        ++i )
-  {
-    result = (unsigned __int8)g_iNumPlayers;
-    if ( i >= (unsigned __int8)g_iNumPlayers )
+    v13 = 0;
+    for ( i = 0;
+          ;
+          ++i )
     {
-      break;
+      result = (unsigned __int8)g_iNumPlayers;
+      if ( i >= (unsigned __int8)g_iNumPlayers )
+      {
+        break;
+      }
+      v9 = 0;
+      v8 = 0;
+      CPlayerData::getStartPos_Real(g_pPlayerData[i], &v9, &v8);
+      if ( j__abs(a2 - v9) < 7 || j__abs(a3 - v8) < 7 )
+      {
+        v13 = 1;
+      }
     }
-    v9 = 0;
-    v8 = 0;
-    CPlayerData::getStartPos_Real(*(CPlayerData **)(g_pPlayerData + 4 * i), &v9, &v8);
-    if ( j__abs(a2 - v9) < 7 || j__abs(a3 - v8) < 7 )
+    if ( v13 == 0 )
     {
-      v13 = 1;
+      result = (int)v12;
+      if ( (CCheckLayer *)(*(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)v12[3] * a3) + 1) & 0xF0) == v12[1] )
+      {
+        v7 = CRandom16::Rand(g_pRand);
+        v10 = v7 % (unsigned int)v12[12];
+        (*(void (__thiscall **)(int, int, int, char *))(*(_DWORD *)g_pHost + 24))(g_pHost, a2, a3, (char *)v12[11] + v10);
+        if ( (g_iFlags & 1) != 0 )
+        {
+          (*(void (__thiscall **)(int, int, int, char *))(*(_DWORD *)g_pHost + 24))(g_pHost, a3, a2, (char *)v12[11] + v10);
+        }
+        if ( (g_iFlags & 2) != 0 )
+        {
+          (*(void (__thiscall **)(int, char *, char *, char *))(*(_DWORD *)g_pHost + 24))(g_pHost, (char *)v12[3] - a3 - 1, (char *)v12[3] - a2 - 1, (char *)v12[11] + v10);
+        }
+        result = g_iFlags & 1;
+        if ( (g_iFlags & 1) != 0 && (g_iFlags & 2) != 0 )
+        {
+          return (*(int (__thiscall **)(int, char *, char *, char *))(*(_DWORD *)g_pHost + 24))(g_pHost, (char *)v12[3] - a2 - 1, (char *)v12[3] - a3 - 1, (char *)v12[11] + v10);
+        }
+      }
     }
-  }
-  if ( v13 )
-  {
-    return result;
-  }
-  result = (int)v12;
-  if ( (CCheckLayer *)(*(_BYTE *)(g_pMapElement + 4 * (a2 + (_DWORD)v12[3] * a3) + 1) & 0xF0) != v12[1] )
-  {
-    return result;
-  }
-  v7 = CRandom16::Rand((CRandom16 *)g_pRand);
-  v10 = v7 % (unsigned int)v12[12];
-  (*(void (__thiscall **)(int, int, int, int))(*(_DWORD *)g_pHost + 24))(g_pHost, a2, a3, (int)v12[11] + v10);
-  if ( (g_iFlags & 1) != 0 )
-  {
-    (*(void (__thiscall **)(int, int, int, int))(*(_DWORD *)g_pHost + 24))(g_pHost, a3, a2, (int)v12[11] + v10);
-  }
-  if ( (g_iFlags & 2) != 0 )
-  {
-    (*(void (__thiscall **)(int, int, int, int))(*(_DWORD *)g_pHost + 24))(g_pHost, (int)v12[3] - a3 - 1, (int)v12[3] - a2 - 1, (int)v12[11] + v10);
-  }
-  result = g_iFlags & 1;
-  if ( (g_iFlags & 1) != 0 && (g_iFlags & 2) != 0 )
-  {
-    return (*(int (__thiscall **)(int, int, int, int))(*(_DWORD *)g_pHost + 24))(g_pHost, (int)v12[3] - a2 - 1, (int)v12[3] - a3 - 1, (int)v12[11] + v10);
   }
   return result;
 }

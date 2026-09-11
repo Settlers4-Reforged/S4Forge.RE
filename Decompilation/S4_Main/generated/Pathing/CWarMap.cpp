@@ -16,8 +16,8 @@ unsigned int __cdecl CWarMap::NumberOfEntitiesXY(enum T_WAR_MAP_TYPE a1, int a2,
   
   int v3; // esi
 
-  v3 = 640 * (Squares::XYToVW(a3) + 1);
-  return CWarMap::m_sSquares[10 * Squares::XYToVW(a2) + 1 + 2 * a1 + v3];
+  v3 = 640 * (Squares::XYToVW((int)a3) + 1);
+  return CWarMap::m_sSquares[10 * Squares::XYToVW((int)a2) + 1 + 2 * a1 + v3];
 }
 
 
@@ -35,8 +35,8 @@ int __cdecl CWarMap::FirstEntityIdXY(enum T_WAR_MAP_TYPE a1, int a2, int a3) {
   
   int v3; // esi
 
-  v3 = 640 * (Squares::XYToVW(a3) + 1);
-  return CWarMap::m_sSquares[10 * Squares::XYToVW(a2) + 2 * a1 + v3];
+  v3 = 640 * (Squares::XYToVW((int)a3) + 1);
+  return CWarMap::m_sSquares[10 * Squares::XYToVW((int)a2) + 2 * a1 + v3];
 }
 
 
@@ -113,7 +113,7 @@ void __cdecl CWarMap::Done(void) {
   
   unsigned int i; // [esp+0h] [ebp-4h]
 
-  if ( CWarMap::m_iInitialized )
+  if ( CWarMap::m_iInitialized != 0 )
   {
     for ( i = 0;
           i < 0x10000;
@@ -152,7 +152,7 @@ void __cdecl CWarMap::RemoveEntity(class IEntity & a1) {
   
   int v1; // [esp-4h] [ebp-4h]
 
-  if ( *IEntity::WarMapNode(a1) != 0xFFFF )
+  if ( IEntity::WarMapNode(a1)->m_uNextPrev != 0xFFFF )
   {
     v1 = IEntity::PackedXY(a1);
     CWarMap::RemoveEntityEx(a1, v1);
@@ -185,7 +185,7 @@ void __cdecl CWarMap::NotifyMove(class IEntity & a1, int a2) {
   int v20; // [esp+Ch] [ebp-8h]
   int v21; // [esp+10h] [ebp-4h]
 
-  if ( !CWarMap::m_iInitialized && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 505, "m_iInitialized") == 1 )
+  if ( CWarMap::m_iInitialized == 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 505, "m_iInitialized") == 1 )
   {
     __debugbreak();
   }
@@ -241,7 +241,7 @@ void __cdecl CWarMap::NotifyMove(class IEntity & a1, int a2) {
       v10 = Y16X16::UnpackXFast(v21);
       v19 = Squares::XYToVW(v10);
       v11 = Y16X16::UnpackYFast(v21);
-      if ( (v18 - Squares::XYToVW(v11)) | (v20 - v19) )
+      if ( ((v18 - Squares::XYToVW(v11)) | (v20 - v19)) != 0 )
       {
         CWarMap::RemoveEntityEx(a1, a2);
         CWarMap::AddEntity(a1);
@@ -286,11 +286,11 @@ void __cdecl CWarMap::AddEntityEx(class IEntity & target, int packedXY) {
   int v21; // [esp+20h] [ebp-8h]
   unsigned __int16 *v22; // [esp+24h] [ebp-4h]
 
-  if ( !CWarMap::m_iInitialized && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 271, "m_iInitialized") == 1 )
+  if ( CWarMap::m_iInitialized == 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 271, "m_iInitialized") == 1 )
   {
     __debugbreak();
   }
-  if ( *IEntity::WarMapNode(target) != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 272, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
+  if ( IEntity::WarMapNode(target)->m_uNextPrev != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 272, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
   {
     __debugbreak();
   }
@@ -313,18 +313,18 @@ void __cdecl CWarMap::AddEntityEx(class IEntity & target, int packedXY) {
     {
       __debugbreak();
     }
-    if ( *IEntity::WarMapNode(target) != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 293, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
+    if ( IEntity::WarMapNode(target)->m_uNextPrev != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 293, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
     {
       __debugbreak();
     }
-    if ( IEntity::WarriorType() )
+    if ( ((int (__stdcall *)())IEntity::WarriorType)() != 0 )
     {
       type = IEntity::Type(target);
       objType = IEntity::ObjType(target);
       settlerInfluence = sub_15FC2F0(objType, type);
-      if ( settlerInfluence )
+      if ( settlerInfluence != 0 )
       {
-        x = Y16X16::UnpackXFast(packedXY);
+        x = Y16X16::UnpackXFast((unsigned __int16)packedXY);
         v = Squares::XYToVW(x);
         y = Y16X16::UnpackYFast(packedXY);
         w = Squares::XYToVW(y);
@@ -335,11 +335,11 @@ void __cdecl CWarMap::AddEntityEx(class IEntity & target, int packedXY) {
     targetId = IEntity::ID(target);
     objType = IEntity::ObjType(target);
     warMapType = CWarMap::ObjectTypeToWarMapType(objType);
-    if ( !targetId && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 313, "uEntityId > 0") == 1 )
+    if ( targetId == 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 313, "uEntityId > 0") == 1 )
     {
       __debugbreak();
     }
-    x = Y16X16::UnpackXFast(packedXY);
+    x = Y16X16::UnpackXFast((unsigned __int16)packedXY);
     v = Squares::XYToVW(x);
     y = Y16X16::UnpackYFast(packedXY);
     w = Squares::XYToVW(y);
@@ -348,21 +348,18 @@ void __cdecl CWarMap::AddEntityEx(class IEntity & target, int packedXY) {
     warMapNode = IEntity::WarMapNode(target);
     CWarMapNode::SetPrevNext(warMapNode, 0, v21);
     *v22 = targetId;
-    if ( v21 )
+    if ( v21 != 0 )
     {
       v18 = CWarMapNode::GetFromPrev(v21);
-      if ( CWarMapNode::Prev(v18) )
+      if ( CWarMapNode::Prev(v18) != 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 334, "rNextNode.Prev() == 0") == 1 )
       {
-        if ( BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 334, "rNextNode.Prev() == 0") == 1 )
-        {
-          __debugbreak();
-        }
+        __debugbreak();
       }
       CWarMapNode::SetPrev(v18, targetId);
     }
     ++v22[1];
   }
-  else if ( *IEntity::WarMapNode(target) != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 345, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
+  else if ( IEntity::WarMapNode(target)->m_uNextPrev != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 345, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
   {
     __debugbreak();
   }
@@ -405,11 +402,11 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
   unsigned __int16 *v31; // [esp+1Ch] [ebp-8h]
   CWarMapNode *v32; // [esp+20h] [ebp-4h]
 
-  if ( !CWarMap::m_iInitialized && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 358, "m_iInitialized") == 1 )
+  if ( CWarMap::m_iInitialized == 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 358, "m_iInitialized") == 1 )
   {
     __debugbreak();
   }
-  if ( *IEntity::WarMapNode(a1) == 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 359, "_rEntity.WarMapNode().m_uNextPrev != CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
+  if ( IEntity::WarMapNode(a1)->m_uNextPrev == 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 359, "_rEntity.WarMapNode().m_uNextPrev != CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
   {
     __debugbreak();
   }
@@ -436,20 +433,20 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
       {
         __debugbreak();
       }
-      if ( *(unsigned __int16 *)&IEntity::WarMapNode(a1)->m_uNextPrev == 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 386, "_rEntity.WarMapNode().m_uPrev != CWarMapNode::PREV_NOT_IN_LIST") == 1 )
+      if ( LOWORD(IEntity::WarMapNode(a1)->m_uNextPrev) == 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 386, "_rEntity.WarMapNode().m_uPrev != CWarMapNode::PREV_NOT_IN_LIST") == 1 )
       {
         __debugbreak();
       }
       v8 = (Squares *)Y16X16::UnpackXFast(a2);
-      v28 = Squares::XYToVW(v8);
+      v28 = Squares::XYToVW((int)v8);
       v9 = (Squares *)Y16X16::UnpackYFast(a2);
-      v29 = Squares::XYToVW(v9);
-      if ( IEntity::WarriorType() )
+      v29 = Squares::XYToVW((int)v9);
+      if ( ((int (__stdcall *)())IEntity::WarriorType)() != 0 )
       {
         v24 = IEntity::Type(a1);
         v10 = IEntity::ObjType(a1);
         v30 = sub_15FC2F0(v10, v24);
-        if ( v30 )
+        if ( v30 != 0 )
         {
           v11 = IEntity::OwnerId(a1);
           CInfluMap::ModifyInfluenceMapVW(v28, v29, v11, -v30);
@@ -458,13 +455,13 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
       v32 = IEntity::WarMapNode(a1);
       v12 = IEntity::ObjType(a1);
       v25 = CWarMap::ObjectTypeToWarMapType(v12);
-      v31 = (unsigned __int16 *)CWarMap::WarMapTypeSquareDataVW(v25, v28, v29);
-      if ( !v31[1] && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 413, "rWarMapTypeSquareData.m_uNumber > 0") == 1 )
+      v31 = CWarMap::WarMapTypeSquareDataVW(v25, v28, v29);
+      if ( v31[1] == 0 && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 413, "rWarMapTypeSquareData.m_uNumber > 0") == 1 )
       {
         __debugbreak();
       }
       --v31[1];
-      if ( CWarMapNode::Prev(v32) )
+      if ( CWarMapNode::Prev(v32) != 0 )
       {
         prevWarMapNode = CWarMapNode::Prev(v32);
         v27 = CWarMapNode::GetFromPrev(prevWarMapNode);
@@ -485,7 +482,7 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
         }
         *v31 = CWarMapNode::Next(v32);
       }
-      if ( CWarMapNode::Next(v32) )
+      if ( CWarMapNode::Next(v32) != 0 )
       {
         v17 = CWarMapNode::Next(v32);
         v26 = CWarMapNode::GetFromPrev(v17);
@@ -497,7 +494,7 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
         v19 = CWarMapNode::Prev(v32);
         CWarMapNode::SetPrev(v26, v19);
       }
-      *v32 = (CWarMapNode)0xFFFF;
+      v32->m_uNextPrev = 0xFFFF;
     }
     else
     {
@@ -507,7 +504,7 @@ void __cdecl CWarMap::RemoveEntityEx(class IEntity & a1, int a2) {
       CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v3, 6, 0);
     }
   }
-  else if ( *IEntity::WarMapNode(a1) != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 452, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
+  else if ( IEntity::WarMapNode(a1)->m_uNextPrev != 0xFFFF && BBSupportDbgReport(2, "Pathing\\WarMap.cpp", 452, "_rEntity.WarMapNode().m_uNextPrev == CWarMapNode::NEXT_PREV_NOT_IN_LIST") == 1 )
   {
     __debugbreak();
   }

@@ -9,7 +9,7 @@ class CBuilding &  CBuildingMgr::operator[](int a1) {
   IEntity *v3; // [esp+4h] [ebp-4h]
 
   v3 = CMapObjectMgr::EntityPtr(a1);
-  if ( !v3 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Building\\BuildingMgr.h", 408, "pEntity != 0") == 1 )
+  if ( v3 == 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Building\\BuildingMgr.h", 408, "pEntity != 0") == 1 )
   {
     __debugbreak();
   }
@@ -28,11 +28,11 @@ class CBuilding &  CBuildingMgr::Building(int a2) {
   unsigned __int8 *v3; // [esp+4h] [ebp-4h]
 
   v3 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a2);
-  if ( !v3 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Building\\BuildingMgr.h", 423, "pEntity != 0") == 1 )
+  if ( v3 == 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Building\\BuildingMgr.h", 423, "pEntity != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::ObjType(v3) != 8 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Building\\BuildingMgr.h", 424, "pEntity->ObjType() == BUILDING_OBJ") == 1 )
+  if ( IEntity::ObjType((IEntity *)v3) != BUILDING_OBJ && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\Building\\BuildingMgr.h", 424, "pEntity->ObjType() == BUILDING_OBJ") == 1 )
   {
     __debugbreak();
   }
@@ -47,7 +47,7 @@ class CBuilding *  CBuildingMgr::GetBuildingPtr(int a2) {
   IEntity *v4; // [esp+Ch] [ebp-4h]
 
   v4 = CMapObjectMgr::EntityPtr(a2);
-  if ( v4 && IEntity::ObjType(v4) == BUILDING_OBJ )
+  if ( v4 != 0 && IEntity::ObjType(v4) == BUILDING_OBJ )
   {
     return (struct CBuilding *)v4;
   }
@@ -95,7 +95,7 @@ bool __cdecl CBuildingMgr::IsMilitaryBuildingEx(int a1) {
 
 
 // address=[0x14f4340]
-// Decompiled from void __thiscall CBuildingMgr::~CBuildingMgr(CBuildingMgr *this)
+// Decompiled from void __thiscall CBuildingMgr::~CBuildingMgr(MemoryAllocator *this)
  CBuildingMgr::~CBuildingMgr(void) {
   
   MemoryAllocator::~MemoryAllocator(this);
@@ -158,16 +158,16 @@ void  CBuildingMgr::LoadBuildingData(class S4::CMapFile & a2, int a3) {
     v6 = *(unsigned __int16 *)v17;
     v7 = *((unsigned __int16 *)v17 + 1);
     v13 = (unsigned __int8)v17[4];
-    if ( v13 )
+    if ( v13 != 0 )
     {
-      a1 = CBuildingMgr::AddBuilding((int *)this, v6, v7, (unsigned __int8)v8[0x14 * i + 5], v13, 0);
-      if ( a1 )
+      a1 = CBuildingMgr::AddBuilding(this, v6, v7, (unsigned __int8)v8[0x14 * i + 5], v13, 0);
+      if ( a1 != 0 )
       {
-        v16 = (IEntity *)CBuildingMgr::operator[](a1);
+        v16 = ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(a1);
         v3 = IEntity::Type(v16);
-        if ( (unsigned __int8)CBuildingMgr::IsMilitary(v3) && v17[6] )
+        if ( CBuildingMgr::IsMilitary(v3) && v17[6] != 0 )
         {
-          CBuilding::Role(v16);
+          CBuilding::Role((CBuilding *)v16);
           for ( j = 0;
                 j < 9;
                 ++j )
@@ -182,9 +182,9 @@ void  CBuildingMgr::LoadBuildingData(class S4::CMapFile & a2, int a3) {
         }
         IsPort = CBuildingMgr::IsPortEx(v13);
         IsShipyard = CBuildingMgr::IsShipyardEx(v13);
-        if ( IsShipyard | IsPort )
+        if ( (IsShipyard | IsPort) != 0 )
         {
-          v4 = (IBuildingRole *)CBuilding::Role(v16);
+          v4 = CBuilding::Role((CBuilding *)v16);
           IBuildingRole::PostLoadSetWaterFlags(v4, v16);
           if ( IsShipyard )
           {
@@ -204,7 +204,7 @@ void  CBuildingMgr::LoadBuildingData(class S4::CMapFile & a2, int a3) {
 int  CBuildingMgr::AddBuilding(int a2, int a3, int a4, int a5, bool a6) {
   
   int v6; // eax
-  int v7; // eax
+  DWORD v7; // eax
   int v8; // ecx
   int v9; // eax
   int v11; // [esp-8h] [ebp-5Ch] BYREF
@@ -229,7 +229,7 @@ int  CBuildingMgr::AddBuilding(int a2, int a3, int a4, int a5, bool a6) {
   int v30; // [esp+50h] [ebp-4h]
 
   v28 = this;
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 441, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 441, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -271,7 +271,7 @@ int  CBuildingMgr::AddBuilding(int a2, int a3, int a4, int a5, bool a6) {
   FreeSlot = CMapObjectMgr::GetFreeSlot();
   v23 = CBuilding::operator new(0x64u);
   LOBYTE(v30) = 1;
-  if ( v23 )
+  if ( v23 != 0 )
   {
     v12 = FreeSlot;
     v11 = v8;
@@ -287,18 +287,18 @@ int  CBuildingMgr::AddBuilding(int a2, int a3, int a4, int a5, bool a6) {
   v18 = v22;
   LOBYTE(v30) = 0;
   v27 = v22;
-  v26 = IEntity::Type(v22);
+  v26 = IEntity::Type((IEntity *)v22);
   v21 = 0;
   if ( !a6 )
   {
     v21 = 1;
     CBuilding::SetToWorld(v27);
-    CStatistic::AddBuilding((CStatistic *)&g_cStatistic, a4, v26, 1);
-    IEntity::SetFlagBits(v27, (EntityFlag)0x10000u);
+    CStatistic::AddBuilding(&g_cStatistic, a4, v26, 1);
+    IEntity::SetFlagBits(v27, (EntityFlag)0x10000);
     v12 = 1;
     v11 = IEntity::Y(v27);
     v9 = IEntity::X(v27);
-    if ( !CWorldManager::FlagBits(v9, v11, v12) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 504, "g_cWorld.FlagBits(pBuilding->X(), pBuilding->Y(), FLAG_BLOCKED_LAND) != 0") == 1 )
+    if ( CWorldManager::FlagBits(v9, v11, v12) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 504, "g_cWorld.FlagBits(pBuilding->X(), pBuilding->Y(), FLAG_BLOCKED_LAND) != 0") == 1 )
     {
       __debugbreak();
     }
@@ -335,9 +335,9 @@ int  CBuildingMgr::SearchSpaceForBuilding(int a2, int a3, int a4, int a5, bool a
   int v12; // [esp+14h] [ebp-10h]
   int v13; // [esp+18h] [ebp-Ch]
   int v14; // [esp+1Ch] [ebp-8h]
-  char IsMilitary; // [esp+23h] [ebp-1h]
+  bool IsMilitary; // [esp+23h] [ebp-1h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 549, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 549, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -376,9 +376,9 @@ int  CBuildingMgr::SearchSpaceForBuilding(int a2, int a3, int a4, int a5, bool a
   {
     v12 = a2 + CSpiralOffsets::DeltaX(v14);
     v13 = a3 + CSpiralOffsets::DeltaY(v14);
-    if ( (unsigned __int8)CWorldManager::InWorld(v12, v13) && CBuildingMgr::CheckForBuild(this, v12, v13, a4, a5, v9) )
+    if ( CWorldManager::InWorld(v12, v13) && CBuildingMgr::CheckForBuild(this, v12, v13, a4, a5, v9) != 0 )
     {
-      v10 = CBuildingMgr::AddBuilding((int *)this, v12, v13, a4, a5, 0);
+      v10 = CBuildingMgr::AddBuilding(this, v12, v13, a4, a5, 0);
       if ( IsMilitary )
       {
         CBuildingMgr::AddSoldierToStartTower(v10, 0);
@@ -431,11 +431,11 @@ void  CBuildingMgr::DestroyBuilding(int _iX, int _iY, int _iGardenerPlayerIdEx) 
   {
     __debugbreak();
   }
-  if ( _iGardenerPlayerIdEx != -1 && _iGardenerPlayerIdEx && !CPlayerManager::ValidUsedPlayerId(_iGardenerPlayerIdEx) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1002, "(_iGardenerPlayerIdEx == -1) || (_iGardenerPlayerIdEx == 0) || (g_cPlayerMgr.ValidUsedPlayerId(_iGardenerPlayerIdEx))") == 1 )
+  if ( _iGardenerPlayerIdEx != -1 && _iGardenerPlayerIdEx != 0 && !CPlayerManager::ValidUsedPlayerId(_iGardenerPlayerIdEx) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1002, "(_iGardenerPlayerIdEx == -1) || (_iGardenerPlayerIdEx == 0) || (g_cPlayerMgr.ValidUsedPlayerId(_iGardenerPlayerIdEx))") == 1 )
   {
     __debugbreak();
   }
-  if ( !CWorldManager::FlagBits(_iX, _iY, 8u) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1004, "g_cWorld.FlagBits(_iX, _iY, FLAG_BUILDING)") == 1 )
+  if ( CWorldManager::FlagBits(_iX, _iY, 8u) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1004, "g_cWorld.FlagBits(_iX, _iY, FLAG_BUILDING)") == 1 )
   {
     __debugbreak();
   }
@@ -451,20 +451,20 @@ void  CBuildingMgr::DestroyBuilding(int _iX, int _iY, int _iGardenerPlayerIdEx) 
       {
         a2 = CWorldManager::MapObjectId(iCheckX, iCheckY);
         BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
-        if ( !BuildingPtr )
+        if ( BuildingPtr == 0 )
         {
           a2 = CWorldManager::ObjectId(iCheckX, iCheckY);
           BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
         }
-        if ( BuildingPtr )
+        if ( BuildingPtr != 0 )
         {
           if ( IEntity::Type(BuildingPtr) == 80 )
           {
-            if ( !g_pGame && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1042, "g_pGame != 0") == 1 )
+            if ( g_pGame == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1042, "g_pGame != 0") == 1 )
             {
               __debugbreak();
             }
-            if ( g_pGame )
+            if ( g_pGame != 0 )
             {
               TickCounter = CStateGame::GetTickCounter(g_pGame);
               v5 = IEntity::OwnerId(BuildingPtr);
@@ -487,7 +487,7 @@ void  CBuildingMgr::DestroyBuilding(int _iX, int _iY, int _iGardenerPlayerIdEx) 
             __debugbreak();
           }
           v35 = 0;
-          v18 = CBuilding::BuildingTypeEx((unsigned __int8 *)BuildingPtr);
+          v18 = CBuilding::BuildingTypeEx((struct CBuilding *)BuildingPtr);
           v9 = IEntity::Race(BuildingPtr);
           BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v9, v18);
           p_m_vBuildingPosLines = &BuildingInfo->m_vBuildingPosLines;
@@ -496,7 +496,7 @@ void  CBuildingMgr::DestroyBuilding(int _iX, int _iY, int _iGardenerPlayerIdEx) 
           v12 = IEntity::Y(BuildingPtr);
           v10 = IEntity::X(BuildingPtr);
           CBuildingFlagsWalk::CBuildingFlagsWalk(&v22, v10, v12, m_iHotSpotX, m_iHotSpotY, p_m_vBuildingPosLines);
-          while ( CBuildingFlagsWalk::NextPosition(&v22) )
+          while ( CBuildingFlagsWalk::NextPosition(&v22) != 0 )
           {
             if ( CBuildingFlagsWalk::CurrentX(&v22) == _iX && CBuildingFlagsWalk::CurrentY(&v22) == _iY )
             {
@@ -504,7 +504,7 @@ void  CBuildingMgr::DestroyBuilding(int _iX, int _iY, int _iGardenerPlayerIdEx) 
               break;
             }
           }
-          if ( !v35 && BuildingInfo->m_bIsPort )
+          if ( v35 == 0 && BuildingInfo->m_bIsPort != 0 )
           {
             p_m_vWaterPosLines = &BuildingInfo->m_vWaterPosLines;
             v17 = BuildingInfo->m_iHotSpotY;
@@ -512,7 +512,7 @@ void  CBuildingMgr::DestroyBuilding(int _iX, int _iY, int _iGardenerPlayerIdEx) 
             v13 = IEntity::Y(BuildingPtr);
             v11 = IEntity::X(BuildingPtr);
             CBuildingFlagsWalk::CBuildingFlagsWalk(&v21, v11, v13, v15, v17, p_m_vWaterPosLines);
-            while ( CBuildingFlagsWalk::NextPosition(&v21) )
+            while ( CBuildingFlagsWalk::NextPosition(&v21) != 0 )
             {
               if ( CBuildingFlagsWalk::CurrentX(&v21) == _iX && CBuildingFlagsWalk::CurrentY(&v21) == _iY )
               {
@@ -521,25 +521,24 @@ void  CBuildingMgr::DestroyBuilding(int _iX, int _iY, int _iGardenerPlayerIdEx) 
               }
             }
           }
-          if ( v35 )
+          if ( v35 != 0 )
           {
             v24 = IEntity::Race(BuildingPtr);
             v34 = v24 == 3;
             v33 = v24 == 3;
-            if ( _iGardenerPlayerIdEx != -1 && (_iGardenerPlayerIdEx || v33) && (_iGardenerPlayerIdEx <= 0 || !v33) )
+            if ( _iGardenerPlayerIdEx == -1 || _iGardenerPlayerIdEx == 0 && !v33 || _iGardenerPlayerIdEx > 0 && v33 )
             {
-              return;
+              if ( _iGardenerPlayerIdEx >= 0 )
+              {
+                v25 = _iGardenerPlayerIdEx;
+              }
+              else
+              {
+                v25 = 0;
+              }
+              v23 = v25;
+              CBuilding::DestroyBuilding((CBuilding *)BuildingPtr, v25);
             }
-            if ( _iGardenerPlayerIdEx >= 0 )
-            {
-              v25 = _iGardenerPlayerIdEx;
-            }
-            else
-            {
-              v25 = 0;
-            }
-            v23 = v25;
-            CBuilding::DestroyBuilding(BuildingPtr, v25);
             return;
           }
         }
@@ -587,7 +586,7 @@ class CBuilding *  CBuildingMgr::GetNextBuilding(int iOwnerId, int _iBuildingTyp
   }
   v7 = (int *)((char *)this + 332 * iOwnerId + 4 * _iBuildingType + 8992);
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, *v7);
-  if ( BuildingPtr )
+  if ( BuildingPtr != 0 )
   {
     v5 = IAnimatedEntity::Next(BuildingPtr);
   }
@@ -596,13 +595,13 @@ class CBuilding *  CBuildingMgr::GetNextBuilding(int iOwnerId, int _iBuildingTyp
     v5 = 0;
   }
   *v7 = v5;
-  if ( !*v7 )
+  if ( *v7 == 0 )
   {
     *v7 = *((_DWORD *)this + 83 * iOwnerId + _iBuildingType + 7);
   }
-  if ( *v7 )
+  if ( *v7 != 0 )
   {
-    return CBuildingMgr::operator[](*v7);
+    return ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(*v7);
   }
   else
   {
@@ -626,13 +625,13 @@ class CBuilding *  CBuildingMgr::GetBuilding(int a2, int a3)const {
     __debugbreak();
   }
   v5 = (_DWORD *)((char *)this + 332 * a2 + 4 * a3 + 8992);
-  if ( !*v5 )
+  if ( *v5 == 0 )
   {
     CBuildingMgr::GetNextBuilding(this, a2, a3);
   }
-  if ( *v5 )
+  if ( *v5 != 0 )
   {
-    return CBuildingMgr::operator[](*v5);
+    return ((_DWORD (__stdcall *)(_DWORD))CBuildingMgr::operator[])(*v5);
   }
   else
   {
@@ -665,6 +664,8 @@ int  CBuildingMgr::GetNumberOfBuildings(int _iOwnerId, int _iBuildingType, int _
       return *((_DWORD *)this + 166 * _iOwnerId + 2 * _iBuildingType + 755);
     case 2u:
       return *((_DWORD *)this + 166 * _iOwnerId + 2 * _iBuildingType + 755) + *((_DWORD *)this + 166 * _iOwnerId + 2 * _iBuildingType + 754);
+    default:
+      break;
   }
   return 0;
 }
@@ -693,7 +694,7 @@ void  CBuildingMgr::ChangeNumberOfBuildings(int a2, int a3, int a4, int a5) {
     __debugbreak();
   }
   result = 0;
-  if ( a4 )
+  if ( a4 != 0 )
   {
     if ( a4 == 1 )
     {
@@ -739,10 +740,10 @@ bool  CBuildingMgr::CheckNumberOfOccupiedMilitaryBuildings(int a2, int a3) {
       __debugbreak();
     }
     for ( j = CBuildingMgr::GetFirstBuildingId(this, a2, v6);
-          j;
+          j != 0;
           j = IAnimatedEntity::Next(v4) )
     {
-      v4 = CBuildingMgr::Building(this, j);
+      v4 = (unsigned __int8 *)CBuildingMgr::Building(this, j);
       if ( CBuilding::IsOccupied((CBuilding *)v4) && ++v8 >= a3 )
       {
         return 1;
@@ -761,7 +762,7 @@ bool __cdecl CBuildingMgr::IsMine(int buildingType) {
   {
     __debugbreak();
   }
-  return CBuildingInfoMgr::GetBuildingInfo(0, buildingType)[477] == 7;
+  return CBuildingInfoMgr::GetBuildingInfo(0, buildingType)->m_iBuildingKind == 7;
 }
 
 
@@ -775,7 +776,7 @@ bool __cdecl CBuildingMgr::IsMilitary(int a1) {
   {
     __debugbreak();
   }
-  BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(0, a1);
+  BuildingInfo = (int)CBuildingInfoMgr::GetBuildingInfo(0, a1);
   return *(_BYTE *)(BuildingInfo + 477) == 10 || *(_BYTE *)(BuildingInfo + 477) == 15;
 }
 
@@ -890,7 +891,7 @@ int  CBuildingMgr::CheckForBuild(int x, int y, int ownerId, int a5, int a6) {
   }
   HIDWORD(v47) = a5 == 31;
   LODWORD(v47) = a5 == 32;
-  if ( v47 )
+  if ( v47 != 0 )
   {
     if ( a5 == 31 )
     {
@@ -901,7 +902,7 @@ int  CBuildingMgr::CheckForBuild(int x, int y, int ownerId, int a5, int a6) {
       v73 = 52;
     }
     a5 = CBuildingMgr::CheckForBuildInWater((CBuildingMgr *)v66, x, y, ownerId, v73);
-    if ( !a5 )
+    if ( a5 == 0 )
     {
       return -1;
     }
@@ -948,7 +949,7 @@ CBuildingMgr__CheckForBuild___def_18F58B2:
         v63 = 4;
       }
       BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v46, a5);
-      if ( v70 )
+      if ( v70 != 0 )
       {
         goto LABEL_71;
       }
@@ -964,20 +965,20 @@ CBuildingMgr__CheckForBuild___def_18F58B2:
       v27 = x + 32 - BuildingInfo->m_iHotSpotX - 1;
       v26 = y - BuildingInfo->m_iHotSpotY - 1;
       v45 = CWorldManager::Index(x, y);
-      if ( CWorldManager::FlagBits(v45, 0x5Fu) || ITiling::OwnerId(v45) != v61 )
+      if ( CWorldManager::FlagBits(v45, 0x5Fu) != 0 || ITiling::OwnerId(v45) != v61 )
       {
         return -1;
       }
       v20 = std::vector<unsigned int>::operator[](&BuildingInfo->m_vBuildingPosLines, 0);
       v8 = std::vector<unsigned int>::size(&BuildingInfo->m_vBuildingPosLines);
-      if ( !((unsigned __int8 (__thiscall *)(CTiling *, int, int, int, unsigned int, int))g_pTiling->CheckFlagBits)(g_pTiling, x - BuildingInfo->m_iHotSpotX, y - BuildingInfo->m_iHotSpotY, v8, v20, 95) )
+      if ( ((unsigned __int8 (__thiscall *)(CTiling *, int, int, int, unsigned int, int))g_pTiling->CheckFlagBits)(g_pTiling, x - BuildingInfo->m_iHotSpotX, y - BuildingInfo->m_iHotSpotY, v8, v20, 95) == 0 )
       {
         return -1;
       }
       CBuildingFlagsWalk::CBuildingFlagsWalk(&v25, x, y, BuildingInfo->m_iHotSpotX, BuildingInfo->m_iHotSpotY, &BuildingInfo->m_vBuildingPosLines);
       if ( v67 == 3 )
       {
-        while ( CBuildingFlagsWalk::NextPosition(&v25) )
+        while ( CBuildingFlagsWalk::NextPosition(&v25) != 0 )
         {
           v21 = CBuildingFlagsWalk::CurrentY(&v25);
           v9 = CBuildingFlagsWalk::CurrentX(&v25);
@@ -1001,7 +1002,7 @@ CBuildingMgr__CheckForBuild___def_18F58B2:
             {
               v11 = CWorldManager::NeighborRelIndex(i);
               v40 = v54 + v11;
-              if ( CWorldManager::FlagBits(v54 + v11, 1u) )
+              if ( CWorldManager::FlagBits(v54 + v11, 1u) != 0 )
               {
                 return -1;
               }
@@ -1011,7 +1012,7 @@ CBuildingMgr__CheckForBuild___def_18F58B2:
       }
       else
       {
-        while ( CBuildingFlagsWalk::NextPosition(&v25) )
+        while ( CBuildingFlagsWalk::NextPosition(&v25) != 0 )
         {
           v22 = CBuildingFlagsWalk::CurrentY(&v25);
           v12 = CBuildingFlagsWalk::CurrentX(&v25);
@@ -1035,7 +1036,7 @@ CBuildingMgr__CheckForBuild___def_18F58B2:
             {
               v14 = CWorldManager::NeighborRelIndex(j);
               v39 = v53 + v14;
-              if ( CWorldManager::FlagBits(v53 + v14, 0x5Fu) )
+              if ( CWorldManager::FlagBits(v53 + v14, 0x5Fu) != 0 )
               {
                 return -1;
               }
@@ -1058,7 +1059,7 @@ LABEL_71:
         v62 = 0;
         v52 = 0;
         CBuildingFlagsWalk::CBuildingFlagsWalk(&v24, x, y, BuildingInfo->m_iHotSpotX, BuildingInfo->m_iHotSpotY, &BuildingInfo->m_vDigPosLines);
-        while ( CBuildingFlagsWalk::NextPosition(&v24) )
+        while ( CBuildingFlagsWalk::NextPosition(&v24) != 0 )
         {
           v23 = CBuildingFlagsWalk::CurrentY(&v24);
           v15 = CBuildingFlagsWalk::CurrentX(&v24);
@@ -1073,14 +1074,14 @@ LABEL_71:
           v71 = CBuildingMgr::CheckForBuildCalc((CBuildingMgr *)v66, x, y, ownerId, v61, a5, v35);
         }
       }
-      if ( v71 )
+      if ( v71 != 0 )
       {
         if ( a6 == 1 )
         {
           v64 = 0;
           if ( v67 != 3 )
           {
-            while ( *((_BYTE *)v66 + 30750 * ownerId + 1025 * v64 + 11981) && v64 != 30 )
+            while ( *((_BYTE *)v66 + 30750 * ownerId + 1025 * v64 + 11981) != 0 && v64 != 30 )
             {
               ++v64;
             }
@@ -1090,7 +1091,7 @@ LABEL_71:
             return 0;
           }
           a1 = CBuildingMgr::AddBuilding((CBuildingMgr *)v66, x, y, ownerId, a5, 1);
-          if ( !a1 )
+          if ( a1 == 0 )
           {
             return 0;
           }
@@ -1120,7 +1121,7 @@ LABEL_71:
                 {
                   CWorldManager::SetFlagBits(v50, v51, 16);
                   v59[32 * m + 1 + k] = *((_BYTE *)&v66[8 * m + 72182] + k + 3);
-                  if ( v59[32 * m + 1 + k] )
+                  if ( v59[32 * m + 1 + k] != 0 )
                   {
                     v18 = CWorldManager::GroundHeight(v50, v51);
                     v49 = v18 - (unsigned __int8)v59[32 * m + 1 + k];
@@ -1139,7 +1140,7 @@ LABEL_71:
             }
           }
         }
-        if ( v71 && v71 < 0x28 )
+        if ( v71 != 0 && v71 < 0x28 )
         {
           v65 = 1;
         }
@@ -1239,7 +1240,9 @@ int  CBuildingMgr::CheckForBuildDarkTribe(int a2, int a3, int a4, int a5, int a6
   int v24; // [esp+34h] [ebp-A0h]
   int v25; // [esp+38h] [ebp-9Ch]
   int v26; // [esp+3Ch] [ebp-98h]
+  int; // [esp+40h] [ebp-94h]
   signed int v28; // [esp+44h] [ebp-90h]
+  int; // [esp+48h] [ebp-8Ch]
   std::_Iterator_base12 *v30; // [esp+4Ch] [ebp-88h]
   std::_Iterator_base12 *v31; // [esp+50h] [ebp-84h]
   int v32; // [esp+54h] [ebp-80h]
@@ -1273,7 +1276,7 @@ int  CBuildingMgr::CheckForBuildDarkTribe(int a2, int a3, int a4, int a5, int a6
   int v60; // [esp+D0h] [ebp-4h]
 
   v44 = (int *)this;
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 3286, "g_cWorld.InWorld(_iXPos, _iYPos)") == 1 )
+  if ( !CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 3286, "g_cWorld.InWorld(_iXPos, _iYPos)") == 1 )
   {
     __debugbreak();
   }
@@ -1291,7 +1294,7 @@ int  CBuildingMgr::CheckForBuildDarkTribe(int a2, int a3, int a4, int a5, int a6
   v25 = 95;
   v48 = 0;
   v45 = 0;
-  if ( a2 < 15 || a2 > CWorldManager::Width(v6) - 16 || a3 < 15 || a3 > CWorldManager::Width(v7) - 16 )
+  if ( a2 < 15 || a2 > ((int (__thiscall *)(int))CWorldManager::Width)(v6) - 16 || a3 < 15 || a3 > ((int (__thiscall *)(int))CWorldManager::Width)(v7) - 16 )
   {
     return 0;
   }
@@ -1301,26 +1304,26 @@ int  CBuildingMgr::CheckForBuildDarkTribe(int a2, int a3, int a4, int a5, int a6
   v40 = a2 + 32 - *BuildingInfo - 1;
   v41 = a3 - BuildingInfo[1] - 1;
   v50 = 0;
-  v26 = std::vector<unsigned int>::begin(v23);
+  v26 = ((int (__stdcall *)(_BYTE *))std::vector<unsigned int>::begin)(v23);
   v39 = v26;
   LOBYTE(v60) = 1;
-  std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator=(v26);
+  ((void (__stdcall *)(int))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator=)(v26);
   LOBYTE(v60) = 0;
   std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v23);
   while ( 1 )
   {
-    v38 = (std::_Iterator_base12 *)std::vector<unsigned int>::end(v22);
+    v38 = (std::_Iterator_base12 *)((std::_Iterator_base12 *(__stdcall *)(_BYTE *))std::vector<unsigned int>::end)(v22);
     v37 = v38;
     LOBYTE(v60) = 2;
     v52 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator!=(v38);
     LOBYTE(v60) = 0;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v22);
-    if ( !v52 )
+    if ( v52 == 0 )
     {
       break;
     }
     ++v50;
-    if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v43) )
+    if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v43) != 0 )
     {
       k = v50 + v41;
       for ( i = 31;
@@ -1359,26 +1362,26 @@ int  CBuildingMgr::CheckForBuildDarkTribe(int a2, int a3, int a4, int a5, int a6
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator++(v43);
   }
   v50 = 0;
-  v33 = std::vector<unsigned int>::begin(v21);
+  v33 = ((int (__stdcall *)(_BYTE *))std::vector<unsigned int>::begin)(v21);
   v32 = v33;
   LOBYTE(v60) = 3;
-  std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator=(v33);
+  ((void (__stdcall *)(int))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator=)(v33);
   LOBYTE(v60) = 0;
   std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v21);
   while ( 1 )
   {
-    v31 = (std::_Iterator_base12 *)std::vector<unsigned int>::end(v20);
+    v31 = (std::_Iterator_base12 *)((std::_Iterator_base12 *(__stdcall *)(_BYTE *))std::vector<unsigned int>::end)(v20);
     v30 = v31;
     LOBYTE(v60) = 4;
     v51 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator!=(v31);
     LOBYTE(v60) = 0;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v20);
-    if ( !v51 )
+    if ( v51 == 0 )
     {
       break;
     }
     ++v50;
-    if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v43) )
+    if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v43) != 0 )
     {
       k = v50 + v41;
       for ( j = 31;
@@ -1399,10 +1402,11 @@ int  CBuildingMgr::CheckForBuildDarkTribe(int a2, int a3, int a4, int a5, int a6
   }
   v60 = -1;
   std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v43);
-  if ( v45 )
+  if ( v45 != 0 )
   {
     v48 = (v48 + (v45 >> 1)) / v45;
-    if ( !CBuildingMgr::CheckForBuildCalc((CBuildingMgr *)v44, a2, a3, a4, a4, v42, v48) )
+     = CBuildingMgr::CheckForBuildCalc((CBuildingMgr *)v44, a2, a3, a4, a4, v42, v48);
+    if (  == 0 )
     {
       return 0;
     }
@@ -1427,7 +1431,7 @@ int  CBuildingMgr::CheckForBuildDarkTribe(int a2, int a3, int a4, int a5, int a6
         v57 = a2 + m - 15;
         v54 = CWorldManager::GroundHeight(v57, v58);
         v28 = v48;
-        if ( *((_BYTE *)&v44[8 * m + 72182] + k + 3) && *((unsigned __int8 *)&v44[8 * m + 72182] + k + 3) != v54 )
+        if ( *((_BYTE *)&v44[8 * m + 72182] + k + 3) != 0 && *((unsigned __int8 *)&v44[8 * m + 72182] + k + 3) != v54 )
         {
           if ( v54 <= v28 )
           {
@@ -1444,7 +1448,7 @@ int  CBuildingMgr::CheckForBuildDarkTribe(int a2, int a3, int a4, int a5, int a6
                   if ( v19 != v54 - 7 )
                   {
                     CWorldManager::IncreaseGroundHeight(v57, v58);
-                    IGfxEngine::UpdateWorldPosition((IGfxEngine *)g_pGfxEngine, v57, v58);
+                    IGfxEngine::UpdateWorldPosition(g_pGfxEngine, v57, v58);
                     v59 = 1;
                   }
                 }
@@ -1466,7 +1470,7 @@ int  CBuildingMgr::CheckForBuildDarkTribe(int a2, int a3, int a4, int a5, int a6
                   if ( v15 != v54 + 5 )
                   {
                     CWorldManager::DecreaseGroundHeight(v57, v58);
-                    IGfxEngine::UpdateWorldPosition((IGfxEngine *)g_pGfxEngine, v57, v58);
+                    IGfxEngine::UpdateWorldPosition(g_pGfxEngine, v57, v58);
                     v59 = 1;
                   }
                 }
@@ -1477,7 +1481,8 @@ int  CBuildingMgr::CheckForBuildDarkTribe(int a2, int a3, int a4, int a5, int a6
       }
     }
   }
-  return CBuildingMgr::AddBuilding(v44, a2, a3, a4, v42, 1u) != 0;
+   = CBuildingMgr::AddBuilding((CBuildingMgr *)v44, a2, a3, a4, v42, 1);
+  return  != 0;
 }
 
 
@@ -1506,59 +1511,55 @@ void  CBuildingMgr::ShowWorkingArea(int a2)const {
   int i; // [esp+40h] [ebp-8h]
   int j; // [esp+44h] [ebp-4h]
 
-  v19 = (unsigned __int16 *)CBuildingMgr::operator[](a2);
-  v2 = CBuilding::EnsignWorldIdx(v19);
+  v19 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(int))CBuildingMgr::operator[])(a2);
+  v2 = CBuilding::EnsignWorldIdx((CBuilding *)v19);
   v6 = CWorldManager::EcoSectorId(v2);
-  v5 = IEntity::Type(v19);
+  v5 = IEntity::Type((IEntity *)v19);
   v3 = IEntity::Race(v19);
   result = (_DWORD *)CBuildingInfoMgr::GetBuildingInfo(v3, v5);
   v17 = result[123];
-  if ( v17 <= 0 )
+  if ( v17 > 0 )
   {
-    return result;
-  }
-  WorkingAreaPackedXY = CBuilding::GetWorkingAreaPackedXY(v19);
-  v8 = Y16X16::UnpackXFast(WorkingAreaPackedXY);
-  result = (_DWORD *)Y16X16::UnpackYFast(WorkingAreaPackedXY);
-  v7 = result;
-  v11 = -1;
-  if ( v17 <= 5 )
-  {
-    v16 = 3;
-    v12 = "\n";
-  }
-  else
-  {
-    v16 = 4;
-    result = &unk_377E808;
-    v12 = (const char *)&unk_377E808;
-  }
-  for ( i = 0;
-        i < v16;
-        ++i )
-  {
-    v18 = v17 * (i + 1) / v16;
-    if ( v18 > v11 )
+    WorkingAreaPackedXY = CBuilding::GetWorkingAreaPackedXY(v19);
+    v8 = Y16X16::UnpackXFast(WorkingAreaPackedXY);
+    result = (_DWORD *)Y16X16::UnpackYFast(WorkingAreaPackedXY);
+    v7 = result;
+    v11 = -1;
+    if ( v17 <= 5 )
     {
-      v10 = CSpiralOffsets::First(v18);
-      v9 = CSpiralOffsets::Last(v18);
-      for ( j = v10;
-            j <= v9;
-            ++j )
+      v16 = 3;
+      v12 = "\n";
+    }
+    else
+    {
+      v16 = 4;
+      result = &unk_377E808;
+      v12 = (const char *)&unk_377E808;
+    }
+    for ( i = 0;
+          i < v16;
+          ++i )
+    {
+      v18 = v17 * (i + 1) / v16;
+      if ( v18 > v11 )
       {
-        v14 = v8 + CSpiralOffsets::DeltaX(j);
-        v15 = (int)v7 + CSpiralOffsets::DeltaY(j);
-        if ( (unsigned __int8)CWorldManager::InWorld(v14, v15) )
+        v10 = CSpiralOffsets::First(v18);
+        v9 = CSpiralOffsets::Last(v18);
+        for ( j = v10;
+              j <= v9;
+              ++j )
         {
-          if ( CWorldManager::EcoSectorId(v14, v15) == v6 )
+          v14 = v8 + CSpiralOffsets::DeltaX(j);
+          v15 = (int)v7 + CSpiralOffsets::DeltaY(j);
+          if ( CWorldManager::InWorld(v14, v15) && CWorldManager::EcoSectorId(v14, v15) == v6 )
           {
             CWorldManager::SetHelperObject(v14, v15, *(_DWORD *)&v12[4 * i]);
           }
         }
       }
+      v11 = v17 * (i + 1) / v16;
+      result = (_DWORD *)(i + 1);
     }
-    v11 = v17 * (i + 1) / v16;
-    result = (_DWORD *)(i + 1);
   }
   return result;
 }
@@ -1574,12 +1575,12 @@ bool  CBuildingMgr::IsGoodWorkingAreaCenter(int a2, int & a3, int & a4)const {
   int v8; // [esp-4h] [ebp-28h]
   int v9; // [esp+Ch] [ebp-18h]
   int v10; // [esp+10h] [ebp-14h]
-  _DWORD *v11; // [esp+14h] [ebp-10h]
+  CBuilding *v11; // [esp+14h] [ebp-10h]
   int v12; // [esp+18h] [ebp-Ch]
   int v13; // [esp+1Ch] [ebp-8h]
   int i; // [esp+20h] [ebp-4h]
 
-  v11 = (_DWORD *)CBuildingMgr::operator[](a2);
+  v11 = (CBuilding *)((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(a2);
   v10 = *a3;
   v9 = *a4;
   for ( i = 0;
@@ -1588,17 +1589,14 @@ bool  CBuildingMgr::IsGoodWorkingAreaCenter(int a2, int & a3, int & a4)const {
   {
     v13 = v10 + CSpiralOffsets::DeltaX(i);
     v12 = v9 + CSpiralOffsets::DeltaY(i);
-    if ( (unsigned __int8)CWorldManager::InWorld(v13, v12) )
+    if ( CWorldManager::InWorld(v13, v12) && CWorldManager::EcoSectorId(v13, v12) != 0 )
     {
-      if ( CWorldManager::EcoSectorId(v13, v12) )
-      {
-        break;
-      }
+      break;
     }
   }
   v8 = v12 - IEntity::Y(v11);
   v4 = IEntity::X(v11);
-  if ( (int)Grid::Distance((Grid *)(v13 - v4), v8) >= 60 )
+  if ( Grid::Distance(v13 - v4, v8) >= 60 )
   {
     return 0;
   }
@@ -1629,22 +1627,22 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
   int LocalPlayerId; // [esp+2Ch] [ebp-38h]
   int i; // [esp+30h] [ebp-34h]
   unsigned int v14; // [esp+34h] [ebp-30h]
-  int v15; // [esp+38h] [ebp-2Ch]
+  S4_BUILDING_ENUM v15; // [esp+38h] [ebp-2Ch]
   CEvn_Event v16; // [esp+3Ch] [ebp-28h] BYREF
   int v17; // [esp+60h] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1581, "_pInfoExchange != 0") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1581, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !j____RTDynamicCast((void **)&a1->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &SBuildingMenu__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1582, "dynamic_cast<SBuildingMenu*>(_pInfoExchange) != 0") == 1 )
+  if ( j____RTDynamicCast((void **)&a1->__vftable, 0, &CInfoExchange__RTTI_Type_Descriptor_, &SBuildingMenu__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1582, "dynamic_cast<SBuildingMenu*>(_pInfoExchange) != 0") == 1 )
   {
     __debugbreak();
   }
   LocalPlayerId = CPlayerManager::GetLocalPlayerId();
   v4 = CPlayerManager::Race(LocalPlayerId);
   v11 = a1;
-  BYTE1(a1->m_iUnknown[1]) = a3;
+  BYTE1(a1[1].__vftable) = a3;
   if ( a3 )
   {
     LocalPlayerEcoSectorIdAtCenter = CEcoSectorMgr::GetLocalPlayerEcoSectorIdAtCenter();
@@ -1658,11 +1656,11 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
         i < 10;
         ++i )
   {
-    v14 = (unsigned int)&v11->m_iUnknown[4 * i + 2];
+    v14 = (unsigned int)&v11[2 * i + 1].m_iUnknown;
     v15 = *(_DWORD *)v14;
     NumberOfBuildings = 0;
     v7 = 0;
-    if ( v15 <= 0 || v15 >= 83 )
+    if ( v15 <= BUILDING_NO_BUILDING || v15 >= BUILDING_MAX )
     {
       *(_BYTE *)(v14 + 12) = 0;
       *(_BYTE *)(v14 + 13) = 0;
@@ -1679,15 +1677,15 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
       {
         CBuildingMgr::CalculateNumberOfBuildingsInEcoSector((CBuildingMgr *)g_cBuildingMgr, LocalPlayerId, v15, v10, &NumberOfBuildings, &v7);
       }
-      if ( v15 == 31 )
+      if ( v15 == BUILDING_SHIPYARD )
       {
-        v15 = 58;
+        v15 = BUILDING_SHIPYARDA;
       }
-      else if ( v15 == 32 )
+      else if ( v15 == BUILDING_PORT )
       {
-        v15 = 52;
+        v15 = BUILDING_PORTA;
       }
-      BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(v4, v15);
+      BuildingInfo = (char *)CBuildingInfoMgr::GetBuildingInfo(v4, v15);
       *(_BYTE *)(v14 + 12) = BuildingInfo[3];
       *(_BYTE *)(v14 + 13) = BuildingInfo[2];
       *(_BYTE *)(v14 + 14) = BuildingInfo[4];
@@ -1695,7 +1693,7 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
     *(_DWORD *)(v14 + 8) = NumberOfBuildings;
     *(_DWORD *)(v14 + 4) = v7;
   }
-  v11->m_iUnknown[0] = 28;
+  v11->m_iUnknown = 28;
   if ( a2 )
   {
     v5 = 604;
@@ -1706,11 +1704,11 @@ void __cdecl CBuildingMgr::FillBuildingAmount(class CInfoExchange * a1, bool a2,
   }
   CEvn_Event::CEvn_Event(&v16, v5, 0, (unsigned int)v11, 0);
   v17 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1659, "g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1659, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v16);
   }
@@ -1726,15 +1724,15 @@ void __cdecl CBuildingMgr::FillAddSoldierSideBar(class CInfoExchange * arg0, boo
   CBarrackRole *v3; // [esp+0h] [ebp-Ch]
   CBuilding *v4; // [esp+8h] [ebp-4h]
 
-  if ( !arg0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1680, "_pInfoExchange != 0") == 1 )
+  if ( arg0 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1680, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1681, "_iEntityId != 0") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1681, "_iEntityId != 0") == 1 )
   {
     __debugbreak();
   }
-  v4 = CBuildingMgr::operator[](a1);
+  v4 = ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(a1);
   v3 = (CBarrackRole *)CBuilding::Role(v4);
   CBarrackRole::FillAddSoldierSideBar(v3, arg0, a2);
 }
@@ -1747,15 +1745,15 @@ void __cdecl CBuildingMgr::FillToolSideBar(class CInfoExchange * arg0, bool a2, 
   CProductionBuildingRole *v3; // [esp+0h] [ebp-Ch]
   CBuilding *v4; // [esp+8h] [ebp-4h]
 
-  if ( !arg0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1704, "_pInfoExchange != 0") == 1 )
+  if ( arg0 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1704, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1705, "_iEntityId != 0") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1705, "_iEntityId != 0") == 1 )
   {
     __debugbreak();
   }
-  v4 = CBuildingMgr::operator[](a1);
+  v4 = ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(a1);
   v3 = (CProductionBuildingRole *)CBuilding::Role(v4);
   CProductionBuildingRole::FillToolSideBar(v3, arg0, a2);
 }
@@ -1765,17 +1763,17 @@ void __cdecl CBuildingMgr::FillToolSideBar(class CInfoExchange * arg0, bool a2, 
 // Decompiled from int __cdecl CBuildingMgr::FillWeaponSideBar(int a1, char a2, int a3)
 void __cdecl CBuildingMgr::FillWeaponSideBar(class CInfoExchange * a1, bool a2, int a3) {
   
-  _DWORD *v4; // [esp+8h] [ebp-4h]
+  CBuilding *v4; // [esp+8h] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, (int)"MapObjects\\Building\\BuildingMgr.cpp", 1728, (int)"_pInfoExchange != 0") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1728, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !a3 && BBSupportDbgReport(2, (int)"MapObjects\\Building\\BuildingMgr.cpp", 1729, (int)"_iEntityId != 0") == 1 )
+  if ( a3 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1729, "_iEntityId != 0") == 1 )
   {
     __debugbreak();
   }
-  v4 = (_DWORD *)CBuildingMgr::operator[](a3);
+  v4 = (CBuilding *)((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(a3);
   CBuilding::Role(v4);
   return CProductionBuildingRole::FillWeaponSideBar(a1, a2);
 }
@@ -1786,19 +1784,19 @@ void __cdecl CBuildingMgr::FillWeaponSideBar(class CInfoExchange * a1, bool a2, 
 void __cdecl CBuildingMgr::FillGoodsOutSideBar(class CInfoExchange * a1, bool a2, int a3) {
   
   CTradingBuildingRole *v3; // [esp+0h] [ebp-Ch]
-  _DWORD *v4; // [esp+8h] [ebp-4h]
+  CBuilding *v4; // [esp+8h] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1752, "_pInfoExchange != 0") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1752, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !a3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1753, "_iEntityId != 0") == 1 )
+  if ( a3 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1753, "_iEntityId != 0") == 1 )
   {
     __debugbreak();
   }
-  v4 = (_DWORD *)CBuildingMgr::operator[](a3);
+  v4 = (CBuilding *)((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(a3);
   v3 = (CTradingBuildingRole *)CBuilding::Role(v4);
-  CTradingBuildingRole::FillGoodsOutSideBar(v3, a1, a2);
+  CTradingBuildingRole::FillGoodsOutSideBar(v3, (struct CPortGoodsOutBarInfo *)a1, a2);
 }
 
 
@@ -1807,19 +1805,19 @@ void __cdecl CBuildingMgr::FillGoodsOutSideBar(class CInfoExchange * a1, bool a2
 void __cdecl CBuildingMgr::FillTradeSideBar(class CInfoExchange * a1, bool a2, int a3) {
   
   CTradingBuildingRole *v3; // [esp+0h] [ebp-Ch]
-  _DWORD *v4; // [esp+8h] [ebp-4h]
+  CBuilding *v4; // [esp+8h] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1776, "_pInfoExchange != 0") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1776, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !a3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1777, "_iEntityId != 0") == 1 )
+  if ( a3 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1777, "_iEntityId != 0") == 1 )
   {
     __debugbreak();
   }
-  v4 = (_DWORD *)CBuildingMgr::operator[](a3);
+  v4 = (CBuilding *)((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(a3);
   v3 = (CTradingBuildingRole *)CBuilding::Role(v4);
-  CTradingBuildingRole::FillTradeSideBar(v3, a1, a2);
+  CTradingBuildingRole::FillTradeSideBar((CInternationalTrader **)v3, (struct CPortGoodsTradeBarInfo *)a1, a2);
 }
 
 
@@ -1828,19 +1826,19 @@ void __cdecl CBuildingMgr::FillTradeSideBar(class CInfoExchange * a1, bool a2, i
 void __cdecl CBuildingMgr::FillStorageSideBar(class CInfoExchange * a1, bool a2, int a3) {
   
   CStorageBuildingRole *v3; // [esp+0h] [ebp-Ch]
-  _DWORD *v4; // [esp+8h] [ebp-4h]
+  CBuilding *v4; // [esp+8h] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1800, "_pInfoExchange != 0") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1800, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !a3 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1801, "_iEntityId != 0") == 1 )
+  if ( a3 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1801, "_iEntityId != 0") == 1 )
   {
     __debugbreak();
   }
-  v4 = (_DWORD *)CBuildingMgr::operator[](a3);
+  v4 = (CBuilding *)((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(a3);
   v3 = (CStorageBuildingRole *)CBuilding::Role(v4);
-  CStorageBuildingRole::FillStorageSideBar(v3, a1, a2);
+  CStorageBuildingRole::FillStorageSideBar(v3, (struct CStorageSideBarInfo *)a1, a2);
 }
 
 
@@ -1859,7 +1857,7 @@ void __cdecl CBuildingMgr::FillEyeCatcherSideBar(class CInfoExchange * a1, bool 
   CEvn_Event v11; // [esp+18h] [ebp-28h] BYREF
   int v12; // [esp+3Ch] [ebp-4h]
 
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1824, "_pInfoExchange != 0") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1824, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
@@ -1868,12 +1866,12 @@ void __cdecl CBuildingMgr::FillEyeCatcherSideBar(class CInfoExchange * a1, bool 
         ++i )
   {
     m_uBuildingId = a1->m_sEyeCatcher[i].m_uBuildingId;
-    if ( m_uBuildingId )
+    if ( m_uBuildingId != 0 )
     {
       LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-      a1->m_sEyeCatcher[i].m_uCountBuilt = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, LocalPlayerId, m_uBuildingId, 1u);
+      a1->m_sEyeCatcher[i].m_uCountBuilt = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, LocalPlayerId, (S4_BUILDING_ENUM)m_uBuildingId, 1u);
       v3 = CPlayerManager::GetLocalPlayerId();
-      a1->m_sEyeCatcher[i].m_uCountTotal = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, m_uBuildingId, 0);
+      a1->m_sEyeCatcher[i].m_uCountTotal = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v3, (S4_BUILDING_ENUM)m_uBuildingId, 0);
       v4 = CPlayerManager::GetLocalPlayerId();
       v5 = CPlayerManager::Race(v4);
       BuildingInfo = (BYTE *)CBuildingInfoMgr::GetBuildingInfo(v5, m_uBuildingId);
@@ -1890,11 +1888,11 @@ void __cdecl CBuildingMgr::FillEyeCatcherSideBar(class CInfoExchange * a1, bool 
   }
   CEvn_Event::CEvn_Event(&v11, v8, 0, (unsigned int)a1, 0);
   v12 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1874, "g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1874, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v11);
   }
@@ -1910,15 +1908,15 @@ void __cdecl CBuildingMgr::FillAddVehicleSideBar(class CInfoExchange * a1, bool 
   CWorkshopBuildingRole *v3; // [esp+4h] [ebp-8h]
   CBuilding *v4; // [esp+8h] [ebp-4h]
 
-  if ( !arg0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1895, "_pInfoExchange != 0") == 1 )
+  if ( arg0 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1895, "_pInfoExchange != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !a1 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1896, "_iEntityId != 0") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 1896, "_iEntityId != 0") == 1 )
   {
     __debugbreak();
   }
-  v4 = CBuildingMgr::operator[](a1);
+  v4 = ((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(a1);
   v3 = (CWorkshopBuildingRole *)CBuilding::Role(v4);
   CWorkshopBuildingRole::FillAddVehicleSideBar(v3, &g_cVehicleSideBarInfo, a2);
 }
@@ -1946,8 +1944,8 @@ void  CBuildingMgr::Store(class S4::CMapFile & a2) {
   int v17; // [esp+ECh] [ebp-38h] BYREF
   int v18; // [esp+F0h] [ebp-34h]
   int v19; // [esp+F4h] [ebp-30h] BYREF
-  unsigned __int8 *v20; // [esp+F8h] [ebp-2Ch]
-  unsigned __int8 *v21; // [esp+FCh] [ebp-28h]
+  IEntity *v20; // [esp+F8h] [ebp-2Ch]
+  IEntity *v21; // [esp+FCh] [ebp-28h]
   int k; // [esp+100h] [ebp-24h]
   void *v23; // [esp+104h] [ebp-20h]
   int *v24; // [esp+108h] [ebp-1Ch]
@@ -1958,29 +1956,29 @@ void  CBuildingMgr::Store(class S4::CMapFile & a2) {
 
   v27 = &v4;
   v24 = (int *)this;
-  std::ostrstream::ostrstream(0, 0x40000, 0, 2, 1);
+  ((void (__stdcall *)(char *, int, int, int, int))std::ostrstream::ostrstream)(0, 0x40000, 0, 2, 1);
   v28 = 0;
   v7 = std::ios_base::exceptions((char *)v5 + *(_DWORD *)(v5[0] + 4));
   std::ios_base::exceptions((std::ios_base *)((char *)v5 + *(_DWORD *)(v5[0] + 4)), 6);
   LOBYTE(v28) = 1;
   v17 = 2;
-  operator^<unsigned int>((struct std::ostream *)v5, &v17);
+  operator^<unsigned int>((struct std::ostream *)v5, (unsigned int *)&v17);
   j = 0;
   k = 0;
   for ( i = 0;
         i < 9;
         ++i )
   {
-    operator^<int>((int)v5, &v24[i + 72884]);
-    operator^<int>((int)v5, &v24[i + 72875]);
+    operator^<int>((struct std::ostream *)v5, &v24[i + 72884]);
+    operator^<int>((struct std::ostream *)v5, &v24[i + 72875]);
     for ( j = 0;
           j < 20;
           ++j )
     {
-      operator^<int>((int)v5, &v24[20 * i + 72695 + j]);
+      operator^<int>((struct std::ostream *)v5, &v24[20 * i + 72695 + j]);
     }
   }
-  operator^<int>((int)v5, v24 + 6);
+  operator^<int>((struct std::ostream *)v5, v24 + 6);
   for ( i = 0;
         i < 9;
         ++i )
@@ -1989,7 +1987,7 @@ void  CBuildingMgr::Store(class S4::CMapFile & a2) {
           j < 83;
           ++j )
     {
-      operator^<unsigned int>((struct std::ostream *)v5, &v24[83 * i + 7 + j]);
+      operator^<unsigned int>((struct std::ostream *)v5, (unsigned int *)&v24[83 * i + 7 + j]);
     }
   }
   for ( i = 0;
@@ -2004,7 +2002,7 @@ void  CBuildingMgr::Store(class S4::CMapFile & a2) {
             k < 2;
             ++k )
       {
-        operator^<unsigned int>((struct std::ostream *)v5, &v24[166 * i + 754 + 2 * j + k]);
+        operator^<unsigned int>((struct std::ostream *)v5, (unsigned int *)&v24[166 * i + 754 + 2 * j + k]);
       }
     }
   }
@@ -2016,7 +2014,7 @@ void  CBuildingMgr::Store(class S4::CMapFile & a2) {
           j < 83;
           ++j )
     {
-      operator^<int>((int)v5, &v24[83 * i + 2248 + j]);
+      operator^<int>((struct std::ostream *)v5, &v24[83 * i + 2248 + j]);
     }
   }
   UsedId = CMapObjectMgr::LastUsedId();
@@ -2027,40 +2025,40 @@ void  CBuildingMgr::Store(class S4::CMapFile & a2) {
         ++i )
   {
     v15 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(i);
-    v20 = v15;
-    if ( v15 )
+    v20 = (IEntity *)v15;
+    if ( v15 != 0 )
     {
       v14 = IEntity::ObjType(v20);
-      if ( v14 == 8 || (v13 = IEntity::ObjType(v20), v13 == 10) )
+      if ( v14 == 8 || (v13 = IEntity::ObjType(v20)) == 10 )
       {
         ++v19;
       }
     }
   }
-  operator^<unsigned int>((struct std::ostream *)v5, &v19);
+  operator^<unsigned int>((struct std::ostream *)v5, (unsigned int *)&v19);
   for ( i = 0;
         i <= v18;
         ++i )
   {
     v12 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(i);
-    v21 = v12;
-    if ( v12 )
+    v21 = (IEntity *)v12;
+    if ( v12 != 0 )
     {
       v11 = IEntity::ObjType(v21);
-      if ( v11 == 8 || (v10 = IEntity::ObjType(v21), v10 == 10) )
+      if ( v11 == 8 || (v10 = IEntity::ObjType(v21)) == 10 )
       {
-        (*(void (__thiscall **)(unsigned __int8 *, _DWORD *))(*(_DWORD *)v21 + 4))(v21, v5);
+        v21->Store(v21, (struct std::ostream *)v5);
       }
     }
   }
   std::ostream::put(0);
   v28 = 0;
   std::ostrstream::freeze((std::ostrstream *)v5, 1);
-  v2 = std::ostrstream::rdbuf((std::ostrstream *)v5);
+  v2 = (struct std::strstreambuf *)std::ostrstream::rdbuf((std::ostrstream *)v5);
   Size = std::strstreambuf::pcount(v2);
-  std::ostrstream::str((CDaoIndexFieldInfo *)v5);
+  std::ostrstream::str(v5);
   Src = v3;
-  S4::CMapFile::SaveChunk(162, 0, Size, v3, 0);
+  ((void (__stdcall *)(__int16, __int16, size_t, void *, char))S4::CMapFile::SaveChunk)(162, 0, Size, v3, 0);
   std::ostrstream::freeze((std::ostrstream *)v5, 0);
   std::ios_base::exceptions((std::ios_base *)((char *)v5 + *(_DWORD *)(v5[0] + 4)), v7);
   LOBYTE(v28) = 3;
@@ -2072,7 +2070,7 @@ void  CBuildingMgr::Store(class S4::CMapFile & a2) {
   memcpy((char *)v23 + 2, (char *)v24 + 288731, 0x400u);
   memcpy((char *)v23 + 1026, (char *)v24 + 289755, 0x400u);
   memcpy((char *)v23 + 2050, (char *)v24 + 11981, 0x4390Eu);
-  S4::CMapFile::SaveChunk(182, 0, 0x44112u, v23, 0);
+  ((void (__stdcall *)(__int16, __int16, size_t, void *, char))S4::CMapFile::SaveChunk)(182, 0, 0x44112u, v23, 0);
   v5[42] = v23;
   operator delete(v23);
   v28 = -1;
@@ -2088,11 +2086,11 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
   _DWORD v3[42]; // [esp+4h] [ebp-114h] BYREF
   size_t v4; // [esp+ACh] [ebp-6Ch] BYREF
   unsigned int v5; // [esp+B0h] [ebp-68h]
-  int v6; // [esp+B4h] [ebp-64h] BYREF
+  unsigned int v6; // [esp+B4h] [ebp-64h] BYREF
   int v7; // [esp+B8h] [ebp-60h] BYREF
   int pExceptionObject; // [esp+BCh] [ebp-5Ch] BYREF
   unsigned int v9; // [esp+C0h] [ebp-58h] BYREF
-  int v10; // [esp+C4h] [ebp-54h]
+  unsigned int v10; // [esp+C4h] [ebp-54h]
   char *Str; // [esp+C8h] [ebp-50h]
   int v12; // [esp+CCh] [ebp-4Ch]
   int n; // [esp+D0h] [ebp-48h]
@@ -2102,18 +2100,18 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
   CBuildingMgr *v17; // [esp+E0h] [ebp-38h]
   int m; // [esp+E4h] [ebp-34h]
   int k; // [esp+E8h] [ebp-30h]
-  _BYTE v20[28]; // [esp+ECh] [ebp-2Ch] BYREF
+  std::string v20; // [esp+ECh] [ebp-2Ch] BYREF
   int v21; // [esp+114h] [ebp-4h]
 
   v17 = this;
   CTrace::Print("BuildingMgr load");
   v7 = 0;
-  Str = (char *)S4::CMapFile::LoadChunk(a2, 0xA2u, 0, &v7, 0);
-  if ( Str )
+  Str = (char *)S4::CMapFile::LoadChunk(a2, MAP_CHUNK_SAVE_BUILDINGS, 0, &v7, 0);
+  if ( Str != 0 )
   {
-    std::string::string(v20, Str);
+    std::string::string(&v20, Str);
     v21 = 0;
-    std::istringstream::istringstream(v20, 1, 1);
+    std::istringstream::istringstream((int)&v20, 1, 1);
     LOBYTE(v21) = 1;
     v5 = std::ios_base::exceptions((char *)v3 + *(_DWORD *)(v3[0] + 4));
     std::ios_base::exceptions((std::ios_base *)((char *)v3 + *(_DWORD *)(v3[0] + 4)), 6);
@@ -2133,17 +2131,17 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
             i < 9;
             ++i )
       {
-        operator^<int>((int)v3, (int)v17 + 4 * i + 291536);
-        operator^<int>((int)v3, (int)v17 + 4 * i + 291500);
+        operator^<int>((struct std::istream *)v3, (int *)v17 + i + 72884);
+        operator^<int>((struct std::istream *)v3, (int *)v17 + i + 72875);
         for ( j = 0;
               j < 20;
               ++j )
         {
-          operator^<int>((int)v3, (int)v17 + 80 * i + 4 * j + 290780);
+          operator^<int>((struct std::istream *)v3, (int *)v17 + 20 * i + j + 72695);
         }
       }
     }
-    operator^<int>((int)v3, (int)v17 + 24);
+    operator^<int>((struct std::istream *)v3, (int *)v17 + 6);
     m = 0;
     n = 0;
     for ( k = 0;
@@ -2154,7 +2152,7 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
             m < 83;
             ++m )
       {
-        operator^<unsigned int>(v3, (char *)v17 + 332 * k + 4 * m + 28);
+        operator^<unsigned int>(v3, (unsigned int *)v17 + 83 * k + m + 7);
       }
     }
     for ( k = 0;
@@ -2169,7 +2167,7 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
               n < 2;
               ++n )
         {
-          operator^<unsigned int>(v3, (char *)v17 + 664 * k + 8 * m + 4 * n + 3016);
+          operator^<unsigned int>(v3, (unsigned int *)v17 + 166 * k + 2 * m + n + 754);
         }
       }
     }
@@ -2181,7 +2179,7 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
             m < 83;
             ++m )
       {
-        operator^<int>((int)v3, (int)v17 + 332 * k + 4 * m + 8992);
+        operator^<int>((struct std::istream *)v3, (int *)v17 + 83 * k + m + 2248);
       }
     }
     v9 = 0;
@@ -2190,20 +2188,20 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
           k < v9;
           ++k )
     {
-      v12 = CPersistence::New(v3, v2);
-      if ( !v12 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 377, "pNewBulding != NULL") == 1 )
+      v12 = ((int (__cdecl *)(_DWORD *, int))CPersistence::New)(v3, v2);
+      if ( v12 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 377, "pNewBulding != NULL") == 1 )
       {
         __debugbreak();
       }
-      if ( v12 )
+      if ( v12 != 0 )
       {
         (*(void (__thiscall **)(int))(*(_DWORD *)v12 + 12))(v12);
       }
     }
     std::ios_base::exceptions((std::ios_base *)((char *)v3 + *(_DWORD *)(v3[0] + 4)), v5);
     v4 = 0;
-    v15 = S4::CMapFile::LoadChunk(a2, 0xB6u, 0, &v7, &v4);
-    if ( !v15 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 404, "pDiggertab != NULL") == 1 )
+    v15 = S4::CMapFile::LoadChunk(a2, MAP_CHUNK_SAVE_GROUPS|MAP_CHUNK_SCRIPT|0x20, 0, &v7, &v4);
+    if ( v15 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 404, "pDiggertab != NULL") == 1 )
     {
       __debugbreak();
     }
@@ -2218,11 +2216,11 @@ void  CBuildingMgr::Load(class S4::CMapFile & a2) {
     memcpy((char *)v17 + 288731, v15 + 1, 0x400u);
     memcpy((char *)v17 + 289755, v15 + 513, 0x400u);
     memcpy((char *)v17 + 11981, v15 + 1025, 0x4390Eu);
-    S4::CMapFile::CloseChunk(a2, 0xB6u, 0);
+    S4::CMapFile::CloseChunk(a2, MAP_CHUNK_SAVE_GROUPS|MAP_CHUNK_SCRIPT|0x20, 0);
     LOBYTE(v21) = 0;
     std::istringstream::`vbase destructor'(v3);
     v21 = -1;
-    std::string::~string(v20);
+    std::string::~string(&v20);
   }
 }
 
@@ -2243,26 +2241,26 @@ void  CBuildingMgr::ChangeOwnerIdOfBuilding(int a2, int a3) {
   {
     __debugbreak();
   }
-  BuildingPtr = (IEntity *)CBuildingMgr::GetBuildingPtr(this, a2);
-  if ( !BuildingPtr && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 3570, "pBuilding != 0") == 1 )
+  BuildingPtr = CBuildingMgr::GetBuildingPtr(this, a2);
+  if ( BuildingPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 3570, "pBuilding != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !IEntity::FlagBits(BuildingPtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 3571, "pBuilding->FlagBits(ENTITY_FLAG_READY) != 0") == 1 )
+  if ( IEntity::FlagBits(BuildingPtr, (EntityFlag)((char *)&loc_1FFFFFF + 1)) == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 3571, "pBuilding->FlagBits(ENTITY_FLAG_READY) != 0") == 1 )
   {
     __debugbreak();
   }
-  v3 = IEntity::OwnerId((unsigned __int8 *)BuildingPtr);
-  v6 = IEntity::Type((unsigned __int16 *)BuildingPtr);
+  v3 = IEntity::OwnerId(BuildingPtr);
+  v6 = IEntity::Type(BuildingPtr);
   if ( v3 != a3 )
   {
-    CBuildingMgr::ChangeNumberOfBuildings(this, v3, v6, 1, -1);
+    CBuildingMgr::ChangeNumberOfBuildings(this, v3, v6, 1u, -1);
     CBuildingMgr::DetachBuilding(this, v3, v6, a2);
-    CStatistic::DecBuilding((CStatistic *)&g_cStatistic, v3, v6, 1);
+    CStatistic::DecBuilding(&g_cStatistic, v3, (S4_BUILDING_ENUM)v6, 1);
     IEntity::SetOwnerId(BuildingPtr, a3);
     CBuildingMgr::AttachBuilding(this, a3, v6, a2);
-    CBuildingMgr::ChangeNumberOfBuildings(this, a3, v6, 1, 1);
-    CStatistic::AddBuilding((CStatistic *)&g_cStatistic, a3, v6, 1);
+    CBuildingMgr::ChangeNumberOfBuildings(this, a3, v6, 1u, 1);
+    CStatistic::AddBuilding(&g_cStatistic, a3, v6, 1);
   }
 }
 
@@ -2289,19 +2287,19 @@ void  CBuildingMgr::CalculateNumberOfBuildingsInEcoSector(int a2, int a3, int a4
   v10 = (int)result;
   *a5 = 0;
   *a6 = 0;
-  while ( v10 )
+  while ( v10 != 0 )
   {
-    result = CBuildingMgr::GetBuildingPtr(this, v10);
+    result = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr(this, v10);
     v11 = result;
-    if ( result )
+    if ( result != 0 )
     {
-      if ( IEntity::FlagBits(result, (EntityFlag)&loc_3000000) )
+      if ( IEntity::FlagBits((IEntity *)result, (EntityFlag)&loc_3000000) != 0 )
       {
         v7 = CBuilding::EnsignPackedXY(v11);
         v8 = CWorldManager::Index(v7);
         if ( ITiling::EcoSectorId(v8) == a4 )
         {
-          if ( IEntity::FlagBits(v11, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+          if ( IEntity::FlagBits((IEntity *)v11, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0 )
           {
             ++*a6;
           }
@@ -2353,7 +2351,7 @@ bool  CBuildingMgr::IsPositionNearMKHPosition(int a2, int a3) {
   int v7; // [esp+Ch] [ebp-Ch]
   int i; // [esp+14h] [ebp-4h]
 
-  if ( !*((_DWORD *)this + a3 + 72875) )
+  if ( *((_DWORD *)this + a3 + 72875) == 0 )
   {
     return 0;
   }
@@ -2365,7 +2363,7 @@ bool  CBuildingMgr::IsPositionNearMKHPosition(int a2, int a3) {
   {
     v6 = Y16X16::UnpackXFast(*((_DWORD *)this + 20 * a3 + i + 72695));
     v7 = Y16X16::UnpackYFast(*((_DWORD *)this + 20 * a3 + i + 72695));
-    if ( (int)Grid::Distance(v4, v5, v6, v7, v4) < 25 )
+    if ( (int)((int (__cdecl *)(Grid *, int, int, int, Grid *))Grid::Distance)(v4, v5, v6, v7, v4) < 25 )
     {
       return 1;
     }
@@ -2388,13 +2386,13 @@ int  CBuildingMgr::EcoSectorId(int a2)const {
   
   unsigned __int8 *BuildingPtr; // eax
 
-  BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
+  BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a2);
   return CBuilding::EcoSectorId(BuildingPtr);
 }
 
 
 // address=[0x14eb280]
-// Decompiled from unsigned int __thiscall CBuildingMgr::Alloc(unsigned int *this, unsigned int a2)
+// Decompiled from uint __thiscall CBuildingMgr::Alloc(MemoryAllocator *this, uint a2)
 void *  CBuildingMgr::Alloc(unsigned int a2) {
   
   return MemoryAllocator::allocate(this, a2);
@@ -2402,7 +2400,7 @@ void *  CBuildingMgr::Alloc(unsigned int a2) {
 
 
 // address=[0x14eb3c0]
-// Decompiled from void __thiscall CBuildingMgr::Dealloc(CBuildingMgr *this, void *a2)
+// Decompiled from void __thiscall CBuildingMgr::Dealloc(MemoryAllocator *this, uint *a2)
 void  CBuildingMgr::Dealloc(void * a2) {
   
   MemoryAllocator::deallocate(this, a2);
@@ -2444,7 +2442,7 @@ int  CBuildingMgr::CheckForBuildWater(int a2, int a3, int a4, int a5, int a6) {
   int v35; // [esp+A0h] [ebp-8Ch]
   unsigned int v36; // [esp+A4h] [ebp-88h]
   int v37; // [esp+A8h] [ebp-84h]
-  int v38; // [esp+ACh] [ebp-80h]
+  DWORD v38; // [esp+ACh] [ebp-80h]
   int v39; // [esp+B0h] [ebp-7Ch]
   int v40; // [esp+B4h] [ebp-78h]
   int v41; // [esp+B8h] [ebp-74h]
@@ -2480,7 +2478,7 @@ int  CBuildingMgr::CheckForBuildWater(int a2, int a3, int a4, int a5, int a6) {
   v27 = this;
   v59 = CWorldManager::Index(a2, a3);
   v26[9] = 95;
-  if ( CWorldManager::FlagBits(v59, 0x5Fu) || ITiling::OwnerId(v59) != a4 )
+  if ( CWorldManager::FlagBits(v59, 0x5Fu) != 0 || ITiling::OwnerId(v59) != a4 )
   {
     return -1;
   }
@@ -2492,7 +2490,7 @@ int  CBuildingMgr::CheckForBuildWater(int a2, int a3, int a4, int a5, int a6) {
           ++i )
     {
       v40 = v59 + CWorldManager::NeighborRelIndex(i);
-      if ( CWorldManager::FlagBits(v40, 0x5Fu) )
+      if ( CWorldManager::FlagBits(v40, 0x5Fu) != 0 )
       {
         return -1;
       }
@@ -2516,12 +2514,12 @@ int  CBuildingMgr::CheckForBuildWater(int a2, int a3, int a4, int a5, int a6) {
     v7 = 4;
     v61 = "4";
   }
-  if ( !v61 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 3731, "pCheckBuildingTypes != 0") == 1 )
+  if ( v61 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 3731, "pCheckBuildingTypes != 0") == 1 )
   {
     __debugbreak();
   }
-  v49 = CWorldManager::Width(v7) - 1;
-  v9 = CWorldManager::Width(v8);
+  v49 = ((int (__thiscall *)(int))CWorldManager::Width)(v7) - 1;
+  v9 = ((int (__thiscall *)(int))CWorldManager::Width)(v8);
   if ( v9 != CWorldManager::Height() && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 3737, "g_cWorld.Width() == g_cWorld.Height()") == 1 )
   {
     __debugbreak();
@@ -2551,32 +2549,32 @@ int  CBuildingMgr::CheckForBuildWater(int a2, int a3, int a4, int a5, int a6) {
     {
       v47 = a2 + BuildingInfo[42];
       v48 = a3 + BuildingInfo[43];
-      if ( !(unsigned __int8)CWorldManager::InWorld(v47, v48) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 3777, "g_cWorld.InWorld(iWorkPosX, iWorkPosY)") == 1 )
+      if ( !CWorldManager::InWorld(v47, v48) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 3777, "g_cWorld.InWorld(iWorkPosX, iWorkPosY)") == 1 )
       {
         __debugbreak();
       }
       v37 = CWorldManager::Index(v47, v48);
       if ( !CWaterFlags::IsBlockedWater(v37) )
       {
-        v10 = std::vector<unsigned int>::operator[](0);
-        v11 = std::vector<unsigned int>::size(BuildingInfo + 720, v10, 95);
-        if ( (*(unsigned __int8 (__thiscall **)(void *, int, int, int, int, int))(*(_DWORD *)g_pTiling + 64))(g_pTiling, a2 - *BuildingInfo, a3 - BuildingInfo[1], v11, v17, v18) )
+        v10 = ((int (__stdcall *)(_DWORD))std::vector<unsigned int>::operator[])(0);
+        v11 = ((int (__thiscall *)(char *, int, int))std::vector<unsigned int>::size)(BuildingInfo + 720, v10, 95);
+        if ( ((unsigned __int8 (__thiscall *)(CTiling *, int, int, int, int, int))g_pTiling->CheckFlagBits)(g_pTiling, a2 - *BuildingInfo, a3 - BuildingInfo[1], v11, v17, v18) != 0 )
         {
           v64 = 0;
-          CBuildingFlagsWalk::CBuildingFlagsWalk(a2, a3, *BuildingInfo, BuildingInfo[1], BuildingInfo + 784);
-          while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v26) )
+          ((void (__stdcall *)(int, int, _DWORD, _DWORD, char *))CBuildingFlagsWalk::CBuildingFlagsWalk)(a2, a3, *BuildingInfo, BuildingInfo[1], BuildingInfo + 784);
+          while ( CBuildingFlagsWalk::NextPosition((CBuildingFlagsWalk *)v26) != 0 )
           {
-            v19 = CBuildingFlagsWalk::CurrentY(v26);
-            v12 = CBuildingFlagsWalk::CurrentX(v26);
+            v19 = CBuildingFlagsWalk::CurrentY((CBuildingFlagsWalk *)v26);
+            v12 = CBuildingFlagsWalk::CurrentX((CBuildingFlagsWalk *)v26);
             v56 = CWorldManager::Index(v12, v19);
             LOBYTE(v55) = CWorldManager::Ground(v56) & 0xF0;
             v55 = (unsigned __int8)v55;
             v45 = CWorldManager::Flags(v56);
-            if ( v55 )
+            if ( v55 != 0 )
             {
               HIDWORD(v46) = v55 == 48;
               LODWORD(v46) = v55 == 16;
-              if ( !v46 || (v45 & 0x5F) != 0 )
+              if ( v46 == 0 || (v45 & 0x5F) != 0 )
               {
 LABEL_50:
                 v64 = -1;
@@ -2595,11 +2593,11 @@ LABEL_50:
           if ( v64 > v53 )
           {
             v67 = 1;
-            CBuildingFlagsWalk::CBuildingFlagsWalk(a2, a3, *BuildingInfo, BuildingInfo[1], BuildingInfo + 800);
-            while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v25) )
+            ((void (__stdcall *)(int, int, _DWORD, _DWORD, char *))CBuildingFlagsWalk::CBuildingFlagsWalk)(a2, a3, *BuildingInfo, BuildingInfo[1], BuildingInfo + 800);
+            while ( CBuildingFlagsWalk::NextPosition((CBuildingFlagsWalk *)v25) != 0 )
             {
-              v20 = CBuildingFlagsWalk::CurrentY(v25);
-              v13 = CBuildingFlagsWalk::CurrentX(v25);
+              v20 = CBuildingFlagsWalk::CurrentY((CBuildingFlagsWalk *)v25);
+              v13 = CBuildingFlagsWalk::CurrentX((CBuildingFlagsWalk *)v25);
               v44 = CWorldManager::Index(v13, v20);
               v36 = CWorldManager::Flags(v44);
               v35 = CWaterFlags::WaterFlags(v44);
@@ -2609,14 +2607,14 @@ LABEL_50:
                 break;
               }
             }
-            if ( v67 )
+            if ( v67 != 0 )
             {
               v66 = 1;
-              CBuildingFlagsWalk::CBuildingFlagsWalk(a2, a3, *BuildingInfo, BuildingInfo[1], BuildingInfo + 832);
-              while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v24) )
+              ((void (__stdcall *)(int, int, _DWORD, _DWORD, char *))CBuildingFlagsWalk::CBuildingFlagsWalk)(a2, a3, *BuildingInfo, BuildingInfo[1], BuildingInfo + 832);
+              while ( CBuildingFlagsWalk::NextPosition((CBuildingFlagsWalk *)v24) != 0 )
               {
-                v21 = CBuildingFlagsWalk::CurrentY(v24);
-                v14 = CBuildingFlagsWalk::CurrentX(v24);
+                v21 = CBuildingFlagsWalk::CurrentY((CBuildingFlagsWalk *)v24);
+                v14 = CBuildingFlagsWalk::CurrentX((CBuildingFlagsWalk *)v24);
                 v43 = CWorldManager::Index(v14, v21);
                 v34 = CWorldManager::Flags(v43);
                 v33 = CWaterFlags::WaterFlags(v43);
@@ -2626,14 +2624,14 @@ LABEL_50:
                   break;
                 }
               }
-              if ( v66 )
+              if ( v66 != 0 )
               {
                 v69 = 1;
-                CBuildingFlagsWalk::CBuildingFlagsWalk(a2, a3, *BuildingInfo, BuildingInfo[1], BuildingInfo + 720);
-                while ( (unsigned __int8)CBuildingFlagsWalk::NextPosition(v23) )
+                ((void (__stdcall *)(int, int, _DWORD, _DWORD, char *))CBuildingFlagsWalk::CBuildingFlagsWalk)(a2, a3, *BuildingInfo, BuildingInfo[1], BuildingInfo + 720);
+                while ( CBuildingFlagsWalk::NextPosition((CBuildingFlagsWalk *)v23) != 0 )
                 {
-                  v22 = CBuildingFlagsWalk::CurrentY(v23);
-                  v15 = CBuildingFlagsWalk::CurrentX(v23);
+                  v22 = CBuildingFlagsWalk::CurrentY((CBuildingFlagsWalk *)v23);
+                  v15 = CBuildingFlagsWalk::CurrentX((CBuildingFlagsWalk *)v23);
                   v54 = CWorldManager::Index(v15, v22);
                   v32 = CWorldManager::OwnerId(v54);
                   if ( v32 != a4 )
@@ -2656,25 +2654,22 @@ LABEL_50:
                     {
                       v16 = CWorldManager::NeighborRelIndex(k);
                       v31 = v54 + v16;
-                      if ( CWorldManager::FlagBits(v54 + v16, 0x5Fu) )
+                      if ( CWorldManager::FlagBits(v54 + v16, 0x5Fu) != 0 )
                       {
                         v69 = 0;
                         break;
                       }
                     }
-                    if ( !v69 )
+                    if ( v69 == 0 )
                     {
                       break;
                     }
                   }
                 }
-                if ( v69 )
+                if ( v69 != 0 && v64 > v53 )
                 {
-                  if ( v64 > v53 )
-                  {
-                    v53 = v64;
-                    v65 = j;
-                  }
+                  v53 = v64;
+                  v65 = j;
                 }
               }
             }
@@ -2685,7 +2680,7 @@ LABEL_50:
   }
   if ( v65 >= 0 )
   {
-    if ( g_bDbgDisableAdditionalWaterBuildingCheck )
+    if ( g_bDbgDisableAdditionalWaterBuildingCheck != 0 )
     {
       a6 = 100;
     }
@@ -2698,8 +2693,8 @@ LABEL_50:
             m < 2;
             ++m )
       {
-        v28 = g_sNeighborPoints[2 * v62] + a2;
-        v29 = MEMORY[0x37D8C0C][2 * v62] + a3;
+        v28 = g_sNeighborPoints[v62].x + a2;
+        v29 = g_sNeighborPoints[v62].y + a3;
         if ( (int)CBuildingMgr::CheckForBuildWater(v27, v28, v29, a4, a5, v30) > 0 )
         {
           v65 = -1;
@@ -2788,7 +2783,7 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
   if ( a3 )
   {
     C = (CBuildingSiteRole *)operator new(0x1C8u);
-    if ( C )
+    if ( C != 0 )
     {
       return CBuildingSiteRole::CBuildingSiteRole(C);
     }
@@ -2799,11 +2794,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
   }
   else
   {
-    switch ( *(_BYTE *)(CBuildingInfoMgr::GetBuildingInfo(a2, a1) + 477) )
+    switch ( CBuildingInfoMgr::GetBuildingInfo(a2, a1)->m_iBuildingKind )
     {
       case 1:
         v47 = (CSimpleBuildingRole *)operator new(0x180u);
-        if ( v47 )
+        if ( v47 != 0 )
         {
           v46 = CSimpleBuildingRole::CSimpleBuildingRole(v47);
         }
@@ -2811,11 +2806,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v46 = 0;
         }
-        result = v46;
+        result = (CBuildingSiteRole *)v46;
         break;
       case 2:
         v45 = (CWorkUpBuildingRole *)operator new(0x190u);
-        if ( v45 )
+        if ( v45 != 0 )
         {
           v44 = CWorkUpBuildingRole::CWorkUpBuildingRole(v45);
         }
@@ -2823,11 +2818,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v44 = 0;
         }
-        result = v44;
+        result = (CBuildingSiteRole *)v44;
         break;
       case 3:
         v43 = (CAnimalRanchRole *)operator new(0x194u);
-        if ( v43 )
+        if ( v43 != 0 )
         {
           v42 = CAnimalRanchRole::CAnimalRanchRole(v43);
         }
@@ -2835,11 +2830,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v42 = 0;
         }
-        result = v42;
+        result = (CBuildingSiteRole *)v42;
         break;
       case 4:
         v41 = (CProductionBuildingRole *)operator new(0x1B0u);
-        if ( v41 )
+        if ( v41 != 0 )
         {
           v40 = CProductionBuildingRole::CProductionBuildingRole(v41);
         }
@@ -2847,11 +2842,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v40 = 0;
         }
-        result = v40;
+        result = (CBuildingSiteRole *)v40;
         break;
       case 5:
         v39 = (CWorkshopBuildingRole *)operator new(0x19Cu);
-        if ( v39 )
+        if ( v39 != 0 )
         {
           v38 = CWorkshopBuildingRole::CWorkshopBuildingRole(v39);
         }
@@ -2859,11 +2854,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v38 = 0;
         }
-        result = v38;
+        result = (CBuildingSiteRole *)v38;
         break;
       case 6:
         v37 = (CGatherBuildingRole *)operator new(0x180u);
-        if ( v37 )
+        if ( v37 != 0 )
         {
           v36 = CGatherBuildingRole::CGatherBuildingRole(v37);
         }
@@ -2871,11 +2866,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v36 = 0;
         }
-        result = v36;
+        result = (CBuildingSiteRole *)v36;
         break;
       case 7:
         v35 = (CMineRole *)operator new(0x1BCu);
-        if ( v35 )
+        if ( v35 != 0 )
         {
           v34 = CMineRole::CMineRole(v35);
         }
@@ -2883,11 +2878,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v34 = 0;
         }
-        result = v34;
+        result = (CBuildingSiteRole *)v34;
         break;
       case 8:
         v33 = (CFarmBuildingRole *)operator new(0x180u);
-        if ( v33 )
+        if ( v33 != 0 )
         {
           v32 = CFarmBuildingRole::CFarmBuildingRole(v33);
         }
@@ -2895,11 +2890,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v32 = 0;
         }
-        result = v32;
+        result = (CBuildingSiteRole *)v32;
         break;
       case 9:
         v31 = (CLookoutTowerRole *)operator new(0x180u);
-        if ( v31 )
+        if ( v31 != 0 )
         {
           v30 = CLookoutTowerRole::CLookoutTowerRole(v31);
         }
@@ -2907,11 +2902,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v30 = 0;
         }
-        result = v30;
+        result = (CBuildingSiteRole *)v30;
         break;
       case 0xA:
         v29 = (CMilitaryBuildingRole *)operator new(0x1B8u);
-        if ( v29 )
+        if ( v29 != 0 )
         {
           v28 = CMilitaryBuildingRole::CMilitaryBuildingRole(v29);
         }
@@ -2919,11 +2914,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v28 = 0;
         }
-        result = v28;
+        result = (CBuildingSiteRole *)v28;
         break;
       case 0xB:
         v27 = (CBarrackRole *)operator new(0x190u);
-        if ( v27 )
+        if ( v27 != 0 )
         {
           v26 = CBarrackRole::CBarrackRole(v27);
         }
@@ -2931,11 +2926,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v26 = 0;
         }
-        result = v26;
+        result = (CBuildingSiteRole *)v26;
         break;
       case 0xC:
         v25 = (CStorageBuildingRole *)operator new(0x1BCu);
-        if ( v25 )
+        if ( v25 != 0 )
         {
           v24 = CStorageBuildingRole::CStorageBuildingRole(v25);
         }
@@ -2943,11 +2938,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v24 = 0;
         }
-        result = v24;
+        result = (CBuildingSiteRole *)v24;
         break;
       case 0xD:
         v23 = (CTradingBuildingRole *)operator new(0x2B4u);
-        if ( v23 )
+        if ( v23 != 0 )
         {
           v22 = CTradingBuildingRole::CTradingBuildingRole(v23);
         }
@@ -2955,11 +2950,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v22 = 0;
         }
-        result = v22;
+        result = (CBuildingSiteRole *)v22;
         break;
       case 0xE:
         v21 = (CResidenceBuildingRole *)operator new(0x180u);
-        if ( v21 )
+        if ( v21 != 0 )
         {
           v20 = CResidenceBuildingRole::CResidenceBuildingRole(v21);
         }
@@ -2967,11 +2962,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v20 = 0;
         }
-        result = v20;
+        result = (CBuildingSiteRole *)v20;
         break;
       case 0xF:
         v19 = (CCastleRole *)operator new(0x1C0u);
-        if ( v19 )
+        if ( v19 != 0 )
         {
           v18 = CCastleRole::CCastleRole(v19);
         }
@@ -2979,11 +2974,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v18 = 0;
         }
-        result = v18;
+        result = (CBuildingSiteRole *)v18;
         break;
       case 0x10:
         v17 = (CSmallTempleRole *)operator new(0x184u);
-        if ( v17 )
+        if ( v17 != 0 )
         {
           v16 = CSmallTempleRole::CSmallTempleRole(v17);
         }
@@ -2991,11 +2986,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v16 = 0;
         }
-        result = v16;
+        result = (CBuildingSiteRole *)v16;
         break;
       case 0x11:
         v15 = (CBigTempleRole *)operator new(0x180u);
-        if ( v15 )
+        if ( v15 != 0 )
         {
           v14 = CBigTempleRole::CBigTempleRole(v15);
         }
@@ -3003,11 +2998,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v14 = 0;
         }
-        result = v14;
+        result = (CBuildingSiteRole *)v14;
         break;
       case 0x12:
         v13 = (CDarkTempleRole *)operator new(0x1B4u);
-        if ( v13 )
+        if ( v13 != 0 )
         {
           v12 = CDarkTempleRole::CDarkTempleRole(v13);
         }
@@ -3015,11 +3010,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v12 = 0;
         }
-        result = v12;
+        result = (CBuildingSiteRole *)v12;
         break;
       case 0x13:
         v11 = (CEyeCatcherRole *)operator new(0x17Cu);
-        if ( v11 )
+        if ( v11 != 0 )
         {
           v10 = CEyeCatcherRole::CEyeCatcherRole(v11);
         }
@@ -3027,11 +3022,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v10 = 0;
         }
-        result = v10;
+        result = (CBuildingSiteRole *)v10;
         break;
       case 0x14:
         v9 = (CDarkMushroomFarmRole *)operator new(0x19Cu);
-        if ( v9 )
+        if ( v9 != 0 )
         {
           v8 = CDarkMushroomFarmRole::CDarkMushroomFarmRole(v9);
         }
@@ -3039,11 +3034,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v8 = 0;
         }
-        result = v8;
+        result = (CBuildingSiteRole *)v8;
         break;
       case 0x15:
         v7 = (CManakopterHallRole *)operator new(0x198u);
-        if ( v7 )
+        if ( v7 != 0 )
         {
           v6 = CManakopterHallRole::CManakopterHallRole(v7);
         }
@@ -3051,11 +3046,11 @@ class IBuildingRole * __cdecl CBuildingMgr::CreateBuildingRole(int a1, int a2, b
         {
           v6 = 0;
         }
-        result = v6;
+        result = (CBuildingSiteRole *)v6;
         break;
       default:
         BuildingName = CS4DefineNames::GetBuildingName(a1);
-        if ( BuildingName )
+        if ( BuildingName != 0 )
         {
           v4 = BuildingName;
         }
@@ -3120,7 +3115,7 @@ class IBuildingRole * __cdecl CBuildingMgr::LoadBuildingRole(std::istream & a1, 
       result = CMilitaryBuildingRole::Load(a1);
       break;
     case 11:
-      result = CBarrackRole::Load(a1);
+      result = CBarrackRole::Load((struct std::istream *)a1);
       break;
     case 12:
       result = CStorageBuildingRole::Load(a1);
@@ -3138,7 +3133,7 @@ class IBuildingRole * __cdecl CBuildingMgr::LoadBuildingRole(std::istream & a1, 
       result = CSmallTempleRole::Load(a1);
       break;
     case 17:
-      result = CBigTempleRole::Load(a1);
+      result = CBigTempleRole::Load((struct std::istream *)a1);
       break;
     case 18:
       result = CDarkTempleRole::Load(a1);
@@ -3171,7 +3166,7 @@ int  CBuildingMgr::CheckForBuildCalc(int a2, int a3, int a4, int a5, int a6, int
   
   int v7; // ecx
   int v8; // ecx
-  void *v9; // eax
+  CPlayerInfo *v9; // eax
   _DWORD *v10; // eax
   int result; // eax
   _BYTE v12[12]; // [esp+8h] [ebp-C8h] BYREF
@@ -3190,7 +3185,7 @@ int  CBuildingMgr::CheckForBuildCalc(int a2, int a3, int a4, int a5, int a6, int
   std::_Iterator_base12 *v25; // [esp+4Ch] [ebp-84h]
   int v26; // [esp+50h] [ebp-80h]
   int v27; // [esp+54h] [ebp-7Ch]
-  int v28; // [esp+58h] [ebp-78h]
+  DWORD v28; // [esp+58h] [ebp-78h]
   int v29; // [esp+5Ch] [ebp-74h]
   int v30; // [esp+60h] [ebp-70h]
   int v31; // [esp+64h] [ebp-6Ch]
@@ -3218,7 +3213,7 @@ int  CBuildingMgr::CheckForBuildCalc(int a2, int a3, int a4, int a5, int a6, int
   int v53; // [esp+CCh] [ebp-4h]
 
   v50 = this;
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2208, "g_cWorld.InWorld(_iXPos, _iYPos)") == 1 )
+  if ( !CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2208, "g_cWorld.InWorld(_iXPos, _iYPos)") == 1 )
   {
     __debugbreak();
   }
@@ -3239,7 +3234,7 @@ int  CBuildingMgr::CheckForBuildCalc(int a2, int a3, int a4, int a5, int a6, int
   {
     __debugbreak();
   }
-  if ( a3 + 15 >= CWorldManager::Height(v7, 0) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2213, "_iYPos+MAX_DIG_RANGE < g_cWorld.Height()") == 1 )
+  if ( a3 + 15 >= ((int (__fastcall *)(int, _DWORD))CWorldManager::Height)(v7, 0) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2213, "_iYPos+MAX_DIG_RANGE < g_cWorld.Height()") == 1 )
   {
     __debugbreak();
   }
@@ -3248,7 +3243,7 @@ int  CBuildingMgr::CheckForBuildCalc(int a2, int a3, int a4, int a5, int a6, int
   {
     __debugbreak();
   }
-  if ( a2 + 15 >= CWorldManager::Width(v8) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2215, "_iXPos+MAX_DIG_RANGE < g_cWorld.Width()") == 1 )
+  if ( a2 + 15 >= ((int (__thiscall *)(int))CWorldManager::Width)(v8) && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2215, "_iXPos+MAX_DIG_RANGE < g_cWorld.Width()") == 1 )
   {
     __debugbreak();
   }
@@ -3265,9 +3260,9 @@ int  CBuildingMgr::CheckForBuildCalc(int a2, int a3, int a4, int a5, int a6, int
       *((_BYTE *)v50 + 32 * j + i + 289755) = 0;
       v43 = a2 + j - 15;
       *((_BYTE *)v50 + 32 * j + i + 288731) = CWorldManager::GroundHeight(v43, v44);
-      if ( j && i && j != v47 - 1 && i != v47 - 1 )
+      if ( j != 0 && i != 0 && j != v47 - 1 && i != v47 - 1 )
       {
-        if ( CWorldManager::FlagBits(v43, v44, 0x10u) )
+        if ( CWorldManager::FlagBits(v43, v44, 0x10u) != 0 )
         {
           *((_BYTE *)v50 + 32 * j + i + 289755) = 100;
           *((_BYTE *)v50 + 32 * j + i + 289787) = 100;
@@ -3277,7 +3272,7 @@ int  CBuildingMgr::CheckForBuildCalc(int a2, int a3, int a4, int a5, int a6, int
           *((_BYTE *)v50 + 32 * j + i + 289788) = 100;
           *((_BYTE *)v50 + 32 * j + i + 289722) = 100;
         }
-        else if ( !CWorldManager::FlagBits(v43, v44, 0x49u) && CWorldManager::OwnerId(v43, v44) == a5 )
+        else if ( CWorldManager::FlagBits(v43, v44, 0x49u) == 0 && CWorldManager::OwnerId(v43, v44) == a5 )
         {
           v14 = CWorldManager::Ground(v43, v44) & 0xF0;
           if ( v14 == 48 )
@@ -3298,30 +3293,30 @@ int  CBuildingMgr::CheckForBuildCalc(int a2, int a3, int a4, int a5, int a6, int
   }
   std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v41);
   v53 = 0;
-  v9 = (void *)CPlayerManager::PlayerInfo(a4);
+  v9 = CPlayerManager::PlayerInfo(a4);
   v28 = CPlayerInfo::Race(v9);
   BuildingInfo = (char *)CBuildingInfoMgr::GetBuildingInfo(v28, a6);
   v39 = 0;
-  v27 = std::vector<unsigned int>::begin(v13);
+  v27 = ((int (__stdcall *)(_BYTE *))std::vector<unsigned int>::begin)(v13);
   v26 = v27;
   LOBYTE(v53) = 1;
-  std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator=(v27);
+  ((void (__stdcall *)(int))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator=)(v27);
   LOBYTE(v53) = 0;
   std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v13);
   while ( 1 )
   {
-    v25 = (std::_Iterator_base12 *)std::vector<unsigned int>::end(v12);
+    v25 = (std::_Iterator_base12 *)((std::_Iterator_base12 *(__stdcall *)(_BYTE *))std::vector<unsigned int>::end)(v12);
     v24 = v25;
     LOBYTE(v53) = 2;
     v46 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator!=(v25);
     LOBYTE(v53) = 0;
     std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v12);
-    if ( !v46 )
+    if ( v46 == 0 )
     {
       break;
     }
     ++v39;
-    if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v41) )
+    if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v41) != 0 )
     {
       v38 = v39 - BuildingInfo[1] - 1;
       for ( k = 31;
@@ -3589,7 +3584,7 @@ CBuildingMgr__CheckForBuildCalc___def_18F9EDB:
       }
     }
   }
-  if ( !v45 )
+  if ( v45 == 0 )
   {
     v45 = 1;
   }
@@ -3623,52 +3618,54 @@ void  CBuildingMgr::AddSoldierToStartTower(int a2, int a3) {
   int v19; // [esp+30h] [ebp-Ch]
   int v20; // [esp+34h] [ebp-8h]
   bool v21; // [esp+3Ah] [ebp-2h]
+  char; // [esp+3Bh] [ebp-1h]
 
   v11[4] = this;
-  v18 = (unsigned __int8 *)CBuildingMgr::operator[](a2);
-  v13 = (CMilitaryBuildingRole *)CBuilding::Role(v18);
+  v18 = (unsigned __int8 *)((unsigned __int8 *(__stdcall *)(int))CBuildingMgr::operator[])(a2);
+  v13 = (CMilitaryBuildingRole *)CBuilding::Role((CBuilding *)v18);
   v20 = a3 + 29;
-  if ( a3 && v20 != 30 && v20 != 31 && v20 != 32 && v20 != 33 && v20 != 34 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2104, "(iSoldierType == SETTLER_SWORDSMAN_01) || (iSoldierType == SETTLER_SWORDSMAN_02) || (iSoldierType == SETTLER_SWORDSMAN_03) || (iSoldierType == SETTLER_BOWMAN_01) || (iSoldierType == SETTLER_BOWMAN_02) || (iSoldierType == SETTLER_BOWMAN_03)") == 1 )
+  if ( a3 != 0 && v20 != 30 && v20 != 31 && v20 != 32 && v20 != 33 && v20 != 34 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2104, "(iSoldierType == SETTLER_SWORDSMAN_01) || (iSoldierType == SETTLER_SWORDSMAN_02) || (iSoldierType == SETTLER_SWORDSMAN_03) || (iSoldierType == SETTLER_BOWMAN_01) || (iSoldierType == SETTLER_BOWMAN_02) || (iSoldierType == SETTLER_BOWMAN_03)") == 1 )
   {
     __debugbreak();
   }
   v12 = CSettlerMgr::SettlerWarriorType(v20);
-  if ( CMilitaryBuildingRole::IncWishAndOrder(v13, v12, 1) )
+   = CMilitaryBuildingRole::IncWishAndOrder(v13, v12, 1);
+  if (  != 0 )
   {
     v19 = 0;
     v8 = Y16X16::UnpackYFast(*((_DWORD *)v18 + 19));
     v3 = Y16X16::UnpackXFast(*((_DWORD *)v18 + 19));
     CSpiralWalk::CSpiralWalk((CSpiralWalk *)v11, v3, v8, 15);
-    while ( CSpiralWalk::NextXY(v11, &v14, &v15) )
+    while ( CSpiralWalk::NextXY(v11, &v14, &v15) != 0 )
     {
       v16 = CWorldManager::Index(v14, v15);
-      if ( !(unsigned __int8)CWorldManager::IsBlockedLand(v16) && !CWorldManager::MapObjectId(v16) )
+      if ( !CWorldManager::IsBlockedLand(v16) && CWorldManager::MapObjectId(v16) == 0 )
       {
         v9 = v20;
-        v4 = IEntity::OwnerId(v18);
-        v19 = CSettlerMgr::AddSettler((CSettlerMgr *)g_cSettlerMgr, v14, v15, v4, v9, 0);
+        v4 = IEntity::OwnerId((IEntity *)v18);
+        v19 = CSettlerMgr::AddSettler(&g_cSettlerMgr, v14, v15, v4, v9, 0);
         break;
       }
     }
-    if ( !v19 && BBSupportDbgReportF(2, "MapObjects\\Building\\BuildingMgr.cpp", 2149, "No soldier for military building") == 1 )
+    if ( v19 == 0 && BBSupportDbgReportF(2, "MapObjects\\Building\\BuildingMgr.cpp", 2149, "No soldier for military building") == 1 )
     {
       __debugbreak();
     }
-    if ( v19 )
+    if ( v19 != 0 )
     {
       v17 = (CPaneContainer *)CSettlerMgr::operator[](v19);
-      v5 = IEntity::WarriorType();
+      v5 = ((int (__stdcall *)())IEntity::WarriorType)();
       v21 = CMilitaryBuildingRole::IncWishAndOrder(v13, v5, 0);
       if ( !v21 && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingMgr.cpp", 2157, "bIncWishAndOrderOk") == 1 )
       {
         __debugbreak();
       }
-      IEntity::ClearFlagBits(v17, ENTITY_FLAG_Selectable);
+      IEntity::ClearFlagBits((IEntity *)v17, ENTITY_FLAG_Selectable);
       v10 = v19;
-      LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(v17);
+      LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick((IAnimatedEntity *)v17);
       CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, v10);
-      CWarMap::RemoveEntity(v17);
-      v7 = IEntity::WorldIdx();
+      CWarMap::RemoveEntity((IEntity *)v17);
+      v7 = ((int (__stdcall *)())IEntity::WorldIdx)();
       CWorldManager::SetSettlerId(v7, 0);
       IEntity::SetFlagBits(v17, ENTITY_FLAG_ON_BOARD);
       (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v18 + 116))(v18, v19);
@@ -3697,9 +3694,9 @@ void  CBuildingMgr::CheckOutBuilding(int a2) {
   {
     __debugbreak();
   }
-  v5 = (unsigned __int8 *)CBuildingMgr::operator[](a2);
-  v6 = IEntity::OwnerId(v5);
-  v7 = IEntity::Type((unsigned __int16 *)v5);
+  v5 = (unsigned __int8 *)((unsigned __int8 *(__stdcall *)(int))CBuildingMgr::operator[])(a2);
+  v6 = IEntity::OwnerId((IEntity *)v5);
+  v7 = IEntity::Type((IEntity *)v5);
   if ( a2 == *((_DWORD *)this + 83 * v6 + v7 + 2248) )
   {
     CBuildingMgr::GetNextBuilding(this, v6, v7);
@@ -3709,11 +3706,11 @@ void  CBuildingMgr::CheckOutBuilding(int a2) {
     }
   }
   CBuildingMgr::DetachBuilding(this, v6, v7, a2);
-  v2 = CBuilding::Role(v5);
+  v2 = (int)CBuilding::Role((CBuilding *)v5);
   v4 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v2 + 112))(v2, v2) != 0;
   if ( v4 )
   {
-    CStatistic::DecBuilding((CStatistic *)&g_cStatistic, v6, v7, 1);
+    CStatistic::DecBuilding(&g_cStatistic, v6, (S4_BUILDING_ENUM)v7, 1);
   }
   CBuildingMgr::ChangeNumberOfBuildings(this, v6, v7, v4, -1);
   result = this;
@@ -3740,15 +3737,15 @@ void  CBuildingMgr::AttachBuilding(int a2, int a3, int a4) {
   {
     __debugbreak();
   }
-  v4 = (IAnimatedEntity *)CBuildingMgr::operator[](a4);
+  v4 = (IAnimatedEntity *)((IAnimatedEntity *(__stdcall *)(int))CBuildingMgr::operator[])(a4);
   IAnimatedEntity::SetPrevious(v4, 0);
   v9 = *((_DWORD *)this + 83 * a2 + a3 + 7);
-  if ( v9 )
+  if ( v9 != 0 )
   {
-    v5 = (IAnimatedEntity *)CBuildingMgr::operator[](v9);
+    v5 = (IAnimatedEntity *)((IAnimatedEntity *(__stdcall *)(int))CBuildingMgr::operator[])(v9);
     IAnimatedEntity::SetPrevious(v5, a4);
   }
-  v6 = (_WORD *)CBuildingMgr::operator[](a4);
+  v6 = (_WORD *)((_WORD *(__stdcall *)(int))CBuildingMgr::operator[])(a4);
   IAnimatedEntity::SetNext(v6, v9);
   result = a3;
   *((_DWORD *)this + 83 * a2 + a3 + 7) = a4;
@@ -3776,12 +3773,12 @@ void  CBuildingMgr::DetachBuilding(int a2, int a3, int a4) {
   {
     __debugbreak();
   }
-  v11 = (IAnimatedEntity *)CBuildingMgr::operator[](a4);
-  if ( IAnimatedEntity::Previous(v11) )
+  v11 = (IAnimatedEntity *)((IAnimatedEntity *(__stdcall *)(int))CBuildingMgr::operator[])(a4);
+  if ( IAnimatedEntity::Previous(v11) != 0 )
   {
     v8 = IAnimatedEntity::Next(v11);
     v4 = IAnimatedEntity::Previous(v11);
-    v5 = (_WORD *)CBuildingMgr::operator[](v4);
+    v5 = (_WORD *)((_WORD *(__stdcall *)(int))CBuildingMgr::operator[])(v4);
     IAnimatedEntity::SetNext(v5, v8);
   }
   else
@@ -3792,11 +3789,11 @@ void  CBuildingMgr::DetachBuilding(int a2, int a3, int a4) {
     }
     *((_DWORD *)this + 83 * a2 + a3 + 7) = IAnimatedEntity::Next(v11);
   }
-  if ( IAnimatedEntity::Next(v11) )
+  if ( IAnimatedEntity::Next(v11) != 0 )
   {
     v9 = IAnimatedEntity::Previous(v11);
     v6 = IAnimatedEntity::Next(v11);
-    v7 = (IAnimatedEntity *)CBuildingMgr::operator[](v6);
+    v7 = (IAnimatedEntity *)((IAnimatedEntity *(__stdcall *)(int))CBuildingMgr::operator[])(v6);
     IAnimatedEntity::SetPrevious(v7, v9);
   }
   IAnimatedEntity::SetNext(v11, 0);

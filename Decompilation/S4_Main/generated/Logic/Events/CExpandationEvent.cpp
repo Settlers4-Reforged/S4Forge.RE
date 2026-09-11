@@ -52,61 +52,60 @@
   *((_DWORD *)this + 8) = 0;
   v11 = 0.0;
   *((_DWORD *)this + 27) = 0;
-  if ( a2 != -5 )
+  if ( a2 == -5 )
   {
-    return this;
-  }
-  C = (CFilter *)operator new(0x18u);
-  if ( C )
-  {
-    v7 = CFilter::CFilter(C, 5);
-  }
-  else
-  {
-    v7 = 0;
-  }
-  *((_DWORD *)this + 11) = v7;
-  for ( i = CDynList::FirstEntry(a3[1]);
-        i;
-        i = (struct CDynListEntry *)CDynListEntry::Next(i) )
-  {
-    if ( *((_DWORD *)i + 4) == 5 )
+    C = (CFilter *)operator new(0x18u);
+    if ( C != 0 )
     {
-      for ( j = 0;
-            j < *(_DWORD *)(*((_DWORD *)i + 21) + 8);
-            ++j )
+      v7 = CFilter::CFilter(C, 5);
+    }
+    else
+    {
+      v7 = 0;
+    }
+    *((_DWORD *)this + 11) = v7;
+    for ( i = (struct CDynListEntry *)CDynList::FirstEntry(a3[1]);
+          i != 0;
+          i = (struct CDynListEntry *)CDynListEntry::Next(i) )
+    {
+      if ( *((_DWORD *)i + 4) == 5 )
       {
-        FilterEntry = CFilter::GetFilterEntry(*((CFilter **)i + 21), j);
-        if ( *((_DWORD *)FilterEntry + 6) )
+        for ( j = 0;
+              j < *(_DWORD *)(*((_DWORD *)i + 21) + 8);
+              ++j )
         {
-          switch ( *((_DWORD *)i + 11) )
+          FilterEntry = CFilter::GetFilterEntry(*((CDynList ***)i + 21), j);
+          if ( *((_DWORD *)FilterEntry + 6) != 0 )
           {
-            case 0x10:
-              v11 = FLOAT_4_0;
-              break;
-            case 0x20:
-              v11 = FLOAT_3_0;
-              break;
-            case 0x60:
-              v11 = FLOAT_2_0;
-              break;
-            case 0x70:
-              v11 = FLOAT_2_0;
-              break;
-            default:
-              break;
+            switch ( *((_DWORD *)i + 11) )
+            {
+              case 0x10:
+                v11 = FLOAT_4_0;
+                break;
+              case 0x20:
+                v11 = FLOAT_3_0;
+                break;
+              case 0x60:
+                v11 = FLOAT_2_0;
+                break;
+              case 0x70:
+                v11 = FLOAT_2_0;
+                break;
+              default:
+                break;
+            }
+            v6 = (CFilterResourceLandscape *)operator new(0x20u);
+            if ( v6 != 0 )
+            {
+              v5 = CFilterResourceLandscape::CFilterResourceLandscape(v6, *((_DWORD *)FilterEntry + 3), *((_DWORD *)FilterEntry + 4), (int)(float)((float)*((int *)FilterEntry + 5) * v11), *((_DWORD *)FilterEntry + 6), *((_DWORD *)FilterEntry + 7));
+            }
+            else
+            {
+              v5 = 0;
+            }
+            ((void (__thiscall *)(CFilter *, struct IFilterEntry *))CFilter::AddFilterEntry)(*((CFilter **)this + 11), v5);
+            break;
           }
-          v6 = (CFilterResourceLandscape *)operator new(0x20u);
-          if ( v6 )
-          {
-            v5 = CFilterResourceLandscape::CFilterResourceLandscape(v6, *((_DWORD *)FilterEntry + 3), *((_DWORD *)FilterEntry + 4), (int)(float)((float)*((int *)FilterEntry + 5) * v11), *((_DWORD *)FilterEntry + 6), *((_DWORD *)FilterEntry + 7));
-          }
-          else
-          {
-            v5 = 0;
-          }
-          CFilter::AddFilterEntry(*((CFilter **)this + 11), v5);
-          break;
         }
       }
     }
@@ -123,10 +122,10 @@
   int v2; // [esp+4h] [ebp-Ch]
 
   *(_DWORD *)this = &CExpandationEvent::_vftable_;
-  if ( *((_DWORD *)this + 11) )
+  if ( *((_DWORD *)this + 11) != 0 )
   {
     v2 = *((_DWORD *)this + 11);
-    if ( v2 )
+    if ( v2 != 0 )
     {
       v1 = (***((int (__thiscall ****)(_DWORD, int))this + 11))(*((_DWORD *)this + 11), 1);
     }
@@ -182,13 +181,13 @@ bool  CExpandationEvent::IsShooting(void a2) {
   unsigned int i; // [esp+50h] [ebp-18h]
   unsigned int j; // [esp+54h] [ebp-14h]
 
-  SpecialTask = CSchedule::GetSpecialTask(this[10], 6);
-  if ( std::vector<SUNDERGROUNDCONCENTRATIONDATA>::size(this + 16) || std::vector<SRESOURCECONCENTRATIONDATA>::size(this + 12) )
+  SpecialTask = CSchedule::GetSpecialTask((CDynList **)*(this + 10), 6);
+  if ( std::vector<SUNDERGROUNDCONCENTRATIONDATA>::size(this + 16) != 0 || std::vector<SRESOURCECONCENTRATIONDATA>::size(this + 12) != 0 )
   {
-    if ( !this[11] )
+    if ( *(this + 11) == 0 )
     {
       C = (CFilter *)operator new(0x18u);
-      if ( C )
+      if ( C != 0 )
       {
         v24 = CFilter::CFilter(C, 5);
       }
@@ -196,8 +195,8 @@ bool  CExpandationEvent::IsShooting(void a2) {
       {
         v24 = 0;
       }
-      this[11] = v24;
-      if ( *((_BYTE *)this + 112) )
+      *(this + 11) = v24;
+      if ( *((_BYTE *)this + 112) != 0 )
       {
         for ( i = 0;
               i < std::vector<SUNDERGROUNDCONCENTRATIONDATA>::size(this + 16);
@@ -205,15 +204,15 @@ bool  CExpandationEvent::IsShooting(void a2) {
         {
           v17 = *(__int16 *)(std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i) + 8);
           v7 = std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i);
-          NextPositionInside = CSchedule::GetNextPositionInside(this[10], *(__int16 *)(v7 + 6), v17);
+          NextPositionInside = CSchedule::GetNextPositionInside((CDynList **)*(this + 10), *(__int16 *)(v7 + 6), v17);
           v18 = *(__int16 *)(std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i) + 8);
           v8 = std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i);
-          v9 = CReserveDatabase::PackPosition(*(CReserveDatabase **)this[10], *(__int16 *)(v8 + 6), v18);
-          v33 = CSchedule::CalcDistance(this[10], NextPositionInside, v9);
-          if ( v33 <= (int)this[26] + 40 )
+          v9 = CReserveDatabase::PackPosition(*(CReserveDatabase **)*(this + 10), *(__int16 *)(v8 + 6), v18);
+          v33 = CSchedule::CalcDistance((CReserveDatabase **)*(this + 10), NextPositionInside, v9);
+          if ( v33 <= (int)*(this + 26) + 40 )
           {
             v21 = (CFilterResourceLandscape *)operator new(0x20u);
-            if ( v21 )
+            if ( v21 != 0 )
             {
               v14 = *(__int16 *)(std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i) + 4);
               v12 = *(__int16 *)(std::vector<SUNDERGROUNDCONCENTRATIONDATA>::operator[](i) + 8);
@@ -224,7 +223,7 @@ bool  CExpandationEvent::IsShooting(void a2) {
             {
               v20 = 0;
             }
-            CFilter::AddFilterEntry(this[11], v20);
+            ((void (__thiscall *)(CFilter *, struct IFilterEntry *))CFilter::AddFilterEntry)(*(this + 11), v20);
           }
         }
       }
@@ -236,15 +235,15 @@ bool  CExpandationEvent::IsShooting(void a2) {
         {
           v15 = *(__int16 *)(std::vector<SRESOURCECONCENTRATIONDATA>::operator[](j) + 8);
           v3 = std::vector<SRESOURCECONCENTRATIONDATA>::operator[](j);
-          v30 = CSchedule::GetNextPositionInside(this[10], *(__int16 *)(v3 + 6), v15);
+          v30 = CSchedule::GetNextPositionInside((CDynList **)*(this + 10), *(__int16 *)(v3 + 6), v15);
           v16 = *(__int16 *)(std::vector<SRESOURCECONCENTRATIONDATA>::operator[](j) + 8);
           v4 = std::vector<SRESOURCECONCENTRATIONDATA>::operator[](j);
-          v5 = CReserveDatabase::PackPosition(*(CReserveDatabase **)this[10], *(__int16 *)(v4 + 6), v16);
-          v32 = CSchedule::CalcDistance(this[10], v30, v5);
-          if ( v32 <= (int)this[26] + 40 )
+          v5 = CReserveDatabase::PackPosition(*(CReserveDatabase **)*(this + 10), *(__int16 *)(v4 + 6), v16);
+          v32 = CSchedule::CalcDistance((CReserveDatabase **)*(this + 10), v30, v5);
+          if ( v32 <= (int)*(this + 26) + 40 )
           {
             v23 = (CFilterResourceLandscape *)operator new(0x20u);
-            if ( v23 )
+            if ( v23 != 0 )
             {
               v13 = *(__int16 *)(std::vector<SRESOURCECONCENTRATIONDATA>::operator[](j) + 4);
               v11 = *(__int16 *)(std::vector<SRESOURCECONCENTRATIONDATA>::operator[](j) + 8);
@@ -255,51 +254,51 @@ bool  CExpandationEvent::IsShooting(void a2) {
             {
               v22 = 0;
             }
-            CFilter::AddFilterEntry(this[11], v22);
+            ((void (__thiscall *)(CFilter *, struct IFilterEntry *))CFilter::AddFilterEntry)(*(this + 11), v22);
           }
         }
       }
     }
-    if ( *((_DWORD *)this[11] + 2) )
+    if ( *((_DWORD *)*(this + 11) + 2) != 0 )
     {
       return CExpandationManagerTask::GetExpandationPermission(SpecialTask, (struct CExpandationEvent *)this);
     }
     else
     {
-      this[26] = (CSchedule *)((char *)this[26] + 50);
+      *(this + 26) = (CSchedule *)((char *)*(this + 26) + 50);
       return 0;
     }
   }
   else
   {
-    switch ( (unsigned int)this[22] )
+    switch ( (unsigned int)*(this + 22) )
     {
       case 0xFFFFFFFA:
         *((_BYTE *)this + 112) = 1;
-        EcoSector = CSchedule::GetEcoSector(this[10]);
-        (*(void (__thiscall **)(struct IAIEcoManager *, int, char *))(*(_DWORD *)EcoSector + 252))(EcoSector, 2, (char *)this + 64);
+        EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
+        (*(void (__thiscall **)(struct IAIEcoManager *, int, CSchedule **))(*(_DWORD *)EcoSector + 252))(EcoSector, 2, this + 16);
         break;
       case 0xFFFFFFFC:
         *((_BYTE *)this + 112) = 1;
-        v28 = CSchedule::GetEcoSector(this[10]);
-        (*(void (__thiscall **)(struct IAIEcoManager *, int, char *))(*(_DWORD *)v28 + 252))(v28, 1, (char *)this + 64);
+        v28 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
+        (*(void (__thiscall **)(struct IAIEcoManager *, int, CSchedule **))(*(_DWORD *)v28 + 252))(v28, 1, this + 16);
         break;
       case 0xFFFFFFFD:
         *((_BYTE *)this + 112) = 1;
-        v1 = CSchedule::GetEcoSector(this[10]);
-        (*(void (__thiscall **)(struct IAIEcoManager *, int, char *))(*(_DWORD *)v1 + 252))(v1, 5, (char *)this + 64);
+        v1 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
+        (*(void (__thiscall **)(struct IAIEcoManager *, int, CSchedule **))(*(_DWORD *)v1 + 252))(v1, 5, this + 16);
         break;
       case 0xFFFFFFFE:
         *((_BYTE *)this + 112) = 1;
-        v29 = CSchedule::GetEcoSector(this[10]);
-        (*(void (__thiscall **)(struct IAIEcoManager *, int, char *))(*(_DWORD *)v29 + 252))(v29, 6, (char *)this + 64);
+        v29 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
+        (*(void (__thiscall **)(struct IAIEcoManager *, int, CSchedule **))(*(_DWORD *)v29 + 252))(v29, 6, this + 16);
         break;
       default:
         *((_BYTE *)this + 112) = 0;
-        v26 = CSchedule::GetEcoSector(this[10]);
-        if ( !(*(int (__thiscall **)(struct IAIEcoManager *, CSchedule *, char *))(*(_DWORD *)v26 + 188))(v26, this[22], (char *)this + 48) )
+        v26 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
+        if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD, CSchedule **))(*(_DWORD *)v26 + 188))(v26, *(this + 22), this + 12) == 0 )
         {
-          this[5] = (CSchedule *)3;
+          *(this + 5) = (CSchedule *)3;
         }
         break;
     }
@@ -316,7 +315,7 @@ bool  CExpandationEvent::action(void) {
   CMainProblemSolveEvent *C; // [esp+Ch] [ebp-14h]
 
   C = (CMainProblemSolveEvent *)operator new(0x70u);
-  if ( C )
+  if ( C != 0 )
   {
     v2 = CMainProblemSolveEvent::CMainProblemSolveEvent(C, *((_DWORD *)this + 3), 11, *((_DWORD *)this + 22), 0, 0, 0);
   }
@@ -324,7 +323,7 @@ bool  CExpandationEvent::action(void) {
   {
     v2 = 0;
   }
-  *((_DWORD *)this + 21) = CSchedule::NewSchedEntry(*((CSchedule **)this + 10), v2, *((_DWORD *)this + 3));
+  *((_DWORD *)this + 21) = CSchedule::NewSchedEntry(*((CDynList ***)this + 10), v2, *((_DWORD *)this + 3));
   *((_DWORD *)this + 5) = 1;
   return 1;
 }
@@ -347,26 +346,24 @@ bool  CExpandationEvent::WaitFor(void) {
   v2 = *((_DWORD *)this + 27);
   if ( v2 == 1 )
   {
-    if ( !*((_DWORD *)this + 8) )
+    if ( *((_DWORD *)this + 8) != 0 )
     {
-      return 0;
+      CSchedule::MarkSolvedProblem(*((CDynList ***)this + 10), *((_DWORD *)this + 8), 0);
+      *((_DWORD *)this + 8) = 0;
+      *((_DWORD *)this + 5) = 3;
     }
-    CSchedule::MarkSolvedProblem(*((CSchedule **)this + 10), *((_DWORD *)this + 8), 0);
-    *((_DWORD *)this + 8) = 0;
-    *((_DWORD *)this + 5) = 3;
     return 0;
   }
   else
   {
-    if ( v2 != 2 )
+    if ( v2 == 2 )
     {
-      return 0;
+      if ( *((_DWORD *)this + 8) != 0 )
+      {
+        CSchedule::MarkSolvedProblem(*((CDynList ***)this + 10), *((_DWORD *)this + 8), 1);
+      }
+      *((_DWORD *)this + 5) = 3;
     }
-    if ( *((_DWORD *)this + 8) )
-    {
-      CSchedule::MarkSolvedProblem(*((CSchedule **)this + 10), *((_DWORD *)this + 8), 1);
-    }
-    *((_DWORD *)this + 5) = 3;
     return 0;
   }
 }

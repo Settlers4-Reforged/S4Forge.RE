@@ -17,10 +17,10 @@ enum IMapCheck::PATCHMAPS  CMapCheck::GetPatchMap(wchar_t const * Source, unsign
   int i; // [esp+4h] [ebp-4h]
 
   for ( i = 0;
-        dword_3D89BB8[4 * i];
+        dword_3D89BB8[4 * i] != 0;
         ++i )
   {
-    if ( a2 == dword_3D89BB0[4 * i] && a3 == dword_3D89BB4[4 * i] && (unsigned __int8)CMapCheck::StrStrLo(Source, (&off_3D89BAC)[4 * i]) )
+    if ( a2 == dword_3D89BB0[4 * i] && a3 == dword_3D89BB4[4 * i] && CMapCheck::StrStrLo(Source, (&off_3D89BAC)[4 * i]) )
     {
       return dword_3D89BB8[4 * i];
     }
@@ -45,18 +45,18 @@ bool __cdecl CMapCheck::StrStrLo(wchar_t const * Source, wchar_t const * SubStr)
   
   wchar_t Destination[1024]; // [esp+Ch] [ebp-804h] BYREF
 
-  if ( !Source || !*Source )
+  if ( Source == 0 || *Source == 0 )
   {
     return 0;
   }
-  if ( !SubStr || !*SubStr )
+  if ( SubStr == 0 || *SubStr == 0 )
   {
     return 1;
   }
   wcsncpy(Destination, Source, 0x3FFu);
   Destination[1023] = 0;
   j___wcslwr(Destination);
-  return wcsstr(Destination, SubStr) != 0;
+  return (int)wcsstr(Destination, SubStr) != 0;
 }
 
 

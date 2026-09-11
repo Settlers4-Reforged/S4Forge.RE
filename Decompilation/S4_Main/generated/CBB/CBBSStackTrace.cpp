@@ -9,7 +9,7 @@
   *(_DWORD *)this = a2;
   *((_DWORD *)this + 1) = a3;
   qmemcpy((char *)this + 8, a4, 0x2CCu);
-  sub_2F31910((char *)this + 724, (int)this + 8);
+  sub_2F31910((_DWORD *)this + 181, (_DWORD *)this + 2);
   return this;
 }
 

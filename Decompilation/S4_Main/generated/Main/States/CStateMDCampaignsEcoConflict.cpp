@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateMDCampaignsEcoConflict::DynamicCreateFunc(void 
   CStateMDCampaignsEcoConflict *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateMDCampaignsEcoConflict *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(C, a1);
   }
@@ -24,26 +24,26 @@ class CGameState * __cdecl CStateMDCampaignsEcoConflict::DynamicCreateFunc(void 
 // Decompiled from CStateMDCampaignsEcoConflict *__thiscall CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(CStateMDCampaignsEcoConflict *this, void *a2)
  CStateMDCampaignsEcoConflict::CStateMDCampaignsEcoConflict(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateMDCampaignsEcoConflict::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  CGuiGameState::SetupExtraGui(g_pMissionCD, 4, (int)GuiDlgMDCampaignsEcoConflictProc);
+  CGuiGameState::SetupExtraGui((int)g_pMissionCD, 4, (int)GuiDlgMDCampaignsEcoConflictProc);
   g_cCampaignSettings = 17;
   dword_402CBBC[8] = CGameSettings::GetCampaignStatus(8);
   dword_402CBBC[8] = 3;
   dword_402CBBC[9] = CGameSettings::GetCampaignStatus(9);
   dword_402CBBC[9] = 3;
-  CGuiGameState::OpenDialog(this, 4, GuiDlgMDCampaignsEcoConflictProc);
+  CGuiGameState::OpenDialog((CGuiGameState *)this, 4, (bool (__cdecl *)(int, int, int))GuiDlgMDCampaignsEcoConflictProc);
   return this;
 }
 
 
 // address=[0x14c7820]
-// Decompiled from void __thiscall CStateMDCampaignsEcoConflict::~CStateMDCampaignsEcoConflict(CStateMDCampaignsEcoConflict *this)
+// Decompiled from void __thiscall CStateMDCampaignsEcoConflict::~CStateMDCampaignsEcoConflict(CGuiGameState *this)
  CStateMDCampaignsEcoConflict::~CStateMDCampaignsEcoConflict(void) {
   
-  *(_DWORD *)this = &CStateMDCampaignsEcoConflict::_vftable_;
-  IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 4);
+  this->__vftable = (CGuiGameState_vtbl *)&CStateMDCampaignsEcoConflict::_vftable_;
+  IGuiEngine::CloseDialog(g_pGUIEngine, 4);
   CGuiGameState::~CGuiGameState(this);
 }
 
@@ -55,10 +55,10 @@ bool  CStateMDCampaignsEcoConflict::Perform(void) {
   DWORD v2; // esi
   int Instance; // [esp+8h] [ebp-4h]
 
-  Instance = UPlay::UPlayManager::GetInstance();
-  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) )
+  Instance = (int)UPlay::UPlayManager::GetInstance();
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 36))(Instance) != 0 )
   {
-    CGameStateHandler::Switch((int)CStateMDCampaigns::DynamicCreateFunc, 1);
+    CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDCampaigns::DynamicCreateFunc, (void *)1);
     return 1;
   }
   else
@@ -73,21 +73,20 @@ bool  CStateMDCampaignsEcoConflict::Perform(void) {
       }
     }
     v2 = dword_4031F6C + 30;
-    if ( v2 >= timeGetTime() )
+    if ( v2 < timeGetTime() )
     {
-      return 1;
+      dword_4031F6C = timeGetTime();
+      IGuiEngine::RenderGui(g_pGUIEngine);
+      IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+      IGfxEngine::ShowFrame(g_pGfxEngine);
     }
-    dword_4031F6C = timeGetTime();
-    IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-    IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-    IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
     return 1;
   }
 }
 
 
 // address=[0x14c7960]
-// Decompiled from char __thiscall CStateMDCampaignsEcoConflict::OnEvent(CStateMDCampaignsEcoConflict *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateMDCampaignsEcoConflict::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateMDCampaignsEcoConflict::OnEvent(class CEvn_Event & a2) {
   
   CEvn_Event *v3; // [esp+10h] [ebp-38h]
@@ -100,7 +99,7 @@ bool  CStateMDCampaignsEcoConflict::OnEvent(class CEvn_Event & a2) {
   {
     if ( event == 7016 )
     {
-      CGameStateHandler::Switch((int)CStateMDCampaigns::DynamicCreateFunc, 1);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDCampaigns::DynamicCreateFunc, (void *)1);
       return 1;
     }
   }
@@ -109,7 +108,7 @@ bool  CStateMDCampaignsEcoConflict::OnEvent(class CEvn_Event & a2) {
     switch ( event )
     {
       case 0x1B67u:
-        CGameStateHandler::Switch((int)CStateMDBriefing::DynamicCreateFunc, (a2->m_wParam << 16) | 9);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDBriefing::DynamicCreateFunc, (void *)((a2->m_wParam << 16) | 9));
         return 1;
       case 0xBu:
         if ( (unsigned __int16)a2->m_wParam == 27 )
@@ -123,8 +122,10 @@ bool  CStateMDCampaignsEcoConflict::OnEvent(class CEvn_Event & a2) {
         }
         break;
       case 0x1B66u:
-        CGameStateHandler::Switch((int)CStateMDBriefing::DynamicCreateFunc, (a2->m_wParam << 16) | 8);
+        CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMDBriefing::DynamicCreateFunc, (void *)((a2->m_wParam << 16) | 8));
         return 1;
+      default:
+        break;
     }
   }
   return CGuiGameState::OnEvent(this, a2);

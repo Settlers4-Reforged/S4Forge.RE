@@ -8,7 +8,7 @@
  CMagicSpellSideBarInfo::CMagicSpellSideBarInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CMagicSpellSideBarInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CMagicSpellSideBarInfo::_vftable_;
   return this;
 }
 

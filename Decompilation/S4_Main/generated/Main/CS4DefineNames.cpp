@@ -144,7 +144,7 @@ int __cdecl CS4DefineNames::GetStringId(char const * Str1) {
   
   int i; // [esp+4h] [ebp-4h]
 
-  if ( !Str1 || !*Str1 )
+  if ( Str1 == 0 || *Str1 == 0 )
   {
     return -1;
   }
@@ -152,7 +152,7 @@ int __cdecl CS4DefineNames::GetStringId(char const * Str1) {
         i < 3837;
         ++i )
   {
-    if ( !j__strcmp(Str1, s_sStringNames[i].m_spName) )
+    if ( j__strcmp(Str1, s_sStringNames[i].m_spName) == 0 )
     {
       return s_sStringNames[i].m_iNr;
     }

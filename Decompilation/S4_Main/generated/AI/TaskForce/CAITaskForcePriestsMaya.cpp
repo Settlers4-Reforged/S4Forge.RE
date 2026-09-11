@@ -41,12 +41,9 @@ int  CAITaskForcePriestsMaya::ChooseMilitarySpell(struct SCountFightersResult co
     }
   }
   m_uAllySoldiers = a2->m_uAllySoldiers;
-  if ( m_uAllySoldiers < 10 )
+  if ( m_uAllySoldiers < 10 && (m_uAllySoldiers < 5 || (v6 = IAIEnvironment::Rand()) >= CRandom16::PercentValue(0x14u) * (m_uAllySoldiers - 5)) )
   {
-    if ( m_uAllySoldiers < 5 || (v6 = IAIEnvironment::Rand(), v6 >= CRandom16::PercentValue(0x14u) * (m_uAllySoldiers - 5)) )
-    {
-      a3 &= ~0x40u;
-    }
+    a3 &= ~0x40u;
   }
   if ( (a3 & 0x70) == 0 )
   {
@@ -61,7 +58,7 @@ int  CAITaskForcePriestsMaya::ChooseMilitarySpell(struct SCountFightersResult co
 
 
 // address=[0x132bd00]
-// Decompiled from int __thiscall CAITaskForcePriestsMaya::ChooseMilitarySpellDestination(CAITaskForcePriestsMaya *this, int a2, int a3, int a4, int a5)
+// Decompiled from int __thiscall CAITaskForcePriestsMaya::ChooseMilitarySpellDestination(CAITaskForcePriestsMaya *this, int a2, unsigned int a3, unsigned int a4, int a5)
 int  CAITaskForcePriestsMaya::ChooseMilitarySpellDestination(int a2, int a3, int a4, int a5) {
   
   int v5; // eax
@@ -122,7 +119,7 @@ int  CAITaskForcePriestsMaya::ChooseMilitarySpellDestination(int a2, int a3, int
 
 
 // address=[0x132e630]
-// Decompiled from void __thiscall CAITaskForcePriestsMaya::~CAITaskForcePriestsMaya(CAITaskForcePriestsMaya *this)
+// Decompiled from void __thiscall CAITaskForcePriestsMaya::~CAITaskForcePriestsMaya(CAITaskForce **this)
  CAITaskForcePriestsMaya::~CAITaskForcePriestsMaya(void) {
   
   CAITaskForcePriests::~CAITaskForcePriests(this);

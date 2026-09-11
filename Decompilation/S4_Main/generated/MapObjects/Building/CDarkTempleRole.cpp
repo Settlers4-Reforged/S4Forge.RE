@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CDarkTempleRole::New(int a1)
 class CPersistence * __cdecl CDarkTempleRole::New(std::istream & a1) {
   
-  if ( operator new(0x1B4u) )
+  if ( operator new(0x1B4u) != 0 )
   {
-    return CDarkTempleRole::CDarkTempleRole(a1);
+    return ((_DWORD (__stdcall *)(int))CDarkTempleRole::CDarkTempleRole)(a1);
   }
   else
   {
@@ -18,13 +18,13 @@ class CPersistence * __cdecl CDarkTempleRole::New(std::istream & a1) {
 
 
 // address=[0x14fd970]
-// Decompiled from int __cdecl CDarkTempleRole::Load(int a1)
+// Decompiled from int __cdecl CDarkTempleRole::Load(struct std::istream *a1)
 class CDarkTempleRole * __cdecl CDarkTempleRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CDarkTempleRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -36,25 +36,24 @@ class CDarkTempleRole * __cdecl CDarkTempleRole::Load(std::istream & a1) {
   int v2; // [esp+4h] [ebp-18h]
   int i; // [esp+Ch] [ebp-10h]
 
-  IBuildingRole::IBuildingRole(this);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this);
   *(_DWORD *)this = &CDarkTempleRole::_vftable_;
   std::vector<int>::vector<int>((char *)this + 420);
-  if ( byte_40F2218 )
+  if ( byte_40F2218 == 0 )
   {
-    return this;
-  }
-  byte_40F2218 = 1;
-  memset(byte_40F2220, 0, 0x43u);
-  memset(dword_40F2264, 0, 0x18u);
-  for ( i = 0;
-        i < 6;
-        ++i )
-  {
-    v2 = dword_378588C[i];
-    if ( v2 > 0 )
+    byte_40F2218 = 1;
+    memset(byte_40F2220, 0, 0x43u);
+    memset(dword_40F2264, 0, 0x18u);
+    for ( i = 0;
+          i < 6;
+          ++i )
     {
-      byte_40F2220[v2] = i;
-      dword_40F2264[i] = (*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 52))(g_pAI, v2);
+      v2 = dword_378588C[i];
+      if ( v2 > 0 )
+      {
+        byte_40F2220[v2] = i;
+        dword_40F2264[i] = ((int (__thiscall *)(CAIMain *, int))g_pAI->j_?DarkTribeGetProductionCostConfigVar@CAIMain@@UBEPBVCStaticConfigVarInt@@H@Z)(g_pAI, v2);
+      }
     }
   }
   return this;
@@ -65,43 +64,43 @@ class CDarkTempleRole * __cdecl CDarkTempleRole::Load(std::istream & a1) {
 // Decompiled from int __thiscall CDarkTempleRole::LogicUpdate(CDarkTempleRole *this, struct CBuilding *a2)
 void  CDarkTempleRole::LogicUpdate(class CBuilding * a2) {
   
-  _DWORD *v2; // eax
+  int *v2; // eax
   int v3; // eax
   int v4; // eax
   int v6; // [esp-8h] [ebp-10h]
   int v7; // [esp-4h] [ebp-Ch]
   CPaneContainer *v8; // [esp+0h] [ebp-8h]
 
-  if ( IEntity::FlagBits(a2, (EntityFlag)dword_800000) )
+  if ( IEntity::FlagBits(a2, (EntityFlag)dword_800000) != 0 )
   {
     IEntity::ClearFlagBits(a2, (EntityFlag)dword_800000);
   }
   else
   {
-    IEntity::ClearFlagBits(a2, (EntityFlag)0x200000u);
+    IEntity::ClearFlagBits(a2, (EntityFlag)0x200000);
   }
   CDarkTempleRole::Produce(this, a2);
-  if ( std::vector<int>::size((char *)this + 420) )
+  if ( std::vector<int>::size((char *)this + 420) != 0 )
   {
-    v2 = (_DWORD *)std::vector<int>::back();
+    v2 = (int *)std::vector<int>::back();
     v8 = (CPaneContainer *)CSettlerMgr::operator[](*v2);
     if ( !CWorldManager::IsPositionFreeForSettler(*((_DWORD *)this + 95)) && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 321, "g_cWorld.IsPositionFreeForSettler( m_iAddDoorPackedXY ) == true") == 1 )
     {
       __debugbreak();
     }
-    IEntity::SetPosition(v8, *((struct CPaneContainer **)this + 95));
-    CWorldManager::SetSettlerId(*((_DWORD *)this + 95), *((unsigned __int16 *)this + 4));
+    IEntity::SetPosition((IEntity *)v8, *((_DWORD *)this + 95));
+    CWorldManager::SetSettlerId(*((_DWORD *)this + 95), *((_WORD *)this + 4));
     IEntity::SetFlagBits(v8, ENTITY_FLAG_Visible);
-    v7 = IEntity::Type((unsigned __int16 *)v8);
-    v6 = IEntity::Type((unsigned __int16 *)v8);
+    v7 = IEntity::Type((IEntity *)v8);
+    v6 = IEntity::Type((IEntity *)v8);
     v3 = IEntity::Race(v8);
-    v4 = CEntityToDoListMgr::SettlerJobList(v3, v6);
+    v4 = ((int (__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v3, v6);
     (*(void (__thiscall **)(CPaneContainer *, int, int))(*(_DWORD *)v8 + 112))(v8, v4, v7);
     std::vector<int>::pop_back((char *)this + 420);
   }
   CDarkTempleRole::AttackEnemies(this, a2);
   CDarkTempleRole::ServantManagement(this, a2);
-  return IAnimatedEntity::RegisterForLogicUpdate(31);
+  return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
 }
 
 
@@ -127,13 +126,13 @@ void  CDarkTempleRole::Init(class CBuilding * a2) {
   int v4; // [esp+4h] [ebp-Ch]
   int v5; // [esp+8h] [ebp-8h]
 
-  IBuildingRole::InitCommon((int)a2);
+  IBuildingRole::InitCommon(a2);
   *((_BYTE *)this + 29) = 1;
   v4 = CBuilding::DoorX(a2) + 1;
   v5 = CBuilding::DoorY(a2) + 1;
   v3 = CWorldManager::Index(v4, v5);
   *((_DWORD *)this + 95) = Y16X16::PackXYFast(v4, v5);
-  if ( (unsigned __int8)CWorldManager::IsBlockedLand(v3) && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 277, "! g_cWorld.IsBlockedLand( iAddDoorPackedWorldIdx )") == 1 )
+  if ( CWorldManager::IsBlockedLand(v3) && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 277, "! g_cWorld.IsBlockedLand( iAddDoorPackedWorldIdx )") == 1 )
   {
     __debugbreak();
   }
@@ -142,7 +141,7 @@ void  CDarkTempleRole::Init(class CBuilding * a2) {
   *((_DWORD *)this + 103) = -1024;
   *((_DWORD *)this + 104) = 0;
   std::vector<int>::clear();
-  return IAnimatedEntity::RegisterForLogicUpdate(31);
+  return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
 }
 
 
@@ -156,7 +155,7 @@ void  CDarkTempleRole::PostLoadInit(class CBuilding * a2) {
   int v6; // [esp+8h] [ebp-8h]
   int v7; // [esp+Ch] [ebp-4h]
 
-  v4 = IEntity::Type((unsigned __int16 *)a2);
+  v4 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
   *((_DWORD *)this + 94) = CBuildingInfoMgr::GetBuildingInfo(v2, v4);
   v6 = CBuilding::DoorX(a2) + 1;
@@ -169,7 +168,7 @@ void  CDarkTempleRole::PostLoadInit(class CBuilding * a2) {
 
 
 // address=[0x1508690]
-// Decompiled from char __thiscall CDarkTempleRole::SettlerEnter(CDarkTempleRole *this, struct CBuilding *a2, int a3)
+// Decompiled from char __thiscall CDarkTempleRole::SettlerEnter(IBuildingRole *this, struct CBuilding *a2, int a3)
 bool  CDarkTempleRole::SettlerEnter(class CBuilding * a2, int a3) {
   
   int v3; // eax
@@ -182,26 +181,26 @@ bool  CDarkTempleRole::SettlerEnter(class CBuilding * a2, int a3) {
 
   v9 = this;
   v10 = (CPaneContainer *)CSettlerMgr::operator[](a3);
-  v8 = IEntity::Type((unsigned __int16 *)v10);
+  v8 = IEntity::Type((IEntity *)v10);
   if ( v8 == 52 )
   {
-    IEntity::ClearFlagBits(v10, ENTITY_FLAG_Visible);
-    v3 = IEntity::WorldIdx();
+    IEntity::ClearFlagBits((IEntity *)v10, ENTITY_FLAG_Visible);
+    v3 = ((int (__stdcall *)())IEntity::WorldIdx)();
     CWorldManager::SetSettlerId(v3, 0);
     v4 = (struct CPaneContainer *)IEntity::PackedXY(a2);
-    IEntity::SetPosition(v10, v4);
-    v7 = IEntity::ID();
-    std::vector<int>::push_back(&v7);
+    IEntity::SetPosition((IEntity *)v10, (int)v4);
+    v7 = ((int (__stdcall *)())IEntity::ID)();
+    std::vector<int>::push_back((int)&v7);
   }
   else
   {
     if ( v8 == 53 )
     {
-      v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-      (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 48))(g_pAI, v5);
+      v5 = IEntity::OwnerId(a2);
+      ((void (__thiscall *)(CAIMain *, int))g_pAI->j_?DarkTribeIncreaseManaForNewManaSphere@CAIMain@@UAEXH@Z)(g_pAI, v5);
       IBuildingRole::DetachWithoutNotify(v9, a2, a3);
-      IEntity::ClearFlagBits(v10, ENTITY_FLAG_Visible);
-      if ( IEntity::FlagBits(v10, ENTITY_FLAG_ON_BOARD) && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 697, "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) == 0") == 1 )
+      IEntity::ClearFlagBits((IEntity *)v10, ENTITY_FLAG_Visible);
+      if ( IEntity::FlagBits((IEntity *)v10, ENTITY_FLAG_ON_BOARD) != 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 697, "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) == 0") == 1 )
       {
         __debugbreak();
       }
@@ -212,15 +211,15 @@ bool  CDarkTempleRole::SettlerEnter(class CBuilding * a2, int a3) {
       {
         return 1;
       }
-      ++*((_DWORD *)v9 + 104);
+      ++*(_DWORD *)v9[1].gap_24;
       IBuildingRole::DetachWithoutNotify(v9, a2, a3);
-      IEntity::ClearFlagBits(v10, ENTITY_FLAG_Visible);
-      if ( IEntity::FlagBits(v10, ENTITY_FLAG_ON_BOARD) && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 709, "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) == 0") == 1 )
+      IEntity::ClearFlagBits((IEntity *)v10, ENTITY_FLAG_Visible);
+      if ( IEntity::FlagBits((IEntity *)v10, ENTITY_FLAG_ON_BOARD) != 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 709, "rSettler.FlagBits(ENTITY_FLAG_ON_BOARD) == 0") == 1 )
       {
         __debugbreak();
       }
     }
-    CMapObjectMgr::Kill(a3, 0);
+    ((void (__stdcall *)(int, int))CMapObjectMgr::Kill)(a3, 0);
   }
   return 1;
 }
@@ -235,7 +234,7 @@ void  CDarkTempleRole::TakeOrder(int a2, int a3) {
 
   if ( a2 > 0 && a2 < 67 )
   {
-    if ( byte_40F2220[a2] )
+    if ( byte_40F2220[a2] != 0 )
     {
       v4 = (int *)((char *)this + 4 * (unsigned __int8)byte_40F2220[a2] + 384);
       if ( a3 >= 10000 )
@@ -317,7 +316,7 @@ int  CDarkTempleRole::ProduceMushroomFarmer(class CBuilding * a2) {
   
   int v2; // eax
 
-  v2 = IEntity::OwnerId((unsigned __int8 *)a2);
+  v2 = IEntity::OwnerId(a2);
   return CDarkTempleRole::AddSettlerToWorld(this, v2, 53, 0);
 }
 
@@ -328,7 +327,7 @@ int  CDarkTempleRole::ProduceMushroomFarmer(class CBuilding * a2) {
   
   int v2; // eax
   int v3; // eax
-  int v5; // [esp+8h] [ebp-2Ch] BYREF
+  unsigned int v5; // [esp+8h] [ebp-2Ch] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-28h] BYREF
   unsigned int v7; // [esp+10h] [ebp-24h] BYREF
   int v8; // [esp+14h] [ebp-20h]
@@ -339,7 +338,7 @@ int  CDarkTempleRole::ProduceMushroomFarmer(class CBuilding * a2) {
   int v13; // [esp+30h] [ebp-4h]
 
   v12 = this;
-  IBuildingRole::IBuildingRole(this, a2);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this, (struct std::istream *)a2);
   v13 = 0;
   *(_DWORD *)v12 = &CDarkTempleRole::_vftable_;
   std::vector<int>::vector<int>(v12 + 420);
@@ -356,11 +355,11 @@ int  CDarkTempleRole::ProduceMushroomFarmer(class CBuilding * a2) {
         i < 6;
         ++i )
   {
-    operator^<int>(a2, (int)&v12[4 * i + 384]);
+    operator^<int>((struct std::istream *)a2, (int *)&v12[4 * i + 384]);
   }
-  operator^<int>(a2, (int)(v12 + 408));
-  operator^<int>(a2, (int)(v12 + 412));
-  operator^<int>(a2, (int)(v12 + 416));
+  operator^<int>((struct std::istream *)a2, (int *)v12 + 102);
+  operator^<int>((struct std::istream *)a2, (int *)v12 + 103);
+  operator^<int>((struct std::istream *)a2, (int *)v12 + 104);
   v7 = 0;
   operator^<unsigned int>(a2, &v7);
   for ( j = 0;
@@ -368,7 +367,7 @@ int  CDarkTempleRole::ProduceMushroomFarmer(class CBuilding * a2) {
         ++j )
   {
     v2 = std::vector<int>::operator[](j);
-    operator^<int>(a2, v2);
+    operator^<int>((struct std::istream *)a2, (int *)v2);
   }
   for ( k = 0;
         k < 6;
@@ -378,7 +377,7 @@ int  CDarkTempleRole::ProduceMushroomFarmer(class CBuilding * a2) {
     if ( v8 > 0 )
     {
       byte_40F2220[v8] = k;
-      v3 = (*(int (__thiscall **)(void *, int))(*(_DWORD *)g_pAI + 52))(g_pAI, v8);
+      v3 = ((int (__thiscall *)(CAIMain *, int))g_pAI->j_?DarkTribeGetProductionCostConfigVar@CAIMain@@UBEPBVCStaticConfigVarInt@@H@Z)(g_pAI, v8);
       dword_40F2264[k] = v3;
     }
   }
@@ -401,24 +400,24 @@ void  CDarkTempleRole::Store(std::ostream & a2) {
   v8 = (int *)this;
   IBuildingRole::Store(this, a2);
   v4 = 1;
-  operator^<unsigned int>(a2, &v4);
+  operator^<unsigned int>(a2, (unsigned int *)&v4);
   for ( i = 0;
         i < 6;
         ++i )
   {
-    operator^<int>((int)a2, &v8[i + 96]);
+    operator^<int>(a2, &v8[i + 96]);
   }
-  operator^<int>((int)a2, v8 + 102);
-  operator^<int>((int)a2, v8 + 103);
-  operator^<int>((int)a2, v8 + 104);
+  operator^<int>(a2, v8 + 102);
+  operator^<int>(a2, v8 + 103);
+  operator^<int>(a2, v8 + 104);
   v5 = std::vector<int>::size(v8 + 105);
-  result = operator^<unsigned int>(a2, &v5);
+  result = operator^<unsigned int>(a2, (unsigned int *)&v5);
   for ( j = 0;
         j < v5;
         ++j )
   {
     v3 = (int *)std::vector<int>::operator[](j);
-    result = operator^<int>((int)a2, v3);
+    result = operator^<int>(a2, v3);
   }
   return result;
 }
@@ -499,90 +498,88 @@ void  CDarkTempleRole::Produce(class CBuilding * a2) {
   unsigned int v10; // [esp+14h] [ebp-Ch]
   BOOL v11; // [esp+18h] [ebp-8h]
 
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 388, "_pBuilding != 0") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 388, "_pBuilding != 0") == 1 )
   {
     __debugbreak();
   }
-  v9 = IEntity::OwnerId((unsigned __int8 *)a2);
-  v2 = CPlayerManager::PlayerGameData(v9);
-  v3 = (CPlayerMagicData *)CPlayerGameData::MagicData(v2);
+  v9 = IEntity::OwnerId(a2);
+  v2 = (type_info *)CPlayerManager::PlayerGameData(v9);
+  v3 = CPlayerGameData::MagicData((CPlayerGameData *)v2);
   result = CPlayerMagicData::ManaAmount(v3);
-  if ( result < 10 )
+  if ( result >= 10 )
   {
-    return result;
-  }
-  v11 = 0;
-  TickCounter = CStateGame::GetTickCounter(g_pGame);
-  if ( TickCounter - *((_DWORD *)this + 103) > 30 )
-  {
-    v11 = *((_DWORD *)this + 97) > 0;
-  }
-  if ( *((int *)this + 102) < 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 419, "m_iOrderIdx >= 0") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( *((int *)this + 102) >= 6 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 420, "m_iOrderIdx < DARK_ORDER_MAX") == 1 )
-  {
-    __debugbreak();
-  }
-  result = *((_DWORD *)this + 102);
-  v10 = result;
-  for ( i = 0;
-        i < 6;
-        ++i )
-  {
-    if ( v10 >= 2 )
+    v11 = 0;
+    TickCounter = CStateGame::GetTickCounter(g_pGame);
+    if ( TickCounter - *((_DWORD *)this + 103) > 30 )
     {
-      result = (int)this;
-      if ( *((int *)this + v10 + 96) > 0 )
+      v11 = *((_DWORD *)this + 97) > 0;
+    }
+    if ( *((int *)this + 102) < 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 419, "m_iOrderIdx >= 0") == 1 )
+    {
+      __debugbreak();
+    }
+    if ( *((int *)this + 102) >= 6 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 420, "m_iOrderIdx < DARK_ORDER_MAX") == 1 )
+    {
+      __debugbreak();
+    }
+    result = *((_DWORD *)this + 102);
+    v10 = result;
+    for ( i = 0;
+          i < 6;
+          ++i )
+    {
+      if ( v10 >= 2 )
       {
-        v11 = v10;
-        break;
+        result = (int)this;
+        if ( *((int *)this + v10 + 96) > 0 )
+        {
+          v11 = v10;
+          break;
+        }
       }
+      result = (int)(v10 + 1) / 6;
+      v10 = (int)(v10 + 1) % 6;
     }
-    result = (int)(v10 + 1) / 6;
-    v10 = (int)(v10 + 1) % 6;
-  }
-  if ( !v11 )
-  {
-    return result;
-  }
-  if ( *((int *)this + v11 + 96) <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 444, "m_vOrder[ iOrderIdx ] > 0") == 1 )
-  {
-    __debugbreak();
-  }
-  v7 = CStaticConfigVarInt::operator int(dword_40F2264[v11]);
-  if ( v7 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 448, "iOrderManaCost > 0") == 1 )
-  {
-    __debugbreak();
-  }
-  result = CMagic::CheckAndDecreaseMana(v9, v7);
-  if ( (_BYTE)result )
-  {
-    if ( *((int *)this + v11 + 96) < 100 )
-    {
-      --*((_DWORD *)this + v11 + 96);
-    }
-    v6 = dword_378588C[v11];
-    CDarkTempleRole::AddSettlerToWorld(this, v9, v6, 1);
-    CStatistic::AddProducedSettler((CStatistic *)&g_cStatistic, v9, v6);
     if ( v11 )
     {
-      *((_DWORD *)this + 103) = TickCounter;
+      if ( *((int *)this + v11 + 96) <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 444, "m_vOrder[ iOrderIdx ] > 0") == 1 )
+      {
+        __debugbreak();
+      }
+      v7 = CStaticConfigVarInt::operator int((CStaticConfigVarInt *)dword_40F2264[v11]);
+      if ( v7 <= 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 448, "iOrderManaCost > 0") == 1 )
+      {
+        __debugbreak();
+      }
+      result = CMagic::CheckAndDecreaseMana(v9, v7);
+      if ( (_BYTE)result != 0 )
+      {
+        if ( *((int *)this + v11 + 96) < 100 )
+        {
+          --*((_DWORD *)this + v11 + 96);
+        }
+        v6 = dword_378588C[v11];
+        CDarkTempleRole::AddSettlerToWorld(this, v9, v6, 1);
+        CStatistic::AddProducedSettler(&g_cStatistic, v9, v6);
+        if ( v11 )
+        {
+          *((_DWORD *)this + 103) = TickCounter;
+        }
+        result = (int)this;
+        *((_DWORD *)this + 102) = (v11 + 1) % 6;
+      }
+      else
+      {
+        *((_DWORD *)this + 102) = v11;
+      }
     }
-    result = (int)this;
-    *((_DWORD *)this + 102) = (v11 + 1) % 6;
-  }
-  else
-  {
-    *((_DWORD *)this + 102) = v11;
   }
   return result;
 }
 
 
 // address=[0x1508f70]
-// Decompiled from int __thiscall CDarkTempleRole::AttackEnemies(CDarkTempleRole *this, _DWORD *a2)
+// Decompiled from int __thiscall CDarkTempleRole::AttackEnemies(CDarkTempleRole *this, IEntity *a2)
 void  CDarkTempleRole::AttackEnemies(class CBuilding * a2) {
   
   int result; // eax
@@ -637,124 +634,117 @@ void  CDarkTempleRole::AttackEnemies(class CBuilding * a2) {
   v12 = 15;
   v32 = IEntity::X(a2) + 1;
   v33 = IEntity::Y(a2) + 2;
-  v34 = IEntity::OwnerId((unsigned __int8 *)a2);
-  result = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v34, 49, 1u);
+  v34 = IEntity::OwnerId(a2);
+  result = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v34, BUILDING_MUSHROOMFARM, 1u);
   v43 = result;
-  if ( result <= 0 )
+  if ( result > 0 )
   {
-    return result;
-  }
-  if ( v43 < 4 )
-  {
-    v37 = v43 * 16 * v43;
-  }
-  else
-  {
-    v37 = 0x4000;
-  }
-  v16 = v37;
-  if ( v43 < 4 )
-  {
-    v36 = CRandom16::PercentValue(25 * v43);
-  }
-  else
-  {
-    v36 = CRandom16::PercentValue(0x64u);
-  }
-  v20 = v36;
-  if ( v43 < 4 )
-  {
-    v35 = 24 - 2 * (4 - v43);
-  }
-  else
-  {
-    v35 = 24;
-  }
-  v22 = v35;
-  v19 = CStateGame::Rand(g_pGame) % 8u + 8;
-  v10 = CBuilding::EnsignY(a2);
-  v3 = CBuilding::EnsignX(a2);
-  v31 = CWorldManager::SectorId(v3, v10);
-  if ( !v31 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 514, "iTempleSectorId != 0") == 1 )
-  {
-    __debugbreak();
-  }
-  CDarkTempleRole::ShowFireRing(v23, v43, v32, v33, 16);
-  v21 = CAlliances::PlayerEnemyBits(v34);
-  CSpiralWalk::CSpiralWalk((CSpiralWalk *)v11, v32, v33, v22);
-  v38 = 0;
-  v40 = 0;
-  while ( 1 )
-  {
-    result = (unsigned __int8)CSpiralWalk::NextXY(v11, &v27, &v28);
-    if ( !(_BYTE)result )
+    if ( v43 < 4 )
     {
-      break;
+      v37 = v43 * 16 * v43;
     }
-    v41 = CWorldManager::Index(v27, v28);
-    if ( CWorldManager::FlagBits(v41, 5u) == 4 )
+    else
     {
-      v39 = CWorldManager::MapObjectId(v41);
-      if ( v39 )
+      v37 = 0x4000;
+    }
+    v16 = v37;
+    if ( v43 < 4 )
+    {
+      v36 = CRandom16::PercentValue(25 * v43);
+    }
+    else
+    {
+      v36 = CRandom16::PercentValue(0x64u);
+    }
+    v20 = v36;
+    if ( v43 < 4 )
+    {
+      v35 = 24 - 2 * (4 - v43);
+    }
+    else
+    {
+      v35 = 24;
+    }
+    v22 = v35;
+    v19 = CStateGame::Rand(g_pGame) % 8 + 8;
+    v10 = CBuilding::EnsignY(a2);
+    v3 = CBuilding::EnsignX(a2);
+    v31 = CWorldManager::SectorId(v3, v10);
+    if ( v31 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 514, "iTempleSectorId != 0") == 1 )
+    {
+      __debugbreak();
+    }
+    CDarkTempleRole::ShowFireRing(v23, v43, v32, v33, 16);
+    v21 = CAlliances::PlayerEnemyBits(v34);
+    CSpiralWalk::CSpiralWalk((CSpiralWalk *)v11, v32, v33, v22);
+    v38 = 0;
+    v40 = 0;
+    while ( 1 )
+    {
+      result = (unsigned __int8)CSpiralWalk::NextXY(v11, &v27, &v28);
+      if ( (_BYTE)result == 0 )
       {
-        v4 = ITiling::SectorId(v41);
-        if ( v4 == v31 )
+        break;
+      }
+      v41 = CWorldManager::Index(v27, v28);
+      if ( CWorldManager::FlagBits(v41, 5u) == 4 )
+      {
+        v39 = CWorldManager::MapObjectId(v41);
+        if ( v39 != 0 )
         {
-          v42 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v39);
-          if ( !v42 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 557, "pEntity != 0") == 1 )
+          v4 = ITiling::SectorId(v41);
+          if ( v4 == v31 )
           {
-            __debugbreak();
-          }
-          if ( v42 )
-          {
-            if ( (IEntity::UniqueId(v42) & 0x20000000) == 0 )
+            v42 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v39);
+            if ( v42 == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\DarkTemple.cpp", 557, "pEntity != 0") == 1 )
             {
-              v5 = IEntity::OwnerId(v42);
+              __debugbreak();
+            }
+            if ( v42 != 0 && (IEntity::UniqueId(v42) & 0x20000000) == 0 )
+            {
+              v5 = IEntity::OwnerId((IEntity *)v42);
               v6 = CAlliances::PlayerBit(v5);
-              if ( (v21 & v6) != 0 && (IEntity::ObjType(v42) == 1 || IEntity::ObjType(v42) == 4) )
+              if ( (v21 & v6) != 0 && (IEntity::ObjType((IEntity *)v42) == SETTLER_OBJ || IEntity::ObjType((IEntity *)v42) == CATAPULT_OBJ) && ((int (__stdcall *)())IEntity::WarriorType)() != 0 )
               {
-                if ( IEntity::WarriorType() )
+                v7 = CStateGame::Rand(g_pGame);
+                v30 = v7 < v20;
+                v44 = v7 < v20;
+                v29 = CSpiralWalk::CurrentRadius(v11);
+                if ( v29 > 16 )
                 {
-                  v7 = CStateGame::Rand(g_pGame);
-                  v30 = v7 < v20;
-                  v44 = v7 < v20;
-                  v29 = CSpiralWalk::CurrentRadius(v11);
-                  if ( v29 > 16 )
+                  result = ++v40;
+                  if ( v40 > v19 )
                   {
-                    result = ++v40;
-                    if ( v40 > v19 )
-                    {
-                      return result;
-                    }
-                    if ( v44 )
-                    {
-                      v18 = (24 - v29 - 16) << 13;
-                      v8 = CStateGame::Rand(g_pGame);
-                      if ( v8 >= v18 )
-                      {
-                        v44 = 0;
-                      }
-                    }
+                    return result;
                   }
                   if ( v44 )
                   {
-                    LOBYTE(v25) = CStateGame::Rand(g_pGame) & 0xF;
-                    v25 = (unsigned __int8)v25;
-                    v26 = CLogic::Effects((DWORD *)g_pLogic);
-                    (*(void (__thiscall **)(int, int, int, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v26 + 16))(v26, 78, 48, v27, v28, v25, 0, 0);
-                    v24 = CLogic::FutureEvents(g_pLogic);
-                    (*(void (__thiscall **)(int, int, int, int, int, _DWORD))(*(_DWORD *)v24 + 12))(v24, 2, v25 + 6, v39, 255, 0);
-                    v9 = IEntity::OwnerId(v42);
-                    if ( v9 == LocalPlayerId )
+                    v18 = (24 - v29 - 16) << 13;
+                    v8 = CStateGame::Rand(g_pGame);
+                    if ( v8 >= v18 )
                     {
-                      IEntity::SetFlagBits(a2, (EntityFlag)0xA00000u);
+                      v44 = 0;
                     }
                   }
-                  result = ++v38;
-                  if ( v38 >= v16 )
+                }
+                if ( v44 )
+                {
+                  LOBYTE(v25) = CStateGame::Rand(g_pGame) & 0xF;
+                  v25 = (unsigned __int8)v25;
+                  v26 = (int)CLogic::Effects(g_pLogic);
+                  (*(void (__thiscall **)(int, int, int, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v26 + 16))(v26, 78, 48, v27, v28, v25, 0, 0);
+                  v24 = (int)CLogic::FutureEvents(g_pLogic);
+                  (*(void (__thiscall **)(int, int, int, int, int, _DWORD))(*(_DWORD *)v24 + 12))(v24, 2, v25 + 6, v39, 255, 0);
+                  v9 = IEntity::OwnerId((IEntity *)v42);
+                  if ( v9 == LocalPlayerId )
                   {
-                    break;
+                    IEntity::SetFlagBits(a2, (EntityFlag)10485760);
                   }
+                }
+                result = ++v38;
+                if ( v38 >= v16 )
+                {
+                  break;
                 }
               }
             }
@@ -794,8 +784,8 @@ void  CDarkTempleRole::ShowFireRing(int a2, int a3, int a4, int a5) {
         i < v13;
         ++i )
   {
-    v10 = v12 + CRandom16::Rand((CUserToolsManager *)((char *)g_pGameData + 44)) % v8;
-    if ( i % a2 )
+    v10 = v12 + CRandom16::Rand(&g_pGameData->m_sRandom) % v8;
+    if ( i % a2 != 0 )
     {
       v11 = 0;
     }
@@ -803,7 +793,7 @@ void  CDarkTempleRole::ShowFireRing(int a2, int a3, int a4, int a5) {
     {
       v11 = 48;
     }
-    v9 = CLogic::Effects((DWORD *)g_pLogic);
+    v9 = (int)CLogic::Effects(g_pLogic);
     v7 = a4 + CSpiralOffsets::DeltaY(v10);
     v6 = CSpiralOffsets::DeltaX(v10);
     result = (*(int (__thiscall **)(int, int, int, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v9 + 16))(v9, 78, v11, a3 + v6, v7, 2 * i, 0, 0);
@@ -819,20 +809,20 @@ void  CDarkTempleRole::ServantManagement(class CBuilding * a2) {
   int result; // eax
   CDarkTempleRole *v3; // [esp+0h] [ebp-14h]
   int v4; // [esp+4h] [ebp-10h]
-  int v5; // [esp+8h] [ebp-Ch]
+  CSettler *v5; // [esp+8h] [ebp-Ch]
   int v6; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
   v3 = this;
-  v4 = IEntity::OwnerId((unsigned __int8 *)a2);
+  v4 = IEntity::OwnerId(a2);
   v6 = 0;
-  result = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, v4, 55);
+  result = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, v4, 55);
   for ( i = result;
-        i;
+        i != 0;
         i = result )
   {
     v5 = CSettlerMgr::operator[](i);
-    if ( (*(unsigned __int8 (__thiscall **)(int, CDarkTempleRole *, int))(*(_DWORD *)v5 + 116))(v5, v3, v4) )
+    if ( ((unsigned __int8 (__thiscall *)(CSettler *, CDarkTempleRole *, int))v5->j_?IsUnEmployed@CSettler@@UBE_NXZ)(v5, v3, v4) != 0 )
     {
       (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pDarkTribe + 8))(g_pDarkTribe, i);
       result = ++v6;
@@ -868,9 +858,9 @@ int  CDarkTempleRole::AddSettlerToWorld(int a2, int a3, int a4) {
   {
     __debugbreak();
   }
-  if ( CSettlerMgr::IsAddSettlerOk((CSettlerMgr *)g_cSettlerMgr, v8, v9, 0) || CSettlerMgr::SearchFreePositionInSector((CSettlerMgr *)g_cSettlerMgr, &v8, &v9, v6, 34) )
+  if ( CSettlerMgr::IsAddSettlerOk(&g_cSettlerMgr, v8, v9, 0) || CSettlerMgr::SearchFreePositionInSector(&g_cSettlerMgr, &v8, &v9, v6, 34) )
   {
-    return CSettlerMgr::AddSettler((CSettlerMgr *)g_cSettlerMgr, v8, v9, a2, a3, a4);
+    return CSettlerMgr::AddSettler(&g_cSettlerMgr, v8, v9, a2, a3, a4);
   }
   return v5;
 }

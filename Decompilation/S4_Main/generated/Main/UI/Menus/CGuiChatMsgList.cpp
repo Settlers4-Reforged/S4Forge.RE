@@ -18,7 +18,7 @@
 // Decompiled from char __thiscall CGuiChatMsgList::AddListItem(int *this, char *Str)
 bool  CGuiChatMsgList::AddListItem(char const * Str) {
   
-  if ( this[10031] >= 200 )
+  if ( *(this + 10031) >= 200 )
   {
     CGuiChatMsgList::RemoveListItem((CGuiChatMsgList *)this, 0);
   }
@@ -26,7 +26,8 @@ bool  CGuiChatMsgList::AddListItem(char const * Str) {
   {
     return 0;
   }
-  j__strcpy_0((char *)&this[50 * this[10031]++ + 30], Str);
+  j__strcpy_0((char *)this + 200 * *(this + 10031) + 120, Str);
+  ++*(this + 10031);
   return 1;
 }
 
@@ -59,7 +60,7 @@ bool  CGuiChatMsgList::SetTopindex(int a2) {
         i < *((_DWORD *)this + 10032);
         ++i )
   {
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 3 * i), *((_DWORD *)this + 3 * i + 1), 0);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, *((_DWORD *)this + 3 * i), *((_DWORD *)this + 3 * i + 1), 0);
   }
   if ( a2 >= *((_DWORD *)this + 10031) )
   {
@@ -149,7 +150,7 @@ bool  CGuiChatMsgList::SetOutputControls(int a2, struct CGuiChatMsgList::SContro
         i < *((_DWORD *)this + 10032);
         ++i )
   {
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 3 * i), *((_DWORD *)this + 3 * i + 1), 0);
+    IGuiEngine::SetControlVisibility(g_pGUIEngine, *((_DWORD *)this + 3 * i), *((_DWORD *)this + 3 * i + 1), 0);
   }
   for ( j = 0;
         j < a2;
@@ -180,44 +181,43 @@ int  CGuiChatMsgList::SetListentry(int a2, int a3) {
 
   v10 = a3;
   j__strcpy_0(Destination, (const char *)this + 200 * a2 + 120);
-  IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 3 * v10), *((_DWORD *)this + 3 * v10 + 1), Destination);
-  IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 3 * v10), *((_DWORD *)this + 3 * v10 + 1), 1);
+  IGuiEngine::SetText(g_pGUIEngine, *((_DWORD *)this + 3 * v10), *((_DWORD *)this + 3 * v10 + 1), Destination);
+  IGuiEngine::SetControlVisibility(g_pGUIEngine, *((_DWORD *)this + 3 * v10), *((_DWORD *)this + 3 * v10 + 1), 1);
   *((_DWORD *)this + 3 * a3 + 2) = a2;
-  Count = IGuiEngine::GetWrapPosition((IGuiEngine *)g_pGUIEngine, *((_DWORD *)this + 3 * v10), *((_DWORD *)this + 3 * v10 + 1));
-  if ( Count <= 0 )
+  Count = IGuiEngine::GetWrapPosition(g_pGUIEngine, *((_DWORD *)this + 3 * v10), *((_DWORD *)this + 3 * v10 + 1));
+  if ( Count > 0 )
   {
-    return v10 - 1;
-  }
-  Counta = Count - 1;
-  for ( Ptr = j___mbsninc((const unsigned __int8 *)Destination, Counta);
-        Ptr > (const unsigned __int8 *)Destination && j___mbsncmp(Ptr, &byte_3690324, 1u);
-        Ptr = j___mbsdec((const unsigned __int8 *)Destination, Ptr) )
-  {
-    ;
-  }
-  if ( j___mbsncmp(Ptr, &byte_369038C, 1u) )
-  {
-    Ptra = j___mbsninc((const unsigned __int8 *)Destination, Counta);
-  }
-  else
-  {
-    Ptra = j___mbsinc(Ptr);
-  }
-  v6 = *Ptra;
-  *Ptra = 0;
-  if ( a3 <= 0 )
-  {
-    *Ptra = v6;
-    IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 3 * a3), *((_DWORD *)this + 3 * a3 + 1), (char *)Ptra);
-  }
-  else
-  {
-    IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 3 * a3 - 3), *((_DWORD *)this + 3 * a3 - 2), Destination);
-    IGuiEngine::SetControlVisibility((void *)g_pGUIEngine, *((_DWORD *)this + 3 * a3 - 3), *((_DWORD *)this + 3 * a3 - 2), 1);
-    *((_DWORD *)this + 3 * a3 - 1) = a2;
-    *Ptra = v6;
-    IGuiEngine::SetText((void *)g_pGUIEngine, *((_DWORD *)this + 3 * a3), *((_DWORD *)this + 3 * a3 + 1), (char *)Ptra);
-    v10 = a3 - 1;
+    Counta = Count - 1;
+    for ( Ptr = j___mbsninc((const unsigned __int8 *)Destination, Counta);
+          Ptr > (const unsigned __int8 *)Destination && j___mbsncmp(Ptr, &byte_3690324, 1u) != 0;
+          Ptr = j___mbsdec((const unsigned __int8 *)Destination, Ptr) )
+    {
+      ;
+    }
+    if ( j___mbsncmp(Ptr, &byte_369038C, 1u) != 0 )
+    {
+      Ptra = j___mbsninc((const unsigned __int8 *)Destination, Counta);
+    }
+    else
+    {
+      Ptra = j___mbsinc(Ptr);
+    }
+    v6 = *Ptra;
+    *Ptra = 0;
+    if ( a3 <= 0 )
+    {
+      *Ptra = v6;
+      IGuiEngine::SetText(g_pGUIEngine, *((_DWORD *)this + 3 * a3), *((_DWORD *)this + 3 * a3 + 1), (char *)Ptra);
+    }
+    else
+    {
+      IGuiEngine::SetText(g_pGUIEngine, *((_DWORD *)this + 3 * a3 - 3), *((_DWORD *)this + 3 * a3 - 2), Destination);
+      IGuiEngine::SetControlVisibility(g_pGUIEngine, *((_DWORD *)this + 3 * a3 - 3), *((_DWORD *)this + 3 * a3 - 2), 1);
+      *((_DWORD *)this + 3 * a3 - 1) = a2;
+      *Ptra = v6;
+      IGuiEngine::SetText(g_pGUIEngine, *((_DWORD *)this + 3 * a3), *((_DWORD *)this + 3 * a3 + 1), (char *)Ptra);
+      v10 = a3 - 1;
+    }
   }
   return v10 - 1;
 }

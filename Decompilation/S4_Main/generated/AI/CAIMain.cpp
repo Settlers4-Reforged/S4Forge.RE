@@ -52,12 +52,9 @@ void  CAIMain::Done(void) {
   {
     __debugbreak();
   }
-  if ( this->m_uActiveAIsMask )
+  if ( this->m_uActiveAIsMask != 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 187, "m_uActiveAIsMask == 0") == 1 )
   {
-    if ( BBSupportDbgReport(2, "AI\\AI_Main.cpp", 187, "m_uActiveAIsMask == 0") == 1 )
-    {
-      __debugbreak();
-    }
+    __debugbreak();
   }
 }
 
@@ -91,7 +88,7 @@ void  CAIMain::Load(class IS4Chunk & a2) {
     }
     v3 = a2->LoadUnsigned32(1, 1);
   }
-  if ( v3 )
+  if ( v3 != 0 )
   {
     v2 = a2->LoadUnsigned32_(a2);
     IAIEnvironment::SetGlobalEcoAIFlags(v2);
@@ -136,7 +133,7 @@ void  CAIMain::Save(class IS4Chunk & a2) {
         i <= PlayerId;
         ++i )
   {
-    if ( this->m_pPlayerAIs[i] )
+    if ( this->m_pPlayerAIs[i] != 0 )
     {
       ((void (__thiscall *)(CS4MemChunk *, int))a2->SaveUnsigned32)(a2, i);
       this->m_pPlayerAIs[i]->Save(&this->m_pPlayerAIs[i]->IS4ChunkObject, a2);
@@ -161,7 +158,7 @@ void  CAIMain::Execute(void) {
   }
   IAIEnvironment::UpdateTickCounter();
   CAIResourceMap::Update();
-  if ( this->m_uActiveAIsMask )
+  if ( this->m_uActiveAIsMask != 0 )
   {
     v2 = IAIEnvironment::TickCounter();
     CAITaskForces::Execute();
@@ -171,13 +168,13 @@ void  CAIMain::Execute(void) {
           i <= PlayerId;
           ++i )
     {
-      if ( this->m_pPlayerAIs[i] )
+      if ( this->m_pPlayerAIs[i] != 0 )
       {
         if ( (this->m_uActiveAIsMask & (1 << i)) == 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 255, "(m_uActiveAIsMask & (1 << iPlayerId)) != 0") == 1 )
         {
           __debugbreak();
         }
-        (*(void (__thiscall **)(struct CAIPlayerAI *))(*(_DWORD *)this->m_pPlayerAIs[i] + 4))(this->m_pPlayerAIs[i]);
+        ((void (__thiscall *)(struct CAIPlayerAI *))this->m_pPlayerAIs[i]->IAIUnknown::__vftable[1].j___purecall)(this->m_pPlayerAIs[i]);
       }
       else if ( (this->m_uActiveAIsMask & (1 << i)) != 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 261, "(m_uActiveAIsMask & (1 << iPlayerId)) == 0") == 1 )
       {
@@ -192,11 +189,11 @@ void  CAIMain::Execute(void) {
 // Decompiled from void __thiscall CAIMain::ActivatePlayerAI(CAIMain *this, unsigned int a2)
 void  CAIMain::ActivatePlayerAI(int a2) {
   
-  if ( *((_BYTE *)this + 4) )
+  if ( this->m_bInitialized )
   {
     if ( CAIMain::IsRealPlayerId(a2) )
     {
-      if ( *((_DWORD *)this + a2 + 3) )
+      if ( this->m_pPlayerAIs[a2] != 0 )
       {
         BBSupportTracePrintF(3, "AI: %s AI for player %i is already active.", "CAIMain::ActivatePlayerAI():", a2);
       }
@@ -224,7 +221,7 @@ void  CAIMain::DeactivatePlayerAI(int a2) {
   
   int result; // eax
 
-  if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 303, "m_bInitialized") == 1 )
+  if ( !this->m_bInitialized && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 303, "m_bInitialized") == 1 )
   {
     __debugbreak();
   }
@@ -232,16 +229,16 @@ void  CAIMain::DeactivatePlayerAI(int a2) {
   {
     __debugbreak();
   }
-  if ( *((_BYTE *)this + 4) )
+  if ( this->m_bInitialized )
   {
     if ( CAIMain::IsRealPlayerId(a2) )
     {
-      if ( *((_DWORD *)this + a2 + 3) )
+      if ( this->m_pPlayerAIs[a2] != 0 )
       {
         BBSupportTracePrintF(3, "AI: %s Deactivating AI for player %i...", "CAIMain::DeactivatePlayerAI():", a2);
-        (***((void (__thiscall ****)(_DWORD))this + a2 + 3))(*((_DWORD *)this + a2 + 3));
-        *((_DWORD *)this + a2 + 3) = 0;
-        *((_DWORD *)this + 2) &= ~(1 << a2);
+        ((void (__thiscall *)(struct CAIPlayerAI *))this->m_pPlayerAIs[a2]->j___purecall)(this->m_pPlayerAIs[a2]);
+        this->m_pPlayerAIs[a2] = 0;
+        this->m_uActiveAIsMask &= ~(1 << a2);
       }
       else
       {
@@ -257,19 +254,18 @@ void  CAIMain::DeactivatePlayerAI(int a2) {
   {
     BBSupportTracePrintF(3, "AI: %s Not initialized!", "CAIMain::DeactivatePlayerAI():");
   }
-  if ( (*((_DWORD *)this + 2) & (1 << a2)) != 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 329, "(m_uActiveAIsMask & (1 << _iPlayerId)) == 0") == 1 )
+  if ( (this->m_uActiveAIsMask & (1 << a2)) != 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 329, "(m_uActiveAIsMask & (1 << _iPlayerId)) == 0") == 1 )
   {
     __debugbreak();
   }
   result = a2;
-  if ( !*((_DWORD *)this + a2 + 3) )
+  if ( this->m_pPlayerAIs[a2] != 0 )
   {
-    return result;
-  }
-  result = BBSupportDbgReport(2, "AI\\AI_Main.cpp", 330, "m_pPlayerAIs[_iPlayerId] == 0");
-  if ( result == 1 )
-  {
-    __debugbreak();
+    result = BBSupportDbgReport(2, "AI\\AI_Main.cpp", 330, "m_pPlayerAIs[_iPlayerId] == 0");
+    if ( result == 1 )
+    {
+      __debugbreak();
+    }
   }
   return result;
 }
@@ -286,7 +282,7 @@ void  CAIMain::DeactivateAllPlayerAIs(void) {
         i <= 8;
         ++i )
   {
-    (*(void (__thiscall **)(CAIMain *, int))(*(_DWORD *)this + 32))(this, i);
+    this->DeactivatePlayerAI(this, i);
     result = i + 1;
   }
   return result;
@@ -301,7 +297,7 @@ bool  CAIMain::IsPlayerAIActive(int a2) {
   {
     __debugbreak();
   }
-  return this->m_bInitialized && CAIMain::IsRealPlayerId(a2) && this->m_pPlayerAIs[a2];
+  return this->m_bInitialized && CAIMain::IsRealPlayerId(a2) && this->m_pPlayerAIs[a2] != 0;
 }
 
 
@@ -309,8 +305,8 @@ bool  CAIMain::IsPlayerAIActive(int a2) {
 // Decompiled from void __thiscall CAIMain::PostAIEvent(CAIPlayerAI **this, int a2, int a3, int a4, int a5)
 void  CAIMain::PostAIEvent(int iEventType, int iX, int iY, int iDark) {
   
-  int v5; // [esp+C8h] [ebp-48h]
-  int v6; // [esp+CCh] [ebp-44h]
+  Squares *v5; // [esp+C8h] [ebp-48h]
+  Squares *v6; // [esp+CCh] [ebp-44h]
   int i; // [esp+104h] [ebp-Ch]
   signed int v9; // [esp+10Ch] [ebp-4h]
 
@@ -337,9 +333,9 @@ void  CAIMain::PostAIEvent(int iEventType, int iX, int iY, int iDark) {
       v9 = 0;
       break;
     case 2:
-      v5 = IAIEnvironment::UnpackXFast(a3);
-      v6 = IAIEnvironment::UnpackYFast(a3);
-      if ( !IAIEnvironment::WorldInWorld(v5, v6) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 399, "g_pAIEnv->WorldInWorld(iX, iY)") == 1 )
+      v5 = (Squares *)IAIEnvironment::UnpackXFast(a3);
+      v6 = (Squares *)IAIEnvironment::UnpackYFast(a3);
+      if ( !IAIEnvironment::WorldInWorld((unsigned int)v5, (unsigned int)v6) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 399, "g_pAIEnv->WorldInWorld(iX, iY)") == 1 )
       {
         __debugbreak();
       }
@@ -355,7 +351,7 @@ void  CAIMain::PostAIEvent(int iEventType, int iX, int iY, int iDark) {
       {
         __debugbreak();
       }
-      if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a4) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 416, "g_cBuildingMgr.GetBuildingPtr(iBuildingId) != 0") == 1 )
+      if ( (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a4) == 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 416, "g_cBuildingMgr.GetBuildingPtr(iBuildingId) != 0") == 1 )
       {
         __debugbreak();
       }
@@ -365,7 +361,7 @@ void  CAIMain::PostAIEvent(int iEventType, int iX, int iY, int iDark) {
       {
         __debugbreak();
       }
-      if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a4) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 433, "g_cBuildingMgr.GetBuildingPtr(iBuildingId) != 0") == 1 )
+      if ( (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a4) == 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 433, "g_cBuildingMgr.GetBuildingPtr(iBuildingId) != 0") == 1 )
       {
         __debugbreak();
       }
@@ -376,7 +372,7 @@ void  CAIMain::PostAIEvent(int iEventType, int iX, int iY, int iDark) {
       {
         __debugbreak();
       }
-      if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a4) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 449, "g_cBuildingMgr.GetBuildingPtr(iBuildingId) != 0") == 1 )
+      if ( (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a4) == 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 449, "g_cBuildingMgr.GetBuildingPtr(iBuildingId) != 0") == 1 )
       {
         __debugbreak();
       }
@@ -390,7 +386,7 @@ void  CAIMain::PostAIEvent(int iEventType, int iX, int iY, int iDark) {
       {
         __debugbreak();
       }
-      if ( !CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a4) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 468, "g_cBuildingMgr.GetBuildingPtr(iBuildingId) != 0") == 1 )
+      if ( (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, a4) == 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 468, "g_cBuildingMgr.GetBuildingPtr(iBuildingId) != 0") == 1 )
       {
         __debugbreak();
       }
@@ -504,7 +500,7 @@ LABEL_89:
       {
         __debugbreak();
       }
-      CAIResourceMap::NotifyDarkLandChange(a3, a4, a5 != 0);
+      ((void (__cdecl *)(int, int, bool))CAIResourceMap::NotifyDarkLandChange)(a3, a4, a5 != 0);
       v9 = 9;
       break;
     default:
@@ -520,21 +516,21 @@ LABEL_89:
           i <= CPlayerManager::LastPlayerId();
           ++i )
     {
-      if ( this[i + 3] )
+      if ( *(this + i + 3) != 0 )
       {
-        CAIPlayerAI::PostAIEvent(this[i + 3], a2, a3, a4, a5);
+        CAIPlayerAI::PostAIEvent(*(this + i + 3), a2, a3, a4, a5);
       }
     }
   }
   else
   {
-    if ( v9 && (v9 > 8 || v9 < 1) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 638, "(iPostEventPlayerId == PLAYER_NO_PLAYER) || ((iPostEventPlayerId >= PLAYER_FIRST) & (iPostEventPlayerId <= PLAYER_LAST))") == 1 )
+    if ( v9 != 0 && (v9 > 8 || v9 < 1) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 638, "(iPostEventPlayerId == PLAYER_NO_PLAYER) || ((iPostEventPlayerId >= PLAYER_FIRST) & (iPostEventPlayerId <= PLAYER_LAST))") == 1 )
     {
       __debugbreak();
     }
-    if ( CAIMain::IsRealPlayerId(v9) && this[v9 + 3] )
+    if ( CAIMain::IsRealPlayerId(v9) && *(this + v9 + 3) != 0 )
     {
-      CAIPlayerAI::PostAIEvent(this[v9 + 3], a2, a3, a4, a5);
+      CAIPlayerAI::PostAIEvent(*(this + v9 + 3), a2, a3, a4, a5);
     }
   }
 }
@@ -554,7 +550,7 @@ void  CAIMain::DarkTribeIncreaseManaForNewManaSphere(int _iPlayerId) {
   {
     __debugbreak();
   }
-  Value = CAIPlayersScriptVars::GetValue(g_cAIPlayersScriptVars, _iPlayerId, 11);
+  Value = CAIPlayersScriptVars::GetValue((CAIPlayersScriptVars *)g_cAIPlayersScriptVars, _iPlayerId, 11);
   IAIEnvironment::MagicIncreaseMana(_iPlayerId, Value);
 }
 
@@ -605,9 +601,9 @@ void  CAIMain::DbgPrint(int a2) {
   {
     __debugbreak();
   }
-  if ( a2 )
+  if ( a2 != 0 )
   {
-    if ( CAIMain::IsRealPlayerId(a2) && this->m_pPlayerAIs[a2] )
+    if ( CAIMain::IsRealPlayerId(a2) && this->m_pPlayerAIs[a2] != 0 )
     {
       CAIPlayerAI::DbgPrint(this->m_pPlayerAIs[a2]);
     }
@@ -619,7 +615,7 @@ void  CAIMain::DbgPrint(int a2) {
           i <= PlayerId;
           ++i )
     {
-      if ( this->m_pPlayerAIs[i] )
+      if ( this->m_pPlayerAIs[i] != 0 )
       {
         CAIPlayerAI::DbgPrint(this->m_pPlayerAIs[i]);
       }
@@ -633,7 +629,7 @@ void  CAIMain::DbgPrint(int a2) {
  CAIMain::CAIMain(void) {
   
   IAIMain::IAIMain((IAIMain *)this);
-  this->__vftable = (CAIMain_vtbl *)CAIMain::_vftable_;
+  this->__vftable = (CAIMain_vtbl *)&CAIMain::_vftable_;
   CAIScheduler::CAIScheduler(&this->m_sAIScheduler);
   CAIAgentEvaluation::CAIAgentEvaluation(&this->m_sAIAgentEvaluation, &g_cAIPlayerEvaluations);
   this->m_bInitialized = 0;
@@ -647,7 +643,7 @@ void  CAIMain::DbgPrint(int a2) {
 // Decompiled from int __thiscall CAIMain::PrepareAI(CAIMain *this)
 void  CAIMain::PrepareAI(void) {
   
-  return CAIPlayerEvaluations::EvaluateAllPlayers((CAIPlayerEvaluations *)&g_cAIPlayerEvaluations);
+  return ((int (__thiscall *)(CAIPlayerEvaluations *))CAIPlayerEvaluations::EvaluateAllPlayers)(&g_cAIPlayerEvaluations);
 }
 
 
@@ -657,7 +653,7 @@ void  CAIMain::CreatePlayerAI(int a2, class IS4Chunk * a3) {
   
   int result; // eax
 
-  if ( !*((_BYTE *)this + 4) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 207, "m_bInitialized") == 1 )
+  if ( !this->m_bInitialized && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 207, "m_bInitialized") == 1 )
   {
     __debugbreak();
   }
@@ -665,29 +661,28 @@ void  CAIMain::CreatePlayerAI(int a2, class IS4Chunk * a3) {
   {
     __debugbreak();
   }
-  if ( *((_DWORD *)this + a2 + 3) && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 209, "m_pPlayerAIs[_iPlayerId] == 0") == 1 )
+  if ( this->m_pPlayerAIs[a2] != 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 209, "m_pPlayerAIs[_iPlayerId] == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 2) )
+  if ( this->m_uActiveAIsMask == 0 )
   {
     CAIMain::PrepareAI(this);
   }
-  *((_DWORD *)this + a2 + 3) = CAIPlayerAI::CreatePlayerAI(a2, a3);
-  *((_DWORD *)this + 2) |= 1 << a2;
-  if ( (*((_DWORD *)this + 2) & (1 << a2)) == 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 222, "(m_uActiveAIsMask & (1 << _iPlayerId)) != 0") == 1 )
+  this->m_pPlayerAIs[a2] = (struct CAIPlayerAI *)CAIPlayerAI::CreatePlayerAI(a2, a3);
+  this->m_uActiveAIsMask |= 1 << a2;
+  if ( (this->m_uActiveAIsMask & (1 << a2)) == 0 && BBSupportDbgReport(2, "AI\\AI_Main.cpp", 222, "(m_uActiveAIsMask & (1 << _iPlayerId)) != 0") == 1 )
   {
     __debugbreak();
   }
   result = a2;
-  if ( *((_DWORD *)this + a2 + 3) )
+  if ( this->m_pPlayerAIs[a2] == 0 )
   {
-    return result;
-  }
-  result = BBSupportDbgReport(2, "AI\\AI_Main.cpp", 223, "m_pPlayerAIs[_iPlayerId] != 0");
-  if ( result == 1 )
-  {
-    __debugbreak();
+    result = BBSupportDbgReport(2, "AI\\AI_Main.cpp", 223, "m_pPlayerAIs[_iPlayerId] != 0");
+    if ( result == 1 )
+    {
+      __debugbreak();
+    }
   }
   return result;
 }
@@ -697,8 +692,8 @@ void  CAIMain::CreatePlayerAI(int a2, class IS4Chunk * a3) {
 // Decompiled from void __thiscall CAIMain::~CAIMain(CAIMain *this)
  CAIMain::~CAIMain(void) {
   
-  CAIAgentEvaluation::~CAIAgentEvaluation((CAIMain *)((char *)this + 92));
-  CAIScheduler::~CAIScheduler((CAIMain *)((char *)this + 48));
+  CAIAgentEvaluation::~CAIAgentEvaluation((CAIScheduler **)&this->m_sAIAgentEvaluation);
+  CAIScheduler::~CAIScheduler((struct CAIAgent **)&this->m_sAIScheduler);
 }
 
 

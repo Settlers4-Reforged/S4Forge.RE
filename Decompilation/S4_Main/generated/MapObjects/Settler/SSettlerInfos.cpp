@@ -19,7 +19,7 @@
 // Decompiled from int __thiscall CSettlerMgr::SSettlerInfos::~SSettlerInfos(CSettlerMgr::SSettlerInfos *this)
  CSettlerMgr::SSettlerInfos::~SSettlerInfos(void) {
   
-  std::vector<unsigned short>::~vector<unsigned short>((char *)this + 24);
+  std::vector<unsigned short>::~vector<unsigned short>(&this->g_vAnimLists);
   return std::vector<CSettlerMgr::SSearchInfos>::~vector<CSettlerMgr::SSearchInfos>(this);
 }
 

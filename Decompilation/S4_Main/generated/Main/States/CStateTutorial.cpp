@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateTutorial::DynamicCreateFunc(void * a1) {
   CStateTutorial *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateTutorial *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateTutorial::CStateTutorial(C, a1);
   }
@@ -24,22 +24,22 @@ class CGameState * __cdecl CStateTutorial::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateTutorial *__thiscall CStateTutorial::CStateTutorial(CStateTutorial *this, void *a2)
  CStateTutorial::CStateTutorial(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateTutorial::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
   g_cTutorialStatus = 9;
   dword_40320BC = CGameSettings::GetTutorialStatus();
-  CGuiGameState::OpenDialog(this, 11, GuiDlgMainTutorialProc);
+  CGuiGameState::OpenDialog((CGuiGameState *)this, 11, (bool (__cdecl *)(int, int, int))GuiDlgMainTutorialProc);
   return this;
 }
 
 
 // address=[0x14caed0]
-// Decompiled from void __thiscall CStateTutorial::~CStateTutorial(CStateTutorial *this)
+// Decompiled from void __thiscall CStateTutorial::~CStateTutorial(CGuiGameState *this)
  CStateTutorial::~CStateTutorial(void) {
   
-  *(_DWORD *)this = &CStateTutorial::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 11) && BBSupportDbgReport(2, "main\\states\\StateTutorial.cpp", 76, "bRet") == 1 )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateTutorial::_vftable_;
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 11) && BBSupportDbgReport(2, "main\\states\\StateTutorial.cpp", 76, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -63,20 +63,19 @@ bool  CStateTutorial::Perform(void) {
     }
   }
   v1 = dword_4032124 + 30;
-  if ( v1 >= timeGetTime() )
+  if ( v1 < timeGetTime() )
   {
-    return 1;
+    dword_4032124 = timeGetTime();
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  dword_4032124 = timeGetTime();
-  IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-  IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   return 1;
 }
 
 
 // address=[0x14caff0]
-// Decompiled from char __thiscall CStateTutorial::OnEvent(CStateTutorial *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateTutorial::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
@@ -111,7 +110,7 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
   void *v31; // [esp+30h] [ebp-250h]
   CGameType *v32; // [esp+34h] [ebp-24Ch]
   void *C; // [esp+38h] [ebp-248h]
-  int (__thiscall ***v34)(_DWORD, int); // [esp+3Ch] [ebp-244h]
+  INetworkEngine *v34; // [esp+3Ch] [ebp-244h]
   bool v35; // [esp+43h] [ebp-23Dh]
   unsigned int i; // [esp+44h] [ebp-23Ch]
   int v37; // [esp+48h] [ebp-238h]
@@ -143,11 +142,11 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
         __debugbreak();
       }
       v21 = a2->m_wParam + 1;
-      v3 = (char *)std::wstring::c_str((_Cnd_internal_imp_t *)&stru_40320F4);
-      swprintf((char *)Buffer, v3, v21);
+      v3 = (char *)std::wstring::c_str(&stru_40320F4);
+      swprintf(Buffer, (const WCHAR *)v3, (WCHAR *)(char)v21);
       C = operator new(0x620u);
       v43 = 1;
-      if ( C )
+      if ( C != 0 )
       {
         v32 = CGameType::CGameType((CGameType *)C);
       }
@@ -157,7 +156,7 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
       }
       v27 = v32;
       v43 = -1;
-      g_pGameType = (int)v32;
+      g_pGameType = v32;
       v21 = 0;
       v20 = 0;
       v19 = -1;
@@ -168,25 +167,25 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
       v14 = 0;
       v13 = 1;
       v23 = &v6;
-      v22 = std::wstring::wstring(&v6, Buffer);
-      MapData = CGameType::LoadMapData(v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21);
+      v22 = std::wstring::wstring((std::wstring *)&v6, Buffer);
+      MapData = ((_DWORD (__stdcall *)(char, int, int, int, int, int, int, char, int, char, char, int, int, int, char, char))CGameType::LoadMapData)(v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21);
       v38 = MapData;
-      if ( MapData )
+      if ( MapData != 0 )
       {
-        IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 4);
-        IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 0);
-        if ( (unsigned __int8)CStateLobbyGameSettings::CopyDefaultUserFlags() )
+        IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 4u);
+        IGuiEngine::EnableEventInput(g_pGUIEngine, 0);
+        if ( (unsigned __int8)CStateLobbyGameSettings::CopyDefaultUserFlags() != 0 )
         {
-          if ( g_pNetworkEngine )
+          if ( g_pNetworkEngine != 0 )
           {
-            v26 = g_pNetworkEngine;
-            v34 = (int (__thiscall ***)(_DWORD, int))g_pNetworkEngine;
-            v25 = (**v34)(v34, 1);
+            v26 = (int)g_pNetworkEngine;
+            v34 = g_pNetworkEngine;
+            v25 = (**(int (__thiscall ***)(INetworkEngine *, int))v34)(v34, 1);
             g_pNetworkEngine = 0;
           }
           v31 = operator new(0x18u);
           v43 = 2;
-          if ( v31 )
+          if ( v31 != 0 )
           {
             v30 = INetworkEngine::INetworkEngine((INetworkEngine *)v31, 0);
           }
@@ -196,25 +195,25 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
           }
           v24 = v30;
           v43 = -1;
-          g_pNetworkEngine = (int)v30;
-          *(_DWORD *)(g_pGameType + 112) = *(_DWORD *)(g_pGameType + 852);
+          g_pNetworkEngine = v30;
+          g_pGameType->m_iActualPlayerCount = g_pGameType->m_iMapMaxNumPlayers;
           for ( i = 0;
-                i < *(_DWORD *)(g_pGameType + 112);
+                i < g_pGameType->m_iActualPlayerCount;
                 ++i )
           {
-            *(_BYTE *)(i + g_pGameType + 440) = 0;
+            g_pGameType->m_sPlayerExclusiveColor[i] = 0;
           }
-          *(_DWORD *)(g_pGameType + 188) = INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
+          g_pGameType->m_uiIPPlayer[0] = (DWORD)INetworkEngine::GetLocalIP((CGameHost **)g_pNetworkEngine);
           Instance = (OnlineManager *)OnlineManager::GetInstance();
-          *(_DWORD *)(g_pGameType + 224) = OnlineManager::GetLocalPeerId(Instance);
-          *(_DWORD *)(g_pGameType + 692) = 4;
-          INetworkEngine::Start(1, 1, *(_DWORD *)(g_pGameType + 112), 0);
-          CGameStateHandler::Switch((int)CStateGame::DynamicCreateFunc, 0);
+          g_pGameType->m_sPlayerPeerId[0] = OnlineManager::GetLocalPeerId(Instance);
+          g_pGameType->m_iGameType = 4;
+          INetworkEngine::Start(1, 1, g_pGameType->m_iActualPlayerCount, 0);
+          CGameStateHandler::Switch(CStateGame::DynamicCreateFunc, 0);
           result = 1;
         }
         else
         {
-          CGameStateHandler::Switch((int)CStateMessageBox::DynamicCreateFunc, 2398);
+          CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateMessageBox::DynamicCreateFunc, (void *)2398);
           result = 1;
         }
       }
@@ -222,9 +221,9 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
       {
         v4 = g_pStringEngine->GetString(g_pStringEngine, 2406);
         std::string::operator=(&g_iMessageBoxStringID, v4);
-        v40 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 11);
-        v40 = IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 20, GuiDlgMainMessageBoxProc);
-        if ( !v40 && BBSupportDbgReport(2, "main\\states\\StateTutorial.cpp", 128, "bRet") == 1 )
+        v40 = IGuiEngine::CloseDialog(g_pGUIEngine, 11);
+        v40 = IGuiEngine::OpenDialog(g_pGUIEngine, 20, (bool (__cdecl *)(int, int, int))GuiDlgMainMessageBoxProc);
+        if ( v40 == 0 && BBSupportDbgReport(2, "main\\states\\StateTutorial.cpp", 128, "bRet") == 1 )
         {
           __debugbreak();
         }
@@ -233,12 +232,12 @@ bool  CStateTutorial::OnEvent(class CEvn_Event & a2) {
       }
       break;
     case 92:
-      CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch(CStateMainMenu::DynamicCreateFunc, 0);
       result = 1;
       break;
     case 101:
-      v35 = IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 20);
-      CGuiGameState::OpenDialog(v29, 11, GuiDlgMainTutorialProc);
+      v35 = IGuiEngine::CloseDialog(g_pGUIEngine, 20);
+      CGuiGameState::OpenDialog(v29, 11, (bool (__cdecl *)(int, int, int))GuiDlgMainTutorialProc);
       result = 1;
       break;
     default:

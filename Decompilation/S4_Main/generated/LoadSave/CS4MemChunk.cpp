@@ -50,15 +50,15 @@ void  CS4MemChunk::InitLoadData(void const * chunkData, unsigned int chunkSize) 
   
   CS4MemChunk *result; // eax
 
-  if ( !chunkData && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 66, "_pChunkData != 0") == 1 )
+  if ( chunkData == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 66, "_pChunkData != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !chunkSize && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 67, "_uChunkSize > 0") == 1 )
+  if ( chunkSize == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 67, "_uChunkSize > 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_tMode && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 69, "m_tMode == CHUNK_MODE_NONE") == 1 )
+  if ( this->m_tMode != CHUNK_MODE_NONE && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 69, "m_tMode == CHUNK_MODE_NONE") == 1 )
   {
     __debugbreak();
   }
@@ -77,7 +77,7 @@ void  CS4MemChunk::InitLoadData(void const * chunkData, unsigned int chunkSize) 
 // Decompiled from void __thiscall CS4MemChunk::InitSaveCalcSize(CS4MemChunk *this)
 void  CS4MemChunk::InitSaveCalcSize(void) {
   
-  if ( this->m_tMode && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 87, "m_tMode == CHUNK_MODE_NONE") == 1 )
+  if ( this->m_tMode != CHUNK_MODE_NONE && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 87, "m_tMode == CHUNK_MODE_NONE") == 1 )
   {
     __debugbreak();
   }
@@ -86,7 +86,7 @@ void  CS4MemChunk::InitSaveCalcSize(void) {
   this->m_pData = 0;
   this->m_pCurrent = 0;
   this->m_pSaveFunc = CS4MemChunk::SaveFuncCalcSize;
-  this->m_pSaveUnsigned32 = j_CS4MemChunk::SaveUnsigned32CalcSize;
+  this->m_pSaveUnsigned32 = (void (__fastcall *)(CS4MemChunk *, unsigned int))j_CS4MemChunk::SaveUnsigned32CalcSize;
 }
 
 
@@ -122,7 +122,7 @@ void  CS4MemChunk::Done(void) {
   
   CS4MemChunk *result; // eax
 
-  if ( this->m_tMode == CHUNK_MODE_SAVE_DATA_AUTO_PTR && this->m_pData )
+  if ( this->m_tMode == CHUNK_MODE_SAVE_DATA_AUTO_PTR && this->m_pData != 0 )
   {
     operator delete((void *)this->m_pData);
   }
@@ -145,11 +145,11 @@ void  CS4MemChunk::Load(void * a2, unsigned int Size) {
   CS4MemChunk *v4; // [esp+4h] [ebp-4h]
 
   v4 = this;
-  if ( !a2 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 146, "_pData != 0") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 146, "_pData != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !Size && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 147, "_uSize > 0") == 1 )
+  if ( Size == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 147, "_uSize > 0") == 1 )
   {
     __debugbreak();
   }
@@ -157,7 +157,7 @@ void  CS4MemChunk::Load(void * a2, unsigned int Size) {
   {
     __debugbreak();
   }
-  if ( !v4->m_pCurrent && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 150, "m_pCurrent != 0") == 1 )
+  if ( v4->m_pCurrent == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 150, "m_pCurrent != 0") == 1 )
   {
     __debugbreak();
   }
@@ -198,15 +198,14 @@ unsigned int  CS4MemChunk::LoadUnsigned32(unsigned int a2, unsigned int a3) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  if ( Unsigned32Inline <= a3 )
+  if ( Unsigned32Inline > a3 )
   {
-    return Unsigned32Inline;
+    Unsigned32Inline = a3;
+    BBSupportDbgReport(3, "LoadSave\\MemChunk.cpp", 219, "CS4MemChunk::LoadUnsigned32() failed!");
+    v4 = 0;
+    CS4InvalidMapException::CS4InvalidMapException(&v4);
+    _CxxThrowException(&v4, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  Unsigned32Inline = a3;
-  BBSupportDbgReport(3, "LoadSave\\MemChunk.cpp", 219, "CS4MemChunk::LoadUnsigned32() failed!");
-  v4 = 0;
-  CS4InvalidMapException::CS4InvalidMapException(&v4);
-  _CxxThrowException(&v4, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   return Unsigned32Inline;
 }
 
@@ -311,11 +310,11 @@ void __fastcall CS4MemChunk::SaveFuncNOP(void const * a1, unsigned int a2) {
 // Decompiled from void __fastcall CS4MemChunk::SaveFuncCalcSize(CS4MemChunk *this, const void *_pData, unsigned int _uSize)
 void __fastcall CS4MemChunk::SaveFuncCalcSize(void const * _pData, unsigned int _uSize) {
   
-  if ( !_pData && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 301, "_pData != 0") == 1 )
+  if ( _pData == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 301, "_pData != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !_uSize && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 302, "_uSize > 0") == 1 )
+  if ( _uSize == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 302, "_uSize > 0") == 1 )
   {
     __debugbreak();
   }
@@ -333,21 +332,21 @@ void __fastcall CS4MemChunk::SaveFuncSaveData(void const * a2, unsigned int Size
   
   __int64 v4; // [esp+4h] [ebp-Ch]
 
-  if ( !a2 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 316, "_pData != 0") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 316, "_pData != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( !Size && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 317, "_uSize > 0") == 1 )
+  if ( Size == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 317, "_uSize > 0") == 1 )
   {
     __debugbreak();
   }
   HIDWORD(v4) = this->m_tMode == CHUNK_MODE_SAVE_DATA;
   LODWORD(v4) = this->m_tMode == CHUNK_MODE_SAVE_DATA_AUTO_PTR;
-  if ( !v4 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 319, "(m_tMode == CHUNK_MODE_SAVE_DATA) | (m_tMode == CHUNK_MODE_SAVE_DATA_AUTO_PTR)") == 1 )
+  if ( v4 == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 319, "(m_tMode == CHUNK_MODE_SAVE_DATA) | (m_tMode == CHUNK_MODE_SAVE_DATA_AUTO_PTR)") == 1 )
   {
     __debugbreak();
   }
-  if ( !this->m_pCurrent && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 321, "m_pCurrent != 0") == 1 )
+  if ( this->m_pCurrent == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 321, "m_pCurrent != 0") == 1 )
   {
     __debugbreak();
   }
@@ -392,11 +391,11 @@ void __fastcall CS4MemChunk::SaveUnsigned32SaveData(unsigned int a2) {
 
   HIDWORD(v3) = this->m_tMode == CHUNK_MODE_SAVE_DATA;
   LODWORD(v3) = this->m_tMode == CHUNK_MODE_SAVE_DATA_AUTO_PTR;
-  if ( !v3 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 358, "(m_tMode == CHUNK_MODE_SAVE_DATA) | (m_tMode == CHUNK_MODE_SAVE_DATA_AUTO_PTR)") == 1 )
+  if ( v3 == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 358, "(m_tMode == CHUNK_MODE_SAVE_DATA) | (m_tMode == CHUNK_MODE_SAVE_DATA_AUTO_PTR)") == 1 )
   {
     __debugbreak();
   }
-  if ( !this->m_pCurrent && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 360, "m_pCurrent != 0") == 1 )
+  if ( this->m_pCurrent == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 360, "m_pCurrent != 0") == 1 )
   {
     __debugbreak();
   }
@@ -420,7 +419,7 @@ unsigned int  CS4MemChunk::LoadUnsigned32Inline(void) {
   {
     __debugbreak();
   }
-  if ( !this->m_pCurrent && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 172, "m_pCurrent != 0") == 1 )
+  if ( this->m_pCurrent == 0 && BBSupportDbgReport(2, "LoadSave\\MemChunk.cpp", 172, "m_pCurrent != 0") == 1 )
   {
     __debugbreak();
   }

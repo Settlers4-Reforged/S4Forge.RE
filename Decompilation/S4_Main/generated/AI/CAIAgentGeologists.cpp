@@ -3,7 +3,7 @@
 // Definitions for class CAIAgentGeologists
 
 // address=[0x1304250]
-// Decompiled from unsigned int __thiscall CAIAgentGeologists::Execute(CAIAgentGeologists *this, unsigned int a2, unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentGeologists::Execute(CAINormalSectorAgent *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentGeologists::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAINormalSectorAI *v3; // eax
@@ -48,35 +48,35 @@ unsigned int  CAIAgentGeologists::Execute(unsigned int a2, unsigned int a3) {
   v31 = (struct CAINormalSectorAI *)((char *)CAINormalSectorAgent::SectorAI(this) + 2324);
   v3 = CAINormalSectorAgent::SectorAI(v37);
   v33 = CAISectorAI::Reservoir(v3, 7);
-  if ( !v33 && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 291, "pReservoir != 0") == 1 )
+  if ( v33 == 0 && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 291, "pReservoir != 0") == 1 )
   {
     __debugbreak();
   }
-  for ( i = CAITaskForce::FirstEntity(v33);
-        i;
+  for ( i = (int)CAITaskForce::FirstEntity((CAITaskForce *)v33);
+        i != 0;
         i = v20 )
   {
-    v20 = CAIEntityInfo::Next(i);
-    v32 = CAIEntityInfo::EntityId(i);
+    v20 = (int)CAIEntityInfo::Next((CAIEntityInfo *)i);
+    v32 = CAIEntityInfo::EntityId((CAIEntityInfo *)i);
     v21 = IAIEnvironment::EntityType(v32);
     if ( v21 == 49 )
     {
       CAITaskForce::RemoveEntity(v33, v32);
-      CAITaskForce::AddEntity(v31, v32, 0);
+      CAITaskForce::AddEntity((CAITaskForce *)v31, v32, 0);
     }
   }
-  if ( CAITaskForce::NumberOfEntities(v31) <= 0 )
+  if ( CAITaskForce::NumberOfEntities((CAITaskForce *)v31) <= 0 )
   {
     return CAIAgent::ExecuteResult(0, 0x80u);
   }
   v25 = IAIEnvironment::TickCounter();
   v4 = CAINormalSectorAgent::SectorAI(v37);
-  v5 = CAISectorAI::PlayerAI(v4);
+  v5 = CAISectorAI::PlayerAI((CAISectorAI *)v4);
   v22 = IAIEnvironment::AlliancesPlayerEnemyBits(*(_DWORD *)(v5 + 12));
   v28 = 0;
-  for ( j = (CAIEntityInfo *)CAITaskForce::FirstEntity(v31);
+  for ( j = CAITaskForce::FirstEntity((CAITaskForce *)v31);
         ;
-        j = (CAIEntityInfo *)CAIEntityInfo::Next(j) )
+        j = CAIEntityInfo::Next(j) )
   {
     v27 = j != 0;
     v26 = v28 < 10;
@@ -94,10 +94,10 @@ unsigned int  CAIAgentGeologists::Execute(unsigned int a2, unsigned int a3) {
       v40 = 0;
       v23 = CQuickScan::CenterSectorId((CQuickScan *)v19);
 LABEL_15:
-      while ( !v40 && CQuickScan::NextPosition((CQuickScan *)v19, (int *)&v39, (int *)&v35) )
+      while ( v40 == 0 && CQuickScan::NextPosition((CQuickScan *)v19, (unsigned int *)&v39, (unsigned int *)&v35) )
       {
         v24 = IAIEnvironment::WorldIndex((int)v39, (int)v35);
-        if ( (unsigned __int8)IAIEnvironment::WorldIsScree(v39, v35) )
+        if ( (unsigned __int8)IAIEnvironment::WorldIsScree(v39, v35) != 0 )
         {
           v8 = IAIEnvironment::WorldSectorId(v24);
           if ( v8 == v23 )
@@ -137,15 +137,15 @@ LABEL_15:
           }
         }
       }
-      if ( v40 )
+      if ( v40 != 0 )
       {
         IAIEnvironment::MovingEntitySendMoveCommand(v34, (int)v39, (int)v35, 1);
       }
       else
       {
-        v14 = CAINormalSectorAgent::SectorAI(v37);
+        v14 = (CAISectorAI *)CAINormalSectorAgent::SectorAI(v37);
         v18 = CAISectorAI::BaseY(v14);
-        v15 = CAINormalSectorAgent::SectorAI(v37);
+        v15 = (struct CAISectorAI *)CAINormalSectorAgent::SectorAI(v37);
         v16 = CAISectorAI::BaseX(v15);
         IAIEnvironment::MovingEntitySendMoveCommand(v34, v16, v18, 0);
       }
@@ -160,14 +160,14 @@ LABEL_15:
 // Decompiled from CAIAgentGeologists *__thiscall CAIAgentGeologists::CAIAgentGeologists(CAIAgentGeologists *this)
  CAIAgentGeologists::CAIAgentGeologists(void) {
   
-  CAINormalSectorAgent::CAINormalSectorAgent(this, "geologists");
+  CAINormalSectorAgent::CAINormalSectorAgent((CAINormalSectorAgent *)this, "geologists");
   *(_DWORD *)this = &CAIAgentGeologists::_vftable_;
   return this;
 }
 
 
 // address=[0x1325c70]
-// Decompiled from void __thiscall CAIAgentGeologists::~CAIAgentGeologists(CAIAgentGeologists *this)
+// Decompiled from void __thiscall CAIAgentGeologists::~CAIAgentGeologists(CAIScheduler **this)
  CAIAgentGeologists::~CAIAgentGeologists(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

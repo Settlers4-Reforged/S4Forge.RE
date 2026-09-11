@@ -7,8 +7,8 @@
 // Decompiled from CFerryLoadInfo *__thiscall CFerryLoadInfo::CFerryLoadInfo(CFerryLoadInfo *this)
  CFerryLoadInfo::CFerryLoadInfo(void) {
   
-  CInfoExchange::CInfoExchange((CInfoExchange *)this);
-  *(_DWORD *)this = &CFerryLoadInfo::_vftable_;
+  CInfoExchange::CInfoExchange(this);
+  this->__vftable = (CInfoExchange_vtbl *)&CFerryLoadInfo::_vftable_;
   return this;
 }
 

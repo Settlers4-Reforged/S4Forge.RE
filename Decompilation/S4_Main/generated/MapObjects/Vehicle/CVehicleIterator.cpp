@@ -19,7 +19,7 @@ class CVehicle *  CVehicleIterator::FirstVehicle(void) {
   }
   FirstVehicleId = CVehicleMgr::GetFirstVehicleId((CVehicleMgr *)&g_cVehicleMgr, *(_DWORD *)this, *((_DWORD *)this + 1));
   v3 = (void **)CMapObjectMgr::EntityPtr(FirstVehicleId);
-  if ( v3 && !j____RTDynamicCast(v3, 0, &IEntity__RTTI_Type_Descriptor_, &CVehicle__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "MapObjects\\VehicleMgr.cpp", 1129, "(pFirstEntity == 0) || (dynamic_cast<CVehicle*>(pFirstEntity) != 0)") == 1 )
+  if ( v3 != 0 && j____RTDynamicCast(v3, 0, &IEntity__RTTI_Type_Descriptor_, &CVehicle__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "MapObjects\\VehicleMgr.cpp", 1129, "(pFirstEntity == 0) || (dynamic_cast<CVehicle*>(pFirstEntity) != 0)") == 1 )
   {
     __debugbreak();
   }
@@ -60,7 +60,7 @@ class CVehicle *  CVehicleIterator::NextVehicle(void) {
 // Decompiled from bool __cdecl CVehicleIterator::IsEntityNullOrValid(struct IEntity *a1)
 bool __cdecl CVehicleIterator::IsEntityNullOrValid(class IEntity * a1) {
   
-  return !a1 || IEntity::FlagBits(a1, (EntityFlag)&loc_3000000);
+  return a1 == 0 || IEntity::FlagBits(a1, (EntityFlag)&loc_3000000) != 0;
 }
 
 
@@ -71,13 +71,13 @@ class CVehicle *  CVehicleIterator::NextVehicleEx(class CVehicle * a2) {
   int v3; // eax
   void **v4; // [esp+4h] [ebp-4h]
 
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 0;
   }
   v3 = IAnimatedEntity::Next(a2);
   v4 = (void **)CMapObjectMgr::EntityPtr(v3);
-  if ( v4 && !j____RTDynamicCast(v4, 0, &IEntity__RTTI_Type_Descriptor_, &CVehicle__RTTI_Type_Descriptor_, 0) && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\VehicleMgr.h", 218, "(pNextEntity == 0) || (dynamic_cast<CVehicle*>(pNextEntity) != 0)") == 1 )
+  if ( v4 != 0 && j____RTDynamicCast(v4, 0, &IEntity__RTTI_Type_Descriptor_, &CVehicle__RTTI_Type_Descriptor_, 0) == 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\VehicleMgr.h", 218, "(pNextEntity == 0) || (dynamic_cast<CVehicle*>(pNextEntity) != 0)") == 1 )
   {
     __debugbreak();
   }

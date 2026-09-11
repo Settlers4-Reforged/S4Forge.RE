@@ -17,11 +17,11 @@
  CCondition::~CCondition(void) {
   
   *(_DWORD *)this = &CCondition::_vftable_;
-  if ( *((_DWORD *)this + 4) )
+  if ( *((_DWORD *)this + 4) != 0 )
   {
     (***((void (__thiscall ****)(_DWORD, int))this + 4))(*((_DWORD *)this + 4), 1);
   }
-  if ( *((_DWORD *)this + 5) )
+  if ( *((_DWORD *)this + 5) != 0 )
   {
     delete *((COptimizeOptions **)this + 5);
   }

@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CGoodTransportPriority::New(int a1)
 class CPersistence * __cdecl CGoodTransportPriority::New(std::istream & a1) {
   
-  if ( operator new(0x64u) )
+  if ( operator new(0x64u) != 0 )
   {
-    return CGoodTransportPriority::CGoodTransportPriority(a1);
+    return ((_DWORD (__stdcall *)(int))CGoodTransportPriority::CGoodTransportPriority)(a1);
   }
   else
   {
@@ -39,25 +39,25 @@ int  CGoodTransportPriority::GetPriority(enum PILE_TYPES a2) {
   }
   else
   {
-    return this[a2 + 2];
+    return *(this + a2 + 2);
   }
 }
 
 
 // address=[0x1452ac0]
-// Decompiled from _DWORD *__thiscall CGoodTransportPriority::CGoodTransportPriority(_DWORD *this, int a2)
+// Decompiled from CPersistence *__thiscall CGoodTransportPriority::CGoodTransportPriority(CPersistence *this, int a2)
  CGoodTransportPriority::CGoodTransportPriority(std::istream & a2) {
   
   _BYTE v3[4]; // [esp+0h] [ebp-14h] BYREF
-  int v4; // [esp+4h] [ebp-10h]
-  int v5; // [esp+8h] [ebp-Ch] BYREF
+  unsigned int v4; // [esp+4h] [ebp-10h]
+  unsigned int v5; // [esp+8h] [ebp-Ch] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-8h] BYREF
-  _DWORD *v7; // [esp+10h] [ebp-4h]
+  CPersistence *v7; // [esp+10h] [ebp-4h]
 
   v7 = this;
   CPersistence::CPersistence(this);
-  *v7 = &CGoodTransportPriority::_vftable_;
-  operator^<unsigned long>(a2, v3);
+  v7->__vftable = (CPersistence_vtbl *)&CGoodTransportPriority::_vftable_;
+  operator^<unsigned long>(a2, (int)v3);
   operator^<unsigned int>(a2, &v5);
   v4 = v5;
   if ( v5 != 1 )
@@ -67,15 +67,15 @@ int  CGoodTransportPriority::GetPriority(enum PILE_TYPES a2) {
     CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
-  operator^<bool>(a2, v7 + 24);
-  operator^<int>(a2, (int)(v7 + 23));
-  LoadArray<unsigned short>(a2, v7 + 1, 86);
+  operator^<bool>(a2, &v7[24]);
+  operator^<int>((struct std::istream *)a2, (int *)&v7[23]);
+  LoadArray<unsigned short>(a2, (int)&v7[1], 86u);
   return v7;
 }
 
 
 // address=[0x1452b80]
-// Decompiled from int __thiscall CGoodTransportPriority::Store(struct CPersistence *this, struct std::ostream *a2)
+// Decompiled from struct std::ostream *__thiscall CGoodTransportPriority::Store(struct CPersistence *this, struct std::ostream *a2)
 void  CGoodTransportPriority::Store(std::ostream & a2) {
   
   int v3; // [esp+0h] [ebp-8h] BYREF
@@ -84,10 +84,10 @@ void  CGoodTransportPriority::Store(std::ostream & a2) {
   v4 = this;
   CPersistence::Store(this, a2);
   v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  operator^<bool>((int)a2, (int)v4 + 96);
-  operator^<int>((int)a2, (int *)v4 + 23);
-  return StoreArray<unsigned short>(a2, (char *)v4 + 4, 86);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
+  operator^<bool>(a2, (bool *)&v4[24]);
+  operator^<int>(a2, (int *)&v4[23]);
+  return StoreArray<unsigned short>(a2, (int)&v4[1], 86u);
 }
 
 
@@ -95,7 +95,7 @@ void  CGoodTransportPriority::Store(std::ostream & a2) {
 // Decompiled from CGoodTransportPriority *__thiscall CGoodTransportPriority::CGoodTransportPriority(CGoodTransportPriority *this, unsigned __int8 a2)
  CGoodTransportPriority::CGoodTransportPriority(unsigned char a2) {
   
-  CPersistence::CPersistence(this);
+  CPersistence::CPersistence((CPersistence *)this);
   *(_DWORD *)this = &CGoodTransportPriority::_vftable_;
   switch ( a2 )
   {
@@ -134,58 +134,57 @@ void  CGoodTransportPriority::ChangePriority(enum PILE_TYPES a2, int a3) {
     __debugbreak();
   }
   result = 0;
-  if ( a2 <= 0 || a2 >= 43 )
+  if ( a2 > 0 && a2 < 43 )
   {
-    return result;
-  }
-  if ( a3 == 100 )
-  {
-    for ( i = 0;
-          i < 43;
-          ++i )
+    if ( a3 == 100 )
     {
-      if ( (unsigned __int16)this[i + 2] > (int)(unsigned __int16)this[a2 + 2] )
+      for ( i = 0;
+            i < 43;
+            ++i )
       {
-        --this[i + 2];
+        if ( (unsigned __int16)*(this + i + 2) > (int)(unsigned __int16)*(this + a2 + 2) )
+        {
+          --*(this + i + 2);
+        }
       }
-    }
-    result = (int)this;
-    this[a2 + 2] = this[46];
-  }
-  else if ( a3 )
-  {
-    result = a2;
-    v4 = -1;
-    for ( j = 0;
-          j < 43 && v4 == -1;
-          ++j )
-    {
-      if ( (unsigned __int16)this[j + 2] == a3 + (unsigned __int16)this[a2 + 2] )
-      {
-        v4 = j;
-      }
-      result = j + 1;
-    }
-    if ( v4 > 0 )
-    {
-      this[v4 + 2] = this[a2 + 2];
       result = (int)this;
-      this[a2 + 2] += a3;
+      *(this + a2 + 2) = *(this + 46);
     }
-  }
-  else
-  {
-    for ( k = 0;
-          k < 43;
-          ++k )
+    else if ( a3 != 0 )
     {
-      if ( this[k + 2] && (unsigned __int16)this[k + 2] < (int)(unsigned __int16)this[a2 + 2] )
+      result = a2;
+      v4 = -1;
+      for ( j = 0;
+            j < 43 && v4 == -1;
+            ++j )
       {
-        ++this[k + 2];
+        if ( (unsigned __int16)*(this + j + 2) == a3 + (unsigned __int16)*(this + a2 + 2) )
+        {
+          v4 = j;
+        }
+        result = j + 1;
+      }
+      if ( v4 > 0 )
+      {
+        *(this + v4 + 2) = *(this + a2 + 2);
+        result = (int)this;
+        *(this + a2 + 2) += a3;
       }
     }
-    result = 1;
-    this[a2 + 2] = 1;
+    else
+    {
+      for ( k = 0;
+            k < 43;
+            ++k )
+      {
+        if ( *(this + k + 2) != 0 && (unsigned __int16)*(this + k + 2) < (int)(unsigned __int16)*(this + a2 + 2) )
+        {
+          ++*(this + k + 2);
+        }
+      }
+      result = 1;
+      *(this + a2 + 2) = 1;
+    }
   }
   return result;
 }
@@ -202,11 +201,11 @@ void  CGoodTransportPriority::GetSortedGoods(int * const a2) {
   int v6; // [esp+10h] [ebp-Ch]
   int j; // [esp+18h] [ebp-4h]
 
-  if ( !*((_BYTE *)this + 96) && BBSupportDbgReport(2, "Logic\\GoodTransportPriority.cpp", 78, "m_bIsInit") == 1 )
+  if ( *((_BYTE *)this + 96) == 0 && BBSupportDbgReport(2, "Logic\\GoodTransportPriority.cpp", 78, "m_bIsInit") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 23) && BBSupportDbgReport(2, "Logic\\GoodTransportPriority.cpp", 79, "m_iNumberOfPriorities!= 0") == 1 )
+  if ( *((_DWORD *)this + 23) == 0 && BBSupportDbgReport(2, "Logic\\GoodTransportPriority.cpp", 79, "m_iNumberOfPriorities!= 0") == 1 )
   {
     __debugbreak();
   }
@@ -386,7 +385,7 @@ void  CGoodTransportPriority::CreateTrojanPriorities(void) {
   CGoodTransportPriority *result; // eax
 
   memset((char *)this + 4, 0, 0x56u);
-  *((_WORD *)this + 44) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_TROJAN_TP_SUNFLOWER);
+  *((_WORD *)this + 44) = CStaticConfigVarInt::operator int((CStaticConfigVarInt *)&CGoodTransportPriority::m_iDefault_TROJAN_TP_SUNFLOWER);
   *((_WORD *)this + 5) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_TROJAN_TP_ARMOR);
   *((_WORD *)this + 6) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_TROJAN_TP_AXE);
   *((_WORD *)this + 40) = CStaticConfigVarInt::operator int(&CGoodTransportPriority::m_iDefault_TROJAN_TP_BACKPACKCATAPULT);

@@ -11,12 +11,12 @@ void  CVehicleInfoMgr::InitializeVehicleProperties(bool a2, bool _bKeepData) {
   unsigned int uType; // [esp+10h] [ebp-Ch]
   SVehicleDefinition *i; // [esp+18h] [ebp-4h]
 
-  if ( a2 || !IVehicleInfoMgr::m_bInitialized )
+  if ( a2 || IVehicleInfoMgr::m_bInitialized == 0 )
   {
     IVehicleInfoMgr::m_bInitialized = 1;
     memset(IVehicleInfoMgr::m_sVehicleProperties, 0, sizeof(IVehicleInfoMgr::m_sVehicleProperties));
     for ( i = IVehicleInfoMgr::m_sVehicleDefinitions;
-          i->m_pProperty;
+          i->m_pProperty != 0;
           ++i )
     {
       uRace = i->m_uType;
@@ -193,8 +193,8 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
 
   v137 = &v17;
   v103 = 0;
-  v118 = (char *)AdvXMLParser::Parser::OpenXMLFile(aGamedataVehicl, &v103);
-  if ( v118 )
+  v118 = (char *)AdvXMLParser::Parser::OpenXMLFile(L"GameData\\VehicleInfo.xml", &v103);
+  if ( v118 != 0 )
   {
     v44 = (struct CDefineTranslator *)CDefineTranslator::Instance();
     pDocument = 0;
@@ -202,7 +202,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
     v36 = AdvXMLParser::Parser::Parser(v18);
     LOBYTE(exceptionBlock) = 1;
     pDocument = AdvXMLParser::Parser::Parse((AdvXMLParser::Parser *)v18, v118, v103);
-    if ( !pDocument )
+    if ( pDocument == 0 )
     {
       v52 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 471, "pDocument != 0");
       if ( v52 == 1 )
@@ -275,7 +275,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         }
         bIsAttackVehicle = iVehicleType == 4 || iVehicleType == 1;
         rProperties = &IVehicleInfoMgr::m_sVehicleProperties[iRaceId][iVehicleType];
-        if ( !rProperties->m_bInitialized )
+        if ( rProperties->m_bInitialized == 0 )
         {
           v90 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 504, "rProperties.m_bInitialized");
           if ( v90 == 1 )
@@ -288,7 +288,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         v108 = v88;
         v28 = v88->GetValue(v88);
         LOBYTE(exceptionBlock) = 16;
-        if ( std::string::length(&v132) )
+        if ( std::string::length(&v132) != 0 )
         {
           v2 = std::string::c_str(&v132);
           v3 = j__atoi(v2);
@@ -309,7 +309,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         v109 = v85;
         v27 = v85->GetValue(v85);
         LOBYTE(exceptionBlock) = 17;
-        if ( std::string::length(&v133) )
+        if ( std::string::length(&v133) != 0 )
         {
           v4 = std::string::c_str(&v133);
           v5 = j__atoi(v4);
@@ -325,7 +325,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         }
         LOBYTE(exceptionBlock) = 15;
         std::string::~string(&v133);
-        if ( !(rProperties->m_uIronbars + rProperties->m_uBoards) )
+        if ( rProperties->m_uIronbars + rProperties->m_uBoards == 0 )
         {
           v83 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 534, "(rProperties.m_uBoards + rProperties.m_uIronbars) > 0");
           if ( v83 == 1 )
@@ -338,12 +338,12 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         v102 = v81;
         v26 = v81->GetValue(v81);
         LOBYTE(exceptionBlock) = 18;
-        if ( std::string::length(&v134) )
+        if ( std::string::length(&v134) != 0 )
         {
           v6 = std::string::c_str(&v134);
           v7 = j__atoi(v6);
           rProperties->m_uHitpoints = v7 / 2;
-          if ( !rProperties->m_uHitpoints )
+          if ( rProperties->m_uHitpoints == 0 )
           {
             v80 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 545, "rProperties.m_uHitpoints > 0");
             if ( v80 == 1 )
@@ -367,7 +367,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         v114 = v77;
         v25 = v77->GetValue(v77);
         LOBYTE(exceptionBlock) = 19;
-        if ( std::string::length(&v135) )
+        if ( std::string::length(&v135) != 0 )
         {
           v8 = std::string::c_str(&v135);
           v9 = j__atoi(v8);
@@ -388,14 +388,14 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         v113 = v74;
         v40 = v74->GetValue(v74);
         LOBYTE(exceptionBlock) = 20;
-        if ( std::string::length(&v136) )
+        if ( std::string::length(&v136) != 0 )
         {
           v10 = std::string::c_str(&v136);
           v11 = j__atoi(v10);
           rProperties->m_uDamage = v11;
           if ( bIsAttackVehicle )
           {
-            if ( !rProperties->m_uDamage )
+            if ( rProperties->m_uDamage == 0 )
             {
               v73 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 575, "rProperties.m_uDamage > 0");
               if ( v73 == 1 )
@@ -412,7 +412,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
               }
             }
           }
-          else if ( rProperties->m_uDamage )
+          else if ( rProperties->m_uDamage != 0 )
           {
             v71 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 580, "rProperties.m_uDamage == 0");
             if ( v71 == 1 )
@@ -428,14 +428,14 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         v112 = v69;
         v39 = v69->GetValue(v69);
         LOBYTE(exceptionBlock) = 21;
-        if ( std::string::length(&v129) )
+        if ( std::string::length(&v129) != 0 )
         {
           v12 = std::string::c_str(&v129);
           v13 = j__atoi(v12);
           rProperties->m_uReadyToFireDelay = v13;
           if ( bIsAttackVehicle )
           {
-            if ( !rProperties->m_uReadyToFireDelay )
+            if ( rProperties->m_uReadyToFireDelay == 0 )
             {
               v68 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 596, "rProperties.m_uReadyToFireDelay > 0");
               if ( v68 == 1 )
@@ -452,7 +452,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
               }
             }
           }
-          else if ( rProperties->m_uReadyToFireDelay )
+          else if ( rProperties->m_uReadyToFireDelay != 0 )
           {
             v66 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 601, "rProperties.m_uReadyToFireDelay == 0");
             if ( v66 == 1 )
@@ -468,14 +468,14 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         v111 = v64;
         v38 = v64->GetValue(v64);
         LOBYTE(exceptionBlock) = 22;
-        if ( std::string::length(&v130) )
+        if ( std::string::length(&v130) != 0 )
         {
           v14 = std::string::c_str(&v130);
           v15 = j__atoi(v14);
           rProperties->m_uMaxAmmo = v15;
           if ( bIsAttackVehicle )
           {
-            if ( !rProperties->m_uMaxAmmo )
+            if ( rProperties->m_uMaxAmmo == 0 )
             {
               v63 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 617, "rProperties.m_uMaxAmmo > 0");
               if ( v63 == 1 )
@@ -492,7 +492,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
               }
             }
           }
-          else if ( rProperties->m_uMaxAmmo )
+          else if ( rProperties->m_uMaxAmmo != 0 )
           {
             v61 = BBSupportDbgReport(2, "MapObjects\\VehicleProperties.cpp", 622, "rProperties.m_uMaxAmmo == 0");
             if ( v61 == 1 )
@@ -508,7 +508,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
         v110 = v59;
         v37 = v59->GetValue(v59);
         LOBYTE(exceptionBlock) = 23;
-        if ( std::string::length(&v131) )
+        if ( std::string::length(&v131) != 0 )
         {
           v16 = std::string::c_str(&v131);
           iWalkSteps = j__atoi(v16);
@@ -551,7 +551,7 @@ void  CVehicleInfoMgr::ReadXMLFile(void) {
     LOBYTE(exceptionBlock) = 0;
     AdvXMLParser::Parser::~Parser(v18);
     exceptionBlock = -1;
-    if ( pDocument )
+    if ( pDocument != 0 )
     {
       v56 = pDocument;
       v117 = (int (__thiscall ***)(_DWORD, int))pDocument;

@@ -41,7 +41,7 @@ void  CAITaskForceManakopters::Execute(void) {
       return;
     case 103:
       Entity = CAITaskForce::FirstEntity(this);
-      if ( Entity )
+      if ( Entity != 0 )
       {
         v2 = CAIEntityInfo::EntityId(Entity);
         if ( !IAIEnvironment::EntityIsManakopterMoving(v2) )
@@ -52,13 +52,13 @@ void  CAITaskForceManakopters::Execute(void) {
       break;
     case 109:
       v7 = CAITaskForce::FirstEntity(this);
-      if ( v7 && CAITaskForce::CmdGoal(this) > 0 )
+      if ( v7 != 0 && CAITaskForce::CmdGoal(this) > 0 )
       {
-        while ( v7 )
+        while ( v7 != 0 )
         {
           v4 = CAIEntityInfo::EntityId(v7);
           v3 = Y16X16::UnpackYFast(this->m_iDestinationXY);
-          v1 = Y16X16::UnpackXFast(this->m_iDestinationXY);
+          v1 = Y16X16::UnpackXFast((unsigned __int16)this->m_iDestinationXY);
           IAIEnvironment::EntityManakopterFlyTo(v4, v1, v3);
           v7 = CAIEntityInfo::Next(v7);
         }
@@ -67,9 +67,9 @@ void  CAITaskForceManakopters::Execute(void) {
       break;
     case 110:
       v8 = CAITaskForce::FirstEntity(this);
-      if ( v8 )
+      if ( v8 != 0 )
       {
-        while ( v8 )
+        while ( v8 != 0 )
         {
           v5 = CAIEntityInfo::EntityId(v8);
           IAIEnvironment::EntityManakopterUnload(v5);

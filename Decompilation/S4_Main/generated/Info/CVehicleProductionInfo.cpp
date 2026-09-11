@@ -6,7 +6,7 @@
 // Decompiled from CVehicleProductionInfo *__thiscall CVehicleProductionInfo::CVehicleProductionInfo(CVehicleProductionInfo *this)
  CVehicleProductionInfo::CVehicleProductionInfo(void) {
   
-  CBuildingInfo::CBuildingInfo(this);
+  CBuildingInfo::CBuildingInfo((CBuildingInfo *)this);
   *(_DWORD *)this = &CVehicleProductionInfo::_vftable_;
   return this;
 }

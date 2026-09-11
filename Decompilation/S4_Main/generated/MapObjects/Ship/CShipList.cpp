@@ -12,9 +12,9 @@ void  CShipList::PushNeighborShips(int a2) {
   int v6; // [esp+8h] [ebp-4h]
 
   v2 = (Squares *)Y16X16::UnpackXFast(a2);
-  v6 = Squares::XYToVW(v2);
+  v6 = Squares::XYToVW((int)v2);
   v3 = (Squares *)Y16X16::UnpackYFast(a2);
-  v5 = Squares::XYToVW(v3);
+  v5 = Squares::XYToVW((int)v3);
   CShipList::PushSquareVW(this, v6, v5, a2);
   CShipList::PushSquareVW(this, v6, v5 - 1, a2);
   CShipList::PushSquareVW(this, v6, v5 + 1, a2);
@@ -51,8 +51,8 @@ int  CShipList::Nearest(int a2) {
         v8 < i;
         i = CShipList::NumberOfShips(this) )
   {
-    v3 = CShipList::ShipInfo(this, v8);
-    v9 = Y16X16::DistanceFast(a2, *(_DWORD *)v3);
+    v3 = (const struct CShipInfo *)CShipList::ShipInfo(this, v8);
+    v9 = Y16X16::DistanceFast((int)a2, *(_DWORD *)v3);
     if ( v9 < 10 )
     {
       if ( v9 >= v7 )
@@ -121,12 +121,12 @@ void  CShipList::PushSquareVW(int a2, int a3, int a4) {
         ++i )
   {
     result = i;
-    if ( !*(_DWORD *)(v7 + 4 * i) )
+    if ( *(_DWORD *)(v7 + 4 * i) == 0 )
     {
       break;
     }
     v6 = *(Y16X16 **)(v7 + 4 * i);
-    result = Y16X16::DistanceFast(v6, a4);
+    result = Y16X16::DistanceFast((int)v6, a4);
     if ( result <= 18 )
     {
       result = CShipList::PushShip(this, (int)v6);

@@ -75,7 +75,7 @@ void  CVehicle::PostLoadInit(void) {
 // Decompiled from void __thiscall CVehicle::AddToWarMap(IEntity *this)
 void  CVehicle::AddToWarMap(void) {
   
-  if ( IEntity::FlagBits(this, ENTITY_FLAG_Ready) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Ready) != 0 )
   {
     CWarMap::AddEntity(this);
   }
@@ -139,17 +139,17 @@ void  CVehicle::Delete(void) {
   int v12; // [esp+30h] [ebp-4h]
 
   CWarMap::RemoveEntity(this);
-  if ( this->m_uPackedXY > 0 )
+  if ( (int)this->m_uPackedXY > 0 )
   {
     this->RemoveVehicle(this, this->m_uPackedXY);
     this->m_uPackedXY = 0;
   }
-  v5 = IAnimatedEntity::AttackerPlayerId();
+  v5 = ((int (__stdcall *)())IAnimatedEntity::AttackerPlayerId)();
   v1 = IEntity::EntityId(this);
   v10 = CEntityEvent::CEntityEvent(&v8, 9u, 0, v1, v5, 0);
   v9 = v10;
   v12 = 0;
-  CObserverList::NotifyAndDetachAllObservers((CObserverList *)&this[1].m_iFrame, v10);
+  CObserverList::NotifyAndDetachAllObservers((CObserverList *)&this->m_cObserverList, v10);
   v12 = -1;
   CEntityEvent::~CEntityEvent(&v8);
   v7 = IEntity::ID(this);
@@ -214,12 +214,12 @@ void  CVehicle::FireMissile(int _iTargetId, int _iDestinationXY) {
     iXY = IEntity::PackedXY(this);
     iFireAnimationEnd = pEffects->AddMissile(pEffects, this->m_pVehicleProperties->m_tMissileType, iXY, _iDestinationXY, 1, 0, 0);
   }
-  if ( this->m_pVehicleProperties->m_iMissileFlightEffectId )
+  if ( this->m_pVehicleProperties->m_iMissileFlightEffectId != 0 )
   {
     pEffects = CLogic::Effects(g_pLogic);
     iY = Y16X16::UnpackYFast(_iDestinationXY);
     iX = Y16X16::UnpackXFast(_iDestinationXY);
-    pEffects->AddEffect(pEffects, this->m_pVehicleProperties->m_iMissileFlightEffectId, this->m_pVehicleProperties->m_tMissileFlightEffectSoundId, iX, iY, iFireAnimationEnd + 1, 0, 1);
+    pEffects->AddEffect(pEffects, (T_S4_EFFECTS)this->m_pVehicleProperties->m_iMissileFlightEffectId, this->m_pVehicleProperties->m_tMissileFlightEffectSoundId, iX, iY, iFireAnimationEnd + 1, 0, 1);
   }
   rEntity = CMapObjectMgr::Entity(_iTargetId);
   m_uDamage = this->m_pVehicleProperties->m_uDamage;
@@ -230,14 +230,14 @@ void  CVehicle::FireMissile(int _iTargetId, int _iDestinationXY) {
   iAlliance = CAlliances::AllianceId(iOwner);
   if ( iAlliance == CAlliances::AllianceId(iTileOwner) )
   {
-    iStrength = CStatistic::DefenceStrength256((CStatistic *)&g_cStatistic, iOwner);
+    iStrength = CStatistic::DefenceStrength256(&g_cStatistic, iOwner);
   }
   else
   {
-    iStrength = CStatistic::OffenceStrength256((CStatistic *)&g_cStatistic, iOwner);
+    iStrength = CStatistic::OffenceStrength256(&g_cStatistic, iOwner);
   }
   uDamage = ((iStrength * m_uDamage + 127) >> 8 == 0) + ((iStrength * m_uDamage + 127) >> 8);
-  if ( IEntity::FlagBits(rEntity, ENTITY_FLAG_Ready) )
+  if ( IEntity::FlagBits(rEntity, ENTITY_FLAG_Ready) != 0 )
   {
     rFutureEvents = CLogic::FutureEvents(g_pLogic);
     iOwner = IEntity::OwnerId(this);
@@ -257,15 +257,15 @@ void  CVehicle::Update(void) {
 
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   uTick = TickCounter - this->m_uLastUpdateTick;
-  if ( !uTick )
+  if ( uTick == 0 )
   {
     return;
   }
   this->m_uLastUpdateTick = TickCounter;
-  if ( (unsigned __int8)CVehicle::IsTurning(this) )
+  if ( (unsigned __int8)CVehicle::IsTurning(this) != 0 )
   {
     uTick = CVehicle::TurnVehicle(this, uTick);
-    if ( !uTick )
+    if ( uTick == 0 )
     {
       return;
     }
@@ -282,47 +282,46 @@ void  CVehicle::Update(void) {
       return;
     }
 LABEL_7:
-    if ( !CVehicle::IsMoving(this) )
+    if ( CVehicle::IsMoving(this) )
     {
-      return;
+      if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 893, "m_uCycleFrames > 0") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( (this->m_uWalkResult & 8) != 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 894, "( m_uWalkResult & WALK_RESULT_FLAG_DONT_MOVE ) == 0") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( (this->m_iFlags & 0x40000) != 0 )
+      {
+        this->byte6C = (uTick + this->byte6C) % (2 * (unsigned int)this->m_uCycleFrames);
+        this->m_iFrame = this->byte6C / 2;
+      }
+      else
+      {
+        this->m_iFrame = (uTick + this->m_iFrame) % this->m_uCycleFrames;
+      }
+      if ( this->m_iDistance == 0 )
+      {
+        BBSupportTracePrintF(0, "CVehicle::Update(): m_uDistance == 0!");
+      }
+      if ( this->m_uWalkSteps == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 917, "m_uWalkSteps > 0") == 1 )
+      {
+        __debugbreak();
+      }
+      if ( this->m_uWalkSteps != 0 )
+      {
+        m_uWalkSteps = this->m_uWalkSteps;
+      }
+      else
+      {
+        m_uWalkSteps = 1;
+      }
+      IMovingEntity::DecDistance(this, (uTick << 8) / m_uWalkSteps);
     }
-    if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 893, "m_uCycleFrames > 0") == 1 )
-    {
-      __debugbreak();
-    }
-    if ( (this->m_uWalkResult & 8) != 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 894, "( m_uWalkResult & WALK_RESULT_FLAG_DONT_MOVE ) == 0") == 1 )
-    {
-      __debugbreak();
-    }
-    if ( (this->m_iFlags & 0x40000) != 0 )
-    {
-      this->byte6C = (uTick + this->byte6C) % (2 * (unsigned int)this->m_uCycleFrames);
-      this->m_iFrame = this->byte6C / 2;
-    }
-    else
-    {
-      this->m_iFrame = (uTick + this->m_iFrame) % this->m_uCycleFrames;
-    }
-    if ( !this->m_iDistance )
-    {
-      BBSupportTracePrintF(0, "CVehicle::Update(): m_uDistance == 0!");
-    }
-    if ( !this->m_uWalkSteps && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 917, "m_uWalkSteps > 0") == 1 )
-    {
-      __debugbreak();
-    }
-    if ( this->m_uWalkSteps )
-    {
-      m_uWalkSteps = this->m_uWalkSteps;
-    }
-    else
-    {
-      m_uWalkSteps = 1;
-    }
-    IMovingEntity::DecDistance(this, (uTick << 8) / m_uWalkSteps);
     return;
   }
-  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 927, "m_uCycleFrames > 0") == 1 )
+  if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 927, "m_uCycleFrames > 0") == 1 )
   {
     __debugbreak();
   }
@@ -337,7 +336,7 @@ void  CVehicle::LogicUpdate(void) {
   int v1; // eax
 
   CVehicle::Update(this);
-  if ( IEntity::FlagBits(this, ENTITY_FLAG_Birth) )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Birth) != 0 )
   {
     if ( this->m_uMaterialSupplied < (int)this->word7E )
     {
@@ -407,7 +406,7 @@ void  CVehicle::VehicleLogicUpdate(void) {
 // Decompiled from bool __thiscall CVehicle::IsUnEmployed(CVehicle *this)
 bool  CVehicle::IsUnEmployed(void)const {
   
-  return (this->m_uCurrentTask == 17 || !this->m_uCurrentTask) && IEntity::FlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1));
+  return (this->m_uCurrentTask == 17 || this->m_uCurrentTask == 0) && IEntity::FlagBits(this, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0;
 }
 
 
@@ -512,11 +511,11 @@ void  CVehicle::OnBuildReady(void) {
 
   v15 = IEntity::OwnerId(this);
   v16 = IEntity::Type(this);
-  if ( !IEntity::FlagBits(this, ENTITY_FLAG_Birth) && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 477, "FlagBits(ENTITY_FLAG_BIRTH) != 0") == 1 )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Birth) == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 477, "FlagBits(ENTITY_FLAG_BIRTH) != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(this, ENTITY_FLAG_Ready) && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 478, "FlagBits(ENTITY_FLAG_READY) == 0") == 1 )
+  if ( IEntity::FlagBits(this, ENTITY_FLAG_Ready) != 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 478, "FlagBits(ENTITY_FLAG_READY) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -525,7 +524,7 @@ void  CVehicle::OnBuildReady(void) {
   v1 = IEntity::OwnerId(this);
   CVehicleMgr::DetachVehicle((CVehicleMgr *)&g_cVehicleMgr, v1, v9, v12);
   IEntity::ClearFlagBits(this, ENTITY_FLAG_Birth);
-  if ( word_4158D1C[18 * v15 + 1 + 3 * v16] )
+  if ( word_4158D1C[18 * v15 + 1 + 3 * v16] != 0 )
   {
     --word_4158D1C[18 * v15 + 1 + 3 * v16];
   }
@@ -540,7 +539,7 @@ void  CVehicle::OnBuildReady(void) {
   this->TakeJob(this);
   v11 = IEntity::Type(this);
   v3 = IEntity::OwnerId(this);
-  CStatistic::AddProducedVehicle((CStatistic *)&g_cStatistic, v3, v11, 1);
+  CStatistic::AddProducedVehicle(&g_cStatistic, v3, v11, 1);
   v4 = IEntity::OwnerId(this);
   if ( v4 == CPlayerManager::GetLocalPlayerId() )
   {
@@ -557,7 +556,7 @@ void  CVehicle::OnBuildReady(void) {
         v17 = GUI_MSG_GOODSTRANSP;
         break;
       case 4:
-        if ( IEntity::Race(this) )
+        if ( IEntity::Race(this) != 0 )
         {
           if ( IEntity::Race(this) == 1 )
           {
@@ -587,7 +586,7 @@ void  CVehicle::OnBuildReady(void) {
         CTrace::Print("Workshopbuildingrole: Text message for this vehicle Race %u, Type %u not implemented", v5, v14);
         break;
     }
-    if ( v17 )
+    if ( v17 != AO_BONUS_BRIEFING_01 )
     {
       v8 = IEntity::Y(this);
       v7 = IEntity::X(this);
@@ -623,7 +622,7 @@ void  CVehicle::AddBuildingMaterial(int a2) {
   
   if ( a2 == GOOD_BOARD )
   {
-    if ( !this->m_uBoardsNeed && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 437, "m_uBoardsNeed > 0") == 1 )
+    if ( this->m_uBoardsNeed == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 437, "m_uBoardsNeed > 0") == 1 )
     {
       __debugbreak();
     }
@@ -632,7 +631,7 @@ void  CVehicle::AddBuildingMaterial(int a2) {
   }
   else if ( a2 == GOOD_IRONBAR )
   {
-    if ( !this->m_uIronNeed && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 446, "m_uIronNeed > 0") == 1 )
+    if ( this->m_uIronNeed == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 446, "m_uIronNeed > 0") == 1 )
     {
       __debugbreak();
     }
@@ -703,9 +702,9 @@ void  CVehicle::Decrease(int a2) {
     v3 = IEntity::X(this);
     v4 = IEntity::Y(this);
     IEntity::Decrease(this, v5);
-    if ( !this->Amount(this) )
+    if ( this->Amount(this) == 0 )
     {
-      v2 = CLogic::Effects((DWORD *)g_pLogic);
+      v2 = CLogic::Effects(g_pLogic);
       v2->AddEffect(v2, EFFECT_DESTROYSMALL, SOUND_AMB_ATTACKSMALLBUILDING, v3, v4, 0, 0, 0);
     }
   }
@@ -757,9 +756,9 @@ void  CVehicle::FillDialog(bool a2) {
 // Decompiled from unsigned int __thiscall CVehicle::GetCurrentTaskPtr(CVehicle *this)
 class CEntityTask *  CVehicle::GetCurrentTaskPtr(void) {
   
-  if ( this->m_uCurrentTaskIdx1 )
+  if ( this->m_uCurrentTaskIdx1 != 0 )
   {
-    return std::vector<CEntityTask>::operator[](&this->m_vTasks, (unsigned __int8)this->m_uCurrentTaskIdx1 - 1);
+    return std::vector<CEntityTask>::operator[](&this->m_vTasks, this->m_uCurrentTaskIdx1 - 1);
   }
   else
   {
@@ -859,7 +858,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
     CVehicle::InitBuildingSite(this);
     this->m_iJobPart = CGfxManager::GetVehicleFirstJob(g_pGfxManager, a1, this->m_iType);
     this->m_uCycleFrames = CGfxManager::GetVehicleFrameCount(g_pGfxManager, a1, this->m_iJobPart);
-    if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 139, "m_uCycleFrames > 0") == 1 )
+    if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 139, "m_uCycleFrames > 0") == 1 )
     {
       __debugbreak();
     }
@@ -874,17 +873,17 @@ unsigned int  CVehicle::TurnCounter(void)const {
   this->m_iLivePoints = this->m_pVehicleProperties->m_uHitpoints;
   this->m_iJobPart = CGfxManager::GetVehicleFirstJob(g_pGfxManager, a1, this->m_iType);
   this->m_uCycleFrames = CGfxManager::GetVehicleFrameCount(g_pGfxManager, a1, this->m_iJobPart);
-  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 161, "m_uCycleFrames > 0") == 1 )
+  if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 161, "m_uCycleFrames > 0") == 1 )
   {
     __debugbreak();
   }
   IEntity::SetFlagBits(this, (EntityFlag)this->m_pVehicleProperties->m_tWarriorType);
   v10 = IEntity::OwnerId(this);
-  v11 = CWalking::Create(this->m_pVehicleProperties->m_uU14, v10);
+  v11 = (int)CWalking::Create(this->m_pVehicleProperties->m_uU14, v10);
   std::auto_ptr<CWalking>::auto_ptr<CWalking>(&v13, v11);
   LOBYTE(v18) = 3;
-  std::auto_ptr<CWalking>::operator=(&v13);
-  v14 = std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
+  std::auto_ptr<CWalking>::operator=((int)&v13);
+  v14 = (int)std::auto_ptr<CWalking>::operator->(&this->m_pWalking);
   (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v14 + 8))(v14, -1, 0);
   this->m_uWalkResult = 8;
   this->m_uTurnCounter = 0;
@@ -892,7 +891,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
   this->m_uCurrentTask = 0;
   this->byte6C = 0;
   this->m_uWalkSteps = this->m_pVehicleProperties->m_iWalkSteps;
-  if ( !this->m_uWalkSteps && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 181, "m_uWalkSteps > 0") == 1 )
+  if ( this->m_uWalkSteps == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 181, "m_uWalkSteps > 0") == 1 )
   {
     __debugbreak();
   }
@@ -923,7 +922,7 @@ unsigned int  CVehicle::TurnCounter(void)const {
 
 
 // address=[0x15a51a0]
-// Decompiled from CVehicle *__thiscall CVehicle::CVehicle(CVehicle *this, int a2)
+// Decompiled from CVehicle *__thiscall CVehicle::CVehicle(CVehicle *this, struct std::istream *a2)
  CVehicle::CVehicle(std::istream & a2) {
   
   int v2; // eax
@@ -932,14 +931,14 @@ unsigned int  CVehicle::TurnCounter(void)const {
   unsigned int v6; // [esp+10h] [ebp-14h] BYREF
   int v8; // [esp+20h] [ebp-4h]
 
-  IMovingEntity::IMovingEntity(this, a2);
+  IMovingEntity::IMovingEntity(this, (int)a2);
   v8 = 0;
   this->__vftable = (CVehicle_vtbl *)&CVehicle::_vftable_;
   std::vector<CEntityTask>::vector<CEntityTask>();
-  CObserverList::CObserverList((CObserverList *)&this->m_cObserverList, a2);
+  CObserverList::CObserverList((CObserverList *)&this->m_cObserverList, (int)a2);
   LOBYTE(v8) = 2;
   operator^<unsigned int>(a2, &v6);
-  if ( v6 )
+  if ( v6 != 0 )
   {
     operator^<unsigned char>(a2, &this->m_uWalkResult);
     operator^<unsigned char>(a2, &this->m_uTurnCounter);
@@ -962,14 +961,14 @@ unsigned int  CVehicle::TurnCounter(void)const {
     operator^<unsigned short>(a2, &this->word80);
     operator^<unsigned short>(a2, &this->word82);
     operator^<unsigned short>(a2, &this->word84);
-    operator^<float>(a2, &this->m_iBuildingProgress);
+    operator^<float>((int)a2, (int)&this->m_iBuildingProgress);
     operator^<unsigned char>(a2, &this->m_iDistance);
     operator^<unsigned int>(a2, &iTaskCount);
     for ( i = 0;
           i < iTaskCount;
           ++i )
     {
-      v2 = CEntityTask::Load(a2);
+      v2 = (int)CEntityTask::Load(a2);
       std::vector<CEntityTask>::push_back(v2);
     }
   }
@@ -998,7 +997,7 @@ void  CVehicle::Store(std::ostream & a1) {
   IMovingEntity::Store((CSettler *)this, a1);
   CObserverList::Store(&this->m_cObserverList, a1);
   v7 = 2;
-  operator^<unsigned int>(a1, &v7);
+  operator^<unsigned int>(a1, (unsigned int *)&v7);
   operator^<unsigned char>(a1, &this->m_uWalkResult);
   operator^<unsigned char>(a1, &this->m_uTurnCounter);
   operator^<unsigned char>(a1, &this->m_uTurningDir);
@@ -1009,7 +1008,7 @@ void  CVehicle::Store(std::ostream & a1) {
   operator^<unsigned char>(a1, &this->m_iAmmo);
   operator^<unsigned char>(a1, &this->m_uCurrentTaskIdx1);
   operator^<unsigned char>(a1, &this->byte71);
-  operator^<unsigned int>(a1, (int *)&this->m_uReadyToFireTick);
+  operator^<unsigned int>(a1, &this->m_uReadyToFireTick);
   operator^<bool>(a1, &CVehicle::m_bCallTakeJob);
   operator^<unsigned char>(a1, &this->word78);
   operator^<unsigned char>(a1, &this->m_uBoardsNeed);
@@ -1020,21 +1019,21 @@ void  CVehicle::Store(std::ostream & a1) {
   operator^<unsigned short>(a1, &this->word80);
   operator^<unsigned short>(a1, &this->word82);
   operator^<unsigned short>(a1, &this->word84);
-  operator^<float>((int)a1, &this->m_iBuildingProgress);
+  operator^<float>(a1, &this->m_iBuildingProgress);
   operator^<unsigned char>(a1, &this->m_iDistance);
   v6 = std::vector<CEntityTask>::size(&this->m_vTasks);
-  operator^<unsigned int>(a1, &v6);
-  std::vector<CEntityTask>::begin(v3);
+  operator^<unsigned int>(a1, (unsigned int *)&v6);
+  std::vector<CEntityTask>::begin((int)v3);
   v11 = 0;
   while ( 1 )
   {
-    v5 = (std::_Iterator_base12 *)std::vector<CEntityTask>::end(v2);
+    v5 = (std::_Iterator_base12 *)std::vector<CEntityTask>::end((int)v2);
     v4 = v5;
     LOBYTE(v11) = 1;
     v10 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<CEntityTask>>>::operator!=(v5);
     LOBYTE(v11) = 0;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityTask>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<CEntityTask>>>(v2);
-    if ( !v10 )
+    if ( v10 == 0 )
     {
       break;
     }
@@ -1060,7 +1059,7 @@ void  CVehicle::GetTurnGfxInfo(void) {
   iRace = IEntity::Race(this);
   iTurnDir = CVehicle::TurnDirEx(this);
   iTurnId = g_sVehicleDirExInfos[iTurnDir].m_uTurnId;
-  if ( iTurnId )
+  if ( iTurnId != 0 )
   {
     iGfxId = this->m_pVehicleProperties->m_uTurnGfx + iTurnId - 1;
   }
@@ -1166,7 +1165,7 @@ void  CVehicle::TakeJobPart(unsigned int a2) {
   this->m_iFrame = 0;
   this->byte6C = 0;
   this->m_uCycleFrames = CGfxManager::GetVehicleFrameCount(g_pGfxManager, v2, a2);
-  if ( !this->m_uCycleFrames && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1084, "m_uCycleFrames > 0") == 1 )
+  if ( this->m_uCycleFrames == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1084, "m_uCycleFrames > 0") == 1 )
   {
     __debugbreak();
   }
@@ -1206,26 +1205,26 @@ bool  CVehicle::NewDestination(int a2, int a3, int _iFlags) {
   VehicleFrameCount = CGfxManager::GetVehicleFrameCount(g_pGfxManager, v22, m_iJob);
   if ( (_iFlags & 1) != 0 )
   {
-    if ( !this->byte71 )
+    if ( this->byte71 == 0 )
     {
       if ( (_iFlags & 2) == 0 )
       {
         std::vector<CEntityTask>::clear();
         this->m_uCurrentTaskIdx1 = 0;
       }
-      v11 = CEntityTask::CEntityTask(&v16, 8u, m_iJob, -1, -1, -1, VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
-      std::vector<CEntityTask>::push_back(v11);
+      v11 = CEntityTask::CEntityTask(&v16, 8, (unsigned __int16)m_iJob, -1, -1, -1, (char)VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
+      std::vector<CEntityTask>::push_back((int)v11);
       v12 = std::vector<CEntityTask>::size(&this->m_vTasks);
       this->byte71 = v12;
     }
-    v13 = CEntityTask::CEntityTask(&v15, 8u, m_iJob, a2, a3, -1, VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
-    std::vector<CEntityTask>::push_back(v13);
+    v13 = CEntityTask::CEntityTask(&v15, 8, (unsigned __int16)m_iJob, (__int16)a2, (__int16)a3, -1, (char)VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
+    std::vector<CEntityTask>::push_back((int)v13);
   }
   else
   {
     if ( (_iFlags & 2) != 0 )
     {
-      if ( this->byte71 )
+      if ( this->byte71 != 0 )
       {
         return 0;
       }
@@ -1251,8 +1250,8 @@ bool  CVehicle::NewDestination(int a2, int a3, int _iFlags) {
       {
         __debugbreak();
       }
-      v5 = CEntityTask::CEntityTask(&v19, 0x24u, m_iJob, 0, 0, -1, VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
-      std::vector<CEntityTask>::push_back(v5);
+      v5 = CEntityTask::CEntityTask(&v19, 0x24, (unsigned __int16)m_iJob, 0, 0, -1, (char)VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
+      std::vector<CEntityTask>::push_back((int)v5);
     }
     else
     {
@@ -1262,7 +1261,7 @@ bool  CVehicle::NewDestination(int a2, int a3, int _iFlags) {
         v6 = IEntity::OwnerId(this);
         v7 = CAlliances::PlayerBit(v6);
         CWarriorEntitySpiralWalk::CWarriorEntitySpiralWalk((CWarriorEntitySpiralWalk *)v20, a2, a3, 10, v7, 3072);
-        while ( CWarriorEntitySpiralWalk::NextEntity((CWarriorEntitySpiralWalk *)v20, &v23) )
+        while ( CWarriorEntitySpiralWalk::NextEntity((CWarriorEntitySpiralWalk *)v20, &v23) != 0 )
         {
           v8 = IEntity::ID(v23);
           if ( v8 != IEntity::ID(this) )
@@ -1272,19 +1271,19 @@ bool  CVehicle::NewDestination(int a2, int a3, int _iFlags) {
           }
         }
       }
-      if ( v25 )
+      if ( v25 != 0 )
       {
-        v10 = CEntityTask::CEntityTask(&v17, 0xAu, m_iJob, 0, 0, -1, VehicleFrameCount, -1, 1, 1, 0, v25, 0, 0);
-        std::vector<CEntityTask>::push_back(v10);
+        v10 = CEntityTask::CEntityTask(&v17, 0xA, (unsigned __int16)m_iJob, 0, 0, -1, (char)VehicleFrameCount, -1, 1, 1, 0, (unsigned __int16)v25, 0, 0);
+        std::vector<CEntityTask>::push_back((int)v10);
       }
       else
       {
-        v9 = CEntityTask::CEntityTask(&v18, v21, m_iJob, a2, a3, -1, VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
-        std::vector<CEntityTask>::push_back(v9);
+        v9 = CEntityTask::CEntityTask(&v18, (unsigned __int8)v21, (unsigned __int16)m_iJob, (__int16)a2, (__int16)a3, -1, (char)VehicleFrameCount, -1, 1, 1, 0, 0, 0, 0);
+        std::vector<CEntityTask>::push_back((int)v9);
       }
     }
   }
-  if ( !std::vector<CEntityTask>::size(&this->m_vTasks) && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1403, "m_vTasks.size() > 0") == 1 )
+  if ( std::vector<CEntityTask>::size(&this->m_vTasks) == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1403, "m_vTasks.size() > 0") == 1 )
   {
     __debugbreak();
   }
@@ -1293,7 +1292,7 @@ bool  CVehicle::NewDestination(int a2, int a3, int _iFlags) {
   {
     __debugbreak();
   }
-  if ( this->m_uCurrentTaskIdx1 )
+  if ( this->m_uCurrentTaskIdx1 != 0 )
   {
     return 0;
   }
@@ -1316,7 +1315,7 @@ void  CVehicle::GetNextJob(void) {
   else
   {
     this->m_uCurrentTaskIdx1 = this->byte71;
-    if ( !this->byte71 )
+    if ( this->byte71 == 0 )
     {
       std::vector<CEntityTask>::clear();
     }
@@ -1382,7 +1381,7 @@ void  CVehicle::AttackTarget(int _iTargetId) {
   struct IFutureEvents *v9; // [esp+14h] [ebp-Ch]
   IEntity *v10; // [esp+18h] [ebp-8h]
 
-  if ( !_iTargetId && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1096, "_iTargetId != 0") == 1 )
+  if ( _iTargetId == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1096, "_iTargetId != 0") == 1 )
   {
     __debugbreak();
   }
@@ -1391,7 +1390,7 @@ void  CVehicle::AttackTarget(int _iTargetId) {
   {
     __debugbreak();
   }
-  if ( !IEntity::FlagBits(v10, ENTITY_FLAG_Ready) && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1101, "rTargetEntity.FlagBits( ENTITY_FLAG_READY ) != 0") == 1 )
+  if ( IEntity::FlagBits(v10, ENTITY_FLAG_Ready) == 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1101, "rTargetEntity.FlagBits( ENTITY_FLAG_READY ) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -1439,7 +1438,7 @@ void  CVehicle::WalkDirAndRegister(int a2, bool a3) {
       {
         __debugbreak();
       }
-      if ( this->m_uTurnCounter && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1159, "( m_uTurnCounter == 0 )") == 1 )
+      if ( this->m_uTurnCounter != 0 && BBSupportDbgReport(2, "MapObjects\\Vehicle.cpp", 1159, "( m_uTurnCounter == 0 )") == 1 )
       {
         __debugbreak();
       }
@@ -1462,13 +1461,13 @@ void  CVehicle::WalkDirAndRegister(int a2, bool a3) {
 // Decompiled from void __thiscall CVehicle::InitCommonTaskValues(CVehicle *this, const struct CEntityTask *a2)
 void  CVehicle::InitCommonTaskValues(class CEntityTask const * a2) {
   
-  if ( a2 )
+  if ( a2 != 0 )
   {
-    if ( *((char *)a2 + 6) >= 0 )
+    if ( a2->m_iDir >= 0 )
     {
-      this->m_iDirection = *((_BYTE *)a2 + 6);
+      this->m_iDirection = a2->m_iDir;
     }
-    if ( *((_BYTE *)a2 + 20) )
+    if ( a2->m_bVisible )
     {
       IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
     }
@@ -1476,14 +1475,14 @@ void  CVehicle::InitCommonTaskValues(class CEntityTask const * a2) {
     {
       IEntity::ClearFlagBits(this, ENTITY_FLAG_Visible);
     }
-    this->m_uCurrentTask = *((_BYTE *)a2 + 4);
-    CVehicle::TakeJobPart(this, *((unsigned __int16 *)a2 + 7));
+    this->m_uCurrentTask = a2->m_iTask;
+    CVehicle::TakeJobPart(this, a2->m_iJobNr);
   }
   else
   {
     IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
     this->m_uCurrentTask = 17;
-    CVehicle::TakeJobPart(this, *((_DWORD *)this->m_pVehicleProperties + 6));
+    CVehicle::TakeJobPart(this, this->m_pVehicleProperties->m_iJob);
   }
   this->m_uWalkResult = 8;
   this->m_uTurnCounter = 0;

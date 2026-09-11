@@ -33,7 +33,7 @@ int  CAITaskForcePriestsTrojan::ChooseMilitarySpell(struct SCountFightersResult 
   {
     __debugbreak();
   }
-  if ( !iEnemyNonBowmen )
+  if ( iEnemyNonBowmen == 0 )
   {
     a3 &= ~0x10u;
   }
@@ -57,7 +57,7 @@ int  CAITaskForcePriestsTrojan::ChooseMilitarySpell(struct SCountFightersResult 
 
 
 // address=[0x132bf10]
-// Decompiled from int __thiscall CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(CAITaskForcePriestsTrojan *this, int a2, int a3, int a4, int a5)
+// Decompiled from int __thiscall CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(CAITaskForcePriestsTrojan *this, int a2, unsigned int a3, unsigned int a4, int a5)
 int  CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(int a2, int a3, int a4, int a5) {
   
   int v5; // eax
@@ -72,7 +72,7 @@ int  CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(int a2, int a3, i
     case 4:
       v5 = CAITaskForce::OwnerId(this);
       NearestOwnTowerInSector = CScanner::FindNearestOwnTowerInSector(a3, a4, 20, v5);
-      if ( NearestOwnTowerInSector )
+      if ( NearestOwnTowerInSector != 0 )
       {
         v10 = CMapObjectMgr::Entity(NearestOwnTowerInSector);
         v9 = IEntity::Y(v10);
@@ -95,17 +95,17 @@ int  CAITaskForcePriestsTrojan::ChooseMilitarySpellDestination(int a2, int a3, i
 
 
 // address=[0x132e560]
-// Decompiled from _DWORD *__thiscall CAITaskForcePriestsTrojan::CAITaskForcePriestsTrojan(_DWORD *this, int a2, int a3, int a4)
+// Decompiled from CAITaskForcePriests *__thiscall CAITaskForcePriestsTrojan::CAITaskForcePriestsTrojan(CAITaskForcePriests *this, int a2, int a3, int a4)
  CAITaskForcePriestsTrojan::CAITaskForcePriestsTrojan(int a2, enum T_AI_TASK_FORCE_TYPE a3, int a4) {
   
   CAITaskForcePriests::CAITaskForcePriests(this, a2, a3, a4);
-  *this = CAITaskForcePriestsTrojan::_vftable_;
+  this->__vftable = (CAITaskForcePriests_vtbl *)CAITaskForcePriestsTrojan::_vftable_;
   return this;
 }
 
 
 // address=[0x132e670]
-// Decompiled from void __thiscall CAITaskForcePriestsTrojan::~CAITaskForcePriestsTrojan(CAITaskForcePriestsTrojan *this)
+// Decompiled from void __thiscall CAITaskForcePriestsTrojan::~CAITaskForcePriestsTrojan(CAITaskForce **this)
  CAITaskForcePriestsTrojan::~CAITaskForcePriestsTrojan(void) {
   
   CAITaskForcePriests::~CAITaskForcePriests(this);

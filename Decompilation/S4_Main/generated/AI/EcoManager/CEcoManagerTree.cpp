@@ -25,8 +25,8 @@
         v4 < i;
         i = CEcoManagerTree::GetNrBaseLeaves(this) )
   {
-    BaseLeaf = CEcoManagerTree::GetBaseLeaf(this, v4);
-    if ( BaseLeaf )
+    BaseLeaf = (struct CEcoManagerLeaf *)CEcoManagerTree::GetBaseLeaf(this, v4);
+    if ( BaseLeaf != 0 )
     {
       delete BaseLeaf;
     }
@@ -68,8 +68,8 @@ unsigned char  CEcoManagerTree::CreateBaseLeaf(enum BUILDING_TYPES a2, int a3, i
     {
       break;
     }
-    BaseLeaf = CEcoManagerTree::GetBaseLeaf(v14, i);
-    if ( BaseLeaf )
+    BaseLeaf = (_DWORD *)CEcoManagerTree::GetBaseLeaf(v14, i);
+    if ( BaseLeaf != 0 )
     {
       CEcoManagerLeaf::GetPosition((CEcoManagerLeaf *)BaseLeaf, &v8, &v7);
       if ( v8 == v11 && v7 == v12 )
@@ -83,7 +83,7 @@ unsigned char  CEcoManagerTree::CreateBaseLeaf(enum BUILDING_TYPES a2, int a3, i
   {
     C = operator new(0x68u);
     v17 = 0;
-    if ( C )
+    if ( C != 0 )
     {
       v9 = CEcoManagerLeaf::CEcoManagerLeaf((CEcoManagerLeaf::CEMLD *)C, 64, a2, v11, v12);
     }
@@ -93,7 +93,7 @@ unsigned char  CEcoManagerTree::CreateBaseLeaf(enum BUILDING_TYPES a2, int a3, i
     }
     v17 = -1;
     BaseLeaf = v9;
-    std::vector<CEcoManagerLeaf *>::push_back(&BaseLeaf);
+    std::vector<CEcoManagerLeaf *>::push_back((int)&BaseLeaf);
     v13 = std::vector<CEcoManagerLeaf *>::size(v14) - 1;
   }
   CEcoManagerLeaf::AddPosition(BaseLeaf, a3, a4, a5);
@@ -109,8 +109,8 @@ bool  CEcoManagerTree::RemoveLeaf(int a2) {
   _DWORD *v4; // esi
   CEcoManagerLeaf *BaseLeaf; // [esp+10h] [ebp-8h]
 
-  BaseLeaf = CEcoManagerTree::GetBaseLeaf(this, a2);
-  if ( !BaseLeaf )
+  BaseLeaf = (struct CEcoManagerLeaf *)CEcoManagerTree::GetBaseLeaf(this, a2);
+  if ( BaseLeaf == 0 )
   {
     return 0;
   }
@@ -136,11 +136,11 @@ bool  CEcoManagerTree::RemoveLeaf(struct SBUILDINFODATA * a2) {
         i < CEcoManagerTree::GetNrBaseLeaves(this);
         ++i )
   {
-    if ( CEcoManagerTree::GetBaseLeaf(this, i) == Leaf )
+    if ( (struct CEcoManagerLeaf *)CEcoManagerTree::GetBaseLeaf(this, i) == Leaf )
     {
       return CEcoManagerTree::RemoveLeaf(this, i);
     }
-    BaseLeaf = CEcoManagerTree::GetBaseLeaf(this, i);
+    BaseLeaf = (struct CEcoManagerLeaf *)CEcoManagerTree::GetBaseLeaf(this, i);
     if ( CEcoManagerTree::RemoveLeafRecursive(this, BaseLeaf, Leaf) )
     {
       return 1;
@@ -179,8 +179,8 @@ bool  CEcoManagerTree::UpdateBaseLeaf(int a2) {
   
   struct CEcoManagerLeaf *BaseLeaf; // [esp+4h] [ebp-4h]
 
-  BaseLeaf = CEcoManagerTree::GetBaseLeaf(this, a2);
-  if ( BaseLeaf )
+  BaseLeaf = (struct CEcoManagerLeaf *)CEcoManagerTree::GetBaseLeaf(this, a2);
+  if ( BaseLeaf != 0 )
   {
     return CEcoManagerLeaf::Update(BaseLeaf);
   }
@@ -212,7 +212,7 @@ int  CEcoManagerTree::GetNrValidOfAllBaseLeafes(enum IECONOMANAGERGRIDRESOLUTION
           i < CEcoManagerTree::GetNrBaseLeaves(this);
           ++i )
     {
-      BaseLeaf = CEcoManagerTree::GetBaseLeaf(this, i);
+      BaseLeaf = (struct CEcoManagerLeaf *)CEcoManagerTree::GetBaseLeaf(this, i);
       NrBaseLeaves += CEcoManagerLeaf::GetNrValidChilds(BaseLeaf);
     }
   }
@@ -222,7 +222,7 @@ int  CEcoManagerTree::GetNrValidOfAllBaseLeafes(enum IECONOMANAGERGRIDRESOLUTION
           j < CEcoManagerTree::GetNrBaseLeaves(this);
           ++j )
     {
-      v3 = CEcoManagerTree::GetBaseLeaf(this, j);
+      v3 = (struct CEcoManagerLeaf *)CEcoManagerTree::GetBaseLeaf(this, j);
       NrBaseLeaves += CEcoManagerLeaf::GetNrValidOfAllSubChilds(v3);
     }
   }
@@ -256,7 +256,7 @@ class CEcoManagerLeaf *  CEcoManagerTree::FindLeaf(enum IECONOMANAGERGRIDRESOLUT
     v9 >>= 1;
   }
   BaseLeaf = CEcoManagerTree::GetBaseLeaf(this, v7, v9);
-  if ( a2 == 64 || !BaseLeaf )
+  if ( a2 == 64 || BaseLeaf == 0 )
   {
     return BaseLeaf;
   }
@@ -272,8 +272,8 @@ class CEcoManagerLeaf *  CEcoManagerTree::FindLeaf(enum IECONOMANAGERGRIDRESOLUT
   {
     return 0;
   }
-  v12 = CEcoManagerLeaf::GetChild(BaseLeaf, Child);
-  if ( a2 == 32 || !v12 )
+  v12 = (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(BaseLeaf, Child);
+  if ( a2 == 32 || v12 == 0 )
   {
     return v12;
   }
@@ -284,7 +284,7 @@ class CEcoManagerLeaf *  CEcoManagerTree::FindLeaf(enum IECONOMANAGERGRIDRESOLUT
   }
   else
   {
-    return CEcoManagerLeaf::GetChild(v12, v6);
+    return (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(v12, v6);
   }
 }
 
@@ -299,7 +299,7 @@ class CEcoManagerLeaf *  CEcoManagerTree::FindNearLeaf(enum IECONOMANAGERGRIDRES
   int v10; // [esp+Ch] [ebp-4h]
 
   Leaf = CEcoManagerTree::FindLeaf(this, a2, a3, a4);
-  if ( Leaf )
+  if ( Leaf != 0 )
   {
     return Leaf;
   }
@@ -312,7 +312,7 @@ class CEcoManagerLeaf *  CEcoManagerTree::FindNearLeaf(enum IECONOMANAGERGRIDRES
           ++j )
     {
       v10 = CEcoManagerTree::FindLeaf(this, a2, i, j);
-      if ( v10 )
+      if ( v10 != 0 )
       {
         return v10;
       }
@@ -343,11 +343,11 @@ class CEcoManagerLeaf *  CEcoManagerTree::GetBaseLeaf(int a2, int a3) {
     {
       break;
     }
-    BaseLeaf = CEcoManagerTree::GetBaseLeaf(v8, i);
+    BaseLeaf = (struct CEcoManagerLeaf *)CEcoManagerTree::GetBaseLeaf(v8, i);
     CEcoManagerLeaf::GetPosition(BaseLeaf, &v7, &v6);
     if ( v7 == a2 && v6 == a3 )
     {
-      return CEcoManagerTree::GetBaseLeaf(v8, i);
+      return (struct CEcoManagerLeaf *)CEcoManagerTree::GetBaseLeaf(v8, i);
     }
   }
   return 0;
@@ -366,7 +366,7 @@ bool  CEcoManagerTree::RemoveLeafRecursive(class CEcoManagerLeaf * a2, class CEc
         i < CEcoManagerLeaf::GetNrChilds(a2);
         ++i )
   {
-    if ( CEcoManagerLeaf::GetChild(a2, i) && CEcoManagerLeaf::GetChild(a2, i) == a3 )
+    if ( (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(a2, i) != 0 && (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(a2, i) == a3 )
     {
       CEcoManagerLeaf::RemoveChild(a2, i);
       return 1;
@@ -376,9 +376,9 @@ bool  CEcoManagerTree::RemoveLeafRecursive(class CEcoManagerLeaf * a2, class CEc
         j < CEcoManagerLeaf::GetNrChilds(a2);
         ++j )
   {
-    if ( CEcoManagerLeaf::GetChild(a2, j) )
+    if ( (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(a2, j) != 0 )
     {
-      Child = CEcoManagerLeaf::GetChild(a2, j);
+      Child = (struct CEcoManagerLeaf *)CEcoManagerLeaf::GetChild(a2, j);
       if ( CEcoManagerTree::RemoveLeafRecursive(this, Child, a3) )
       {
         return 1;

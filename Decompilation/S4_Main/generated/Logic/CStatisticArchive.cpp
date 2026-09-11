@@ -6,7 +6,7 @@
 // Decompiled from CStatisticArchive *__thiscall CStatisticArchive::CStatisticArchive(CStatisticArchive *this)
  CStatisticArchive::CStatisticArchive(void) {
   
-  IS4ChunkObject::IS4ChunkObject(this);
+  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this);
   *(_DWORD *)this = CStatisticArchive::_vftable_;
   *((_DWORD *)this + 21185) = 0;
   *((_DWORD *)this + 21188) = 0;
@@ -110,7 +110,7 @@ void  CStatisticArchive::GetAreaSizeData(int a2) {
   
   int result; // eax
 
-  result = CStatistic::GetLandSizePercent((CStatistic *)&g_cStatistic, a2);
+  result = CStatistic::GetLandSizePercent(&g_cStatistic, a2);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 17) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7073) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14129) = result;
@@ -124,7 +124,7 @@ void  CStatisticArchive::GetPopulationData(int a2) {
   
   int result; // eax
 
-  result = CStatistic::GetCivilian((CStatistic *)&g_cStatistic, a2);
+  result = CStatistic::GetCivilian(&g_cStatistic, a2);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 49) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7105) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14161) = result;
@@ -138,7 +138,7 @@ void  CStatisticArchive::GetRessourcesData(int a2) {
   
   int result; // eax
 
-  result = CStatistic::UsedBuildingMaterial((CStatistic *)&g_cStatistic, a2);
+  result = CStatistic::UsedBuildingMaterial(&g_cStatistic, a2);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 33) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7089) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14145) = result;
@@ -152,7 +152,7 @@ void  CStatisticArchive::GetSoldierData(int a2) {
   
   int result; // eax
 
-  result = CStatistic::GetNrOfSoldiers((CStatistic *)&g_cStatistic, a2);
+  result = CStatistic::GetNrOfSoldiers(&g_cStatistic, a2);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 65) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7121) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14177) = result;
@@ -166,7 +166,7 @@ void  CStatisticArchive::GetBeatenEnemiesData(int a2) {
   
   int result; // eax
 
-  result = CStatistic::GetKills((CStatistic *)&g_cStatistic, a2);
+  result = CStatistic::GetKills(&g_cStatistic, a2);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 81) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7137) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14193) = result;
@@ -180,7 +180,7 @@ void  CStatisticArchive::GetLostWarriorsData(int a2) {
   
   int result; // eax
 
-  result = CStatistic::GetLosses((CStatistic *)&g_cStatistic, a2);
+  result = CStatistic::GetLosses(&g_cStatistic, a2);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 97) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7153) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14209) = result;
@@ -194,7 +194,7 @@ void  CStatisticArchive::GetDestroyedBuildingsData(int a2) {
   
   int result; // eax
 
-  result = CStatistic::GetBuildingLosses((CStatistic *)&g_cStatistic, a2);
+  result = CStatistic::GetBuildingLosses(&g_cStatistic, a2);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 113) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7169) = result;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14225) = result;
@@ -250,171 +250,171 @@ void  CStatisticArchive::GetGoodData(int a2) {
   int result; // eax
   int v44; // [esp+0h] [ebp-8h]
 
-  Good = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 1);
+  Good = CStatistic::GetGood(&g_cStatistic, a2, GOOD_AGAVE);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 129) = Good;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7185) = Good;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14241) = Good;
-  v3 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 2);
+  v3 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_AMMO);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 145) = v3;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7201) = v3;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14257) = v3;
-  v4 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 3);
+  v4 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_ARMOR);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 161) = v4;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7217) = v4;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14273) = v4;
-  v5 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 4);
+  v5 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_AXE);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 177) = v5;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7233) = v5;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14289) = v5;
-  v6 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 38);
+  v6 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_BACKPACKCATAPULT);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 721) = v6;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7777) = v6;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14833) = v6;
-  v7 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 5);
+  v7 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_BATTLEAXE);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 193) = v7;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7249) = v7;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14305) = v7;
-  v8 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 6);
+  v8 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_BLOWGUN);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 209) = v8;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7265) = v8;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14321) = v8;
-  v9 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 7);
+  v9 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_BOARD);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 225) = v9;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7281) = v9;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14337) = v9;
-  v10 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 8);
+  v10 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_BOW);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 241) = v10;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7297) = v10;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14353) = v10;
-  v11 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 9);
+  v11 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_BREAD);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 257) = v11;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7313) = v11;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14369) = v11;
-  v12 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 10);
+  v12 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_COAL);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 273) = v12;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7329) = v12;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14385) = v12;
-  v13 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 40);
+  v13 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_EXPLOSIVEARROW);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 737) = v13;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7793) = v13;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14849) = v13;
-  v14 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 11);
+  v14 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_FISH);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 289) = v14;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7345) = v14;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14401) = v14;
-  v15 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 12);
+  v15 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_FLOUR);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 305) = v15;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7361) = v15;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14417) = v15;
-  v16 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 13);
+  v16 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_GOAT);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 321) = v16;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7377) = v16;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14433) = v16;
-  v17 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 14);
+  v17 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_GOLDBAR);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 337) = v17;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7393) = v17;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14449) = v17;
-  v18 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 15);
+  v18 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_GOLDORE);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 353) = v18;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7409) = v18;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14465) = v18;
-  v19 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 39);
+  v19 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_GOOSE);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 753) = v19;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7809) = v19;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14865) = v19;
-  v20 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 16);
+  v20 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_GRAIN);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 369) = v20;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7425) = v20;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14481) = v20;
-  v21 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 17);
+  v21 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_GUNPOWDER);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 385) = v21;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7441) = v21;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14497) = v21;
-  v22 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 18);
+  v22 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_HAMMER);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 401) = v22;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7457) = v22;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14513) = v22;
-  v23 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 19);
+  v23 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_HONEY);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 417) = v23;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7473) = v23;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14529) = v23;
-  v24 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 20);
+  v24 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_IRONBAR);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 433) = v24;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7489) = v24;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14545) = v24;
-  v25 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 21);
+  v25 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_IRONORE);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 449) = v25;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7505) = v25;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14561) = v25;
-  v26 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 22);
+  v26 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_LOG);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 465) = v26;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7521) = v26;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14577) = v26;
-  v27 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 23);
+  v27 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_MEAD);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 481) = v27;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7537) = v27;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14593) = v27;
-  v28 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 24);
+  v28 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_MEAT);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 497) = v28;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7553) = v28;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14609) = v28;
-  v29 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 25);
+  v29 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_PICKAXE);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 513) = v29;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7569) = v29;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14625) = v29;
-  v30 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 26);
+  v30 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_PIG);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 529) = v30;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7585) = v30;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14641) = v30;
-  v31 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 27);
+  v31 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_ROD);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 545) = v31;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7601) = v31;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14657) = v31;
-  v32 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 28);
+  v32 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_SAW);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 561) = v32;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7617) = v32;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14673) = v32;
-  v33 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 29);
+  v33 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_SCYTHE);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 577) = v33;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7633) = v33;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14689) = v33;
-  v34 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 30);
+  v34 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_SHEEP);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 593) = v34;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7649) = v34;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14705) = v34;
-  v35 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 31);
+  v35 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_SHOVEL);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 609) = v35;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7665) = v35;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14721) = v35;
-  v36 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 32);
+  v36 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_STONE);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 625) = v36;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7681) = v36;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14737) = v36;
-  v37 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 33);
+  v37 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_SULFUR);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 641) = v37;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7697) = v37;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14753) = v37;
-  v38 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 42);
+  v38 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_SUNFLOWER);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 769) = v38;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7825) = v38;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14881) = v38;
-  v39 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 41);
+  v39 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_SUNFLOWEROIL);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 785) = v39;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7841) = v39;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14897) = v39;
-  v40 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 34);
+  v40 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_SWORD);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 657) = v40;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7713) = v40;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14769) = v40;
-  v41 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 35);
+  v41 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_TEQUILA);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 673) = v41;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7729) = v41;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14785) = v41;
-  v42 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 36);
+  v42 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_WATER);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 689) = v42;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7745) = v42;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 13) + 14801) = v42;
-  v44 = CStatistic::GetGood((CStatistic *)&g_cStatistic, a2, 37);
+  v44 = CStatistic::GetGood(&g_cStatistic, a2, GOOD_WINE);
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 3) + 705) = v44;
   *((_DWORD *)this + 784 * a2 + *((_DWORD *)this + 8) + 7761) = v44;
   result = *((_DWORD *)this + 13);
@@ -437,42 +437,42 @@ void  CStatisticArchive::Load(class IS4Chunk & a2) {
   CStatisticArchive *v9; // [esp+18h] [ebp-4h]
 
   v9 = this;
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 12))(a2, 762236059);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->LoadSignature)(a2, 762236059);
   v8 = 0;
-  result = (**(int (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v8, 4);
-  if ( v8 != 1 )
+  result = ((int (__thiscall *)(struct IS4Chunk *, int *, int))a2->Load)(a2, &v8, 4);
+  if ( v8 == 1 )
   {
-    return result;
+    ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Load)(a2, &v7, 4);
+    if ( v7 != 9 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 95, "iNumberPlayer== PLAYER_MAX") == 1 )
+    {
+      __debugbreak();
+    }
+    ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Load)(a2, &v6, 4);
+    if ( v6 != 49 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 98, "StatisticTypeMax == STATISTICTYPE_MAX") == 1 )
+    {
+      __debugbreak();
+    }
+    ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Load)(a2, &v5, 4);
+    if ( v5 != 16 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 101, "MaxSamplesShort == MAX_SAMPLESSHORT") == 1 )
+    {
+      __debugbreak();
+    }
+    ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Load)(a2, &v4, 4);
+    if ( v4 != 16 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 104, "MaxSamplesMedium == MAX_SAMPLESMEDIUM") == 1 )
+    {
+      __debugbreak();
+    }
+    ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Load)(a2, &v3, 4);
+    if ( v3 != 16 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 107, "MaxSamplesLong == MAX_SAMPLESLONG") == 1 )
+    {
+      __debugbreak();
+    }
+    ((void (__thiscall *)(struct IS4Chunk *, char *, int))a2->Load)(a2, (char *)v9 + 68, 28224);
+    ((void (__thiscall *)(struct IS4Chunk *, char *, int))a2->Load)(a2, (char *)v9 + 28292, 28224);
+    ((void (__thiscall *)(struct IS4Chunk *, char *, int))a2->Load)(a2, (char *)v9 + 56516, 28224);
+    return ((int (__thiscall *)(struct IS4Chunk *, char *, int))a2->Load)(a2, (char *)v9 + 84740, 196);
   }
-  (**(void (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v7, 4);
-  if ( v7 != 9 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 95, "iNumberPlayer== PLAYER_MAX") == 1 )
-  {
-    __debugbreak();
-  }
-  (**(void (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v6, 4);
-  if ( v6 != 49 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 98, "StatisticTypeMax == STATISTICTYPE_MAX") == 1 )
-  {
-    __debugbreak();
-  }
-  (**(void (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v5, 4);
-  if ( v5 != 16 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 101, "MaxSamplesShort == MAX_SAMPLESSHORT") == 1 )
-  {
-    __debugbreak();
-  }
-  (**(void (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v4, 4);
-  if ( v4 != 16 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 104, "MaxSamplesMedium == MAX_SAMPLESMEDIUM") == 1 )
-  {
-    __debugbreak();
-  }
-  (**(void (__thiscall ***)(struct IS4Chunk *, int *, int))a2)(a2, &v3, 4);
-  if ( v3 != 16 && BBSupportDbgReport(2, "logic\\StatisticArchive.cpp", 107, "MaxSamplesLong == MAX_SAMPLESLONG") == 1 )
-  {
-    __debugbreak();
-  }
-  (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v9 + 68, 28224);
-  (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v9 + 28292, 28224);
-  (**(void (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v9 + 56516, 28224);
-  return (**(int (__thiscall ***)(struct IS4Chunk *, int, int))a2)(a2, (int)v9 + 84740, 196);
+  return result;
 }
 
 
@@ -489,23 +489,23 @@ void  CStatisticArchive::Save(class IS4Chunk & a2) {
   CStatisticArchive *v9; // [esp+18h] [ebp-4h]
 
   v9 = this;
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, 762236059);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveSignature)(a2, 762236059);
   v8 = 1;
-  (*(void (__thiscall **)(struct IS4Chunk *, int *, int))(*(_DWORD *)a2 + 16))(a2, &v8, 4);
+  ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Save)(a2, &v8, 4);
   v7 = 9;
-  (*(void (__thiscall **)(struct IS4Chunk *, int *, int))(*(_DWORD *)a2 + 16))(a2, &v7, 4);
+  ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Save)(a2, &v7, 4);
   v6 = 49;
-  (*(void (__thiscall **)(struct IS4Chunk *, int *, int))(*(_DWORD *)a2 + 16))(a2, &v6, 4);
+  ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Save)(a2, &v6, 4);
   v5 = 16;
-  (*(void (__thiscall **)(struct IS4Chunk *, int *, int))(*(_DWORD *)a2 + 16))(a2, &v5, 4);
+  ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Save)(a2, &v5, 4);
   v4 = 16;
-  (*(void (__thiscall **)(struct IS4Chunk *, int *, int))(*(_DWORD *)a2 + 16))(a2, &v4, 4);
+  ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Save)(a2, &v4, 4);
   v3 = 16;
-  (*(void (__thiscall **)(struct IS4Chunk *, int *, int))(*(_DWORD *)a2 + 16))(a2, &v3, 4);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 16))(a2, (int)v9 + 68, 28224);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 16))(a2, (int)v9 + 28292, 28224);
-  (*(void (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 16))(a2, (int)v9 + 56516, 28224);
-  return (*(int (__thiscall **)(struct IS4Chunk *, int, int))(*(_DWORD *)a2 + 16))(a2, (int)v9 + 84740, 196);
+  ((void (__thiscall *)(struct IS4Chunk *, int *, int))a2->Save)(a2, &v3, 4);
+  ((void (__thiscall *)(struct IS4Chunk *, char *, int))a2->Save)(a2, (char *)v9 + 68, 28224);
+  ((void (__thiscall *)(struct IS4Chunk *, char *, int))a2->Save)(a2, (char *)v9 + 28292, 28224);
+  ((void (__thiscall *)(struct IS4Chunk *, char *, int))a2->Save)(a2, (char *)v9 + 56516, 28224);
+  return ((int (__thiscall *)(struct IS4Chunk *, char *, int))a2->Save)(a2, (char *)v9 + 84740, 196);
 }
 
 

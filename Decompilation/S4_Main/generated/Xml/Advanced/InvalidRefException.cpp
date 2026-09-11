@@ -9,7 +9,7 @@
   
   AdvXMLParser::Exception::Exception(this);
   *(_DWORD *)this = &AdvXMLParser::InvalidRefException::_vftable_;
-  std::string::string(a2);
+  ((void (__stdcall *)(int))std::string::string)(a2);
   return this;
 }
 
@@ -20,7 +20,7 @@
   
   AdvXMLParser::Exception::Exception(this, a2);
   *(_DWORD *)this = &AdvXMLParser::InvalidRefException::_vftable_;
-  std::string::string((char *)a2 + 4);
+  ((void (__stdcall *)(char *))std::string::string)((char *)a2 + 4);
   return this;
 }
 

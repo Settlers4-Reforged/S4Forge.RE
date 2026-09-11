@@ -30,7 +30,7 @@ void __cdecl CLinks::InitLinks(void) {
 // Decompiled from void CLinks::DeactivateLinksPushBackMode()
 void __cdecl CLinks::DeactivateLinksPushBackMode(void) {
   
-  if ( !CLinks::m_iLinksPushBackMode && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 674, "m_iLinksPushBackMode") == 1 )
+  if ( CLinks::m_iLinksPushBackMode == 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 674, "m_iLinksPushBackMode") == 1 )
   {
     __debugbreak();
   }
@@ -49,7 +49,7 @@ class CLinkList & __cdecl CLinks::PushLinksBack(class CIntLinkList const & a1) {
   int v4; // [esp+4h] [ebp-Ch]
   CLinkList *v5; // [esp+Ch] [ebp-4h]
 
-  if ( !CLinks::m_iLinksPushBackMode && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 690, "m_iLinksPushBackMode") == 1 )
+  if ( CLinks::m_iLinksPushBackMode == 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 690, "m_iLinksPushBackMode") == 1 )
   {
     __debugbreak();
   }
@@ -73,7 +73,7 @@ int __cdecl CLinks::PushLinksUndef(int a1) {
 
   iSizeEx = a1 + (a1 & 1) + 2;
   iUnusedLinksId = CLinks::SearchForUnusedLinkEntries(iSizeEx);
-  if ( !iUnusedLinksId )
+  if ( iUnusedLinksId == 0 )
   {
     return 0;
   }
@@ -133,7 +133,7 @@ bool __cdecl CLinks::IsValidUsedLinkList(class CLinkList const & a1) {
   bool v2; // [esp+0h] [ebp-4h]
 
   v2 = a1->m_uMarker == 253;
-  return v2 & CLinks::IsValidRealLinkList(a1);
+  return v2 & CLinks::IsValidRealLinkList((const struct CLink *)a1);
 }
 
 
@@ -146,7 +146,7 @@ class CLink const & __cdecl CLinks::Link(int a1) {
 
 
 // address=[0x15e7270]
-// Decompiled from struct CLinkList *__cdecl CLinks::LinkList(int a1)
+// Decompiled from static struct CLinkList *__cdecl CLinks::LinkList(int a1)
 class CLinkList & __cdecl CLinks::LinkList(int a1) {
   
   return (struct CLinkList *)&CLinks::m_cLinks[a1];
@@ -195,7 +195,7 @@ void __cdecl CLinks::LinkListPushLinkTileId(class CLinkList & _rLinkList, int _i
   int iLinksId; // [esp+Ch] [ebp-8h]
   int iOldSize; // [esp+10h] [ebp-4h]
 
-  if ( CLinkList::SearchForLinkTileId(_rLinkList, _iLinkTileId) && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 910, "!_rLinkList.SearchForLinkTileId(_iLinkTileId)") == 1 )
+  if ( CLinkList::SearchForLinkTileId(_rLinkList, _iLinkTileId) != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 910, "!_rLinkList.SearchForLinkTileId(_iLinkTileId)") == 1 )
   {
     __debugbreak();
   }
@@ -345,7 +345,7 @@ int __cdecl CLinks::SearchForUnusedLinkEntries(int _iSizeEx) {
   {
     __debugbreak();
   }
-  if ( CLinks::m_iLinksPushBackMode && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 755, "!m_iLinksPushBackMode") == 1 )
+  if ( CLinks::m_iLinksPushBackMode != 0 && BBSupportDbgReport(2, "Pathing\\TilesAndLinks.cpp", 755, "!m_iLinksPushBackMode") == 1 )
   {
     __debugbreak();
   }

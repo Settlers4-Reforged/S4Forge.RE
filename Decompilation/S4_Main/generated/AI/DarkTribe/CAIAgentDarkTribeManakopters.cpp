@@ -6,14 +6,14 @@
 // Decompiled from CAIAgentDarkTribeManakopters *__thiscall CAIAgentDarkTribeManakopters::CAIAgentDarkTribeManakopters(CAIAgentDarkTribeManakopters *this)
  CAIAgentDarkTribeManakopters::CAIAgentDarkTribeManakopters(void) {
   
-  CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "manakopters");
+  CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent((CAIDarkTribeSectorAgent *)this, "manakopters");
   *(_DWORD *)this = &CAIAgentDarkTribeManakopters::_vftable_;
   return this;
 }
 
 
 // address=[0x1322f20]
-// Decompiled from void __thiscall CAIAgentDarkTribeManakopters::~CAIAgentDarkTribeManakopters(CAIAgentDarkTribeManakopters *this)
+// Decompiled from void __thiscall CAIAgentDarkTribeManakopters::~CAIAgentDarkTribeManakopters(CAIScheduler **this)
  CAIAgentDarkTribeManakopters::~CAIAgentDarkTribeManakopters(void) {
   
   CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(this);

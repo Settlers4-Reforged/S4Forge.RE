@@ -16,7 +16,7 @@ void  CClipboard::CopyTextToClipboard(char const * Str) {
   {
     EmptyClipboard();
     hMem = GlobalAlloc(2u, v3 + 1);
-    if ( hMem )
+    if ( hMem != 0 )
     {
       v1 = GlobalLock(hMem);
       memcpy(v1, Str, v3 + 1);
@@ -34,16 +34,16 @@ void  CClipboard::CopyTextToClipboard(std::string const & a2) {
   
   int v2; // eax
 
-  if ( std::string::length(a2) )
+  if ( std::string::length(a2) != 0 )
   {
-    v2 = std::string::c_str(a2);
+    v2 = (int)std::string::c_str((std::string *)a2);
     this->CopyTextToClipboard(this, v2);
   }
 }
 
 
 // address=[0x147f6c0]
-// Decompiled from void __stdcall CClipboard::GetTextFromClipboard(void *a1, unsigned int a2)
+// Decompiled from void __stdcall CClipboard::GetTextFromClipboard(std::string *a1, unsigned int a2)
 void  CClipboard::GetTextFromClipboard(std::string & a1, int a2) {
   
   char *Str; // [esp+8h] [ebp-Ch]
@@ -58,7 +58,7 @@ void  CClipboard::GetTextFromClipboard(std::string & a1, int a2) {
   if ( OpenClipboard(0) )
   {
     Str = (char *)GetClipboardData(CF_TEXT);
-    if ( Str )
+    if ( Str != 0 )
     {
       v3 = strlen(Str);
       if ( v3 > (int)a2 )
@@ -82,8 +82,8 @@ void  CClipboard::GetTextFromClipboard(std::string & a1, int a2) {
 // Decompiled from CClipboard *__thiscall CClipboard::CClipboard(CClipboard *this)
  CClipboard::CClipboard(void) {
   
-  IClipboard::IClipboard(this);
-  *(_DWORD *)this = &CClipboard::_vftable_;
+  IClipboard::IClipboard((IClipboard *)this);
+  this->__vftable = (CClipboard_vtbl *)&CClipboard::_vftable_;
   return this;
 }
 

@@ -19,7 +19,7 @@ void  CAIScripting::Init(void) {
   CLua::ActivateScriptingEnvironment(ScriptEnv);
   lua_beginblock();
   lua_gAI = lua_getglobal("AI");
-  if ( !lua_isnil(lua_gAI) && BBSupportDbgReport(2, "AI\\AI_Script.cpp", 1163, "lua_isnil(lua_getglobal(\"AI\"))") == 1 )
+  if ( lua_isnil(lua_gAI) == 0 && BBSupportDbgReport(2, "AI\\AI_Script.cpp", 1163, "lua_isnil(lua_getglobal(\"AI\"))") == 1 )
   {
     __debugbreak();
   }
@@ -27,7 +27,7 @@ void  CAIScripting::Init(void) {
   lua_pushobject(lua_gAITable);
   lua_rawsetglobal("AI");
   for ( i = &s_vAILuaDefaults;
-        i->m_spName;
+        i->m_spName != 0;
         ++i )
   {
     lua_pushobject(lua_gAITable);
@@ -36,7 +36,7 @@ void  CAIScripting::Init(void) {
     lua_rawsettable();
   }
   for ( j = &s_AIDebugFunctions;
-        j->m_swpName;
+        j->m_swpName != 0;
         ++j )
   {
     lua_pushobject(lua_gAITable);
@@ -45,7 +45,7 @@ void  CAIScripting::Init(void) {
     lua_rawsettable();
   }
   for ( k = &s_AIFunctions;
-        k->m_swpName;
+        k->m_swpName != 0;
         ++k )
   {
     lua_pushobject(lua_gAITable);
@@ -135,7 +135,7 @@ void  CAIScripting::InitPlayerScriptVarsDefaultValues(void) {
         ++i )
   {
     v10 = &s_sDefaultScriptVars[i];
-    if ( v10->m_pConfig )
+    if ( v10->m_pConfig != 0 )
     {
       s_iDefaultScriptVars[0][i] = 0;
       m_iMax = v10->m_iMax;

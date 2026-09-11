@@ -6,13 +6,13 @@
 // Decompiled from CUploadCachePageManager *__thiscall CUploadCachePageManager::CUploadCachePageManager(CUploadCachePageManager *this, struct IDirectDrawSurface7 *a2, struct IDirectDrawSurface7 *a3, struct IDirect3DDevice7 *a4)
  CUploadCachePageManager::CUploadCachePageManager(struct IDirectDrawSurface7 * a2, struct IDirectDrawSurface7 * a3, struct IDirect3DDevice7 * a4) {
   
-  CCachePageManager::CCachePageManager(this, a2, a3, a4);
+  CCachePageManager::CCachePageManager((CCachePageManager *)this, a2, a3, a4);
   return this;
 }
 
 
 // address=[0x2f69860]
-// Decompiled from CCachePageManager *__thiscall CUploadCachePageManager::~CUploadCachePageManager(CUploadCachePageManager *this)
+// Decompiled from CCachePageManager *__thiscall CUploadCachePageManager::~CUploadCachePageManager(CCachePageManager *this)
  CUploadCachePageManager::~CUploadCachePageManager(void) {
   
   return CCachePageManager::~CCachePageManager(this);

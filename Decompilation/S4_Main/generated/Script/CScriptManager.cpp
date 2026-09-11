@@ -101,7 +101,7 @@ void  CScriptManager::Call(int _iScriptFuncId, int a3, int a4, int a5, int a6) {
  CScriptManager::CScriptManager(class CLua & a2) {
   
   this->vtable = &CScriptManager::_vftable_;
-  if ( CScriptManager::m_pScriptManager && BBSupportDbgReport(2, "Script\\ScriptManager.cpp", 95, "m_pScriptManager == 0") == 1 )
+  if ( CScriptManager::m_pScriptManager != 0 && BBSupportDbgReport(2, "Script\\ScriptManager.cpp", 95, "m_pScriptManager == 0") == 1 )
   {
     __debugbreak();
   }
@@ -136,7 +136,7 @@ int  CScriptManager::FindFunc(unsigned int a2) {
   int m_iNumberOfRegisteredFunctions; // [esp+0h] [ebp-Ch]
   int i; // [esp+4h] [ebp-8h]
 
-  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\ScriptManager.cpp", 126, "m_pScriptEnv != 0") == 1 )
+  if ( this->m_pScriptEnv == 0 && BBSupportDbgReport(2, "Script\\ScriptManager.cpp", 126, "m_pScriptEnv != 0") == 1 )
   {
     __debugbreak();
   }
@@ -161,12 +161,12 @@ void  CScriptManager::RegisterFunction(void) {
   
   int Param; // [esp+4h] [ebp-8h]
 
-  if ( !this->m_pScriptEnv && BBSupportDbgReport(2, "Script\\ScriptManager.cpp", 148, "m_pScriptEnv != 0") == 1 )
+  if ( this->m_pScriptEnv == 0 && BBSupportDbgReport(2, "Script\\ScriptManager.cpp", 148, "m_pScriptEnv != 0") == 1 )
   {
     __debugbreak();
   }
   Param = CLua::GetParam(this->m_pScriptEnv, 1);
-  if ( this->m_bAllowRegister )
+  if ( this->m_bAllowRegister != 0 )
   {
     if ( CLua::IsFunction(this->m_pScriptEnv, Param) )
     {
@@ -202,9 +202,9 @@ void  CScriptManager::RegisterFunction(void) {
 // Decompiled from int CScriptManager::LuaRegisterFunction()
 void __cdecl CScriptManager::LuaRegisterFunction(void) {
   
-  if ( CScriptManager::m_pScriptManager )
+  if ( CScriptManager::m_pScriptManager != 0 )
   {
-    return CScriptManager::RegisterFunction(CScriptManager::m_pScriptManager);
+    return ((int (__thiscall *)(CScriptManager *))CScriptManager::RegisterFunction)(CScriptManager::m_pScriptManager);
   }
   if ( BBSupportDbgReport(1, "Script\\ScriptManager.cpp", 191, "CScriptManager::LuaRegisterFunc(): m_pScriptManager == 0!") == 1 )
   {

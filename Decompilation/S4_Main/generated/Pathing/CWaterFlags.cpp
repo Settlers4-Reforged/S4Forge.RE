@@ -110,7 +110,7 @@ void __cdecl CWaterFlags::SetWaterFlagBits(int a1, int a2) {
 // Decompiled from void __cdecl CWaterFlags::Init(unsigned __int16 *a1)
 void __cdecl CWaterFlags::Init(unsigned short * a1) {
   
-  if ( !a1 && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 736, "_pWaterFlagsLayer != 0") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 736, "_pWaterFlagsLayer != 0") == 1 )
   {
     __debugbreak();
   }
@@ -142,7 +142,7 @@ void __cdecl CWaterFlags::PlaceShip(int a1) {
   int v6; // [esp+18h] [ebp-8h]
   int i; // [esp+1Ch] [ebp-4h]
 
-  if ( !CWaterFlags::m_iInitialized && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 769, "m_iInitialized") == 1 )
+  if ( CWaterFlags::m_iInitialized == 0 && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 769, "m_iInitialized") == 1 )
   {
     __debugbreak();
   }
@@ -212,11 +212,11 @@ void __cdecl CWaterFlags::RemoveShip(int a1) {
   int i; // [esp+10h] [ebp-ACh]
   _BYTE v10[164]; // [esp+14h] [ebp-A8h] BYREF
 
-  if ( !CWaterFlags::m_iInitialized && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 828, "m_iInitialized") == 1 )
+  if ( CWaterFlags::m_iInitialized == 0 && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 828, "m_iInitialized") == 1 )
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(a1) && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 829, "g_cWorld.InWorldPackedXY(_iXY)") == 1 )
+  if ( !CWorldManager::InWorldPackedXY(a1) && BBSupportDbgReport(2, "Pathing\\WaterFlags.cpp", 829, "g_cWorld.InWorldPackedXY(_iXY)") == 1 )
   {
     __debugbreak();
   }
@@ -228,7 +228,7 @@ void __cdecl CWaterFlags::RemoveShip(int a1) {
       __debugbreak();
     }
     CShipList::CShipList((CShipList *)v10, a1);
-    result = CWaterFlags::ClearWaterFlagBits(v8, 2048);
+    result = ((int (__cdecl *)(int, __int16))CWaterFlags::ClearWaterFlagBits)(v8, 2048);
     for ( i = 0;
           i < 271;
           ++i )
@@ -239,10 +239,10 @@ void __cdecl CWaterFlags::RemoveShip(int a1) {
         v6 = CWaterFlags::WaterFlags(v7);
         if ( CWaterFlags::WaterFlagsValid(v6) )
         {
-          v4 = SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * i]);
-          v2 = SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * i]);
+          v4 = SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[i]);
+          v2 = SSurroundingPoint8::X(&g_sSurroundingHexPoints8[i]);
           v3 = Y16X16::PackXYFast(v2, v4);
-          v5 = CShipList::Nearest((CShipList *)v10, a1 + v3);
+          v5 = CShipList::Nearest((CShipList *)v10, (Y16X16 *)(a1 + v3));
           CWaterFlags::SetWaterFlags(v7, v5 | v6 & 0xFF00);
         }
       }

@@ -47,18 +47,18 @@ bool  CPeopleManagerTask::IsShooting(void) {
   char v16; // [esp+4Fh] [ebp-1h]
 
   v16 = 0;
-  EcoSector = CSchedule::GetEcoSector(this[10]);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
   v9 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 152))(EcoSector, 2);
-  v11 = CSchedule::GetEcoSector(this[10]);
+  v11 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
   v6 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v11 + 152))(v11, 3);
-  v10 = CSchedule::GetEcoSector(this[10]);
+  v10 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
   v2 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v10 + 152))(v10, 1);
-  NeededCarierSettler = CPeopleManagerTask::GetNeededCarierSettler((CPeopleManagerTask *)this);
+  NeededCarierSettler = CPeopleManagerTask::GetNeededCarierSettler(this);
   NeededBuildingSettler = CPeopleManagerTask::GetNeededBuildingSettler((CPeopleManagerTask *)this, NeededCarierSettler);
   CPeopleManagerTask::DestroyResidenceBuildings((CPeopleManagerTask *)this);
   CPeopleManagerTask::SetMinimumCarrier((CPeopleManagerTask *)this);
-  this[11] = 0;
-  this[13] = 0;
+  *(this + 11) = 0;
+  *(this + 13) = 0;
   if ( NeededBuildingSettler > v9 )
   {
     v8 = NeededBuildingSettler - v9;
@@ -69,10 +69,10 @@ bool  CPeopleManagerTask::IsShooting(void) {
   }
   if ( v8 > 0 )
   {
-    v7 = CSchedule::GetEcoSector(this[10]);
+    v7 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
     if ( v8 - (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v7 + 144))(v7, 31) > 0 )
     {
-      this[11] = (CSchedule *)((unsigned int)this[11] | 1);
+      *(this + 11) = (CSchedule *)((unsigned int)*(this + 11) | 1);
     }
   }
   if ( NeededBuildingSettler > v6 )
@@ -85,21 +85,21 @@ bool  CPeopleManagerTask::IsShooting(void) {
   }
   if ( v5 > 0 )
   {
-    v4 = CSchedule::GetEcoSector(this[10]);
+    v4 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
     (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v4 + 144))(v4, 18);
-    this[11] = (CSchedule *)((unsigned int)this[11] | 2);
+    *(this + 11) = (CSchedule *)((unsigned int)*(this + 11) | 2);
   }
   v13 = v5 + v8;
   if ( v5 + v8 > 10 )
   {
     v13 = 10;
   }
-  if ( v2 >= NeededCarierSettler + v13 || this[8] )
+  if ( v2 < NeededCarierSettler + v13 && *(this + 8) == 0 )
   {
-    return v16;
+    *(this + 11) = (CSchedule *)((unsigned int)*(this + 11) | 4);
+    return 1;
   }
-  this[11] = (CSchedule *)((unsigned int)this[11] | 4);
-  return 1;
+  return v16;
 }
 
 
@@ -115,10 +115,10 @@ bool  CPeopleManagerTask::action(void) {
   {
     return 1;
   }
-  GoodPositionForBuilding = CSchedule::GetGoodPositionForBuilding(*((CSchedule **)this + 10), 40);
+  GoodPositionForBuilding = CSchedule::GetGoodPositionForBuilding(*((CDynList ***)this + 10), 40);
   *((_DWORD *)this + 14) = CSchedule::GetResidenceBuildingLevel(*((CSchedule **)this + 10));
   C = (CMainProblemSolveEvent *)operator new(0x70u);
-  if ( C )
+  if ( C != 0 )
   {
     v2 = CMainProblemSolveEvent::CMainProblemSolveEvent(C, *((_DWORD *)this + 3), 9, *((_DWORD *)this + 14), GoodPositionForBuilding, 0, 0);
   }
@@ -126,7 +126,7 @@ bool  CPeopleManagerTask::action(void) {
   {
     v2 = 0;
   }
-  *((_DWORD *)this + 8) = CSchedule::NewSchedEntry(*((CSchedule **)this + 10), v2);
+  *((_DWORD *)this + 8) = CSchedule::NewSchedEntry(*((CDynList ***)this + 10), v2);
   *((_DWORD *)this + 5) = 1;
   *((_DWORD *)this + 13) = 0;
   *((_BYTE *)this + 60) = 0;
@@ -151,45 +151,43 @@ bool  CPeopleManagerTask::WaitFor(void) {
   struct IScheduleEntry *v3; // [esp+Ch] [ebp-18h]
   CExpandationEvent *C; // [esp+10h] [ebp-14h]
 
-  SpecialTask = CSchedule::GetSpecialTask(this[10], 3);
+  SpecialTask = CSchedule::GetSpecialTask((CDynList **)*(this + 10), 3);
   CPeopleManagerTask::SetMinimumCarrier((CPeopleManagerTask *)this);
   CPeopleManagerTask::ExistNotEmptyResidence((CPeopleManagerTask *)this);
-  if ( !this[13] )
+  if ( *(this + 13) == 0 )
   {
     return 0;
   }
-  if ( this[13] != (CSchedule *)1 )
+  if ( *(this + 13) != (CSchedule *)1 )
   {
-    if ( CBuildingManagerTask::IsRejectedBuilding(SpecialTask, 41, 1) || CBuildingManagerTask::IsRejectedBuilding(SpecialTask, 42, 1) )
+    if ( CBuildingManagerTask::IsRejectedBuilding(SpecialTask, 41, 1) != 0 || CBuildingManagerTask::IsRejectedBuilding(SpecialTask, 42, 1) != 0 )
     {
       *((_BYTE *)this + 60) = 1;
     }
-    if ( this[13] != (CSchedule *)2 )
+    if ( *(this + 13) == (CSchedule *)2 )
     {
-      return 0;
+      *(this + 16) = (CSchedule *)((char *)*(this + 16) - 1);
+      if ( *((_BYTE *)this + 60) != 0 )
+      {
+        *(this + 8) = 0;
+        return 1;
+      }
     }
-    this[16] = (CSchedule *)((char *)this[16] - 1);
-    if ( !*((_BYTE *)this + 60) )
+    return 0;
+  }
+  if ( *(this + 8) != 0 && CSchedule::IsAnyExpandation((CDynList **)*(this + 10)) == 0 )
+  {
+    C = (CExpandationEvent *)operator new(0x74u);
+    if ( C != 0 )
     {
-      return 0;
+      v3 = CExpandationEvent::CExpandationEvent(C, (int)*(this + 3), 0, -3);
     }
-    this[8] = 0;
-    return 1;
+    else
+    {
+      v3 = 0;
+    }
+    *(this + 8) = (CSchedule *)CSchedule::NewSchedEntry((CDynList **)*(this + 10), v3);
   }
-  if ( !this[8] || CSchedule::IsAnyExpandation((CDynList **)this[10]) )
-  {
-    return 1;
-  }
-  C = (CExpandationEvent *)operator new(0x74u);
-  if ( C )
-  {
-    v3 = CExpandationEvent::CExpandationEvent(C, this[3], 0, -3);
-  }
-  else
-  {
-    v3 = 0;
-  }
-  this[8] = (CSchedule *)CSchedule::NewSchedEntry(this[10], v3);
   return 1;
 }
 
@@ -205,13 +203,13 @@ int  CPeopleManagerTask::GetNeededCarierSettler(void) {
   struct IAIEcoManager *EcoSector; // [esp+14h] [ebp-Ch]
   struct IAIEcoManager *v7; // [esp+18h] [ebp-8h]
 
-  EcoSector = CSchedule::GetEcoSector(this[10]);
-  v7 = CSchedule::GetEcoSector(this[10]);
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
+  v7 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*(this + 10));
   v1 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v7 + 144))(v7, 8);
   v2 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 144))(EcoSector, 34);
-  NumberOfBuildingType = CSchedule::GetNumberOfBuildingType(this[10], 1);
-  v5 = CSchedule::GetNumberOfBuildingType(this[10], 4);
-  return v1 + 10 * (NumberOfBuildingType + v5 + CSchedule::GetNumberOfBuildingType(this[10], 17)) + v2 + 20;
+  NumberOfBuildingType = CSchedule::GetNumberOfBuildingType(*(this + 10), 1);
+  v5 = CSchedule::GetNumberOfBuildingType(*(this + 10), 4);
+  return v1 + 10 * (NumberOfBuildingType + v5 + CSchedule::GetNumberOfBuildingType(*(this + 10), 17)) + v2 + 20;
 }
 
 
@@ -265,15 +263,15 @@ bool  CPeopleManagerTask::DestroyResidenceBuildings(void) {
   v11 = 0;
   std::vector<int>::vector<int>(v6);
   v23 = 0;
-  EcoSector = CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
   v5 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)EcoSector + 284))(EcoSector) + 50;
-  v15 = CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
+  v15 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
   v11 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)v15 + 288))(v15) - v5;
-  v14 = CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
+  v14 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
   v21[0] = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v14 + 88))(v14, 40);
-  v13 = CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
+  v13 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
   v21[1] = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v13 + 88))(v13, 41);
-  v12 = CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
+  v12 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
   v21[2] = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v12 + 88))(v12, 42);
   v22[0] = 40;
   v22[1] = 41;
@@ -284,21 +282,21 @@ bool  CPeopleManagerTask::DestroyResidenceBuildings(void) {
   {
     if ( v11 > v21[i] )
     {
-      v10 = CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
+      v10 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
       if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v10 + 156))(v10, v22[i]) > 0 )
       {
         std::vector<int>::clear();
-        v9 = CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
+        v9 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
         (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, _BYTE *))(*(_DWORD *)v9 + 160))(v9, v22[i], v6);
-        if ( std::vector<int>::size(v6) )
+        if ( std::vector<int>::size(v6) != 0 )
         {
-          v8 = CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
+          v8 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
           v1 = (_DWORD *)std::vector<int>::operator[](0);
-          if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v8 + 76))(v8, *v1) )
+          if ( (*(unsigned __int8 (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v8 + 76))(v8, *v1) != 0 )
           {
             v2 = (_DWORD *)std::vector<int>::operator[](0);
             BBSupportTracePrintF(3, "AI_BuildingEvent::PlayerNr %i destroy %s with ID %i", *(_DWORD *)(*((_DWORD *)v20 + 10) + 20), (&off_3AC3FBC)[2 * v22[i]], *v2);
-            v7 = CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
+            v7 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v20 + 10));
             v3 = (_DWORD *)std::vector<int>::operator[](0);
             (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v7 + 104))(v7, *v3);
             v19 = 1;
@@ -332,7 +330,7 @@ void  CPeopleManagerTask::SetMinimumCarrier(void) {
   NumberOfBuildingTypeAtWork = CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 17);
   v2 = CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 4) + NumberOfBuildingTypeAtWork;
   v9 = 7 * (CSchedule::GetNumberOfBuildingTypeAtWork(*((_DWORD *)this + 10), 1) + v2) + 10;
-  EcoSector = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
+  EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)this + 10));
   v6 = (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)EcoSector + 152))(EcoSector, 1);
   if ( v6 - v9 < 10 )
   {
@@ -346,9 +344,9 @@ void  CPeopleManagerTask::SetMinimumCarrier(void) {
   {
     v9 = 80;
   }
-  v5 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
+  v5 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)this + 10));
   (*(void (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v5 + 320))(v5, 12);
-  v4 = CSchedule::GetEcoSector(*((CSchedule **)this + 10));
+  v4 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)this + 10));
   return (*(int (__thiscall **)(struct IAIEcoManager *, int))(*(_DWORD *)v4 + 312))(v4, v9);
 }
 
@@ -382,7 +380,7 @@ bool  CPeopleManagerTask::ExistNotEmptyResidence(void) {
         i < 3;
         ++i )
   {
-    EcoSector = CSchedule::GetEcoSector(*((CSchedule **)v10 + 10));
+    EcoSector = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v10 + 10));
     (*(void (__thiscall **)(struct IAIEcoManager *, _DWORD, _BYTE *))(*(_DWORD *)EcoSector + 160))(EcoSector, v13[i], v5);
     for ( j = 0;
           ;
@@ -393,11 +391,11 @@ bool  CPeopleManagerTask::ExistNotEmptyResidence(void) {
       {
         break;
       }
-      v7 = CSchedule::GetEcoSector(*((CSchedule **)v10 + 10));
+      v7 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v10 + 10));
       v2 = (_DWORD *)std::vector<int>::operator[](j);
       if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v7 + 68))(v7, *v2) >= 100 )
       {
-        v6 = CSchedule::GetEcoSector(*((CSchedule **)v10 + 10));
+        v6 = (struct IAIEcoManager *)CSchedule::GetEcoSector(*((CSchedule **)v10 + 10));
         v3 = (_DWORD *)std::vector<int>::operator[](j);
         if ( (*(int (__thiscall **)(struct IAIEcoManager *, _DWORD))(*(_DWORD *)v6 + 92))(v6, *v3) <= 0 )
         {

@@ -11,7 +11,7 @@ int __cdecl CInfluMap::EnemyValueVW(int a1, int a2, int a3) {
 
 
 // address=[0x1306580]
-// Decompiled from int __cdecl CInfluMap::EnemyValueXY(int a1, int a2, int a3)
+// Decompiled from static int __cdecl CInfluMap::EnemyValueXY(int a1, int a2, int a3)
 int __cdecl CInfluMap::EnemyValueXY(int a1, int a2, int a3) {
   
   int v3; // eax
@@ -37,8 +37,8 @@ int __cdecl CInfluMap::AllyValueXY(int a1, int a2, int a3) {
   
   int v3; // esi
 
-  v3 = 576 * (Squares::XYToVW(a2) + 1);
-  return CInfluMap::m_uValues[9 * Squares::XYToVW(a1) + v3 + a3];
+  v3 = 576 * (Squares::XYToVW((int)a2) + 1);
+  return CInfluMap::m_uValues[9 * Squares::XYToVW((int)a1) + v3 + a3];
 }
 
 
@@ -69,7 +69,7 @@ void __cdecl CInfluMap::ModifyInfluenceMapVW(int a1, int a2, int a3, int Number)
   int v4; // [esp+4h] [ebp-8h]
   int v5; // [esp+8h] [ebp-4h]
 
-  if ( !CInfluMap::m_iInitialized && BBSupportDbgReport(2, "Pathing\\InfluMap.cpp", 84, "m_iInitialized") == 1 )
+  if ( CInfluMap::m_iInitialized == 0 && BBSupportDbgReport(2, "Pathing\\InfluMap.cpp", 84, "m_iInitialized") == 1 )
   {
     __debugbreak();
   }
@@ -78,7 +78,7 @@ void __cdecl CInfluMap::ModifyInfluenceMapVW(int a1, int a2, int a3, int Number)
     __debugbreak();
   }
   v5 = CAlliances::AllianceId(a3);
-  if ( !v5 && BBSupportDbgReport(2, "Pathing\\InfluMap.cpp", 89, "iAllianceId != ALLIANCE_NO_ALLIANCE") == 1 )
+  if ( v5 == 0 && BBSupportDbgReport(2, "Pathing\\InfluMap.cpp", 89, "iAllianceId != ALLIANCE_NO_ALLIANCE") == 1 )
   {
     __debugbreak();
   }

@@ -6,7 +6,7 @@
 // Decompiled from SVehicleProperties *__cdecl IVehicleInfoMgr::VehicleProperties(unsigned int _uRace, unsigned int _uVehicleType)
 struct SVehicleProperties const * __cdecl IVehicleInfoMgr::VehicleProperties(unsigned int _uRace, unsigned int _uVehicleType) {
   
-  if ( !IVehicleInfoMgr::m_bInitialized && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\VehicleProperties.h", 138, "m_bInitialized") == 1 )
+  if ( IVehicleInfoMgr::m_bInitialized == 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\VehicleProperties.h", 138, "m_bInitialized") == 1 )
   {
     __debugbreak();
   }
@@ -18,7 +18,7 @@ struct SVehicleProperties const * __cdecl IVehicleInfoMgr::VehicleProperties(uns
   {
     __debugbreak();
   }
-  if ( !IVehicleInfoMgr::m_sVehicleProperties[_uRace][_uVehicleType].m_bInitialized && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\VehicleProperties.h", 141, "m_sVehicleProperties[_uRace][_uVehicleType].m_bInitialized") == 1 )
+  if ( IVehicleInfoMgr::m_sVehicleProperties[_uRace][_uVehicleType].m_bInitialized == 0 && BBSupportDbgReport(2, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\S4_Main\\MapObjects\\VehicleProperties.h", 141, "m_sVehicleProperties[_uRace][_uVehicleType].m_bInitialized") == 1 )
   {
     __debugbreak();
   }

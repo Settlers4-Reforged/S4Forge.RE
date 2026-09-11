@@ -26,7 +26,7 @@
   std::string::string(&this->m_swMapMode);
   this->m_bUnknown2 = 0;
   CRandom16Ex::Init(&this->m_sRandom, 290671, 0);
-  if ( !g_pGameType && BBSupportDbgReport(2, "GameData.cpp", 57, "g_pGameType != NULL") == 1 )
+  if ( g_pGameType == 0 && BBSupportDbgReport(2, "GameData.cpp", 57, "g_pGameType != NULL") == 1 )
   {
     __debugbreak();
   }
@@ -36,20 +36,20 @@
   }
   this->m_iType = g_pGameType->m_iGameType;
   std::string::operator=(&this->m_swGameType, s_pszGameType[this->m_iType]);
-  if ( !this->m_iType && BBSupportDbgReport(2, "GameData.cpp", 63, "m_iType") == 1 )
+  if ( this->m_iType == 0 && BBSupportDbgReport(2, "GameData.cpp", 63, "m_iType") == 1 )
   {
     __debugbreak();
   }
   this->m_iMode = g_pGameType->m_iMode;
   std::string::operator=(&this->m_swMapMode, s_pszMapMode[this->m_iMode]);
-  if ( !this->m_iMode && BBSupportDbgReport(2, "GameData.cpp", 67, "m_iMode") == 1 )
+  if ( this->m_iMode == 0 && BBSupportDbgReport(2, "GameData.cpp", 67, "m_iMode") == 1 )
   {
     __debugbreak();
   }
   *(_WORD *)&this->m_bIsNetworkGame = g_pGameType->m_bAIActive == 0;
   this->m_bIsGameWon = g_pGameType->m_bIsGameWon;
   this->m_iTeamWon = g_pGameType->m_iTeamWon;
-  memcpy(this->m_pEconomyGoodsArray, g_pGameType->m_pEconomyGoodsArray, 7u);
+  memcpy(this->m_pEconomyGoodsArray, g_pGameType->m_pEconomyGoodsArray, sizeof(this->m_pEconomyGoodsArray));
   this->m_bIsLadderGame = CGameType::IsLadderGame(g_pGameType);
   return this;
 }

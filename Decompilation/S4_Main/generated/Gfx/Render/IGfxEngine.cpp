@@ -30,9 +30,9 @@
  IGfxEngine::~IGfxEngine(void) {
   
   DeleteEngine();
-  if ( g_pDirectDraw )
+  if ( g_pDirectDraw != 0 )
   {
-    g_pDirectDraw->lpVtbl->SetCooperativeLevel(g_pDirectDraw, MEMORY[0x3E2E268], 8);
+    g_pDirectDraw->lpVtbl->SetCooperativeLevel(g_pDirectDraw, GfxEngineSetup.m_hWnd, 8);
     g_pDirectDraw->lpVtbl->Release(g_pDirectDraw);
     g_pDirectDraw = 0;
   }
@@ -62,7 +62,7 @@ void  IGfxEngine::SetTickCounterAdress(unsigned int * a2) {
 // Decompiled from char __stdcall IGfxEngine::SetTemporaryText(char *Str, int a2, int a3, int a4, int a5, COLORREF a6)
 bool  IGfxEngine::SetTemporaryText(char * Str, int a2, int a3, int a4, int a5, int a6) {
   
-  if ( Str )
+  if ( Str != 0 )
   {
     if ( strlen(Str) > 0xFF )
     {
@@ -100,12 +100,9 @@ void  IGfxEngine::SetTriangleSize(int a2) {
     SetMiniMapAreaSize();
     MarkCurrentArea();
     InitGradientTable();
-    if ( D3DObjectPtr )
+    if ( D3DObjectPtr != 0 && D3DObjectPtr->CCachePageManager[0] != 0 )
     {
-      if ( D3DObjectPtr->CCachePageManager[0] )
-      {
-        CCachePageManager::SetCurrentZoomFactor((CCachePageManager *)D3DObjectPtr->CCachePageManager[0], SLODWORD(g_fZoomFactor));
-      }
+      ((void (__thiscall *)(CCachePageManager *, int))CCachePageManager::SetCurrentZoomFactor)(D3DObjectPtr->CCachePageManager[0], SLODWORD(g_fZoomFactor));
     }
   }
 }
@@ -175,13 +172,12 @@ bool  IGfxEngine::SetPlayerColor(int a1, struct SGfxColor & a2) {
   {
     return 0;
   }
-  MEMORY[0x468D2C8][a1 + 1] = *a2;
-  if ( !D3DObjectPtr )
+  g_cColorGradient.m_vPlayerColors[a1 + 1] = *a2;
+  if ( D3DObjectPtr != 0 )
   {
-    return 1;
+    GradientFormat = CInterfaceD3D::GetGradientFormat(D3DObjectPtr);
+    ((void (__thiscall *)(CColorGradient *, unsigned int, int, int, int, int))CColorGradient::SetupGradients)(&g_cColorGradient, a1, a2->m_iR, a2->m_iG, a2->m_iB, GradientFormat);
   }
-  GradientFormat = CInterfaceD3D::GetGradientFormat(D3DObjectPtr);
-  CColorGradient::SetupGradients(g_cColorGradient, a1, a2->m_iR, a2->m_iG, a2->m_iB, GradientFormat);
   return 1;
 }
 
@@ -354,7 +350,7 @@ void  IGfxEngine::SetReloadCallback(void * (__cdecl*)(int,bool,bool) a2) {
 // Decompiled from void __stdcall IGfxEngine::SetGfxObject(struct SGfxObject *Src)
 void  IGfxEngine::SetGfxObject(struct SGfxObject * Src) {
   
-  if ( Src )
+  if ( Src != 0 )
   {
     memcpy(&g_sGfxObjectCursorBuilding, Src, 0x2E0u);
   }
@@ -546,7 +542,7 @@ bool  IGfxEngine::EnableMiniMap(bool a2, int a3, int a4, struct HWND__ * a5) {
   dword_3E2E304 = a3;
   dword_3E2E308 = a4;
   dword_3E2E2E4 = (int)a5;
-  if ( D3DObjectPtr && SurfaceClipper::GetClipper((SurfaceClipper *)&D3DObjectPtr->m_sMinimapClipper) && (v6 = SurfaceClipper::SetClipWindow((SurfaceClipper *)&D3DObjectPtr->m_sMinimapClipper, a5)) != 0 )
+  if ( D3DObjectPtr != 0 && SurfaceClipper::GetClipper(&D3DObjectPtr->m_sMinimapClipper) != 0 && (v6 = SurfaceClipper::SetClipWindow(&D3DObjectPtr->m_sMinimapClipper, a5)) != 0 )
   {
     WriteError(v6, (char *)&dword_3AC8174[1]);
     return 0;
@@ -575,7 +571,7 @@ void  IGfxEngine::SetMiniMapColorCallback(struct SGfxColor * (__cdecl*)(unsigned
 bool  IGfxEngine::EnableCameraWindow(bool a2, int a3, int a4, int a5, int a6) {
   
   CInterfaceD3D::DestroyCameraWindowSurface(D3DObjectPtr);
-  if ( a2 && !CInterfaceD3D::CreateCameraWindowSurface(D3DObjectPtr, a5, a6) )
+  if ( a2 != 0 && CInterfaceD3D::CreateCameraWindowSurface(D3DObjectPtr, a5, a6) == 0 )
   {
     return 0;
   }
@@ -677,7 +673,7 @@ bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMX, in
     this->m_bHardwareRenderingPossible = IGfxEngine::IsHardwareRenderingAvailable(this);
     *a5 = this->m_bV7Available;
   }
-  if ( this->m_bHasCpuMMX )
+  if ( this->m_bHasCpuMMX != 0 )
   {
     this->m_bSoftwareRenderingPossible = IGfxEngine::IsSoftwareRenderingAvailable(this);
     *a4 = this->m_bV3Available;
@@ -688,7 +684,7 @@ bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMX, in
     *a4 = 22;
     this->m_bSoftwareRenderingPossible = 0;
   }
-  if ( this->m_bSoftwareRenderingPossible )
+  if ( this->m_bSoftwareRenderingPossible != 0 )
   {
     BBSupportTracePrintF(1, "GFX ENGINE: Check setup: Software-rendering is possible.");
   }
@@ -696,7 +692,7 @@ bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMX, in
   {
     BBSupportTracePrintF(1, "GFX ENGINE: Check setup: Software-rendering is not possible.");
   }
-  if ( this->m_bHardwareRenderingPossible )
+  if ( this->m_bHardwareRenderingPossible != 0 )
   {
     BBSupportTracePrintF(1, "GFX ENGINE: Check setup: Hardware-rendering is possible.");
   }
@@ -704,10 +700,10 @@ bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMX, in
   {
     BBSupportTracePrintF(1, "GFX ENGINE: Check setup: Hardware-rendering is not possible.");
   }
-  if ( this->m_bHardwareRenderingPossible || this->m_bSoftwareRenderingPossible )
+  if ( this->m_bHardwareRenderingPossible != 0 || this->m_bSoftwareRenderingPossible != 0 )
   {
     byte_3E2E2FF = 1;
-    if ( SGfxRenderConfiguration::IsHardwareObjectEngine(&a2) && this->m_bHardwareObjectPossible )
+    if ( SGfxRenderConfiguration::IsHardwareObjectEngine(&a2) != 0 && this->m_bHardwareObjectPossible != 0 )
     {
       g_bHardwareObjectEnabled = 1;
       BBSupportTracePrintF(1, "GFX ENGINE: Hardware object rendering enabled.");
@@ -717,7 +713,7 @@ bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMX, in
       g_bHardwareObjectEnabled = 0;
       BBSupportTracePrintF(1, "GFX ENGINE: Hardware object rendering disabled.");
     }
-    if ( this->m_bHardwareObjectPossible )
+    if ( this->m_bHardwareObjectPossible != 0 )
     {
       BBSupportTracePrintF(1, "GFX ENGINE: Check setup: Hardware object rendering is possible.");
       *a6 = 0;
@@ -730,11 +726,11 @@ bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMX, in
     SetMiniMapAreaSize();
     if ( Initialize() )
     {
-      if ( !this->m_bV7Available || !this->m_bV3Available )
+      if ( this->m_bV7Available == 0 || this->m_bV3Available == 0 )
       {
         this->m_bNeedsRebuild = 1;
       }
-      if ( (!SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) || this->m_bHardwareRenderingPossible) && (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) || this->m_bSoftwareRenderingPossible) )
+      if ( (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) == 0 || this->m_bHardwareRenderingPossible != 0) && (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) != 0 || this->m_bSoftwareRenderingPossible != 0) )
       {
         return IGfxEngine::SetRenderEnvironment(this);
       }
@@ -761,11 +757,11 @@ bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMX, in
 // Decompiled from char __thiscall IGfxEngine::RebuildRenderEnvironment(IGfxEngine *this, struct SGfxRenderConfiguration sConf)
 bool  IGfxEngine::RebuildRenderEnvironment(struct SGfxRenderConfiguration sConf) {
   
-  if ( !this->m_bNeedsRebuild )
+  if ( this->m_bNeedsRebuild == 0 )
   {
     return 0;
   }
-  if ( SGfxRenderConfiguration::IsHardwareObjectEngine(&sConf) && this->m_bHardwareObjectPossible )
+  if ( SGfxRenderConfiguration::IsHardwareObjectEngine(&sConf) != 0 && this->m_bHardwareObjectPossible != 0 )
   {
     g_bHardwareObjectEnabled = 1;
     BBSupportTracePrintF(1, "GFX ENGINE: Hardware object rendering enabled.");
@@ -784,7 +780,7 @@ bool  IGfxEngine::RebuildRenderEnvironment(struct SGfxRenderConfiguration sConf)
     g_pRequestedRectangle = 0;
     SetCrossingSystemMapAccess(0, 0);
   }
-  if ( (!SGfxRenderConfiguration::IsHardwareLandscapeEngine(&sConf) || this->m_bHardwareRenderingPossible) && (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&sConf) || this->m_bSoftwareRenderingPossible) )
+  if ( (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&sConf) == 0 || this->m_bHardwareRenderingPossible != 0) && (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&sConf) != 0 || this->m_bSoftwareRenderingPossible != 0) )
   {
     qmemcpy(&GfxEngineSetup, &sConf, sizeof(GfxEngineSetup));
     byte_3E2E2FF = 1;
@@ -846,26 +842,26 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
     return 1;
   }
-  if ( !D3DObjectPtr )
+  if ( D3DObjectPtr == 0 )
   {
     BBSupportTracePrintF(0, "GFX ENGINE: Call to RenderFrame without initializing the engine!");
     return 0;
   }
-  if ( g_iRefreshWaitFrames )
+  if ( g_iRefreshWaitFrames != 0 )
   {
-    if ( byte_4689BD9 )
+    if ( byte_4689BD9 != 0 )
     {
       byte_4689BD9 = 0;
       D3DObjectPtr->m_bGfxEngineRebuilded = 1;
     }
-    if ( --g_iRefreshWaitFrames )
+    if ( --g_iRefreshWaitFrames != 0 )
     {
       return 1;
     }
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
   {
-    if ( IGfxEngine::SetRenderEnvironment(this) )
+    if ( IGfxEngine::SetRenderEnvironment(this) != 0 )
     {
       LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 0;
       byte_3E2E2FE = 1;
@@ -882,7 +878,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
   }
   else if ( GfxEngineSetup.m_bGuiOnly )
   {
-    if ( D3DObjectPtr->FinalRenderSurface )
+    if ( D3DObjectPtr->FinalRenderSurface != 0 )
     {
       CBlitFX::CBlitFX(&v6);
       v21 = g_uGfxMode == 1;
@@ -890,21 +886,20 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
       v22 = D3DObjectPtr->FinalRenderSurface->ClearSurface(D3DObjectPtr->FinalRenderSurface, (_BYTE *)&v6);
       if ( v22 >= 0 )
       {
-        if ( (unsigned __int8)std::operator!=<SurfaceClipper,std::default_delete<SurfaceClipper>>((int)&this->m_pSurfaceClipper, 0) && (v4 = (struct SurfaceClipper *)std::unique_ptr<SurfaceClipper>::operator*(&this->m_pSurfaceClipper), v22 = CInterfaceD3D::SetCustomClipper(D3DObjectPtr, v4), v22 < 0) )
+        if ( (unsigned __int8)std::operator!=<SurfaceClipper,std::default_delete<SurfaceClipper>>((int)&this->m_pSurfaceClipper, 0) != 0 && (v4 = (struct SurfaceClipper *)std::unique_ptr<SurfaceClipper>::operator*(&this->m_pSurfaceClipper), (v22 = CInterfaceD3D::SetCustomClipper(D3DObjectPtr, v4)) < 0) )
         {
           BBSupportTracePrintF(0, "GFX ENGINE: Failed to assign GUI clipper!");
           LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
           return 1;
         }
-        else if ( AddGuiPatches() )
+        else if ( AddGuiPatches() != 0 )
         {
           v22 = CInterfaceD3D::ClearCustomClipper(D3DObjectPtr);
-          if ( v22 >= 0 )
+          if ( v22 < 0 )
           {
-            return 1;
+            BBSupportTracePrintF(0, "GFX ENGINE: Failed to clear GUI clipper!");
+            LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
           }
-          BBSupportTracePrintF(0, "GFX ENGINE: Failed to clear GUI clipper!");
-          LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
           return 1;
         }
         else
@@ -933,12 +928,12 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
       byte_3E2E2FE = 1;
       byte_3E2E2FF = 1;
     }
-    if ( byte_3E2E2FF || byte_3E2E302 )
+    if ( byte_3E2E2FF != 0 || byte_3E2E302 != 0 )
     {
       v22 = (unsigned __int8)DrawTexturedLandscape(dword_3E2E2A8, dword_3E2E2AC);
       a3 = 1;
     }
-    if ( !v22 )
+    if ( v22 == 0 )
     {
       WriteError(0, "RenderLandscape");
       LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
@@ -946,12 +941,12 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     }
     byte_3E2E302 = 0;
     byte_3E2E2FF = 0;
-    if ( byte_3E2E300 )
+    if ( byte_3E2E300 != 0 )
     {
       v22 = (unsigned __int8)DrawTexturedLandscapeDelta(dword_3E2E2A8, dword_3E2E2AC);
       a3 = 1;
     }
-    if ( !v22 )
+    if ( v22 == 0 )
     {
       WriteError(0, "RenderLandscapeDelta");
       LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
@@ -960,10 +955,10 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     byte_3E2E300 = 0;
     dword_3E2E314 = 2000;
     g_iFoggingRange = -1;
-    if ( !SGfxRenderConfiguration::IsEditorMode(&GfxEngineSetup) || a3 )
+    if ( !SGfxRenderConfiguration::IsEditorMode(&GfxEngineSetup) || a3 != 0 )
     {
       v22 = D3DObjectPtr->FinalRenderSurface->Blt(D3DObjectPtr->FinalRenderSurface, 0, D3DObjectPtr->LandscapeSurface, 0, 0, 0);
-      if ( v22 )
+      if ( v22 != 0 )
       {
         WriteError(v22, "BlitLandscapeSurfaceToFinal");
         LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
@@ -972,7 +967,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
       HIBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
       RenderObjectLayer(0);
     }
-    v17 = byte_3E2E327 && CInterfaceD3D::HasCameraWindowSurface(D3DObjectPtr) && dword_3E2E2DC > 0 && D3DObjectPtr->FinalRenderSurface;
+    v17 = byte_3E2E327 != 0 && CInterfaceD3D::HasCameraWindowSurface(D3DObjectPtr) && dword_3E2E2DC > 0 && D3DObjectPtr->FinalRenderSurface != 0;
     v19 = v17;
     if ( v17 )
     {
@@ -991,7 +986,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         v5 = DrawCameraLandscape(dword_3E2E2C4, dword_3E2E2C8);
         v22 = v5;
         g_fVertexSize = v9;
-        if ( !v5 )
+        if ( v5 == 0 )
         {
           WriteError(v22, "RenderCamWindow");
           LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
@@ -1027,7 +1022,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         v23[2] = dword_3E2E2D4 + v13;
         v23[3] = dword_3E2E2D8 + v15;
         v22 = D3DObjectPtr->FinalRenderSurface->Blt(D3DObjectPtr->FinalRenderSurface, (struct tagRECT *)v23, (CSurfaceV7 *)D3DObjectPtr->m_pCameraWindowSurface, 0, 0, 0);
-        if ( v22 )
+        if ( v22 != 0 )
         {
           WriteError(v22, "BlitCameraSurfaceToBuffer");
           LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
@@ -1037,12 +1032,12 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         byte_3E2E2FE = 0;
         CInterfaceD3D::SetupViewport(D3DObjectPtr, dword_3E2E2D4, dword_3E2E2D8, v13, v14);
         EnableCamRenderSettings(1);
-        if ( D3DObjectPtr && D3DObjectPtr->CCachePageManager[0] )
+        if ( D3DObjectPtr != 0 && D3DObjectPtr->CCachePageManager[0] != 0 )
         {
           ((void (__thiscall *)(CCachePageManager *, int))CCachePageManager::SetCurrentZoomFactor)(D3DObjectPtr->CCachePageManager[0], SLODWORD(g_fZoomFactor));
         }
         RenderObjectLayer(1);
-        if ( D3DObjectPtr && D3DObjectPtr->CCachePageManager[0] )
+        if ( D3DObjectPtr != 0 && D3DObjectPtr->CCachePageManager[0] != 0 )
         {
           ((void (__thiscall *)(CCachePageManager *, int))CCachePageManager::SetCurrentZoomFactor)(D3DObjectPtr->CCachePageManager[0], SLODWORD(g_fCameraZoomFactor));
         }
@@ -1050,14 +1045,14 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         CInterfaceD3D::SetupViewport(D3DObjectPtr, 0, 0, GfxEngineSetup.m_uWidth, GfxEngineSetup.m_uHeight);
       }
     }
-    if ( g_bHardwareObjectEnabled && dword_3E2E310 )
+    if ( g_bHardwareObjectEnabled != 0 && dword_3E2E310 != 0 )
     {
       if ( dword_3E2E310 == -1 )
       {
         CInterfaceD3D::BeginObjectScene(D3DObjectPtr);
         CCachePageManager::ShowPageContent(D3DObjectPtr->CCachePageManager[0], &v22);
         CInterfaceD3D::EndObjectScene(D3DObjectPtr);
-        if ( v22 )
+        if ( v22 != 0 )
         {
           WriteError(v22, "ShowCachePage");
         }
@@ -1067,7 +1062,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         CInterfaceD3D::BeginObjectScene(D3DObjectPtr);
         CCachePageManager::ShowPageContent(D3DObjectPtr->CCachePageManager[1], &v22);
         CInterfaceD3D::EndObjectScene(D3DObjectPtr);
-        if ( v22 )
+        if ( v22 != 0 )
         {
           WriteError(v22, "ShowCachePage");
         }
@@ -1077,7 +1072,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         CInterfaceD3D::BeginObjectScene(D3DObjectPtr);
         CCachePageManager::ShowPageContent(D3DObjectPtr->m_pCacheManagers[dword_3E2E310], &v22);
         CInterfaceD3D::EndObjectScene(D3DObjectPtr);
-        if ( v22 )
+        if ( v22 != 0 )
         {
           WriteError(v22, "ShowCachePage");
         }
@@ -1085,13 +1080,13 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     }
     v7 = GetTickCount() - TickCount;
     AddDebugStrings(v7);
-    if ( !byte_3E2E301 )
+    if ( byte_3E2E301 == 0 )
     {
       goto LABEL_106;
     }
     v12 = D3DObjectPtr->MiniMapSurface->IsLost(D3DObjectPtr->MiniMapSurface) == -2005532222 || D3DObjectPtr->MiniMapAreaSurface->IsLost(D3DObjectPtr->MiniMapAreaSurface) == -2005532222;
     v20 = v12;
-    if ( g_bForceMiniMapRefresh || v20 )
+    if ( g_bForceMiniMapRefresh != 0 || v20 )
     {
       if ( v20 )
       {
@@ -1132,12 +1127,12 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         v26 -= v10;
       }
       v22 = D3DObjectPtr->FinalRenderSurface->Blt(D3DObjectPtr->FinalRenderSurface, (struct tagRECT *)&v28, D3DObjectPtr->MiniMapSurface, (struct tagRECT *)&v24, 0x8000, 0);
-      if ( !v22 )
+      if ( v22 == 0 )
       {
         v22 = D3DObjectPtr->FinalRenderSurface->Blt(D3DObjectPtr->FinalRenderSurface, (struct tagRECT *)&v28, D3DObjectPtr->MiniMapAreaSurface, (struct tagRECT *)&v24, 0x8000, 0);
       }
     }
-    if ( v22 )
+    if ( v22 != 0 )
     {
       WriteError(v22, "BlitMiniMap");
       return 0;
@@ -1147,7 +1142,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
 LABEL_106:
       RenderTmpText();
       CInterfaceD3D::BlitCursor(D3DObjectPtr);
-      if ( !AddGuiPatches() )
+      if ( AddGuiPatches() == 0 )
       {
         LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
       }
@@ -1161,7 +1156,7 @@ LABEL_106:
 // Decompiled from char __stdcall IGfxEngine::BlitFrameToDIB(HGDIOBJ h)
 bool  IGfxEngine::BlitFrameToDIB(struct HBITMAP__ * h) {
   
-  return BlitRenderedSurfaceToDIB(MEMORY[0x3E2E268], h);
+  return BlitRenderedSurfaceToDIB(GfxEngineSetup.m_hWnd, h);
 }
 
 
@@ -1196,7 +1191,7 @@ void  IGfxEngine::UpdateWorldPosition(int a2, int a3) {
   
   int v3; // [esp+4h] [ebp-4h]
 
-  if ( g_pGfxLayer && (a3 | a2) >= 0 && a2 < (int)Size && a3 < (int)Size )
+  if ( g_pGfxLayer != 0 && (a3 | a2) >= 0 && a2 < (int)Size && a3 < (int)Size )
   {
     v3 = a2 + Size * a3;
     RefreshShading(v3, 0);
@@ -1224,36 +1219,30 @@ void  IGfxEngine::UpdateWorldPosition(int a2) {
   int result; // eax
   int v3; // [esp+4h] [ebp-4h]
 
-  if ( !g_pGfxLayer )
+  if ( g_pGfxLayer != 0 && a2 >= 0 )
   {
-    return result;
+    result = Size * Size;
+    if ( a2 < (int)(Size * Size) )
+    {
+      RefreshShading(a2, 0);
+      v3 = a2 / (int)Size;
+      if ( g_pGfxLayer[a2].m_uGroundHeight > (int)(unsigned __int8)g_uMaxYTable[a2 / (int)Size] )
+      {
+        g_uMaxYTable[v3] = g_pGfxLayer[a2].m_uGroundHeight;
+      }
+      result = v3;
+      if ( v3 < dword_3E2E314 )
+      {
+        dword_3E2E314 = v3;
+      }
+      if ( v3 > g_iFoggingRange )
+      {
+        result = v3;
+        g_iFoggingRange = v3;
+      }
+      byte_3E2E300 = 1;
+    }
   }
-  if ( a2 < 0 )
-  {
-    return result;
-  }
-  result = Size * Size;
-  if ( a2 >= (int)(Size * Size) )
-  {
-    return result;
-  }
-  RefreshShading(a2, 0);
-  v3 = a2 / (int)Size;
-  if ( g_pGfxLayer[a2].m_uGroundHeight > (int)(unsigned __int8)g_uMaxYTable[a2 / (int)Size] )
-  {
-    g_uMaxYTable[v3] = g_pGfxLayer[a2].m_uGroundHeight;
-  }
-  result = v3;
-  if ( v3 < dword_3E2E314 )
-  {
-    dword_3E2E314 = v3;
-  }
-  if ( v3 > g_iFoggingRange )
-  {
-    result = v3;
-    g_iFoggingRange = v3;
-  }
-  byte_3E2E300 = 1;
   return result;
 }
 
@@ -1262,7 +1251,7 @@ void  IGfxEngine::UpdateWorldPosition(int a2) {
 // Decompiled from void IGfxEngine::RenderCursor()
 void  IGfxEngine::RenderCursor(void) {
   
-  if ( D3DObjectPtr )
+  if ( D3DObjectPtr != 0 )
   {
     CInterfaceD3D::BlitCursor(D3DObjectPtr);
   }
@@ -1276,7 +1265,7 @@ void  IGfxEngine::ConvertMapPositionToWorldScreenOffsets(int a2, int a3, float &
   int v5; // [esp+8h] [ebp-4h]
 
   v5 = 0;
-  if ( (a3 | a2) >= 0 && a2 < (int)Size && a3 < (int)Size && g_pGfxLayer )
+  if ( (a3 | a2) >= 0 && a2 < (int)Size && a3 < (int)Size && g_pGfxLayer != 0 )
   {
     v5 = CalcStaticHeightOffset(g_pGfxLayer[a2 + Size * a3].m_uGroundHeight);
   }
@@ -1292,7 +1281,7 @@ void  IGfxEngine::ConvertMapPositionToWorldScreenOffsets(int a1, int a2, int & a
   int v4; // [esp+8h] [ebp-4h]
 
   v4 = 0;
-  if ( (a1_4 | a1) >= 0 && a1 < (int)Size && a1_4 < (int)Size && g_pGfxLayer )
+  if ( (a1_4 | a1) >= 0 && a1 < (int)Size && a1_4 < (int)Size && g_pGfxLayer != 0 )
   {
     v4 = CalcStaticHeightOffsetInt(g_pGfxLayer[a1 + Size * a1_4].m_uGroundHeight);
   }
@@ -1305,7 +1294,7 @@ void  IGfxEngine::ConvertMapPositionToWorldScreenOffsets(int a1, int a2, int & a
 // Decompiled from bool __thiscall IGfxEngine::CanChangeGround(IGfxEngine *this, int a2, int a3, int a4)
 bool  IGfxEngine::CanChangeGround(int a2, int a3, int a4) {
   
-  return g_pGfxLayer && CheckField(a2, a3, a2 + Size * a3, a4);
+  return g_pGfxLayer != 0 && CheckField(a2, a3, a2 + Size * a3, a4);
 }
 
 
@@ -1316,7 +1305,7 @@ void  IGfxEngine::SetDarkLand(int a2, int a3, bool a4) {
   int v4; // [esp+4h] [ebp-8h] BYREF
   int v5; // [esp+8h] [ebp-4h] BYREF
 
-  if ( g_pGfxLayer )
+  if ( g_pGfxLayer != 0 )
   {
     SetDarkLandFlag(a2, a3, a4, &v5, &v4);
     if ( v5 < dword_3E2E314 )
@@ -1418,7 +1407,7 @@ void  IGfxEngine::SetFoggingRange(int a2, int a3) {
 // Decompiled from bool __thiscall IGfxEngine::IsInitialized(IGfxEngine *this)
 bool  IGfxEngine::IsInitialized(void) {
   
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) != 0 )
   {
     return HardwareIsRunning();
   }
@@ -1433,7 +1422,7 @@ bool  IGfxEngine::IsInitialized(void) {
 // Decompiled from char __thiscall IGfxEngine::IsHardwareEngine(IGfxEngine *this)
 bool  IGfxEngine::IsHardwareEngine(void) {
   
-  if ( this->m_bNeedsRebuild )
+  if ( this->m_bNeedsRebuild != 0 )
   {
     return SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup);
   }
@@ -1448,7 +1437,7 @@ bool  IGfxEngine::IsHardwareEngine(void) {
 // Decompiled from char __thiscall IGfxEngine::Use4444Palettes(IGfxEngine *this)
 bool  IGfxEngine::Use4444Palettes(void) {
   
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) != 0 )
   {
     return g_bHardwareObjectEnabled;
   }
@@ -1631,22 +1620,22 @@ void  IGfxEngine::LockCursorShape(bool a2) {
 // Decompiled from void __thiscall IGfxEngine::SetCursorShape(IGfxEngine *this, bool a2, unsigned int a3)
 void  IGfxEngine::SetCursorShape(bool a2, int a3) {
   
-  if ( !this->m_bLockCursorShape && a3 < 0x24 )
+  if ( this->m_bLockCursorShape == 0 && a3 < 0x24 )
   {
     if ( a2 )
     {
-      if ( !s_bCursorIsVisible )
+      if ( s_bCursorIsVisible == 0 )
       {
         ShowCursor(1);
         s_bCursorIsVisible = 1;
       }
     }
-    else if ( s_bCursorIsVisible )
+    else if ( s_bCursorIsVisible != 0 )
     {
       ShowCursor(0);
       s_bCursorIsVisible = 0;
     }
-    if ( s_hCursor )
+    if ( s_hCursor != 0 )
     {
       SetCursor(s_hCursorHandles[a3]);
     }
@@ -1654,7 +1643,7 @@ void  IGfxEngine::SetCursorShape(bool a2, int a3) {
     {
       s_hCursor = (LONG)SetCursor(s_hCursorHandles[a3]);
     }
-    SetClassLongA((HWND)GfxEngineSetup.m_hWnd, GCL_HCURSOR, (LONG)s_hCursorHandles[a3]);
+    SetClassLongA(GfxEngineSetup.m_hWnd, GCL_HCURSOR, (LONG)s_hCursorHandles[a3]);
     s_iCurrentCursor = a3;
   }
 }
@@ -1669,7 +1658,7 @@ void  IGfxEngine::FixCursor(bool a2, bool a3) {
   IGfxEngine *v5; // [esp+8h] [ebp-4h]
 
   v5 = this;
-  if ( D3DObjectPtr && (!s_bCursorIsFixed || !a2) && (s_bCursorIsFixed || a2) )
+  if ( D3DObjectPtr != 0 && (s_bCursorIsFixed == 0 || !a2) && (s_bCursorIsFixed != 0 || a2) )
   {
     if ( a2 )
     {
@@ -1742,13 +1731,13 @@ bool  IGfxEngine::IsResolutionPossible(int a2) {
 
   if ( a2 <= 4 )
   {
-    if ( D3DObjectPtr )
+    if ( D3DObjectPtr != 0 )
     {
-      if ( D3DObjectPtr->m_pDDraw || D3DObjectPtr->m_bInitHardware || D3DObjectPtr->m_bInitSoftware )
+      if ( D3DObjectPtr->m_pDDraw != 0 || D3DObjectPtr->m_bInitHardware != 0 || D3DObjectPtr->m_bInitSoftware != 0 )
       {
         v10[0] = 380;
         v8 = D3DObjectPtr->m_pDDraw->lpVtbl->GetCaps(D3DObjectPtr->m_pDDraw, (LPDDCAPS)v10, 0);
-        if ( v8 )
+        if ( v8 != 0 )
         {
           WriteError(v8, "GetCapabilities");
           LOBYTE(v2) = 0;
@@ -1758,7 +1747,7 @@ bool  IGfxEngine::IsResolutionPossible(int a2) {
           v6 = 16;
           v8 = D3DObjectPtr->PrimarySurface->GetBitDepth(D3DObjectPtr->PrimarySurface, &v6);
           v9 = v10[15];
-          if ( v8 )
+          if ( v8 != 0 )
           {
             WriteError(v8, "GetBitDepthWhileResChecking");
             LOBYTE(v2) = 0;
@@ -1766,7 +1755,7 @@ bool  IGfxEngine::IsResolutionPossible(int a2) {
           else
           {
             v8 = D3DObjectPtr->PrimarySurface->GetSurfaceSize(D3DObjectPtr->PrimarySurface, v5, &v4);
-            if ( v8 )
+            if ( v8 != 0 )
             {
               WriteError(v8, "GetSurfaceSizeWhileResChecking");
               LOBYTE(v2) = 0;
@@ -1776,9 +1765,9 @@ bool  IGfxEngine::IsResolutionPossible(int a2) {
               v9 += v4 * v5[0] * (v6 / 8);
               v9 -= 810000LL;
               v9 -= 155000LL;
-              if ( D3DObjectPtr->m_bInitHardware )
+              if ( D3DObjectPtr->m_bInitHardware != 0 )
               {
-                if ( BYTE1(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+                if ( BYTE1(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
                 {
                   v9 -= 6080000LL;
                 }
@@ -1817,7 +1806,7 @@ bool  IGfxEngine::IsResolutionPossible(int a2) {
                 else
                 {
                   v8 = D3DObjectPtr->m_pDDraw7->lpVtbl->EnumDisplayModes(D3DObjectPtr->m_pDDraw7, 2, 0, 0, CInterfaceD3D::EnumModesCallback);
-                  if ( v8 )
+                  if ( v8 != 0 )
                   {
                     WriteError(v8, "EnumeratingDisplayModes");
                     LOBYTE(v2) = 0;
@@ -1867,15 +1856,15 @@ bool  IGfxEngine::CheckRenderConfiguration(struct SGfxRenderConfiguration a2) {
   _DWORD v9[95]; // [esp+20h] [ebp-180h] BYREF
 
   CheckConfiguration(&a2);
-  if ( (!SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) || this->m_bHardwareRenderingPossible) && (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) || this->m_bSoftwareRenderingPossible) )
+  if ( (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) == 0 || this->m_bHardwareRenderingPossible != 0) && (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) != 0 || this->m_bSoftwareRenderingPossible != 0) )
   {
-    if ( D3DObjectPtr )
+    if ( D3DObjectPtr != 0 )
     {
-      if ( D3DObjectPtr->m_pDDraw || D3DObjectPtr->m_bInitHardware || D3DObjectPtr->m_bInitSoftware )
+      if ( D3DObjectPtr->m_pDDraw != 0 || D3DObjectPtr->m_bInitHardware != 0 || D3DObjectPtr->m_bInitSoftware != 0 )
       {
         v9[0] = 380;
         v7 = D3DObjectPtr->m_pDDraw->lpVtbl->GetCaps(D3DObjectPtr->m_pDDraw, (LPDDCAPS)v9, 0);
-        if ( v7 )
+        if ( v7 != 0 )
         {
           WriteError(v7, "GetCapabilities");
           return 0;
@@ -1885,7 +1874,7 @@ bool  IGfxEngine::CheckRenderConfiguration(struct SGfxRenderConfiguration a2) {
           v5 = 16;
           v7 = D3DObjectPtr->PrimarySurface->GetBitDepth(D3DObjectPtr->PrimarySurface, &v5);
           v8 = v9[15];
-          if ( v7 )
+          if ( v7 != 0 )
           {
             WriteError(v7, "GetBitDepthWhileResChecking");
             return 0;
@@ -1893,7 +1882,7 @@ bool  IGfxEngine::CheckRenderConfiguration(struct SGfxRenderConfiguration a2) {
           else
           {
             v7 = D3DObjectPtr->PrimarySurface->GetSurfaceSize(D3DObjectPtr->PrimarySurface, &v4, &v3);
-            if ( v7 )
+            if ( v7 != 0 )
             {
               WriteError(v7, "GetSurfaceSizeWhileResChecking");
               return 0;
@@ -1903,9 +1892,9 @@ bool  IGfxEngine::CheckRenderConfiguration(struct SGfxRenderConfiguration a2) {
               v8 += v3 * v4 * (v5 / 8);
               v8 -= 810000LL;
               v8 -= 155000LL;
-              if ( D3DObjectPtr->m_bInitHardware )
+              if ( D3DObjectPtr->m_bInitHardware != 0 )
               {
-                if ( BYTE1(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+                if ( BYTE1(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
                 {
                   v8 -= 6080000LL;
                 }
@@ -1925,7 +1914,7 @@ bool  IGfxEngine::CheckRenderConfiguration(struct SGfxRenderConfiguration a2) {
                 else
                 {
                   v7 = D3DObjectPtr->m_pDDraw7->lpVtbl->EnumDisplayModes(D3DObjectPtr->m_pDDraw7, 2, 0, 0, CInterfaceD3D::EnumModesCallback);
-                  if ( v7 )
+                  if ( v7 != 0 )
                   {
                     WriteError(v7, "EnumeratingDisplayModes");
                     return 0;
@@ -1971,13 +1960,13 @@ bool  IGfxEngine::ShowFrame(void) {
   {
     return 1;
   }
-  if ( g_iRefreshWaitFrames )
+  if ( g_iRefreshWaitFrames != 0 )
   {
     return 1;
   }
-  if ( D3DObjectPtr )
+  if ( D3DObjectPtr != 0 )
   {
-    if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+    if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
     {
       return 0;
     }
@@ -2000,11 +1989,11 @@ bool  IGfxEngine::SolidColorFillGuiSurface(int _iSurfaceType, unsigned char a3, 
   
   int v6; // [esp+8h] [ebp-14h]
 
-  if ( !D3DObjectPtr || (unsigned int)_iSurfaceType >= 0xE )
+  if ( D3DObjectPtr == 0 || (unsigned int)_iSurfaceType >= 0xE )
   {
     return 0;
   }
-  if ( !D3DObjectPtr->m_pGuiSurfaces[_iSurfaceType] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[_iSurfaceType] == 0 )
   {
     return 0;
   }
@@ -2019,7 +2008,7 @@ bool  IGfxEngine::SolidColorFillGuiSurface(int _iSurfaceType, unsigned char a3, 
   }
   CBlitFX::SetFillColor(&s_cSolidFillFX, a3, a4, a5, g_uGfxMode == 1);
   v6 = D3DObjectPtr->m_pGuiSurfaces[_iSurfaceType]->ClearSurface(D3DObjectPtr->m_pGuiSurfaces[_iSurfaceType], (_BYTE *)&s_cSolidFillFX);
-  if ( !v6 )
+  if ( v6 == 0 )
   {
     return 1;
   }
@@ -2034,11 +2023,11 @@ bool  IGfxEngine::SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned ch
   
   int v7; // [esp+8h] [ebp-14h]
 
-  if ( !D3DObjectPtr || a2 >= 0xE )
+  if ( D3DObjectPtr == 0 || a2 >= 0xE )
   {
     return 0;
   }
-  if ( !D3DObjectPtr->m_pGuiSurfaces[a2] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[a2] == 0 )
   {
     return 0;
   }
@@ -2053,7 +2042,7 @@ bool  IGfxEngine::SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned ch
   }
   CBlitFX::SetFillColor(&s_cSolidRectFillFX, a3, a4, a5, g_uGfxMode == 1);
   v7 = D3DObjectPtr->m_pGuiSurfaces[a2]->ClearSurface_(D3DObjectPtr->m_pGuiSurfaces[a2], a6.left, a6.top, a6.right, a6.bottom, &s_cSolidRectFillFX);
-  if ( !v7 )
+  if ( v7 == 0 )
   {
     return 1;
   }
@@ -2072,20 +2061,20 @@ bool  IGfxEngine::RenderObject(int a2, int a3, struct SGfxObjectInfo * a4, int a
   int v10; // [esp+10h] [ebp-8h] BYREF
   int v11; // [esp+14h] [ebp-4h]
 
-  if ( !D3DObjectPtr || !D3DObjectPtr->FinalRenderSurface )
+  if ( D3DObjectPtr == 0 || D3DObjectPtr->FinalRenderSurface == 0 )
   {
     return 0;
   }
   if ( a6 == 1 )
   {
-    if ( byte_468DD14 )
+    if ( byte_468DD14 != 0 )
     {
       return 0;
     }
     else
     {
       v11 = D3DObjectPtr->FinalRenderSurface->Lock(D3DObjectPtr->FinalRenderSurface, &dword_468DD10, &dword_468DD0C, 1);
-      if ( v11 )
+      if ( v11 != 0 )
       {
         WriteError(v11, "LockRenderSurfaceForEditor");
         return 0;
@@ -2099,10 +2088,10 @@ bool  IGfxEngine::RenderObject(int a2, int a3, struct SGfxObjectInfo * a4, int a
   }
   else if ( a6 == 2 )
   {
-    if ( byte_468DD14 )
+    if ( byte_468DD14 != 0 )
     {
-      v11 = D3DObjectPtr->FinalRenderSurface->Unlock(D3DObjectPtr->FinalRenderSurface, this);
-      if ( v11 )
+      v11 = ((int (__thiscall *)(CSurfaceV7 *, IGfxEngine *))D3DObjectPtr->FinalRenderSurface->Unlock)(D3DObjectPtr->FinalRenderSurface, this);
+      if ( v11 != 0 )
       {
         WriteError(v11, "UnlockRenderSurfaceForEditor");
         return 0;
@@ -2119,13 +2108,13 @@ bool  IGfxEngine::RenderObject(int a2, int a3, struct SGfxObjectInfo * a4, int a
       return 0;
     }
   }
-  else if ( byte_468DD14 )
+  else if ( byte_468DD14 != 0 )
   {
-    v8 = *(_DWORD *)g_pZoomGradient;
+    v8 = *g_pZoomGradient;
     v7 = g_fZoomFactor;
     if ( a5 != 256 )
     {
-      *(_DWORD *)g_pZoomGradient *= a5 / 256;
+      *g_pZoomGradient *= a5 / 256;
       g_fZoomFactor = (float)(a5 / 256) * g_fZoomFactor;
     }
     g_pRenderAdress = dword_468DD0C;
@@ -2134,9 +2123,9 @@ bool  IGfxEngine::RenderObject(int a2, int a3, struct SGfxObjectInfo * a4, int a
     g_iScanlineLength = 2 * GfxEngineSetup.m_uWidth;
     g_pEndOfRenderBuffer = 2 * GfxEngineSetup.m_uWidth + dword_468DD0C + dword_468DD10 * (GfxEngineSetup.m_uHeight - 1);
     IGfxEngine::GetScreenOffsetsByMapIndices(a2, a3, &v9, &v10);
-    if ( *(_DWORD *)a4 )
+    if ( a4->m_pGfxData != 0 )
     {
-      if ( *((_BYTE *)a4 + 712) == 1 )
+      if ( a4->m_uObjType == 1 )
       {
         BlitSettler(255, v9 << 16, v10 << 16, a4);
       }
@@ -2144,7 +2133,7 @@ bool  IGfxEngine::RenderObject(int a2, int a3, struct SGfxObjectInfo * a4, int a
       {
         BlitObject(255, v9 << 16, v10 << 16, a4);
       }
-      *(_DWORD *)g_pZoomGradient = v8;
+      *g_pZoomGradient = v8;
       g_fZoomFactor = v7;
       return 1;
     }
@@ -2176,10 +2165,10 @@ bool  IGfxEngine::RenderResource(int a2, int a3, void * a4, void * a5, void * a6
 
   if ( a7 == 1 )
   {
-    if ( !byte_468DD08 && D3DObjectPtr->FinalRenderSurface )
+    if ( byte_468DD08 == 0 && D3DObjectPtr->FinalRenderSurface != 0 )
     {
       v12 = D3DObjectPtr->FinalRenderSurface->Lock(D3DObjectPtr->FinalRenderSurface, &dword_468DD04, &dword_468DD00, 1);
-      if ( v12 )
+      if ( v12 != 0 )
       {
         WriteError(v12, "LockRenderSurfaceForResources");
         return 0;
@@ -2197,10 +2186,10 @@ bool  IGfxEngine::RenderResource(int a2, int a3, void * a4, void * a5, void * a6
   }
   else if ( a7 == 2 )
   {
-    if ( byte_468DD08 )
+    if ( byte_468DD08 != 0 )
     {
-      v12 = D3DObjectPtr->FinalRenderSurface->Unlock(D3DObjectPtr->FinalRenderSurface, this);
-      if ( v12 )
+      v12 = ((int (__thiscall *)(CSurfaceV7 *, IGfxEngine *))D3DObjectPtr->FinalRenderSurface->Unlock)(D3DObjectPtr->FinalRenderSurface, this);
+      if ( v12 != 0 )
       {
         WriteError(v12, "UnlockRenderSurfaceForResources");
         return 0;
@@ -2217,7 +2206,7 @@ bool  IGfxEngine::RenderResource(int a2, int a3, void * a4, void * a5, void * a6
       return 0;
     }
   }
-  else if ( byte_468DD08 )
+  else if ( byte_468DD08 != 0 )
   {
     v9 = *g_pZoomGradient;
     v8 = g_fZoomFactor;
@@ -2284,15 +2273,15 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
   int v9; // [esp+2Ch] [ebp-8h]
   unsigned int i; // [esp+30h] [ebp-4h]
 
-  if ( !D3DObjectPtr )
+  if ( D3DObjectPtr == 0 )
   {
     return -1;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
   {
     return -1;
   }
-  if ( !this->m_bNeedsRebuild && !D3DObjectPtr->m_bInitHardware && !D3DObjectPtr->m_bInitSoftware )
+  if ( this->m_bNeedsRebuild == 0 && D3DObjectPtr->m_bInitHardware == 0 && D3DObjectPtr->m_bInitSoftware == 0 )
   {
     BBSupportTracePrintF(0, "GFX ENGINE: Call to CreateGuiSurface without initializing the engine before!");
   }
@@ -2300,12 +2289,12 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
   {
     return -1;
   }
-  if ( D3DObjectPtr->m_pGuiSurfaces[_iIndex] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[_iIndex] != 0 )
   {
     return -1;
   }
   D3DObjectPtr->m_pGuiSurfaces[_iIndex] = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-  if ( D3DObjectPtr->m_pGuiSurfaces[_iIndex] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[_iIndex] != 0 )
   {
     if ( GfxEngineSetup.m_bD3DInterface )
     {
@@ -2317,10 +2306,10 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
     }
     v4 = j__abs(g_uGfxMode == 1);
     pSurface = D3DObjectPtr->m_pGuiSurfaces[_iIndex]->CreateSurface(D3DObjectPtr->m_pGuiSurfaces[_iIndex], m_pDDraw, a3->m_iWidth, a3->m_iHeight, 1, 0, 0, v4, 0, 0, 0);
-    if ( pSurface )
+    if ( pSurface != 0 )
     {
       v8 = D3DObjectPtr->m_pGuiSurfaces[_iIndex];
-      if ( v8 )
+      if ( v8 != 0 )
       {
         v8->dtor(v8, 1);
       }
@@ -2331,7 +2320,7 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
     else
     {
       g_bGuiSurfaceVisible[_iIndex] = 0;
-      qmemcpy(&g_pGuiSurfaceDescriptors[_iIndex], a3, sizeof(GFX_ENGINE_GUI_SURFACE_DESCRIPTION));
+      qmemcpy((char *)g_pGuiSurfaceDescriptors + 28 * _iIndex, a3, 0x1Cu);
       ClipGuiSurface(_iIndex);
       v9 = 0;
       v7 = 0;
@@ -2339,18 +2328,17 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
             i < 0xE;
             ++i )
       {
-        if ( D3DObjectPtr->m_pGuiSurfaces[i] )
+        if ( D3DObjectPtr->m_pGuiSurfaces[i] != 0 )
         {
           ++v7;
-          v9 += 2 * stru_468DFA4[i].m_iWidth * g_pGuiSurfaceDescriptors[i].m_iWidth;
+          v9 += 2 * *(&stru_468DFA4[0].m_iWidth + 7 * i) * *(&g_pGuiSurfaceDescriptors[0].m_iWidth + 7 * i);
         }
       }
-      if ( CInterfaceD3D::GetGuiMemorySize(D3DObjectPtr) >= v9 )
+      if ( CInterfaceD3D::GetGuiMemorySize(D3DObjectPtr) < v9 )
       {
-        return _iIndex;
+        CInterfaceD3D::SetGuiMemorySize(D3DObjectPtr, v9);
+        BBSupportTracePrintF(0, "GFX ENGINE: New max size reached: Surfaces currently used by gui: %d Used vid-mem: %d", v7, v9);
       }
-      CInterfaceD3D::SetGuiMemorySize(D3DObjectPtr, v9);
-      BBSupportTracePrintF(0, "GFX ENGINE: New max size reached: Surfaces currently used by gui: %d Used vid-mem: %d", v7, v9);
       return _iIndex;
     }
   }
@@ -2369,7 +2357,7 @@ int  IGfxEngine::CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a2
   signed int v3; // [esp+4h] [ebp-8h]
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  if ( !D3DObjectPtr )
+  if ( D3DObjectPtr == 0 )
   {
     return -1;
   }
@@ -2378,7 +2366,7 @@ int  IGfxEngine::CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a2
         i < 0xE;
         ++i )
   {
-    if ( !D3DObjectPtr->m_pGuiSurfaces[i] )
+    if ( D3DObjectPtr->m_pGuiSurfaces[i] == 0 )
     {
       v3 = i;
       break;
@@ -2399,20 +2387,20 @@ int  IGfxEngine::CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a2
 // Decompiled from char __thiscall IGfxEngine::DestroyGuiSurface(IGfxEngine *this, unsigned int a2)
 bool  IGfxEngine::DestroyGuiSurface(int a2) {
   
-  if ( !D3DObjectPtr || a2 >= 0xE )
+  if ( D3DObjectPtr == 0 || a2 >= 0xE )
   {
     return 0;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
   {
     return 0;
   }
-  if ( !D3DObjectPtr->m_pGuiSurfaces[a2] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[a2] == 0 )
   {
     return 0;
   }
   D3DObjectPtr->m_pGuiSurfaces[a2]->Release(D3DObjectPtr->m_pGuiSurfaces[a2], this);
-  if ( D3DObjectPtr->m_pGuiSurfaces[a2] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[a2] != 0 )
   {
     D3DObjectPtr->m_pGuiSurfaces[a2]->dtor(D3DObjectPtr->m_pGuiSurfaces[a2], 1);
   }
@@ -2447,15 +2435,15 @@ bool  IGfxEngine::SetVisibilityOfGuiSurface(int a2, bool a3) {
 // Decompiled from char __thiscall IGfxEngine::SetGuiSurfaceDestinationPosition(IGfxEngine *this, unsigned int a2, int a3, int a4)
 bool  IGfxEngine::SetGuiSurfaceDestinationPosition(int a2, int a3, int a4) {
   
-  if ( !D3DObjectPtr || a2 >= 0xE )
+  if ( D3DObjectPtr == 0 || a2 >= 0xE )
   {
     return 0;
   }
-  if ( !D3DObjectPtr->m_pGuiSurfaces[a2] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[a2] == 0 )
   {
     return 0;
   }
-  OffsetRect(&g_pGuiSurfaceDescriptors[a2].m_sDestinationRect, a3 - g_pGuiSurfaceDescriptors[a2].m_sDestinationRect.left, a4 - g_pGuiSurfaceDescriptors[a2].m_sDestinationRect.top);
+  OffsetRect((LPRECT)((char *)&g_pGuiSurfaceDescriptors[0].m_sDestinationRect + 28 * a2), a3 - *(&g_pGuiSurfaceDescriptors[0].m_sDestinationRect.left + 7 * a2), a4 - *(&g_pGuiSurfaceDescriptors[0].m_sDestinationRect.top + 7 * a2));
   ClipGuiSurface(a2);
   return 1;
 }
@@ -2465,15 +2453,15 @@ bool  IGfxEngine::SetGuiSurfaceDestinationPosition(int a2, int a3, int a4) {
 // Decompiled from char __thiscall IGfxEngine::SetGuiSurfaceDestinationRect(IGfxEngine *this, unsigned int a2, const struct tagRECT *a3)
 bool  IGfxEngine::SetGuiSurfaceDestinationRect(int a2, struct tagRECT const & a3) {
   
-  if ( !D3DObjectPtr || a2 >= 0xE )
+  if ( D3DObjectPtr == 0 || a2 >= 0xE )
   {
     return 0;
   }
-  if ( !D3DObjectPtr->m_pGuiSurfaces[a2] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[a2] == 0 )
   {
     return 0;
   }
-  *(struct tagRECT *)&stru_468DFA4[a2].m_iHeight = *a3;
+  *(struct tagRECT *)(&stru_468DFA4[0].m_iHeight + 7 * a2) = *a3;
   ClipGuiSurface(a2);
   return 1;
 }
@@ -2508,11 +2496,11 @@ bool  IGfxEngine::GetGuiSurfaceDescription(int a2, struct GFX_ENGINE_GUI_SURFACE
   {
     return 0;
   }
-  if ( !D3DObjectPtr->m_pGuiSurfaces[a2] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[a2] == 0 )
   {
     return 0;
   }
-  qmemcpy(a3, &g_pGuiSurfaceDescriptors[a2], sizeof(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION));
+  qmemcpy(a3, (char *)g_pGuiSurfaceDescriptors + 28 * a2, 0x1Cu);
   return 1;
 }
 
@@ -2525,15 +2513,15 @@ unsigned short *  IGfxEngine::BeginWriteToSurface(int a2, unsigned int & a3) {
   int v5; // [esp+Ch] [ebp-8h]
   unsigned int i; // [esp+10h] [ebp-4h]
 
-  if ( !D3DObjectPtr || a2 >= 0xE )
+  if ( D3DObjectPtr == 0 || a2 >= 0xE )
   {
     return 0;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
   {
     return 0;
   }
-  if ( !D3DObjectPtr->m_pGuiSurfaces[a2] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[a2] == 0 )
   {
     return 0;
   }
@@ -2543,25 +2531,22 @@ unsigned short *  IGfxEngine::BeginWriteToSurface(int a2, unsigned int & a3) {
           i < 0xE;
           ++i )
     {
-      if ( D3DObjectPtr->m_pGuiSurfaces[i] )
+      if ( D3DObjectPtr->m_pGuiSurfaces[i] != 0 && D3DObjectPtr->m_pGuiSurfaces[i]->IsLost(D3DObjectPtr->m_pGuiSurfaces[i]) == -2005532222 )
       {
-        if ( D3DObjectPtr->m_pGuiSurfaces[i]->IsLost(D3DObjectPtr->m_pGuiSurfaces[i]) == -2005532222 )
+        v5 = D3DObjectPtr->m_pGuiSurfaces[i]->Restore(D3DObjectPtr->m_pGuiSurfaces[i]);
+        if ( v5 != 0 )
         {
-          v5 = D3DObjectPtr->m_pGuiSurfaces[i]->Restore(D3DObjectPtr->m_pGuiSurfaces[i]);
-          if ( v5 )
-          {
-            WriteError(v5, "RestoreGuiSurface");
-            BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
-            LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
-            return 0;
-          }
+          WriteError(v5, "RestoreGuiSurface");
+          BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
+          LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
+          return 0;
         }
       }
     }
     D3DObjectPtr->m_bGfxEngineRebuilded = 1;
   }
   v5 = D3DObjectPtr->m_pGuiSurfaces[a2]->Lock(D3DObjectPtr->m_pGuiSurfaces[a2], (int *)a3, (int *)&v4, 1);
-  if ( v5 )
+  if ( v5 != 0 )
   {
     return 0;
   }
@@ -2576,15 +2561,15 @@ unsigned short *  IGfxEngine::BeginWriteToSurface(int a2, unsigned int & a3) {
 // Decompiled from char __thiscall IGfxEngine::EndWriteToSurface(IGfxEngine *this, unsigned int a2)
 bool  IGfxEngine::EndWriteToSurface(int a2) {
   
-  if ( !D3DObjectPtr || a2 >= 0xE )
+  if ( D3DObjectPtr == 0 || a2 >= 0xE )
   {
     return 0;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
   {
     return 0;
   }
-  if ( !D3DObjectPtr->m_pGuiSurfaces[a2] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[a2] == 0 )
   {
     return 0;
   }
@@ -2600,15 +2585,15 @@ bool  IGfxEngine::GetGuiSurfaceDC(int a2, struct HDC__ * * a3) {
   int v4; // [esp+4h] [ebp-8h]
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  if ( !D3DObjectPtr || a2 >= 0xE )
+  if ( D3DObjectPtr == 0 || a2 >= 0xE )
   {
     return 0;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
   {
     return 0;
   }
-  if ( !D3DObjectPtr->m_pGuiSurfaces[a2] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[a2] == 0 )
   {
     return 0;
   }
@@ -2618,18 +2603,15 @@ bool  IGfxEngine::GetGuiSurfaceDC(int a2, struct HDC__ * * a3) {
           i < 0xE;
           ++i )
     {
-      if ( D3DObjectPtr->m_pGuiSurfaces[i] )
+      if ( D3DObjectPtr->m_pGuiSurfaces[i] != 0 && D3DObjectPtr->m_pGuiSurfaces[i]->IsLost(D3DObjectPtr->m_pGuiSurfaces[i]) == -2005532222 )
       {
-        if ( D3DObjectPtr->m_pGuiSurfaces[i]->IsLost(D3DObjectPtr->m_pGuiSurfaces[i]) == -2005532222 )
+        v4 = D3DObjectPtr->m_pGuiSurfaces[i]->Restore(D3DObjectPtr->m_pGuiSurfaces[i]);
+        if ( v4 != 0 )
         {
-          v4 = D3DObjectPtr->m_pGuiSurfaces[i]->Restore(D3DObjectPtr->m_pGuiSurfaces[i]);
-          if ( v4 )
-          {
-            WriteError(v4, "RestoreGuiSurface");
-            BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
-            LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
-            return 0;
-          }
+          WriteError(v4, "RestoreGuiSurface");
+          BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
+          LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
+          return 0;
         }
       }
     }
@@ -2644,15 +2626,15 @@ bool  IGfxEngine::GetGuiSurfaceDC(int a2, struct HDC__ * * a3) {
 // Decompiled from bool __thiscall IGfxEngine::ReleaseGuiSurfaceDC(IGfxEngine *this, unsigned int a2, HDC a3)
 bool  IGfxEngine::ReleaseGuiSurfaceDC(int a2, struct HDC__ * a3) {
   
-  if ( !D3DObjectPtr || a2 >= 0xE )
+  if ( D3DObjectPtr == 0 || a2 >= 0xE )
   {
     return 0;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
   {
     return 0;
   }
-  if ( D3DObjectPtr->m_pGuiSurfaces[a2] )
+  if ( D3DObjectPtr->m_pGuiSurfaces[a2] != 0 )
   {
     return D3DObjectPtr->m_pGuiSurfaces[a2]->ReleaseDC(D3DObjectPtr->m_pGuiSurfaces[a2], a3) == 0;
   }
@@ -2672,7 +2654,7 @@ bool  IGfxEngine::SetGuiSurfaceClipRect(struct tagRECT const & _rRect) {
   int v8; // [esp+4h] [ebp-Ch]
   HRESULT inited; // [esp+Ch] [ebp-4h]
 
-  if ( !D3DObjectPtr || LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+  if ( D3DObjectPtr == 0 || LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
   {
     return 0;
   }
@@ -2736,7 +2718,7 @@ bool  IGfxEngine::IsHardwareRenderingAvailable(void) {
   void *C; // [esp+6Ch] [ebp-14h]
   int v12; // [esp+7Ch] [ebp-4h]
 
-  if ( D3DObjectPtr && (D3DObjectPtr->m_bInitHardware || D3DObjectPtr->m_bInitSoftware) )
+  if ( D3DObjectPtr != 0 && (D3DObjectPtr->m_bInitHardware != 0 || D3DObjectPtr->m_bInitSoftware != 0) )
   {
     return 0;
   }
@@ -2749,13 +2731,13 @@ bool  IGfxEngine::IsHardwareRenderingAvailable(void) {
   v4.m_uHeight = v3.m_uHeight;
   memset(&v4.m_uX, 0, 16);
   qmemcpy(&GfxEngineSetup, &v4, sizeof(GfxEngineSetup));
-  if ( D3DObjectPtr || ((C = operator new(0x794u), v12 = 0, !C) ? (v9 = 0) : (v9 = CInterfaceD3D::CInterfaceD3D((CInterfaceD3D *)C)), v7 = v9, v12 = -1, (D3DObjectPtr = v9) != 0) )
+  if ( D3DObjectPtr != 0 || ((C = operator new(0x794u), v12 = 0, C == 0) ? (v9 = 0) : (v9 = CInterfaceD3D::CInterfaceD3D((CInterfaceD3D *)C)), v7 = v9, v12 = -1, D3DObjectPtr = v9, v9 != 0) )
   {
     IsInterface7Available = CInterfaceD3D::IsInterface7Available(D3DObjectPtr, &this->m_bHardwareObjectPossible, v3.m_hWnd);
     this->m_bV7Available = IsInterface7Available;
     v6 = D3DObjectPtr;
     v8 = D3DObjectPtr;
-    if ( D3DObjectPtr )
+    if ( D3DObjectPtr != 0 )
     {
       v5 = delete v8;
     }
@@ -2793,7 +2775,7 @@ bool  IGfxEngine::IsSoftwareRenderingAvailable(void) {
   int v12; // [esp+7Ch] [ebp-4h]
 
   v11 = this;
-  if ( D3DObjectPtr && (D3DObjectPtr->m_bInitHardware || D3DObjectPtr->m_bInitSoftware) )
+  if ( D3DObjectPtr != 0 && (D3DObjectPtr->m_bInitHardware != 0 || D3DObjectPtr->m_bInitSoftware != 0) )
   {
     return 0;
   }
@@ -2807,9 +2789,9 @@ bool  IGfxEngine::IsSoftwareRenderingAvailable(void) {
   v4.m_uHeight = v3.m_uHeight;
   memset(&v4.m_uX, 0, 16);
   qmemcpy(&GfxEngineSetup, &v4, sizeof(GfxEngineSetup));
-  if ( D3DObjectPtr || ((C = operator new(0x794u), v12 = 0, !C) ? (v9 = 0) : (v9 = CInterfaceD3D::CInterfaceD3D((CInterfaceD3D *)C)), v7 = v9, v12 = -1, (D3DObjectPtr = v9) != 0) )
+  if ( D3DObjectPtr != 0 || ((C = operator new(0x794u), v12 = 0, C == 0) ? (v9 = 0) : (v9 = CInterfaceD3D::CInterfaceD3D((CInterfaceD3D *)C)), v7 = v9, v12 = -1, D3DObjectPtr = v9, v9 != 0) )
   {
-    if ( g_pDirectDraw )
+    if ( g_pDirectDraw != 0 )
     {
       v11->m_bV3Available = 0;
     }
@@ -2820,7 +2802,7 @@ bool  IGfxEngine::IsSoftwareRenderingAvailable(void) {
     }
     v6 = D3DObjectPtr;
     v8 = D3DObjectPtr;
-    if ( D3DObjectPtr )
+    if ( D3DObjectPtr != 0 )
     {
       v5 = delete v8;
     }
@@ -2850,11 +2832,11 @@ bool  IGfxEngine::SetRenderEnvironment(void) {
   char inited; // [esp+23h] [ebp-Dh]
   char v6; // [esp+23h] [ebp-Dh]
 
-  if ( D3DObjectPtr )
+  if ( D3DObjectPtr != 0 )
   {
     delete D3DObjectPtr;
     C = (CInterfaceD3D *)operator new(0x794u);
-    if ( C )
+    if ( C != 0 )
     {
       v3 = CInterfaceD3D::CInterfaceD3D(C);
     }
@@ -2863,7 +2845,7 @@ bool  IGfxEngine::SetRenderEnvironment(void) {
       v3 = 0;
     }
     D3DObjectPtr = v3;
-    if ( !v3 )
+    if ( v3 == 0 )
     {
       BBSupportTracePrintF(1, "GFX ENGINE: Couldn't create gfx engine interface object!");
       return 0;
@@ -2877,7 +2859,7 @@ bool  IGfxEngine::SetRenderEnvironment(void) {
       inited = CInterfaceD3D::InitCommon(D3DObjectPtr);
     }
     IGfxEngine::SetCameraTriangleSize(this, 1572864);
-    if ( !inited )
+    if ( inited == 0 )
     {
       return 0;
     }
@@ -2885,7 +2867,7 @@ bool  IGfxEngine::SetRenderEnvironment(void) {
     {
       return 1;
     }
-    if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
+    if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) != 0 )
     {
       v6 = CInterfaceD3D::InitHardware(D3DObjectPtr);
     }
@@ -2893,11 +2875,11 @@ bool  IGfxEngine::SetRenderEnvironment(void) {
     {
       v6 = CInterfaceD3D::InitSoftware(D3DObjectPtr);
     }
-    if ( !v6 )
+    if ( v6 == 0 )
     {
       return 0;
     }
-    if ( !CInterfaceD3D::LoadTexturePageContents(D3DObjectPtr) )
+    if ( CInterfaceD3D::LoadTexturePageContents(D3DObjectPtr) == 0 )
     {
       return 0;
     }

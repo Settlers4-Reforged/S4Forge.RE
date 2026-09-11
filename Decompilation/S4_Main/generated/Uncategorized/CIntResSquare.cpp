@@ -14,12 +14,12 @@ int  CIntResSquare::Value(void) {
         i < 8;
         ++i )
   {
-    if ( (int)this[i] > 0 )
+    if ( (int)*(this + i) > 0 )
     {
-      v2 += (int)sqrt<int>(this[i]) + 100;
+      v2 += (int)sqrt<int>(*(this + i)) + 100;
     }
   }
-  return v2 + 10 * this[18];
+  return v2 + 10 * *(this + 18);
 }
 
 
@@ -33,11 +33,11 @@ class CIntResSquare &  CIntResSquare::operator+=(class CAIResourceData const & a
         i < 8;
         ++i )
   {
-    this[i] += CAIResourceData::ResourceAmount1(a2, i);
+    *(this + i) += CAIResourceData::ResourceAmount1(a2, i);
   }
-  this[16] |= CAIResourceData::Flags1(a2);
-  this[17] |= CAIResourceData::Flags9(a2);
-  ++this[18];
+  *(this + 16) |= CAIResourceData::Flags1(a2);
+  *(this + 17) |= CAIResourceData::Flags9(a2);
+  ++*(this + 18);
   return this;
 }
 

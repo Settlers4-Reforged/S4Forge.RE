@@ -10,7 +10,7 @@ void  IMessageTracer::PushFormatedInts(char const * message, int arg1) {
   IMessageTracer::STraceMsg *NextTraceMsg; // [esp+4h] [ebp-4h]
 
   NextTraceMsg = IMessageTracer::GetNextTraceMsg(this);
-  if ( NextTraceMsg )
+  if ( NextTraceMsg != 0 )
   {
     NextTraceMsg->message = message;
     NextTraceMsg->arg1 = arg1;
@@ -25,7 +25,7 @@ void  IMessageTracer::PushFormatedInts(char const * message, int arg1, int arg2)
   IMessageTracer::STraceMsg *NextTraceMsg; // [esp+4h] [ebp-4h]
 
   NextTraceMsg = IMessageTracer::GetNextTraceMsg(this);
-  if ( NextTraceMsg )
+  if ( NextTraceMsg != 0 )
   {
     NextTraceMsg->message = message;
     NextTraceMsg->arg1 = arg1;
@@ -41,7 +41,7 @@ void  IMessageTracer::PushStaticText(char const * message) {
   IMessageTracer::STraceMsg *NextTraceMsg; // [esp+4h] [ebp-4h]
 
   NextTraceMsg = IMessageTracer::GetNextTraceMsg(this);
-  if ( NextTraceMsg )
+  if ( NextTraceMsg != 0 )
   {
     NextTraceMsg->message = message;
   }
@@ -55,7 +55,7 @@ void  IMessageTracer::PushFormatedInts(char const * message, int arg1, int arg2,
   IMessageTracer::STraceMsg *NextTraceMsg; // [esp+4h] [ebp-4h]
 
   NextTraceMsg = IMessageTracer::GetNextTraceMsg(this);
-  if ( NextTraceMsg )
+  if ( NextTraceMsg != 0 )
   {
     NextTraceMsg->message = message;
     NextTraceMsg->arg1 = arg1;
@@ -72,7 +72,7 @@ void  IMessageTracer::PushFormatedInts(char const * message, int arg1, int arg2,
   IMessageTracer::STraceMsg *NextTraceMsg; // [esp+4h] [ebp-4h]
 
   NextTraceMsg = IMessageTracer::GetNextTraceMsg(this);
-  if ( NextTraceMsg )
+  if ( NextTraceMsg != 0 )
   {
     NextTraceMsg->message = message;
     NextTraceMsg->arg1 = arg1;
@@ -90,7 +90,7 @@ void  IMessageTracer::PushFormatedInts(char const * message, int arg, int arg2, 
   IMessageTracer::STraceMsg *NextTraceMsg; // [esp+4h] [ebp-4h]
 
   NextTraceMsg = IMessageTracer::GetNextTraceMsg(this);
-  if ( NextTraceMsg )
+  if ( NextTraceMsg != 0 )
   {
     NextTraceMsg->message = message;
     NextTraceMsg->arg1 = arg;
@@ -144,10 +144,10 @@ void  IMessageTracer::PrintMessages(unsigned int a2, unsigned int a3) {
   {
     m_iCurrentMessage = this->m_iMaxMessage;
   }
-  if ( m_iCurrentMessage >= 0 && this->m_aMessages[0].message )
+  if ( m_iCurrentMessage >= 0 && this->m_aMessages[0].message != 0 )
   {
     memset(buffer, 0, sizeof(buffer));
-    if ( this->m_aMessages[0x3FFF].message )
+    if ( this->m_aMessages[0x3FFF].message != 0 )
     {
       m_iCurrentMessage = 0x4000;
       v5 = 0;
@@ -168,10 +168,10 @@ void  IMessageTracer::PrintMessages(unsigned int a2, unsigned int a3) {
             ++j )
       {
         message = &this->m_aMessages[j];
-        if ( message->message )
+        if ( message->message != 0 )
         {
           snprintf(buffer, 0x3FFu, message->message, message->arg1, message->arg2, message->arg3, message->arg4, message->arg5);
-          if ( buffer[0] )
+          if ( buffer[0] != 0 )
           {
             BBSupportTracePrint(a2, buffer);
           }

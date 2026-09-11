@@ -81,7 +81,7 @@ std::string const &  CFile::GetName(void) {
   std::string::string(&this->m_spName);
   std::string::string(&this->m_spU24);
   LOBYTE(v7) = 2;
-  if ( a3 )
+  if ( a3 != 0 )
   {
     std::string::operator=(&this->m_spU24, " /\n\r\t");
     CFile::Open(this, FileName, (CFile::Mode)a3, UNUSED_ARG(), UNUSED_ARG());
@@ -123,7 +123,7 @@ void  CFile::Open(wchar_t const * FileName, unsigned int a3, char * Str, int a5)
   CFile::OpenMaskToCWStr(this, a3, (char *)&v8);
   v5 = std::wstring::c_str(&v8);
   this->m_hFile = (FILE *)CFileMgr::Open(FileName, v5, Str, a5);
-  if ( !this->m_hFile )
+  if ( this->m_hFile == 0 )
   {
     CBBFileException::CBBFileException((CBBFileException *)pExceptionObject, 2, FileName);
     _CxxThrowException(pExceptionObject, (_ThrowInfo *)&_TI2_AVCBBFileException__);
@@ -199,7 +199,7 @@ int  CFile::Eof(void) {
 // Decompiled from int __thiscall CFile::Error(FILE **this)
 int  CFile::Error(void) {
   
-  return j__ferror(this[17]);
+  return j__ferror(*(this + 17));
 }
 
 
@@ -210,12 +210,12 @@ int  CFile::Close(char * a2, int a3) {
   int result; // eax
   void **v4; // [esp+0h] [ebp-Ch]
 
-  if ( !this->m_hFile )
+  if ( this->m_hFile == 0 )
   {
     return 0;
   }
   v4 = (void **)CFileMgr::CheckValidFilePtr(this->m_hFile, "CFile::Close", a2, a3);
-  if ( v4 )
+  if ( v4 != 0 )
   {
     CFileMgr::RemoveFromList(v4);
   }

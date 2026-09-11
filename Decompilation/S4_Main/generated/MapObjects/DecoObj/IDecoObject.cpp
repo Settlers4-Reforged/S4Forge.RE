@@ -51,19 +51,19 @@ bool  IDecoObject::IsStaticInstance(void)const {
     IEntity::SetPosition(this, _iX, _iY);
   }
   v8 = CWorldManager::ObjectId(_iX, _iY);
-  if ( v8 )
+  if ( v8 != 0 )
   {
     pDbgDecoObject = (IDecoObject *)CDecoObjMgr::GetDecoObjPtr(v8);
-    if ( !pDbgDecoObject && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 94, "pDbgDecoObject != 0") == 1 )
+    if ( pDbgDecoObject == 0 && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 94, "pDbgDecoObject != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( pDbgDecoObject )
+    if ( pDbgDecoObject != 0 )
     {
       iDbgType = IEntity::Type(pDbgDecoObject);
       if ( IDecoObject::IsStaticInstance(pDbgDecoObject) )
       {
-        if ( iDbgType != IEntity::Type(this) && CDecoObjMgr::GetTotalBuildingRings(&g_cDecoObjMgr, iDbgType) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 102, "iDbgType == Type() || ( g_cDecoObjMgr.GetTotalBuildingRings( iDbgType ) == 0 )") == 1 )
+        if ( iDbgType != IEntity::Type(this) && CDecoObjMgr::GetTotalBuildingRings(&g_cDecoObjMgr, iDbgType) != 0 && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 102, "iDbgType == Type() || ( g_cDecoObjMgr.GetTotalBuildingRings( iDbgType ) == 0 )") == 1 )
         {
           __debugbreak();
         }
@@ -108,7 +108,7 @@ bool  IDecoObject::IsStaticInstance(void)const {
   this->m_iType = _rStaticDecoObject->m_iType;
   this->m_iFrame = 0;
   IEntity::SetFlagBits(this, ENTITY_FLAG_Visible);
-  if ( CWorldManager::ObjectId(_iX, _iY) )
+  if ( CWorldManager::ObjectId(_iX, _iY) != 0 )
   {
     v5 = CWorldManager::ObjectId(_iX, _iY);
     if ( v5 != IEntity::EntityId(&_rStaticDecoObject->IAnimatedEntity) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 145, "( g_cWorld.ObjectId( _iX, _iY ) == 0 ) || ( g_cWorld.ObjectId( _iX, _iY ) == _rStaticDecoObject.EntityId() )") == 1 )
@@ -133,28 +133,27 @@ bool  IDecoObject::IsStaticInstance(void)const {
   unsigned int v6; // [esp-4h] [ebp-1Ch]
 
   this->__vftable = (IAnimatedEntity_vtbl *)&IDecoObject::_vftable_;
-  if ( this->m_bStaticInstance )
+  if ( !this->m_bStaticInstance )
   {
-    return IAnimatedEntity::~IAnimatedEntity(this);
+    if ( IEntity::X(this) == 0 && IEntity::Y(this) == 0 && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 164, "! ( ( X() == 0 ) && ( Y() == 0 ) )") == 1 )
+    {
+      __debugbreak();
+    }
+    v6 = IEntity::Y(this);
+    v1 = IEntity::X(this);
+    if ( !CWorldManager::InWorld(v1, v6) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 165, "g_cWorld.InWorld( X(), Y() )") == 1 )
+    {
+      __debugbreak();
+    }
+    v2 = ((int (__stdcall *)())IEntity::WorldIdx)();
+    v3 = CWorldManager::ObjectId(v2);
+    if ( v3 != IEntity::EntityId(this) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 166, "g_cWorld.ObjectId( WorldIdx() ) == EntityId()") == 1 )
+    {
+      __debugbreak();
+    }
+    v4 = ((int (__stdcall *)())IEntity::WorldIdx)();
+    CWorldManager::SetObjectId(v4, 0);
   }
-  if ( !IEntity::X(this) && !IEntity::Y(this) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 164, "! ( ( X() == 0 ) && ( Y() == 0 ) )") == 1 )
-  {
-    __debugbreak();
-  }
-  v6 = IEntity::Y(this);
-  v1 = IEntity::X(this);
-  if ( !CWorldManager::InWorld(v1, v6) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 165, "g_cWorld.InWorld( X(), Y() )") == 1 )
-  {
-    __debugbreak();
-  }
-  v2 = IEntity::WorldIdx();
-  v3 = CWorldManager::ObjectId(v2);
-  if ( v3 != IEntity::EntityId(this) && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 166, "g_cWorld.ObjectId( WorldIdx() ) == EntityId()") == 1 )
-  {
-    __debugbreak();
-  }
-  v4 = IEntity::WorldIdx();
-  CWorldManager::SetObjectId(v4, 0);
   return IAnimatedEntity::~IAnimatedEntity(this);
 }
 
@@ -175,7 +174,7 @@ int  IDecoObject::ConvertToDarkOrGreen(bool a2) {
   {
     DarkObject = CDarkConvert::GetGreenObject(v5);
   }
-  if ( DarkObject )
+  if ( DarkObject != 0 )
   {
     return DarkObject;
   }
@@ -197,7 +196,7 @@ int  IDecoObject::ConvertToDarkOrGreen(bool a2) {
   IAnimatedEntity::IAnimatedEntity(this, a2);
   v6 = 0;
   this->__vftable = (IAnimatedEntity_vtbl *)&IDecoObject::_vftable_;
-  operator^<unsigned int>(a2, &fileFormatVersion);
+  operator^<unsigned int>(a2, (unsigned int *)&fileFormatVersion);
   if ( fileFormatVersion != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for IDecoObject");
@@ -219,7 +218,7 @@ void  IDecoObject::Store(std::ostream & a2) {
 
   IAnimatedEntity::Store(&this->IAnimatedEntity, a2);
   v3 = 1;
-  operator^<unsigned int>(a2, &v3);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
   return operator^<bool>(a2, &this->m_bStaticInstance);
 }
 

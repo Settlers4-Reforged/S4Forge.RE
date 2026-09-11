@@ -6,10 +6,10 @@
 // Decompiled from CBriefingSettings *__thiscall CBriefingSettings::CBriefingSettings(CBriefingSettings *this)
  CBriefingSettings::CBriefingSettings(void) {
   
-  std::string::string();
-  std::string::string();
-  std::string::string();
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
+  ((void (__cdecl *)())std::string::string)();
+  ((void (__cdecl *)())std::string::string)();
+  ((void (__cdecl *)())std::string::string)();
   return this;
 }
 

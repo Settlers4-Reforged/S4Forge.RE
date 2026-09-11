@@ -6,8 +6,8 @@
 // Decompiled from SEnvironmentInfo *__thiscall SEnvironmentInfo::SEnvironmentInfo(SEnvironmentInfo *this)
  SEnvironmentInfo::SEnvironmentInfo(void) {
   
-  std::string::string();
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
+  ((void (__cdecl *)())std::string::string)();
   return this;
 }
 
@@ -16,8 +16,8 @@
 // Decompiled from void __thiscall SEnvironmentInfo::~SEnvironmentInfo(SEnvironmentInfo *this)
  SEnvironmentInfo::~SEnvironmentInfo(void) {
   
-  std::string::~string((char *)this + 80);
-  std::string::~string((char *)this + 16);
+  std::string::~string(&this->gpuGap[1]);
+  std::string::~string(&this->sOSAdditionalInfo);
 }
 
 

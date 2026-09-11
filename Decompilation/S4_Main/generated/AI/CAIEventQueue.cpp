@@ -61,7 +61,7 @@ class CAIEvent const *  CAIEventQueue::PeekAIEvent(bool a2) {
 
   if ( this->m_uReadCounter >= std::vector<CAIEvent>::size(&this->m_vEvents) )
   {
-    if ( this->m_uReadCounter )
+    if ( this->m_uReadCounter != 0 )
     {
       CAIEventQueue::Clear(this);
     }
@@ -99,7 +99,7 @@ void  CAIEventQueue::Load(class IS4Chunk & a2) {
         ++i )
   {
     a2->Load(&v3, 16);
-    std::vector<CAIEvent>::push_back(&v3);
+    std::vector<CAIEvent>::push_back((int)&v3);
   }
   v2 = std::vector<CAIEvent>::size(&this->m_vEvents);
   if ( v2 != iNumberOfEvents && BBSupportDbgReport(2, "AI\\AI_EventQueue.cpp", 119, "m_cAIEventVector.size() == iNumberOfEvents") == 1 )

@@ -45,27 +45,27 @@ bool  CWalkingCatapult::IsNotOccupied(int a2) {
   int v3; // [esp+4h] [ebp-4h]
 
   v3 = CWorldManager::Width();
-  if ( CWorldManager::OccupyingEntityId(a2) )
+  if ( CWorldManager::OccupyingEntityId(a2) != 0 )
   {
     return 0;
   }
-  if ( CWorldManager::OccupyingEntityId(a2 + 1) )
+  if ( CWorldManager::OccupyingEntityId(a2 + 1) != 0 )
   {
     return 0;
   }
-  if ( CWorldManager::OccupyingEntityId(a2 + v3 + 1) )
+  if ( CWorldManager::OccupyingEntityId(a2 + v3 + 1) != 0 )
   {
     return 0;
   }
-  if ( CWorldManager::OccupyingEntityId(v3 + a2) )
+  if ( CWorldManager::OccupyingEntityId(v3 + a2) != 0 )
   {
     return 0;
   }
-  if ( CWorldManager::OccupyingEntityId(a2 - 1) )
+  if ( CWorldManager::OccupyingEntityId(a2 - 1) != 0 )
   {
     return 0;
   }
-  if ( CWorldManager::OccupyingEntityId(a2 - v3 - 1) )
+  if ( CWorldManager::OccupyingEntityId(a2 - v3 - 1) != 0 )
   {
     return 0;
   }
@@ -110,7 +110,7 @@ bool  CWalkingCatapult::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
         j < 6;
         ++j )
   {
-    if ( v11[j] )
+    if ( v11[j] != 0 )
     {
       v5 = iIndex + CWorldManager::NeighborRelIndex(j);
       CWorldManager::SetMapObjectId(v5, j + 1);
@@ -166,7 +166,7 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
           ++i )
     {
       v12 = v16 + CWorldManager::NeighborRelIndex(i);
-      if ( CWorldManager::FlagBits(v12, 8u) && CWorldManager::MoveCostsBits(v12) >= 7 )
+      if ( CWorldManager::FlagBits(v12, 8u) != 0 && CWorldManager::MoveCostsBits(v12) >= 7 )
       {
         v26 = 1;
         break;
@@ -217,13 +217,13 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
                   ++k )
             {
               v8 = v20 + CWorldManager::SurroundingHexPointRelIndex(k);
-              if ( CWorldManager::FlagBits(v8, 8u) && CWorldManager::MoveCostsBits(v8) >= 7 )
+              if ( CWorldManager::FlagBits(v8, 8u) != 0 && CWorldManager::MoveCostsBits(v8) >= 7 )
               {
                 v25 = 0;
                 break;
               }
             }
-            if ( v25 )
+            if ( v25 != 0 )
             {
               v13 = v15;
               v7 = v14;
@@ -240,7 +240,7 @@ int  CWalkingCatapult::IdleWalk(int a2, int a3) {
     }
     v17 = Y16X16::DirectionFast(a2, this->m_sData.m_iIdleWalkToXY);
     v4 = CWorldManager::Index(g_sNeighborPoints[v17].x + iCurrentX, g_sNeighborPoints[v17].y + iCurrentY);
-    if ( !this->IsNotBlocked(this, v4) )
+    if ( this->IsNotBlocked(this, v4) == 0 )
     {
       return 8;
     }

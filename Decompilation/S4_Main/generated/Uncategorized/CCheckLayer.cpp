@@ -25,7 +25,7 @@
 // Decompiled from __int16 __thiscall CCheckLayer::getPoint(CCheckLayer *this, int a2, int a3)
 unsigned short  CCheckLayer::getPoint(int a2, int a3) {
   
-  if ( a2 >= *((_DWORD *)this + 1) && BBSupportDbgReport(2, "CCheckLayer.cpp", 35, "_iX < m_iSizeX") == 1 )
+  if ( a2 >= this->m_iWidth && BBSupportDbgReport(2, "CCheckLayer.cpp", 35, "_iX < m_iSizeX") == 1 )
   {
     __debugbreak();
   }
@@ -33,7 +33,7 @@ unsigned short  CCheckLayer::getPoint(int a2, int a3) {
   {
     __debugbreak();
   }
-  if ( a3 >= *((_DWORD *)this + 2) && BBSupportDbgReport(2, "CCheckLayer.cpp", 37, "_iY < m_iSizeY") == 1 )
+  if ( a3 >= this->m_iHeight && BBSupportDbgReport(2, "CCheckLayer.cpp", 37, "_iY < m_iSizeY") == 1 )
   {
     __debugbreak();
   }
@@ -41,13 +41,13 @@ unsigned short  CCheckLayer::getPoint(int a2, int a3) {
   {
     __debugbreak();
   }
-  if ( a2 >= *((_DWORD *)this + 1) || a2 < 0 || a3 >= *((_DWORD *)this + 2) || a3 < 0 )
+  if ( a2 >= this->m_iWidth || a2 < 0 || a3 >= this->m_iHeight || a3 < 0 )
   {
     return 0;
   }
   else
   {
-    return *(_WORD *)(*(_DWORD *)this + 2 * (a2 + *((_DWORD *)this + 1) * a3));
+    return this->m_vLayer[a2 + this->m_iWidth * a3];
   }
 }
 

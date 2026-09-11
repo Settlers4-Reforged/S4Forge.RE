@@ -7,8 +7,8 @@
 // Decompiled from CAddSoldierSideBarInfo *__thiscall CAddSoldierSideBarInfo::CAddSoldierSideBarInfo(CAddSoldierSideBarInfo *this)
  CAddSoldierSideBarInfo::CAddSoldierSideBarInfo(void) {
   
-  CInfoExchange::CInfoExchange((CInfoExchange *)this);
-  *(_DWORD *)this = &CAddSoldierSideBarInfo::_vftable_;
+  CInfoExchange::CInfoExchange(this);
+  this->__vftable = (CInfoExchange_vtbl *)&CAddSoldierSideBarInfo::_vftable_;
   return this;
 }
 

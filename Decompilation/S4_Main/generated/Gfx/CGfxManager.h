@@ -6,7 +6,7 @@
 class CGfxManager {
 public:
     // address=[0x1361470]
-     CGfxManager(bool a2, bool a3, bool a4);
+     CGfxManager(bool arg0, bool a3, bool a4);
 
     // address=[0x1361660]
      ~CGfxManager(void);
@@ -69,7 +69,7 @@ public:
     unsigned int  GetSettlerJobFrameCount(unsigned int iRace, unsigned int iJob, unsigned int iDir);
 
     // address=[0x1363440]
-    unsigned int  GetObjectFrameCount(unsigned int a2);
+    unsigned int  GetObjectFrameCount(unsigned int iJob);
 
     // address=[0x1363470]
     unsigned int  GetPileFrameCount(unsigned int a1);
@@ -90,7 +90,7 @@ public:
     void  GetBoundingBox(struct SGfxBoundingBox & a2, unsigned int a3, unsigned int a4, unsigned int a5);
 
     // address=[0x13637e0]
-    bool  EnableGfxFile(unsigned int _iGfxFile, int _iType, bool _bMapFile, unsigned int _iFileVersion);
+    bool  EnableGfxFile(unsigned int iGfxFile, int iType, bool bMapFile, unsigned int iFileVersion);
 
     // address=[0x1363b20]
     static void * __cdecl Reload(int a1, bool a2, bool a3);
@@ -139,34 +139,34 @@ private:
     void  ErrorMessageBox(class String a1);
 
     // address=[0x1364ff0]
-    void *  LoadFile(std::wstring a2, unsigned long * a3, unsigned int a4);
+    void *  LoadFile(std::wstring _swPath, unsigned long * _iSize, unsigned int _iFileVersion);
 
     // address=[0x1365310]
     class CFileEx *  MapFullFile(std::wstring a2, unsigned int _iFileVersion);
 
     // address=[0x1365750]
-    bool  LoadGfxFile(unsigned int a2, bool _bMapFile, unsigned int _iFileVersion);
+    bool  LoadGfxFile(unsigned int _iGfxFile, bool _bMapFile, unsigned int _iFileVersion);
 
     // address=[0x1365a70]
     bool  LoadGfxColorFile(unsigned int a2, bool a3, unsigned int a4);
 
     // address=[0x1365ce0]
-    bool  LoadGilFile(unsigned int a2, unsigned int a3);
+    bool  LoadGilFile(unsigned int nGfxFile, unsigned int _iFileVersion);
 
     // address=[0x1365f30]
-    bool  LoadDilFile(unsigned int a2, unsigned int a3);
+    bool  LoadDilFile(unsigned int _iGfxFile, unsigned int a4);
 
     // address=[0x1366180]
-    bool  LoadJilFile(unsigned int a2, unsigned int a3);
+    bool  LoadJilFile(unsigned int nGfxFile, unsigned int a4);
 
     // address=[0x13663d0]
-    bool  LoadSilFile(unsigned int a2, unsigned int a3);
+    bool  LoadSilFile(unsigned int _iGfxFile, unsigned int _iFileVersion);
 
     // address=[0x1366520]
-    bool  LoadPilFile(unsigned int a2, unsigned int a3, bool a4);
+    bool  LoadPilFile(unsigned int nGfxFile, unsigned int a3, bool a4);
 
     // address=[0x1366790]
-    bool  LoadPalFile(unsigned int a2, unsigned int a3, bool a4);
+    bool  LoadPalFile(unsigned int _iGfxFile, unsigned int _iFileVersion, bool _bUseHi);
 
     // address=[0x1366b90]
     bool  MoveAccessoriesToGfxEngine(void);
@@ -183,21 +183,22 @@ private:
     // Type information members
 public:
     CGfxManager::SGFXINFO[42] m_sFilePal;
-    char **[42] m_pFilePalIndex;
+    GFX_ENGINE_GFX_DESCRIPTION *[42] m_pFilePalIndex;
     CGfxManager::SGfxFrame[42] m_pFileGfxFrames;
     CGfxManager::SGfxFrame[42] m_pFileGfxDirections;
     CGfxManager::SGfxFrame[42] m_pFileGfxJobs;
-    CGfxManager::SGfxFrame[42] m_pFileGfxJobCodes;
+    CGfxManager::SJobCodes[42] m_pFileGfxJobCodes;
     CGfxManager::SGFXINFO[42] m_sFileGfx;
-    _BYTE[336] field_B2C;
+    _BYTE[168] field_B2C;
+    _BYTE[168] field_BD4;
     std::wstring m_swGfxFolderName;
     BYTE m_bUse6Palette;
     BYTE m_bUseHighPalette;
     _BYTE[2] gapC9A;
     int m_iActiveGfxFile;
     std::string m_sLastError;
-    bool field_cbc;
-    bool field_cbd;
+    bool m_bHasAddOn;
+    bool m_bHasAnyMissionCD;
     bool m_bUseHighTerrain;
 
 };

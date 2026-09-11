@@ -10,11 +10,11 @@ void  AdvXMLParser::Bookmark::GetSubString(std::string & a2, int a3) {
   void *v3; // [esp+0h] [ebp-28h]
   _BYTE v5[28]; // [esp+8h] [ebp-20h] BYREF
 
-  if ( a3 + *((_DWORD *)*this + 2) < (unsigned int)this[1] && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\xml\\Reader.inl", 155, "m_reader.m_szSourceCurrent + nNumEndSkip >= m_szSourceCurrent") == 1 )
+  if ( a3 + *((_DWORD *)*this + 2) < (unsigned int)*(this + 1) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\baselib\\include\\xml\\Reader.inl", 155, "m_reader.m_szSourceCurrent + nNumEndSkip >= m_szSourceCurrent") == 1 )
   {
     __debugbreak();
   }
-  v3 = (void *)std::string::string(this[1], *((_DWORD *)*this + 2) - (_DWORD)this[1] - a3);
+  v3 = (void *)std::string::string(*(this + 1), *((_DWORD *)*this + 2) - (_DWORD)*(this + 1) - a3);
   std::string::operator=(a2, v3);
   std::string::~string(v5);
 }

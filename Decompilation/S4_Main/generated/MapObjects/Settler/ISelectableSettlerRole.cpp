@@ -91,7 +91,7 @@ int  ISelectableSettlerRole::GetPrimaryGroupId(void)const {
 // Decompiled from ISettlerRole *__thiscall ISelectableSettlerRole::~ISelectableSettlerRole(ISelectableSettlerRole *this)
  ISelectableSettlerRole::~ISelectableSettlerRole(void) {
   
-  *(_DWORD *)this = &ISelectableSettlerRole::_vftable_;
+  this->__vftable = (ISettlerRole_vtbl *)&ISelectableSettlerRole::_vftable_;
   return ISettlerRole::~ISettlerRole(this);
 }
 
@@ -149,7 +149,7 @@ int  ISelectableSettlerRole::Decrease(int a2) {
     return 0;
   }
   v6 = CMapObjectMgr::EntityPtr(this->m_uAttachedSettlerId);
-  if ( !v6 )
+  if ( v6 == 0 )
   {
     return a2;
   }
@@ -157,7 +157,7 @@ int  ISelectableSettlerRole::Decrease(int a2) {
   {
     return 0;
   }
-  if ( IEntity::FlagBits(v6, (EntityFlag)0x200000) )
+  if ( IEntity::FlagBits(v6, (EntityFlag)0x200000) != 0 )
   {
     a2 = (a2 * CStaticConfigVarInt::operator int((CStaticConfigVarInt *)g_pMagicShieldDmgDecrease256)) >> 8;
   }
@@ -168,7 +168,7 @@ int  ISelectableSettlerRole::Decrease(int a2) {
   else if ( IEntity::Type(v6) == 44 )
   {
     v4 = CMapObjectMgr::EntityPtr(this->m_uAttachedSettlerId);
-    if ( v4 )
+    if ( v4 != 0 )
     {
       v3 = IEntity::Race(v4);
     }
@@ -203,40 +203,37 @@ bool  ISelectableSettlerRole::ProcessGoToPosFerry(class CSettler * a2, class CEn
   CFerryShip *pFerry; // [esp+18h] [ebp-4h]
 
   m_iDataC = a3->m_iDataC;
-  if ( m_iDataC <= 0 )
+  if ( m_iDataC > 0 )
   {
-    return 0;
-  }
-  v10 = Y16X16::UnpackXFast(m_iDataC);
-  v11 = Y16X16::UnpackYFast(m_iDataC);
-  FerryShipAt = (IEntity *)CVehicleMgr::GetFerryShipAt(v10, v11);
-  if ( FerryShipAt )
-  {
-    v3 = IEntity::OwnerId(FerryShipAt);
-    if ( v3 == IEntity::OwnerId(a2) )
+    v10 = Y16X16::UnpackXFast(m_iDataC);
+    v11 = Y16X16::UnpackYFast(m_iDataC);
+    FerryShipAt = (IEntity *)CVehicleMgr::GetFerryShipAt(v10, v11);
+    if ( FerryShipAt != 0 )
     {
-      v4 = IEntity::EntityId(a2);
-      if ( !CFerryShip::Request(FerryShipAt, v4) )
+      v3 = IEntity::OwnerId(FerryShipAt);
+      if ( v3 == IEntity::OwnerId(a2) )
       {
-        return 1;
+        v4 = IEntity::EntityId(a2);
+        if ( CFerryShip::Request(FerryShipAt, v4) == 0 )
+        {
+          return 1;
+        }
+      }
+    }
+    if ( ISettlerRole::HomeEntityId(this) > 0 )
+    {
+      v6 = ISettlerRole::HomeEntityId(this);
+      v7 = CMapObjectMgr::EntityPtr(v6);
+      pFerry = (CFerryShip *)j____RTDynamicCast((void **)&v7->__vftable, 0, &IEntity__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0);
+      if ( pFerry != 0 )
+      {
+        v8 = IEntity::EntityId(a2);
+        pFerry->EntityOrderCanceled(pFerry, v8);
+        v9 = IEntity::EntityId(a2);
+        pFerry->Detach(pFerry, v9);
       }
     }
   }
-  if ( ISettlerRole::HomeEntityId(this) <= 0 )
-  {
-    return 0;
-  }
-  v6 = ISettlerRole::HomeEntityId(this);
-  v7 = CMapObjectMgr::EntityPtr(v6);
-  pFerry = (CFerryShip *)j____RTDynamicCast((void **)&v7->__vftable, 0, &IEntity__RTTI_Type_Descriptor_, &CFerryShip__RTTI_Type_Descriptor_, 0);
-  if ( !pFerry )
-  {
-    return 0;
-  }
-  v8 = IEntity::EntityId(a2);
-  pFerry->EntityOrderCanceled(pFerry, v8);
-  v9 = IEntity::EntityId(a2);
-  pFerry->Detach(pFerry, v9);
   return 0;
 }
 
@@ -264,27 +261,27 @@ unsigned int  ISelectableSettlerRole::ThiefCheckMasquerade(class CSettler * _pSe
   v16 = CAlliances::AllianceId(v3);
   v4 = IEntity::OwnerId(_pSettler);
   v12 = CAlliances::AllianceId(v4);
-  if ( IEntity::FlagBits(_pSettler, ENTITY_FLAG_Ownerless) )
+  if ( IEntity::FlagBits(_pSettler, ENTITY_FLAG_Ownerless) != 0 )
   {
     v11 = IEntity::OwnerId(_pSettler);
     v9 = IEntity::Y(_pSettler);
     v6 = IEntity::X(_pSettler);
-    if ( CScanner::FindAnyEnemyFighter(v6, v9, 6, 60, v11) )
+    if ( CScanner::FindAnyEnemyFighter(v6, v9, 6, 60, v11) != 0 )
     {
       ISelectableSettlerRole::ThiefExpose(this, _pSettler);
     }
   }
-  else if ( v16 == v12 || !v16 )
+  else if ( v16 == v12 || v16 == 0 )
   {
     v10 = IEntity::OwnerId(_pSettler);
     v8 = IEntity::Y(_pSettler);
     v5 = IEntity::X(_pSettler);
-    if ( !CScanner::FindAnyEnemyFighter(v5, v8, 15, 60, v10) )
+    if ( CScanner::FindAnyEnemyFighter(v5, v8, 15, 60, v10) == 0 )
     {
       ISelectableSettlerRole::ThiefDisguise(this, _pSettler);
     }
   }
-  if ( IEntity::FlagBits(_pSettler, ENTITY_FLAG_Ownerless) )
+  if ( IEntity::FlagBits(_pSettler, ENTITY_FLAG_Ownerless) != 0 )
   {
     return 15;
   }

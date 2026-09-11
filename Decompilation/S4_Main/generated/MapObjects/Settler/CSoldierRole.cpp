@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CSoldierRole::New(int a1)
 class CPersistence * __cdecl CSoldierRole::New(std::istream & a1) {
   
-  if ( operator new(0x64u) )
+  if ( operator new(0x64u) != 0 )
   {
-    return CSoldierRole::CSoldierRole(a1);
+    return ((_DWORD (__stdcall *)(int))CSoldierRole::CSoldierRole)(a1);
   }
   else
   {
@@ -18,13 +18,13 @@ class CPersistence * __cdecl CSoldierRole::New(std::istream & a1) {
 
 
 // address=[0x1588900]
-// Decompiled from int __cdecl CSoldierRole::Load(int a1)
+// Decompiled from int __cdecl CSoldierRole::Load(struct std::istream *a1)
 class CSoldierRole * __cdecl CSoldierRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CSoldierRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -35,8 +35,8 @@ class CWalking *  CSoldierRole::InitWalking(class CSettler * a2) {
   
   int v2; // eax
 
-  v2 = IEntity::OwnerId((unsigned __int8 *)a2);
-  return CWalking::Create(0, v2);
+  v2 = IEntity::OwnerId(a2);
+  return (int)CWalking::Create(0, v2);
 }
 
 
@@ -86,27 +86,28 @@ void  CSoldierRole::LogicUpdateJob(class CSettler * a2) {
   int v41; // [esp+80h] [ebp-38h]
   int v42; // [esp+84h] [ebp-34h]
   int v43; // [esp+88h] [ebp-30h]
-  _DWORD *v44; // [esp+8Ch] [ebp-2Ch]
+  IEntity *v44; // [esp+8Ch] [ebp-2Ch]
   int v45; // [esp+90h] [ebp-28h] BYREF
   int v46; // [esp+94h] [ebp-24h]
   int v47; // [esp+98h] [ebp-20h]
   struct IEntity *v48; // [esp+9Ch] [ebp-1Ch]
   int v49; // [esp+A0h] [ebp-18h]
   int v50; // [esp+A4h] [ebp-14h]
+  char; // [esp+AAh] [ebp-Eh]
   int v53; // [esp+ACh] [ebp-Ch]
   unsigned __int8 *v54; // [esp+B0h] [ebp-8h]
   CSoldierRole *v55; // [esp+B4h] [ebp-4h]
 
   v55 = this;
-  if ( *((_BYTE *)this + 4) == 16 )
+  if ( this->m_iTask == 16 )
   {
-    v54 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)v55 + 17));
-    if ( v54 )
+    v54 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(v55->m_uEntityId);
+    if ( v54 != 0 )
     {
-      if ( IEntity::FlagBits(v54, (EntityFlag)((char *)&loc_1FFFFFF + 1)) && IEntity::FlagBits(v54, ENTITY_FLAG_VulnerableMask) )
+      if ( IEntity::FlagBits((IEntity *)v54, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0 && IEntity::FlagBits((IEntity *)v54, ENTITY_FLAG_VulnerableMask) != 0 )
       {
-        v53 = *(unsigned __int8 *)(*((_DWORD *)v55 + 24) + 3);
-        v43 = IEntity::OwnerId((unsigned __int8 *)a2);
+        v53 = *(unsigned __int8 *)(v55->m_iU5 + 3);
+        v43 = IEntity::OwnerId(a2);
         v2 = IEntity::PackedXY(a2);
         v3 = CWorldManager::Index(v2);
         v32 = ITiling::OwnerId(v3);
@@ -114,11 +115,11 @@ void  CSoldierRole::LogicUpdateJob(class CSettler * a2) {
         v30 = CAlliances::AllianceId(v32);
         if ( v31 == v30 )
         {
-          v41 = CStatistic::DefenceStrength256((CStatistic *)&g_cStatistic, v43);
+          v41 = CStatistic::DefenceStrength256(&g_cStatistic, v43);
         }
         else
         {
-          v41 = CStatistic::OffenceStrength256((CStatistic *)&g_cStatistic, v43);
+          v41 = CStatistic::OffenceStrength256(&g_cStatistic, v43);
         }
         v29 = v41;
         v53 = (v41 * v53 + 127) >> 8;
@@ -126,7 +127,7 @@ void  CSoldierRole::LogicUpdateJob(class CSettler * a2) {
         v53 += v40;
         if ( (IEntity::Flags(a2) & 0x100000) != 0 )
         {
-          v53 += (v53 * CStaticConfigVarInt::operator int(g_pMagicBloodlustDmgIncrease256) + 127) >> 8;
+          v53 += (v53 * CStaticConfigVarInt::operator int((CStaticConfigVarInt *)g_pMagicBloodlustDmgIncrease256) + 127) >> 8;
         }
         if ( (ISelectableSettlerRole::GetGroupFlagsEx(v55) & 0x800) != 0 )
         {
@@ -139,7 +140,7 @@ void  CSoldierRole::LogicUpdateJob(class CSettler * a2) {
           }
           v53 += v46 >> 8;
         }
-        v5 = IEntity::OwnerId(v54);
+        v5 = IEntity::OwnerId((IEntity *)v54);
         if ( v5 == CPlayerManager::GetLocalPlayerId() )
         {
           v15 = IEntity::Y(v54);
@@ -148,41 +149,41 @@ void  CSoldierRole::LogicUpdateJob(class CSettler * a2) {
         }
         v38 = (Grid *)IEntity::X(v54);
         v39 = IEntity::Y(v54);
-        v27 = IEntity::ID();
-        v7 = IEntity::OwnerId((unsigned __int8 *)a2);
+        v27 = ((int (__stdcall *)())IEntity::ID)();
+        v7 = IEntity::OwnerId(a2);
         (*(void (__thiscall **)(unsigned __int8 *, int, int))(*(_DWORD *)v54 + 28))(v54, v53, v7);
-        v47 = IEntity::Type((unsigned __int16 *)a2);
+        v47 = IEntity::Type(a2);
         if ( (unsigned int)(v47 - 61) <= 2 )
         {
-          v18[0] = MEMORY[0x3D8BE0C][v47] * v53 / 100;
-          v18[1] = MEMORY[0x3D8BE0C][v47] * v53 / 200;
+          v18[0] = *(&s_sGoodConversionMap[4][12].m_iToGood + v47) * v53 / 100;
+          v18[1] = *(&s_sGoodConversionMap[4][12].m_iToGood + v47) * v53 / 200;
           v45 = 0;
-          CSettlerSpiralWalk::CSettlerSpiralWalk((CSettlerSpiralWalk *)v17, v38, v39, 4);
+          CSettlerSpiralWalk::CSettlerSpiralWalk((CSettlerSpiralWalk *)v17, (int)v38, v39, 4);
           while ( CSettlerSpiralWalk::NextSettlerId((CSettlerSpiralWalk *)v17, &v45) )
           {
-            if ( !v45 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 525, "iNeighbourID != 0") == 1 )
+            if ( v45 == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 525, "iNeighbourID != 0") == 1 )
             {
               __debugbreak();
             }
             if ( v45 != v27 )
             {
-              v48 = (struct IEntity *)CMapObjectMgr::EntityPtr(v45);
-              if ( CWarriorBehavior::IsValidTarget((CSoldierRole *)((char *)v55 + 48), a2, v48) )
+              v48 = CMapObjectMgr::EntityPtr(v45);
+              if ( CWarriorBehavior::IsValidTarget(&v55->CWarriorBehavior, a2, v48) )
               {
                 v16 = IEntity::Y(v48);
                 v8 = IEntity::X(v48);
-                v49 = (Grid::Distance(v38, v39, v8, v16) - 1) >> 1;
+                v49 = (Grid::Distance((int)v38, v39, v8, v16) - 1) >> 1;
                 v37 = v49 > 0;
                 v49 = v37;
-                v9 = IEntity::OwnerId((unsigned __int8 *)a2);
-                ((void (__thiscall *)(struct IEntity *, _DWORD, int))v48->MetaData)(v48, v18[v49], v9);
+                v9 = IEntity::OwnerId(a2);
+                v48->j_?Decrease@IEntity@@UAEXHH@Z(v48, v18[v49], v9);
               }
             }
           }
         }
-        if ( (unsigned int)(v47 - 41) <= 2 && !IEntity::FlagBits(v54, (EntityFlag)dword_800000) )
+        if ( (unsigned int)(v47 - 41) <= 2 && IEntity::FlagBits((IEntity *)v54, (EntityFlag)dword_800000) == 0 )
         {
-          v26 = IEntity::WarriorType();
+          v26 = ((int (__stdcall *)())IEntity::WarriorType)();
           v36 = IEntity::Race(v54) == 3 ? 12 : 60;
           v25 = v36;
           if ( (v36 & (1 << v26)) != 0 )
@@ -191,9 +192,10 @@ void  CSoldierRole::LogicUpdateJob(class CSettler * a2) {
             if ( v10 < dword_41579C4[v47] )
             {
               v24 = (CStateGame::Rand(g_pGame) & 0xF) + 20;
-              v35 = CLogic::FutureEvents(g_pLogic);
-              v11 = IEntity::EntityId((unsigned __int16 *)v54);
-              if ( (*(unsigned __int8 (__thiscall **)(int, int, int, int, _DWORD, int *))(*(_DWORD *)v35 + 12))(v35, 1, v24, v11, 0, dword_800000) )
+              v35 = (int)CLogic::FutureEvents(g_pLogic);
+              v11 = IEntity::EntityId((IEntity *)v54);
+               = (*(int (__thiscall **)(int, int, int, int, _DWORD, int *))(*(_DWORD *)v35 + 12))(v35, 1, v24, v11, 0, dword_800000);
+              if (  != 0 )
               {
                 IEntity::SetFlagBits(v54, (EntityFlag)dword_800000);
               }
@@ -205,25 +207,25 @@ void  CSoldierRole::LogicUpdateJob(class CSettler * a2) {
     else
     {
       BBSupportTracePrintF(3, "### CSoldierRole::LogicUpdateJob(): pTarget == 0! ###");
-      v12 = IEntity::EntityId((unsigned __int16 *)a2);
-      CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v12, 3, (struct tagVARIANT *)&stru_37BB350);
-      CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, *((unsigned __int16 *)v55 + 17), 3, (struct tagVARIANT *)&stru_37BB350.decVal.Lo32);
+      v12 = IEntity::EntityId(a2);
+      CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v12, 3, (const char *)&stru_37BB350);
+      CMapObjectMgr::DbgPrintEntity(g_pMapObjectMgr, v55->m_uEntityId, 3, &stru_37BB350.cVal);
     }
     CSoldierRole::CheckToDoList();
   }
-  else if ( *((_BYTE *)v55 + 4) == 34 )
+  else if ( v55->m_iTask == 34 )
   {
-    v44 = (_DWORD *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)v55 + 17));
-    if ( v44 && IEntity::FlagBits(v44, (EntityFlag)((char *)&loc_1FFFFFF + 1)) )
+    v44 = CMapObjectMgr::EntityPtr(v55->m_uEntityId);
+    if ( v44 != 0 && IEntity::FlagBits(v44, (EntityFlag)((char *)&loc_1FFFFFF + 1)) != 0 )
     {
       v22 = IEntity::Race(a2);
-      v23 = IEntity::Type((unsigned __int16 *)a2);
-      v50 = *(unsigned __int8 *)(CSettlerMgr::GetSettlerInfo(v22, v23) + 7);
+      v23 = IEntity::Type(a2);
+      v50 = CSettlerMgr::GetSettlerInfo(v22, v23)->m_bMisc;
       if ( v50 <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 611, "iHealAmount > 0") == 1 )
       {
         __debugbreak();
       }
-      v42 = IEntity::OwnerId((unsigned __int8 *)a2);
+      v42 = IEntity::OwnerId(a2);
       v13 = IEntity::PackedXY(a2);
       v14 = CWorldManager::Index(v13);
       v21 = ITiling::OwnerId(v14);
@@ -231,29 +233,29 @@ void  CSoldierRole::LogicUpdateJob(class CSettler * a2) {
       v19 = CAlliances::AllianceId(v21);
       if ( v20 == v19 )
       {
-        v34 = CStatistic::DefenceStrength256((CStatistic *)&g_cStatistic, v42);
+        v34 = CStatistic::DefenceStrength256(&g_cStatistic, v42);
       }
       else
       {
-        v34 = CStatistic::OffenceStrength256((CStatistic *)&g_cStatistic, v42);
+        v34 = CStatistic::OffenceStrength256(&g_cStatistic, v42);
       }
       v18[2] = v34;
       v50 = (v34 * v50 + 127) >> 8;
       v33 = v50 == 0;
       v50 += v33;
-      (*(void (__thiscall **)(_DWORD *, int))(*v44 + 24))(v44, v50);
-      if ( *((_BYTE *)v55 + 73) )
+      v44->Increase(v44, v50);
+      if ( v55->m_iMaxNumberOfHealings != 0 )
       {
-        --*((_BYTE *)v55 + 73);
+        --v55->m_iMaxNumberOfHealings;
       }
     }
     CSoldierRole::CheckToDoList();
   }
-  if ( *((_DWORD *)v55 + 20) )
+  if ( v55->m_iU3 != 0 )
   {
-    *((_DWORD *)v55 + 20) = 0;
-    (*(void (__thiscall **)(CSoldierRole *, struct CSettler *))(*(_DWORD *)v55 + 40))(v55, a2);
-    if ( *((_BYTE *)v55 + 4) == 27 )
+    v55->m_iU3 = 0;
+    ((void (__thiscall *)(CSoldierRole *, struct CSettler *))v55->ISelectableSettlerRole::ISettlerRole::CPersistence::__vftable[2].j_?WarriorInit@CWarriorBehavior@@UAEXAAVIMovingEntity@@HH@Z)(v55, a2);
+    if ( v55->m_iTask == 27 )
     {
       CSoldierRole::SoldierWarriorLogicUpdate(v55, a2);
     }
@@ -273,29 +275,29 @@ void  CSoldierRole::UpdateJob(class CSettler * a2) {
   int v2; // eax
   int v3; // eax
 
-  switch ( *((_BYTE *)this + 4) )
+  switch ( this->m_iTask )
   {
     case 0x10:
     case 0x22:
       v2 = IAnimatedEntity::Frame(a2);
-      IAnimatedEntity::SetFrame((*((unsigned __int16 *)this + 4) + v2) % *((unsigned __int8 *)this + 7));
+      ((void (__stdcall *)(char))IAnimatedEntity::SetFrame)((this->m_uTick + v2) % this->m_uCycleFrames);
       break;
     case 0x18:
       return CSoldierRole::CheckToDoList();
     case 0x1B:
-      if ( (*((_BYTE *)this + 5) & 8) != 0 )
+      if ( (this->m_uSettlerWalk & 8) != 0 )
       {
-        *((_BYTE *)a2 + 36) = 0;
+        a2->m_iFrame = 0;
       }
       else
       {
         v3 = IAnimatedEntity::Frame(a2);
-        IAnimatedEntity::SetFrame((*((unsigned __int16 *)this + 4) + v3) % *((unsigned __int8 *)this + 7));
-        if ( !*((_BYTE *)a2 + 36) )
+        ((void (__stdcall *)(char))IAnimatedEntity::SetFrame)((this->m_uTick + v3) % this->m_uCycleFrames);
+        if ( a2->m_iFrame == 0 )
         {
-          *((_BYTE *)a2 + 36) = 1;
+          a2->m_iFrame = 1;
         }
-        IMovingEntity::DecDistance(a2, (*((unsigned __int16 *)this + 4) << 8) / *((char *)this + 6));
+        IMovingEntity::DecDistance(a2, (this->m_uTick << 8) / this->m_iWalkspeed);
       }
       break;
     default:
@@ -307,7 +309,7 @@ void  CSoldierRole::UpdateJob(class CSettler * a2) {
 
 
 // address=[0x158ed00]
-// Decompiled from int __thiscall CSoldierRole::WarriorTaskWalkOneStep(CSoldierRole *this, struct IMovingEntity *a2)
+// Decompiled from int __thiscall CSoldierRole::WarriorTaskWalkOneStep(CSoldierRole *this, CSettler *a2)
 int  CSoldierRole::WarriorTaskWalkOneStep(class IMovingEntity & a2) {
   
   int v4; // [esp+8h] [ebp-4h]
@@ -319,7 +321,7 @@ int  CSoldierRole::WarriorTaskWalkOneStep(class IMovingEntity & a2) {
 
 
 // address=[0x158ed40]
-// Decompiled from int __thiscall CSoldierRole::WarriorTaskAttack(_DWORD *this, _DWORD *a2, unsigned int a3, int a4)
+// Decompiled from int __thiscall CSoldierRole::WarriorTaskAttack(_DWORD *this, IEntity *a2, unsigned int a3, int a4)
 void  CSoldierRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WARRIOR_ATTACK a4) {
   
   int v4; // eax
@@ -355,7 +357,7 @@ void  CSoldierRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_W
   _BYTE v34[12]; // [esp+8h] [ebp-50h] BYREF
   int v35; // [esp+14h] [ebp-44h]
   int v36; // [esp+18h] [ebp-40h]
-  unsigned __int8 *v37; // [esp+1Ch] [ebp-3Ch]
+  IEntity *v37; // [esp+1Ch] [ebp-3Ch]
   int v38; // [esp+20h] [ebp-38h]
   int v39; // [esp+24h] [ebp-34h]
   int v40; // [esp+28h] [ebp-30h]
@@ -363,7 +365,8 @@ void  CSoldierRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_W
   int v42; // [esp+30h] [ebp-28h]
   int v43; // [esp+34h] [ebp-24h]
   int v44; // [esp+38h] [ebp-20h]
-  _BYTE *v45; // [esp+3Ch] [ebp-1Ch]
+  IEntity *v45; // [esp+3Ch] [ebp-1Ch]
+  void *; // [esp+40h] [ebp-18h]
   int v47; // [esp+44h] [ebp-14h]
   _DWORD *v48; // [esp+48h] [ebp-10h]
   int v49; // [esp+54h] [ebp-4h]
@@ -377,53 +380,54 @@ void  CSoldierRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_W
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(a2, (EntityFlag)0x8000000u) )
+  if ( IEntity::FlagBits(a2, (EntityFlag)0x8000000) != 0 )
   {
-    IEntity::ClearFlagBits(a2, (EntityFlag)0x8000000u);
+    IEntity::ClearFlagBits(a2, (EntityFlag)0x8000000);
   }
   v45 = a2;
   v47 = 1;
   if ( a4 == 1 )
   {
-    v37 = (unsigned __int8 *)CMapObjectMgr::Entity(a3);
+    v37 = CMapObjectMgr::Entity(a3);
     v4 = IEntity::OwnerId(v37);
     v5 = CAlliances::AllianceId(v4);
-    v6 = IEntity::OwnerId((unsigned __int8 *)a2);
+    v6 = IEntity::OwnerId(a2);
     if ( v5 == CAlliances::AllianceId(v6) )
     {
       v47 = 2;
     }
   }
-  v32 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](v47);
+  v32 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(int))std::vector<unsigned short>::operator[])(v47);
   v7 = IEntity::Race(v45);
-  if ( !CEntityToDoListMgr::SettlerJobList(v7, v32) )
+   = (void *)((void *(__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v7, v32);
+  if (  == 0 )
   {
     v33 = IEntity::Race(a2);
-    v8 = IEntity::Type((unsigned __int16 *)a2);
+    v8 = IEntity::Type(a2);
     if ( BBSupportDbgReportF(2, "MapObjects\\Settler\\SoldierRole.cpp", 1680, "CSoldierRole::WarriorTaskAttack(): No work list for settler type %i of race %i!", v8, v33) == 1 )
     {
       __debugbreak();
     }
   }
-  v36 = std::list<CEntityTask>::begin(v34);
+  v36 = ((int (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v34);
   v35 = v36;
   v49 = 0;
   v9 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*(v36);
   v48[8] = v9;
   v49 = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v34);
-  if ( *(_WORD *)(v48[8] + 16) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1684, "m_pTempEntityTask->m_uEntityID == 0") == 1 )
+  if ( *(_WORD *)(v48[8] + 16) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1684, "m_pTempEntityTask->m_uEntityID == 0") == 1 )
   {
     __debugbreak();
   }
   *(_WORD *)(v48[8] + 16) = a3;
-  (*(void (__thiscall **)(_DWORD *, _BYTE *))(*(v48 - 12) + 40))(v48 - 12, v45);
+  (*(void (__thiscall **)(_DWORD *, IEntity *))(*(v48 - 12) + 40))(v48 - 12, v45);
   *(_WORD *)(v48[8] + 16) = 0;
-  if ( IEntity::WarriorType() == 3 )
+  if ( ((int (__stdcall *)())IEntity::WarriorType)() == 3 )
   {
     if ( IEntity::Race(a2) == 3 )
     {
-      v43 = CLogic::Effects((DWORD *)g_pLogic);
+      v43 = (int)CLogic::Effects(g_pLogic);
       v13 = CMapObjectMgr::Entity(a3);
       v26 = IEntity::PackedXY(v13);
       v14 = IEntity::PackedXY(a2);
@@ -431,7 +435,7 @@ void  CSoldierRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_W
     }
     else
     {
-      v44 = CLogic::Effects((DWORD *)g_pLogic);
+      v44 = (int)CLogic::Effects(g_pLogic);
       v10 = CMapObjectMgr::Entity(a3);
       v25 = IEntity::PackedXY(v10);
       v11 = IEntity::PackedXY(a2);
@@ -440,27 +444,27 @@ void  CSoldierRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_W
   }
   else
   {
-    result = IEntity::WarriorType();
+    result = ((int (__stdcall *)())IEntity::WarriorType)();
     if ( result == 4 )
     {
-      if ( IEntity::Type((unsigned __int16 *)a2) < 41 || IEntity::Type((unsigned __int16 *)a2) > 43 )
+      if ( IEntity::Type(a2) < 41 || IEntity::Type(a2) > 43 )
       {
-        if ( IEntity::Type((unsigned __int16 *)a2) == 61 )
+        if ( IEntity::Type(a2) == 61 )
         {
-          v41 = CLogic::Effects((DWORD *)g_pLogic);
+          v41 = (int)CLogic::Effects(g_pLogic);
           v17 = CMapObjectMgr::Entity(a3);
           v28 = IEntity::PackedXY(v17);
           v18 = IEntity::PackedXY(a2);
           return (*(int (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v41 + 24))(v41, 8, v18, v28, 15, 0, 0);
         }
-        else if ( IEntity::Type((unsigned __int16 *)a2) == 62 )
+        else if ( IEntity::Type(a2) == 62 )
         {
-          v40 = CLogic::Effects((DWORD *)g_pLogic);
+          v40 = (int)CLogic::Effects(g_pLogic);
           v19 = CMapObjectMgr::Entity(a3);
           v29 = IEntity::PackedXY(v19);
           v20 = IEntity::PackedXY(a2);
           (*(void (__thiscall **)(int, int, int, int, int, _DWORD, _DWORD))(*(_DWORD *)v40 + 24))(v40, 8, v20, v29, 10, 0, 0);
-          v39 = CLogic::Effects((DWORD *)g_pLogic);
+          v39 = (int)CLogic::Effects(g_pLogic);
           v21 = CMapObjectMgr::Entity(a3);
           v30 = IEntity::PackedXY(v21);
           v22 = IEntity::PackedXY(a2);
@@ -468,10 +472,10 @@ void  CSoldierRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_W
         }
         else
         {
-          result = IEntity::Type((unsigned __int16 *)a2);
+          result = IEntity::Type(a2);
           if ( result == 63 )
           {
-            v38 = CLogic::Effects((DWORD *)g_pLogic);
+            v38 = (int)CLogic::Effects(g_pLogic);
             v23 = CMapObjectMgr::Entity(a3);
             v31 = IEntity::PackedXY(v23);
             v24 = IEntity::PackedXY(a2);
@@ -481,7 +485,7 @@ void  CSoldierRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_W
       }
       else
       {
-        v42 = CLogic::Effects((DWORD *)g_pLogic);
+        v42 = (int)CLogic::Effects(g_pLogic);
         v15 = CMapObjectMgr::Entity(a3);
         v27 = IEntity::PackedXY(v15);
         v16 = IEntity::PackedXY(a2);
@@ -497,25 +501,25 @@ void  CSoldierRole::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_W
 // Decompiled from int __thiscall CSoldierRole::WarriorTaskFinished(CSoldierRole *this, struct IMovingEntity *a2)
 void  CSoldierRole::WarriorTaskFinished(class IMovingEntity & a2) {
   
-  IAnimatedEntity::RegisterForLogicUpdate(1);
-  IMovingEntity::SetDisplacementCosts(0);
+  ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
+  ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(0);
   return (*(int (__thiscall **)(char *, struct IMovingEntity *))(*((_DWORD *)this - 12) + 36))((char *)this - 48, a2);
 }
 
 
 // address=[0x158f1e0]
-// Decompiled from int __thiscall CSoldierRole::WarriorTaskIdleWalk(CSoldierRole *this, struct IMovingEntity *a2)
+// Decompiled from unsigned int __thiscall CSoldierRole::WarriorTaskIdleWalk(CSoldierRole *this, CSettler *a2)
 int  CSoldierRole::WarriorTaskIdleWalk(class IMovingEntity & a2) {
   
   int v2; // eax
   int v5; // [esp+4h] [ebp-10h]
-  int v6; // [esp+8h] [ebp-Ch]
+  unsigned int v6; // [esp+8h] [ebp-Ch]
   struct CWalking *v7; // [esp+Ch] [ebp-8h]
 
-  IMovingEntity::SetDisplacementCosts(0);
+  ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(0);
   v7 = IMovingEntity::Walking(a2);
   v2 = IEntity::PackedXY(a2);
-  v5 = (*(int (__thiscall **)(struct CWalking *, int, _DWORD))(*(_DWORD *)v7 + 16))(v7, v2, 0);
+  v5 = v7->IdleWalk((CWalkingBase *)v7, (Y16X16 *)v2, 0);
   v6 = CSettler::WalkDir(a2, v5);
   CSoldierRole::EvaluateWalkAndRegister((CSoldierRole *)((char *)this - 48), a2, v6);
   return v6;
@@ -531,32 +535,32 @@ bool  CSoldierRole::SetFree(class CSettler * a2, int a3) {
   int v7; // [esp+Ch] [ebp-4h]
 
   v6 = ISettlerRole::HomeEntityId(this);
-  v4 = IEntity::EntityId((unsigned __int16 *)a2);
-  if ( v6 )
+  v4 = IEntity::EntityId(a2);
+  if ( v6 != 0 )
   {
-    if ( !IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1903, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
+    if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1903, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
     {
       __debugbreak();
     }
-    v7 = CMapObjectMgr::EntityPtr(v6);
-    if ( !v7 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1908, "pEntity != 0") == 1 )
+    v7 = (int)CMapObjectMgr::EntityPtr(v6);
+    if ( v7 == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1908, "pEntity != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( v7 )
+    if ( v7 != 0 )
     {
       (*(void (__thiscall **)(int, int))(*(_DWORD *)v7 + 64))(v7, v4);
     }
-    if ( ISettlerRole::HomeEntityId(this) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1915, "HomeEntityId() == 0") == 1 )
+    if ( ISettlerRole::HomeEntityId(this) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1915, "HomeEntityId() == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1917, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
+    if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1917, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
     {
       __debugbreak();
     }
   }
-  else if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1921, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
+  else if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1921, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) == 0") == 1 )
   {
     __debugbreak();
   }
@@ -565,7 +569,7 @@ bool  CSoldierRole::SetFree(class CSettler * a2, int a3) {
 
 
 // address=[0x158f390]
-// Decompiled from int __thiscall CSoldierRole::PostLoadInit(_DWORD *this, CPropertySet *a2)
+// Decompiled from int __thiscall CSoldierRole::PostLoadInit(CWarriorBehavior *this, IMovingEntity *a2)
 void  CSoldierRole::PostLoadInit(class CSettler * a2) {
   
   int v2; // esi
@@ -581,65 +585,65 @@ void  CSoldierRole::PostLoadInit(class CSettler * a2) {
   _BYTE v13[12]; // [esp+8h] [ebp-30h] BYREF
   int v14; // [esp+14h] [ebp-24h]
   int v15; // [esp+18h] [ebp-20h]
-  int v16; // [esp+1Ch] [ebp-1Ch]
+  void *v16; // [esp+1Ch] [ebp-1Ch]
   int v17; // [esp+20h] [ebp-18h]
   int v18; // [esp+24h] [ebp-14h]
-  _DWORD *v19; // [esp+28h] [ebp-10h]
+  CWarriorBehavior *v19; // [esp+28h] [ebp-10h]
   int v20; // [esp+34h] [ebp-4h]
 
   v19 = this;
   v18 = IEntity::PackedXY(a2);
-  v17 = IEntity::WorldIdx();
-  if ( v18 && (unsigned __int8)CWorldManager::InWorldPackedXY(v18) && !IEntity::FlagBits(a2, ENTITY_FLAG_ON_BOARD) )
+  v17 = ((int (__stdcall *)())IEntity::WorldIdx)();
+  if ( v18 != 0 && CWorldManager::InWorldPackedXY(v18) && IEntity::FlagBits(a2, ENTITY_FLAG_ON_BOARD) == 0 )
   {
     v2 = CWorldManager::MapObjectId(v17);
-    if ( v2 != IEntity::EntityId((unsigned __int16 *)a2) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 291, "g_cWorld.MapObjectId(iSettlerWorldIdx) == _pSettler->EntityId()") == 1 )
+    if ( v2 != IEntity::EntityId(a2) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 291, "g_cWorld.MapObjectId(iSettlerWorldIdx) == _pSettler->EntityId()") == 1 )
     {
       __debugbreak();
     }
     CWarMap::AddEntity(a2);
   }
-  else if ( (unsigned __int8)CWorldManager::InWorldPackedXY(v18) )
+  else if ( CWorldManager::InWorldPackedXY(v18) )
   {
     v3 = CWorldManager::MapObjectId(v17);
-    if ( v3 == IEntity::EntityId((unsigned __int16 *)a2) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 297, "!g_cWorld.InWorldPackedXY(iSettlerPackedXY) || (g_cWorld.MapObjectId(iSettlerWorldIdx) != _pSettler->EntityId())") == 1 )
+    if ( v3 == IEntity::EntityId(a2) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 297, "!g_cWorld.InWorldPackedXY(iSettlerPackedXY) || (g_cWorld.MapObjectId(iSettlerWorldIdx) != _pSettler->EntityId())") == 1 )
     {
       __debugbreak();
     }
   }
-  v9 = IEntity::Type((unsigned __int16 *)a2);
+  v9 = IEntity::Type(a2);
   v4 = IEntity::Race(a2);
-  v19[24] = CSettlerMgr::GetSettlerInfo(v4, v9);
-  if ( std::list<CEntityTask>::size(v19 + 21) )
+  v19[4].__vftable = (CWarriorBehavior_vtbl *)CSettlerMgr::GetSettlerInfo(v4, v9);
+  if ( std::list<CEntityTask>::size(&v19[3].m_sWarriorBehaviorData.m_iDestinationXYOrId) != 0 )
   {
-    IMovingEntity::SetToDoList(a2, (int)(v19 + 21));
+    IMovingEntity::SetToDoList(a2, (DWORD)&v19[3].m_sWarriorBehaviorData.m_iDestinationXYOrId);
   }
-  IMovingEntity::ResetToDoList(v12);
-  while ( *((_BYTE *)v19 + 12) )
+  ((void (__cdecl *)(_DWORD))IMovingEntity::ResetToDoList)(v12);
+  while ( LOBYTE(v19->m_sWarriorBehaviorData.m_iDestinationXYOrId) != 0 )
   {
     IMovingEntity::IncToDoListIter(a2);
-    --*((_BYTE *)v19 + 12);
+    --LOBYTE(v19->m_sWarriorBehaviorData.m_iDestinationXYOrId);
   }
-  if ( *((_BYTE *)v19 + 72) )
+  if ( LOBYTE(v19[3].__vftable) != 0 )
   {
-    v10 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](1);
+    v10 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(int))std::vector<unsigned short>::operator[])(1);
     v5 = IEntity::Race(a2);
-    v16 = CEntityToDoListMgr::SettlerJobList(v5, v10);
-    v15 = std::list<CEntityTask>::begin(v13);
+    v16 = (void *)((void *(__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v5, v10);
+    v15 = ((int (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v13);
     v14 = v15;
     v20 = 0;
     v6 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*(v15);
-    v19[20] = v6;
+    *(_DWORD *)&v19[3].m_sWarriorBehaviorData.m_uState = v6;
     v20 = -1;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v13);
   }
   else
   {
-    v19[20] = 0;
+    *(_DWORD *)&v19[3].m_sWarriorBehaviorData.m_uState = 0;
   }
-  v11 = *((_DWORD *)CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)(v19 + 12)) + 3);
-  WarriorBehaviorData = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)(v19 + 12));
-  (*(void (__thiscall **)(_DWORD *, CPropertySet *, _DWORD, int))v19[12])(v19 + 12, a2, *((_DWORD *)WarriorBehaviorData + 2), v11);
+  v11 = CWarriorBehavior::GetWarriorBehaviorData(v19 + 2)->m_iFlags;
+  WarriorBehaviorData = CWarriorBehavior::GetWarriorBehaviorData(v19 + 2);
+  ((void (__thiscall *)(CWarriorBehavior_vtbl **, IMovingEntity *, int, int))v19[2].WarriorInit)(&v19[2].__vftable, a2, WarriorBehaviorData->m_iDestinationXYOrId, v11);
   return CSoldierRole::CheckToDoList();
 }
 
@@ -653,7 +657,7 @@ void  CSoldierRole::CheckToDoList(void) {
   _BYTE v3[12]; // [esp+1Ch] [ebp-34h] BYREF
   std::_Iterator_base12 *v4; // [esp+28h] [ebp-28h]
   std::_Iterator_base12 *ActualIter; // [esp+2Ch] [ebp-24h]
-  char *v6; // [esp+30h] [ebp-20h]
+  CSettler *v6; // [esp+30h] [ebp-20h]
   std::_Iterator_base12 *v7; // [esp+34h] [ebp-1Ch]
   std::_Iterator_base12 *v8; // [esp+38h] [ebp-18h]
   CSoldierRole *v9; // [esp+3Ch] [ebp-14h]
@@ -664,28 +668,28 @@ void  CSoldierRole::CheckToDoList(void) {
 
   v9 = this;
   v12 = 0;
-  v6 = (char *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  std::list<CEntityTask>::begin(v3);
+  v6 = CSettlerMgr::operator[](this->m_uAttachedSettlerId);
+  ((void (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v3);
   v13 = 0;
   while ( 1 )
   {
-    v8 = (std::_Iterator_base12 *)std::list<CEntityTask>::end(v2);
+    v8 = (std::_Iterator_base12 *)((std::_Iterator_base12 *(__stdcall *)(_BYTE *))std::list<CEntityTask>::end)(v2);
     v7 = v8;
     LOBYTE(v13) = 1;
     v11 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=(v8);
     LOBYTE(v13) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v2);
-    if ( !v11 )
+    if ( v11 == 0 )
     {
       break;
     }
     ActualIter = (std::_Iterator_base12 *)IMovingEntity::GetActualIter(v6, (int)v1);
     v4 = ActualIter;
     LOBYTE(v13) = 2;
-    v10 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==(ActualIter);
+    v10 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==)(ActualIter);
     LOBYTE(v13) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v1);
-    if ( v10 )
+    if ( v10 != 0 )
     {
       v12 = 1;
     }
@@ -693,9 +697,9 @@ void  CSoldierRole::CheckToDoList(void) {
   }
   v13 = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v3);
-  if ( std::list<CEntityTask>::size((char *)v9 + 84) )
+  if ( std::list<CEntityTask>::size(&v9->m_vTasks) != 0 )
   {
-    if ( v12 )
+    if ( v12 != 0 )
     {
       OutputDebugStringA("CSoldierRole found\n");
     }
@@ -728,7 +732,7 @@ int  CSoldierRole::GetKindOfSelection(class CSettler * a2)const {
   
   int v3; // [esp+8h] [ebp-4h]
 
-  switch ( IEntity::Type((unsigned __int16 *)a2) )
+  switch ( IEntity::Type(a2) )
   {
     case 30:
     case 33:
@@ -769,22 +773,22 @@ int  CSoldierRole::GetKindOfSelection(class CSettler * a2)const {
   char v4; // al
   struct CWarriorBehavior::SWarriorBehaviorData *v5; // eax
   struct CWarriorBehavior::SWarriorBehaviorData *v6; // eax
-  int v8; // [esp+4h] [ebp-34h]
+  struct CEntityTask *v8; // [esp+4h] [ebp-34h]
   unsigned int v9; // [esp+8h] [ebp-30h] BYREF
-  int v10; // [esp+Ch] [ebp-2Ch]
+  struct CEntityTask *v10; // [esp+Ch] [ebp-2Ch]
   unsigned int v11; // [esp+10h] [ebp-28h] BYREF
-  int v12; // [esp+14h] [ebp-24h] BYREF
+  unsigned int v12; // [esp+14h] [ebp-24h] BYREF
   int pExceptionObject; // [esp+18h] [ebp-20h] BYREF
-  int v14; // [esp+1Ch] [ebp-1Ch]
+  unsigned int v14; // [esp+1Ch] [ebp-1Ch]
   unsigned int j; // [esp+20h] [ebp-18h]
   unsigned int i; // [esp+24h] [ebp-14h]
   _DWORD *v17; // [esp+28h] [ebp-10h]
   int v18; // [esp+34h] [ebp-4h]
 
   v17 = this;
-  ISelectableSettlerRole::ISelectableSettlerRole(a2);
+  ((void (__stdcall *)(int))ISelectableSettlerRole::ISelectableSettlerRole)(a2);
   v18 = 0;
-  CWarriorBehavior::CWarriorBehavior((CWarriorBehavior *)(v17 + 12));
+  CWarriorBehavior::CWarriorBehavior((CWarriorBehavior *)v17 + 2);
   *v17 = &CSoldierRole::_vftable_;
   v17[12] = &CSoldierRole::`vftable';
   std::list<CEntityTask>::list<CEntityTask>(v17 + 21);
@@ -794,20 +798,20 @@ int  CSoldierRole::GetKindOfSelection(class CSettler * a2)const {
   v14 = v12;
   if ( v12 == 1 )
   {
-    WarriorBehaviorData = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)(v17 + 12));
-    operator^<int>(a2, (int)WarriorBehaviorData + 8);
-    v3 = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)(v17 + 12));
-    operator^<unsigned int>(a2, (char *)v3 + 12);
+    WarriorBehaviorData = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)v17 + 2);
+    operator^<int>((struct std::istream *)a2, &WarriorBehaviorData->m_iDestinationXYOrId);
+    v3 = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)v17 + 2);
+    operator^<unsigned int>(a2, (unsigned int *)&v3->m_iFlags);
     operator^<unsigned int>(a2, &v11);
     for ( i = 0;
           i < v11;
           ++i )
     {
-      v10 = CEntityTask::Load(a2);
-      std::list<CEntityTask>::push_back(v10);
+      v10 = CEntityTask::Load((struct std::istream *)a2);
+      std::list<CEntityTask>::push_back((int)v10);
     }
-    operator^<unsigned char>(a2, v17 + 3);
-    operator^<unsigned char>(a2, v17 + 18);
+    operator^<unsigned char>(a2, (unsigned __int8 *)v17 + 12);
+    operator^<unsigned char>(a2, (unsigned __int8 *)v17 + 72);
     v4 = CStaticConfigVarInt::operator int(&CSoldierRole::s_iMaxNumberOfHealings);
     *((_BYTE *)v17 + 73) = v4;
     v17[19] = 0;
@@ -821,21 +825,21 @@ int  CSoldierRole::GetKindOfSelection(class CSettler * a2)const {
       CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
       _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
     }
-    v5 = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)(v17 + 12));
-    operator^<int>(a2, (int)v5 + 8);
-    v6 = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)(v17 + 12));
-    operator^<unsigned int>(a2, (char *)v6 + 12);
+    v5 = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)v17 + 2);
+    operator^<int>((struct std::istream *)a2, &v5->m_iDestinationXYOrId);
+    v6 = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)v17 + 2);
+    operator^<unsigned int>(a2, (unsigned int *)&v6->m_iFlags);
     operator^<unsigned int>(a2, &v9);
     for ( j = 0;
           j < v9;
           ++j )
     {
-      v8 = CEntityTask::Load(a2);
-      std::list<CEntityTask>::push_back(v8);
+      v8 = CEntityTask::Load((struct std::istream *)a2);
+      std::list<CEntityTask>::push_back((int)v8);
     }
-    operator^<unsigned char>(a2, v17 + 3);
-    operator^<unsigned char>(a2, v17 + 18);
-    operator^<unsigned char>(a2, (char *)v17 + 73);
+    operator^<unsigned char>(a2, (unsigned __int8 *)v17 + 12);
+    operator^<unsigned char>(a2, (unsigned __int8 *)v17 + 72);
+    operator^<unsigned char>(a2, (unsigned __int8 *)v17 + 73);
     operator^<unsigned int>(a2, v17 + 19);
   }
   return v17;
@@ -858,7 +862,7 @@ void  CSoldierRole::Store(std::ostream & a2) {
   _BYTE v12[12]; // [esp+38h] [ebp-4Ch] BYREF
   std::_Iterator_base12 *v13; // [esp+44h] [ebp-40h]
   std::_Iterator_base12 *ActualIter; // [esp+48h] [ebp-3Ch]
-  char *v15; // [esp+4Ch] [ebp-38h]
+  CSettler *v15; // [esp+4Ch] [ebp-38h]
   std::_Iterator_base12 *v16; // [esp+50h] [ebp-34h]
   std::_Iterator_base12 *v17; // [esp+54h] [ebp-30h]
   std::_Iterator_base12 *v18; // [esp+58h] [ebp-2Ch]
@@ -876,60 +880,60 @@ void  CSoldierRole::Store(std::ostream & a2) {
   int v30; // [esp+80h] [ebp-4h]
 
   v23 = this;
-  ISelectableSettlerRole::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))ISelectableSettlerRole::Store)(a2);
   v20 = 2;
-  operator^<unsigned int>(a2, &v20);
-  WarriorBehaviorData = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)(v23 + 12));
-  operator^<int>((int)a2, (int *)WarriorBehaviorData + 2);
-  v3 = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)(v23 + 12));
-  operator^<unsigned int>(a2, (int *)v3 + 3);
+  operator^<unsigned int>(a2, (unsigned int *)&v20);
+  WarriorBehaviorData = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)v23 + 2);
+  operator^<int>(a2, &WarriorBehaviorData->m_iDestinationXYOrId);
+  v3 = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)v23 + 2);
+  operator^<unsigned int>(a2, (unsigned int *)&v3->m_iFlags);
   LOBYTE(v29) = 0;
   v21 = std::list<CEntityTask>::size(v23 + 21);
-  operator^<unsigned int>(a2, &v21);
-  std::list<CEntityTask>::begin(v12);
+  operator^<unsigned int>(a2, (unsigned int *)&v21);
+  ((void (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v12);
   v30 = 0;
   while ( 1 )
   {
-    v19 = (std::_Iterator_base12 *)std::list<CEntityTask>::end(v10);
+    v19 = (std::_Iterator_base12 *)((std::_Iterator_base12 *(__stdcall *)(_BYTE *))std::list<CEntityTask>::end)(v10);
     v18 = v19;
     LOBYTE(v30) = 1;
     v28 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=(v19);
     LOBYTE(v30) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v10);
-    if ( !v28 )
+    if ( v28 == 0 )
     {
       break;
     }
-    v22 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(v12, v6, v7);
+    v22 = ((int (__thiscall *)(_BYTE *, int, int))std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->)(v12, v6, v7);
     (*(void (__thiscall **)(int, struct std::ostream *))(*(_DWORD *)v22 + 4))(v22, a2);
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v12);
   }
   v30 = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v12);
-  v15 = (char *)CSettlerMgr::operator[](*((unsigned __int16 *)v23 + 9));
-  if ( v21 )
+  v15 = CSettlerMgr::operator[](*((unsigned __int16 *)v23 + 9));
+  if ( v21 != 0 )
   {
-    std::list<CEntityTask>::begin(v11);
+    ((void (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v11);
     v30 = 2;
     while ( 1 )
     {
-      v17 = (std::_Iterator_base12 *)std::list<CEntityTask>::end(v9);
+      v17 = (std::_Iterator_base12 *)((std::_Iterator_base12 *(__stdcall *)(_BYTE *))std::list<CEntityTask>::end)(v9);
       v16 = v17;
       LOBYTE(v30) = 3;
       v27 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=(v17);
       LOBYTE(v30) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v9);
-      if ( !v27 )
+      if ( v27 == 0 )
       {
         break;
       }
       ActualIter = (std::_Iterator_base12 *)IMovingEntity::GetActualIter(v15, (int)v8);
       v13 = ActualIter;
       LOBYTE(v30) = 4;
-      v26 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==(ActualIter);
+      v26 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==)(ActualIter);
       LOBYTE(v30) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v8);
-      if ( v26 )
+      if ( v26 != 0 )
       {
         break;
       }
@@ -944,19 +948,19 @@ void  CSoldierRole::Store(std::ostream & a2) {
   {
     LOBYTE(v29) = 0;
   }
-  operator^<unsigned char>(a2, (int)&v29);
-  if ( v23[20] )
+  operator^<unsigned char>(a2, (unsigned __int8 *)&v29);
+  if ( v23[20] != 0 )
   {
     v25 = 1;
-    operator^<unsigned char>(a2, (int)&v25);
+    operator^<unsigned char>(a2, (unsigned __int8 *)&v25);
   }
   else
   {
     v24 = 0;
-    operator^<unsigned char>(a2, (int)&v24);
+    operator^<unsigned char>(a2, (unsigned __int8 *)&v24);
   }
-  operator^<unsigned char>(a2, (int)v23 + 73);
-  operator^<unsigned int>(a2, v23 + 19);
+  operator^<unsigned char>(a2, (unsigned __int8 *)v23 + 73);
+  operator^<unsigned int>(a2, (unsigned int *)v23 + 19);
   return CSoldierRole::CheckToDoList();
 }
 
@@ -1010,11 +1014,11 @@ int  CSoldierRole::GetNumberOfHealings(void) {
 // Decompiled from void __thiscall CSoldierRole::~CSoldierRole(CSoldierRole *this)
  CSoldierRole::~CSoldierRole(void) {
   
-  *(_DWORD *)this = &CSoldierRole::_vftable_;
-  *((_DWORD *)this + 12) = &CSoldierRole::`vftable';
-  if ( *((_DWORD *)this + 20) )
+  this->ISelectableSettlerRole::ISettlerRole::CPersistence::__vftable = (CSoldierRole_vtbl *)&CSoldierRole::_vftable_;
+  this->CWarriorBehavior::__vftable = (CWarriorBehavior_vtbl *)&CSoldierRole::`vftable';
+  if ( this->m_iU3 != 0 )
   {
-    *((_DWORD *)this + 20) = 0;
+    this->m_iU3 = 0;
   }
   std::list<CEntityTask>::~list<CEntityTask>();
   ISelectableSettlerRole::~ISelectableSettlerRole(this);
@@ -1026,7 +1030,7 @@ int  CSoldierRole::GetNumberOfHealings(void) {
 void  CSoldierRole::SoldierMagicIdleWalk(class CSettler * a2) {
   
   int v2; // eax
-  int v4; // [esp+0h] [ebp-1Ch]
+  unsigned int v4; // [esp+0h] [ebp-1Ch]
   int v5; // [esp+4h] [ebp-18h]
   struct CWalking *v6; // [esp+Ch] [ebp-10h]
   int v7; // [esp+10h] [ebp-Ch]
@@ -1035,13 +1039,13 @@ void  CSoldierRole::SoldierMagicIdleWalk(class CSettler * a2) {
   v8 = IEntity::Flags(a2);
   if ( ((unsigned int)dword_800000 & v8) != 0 )
   {
-    IMovingEntity::SetDisplacementCosts(10);
-    *((_BYTE *)this + 5) = 8;
-    IAnimatedEntity::RegisterForLogicUpdate(8);
+    ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(10);
+    this->m_uSettlerWalk = 8;
+    ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(8);
   }
   else
   {
-    IMovingEntity::SetDisplacementCosts(0);
+    ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(0);
     if ( (v8 & 0x400000) != 0 )
     {
       v7 = 0x10000000;
@@ -1052,7 +1056,7 @@ void  CSoldierRole::SoldierMagicIdleWalk(class CSettler * a2) {
     }
     v6 = IMovingEntity::Walking(a2);
     v2 = IEntity::PackedXY(a2);
-    v5 = (*(int (__thiscall **)(struct CWalking *, int, int))(*(_DWORD *)v6 + 16))(v6, v2, v7);
+    v5 = v6->IdleWalk((CWalkingBase *)v6, (Y16X16 *)v2, v7);
     v4 = CSettler::WalkDir(a2, v5);
     CSoldierRole::EvaluateWalkAndRegister(this, a2, v4);
   }
@@ -1067,7 +1071,7 @@ void  CSoldierRole::GetNextJob(class CSettler * a2) {
   int result; // eax
   int v3; // [esp+0h] [ebp-40h]
   _BYTE v4[12]; // [esp+4h] [ebp-3Ch] BYREF
-  Grid *v5; // [esp+10h] [ebp-30h]
+  int v5; // [esp+10h] [ebp-30h]
   int v6; // [esp+14h] [ebp-2Ch]
   int v7; // [esp+18h] [ebp-28h]
   int v8; // [esp+1Ch] [ebp-24h]
@@ -1079,24 +1083,24 @@ void  CSoldierRole::GetNextJob(class CSettler * a2) {
   int v14; // [esp+3Ch] [ebp-4h]
 
   v13 = this;
-  result = *(unsigned __int8 *)(IMovingEntity::GetActualTask(a2) + 4);
+  result = (unsigned __int8)IMovingEntity::GetActualTask((IMovingEntity *)a2)->m_iTask;
   if ( result == 17 )
   {
-    if ( *((_DWORD *)v13 + 20) )
+    if ( v13->m_iU3 != 0 )
     {
-      *((_DWORD *)v13 + 20) = 0;
-      return (*(int (__thiscall **)(CSoldierRole *, void **))(*(_DWORD *)v13 + 40))(v13, a2);
+      v13->m_iU3 = 0;
+      return ((int (__thiscall *)(CSoldierRole *, void **))v13->ISelectableSettlerRole::ISettlerRole::CPersistence::__vftable[2].j_?WarriorInit@CWarriorBehavior@@UAEXAAVIMovingEntity@@HH@Z)(v13, a2);
     }
   }
   else
   {
-    v5 = (Grid *)*(__int16 *)(std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(a2 + 22) + 10);
-    v6 = *(__int16 *)(std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(a2 + 22) + 12);
+    v5 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(a2 + 22)->m_iX;
+    v6 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(a2 + 22)->m_iY;
     IMovingEntity::IncToDoListIter(a2);
-    ActualTask = IMovingEntity::GetActualTask(a2);
+    ActualTask = (int)IMovingEntity::GetActualTask((IMovingEntity *)a2);
     if ( *(_BYTE *)(ActualTask + 4) == 17 && (*(_WORD *)(ActualTask + 10) & 1) != 0 && (unsigned int)std::list<CEntityTask>::size(a2[21]) > 2 )
     {
-      v10 = std::list<CEntityTask>::begin(v4);
+      v10 = ((int (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v4);
       v9 = v10;
       v14 = 0;
       v11 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*(v10);
@@ -1104,20 +1108,20 @@ void  CSoldierRole::GetNextJob(class CSettler * a2) {
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v4);
       v7 = *(__int16 *)(v11 + 10);
       v8 = *(__int16 *)(v11 + 12);
-      if ( (int)Grid::Distance(v5, v6, v7, v8) > 3 )
+      if ( Grid::Distance(v5, v6, v7, v8) > 3 )
       {
-        IMovingEntity::ResetToDoList(v3);
+        ((void (__cdecl *)(_DWORD))IMovingEntity::ResetToDoList)(v3);
       }
     }
-    *((_DWORD *)v13 + 20) = 0;
-    return (*(int (__thiscall **)(CSoldierRole *, void **))(*(_DWORD *)v13 + 40))(v13, a2);
+    v13->m_iU3 = 0;
+    return ((int (__thiscall *)(CSoldierRole *, void **))v13->ISelectableSettlerRole::ISettlerRole::CPersistence::__vftable[2].j_?WarriorInit@CWarriorBehavior@@UAEXAAVIMovingEntity@@HH@Z)(v13, a2);
   }
   return result;
 }
 
 
 // address=[0x1590040]
-// Decompiled from int __thiscall CSoldierRole::TakeJob(ISettlerRole *this, CPaneContainer *a2)
+// Decompiled from int __thiscall CSoldierRole::TakeJob(ISettlerRole *this, struct CSettler *a2)
 void  CSoldierRole::TakeJob(class CSettler * a2) {
   
   const struct CEntityTask *v2; // eax
@@ -1141,7 +1145,7 @@ void  CSoldierRole::TakeJob(class CSettler * a2) {
   int v20; // [esp-4h] [ebp-1CCh]
   int v21; // [esp-4h] [ebp-1CCh]
   int v22; // [esp+4h] [ebp-1C4h]
-  int v23; // [esp+Ch] [ebp-1BCh]
+  CVehicle *v23; // [esp+Ch] [ebp-1BCh]
   unsigned __int8 *v24; // [esp+10h] [ebp-1B8h]
   int NextDestination; // [esp+14h] [ebp-1B4h]
   int v26; // [esp+18h] [ebp-1B0h]
@@ -1150,25 +1154,25 @@ void  CSoldierRole::TakeJob(class CSettler * a2) {
 
   v22 = IAnimatedEntity::JobPart(a2);
   v26 = IAnimatedEntity::Frame(a2);
-  if ( *((_DWORD *)this + 20) )
+  if ( *((_DWORD *)this + 20) != 0 )
   {
     ISettlerRole::InitCommonTaskValues(this, a2, *((const struct CEntityTask **)this + 20));
   }
   else
   {
-    v2 = (const struct CEntityTask *)std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*((char *)a2 + 88);
+    v2 = (const struct CEntityTask *)std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator*(&a2->m_cCurrentToDoItemIter);
     ISettlerRole::InitCommonTaskValues(this, a2, v2);
   }
-  switch ( *((_BYTE *)this + 4) )
+  switch ( this->m_iTask )
   {
     case 7:
     case 8:
     case 9:
-      if ( *((_BYTE *)this + 4) == 9 )
+      if ( this->m_iTask == 9 )
       {
         v27 = &dword_420320[229176];
       }
-      else if ( *((_BYTE *)this + 4) == 8 )
+      else if ( this->m_iTask == 8 )
       {
         v27 = dword_200000;
       }
@@ -1176,104 +1180,104 @@ void  CSoldierRole::TakeJob(class CSettler * a2) {
       {
         v27 = dword_100000;
       }
-      *((_BYTE *)this + 4) = 27;
-      IMovingEntity::SetDisplacementCosts(5);
-      if ( v22 == IAnimatedEntity::JobPart(a2) && v26 >= 1 && v26 < *((unsigned __int8 *)this + 7) )
+      this->m_iTask = 27;
+      ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(5);
+      if ( v22 == IAnimatedEntity::JobPart(a2) && v26 >= 1 && v26 < this->m_uCycleFrames )
       {
-        IAnimatedEntity::SetFrame(v26);
+        ((void (__stdcall *)(char))IAnimatedEntity::SetFrame)(v26);
       }
       else
       {
-        IAnimatedEntity::SetFrame(1);
+        ((void (__stdcall *)(char))IAnimatedEntity::SetFrame)(1);
       }
-      *((_BYTE *)this + 5) = 0x80;
+      this->m_uSettlerWalk = 0x80;
       v5 = IEntity::PackedXY(a2);
-      CGroupDestinations::CGroupDestinations((CGroupDestinations *)v29, *((__int16 *)this + 7), *((__int16 *)this + 8), 1, 1, v5);
-      NextDestination = CGroupDestinations::GetNextDestination(v29);
-      *((_WORD *)this + 7) = Y16X16::UnpackXFast(NextDestination);
-      *((_WORD *)this + 8) = Y16X16::UnpackYFast(NextDestination);
-      v6 = Y16X16::PackXYFast(*((__int16 *)this + 7), *((__int16 *)this + 8));
-      (**((void (__thiscall ***)(_DWORD *, CPaneContainer *, int, int *))this + 12))((_DWORD *)this + 12, a2, v6, v27);
+      CGroupDestinations::CGroupDestinations((CGroupDestinations *)v29, this->m_iDestinationOffsetX, this->m_iDestinationOffsetY, 1, 1, v5);
+      NextDestination = CGroupDestinations::GetNextDestination((CGroupDestinations *)v29);
+      this->m_iDestinationOffsetX = Y16X16::UnpackXFast(NextDestination);
+      this->m_iDestinationOffsetY = Y16X16::UnpackYFast(NextDestination);
+      v6 = Y16X16::PackXYFast(this->m_iDestinationOffsetX, this->m_iDestinationOffsetY);
+      (**((void (__thiscall ***)(char *, struct CSettler *, int, int *))this + 12))((char *)this + 48, a2, v6, v27);
       result = CSoldierRole::CheckToDoList();
       break;
     case 0xA:
-      *((_BYTE *)this + 4) = 6;
-      *((_BYTE *)this + 4) = 27;
-      IMovingEntity::SetDisplacementCosts(5);
-      IAnimatedEntity::RegisterForLogicUpdate(1);
-      *((_BYTE *)a2 + 36) = 1;
-      *((_BYTE *)this + 5) = 1;
-      v17 = IEntity::Type((unsigned __int16 *)a2);
+      this->m_iTask = 6;
+      this->m_iTask = 27;
+      ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(5);
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
+      a2->m_iFrame = 1;
+      this->m_uSettlerWalk = 1;
+      v17 = IEntity::Type(a2);
       v4 = IEntity::Race(a2);
-      if ( CGfxManager::GetSettlerFirstJob(v4, v17) != *((unsigned __int16 *)a2 + 19) )
+      if ( CGfxManager::GetSettlerFirstJob(v4, v17) != a2->m_iJobPart )
       {
-        *((_BYTE *)this + 5) = 1;
+        this->m_uSettlerWalk = 1;
       }
       goto LABEL_8;
     case 0x10:
     case 0x22:
-      if ( !*((_WORD *)this + 17) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1048, "m_uEntityId > 0") == 1 )
+      if ( this->m_uEntityId == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1048, "m_uEntityId > 0") == 1 )
       {
         __debugbreak();
       }
-      if ( *((char *)this + 6) <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1049, "m_iJobCounter > 0") == 1 )
+      if ( this->m_iWalkspeed <= 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1049, "m_iJobCounter > 0") == 1 )
       {
         __debugbreak();
       }
-      IMovingEntity::SetDisplacementCosts(10);
-      IAnimatedEntity::RegisterForLogicUpdate(*((char *)this + 6));
-      v14 = CMapObjectMgr::Entity(*((unsigned __int16 *)this + 17));
+      ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(10);
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(this->m_iWalkspeed);
+      v14 = CMapObjectMgr::Entity(this->m_uEntityId);
       v21 = IEntity::PackedXY(v14);
       v15 = (Y16X16 *)IEntity::PackedXY(a2);
-      v16 = Y16X16::DirectionFast(v15, v21);
+      v16 = Y16X16::DirectionFast((int)v15, v21);
       IMovingEntity::SetDirection(a2, v16);
       result = CSoldierRole::CheckToDoList();
       break;
     case 0x11:
-      *((_BYTE *)this + 4) = 27;
-      IMovingEntity::SetDisplacementCosts(0);
-      IAnimatedEntity::RegisterForLogicUpdate(1);
-      (**((void (__thiscall ***)(_DWORD *, CPaneContainer *, int, _DWORD))this + 12))((_DWORD *)this + 12, a2, -1, 0);
+      this->m_iTask = 27;
+      ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(0);
+      ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
+      (**((void (__thiscall ***)(char *, struct CSettler *, int, _DWORD))this + 12))((char *)this + 48, a2, -1, 0);
       result = CSoldierRole::CheckToDoList();
       break;
     case 0x18:
-      IMovingEntity::SetDisplacementCosts(10);
-      v18 = IEntity::ID();
+      ((void (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(10);
+      v18 = ((int (__stdcall *)())IEntity::ID)();
       LastLogicUpdateTick = IAnimatedEntity::GetLastLogicUpdateTick(a2);
       CMapObjectMgr::UnRegisterFromLogicUpdate(g_pMapObjectMgr, LastLogicUpdateTick, v18);
       CWarMap::RemoveEntity(a2);
-      v8 = IEntity::WorldIdx();
+      v8 = ((int (__stdcall *)())IEntity::WorldIdx)();
       v9 = CWorldManager::SettlerId(v8);
-      if ( v9 != IEntity::ID() && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1006, "g_cWorld.SettlerId(_pSettler->WorldIdx()) == _pSettler->ID()") == 1 )
+      if ( v9 != ((int (__stdcall *)())IEntity::ID)() && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1006, "g_cWorld.SettlerId(_pSettler->WorldIdx()) == _pSettler->ID()") == 1 )
       {
         __debugbreak();
       }
-      v10 = IEntity::WorldIdx();
+      v10 = ((int (__stdcall *)())IEntity::WorldIdx)();
       CWorldManager::SetSettlerId(v10, 0);
-      if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1013, "_pSettler->FlagBits( ENTITY_FLAG_SELECTABLE ) == 0") == 1 )
+      if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1013, "_pSettler->FlagBits( ENTITY_FLAG_SELECTABLE ) == 0") == 1 )
       {
         __debugbreak();
       }
       IEntity::SetFlagBits(a2, ENTITY_FLAG_ON_BOARD);
-      v24 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(*((unsigned __int16 *)this + 16));
-      if ( v24 )
+      v24 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(this->m_uHomeEntityId);
+      if ( v24 != 0 )
       {
-        switch ( IEntity::ObjType(v24) )
+        switch ( IEntity::ObjType((IEntity *)v24) )
         {
-          case 2:
-          case 4:
-            v23 = CVehicleMgr::operator[](*((unsigned __int16 *)this + 16));
-            v12 = IEntity::ID();
-            (*(void (__thiscall **)(int, int))(*(_DWORD *)v23 + 128))(v23, v12);
+          case SHIP_OBJ:
+          case CATAPULT_OBJ:
+            v23 = CVehicleMgr::operator[](this->m_uHomeEntityId);
+            v12 = ((int (__stdcall *)())IEntity::ID)();
+            v23->EntityEnter(v23, v12);
             break;
-          case 8:
-            v19 = IEntity::ID();
-            v11 = (CBuilding *)CBuildingMgr::operator[](*((unsigned __int16 *)this + 16));
+          case BUILDING_OBJ:
+            v19 = ((int (__stdcall *)())IEntity::ID)();
+            v11 = (CBuilding *)((CBuilding *(__stdcall *)(_DWORD))CBuildingMgr::operator[])(this->m_uHomeEntityId);
             CBuilding::SettlerEnter(v11, v19);
             break;
-          case 64:
-            v20 = IEntity::ID();
-            ManakopterPtr = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, *((unsigned __int16 *)this + 16));
+          case DECO_OBJ:
+            v20 = ((int (__stdcall *)())IEntity::ID)();
+            ManakopterPtr = (struct CManakopter *)CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, this->m_uHomeEntityId);
             CManakopter::SettlerEnter(ManakopterPtr, v20);
             break;
           default:
@@ -1282,7 +1286,7 @@ void  CSoldierRole::TakeJob(class CSettler * a2) {
       }
       else
       {
-        (*(void (__thiscall **)(ISettlerRole *, CPaneContainer *, int))(*(_DWORD *)this + 64))(this, a2, -1);
+        this->SetFree(this, a2, -1);
       }
 LABEL_8:
       result = CSoldierRole::CheckToDoList();
@@ -1328,7 +1332,7 @@ void  CSoldierRole::Init(class CSettler * a2) {
 
 
 // address=[0x1590740]
-// Decompiled from void __thiscall CSoldierRole::ConvertEventIntoGoal(int this, CPropertySet *a2, const struct CEntityEvent *a3)
+// Decompiled from void __thiscall CSoldierRole::ConvertEventIntoGoal(int this, struct CSettler *a2, const struct CEntityEvent *a3)
 void  CSoldierRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
@@ -1342,7 +1346,7 @@ void  CSoldierRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
   int v11; // esi
   int v12; // eax
   int v13; // eax
-  _DWORD *v14; // eax
+  CBuilding *v14; // eax
   int v15; // eax
   int v16; // eax
   int v17; // eax
@@ -1399,67 +1403,67 @@ void  CSoldierRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
   int v68; // [esp+4Ch] [ebp-20h]
   unsigned __int8 *BuildingPtr; // [esp+50h] [ebp-1Ch]
   struct CManakopter *v70; // [esp+58h] [ebp-14h]
-  _DWORD *v71; // [esp+5Ch] [ebp-10h]
+  CVehicle *v71; // [esp+5Ch] [ebp-10h]
   int v72; // [esp+60h] [ebp-Ch]
   int i; // [esp+64h] [ebp-8h]
 
-  switch ( *((_DWORD *)a3 + 1) )
+  switch ( a3->m_iEvent )
   {
     case 1:
-      if ( ISettlerRole::HomeEntityId(this) )
+      if ( ISettlerRole::HomeEntityId((ISettlerRole *)this) != 0 )
       {
-        v17 = ISettlerRole::HomeEntityId(this);
+        v17 = ISettlerRole::HomeEntityId((ISettlerRole *)this);
         CSoldierRole::ComeToWork((CSoldierRole *)this, a2, v17);
       }
       else
       {
-        (*(void (__thiscall **)(int, CPropertySet *, int))(*(_DWORD *)this + 64))(this, a2, -1);
+        (*(void (__thiscall **)(int, struct CSettler *, int))(*(_DWORD *)this + 64))(this, a2, -1);
       }
       break;
     case 7:
     case 9:
-      if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) )
+      if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) == 0 )
       {
         IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable);
         CSettler::TakeWaitList(a2);
-        (**(void (__thiscall ***)(int, CPropertySet *, int, _DWORD))(this + 48))(this + 48, a2, -1, 0);
+        (**(void (__thiscall ***)(int, struct CSettler *, int, _DWORD))(this + 48))(this + 48, a2, -1, 0);
         *(_BYTE *)(this + 4) = 27;
-        v44 = *((_DWORD *)a3 + 3);
-        v35 = IEntity::EntityId((unsigned __int16 *)a2);
-        v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v3, v35, v44);
+        v44 = a3->m_iDataA;
+        v35 = IEntity::EntityId(a2);
+        v3 = IEntity::OwnerId(a2);
+        g_pAI->PostAIEvent(g_pAI, 21, v3, v35, v44);
       }
       break;
     case 0x11:
-      if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) )
+      if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) == 0 )
       {
         goto LABEL_12;
       }
-      if ( *((_DWORD *)a3 + 2) == 13 && !ISelectableSettlerRole::ProcessGoToPosFerry((ISelectableSettlerRole *)this, a2, a3) )
+      if ( a3->m_iType == 13 && !ISelectableSettlerRole::ProcessGoToPosFerry((ISelectableSettlerRole *)this, a2, a3) )
       {
-        v55 = *((_DWORD *)a3 + 3);
-        v58 = *((_DWORD *)a3 + 4);
-        v66 = *((_DWORD *)a3 + 5);
+        v55 = a3->m_iDataA;
+        v58 = a3->m_iDataB;
+        v66 = a3->m_iDataC;
         v65 = Y16X16::UnpackXFast(v66);
         v64 = Y16X16::UnpackYFast(v66);
         if ( v66 <= 0 )
         {
           goto LABEL_33;
         }
-        if ( ISettlerRole::HomeEntityId(this) )
+        if ( ISettlerRole::HomeEntityId((ISettlerRole *)this) != 0 )
         {
           goto LABEL_33;
         }
-        if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) )
+        if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selectable) == 0 )
         {
           goto LABEL_33;
         }
-        if ( !CWorldManager::FlagBits(v65, v64, 1u) )
+        if ( CWorldManager::FlagBits(v65, v64, 1u) == 0 )
         {
           goto LABEL_33;
         }
         v7 = CWorldManager::OwnerId(v65, v64);
-        if ( v7 != IEntity::OwnerId((unsigned __int8 *)a2) )
+        if ( v7 != IEntity::OwnerId(a2) )
         {
           goto LABEL_33;
         }
@@ -1471,36 +1475,33 @@ void  CSoldierRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent
         {
           v59 = v65 + CSpiralOffsets::DeltaX(i);
           v60 = v64 + CSpiralOffsets::DeltaY(i);
-          if ( (unsigned __int8)CWorldManager::InWorld(v59, v60) )
+          if ( CWorldManager::InWorld(v59, v60) )
           {
             v63 = CWorldManager::MapObjectId(v59, v60);
-            if ( v63 )
+            if ( v63 != 0 )
             {
-              BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v63);
-              if ( BuildingPtr )
+              BuildingPtr = (unsigned __int8 *)CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v63);
+              if ( BuildingPtr != 0 && ((int (__stdcall *)())IEntity::WarriorType)() == 12 )
               {
-                if ( IEntity::WarriorType() == 12 )
+                v8 = IEntity::OwnerId((IEntity *)BuildingPtr);
+                if ( v8 == IEntity::OwnerId(a2) )
                 {
-                  v8 = IEntity::OwnerId(BuildingPtr);
-                  if ( v8 == IEntity::OwnerId((unsigned __int8 *)a2) )
+                  v9 = CBuilding::EnsignPackedXY(BuildingPtr);
+                  v10 = CWorldManager::Index(v9);
+                  v11 = ITiling::SectorId(v10);
+                  v12 = IEntity::PackedXY(a2);
+                  v13 = CWorldManager::Index(v12);
+                  if ( v11 == ITiling::SectorId(v13) )
                   {
-                    v9 = CBuilding::EnsignPackedXY(BuildingPtr);
-                    v10 = CWorldManager::Index(v9);
-                    v11 = ITiling::SectorId(v10);
-                    v12 = IEntity::PackedXY(a2);
-                    v13 = CWorldManager::Index(v12);
-                    if ( v11 == ITiling::SectorId(v13) )
-                    {
-                      v72 = v63;
-                      break;
-                    }
+                    v72 = v63;
+                    break;
                   }
                 }
               }
             }
           }
         }
-        if ( v72 && (v14 = (_DWORD *)CBuildingMgr::operator[](v72), v56 = (CMilitaryBuildingRole *)CBuilding::Role(v14), v15 = IEntity::Type((unsigned __int16 *)a2), v16 = CSettlerMgr::SettlerWarriorType(v15), CMilitaryBuildingRole::HaveFreeSlots(v56, v16)) )
+        if ( v72 != 0 && (v14 = (CBuilding *)((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(v72), v56 = (CMilitaryBuildingRole *)CBuilding::Role(v14), v15 = IEntity::Type(a2), v16 = CSettlerMgr::SettlerWarriorType(v15), CMilitaryBuildingRole::HaveFreeSlots(v56, v16) != 0) )
         {
           CSettler::AttachToBuilding(a2, v72);
           CSoldierRole::ComeToWork((CSoldierRole *)this, a2, v72);
@@ -1516,97 +1517,97 @@ LABEL_33:
       }
       break;
     case 0x18:
-      v47 = IEntity::Type((unsigned __int16 *)a2);
+      v47 = IEntity::Type(a2);
       v18 = IEntity::Race(a2);
       CSettlerMgr::GetSettlerInfo(v18, v47);
-      v71 = (_DWORD *)CVehicleMgr::operator[](*((_DWORD *)a3 + 3));
-      v19 = IEntity::ID();
-      v62 = (*(int (__thiscall **)(_DWORD *, int, int))(*v71 + 140))(v71, 1, v19);
-      if ( v62 && IEntity::FlagBits(v71, (EntityFlag)&loc_3000000) )
+      v71 = CVehicleMgr::operator[](a3->m_iDataA);
+      v19 = ((int (__stdcall *)())IEntity::ID)();
+      v62 = v71->GetMeetingPointXY(v71, SETTLER_OBJ, v19);
+      if ( v62 != 0 && IEntity::FlagBits(v71, (EntityFlag)&loc_3000000) != 0 )
       {
         v38 = Y16X16::UnpackYFast(v62);
         v20 = Y16X16::UnpackXFast(v62);
         CSoldierRole::NewDestinationEx((CSoldierRole *)this, a2, v20, v38, 0);
-        v48 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](0);
-        v39 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](0);
+        v48 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))std::vector<unsigned short>::operator[])(0);
+        v39 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))std::vector<unsigned short>::operator[])(0);
         v21 = IEntity::Race(a2);
-        v22 = CEntityToDoListMgr::SettlerJobList(v21, v39);
-        (*(void (__thiscall **)(CPropertySet *, int, int))(*(_DWORD *)a2 + 112))(a2, v22, v48);
-        v23 = IEntity::OwnerId((unsigned __int8 *)a2);
+        v22 = ((int (__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v21, v39);
+        a2->NewToDoList(a2, v22, v48);
+        v23 = IEntity::OwnerId(a2);
         if ( v23 == CPlayerManager::GetLocalPlayerId() )
         {
-          v24 = IEntity::ID();
+          v24 = ((int (__stdcall *)())IEntity::ID)();
           CInputProcessor::DeSelectEntity(&g_cInputProcessor, v24);
         }
-        v25 = IEntity::ID();
-        (*(void (__thiscall **)(_DWORD *, int))(*v71 + 164))(v71, v25);
+        v25 = ((int (__stdcall *)())IEntity::ID)();
+        v71->Attach(v71, v25);
         IEntity::ClearFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
-        v26 = IEntity::ID();
-        (*(void (__thiscall **)(void *, int))(*(_DWORD *)g_pGroupMgr + 28))(g_pGroupMgr, v26);
+        v26 = ((int (__stdcall *)())IEntity::ID)();
+        ((void (__thiscall *)(CGroupMgr *, int))g_pGroupMgr->DetachEntityFromAllGroups)(g_pGroupMgr, v26);
         v49 = *(unsigned __int16 *)(this + 32);
-        v40 = IEntity::ID();
-        v27 = IEntity::OwnerId((unsigned __int8 *)a2);
-        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v27, v40, v49);
+        v40 = ((int (__stdcall *)())IEntity::ID)();
+        v27 = IEntity::OwnerId(a2);
+        g_pAI->PostAIEvent(g_pAI, 18, v27, v40, v49);
       }
       else
       {
         IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable);
-        v50 = IEntity::Type((unsigned __int16 *)a2);
-        v41 = IEntity::Type((unsigned __int16 *)a2);
+        v50 = IEntity::Type(a2);
+        v41 = IEntity::Type(a2);
         v28 = IEntity::Race(a2);
-        v29 = CEntityToDoListMgr::SettlerJobList(v28, v41);
-        (*(void (__thiscall **)(CPropertySet *, int, int))(*(_DWORD *)a2 + 112))(a2, v29, v50);
+        v29 = ((int (__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v28, v41);
+        a2->NewToDoList(a2, v29, v50);
       }
       break;
     case 0x19:
-      v61 = *((_DWORD *)a3 + 4);
+      v61 = a3->m_iDataB;
       v45 = Y16X16::UnpackYFast(v61);
       v36 = Y16X16::UnpackXFast(v61);
-      v4 = IEntity::ID();
-      CSettlerMgr::SearchSpaceForSettler((CSettlerMgr *)g_cSettlerMgr, v4, v36, v45);
+      v4 = ((int (__stdcall *)())IEntity::ID)();
+      CSettlerMgr::SearchSpaceForSettler(&g_cSettlerMgr, v4, v36, v45);
       CWarMap::AddEntity(a2);
       IEntity::SetFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Visible);
       IEntity::ClearFlagBits(a2, ENTITY_FLAG_ON_BOARD);
-      (**(void (__thiscall ***)(int, CPropertySet *, int, _DWORD))(this + 48))(this + 48, a2, -1, 0);
+      (**(void (__thiscall ***)(int, struct CSettler *, int, _DWORD))(this + 48))(this + 48, a2, -1, 0);
       *(_BYTE *)(this + 4) = 27;
       if ( IEntity::Race(a2) != 3 )
       {
         v46 = *(unsigned __int16 *)(this + 32);
-        v37 = IEntity::ID();
-        v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-        (*(void (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 21, v5, v37, v46);
+        v37 = ((int (__stdcall *)())IEntity::ID)();
+        v5 = IEntity::OwnerId(a2);
+        g_pAI->PostAIEvent(g_pAI, 21, v5, v37, v46);
       }
-      if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) )
+      if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) != 0 )
       {
-        ManakopterPtr = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, *(unsigned __int16 *)(this + 32));
-        if ( ManakopterPtr )
+        ManakopterPtr = (struct CManakopter *)CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, *(unsigned __int16 *)(this + 32));
+        if ( ManakopterPtr != 0 )
         {
-          v6 = IEntity::ID();
+          v6 = ((int (__stdcall *)())IEntity::ID)();
           (*(void (__thiscall **)(struct CManakopter *, int))(*(_DWORD *)ManakopterPtr + 64))(ManakopterPtr, v6);
         }
       }
       break;
     case 0x1C:
-      v51 = IEntity::Type((unsigned __int16 *)a2);
+      v51 = IEntity::Type(a2);
       v30 = IEntity::Race(a2);
       CSettlerMgr::GetSettlerInfo(v30, v51);
-      v70 = CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, *((_DWORD *)a3 + 3));
-      if ( v70 && !IEntity::FlagBits(v70, (EntityFlag)&MEMORY[0x4000000]) )
+      v70 = (struct CManakopter *)CFlyingMgr::GetManakopterPtr((CFlyingMgr *)g_cFlyingMgr, a3->m_iDataA);
+      if ( v70 != 0 && IEntity::FlagBits((IEntity *)v70, (EntityFlag)&s_iMsgTracer2.m_aMessages[15456]) == 0 )
       {
-        v68 = IEntity::PackedXY(v70);
-        if ( v68 )
+        v68 = IEntity::PackedXY((IEntity *)v70);
+        if ( v68 != 0 )
         {
           v42 = Y16X16::UnpackYFast(v68);
           v31 = Y16X16::UnpackXFast(v68);
           CSoldierRole::NewDestinationEx((CSoldierRole *)this, a2, v31, v42, 0);
-          (**(void (__thiscall ***)(int, CPropertySet *, int, int))(this + 48))(this + 48, a2, v68, 0x200000);
-          v52 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](0);
-          v43 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](0);
+          (**(void (__thiscall ***)(int, struct CSettler *, int, int))(this + 48))(this + 48, a2, v68, 0x200000);
+          v52 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))std::vector<unsigned short>::operator[])(0);
+          v43 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))std::vector<unsigned short>::operator[])(0);
           v32 = IEntity::Race(a2);
-          v33 = CEntityToDoListMgr::SettlerJobList(v32, v43);
-          (*(void (__thiscall **)(CPropertySet *, int, int))(*(_DWORD *)a2 + 112))(a2, v33, v52);
+          v33 = ((int (__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v32, v43);
+          a2->NewToDoList(a2, v33, v52);
           IEntity::ClearFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
-          v34 = IEntity::ID();
+          v34 = ((int (__stdcall *)())IEntity::ID)();
           (*(void (__thiscall **)(struct CManakopter *, int))(*(_DWORD *)v70 + 112))(v70, v34);
         }
       }
@@ -1617,14 +1618,14 @@ LABEL_12:
       }
       break;
     default:
-      if ( BBSupportDbgReportF(1, "MapObjects\\Settler\\SoldierRole.cpp", 1453, "CSoldierRole::ConvertEventIntoGoal(): Invalid event %i!", *((_DWORD *)a3 + 1)) == 1 )
+      if ( BBSupportDbgReportF(1, "MapObjects\\Settler\\SoldierRole.cpp", 1453, "CSoldierRole::ConvertEventIntoGoal(): Invalid event %i!", a3->m_iEvent) == 1 )
       {
         __debugbreak();
       }
-      if ( !IEntity::FlagBits(a2, ENTITY_FLAG_Registered) )
+      if ( IEntity::FlagBits(a2, ENTITY_FLAG_Registered) == 0 )
       {
-        CTrace::Print("ConvertEventIntoGoal SoldierRole - unknown event %u", *((_DWORD *)a3 + 1));
-        IAnimatedEntity::RegisterForLogicUpdate(1);
+        CTrace::Print("ConvertEventIntoGoal SoldierRole - unknown event %u", a3->m_iEvent);
+        ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
       }
       break;
   }
@@ -1646,7 +1647,7 @@ void  CSoldierRole::ComeToWork(class CSettler * a2, int a3) {
   int v11; // [esp-4h] [ebp-Ch]
   CMFCToolBarButton *v12; // [esp+0h] [ebp-8h]
 
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1559, "_pSettler != 0") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1559, "_pSettler != 0") == 1 )
   {
     __debugbreak();
   }
@@ -1654,37 +1655,37 @@ void  CSoldierRole::ComeToWork(class CSettler * a2, int a3) {
   {
     __debugbreak();
   }
-  if ( *((unsigned __int16 *)this + 16) != a3 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1562, "m_uHomeEntityId == _iBuildingId") == 1 )
+  if ( this->m_uHomeEntityId != a3 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1562, "m_uHomeEntityId == _iBuildingId") == 1 )
   {
     __debugbreak();
   }
-  if ( !IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1563, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_ATTACHED) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1563, "_pSettler->FlagBits(ENTITY_FLAG_ATTACHED) != 0") == 1 )
   {
     __debugbreak();
   }
-  v12 = (CMFCToolBarButton *)CBuildingMgr::operator[](a3);
-  if ( !IEntity::FlagBits(v12, (EntityFlag)&loc_3000000) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1567, "rBuilding.FlagBits(ENTITY_FLAG_ALIVE_MASK) != 0") == 1 )
+  v12 = (CMFCToolBarButton *)((CMFCToolBarButton *(__stdcall *)(int))CBuildingMgr::operator[])(a3);
+  if ( IEntity::FlagBits((IEntity *)v12, (EntityFlag)&loc_3000000) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 1567, "rBuilding.FlagBits(ENTITY_FLAG_ALIVE_MASK) != 0") == 1 )
   {
     __debugbreak();
   }
-  v3 = CBuilding::DoorPackedXY(v12);
-  (**((void (__thiscall ***)(char *, struct CSettler *, int, int))this + 12))((char *)this + 48, a2, v3, 0x200000);
+  v3 = CBuilding::DoorPackedXY((CBuilding *)v12);
+  ((void (__thiscall *)(CWarriorBehavior *, struct CSettler *, int, int))this->WarriorInit)(&this->CWarriorBehavior, a2, v3, 0x200000);
   CSoldierRole::CheckToDoList();
-  v10 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](0);
-  v8 = *(unsigned __int16 *)std::vector<unsigned short>::operator[](0);
+  v10 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))std::vector<unsigned short>::operator[])(0);
+  v8 = *(unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))std::vector<unsigned short>::operator[])(0);
   v4 = IEntity::Race(a2);
-  v5 = CEntityToDoListMgr::SettlerJobList(v4, v8);
-  (*(void (__thiscall **)(struct CSettler *, int, int))(*(_DWORD *)a2 + 112))(a2, v5, v10);
+  v5 = ((int (__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v4, v8);
+  a2->NewToDoList(a2, v5, v10);
   IEntity::ClearFlagBits(a2, ENTITY_FLAG_Selectable|ENTITY_FLAG_Selected);
-  result = IEntity::Type((unsigned __int16 *)v12);
-  if ( result == 24 )
+  result = IEntity::Type((IEntity *)v12);
+  if ( result != 24 )
   {
-    return result;
+    v11 = this->m_uHomeEntityId;
+    v9 = ((int (__stdcall *)())IEntity::ID)();
+    v7 = IEntity::OwnerId(a2);
+    return g_pAI->PostAIEvent(g_pAI, 18, v7, v9, v11);
   }
-  v11 = *((unsigned __int16 *)this + 16);
-  v9 = IEntity::ID();
-  v7 = IEntity::OwnerId((unsigned __int8 *)a2);
-  return (*(int (__thiscall **)(void *, int, int, int, int))(*(_DWORD *)g_pAI + 44))(g_pAI, 18, v7, v9, v11);
+  return result;
 }
 
 
@@ -1732,7 +1733,7 @@ bool  CSoldierRole::NewDestinationEx(class CSettler * a2, int a3, int a4, int a5
       a5 &= ~1u;
     }
   }
-  v23 = std::list<CEntityTask>::size(&v32[1].m_fOffsetX);
+  v23 = std::list<CEntityTask>::size(&v32->m_vTasks);
   if ( v23 <= 0 )
   {
     v31 = 1;
@@ -1756,7 +1757,7 @@ bool  CSoldierRole::NewDestinationEx(class CSettler * a2, int a3, int a4, int a5
     }
     else
     {
-      std::list<CEntityTask>::clear();
+      ((void (__cdecl *)())std::list<CEntityTask>::clear)();
       v31 = 1;
     }
   }
@@ -1779,40 +1780,40 @@ bool  CSoldierRole::NewDestinationEx(class CSettler * a2, int a3, int a4, int a5
   }
   if ( (a5 & 1) != 0 )
   {
-    if ( std::list<CEntityTask>::size(&v32[1].m_fOffsetX) && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 796, "m_vTasks.size() == 0") == 1 )
+    if ( std::list<CEntityTask>::size(&v32->m_vTasks) != 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 796, "m_vTasks.size() == 0") == 1 )
     {
       __debugbreak();
     }
     v12 = IEntity::Y(a2);
     v7 = IEntity::X(a2);
-    v8 = CEntityTask::CEntityTask(&v16, v26, SettlerFirstJob, v7, v12, -1, SettlerJobFrameCount, -1, 1, 1, 0, 0, 0, 0);
-    std::list<CEntityTask>::push_back((int)v8);
+    v8 = CEntityTask::CEntityTask(&v16, (unsigned __int8)v26, (unsigned __int16)SettlerFirstJob, v7, v12, -1, (char)SettlerJobFrameCount, -1, 1, 1, 0, 0, 0, 0);
+    ((void (__stdcall *)(int))std::list<CEntityTask>::push_back)((int)v8);
   }
-  v9 = CEntityTask::CEntityTask(&v15, v26, SettlerFirstJob, a3, a4, -1, SettlerJobFrameCount, -1, 1, 1, 0, 0, 0, 0);
-  std::list<CEntityTask>::push_back((int)v9);
-  v10 = CEntityTask::CEntityTask(&v14, 0x11u, SettlerFirstJob, a5, 0, -1, SettlerJobFrameCount, -1, 1, 1, 0, 0, 0, 0);
-  std::list<CEntityTask>::push_back((int)v10);
-  IMovingEntity::SetToDoList(a2, (DWORD)&v32[1].m_fOffsetX);
-  if ( (unsigned int)std::list<CEntityTask>::size(&v32[1].m_fOffsetX) < 2 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 850, "m_vTasks.size() >= 2") == 1 )
+  v9 = CEntityTask::CEntityTask(&v15, (unsigned __int8)v26, (unsigned __int16)SettlerFirstJob, (__int16)a3, (__int16)a4, -1, (char)SettlerJobFrameCount, -1, 1, 1, 0, 0, 0, 0);
+  ((void (__stdcall *)(int))std::list<CEntityTask>::push_back)((int)v9);
+  v10 = CEntityTask::CEntityTask(&v14, 0x11, (unsigned __int16)SettlerFirstJob, a5, 0, -1, (char)SettlerJobFrameCount, -1, 1, 1, 0, 0, 0, 0);
+  ((void (__stdcall *)(int))std::list<CEntityTask>::push_back)((int)v10);
+  IMovingEntity::SetToDoList(a2, (DWORD)&v32->m_vTasks);
+  if ( (unsigned int)std::list<CEntityTask>::size(&v32->m_vTasks) < 2 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 850, "m_vTasks.size() >= 2") == 1 )
   {
     __debugbreak();
   }
   CSoldierRole::CheckToDoList();
-  if ( v31 )
+  if ( v31 != 0 )
   {
-    if ( std::list<CEntityTask>::size(&v32[1].m_fOffsetX) != 2 && std::list<CEntityTask>::size(&v32[1].m_fOffsetX) != 3 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 856, "(m_vTasks.size() == 2) || ((m_vTasks.size() == 3))") == 1 )
+    if ( std::list<CEntityTask>::size(&v32->m_vTasks) != 2 && std::list<CEntityTask>::size(&v32->m_vTasks) != 3 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 856, "(m_vTasks.size() == 2) || ((m_vTasks.size() == 3))") == 1 )
     {
       __debugbreak();
     }
     IMovingEntity::ResetToDoList(a2);
-    *(_DWORD *)&v32[1].m_uHomeEntityId = 0;
-    v32->TakeJob(v32, a2);
+    v32->m_iU3 = 0;
+    ((void (__thiscall *)(CSoldierRole *, CSettler *))v32->ISelectableSettlerRole::ISettlerRole::CPersistence::__vftable[2].j_?WarriorInit@CWarriorBehavior@@UAEXAAVIMovingEntity@@HH@Z)(v32, a2);
     CSoldierRole::CheckToDoList();
     return 1;
   }
   else
   {
-    if ( (unsigned int)std::list<CEntityTask>::size(&v32[1].m_fOffsetX) <= 2 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 870, "m_vTasks.size() > 2") == 1 )
+    if ( (unsigned int)std::list<CEntityTask>::size(&v32->m_vTasks) <= 2 && BBSupportDbgReport(2, "MapObjects\\Settler\\SoldierRole.cpp", 870, "m_vTasks.size() > 2") == 1 )
     {
       __debugbreak();
     }
@@ -1822,31 +1823,31 @@ bool  CSoldierRole::NewDestinationEx(class CSettler * a2, int a3, int a4, int a5
 
 
 // address=[0x1591450]
-// Decompiled from int __thiscall CSoldierRole::EvaluateWalkAndRegister(CSoldierRole *this, struct IMovingEntity *a2, char a3)
+// Decompiled from int __thiscall CSoldierRole::EvaluateWalkAndRegister(CSoldierRole *this, struct IMovingEntity *a2, BYTE a3)
 void  CSoldierRole::EvaluateWalkAndRegister(class IMovingEntity & a2, int a3) {
   
-  *((_BYTE *)this + 5) = a3;
+  this->m_uSettlerWalk = a3;
   if ( (a3 & 0xFu) >= 6 )
   {
-    IAnimatedEntity::RegisterForLogicUpdate(1);
+    ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
   }
   else
   {
-    *((_BYTE *)this + 6) = 9;
-    if ( IEntity::WarriorType() == 2 )
+    this->m_iWalkspeed = 9;
+    if ( ((int (__stdcall *)())IEntity::WarriorType)() == 2 )
     {
-      *((_BYTE *)this + 6) = 7;
+      this->m_iWalkspeed = 7;
     }
-    IAnimatedEntity::RegisterForLogicUpdate(*((char *)this + 6));
+    ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(this->m_iWalkspeed);
     IMovingEntity::SetDistance(a2, 255);
   }
   if ( (a3 & 0x10) != 0 )
   {
-    return IMovingEntity::SetDisplacementCosts(0);
+    return ((int (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(0);
   }
   else
   {
-    return IMovingEntity::SetDisplacementCosts(5);
+    return ((int (__stdcall *)(char))IMovingEntity::SetDisplacementCosts)(5);
   }
 }
 
@@ -1860,17 +1861,17 @@ void  CSoldierRole::SoldierWarriorLogicUpdate(class CSettler * a2) {
   unsigned int v4; // eax
   int v6; // [esp+8h] [ebp-8h]
 
-  v6 = IEntity::Type((unsigned __int16 *)a2);
+  v6 = IEntity::Type(a2);
   if ( v6 >= 35 && v6 <= 37 )
   {
     TickCounter = CGameData::GetTickCounter(g_pGameData);
-    if ( TickCounter >= *((_DWORD *)this + 19) + CStaticConfigVarInt::operator int(&CSoldierRole::s_iTicksToRegeneration) )
+    if ( TickCounter >= this->m_iU2 + CStaticConfigVarInt::operator int(&CSoldierRole::s_iTicksToRegeneration) )
     {
-      *((_DWORD *)this + 19) = CGameData::GetTickCounter(g_pGameData);
-      v3 = *((unsigned __int8 *)this + 73);
+      this->m_iU2 = CGameData::GetTickCounter(g_pGameData);
+      v3 = (unsigned __int8)this->m_iMaxNumberOfHealings;
       if ( v3 < CStaticConfigVarInt::operator int(&CSoldierRole::s_iMaxNumberOfHealings) )
       {
-        ++*((_BYTE *)this + 73);
+        ++this->m_iMaxNumberOfHealings;
       }
     }
   }
@@ -1881,7 +1882,7 @@ void  CSoldierRole::SoldierWarriorLogicUpdate(class CSettler * a2) {
   else
   {
     v4 = CGameData::GetTickCounter(g_pGameData);
-    CWarriorBehavior::WarriorLogicUpdate((CSoldierRole *)((char *)this + 48), a2, v4, 0);
+    CWarriorBehavior::WarriorLogicUpdate(&this->CWarriorBehavior, a2, v4, 0);
   }
   return CSoldierRole::CheckToDoList();
 }

@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateLocalType::DynamicCreateFunc(void * a1) {
   CStateLocalType *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateLocalType *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateLocalType::CStateLocalType(C, a1);
   }
@@ -24,21 +24,21 @@ class CGameState * __cdecl CStateLocalType::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateLocalType *__thiscall CStateLocalType::CStateLocalType(CStateLocalType *this, void *a2)
  CStateLocalType::CStateLocalType(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateLocalType::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
   s_uAIDifficulty = CGameSettings::GetAIDifficulty();
-  CGuiGameState::OpenDialog(this, 7, GuiDlgMainLocalTypeProc);
+  CGuiGameState::OpenDialog((CGuiGameState *)this, 7, (bool (__cdecl *)(int, int, int))GuiDlgMainLocalTypeProc);
   return this;
 }
 
 
 // address=[0x14c1200]
-// Decompiled from void __thiscall CStateLocalType::~CStateLocalType(CStateLocalType *this)
+// Decompiled from void __thiscall CStateLocalType::~CStateLocalType(CGuiGameState *this)
  CStateLocalType::~CStateLocalType(void) {
   
-  *(_DWORD *)this = &CStateLocalType::_vftable_;
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 7) && BBSupportDbgReport(2, "main\\states\\StateLocalType.cpp", 61, (const char *)&dword_374C518[1]) == 1 )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateLocalType::_vftable_;
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 7) && BBSupportDbgReport(2, "main\\states\\StateLocalType.cpp", 61, (const char *)&dword_374C518[1]) == 1 )
   {
     __debugbreak();
   }
@@ -62,20 +62,19 @@ bool  CStateLocalType::Perform(void) {
     }
   }
   v1 = dword_4031D04 + 30;
-  if ( v1 >= timeGetTime() )
+  if ( v1 < timeGetTime() )
   {
-    return 1;
+    dword_4031D04 = timeGetTime();
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  dword_4031D04 = timeGetTime();
-  IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-  IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   return 1;
 }
 
 
 // address=[0x14c1320]
-// Decompiled from char __thiscall CStateLocalType::OnEvent(CStateLocalType *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateLocalType::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateLocalType::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
@@ -101,7 +100,7 @@ bool  CStateLocalType::OnEvent(class CEvn_Event & a2) {
       {
         CGameSettings::SetAIDifficulty(s_uAIDifficulty);
       }
-      CGameStateHandler::Switch((int)CStateCampaignDark::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateCampaignDark::DynamicCreateFunc, 0);
       result = 1;
       break;
     case 0x61:
@@ -109,7 +108,7 @@ bool  CStateLocalType::OnEvent(class CEvn_Event & a2) {
       {
         CGameSettings::SetAIDifficulty(s_uAIDifficulty);
       }
-      CGameStateHandler::Switch((int)CStateCampaign3X3::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateCampaign3X3::DynamicCreateFunc, 0);
       result = 1;
       break;
     case 0x62:
@@ -118,7 +117,7 @@ bool  CStateLocalType::OnEvent(class CEvn_Event & a2) {
         CGameSettings::SetAIDifficulty(s_uAIDifficulty);
       }
       dword_403191C = 0;
-      CGameStateHandler::Switch((int)CStateLobbyMapSettings::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch((struct CGameState *(__cdecl *)(void *))CStateLobbyMapSettings::DynamicCreateFunc, 0);
       result = 1;
       break;
     case 0x63:
@@ -126,7 +125,7 @@ bool  CStateLocalType::OnEvent(class CEvn_Event & a2) {
       {
         CGameSettings::SetAIDifficulty(s_uAIDifficulty);
       }
-      CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch(CStateMainMenu::DynamicCreateFunc, 0);
       result = 1;
       break;
     default:

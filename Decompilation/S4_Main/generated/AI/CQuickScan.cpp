@@ -33,13 +33,13 @@
 
 
 // address=[0x1305900]
-// Decompiled from _DWORD *__thiscall sub_1705900(_DWORD *this, int a2, unsigned int a3, unsigned int a4)
+// Decompiled from int *__thiscall sub_1705900(int *this, int a2, unsigned int a3, unsigned int a4)
  CQuickScan::CQuickScan(int a2, unsigned int a3, unsigned int a4) {
   
   int v4; // eax
 
   *this = IAIEnvironment::UnpackXFast(a2);
-  this[1] = IAIEnvironment::UnpackYFast(a2);
+  *(this + 1) = IAIEnvironment::UnpackYFast(a2);
   if ( a4 >= 0x4B )
   {
     v4 = CSpiralOffsets::Last(74);
@@ -48,7 +48,7 @@
   {
     v4 = CSpiralOffsets::Last(a4);
   }
-  this[2] = v4;
+  *(this + 2) = v4;
   if ( a3 >= 0x4B && BBSupportDbgReport(2, "AI\\AI_AgentsNormal.cpp", 83, "_uRadiusFirst < SPIRAL_RADIUS_MAX") == 1 )
   {
     __debugbreak();
@@ -57,7 +57,7 @@
   {
     __debugbreak();
   }
-  this[3] = CSpiralOffsets::First(a3);
+  *(this + 3) = CSpiralOffsets::First(a3);
   return this;
 }
 

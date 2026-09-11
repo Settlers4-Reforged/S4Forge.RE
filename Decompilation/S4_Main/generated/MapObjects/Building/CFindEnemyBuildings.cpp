@@ -53,7 +53,7 @@ bool  CFindEnemyBuildings::NextBuilding(void) {
   int iWarMapId; // [esp+24h] [ebp-Ch]
   struct CBuilding *pBuilding; // [esp+28h] [ebp-8h]
 
-  if ( this->m_pBuilding )
+  if ( this->m_pBuilding != 0 )
   {
     v1 = IEntity::WarMapNode(this->m_pBuilding);
     v11 = CWarMapNode::Next(v1);
@@ -65,7 +65,7 @@ bool  CFindEnemyBuildings::NextBuilding(void) {
   iWarMapId = v11;
   while ( 1 )
   {
-    while ( iWarMapId )
+    while ( iWarMapId != 0 )
     {
       pBuilding = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, iWarMapId);
       iOwner = IEntity::OwnerId(pBuilding);
@@ -73,7 +73,7 @@ bool  CFindEnemyBuildings::NextBuilding(void) {
       {
         v10 = IEntity::Flags(pBuilding);
         v9 = IEntity::WarriorType(pBuilding);
-        if ( (v10 & ENTITY_FLAG_Ready) != 0 && (!this->m_bOnlyTowers || v9 == AI_WARRIOR_TYPE_TOWER_BUILDING) )
+        if ( (v10 & ENTITY_FLAG_Ready) != 0 && (this->m_bOnlyTowers == 0 || v9 == AI_WARRIOR_TYPE_TOWER_BUILDING) )
         {
           iX = IEntity::X(pBuilding);
           iY = IEntity::Y(pBuilding);

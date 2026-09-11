@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CManakopterHallRole::New(int a1)
 class CPersistence * __cdecl CManakopterHallRole::New(std::istream & a1) {
   
-  if ( operator new(0x198u) )
+  if ( operator new(0x198u) != 0 )
   {
-    return CManakopterHallRole::CManakopterHallRole(a1);
+    return ((_DWORD (__stdcall *)(int))CManakopterHallRole::CManakopterHallRole)(a1);
   }
   else
   {
@@ -18,13 +18,13 @@ class CPersistence * __cdecl CManakopterHallRole::New(std::istream & a1) {
 
 
 // address=[0x14fdab0]
-// Decompiled from int __cdecl CManakopterHallRole::Load(int a1)
+// Decompiled from int __cdecl CManakopterHallRole::Load(struct std::istream *a1)
 class CManakopterHallRole * __cdecl CManakopterHallRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CManakopterHallRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -33,14 +33,14 @@ class CManakopterHallRole * __cdecl CManakopterHallRole::Load(std::istream & a1)
 // Decompiled from char *__thiscall CManakopterHallRole::CManakopterHallRole(char *this, int a2)
  CManakopterHallRole::CManakopterHallRole(std::istream & a2) {
   
-  int v3; // [esp+4h] [ebp-1Ch] BYREF
+  unsigned int v3; // [esp+4h] [ebp-1Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-18h] BYREF
-  int v5; // [esp+Ch] [ebp-14h]
+  unsigned int v5; // [esp+Ch] [ebp-14h]
   char *v6; // [esp+10h] [ebp-10h]
   int v7; // [esp+1Ch] [ebp-4h]
 
   v6 = this;
-  IBuildingRole::IBuildingRole(this, a2);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this, (struct std::istream *)a2);
   v7 = 0;
   *(_DWORD *)v6 = &CManakopterHallRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
@@ -57,15 +57,15 @@ class CManakopterHallRole * __cdecl CManakopterHallRole::Load(std::istream & a1)
         CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
         _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
       }
-      operator^<int>(a2, (int)(v6 + 392));
-      operator^<int>(a2, (int)(v6 + 396));
-      operator^<int>(a2, (int)(v6 + 400));
+      operator^<int>((struct std::istream *)a2, (int *)v6 + 98);
+      operator^<int>((struct std::istream *)a2, (int *)v6 + 99);
+      operator^<int>((struct std::istream *)a2, (int *)v6 + 100);
     }
-    operator^<int>(a2, (int)(v6 + 404));
+    operator^<int>((struct std::istream *)a2, (int *)v6 + 101);
   }
-  operator^<int>(a2, (int)(v6 + 380));
-  operator^<int>(a2, (int)(v6 + 384));
-  operator^<int>(a2, (int)(v6 + 388));
+  operator^<int>((struct std::istream *)a2, (int *)v6 + 95);
+  operator^<int>((struct std::istream *)a2, (int *)v6 + 96);
+  operator^<int>((struct std::istream *)a2, (int *)v6 + 97);
   v7 = -1;
   return v6;
 }
@@ -81,14 +81,14 @@ void  CManakopterHallRole::Store(std::ostream & a2) {
   v4 = (int *)this;
   IBuildingRole::Store(this, a2);
   v3 = 3;
-  operator^<unsigned int>(a2, &v3);
-  operator^<int>((int)a2, v4 + 98);
-  operator^<int>((int)a2, v4 + 99);
-  operator^<int>((int)a2, v4 + 100);
-  operator^<int>((int)a2, v4 + 101);
-  operator^<int>((int)a2, v4 + 95);
-  operator^<int>((int)a2, v4 + 96);
-  return operator^<int>((int)a2, v4 + 97);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
+  operator^<int>(a2, v4 + 98);
+  operator^<int>(a2, v4 + 99);
+  operator^<int>(a2, v4 + 100);
+  operator^<int>(a2, v4 + 101);
+  operator^<int>(a2, v4 + 95);
+  operator^<int>(a2, v4 + 96);
+  return operator^<int>(a2, v4 + 97);
 }
 
 
@@ -96,7 +96,7 @@ void  CManakopterHallRole::Store(std::ostream & a2) {
 // Decompiled from CManakopterHallRole *__thiscall CManakopterHallRole::CManakopterHallRole(CManakopterHallRole *this)
  CManakopterHallRole::CManakopterHallRole(void) {
   
-  IBuildingRole::IBuildingRole(this);
+  IBuildingRole::IBuildingRole((IBuildingRole *)this);
   *(_DWORD *)this = &CManakopterHallRole::_vftable_;
   *((_DWORD *)this + 95) = 0;
   *((_DWORD *)this + 96) = 0;
@@ -154,7 +154,7 @@ void  CManakopterHallRole::LogicUpdate(class CBuilding * a2) {
       {
         ++*((_DWORD *)this + 95);
       }
-      return (CManakopterHallRole *)IAnimatedEntity::RegisterForLogicUpdate(31);
+      return (CManakopterHallRole *)((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
     case 3:
       v17 = 0;
       v16 = CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredMana) - *((_DWORD *)this + 98);
@@ -170,10 +170,10 @@ void  CManakopterHallRole::LogicUpdate(class CBuilding * a2) {
       }
       if ( v16 <= 0 )
       {
-        v10 = IEntity::OwnerId((unsigned __int8 *)a2);
+        v10 = IEntity::OwnerId(a2);
         v9 = CBuilding::EnsignY(a2);
         v8 = CBuilding::EnsignX(a2);
-        CFlyingMgr::AddFlyingEntity((CFlyingMgr *)g_cFlyingMgr, 1, v8, v9, v10, 1);
+        ((void (__thiscall *)(CFlyingMgr *, int, int, int, int, bool))CFlyingMgr::AddFlyingEntity)((CFlyingMgr *)g_cFlyingMgr, 1, v8, v9, v10, 1);
         *((_DWORD *)this + 101) = 0;
         *((_DWORD *)this + 98) = 0;
         *((_DWORD *)this + 99) = 0;
@@ -183,7 +183,7 @@ void  CManakopterHallRole::LogicUpdate(class CBuilding * a2) {
         *((_BYTE *)this + 276) = 0;
         *((_BYTE *)this + 277) = 0;
         *((_BYTE *)this + 4) = 2;
-        return (CManakopterHallRole *)IAnimatedEntity::RegisterForLogicUpdate(31);
+        return (CManakopterHallRole *)((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(31);
       }
       else
       {
@@ -193,7 +193,7 @@ void  CManakopterHallRole::LogicUpdate(class CBuilding * a2) {
         *((_DWORD *)this + 29) = *((_DWORD *)this + 65);
         v11 = *((_DWORD *)this + 65);
         v3 = IEntity::Race(a2);
-        *((_BYTE *)this + 264) = CGfxManager::GetBuildingJobFrameCount((CGfxManager *)g_pGfxManager, v3, v11);
+        *((_BYTE *)this + 264) = CGfxManager::GetBuildingJobFrameCount(g_pGfxManager, v3, v11);
         *((_BYTE *)this + 257) = 0;
         *((_BYTE *)this + 259) = 0;
         *((_BYTE *)this + 265) = 0;
@@ -201,19 +201,21 @@ void  CManakopterHallRole::LogicUpdate(class CBuilding * a2) {
         *((_DWORD *)this + 31) = *((_DWORD *)this + 70);
         v12 = *((_DWORD *)this + 70);
         v4 = IEntity::Race(a2);
-        *((_BYTE *)this + 284) = CGfxManager::GetBuildingJobFrameCount((CGfxManager *)g_pGfxManager, v4, v12);
+        *((_BYTE *)this + 284) = CGfxManager::GetBuildingJobFrameCount(g_pGfxManager, v4, v12);
         *((_BYTE *)this + 277) = 0;
         *((_BYTE *)this + 279) = 0;
         *((_BYTE *)this + 285) = 0;
         v13 = *((_DWORD *)this + 55);
         v5 = IEntity::Race(a2);
-        *((_BYTE *)this + 224) = CGfxManager::GetBuildingJobFrameCount((CGfxManager *)g_pGfxManager, v5, v13);
+        *((_BYTE *)this + 224) = CGfxManager::GetBuildingJobFrameCount(g_pGfxManager, v5, v13);
         v14 = *((unsigned __int8 *)this + 224) - 2;
         v6 = CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredMana);
         v7 = CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredBoard) + v6;
         *((_DWORD *)this + 101) = (*((_DWORD *)this + 100) + *((_DWORD *)this + 99) + *((_DWORD *)this + 98)) * v14 / (CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredIron) + v7);
-        return (CManakopterHallRole *)IAnimatedEntity::RegisterForLogicUpdate(3 * *((unsigned __int8 *)this + 264) - 1);
+        return (CManakopterHallRole *)((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(3 * *((unsigned __int8 *)this + 264) - 1);
       }
+    default:
+      break;
   }
   return result;
 }
@@ -242,9 +244,9 @@ void  CManakopterHallRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectIn
   }
   *((_DWORD *)this + 19) = *((_DWORD *)this + 40);
   *((_DWORD *)this + 20) = *((_DWORD *)this + 95);
-  v5 = IEntity::Type((unsigned __int16 *)a2);
+  v5 = IEntity::Type(a2);
   v3 = IEntity::Race(a2);
-  return CGfxManager::GetBuildingGfxInfo((int)a3, v3, v5, 1, (int)this + 76);
+  return ((int (__stdcall *)(int, int, int, int, int))CGfxManager::GetBuildingGfxInfo)((int)a3, v3, v5, 1, (int)this + 76);
 }
 
 
@@ -256,9 +258,9 @@ void  CManakopterHallRole::PostLoadInit(class CBuilding * a2) {
   int result; // eax
   int v4; // [esp-4h] [ebp-8h]
 
-  v4 = IEntity::Type((unsigned __int16 *)a2);
+  v4 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
-  result = CBuildingInfoMgr::GetBuildingInfo(v2, v4);
+  result = (int)CBuildingInfoMgr::GetBuildingInfo(v2, v4);
   *((_DWORD *)this + 94) = result;
   return result;
 }
@@ -268,7 +270,7 @@ void  CManakopterHallRole::PostLoadInit(class CBuilding * a2) {
 // Decompiled from int __thiscall CManakopterHallRole::Init(CManakopterHallRole *this, struct CBuilding *a2)
 void  CManakopterHallRole::Init(class CBuilding * a2) {
   
-  IBuildingRole::InitCommon((int)a2);
+  IBuildingRole::InitCommon(a2);
   *((_BYTE *)this + 4) = 2;
   *((_DWORD *)this + 95) = CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredMana);
   *((_DWORD *)this + 96) = CStaticConfigVarInt::operator int(&CManakopterHallRole::s_iRequiredBoard);
@@ -277,7 +279,7 @@ void  CManakopterHallRole::Init(class CBuilding * a2) {
   *((_DWORD *)this + 98) = 0;
   *((_DWORD *)this + 99) = 0;
   *((_DWORD *)this + 100) = 0;
-  return IAnimatedEntity::RegisterForLogicUpdate(14);
+  return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(14);
 }
 
 
@@ -389,7 +391,7 @@ void  CManakopterHallRole::TeleportGoods(int a2, int a3) {
     {
       __debugbreak();
     }
-    return BBSupportTracePrintF(1, "Shaman teleported %d invalid goods %s to ManakopterHall.", a3, (const char *)off_3786468[2 * a2]);
+    return BBSupportTracePrintF(1, "Shaman teleported %d invalid goods %s to ManakopterHall.", a3, (const char *)off_3786468[a2].m_iNr);
   }
   return result;
 }
@@ -417,13 +419,13 @@ bool  CManakopterHallRole::TryMakingManakopter(class CBuilding * a2) {
   {
     return 0;
   }
-  v3 = IEntity::OwnerId((unsigned __int8 *)a2);
-  if ( CFlyingMgr::GetFirstEntityId((CFlyingMgr *)g_cFlyingMgr, v3, 1) )
+  v3 = IEntity::OwnerId(a2);
+  if ( CFlyingMgr::GetFirstEntityId((CFlyingMgr *)g_cFlyingMgr, v3, 1) != 0 )
   {
     return 0;
   }
   *((_BYTE *)this + 4) = 3;
-  IAnimatedEntity::RegisterForLogicUpdate(1);
+  ((void (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
   return 1;
 }
 
@@ -443,11 +445,12 @@ bool  CManakopterHallRole::CheatIfRequired(class CBuilding * a2) {
   int v11; // [esp+8h] [ebp-10h] BYREF
   BOOL v12; // [esp+Ch] [ebp-Ch]
   CManakopterHallRole *v13; // [esp+10h] [ebp-8h]
+  char; // [esp+16h] [ebp-2h]
   bool v15; // [esp+17h] [ebp-1h]
 
   v13 = this;
-  v2 = IEntity::OwnerId((unsigned __int8 *)a2);
-  if ( CFlyingMgr::GetFirstEntityId((CFlyingMgr *)g_cFlyingMgr, v2, 1) )
+  v2 = IEntity::OwnerId(a2);
+  if ( CFlyingMgr::GetFirstEntityId((CFlyingMgr *)g_cFlyingMgr, v2, 1) != 0 )
   {
     if ( BBSupportDbgReportF(2, "MapObjects\\Building\\ManakopterHallRole.cpp", 514, "[MM] CheatIfRequired called while Manakopter exists.") == 1 )
     {
@@ -473,10 +476,11 @@ bool  CManakopterHallRole::CheatIfRequired(class CBuilding * a2) {
       {
         v10 = CBuilding::EnsignX(a2);
         v11 = CBuilding::EnsignY(a2);
-        v4 = IEntity::OwnerId((unsigned __int8 *)a2);
+        v4 = IEntity::OwnerId(a2);
         v9 = IAIEnvironment::AlliancesPlayerEnemyBits(v4);
-        v5 = IEntity::OwnerId((unsigned __int8 *)a2);
-        if ( (**(unsigned __int8 (__thiscall ***)(void *, int, int, int *, int *, _DWORD))off_3D7A6A8)(off_3D7A6A8, v5, v9, &v10, &v11, 0) )
+        v5 = IEntity::OwnerId(a2);
+         = (**(int (__thiscall ***)(void *, int, int, int *, int *, _DWORD))off_3D7A6A8)(off_3D7A6A8, v5, v9, &v10, &v11, 0);
+        if (  != 0 )
         {
           return 0;
         }

@@ -138,11 +138,11 @@ bool  CToolTip::OpenTooltip(int a2, int a3) {
   {
     CToolTip::CloseTooltip(this);
   }
-  if ( !g_pGfxEngine )
+  if ( g_pGfxEngine == 0 )
   {
     return 0;
   }
-  if ( !this->m_sText[0] )
+  if ( this->m_sText[0] == 0 )
   {
     return 0;
   }
@@ -184,27 +184,17 @@ bool  CToolTip::OpenTooltip(int a2, int a3) {
   else
   {
     v18 = IGfxEngine::SolidColorFillGuiSurface(g_pGfxEngine, this->m_iSurfaceType, 0, 0, 0xFFu);
-    if ( !v18 )
-    {
-      BBSupportTracePrintF(0, "GUI ENGINE: Cannot clear tooltip surface!");
-      return 0;
-    }
-    else
+    if ( v18 != 0 )
     {
       v21 = 0;
       v20 = 0;
       v22 = psizl.cx + 3;
       v23 = psizl.cy + 3;
-      *(_QWORD *)&v5.left = 0LL;
+      *(_QWORD *)&v5.left = 0;
       v5.right = psizl.cx + 3;
       v5.bottom = psizl.cy + 3;
       v18 = IGfxEngine::SolidColorFillGuiSurface(g_pGfxEngine, this->m_iSurfaceType, 255, 0xFFu, 180, v5);
-      if ( !v18 )
-      {
-        BBSupportTracePrintF(0, "GUI ENGINE: Cannot set tooltip surface!");
-        return 0;
-      }
-      else
+      if ( v18 != 0 )
       {
         v6.m_bDirty = 1;
         v6.m_iFontTemplate = 8;
@@ -216,38 +206,48 @@ bool  CToolTip::OpenTooltip(int a2, int a3) {
         v6.m_iParam2 = 0;
         v6.m_iEffects = 0;
         v10 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, this->m_iSurfaceType, (unsigned int *)&v9);
-        if ( !v10 )
-        {
-          BBSupportTracePrintF(0, "GUI ENGINE: Cannot lock tooltip surface!");
-          return 0;
-        }
-        else
+        if ( v10 != 0 )
         {
           FastRectangle(v10, v9, 0, 0, psizl.cx + 3, psizl.cy + 3, 0);
           IGfxEngine::EndWriteToSurface(g_pGfxEngine, this->m_iSurfaceType);
-          if ( !IGfxEngine::GetGuiSurfaceDC(g_pGfxEngine, this->m_iSurfaceType, &hdc) )
-          {
-            BBSupportTracePrintF(0, "GUI ENGINE: Cannot render text into tooltip surface!");
-            return 0;
-          }
-          else
+          if ( IGfxEngine::GetGuiSurfaceDC(g_pGfxEngine, this->m_iSurfaceType, &hdc) != 0 )
           {
             SetBkMode(hdc, 1);
             DrawControlText(hdc, &v6);
             IGfxEngine::ReleaseGuiSurfaceDC(g_pGfxEngine, this->m_iSurfaceType, hdc);
-            if ( !IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, this->m_iSurfaceType, 1) )
-            {
-              BBSupportTracePrintF(0, "GUI ENGINE: Error while set tooltip visible!");
-              return 0;
-            }
-            else
+            if ( IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, this->m_iSurfaceType, 1) != 0 )
             {
               this->m_bOpen = 1;
               return 1;
             }
+            else
+            {
+              BBSupportTracePrintF(0, "GUI ENGINE: Error while set tooltip visible!");
+              return 0;
+            }
+          }
+          else
+          {
+            BBSupportTracePrintF(0, "GUI ENGINE: Cannot render text into tooltip surface!");
+            return 0;
           }
         }
+        else
+        {
+          BBSupportTracePrintF(0, "GUI ENGINE: Cannot lock tooltip surface!");
+          return 0;
+        }
       }
+      else
+      {
+        BBSupportTracePrintF(0, "GUI ENGINE: Cannot set tooltip surface!");
+        return 0;
+      }
+    }
+    else
+    {
+      BBSupportTracePrintF(0, "GUI ENGINE: Cannot clear tooltip surface!");
+      return 0;
     }
   }
 }
@@ -261,12 +261,12 @@ bool  CToolTip::CloseTooltip(void) {
   {
     return 0;
   }
-  if ( !g_pGfxEngine )
+  if ( g_pGfxEngine == 0 )
   {
     return 0;
   }
   IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, this->m_iSurfaceType, 0);
-  if ( IGfxEngine::DestroyGuiSurface(g_pGfxEngine, this->m_iSurfaceType) )
+  if ( IGfxEngine::DestroyGuiSurface(g_pGfxEngine, this->m_iSurfaceType) != 0 )
   {
     this->m_bOpen = 0;
     return 1;

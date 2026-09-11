@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CBuildingSupplyPriority::New(int a1)
 class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream & a1) {
   
-  if ( operator new(0x10u) )
+  if ( operator new(0x10u) != 0 )
   {
-    return CBuildingSupplyPriority::CBuildingSupplyPriority(a1);
+    return ((_DWORD (__stdcall *)(int))CBuildingSupplyPriority::CBuildingSupplyPriority)(a1);
   }
   else
   {
@@ -18,14 +18,14 @@ class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream & a1) {
 
 
 // address=[0x140aae0]
-// Decompiled from _DWORD *__thiscall CBuildingSupplyPriority::CBuildingSupplyPriority(_DWORD *this, int a2)
+// Decompiled from CPersistence *__thiscall CBuildingSupplyPriority::CBuildingSupplyPriority(CPersistence *this, int a2)
  CBuildingSupplyPriority::CBuildingSupplyPriority(std::istream & a2) {
   
   _DWORD *v2; // eax
   _BYTE v4[12]; // [esp+4h] [ebp-48h] BYREF
   _BYTE v5[4]; // [esp+10h] [ebp-3Ch] BYREF
-  int v6; // [esp+14h] [ebp-38h]
-  int v7; // [esp+18h] [ebp-34h] BYREF
+  unsigned int v6; // [esp+14h] [ebp-38h]
+  unsigned int v7; // [esp+18h] [ebp-34h] BYREF
   int pExceptionObject; // [esp+1Ch] [ebp-30h] BYREF
   int v9; // [esp+20h] [ebp-2Ch] BYREF
   int v10; // [esp+24h] [ebp-28h] BYREF
@@ -34,15 +34,15 @@ class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream & a1) {
   int v13; // [esp+30h] [ebp-1Ch] BYREF
   int j; // [esp+34h] [ebp-18h]
   int i; // [esp+38h] [ebp-14h]
-  _DWORD *v16; // [esp+3Ch] [ebp-10h]
+  CPersistence *v16; // [esp+3Ch] [ebp-10h]
   int v17; // [esp+48h] [ebp-4h]
 
   v16 = this;
   CPersistence::CPersistence(this);
-  *v16 = &CBuildingSupplyPriority::_vftable_;
-  std::map<int,std::map<int,int>>::map<int,std::map<int,int>>(v16 + 1);
+  v16->__vftable = (CPersistence_vtbl *)&CBuildingSupplyPriority::_vftable_;
+  std::map<int,std::map<int,int>>::map<int,std::map<int,int>>(&v16[1]);
   v17 = 0;
-  operator^<unsigned long>(a2, v5);
+  operator^<unsigned long>(a2, (int)v5);
   operator^<unsigned int>(a2, &v7);
   v6 = v7;
   if ( v7 != 1 )
@@ -53,15 +53,15 @@ class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream & a1) {
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
   v13 = 0;
-  operator^<int>(a2, (int)&v13);
+  operator^<int>((struct std::istream *)a2, &v13);
   for ( i = 0;
         i < v13;
         ++i )
   {
     v9 = 0;
-    operator^<int>(a2, (int)&v9);
+    operator^<int>((struct std::istream *)a2, &v9);
     v12 = 0;
-    operator^<int>(a2, (int)&v12);
+    operator^<int>((struct std::istream *)a2, &v12);
     std::map<int,int>::map<int,int>(v4);
     LOBYTE(v17) = 1;
     for ( j = 0;
@@ -69,14 +69,14 @@ class CPersistence * __cdecl CBuildingSupplyPriority::New(std::istream & a1) {
           ++j )
     {
       v11 = 0;
-      operator^<int>(a2, (int)&v11);
+      operator^<int>((struct std::istream *)a2, &v11);
       v10 = 0;
-      operator^<int>(a2, (int)&v10);
-      v2 = (_DWORD *)std::map<int,int>::operator[](&v11);
+      operator^<int>((struct std::istream *)a2, &v10);
+      v2 = (_DWORD *)std::map<int,int>::operator[]((int)&v11);
       *v2 = v10;
     }
-    std::map<int,std::map<int,int>>::operator[](&v9);
-    std::map<int,int>::operator=(v4);
+    std::map<int,std::map<int,int>>::operator[]((int)&v9);
+    std::map<int,int>::operator=((int)v4);
     LOBYTE(v17) = 0;
     std::map<int,int>::~map<int,int>(v4);
   }
@@ -112,52 +112,52 @@ void  CBuildingSupplyPriority::Store(std::ostream & a2) {
   v18 = this;
   CPersistence::Store(this, a2);
   v16 = 1;
-  operator^<unsigned int>(a2, &v16);
-  v15 = std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::size((char *)v18 + 4);
-  operator^<int>((int)a2, &v15);
-  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::begin(v7);
+  operator^<unsigned int>(a2, (unsigned int *)&v16);
+  v15 = std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::size(&v18[1]);
+  operator^<int>(a2, &v15);
+  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::begin((int)v7);
   v21 = 0;
   while ( 1 )
   {
-    v14 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v5);
+    v14 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end((int)v5);
     v13[1] = (int)v14;
     LOBYTE(v21) = 1;
     v20 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v14);
     LOBYTE(v21) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v5);
-    if ( !v20 )
+    if ( v20 == 0 )
     {
       break;
     }
     v13[0] = *(_DWORD *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v7);
-    operator^<int>((int)a2, v13);
+    operator^<int>(a2, v13);
     v17 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v7) + 4;
     v12 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::size(v17);
-    operator^<int>((int)a2, &v12);
-    std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::begin(v8);
+    operator^<int>(a2, &v12);
+    std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::begin((int)v8);
     LOBYTE(v21) = 2;
     while ( 1 )
     {
-      v11 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::end(v3);
+      v11 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::end((int)v3);
       v10[1] = (int)v11;
       LOBYTE(v21) = 3;
       v19 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator!=(v11);
       LOBYTE(v21) = 2;
       std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v3);
-      if ( !v19 )
+      if ( v19 == 0 )
       {
         break;
       }
       v10[0] = *(_DWORD *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator*(v8);
-      operator^<int>((int)a2, v10);
+      operator^<int>(a2, v10);
       v9 = *(_DWORD *)(std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator*(v8) + 4);
-      operator^<int>((int)a2, &v9);
-      std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator++(v4, 0);
+      operator^<int>(a2, &v9);
+      std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator++((int)v4, 0);
       std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v4);
     }
     LOBYTE(v21) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v8);
-    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(v6, 0);
+    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++((int)v6, 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v6);
   }
   v21 = -1;
@@ -169,7 +169,7 @@ void  CBuildingSupplyPriority::Store(std::ostream & a2) {
 // Decompiled from CBuildingSupplyPriority *__thiscall CBuildingSupplyPriority::CBuildingSupplyPriority(CBuildingSupplyPriority *this, int a2)
  CBuildingSupplyPriority::CBuildingSupplyPriority(int a2) {
   
-  CPersistence::CPersistence(this);
+  CPersistence::CPersistence((CPersistence *)this);
   *(_DWORD *)this = &CBuildingSupplyPriority::_vftable_;
   std::map<int,std::map<int,int>>::map<int,std::map<int,int>>((char *)this + 4);
   switch ( a2 )
@@ -219,13 +219,13 @@ int  CBuildingSupplyPriority::GetPriority(enum BUILDING_TYPES a2, enum PILE_TYPE
   v17 = this;
   v18 = 0;
   v15 = a2;
-  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::find(v6, &v15);
+  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::find((int)v6, (int)&v15);
   v21 = 0;
-  v14 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v5);
+  v14 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end((int)v5);
   v13 = v14;
   LOBYTE(v21) = 1;
   v18 |= 1u;
-  v16 = !(unsigned __int8)std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v14) && BBSupportDbgReport(2, "Logic\\BuildingSupplyPriority.cpp", 152, "findAt!=m_cBuildingList.end()") == 1;
+  v16 = (unsigned __int8)std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v14) == 0 && BBSupportDbgReport(2, "Logic\\BuildingSupplyPriority.cpp", 152, "findAt!=m_cBuildingList.end()") == 1;
   v20 = v16;
   v21 = 0;
   if ( (v18 & 1) != 0 )
@@ -237,18 +237,18 @@ int  CBuildingSupplyPriority::GetPriority(enum BUILDING_TYPES a2, enum PILE_TYPE
   {
     __debugbreak();
   }
-  v12 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v4);
+  v12 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end((int)v4);
   v11[1] = v12;
   LOBYTE(v21) = 2;
   v19 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v12);
   LOBYTE(v21) = 0;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v4);
-  if ( v19 )
+  if ( v19 != 0 )
   {
     v11[0] = a2;
-    v9 = std::map<int,std::map<int,int>>::operator[](v11);
+    v9 = std::map<int,std::map<int,int>>::operator[]((int)v11);
     v10 = a3;
-    v8 = *(_DWORD *)std::map<int,int>::operator[](&v10);
+    v8 = *(_DWORD *)std::map<int,int>::operator[]((int)&v10);
     v21 = -1;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v6);
     return v8;
@@ -291,27 +291,27 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES a2, str
 
   v19 = this;
   v21 = 0;
-  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::begin(v11);
+  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::begin((int)v11);
   v24 = 0;
   while ( 1 )
   {
-    v18 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v9);
+    v18 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end((int)v9);
     v17 = v18;
     LOBYTE(v24) = 1;
     v23 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v18);
     LOBYTE(v24) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v9);
-    if ( !v23 )
+    if ( v23 == 0 )
     {
       break;
     }
     v20 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v11) + 4;
     v15[0] = a2;
-    v16 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::end(v7);
+    v16 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::end((int)v7);
     v15[1] = v16;
     LOBYTE(v24) = 2;
     v6 = v16;
-    v14 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(v8, v15);
+    v14 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find((int)v8, (int)v15);
     v13[1] = v14;
     LOBYTE(v24) = 3;
     v22 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator!=(v6);
@@ -319,15 +319,15 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES a2, str
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v8);
     LOBYTE(v24) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v7);
-    if ( v22 )
+    if ( v22 != 0 )
     {
       v3 = (_DWORD *)std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v11);
       *(_DWORD *)(a3 + 8 * v21) = *v3;
       v13[0] = a2;
-      v4 = (_DWORD *)std::map<int,int>::operator[](v13);
+      v4 = (_DWORD *)std::map<int,int>::operator[]((int)v13);
       *(_DWORD *)(a3 + 8 * v21++ + 4) = *v4;
     }
-    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(v10, 0);
+    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++((int)v10, 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v10);
   }
   v12 = v21;
@@ -363,27 +363,27 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES a2) {
 
   v17 = this;
   v18 = 0;
-  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::begin(v8);
+  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::begin((int)v8);
   v21 = 0;
   while ( 1 )
   {
-    v15 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v6);
+    v15 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end((int)v6);
     v14 = v15;
     LOBYTE(v21) = 1;
     v20 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v15);
     LOBYTE(v21) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v6);
-    if ( !v20 )
+    if ( v20 == 0 )
     {
       break;
     }
     v16 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v8) + 4;
     v12[0] = a2;
-    v13 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::end(v4);
+    v13 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::end((int)v4);
     v12[1] = v13;
     LOBYTE(v21) = 2;
     v3 = v13;
-    v11 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(v5, v12);
+    v11 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find((int)v5, (int)v12);
     v10 = v11;
     LOBYTE(v21) = 3;
     v19 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator!=(v3);
@@ -391,11 +391,11 @@ int  CBuildingSupplyPriority::GetNumberOfSupplyBuildings(enum PILE_TYPES a2) {
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v5);
     LOBYTE(v21) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v4);
-    if ( v19 )
+    if ( v19 != 0 )
     {
       ++v18;
     }
-    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(v7, 0);
+    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++((int)v7, 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v7);
   }
   v9 = v18;
@@ -434,27 +434,27 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, struct SDistri
 
   v20 = this;
   v22 = 0;
-  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::begin(v11);
+  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::begin((int)v11);
   v25 = 0;
   while ( 1 )
   {
-    v19 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v9);
+    v19 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end((int)v9);
     v18 = v19;
     LOBYTE(v25) = 1;
     v24 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v19);
     LOBYTE(v25) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v9);
-    if ( !v24 )
+    if ( v24 == 0 )
     {
       break;
     }
     v21 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator*(v11) + 4;
     v16[0] = a2;
-    v17 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::end(v7);
+    v17 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::end((int)v7);
     v16[1] = v17;
     LOBYTE(v25) = 2;
     v5 = v17;
-    v15 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(v8, v16);
+    v15 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find((int)v8, (int)v16);
     v14[1] = v15;
     LOBYTE(v25) = 3;
     v23 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator!=(v5);
@@ -462,10 +462,10 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, struct SDistri
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v8);
     LOBYTE(v25) = 0;
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v7);
-    if ( v23 )
+    if ( v23 != 0 )
     {
       v14[0] = a2;
-      v13 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find(v6, v14);
+      v13 = std::_Tree<std::_Tmap_traits<int,int,std::less<int>,std::allocator<std::pair<int const,int>>,0>>::find((int)v6, (int)v14);
       v12 = v13;
       LOBYTE(v25) = 4;
       v3 = std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::operator*(v13);
@@ -474,7 +474,7 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, struct SDistri
       std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,int>>>>(v6);
       BBSupportTracePrintF(1, " Change Good %d Priotity to %d", a2, *(_DWORD *)(a3 + 8 * v22++ + 4));
     }
-    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++(v10, 0);
+    std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator++((int)v10, 0);
     std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v10);
   }
   v25 = -1;
@@ -509,13 +509,13 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, enum BUILDING_
   v18 = this;
   v20 = 0;
   v16[0] = a3;
-  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::find(v8, v16);
+  std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::find((int)v8, (int)v16);
   v23 = 0;
-  v15 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v7);
+  v15 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end((int)v7);
   v14 = v15;
   LOBYTE(v23) = 1;
   v20 |= 1u;
-  v17 = !(unsigned __int8)std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v15) && BBSupportDbgReport(2, "Logic\\BuildingSupplyPriority.cpp", 218, "findAt!=m_cBuildingList.end()") == 1;
+  v17 = (unsigned __int8)std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v15) == 0 && BBSupportDbgReport(2, "Logic\\BuildingSupplyPriority.cpp", 218, "findAt!=m_cBuildingList.end()") == 1;
   v22 = v17;
   v23 = 0;
   if ( (v20 & 1) != 0 )
@@ -527,18 +527,18 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, enum BUILDING_
   {
     __debugbreak();
   }
-  v13 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end(v6);
+  v13 = (std::_Iterator_base12 *)std::_Tree<std::_Tmap_traits<int,std::map<int,int>,std::less<int>,std::allocator<std::pair<int const,std::map<int,int>>>,0>>::end((int)v6);
   v12[1] = v13;
   LOBYTE(v23) = 2;
   v21 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::operator!=(v13);
   LOBYTE(v23) = 0;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<int const,std::map<int,int>>>>>(v6);
-  if ( v21 )
+  if ( v21 != 0 )
   {
     v12[0] = a3;
-    v16[1] = std::map<int,std::map<int,int>>::operator[](v12);
+    v16[1] = std::map<int,std::map<int,int>>::operator[]((int)v12);
     v11 = a2;
-    v10 = *(_DWORD *)std::map<int,int>::operator[](&v11);
+    v10 = *(_DWORD *)std::map<int,int>::operator[]((int)&v11);
     v19 = a4 + v10;
     if ( a4 + v10 >= 0 )
     {
@@ -552,7 +552,7 @@ void  CBuildingSupplyPriority::ChangePriority(enum PILE_TYPES a2, enum BUILDING_
       v19 = 0;
     }
     v9 = a2;
-    v4 = (int *)std::map<int,int>::operator[](&v9);
+    v4 = (int *)std::map<int,int>::operator[]((int)&v9);
     *v4 = v19;
   }
   v23 = -1;
@@ -631,92 +631,92 @@ void  CBuildingSupplyPriority::CreateRomanPriorities(void) {
   v42 = 0;
   v41[0] = 20;
   IntArray = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_SHIPYARD);
-  *(_DWORD *)std::map<int,int>::operator[](v41) = *(_DWORD *)(IntArray + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)v41) = *(_DWORD *)(IntArray + 4);
   v40 = 31;
-  std::map<int,std::map<int,int>>::operator[](&v40);
-  std::map<int,int>::operator=(v17);
+  std::map<int,std::map<int,int>>::operator[]((int)&v40);
+  std::map<int,int>::operator=((int)v17);
   v42 = -1;
   std::map<int,int>::~map<int,int>(v17);
   std::map<int,int>::map<int,int>(v16);
   v42 = 1;
   v39 = 10;
   v2 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_GOLDMELT);
-  *(_DWORD *)std::map<int,int>::operator[](&v39) = *(_DWORD *)(v2 + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v39) = *(_DWORD *)(v2 + 4);
   v38 = 19;
-  std::map<int,std::map<int,int>>::operator[](&v38);
-  std::map<int,int>::operator=(v16);
+  std::map<int,std::map<int,int>>::operator[]((int)&v38);
+  std::map<int,int>::operator=((int)v16);
   v42 = -1;
   std::map<int,int>::~map<int,int>(v16);
   std::map<int,int>::map<int,int>(v15);
   v42 = 2;
   v37 = 10;
   v3 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_IRONMELT);
-  *(_DWORD *)std::map<int,int>::operator[](&v37) = *(_DWORD *)(v3 + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v37) = *(_DWORD *)(v3 + 4);
   v36 = 20;
-  std::map<int,std::map<int,int>>::operator[](&v36);
-  std::map<int,int>::operator=(v15);
+  std::map<int,std::map<int,int>>::operator[]((int)&v36);
+  std::map<int,int>::operator=((int)v15);
   v42 = -1;
   std::map<int,int>::~map<int,int>(v15);
   std::map<int,int>::map<int,int>(v21);
   v42 = 3;
   v35 = 10;
   v4 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_TOOLSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v35) = *(_DWORD *)(v4 + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v35) = *(_DWORD *)(v4 + 4);
   v34 = 20;
   v5 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_TOOLSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v34) = *(_DWORD *)(v5 + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v34) = *(_DWORD *)(v5 + 4);
   v33 = 21;
-  std::map<int,std::map<int,int>>::operator[](&v33);
-  std::map<int,int>::operator=(v21);
+  std::map<int,std::map<int,int>>::operator[]((int)&v33);
+  std::map<int,int>::operator=((int)v21);
   v42 = -1;
   std::map<int,int>::~map<int,int>(v21);
   std::map<int,int>::map<int,int>(v20);
   v42 = 4;
   v32 = 10;
   v6 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_WEAPONSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v32) = *(_DWORD *)(v6 + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v32) = *(_DWORD *)(v6 + 4);
   v31 = 20;
   v7 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_WEAPONSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v31) = *(_DWORD *)(v7 + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v31) = *(_DWORD *)(v7 + 4);
   v30 = 22;
-  std::map<int,std::map<int,int>>::operator[](&v30);
-  std::map<int,int>::operator=(v20);
+  std::map<int,std::map<int,int>>::operator[]((int)&v30);
+  std::map<int,int>::operator=((int)v20);
   v42 = -1;
   std::map<int,int>::~map<int,int>(v20);
   std::map<int,int>::map<int,int>(v14);
   v42 = 5;
   v29 = 36;
   v8 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_BAKERY);
-  *(_DWORD *)std::map<int,int>::operator[](&v29) = *(_DWORD *)(v8 + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v29) = *(_DWORD *)(v8 + 4);
   v28 = 10;
-  std::map<int,std::map<int,int>>::operator[](&v28);
-  std::map<int,int>::operator=(v14);
+  std::map<int,std::map<int,int>>::operator[]((int)&v28);
+  std::map<int,int>::operator=((int)v14);
   v42 = -1;
   std::map<int,int>::~map<int,int>(v14);
   std::map<int,int>::map<int,int>(v19);
   v42 = 6;
   v27 = 36;
   v9 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_ANIMALFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v27) = *(_DWORD *)(v9 + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v27) = *(_DWORD *)(v9 + 4);
   v26 = 16;
   v10 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_GRAIN_ANIMALRANCH);
-  *(_DWORD *)std::map<int,int>::operator[](&v26) = *(_DWORD *)(v10 + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v26) = *(_DWORD *)(v10 + 4);
   v25 = 12;
-  std::map<int,std::map<int,int>>::operator[](&v25);
-  std::map<int,int>::operator=(v19);
+  std::map<int,std::map<int,int>>::operator[]((int)&v25);
+  std::map<int,int>::operator=((int)v19);
   v42 = -1;
   std::map<int,int>::~map<int,int>(v19);
   std::map<int,int>::map<int,int>(v18);
   v42 = 7;
   v24 = 36;
   v11 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_DONKEYFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v24) = *(_DWORD *)(v11 + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v24) = *(_DWORD *)(v11 + 4);
   v23 = 16;
   v12 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_GRAIN_DONKEYFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v23) = *(_DWORD *)(v12 + 4);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v23) = *(_DWORD *)(v12 + 4);
   v22 = 13;
-  std::map<int,std::map<int,int>>::operator[](&v22);
-  std::map<int,int>::operator=(v18);
+  std::map<int,std::map<int,int>>::operator[]((int)&v22);
+  std::map<int,int>::operator=((int)v18);
   v42 = -1;
   return std::map<int,int>::~map<int,int>(v18);
 }
@@ -786,122 +786,122 @@ void  CBuildingSupplyPriority::CreateVikingPriorities(void) {
   v54 = 0;
   v53[0] = 36;
   IntArray = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_MEADMAKERHUT);
-  *(_DWORD *)std::map<int,int>::operator[](v53) = *(_DWORD *)(IntArray + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)v53) = *(_DWORD *)(IntArray + 8);
   v52 = 39;
-  std::map<int,std::map<int,int>>::operator[](&v52);
-  std::map<int,int>::operator=(v23);
+  std::map<int,std::map<int,int>>::operator[]((int)&v52);
+  std::map<int,int>::operator=((int)v23);
   v54 = -1;
   std::map<int,int>::~map<int,int>(v23);
   std::map<int,int>::map<int,int>(v22);
   v54 = 1;
   v51 = 20;
   v2 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_SHIPYARD);
-  *(_DWORD *)std::map<int,int>::operator[](&v51) = *(_DWORD *)(v2 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v51) = *(_DWORD *)(v2 + 8);
   v50 = 31;
-  std::map<int,std::map<int,int>>::operator[](&v50);
-  std::map<int,int>::operator=(v22);
+  std::map<int,std::map<int,int>>::operator[]((int)&v50);
+  std::map<int,int>::operator=((int)v22);
   v54 = -1;
   std::map<int,int>::~map<int,int>(v22);
   std::map<int,int>::map<int,int>(v21);
   v54 = 2;
   v49 = 22;
   v3 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_LOG_CHARCOALMAKER);
-  *(_DWORD *)std::map<int,int>::operator[](&v49) = *(_DWORD *)(v3 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v49) = *(_DWORD *)(v3 + 8);
   v48 = 25;
-  std::map<int,std::map<int,int>>::operator[](&v48);
-  std::map<int,int>::operator=(v21);
+  std::map<int,std::map<int,int>>::operator[]((int)&v48);
+  std::map<int,int>::operator=((int)v21);
   v54 = -1;
   std::map<int,int>::~map<int,int>(v21);
   std::map<int,int>::map<int,int>(v20);
   v54 = 3;
   v47 = 22;
   v4 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_LOG_SAWMILL);
-  *(_DWORD *)std::map<int,int>::operator[](&v47) = *(_DWORD *)(v4 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v47) = *(_DWORD *)(v4 + 8);
   v46 = 3;
-  std::map<int,std::map<int,int>>::operator[](&v46);
-  std::map<int,int>::operator=(v20);
+  std::map<int,std::map<int,int>>::operator[]((int)&v46);
+  std::map<int,int>::operator=((int)v20);
   v54 = -1;
   std::map<int,int>::~map<int,int>(v20);
   std::map<int,int>::map<int,int>(v19);
   v54 = 4;
   v45 = 10;
   v5 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_GOLDMELT);
-  *(_DWORD *)std::map<int,int>::operator[](&v45) = *(_DWORD *)(v5 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v45) = *(_DWORD *)(v5 + 8);
   v44 = 19;
-  std::map<int,std::map<int,int>>::operator[](&v44);
-  std::map<int,int>::operator=(v19);
+  std::map<int,std::map<int,int>>::operator[]((int)&v44);
+  std::map<int,int>::operator=((int)v19);
   v54 = -1;
   std::map<int,int>::~map<int,int>(v19);
   std::map<int,int>::map<int,int>(v18);
   v54 = 5;
   v43 = 10;
   v6 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_IRONMELT);
-  *(_DWORD *)std::map<int,int>::operator[](&v43) = *(_DWORD *)(v6 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v43) = *(_DWORD *)(v6 + 8);
   v42 = 20;
-  std::map<int,std::map<int,int>>::operator[](&v42);
-  std::map<int,int>::operator=(v18);
+  std::map<int,std::map<int,int>>::operator[]((int)&v42);
+  std::map<int,int>::operator=((int)v18);
   v54 = -1;
   std::map<int,int>::~map<int,int>(v18);
   std::map<int,int>::map<int,int>(v27);
   v54 = 6;
   v41 = 10;
   v7 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_TOOLSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v41) = *(_DWORD *)(v7 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v41) = *(_DWORD *)(v7 + 8);
   v40 = 20;
   v8 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_TOOLSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v40) = *(_DWORD *)(v8 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v40) = *(_DWORD *)(v8 + 8);
   v39 = 21;
-  std::map<int,std::map<int,int>>::operator[](&v39);
-  std::map<int,int>::operator=(v27);
+  std::map<int,std::map<int,int>>::operator[]((int)&v39);
+  std::map<int,int>::operator=((int)v27);
   v54 = -1;
   std::map<int,int>::~map<int,int>(v27);
   std::map<int,int>::map<int,int>(v26);
   v54 = 7;
   v38 = 10;
   v9 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_WEAPONSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v38) = *(_DWORD *)(v9 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v38) = *(_DWORD *)(v9 + 8);
   v37 = 20;
   v10 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_WEAPONSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v37) = *(_DWORD *)(v10 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v37) = *(_DWORD *)(v10 + 8);
   v36 = 22;
-  std::map<int,std::map<int,int>>::operator[](&v36);
-  std::map<int,int>::operator=(v26);
+  std::map<int,std::map<int,int>>::operator[]((int)&v36);
+  std::map<int,int>::operator=((int)v26);
   v54 = -1;
   std::map<int,int>::~map<int,int>(v26);
   std::map<int,int>::map<int,int>(v17);
   v54 = 8;
   v35 = 36;
   v11 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_BAKERY);
-  *(_DWORD *)std::map<int,int>::operator[](&v35) = *(_DWORD *)(v11 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v35) = *(_DWORD *)(v11 + 8);
   v34 = 10;
-  std::map<int,std::map<int,int>>::operator[](&v34);
-  std::map<int,int>::operator=(v17);
+  std::map<int,std::map<int,int>>::operator[]((int)&v34);
+  std::map<int,int>::operator=((int)v17);
   v54 = -1;
   std::map<int,int>::~map<int,int>(v17);
   std::map<int,int>::map<int,int>(v25);
   v54 = 9;
   v33 = 36;
   v12 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_ANIMALFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v33) = *(_DWORD *)(v12 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v33) = *(_DWORD *)(v12 + 8);
   v32 = 16;
   v13 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_GRAIN_ANIMALRANCH);
-  *(_DWORD *)std::map<int,int>::operator[](&v32) = *(_DWORD *)(v13 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v32) = *(_DWORD *)(v13 + 8);
   v31 = 12;
-  std::map<int,std::map<int,int>>::operator[](&v31);
-  std::map<int,int>::operator=(v25);
+  std::map<int,std::map<int,int>>::operator[]((int)&v31);
+  std::map<int,int>::operator=((int)v25);
   v54 = -1;
   std::map<int,int>::~map<int,int>(v25);
   std::map<int,int>::map<int,int>(v24);
   v54 = 10;
   v30 = 36;
   v14 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_DONKEYFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v30) = *(_DWORD *)(v14 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v30) = *(_DWORD *)(v14 + 8);
   v29 = 16;
   v15 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_GRAIN_DONKEYFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v29) = *(_DWORD *)(v15 + 8);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v29) = *(_DWORD *)(v15 + 8);
   v28 = 13;
-  std::map<int,std::map<int,int>>::operator[](&v28);
-  std::map<int,int>::operator=(v24);
+  std::map<int,std::map<int,int>>::operator[]((int)&v28);
+  std::map<int,int>::operator=((int)v24);
   v54 = -1;
   return std::map<int,int>::~map<int,int>(v24);
 }
@@ -967,112 +967,112 @@ void  CBuildingSupplyPriority::CreateMayaPriorities(void) {
   v50 = 0;
   v49[0] = 10;
   IntArray = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_AMMOMAKERHUT);
-  *(_DWORD *)std::map<int,int>::operator[](v49) = *(_DWORD *)(IntArray + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)v49) = *(_DWORD *)(IntArray + 12);
   v48 = 28;
-  std::map<int,std::map<int,int>>::operator[](&v48);
-  std::map<int,int>::operator=(v21);
+  std::map<int,std::map<int,int>>::operator[]((int)&v48);
+  std::map<int,int>::operator=((int)v21);
   v50 = -1;
   std::map<int,int>::~map<int,int>(v21);
   std::map<int,int>::map<int,int>(v20);
   v50 = 1;
   v47 = 20;
   v2 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_SHIPYARD);
-  *(_DWORD *)std::map<int,int>::operator[](&v47) = *(_DWORD *)(v2 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v47) = *(_DWORD *)(v2 + 12);
   v46 = 31;
-  std::map<int,std::map<int,int>>::operator[](&v46);
-  std::map<int,int>::operator=(v20);
+  std::map<int,std::map<int,int>>::operator[]((int)&v46);
+  std::map<int,int>::operator=((int)v20);
   v50 = -1;
   std::map<int,int>::~map<int,int>(v20);
   std::map<int,int>::map<int,int>(v19);
   v50 = 2;
   v45 = 10;
   v3 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_GOLDMELT);
-  *(_DWORD *)std::map<int,int>::operator[](&v45) = *(_DWORD *)(v3 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v45) = *(_DWORD *)(v3 + 12);
   v44 = 19;
-  std::map<int,std::map<int,int>>::operator[](&v44);
-  std::map<int,int>::operator=(v19);
+  std::map<int,std::map<int,int>>::operator[]((int)&v44);
+  std::map<int,int>::operator=((int)v19);
   v50 = -1;
   std::map<int,int>::~map<int,int>(v19);
   std::map<int,int>::map<int,int>(v18);
   v50 = 3;
   v43 = 10;
   v4 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_IRONMELT);
-  *(_DWORD *)std::map<int,int>::operator[](&v43) = *(_DWORD *)(v4 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v43) = *(_DWORD *)(v4 + 12);
   v42 = 20;
-  std::map<int,std::map<int,int>>::operator[](&v42);
-  std::map<int,int>::operator=(v18);
+  std::map<int,std::map<int,int>>::operator[]((int)&v42);
+  std::map<int,int>::operator=((int)v18);
   v50 = -1;
   std::map<int,int>::~map<int,int>(v18);
   std::map<int,int>::map<int,int>(v25);
   v50 = 4;
   v41 = 10;
   v5 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_TOOLSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v41) = *(_DWORD *)(v5 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v41) = *(_DWORD *)(v5 + 12);
   v40 = 20;
   v6 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_TOOLSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v40) = *(_DWORD *)(v6 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v40) = *(_DWORD *)(v6 + 12);
   v39 = 21;
-  std::map<int,std::map<int,int>>::operator[](&v39);
-  std::map<int,int>::operator=(v25);
+  std::map<int,std::map<int,int>>::operator[]((int)&v39);
+  std::map<int,int>::operator=((int)v25);
   v50 = -1;
   std::map<int,int>::~map<int,int>(v25);
   std::map<int,int>::map<int,int>(v24);
   v50 = 5;
   v38 = 10;
   v7 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_WEAPONSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v38) = *(_DWORD *)(v7 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v38) = *(_DWORD *)(v7 + 12);
   v37 = 20;
   v8 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_WEAPONSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v37) = *(_DWORD *)(v8 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v37) = *(_DWORD *)(v8 + 12);
   v36 = 22;
-  std::map<int,std::map<int,int>>::operator[](&v36);
-  std::map<int,int>::operator=(v24);
+  std::map<int,std::map<int,int>>::operator[]((int)&v36);
+  std::map<int,int>::operator=((int)v24);
   v50 = -1;
   std::map<int,int>::~map<int,int>(v24);
   std::map<int,int>::map<int,int>(v17);
   v50 = 6;
   v35 = 36;
   v9 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_BAKERY);
-  *(_DWORD *)std::map<int,int>::operator[](&v35) = *(_DWORD *)(v9 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v35) = *(_DWORD *)(v9 + 12);
   v34 = 10;
-  std::map<int,std::map<int,int>>::operator[](&v34);
-  std::map<int,int>::operator=(v17);
+  std::map<int,std::map<int,int>>::operator[]((int)&v34);
+  std::map<int,int>::operator=((int)v17);
   v50 = -1;
   std::map<int,int>::~map<int,int>(v17);
   std::map<int,int>::map<int,int>(v23);
   v50 = 7;
   v33 = 36;
   v10 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_ANIMALFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v33) = *(_DWORD *)(v10 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v33) = *(_DWORD *)(v10 + 12);
   v32 = 16;
   v11 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_GRAIN_ANIMALRANCH);
-  *(_DWORD *)std::map<int,int>::operator[](&v32) = *(_DWORD *)(v11 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v32) = *(_DWORD *)(v11 + 12);
   v31 = 12;
-  std::map<int,std::map<int,int>>::operator[](&v31);
-  std::map<int,int>::operator=(v23);
+  std::map<int,std::map<int,int>>::operator[]((int)&v31);
+  std::map<int,int>::operator=((int)v23);
   v50 = -1;
   std::map<int,int>::~map<int,int>(v23);
   std::map<int,int>::map<int,int>(v22);
   v50 = 8;
   v30 = 36;
   v12 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_DONKEYFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v30) = *(_DWORD *)(v12 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v30) = *(_DWORD *)(v12 + 12);
   v29 = 16;
   v13 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_GRAIN_DONKEYFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v29) = *(_DWORD *)(v13 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v29) = *(_DWORD *)(v13 + 12);
   v28 = 13;
-  std::map<int,std::map<int,int>>::operator[](&v28);
-  std::map<int,int>::operator=(v22);
+  std::map<int,std::map<int,int>>::operator[]((int)&v28);
+  std::map<int,int>::operator=((int)v22);
   v50 = -1;
   std::map<int,int>::~map<int,int>(v22);
   std::map<int,int>::map<int,int>(v16);
   v50 = 9;
   v27 = 36;
   v14 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_TEQUILAMAKERHUT);
-  *(_DWORD *)std::map<int,int>::operator[](&v27) = *(_DWORD *)(v14 + 12);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v27) = *(_DWORD *)(v14 + 12);
   v26 = 37;
-  std::map<int,std::map<int,int>>::operator[](&v26);
-  std::map<int,int>::operator=(v16);
+  std::map<int,std::map<int,int>>::operator[]((int)&v26);
+  std::map<int,int>::operator=((int)v16);
   v50 = -1;
   return std::map<int,int>::~map<int,int>(v16);
 }
@@ -1140,115 +1140,115 @@ void  CBuildingSupplyPriority::CreateTrojanPriorities(void) {
   v52 = 0;
   v51[0] = 22;
   IntArray = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_LOG_AMMOMAKERHUT);
-  *(_DWORD *)std::map<int,int>::operator[](v51) = *(_DWORD *)(IntArray + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)v51) = *(_DWORD *)(IntArray + 20);
   v50 = 10;
   v2 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_AMMOMAKERHUT);
-  *(_DWORD *)std::map<int,int>::operator[](&v50) = *(_DWORD *)(v2 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v50) = *(_DWORD *)(v2 + 20);
   v49 = 28;
-  std::map<int,std::map<int,int>>::operator[](&v49);
-  std::map<int,int>::operator=(v26);
+  std::map<int,std::map<int,int>>::operator[]((int)&v49);
+  std::map<int,int>::operator=((int)v26);
   v52 = -1;
   std::map<int,int>::~map<int,int>(v26);
   std::map<int,int>::map<int,int>(v21);
   v52 = 1;
   v48 = 22;
   v3 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_LOG_SAWMILL);
-  *(_DWORD *)std::map<int,int>::operator[](&v48) = *(_DWORD *)(v3 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v48) = *(_DWORD *)(v3 + 20);
   v47 = 3;
-  std::map<int,std::map<int,int>>::operator[](&v47);
-  std::map<int,int>::operator=(v21);
+  std::map<int,std::map<int,int>>::operator[]((int)&v47);
+  std::map<int,int>::operator=((int)v21);
   v52 = -1;
   std::map<int,int>::~map<int,int>(v21);
   std::map<int,int>::map<int,int>(v20);
   v52 = 2;
   v46 = 20;
   v4 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_SHIPYARD);
-  *(_DWORD *)std::map<int,int>::operator[](&v46) = *(_DWORD *)(v4 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v46) = *(_DWORD *)(v4 + 20);
   v45 = 31;
-  std::map<int,std::map<int,int>>::operator[](&v45);
-  std::map<int,int>::operator=(v20);
+  std::map<int,std::map<int,int>>::operator[]((int)&v45);
+  std::map<int,int>::operator=((int)v20);
   v52 = -1;
   std::map<int,int>::~map<int,int>(v20);
   std::map<int,int>::map<int,int>(v19);
   v52 = 3;
   v44 = 10;
   v5 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_GOLDMELT);
-  *(_DWORD *)std::map<int,int>::operator[](&v44) = *(_DWORD *)(v5 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v44) = *(_DWORD *)(v5 + 20);
   v43 = 19;
-  std::map<int,std::map<int,int>>::operator[](&v43);
-  std::map<int,int>::operator=(v19);
+  std::map<int,std::map<int,int>>::operator[]((int)&v43);
+  std::map<int,int>::operator=((int)v19);
   v52 = -1;
   std::map<int,int>::~map<int,int>(v19);
   std::map<int,int>::map<int,int>(v18);
   v52 = 4;
   v42 = 10;
   v6 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_IRONMELT);
-  *(_DWORD *)std::map<int,int>::operator[](&v42) = *(_DWORD *)(v6 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v42) = *(_DWORD *)(v6 + 20);
   v41 = 20;
-  std::map<int,std::map<int,int>>::operator[](&v41);
-  std::map<int,int>::operator=(v18);
+  std::map<int,std::map<int,int>>::operator[]((int)&v41);
+  std::map<int,int>::operator=((int)v18);
   v52 = -1;
   std::map<int,int>::~map<int,int>(v18);
   std::map<int,int>::map<int,int>(v25);
   v52 = 5;
   v40 = 10;
   v7 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_TOOLSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v40) = *(_DWORD *)(v7 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v40) = *(_DWORD *)(v7 + 20);
   v39 = 20;
   v8 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_TOOLSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v39) = *(_DWORD *)(v8 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v39) = *(_DWORD *)(v8 + 20);
   v38 = 21;
-  std::map<int,std::map<int,int>>::operator[](&v38);
-  std::map<int,int>::operator=(v25);
+  std::map<int,std::map<int,int>>::operator[]((int)&v38);
+  std::map<int,int>::operator=((int)v25);
   v52 = -1;
   std::map<int,int>::~map<int,int>(v25);
   std::map<int,int>::map<int,int>(v24);
   v52 = 6;
   v37 = 10;
   v9 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_COAL_WEAPONSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v37) = *(_DWORD *)(v9 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v37) = *(_DWORD *)(v9 + 20);
   v36 = 20;
   v10 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_WEAPONSMITH);
-  *(_DWORD *)std::map<int,int>::operator[](&v36) = *(_DWORD *)(v10 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v36) = *(_DWORD *)(v10 + 20);
   v35 = 22;
-  std::map<int,std::map<int,int>>::operator[](&v35);
-  std::map<int,int>::operator=(v24);
+  std::map<int,std::map<int,int>>::operator[]((int)&v35);
+  std::map<int,int>::operator=((int)v24);
   v52 = -1;
   std::map<int,int>::~map<int,int>(v24);
   std::map<int,int>::map<int,int>(v17);
   v52 = 7;
   v34 = 36;
   v11 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_BAKERY);
-  *(_DWORD *)std::map<int,int>::operator[](&v34) = *(_DWORD *)(v11 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v34) = *(_DWORD *)(v11 + 20);
   v33 = 10;
-  std::map<int,std::map<int,int>>::operator[](&v33);
-  std::map<int,int>::operator=(v17);
+  std::map<int,std::map<int,int>>::operator[]((int)&v33);
+  std::map<int,int>::operator=((int)v17);
   v52 = -1;
   std::map<int,int>::~map<int,int>(v17);
   std::map<int,int>::map<int,int>(v23);
   v52 = 8;
   v32 = 36;
   v12 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_ANIMALFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v32) = *(_DWORD *)(v12 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v32) = *(_DWORD *)(v12 + 20);
   v31 = 16;
   v13 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_GRAIN_ANIMALRANCH);
-  *(_DWORD *)std::map<int,int>::operator[](&v31) = *(_DWORD *)(v13 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v31) = *(_DWORD *)(v13 + 20);
   v30 = 12;
-  std::map<int,std::map<int,int>>::operator[](&v30);
-  std::map<int,int>::operator=(v23);
+  std::map<int,std::map<int,int>>::operator[]((int)&v30);
+  std::map<int,int>::operator=((int)v23);
   v52 = -1;
   std::map<int,int>::~map<int,int>(v23);
   std::map<int,int>::map<int,int>(v22);
   v52 = 9;
   v29 = 36;
   v14 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_WATER_DONKEYFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v29) = *(_DWORD *)(v14 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v29) = *(_DWORD *)(v14 + 20);
   v28 = 16;
   v15 = TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_GRAIN_DONKEYFARM);
-  *(_DWORD *)std::map<int,int>::operator[](&v28) = *(_DWORD *)(v15 + 20);
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v28) = *(_DWORD *)(v15 + 20);
   v27 = 13;
-  std::map<int,std::map<int,int>>::operator[](&v27);
-  std::map<int,int>::operator=(v22);
+  std::map<int,std::map<int,int>>::operator[]((int)&v27);
+  std::map<int,int>::operator=((int)v22);
   v52 = -1;
   return std::map<int,int>::~map<int,int>(v22);
 }
@@ -1318,100 +1318,100 @@ void  CBuildingSupplyPriority::CreateAllRacesPriorities(void) {
   v55 = 0;
   v50 = 9;
   IntArray = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_BREAD_COALMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v50) = *IntArray;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v50) = *IntArray;
   v49 = 24;
   v2 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_MEAT_COALMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v49) = *v2;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v49) = *v2;
   v48 = 11;
   v3 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_FISH_COALMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v48) = *v3;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v48) = *v3;
   v47 = 17;
-  std::map<int,std::map<int,int>>::operator[](&v47);
-  std::map<int,int>::operator=(v26);
+  std::map<int,std::map<int,int>>::operator[]((int)&v47);
+  std::map<int,int>::operator=((int)v26);
   v55 = -1;
   std::map<int,int>::~map<int,int>(v26);
   std::map<int,int>::map<int,int>(v25);
   v55 = 1;
   v46 = 9;
   v4 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_BREAD_IRONMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v46) = *v4;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v46) = *v4;
   v45 = 24;
   v5 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_MEAT_IRONMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v45) = *v5;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v45) = *v5;
   v44 = 11;
   v6 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_FISH_IRONMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v44) = *v6;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v44) = *v6;
   v43 = 15;
-  std::map<int,std::map<int,int>>::operator[](&v43);
-  std::map<int,int>::operator=(v25);
+  std::map<int,std::map<int,int>>::operator[]((int)&v43);
+  std::map<int,int>::operator=((int)v25);
   v55 = -1;
   std::map<int,int>::~map<int,int>(v25);
   std::map<int,int>::map<int,int>(v24);
   v55 = 2;
   v42 = 9;
   v7 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_BREAD_GOLDMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v42) = *v7;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v42) = *v7;
   v41 = 24;
   v8 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_MEAT_GOLDMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v41) = *v8;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v41) = *v8;
   v40 = 11;
   v9 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_FISH_GOLDMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v40) = *v9;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v40) = *v9;
   v39 = 16;
-  std::map<int,std::map<int,int>>::operator[](&v39);
-  std::map<int,int>::operator=(v24);
+  std::map<int,std::map<int,int>>::operator[]((int)&v39);
+  std::map<int,int>::operator=((int)v24);
   v55 = -1;
   std::map<int,int>::~map<int,int>(v24);
   std::map<int,int>::map<int,int>(v23);
   v55 = 3;
   v38 = 9;
   v10 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_BREAD_STONEMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v38) = *v10;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v38) = *v10;
   v37 = 24;
   v11 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_MEAT_STONEMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v37) = *v11;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v37) = *v11;
   v36 = 11;
   v12 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_FISH_STONEMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v36) = *v12;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v36) = *v12;
   v21 = 14;
-  std::map<int,std::map<int,int>>::operator[](&v21);
-  std::map<int,int>::operator=(v23);
+  std::map<int,std::map<int,int>>::operator[]((int)&v21);
+  std::map<int,int>::operator=((int)v23);
   v55 = -1;
   std::map<int,int>::~map<int,int>(v23);
   std::map<int,int>::map<int,int>(v22);
   v55 = 4;
   v35 = 9;
   v13 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_BREAD_SULFURMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v35) = *v13;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v35) = *v13;
   v34 = 24;
   v14 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_MEAT_SULFURMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v34) = *v14;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v34) = *v14;
   v33 = 11;
   v15 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_FISH_SULFURMINE);
-  *(_DWORD *)std::map<int,int>::operator[](&v33) = *v15;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v33) = *v15;
   v32 = 18;
-  std::map<int,std::map<int,int>>::operator[](&v32);
-  std::map<int,int>::operator=(v22);
+  std::map<int,std::map<int,int>>::operator[]((int)&v32);
+  std::map<int,int>::operator=((int)v22);
   v55 = -1;
   std::map<int,int>::~map<int,int>(v22);
   std::map<int,int>::map<int,int>(v20);
   v55 = 5;
   v31 = 16;
   v16 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_GRAIN_MILL);
-  *(_DWORD *)std::map<int,int>::operator[](&v31) = *v16;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v31) = *v16;
   v30 = 9;
-  std::map<int,std::map<int,int>>::operator[](&v30);
-  std::map<int,int>::operator=(v20);
+  std::map<int,std::map<int,int>>::operator[]((int)&v30);
+  std::map<int,int>::operator=((int)v20);
   v55 = -1;
   std::map<int,int>::~map<int,int>(v20);
   std::map<int,int>::map<int,int>(v19);
   v55 = 6;
   v29 = 20;
   v17 = (_DWORD *)TStaticConfigIntArrayBase<6>::GetIntArray(&CBuildingSupplyPriority::m_iDefault_SP_IRONBAR_VEHICLEHALL);
-  *(_DWORD *)std::map<int,int>::operator[](&v29) = *v17;
+  *(_DWORD *)std::map<int,int>::operator[]((int)&v29) = *v17;
   v28 = 23;
-  std::map<int,std::map<int,int>>::operator[](&v28);
-  std::map<int,int>::operator=(v19);
+  std::map<int,std::map<int,int>>::operator[]((int)&v28);
+  std::map<int,int>::operator=((int)v19);
   v55 = -1;
   std::map<int,int>::~map<int,int>(v19);
   CGoodDistributionInfo::CGoodDistributionInfo(&v54);

@@ -56,7 +56,7 @@
     v1 = 0;
     if ( CBBObjectTracer::IsObjectInList(this->m_uSerialNumber, &v1) )
     {
-      if ( v1 )
+      if ( v1 != 0 )
       {
         v1->m_pFirst = this->m_pFirst;
       }
@@ -72,9 +72,9 @@
       {
         BBSupportTracePrintF(0, "%06x-%08x: %s deleted (%i object%s remaining).", this->m_uSerialNumber, this, this->m_spType, CBBObjectTracer::m_iNumberOfObjects, "s");
       }
-      if ( !this->m_uSerialNumber )
+      if ( this->m_uSerialNumber == 0 )
       {
-        if ( CBBObjectTracer::m_iNumberOfObjects )
+        if ( CBBObjectTracer::m_iNumberOfObjects != 0 )
         {
           BBSupportTracePrint(0, (char *)&byte_3ABA823);
           BBSupportTracePrint(0, "Warning: Missing delete!");

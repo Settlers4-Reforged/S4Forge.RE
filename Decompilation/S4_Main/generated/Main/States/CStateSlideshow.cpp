@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void * a1) {
   CStateSlideshow *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateSlideshow *)operator new(0x18u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateSlideshow::CStateSlideshow(C, a1);
   }
@@ -24,12 +24,12 @@ class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateSlideshow *__thiscall CStateSlideshow::CStateSlideshow(CStateSlideshow *this, void *a2)
  CStateSlideshow::CStateSlideshow(void * a2) {
   
-  CGameState::CGameState(this);
+  CGameState::CGameState((CGameState *)this);
   *(_DWORD *)this = &CStateSlideshow::_vftable_;
   *((_BYTE *)this + 4) = 0;
   *((_DWORD *)this + 2) = a2;
   CSlideshow::CSlideshow((CStateSlideshow *)((char *)this + 12), *((_DWORD *)this + 2));
-  if ( !g_pGfxEngine || !(unsigned __int8)IGfxEngine::IsGuiMode(g_pGfxEngine) )
+  if ( g_pGfxEngine == 0 || !IGfxEngine::IsGuiMode(g_pGfxEngine) )
   {
     CGameStateHandler::RebuildGfxEngine(1);
   }
@@ -42,7 +42,7 @@ class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void * a1) {
 
 
 // address=[0x14ca9b0]
-// Decompiled from void __thiscall CStateSlideshow::~CStateSlideshow(CStateSlideshow *this)
+// Decompiled from void __thiscall CStateSlideshow::~CStateSlideshow(CGameState *this)
  CStateSlideshow::~CStateSlideshow(void) {
   
   char v1; // [esp-38h] [ebp-74h] BYREF
@@ -56,21 +56,21 @@ class CGameState * __cdecl CStateSlideshow::DynamicCreateFunc(void * a1) {
   char *v9; // [esp+4h] [ebp-38h]
   char *v10; // [esp+8h] [ebp-34h]
   CGameState *v11; // [esp+Ch] [ebp-30h]
-  _BYTE v12[28]; // [esp+10h] [ebp-2Ch] BYREF
+  std::string v12; // [esp+10h] [ebp-2Ch] BYREF
 
   v11 = this;
-  *(_DWORD *)this = &CStateSlideshow::_vftable_;
-  if ( *((_DWORD *)v11 + 2) == 1 )
+  this->__vftable = (CGameState_vtbl *)&CStateSlideshow::_vftable_;
+  if ( v11[2].__vftable == (CGameState_vtbl *)1 )
   {
-    std::string::string(v12, (char *)&dword_3755768[1]);
+    std::string::string(&v12, (char *)&dword_3755768[1]);
     v10 = v8;
-    std::string::string(v8, (char *)off_3755774 + 1);
+    std::string::string((std::string *)v8, (char *)off_3755774 + 1);
     v9 = &v1;
-    std::string::string(v12);
-    CGameStateHandler::ShowHTMLPage(v1, v2, v3, v4, v5, v6, v7, v8[0]);
-    std::string::~string(v12);
+    ((void (__stdcall *)(std::string *))std::string::string)(&v12);
+    ((void (__cdecl *)(char, int, int, int, int, int, int, char))CGameStateHandler::ShowHTMLPage)(v1, v2, v3, v4, v5, v6, v7, v8[0]);
+    std::string::~string(&v12);
   }
-  CSlideshow::~CSlideshow((CGameState *)((char *)v11 + 12));
+  CSlideshow::~CSlideshow((CSlideshow *)&v11[3]);
   CGameState::~CGameState(v11);
 }
 
@@ -84,11 +84,11 @@ bool  CStateSlideshow::Perform(void) {
   CEvn_Event v5; // [esp+14h] [ebp-28h] BYREF
   int v6; // [esp+38h] [ebp-4h]
 
-  if ( *((_BYTE *)this + 4) && *((_DWORD *)this + 2) == 1 )
+  if ( *((_BYTE *)this + 4) != 0 && *((_DWORD *)this + 2) == 1 )
   {
     return 0;
   }
-  if ( *((_BYTE *)this + 4) )
+  if ( *((_BYTE *)this + 4) != 0 )
   {
     v3 = CEvn_Event::CEvn_Event(&v5, 0xDu, 0x20u, 0, 0);
     v6 = 0;
@@ -107,13 +107,12 @@ bool  CStateSlideshow::Perform(void) {
     }
   }
   v2 = dword_40320AC + 30;
-  if ( v2 >= timeGetTime() )
+  if ( v2 < timeGetTime() )
   {
-    return 1;
+    dword_40320AC = timeGetTime();
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  dword_40320AC = timeGetTime();
-  IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   return 1;
 }
 

@@ -8,7 +8,7 @@ void  CManySettlerTypesIterator::Init(int a2, int a3, int a4) {
   
   int result; // eax
 
-  if ( !a4 )
+  if ( a4 == 0 )
   {
     a4 = a3;
   }
@@ -28,7 +28,7 @@ int  CManySettlerTypesIterator::FirstSettler(void) {
   bool v2; // [esp+0h] [ebp-8h]
 
   *(_DWORD *)this = *((_DWORD *)this + 3);
-  *((_DWORD *)this + 1) = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, *((_DWORD *)this + 2), *((_DWORD *)this + 3));
+  *((_DWORD *)this + 1) = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, *((_DWORD *)this + 2), *((_DWORD *)this + 3));
   v2 = *((_DWORD *)this + 1) != 0;
   if ( (v2 & CSettlerIteratorBase::SettlerValid(this, *((_DWORD *)this + 1))) != 0 )
   {
@@ -45,7 +45,7 @@ int  CManySettlerTypesIterator::FirstSettler(void) {
 // Decompiled from int __thiscall CManySettlerTypesIterator::NextSettler(CManySettlerTypesIterator *this)
 int  CManySettlerTypesIterator::NextSettler(void) {
   
-  int v1; // eax
+  CSettler *v1; // eax
   int i; // [esp+0h] [ebp-8h]
 
   i = *((_DWORD *)this + 1);
@@ -53,8 +53,8 @@ int  CManySettlerTypesIterator::NextSettler(void) {
   {
     v1 = CSettlerMgr::operator[](i);
     for ( i = IAnimatedEntity::Next(v1);
-          !i;
-          i = CSettlerMgr::GetFirstSettlerId((CSettlerMgr *)g_cSettlerMgr, *((_DWORD *)this + 2), *(_DWORD *)this) )
+          i == 0;
+          i = CSettlerMgr::GetFirstSettlerId(&g_cSettlerMgr, *((_DWORD *)this + 2), *(_DWORD *)this) )
     {
       if ( ++*(_DWORD *)this > *((_DWORD *)this + 4) )
       {

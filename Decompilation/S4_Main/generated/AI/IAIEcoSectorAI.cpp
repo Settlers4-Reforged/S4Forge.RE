@@ -19,7 +19,7 @@ class IAIEcoSectorAI * __cdecl IAIEcoSectorAI::CreateEcoSectorAI(class IAIEcoMan
   struct IAISectorAI *v5; // [esp+14h] [ebp-14h]
   int v6; // [esp+18h] [ebp-10h]
 
-  if ( !a1 && BBSupportDbgReport(2, "Source\\SiedAI.cpp", 2120, "_pEcoManager != 0") == 1 )
+  if ( a1 == 0 && BBSupportDbgReport(2, "Source\\SiedAI.cpp", 2120, "_pEcoManager != 0") == 1 )
   {
     __debugbreak();
   }
@@ -28,18 +28,18 @@ class IAIEcoSectorAI * __cdecl IAIEcoSectorAI::CreateEcoSectorAI(class IAIEcoMan
     __debugbreak();
   }
   v5 = (struct IAISectorAI *)(*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)a1 + 332))(a1);
-  if ( !v5 && BBSupportDbgReport(2, "Source\\SiedAI.cpp", 2125, "pSectorAI != 0") == 1 )
+  if ( v5 == 0 && BBSupportDbgReport(2, "Source\\SiedAI.cpp", 2125, "pSectorAI != 0") == 1 )
   {
     __debugbreak();
   }
   v6 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)a1 + 128))(a1);
   v2 = (*(int (__thiscall **)(struct IAIEcoManager *))(*(_DWORD *)a1 + 136))(a1);
-  if ( !v6 && BBSupportDbgReport(2, "Source\\SiedAI.cpp", 2130, "iPlayerId != PLAYER_NO_PLAYER") == 1 )
+  if ( v6 == 0 && BBSupportDbgReport(2, "Source\\SiedAI.cpp", 2130, "iPlayerId != PLAYER_NO_PLAYER") == 1 )
   {
     __debugbreak();
   }
   C = (CEcoSectorAI *)operator new(0x24u);
-  if ( C )
+  if ( C != 0 )
   {
     return CEcoSectorAI::CEcoSectorAI(C, a1, v5, v6, v2);
   }
@@ -54,7 +54,7 @@ class IAIEcoSectorAI * __cdecl IAIEcoSectorAI::CreateEcoSectorAI(class IAIEcoMan
 // Decompiled from IAIEcoSectorAI *__thiscall IAIEcoSectorAI::IAIEcoSectorAI(IAIEcoSectorAI *this)
  IAIEcoSectorAI::IAIEcoSectorAI(void) {
   
-  IAIUnknown::IAIUnknown(this);
+  IAIUnknown::IAIUnknown((IAIUnknown *)this);
   *(_DWORD *)this = IAIEcoSectorAI::_vftable_;
   return this;
 }

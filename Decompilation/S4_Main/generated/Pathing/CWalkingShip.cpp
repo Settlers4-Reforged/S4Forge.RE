@@ -47,17 +47,17 @@ bool  CWalkingShip::IsNotOccupied(int a2) {
 
 
 // address=[0x15f9910]
-// Decompiled from char __thiscall CWalkingShip::FindPathAStar64(CWalkingShip *this, int a2, int a3, struct CDirCache *a4)
+// Decompiled from char __thiscall CWalkingShip::FindPathAStar64(CWalkingShip *this, unsigned int a2, unsigned int a3, struct CDirCache *a4)
 bool  CWalkingShip::FindPathAStar64(int a2, int a3, class CDirCache & a4) {
   
   char Path; // [esp+5h] [ebp-3h]
 
-  if ( !CWater::RemoveShip(a2) && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2213, "bRemoved") == 1 )
+  if ( CWater::RemoveShip(a2) == 0 && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2213, "bRemoved") == 1 )
   {
     __debugbreak();
   }
   Path = CAStar64::FindPath((CAStar64 *)&g_cAStar64Ship, a2, a3, a4);
-  if ( !CWater::PlaceShip(a2) && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2219, "bPlaced") == 1 )
+  if ( CWater::PlaceShip(a2) == 0 && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2219, "bPlaced") == 1 )
   {
     __debugbreak();
   }
@@ -182,8 +182,8 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
             j < SurroundingHexPointsCount(15);
             ++j )
       {
-        v22 = v9 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * j]);
-        v21 = v8 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * j]);
+        v22 = v9 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[j]);
+        v21 = v8 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[j]);
         if ( CWorldManager::InWorld(v22, v21) )
         {
           v17 = CWorldManager::Index(v22, v21);
@@ -213,7 +213,7 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
     v7 = Y16X16::UnpackXFast(a2);
     v6 = Y16X16::UnpackYFast(a2);
     v5 = CWorldManager::Index(g_sNeighborPoints[v19].x + v7, g_sNeighborPoints[v19].y + v6);
-    if ( this->IsNotBlocked(this, v5) )
+    if ( this->IsNotBlocked(this, v5) != 0 )
     {
       this->m_sData.m_uFlags |= 0x20000u;
       return v19;
@@ -223,7 +223,7 @@ int  CWalkingShip::IdleWalk(int a2, int a3) {
   {
     this->m_sData.m_iIdleWalkToXY = -1;
   }
-  if ( v34 | v33 )
+  if ( (v34 | v33) != 0 )
   {
     v31 = 0;
     v13 = v39[5] == v28;

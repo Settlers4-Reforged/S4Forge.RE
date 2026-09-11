@@ -8,7 +8,7 @@
  IEventHandler::IEventHandler(int a2) {
   
   this->__vftable = (IEventHandler_vtbl *)&IEventHandler::_vftable_;
-  this->m_pHandlers = (DWORD *)operator new[](4 * a2);
+  this->m_pHandlers = (char (__thiscall **)(IEventHandler *, void *))operator new[](4 * a2);
   return this;
 }
 
@@ -18,7 +18,7 @@
  IEventHandler::~IEventHandler(void) {
   
   *this = &IEventHandler::_vftable_;
-  return operator delete[](this[1]);
+  return operator delete[](*(this + 1));
 }
 
 

@@ -12,7 +12,7 @@ void __cdecl CWaterFlagsEx::BlockRowPrimary(unsigned char * a1, int a2) {
   int v5; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  v5 = CWorldManager::Width(v2) + 4;
+  v5 = ((int (__thiscall *)(int))CWorldManager::Width)(v2) + 4;
   for ( i = a2 * v5;
         ;
         ++i )
@@ -46,7 +46,7 @@ void __cdecl CWaterFlagsEx::BlockColPrimary(unsigned char * a1, int a2) {
   unsigned __int8 v5; // [esp+Ch] [ebp-8h]
   int i; // [esp+10h] [ebp-4h]
 
-  v4 = CWorldManager::Width(v2) + 4;
+  v4 = ((int (__thiscall *)(int))CWorldManager::Width)(v2) + 4;
   result = a2;
   for ( i = a2;
         i <= a2 + v4 * (v4 - 1);
@@ -75,7 +75,7 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
   int v1; // esi
   int v2; // eax
   const char *v3; // eax
-  _BYTE v5[24]; // [esp+4h] [ebp-19Ch] BYREF
+  LARGE_INTEGER v5[3]; // [esp+4h] [ebp-19Ch] BYREF
   void *C; // [esp+1Ch] [ebp-184h]
   int v7; // [esp+20h] [ebp-180h]
   int v8; // [esp+24h] [ebp-17Ch]
@@ -115,14 +115,14 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
 
   CPerformanceCounter::CPerformanceCounter((CPerformanceCounter *)v5);
   CPerformanceCounter::Start((CPerformanceCounter *)v5);
-  v35 = CWorldManager::Width(v0);
+  v35 = ((int (__thiscall *)(int))CWorldManager::Width)(v0);
   v39 = v35 + 4;
   for ( i = 0;
         i < 61;
         ++i )
   {
-    v1 = SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * i]);
-    v2 = SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * i]);
+    v1 = SSurroundingPoint8::X(&g_sSurroundingHexPoints8[i]);
+    v2 = SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[i]);
     v41[i] = v39 * v2 + v1;
   }
   v15 = (unsigned __int8 *)operator new[](v39 * v39);
@@ -161,7 +161,7 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
       else
       {
         v29 = 66;
-        if ( (unsigned __int8)CWorldManager::IsBlockedLand(v33) )
+        if ( CWorldManager::IsBlockedLand(v33) )
         {
           v29 = 194;
         }
@@ -280,7 +280,7 @@ void __cdecl CWaterFlagsEx::CalcWaterFlags(void) {
   }
   C = v40;
   operator delete[](v40);
-  CPerformanceCounter::Measure((CPerformanceCounter *)v5);
+  CPerformanceCounter::Measure(v5);
   v3 = CPerformanceCounter::TimeMsStr((CPerformanceCounter *)v5, 0, 3);
   return CTrace::Print("CWaterFlagsEx::CalcWaterFlags(): %s ms", v3);
 }

@@ -3,7 +3,7 @@
 // Definitions for class CCatapult
 
 // address=[0x153d480]
-// Decompiled from void __thiscall CCatapult::Delete(CCatapult *this)
+// Decompiled from void __thiscall CCatapult::Delete(CWheeler *this)
 void  CCatapult::Delete(void) {
   
   CWheeler::Delete(this);
@@ -22,16 +22,16 @@ void  CCatapult::VehicleLogicUpdate(void) {
   TickCounter = CStateGame::GetTickCounter(g_pGame);
   if ( CWheeler::FULL_UPDATE_DELAY + *((_DWORD *)this + 53) < TickCounter )
   {
-    CCatapult::TakeAmmo(this);
-    v3 = CWheeler::RepairBuildingInRange(this);
-    if ( v3 )
+    ((void (__thiscall *)(CCatapult *))CCatapult::TakeAmmo)(this);
+    v3 = CWheeler::RepairBuildingInRange((CWheeler *)this);
+    if ( v3 != 0 )
     {
-      CWheeler::RepairAt(this, v3);
+      CWheeler::RepairAt((CWheeler *)this, v3);
     }
     *((_DWORD *)this + 53) = TickCounter;
   }
-  v2 = !CVehicle::ReadyToFire(this, TickCounter);
-  if ( (*(unsigned __int8 (__thiscall **)(CCatapult *))(*(_DWORD *)this + 204))(this) )
+  v2 = !CVehicle::ReadyToFire((CVehicle *)this, TickCounter);
+  if ( (*(unsigned __int8 (__thiscall **)(CCatapult *))(*(_DWORD *)this + 204))(this) != 0 )
   {
     v1 = 0;
   }
@@ -39,9 +39,9 @@ void  CCatapult::VehicleLogicUpdate(void) {
   {
     v1 = 2;
   }
-  if ( !IEntity::FlagBits(this, ENTITY_FLAG_ON_BOARD) )
+  if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_ON_BOARD) == 0 )
   {
-    CWarriorBehavior::WarriorVehicleLogicUpdate((CCatapult *)((char *)this + 180), this, TickCounter, v1 | v2);
+    CWarriorBehavior::WarriorVehicleLogicUpdate((CWarriorBehavior *)((char *)this + 180), (struct IMovingEntity *)this, TickCounter, v1 | v2);
   }
 }
 
@@ -70,11 +70,11 @@ void  CCatapult::ConvertEventIntoGoal(class CEntityEvent * a2) {
   int v19; // [esp+58h] [ebp-4h]
 
   v17 = this;
-  if ( !a2 && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 379, "_pEvent!=NULL") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 379, "_pEvent!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( a2 )
+  if ( a2 != 0 )
   {
     m_iEvent = a2->m_iEvent;
     if ( m_iEvent == 17 && a2->m_iType == 13 )
@@ -82,14 +82,14 @@ void  CCatapult::ConvertEventIntoGoal(class CEntityEvent * a2) {
       m_iDataB = a2->m_iDataB;
       v11 = Y16X16::UnpackXFast(m_iDataB);
       v12 = Y16X16::UnpackYFast(m_iDataB);
-      if ( CCatapult::AttackTargetAt((CCatapult *)v17, v11, v12) )
+      if ( CCatapult::AttackTargetAt((CCatapult *)v17, v11, v12) != 0 )
       {
         return;
       }
       if ( (int)v17[5].m_warMapNode.m_uNextPrev > 0 )
       {
         SettlerPtr = CSettlerMgr::GetSettlerPtr(&g_cSettlerMgr, v17[5].m_warMapNode.m_uNextPrev);
-        if ( SettlerPtr && IEntity::Type(SettlerPtr) == 60 )
+        if ( SettlerPtr != 0 && IEntity::Type(SettlerPtr) == 60 )
         {
           if ( IEntity::Type(SettlerPtr) != 60 && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 407, "pSettler->Type() == SETTLER_DONKEY") == 1 )
           {
@@ -103,7 +103,7 @@ void  CCatapult::ConvertEventIntoGoal(class CEntityEvent * a2) {
           v10 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
           CDonkeyRole::UpdateCatapultPosition(v10, m_iDataB);
         }
-        if ( SettlerPtr && IEntity::Type(SettlerPtr) == 1 )
+        if ( SettlerPtr != 0 && IEntity::Type(SettlerPtr) == 1 )
         {
           if ( IEntity::Type(SettlerPtr) != 1 && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 417, "pSettler->Type() == SETTLER_CARRIER") == 1 )
           {
@@ -135,17 +135,17 @@ void  CCatapult::ConvertEventIntoGoal(class CEntityEvent * a2) {
 
 
 // address=[0x153d840]
-// Decompiled from int __thiscall CCatapult::WarriorTaskWalkOneStep(CCatapult *this, struct IMovingEntity *a2)
+// Decompiled from int __thiscall CCatapult::WarriorTaskWalkOneStep(IEntity *this, struct IMovingEntity *a2)
 int  CCatapult::WarriorTaskWalkOneStep(class IMovingEntity & a2) {
   
   int v2; // eax
   int v3; // eax
   struct CWalking *v5; // [esp+0h] [ebp-8h]
 
-  v5 = IMovingEntity::Walking((CCatapult *)((char *)this - 180));
-  v2 = IEntity::PackedXY((char *)this - 180);
-  v3 = (*(int (__thiscall **)(struct CWalking *, int))(*(_DWORD *)v5 + 12))(v5, v2);
-  CVehicle::WalkDirAndRegister((CCatapult *)((char *)this - 180), v3, 0);
+  v5 = IMovingEntity::Walking((IMovingEntity *)(this - 5));
+  v2 = IEntity::PackedXY(this - 5);
+  v3 = v5->Walk(v5, v2);
+  CVehicle::WalkDirAndRegister((CVehicle *)(this - 5), v3, 0);
   return *((unsigned __int8 *)this - 76);
 }
 
@@ -157,9 +157,9 @@ void  CCatapult::WarriorTaskAttack(class IMovingEntity & a2, int a3, enum T_WARR
   int v4; // eax
 
   CVehicle::AttackTarget((CVehicle *)(this - 180), a3);
-  CVehicle::TakeJobPart((CVehicle *)(this - 180), 0x23u);
+  CVehicle::TakeJobPart((CVehicle *)(this - 180), 0x23);
   v4 = CVehicle::TurnCounter((CVehicle *)(this - 180));
-  return CVehicle::RegisterNewTask((CVehicle *)(this - 180), 16, (unsigned __int8)*(this - 71) + v4);
+  return CVehicle::RegisterNewTask((CVehicle *)(this - 180), 16u, (unsigned __int8)*(this - 71) + v4);
 }
 
 
@@ -176,41 +176,38 @@ void  CCatapult::WarriorTaskFinished(class IMovingEntity & a2) {
   int v9; // [esp+Ch] [ebp-Ch]
   unsigned __int8 *SettlerPtr; // [esp+10h] [ebp-8h]
 
-  if ( *((int *)this + 7) <= 0 )
+  if ( *((int *)this + 7) > 0 )
   {
-    return CVehicle::GetNextJob((CCatapult *)((char *)this - 180));
+    SettlerPtr = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(*((_DWORD *)this + 7));
+    if ( SettlerPtr == 0 && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 650, "pSettler!= NULL") == 1 )
+    {
+      __debugbreak();
+    }
+    if ( SettlerPtr != 0 )
+    {
+      v9 = (int)CSettler::Role((CSettler *)SettlerPtr);
+      if ( (*(int (__thiscall **)(int))(*(_DWORD *)v9 + 72))(v9) == 20 )
+      {
+        v7 = (CDonkeyRole *)CSettler::Role((CSettler *)SettlerPtr);
+        v2 = (*(int (__thiscall **)(char *, int, _DWORD))(*((_DWORD *)this - 45) + 140))((char *)this - 180, 1, *((_DWORD *)this + 7));
+        CDonkeyRole::UpdateCatapultPosition(v7, v2);
+      }
+      v8 = (int)CSettler::Role((CSettler *)SettlerPtr);
+      if ( (*(int (__thiscall **)(int))(*(_DWORD *)v8 + 72))(v8) == 1 )
+      {
+        v6 = (CCarrierRole *)CSettler::Role((CSettler *)SettlerPtr);
+        v3 = ((int (__stdcall *)())IEntity::ID)();
+        v4 = (*(int (__thiscall **)(char *, int, int))(*((_DWORD *)this - 45) + 140))((char *)this - 180, 1, v3);
+        CCarrierRole::UpdateCatapultPosition(v6, v4);
+      }
+    }
   }
-  SettlerPtr = CSettlerMgr::GetSettlerPtr(*((_DWORD *)this + 7));
-  if ( !SettlerPtr && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 650, "pSettler!= NULL") == 1 )
-  {
-    __debugbreak();
-  }
-  if ( !SettlerPtr )
-  {
-    return CVehicle::GetNextJob((CCatapult *)((char *)this - 180));
-  }
-  v9 = CSettler::Role(SettlerPtr);
-  if ( (*(int (__thiscall **)(int))(*(_DWORD *)v9 + 72))(v9) == 20 )
-  {
-    v7 = (CDonkeyRole *)CSettler::Role(SettlerPtr);
-    v2 = (*(int (__thiscall **)(char *, int, _DWORD))(*((_DWORD *)this - 45) + 140))((char *)this - 180, 1, *((_DWORD *)this + 7));
-    CDonkeyRole::UpdateCatapultPosition(v7, v2);
-  }
-  v8 = CSettler::Role(SettlerPtr);
-  if ( (*(int (__thiscall **)(int))(*(_DWORD *)v8 + 72))(v8) != 1 )
-  {
-    return CVehicle::GetNextJob((CCatapult *)((char *)this - 180));
-  }
-  v6 = (CCarrierRole *)CSettler::Role(SettlerPtr);
-  v3 = IEntity::ID();
-  v4 = (*(int (__thiscall **)(char *, int, int))(*((_DWORD *)this - 45) + 140))((char *)this - 180, 1, v3);
-  CCarrierRole::UpdateCatapultPosition(v6, v4);
-  return CVehicle::GetNextJob((CCatapult *)((char *)this - 180));
+  return CVehicle::GetNextJob((CVehicle *)((char *)this - 180));
 }
 
 
 // address=[0x153da20]
-// Decompiled from int __thiscall CCatapult::WarriorTaskIdleWalk(CCatapult *this, struct IMovingEntity *a2)
+// Decompiled from int __thiscall CCatapult::WarriorTaskIdleWalk(IEntity *this, struct IMovingEntity *a2)
 int  CCatapult::WarriorTaskIdleWalk(class IMovingEntity & a2) {
   
   int v2; // eax
@@ -219,20 +216,19 @@ int  CCatapult::WarriorTaskIdleWalk(class IMovingEntity & a2) {
   int v5; // eax
   struct CWalking *v7; // [esp+0h] [ebp-8h]
 
-  v2 = IEntity::PackedXY((char *)this - 180);
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(v2) && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 595, "g_cWorld.InWorldPackedXY(PackedXY())") == 1 )
+  v2 = IEntity::PackedXY(this - 5);
+  if ( !CWorldManager::InWorldPackedXY(v2) && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 595, "g_cWorld.InWorldPackedXY(PackedXY())") == 1 )
   {
     __debugbreak();
   }
-  v3 = IEntity::PackedXY((char *)this - 180);
-  if ( !(unsigned __int8)CWorldManager::InWorldPackedXY(v3) )
+  v3 = IEntity::PackedXY(this - 5);
+  if ( CWorldManager::InWorldPackedXY(v3) )
   {
-    return *((unsigned __int8 *)this - 76);
+    v7 = IMovingEntity::Walking((IMovingEntity *)(this - 5));
+    v4 = IEntity::PackedXY(this - 5);
+    v5 = v7->IdleWalk((CWalkingBase *)v7, (Y16X16 *)v4, 0);
+    CVehicle::WalkDirAndRegister((CVehicle *)(this - 5), v5, 0);
   }
-  v7 = IMovingEntity::Walking((CCatapult *)((char *)this - 180));
-  v4 = IEntity::PackedXY((char *)this - 180);
-  v5 = (*(int (__thiscall **)(struct CWalking *, int, _DWORD))(*(_DWORD *)v7 + 16))(v7, v4, 0);
-  CVehicle::WalkDirAndRegister((CCatapult *)((char *)this - 180), v5, 0);
   return *((unsigned __int8 *)this - 76);
 }
 
@@ -244,7 +240,7 @@ void  CCatapult::EntityOrderCanceled(int a2) {
   CCatapult *result; // eax
 
   result = this;
-  if ( !*((_DWORD *)this + 52) )
+  if ( *((_DWORD *)this + 52) == 0 )
   {
     result = (CCatapult *)BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 357, "m_iAmmoTransporterID != 0");
     if ( result == (CCatapult *)1 )
@@ -264,7 +260,7 @@ void  CCatapult::GoodArrived(int a2, int a3) {
   int v3; // edx
   CCatapult *result; // eax
 
-  if ( !*((_DWORD *)this + 52) && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 371, "m_iAmmoTransporterID != 0") == 1 )
+  if ( *((_DWORD *)this + 52) == 0 && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 371, "m_iAmmoTransporterID != 0") == 1 )
   {
     __debugbreak();
   }
@@ -280,13 +276,13 @@ void  CCatapult::GoodArrived(int a2, int a3) {
 // Decompiled from _DWORD *__thiscall CCatapult::CCatapult(_DWORD *this, int a2)
  CCatapult::CCatapult(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   _DWORD *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  CWheeler::CWheeler(a2);
+  ((void (__stdcall *)(int))CWheeler::CWheeler)(a2);
   v6 = 0;
   CWarriorBehavior::CWarriorBehavior((CWarriorBehavior *)(v5 + 45));
   *v5 = &CCatapult::_vftable_;
@@ -300,8 +296,8 @@ void  CCatapult::GoodArrived(int a2, int a3) {
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
   operator^<bool>(a2, v5 + 51);
-  operator^<int>(a2, (int)(v5 + 52));
-  operator^<int>(a2, (int)(v5 + 53));
+  operator^<int>((struct std::istream *)a2, v5 + 52);
+  operator^<int>((struct std::istream *)a2, v5 + 53);
   v6 = -1;
   return v5;
 }
@@ -315,12 +311,12 @@ void  CCatapult::Store(std::ostream & a2) {
   int *v4; // [esp+4h] [ebp-4h]
 
   v4 = this;
-  CWheeler::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))CWheeler::Store)(a2);
   v3 = 1;
-  operator^<unsigned int>(a2, &v3);
-  operator^<bool>((int)a2, (int)(v4 + 51));
-  operator^<int>((int)a2, v4 + 52);
-  return operator^<int>((int)a2, v4 + 53);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
+  operator^<bool>(a2, (bool *)v4 + 204);
+  operator^<int>(a2, v4 + 52);
+  return operator^<int>(a2, v4 + 53);
 }
 
 
@@ -331,17 +327,15 @@ void  CCatapult::RequestAmmoDonkey(void) {
   CCatapult *result; // eax
 
   result = this;
-  if ( *((_DWORD *)this + 52) )
+  if ( *((_DWORD *)this + 52) == 0 )
   {
-    return result;
+    result = this;
+    if ( (unsigned int)*((unsigned __int8 *)this + 111) < *(_DWORD *)(*((_DWORD *)this + 25) + 84) )
+    {
+      result = (CCatapult *)CCatapult::RequestDonkey((IEntity *)this);
+      *((_DWORD *)this + 52) = result;
+    }
   }
-  result = this;
-  if ( (unsigned int)*((unsigned __int8 *)this + 111) >= *(_DWORD *)(*((_DWORD *)this + 25) + 84) )
-  {
-    return result;
-  }
-  result = (CCatapult *)CCatapult::RequestDonkey(this);
-  *((_DWORD *)this + 52) = result;
   return result;
 }
 
@@ -371,14 +365,13 @@ int const  CCatapult::GetMeetingPointXY(enum OBJ_TYPE a2, int a3) {
     v4 = IEntity::Y((void *)this);
     v8 = CSpiralOffsets::DeltaY(v9) + v4;
     v10 = CWorldManager::MapObjectId(v7, v8);
-    if ( !v10 )
+    if ( v10 != 0 )
     {
-      return Y16X16::PackXYFast(v7, v8);
-    }
-    v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v10);
-    if ( !IEntity::ObjType(v5) )
-    {
-      continue;
+      v5 = (unsigned __int8 *)CMapObjectMgr::Entity(v10);
+      if ( IEntity::ObjType((IEntity *)v5) == NONE_OBJ )
+      {
+        continue;
+      }
     }
     return Y16X16::PackXYFast(v7, v8);
   }
@@ -405,10 +398,10 @@ void  CCatapult::PostLoadInit(void) {
   struct CWarriorBehavior::SWarriorBehaviorData *WarriorBehaviorData; // eax
   int v3; // [esp-4h] [ebp-8h]
 
-  v3 = *((_DWORD *)CWarriorBehavior::GetWarriorBehaviorData((CCatapult *)((char *)this + 180)) + 3);
-  WarriorBehaviorData = CWarriorBehavior::GetWarriorBehaviorData((CCatapult *)((char *)this + 180));
-  (**((void (__thiscall ***)(char *, CCatapult *, _DWORD, int))this + 45))((char *)this + 180, this, *((_DWORD *)WarriorBehaviorData + 2), v3);
-  return CVehicle::PostLoadInit(this);
+  v3 = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)((char *)this + 180))->m_iFlags;
+  WarriorBehaviorData = CWarriorBehavior::GetWarriorBehaviorData((CWarriorBehavior *)((char *)this + 180));
+  (**((void (__thiscall ***)(char *, CCatapult *, int, int))this + 45))((char *)this + 180, this, WarriorBehaviorData->m_iDestinationXYOrId, v3);
+  return ((char (__thiscall *)(CVehicle *))CVehicle::PostLoadInit)((CVehicle *)this);
 }
 
 
@@ -420,7 +413,7 @@ void  CCatapult::OnComeToFerry(int a2) {
   int v3; // eax
   int v4; // eax
   int v5; // [esp-4h] [ebp-40h]
-  _BYTE v6[24]; // [esp+4h] [ebp-38h] BYREF
+  CEntityEvent v6; // [esp+4h] [ebp-38h] BYREF
   CEntityEvent *v7; // [esp+1Ch] [ebp-20h]
   CEntityEvent *v8; // [esp+20h] [ebp-1Ch]
   int v9; // [esp+24h] [ebp-18h]
@@ -429,36 +422,34 @@ void  CCatapult::OnComeToFerry(int a2) {
   int v12; // [esp+38h] [ebp-4h]
 
   v11 = (int *)this;
-  result = (unsigned __int8 *)CWheeler::OnComeToFerry(this, a2);
-  if ( v11[43] <= 0 || v11[52] <= 0 )
+  result = (unsigned __int8 *)CWheeler::OnComeToFerry((CWheeler *)this, a2);
+  if ( v11[43] > 0 && v11[52] > 0 )
   {
-    return result;
-  }
-  result = CSettlerMgr::GetSettlerPtr(v11[52]);
-  v10 = result;
-  if ( !result )
-  {
-    result = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 739, "pSettler!=NULL");
-    if ( result == (unsigned __int8 *)1 )
+    result = ((unsigned __int8 *(__stdcall *)(int))CSettlerMgr::GetSettlerPtr)(v11[52]);
+    v10 = result;
+    if ( result == 0 )
     {
-      __debugbreak();
+      result = (unsigned __int8 *)BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 739, "pSettler!=NULL");
+      if ( result == (unsigned __int8 *)1 )
+      {
+        __debugbreak();
+      }
+    }
+    if ( v10 != 0 )
+    {
+      v5 = IEntity::Y(v11);
+      v3 = IEntity::X(v11);
+      v9 = CWorldManager::EcoSectorId(v3, v5);
+      v4 = ((int (__stdcall *)())IEntity::ID)();
+      v8 = CEntityEvent::CEntityEvent(&v6, 9u, 0, v4, v9, 0);
+      v7 = v8;
+      v12 = 0;
+      (*(void (__thiscall **)(unsigned __int8 *, CEntityEvent *))(*(_DWORD *)v10 + 80))(v10, v8);
+      v12 = -1;
+      result = (unsigned __int8 *)CEntityEvent::~CEntityEvent(&v6);
+      v11[52] = 0;
     }
   }
-  if ( !v10 )
-  {
-    return result;
-  }
-  v5 = IEntity::Y(v11);
-  v3 = IEntity::X(v11);
-  v9 = CWorldManager::EcoSectorId(v3, v5);
-  v4 = IEntity::ID();
-  v8 = CEntityEvent::CEntityEvent((CEntityEvent *)v6, 9u, 0, v4, v9, 0);
-  v7 = v8;
-  v12 = 0;
-  (*(void (__thiscall **)(unsigned __int8 *, CEntityEvent *))(*(_DWORD *)v10 + 80))(v10, v8);
-  v12 = -1;
-  result = (unsigned __int8 *)CEntityEvent::~CEntityEvent(v6);
-  v11[52] = 0;
   return result;
 }
 
@@ -488,32 +479,31 @@ void  CCatapult::OnComeToFerry(int a2) {
 
 
 // address=[0x153e110]
-// Decompiled from void __thiscall CCatapult::~CCatapult(CCatapult *this)
+// Decompiled from void __thiscall CCatapult::~CCatapult(CWheeler *this)
  CCatapult::~CCatapult(void) {
   
-  *(_DWORD *)this = &CCatapult::_vftable_;
+  this->__vftable = (CVehicle_vtbl *)&CCatapult::_vftable_;
   *((_DWORD *)this + 45) = &CCatapult::`vftable';
   CWheeler::~CWheeler(this);
 }
 
 
 // address=[0x153e140]
-// Decompiled from void *__thiscall CCatapult::GetGfxInfos(CCatapult *this)
+// Decompiled from SGfxObjectInfo *__thiscall CCatapult::GetGfxInfos(CCatapult *this)
 struct SGfxObjectInfo *  CCatapult::GetGfxInfos(void) {
   
   CWheeler::GetGfxInfos((int)this);
-  if ( !IEntity::FlagBits(this, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) != 0 )
   {
-    return &IEntity::m_sGfxInfo;
+    IEntity::m_sGfxInfo.m_uDecorator = CCatapult::GetHealthDisplayID(this);
+    IEntity::m_sGfxInfo.m_u0 = CCatapult::GetAmmoDisplayID((IEntity *)this);
   }
-  MEMORY[0x40FE264] = CCatapult::GetHealthDisplayID(this);
-  MEMORY[0x40FE265] = CCatapult::GetAmmoDisplayID(this);
   return &IEntity::m_sGfxInfo;
 }
 
 
 // address=[0x153e190]
-// Decompiled from int __thiscall CCatapult::TakeJob(CCatapult *this)
+// Decompiled from int __thiscall CCatapult::TakeJob(CVehicle *this)
 void  CCatapult::TakeJob(void) {
   
   int v1; // eax
@@ -524,42 +514,40 @@ void  CCatapult::TakeJob(void) {
 
   CVehicle::InitCommonTaskValues(this, 0);
   CurrentTaskPtr = CVehicle::GetCurrentTaskPtr(this);
-  if ( !CurrentTaskPtr )
+  if ( CurrentTaskPtr == 0 )
   {
 LABEL_12:
-    (**((void (__thiscall ***)(char *, CCatapult *, int, _DWORD))this + 45))((char *)this + 180, this, -1, 0);
-    return (*(int (__thiscall **)(CCatapult *))(*(_DWORD *)this + 144))(this);
+    (**((void (__thiscall ***)(char *, CVehicle *, int, _DWORD))this + 45))((char *)this + 180, this, -1, 0);
+    return this->VehicleLogicUpdate(this);
   }
   v5 = *(_BYTE *)(CurrentTaskPtr + 4);
-  if ( v5 == 6 )
+  switch ( v5 )
   {
-    v1 = Y16X16::PackXYFast(*(__int16 *)(CurrentTaskPtr + 10), *(__int16 *)(CurrentTaskPtr + 12));
-    (**((void (__thiscall ***)(char *, CCatapult *, int, int))this + 45))((char *)this + 180, this, v1, 0x200000);
-  }
-  else
-  {
-    if ( v5 != 7 )
-    {
-      if ( v5 != 8 )
-      {
-        if ( BBSupportDbgReport(1, "MapObjects\\Catapult\\Catapult.cpp", 528, "CCatapult::TakeJob(): Invalid task!") == 1 )
-        {
-          __debugbreak();
-        }
-        goto LABEL_12;
-      }
+    case 6:
+      v1 = Y16X16::PackXYFast(*(__int16 *)(CurrentTaskPtr + 10), *(__int16 *)(CurrentTaskPtr + 12));
+      (**((void (__thiscall ***)(char *, CVehicle *, int, int))this + 45))((char *)this + 180, this, v1, 0x200000);
+      break;
+    case 7:
+      v2 = Y16X16::PackXYFast(*(__int16 *)(CurrentTaskPtr + 10), *(__int16 *)(CurrentTaskPtr + 12));
+      (**((void (__thiscall ***)(char *, CVehicle *, int, int))this + 45))((char *)this + 180, this, v2, 0x100000);
+      break;
+    case 8:
       HIDWORD(v4) = *(__int16 *)(CurrentTaskPtr + 10) < 0;
       LODWORD(v4) = *(__int16 *)(CurrentTaskPtr + 12) < 0;
-      if ( v4 )
+      if ( v4 != 0 )
       {
         *(_WORD *)(CurrentTaskPtr + 10) = IEntity::X(this);
         *(_WORD *)(CurrentTaskPtr + 12) = IEntity::Y(this);
       }
-    }
-    v2 = Y16X16::PackXYFast(*(__int16 *)(CurrentTaskPtr + 10), *(__int16 *)(CurrentTaskPtr + 12));
-    (**((void (__thiscall ***)(char *, CCatapult *, int, int))this + 45))((char *)this + 180, this, v2, 0x100000);
+      break;
+    default:
+      if ( BBSupportDbgReport(1, "MapObjects\\Catapult\\Catapult.cpp", 528, "CCatapult::TakeJob(): Invalid task!") == 1 )
+      {
+        __debugbreak();
+      }
+      goto LABEL_12;
   }
-  return (*(int (__thiscall **)(CCatapult *))(*(_DWORD *)this + 144))(this);
+  return this->VehicleLogicUpdate(this);
 }
 
 
@@ -576,33 +564,30 @@ void  CCatapult::TakeAmmo(void) {
   int v7; // [esp+14h] [ebp-8h]
 
   result = (unsigned int)this;
-  if ( !*((_BYTE *)this + 204) )
+  if ( *((_BYTE *)this + 204) != 0 )
   {
-    return result;
+    result = *((unsigned __int8 *)this + 111);
+    if ( result < *(_DWORD *)(*((_DWORD *)this + 25) + 84) )
+    {
+      result = CCatapult::SearchForAmmo(this);
+      if ( result != 0 )
+      {
+        v4 = (unsigned __int8 *)CPileMgr::operator[](result);
+        v3 = CPile::NumberOfAvailableGoods((CPile *)v4);
+        v6 = v3 * (*(int (__thiscall **)(CCatapult *))(*(_DWORD *)this + 228))(this);
+        v5 = *(_DWORD *)(*((_DWORD *)this + 25) + 84) - *((unsigned __int8 *)this + 111);
+        v7 = v6 / (*(int (__thiscall **)(CCatapult *))(*(_DWORD *)this + 228))(this);
+        if ( v6 > v5 )
+        {
+          v7 = v5 / (*(int (__thiscall **)(CCatapult *))(*(_DWORD *)this + 228))(this);
+        }
+        CPile::DecreaseUnforeseen((CPile *)v4, v7);
+        v2 = v7 * (*(int (__thiscall **)(CCatapult *))(*(_DWORD *)this + 228))(this) + *((_BYTE *)this + 111);
+        result = (unsigned int)this;
+        *((_BYTE *)this + 111) = v2;
+      }
+    }
   }
-  result = *((unsigned __int8 *)this + 111);
-  if ( result >= *(_DWORD *)(*((_DWORD *)this + 25) + 84) )
-  {
-    return result;
-  }
-  result = CCatapult::SearchForAmmo(this);
-  if ( !result )
-  {
-    return result;
-  }
-  v4 = CPileMgr::operator[](result);
-  v3 = CPile::NumberOfAvailableGoods((CPile *)v4);
-  v6 = v3 * (*(int (__thiscall **)(CCatapult *))(*(_DWORD *)this + 228))(this);
-  v5 = *(_DWORD *)(*((_DWORD *)this + 25) + 84) - *((unsigned __int8 *)this + 111);
-  v7 = v6 / (*(int (__thiscall **)(CCatapult *))(*(_DWORD *)this + 228))(this);
-  if ( v6 > v5 )
-  {
-    v7 = v5 / (*(int (__thiscall **)(CCatapult *))(*(_DWORD *)this + 228))(this);
-  }
-  CPile::DecreaseUnforeseen((CPile *)v4, v7);
-  v2 = v7 * (*(int (__thiscall **)(CCatapult *))(*(_DWORD *)this + 228))(this) + *((_BYTE *)this + 111);
-  result = (unsigned int)this;
-  *((_BYTE *)this + 111) = v2;
   return result;
 }
 
@@ -622,32 +607,31 @@ int  CCatapult::SearchForAmmo(void) {
   unsigned __int8 *v10; // [esp+20h] [ebp-Ch]
   int i; // [esp+28h] [ebp-4h]
 
-  if ( IEntity::Race(this) == 1 )
+  if ( IEntity::Race(this) != 1 )
   {
-    return 0;
-  }
-  v3 = *(_DWORD *)(*((_DWORD *)this + 25) + 80);
-  v6 = IEntity::X(this);
-  v5 = IEntity::Y(this);
-  for ( i = 0;
-        i < 91;
-        ++i )
-  {
-    v7 = v6 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[4 * i]);
-    v8 = v5 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[4 * i]);
-    if ( (unsigned __int8)CWorldManager::InWorld(v7, v8) )
+    v3 = *(_DWORD *)(*((_DWORD *)this + 25) + 80);
+    v6 = IEntity::X(this);
+    v5 = IEntity::Y(this);
+    for ( i = 0;
+          i < 91;
+          ++i )
     {
-      v4 = CWorldManager::Index(v7, v8);
-      v9 = CWorldManager::PileId(v4);
-      if ( v9 )
+      v7 = v6 + SSurroundingPoint8::X(&g_sSurroundingHexPoints8[i]);
+      v8 = v5 + SSurroundingPoint8::Y(&g_sSurroundingHexPoints8[i]);
+      if ( CWorldManager::InWorld(v7, v8) )
       {
-        v10 = CPileMgr::operator[](v9);
-        if ( (*(int (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v10 + 60))(v10, v2) == v3 )
+        v4 = CWorldManager::Index(v7, v8);
+        v9 = CWorldManager::PileId(v4);
+        if ( v9 != 0 )
         {
-          v2 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v10 + 40))(v10);
-          if ( v2 > 0 )
+          v10 = (unsigned __int8 *)CPileMgr::operator[](v9);
+          if ( (*(int (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v10 + 60))(v10, v2) == v3 )
           {
-            return v9;
+            v2 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v10 + 40))(v10);
+            if ( v2 > 0 )
+            {
+              return v9;
+            }
           }
         }
       }
@@ -658,7 +642,7 @@ int  CCatapult::SearchForAmmo(void) {
 
 
 // address=[0x153e530]
-// Decompiled from int __thiscall CCatapult::GetAmmoDisplayID(CCatapult *this)
+// Decompiled from int __thiscall CCatapult::GetAmmoDisplayID(IEntity *this)
 int  CCatapult::GetAmmoDisplayID(void) {
   
   int v2; // eax
@@ -668,32 +652,32 @@ int  CCatapult::GetAmmoDisplayID(void) {
   signed int v7; // [esp+14h] [ebp-8h]
   signed int v8; // [esp+18h] [ebp-4h]
 
-  if ( !*((_DWORD *)this + 25) && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 201, "m_pVehicleProperties!=NULL") == 1 )
+  if ( *((_DWORD *)this + 25) == 0 && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 201, "m_pVehicleProperties!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 25) )
+  if ( *((_DWORD *)this + 25) == 0 )
   {
     return 0;
   }
   if ( IEntity::Race(this) == 1 )
   {
-    if ( CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost) <= 0 )
+    if ( CStaticConfigVarInt::operator int((CStaticConfigVarInt *)g_pMagicVikingWarmachineShotCost) <= 0 )
     {
       v3 = 1;
     }
     else
     {
-      v3 = CStaticConfigVarInt::operator int(g_pMagicVikingWarmachineShotCost);
+      v3 = CStaticConfigVarInt::operator int((CStaticConfigVarInt *)g_pMagicVikingWarmachineShotCost);
     }
-    v2 = IEntity::OwnerId((unsigned __int8 *)this);
+    v2 = IEntity::OwnerId(this);
     CurrentManaAmount = CMagic::GetCurrentManaAmount(v2);
     v5 = 40 * v3;
-    if ( !(40 * v3) && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 217, "iMaxAmmo != 0") == 1 )
+    if ( 40 * v3 == 0 && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 217, "iMaxAmmo != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( v5 )
+    if ( v5 != 0 )
     {
       if ( CurrentManaAmount > v5 )
       {
@@ -751,19 +735,19 @@ int  CCatapult::GetHealthDisplayID(void) {
   
   signed int v2; // [esp+0h] [ebp-8h]
 
-  if ( !*((_DWORD *)this + 25) && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 236, "m_pVehicleProperties!=NULL") == 1 )
+  if ( *((_DWORD *)this + 25) == 0 && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 236, "m_pVehicleProperties!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !*((_DWORD *)this + 25) )
+  if ( *((_DWORD *)this + 25) == 0 )
   {
     return 0;
   }
-  if ( !*(_DWORD *)(*((_DWORD *)this + 25) + 48) && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 239, "m_pVehicleProperties->m_uHitpoints!=0") == 1 )
+  if ( *(_DWORD *)(*((_DWORD *)this + 25) + 48) == 0 && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 239, "m_pVehicleProperties->m_uHitpoints!=0") == 1 )
   {
     __debugbreak();
   }
-  if ( !*(_DWORD *)(*((_DWORD *)this + 25) + 48) )
+  if ( *(_DWORD *)(*((_DWORD *)this + 25) + 48) == 0 )
   {
     return 0;
   }
@@ -798,7 +782,7 @@ bool  CCatapult::AttackTargetAt(int a2, int a3) {
   int v8; // [esp+10h] [ebp-Ch]
   int i; // [esp+18h] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 676, "g_cWorld.InWorld(_iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(a2, a3) && BBSupportDbgReport(2, "MapObjects\\Catapult\\Catapult.cpp", 676, "g_cWorld.InWorld(_iX, _iY)") == 1 )
   {
     __debugbreak();
   }
@@ -809,13 +793,13 @@ bool  CCatapult::AttackTargetAt(int a2, int a3) {
   {
     v6 = a2 + CSpiralOffsets::DeltaX(i);
     v7 = a3 + CSpiralOffsets::DeltaY(i);
-    if ( (unsigned __int8)CWorldManager::InWorld(v6, v7) )
+    if ( CWorldManager::InWorld(v6, v7) )
     {
       v8 = CWorldManager::MapObjectId(v6, v7);
-      if ( v8 )
+      if ( v8 != 0 )
       {
         v4 = CMapObjectMgr::Entity(v8);
-        if ( CWarriorBehavior::IsValidTarget((CCatapult *)((char *)this + 180), this, v4) )
+        if ( CWarriorBehavior::IsValidTarget((CWarriorBehavior *)((char *)this + 180), (const struct IMovingEntity *)this, v4) )
         {
           (**((void (__thiscall ***)(char *, CCatapult *, int, int *))this + 45))((char *)this + 180, this, v8, &dword_6FC800[3584]);
           return 1;
@@ -849,7 +833,7 @@ int  CCatapult::RequestDonkey(void) {
   int v17; // [esp-4h] [ebp-58h]
   int v18; // [esp-4h] [ebp-58h]
   int v19; // [esp+0h] [ebp-54h]
-  _BYTE v20[24]; // [esp+Ch] [ebp-48h] BYREF
+  CEntityEvent v20; // [esp+Ch] [ebp-48h] BYREF
   CEntityEvent *v21; // [esp+24h] [ebp-30h]
   CEntityEvent *v22; // [esp+28h] [ebp-2Ch]
   int v23; // [esp+2Ch] [ebp-28h]
@@ -865,13 +849,13 @@ int  CCatapult::RequestDonkey(void) {
   v17 = *(_DWORD *)(*((_DWORD *)this + 25) + 80);
   v15 = IEntity::Y(this);
   v13 = IEntity::X(v29);
-  v1 = IEntity::OwnerId(v29);
+  v1 = IEntity::OwnerId((IEntity *)v29);
   NearestPileIDOfferGood = CEcoSectorMgr::GetNearestPileIDOfferGood((CEcoSectorMgr *)g_cESMgr, v1, v13, v15, v17);
   if ( NearestPileIDOfferGood <= 0 )
   {
     return 0;
   }
-  v28 = CPileMgr::operator[](NearestPileIDOfferGood);
+  v28 = (unsigned __int8 *)CPileMgr::operator[](NearestPileIDOfferGood);
   v3 = *(_DWORD *)(*((_DWORD *)v29 + 25) + 84) - v29[111];
   v4 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v28 + 40))(v28);
   if ( v3 >= (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v29 + 228))(v29) * v4 )
@@ -889,34 +873,34 @@ int  CCatapult::RequestDonkey(void) {
   v14 = IEntity::X(v29);
   v12 = IEntity::Y(v28);
   v11 = IEntity::X(v28);
-  v6 = IEntity::OwnerId(v29);
-  VehicleCargoLoader = CTransportMgr::GetVehicleCargoLoader(4, v6, v11, v12, v14, v16, &v26);
+  v6 = IEntity::OwnerId((IEntity *)v29);
+  VehicleCargoLoader = (unsigned __int8 *)CTransportMgr::GetVehicleCargoLoader(4, v6, v11, v12, v14, v16, &v26);
   v7 = (*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)v29 + 228))(v29);
   v26 *= v7;
   if ( v26 < v23 )
   {
     v25 = v26;
   }
-  if ( !VehicleCargoLoader || v25 <= 0 )
+  if ( VehicleCargoLoader == 0 || v25 <= 0 )
   {
     return 0;
   }
-  if ( IEntity::Type((unsigned __int16 *)VehicleCargoLoader) == 1 )
+  if ( IEntity::Type((IEntity *)VehicleCargoLoader) == 1 )
   {
-    v8 = IEntity::ID();
-    CPile::AttachAndIncAmountLeaving((unsigned __int16 *)v28, v8, 1, 2);
-    v9 = IEntity::ID();
+    v8 = ((int (__stdcall *)())IEntity::ID)();
+    CPile::AttachAndIncAmountLeaving((CPile *)v28, v8, 1, 2);
+    v9 = ((int (__stdcall *)())IEntity::ID)();
     (*(void (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v29 + 164))(v29, v9);
   }
-  v18 = IEntity::ID();
+  v18 = ((int (__stdcall *)())IEntity::ID)();
   v10 = (*(int (__thiscall **)(unsigned __int8 *, int))(*(_DWORD *)v29 + 228))(v29, NearestPileIDOfferGood);
-  v22 = CEntityEvent::CEntityEvent((CEntityEvent *)v20, 0xBu, 0, v25 / v10, v18, v19);
+  v22 = CEntityEvent::CEntityEvent(&v20, 0xBu, 0, v25 / v10, v18, v19);
   v21 = v22;
   v30 = 0;
   (*(void (__thiscall **)(unsigned __int8 *, CEntityEvent *))(*(_DWORD *)VehicleCargoLoader + 80))(VehicleCargoLoader, v22);
   v30 = -1;
-  CEntityEvent::~CEntityEvent(v20);
-  return IEntity::ID();
+  CEntityEvent::~CEntityEvent(&v20);
+  return ((int (__stdcall *)())IEntity::ID)();
 }
 
 

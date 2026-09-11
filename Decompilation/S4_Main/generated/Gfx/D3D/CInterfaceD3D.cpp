@@ -9,14 +9,14 @@ void  CInterfaceD3D::BlitCursor(void) {
   HRESULT result; // eax
   int v2; // [esp+0h] [ebp-8h]
 
-  v2 = CFixCursor::Show((CFixCursor *)&this[1].m_sClipper1.m_vChar.uC, this->FinalRenderSurface);
-  if ( v2 )
+  v2 = CFixCursor::Show((CFixCursor *)((char *)this + 1860), this->FinalRenderSurface);
+  if ( v2 != 0 )
   {
     WriteError(v2, "BlitMoveCursor");
   }
-  result = CFixCursor::Show((CFixCursor *)&this[1].m_sViewport.dwY, this->FinalRenderSurface);
-  HIBYTE(this[1].m_sClipper1.m_vChar.u8) = 1;
-  if ( result )
+  result = CFixCursor::Show((CFixCursor *)((char *)this + 1900), this->FinalRenderSurface);
+  *((_BYTE *)this + 1859) = 1;
+  if ( result != 0 )
   {
     return WriteError(result, "BlitZoomCursor");
   }
@@ -42,17 +42,17 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
 
   SurfaceClipper::SurfaceClipper(&this->m_sClipper1);
   SurfaceClipper::SurfaceClipper(&this->m_sMinimapClipper);
-  CFixCursor::CFixCursor((CFixCursor *)&this[1].m_sClipper1.m_vChar.uC);
-  CFixCursor::CFixCursor((CFixCursor *)&this[1].m_sViewport.dwY);
-  this[1].m_sClipper1.m_vChar.u4 = 2000;
-  HIBYTE(this[1].m_sClipper1.m_vChar.u8) = 0;
-  BYTE2(this[1].m_sClipper1.m_vChar.u8) = 0;
-  BYTE1(this[1].m_sClipper1.m_vChar.u8) = 0;
-  this[1].m_sClipper1.m_pClipper = 0;
+  CFixCursor::CFixCursor((CFixCursor *)((char *)this + 1860));
+  CFixCursor::CFixCursor((CFixCursor *)((char *)this + 1900));
+  *((_DWORD *)this + 463) = 2000;
+  *((_BYTE *)this + 1859) = 0;
+  *((_BYTE *)this + 1858) = 0;
+  *((_BYTE *)this + 1857) = 0;
+  *((_DWORD *)this + 461) = 0;
   this->m_uCacheSurfaceCount = 0;
-  LOBYTE(this[1].m_sClipper1.m_vChar.u8) = 0;
-  this[1].m_pDDraw = 0;
-  this[1].field_0 = 0;
+  *((_BYTE *)this + 1856) = 0;
+  *((_DWORD *)this + 460) = 0;
+  *((_DWORD *)this + 459) = 0;
   memset(this->field_71E, 0, sizeof(this->field_71E));
   this->m_bInitHardware = 0;
   this->m_bInitSoftware = 0;
@@ -115,7 +115,7 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
   CSurfaceV7 *LandscapeSurface; // [esp+98h] [ebp-34h]
   CSurfaceV7 *MoveCursorSurface; // [esp+9Ch] [ebp-30h]
   CSurfaceV7 *ZoomCursorSurface; // [esp+A0h] [ebp-2Ch]
-  void (__thiscall ***v11)(_DWORD, int); // [esp+A4h] [ebp-28h]
+  CSurfaceV7 *v11; // [esp+A4h] [ebp-28h]
   CSurfaceV7 *v12; // [esp+A8h] [ebp-24h]
   CSurfaceV7 *v13; // [esp+ACh] [ebp-20h]
   CSurfaceV7 *v14; // [esp+B0h] [ebp-1Ch]
@@ -129,26 +129,26 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
         i >= 0;
         --i )
   {
-    if ( this->m_pCacheManagers[i] )
+    if ( this->m_pCacheManagers[i] != 0 )
     {
-      if ( CCachePageManager::IsVideoSurfaceLocked((CCachePageManager *)this->m_pCacheManagers[i]) )
+      if ( CCachePageManager::IsVideoSurfaceLocked(this->m_pCacheManagers[i]) )
       {
-        CCachePageManager::UnlockVideoSurface((CCachePageManager *)this->m_pCacheManagers[i]);
+        CCachePageManager::UnlockVideoSurface(this->m_pCacheManagers[i]);
       }
-      if ( CCachePageManager::IsSourceSurfaceLocked((CCachePageManager *)this->m_pCacheManagers[i]) )
+      if ( CCachePageManager::IsSourceSurfaceLocked(this->m_pCacheManagers[i]) )
       {
-        CCachePageManager::UnlockSourceSurface((CCachePageManager *)this->m_pCacheManagers[i]);
+        CCachePageManager::UnlockSourceSurface(this->m_pCacheManagers[i]);
       }
-      v2 = (CCachePageManager *)this->m_pCacheManagers[i];
-      if ( v2 )
+      v2 = this->m_pCacheManagers[i];
+      if ( v2 != 0 )
       {
         delete v2;
       }
       this->m_pCacheManagers[i] = 0;
     }
-    if ( this->m_pCacheSurfaces[i] )
+    if ( this->m_pCacheSurfaces[i] != 0 )
     {
-      (*(void (__stdcall **)(DWORD))(*(_DWORD *)this->m_pCacheSurfaces[i] + 8))(this->m_pCacheSurfaces[i]);
+      this->m_pCacheSurfaces[i]->lpVtbl->Release(this->m_pCacheSurfaces[i]);
       this->m_pCacheSurfaces[i] = 0;
     }
   }
@@ -156,63 +156,63 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
         j >= 0;
         --j )
   {
-    if ( this->CCachePageManager[j] )
+    if ( this->CCachePageManager[j] != 0 )
     {
-      if ( CCachePageManager::IsVideoSurfaceLocked((CCachePageManager *)this->CCachePageManager[j]) )
+      if ( CCachePageManager::IsVideoSurfaceLocked(this->CCachePageManager[j]) )
       {
-        CCachePageManager::UnlockVideoSurface((CCachePageManager *)this->CCachePageManager[j]);
+        CCachePageManager::UnlockVideoSurface(this->CCachePageManager[j]);
       }
-      if ( CCachePageManager::IsSourceSurfaceLocked((CCachePageManager *)this->CCachePageManager[j]) )
+      if ( CCachePageManager::IsSourceSurfaceLocked(this->CCachePageManager[j]) )
       {
-        CCachePageManager::UnlockSourceSurface((CCachePageManager *)this->CCachePageManager[j]);
+        CCachePageManager::UnlockSourceSurface(this->CCachePageManager[j]);
       }
       v1 = (CUploadCachePageManager *)this->CCachePageManager[j];
-      if ( v1 )
+      if ( v1 != 0 )
       {
         delete v1;
       }
       this->CCachePageManager[j] = 0;
     }
-    if ( this->ObjectTextureSystemMemoryTable[j] )
+    if ( this->ObjectTextureSystemMemoryTable[j] != 0 )
     {
       ((void (__thiscall *)(CSurfaceV7 *))this->ObjectTextureSystemMemoryTable[j]->Release)(this->ObjectTextureSystemMemoryTable[j]);
       v14 = this->ObjectTextureSystemMemoryTable[j];
-      if ( v14 )
+      if ( v14 != 0 )
       {
-        ((void (__thiscall *)(CSurfaceV7 *, int))v14->dtor)(v14, 1);
+        v14->dtor(v14, 1);
       }
       this->ObjectTextureSystemMemoryTable[j] = 0;
     }
-    if ( this->ObjectTextureTable[j] )
+    if ( this->ObjectTextureTable[j] != 0 )
     {
       ((void (__thiscall *)(CSurfaceV7 *))this->ObjectTextureTable[j]->Release)(this->ObjectTextureTable[j]);
       v13 = this->ObjectTextureTable[j];
-      if ( v13 )
+      if ( v13 != 0 )
       {
-        ((void (__thiscall *)(CSurfaceV7 *, int))v13->dtor)(v13, 1);
+        v13->dtor(v13, 1);
       }
       this->ObjectTextureTable[j] = 0;
     }
   }
-  if ( s_bCursorIsFixed )
+  if ( s_bCursorIsFixed != 0 )
   {
     ClipCursor(0);
     s_bCursorIsFixed = 0;
   }
-  if ( !s_bCursorIsVisible )
+  if ( s_bCursorIsVisible == 0 )
   {
     ShowCursor(1);
     s_bCursorIsVisible = 1;
   }
-  if ( s_hCursor )
+  if ( s_hCursor != 0 )
   {
-    SetClassLongA(MEMORY[0x3E2E268], -12, s_hCursor);
+    SetClassLongA(GfxEngineSetup.m_hWnd, -12, s_hCursor);
     SetCursor((HCURSOR)s_hCursor);
     s_hCursor = 0;
   }
-  SurfaceClipper::ReleaseClipper((SurfaceClipper *)&this->m_sClipper1);
-  SurfaceClipper::ReleaseClipper((SurfaceClipper *)&this->m_sMinimapClipper);
-  if ( g_pSoftwareTexturePages )
+  SurfaceClipper::ReleaseClipper(&this->m_sClipper1);
+  SurfaceClipper::ReleaseClipper(&this->m_sMinimapClipper);
+  if ( g_pSoftwareTexturePages != 0 )
   {
     operator delete[]((void *)g_pSoftwareTexturePages);
     g_pSoftwareTexturePages = 0;
@@ -227,13 +227,13 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
         m >= 0;
         --m )
   {
-    if ( this->LandscapeTextureTable[m] )
+    if ( this->LandscapeTextureTable[m] != 0 )
     {
       ((void (__thiscall *)(CSurfaceV7 *))this->LandscapeTextureTable[m]->Release)(this->LandscapeTextureTable[m]);
       v12 = this->LandscapeTextureTable[m];
-      if ( v12 )
+      if ( v12 != 0 )
       {
-        ((void (__thiscall *)(CSurfaceV7 *, int))v12->dtor)(v12, 1);
+        v12->dtor(v12, 1);
       }
       this->LandscapeTextureTable[m] = 0;
     }
@@ -243,117 +243,117 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
         n >= 0;
         --n )
   {
-    if ( this->m_pGuiSurfaces[n] )
+    if ( this->m_pGuiSurfaces[n] != 0 )
     {
-      (*(void (__thiscall **)(DWORD))(*(_DWORD *)this->m_pGuiSurfaces[n] + 4))(this->m_pGuiSurfaces[n]);
-      v11 = (void (__thiscall ***)(_DWORD, int))this->m_pGuiSurfaces[n];
-      if ( v11 )
+      ((void (__thiscall *)(CSurfaceV7 *))this->m_pGuiSurfaces[n]->Release)(this->m_pGuiSurfaces[n]);
+      v11 = this->m_pGuiSurfaces[n];
+      if ( v11 != 0 )
       {
-        (**v11)(v11, 1);
+        v11->dtor(v11, 1);
       }
       this->m_pGuiSurfaces[n] = 0;
     }
   }
-  SurfaceClipper::ReleaseClipper((SurfaceClipper *)&this->m_sClipper1);
-  SurfaceClipper::ReleaseClipper((SurfaceClipper *)&this->m_sMinimapClipper);
-  if ( this->m_pObjectDevice )
+  SurfaceClipper::ReleaseClipper(&this->m_sClipper1);
+  SurfaceClipper::ReleaseClipper(&this->m_sMinimapClipper);
+  if ( this->m_pObjectDevice != 0 )
   {
-    (*(void (__stdcall **)(int))(*(_DWORD *)this->m_pObjectDevice + 8))(this->m_pObjectDevice);
+    this->m_pObjectDevice->Release(this->m_pObjectDevice);
   }
-  if ( this->LandscapeDevice )
+  if ( this->LandscapeDevice != 0 )
   {
-    this->LandscapeDevice->lpVtbl->Release(this->LandscapeDevice);
+    this->LandscapeDevice->Release(this->LandscapeDevice);
   }
-  if ( this->m_pZoomCursorSurface )
+  if ( this->m_pZoomCursorSurface != 0 )
   {
     ((void (__thiscall *)(CSurfaceV7 *))this->m_pZoomCursorSurface->Release)(this->m_pZoomCursorSurface);
     ZoomCursorSurface = this->m_pZoomCursorSurface;
-    if ( ZoomCursorSurface )
+    if ( ZoomCursorSurface != 0 )
     {
-      ((void (__thiscall *)(CSurfaceV7 *, int))ZoomCursorSurface->dtor)(ZoomCursorSurface, 1);
+      ZoomCursorSurface->dtor(ZoomCursorSurface, 1);
     }
     this->m_pZoomCursorSurface = 0;
   }
-  if ( this->m_pMoveCursorSurface )
+  if ( this->m_pMoveCursorSurface != 0 )
   {
     ((void (__thiscall *)(CSurfaceV7 *))this->m_pMoveCursorSurface->Release)(this->m_pMoveCursorSurface);
     MoveCursorSurface = this->m_pMoveCursorSurface;
-    if ( MoveCursorSurface )
+    if ( MoveCursorSurface != 0 )
     {
-      ((void (__thiscall *)(CSurfaceV7 *, int))MoveCursorSurface->dtor)(MoveCursorSurface, 1);
+      MoveCursorSurface->dtor(MoveCursorSurface, 1);
     }
     this->m_pMoveCursorSurface = 0;
   }
-  if ( this->LandscapeSurface )
+  if ( this->LandscapeSurface != 0 )
   {
     ((void (__thiscall *)(CSurfaceV7 *))this->LandscapeSurface->Release)(this->LandscapeSurface);
     LandscapeSurface = this->LandscapeSurface;
-    if ( LandscapeSurface )
+    if ( LandscapeSurface != 0 )
     {
-      ((void (__thiscall *)(CSurfaceV7 *, int))LandscapeSurface->dtor)(LandscapeSurface, 1);
+      LandscapeSurface->dtor(LandscapeSurface, 1);
     }
     this->LandscapeSurface = 0;
   }
   CInterfaceD3D::DestroyCameraWindowSurface(this);
-  if ( this->FinalRenderSurface )
+  if ( this->FinalRenderSurface != 0 )
   {
-    if ( !((unsigned __int8 (__thiscall *)(CSurfaceV7 *))this->FinalRenderSurface->j_?IsBackBufferReference@CSurfaceV7@@UAE_NXZ)(this->FinalRenderSurface) )
+    if ( ((unsigned __int8 (__thiscall *)(CSurfaceV7 *))this->FinalRenderSurface->j_?IsBackBufferReference@CSurfaceV7@@UAE_NXZ)(this->FinalRenderSurface) == 0 )
     {
       ((void (__thiscall *)(CSurfaceV7 *))this->FinalRenderSurface->Release)(this->FinalRenderSurface);
     }
     FinalRenderSurface = this->FinalRenderSurface;
-    if ( FinalRenderSurface )
+    if ( FinalRenderSurface != 0 )
     {
-      ((void (__thiscall *)(CSurfaceV7 *, int))FinalRenderSurface->dtor)(FinalRenderSurface, 1);
+      FinalRenderSurface->dtor(FinalRenderSurface, 1);
     }
     this->FinalRenderSurface = 0;
   }
-  if ( this->MiniMapSurface )
+  if ( this->MiniMapSurface != 0 )
   {
     ((void (__thiscall *)(CSurfaceV7 *))this->MiniMapSurface->Release)(this->MiniMapSurface);
     MiniMapSurface = this->MiniMapSurface;
-    if ( MiniMapSurface )
+    if ( MiniMapSurface != 0 )
     {
-      ((void (__thiscall *)(CSurfaceV7 *, int))MiniMapSurface->dtor)(MiniMapSurface, 1);
+      MiniMapSurface->dtor(MiniMapSurface, 1);
     }
     this->MiniMapSurface = 0;
   }
-  if ( this->MiniMapAreaSurface )
+  if ( this->MiniMapAreaSurface != 0 )
   {
     ((void (__thiscall *)(CSurfaceV7 *))this->MiniMapAreaSurface->Release)(this->MiniMapAreaSurface);
     MiniMapAreaSurface = this->MiniMapAreaSurface;
-    if ( MiniMapAreaSurface )
+    if ( MiniMapAreaSurface != 0 )
     {
-      ((void (__thiscall *)(CSurfaceV7 *, int))MiniMapAreaSurface->dtor)(MiniMapAreaSurface, 1);
+      MiniMapAreaSurface->dtor(MiniMapAreaSurface, 1);
     }
     this->MiniMapAreaSurface = 0;
   }
-  if ( this->PrimarySurface )
+  if ( this->PrimarySurface != 0 )
   {
     ((void (__thiscall *)(CSurfaceV7 *))this->PrimarySurface->Release)(this->PrimarySurface);
     PrimarySurface = this->PrimarySurface;
-    if ( PrimarySurface )
+    if ( PrimarySurface != 0 )
     {
-      ((void (__thiscall *)(CSurfaceV7 *, int))PrimarySurface->dtor)(PrimarySurface, 1);
+      PrimarySurface->dtor(PrimarySurface, 1);
     }
     this->PrimarySurface = 0;
   }
-  if ( this->field_68 )
+  if ( this->field_68 != 0 )
   {
     v3 = (void (__thiscall ***)(_DWORD, int))this->field_68;
-    if ( v3 )
+    if ( v3 != 0 )
     {
       (**v3)(v3, 1);
     }
     this->field_68 = 0;
   }
-  if ( this->m_pDDraw7 )
+  if ( this->m_pDDraw7 != 0 )
   {
     this->m_pDDraw7->lpVtbl->Release(this->m_pDDraw7);
   }
-  if ( this->m_pIDirect3D7 )
+  if ( this->m_pIDirect3D7 != 0 )
   {
-    (*(void (__stdcall **)(int))(*(_DWORD *)this->m_pIDirect3D7 + 8))(this->m_pIDirect3D7);
+    ((void (__stdcall *)(IDirect3D7 *))this->m_pIDirect3D7->Release)(this->m_pIDirect3D7);
   }
   this->m_pDDraw = 0;
   this->m_pDDraw7 = 0;
@@ -362,8 +362,8 @@ bool  CInterfaceD3D::HasCameraWindowSurface(void)const {
   this->m_pObjectDevice = 0;
   CInterfaceD3D::DeleteEngineData(this);
   BBSupportTracePrintF(1, "GFX ENGINE: DD interface successfully destroyed!");
-  SurfaceClipper::~SurfaceClipper((SurfaceClipper *)&this->m_sMinimapClipper);
-  SurfaceClipper::~SurfaceClipper((SurfaceClipper *)&this->m_sClipper1);
+  SurfaceClipper::~SurfaceClipper(&this->m_sMinimapClipper);
+  SurfaceClipper::~SurfaceClipper(&this->m_sClipper1);
 }
 
 
@@ -412,14 +412,14 @@ bool  CInterfaceD3D::InitCommon(void) {
   char v42; // [esp+67h] [ebp-1h] BYREF
 
   BBSupportTracePrintF(1, "GFX ENGINE: Begin common init. Mode: Interface 7.");
-  if ( this->m_bInitHardware || this->m_bInitSoftware )
+  if ( this->m_bInitHardware != 0 || this->m_bInitSoftware != 0 )
   {
     BBSupportTracePrintF(1, "GFX ENGINE: INIT COMMON: Engine is already initialized!");
     return 1;
   }
-  BYTE1(this[1].m_sClipper1.m_vChar.u8) = SGfxRenderConfiguration::IsHQTextureSet(&GfxEngineSetup);
-  BYTE2(this[1].m_sClipper1.m_vChar.u8) = !SGfxRenderConfiguration::IsForceBlit(&GfxEngineSetup);
-  if ( s_hCursor )
+  *((_BYTE *)this + 1857) = SGfxRenderConfiguration::IsHQTextureSet(&GfxEngineSetup);
+  *((_BYTE *)this + 1858) = !SGfxRenderConfiguration::IsForceBlit(&GfxEngineSetup);
+  if ( s_hCursor != 0 )
   {
     SetClassLongA(GfxEngineSetup.m_hWnd, -12, s_hCursor);
     SetCursor((HCURSOR)s_hCursor);
@@ -468,7 +468,7 @@ bool  CInterfaceD3D::InitCommon(void) {
         i < 36;
         ++i )
   {
-    if ( !s_hCursorHandles[i] )
+    if ( s_hCursorHandles[i] == 0 )
     {
       BBSupportTracePrintF(1, "GFX ENGINE: Couldn't create cursors!");
       return 0;
@@ -476,31 +476,31 @@ bool  CInterfaceD3D::InitCommon(void) {
   }
   g_bForceMiniMapRefresh = 1;
   this->field_68 = (int)CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-  if ( !this->field_68 )
+  if ( this->field_68 == 0 )
   {
     BBSupportTracePrintF(1, "GFX ENGINE: Not enough memory to create surface object!");
     return 0;
   }
-  if ( g_pDirectDraw )
+  if ( g_pDirectDraw != 0 )
   {
     this->m_pDDraw = g_pDirectDraw;
   }
   else
   {
     hModule = GetModuleHandleA("DDRAW");
-    if ( !hModule )
+    if ( hModule == 0 )
     {
       BBSupportTracePrintF(1, "GFX ENGINE: Direct Draw is not accessible!");
       return 0;
     }
     DirectDrawCreateEx = (HRESULT (__stdcall *)(GUID *, LPVOID *, const IID *const, IUnknown *))GetProcAddress(hModule, "DirectDrawCreateEx");
-    if ( !DirectDrawCreateEx )
+    if ( DirectDrawCreateEx == 0 )
     {
       BBSupportTracePrintF(1, "GFX ENGINE: DirectDrawCreateEx not found! Interface 7 or higher not available!");
       return 0;
     }
     v24 = DirectDrawCreateEx(0, (LPVOID *)&this->m_pDDraw, &IID_IDirectDraw7, 0);
-    if ( v24 )
+    if ( v24 != 0 )
     {
       WriteError(v24, "CreateDirectDrawObject");
       return 0;
@@ -508,7 +508,7 @@ bool  CInterfaceD3D::InitCommon(void) {
     g_pDirectDraw = this->m_pDDraw;
   }
   v25 = this->m_pDDraw->lpVtbl->QueryInterface(this->m_pDDraw, &IID_IDirectDraw7, (LPVOID *)&this->m_pDDraw7);
-  if ( v25 )
+  if ( v25 != 0 )
   {
     WriteError(v25, "QueryInterface");
     return 0;
@@ -516,7 +516,7 @@ bool  CInterfaceD3D::InitCommon(void) {
   else
   {
     v26 = this->m_pDDraw7->lpVtbl->SetCooperativeLevel(this->m_pDDraw7, GfxEngineSetup.m_hWnd, 8);
-    if ( v26 )
+    if ( v26 != 0 )
     {
       WriteError(v26, "SetCooperativeLevel");
       return 0;
@@ -524,7 +524,7 @@ bool  CInterfaceD3D::InitCommon(void) {
     else
     {
       this->PrimarySurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-      if ( this->PrimarySurface )
+      if ( this->PrimarySurface != 0 )
       {
         if ( GfxEngineSetup.m_bD3DInterface )
         {
@@ -536,7 +536,7 @@ bool  CInterfaceD3D::InitCommon(void) {
         }
         v2 = j__abs(g_uGfxMode == 1);
         v27 = this->PrimarySurface->CreateSurface(this->PrimarySurface, m_pDDraw, GfxEngineSetup.m_uWidth, GfxEngineSetup.m_uHeight, 1, 0, 0, v2, 1, 0, 0);
-        if ( v27 )
+        if ( v27 != 0 )
         {
           WriteError((int)v27, "CreatePrimarySurface");
           return 0;
@@ -544,14 +544,14 @@ bool  CInterfaceD3D::InitCommon(void) {
         else
         {
           v28 = ((int (__thiscall *)(CSurfaceV7 *, char *))this->PrimarySurface->GetPixelFormat)(this->PrimarySurface, &v42);
-          if ( v28 )
+          if ( v28 != 0 )
           {
             WriteError(v28, "RetrievePixelFormatFromPrimarySurface");
             return 0;
           }
           else
           {
-            if ( v42 )
+            if ( v42 != 0 )
             {
               g_uGfxMode = 1;
             }
@@ -560,7 +560,7 @@ bool  CInterfaceD3D::InitCommon(void) {
               g_uGfxMode = 2;
             }
             this->m_pMoveCursorSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-            if ( this->m_pMoveCursorSurface )
+            if ( this->m_pMoveCursorSurface != 0 )
             {
               if ( GfxEngineSetup.m_bD3DInterface )
               {
@@ -572,7 +572,7 @@ bool  CInterfaceD3D::InitCommon(void) {
               }
               v3 = j__abs(g_uGfxMode == 1);
               v29 = this->m_pMoveCursorSurface->CreateSurface(this->m_pMoveCursorSurface, m_pDDraw7, 32, 32, 1, 0, 0, v3, 0, 0, 0);
-              if ( v29 )
+              if ( v29 != 0 )
               {
                 WriteError((int)v29, "CreateMoveCursorSurface");
                 return 0;
@@ -581,11 +581,11 @@ bool  CInterfaceD3D::InitCommon(void) {
               {
                 if ( g_uGfxMode == 1 )
                 {
-                  CFixCursor::SetSurfacePtr((CFixCursor *)&this[1].m_sClipper1.m_vChar.uC, 0x73u, this->m_pMoveCursorSurface, g_sColorKeyMagenta555);
+                  CFixCursor::SetSurfacePtr((CFixCursor *)((char *)this + 1860), 0x73u, this->m_pMoveCursorSurface, g_sColorKeyMagenta555);
                 }
                 else
                 {
-                  CFixCursor::SetSurfacePtr((CFixCursor *)&this[1].m_sClipper1.m_vChar.uC, 0x73u, this->m_pMoveCursorSurface, g_sColorKeyMagenta565);
+                  CFixCursor::SetSurfacePtr((CFixCursor *)((char *)this + 1860), 0x73u, this->m_pMoveCursorSurface, g_sColorKeyMagenta565);
                 }
                 if ( g_uGfxMode == 1 )
                 {
@@ -596,7 +596,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                   this->m_pMoveCursorSurface->SetColorKey(this->m_pMoveCursorSurface, 8, &g_sColorKeyMagenta565);
                 }
                 this->m_pZoomCursorSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-                if ( this->m_pZoomCursorSurface )
+                if ( this->m_pZoomCursorSurface != 0 )
                 {
                   if ( GfxEngineSetup.m_bD3DInterface )
                   {
@@ -608,7 +608,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                   }
                   v4 = j__abs(g_uGfxMode == 1);
                   v30 = this->m_pZoomCursorSurface->CreateSurface(this->m_pZoomCursorSurface, v18, 32, 32, 1, 0, 0, v4, 0, 0, 0);
-                  if ( v30 )
+                  if ( v30 != 0 )
                   {
                     WriteError((int)v30, "CreateZoomCursorSurface");
                     return 0;
@@ -617,11 +617,11 @@ bool  CInterfaceD3D::InitCommon(void) {
                   {
                     if ( g_uGfxMode == 1 )
                     {
-                      CFixCursor::SetSurfacePtr((CFixCursor *)&this[1].m_sViewport.dwY, 0x74u, this->m_pZoomCursorSurface, g_sColorKeyMagenta555);
+                      CFixCursor::SetSurfacePtr((CFixCursor *)((char *)this + 1900), 0x74u, this->m_pZoomCursorSurface, g_sColorKeyMagenta555);
                     }
                     else
                     {
-                      CFixCursor::SetSurfacePtr((CFixCursor *)&this[1].m_sViewport.dwY, 0x74u, this->m_pZoomCursorSurface, g_sColorKeyMagenta565);
+                      CFixCursor::SetSurfacePtr((CFixCursor *)((char *)this + 1900), 0x74u, this->m_pZoomCursorSurface, g_sColorKeyMagenta565);
                     }
                     if ( g_uGfxMode == 1 )
                     {
@@ -632,7 +632,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                       this->m_pZoomCursorSurface->SetColorKey(this->m_pZoomCursorSurface, 8, &g_sColorKeyMagenta565);
                     }
                     this->MiniMapSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-                    if ( this->MiniMapSurface )
+                    if ( this->MiniMapSurface != 0 )
                     {
                       if ( GfxEngineSetup.m_bD3DInterface )
                       {
@@ -644,7 +644,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                       }
                       v5 = j__abs(g_uGfxMode == 1);
                       v31 = this->MiniMapSurface->CreateSurface(this->MiniMapSurface, v17, 240, 160, 1, 0, 0, v5, 0, 0, 0);
-                      if ( v31 )
+                      if ( v31 != 0 )
                       {
                         WriteError((int)v31, "CreateMiniMapSurface");
                         return 0;
@@ -654,7 +654,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                         this->MiniMapSurface->ClearSurface(this->MiniMapSurface, 0);
                         this->MiniMapSurface->SetColorKey(this->MiniMapSurface, 8, (int *)&g_sColorKeyBlack);
                         this->MiniMapAreaSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-                        if ( this->MiniMapAreaSurface )
+                        if ( this->MiniMapAreaSurface != 0 )
                         {
                           if ( GfxEngineSetup.m_bD3DInterface )
                           {
@@ -666,7 +666,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                           }
                           v6 = j__abs(g_uGfxMode == 1);
                           v32 = this->MiniMapAreaSurface->CreateSurface(this->MiniMapAreaSurface, v16, 240, 160, 1, 0, 0, v6, 0, 0, 0);
-                          if ( v32 )
+                          if ( v32 != 0 )
                           {
                             WriteError((int)v32, "CreateMiniMapAreaSurface");
                             return 0;
@@ -674,18 +674,18 @@ bool  CInterfaceD3D::InitCommon(void) {
                           else
                           {
                             v33 = this->MiniMapAreaSurface->ClearSurface(this->MiniMapAreaSurface, 0);
-                            if ( v33 )
+                            if ( v33 != 0 )
                             {
                               WriteError(v33, "ClearMiniMapSurface");
                             }
                             v34 = ((int (__thiscall *)(CSurfaceV7 *, int, void *))this->MiniMapAreaSurface->SetColorKey)(this->MiniMapAreaSurface, 8, &g_sColorKeyBlack);
-                            if ( v34 )
+                            if ( v34 != 0 )
                             {
                               WriteError(v34, "SetMiniMapColorKey");
                             }
                             BBSupportTracePrintF(1, "GFX ENGINE: Size of render surface: %d x %d", GfxEngineSetup.m_uWidth, GfxEngineSetup.m_uHeight);
                             this->LandscapeSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-                            if ( this->LandscapeSurface )
+                            if ( this->LandscapeSurface != 0 )
                             {
                               if ( GfxEngineSetup.m_bD3DInterface )
                               {
@@ -698,7 +698,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                               v10 = j__abs(g_uGfxMode == 1);
                               IsHardwareLandscapeEngine = SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup);
                               v35 = this->LandscapeSurface->CreateSurface(this->LandscapeSurface, v15, GfxEngineSetup.m_uWidth, GfxEngineSetup.m_uHeight, 1, IsHardwareLandscapeEngine, 0, v10, 0, 0, 0);
-                              if ( v35 )
+                              if ( v35 != 0 )
                               {
                                 WriteError((int)v35, "CreateLandscapeSurface");
                                 return 0;
@@ -707,7 +707,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                               {
                                 this->LandscapeSurface2 = this->LandscapeSurface;
                                 this->FinalRenderSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-                                if ( this->FinalRenderSurface )
+                                if ( this->FinalRenderSurface != 0 )
                                 {
                                   v14 = g_uGfxMode == 1;
                                   if ( GfxEngineSetup.m_bD3DInterface )
@@ -722,7 +722,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                                   v11 = j__abs(v14);
                                   HardwareLandscapeEngine2 = SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup);
                                   v36 = this->FinalRenderSurface->CreateSurface(this->FinalRenderSurface, m_pDDraw, GfxEngineSetup.m_uWidth, GfxEngineSetup.m_uHeight, 1, HardwareLandscapeEngine2, 0, v11, 0, HardwareLandscapeEngine, 0);
-                                  if ( v36 )
+                                  if ( v36 != 0 )
                                   {
                                     WriteError((int)v36, "CreateFinalRenderSurface");
                                     return 0;
@@ -730,7 +730,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                                   else
                                   {
                                     inited = SurfaceClipper::InitClipper(&this->m_sClipper1, this->m_pDDraw7);
-                                    if ( inited )
+                                    if ( inited != 0 )
                                     {
                                       WriteError(inited, "CreateClipper1");
                                       return 0;
@@ -738,7 +738,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                                     else
                                     {
                                       v38 = SurfaceClipper::InitClipper(&this->m_sMinimapClipper, this->m_pDDraw7);
-                                      if ( v38 )
+                                      if ( v38 != 0 )
                                       {
                                         WriteError(v38, "Create Minimap Clipper");
                                         return 0;
@@ -746,7 +746,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                                       else
                                       {
                                         v39 = SurfaceClipper::SetClipWindow(&this->m_sClipper1, GfxEngineSetup.m_hWnd);
-                                        if ( v39 )
+                                        if ( v39 != 0 )
                                         {
                                           WriteError(v39, "AssignClipper1");
                                           return 0;
@@ -755,7 +755,7 @@ bool  CInterfaceD3D::InitCommon(void) {
                                         {
                                           Clipper = SurfaceClipper::GetClipper(&this->m_sClipper1);
                                           v40 = this->PrimarySurface->SetClipper(this->PrimarySurface, Clipper);
-                                          if ( v40 )
+                                          if ( v40 != 0 )
                                           {
                                             WriteError(v40, "SetClipper1");
                                             return 0;
@@ -866,14 +866,14 @@ bool  CInterfaceD3D::InitCommonV3(void) {
 
   v34 = this;
   BBSupportTracePrintF(1, "GFX ENGINE: Begin common init. Mode: Interface 3.");
-  if ( v34->m_bInitHardware || v34->m_bInitSoftware )
+  if ( v34->m_bInitHardware != 0 || v34->m_bInitSoftware != 0 )
   {
     BBSupportTracePrintF(1, "GFX ENGINE: INIT COMMON: Engine is already initialized!");
     return 1;
   }
   BYTE1(v34[1].m_sClipper1.m_vChar.u8) = SGfxRenderConfiguration::IsHQTextureSet(&GfxEngineSetup);
   BYTE2(v34[1].m_sClipper1.m_vChar.u8) = 0;
-  if ( s_hCursor )
+  if ( s_hCursor != 0 )
   {
     SetClassLongA(GfxEngineSetup.m_hWnd, -12, s_hCursor);
     SetCursor((HCURSOR)s_hCursor);
@@ -922,7 +922,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
         i < 36;
         ++i )
   {
-    if ( !s_hCursorHandles[i] )
+    if ( s_hCursorHandles[i] == 0 )
     {
       BBSupportTracePrintF(1, "GFX ENGINE: Couldn't create cursors!");
       return 0;
@@ -930,19 +930,19 @@ bool  CInterfaceD3D::InitCommonV3(void) {
   }
   g_bForceMiniMapRefresh = 1;
   v34->field_68 = (int)CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-  if ( !v34->field_68 )
+  if ( v34->field_68 == 0 )
   {
     BBSupportTracePrintF(1, "GFX ENGINE: Not enough memory to create surface object!");
     return 0;
   }
-  if ( g_pDirectDraw )
+  if ( g_pDirectDraw != 0 )
   {
     v34->m_pDDraw = g_pDirectDraw;
   }
   else
   {
     inited = DirectDrawCreate(0, (LPDIRECTDRAW *)&v34->m_pDDraw, 0);
-    if ( inited )
+    if ( inited != 0 )
     {
       WriteError(inited, "CreateDirectDrawObject");
       return 0;
@@ -950,7 +950,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
     g_pDirectDraw = v34->m_pDDraw;
   }
   inited = v34->m_pDDraw->lpVtbl->SetCooperativeLevel(v34->m_pDDraw, GfxEngineSetup.m_hWnd, 8);
-  if ( inited )
+  if ( inited != 0 )
   {
     WriteError(inited, "SetCooperativeLevel");
     return 0;
@@ -958,7 +958,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
   else
   {
     v34->PrimarySurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-    if ( v34->PrimarySurface )
+    if ( v34->PrimarySurface != 0 )
     {
       Number = g_uGfxMode == 1;
       if ( GfxEngineSetup.m_bD3DInterface )
@@ -971,7 +971,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
       }
       v2 = j__abs(Number);
       inited = (HRESULT)v34->PrimarySurface->CreateSurface(v34->PrimarySurface, m_pDDraw, GfxEngineSetup.m_uWidth, GfxEngineSetup.m_uHeight, 1, 0, 0, v2, 1, 0, 0);
-      if ( inited )
+      if ( inited != 0 )
       {
         WriteError(inited, "CreatePrimarySurface");
         return 0;
@@ -979,7 +979,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
       else
       {
         inited = v34->PrimarySurface->GetBitDepth(v34->PrimarySurface, &v13);
-        if ( inited )
+        if ( inited != 0 )
         {
           WriteError(inited, "RetrieveBitDepth");
           return 0;
@@ -987,14 +987,14 @@ bool  CInterfaceD3D::InitCommonV3(void) {
         else if ( v13 == 16 )
         {
           inited = ((int (__thiscall *)(CSurfaceV7 *, char *))v34->PrimarySurface->GetPixelFormat)(v34->PrimarySurface, &v35);
-          if ( inited )
+          if ( inited != 0 )
           {
             WriteError(inited, "RetrievePixelFormatFromPrimarySurface");
             return 0;
           }
           else
           {
-            if ( v35 )
+            if ( v35 != 0 )
             {
               g_uGfxMode = 1;
             }
@@ -1003,7 +1003,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
               g_uGfxMode = 2;
             }
             v34->m_pMoveCursorSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-            if ( v34->m_pMoveCursorSurface )
+            if ( v34->m_pMoveCursorSurface != 0 )
             {
               v29 = g_uGfxMode == 1;
               if ( GfxEngineSetup.m_bD3DInterface )
@@ -1016,7 +1016,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
               }
               v3 = j__abs(v29);
               inited = (HRESULT)v34->m_pMoveCursorSurface->CreateSurface(v34->m_pMoveCursorSurface, DDraw7, 32, 32, 1, 0, 0, v3, 0, 0, 0);
-              if ( inited )
+              if ( inited != 0 )
               {
                 WriteError(inited, "CreateMoveCursorSurface");
                 return 0;
@@ -1042,7 +1042,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                 }
                 v34->m_pMoveCursorSurface->SetColorKey(v34->m_pMoveCursorSurface, 8, v26);
                 v34->m_pZoomCursorSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-                if ( v34->m_pZoomCursorSurface )
+                if ( v34->m_pZoomCursorSurface != 0 )
                 {
                   v25 = g_uGfxMode == 1;
                   if ( GfxEngineSetup.m_bD3DInterface )
@@ -1055,7 +1055,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                   }
                   v4 = j__abs(v25);
                   inited = (HRESULT)v34->m_pZoomCursorSurface->CreateSurface(v34->m_pZoomCursorSurface, v24, 32, 32, 1, 0, 0, v4, 0, 0, 0);
-                  if ( inited )
+                  if ( inited != 0 )
                   {
                     WriteError(inited, "CreationZoomCursorSurface");
                     return 0;
@@ -1081,7 +1081,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                     }
                     v34->m_pZoomCursorSurface->SetColorKey(v34->m_pZoomCursorSurface, 8, v22);
                     v34->MiniMapSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-                    if ( v34->MiniMapSurface )
+                    if ( v34->MiniMapSurface != 0 )
                     {
                       v21 = g_uGfxMode == 1;
                       if ( GfxEngineSetup.m_bD3DInterface )
@@ -1094,7 +1094,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                       }
                       v5 = j__abs(v21);
                       inited = (HRESULT)v34->MiniMapSurface->CreateSurface(v34->MiniMapSurface, v20, 240, 160, 1, 0, 0, v5, 0, 0, 0);
-                      if ( inited )
+                      if ( inited != 0 )
                       {
                         WriteError(inited, "CreateMiniMapSurface");
                         return 0;
@@ -1104,7 +1104,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                         v34->MiniMapSurface->ClearSurface(v34->MiniMapSurface, 0);
                         v34->MiniMapSurface->SetColorKey(v34->MiniMapSurface, 8, (int *)&g_sColorKeyBlack);
                         v34->MiniMapAreaSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-                        if ( v34->MiniMapAreaSurface )
+                        if ( v34->MiniMapAreaSurface != 0 )
                         {
                           v19 = g_uGfxMode == 1;
                           if ( GfxEngineSetup.m_bD3DInterface )
@@ -1117,7 +1117,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                           }
                           v6 = j__abs(v19);
                           inited = (HRESULT)v34->MiniMapAreaSurface->CreateSurface(v34->MiniMapAreaSurface, v18, 240, 160, 1, 0, 0, v6, 0, 0, 0);
-                          if ( inited )
+                          if ( inited != 0 )
                           {
                             WriteError(inited, "CreateMiniMapAreaSurface");
                             return 0;
@@ -1125,18 +1125,18 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                           else
                           {
                             inited = v34->MiniMapAreaSurface->ClearSurface(v34->MiniMapAreaSurface, 0);
-                            if ( inited )
+                            if ( inited != 0 )
                             {
                               WriteError(inited, "ClearMiniMapSurface");
                             }
                             inited = ((int (__thiscall *)(CSurfaceV7 *, int, void *))v34->MiniMapAreaSurface->SetColorKey)(v34->MiniMapAreaSurface, 8, &g_sColorKeyBlack);
-                            if ( inited )
+                            if ( inited != 0 )
                             {
                               WriteError(inited, "SetMiniMapColorKey");
                             }
                             BBSupportTracePrintF(1, "GFX ENGINE: Size of render surface: %d x %d", GfxEngineSetup.m_uWidth, GfxEngineSetup.m_uHeight);
                             v34->LandscapeSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-                            if ( v34->LandscapeSurface )
+                            if ( v34->LandscapeSurface != 0 )
                             {
                               v17 = g_uGfxMode == 1;
                               if ( GfxEngineSetup.m_bD3DInterface )
@@ -1150,7 +1150,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                               v10 = j__abs(v17);
                               IsHardwareLandscapeEngine = SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup);
                               inited = (HRESULT)v34->LandscapeSurface->CreateSurface(v34->LandscapeSurface, v16, GfxEngineSetup.m_uWidth, GfxEngineSetup.m_uHeight, 1, IsHardwareLandscapeEngine, 0, v10, 0, 0, 0);
-                              if ( inited )
+                              if ( inited != 0 )
                               {
                                 WriteError(inited, "CreateLandscapeSurface");
                                 return 0;
@@ -1159,7 +1159,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                               {
                                 v34->LandscapeSurface2 = v34->LandscapeSurface;
                                 v34->FinalRenderSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-                                if ( v34->FinalRenderSurface )
+                                if ( v34->FinalRenderSurface != 0 )
                                 {
                                   v15 = g_uGfxMode == 1;
                                   if ( GfxEngineSetup.m_bD3DInterface )
@@ -1174,7 +1174,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                                   v11 = j__abs(v15);
                                   v8 = SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup);
                                   inited = (HRESULT)v34->FinalRenderSurface->CreateSurface(v34->FinalRenderSurface, v14, GfxEngineSetup.m_uWidth, GfxEngineSetup.m_uHeight, 1, v8, 0, v11, 0, v12, 0);
-                                  if ( inited )
+                                  if ( inited != 0 )
                                   {
                                     WriteError(inited, "CreateFinalRenderSurface");
                                     return 0;
@@ -1182,7 +1182,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                                   else
                                   {
                                     inited = SurfaceClipper::InitClipper(&v34->m_sClipper1, v34->m_pDDraw);
-                                    if ( inited )
+                                    if ( inited != 0 )
                                     {
                                       WriteError(inited, "CreateClipper1");
                                       return 0;
@@ -1190,7 +1190,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                                     else
                                     {
                                       inited = SurfaceClipper::InitClipper(&v34->m_sMinimapClipper, v34->m_pDDraw);
-                                      if ( inited )
+                                      if ( inited != 0 )
                                       {
                                         WriteError(inited, "Create Minimap Clipper");
                                         return 0;
@@ -1198,7 +1198,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                                       else
                                       {
                                         inited = SurfaceClipper::SetClipWindow(&v34->m_sClipper1, GfxEngineSetup.m_hWnd);
-                                        if ( inited )
+                                        if ( inited != 0 )
                                         {
                                           WriteError(inited, "AssignClipper1");
                                           return 0;
@@ -1207,7 +1207,7 @@ bool  CInterfaceD3D::InitCommonV3(void) {
                                         {
                                           Clipper = SurfaceClipper::GetClipper(&v34->m_sClipper1);
                                           inited = v34->PrimarySurface->SetClipper(v34->PrimarySurface, Clipper);
-                                          if ( inited )
+                                          if ( inited != 0 )
                                           {
                                             WriteError(inited, "SetClipper1");
                                             return 0;
@@ -1320,21 +1320,21 @@ bool  CInterfaceD3D::InitHardware(void) {
   int exceptionBlock; // [esp+218h] [ebp-4h]
 
   BBSupportTracePrintF(1, "GFX ENGINE: Begin hardware init.");
-  if ( this->m_bInitHardware || this->m_bInitSoftware )
+  if ( this->m_bInitHardware != 0 || this->m_bInitSoftware != 0 )
   {
     BBSupportTracePrintF(1, "GFX ENGINE: INIT HARDWARE: Engine is already initialized!");
     return 1;
   }
   CHeightAndTypeTable::InitShadeTables((CHeightAndTypeTable *)g_cHeightAndTypeTable);
   v30 = (void *)this->m_pDDraw7->lpVtbl->QueryInterface(this->m_pDDraw7, &IID_IDirect3D7, (LPVOID *)&this->m_pIDirect3D7);
-  if ( v30 )
+  if ( v30 != 0 )
   {
     WriteError((int)v30, "QueryD3DInterface");
     return 0;
   }
   CInterfaceD3D::AllocateEngineData(D3DObjectPtr, 256);
   v26 = 256;
-  if ( !BYTE1(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) && SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
+  if ( BYTE1(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) == 0 && SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) != 0 )
   {
     v26 /= 2;
   }
@@ -1344,7 +1344,7 @@ bool  CInterfaceD3D::InitHardware(void) {
         ++i )
   {
     this->LandscapeTextureTable[i] = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-    if ( !this->LandscapeTextureTable[i] )
+    if ( this->LandscapeTextureTable[i] == 0 )
     {
       BBSupportTracePrintF(1, "GFX ENGINE: Not enough memory to create surface object!");
       return 0;
@@ -1360,20 +1360,20 @@ bool  CInterfaceD3D::InitHardware(void) {
     }
     v2 = j__abs(Number);
     v31 = (HRESULT)this->LandscapeTextureTable[i]->CreateSurface(this->LandscapeTextureTable[i], m_pDDraw, v26, v26, 1, 1, 1, v2, 0, 0, 0);
-    if ( v31 )
+    if ( v31 != 0 )
     {
       WriteError(v31, "CreateLandscapeTextureSurface");
       return 0;
     }
   }
-  if ( g_bHardwareObjectEnabled )
+  if ( g_bHardwareObjectEnabled != 0 )
   {
     for ( i = 0;
           i < 2;
           ++i )
     {
       this->ObjectTextureTable[i] = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-      if ( !this->ObjectTextureTable[i] )
+      if ( this->ObjectTextureTable[i] == 0 )
       {
         BBSupportTracePrintF(1, "GFX ENGINE: Not enough memory to create surface object!");
         return 0;
@@ -1387,7 +1387,7 @@ bool  CInterfaceD3D::InitHardware(void) {
         m_pDDraw7 = this->m_pDDraw7;
       }
       v31 = (HRESULT)this->ObjectTextureTable[i]->CreateSurface(this->ObjectTextureTable[i], m_pDDraw7, 512, 512, 1, 0, 1, 2, 0, 0, 0);
-      if ( v31 )
+      if ( v31 != 0 )
       {
         WriteError(v31, "CreateObjectTextureSurface");
         return 0;
@@ -1398,7 +1398,7 @@ bool  CInterfaceD3D::InitHardware(void) {
           ++i )
     {
       this->ObjectTextureSystemMemoryTable[i] = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-      if ( !this->ObjectTextureSystemMemoryTable[i] )
+      if ( this->ObjectTextureSystemMemoryTable[i] == 0 )
       {
         BBSupportTracePrintF(1, "GFX ENGINE: Not enough memory to create surface object!");
         return 0;
@@ -1412,7 +1412,7 @@ bool  CInterfaceD3D::InitHardware(void) {
         v20 = this->m_pDDraw7;
       }
       v31 = (HRESULT)this->ObjectTextureSystemMemoryTable[i]->CreateSurface(this->ObjectTextureSystemMemoryTable[i], v20, 512, 512, 0, 0, 1, 2, 0, 0, 0);
-      if ( v31 )
+      if ( v31 != 0 )
       {
         WriteError(v31, "CreateObjectTextureSystemMemory");
         return 0;
@@ -1421,14 +1421,14 @@ bool  CInterfaceD3D::InitHardware(void) {
   }
   v3 = this->LandscapeSurface->GetSurfacePtr(this->LandscapeSurface);
   v31 = ((int (__stdcall *)(IDirect3D7 *, GUID *, IDirectDrawSurface7 *))this->m_pIDirect3D7->CreateDevice)(this->m_pIDirect3D7, &IID_IDirect3DHALDevice, v3);// Goes to null the device probably
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "CreateLandscapeRenderDevice");
     return 0;
   }
   v4 = this->FinalRenderSurface->GetSurfacePtr(this->FinalRenderSurface);
   v31 = ((int (__stdcall *)(IDirect3D7 *, GUID *, IDirectDrawSurface7 *))this->m_pIDirect3D7->CreateDevice)(this->m_pIDirect3D7, &IID_IDirect3DHALDevice, v4);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "CreateObjectRenderDevice");
     return 0;
@@ -1440,102 +1440,102 @@ bool  CInterfaceD3D::InitHardware(void) {
   this->m_sViewport.dvMinZ = 0.0;
   this->m_sViewport.dvMaxZ = FLOAT_1_0;
   v31 = this->LandscapeDevice->SetViewport(this->LandscapeDevice, &this->m_sViewport);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "SetLandscapeViewport");
     return 0;
   }
   v31 = this->m_pObjectDevice->SetViewport(this->m_pObjectDevice, &this->m_sViewport);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "SetObjectViewport");
     return 0;
   }
   v5 = this->LandscapeTextureTable[0]->GetSurfacePtr(this->LandscapeTextureTable[0]);
   v31 = this->LandscapeDevice->SetTexture(this->LandscapeDevice, 0, v5);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "SetDefaultLandscapeTexture");
     return 0;
   }
   v31 = this->LandscapeDevice->SetRenderState(this->LandscapeDevice, D3DRENDERSTATE_CULLMODE, 1);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "SetCulling");
     return 0;
   }
   v31 = this->LandscapeDevice->SetRenderState(this->LandscapeDevice, D3DRENDERSTATE_TEXTUREPERSPECTIVE, 0);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "SetTextureCorrecture");
     return 0;
   }
   v31 = this->LandscapeDevice->SetRenderState(this->LandscapeDevice, D3DRENDERSTATE_ZENABLE, 0);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "DisableZBuffer");
     return 0;
   }
   v31 = this->LandscapeDevice->SetRenderState(this->LandscapeDevice, D3DRENDERSTATE_LOCALVIEWER, 0);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "DisableCameraView");
     return 0;
   }
   v31 = this->LandscapeDevice->SetTextureStageState(this->LandscapeDevice, 0, D3DTSS_ADDRESS, 1);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "SetTextureAdressMode");
     return 0;
   }
   v31 = this->LandscapeDevice->SetRenderState(this->LandscapeDevice, D3DRENDERSTATE_SHADEMODE, 2);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "SetLandscapeShading");
     return 0;
   }
   v31 = this->LandscapeDevice->SetRenderState(this->LandscapeDevice, D3DRENDERSTATE_SPECULARENABLE, 1);
-  if ( v31 )
+  if ( v31 != 0 )
   {
     WriteError(v31, "SetLandscapeLighting");
     return 0;
   }
-  if ( g_bHardwareObjectEnabled )
+  if ( g_bHardwareObjectEnabled != 0 )
   {
     InitRenderStates();
     v6 = this->ObjectTextureTable[0]->GetSurfacePtr(this->ObjectTextureTable[0]);
     v31 = this->m_pObjectDevice->SetTexture(this->m_pObjectDevice, 0, v6);
-    if ( v31 )
+    if ( v31 != 0 )
     {
       WriteError(v31, "SetDefaultObjectTexture");
       return 0;
     }
     v31 = this->m_pObjectDevice->SetRenderState(this->m_pObjectDevice, D3DRENDERSTATE_SHADEMODE, 1);
-    if ( v31 )
+    if ( v31 != 0 )
     {
       WriteError(v31, "SetObjectShading");
       return 0;
     }
     v31 = this->m_pObjectDevice->SetRenderState(this->m_pObjectDevice, D3DRENDERSTATE_SPECULARENABLE, 0);
-    if ( v31 )
+    if ( v31 != 0 )
     {
       WriteError(v31, "SetObjectLighting");
       return 0;
     }
     v31 = this->m_pObjectDevice->SetRenderState(this->m_pObjectDevice, D3DRENDERSTATE_ALPHABLENDENABLE, 1);
-    if ( v31 )
+    if ( v31 != 0 )
     {
       WriteError(v31, "EnableAlphaBlending");
       return 0;
     }
     v31 = this->m_pObjectDevice->SetRenderState(this->m_pObjectDevice, D3DRENDERSTATE_SRCBLEND, 5);
-    if ( v31 )
+    if ( v31 != 0 )
     {
       WriteError(v31, "SetSourceBlend");
       return 0;
     }
     v31 = this->m_pObjectDevice->SetRenderState(this->m_pObjectDevice, D3DRENDERSTATE_DESTBLEND, 6);
-    if ( v31 )
+    if ( v31 != 0 )
     {
       WriteError(v31, "SetDestBlend");
       return 0;
@@ -1549,7 +1549,7 @@ bool  CInterfaceD3D::InitHardware(void) {
       v19 = 1;
     }
     v31 = this->m_pObjectDevice->SetTextureStageState(this->m_pObjectDevice, 0, D3DTSS_MAGFILTER, v19);
-    if ( v31 )
+    if ( v31 != 0 )
     {
       WriteError(v31, "SetObjectFiltering");
       return 0;
@@ -1563,7 +1563,7 @@ bool  CInterfaceD3D::InitHardware(void) {
       v18 = 1;
     }
     v31 = this->m_pObjectDevice->SetTextureStageState(this->m_pObjectDevice, 0, D3DTSS_MINFILTER, v18);
-    if ( v31 )
+    if ( v31 != 0 )
     {
       WriteError(v31, "SetObjectFiltering");
       return 0;
@@ -1600,7 +1600,7 @@ bool  CInterfaceD3D::InitHardware(void) {
     g_pfBlitAccessoryIcon = (int (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD))BlitAccessoryIcon;
     g_pfBlitWave = BlitWave;
   }
-  if ( g_bHardwareObjectEnabled )
+  if ( g_bHardwareObjectEnabled != 0 )
   {
     for ( i = 0;
           i < 2;
@@ -1608,7 +1608,7 @@ bool  CInterfaceD3D::InitHardware(void) {
     {
       C = operator new(0x9A4u);
       exceptionBlock = 0;
-      if ( C )
+      if ( C != 0 )
       {
         m_pObjectDevice = this->m_pObjectDevice;
         v9 = this->ObjectTextureSystemMemoryTable[i]->GetSurfacePtr(this->ObjectTextureSystemMemoryTable[i]);
@@ -1621,7 +1621,7 @@ bool  CInterfaceD3D::InitHardware(void) {
       }
       exceptionBlock = -1;
       this->CCachePageManager[i] = v16;
-      if ( !this->CCachePageManager[i] )
+      if ( this->CCachePageManager[i] == 0 )
       {
         BBSupportTracePrintF(1, "GFX ENGINE: No memory to create PictureManager");
         return 0;
@@ -1631,7 +1631,7 @@ bool  CInterfaceD3D::InitHardware(void) {
     memset(&v34, 0, sizeof(v34));
     v34.dwCaps = 4096;
     v27 = this->m_pDDraw7->lpVtbl->GetAvailableVidMem(this->m_pDDraw7, &v34, &v11, (LPDWORD)&uAvailableVidMemory);
-    if ( v27 )
+    if ( v27 != 0 )
     {
       WriteError(v27, "GetVideoMemory");
       return 0;
@@ -1648,7 +1648,7 @@ bool  CInterfaceD3D::InitHardware(void) {
       v33.ddsCaps.dwCaps = 20480;
       v33.dwWidth = 512;
       v33.dwHeight = 512;
-      *(_QWORD *)&v33.ddpfPixelFormat.dwFlags = 65LL;
+      *(_QWORD *)&v33.ddpfPixelFormat.dwFlags = 65;
       *(_QWORD *)&v33.ddpfPixelFormat.dwRGBBitCount = 0xF0000000010LL;
       *(_QWORD *)&v33.ddpfPixelFormat.dwGBitMask = 0xF000000F0LL;
       v33.ddpfPixelFormat.dwRGBAlphaBitMask = 61440;
@@ -1660,7 +1660,7 @@ bool  CInterfaceD3D::InitHardware(void) {
       {
         v27 = this->m_pDDraw7->lpVtbl->CreateSurface(this->m_pDDraw7, &v33, &this->m_pCacheSurfaces[this->m_uCacheSurfaceCount], 0);
         v28 = 1;
-        if ( v27 )
+        if ( v27 != 0 )
         {
           if ( v27 == DDERR_OUTOFVIDEOMEMORY )
           {
@@ -1671,7 +1671,7 @@ bool  CInterfaceD3D::InitHardware(void) {
           return 0;
         }
         v27 = this->m_pDDraw7->lpVtbl->GetAvailableVidMem(this->m_pDDraw7, &v34, &v11, (LPDWORD)&uAvailableVidMemory);
-        if ( v27 )
+        if ( v27 != 0 )
         {
           WriteError(v27, "GetVideoMemory");
           return 0;
@@ -1682,7 +1682,7 @@ bool  CInterfaceD3D::InitHardware(void) {
         }
         v14 = (CCachePageManager *)operator new(0x824u);
         exceptionBlock = 1;
-        if ( v14 )
+        if ( v14 != 0 )
         {
           v13 = CCachePageManager::CCachePageManager(v14, this->m_pCacheSurfaces[this->m_uCacheSurfaceCount], 0, this->m_pObjectDevice);
         }
@@ -1692,7 +1692,7 @@ bool  CInterfaceD3D::InitHardware(void) {
         }
         exceptionBlock = -1;
         this->m_pCacheManagers[this->m_uCacheSurfaceCount] = v13;
-        if ( !this->m_pCacheManagers[this->m_uCacheSurfaceCount] )
+        if ( this->m_pCacheManagers[this->m_uCacheSurfaceCount] == 0 )
         {
           BBSupportTracePrintF(1, "GFX ENGINE: Out of memory while creating CacheManager");
           return 0;
@@ -1701,7 +1701,7 @@ bool  CInterfaceD3D::InitHardware(void) {
     }
     g_iZoomGradient = g_iVertexSize / 24;
     g_iZoomInit = -65536;
-    if ( D3DObjectPtr->CCachePageManager[0] )
+    if ( D3DObjectPtr->CCachePageManager[0] != 0 )
     {
       CCachePageManager::SetCurrentZoomFactor(D3DObjectPtr->CCachePageManager[0], g_fZoomFactor);
     }
@@ -1721,7 +1721,7 @@ bool  CInterfaceD3D::InitSoftware(void) {
   int j; // [esp+8h] [ebp-4h]
 
   BBSupportTracePrintF(1, "GFX ENGINE: Begin software init.");
-  if ( this->m_bInitHardware || this->m_bInitSoftware )
+  if ( this->m_bInitHardware != 0 || this->m_bInitSoftware != 0 )
   {
     BBSupportTracePrintF(1, "GFX ENGINE: INIT SOFTWARE: Engine is already initialized!");
     return 1;
@@ -1739,7 +1739,7 @@ bool  CInterfaceD3D::InitSoftware(void) {
     CHeightAndTypeTable::InitShadeTables((CHeightAndTypeTable *)g_cHeightAndTypeTable);
     CInterfaceD3D::AllocateEngineData(D3DObjectPtr, 256);
     g_pSoftwareTexturePages = (int)operator new[](0x2C0000u);
-    if ( g_pSoftwareTexturePages )
+    if ( g_pSoftwareTexturePages != 0 )
     {
       for ( i = 0;
             i < 44;
@@ -1753,7 +1753,7 @@ bool  CInterfaceD3D::InitSoftware(void) {
             ++j )
       {
         GradientFormat = CInterfaceD3D::GetGradientFormat(this);
-        CColorGradient::SetupGradients(&g_cColorGradient, j, MEMORY[0x468D2C8][j + 1].m_iR, MEMORY[0x468D2C8][j + 1].m_iG, MEMORY[0x468D2C8][j + 1].m_iB, GradientFormat);
+        ((void (__thiscall *)(CColorGradient *, int, int, int, int, int))CColorGradient::SetupGradients)(&g_cColorGradient, j, g_cColorGradient.m_vPlayerColors[j + 1].m_iR, g_cColorGradient.m_vPlayerColors[j + 1].m_iG, g_cColorGradient.m_vPlayerColors[j + 1].m_iB, GradientFormat);
       }
       CInterfaceD3D::PreCalcTextureVertices(this, 256);
       g_pfBlitSettler = (int (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD))BlitSettler;
@@ -1787,7 +1787,7 @@ bool  CInterfaceD3D::BlitSurfaceToDIB(struct HWND__ * hWnd, struct HBITMAP__ * h
   _DWORD **v8; // [esp+14h] [ebp-4h]
 
   v8 = this;
-  v6 = (*(int (__thiscall **)(_DWORD *, HDC *))(*this[25] + 40))(this[25], &hdcSrc);
+  v6 = (*(int (__thiscall **)(_DWORD, HDC *))(**(this + 25) + 40))(*(this + 25), &hdcSrc);
   if ( v6 == -2005532222 )
   {
     BBSupportTracePrintF(1, "GFX ENGINE: Blit to DIB failed! (Case 1)");
@@ -1795,14 +1795,14 @@ bool  CInterfaceD3D::BlitSurfaceToDIB(struct HWND__ * hWnd, struct HBITMAP__ * h
   }
   else
   {
-    if ( v6 )
+    if ( v6 != 0 )
     {
       BBSupportTracePrintF(1, "GFX ENGINE: Blit to DIB failed! (Case 2)");
     }
     hdc = GetDC(hWnd);
     CompatibleDC = CreateCompatibleDC(hdc);
     SelectObject(CompatibleDC, h);
-    if ( !BitBlt(CompatibleDC, 0, 0, MEMORY[0x3E2E26C], MEMORY[0x3E2E270], hdcSrc, 0, 0, (DWORD)&dword_C20408[163590]) )
+    if ( !BitBlt(CompatibleDC, 0, 0, GfxEngineSetup.m_uWidth, GfxEngineSetup.m_uHeight, hdcSrc, 0, 0, (DWORD)&dword_C20408[163590]) )
     {
       BBSupportTracePrintF(1, "GFX ENGINE: Blit to DIB failed! (Case 3)");
     }
@@ -1839,7 +1839,7 @@ bool  CInterfaceD3D::BlitSurfaceToWindow(void) {
   v6 = 0;
   if ( SGfxRenderConfiguration::IsEditorMode(&GfxEngineSetup) )
   {
-    if ( this->m_pGuiSurfaces[0] && this->PrimarySurface )
+    if ( this->m_pGuiSurfaces[0] != 0 && this->PrimarySurface != 0 )
     {
       v11.left = GfxEngineSetup.m_uX;
       v11.top = GfxEngineSetup.m_uY;
@@ -1848,7 +1848,7 @@ bool  CInterfaceD3D::BlitSurfaceToWindow(void) {
       BlitStructPtr = CBlitFX::GetBlitStructPtr((CBlitFX *)&g_cBlitFX);
       v6 = this->PrimarySurface->Blt(this->PrimarySurface, &v11, this->m_pGuiSurfaces[0], 0, 512, (struct _DDBLTFX *)BlitStructPtr);
     }
-    if ( byte_3E2E301 && this->MiniMapAreaSurface && this->PrimarySurface )
+    if ( byte_3E2E301 != 0 && this->MiniMapAreaSurface != 0 && this->PrimarySurface != 0 )
     {
       v7 = -1;
       v16 = g_sMiniMapRect;
@@ -1891,26 +1891,26 @@ bool  CInterfaceD3D::BlitSurfaceToWindow(void) {
       if ( v17 <= surfaceHeight || v16 <= surfaceWidth )
       {
         v7 = CInterfaceD3D::SetCustomClipper(this, &this->m_sMinimapClipper);
-        if ( v7 )
+        if ( v7 != 0 )
         {
           WriteError(v7, "SetClipper2");
           return 0;
         }
         v7 = D3DObjectPtr->PrimarySurface->Blt(D3DObjectPtr->PrimarySurface, (struct tagRECT *)&v16, D3DObjectPtr->MiniMapSurface, (struct tagRECT *)&v12, 0x8000, 0);
-        if ( !v7 )
+        if ( v7 == 0 )
         {
           v7 = D3DObjectPtr->PrimarySurface->Blt(D3DObjectPtr->PrimarySurface, (struct tagRECT *)&v16, D3DObjectPtr->MiniMapAreaSurface, (struct tagRECT *)&v12, 0x8000, 0);
         }
       }
       v7 = CInterfaceD3D::ClearCustomClipper(this);
-      if ( v7 )
+      if ( v7 != 0 )
       {
         WriteError(v7, "SetClipper1");
         return 0;
       }
     }
   }
-  else if ( this->FinalRenderSurface && this->PrimarySurface )
+  else if ( this->FinalRenderSurface != 0 && this->PrimarySurface != 0 )
   {
     v10.left = GfxEngineSetup.m_uX;
     v10.top = GfxEngineSetup.m_uY;
@@ -1925,19 +1925,19 @@ bool  CInterfaceD3D::BlitSurfaceToWindow(void) {
       return 1;
     case -2005532222:
       v6 = this->PrimarySurface->Restore(this->PrimarySurface);
-      if ( v6 )
+      if ( v6 != 0 )
       {
         WriteError(v6, "RestorePrimarySurface");
       }
       if ( v6 == -2005532085 )
       {
         BBSupportTracePrintF(1, "GFX ENGINE: Stop rendering because of inaccessability of primary surface!");
-        LOBYTE(this[1].m_sClipper1.m_vChar.u8) = 1;
+        *((_BYTE *)this + 1856) = 1;
       }
       break;
     case -2005532447:
       WriteError(-2005532447, "Exclusive mode down! Stop rendering...");
-      LOBYTE(this[1].m_sClipper1.m_vChar.u8) = 1;
+      *((_BYTE *)this + 1856) = 1;
       break;
     default:
       WriteError(v6, "PrimarySurfaceBlit");
@@ -2082,60 +2082,58 @@ bool  CInterfaceD3D::LoadTexturePageContents(void) {
   int i; // [esp+4h] [ebp-8h]
 
   BBSupportTracePrintF(1, "GFX ENGINE: Read in all texture pages...");
-  if ( !SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) == 0 )
   {
     BYTE1(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
   }
-  if ( !D3DObjectPtr )
+  if ( D3DObjectPtr != 0 )
   {
-    return 1;
+    v4 = g_uGfxMode == 1;
+    IsHQTextureSet = BYTE1(D3DObjectPtr[1].m_sClipper1.m_vChar.u8);
+    IsHardwareLandscapeEngine = SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup);
+    if ( !ReadTextureBitmapSet(IsHardwareLandscapeEngine, IsHQTextureSet, v4, 44) )
+    {
+      BBSupportTracePrintF(0, "GFX ENGINE: Error while loading texture set!");
+      return 0;
+    }
+    if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) == 0 )
+    {
+      BBSupportTracePrintF(1, "GFX ENGINE: Begin set up luminance tables.");
+      for ( i = 0;
+            i < 44;
+            ++i )
+      {
+        j__TRI_calculate_LUT_from_palette((int)&g_uColorPalettes + 768 * i, g_pLuminanceTablesStart + (i << 11));
+      }
+      BBSupportTracePrintF(1, "GFX ENGINE: End set up luminance tables.");
+    }
   }
-  v4 = g_uGfxMode == 1;
-  IsHQTextureSet = BYTE1(D3DObjectPtr[1].m_sClipper1.m_vChar.u8);
-  IsHardwareLandscapeEngine = SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup);
-  if ( !ReadTextureBitmapSet(IsHardwareLandscapeEngine, IsHQTextureSet, v4, 44) )
-  {
-    BBSupportTracePrintF(0, "GFX ENGINE: Error while loading texture set!");
-    return 0;
-  }
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
-  {
-    return 1;
-  }
-  BBSupportTracePrintF(1, "GFX ENGINE: Begin set up luminance tables.");
-  for ( i = 0;
-        i < 44;
-        ++i )
-  {
-    j__TRI_calculate_LUT_from_palette((int)&g_uColorPalettes + 768 * i, g_pLuminanceTablesStart + (i << 11));
-  }
-  BBSupportTracePrintF(1, "GFX ENGINE: End set up luminance tables.");
   return 1;
 }
 
 
 // address=[0x2f67190]
-// Decompiled from void __thiscall CInterfaceD3D::SetupViewport(CInterfaceD3D *this, int a2, int a3, int a4, int a5)
+// Decompiled from void __thiscall CInterfaceD3D::SetupViewport(CInterfaceD3D *this, DWORD a2, DWORD a3, DWORD a4, DWORD a5)
 void  CInterfaceD3D::SetupViewport(int a2, int a3, int a4, int a5) {
   
   HRESULT v5; // [esp+0h] [ebp-8h]
   int v6; // [esp+0h] [ebp-8h]
 
-  this->m_sViewport = a2;
-  this->? = a3;
-  this->? = a4;
-  this->? = a5;
-  if ( this->LandscapeDevice )
+  this->m_sViewport.dwX = a2;
+  this->m_sViewport.dwY = a3;
+  this->m_sViewport.dwWidth = a4;
+  this->m_sViewport.dwHeight = a5;
+  if ( this->LandscapeDevice != 0 )
   {
-    v5 = this->LandscapeDevice->lpVtbl->GetBltStatus(this->LandscapeDevice, (DWORD)&this->m_sViewport);
-    if ( v5 )
+    v5 = this->LandscapeDevice->SetViewport(this->LandscapeDevice, &this->m_sViewport);
+    if ( v5 != 0 )
     {
       WriteError(v5, "SetLandscapeViewport");
     }
-    else if ( this->m_pObjectDevice )
+    else if ( this->m_pObjectDevice != 0 )
     {
-      v6 = (*(int (__stdcall **)(int, _DWORD *))(*(_DWORD *)this->m_pObjectDevice + 52))(this->m_pObjectDevice, &this->m_sViewport);
-      if ( v6 )
+      v6 = this->m_pObjectDevice->SetViewport(this->m_pObjectDevice, &this->m_sViewport);
+      if ( v6 != 0 )
       {
         WriteError(v6, "SetObjectViewport");
       }
@@ -2150,12 +2148,12 @@ long  CInterfaceD3D::SetCustomClipper(class SurfaceClipper & a2) {
   
   struct IDirectDrawClipper *Clipper; // eax
 
-  if ( !SurfaceClipper::GetClipper(a2) )
+  if ( (struct IDirectDrawClipper *)SurfaceClipper::GetClipper(a2) == 0 )
   {
     j___wassert(L"clipper.GetClipper() != nullptr", L"MainGfxManager.cpp", 0x90Fu);
   }
-  Clipper = SurfaceClipper::GetClipper(a2);
-  return (*(int (__thiscall **)(_DWORD, struct IDirectDrawClipper *))(**((_DWORD **)this + 25) + 68))(*((_DWORD *)this + 25), Clipper);
+  Clipper = (struct IDirectDrawClipper *)SurfaceClipper::GetClipper(a2);
+  return this->FinalRenderSurface->SetClipper(this->FinalRenderSurface, (int)Clipper);
 }
 
 
@@ -2165,8 +2163,8 @@ long  CInterfaceD3D::ClearCustomClipper(void) {
   
   struct IDirectDrawClipper *Clipper; // eax
 
-  Clipper = SurfaceClipper::GetClipper((SurfaceClipper *)&this->m_sClipper1);
-  return ((int (__thiscall *)(CSurfaceV7 *, struct IDirectDrawClipper *))this->FinalRenderSurface->SetClipper)(this->FinalRenderSurface, Clipper);
+  Clipper = (struct IDirectDrawClipper *)SurfaceClipper::GetClipper(&this->m_sClipper1);
+  return this->FinalRenderSurface->SetClipper(this->FinalRenderSurface, (int)Clipper);
 }
 
 
@@ -2177,20 +2175,19 @@ void  CInterfaceD3D::DeleteEngineData(void) {
   CInterfaceD3D *result; // eax
 
   result = this;
-  if ( this->field_0 )
+  if ( this->field_0 != 0 )
   {
     result = (CInterfaceD3D *)operator delete[]((void *)this->field_0);
     this->field_0 = 0;
     g_pVertexMax = 0;
     g_pVertex = 0;
   }
-  if ( !g_pLuminanceTablesMemory )
+  if ( g_pLuminanceTablesMemory != 0 )
   {
-    return result;
+    result = (CInterfaceD3D *)operator delete[]((void *)g_pLuminanceTablesMemory);
+    g_pLuminanceTablesMemory = 0;
+    g_pLuminanceTablesStart = 0;
   }
-  result = (CInterfaceD3D *)operator delete[]((void *)g_pLuminanceTablesMemory);
-  g_pLuminanceTablesMemory = 0;
-  g_pLuminanceTablesStart = 0;
   return result;
 }
 
@@ -2202,18 +2199,18 @@ long  CInterfaceD3D::BeginLandscapeScene(void) {
   int v2; // [esp+0h] [ebp-8h]
 
   v2 = -1;
-  if ( this[1].m_pDDraw )
+  if ( *((_DWORD *)this + 460) != 0 )
   {
-    BBSupportTracePrintF(0, "GFX ENGINE: WARNING: LandscapeScene Lockcounter is %d instead of 0", this[1].m_pDDraw);
+    BBSupportTracePrintF(0, "GFX ENGINE: WARNING: LandscapeScene Lockcounter is %d instead of 0", *((_DWORD *)this + 460));
   }
   else
   {
     v2 = this->LandscapeDevice->BeginScene(this->LandscapeDevice);
-    if ( v2 )
+    if ( v2 != 0 )
     {
       WriteError(v2, "BeginLandscapeScene");
     }
-    ++this[1].m_pDDraw;
+    ++*((_DWORD *)this + 460);
   }
   return v2;
 }
@@ -2225,16 +2222,16 @@ long  CInterfaceD3D::EndLandscapeScene(void) {
   
   int v2; // [esp+0h] [ebp-8h]
 
-  if ( (int)this[1].m_pDDraw > 1 )
+  if ( *((int *)this + 460) > 1 )
   {
-    BBSupportTracePrintF(0, "GFX ENGINE: WARNING: LandscapeScene Lockcounter is %d instead of 1", this[1].m_pDDraw);
+    BBSupportTracePrintF(0, "GFX ENGINE: WARNING: LandscapeScene Lockcounter is %d instead of 1", *((_DWORD *)this + 460));
   }
   v2 = this->LandscapeDevice->EndScene(this->LandscapeDevice);
-  if ( v2 )
+  if ( v2 != 0 )
   {
     WriteError(v2, "EndLandscapeScene");
   }
-  --this[1].m_pDDraw;
+  --*((_DWORD *)this + 460);
   return v2;
 }
 
@@ -2246,18 +2243,18 @@ long  CInterfaceD3D::BeginObjectScene(void) {
   int v2; // [esp+0h] [ebp-8h]
 
   v2 = -1;
-  if ( this[1].field_0 )
+  if ( *((_DWORD *)this + 459) != 0 )
   {
-    BBSupportTracePrintF(0, "GFX ENGINE: WARNING: ObjectScene Lockcounter is %d instead of 0", this[1].field_0);
+    BBSupportTracePrintF(0, "GFX ENGINE: WARNING: ObjectScene Lockcounter is %d instead of 0", *((_DWORD *)this + 459));
   }
   else
   {
     v2 = this->m_pObjectDevice->BeginScene(this->m_pObjectDevice);
-    if ( v2 )
+    if ( v2 != 0 )
     {
       WriteError(v2, "BeginObjectScene");
     }
-    ++this[1].field_0;
+    ++*((_DWORD *)this + 459);
   }
   return v2;
 }
@@ -2269,16 +2266,16 @@ long  CInterfaceD3D::EndObjectScene(void) {
   
   int v2; // [esp+0h] [ebp-8h]
 
-  if ( (int)this[1].field_0 > 1 )
+  if ( *((int *)this + 459) > 1 )
   {
-    BBSupportTracePrintF(0, "GFX ENGINE: WARNING: LandscapeScene Lockcounter is %d instead of 1", this[1].field_0);
+    BBSupportTracePrintF(0, "GFX ENGINE: WARNING: LandscapeScene Lockcounter is %d instead of 1", *((_DWORD *)this + 459));
   }
   v2 = this->m_pObjectDevice->EndScene(this->m_pObjectDevice);
-  if ( v2 )
+  if ( v2 != 0 )
   {
     WriteError(v2, "EndObjectScene");
   }
-  --this[1].field_0;
+  --*((_DWORD *)this + 459);
   return v2;
 }
 
@@ -2294,7 +2291,7 @@ bool  CInterfaceD3D::CreateCameraWindowSurface(int a2, int a3) {
 
   CInterfaceD3D::DestroyCameraWindowSurface(this);
   this->m_pCameraWindowSurface = CSurface::CreateSurfacePtr(GfxEngineSetup.m_bD3DInterface);
-  if ( this->m_pCameraWindowSurface )
+  if ( this->m_pCameraWindowSurface != 0 )
   {
     if ( GfxEngineSetup.m_bD3DInterface )
     {
@@ -2307,7 +2304,7 @@ bool  CInterfaceD3D::CreateCameraWindowSurface(int a2, int a3) {
     v5 = j__abs(g_uGfxMode == 1);
     IsHardwareLandscapeEngine = SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup);
     v6 = this->m_pCameraWindowSurface->CreateSurface(this->m_pCameraWindowSurface, m_pDDraw, a2, a3, 1, IsHardwareLandscapeEngine, 0, v5, 0, 0, 0);
-    if ( v6 )
+    if ( v6 != 0 )
     {
       WriteError((int)v6, "CreateLandscapeSurface");
       return 0;
@@ -2332,21 +2329,20 @@ void  CInterfaceD3D::DestroyCameraWindowSurface(void) {
   CInterfaceD3D *result; // eax
 
   result = this;
-  if ( !this->m_pCameraWindowSurface )
+  if ( this->m_pCameraWindowSurface != 0 )
   {
-    return result;
+    if ( this->LandscapeSurface2 == this->m_pCameraWindowSurface )
+    {
+      j___wassert(L"m_pCurrentLandScapeRenderTarget != m_pLandscapeCameraRenderSurface", L"MainGfxManager.cpp", 0x9D2u);
+    }
+    ((void (__thiscall *)(CSurface *))this->m_pCameraWindowSurface->Release)(this->m_pCameraWindowSurface);
+    result = (CInterfaceD3D *)this->m_pCameraWindowSurface;
+    if ( result != 0 )
+    {
+      result = (CInterfaceD3D *)((int (__thiscall *)(CSurface *, int))this->m_pCameraWindowSurface->dtor)(this->m_pCameraWindowSurface, 1);
+    }
+    this->m_pCameraWindowSurface = 0;
   }
-  if ( this->LandscapeSurface2 == (CSurfaceV7 *)this->m_pCameraWindowSurface )
-  {
-    j___wassert(L"m_pCurrentLandScapeRenderTarget != m_pLandscapeCameraRenderSurface", L"MainGfxManager.cpp", 0x9D2u);
-  }
-  (*(void (__thiscall **)(int))(*(_DWORD *)this->m_pCameraWindowSurface + 4))(this->m_pCameraWindowSurface);
-  result = (CInterfaceD3D *)this->m_pCameraWindowSurface;
-  if ( result )
-  {
-    result = (CInterfaceD3D *)(**(int (__thiscall ***)(int, int))this->m_pCameraWindowSurface)(this->m_pCameraWindowSurface, 1);
-  }
-  this->m_pCameraWindowSurface = 0;
   return result;
 }
 
@@ -2366,13 +2362,13 @@ long  CInterfaceD3D::SwitchLandscapeRenderTarget(bool a2) {
   {
     LandscapeSurface = this->LandscapeSurface;
   }
-  if ( !LandscapeSurface )
+  if ( LandscapeSurface == 0 )
   {
     j___wassert(L"renderTarget != nullptr", L"MainGfxManager.cpp", 0x9DDu);
   }
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup) )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) != 0 )
   {
-    v3 = ((int (__thiscall *)(CSurfaceV7 *, IDirectDrawSurface7 *))LandscapeSurface->j_?SetAsRenderTarget@CSurfaceV7@@UAEJPAUIDirect3DDevice7@@@Z)(LandscapeSurface, this->LandscapeDevice);
+    v3 = ((int (__thiscall *)(CSurfaceV7 *, IDirect3DDevice7 *))LandscapeSurface->j_?SetAsRenderTarget@CSurfaceV7@@UAEJPAUIDirect3DDevice7@@@Z)(LandscapeSurface, this->LandscapeDevice);
     if ( v3 < 0 )
     {
       return v3;
@@ -2444,8 +2440,8 @@ void  CInterfaceD3D::PreCalcTextureVertices(int a2) {
   float v13; // [esp+7Ch] [ebp-8h]
 
   v3 = FLOAT_0_001953125;
-  result = (unsigned __int8)SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup);
-  if ( !(_BYTE)result )
+  result = (unsigned __int8)SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup);
+  if ( (_BYTE)result == 0 )
   {
     v3 = 0.0;
   }
@@ -2462,7 +2458,7 @@ void  CInterfaceD3D::PreCalcTextureVertices(int a2) {
             ++k )
       {
         _vec_ctor_no(v7, 0x20u, 3u, (void *(__thiscall *)(void *))_D3DTLVERTEX::_D3DTLVERTEX);
-        ((void (__cdecl *)(_DWORD, _DWORD, _DWORD, _DWORD))sub_2F7BC20)(v7, (float)j, (float)i, k);
+        sub_2F7BC20((int)v7, COERCE_INT((float)j), COERCE_INT((float)i), k);
         PatternTripleVertices[144 * j + 36 * i + 6 * k] = v8 + v3;
         PatternTripleVertices[144 * j + 1 + 36 * i + 6 * k] = v9 + v3;
         PatternTripleVertices[144 * j + 2 + 36 * i + 6 * k] = v10 + v3;
@@ -2504,7 +2500,7 @@ void  CInterfaceD3D::CalcTilingVerticesType1(int a2) {
   {
     *(float *)(g_pVertex + 24) = *(float *)&g_fPatternSuboffsetX + 0.125;
   }
-  else if ( g_bHalfLine )
+  else if ( g_bHalfLine != 0 )
   {
     *(float *)(g_pVertex + 24) = *(float *)&dword_3E2E708 + 1.0;
     g_bSplitTriangle = 1;
@@ -2539,7 +2535,7 @@ void  CInterfaceD3D::CalcTilingVerticesType2(int a2) {
   v3 = *(float *)&g_fPatternSuboffsetX;
   if ( (float)(*(float *)&g_fPatternSuboffsetX + 0.1875) > 1.0 )
   {
-    if ( g_bHalfLine )
+    if ( g_bHalfLine != 0 )
     {
       v4 = v4 - 1.0;
       v3 = *(float *)&g_fPatternSuboffsetX - 1.0;
@@ -2572,12 +2568,12 @@ int  CInterfaceD3D::AllocateEngineData(int a2) {
   void *v4; // [esp+18h] [ebp-18h]
   signed int i; // [esp+1Ch] [ebp-14h]
 
-  if ( this->field_0 )
+  if ( this->field_0 != 0 )
   {
     CInterfaceD3D::DeleteEngineData(this);
   }
   v4 = operator new[](32 * a2);
-  if ( v4 )
+  if ( v4 != 0 )
   {
     _vec_ctor_no(v4, 0x20u, a2, (void *(__thiscall *)(void *))_D3DTLVERTEX::_D3DTLVERTEX);
     v3 = v4;
@@ -2587,7 +2583,7 @@ int  CInterfaceD3D::AllocateEngineData(int a2) {
     v3 = 0;
   }
   this->field_0 = v3;
-  if ( !this->field_0 )
+  if ( this->field_0 == 0 )
   {
     BBSupportTracePrintF(0, "GFX ENGINE: Not enough memory to allocate vertices");
     return 0;
@@ -2599,22 +2595,21 @@ int  CInterfaceD3D::AllocateEngineData(int a2) {
     *(float *)(this->field_0 + 32 * i + 8) = FLOAT_0_89999998;
     *(float *)(this->field_0 + 32 * i + 12) = FLOAT_0_5;
   }
-  if ( this->field_0 )
+  if ( this->field_0 != 0 )
   {
     g_pVertexMax = this->field_0 + 7680;
   }
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) == 0 )
   {
-    return 1;
+    g_pLuminanceTablesMemory = (int)operator new[](0x16800u);
+    if ( g_pLuminanceTablesMemory == 0 )
+    {
+      BBSupportTracePrintF(0, "GFX ENGINE: Not enough memory to allocate luminance tables!");
+      g_pLuminanceTablesStart = 0;
+      return 0;
+    }
+    g_pLuminanceTablesStart = (g_pLuminanceTablesMemory + 2047) & 0xFFFFF800;
   }
-  g_pLuminanceTablesMemory = (int)operator new[](0x16800u);
-  if ( !g_pLuminanceTablesMemory )
-  {
-    BBSupportTracePrintF(0, "GFX ENGINE: Not enough memory to allocate luminance tables!");
-    g_pLuminanceTablesStart = 0;
-    return 0;
-  }
-  g_pLuminanceTablesStart = (g_pLuminanceTablesMemory + 2047) & 0xFFFFF800;
   return 1;
 }
 
@@ -2627,22 +2622,21 @@ void  CInterfaceD3D::ChangeCurrentTexturePage(int a2) {
   struct IDirectDrawSurface7 *v3; // eax
 
   result = a2;
-  if ( a2 == g_iLastUsedPage )
+  if ( a2 != g_iLastUsedPage )
   {
-    return result;
-  }
-  CInterfaceD3D::RenderScene(this, byte_4696877);
-  g_iLastUsedPage = a2;
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup) )
-  {
-    v3 = (struct IDirectDrawSurface7 *)((int (__thiscall *)(CSurfaceV7 *))this->LandscapeTextureTable[g_iLastUsedPage]->GetSurfacePtr)(this->LandscapeTextureTable[g_iLastUsedPage]);
-    return this->LandscapeDevice->lpVtbl->UpdateOverlayZOrder(this->LandscapeDevice, 0, v3);
-  }
-  else
-  {
-    CurrentTexturePagePtr = g_pTextureTable[g_iLastUsedPage];
-    result = g_pLuminanceTablesStart + (g_iLastUsedPage << 11);
-    j__TRI_palette_LUT = result;
+    CInterfaceD3D::RenderScene(this, byte_4696877);
+    g_iLastUsedPage = a2;
+    if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) != 0 )
+    {
+      v3 = this->LandscapeTextureTable[g_iLastUsedPage]->GetSurfacePtr(this->LandscapeTextureTable[g_iLastUsedPage]);
+      return this->LandscapeDevice->SetTexture(this->LandscapeDevice, 0, v3);
+    }
+    else
+    {
+      CurrentTexturePagePtr = g_pTextureTable[g_iLastUsedPage];
+      result = g_pLuminanceTablesStart + (g_iLastUsedPage << 11);
+      j__TRI_palette_LUT = result;
+    }
   }
   return result;
 }
@@ -2657,17 +2651,17 @@ class CSurface *  CInterfaceD3D::GetLandscapeRenderTargetSurface(void) {
 
 
 // address=[0x2f86180]
-// Decompiled from CInterfaceD3D *__thiscall CInterfaceD3D::RenderScene(CInterfaceD3D *this, bool a2)
+// Decompiled from int __thiscall CInterfaceD3D::RenderScene(CInterfaceD3D *this, bool a2)
 void  CInterfaceD3D::RenderScene(bool a2) {
   
-  CInterfaceD3D *result; // eax
+  int result; // eax
   unsigned int j; // [esp+4h] [ebp-Ch]
   float *i; // [esp+Ch] [ebp-4h]
 
-  result = (CInterfaceD3D *)(unsigned __int8)SGfxRenderConfiguration::IsHardwareLandscapeEngine((SGfxRenderConfiguration *)&GfxEngineSetup);
-  if ( (_BYTE)result )
+  result = (unsigned __int8)SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup);
+  if ( (_BYTE)result != 0 )
   {
-    result = this;
+    result = (int)this;
     if ( (g_pVertex - this->field_0) >> 5 > 0 )
     {
       if ( a2 )
@@ -2684,8 +2678,8 @@ void  CInterfaceD3D::RenderScene(bool a2) {
           i[17] = (float)dword_3E2E288 + i[17];
         }
       }
-      result = (CInterfaceD3D *)((int (__stdcall *)(IDirectDrawSurface7 *, int, int, _DWORD, int, _DWORD))this->LandscapeDevice->lpVtbl->Lock)(this->LandscapeDevice, 4, 452, this->field_0, (g_pVertex - this->field_0) >> 5, 0);
-      if ( result )
+      result = this->LandscapeDevice->DrawPrimitive(this->LandscapeDevice, D3DPT_TRIANGLELIST, 452, (LPVOID)this->field_0, (g_pVertex - this->field_0) >> 5, 0);
+      if ( result != 0 )
       {
         WriteError(result, "DrawPrimitive");
         g_bRenderSuccess = 0;
@@ -2699,7 +2693,7 @@ void  CInterfaceD3D::RenderScene(bool a2) {
           j += 96 )
     {
       j__TRI_draw_triangle(j, j + 32, j + 64, CurrentTexturePagePtr, 8);
-      result = (CInterfaceD3D *)(j + 96);
+      result = j + 96;
     }
   }
   g_pVertex = this->field_0;
@@ -2729,7 +2723,7 @@ int  CInterfaceD3D::IsInterface7Available(bool & a2, struct HWND__ * a3) {
   char v19; // [esp+3Eh] [ebp-27Ah]
   char v20; // [esp+3Fh] [ebp-279h]
   unsigned __int8 v21; // [esp+43h] [ebp-275h] BYREF
-  int v22; // [esp+44h] [ebp-274h]
+  CSurfaceV7 *v22; // [esp+44h] [ebp-274h]
   CInterfaceD3D *v23; // [esp+48h] [ebp-270h]
   int v24; // [esp+4Ch] [ebp-26Ch] BYREF
   int v25; // [esp+50h] [ebp-268h]
@@ -2745,7 +2739,7 @@ int  CInterfaceD3D::IsInterface7Available(bool & a2, struct HWND__ * a3) {
   v23 = this;
   *a2 = 0;
   byte_46C7938 = 0;
-  if ( g_pDirectDraw )
+  if ( g_pDirectDraw != 0 )
   {
     BBSupportTracePrintF(1, "GFX ENGINE: DirectDraw already loaded");
     return 3;
@@ -2753,32 +2747,32 @@ int  CInterfaceD3D::IsInterface7Available(bool & a2, struct HWND__ * a3) {
   else
   {
     hModule = GetModuleHandleA("DDRAW");
-    if ( hModule )
+    if ( hModule != 0 )
     {
       DirectDrawCreateEx = (HRESULT (__stdcall *)(GUID *, LPVOID *, const IID *const, IUnknown *))GetProcAddress(hModule, "DirectDrawCreateEx");
       v13 = DirectDrawCreateEx;
-      if ( DirectDrawCreateEx )
+      if ( DirectDrawCreateEx != 0 )
       {
-        v22 = v13(0, (LPVOID *)&v23->m_pDDraw, &IID_IDirectDraw7, 0);
-        if ( v22 )
+        v22 = (CSurfaceV7 *)v13(0, (LPVOID *)&v23->m_pDDraw, &IID_IDirectDraw7, 0);
+        if ( v22 != 0 )
         {
-          WriteError(v22, "CreateDirectDrawObject");
+          WriteError((int)v22, "CreateDirectDrawObject");
           return 3;
         }
         else
         {
-          g_pDirectDraw = (LPDIRECTDRAW *)v23->m_pDDraw;
-          v22 = v23->m_pDDraw->lpVtbl->QueryInterface(v23->m_pDDraw, &IID_IDirectDraw7, (LPVOID *)&v23->m_pDDraw7);
-          if ( v22 )
+          g_pDirectDraw = v23->m_pDDraw;
+          v22 = (CSurfaceV7 *)v23->m_pDDraw->lpVtbl->QueryInterface(v23->m_pDDraw, &IID_IDirectDraw7, (LPVOID *)&v23->m_pDDraw7);
+          if ( v22 != 0 )
           {
             CInterfaceD3D::CleanUpCheckObjects(v23);
-            WriteError(v22, "QueryInterface");
+            WriteError((int)v22, "QueryInterface");
             return 4;
           }
           else
           {
-            v22 = v23->m_pDDraw7->lpVtbl->GetDeviceIdentifier(v23->m_pDDraw7, (LPDDDEVICEIDENTIFIER2)byte_46C7940, 1);
-            if ( !v22 )
+            v22 = (CSurfaceV7 *)v23->m_pDDraw7->lpVtbl->GetDeviceIdentifier(v23->m_pDDraw7, (LPDDDEVICEIDENTIFIER2)byte_46C7940, 1);
+            if ( v22 == 0 )
             {
               BBSupportTracePrintF(1, "GFX ENGINE: ---------------GfxAdapter Info---------------");
               BBSupportTracePrintF(1, "GFX ENGINE: ");
@@ -2794,28 +2788,28 @@ int  CInterfaceD3D::IsInterface7Available(bool & a2, struct HWND__ * a3) {
               BBSupportTracePrintF(1, "GFX ENGINE: ---------------------------------------------");
               byte_46C7938 = 1;
             }
-            v22 = v23->m_pDDraw7->lpVtbl->SetCooperativeLevel(v23->m_pDDraw7, a3, 8);
-            if ( v22 )
+            v22 = (CSurfaceV7 *)v23->m_pDDraw7->lpVtbl->SetCooperativeLevel(v23->m_pDDraw7, a3, 8);
+            if ( v22 != 0 )
             {
               CInterfaceD3D::CleanUpCheckObjects(v23);
-              WriteError(v22, "SetCooperativeLevel");
+              WriteError((int)v22, "SetCooperativeLevel");
               return 5;
             }
             else
             {
-              v22 = v23->m_pDDraw7->lpVtbl->QueryInterface(v23->m_pDDraw7, &IID_IDirect3D7, (LPVOID *)&v23->m_pIDirect3D7);
-              if ( v22 )
+              v22 = (CSurfaceV7 *)v23->m_pDDraw7->lpVtbl->QueryInterface(v23->m_pDDraw7, &IID_IDirect3D7, (LPVOID *)&v23->m_pIDirect3D7);
+              if ( v22 != 0 )
               {
                 CInterfaceD3D::CleanUpCheckObjects(v23);
-                WriteError(v22, "QueryD3DInterface");
+                WriteError((int)v22, "QueryD3DInterface");
                 return 6;
               }
               else
               {
                 v23->PrimarySurface = CSurface::CreateSurfacePtr(0);
-                if ( v23->PrimarySurface )
+                if ( v23->PrimarySurface != 0 )
                 {
-                  if ( MEMORY[0x3E2E262] )
+                  if ( GfxEngineSetup.m_bD3DInterface )
                   {
                     m_pDDraw = v23->m_pDDraw;
                   }
@@ -2823,88 +2817,88 @@ int  CInterfaceD3D::IsInterface7Available(bool & a2, struct HWND__ * a3) {
                   {
                     m_pDDraw = v23->m_pDDraw7;
                   }
-                  v22 = ((int (__thiscall *)(CSurfaceV7 *, IDirectDraw7 *, _DWORD, _DWORD, int, _DWORD, _DWORD, _DWORD, int, _DWORD, _DWORD))v23->PrimarySurface->CreateSurface)(v23->PrimarySurface, m_pDDraw, 0, 0, 1, 0, 0, 0, 1, 0, 0);
-                  if ( v22 )
+                  v22 = v23->PrimarySurface->CreateSurface(v23->PrimarySurface, m_pDDraw, 0, 0, 1, 0, 0, 0, 1, 0, 0);
+                  if ( v22 != 0 )
                   {
                     CInterfaceD3D::CleanUpCheckObjects(v23);
-                    WriteError(v22, "CreatePrimarySurface");
+                    WriteError((int)v22, "CreatePrimarySurface");
                     return 8;
                   }
                   else
                   {
-                    v22 = ((int (__thiscall *)(CSurfaceV7 *, unsigned __int8 *))v23->PrimarySurface->GetPixelFormat)(v23->PrimarySurface, &v21);
-                    if ( v22 )
+                    v22 = (CSurfaceV7 *)((int (__thiscall *)(CSurfaceV7 *, unsigned __int8 *))v23->PrimarySurface->GetPixelFormat)(v23->PrimarySurface, &v21);
+                    if ( v22 != 0 )
                     {
                       CInterfaceD3D::CleanUpCheckObjects(v23);
-                      WriteError(v22, "RetrievePixelFormatFromPrimarySurface");
+                      WriteError((int)v22, "RetrievePixelFormatFromPrimarySurface");
                       return 9;
                     }
                     else
                     {
                       v23->field_68 = (int)CSurface::CreateSurfacePtr(0);
-                      if ( v23->field_68 )
+                      if ( v23->field_68 != 0 )
                       {
                         v4 = j__abs(v21);
-                        v22 = (*(int (__thiscall **)(int, IDirectDraw7 *, int, int, int, int, _DWORD, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v23->field_68 + 48))(v23->field_68, v23->m_pDDraw7, 32, 32, 1, 1, 0, v4, 0, 0, 0);
-                        if ( v22 )
+                        v22 = (CSurfaceV7 *)(*(int (__thiscall **)(int, IDirectDraw7 *, int, int, int, int, _DWORD, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v23->field_68 + 48))(v23->field_68, v23->m_pDDraw7, 32, 32, 1, 1, 0, v4, 0, 0, 0);
+                        if ( v22 != 0 )
                         {
                           CInterfaceD3D::CleanUpCheckObjects(v23);
-                          WriteError(v22, "CreateTestSurface");
+                          WriteError((int)v22, "CreateTestSurface");
                           return 7;
                         }
                         else
                         {
                           v11 = 16;
-                          v22 = ((int (__thiscall *)(CSurfaceV7 *, int *))v23->PrimarySurface->GetBitDepth)(v23->PrimarySurface, &v11);
-                          if ( v22 )
+                          v22 = (CSurfaceV7 *)v23->PrimarySurface->GetBitDepth(v23->PrimarySurface, &v11);
+                          if ( v22 != 0 )
                           {
                             CInterfaceD3D::CleanUpCheckObjects(v23);
-                            WriteError(v22, "GetBitDepthWhileCapChecking");
+                            WriteError((int)v22, "GetBitDepthWhileCapChecking");
                             return 12;
                           }
                           else
                           {
-                            v22 = ((int (__thiscall *)(CSurfaceV7 *, int *, int *))v23->PrimarySurface->GetSurfaceSize)(v23->PrimarySurface, &v8, &v7);
-                            if ( v22 )
+                            v22 = (CSurfaceV7 *)v23->PrimarySurface->GetSurfaceSize(v23->PrimarySurface, &v8, &v7);
+                            if ( v22 != 0 )
                             {
                               CInterfaceD3D::CleanUpCheckObjects(v23);
-                              WriteError(v22, "GetSurfaceSizeWhileCapChecking");
+                              WriteError((int)v22, "GetSurfaceSizeWhileCapChecking");
                               return 11;
                             }
                             else
                             {
                               v6 = v11 / 8 * v7 * v8;
                               v24 = 380;
-                              v22 = v23->m_pDDraw->lpVtbl->GetCaps(v23->m_pDDraw, (LPDDCAPS)&v24, 0);
-                              if ( v22 )
+                              v22 = (CSurfaceV7 *)v23->m_pDDraw->lpVtbl->GetCaps(v23->m_pDDraw, (LPDDCAPS)&v24, 0);
+                              if ( v22 != 0 )
                               {
                                 CInterfaceD3D::CleanUpCheckObjects(v23);
-                                WriteError(v22, "GetCapabilities");
+                                WriteError((int)v22, "GetCapabilities");
                                 return 11;
                               }
-                              else if ( (unsigned __int8)sub_2F8BE40(v26, v6, &dword_760B60[65960], 0) )
+                              else if ( (unsigned __int8)sub_2F8BE40(v26, v6, (int)&dword_760B60[65960], 0) != 0 )
                               {
                                 if ( (v25 & 0x40) != 0 && ((unsigned int)&s_iMsgTracer2.m_aMessages[15456] & v25) != 0 || (v27 & 0x40) != 0 && ((unsigned int)&s_iMsgTracer2.m_aMessages[15456] & v27) != 0 )
                                 {
                                   if ( (v25 & 0x400000) != 0 )
                                   {
-                                    v5 = (*(int (__thiscall **)(int, IDirectDrawSurface7 **))(*(_DWORD *)v23->field_68 + 72))(v23->field_68, &v23->LandscapeDevice);
-                                    v22 = (*(int (__stdcall **)(int, GUID *, int))(*(_DWORD *)v23->m_pIDirect3D7 + 16))(v23->m_pIDirect3D7, &IID_IDirect3DHALDevice, v5);
-                                    if ( v22 )
+                                    v5 = (*(int (__thiscall **)(int, IDirect3DDevice7 **))(*(_DWORD *)v23->field_68 + 72))(v23->field_68, &v23->LandscapeDevice);
+                                    v22 = (CSurfaceV7 *)((int (__stdcall *)(IDirect3D7 *, GUID *, int))v23->m_pIDirect3D7->CreateDevice)(v23->m_pIDirect3D7, &IID_IDirect3DHALDevice, v5);
+                                    if ( v22 != 0 )
                                     {
                                       CInterfaceD3D::CleanUpCheckObjects(v23);
-                                      WriteError(v22, "CreateCheckDevice");
+                                      WriteError((int)v22, "CreateCheckDevice");
                                       return 16;
                                     }
                                     else
                                     {
                                       v28[15] = 56;
                                       v28[1] = 56;
-                                      v22 = v23->LandscapeDevice->lpVtbl->AddAttachedSurface(v23->LandscapeDevice, (LPDIRECTDRAWSURFACE7)v28);
-                                      if ( v22 )
+                                      v22 = (CSurfaceV7 *)v23->LandscapeDevice->GetCaps(v23->LandscapeDevice, (LPD3DDEVICEDESC7)v28);
+                                      if ( v22 != 0 )
                                       {
                                         CInterfaceD3D::CleanUpCheckObjects(v23);
-                                        WriteError(v22, "Get3dCaps");
+                                        WriteError((int)v22, "Get3dCaps");
                                         return 17;
                                       }
                                       else if ( (v28[0] & 0x200) != 0 && (v28[0] & 0x400) != 0 && (v30 & 0x400) != 0 && v31 <= 0x80 && v32 <= 0x80 && v33 >= 0x100 )
@@ -2923,17 +2917,17 @@ int  CInterfaceD3D::IsInterface7Available(bool & a2, struct HWND__ * a3) {
                                           v18 = 0;
                                           v19 = 0;
                                           v20 = 0;
-                                          v22 = ((int (__stdcall *)(IDirectDrawSurface7 *, int (__stdcall *)(struct _DDPIXELFORMAT *, _BYTE *), char *))v23->LandscapeDevice->lpVtbl->AddOverlayDirtyRect)(v23->LandscapeDevice, D3DEnumPixelFormatsCallback, &v17);
-                                          if ( v22 )
+                                          v22 = (CSurfaceV7 *)v23->LandscapeDevice->EnumTextureFormats(v23->LandscapeDevice, (LPD3DENUMPIXELFORMATSCALLBACK)D3DEnumPixelFormatsCallback, &v17);
+                                          if ( v22 != 0 )
                                           {
                                             CInterfaceD3D::CleanUpCheckObjects(v23);
                                             *a2 = 0;
-                                            WriteError(v22, "EnumerateTextureFormats");
+                                            WriteError((int)v22, "EnumerateTextureFormats");
                                             return 20;
                                           }
-                                          else if ( v17 || v18 )
+                                          else if ( v17 != 0 || v18 != 0 )
                                           {
-                                            if ( !v19 )
+                                            if ( v19 == 0 )
                                             {
                                               *a2 = 0;
                                               BBSupportTracePrintF(1, "GFX ENGINE: The needed 4444 format are not supported by the hardware!");
@@ -2947,42 +2941,41 @@ int  CInterfaceD3D::IsInterface7Available(bool & a2, struct HWND__ * a3) {
                                             }
                                             else
                                             {
-                                              if ( v23->LandscapeDevice )
+                                              if ( v23->LandscapeDevice != 0 )
                                               {
-                                                v23->LandscapeDevice->lpVtbl->Release(v23->LandscapeDevice);
+                                                v23->LandscapeDevice->Release(v23->LandscapeDevice);
                                                 v23->LandscapeDevice = 0;
                                               }
-                                              if ( v23->PrimarySurface )
+                                              if ( v23->PrimarySurface != 0 )
                                               {
                                                 ((void (__thiscall *)(CSurfaceV7 *))v23->PrimarySurface->Release)(v23->PrimarySurface);
                                                 PrimarySurface = v23->PrimarySurface;
-                                                if ( PrimarySurface )
+                                                if ( PrimarySurface != 0 )
                                                 {
-                                                  ((void (__thiscall *)(CSurfaceV7 *, int))PrimarySurface->dtor)(PrimarySurface, 1);
+                                                  PrimarySurface->dtor(PrimarySurface, 1);
                                                 }
                                                 v23->PrimarySurface = 0;
                                               }
-                                              if ( v23->field_68 )
+                                              if ( v23->field_68 != 0 )
                                               {
                                                 (*(void (__thiscall **)(int))(*(_DWORD *)v23->field_68 + 4))(v23->field_68);
                                                 v15 = (void (__thiscall ***)(_DWORD, int))v23->field_68;
-                                                if ( v15 )
+                                                if ( v15 != 0 )
                                                 {
                                                   (**v15)(v15, 1);
                                                 }
                                                 v23->field_68 = 0;
                                               }
-                                              if ( v23->m_pIDirect3D7 )
+                                              if ( v23->m_pIDirect3D7 != 0 )
                                               {
-                                                (*(void (__stdcall **)(int))(*(_DWORD *)v23->m_pIDirect3D7 + 8))(v23->m_pIDirect3D7);
+                                                ((void (__stdcall *)(IDirect3D7 *))v23->m_pIDirect3D7->Release)(v23->m_pIDirect3D7);
                                                 v23->m_pIDirect3D7 = 0;
                                               }
-                                              if ( !v23->m_pDDraw7 )
+                                              if ( v23->m_pDDraw7 != 0 )
                                               {
-                                                return 0;
+                                                v23->m_pDDraw7->lpVtbl->Release(v23->m_pDDraw7);
+                                                v23->m_pDDraw7 = 0;
                                               }
-                                              v23->m_pDDraw7->lpVtbl->Release(v23->m_pDDraw7);
-                                              v23->m_pDDraw7 = 0;
                                               return 0;
                                             }
                                           }
@@ -3089,7 +3082,7 @@ int  CInterfaceD3D::IsInterface3Available(struct HWND__ * a2) {
 
   v12 = this;
   byte_46C7938 = 0;
-  if ( g_pDirectDraw )
+  if ( g_pDirectDraw != 0 )
   {
     BBSupportTracePrintF(1, "GFX ENGINE: DirectDraw already loaded");
     return 3;
@@ -3097,16 +3090,16 @@ int  CInterfaceD3D::IsInterface3Available(struct HWND__ * a2) {
   else
   {
     v11 = DirectDrawCreate(0, (LPDIRECTDRAW *)&v12->m_pDDraw, 0);
-    if ( v11 )
+    if ( v11 != 0 )
     {
       WriteError(v11, "CreateDirectDrawObject");
       return 3;
     }
     else
     {
-      g_pDirectDraw = (int)v12->m_pDDraw;
+      g_pDirectDraw = v12->m_pDDraw;
       v11 = v12->m_pDDraw->lpVtbl->SetCooperativeLevel(v12->m_pDDraw, a2, 8);
-      if ( v11 )
+      if ( v11 != 0 )
       {
         CInterfaceD3D::CleanUpCheckObjects(v12);
         WriteError(v11, "SetCooperativeLevel");
@@ -3115,10 +3108,10 @@ int  CInterfaceD3D::IsInterface3Available(struct HWND__ * a2) {
       else
       {
         v12->PrimarySurface = CSurface::CreateSurfacePtr(1);
-        if ( v12->PrimarySurface )
+        if ( v12->PrimarySurface != 0 )
         {
-          v11 = ((int (__thiscall *)(CSurfaceV7 *, IDirectDraw7 *, _DWORD, _DWORD, int, _DWORD, _DWORD, _DWORD, int, _DWORD, _DWORD))v12->PrimarySurface->CreateSurface)(v12->PrimarySurface, v12->m_pDDraw, 0, 0, 1, 0, 0, 0, 1, 0, 0);
-          if ( v11 )
+          v11 = (HRESULT)v12->PrimarySurface->CreateSurface(v12->PrimarySurface, v12->m_pDDraw, 0, 0, 1, 0, 0, 0, 1, 0, 0);
+          if ( v11 != 0 )
           {
             CInterfaceD3D::CleanUpCheckObjects(v12);
             WriteError(v11, "CreatePrimarySurface");
@@ -3127,7 +3120,7 @@ int  CInterfaceD3D::IsInterface3Available(struct HWND__ * a2) {
           else
           {
             v11 = ((int (__thiscall *)(CSurfaceV7 *, unsigned __int8 *))v12->PrimarySurface->GetPixelFormat)(v12->PrimarySurface, &v10);
-            if ( v11 )
+            if ( v11 != 0 )
             {
               CInterfaceD3D::CleanUpCheckObjects(v12);
               WriteError(v11, "RetrievePixelFormatFromPrimarySurface");
@@ -3136,11 +3129,11 @@ int  CInterfaceD3D::IsInterface3Available(struct HWND__ * a2) {
             else
             {
               v12->field_68 = (int)CSurface::CreateSurfacePtr(1);
-              if ( v12->field_68 )
+              if ( v12->field_68 != 0 )
               {
                 v3 = j__abs(v10);
                 v11 = (*(int (__thiscall **)(int, IDirectDraw7 *, int, int, int, int, _DWORD, int, _DWORD, _DWORD, _DWORD))(*(_DWORD *)v12->field_68 + 48))(v12->field_68, v12->m_pDDraw, 32, 32, 1, 1, 0, v3, 0, 0, 0);
-                if ( v11 )
+                if ( v11 != 0 )
                 {
                   CInterfaceD3D::CleanUpCheckObjects(v12);
                   WriteError(v11, "CreateTestSurface");
@@ -3149,8 +3142,8 @@ int  CInterfaceD3D::IsInterface3Available(struct HWND__ * a2) {
                 else
                 {
                   v7 = 16;
-                  v11 = ((int (__thiscall *)(CSurfaceV7 *, int *))v12->PrimarySurface->GetBitDepth)(v12->PrimarySurface, &v7);
-                  if ( v11 )
+                  v11 = v12->PrimarySurface->GetBitDepth(v12->PrimarySurface, &v7);
+                  if ( v11 != 0 )
                   {
                     CInterfaceD3D::CleanUpCheckObjects(v12);
                     WriteError(v11, "GetBitDepthWhileCapChecking");
@@ -3158,8 +3151,8 @@ int  CInterfaceD3D::IsInterface3Available(struct HWND__ * a2) {
                   }
                   else
                   {
-                    v11 = ((int (__thiscall *)(CSurfaceV7 *, int *, int *))v12->PrimarySurface->GetSurfaceSize)(v12->PrimarySurface, &v6, &v5);
-                    if ( v11 )
+                    v11 = v12->PrimarySurface->GetSurfaceSize(v12->PrimarySurface, &v6, &v5);
+                    if ( v11 != 0 )
                     {
                       CInterfaceD3D::CleanUpCheckObjects(v12);
                       WriteError(v11, "GetSurfaceSizeWhileCapChecking");
@@ -3170,54 +3163,53 @@ int  CInterfaceD3D::IsInterface3Available(struct HWND__ * a2) {
                       v4 = v7 / 8 * v5 * v6;
                       v13 = 380;
                       v11 = v12->m_pDDraw->lpVtbl->GetCaps(v12->m_pDDraw, (LPDDCAPS)&v13, 0);
-                      if ( v11 )
+                      if ( v11 != 0 )
                       {
                         CInterfaceD3D::CleanUpCheckObjects(v12);
                         WriteError(v11, "GetCapabilities");
                         return 11;
                       }
-                      else if ( (unsigned __int8)sub_2F8BE40(v15, v4, 4000000, 0) )
+                      else if ( (unsigned __int8)sub_2F8BE40(v15, v4, 4000000, 0) != 0 )
                       {
-                        if ( (v14 & 0x40) != 0 && ((unsigned int)&MEMORY[0x4000000] & v14) != 0 || (v16 & 0x40) != 0 && ((unsigned int)&MEMORY[0x4000000] & v16) != 0 )
+                        if ( (v14 & 0x40) != 0 && ((unsigned int)&s_iMsgTracer2.m_aMessages[15456] & v14) != 0 || (v16 & 0x40) != 0 && ((unsigned int)&s_iMsgTracer2.m_aMessages[15456] & v16) != 0 )
                         {
                           if ( (v14 & 0x400000) != 0 )
                           {
-                            if ( v12->LandscapeDevice )
+                            if ( v12->LandscapeDevice != 0 )
                             {
-                              v12->LandscapeDevice->lpVtbl->Release(v12->LandscapeDevice);
+                              v12->LandscapeDevice->Release(v12->LandscapeDevice);
                               v12->LandscapeDevice = 0;
                             }
-                            if ( v12->PrimarySurface )
+                            if ( v12->PrimarySurface != 0 )
                             {
                               ((void (__thiscall *)(CSurfaceV7 *))v12->PrimarySurface->Release)(v12->PrimarySurface);
                               PrimarySurface = v12->PrimarySurface;
-                              if ( PrimarySurface )
+                              if ( PrimarySurface != 0 )
                               {
-                                ((void (__thiscall *)(CSurfaceV7 *, int))PrimarySurface->dtor)(PrimarySurface, 1);
+                                PrimarySurface->dtor(PrimarySurface, 1);
                               }
                               v12->PrimarySurface = 0;
                             }
-                            if ( v12->field_68 )
+                            if ( v12->field_68 != 0 )
                             {
                               (*(void (__thiscall **)(int))(*(_DWORD *)v12->field_68 + 4))(v12->field_68);
                               v8 = (void (__thiscall ***)(_DWORD, int))v12->field_68;
-                              if ( v8 )
+                              if ( v8 != 0 )
                               {
                                 (**v8)(v8, 1);
                               }
                               v12->field_68 = 0;
                             }
-                            if ( v12->m_pIDirect3D7 )
+                            if ( v12->m_pIDirect3D7 != 0 )
                             {
-                              (*(void (__stdcall **)(int))(*(_DWORD *)v12->m_pIDirect3D7 + 8))(v12->m_pIDirect3D7);
+                              ((void (__stdcall *)(IDirect3D7 *))v12->m_pIDirect3D7->Release)(v12->m_pIDirect3D7);
                               v12->m_pIDirect3D7 = 0;
                             }
-                            if ( !v12->m_pDDraw7 )
+                            if ( v12->m_pDDraw7 != 0 )
                             {
-                              return 0;
+                              v12->m_pDDraw7->lpVtbl->Release(v12->m_pDDraw7);
+                              v12->m_pDDraw7 = 0;
                             }
-                            v12->m_pDDraw7->lpVtbl->Release(v12->m_pDDraw7);
-                            v12->m_pDDraw7 = 0;
                             return 0;
                           }
                           else
@@ -3266,7 +3258,7 @@ int  CInterfaceD3D::IsInterface3Available(struct HWND__ * a2) {
 
 
 // address=[0x2f8bba0]
-// Decompiled from char __thiscall CInterfaceD3D::CanCreateEngine(_DWORD *this, bool a2)
+// Decompiled from char __thiscall CInterfaceD3D::CanCreateEngine(IDirectDraw7 **this, bool a2)
 bool  CInterfaceD3D::CanCreateEngine(bool a2) {
   
   int v3; // eax
@@ -3274,20 +3266,20 @@ bool  CInterfaceD3D::CanCreateEngine(bool a2) {
   CSurfaceV7 *SurfacePtr; // [esp+24h] [ebp-4h]
 
   SurfacePtr = CSurface::CreateSurfacePtr(a2);
-  if ( SurfacePtr )
+  if ( SurfacePtr != 0 )
   {
     v3 = j__abs(g_uGfxMode == 1);
-    v5 = ((int (__thiscall *)(CSurfaceV7 *, _DWORD, int, int, int, int, _DWORD, int, _DWORD, _DWORD, _DWORD))SurfacePtr->CreateSurface)(SurfacePtr, this[1], 32, 32, 1, 1, 0, v3, 0, 0, 0);
-    if ( v5 )
+    v5 = (int)SurfacePtr->CreateSurface(SurfacePtr, *(this + 1), 32, 32, 1, 1, 0, v3, 0, 0, 0);
+    if ( v5 != 0 )
     {
       WriteError(v5, "CanRebuildEngine");
-      ((void (__thiscall *)(CSurfaceV7 *, int))SurfacePtr->dtor)(SurfacePtr, 1);
+      SurfacePtr->dtor(SurfacePtr, 1);
       return 0;
     }
     else
     {
       ((void (__thiscall *)(CSurfaceV7 *))SurfacePtr->Release)(SurfacePtr);
-      ((void (__thiscall *)(CSurfaceV7 *, int))SurfacePtr->dtor)(SurfacePtr, 1);
+      SurfacePtr->dtor(SurfacePtr, 1);
       return 1;
     }
   }
@@ -3305,47 +3297,46 @@ void  CInterfaceD3D::CleanUpCheckObjects(void) {
   
   CInterfaceD3D *result; // eax
 
-  if ( this->LandscapeDevice )
+  if ( this->LandscapeDevice != 0 )
   {
-    this->LandscapeDevice->lpVtbl->Release(this->LandscapeDevice);
+    this->LandscapeDevice->Release(this->LandscapeDevice);
     this->LandscapeDevice = 0;
   }
-  if ( this->PrimarySurface )
+  if ( this->PrimarySurface != 0 )
   {
     ((void (__thiscall *)(CSurfaceV7 *))this->PrimarySurface->Release)(this->PrimarySurface);
-    if ( this->PrimarySurface )
+    if ( this->PrimarySurface != 0 )
     {
-      ((void (__thiscall *)(CSurfaceV7 *, int))this->PrimarySurface->dtor)(this->PrimarySurface, 1);
+      this->PrimarySurface->dtor(this->PrimarySurface, 1);
     }
     this->PrimarySurface = 0;
   }
-  if ( this->field_68 )
+  if ( this->field_68 != 0 )
   {
     (*(void (__thiscall **)(int))(*(_DWORD *)this->field_68 + 4))(this->field_68);
-    if ( this->field_68 )
+    if ( this->field_68 != 0 )
     {
       (**(void (__thiscall ***)(int, int))this->field_68)(this->field_68, 1);
     }
     this->field_68 = 0;
   }
-  if ( this->m_pIDirect3D7 )
+  if ( this->m_pIDirect3D7 != 0 )
   {
-    (*(void (__stdcall **)(int))(*(_DWORD *)this->m_pIDirect3D7 + 8))(this->m_pIDirect3D7);
+    ((void (__stdcall *)(IDirect3D7 *))this->m_pIDirect3D7->Release)(this->m_pIDirect3D7);
     this->m_pIDirect3D7 = 0;
   }
-  if ( this->m_pDDraw7 )
+  if ( this->m_pDDraw7 != 0 )
   {
     this->m_pDDraw7->lpVtbl->Release(this->m_pDDraw7);
     this->m_pDDraw7 = 0;
   }
   result = this;
-  if ( !this->m_pDDraw )
+  if ( this->m_pDDraw != 0 )
   {
-    return result;
+    result = (CInterfaceD3D *)this->m_pDDraw->lpVtbl->Release(this->m_pDDraw);
+    this->m_pDDraw = 0;
+    g_pDirectDraw = 0;
   }
-  result = (CInterfaceD3D *)this->m_pDDraw->lpVtbl->Release(this->m_pDDraw);
-  this->m_pDDraw = 0;
-  g_pDirectDraw = 0;
   return result;
 }
 

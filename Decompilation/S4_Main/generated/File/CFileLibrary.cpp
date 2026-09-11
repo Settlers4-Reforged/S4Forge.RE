@@ -16,11 +16,11 @@ unsigned int  CFileLibrary::FileSize(wchar_t const * String) {
   {
     File = 0;
     a2 = CFileLibrary::pFindDirectory(this, Destination);
-    if ( a2 )
+    if ( a2 != 0 )
     {
       File = CFileLibrary::pFindFile(String1, a2);
     }
-    if ( File && File->m_iLibraryIndex != -4 )
+    if ( File != 0 && File->m_iLibraryIndex != -4 )
     {
       if ( (File->m_iFlags & 1) != 0 )
       {
@@ -52,7 +52,7 @@ unsigned int  CFileLibrary::FileSize(unsigned int a2) {
   FLIntHandleStruct *IntHandlePtr; // [esp+4h] [ebp-4h]
 
   IntHandlePtr = CFileLibrary::pGetIntHandlePtr(this, a2);
-  if ( IntHandlePtr )
+  if ( IntHandlePtr != 0 )
   {
     if ( (IntHandlePtr->m_pLibraryFile->m_iFlags & FLFF_Compressed) != 0 )
     {
@@ -83,7 +83,7 @@ void  CFileLibrary::UnmapFile(void * a2) {
         ++i )
   {
     m_pFileData = (char *)this->m_pLibraryFiles[i].m_pFileData;
-    if ( a2 >= m_pFileData && a2 < &m_pFileData[this->m_pLibraryFiles[i].m_uFileSize] && !--this->m_pLibraryFiles[i].m_bFileMapped )
+    if ( a2 >= m_pFileData && a2 < &m_pFileData[this->m_pLibraryFiles[i].m_uFileSize] && --this->m_pLibraryFiles[i].m_bFileMapped == 0 )
     {
       UnmapViewOfFile(this->m_pLibraryFiles[i].m_pFileData);
       this->m_pLibraryFiles[i].m_pFileData = 0;
@@ -110,11 +110,11 @@ bool  CFileLibrary::DoesFileExistInLib(wchar_t const * String) {
   }
   File = 0;
   a2 = CFileLibrary::pFindDirectory(this, Destination);
-  if ( a2 )
+  if ( a2 != 0 )
   {
     File = CFileLibrary::pFindFile(String1, a2);
   }
-  return File && File->m_iLibraryIndex != 0xFFFFFFFC;
+  return File != 0 && File->m_iLibraryIndex != 0xFFFFFFFC;
 }
 
 
@@ -130,18 +130,18 @@ void *  CFileLibrary::MapFile(unsigned int a2) {
   FLIntHandleStruct *IntHandlePtr; // [esp+Ch] [ebp-8h]
 
   IntHandlePtr = CFileLibrary::pGetIntHandlePtr(this, a2);
-  if ( !IntHandlePtr )
+  if ( IntHandlePtr == 0 )
   {
     return 0;
   }
-  if ( this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_hFileMap )
+  if ( this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_hFileMap != 0 )
   {
     ++this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_bFileMapped;
     return (char *)this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_pFileData + IntHandlePtr->m_pLibraryFile->m_iFileOffset;
   }
   else
   {
-    hFile = (HANDLE)CFileLibrary::pGetFileLibraryHandle(this, IntHandlePtr->m_pLibraryFile->m_iLibraryIndex);
+    hFile = CFileLibrary::pGetFileLibraryHandle(this, IntHandlePtr->m_pLibraryFile->m_iLibraryIndex);
     hFileMappingObject = CreateFileMappingA(hFile, 0, 2u, 0, 0, 0);
     if ( hFileMappingObject == (HANDLE)-1 )
     {
@@ -153,7 +153,7 @@ void *  CFileLibrary::MapFile(unsigned int a2) {
     else
     {
       pFileData = (BYTE *)MapViewOfFile(hFileMappingObject, 4u, 0, 0, 0);
-      if ( pFileData )
+      if ( pFileData != 0 )
       {
         this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_pFileData = pFileData;
         this->m_pLibraryFiles[IntHandlePtr->m_pLibraryFile->m_iLibraryIndex].m_hFileMap = hFileMappingObject;
@@ -196,11 +196,11 @@ unsigned int  CFileLibrary::FileOpen(wchar_t const * _swpName, int Size) {
   }
   File = 0;
   a2 = CFileLibrary::pFindDirectory(this, swpPath);
-  if ( a2 )
+  if ( a2 != 0 )
   {
     File = CFileLibrary::pFindFile(swpFileName, a2);
   }
-  if ( !File || File->m_iLibraryIndex == 0xFFFFFFFC )
+  if ( File == 0 || File->m_iLibraryIndex == 0xFFFFFFFC )
   {
     return -1;
   }
@@ -216,22 +216,22 @@ unsigned int  CFileLibrary::FileOpen(wchar_t const * _swpName, int Size) {
       this->m_uHandleCount = v11 + 1;
     }
     for ( i = this->m_pFLIntHandle[v11 % 0x64];
-          i && i->m_iLibraryIndex != v11;
+          i != 0 && i->m_iLibraryIndex != v11;
           i = i->m_pNextHandle )
     {
-      if ( !i->m_pNextHandle )
+      if ( i->m_pNextHandle == 0 )
       {
         bFoundHandle = 1;
         break;
       }
     }
   }
-  while ( !bFoundHandle && i );
-  if ( i )
+  while ( bFoundHandle == 0 && i != 0 );
+  if ( i != 0 )
   {
     v5 = (FLIntHandleStruct *)operator new(0x1Cu);
     exceptionBlock = 1;
-    if ( v5 )
+    if ( v5 != 0 )
     {
       pHandle = FLIntHandleStruct::FLIntHandleStruct(v5);
     }
@@ -247,7 +247,7 @@ unsigned int  CFileLibrary::FileOpen(wchar_t const * _swpName, int Size) {
   {
     C = (FLIntHandleStruct *)operator new(0x1Cu);
     exceptionBlock = 0;
-    if ( C )
+    if ( C != 0 )
     {
       pHandle = FLIntHandleStruct::FLIntHandleStruct(C);
     }
@@ -282,15 +282,15 @@ void  CFileLibrary::FileClose(unsigned int _iId) {
 
   ++this->m_iFileInteractions;
   i = this->m_pFLIntHandle[_iId % 0x64];
-  if ( i )
+  if ( i != 0 )
   {
     for ( i = 0;
-          i;
+          i != 0;
           i = i->m_pNextHandle )
     {
       if ( i->m_iLibraryIndex == _iId )
       {
-        if ( i )
+        if ( i != 0 )
         {
           i->m_pNextHandle = i->m_pNextHandle;
         }
@@ -316,11 +316,11 @@ unsigned int  CFileLibrary::FileSeek(unsigned int _iLibraryIndex, long _iOffset,
 
   ++this->m_iFileSeeks;
   pHandle = this->m_pFLIntHandle[_iLibraryIndex % 0x64];
-  if ( pHandle )
+  if ( pHandle != 0 )
   {
     while ( 1 )
     {
-      if ( !pHandle )
+      if ( pHandle == 0 )
       {
         BBSupportTracePrintF(3, "CFileLibrary::FileSeek\t:\tFailed to seek in %s", *MEMORY[0x14]);// Hm.. is handle->m_pLibraryFile->m_pswName
         return -1;
@@ -340,7 +340,7 @@ unsigned int  CFileLibrary::FileSeek(unsigned int _iLibraryIndex, long _iOffset,
     {
       iTotalSize = pHandle->m_pLibraryFile->m_iFileSize;
     }
-    if ( _iSeekStart )
+    if ( _iSeekStart != 0 )
     {
       if ( _iSeekStart == 1 )                   // From beginning
       {
@@ -398,7 +398,7 @@ unsigned int  CFileLibrary::FileRead(unsigned int a2, void * _pData, unsigned in
   ++this->field_C;
   this->m_iDecompressedBytesRead += Size;
   IntHandlePtr = CFileLibrary::pGetIntHandlePtr(this, a2);
-  if ( !IntHandlePtr )
+  if ( IntHandlePtr == 0 )
   {
     return -1;
   }
@@ -411,11 +411,11 @@ unsigned int  CFileLibrary::FileRead(unsigned int a2, void * _pData, unsigned in
   if ( (IntHandlePtr->m_pLibraryFile->m_iFlags & FLFF_Compressed) != 0 )
   {
     nNumberOfBytesToRead = IntHandlePtr->m_pLibraryFile->m_iDecompressedSize - IntHandlePtr->m_iSeekPosition;
-    if ( nNumberOfBytesToRead )
+    if ( nNumberOfBytesToRead != 0 )
     {
       if ( nNumberOfBytesToRead >= Size )
       {
-        if ( IntHandlePtr->m_pLibraryFile->m_pFileData || (m_iDecompressedSize = IntHandlePtr->m_pLibraryFile->m_iDecompressedSize, v8 = (BYTE *)operator new[](m_iDecompressedSize), IntHandlePtr->m_pLibraryFile->m_pFileData = v8, CFileLibrary::LoadEntireFile(this, a2, (char *)IntHandlePtr->m_pLibraryFile->m_pFileData, IntHandlePtr->m_pLibraryFile->m_iCRC, 0) != -1) )
+        if ( IntHandlePtr->m_pLibraryFile->m_pFileData != 0 || (m_iDecompressedSize = IntHandlePtr->m_pLibraryFile->m_iDecompressedSize, v8 = (BYTE *)operator new[](m_iDecompressedSize), IntHandlePtr->m_pLibraryFile->m_pFileData = v8, CFileLibrary::LoadEntireFile(this, a2, (char *)IntHandlePtr->m_pLibraryFile->m_pFileData, IntHandlePtr->m_pLibraryFile->m_iCRC, 0) != -1) )
         {
           memcpy(_pData, &IntHandlePtr->m_pLibraryFile->m_pFileData[IntHandlePtr->m_iSeekPosition], Size);
           IntHandlePtr->m_iSeekPosition += Size;
@@ -446,16 +446,16 @@ unsigned int  CFileLibrary::FileRead(unsigned int a2, void * _pData, unsigned in
     {
       nNumberOfBytesToRead = Size;
     }
-    if ( !nNumberOfBytesToRead )
+    if ( nNumberOfBytesToRead == 0 )
     {
       return -2;
     }
-    if ( IntHandlePtr->m_iDataSize )
+    if ( IntHandlePtr->m_iDataSize != 0 )
     {
       v20 = 0;
       v16 = IntHandlePtr->m_iSeekPosition / (unsigned int)IntHandlePtr->m_iDataSize;
       v7 = IntHandlePtr->m_iSeekPosition % (unsigned int)IntHandlePtr->m_iDataSize;
-      if ( v16 != IntHandlePtr->field_8 && v7 )
+      if ( v16 != IntHandlePtr->field_8 && v7 != 0 )
       {
         lDistanceToMove = IntHandlePtr->m_pLibraryFile->m_iFileOffset + v16 * IntHandlePtr->m_iDataSize;
         v14 = SetFilePointer(hFile, lDistanceToMove, 0, FILE_BEGIN);
@@ -619,7 +619,7 @@ int  CFileLibrary::AddFileLibrary(wchar_t const * sFileName, int a3) {
       v47 = this->m_iLibraryFilesCapacity + 8;
       pFLLibraryFileList = (FLLibraryFileStruct *)operator new[](0x18 * v47);
       exceptionBlock = 0;
-      if ( pFLLibraryFileList )
+      if ( pFLLibraryFileList != 0 )
       {
         _vec_ctor_no(pFLLibraryFileList, 0x18u, v47, (void *(__thiscall *)(void *))FLLibraryFileStruct::FLLibraryFileStruct);
       }
@@ -676,7 +676,7 @@ int  CFileLibrary::AddFileLibrary(wchar_t const * sFileName, int a3) {
               iHeaderCount = sHeader.m_iFileHeaderCount;
               pFileHeaders = (FLHeaderFileStruct *)operator new[](24 * sHeader.m_iFileHeaderCount);
               exceptionBlock = 1;
-              if ( pFileHeaders )
+              if ( pFileHeaders != 0 )
               {
                 _vec_ctor_no(pFileHeaders, 0x18u, iHeaderCount, (void *(__thiscall *)(void *))FLHeaderFileStruct::FLHeaderFileStruct);
               }
@@ -705,7 +705,7 @@ int  CFileLibrary::AddFileLibrary(wchar_t const * sFileName, int a3) {
                           ++i )
                     {
                       *(_DWORD *)&pswDirectoryNames[4 * i] = pCopyBuffer;
-                      while ( *pCopyBuffer )
+                      while ( *pCopyBuffer != 0 )
                       {
                         ++pCopyBuffer;
                       }
@@ -718,7 +718,7 @@ int  CFileLibrary::AddFileLibrary(wchar_t const * sFileName, int a3) {
                           ++i )
                     {
                       *(_DWORD *)&pswFileNames[4 * i] = pCopyBuffer;
-                      while ( *pCopyBuffer )
+                      while ( *pCopyBuffer != 0 )
                       {
                         ++pCopyBuffer;
                       }
@@ -738,10 +738,10 @@ int  CFileLibrary::AddFileLibrary(wchar_t const * sFileName, int a3) {
                           std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)v75, *(char **)&pswFileNames[4 * i]);
                           LOBYTE(exceptionBlock) = 3;
                           v11 = v54;
-                          v5 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v75);
+                          v5 = std::wstring::c_str((std::wstring *)v75);
                           CFileLibrary::pAddFile(pDir, v5, pFileHeaders, v11, a3);
                           LOBYTE(exceptionBlock) = 2;
-                          std::wstring::~wstring(v75);
+                          std::wstring::~wstring((std::wstring *)v75);
                           exceptionBlock = -1;
                           std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v70);
                         }
@@ -763,10 +763,10 @@ int  CFileLibrary::AddFileLibrary(wchar_t const * sFileName, int a3) {
                         exceptionBlock = 4;
                         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::from_bytes((int)v76, *(char **)&pswDirectoryNames[4 * i]);
                         LOBYTE(exceptionBlock) = 5;
-                        v6 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v76);
+                        v6 = std::wstring::c_str((std::wstring *)v76);
                         CFileLibrary::pAddDirectory(this, v6);
                         LOBYTE(exceptionBlock) = 4;
-                        std::wstring::~wstring(v76);
+                        std::wstring::~wstring((std::wstring *)v76);
                         exceptionBlock = -1;
                         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v71);
                       }
@@ -789,10 +789,10 @@ int  CFileLibrary::AddFileLibrary(wchar_t const * sFileName, int a3) {
                             LOBYTE(exceptionBlock) = 7;
                             v14 = a3;
                             v12 = v54;
-                            v7 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v74);
+                            v7 = std::wstring::c_str((std::wstring *)v74);
                             CFileLibrary::pAddFile(pDir, v7, pFileHeaders, v12, v14);
                             LOBYTE(exceptionBlock) = 6;
-                            std::wstring::~wstring(v74);
+                            std::wstring::~wstring((std::wstring *)v74);
                             exceptionBlock = -1;
                             std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v72);
                           }
@@ -805,7 +805,7 @@ int  CFileLibrary::AddFileLibrary(wchar_t const * sFileName, int a3) {
                         ++pFileHeaders;
                       }
                     }
-                    v8 = std::make_pair<wchar_t const * &,int &>(v15, &sFileName, &v54);
+                    v8 = std::make_pair<wchar_t const * &,int &>((int)v15, (int)&sFileName, (int)&v54);
                     std::pair<std::wstring,int>::pair<std::wstring,int>(v73, v8);
                     exceptionBlock = 8;
                     std::vector<std::pair<std::wstring,int>>::push_back(&this->m_vFileIdPairs, (int)v73);
@@ -907,20 +907,20 @@ class std::vector<struct std::pair<std::wstring,std::wstring >,class std::alloca
 
   v21 = 0;
   BBSupportTracePrintF(1, "Starting listing");
-  v7 = *(_DWORD *)std::_Iterator_base12::operator=(&v27);
+  v7 = *(_DWORD *)std::_Iterator_base12::operator=((int)&v27);
   v15 = v6;
-  v14 = std::vector<std::pair<std::wstring,int>>::end(v6);
+  v14 = std::vector<std::pair<std::wstring,int>>::end((int)v6);
   v13 = &v3;
-  v12 = std::vector<std::pair<std::wstring,int>>::begin(&v3);
-  v11 = std::find_if<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>,_lambda_2ccfe65c9d4fa599f75d5b3f0ed0c104_>(v10, v3, v4, v5, v6[0], v6[1], v6[2], v7);
+  v12 = std::vector<std::pair<std::wstring,int>>::begin((int)&v3);
+  v11 = std::find_if<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>,_lambda_2ccfe65c9d4fa599f75d5b3f0ed0c104_>((int)v10, v3, v4, v5, v6[0], v6[1], v6[2], v7);
   v26 = 0;
-  v18 = (std::_Iterator_base12 *)std::vector<std::pair<std::wstring,int>>::end(v9);
+  v18 = (std::_Iterator_base12 *)std::vector<std::pair<std::wstring,int>>::end((int)v9);
   v17 = v18;
   LOBYTE(v26) = 1;
   v25 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::operator==(v18);
   LOBYTE(v26) = 0;
   std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,int>>>>(v9);
-  if ( v25 )
+  if ( v25 != 0 )
   {
     std::vector<std::pair<std::wstring,std::wstring>>::vector<std::pair<std::wstring,std::wstring>>((void *)a2);
     v21 |= 1u;
@@ -952,7 +952,7 @@ class std::vector<struct std::pair<std::wstring,std::wstring >,class std::alloca
       }
       ++m_pDirectories;
     }
-    std::vector<std::pair<std::wstring,std::wstring>>::vector<std::pair<std::wstring,std::wstring>>(v8);
+    std::vector<std::pair<std::wstring,std::wstring>>::vector<std::pair<std::wstring,std::wstring>>((int)v8);
     v21 |= 1u;
     LOBYTE(v26) = 0;
     std::vector<std::pair<std::wstring,std::wstring>>::~vector<std::pair<std::wstring,std::wstring>>();
@@ -993,63 +993,63 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a3, wchar_t const * String) {
   void *Buffer; // [esp+60h] [ebp-128h]
   int v29; // [esp+64h] [ebp-124h]
   size_t Size; // [esp+68h] [ebp-120h]
-  _BYTE v31[72]; // [esp+6Ch] [ebp-11Ch] BYREF
+  CFile v31; // [esp+6Ch] [ebp-11Ch] BYREF
   int v32[7]; // [esp+B4h] [ebp-D4h] BYREF
   int v33[7]; // [esp+D0h] [ebp-B8h] BYREF
   int v34[7]; // [esp+ECh] [ebp-9Ch] BYREF
-  _BYTE v35[28]; // [esp+108h] [ebp-80h] BYREF
+  std::wstring v35; // [esp+108h] [ebp-80h] BYREF
   int v36[7]; // [esp+124h] [ebp-64h] BYREF
   int v37[7]; // [esp+140h] [ebp-48h] BYREF
-  _BYTE v38[28]; // [esp+15Ch] [ebp-2Ch] BYREF
+  std::wstring v38; // [esp+15Ch] [ebp-2Ch] BYREF
   int v39; // [esp+184h] [ebp-4h]
 
   CFileLibrary::ListFilesInLib(this, a2);
   v39 = 0;
-  if ( (unsigned __int8)std::vector<std::pair<std::wstring,std::wstring>>::empty(a2) )
+  if ( (unsigned __int8)std::vector<std::pair<std::wstring,std::wstring>>::empty(a2) != 0 )
   {
     v39 = -1;
     return std::vector<std::pair<std::wstring,std::wstring>>::~vector<std::pair<std::wstring,std::wstring>>();
   }
   else
   {
-    std::wstring::wstring(v36, String);
+    std::wstring::wstring((std::wstring *)v36, String);
     LOBYTE(v39) = 1;
-    if ( !(unsigned __int8)sub_2F0D990(v36) )
+    if ( (unsigned __int8)sub_2F0D990((std::wstring *)v36) == 0 )
     {
-      sub_2F0D9D0(v36);
+      sub_2F0D9D0((int)v36);
     }
     v26 = (int *)a2;
-    std::vector<std::pair<std::wstring,std::wstring>>::begin(v14);
+    std::vector<std::pair<std::wstring,std::wstring>>::begin((int)v14);
     LOBYTE(v39) = 2;
-    std::vector<std::pair<std::wstring,std::wstring>>::end(v12);
+    std::vector<std::pair<std::wstring,std::wstring>>::end((int)v12);
     LOBYTE(v39) = 3;
-    while ( (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,std::wstring>>>>::operator!=((std::_Iterator_base12 *)v12) )
+    while ( (unsigned __int8)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,std::wstring>>>>::operator!=((std::_Iterator_base12 *)v12) != 0 )
     {
       v29 = std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,std::wstring>>>>::operator*(v14);
       v9 = (_Cnd_internal_imp_t *)v29;
       v24 = (void *)std::operator+<wchar_t>((int)v34, (int)v36, (wchar_t *)L"\\");
       v23 = v24;
       LOBYTE(v39) = 4;
-      std::operator+<wchar_t>(v37, v24, v9);
+      std::operator+<wchar_t>(v37, v24, (std::wstring *)v9);
       LOBYTE(v39) = 6;
-      std::wstring::~wstring(v34);
-      if ( !(unsigned __int8)sub_2F0D990(v37) )
+      std::wstring::~wstring((std::wstring *)v34);
+      if ( (unsigned __int8)sub_2F0D990((std::wstring *)v37) == 0 )
       {
-        sub_2F0D9D0(v37);
+        sub_2F0D9D0((int)v37);
       }
       v10 = (_Cnd_internal_imp_t *)(v29 + 28);
       v22 = (void *)std::operator+<wchar_t>((int)v33, v29, (wchar_t *)L"\\");
       v21 = v22;
       LOBYTE(v39) = 7;
-      std::operator+<wchar_t>(v38, v22, v10);
+      std::operator+<wchar_t>(&v38, v22, (std::wstring *)v10);
       LOBYTE(v39) = 9;
-      std::wstring::~wstring(v33);
-      v4 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v38);
+      std::wstring::~wstring((std::wstring *)v33);
+      v4 = std::wstring::c_str(&v38);
       v27 = CFileLibrary::FileOpen(&g_cFileLibrary, v4, 0);
       Size = 0;
       if ( v27 == -1 )
       {
-        v5 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v38);
+        v5 = (const char *)std::wstring::c_str(&v38);
         BBSupportTracePrintF(1, "can't open file `%s'", v5);
       }
       else
@@ -1062,7 +1062,7 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a3, wchar_t const * String) {
       v19 = CFileLibrary::FileRead(&g_cFileLibrary, v27, (char *)Buffer, Size);
       if ( v19 == -1 )
       {
-        v6 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v38);
+        v6 = (const char *)std::wstring::c_str(&v38);
         BBSupportTracePrintF(1, "cannot read `%s'", v6);
       }
       else
@@ -1071,32 +1071,32 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a3, wchar_t const * String) {
         v18 = (void *)std::operator+<wchar_t>((int)v32, (int)v37, (wchar_t *)asc_3AB56DC);
         v17 = v18;
         LOBYTE(v39) = 10;
-        std::operator+<wchar_t>(v35, v18, v11);
+        std::operator+<wchar_t>(&v35, v18, (std::wstring *)v11);
         LOBYTE(v39) = 12;
-        std::wstring::~wstring(v32);
-        CFile::CFile((CFile *)v31);
+        std::wstring::~wstring((std::wstring *)v32);
+        CFile::CFile(&v31);
         LOBYTE(v39) = 13;
-        v7 = (wchar_t *)std::wstring::c_str((_Cnd_internal_imp_t *)v35);
-        CFile::Open(v7, 10, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
-        v16 = CFile::Write(Buffer, 1u, Size, UNUSED_ARG(), UNUSED_ARG());
+        v7 = std::wstring::c_str(&v35);
+        ((void (__stdcall *)(wchar_t *, int, char *, int))CFile::Open)(v7, 10, "D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\File.h", 0);
+        v16 = ((int (__stdcall *)(void *, size_t, size_t, int, int))CFile::Write)(Buffer, 1u, Size, UNUSED_ARG(), UNUSED_ARG());
         if ( v16 < (int)Size )
         {
-          v8 = (const char *)std::wstring::c_str((_Cnd_internal_imp_t *)v35);
+          v8 = (const char *)std::wstring::c_str(&v35);
           BBSupportTracePrintF(1, "short write `%s'", v8);
         }
-        CFile::Close((CFile *)v31, UNUSED_ARG(), UNUSED_ARG());
+        CFile::Close(&v31, UNUSED_ARG(), UNUSED_ARG());
         LOBYTE(v39) = 12;
-        CFile::~CFile();
+        ((void (__cdecl *)())CFile::~CFile)();
         LOBYTE(v39) = 9;
-        std::wstring::~wstring(v35);
+        std::wstring::~wstring(&v35);
       }
       C = Buffer;
       operator delete[](Buffer);
       CFileLibrary::FileClose(&g_cFileLibrary, v27);
       LOBYTE(v39) = 6;
-      std::wstring::~wstring(v38);
+      std::wstring::~wstring(&v38);
       LOBYTE(v39) = 3;
-      std::wstring::~wstring(v37);
+      std::wstring::~wstring((std::wstring *)v37);
       std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,std::wstring>>>>::operator++(v14);
     }
     LOBYTE(v39) = 2;
@@ -1104,7 +1104,7 @@ void  CFileLibrary::DumpFilesInLib(wchar_t const * a3, wchar_t const * String) {
     LOBYTE(v39) = 1;
     std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,std::wstring>>>>::~_Vector_iterator<std::_Vector_val<std::_Simple_types<std::pair<std::wstring,std::wstring>>>>(v14);
     LOBYTE(v39) = 0;
-    std::wstring::~wstring(v36);
+    std::wstring::~wstring((std::wstring *)v36);
     v39 = -1;
     return std::vector<std::pair<std::wstring,std::wstring>>::~vector<std::pair<std::wstring,std::wstring>>();
   }
@@ -1139,7 +1139,7 @@ void  CFileLibrary::C_AddPath(wchar_t const * _swpPath, int a3, wchar_t const * 
   size_t Count; // [esp+2Ch] [ebp-14h]
 
   C = (FLPathListStruct *)operator new(0x14u);
-  if ( C )
+  if ( C != 0 )
   {
     v7 = FLPathListStruct::FLPathListStruct(C);
   }
@@ -1148,7 +1148,7 @@ void  CFileLibrary::C_AddPath(wchar_t const * _swpPath, int a3, wchar_t const * 
     v7 = 0;
   }
   Count = wcslen(_swpPath);
-  if ( Count )
+  if ( Count != 0 )
   {
     if ( _swpPath[Count - 1] == '\\' )
     {
@@ -1161,7 +1161,7 @@ void  CFileLibrary::C_AddPath(wchar_t const * _swpPath, int a3, wchar_t const * 
       v7->m_swpPath = (wchar_t *)operator new[](2 * (Count + 1));
       wcscpy(v7->m_swpPath, _swpPath);
     }
-    if ( Source )
+    if ( Source != 0 )
     {
       v5 = wcslen(Source);
       v7->m_swpSearch = (wchar_t *)operator new[](2 * (v5 + 1));
@@ -1173,16 +1173,16 @@ void  CFileLibrary::C_AddPath(wchar_t const * _swpPath, int a3, wchar_t const * 
       wcscpy(v7->m_swpSearch, asc_3AB57EC);
     }
     v7->field_C = a3;
-    if ( a5 )
+    if ( a5 != 0 )
     {
       v6 = wcslen(a5);
       v7->m_swpUnknown = (wchar_t *)operator new[](2 * (v6 + 1));
       wcscpy(v7->m_swpUnknown, a5);
     }
-    if ( this->m_pPathList )
+    if ( this->m_pPathList != 0 )
     {
       for ( i = this->m_pPathList;
-            i->field_10;
+            i->field_10 != 0;
             i = (FLPathListStruct *)i->field_10 )
       {
         ;
@@ -1283,11 +1283,11 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
   struct _WIN32_FIND_DATAW FindFileData; // [esp+15Ch] [ebp-2BE0h] BYREF
   _DWORD v94[22]; // [esp+3ACh] [ebp-2990h] BYREF
   _DWORD v95[22]; // [esp+404h] [ebp-2938h] BYREF
-  _BYTE v96[28]; // [esp+45Ch] [ebp-28E0h] BYREF
-  _BYTE v97[28]; // [esp+478h] [ebp-28C4h] BYREF
-  _BYTE v98[28]; // [esp+494h] [ebp-28A8h] BYREF
-  _BYTE v99[28]; // [esp+4B0h] [ebp-288Ch] BYREF
-  _BYTE v100[28]; // [esp+4CCh] [ebp-2870h] BYREF
+  std::string v96; // [esp+45Ch] [ebp-28E0h] BYREF
+  std::string v97; // [esp+478h] [ebp-28C4h] BYREF
+  std::string v98; // [esp+494h] [ebp-28A8h] BYREF
+  std::string v99; // [esp+4B0h] [ebp-288Ch] BYREF
+  std::string v100; // [esp+4CCh] [ebp-2870h] BYREF
   struct FLCopyProgressStruct pCopyProgress; // [esp+4E8h] [ebp-2854h] BYREF
   CHAR Text[2048]; // [esp+50Ch] [ebp-2830h] BYREF
   CHAR v103[1024]; // [esp+D0Ch] [ebp-2030h] BYREF
@@ -1299,7 +1299,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
   wchar_t String[260]; // [esp+2B24h] [ebp-218h] BYREF
   int exceptionBlock; // [esp+2D38h] [ebp-4h]
 
-  if ( !this->m_pPathList )
+  if ( this->m_pPathList == 0 )
   {
     return 1;
   }
@@ -1310,11 +1310,11 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
   v71 = 0;
   uFailReason = 0;
   bCanceled = 0;
-  while ( m_pPathList && !bCanceled )
+  while ( m_pPathList != 0 && bCanceled == 0 )
   {
     pDirListIterator = (FLDirListStruct *)operator new(0x10u);
     exceptionBlock = 0;
-    if ( pDirListIterator )
+    if ( pDirListIterator != 0 )
     {
       pDirListIterator = FLDirListStruct::FLDirListStruct(pDirListIterator);
     }
@@ -1325,11 +1325,11 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
     v33 = pDirListIterator;
     exceptionBlock = -1;
     v74 = m_pPathList->field_C;
-    while ( pDirListIterator )
+    while ( pDirListIterator != 0 )
     {
       v35 = 0;
       Destination[0] = 0;
-      if ( m_pPathList->m_swpUnknown )
+      if ( m_pPathList->m_swpUnknown != 0 )
       {
         Source = m_pPathList->m_swpUnknown;
         if ( *Source == '\\' )
@@ -1352,14 +1352,14 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
             i < 2;
             ++i )
       {
-        if ( !bCanceled )
+        if ( bCanceled == 0 )
         {
           v75 = -1;
-          if ( i )
+          if ( i != 0 )
           {
             if ( i == 1 )
             {
-              if ( pDirListIterator->m_swpPath )
+              if ( pDirListIterator->m_swpPath != 0 )
               {
                 swprintf(Buffer, L"%s\\%s\\%s", m_pPathList->m_swpPath, pDirListIterator->m_swpPath, m_pPathList->m_swpSearch);
                 v78 = 0;
@@ -1371,7 +1371,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
               }
             }
           }
-          else if ( pDirListIterator->m_swpPath )
+          else if ( pDirListIterator->m_swpPath != 0 )
           {
             swprintf(Buffer, L"%s\\%s\\*", m_pPathList->m_swpPath, pDirListIterator->m_swpPath);
             v78 = 0;
@@ -1381,14 +1381,14 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
             swprintf(Buffer, L"%s\\*", m_pPathList->m_swpPath);
             v78 = 1;
           }
-          if ( Destination[0] )
+          if ( Destination[0] != 0 )
           {
             v78 = 0;
           }
           hFindFile = FindFirstFileW(Buffer, &FindFileData);
           if ( hFindFile != (HANDLE)-1 )
           {
-            if ( pDirListIterator->m_swpPath )
+            if ( pDirListIterator->m_swpPath != 0 )
             {
               swprintf(String, L"%s\\%s", m_pPathList->m_swpPath, pDirListIterator->m_swpPath);
             }
@@ -1398,7 +1398,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
             }
             v37 = (FLDirListStruct *)operator new(0x10u);
             exceptionBlock = 1;
-            if ( v37 )
+            if ( v37 != 0 )
             {
               v37 = FLDirListStruct::FLDirListStruct(v37);
             }
@@ -1411,7 +1411,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
             v6 = wcslen(String);
             v37->m_swpPath = (WCHAR *)operator new[](2 * (v6 + 1));
             wcscpy(v87->m_swpPath, String);
-            if ( pDirListIterator->m_swpPath )
+            if ( pDirListIterator->m_swpPath != 0 )
             {
               swprintf(String, L"Root: \"%s\"\n  Directory: \"\\%s\\%s\"", m_pPathList->m_swpPath, Destination, pDirListIterator->m_swpPath);
             }
@@ -1424,12 +1424,12 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
             wcscpy((wchar_t *)v87->field_4, String);
             v87->m_pNext = pDirList;
             pDirList = v87;
-            if ( !v78 )
+            if ( v78 == 0 )
             {
               m_pDirList = this->m_pDirList;
-              if ( pDirListIterator->m_swpPath )
+              if ( pDirListIterator->m_swpPath != 0 )
               {
-                if ( Destination[0] )
+                if ( Destination[0] != 0 )
                 {
                   swprintf(String, L"%s\\%s", Destination, pDirListIterator->m_swpPath);
                 }
@@ -1442,9 +1442,9 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
               {
                 swprintf(String, L"%s", Destination);
               }
-              while ( m_pDirList )
+              while ( m_pDirList != 0 )
               {
-                if ( !wcsicmp(String, m_pDirList->m_swpPath) )
+                if ( wcsicmp(String, m_pDirList->m_swpPath) == 0 )
                 {
                   v75 = m_pDirList->field_8;
                   break;
@@ -1455,7 +1455,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
               {
                 v39 = (FLDirListStruct *)operator new(0x10u);
                 exceptionBlock = 2;
-                if ( v39 )
+                if ( v39 != 0 )
                 {
                   v41 = FLDirListStruct::FLDirListStruct(v39);
                 }
@@ -1471,7 +1471,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
                 v41->m_swpPath = v21;
                 v87->field_8 = v71;
                 wcscpy(v87->m_swpPath, String);
-                if ( v65 )
+                if ( v65 != 0 )
                 {
                   v65->m_pNext = v87;
                 }
@@ -1487,7 +1487,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
             {
               if ( (FindFileData.dwFileAttributes & 0x10) != 0 )
               {
-                if ( !i )
+                if ( i == 0 )
                 {
                   v76 = (v74 & 1) != 0;
                   if ( (v74 & 2) != 0 && FindFileData.cFileName[0] == 33 )
@@ -1495,23 +1495,23 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
                     v76 = 1;
                   }
                   v42 = wcslen(FindFileData.cFileName);
-                  if ( v42 >= 6 && !wcsicmp((const wchar_t *)&FindFileData.nFileSizeLow + v42 + 1, L".work") )
+                  if ( v42 >= 6 && wcsicmp((const wchar_t *)&FindFileData.nFileSizeLow + v42 + 1, L".work") == 0 )
                   {
                     v76 = 1;
                   }
-                  if ( !j__wcscmp(FindFileData.cFileName, L".") || !j__wcscmp(FindFileData.cFileName, L"..") )
+                  if ( j__wcscmp(FindFileData.cFileName, L".") == 0 || j__wcscmp(FindFileData.cFileName, L"..") == 0 )
                   {
                     v76 = 1;
                   }
                   if ( !v76 )
                   {
                     for ( j = pDirListIterator;
-                          j->m_pNext;
+                          j->m_pNext != 0;
                           j = j->m_pNext )
                     {
                       ;
                     }
-                    if ( pDirListIterator->m_swpPath )
+                    if ( pDirListIterator->m_swpPath != 0 )
                     {
                       swprintf(String, L"%s\\%s", pDirListIterator->m_swpPath, FindFileData.cFileName);
                     }
@@ -1521,7 +1521,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
                     }
                     v43 = (FLDirListStruct *)operator new(0x10u);
                     exceptionBlock = 3;
-                    if ( v43 )
+                    if ( v43 != 0 )
                     {
                       v44 = FLDirListStruct::FLDirListStruct(v43);
                     }
@@ -1550,39 +1550,39 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
                 if ( !v45 )
                 {
                   for ( k = this->m_FileList;
-                        k;
+                        k != 0;
                         k = k->m_pNext )
                   {
-                    if ( !wcsicmp(k->m_swpFileName, FindFileData.cFileName) && k->m_uU4 == v75 )
+                    if ( wcsicmp(k->m_swpFileName, FindFileData.cFileName) == 0 && k->m_uU4 == v75 )
                     {
                       uFailReason = 4;
                       m_pContainingDir = k->m_pContainingDir;
                       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>((char *)v95);
                       exceptionBlock = 4;
-                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v95, (int)v98, m_pContainingDir->field_4);
+                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v95, (int)&v98, m_pContainingDir->field_4);
                       LOBYTE(exceptionBlock) = 5;
-                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v95, (int)v97, (char *)m_pContainingDir->m_swpPath);
+                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v95, (int)&v97, (char *)m_pContainingDir->m_swpPath);
                       LOBYTE(exceptionBlock) = 6;
-                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v95, (int)v100, pDirList->field_4);
+                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v95, (int)&v100, pDirList->field_4);
                       LOBYTE(exceptionBlock) = 7;
-                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v95, (int)v99, (char *)FindFileData.cFileName);
-                      v18 = (const char *)std::string::c_str(v99);
-                      v17 = (const char *)std::string::c_str(v100);
-                      v16 = (const char *)std::string::c_str(v97);
-                      v10 = (const char *)std::string::c_str(v98);
+                      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v95, (int)&v99, (char *)FindFileData.cFileName);
+                      v18 = std::string::c_str(&v99);
+                      v17 = std::string::c_str(&v100);
+                      v16 = std::string::c_str(&v97);
+                      v10 = std::string::c_str(&v98);
                       sprintf(Text, "The same file names were found:\n\n%s\n  File: \"%s\"\n\n%s\n  File: \"%s\"\n", v10, v16, v17, v18);
                       v28 = MessageBoxA(0, Text, "Error Creating File Library", 0x31u);
                       if ( v28 == 2 )
                       {
                         bCanceled = 1;
                       }
-                      std::string::~string(v99);
+                      std::string::~string(&v99);
                       LOBYTE(exceptionBlock) = 6;
-                      std::string::~string(v100);
+                      std::string::~string(&v100);
                       LOBYTE(exceptionBlock) = 5;
-                      std::string::~string(v97);
+                      std::string::~string(&v97);
                       LOBYTE(exceptionBlock) = 4;
-                      std::string::~string(v98);
+                      std::string::~string(&v98);
                       exceptionBlock = -1;
                       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v95);
                       break;
@@ -1590,7 +1590,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
                   }
                   v56 = (FLFileListStruct *)operator new(0x18u);
                   exceptionBlock = 8;
-                  if ( v56 )
+                  if ( v56 != 0 )
                   {
                     v55 = FLFileListStruct::FLFileListStruct(v56);
                   }
@@ -1615,7 +1615,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
                     k->m_uFlags |= FLFF_Encrypted;
                   }
                   k->m_pContainingDir = pDirList;
-                  if ( pPrevFileList )
+                  if ( pPrevFileList != 0 )
                   {
                     pPrevFileList->m_pNext = k;
                   }
@@ -1628,7 +1628,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
               }
               NextFileW = FindNextFileW(hFindFile, &FindFileData);
             }
-            while ( NextFileW && !bCanceled );
+            while ( NextFileW && bCanceled == 0 );
             FindClose(hFindFile);
           }
         }
@@ -1638,26 +1638,26 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
       v23 = v24;
 
       v54 = v24;
-      if ( v24 )
+      if ( v24 != 0 )
       {
         delete v54;
       }
     }
     m_pPathList = (FLPathListStruct *)m_pPathList->field_10;
   }
-  if ( !uFailReason && !bCanceled )
+  if ( uFailReason == 0 && bCanceled == 0 )
   {
     hObject = CreateFileW(lpFileName, 0xC0000000, 0, 0, 2u, 0x80u, 0);
     if ( hObject == (HANDLE)-1 )
     {
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>((char *)v94);
       exceptionBlock = 10;
-      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v94, (int)v96, (char *)lpFileName);
-      v15 = (const char *)std::string::c_str(v96);
+      std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v94, (int)&v96, (char *)lpFileName);
+      v15 = std::string::c_str(&v96);
       sprintf(v104, "Error Creating File Library file: \"%s\"", v15);
       MessageBoxA(0, v104, "Error Creating File Library", 0x10u);
       uFailReason = 3;
-      std::string::~string(v96);
+      std::string::~string(&v96);
       exceptionBlock = -1;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v94);
     }
@@ -1667,7 +1667,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
       v57.m_iVersion = 4097;
       v53 = 0;
       v105[0] = 0;
-      if ( _spCommentFile )
+      if ( _spCommentFile != 0 )
       {
         v52 = _spCommentFile;
       }
@@ -1699,7 +1699,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
       v69 = 0;
       v57.m_iDirectoryNameCount = 0;
       for ( m = this->m_pDirList;
-            m;
+            m != 0;
             m = m->m_pNext )
       {
         ++v57.m_iDirectoryNameCount;
@@ -1708,7 +1708,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
       v70 = 0;
       v57.m_iFileHeaderCount = 0;
       for ( n = this->m_FileList;
-            n;
+            n != 0;
             n = n->m_pNext )
       {
         ++v57.m_iFileHeaderCount;
@@ -1716,7 +1716,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
       }
       v61 = 0;
       for ( n = this->m_FileList;
-            n;
+            n != 0;
             n = n->m_pNext )
       {
         v61 += n->m_uFileSize;
@@ -1736,7 +1736,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
       m_iFileHeaderCount = v57.m_iFileHeaderCount;
       pFileHeaders = (FLHeaderFileStruct *)operator new[](0x18 * v57.m_iFileHeaderCount);
       exceptionBlock = 9;
-      if ( pFileHeaders )
+      if ( pFileHeaders != 0 )
       {
         _vec_ctor_no(pFileHeaders, 0x18u, m_iFileHeaderCount, (void *(__thiscall *)(void *))FLHeaderFileStruct::FLHeaderFileStruct);
       }
@@ -1745,7 +1745,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
         pFileHeaders = 0;
       }
       exceptionBlock = -1;
-      while ( n )
+      while ( n != 0 )
       {
         pFileHeaders->field_0 = v67;
         pFileHeaders->field_C = n->m_uU4;
@@ -1754,7 +1754,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
         pCopyProgress.m_uExpectedFileSize = n->m_uFileSize;
         pCopyProgress.m_uFlags = n->m_uFlags;
         v58 = CFileLibrary::pC_CopyFile(this, FileName, hObject, nNumberOfBytesToRead, &pCopyProgress);
-        if ( v58 )
+        if ( v58 != 0 )
         {
           if ( v58 == 5 )
           {
@@ -1773,14 +1773,14 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
       }
       WriteFile(hObject, &v57, 0x18u, &NumberOfBytesWritten, 0);
       for ( m = this->m_pDirList;
-            m;
+            m != 0;
             m = m->m_pNext )
       {
         v13 = wcslen(m->m_swpPath);
         WriteFile(hObject, m->m_swpPath, v13 + 1, &NumberOfBytesWritten, 0);
       }
       for ( n = this->m_FileList;
-            n;
+            n != 0;
             n = n->m_pNext )
       {
         v14 = wcslen(n->m_swpFileName);
@@ -1792,17 +1792,17 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
       CloseHandle(hObject);
     }
   }
-  while ( pDirList )
+  while ( pDirList != 0 )
   {
     pDirList = pDirList->m_pNext;
     v31 = delete pDirList;
   }
-  if ( bCanceled )
+  if ( bCanceled != 0 )
   {
     BBSupportTracePrintF(3, "CFileLibrary::C_CreateFileLibrary\t:\tFailed to create lib %s", (const char *)lpFileName);
     return 2;
   }
-  else if ( uFailReason )
+  else if ( uFailReason != 0 )
   {
     BBSupportTracePrintF(3, "CFileLibrary::C_CreateFileLibrary\t:\tFailed to create lib %s, %i", (const char *)lpFileName, uFailReason);
     return uFailReason;
@@ -1847,12 +1847,12 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
   }
   i = a2;
   pFLFHandle = 0;
-  while ( i )
+  while ( i != 0 )
   {
-    if ( pFLFHandle )
+    if ( pFLFHandle != 0 )
     {
       v4 = (FLFHandleStruct *)operator new(0xCu);
-      if ( v4 )
+      if ( v4 != 0 )
       {
         v3 = FLFHandleStruct::FLFHandleStruct(v4);
       }
@@ -1867,7 +1867,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
     else
     {
       C = (FLFHandleStruct *)operator new(0xCu);
-      if ( C )
+      if ( C != 0 )
       {
         v5 = FLFHandleStruct::FLFHandleStruct(C);
       }
@@ -1908,7 +1908,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
         i < this->m_iLibraryFilesCount;
         ++i )
   {
-    if ( this->m_pLibraryFiles[i].m_pFileData )
+    if ( this->m_pLibraryFiles[i].m_pFileData != 0 )
     {
       UnmapViewOfFile(this->m_pLibraryFiles[i].m_pFileData);
       CloseHandle(this->m_pLibraryFiles[i].m_hFileMap);
@@ -1917,7 +1917,7 @@ int  CFileLibrary::C_CreateFileLibrary(wchar_t const * lpFileName, char * _spCom
   }
   CFileLibrary::pFreeFLCreationData(this);
   CFileLibrary::pFreeFLData(this);
-  while ( this->m_pFLFHandleStart )
+  while ( this->m_pFLFHandleStart != 0 )
   {
     m_pFLFHandleStart = (struct FLFHandleStruct **)this->m_pFLFHandleStart;
     this->m_pFLFHandleStart = m_pFLFHandleStart[2];
@@ -1951,7 +1951,7 @@ bool  CFileLibrary::pCutPathAndFilename(wchar_t const * String, wchar_t * _swpPa
   {
     ++v4;
   }
-  if ( v4 )
+  if ( v4 != 0 )
   {
     v6 = wcslen(_swpPath) - v4;
     if ( v6 > 1 )
@@ -1988,7 +1988,7 @@ void *  CFileLibrary::pGetFileLibraryHandle(int a2) {
   {
     return (void *)-1;
   }
-  if ( this->m_pLibraryFiles[a2].m_hFile )
+  if ( this->m_pLibraryFiles[a2].m_hFile != 0 )
   {
     hFile = this->m_pLibraryFiles[a2].m_hFile;
   }
@@ -1998,10 +1998,10 @@ void *  CFileLibrary::pGetFileLibraryHandle(int a2) {
   }
   if ( hFile == (void *)-1 )
   {
-    if ( this->m_iFLFHandleCount )
+    if ( this->m_iFLFHandleCount != 0 )
     {
       for ( i = this->m_pFLFHandleStart;
-            i && i->m_uId != -1;
+            i != 0 && i->m_uId != -1;
             i = i->m_pNext )
       {
         ;
@@ -2050,7 +2050,7 @@ void *  CFileLibrary::pGetFileLibraryHandle(int a2) {
   else
   {
     for ( j = this->m_pFLFHandleStart;
-          j && j->m_uId != a2;
+          j != 0 && j->m_uId != a2;
           j = j->m_pNext )
     {
       ;
@@ -2088,7 +2088,7 @@ int  CFileLibrary::pC_CopyFile(wchar_t const * lpFileName, void * a2, int nNumbe
     {
       NumberOfBytesWritten = CFileLibrary::pC_PackFile(this, a2, hFile, &_pCopyProgress->m_uCRC, 0);
     }
-    if ( !NumberOfBytesWritten )
+    if ( NumberOfBytesWritten == 0 )
     {
       return 6;
     }
@@ -2112,7 +2112,7 @@ int  CFileLibrary::pC_CopyFile(wchar_t const * lpFileName, void * a2, int nNumbe
     _pCopyProgress->m_uU1C = 0;
     while ( ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &NumberOfBytesRead, 0) )
     {
-      if ( !NumberOfBytesRead )
+      if ( NumberOfBytesRead == 0 )
       {
         ++_pCopyProgress->m_uU10;
         success = 0;
@@ -2159,8 +2159,8 @@ int  CFileLibrary::pC_PackFile(void * a2, void * hFile, unsigned int * _pCRC, bo
   if ( uAcutallyReadSize == uReadSize )
   {
     nNumberOfBytesToWrite = 0;
-    nNumberOfBytesToWrite = j__LZHLCompress(pCompressor, pWriteBuffer, pReadBuffer, uAcutallyReadSize);
-    if ( a5 )
+    nNumberOfBytesToWrite = j__LZHLCompress(pCompressor, (uint8_t *)pWriteBuffer, (const uint8_t *)pReadBuffer, uAcutallyReadSize);
+    if ( a5 != 0 )
     {
       CFileLibrary::DataCryptor(pWriteBuffer, nNumberOfBytesToWrite);
     }
@@ -2207,7 +2207,7 @@ int  CFileLibrary::UnpackData(char * _pDst, int _uDstSize, char * _pSrc, int _uS
   bSucceeded = j__LZHLDecompress(pDecompressor, _pDst, &_uDstSize, _pSrc, &_uSrcSize);
   exceptionBlock = -1;
   j__LZHLDestroyDecompressor(pDecompressor);
-  if ( bSucceeded )
+  if ( bSucceeded != 0 )
   {
     return _uDstSize;
   }
@@ -2224,29 +2224,29 @@ void  CFileLibrary::pFreeFLCreationData(void) {
   FLDirListStruct *m_pDirList; // [esp+14h] [ebp-20h]
   FLPathListStruct *m_pPathList; // [esp+20h] [ebp-14h]
 
-  while ( this->m_pPathList )
+  while ( this->m_pPathList != 0 )
   {
     m_pPathList = this->m_pPathList;
     this->m_pPathList = (FLPathListStruct *)m_pPathList->field_10;
-    if ( m_pPathList )
+    if ( m_pPathList != 0 )
     {
       delete m_pPathList;
     }
   }
-  while ( this->m_pDirList )
+  while ( this->m_pDirList != 0 )
   {
     m_pDirList = this->m_pDirList;
     this->m_pDirList = m_pDirList->m_pNext;
-    if ( m_pDirList )
+    if ( m_pDirList != 0 )
     {
       delete m_pDirList;
     }
   }
-  while ( this->m_FileList )
+  while ( this->m_FileList != 0 )
   {
     m_FileList = this->m_FileList;
     this->m_FileList = m_FileList->m_pNext;
-    if ( m_FileList )
+    if ( m_FileList != 0 )
     {
       delete m_FileList;
     }
@@ -2274,12 +2274,12 @@ void  CFileLibrary::pFreeFLData(void) {
         i < this->m_iLibraryFilesCount;
         ++i )
   {
-    if ( m_pLibraryFiles->m_swpFileName )
+    if ( m_pLibraryFiles->m_swpFileName != 0 )
     {
       operator delete(m_pLibraryFiles->m_swpFileName);
     }
     m_pLibraryFiles->m_swpFileName = 0;
-    if ( m_pLibraryFiles->m_hFile )
+    if ( m_pLibraryFiles->m_hFile != 0 )
     {
       hObject = m_pLibraryFiles->m_hFile;
       if ( hObject != (HANDLE)-1 )
@@ -2290,7 +2290,7 @@ void  CFileLibrary::pFreeFLData(void) {
     }
     ++m_pLibraryFiles;
   }
-  if ( this->m_pLibraryFiles )
+  if ( this->m_pLibraryFiles != 0 )
   {
     operator delete[](this->m_pLibraryFiles);
   }
@@ -2302,7 +2302,7 @@ void  CFileLibrary::pFreeFLData(void) {
         j < this->m_iDirectoryCount;
         ++j )
   {
-    if ( m_pDirectories->m_swpDirectoryName )
+    if ( m_pDirectories->m_swpDirectoryName != 0 )
     {
       operator delete[]((void *)m_pDirectories->m_swpDirectoryName);
     }
@@ -2311,24 +2311,24 @@ void  CFileLibrary::pFreeFLData(void) {
           k < m_pDirectories->m_iFileCount;
           ++k )
     {
-      if ( m_pFiles->m_pswName )
+      if ( m_pFiles->m_pswName != 0 )
       {
         operator delete[]((void *)m_pFiles->m_pswName);
       }
-      if ( m_pFiles->m_pFileData )
+      if ( m_pFiles->m_pFileData != 0 )
       {
         operator delete[](m_pFiles->m_pFileData);
         m_pFiles->m_pFileData = 0;
       }
       ++m_pFiles;
     }
-    if ( m_pDirectories->m_pFiles )
+    if ( m_pDirectories->m_pFiles != 0 )
     {
       operator delete[](m_pDirectories->m_pFiles);
     }
     ++m_pDirectories;
   }
-  if ( this->m_pDirectories )
+  if ( this->m_pDirectories != 0 )
   {
     operator delete[](this->m_pDirectories);
   }
@@ -2336,7 +2336,7 @@ void  CFileLibrary::pFreeFLData(void) {
   this->m_iDirectoryCount = 0;
   this->field_30 = 0;
   for ( m = this->m_pFLFHandleStart;
-        m;
+        m != 0;
         m = m->m_pNext )
   {
     m->m_uId = -1;
@@ -2346,7 +2346,7 @@ void  CFileLibrary::pFreeFLData(void) {
         ++n )
   {
     for ( o = this->m_pFLIntHandle[n];
-          o;
+          o != 0;
           delete o
     {
       o = o->m_pNextHandle;
@@ -2369,13 +2369,13 @@ void  CFileLibrary::pOptimize(void) {
   struct FLMemDirStruct *v7; // [esp+3Ch] [ebp-18h]
   struct FLMemDirStruct *m_pDirectories; // [esp+40h] [ebp-14h]
 
-  if ( this->m_pDirectories )
+  if ( this->m_pDirectories != 0 )
   {
     if ( this->m_iDirectoryCount != this->field_30 )
     {
       m_iDirectoryCount = this->m_iDirectoryCount;
       v7 = (struct FLMemDirStruct *)operator new[](16 * m_iDirectoryCount);
-      if ( v7 )
+      if ( v7 != 0 )
       {
         _vec_ctor_no(v7, 0x10u, m_iDirectoryCount, (void *(__thiscall *)(void *))FLMemDirStruct::FLMemDirStruct);
         v3 = v7;
@@ -2396,13 +2396,13 @@ void  CFileLibrary::pOptimize(void) {
           i < this->m_iDirectoryCount;
           ++i )
     {
-      if ( m_pDirectories->m_pFiles )
+      if ( m_pDirectories->m_pFiles != 0 )
       {
         if ( m_pDirectories->m_iReadFileCount != m_pDirectories->m_iFileCount )
         {
           m_iFileCount = m_pDirectories->m_iFileCount;
           pMemFiles = (FLMemFileStruct *)operator new[](32 * m_iFileCount);
-          if ( pMemFiles )
+          if ( pMemFiles != 0 )
           {
             _vec_ctor_no(pMemFiles, 0x20u, m_iFileCount, (void *(__thiscall *)(void *))FLMemFileStruct::FLMemFileStruct);
           }
@@ -2415,7 +2415,7 @@ void  CFileLibrary::pOptimize(void) {
           m_pDirectories->m_pFiles = pMemFiles;
           m_pDirectories->m_iReadFileCount = m_pDirectories->m_iFileCount;
         }
-        qsort(m_pDirectories->m_pFiles, m_pDirectories->m_iFileCount, 0x20u, CFileLibrary::sFileCompare_qsort);
+        qsort(m_pDirectories->m_pFiles, m_pDirectories->m_iFileCount, 0x20u, (_CoreCrtNonSecureSearchSortCompareFunction)CFileLibrary::sFileCompare_qsort);
         m_pDirectories->m_uFlags |= FLFF_Compressed;
       }
       ++m_pDirectories;
@@ -2438,7 +2438,7 @@ int  CFileLibrary::LoadEntireFile(unsigned int a2, void * _pData, unsigned int _
   ++this->m_iRefCount;
   ++this->m_iFileInteractions;
   IntHandlePtr = CFileLibrary::pGetIntHandlePtr(this, a2);
-  if ( IntHandlePtr )
+  if ( IntHandlePtr != 0 )
   {
     hFile = CFileLibrary::pGetFileLibraryHandle(this, IntHandlePtr->m_pLibraryFile->m_iLibraryIndex);
     if ( hFile == (HANDLE)-1 )
@@ -2475,7 +2475,7 @@ int  CFileLibrary::LoadEntireFile(unsigned int a2, void * _pData, unsigned int _
               v8 = CFileLibrary::UnpackData(this, _pData, IntHandlePtr->m_pLibraryFile->m_iDecompressedSize, (char *)compressedData, NumberOfBytesRead, 0);
             }
             operator delete[](compressedData);
-            if ( v8 )
+            if ( v8 != 0 )
             {
               this->m_iDecompressedBytesRead += v8;
               return v8;
@@ -2526,14 +2526,14 @@ void __cdecl CFileLibrary::DataCryptor(void * _pData, int _iDataSize) {
   
   int i; // [esp+8h] [ebp-7Ch]
   _DWORD v3[19]; // [esp+Ch] [ebp-78h] BYREF
-  _BYTE v4[28]; // [esp+58h] [ebp-2Ch] BYREF
+  struct std::string v4; // [esp+58h] [ebp-2Ch] BYREF
   int exceptionBlock; // [esp+80h] [ebp-4h]
 
   Cryptor::Cryptor((Cryptor *)v3);
   exceptionBlock = 0;
-  std::string::string((struct std::string *)v4, "01234567890123456789");
+  std::string::string(&v4, "01234567890123456789");
   LOBYTE(exceptionBlock) = 1;
-  Cryptor::Set_Key(v3, (int)v4);
+  Cryptor::Set_Key(v3, (int)&v4);
   for ( i = 0;
         i < _iDataSize;
         ++i )
@@ -2541,7 +2541,7 @@ void __cdecl CFileLibrary::DataCryptor(void * _pData, int _iDataSize) {
     Cryptor::Transform_Char((Cryptor *)v3, (unsigned __int8 *)&_pData[i]);
   }
   LOBYTE(exceptionBlock) = 0;
-  std::string::~string(v4);
+  std::string::~string(&v4);
   exceptionBlock = -1;
   Cryptor::~Cryptor((Cryptor *)v3);
 }

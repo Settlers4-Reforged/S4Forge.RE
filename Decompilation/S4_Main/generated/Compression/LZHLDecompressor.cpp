@@ -20,7 +20,7 @@
  LZHLDecompressor::~LZHLDecompressor(void) {
   
   LZHLDecoderStat::~LZHLDecoderStat(this + 2);
-  LZBuffer::~LZBuffer((LZBuffer *)this);
+  LZBuffer::~LZBuffer(this);
 }
 
 
@@ -58,7 +58,7 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
   v6 = a4;
   v22 = *a5 + a4;
   v9 = &Src[*a3];
-  this[37] = 0;
+  *(this + 37) = 0;
   while ( 1 )
   {
     while ( 1 )
@@ -70,8 +70,8 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
         {
           return 0;
         }
-        v23 = this[2 * v16 + 3];
-        if ( v23 )
+        v23 = *(this + 2 * v16 + 3);
+        if ( v23 != 0 )
         {
           if ( v23 > 8 && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 430, "nBits <= 8") == 1 )
           {
@@ -82,22 +82,22 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
           {
             return 0;
           }
-          v14 = v15 + this[2 * v16 + 4];
+          v14 = v15 + *(this + 2 * v16 + 4);
           if ( v14 >= 274 )
           {
             return 0;
           }
-          v27 = *(__int16 *)(this[35] + 2 * v14);
+          v27 = *(__int16 *)(*(this + 35) + 2 * v14);
         }
         else
         {
-          v27 = *(__int16 *)(this[35] + 2 * this[2 * v16 + 4]);
+          v27 = *(__int16 *)(*(this + 35) + 2 * *(this + 2 * v16 + 4));
         }
         if ( v27 >= 274 && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 440, "symbol < NHUFFSYMBOLS") == 1 )
         {
           __debugbreak();
         }
-        ++*(_WORD *)(this[2] + 2 * v27);
+        ++*(_WORD *)(*(this + 2) + 2 * v27);
         if ( v27 >= 256 )
         {
           break;
@@ -118,7 +118,7 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
             i < 274;
             ++i )
       {
-        *(_WORD *)(this[35] + 2 * i) = v31[2 * i];
+        *(_WORD *)(*(this + 35) + 2 * i) = v31[2 * i];
       }
       v19 = 0;
       v18 = 0;
@@ -127,13 +127,13 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
             ++j )
       {
         v17 = 0;
-        while ( !LZHLDecompressor::_get(this, &a4, v22, 1) )
+        while ( LZHLDecompressor::_get(this, &a4, v22, 1) == 0 )
         {
           ++v17;
         }
         v19 += v17;
-        this[2 * j + 3] = v19;
-        this[2 * j + 4] = v18;
+        *(this + 2 * j + 3) = v19;
+        *(this + 2 * j + 4) = v18;
         v18 += 1 << v19;
       }
       if ( v18 >= 529 && BBSupportDbgReport(2, "Source\\compression\\huff.cpp", 475, "pos < NHUFFSYMBOLS + 255") == 1 )
@@ -147,12 +147,12 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
     }
     if ( v27 >= 264 )
     {
-      v13 = LZHLDecompressor::_get(this, &a4, v22, aGhijklmnopqrst[2 * v27]);
+      v13 = LZHLDecompressor::_get(this, &a4, v22, *(_DWORD *)&aGhijklmnopqrst[8 * v27]);
       if ( v13 < 0 )
       {
         return 0;
       }
-      v10 = v13 + aGhijklmnopqrst[2 * v27 + 1];
+      v10 = v13 + *(_DWORD *)&aGhijklmnopqrst[8 * v27 + 4];
     }
     else
     {
@@ -193,7 +193,7 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
     {
       return 0;
     }
-    v8 = this[1] - v29;
+    v8 = *(this + 1) - v29;
     if ( v21 >= v29 )
     {
       LZBuffer::_bufCpy(Src, v8, v29);
@@ -211,11 +211,11 @@ int  LZHLDecompressor::decompress(unsigned char * Src, unsigned int * a3, unsign
     LZBuffer::_toBuf(Src, v21);
     Src += v21;
   }
-  if ( a3 )
+  if ( a3 != 0 )
   {
     *a3 -= Src - v7;
   }
-  if ( a5 )
+  if ( a5 != 0 )
   {
     *a5 -= a4 - v6;
   }
@@ -233,19 +233,19 @@ int  LZHLDecompressor::_get(unsigned char const * & a2, unsigned char const * a3
   {
     __debugbreak();
   }
-  if ( this[37] < a4 )
+  if ( *(this + 37) < a4 )
   {
     if ( *a2 >= a3 )
     {
-      this[37] = 0;
+      *(this + 37) = 0;
       return -1;
     }
-    this[36] |= *(unsigned __int8 *)(*a2)++ << (24 - *((_BYTE *)this + 148));
-    this[37] += 8;
+    *(this + 36) |= *(unsigned __int8 *)(*a2)++ << (24 - *((_BYTE *)this + 148));
+    *(this + 37) += 8;
   }
-  v5 = this[36] >> (32 - a4);
-  this[36] <<= a4;
-  this[37] -= a4;
+  v5 = *(this + 36) >> (32 - a4);
+  *(this + 36) <<= a4;
+  *(this + 37) -= a4;
   return v5;
 }
 

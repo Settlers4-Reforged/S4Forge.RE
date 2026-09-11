@@ -7,8 +7,8 @@
 // Decompiled from CAddToolSideBarInfo *__thiscall CAddToolSideBarInfo::CAddToolSideBarInfo(CAddToolSideBarInfo *this)
  CAddToolSideBarInfo::CAddToolSideBarInfo(void) {
   
-  CInfoExchange::CInfoExchange((CInfoExchange *)this);
-  *(_DWORD *)this = &CAddToolSideBarInfo::_vftable_;
+  CInfoExchange::CInfoExchange(this);
+  this->__vftable = (CInfoExchange_vtbl *)&CAddToolSideBarInfo::_vftable_;
   return this;
 }
 

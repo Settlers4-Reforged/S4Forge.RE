@@ -21,22 +21,22 @@
   *((_DWORD *)this + 1) = 0;
   memset(v6, 0, sizeof(v6));
   LOBYTE(v6[6]) = 0;
-  OutputWidth = IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
-  OutputHeight = IGfxEngine::GetOutputHeight((IGfxEngine *)g_pGfxEngine);
+  OutputWidth = IGfxEngine::GetOutputWidth(g_pGfxEngine);
+  OutputHeight = IGfxEngine::GetOutputHeight(g_pGfxEngine);
   v6[0] = OutputWidth;
   v6[1] = OutputHeight;
   v7 = 0;
   v8 = 0;
-  v9 = IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
-  v10 = IGfxEngine::GetOutputHeight((IGfxEngine *)g_pGfxEngine);
+  v9 = IGfxEngine::GetOutputWidth(g_pGfxEngine);
+  v10 = IGfxEngine::GetOutputHeight(g_pGfxEngine);
   v6[2] = v7;
   v6[3] = v8;
   v6[4] = v9;
   v6[5] = v10;
-  *((_DWORD *)this + 2) = IGfxEngine::CreateGuiSurface((IGfxEngine *)g_pGfxEngine, (struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *)v6);
+  *((_DWORD *)this + 2) = IGfxEngine::CreateGuiSurface(g_pGfxEngine, (struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *)v6);
   if ( CSlideshow::HasDisplaySurface(this) )
   {
-    IGfxEngine::SetVisibilityOfGuiSurface((IGfxEngine *)g_pGfxEngine, *((_DWORD *)this + 2), 1);
+    IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, *((_DWORD *)this + 2), 1);
   }
   else
   {
@@ -55,7 +55,7 @@
   result = CSlideshow::HasDisplaySurface(this);
   if ( result )
   {
-    return IGfxEngine::DestroyGuiSurface((IGfxEngine *)g_pGfxEngine, *((_DWORD *)this + 2));
+    return IGfxEngine::DestroyGuiSurface(g_pGfxEngine, *((_DWORD *)this + 2));
   }
   return result;
 }
@@ -95,7 +95,7 @@ bool  CSlideshow::ShowPicture(void) {
   h = 0;
   while ( *((int *)v9 + 1) < 10 )
   {
-    if ( *(_DWORD *)v9 )
+    if ( *(_DWORD *)v9 != 0 )
     {
       sprintf(name, "downsell%d.bmp", *((_DWORD *)v9 + 1));
     }
@@ -104,24 +104,24 @@ bool  CSlideshow::ShowPicture(void) {
       sprintf(name, "upsell%d.bmp", *((_DWORD *)v9 + 1));
     }
     h = LoadImageA(0, name, 0, 0, 0, 0x10u);
-    if ( h )
+    if ( h != 0 )
     {
       break;
     }
     ++*((_DWORD *)v9 + 1);
   }
-  if ( !h )
+  if ( h == 0 )
   {
     return 0;
   }
-  IGfxEngine::GetGuiSurfaceDC((IGfxEngine *)g_pGfxEngine, *((_DWORD *)v9 + 2), &v6);
+  IGfxEngine::GetGuiSurfaceDC(g_pGfxEngine, *((_DWORD *)v9 + 2), &v6);
   hdc = CreateCompatibleDC(0);
   v5 = SelectObject(hdc, h);
-  IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
-  IGfxEngine::GetOutputHeight((IGfxEngine *)g_pGfxEngine);
+  IGfxEngine::GetOutputWidth(g_pGfxEngine);
+  IGfxEngine::GetOutputHeight(g_pGfxEngine);
   v4 = hdc;
-  OutputHeight = IGfxEngine::GetOutputHeight((IGfxEngine *)g_pGfxEngine);
-  OutputWidth = IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
+  OutputHeight = IGfxEngine::GetOutputHeight(g_pGfxEngine);
+  OutputWidth = IGfxEngine::GetOutputWidth(g_pGfxEngine);
   if ( !BitBlt(v6, 0, 0, OutputWidth, OutputHeight, v4, 0, 0, (DWORD)&dword_C20408[163590]) )
   {
     return 0;
@@ -131,7 +131,7 @@ bool  CSlideshow::ShowPicture(void) {
   {
     CTrace::Print("SlideShow.cpp: Could not release compDC!");
   }
-  IGfxEngine::ReleaseGuiSurfaceDC((IGfxEngine *)g_pGfxEngine, *((_DWORD *)v9 + 2), v6);
+  IGfxEngine::ReleaseGuiSurfaceDC(g_pGfxEngine, *((_DWORD *)v9 + 2), v6);
   DeleteObject(h);
   return 1;
 }

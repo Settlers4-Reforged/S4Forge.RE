@@ -44,7 +44,7 @@ int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE a2, unsigned char 
   int v22; // [esp+4Ch] [ebp-4h]
 
   v11 = this;
-  if ( this[4] )
+  if ( *(this + 4) != 0 )
   {
     for ( i = 0;
           i < (int)a5;
@@ -54,7 +54,7 @@ int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE a2, unsigned char 
       v20 = *(_BYTE *)(a3[1] + i);
       v21 = *(_BYTE *)(a3[2] + i);
       v18 = *(_BYTE *)(a3[3] + i);
-      if ( !*v11 )
+      if ( *v11 == 0 )
       {
         v14 = SM_SIV_PaletteBlock::Convert565(v19, v20, v21, 0.5);
         v15 = SM_SIV_PaletteBlock::Convert565(v19, v20, v21, 1.0);
@@ -83,7 +83,7 @@ int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE a2, unsigned char 
       v20 = *(_BYTE *)(a3[1] + i);
       v21 = *(_BYTE *)(a3[2] + i);
       v18 = *(_BYTE *)(a3[3] + i);
-      if ( !*v11 )
+      if ( *v11 == 0 )
       {
         v14 = SM_SIV_PaletteBlock::Convert565(v19, v20, v21, 0.44999999);
         v15 = SM_SIV_PaletteBlock::Convert565(v19, v20, v21, 0.69999999);
@@ -127,15 +127,15 @@ int  SM_SIV_PaletteBlock::FillPalette(enum SM_SIV_PALETTETYPE a2, unsigned char 
         break;
       }
       v6 = *(unsigned __int16 *)((char *)&v11[128 * a2 + 1] + 2 * i + 2 * a4 + 1);
-      if ( v6 == *(unsigned __int16 *)std::vector<unsigned short>::operator[](v8, j) )
+      if ( v6 == *std::vector<unsigned short>::operator[](v8, j) )
       {
         v17 = 1;
         break;
       }
     }
-    if ( !v17 )
+    if ( v17 == 0 )
     {
-      std::vector<unsigned short>::push_back((char *)&v11[128 * a2 + 1] + 2 * i + 2 * a4 + 1);
+      ((void (__stdcall *)(char *))std::vector<unsigned short>::push_back)((char *)&v11[128 * a2 + 1] + 2 * i + 2 * a4 + 1);
     }
   }
   v9 = std::vector<unsigned short>::size(v8);
@@ -155,11 +155,11 @@ unsigned int  SM_SIV_PaletteBlock::Save(struct _iobuf * a2, struct _iobuf * Stre
   unsigned int j; // [esp+10h] [ebp-8h]
   unsigned int i; // [esp+14h] [ebp-4h]
 
-  if ( Stream )
+  if ( Stream != 0 )
   {
     j__fwrite(&Buffer, 4u, 1u, Stream);
   }
-  if ( this[4] )
+  if ( *(this + 4) != 0 )
   {
     v9 = 2;
   }
@@ -168,7 +168,7 @@ unsigned int  SM_SIV_PaletteBlock::Save(struct _iobuf * a2, struct _iobuf * Stre
     v9 = 4;
   }
   v8 = 2;
-  if ( a5 && a6 )
+  if ( a5 != 0 && a6 != 0 )
   {
     v8 = 1;
   }
@@ -181,8 +181,8 @@ unsigned int  SM_SIV_PaletteBlock::Save(struct _iobuf * a2, struct _iobuf * Stre
           j < v8;
           ++j )
     {
-      j__fwrite(&this[1024 * i + 5 + 512 * j], 0x200u, 1u, a2);
-      if ( Stream )
+      j__fwrite(this + 1024 * i + 512 * j + 5, 0x200u, 1u, a2);
+      if ( Stream != 0 )
       {
         v10 += 512;
       }

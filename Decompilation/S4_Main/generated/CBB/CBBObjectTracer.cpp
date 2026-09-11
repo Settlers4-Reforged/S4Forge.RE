@@ -7,7 +7,7 @@
 // Decompiled from void CBBObjectTracer::Enter()
 void __cdecl CBBObjectTracer::Enter(void) {
   
-  if ( !CBBObjectTracer::m_uCurrentSerialNumber )
+  if ( CBBObjectTracer::m_uCurrentSerialNumber == 0 )
   {
     CBBObjectTracer::m_uCurrentSerialNumber = 1;
     InitializeCriticalSection(&CBBObjectTracer::m_sCriticalSection);
@@ -88,10 +88,10 @@ void __cdecl CBBObjectTracer::DumpObjects(void) {
   }
   BBSupportTracePrint(0, (char *)&sEmpty7);
   for ( i = CBBObjectTracer::m_pObjectFirst;
-        i;
+        i != 0;
         i = i->m_pFirst )
   {
-    if ( i->m_spType )
+    if ( i->m_spType != 0 )
     {
       m_spType = i->m_spType;
     }

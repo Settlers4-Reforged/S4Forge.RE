@@ -10,7 +10,7 @@ class IConfigManager * __cdecl IConfigManager::CreateConfigManger(void) {
   CConfigManager *C; // [esp+Ch] [ebp-10h]
 
   C = (CConfigManager *)operator new(0x1Cu, 1, "Source\\ConfigManager\\ConfigManager.cpp", 1407);
-  if ( C )
+  if ( C != 0 )
   {
     return CConfigManager::CConfigManager(C);
   }

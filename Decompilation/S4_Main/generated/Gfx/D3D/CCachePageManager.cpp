@@ -76,7 +76,7 @@ bool  CCachePageManager::IsVideoSurfaceLocked(void) {
   CCachePageManager *result; // eax
 
   result = this;
-  if ( !*((_BYTE *)this + 2072) )
+  if ( this->byte818 == 0 )
   {
     return (CCachePageManager *)CCachePageManager::UnlockSourceSurface(this);
   }
@@ -165,80 +165,78 @@ long  CCachePageManager::EraseExtensionAreas(int a2, int a3, int a4, int a5, int
   }
   else
   {
-    BlitStructPtr = CBlitFX::GetBlitStructPtr((CBlitFX *)&s_cBlitFxAlpha);
+    BlitStructPtr = CBlitFX::GetBlitStructPtr(&s_cBlitFxAlpha);
   }
-  if ( a2 >= *((_DWORD *)this + 511) )
+  if ( a2 < this->dword7FC )
   {
-    return v9;
-  }
-  if ( a5 )
-  {
-    v12 = *((unsigned __int16 *)this + 4 * a2 + 15);
-    v14 = *((unsigned __int16 *)this + 4 * a2 + 17);
-    v11 = *((unsigned __int16 *)this + 4 * a2 + 14);
-    v13 = a5 + v11;
-    do
+    if ( a5 != 0 )
     {
+      v12 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 2];
+      v14 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 6];
+      v11 = *(unsigned __int16 *)&this->gap1C[8 * a2];
+      v13 = a5 + v11;
       do
       {
-        v9 = (*(int (__stdcall **)(_DWORD, int *, _DWORD, _DWORD, int, CBlitFX *))(**(_DWORD **)this + 20))(*(_DWORD *)this, &v11, 0, 0, 1536, BlitStructPtr);
+        do
+        {
+          v9 = this->m_pSurfaceB->lpVtbl->Blt(this->m_pSurfaceB, (LPRECT)&v11, 0, 0, 1536, (LPDDBLTFX)BlitStructPtr);
+        }
+        while ( v9 == -2005532132 );
       }
-      while ( v9 == -2005532132 );
+      while ( v9 == -2005532242 );
     }
-    while ( v9 == -2005532242 );
-  }
-  if ( a6 && !v9 )
-  {
-    v12 = *((unsigned __int16 *)this + 4 * a2 + 15);
-    v14 = *((unsigned __int16 *)this + 4 * a2 + 17);
-    v11 = *((unsigned __int16 *)this + 4 * a2 + 14);
-    v13 = *((unsigned __int16 *)this + 4 * a2 + 16);
-    v11 = v13 - a6;
-    do
+    if ( a6 != 0 && v9 == 0 )
     {
+      v12 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 2];
+      v14 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 6];
+      v11 = *(unsigned __int16 *)&this->gap1C[8 * a2];
+      v13 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 4];
+      v11 = v13 - a6;
       do
       {
-        v9 = (*(int (__stdcall **)(_DWORD, int *, _DWORD, _DWORD, int, CBlitFX *))(**(_DWORD **)this + 20))(*(_DWORD *)this, &v11, 0, 0, 1536, BlitStructPtr);
+        do
+        {
+          v9 = this->m_pSurfaceB->lpVtbl->Blt(this->m_pSurfaceB, (LPRECT)&v11, 0, 0, 1536, (LPDDBLTFX)BlitStructPtr);
+        }
+        while ( v9 == -2005532132 );
       }
-      while ( v9 == -2005532132 );
+      while ( v9 == -2005532242 );
     }
-    while ( v9 == -2005532242 );
-  }
-  if ( a3 && !v9 )
-  {
-    v12 = *((unsigned __int16 *)this + 4 * a2 + 15);
-    v14 = *((unsigned __int16 *)this + 4 * a2 + 17);
-    v11 = *((unsigned __int16 *)this + 4 * a2 + 14);
-    v13 = *((unsigned __int16 *)this + 4 * a2 + 16);
-    v14 = a3 + v12;
-    do
+    if ( a3 != 0 && v9 == 0 )
     {
+      v12 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 2];
+      v14 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 6];
+      v11 = *(unsigned __int16 *)&this->gap1C[8 * a2];
+      v13 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 4];
+      v14 = a3 + v12;
       do
       {
-        v9 = (*(int (__stdcall **)(_DWORD, int *, _DWORD, _DWORD, int, CBlitFX *))(**(_DWORD **)this + 20))(*(_DWORD *)this, &v11, 0, 0, 1536, BlitStructPtr);
+        do
+        {
+          v9 = this->m_pSurfaceB->lpVtbl->Blt(this->m_pSurfaceB, (LPRECT)&v11, 0, 0, 1536, (LPDDBLTFX)BlitStructPtr);
+        }
+        while ( v9 == -2005532132 );
       }
-      while ( v9 == -2005532132 );
+      while ( v9 == -2005532242 );
     }
-    while ( v9 == -2005532242 );
-  }
-  if ( !a4 || v9 )
-  {
-    return v9;
-  }
-  v12 = *((unsigned __int16 *)this + 4 * a2 + 15);
-  v14 = *((unsigned __int16 *)this + 4 * a2 + 17);
-  v11 = *((unsigned __int16 *)this + 4 * a2 + 14);
-  v13 = *((unsigned __int16 *)this + 4 * a2 + 16);
-  v12 = v14 - a4;
-  do
-  {
-    do
+    if ( a4 != 0 && v9 == 0 )
     {
-      v9 = (*(int (__stdcall **)(_DWORD, int *, _DWORD, _DWORD, int, CBlitFX *))(**(_DWORD **)this + 20))(*(_DWORD *)this, &v11, 0, 0, 1536, BlitStructPtr);
+      v12 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 2];
+      v14 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 6];
+      v11 = *(unsigned __int16 *)&this->gap1C[8 * a2];
+      v13 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 4];
+      v12 = v14 - a4;
+      do
+      {
+        do
+        {
+          v9 = this->m_pSurfaceB->lpVtbl->Blt(this->m_pSurfaceB, (LPRECT)&v11, 0, 0, 1536, (LPDDBLTFX)BlitStructPtr);
+        }
+        while ( v9 == -2005532132 );
+      }
+      while ( v9 == -2005532242 );
     }
-    while ( v9 == -2005532132 );
   }
-  while ( v9 == -2005532242 );
   return v9;
 }
 
@@ -249,18 +247,18 @@ bool  CCachePageManager::UploadData(long & a2) {
   
   if ( CCachePageManager::IsData(this) )
   {
-    if ( *((_BYTE *)this + 2072) && (*a2 = CCachePageManager::UnlockSourceSurface(this)) != 0 )
+    if ( this->byte818 != 0 && (*a2 = CCachePageManager::UnlockSourceSurface(this), *a2 != 0) )
     {
       return 0;
     }
     else
     {
-      *((_DWORD *)this + 516) = *((_DWORD *)this + 5);
-      *((_DWORD *)this + 517) = *((_DWORD *)this + 6);
-      *a2 = (*(int (__stdcall **)(_DWORD, _DWORD, char *, _DWORD, char *, _DWORD))(**((_DWORD **)this + 2) + 172))(*((_DWORD *)this + 2), *((_DWORD *)this + 1), (char *)this + 2048, *(_DWORD *)this, (char *)this + 2056, 0);
+      this->dword810 = this->dword14;
+      this->dword814 = this->dword18;
+      *a2 = this->m_pDevice->Load(this->m_pDevice, this->m_pSurfaceA, (LPPOINT)&this->dword800, this->m_pSurfaceB, (LPRECT)&this->dword808, 0);
       if ( *a2 == -2005532222 )
       {
-        (*(void (__stdcall **)(_DWORD))(**((_DWORD **)this + 1) + 108))(*((_DWORD *)this + 1));
+        this->m_pSurfaceA->lpVtbl->Restore(this->m_pSurfaceA);
         CCachePageManager::ReleaseData(this);
         return 0;
       }
@@ -279,7 +277,7 @@ bool  CCachePageManager::UploadData(long & a2) {
 
 
 // address=[0x2f87ea0]
-// Decompiled from char __thiscall CCachePageManager::UploadDataAndRender(int this, _DWORD *a2)
+// Decompiled from char __thiscall CCachePageManager::UploadDataAndRender(CCachePageManager *this, int *a2)
 bool  CCachePageManager::UploadDataAndRender(long & a2) {
   
   int v3; // [esp+0h] [ebp-2Ch]
@@ -293,47 +291,47 @@ bool  CCachePageManager::UploadDataAndRender(long & a2) {
   int i; // [esp+20h] [ebp-Ch]
   int v13; // [esp+28h] [ebp-4h]
 
-  if ( CCachePageManager::IsData((CCachePageManager *)this) )
+  if ( CCachePageManager::IsData(this) )
   {
-    *a2 = (*(int (__stdcall **)(_DWORD, _DWORD, _DWORD))(**(_DWORD **)(this + 8) + 140))(*(_DWORD *)(this + 8), 0, *(_DWORD *)(this + 4));
-    if ( *a2 )
+    *a2 = this->m_pDevice->SetTexture(this->m_pDevice, 0, this->m_pSurfaceA);
+    if ( *a2 != 0 )
     {
       return 0;
     }
-    else if ( *(_BYTE *)(this + 2072) && (*a2 = CCachePageManager::UnlockSourceSurface((CCachePageManager *)this)) != 0 )
+    else if ( this->byte818 != 0 && (*a2 = CCachePageManager::UnlockSourceSurface(this), *a2 != 0) )
     {
       return 0;
     }
     else
     {
-      *(_DWORD *)(this + 2064) = *(_DWORD *)(this + 20);
-      *(_DWORD *)(this + 2068) = *(_DWORD *)(this + 24);
-      *a2 = (*(int (__stdcall **)(_DWORD, _DWORD, int, _DWORD, int, _DWORD))(**(_DWORD **)(this + 8) + 172))(*(_DWORD *)(this + 8), *(_DWORD *)(this + 4), this + 2048, *(_DWORD *)this, this + 2056, 0);
+      this->dword810 = this->dword14;
+      this->dword814 = this->dword18;
+      *a2 = this->m_pDevice->Load(this->m_pDevice, this->m_pSurfaceA, (LPPOINT)&this->dword800, this->m_pSurfaceB, (LPRECT)&this->dword808, 0);
       if ( *a2 == -2005532222 )
       {
-        (*(void (__stdcall **)(_DWORD))(**(_DWORD **)(this + 4) + 108))(*(_DWORD *)(this + 4));
-        CCachePageManager::ReleaseData((CCachePageManager *)this);
+        this->m_pSurfaceA->lpVtbl->Restore(this->m_pSurfaceA);
+        CCachePageManager::ReleaseData(this);
         return 0;
       }
-      else if ( *a2 )
+      else if ( *a2 != 0 )
       {
         return 0;
       }
       else
       {
         for ( i = 0;
-              i < *(_DWORD *)(this + 2044);
+              i < this->dword7FC;
               ++i )
         {
           v13 = 6 * i;
-          v8 = *(unsigned __int16 *)(this + 8 * i + 28) + 1;
-          v7 = *(unsigned __int16 *)(this + 8 * i + 30) + 1;
-          v6 = *(unsigned __int16 *)(this + 8 * i + 32) - v8 - 1;
-          v5 = *(unsigned __int16 *)(this + 8 * i + 34) - v7 - 1;
-          v4 = (int)(float)((float)v6 * *(float *)&CCachePageManager::sm_fZoomFactor) >> *(_BYTE *)(i + this + 1948);
-          v3 = (int)(float)((float)v5 * *(float *)&CCachePageManager::sm_fZoomFactor) >> *(_BYTE *)(i + this + 1948);
-          *(float *)&v10 = (float)s_iObjectOffsetX + (float)(*(float *)(this + 8 * i + 796) + *(float *)&CCachePageManager::sm_fZoomFactor);
-          *(float *)&v9 = (float)s_iObjectOffsetY + (float)(*(float *)(this + 8 * i + 800) + *(float *)&CCachePageManager::sm_fZoomFactor);
+          v8 = *(unsigned __int16 *)&this->gap1C[8 * i] + 1;
+          v7 = *(unsigned __int16 *)&this->gap1C[8 * i + 2] + 1;
+          v6 = *(unsigned __int16 *)&this->gap1C[8 * i + 4] - v8 - 1;
+          v5 = *(unsigned __int16 *)&this->gap1C[8 * i + 6] - v7 - 1;
+          v4 = (int)(float)((float)v6 * CCachePageManager::sm_fZoomFactor) >> this->gap1C[i + 1920];
+          v3 = (int)(float)((float)v5 * CCachePageManager::sm_fZoomFactor) >> this->gap1C[i + 1920];
+          *(float *)&v10 = (float)s_iObjectOffsetX + (float)(*(float *)&this->gap1C[8 * i + 768] + CCachePageManager::sm_fZoomFactor);
+          *(float *)&v9 = (float)s_iObjectOffsetY + (float)(*(float *)&this->gap1C[8 * i + 772] + CCachePageManager::sm_fZoomFactor);
           CCachePageManager::sm_sVertexList[48 * i] = v10;
           dword_46C1F14[8 * v13] = v9;
           dword_46C1F28[8 * v13] = LODWORD(CCachePageManager::sm_fTextureCoordTable[v8]);
@@ -358,21 +356,21 @@ bool  CCachePageManager::UploadDataAndRender(long & a2) {
           *(float *)&dword_46C1F14[8 * v13 + 40] = (float)v3 + *(float *)&v9;
           dword_46C1F28[8 * v13 + 40] = LODWORD(CCachePageManager::sm_fTextureCoordTable[v6 + v8]);
           dword_46C1F2C[8 * v13 + 40] = CCachePageManager::sm_fTextureCoordTable[v5 + v7];
-          dword_46C1F20[8 * v13 + 40] = *(_DWORD *)(this + 4 * i + 1564);
+          dword_46C1F20[8 * v13 + 40] = *(_DWORD *)&this->gap1C[4 * i + 1536];
           dword_46C1F20[8 * v13 + 32] = dword_46C1F20[8 * v13 + 40];
           dword_46C1F20[8 * v13 + 24] = dword_46C1F20[8 * v13 + 32];
           dword_46C1F20[8 * v13 + 16] = dword_46C1F20[8 * v13 + 24];
           dword_46C1F20[8 * v13 + 8] = dword_46C1F20[8 * v13 + 16];
           dword_46C1F20[8 * v13] = dword_46C1F20[48 * i + 8];
         }
-        *a2 = (*(int (__stdcall **)(_DWORD, int, int, int *, int, _DWORD))(**(_DWORD **)(this + 8) + 100))(*(_DWORD *)(this + 8), 4, 452, CCachePageManager::sm_sVertexList, 6 * *(_DWORD *)(this + 2044), 0);
-        if ( *a2 )
+        *a2 = this->m_pDevice->DrawPrimitive(this->m_pDevice, D3DPT_TRIANGLELIST, 452, CCachePageManager::sm_sVertexList, 6 * this->dword7FC, 0);
+        if ( *a2 != 0 )
         {
           return 0;
         }
         else
         {
-          CCachePageManager::ReleaseData((CCachePageManager *)this);
+          CCachePageManager::ReleaseData(this);
           return 1;
         }
       }
@@ -393,60 +391,58 @@ bool  CCachePageManager::ShowPageContent(long & a2) {
   CBlitFX *BlitStructPtr; // eax
   int v4; // [esp+0h] [ebp-28h]
 
-  *a2 = (*(int (__stdcall **)(_DWORD, _DWORD, _DWORD))(**((_DWORD **)this + 2) + 140))(*((_DWORD *)this + 2), 0, *((_DWORD *)this + 1));
-  if ( *a2 )
+  *a2 = this->m_pDevice->SetTexture(this->m_pDevice, 0, this->m_pSurfaceA);
+  if ( *a2 != 0 )
   {
     return 0;
   }
-  if ( *((_BYTE *)this + 2072) )
+  if ( this->byte818 != 0 )
   {
     *a2 = CCachePageManager::UnlockSourceSurface(this);
-    if ( *a2 )
+    if ( *a2 != 0 )
     {
       return 0;
     }
   }
-  *((_DWORD *)this + 516) = 511;
-  *((_DWORD *)this + 517) = 511;
-  if ( !*(_DWORD *)this )
+  this->dword810 = 511;
+  this->dword814 = 511;
+  if ( this->m_pSurfaceB != 0 )
   {
-    goto LABEL_11;
+    *a2 = this->m_pDevice->Load(this->m_pDevice, this->m_pSurfaceA, (LPPOINT)&this->dword800, this->m_pSurfaceB, (LPRECT)&this->dword808, 0);
+    if ( *a2 == -2005532222 )
+    {
+      this->m_pSurfaceA->lpVtbl->Restore(this->m_pSurfaceA);
+      CCachePageManager::ReleaseData(this);
+      return 0;
+    }
+    if ( *a2 != 0 )
+    {
+      return 0;
+    }
   }
-  *a2 = (*(int (__stdcall **)(_DWORD, _DWORD, char *, _DWORD, char *, _DWORD))(**((_DWORD **)this + 2) + 172))(*((_DWORD *)this + 2), *((_DWORD *)this + 1), (char *)this + 2048, *(_DWORD *)this, (char *)this + 2056, 0);
-  if ( *a2 == -2005532222 )
-  {
-    (*(void (__stdcall **)(_DWORD))(**((_DWORD **)this + 1) + 108))(*((_DWORD *)this + 1));
-    CCachePageManager::ReleaseData(this);
-    return 0;
-  }
-  if ( *a2 )
-  {
-    return 0;
-  }
-LABEL_11:
-  *(float *)&CCachePageManager::sm_sVertexList = (float)300;
-  *(float *)&dword_46C1F14 = (float)100;
-  dword_46C1F28 = LODWORD(CCachePageManager::sm_fTextureCoordTable[0]);
+  *(float *)CCachePageManager::sm_sVertexList = (float)300;
+  *(float *)dword_46C1F14 = (float)100;
+  *(float *)dword_46C1F28 = CCachePageManager::sm_fTextureCoordTable[0];
   dword_46C1F2C[0] = CCachePageManager::sm_fTextureCoordTable[0];
-  *((float *)&CCachePageManager::sm_sVertexList + 8) = (float)812;
-  *((float *)&dword_46C1F14 + 8) = (float)612;
-  *(&dword_46C1F28 + 8) = LODWORD(CCachePageManager::sm_fTextureCoordTable[511]);
+  *(float *)&CCachePageManager::sm_sVertexList[8] = (float)812;
+  *(float *)&dword_46C1F14[8] = (float)612;
+  dword_46C1F28[8] = LODWORD(CCachePageManager::sm_fTextureCoordTable[511]);
   dword_46C1F2C[8] = CCachePageManager::sm_fTextureCoordTable[511];
-  *((float *)&CCachePageManager::sm_sVertexList + 16) = (float)300;
-  *((float *)&dword_46C1F14 + 16) = (float)612;
-  *(&dword_46C1F28 + 16) = LODWORD(CCachePageManager::sm_fTextureCoordTable[0]);
+  *(float *)&CCachePageManager::sm_sVertexList[16] = (float)300;
+  *(float *)&dword_46C1F14[16] = (float)612;
+  dword_46C1F28[16] = LODWORD(CCachePageManager::sm_fTextureCoordTable[0]);
   dword_46C1F2C[16] = CCachePageManager::sm_fTextureCoordTable[511];
-  *((float *)&CCachePageManager::sm_sVertexList + 24) = (float)300;
-  *((float *)&dword_46C1F14 + 24) = (float)100;
-  *(&dword_46C1F28 + 24) = LODWORD(CCachePageManager::sm_fTextureCoordTable[0]);
+  *(float *)&CCachePageManager::sm_sVertexList[24] = (float)300;
+  *(float *)&dword_46C1F14[24] = (float)100;
+  dword_46C1F28[24] = LODWORD(CCachePageManager::sm_fTextureCoordTable[0]);
   dword_46C1F2C[24] = CCachePageManager::sm_fTextureCoordTable[0];
-  *((float *)&CCachePageManager::sm_sVertexList + 32) = (float)812;
-  *((float *)&dword_46C1F14 + 32) = (float)100;
-  *(&dword_46C1F28 + 32) = LODWORD(CCachePageManager::sm_fTextureCoordTable[511]);
+  *(float *)&CCachePageManager::sm_sVertexList[32] = (float)812;
+  *(float *)&dword_46C1F14[32] = (float)100;
+  dword_46C1F28[32] = LODWORD(CCachePageManager::sm_fTextureCoordTable[511]);
   dword_46C1F2C[32] = CCachePageManager::sm_fTextureCoordTable[0];
-  *((float *)&CCachePageManager::sm_sVertexList + 40) = (float)812;
-  *((float *)&dword_46C1F14 + 40) = (float)612;
-  *(&dword_46C1F28 + 40) = LODWORD(CCachePageManager::sm_fTextureCoordTable[511]);
+  *(float *)&CCachePageManager::sm_sVertexList[40] = (float)812;
+  *(float *)&dword_46C1F14[40] = (float)612;
+  dword_46C1F28[40] = LODWORD(CCachePageManager::sm_fTextureCoordTable[511]);
   dword_46C1F2C[40] = CCachePageManager::sm_fTextureCoordTable[511];
   dword_46C1F20[40] = (int)&dword_F29144[220078] + 3;
   dword_46C1F20[32] = (int)&dword_F29144[220078] + 3;
@@ -454,15 +450,15 @@ LABEL_11:
   dword_46C1F20[16] = (int)&dword_F29144[220078] + 3;
   dword_46C1F20[8] = (int)&dword_F29144[220078] + 3;
   dword_46C1F20[0] = (int)&dword_F29144[220078] + 3;
-  *a2 = (*(int (__stdcall **)(_DWORD, int, int, int *, int, _DWORD))(**((_DWORD **)this + 2) + 100))(*((_DWORD *)this + 2), 4, 452, &CCachePageManager::sm_sVertexList, 6, 0);
-  if ( *(_DWORD *)this )
+  *a2 = this->m_pDevice->DrawPrimitive(this->m_pDevice, D3DPT_TRIANGLELIST, 452, CCachePageManager::sm_sVertexList, 6, 0);
+  if ( this->m_pSurfaceB != 0 )
   {
     do
     {
       do
       {
-        BlitStructPtr = CBlitFX::GetBlitStructPtr((CBlitFX *)&s_cBlitFx);
-        v4 = (*(int (__stdcall **)(_DWORD, _DWORD, _DWORD, _DWORD, int, CBlitFX *))(**(_DWORD **)this + 20))(*(_DWORD *)this, 0, 0, 0, 1536, BlitStructPtr);
+        BlitStructPtr = CBlitFX::GetBlitStructPtr(&s_cBlitFx);
+        v4 = this->m_pSurfaceB->lpVtbl->Blt(this->m_pSurfaceB, 0, 0, 0, 1536, (LPDDBLTFX)BlitStructPtr);
       }
       while ( v4 == -2005532132 );
     }
@@ -516,34 +512,34 @@ long  CCachePageManager::RenderCacheObject(int a2, float a3, float a4, int a5, i
   {
     return 0;
   }
-  v16 = (*(int (__stdcall **)(_DWORD, _DWORD, _DWORD))(**((_DWORD **)this + 2) + 140))(*((_DWORD *)this + 2), 0, *((_DWORD *)this + 1));
-  if ( v16 )
+  v16 = this->m_pDevice->SetTexture(this->m_pDevice, 0, this->m_pSurfaceA);
+  if ( v16 != 0 )
   {
     return v16;
   }
-  if ( *((_BYTE *)this + 2073) )
+  if ( this->byte819 != 0 )
   {
     v17 = CCachePageManager::UnlockVideoSurface(this);
-    if ( v17 )
+    if ( v17 != 0 )
     {
       return v17;
     }
   }
-  v24 = *((unsigned __int16 *)this + 4 * a2 + 14) + 1;
-  v25 = *((unsigned __int16 *)this + 4 * a2 + 15) + 1;
-  v18 = *((unsigned __int16 *)this + 4 * a2 + 16) - v24 - 1;
-  v20 = *((unsigned __int16 *)this + 4 * a2 + 17) - v25 - 1;
+  v24 = *(unsigned __int16 *)&this->gap1C[8 * a2] + 1;
+  v25 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 2] + 1;
+  v18 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 4] - v24 - 1;
+  v20 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 6] - v25 - 1;
   if ( a8 )
   {
     v19 = (float)v18 - 1.0;
     v21 = (float)v20 - 1.0;
-    v18 = *((unsigned __int16 *)this + 4 * a2 + 16) - v24 - 2;
-    v20 = *((unsigned __int16 *)this + 4 * a2 + 17) - v25 - 2;
+    v18 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 4] - v24 - 2;
+    v20 = *(unsigned __int16 *)&this->gap1C[8 * a2 + 6] - v25 - 2;
   }
   else
   {
-    v19 = (float)v18 * *(float *)&CCachePageManager::sm_fZoomFactor;
-    v21 = (float)v20 * *(float *)&CCachePageManager::sm_fZoomFactor;
+    v19 = (float)v18 * CCachePageManager::sm_fZoomFactor;
+    v21 = (float)v20 * CCachePageManager::sm_fZoomFactor;
   }
   if ( (a6 & 7) != 0 )
   {
@@ -551,14 +547,14 @@ long  CCachePageManager::RenderCacheObject(int a2, float a3, float a4, int a5, i
     v21 = v21 * 0.5;
   }
   v26 = a4;
-  if ( a7 )
+  if ( a7 != 0 )
   {
     if ( a7 == 255 )
     {
       return 0;
     }
     v15 = a7 * v20 / 256;
-    v12 = (float)v15 * *(float *)&CCachePageManager::sm_fZoomFactor;
+    v12 = (float)v15 * CCachePageManager::sm_fZoomFactor;
     v25 += v15;
     v20 -= v15;
     v26 = a4 + v12;
@@ -609,42 +605,41 @@ long  CCachePageManager::RenderCacheObject(int a2, float a3, float a4, int a5, i
     BBSupportTracePrintF(0, "GFX ENGINE: Vertex 4 : %f, %f, %f, %f", *(float *)&CCachePageManager::sm_sVertexList[32], *(float *)&dword_46C1F14[32], *(float *)&dword_46C1F28[32], dword_46C1F2C[32]);
     BBSupportTracePrintF(0, "GFX ENGINE: Vertex 5 : %f, %f, %f, %f", *(float *)&CCachePageManager::sm_sVertexList[40], *(float *)&dword_46C1F14[40], *(float *)&dword_46C1F28[40], dword_46C1F2C[40]);
   }
-  if ( !a7 )
+  if ( a7 != 0 )
   {
-    return (*(int (__stdcall **)(_DWORD, int, int, int *, int, _DWORD))(**((_DWORD **)this + 2) + 100))(*((_DWORD *)this + 2), 4, 452, CCachePageManager::sm_sVertexList, v10 + 6, 0);
+    v14 = v18 / 12;
+    v28 = 6;
+    v13 = 6;
+    if ( v15 < 6 )
+    {
+      v13 = v15;
+    }
+    v9 = (float)v13 * CCachePageManager::sm_fZoomFactor;
+    v10 = 3 * v14;
+    v11 = 12.0 * CCachePageManager::sm_fZoomFactor;
+    while ( --v14 >= 0 )
+    {
+      CCachePageManager::sm_sVertexList[8 * v28] = v23;
+      dword_46C1F14[8 * v28] = v27;
+      dword_46C1F28[8 * v28] = LODWORD(CCachePageManager::sm_fTextureCoordTable[v24]);
+      dword_46C1F2C[8 * v28] = CCachePageManager::sm_fTextureCoordTable[v25];
+      *(float *)&CCachePageManager::sm_sVertexList[8 * v28 + 8] = (float)(v11 * 0.5) + *(float *)&v23;
+      *(float *)&dword_46C1F14[8 * v28 + 8] = *(float *)&v27 - v9;
+      dword_46C1F28[8 * v28 + 8] = dword_46C16B8[v24];
+      dword_46C1F2C[8 * v28 + 8] = CCachePageManager::sm_fTextureCoordTable[v25 - v13];
+      *(float *)&CCachePageManager::sm_sVertexList[8 * v28 + 16] = *(float *)&v23 + v11;
+      dword_46C1F14[8 * v28 + 16] = v27;
+      dword_46C1F28[8 * v28 + 16] = dword_46C16D0[v24];
+      dword_46C1F2C[8 * v28 + 16] = CCachePageManager::sm_fTextureCoordTable[v25];
+      dword_46C1F20[8 * v28 + 16] = a5;
+      dword_46C1F20[8 * v28 + 8] = a5;
+      dword_46C1F20[8 * v28] = a5;
+      v24 += 12;
+      *(float *)&v23 = (float)(12.0 * CCachePageManager::sm_fZoomFactor) + *(float *)&v23;
+      v28 += 3;
+    }
   }
-  v14 = v18 / 12;
-  v28 = 6;
-  v13 = 6;
-  if ( v15 < 6 )
-  {
-    v13 = v15;
-  }
-  v9 = (float)v13 * *(float *)&CCachePageManager::sm_fZoomFactor;
-  v10 = 3 * v14;
-  v11 = 12.0 * *(float *)&CCachePageManager::sm_fZoomFactor;
-  while ( --v14 >= 0 )
-  {
-    CCachePageManager::sm_sVertexList[8 * v28] = v23;
-    dword_46C1F14[8 * v28] = v27;
-    dword_46C1F28[8 * v28] = LODWORD(CCachePageManager::sm_fTextureCoordTable[v24]);
-    dword_46C1F2C[8 * v28] = CCachePageManager::sm_fTextureCoordTable[v25];
-    *(float *)&CCachePageManager::sm_sVertexList[8 * v28 + 8] = (float)(v11 * 0.5) + *(float *)&v23;
-    *(float *)&dword_46C1F14[8 * v28 + 8] = *(float *)&v27 - v9;
-    dword_46C1F28[8 * v28 + 8] = dword_46C16B8[v24];
-    dword_46C1F2C[8 * v28 + 8] = CCachePageManager::sm_fTextureCoordTable[v25 - v13];
-    *(float *)&CCachePageManager::sm_sVertexList[8 * v28 + 16] = *(float *)&v23 + v11;
-    dword_46C1F14[8 * v28 + 16] = v27;
-    dword_46C1F28[8 * v28 + 16] = dword_46C16D0[v24];
-    dword_46C1F2C[8 * v28 + 16] = CCachePageManager::sm_fTextureCoordTable[v25];
-    dword_46C1F20[8 * v28 + 16] = a5;
-    dword_46C1F20[8 * v28 + 8] = a5;
-    dword_46C1F20[8 * v28] = a5;
-    v24 += 12;
-    *(float *)&v23 = (float)(12.0 * *(float *)&CCachePageManager::sm_fZoomFactor) + *(float *)&v23;
-    v28 += 3;
-  }
-  return (*(int (__stdcall **)(_DWORD, int, int, int *, int, _DWORD))(**((_DWORD **)this + 2) + 100))(*((_DWORD *)this + 2), 4, 452, CCachePageManager::sm_sVertexList, v10 + 6, 0);
+  return this->m_pDevice->DrawPrimitive(this->m_pDevice, D3DPT_TRIANGLELIST, 452, CCachePageManager::sm_sVertexList, v10 + 6, 0);
 }
 
 
@@ -654,24 +649,23 @@ long  CCachePageManager::LockSourceSurface(int & a2, unsigned short * & a3) {
   
   int v4; // [esp+0h] [ebp-8h]
 
-  if ( *((_BYTE *)this + 2072) )
+  if ( this->byte818 != 0 )
   {
-    *a2 = *((_DWORD *)this + 520);
-    *a3 = (unsigned __int16 *)*((_DWORD *)this + 519);
+    *a2 = this->dword820;
+    *a3 = (unsigned __int16 *)this->dword81C;
     return 0;
   }
   else
   {
-    v4 = (*(int (__stdcall **)(_DWORD, _DWORD, DDSURFACEDESC2 *, int, _DWORD))(**(_DWORD **)this + 100))(*(_DWORD *)this, 0, &s_cSurfaceDescription, 33, 0);
-    if ( v4 )
+    v4 = this->m_pSurfaceB->lpVtbl->Lock(this->m_pSurfaceB, 0, &s_cSurfaceDescription, 33, 0);
+    if ( v4 == 0 )
     {
-      return v4;
+      this->dword820 = s_cSurfaceDescription.lPitch;
+      *a2 = s_cSurfaceDescription.lPitch;
+      this->dword81C = s_cSurfaceDescription.lpSurface;
+      *a3 = (unsigned __int16 *)this->dword81C;
+      this->byte818 = 1;
     }
-    *((_DWORD *)this + 520) = s_cSurfaceDescription.lPitch;
-    *a2 = s_cSurfaceDescription.lPitch;
-    *((_DWORD *)this + 519) = s_cSurfaceDescription.lpSurface;
-    *a3 = (unsigned __int16 *)*((_DWORD *)this + 519);
-    *((_BYTE *)this + 2072) = 1;
     return v4;
   }
 }
@@ -683,24 +677,23 @@ long  CCachePageManager::LockVideoSurface(int & a2, unsigned short * & a3) {
   
   int v4; // [esp+0h] [ebp-8h]
 
-  if ( *((_BYTE *)this + 2073) )
+  if ( this->byte819 != 0 )
   {
-    *a2 = *((_DWORD *)this + 520);
-    *a3 = (unsigned __int16 *)*((_DWORD *)this + 519);
+    *a2 = this->dword820;
+    *a3 = (unsigned __int16 *)this->dword81C;
     return 0;
   }
   else
   {
-    v4 = (*(int (__stdcall **)(_DWORD, _DWORD, DDSURFACEDESC2 *, int, _DWORD))(**((_DWORD **)this + 1) + 100))(*((_DWORD *)this + 1), 0, &s_cSurfaceDescription, 33, 0);
-    if ( v4 )
+    v4 = this->m_pSurfaceA->lpVtbl->Lock(this->m_pSurfaceA, 0, &s_cSurfaceDescription, 33, 0);
+    if ( v4 == 0 )
     {
-      return v4;
+      this->dword820 = s_cSurfaceDescription.lPitch;
+      *a2 = s_cSurfaceDescription.lPitch;
+      this->dword81C = s_cSurfaceDescription.lpSurface;
+      *a3 = (unsigned __int16 *)this->dword81C;
+      this->byte819 = 1;
     }
-    *((_DWORD *)this + 520) = s_cSurfaceDescription.lPitch;
-    *a2 = s_cSurfaceDescription.lPitch;
-    *((_DWORD *)this + 519) = s_cSurfaceDescription.lpSurface;
-    *a3 = (unsigned __int16 *)*((_DWORD *)this + 519);
-    *((_BYTE *)this + 2073) = 1;
     return v4;
   }
 }
@@ -712,12 +705,12 @@ long  CCachePageManager::UnlockSourceSurface(void) {
   
   int result; // eax
 
-  if ( !*((_BYTE *)this + 2072) )
+  if ( this->byte818 == 0 )
   {
     return 0;
   }
-  result = (*(int (__stdcall **)(_DWORD, _DWORD))(**(_DWORD **)this + 128))(*(_DWORD *)this, 0);
-  *((_BYTE *)this + 2072) = 0;
+  result = this->m_pSurfaceB->lpVtbl->Unlock(this->m_pSurfaceB, 0);
+  this->byte818 = 0;
   return result;
 }
 
@@ -728,12 +721,12 @@ long  CCachePageManager::UnlockVideoSurface(void) {
   
   int result; // eax
 
-  if ( !*((_BYTE *)this + 2073) )
+  if ( this->byte819 == 0 )
   {
     return 0;
   }
-  result = (*(int (__stdcall **)(_DWORD, _DWORD))(**((_DWORD **)this + 1) + 128))(*((_DWORD *)this + 1), 0);
-  *((_BYTE *)this + 2073) = 0;
+  result = this->m_pSurfaceA->lpVtbl->Unlock(this->m_pSurfaceA, 0);
+  this->byte819 = 0;
   return result;
 }
 

@@ -30,27 +30,27 @@ unsigned int  CAIAgentAttack::Execute(unsigned int a2, unsigned int a3) {
   unsigned int v14; // [esp+24h] [ebp-14h]
   unsigned int v15; // [esp+30h] [ebp-8h]
 
-  v3 = CAINormalSectorAgent::SectorAI(this);
+  v3 = (CAISectorAI *)CAINormalSectorAgent::SectorAI(this);
   v4 = (pairNode *)CAISectorAI::PlayerAI(v3);
   v15 = CAIPlayerAI::PlayerId(v4);
   switch ( this->m_uU1 )
   {
     case 0:
-      CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v15);
-      v12 = CAIPlayerScriptVars::operator[](0);
+      CAIPlayersScriptVars::operator[]((CAIPlayersScriptVars *)g_cAIPlayersScriptVars, v15);
+      v12 = ((int (__stdcall *)(int))CAIPlayerScriptVars::operator[])(0);
       if ( v12 <= 0 )
       {
         return CAIAgent::ExecuteResult(0, 0);
       }
-      CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v15);
-      v10 = CAIPlayerScriptVars::operator[](1);
+      CAIPlayersScriptVars::operator[]((CAIPlayersScriptVars *)g_cAIPlayersScriptVars, v15);
+      v10 = ((int (__stdcall *)(int))CAIPlayerScriptVars::operator[])(1);
       v9 = IAIEnvironment::MinutesToTicks(v10);
       v14 = IAIEnvironment::TickCounter();
       if ( v14 <= this->m_uU4 || v14 <= v9 )
       {
         return CAIAgent::ExecuteResult(0, 0);
       }
-      if ( (unsigned int)IAIEnvironment::Rand() < this->m_uU5 && ((v5 = IAIEnvironment::Rand(), CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v15), v6 = CAIPlayerScriptVars::operator[](2), v5 >= CRandom16::PercentValue(v6)) ? (v13 = 2) : (v13 = 1), (v13 == 1 || v12 > 1) && CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, 0, v13) && CAIAgentAttack::OrderSquadsToSneakUpPosition(this, v13 == 1)) )
+      if ( IAIEnvironment::Rand() < this->m_uU5 && ((v5 = IAIEnvironment::Rand(), CAIPlayersScriptVars::operator[]((CAIPlayersScriptVars *)g_cAIPlayersScriptVars, v15), v6 = ((int (__stdcall *)(int))CAIPlayerScriptVars::operator[])(2), v5 >= CRandom16::PercentValue(v6)) ? (v13 = 2) : (v13 = 1), (v13 == 1 || v12 > 1) && CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, 0, v13) != 0 && CAIAgentAttack::OrderSquadsToSneakUpPosition(this, v13 == 1)) )
       {
         this->m_uU1 = 1;
         return CAIAgent::ExecuteResult(0, 0);
@@ -65,12 +65,12 @@ unsigned int  CAIAgentAttack::Execute(unsigned int a2, unsigned int a3) {
         return CAIAgent::ExecuteResult((v8 & 0x100) + 512, 0);
       }
     case 1:
-      if ( !CAIAgentAttack::CheckCurrentTarget(this, 1) )
+      if ( CAIAgentAttack::CheckCurrentTarget(this, 1) == 0 )
       {
         goto LABEL_23;
       }
       v11 = CAIAgentAttack::CheckIfSneakUpPositionIsReached(this);
-      if ( !v11 )
+      if ( v11 == 0 )
       {
         goto LABEL_23;
       }
@@ -81,15 +81,14 @@ unsigned int  CAIAgentAttack::Execute(unsigned int a2, unsigned int a3) {
       return CAIAgent::ExecuteResult(0, 0);
     case 2:
       CAIAgentAttack::CheckCurrentTarget(this, 1);
-      if ( CAIAgentAttack::CheckSquadTargets(this) > 0 )
+      if ( CAIAgentAttack::CheckSquadTargets(this) <= 0 )
       {
-        return CAIAgent::ExecuteResult(0, 0);
+        CAIAgentAttack::OrderSquadsHome(this, 4);
+        CAIAgentAttack::ResetAttackState(this);
       }
-      CAIAgentAttack::OrderSquadsHome(this, 4);
-      CAIAgentAttack::ResetAttackState(this);
       return CAIAgent::ExecuteResult(0, 0);
     case 3:
-      if ( CAIAgentAttack::CheckCurrentTarget(this, 1) && CAIAgentAttack::OrderSquadsToAttack(this) > 0 )
+      if ( CAIAgentAttack::CheckCurrentTarget(this, 1) != 0 && CAIAgentAttack::OrderSquadsToAttack(this) > 0 )
       {
         this->m_uU1 = 2;
       }
@@ -138,21 +137,21 @@ void  CAIAgentAttack::Load(class IS4Chunk & a2) {
 // Decompiled from int __thiscall CAIAgentAttack::Save(CAIAgentAttack *this, struct IS4Chunk *a2)
 void  CAIAgentAttack::Save(class IS4Chunk & a2) {
   
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516290048);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 20))(a2, 1);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveSignature)(a2, -1516290048);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, 1);
   CAIAgent::Save(this, a2);
-  (*(void (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516290046);
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 10));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 11));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 12));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 13));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 14));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 15));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 16));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 17));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 18));
-  (*(void (__thiscall **)(struct IS4Chunk *, _DWORD))(*(_DWORD *)a2 + 20))(a2, *((_DWORD *)this + 19));
-  return (*(int (__thiscall **)(struct IS4Chunk *, int))(*(_DWORD *)a2 + 24))(a2, -1516290047);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveSignature)(a2, -1516290046);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, this->m_uU1);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, this->m_uU2);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, this->m_uU3);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, this->m_uU4);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, this->m_uU5);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, this->m_uU6);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, this->m_uU7);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, this->m_uU8);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, this->m_uU9);
+  ((void (__thiscall *)(struct IS4Chunk *, int))a2->SaveUnsigned32)(a2, this->m_uU10);
+  return ((int (__thiscall *)(struct IS4Chunk *, int))a2->SaveSignature)(a2, -1516290047);
 }
 
 
@@ -177,32 +176,32 @@ bool  CAIAgentAttack::AttackNow(int a2, int a3) {
   pairNode *v5; // eax
   int v6; // eax
 
-  if ( a2 && !IAIEnvironment::AlliancesIsValidUsedPlayerId(a2) )
+  if ( a2 != 0 && !IAIEnvironment::AlliancesIsValidUsedPlayerId(a2) )
   {
     return 0;
   }
-  if ( a2 )
+  if ( a2 != 0 )
   {
     v4 = CAINormalSectorAgent::SectorAI(this);
-    v5 = (pairNode *)CAISectorAI::PlayerAI(v4);
+    v5 = (pairNode *)CAISectorAI::PlayerAI((CAISectorAI *)v4);
     v6 = CAIPlayerAI::PlayerId(v5);
     if ( IAIEnvironment::AlliancesAllied(v6, a2) )
     {
       return 0;
     }
   }
-  if ( *((_DWORD *)this + 10) || !CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, a2, 0) || !CAIAgentAttack::OrderSquadsToSneakUpPosition(this, a3) )
+  if ( this->m_uU1 != 0 || !CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, (char *)a2, 0) || !CAIAgentAttack::OrderSquadsToSneakUpPosition(this, a3) )
   {
     return 0;
   }
-  *((_DWORD *)this + 10) = 1;
+  this->m_uU1 = 1;
   CAIAgent::UpdateScheduleTime(this, 0);
   return 1;
 }
 
 
 // address=[0x1301020]
-// Decompiled from void __thiscall CAIAgentAttack::~CAIAgentAttack(CAIAgentAttack *this)
+// Decompiled from void __thiscall CAIAgentAttack::~CAIAgentAttack(CAIScheduler **this)
  CAIAgentAttack::~CAIAgentAttack(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);
@@ -253,11 +252,11 @@ bool  CAIAgentAttack::SetAttackTarget(int a2) {
   }
   else
   {
-    *((_DWORD *)this + 15) = a2;
-    *((_DWORD *)this + 16) = v3;
-    *((_DWORD *)this + 17) = IAIEnvironment::EntityOwnerId(a2);
-    *((_DWORD *)this + 18) = IAIEnvironment::UnpackXFast(v4);
-    *((_DWORD *)this + 19) = IAIEnvironment::UnpackYFast(v4);
+    this->m_uU6 = a2;
+    this->m_uU7 = v3;
+    this->m_uU8 = IAIEnvironment::EntityOwnerId(a2);
+    this->m_uU9 = IAIEnvironment::UnpackXFast(v4);
+    this->m_uU10 = IAIEnvironment::UnpackYFast(v4);
     return 1;
   }
 }
@@ -271,15 +270,14 @@ bool  CAIAgentAttack::CheckAttackPosition(void) {
   int v3; // [esp+0h] [ebp-Ch]
   bool NearestSectorPosition; // [esp+Bh] [ebp-1h]
 
-  v1 = CAINormalSectorAgent::SectorAI((CAINormalSectorAgent *)this);
+  v1 = (CAISectorAI *)CAINormalSectorAgent::SectorAI((CAINormalSectorAgent *)this);
   v3 = CAISectorAI::SectorId(v1);
   NearestSectorPosition = IAIEnvironment::FindNearestSectorPosition(this + 18, this + 19, v3, 15);
-  if ( NearestSectorPosition )
+  if ( !NearestSectorPosition )
   {
-    return NearestSectorPosition;
+    *(this + 18) = 0;
+    *(this + 19) = 0;
   }
-  this[18] = 0;
-  this[19] = 0;
   return NearestSectorPosition;
 }
 
@@ -300,11 +298,11 @@ int  CAIAgentAttack::OrderSquadsToAttack(void) {
   v1 = CAINormalSectorAgent::SectorAI(this);
   v2 = CAISectorAI::TaskForceGroup(v1);
   CAITaskForceClassWalk::CAITaskForceClassWalk(v4, v2, 2);
-  while ( (unsigned __int8)CAITaskForceClassWalk::NextTaskForce(v4, 3) )
+  while ( (unsigned __int8)CAITaskForceClassWalk::NextTaskForce(v4, 3) != 0 )
   {
     ++v7;
     v5 = CAITaskForceClassWalk::CurrentTaskForce(v4);
-    (*(void (__thiscall **)(int, int, _DWORD, _DWORD))(*(_DWORD *)v5 + 32))(v5, 4, *((_DWORD *)v6 + 15), 0);
+    (*(void (__thiscall **)(int, int, int, _DWORD))(*(_DWORD *)v5 + 32))(v5, 4, v6->m_uU6, 0);
   }
   return v7;
 }
@@ -333,7 +331,7 @@ void  CAIAgentAttack::OrderSquadsHome(enum T_AI_TASK_FORCE_CMD a2) {
   while ( 1 )
   {
     result = CAITaskForceClassWalk::NextTaskForce(v8, a2);
-    if ( !(_BYTE)result )
+    if ( (_BYTE)result == 0 )
     {
       break;
     }
@@ -374,7 +372,7 @@ int  CAIAgentAttack::CheckIfSneakUpPositionIsReached(void) {
   v1 = CAINormalSectorAgent::SectorAI(this);
   v2 = CAISectorAI::TaskForceGroup(v1);
   CAITaskForceClassWalk::CAITaskForceClassWalk(v5, v2, 2);
-  while ( (unsigned __int8)CAITaskForceClassWalk::NextTaskForce(v5, 3) )
+  while ( (unsigned __int8)CAITaskForceClassWalk::NextTaskForce(v5, 3) != 0 )
   {
     ++v7;
     v3 = CAITaskForceClassWalk::CurrentTaskForce(v5);
@@ -397,26 +395,25 @@ bool  CAIAgentAttack::CheckCurrentTarget(bool a2) {
   int v6; // [esp-4h] [ebp-10h]
   bool HasGivenUniqueId; // [esp+Bh] [ebp-1h]
 
-  HasGivenUniqueId = IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(*((_DWORD *)this + 15), *((_DWORD *)this + 16));
+  HasGivenUniqueId = IAIEnvironment::EntityIsAliveAndHasGivenUniqueId(this->m_uU6, this->m_uU7);
   if ( HasGivenUniqueId )
   {
-    v6 = IAIEnvironment::EntityOwnerId(*((_DWORD *)this + 15));
+    v6 = IAIEnvironment::EntityOwnerId(this->m_uU6);
     v2 = CAINormalSectorAgent::SectorAI(this);
-    v3 = (pairNode *)CAISectorAI::PlayerAI(v2);
+    v3 = (pairNode *)CAISectorAI::PlayerAI((CAISectorAI *)v2);
     v4 = CAIPlayerAI::PlayerId(v3);
     HasGivenUniqueId = !IAIEnvironment::AlliancesAllied(v4, v6);
   }
-  if ( HasGivenUniqueId )
+  if ( !HasGivenUniqueId )
   {
-    return HasGivenUniqueId;
-  }
-  if ( a2 )
-  {
-    return CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, *((_DWORD *)this + 17), 0);
-  }
-  else
-  {
-    CAIAgentAttack::ResetAttackTarget(this);
+    if ( a2 )
+    {
+      return CAIAgentAttack::CheckStrengthAndFindAnyTarget(this, (char *)this->m_uU8, 0);
+    }
+    else
+    {
+      CAIAgentAttack::ResetAttackTarget(this);
+    }
   }
   return HasGivenUniqueId;
 }
@@ -451,21 +448,21 @@ int  CAIAgentAttack::CheckSquadTargets(void) {
 
   v20 = this;
   v1 = CAINormalSectorAgent::SectorAI(this);
-  v2 = (pairNode *)CAISectorAI::PlayerAI(v1);
+  v2 = (pairNode *)CAISectorAI::PlayerAI((CAISectorAI *)v1);
   v15[1] = CAIPlayerAI::PlayerId(v2);
   v17 = IAIEnvironment::TickCounter();
   v3 = CAINormalSectorAgent::SectorAI(v20);
   v4 = CAISectorAI::TaskForceGroup(v3);
   CAITaskForceClassWalk::CAITaskForceClassWalk(v13, v4, 2);
   v18 = 0;
-  while ( (unsigned __int8)CAITaskForceClassWalk::NextTaskForce(v13, 4) )
+  while ( (unsigned __int8)CAITaskForceClassWalk::NextTaskForce(v13, 4) != 0 )
   {
     v21 = (CUserToolsManager *)CAITaskForceClassWalk::CurrentTaskForce(v13);
     v16 = (*(int (__thiscall **)(CUserToolsManager *, int))(*(_DWORD *)v21 + 16))(v21, 2);
     if ( v16 > 0 )
     {
       ++v18;
-      PositionOfFirstEntity = CAITaskForce::GetPositionOfFirstEntity(v21, &v14, v15);
+      PositionOfFirstEntity = CAITaskForce::GetPositionOfFirstEntity((CAITaskForce *)v21, &v14, v15);
       if ( !PositionOfFirstEntity && BBSupportDbgReport(2, "AI\\AI_AgentsAttack.cpp", 619, "bGetPositionOk") == 1 )
       {
         __debugbreak();
@@ -474,7 +471,7 @@ int  CAIAgentAttack::CheckSquadTargets(void) {
       if ( CAITaskForce::Status(v21) == 2 )
       {
         v6 = CAITaskForce::CmdTimeStamp(v21);
-        if ( v6 + IAIEnvironment::Rand() % 0x80u + 185 < v17 )
+        if ( v6 + IAIEnvironment::Rand() % 0x80 + 185 < v17 )
         {
           v23 = 1;
         }
@@ -483,21 +480,21 @@ int  CAIAgentAttack::CheckSquadTargets(void) {
       {
         v23 = 1;
       }
-      if ( v23 )
+      if ( v23 != 0 )
       {
         v19 = 0;
-        if ( !CAIAgentAttack::FindNearTarget(v20, v21, 32, &v19) )
+        if ( !((bool (__thiscall *)(CAIAgentAttack *, struct CAITaskForce *, int, int *))CAIAgentAttack::FindNearTarget)(v20, (struct CAITaskForce *)v21, 32, &v19) )
         {
-          v19 = *((_DWORD *)v20 + 15);
+          v19 = v20->m_uU6;
         }
         if ( v19 <= 0 )
         {
           v12 = v21;
           v9 = CAINormalSectorAgent::SectorAI(v20);
-          CAINormalSectorAI::MoveSquadHome(v9, v12);
+          CAINormalSectorAI::MoveSquadHome(v9, (struct CAITaskForce *)v12);
           --v18;
         }
-        else if ( CAITaskForce::Command(v21) != 4 || (v7 = CAITaskForce::CmdGoal(v21), v7 != v19) || ((unsigned int)&MEMORY[0x4000000] & CAITaskForce::Flags(v21)) != 0 || (v8 = CAITaskForce::CmdTimeStamp(v21), v17 >= v8 + 1000) )
+        else if ( CAITaskForce::Command((CAITaskForce *)v21) != 4 || (v7 = CAITaskForce::CmdGoal((CAITaskForce *)v21)) != v19 || ((unsigned int)&s_iMsgTracer2.m_aMessages[15456] & CAITaskForce::Flags((CAITaskForce *)v21)) != 0 || (v8 = CAITaskForce::CmdTimeStamp(v21), v17 >= v8 + 1000) )
         {
           (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)v21 + 32))(v21, 4, v19, 0);
         }
@@ -507,7 +504,7 @@ int  CAIAgentAttack::CheckSquadTargets(void) {
     {
       v11 = v21;
       v5 = CAINormalSectorAgent::SectorAI(v20);
-      CAINormalSectorAI::MoveSquadHome(v5, v11);
+      CAINormalSectorAI::MoveSquadHome(v5, (struct CAITaskForce *)v11);
     }
   }
   return v18;
@@ -520,25 +517,24 @@ bool  CAIAgentAttack::FindNearTarget(class CAITaskForce * a2, int a3, int & a4) 
   
   int v6; // eax
   _DWORD v7[3]; // [esp+0h] [ebp-18h] BYREF
-  int v8; // [esp+Ch] [ebp-Ch] BYREF
-  int v9; // [esp+10h] [ebp-8h] BYREF
+  unsigned int v8; // [esp+Ch] [ebp-Ch] BYREF
+  unsigned int v9; // [esp+10h] [ebp-8h] BYREF
 
   v7[2] = this;
   *a5 = 0;
-  if ( !CAITaskForce::GetPositionOfFirstEntity(a3, &v8, &v9) )
+  if ( !CAITaskForce::GetPositionOfFirstEntity(a3, (int *)&v8, (int *)&v9) )
   {
     return 0;
   }
   v6 = CAITaskForce::OwnerId(a3);
-  if ( !CScanner::FindNearestEnemyTowerInSector((struct SFindNearestResult *)v7, v8, v9, 32, v6) )
+  if ( CScanner::FindNearestEnemyTowerInSector((struct SFindNearestResult *)v7, v8, v9, 32, v6) )
   {
-    return *a5 > 0;
+    if ( v7[0] <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentsAttack.cpp", 576, "sResult.m_iEntityId > 0") == 1 )
+    {
+      __debugbreak();
+    }
+    *a5 = v7[0];
   }
-  if ( v7[0] <= 0 && BBSupportDbgReport(2, "AI\\AI_AgentsAttack.cpp", 576, "sResult.m_iEntityId > 0") == 1 )
-  {
-    __debugbreak();
-  }
-  *a5 = v7[0];
   return *a5 > 0;
 }
 
@@ -566,14 +562,14 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
 
   IMessageTracer::PushFormatedInts(g_pMsgTracer, "CAIAgentAttack::CheckStrengthAndFindAnyTarget(): TargetPlayerId %u, Mode %u", (DWORD)a2, a3);
   CAIAgentAttack::ResetAttackTarget(this);
-  if ( !a3 || this->m_uU2 >= 15 )
+  if ( a3 == 0 || this->m_uU2 >= 15 )
   {
     v14 = CAINormalSectorAgent::SectorAI(this);
     v16 = (struct CAINormalSectorAI *)((char *)v14 + 1452);
     v10 = CAIGoalCache::NumberOfCachedGoals((struct CAINormalSectorAI *)((char *)v14 + 1452));
     if ( v10 > 0 )
     {
-      v3 = (pairNode *)CAISectorAI::PlayerAI(v14);
+      v3 = (pairNode *)CAISectorAI::PlayerAI((CAISectorAI *)v14);
       v12 = CAIPlayerAI::PlayerId(v3);
       v17 = IAIEnvironment::AlliancesPlayerAllyBits(v12);
       if ( (int)a2 > 0 )
@@ -591,8 +587,8 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
         {
           v13 = 4;
         }
-        CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, v12);
-        v11 = CAIPlayerScriptVars::operator[](v13);
+        CAIPlayersScriptVars::operator[]((CAIPlayersScriptVars *)g_cAIPlayersScriptVars, v12);
+        v11 = ((int (__stdcall *)(int))CAIPlayerScriptVars::operator[])(v13);
         if ( v11 > 0 )
         {
           m_uU3 = 100 * m_uU3 / v11;
@@ -612,11 +608,11 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
           v8 = IAIEnvironment::AlliancesPlayerBit(v9);
           if ( (v17 & v8) == 0 )
           {
-            if ( a3 > 0 && m_uU3 <= MEMORY[0x3E95220][22 * v9] )
+            if ( a3 > 0 && m_uU3 <= g_cAIPlayerEvaluations.m_sPlayerEvaluations[v9].m_uTotalFighterCount )
             {
               v17 |= v8;
             }
-            else if ( CAIAgentAttack::SetAttackTarget(this, v18) )
+            else if ( CAIAgentAttack::SetAttackTarget(this, v18) != 0 )
             {
               IMessageTracer::PushFormatedInts(g_pMsgTracer, "CAIAgentAttack::CheckStrengthAndFindAnyTarget(): Attack target %u", v18);
               return 1;
@@ -636,11 +632,12 @@ bool  CAIAgentAttack::CheckStrengthAndFindAnyTarget(int a2, int a3) {
 bool  CAIAgentAttack::OrderSquadsToSneakUpPosition(int a2) {
   
   CAITaskForce *v3; // [esp+0h] [ebp-1D8h] BYREF
+  int; // [esp+4h] [ebp-1D4h]
   int *v5; // [esp+8h] [ebp-1D0h]
   CAITaskForce *TaskForceGroupMemberOfSameClass; // [esp+Ch] [ebp-1CCh]
   struct CAINormalSectorAI *v7; // [esp+10h] [ebp-1C8h]
   int v8; // [esp+18h] [ebp-1C0h]
-  _DWORD *v9; // [esp+1Ch] [ebp-1BCh]
+  CAITaskForceGroup *v9; // [esp+1Ch] [ebp-1BCh]
   int v10; // [esp+20h] [ebp-1B8h]
   CAINormalSectorAgent *v11; // [esp+24h] [ebp-1B4h]
   int v12; // [esp+28h] [ebp-1B0h]
@@ -650,13 +647,13 @@ bool  CAIAgentAttack::OrderSquadsToSneakUpPosition(int a2) {
   _BYTE v16[412]; // [esp+38h] [ebp-1A0h] BYREF
 
   v11 = this;
-  v8 = IAIEnvironment::PackXYFast(*((_DWORD *)this + 18), *((_DWORD *)this + 19));
+  v8 = IAIEnvironment::PackXYFast(this->m_uU9, this->m_uU10);
   if ( v8 <= 0 )
   {
     return 0;
   }
   v7 = CAINormalSectorAgent::SectorAI(v11);
-  v9 = (_DWORD *)CAISectorAI::TaskForceGroup(v7);
+  v9 = (CAITaskForceGroup *)CAISectorAI::TaskForceGroup(v7);
   v10 = CAITaskForceGroup::NumberOfTaskForcesOfType(v9, 5);
   v15 = v10 - v10 / 5 - 1;
   if ( a2 <= 0 )
@@ -679,26 +676,27 @@ bool  CAIAgentAttack::OrderSquadsToSneakUpPosition(int a2) {
     v15 = 50;
   }
   TPriorityQueue<SSquadValue,51>::TPriorityQueue<SSquadValue,51>(v16);
-  for ( i = (CAITaskForce *)CAITaskForceGroup::FirstTaskForce(v9, 2);
-        i;
+  for ( i = CAITaskForceGroup::FirstTaskForce(v9, 2);
+        i != 0;
         i = TaskForceGroupMemberOfSameClass )
   {
     TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
     if ( CAITaskForce::Type(i) == 5 )
     {
       v3 = i;
-      if ( (*(int (__thiscall **)(CAITaskForce *, int))(*(_DWORD *)i + 16))(i, 2) )
+       = i->NumberOfEntities(i, AI_WARRIOR_TYPE_SWORDMAN);
+      if (  != 0 )
       {
-        TPriorityQueue<SSquadValue,51>::Push(&v3);
+        ((void (__stdcall *)(CAITaskForce **))TPriorityQueue<SSquadValue,51>::Push)(&v3);
       }
     }
   }
   v12 = 0;
-  while ( !(unsigned __int8)TPriorityQueue<SSquadValue,51>::Empty(v16) && v12 < v15 )
+  while ( (unsigned __int8)TPriorityQueue<SSquadValue,51>::Empty(v16) == 0 && v12 < v15 )
   {
     v5 = (int *)TPriorityQueue<SSquadValue,51>::Top(v16);
     v13 = *v5;
-    if ( v13 )
+    if ( v13 != 0 )
     {
       CAITaskForce::ChangeType(v13, 6);
       (*(void (__thiscall **)(int, int, int, _DWORD))(*(_DWORD *)v13 + 32))(v13, 3, v8, 0);

@@ -52,19 +52,19 @@ void  CAIAgent::UpdateScheduleTimeIfLess(unsigned int _uScheduleTime) {
  CAIAgent::~CAIAgent(void) {
   
   this->__vftable = (CAIAgent_vtbl *)&CAIAgent::_vftable_;
-  if ( this->m_pScheduler )
+  if ( this->m_pScheduler != 0 )
   {
     CAIScheduler::RemoveAgent(this->m_pScheduler, this);
   }
-  if ( this->m_pScheduler && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 53, "m_pScheduler == 0") == 1 )
+  if ( this->m_pScheduler != 0 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 53, "m_pScheduler == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_pPrevAgent && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 54, "m_pPrevAgent == 0") == 1 )
+  if ( this->m_pPrevAgent != 0 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 54, "m_pPrevAgent == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_pNextAgent && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 55, "m_pNextAgent == 0") == 1 )
+  if ( this->m_pNextAgent != 0 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 55, "m_pNextAgent == 0") == 1 )
   {
     __debugbreak();
   }
@@ -82,14 +82,14 @@ void  CAIAgent::Load(class IS4Chunk & a2) {
   a2->LoadUnsigned32(1, 1);
   a2->LoadSignature(-1516306174);
   uScheduleTime = a2->LoadUnsigned32_(a2);
-  if ( this->m_pScheduler )
+  if ( this->m_pScheduler != 0 )
   {
-    if ( uScheduleTime )
+    if ( uScheduleTime != 0 )
     {
-      CAIAgent::UpdateScheduleTime((CAIScheduler **)this, uScheduleTime);
+      CAIAgent::UpdateScheduleTime(this, uScheduleTime);
     }
   }
-  else if ( uScheduleTime && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 86, "uScheduleTime == 0") == 1 )
+  else if ( uScheduleTime != 0 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 86, "uScheduleTime == 0") == 1 )
   {
     __debugbreak();
   }
@@ -106,7 +106,7 @@ void  CAIAgent::Save(class IS4Chunk & a2) {
   a2->SaveSignature(-1516306176);
   a2->SaveUnsigned32(1);
   a2->SaveSignature(-1516306174);
-  if ( this->m_pScheduler )
+  if ( this->m_pScheduler != 0 )
   {
     uScheduleTime = this->m_uScheduleTime;
   }
@@ -123,7 +123,7 @@ void  CAIAgent::Save(class IS4Chunk & a2) {
 // Decompiled from void __thiscall CAIAgent::UpdateScheduleTime(CAIAgent *this, unsigned int a2)
 void  CAIAgent::UpdateScheduleTime(unsigned int a2) {
   
-  if ( this->m_pScheduler )
+  if ( this->m_pScheduler != 0 )
   {
     CAIScheduler::UpdateAgentScheduleTime(this->m_pScheduler, this, a2);
   }

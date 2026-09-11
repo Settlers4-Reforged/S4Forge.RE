@@ -6,8 +6,8 @@
 // Decompiled from CGfxManager::SGFXINFO *__thiscall CGfxManager::SGFXINFO::SGFXINFO(CGfxManager::SGFXINFO *this)
  CGfxManager::SGFXINFO::SGFXINFO(void) {
   
-  *((_DWORD *)this + 2) = 0;
-  *((_DWORD *)this + 3) = 42;
+  this->m_pFile = 0;
+  this->iLength = 42;
   return this;
 }
 

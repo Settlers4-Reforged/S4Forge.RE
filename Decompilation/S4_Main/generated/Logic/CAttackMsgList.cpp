@@ -26,7 +26,7 @@ void  CAttackMsgList::SendAttackMessage(int a2, int a3) {
       break;
     }
     v7 = (CAttackMsgList *)((char *)this + 16 * v9);
-    if ( CAttackMsgFilter::IsActive(v7) )
+    if ( CAttackMsgFilter::IsActive(v7) != 0 )
     {
       if ( CAttackMsgFilter::IsOld(v7, TickCounter) )
       {
@@ -39,7 +39,7 @@ void  CAttackMsgList::SendAttackMessage(int a2, int a3) {
       else
       {
         result = CAttackMsgFilter::IsInRadius((Grid **)v7, a2, a3);
-        if ( result )
+        if ( result != 0 )
         {
           v10 = 1;
           break;
@@ -52,22 +52,21 @@ void  CAttackMsgList::SendAttackMessage(int a2, int a3) {
     }
     ++v9;
   }
-  if ( v10 )
+  if ( v10 == 0 )
   {
-    return result;
-  }
-  if ( v8 == 15 )
-  {
-    return BBSupportTracePrintF(3, "AttackMsgList : Out of filters!!");
-  }
-  else
-  {
-    if ( !CAttackMsgFilter::Activate((CAttackMsgList *)((char *)this + 16 * v8), TickCounter, a2, a3) )
+    if ( v8 == 15 )
     {
-      BBSupportTracePrintF(3, "AttackMsgList : Tried to activate active filter!!");
+      return BBSupportTracePrintF(3, "AttackMsgList : Out of filters!!");
     }
-    LocalPlayerId = CPlayerManager::GetLocalPlayerId();
-    return CTextMsgHandler::AddWarningMsg(2450, LocalPlayerId, a2, a3);
+    else
+    {
+      if ( CAttackMsgFilter::Activate((CAttackMsgList *)((char *)this + 16 * v8), TickCounter, a2, a3) == 0 )
+      {
+        BBSupportTracePrintF(3, "AttackMsgList : Tried to activate active filter!!");
+      }
+      LocalPlayerId = CPlayerManager::GetLocalPlayerId();
+      return CTextMsgHandler::AddWarningMsg(2450, LocalPlayerId, a2, a3);
+    }
   }
   return result;
 }
@@ -77,7 +76,7 @@ void  CAttackMsgList::SendAttackMessage(int a2, int a3) {
 // Decompiled from CAttackMsgList *__thiscall CAttackMsgList::CAttackMsgList(CAttackMsgList *this)
  CAttackMsgList::CAttackMsgList(void) {
   
-  _vec_ctor(this, 0x10u, 0xFu, CAttackMsgFilter::CAttackMsgFilter, CAttackMsgFilter::~CAttackMsgFilter);
+  _vec_ctor((char *)this, 0x10u, 0xFu, CAttackMsgFilter::CAttackMsgFilter, CAttackMsgFilter::~CAttackMsgFilter);
   return this;
 }
 

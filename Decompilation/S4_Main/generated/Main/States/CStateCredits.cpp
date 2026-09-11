@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void * a1) {
   CStateCredits *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateCredits *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateCredits::CStateCredits(C, a1);
   }
@@ -24,38 +24,38 @@ class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateCredits *__thiscall CStateCredits::CStateCredits(CStateCredits *this, void *a2)
  CStateCredits::CStateCredits(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateCredits::_vftable_;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
   CStateCredits::SetupGUI(this);
-  IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 0);
+  IGuiEngine::EnableEventInput(g_pGUIEngine, 0);
   return this;
 }
 
 
 // address=[0x14a41e0]
-// Decompiled from void __thiscall CStateCredits::~CStateCredits(CStateCredits *this)
+// Decompiled from void __thiscall CStateCredits::~CStateCredits(CGuiGameState *this)
  CStateCredits::~CStateCredits(void) {
   
-  *(_DWORD *)this = &CStateCredits::_vftable_;
-  IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 1);
-  if ( g_pSoundManager )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateCredits::_vftable_;
+  IGuiEngine::EnableEventInput(g_pGUIEngine, 1);
+  if ( g_pSoundManager != 0 )
   {
     CSoundManager::StopMusic(g_pSoundManager);
   }
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 15) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 90, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 15) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 90, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 16) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 92, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 16) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 92, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 17) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 94, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 17) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 94, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 14) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 96, "bRet") == 1 )
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 14) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 96, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -70,27 +70,26 @@ bool  CStateCredits::Perform(void) {
   
   signed int Time; // [esp+4h] [ebp-4h]
 
-  if ( !byte_402CC48 )
+  if ( byte_402CC48 == 0 )
   {
     UpdateGuiDlgMainCredits();
-    IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-    IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
     byte_402CC48 = 1;
   }
   Time = timeGetTime();
-  if ( !byte_402CC48 || dword_402CC44 >= Time )
+  if ( byte_402CC48 != 0 && dword_402CC44 < Time )
   {
-    return 1;
+    dword_402CC44 = Time + 15;
+    IGfxEngine::ShowFrame(g_pGfxEngine);
+    byte_402CC48 = 0;
   }
-  dword_402CC44 = Time + 15;
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
-  byte_402CC48 = 0;
   return 1;
 }
 
 
 // address=[0x14a43b0]
-// Decompiled from char __thiscall CStateCredits::OnEvent(CStateCredits *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateCredits::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateCredits::OnEvent(class CEvn_Event & a2) {
   
   char result; // al
@@ -103,7 +102,7 @@ bool  CStateCredits::OnEvent(class CEvn_Event & a2) {
   switch ( a2->m_iEventId )
   {
     case 3:
-      sub_14A4570();
+      ((void (*)(void))sub_14A4570)();
       goto CStateCredits__OnEvent___def_18A4401;
     case 8:
     case 0xA:
@@ -126,7 +125,7 @@ bool  CStateCredits::OnEvent(class CEvn_Event & a2) {
       result = 1;
       break;
     case 0x6D:
-      CGameStateHandler::Switch((int)CStateMainMenu::DynamicCreateFunc, 0);
+      CGameStateHandler::Switch(CStateMainMenu::DynamicCreateFunc, 0);
       return 1;
     default:
 CStateCredits__OnEvent___def_18A4401:
@@ -141,28 +140,28 @@ CStateCredits__OnEvent___def_18A4401:
 // Decompiled from int __thiscall CStateCredits::SetupGUI(CStateCredits *this)
 void  CStateCredits::SetupGUI(void) {
   
-  if ( g_pSoundManager )
+  if ( g_pSoundManager != 0 )
   {
     CSoundManager::StopMusic(g_pSoundManager);
     CSoundManager::PlayBackgroundMusic(5, 5, 0);
   }
-  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 14, GuiDlgMainCreditsProc) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 206, "bRet") == 1 )
+  if ( IGuiEngine::OpenDialog(g_pGUIEngine, 14, (bool (__cdecl *)(int, int, int))GuiDlgMainCreditsProc) == 0 && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 206, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 17, GuiDlgMainCreditsPaperProc) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 208, "bRet") == 1 )
+  if ( IGuiEngine::OpenDialog(g_pGUIEngine, 17, (bool (__cdecl *)(int, int, int))GuiDlgMainCreditsPaperProc) == 0 && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 208, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 16, GuiDlgMainCreditsTopProc) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 210, "bRet") == 1 )
+  if ( IGuiEngine::OpenDialog(g_pGUIEngine, 16, (bool (__cdecl *)(int, int, int))GuiDlgMainCreditsTopProc) == 0 && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 210, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::OpenDialog((IGuiEngine *)g_pGUIEngine, 15, GuiDlgMainCreditsBottomProc) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 212, "bRet") == 1 )
+  if ( IGuiEngine::OpenDialog(g_pGUIEngine, 15, (bool (__cdecl *)(int, int, int))GuiDlgMainCreditsBottomProc) == 0 && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 212, "bRet") == 1 )
   {
     __debugbreak();
   }
-  return sub_14A4570(0, this);
+  return ((int (__thiscall *)(_DWORD, CStateCredits *))sub_14A4570)(0, this);
 }
 
 

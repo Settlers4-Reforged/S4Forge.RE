@@ -11,7 +11,7 @@ void __cdecl StormManager::CreateInstance(void) {
   void *C; // [esp+Ch] [ebp-10h]
 
   C = operator new(0xAA4u);
-  if ( C )
+  if ( C != 0 )
   {
     memset(C, 0, 0xAA4u);
     v1 = StormManager::StormManager();
@@ -31,7 +31,7 @@ void __cdecl StormManager::CreateInstance(void) {
 // Decompiled from void StormManager::DestroyInstance()
 void __cdecl StormManager::DestroyInstance(void) {
   
-  if ( StormManager::m_instance )
+  if ( StormManager::m_instance != 0 )
   {
     delete (StormManager *)StormManager::m_instance;
   }
@@ -51,31 +51,31 @@ class StormManager * __cdecl StormManager::GetInstance(void) {
 void  StormManager::Initialize(void) {
   
   int v2; // [esp+4h] [ebp-54h]
-  unsigned int v3; // [esp+Ch] [ebp-4Ch]
+  unsigned int v3[3]; // [esp+Ch] [ebp-4Ch]
   void *v4; // [esp+18h] [ebp-40h]
   int v5; // [esp+1Ch] [ebp-3Ch]
   _BYTE v7[16]; // [esp+28h] [ebp-30h] BYREF
   _BYTE v8[16]; // [esp+38h] [ebp-20h] BYREF
   int v9; // [esp+54h] [ebp-4h]
 
-  v4 = (void *)storm::memory::internal::EalAllocator::New(8, 4, 1093636132, "StormSampleFramework", "TGOnline\\StormManager.cpp", 36);
+  v4 = storm::memory::internal::EalAllocator::New(8u, 4u, 1093636132, "StormSampleFramework", "TGOnline\\StormManager.cpp", 36u);
   v9 = 0;
-  if ( operator new(8u, v4) )
+  if ( operator new(8u, v4) != 0 )
   {
-    v5 = StormSampleFramework::StormSampleFramework(this, 0);
+    v5 = ((int (__stdcall *)(_DWORD *, _DWORD))StormSampleFramework::StormSampleFramework)(this, 0);
   }
   else
   {
     v5 = 0;
   }
-  this[676] = v5;
-  v3 = storm::ApplicationId::ApplicationId("48725ec3-179d-415a-9ff0-a51e42cecdaa");
-  storm::ApplicationDescriptor::SetApplicationId((Concurrency::details::stl_critical_section_concrt *)(this + 646), v3);
+  *(this + 676) = v5;
+  v3[0] = ((unsigned int (__stdcall *)(const char *))storm::ApplicationId::ApplicationId)("48725ec3-179d-415a-9ff0-a51e42cecdaa");
+  storm::ApplicationDescriptor::SetApplicationId((Concurrency::details::stl_critical_section_concrt *)(this + 646), v3[0]);
   v9 = -1;
   storm::ApplicationId::~ApplicationId(v8);
-  v2 = storm::ApplicationId::ApplicationId("48725ec3-179d-415a-9ff0-a51e42cecdaa");
+  v2 = ((int (__stdcall *)(const char *))storm::ApplicationId::ApplicationId)("48725ec3-179d-415a-9ff0-a51e42cecdaa");
   v9 = 2;
-  storm::ApplicationDescriptor::SetCompatibilityId(v2);
+  ((void (__stdcall *)(int))storm::ApplicationDescriptor::SetCompatibilityId)(v2);
   v9 = -1;
   storm::ApplicationId::~ApplicationId(v7);
   StormManager::InitControllers(this);
@@ -93,13 +93,13 @@ void  StormManager::UpdateGlobalController(void) {
   _BYTE v2[44]; // [esp+4h] [ebp-5Ch] BYREF
   _BYTE v3[44]; // [esp+30h] [ebp-30h] BYREF
 
-  if ( !*((_BYTE *)this + 20) )
+  if ( *((_BYTE *)this + 20) == 0 )
   {
     storm::SimpleGlobalController::NetworkUpdate((char *)this + 68, v3, 1);
     storm::EResult::~EResult((CDHtmlElementEventSink *)v3);
   }
   storm::SimpleGlobalController::Update((StormManager *)((char *)this + 68), utDriver|utSoftware);
-  if ( !*((_BYTE *)this + 20) )
+  if ( *((_BYTE *)this + 20) == 0 )
   {
     storm::SimpleGlobalController::NetworkUpdate((char *)this + 68, v2, 2);
     storm::EResult::~EResult((CDHtmlElementEventSink *)v2);
@@ -115,10 +115,10 @@ void  StormManager::Update(void) {
   _BYTE v3[44]; // [esp+4h] [ebp-30h] BYREF
 
   StormManager::UpdateGlobalController((StormManager *)this);
-  (*(void (__thiscall **)(storm::SimpleConnectivityFacade *))(*(_DWORD *)this[678] + 12))(this[678]);
-  storm::Core::Update(this[4], v3, 3);
+  (*(void (__thiscall **)(_DWORD))(*(_DWORD *)*(this + 678) + 12))(*(this + 678));
+  storm::Core::Update(*(this + 4), v3, 3);
   storm::EResult::~EResult((CDHtmlElementEventSink *)v3);
-  SessionController = storm::SimpleConnectivityFacade::GetSessionController(this[663]);
+  SessionController = storm::SimpleConnectivityFacade::GetSessionController(*(this + 663));
   storm::SimpleController::Update(SessionController);
 }
 
@@ -152,24 +152,24 @@ void  StormManager::Shutdown(void) {
   storm::EResult::~EResult((CDHtmlElementEventSink *)v7);
   StormManager::ShutdownEcho(v6);
   storm::memory::internal::EalAllocator::Delete<StormSampleFramework>(*((void ***)v6 + 676), (int)"TGOnline\\StormManager.cpp", 55);
-  StormManager::DestroyStormControllers(v6);
+  StormManager::DestroyStormControllers((struct storm::SimpleController **)v6);
   StormManager::StopStormCore(v6);
-  if ( *((_DWORD *)v6 + 678) )
+  if ( *((_DWORD *)v6 + 678) != 0 )
   {
     storm::memory::internal::EalAllocator::Delete<storm::SimpleUbiServicesControllerClientImpl>(*((void ***)v6 + 678), (int)"TGOnline\\StormManager.cpp", 61);
     *((_DWORD *)v6 + 678) = 0;
   }
-  if ( *((_DWORD *)v6 + 679) )
+  if ( *((_DWORD *)v6 + 679) != 0 )
   {
     storm::memory::internal::EalAllocator::Delete<storm::PeerChannelController>(*((void ***)v6 + 679), (int)"TGOnline\\StormManager.cpp", 62);
     *((_DWORD *)v6 + 679) = 0;
   }
-  if ( *((_DWORD *)v6 + 663) )
+  if ( *((_DWORD *)v6 + 663) != 0 )
   {
     storm::memory::internal::EalAllocator::Delete<storm::SimpleConnectivityFacade>(*((void ***)v6 + 663), (int)"TGOnline\\StormManager.cpp", 63);
     *((_DWORD *)v6 + 663) = 0;
   }
-  StormManager::ShutdownStormLogs(v6);
+  StormManager::ShutdownStormLogs((storm::RefCountedObject **)v6);
 }
 
 
@@ -202,13 +202,13 @@ void  StormManager::CloseSession(void) {
   int v23; // [esp+78h] [ebp-4h]
 
   v19 = (int)this;
-  if ( *((_DWORD *)this + 677) )
+  if ( *((_DWORD *)this + 677) != 0 )
   {
     v12 = 1092677632;
-    v11 = (_BYTE *)(_enc_textbss_begin + 5904);
+    v11 = (_BYTE *)&unk_2710;
     v17 = &v9;
     storm::BasicStringView<char,std::char_traits<char>>::BasicStringView<char,std::char_traits<char>>("Leave Session");
-    v18 = storm::SimpleAsyncOp::New(v9, v10, v11, v12);
+    v18 = storm::SimpleAsyncOp::New(v9, v10, (int)v11, v12);
     v1 = (_DWORD *)unknown_libname_12627(v19);
     v16 = &v3;
     v15 = std::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>(*v1);
@@ -217,7 +217,7 @@ void  StormManager::CloseSession(void) {
     if ( storm::EResult::GetErrorCode(v21) < 0 )
     {
       *(_BYTE *)(v19 + 2720) = 0;
-      if ( storm::assert::IsAssertEnabled(v13) )
+      if ( ((bool (__cdecl *)(storm::assert *))storm::assert::IsAssertEnabled)(v13) )
       {
         v20 = 1;
         storm::StringStream::StringStream((storm::StringStream *)v22);
@@ -226,8 +226,8 @@ void  StormManager::CloseSession(void) {
         storm::StringStream::operator<<("StormManager::CloseSession");
         storm::StringStream::operator<<((char *)v12);
         v12 = 455;
-        v2 = (const char *)std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str("TGOnline\\StormManager.cpp");
-        storm::assert::AssertFunction((storm::assert *)"false", v2, v11, (const char *)v12, v13);
+        v2 = (const char *)((_DWORD (__cdecl *)(_DWORD))std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str)("TGOnline\\StormManager.cpp");
+        ((void (__cdecl *)(storm::assert *, const char *, const char *, const char *, storm::assert *))storm::assert::AssertFunction)((storm::assert *)"false", v2, v11, (const char *)v12, v13);
         LOBYTE(v23) = 0;
         storm::StringStream::~StringStream((storm::StringStream *)v22);
       }
@@ -272,7 +272,7 @@ void  StormManager::SearchForSessions(void) {
   int v28; // [esp+78h] [ebp-4h]
 
   v24 = (int)this;
-  if ( StormManager::IsLoggedIn(this) && StormManager::IsNATReady((StormManager *)v24) )
+  if ( StormManager::IsLoggedIn(this) && StormManager::IsNATReady((storm::SimpleConnectivityFacade **)v24) )
   {
     storm::SimpleConnectivityFacade::CopySandboxNameIntoStrategy(*(storm::SimpleConnectivityFacade **)(v24 + 2652));
     v1 = (_DWORD *)unknown_libname_12626(v24);
@@ -289,7 +289,7 @@ void  StormManager::SearchForSessions(void) {
     v28 = -1;
     v19 = storm::SimpleAsyncOp::Launch(v7, v8, v9, v10, v11, v12, v13, v14, v15, (int)v16, v17);
     v28 = 1;
-    if ( storm::EResult::GetErrorCode(v26) < 0 && storm::assert::IsAssertEnabled(v18) )
+    if ( storm::EResult::GetErrorCode(v26) < 0 && ((bool (__cdecl *)(storm::assert *))storm::assert::IsAssertEnabled)(v18) )
     {
       v25 = 1;
       storm::StringStream::StringStream((storm::StringStream *)v27);
@@ -298,8 +298,8 @@ void  StormManager::SearchForSessions(void) {
       storm::StringStream::operator<<("StormManager::SearchForSessions");
       storm::StringStream::operator<<((char *)v17);
       v17 = 551;
-      v2 = (const char *)std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str("TGOnline\\StormManager.cpp");
-      storm::assert::AssertFunction((storm::assert *)"false", v2, v16, (const char *)v17, v18);
+      v2 = (const char *)((_DWORD (__cdecl *)(_DWORD))std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str)("TGOnline\\StormManager.cpp");
+      ((void (__cdecl *)(storm::assert *, const char *, const char *, const char *, storm::assert *))storm::assert::AssertFunction)((storm::assert *)"false", v2, v16, (const char *)v17, v18);
       LOBYTE(v28) = 1;
       storm::StringStream::~StringStream((storm::StringStream *)v27);
     }
@@ -382,7 +382,7 @@ void  StormManager::LeaveSession(void) {
   int v67; // [esp+98h] [ebp-4h]
 
   v64 = (int)this;
-  if ( *((_DWORD *)this + 677) )
+  if ( *((_DWORD *)this + 677) != 0 )
   {
     SessionGUID = (storm::GUID *)storm::SimpleSessionHandler::GetSessionGUID(*(storm::SimpleSessionHandler **)(v64 + 2708));
     if ( storm::GUID::IsValid(SessionGUID) && !storm::SimpleSessionHandler::IsLeaving(*(storm::SimpleSessionHandler **)(v64 + 2708)) )
@@ -399,17 +399,17 @@ void  StormManager::LeaveSession(void) {
       v54 = v63;
       v67 = 0;
       v36 = (CDHtmlElementEventSink *)v66;
-      v3 = (_DWORD *)unknown_libname_12614(&v65);
+      v3 = (_DWORD *)unknown_libname_12614((int)&v65);
       v53 = &v26;
       v62 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(*v3);
       v52 = v62;
       LOBYTE(v67) = 1;
-      v4 = (_DWORD *)unknown_libname_12617(&v65);
+      v4 = (_DWORD *)unknown_libname_12617((int)&v65);
       v51 = &v16;
       v61 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(*v4);
       v50 = v61;
       LOBYTE(v67) = 2;
-      v5 = (_DWORD *)unknown_libname_12622(&v65);
+      v5 = (_DWORD *)unknown_libname_12622((int)&v65);
       v49 = &v6;
       v48 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(*v5);
       v59 = storm::SimpleAsyncOp::OnFailureDo(v6, v7, v8, v9, v10, v11, v12, v13, v14, v15);
@@ -422,7 +422,7 @@ void  StormManager::LeaveSession(void) {
       v67 = 3;
       if ( storm::EResult::GetErrorCode(v66) >= 0 )
       {
-        while ( !v65 )
+        while ( v65 == 0 )
         {
           StormManager::UpdateGlobalController((StormManager *)v64);
           storm::ThisThread::SleepFor(30);
@@ -515,7 +515,7 @@ void  StormManager::SetJoinAndDiscoveryOverride(bool a2) {
   v64 = 0;
   v63 = 0;
   v62 = 0;
-  v2 = (_DWORD *)sub_12FC1B0(v61, &a2);
+  v2 = (_DWORD *)sub_12FC1B0(v61, (int)&a2);
   v52 = &v34;
   v60 = std::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>(*v2, v2[1]);
   v51 = v60;
@@ -551,7 +551,7 @@ void  StormManager::DeleteSessionHandler(void) {
   int v4; // [esp+0h] [ebp-34h]
   unsigned int v5[11]; // [esp+4h] [ebp-30h] BYREF
 
-  if ( *((_DWORD *)this + 677) )
+  if ( *((_DWORD *)this + 677) != 0 )
   {
     v2 = *((_DWORD *)this + 677);
     SessionController = storm::SimpleConnectivityFacade::GetSessionController(*((storm::SimpleConnectivityFacade **)this + 663));
@@ -574,11 +574,11 @@ void  StormManager::SetFreeSlotCount(int a2) {
   int v7; // [esp+340h] [ebp-4h]
 
   v4 = this;
-  if ( *((_DWORD *)this + 677) )
+  if ( *((_DWORD *)this + 677) != 0 )
   {
     GameSessionDescriptor::GameSessionDescriptor((GameSessionDescriptor *)v5);
     v7 = 0;
-    SessionDescriptor = storm::SimpleSessionHandler::GetSessionDescriptor(*((storm::SimpleSessionHandler **)v4 + 677));
+    SessionDescriptor = (const struct storm::echo::SessionDescriptor *)storm::SimpleSessionHandler::GetSessionDescriptor(*((storm::SimpleSessionHandler **)v4 + 677));
     storm::DataContainer::CopyAllNetData(v6, v5, SessionDescriptor);
     storm::EResult::~EResult((CDHtmlElementEventSink *)v6);
     GameSessionDescriptor::GetFreeSlots((GameSessionDescriptor *)v5, &v3);
@@ -597,7 +597,7 @@ void  StormManager::SetFreeSlotCount(int a2) {
 // Decompiled from unsigned int __thiscall StormManager::GetLocalPeerId(storm::SimpleSessionHandler **this)
 int  StormManager::GetLocalPeerId(void)const {
   
-  return storm::SimpleSessionHandler::GetLocalSessionPeerId(this[677]);
+  return storm::SimpleSessionHandler::GetLocalSessionPeerId(*(this + 677));
 }
 
 
@@ -605,7 +605,7 @@ int  StormManager::GetLocalPeerId(void)const {
 // Decompiled from int __thiscall StormManager::GetHostPeerId(storm::SimpleSessionHandler **this)
 int  StormManager::GetHostPeerId(void)const {
   
-  return storm::SimpleSessionHandler::GetHostSessionPeerId(this[677]);
+  return storm::SimpleSessionHandler::GetHostSessionPeerId(*(this + 677));
 }
 
 
@@ -621,7 +621,7 @@ bool  StormManager::IsLocalPeerId(int a2)const {
 // Decompiled from char __thiscall StormManager::IsLoggedIn(StormManager *this)
 bool  StormManager::IsLoggedIn(void)const {
   
-  if ( *((_DWORD *)this + 678) )
+  if ( *((_DWORD *)this + 678) != 0 )
   {
     return (*(int (__thiscall **)(_DWORD))(**((_DWORD **)this + 678) + 84))(*((_DWORD *)this + 678));
   }
@@ -636,7 +636,7 @@ bool  StormManager::IsLoggedIn(void)const {
 // Decompiled from bool __thiscall StormManager::IsNATReady(storm::SimpleConnectivityFacade **this)
 bool  StormManager::IsNATReady(void)const {
   
-  return storm::SimpleConnectivityFacade::IsStormReadyForMatchmaking(this[663]);
+  return storm::SimpleConnectivityFacade::IsStormReadyForMatchmaking(*(this + 663));
 }
 
 
@@ -646,12 +646,12 @@ enum StormManager::SESSION_STATE  StormManager::GetSessionState(void)const {
   
   unsigned int HostSessionPeerId; // esi
 
-  if ( !this[677] )
+  if ( *(this + 677) == 0 )
   {
     return 2;
   }
-  HostSessionPeerId = storm::SimpleSessionHandler::GetHostSessionPeerId(this[677]);
-  return HostSessionPeerId != storm::SimpleSessionHandler::GetLocalSessionPeerId(this[677]);
+  HostSessionPeerId = storm::SimpleSessionHandler::GetHostSessionPeerId(*(this + 677));
+  return HostSessionPeerId != storm::SimpleSessionHandler::GetLocalSessionPeerId(*(this + 677));
 }
 
 
@@ -668,7 +668,7 @@ enum StormManager::SESSION_STATE  StormManager::GetSessionState(void)const {
   v4 = this;
   storm::CoreParams::CoreParams((StormManager *)((char *)this + 20));
   v6 = 0;
-  v1 = (_DWORD *)storm::DefineSimpleControllersLibCompilParams<int>(v3);
+  v1 = (_DWORD *)storm::DefineSimpleControllersLibCompilParams<int>((int)v3);
   v5[0] = *v1;
   v5[1] = v1[1];
   v5[2] = v1[2];
@@ -731,12 +731,12 @@ void  StormManager::ShutdownStormLogs(void) {
   
   int result; // eax
 
-  storm::RefCountedObject::ReleaseInstance(this[3]);
-  this[3] = 0;
+  storm::RefCountedObject::ReleaseInstance(*(this + 3));
+  *(this + 3) = 0;
   storm::RefCountedObject::ReleaseInstance(*this);
   *this = 0;
-  storm::RefCountedObject::ReleaseInstance(this[1]);
-  this[1] = 0;
+  storm::RefCountedObject::ReleaseInstance(*(this + 1));
+  *(this + 1) = 0;
   return result;
 }
 
@@ -764,7 +764,7 @@ void  StormManager::StartupStormCore(void) {
   storm::CoreParams::CoreParams((storm::CoreParams *)v6);
   v14 = 0;
   v7 = *((_DWORD *)v9 + 3);
-  v1 = (_DWORD *)storm::DefineStormCommonLibCompilParams<int>(v5);
+  v1 = (_DWORD *)storm::DefineStormCommonLibCompilParams<int>((int)v5);
   v13[0] = *v1;
   v13[1] = v1[1];
   v13[2] = v1[2];
@@ -781,8 +781,8 @@ void  StormManager::StartupStormCore(void) {
     {
       storm::StringStream::StringStream((storm::StringStream *)v12);
       LOBYTE(v14) = 2;
-      storm::operator<<(v12, v11);
-      v3 = (const char *)std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str("TGOnline\\StormManager.cpp");
+      storm::operator<<((int)v12, (int)v11);
+      v3 = (const char *)((_DWORD (__cdecl *)(_DWORD))std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str)("TGOnline\\StormManager.cpp");
       storm::assert::AssertFunction((storm::assert *)"!( (_eres).GetErrorCode() < 0 )", v3, v4, (const char *)0x77);
       LOBYTE(v14) = 1;
       storm::StringStream::~StringStream((storm::StringStream *)v12);
@@ -817,8 +817,8 @@ void  StormManager::StopStormCore(void) {
   {
     storm::StringStream::StringStream((storm::StringStream *)v10);
     LOBYTE(v11) = 1;
-    storm::operator<<(v10, v9);
-    v1 = (const char *)std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str("TGOnline\\StormManager.cpp");
+    storm::operator<<((int)v10, (int)v9);
+    v1 = (const char *)((_DWORD (__cdecl *)(_DWORD))std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::c_str)("TGOnline\\StormManager.cpp");
     storm::assert::AssertFunction((storm::assert *)"!( (_eres).GetErrorCode() < 0 )", v1, v3, (const char *)0x7E);
     LOBYTE(v11) = 0;
     storm::StringStream::~StringStream((storm::StringStream *)v10);
@@ -829,7 +829,7 @@ void  StormManager::StopStormCore(void) {
   *((_DWORD *)this + 4) = 0;
   SessionController = storm::SimpleConnectivityFacade::GetSessionController(*((storm::SimpleConnectivityFacade **)this + 663));
   v6 = *((_DWORD *)this + 679);
-  if ( v6 )
+  if ( v6 != 0 )
   {
     return storm::SimpleSessionController::RemoveSessionHandlerObserver(SessionController, v6 + 60, v4);
   }
@@ -930,7 +930,7 @@ void  StormManager::CreateStormControllers(void) {
   v43 = storm::memory::internal::EalAllocator::New(0xE8u, 8u, 1093636239, "storm::SimpleUbiServicesControllerClientImpl", "TGOnline\\StormManager.cpp", 0x8Fu);
   v70 = (storm::SimpleUbiServicesControllerClientImpl *)operator new(0xE8u, v43);
   v75 = 0;
-  if ( v70 )
+  if ( v70 != 0 )
   {
     storm::ApplicationDescriptor::GetApplicationId((StormManager *)((char *)v73 + 2584));
     v59 = storm::SimpleUbiServicesControllerClientImpl::SimpleUbiServicesControllerClientImpl(v70, v1, 0);
@@ -943,15 +943,15 @@ void  StormManager::CreateStormControllers(void) {
   v75 = -1;
   *((_DWORD *)v73 + 678) = v59;
   v72[11] = 1;
-  Instance = UPlay::UPlayManager::GetInstance(1);
+  Instance = ((int (__thiscall *)(int))UPlay::UPlayManager::GetInstance)(1);
   v71 = (_BYTE *)(*(int (__thiscall **)(int))(*(_DWORD *)Instance + 12))(Instance);
-  if ( v71 && *v71 )
+  if ( v71 != 0 && *v71 != 0 )
   {
-    storm::memory::MakeShared<storm::SimpleOnlinePlayerUplay,char const *>(v41, (char)v71);
+    storm::memory::MakeShared<storm::SimpleOnlinePlayerUplay,char const *>((int)v41, (char)v71);
     v75 = 1;
-    std::shared_ptr<storm::SimpleOnlinePlayerInterface>::shared_ptr<storm::SimpleOnlinePlayerInterface>(v41);
+    std::shared_ptr<storm::SimpleOnlinePlayerInterface>::shared_ptr<storm::SimpleOnlinePlayerInterface>((int)v41);
     LOBYTE(v75) = 2;
-    storm::SimpleUbiServicesControllerClientImpl::SetOnlinePlayer(v40);
+    storm::SimpleUbiServicesControllerClientImpl::SetOnlinePlayer((int)v40);
     LOBYTE(v75) = 1;
     std::shared_ptr<storm::SimpleOnlinePlayerInterface>::~shared_ptr<storm::SimpleOnlinePlayerInterface>(v22, v23);
     v75 = -1;
@@ -960,7 +960,7 @@ void  StormManager::CreateStormControllers(void) {
   v50 = storm::memory::internal::EalAllocator::New(0x418u, 8u, 1093636267, "storm::SimpleConnectivityFacade", "TGOnline\\StormManager.cpp", 0xABu);
   v68 = (storm::SimpleConnectivityFacade *)operator new(0x418u, v50);
   v75 = 13;
-  if ( v68 )
+  if ( v68 != 0 )
   {
     v67 = storm::SimpleConnectivityFacade::SimpleConnectivityFacade(v68, *((_BYTE *)v73 + 1638), *((struct storm::SimpleUbiServicesControllerBase **)v73 + 678), (StormManager *)((char *)v73 + 1340), (const struct storm::SimpleConnectivityFacade::DesiredState *)v72, 0);
   }
@@ -975,7 +975,7 @@ void  StormManager::CreateStormControllers(void) {
   v58 = storm::memory::internal::EalAllocator::New(0x108u, 8u, 1093636270, "storm::PeerChannelController", "TGOnline\\StormManager.cpp", 0xAEu);
   v66 = (storm::PeerChannelController *)operator new(0x108u, v58);
   v75 = 14;
-  if ( v66 )
+  if ( v66 != 0 )
   {
     v65 = storm::PeerChannelController::PeerChannelController(v66);
   }
@@ -988,7 +988,7 @@ void  StormManager::CreateStormControllers(void) {
   *((_DWORD *)v73 + 679) = v65;
   SessionController = storm::SimpleConnectivityFacade::GetSessionController(*((storm::SimpleConnectivityFacade **)v73 + 663));
   v64 = *((_DWORD *)v73 + 679);
-  if ( v64 )
+  if ( v64 != 0 )
   {
     v63 = (struct storm::SimpleSessionHandler::Observer *)(v64 + 60);
   }
@@ -1001,7 +1001,7 @@ void  StormManager::CreateStormControllers(void) {
   GroupController = storm::SimpleConnectivityFacade::GetGroupController(*((COleIPFrameWnd **)v73 + 663));
   storm::SimpleResilientPeerChannelController::SetGroupController(*((storm::SimpleResilientPeerChannelController **)v73 + 679), GroupController);
   v61 = *((_DWORD *)v73 + 679);
-  if ( v61 )
+  if ( v61 != 0 )
   {
     v60 = (struct storm::SimpleGroupHandler::Observer *)(v61 + 64);
   }
@@ -1018,14 +1018,14 @@ void  StormManager::CreateStormControllers(void) {
   v53 = StormManager::CreateSessionHandler;
   v26 = &v12;
   v25 = &v9;
-  std::bind<void (__thiscall StormManager::*)(storm::SimpleSessionHandler *),StormManager * const,std::_Ph<1> const &>(&v9, &v56, v57, &unk_382F26B);
+  std::bind<void (__thiscall StormManager::*)(storm::SimpleSessionHandler *),StormManager * const,std::_Ph<1> const &>((int)&v9, (int)&v56, (int)v57, (int)&unk_382F26B);
   v55 = std::function<void __cdecl (storm::SimpleSessionHandler *)>::function<void __cdecl (storm::SimpleSessionHandler *)>(v9, v10, v11);
   v39 = v55;
   v75 = 15;
   v38 = v8;
   v37 = &v5;
-  std::bind<storm::SimpleSessionHandler * (__thiscall StormManager::*)(storm::StringId const &),StormManager * const,std::_Ph<1> const &>(&v5, &v53, &v54, &unk_382F26B);
-  v52 = std::function<storm::SimpleSessionHandler * __cdecl (storm::StringId const &)>::function<storm::SimpleSessionHandler * __cdecl (storm::StringId const &)>(v5, v6, v7);
+  std::bind<storm::SimpleSessionHandler * (__thiscall StormManager::*)(storm::StringId const &),StormManager * const,std::_Ph<1> const &>((int)&v5, (int)&v53, (int)&v54, (int)&unk_382F26B);
+  v52 = std::function<storm::SimpleSessionHandler * __cdecl (storm::StringId const &)>::function<storm::SimpleSessionHandler * __cdecl (storm::StringId const &)>(v5, v6, (int)v7);
   v36 = v52;
   LOBYTE(v75) = 16;
   v7 = v74;
@@ -1037,29 +1037,29 @@ void  StormManager::CreateStormControllers(void) {
   v42 = OnlineManager::OnNewMessage;
   v34 = &v12;
   v33 = &v9;
-  std::bind<void (__thiscall OnlineManager::*)(storm::StormMessage const *,unsigned long),OnlineManager *,std::_Ph<1> const &,std::_Ph<2> const &>(&v9, &v42, &v51, &unk_382F26B, &unk_382F2C1);
+  std::bind<void (__thiscall OnlineManager::*)(storm::StormMessage const *,unsigned long),OnlineManager *,std::_Ph<1> const &,std::_Ph<2> const &>((int)&v9, (int)&v42, (int)&v51, (int)&unk_382F26B, (int)&unk_382F2C1);
   v24 = std::function<void __cdecl (storm::StormMessage const *,unsigned long)>::function<void __cdecl (storm::StormMessage const *,unsigned long)>(v9, v10, v11);
   (*(void (__thiscall **)(_DWORD, int, int, int, int, int, int, int, int, int, struct storm::SimpleGroupHandler::Observer *))(**((_DWORD **)v73 + 679) + 404))(*((_DWORD *)v73 + 679), v12, v13, v14, v15, v16, v17, v18, v19, v20, v21);
   v49 = OnlineManager::GetInstance();
   v48 = OnlineManager::OnNewPlayerMessage;
   v32 = &v12;
   v31 = &v9;
-  std::bind<void (__thiscall OnlineManager::*)(storm::StormPlayerMessage const *,unsigned long),OnlineManager *,std::_Ph<1> const &,std::_Ph<2> const &>(&v9, &v48, &v49, &unk_382F26B, &unk_382F2C1);
+  std::bind<void (__thiscall OnlineManager::*)(storm::StormPlayerMessage const *,unsigned long),OnlineManager *,std::_Ph<1> const &,std::_Ph<2> const &>((int)&v9, (int)&v48, (int)&v49, (int)&unk_382F26B, (int)&unk_382F2C1);
   v30 = std::function<void __cdecl (storm::StormPlayerMessage const *,unsigned long)>::function<void __cdecl (storm::StormPlayerMessage const *,unsigned long)>(v9, v10, v11);
   (*(void (__thiscall **)(_DWORD, int, int, int, int, int, int, int, int, int, struct storm::SimpleGroupHandler::Observer *))(**((_DWORD **)v73 + 679) + 408))(*((_DWORD *)v73 + 679), v12, v13, v14, v15, v16, v17, v18, v19, v20, v21);
   v47 = OnlineManager::GetInstance();
   v46 = OnlineManager::OnNewGameSetupMessage;
   v29 = &v12;
   v28 = &v9;
-  std::bind<void (__thiscall OnlineManager::*)(storm::StormGameSetupMessage const *,unsigned long),OnlineManager *,std::_Ph<1> const &,std::_Ph<2> const &>(&v9, &v46, &v47, &unk_382F26B, &unk_382F2C1);
+  std::bind<void (__thiscall OnlineManager::*)(storm::StormGameSetupMessage const *,unsigned long),OnlineManager *,std::_Ph<1> const &,std::_Ph<2> const &>((int)&v9, (int)&v46, (int)&v47, (int)&unk_382F26B, (int)&unk_382F2C1);
   v27 = std::function<void __cdecl (storm::StormGameSetupMessage const *,unsigned long)>::function<void __cdecl (storm::StormGameSetupMessage const *,unsigned long)>(v9, v10, v11);
   (*(void (__thiscall **)(_DWORD, int, int, int, int, int, int, int, int, int, struct storm::SimpleGroupHandler::Observer *))(**((_DWORD **)v73 + 679) + 412))(*((_DWORD *)v73 + 679), v12, v13, v14, v15, v16, v17, v18, v19, v20, v21);
-  StormManager::RegisterStormControllers(v73);
+  StormManager::RegisterStormControllers((struct storm::SimpleController **)v73);
 }
 
 
 // address=[0x1650c50]
-// Decompiled from void __thiscall StormManager::DestroyStormControllers(StormManager *this)
+// Decompiled from void __thiscall StormManager::DestroyStormControllers(struct storm::SimpleController **this)
 void  StormManager::DestroyStormControllers(void) {
   
   int v1; // eax
@@ -1081,7 +1081,7 @@ void  StormManager::DestroyStormControllers(void) {
   v3 = storm::SimpleAsyncOp::Registry("TGOnline\\StormManager.cpp");
   storm::memory::internal::EalAllocator::Delete<storm::SimpleAsyncOp::AORegistry>(v3, v4, 377);
   StormManager::UnregisterStormControllers(this);
-  storm::SimpleGlobalController::Teardown((char *)this + 68, v8);
+  storm::SimpleGlobalController::Teardown(this + 17, v8);
   storm::EResult::~EResult((CDHtmlElementEventSink *)v8);
 }
 
@@ -1090,8 +1090,8 @@ void  StormManager::DestroyStormControllers(void) {
 // Decompiled from void __thiscall StormManager::RegisterStormControllers(struct storm::SimpleController **this)
 void  StormManager::RegisterStormControllers(void) {
   
-  storm::SimpleGlobalController::AddEchoController((storm::SimpleGlobalController *)(this + 17), this[663]);
-  storm::SimpleGlobalController::AddEchoController((storm::SimpleGlobalController *)(this + 17), this[679]);
+  storm::SimpleGlobalController::AddEchoController((storm::SimpleGlobalController *)(this + 17), *(this + 663));
+  storm::SimpleGlobalController::AddEchoController((storm::SimpleGlobalController *)(this + 17), *(this + 679));
 }
 
 
@@ -1099,8 +1099,8 @@ void  StormManager::RegisterStormControllers(void) {
 // Decompiled from void __thiscall StormManager::UnregisterStormControllers(struct storm::SimpleController **this)
 void  StormManager::UnregisterStormControllers(void) {
   
-  storm::SimpleGlobalController::RemoveEchoController((storm::SimpleGlobalController *)(this + 17), this[663]);
-  storm::SimpleGlobalController::RemoveEchoController((storm::SimpleGlobalController *)(this + 17), this[679]);
+  storm::SimpleGlobalController::RemoveEchoController((storm::SimpleGlobalController *)(this + 17), *(this + 663));
+  storm::SimpleGlobalController::RemoveEchoController((storm::SimpleGlobalController *)(this + 17), *(this + 679));
 }
 
 
@@ -1222,8 +1222,8 @@ void  StormManager::InitAndStartupEcho(void) {
   storm::EResult::~EResult((CDHtmlElementEventSink *)v87);
   storm::Core::AddHandler(*((_DWORD *)v82 + 4), v86, *((_DWORD *)v82 + 679), "TGOnline\\StormManager.cpp", 408);
   storm::EResult::~EResult((CDHtmlElementEventSink *)v86);
-  Instance = UPlay::UPlayManager::GetInstance(v4);
-  if ( !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 32))(Instance) )
+  Instance = ((int (__thiscall *)(int))UPlay::UPlayManager::GetInstance)(v4);
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 32))(Instance) == 0 )
   {
     v81 = 0;
     v80 = 0;
@@ -1235,11 +1235,11 @@ void  StormManager::InitAndStartupEcho(void) {
     v72 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(v80);
     v44 = v72;
     LOBYTE(v90) = 1;
-    v5 = (_DWORD *)unknown_libname_12621(v82);
+    v5 = (_DWORD *)unknown_libname_12621((int)v82);
     v43 = &v12;
     v66 = std::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>(*v5);
     v90 = -1;
-    v65 = storm::SimpleAsyncOp::LinkOp::LinkOp(v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41);
+    v65 = storm::SimpleAsyncOp::LinkOp::LinkOp(v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, (int)v35, (int)v36, (int)v37, v38, v39, v40, v41);
     v90 = 2;
     v79 = 0;
     v78 = 0;
@@ -1251,11 +1251,11 @@ void  StormManager::InitAndStartupEcho(void) {
     v70 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(v78);
     v61 = v70;
     LOBYTE(v90) = 4;
-    v6 = (_DWORD *)unknown_libname_12619(v82);
+    v6 = (_DWORD *)unknown_libname_12619((int)v82);
     v60 = &v12;
     v59 = std::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>(*v6);
     LOBYTE(v90) = 2;
-    v58 = storm::SimpleAsyncOp::LinkOp::LinkOp(v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41);
+    v58 = storm::SimpleAsyncOp::LinkOp::LinkOp(v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, (int)v35, (int)v36, (int)v37, v38, v39, v40, v41);
     LOBYTE(v90) = 5;
     v77 = 0;
     v76 = 0;
@@ -1267,24 +1267,24 @@ void  StormManager::InitAndStartupEcho(void) {
     v68 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(v76);
     v54 = v68;
     LOBYTE(v90) = 7;
-    v7 = (_DWORD *)unknown_libname_12625(v82);
+    v7 = (_DWORD *)unknown_libname_12625((int)v82);
     v47 = &v12;
     v52 = std::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>(*v7);
     LOBYTE(v90) = 5;
-    v51 = storm::SimpleAsyncOp::LinkOp::LinkOp(v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41);
+    v51 = storm::SimpleAsyncOp::LinkOp::LinkOp(v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, (int)v35, (int)v36, (int)v37, v38, v39, v40, v41);
     v90 = 8;
-    std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>("Startup ECHO");
+    ((void (__stdcall *)(char *))std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>)("Startup ECHO");
     LOBYTE(v90) = 9;
     v8 = std::allocator<storm::SimpleAsyncOp::LinkOp>::allocator<storm::SimpleAsyncOp::LinkOp>(&v75);
     v50 = &v38;
     v37 = (_BYTE *)v8;
-    v9 = (_DWORD *)std::initializer_list<storm::SimpleAsyncOp::LinkOp>::initializer_list<storm::SimpleAsyncOp::LinkOp>(v83, v84);
-    v67 = std::vector<storm::SimpleAsyncOp::LinkOp>::vector<storm::SimpleAsyncOp::LinkOp>(*v9, v9[1], v37);
+    v9 = (_DWORD *)std::initializer_list<storm::SimpleAsyncOp::LinkOp>::initializer_list<storm::SimpleAsyncOp::LinkOp>((int)v83, (int)v84);
+    v67 = std::vector<storm::SimpleAsyncOp::LinkOp>::vector<storm::SimpleAsyncOp::LinkOp>(*v9, v9[1], (int)v37);
     v49 = v67;
     LOBYTE(v90) = 10;
     v37 = v85;
     v36 = v82;
-    v35 = StormManager::StartEchoFinished;
+    v35 = (void (__cdecl *)(struct storm::SimpleResultRelayer *, void *))StormManager::StartEchoFinished;
     v10 = (storm::SimpleAsyncOp *)(*(int (__thiscall **)(_DWORD, _BYTE *, int))(**((_DWORD **)v82 + 676) + 16))(*((_DWORD *)v82 + 676), v89, 50000);
     v11 = storm::SimpleAsyncOp::WithCompletionCB(v10, v35, v36);
     LOBYTE(v90) = 9;
@@ -1416,8 +1416,8 @@ void  StormManager::ShutdownEcho(void) {
   storm::EResult::~EResult((CDHtmlElementEventSink *)v95);
   v2 = (struct storm::SimpleController *)storm::SimpleAsyncOp::Registry(HIDWORD(v60));
   storm::SimpleGlobalController::RemoveEchoController((StormManager *)((char *)v91 + 68), v2);
-  Instance = UPlay::UPlayManager::GetInstance(v3);
-  if ( !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 32))(Instance) )
+  Instance = ((int (__thiscall *)(int))UPlay::UPlayManager::GetInstance)(v3);
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)Instance + 32))(Instance) == 0 )
   {
     v92 = 0;
     v90 = 0;
@@ -1430,11 +1430,11 @@ void  StormManager::ShutdownEcho(void) {
     v65 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(v89);
     v63[3] = v65;
     LOBYTE(v98) = 1;
-    v4 = (_DWORD *)unknown_libname_12629(v91);
+    v4 = (_DWORD *)unknown_libname_12629((int)v91);
     v63[47] = (unsigned int)&v31;
     v63[46] = std::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>(*v4);
     v98 = -1;
-    v63[45] = storm::SimpleAsyncOp::LinkOp::LinkOp(v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41, v42, v43, v44, v45, v46, v47, v48, v49, v50, v51, v52, v53, v54, v55, v56, v57, v58, v59, LODWORD(v60));
+    v63[45] = storm::SimpleAsyncOp::LinkOp::LinkOp(v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41, v42, v43, v44, v45, v46, v47, v48, v49, v50, v51, v52, v53, v54, v55, (int)v56, v57, v58, v59, LODWORD(v60));
     v98 = 2;
     v88 = 0;
     v87 = 0;
@@ -1446,11 +1446,11 @@ void  StormManager::ShutdownEcho(void) {
     v67 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(v87);
     v63[41] = v67;
     LOBYTE(v98) = 4;
-    v5 = (_DWORD *)unknown_libname_12613(v91);
+    v5 = (_DWORD *)unknown_libname_12613((int)v91);
     v63[39] = (unsigned int)&v31;
     v63[38] = std::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>(*v5);
     LOBYTE(v98) = 2;
-    v63[37] = storm::SimpleAsyncOp::LinkOp::LinkOp(v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41, v42, v43, v44, v45, v46, v47, v48, v49, v50, v51, v52, v53, v54, v55, v56, v57, v58, v59, LODWORD(v60));
+    v63[37] = storm::SimpleAsyncOp::LinkOp::LinkOp(v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41, v42, v43, v44, v45, v46, v47, v48, v49, v50, v51, v52, v53, v54, v55, (int)v56, v57, v58, v59, LODWORD(v60));
     LOBYTE(v98) = 5;
     v86 = 0;
     v85 = 0;
@@ -1462,11 +1462,11 @@ void  StormManager::ShutdownEcho(void) {
     v79 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(v85);
     v63[33] = v79;
     LOBYTE(v98) = 7;
-    v6 = (_DWORD *)unknown_libname_12610(v91);
+    v6 = (_DWORD *)unknown_libname_12610((int)v91);
     v63[31] = (unsigned int)&v31;
     v63[30] = std::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>(*v6);
     LOBYTE(v98) = 5;
-    v63[29] = storm::SimpleAsyncOp::LinkOp::LinkOp(v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41, v42, v43, v44, v45, v46, v47, v48, v49, v50, v51, v52, v53, v54, v55, v56, v57, v58, v59, LODWORD(v60));
+    v63[29] = storm::SimpleAsyncOp::LinkOp::LinkOp(v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41, v42, v43, v44, v45, v46, v47, v48, v49, v50, v51, v52, v53, v54, v55, (int)v56, v57, v58, v59, LODWORD(v60));
     LOBYTE(v98) = 8;
     v84 = 0;
     v83 = 0;
@@ -1478,39 +1478,39 @@ void  StormManager::ShutdownEcho(void) {
     v77 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(v83);
     v63[25] = v77;
     LOBYTE(v98) = 10;
-    v7 = (_DWORD *)unknown_libname_12605(v91);
+    v7 = (_DWORD *)unknown_libname_12605((int)v91);
     v63[23] = (unsigned int)&v31;
     v63[22] = std::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>::function<storm::EResult __cdecl (storm::SimpleAsyncOp &)>(*v7);
     LOBYTE(v98) = 8;
-    v63[21] = storm::SimpleAsyncOp::LinkOp::LinkOp(v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41, v42, v43, v44, v45, v46, v47, v48, v49, v50, v51, v52, v53, v54, v55, v56, v57, v58, v59, LODWORD(v60));
+    v63[21] = storm::SimpleAsyncOp::LinkOp::LinkOp(v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41, v42, v43, v44, v45, v46, v47, v48, v49, v50, v51, v52, v53, v54, v55, (int)v56, v57, v58, v59, LODWORD(v60));
     v98 = 11;
-    std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>("Shutdown STORM");
+    ((void (__stdcall *)(char *))std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>)("Shutdown STORM");
     LOBYTE(v98) = 12;
     v8 = std::allocator<storm::SimpleAsyncOp::LinkOp>::allocator<storm::SimpleAsyncOp::LinkOp>(&v82);
     v63[10] = (unsigned int)&v57;
     v56 = (_BYTE *)v8;
-    v9 = (_DWORD *)std::initializer_list<storm::SimpleAsyncOp::LinkOp>::initializer_list<storm::SimpleAsyncOp::LinkOp>(v93, v94);
-    v76 = std::vector<storm::SimpleAsyncOp::LinkOp>::vector<storm::SimpleAsyncOp::LinkOp>(*v9, v9[1], v56);
+    v9 = (_DWORD *)std::initializer_list<storm::SimpleAsyncOp::LinkOp>::initializer_list<storm::SimpleAsyncOp::LinkOp>((int)v93, (int)v94);
+    v76 = std::vector<storm::SimpleAsyncOp::LinkOp>::vector<storm::SimpleAsyncOp::LinkOp>(*v9, v9[1], (int)v56);
     v63[19] = v76;
     LOBYTE(v98) = 13;
     v56 = v96;
-    v10 = (_DWORD *)unknown_libname_12611(&v92);
+    v10 = (_DWORD *)unknown_libname_12611((int)&v92);
     v63[17] = (unsigned int)&v46;
     v75 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(*v10);
     v63[16] = v75;
     LOBYTE(v98) = 14;
-    v11 = (_DWORD *)unknown_libname_12609(&v92);
+    v11 = (_DWORD *)unknown_libname_12609((int)&v92);
     v63[14] = (unsigned int)&v36;
     v74 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(*v11);
     v63[13] = v74;
     LOBYTE(v98) = 15;
-    v12 = (_DWORD *)unknown_libname_12600(&v92);
+    v12 = (_DWORD *)unknown_libname_12600((int)&v92);
     v63[11] = (unsigned int)&v26;
     v73 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(*v12);
     v63[2] = v73;
     LOBYTE(v98) = 16;
     v25 = 1;
-    v13 = (_DWORD *)unknown_libname_12603(v91);
+    v13 = (_DWORD *)unknown_libname_12603((int)v91);
     v63[8] = (unsigned int)&v15;
     v72 = std::function<void __cdecl (storm::SimpleAsyncOp &)>::function<void __cdecl (storm::SimpleAsyncOp &)>(*v13);
     v63[7] = v72;
@@ -1531,7 +1531,7 @@ void  StormManager::ShutdownEcho(void) {
     std::basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>::~basic_string<char,std::char_traits<char>,storm::Allocator<char,1092620295>>(v97);
     v98 = -1;
     `eh vector destructor iterator'(v93, 0xA0u, 4u, storm::SimpleAsyncOp::LinkOp::~LinkOp);
-    while ( !v92 )
+    while ( v92 == 0 )
     {
       v14 = (storm::SimpleController *)storm::SimpleAsyncOp::Registry(HIDWORD(v60));
       storm::SimpleController::Update(v14);

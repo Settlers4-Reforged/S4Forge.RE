@@ -13,7 +13,7 @@
 
   *(_DWORD *)this = IAI_Module::_vftable_;
   C = (CDynList *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     v4 = CDynList::CDynList(C);
   }
@@ -23,7 +23,7 @@
   }
   *((_DWORD *)this + 1) = v4;
   v3 = (CDynList *)operator new(0xCu);
-  if ( v3 )
+  if ( v3 != 0 )
   {
     v2 = CDynList::CDynList(v3);
   }
@@ -46,17 +46,17 @@
   CDynList *result; // eax
 
   *this = (CDynList *)IAI_Module::_vftable_;
-  if ( this[1] )
+  if ( *(this + 1) != 0 )
   {
-    delete this[1];
+    delete *(this + 1);
   }
-  this[1] = 0;
-  result = this[2];
-  if ( result )
+  *(this + 1) = 0;
+  result = *(this + 2);
+  if ( result != 0 )
   {
-    result = (CDynList *)delete this[2];
+    result = (CDynList *)delete *(this + 2);
   }
-  this[2] = 0;
+  *(this + 2) = 0;
   return result;
 }
 
@@ -69,7 +69,7 @@ void  IAI_Module::NewSolutionEdge(int a2, int a3) {
   CSolutionEdge *C; // [esp+14h] [ebp-10h]
 
   C = (CSolutionEdge *)operator new(0x14u);
-  if ( C )
+  if ( C != 0 )
   {
     v5 = CSolutionEdge::CSolutionEdge(C, a2, a3);
   }
@@ -77,7 +77,7 @@ void  IAI_Module::NewSolutionEdge(int a2, int a3) {
   {
     v5 = 0;
   }
-  return CDynList::addElement(this[1], v5);
+  return CDynList::addElement(*(this + 1), v5);
 }
 
 
@@ -92,7 +92,7 @@ class CSolutionTree *  IAI_Module::Problem(int a2, int a3, int a4, int a5, int a
   CParam *C; // [esp+3Ch] [ebp-14h]
 
   C = (CParam *)operator new(0x1Cu);
-  if ( C )
+  if ( C != 0 )
   {
     v11 = CParam::CParam(C, a3, a4, a5, a6);
   }
@@ -101,7 +101,7 @@ class CSolutionTree *  IAI_Module::Problem(int a2, int a3, int a4, int a5, int a
     v11 = 0;
   }
   v10 = (COptimizeOptions *)operator new(0x18u);
-  if ( v10 )
+  if ( v10 != 0 )
   {
     v9 = COptimizeOptions::COptimizeOptions(v10);
   }
@@ -111,11 +111,11 @@ class CSolutionTree *  IAI_Module::Problem(int a2, int a3, int a4, int a5, int a
   }
   *((_DWORD *)this + 3) = 0;
   v7 = IAI_Module::ProblemSolve(this, a2, v11, v9);
-  if ( v11 )
+  if ( v11 != 0 )
   {
     (**(void (__thiscall ***)(struct CParam *, int))v11)(v11, 1);
   }
-  if ( v9 )
+  if ( v9 != 0 )
   {
     delete v9;
   }
@@ -124,10 +124,10 @@ class CSolutionTree *  IAI_Module::Problem(int a2, int a3, int a4, int a5, int a
 
 
 // address=[0x2f3d230]
-// Decompiled from void __thiscall IAI_Module::Execute(IAI_Module *this, struct CSolutionTree *a2)
+// Decompiled from void __thiscall IAI_Module::Execute(IAI_Module *this, CDynList **a2)
 void  IAI_Module::Execute(class CSolutionTree * a2) {
   
-  if ( a2 )
+  if ( a2 != 0 )
   {
     IAI_Module::ExecuteSolution(this, a2);
   }
@@ -141,10 +141,10 @@ bool  IAI_Module::checkSolutionForRepeating(int a2) {
   int i; // [esp+8h] [ebp-4h]
 
   for ( i = 0;
-        i < CDynList::size(this[2]);
+        i < CDynList::size(*(this + 2));
         ++i )
   {
-    if ( a2 == *(_DWORD *)(CDynList::elementAt(this[2], i) + 12) )
+    if ( a2 == *(_DWORD *)(CDynList::elementAt(*(this + 2), i) + 12) )
     {
       return 1;
     }
@@ -161,10 +161,10 @@ bool  IAI_Module::checkSolutionForExactRepeating(int a2, class CParam * a3) {
   int i; // [esp+8h] [ebp-4h]
 
   for ( i = 0;
-        i < CDynList::size(this[2]);
+        i < CDynList::size(*(this + 2));
         ++i )
   {
-    v4 = CDynList::elementAt(this[2], i);
+    v4 = CDynList::elementAt(*(this + 2), i);
     if ( a2 == *(_DWORD *)(v4 + 12) && CParam::ParamAreEqual(a3, *(struct CParam **)(v4 + 16)) )
     {
       return 1;
@@ -182,11 +182,11 @@ bool  IAI_Module::checkSolutionForSpecialRepeating(int a2, class CParam * a3, in
   int v10; // [esp+8h] [ebp-4h]
 
   for ( i = 0;
-        i < CDynList::size(this[2]);
+        i < CDynList::size(*(this + 2));
         ++i )
   {
-    v10 = CDynList::elementAt(this[2], i);
-    if ( a2 == *(_DWORD *)(v10 + 12) && (*(_DWORD *)(*(_DWORD *)(v10 + 16) + 12) == a3[3] || !a4) && (*(_DWORD *)(*(_DWORD *)(v10 + 16) + 16) == a3[4] || !a5) && (*(_DWORD *)(*(_DWORD *)(v10 + 16) + 20) == a3[5] || !a6) && (*(_DWORD *)(*(_DWORD *)(v10 + 16) + 24) == a3[6] || !a7) )
+    v10 = CDynList::elementAt(*(this + 2), i);
+    if ( a2 == *(_DWORD *)(v10 + 12) && (*(_DWORD *)(*(_DWORD *)(v10 + 16) + 12) == a3[3] || a4 == 0) && (*(_DWORD *)(*(_DWORD *)(v10 + 16) + 16) == a3[4] || a5 == 0) && (*(_DWORD *)(*(_DWORD *)(v10 + 16) + 20) == a3[5] || a6 == 0) && (*(_DWORD *)(*(_DWORD *)(v10 + 16) + 24) == a3[6] || a7 == 0) )
     {
       return 1;
     }
@@ -273,13 +273,13 @@ class CSolutionTree *  IAI_Module::ProblemSolve(int a2, class CParam * a3, class
     --*((_DWORD *)this + 3);
     return 0;
   }
-  if ( *((_DWORD *)this + 3) > *((_DWORD *)this + 5) && *((_DWORD *)this + 5) )
+  if ( *((_DWORD *)this + 3) > *((_DWORD *)this + 5) && *((_DWORD *)this + 5) != 0 )
   {
     --*((_DWORD *)this + 3);
     return 0;
   }
   C = (CSolutionSet *)operator new(0x10u);
-  if ( C )
+  if ( C != 0 )
   {
     v9 = (CDynList **)CSolutionSet::CSolutionSet(C);
   }
@@ -295,42 +295,42 @@ class CSolutionTree *  IAI_Module::ProblemSolve(int a2, class CParam * a3, class
     if ( *(_DWORD *)(v12 + 16) == a2 )
     {
       v17 = (CParameterSet *)(*(int (__thiscall **)(IAI_Module *, _DWORD, struct CParam *))(*(_DWORD *)this + 12))(this, *(_DWORD *)(v12 + 12), a3);
-      if ( v17 )
+      if ( v17 != 0 )
       {
-        if ( CParameterSet::size(v17) )
+        if ( CParameterSet::size((CDynList **)v17) != 0 )
         {
           for ( j = 0;
-                j < CParameterSet::size(v17);
+                j < CParameterSet::size((CDynList **)v17);
                 ++j )
           {
-            v5 = CParameterSet::elementAt(v17, j);
-            CSolutionSet::NewSolution((CSolutionSet *)v9, *(_DWORD *)(v12 + 12), v5);
+            v5 = (struct CParam *)CParameterSet::elementAt((CDynList **)v17, j);
+            CSolutionSet::NewSolution(v9, *(_DWORD *)(v12 + 12), v5);
           }
         }
         (**(void (__thiscall ***)(CParameterSet *, int))v17)(v17, 1);
       }
       else
       {
-        CSolutionSet::NewSolution((CSolutionSet *)v9, *(_DWORD *)(v12 + 12), a3);
+        CSolutionSet::NewSolution(v9, *(_DWORD *)(v12 + 12), a3);
       }
     }
   }
-  if ( !CSolutionSet::size((CSolutionSet *)v9) )
+  if ( CSolutionSet::size(v9) == 0 )
   {
     --*((_DWORD *)this + 3);
-    if ( v9 )
+    if ( v9 != 0 )
     {
       (*(void (__thiscall **)(CDynList **, int))*v9)(v9, 1);
     }
     return 0;
   }
-  if ( (int)CSolutionSet::size((CSolutionSet *)v9) > 1 )
+  if ( CSolutionSet::size(v9) > 1 )
   {
-    BestSolution = IAI_Module::GetBestSolution(this, (struct CSolutionSet *)v9, a4);
-    if ( !BestSolution )
+    BestSolution = IAI_Module::GetBestSolution((CDynList **)this, v9, a4);
+    if ( BestSolution == 0 )
     {
       --*((_DWORD *)this + 3);
-      if ( v9 )
+      if ( v9 != 0 )
       {
         (*(void (__thiscall **)(CDynList **, int))*v9)(v9, 1);
       }
@@ -339,13 +339,13 @@ class CSolutionTree *  IAI_Module::ProblemSolve(int a2, class CParam * a3, class
     goto LABEL_63;
   }
   v21 = CDynList::elementAt(v9[3], 0);
-  if ( IAI_Module::checkSolutionForRepeating((CDynList **)this, *(_DWORD *)(v21 + 12)) )
+  if ( IAI_Module::checkSolutionForRepeating((CDynList **)this, *(_DWORD *)(v21 + 12)) != 0 )
   {
     v11 = (*(int (__thiscall **)(IAI_Module *, _DWORD, _DWORD))(*(_DWORD *)this + 8))(this, *(_DWORD *)(v21 + 12), *(_DWORD *)(v21 + 16));
-    if ( !v11 )
+    if ( v11 == 0 )
     {
       --*((_DWORD *)this + 3);
-      if ( v9 )
+      if ( v9 != 0 )
       {
         (*(void (__thiscall **)(CDynList **, int))*v9)(v9, 1);
       }
@@ -354,7 +354,7 @@ class CSolutionTree *  IAI_Module::ProblemSolve(int a2, class CParam * a3, class
     if ( v11 == 2 )
     {
       --*((_DWORD *)this + 3);
-      if ( v9 )
+      if ( v9 != 0 )
       {
         (*(void (__thiscall **)(CDynList **, int))*v9)(v9, 1);
       }
@@ -363,7 +363,7 @@ class CSolutionTree *  IAI_Module::ProblemSolve(int a2, class CParam * a3, class
     }
   }
   v8 = (CSolutionTree *)operator new(0x18u);
-  if ( v8 )
+  if ( v8 != 0 )
   {
     v7 = CSolutionTree::CSolutionTree(v8, *(_DWORD *)(v21 + 12), *(struct CParam **)(v21 + 16));
   }
@@ -374,40 +374,40 @@ class CSolutionTree *  IAI_Module::ProblemSolve(int a2, class CParam * a3, class
   BestSolution = v7;
   (*(void (__thiscall **)(IAI_Module *, _DWORD, _DWORD))(*(_DWORD *)this + 16))(this, *(_DWORD *)(v21 + 12), *(_DWORD *)(v21 + 16));
   v16 = (CConditionSet *)(**(int (__thiscall ***)(IAI_Module *, _DWORD, _DWORD))this)(this, *(_DWORD *)(v21 + 12), *(_DWORD *)(v21 + 16));
-  if ( (int)CConditionSet::size(v16) <= 0 )
+  if ( CConditionSet::size((CDynList **)v16) <= 0 )
   {
 LABEL_63:
     --*((_DWORD *)this + 3);
-    if ( v16 )
+    if ( v16 != 0 )
     {
       delete v16;
     }
-    if ( v9 )
+    if ( v9 != 0 )
     {
       (*(void (__thiscall **)(CDynList **, int))*v9)(v9, 1);
     }
     return BestSolution;
   }
   for ( k = 0;
-        k < CConditionSet::size(v16);
+        k < CConditionSet::size((CDynList **)v16);
         ++k )
   {
-    v18 = CConditionSet::elementAt(v16, k);
+    v18 = (struct CCondition *)CConditionSet::elementAt((CDynList **)v16, k);
     v6 = *((_DWORD *)this + 5);
-    if ( *(_DWORD *)(*((_DWORD *)v18 + 5) + 12) && (*(_DWORD *)(*((_DWORD *)v18 + 5) + 12) < *((_DWORD *)this + 5) || !*((_DWORD *)this + 5)) )
+    if ( *(_DWORD *)(*((_DWORD *)v18 + 5) + 12) != 0 && (*(_DWORD *)(*((_DWORD *)v18 + 5) + 12) < *((_DWORD *)this + 5) || *((_DWORD *)this + 5) == 0) )
     {
       *((_DWORD *)this + 5) = *(_DWORD *)(*((_DWORD *)v18 + 5) + 12);
     }
   }
-  v14 = IAI_Module::TryImportSolution(this, *((_DWORD *)v18 + 3), *((struct CParam **)v18 + 4));
-  if ( !v14 )
+  v14 = (struct CSolutionTree *)IAI_Module::TryImportSolution(this, *((_DWORD *)v18 + 3), *((struct CParam **)v18 + 4));
+  if ( v14 == 0 )
   {
     v14 = IAI_Module::ProblemSolve(this, *((_DWORD *)v18 + 3), *((struct CParam **)v18 + 4), *((struct COptimizeOptions **)v18 + 5));
   }
   *((_DWORD *)this + 5) = v6;
-  if ( v14 )
+  if ( v14 != 0 )
   {
-    CSolutionTree::NewSubSolution(v7, v14);
+    CSolutionTree::NewSubSolution((CDynList **)v7, v14);
     goto LABEL_63;
   }
   if ( *(_DWORD *)(*((_DWORD *)v18 + 5) + 16) != 1 )
@@ -415,15 +415,15 @@ LABEL_63:
     goto LABEL_63;
   }
   --*((_DWORD *)this + 3);
-  if ( v9 )
+  if ( v9 != 0 )
   {
     (*(void (__thiscall **)(CDynList **, int))*v9)(v9, 1);
   }
-  if ( v16 )
+  if ( v16 != 0 )
   {
     delete v16;
   }
-  if ( v7 )
+  if ( v7 != 0 )
   {
     (**(void (__thiscall ***)(CSolutionTree *, int))v7)(v7, 1);
   }
@@ -458,7 +458,7 @@ class CSolutionTree *  IAI_Module::GetBestSolution(class CSolutionSet * a2, clas
   v18 = 0;
   v4 = DOUBLE_N100000_0;
   v13 = 0;
-  if ( !*((_DWORD *)a3 + 1) )
+  if ( *((_DWORD *)a3 + 1) == 0 )
   {
     v4 = DOUBLE_100000_0;
   }
@@ -466,15 +466,15 @@ class CSolutionTree *  IAI_Module::GetBestSolution(class CSolutionSet * a2, clas
         ;
         ++i )
   {
-    if ( i >= CSolutionSet::size((CSolutionSet *)a2) )
+    if ( i >= CSolutionSet::size(a2) )
     {
       return v18;
     }
     v22 = CDynList::elementAt(a2[3], i);
-    if ( IAI_Module::checkSolutionForRepeating(this, *(_DWORD *)(v22 + 12)) )
+    if ( IAI_Module::checkSolutionForRepeating(this, *(_DWORD *)(v22 + 12)) != 0 )
     {
       v14 = (*((int (__thiscall **)(CDynList **, _DWORD, _DWORD))*this + 2))(this, *(_DWORD *)(v22 + 12), *(_DWORD *)(v22 + 16));
-      if ( !v14 )
+      if ( v14 == 0 )
       {
         continue;
       }
@@ -485,10 +485,10 @@ class CSolutionTree *  IAI_Module::GetBestSolution(class CSolutionSet * a2, clas
     }
     (*((void (__thiscall **)(CDynList **, _DWORD, _DWORD))*this + 4))(this, *(_DWORD *)(v22 + 12), *(_DWORD *)(v22 + 16));
     v15 = (CConditionSet *)(*(int (__thiscall **)(CDynList **, _DWORD, _DWORD))*this)(this, *(_DWORD *)(v22 + 12), *(_DWORD *)(v22 + 16));
-    if ( (int)CConditionSet::size(v15) <= 0 )
+    if ( CConditionSet::size((CDynList **)v15) <= 0 )
     {
       v7 = (CSolutionTree *)operator new(0x18u);
-      if ( v7 )
+      if ( v7 != 0 )
       {
         v6 = CSolutionTree::CSolutionTree(v7, *(_DWORD *)(v22 + 12), *(struct CParam **)(v22 + 16));
       }
@@ -501,7 +501,7 @@ class CSolutionTree *  IAI_Module::GetBestSolution(class CSolutionSet * a2, clas
     else
     {
       v10 = (CSolutionTree *)operator new(0x18u);
-      if ( v10 )
+      if ( v10 != 0 )
       {
         v9 = CSolutionTree::CSolutionTree(v10, *(_DWORD *)(v22 + 12), *(struct CParam **)(v22 + 16));
       }
@@ -511,40 +511,40 @@ class CSolutionTree *  IAI_Module::GetBestSolution(class CSolutionSet * a2, clas
       }
       v21 = v9;
       for ( j = 0;
-            j < CConditionSet::size(v15);
+            j < CConditionSet::size((CDynList **)v15);
             ++j )
       {
-        v20 = CConditionSet::elementAt(v15, j);
-        v8 = this[5];
-        if ( *(_DWORD *)(*((_DWORD *)v20 + 5) + 12) && (*(_DWORD *)(*((_DWORD *)v20 + 5) + 12) < (int)this[5] || !this[5]) )
+        v20 = (struct CCondition *)CConditionSet::elementAt((CDynList **)v15, j);
+        v8 = *(this + 5);
+        if ( *(_DWORD *)(*((_DWORD *)v20 + 5) + 12) != 0 && (*(_DWORD *)(*((_DWORD *)v20 + 5) + 12) < (int)*(this + 5) || *(this + 5) == 0) )
         {
-          this[5] = *(CDynList **)(*((_DWORD *)v20 + 5) + 12);
+          *(this + 5) = *(CDynList **)(*((_DWORD *)v20 + 5) + 12);
         }
-        v19 = IAI_Module::TryImportSolution((IAI_Module *)this, *((_DWORD *)v20 + 3), *((struct CParam **)v20 + 4));
-        if ( !v19 )
+        v19 = (struct CSolutionTree *)IAI_Module::TryImportSolution((IAI_Module *)this, *((_DWORD *)v20 + 3), *((struct CParam **)v20 + 4));
+        if ( v19 == 0 )
         {
           v19 = IAI_Module::ProblemSolve((IAI_Module *)this, *((_DWORD *)v20 + 3), *((struct CParam **)v20 + 4), *((struct COptimizeOptions **)v20 + 5));
         }
-        this[5] = v8;
-        if ( !v19 )
+        *(this + 5) = v8;
+        if ( v19 == 0 )
         {
-          if ( v9 )
+          if ( v9 != 0 )
           {
             (**(void (__thiscall ***)(CSolutionTree *, int))v9)(v9, 1);
           }
           v21 = 0;
           break;
         }
-        CSolutionTree::NewSubSolution(v9, v19);
+        CSolutionTree::NewSubSolution((CDynList **)v9, v19);
       }
     }
-    if ( v15 )
+    if ( v15 != 0 )
     {
       delete v15;
     }
-    if ( v21 )
+    if ( v21 != 0 )
     {
-      if ( ((++v13, v5 = IAI_Module::ValuationSubSolution((IAI_Module *)this, v21, *((_DWORD *)a3 + 1), *((_DWORD *)a3 + 2)), v5 < v4) || *((_DWORD *)a3 + 1) != 1) && (v4 <= v5 || *((_DWORD *)a3 + 1)) )
+      if ( ((++v13, (v5 = IAI_Module::ValuationSubSolution((IAI_Module *)this, v21, *((_DWORD *)a3 + 1), *((_DWORD *)a3 + 2))) < v4) || *((_DWORD *)a3 + 1) != 1) && (v4 <= v5 || *((_DWORD *)a3 + 1) != 0) )
       {
         (**(void (__thiscall ***)(struct CSolutionTree *, int))v21)(v21, 1);
       }
@@ -553,14 +553,14 @@ class CSolutionTree *  IAI_Module::GetBestSolution(class CSolutionSet * a2, clas
         v4 = v5;
         v18 = v21;
       }
-      if ( v13 == *((_DWORD *)a3 + 5) && *((_DWORD *)a3 + 5) )
+      if ( v13 == *((_DWORD *)a3 + 5) && *((_DWORD *)a3 + 5) != 0 )
       {
         return v18;
       }
     }
   }
   C = (CSolutionTree *)operator new(0x18u);
-  if ( C )
+  if ( C != 0 )
   {
     v11 = CSolutionTree::CSolutionTree(C, *(_DWORD *)(v22 + 12), *(struct CParam **)(v22 + 16));
   }
@@ -569,7 +569,7 @@ class CSolutionTree *  IAI_Module::GetBestSolution(class CSolutionSet * a2, clas
     v11 = 0;
   }
   *((_DWORD *)a3 + 4) = 0;
-  if ( v11 )
+  if ( v11 != 0 )
   {
     (**(void (__thiscall ***)(CSolutionTree *, int))v11)(v11, 1);
   }
@@ -589,14 +589,13 @@ class CSolutionTree *  IAI_Module::TryImportSolution(int a2, class CParam * a3) 
   {
     return (*(int (__thiscall **)(IAI_Module *, int, struct CParam *))(*(_DWORD *)this + 40))(this, a2, a3);
   }
-  if ( v4 != 2 )
+  if ( v4 == 2 )
   {
-    return 0;
-  }
-  v5 = (*(int (__thiscall **)(IAI_Module *, int, struct CParam *))(*(_DWORD *)this + 40))(this, a2, a3);
-  if ( v5 )
-  {
-    return v5;
+    v5 = (*(int (__thiscall **)(IAI_Module *, int, struct CParam *))(*(_DWORD *)this + 40))(this, a2, a3);
+    if ( v5 != 0 )
+    {
+      return v5;
+    }
   }
   return 0;
 }
@@ -610,12 +609,12 @@ void  IAI_Module::DeleteHistory(void) {
   CDynList *v3; // [esp+14h] [ebp-18h]
   CDynList *C; // [esp+18h] [ebp-14h]
 
-  if ( this[2] )
+  if ( *(this + 2) != 0 )
   {
-    delete this[2];
+    delete *(this + 2);
   }
   C = (CDynList *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     v3 = CDynList::CDynList(C);
   }
@@ -624,7 +623,7 @@ void  IAI_Module::DeleteHistory(void) {
     v3 = 0;
   }
   result = v3;
-  this[2] = v3;
+  *(this + 2) = v3;
   return result;
 }
 
@@ -637,7 +636,7 @@ void  IAI_Module::NewSolutionInHistory(int a2, class CParam * a3) {
   CHistorySolution *C; // [esp+10h] [ebp-10h]
 
   C = (CHistorySolution *)operator new(0x14u);
-  if ( C )
+  if ( C != 0 )
   {
     v5 = CHistorySolution::CHistorySolution(C, a2, a3);
   }
@@ -645,7 +644,7 @@ void  IAI_Module::NewSolutionInHistory(int a2, class CParam * a3) {
   {
     v5 = 0;
   }
-  return CDynList::addElement(this[2], v5);
+  return CDynList::addElement(*(this + 2), v5);
 }
 
 
@@ -663,7 +662,7 @@ void  IAI_Module::NewSolutionInHistory(class CSolutionTree * a2) {
   if ( CDynList::isEmpty(*((CDynList **)a2 + 5)) )
   {
     C = (CHistorySolution *)operator new(0x14u);
-    if ( C )
+    if ( C != 0 )
     {
       v6 = CHistorySolution::CHistorySolution(C, *((_DWORD *)a2 + 4), *((struct CParam **)a2 + 3));
     }
@@ -671,7 +670,7 @@ void  IAI_Module::NewSolutionInHistory(class CSolutionTree * a2) {
     {
       v6 = 0;
     }
-    return CDynList::addElement(this[2], v6);
+    return CDynList::addElement(*(this + 2), v6);
   }
   else
   {
@@ -680,10 +679,10 @@ void  IAI_Module::NewSolutionInHistory(class CSolutionTree * a2) {
           ++i )
     {
       v3 = (struct CSolutionTree *)CDynList::elementAt(*((CDynList **)a2 + 5), i);
-      IAI_Module::NewSolutionInHistory((IAI_Module *)this, v3);
+      IAI_Module::NewSolutionInHistory(this, v3);
     }
     v5 = (CHistorySolution *)operator new(0x14u);
-    if ( v5 )
+    if ( v5 != 0 )
     {
       v4 = CHistorySolution::CHistorySolution(v5, *((_DWORD *)a2 + 4), *((struct CParam **)a2 + 3));
     }
@@ -691,7 +690,7 @@ void  IAI_Module::NewSolutionInHistory(class CSolutionTree * a2) {
     {
       v4 = 0;
     }
-    return CDynList::addElement(this[2], v4);
+    return CDynList::addElement(*(this + 2), v4);
   }
 }
 
@@ -708,7 +707,7 @@ class CDynList *  IAI_Module::CloneHistorie(class CDynList * a2) {
   int i; // [esp+28h] [ebp-10h]
 
   C = (CDynList *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     v5 = CDynList::CDynList(C);
   }
@@ -722,7 +721,7 @@ class CDynList *  IAI_Module::CloneHistorie(class CDynList * a2) {
   {
     v7 = CDynList::elementAt(a2, i);
     v4 = (CHistorySolution *)operator new(0x14u);
-    if ( v4 )
+    if ( v4 != 0 )
     {
       v3 = CHistorySolution::CHistorySolution(v4, *(_DWORD *)(v7 + 12), *(struct CParam **)(v7 + 16));
     }
@@ -792,12 +791,12 @@ void  IAI_Module::Netzplan_ausgeben(void) {
         ;
         ++i )
   {
-    result = CDynList::size(this[1]);
+    result = CDynList::size(*(this + 1));
     if ( i >= result )
     {
       break;
     }
-    CDynList::elementAt(this[1], i);
+    CDynList::elementAt(*(this + 1), i);
   }
   return result;
 }
@@ -811,10 +810,10 @@ class CHistorySolution *  IAI_Module::gleiche_loesung_suchen(int a2, class CPara
   int i; // [esp+8h] [ebp-4h]
 
   for ( i = 0;
-        i < CDynList::size(this[2]);
+        i < CDynList::size(*(this + 2));
         ++i )
   {
-    v4 = CDynList::elementAt(this[2], i);
+    v4 = CDynList::elementAt(*(this + 2), i);
     if ( a2 == *(_DWORD *)(v4 + 12) )
     {
       return v4;
@@ -839,7 +838,7 @@ void  IAI_Module::PreExecuteSolution(class CSolutionTree * a2) {
     {
       v3 = (struct CSolutionTree *)CDynList::elementAt(a2[5], i);
       ++*((_DWORD *)this + 3);
-      IAI_Module::PreExecuteSolution(this, v3);
+      IAI_Module::PreExecuteSolution(this, (CDynList **)v3);
       --*((_DWORD *)this + 3);
     }
   }
@@ -862,7 +861,7 @@ void  IAI_Module::ExecuteSolution(class CSolutionTree * a2) {
     {
       v3 = (struct CSolutionTree *)CDynList::elementAt(a2[5], i);
       ++*((_DWORD *)this + 3);
-      IAI_Module::ExecuteSolution(this, v3);
+      IAI_Module::ExecuteSolution(this, (CDynList **)v3);
       --*((_DWORD *)this + 3);
     }
   }
@@ -892,7 +891,7 @@ void  IAI_Module::t(int a2) {
 // Decompiled from int __thiscall IAI_Module::t_0(int *this)
 void  IAI_Module::t(void) {
   
-  return IAI_Module::t((IAI_Module *)this, this[3]);
+  return IAI_Module::t((IAI_Module *)this, *(this + 3));
 }
 
 

@@ -6,7 +6,7 @@
 // Decompiled from CSaveGameContext *__thiscall CSaveGameContext::CSaveGameContext(CSaveGameContext *this)
  CSaveGameContext::CSaveGameContext(void) {
   
-  std::wstring::wstring((char *)this + 12, (wchar_t *)&off_3743B14);
+  std::wstring::wstring((std::wstring *)((char *)this + 12), (wchar_t *)&off_3743B14);
   *((_BYTE *)this + 40) = 0;
   return this;
 }
@@ -16,7 +16,7 @@
 // Decompiled from void __thiscall CSaveGameContext::~CSaveGameContext(CSaveGameContext *this)
  CSaveGameContext::~CSaveGameContext(void) {
   
-  std::wstring::~wstring((char *)this + 12);
+  std::wstring::~wstring((std::wstring *)((char *)this + 12));
 }
 
 

@@ -223,15 +223,14 @@ void  LZHLEncoder::_putBits(int a2, unsigned long a3) {
   *((_DWORD *)this + 5) |= a3 << (32 - *((_BYTE *)this + 24) - a2);
   *((_DWORD *)this + 6) += a2;
   result = this;
-  if ( *((int *)this + 6) < 16 )
+  if ( *((int *)this + 6) >= 16 )
   {
-    return result;
+    *(_BYTE *)(*((_DWORD *)this + 3))++ = HIBYTE(*((_DWORD *)this + 5));
+    *(_BYTE *)(*((_DWORD *)this + 3))++ = BYTE2(*((_DWORD *)this + 5));
+    *((_DWORD *)this + 6) -= 16;
+    result = this;
+    *((_DWORD *)this + 5) <<= 16;
   }
-  *(_BYTE *)(*((_DWORD *)this + 3))++ = HIBYTE(*((_DWORD *)this + 5));
-  *(_BYTE *)(*((_DWORD *)this + 3))++ = BYTE2(*((_DWORD *)this + 5));
-  *((_DWORD *)this + 6) -= 16;
-  result = this;
-  *((_DWORD *)this + 5) <<= 16;
   return result;
 }
 

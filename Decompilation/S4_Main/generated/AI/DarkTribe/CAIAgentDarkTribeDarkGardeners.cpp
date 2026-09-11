@@ -3,7 +3,7 @@
 // Definitions for class CAIAgentDarkTribeDarkGardeners
 
 // address=[0x1301980]
-// Decompiled from unsigned int __thiscall CAIAgentDarkTribeDarkGardeners::Execute(CAIAgentDarkTribeDarkGardeners *this, unsigned int a2, unsigned int a3)
+// Decompiled from unsigned int __thiscall CAIAgentDarkTribeDarkGardeners::Execute(CAIDarkTribeSectorAgent *this, unsigned int a2, unsigned int a3)
 unsigned int  CAIAgentDarkTribeDarkGardeners::Execute(unsigned int a2, unsigned int a3) {
   
   struct CAIDarkTribeSectorAI *v3; // eax
@@ -47,51 +47,51 @@ unsigned int  CAIAgentDarkTribeDarkGardeners::Execute(unsigned int a2, unsigned 
   v30 = this;
   v3 = CAIDarkTribeSectorAgent::SectorAI(this);
   v4 = CAISectorAI::TaskForceGroup(v3);
-  for ( i = (CUserToolsManager *)CAITaskForceGroup::FirstTaskForce(v4, 6);
-        i;
+  for ( i = (CUserToolsManager *)CAITaskForceGroup::FirstTaskForce((CAITaskForceGroup *)v4, 6);
+        i != 0;
         i = TaskForceGroupMemberOfSameClass )
   {
-    TaskForceGroupMemberOfSameClass = CAITaskForce::NextTaskForceGroupMemberOfSameClass(i);
-    v22 = CAITaskForce::NumberOfEntities(i);
+    TaskForceGroupMemberOfSameClass = (CUserToolsManager *)CAITaskForce::NextTaskForceGroupMemberOfSameClass((CAITaskForce *)i);
+    v22 = CAITaskForce::NumberOfEntities((CAITaskForce *)i);
     if ( v22 <= 0 )
     {
       v29 = i;
-      if ( i )
+      if ( i != 0 )
       {
         (*(void (__thiscall **)(CUserToolsManager *, int))(*(_DWORD *)v29 + 8))(v29, 1);
       }
     }
     else
     {
-      PositionOfFirstEntity = CAITaskForce::GetPositionOfFirstEntity(i, &v16, &v17);
+      PositionOfFirstEntity = CAITaskForce::GetPositionOfFirstEntity((CAITaskForce *)i, &v16, &v17);
       if ( !PositionOfFirstEntity && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 732, "bGetTaskForcePosOk") == 1 )
       {
         __debugbreak();
       }
-      v21 = CAITaskForce::Flags(i);
+      v21 = CAITaskForce::Flags((CAITaskForce *)i);
       v14 = CAITaskForce::Status(i);
-      v20 = CAITaskForce::Command(i);
-      v39 = ((unsigned int)&MEMORY[0x4000000] & v21) != 0;
+      v20 = CAITaskForce::Command((CAITaskForce *)i);
+      v39 = ((unsigned int)&s_iMsgTracer2.m_aMessages[15456] & v21) != 0;
       v37 = v39;
-      v34 = CAITaskForce::TimeStamp(i);
-      v28 = v37 || v34 + 1000 <= a2 || !v34 || v20 != 5;
+      v34 = CAITaskForce::TimeStamp((CAITaskForce *)i);
+      v28 = v37 || v34 + 1000 <= a2 || v34 == 0 || v20 != 5;
       v40 = v28;
       if ( !v28 && v34 + 250 <= a2 && CAITaskForce::CmdTimeStamp(i) + 250 <= a2 )
       {
-        if ( CAITaskForce::Command(i) != 5 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 749, "pTaskForce->Command() == AI_TASK_FORCE_CMD_MOVE_TO_WORK_POSITION") == 1 )
+        if ( CAITaskForce::Command((CAITaskForce *)i) != 5 && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 749, "pTaskForce->Command() == AI_TASK_FORCE_CMD_MOVE_TO_WORK_POSITION") == 1 )
         {
           __debugbreak();
         }
-        v5 = CAITaskForce::CmdGoal(i);
+        v5 = CAITaskForce::CmdGoal((CAITaskForce *)i);
         if ( !IAIEnvironment::WorldInWorldPackedXY(v5) && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 750, "g_pAIEnv->WorldInWorldPackedXY(pTaskForce->CmdGoal())") == 1 )
         {
           __debugbreak();
         }
-        v6 = CAITaskForce::CmdGoal(i);
+        v6 = CAITaskForce::CmdGoal((CAITaskForce *)i);
         v31 = IAIEnvironment::UnpackXFast(v6);
-        v7 = CAITaskForce::CmdGoal(i);
+        v7 = CAITaskForce::CmdGoal((CAITaskForce *)i);
         v32 = IAIEnvironment::UnpackYFast(v7);
-        if ( IAIEnvironment::GetNearestGreenBorderElement(&v31, &v32, 10) )
+        if ( IAIEnvironment::GetNearestGreenBorderElement(&v31, &v32, 10) != 0 )
         {
           v8 = IAIEnvironment::PackXYFast(v31, v32);
           (*(void (__thiscall **)(CUserToolsManager *, int, int, _DWORD))(*(_DWORD *)i + 32))(i, 5, v8, 0);
@@ -99,8 +99,8 @@ unsigned int  CAIAgentDarkTribeDarkGardeners::Execute(unsigned int a2, unsigned 
         else
         {
           v9 = CAIDarkTribeSectorAgent::SectorAI(v30);
-          v27 = CAIDarkTribeSectorAI::EconomyAI(v9);
-          v10 = CAITaskForce::CmdGoal(i);
+          v27 = (struct IAIDarkTribeEcoAI *)CAIDarkTribeSectorAI::EconomyAI(v9);
+          v10 = CAITaskForce::CmdGoal((CAITaskForce *)i);
           v33 = (*(int (__thiscall **)(struct IAIDarkTribeEcoAI *, int))(*(_DWORD *)v27 + 8))(v27, v10);
           if ( v33 <= 0 )
           {
@@ -116,12 +116,12 @@ unsigned int  CAIAgentDarkTribeDarkGardeners::Execute(unsigned int a2, unsigned 
           }
         }
       }
-      if ( v40 )
+      if ( v40 != 0 )
       {
-        CAITaskForce::ClearEntityAddedFlag(i);
-        CAITaskForce::SetTimeStamp(i, a2);
+        CAITaskForce::ClearEntityAddedFlag((CAITaskForce *)i);
+        CAITaskForce::SetTimeStamp((CAITaskForce *)i, a2);
         v12 = CAIDarkTribeSectorAgent::SectorAI(v30);
-        v26 = CAIDarkTribeSectorAI::EconomyAI(v12);
+        v26 = (struct IAIDarkTribeEcoAI *)CAIDarkTribeSectorAI::EconomyAI(v12);
         v35 = (*(int (__thiscall **)(struct IAIDarkTribeEcoAI *, int, int, int))(*(_DWORD *)v26 + 12))(v26, 250, 1000, v14);
         if ( v35 > 0 )
         {
@@ -131,7 +131,7 @@ unsigned int  CAIAgentDarkTribeDarkGardeners::Execute(unsigned int a2, unsigned 
           v23 = IAIEnvironment::GridDistance(v24 - v16, v25 - v17);
           if ( v23 > 5 )
           {
-            CAITaskForce::SetTimeStamp(i, a2 + 12 * v23);
+            CAITaskForce::SetTimeStamp((CAITaskForce *)i, a2 + 12 * v23);
           }
           if ( !IAIEnvironment::WorldInWorldPackedXY(v35) && BBSupportDbgReport(2, "AI\\AI_AgentsDark.cpp", 801, "g_pAIEnv->WorldInWorldPackedXY(iPackedWorkPosition)") == 1 )
           {
@@ -150,14 +150,14 @@ unsigned int  CAIAgentDarkTribeDarkGardeners::Execute(unsigned int a2, unsigned 
 // Decompiled from CAIAgentDarkTribeDarkGardeners *__thiscall CAIAgentDarkTribeDarkGardeners::CAIAgentDarkTribeDarkGardeners(CAIAgentDarkTribeDarkGardeners *this)
  CAIAgentDarkTribeDarkGardeners::CAIAgentDarkTribeDarkGardeners(void) {
   
-  CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent(this, "dark gardeners");
+  CAIDarkTribeSectorAgent::CAIDarkTribeSectorAgent((CAIDarkTribeSectorAgent *)this, "dark gardeners");
   *(_DWORD *)this = &CAIAgentDarkTribeDarkGardeners::_vftable_;
   return this;
 }
 
 
 // address=[0x1322ee0]
-// Decompiled from void __thiscall CAIAgentDarkTribeDarkGardeners::~CAIAgentDarkTribeDarkGardeners(CAIAgentDarkTribeDarkGardeners *this)
+// Decompiled from void __thiscall CAIAgentDarkTribeDarkGardeners::~CAIAgentDarkTribeDarkGardeners(CAIScheduler **this)
  CAIAgentDarkTribeDarkGardeners::~CAIAgentDarkTribeDarkGardeners(void) {
   
   CAIDarkTribeSectorAgent::~CAIDarkTribeSectorAgent(this);

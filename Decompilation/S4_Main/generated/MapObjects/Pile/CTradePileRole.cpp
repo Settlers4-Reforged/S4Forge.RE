@@ -4,13 +4,13 @@
 // Definitions for class CTradePileRole
 
 // address=[0x14023e0]
-// Decompiled from CTradePileRole *__cdecl CTradePileRole::New(int a1)
+// Decompiled from CTradePileRole *__cdecl CTradePileRole::New(struct std::istream *a1)
 class CPersistence * __cdecl CTradePileRole::New(std::istream & a1) {
   
   CTradePileRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CTradePileRole *)operator new(0x14u);
-  if ( C )
+  if ( C != 0 )
   {
     return CTradePileRole::CTradePileRole(C, a1);
   }
@@ -22,13 +22,13 @@ class CPersistence * __cdecl CTradePileRole::New(std::istream & a1) {
 
 
 // address=[0x1560480]
-// Decompiled from int __cdecl CTradePileRole::Load(int a1)
+// Decompiled from int __cdecl CTradePileRole::Load(struct std::istream *a1)
 class CTradePileRole * __cdecl CTradePileRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CTradePileRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -46,7 +46,7 @@ void  CTradePileRole::Increase(class CPile * _pPile, int a3) {
   int v9; // [esp-8h] [ebp-10h]
   int v10; // [esp-4h] [ebp-Ch]
 
-  if ( !_pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 226, "_pPile") == 1 )
+  if ( _pPile == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 226, "_pPile") == 1 )
   {
     __debugbreak();
   }
@@ -65,7 +65,7 @@ void  CTradePileRole::Increase(class CPile * _pPile, int a3) {
     v7 = IEntity::Type(v6);
     CGameScriptManager::SendGameEvent(g_pScriptMgr, 0x11u, v7, v9, 1);
     v8 = _pPile->Amount(_pPile) - a3;
-    if ( v8 == CPile::AmountLeaving(_pPile) && !CPile::GetOfferFlag(_pPile) )
+    if ( v8 == CPile::AmountLeaving(_pPile) && CPile::GetOfferFlag(_pPile) == 0 )
     {
       CPile::Offer(_pPile, 1, 0);
       CPile::SetOfferFlag(_pPile, 1u);
@@ -83,7 +83,7 @@ void  CTradePileRole::Decrease(class CPile * _pPile, int a3) {
   CTradingBuildingRole *v5; // [esp+0h] [ebp-Ch]
   struct CBuilding *BuildingPtr; // [esp+4h] [ebp-8h]
 
-  if ( !_pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 270, "_pPile") == 1 )
+  if ( _pPile == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 270, "_pPile") == 1 )
   {
     __debugbreak();
   }
@@ -94,9 +94,9 @@ void  CTradePileRole::Decrease(class CPile * _pPile, int a3) {
     v5 = (CTradingBuildingRole *)CBuilding::Role(BuildingPtr);
     v4 = _pPile->GetGoodType();
     CTradingBuildingRole::GoodLeft(v5, v4);
-    if ( !_pPile->Amount(_pPile) && !CTradePileRole::GetExpectedAmount(this) && !CPile::AmountComing(_pPile) )
+    if ( _pPile->Amount(_pPile) == 0 && CTradePileRole::GetExpectedAmount(this) == 0 && CPile::AmountComing(_pPile) == 0 )
     {
-      if ( CPile::GetOfferFlag(_pPile) )
+      if ( CPile::GetOfferFlag(_pPile) != 0 )
       {
         CPile::CancelOffer(_pPile, 0, 0);
         CPile::SetOfferFlag(_pPile, 0);
@@ -124,9 +124,9 @@ void  CTradePileRole::Empty(class CPile * a2) {
   CBuilding *v5; // [esp+4h] [ebp-Ch]
   int a1; // [esp+Ch] [ebp-4h]
 
-  if ( !CTradePileRole::GetExpectedAmount(this) && !CPile::AmountComing(a2) )
+  if ( CTradePileRole::GetExpectedAmount(this) == 0 && CPile::AmountComing(a2) == 0 )
   {
-    if ( CPile::GetOfferFlag(a2) )
+    if ( CPile::GetOfferFlag(a2) != 0 )
     {
       CPile::CancelOffer(a2, 0, 0);
       CPile::SetOfferFlag(a2, 0);
@@ -155,7 +155,7 @@ void  CTradePileRole::Init(class CPile * a2) {
   
   int v2; // eax
 
-  if ( debug && DEBUG_FLAGS[s_iTradePileRoleDebugSection] )
+  if ( debug != 0 && DEBUG_FLAGS[s_iTradePileRoleDebugSection] != 0 )
   {
     v2 = IEntity::ID(a2);
     BBSupportTracePrintF(0, "Pile %u init as tradePile", v2);
@@ -186,15 +186,15 @@ void  CTradePileRole::LogicUpdate(class CPile * a2) {
   int v12; // [esp+4h] [ebp-Ch]
   struct CBuilding *v13; // [esp+8h] [ebp-8h]
 
-  if ( (CTradePileRole::GetTradeRoleType(this) == 1 || CTradePileRole::GetTradeRoleType(this) == 3) && !CPile::GetOfferFlag(a2) )
+  if ( (CTradePileRole::GetTradeRoleType(this) == 1 || CTradePileRole::GetTradeRoleType(this) == 3) && CPile::GetOfferFlag(a2) == 0 )
   {
-    if ( CTradePileRole::GetExpectedAmount(this) )
+    if ( CTradePileRole::GetExpectedAmount(this) != 0 )
     {
       v2 = IEntity::WorldIdx(a2);
       v12 = CWorldManager::EcoSectorId(v2);
       BuildingId = CPile::GetBuildingId(a2);
       BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, BuildingId);
-      if ( IEntity::FlagBits(BuildingPtr, (EntityFlag)4096) )
+      if ( IEntity::FlagBits(BuildingPtr, (EntityFlag)4096) != 0 )
       {
         v11 = a2->GetGoodType();
         v10 = CPile::GetBuildingId(a2);
@@ -208,7 +208,7 @@ void  CTradePileRole::LogicUpdate(class CPile * a2) {
   {
     v5 = CPile::GetBuildingId(a2);
     v13 = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, v5);
-    if ( v13 && IEntity::Type(v13) != BUILDING_STORAGEAREA && IEntity::FlagBits(v13, (EntityFlag)4096) )
+    if ( v13 != 0 && IEntity::Type(v13) != BUILDING_STORAGEAREA && IEntity::FlagBits(v13, (EntityFlag)4096) != 0 )
     {
       v6 = a2->Amount(a2);
       if ( v6 - CPile::AmountLeaving(a2) >= 1 )
@@ -235,7 +235,7 @@ void  CTradePileRole::Occupied(class CPile * a2, int a3) {
   if ( CTradePileRole::GetTradeRoleType(this) == 1 )
   {
     v3 = a2->Amount(a2);
-    if ( v3 > CPile::AmountLeaving(a2) && !CPile::GetOfferFlag(a2) )
+    if ( v3 > CPile::AmountLeaving(a2) && CPile::GetOfferFlag(a2) == 0 )
     {
       v4 = a2->Amount(a2);
       v5 = CPile::AmountLeaving(a2);
@@ -256,22 +256,18 @@ bool  CTradePileRole::SetFree(class CPile * a2, int a3) {
   if ( CTradePileRole::GetTradeRoleType(this) == 1 )
   {
     v3 = a2->Amount(a2);
-    if ( v3 == CPile::AmountLeaving(a2) )
+    if ( v3 == CPile::AmountLeaving(a2) && CPile::GetOfferFlag(a2) != 0 )
     {
-      if ( CPile::GetOfferFlag(a2) )
-      {
-        CPile::CancelOffer(a2, 0, 0);
-        CPile::SetOfferFlag(a2, 0);
-      }
+      CPile::CancelOffer(a2, 0, 0);
+      CPile::SetOfferFlag(a2, 0);
     }
   }
-  if ( CTradePileRole::GetTradeRoleType(this) != 2 )
+  if ( CTradePileRole::GetTradeRoleType(this) == 2 )
   {
-    return 0;
+    v4 = a2->Amount(a2);
+    CPile::CancelOffer(a2, v4, a3);
+    CPile::SetOfferFlag(a2, 0);
   }
-  v4 = a2->Amount(a2);
-  CPile::CancelOffer(a2, v4, a3);
-  CPile::SetOfferFlag(a2, 0);
   return 0;
 }
 
@@ -304,11 +300,11 @@ void  CTradePileRole::SubjectDie(class CPile * _pPile, int a1) {
   CStorageBuildingRole *v5; // [esp+4h] [ebp-8h]
   CBuilding *v6; // [esp+8h] [ebp-4h]
 
-  if ( CPile::AmountLeaving(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 355, "_pPile->AmountLeaving() == 0") == 1 )
+  if ( CPile::AmountLeaving(_pPile) != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 355, "_pPile->AmountLeaving() == 0") == 1 )
   {
     __debugbreak();
   }
-  if ( CPile::AmountComing(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 356, "_pPile->AmountComing() == 0") == 1 )
+  if ( CPile::AmountComing(_pPile) != 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 356, "_pPile->AmountComing() == 0") == 1 )
   {
     __debugbreak();
   }
@@ -339,7 +335,7 @@ void  CTradePileRole::SubjectStopped(class CPile * a2) {
   int v2; // eax
 
   CPile::NotifyTargetDieAndDetachAllObservers(a2);
-  if ( CTradePileRole::GetTradeRoleType(this) == 1 && a2->Amount(a2) > 0 && !CPile::GetOfferFlag(a2) )
+  if ( CTradePileRole::GetTradeRoleType(this) == 1 && a2->Amount(a2) > 0 && CPile::GetOfferFlag(a2) == 0 )
   {
     v2 = a2->Amount(a2);
     CPile::Offer(a2, v2, 0);
@@ -355,7 +351,7 @@ void  CTradePileRole::SubjectStarted(class CPile * a2) {
   int v2; // eax
 
   CPile::NotifyTargetDieAndDetachAllObservers(a2);
-  if ( CTradePileRole::GetTradeRoleType(this) == 1 && CPile::GetOfferFlag(a2) )
+  if ( CTradePileRole::GetTradeRoleType(this) == 1 && CPile::GetOfferFlag(a2) != 0 )
   {
     v2 = a2->Amount(a2);
     CPile::CancelOffer(a2, v2, 0);
@@ -388,13 +384,12 @@ bool  CTradePileRole::ChangeGoodTypeUnforseen(class CPile * a2, int a3) {
     v4 = IEntity::ID(a2);
     CStorageBuildingRole::ExecuteUnforseenGoodTypeChange(v8, v4, v10, a3);
   }
-  if ( IEntity::Type(v11) != 33 )
+  if ( IEntity::Type(v11) == 33 )
   {
-    return v12;
+    v7 = (CTradingBuildingRole *)CBuilding::Role(v11);
+    v5 = IEntity::ID(a2);
+    CTradingBuildingRole::ExecuteUnforseenGoodTypeChange(v7, v5, v10, a3);
   }
-  v7 = (CTradingBuildingRole *)CBuilding::Role(v11);
-  v5 = IEntity::ID(a2);
-  CTradingBuildingRole::ExecuteUnforseenGoodTypeChange(v7, v5, v10, a3);
   return v12;
 }
 
@@ -416,7 +411,7 @@ void  CTradePileRole::SetTradeRoleType(enum CTradePileRole::TRADEPILE_ROLE a2) {
   if ( this->m_iTradeRoleType == 1 || this->m_iTradeRoleType == 3 )
   {
     v6 = CPileMgr::operator[](this->m_uPileId);
-    if ( CPile::GetOfferFlag(v6) )
+    if ( CPile::GetOfferFlag(v6) != 0 )
     {
       v2 = v6->Amount(v6);
       if ( v2 > CPile::AmountLeaving(v6) )
@@ -430,13 +425,10 @@ void  CTradePileRole::SetTradeRoleType(enum CTradePileRole::TRADEPILE_ROLE a2) {
   if ( this->m_iTradeRoleType == 2 )
   {
     v4 = CPileMgr::operator[](this->m_uPileId);
-    if ( v4->Amount(v4) )
+    if ( v4->Amount(v4) != 0 && CPile::GetOfferFlag(v4) == 0 )
     {
-      if ( !CPile::GetOfferFlag(v4) )
-      {
-        CPile::Offer(v4, 1, 0);
-        CPile::SetOfferFlag(v4, 1u);
-      }
+      CPile::Offer(v4, 1, 0);
+      CPile::SetOfferFlag(v4, 1u);
     }
   }
 }
@@ -475,13 +467,10 @@ void  CTradePileRole::IncAmoutLeaving(class CPile * a2) {
   if ( CTradePileRole::GetTradeRoleType(this) == 2 )
   {
     v2 = a2->Amount(a2);
-    if ( v2 == CPile::AmountLeaving(a2) )
+    if ( v2 == CPile::AmountLeaving(a2) && CPile::GetOfferFlag(a2) != 0 )
     {
-      if ( CPile::GetOfferFlag(a2) )
-      {
-        CPile::CancelOffer(a2, 0, 0);
-        CPile::SetOfferFlag(a2, 0);
-      }
+      CPile::CancelOffer(a2, 0, 0);
+      CPile::SetOfferFlag(a2, 0);
     }
   }
 }
@@ -496,7 +485,7 @@ void  CTradePileRole::DecAmountLeaving(class CPile * a2) {
   if ( CTradePileRole::GetTradeRoleType(this) == 2 )
   {
     v2 = a2->Amount(a2);
-    if ( v2 == CPile::AmountLeaving(a2) && !CPile::GetOfferFlag(a2) )
+    if ( v2 == CPile::AmountLeaving(a2) && CPile::GetOfferFlag(a2) == 0 )
     {
       CPile::Offer(a2, 0, 0);
       CPile::SetOfferFlag(a2, 1u);
@@ -541,11 +530,11 @@ int  CTradePileRole::ReservesGood(int _iAmount, enum PILE_TYPES a3, class CPile 
   {
     __debugbreak();
   }
-  if ( !pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 690, "pPile!=NULL") == 1 )
+  if ( pPile == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\TradePileRole.cpp", 690, "pPile!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !pPile )
+  if ( pPile == 0 )
   {
     return _iAmount;
   }
@@ -598,24 +587,17 @@ int  CTradePileRole::GetReserveAmount(void) {
   this->__vftable = (IPileRole_vtbl *)&CTradePileRole::_vftable_;
   this->m_iReserveAmount = 0;
   operator^<unsigned int>(a1, &v5);
-  if ( v5 )
+  if ( v5 == 0 || (operator^<int>(a1, &a2), this->m_iTradeRoleType = a2, operator^<int>(a1, &this->m_iExpectedAmount), v5 != 1) )
   {
-    operator^<int>(a1, &a2);
-    this->m_iTradeRoleType = a2;
-    operator^<int>(a1, &this->m_iExpectedAmount);
-    if ( v5 == 1 )
+    if ( v5 < 2 )
     {
-      return this;
+      BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CTradePileRole");
+      pExceptionObject = 0;
+      CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
+      _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
     }
+    operator^<int>(a1, &this->m_iReserveAmount);
   }
-  if ( v5 < 2 )
-  {
-    BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CTradePileRole");
-    pExceptionObject = 0;
-    CS4InvalidMapException::CS4InvalidMapException(&pExceptionObject);
-    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
-  }
-  operator^<int>(a1, &this->m_iReserveAmount);
   return this;
 }
 
@@ -629,7 +611,7 @@ void  CTradePileRole::Store(std::ostream & a2) {
 
   IPileRole::Store(this, a2);
   v3 = 2;
-  operator^<unsigned int>(a2, &v3);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
   m_iTradeRoleType = this->m_iTradeRoleType;
   operator^<int>(a2, &m_iTradeRoleType);
   operator^<int>(a2, &this->m_iExpectedAmount);

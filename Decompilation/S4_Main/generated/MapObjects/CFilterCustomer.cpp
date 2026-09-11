@@ -8,7 +8,7 @@
   
   IFilterEntry::IFilterEntry(this);
   *(_DWORD *)this = &CFilterCustomer::_vftable_;
-  *((_DWORD *)this + 3) = CSchedule::CalcDistance(a2[10], a2[17], *((_DWORD *)a3 + 17));
+  *((_DWORD *)this + 3) = CSchedule::CalcDistance((CReserveDatabase **)a2[10], (int)a2[17], *((_DWORD *)a3 + 17));
   *((_DWORD *)this + 4) = a2;
   *((_DWORD *)this + 4) = a3;
   return this;

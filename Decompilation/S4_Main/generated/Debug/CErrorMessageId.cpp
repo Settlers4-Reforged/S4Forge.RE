@@ -10,13 +10,13 @@
   int i; // [esp+8h] [ebp-4h]
 
   this->m_uMessageId = 0;
-  if ( Str1 && *Str1 )
+  if ( Str1 != 0 && *Str1 != 0 )
   {
     for ( i = 1;
           i <= 1;
           ++i )
     {
-      if ( !j__strcmp(Str1, s_aErrorMessages[i].m_uName) )
+      if ( j__strcmp(Str1, s_aErrorMessages[i].m_uName) == 0 )
       {
         this->m_uMessageId = i;
         return this;
@@ -24,7 +24,7 @@
     }
   }
   ++s_uUnknownErrorMessageCount;
-  if ( Str1 )
+  if ( Str1 != 0 )
   {
     BBSupportTracePrintF(3, "Unkwown error message <%s>!", Str1);
   }

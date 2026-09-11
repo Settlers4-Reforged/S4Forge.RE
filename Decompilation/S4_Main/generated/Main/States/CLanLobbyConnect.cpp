@@ -6,8 +6,8 @@
 // Decompiled from CLanLobbyConnect *__thiscall CLanLobbyConnect::CLanLobbyConnect(CLanLobbyConnect *this)
  CLanLobbyConnect::CLanLobbyConnect(void) {
   
-  std::wstring::wstring((char *)this + 16);
-  std::string::string();
+  std::wstring::wstring((std::wstring *)((char *)this + 16));
+  ((void (__cdecl *)())std::string::string)();
   return this;
 }
 
@@ -17,7 +17,7 @@
  CLanLobbyConnect::~CLanLobbyConnect(void) {
   
   std::string::~string((char *)this + 44);
-  std::wstring::~wstring((char *)this + 16);
+  std::wstring::~wstring((std::wstring *)((char *)this + 16));
 }
 
 

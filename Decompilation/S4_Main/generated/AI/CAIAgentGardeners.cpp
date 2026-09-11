@@ -14,14 +14,14 @@ unsigned int  CAIAgentGardeners::Execute(unsigned int a2, unsigned int a3) {
 // Decompiled from CAIAgentGardeners *__thiscall CAIAgentGardeners::CAIAgentGardeners(CAIAgentGardeners *this)
  CAIAgentGardeners::CAIAgentGardeners(void) {
   
-  CAINormalSectorAgent::CAINormalSectorAgent(this, string__27);
+  CAINormalSectorAgent::CAINormalSectorAgent((CAINormalSectorAgent *)this, string__27);
   *(_DWORD *)this = &CAIAgentGardeners::_vftable_;
   return this;
 }
 
 
 // address=[0x1325c50]
-// Decompiled from void __thiscall CAIAgentGardeners::~CAIAgentGardeners(CAIAgentGardeners *this)
+// Decompiled from void __thiscall CAIAgentGardeners::~CAIAgentGardeners(CAIScheduler **this)
  CAIAgentGardeners::~CAIAgentGardeners(void) {
   
   CAINormalSectorAgent::~CAINormalSectorAgent(this);

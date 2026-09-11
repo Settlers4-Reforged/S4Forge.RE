@@ -30,10 +30,10 @@ bool __cdecl CLanLobby::ConnectPlayer(struct SConnectGameInfoFromClient & _rMsg,
       CTrace::Print("LanLobby: Player %s could not be connected", (const char *)_rMsg);
       return 0;
     }
-    if ( g_pGameType->m_sPlayerExclusiveColor[i] && g_pGameType->m_sPlayerType[i] || CGameType::IsSaveGame(g_pGameType) && (g_pGameType->m_sPlayerType[i] == 2 || g_pGameType->m_sPlayerType[i] == 3) )
+    if ( g_pGameType->m_sPlayerExclusiveColor[i] != 0 && g_pGameType->m_sPlayerType[i] != 0 || CGameType::IsSaveGame(g_pGameType) != 0 && (g_pGameType->m_sPlayerType[i] == 2 || g_pGameType->m_sPlayerType[i] == 3) )
     {
       iPeerId = _rMsg->m_iPeerId == -1;
-      if ( (_rMsg->m_iPeerId != -1 || g_pGameType->m_sPlayerType[i] != 1) && (_rMsg->m_iPeerId == -1 || g_pGameType->m_sPlayerType[i] == 1 || CGameType::IsSaveGame(g_pGameType)) )
+      if ( (_rMsg->m_iPeerId != -1 || g_pGameType->m_sPlayerType[i] != 1) && (_rMsg->m_iPeerId == -1 || g_pGameType->m_sPlayerType[i] == 1 || CGameType::IsSaveGame(g_pGameType) != 0) )
       {
         break;
       }
@@ -60,7 +60,7 @@ bool __cdecl CLanLobby::ConnectPlayer(struct SConnectGameInfoFromClient & _rMsg,
   std::wstring::~wstring(&v9);
   g_pGameType->m_sPlayerExclusiveColor[i] = 0;
   ++g_pGameType->m_iHumanPlayers;
-  while ( !CGameHost::IsExclusiveColor(CLanLobby::m_pGameHost, i) )
+  while ( CGameHost::IsExclusiveColor(CLanLobby::m_pGameHost, i) == 0 )
   {
     ++g_pGameType->m_sPlayerColor[i];
     g_pGameType->m_sPlayerColor[i] %= 8u;
@@ -112,16 +112,13 @@ void __cdecl CLanLobby::RedrawPlayerList(void) {
 
   CurrentState = CGameStateHandler::GetCurrentState();
   v1 = (CStateLobbyGameSettings *)j____RTDynamicCast((void **)&CurrentState->__vftable, 0, &CGameState__RTTI_Type_Descriptor_, &CStateLobbyGameSettings__RTTI_Type_Descriptor_, 0);
-  if ( v1 )
+  if ( v1 != 0 )
   {
     (*(void (__thiscall **)(CStateLobbyGameSettings *, int))(*(_DWORD *)v1 + 16))(v1, 1);
   }
-  if ( CLanLobby::m_pGameHost->m_bHost )
+  if ( CLanLobby::m_pGameHost->m_bHost != 0 && CLanLobby::m_pGameHost->m_pFSM != 0 )
   {
-    if ( CLanLobby::m_pGameHost->m_pFSM )
-    {
-      CFsm::GenerateEvent(CLanLobby::m_pGameHost->m_pFSM, 1027, 0);
-    }
+    CFsm::GenerateEvent(CLanLobby::m_pGameHost->m_pFSM, 1027, 0);
   }
 }
 
@@ -132,22 +129,20 @@ void __cdecl CLanLobby::ChangeData(struct SLobbyChange * Src) {
   
   int *result; // eax
 
-  if ( !Src )
+  if ( Src != 0 )
   {
-    return result;
-  }
-  result = Src;
-  if ( *Src < 0 )
-  {
-    return result;
-  }
-  if ( CLanLobby::m_pGameHost->m_bHost )
-  {
-    return (int *)CFsm::Control(CLanLobby::m_pGameHost->m_pFSM, 1052, Src);
-  }
-  else
-  {
-    return (int *)CGameHost::SendToHost(1052, Src, 0xCu, 0, 0, 1);
+    result = Src;
+    if ( *Src >= 0 )
+    {
+      if ( CLanLobby::m_pGameHost->m_bHost != 0 )
+      {
+        return (int *)CFsm::Control(CLanLobby::m_pGameHost->m_pFSM, 1052, Src);
+      }
+      else
+      {
+        return (int *)CGameHost::SendToHost(1052, Src, 0xCu, 0, 0, 1);
+      }
+    }
   }
   return result;
 }
@@ -159,22 +154,20 @@ void __cdecl CLanLobby::ChangeSlots(struct SLobbyChange * Src) {
   
   int *result; // eax
 
-  if ( !Src )
+  if ( Src != 0 )
   {
-    return result;
-  }
-  result = Src;
-  if ( *Src < 0 )
-  {
-    return result;
-  }
-  if ( *(_BYTE *)(CLanLobby::m_pGameHost + 8) )
-  {
-    return (int *)CFsm::Control(*(CFsm **)(CLanLobby::m_pGameHost + 12), 1056, Src);
-  }
-  else
-  {
-    return (int *)CGameHost::SendToHost(1056, Src, 0xCu, 0, 0, 1);
+    result = Src;
+    if ( *Src >= 0 )
+    {
+      if ( CLanLobby::m_pGameHost->m_bHost != 0 )
+      {
+        return (int *)CFsm::Control(CLanLobby::m_pGameHost->m_pFSM, 1056, Src);
+      }
+      else
+      {
+        return (int *)CGameHost::SendToHost(1056, Src, 0xCu, 0, 0, 1);
+      }
+    }
   }
   return result;
 }
@@ -184,11 +177,11 @@ void __cdecl CLanLobby::ChangeSlots(struct SLobbyChange * Src) {
 // Decompiled from void __cdecl CLanLobby::Communicate(int a1, void *a2)
 void __cdecl CLanLobby::Communicate(int a1, void * a2) {
   
-  if ( !CLanLobby::m_pGameHost && BBSupportDbgReport(2, "net\\LanLobby.cpp", 319, "m_pGameHost!=NULL") == 1 )
+  if ( CLanLobby::m_pGameHost == 0 && BBSupportDbgReport(2, "net\\LanLobby.cpp", 319, "m_pGameHost!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( CLanLobby::m_pGameHost )
+  if ( CLanLobby::m_pGameHost != 0 )
   {
     CFsm::Control(CLanLobby::m_pGameHost->m_pFSM, a1, a2);
   }
@@ -257,20 +250,20 @@ void __cdecl CLanLobby::RedrawGameList(void) {
 
   CurrentState = CGameStateHandler::GetCurrentState();
   v21 = (CStateLobbyConnect *)j____RTDynamicCast((void **)&CurrentState->__vftable, 0, &CGameState__RTTI_Type_Descriptor_, &CStateLobbyConnect__RTTI_Type_Descriptor_, 0);
-  if ( v21 )
+  if ( v21 != 0 )
   {
     v22 = 0;
     std::list<SGameInfo>::begin(&CLanLobby::m_pGameHost->m_vGameInfos, (int)v19);
     v30 = 0;
     while ( 1 )
     {
-      v18 = (std::_Iterator_base12 *)std::list<SGameInfo>::end(v14);
+      v18 = (std::_Iterator_base12 *)std::list<SGameInfo>::end((int)v14);
       v17 = v18;
       LOBYTE(v30) = 1;
       v20 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator!=(v18);
       LOBYTE(v30) = 0;
       std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>(v14);
-      if ( !v20 )
+      if ( v20 == 0 )
       {
         break;
       }
@@ -285,13 +278,13 @@ void __cdecl CLanLobby::RedrawGameList(void) {
       v4 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
       *((_DWORD *)v21 + 35 * v22 + 26) = v4->m_iHostAddress;
       v5 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
-      std::wstring::operator=((char *)v21 + 140 * v22 + 60, v5->m_swpMapName);
+      std::wstring::operator=((std::wstring *)((char *)v21 + 140 * v22 + 60), v5->m_swpMapName);
       v6 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
       *((_BYTE *)v21 + 140 * v22 + 110) = v6->m_bU3;
       v7 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
       wcscpy(Destination, v7->m_swpMapName);
       j___wsplitpath(Destination, Drive, Dir, Filename, Ext);
-      std::wstring::operator=((char *)v21 + 140 * v22 + 32, Filename);
+      std::wstring::operator=((std::wstring *)((char *)v21 + 140 * v22 + 32), Filename);
       v8 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
       a2 = (std::wstring *)std::wstring::wstring(&v24, v8->m_swpGameName);
       std::wstring::operator=((std::wstring *)((char *)v21 + 140 * v22 + 4), a2);
@@ -301,12 +294,12 @@ void __cdecl CLanLobby::RedrawGameList(void) {
       v10 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
       *((_BYTE *)v21 + 140 * v22 + 109) = v10->m_bIsAutosave;
       v11 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
-      v15 = (std::wstring *)std::wstring::wstring(&v23, (wchar_t *)v11->m_swpRandomMapFileName);
+      v15 = (std::wstring *)std::wstring::wstring(&v23, v11->m_swpRandomMapFileName);
       std::wstring::operator=((std::wstring *)v21 + 5 * v22 + 4, v15);
       std::wstring::~wstring(&v23);
       v12 = std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator*(v19);
       *((_DWORD *)v21 + 35 * v22++ + 35) = v12->m_uTickCounter;
-      std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator++(v13, 0);
+      std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::operator++((int)v13, 0);
       std::_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>::~_List_iterator<std::_List_val<std::_List_simple_types<SGameInfo>>>(v13);
     }
     dword_4030714 = v22;
@@ -327,7 +320,7 @@ void __cdecl CLanLobby::RedrawMap(void) {
 
   CurrentState = (void **)CGameStateHandler::GetCurrentState();
   v1 = (_DWORD *)j____RTDynamicCast(CurrentState, 0, &CGameState__RTTI_Type_Descriptor_, &CStateLobbyGameSettings__RTTI_Type_Descriptor_, 0);
-  if ( v1 )
+  if ( v1 != 0 )
   {
     CStateLobbyGameSettings::PaintMap(v1);
   }
@@ -343,7 +336,7 @@ void __cdecl CLanLobby::PrintChatLine(unsigned short const * String, unsigned sh
 
   CurrentState = CGameStateHandler::GetCurrentState();
   v4 = j____RTDynamicCast((void **)&CurrentState->__vftable, 0, &CGameState__RTTI_Type_Descriptor_, &CStateLobbyGameSettings__RTTI_Type_Descriptor_, 0);
-  if ( v4 )
+  if ( v4 != 0 )
   {
     (*(void (__thiscall **)(int, int))(*(_DWORD *)v4 + 16))(v4, 1);
   }

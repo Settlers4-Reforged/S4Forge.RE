@@ -37,18 +37,18 @@ void  CFixCursor::SetSurfacePtr(unsigned short a2, class CSurface * a3, unsigned
 
   this->m_pSurface = a3;
   ho = LoadBitmapA(g_hInstance, (LPCSTR)a2);
-  if ( !ho )
+  if ( ho == 0 )
   {
     return BBSupportTracePrintF(1, "GFX ENGINE: Cannot open resource bitmap!");
   }
   hdc = CreateCompatibleDC(0);
-  if ( hdc )
+  if ( hdc != 0 )
   {
     h = SelectObject(hdc, ho);
-    if ( h )
+    if ( h != 0 )
     {
       v10 = this->m_pSurface->Lock(this->m_pSurface, (int *)&v5, &v8, 1);
-      if ( v10 )
+      if ( v10 != 0 )
       {
         WriteError(v10, "LockCursorSurface");
         SelectObject(hdc, h);
@@ -71,7 +71,7 @@ void  CFixCursor::SetSurfacePtr(unsigned short a2, class CSurface * a3, unsigned
             {
               v15 = -1;
             }
-            else if ( !(_BYTE)Pixel )
+            else if ( (_BYTE)Pixel == 0 )
             {
               v15 = 0;
             }
@@ -80,7 +80,7 @@ void  CFixCursor::SetSurfacePtr(unsigned short a2, class CSurface * a3, unsigned
           v8 += 2 * (v5 >> 1);
         }
         v10 = this->m_pSurface->Unlock(this->m_pSurface);
-        if ( v10 )
+        if ( v10 != 0 )
         {
           WriteError(v10, "UnlockCursorSurface");
         }
@@ -153,11 +153,11 @@ void  CFixCursor::SetFixCursor(int a2, int a3, bool a4) {
 // Decompiled from HRESULT __thiscall CFixCursor::Show(CFixCursor *this, CSurfaceV7 *a2)
 long  CFixCursor::Show(class CSurface * a2) {
   
-  if ( !CFixCursor::IsVisible(this) )
+  if ( CFixCursor::IsVisible(this) == 0 )
   {
     return 0;
   }
-  if ( this->m_pSurface && a2 )
+  if ( this->m_pSurface != 0 && a2 != 0 )
   {
     return a2->Blt(a2, &this->m_sRect, this->m_pSurface, &this->m_sOffset, 0x8000u, 0);
   }

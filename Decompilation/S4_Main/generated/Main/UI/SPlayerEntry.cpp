@@ -6,10 +6,10 @@
 // Decompiled from CLanLobbyGameSettings::SPlayerEntry *__thiscall CLanLobbyGameSettings::SPlayerEntry::SPlayerEntry(CLanLobbyGameSettings::SPlayerEntry *this)
  CLanLobbyGameSettings::SPlayerEntry::SPlayerEntry(void) {
   
-  std::wstring::wstring((char *)this + 8);
+  std::wstring::wstring((std::wstring *)((char *)this + 8));
   *(_BYTE *)this = 1;
   *((_DWORD *)this + 1) = 0;
-  std::wstring::operator=((char *)this + 8, (wchar_t *)&word_3746B00);
+  std::wstring::operator=((std::wstring *)((char *)this + 8), (wchar_t *)&word_3746B00);
   *((_DWORD *)this + 9) = 0;
   *((_DWORD *)this + 10) = 0;
   *((_DWORD *)this + 11) = 0;
@@ -26,7 +26,7 @@
 // Decompiled from void __thiscall CLanLobbyGameSettings::SPlayerEntry::~SPlayerEntry(CDHtmlElementEventSink *this)
  CLanLobbyGameSettings::SPlayerEntry::~SPlayerEntry(void) {
   
-  std::wstring::~wstring((char *)this + 8);
+  std::wstring::~wstring((std::wstring *)((char *)this + 8));
 }
 
 

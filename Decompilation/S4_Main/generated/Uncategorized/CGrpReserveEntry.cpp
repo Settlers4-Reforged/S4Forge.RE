@@ -11,12 +11,12 @@
 
   CReserveEntry::CReserveEntry(this);
   *this = &CGrpReserveEntry::_vftable_;
-  this[3] = a2;
-  this[4] = a3;
-  this[5] = a4;
-  this[11] = a5;
+  *(this + 3) = a2;
+  *(this + 4) = a3;
+  *(this + 5) = a4;
+  *(this + 11) = a5;
   C = (CDynList *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     v6 = CDynList::CDynList(C);
   }
@@ -24,7 +24,7 @@
   {
     v6 = 0;
   }
-  this[12] = v6;
+  *(this + 12) = v6;
   return this;
 }
 
@@ -34,9 +34,9 @@
  CGrpReserveEntry::~CGrpReserveEntry(void) {
   
   *this = (CDynList *)&CGrpReserveEntry::_vftable_;
-  if ( this[12] )
+  if ( *(this + 12) != 0 )
   {
-    delete this[12];
+    delete *(this + 12);
   }
   CReserveEntry::~CReserveEntry(this);
 }

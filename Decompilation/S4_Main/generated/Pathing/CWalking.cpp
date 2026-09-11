@@ -4,17 +4,10 @@
 // Definitions for class CWalking
 
 // address=[0x14d8690]
-// Decompiled from unsigned __int8 __thiscall CWalking::IsFree(CWalking *this, int a2)
+// Decompiled from bool __thiscall CWalking::IsFree(CWalking *this, int a2)
 bool  CWalking::IsFree(int a2) {
   
-  if ( this->IsNotBlocked(this, a2) )
-  {
-    return this->IsNotOccupied(this, a2);
-  }
-  else
-  {
-    return 0;
-  }
+  return this->IsNotBlocked(this, a2) != 0 && this->IsNotOccupied(this, a2);
 }
 
 
@@ -36,7 +29,7 @@ class CWalking * __cdecl CWalking::Create(enum T_WALKING_TYPE a1, int a2) {
   {
     case 0:
       C = (CWalkingNormal *)operator new(0xC0u);
-      if ( C )
+      if ( C != 0 )
       {
         v9 = CWalkingNormal::CWalkingNormal(C, a2);
       }
@@ -48,9 +41,9 @@ class CWalking * __cdecl CWalking::Create(enum T_WALKING_TYPE a1, int a2) {
       break;
     case 1:
       v8 = (CWalkingWorker *)operator new(0xC0u);
-      if ( v8 )
+      if ( v8 != 0 )
       {
-        v7 = CWalkingWorker::CWalkingWorker(v8, a2);
+        v7 = (CWalkingNormal *)CWalkingWorker::CWalkingWorker(v8, a2);
       }
       else
       {
@@ -60,9 +53,9 @@ class CWalking * __cdecl CWalking::Create(enum T_WALKING_TYPE a1, int a2) {
       break;
     case 3:
       v6 = (CWalkingCatapult *)operator new(0xC0u);
-      if ( v6 )
+      if ( v6 != 0 )
       {
-        v5 = CWalkingCatapult::CWalkingCatapult(v6);
+        v5 = (CWalkingNormal *)CWalkingCatapult::CWalkingCatapult(v6);
       }
       else
       {
@@ -72,9 +65,9 @@ class CWalking * __cdecl CWalking::Create(enum T_WALKING_TYPE a1, int a2) {
       break;
     case 4:
       v4 = (CWalkingShip *)operator new(0xC0u);
-      if ( v4 )
+      if ( v4 != 0 )
       {
-        v3 = CWalkingShip::CWalkingShip(v4);
+        v3 = (CWalkingNormal *)CWalkingShip::CWalkingShip(v4);
       }
       else
       {
@@ -95,7 +88,7 @@ class CWalking * __cdecl CWalking::Create(enum T_WALKING_TYPE a1, int a2) {
 
 
 // address=[0x15f62c0]
-// Decompiled from CWalkingBase *__cdecl CWalking::Create(struct std::istream *a1)
+// Decompiled from CWalkingNormal *__cdecl CWalking::Create(struct std::istream *a1)
 class CWalking * __cdecl CWalking::Create(std::istream & a1) {
   
   CWalkingBase::SData *Data; // eax
@@ -118,14 +111,14 @@ class CWalking * __cdecl CWalking::Create(std::istream & a1) {
   int ControllID; // [esp+8h] [ebp-18h] BYREF
   int a2; // [esp+Ch] [ebp-14h] BYREF
   int v21; // [esp+10h] [ebp-10h] BYREF
-  CWalkingBase *pNewWalking; // [esp+14h] [ebp-Ch]
+  CWalkingNormal *pNewWalking; // [esp+14h] [ebp-Ch]
   __int16 v23; // [esp+18h] [ebp-8h] BYREF
   __int16 v24; // [esp+1Ch] [ebp-4h] BYREF
 
   operator^<int>(a1, &a2);
   a2 = 929995208;
   v24 = 1;
-  operator^<short>(a1, &v24);
+  operator^<short>((int)a1, (int)&v24);
   if ( v24 != 1 )
   {
     BBSupportTracePrintF(3, "load output defect Unknown fileFormatVersion for CWalking");
@@ -134,15 +127,15 @@ class CWalking * __cdecl CWalking::Create(std::istream & a1) {
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVCS4InvalidMapException__);
   }
   v23 = -1;
-  operator^<short>(a1, &v23);
+  operator^<short>((int)a1, (int)&v23);
   v21 = -1;
   operator^<int>(a1, &v21);
-  pNewWalking = (CWalkingBase *)CWalking::Create(v23, v21 & 0xF);
-  if ( !pNewWalking && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2476, "pNewWalking!=NULL") == 1 )
+  pNewWalking = CWalking::Create(v23, v21 & 0xF);
+  if ( pNewWalking == 0 && BBSupportDbgReport(2, "Pathing\\Walking.cpp", 2476, "pNewWalking!=NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !pNewWalking )
+  if ( pNewWalking == 0 )
   {
     return 0;
   }

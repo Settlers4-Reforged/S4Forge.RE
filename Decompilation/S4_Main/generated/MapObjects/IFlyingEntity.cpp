@@ -16,7 +16,7 @@ int  IFlyingEntity::FlyingFlagBits(int a2)const {
   
   int v6; // [esp+4h] [ebp-14h]
 
-  IAnimatedEntity::IAnimatedEntity(this, a2);
+  IAnimatedEntity::IAnimatedEntity((IAnimatedEntity *)this, a2);
   *(_DWORD *)this = &IFlyingEntity::_vftable_;
   CObserverList::CObserverList((char *)this + 84);
   *((_BYTE *)this + 82) = 0;
@@ -26,7 +26,7 @@ int  IFlyingEntity::FlyingFlagBits(int a2)const {
   *((_BYTE *)this + 10) = 64;
   *((_WORD *)this + 38) = a4;
   *((_WORD *)this + 39) = a5;
-  v6 = CLogic::Effects((DWORD *)g_pLogic);
+  v6 = (int)CLogic::Effects(g_pLogic);
   *((_DWORD *)this + 18) = (*(int (__cdecl **)(_DWORD))(*(_DWORD *)v6 + 40))(*((_DWORD *)this + 17));
   return this;
 }
@@ -36,27 +36,26 @@ int  IFlyingEntity::FlyingFlagBits(int a2)const {
 // Decompiled from _DWORD *__thiscall IFlyingEntity::IFlyingEntity(_DWORD *this, int a2)
  IFlyingEntity::IFlyingEntity(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-14h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-14h] BYREF
   _DWORD *v4; // [esp+Ch] [ebp-10h]
   int v5; // [esp+18h] [ebp-4h]
 
   v4 = this;
-  IAnimatedEntity::IAnimatedEntity(a2);
+  ((void (__stdcall *)(int))IAnimatedEntity::IAnimatedEntity)(a2);
   v5 = 0;
   *v4 = &IFlyingEntity::_vftable_;
-  CObserverList::CObserverList(a2);
+  ((void (__stdcall *)(int))CObserverList::CObserverList)(a2);
   LOBYTE(v5) = 1;
   operator^<unsigned int>(a2, &v3);
-  if ( v3 != 1 )
+  if ( v3 == 1 )
   {
-    return v4;
+    operator^<signed char>(a2, (char *)v4 + 82);
+    operator^<unsigned int>(a2, v4 + 17);
+    operator^<unsigned int>(a2, v4 + 18);
+    operator^<unsigned short>(a2, (unsigned __int16 *)v4 + 38);
+    operator^<unsigned short>(a2, (unsigned __int16 *)v4 + 39);
+    operator^<short>(a2, (int)(v4 + 20));
   }
-  operator^<signed char>(a2, (char *)v4 + 82);
-  operator^<unsigned int>(a2, v4 + 17);
-  operator^<unsigned int>(a2, v4 + 18);
-  operator^<unsigned short>(a2, v4 + 19);
-  operator^<unsigned short>(a2, (char *)v4 + 78);
-  operator^<short>(a2, v4 + 20);
   return v4;
 }
 
@@ -69,16 +68,16 @@ void  IFlyingEntity::Store(std::ostream & a2) {
   char *v4; // [esp+4h] [ebp-4h]
 
   v4 = this;
-  IAnimatedEntity::Store(a2);
-  CObserverList::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))IAnimatedEntity::Store)(a2);
+  ((void (__stdcall *)(struct std::ostream *))CObserverList::Store)(a2);
   v3 = 1;
-  operator^<unsigned int>(a2, &v3);
+  operator^<unsigned int>(a2, (unsigned int *)&v3);
   operator^<signed char>(a2, v4 + 82);
-  operator^<unsigned int>(a2, (int *)v4 + 17);
-  operator^<unsigned int>(a2, (int *)v4 + 18);
-  operator^<unsigned short>((int)a2, (__int16 *)v4 + 38);
-  operator^<unsigned short>((int)a2, (__int16 *)v4 + 39);
-  return operator^<short>((int)a2, (__int16 *)v4 + 40);
+  operator^<unsigned int>(a2, (unsigned int *)v4 + 17);
+  operator^<unsigned int>(a2, (unsigned int *)v4 + 18);
+  operator^<unsigned short>(a2, (WORD *)v4 + 38);
+  operator^<unsigned short>(a2, (WORD *)v4 + 39);
+  return operator^<short>(a2, (__int16 *)v4 + 40);
 }
 
 
@@ -89,48 +88,48 @@ void  IFlyingEntity::FlyTo(int a2, int a3) {
   *((_WORD *)this + 38) = a2;
   *((_WORD *)this + 39) = a3;
   IFlyingEntity::SetFlyingFlagBits(this, 1);
-  return IAnimatedEntity::RegisterForLogicUpdate(1);
+  return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
 }
 
 
 // address=[0x154f180]
-// Decompiled from void __thiscall IFlyingEntity::Delete(IFlyingEntity *this)
+// Decompiled from void __thiscall IFlyingEntity::Delete(IEntity *this)
 void  IFlyingEntity::Delete(void) {
   
   int v1; // eax
   int v2; // eax
   int v3; // eax
   int v4; // [esp-8h] [ebp-3Ch]
-  _BYTE v5[24]; // [esp+4h] [ebp-30h] BYREF
+  CEntityEvent v5; // [esp+4h] [ebp-30h] BYREF
   const struct CEntityEvent *v6; // [esp+1Ch] [ebp-18h]
   const struct CEntityEvent *v7; // [esp+20h] [ebp-14h]
-  unsigned __int16 *v8; // [esp+24h] [ebp-10h]
+  IEntity *v8; // [esp+24h] [ebp-10h]
   int v9; // [esp+30h] [ebp-4h]
 
-  v8 = (unsigned __int16 *)this;
-  v4 = IAnimatedEntity::AttackerPlayerId();
+  v8 = this;
+  v4 = ((int (__stdcall *)())IAnimatedEntity::AttackerPlayerId)();
   v1 = IEntity::EntityId(v8);
-  v7 = CEntityEvent::CEntityEvent((CEntityEvent *)v5, 9u, 0, v1, v4, 0);
+  v7 = CEntityEvent::CEntityEvent(&v5, 9u, 0, v1, v4, 0);
   v6 = v7;
   v9 = 0;
-  CObserverList::NotifyAndDetachAllObservers((CObserverList *)(v8 + 42), v7);
+  CObserverList::NotifyAndDetachAllObservers((CObserverList *)&v8[2].m_iType, v7);
   v9 = -1;
-  CEntityEvent::~CEntityEvent(v5);
-  v2 = IEntity::ID();
+  CEntityEvent::~CEntityEvent(&v5);
+  v2 = ((int (__stdcall *)())IEntity::ID)();
   CTrace::Print("FlyingEntity: DetachAllObservers for ID %i called!", v2);
-  v3 = IEntity::ID();
+  v3 = ((int (__stdcall *)())IEntity::ID)();
   CFlyingMgr::CheckOutFlyingEntity((CFlyingMgr *)g_cFlyingMgr, v3);
 }
 
 
 // address=[0x154f230]
-// Decompiled from void __thiscall IFlyingEntity::Attach(IFlyingEntity *this, int a2)
+// Decompiled from void __thiscall IFlyingEntity::Attach(IEntity *this, int a2)
 void  IFlyingEntity::Attach(int a2) {
   
   int v2; // eax
 
-  v2 = IEntity::EntityId((unsigned __int16 *)this);
-  CObserverList::Attach((IFlyingEntity *)((char *)this + 84), v2, a2);
+  v2 = IEntity::EntityId(this);
+  CObserverList::Attach((CObserverList *)((char *)this + 84), (void *)v2, a2);
 }
 
 
@@ -152,11 +151,11 @@ void  IFlyingEntity::Notify(class CEntityEvent const & a2)const {
 
 
 // address=[0x154f3e0]
-// Decompiled from void __thiscall IFlyingEntity::~IFlyingEntity(IFlyingEntity *this)
+// Decompiled from void __thiscall IFlyingEntity::~IFlyingEntity(IAnimatedEntity *this)
  IFlyingEntity::~IFlyingEntity(void) {
   
-  *(_DWORD *)this = &IFlyingEntity::_vftable_;
-  CObserverList::~CObserverList((IFlyingEntity *)((char *)this + 84));
+  this->__vftable = (IAnimatedEntity_vtbl *)&IFlyingEntity::_vftable_;
+  CObserverList::~CObserverList((CObserverList *)((char *)this + 84));
   IAnimatedEntity::~IAnimatedEntity(this);
 }
 

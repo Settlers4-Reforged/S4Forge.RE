@@ -15,18 +15,18 @@
 
 
 // address=[0x1306800]
-// Decompiled from char __thiscall CSpiralWalk::NextXY(_DWORD *this, int *a2, int *a3)
+// Decompiled from char __thiscall CSpiralWalk::NextXY(int *this, int *a2, int *a3)
 bool  CSpiralWalk::NextXY(int & a2, int & a3) {
   
   int v4; // [esp+0h] [ebp-Ch]
   int v5; // [esp+4h] [ebp-8h]
 
-  while ( *this <= this[3] )
+  while ( *this <= *(this + 3) )
   {
-    v5 = this[1] + CSpiralOffsets::DeltaX(*this);
-    v4 = this[2] + CSpiralOffsets::DeltaY(*this);
+    v5 = *(this + 1) + CSpiralOffsets::DeltaX(*this);
+    v4 = *(this + 2) + CSpiralOffsets::DeltaY(*this);
     ++*this;
-    if ( (unsigned __int8)CWorldManager::InWorld(v5, v4) )
+    if ( CWorldManager::InWorld(v5, v4) )
     {
       *a2 = v5;
       *a3 = v4;

@@ -10,7 +10,7 @@ class CPersistence * __cdecl CStoragePileRole::New(std::istream & a1) {
   CStoragePileRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CStoragePileRole *)operator new(8u);
-  if ( C )
+  if ( C != 0 )
   {
     CStoragePileRole::CStoragePileRole(C, (int)a1);
   }
@@ -34,13 +34,13 @@ unsigned long  CStoragePileRole::ClassID(void)const {
 
 
 // address=[0x1560440]
-// Decompiled from int __cdecl CStoragePileRole::Load(int a1)
+// Decompiled from int __cdecl CStoragePileRole::Load(struct std::istream *a1)
 class CStoragePileRole * __cdecl CStoragePileRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CStoragePileRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -50,7 +50,7 @@ class CStoragePileRole * __cdecl CStoragePileRole::Load(std::istream & a1) {
 void  CStoragePileRole::Init(class CPile * a2) {
   
   IPileRole::Init(this, a2);
-  CPile::SetRoleType(a2, 2);
+  CPile::SetRoleType(a2, 2u);
   CPile::SetOfferFlag(a2, 1);
   CPile::OfferCompletePileIfPossible(a2, 0);
 }
@@ -60,13 +60,13 @@ void  CStoragePileRole::Init(class CPile * a2) {
 // Decompiled from _DWORD *__thiscall CStoragePileRole::CStoragePileRole(_DWORD *this, int a2)
  CStoragePileRole::CStoragePileRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   _DWORD *v5; // [esp+10h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-4h]
 
   v5 = this;
-  IPileRole::IPileRole(a2);
+  ((void (__stdcall *)(int))IPileRole::IPileRole)(a2);
   v6 = 0;
   *v5 = &CStoragePileRole::_vftable_;
   operator^<unsigned int>(a2, &v3);
@@ -89,9 +89,9 @@ void  CStoragePileRole::Store(std::ostream & a2) {
   int v3[2]; // [esp+0h] [ebp-8h] BYREF
 
   v3[1] = (int)this;
-  IPileRole::Store(a2);
+  ((void (__stdcall *)(struct std::ostream *))IPileRole::Store)(a2);
   v3[0] = 1;
-  return operator^<unsigned int>(a2, v3);
+  return operator^<unsigned int>(a2, (unsigned int *)v3);
 }
 
 
@@ -103,7 +103,7 @@ void  CStoragePileRole::Store(std::ostream & a2) {
  CStoragePileRole::CStoragePileRole(void) {
   
   IPileRole::IPileRole(this);
-  *(_DWORD *)this = &CStoragePileRole::_vftable_;
+  this->__vftable = (IPileRole_vtbl *)&CStoragePileRole::_vftable_;
   return this;
 }
 

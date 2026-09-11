@@ -6,7 +6,7 @@
 // Decompiled from CPlaylist::SEntry *__thiscall CPlaylist::SEntry::SEntry(CPlaylist::SEntry *this)
  CPlaylist::SEntry::SEntry(void) {
   
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   return this;
 }
 

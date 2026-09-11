@@ -10,7 +10,7 @@ class CPersistence * __cdecl CDeliverPileRole::New(std::istream & a1) {
   CDeliverPileRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CDeliverPileRole *)operator new(8u);
-  if ( C )
+  if ( C != 0 )
   {
     CDeliverPileRole::CDeliverPileRole(C, (int)a1);
   }
@@ -28,7 +28,7 @@ void  CDeliverPileRole::Init(class CPile * _pPile) {
   CPile::SetRoleType(_pPile, 1u);
   CPile::SetOfferFlag(_pPile, 1u);
   v2 = IEntity::WorldIdx(_pPile);
-  if ( !CWorldManager::FlagBits(v2, 8u) && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 100, "g_cWorld.FlagBits(_pPile->WorldIdx(), FLAG_BUILDING) != 0") == 1 )
+  if ( CWorldManager::FlagBits(v2, 8u) == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 100, "g_cWorld.FlagBits(_pPile->WorldIdx(), FLAG_BUILDING) != 0") == 1 )
   {
     __debugbreak();
   }
@@ -52,7 +52,7 @@ void  CDeliverPileRole::LogicUpdate(class CPile * a2) {
   int v7; // [esp-4h] [ebp-Ch]
   int iEcoSectorId; // [esp+4h] [ebp-4h]
 
-  if ( !CPile::GetOfferFlag(a2) )
+  if ( CPile::GetOfferFlag(a2) == 0 )
   {
     if ( !CPile::HasSpace(a2) )
     {
@@ -61,13 +61,13 @@ LABEL_11:
       return;
     }
     _pPile = IEntity::WorldIdx(a2);
-    if ( !CWorldManager::FlagBits(_pPile, 8u) && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 155, "g_cWorld.FlagBits( _pPile->WorldIdx(), FLAG_BUILDING )") == 1 )
+    if ( CWorldManager::FlagBits(_pPile, 8u) == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 155, "g_cWorld.FlagBits( _pPile->WorldIdx(), FLAG_BUILDING )") == 1 )
     {
       __debugbreak();
     }
     v3 = IEntity::WorldIdx(a2);
     iEcoSectorId = CWorldManager::EcoSectorId(v3);
-    if ( !iEcoSectorId )
+    if ( iEcoSectorId == 0 )
     {
       v4 = IEntity::WorldIdx(a2);
       v5 = CWorldManager::FlagBits(v4, 0xFFu);
@@ -76,7 +76,7 @@ LABEL_11:
         __debugbreak();
       }
     }
-    if ( iEcoSectorId )
+    if ( iEcoSectorId != 0 )
     {
       v7 = a2->GetGoodType();
       BuildingId = CPile::GetBuildingId(a2);
@@ -96,7 +96,7 @@ void  CDeliverPileRole::Increase(class CPile * _pPile, int _iAmount) {
   int v4; // eax
   struct CBuilding *BuildingPtr; // [esp+4h] [ebp-4h]
 
-  if ( !_pPile && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 186, "_pPile != 0") == 1 )
+  if ( _pPile == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 186, "_pPile != 0") == 1 )
   {
     __debugbreak();
   }
@@ -104,13 +104,13 @@ void  CDeliverPileRole::Increase(class CPile * _pPile, int _iAmount) {
   {
     __debugbreak();
   }
-  if ( !CPile::GetBuildingId(_pPile) && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 193, "_pPile->GetBuildingId() != 0") == 1 )
+  if ( CPile::GetBuildingId(_pPile) == 0 && BBSupportDbgReport(2, "MapObjects\\Pile\\DeliverPileRole.cpp", 193, "_pPile->GetBuildingId() != 0") == 1 )
   {
     __debugbreak();
   }
   BuildingId = CPile::GetBuildingId(_pPile);
   BuildingPtr = CBuildingMgr::GetBuildingPtr((CBuildingMgr *)g_cBuildingMgr, BuildingId);
-  if ( BuildingPtr )
+  if ( BuildingPtr != 0 )
   {
     v4 = _pPile->GetGoodType();
     CBuilding::GoodArrive(BuildingPtr, v4);
@@ -143,7 +143,7 @@ void  CDeliverPileRole::SubjectStarted(class CPile * a2) {
 // Decompiled from CDeliverPileRole *__thiscall CDeliverPileRole::CDeliverPileRole(CDeliverPileRole *this, int a2)
  CDeliverPileRole::CDeliverPileRole(std::istream & a2) {
   
-  int v3; // [esp+8h] [ebp-18h] BYREF
+  unsigned int v3; // [esp+8h] [ebp-18h] BYREF
   int pExceptionObject; // [esp+Ch] [ebp-14h] BYREF
   int v6; // [esp+1Ch] [ebp-4h]
 
@@ -171,7 +171,7 @@ void  CDeliverPileRole::Store(std::ostream & a2) {
 
   IPileRole::Store(this, a2);
   v3 = 1;
-  return operator^<unsigned int>(a2, &v3);
+  return operator^<unsigned int>(a2, (unsigned int *)&v3);
 }
 
 
@@ -210,7 +210,7 @@ class CDeliverPileRole * __cdecl CDeliverPileRole::Load(std::istream & a1) {
  CDeliverPileRole::CDeliverPileRole(void) {
   
   IPileRole::IPileRole(this);
-  *(_DWORD *)this = &CDeliverPileRole::_vftable_;
+  this->__vftable = (IPileRole_vtbl *)&CDeliverPileRole::_vftable_;
   return this;
 }
 

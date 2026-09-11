@@ -16,7 +16,7 @@
 // Decompiled from char __thiscall CSectorSpiralWalk::NextXY(CSectorSpiralWalk *this, int *a2, int *a3)
 bool  CSectorSpiralWalk::NextXY(int & a2, int & a3) {
   
-  while ( CSpiralWalk::NextXY(this, a2, a3) )
+  while ( CSpiralWalk::NextXY(this, a2, a3) != 0 )
   {
     if ( CWorldManager::SectorId(*a2, *a3) == *((_DWORD *)this + 4) )
     {

@@ -6,7 +6,7 @@
 // Decompiled from IAIMain *__thiscall IAIMain::IAIMain(IAIMain *this)
  IAIMain::IAIMain(void) {
   
-  IS4ChunkObject::IS4ChunkObject(this);
+  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this);
   *(_DWORD *)this = IAIMain::_vftable_;
   return this;
 }

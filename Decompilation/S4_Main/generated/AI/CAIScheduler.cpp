@@ -19,7 +19,7 @@
 // Decompiled from void __thiscall CAIScheduler::~CAIScheduler(CAIScheduler *this)
  CAIScheduler::~CAIScheduler(void) {
   
-  *(_DWORD *)this = &CAIScheduler::_vftable_;
+  this->__vftable = (CAIScheduler_vtbl *)&CAIScheduler::_vftable_;
   CAIScheduler::RemoveAllAgents(this);
   CAIAgent::~CAIAgent(this);
 }
@@ -29,7 +29,7 @@
 // Decompiled from void __thiscall CAIScheduler::AddAgent(CAIScheduler *this, CAIAgent *_rAgent, int _uDefaultExecutionDelay, int a4, int a5)
 void  CAIScheduler::AddAgent(class CAIAgent & _rAgent, unsigned int _uDefaultExecutionDelay, unsigned int a4, unsigned int a5) {
   
-  if ( _rAgent->m_pScheduler )
+  if ( _rAgent->m_pScheduler != 0 )
   {
     CAIScheduler::RemoveAgent(_rAgent->m_pScheduler, _rAgent);
   }
@@ -60,7 +60,7 @@ void  CAIScheduler::RemoveAgent(class CAIAgent & a2) {
 // Decompiled from void __thiscall CAIScheduler::RemoveAllAgents(CAIScheduler *this)
 void  CAIScheduler::RemoveAllAgents(void) {
   
-  while ( this->m_pFirstAgent )
+  while ( this->m_pFirstAgent != 0 )
   {
     CAIScheduler::RemoveAgent(this, this->m_pFirstAgent);
   }
@@ -99,17 +99,17 @@ unsigned int  CAIScheduler::Execute(unsigned int a2, unsigned int a3) {
   CAIAgent *m_pFirstAgent; // [esp+14h] [ebp-8h]
 
   v6 = 1;
-  while ( this->m_pFirstAgent && this->m_pFirstAgent->m_uScheduleTime <= a2 && this->m_pFirstAgent->dwordC <= a3 )
+  while ( this->m_pFirstAgent != 0 && this->m_pFirstAgent->m_uScheduleTime <= a2 && this->m_pFirstAgent->dwordC <= a3 )
   {
     m_pFirstAgent = this->m_pFirstAgent;
     v4 = m_pFirstAgent->Execute(m_pFirstAgent, a2, a3);
     m_uDefaultExecutionDelay = v4 >> 12;
     dwordC = v4 & 0xFFF;
-    if ( !(v4 >> 12) )
+    if ( v4 >> 12 == 0 )
     {
       m_uDefaultExecutionDelay = m_pFirstAgent->m_uDefaultExecutionDelay;
     }
-    if ( !m_uDefaultExecutionDelay )
+    if ( m_uDefaultExecutionDelay == 0 )
     {
       m_uDefaultExecutionDelay = 1;
     }
@@ -117,7 +117,7 @@ unsigned int  CAIScheduler::Execute(unsigned int a2, unsigned int a3) {
     {
       dwordC = m_pFirstAgent->dwordC;
     }
-    if ( !dwordC )
+    if ( dwordC == 0 )
     {
       dwordC = 1;
     }
@@ -138,7 +138,7 @@ unsigned int  CAIScheduler::Execute(unsigned int a2, unsigned int a3) {
   {
     v6 = 4095;
   }
-  if ( !this->m_pFirstAgent )
+  if ( this->m_pFirstAgent == 0 )
   {
     return CAIAgent::ExecuteResult(0xFFFFFu, v6);
   }
@@ -167,18 +167,18 @@ void  CAIScheduler::AddAgentEx(class CAIAgent * a2) {
   CAIAgent *v4; // [esp+Ch] [ebp-8h]
   CAIAgent *i; // [esp+10h] [ebp-4h]
 
-  if ( !a2 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 174, "_pAgent != 0") == 1 )
+  if ( a2 == 0 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 174, "_pAgent != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( a2->m_pScheduler && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 175, "_pAgent->m_pScheduler == 0") == 1 )
+  if ( a2->m_pScheduler != 0 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 175, "_pAgent->m_pScheduler == 0") == 1 )
   {
     __debugbreak();
   }
   dword4 = a2->m_uScheduleTime;
   v4 = 0;
   for ( i = this->m_pFirstAgent;
-        i && dword4 >= i->m_uScheduleTime && (dword4 != i->m_uScheduleTime || a2->dword10 < i->dword10);
+        i != 0 && dword4 >= i->m_uScheduleTime && (dword4 != i->m_uScheduleTime || a2->dword10 < i->dword10);
         i = i->m_pNextAgent )
   {
     v4 = i;
@@ -186,15 +186,15 @@ void  CAIScheduler::AddAgentEx(class CAIAgent * a2) {
   a2->m_pPrevAgent = v4;
   a2->m_pNextAgent = i;
   a2->m_pScheduler = this;
-  if ( v4 && v4->m_pNextAgent != i && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 203, "(pPrevAgent == 0) || (pPrevAgent->m_pNextAgent == pNextAgent)") == 1 )
+  if ( v4 != 0 && v4->m_pNextAgent != i && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 203, "(pPrevAgent == 0) || (pPrevAgent->m_pNextAgent == pNextAgent)") == 1 )
   {
     __debugbreak();
   }
-  if ( i && i->m_pPrevAgent != v4 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 204, "(pNextAgent == 0) || (pNextAgent->m_pPrevAgent == pPrevAgent)") == 1 )
+  if ( i != 0 && i->m_pPrevAgent != v4 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 204, "(pNextAgent == 0) || (pNextAgent->m_pPrevAgent == pPrevAgent)") == 1 )
   {
     __debugbreak();
   }
-  if ( v4 )
+  if ( v4 != 0 )
   {
     v4->m_pNextAgent = a2;
   }
@@ -202,7 +202,7 @@ void  CAIScheduler::AddAgentEx(class CAIAgent * a2) {
   {
     this->m_pFirstAgent = a2;
   }
-  if ( i )
+  if ( i != 0 )
   {
     i->m_pPrevAgent = a2;
   }
@@ -214,7 +214,7 @@ void  CAIScheduler::AddAgentEx(class CAIAgent * a2) {
 // Decompiled from void __thiscall CAIScheduler::RemoveAgentEx(CAIScheduler *this, struct CAIAgent *_pAgent)
 void  CAIScheduler::RemoveAgentEx(class CAIAgent * _pAgent) {
   
-  if ( !_pAgent && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 249, "_pAgent != 0") == 1 )
+  if ( _pAgent == 0 && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 249, "_pAgent != 0") == 1 )
   {
     __debugbreak();
   }
@@ -222,7 +222,7 @@ void  CAIScheduler::RemoveAgentEx(class CAIAgent * _pAgent) {
   {
     __debugbreak();
   }
-  if ( _pAgent->m_pPrevAgent )
+  if ( _pAgent->m_pPrevAgent != 0 )
   {
     if ( _pAgent->m_pPrevAgent->m_pNextAgent != _pAgent && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 254, "_pAgent->m_pPrevAgent->m_pNextAgent == _pAgent") == 1 )
     {
@@ -238,7 +238,7 @@ void  CAIScheduler::RemoveAgentEx(class CAIAgent * _pAgent) {
     }
     this->m_pFirstAgent = _pAgent->m_pNextAgent;
   }
-  if ( _pAgent->m_pNextAgent )
+  if ( _pAgent->m_pNextAgent != 0 )
   {
     if ( _pAgent->m_pNextAgent->m_pPrevAgent != _pAgent && BBSupportDbgReport(2, "AI\\AI_Agents.cpp", 267, "_pAgent->m_pNextAgent->m_pPrevAgent == _pAgent") == 1 )
     {

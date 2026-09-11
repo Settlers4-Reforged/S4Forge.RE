@@ -7,11 +7,11 @@
 // Decompiled from void __thiscall CAIAgentPlayerBase::AttachPlayerAI(CAIAgentPlayerBase *this, struct CAIPlayerAI *_pPlayerAI)
 void  CAIAgentPlayerBase::AttachPlayerAI(class CAIPlayerAI * _pPlayerAI) {
   
-  if ( !_pPlayerAI && BBSupportDbgReport(2, "AI\\AI_AgentsPlayer.cpp", 27, "_pPlayerAI != 0") == 1 )
+  if ( _pPlayerAI == 0 && BBSupportDbgReport(2, "AI\\AI_AgentsPlayer.cpp", 27, "_pPlayerAI != 0") == 1 )
   {
     __debugbreak();
   }
-  if ( this->m_pPlayerAI && BBSupportDbgReport(2, "AI\\AI_AgentsPlayer.cpp", 28, "m_pPlayerAI == 0") == 1 )
+  if ( this->m_pPlayerAI != 0 && BBSupportDbgReport(2, "AI\\AI_AgentsPlayer.cpp", 28, "m_pPlayerAI == 0") == 1 )
   {
     __debugbreak();
   }

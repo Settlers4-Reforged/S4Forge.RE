@@ -86,21 +86,21 @@ void __cdecl CMinimapHandler::Init(void) {
 
 
 // address=[0x15b1730]
-// Decompiled from _DWORD *CMinimapHandler::UpdateAlliances()
+// Decompiled from SGfxColor *CMinimapHandler::UpdateAlliances()
 void __cdecl CMinimapHandler::UpdateAlliances(void) {
   
-  _DWORD *result; // eax
-  _DWORD *v1; // ecx
-  _DWORD *v2; // ecx
+  SGfxColor *result; // eax
+  SGfxColor *v1; // ecx
+  SGfxColor *v2; // ecx
   int v3; // [esp+0h] [ebp-10h]
   int v4; // [esp+0h] [ebp-10h]
-  _DWORD *v5; // [esp+4h] [ebp-Ch]
+  SGfxColor *v5; // [esp+4h] [ebp-Ch]
   int LocalPlayerId; // [esp+8h] [ebp-8h]
   int i; // [esp+Ch] [ebp-4h]
 
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId(v3);
+  LocalPlayerId = ((int (__cdecl *)(_DWORD))CPlayerManager::GetLocalPlayerId)(v3);
   v4 = CAlliances::AllianceId(LocalPlayerId);
-  result = (_DWORD *)CPlayerManager::LastPlayerId();
+  result = (SGfxColor *)CPlayerManager::LastPlayerId();
   v5 = result;
   for ( i = 1;
         i <= (int)v5;
@@ -108,26 +108,26 @@ void __cdecl CMinimapHandler::UpdateAlliances(void) {
   {
     if ( i == LocalPlayerId )
     {
-      v1 = (_DWORD *)((char *)&CMinimapHandler::m_sOwnerColorAlly + 12 * i - 12);
-      *v1 = CMinimapHandler::m_sObjectColor[0];
-      result = (_DWORD *)CMinimapHandler::m_sObjectColor[1];
-      v1[1] = result;
-      v1[2] = CMinimapHandler::m_sObjectColor[2];
+      v1 = &CMinimapHandler::m_sOwnerColorAlly[i - 1];
+      v1->m_iR = CMinimapHandler::m_sObjectColor[0].m_iR;
+      result = (SGfxColor *)CMinimapHandler::m_sObjectColor[0].m_iG;
+      v1->m_iG = (int)result;
+      v1->m_iB = CMinimapHandler::m_sObjectColor[0].m_iB;
     }
     else if ( CAlliances::AllianceId(i) == v4 )
     {
-      result = (_DWORD *)((char *)&CMinimapHandler::m_sOwnerColorAlly + 12 * i - 12);
-      *result = CMinimapHandler::m_sObjectColor[3];
-      result[1] = CMinimapHandler::m_sObjectColor[4];
-      result[2] = CMinimapHandler::m_sObjectColor[5];
+      result = &CMinimapHandler::m_sOwnerColorAlly[i - 1];
+      result->m_iR = CMinimapHandler::m_sObjectColor[1].m_iR;
+      result->m_iG = CMinimapHandler::m_sObjectColor[1].m_iG;
+      result->m_iB = CMinimapHandler::m_sObjectColor[1].m_iB;
     }
     else
     {
-      v2 = (_DWORD *)((char *)&CMinimapHandler::m_sOwnerColorAlly + 12 * i - 12);
-      *v2 = CMinimapHandler::m_sObjectColor[6];
-      result = (_DWORD *)CMinimapHandler::m_sObjectColor[7];
-      v2[1] = result;
-      v2[2] = CMinimapHandler::m_sObjectColor[8];
+      v2 = &CMinimapHandler::m_sOwnerColorAlly[i - 1];
+      v2->m_iR = CMinimapHandler::m_sObjectColor[2].m_iR;
+      result = (SGfxColor *)CMinimapHandler::m_sObjectColor[2].m_iG;
+      v2->m_iG = (int)result;
+      v2->m_iB = CMinimapHandler::m_sObjectColor[2].m_iB;
     }
   }
   return result;

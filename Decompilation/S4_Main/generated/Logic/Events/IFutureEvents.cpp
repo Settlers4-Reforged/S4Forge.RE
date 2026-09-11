@@ -9,7 +9,7 @@ class IFutureEvents * __cdecl IFutureEvents::CreateFutureEvents(void) {
   CFutureEvents *C; // [esp+Ch] [ebp-10h]
 
   C = (CFutureEvents *)operator new(0x6001Cu);
-  if ( C )
+  if ( C != 0 )
   {
     return CFutureEvents::CFutureEvents(C);
   }
@@ -24,7 +24,7 @@ class IFutureEvents * __cdecl IFutureEvents::CreateFutureEvents(void) {
 // Decompiled from IFutureEvents *__thiscall IFutureEvents::IFutureEvents(IFutureEvents *this)
  IFutureEvents::IFutureEvents(void) {
   
-  IS4ChunkObject::IS4ChunkObject(this);
+  IS4ChunkObject::IS4ChunkObject((IS4ChunkObject *)this);
   *(_DWORD *)this = IFutureEvents::_vftable_;
   return this;
 }

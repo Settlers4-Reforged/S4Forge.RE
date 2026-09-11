@@ -15,20 +15,19 @@
   this->__vftable = (IScriptFile_vtbl *)&CStdScriptFile::_vftable_;
   this->m_pScript = 0;
   this->m_uSize = 0;
-  if ( !FileName )
+  if ( FileName != 0 )
   {
-    return this;
+    CFileEx::CFileEx(&v4, UNUSED_ARG());
+    LOBYTE(v5) = 1;
+    CFileEx::Open(&v4.IFileEx, FileName, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
+    this->m_uSize = CFileEx::Size(&v4);
+    this->m_pScript = (const char *)operator new[](this->m_uSize + 1);
+    this->m_pScript[this->m_uSize] = 0;
+    CFileEx::Read(&v4.IFileEx.__vftable, (void *)this->m_pScript, 1, this->m_uSize, UNUSED_ARG(), UNUSED_ARG());
+    CFileEx::Close(&v4.IFileEx, UNUSED_ARG(), UNUSED_ARG());
+    LOBYTE(v5) = 0;
+    CFileEx::~CFileEx(&v4);
   }
-  CFileEx::CFileEx(&v4, UNUSED_ARG());
-  LOBYTE(v5) = 1;
-  CFileEx::Open(&v4.IFileEx, FileName, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
-  this->m_uSize = CFileEx::Size(&v4);
-  this->m_pScript = (const char *)operator new[](this->m_uSize + 1);
-  this->m_pScript[this->m_uSize] = 0;
-  CFileEx::Read(&v4.IFileEx.__vftable, (void *)this->m_pScript, 1, this->m_uSize, UNUSED_ARG(), UNUSED_ARG());
-  CFileEx::Close(&v4.IFileEx, UNUSED_ARG(), UNUSED_ARG());
-  LOBYTE(v5) = 0;
-  CFileEx::~CFileEx(&v4);
   return this;
 }
 
@@ -38,7 +37,7 @@
  CStdScriptFile::~CStdScriptFile(void) {
   
   this->__vftable = (IScriptFile_vtbl *)&CStdScriptFile::_vftable_;
-  if ( this->m_pScript )
+  if ( this->m_pScript != 0 )
   {
     operator delete[]((void *)this->m_pScript);
     this->m_pScript = 0;

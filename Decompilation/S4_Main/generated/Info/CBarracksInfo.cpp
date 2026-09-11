@@ -7,8 +7,8 @@
 // Decompiled from CBarracksInfo *__thiscall CBarracksInfo::CBarracksInfo(CBarracksInfo *this)
  CBarracksInfo::CBarracksInfo(void) {
   
-  CBuildingInfo::CBuildingInfo((CBuildingInfo *)this);
-  *(_DWORD *)this = &CBarracksInfo::_vftable_;
+  CBuildingInfo::CBuildingInfo(this);
+  this->__vftable = (CInfoExchange_vtbl *)&CBarracksInfo::_vftable_;
   return this;
 }
 

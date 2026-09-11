@@ -9,7 +9,7 @@ char  pairNode::getLastChar(void)const {
   char v3; // [esp+13h] [ebp-1h]
 
   v3 = (*(int (__thiscall **)(_DWORD))(**((_DWORD **)this + 2) + 4))(*((_DWORD *)this + 2));
-  if ( !v3 )
+  if ( v3 == 0 )
   {
     return (*(int (__thiscall **)(_DWORD))(**((_DWORD **)this + 1) + 4))(*((_DWORD *)this + 1));
   }
@@ -41,12 +41,11 @@ int  pairNode::length(void)const {
   
   int v1; // esi
 
-  if ( *((int *)this + 3) >= 0 )
+  if ( *((int *)this + 3) < 0 )
   {
-    return *((_DWORD *)this + 3);
+    v1 = (***((int (__thiscall ****)(_DWORD))this + 1))(*((_DWORD *)this + 1));
+    *((_DWORD *)this + 3) = (***((int (__thiscall ****)(_DWORD))this + 2))(*((_DWORD *)this + 2)) + v1;
   }
-  v1 = (***((int (__thiscall ****)(_DWORD))this + 1))(*((_DWORD *)this + 1));
-  *((_DWORD *)this + 3) = (***((int (__thiscall ****)(_DWORD))this + 2))(*((_DWORD *)this + 2)) + v1;
   return *((_DWORD *)this + 3);
 }
 

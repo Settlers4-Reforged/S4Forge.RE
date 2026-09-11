@@ -9,7 +9,7 @@ bool  CAITaskForcePriests::NewCommand(int a2, int a3, int a4) {
   
   CAITaskForceEx::SetCommandAndClearStuff(this, a2, a3, a4);
   this->m_uNextSpellTick = 0;
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 1;
   }
@@ -34,7 +34,7 @@ bool  CAITaskForcePriests::NewCommand(int a2, int a3, int a4) {
  CAITaskForcePriests::CAITaskForcePriests(int iOwnerId, enum T_AI_TASK_FORCE_TYPE tType, int iFlags) {
   
   CAITaskForceEx::CAITaskForceEx(this, iOwnerId, 3, tType, iFlags);
-  this->__vftable = (CAITaskForceEx_vtbl *)CAITaskForcePriests::_vftable_;
+  this->__vftable = (CAITaskForcePriests_vtbl *)CAITaskForcePriests::_vftable_;
   this->m_uNextSpellTick = 0;
   return this;
 }
@@ -44,7 +44,7 @@ bool  CAITaskForcePriests::NewCommand(int a2, int a3, int a4) {
 // Decompiled from char __thiscall CAITaskForcePriests::IsAddEntityOk(CAITaskForcePriests *this, int a2)
 bool  CAITaskForcePriests::IsAddEntityOk(int a2) {
   
-  if ( IAIEnvironment::EntityWarriorType(a2) == 6 )
+  if ( IAIEnvironment::EntityWarriorType(a2) == AI_WARRIOR_TYPE_PRIEST )
   {
     return 1;
   }
@@ -81,9 +81,9 @@ void  CAITaskForcePriests::Execute(void) {
   if ( iTick >= this->m_uNextSpellTick )
   {
     iOwnerId = CAITaskForce::OwnerId(this);
-    v15 = CAIPlayersScriptVars::operator[]((char *)g_cAIPlayersScriptVars, iOwnerId);
+    v15 = (char *)CAIPlayersScriptVars::operator[]((CAIPlayersScriptVars *)g_cAIPlayersScriptVars, iOwnerId);
     v14 = 0;
-    if ( !CAIPlayerScriptVars::operator[](v15, 8u) )
+    if ( CAIPlayerScriptVars::operator[](v15, 8u) == 0 )
     {
       v6 = CAIPlayerScriptVars::operator[](v15, 9u);
       v5 = CAIPlayerScriptVars::operator[](v15, 0xAu);
@@ -94,7 +94,7 @@ void  CAITaskForcePriests::Execute(void) {
         if ( (v6 & (1 << i)) != 0 )
         {
           v2 = CAITaskForce::OwnerId(this);
-          if ( CMagic::CheckManaForCastSpell(v2, i, v5) )
+          if ( CMagic::CheckManaForCastSpell(v2, i, v5) != 0 )
           {
             v14 |= 1 << i;
           }
@@ -104,11 +104,11 @@ void  CAITaskForcePriests::Execute(void) {
     v18 = 0;
     CTmpEntitiesRef::CTmpEntitiesRef((CTmpEntitiesRef *)v4);
     for ( j = CAITaskForce::FirstEntity(this);
-          j;
+          j != 0;
           j = CAIEntityInfo::Next(j) )
     {
       v7 = CAIEntityInfo::EntityId(j);
-      v11 = CTmpEntitiesRef::operator[](v7);
+      v11 = ((IEntity *(__stdcall *)(int))CTmpEntitiesRef::operator[])(v7);
       v9 = IEntity::X(v11);
       v10 = IEntity::Y(v11);
       v3 = CAITaskForce::OwnerId(this);
@@ -125,7 +125,7 @@ void  CAITaskForcePriests::Execute(void) {
         }
       }
     }
-    if ( v18 )
+    if ( v18 != 0 )
     {
       this->m_uNextSpellTick = iTick + (IAIEnvironment::Rand() & 0x1F) + 45;
     }
@@ -156,7 +156,7 @@ class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(
   {
     case 0:
       C = (CAITaskForcePriestsRoman *)operator new(0x64u);
-      if ( C )
+      if ( C != 0 )
       {
         v11 = CAITaskForcePriestsRoman::CAITaskForcePriestsRoman(C, iOwnerId, tType, iFlags);
       }
@@ -168,7 +168,7 @@ class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(
       break;
     case 1:
       v10 = (CAITaskForcePriestsViking *)operator new(0x64u);
-      if ( v10 )
+      if ( v10 != 0 )
       {
         v9 = CAITaskForcePriestsViking::CAITaskForcePriestsViking(v10, iOwnerId, tType, iFlags);
       }
@@ -180,7 +180,7 @@ class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(
       break;
     case 2:
       v8 = (CAITaskForcePriestsMaya *)operator new(0x64u);
-      if ( v8 )
+      if ( v8 != 0 )
       {
         v7 = CAITaskForcePriestsMaya::CAITaskForcePriestsMaya(v8, iOwnerId, tType, iFlags);
       }
@@ -192,7 +192,7 @@ class CAITaskForcePriests * __cdecl CAITaskForcePriests::CreatePriestsTaskForce(
       break;
     case 4:
       v6 = (CAITaskForcePriestsTrojan *)operator new(0x64u);
-      if ( v6 )
+      if ( v6 != 0 )
       {
         v5 = CAITaskForcePriestsTrojan::CAITaskForcePriestsTrojan(v6, iOwnerId, tType, iFlags);
       }

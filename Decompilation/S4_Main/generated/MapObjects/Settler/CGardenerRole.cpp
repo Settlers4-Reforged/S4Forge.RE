@@ -9,7 +9,7 @@ class CPersistence * __cdecl CGardenerRole::New(std::istream & a1) {
   CGardenerRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CGardenerRole *)operator new(0x54u);
-  if ( C )
+  if ( C != 0 )
   {
     return CGardenerRole::CGardenerRole(C, a1);
   }
@@ -54,14 +54,14 @@ void  CGardenerRole::LogicUpdateJob(class CSettler * pSettler) {
       this->Go(this, pSettler);
       break;
     case 0xD:
-      if ( debug && DEBUG_FLAGS[g_iGardenerDebugFlags] )
+      if ( debug != 0 && DEBUG_FLAGS[g_iGardenerDebugFlags] != 0 )
       {
         BBSupportTracePrint(0, "LogicUpdateJob RESOURCE_GATHERING");
       }
-      if ( this->m_uEntityId )
+      if ( this->m_uEntityId != 0 )
       {
         v9 = CMapObjectMgr::EntityPtr(this->m_uEntityId);
-        if ( v9 )
+        if ( v9 != 0 )
         {
           v9->Decrease(1);
           this->m_iTargetMushroomX = -1;
@@ -74,7 +74,7 @@ void  CGardenerRole::LogicUpdateJob(class CSettler * pSettler) {
       }
       goto LABEL_11;
     case 0x10:
-      if ( debug && DEBUG_FLAGS[g_iGardenerDebugFlags] )
+      if ( debug != 0 && DEBUG_FLAGS[g_iGardenerDebugFlags] != 0 )
       {
         BBSupportTracePrint(0, "LogicUpdateJob WORK");
       }
@@ -105,12 +105,12 @@ LABEL_11:
 void  CGardenerRole::PostLoadInit(class CSettler * a1) {
   
   CWarMap::AddEntity(a1);
-  if ( std::list<CEntityTask>::size(&this->m_vTasks) )
+  if ( std::list<CEntityTask>::size(&this->m_vTasks) != 0 )
   {
     IMovingEntity::SetToDoList(a1, (DWORD)&this->m_vTasks);
   }
   IMovingEntity::ResetToDoList(a1);
-  while ( this->m_uToDoCount )
+  while ( this->m_uToDoCount != 0 )
   {
     IMovingEntity::IncToDoListIter(a1);
     --this->m_uToDoCount;
@@ -129,7 +129,7 @@ void  CGardenerRole::PostLoadInit(class CSettler * a1) {
   unsigned int i; // [esp+14h] [ebp-14h]
   int exceptionBlock; // [esp+24h] [ebp-4h]
 
-  ISelectableSettlerRole::ISelectableSettlerRole(this, (int)stream);
+  ISelectableSettlerRole::ISelectableSettlerRole(this, stream);
   exceptionBlock = 0;
   this->__vftable = (ISettlerRole_vtbl *)&CGardenerRole::_vftable_;
   std::list<CEntityTask>::list<CEntityTask>(&this->m_vTasks);
@@ -148,7 +148,7 @@ void  CGardenerRole::PostLoadInit(class CSettler * a1) {
         ++i )
   {
     v2 = CEntityTask::Load(stream);
-    std::list<CEntityTask>::push_back(v2);
+    std::list<CEntityTask>::push_back((int)v2);
   }
   operator^<unsigned char>(stream, &this->m_uToDoCount);
   operator^<int>(stream, &this->m_iEventX);
@@ -188,11 +188,11 @@ void  CGardenerRole::Store(std::ostream & a1) {
   BYTE a2; // [esp+73h] [ebp-Dh] BYREF
   int v23; // [esp+7Ch] [ebp-4h]
 
-  ISelectableSettlerRole::Store((__int16 *)this, a1);
+  ISelectableSettlerRole::Store(this, a1);
   v15 = 1;
-  operator^<unsigned int>(a1, &v15);
+  operator^<unsigned int>(a1, (unsigned int *)&v15);
   v16 = std::list<CEntityTask>::size(&this->m_vTasks);
-  operator^<unsigned int>(a1, &v16);
+  operator^<unsigned int>(a1, (unsigned int *)&v16);
   std::list<CEntityTask>::begin(&this->m_vTasks);
   v23 = 0;
   while ( 1 )
@@ -203,11 +203,11 @@ void  CGardenerRole::Store(std::ostream & a1) {
     v21 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=(v14);
     LOBYTE(v23) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v5);
-    if ( !v21 )
+    if ( v21 == 0 )
     {
       break;
     }
-    v17 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(v7);
+    v17 = (int)std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(v7);
     (*(void (__thiscall **)(int, struct std::ostream *))(*(_DWORD *)v17 + 4))(v17, a1);
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v7);
   }
@@ -215,7 +215,7 @@ void  CGardenerRole::Store(std::ostream & a1) {
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v7);
   v10 = CSettlerMgr::operator[](this->m_uAttachedSettlerId);
   a2 = 0;
-  if ( v16 )
+  if ( v16 != 0 )
   {
     std::list<CEntityTask>::begin(&this->m_vTasks);
     v23 = 2;
@@ -227,7 +227,7 @@ void  CGardenerRole::Store(std::ostream & a1) {
       v20 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=(v12);
       LOBYTE(v23) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v4);
-      if ( !v20 )
+      if ( v20 == 0 )
       {
         break;
       }
@@ -309,15 +309,15 @@ class CGardenerRole * __cdecl CGardenerRole::Load(std::istream & a1) {
   
   CPropertySet *v1; // [esp+4h] [ebp-14h]
 
-  *(_DWORD *)this = &CGardenerRole::_vftable_;
-  v1 = (CPropertySet *)CSettlerMgr::operator[](*((unsigned __int16 *)this + 9));
-  if ( !IEntity::FlagBits(v1, ENTITY_FLAG_ON_BOARD) )
+  this->__vftable = (ISettlerRole_vtbl *)&CGardenerRole::_vftable_;
+  v1 = (CPropertySet *)CSettlerMgr::operator[](this->m_uAttachedSettlerId);
+  if ( IEntity::FlagBits((IEntity *)v1, ENTITY_FLAG_ON_BOARD) == 0 )
   {
-    CWarMap::RemoveEntity(v1);
+    CWarMap::RemoveEntity((IEntity *)v1);
   }
-  if ( *((_DWORD *)this + 17) != -1 )
+  if ( this->m_iTargetMushroomX != -1 )
   {
-    CWorldManager::ClearFlagBits(*((_DWORD *)this + 17), *((_DWORD *)this + 18), 32);
+    CWorldManager::ClearFlagBits(this->m_iTargetMushroomX, this->m_iTargetMushroomY, 32);
   }
   std::list<CEntityTask>::~list<CEntityTask>();
   ISelectableSettlerRole::~ISelectableSettlerRole(this);
@@ -364,14 +364,14 @@ void  CGardenerRole::TakeJob(class CSettler * pSettler) {
   int v22; // [esp+2Ch] [ebp-14h]
   int FreeSlot; // [esp+2Ch] [ebp-14h]
 
-  if ( !ISelectableSettlerRole::TakeCommonJob(this, pSettler) )
+  if ( ISelectableSettlerRole::TakeCommonJob(this, pSettler) == 0 )
   {
     ActualTask = IMovingEntity::GetActualTask(pSettler);
     ISettlerRole::InitCommonTaskValues(this, pSettler, ActualTask);
     switch ( this->m_iTask )
     {
       case 7:
-        if ( debug && DEBUG_FLAGS[g_iGardenerDebugFlags] )
+        if ( debug != 0 && DEBUG_FLAGS[g_iGardenerDebugFlags] != 0 )
         {
           BBSupportTracePrint(0, "TakeJob GO_TO_POS");
         }
@@ -389,7 +389,7 @@ void  CGardenerRole::TakeJob(class CSettler * pSettler) {
         this->Go(this, pSettler);
         break;
       case 0xA:
-        if ( debug && DEBUG_FLAGS[g_iGardenerDebugFlags] )
+        if ( debug != 0 && DEBUG_FLAGS[g_iGardenerDebugFlags] != 0 )
         {
           BBSupportTracePrint(0, "TakeJob GO");
         }
@@ -407,60 +407,57 @@ void  CGardenerRole::TakeJob(class CSettler * pSettler) {
         this->Go(this, pSettler);
         break;
       case 0xD:
-        if ( debug && DEBUG_FLAGS[g_iGardenerDebugFlags] )
+        if ( debug != 0 && DEBUG_FLAGS[g_iGardenerDebugFlags] != 0 )
         {
           BBSupportTracePrint(0, "TakeJob RESOURCE_GATHERING");
         }
         v11 = IEntity::Y(pSettler);
         v5 = IEntity::X(pSettler);
-        if ( !CGardenerRole::CheckPosition(this, v5, v11, 0, 1) )
+        if ( CGardenerRole::CheckPosition(this, v5, v11, 0, 1) )
         {
-          goto LABEL_29;
-        }
-        if ( debug && DEBUG_FLAGS[g_iGardenerDebugFlags] )
-        {
-          BBSupportTracePrint(0, "TakeJob RESOURCE_GATHERING doit");
-        }
-        IMovingEntity::SetDisplacementCosts(pSettler, 10);
-        IAnimatedEntity::RegisterForLogicUpdate(pSettler, this->m_iWalkspeed);
-        v13 = IEntity::Y(pSettler) - 1;
-        v6 = IEntity::X(pSettler);
-        v22 = CWorldManager::ObjectId(v6 + 1, v13);
-        if ( !v22 )
-        {
-          goto LABEL_29;
-        }
-        pSrcMushroom = (struct CMushroom *)CMapObjectMgr::EntityPtr(v22);
-        if ( !pSrcMushroom && BBSupportDbgReport(2, "MapObjects\\Settler\\GardenerRole.cpp", 418, "pSrcMushroom") == 1 )
-        {
-          __debugbreak();
-        }
-        if ( !pSrcMushroom || !IDecoObject::IsStaticInstance(pSrcMushroom) )
-        {
-LABEL_29:
-          if ( this->m_iTargetMushroomX != -1 )
+          if ( debug != 0 && DEBUG_FLAGS[g_iGardenerDebugFlags] != 0 )
           {
-            v12 = IEntity::Y(pSettler);
-            v8 = IEntity::X(pSettler);
-            CWorldManager::ClearFlagBits(v8, v12, 32);
-            this->m_iTargetMushroomX = -1;
-            this->m_iTargetMushroomY = -1;
-            CTrace::Print("GardenerRole: Funghi disappeared! This should not happen!");
+            BBSupportTracePrint(0, "TakeJob RESOURCE_GATHERING doit");
           }
-          goto LABEL_31;
+          IMovingEntity::SetDisplacementCosts(pSettler, 10);
+          IAnimatedEntity::RegisterForLogicUpdate(pSettler, this->m_iWalkspeed);
+          v13 = IEntity::Y(pSettler) - 1;
+          v6 = IEntity::X(pSettler);
+          v22 = CWorldManager::ObjectId(v6 + 1, v13);
+          if ( v22 != 0 )
+          {
+            pSrcMushroom = (struct CMushroom *)CMapObjectMgr::EntityPtr(v22);
+            if ( pSrcMushroom == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\GardenerRole.cpp", 418, "pSrcMushroom") == 1 )
+            {
+              __debugbreak();
+            }
+            if ( pSrcMushroom != 0 && IDecoObject::IsStaticInstance(pSrcMushroom) )
+            {
+              FreeSlot = CMapObjectMgr::GetFreeSlot();
+              v20 = (CMushroom *)CMushroom::operator new(0x50u);
+              if ( v20 != 0 )
+              {
+                v14 = IEntity::Y(pSettler) - 1;
+                v7 = IEntity::X(pSettler);
+                CMushroom::CMushroom(v20, pSrcMushroom, FreeSlot, v7 + 1, v14);
+              }
+              this->SetEntity(this, FreeSlot);
+              break;
+            }
+          }
         }
-        FreeSlot = CMapObjectMgr::GetFreeSlot();
-        v20 = (CMushroom *)CMushroom::operator new(0x50u);
-        if ( v20 )
+        if ( this->m_iTargetMushroomX != -1 )
         {
-          v14 = IEntity::Y(pSettler) - 1;
-          v7 = IEntity::X(pSettler);
-          CMushroom::CMushroom(v20, pSrcMushroom, FreeSlot, v7 + 1, v14);
+          v12 = IEntity::Y(pSettler);
+          v8 = IEntity::X(pSettler);
+          CWorldManager::ClearFlagBits(v8, v12, 32);
+          this->m_iTargetMushroomX = -1;
+          this->m_iTargetMushroomY = -1;
+          CTrace::Print("GardenerRole: Funghi disappeared! This should not happen!");
         }
-        this->SetEntity(this, FreeSlot);
-        break;
+        goto LABEL_31;
       case 0x10:
-        if ( debug && DEBUG_FLAGS[g_iGardenerDebugFlags] )
+        if ( debug != 0 && DEBUG_FLAGS[g_iGardenerDebugFlags] != 0 )
         {
           BBSupportTracePrint(0, "TakeJob WORK");
         }
@@ -488,7 +485,7 @@ LABEL_31:
         v19->EntityEnter(v19, v9);
         break;
       case 0x1F:
-        if ( !CGardenerRole::SearchPosition(this, pSettler, 0) && !CGardenerRole::SearchPosition(this, pSettler, 1) )
+        if ( CGardenerRole::SearchPosition(this, pSettler, 0) == 0 && CGardenerRole::SearchPosition(this, pSettler, 1) == 0 )
         {
           this->m_iNextSearchTick += 48;
           if ( ++this->m_iWorkTick <= 56 )
@@ -588,7 +585,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
       v38 = IEntity::Type(pSettler);
       v29 = IEntity::Type(pSettler);
       v19 = IEntity::Race(pSettler);
-      v20 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v19, v29);
+      v20 = (int)CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v19, v29);
       pSettler->NewToDoList(pSettler, v20, v38);
       this->m_iTask = 27;
       v30 = IEntity::ID(pSettler);
@@ -606,12 +603,12 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
         this->m_iTargetMushroomX = -1;
         this->m_iTargetMushroomY = -1;
       }
-      if ( pEvent->m_iType == 13 && !ISelectableSettlerRole::ProcessGoToPosFerry(this, pSettler, pEvent) )
+      if ( pEvent->m_iType == 13 && ISelectableSettlerRole::ProcessGoToPosFerry(this, pSettler, pEvent) == 0 )
       {
-        if ( this->m_uEntityId )
+        if ( this->m_uEntityId != 0 )
         {
           pDeco = (IDecoObject *)CDecoObjMgr::GetDecoObjPtr(this->m_uEntityId);
-          if ( pDeco && !IDecoObject::IsStaticInstance(pDeco) )
+          if ( pDeco != 0 && !IDecoObject::IsStaticInstance(pDeco) )
           {
             v31 = pDeco->Amount(pDeco);
             v23 = IEntity::Type(pDeco);
@@ -645,7 +642,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
         }
         ISettlerRole::NewDestination(this, pSettler, v44, v45, 0);
         v4 = IEntity::Race(pSettler);
-        v5 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v4, v47);
+        v5 = (int)CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v4, v47);
         pSettler->NewToDoList(pSettler, v5, v47);
       }
       break;
@@ -656,13 +653,13 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
       v48 = CVehicleMgr::operator[](pEvent->m_iDataA);
       v7 = IEntity::ID(pSettler);
       v43 = v48->GetMeetingPointXY(v48, SETTLER_OBJ, v7);
-      if ( v43 && IEntity::FlagBits(v48, (EntityFlag)&loc_3000000) )
+      if ( v43 != 0 && IEntity::FlagBits(v48, (EntityFlag)&loc_3000000) != 0 )
       {
         ISettlerRole::NewDestination(this, pSettler, v43, 0);
-        v33 = *std::vector<unsigned short>::operator[](SettlerInfo->g_vAnimLists, 0);
-        v24 = *std::vector<unsigned short>::operator[](SettlerInfo->g_vAnimLists, 0);
+        v33 = *std::vector<unsigned short>::operator[](&SettlerInfo->g_vAnimLists, 0);
+        v24 = *std::vector<unsigned short>::operator[](&SettlerInfo->g_vAnimLists, 0);
         v8 = IEntity::Race(pSettler);
-        v9 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v8, v24);
+        v9 = (int)CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v8, v24);
         pSettler->NewToDoList(pSettler, v9, v33);
         v10 = IEntity::OwnerId(pSettler);
         if ( v10 == CPlayerManager::GetLocalPlayerId() )
@@ -686,7 +683,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
         v35 = IEntity::Type(pSettler);
         v26 = IEntity::Type(pSettler);
         v15 = IEntity::Race(pSettler);
-        v16 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v15, v26);
+        v16 = (int)CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v15, v26);
         pSettler->NewToDoList(pSettler, v16, v35);
       }
       break;
@@ -707,7 +704,7 @@ void  CGardenerRole::ConvertEventIntoGoal(class CSettler * pSettler, class CEnti
       g_pAI->PostAIEvent(g_pAI, 21, v18, v28, v37);
       break;
     default:
-      if ( !IEntity::FlagBits(pSettler, ENTITY_FLAG_Registered) )
+      if ( IEntity::FlagBits(pSettler, ENTITY_FLAG_Registered) == 0 )
       {
         CTrace::Print("ConvertEventIntoGoal GardenerRole - unknown event %u", pEvent->m_iEvent);
         IAnimatedEntity::RegisterForLogicUpdate(pSettler, 1);
@@ -729,7 +726,7 @@ void  CGardenerRole::WorkIsDone(class CSettler * a2) {
   v5 = IEntity::Type(a2);
   v4 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
-  v3 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v2, v4);
+  v3 = (int)CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v2, v4);
   a2->NewToDoList(a2, v3, v5);
 }
 
@@ -744,20 +741,19 @@ bool  CGardenerRole::SetFree(class CSettler * a2, int a3) {
   unsigned int v7; // [esp-4h] [ebp-Ch]
   IDecoObject *DecoObjPtr; // [esp+4h] [ebp-4h]
 
-  if ( !this->m_uEntityId )
+  if ( this->m_uEntityId != 0 )
   {
-    return ISettlerRole::SetFree(this, a2, a3);
+    DecoObjPtr = (IDecoObject *)CDecoObjMgr::GetDecoObjPtr(this->m_uEntityId);
+    if ( DecoObjPtr != 0 && !IDecoObject::IsStaticInstance(DecoObjPtr) )
+    {
+      v7 = DecoObjPtr->Amount(DecoObjPtr);
+      v6 = IEntity::Type(DecoObjPtr);
+      v5 = IEntity::Y(DecoObjPtr);
+      v3 = IEntity::X(DecoObjPtr);
+      CDecoObjMgr::ChangeToStaticInstance(&g_cDecoObjMgr, v3, v5, v6, v7);
+    }
+    this->m_uEntityId = 0;
   }
-  DecoObjPtr = (IDecoObject *)CDecoObjMgr::GetDecoObjPtr(this->m_uEntityId);
-  if ( DecoObjPtr && !IDecoObject::IsStaticInstance(DecoObjPtr) )
-  {
-    v7 = DecoObjPtr->Amount(DecoObjPtr);
-    v6 = IEntity::Type(DecoObjPtr);
-    v5 = IEntity::Y(DecoObjPtr);
-    v3 = IEntity::X(DecoObjPtr);
-    CDecoObjMgr::ChangeToStaticInstance(&g_cDecoObjMgr, v3, v5, v6, v7);
-  }
-  this->m_uEntityId = 0;
   return ISettlerRole::SetFree(this, a2, a3);
 }
 
@@ -780,7 +776,7 @@ bool  CGardenerRole::CheckPosition(int a2, int a3, int iSearchType, bool a5) {
   v9 = iSearchType != 0;
   if ( a5 )
   {
-    if ( !CWorldManager::FlagBits(v7, 0x20u) )
+    if ( CWorldManager::FlagBits(v7, 0x20u) == 0 )
     {
       return 0;
     }
@@ -789,43 +785,37 @@ bool  CGardenerRole::CheckPosition(int a2, int a3, int iSearchType, bool a5) {
   {
     v9 |= 0x20u;
   }
-  if ( CWorldManager::FlagBits(v7, v9) )
+  if ( CWorldManager::FlagBits(v7, v9) != 0 )
   {
     return 0;
   }
-  if ( !iSearchType )
+  if ( iSearchType == 0 )
   {
     if ( !CWorldManager::InWorld(a2 + 1, a3 - 1) )
     {
       return 0;
     }
     v8 = CWorldManager::ObjectId(a2 + 1, a3 - 1);
-    if ( !v8 )
+    if ( v8 != 0 )
     {
-      return 0;
-    }
-    v10 = CMapObjectMgr::Entity(v8);
-    if ( IEntity::ObjType(v10) != DECO_OBJ_2 || !IEntity::FlagBits(v10, ENTITY_FLAG_Ready) || IEntity::Type(v10) != OBJECT_MUSHROOM_DARK1 && IEntity::Type(v10) != OBJECT_MUSHROOM_DARK2 && IEntity::Type(v10) != OBJECT_MUSHROOM_DARK3 )
-    {
-      return 0;
-    }
-    v6 = (IDecoObject *)CMapObjectMgr::EntityPtr(v8);
-    if ( !v6 )
-    {
-      return 0;
-    }
-    if ( IDecoObject::IsStaticInstance(v6) )
-    {
-      return 1;
+      v10 = CMapObjectMgr::Entity(v8);
+      if ( IEntity::ObjType(v10) == DECO_OBJ_2 && IEntity::FlagBits(v10, ENTITY_FLAG_Ready) != 0 && (IEntity::Type(v10) == OBJECT_MUSHROOM_DARK1 || IEntity::Type(v10) == OBJECT_MUSHROOM_DARK2 || IEntity::Type(v10) == OBJECT_MUSHROOM_DARK3) )
+      {
+        v6 = (IDecoObject *)CMapObjectMgr::EntityPtr(v8);
+        if ( v6 != 0 && IDecoObject::IsStaticInstance(v6) )
+        {
+          return 1;
+        }
+      }
     }
     return 0;
   }
-  if ( iSearchType == 1 )
+  if ( iSearchType != 1 )
   {
-    return (!CWorldManager::MapObjectId(a2, a3) || a5) && CWorldManager::FlagBits(v7, 4u) == 4;
+    CTrace::Print("GardernerRole: Unknown Searchtype %d", iSearchType);
+    return 0;
   }
-  CTrace::Print("GardernerRole: Unknown Searchtype %d", iSearchType);
-  return 0;
+  return (CWorldManager::MapObjectId(a2, a3) == 0 || a5) && CWorldManager::FlagBits(v7, 4u) == 4;
 }
 
 
@@ -906,13 +896,13 @@ bool  CGardenerRole::SearchPosition(class CSettler * pSettler, int _iSearchType)
   this->m_iTargetMushroomY = iFoundY;
   this->m_iNextSearchTick = 0;
   this->m_iWorkTick = 0;
-  if ( _iSearchType )
+  if ( _iSearchType != 0 )
   {
     if ( _iSearchType == 1 )
     {
       ISettlerRole::NewDestination(this, pSettler, iFoundX, iFoundY, 0);
       v9 = IEntity::Race(pSettler);
-      v10 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v9, 0xAFu);
+      v10 = (int)CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v9, 0xAFu);
       pSettler->NewToDoList(pSettler, v10, 175);
     }
     else
@@ -924,7 +914,7 @@ bool  CGardenerRole::SearchPosition(class CSettler * pSettler, int _iSearchType)
   {
     ISettlerRole::NewDestination(this, pSettler, iFoundX, iFoundY, 0);
     v7 = IEntity::Race(pSettler);
-    v8 = CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v7, 0xAEu);
+    v8 = (int)CEntityToDoListMgr::SettlerJobList(g_pEntityToDoListMgr, v7, 0xAEu);
     pSettler->NewToDoList(pSettler, v8, 174);
   }
   return 1;

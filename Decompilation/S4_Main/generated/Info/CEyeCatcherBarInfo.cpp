@@ -7,8 +7,8 @@
 // Decompiled from CEyeCatcherBarInfo *__thiscall CEyeCatcherBarInfo::CEyeCatcherBarInfo(CEyeCatcherBarInfo *this)
  CEyeCatcherBarInfo::CEyeCatcherBarInfo(void) {
   
-  CInfoExchange::CInfoExchange((CInfoExchange *)this);
-  *(_DWORD *)this = &CEyeCatcherBarInfo::_vftable_;
+  CInfoExchange::CInfoExchange(this);
+  this->__vftable = (CInfoExchange_vtbl *)&CEyeCatcherBarInfo::_vftable_;
   return this;
 }
 

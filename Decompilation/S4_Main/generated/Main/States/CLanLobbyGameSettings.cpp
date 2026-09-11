@@ -6,10 +6,10 @@
 // Decompiled from CLanLobbyGameSettings *__thiscall CLanLobbyGameSettings::CLanLobbyGameSettings(CLanLobbyGameSettings *this)
  CLanLobbyGameSettings::CLanLobbyGameSettings(void) {
   
-  std::wstring::wstring((char *)this + 4);
-  std::wstring::wstring((char *)this + 32);
-  std::string::string();
-  std::string::string();
+  std::wstring::wstring((std::wstring *)((char *)this + 4));
+  std::wstring::wstring((std::wstring *)((char *)this + 32));
+  ((void (__cdecl *)())std::string::string)();
+  ((void (__cdecl *)())std::string::string)();
   return this;
 }
 
@@ -20,8 +20,8 @@
   
   std::string::~string((char *)this + 88);
   std::string::~string((char *)this + 60);
-  std::wstring::~wstring((char *)this + 32);
-  std::wstring::~wstring((char *)this + 4);
+  std::wstring::~wstring((std::wstring *)((char *)this + 32));
+  std::wstring::~wstring((std::wstring *)((char *)this + 4));
 }
 
 

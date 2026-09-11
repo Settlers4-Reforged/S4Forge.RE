@@ -7,8 +7,8 @@
 // Decompiled from CGroupSideBarInfo *__thiscall CGroupSideBarInfo::CGroupSideBarInfo(CGroupSideBarInfo *this)
  CGroupSideBarInfo::CGroupSideBarInfo(void) {
   
-  CInfoExchange::CInfoExchange((CInfoExchange *)this);
-  *(_DWORD *)this = &CGroupSideBarInfo::_vftable_;
+  CInfoExchange::CInfoExchange(this);
+  this->__vftable = (CInfoExchange_vtbl *)&CGroupSideBarInfo::_vftable_;
   return this;
 }
 

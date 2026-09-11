@@ -9,7 +9,7 @@ class IAIEcoManager * __cdecl IAIEcoManager::CreateEcoManager(int a1, class IAIS
   CEcoManager *C; // [esp+Ch] [ebp-10h]
 
   C = (CEcoManager *)operator new(0x3FE60u);
-  if ( C )
+  if ( C != 0 )
   {
     return CEcoManager::CEcoManager(C, a1, a2, a3);
   }

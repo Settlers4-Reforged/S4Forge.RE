@@ -6,10 +6,10 @@
 // Decompiled from CLanLobbyConnect::SGameEntry *__thiscall CLanLobbyConnect::SGameEntry::SGameEntry(CLanLobbyConnect::SGameEntry *this)
  CLanLobbyConnect::SGameEntry::SGameEntry(void) {
   
-  std::wstring::wstring(this);
-  std::wstring::wstring((char *)this + 28);
-  std::wstring::wstring((char *)this + 56);
-  std::wstring::wstring((char *)this + 108);
+  std::wstring::wstring((std::wstring *)this);
+  std::wstring::wstring((std::wstring *)this + 1);
+  std::wstring::wstring((std::wstring *)this + 2);
+  std::wstring::wstring((std::wstring *)((char *)this + 108));
   return this;
 }
 
@@ -18,10 +18,10 @@
 // Decompiled from void __thiscall CLanLobbyConnect::SGameEntry::~SGameEntry(CLanLobbyConnect::SGameEntry *this)
  CLanLobbyConnect::SGameEntry::~SGameEntry(void) {
   
-  std::wstring::~wstring((char *)this + 108);
-  std::wstring::~wstring((char *)this + 56);
-  std::wstring::~wstring((char *)this + 28);
-  std::wstring::~wstring(this);
+  std::wstring::~wstring((std::wstring *)((char *)this + 108));
+  std::wstring::~wstring((std::wstring *)this + 2);
+  std::wstring::~wstring((std::wstring *)this + 1);
+  std::wstring::~wstring((std::wstring *)this);
 }
 
 

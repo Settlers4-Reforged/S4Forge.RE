@@ -6,7 +6,7 @@
 // Decompiled from CTransportpriorityInfo *__thiscall CTransportpriorityInfo::CTransportpriorityInfo(CTransportpriorityInfo *this)
  CTransportpriorityInfo::CTransportpriorityInfo(void) {
   
-  CInfoExchange::CInfoExchange(this);
+  CInfoExchange::CInfoExchange((CInfoExchange *)this);
   *(_DWORD *)this = &CTransportpriorityInfo::_vftable_;
   *((_BYTE *)this + 8) = 0;
   *((_DWORD *)this + 3) = 0;

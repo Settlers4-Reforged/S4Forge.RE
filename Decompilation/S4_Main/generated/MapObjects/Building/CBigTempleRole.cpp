@@ -3,13 +3,13 @@
 // Definitions for class CBigTempleRole
 
 // address=[0x13ffbe0]
-// Decompiled from CBigTempleRole *__cdecl CBigTempleRole::New(int a1)
+// Decompiled from CBigTempleRole *__cdecl CBigTempleRole::New(struct std::istream *a1)
 class CPersistence * __cdecl CBigTempleRole::New(std::istream & a1) {
   
   CBigTempleRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CBigTempleRole *)operator new(0x180u);
-  if ( C )
+  if ( C != 0 )
   {
     return CBigTempleRole::CBigTempleRole(C, a1);
   }
@@ -32,7 +32,7 @@ void  CBigTempleRole::LogicUpdate(class CBuilding * a2) {
   const char *RaceName; // [esp-4h] [ebp-Ch]
   unsigned __int8 uLogicState; // [esp+0h] [ebp-8h]
 
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) != 0 )
   {
     this->FillDialog(this, a2, 1);
   }
@@ -53,13 +53,13 @@ void  CBigTempleRole::LogicUpdate(class CBuilding * a2) {
   }
   else if ( uLogicState == 3 )
   {
-    if ( IEntity::FlagBits(a2, (EntityFlag)4096) )
+    if ( IEntity::FlagBits(a2, (EntityFlag)4096) != 0 )
     {
       CBigTempleRole::ThrowOutPriest(a2);
     }
     if ( this->m_uThrownOutPriests < 10u )
     {
-      if ( this->m_pBuildingInfo->m_iProductionDelay )
+      if ( this->m_pBuildingInfo->m_iProductionDelay != 0 )
       {
         this->m_iDelayTick = 0;
         IAnimatedEntity::RegisterForLogicUpdate(a2, 14);
@@ -105,7 +105,7 @@ void  CBigTempleRole::Init(class CBuilding * a2) {
   this->m_uLogicState = 3;
   v2 = IEntity::OwnerId(a2);
   CMagic::IncreaseManaByBigTemple(v2);
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) != 0 )
   {
     this->FillDialog(this, a2, 0);
   }
@@ -294,7 +294,7 @@ void  CBigTempleRole::ThrowOutPriest(class CBuilding * a2) {
   v2 = CBuilding::DoorWorldIdx(a2);
   if ( CWorldManager::IsPositionFreeForSettler(v2) )
   {
-    m_iBuildingInhabitant = (char)this->m_pBuildingInfo->m_iBuildingInhabitant;
+    m_iBuildingInhabitant = this->m_pBuildingInfo->m_iBuildingInhabitant;
     v7 = IEntity::OwnerId(a2);
     v3 = CBuilding::DoorPackedXY(a2);
     v6 = Y16X16::UnpackYFast(v3);

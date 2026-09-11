@@ -3,7 +3,7 @@
 // Definitions for class GameSessionDescriptor
 
 // address=[0x1308e60]
-// Decompiled from int __thiscall GameSessionDescriptor::SetPeerCount(GameSessionDescriptor *this, unsigned int a2)
+// Decompiled from int __thiscall GameSessionDescriptor::SetPeerCount(GameSessionDescriptor *this, int a2)
 void  GameSessionDescriptor::SetPeerCount(unsigned long a2) {
   
   _BYTE v3[20]; // [esp+4h] [ebp-24h] BYREF
@@ -13,7 +13,7 @@ void  GameSessionDescriptor::SetPeerCount(unsigned long a2) {
   v4 = this;
   storm::DataNumber<unsigned long,8,0>::DataNumber<unsigned long,8,0>(a2);
   v5 = 0;
-  storm::DataNumber<unsigned long,8,0>::operator=(v3);
+  storm::DataNumber<unsigned long,8,0>::operator=((int)v3);
   v5 = -1;
   return storm::DataNumber<unsigned long,8,0>::~DataNumber<unsigned long,8,0>(v3);
 }
@@ -30,7 +30,7 @@ void  GameSessionDescriptor::SetSaveId(long a2) {
   v4 = this;
   storm::DataNumber<long,8,0>::DataNumber<long,8,0>(a2);
   v5 = 0;
-  storm::DataNumber<long,8,0>::operator=(v3);
+  storm::DataNumber<long,8,0>::operator=((int)v3);
   v5 = -1;
   return storm::DataNumber<long,8,0>::~DataNumber<long,8,0>(v3);
 }
@@ -65,7 +65,7 @@ void  GameSessionDescriptor::GetMaxSlots(unsigned long & a2)const {
 
 
 // address=[0x160e820]
-// Decompiled from int __thiscall GameSessionDescriptor::SetMaxSlots(GameSessionDescriptor *this, unsigned int a2)
+// Decompiled from int __thiscall GameSessionDescriptor::SetMaxSlots(GameSessionDescriptor *this, int a2)
 void  GameSessionDescriptor::SetMaxSlots(unsigned long a2) {
   
   _BYTE v3[20]; // [esp+4h] [ebp-2Ch] BYREF
@@ -96,7 +96,7 @@ void  GameSessionDescriptor::GetFreeSlots(unsigned long & a2)const {
 
 
 // address=[0x160e8c0]
-// Decompiled from int __thiscall GameSessionDescriptor::SetFreeSlots(GameSessionDescriptor *this, unsigned int a2)
+// Decompiled from int __thiscall GameSessionDescriptor::SetFreeSlots(GameSessionDescriptor *this, int a2)
 void  GameSessionDescriptor::SetFreeSlots(unsigned long a2) {
   
   _BYTE v3[20]; // [esp+4h] [ebp-2Ch] BYREF
@@ -171,7 +171,7 @@ long  GameSessionDescriptor::GetSaveId(void)const {
 
 
 // address=[0x168cfb0]
-// Decompiled from int __thiscall GameSessionDescriptor::SetTickCount(GameSessionDescriptor *this, unsigned int a2)
+// Decompiled from int __thiscall GameSessionDescriptor::SetTickCount(GameSessionDescriptor *this, int a2)
 void  GameSessionDescriptor::SetTickCount(unsigned long a2) {
   
   _BYTE v3[20]; // [esp+4h] [ebp-24h] BYREF
@@ -181,7 +181,7 @@ void  GameSessionDescriptor::SetTickCount(unsigned long a2) {
   v4 = this;
   storm::DataNumber<unsigned long,8,0>::DataNumber<unsigned long,8,0>(a2);
   v5 = 0;
-  storm::DataNumber<unsigned long,8,0>::operator=(v3);
+  storm::DataNumber<unsigned long,8,0>::operator=((int)v3);
   v5 = -1;
   return storm::DataNumber<unsigned long,8,0>::~DataNumber<unsigned long,8,0>(v3);
 }

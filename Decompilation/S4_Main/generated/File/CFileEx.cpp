@@ -7,15 +7,15 @@
 // Decompiled from CFileEx *__thiscall CFileEx::CFileEx(CFileEx *this, int a2)
  CFileEx::CFileEx(void a2) {
   
-  if ( a2 )
+  if ( a2 != 0 )
   {
     this->m_pVbtable = (vbtable::CFileEx *)&CFileEx::_vbtable_;
     IFileEx::IFileEx(&this->IFileEx);
   }
   CFile::CFile(&this->CFile);
   this->CFile.__vftable = (IFSNode_vtbl *)&CFileEx::_vftable_;
-  *(vbtable::CFileEx **)((char *)&this->m_pVbtable + this->m_pVbtable->offsetIFileEx[0]) = (vbtable::CFileEx *)&CFileEx::`vftable';
-  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->offsetIFileEx[0]) = (FILE *)(this->m_pVbtable->offsetIFileEx[0] - 32);
+  *(vbtable::CFileEx **)((char *)&this->m_pVbtable + (unsigned int)this->m_pVbtable->offsetIFileEx) = (vbtable::CFileEx *)&CFileEx::`vftable';
+  *(FILE **)((char *)&this->CFile.m_hFile + (unsigned int)this->m_pVbtable->offsetIFileEx) = (FILE *)&this->m_pVbtable->offsetIFileEx[-8];
   this->CFile.m_bTextMode = 1;
   this->m_hFileMemoryHandle = 0;
   this->m_pFileMemoryMap = 0;
@@ -32,11 +32,11 @@
 // Decompiled from int __thiscall CFileEx::_CFileEx(_DWORD *this)
  CFileEx::~CFileEx(void) {
   
-  *this = CFileEx::_vftable_;
-  *(_DWORD *)((char *)this + *(_DWORD *)(this[18] + 4) + 72) = &CFileEx::`vftable';
-  *(_DWORD *)((char *)this + *(_DWORD *)(this[18] + 4) + 68) = *(_DWORD *)(this[18] + 4) - 32;
-  CFileEx::Close("D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h", 146);
-  return CFile::~CFile();
+  *this = &CFileEx::_vftable_;
+  *(_DWORD *)((char *)this + *(_DWORD *)(*(this + 18) + 4) + 72) = &CFileEx::`vftable';
+  *(_DWORD *)((char *)this + *(_DWORD *)(*(this + 18) + 4) + 68) = *(_DWORD *)(*(this + 18) + 4) - 32;
+  ((void (__stdcall *)(const char *, int))CFileEx::Close)("D:\\Projects\\TSHE\\PurpleLamp\\S4\\source\\BaseLib\\Include\\FileEx.h", 146);
+  return ((_DWORD (__cdecl *)())CFile::~CFile)();
 }
 
 
@@ -56,7 +56,7 @@ bool  CFileEx::InLibrary(void)const {
   CFileEx v8; // [esp+8h] [ebp-7Ch] BYREF
   int v9; // [esp+80h] [ebp-4h]
 
-  if ( a5 )
+  if ( a5 != 0 )
   {
     this->m_pVbtable = (vbtable::CFileEx *)&CFileEx::_vbtable_;
     IFileEx::IFileEx(&this->IFileEx);
@@ -64,8 +64,8 @@ bool  CFileEx::InLibrary(void)const {
   CFile::CFile(&this->CFile);
   v9 = 0;
   this->CFile.__vftable = (IFSNode_vtbl *)&CFileEx::_vftable_;
-  *(vbtable::CFileEx **)((char *)&this->m_pVbtable + this->m_pVbtable->offsetIFileEx[0]) = (vbtable::CFileEx *)&CFileEx::`vftable';
-  *(FILE **)((char *)&this->CFile.m_hFile + this->m_pVbtable->offsetIFileEx[0]) = (FILE *)(this->m_pVbtable->offsetIFileEx[0] - 32);
+  *(vbtable::CFileEx **)((char *)&this->m_pVbtable + (unsigned int)this->m_pVbtable->offsetIFileEx) = (vbtable::CFileEx *)&CFileEx::`vftable';
+  *(FILE **)((char *)&this->CFile.m_hFile + (unsigned int)this->m_pVbtable->offsetIFileEx) = (FILE *)&this->m_pVbtable->offsetIFileEx[-8];
   v5 = std::wstring::c_str(a2);
   CFileEx::CFileEx(&v8, v5, a3, a4, 1);
   CFileEx::~CFileEx(&v8);
@@ -77,7 +77,7 @@ bool  CFileEx::InLibrary(void)const {
 // Decompiled from CFileEx *__thiscall CFileEx::CFileEx(CFileEx *this, wchar_t *FileName, int a2, char a4, __unused int a5)
  CFileEx::CFileEx(wchar_t const * FileName, unsigned int a2, bool a4) {
   
-  if ( a5 )
+  if ( a5 != 0 )
   {
     this->m_pVbtable = (vbtable::CFileEx *)&CFileEx::_vbtable_;
     IFileEx::IFileEx(&this->IFileEx);
@@ -86,18 +86,17 @@ bool  CFileEx::InLibrary(void)const {
   this->CFile.__vftable = (IFSNode_vtbl *)&CFileEx::_vftable_;
   *(vbtable::CFileEx **)((char *)&this->m_pVbtable + (unsigned int)this->m_pVbtable->offsetIFileEx) = (vbtable::CFileEx *)&CFileEx::`vftable';
   *(FILE **)((char *)&this->CFile.m_hFile + (unsigned int)this->m_pVbtable->offsetIFileEx) = (FILE *)&this->m_pVbtable->offsetIFileEx[-8];
-  if ( !a2 )
+  if ( a2 != 0 )
   {
-    return this;
+    this->m_hFileMemoryHandle = 0;
+    this->m_pFileMemoryMap = 0;
+    this->m_bFileLibraryHandled = 0;
+    this->m_bMemoryMapped = 0;
+    this->CFile.m_hFile = 0;
+    this->m_uSize = 0;
+    this->m_uReadOffset = 0;
+    CFileEx::Open(&this->IFileEx, FileName, (CFile::Mode)a2, a4, UNUSED_ARG(), UNUSED_ARG());
   }
-  this->m_hFileMemoryHandle = 0;
-  this->m_pFileMemoryMap = 0;
-  this->m_bFileLibraryHandled = 0;
-  this->m_bMemoryMapped = 0;
-  this->CFile.m_hFile = 0;
-  this->m_uSize = 0;
-  this->m_uReadOffset = 0;
-  CFileEx::Open(&this->IFileEx, FileName, (CFile::Mode)a2, a4, UNUSED_ARG(), UNUSED_ARG());
   return this;
 }
 
@@ -123,7 +122,7 @@ void  CFileEx::Open(wchar_t const * FileName, unsigned int _uFileMask, bool a4, 
   int v10; // [esp+258h] [ebp-4h]
 
   ADJ(this)->m_bFileLibraryHandled = 0;
-  if ( a4 )
+  if ( a4 != 0 )
   {                                             // ->MapFile (?)
     ((void (__thiscall *)(char *, wchar_t *, char *, int))(*(vbtable::CFileEx **)((char *)&ADJ(this)->m_pVbtable + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx))->offsetCFile)((char *)&ADJ(this)->m_pVbtable + (unsigned int)ADJ(this)->m_pVbtable->offsetIFileEx, FileName, Str, a6);
   }
@@ -134,7 +133,7 @@ void  CFileEx::Open(wchar_t const * FileName, unsigned int _uFileMask, bool a4, 
     CFile::OpenMaskToCWStr(&ADJ(this)->CFile, _uFileMask, (char *)&v9);
     v6 = std::wstring::c_str(&v9);
     ADJ(this)->CFile.m_hFile = (FILE *)CFileMgr::Open(FileName, v6, Str, a6);
-    if ( !ADJ(this)->CFile.m_hFile )
+    if ( ADJ(this)->CFile.m_hFile == 0 )
     {
       ADJ(this)->m_uFileLibraryHandle = CFileLibrary::FileOpen(&g_cFileLibrary, FileName, 0);
       if ( ADJ(this)->m_uFileLibraryHandle == -1 )
@@ -197,7 +196,7 @@ int  CFileEx::MapFile(wchar_t const * lpFileName, char * a3, int a4) {
     else
     {
       ADJ(this)->m_pFileMemoryMap = (char *)MapViewOfFile(hFileMappingObject, 4u, 0, 0, 0);
-      if ( ADJ(this)->m_pFileMemoryMap )
+      if ( ADJ(this)->m_pFileMemoryMap != 0 )
       {
         ADJ(this)->m_hFileMemoryHandle = (int)hFileMappingObject;
         ADJ(this)->m_bMemoryMapped = 1;
@@ -285,7 +284,7 @@ int  CFileEx::Seek(int Offset, int Origin, char * a4, int a5) {
   
   if ( ADJ(this)->m_bMemoryMapped )
   {
-    if ( Origin )
+    if ( Origin != 0 )
     {
       if ( Origin == 1 )
       {
@@ -352,7 +351,7 @@ int  CFileEx::Seek(int Offset, int Origin, char * a4, int a5) {
   }
   else
   {
-    return CFile::Seek(Offset, Origin, (int)a4, a5);
+    return ((int (__stdcall *)(int, int, int, int))CFile::Seek)(Offset, Origin, (int)a4, a5);
   }
 }
 

@@ -7,7 +7,7 @@
 // Decompiled from _DWORD *__thiscall AdvXMLParser::Reference::Reference(_DWORD *this, int a2, int a3)
  AdvXMLParser::Reference::Reference(class AdvXMLParser::NodeContainer & a2, std::string const & a3) {
   
-  AdvXMLParser::Node::Node(a2, a3);
+  ((void (__stdcall *)(int, int))AdvXMLParser::Node::Node)(a2, a3);
   *this = &AdvXMLParser::Reference::_vftable_;
   return this;
 }
@@ -43,11 +43,11 @@ class AdvXMLParser::Reference * __cdecl AdvXMLParser::Reference::Parse(class Adv
   {
     return 0;
   }
-  AdvXMLParser::Parser::PreviousChar(a1);
-  v3 = AdvXMLParser::CharRef::Parse(a1, a2);
-  std::auto_ptr<AdvXMLParser::Reference>::auto_ptr<AdvXMLParser::Reference>(v3);
+  AdvXMLParser::Parser::PreviousChar((AdvXMLParser::Parser **)a1);
+  v3 = (struct AdvXMLParser::CharRef *)AdvXMLParser::CharRef::Parse(a1, a2);
+  std::auto_ptr<AdvXMLParser::Reference>::auto_ptr<AdvXMLParser::Reference>((int)v3);
   v7 = 0;
-  if ( std::auto_ptr<AdvXMLParser::Reference>::get(v6) )
+  if ( std::auto_ptr<AdvXMLParser::Reference>::get(v6) != 0 )
   {
     v5 = std::auto_ptr<AdvXMLParser::Reference>::release(v6);
     v7 = -1;
@@ -56,7 +56,7 @@ class AdvXMLParser::Reference * __cdecl AdvXMLParser::Reference::Parse(class Adv
   }
   else
   {
-    v4 = AdvXMLParser::EntityRef::Parse(a1, a2);
+    v4 = (struct AdvXMLParser::EntityRef *)AdvXMLParser::EntityRef::Parse(a1, a2);
     v7 = -1;
     std::auto_ptr<AdvXMLParser::Reference>::~auto_ptr<AdvXMLParser::Reference>(v6);
     return v4;

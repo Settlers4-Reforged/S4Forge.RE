@@ -207,7 +207,7 @@ enum T_AI_TASK_FORCE_CLASS  CAITaskForce::Class(void)const {
   
   this->__vftable = (CAITaskForce_vtbl *)CAITaskForce::_vftable_;
   CAITaskForce::ClearAssociatedTaskForce(this);
-  if ( this->m_pTaskForceGroup )
+  if ( this->m_pTaskForceGroup != 0 )
   {
     CAITaskForceGroup::RemoveTaskForce(this->m_pTaskForceGroup, this);
   }
@@ -220,7 +220,7 @@ enum T_AI_TASK_FORCE_CLASS  CAITaskForce::Class(void)const {
 // Decompiled from void __thiscall CAITaskForce::Release(CAITaskForce *this)
 void  CAITaskForce::Release(void) {
   
-  if ( this )
+  if ( this != 0 )
   {
     this->dtor(this, 1);
   }
@@ -235,7 +235,7 @@ void  CAITaskForce::ChangeType(enum T_AI_TASK_FORCE_TYPE a2) {
   {
     if ( g_tAITaskForceTypeToClassMap[a2] == CAITaskForce::Class(this) )
     {
-      if ( this->m_pTaskForceGroup )
+      if ( this->m_pTaskForceGroup != 0 )
       {
         if ( this->m_pTaskForceGroup->m_sData.m_iNumberOfTaskForcesOfType[this->m_tType] <= 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 181, "m_pTaskForceGroup->m_sData.m_iNumberOfTaskForcesOfType[m_tTaskForceType] > 0") == 1 )
         {
@@ -258,7 +258,7 @@ void  CAITaskForce::ChangeType(enum T_AI_TASK_FORCE_TYPE a2) {
 // Decompiled from int __thiscall CAITaskForce::AddEntity(CAITaskForce *this, CAIEntityInfo *_pEntityInfo, int a3)
 enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo * _pEntityInfo, enum CAITaskForce::T_POSITION a3) {
   
-  if ( !_pEntityInfo )
+  if ( _pEntityInfo == 0 )
   {
     return 0;
   }
@@ -283,11 +283,11 @@ enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo * _pEnt
       }
     }
   }
-  if ( _pEntityInfo->m_pTaskForce )
+  if ( _pEntityInfo->m_pTaskForce != 0 )
   {
     _pEntityInfo->m_pTaskForce->RemoveEntity(_pEntityInfo->m_pTaskForce, _pEntityInfo);
   }
-  if ( _pEntityInfo->m_pTaskForce && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 245, "_pEntityInfo->m_pTaskForce == 0") == 1 )
+  if ( _pEntityInfo->m_pTaskForce != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 245, "_pEntityInfo->m_pTaskForce == 0") == 1 )
   {
     __debugbreak();
   }
@@ -296,13 +296,13 @@ enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo * _pEnt
   {
     _pEntityInfo->m_pPrevEntity = 0;
     _pEntityInfo->m_pNextEntity = this->m_pFirstEntity;
-    if ( this->m_pFirstEntity )
+    if ( this->m_pFirstEntity != 0 )
     {
       if ( this->m_pFirstEntity->m_pTaskForce != this && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 281, "m_pFirstEntity->m_pTaskForce == this") == 1 )
       {
         __debugbreak();
       }
-      if ( this->m_pFirstEntity->m_pPrevEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 282, "m_pFirstEntity->m_pPrevEntity == 0") == 1 )
+      if ( this->m_pFirstEntity->m_pPrevEntity != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 282, "m_pFirstEntity->m_pPrevEntity == 0") == 1 )
       {
         __debugbreak();
       }
@@ -310,7 +310,7 @@ enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo * _pEnt
     }
     else
     {
-      if ( this->m_iNumberOfEntities && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 288, "m_iNumberOfEntities == 0") == 1 )
+      if ( this->m_iNumberOfEntities != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 288, "m_iNumberOfEntities == 0") == 1 )
       {
         __debugbreak();
       }
@@ -322,13 +322,13 @@ enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo * _pEnt
   {
     _pEntityInfo->m_pPrevEntity = this->m_pLastEntity;
     _pEntityInfo->m_pNextEntity = 0;
-    if ( this->m_pLastEntity )
+    if ( this->m_pLastEntity != 0 )
     {
       if ( this->m_pLastEntity->m_pTaskForce != this && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 258, "m_pLastEntity->m_pTaskForce == this") == 1 )
       {
         __debugbreak();
       }
-      if ( this->m_pLastEntity->m_pNextEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 259, "m_pLastEntity->m_pNextEntity == 0") == 1 )
+      if ( this->m_pLastEntity->m_pNextEntity != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 259, "m_pLastEntity->m_pNextEntity == 0") == 1 )
       {
         __debugbreak();
       }
@@ -336,7 +336,7 @@ enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo * _pEnt
     }
     else
     {
-      if ( this->m_iNumberOfEntities && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 265, "m_iNumberOfEntities == 0") == 1 )
+      if ( this->m_iNumberOfEntities != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 265, "m_iNumberOfEntities == 0") == 1 )
       {
         __debugbreak();
       }
@@ -349,35 +349,32 @@ enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(class CAIEntityInfo * _pEnt
   this->m_uFlags |= 0xC000000u;
   if ( this->m_iNumberOfEntities <= 0 )
   {
-    if ( this->m_pFirstEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 319, "m_pFirstEntity == 0") == 1 )
+    if ( this->m_pFirstEntity != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 319, "m_pFirstEntity == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( this->m_pLastEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 320, "m_pLastEntity == 0") == 1 )
+    if ( this->m_pLastEntity != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 320, "m_pLastEntity == 0") == 1 )
     {
       __debugbreak();
     }
   }
   else
   {
-    if ( !this->m_pFirstEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 311, "m_pFirstEntity != 0") == 1 )
+    if ( this->m_pFirstEntity == 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 311, "m_pFirstEntity != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( !this->m_pLastEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 312, "m_pLastEntity != 0") == 1 )
+    if ( this->m_pLastEntity == 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 312, "m_pLastEntity != 0") == 1 )
     {
       __debugbreak();
     }
-    if ( this->m_pFirstEntity->m_pPrevEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 314, "m_pFirstEntity->m_pPrevEntity == 0") == 1 )
+    if ( this->m_pFirstEntity->m_pPrevEntity != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 314, "m_pFirstEntity->m_pPrevEntity == 0") == 1 )
     {
       __debugbreak();
     }
-    if ( this->m_pLastEntity->m_pNextEntity )
+    if ( this->m_pLastEntity->m_pNextEntity != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 315, "m_pLastEntity->m_pNextEntity == 0") == 1 )
     {
-      if ( BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 315, "m_pLastEntity->m_pNextEntity == 0") == 1 )
-      {
-        __debugbreak();
-      }
+      __debugbreak();
     }
   }
   return 3;
@@ -391,7 +388,7 @@ enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(int _iEntityId, enum CAITas
   CAIEntityInfo *pEntityInfo; // [esp+4h] [ebp-4h]
 
   pEntityInfo = IAIEnvironment::EntityGetEntityInfo(_iEntityId, 1);
-  if ( pEntityInfo )
+  if ( pEntityInfo != 0 )
   {
     if ( pEntityInfo->m_iEntityId != _iEntityId && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 341, "pEntityInfo->m_uEntityId == _iEntityId") == 1 )
     {
@@ -414,7 +411,7 @@ enum CAITaskForce::T_RESULT  CAITaskForce::AddEntity(int _iEntityId, enum CAITas
 // Decompiled from int __thiscall CAITaskForce::RemoveEntity(CAITaskForce *this, struct CAIEntityInfo *_pEntityInfo)
 enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo * _pEntityInfo) {
   
-  if ( !_pEntityInfo )
+  if ( _pEntityInfo == 0 )
   {
     return 0;
   }
@@ -424,7 +421,7 @@ enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo * _p
     {
       __debugbreak();
     }
-    if ( _pEntityInfo->m_pPrevEntity )
+    if ( _pEntityInfo->m_pPrevEntity != 0 )
     {
       if ( _pEntityInfo->m_pPrevEntity->m_pTaskForce != this && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 380, "_pEntityInfo->m_pPrevEntity->m_pTaskForce == this") == 1 )
       {
@@ -444,7 +441,7 @@ enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo * _p
       }
       this->m_pFirstEntity = _pEntityInfo->m_pNextEntity;
     }
-    if ( _pEntityInfo->m_pNextEntity )
+    if ( _pEntityInfo->m_pNextEntity != 0 )
     {
       if ( _pEntityInfo->m_pNextEntity->m_pTaskForce != this && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 396, "_pEntityInfo->m_pNextEntity->m_pTaskForce == this") == 1 )
       {
@@ -477,30 +474,30 @@ enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(class CAIEntityInfo * _p
     }
     if ( this->m_iNumberOfEntities <= 0 )
     {
-      if ( this->m_pFirstEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 435, "m_pFirstEntity == 0") == 1 )
+      if ( this->m_pFirstEntity != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 435, "m_pFirstEntity == 0") == 1 )
       {
         __debugbreak();
       }
-      if ( this->m_pLastEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 436, "m_pLastEntity == 0") == 1 )
+      if ( this->m_pLastEntity != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 436, "m_pLastEntity == 0") == 1 )
       {
         __debugbreak();
       }
     }
     else
     {
-      if ( !this->m_pFirstEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 427, "m_pFirstEntity != 0") == 1 )
+      if ( this->m_pFirstEntity == 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 427, "m_pFirstEntity != 0") == 1 )
       {
         __debugbreak();
       }
-      if ( !this->m_pLastEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 428, "m_pLastEntity != 0") == 1 )
+      if ( this->m_pLastEntity == 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 428, "m_pLastEntity != 0") == 1 )
       {
         __debugbreak();
       }
-      if ( this->m_pFirstEntity->m_pPrevEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 430, "m_pFirstEntity->m_pPrevEntity == 0") == 1 )
+      if ( this->m_pFirstEntity->m_pPrevEntity != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 430, "m_pFirstEntity->m_pPrevEntity == 0") == 1 )
       {
         __debugbreak();
       }
-      if ( this->m_pLastEntity->m_pNextEntity && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 431, "m_pLastEntity->m_pNextEntity == 0") == 1 )
+      if ( this->m_pLastEntity->m_pNextEntity != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 431, "m_pLastEntity->m_pNextEntity == 0") == 1 )
       {
         __debugbreak();
       }
@@ -525,7 +522,7 @@ enum CAITaskForce::T_RESULT  CAITaskForce::RemoveEntity(int a2) {
   CAIEntityInfo *EntityInfo; // [esp+4h] [ebp-4h]
 
   EntityInfo = IAIEnvironment::EntityGetEntityInfo(a2, 0);
-  if ( EntityInfo )
+  if ( EntityInfo != 0 )
   {
     return (void *)((int (__thiscall *)(CAITaskForce *, CAIEntityInfo *))this->RemoveEntity)(this, EntityInfo);
   }
@@ -546,7 +543,7 @@ void  CAITaskForce::RemoveAllEntities(void) {
 
   iCounter = 0;
   for ( pEntityInfo = this->m_pFirstEntity;
-        pEntityInfo;
+        pEntityInfo != 0;
         pEntityInfo = m_pNextEntity )
   {
     ++iCounter;
@@ -555,7 +552,7 @@ void  CAITaskForce::RemoveAllEntities(void) {
     {
       __debugbreak();
     }
-    if ( m_pNextEntity && m_pNextEntity->m_pPrevEntity != pEntityInfo && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 487, "(pNextEntityInfo == 0) || (pNextEntityInfo->m_pPrevEntity == pEntityInfo)") == 1 )
+    if ( m_pNextEntity != 0 && m_pNextEntity->m_pPrevEntity != pEntityInfo && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 487, "(pNextEntityInfo == 0) || (pNextEntityInfo->m_pPrevEntity == pEntityInfo)") == 1 )
     {
       __debugbreak();
     }
@@ -577,7 +574,7 @@ void  CAITaskForce::RemoveAllEntities(void) {
 // Decompiled from void __thiscall CAITaskForce::SetAssociatedTaskForce(CAITaskForce *this, CAITaskForce *_pTaskForce)
 void  CAITaskForce::SetAssociatedTaskForce(class CAITaskForce * _pTaskForce) {
   
-  if ( this->m_pAssociatedTaskForce )
+  if ( this->m_pAssociatedTaskForce != 0 )
   {
     CAITaskForce::ClearAssociatedTaskForce(this);
     if ( BBSupportDbgReport(1, "AI\\AI_TaskForces.cpp", 520, "CAITaskForce::SetAssociatedTaskForce(): Task force has already a associated task force!") == 1 )
@@ -585,13 +582,13 @@ void  CAITaskForce::SetAssociatedTaskForce(class CAITaskForce * _pTaskForce) {
       __debugbreak();
     }
   }
-  if ( _pTaskForce )
+  if ( _pTaskForce != 0 )
   {
     if ( _pTaskForce == this && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 525, "_pTaskForce != this") == 1 )
     {
       __debugbreak();
     }
-    if ( _pTaskForce->m_pAssociatedTaskForce )
+    if ( _pTaskForce->m_pAssociatedTaskForce != 0 )
     {
       CAITaskForce::ClearAssociatedTaskForce(_pTaskForce);
       if ( BBSupportDbgReport(1, "AI\\AI_TaskForces.cpp", 531, "CAITaskForce::SetAssociatedTaskForce(): Associated task force is already associated!") == 1 )
@@ -599,7 +596,7 @@ void  CAITaskForce::SetAssociatedTaskForce(class CAITaskForce * _pTaskForce) {
         __debugbreak();
       }
     }
-    if ( !this->m_pTaskForceGroup && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 534, "m_pTaskForceGroup != 0") == 1 )
+    if ( this->m_pTaskForceGroup == 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 534, "m_pTaskForceGroup != 0") == 1 )
     {
       __debugbreak();
     }
@@ -621,7 +618,7 @@ void  CAITaskForce::SetAssociatedTaskForce(class CAITaskForce * _pTaskForce) {
 // Decompiled from void __thiscall CAITaskForce::ClearAssociatedTaskForce(CAITaskForce *this)
 void  CAITaskForce::ClearAssociatedTaskForce(void) {
   
-  if ( this->m_pAssociatedTaskForce )
+  if ( this->m_pAssociatedTaskForce != 0 )
   {
     if ( this->m_pAssociatedTaskForce->m_pAssociatedTaskForce != this && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 555, "m_pAssociatedTaskForce->m_pAssociatedTaskForce == this") == 1 )
     {
@@ -682,7 +679,7 @@ void  CAITaskForce::Save(class IS4Chunk & a2) {
   a2->SaveSignature(-1516371712);
   a2->SaveUnsigned32(1);
   a2->SaveSignature(-1516371710);
-  a2->SaveUnsigned32((unsigned __int8)this->m_uNewCounter);
+  a2->SaveUnsigned32(this->m_uNewCounter);
   a2->SaveUnsigned32((unsigned __int8)this->m_bState);
   a2->SaveUnsigned32((unsigned __int8)this->m_iNextState);
   a2->SaveUnsigned32(this->m_bStatus);
@@ -695,12 +692,12 @@ void  CAITaskForce::Save(class IS4Chunk & a2) {
   a2->SaveSignature(-1516371709);
   a2->SaveUnsigned32(this->m_iNumberOfEntities);
   iCounter = 0;
-  pEntity = CAITaskForce::FirstEntity(this);
-  while ( pEntity )
+  pEntity = (int)CAITaskForce::FirstEntity(this);
+  while ( pEntity != 0 )
   {
-    v2 = CAIEntityInfo::EntityId(pEntity);
+    v2 = CAIEntityInfo::EntityId((CAIEntityInfo *)pEntity);
     a2->SaveUnsigned32(v2);
-    pEntity = CAIEntityInfo::Next(pEntity);
+    pEntity = (int)CAIEntityInfo::Next((CAIEntityInfo *)pEntity);
     ++iCounter;
   }
   if ( iCounter != this->m_iNumberOfEntities && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 791, "iCounter == m_iNumberOfEntities") == 1 )
@@ -715,7 +712,7 @@ void  CAITaskForce::Save(class IS4Chunk & a2) {
 // Decompiled from bool __thiscall CAITaskForce::IsGoalValid(CAITaskForce *this, int a2)
 bool  CAITaskForce::IsGoalValid(enum CAITaskForce::T_GOAL_TYPE a2) {
   
-  if ( !a2 )
+  if ( a2 == 0 )
   {
     return 0;
   }
@@ -745,10 +742,10 @@ bool  CAITaskForce::GetPositionOfFirstEntity(int & _rX, int & _rY) {
   int iEntityId; // [esp+4h] [ebp-8h]
   int Entity; // [esp+8h] [ebp-4h]
 
-  Entity = CAITaskForce::FirstEntity(this);
-  if ( Entity )
+  Entity = (int)CAITaskForce::FirstEntity(this);
+  if ( Entity != 0 )
   {
-    iEntityId = CAIEntityInfo::EntityId(Entity);
+    iEntityId = CAIEntityInfo::EntityId((CAIEntityInfo *)Entity);
     if ( iEntityId <= 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 646, "iEntityId > 0") == 1 )
     {
       __debugbreak();
@@ -916,7 +913,7 @@ void  CAITaskForce::MarkGoalAsPosition(void) {
   {
     __debugbreak();
   }
-  if ( this->m_uCmdUniqueId && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 673, "m_uCmdUniqueId == 0") == 1 )
+  if ( this->m_uCmdUniqueId != 0 && BBSupportDbgReport(2, "AI\\AI_TaskForces.cpp", 673, "m_uCmdUniqueId == 0") == 1 )
   {
     __debugbreak();
   }
@@ -1004,7 +1001,7 @@ void  CAITaskForce::SetState(int a2) {
 // Decompiled from void __thiscall CAITaskForce::SetStateEx(CAITaskForce *this, char a2, int _iNextState)
 void  CAITaskForce::SetStateEx(int a2, int _iNextState) {
   
-  if ( _iNextState && CAITaskForce::IsTaskForceExState(this, _iNextState) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_TaskForces.h", 433, "(_iNextState == AI_TASK_FORCE_STATE_IDLE) || !IsTaskForceExState(_iNextState)") == 1 )
+  if ( _iNextState != 0 && CAITaskForce::IsTaskForceExState(this, _iNextState) && BBSupportDbgReport(2, "d:\\projects\\tshe\\purplelamp\\s4\\source\\s4_main\\ai\\AI_TaskForces.h", 433, "(_iNextState == AI_TASK_FORCE_STATE_IDLE) || !IsTaskForceExState(_iNextState)") == 1 )
   {
     __debugbreak();
   }

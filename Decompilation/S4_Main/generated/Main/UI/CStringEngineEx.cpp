@@ -38,22 +38,21 @@
   int i; // [esp+8h] [ebp-8h]
 
   this->__vftable = (CStringEngineEx_vtbl *)&CStringEngineEx::_vftable_;
-  if ( !this->m_swpTexts )
+  if ( this->m_swpTexts != 0 )
   {
-    return CStringEngine::~CStringEngine((CStringEngine *)this);
-  }
-  for ( i = 0;
-        i < 3837;
-        ++i )
-  {
-    if ( this->m_swpTexts[i] )
+    for ( i = 0;
+          i < 3837;
+          ++i )
     {
-      operator delete[](this->m_swpTexts[i]);
-      this->m_swpTexts[i] = 0;
+      if ( this->m_swpTexts[i] != 0 )
+      {
+        operator delete[](this->m_swpTexts[i]);
+        this->m_swpTexts[i] = 0;
+      }
     }
+    operator delete[](this->m_swpTexts);
+    this->m_swpTexts = 0;
   }
-  operator delete[](this->m_swpTexts);
-  this->m_swpTexts = 0;
   return CStringEngine::~CStringEngine((CStringEngine *)this);
 }
 
@@ -70,11 +69,11 @@ char const *  CStringEngineEx::GetString(int _iId) {
   }
   if ( _iId < 3837 )
   {
-    if ( this->m_swpTexts )
+    if ( this->m_swpTexts != 0 )
     {
       if ( _iId >= 0 )
       {
-        if ( this->m_swpTexts[_iId] )
+        if ( this->m_swpTexts[_iId] != 0 )
         {
           return this->m_swpTexts[_iId];
         }
@@ -125,7 +124,7 @@ bool  CStringEngineEx::ExtractStrings(char * sdTextFileData, int size, int _bFil
 
   BBSupportTracePrintF(1, "%i strings in file version %i expected. Data length is %i bytes.", 3837, 21, size);
   v11 = 1;
-  if ( sdTextFileData && size > 4 )
+  if ( sdTextFileData != 0 && size > 4 )
   {
     if ( *(_DWORD *)sdTextFileData != 0x15 )
     {
@@ -159,7 +158,7 @@ bool  CStringEngineEx::ExtractStrings(char * sdTextFileData, int size, int _bFil
       uTextSize = size - uTextPointer;
       v11 = 0;
     }
-    if ( readTxtIndex < 3837 && !this->m_swpTexts[readTxtIndex] && (uTextSize > 0 || (_bFillEmptyStrings & 1) == 0) )
+    if ( readTxtIndex < 3837 && this->m_swpTexts[readTxtIndex] == 0 && (uTextSize > 0 || (_bFillEmptyStrings & 1) == 0) )
     {
       this->m_swpTexts[readTxtIndex] = (wchar_t *)operator new[](uTextSize + 1);
       if ( uTextSize > 0 )
@@ -219,7 +218,7 @@ bool  CStringEngineEx::ImportFile(wchar_t const * FileName, int a3) {
   exceptionBlock = 1;
   CFileEx::Open(&pFile.IFileEx, FileName, CFile_BINARY|CFile_READ, 0, UNUSED_ARG(), UNUSED_ARG());
   exceptionBlock = 0;
-  if ( !this->m_swpTexts )
+  if ( this->m_swpTexts == 0 )
   {
     v9 = (wchar_t **)operator new[](15348u);    // 3837 entries
     this->m_swpTexts = v9;
@@ -260,14 +259,14 @@ void  CStringEngineEx::CreateTextForEmptyStrings(void) {
   int i; // [esp+14h] [ebp-408h]
   char Src[1024]; // [esp+18h] [ebp-404h] BYREF
 
-  if ( this->m_swpTexts )
+  if ( this->m_swpTexts != 0 )
   {
     v3 = 0;
     for ( i = 0;
           i < 3837;
           ++i )
     {
-      if ( !this->m_swpTexts[i] )
+      if ( this->m_swpTexts[i] == 0 )
       {
         StringName = (const char *)CS4DefineNames::GetStringName(i);
         snprintf(Src, 0x3FFu, "<%s>", StringName);

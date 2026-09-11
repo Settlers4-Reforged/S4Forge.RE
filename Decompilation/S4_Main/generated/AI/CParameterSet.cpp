@@ -12,7 +12,7 @@
   CDynListEntry::CDynListEntry(this);
   *(_DWORD *)this = &CParameterSet::_vftable_;
   C = (CDynList *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     v2 = CDynList::CDynList(C);
   }
@@ -30,9 +30,9 @@
  CParameterSet::~CParameterSet(void) {
   
   *this = (CDynList *)&CParameterSet::_vftable_;
-  if ( this[3] )
+  if ( *(this + 3) != 0 )
   {
-    delete this[3];
+    delete *(this + 3);
   }
   CDynListEntry::~CDynListEntry((CDynListEntry *)this);
 }
@@ -42,7 +42,7 @@
 // Decompiled from int __thiscall CParameterSet::size(CDynList **this)
 int  CParameterSet::size(void) {
   
-  return CDynList::size(this[3]);
+  return CDynList::size(*(this + 3));
 }
 
 
@@ -50,7 +50,7 @@ int  CParameterSet::size(void) {
 // Decompiled from int __thiscall CParameterSet::elementAt(CDynList **this, int a2)
 class CParam *  CParameterSet::elementAt(int a2) {
   
-  return CDynList::elementAt(this[3], a2);
+  return CDynList::elementAt(*(this + 3), a2);
 }
 
 
@@ -58,7 +58,7 @@ class CParam *  CParameterSet::elementAt(int a2) {
 // Decompiled from int __thiscall CParameterSet::NewParameterSet(CDynList **this, struct CParam *a2)
 void  CParameterSet::NewParameterSet(class CParam * a2) {
   
-  return CDynList::addElement(this[3], a2);
+  return CDynList::addElement(*(this + 3), a2);
 }
 
 
@@ -71,7 +71,7 @@ void  CParameterSet::Ausgabe(void) {
   int i; // [esp+18h] [ebp-10h]
 
   C = (CParam *)operator new(0x1Cu);
-  if ( C )
+  if ( C != 0 )
   {
     CParam::CParam(C);
   }
@@ -79,12 +79,12 @@ void  CParameterSet::Ausgabe(void) {
         ;
         ++i )
   {
-    result = CDynList::size(this[3]);
+    result = CDynList::size(*(this + 3));
     if ( i >= result )
     {
       break;
     }
-    CDynList::elementAt(this[3], i);
+    CDynList::elementAt(*(this + 3), i);
   }
   return result;
 }

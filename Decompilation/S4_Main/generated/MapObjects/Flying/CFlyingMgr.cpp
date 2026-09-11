@@ -48,16 +48,16 @@ bool  CFlyingMgr::AddFlyingEntity(int a2, int a3, int a4, int a5, bool a5) {
     return 0;
   }
   C = (CManakopter *)operator new(0x94u);
-  if ( C )
+  if ( C != 0 )
   {
-    CManakopter::CManakopter(C, FreeSlot, a3, a4, a5);
+    ((void (__thiscall *)(CManakopter *, int, int, int, int))CManakopter::CManakopter)(C, FreeSlot, a3, a4, a5);
   }
   *(_DWORD *)this = FreeSlot;
   CFlyingMgr::AttachFlyingEntity(this, a5, 1, FreeSlot);
   ++*((_DWORD *)this + 2 * a5 + 20);
   if ( a6 )
   {
-    (*(void (__thiscall **)(void *, int, int, int, _DWORD))(*(_DWORD *)g_pAI + 44))(g_pAI, 20, a5, FreeSlot, 0);
+    g_pAI->PostAIEvent(g_pAI, 20, a5, FreeSlot, 0);
   }
   return 1;
 }
@@ -96,7 +96,7 @@ class IFlyingEntity *  CFlyingMgr::GetEntityPtr(int a2) {
   unsigned __int8 *v4; // [esp+Ch] [ebp-4h]
 
   v4 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a2);
-  if ( v4 && IEntity::ObjType(v4) == 64 )
+  if ( v4 != 0 && IEntity::ObjType((IEntity *)v4) == DECO_OBJ )
   {
     return v4;
   }
@@ -114,7 +114,7 @@ class CManakopter *  CFlyingMgr::GetManakopterPtr(int a2) {
   unsigned __int8 *v4; // [esp+Ch] [ebp-4h]
 
   v4 = (unsigned __int8 *)CMapObjectMgr::EntityPtr(a2);
-  if ( v4 && IEntity::ObjType(v4) == 64 )
+  if ( v4 != 0 && IEntity::ObjType((IEntity *)v4) == DECO_OBJ )
   {
     return v4;
   }
@@ -131,7 +131,7 @@ void  CFlyingMgr::AttachFlyingEntity(int a2, int a3, int a4) {
   
   IAnimatedEntity *v4; // eax
   IAnimatedEntity *v5; // eax
-  _WORD *v6; // eax
+  IEntity *v6; // eax
   int result; // eax
   int v9; // [esp+4h] [ebp-4h]
 
@@ -146,12 +146,12 @@ void  CFlyingMgr::AttachFlyingEntity(int a2, int a3, int a4) {
   v4 = (IAnimatedEntity *)CFlyingMgr::operator[](a4);
   IAnimatedEntity::SetPrevious(v4, 0);
   v9 = *((_DWORD *)this + 2 * a2 + a3 + 1);
-  if ( v9 )
+  if ( v9 != 0 )
   {
     v5 = (IAnimatedEntity *)CFlyingMgr::operator[](v9);
     IAnimatedEntity::SetPrevious(v5, a4);
   }
-  v6 = (_WORD *)CFlyingMgr::operator[](a4);
+  v6 = CFlyingMgr::operator[](a4);
   IAnimatedEntity::SetNext(v6, v9);
   result = a3;
   *((_DWORD *)this + 2 * a2 + a3 + 1) = a4;
@@ -164,7 +164,7 @@ void  CFlyingMgr::AttachFlyingEntity(int a2, int a3, int a4) {
 void  CFlyingMgr::DetachFlyingEntity(int a2, int a3, int a4) {
   
   int v4; // eax
-  _WORD *v5; // eax
+  IEntity *v5; // eax
   int v6; // eax
   IAnimatedEntity *v7; // eax
   int v8; // [esp-4h] [ebp-Ch]
@@ -180,11 +180,11 @@ void  CFlyingMgr::DetachFlyingEntity(int a2, int a3, int a4) {
     __debugbreak();
   }
   v11 = (IAnimatedEntity *)CFlyingMgr::operator[](a4);
-  if ( IAnimatedEntity::Previous(v11) )
+  if ( IAnimatedEntity::Previous(v11) != 0 )
   {
     v8 = IAnimatedEntity::Next(v11);
     v4 = IAnimatedEntity::Previous(v11);
-    v5 = (_WORD *)CFlyingMgr::operator[](v4);
+    v5 = CFlyingMgr::operator[](v4);
     IAnimatedEntity::SetNext(v5, v8);
   }
   else
@@ -195,7 +195,7 @@ void  CFlyingMgr::DetachFlyingEntity(int a2, int a3, int a4) {
     }
     *((_DWORD *)this + 2 * a2 + a3 + 1) = IAnimatedEntity::Next(v11);
   }
-  if ( IAnimatedEntity::Next(v11) )
+  if ( IAnimatedEntity::Next(v11) != 0 )
   {
     v9 = IAnimatedEntity::Previous(v11);
     v6 = IAnimatedEntity::Next(v11);
@@ -216,8 +216,8 @@ void  CFlyingMgr::CheckOutFlyingEntity(int a2) {
   int v5; // [esp+Ch] [ebp-4h]
 
   v2 = (unsigned __int8 *)CFlyingMgr::operator[](a2);
-  v4 = IEntity::OwnerId(v2);
-  v5 = IEntity::Type((unsigned __int16 *)v2);
+  v4 = IEntity::OwnerId((IEntity *)v2);
+  v5 = IEntity::Type((IEntity *)v2);
   --*((_DWORD *)this + 2 * v4 + v5 + 19);
   CFlyingMgr::DetachFlyingEntity(this, v4, v5, a2);
 }
@@ -233,7 +233,7 @@ int  CFlyingMgr::GetNearestEntity(int a2, int a3, int a4, int a5, int a6) {
   unsigned int v11; // [esp+8h] [ebp-10h]
   unsigned int v12; // [esp+Ch] [ebp-Ch]
   int i; // [esp+10h] [ebp-8h]
-  _DWORD *v14; // [esp+14h] [ebp-4h]
+  IEntity *v14; // [esp+14h] [ebp-4h]
 
   if ( (a2 <= 0 || a2 > CPlayerManager::LastPlayerId()) && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 398, "_iOwnerId>0 && _iOwnerId <= g_cPlayerMgr.LastPlayerId()") == 1 )
   {
@@ -243,21 +243,21 @@ int  CFlyingMgr::GetNearestEntity(int a2, int a3, int a4, int a5, int a6) {
   {
     __debugbreak();
   }
-  if ( !(unsigned __int8)CWorldManager::InWorld(a4, a5) && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 400, "g_cWorld.InWorld( _iX, _iY)") == 1 )
+  if ( !CWorldManager::InWorld(a4, a5) && BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 400, "g_cWorld.InWorld( _iX, _iY)") == 1 )
   {
     __debugbreak();
   }
   v11 = -1;
   v10 = 0;
   for ( i = *((_DWORD *)this + 2 * a2 + a3 + 1);
-        i;
+        i != 0;
         i = IAnimatedEntity::Next(v14) )
   {
-    v14 = (_DWORD *)CFlyingMgr::operator[](i);
+    v14 = CFlyingMgr::operator[](i);
     v8 = a5 - IEntity::Y(v14);
     v6 = IEntity::X(v14);
-    v12 = Grid::Distance((Grid *)(a4 - v6), v8);
-    if ( v12 < v11 && (!a6 || IFlyingEntity::FlyingFlagBits((IFlyingEntity *)v14, a6)) )
+    v12 = Grid::Distance(a4 - v6, v8);
+    if ( v12 < v11 && (a6 == 0 || IFlyingEntity::FlyingFlagBits((IFlyingEntity *)v14, a6) != 0) )
     {
       v11 = v12;
       v10 = i;
@@ -295,13 +295,13 @@ void  CFlyingMgr::Store(class S4::CMapFile & a2) {
 
   v21 = &v4;
   v17 = this;
-  std::ostrstream::ostrstream(0, 0x40000, 0, 2, 1);
+  ((void (__stdcall *)(char *, int, int, int, int))std::ostrstream::ostrstream)(0, 0x40000, 0, 2, 1);
   v22 = 0;
   v5[42] = std::ios_base::exceptions((char *)v5 + *(_DWORD *)(v5[0] + 4));
   std::ios_base::exceptions((std::ios_base *)((char *)v5 + *(_DWORD *)(v5[0] + 4)), 6);
   LOBYTE(v22) = 1;
   v12 = 1;
-  operator^<unsigned int>((struct std::ostream *)v5, &v12);
+  operator^<unsigned int>((struct std::ostream *)v5, (unsigned int *)&v12);
   UsedId = CMapObjectMgr::LastUsedId();
   v13 = UsedId;
   v15 = 0;
@@ -309,21 +309,21 @@ void  CFlyingMgr::Store(class S4::CMapFile & a2) {
         i <= v13;
         ++i )
   {
-    EntityPtr = CFlyingMgr::GetEntityPtr(v17, i);
+    EntityPtr = (unsigned __int8 *)CFlyingMgr::GetEntityPtr(v17, i);
     v9 = EntityPtr;
-    if ( EntityPtr )
+    if ( EntityPtr != 0 )
     {
       ++v15;
     }
   }
-  operator^<unsigned int>((struct std::ostream *)v5, &v15);
+  operator^<unsigned int>((struct std::ostream *)v5, (unsigned int *)&v15);
   for ( i = 1;
         i <= v13;
         ++i )
   {
-    v8 = CFlyingMgr::GetEntityPtr(v17, i);
+    v8 = (unsigned __int8 *)CFlyingMgr::GetEntityPtr(v17, i);
     v14 = v8;
-    if ( v8 )
+    if ( v8 != 0 )
     {
       (*(void (__thiscall **)(unsigned __int8 *, _DWORD *))(*(_DWORD *)v14 + 4))(v14, v5);
     }
@@ -336,7 +336,7 @@ void  CFlyingMgr::Store(class S4::CMapFile & a2) {
           k < 2;
           ++k )
     {
-      operator^<int>((int)v5, (int *)v17 + 2 * j + k + 1);
+      operator^<int>((struct std::ostream *)v5, (int *)v17 + 2 * j + k + 1);
     }
   }
   for ( j = 0;
@@ -347,16 +347,16 @@ void  CFlyingMgr::Store(class S4::CMapFile & a2) {
           m < 2;
           ++m )
     {
-      operator^<int>((int)v5, (int *)v17 + 2 * j + m + 19);
+      operator^<int>((struct std::ostream *)v5, (int *)v17 + 2 * j + m + 19);
     }
   }
   v22 = 0;
   std::ostrstream::freeze((std::ostrstream *)v5, 1);
-  v2 = std::ostrstream::rdbuf((std::ostrstream *)v5);
+  v2 = (struct std::strstreambuf *)std::ostrstream::rdbuf((std::ostrstream *)v5);
   Size = std::strstreambuf::pcount(v2);
-  std::ostrstream::str((CDaoIndexFieldInfo *)v5);
+  std::ostrstream::str(v5);
   Src = v3;
-  S4::CMapFile::SaveChunk(168, 0, Size, v3, 0);
+  ((void (__stdcall *)(__int16, __int16, size_t, void *, char))S4::CMapFile::SaveChunk)(168, 0, Size, v3, 0);
   std::ostrstream::freeze((std::ostrstream *)v5, 0);
   v22 = -1;
   std::ostrstream::`vbase destructor'((std::ostrstream *)v5);
@@ -376,8 +376,8 @@ void  CFlyingMgr::Load(class S4::CMapFile & a2) {
   int v8; // [esp+D0h] [ebp-48h]
   int v9; // [esp+D4h] [ebp-44h]
   unsigned __int8 *v10; // [esp+D8h] [ebp-40h]
-  int v11; // [esp+DCh] [ebp-3Ch]
-  int v12; // [esp+E0h] [ebp-38h] BYREF
+  unsigned int v11; // [esp+DCh] [ebp-3Ch]
+  unsigned int v12; // [esp+E0h] [ebp-38h] BYREF
   int v13; // [esp+E4h] [ebp-34h] BYREF
   unsigned int v14; // [esp+E8h] [ebp-30h] BYREF
   int pExceptionObject; // [esp+ECh] [ebp-2Ch] BYREF
@@ -395,8 +395,8 @@ void  CFlyingMgr::Load(class S4::CMapFile & a2) {
   CTrace::Print("CFlyingMgr load");
   CFlyingMgr::Clear(v19);
   v13 = 0;
-  Str = (char *)S4::CMapFile::LoadChunk(a2, 0xA8u, 0, &v13, 0);
-  if ( Str )
+  Str = (char *)S4::CMapFile::LoadChunk(a2, MAP_CHUNK_SAVE_FLYINGENTITIES, 0, &v13, 0);
+  if ( Str != 0 )
   {
     std::istrstream::istrstream(Str, 1);
     v23 = 0;
@@ -418,9 +418,9 @@ void  CFlyingMgr::Load(class S4::CMapFile & a2) {
           i < v14;
           ++i )
     {
-      v10 = (unsigned __int8 *)CPersistence::New(v3, v2);
+      v10 = (unsigned __int8 *)((unsigned __int8 *(__cdecl *)(_DWORD *, int))CPersistence::New)(v3, v2);
       v20 = (unsigned __int16 *)v10;
-      if ( !v10 )
+      if ( v10 == 0 )
       {
         v9 = BBSupportDbgReport(2, "mapobjects\\FlyingMgr.cpp", 186, "pFlyingEntity != NULL");
         if ( v9 == 1 )
@@ -428,11 +428,11 @@ void  CFlyingMgr::Load(class S4::CMapFile & a2) {
           __debugbreak();
         }
       }
-      v8 = IEntity::ID();
-      v7 = IEntity::Type(v20);
-      v6 = IEntity::OwnerId((unsigned __int8 *)v20);
+      v8 = ((int (__stdcall *)())IEntity::ID)();
+      v7 = IEntity::Type((IEntity *)v20);
+      v6 = IEntity::OwnerId((IEntity *)v20);
       CFlyingMgr::AttachFlyingEntity(v19, v6, v7, v8);
-      v5 = IEntity::ID();
+      v5 = ((int (__stdcall *)())IEntity::ID)();
       *(_DWORD *)v19 = v5;
     }
     for ( i = 0;
@@ -443,7 +443,7 @@ void  CFlyingMgr::Load(class S4::CMapFile & a2) {
             j < 2;
             ++j )
       {
-        operator^<int>((int)v3, (int)v19 + 8 * i + 4 * j + 4);
+        operator^<int>((struct std::istream *)v3, (int *)v19 + 2 * i + j + 1);
       }
     }
     for ( i = 0;
@@ -454,7 +454,7 @@ void  CFlyingMgr::Load(class S4::CMapFile & a2) {
             k < 2;
             ++k )
       {
-        operator^<int>((int)v3, (int)v19 + 8 * i + 4 * k + 76);
+        operator^<int>((struct std::istream *)v3, (int *)v19 + 2 * i + k + 19);
       }
     }
     v23 = 0;
@@ -478,7 +478,7 @@ void  CFlyingMgr::Clear(void) {
 // Decompiled from int __stdcall CFlyingMgr::operator[](int a1)
 class IFlyingEntity &  CFlyingMgr::operator[](int a1) {
   
-  return CMapObjectMgr::EntityPtr(a1);
+  return (int)CMapObjectMgr::EntityPtr(a1);
 }
 
 

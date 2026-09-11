@@ -54,12 +54,11 @@ void  SurfaceClipper::ReleaseClipper(void) {
   SurfaceClipper *result; // eax
 
   result = this;
-  if ( !*(_DWORD *)this )
+  if ( this->m_pClipper != 0 )
   {
-    return result;
+    result = (SurfaceClipper *)this->m_pClipper->lpVtbl->Release(this->m_pClipper);
+    this->m_pClipper = 0;
   }
-  result = (SurfaceClipper *)(*(int (__stdcall **)(_DWORD))(**(_DWORD **)this + 8))(*(_DWORD *)this);
-  *(_DWORD *)this = 0;
   return result;
 }
 
@@ -89,7 +88,7 @@ long  SurfaceClipper::SetClipRect(struct tagRECT const & Src) {
 // Decompiled from int __thiscall SurfaceClipper::SetClipWindow(SurfaceClipper *this, HWND a2)
 long  SurfaceClipper::SetClipWindow(struct HWND__ * a2) {
   
-  return (*(int (__thiscall **)(_DWORD, _DWORD, _DWORD, HWND))(**(_DWORD **)this + 32))(*(_DWORD *)this, *(_DWORD *)this, 0, a2);
+  return ((int (__thiscall *)(LPDIRECTDRAWCLIPPER, LPDIRECTDRAWCLIPPER, _DWORD, HWND))this->m_pClipper->lpVtbl->SetHWnd)(this->m_pClipper, this->m_pClipper, 0, a2);
 }
 
 

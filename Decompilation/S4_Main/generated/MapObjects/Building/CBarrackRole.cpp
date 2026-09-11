@@ -3,13 +3,13 @@
 // Definitions for class CBarrackRole
 
 // address=[0x13ffb40]
-// Decompiled from CBarrackRole *__cdecl CBarrackRole::New(int a1)
+// Decompiled from CBarrackRole *__cdecl CBarrackRole::New(struct std::istream *a1)
 class CPersistence * __cdecl CBarrackRole::New(std::istream & a1) {
   
   CBarrackRole *C; // [esp+Ch] [ebp-10h]
 
   C = (CBarrackRole *)operator new(0x190u);
-  if ( C )
+  if ( C != 0 )
   {
     return CBarrackRole::CBarrackRole(C, a1);
   }
@@ -88,11 +88,11 @@ void  CBarrackRole::LogicUpdate(class CBuilding * a2) {
   char v51; // [esp+ABh] [ebp-11h]
   int v53; // [esp+B8h] [ebp-4h]
 
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) != 0 )
   {
-    this->FillDialog((CFarmBuildingRole *)this, a2, 1);
+    this->FillDialog(this, a2, 1);
   }
-  if ( IEntity::FlagBits(a2, (EntityFlag)4096) )
+  if ( IEntity::FlagBits(a2, (EntityFlag)4096) != 0 )
   {
     iRace = IEntity::Race(a2);
     v2 = CBuilding::EnsignWorldIdx(a2);
@@ -119,7 +119,7 @@ void  CBarrackRole::LogicUpdate(class CBuilding * a2) {
         __debugbreak();
       }
       for ( j = 0;
-            g_vSoldierProductionMap[j].m_iFrom && g_vSoldierProductionMap[j].m_iFrom != rInfo->m_iSettlerType;
+            g_vSoldierProductionMap[j].m_iFrom != 0 && g_vSoldierProductionMap[j].m_iFrom != rInfo->m_iSettlerType;
             ++j )
       {
         ;
@@ -133,14 +133,14 @@ void  CBarrackRole::LogicUpdate(class CBuilding * a2) {
           v51 = 0;
           v23 = this->GetPileIdWithGood(this, rInfo->m_iWeaponType);
           v22 = this->GetPileIdWithGood(this, rInfo->m_iGold);
-          if ( rInfo->m_iWeaponType )
+          if ( rInfo->m_iWeaponType != 0 )
           {
             v3 = CPileMgr::operator[]((int)v23);
             if ( CPile::NumberOfAvailableGoods(v3) > 0 )
             {
-              if ( !rInfo->m_iGold || (v4 = CPileMgr::operator[]((int)v22), CPile::NumberOfAvailableGoods(v4) > 0) )
+              if ( rInfo->m_iGold == 0 || (v4 = CPileMgr::operator[]((int)v22), CPile::NumberOfAvailableGoods(v4) > 0) )
               {
-                if ( !rInfo->iWeaponAmount || v21 >= rInfo->iWeaponAmount )
+                if ( rInfo->iWeaponAmount == 0 || v21 >= rInfo->iWeaponAmount )
                 {
                   iSettlerType = rInfo->m_iSettlerType;
                   iPrioLevel = SettlerTypePrioLevel(iSettlerType);
@@ -170,7 +170,7 @@ void  CBarrackRole::LogicUpdate(class CBuilding * a2) {
         }
       }
     }
-    if ( v51 )
+    if ( v51 != 0 )
     {
       if ( iBestIndex != -1 && BBSupportDbgReport(2, "MapObjects\\Building\\BarrackRole.cpp", 1000, "iBestIndex == -1") == 1 )
       {
@@ -235,7 +235,7 @@ void  CBarrackRole::LogicUpdate(class CBuilding * a2) {
         {
           CPile::AttachAndIncAmountLeaving(v29, NearestSettler, v45->iWeaponAmount, 3);
         }
-        if ( v45->m_iGold )
+        if ( v45->m_iGold != 0 )
         {
           v9 = CPileMgr::operator[]((int)v19);
           CPile::AttachAndIncAmountLeaving(v9, NearestSettler, 1, 4);
@@ -331,7 +331,7 @@ void  CBarrackRole::Init(class CBuilding * a2) {
     {
       __debugbreak();
     }
-    if ( !iPileId && BBSupportDbgReport(2, "MapObjects\\Building\\BarrackRole.cpp", 771, "iPileId != 0") == 1 )
+    if ( iPileId == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BarrackRole.cpp", 771, "iPileId != 0") == 1 )
     {
       __debugbreak();
     }
@@ -342,15 +342,15 @@ void  CBarrackRole::Init(class CBuilding * a2) {
     v12 = iPileId;
     std::vector<unsigned short>::push_back(&this->m_vDeliverPiles, &v12);
   }
-  if ( !std::vector<unsigned short>::size(&this->m_vDeliverPiles) && BBSupportDbgReportF(2, "MapObjects\\Building\\BarrackRole.cpp", 783, "No deliver pile at barrack") == 1 )
+  if ( std::vector<unsigned short>::size(&this->m_vDeliverPiles) == 0 && BBSupportDbgReportF(2, "MapObjects\\Building\\BarrackRole.cpp", 783, "No deliver pile at barrack") == 1 )
   {
     __debugbreak();
   }
-  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) )
+  if ( IEntity::FlagBits(a2, ENTITY_FLAG_Selected) != 0 )
   {
     this->FillDialog(this, a2, 0);
   }
-  if ( IEntity::FlagBits(a2, (EntityFlag)4096) )
+  if ( IEntity::FlagBits(a2, (EntityFlag)4096) != 0 )
   {
     CEntityEvent::CEntityEvent(&v4, 8u, 0, this->m_iEntityId, 0, 0);
     v13 = 0;
@@ -506,11 +506,11 @@ void  CBarrackRole::FillAddSoldierSideBar(class CAddSoldierSideBarInfo * a2, boo
   }
   CEvn_Event::CEvn_Event(&v21, v12, 0, (unsigned int)a2, 0);
   v22 = 0;
-  if ( !g_pEvnEngine && BBSupportDbgReport(2, "MapObjects\\Building\\BarrackRole.cpp", 1217, "g_pEvnEngine != NULL") == 1 )
+  if ( g_pEvnEngine == 0 && BBSupportDbgReport(2, "MapObjects\\Building\\BarrackRole.cpp", 1217, "g_pEvnEngine != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pEvnEngine )
+  if ( g_pEvnEngine != 0 )
   {
     IEventEngine::SendAMessage(g_pEvnEngine, &v21);
   }
@@ -661,7 +661,7 @@ void  CBarrackRole::FillDialog(class CBuilding * a2, bool a3) {
   v4 = IEntity::OwnerId(a2);
   g_cBarracksInfo.m_cTotalBuiltCount = CBuildingMgr::GetNumberOfBuildings((CBuildingMgr *)g_cBuildingMgr, v4, v9, 1u);
   g_cBarracksInfo.m_bInhabitants = this->m_bInhabitants;
-  if ( this->m_bInhabitants )
+  if ( this->m_bInhabitants != 0 )
   {
     g_cBarracksInfo.m_iSettlerCount = this->m_pBuildingInfo->m_iBuildingInhabitant;
   }

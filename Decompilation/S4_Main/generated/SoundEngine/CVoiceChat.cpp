@@ -45,40 +45,40 @@
     CVoiceChat::ToggleRecording((CVoiceChat *)this, 0);
   }
   CVC_EventHandle::UnregisterVC((CVC_EventHandle *)&g_cVC_EventHandle);
-  if ( (int)this[40] >= 0 )
+  if ( (int)*(this + 40) >= 0 )
   {
-    CVoiceChat::SetWindowsMicVolume((CVoiceChat *)this, this[40]);
+    CVoiceChat::SetWindowsMicVolume((CVoiceChat *)this, (int)*(this + 40));
   }
-  if ( this[3] )
+  if ( *(this + 3) != 0 )
   {
     for ( i = 0;
-          i < (int)this[2];
+          i < (int)*(this + 2);
           ++i )
     {
-      if ( *((_DWORD *)this[3] + i) )
+      if ( *((_DWORD *)*(this + 3) + i) != 0 )
       {
-        v1 = (void (__thiscall ***)(_DWORD, int))*((_DWORD *)this[3] + i);
-        if ( v1 )
+        v1 = *((void (__thiscall ****)(_DWORD, int))*(this + 3) + i);
+        if ( v1 != 0 )
         {
           (**v1)(v1, 1);
         }
-        *((_DWORD *)this[3] + i) = 0;
+        *((_DWORD *)*(this + 3) + i) = 0;
       }
     }
-    operator delete[](this[3]);
-    this[3] = 0;
+    operator delete[](*(this + 3));
+    *(this + 3) = 0;
   }
-  if ( this[4] )
+  if ( *(this + 4) != 0 )
   {
-    operator delete[](this[4]);
-    this[4] = 0;
+    operator delete[](*(this + 4));
+    *(this + 4) = 0;
   }
-  if ( this[35] )
+  if ( *(this + 35) != 0 )
   {
-    operator delete[](this[35]);
-    this[35] = 0;
+    operator delete[](*(this + 35));
+    *(this + 35) = 0;
   }
-  CVCRecorder::~CVCRecorder((CVCRecorder *)(this + 6));
+  CVCRecorder::~CVCRecorder(this + 6);
 }
 
 
@@ -96,24 +96,24 @@ bool  CVoiceChat::Init(int a2, unsigned int a3, char * Str) {
   int i; // [esp+18h] [ebp-14h]
 
   *this = a2;
-  this[1] = a3;
+  *(this + 1) = a3;
   v4 = strlen(Str);
-  this[4] = (int)operator new[](v4 + 1);
-  j__strcpy_0((char *)this[4], Str);
+  *(this + 4) = (int)operator new[](v4 + 1);
+  j__strcpy_0((char *)*(this + 4), Str);
   if ( !CVoiceChat::GetWindowsMicVolume((CVoiceChat *)this, this + 40) )
   {
-    this[40] = -1;
+    *(this + 40) = -1;
   }
-  if ( CVCRecorder::Start((CVCRecorder *)(this + 6), 4, (char *)this[4], *this, (struct _DIG_DRIVER *)this[1]) )
+  if ( CVCRecorder::Start((CVCRecorder *)(this + 6), 4, (char *)*(this + 4), *this, (struct _DIG_DRIVER *)*(this + 1)) )
   {
-    this[33] = CVCRecorder::GetFrameSize((CVCRecorder *)(this + 6));
-    this[35] = (int)operator new[](this[33]);
+    *(this + 33) = CVCRecorder::GetFrameSize((CVCRecorder *)(this + 6));
+    *(this + 35) = (int)operator new[](*(this + 33));
     for ( i = 0;
-          i < this[2];
+          i < *(this + 2);
           ++i )
     {
       C = (CVCClient *)operator new(0x78u);
-      if ( C )
+      if ( C != 0 )
       {
         v10 = CVCClient::CVCClient(C);
       }
@@ -121,12 +121,12 @@ bool  CVoiceChat::Init(int a2, unsigned int a3, char * Str) {
       {
         v10 = 0;
       }
-      *(_DWORD *)(this[3] + 4 * i) = v10;
-      v9 = (char *)this[4];
-      v8 = this[33];
-      v7 = (struct _DIG_DRIVER *)this[1];
+      *(_DWORD *)(*(this + 3) + 4 * i) = v10;
+      v9 = (char *)*(this + 4);
+      v8 = *(this + 33);
+      v7 = (struct _DIG_DRIVER *)*(this + 1);
       InputRate = CVCRecorder::GetInputRate((CVCRecorder *)(this + 6));
-      CVCClient::Start(*(CVCClient **)(this[3] + 4 * i), InputRate, v7, v8, v9);
+      CVCClient::Start(*(CVCClient **)(*(this + 3) + 4 * i), InputRate, v7, v8, v9);
     }
     return 1;
   }
@@ -149,26 +149,26 @@ void  CVoiceChat::Stop(void) {
   CVC_EventHandle::UnregisterVC((CVC_EventHandle *)&g_cVC_EventHandle);
   CVCRecorder::Shutdown((CVCRecorder *)(this + 6));
   result = this;
-  if ( this[3] )
+  if ( *(this + 3) != 0 )
   {
     for ( i = 0;
           ;
           ++i )
     {
       result = (_DWORD *)i;
-      if ( i >= this[2] )
+      if ( i >= *(this + 2) )
       {
         break;
       }
-      if ( *(_DWORD *)(this[3] + 4 * i) )
+      if ( *(_DWORD *)(*(this + 3) + 4 * i) != 0 )
       {
-        CVCClient::Shutdown(*(CVCClient **)(this[3] + 4 * i));
-        if ( *(_DWORD *)(this[3] + 4 * i) )
+        CVCClient::Shutdown(*(CVCClient **)(*(this + 3) + 4 * i));
+        if ( *(_DWORD *)(*(this + 3) + 4 * i) != 0 )
         {
-          v2 = *(void (__thiscall ****)(_DWORD, int))(this[3] + 4 * i);
+          v2 = *(void (__thiscall ****)(_DWORD, int))(*(this + 3) + 4 * i);
           (**v2)(v2, 1);
         }
-        *(_DWORD *)(this[3] + 4 * i) = 0;
+        *(_DWORD *)(*(this + 3) + 4 * i) = 0;
       }
     }
   }
@@ -182,11 +182,11 @@ bool  CVoiceChat::ReceivePacket(signed char * Src, int a3) {
   
   int v4; // [esp+0h] [ebp-8h]
 
-  if ( !*(_DWORD *)(this + 12) && BBSupportDbgReport(2, "VoiceChat.cpp", 260, "m_papcClients != NULL") == 1 )
+  if ( *(_DWORD *)(this + 12) == 0 && BBSupportDbgReport(2, "VoiceChat.cpp", 260, "m_papcClients != NULL") == 1 )
   {
     __debugbreak();
   }
-  if ( !*(_BYTE *)(this + 20) )
+  if ( *(_BYTE *)(this + 20) == 0 )
   {
     return 0;
   }
@@ -244,7 +244,7 @@ void  CVoiceChat::Run(void) {
         i < *((_DWORD *)this + 2);
         ++i )
   {
-    if ( *(_DWORD *)(*((_DWORD *)this + 3) + 4 * i) )
+    if ( *(_DWORD *)(*((_DWORD *)this + 3) + 4 * i) != 0 )
     {
       CVCClient::Run(*(CVCClient **)(*((_DWORD *)this + 3) + 4 * i));
     }
@@ -343,7 +343,7 @@ void  CVoiceChat::SetVolume(int a2) {
     {
       break;
     }
-    if ( *(_DWORD *)(*((_DWORD *)this + 3) + 4 * i) )
+    if ( *(_DWORD *)(*((_DWORD *)this + 3) + 4 * i) != 0 )
     {
       CVCClient::SetVolume(*(CVCClient **)(*((_DWORD *)this + 3) + 4 * i), v5);
     }
@@ -367,7 +367,7 @@ void  CVoiceChat::SetMicVolume(int a2) {
     __debugbreak();
   }
   result = CVoiceChat::SetWindowsMicVolume(this, (int)(a2 * *((_DWORD *)this + 41)) / 100);
-  if ( !result )
+  if ( result == 0 )
   {
     return BBSupportTracePrintF(0, "VoiceChat :\tCVoiceChat::SetMicVolume() : Failed to set volume");
   }
@@ -397,26 +397,26 @@ int  CVoiceChat::GetMicVolume(void) {
 void  CVoiceChat::SendPacket(void) {
   
   CEvn_Logic *v1; // [esp+4h] [ebp-3Ch]
-  _BYTE v3[32]; // [esp+10h] [ebp-30h] BYREF
+  CEvn_Logic v3; // [esp+10h] [ebp-30h] BYREF
   int v4; // [esp+3Ch] [ebp-4h]
 
-  if ( CVCRecorder::IsRecording((CVoiceChat *)((char *)this + 24)) || *((_DWORD *)this + 36) )
+  if ( CVCRecorder::IsRecording((CVoiceChat *)((char *)this + 24)) || *((_DWORD *)this + 36) != 0 )
   {
     *((_DWORD *)this + 36) += CVCRecorder::GetEncodedData((CVoiceChat *)((char *)this + 24), (signed __int8 *)(*((_DWORD *)this + 36) + *((_DWORD *)this + 35)), *((_DWORD *)this + 33) - *((_DWORD *)this + 36));
     if ( *((_DWORD *)this + 36) == *((_DWORD *)this + 33) )
     {
       *((_DWORD *)this + 36) = 0;
-      if ( *((_BYTE *)this + 136) )
+      if ( *((_BYTE *)this + 136) != 0 )
       {
         CVoiceChat::ReceivePacket(*((void **)this + 35), *((_DWORD *)this + 2) - 1);
       }
       else
       {
-        v1 = CEvn_Logic::CEvn_Logic((CEvn_Logic *)v3, 0x25u, 0, 0, 0, *((_DWORD *)this + 35), *((_WORD *)this + 66));
+        v1 = CEvn_Logic::CEvn_Logic(&v3, 0x25u, 0, 0, 0, *((_DWORD *)this + 35), *((_WORD *)this + 66));
         v4 = 0;
         IEventEngine::SendAMessage(g_pEvnEngine, v1);
         v4 = -1;
-        CEvn_Logic::~CEvn_Logic(v3);
+        CEvn_Logic::~CEvn_Logic(&v3);
       }
     }
   }
@@ -430,6 +430,7 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
   tagMIXERLINECONTROLSA pmxlc; // [esp+4h] [ebp-1C0h] BYREF
   tMIXERCONTROLDETAILS pmxcd; // [esp+1Ch] [ebp-1A8h] BYREF
   int v5; // [esp+34h] [ebp-190h] BYREF
+  UINT; // [esp+38h] [ebp-18Ch]
   signed int cConnections; // [esp+3Ch] [ebp-188h]
   signed int j; // [esp+40h] [ebp-184h]
   DWORD i; // [esp+44h] [ebp-180h]
@@ -445,10 +446,11 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
   i = 0;
   cConnections = 0;
   v12 = 0;
-  if ( mixerGetNumDevs() )
+   = mixerGetNumDevs();
+  if (  != 0 )
   {
     DevCapsA = mixerOpen(&phmx, 0, 0, 0, 0);
-    if ( DevCapsA )
+    if ( DevCapsA != 0 )
     {
       BBSupportTracePrintF(0, "CVoiceChat::SetWindowsMicVolume : Failed to open mixer");
       return 0;
@@ -456,7 +458,7 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
     else
     {
       DevCapsA = mixerGetDevCapsA((UINT_PTR)phmx, &pmxcaps, 0x30u);
-      if ( DevCapsA )
+      if ( DevCapsA != 0 )
       {
         BBSupportTracePrintF(0, "CVoiceChat::SetWindowsMicVolume : Failed to get mixer device caps");
         return 0;
@@ -470,7 +472,7 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
         {
           pmxl.dwDestination = i;
           DevCapsA = mixerGetLineInfoA((HMIXEROBJ)phmx, &pmxl, 0);
-          if ( DevCapsA )
+          if ( DevCapsA != 0 )
           {
             BBSupportTracePrintF(0, "CVoiceChat::SetWindowsMicVolume : Failed to get mixer line info");
             mixerClose(phmx);
@@ -486,7 +488,7 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
               pmxl.dwSource = j;
               pmxl.dwDestination = i;
               DevCapsA = mixerGetLineInfoA((HMIXEROBJ)phmx, &pmxl, 1u);
-              if ( DevCapsA )
+              if ( DevCapsA != 0 )
               {
                 BBSupportTracePrintF(0, "CVoiceChat::SetWindowsMicVolume : Failed to get mic line info.");
                 mixerClose(phmx);
@@ -498,13 +500,13 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
                 break;
               }
             }
-            if ( v12 )
+            if ( v12 != 0 )
             {
               break;
             }
           }
         }
-        if ( v12 )
+        if ( v12 != 0 )
         {
           pmxlc.dwLineID = pmxl.dwLineID;
           pmxlc.dwControlID = 1342373889;
@@ -513,7 +515,7 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
           pmxlc.cControls = 1;
           pmxlc.pamxctrl = (LPMIXERCONTROLA)&v13;
           DevCapsA = mixerGetLineControlsA((HMIXEROBJ)phmx, &pmxlc, 2u);
-          if ( DevCapsA )
+          if ( DevCapsA != 0 )
           {
             BBSupportTracePrintF(0, "CVoiceChat::SetWindowsMicVolume : Failed to get microphon control");
             mixerClose(phmx);
@@ -528,7 +530,7 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
             pmxcd.cbDetails = 4;
             pmxcd.paDetails = &v5;
             DevCapsA = mixerGetControlDetailsA((HMIXEROBJ)phmx, &pmxcd, 0);
-            if ( DevCapsA )
+            if ( DevCapsA != 0 )
             {
               BBSupportTracePrintF(0, "CVoiceChat::SetWindowsMicVolume : Failed to get control details.");
               mixerClose(phmx);
@@ -538,7 +540,7 @@ bool  CVoiceChat::SetWindowsMicVolume(int a2) {
             {
               v5 = a2;
               DevCapsA = mixerSetControlDetails((HMIXEROBJ)phmx, &pmxcd, 0);
-              if ( DevCapsA )
+              if ( DevCapsA != 0 )
               {
                 BBSupportTracePrintF(0, "CVoiceChat::SetWindowsMicVolume : Failed to set control details.");
                 mixerClose(phmx);
@@ -577,6 +579,7 @@ bool  CVoiceChat::GetWindowsMicVolume(int * a2) {
   struct tMIXERCONTROLDETAILS pmxcd; // [esp+18h] [ebp-1ACh] BYREF
   int v5; // [esp+30h] [ebp-194h] BYREF
   CVoiceChat *v6; // [esp+34h] [ebp-190h]
+  UINT; // [esp+38h] [ebp-18Ch]
   signed int cConnections; // [esp+3Ch] [ebp-188h]
   signed int j; // [esp+40h] [ebp-184h]
   DWORD i; // [esp+44h] [ebp-180h]
@@ -595,10 +598,11 @@ bool  CVoiceChat::GetWindowsMicVolume(int * a2) {
   i = 0;
   cConnections = 0;
   v13 = 0;
-  if ( mixerGetNumDevs() )
+   = mixerGetNumDevs();
+  if (  != 0 )
   {
     DevCapsA = mixerOpen(&phmx, 0, 0, 0, 0);
-    if ( DevCapsA )
+    if ( DevCapsA != 0 )
     {
       BBSupportTracePrintF(0, "CVoiceChat::GetWindowsMicVolume : Failed to open mixer");
       return 0;
@@ -606,7 +610,7 @@ bool  CVoiceChat::GetWindowsMicVolume(int * a2) {
     else
     {
       DevCapsA = mixerGetDevCapsA((UINT_PTR)phmx, &pmxcaps, 0x30u);
-      if ( DevCapsA )
+      if ( DevCapsA != 0 )
       {
         BBSupportTracePrintF(0, "CVoiceChat::GetWindowsMicVolume : Failed to get mixer device caps");
         return 0;
@@ -620,7 +624,7 @@ bool  CVoiceChat::GetWindowsMicVolume(int * a2) {
         {
           pmxl.dwDestination = i;
           DevCapsA = mixerGetLineInfoA((HMIXEROBJ)phmx, &pmxl, 0);
-          if ( DevCapsA )
+          if ( DevCapsA != 0 )
           {
             BBSupportTracePrintF(0, "CVoiceChat::GetWindowsMicVolume : Failed to get mixer line info");
             mixerClose(phmx);
@@ -636,7 +640,7 @@ bool  CVoiceChat::GetWindowsMicVolume(int * a2) {
               pmxl.dwSource = j;
               pmxl.dwDestination = i;
               DevCapsA = mixerGetLineInfoA((HMIXEROBJ)phmx, &pmxl, 1u);
-              if ( DevCapsA )
+              if ( DevCapsA != 0 )
               {
                 BBSupportTracePrintF(0, "CVoiceChat::GetWindowsMicVolume : Failed to get mic line info.");
                 mixerClose(phmx);
@@ -648,13 +652,13 @@ bool  CVoiceChat::GetWindowsMicVolume(int * a2) {
                 break;
               }
             }
-            if ( v13 )
+            if ( v13 != 0 )
             {
               break;
             }
           }
         }
-        if ( v13 )
+        if ( v13 != 0 )
         {
           pmxlc.dwLineID = pmxl.dwLineID;
           pmxlc.dwControlID = 1342373889;
@@ -663,7 +667,7 @@ bool  CVoiceChat::GetWindowsMicVolume(int * a2) {
           pmxlc.cControls = 1;
           pmxlc.pamxctrl = (LPMIXERCONTROLA)&v14;
           DevCapsA = mixerGetLineControlsA((HMIXEROBJ)phmx, &pmxlc, 2u);
-          if ( DevCapsA )
+          if ( DevCapsA != 0 )
           {
             BBSupportTracePrintF(0, "CVoiceChat::GetWindowsMicVolume : Failed to get microphon control");
             mixerClose(phmx);
@@ -678,7 +682,7 @@ bool  CVoiceChat::GetWindowsMicVolume(int * a2) {
             pmxcd.cbDetails = 4;
             pmxcd.paDetails = &v5;
             DevCapsA = mixerGetControlDetailsA((HMIXEROBJ)phmx, &pmxcd, 0);
-            if ( DevCapsA )
+            if ( DevCapsA != 0 )
             {
               BBSupportTracePrintF(0, "CVoiceChat::GetWindowsMicVolume : Failed to get mixer control details, %s", v16);
               mixerClose(phmx);

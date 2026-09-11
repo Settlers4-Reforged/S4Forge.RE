@@ -6,7 +6,7 @@
 // Decompiled from void *__thiscall String::String(void *this, int a2)
  String::String(std::string const & a2) {
   
-  std::string::string(a2);
+  ((void (__stdcall *)(int))std::string::string)(a2);
   return this;
 }
 
@@ -16,24 +16,23 @@
  String::String(char const * Str, unsigned int Size) {
   
   void *v4; // [esp+4h] [ebp-58h]
-  void *v5; // [esp+8h] [ebp-54h]
-  _BYTE v7[28]; // [esp+14h] [ebp-48h] BYREF
+  struct std::string *v5; // [esp+8h] [ebp-54h]
+  std::string v7; // [esp+14h] [ebp-48h] BYREF
   _BYTE v8[28]; // [esp+30h] [ebp-2Ch] BYREF
   int v9; // [esp+58h] [ebp-4h]
 
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v9 = 0;
-  if ( !Str )
+  if ( Str != 0 )
   {
-    return this;
+    v5 = std::string::string(&v7, Str);
+    LOBYTE(v9) = 1;
+    v4 = (void *)std::string::string((int)v5, 0, Size);
+    std::string::operator=(this, v4);
+    std::string::~string(v8);
+    LOBYTE(v9) = 0;
+    std::string::~string(&v7);
   }
-  v5 = std::string::string(v7, Str);
-  LOBYTE(v9) = 1;
-  v4 = (void *)std::string::string((int)v5, 0, Size);
-  std::string::operator=(this, v4);
-  std::string::~string(v8);
-  LOBYTE(v9) = 0;
-  std::string::~string(v7);
   return this;
 }
 
@@ -51,7 +50,7 @@
 // Decompiled from void *__thiscall String::operator=(void *this, int a2)
 class String &  String::operator=(class String const & a2) {
   
-  std::string::operator=(a2);
+  ((void (__stdcall *)(int))std::string::operator=)(a2);
   return this;
 }
 
@@ -63,7 +62,7 @@ class String &  String::operator=(char const * Str) {
   struct std::string *v3; // [esp+0h] [ebp-28h]
   std::string v5; // [esp+8h] [ebp-20h] BYREF
 
-  if ( Str )
+  if ( Str != 0 )
   {
     v3 = std::string::string(&v5, Str);
     std::string::operator=(this, v3);
@@ -78,10 +77,10 @@ class String &  String::operator=(char const * Str) {
 
 
 // address=[0x1352200]
-// Decompiled from int __thiscall String::c_str(String *this)
+// Decompiled from int __thiscall String::c_str(std::string *this)
 char const *  String::c_str(void)const {
   
-  return std::string::c_str(this);
+  return (int)std::string::c_str(this);
 }
 
 
@@ -98,7 +97,7 @@ char const *  String::c_str(void)const {
 // Decompiled from String *__thiscall String::String(String *this)
  String::String(void) {
   
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   return this;
 }
 
@@ -107,7 +106,7 @@ char const *  String::c_str(void)const {
 // Decompiled from void *__thiscall String::operator+=(void *this, char *Str)
 class String &  String::operator+=(char const * Str) {
   
-  if ( Str )
+  if ( Str != 0 )
   {
     std::string::operator+=(Str);
   }

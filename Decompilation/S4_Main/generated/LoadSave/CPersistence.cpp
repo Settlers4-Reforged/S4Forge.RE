@@ -26,7 +26,7 @@ void  CPersistence::Store(std::ostream & a2) {
 // Decompiled from void __cdecl CPersistence::RegisterClassWhithId(unsigned int *_rClassId, struct CPersistence *(__cdecl *_rClassDeserializer)(struct std::istrstream *), unsigned int _iOverrideClassId)
 void __cdecl CPersistence::RegisterClassWhithId(unsigned long & _rClassId, class CPersistence * (__cdecl*)(std::istream &) _rClassDeserializer, unsigned long _iOverrideClassId) {
   
-  if ( !_iOverrideClassId )
+  if ( _iOverrideClassId == 0 )
   {
     _iOverrideClassId = CPersistence::m_iNextClassID++;
   }
@@ -51,8 +51,8 @@ class CPersistence * __cdecl CPersistence::New(std::istream & stream) {
   char v11; // [esp+3Bh] [ebp-Dh]
   int v12; // [esp+44h] [ebp-4h]
 
-  operator^<unsigned long>(stream, &classId);
-  if ( (unsigned __int8)std::ios_base::operator!((char *)stream + *(_DWORD *)(*(_DWORD *)stream + 4)) )
+  operator^<unsigned long>((int)stream, (int)&classId);
+  if ( (unsigned __int8)std::ios_base::operator!((char *)stream + *(_DWORD *)(*(_DWORD *)stream + 4)) != 0 )
   {
     pExceptionObject = 0;
     CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
@@ -66,7 +66,7 @@ class CPersistence * __cdecl CPersistence::New(std::istream & stream) {
   v11 = std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>>>::operator==(v7);
   LOBYTE(v12) = 0;
   std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>>>::~_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<unsigned long const,CPersistence * (__cdecl *)(std::istream &)>>>>(v2);
-  if ( v11 )
+  if ( v11 != 0 )
   {
     v9 = 0;
     CPersistence::BadClassID::BadClassID((CPersistence::BadClassID *)&v9);
@@ -88,8 +88,8 @@ class CPersistence * __cdecl CPersistence::New_HACK_VERSION(std::istream & strea
   void *C; // [esp+10h] [ebp-14h]
   _DWORD pExceptionObject[4]; // [esp+14h] [ebp-10h] BYREF
 
-  operator^<unsigned long>(stream, classId);
-  if ( (unsigned __int8)std::ios_base::operator!((char *)stream + *(_DWORD *)(*(_DWORD *)stream + 4)) )
+  operator^<unsigned long>((int)stream, (int)classId);
+  if ( (unsigned __int8)std::ios_base::operator!((char *)stream + *(_DWORD *)(*(_DWORD *)stream + 4)) != 0 )
   {
     pExceptionObject[0] = 0;
     CPersistence::SerialError::SerialError((CPersistence::SerialError *)pExceptionObject);
@@ -97,9 +97,9 @@ class CPersistence * __cdecl CPersistence::New_HACK_VERSION(std::istream & strea
   }
   C = operator new(0x74u);
   pExceptionObject[3] = 0;
-  if ( C )
+  if ( C != 0 )
   {
-    return (struct CPersistence *)CSquadLeaderRole::CSquadLeaderRole((CSquadLeaderRole *)C, (int)stream);
+    return (struct CPersistence *)CSquadLeaderRole::CSquadLeaderRole((CSquadLeaderRole *)C, stream);
   }
   else
   {
@@ -144,58 +144,55 @@ class CPersistence &  CPersistence::operator=(class CPersistence const & a2) {
 
 
 // address=[0x13eda90]
-// Decompiled from char __cdecl CPersistence::LOAD_UINT8(int a1)
+// Decompiled from unsigned __int8 __cdecl CPersistence::LOAD_UINT8(int a1)
 unsigned char __cdecl CPersistence::LOAD_UINT8(std::istream & a1) {
   
   int pExceptionObject; // [esp+0h] [ebp-8h] BYREF
-  char v3; // [esp+7h] [ebp-1h] BYREF
+  unsigned __int8 v3; // [esp+7h] [ebp-1h] BYREF
 
   operator^<unsigned char>(a1, &v3);
-  if ( !(unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) != 0 )
   {
-    return v3;
+    pExceptionObject = 0;
+    CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  pExceptionObject = 0;
-  CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   return v3;
 }
 
 
 // address=[0x13edae0]
-// Decompiled from __int16 __cdecl CPersistence::LOAD_UINT16(int a1)
+// Decompiled from unsigned __int16 __cdecl CPersistence::LOAD_UINT16(int a1)
 unsigned short __cdecl CPersistence::LOAD_UINT16(std::istream & a1) {
   
   int pExceptionObject; // [esp+0h] [ebp-8h] BYREF
-  __int16 v3; // [esp+4h] [ebp-4h] BYREF
+  unsigned __int16 v3; // [esp+4h] [ebp-4h] BYREF
 
   operator^<unsigned short>(a1, &v3);
-  if ( !(unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) != 0 )
   {
-    return v3;
+    pExceptionObject = 0;
+    CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  pExceptionObject = 0;
-  CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   return v3;
 }
 
 
 // address=[0x13edb30]
-// Decompiled from int __cdecl CPersistence::LOAD_UINT32(int a1)
+// Decompiled from unsigned int __cdecl CPersistence::LOAD_UINT32(int a1)
 unsigned int __cdecl CPersistence::LOAD_UINT32(std::istream & a1) {
   
-  int v2; // [esp+0h] [ebp-8h] BYREF
+  unsigned int v2; // [esp+0h] [ebp-8h] BYREF
   int pExceptionObject; // [esp+4h] [ebp-4h] BYREF
 
   operator^<unsigned int>(a1, &v2);
-  if ( !(unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) != 0 )
   {
-    return v2;
+    pExceptionObject = 0;
+    CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  pExceptionObject = 0;
-  CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   return v2;
 }
 
@@ -208,13 +205,12 @@ signed char __cdecl CPersistence::LOAD_INT8(std::istream & a1) {
   char v3; // [esp+7h] [ebp-1h] BYREF
 
   operator^<signed char>(a1, &v3);
-  if ( !(unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) != 0 )
   {
-    return v3;
+    pExceptionObject = 0;
+    CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  pExceptionObject = 0;
-  CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   return v3;
 }
 
@@ -226,33 +222,31 @@ short __cdecl CPersistence::LOAD_INT16(std::istream & a1) {
   int pExceptionObject; // [esp+0h] [ebp-8h] BYREF
   __int16 v3; // [esp+4h] [ebp-4h] BYREF
 
-  operator^<short>(a1, &v3);
-  if ( !(unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  operator^<short>(a1, (int)&v3);
+  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) != 0 )
   {
-    return v3;
+    pExceptionObject = 0;
+    CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  pExceptionObject = 0;
-  CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   return v3;
 }
 
 
 // address=[0x13edc20]
-// Decompiled from int __cdecl CPersistence::LOAD_INT32(int a1)
+// Decompiled from int __cdecl CPersistence::LOAD_INT32(struct std::istream *a1)
 int __cdecl CPersistence::LOAD_INT32(std::istream & a1) {
   
   int v2; // [esp+0h] [ebp-8h] BYREF
   int pExceptionObject; // [esp+4h] [ebp-4h] BYREF
 
-  operator^<int>(a1, (int)&v2);
-  if ( !(unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  operator^<int>(a1, &v2);
+  if ( (unsigned __int8)std::ios_base::operator!((char *)a1 + *(_DWORD *)(*(_DWORD *)a1 + 4)) != 0 )
   {
-    return v2;
+    pExceptionObject = 0;
+    CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  pExceptionObject = 0;
-  CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   return v2;
 }
 
@@ -264,14 +258,13 @@ unsigned long __cdecl CPersistence::LOAD_ID(std::istream & a1) {
   int v2; // [esp+0h] [ebp-8h] BYREF
   int pExceptionObject; // [esp+4h] [ebp-4h] BYREF
 
-  operator^<unsigned long>(a1, &v2);
-  if ( !(unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  operator^<unsigned long>(a1, (int)&v2);
+  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) != 0 )
   {
-    return v2;
+    pExceptionObject = 0;
+    CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  pExceptionObject = 0;
-  CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   return v2;
 }
 
@@ -283,14 +276,13 @@ double __cdecl CPersistence::LOAD_FLOAT64(std::istream & a1) {
   double v2; // [esp+0h] [ebp-Ch] BYREF
   int pExceptionObject; // [esp+8h] [ebp-4h] BYREF
 
-  operator^<double>(a1, &v2);
-  if ( !(unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  operator^<double>(a1, (int)&v2);
+  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) != 0 )
   {
-    return v2;
+    pExceptionObject = 0;
+    CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  pExceptionObject = 0;
-  CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   return v2;
 }
 
@@ -302,14 +294,13 @@ float __cdecl CPersistence::LOAD_FLOAT32(std::istream & a1) {
   float v2; // [esp+0h] [ebp-8h] BYREF
   int pExceptionObject; // [esp+4h] [ebp-4h] BYREF
 
-  operator^<float>(a1, &v2);
-  if ( !(unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  operator^<float>(a1, (int)&v2);
+  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) != 0 )
   {
-    return v2;
+    pExceptionObject = 0;
+    CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  pExceptionObject = 0;
-  CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   return v2;
 }
 
@@ -321,14 +312,13 @@ char __cdecl CPersistence::LOAD_char(std::istream & a1) {
   int pExceptionObject; // [esp+0h] [ebp-8h] BYREF
   char v3; // [esp+7h] [ebp-1h] BYREF
 
-  operator^<char>(a1, &v3);
-  if ( !(unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  operator^<char>(a1, (int)&v3);
+  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) != 0 )
   {
-    return v3;
+    pExceptionObject = 0;
+    CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  pExceptionObject = 0;
-  CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   return v3;
 }
 
@@ -338,21 +328,21 @@ char __cdecl CPersistence::LOAD_char(std::istream & a1) {
 std::string __cdecl CPersistence::LOAD_string(std::istream & a1) {
   
   int pExceptionObject; // [esp+8h] [ebp-30h] BYREF
-  _BYTE v4[28]; // [esp+Ch] [ebp-2Ch] BYREF
+  std::string v4; // [esp+Ch] [ebp-2Ch] BYREF
   int v5; // [esp+34h] [ebp-4h]
 
-  std::string::string();
+  ((void (__cdecl *)())std::string::string)();
   v5 = 0;
-  operator^<std::string>(a2, v4);
-  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a2 + 4) + a2) )
+  operator^<std::string>(a2, (int)&v4);
+  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a2 + 4) + a2) != 0 )
   {
     pExceptionObject = 0;
     CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
     _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  std::string::string(v4);
+  std::string::string(&v4);
   v5 = -1;
-  std::string::~string(v4);
+  std::string::~string(&v4);
   return a1;
 }
 
@@ -365,13 +355,12 @@ bool __cdecl CPersistence::LOAD_bool(std::istream & a1) {
   char v3; // [esp+7h] [ebp-1h] BYREF
 
   operator^<bool>(a1, &v3);
-  if ( !(unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) )
+  if ( (unsigned __int8)std::ios_base::operator!(*(_DWORD *)(*(_DWORD *)a1 + 4) + a1) != 0 )
   {
-    return v3;
+    pExceptionObject = 0;
+    CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
+    _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   }
-  pExceptionObject = 0;
-  CPersistence::SerialError::SerialError((CPersistence::SerialError *)&pExceptionObject);
-  _CxxThrowException(&pExceptionObject, (_ThrowInfo *)&_TI2_AVSerialError_CPersistence__);
   return v3;
 }
 

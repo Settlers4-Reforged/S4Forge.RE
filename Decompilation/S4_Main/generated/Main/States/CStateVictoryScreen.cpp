@@ -3,13 +3,13 @@
 // Definitions for class CStateVictoryScreen
 
 // address=[0x14cb770]
-// Decompiled from CStateVictoryScreen *__cdecl CStateVictoryScreen::DynamicCreateFunc(void *a1)
+// Decompiled from CStateVictoryScreen *__cdecl CStateVictoryScreen::DynamicCreateFunc(int a1)
 class CGameState * __cdecl CStateVictoryScreen::DynamicCreateFunc(void * a1) {
   
   CStateVictoryScreen *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateVictoryScreen *)operator new(4u);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateVictoryScreen::CStateVictoryScreen(C, a1);
   }
@@ -24,24 +24,24 @@ class CGameState * __cdecl CStateVictoryScreen::DynamicCreateFunc(void * a1) {
 // Decompiled from CStateVictoryScreen *__thiscall CStateVictoryScreen::CStateVictoryScreen(CStateVictoryScreen *this, int a2)
  CStateVictoryScreen::CStateVictoryScreen(void * a2) {
   
-  CGuiGameState::CGuiGameState(this);
+  CGuiGameState::CGuiGameState((CGuiGameState *)this);
   *(_DWORD *)this = &CStateVictoryScreen::_vftable_;
   g_iVictoryScreenCampaignType = a2;
   CGuiGameState::EnsureGfxEngineIsInGuiMode(this);
-  CGuiGameState::SetupGui(this, L"Menu\\GUISetStartscreens.dat", 12, GuiDlgMainSplashProc);
-  IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 1, 0);
-  IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 0);
+  CGuiGameState::SetupGui((CGuiGameState *)this, L"Menu\\GUISetStartscreens.dat", 12, (bool (__cdecl *)(int, int, int))GuiDlgMainSplashProc);
+  IGfxEngine::SetCursorShape(g_pGfxEngine, 1, 0);
+  IGuiEngine::EnableEventInput(g_pGUIEngine, 0);
   return this;
 }
 
 
 // address=[0x14cb890]
-// Decompiled from void __thiscall CStateVictoryScreen::~CStateVictoryScreen(CStateVictoryScreen *this)
+// Decompiled from void __thiscall CStateVictoryScreen::~CStateVictoryScreen(CGuiGameState *this)
  CStateVictoryScreen::~CStateVictoryScreen(void) {
   
-  *(_DWORD *)this = &CStateVictoryScreen::_vftable_;
-  IGuiEngine::EnableEventInput((IGuiEngine *)g_pGUIEngine, 1);
-  if ( !IGuiEngine::CloseDialog((IGuiEngine *)g_pGUIEngine, 12) && BBSupportDbgReport(2, "main\\States\\StateVictoryScreen.cpp", 70, "bRet") == 1 )
+  this->__vftable = (CGuiGameState_vtbl *)&CStateVictoryScreen::_vftable_;
+  IGuiEngine::EnableEventInput(g_pGUIEngine, 1);
+  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 12) && BBSupportDbgReport(2, "main\\States\\StateVictoryScreen.cpp", 70, "bRet") == 1 )
   {
     __debugbreak();
   }
@@ -65,20 +65,19 @@ bool  CStateVictoryScreen::Perform(void) {
     }
   }
   v1 = dword_4032130 + 30;
-  if ( v1 >= timeGetTime() )
+  if ( v1 < timeGetTime() )
   {
-    return 1;
+    dword_4032130 = timeGetTime();
+    IGuiEngine::RenderGui(g_pGUIEngine);
+    IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
+    IGfxEngine::ShowFrame(g_pGfxEngine);
   }
-  dword_4032130 = timeGetTime();
-  IGuiEngine::RenderGui((IGuiEngine *)g_pGUIEngine);
-  IGfxEngine::RenderFrame((IGfxEngine *)g_pGfxEngine, 0, 0);
-  IGfxEngine::ShowFrame((IGfxEngine *)g_pGfxEngine);
   return 1;
 }
 
 
 // address=[0x14cb9c0]
-// Decompiled from char __thiscall CStateVictoryScreen::OnEvent(CStateVictoryScreen *this, struct CEvn_Event *a2)
+// Decompiled from char __thiscall CStateVictoryScreen::OnEvent(CGuiGameState *this, struct CEvn_Event *a2)
 bool  CStateVictoryScreen::OnEvent(class CEvn_Event & a2) {
   
   int event; // [esp+4h] [ebp-4h]

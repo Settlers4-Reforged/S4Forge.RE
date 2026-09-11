@@ -9,7 +9,7 @@ class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void * a1) {
   CStateVideo *C; // [esp+Ch] [ebp-10h]
 
   C = (CStateVideo *)operator new(0xCu);
-  if ( C )
+  if ( C != 0 )
   {
     return CStateVideo::CStateVideo(C, a1);
   }
@@ -30,14 +30,14 @@ class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void * a1) {
   IVideoEngine *v6; // [esp+3Ch] [ebp-20h]
   int GfxMode; // [esp+44h] [ebp-18h]
 
-  CGameState::CGameState(this);
+  CGameState::CGameState((CGameState *)this);
   *(_DWORD *)this = &CStateVideo::_vftable_;
-  if ( g_pGUIEngine )
+  if ( g_pGUIEngine != 0 )
   {
-    delete (IGuiEngine *)g_pGUIEngine;
+    delete g_pGUIEngine;
     g_pGUIEngine = 0;
   }
-  if ( g_pDialogData )
+  if ( g_pDialogData != 0 )
   {
     operator delete[](g_pDialogData);
     g_pDialogData = 0;
@@ -49,18 +49,18 @@ class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void * a1) {
   }
   DigitalDriver = 0;
   CSoundManager::StopMusic(g_pSoundManager);
-  if ( g_pSoundEngine )
+  if ( g_pSoundEngine != 0 )
   {
-    DigitalDriver = ISoundEngine::GetDigitalDriver((ISoundEngine *)g_pSoundEngine);
+    DigitalDriver = ISoundEngine::GetDigitalDriver(g_pSoundEngine);
   }
-  if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 187, "g_pGfxEngine") == 1 )
+  if ( g_pGfxEngine == 0 && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 187, "g_pGfxEngine") == 1 )
   {
     __debugbreak();
   }
   *((_BYTE *)this + 8) = 0;
   *((_BYTE *)this + 9) = 0;
   v6 = (IVideoEngine *)operator new(1u);
-  if ( v6 )
+  if ( v6 != 0 )
   {
     v5 = IVideoEngine::IVideoEngine(v6);
   }
@@ -70,11 +70,11 @@ class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void * a1) {
   }
   g_pVideoEngine = (int)v5;
   IVideoEngine::Init(v5, DigitalDriver);
-  if ( (unsigned __int8)sub_14CC580(1) )
+  if ( (unsigned __int8)sub_14CC580(1) != 0 )
   {
     CStateVideo::AlignVideoSurface(this);
-    GfxMode = IGfxEngine::GetGfxMode((IGfxEngine *)g_pGfxEngine);
-    if ( GfxMode )
+    GfxMode = IGfxEngine::GetGfxMode(g_pGfxEngine);
+    if ( GfxMode != 0 )
     {
       if ( GfxMode == 1 )
       {
@@ -101,7 +101,7 @@ class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void * a1) {
     else
     {
       CTrace::Print("VideoPlayer :\t CStateVideo::StartVideo : Unknown Gfx mode ");
-      if ( g_pVideoEngine )
+      if ( g_pVideoEngine != 0 )
       {
         delete (IVideoEngine *)g_pVideoEngine;
       }
@@ -110,7 +110,7 @@ class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void * a1) {
   }
   else
   {
-    if ( g_pVideoEngine )
+    if ( g_pVideoEngine != 0 )
     {
       delete (IVideoEngine *)g_pVideoEngine;
     }
@@ -121,11 +121,11 @@ class CGameState * __cdecl CStateVideo::DynamicCreateFunc(void * a1) {
 
 
 // address=[0x14cbe60]
-// Decompiled from void __thiscall CStateVideo::~CStateVideo(CStateVideo *this)
+// Decompiled from void __thiscall CStateVideo::~CStateVideo(CGameState *this)
  CStateVideo::~CStateVideo(void) {
   
-  *(_DWORD *)this = &CStateVideo::_vftable_;
-  if ( g_pVideoEngine )
+  this->__vftable = (CGameState_vtbl *)&CStateVideo::_vftable_;
+  if ( g_pVideoEngine != 0 )
   {
     delete (IVideoEngine *)g_pVideoEngine;
     g_pVideoEngine = 0;
@@ -149,19 +149,19 @@ bool  CStateVideo::Perform(void) {
   int v10; // [esp+44h] [ebp-8h]
 
   v4 = this;
-  if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 273, "g_pGfxEngine") == 1 )
+  if ( g_pGfxEngine == 0 && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 273, "g_pGfxEngine") == 1 )
   {
     __debugbreak();
   }
-  if ( g_pVideoEngine )
+  if ( g_pVideoEngine != 0 )
   {
-    if ( *((_BYTE *)v4 + 8) )
+    if ( *((_BYTE *)v4 + 8) != 0 )
     {
       v5 = 0;
       if ( IVideoEngine::IsReadyForNextFrame((IVideoEngine *)g_pVideoEngine) )
       {
         v3 = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, 0, &v2);
-        if ( !v3 )
+        if ( v3 == 0 )
         {
           v6.m_bDirty = 0;
           v6.m_iWidth = 640;
@@ -174,7 +174,7 @@ bool  CStateVideo::Perform(void) {
           v6.m_sDestinationRect.top = 0;
           v6.m_sDestinationRect.right = 640;
           v6.m_sDestinationRect.bottom = 480;
-          if ( !IGfxEngine::CreateGuiSurface(g_pGfxEngine, 0, &v6) )
+          if ( IGfxEngine::CreateGuiSurface(g_pGfxEngine, 0, &v6) == 0 )
           {
             CStateVideo::AlignVideoSurface(v4);
             IGfxEngine::SetVisibilityOfGuiSurface(g_pGfxEngine, 0, 1);
@@ -185,7 +185,7 @@ bool  CStateVideo::Perform(void) {
         IGfxEngine::EndWriteToSurface(g_pGfxEngine, 0);
         IGfxEngine::RenderFrame(g_pGfxEngine, 0, 0);
         IGfxEngine::ShowFrame(g_pGfxEngine);
-        if ( !v5 )
+        if ( v5 == 0 )
         {
           CStateVideo::EndVideo(v4);
         }
@@ -215,14 +215,14 @@ bool  CStateVideo::OnEvent(class CEvn_Event & a2) {
   switch ( a2->m_iEventId )
   {
     case 3:
-      if ( *((_BYTE *)this + 8) )
+      if ( *((_BYTE *)this + 8) != 0 )
       {
         CStateVideo::EndVideo(this);
       }
       result = 1;
       break;
     case 8:
-      if ( *((_BYTE *)this + 8) )
+      if ( *((_BYTE *)this + 8) != 0 )
       {
         CStateVideo::EndVideo(this);
       }
@@ -231,7 +231,7 @@ bool  CStateVideo::OnEvent(class CEvn_Event & a2) {
     case 0xD:
       if ( a2->m_wParam == 27 )
       {
-        if ( *((_BYTE *)this + 8) )
+        if ( *((_BYTE *)this + 8) != 0 )
         {
           CStateVideo::EndVideo(this);
         }
@@ -243,9 +243,9 @@ bool  CStateVideo::OnEvent(class CEvn_Event & a2) {
       }
       break;
     case 0x16:
-      if ( *((_BYTE *)this + 8) )
+      if ( *((_BYTE *)this + 8) != 0 )
       {
-        if ( a2->m_wParam )
+        if ( a2->m_wParam != 0 )
         {
           CStateVideo::UnPauseVideo(this);
         }
@@ -265,62 +265,62 @@ CStateVideo__OnEvent___def_18CC08F:
 
 
 // address=[0x14cc150]
-// Decompiled from char __thiscall CStateVideo::StartVideo(CStateVideo *this, void *a2)
+// Decompiled from char __thiscall CStateVideo::StartVideo(CStateVideo *this, char *a2)
 bool  CStateVideo::StartVideo(void * a2) {
   
   int CursorShape; // eax
   char *v4; // eax
   char v6[88]; // [esp+Ch] [ebp-A0h] BYREF
-  _BYTE v7[28]; // [esp+64h] [ebp-48h] BYREF
-  _BYTE v8[28]; // [esp+80h] [ebp-2Ch] BYREF
+  std::string v7; // [esp+64h] [ebp-48h] BYREF
+  std::wstring v8; // [esp+80h] [ebp-2Ch] BYREF
   int v9; // [esp+A8h] [ebp-4h]
 
-  if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 411, "g_pGfxEngine") == 1 )
+  if ( g_pGfxEngine == 0 && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 411, "g_pGfxEngine") == 1 )
   {
     __debugbreak();
   }
-  if ( !g_pVideoEngine )
+  if ( g_pVideoEngine == 0 )
   {
     return 0;
   }
   CursorShape = IGfxEngine::GetCursorShape(g_pGfxEngine);
-  IGfxEngine::SetCursorShape((IGfxEngine *)g_pGfxEngine, 0, CursorShape);
-  std::wstring::wstring(v8);
+  IGfxEngine::SetCursorShape(g_pGfxEngine, 0, CursorShape);
+  std::wstring::wstring(&v8);
   v9 = 0;
-  if ( (*(unsigned __int8 (__thiscall **)(void *, _BYTE *, void *, int))(*(_DWORD *)g_pCDDrive + 8))(g_pCDDrive, v8, a2, 4194305) )
+  if ( g_pCDDrive->GetCDPath(g_pCDDrive, (char *)&v8, a2, 4194305) != 0 )
   {
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v6);
     LOBYTE(v9) = 1;
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes(v7, v8);
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::to_bytes((int)&v7, &v8);
     LOBYTE(v9) = 2;
-    v4 = (char *)std::string::c_str(v7);
+    v4 = std::string::c_str(&v7);
     if ( IVideoEngine::StartVideo((IVideoEngine *)g_pVideoEngine, v4, 0x280u, 0x1E0u) )
     {
       *((_BYTE *)this + 8) = 1;
       *((_BYTE *)this + 9) = 0;
       LOBYTE(v9) = 1;
-      std::string::~string(v7);
+      std::string::~string(&v7);
       LOBYTE(v9) = 0;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v6);
       v9 = -1;
-      std::wstring::~wstring(v8);
+      std::wstring::~wstring(&v8);
       return 1;
     }
     else
     {
       LOBYTE(v9) = 1;
-      std::string::~string(v7);
+      std::string::~string(&v7);
       LOBYTE(v9) = 0;
       std::wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>::~wstring_convert<std::codecvt_utf8_utf16<wchar_t,1114111,0>,wchar_t,std::allocator<wchar_t>,std::allocator<char>>(v6);
       v9 = -1;
-      std::wstring::~wstring(v8);
+      std::wstring::~wstring(&v8);
       return 0;
     }
   }
   else
   {
     v9 = -1;
-    std::wstring::~wstring(v8);
+    std::wstring::~wstring(&v8);
     return 0;
   }
 }
@@ -330,15 +330,15 @@ bool  CStateVideo::StartVideo(void * a2) {
 // Decompiled from char __thiscall CStateVideo::EndVideo(CStateVideo *this)
 bool  CStateVideo::EndVideo(void) {
   
-  if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 447, "g_pGfxEngine") == 1 )
+  if ( g_pGfxEngine == 0 && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 447, "g_pGfxEngine") == 1 )
   {
     __debugbreak();
   }
-  if ( !g_pVideoEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 448, "g_pVideoEngine") == 1 )
+  if ( g_pVideoEngine == 0 && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 448, "g_pVideoEngine") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_BYTE *)this + 8) )
+  if ( *((_BYTE *)this + 8) != 0 )
   {
     *((_BYTE *)this + 8) = 0;
     *((_BYTE *)this + 9) = 0;
@@ -353,21 +353,18 @@ bool  CStateVideo::EndVideo(void) {
 // Decompiled from void __thiscall CStateVideo::PauseVideo(CStateVideo *this)
 void  CStateVideo::PauseVideo(void) {
   
-  if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 470, "g_pGfxEngine") == 1 )
+  if ( g_pGfxEngine == 0 && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 470, "g_pGfxEngine") == 1 )
   {
     __debugbreak();
   }
-  if ( !g_pVideoEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 471, "g_pVideoEngine") == 1 )
+  if ( g_pVideoEngine == 0 && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 471, "g_pVideoEngine") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_BYTE *)this + 8) )
+  if ( *((_BYTE *)this + 8) != 0 && *((_BYTE *)this + 9) == 0 )
   {
-    if ( !*((_BYTE *)this + 9) )
-    {
-      *((_BYTE *)this + 9) = 1;
-      IVideoEngine::PauseVideo((IVideoEngine *)g_pVideoEngine);
-    }
+    *((_BYTE *)this + 9) = 1;
+    IVideoEngine::PauseVideo((IVideoEngine *)g_pVideoEngine);
   }
 }
 
@@ -376,21 +373,18 @@ void  CStateVideo::PauseVideo(void) {
 // Decompiled from void __thiscall CStateVideo::UnPauseVideo(CStateVideo *this)
 void  CStateVideo::UnPauseVideo(void) {
   
-  if ( !g_pGfxEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 485, "g_pGfxEngine") == 1 )
+  if ( g_pGfxEngine == 0 && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 485, "g_pGfxEngine") == 1 )
   {
     __debugbreak();
   }
-  if ( !g_pVideoEngine && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 486, "g_pVideoEngine") == 1 )
+  if ( g_pVideoEngine == 0 && BBSupportDbgReport(2, "Main\\States\\StateVideo.cpp", 486, "g_pVideoEngine") == 1 )
   {
     __debugbreak();
   }
-  if ( *((_BYTE *)this + 8) )
+  if ( *((_BYTE *)this + 8) != 0 && *((_BYTE *)this + 9) == 1 )
   {
-    if ( *((_BYTE *)this + 9) == 1 )
-    {
-      *((_BYTE *)this + 9) = 0;
-      IVideoEngine::UnPauseVideo((IVideoEngine *)g_pVideoEngine);
-    }
+    *((_BYTE *)this + 9) = 0;
+    IVideoEngine::UnPauseVideo((IVideoEngine *)g_pVideoEngine);
   }
 }
 
@@ -404,16 +398,16 @@ void  CStateVideo::AlignVideoSurface(void) {
   int v3; // [esp+14h] [ebp-18h]
   struct tagRECT v4; // [esp+18h] [ebp-14h] BYREF
 
-  if ( g_pGfxEngine )
+  if ( g_pGfxEngine != 0 )
   {
-    OutputWidth = IGfxEngine::GetOutputWidth((IGfxEngine *)g_pGfxEngine);
-    OutputHeight = IGfxEngine::GetOutputHeight((IGfxEngine *)g_pGfxEngine);
+    OutputWidth = IGfxEngine::GetOutputWidth(g_pGfxEngine);
+    OutputHeight = IGfxEngine::GetOutputHeight(g_pGfxEngine);
     v3 = (int)(float)((float)OutputHeight * (float)(640.0 / 480.0));
     v4.left = (OutputWidth - v3) / 2;
     v4.top = 0;
     v4.right = v3 + v4.left;
     v4.bottom = OutputHeight;
-    IGfxEngine::SetGuiSurfaceDestinationRect((IGfxEngine *)g_pGfxEngine, 0, &v4);
+    IGfxEngine::SetGuiSurfaceDestinationRect(g_pGfxEngine, 0, &v4);
   }
 }
 

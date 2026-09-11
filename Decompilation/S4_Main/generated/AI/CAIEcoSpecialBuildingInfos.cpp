@@ -6,7 +6,7 @@
 // Decompiled from CAIEcoSpecialBuildingInfos *__thiscall CAIEcoSpecialBuildingInfos::CAIEcoSpecialBuildingInfos(CAIEcoSpecialBuildingInfos *this)
  CAIEcoSpecialBuildingInfos::CAIEcoSpecialBuildingInfos(void) {
   
-  if ( CAIEcoSpecialBuildingInfos::pSingleInstance && BBSupportDbgReport(2, "Ai\\EcoManager\\CAIEcoSpecialBuildingInfos.cpp", 40, "!CAIEcoSpecialBuildingInfos::pSingleInstance") == 1 )
+  if ( CAIEcoSpecialBuildingInfos::pSingleInstance != 0 && BBSupportDbgReport(2, "Ai\\EcoManager\\CAIEcoSpecialBuildingInfos.cpp", 40, "!CAIEcoSpecialBuildingInfos::pSingleInstance") == 1 )
   {
     __debugbreak();
   }
@@ -32,14 +32,13 @@ class CAIEcoSpecialBuildingInfos * __cdecl CAIEcoSpecialBuildingInfos::TheObject
   
   CAIEcoSpecialBuildingInfos *C; // [esp+Ch] [ebp-10h]
 
-  if ( CAIEcoSpecialBuildingInfos::pSingleInstance )
+  if ( CAIEcoSpecialBuildingInfos::pSingleInstance == 0 )
   {
-    return CAIEcoSpecialBuildingInfos::pSingleInstance;
-  }
-  C = (CAIEcoSpecialBuildingInfos *)operator new(0x1038u);
-  if ( C )
-  {
-    CAIEcoSpecialBuildingInfos::CAIEcoSpecialBuildingInfos(C);
+    C = (CAIEcoSpecialBuildingInfos *)operator new(0x1038u);
+    if ( C != 0 )
+    {
+      CAIEcoSpecialBuildingInfos::CAIEcoSpecialBuildingInfos(C);
+    }
   }
   return CAIEcoSpecialBuildingInfos::pSingleInstance;
 }
@@ -179,27 +178,27 @@ void  CAIEcoSpecialBuildingInfos::InitBlockingBitCount(void) {
           j < 83;
           ++j )
     {
-      BuildingInfo = CBuildingInfoMgr::GetBuildingInfo(i, j);
+      BuildingInfo = (int)CBuildingInfoMgr::GetBuildingInfo(i, j);
       v12 = 0;
-      v10 = std::vector<unsigned int>::begin(v4);
+      v10 = ((int (__stdcall *)(_BYTE *))std::vector<unsigned int>::begin)(v4);
       v9 = v10;
       LOBYTE(v17) = 1;
-      std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator=(v10);
+      ((void (__stdcall *)(int))std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator=)(v10);
       LOBYTE(v17) = 0;
       std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v4);
       while ( 1 )
       {
-        v8 = (std::_Iterator_base12 *)std::vector<unsigned int>::end(v3);
+        v8 = (std::_Iterator_base12 *)((std::_Iterator_base12 *(__stdcall *)(_BYTE *))std::vector<unsigned int>::end)(v3);
         v7 = v8;
         LOBYTE(v17) = 2;
         v16 = std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator!=(v8);
         LOBYTE(v17) = 0;
         std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::~_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>(v3);
-        if ( !v16 )
+        if ( v16 == 0 )
         {
           break;
         }
-        if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v5) )
+        if ( *(_DWORD *)std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>::operator*(v5) != 0 )
         {
           for ( k = 31;
                 k >= 0;

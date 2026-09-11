@@ -3,10 +3,10 @@
 // Definitions for class CBasicGrid
 
 // address=[0x2fc5160]
-// Decompiled from void __thiscall CBasicGrid::~CBasicGrid(CBasicGrid *this)
+// Decompiled from void __thiscall CBasicGrid::~CBasicGrid(void **this)
  CBasicGrid::~CBasicGrid(void) {
   
-  CGrid::~CGrid((CBasicGrid *)((char *)this + 4));
+  CGrid::~CGrid(this + 1);
 }
 
 
@@ -65,10 +65,10 @@ void  CBasicGrid::initGrid(void) {
   int j; // [esp+98h] [ebp-4h]
 
   v37 = this;
-  v35 = CRandom16::Rand((CRandom16 *)g_pRand) % *((_DWORD *)this + 2);
-  v36 = CRandom16::Rand((CRandom16 *)g_pRand) % *((_DWORD *)v37 + 2);
+  v35 = CRandom16::Rand(g_pRand) % *((_DWORD *)this + 2);
+  v36 = CRandom16::Rand(g_pRand) % *((_DWORD *)v37 + 2);
   *(_BYTE *)(*((_DWORD *)v37 + 1) + v35 + *((_DWORD *)v37 + 2) * v36) = 101;
-  CPlayerData::setStartPos_Basic(*(CPlayerData **)g_pPlayerData, v35, v36);
+  CPlayerData::setStartPos_Basic(*g_pPlayerData, v35, v36);
   v19 = *((_DWORD *)v37 + 2);
   v34 = operator new[](4 * *((_DWORD *)v37 + 2));
   memset(v34, 0, 4 * *((_DWORD *)v37 + 2));
@@ -121,7 +121,7 @@ void  CBasicGrid::initGrid(void) {
     }
     v35 = v31;
     v36 = v30;
-    CPlayerData::setStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * i), v31, v30);
+    CPlayerData::setStartPos_Basic(g_pPlayerData[i], v31, v30);
     v21 = 0;
     v10 = (int)((double)*((int *)v34 + v35) * 0.4);
     v9 = (int)((double)*((int *)v33 + v36) * 0.4);
@@ -139,7 +139,7 @@ void  CBasicGrid::initGrid(void) {
         {
           v18 = 0;
           v17 = 0;
-          CPlayerData::getStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * k), &v18, &v17);
+          CPlayerData::getStartPos_Basic((CPlayerData *)g_pPlayerData[k], &v18, &v17);
           v1 = j__abs(v18 - v35);
           v28 = j__abs(v17 - v36) + v1;
           if ( v28 < v16 )
@@ -178,7 +178,7 @@ void  CBasicGrid::initGrid(void) {
         {
           v15 = 0;
           v14 = 0;
-          CPlayerData::getStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * m), &v15, &v14);
+          CPlayerData::getStartPos_Basic((CPlayerData *)g_pPlayerData[m], &v15, &v14);
           v3 = j__abs(v15 - v35);
           v26 = j__abs(v14 - v36) + v3;
           if ( v26 < v13 )
@@ -204,7 +204,7 @@ void  CBasicGrid::initGrid(void) {
       v36 = v30;
     }
     *(_BYTE *)(*((_DWORD *)v37 + 1) + v35 + *((_DWORD *)v37 + 2) * v36) = 101;
-    CPlayerData::setStartPos_Basic(*(CPlayerData **)(g_pPlayerData + 4 * i), v35, v36);
+    CPlayerData::setStartPos_Basic(g_pPlayerData[i], v35, v36);
   }
   operator delete[](v34);
   operator delete[](v33);
@@ -214,9 +214,9 @@ void  CBasicGrid::initGrid(void) {
         n < v11;
         ++n )
   {
-    v5 = CRandom16::Rand((CRandom16 *)g_pRand);
+    v5 = CRandom16::Rand(g_pRand);
     v29 = v5 % v20;
-    while ( *(_BYTE *)(*((_DWORD *)v37 + 1) + v29) )
+    while ( *(_BYTE *)(*((_DWORD *)v37 + 1) + v29) != 0 )
     {
       if ( ++v29 >= v20 )
       {
@@ -226,14 +226,13 @@ void  CBasicGrid::initGrid(void) {
     *(_BYTE *)(*((_DWORD *)v37 + 1) + v29) = 1;
   }
   result = v11;
-  if ( v11 <= v20 )
+  if ( v11 > v20 )
   {
-    return result;
-  }
-  result = BBSupportDbgReport(2, "BasicGrid.cpp", 220, "iLandMass <= iGridSize");
-  if ( result == 1 )
-  {
-    __debugbreak();
+    result = BBSupportDbgReport(2, "BasicGrid.cpp", 220, "iLandMass <= iGridSize");
+    if ( result == 1 )
+    {
+      __debugbreak();
+    }
   }
   return result;
 }

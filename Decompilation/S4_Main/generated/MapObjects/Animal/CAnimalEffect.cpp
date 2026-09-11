@@ -10,9 +10,9 @@
   CRandom16 *C; // [esp+Ch] [ebp-14h]
 
   C = (CRandom16 *)operator new(8u);
-  if ( C )
+  if ( C != 0 )
   {
-    v2 = CRandom16::CRandom16(C, (unsigned int)&byte_12AFD6E[116023]);
+    v2 = CRandom16::CRandom16(C, (int)&byte_12AFD6E[116023]);
   }
   else
   {
@@ -37,7 +37,7 @@
 // Decompiled from void __thiscall CAnimalEffect::~CAnimalEffect(void **this)
  CAnimalEffect::~CAnimalEffect(void) {
   
-  if ( *this )
+  if ( *this != 0 )
   {
     operator delete(*this);
     *this = 0;
@@ -103,10 +103,10 @@ void  CAnimalEffect::Update(unsigned int a2, unsigned int a3, unsigned int a4, u
     default:
       break;
   }
-  if ( updated )
+  if ( updated != 0 )
   {
     AnimalEffectDataPtr = CAnimalMgr::GetAnimalEffectDataPtr((CAnimalMgr *)&g_cAnimalMgr, v21);
-    if ( AnimalEffectDataPtr[8] )
+    if ( AnimalEffectDataPtr[8] != 0 )
     {
       v17 = CLogic::Effects(g_pLogic);
       v9 = v17->GetMovingEffectSoundId(v17, a2);
@@ -123,14 +123,11 @@ void  CAnimalEffect::Update(unsigned int a2, unsigned int a3, unsigned int a4, u
           v11 = Squares::XYToVW(v14);
           v12 = Squares::XYToVW(v25);
           v10 = Squares::XYToVW(v26);
-          if ( v12 >= v13 - 1 && v12 <= v13 + 1 && v10 >= v11 - 1 && v10 <= v11 + 1 && (*((_BYTE *)AnimalEffectDataPtr + 36) == 100 || j__rand() % 100 + 1 <= *((unsigned __int8 *)AnimalEffectDataPtr + 36)) )
+          if ( v12 >= v13 - 1 && v12 <= v13 + 1 && v10 >= v11 - 1 && v10 <= v11 + 1 && (*((_BYTE *)AnimalEffectDataPtr + 36) == 100 || j__rand() % 100 + 1 <= *((unsigned __int8 *)AnimalEffectDataPtr + 36)) && g_pFogging->IsPositionVisible(g_pFogging, v25, v26) )
           {
-            if ( (*(unsigned __int8 (__thiscall **)(void *, int, int))(*(_DWORD *)g_pFogging + 32))(g_pFogging, v25, v26) )
-            {
-              v8 = CSoundManager::PlayEnvironmentSound(g_pSoundManager, AnimalEffectDataPtr[8], v25, v26, 0);
-              v6 = CLogic::Effects(g_pLogic);
-              v6->SetMovingEffectSoundId(v6, a2, v8);
-            }
+            v8 = CSoundManager::PlayEnvironmentSound(g_pSoundManager, AnimalEffectDataPtr[8], v25, v26, 0);
+            v6 = CLogic::Effects(g_pLogic);
+            v6->SetMovingEffectSoundId(v6, a2, v8);
           }
         }
       }
@@ -168,16 +165,15 @@ int  CAnimalEffect::AddButterfly(int a2, int a3) {
   int v6; // [esp+4h] [ebp-Ch]
 
   v5 = CRandom16::Rand(*this) % 3 + 11;
-  v3 = CLogic::Effects((DWORD *)g_pLogic);
+  v3 = (int)CLogic::Effects(g_pLogic);
   v6 = (*(int (__thiscall **)(int, unsigned int, int, int))(*(_DWORD *)v3 + 40))(v3, v5, a2, a3);
-  if ( !v6 )
+  if ( v6 != 0 )
   {
-    return v6;
-  }
-  this[3] = (CRandom16 *)((char *)this[3] + 1);
-  if ( (int)this[3] >= (int)this[2] )
-  {
-    this[4] = (CRandom16 *)((char *)this[4] + 1);
+    *(this + 3) = (CRandom16 *)((char *)*(this + 3) + 1);
+    if ( (int)*(this + 3) >= (int)*(this + 2) )
+    {
+      *(this + 4) = (CRandom16 *)((char *)*(this + 4) + 1);
+    }
   }
   return v6;
 }
@@ -206,13 +202,9 @@ int  CAnimalEffect::AddBird(int a2, int a3) {
   int v3; // eax
   int v5; // [esp+0h] [ebp-Ch]
 
-  v3 = CLogic::Effects((DWORD *)g_pLogic);
+  v3 = (int)CLogic::Effects(g_pLogic);
   v5 = (*(int (__thiscall **)(int, int, int, int))(*(_DWORD *)v3 + 40))(v3, 14, a2, a3);
-  if ( !v5 )
-  {
-    return v5;
-  }
-  if ( ++*((_DWORD *)this + 6) >= *((_DWORD *)this + 5) )
+  if ( v5 != 0 && ++*((_DWORD *)this + 6) >= *((_DWORD *)this + 5) )
   {
     ++*((_DWORD *)this + 7);
   }
@@ -243,13 +235,9 @@ int  CAnimalEffect::AddSeagull(int a2, int a3) {
   int v3; // eax
   int v5; // [esp+0h] [ebp-Ch]
 
-  v3 = CLogic::Effects((DWORD *)g_pLogic);
+  v3 = (int)CLogic::Effects(g_pLogic);
   v5 = (*(int (__thiscall **)(int, int, int, int))(*(_DWORD *)v3 + 40))(v3, 15, a2, a3);
-  if ( !v5 )
-  {
-    return v5;
-  }
-  if ( ++*((_DWORD *)this + 9) >= *((_DWORD *)this + 8) )
+  if ( v5 != 0 && ++*((_DWORD *)this + 9) >= *((_DWORD *)this + 8) )
   {
     ++*((_DWORD *)this + 10);
   }
@@ -284,13 +272,9 @@ int  CAnimalEffect::AddDuck(int a2, int a3) {
   int v3; // eax
   int v5; // [esp+0h] [ebp-Ch]
 
-  v3 = CLogic::Effects((DWORD *)g_pLogic);
+  v3 = (int)CLogic::Effects(g_pLogic);
   v5 = (*(int (__thiscall **)(int, int, int, int))(*(_DWORD *)v3 + 40))(v3, 17, a2, a3);
-  if ( !v5 )
-  {
-    return v5;
-  }
-  if ( ++*((_DWORD *)this + 12) >= *((_DWORD *)this + 11) )
+  if ( v5 != 0 && ++*((_DWORD *)this + 12) >= *((_DWORD *)this + 11) )
   {
     ++*((_DWORD *)this + 13);
   }
@@ -334,7 +318,7 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a6) {
 
   v29 = this;
   v35 = 0;
-  if ( *((_DWORD *)this + 4) )
+  if ( *((_DWORD *)this + 4) != 0 )
   {
     ScreenOffsetsByMapIndices = IGfxEngine::GetScreenOffsetsByMapIndices(a3, a4, &v15, &v16);
     if ( ScreenOffsetsByMapIndices != 3 )
@@ -348,7 +332,7 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a6) {
   }
   v21 = CWorldManager::Index(a3, a4);
   v27 = (a6 & 0xFF00) >> 8;
-  if ( CWorldManager::FlagBits(v21, 4u) )
+  if ( CWorldManager::FlagBits(v21, 4u) != 0 )
   {
     if ( ++v27 > 0 )
     {
@@ -371,7 +355,7 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a6) {
   v19 = Squares::XYToVW(v31);
   v35 = CAnimalMgr::CheckButterflyUnderground((CAnimalMgr *)&g_cAnimalMgr, v30, v31);
   for ( i = 0;
-        !v35 && i < 12;
+        v35 == 0 && i < 12;
         ++i )
   {
     if ( (int)++v32 > 12 )
@@ -384,7 +368,7 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a6) {
     v19 = Squares::XYToVW(v31);
     v35 = CAnimalMgr::CheckButterflyUnderground((CAnimalMgr *)&g_cAnimalMgr, v30, v31);
   }
-  if ( !v35 )
+  if ( v35 == 0 )
   {
     v32 = a5 + 6;
     if ( a5 + 6 > 12 )
@@ -394,7 +378,7 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a6) {
     v30 = a3 + CSpiralOffsets::DeltaX(v32 + 7);
     v31 = a4 + CSpiralOffsets::DeltaY(v32 + 7);
   }
-  if ( !CAnimalMgr::CheckButterflyUnderground((CAnimalMgr *)&g_cAnimalMgr, v30, v31) )
+  if ( CAnimalMgr::CheckButterflyUnderground((CAnimalMgr *)&g_cAnimalMgr, v30, v31) == 0 )
   {
     v17 = CSpiralOffsets::First(30);
     v18 = 19;
@@ -411,7 +395,7 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a6) {
         break;
       }
     }
-    if ( !v34 && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalEffect.cpp", 522, "bFound") == 1 )
+    if ( v34 == 0 && BBSupportDbgReport(2, "MapObjects\\Animal\\AnimalEffect.cpp", 522, "bFound") == 1 )
     {
       __debugbreak();
     }
@@ -422,7 +406,7 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a6) {
   }
   v24 = CLogic::Effects(g_pLogic);
   v23 = ((int (__thiscall *)(struct IEffects *, int, int, int, _DWORD))v24->j_?SetMovingEffectDestination@CEffects@@UAEIIHHH@Z)(v24, a2, v30, v31, 0);
-  if ( !v23 )
+  if ( v23 == 0 )
   {
     return 1;
   }
@@ -432,12 +416,11 @@ bool  CAnimalEffect::UpdateButterfly(int a2, int a3, int a4, int a5, int a6) {
   v11 = v23;
   v9 = CLogic::FutureEvents(g_pLogic);
   v33 = IFutureEvents::AddFutureEvent16(v9, 7, v11, 0, a2, v12, v13, v14);
-  if ( v33 )
+  if ( v33 == 0 )
   {
-    return v33;
+    v10 = CLogic::Effects(g_pLogic);
+    IEffects::DeleteMovingEffect(v10, a2);
   }
-  v10 = CLogic::Effects(g_pLogic);
-  IEffects::DeleteMovingEffect(v10, a2);
   return v33;
 }
 
@@ -472,11 +455,12 @@ bool  CAnimalEffect::UpdateBird(int a2, int a3, int a4, int a5) {
   int v29; // [esp+40h] [ebp-10h]
   CAnimalEffect *v30; // [esp+44h] [ebp-Ch]
   int v31; // [esp+48h] [ebp-8h]
+  char; // [esp+4Eh] [ebp-2h]
   char v33; // [esp+4Fh] [ebp-1h]
 
   v30 = this;
   v33 = 0;
-  if ( *((_DWORD *)this + 7) )
+  if ( *((_DWORD *)this + 7) != 0 )
   {
     ScreenOffsetsByMapIndices = IGfxEngine::GetScreenOffsetsByMapIndices(a3, a4, &v13, &v14);
     if ( ScreenOffsetsByMapIndices != 3 )
@@ -491,7 +475,7 @@ LABEL_3:
   }
   v19 = CWorldManager::Index(a3, a4);
   v27 = (a5 & 0xFF00) >> 8;
-  if ( CWorldManager::FlagBits(v19, 4u) )
+  if ( CWorldManager::FlagBits(v19, 4u) != 0 )
   {
     if ( ++v27 > 0 )
     {
@@ -533,7 +517,7 @@ LABEL_3:
   v33 = CAnimalMgr::CheckBirdUnderground((CAnimalMgr *)&g_cAnimalMgr, v28, v29);
   v26 = CRandom16::Rand(*(CRandom16 **)v30);
   for ( i = 0;
-        !v33 && i < 12;
+        v33 == 0 && i < 12;
         ++i )
   {
     if ( v26 >= v23 )
@@ -553,7 +537,7 @@ LABEL_3:
     v15 = Squares::XYToVW(v29);
     v33 = CAnimalMgr::CheckBirdUnderground((CAnimalMgr *)&g_cAnimalMgr, v28, v29);
   }
-  if ( !v33 )
+  if ( v33 == 0 )
   {
     v31 = a5 + 6;
     if ( a5 + 6 > 12 )
@@ -569,18 +553,18 @@ LABEL_3:
   }
   v22 = CLogic::Effects(g_pLogic);
   v21 = ((int (__thiscall *)(struct IEffects *, int, int, int, _DWORD))v22->j_?SetMovingEffectDestination@CEffects@@UAEIIHHH@Z)(v22, a2, v28, v29, 0);
-  if ( !v21 )
+  if ( v21 != 0 )
   {
-    return 1;
-  }
-  v12 = ((unsigned __int8)v27 << 8) + (unsigned __int8)v31;
-  v11 = v29;
-  v10 = v28;
-  v9 = v21;
-  v8 = CLogic::FutureEvents(g_pLogic);
-  if ( !(unsigned __int8)IFutureEvents::AddFutureEvent16(v8, 7, v9, 0, a2, v10, v11, v12) )
-  {
-    goto LABEL_3;
+    v12 = ((unsigned __int8)v27 << 8) + (unsigned __int8)v31;
+    v11 = v29;
+    v10 = v28;
+    v9 = v21;
+    v8 = CLogic::FutureEvents(g_pLogic);
+     = IFutureEvents::AddFutureEvent16(v8, 7, v9, 0, a2, v10, v11, v12);
+    if (  == 0 )
+    {
+      goto LABEL_3;
+    }
   }
   return 1;
 }
@@ -624,6 +608,7 @@ bool  CAnimalEffect::UpdateSeagull(int a2, int a3, int a4, int a5) {
   int v37; // [esp+58h] [ebp-10h]
   CAnimalEffect *v38; // [esp+5Ch] [ebp-Ch]
   int v39; // [esp+60h] [ebp-8h]
+  char; // [esp+66h] [ebp-2h]
   bool v41; // [esp+67h] [ebp-1h]
 
   v38 = this;
@@ -634,7 +619,7 @@ bool  CAnimalEffect::UpdateSeagull(int a2, int a3, int a4, int a5) {
   }
   if ( CWorldManager::InWorld(a3, a4) )
   {
-    if ( !*((_DWORD *)v38 + 10) || (ScreenOffsetsByMapIndices = IGfxEngine::GetScreenOffsetsByMapIndices(a3, a4, &v19, &v20), ScreenOffsetsByMapIndices == 3) )
+    if ( *((_DWORD *)v38 + 10) == 0 || (ScreenOffsetsByMapIndices = IGfxEngine::GetScreenOffsetsByMapIndices(a3, a4, &v19, &v20)) == 3 )
     {
       v25 = CRandom16::PercentValue(0x19u);
       v29 = CRandom16::PercentValue(0x32u);
@@ -659,7 +644,7 @@ bool  CAnimalEffect::UpdateSeagull(int a2, int a3, int a4, int a5) {
       v37 = a4 + CSpiralOffsets::DeltaY(v39 + 7);
       v32 = Squares::XYToVW(v36);
       v33 = Squares::XYToVW(v37);
-      v30 = CAnimalMgr::IsSeagullLand((CAnimalMgr *)&g_cAnimalMgr, v32, v33) && CAnimalMgr::CheckSeagullUndergroundAddPosition((CAnimalMgr *)&g_cAnimalMgr, v36, v37);
+      v30 = CAnimalMgr::IsSeagullLand((CAnimalMgr *)&g_cAnimalMgr, v32, v33) != 0 && CAnimalMgr::CheckSeagullUndergroundAddPosition((CAnimalMgr *)&g_cAnimalMgr, v36, v37) != 0;
       v41 = v30;
       v35 = CRandom16::Rand(*(CRandom16 **)v38);
       for ( i = 0;
@@ -681,7 +666,7 @@ bool  CAnimalEffect::UpdateSeagull(int a2, int a3, int a4, int a5) {
         v37 = a4 + CSpiralOffsets::DeltaY(v39 + 7);
         v32 = Squares::XYToVW(v36);
         v33 = Squares::XYToVW(v37);
-        v28 = CAnimalMgr::IsSeagullLand((CAnimalMgr *)&g_cAnimalMgr, v32, v33) && CAnimalMgr::CheckSeagullUndergroundAddPosition((CAnimalMgr *)&g_cAnimalMgr, v36, v37);
+        v28 = CAnimalMgr::IsSeagullLand((CAnimalMgr *)&g_cAnimalMgr, v32, v33) != 0 && CAnimalMgr::CheckSeagullUndergroundAddPosition((CAnimalMgr *)&g_cAnimalMgr, v36, v37) != 0;
         v41 = v28;
       }
       if ( !v41 )
@@ -698,7 +683,7 @@ bool  CAnimalEffect::UpdateSeagull(int a2, int a3, int a4, int a5) {
       if ( CWorldManager::InWorld(v36, v37) )
       {
         v27 = CLogic::Effects(g_pLogic);
-        v27->GetMovingEffectInfo((CEffects *)v27, a2, &v34, (int *)v15, (int *)v16, (int *)v17);
+        v27->GetMovingEffectInfo(v27, a2, &v34, (int *)v15, (int *)v16, (int *)v17);
         v35 = CRandom16::Rand(*(CRandom16 **)v38);
         if ( v26 < v25 )
         {
@@ -715,7 +700,7 @@ bool  CAnimalEffect::UpdateSeagull(int a2, int a3, int a4, int a5) {
         }
         v23 = CLogic::Effects(g_pLogic);
         v22 = ((int (__thiscall *)(struct IEffects *, int, int, int, _DWORD))v23->j_?SetMovingEffectDestination@CEffects@@UAEIIHHH@Z)(v23, a2, v36, v37, 0);
-        if ( !v22 )
+        if ( v22 == 0 )
         {
           return 1;
         }
@@ -724,7 +709,8 @@ bool  CAnimalEffect::UpdateSeagull(int a2, int a3, int a4, int a5) {
         v12 = v36;
         v11 = v22;
         v9 = CLogic::FutureEvents(g_pLogic);
-        if ( (unsigned __int8)IFutureEvents::AddFutureEvent16(v9, 7, v11, 0, a2, v12, v13, v14) )
+         = IFutureEvents::AddFutureEvent16(v9, 7, v11, 0, a2, v12, v13, v14);
+        if (  != 0 )
         {
           return 1;
         }

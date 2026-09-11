@@ -6,9 +6,9 @@
 // Decompiled from int __cdecl CDarkGardenerRole::New(int a1)
 class CPersistence * __cdecl CDarkGardenerRole::New(std::istream & a1) {
   
-  if ( operator new(0x50u) )
+  if ( operator new(0x50u) != 0 )
   {
-    return CDarkGardenerRole::CDarkGardenerRole(a1);
+    return ((_DWORD (__stdcall *)(int))CDarkGardenerRole::CDarkGardenerRole)(a1);
   }
   else
   {
@@ -24,8 +24,8 @@ class CWalking *  CDarkGardenerRole::InitWalking(class CSettler * a2) {
   int v2; // eax
   int v4; // [esp+4h] [ebp-4h]
 
-  v2 = IEntity::OwnerId((unsigned __int8 *)a2);
-  v4 = CWalking::Create(0, v2);
+  v2 = IEntity::OwnerId(a2);
+  v4 = (int)CWalking::Create(0, v2);
   (*(void (__thiscall **)(int, int, _DWORD))(*(_DWORD *)v4 + 8))(v4, -1, 0);
   return v4;
 }
@@ -48,11 +48,11 @@ void  CDarkGardenerRole::LogicUpdateJob(class CSettler * a2) {
       IMovingEntity::SetDistance(a2, 0);
       return (*(int (__thiscall **)(CDarkGardenerRole *, struct CSettler *))(*(_DWORD *)this + 16))(this, a2);
     case 16:
-      if ( debug && DEBUG_FLAGS[dword_41520A0] )
+      if ( debug != 0 && DEBUG_FLAGS[dword_41520A0] != 0 )
       {
         BBSupportTracePrint(0, "LogicUpdateJob WORK");
       }
-      if ( *((_DWORD *)this + 16) == -1 || !CDecoObjMgr::IsAddDecoObjOk((CDecoObjMgr *)&g_cDecoObjMgr, *((_DWORD *)this + 16), *((_DWORD *)this + 17), 216, 0, 0) )
+      if ( *((_DWORD *)this + 16) == -1 || CDecoObjMgr::IsAddDecoObjOk(&g_cDecoObjMgr, *((_DWORD *)this + 16), *((_DWORD *)this + 17), OBJECT_SHADOWHERB, 0, 0) == 0 )
       {
         v6 = IEntity::Y(a2);
         v3 = IEntity::X(a2);
@@ -60,7 +60,7 @@ void  CDarkGardenerRole::LogicUpdateJob(class CSettler * a2) {
       }
       else
       {
-        CDecoObjMgr::AddDecoObj((CDecoObjMgr *)&g_cDecoObjMgr, *((_DWORD *)this + 16), *((_DWORD *)this + 17), 216, 1, 1);
+        CDecoObjMgr::AddDecoObj(&g_cDecoObjMgr, *((_DWORD *)this + 16), *((_DWORD *)this + 17), 216, 1, 1);
         v5 = IEntity::Y(a2);
         v2 = IEntity::X(a2);
         IDarkTribe::ChangePositionToDarkLand((IDarkTribe *)g_pDarkTribe, v2, v5);
@@ -77,22 +77,22 @@ void  CDarkGardenerRole::LogicUpdateJob(class CSettler * a2) {
 
 
 // address=[0x1567360]
-// Decompiled from int __thiscall CDarkGardenerRole::PostLoadInit(int this, CPropertySet *a2)
+// Decompiled from int __thiscall CDarkGardenerRole::PostLoadInit(int this, IMovingEntity *a2)
 void  CDarkGardenerRole::PostLoadInit(class CSettler * a2) {
   
   int result; // eax
   int v4; // [esp+0h] [ebp-4h]
 
   CWarMap::AddEntity(a2);
-  if ( std::list<CEntityTask>::size((void *)(this + 44)) )
+  if ( std::list<CEntityTask>::size((void *)(this + 44)) != 0 )
   {
     IMovingEntity::SetToDoList(a2, this + 44);
   }
-  IMovingEntity::ResetToDoList(this);
+  ((void (__cdecl *)(_DWORD))IMovingEntity::ResetToDoList)(this);
   while ( 1 )
   {
     result = *(unsigned __int8 *)(v4 + 12);
-    if ( !*(_BYTE *)(v4 + 12) )
+    if ( *(_BYTE *)(v4 + 12) == 0 )
     {
       break;
     }
@@ -109,7 +109,7 @@ void  CDarkGardenerRole::PostLoadInit(class CSettler * a2) {
   
   struct CEntityTask *v2; // eax
   _DWORD v4[2]; // [esp+4h] [ebp-24h] BYREF
-  int v5; // [esp+Ch] [ebp-1Ch] BYREF
+  unsigned int v5; // [esp+Ch] [ebp-1Ch] BYREF
   int pExceptionObject; // [esp+10h] [ebp-18h] BYREF
   unsigned int i; // [esp+14h] [ebp-14h]
   CDarkGardenerRole *v8; // [esp+18h] [ebp-10h]
@@ -136,7 +136,7 @@ void  CDarkGardenerRole::PostLoadInit(class CSettler * a2) {
         ++i )
   {
     v2 = CEntityTask::Load(a1);
-    std::list<CEntityTask>::push_back(v2);
+    std::list<CEntityTask>::push_back((int)v2);
   }
   operator^<unsigned char>(a1, (unsigned __int8 *)v8 + 12);
   operator^<int>(a1, (int *)v8 + 14);
@@ -164,7 +164,7 @@ void  CDarkGardenerRole::Store(std::ostream & a2) {
   _BYTE v10[12]; // [esp+38h] [ebp-48h] BYREF
   std::_Iterator_base12 *v11; // [esp+44h] [ebp-3Ch]
   std::_Iterator_base12 *ActualIter; // [esp+48h] [ebp-38h]
-  char *v13; // [esp+4Ch] [ebp-34h]
+  CSettler *v13; // [esp+4Ch] [ebp-34h]
   std::_Iterator_base12 *v14; // [esp+50h] [ebp-30h]
   std::_Iterator_base12 *v15; // [esp+54h] [ebp-2Ch]
   std::_Iterator_base12 *v16; // [esp+58h] [ebp-28h]
@@ -172,72 +172,72 @@ void  CDarkGardenerRole::Store(std::ostream & a2) {
   int v18; // [esp+60h] [ebp-20h] BYREF
   int v19; // [esp+64h] [ebp-1Ch] BYREF
   int v20; // [esp+68h] [ebp-18h]
-  struct CPersistence *v21; // [esp+6Ch] [ebp-14h]
+  ISettlerRole *v21; // [esp+6Ch] [ebp-14h]
   char v22; // [esp+70h] [ebp-10h]
   char v23; // [esp+71h] [ebp-Fh]
   char v24; // [esp+72h] [ebp-Eh]
   int v25; // [esp+73h] [ebp-Dh] BYREF
   int v26; // [esp+7Ch] [ebp-4h]
 
-  v21 = this;
-  if ( !*((_WORD *)this + 9) && BBSupportDbgReport(2, "MapObjects\\Settler\\DarkGardenerRole.cpp", 111, "m_uSettlerId>0") == 1 )
+  v21 = (ISettlerRole *)this;
+  if ( *((_WORD *)this + 9) == 0 && BBSupportDbgReport(2, "MapObjects\\Settler\\DarkGardenerRole.cpp", 111, "m_uSettlerId>0") == 1 )
   {
     __debugbreak();
   }
-  if ( !CMapObjectMgr::ValidEntityId(*((unsigned __int16 *)v21 + 9)) && BBSupportDbgReport(2, "MapObjects\\Settler\\DarkGardenerRole.cpp", 112, "CMapObjectMgr::ValidEntityId(m_uSettlerId)") == 1 )
+  if ( !CMapObjectMgr::ValidEntityId(v21->m_uAttachedSettlerId) && BBSupportDbgReport(2, "MapObjects\\Settler\\DarkGardenerRole.cpp", 112, "CMapObjectMgr::ValidEntityId(m_uSettlerId)") == 1 )
   {
     __debugbreak();
   }
   ISettlerRole::Store(v21, a2);
   v18 = 1;
-  operator^<unsigned int>(a2, &v18);
-  v19 = std::list<CEntityTask>::size((char *)v21 + 44);
-  operator^<unsigned int>(a2, &v19);
-  std::list<CEntityTask>::begin(v10);
+  operator^<unsigned int>(a2, (unsigned int *)&v18);
+  v19 = std::list<CEntityTask>::size(&v21[1]);
+  operator^<unsigned int>(a2, (unsigned int *)&v19);
+  ((void (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v10);
   v26 = 0;
   while ( 1 )
   {
-    v17 = (std::_Iterator_base12 *)std::list<CEntityTask>::end(v8);
+    v17 = (std::_Iterator_base12 *)((std::_Iterator_base12 *(__stdcall *)(_BYTE *))std::list<CEntityTask>::end)(v8);
     v16 = v17;
     LOBYTE(v26) = 1;
     v24 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=(v17);
     LOBYTE(v26) = 0;
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v8);
-    if ( !v24 )
+    if ( v24 == 0 )
     {
       break;
     }
-    v20 = std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->(v10, v4, v5);
+    v20 = ((int (__thiscall *)(_BYTE *, int, int))std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator->)(v10, v4, v5);
     (*(void (__thiscall **)(int, struct std::ostream *))(*(_DWORD *)v20 + 4))(v20, a2);
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator++(v10);
   }
   v26 = -1;
   std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v10);
-  v13 = (char *)CSettlerMgr::operator[](*((unsigned __int16 *)v21 + 9));
+  v13 = CSettlerMgr::operator[](v21->m_uAttachedSettlerId);
   LOBYTE(v25) = 0;
-  if ( v19 )
+  if ( v19 != 0 )
   {
-    std::list<CEntityTask>::begin(v9);
+    ((void (__stdcall *)(_BYTE *))std::list<CEntityTask>::begin)(v9);
     v26 = 2;
     while ( 1 )
     {
-      v15 = (std::_Iterator_base12 *)std::list<CEntityTask>::end(v7);
+      v15 = (std::_Iterator_base12 *)((std::_Iterator_base12 *(__stdcall *)(_BYTE *))std::list<CEntityTask>::end)(v7);
       v14 = v15;
       LOBYTE(v26) = 3;
       v23 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator!=(v15);
       LOBYTE(v26) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v7);
-      if ( !v23 )
+      if ( v23 == 0 )
       {
         break;
       }
       ActualIter = (std::_Iterator_base12 *)IMovingEntity::GetActualIter(v13, (int)v6);
       v11 = ActualIter;
       LOBYTE(v26) = 4;
-      v22 = std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==(ActualIter);
+      v22 = ((int (__stdcall *)(std::_Iterator_base12 *))std::_List_const_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::operator==)(ActualIter);
       LOBYTE(v26) = 2;
       std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v6);
-      if ( v22 )
+      if ( v22 != 0 )
       {
         break;
       }
@@ -248,17 +248,17 @@ void  CDarkGardenerRole::Store(std::ostream & a2) {
     std::_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>::~_List_iterator<std::_List_val<std::_List_simple_types<CEntityTask>>>(v9);
   }
   v2 = (unsigned __int8)v25;
-  if ( v2 >= std::list<CEntityTask>::size((char *)v21 + 44) )
+  if ( v2 >= std::list<CEntityTask>::size(&v21[1]) )
   {
     LOBYTE(v25) = 0;
   }
-  operator^<unsigned char>(a2, (int)&v25);
-  operator^<int>((int)a2, (int *)v21 + 14);
-  operator^<int>((int)a2, (int *)v21 + 15);
-  operator^<int>((int)a2, (int *)v21 + 16);
-  operator^<int>((int)a2, (int *)v21 + 17);
-  operator^<int>((int)a2, (int *)v21 + 18);
-  return operator^<int>((int)a2, (int *)v21 + 19);
+  operator^<unsigned char>(a2, (unsigned __int8 *)&v25);
+  operator^<int>(a2, (int *)&v21[1].m_uToDoCount);
+  operator^<int>(a2, (int *)&v21[1].m_iDestinationOffsetY);
+  operator^<int>(a2, (int *)&v21[1].m_uSourcePileId);
+  operator^<int>(a2, &v21[1].m_iDestinationPosition);
+  operator^<int>(a2, &v21[1].m_iStartPosition);
+  return operator^<int>(a2, (int *)&v21[1].m_uHomeEntityId);
 }
 
 
@@ -287,13 +287,13 @@ bool __cdecl CDarkGardenerRole::IsLandChangeable(int a1) {
 
 
 // address=[0x15884c0]
-// Decompiled from int __cdecl CDarkGardenerRole::Load(int a1)
+// Decompiled from int __cdecl CDarkGardenerRole::Load(struct std::istream *a1)
 class CDarkGardenerRole * __cdecl CDarkGardenerRole::Load(std::istream & a1) {
   
   void **v1; // eax
   struct TypeDescriptor *v3; // [esp-Ch] [ebp-Ch]
 
-  v1 = (void **)CPersistence::New(a1, &CPersistence__RTTI_Type_Descriptor_);
+  v1 = (void **)((void **(__cdecl *)(struct std::istream *, struct TypeDescriptor *))CPersistence::New)(a1, &CPersistence__RTTI_Type_Descriptor_);
   return j____RTDynamicCast(v1, 0, v3, &CDarkGardenerRole__RTTI_Type_Descriptor_, 1);
 }
 
@@ -311,7 +311,7 @@ class CDarkGardenerRole * __cdecl CDarkGardenerRole::Load(std::istream & a1) {
     CWorldManager::ClearFlagBits(*((_DWORD *)this + 16), *((_DWORD *)this + 17), 32);
   }
   std::list<CEntityTask>::~list<CEntityTask>();
-  return ISettlerRole::~ISettlerRole(this);
+  return ISettlerRole::~ISettlerRole((ISettlerRole *)this);
 }
 
 
@@ -325,7 +325,7 @@ void  CDarkGardenerRole::GetNextJob(class CSettler * a2) {
   IMovingEntity::IncToDoListIter(a2);
   if ( IMovingEntity::IsEndIter(a2) )
   {
-    IMovingEntity::ResetToDoList(v3);
+    ((void (__cdecl *)(_DWORD))IMovingEntity::ResetToDoList)(v3);
   }
   return (*(int (__thiscall **)(CDarkGardenerRole *, struct CSettler *))(*(_DWORD *)v3 + 40))(v3, a2);
 }
@@ -352,11 +352,11 @@ void  CDarkGardenerRole::TakeJob(class CSettler * a2) {
   int i; // [esp+1Ch] [ebp-8h]
 
   ActualTask = IMovingEntity::GetActualTask(a2);
-  ISettlerRole::InitCommonTaskValues((ISettlerRole *)this, a2, ActualTask);
+  ISettlerRole::InitCommonTaskValues((ISettlerRole *)this, (struct CSettler *)a2, ActualTask);
   switch ( *((_BYTE *)this + 4) )
   {
     case 7:
-      if ( debug && DEBUG_FLAGS[dword_41520A0] )
+      if ( debug != 0 && DEBUG_FLAGS[dword_41520A0] != 0 )
       {
         BBSupportTracePrint(0, "TakeJob GO_TO_POS");
       }
@@ -374,7 +374,7 @@ void  CDarkGardenerRole::TakeJob(class CSettler * a2) {
       result = (*(int (__thiscall **)(CDarkGardenerRole *, IMovingEntity *))(*(_DWORD *)this + 16))(this, a2);
       break;
     case 0x10:
-      if ( debug && DEBUG_FLAGS[dword_41520A0] )
+      if ( debug != 0 && DEBUG_FLAGS[dword_41520A0] != 0 )
       {
         BBSupportTracePrint(0, "TakeJob WORK");
       }
@@ -396,12 +396,9 @@ void  CDarkGardenerRole::TakeJob(class CSettler * a2) {
         v14 = CSpiralOffsets::DeltaX(i) + v5;
         v6 = IEntity::Y(a2);
         v15 = CSpiralOffsets::DeltaY(i) + v6;
-        if ( CDarkGardenerRole::CheckPosition(this, v14, v15, 0) )
+        if ( CDarkGardenerRole::CheckPosition(this, v14, v15, 0) && CDecoObjMgr::IsAddDecoObjOk(&g_cDecoObjMgr, v14, v15, OBJECT_SHADOWHERB, 0, 0) != 0 )
         {
-          if ( CDecoObjMgr::IsAddDecoObjOk(&g_cDecoObjMgr, v14, v15, OBJECT_SHADOWHERB, 0, 0) )
-          {
-            break;
-          }
+          break;
         }
       }
       *((_DWORD *)this + 16) = v14;
@@ -421,7 +418,7 @@ void  CDarkGardenerRole::TakeJob(class CSettler * a2) {
       result = IAnimatedEntity::RegisterForLogicUpdate(a2, v3 % 0x10 + 1);
       break;
     case 0x1F:
-      if ( CDarkGardenerRole::SearchPosition(this, a2) )
+      if ( CDarkGardenerRole::SearchPosition(this, a2) != 0 )
       {
 LABEL_15:
         result = IAnimatedEntity::RegisterForLogicUpdate(a2, 1);
@@ -449,7 +446,7 @@ LABEL_15:
 
 
 // address=[0x1567c90]
-// Decompiled from int __thiscall CDarkGardenerRole::Init(int this, CPropertySet *a2)
+// Decompiled from int __thiscall CDarkGardenerRole::Init(int this, IEntity *a2)
 void  CDarkGardenerRole::Init(class CSettler * a2) {
   
   int result; // eax
@@ -463,14 +460,14 @@ void  CDarkGardenerRole::Init(class CSettler * a2) {
   *(_DWORD *)(this + 72) = 0;
   *(_DWORD *)(this + 76) = 0;
   *(_WORD *)(this + 34) = 0;
-  result = IEntity::ID();
+  result = ((int (__stdcall *)())IEntity::ID)();
   *(_WORD *)(this + 18) = result;
   return result;
 }
 
 
 // address=[0x1567d10]
-// Decompiled from int __thiscall CDarkGardenerRole::ConvertEventIntoGoal(CDarkGardenerRole *this, struct CSettler *a2, struct CEntityEvent *a3)
+// Decompiled from int __thiscall CDarkGardenerRole::ConvertEventIntoGoal(ISettlerRole *this, struct CSettler *a2, struct CEntityEvent *a3)
 void  CDarkGardenerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntityEvent * a3) {
   
   int v3; // eax
@@ -483,11 +480,11 @@ void  CDarkGardenerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntity
   int v10; // [esp+14h] [ebp-Ch]
   int v11; // [esp+18h] [ebp-8h]
 
-  v8 = *((_DWORD *)a3 + 1);
+  v8 = a3->m_iEvent;
   if ( v8 == 13 )
   {
     CTrace::Print("CDarkGardenerRole - NewDestinationEx called from ConvertEventIntoGoal-GO_TO_POS");
-    return (*(int (__thiscall **)(CDarkGardenerRole *, struct CSettler *, char *, _DWORD, _DWORD, _DWORD))(*(_DWORD *)this + 128))(this, a2, (char *)this + 44, *((_DWORD *)a3 + 4), *((_DWORD *)a3 + 5), *((_DWORD *)a3 + 3));
+    return ((int (__thiscall *)(ISettlerRole *, struct CSettler *, char *, int, int, int))this->NewDestinationEx)(this, a2, (char *)this + 44, a3->m_iDataB, a3->m_iDataC, a3->m_iDataA);
   }
   else if ( v8 == 17 )
   {
@@ -497,11 +494,11 @@ void  CDarkGardenerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntity
       *((_DWORD *)this + 16) = -1;
       *((_DWORD *)this + 17) = -1;
     }
-    result = *((_DWORD *)a3 + 2);
+    result = a3->m_iType;
     if ( result == 13 )
     {
-      v9 = *((_DWORD *)a3 + 3);
-      v11 = *((_DWORD *)a3 + 4);
+      v9 = a3->m_iDataA;
+      v11 = a3->m_iDataB;
       v7 = Y16X16::UnpackXFast(v11);
       v6 = Y16X16::UnpackYFast(v11);
       if ( (v9 & 2) != 0 || (v9 & 1) != 0 )
@@ -525,18 +522,18 @@ void  CDarkGardenerRole::ConvertEventIntoGoal(class CSettler * a2, class CEntity
           *((_DWORD *)this + 18) = 0;
         }
         v3 = IEntity::Race(a2);
-        v4 = CEntityToDoListMgr::SettlerJobList(v3, v10);
-        return (*(int (__thiscall **)(struct CSettler *, int, int))(*(_DWORD *)a2 + 112))(a2, v4, v10);
+        v4 = ((int (__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v3, v10);
+        return a2->NewToDoList(a2, v4, v10);
       }
     }
   }
   else
   {
     result = IEntity::FlagBits(a2, ENTITY_FLAG_Registered);
-    if ( !result )
+    if ( result == 0 )
     {
-      CTrace::Print("ConvertEventIntoGoal DarkGardenerRole - unknown event %u", *((_DWORD *)a3 + 1));
-      return IAnimatedEntity::RegisterForLogicUpdate(1);
+      CTrace::Print("ConvertEventIntoGoal DarkGardenerRole - unknown event %u", a3->m_iEvent);
+      return ((int (__stdcall *)(int))IAnimatedEntity::RegisterForLogicUpdate)(1);
     }
   }
   return result;
@@ -552,11 +549,11 @@ void  CDarkGardenerRole::WorkIsDone(class CSettler * a2) {
   int v5; // [esp-8h] [ebp-Ch]
   int v6; // [esp-4h] [ebp-8h]
 
-  v6 = IEntity::Type((unsigned __int16 *)a2);
-  v5 = IEntity::Type((unsigned __int16 *)a2);
+  v6 = IEntity::Type(a2);
+  v5 = IEntity::Type(a2);
   v2 = IEntity::Race(a2);
-  v3 = CEntityToDoListMgr::SettlerJobList(v2, v5);
-  return (*(int (__thiscall **)(struct CSettler *, int, int))(*(_DWORD *)a2 + 112))(a2, v3, v6);
+  v3 = ((int (__stdcall *)(int, int))CEntityToDoListMgr::SettlerJobList)(v2, v5);
+  return a2->NewToDoList(a2, v3, v6);
 }
 
 
@@ -568,7 +565,7 @@ bool  CDarkGardenerRole::CheckPosition(int a2, int a3, bool a4) {
   int v6; // [esp+4h] [ebp-8h]
   unsigned int v7; // [esp+8h] [ebp-4h]
 
-  if ( !(unsigned __int8)CWorldManager::InWorld(a2, a3) )
+  if ( !CWorldManager::InWorld(a2, a3) )
   {
     return 0;
   }
@@ -576,7 +573,7 @@ bool  CDarkGardenerRole::CheckPosition(int a2, int a3, bool a4) {
   v7 = 31;
   if ( a4 )
   {
-    if ( !CWorldManager::FlagBits(v6, 0x20u) )
+    if ( CWorldManager::FlagBits(v6, 0x20u) == 0 )
     {
       return 0;
     }
@@ -585,15 +582,15 @@ bool  CDarkGardenerRole::CheckPosition(int a2, int a3, bool a4) {
   {
     v7 = 63;
   }
-  if ( CWorldManager::FlagBits(v6, v7) )
+  if ( CWorldManager::FlagBits(v6, v7) != 0 )
   {
     return 0;
   }
-  if ( CWorldManager::MapObjectId(a2, a3) && !a4 )
+  if ( CWorldManager::MapObjectId(a2, a3) != 0 && !a4 )
   {
     return 0;
   }
-  if ( CWorldManager::ObjectId(a2, a3) )
+  if ( CWorldManager::ObjectId(a2, a3) != 0 )
   {
     return 0;
   }
@@ -638,7 +635,7 @@ bool  CDarkGardenerRole::SearchPosition(class CSettler * a2) {
     v18 = CSpiralOffsets::DeltaX(i) + v3;
     v4 = IEntity::Y(a2);
     v17 = CSpiralOffsets::DeltaY(i) + v4;
-    if ( (unsigned __int8)CWorldManager::InWorld(v18, v17) )
+    if ( CWorldManager::InWorld(v18, v17) )
     {
       if ( CWorldManager::SectorId(v18, v17) == v9 && CDarkGardenerRole::CheckPosition(this, v18, v17, 0) )
       {
@@ -673,7 +670,7 @@ bool  CDarkGardenerRole::SearchPosition(class CSettler * a2) {
   *((_DWORD *)this + 17) = v12;
   *((_DWORD *)this + 19) = 0;
   *((_DWORD *)this + 18) = 0;
-  ISettlerRole::NewDestination(this, a2, v15, v12, 0);
+  ISettlerRole::NewDestination((ISettlerRole *)this, a2, v15, v12, 0);
   return 1;
 }
 
@@ -682,7 +679,7 @@ bool  CDarkGardenerRole::SearchPosition(class CSettler * a2) {
 // Decompiled from CDarkGardenerRole *__thiscall CDarkGardenerRole::CDarkGardenerRole(CDarkGardenerRole *this)
  CDarkGardenerRole::CDarkGardenerRole(void) {
   
-  ISettlerRole::ISettlerRole(this);
+  ISettlerRole::ISettlerRole((ISettlerRole *)this);
   *(_DWORD *)this = &CDarkGardenerRole::_vftable_;
   std::list<CEntityTask>::list<CEntityTask>((char *)this + 44);
   return this;

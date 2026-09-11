@@ -22,7 +22,7 @@ void  CStdCargoCounter::CountEntity(int a2, int _iCargoType) {
   {
     ++this->m_aCounters[1];
     v3 = CSettlerMgr::SettlerWarriorLevel(_iCargoType);
-    if ( v3 )
+    if ( v3 != 0 )
     {
       ++this->m_aCounters[3];
       switch ( v3 )

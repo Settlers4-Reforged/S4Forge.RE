@@ -6,8 +6,8 @@
 // Decompiled from CVehicleInfo *__thiscall CVehicleInfo::CVehicleInfo(CVehicleInfo *this)
  CVehicleInfo::CVehicleInfo(void) {
   
-  CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CVehicleInfo::_vftable_;
+  CInfoExchange::CInfoExchange((CInfoExchange *)this);
+  *(_DWORD *)this->gap_0 = &CVehicleInfo::_vftable_;
   return this;
 }
 

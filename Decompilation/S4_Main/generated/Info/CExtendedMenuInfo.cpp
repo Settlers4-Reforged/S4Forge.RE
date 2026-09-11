@@ -8,7 +8,7 @@
  CExtendedMenuInfo::CExtendedMenuInfo(void) {
   
   CInfoExchange::CInfoExchange(this);
-  *(_DWORD *)this = &CExtendedMenuInfo::_vftable_;
+  this->__vftable = (CInfoExchange_vtbl *)&CExtendedMenuInfo::_vftable_;
   return this;
 }
 

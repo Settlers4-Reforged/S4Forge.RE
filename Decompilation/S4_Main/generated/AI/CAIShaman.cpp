@@ -6,8 +6,8 @@
 // Decompiled from char __thiscall CAIShaman::FindGlobalTargetForShaman(CAIShaman *this, int player, int a3, int *x, int *y, bool a6)
 bool  CAIShaman::FindGlobalTargetForShaman(int player, int a3, int & x, int & y, bool a6) {
   
-  _DWORD *v6; // eax
-  _DWORD *v7; // eax
+  IEntity *v6; // eax
+  CBuilding *v7; // eax
   unsigned int v8; // esi
   int PlayerId; // [esp+14h] [ebp-34h]
   int v11; // [esp+18h] [ebp-30h]
@@ -32,15 +32,15 @@ bool  CAIShaman::FindGlobalTargetForShaman(int player, int a3, int & x, int & y,
   *((_DWORD *)v22 + 6) = IAIEnvironment::WorldSectorId(*x, *y);
   v21 = 0;
   FirstBuildingId = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, player, 80);
-  if ( FirstBuildingId )
+  if ( FirstBuildingId != 0 )
   {
-    v6 = (_DWORD *)CBuildingMgr::operator[](FirstBuildingId);
-    if ( IEntity::FlagBits(v6, ENTITY_FLAG_Ready) )
+    v6 = (IEntity *)((IEntity *(__stdcall *)(int))CBuildingMgr::operator[])(FirstBuildingId);
+    if ( IEntity::FlagBits(v6, ENTITY_FLAG_Ready) != 0 )
     {
-      v7 = (_DWORD *)CBuildingMgr::operator[](FirstBuildingId);
-      v11 = CBuilding::Role(v7);
+      v7 = (CBuilding *)((CBuilding *(__stdcall *)(int))CBuildingMgr::operator[])(FirstBuildingId);
+      v11 = (int)CBuilding::Role(v7);
       MostRequiredGood = CManakopterHallRole::GetMostRequiredGood(v11);
-      if ( MostRequiredGood )
+      if ( MostRequiredGood != 0 )
       {
         v21 = MostRequiredGood == 7;
         if ( MostRequiredGood == 20 )
@@ -50,7 +50,7 @@ bool  CAIShaman::FindGlobalTargetForShaman(int player, int a3, int & x, int & y,
       }
     }
   }
-  if ( !v21 )
+  if ( v21 == 0 )
   {
     v8 = IAIEnvironment::Rand();
     if ( v8 < CRandom16::PercentValue(0x46u) )
@@ -66,7 +66,7 @@ bool  CAIShaman::FindGlobalTargetForShaman(int player, int a3, int & x, int & y,
   v18 = 0;
   v15 = 0;
   v17 = dword_3D7A6F0[v21];
-  v12 = CStateGame::Rand(g_pGame) % (unsigned int)v17;
+  v12 = CStateGame::Rand(g_pGame) % v17;
   PlayerId = IAIEnvironment::AlliancesLastPlayerId();
   for ( i = 1;
         ;
@@ -82,11 +82,11 @@ bool  CAIShaman::FindGlobalTargetForShaman(int player, int a3, int & x, int & y,
             j < v17 - 1;
             ++j )
       {
-        CAIShaman::FindBetterTargetBuilding(v22, i, dword_3D7A6B0[4 * v21 + (int)(j + v12) % v17], &v19, &v18, &v15, a6);
+        CAIShaman::FindBetterTargetBuilding(v22, i, dword_3D7A6B0[4 * v21 + (int)(j + v12) % v17], (struct _Cnd_internal_imp_t **)&v19, (Squares **)&v18, &v15, a6);
       }
       if ( v15 <= 0 )
       {
-        CAIShaman::FindBetterTargetBuilding(v22, i, dword_3D7A6B0[4 * v21 + (int)(v12 + v17 - 1) % v17], &v19, &v18, &v15, a6);
+        CAIShaman::FindBetterTargetBuilding(v22, i, dword_3D7A6B0[4 * v21 + (int)(v12 + v17 - 1) % v17], (struct _Cnd_internal_imp_t **)&v19, (Squares **)&v18, &v15, a6);
       }
       if ( v15 > 0 )
       {
@@ -150,39 +150,35 @@ int  CAIShaman::FindTeleportationTarget(int & a2, int & a3, int a4) {
 
   v14 = 0;
   v13 = CWorldManager::EcoSectorId(*a2, *a3);
-  if ( v13 )
+  if ( v13 != 0 )
   {
-    v12 = (CEcoSector *)CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, v13);
-    if ( v12 )
+    v12 = CEcoSectorMgr::EntryPtr((CEcoSectorMgr *)g_cESMgr, v13);
+    if ( v12 != 0 )
     {
       GoodOffer = CEcoSector::GetGoodOffer(v12, a4);
       PilePtr = CPileMgr::GetPilePtr(GoodOffer);
       v10 = (char *)&dword_F29144[220078] + 3;
-      while ( PilePtr )
+      while ( PilePtr != 0 )
       {
         v8 = IEntity::Y(PilePtr) - *a3;
         v5 = IEntity::X(PilePtr);
-        v11 = (char *)Grid::Distance((Grid *)(v5 - *a2), v8);
-        if ( (int)v11 < (int)v10 )
+        v11 = (char *)Grid::Distance(v5 - *a2, v8);
+        if ( (int)v11 < (int)v10 && CPile::GoodAvailable(PilePtr) )
         {
-          if ( (unsigned __int8)CPile::GoodAvailable(PilePtr) )
-          {
-            v14 = IEntity::ID();
-            v10 = v11;
-          }
+          v14 = ((int (__stdcall *)())IEntity::ID)();
+          v10 = v11;
         }
         v6 = IAnimatedEntity::Next(PilePtr);
         PilePtr = CPileMgr::GetPilePtr(v6);
       }
     }
   }
-  if ( !v14 )
+  if ( v14 != 0 )
   {
-    return v14;
+    v9 = CPileMgr::GetPilePtr(v14);
+    *a2 = IEntity::X(v9);
+    *a3 = IEntity::Y(v9);
   }
-  v9 = CPileMgr::GetPilePtr(v14);
-  *a2 = IEntity::X(v9);
-  *a3 = IEntity::Y(v9);
   return v14;
 }
 
@@ -194,7 +190,7 @@ int  CAIShaman::FindFieldToRot(int & a2, int & a3, int a4) {
   _DWORD v5[5]; // [esp+0h] [ebp-30h] BYREF
   int v6; // [esp+14h] [ebp-1Ch]
   int v7; // [esp+18h] [ebp-18h]
-  unsigned __int16 *DecoObjPtr; // [esp+1Ch] [ebp-14h]
+  struct IDecoObject *DecoObjPtr; // [esp+1Ch] [ebp-14h]
   int v9; // [esp+20h] [ebp-10h]
   int v10; // [esp+24h] [ebp-Ch] BYREF
   int v11[2]; // [esp+28h] [ebp-8h] BYREF
@@ -204,11 +200,11 @@ int  CAIShaman::FindFieldToRot(int & a2, int & a3, int a4) {
   v10 = *a3;
   CSpiralWalk::CSpiralWalk((CSpiralWalk *)v5, v11[0], v10, a4);
   v9 = 0;
-  while ( CSpiralWalk::NextXY(v5, v11, &v10) && !v9 )
+  while ( CSpiralWalk::NextXY(v5, v11, &v10) != 0 && v9 == 0 )
   {
     v7 = CWorldManager::ObjectId(v11[0], v10);
-    DecoObjPtr = (unsigned __int16 *)CDecoObjMgr::GetDecoObjPtr(v7);
-    if ( DecoObjPtr )
+    DecoObjPtr = (struct IDecoObject *)CDecoObjMgr::GetDecoObjPtr(v7);
+    if ( DecoObjPtr != 0 )
     {
       v6 = IEntity::Type(DecoObjPtr);
       v11[1] = v6 - 209;
@@ -252,10 +248,10 @@ int  CAIShaman::EvaluateTargetPosition(int a2, int a3) {
   int v7; // [esp+10h] [ebp-Ch]
   int NearestInSector; // [esp+14h] [ebp-8h]
 
-  v5 = Squares::XYToVW(a2);
-  v6 = Squares::XYToVW(a3);
+  v5 = Squares::XYToVW((int)a2);
+  v6 = Squares::XYToVW((int)a3);
   v4 = -CInfluMap::EnemyValueVW(v5, v6, *((_DWORD *)this + 2));
-  NearestInSector = CScanner::CountCiviliansAndFindNearestInSector((int)a2, (int)a3, 24, *((_DWORD *)this + 3), 0);
+  NearestInSector = CScanner::CountCiviliansAndFindNearestInSector((unsigned int)a2, (unsigned int)a3, 24, *((_DWORD *)this + 3), 0);
   if ( NearestInSector <= 0 )
   {
     v7 = 0;
@@ -281,10 +277,10 @@ void  CAIShaman::FindBetterTargetBuilding(int a2, int a3, int & a4, int & a5, in
 
   result = CBuildingMgr::GetFirstBuildingId((CBuildingMgr *)g_cBuildingMgr, a2, a3);
   for ( i = result;
-        i;
+        i != 0;
         i = result )
   {
-    v11 = CBuildingMgr::operator[](i);
+    v11 = ((int (__stdcall *)(int))CBuildingMgr::operator[])(i);
     v13 = (struct _Cnd_internal_imp_t *)CBuilding::EnsignX(v11);
     v12 = (Squares *)CBuilding::EnsignY(v11);
     if ( IAIEnvironment::WorldSectorId((int)v13, (int)v12) == *((_DWORD *)this + 6) || a7 )

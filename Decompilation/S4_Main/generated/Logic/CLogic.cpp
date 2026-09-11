@@ -77,8 +77,8 @@ void  CLogic::SwitchExtraInfoMenu(bool a2) {
   *((_DWORD *)this + 17) = 0;
   *((_DWORD *)this + 16) = 0;
   *((_DWORD *)this + 15) = 0;
-  CPerformanceCounter::Start(cTimer);
-  lastTime = 0LL;
+  CPerformanceCounter::Start((CPerformanceCounter *)cTimer);
+  lastTime = 0;
   return this;
 }
 
@@ -89,25 +89,25 @@ void  CLogic::SwitchExtraInfoMenu(bool a2) {
   
   *(_DWORD *)this = &CLogic::_vftable_;
   CAnimalMgr::Clear((CAnimalMgr *)&g_cAnimalMgr);
-  CDecoObjMgr::Clear((CDecoObjMgr *)&g_cDecoObjMgr);
-  CPileMgr::Clear((CPileMgr *)&g_cPileMgr);
+  CDecoObjMgr::Clear(&g_cDecoObjMgr);
+  CPileMgr::Clear(&g_cPileMgr);
   CBuildingMgr::Clear((CBuildingMgr *)g_cBuildingMgr);
-  CSettlerMgr::Clear((CSettlerMgr *)g_cSettlerMgr);
+  CSettlerMgr::Clear(&g_cSettlerMgr);
   CVehicleMgr::Clear((CVehicleMgr *)&g_cVehicleMgr);
   CEcoSectorMgr::Clear((CEcoSectorMgr *)g_cESMgr);
-  CStatistic::Clear((CStatistic *)&g_cStatistic);
+  CStatistic::Clear(&g_cStatistic);
   CFlyingMgr::Clear((CFlyingMgr *)g_cFlyingMgr);
-  if ( *((_DWORD *)this + 11) )
+  if ( *((_DWORD *)this + 11) != 0 )
   {
     (*(void (__thiscall **)(_DWORD))(**((_DWORD **)this + 11) + 8))(*((_DWORD *)this + 11));
     *((_DWORD *)this + 11) = 0;
   }
-  if ( *((_DWORD *)this + 12) )
+  if ( *((_DWORD *)this + 12) != 0 )
   {
     (*(void (__thiscall **)(_DWORD))(**((_DWORD **)this + 12) + 12))(*((_DWORD *)this + 12));
     *((_DWORD *)this + 12) = 0;
   }
-  CBBObject::~CBBObject(this);
+  CBBObject::~CBBObject((CBBObject *)this);
 }
 
 
@@ -126,7 +126,7 @@ void  CLogic::PostLoadMap(class CGameType & a2) {
           ++i )
     {
       v3 = a2->m_sPlayerType[i];
-      if ( v3 )
+      if ( v3 != 0 )
       {
         if ( v3 == 1 )
         {
@@ -151,31 +151,31 @@ void  CLogic::LogicUpdate(void) {
   int v2; // eax
   int v3; // [esp+8h] [ebp-8h]
 
-  LocalPlayerId = CPlayerManager::GetLocalPlayerId(15, 14);
+  LocalPlayerId = ((int (__cdecl *)(int, int))CPlayerManager::GetLocalPlayerId)(15, 14);
   if ( !CPlayerManager::IsAlive(LocalPlayerId) )
   {
-    v2 = CInputProcessor::Selection();
-    if ( std::vector<unsigned short>::size(v2) )
+    v2 = (int)CInputProcessor::Selection();
+    if ( std::vector<unsigned short>::size(v2) != 0 )
     {
-      CInputProcessor::DeSelectAllEx((CInputProcessor *)&g_cInputProcessor);
+      CInputProcessor::DeSelectAllEx(&g_cInputProcessor);
     }
   }
-  CInputProcessor::Process((CInputProcessor *)&g_cInputProcessor);
+  CInputProcessor::Process(&g_cInputProcessor);
   CMapObjectMgr::LogicUpdate(g_pMapObjectMgr);
   v3 = CStateGame::GetTickCounter(g_pGame) & 0xF;
   if ( v3 == 14 )
   {
-    if ( *((_DWORD *)this + 4) )
+    if ( *((_DWORD *)this + 4) != 0 )
     {
       (*((void (__cdecl **)(_DWORD, int, _DWORD))this + 4))(*((_DWORD *)this + 5), 1, *((unsigned __int8 *)this + 24));
     }
-    if ( *((_DWORD *)this + 7) )
+    if ( *((_DWORD *)this + 7) != 0 )
     {
       (*((void (__cdecl **)(_DWORD, int, _DWORD))this + 7))(*((_DWORD *)this + 8), 1, *((_DWORD *)this + 9));
     }
     if ( *((_BYTE *)this + 40) == 1 )
     {
-      CStatistic::FillExtraInfo((CStatistic *)&g_cStatistic);
+      CStatistic::FillExtraInfo(&g_cStatistic);
     }
   }
   if ( v3 == 15 )
@@ -184,7 +184,7 @@ void  CLogic::LogicUpdate(void) {
     CEcoSectorMgr::RecruiteSpecialist((CEcoSectorMgr *)g_cESMgr);
     CEcoSectorMgr::RecruiteWorker((CEcoSectorMgr *)g_cESMgr);
   }
-  if ( !(CStateGame::GetTickCounter(g_pGame) % 0x348u) || CStateGame::GetTickCounter(g_pGame) == 1 )
+  if ( CStateGame::GetTickCounter(g_pGame) % 0x348u == 0 || CStateGame::GetTickCounter(g_pGame) == 1 )
   {
     CStatisticArchive::TriggerStatistic((CStatisticArchive *)&g_cStatisticArchive);
   }
@@ -192,7 +192,7 @@ void  CLogic::LogicUpdate(void) {
   (*(void (__thiscall **)(_DWORD))(**((_DWORD **)this + 11) + 16))(*((_DWORD *)this + 11));
   (*(void (__thiscall **)(_DWORD))(**((_DWORD **)this + 12) + 96))(*((_DWORD *)this + 12));
   CLogic::HandleCursor(this);
-  if ( !CGameSettings::GetUserMP3() )
+  if ( CGameSettings::GetUserMP3() == 0 )
   {
     CLogic::HandleSoundtracks(this);
   }
@@ -238,13 +238,13 @@ void  CLogic::ChangeWorldPosition(void) {
 
   v1 = CWorldManager::InWorld(*((_DWORD *)this + 13), *((_DWORD *)this + 14));
   v2 = v1;
-  if ( !v1 && BBSupportDbgReport(2, "Logic\\Logic.cpp", 507, "g_cWorld.InWorld(m_iTimeX, m_iTimeY)") == 1 )
+  if ( v1 == 0 && BBSupportDbgReport(2, "Logic\\Logic.cpp", 507, "g_cWorld.InWorld(m_iTimeX, m_iTimeY)") == 1 )
   {
     __debugbreak();
   }
   v8 = 13;
-  v15 = CWorldManager::Width(v2);
-  if ( v15 != CWorldManager::Height(v4, v3) && BBSupportDbgReport(2, "Logic\\Logic.cpp", 513, "iWidthHeight == g_cWorld.Height()") == 1 )
+  v15 = ((int (__thiscall *)(int))CWorldManager::Width)(v2);
+  if ( v15 != ((int (__fastcall *)(int, int))CWorldManager::Height)(v4, v3) && BBSupportDbgReport(2, "Logic\\Logic.cpp", 513, "iWidthHeight == g_cWorld.Height()") == 1 )
   {
     __debugbreak();
   }
@@ -266,37 +266,34 @@ void  CLogic::ChangeWorldPosition(void) {
         *((_DWORD *)this + 14) -= v15;
       }
     }
-    if ( !(unsigned __int8)CWorldManager::InWorld(*((_DWORD *)this + 13), *((_DWORD *)this + 14)) && BBSupportDbgReport(2, "Logic\\Logic.cpp", 533, "g_cWorld.InWorld(m_iTimeX, m_iTimeY)") == 1 )
+    if ( !CWorldManager::InWorld(*((_DWORD *)this + 13), *((_DWORD *)this + 14)) && BBSupportDbgReport(2, "Logic\\Logic.cpp", 533, "g_cWorld.InWorld(m_iTimeX, m_iTimeY)") == 1 )
     {
       __debugbreak();
     }
     v16 = CWorldManager::Index(*((_DWORD *)this + 13), *((_DWORD *)this + 14));
     CWorldManager::DecreaseWalkCount(v16);
-    if ( !CWorldManager::ResourceType(v16) && CWorldManager::ResourceAmount(v16, 0) > 0 )
+    if ( CWorldManager::ResourceType(v16) == 0 && CWorldManager::ResourceAmount(v16, 0) > 0 )
     {
       v12 = sub_146A900(v8);
       v10 = sub_146A880(*((_DWORD *)this + 13), v12);
       v11 = sub_146A8C0(*((_DWORD *)this + 14), v12);
       v14 = CWorldManager::Index(v10, v11);
-      if ( (unsigned __int8)CWorldManager::InWorld(v10, v11) )
+      if ( CWorldManager::InWorld(v10, v11) && CWorldManager::IsWater(v14) && CWorldManager::ResourceType(v14) == 0 && CWorldManager::ResourceAmount(v14, 0) > 0 )
       {
-        if ( CWorldManager::IsWater(v14) && !CWorldManager::ResourceType(v14) && CWorldManager::ResourceAmount(v14, 0) > 0 )
-        {
-          v6 = CWorldManager::ResourceAmount(v14, 0);
-          CWorldManager::SetResource(v14, 0, v6 + 1);
-          v7 = CWorldManager::ResourceAmount(v16, 0);
-          CWorldManager::SetResource(v16, 0, v7 - 1);
-        }
+        v6 = CWorldManager::ResourceAmount(v14, 0);
+        CWorldManager::SetResource(v14, 0, v6 + 1);
+        v7 = CWorldManager::ResourceAmount(v16, 0);
+        CWorldManager::SetResource(v16, 0, v7 - 1);
       }
     }
-    v9 = CGameData::Rand(g_pGameData);
-    if ( (unsigned int)v9 < CRandom16::PercentValue(7u) && CDecoObjMgr::IsGeologistSign((CDecoObjMgr *)&g_cDecoObjMgr, v16) )
+    v9 = (const char *)CGameData::Rand(g_pGameData);
+    if ( (unsigned int)v9 < CRandom16::PercentValue(7u) && CDecoObjMgr::IsGeologistSign(&g_cDecoObjMgr, v16) )
     {
       CWorldManager::SetObjectId(v16, 0);
     }
     if ( (unsigned int)v9 < CRandom16::PercentValue(0xCu) )
     {
-      CDecoObjMgr::Rod((CDecoObjMgr *)&g_cDecoObjMgr, v16, 0);
+      CDecoObjMgr::Rod(&g_cDecoObjMgr, v16, 0);
     }
   }
   return result;
@@ -311,211 +308,209 @@ void  CLogic::HandleCursor(void) {
   unsigned __int16 *v2; // eax
   int v3; // eax
   int v4; // [esp+8h] [ebp-18h]
-  _DWORD *VehiclePtr; // [esp+10h] [ebp-10h]
+  IEntity *VehiclePtr; // [esp+10h] [ebp-10h]
   char ModifierState; // [esp+14h] [ebp-Ch]
   unsigned __int16 *v7; // [esp+18h] [ebp-8h]
   int v8; // [esp+1Ch] [ebp-4h]
   int v9; // [esp+1Ch] [ebp-4h]
 
   result = (unsigned __int8)CStateGame::IsCursorChangeAllowed(g_pGame, this);
-  if ( !(_BYTE)result )
+  if ( (_BYTE)result != 0 )
   {
-    return result;
-  }
-  result = CInputProcessor::IsTryBuildState(&g_cInputProcessor);
-  if ( (_BYTE)result )
-  {
-    return result;
-  }
-  if ( (unsigned __int8)CInputProcessor::IsWorkingAreaState(&g_cInputProcessor) )
-  {
-    result = IGfxEngine::GetCursorShape(g_pGfxEngine);
-    if ( result != 9 )
+    result = CInputProcessor::IsTryBuildState(&g_cInputProcessor);
+    if ( (_BYTE)result == 0 )
     {
-      return IGfxEngine::SetCursorShape(1, 9);
-    }
-  }
-  else if ( (unsigned __int8)CInputProcessor::IsChooseSecondPatrolPosState(&g_cInputProcessor) )
-  {
-    result = IGfxEngine::GetCursorShape(g_pGfxEngine);
-    if ( result != 19 )
-    {
-      return IGfxEngine::SetCursorShape(1, 19);
-    }
-  }
-  else if ( (unsigned __int8)CInputProcessor::IsZoomAreaState(&g_cInputProcessor) )
-  {
-    result = IGfxEngine::GetCursorShape(g_pGfxEngine);
-    if ( result != 34 )
-    {
-      return IGfxEngine::SetCursorShape(1, 34);
-    }
-  }
-  else
-  {
-    v4 = CInputProcessor::Selection();
-    if ( std::vector<unsigned short>::size(v4) )
-    {
-      v2 = (unsigned __int16 *)std::vector<unsigned short>::operator[](0);
-      v7 = (unsigned __int16 *)CMapObjectMgr::EntityPtr(*v2);
-      if ( v7 )
+      if ( (unsigned __int8)CInputProcessor::IsWorkingAreaState(&g_cInputProcessor) != 0 )
       {
-        v8 = 0;
-        ModifierState = CStateGame::GetModifierState(g_pGame);
-        if ( IEntity::ObjType((unsigned __int8 *)v7) != 1 || IEntity::ObjType((unsigned __int8 *)v7) == 60 )
+        result = IGfxEngine::GetCursorShape(g_pGfxEngine);
+        if ( result != 9 )
         {
-          v3 = IEntity::ID();
-          VehiclePtr = (_DWORD *)CVehicleMgr::GetVehiclePtr(v3);
-          if ( VehiclePtr )
+          return ((_DWORD (__stdcall *)(char, int))IGfxEngine::SetCursorShape)(1, 9);
+        }
+      }
+      else if ( (unsigned __int8)CInputProcessor::IsChooseSecondPatrolPosState(&g_cInputProcessor) != 0 )
+      {
+        result = IGfxEngine::GetCursorShape(g_pGfxEngine);
+        if ( result != 19 )
+        {
+          return ((_DWORD (__stdcall *)(char, int))IGfxEngine::SetCursorShape)(1, 19);
+        }
+      }
+      else if ( (unsigned __int8)CInputProcessor::IsZoomAreaState(&g_cInputProcessor) != 0 )
+      {
+        result = IGfxEngine::GetCursorShape(g_pGfxEngine);
+        if ( result != 34 )
+        {
+          return ((_DWORD (__stdcall *)(char, int))IGfxEngine::SetCursorShape)(1, 34);
+        }
+      }
+      else
+      {
+        v4 = (int)CInputProcessor::Selection();
+        if ( std::vector<unsigned short>::size(v4) != 0 )
+        {
+          v2 = (unsigned __int16 *)((unsigned __int16 *(__stdcall *)(_DWORD))std::vector<unsigned short>::operator[])(0);
+          v7 = (unsigned __int16 *)CMapObjectMgr::EntityPtr(*v2);
+          if ( v7 != 0 )
           {
-            result = IEntity::FlagBits(VehiclePtr, (EntityFlag)0x4000u);
-            if ( result )
+            v8 = 0;
+            ModifierState = CStateGame::GetModifierState(g_pGame);
+            if ( IEntity::ObjType((IEntity *)v7) != SETTLER_OBJ || IEntity::ObjType((IEntity *)v7) == (DECO_OBJ_2|PILE_OBJ|BUILDING_OBJ|CATAPULT_OBJ) )
             {
-              return result;
-            }
-            if ( IEntity::WarriorType() == 8 || IEntity::WarriorType() == 10 || IEntity::WarriorType() == 11 )
-            {
-              if ( (ModifierState & 0x10) != 0 )
+              v3 = ((int (__stdcall *)())IEntity::ID)();
+              VehiclePtr = CVehicleMgr::GetVehiclePtr(v3);
+              if ( VehiclePtr != 0 )
               {
-                v8 = 10;
+                result = IEntity::FlagBits(VehiclePtr, (EntityFlag)0x4000);
+                if ( result != 0 )
+                {
+                  return result;
+                }
+                if ( ((int (__stdcall *)())IEntity::WarriorType)() == 8 || ((int (__stdcall *)())IEntity::WarriorType)() == 10 || ((int (__stdcall *)())IEntity::WarriorType)() == 11 )
+                {
+                  if ( (ModifierState & 0x10) != 0 )
+                  {
+                    v8 = 10;
+                  }
+                  else
+                  {
+                    v8 = 17;
+                  }
+                }
+                else if ( (ModifierState & 0x10) != 0 )
+                {
+                  v8 = 10;
+                }
+                else
+                {
+                  v8 = 32;
+                }
               }
-              else
+              result = IGfxEngine::GetCursorShape(g_pGfxEngine);
+              if ( result != 6 && result != 7 )
               {
-                v8 = 17;
+                result = IGfxEngine::GetCursorShape(g_pGfxEngine);
+                if ( result != v8 )
+                {
+                  return ((_DWORD (__stdcall *)(char, int))IGfxEngine::SetCursorShape)(1, v8);
+                }
               }
-            }
-            else if ( (ModifierState & 0x10) != 0 )
-            {
-              v8 = 10;
             }
             else
             {
-              v8 = 32;
+              if ( IEntity::Type((IEntity *)v7) == 47 )
+              {
+                if ( (ModifierState & 0x10) != 0 )
+                {
+                  v9 = 10;
+                }
+                else
+                {
+                  v9 = 21;
+                }
+              }
+              else if ( IEntity::Type((IEntity *)v7) == 49 )
+              {
+                if ( (ModifierState & 0x10) != 0 )
+                {
+                  v9 = 10;
+                }
+                else
+                {
+                  v9 = 13;
+                }
+              }
+              else if ( IEntity::Type((IEntity *)v7) == 48 )
+              {
+                if ( (ModifierState & 0x10) != 0 )
+                {
+                  v9 = 10;
+                }
+                else
+                {
+                  v9 = 27;
+                }
+              }
+              else if ( IEntity::Type((IEntity *)v7) == 45 )
+              {
+                if ( (ModifierState & 0x10) != 0 )
+                {
+                  v9 = 10;
+                }
+                else
+                {
+                  v9 = 15;
+                }
+              }
+              else if ( IEntity::Type((IEntity *)v7) == 46 )
+              {
+                if ( (ModifierState & 0x10) != 0 )
+                {
+                  v9 = 10;
+                }
+                else
+                {
+                  v9 = 24;
+                }
+              }
+              else if ( IEntity::Type((IEntity *)v7) == 50 )
+              {
+                if ( (ModifierState & 0x10) != 0 )
+                {
+                  v9 = 10;
+                }
+                else
+                {
+                  v9 = 11;
+                }
+              }
+              else if ( IEntity::Type((IEntity *)v7) == 60 || IEntity::Type((IEntity *)v7) == 1 )
+              {
+                v9 = 0;
+              }
+              else if ( (ModifierState & 0x10) != 0 )
+              {
+                v9 = 10;
+              }
+              else if ( (ModifierState & 4) != 0 )
+              {
+                v9 = 7;
+              }
+              else if ( (ModifierState & 8) != 0 )
+              {
+                v9 = 19;
+              }
+              else
+              {
+                v9 = 17;
+              }
+              result = IGfxEngine::GetCursorShape(g_pGfxEngine);
+              if ( result != v9 )
+              {
+                return ((_DWORD (__stdcall *)(char, int))IGfxEngine::SetCursorShape)(1, v9);
+              }
             }
           }
-          result = IGfxEngine::GetCursorShape(g_pGfxEngine);
-          if ( result != 6 && result != 7 )
+          else
           {
             result = IGfxEngine::GetCursorShape(g_pGfxEngine);
-            if ( result != v8 )
+            if ( result != 0 )
             {
-              return IGfxEngine::SetCursorShape(1, v8);
+              return ((_DWORD (__stdcall *)(char, _DWORD))IGfxEngine::SetCursorShape)(1, 0);
             }
           }
         }
         else
         {
-          if ( IEntity::Type(v7) == 47 )
-          {
-            if ( (ModifierState & 0x10) != 0 )
-            {
-              v9 = 10;
-            }
-            else
-            {
-              v9 = 21;
-            }
-          }
-          else if ( IEntity::Type(v7) == 49 )
-          {
-            if ( (ModifierState & 0x10) != 0 )
-            {
-              v9 = 10;
-            }
-            else
-            {
-              v9 = 13;
-            }
-          }
-          else if ( IEntity::Type(v7) == 48 )
-          {
-            if ( (ModifierState & 0x10) != 0 )
-            {
-              v9 = 10;
-            }
-            else
-            {
-              v9 = 27;
-            }
-          }
-          else if ( IEntity::Type(v7) == 45 )
-          {
-            if ( (ModifierState & 0x10) != 0 )
-            {
-              v9 = 10;
-            }
-            else
-            {
-              v9 = 15;
-            }
-          }
-          else if ( IEntity::Type(v7) == 46 )
-          {
-            if ( (ModifierState & 0x10) != 0 )
-            {
-              v9 = 10;
-            }
-            else
-            {
-              v9 = 24;
-            }
-          }
-          else if ( IEntity::Type(v7) == 50 )
-          {
-            if ( (ModifierState & 0x10) != 0 )
-            {
-              v9 = 10;
-            }
-            else
-            {
-              v9 = 11;
-            }
-          }
-          else if ( IEntity::Type(v7) == 60 || IEntity::Type(v7) == 1 )
-          {
-            v9 = 0;
-          }
-          else if ( (ModifierState & 0x10) != 0 )
-          {
-            v9 = 10;
-          }
-          else if ( (ModifierState & 4) != 0 )
-          {
-            v9 = 7;
-          }
-          else if ( (ModifierState & 8) != 0 )
-          {
-            v9 = 19;
-          }
-          else
-          {
-            v9 = 17;
-          }
           result = IGfxEngine::GetCursorShape(g_pGfxEngine);
-          if ( result != v9 )
+          if ( result != 6 && result != 7 )
           {
-            return IGfxEngine::SetCursorShape(1, v9);
+            result = IGfxEngine::GetCursorShape(g_pGfxEngine);
+            if ( result != 0 )
+            {
+              return ((_DWORD (__stdcall *)(char, _DWORD))IGfxEngine::SetCursorShape)(1, 0);
+            }
           }
-        }
-      }
-      else
-      {
-        result = IGfxEngine::GetCursorShape(g_pGfxEngine);
-        if ( result )
-        {
-          return IGfxEngine::SetCursorShape(1, 0);
-        }
-      }
-    }
-    else
-    {
-      result = IGfxEngine::GetCursorShape(g_pGfxEngine);
-      if ( result != 6 && result != 7 )
-      {
-        result = IGfxEngine::GetCursorShape(g_pGfxEngine);
-        if ( result )
-        {
-          return IGfxEngine::SetCursorShape(1, 0);
         }
       }
     }
@@ -534,7 +529,7 @@ void  CLogic::HandleSoundtracks(void) {
   CLogic *v4; // [esp+8h] [ebp-4h]
 
   v4 = this;
-  if ( *((_DWORD *)this + 16) )
+  if ( *((_DWORD *)this + 16) != 0 )
   {
     result = (int)v4;
     if ( (int)++*((_DWORD *)v4 + 16) <= 32 )
@@ -555,12 +550,12 @@ void  CLogic::HandleSoundtracks(void) {
   }
   else
   {
-    CStateGame::GetCenterWorldCoordinate((CStateGame *)g_pGame, &v2, &v3);
-    result = CWorldManager::InWorld(v2, v3);
-    if ( (_BYTE)result )
+    CStateGame::GetCenterWorldCoordinate(g_pGame, &v2, &v3);
+    result = ((int (__cdecl *)(int, int))CWorldManager::InWorld)(v2, v3);
+    if ( (_BYTE)result != 0 )
     {
       result = CWorldManager::FlagBits(v2, v3, 4u);
-      if ( result )
+      if ( result != 0 )
       {
         if ( *((_DWORD *)v4 + 17) != 3 )
         {
@@ -571,7 +566,7 @@ void  CLogic::HandleSoundtracks(void) {
       else
       {
         result = (int)v4;
-        if ( *((_DWORD *)v4 + 17) )
+        if ( *((_DWORD *)v4 + 17) != 0 )
         {
           *((_DWORD *)v4 + 17) = 0;
           return CSoundManager::ChangeMusicStyle(g_pSoundManager, 0);
