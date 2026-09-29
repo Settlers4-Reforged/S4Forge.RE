@@ -4,7 +4,7 @@
 #include "defines.h"
 
 class SGfxRenderConfiguration {
-public:
+  public:
     // address=[0x148fbd0]
     void EnableFiltering(bool a2);
 
@@ -42,19 +42,18 @@ public:
     bool IsForceBlit(void) const;
 
     // Type information members
-public:
-    bool m_uUnkConf0;
+  public:
+    bool m_bHardwareEnabled;
     bool m_bGuiOnly;
-    bool m_bD3DInterface;
-    int  m_uFlags;
+    bool m_bUseDD3Interface;
+    int m_iRenderQuality;
     HWND m_hWnd;
-    int  m_uWidth;
-    int  m_uHeight;
-    int  m_uX;
-    int  m_uY;
-    int  m_uUnkConf1C;
-    int  m_uUnkConf20;
+    int m_uWidth;
+    int m_uHeight;
+    int m_uX;
+    int m_uY;
+    int m_iReserved1;
+    int m_iReserved2;
 };
-
 
 #endif // SGFXRENDERCONFIGURATION_H

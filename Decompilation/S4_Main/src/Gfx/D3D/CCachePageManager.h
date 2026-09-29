@@ -1,7 +1,10 @@
 #ifndef CCACHEPAGEMANAGER_H
 #define CCACHEPAGEMANAGER_H
 
+#include "Gfx/SSmallRectangle.h"
 #include "defines.h"
+
+#include <d3dtypes.h>
 
 class CCachePageManager {
   public:
@@ -21,16 +24,16 @@ class CCachePageManager {
     ~CCachePageManager(void);
 
     // address=[0x2f87940]
-    bool GetPictureArea(float _iBlitX, float iBlitY, int iWidth, int iHeight, int iShading, int iShifting, int &iPosX, int &iPosY);
+    bool GetPictureArea(float _iBlitX, float _iBlitY, int _iWidth, int _iHeight, int _iShading, int _iShifting, int &_iPosX, int &_iPosY);
 
     // address=[0x2f87b30]
     long EraseExtensionAreas(int _iIndex, int a3, int a4, int a5, int a6, bool a7);
 
     // address=[0x2f87db0]
-    bool UploadData(long &hResult);
+    bool UploadData(long &_rResult);
 
     // address=[0x2f87ea0]
-    bool UploadDataAndRender(long &a2);
+    bool UploadDataAndRender(long &_rResult);
 
     // address=[0x2f88440]
     bool ShowPageContent(long &_rResult);
@@ -42,10 +45,10 @@ class CCachePageManager {
     long RenderCacheObject(int _iIndex, float _fX, float _fY, int _iShading, int _iFlags, int _iShift, bool a8);
 
     // address=[0x2f89350]
-    long LockSourceSurface(int &_rPitch, unsigned short *&_rRender);
+    long LockSourceSurface(int &_rPitch, unsigned short *&_rSurface);
 
     // address=[0x2f89400]
-    long LockVideoSurface(int &_rPitch, unsigned short *&a3);
+    long LockVideoSurface(int &_rPitch, unsigned short *&_rSurface);
 
     // address=[0x2f894b0]
     long UnlockSourceSurface(void);
@@ -64,7 +67,9 @@ class CCachePageManager {
     static float sm_fZoomFactor;
 
     // address=[0x46c16a0]
-    static float *sm_fTextureCoordTable;
+    static float sm_fTextureCoordTable[512];
+
+    static D3DTLVERTEX sm_sVertexList[576];
 
     // Type information members
   public:
@@ -75,13 +80,13 @@ class CCachePageManager {
     int m_iCurrentY;
     int m_iUploadWidth;
     int m_iUploadHeight;
-    SSmallRectangle[96] m_sRectangleList;
-    tagPOINT[96] m_sBlitPosition;
-    int[96] m_iShading;
-    unsigned __int8[96] m_uShifting;
+    SSmallRectangle m_sRectangleList[96];
+    POINTFLOAT m_sBlitPosition[96];
+    int m_iShading[96];
+    unsigned __int8 m_uShifting[96];
     int m_iNumberOfObjects;
-    tagPOINT m_sDestinationPoint;
-    tagRECT m_sUploadRectangle;
+    POINT m_sDestinationPoint;
+    RECT m_sUploadRectangle;
     unsigned __int8 m_bSoureSurfaceIsLocked;
     unsigned __int8 m_bVideoSurfaceIsLocked;
     void *m_pRenderAdress;

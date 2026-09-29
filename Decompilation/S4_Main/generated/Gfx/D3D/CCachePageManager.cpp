@@ -1,3 +1,4 @@
+#if FALSE
 #include "CCachePageManager.h"
 
 // Definitions for class CCachePageManager
@@ -752,3 +753,4 @@ int  CCachePageManager::GetLastCacheObjectNr(void) {
 // address=[0x46c16a0]
 // [Decompilation failed for static float * CCachePageManager::sm_fTextureCoordTable]
 
+#endif // Already implemented

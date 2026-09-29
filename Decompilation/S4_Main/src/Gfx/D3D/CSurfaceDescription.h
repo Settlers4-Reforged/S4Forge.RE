@@ -5,8 +5,6 @@
 
 #include <ddraw.h>
 
-extern class CSurfaceDescription s_cSurfaceDescription;
-
 class CSurfaceDescription {
   public:
     // address=[0x2f87700]

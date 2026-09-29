@@ -237,17 +237,17 @@ long  CSurfaceV7::CreateSurface(void * pDDInterface, int iWidth, int iHeight, bo
     s_cSurfaceDescription.m_sSurfaceDescription.dwFlags |= 2u;
     s_cSurfaceDescription.m_sSurfaceDescription.dwWidth = iWidth;
     s_cSurfaceDescription.m_sSurfaceDescription.dwHeight = iHeight;
-    *(_QWORD *)(&s_cSurfaceDescription.m_sSurfaceDescription.dwFVF + 1) = 64;
+    *(_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.ddpfPixelFormat.dwFlags = 64;
     s_cSurfaceDescription.m_sSurfaceDescription.ddpfPixelFormat.dwRGBBitCount = 16;
     if ( iSurfaceFormat == 1 )
     {
-      *((_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.dwFVF + 2) = 0x3E000007C00LL;
+      *(_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.ddpfPixelFormat.dwRBitMask = 0x3E000007C00LL;
     }
     else
     {
-      *((_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.dwFVF + 2) = 0x7E00000F800LL;
+      *(_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.ddpfPixelFormat.dwRBitMask = 0x7E00000F800LL;
     }
-    *((_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.dwFVF + 3) = 31;
+    *(_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.ddpfPixelFormat.dwBBitMask = 31;
     if ( bIsTexture != 0 )
     {
       if ( iSurfaceFormat == 2 )
@@ -256,28 +256,28 @@ long  CSurfaceV7::CreateSurface(void * pDDInterface, int iWidth, int iHeight, bo
         *((_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.dwFVF + 3) = 0xF0000000000FLL;
         s_cSurfaceDescription.m_sSurfaceDescription.ddpfPixelFormat.dwFlags |= 1u;
       }
-      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps = 4096;
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps = DDSCAPS_TEXTURE;
     }
     else
     {
-      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps = 64;
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN;
     }
     if ( bVideoMem != 0 )
     {
-      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= 0x4000u;
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= DDSCAPS_VIDEOMEMORY;
     }
     else
     {
-      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= 0x800u;
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= DDSCAPS_SYSTEMMEMORY;
     }
     if ( bHwAccess != 0 && bIsTexture == 0 )
     {
-      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= 0x2000u;
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= DDSCAPS_3DDEVICE;
     }
     if ( v10 != 0 && v11 != 0 )
     {
       s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= 0x4018u;
-      s_cSurfaceDescription.m_sSurfaceDescription.dwFlags |= 0x20u;
+      s_cSurfaceDescription.m_sSurfaceDescription.dwFlags |= DDSD_BACKBUFFERCOUNT;
       s_cSurfaceDescription.m_sSurfaceDescription.dwBackBufferCount = 1;
     }
   }

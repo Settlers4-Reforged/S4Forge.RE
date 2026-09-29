@@ -5,10 +5,6 @@
 
 #include <ddraw.h>
 
-extern class CBlitFX s_cBlitFx;
-extern class CBlitFX s_cBlitFxAlpha;
-extern class CBlitFX s_cBlitFxAlphaDebug;
-
 class CBlitFX {
   public:
     // address=[0x2f69900]
