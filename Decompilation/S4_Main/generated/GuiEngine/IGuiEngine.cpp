@@ -1215,13 +1215,13 @@ bool  IGuiEngine::LockOwnerImage(int _iContainerId, int _iControlId, struct SGui
     return 0;
   }
   g_pGfxManager->GetGuiGfxInfo(&sGfxInfo, pContainer->m_iMainTexture);
-  if ( sGfxInfo.m_pGfxData != 0 && sGfxInfo.m_pPalData != 0 )
+  if ( sGfxInfo.m_pLayerBlock != 0 && sGfxInfo.m_pPaletteBlock != 0 )
   {
     *_rSurface = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, pContainer->m_iSurfaceType, _rPitch);
     if ( *_rSurface != 0 )
     {
       s_iLockedSurface = pContainer->m_iSurfaceType;
-      FastBlit8Bit(sGfxInfo.m_pGfxData->m_sShort.m_vData, pContainer->m_iWidth, pControl->m_iX, pControl->m_iY, pControl->m_iWidth, pControl->m_iHeight, *_rSurface, *_rPitch, pControl->m_iX, pControl->m_iY, sGfxInfo.m_pPalData);
+      FastBlit8Bit(sGfxInfo.m_pLayerBlock->m_sShort.m_vData, pContainer->m_iWidth, pControl->m_iX, pControl->m_iY, pControl->m_iWidth, pControl->m_iHeight, *_rSurface, *_rPitch, pControl->m_iX, pControl->m_iY, sGfxInfo.m_pPaletteBlock);
       *_rSurface += (*_rPitch >> 1) * pControl->m_iY;
       *_rSurface += pControl->m_iX;
       return 1;
@@ -1306,12 +1306,12 @@ bool  IGuiEngine::EraseOwnerImage(int _iContainerId, int _iControlId) {
     return 0;
   }
   g_pGfxManager->GetGuiGfxInfo(&v8, pContainer->m_iMainTexture);
-  if ( v8.m_pGfxData != 0 && v8.m_pPalData != 0 )
+  if ( v8.m_pLayerBlock != 0 && v8.m_pPaletteBlock != 0 )
   {
     pSurface = IGfxEngine::BeginWriteToSurface(g_pGfxEngine, pContainer->m_iSurfaceType, &iPitch);
     if ( pSurface != 0 )
     {
-      FastBlit8Bit(v8.m_pGfxData->m_sShort.m_vData, pContainer->m_iWidth, pControl->m_iX, pControl->m_iY, pControl->m_iWidth, pControl->m_iHeight, pSurface, iPitch, pControl->m_iX, pControl->m_iY, v8.m_pPalData);
+      FastBlit8Bit(v8.m_pLayerBlock->m_sShort.m_vData, pContainer->m_iWidth, pControl->m_iX, pControl->m_iY, pControl->m_iWidth, pControl->m_iHeight, pSurface, iPitch, pControl->m_iX, pControl->m_iY, v8.m_pPaletteBlock);
       return IGfxEngine::EndWriteToSurface(g_pGfxEngine, pContainer->m_iSurfaceType);
     }
     else

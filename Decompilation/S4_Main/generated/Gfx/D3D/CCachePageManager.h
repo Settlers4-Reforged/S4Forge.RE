@@ -21,13 +21,13 @@ public:
      ~CCachePageManager(void);
 
     // address=[0x2f87940]
-    bool  GetPictureArea(float a2, float a3, int a4, int a5, int a6, int a7, int & a8, int & a9);
+    bool  GetPictureArea(float iBlitX, float iBlitY, int iWidth, int iHeight, int iShading, int iShifting, int & iPosX, int & iPosY);
 
     // address=[0x2f87b30]
-    long  EraseExtensionAreas(int a2, int a3, int a4, int a5, int a6, bool a7);
+    long  EraseExtensionAreas(int _iIndex, int a3, int a4, int a5, int a6, bool a7);
 
     // address=[0x2f87db0]
-    bool  UploadData(long & a2);
+    bool  UploadData(long & hResult);
 
     // address=[0x2f87ea0]
     bool  UploadDataAndRender(long & a2);
@@ -39,10 +39,10 @@ public:
     void  ReleaseData(void);
 
     // address=[0x2f888f0]
-    long  RenderCacheObject(int a2, float a3, float a4, int a5, int a6, int a7, bool a8);
+    long  RenderCacheObject(int _iIndex, float _fX, float _fY, int _iShading, int _iFlags, int _iShift, bool a8);
 
     // address=[0x2f89350]
-    long  LockSourceSurface(int & a2, unsigned short * & a3);
+    long  LockSourceSurface(int & _rPitch, unsigned short * & _rRender);
 
     // address=[0x2f89400]
     long  LockVideoSurface(int & a2, unsigned short * & a3);
@@ -68,25 +68,24 @@ protected:
 
     // Type information members
 public:
-    struct IDirectDrawSurface7 * m_pSurfaceB;
-    struct IDirectDrawSurface7 * m_pSurfaceA;
-    struct IDirect3DDevice7 * m_pDevice;
-    _DWORD dwordC;
-    _DWORD dword10;
-    _DWORD dword14;
-    _DWORD dword18;
-    _BYTE[2016] gap1C;
-    _DWORD dword7FC;
-    _DWORD dword800;
-    _DWORD dword804;
-    _DWORD dword808;
-    _DWORD dword80C;
-    _DWORD dword810;
-    _DWORD dword814;
-    _BYTE byte818;
-    _BYTE byte819;
-    _DWORD dword81C;
-    _DWORD dword820;
+    IDirectDrawSurface7 * m_pSystemTexture;
+    IDirectDrawSurface7 * m_pVideoTexture;
+    IDirect3DDevice7 * m_pRenderDevice;
+    int m_iCurrentX;
+    int m_iCurrentY;
+    int m_iUploadWidth;
+    int m_iUploadHeight;
+    SSmallRectangle[96] m_sRectangleList;
+    tagPOINT[96] m_sBlitPosition;
+    int[96] m_iShading;
+    unsigned __int8[96] m_uShifting;
+    int m_iNumberOfObjects;
+    tagPOINT m_sDestinationPoint;
+    tagRECT m_sUploadRectangle;
+    unsigned __int8 m_bSoureSurfaceIsLocked;
+    unsigned __int8 m_bVideoSurfaceIsLocked;
+    void * m_pRenderAdress;
+    int m_iPitch;
 
 };
 

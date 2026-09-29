@@ -22,14 +22,14 @@ class CPersistence * __cdecl CDecoObject::New(std::istream & a1) {
 // Decompiled from CDecoObject *__thiscall CDecoObject::CDecoObject(CDecoObject *this, unsigned int a2, unsigned int a3, unsigned int a4, int a5, int a6, int a7)
  CDecoObject::CDecoObject(int a2, int a3, int a4, int a5, int a6, int a7) {
   
-  IDecoObject::IDecoObject(this, a2, a3, a4, a5, true);
+  IDecoObject::IDecoObject(this, a2, a3, a4, a5, 1);
   this->__vftable = (IAnimatedEntity_vtbl *)&CDecoObject::_vftable_;
   this->m_iJobPart = CGfxManager::GetObjectFirstJob(g_pGfxManager, a4);
-  if ( this->m_iJobPart >= 552u && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 264, "m_uJobPart<SIV_OBJECT_MAX") == 1 )
+  if ( this->m_iJobPart >= 0x228u && BBSupportDbgReport(2, "MapObjects\\DecoObj\\DecoObj.cpp", 264, "m_uJobPart<SIV_OBJECT_MAX") == 1 )
   {
     __debugbreak();
   }
-  this->m_uU1 = true;
+  this->m_uU1 = 1;
   this->m_iPhases = a7 == 0;
   this->m_uCycleFrames = CGfxManager::GetObjectFrameCount(g_pGfxManager, this->m_iJobPart);
   this->m_iFrame = a6 % this->m_uCycleFrames;
@@ -82,14 +82,14 @@ struct SGfxObjectInfo *  CDecoObject::GetGfxInfos(void) {
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
   if ( this->m_iType == 123 )
   {
-    IEntity::m_sGfxInfo.m_uObjType = 16;
+    IEntity::m_sGfxInfo.m_uType = 16;
   }
   else
   {
-    IEntity::m_sGfxInfo.m_uObjType = this->m_uObjType;
+    IEntity::m_sGfxInfo.m_uType = this->m_uObjType;
   }
-  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
-  IEntity::m_sGfxInfo.m_uFlags = 0;
+  IEntity::m_sGfxInfo.m_bVisible = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_uSelectionBlockIndex = 0;
   return &IEntity::m_sGfxInfo;
 }
 

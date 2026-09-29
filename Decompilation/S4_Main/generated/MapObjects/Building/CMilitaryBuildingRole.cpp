@@ -252,8 +252,8 @@ void  CMilitaryBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObject
       ((void (__stdcall *)(int, int, int, int))CGfxManager::GetObjectGfxInfo)((int)&v21, v15, 0, 1);
       v11 = IEntity::OwnerId(a2);
       g_pGfxManager->GetUserLogoGfxInfo(g_pGfxManager, (struct SGfxObjectInfo *)v20, v11, 0);
-      *(_DWORD *)(a3 + 80) = v21.m_pGfxData;
-      *(_DWORD *)(a3 + 84) = v21.m_pPalData;
+      *(_DWORD *)(a3 + 80) = v21.m_pLayerBlock;
+      *(_DWORD *)(a3 + 84) = v21.m_pPaletteBlock;
       *(_DWORD *)(a3 + 24) = *(_DWORD *)(*(this + 94) + 44);
       *(_DWORD *)(a3 + 28) = *(_DWORD *)(*(this + 94) + 48);
       *(_DWORD *)(a3 + 72) = v20[0];

@@ -1,3 +1,4 @@
+#if FALSE
 #include "CSurfaceDescription.h"
 
 // Definitions for class CSurfaceDescription
@@ -7,12 +8,13 @@
  CSurfaceDescription::CSurfaceDescription(void) {
   
   memset(this, 0, 0x7Cu);
-  memset((char *)this + 124, 0, 0x6Cu);
-  *(_DWORD *)this = 124;
-  *((_DWORD *)this + 31) = 108;
-  *((_DWORD *)this + 18) = 32;
-  *((_DWORD *)this + 49) = 32;
+  memset(&this->m_sSurfaceDescriptionOld, 0, sizeof(this->m_sSurfaceDescriptionOld));
+  this->m_sSurfaceDescription.dwSize = 0x7C;
+  this->m_sSurfaceDescriptionOld.dwSize = 108;
+  this->m_sSurfaceDescription.ddpfPixelFormat.dwSize = 32;
+  this->m_sSurfaceDescriptionOld.ddpfPixelFormat.dwSize = 32;
   return this;
 }
 
 
+#endif // Already implemented

@@ -168,7 +168,7 @@ void  CProductionBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObje
   v3 = IEntity::Race(a2);
   ((void (__stdcall *)(int, int, int, int, int))CGfxManager::GetBuildingGfxInfo)((int)a3, v3, v16, 1, (int)this + 76);
   v4 = IEntity::OwnerId(a2);
-  a3->m_iColor = CPlayerManager::Color(v4);
+  a3->m_uColor = CPlayerManager::Color(v4);
   if ( *((_BYTE *)this + 356) != 0 )
   {
     CGfxManager::GetEffectGfxInfo(g_pGfxManager, (struct SGfxObjectInfo *)v21, *((unsigned __int8 *)this + 356), 0, *((unsigned __int8 *)this + 359));
@@ -182,7 +182,7 @@ void  CProductionBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObje
   if ( *((_BYTE *)this + 29) == 1 )
   {
     v6 = CSettlerMgr::operator[](*((unsigned __int16 *)this + 4));
-    CSettler::GetPatchGfx(v6, a3->m_vPatches);
+    CSettler::GetPatchGfx(v6, a3->m_vPatchSettlers);
   }
   v17 = 0;
   for ( i = 0;
@@ -195,7 +195,7 @@ void  CProductionBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObje
     {
       v9 = std::vector<unsigned short>::operator[]((char *)this + 384, i);
       v10 = (unsigned __int8 *)CPileMgr::operator[](*v9);
-      CPile::GetPatchGfx((CPile *)v10, &a3->m_vPatches2[v17++]);
+      CPile::GetPatchGfx((CPile *)v10, &a3->m_vPatchPiles[v17++]);
     }
   }
   for ( j = 0;
@@ -213,7 +213,7 @@ void  CProductionBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObje
     {
       v14 = std::vector<unsigned short>::operator[]((char *)this + 400, j);
       v15 = (unsigned __int8 *)CPileMgr::operator[](*v14);
-      CPile::GetPatchGfx((CPile *)v15, &a3->m_vPatches2[v17++]);
+      CPile::GetPatchGfx((CPile *)v15, &a3->m_vPatchPiles[v17++]);
     }
   }
   return result;

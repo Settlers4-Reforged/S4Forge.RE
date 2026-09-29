@@ -474,9 +474,9 @@ void  CEffect::VisualizeEffect(struct SGfxObjectInfo & rInfo, int _iTimeIndex) {
     __debugbreak();
   }
   CEffect::GetEffectGfxInfo(rInfo, this->m_iEffect, 0, _iTimeIndex % (unsigned int)this->m_uFramesMax);
-  rInfo->m_uObjType = 0x80;
-  rInfo->m_iEffectScreenX = this->uEffect.m_fWorldX;
-  rInfo->m_iEffectScreenY = this->uEffect.m_fWorldY;
+  rInfo->m_uType = 0x80;
+  rInfo->m_fWorldScreenX = this->uEffect.m_fWorldX;
+  rInfo->m_fWorldScreenY = this->uEffect.m_fWorldY;
 }
 
 
@@ -496,10 +496,10 @@ void  CEffect::VisualizeAngel(struct SGfxObjectInfo & rInfo, int _iTimeIndex) {
   }
   iColor = this->uAngel.m_iColor;
   CGfxManager::GetSettlerGfxInfo(g_pGfxManager, rInfo, this->uAngel.m_iRace, s_iAngelEffectJobIds[this->m_iEffect], _iTimeIndex % (unsigned int)this->m_uFramesMax, 2u);
-  rInfo->m_uObjType = 1;
-  rInfo->m_iColor = iColor;
-  rInfo->m_iEffectScreenX = this->uAngel.m_fWorldX;
-  rInfo->m_iEffectScreenY = this->uAngel.m_fWorldY;
+  rInfo->m_uType = 1;
+  rInfo->m_uColor = iColor;
+  rInfo->m_fWorldScreenX = this->uAngel.m_fWorldX;
+  rInfo->m_fWorldScreenY = this->uAngel.m_fWorldY;
 }
 
 
@@ -516,9 +516,9 @@ void  CEffect::VisualizeArrow(struct SGfxObjectInfo & rInfo, int _iTimeIndex) {
     __debugbreak();
   }
   CEffect::GetEffectGfxInfo(rInfo, this->m_iEffect, this->uMissile.m_iDir, this->m_iFrame);
-  rInfo->m_uObjType = 64;
-  rInfo->m_iEffectScreenX = (float)(this->uMissile.m_fVelocityX * (float)_iTimeIndex) + this->uMissile.m_fWorldX;
-  rInfo->m_iEffectScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY) + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
+  rInfo->m_uType = 64;
+  rInfo->m_fWorldScreenX = (float)(this->uMissile.m_fVelocityX * (float)_iTimeIndex) + this->uMissile.m_fWorldX;
+  rInfo->m_fWorldScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY) + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
 }
 
 
@@ -539,9 +539,9 @@ void  CEffect::VisualizeCannonball(struct SGfxObjectInfo & a2, int _iTimeIndex) 
     __debugbreak();
   }
   CEffect::GetEffectGfxInfo(a2, this->m_iEffect, this->uMissile.m_iDir, _iTimeIndex % (unsigned int)this->m_uFramesMax);
-  a2->m_uObjType = 64;
-  a2->m_iEffectScreenX = (float)(this->uMissile.m_fVelocityX * (float)_iTimeIndex) + this->uMissile.m_fWorldX;
-  a2->m_iEffectScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY) + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
+  a2->m_uType = 64;
+  a2->m_fWorldScreenX = (float)(this->uMissile.m_fVelocityX * (float)_iTimeIndex) + this->uMissile.m_fWorldX;
+  a2->m_fWorldScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY) + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
 }
 
 
@@ -558,9 +558,9 @@ void  CEffect::VisualizeSporeCloud(struct SGfxObjectInfo & a2, int _iTimeIndex) 
     __debugbreak();
   }
   CEffect::GetEffectGfxInfo(a2, this->m_iEffect, this->uSpore.m_iDir, _iTimeIndex % (unsigned int)this->m_uFramesMax);
-  a2->m_uObjType = 0x80;
-  a2->m_iEffectScreenX = (float)(this->uSpore.m_fScreenStepX * (float)_iTimeIndex) + this->uSpore.m_fSrcScreenX;
-  a2->m_iEffectScreenY = (float)(this->uSpore.m_fScreenStepY * (float)_iTimeIndex) + this->uSpore.m_fSrcScreenY;
+  a2->m_uType = 0x80;
+  a2->m_fWorldScreenX = (float)(this->uSpore.m_fScreenStepX * (float)_iTimeIndex) + this->uSpore.m_fSrcScreenX;
+  a2->m_fWorldScreenY = (float)(this->uSpore.m_fScreenStepY * (float)_iTimeIndex) + this->uSpore.m_fSrcScreenY;
 }
 
 
@@ -577,9 +577,9 @@ void  CEffect::VisualizeStagnantAnimal(struct SGfxObjectInfo & a2, int _iTimeInd
     __debugbreak();
   }
   CGfxManager::GetAnimalGfxInfo(g_pGfxManager, a2, this->m_iEffect, this->uEffect.m_iDir, _iTimeIndex % (unsigned int)this->m_uFramesMax);
-  a2->m_uObjType = 128;
-  a2->m_iEffectScreenX = this->uEffect.m_fWorldX;
-  a2->m_iEffectScreenY = this->uEffect.m_fWorldY;
+  a2->m_uType = 128;
+  a2->m_fWorldScreenX = this->uEffect.m_fWorldX;
+  a2->m_fWorldScreenY = this->uEffect.m_fWorldY;
 }
 
 
@@ -599,7 +599,7 @@ void  CEffect::VisualizeMovingEffect(struct SGfxObjectInfo & a2, int _iTimeIndex
     __debugbreak();
   }
   CGfxManager::GetEffectGfxInfo(g_pGfxManager, a2, this->m_iEffect, this->uMoving.m_iDir, (_iTimeIndex + (unsigned int)this->uMoving.m_iFrame) % this->uMoving.m_uFramesMax);
-  a2->m_uObjType = 128;
+  a2->m_uType = 128;
   uDelay = this->m_uDelay;
   if ( _iTimeIndex > uDelay )
   {
@@ -611,15 +611,15 @@ void  CEffect::VisualizeMovingEffect(struct SGfxObjectInfo & a2, int _iTimeIndex
   }
   if ( this->m_uDelay != 0 && iTimeIndex > 0 )
   {
-    a2->m_iEffectScreenX = (float)(iTimeIndex * (this->uMoving.m_iScreenX - this->uMoving.m_iStartScreenX) / uDelay + this->uMoving.m_iStartScreenX);
-    a2->m_iEffectScreenY = (float)(iTimeIndex * (this->uMoving.m_iScreenY - this->uMoving.m_iStartScreenY) / uDelay + this->uMoving.m_iStartScreenY);
+    a2->m_fWorldScreenX = (float)(iTimeIndex * (this->uMoving.m_iScreenX - this->uMoving.m_iStartScreenX) / uDelay + this->uMoving.m_iStartScreenX);
+    a2->m_fWorldScreenY = (float)(iTimeIndex * (this->uMoving.m_iScreenY - this->uMoving.m_iStartScreenY) / uDelay + this->uMoving.m_iStartScreenY);
   }
   else
   {
-    a2->m_iEffectScreenX = (float)this->uMoving.m_iStartScreenX;
-    a2->m_iEffectScreenY = (float)this->uMoving.m_iStartScreenY;
+    a2->m_fWorldScreenX = (float)this->uMoving.m_iStartScreenX;
+    a2->m_fWorldScreenY = (float)this->uMoving.m_iStartScreenY;
   }
-  a2->m_iZOrdering = -64;
+  a2->m_uRenderLayer = -64;
 }
 
 
@@ -636,10 +636,10 @@ void  CEffect::VisualizeTopEffect(struct SGfxObjectInfo & a2, int _iTimeIndex) {
     __debugbreak();
   }
   CEffect::GetEffectGfxInfo(a2, this->m_iEffect, 0, _iTimeIndex % (unsigned int)this->m_uFramesMax);
-  a2->m_uObjType = 0x80;
-  a2->m_iEffectScreenX = this->uEffect.m_fWorldX;
-  a2->m_iEffectScreenY = this->uEffect.m_fWorldY;
-  a2->m_iZOrdering = -64;                       // Maybe related to Top?
+  a2->m_uType = 0x80;
+  a2->m_fWorldScreenX = this->uEffect.m_fWorldX;
+  a2->m_fWorldScreenY = this->uEffect.m_fWorldY;
+  a2->m_uRenderLayer = -64;                     // Maybe related to Top?
 }
 
 
@@ -660,10 +660,10 @@ void  CEffect::VisualizeTopFireball(struct SGfxObjectInfo & a2, int _iTimeIndex)
     __debugbreak();
   }
   CEffect::GetEffectGfxInfo(a2, this->m_iEffect, this->uMissile.m_iDir, _iTimeIndex % (unsigned int)this->uAngel.m_uFramesMax);
-  a2->m_uObjType = 64;
-  a2->m_iEffectScreenX = (float)(this->uMissile.m_fVelocityX * (float)_iTimeIndex) + this->uMissile.m_fWorldX;
-  a2->m_iEffectScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY) + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
-  a2->m_iZOrdering = -64;
+  a2->m_uType = 64;
+  a2->m_fWorldScreenX = (float)(this->uMissile.m_fVelocityX * (float)_iTimeIndex) + this->uMissile.m_fWorldX;
+  a2->m_fWorldScreenY = (float)((float)(this->uMissile.m_fVelocityY * (float)_iTimeIndex) + this->uMissile.m_fWorldY) + (float)((float)((float)_iTimeIndex * (float)_iTimeIndex) * this->uMissile.m_fArcStep);
+  a2->m_uRenderLayer = -64;
 }
 
 
@@ -688,10 +688,10 @@ void  CEffect::VisualizeAttachedEffect(struct SGfxObjectInfo & a2, int _iTimeInd
   iJob = _iTimeIndex % (unsigned int)this->uAngel.m_uFramesMax;
   this->uAttached.m_bProcessed = 1;
   CEffect::GetEffectGfxInfo(a2, m_iEffect, iDir, iJob);
-  a2->m_uObjType = 0x80;
-  a2->m_iEffectScreenX = a2->m_iEffectScreenX + this->uAttached.m_fOffsetX;
-  a2->m_iEffectScreenY = a2->m_iEffectScreenY + this->uAttached.m_fOffsetY;
-  a2->m_iZOrdering = -64;
+  a2->m_uType = 0x80;
+  a2->m_fWorldScreenX = a2->m_fWorldScreenX + this->uAttached.m_fOffsetX;
+  a2->m_fWorldScreenY = a2->m_fWorldScreenY + this->uAttached.m_fOffsetY;
+  a2->m_uRenderLayer = -64;
 }
 
 

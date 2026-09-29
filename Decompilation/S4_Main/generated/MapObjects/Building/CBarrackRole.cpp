@@ -292,7 +292,7 @@ void  CBarrackRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3
     {
       v6 = std::vector<unsigned short>::operator[](&this->m_vDeliverPiles, i);
       v7 = CPileMgr::operator[](*v6);
-      CPile::GetPatchGfx(v7, &a3->m_vPatches2[v9++]);
+      CPile::GetPatchGfx(v7, &a3->m_vPatchPiles[v9++]);
     }
   }
 }

@@ -19,10 +19,10 @@ public:
 
     // Type information members
 public:
-    BYTE m_uGroundHeight;
-    BYTE m_uGroundType;
-    BYTE m_uGradient;
-    BYTE m_uGfxBits;
+    unsigned __int8 iHeight;
+    unsigned __int8 iType;
+    unsigned __int8 iShading;
+    unsigned __int8 iFlags;
 
 };
 

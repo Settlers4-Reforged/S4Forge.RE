@@ -1068,7 +1068,7 @@ void  CVehicle::GetTurnGfxInfo(void) {
     iGfxId = this->m_pVehicleProperties->m_uBaseGfx;
   }
   CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, iRace, iGfxId, g_sVehicleDirExInfos[iTurnDir].m_iDir, g_sVehicleDirExInfos[iTurnDir].m_iFrame, 0, 0);
-  IEntity::m_sGfxInfo.m_pPatchGfxData = 0;
+  IEntity::m_sGfxInfo.m_pVehiclePatch = 0;
 }
 
 

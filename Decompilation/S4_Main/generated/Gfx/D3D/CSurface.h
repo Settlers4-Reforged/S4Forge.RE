@@ -4,17 +4,21 @@
 #include "defines.h"
 
 class CSurface {
-public:
+  public:
     // address=[0x2f86560]
-    static class CSurface * __cdecl CreateSurfacePtr(bool a1);
+    static class CSurface *__cdecl CreateSurfacePtr(bool _bUseV3);
 
     // address=[0x2f8a2f0]
-     CSurface(void);
+    CSurface(void);
 
     // address=[0x2f8a310]
-    virtual  ~CSurface(void);
+    virtual ~CSurface(void);
 
+    // Type information members
+  public:
+    IDirectDrawSurface7 *m_pSurfaceV7;
+    IDirectDrawSurface *m_pSurfaceV3;
+    char m_bBackbuffer;
 };
-
 
 #endif // CSURFACE_H

@@ -81,9 +81,9 @@ struct SGfxObjectInfo *  CStone::GetGfxInfos(void) {
     return 0;
   }
   ((void (__stdcall *)(SGfxObjectInfo *, _DWORD, _DWORD, _DWORD))CGfxManager::GetObjectGfxInfo)(&IEntity::m_sGfxInfo, *(unsigned __int16 *)(this + 38), 0, *(unsigned __int8 *)(this + 33));
-  IEntity::m_sGfxInfo.m_uObjType = 16;
-  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible((_DWORD *)this);
-  IEntity::m_sGfxInfo.m_uFlags = 0;
+  IEntity::m_sGfxInfo.m_uType = 16;
+  IEntity::m_sGfxInfo.m_bVisible = IEntity::IsVisible((_DWORD *)this);
+  IEntity::m_sGfxInfo.m_uSelectionBlockIndex = 0;
   return &IEntity::m_sGfxInfo;
 }
 

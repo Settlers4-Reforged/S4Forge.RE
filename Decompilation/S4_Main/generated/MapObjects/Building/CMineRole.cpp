@@ -159,20 +159,20 @@ void  CMineRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
   v3 = IEntity::Race(a2);
   ((void (__stdcall *)(int, int, int, int, int))CGfxManager::GetBuildingGfxInfo)((int)a3, v3, v14, 1, (int)this->m_vPatchPairs);
   v4 = IEntity::OwnerId(a2);
-  a3->m_iColor = CPlayerManager::Color(v4);
+  a3->m_uColor = CPlayerManager::Color(v4);
   v5 = IEntity::OwnerId(a2);
   IBuildingRole::MiniFlag(this, a3, v5);
   if ( this->m_bInhabitants == 1 )
   {
     v6 = CSettlerMgr::operator[](this->m_uSettlerId);
-    CSettler::GetPatchGfx(v6, a3->m_vPatches);
+    CSettler::GetPatchGfx(v6, a3->m_vPatchSettlers);
   }
   v16 = 0;
   v7 = (unsigned __int8 *)CPileMgr::operator[](*((unsigned __int16 *)this + 191));
   if ( CPile::IsPatchPile(v7) )
   {
     v8 = (unsigned __int8 *)CPileMgr::operator[](*((unsigned __int16 *)this + 191));
-    CPile::GetPatchGfx((CPile *)v8, a3->m_vPatches2);
+    CPile::GetPatchGfx((CPile *)v8, a3->m_vPatchPiles);
     v16 = 1;
   }
   for ( i = 0;
@@ -190,7 +190,7 @@ void  CMineRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo & a3) {
     {
       v12 = std::vector<unsigned short>::operator[]((char *)this + 392, i);
       v13 = (unsigned __int8 *)CPileMgr::operator[](*v12);
-      CPile::GetPatchGfx((CPile *)v13, &a3->m_vPatches2[v16++]);
+      CPile::GetPatchGfx((CPile *)v13, &a3->m_vPatchPiles[v16++]);
     }
   }
   return result;

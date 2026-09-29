@@ -420,29 +420,29 @@ bool __cdecl CGameStateHandler::InitGfxEngine(void) {
   }
   memset(&CGameStateHandler::m_sRenderCfg, 0, sizeof(CGameStateHandler::m_sRenderCfg));
   C = (IGfxEngine *)operator new(0x28u);
-  if ( C != 0 )
+  if ( C != nullptr )
   {
     v1 = IGfxEngine::IGfxEngine(C);
   }
   else
   {
-    v1 = 0;
+    v1 = nullptr;
   }
   g_pGfxEngine = v1;
   _controlfp(0xA031Fu, 0x30F031Fu);
   IGfxEngine::SetTriangleSize(g_pGfxEngine, 0x180000);
   IGfxEngine::SetCameraMode(g_pGfxEngine, 1);
   IGfxEngine::SetScrollOffsets(g_pGfxEngine, 0, 0);
-  IGfxEngine::EnableMiniMap(g_pGfxEngine, 1, 15, 8, 0);
-  if ( CGameStateHandler::BuildInitRenderCfg(0, 1) != 0 )
+  IGfxEngine::EnableMiniMap(g_pGfxEngine, 1u, 15, 8, nullptr);
+  if ( CGameStateHandler::BuildInitRenderCfg(false, true) != 0 )
   {
     return 1;
   }
-  if ( g_pGfxEngine != 0 )
+  if ( g_pGfxEngine != nullptr )
   {
     delete g_pGfxEngine;
   }
-  g_pGfxEngine = 0;
+  g_pGfxEngine = nullptr;
   return 0;
 }
 
@@ -776,7 +776,7 @@ bool __cdecl CGameStateHandler::CheckGfxRenderQuality(unsigned int a1) {
   SGfxRenderConfiguration v3; // [esp+8h] [ebp-24h] BYREF
 
   qmemcpy(&v3, &CGameStateHandler::m_sRenderCfg, sizeof(v3));
-  v3.m_uFlags = a1;
+  v3.m_iFlags = a1;
   qmemcpy(&v2, &v3, sizeof(v2));
   return IGfxEngine::CheckRenderConfiguration(g_pGfxEngine, v2);
 }
@@ -786,14 +786,10 @@ bool __cdecl CGameStateHandler::CheckGfxRenderQuality(unsigned int a1) {
 // Decompiled from char __cdecl CGameStateHandler::CheckGfxHardwareMode(int a1)
 bool __cdecl CGameStateHandler::CheckGfxHardwareMode(unsigned int a1) {
   
-  struct SGfxRenderConfiguration v2; // [esp-24h] [ebp-54h] BYREF
-  struct SGfxRenderConfiguration v3; // [esp+8h] [ebp-28h] BYREF
-  bool v4; // [esp+2Fh] [ebp-1h]
+  struct SGfxRenderConfiguration v2; // 0:^2C.36
 
-  qmemcpy(&v3, &CGameStateHandler::m_sRenderCfg, sizeof(v3));
-  v4 = a1 != 0;
-  v3.m_uUnkConf0 = a1 != 0;
-  qmemcpy(&v2, &v3, sizeof(v2));
+  v2 = CGameStateHandler::m_sRenderCfg;
+  v2.m_bHardwareEnabled = a1 != 0;
   return IGfxEngine::CheckRenderConfiguration(g_pGfxEngine, v2);
 }
 
@@ -1272,7 +1268,7 @@ bool __cdecl CGameStateHandler::BuildInitRenderCfg(bool a1, bool a2) {
   CGameStateHandler::m_sRenderCfg.m_bGuiOnly = bGuiOnly;
   CGameStateHandler::PerformPendingFullScreenEnterOrExit();
   v28 = *sub_148D8B0((struct tagRECT *)v10);
-  CGameStateHandler::m_sRenderCfg.m_bD3DInterface = CDebugInfo::IsWindowsNT40();
+  CGameStateHandler::m_sRenderCfg.m_bUseDD3Interface = CDebugInfo::IsWindowsNT40();
   CGameStateHandler::m_sRenderCfg.m_hWnd = g_hWnd;
   CGameStateHandler::m_sRenderCfg.m_uWidth = v28.right - v28.left;
   CGameStateHandler::m_sRenderCfg.m_uHeight = v28.bottom - v28.top;

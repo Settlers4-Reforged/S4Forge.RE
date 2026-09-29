@@ -42,7 +42,7 @@ public:
     virtual long  ReleaseDC(struct HDC__ * a2);
 
     // address=[0x2f869c0]
-    virtual long  CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, bool a7, int a8, bool a9, bool a10, bool a11);
+    virtual long  CreateSurface(void * pDDInterface, int iWidth, int iHeight, bool bVideoMem, bool bHwAccess, bool bIsTexture, int iSurfaceFormat, bool bPrimary, bool a9, bool a10);
 
     // address=[0x2f86bf0]
     virtual long  SetColorKey(unsigned long a2, struct _DDCOLORKEY * a3);
@@ -76,12 +76,6 @@ public:
 
     // address=[0x2f8a340]
     virtual  ~CSurfaceV7(void);
-
-    // Type information members
-public:
-    LPDIRECTDRAWSURFACE7 innerSurface;
-    int field_8;
-    char field_C;
 
 };
 

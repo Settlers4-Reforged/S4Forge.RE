@@ -56,9 +56,6 @@ public:
     int m_iSourceDialogSurfaceId;
     char[300] m_sText;
     GFX_ENGINE_GUI_SURFACE_DESCRIPTION m_sSurfaceDescription;
-    bool m_bUnknown14D;
-    bool m_bUnknown14E;
-    bool m_bUnknown14F;
     bool m_bOpen;
     bool m_bLocked;
     bool m_bEnableStatus;

@@ -373,20 +373,20 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
   if ( IEntity::FlagBits(this, (EntityFlag)0x800) != 0 )
   {
     IEntity::m_sGfxInfo.m_iDirection = -1;
-    IEntity::m_sGfxInfo.m_iOffsetX = (int)std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior)->m_fOffsetX;
-    IEntity::m_sGfxInfo.m_iOffsetY = (int)std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior)->m_fOffsetY;
+    IEntity::m_sGfxInfo.m_iPreferedOffsetX = (int)std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior)->m_fOffsetX;
+    IEntity::m_sGfxInfo.m_iPreferedOffsetY = (int)std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior)->m_fOffsetY;
   }
   else
   {
     IEntity::m_sGfxInfo.m_iDirection = this->m_iDirection;
-    IEntity::m_sGfxInfo.m_iOffsetX = 0;
-    IEntity::m_sGfxInfo.m_iOffsetY = 0;
+    IEntity::m_sGfxInfo.m_iPreferedOffsetX = 0;
+    IEntity::m_sGfxInfo.m_iPreferedOffsetY = 0;
   }
-  IEntity::m_sGfxInfo.m_uFlags = 0;
+  IEntity::m_sGfxInfo.m_uSelectionBlockIndex = 0;
   if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) != 0 )
   {
     pRole = std::auto_ptr<ISettlerRole>::operator->(&this->m_pBehavior);
-    IEntity::m_sGfxInfo.m_uFlags = ((int (__thiscall *)(ISettlerRole *, CSettler *))pRole->GetKindOfSelection)(pRole, this);
+    IEntity::m_sGfxInfo.m_uSelectionBlockIndex = ((int (__thiscall *)(ISettlerRole *, CSettler *))pRole->GetKindOfSelection)(pRole, this);
     v11 = IEntity::Type(this);
     v10 = IEntity::Race(this);
     SettlerInfo = CSettlerMgr::GetSettlerInfo(v10, v11);
@@ -398,7 +398,7 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
       {
         __debugbreak();
       }
-      IEntity::m_sGfxInfo.m_uDecorator = 9 - 7 * iLivePoints / iMaxLivePoints;
+      IEntity::m_sGfxInfo.m_uFitnessBlockIndex = 9 - 7 * iLivePoints / iMaxLivePoints;
     }
   }
   else if ( IEntity::FlagBits(this, (EntityFlag)1024) != 0 )
@@ -411,31 +411,31 @@ struct SGfxObjectInfo *  CSettler::GetGfxInfos(void) {
     {
       v19 = 0;
     }
-    IEntity::m_sGfxInfo.m_uFlags = v19;
+    IEntity::m_sGfxInfo.m_uSelectionBlockIndex = v19;
   }
   if ( IEntity::FlagBits(this, (EntityFlag)0xF00000) != 0 )
   {
     if ( IEntity::FlagBits(this, (EntityFlag)0x100000) != 0 )
     {
-      IEntity::m_sGfxInfo.m_u0 = 32;
+      IEntity::m_sGfxInfo.m_uMagicBlockIndex = 32;
     }
     else if ( IEntity::FlagBits(this, (EntityFlag)0x200000) != 0 )
     {
-      IEntity::m_sGfxInfo.m_u0 = 35;
+      IEntity::m_sGfxInfo.m_uMagicBlockIndex = 35;
     }
     else if ( IEntity::FlagBits(this, (EntityFlag)0x400000) != 0 )
     {
-      IEntity::m_sGfxInfo.m_u0 = 33;
+      IEntity::m_sGfxInfo.m_uMagicBlockIndex = 33;
     }
     else
     {
-      IEntity::m_sGfxInfo.m_u0 = 34;
+      IEntity::m_sGfxInfo.m_uMagicBlockIndex = 34;
     }
   }
-  IEntity::m_sGfxInfo.m_iDistance = this->m_iDistance;
-  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
-  IEntity::m_sGfxInfo.m_iColor = uColor;
-  IEntity::m_sGfxInfo.m_uObjType = this->m_uObjType;
+  IEntity::m_sGfxInfo.m_uDistance = this->m_iDistance;
+  IEntity::m_sGfxInfo.m_bVisible = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_uColor = uColor;
+  IEntity::m_sGfxInfo.m_uType = this->m_uObjType;
   return &IEntity::m_sGfxInfo;
 }
 

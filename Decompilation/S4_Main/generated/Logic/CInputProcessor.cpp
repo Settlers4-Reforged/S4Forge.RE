@@ -4383,7 +4383,7 @@ void  CInputProcessor::ShowPossibleBuildingType(void) {
       s_iPrevMouseHoverY = iMouseHoverY;
       CWorldManager::SetHelperObject(iMouseHoverX, iMouseHoverY, LOBYTE(this->unk_1C) - v8 + 18);
     }
-    CInputProcessor::m_sGfxObj.m_iUnknown = 1;
+    CInputProcessor::m_sGfxObj.m_iId = 1;
     CInputProcessor::m_sGfxObj.m_iX = iMouseHoverX;
     CInputProcessor::m_sGfxObj.m_iY = iMouseHoverY;
     byte_3F1F604 = 1;

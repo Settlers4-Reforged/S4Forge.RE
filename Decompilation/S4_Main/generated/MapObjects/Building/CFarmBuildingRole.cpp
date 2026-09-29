@@ -238,7 +238,7 @@ void  CFarmBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo
   if ( (_BYTE)result != 0 )
   {
     v7 = (unsigned __int8 *)CPileMgr::operator[](this->m_iPileId);
-    CPile::GetPatchGfx((CPile *)v7, a3->m_vPatches2);
+    CPile::GetPatchGfx((CPile *)v7, a3->m_vPatchPiles);
     return 1;
   }
   return result;

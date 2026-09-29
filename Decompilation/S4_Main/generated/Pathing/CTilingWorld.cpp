@@ -7,7 +7,7 @@
 // Decompiled from int __cdecl CTilingWorld::WorldGroundType(int a1)
 int __cdecl CTilingWorld::WorldGroundType(int a1) {
   
-  return m_pWorldGfxMapElements[a1].m_uGroundType;
+  return m_pWorldGfxMapElements[a1].iType;
 }
 
 
@@ -95,7 +95,7 @@ int __cdecl CTilingWorld::WorldIsGroundTypeWater(int a1) {
 // Decompiled from bool __cdecl CTilingWorld::WorldIsWater(int a1)
 bool __cdecl CTilingWorld::WorldIsWater(int a1) {
   
-  return CLandscapeProperties::IsWater(m_pWorldGfxMapElements[a1].m_uGroundType);
+  return CLandscapeProperties::IsWater(m_pWorldGfxMapElements[a1].iType);
 }
 
 
@@ -277,7 +277,7 @@ void __cdecl CTilingWorld::WorldClearBlockedLandFlag(int a1) {
 // Decompiled from void __cdecl CTilingWorld::WorldClearGfxBorderstoneBit(int a1)
 void __cdecl CTilingWorld::WorldClearGfxBorderstoneBit(int a1) {
   
-  m_pWorldGfxMapElements[a1].m_uGfxBits &= ~0x80u;
+  m_pWorldGfxMapElements[a1].iFlags &= ~0x80u;
 }
 
 
@@ -296,7 +296,7 @@ void __cdecl CTilingWorld::WorldSetGfxBorderstoneBit(int a1) {
   int result; // eax
 
   result = a1;
-  m_pWorldGfxMapElements[a1].m_uGfxBits |= 0x80u;
+  m_pWorldGfxMapElements[a1].iFlags |= 0x80u;
   return result;
 }
 

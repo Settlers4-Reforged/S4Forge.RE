@@ -231,8 +231,8 @@ struct SGfxObjectInfo *  CEffects::NextEffect(void) {
   }
   v5 = this->m_sViewPortData.m_iRows[v7][this->m_sViewPortData.m_uU20++];
   rEffect = &this->m_cEffects[v5];
-  CEffects::m_sGfxInfo.m_bIsVisible = 1;
-  CEffects::m_sGfxInfo.m_iZOrdering = 0;
+  CEffects::m_sGfxInfo.m_bVisible = 1;
+  CEffects::m_sGfxInfo.m_uRenderLayer = 0;
   if ( rEffect->m_uVisualizeFunc == VISUALIZE_FUNC_ATTACHED_EFFECT )
   {
     m_iTimeIdxMax = this->m_cEffects[v5].uAngel.m_iTimeIdxMax;

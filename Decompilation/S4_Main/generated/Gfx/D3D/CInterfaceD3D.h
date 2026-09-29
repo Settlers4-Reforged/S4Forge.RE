@@ -36,7 +36,7 @@ public:
     bool  BlitSurfaceToWindow(void);
 
     // address=[0x2f66d00]
-    void  BlitDIBToSurface(struct HWND__ * hWnd, int a2, int cy, struct IDirectDrawSurface4 * a4);
+    void  BlitDIBToSurface(struct HWND__ * _hWnd, int _uWidth, int _uHeight, struct IDirectDrawSurface4 * _pDDSurface);
 
     // address=[0x2f66dc0]
     int  GetGradientFormat(void);
@@ -99,10 +99,10 @@ public:
     void  InitTexturePtr(void);
 
     // address=[0x2f822a0]
-    void  CalcTilingVerticesType1(int a2);
+    void  CalcTilingVerticesType1(int _LandscapeType);
 
     // address=[0x2f823f0]
-    void  CalcTilingVerticesType2(int a2);
+    void  CalcTilingVerticesType2(int _LandscapeType);
 
     // address=[0x2f82540]
     int  AllocateEngineData(int a2);
@@ -117,7 +117,7 @@ public:
     void  RenderScene(bool a2);
 
     // address=[0x2f8a910]
-    int  IsInterface7Available(bool & a2, struct HWND__ * a3);
+    int  IsInterface7Available(bool & _rSuccess, struct HWND__ * a3);
 
     // address=[0x2f8b530]
     int  IsInterface3Available(struct HWND__ * a2);
@@ -136,37 +136,48 @@ public:
 
     // Type information members
 public:
-    _DWORD field_0;
+    _D3DTLVERTEX * D3DVertexPtr;
     IDirectDraw7 * m_pDDraw;
-    struct SurfaceClipper m_sClipper1;
-    struct SurfaceClipper m_sMinimapClipper;
+    SurfaceClipper m_sClipper1;
+    SurfaceClipper m_sMinimapClipper;
     IDirect3D7 * m_pIDirect3D7;
     IDirect3DDevice7 * LandscapeDevice;
     IDirect3DDevice7 * m_pObjectDevice;
     D3DVIEWPORT7 m_sViewport;
     IDirectDraw7 * m_pDDraw7;
-    CSurfaceV7 * LandscapeSurface;
+    CSurface * m_pLandscapeSurface;
     CSurface * m_pCameraWindowSurface;
-    CSurfaceV7 * LandscapeSurface2;
-    CSurfaceV7 * FinalRenderSurface;
-    int field_68;
-    CSurfaceV7 * PrimarySurface;
-    CSurfaceV7 *[44] LandscapeTextureTable;
-    CSurfaceV7 *[2] ObjectTextureTable;
-    CSurfaceV7 *[2] ObjectTextureSystemMemoryTable;
-    CSurfaceV7 * MiniMapSurface;
-    CSurfaceV7 * MiniMapAreaSurface;
-    CSurfaceV7 *[14] m_pGuiSurfaces;
-    CSurfaceV7 * m_pMoveCursorSurface;
-    CSurfaceV7 * m_pZoomCursorSurface;
+    CSurface * m_pLandscapeSurface2;
+    CSurface * m_pFinalRenderSurface;
+    CSurface * m_pTmpSurface;
+    CSurface * m_pPrimarySurface;
+    CSurface *[44] m_pDDTextureSurfaces;
+    CSurface *[2] m_pDDObjectSurfacePtr;
+    CSurface *[2] m_pDDSourceObjectSurfacePtr;
+    CSurface * m_pMiniMapSurface;
+    CSurface * m_pMiniMapAreaSurface;
+    CSurface *[14] m_pDDGuiSurfaces;
+    CSurface * m_pMoveCursorSurface;
+    CSurface * m_pZoomCursorSurface;
     LPDIRECTDRAWSURFACE7[180] m_pCacheSurfaces;
-    int m_uCacheSurfaceCount;
-    struct CCachePageManager *[180] m_pCacheManagers;
-    char m_bInitSoftware;
-    char m_bInitHardware;
-    _BYTE[5] field_71E;
-    char m_bGfxEngineRebuilded;
-    CCachePageManager *[2] CCachePageManager;
+    int m_iNumberOfCachedSurfaces;
+    CCachePageManager *[180] m_pCacheManagers;
+    unsigned __int8 m_bSoftwareRuns;
+    unsigned __int8 m_bHardwareRuns;
+    unsigned __int8[5] m_bAvailableResolutions;
+    unsigned __int8 m_bEngineWasRebuilded;
+    CCachePageManager *[2] m_pcPictureManager;
+    int m_iObjectSceneLock;
+    int m_iLandscapeSceneLock;
+    int m_iGuiSurfaceSize;
+    int m_iSurfaceSize;
+    int m_iCacheRetries;
+    unsigned __int8 m_bDisableRendering;
+    unsigned __int8 m_bHiTextureQuality;
+    unsigned __int8 m_bForceBlt;
+    unsigned __int8 m_bRefreshTextureSurfaces;
+    CFixCursor m_cMoveCursor;
+    CFixCursor m_cZoomCursor;
 
 };
 

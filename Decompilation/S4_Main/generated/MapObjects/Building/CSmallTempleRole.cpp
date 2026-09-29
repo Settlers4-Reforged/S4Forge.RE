@@ -175,7 +175,7 @@ void  CSmallTempleRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo 
   v3 = IEntity::Race(a2);
   ((void (__stdcall *)(int, int, int, int, int))CGfxManager::GetBuildingGfxInfo)((int)a3, v3, v10, 1, (int)this + 76);
   v4 = IEntity::OwnerId(a2);
-  a3->m_iColor = CPlayerManager::Color(v4);
+  a3->m_uColor = CPlayerManager::Color(v4);
   if ( *((_BYTE *)this + 356) != 0 )
   {
     CGfxManager::GetEffectGfxInfo(g_pGfxManager, (struct SGfxObjectInfo *)v12, *((unsigned __int8 *)this + 356), 0, *((unsigned __int8 *)this + 359));
@@ -189,14 +189,14 @@ void  CSmallTempleRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo 
   if ( *((_BYTE *)this + 29) == 1 )
   {
     v6 = CSettlerMgr::operator[](*((unsigned __int16 *)this + 4));
-    CSettler::GetPatchGfx(v6, a3->m_vPatches);
+    CSettler::GetPatchGfx(v6, a3->m_vPatchSettlers);
   }
   v7 = (unsigned __int8 *)CPileMgr::operator[](*((unsigned __int16 *)this + 190));
   result = (CPile *)((int (__thiscall *)(unsigned __int8 *))CPile::IsPatchPile)(v7);
   if ( (_BYTE)result != 0 )
   {
     v9 = (unsigned __int8 *)CPileMgr::operator[](*((unsigned __int16 *)this + 190));
-    return ((CPile *(__thiscall *)(CPile *, struct SGfxPatchObject *))CPile::GetPatchGfx)((CPile *)v9, a3->m_vPatches2);
+    return ((CPile *(__thiscall *)(CPile *, struct SGfxPatchObject *))CPile::GetPatchGfx)((CPile *)v9, a3->m_vPatchPiles);
   }
   return result;
 }

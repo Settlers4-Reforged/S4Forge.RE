@@ -12,27 +12,20 @@
 
 
 // address=[0x2f895d0]
-// Decompiled from void *__thiscall CCacheManager::Reset(CCacheManager *this)
+// Decompiled from void __thiscall CCacheManager::Reset(CCacheManager *this)
 void  CCacheManager::Reset(void) {
   
-  void *result; // eax
-
-  result = memset(this, 0, 131070u);
-  *((_DWORD *)this + 0x8000) = 0;
-  return result;
+  memset(this, 0, 0x1FFFEu);
+  this->m_iUsedCacheTextures = 0;
 }
 
 
 // address=[0x2f89600]
-// Decompiled from char *__thiscall CCacheManager::SetCacheInfos(CCacheManager *this, int a2, char a3, char a4)
-void  CCacheManager::SetCacheInfos(int a2, int a3, int a4) {
+// Decompiled from void __thiscall CCacheManager::SetCacheInfos(CCacheManager *this, int _iIndex, int _iInSurfaceNr, int _iAsObjectNr)
+void  CCacheManager::SetCacheInfos(int _iIndex, int _iInSurfaceNr, int _iAsObjectNr) {
   
-  char *result; // eax
-
-  *((_BYTE *)this + 2 * a2) = a3;
-  result = (char *)this + 2 * a2;
-  result[1] = a4;
-  return result;
+  this->m_uSurfaceIdx[_iIndex][0] = _iInSurfaceNr;
+  this->m_uSurfaceIdx[_iIndex][1] = _iAsObjectNr;
 }
 
 
@@ -40,7 +33,7 @@ void  CCacheManager::SetCacheInfos(int a2, int a3, int a4) {
 // Decompiled from int __thiscall CCacheManager::GetEntryIdx(CCacheManager *this, int a2)
 int  CCacheManager::GetEntryIdx(int a2) {
   
-  return *((unsigned __int8 *)this + 2 * a2 + 1);
+  return this->m_uSurfaceIdx[a2][1];
 }
 
 
@@ -48,7 +41,7 @@ int  CCacheManager::GetEntryIdx(int a2) {
 // Decompiled from int __thiscall CCacheManager::GetSurfaceIdx(CCacheManager *this, int a2)
 int  CCacheManager::GetSurfaceIdx(int a2) {
   
-  return *((unsigned __int8 *)this + 2 * a2);
+  return this->m_uSurfaceIdx[a2][0];
 }
 
 
@@ -56,7 +49,7 @@ int  CCacheManager::GetSurfaceIdx(int a2) {
 // Decompiled from int __thiscall CCacheManager::GetUsedCacheTextures(CCacheManager *this)
 int  CCacheManager::GetUsedCacheTextures(void) {
   
-  return *((_DWORD *)this + 0x8000);
+  return this->m_iUsedCacheTextures;
 }
 
 
@@ -64,7 +57,7 @@ int  CCacheManager::GetUsedCacheTextures(void) {
 // Decompiled from bool __thiscall CCacheManager::IsGfxCached(CCacheManager *this, int a2)
 bool  CCacheManager::IsGfxCached(int a2) {
   
-  return *((_BYTE *)this + 2 * a2) != 0;
+  return this->m_uSurfaceIdx[a2][0] != 0;
 }
 
 
@@ -72,11 +65,8 @@ bool  CCacheManager::IsGfxCached(int a2) {
 // Decompiled from CCacheManager *__thiscall CCacheManager::SetUsedCacheTextures(CCacheManager *this, int a2)
 void  CCacheManager::SetUsedCacheTextures(int a2) {
   
-  CCacheManager *result; // eax
-
-  result = this;
-  *((_DWORD *)this + 0x8000) = a2;
-  return result;
+  this->m_iUsedCacheTextures = a2;
+  return this;
 }
 
 

@@ -12,7 +12,7 @@ public:
     void  Reset(void);
 
     // address=[0x2f89600]
-    void  SetCacheInfos(int a2, int a3, int a4);
+    void  SetCacheInfos(int _iIndex, int _iInSurfaceNr, int _iAsObjectNr);
 
     // address=[0x2f99740]
     int  GetEntryIdx(int a2);
@@ -28,6 +28,11 @@ public:
 
     // address=[0x2f99830]
     void  SetUsedCacheTextures(int a2);
+
+    // Type information members
+public:
+    unsigned __int8[65535][2] m_uSurfaceIdx;
+    int m_iUsedCacheTextures;
 
 };
 

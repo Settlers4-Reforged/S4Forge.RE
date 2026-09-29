@@ -1202,10 +1202,10 @@ void  IBuildingRole::MiniFlag(struct SGfxObjectInfo & _rGfxInfo, int _iPlayer) {
     iFrame = s_iMiniFlagFrameCount;
     v4 = CPlayerManager::Color(_iPlayer);
     CGfxManager::GetObjectGfxInfo(g_pGfxManager, &a2, v4 + 544, iFrame, iAmount);
-    _rGfxInfo->m_pMiniFlagGfxData = a2.m_pGfxData;
-    _rGfxInfo->m_pMiniFlagPalData = a2.m_pPalData;
-    _rGfxInfo->m_iOffsetX = this->m_pBuildingInfo->m_iMiniFlagXOffset;
-    _rGfxInfo->m_iOffsetY = this->m_pBuildingInfo->m_iMiniFlagYOffset;
+    _rGfxInfo->m_pMiniFlagGfxData = a2.m_pLayerBlock;
+    _rGfxInfo->m_pMiniFlagPalData = a2.m_pPaletteBlock;
+    _rGfxInfo->m_iPreferedOffsetX = this->m_pBuildingInfo->m_iMiniFlagXOffset;
+    _rGfxInfo->m_iPreferedOffsetY = this->m_pBuildingInfo->m_iMiniFlagYOffset;
   }
 }
 

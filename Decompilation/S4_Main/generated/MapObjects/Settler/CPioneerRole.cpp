@@ -826,7 +826,7 @@ bool  CPioneerRole::CheckLand(int a2, int a3, class CSettler * a4, bool a5) {
   }
   v12 = CAlliances::AllianceId(v14);
   v9 = IEntity::OwnerId(a4);
-  return v12 != CAlliances::AllianceId(v9) && (CWorldManager::GetLandscapePtr()[v16].m_uGfxBits & 0x80u) != 0;
+  return v12 != CAlliances::AllianceId(v9) && (CWorldManager::GetLandscapePtr()[v16].iFlags & 0x80u) != 0;
 }
 
 

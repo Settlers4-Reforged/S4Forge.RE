@@ -112,8 +112,8 @@ void  CGfxManager::GetGuiGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3) {
   }
   if ( a3 <= this->m_pFileGfxFrames[iGfxFile].m_iCount )
   {
-    a2->m_pGfxData = (UGfxData *)this->m_pFileGfxFrames[iGfxFile].m_pItem[a3 + 5];
-    a2->m_pPalData = this->m_pFilePalIndex[iGfxFile][a3 + 5];
+    a2->m_pLayerBlock = (UGfxData *)this->m_pFileGfxFrames[iGfxFile].m_pItem[a3 + 5];
+    a2->m_pPaletteBlock = this->m_pFilePalIndex[iGfxFile][a3 + 5];
     sprintf(sGfxDebugBuffer, "Gui Element: %u", a3);
     CGfxManager::Debug_Check_LayerBlock(this, iGfxFile, a2);
   }
@@ -143,8 +143,8 @@ void  CGfxManager::GetUserLogoGfxInfo(struct SGfxObjectInfo & userLogoGfxInfo, u
     __debugbreak();
   }
   logoIndex = logoNr - 1;
-  userLogoGfxInfo->m_pGfxData = (UGfxData *)this->m_pFileGfxFrames[1].m_pItem[2 * logoIndex + 5];
-  userLogoGfxInfo->m_pPalData = this->m_pFilePalIndex[1][2 * logoIndex + 5];
+  userLogoGfxInfo->m_pLayerBlock = (UGfxData *)this->m_pFileGfxFrames[1].m_pItem[2 * logoIndex + 5];
+  userLogoGfxInfo->m_pPaletteBlock = this->m_pFilePalIndex[1][2 * logoIndex + 5];
   sprintf(sGfxDebugBuffer, "Logo Player Nr: %u, Direction: %u", logoIndex, 0);
   CGfxManager::Debug_Check_LayerBlock(this, 1u, userLogoGfxInfo);
 }
@@ -154,12 +154,13 @@ void  CGfxManager::GetUserLogoGfxInfo(struct SGfxObjectInfo & userLogoGfxInfo, u
 // Decompiled from void __thiscall CGfxManager::GetBuildingGfxInfo(CGfxManager *this, SGfxObjectInfo *_rInfo, uint _iRace, uint _iBuilding, uint _iFlags, CGfxManager::SBuildingFX *_argBuildingFX)
 void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned int _iRace, unsigned int _iBuilding, unsigned int _iFlags, struct SBuildingFX * _argBuildingFX) {
   
+  signed int v6; // [esp+4h] [ebp-24h]
   unsigned int iGfxFile; // [esp+20h] [ebp-8h]
   unsigned int i; // [esp+24h] [ebp-4h]
   uint iBuilding; // [esp+38h] [ebp+10h]
 
   iGfxFile = _iRace + 10;
-  if ( this->m_pFileGfxJobs[_iRace + 10].m_pItem == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1330, "m_pFileGfxJobs[ %u ].pItem", iGfxFile) == 1 )
+  if ( this->m_pFileGfxJobs[_iRace + 10].m_pItem == nullptr && BBSupportDbgReportF(2, "GfxManager.cpp", 1330, "m_pFileGfxJobs[ %u ].pItem", iGfxFile) == 1 )
   {
     __debugbreak();
   }
@@ -168,32 +169,32 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned i
     __debugbreak();
   }
   iBuilding = _iBuilding >= this->m_pFileGfxJobs[iGfxFile].m_iCount ? 0 : _iBuilding;
-  dword_3ECDD6C = (int)this->m_pFileGfxJobs[iGfxFile].m_pItem[iBuilding + 5];
+  s_pBuildingGroupJobs = (int ***)this->m_pFileGfxJobs[iGfxFile].m_pItem->m_pGfxData[iBuilding];
   if ( (_iFlags & 1) != 0 && (_iFlags & 2) != 0 )
   {
-    dword_3ECDD74 = *(_DWORD *)(dword_3ECDD6C + 4);
-    dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-    _rInfo->m_pGfxData = (UGfxData *)dword_3ECDD70;
-    dword_3ECDD74 = *(_DWORD *)dword_3ECDD6C;
-    dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-    _rInfo->m_pBuildLayerGfxData = dword_3ECDD70;
+    s_pBuildingGfxDirections = s_pBuildingGroupJobs[1];
+    s_pBuildingGfxData = *s_pBuildingGfxDirections;
+    _rInfo->m_pLayerBlock = (UGfxData *)s_pBuildingGfxData;
+    s_pBuildingGfxDirections = *s_pBuildingGroupJobs;
+    s_pBuildingGfxData = *s_pBuildingGfxDirections;
+    _rInfo->pBuildLayer = s_pBuildingGfxData;
   }
   else
   {
     if ( (_iFlags & 1) != 0 )
     {
-      dword_3ECDD74 = *(_DWORD *)(dword_3ECDD6C + 4);
-      dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-      _rInfo->m_pGfxData = (UGfxData *)dword_3ECDD70;
+      s_pBuildingGfxDirections = s_pBuildingGroupJobs[1];
+      s_pBuildingGfxData = *s_pBuildingGfxDirections;
+      _rInfo->m_pLayerBlock = (UGfxData *)s_pBuildingGfxData;
     }
     if ( (_iFlags & 2) != 0 )
     {
-      dword_3ECDD74 = *(_DWORD *)dword_3ECDD6C;
-      dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-      _rInfo->m_pGfxData = (UGfxData *)dword_3ECDD70;
+      s_pBuildingGfxDirections = *s_pBuildingGroupJobs;
+      s_pBuildingGfxData = *s_pBuildingGfxDirections;
+      _rInfo->m_pLayerBlock = (UGfxData *)s_pBuildingGfxData;
     }
   }
-  if ( _argBuildingFX != 0 )
+  if ( _argBuildingFX != nullptr )
   {
     for ( i = 0;
           i < 10;
@@ -211,23 +212,24 @@ void  CGfxManager::GetBuildingGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned i
           __debugbreak();
         }
         _argBuildingFX[i].m_iFrame &= (_argBuildingFX[i].m_iFrame >= CGfxManager::GetBuildingJobFrameCount(this, _iRace, _argBuildingFX[i].m_iBuildingDefine)) - 1;
-        dword_3ECDD70 = (int)this->m_pFileGfxDirections[iGfxFile].m_pItem[_argBuildingFX[i].m_iBuildingDefine + 5];
-        dword_3ECDD74 = *(_DWORD *)(dword_3ECDD70 + 4 * _argBuildingFX[i].m_iFrame);
-        _rInfo->m_vFXFrameData[i] = dword_3ECDD74;
+        s_pBuildingGfxData = this->m_pFileGfxDirections[iGfxFile].m_pItem->m_pGfxData[_argBuildingFX[i].m_iBuildingDefine];
+        s_pBuildingGfxDirections = *((int ***)s_pBuildingGfxData + _argBuildingFX[i].m_iFrame);
+        v6 = (signed int)((int)s_pBuildingGfxData + 4 * _argBuildingFX[i].m_iFrame - (unsigned int)this->m_pFileGfxFrames[iGfxFile].m_pItem->m_pGfxData) >> 2;
+        _rInfo->m_vBuildingPatches[i] = (UGfxData *)s_pBuildingGfxDirections;
       }
     }
   }
   if ( (_iFlags & 8) != 0 )
   {
-    dword_3ECDD74 = *(_DWORD *)(dword_3ECDD6C + 8);
-    dword_3ECDD70 = *(_DWORD *)dword_3ECDD74;
-    _rInfo->m_vFXFrameData[5] = dword_3ECDD70;
+    s_pBuildingGfxDirections = s_pBuildingGroupJobs[2];
+    s_pBuildingGfxData = *s_pBuildingGfxDirections;
+    _rInfo->m_vBuildingPatches[5] = (UGfxData *)s_pBuildingGfxData;
   }
-  if ( this->m_pFilePalIndex[iGfxFile] == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1407, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
+  if ( this->m_pFilePalIndex[iGfxFile] == nullptr && BBSupportDbgReportF(2, "GfxManager.cpp", 1407, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
   {
     __debugbreak();
   }
-  _rInfo->m_pPalData = this->m_pFilePalIndex[iGfxFile][iBuilding + 5];
+  _rInfo->m_pPaletteBlock = (char *)this->m_pFilePalIndex[iGfxFile]->m_vGfxDataOffset[iBuilding];
   sprintf(sGfxDebugBuffer, "Building Race: %u, Building: %u, Flags: 0x%x", _iRace, iBuilding, _iFlags);
   CGfxManager::Debug_Check_LayerBlock(this, iGfxFile, _rInfo);
 }
@@ -278,12 +280,12 @@ void  CGfxManager::GetObjectGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
     __debugbreak();
   }
   _iAmounta = _iAmount - 1;
-  a2->m_pGfxData = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[s_iActiveGfx].m_pItem[v6 + 5][4 * _iAmounta] + 4 * v7);
+  a2->m_pLayerBlock = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[s_iActiveGfx].m_pItem[v6 + 5][4 * _iAmounta] + 4 * v7);
   if ( this->m_pFilePalIndex[s_iActiveGfx] == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1446, "m_pFilePalIndex[ %u ]", s_iActiveGfx) == 1 )
   {
     __debugbreak();
   }
-  a2->m_pPalData = this->m_pFilePalIndex[s_iActiveGfx][v6 + 5];
+  a2->m_pPaletteBlock = this->m_pFilePalIndex[s_iActiveGfx][v6 + 5];
   sprintf(sGfxDebugBuffer, "Object: %u, Frame: %u, Amount: %u", v6, v7, _iAmounta);
   CGfxManager::Debug_Check_LayerBlock(this, s_iActiveGfx, a2);
 }
@@ -324,15 +326,15 @@ void  CGfxManager::GetSettlerGfxInfo(struct SGfxObjectInfo & _rInfo, unsigned in
     __debugbreak();
   }
   iFrame = _iFrame >= CGfxManager::GetSettlerJobFrameCount(this, _iRace, iJob, 2u) ? 0 : _iFrame;
-  dword_3ECDD5C = this->m_pFileGfxJobs[iGfxFile].m_pItem->20[iJob];
+  dword_3ECDD5C = (int *)this->m_pFileGfxJobs[iGfxFile].m_pItem->m_vGfxDataOffset[iJob];
   dword_3ECDD60 = (int *)dword_3ECDD5C[_iDir];
   dword_3ECDD5C = (int *)dword_3ECDD60[iFrame];
-  _rInfo->m_pGfxData = (UGfxData *)dword_3ECDD5C;
+  _rInfo->m_pLayerBlock = (UGfxData *)dword_3ECDD5C;
   if ( this->m_pFilePalIndex[iGfxFile] == nullptr && BBSupportDbgReportF(2, "GfxManager.cpp", 985, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
   {
     __debugbreak();
   }
-  _rInfo->m_pPalData = this->m_pFilePalIndex[iGfxFile]->?[iJob];
+  _rInfo->m_pPaletteBlock = (char *)this->m_pFilePalIndex[iGfxFile]->m_vGfxDataOffset[iJob];
   sprintf(sGfxDebugBuffer, "Settler Race: %u, Job: %u, Frame: %u, Direction: %u", _iRace, iJob, iFrame, _iDir);
   CGfxManager::Debug_Check_LayerBlock(this, iGfxFile, _rInfo);
 }
@@ -425,12 +427,12 @@ void  CGfxManager::GetPileGfxInfo(struct SGfxObjectInfo & a2, unsigned int iPile
     __debugbreak();
   }
   v8 = a5 >= CGfxManager::GetPileFrameCount(iPile) ? 0 : a5;
-  a2->m_pGfxData = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[s_iActivePileGfx].m_pItem[iPile + 5][4 * _iAmountb] + 4 * v8);
+  a2->m_pLayerBlock = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[s_iActivePileGfx].m_pItem[iPile + 5][4 * _iAmountb] + 4 * v8);
   if ( this->m_pFilePalIndex[s_iActivePileGfx] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 1484, "m_pFilePalIndex[ iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
-  a2->m_pPalData = this->m_pFilePalIndex[s_iActivePileGfx][iPile + 5];
+  a2->m_pPaletteBlock = this->m_pFilePalIndex[s_iActivePileGfx][iPile + 5];
   sprintf(sGfxDebugBuffer, "Pile: %u, Amount: %u, Frame: %u", iPile, _iAmountb, v8);
   CGfxManager::Debug_Check_LayerBlock(this, s_iActivePileGfx, a2);
 }
@@ -494,12 +496,12 @@ void  CGfxManager::GetVehicleGfxInfo(struct SGfxObjectInfo & a2, unsigned int iR
     __debugbreak();
   }
   _iFrame &= (_iFrame >= CGfxManager::GetVehicleFrameCount(this, iRace, iJob)) - 1;
-  a2->m_pGfxData = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[iGfxFile].m_pItem[iJob + 5][4 * _iDir] + 4 * _iFrame);
+  a2->m_pLayerBlock = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[iGfxFile].m_pItem[iJob + 5][4 * _iDir] + 4 * _iFrame);
   if ( this->m_pFilePalIndex[iGfxFile] == 0 && BBSupportDbgReportF(2, "GfxManager.cpp", 1555, "m_pFilePalIndex[ %u ]", iGfxFile) == 1 )
   {
     __debugbreak();
   }
-  a2->m_pPalData = this->m_pFilePalIndex[iGfxFile][iJob + 5];
+  a2->m_pPaletteBlock = this->m_pFilePalIndex[iGfxFile][iJob + 5];
   if ( _iJobPatch != 0 )
   {
     if ( _iJobPatch >= this->m_pFileGfxJobs[iGfxFile].m_iCount && BBSupportDbgReport(2, "GfxManager.cpp", 1561, "_iJobPatch < m_pFileGfxJobs[ iGfxFile ].iCount") == 1 )
@@ -512,8 +514,8 @@ void  CGfxManager::GetVehicleGfxInfo(struct SGfxObjectInfo & a2, unsigned int iR
       __debugbreak();
     }
     _iFrame &= (_iFrame >= CGfxManager::GetVehicleFrameCount(this, iRace, _iJobPatch)) - 1;
-    a2->m_pPatchGfxData = *(char **)(*(_DWORD *)&this->m_pFileGfxJobs[iGfxFile].m_pItem[_iJobPatch + 5][4 * _iDir] + 4 * _iFramePatch);
-    a2->m_pPatchPalData = this->m_pFilePalIndex[iGfxFile][_iJobPatch + 5];
+    a2->m_pVehiclePatch = *(char **)(*(_DWORD *)&this->m_pFileGfxJobs[iGfxFile].m_pItem[_iJobPatch + 5][4 * _iDir] + 4 * _iFramePatch);
+    a2->m_pVehiclePatchPalette = this->m_pFilePalIndex[iGfxFile][_iJobPatch + 5];
   }
   sprintf(sGfxDebugBuffer, "Vehicle Race: %u, Job: %u, Direction: %u, Frame: %u, JobPatch: %u, FramePatch: %u", iRace, iJob, _iDir, _iFrame, _iJobPatch, _iFramePatch);
   CGfxManager::Debug_Check_LayerBlock(this, iGfxFile, a2);
@@ -561,12 +563,12 @@ void  CGfxManager::GetAnimalGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3,
     BBSupportTracePrintF(2, "GfxManager: Invalid Animal Job#%d for Direction#%d, Frame#%d", iAnimal, _iDirection, frame);
     iAnimal = 0;
   }
-  a2->m_pGfxData = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[8].m_pItem[iAnimal + 5][4 * _iDirection] + 4 * frame);
+  a2->m_pLayerBlock = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[8].m_pItem[iAnimal + 5][4 * _iDirection] + 4 * frame);
   if ( this->m_pFilePalIndex[8] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 1616, "m_pFilePalIndex[ iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
-  a2->m_pPalData = this->m_pFilePalIndex[8][iAnimal + 5];
+  a2->m_pPaletteBlock = this->m_pFilePalIndex[8][iAnimal + 5];
   sprintf(sGfxDebugBuffer, "Animal %u, Direction: %u, Frame: %u", iAnimal, _iDirection, frame);
   CGfxManager::Debug_Check_LayerBlock(this, 8u, a2);
 }
@@ -654,12 +656,12 @@ void  CGfxManager::GetEffectGfxInfo(struct SGfxObjectInfo & a2, unsigned int _iJ
     __debugbreak();
   }
   _iFramea = _iFrame >= CGfxManager::GetEffectFrameCount(this, iJob) ? 0 : _iFrame;
-  a2->m_pGfxData = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[v9].m_pItem[v5 + 5][4 * _iDir] + 4 * _iFramea);
+  a2->m_pLayerBlock = *(UGfxData **)(*(_DWORD *)&this->m_pFileGfxJobs[v9].m_pItem[v5 + 5][4 * _iDir] + 4 * _iFramea);
   if ( this->m_pFilePalIndex[v9] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 1715, "m_pFilePalIndex[ iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
-  a2->m_pPalData = this->m_pFilePalIndex[v9][v5 + 5];
+  a2->m_pPaletteBlock = this->m_pFilePalIndex[v9][v5 + 5];
   sprintf(sGfxDebugBuffer, "Effect: %u, Direction: %u, Frame: %u", iJob, _iDir, _iFramea);
   CGfxManager::Debug_Check_LayerBlock(this, v9, a2);
 }
@@ -680,12 +682,12 @@ void  CGfxManager::GetAccessoryGfxInfo(struct SGfxObjectInfo & a2, unsigned int 
     __debugbreak();
   }
   _iAccessorya = _iAccessory >= 0x60 ? 0 : _iAccessory;
-  a2->m_pGfxData = **(UGfxData ***)this->m_pFileGfxJobs[s_iActiveAccGfx].m_pItem[_iAccessorya + 5];
+  a2->m_pLayerBlock = **(UGfxData ***)this->m_pFileGfxJobs[s_iActiveAccGfx].m_pItem[_iAccessorya + 5];
   if ( this->m_pFilePalIndex[s_iActiveAccGfx] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 1649, "m_pFilePalIndex[ iGfxFile ]") == 1 )
   {
     __debugbreak();
   }
-  a2->m_pPalData = this->m_pFilePalIndex[s_iActiveAccGfx][_iAccessorya + 5];
+  a2->m_pPaletteBlock = this->m_pFilePalIndex[s_iActiveAccGfx][_iAccessorya + 5];
   sprintf(sGfxDebugBuffer, "Accessory: %u", _iAccessorya);
   CGfxManager::Debug_Check_LayerBlock(this, s_iActiveAccGfx, a2);
 }
@@ -799,9 +801,9 @@ void  CGfxManager::GetBoundingBox(struct SGfxBoundingBox & a2, unsigned int a3, 
     case SETTLER_OBJ:
       CGfxManager::GetSettlerGfxInfo(this, &v11, a4, a5, 1u, 0);
       v9 = FLOAT_25_0;
-      v8 = (float)(unsigned __int8)v11.m_pGfxData->m_sByte.m_iHeight;
+      v8 = (float)(unsigned __int8)v11.m_pLayerBlock->m_sByte.m_iHeight;
       v7 = 25.0 / 2.0;
-      v6 = (float)v11.m_pGfxData->m_sByte.m_iTop;
+      v6 = (float)v11.m_pLayerBlock->m_sByte.m_iTop;
       break;
     case SHIP_OBJ:
     case CATAPULT_OBJ:
@@ -814,10 +816,10 @@ void  CGfxManager::GetBoundingBox(struct SGfxBoundingBox & a2, unsigned int a3, 
       {
         CGfxManager::GetVehicleGfxInfo(this, &v11, a4, a5, 0, 0, 0, 0);
       }
-      v9 = (float)v11.m_pGfxData->m_sShort.m_iWidth;
-      v8 = (float)v11.m_pGfxData->m_sShort.m_iHeight;
-      v7 = (float)(__int16)v11.m_pGfxData->m_sShort.m_iLeft;
-      v6 = (float)(__int16)v11.m_pGfxData->m_sShort.m_iTop;
+      v9 = (float)v11.m_pLayerBlock->m_sShort.m_iWidth;
+      v8 = (float)v11.m_pLayerBlock->m_sShort.m_iHeight;
+      v7 = (float)(__int16)v11.m_pLayerBlock->m_sShort.m_iLeft;
+      v6 = (float)(__int16)v11.m_pLayerBlock->m_sShort.m_iTop;
       break;
     default:
       break;
@@ -1258,12 +1260,12 @@ void  CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, un
     dword_3ECDD78 = (int)this->m_pFileGfxJobs[a3].m_pItem[a4 + 5];
     dword_3ECDD7C = *(_DWORD *)(dword_3ECDD78 + 4 * a5);
     dword_3ECDD78 = *(_DWORD *)(dword_3ECDD7C + 4 * a6);
-    a2->m_pGfxData = (UGfxData *)dword_3ECDD78;
+    a2->m_pLayerBlock = (UGfxData *)dword_3ECDD78;
     if ( this->m_pFilePalIndex[a3] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 2454, "m_pFilePalIndex[ _iGfxFile ]") == 1 )
     {
       __debugbreak();
     }
-    a2->m_pPalData = this->m_pFilePalIndex[a3][a4 + 5];
+    a2->m_pPaletteBlock = this->m_pFilePalIndex[a3][a4 + 5];
   }
   else
   {
@@ -1271,13 +1273,13 @@ void  CGfxManager::GetRawGfxInfo(struct SGfxObjectInfo & a2, unsigned int a3, un
     dword_3ECDD7C = *(_DWORD *)(dword_3ECDD78 + 4 * a6);
     v11 = dword_3ECDD78 + 4 * a6;
     v10 = (signed int)(v11 - (unsigned int)(this->m_pFileGfxFrames[a3].m_pItem + 5)) >> 2;
-    a2->m_pGfxData = (UGfxData *)dword_3ECDD7C;
+    a2->m_pLayerBlock = (UGfxData *)dword_3ECDD7C;
     if ( this->m_pFilePalIndex[a3] == 0 && BBSupportDbgReport(2, "GfxManager.cpp", 2439, "m_pFilePalIndex[ _iGfxFile ]") == 1 )
     {
       __debugbreak();
     }
     CGfxManager::GetImageInfo(this, a3, v10, &v9, (unsigned int *)&v6, (unsigned int *)&v7, &v8);
-    a2->m_pPalData = this->m_pFilePalIndex[a3][v9 + 5];
+    a2->m_pPaletteBlock = this->m_pFilePalIndex[a3][v9 + 5];
   }
 }
 
@@ -2144,12 +2146,12 @@ bool  CGfxManager::LoadGilFile(unsigned int nGfxFile, unsigned int _iFileVersion
           i < iEntryCount;
           ++i )
     {
-      iGfxOffset = this->m_pFileGfxFrames[nGfxFile].m_pItem->?[i];
+      iGfxOffset = this->m_pFileGfxFrames[nGfxFile].m_pItem->m_vGfxDataOffset[i];
       if ( iGfxOffset == 0 )
       {
         iGfxOffset = 20;
       }
-      this->m_pFileGfxFrames[nGfxFile].m_pItem->?[i] = &pPileGfx[iGfxOffset];
+      this->m_pFileGfxFrames[nGfxFile].m_pItem->m_vGfxDataOffset[i] = (int)&pPileGfx[iGfxOffset];
     }
     v17 = 1;
     v22 = -1;
@@ -2211,12 +2213,12 @@ bool  CGfxManager::LoadDilFile(unsigned int _iGfxFile, unsigned int a4) {
           i < v14;
           ++i )
     {
-      iOffset = this->m_pFileGfxDirections[_iGfxFile].m_pItem->?[i];
+      iOffset = this->m_pFileGfxDirections[_iGfxFile].m_pItem->m_vGfxDataOffset[i];
       if ( iOffset == 0 )
       {
         iOffset = 20;
       }
-      this->m_pFileGfxDirections[_iGfxFile].m_pItem->?[i] = &pGfxData[iOffset];
+      this->m_pFileGfxDirections[_iGfxFile].m_pItem->m_vGfxDataOffset[i] = (int)&pGfxData[iOffset];
     }
     v17 = 1;
     v22 = -1;
@@ -2278,12 +2280,12 @@ bool  CGfxManager::LoadJilFile(unsigned int nGfxFile, unsigned int a4) {
           i < iCount;
           ++i )
     {
-      iJobOffset = this->m_pFileGfxJobs[nGfxFile].m_pItem->?[i];
+      iJobOffset = this->m_pFileGfxJobs[nGfxFile].m_pItem->m_vGfxDataOffset[i];
       if ( iJobOffset == 0 )
       {
         iJobOffset = 20;
       }
-      this->m_pFileGfxJobs[nGfxFile].m_pItem->?[i] = &pGfxData[iJobOffset];
+      this->m_pFileGfxJobs[nGfxFile].m_pItem->m_vGfxDataOffset[i] = (int)&pGfxData[iJobOffset];
     }
     v17 = 1;
     v22 = -1;
@@ -2841,23 +2843,23 @@ void  CGfxManager::Debug_Check_LayerBlock(unsigned int _iGfxFile, struct SGfxObj
   {
     __debugbreak();
   }
-  if ( (a3->m_pGfxData < (UGfxData *)this->m_sFileGfx[_iGfxFile].pFileGfx || a3->m_pGfxData >= (UGfxData *)&this->m_sFileGfx[_iGfxFile].pFileGfx[this->m_sFileGfx[_iGfxFile].iLength]) && BBSupportDbgReportF(2, "GfxManager.cpp", 87, "GfxFile: %u, Base: 0x%x, Len: 0x%x, Access: 0x%x\n%s", _iGfxFile, this->m_sFileGfx[_iGfxFile].pFileGfx, this->m_sFileGfx[_iGfxFile].iLength, a3->m_pGfxData, sGfxDebugBuffer) == 1 )
+  if ( (a3->m_pLayerBlock < (UGfxData *)this->m_sFileGfx[_iGfxFile].pFileGfx || a3->m_pLayerBlock >= (UGfxData *)&this->m_sFileGfx[_iGfxFile].pFileGfx[this->m_sFileGfx[_iGfxFile].iLength]) && BBSupportDbgReportF(2, "GfxManager.cpp", 87, "GfxFile: %u, Base: 0x%x, Len: 0x%x, Access: 0x%x\n%s", _iGfxFile, this->m_sFileGfx[_iGfxFile].pFileGfx, this->m_sFileGfx[_iGfxFile].iLength, a3->m_pLayerBlock, sGfxDebugBuffer) == 1 )
   {
     __debugbreak();
   }
-  if ( (a3->m_pPalData < this->m_sFilePal[_iGfxFile].pFileGfx || a3->m_pPalData >= &this->m_sFilePal[_iGfxFile].pFileGfx[this->m_sFilePal[_iGfxFile].iLength]) && BBSupportDbgReportF(2, "GfxManager.cpp", 98, "PalFile: %u, Base: 0x%x, Len: 0x%x, Access: 0x%x\n%s", _iGfxFile, this->m_sFilePal[_iGfxFile].pFileGfx, this->m_sFilePal[_iGfxFile].iLength, a3->m_pPalData, sGfxDebugBuffer) == 1 )
+  if ( (a3->m_pPaletteBlock < this->m_sFilePal[_iGfxFile].pFileGfx || a3->m_pPaletteBlock >= &this->m_sFilePal[_iGfxFile].pFileGfx[this->m_sFilePal[_iGfxFile].iLength]) && BBSupportDbgReportF(2, "GfxManager.cpp", 98, "PalFile: %u, Base: 0x%x, Len: 0x%x, Access: 0x%x\n%s", _iGfxFile, this->m_sFilePal[_iGfxFile].pFileGfx, this->m_sFilePal[_iGfxFile].iLength, a3->m_pPaletteBlock, sGfxDebugBuffer) == 1 )
   {
     __debugbreak();
   }
   if ( _iGfxFile < 20 || _iGfxFile > 29 )
   {
-    iWidth = *(__int16 *)a3->m_pGfxData;
-    iHeight = (__int16)a3->m_pGfxData->m_sShort.m_iHeight;
+    iWidth = *(__int16 *)a3->m_pLayerBlock;
+    iHeight = (__int16)a3->m_pLayerBlock->m_sShort.m_iHeight;
   }
   else
   {
-    iWidth = a3->m_pGfxData->m_sByte.m_iWidth;
-    iHeight = a3->m_pGfxData->m_sByte.m_iHeight;
+    iWidth = a3->m_pLayerBlock->m_sByte.m_iWidth;
+    iHeight = a3->m_pLayerBlock->m_sByte.m_iHeight;
   }
   if ( _iGfxFile != 0 && _iGfxFile != 9 && _iGfxFile != 19 && _iGfxFile != 29 && _iGfxFile != 18 && _iGfxFile != 28 && _iGfxFile != 39 && _iGfxFile != 40 && (iWidth > 512 || iHeight > 512) && BBSupportDbgReportF(2, "GfxManager.cpp", 125, "Width or height > 512! [%s]", sGfxDebugBuffer) == 1 )
   {

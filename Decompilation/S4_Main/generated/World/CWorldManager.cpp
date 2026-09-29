@@ -1043,7 +1043,7 @@ void __cdecl CWorldManager::LoadGfxData(class S4::CMapFile & a1, int a2, int _iW
       }
       CWorldManager::StartUpOwner(iTileId, iOwner);
       iOccupied = pMapElements->m_iOccupied;
-      if ( (GfxMapElements->m_uGradient & 0x40) != 0 )
+      if ( (GfxMapElements->iShading & 0x40) != 0 )
       {
         iOccupied |= 4u;
       }
@@ -1051,11 +1051,11 @@ void __cdecl CWorldManager::LoadGfxData(class S4::CMapFile & a1, int a2, int _iW
       {
         CWorldManager::SetMoveCostsBits(iTileId, 7);
       }
-      else if ( GfxMapElements->m_uGroundType == GROUND_GRASS_DUSTY )
+      else if ( GfxMapElements->iType == GROUND_GRASS_DUSTY )
       {
         CWorldManager::SetMoveCostsBits(iTileId, 1);
       }
-      else if ( GfxMapElements->m_uGroundType == GROUND_GRASS_PAVEMENT )
+      else if ( GfxMapElements->iType == GROUND_GRASS_PAVEMENT )
       {
         CWorldManager::SetMoveCostsBits(iTileId, 0);
         CWorldManager::SetMoveCount(iTileId, 15);

@@ -8,14 +8,14 @@
 bool  CRegistry::ExistsHLMKey(char const * lpSubKey) {
   
   HKEY phkResult; // [esp+4h] [ebp-8h] BYREF
-  LSTATUS; // [esp+8h] [ebp-4h]
+  LSTATUS v3; // [esp+8h] [ebp-4h]
 
-  if ( lpSubKey == 0 || *lpSubKey == 0 )
+  if ( lpSubKey == nullptr || *lpSubKey == 0 )
   {
     return 0;
   }
-   = RegOpenKeyExA(HKEY_LOCAL_MACHINE, lpSubKey, 0, 0x20019u, &phkResult);
-  if (  != 0 )
+  v3 = RegOpenKeyExA(HKEY_LOCAL_MACHINE, lpSubKey, 0, 0x20019u, &phkResult);
+  if ( v3 != 0 )
   {
     return 0;
   }

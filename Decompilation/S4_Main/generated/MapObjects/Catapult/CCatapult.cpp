@@ -495,8 +495,8 @@ struct SGfxObjectInfo *  CCatapult::GetGfxInfos(void) {
   CWheeler::GetGfxInfos((int)this);
   if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) != 0 )
   {
-    IEntity::m_sGfxInfo.m_uDecorator = CCatapult::GetHealthDisplayID(this);
-    IEntity::m_sGfxInfo.m_u0 = CCatapult::GetAmmoDisplayID((IEntity *)this);
+    IEntity::m_sGfxInfo.m_uFitnessBlockIndex = CCatapult::GetHealthDisplayID(this);
+    IEntity::m_sGfxInfo.m_uMagicBlockIndex = CCatapult::GetAmmoDisplayID((IEntity *)this);
   }
   return &IEntity::m_sGfxInfo;
 }

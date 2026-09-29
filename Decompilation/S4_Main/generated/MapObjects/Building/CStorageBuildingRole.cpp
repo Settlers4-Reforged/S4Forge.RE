@@ -303,7 +303,7 @@ void  CStorageBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectI
     {
       v7 = std::vector<unsigned short>::operator[]((char *)this + 428, i);
       v8 = (unsigned __int8 *)CPileMgr::operator[](*v7);
-      CPile::GetPatchGfx((CPile *)v8, &a3->m_vPatches2[v10++]);
+      CPile::GetPatchGfx((CPile *)v8, &a3->m_vPatchPiles[v10++]);
     }
   }
   return result;

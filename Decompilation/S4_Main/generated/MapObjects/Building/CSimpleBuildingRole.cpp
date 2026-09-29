@@ -344,13 +344,13 @@ void  CSimpleBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectIn
   iRace = IEntity::Race(a2);
   CGfxManager::GetBuildingGfxInfo(g_pGfxManager, _rInfo, iRace, iType, 1, (int)this->m_vPatchPairs);
   v4 = IEntity::OwnerId(a2);
-  _rInfo->m_iColor = CPlayerManager::Color(v4);
+  _rInfo->m_uColor = CPlayerManager::Color(v4);
   v5 = IEntity::OwnerId(a2);
   IBuildingRole::MiniFlag(this, _rInfo, v5);
   if ( this->m_bInhabitants == 1 && IEntity::Type(a2) == 27 )
   {
     v7 = CSettlerMgr::operator[](this->m_uSettlerId);
-    CSettler::GetPatchGfx((CSettler *)v7, _rInfo->m_vPatches);
+    CSettler::GetPatchGfx((CSettler *)v7, _rInfo->m_vPatchSettlers);
   }
 }
 

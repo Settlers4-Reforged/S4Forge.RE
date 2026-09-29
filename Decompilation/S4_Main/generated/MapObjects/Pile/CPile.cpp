@@ -227,8 +227,8 @@ struct SGfxObjectInfo *  CPile::GetGfxInfos(void) {
   if ( this->m_uGood != 0 && this->m_uGood < (unsigned int)GOOD_MAX && this->m_uAmount != 0 )
   {
     CGfxManager::GetPileGfxInfo((int)&IEntity::m_sGfxInfo, this->m_uGood, this->m_uAmount, (unsigned __int8)this->byte4A);
-    IEntity::m_sGfxInfo.m_uObjType = this->m_uObjType;
-    IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
+    IEntity::m_sGfxInfo.m_uType = this->m_uObjType;
+    IEntity::m_sGfxInfo.m_bVisible = IEntity::IsVisible(this);
   }
   return &IEntity::m_sGfxInfo;
 }

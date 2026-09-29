@@ -1,3 +1,4 @@
+#if FALSE
 #include "CSurfaceV7.h"
 
 // Definitions for class CSurfaceV7
@@ -8,25 +9,21 @@
   
   CSurface::CSurface(this);
   this->__vftable = (CSurfaceV7_vtbl *)&CSurfaceV7::_vftable_;
-  this->field_8 = 0;
-  this->innerSurface = 0;
-  this->field_C = 0;
+  this->m_pSurfaceV3 = nullptr;
+  this->m_pSurfaceV7 = nullptr;
+  this->m_bBackbuffer = 0;
   return this;
 }
 
 
 // address=[0x2f86660]
-// Decompiled from CSurfaceV7 *__thiscall CSurfaceV7::Release(CSurfaceV7 *this)
+// Decompiled from void __thiscall CSurfaceV7::Release(CSurfaceV7 *this)
 void  CSurfaceV7::Release(void) {
   
-  CSurfaceV7 *result; // eax
-
-  result = this;
-  if ( this->innerSurface != 0 )
+  if ( this->m_pSurfaceV7 != nullptr )
   {
-    return (CSurfaceV7 *)this->innerSurface->lpVtbl->Release(this->innerSurface);
+    this->m_pSurfaceV7->lpVtbl->Release(this->m_pSurfaceV7);
   }
-  return result;
 }
 
 
@@ -34,7 +31,7 @@ void  CSurfaceV7::Release(void) {
 // Decompiled from HRESULT __thiscall CSurfaceV7::Restore(CSurfaceV7 *this)
 long  CSurfaceV7::Restore(void) {
   
-  return this->innerSurface->lpVtbl->Restore(this->innerSurface);
+  return this->m_pSurfaceV7->lpVtbl->Restore(this->m_pSurfaceV7);
 }
 
 
@@ -42,7 +39,7 @@ long  CSurfaceV7::Restore(void) {
 // Decompiled from HRESULT __thiscall CSurfaceV7::IsLost(CSurfaceV7 *this)
 long  CSurfaceV7::IsLost(void) {
   
-  return this->innerSurface->lpVtbl->IsLost(this->innerSurface);
+  return this->m_pSurfaceV7->lpVtbl->IsLost(this->m_pSurfaceV7);
 }
 
 
@@ -50,22 +47,22 @@ long  CSurfaceV7::IsLost(void) {
 // Decompiled from HRESULT __thiscall CSurfaceV7::ClearSurface(CSurfaceV7 *this, struct CBlitFX *a2)
 long  CSurfaceV7::ClearSurface(class CBlitFX * a2) {
   
-  DDBLTFX *BlitStructPtr; // eax
-  DDBLTFX *v3; // eax
+  CBlitFX *BlitStructPtr; // eax
+  CBlitFX *v3; // eax
   HRESULT v6; // [esp+4h] [ebp-4h]
 
-  if ( a2 != 0 )
+  if ( a2 != nullptr )
   {
     do
     {
       do
       {
-        BlitStructPtr = (DDBLTFX *)CBlitFX::GetBlitStructPtr(a2);
-        v6 = this->innerSurface->lpVtbl->Blt(this->innerSurface, 0, 0, 0, 1536, BlitStructPtr);
+        BlitStructPtr = CBlitFX::GetBlitStructPtr(a2);
+        v6 = this->m_pSurfaceV7->lpVtbl->Blt(this->m_pSurfaceV7, nullptr, nullptr, nullptr, 1536, (LPDDBLTFX)BlitStructPtr);
       }
-      while ( v6 == -2005532132 );
+      while ( v6 == DDERR_WASSTILLDRAWING );
     }
-    while ( v6 == -2005532242 );
+    while ( v6 == DDERR_SURFACEBUSY );
   }
   else
   {
@@ -73,12 +70,12 @@ long  CSurfaceV7::ClearSurface(class CBlitFX * a2) {
     {
       do
       {
-        v3 = (DDBLTFX *)CBlitFX::GetBlitStructPtr(&s_cBlitFx);
-        v6 = this->innerSurface->lpVtbl->Blt(this->innerSurface, 0, 0, 0, 1536, v3);
+        v3 = CBlitFX::GetBlitStructPtr(&s_cBlitFx);
+        v6 = this->m_pSurfaceV7->lpVtbl->Blt(this->m_pSurfaceV7, nullptr, nullptr, nullptr, 1536, (LPDDBLTFX)v3);
       }
-      while ( v6 == -2005532132 );
+      while ( v6 == DDERR_WASSTILLDRAWING );
     }
-    while ( v6 == -2005532242 );
+    while ( v6 == DDERR_SURFACEBUSY );
   }
   return v6;
 }
@@ -88,22 +85,22 @@ long  CSurfaceV7::ClearSurface(class CBlitFX * a2) {
 // Decompiled from HRESULT __thiscall CSurfaceV7::ClearSurface(CSurfaceV7 *this, struct tagRECT a2, struct CBlitFX *a3)
 long  CSurfaceV7::ClearSurface(struct tagRECT a2, class CBlitFX * a3) {
   
-  DDBLTFX *BlitStructPtr; // eax
-  DDBLTFX *v4; // eax
+  CBlitFX *BlitStructPtr; // eax
+  CBlitFX *v4; // eax
   HRESULT v7; // [esp+4h] [ebp-4h]
 
-  if ( a3 != 0 )
+  if ( a3 != nullptr )
   {
     do
     {
       do
       {
-        BlitStructPtr = (DDBLTFX *)CBlitFX::GetBlitStructPtr(a3);
-        v7 = this->innerSurface->lpVtbl->Blt(this->innerSurface, &a2, 0, 0, 1536, BlitStructPtr);
+        BlitStructPtr = CBlitFX::GetBlitStructPtr(a3);
+        v7 = this->m_pSurfaceV7->lpVtbl->Blt(this->m_pSurfaceV7, &a2, nullptr, nullptr, 1536, (LPDDBLTFX)BlitStructPtr);
       }
-      while ( v7 == -2005532132 );
+      while ( v7 == DDERR_WASSTILLDRAWING );
     }
-    while ( v7 == -2005532242 );
+    while ( v7 == DDERR_SURFACEBUSY );
   }
   else
   {
@@ -111,12 +108,12 @@ long  CSurfaceV7::ClearSurface(struct tagRECT a2, class CBlitFX * a3) {
     {
       do
       {
-        v4 = (DDBLTFX *)CBlitFX::GetBlitStructPtr(&s_cBlitFx);
-        v7 = this->innerSurface->lpVtbl->Blt(this->innerSurface, &a2, 0, 0, 1536, v4);
+        v4 = CBlitFX::GetBlitStructPtr(&s_cBlitFx);
+        v7 = this->m_pSurfaceV7->lpVtbl->Blt(this->m_pSurfaceV7, &a2, nullptr, nullptr, 1536, (LPDDBLTFX)v4);
       }
-      while ( v7 == -2005532132 );
+      while ( v7 == DDERR_WASSTILLDRAWING );
     }
-    while ( v7 == -2005532242 );
+    while ( v7 == DDERR_SURFACEBUSY );
   }
   return v7;
 }
@@ -132,11 +129,11 @@ long  CSurfaceV7::Blt(struct tagRECT * a2, class CSurface * a3, struct tagRECT *
   {
     do
     {
-      v8 = this->innerSurface->lpVtbl->Blt(this->innerSurface, a2, a3->innerSurface, a4, a5, a6);
+      v8 = this->m_pSurfaceV7->lpVtbl->Blt(this->m_pSurfaceV7, a2, a3->m_pSurfaceV7, a4, a5, a6);
     }
-    while ( v8 == -2005532132 );
+    while ( v8 == DDERR_WASSTILLDRAWING );
   }
-  while ( v8 == -2005532242 );
+  while ( v8 == DDERR_SURFACEBUSY );
   return v8;
 }
 
@@ -145,7 +142,7 @@ long  CSurfaceV7::Blt(struct tagRECT * a2, class CSurface * a3, struct tagRECT *
 // Decompiled from HRESULT __thiscall CSurfaceV7::Flip(CSurfaceV7 *this)
 long  CSurfaceV7::Flip(void) {
   
-  return this->innerSurface->lpVtbl->Flip(this->innerSurface, 0, 1);
+  return this->m_pSurfaceV7->lpVtbl->Flip(this->m_pSurfaceV7, nullptr, 1);
 }
 
 
@@ -165,13 +162,13 @@ long  CSurfaceV7::Lock(unsigned int & a2, void * & a3, bool a4) {
   {
     do
     {
-      v6 = this->innerSurface->lpVtbl->Lock(this->innerSurface, 0, &s_cSurfaceDescription, v7, 0);
+      v6 = this->m_pSurfaceV7->lpVtbl->Lock(this->m_pSurfaceV7, nullptr, (LPDDSURFACEDESC2)&s_cSurfaceDescription, v7, nullptr);
     }
-    while ( v6 == -2005532132 );
+    while ( v6 == DDERR_WASSTILLDRAWING );
   }
-  while ( v6 == -2005532242 );
-  *a2 = s_cSurfaceDescription.dwLinearSize;
-  *a3 = s_cSurfaceDescription.lpSurface;
+  while ( v6 == DDERR_SURFACEBUSY );
+  *a2 = s_cSurfaceDescription.m_sSurfaceDescription.dwLinearSize;
+  *a3 = s_cSurfaceDescription.m_sSurfaceDescription.lpSurface;
   return v6;
 }
 
@@ -180,7 +177,7 @@ long  CSurfaceV7::Lock(unsigned int & a2, void * & a3, bool a4) {
 // Decompiled from HRESULT __thiscall CSurfaceV7::Unlock(CSurfaceV7 *this)
 long  CSurfaceV7::Unlock(void) {
   
-  return this->innerSurface->lpVtbl->Unlock(this->innerSurface, 0);
+  return this->m_pSurfaceV7->lpVtbl->Unlock(this->m_pSurfaceV7, nullptr);
 }
 
 
@@ -194,11 +191,11 @@ long  CSurfaceV7::GetDC(struct HDC__ * * a2) {
   {
     do
     {
-      v4 = this->innerSurface->lpVtbl->GetDC(this->innerSurface, a2);
+      v4 = this->m_pSurfaceV7->lpVtbl->GetDC(this->m_pSurfaceV7, a2);
     }
-    while ( v4 == -2005532132 );
+    while ( v4 == DDERR_WASSTILLDRAWING );
   }
-  while ( v4 == -2005532242 );
+  while ( v4 == DDERR_SURFACEBUSY );
   return v4;
 }
 
@@ -207,87 +204,84 @@ long  CSurfaceV7::GetDC(struct HDC__ * * a2) {
 // Decompiled from int __thiscall CSurfaceV7::ReleaseDC(CSurfaceV7 *this, HDC a2)
 long  CSurfaceV7::ReleaseDC(struct HDC__ * a2) {
   
-  return ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, HDC))this->innerSurface->lpVtbl->ReleaseDC)(this->innerSurface, this->innerSurface, a2);
+  return ((int (__thiscall *)(IDirectDrawSurface7 *, IDirectDrawSurface7 *, HDC))this->m_pSurfaceV7->lpVtbl->ReleaseDC)(this->m_pSurfaceV7, this->m_pSurfaceV7, a2);
 }
 
 
 // address=[0x2f869c0]
-// Decompiled from int __thiscall CSurfaceV7::CreateSurface(CSurfaceV7 *this, void *a2, int a3, int a4, bool a5, bool a6, bool a7, int a8, bool a9, bool a10, bool a11)
-long  CSurfaceV7::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, bool a7, int a8, bool a9, bool a10, bool a11) {
+// Decompiled from int __thiscall CSurfaceV7::CreateSurface(CSurfaceV7 *this, void *pDDInterface, unsigned int iWidth, unsigned int iHeight, unsigned __int8 bVideoMem, unsigned __int8 bHwAccess, unsigned __int8 bIsTexture, int iSurfaceFormat, unsigned __int8 bPrimary)
+long  CSurfaceV7::CreateSurface(void * pDDInterface, int iWidth, int iHeight, bool bVideoMem, bool bHwAccess, bool bIsTexture, int iSurfaceFormat, bool bPrimary, bool a9, bool a10) {
   
-  s_cSurfaceDescription.dwFlags = 1;
-  if ( a9 )
+  char v10; // [esp+2Ch] [ebp+28h]
+  char v11; // [esp+30h] [ebp+2Ch]
+
+  s_cSurfaceDescription.m_sSurfaceDescription.dwFlags = 1;
+  if ( bPrimary != 0 )
   {
-    s_cSurfaceDescription.ddsCaps.dwCaps = 512;
-    if ( a11 )
+    s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps = 512;
+    if ( v11 != 0 )
     {
-      s_cSurfaceDescription.ddsCaps.dwCaps |= 0x18u;
-      s_cSurfaceDescription.dwFlags |= 0x20u;
-      s_cSurfaceDescription.dwBackBufferCount = 1;
-      if ( a6 )
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= 0x18u;
+      s_cSurfaceDescription.m_sSurfaceDescription.dwFlags |= 0x20u;
+      s_cSurfaceDescription.m_sSurfaceDescription.dwBackBufferCount = 1;
+      if ( bHwAccess != 0 )
       {
-        s_cSurfaceDescription.ddsCaps.dwCaps |= 0x2000u;
+        s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= 0x2000u;
       }
     }
   }
   else
   {
-    s_cSurfaceDescription.dwFlags |= 0x1000u;
-    s_cSurfaceDescription.dwFlags |= 4u;
-    s_cSurfaceDescription.dwFlags |= 2u;
-    s_cSurfaceDescription.dwWidth = a3;
-    s_cSurfaceDescription.dwHeight = a4;
-    s_cSurfaceDescription.ddpfPixelFormat.dwFlags = 64;
-    s_cSurfaceDescription.ddpfPixelFormat.dwFourCC = 0;
-    s_cSurfaceDescription.ddpfPixelFormat.dwRGBBitCount = 16;
-    if ( a8 == 1 )
+    s_cSurfaceDescription.m_sSurfaceDescription.dwFlags |= 0x1000u;
+    s_cSurfaceDescription.m_sSurfaceDescription.dwFlags |= 4u;
+    s_cSurfaceDescription.m_sSurfaceDescription.dwFlags |= 2u;
+    s_cSurfaceDescription.m_sSurfaceDescription.dwWidth = iWidth;
+    s_cSurfaceDescription.m_sSurfaceDescription.dwHeight = iHeight;
+    *(_QWORD *)(&s_cSurfaceDescription.m_sSurfaceDescription.dwFVF + 1) = 64;
+    s_cSurfaceDescription.m_sSurfaceDescription.ddpfPixelFormat.dwRGBBitCount = 16;
+    if ( iSurfaceFormat == 1 )
     {
-      s_cSurfaceDescription.ddpfPixelFormat.dwRBitMask = 31744;
-      s_cSurfaceDescription.ddpfPixelFormat.dwGBitMask = 992;
+      *((_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.dwFVF + 2) = 0x3E000007C00LL;
     }
     else
     {
-      s_cSurfaceDescription.ddpfPixelFormat.dwRBitMask = 63488;
-      s_cSurfaceDescription.ddpfPixelFormat.dwGBitMask = 2016;
+      *((_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.dwFVF + 2) = 0x7E00000F800LL;
     }
-    s_cSurfaceDescription.ddpfPixelFormat.dwBBitMask = 31;
-    s_cSurfaceDescription.ddpfPixelFormat.dwRGBAlphaBitMask = 0;
-    if ( a7 )
+    *((_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.dwFVF + 3) = 31;
+    if ( bIsTexture != 0 )
     {
-      if ( a8 == 2 )
+      if ( iSurfaceFormat == 2 )
       {
-        s_cSurfaceDescription.ddpfPixelFormat.dwRBitMask = 3840;
-        s_cSurfaceDescription.ddpfPixelFormat.dwGBitMask = 240;
-        s_cSurfaceDescription.ddpfPixelFormat.dwBBitMask = 15;
-        s_cSurfaceDescription.ddpfPixelFormat.dwRGBAlphaBitMask = 61440;
-        s_cSurfaceDescription.ddpfPixelFormat.dwFlags |= 1u;
+        *((_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.dwFVF + 2) = 0xF000000F00LL;
+        *((_QWORD *)&s_cSurfaceDescription.m_sSurfaceDescription.dwFVF + 3) = 0xF0000000000FLL;
+        s_cSurfaceDescription.m_sSurfaceDescription.ddpfPixelFormat.dwFlags |= 1u;
       }
-      s_cSurfaceDescription.ddsCaps.dwCaps = 4096;
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps = 4096;
     }
     else
     {
-      s_cSurfaceDescription.ddsCaps.dwCaps = 64;
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps = 64;
     }
-    if ( a5 )
+    if ( bVideoMem != 0 )
     {
-      s_cSurfaceDescription.ddsCaps.dwCaps |= 0x4000u;
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= 0x4000u;
     }
     else
     {
-      s_cSurfaceDescription.ddsCaps.dwCaps |= 0x800u;
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= 0x800u;
     }
-    if ( a6 && !a7 )
+    if ( bHwAccess != 0 && bIsTexture == 0 )
     {
-      s_cSurfaceDescription.ddsCaps.dwCaps |= 0x2000u;
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= 0x2000u;
     }
-    if ( a10 && a11 )
+    if ( v10 != 0 && v11 != 0 )
     {
-      s_cSurfaceDescription.ddsCaps.dwCaps |= 0x4018u;
-      s_cSurfaceDescription.dwFlags |= 0x20u;
-      s_cSurfaceDescription.dwBackBufferCount = 1;
+      s_cSurfaceDescription.m_sSurfaceDescription.ddsCaps.dwCaps |= 0x4018u;
+      s_cSurfaceDescription.m_sSurfaceDescription.dwFlags |= 0x20u;
+      s_cSurfaceDescription.m_sSurfaceDescription.dwBackBufferCount = 1;
     }
   }
-  return (*(int (__stdcall **)(void *, DDSURFACEDESC2 *, LPDIRECTDRAWSURFACE7 *, _DWORD))(*(_DWORD *)a2 + 24))(a2, &s_cSurfaceDescription, &this->innerSurface, 0);
+  return (*(int (__stdcall **)(void *, CSurfaceDescription *, IDirectDrawSurface7 **, _DWORD))(*(_DWORD *)pDDInterface + offsetof(IDirectDrawVtbl, CreateSurface)))(pDDInterface, &s_cSurfaceDescription, &this->m_pSurfaceV7, 0);
 }
 
 
@@ -295,7 +289,7 @@ long  CSurfaceV7::CreateSurface(void * a2, int a3, int a4, bool a5, bool a6, boo
 // Decompiled from HRESULT __thiscall CSurfaceV7::SetColorKey(CSurfaceV7 *this, DWORD a2, struct _DDCOLORKEY *a3)
 long  CSurfaceV7::SetColorKey(unsigned long a2, struct _DDCOLORKEY * a3) {
   
-  return this->innerSurface->lpVtbl->SetColorKey(this->innerSurface, a2, a3);
+  return this->m_pSurfaceV7->lpVtbl->SetColorKey(this->m_pSurfaceV7, a2, a3);
 }
 
 
@@ -304,30 +298,30 @@ long  CSurfaceV7::SetColorKey(unsigned long a2, struct _DDCOLORKEY * a3) {
 long  CSurfaceV7::GetPixelFormat(bool & a2) {
   
   HRESULT v3; // [esp+0h] [ebp-2Ch]
-  _DWORD v5[8]; // [esp+8h] [ebp-24h] BYREF
+  DDPIXELFORMAT sPixelFormat; // [esp+8h] [ebp-24h] BYREF
 
-  memset(v5, 0, sizeof(v5));
-  v5[0] = 32;
-  v3 = this->innerSurface->lpVtbl->GetPixelFormat(this->innerSurface, (LPDDPIXELFORMAT)v5);
-  *a2 = 0;
+  memset(&sPixelFormat, 0, sizeof(sPixelFormat));
+  sPixelFormat.dwSize = 32;
+  v3 = this->m_pSurfaceV7->lpVtbl->GetPixelFormat(this->m_pSurfaceV7, &sPixelFormat);
+  *a2 = false;
   CBlitFX::SetFillColor(&s_cBlitFx, 0, 0, 0, *a2);
   CBlitFX::SetFillColorAlpha(&s_cBlitFxAlpha, 0, 0, 0, 0);
-  CBlitFX::SetFillColorAlpha((CBlitFX *)&s_cBlitFxAlphaDebug, 0, 255, 0, 255);
+  CBlitFX::SetFillColorAlpha(&s_cBlitFxAlphaDebug, 0, 255, 0, 255);
   return v3;
 }
 
 
 // address=[0x2f86cc0]
-// Decompiled from HRESULT __thiscall CSurfaceV7::GetBitDepth(CSurfaceV7 *this, int *a2)
+// Decompiled from HRESULT __thiscall CSurfaceV7::GetBitDepth(CSurfaceV7 *this, DWORD *a2)
 long  CSurfaceV7::GetBitDepth(int & a2) {
   
   HRESULT result; // eax
-  _DWORD v4[8]; // [esp+8h] [ebp-24h] BYREF
+  DDPIXELFORMAT v4; // [esp+8h] [ebp-24h] BYREF
 
-  memset(v4, 0, sizeof(v4));
-  v4[0] = 32;
-  result = this->innerSurface->lpVtbl->GetPixelFormat(this->innerSurface, (LPDDPIXELFORMAT)v4);
-  *a2 = v4[3];
+  memset(&v4, 0, sizeof(v4));
+  v4.dwSize = 32;
+  result = this->m_pSurfaceV7->lpVtbl->GetPixelFormat(this->m_pSurfaceV7, &v4);
+  *a2 = v4.dwRGBBitCount;
   return result;
 }
 
@@ -338,9 +332,9 @@ long  CSurfaceV7::GetSurfaceSize(int & a2, int & a3) {
   
   HRESULT result; // eax
 
-  result = this->innerSurface->lpVtbl->GetSurfaceDesc(this->innerSurface, &s_cSurfaceDescription);
-  *a2 = s_cSurfaceDescription.dwWidth;
-  *a3 = s_cSurfaceDescription.dwHeight;
+  result = this->m_pSurfaceV7->lpVtbl->GetSurfaceDesc(this->m_pSurfaceV7, (LPDDSURFACEDESC2)&s_cSurfaceDescription);
+  *a2 = s_cSurfaceDescription.m_sSurfaceDescription.dwWidth;
+  *a3 = s_cSurfaceDescription.m_sSurfaceDescription.dwHeight;
   return result;
 }
 
@@ -349,7 +343,7 @@ long  CSurfaceV7::GetSurfaceSize(int & a2, int & a3) {
 // Decompiled from int __thiscall CSurfaceV7::SetClipper(CSurfaceV7 *this, struct IDirectDrawClipper *a2)
 long  CSurfaceV7::SetClipper(struct IDirectDrawClipper * a2) {
   
-  return ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, struct IDirectDrawClipper *))this->innerSurface->lpVtbl->SetClipper)(this->innerSurface, this->innerSurface, a2);
+  return ((int (__thiscall *)(IDirectDrawSurface7 *, IDirectDrawSurface7 *, struct IDirectDrawClipper *))this->m_pSurfaceV7->lpVtbl->SetClipper)(this->m_pSurfaceV7, this->m_pSurfaceV7, a2);
 }
 
 
@@ -357,20 +351,16 @@ long  CSurfaceV7::SetClipper(struct IDirectDrawClipper * a2) {
 // Decompiled from LPDIRECTDRAWSURFACE7 __thiscall CSurfaceV7::GetSurfacePtr(CSurfaceV7 *this)
 void *  CSurfaceV7::GetSurfacePtr(void) {
   
-  return this->innerSurface;
+  return this->m_pSurfaceV7;
 }
 
 
 // address=[0x2f86dc0]
-// Decompiled from CSurfaceV7 *__thiscall CSurfaceV7::SetSurfacePtr(CSurfaceV7 *this, struct IDirectDrawSurface7 *a2)
+// Decompiled from void __thiscall CSurfaceV7::SetSurfacePtr(CSurfaceV7 *this, struct IDirectDrawSurface7 *a2)
 void  CSurfaceV7::SetSurfacePtr(void * a2) {
   
-  CSurfaceV7 *result; // eax
-
-  result = this;
-  this->field_C = 1;
-  this->innerSurface = a2;
-  return result;
+  this->m_bBackbuffer = 1;
+  this->m_pSurfaceV7 = a2;
 }
 
 
@@ -379,15 +369,13 @@ void  CSurfaceV7::SetSurfacePtr(void * a2) {
 void *  CSurfaceV7::GetAttachedSurfacePtr(void) {
   
   int v2; // [esp+0h] [ebp-20h] BYREF
-  int; // [esp+4h] [ebp-1Ch]
-  CSurfaceV7 *v4; // [esp+8h] [ebp-18h]
-  _DWORD v5[4]; // [esp+Ch] [ebp-14h] BYREF
+  int v3; // [esp+4h] [ebp-1Ch]
+  DDSCAPS2 sCaps; // [esp+Ch] [ebp-14h] BYREF
 
-  v4 = this;
-  v5[0] = 4;
-  memset(&v5[1], 0, 12);
-   = ((int (__thiscall *)(LPDIRECTDRAWSURFACE7, LPDIRECTDRAWSURFACE7, _DWORD *, int *))this->innerSurface->lpVtbl->GetAttachedSurface)(this->innerSurface, this->innerSurface, v5, &v2);
-  if (  != 0 )
+  sCaps.dwCaps = 4;
+  memset(&sCaps.dwCaps2, 0, 12);
+  v3 = ((int (__thiscall *)(IDirectDrawSurface7 *, IDirectDrawSurface7 *, DDSCAPS2 *, int *))this->m_pSurfaceV7->lpVtbl->GetAttachedSurface)(this->m_pSurfaceV7, this->m_pSurfaceV7, &sCaps, &v2);
+  if ( v3 != 0 )
   {
     return 0;
   }
@@ -402,19 +390,19 @@ void *  CSurfaceV7::GetAttachedSurfacePtr(void) {
 // Decompiled from char __thiscall CSurfaceV7::IsBackBufferReference(CSurfaceV7 *this)
 bool  CSurfaceV7::IsBackBufferReference(void) {
   
-  return this->field_C;
+  return this->m_bBackbuffer;
 }
 
 
 // address=[0x2f86e70]
-// Decompiled from int __thiscall CSurfaceV7::SetAsRenderTarget(CSurfaceV7 *this, struct IDirect3DDevice7 *a2)
+// Decompiled from HRESULT __thiscall CSurfaceV7::SetAsRenderTarget(CSurfaceV7 *this, struct IDirect3DDevice7 *a2)
 long  CSurfaceV7::SetAsRenderTarget(struct IDirect3DDevice7 * a2) {
   
-  if ( this->innerSurface == 0 )
+  if ( this->m_pSurfaceV7 == nullptr )
   {
     j___wassert(L"m_pSurfaceV7 != nullptr", L"DirectXHelperClasses.cpp", 0x56Au);
   }
-  return a2->SetRenderTarget(a2, this->innerSurface, 0);
+  return a2->SetRenderTarget(a2, this->m_pSurfaceV7, 0);
 }
 
 
@@ -426,3 +414,4 @@ long  CSurfaceV7::SetAsRenderTarget(struct IDirect3DDevice7 * a2) {
 }
 
 
+#endif // Already implemented

@@ -8,6 +8,11 @@ public:
     // address=[0x2f87700]
      CSurfaceDescription(void);
 
+    // Type information members
+public:
+    _DDSURFACEDESC2 m_sSurfaceDescription;
+    _DDSURFACEDESC m_sSurfaceDescriptionOld;
+
 };
 
 

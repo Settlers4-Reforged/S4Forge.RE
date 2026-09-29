@@ -1,3 +1,4 @@
+#if FALSE
 #include "CSurface.h"
 
 // Definitions for class CSurface
@@ -40,7 +41,7 @@ class CSurface * __cdecl CSurface::CreateSurfacePtr(bool a1) {
 // Decompiled from CSurface *__thiscall CSurface::CSurface(CSurface *this)
  CSurface::CSurface(void) {
   
-  *(_DWORD *)this = &CSurface::_vftable_;
+  this->__vftable = (CSurfaceV7_vtbl *)&CSurface::_vftable_;
   return this;
 }
 
@@ -53,3 +54,4 @@ class CSurface * __cdecl CSurface::CreateSurfacePtr(bool a1) {
 }
 
 
+#endif // Already implemented

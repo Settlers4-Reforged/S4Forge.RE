@@ -21,16 +21,16 @@ public:
     bool  SetTemporaryText(char * Str, int a2, int a3, int a4, int a5, int a6);
 
     // address=[0x2f5a5e0]
-    void  SetTriangleSize(int a2);
+    void  SetTriangleSize(int _iTriangleSize);
 
     // address=[0x2f5a6d0]
-    void  SetScrollOffsets(int a2, int a3);
+    void  SetScrollOffsets(int _iOffsetX, int _iOffsetY);
 
     // address=[0x2f5a770]
     void  SetCameraMode(int a2);
 
     // address=[0x2f5a7d0]
-    void  SetGfxLayerAccess(int _iSize, struct T_GFX_MAP_ELEMENT * a3);
+    void  SetGfxLayerAccess(int _iNewMapSize, struct T_GFX_MAP_ELEMENT * _pGfxLayer);
 
     // address=[0x2f5a860]
     bool  SetPlayerColor(int a1, struct SGfxColor & a2);
@@ -111,7 +111,7 @@ public:
     void  SetIndexBorderstone(int a2, int a3);
 
     // address=[0x2f5b240]
-    bool  EnableMiniMap(bool a2, int a3, int a4, struct HWND__ * a5);
+    bool  EnableMiniMap(bool _bVisible, int _iOffsetX, int _iOffsetY, struct HWND__ * _pHwnd);
 
     // address=[0x2f5b2f0]
     void  SetMiniMapColorCallback(struct SGfxColor * (__cdecl*)(unsigned int) a2);
@@ -135,7 +135,7 @@ public:
     bool  PutAccessoryIcon(int a2, void * a3, void * a4);
 
     // address=[0x2f5b570]
-    bool  InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMX, int & a4, int & a5, int & a6);
+    bool  InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMXMachine, int & a4, int & a5, int & a6);
 
     // address=[0x2f5b7c0]
     bool  RebuildRenderEnvironment(struct SGfxRenderConfiguration sConf);
@@ -177,7 +177,7 @@ public:
     bool  CanChangeGround(int a2, int a3, int a4);
 
     // address=[0x2f5c7a0]
-    void  SetDarkLand(int a2, int a3, bool a4);
+    void  SetDarkLand(int _iX, int _iY, bool _bCreate);
 
     // address=[0x2f5c810]
     void  SetFoggingFadingStep(int a2);
@@ -234,7 +234,7 @@ public:
     float  GetCurrentZoomFactor(void);
 
     // address=[0x2f5ccc0]
-    void  ShowCachePage(int a2, int a3);
+    void  ShowCachePage(int _iPage, int a3);
 
     // address=[0x2f5cd20]
     void  SetWidthOfLeftGuiBorder(int a2);
@@ -288,7 +288,7 @@ public:
     void  EnableDebugStringCallback(char * (__cdecl*)(void) a2);
 
     // address=[0x2f72f50]
-    int  CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a3);
+    int  CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * _psGuiSurfaceDescription);
 
     // address=[0x2f73220]
     int  CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a2);
@@ -341,13 +341,13 @@ private:
 
     // Type information members
 public:
-    _DWORD m_iVertexSize;
+    _DWORD m_iBufferedTriangleSize;
     int m_iCameraVertexSize;
     _DWORD m_uFixedCursorShape;
     int m_iWaveIndex;
     DWORD m_uWaveFrame;
-    _BYTE m_bNeedsRebuild;
-    _BYTE m_bHasCpuMMX;
+    _BYTE m_bIsInitalized;
+    _BYTE m_bMMXIsPresent;
     _BYTE m_bHardwareRenderingPossible;
     _BYTE m_bSoftwareRenderingPossible;
     _DWORD m_bV7Available;

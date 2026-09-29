@@ -239,7 +239,7 @@ void  CGatherBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectIn
   if ( (_BYTE)result != 0 )
   {
     v7 = (unsigned __int8 *)CPileMgr::operator[](*((unsigned __int16 *)this + 190));
-    return ((CPile *(__thiscall *)(CPile *, struct SGfxPatchObject *))CPile::GetPatchGfx)((CPile *)v7, a3->m_vPatches2);
+    return ((CPile *(__thiscall *)(CPile *, struct SGfxPatchObject *))CPile::GetPatchGfx)((CPile *)v7, a3->m_vPatchPiles);
   }
   return result;
 }

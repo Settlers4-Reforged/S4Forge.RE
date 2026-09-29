@@ -169,14 +169,14 @@ struct SGfxObjectInfo *  CTree::GetGfxInfos(void) {
   ((void (__stdcall *)(SGfxObjectInfo *, _DWORD, _DWORD, int))CGfxManager::GetObjectGfxInfo)(&IEntity::m_sGfxInfo, *(unsigned __int16 *)(this + 38), *(unsigned __int8 *)(this + 36), 1);
   if ( *(_BYTE *)(this + 73) == 3 )
   {
-    IEntity::m_sGfxInfo.m_uObjType = *(_BYTE *)(this + 10);
+    IEntity::m_sGfxInfo.m_uType = *(_BYTE *)(this + 10);
   }
   else
   {
-    IEntity::m_sGfxInfo.m_uObjType = 16;
+    IEntity::m_sGfxInfo.m_uType = 16;
   }
-  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible((_DWORD *)this);
-  IEntity::m_sGfxInfo.m_uFlags = 0;
+  IEntity::m_sGfxInfo.m_bVisible = IEntity::IsVisible((_DWORD *)this);
+  IEntity::m_sGfxInfo.m_uSelectionBlockIndex = 0;
   return &IEntity::m_sGfxInfo;
 }
 

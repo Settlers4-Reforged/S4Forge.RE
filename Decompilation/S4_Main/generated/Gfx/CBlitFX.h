@@ -4,25 +4,22 @@
 #include "defines.h"
 
 class CBlitFX {
-public:
+  public:
     // address=[0x2f69900]
-    struct _DDBLTFX *  GetBlitStructPtr(void);
+    struct _DDBLTFX *GetBlitStructPtr(void);
 
     // address=[0x2f86400]
-     CBlitFX(void);
+    CBlitFX(void);
 
     // address=[0x2f86430]
-    void  SetFillColor(int a2, int a3, int a4, bool a5);
+    void SetFillColor(int _iRed, int _iGreen, int _iBlue, bool _bIs555);
 
     // address=[0x2f864e0]
-    void  SetFillColorAlpha(int a2, int a3, int a4, int a5);
+    void SetFillColorAlpha(int _iRed, int a3, int a4, int a5);
 
     // Type information members
-public:
-    int m_u0;
-    int[24] m_u4;
-
+  public:
+    _DDBLTFX m_sBlitFX;
 };
-
 
 #endif // CBLITFX_H

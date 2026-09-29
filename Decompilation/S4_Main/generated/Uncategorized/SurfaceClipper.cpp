@@ -85,10 +85,10 @@ long  SurfaceClipper::SetClipRect(struct tagRECT const & Src) {
 
 
 // address=[0x2f8a620]
-// Decompiled from int __thiscall SurfaceClipper::SetClipWindow(SurfaceClipper *this, HWND a2)
+// Decompiled from int __thiscall SurfaceClipper::SetClipWindow(SurfaceClipper *this, HWND *a2)
 long  SurfaceClipper::SetClipWindow(struct HWND__ * a2) {
   
-  return ((int (__thiscall *)(LPDIRECTDRAWCLIPPER, LPDIRECTDRAWCLIPPER, _DWORD, HWND))this->m_pClipper->lpVtbl->SetHWnd)(this->m_pClipper, this->m_pClipper, 0, a2);
+  return ((int (__thiscall *)(LPDIRECTDRAWCLIPPER, LPDIRECTDRAWCLIPPER, _DWORD, HWND *))this->m_pClipper->lpVtbl->SetHWnd)(this->m_pClipper, this->m_pClipper, 0, a2);
 }
 
 

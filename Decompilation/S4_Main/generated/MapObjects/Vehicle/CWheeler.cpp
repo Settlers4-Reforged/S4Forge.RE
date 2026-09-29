@@ -90,14 +90,14 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
     CGfxManager::GetVehicleGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, v3, *(unsigned __int16 *)(this + 38), *(char *)(this + 68), *(unsigned __int8 *)(this + 36), 0, 0);
   }
   v1 = IEntity::OwnerId((IEntity *)this);
-  IEntity::m_sGfxInfo.m_iColor = CPlayerManager::Color(v1);
+  IEntity::m_sGfxInfo.m_uColor = CPlayerManager::Color(v1);
   IEntity::m_sGfxInfo.m_iDirection = *(_BYTE *)(this + 68);
-  IEntity::m_sGfxInfo.m_iDistance = *(_BYTE *)(this + 69);
-  IEntity::m_sGfxInfo.m_uObjType = 4;
-  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible((_DWORD *)this);
+  IEntity::m_sGfxInfo.m_uDistance = *(_BYTE *)(this + 69);
+  IEntity::m_sGfxInfo.m_uType = 4;
+  IEntity::m_sGfxInfo.m_bVisible = IEntity::IsVisible((_DWORD *)this);
   if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)&dword_F29144[220079]) != 0 )
   {
-    IEntity::m_sGfxInfo.uConstructionProgress = 65534 - *(unsigned __int16 *)(this + 124) * *(unsigned __int16 *)(this + 128);
+    IEntity::m_sGfxInfo.m_uConstructionProgress = 65534 - *(unsigned __int16 *)(this + 124) * *(unsigned __int16 *)(this + 128);
   }
   if ( IEntity::FlagBits((IEntity *)this, ENTITY_FLAG_Selected) != 0 )
   {
@@ -109,7 +109,7 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
     {
       v5 = 0;
     }
-    IEntity::m_sGfxInfo.m_uFlags = v5;
+    IEntity::m_sGfxInfo.m_uSelectionBlockIndex = v5;
   }
   else if ( IEntity::FlagBits((IEntity *)this, (EntityFlag)1024) != 0 )
   {
@@ -121,7 +121,7 @@ struct SGfxObjectInfo *  CWheeler::GetGfxInfos(void) {
     {
       v4 = 0;
     }
-    IEntity::m_sGfxInfo.m_uFlags = v4;
+    IEntity::m_sGfxInfo.m_uSelectionBlockIndex = v4;
   }
   return &IEntity::m_sGfxInfo;
 }

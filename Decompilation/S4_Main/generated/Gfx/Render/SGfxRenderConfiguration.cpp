@@ -11,13 +11,13 @@ void  SGfxRenderConfiguration::EnableFiltering(bool a2) {
 
   if ( a2 )
   {
-    v2 = this->m_uFlags | 8;
+    v2 = this->m_iFlags | 8;
   }
   else
   {
-    v2 = this->m_uFlags & 0xFFFFFFF7;
+    v2 = this->m_iFlags & 0xFFFFFFF7;
   }
-  this->m_uFlags = v2;
+  this->m_iFlags = v2;
 }
 
 
@@ -29,13 +29,13 @@ void  SGfxRenderConfiguration::EnableHQTextureSet(bool a2) {
 
   if ( a2 )
   {
-    v2 = this->m_uFlags | 4;
+    v2 = this->m_iFlags | 4;
   }
   else
   {
-    v2 = this->m_uFlags & 0xFFFFFFFB;
+    v2 = this->m_iFlags & 0xFFFFFFFB;
   }
-  this->m_uFlags = v2;
+  this->m_iFlags = v2;
 }
 
 
@@ -45,7 +45,7 @@ void  SGfxRenderConfiguration::EnableHardwareLandscapeEngine(bool a2) {
   
   if ( a2 )
   {
-    this->m_uFlags |= 1u;
+    this->m_iFlags |= 1u;
   }
   else
   {
@@ -60,7 +60,7 @@ void  SGfxRenderConfiguration::EnableHardwareObjectEngine(bool a2) {
   
   if ( a2 )
   {
-    this->m_uFlags |= 2u;
+    this->m_iFlags |= 2u;
   }
   else
   {
@@ -77,13 +77,13 @@ void  SGfxRenderConfiguration::ForceBlit(bool a2) {
 
   if ( a2 )
   {
-    v2 = this->m_uFlags | 0x20;
+    v2 = this->m_iFlags | 0x20;
   }
   else
   {
-    v2 = this->m_uFlags & 0xFFFFFFDF;
+    v2 = this->m_iFlags & 0xFFFFFFDF;
   }
-  this->m_uFlags = v2;
+  this->m_iFlags = v2;
 }
 
 
@@ -91,7 +91,7 @@ void  SGfxRenderConfiguration::ForceBlit(bool a2) {
 // Decompiled from bool __thiscall SGfxRenderConfiguration::IsFiltering(SGfxRenderConfiguration *this)
 bool  SGfxRenderConfiguration::IsFiltering(void)const {
   
-  return (this->m_uFlags & 8) != 0;
+  return (this->m_iFlags & 8) != 0;
 }
 
 
@@ -99,7 +99,7 @@ bool  SGfxRenderConfiguration::IsFiltering(void)const {
 // Decompiled from bool __thiscall SGfxRenderConfiguration::IsHQTextureSet(SGfxRenderConfiguration *this)
 bool  SGfxRenderConfiguration::IsHQTextureSet(void)const {
   
-  return (this->m_uFlags & 4) != 0;
+  return (this->m_iFlags & 4) != 0;
 }
 
 
@@ -117,7 +117,7 @@ void  SGfxRenderConfiguration::SetPureSoftwareMode(bool a2) {
   
   if ( a2 )
   {
-    this->m_uFlags |= 0x10u;
+    this->m_iFlags |= 0x10u;
   }
   else
   {
@@ -130,7 +130,7 @@ void  SGfxRenderConfiguration::SetPureSoftwareMode(bool a2) {
 // Decompiled from bool __thiscall SGfxRenderConfiguration::IsEditorMode(SGfxRenderConfiguration *this)
 bool  SGfxRenderConfiguration::IsEditorMode(void)const {
   
-  return (this->m_uFlags & 0x40) != 0;
+  return (this->m_iFlags & 0x40) != 0;
 }
 
 
@@ -146,7 +146,7 @@ bool  SGfxRenderConfiguration::IsHardwareLandscapeEngine(void)const {
 // Decompiled from bool __thiscall SGfxRenderConfiguration::IsForceBlit(SGfxRenderConfiguration *this)
 bool  SGfxRenderConfiguration::IsForceBlit(void)const {
   
-  return (this->m_uFlags & 0x20) != 0;
+  return (this->m_iFlags & 0x20) != 0;
 }
 
 

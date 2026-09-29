@@ -980,7 +980,7 @@ struct SGfxObjectInfo *  CFerryShip::GetGfxInfos(void) {
   CShip::GetGfxInfos((int)this);
   if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) != 0 )
   {
-    IEntity::m_sGfxInfo.m_uDecorator = CShip::GetHealthDisplayID(this);
+    IEntity::m_sGfxInfo.m_uFitnessBlockIndex = CShip::GetHealthDisplayID(this);
   }
   return &IEntity::m_sGfxInfo;
 }

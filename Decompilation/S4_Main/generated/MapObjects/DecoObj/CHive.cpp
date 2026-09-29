@@ -171,9 +171,9 @@ struct SGfxObjectInfo *  CHive::GetGfxInfos(void) {
     this->m_iFrame = (v4 + (unsigned int)this->m_iFrame) % this->m_uCycleFrames;
   }
   CGfxManager::GetObjectGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iFrame, 1);
-  IEntity::m_sGfxInfo.m_uObjType = 16;
-  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
-  IEntity::m_sGfxInfo.m_uFlags = 0;
+  IEntity::m_sGfxInfo.m_uType = 16;
+  IEntity::m_sGfxInfo.m_bVisible = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_uSelectionBlockIndex = 0;
   return &IEntity::m_sGfxInfo;
 }
 

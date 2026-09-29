@@ -584,12 +584,12 @@ void  CBuildingSiteRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo
   if ( this->m_iU0 >= this->m_iScaledTotalResources / 2 )
   {
     v5 = 3;
-    a3->uConstructionProgress = 0xFFFF - this->m_iInverseScaledTotalResources - this->m_iInverseScaledTotalResources * (this->m_iU0 - this->m_iScaledTotalResources / 2);
-    if ( a3->uConstructionProgress > 0xFFFFu )
+    a3->m_uConstructionProgress = 0xFFFF - this->m_iInverseScaledTotalResources - this->m_iInverseScaledTotalResources * (this->m_iU0 - this->m_iScaledTotalResources / 2);
+    if ( a3->m_uConstructionProgress > 0xFFFFu )
     {
-      a3->uConstructionProgress = 0;
+      a3->m_uConstructionProgress = 0;
     }
-    if ( a3->uConstructionProgress > 0xFFFFu && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 392, "_sGfxInfo.uConstructionProgress <= BUILDING_PROGRESS_MAX") == 1 )
+    if ( a3->m_uConstructionProgress > 0xFFFFu && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 392, "_sGfxInfo.uConstructionProgress <= BUILDING_PROGRESS_MAX") == 1 )
     {
       __debugbreak();
     }
@@ -597,12 +597,12 @@ void  CBuildingSiteRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectInfo
   else
   {
     v5 = 2;
-    a3->uConstructionProgress = 0xFFFF - this->m_iInverseScaledTotalResources * this->m_iU0;
-    if ( a3->uConstructionProgress > 0xFFFFu )
+    a3->m_uConstructionProgress = 0xFFFF - this->m_iInverseScaledTotalResources * this->m_iU0;
+    if ( a3->m_uConstructionProgress > 0xFFFFu )
     {
-      a3->uConstructionProgress = 0;
+      a3->m_uConstructionProgress = 0;
     }
-    if ( a3->uConstructionProgress > 0xFFFFu && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 378, "_sGfxInfo.uConstructionProgress <= BUILDING_PROGRESS_MAX") == 1 )
+    if ( a3->m_uConstructionProgress > 0xFFFFu && BBSupportDbgReport(2, "MapObjects\\Building\\BuildingSite.cpp", 378, "_sGfxInfo.uConstructionProgress <= BUILDING_PROGRESS_MAX") == 1 )
     {
       __debugbreak();
     }

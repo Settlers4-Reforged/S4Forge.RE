@@ -269,19 +269,19 @@ struct SGfxObjectInfo *  CBuilding::GetGfxInfos(void) {
   {
     IAnimatedEntity::BoxSelection();
   }
-  IEntity::m_sGfxInfo.m_pBuildLayerGfxData = 0;
-  IEntity::m_sGfxInfo.uConstructionProgress = 0;
+  IEntity::m_sGfxInfo.pBuildLayer = 0;
+  IEntity::m_sGfxInfo.m_uConstructionProgress = 0;
   v1 = std::auto_ptr<IBuildingRole>::operator->((_DWORD *)this + 21);
   v1->FillGfxInfo(v1, this, &IEntity::m_sGfxInfo);
-  IEntity::m_sGfxInfo.m_uObjType = this->m_uObjType;
-  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_uType = this->m_uObjType;
+  IEntity::m_sGfxInfo.m_bVisible = IEntity::IsVisible(this);
   if ( IEntity::FlagBits(this, ENTITY_FLAG_Selected) != 0 )
   {
-    IEntity::m_sGfxInfo.m_uFlags = 28;
+    IEntity::m_sGfxInfo.m_uSelectionBlockIndex = 28;
   }
   else
   {
-    IEntity::m_sGfxInfo.m_uFlags = 0;
+    IEntity::m_sGfxInfo.m_uSelectionBlockIndex = 0;
   }
   return &IEntity::m_sGfxInfo;
 }

@@ -192,7 +192,7 @@ void  CTradingBuildingRole::FillGfxInfo(class CBuilding * a2, struct SGfxObjectI
     PilePtr = CPileMgr::GetPilePtr(*v6);
     if ( PilePtr != 0 && CPile::IsPatchPile(PilePtr) )
     {
-      CPile::GetPatchGfx(PilePtr, &a3->m_vPatches2[v8++]);
+      CPile::GetPatchGfx(PilePtr, &a3->m_vPatchPiles[v8++]);
     }
   }
   return result;

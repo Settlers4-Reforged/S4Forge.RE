@@ -120,9 +120,9 @@ struct SGfxObjectInfo *  CAnimal::GetGfxInfos(void) {
   this->Update();
   CGfxManager::GetAnimalGfxInfo(g_pGfxManager, &IEntity::m_sGfxInfo, this->m_iJobPart, this->m_iDirection, this->m_iFrame);
   IEntity::m_sGfxInfo.m_iDirection = this->m_iDirection;
-  IEntity::m_sGfxInfo.m_iDistance = this->m_iDistance;
-  IEntity::m_sGfxInfo.m_uObjType = this->m_uObjType;
-  IEntity::m_sGfxInfo.m_bIsVisible = IEntity::IsVisible(this);
+  IEntity::m_sGfxInfo.m_uDistance = this->m_iDistance;
+  IEntity::m_sGfxInfo.m_uType = this->m_uObjType;
+  IEntity::m_sGfxInfo.m_bVisible = IEntity::IsVisible(this);
   return &IEntity::m_sGfxInfo;
 }
 
