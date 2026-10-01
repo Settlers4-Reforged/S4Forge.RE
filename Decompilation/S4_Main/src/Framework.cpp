@@ -1,19 +1,19 @@
 #include "Framework.h"
 
-#include "defines.h"
-#include "CBB/CBBSupport.h"
 #include "CBB/Bugreport.h"
+#include "CBB/CBBSupport.h"
 #include "Debug/CTrace.h"
-#include "Main/CGameStateHandler.h"
-#include "Logic/Events/IEventEngine.h"
 #include "File/CFile.h"
 #include "File/CFileEx.h"
 #include "File/FilePaths.h"
+#include "Logic/Events/IEventEngine.h"
+#include "Main/CGameStateHandler.h"
+#include "defines.h"
 
-#include <direct.h>
-#include <time.h>
-#include <locale>
 #include <codecvt>
+#include <direct.h>
+#include <locale>
+#include <time.h>
 
 // Note:
 // Technically Framework.cpp and main.cpp are the same, as they share symbols not included in the linker library - meaning they are not linked but rather are one compilation unit.
@@ -47,7 +47,7 @@ unsigned int g_iGfxVersion;
 HWND g_hWnd;
 
 // address=[0x3ecda74]
-HINSTANCE *g_hInstance;
+HINSTANCE g_hInstance;
 
 // address=[0x3ecda78]
 char *g_strTitleEx;
@@ -65,46 +65,37 @@ char **g_pArgv;
 HANDLE hObject;
 
 // address=[0x13589F0]
-bool __cdecl DoesDirectoryExist(LPCWSTR lpFileName)
-{
+bool __cdecl DoesDirectoryExist(LPCWSTR lpFileName) {
     int FileAttributesW; // [esp+4h] [ebp-8h]
     char v4;             // [esp+Bh] [ebp-1h]
 
     v4 = 0;
-    if (!lpFileName || !*lpFileName)
+    if(!lpFileName || !*lpFileName)
         return v4;
     FileAttributesW = GetFileAttributesW(lpFileName);
     return FileAttributesW != (unsigned int)INVALID_FILE_ATTRIBUTES && (FileAttributesW & FILE_ATTRIBUTE_DIRECTORY) != 0;
 }
 
 // address=[0x13587C0]
-void SetRootCWD()
-{
+void SetRootCWD() {
     char v0[4];       // [esp+0h] [ebp-410h] BYREF
     char v1[4];       // [esp+4h] [ebp-40Ch] BYREF
     DWORD uCwdLength; // [esp+8h] [ebp-408h] BYREF
     char swCwd[1023]; // [esp+Ch] [ebp-404h] BYREF
     char v4;          // [esp+40Bh] [ebp-5h]
 
-    if (getcwd(swCwd, 1023))
-    {
+    if(getcwd(swCwd, 1023)) {
         uCwdLength = strlen(swCwd);
-        if ((int)uCwdLength >= 11)
-        {
-            if (!stricmp("\\exe", &swCwd[uCwdLength - 4]))
-            {
+        if((int)uCwdLength >= 11) {
+            if(!stricmp("\\exe", &swCwd[uCwdLength - 4])) {
                 chdir("..");
-            }
-            else
-            {
-                if (!stricmp("\\_debug", &swCwd[uCwdLength - 7]) || !stricmp("\\_debugfast", &swCwd[uCwdLength - 11]) || !stricmp("\\_demo", &swCwd[uCwdLength - 6]) || !stricmp("\\_openbeta", &swCwd[uCwdLength - 10]) || !stricmp("\\_release", &swCwd[uCwdLength - 9]) || !stricmp("\\_production", &swCwd[uCwdLength - 12]))
-                {
+            } else {
+                if(!stricmp("\\_debug", &swCwd[uCwdLength - 7]) || !stricmp("\\_debugfast", &swCwd[uCwdLength - 11]) || !stricmp("\\_demo", &swCwd[uCwdLength - 6]) || !stricmp("\\_openbeta", &swCwd[uCwdLength - 10]) || !stricmp("\\_release", &swCwd[uCwdLength - 9]) || !stricmp("\\_production", &swCwd[uCwdLength - 12])) {
                     chdir("..");
                 }
-                if (getcwd(swCwd, 1023))
-                {
+                if(getcwd(swCwd, 1023)) {
                     uCwdLength = strlen(swCwd);
-                    if (uCwdLength >= 11 && !stricmp("\\s4_main", &swCwd[uCwdLength - 8]))
+                    if(uCwdLength >= 11 && !stricmp("\\s4_main", &swCwd[uCwdLength - 8]))
                         chdir("..\\s4_data");
                 }
             }
@@ -112,8 +103,7 @@ void SetRootCWD()
     }
 }
 
-void ReadSerial()
-{
+void ReadSerial() {
     unsigned long Type;   // [esp+0h] [ebp-18h] BYREF
     unsigned long cbData; // [esp+4h] [ebp-14h] BYREF
     int v2;               // [esp+8h] [ebp-10h]
@@ -134,8 +124,7 @@ void ReadSerial()
         0,
         &phkResult,
         0);
-    if (!success)
-    {
+    if(!success) {
         cbData = 100;
         success = RegQueryValueExA(phkResult, "SerialNumber", 0, &Type, (LPBYTE)g_strSerial, &cbData);
         RegCloseKey(phkResult);
@@ -143,8 +132,7 @@ void ReadSerial()
 }
 
 // address=[0x01358760]
-BOOL __stdcall KillGame(HWND hWnd)
-{
+BOOL __stdcall KillGame(HWND hWnd) {
     CGameStateHandler::Kill();
     delete g_pEvnEngine;
     g_pEvnEngine = nullptr;
@@ -152,8 +140,7 @@ BOOL __stdcall KillGame(HWND hWnd)
 }
 
 // address=[0x01358EC0]
-bool __fastcall GetFileVersion(const WCHAR *_spFilePath, _DWORD *a2, _DWORD *a3)
-{
+bool __fastcall GetFileVersion(const WCHAR *_spFilePath, _DWORD *a2, _DWORD *a3) {
     unsigned int puLen;     // [esp+0h] [ebp-20h] BYREF
     unsigned long dwHandle; // [esp+4h] [ebp-1Ch] BYREF
     LPVOID lpBuffer;        // [esp+8h] [ebp-18h] BYREF
@@ -162,14 +149,13 @@ bool __fastcall GetFileVersion(const WCHAR *_spFilePath, _DWORD *a2, _DWORD *a3)
     char v11;               // [esp+1Fh] [ebp-1h]
 
     dwLen = GetFileVersionInfoSizeW(_spFilePath, &dwHandle);
-    if (!dwLen)
+    if(!dwLen)
         return false;
     lpData = malloc(dwLen);
-    if (GetFileVersionInfoW(_spFilePath, dwHandle, dwLen, lpData) && VerQueryValueW(lpData, L"\\", &lpBuffer, &puLen))
-    {
-        if (a2)
+    if(GetFileVersionInfoW(_spFilePath, dwHandle, dwLen, lpData) && VerQueryValueW(lpData, L"\\", &lpBuffer, &puLen)) {
+        if(a2)
             *a2 = *((_DWORD *)lpBuffer + 2);
-        if (a3)
+        if(a3)
             *a3 = *((_DWORD *)lpBuffer + 3);
     }
     free(lpData);
@@ -177,8 +163,7 @@ bool __fastcall GetFileVersion(const WCHAR *_spFilePath, _DWORD *a2, _DWORD *a3)
 }
 
 // address=[0x01359BE0]
-void __cdecl ShowFingerprint()
-{
+void __cdecl ShowFingerprint() {
     int v0;           // [esp+0h] [ebp-F8h] BYREF
     int v1;           // [esp+10h] [ebp-E8h]
     signed int iSize; // [esp+14h] [ebp-E4h] MAPDST
@@ -192,10 +177,9 @@ void __cdecl ShowFingerprint()
     // exceptionBlock = 1;
     sVersionFile.Open((wchar_t *)L"Version.txt", 5, CFileLog);
     iSize = sVersionFile.Size();
-    if (iSize >= 128)
-    {
+    if(iSize >= 128) {
         v1 = BBSupportDbgReport(2, "FrameWork.cpp", 770, "iSize < MAX_FINGERPRINT_LENGTH");
-        if (v1 == 1)
+        if(v1 == 1)
             __debugbreak();
     }
     memset(Text, 0, sizeof(Text));
@@ -205,19 +189,16 @@ void __cdecl ShowFingerprint()
     // exceptionBlock = -1;
 }
 
-void __cdecl GetInstanceTimestamp(char *Buffer, size_t Size, void *a3)
-{
+void __cdecl GetInstanceTimestamp(char *Buffer, size_t Size, void *a3) {
     struct tm *v3;                    // eax
     __time64_t Time;                  // [esp+0h] [ebp-34h] BYREF
     unsigned int ModuleTimeDateStamp; // [esp+8h] [ebp-2Ch]
     _DWORD v6[9];                     // [esp+Ch] [ebp-28h] BYREF
 
-    if (Buffer)
-    {
+    if(Buffer) {
         memset(Buffer, 0, Size);
         ModuleTimeDateStamp = BBSupportGetModuleTimeDateStamp(a3);
-        if (ModuleTimeDateStamp)
-        {
+        if(ModuleTimeDateStamp) {
             Time = ModuleTimeDateStamp;
             memset(v6, 0, sizeof(v6));
             v3 = _gmtime64(&Time);
@@ -228,35 +209,29 @@ void __cdecl GetInstanceTimestamp(char *Buffer, size_t Size, void *a3)
 }
 
 // address=[0x013591E0]
-int __cdecl CountArguments(char *spQuotedString)
-{
+int __cdecl CountArguments(char *spQuotedString) {
     int uCount;     // [esp+4h] [ebp-Ch]
     size_t i;       // [esp+8h] [ebp-8h]
     bool bInQuotes; // [esp+Fh] [ebp-1h]
 
     bInQuotes = FALSE;
     uCount = 0;
-    for (i = 0; i < strlen(spQuotedString); ++i)
-    {
-        if (spQuotedString[i] == '"')
-        {
+    for(i = 0; i < strlen(spQuotedString); ++i) {
+        if(spQuotedString[i] == '"') {
             bInQuotes = !bInQuotes;
-        }
-        else if (spQuotedString[i] == ' ' && !bInQuotes)
-        {
+        } else if(spQuotedString[i] == ' ' && !bInQuotes) {
             ++uCount;
-            while (spQuotedString[i] == ' ' && i < strlen(spQuotedString)) // Skip repeating spaces
+            while(spQuotedString[i] == ' ' && i < strlen(spQuotedString)) // Skip repeating spaces
                 ++i;
         }
     }
-    if (bInQuotes)
+    if(bInQuotes)
         CTrace::Print("Framework.cpp: Quote error parsing commandline. Continued anyway...!");
     return uCount + 1;
 }
 
 // address=[0x1358F70]
-void __cdecl PrintCommandline(bool _bKeepFirstArg)
-{
+void __cdecl PrintCommandline(bool _bKeepFirstArg) {
     signed int uCommandLineLength; // [esp+4h] [ebp-30h]
     int iArgc;                     // [esp+18h] [ebp-1Ch]
     signed int uArgumentLength;    // [esp+1Ch] [ebp-18h]
@@ -276,34 +251,25 @@ void __cdecl PrintCommandline(bool _bKeepFirstArg)
     uArgumentLength = 0;
     bInQuotes = 0;
     bSkipArg = !_bKeepFirstArg;
-    for (i = 0; i < iArgc; ++i)
-    {
-        for (j = uArgumentLength; j < uCommandLineLength; ++j)
-        {
-            if (spCommandLine[j] == '"')
-            {
+    for(i = 0; i < iArgc; ++i) {
+        for(j = uArgumentLength; j < uCommandLineLength; ++j) {
+            if(spCommandLine[j] == '"') {
                 bInQuotes = !bInQuotes;
-            }
-            else if (spCommandLine[j] == ' ' && !bInQuotes)
-            {
+            } else if(spCommandLine[j] == ' ' && !bInQuotes) {
                 break;
             }
         }
-        if (bSkipArg)
-        {
+        if(bSkipArg) {
             bSkipArg = 0;
             --i;
-        }
-        else
-        {
+        } else {
             g_pArgv[i] = (char *)operator new[](j - uArgumentLength + 1);
-            for (k = uArgumentLength; k < j; ++k)
+            for(k = uArgumentLength; k < j; ++k)
                 g_pArgv[i][k - uArgumentLength] = spCommandLine[k];
             g_pArgv[i][k - uArgumentLength] = 0;
         }
-        if (spCommandLine[j] == ' ' && !bInQuotes)
-        {
-            while (spCommandLine[j] == ' ' && j < strlen(spCommandLine))
+        if(spCommandLine[j] == ' ' && !bInQuotes) {
+            while(spCommandLine[j] == ' ' && j < strlen(spCommandLine))
                 ++j;
         }
         uArgumentLength = j;
@@ -311,8 +277,7 @@ void __cdecl PrintCommandline(bool _bKeepFirstArg)
 }
 
 // address=[0x013592B0]
-void __cdecl PrepareFilesForReading(const wchar_t *_swpFolder, const wchar_t *_swpFileSearch)
-{
+void __cdecl PrepareFilesForReading(const wchar_t *_swpFolder, const wchar_t *_swpFileSearch) {
     HANDLE hFindFile;                       // [esp+0h] [ebp-1268h]
     struct _WIN32_FIND_DATAW pFindFileData; // [esp+4h] [ebp-1264h] BYREF
     WCHAR swpFoundFilePath[1028];           // [esp+254h] [ebp-1014h] BYREF
@@ -320,22 +285,17 @@ void __cdecl PrepareFilesForReading(const wchar_t *_swpFolder, const wchar_t *_s
 
     memset(swpSearchPathWildcard, 0, sizeof(swpSearchPathWildcard));
     memset(swpFoundFilePath, 0, sizeof(swpFoundFilePath));
-    if (_swpFolder)
-    {
-        if (_swpFileSearch)
-        {
-            if (*_swpFileSearch)
-            {
+    if(_swpFolder) {
+        if(_swpFileSearch) {
+            if(*_swpFileSearch) {
                 wsprintfW(swpSearchPathWildcard, L"%s%s", _swpFolder, _swpFileSearch);
                 memset(&pFindFileData, 0, sizeof(pFindFileData));
                 hFindFile = FindFirstFileW(swpSearchPathWildcard, &pFindFileData);
-                if (hFindFile != (HANDLE)-1)
-                {
-                    do
-                    {
+                if(hFindFile != (HANDLE)-1) {
+                    do {
                         wsprintfW(swpFoundFilePath, L"%s%s", _swpFolder, pFindFileData.cFileName);
                         SetFileAttributesW(swpFoundFilePath, FILE_ATTRIBUTE_NORMAL);
-                    } while (FindNextFileW(hFindFile, &pFindFileData));
+                    } while(FindNextFileW(hFindFile, &pFindFileData));
                     FindClose(hFindFile);
                 }
             }
@@ -344,18 +304,15 @@ void __cdecl PrepareFilesForReading(const wchar_t *_swpFolder, const wchar_t *_s
 }
 
 // address=[0x013593E0]
-void __cdecl PreloadGfx()
-{
+void __cdecl PreloadGfx() {
     PrepareFilesForReading(L"Gfx\\", L"1.*");
     PrepareFilesForReading(L"Gfx\\", L"35.*");
 }
 
 // address=[0x013591E0]
-unsigned long __cdecl GetSystemLanguage(void)
-{
+unsigned long __cdecl GetSystemLanguage(void) {
     unsigned int i; // [esp+8h] [ebp-4D8h]
-    struct SLanguagePair
-    {
+    struct SLanguagePair {
         const char *m_spName;
         int m_iId;
     } sAvailableLanguages[26]; // [esp+Ch] [ebp-4D4h]
@@ -415,9 +372,8 @@ unsigned long __cdecl GetSystemLanguage(void)
     sAvailableLanguages[25].m_iId = 17;
     GetLocaleInfoA(LOCALE_SYSTEM_DEFAULT, 3u, LCData, 1024);
     LCData[2] = 0;
-    for (i = 0; i < 26; ++i)
-    {
-        if (!strcmp(sAvailableLanguages[i].m_spName, LCData))
+    for(i = 0; i < 26; ++i) {
+        if(!strcmp(sAvailableLanguages[i].m_spName, LCData))
             return sAvailableLanguages[i].m_iId;
     }
     return 0;
@@ -425,12 +381,11 @@ unsigned long __cdecl GetSystemLanguage(void)
 
 // address=[0x1359410]
 // Decompiled from ATOM __cdecl RegisterWindowClass(HINSTANCE hInstance)
-unsigned short __cdecl RegisterWindowClass(HINSTANCE hInstance)
-{
+unsigned short __cdecl RegisterWindowClass(HINSTANCE hInstance) {
 
-    if (!g_pEvnEngine && BBSupportDbgReport(2, "FrameWork.cpp", 300, "g_pEvnEngine != NULL") == 1)
+    if(!g_pEvnEngine && BBSupportDbgReport(2, "FrameWork.cpp", 300, "g_pEvnEngine != NULL") == 1)
         __debugbreak();
-    if (!g_pEvnEngine)
+    if(!g_pEvnEngine)
         return -1;
 
     WNDCLASSEXA sWindowsClass{};
@@ -451,8 +406,7 @@ unsigned short __cdecl RegisterWindowClass(HINSTANCE hInstance)
 }
 
 // address=[0x13594d0]
-bool __cdecl ExistsExtractCommand(void)
-{
+bool __cdecl ExistsExtractCommand(void) {
     wchar_t *v1;             // eax
     size_t v2;               // eax
     _DWORD v3[7];            // [esp+0h] [ebp-228h] BYREF
@@ -470,7 +424,7 @@ bool __cdecl ExistsExtractCommand(void)
     _DWORD *v17; // [esp+218h] [ebp-10h]
     int v18;     // [esp+224h] [ebp-4h]
 
-    if (!g_iArgc)
+    if(!g_iArgc)
         return 0;
 
     wchar_t swpAllArguments[128];
@@ -479,11 +433,10 @@ bool __cdecl ExistsExtractCommand(void)
     wcsncpy(swpAllArguments, conv.from_bytes(*g_pArgv).c_str(), 127);
     wcsupr(swpAllArguments);
 
-    if (wcsstr(swpAllArguments, L"EXTRACT:\""))
-    {
+    if(wcsstr(swpAllArguments, L"EXTRACT:\"")) {
         memcpy(swpAllArguments, &swpAllArguments[9], wcslen(swpAllArguments) - 9);
         v6 = 2 * wcslen(swpAllArguments) - 20;
-        if (v6 >= 0x100)
+        if(v6 >= 0x100)
             throw std::length_error("Extract command too long!");
         *(wchar_t *)((char *)swpAllArguments + v6) = 0;
         CFileEx pExtractFile{};
@@ -492,43 +445,35 @@ bool __cdecl ExistsExtractCommand(void)
 
         uExtractFileSize = 0;
         uExtractFileSize = pExtractFile.Size();
-        if (uExtractFileSize)
-        {
+        if(uExtractFileSize) {
             Buffer = new char[uExtractFileSize + 8];
             memset(Buffer, 0, uExtractFileSize + 8);
             pExtractFile.Read(Buffer, 1, uExtractFileSize, CFileLog);
         }
         v18 = 2;
         pExtractFile.Close(CFileLog);
-        if (Buffer)
-        {
+        if(Buffer) {
             pExtractFile.Open(L"Extract", 8, 0, CFileLog);
             pExtractFile.Write(Buffer, 1u, uExtractFileSize, CFileLog);
             pExtractFile.Close(CFileLog);
             MessageBoxA(0, "File successfully extracted!", "", 0);
             delete[] Buffer;
-        }
-        else
-        {
+        } else {
             MessageBoxA(0, "Error while reading file!", "", 0);
         }
         return 1;
-    }
-    else
-    {
+    } else {
         return 0;
     }
 }
 
 // address=[0x013585F0]
-std::wstring GetCrashlogFilename()
-{
+std::wstring GetCrashlogFilename() {
     return FilePaths::GetUserDirectoryPath() + L"Crashinfo.txt";
 }
 
 // address=[0x01358B00]
-int CheckForCrashlog()
-{
+int CheckForCrashlog() {
     size_t uCrashlogBytesRead;   // [esp+20h] [ebp-2E0h] MAPDST
     size_t uCrashlogSize;        // [esp+24h] [ebp-2DCh]
     unsigned int v8;             // [esp+28h] [ebp-2D8h]
@@ -541,7 +486,7 @@ int CheckForCrashlog()
     uCrashlogBytesRead = pCrashlogFile.Read(ExistingFileName, 1u, uCrashlogSize, CFileLog);
 
     v8 = 2 * uCrashlogBytesRead;
-    if (2 * uCrashlogBytesRead >= 520)
+    if(2 * uCrashlogBytesRead >= 520)
         throw std::length_error("Crashlog filename too long!");
 
     ExistingFileName[v8 / 2] = 0;
@@ -550,19 +495,17 @@ int CheckForCrashlog()
     CTrace::Print("Framework.cpp: 'Crashlog.txt' found! ");
     std::wstring sTraceFilePath(Bugreport::BuildTraceFilePath(ExistingFileName));
 
-    if (!sTraceFilePath.empty())
-    {
+    if(!sTraceFilePath.empty()) {
         FilePaths::EnsurePathExists(sTraceFilePath);
         CopyFileW(ExistingFileName, sTraceFilePath.c_str(), 0);
         Bugreport::LaunchAutoreport(0, Bugreport::BuildAutoReporterCmdLineArgsForDebugReports());
     }
 }
 
-void CleanupArgs()
-{
+void CleanupArgs() {
     unsigned int i; // [esp+8h] [ebp-4h]
 
-    for (i = 0; i < g_iArgc; ++i)
+    for(i = 0; i < g_iArgc; ++i)
         delete[] g_pArgv[i];
     delete[] g_pArgv;
 }

@@ -32,7 +32,7 @@ extern unsigned int g_iGfxVersion;
 extern HWND g_hWnd;
 
 // address=[0x3ecda74]
-extern HINSTANCE *g_hInstance;
+extern HINSTANCE g_hInstance;
 
 // address=[0x3ecda78]
 extern char *g_strTitleEx;
