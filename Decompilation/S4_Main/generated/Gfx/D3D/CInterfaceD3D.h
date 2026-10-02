@@ -105,7 +105,7 @@ public:
     void  CalcTilingVerticesType2(int _LandscapeType);
 
     // address=[0x2f82540]
-    int  AllocateEngineData(int a2);
+    int  AllocateEngineData(int _iVertexCount);
 
     // address=[0x2f85f40]
     void  ChangeCurrentTexturePage(int a2);
@@ -114,7 +114,7 @@ public:
     class CSurface *  GetLandscapeRenderTargetSurface(void);
 
     // address=[0x2f86180]
-    void  RenderScene(bool a2);
+    void  RenderScene(bool _bCleanVertexBuffer);
 
     // address=[0x2f8a910]
     int  IsInterface7Available(bool & _rSuccess, struct HWND__ * a3);
@@ -146,8 +146,8 @@ public:
     D3DVIEWPORT7 m_sViewport;
     IDirectDraw7 * m_pDDraw7;
     CSurface * m_pLandscapeSurface;
-    CSurface * m_pCameraWindowSurface;
-    CSurface * m_pLandscapeSurface2;
+    CSurface * m_pLandscapeCameraRenderSurface;
+    CSurface * m_pCurrentLandScapeRenderTarget;
     CSurface * m_pFinalRenderSurface;
     CSurface * m_pTmpSurface;
     CSurface * m_pPrimarySurface;
@@ -166,7 +166,7 @@ public:
     unsigned __int8 m_bHardwareRuns;
     unsigned __int8[5] m_bAvailableResolutions;
     unsigned __int8 m_bEngineWasRebuilded;
-    CCachePageManager *[2] m_pcPictureManager;
+    CUploadCachePageManager *[2] m_pcPictureManager;
     int m_iObjectSceneLock;
     int m_iLandscapeSceneLock;
     int m_iGuiSurfaceSize;

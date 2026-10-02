@@ -3,6 +3,9 @@
 
 #include "defines.h"
 
+// address=[0x46f32d0]
+extern class CCacheManager g_cCacheManager;
+
 class CCacheManager {
   public:
     // address=[0x2f895b0]

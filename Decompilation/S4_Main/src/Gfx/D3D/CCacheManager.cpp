@@ -2,6 +2,9 @@
 
 // Definitions for class CCacheManager
 
+// address=[0x46f32d0]
+CCacheManager g_cCacheManager{};
+
 // address=[0x2f895b0]
 // Decompiled from CCacheManager *__thiscall CCacheManager::CCacheManager(CCacheManager *this)
 CCacheManager::CCacheManager(void) {

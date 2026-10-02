@@ -1,19 +1,14 @@
 #ifndef CWORLDMANAGER_H
 #define CWORLDMANAGER_H
 
-#include "defines.h"
+#include "Gfx/SGfxColor.h"
 #include "TMap.h"
-
-struct SGfxColor {
-    int m_iR;
-    int m_iG;
-    int m_iB;
-};
+#include "defines.h"
 
 extern class CWorldManager g_cWorld;
 
 class CWorldManager {
-public:
+  public:
     // address=[0x12fd0f0]
     static unsigned int __cdecl FlagBits(int a1, unsigned int a2);
 
@@ -174,13 +169,13 @@ public:
     static int __cdecl GroundHeight(int _iX, int _iY);
 
     // address=[0x14aabe0]
-    static unsigned short * __cdecl GetDecoObjectPtr(void);
+    static unsigned short *__cdecl GetDecoObjectPtr(void);
 
     // address=[0x14aac20]
-    static struct T_GFX_MAP_ELEMENT * __cdecl GetLandscapePtr(void);
+    static struct T_GFX_MAP_ELEMENT *__cdecl GetLandscapePtr(void);
 
     // address=[0x14aac30]
-    static unsigned short * __cdecl GetMapObjectPtr(void);
+    static unsigned short *__cdecl GetMapObjectPtr(void);
 
     // address=[0x14d87f0]
     static void __cdecl SetMapObjectId(int _iTileId, int _iObjectId);
@@ -300,7 +295,7 @@ public:
     static void __cdecl TraceLine(int a1, int a2, int a3, int a4);
 
     // address=[0x16a4380]
-    static struct SGfxColor * __cdecl GetMiniMapColor(unsigned int _iTileId);
+    static struct SGfxColor *__cdecl GetMiniMapColor(unsigned int _iTileId);
 
     // address=[0x16a4480]
     static void __cdecl WorldSetNumberOfNextLine(int a1);
@@ -314,7 +309,7 @@ public:
     // address=[0x16a44f0]
     static int __cdecl WorldOwnerIdColor(int _iTileId);
 
-protected:
+  protected:
     // address=[0x16a4520]
     static void __cdecl Construct(int _iWidthHeight);
 
@@ -390,6 +385,5 @@ protected:
     // address=[0x462C980]
     static SGfxColor m_sMinimapColorBuffer;
 };
-
 
 #endif // CWORLDMANAGER_H

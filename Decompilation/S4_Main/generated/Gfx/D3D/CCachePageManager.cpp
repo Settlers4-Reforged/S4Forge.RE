@@ -444,12 +444,12 @@ bool  CCachePageManager::ShowPageContent(long & a2) {
   *(&CCachePageManager::sm_sVertexList[0].sy + 40) = (float)612;
   *(&CCachePageManager::sm_sVertexList[0].tu + 40) = CCachePageManager::sm_fTextureCoordTable[511];
   *(&CCachePageManager::sm_sVertexList[0].tv + 40) = CCachePageManager::sm_fTextureCoordTable[511];
-  *(&CCachePageManager::sm_sVertexList[0].color + 40) = (D3DCOLOR)&dword_F29144[220078] + 3;
-  *(&CCachePageManager::sm_sVertexList[0].color + 32) = (D3DCOLOR)&dword_F29144[220078] + 3;
-  *(&CCachePageManager::sm_sVertexList[0].color + 24) = (D3DCOLOR)&dword_F29144[220078] + 3;
-  *(&CCachePageManager::sm_sVertexList[0].color + 16) = (D3DCOLOR)&dword_F29144[220078] + 3;
-  *(&CCachePageManager::sm_sVertexList[0].color + 8) = (D3DCOLOR)&dword_F29144[220078] + 3;
-  CCachePageManager::sm_sVertexList[0].color = (D3DCOLOR)&dword_F29144[220078] + 3;
+  *(&CCachePageManager::sm_sVertexList[0].color + 40) = 0xFFFFFF;
+  *(&CCachePageManager::sm_sVertexList[0].color + 32) = 0xFFFFFF;
+  *(&CCachePageManager::sm_sVertexList[0].color + 24) = 0xFFFFFF;
+  *(&CCachePageManager::sm_sVertexList[0].color + 16) = 0xFFFFFF;
+  *(&CCachePageManager::sm_sVertexList[0].color + 8) = 0xFFFFFF;
+  CCachePageManager::sm_sVertexList[0].color = 0xFFFFFF;
   *a2 = this->m_pRenderDevice->DrawPrimitive(this->m_pRenderDevice, D3DPT_TRIANGLELIST, 452, CCachePageManager::sm_sVertexList, 6, 0);
   if ( this->m_pSystemTexture != nullptr )
   {

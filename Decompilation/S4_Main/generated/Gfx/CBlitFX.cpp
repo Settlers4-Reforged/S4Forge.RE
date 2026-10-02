@@ -4,10 +4,10 @@
 // Definitions for class CBlitFX
 
 // address=[0x2f69900]
-// Decompiled from CBlitFX *__thiscall CBlitFX::GetBlitStructPtr(CBlitFX *this)
+// Decompiled from _DDBLTFX *__thiscall CBlitFX::GetBlitStructPtr(CBlitFX *this)
 struct _DDBLTFX *  CBlitFX::GetBlitStructPtr(void) {
   
-  return this;
+  return &this->m_sBlitFX;
 }
 
 

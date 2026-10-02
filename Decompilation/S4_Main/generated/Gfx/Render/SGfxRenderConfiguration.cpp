@@ -135,10 +135,10 @@ bool  SGfxRenderConfiguration::IsEditorMode(void)const {
 
 
 // address=[0x2f5f410]
-// Decompiled from char __thiscall SGfxRenderConfiguration::IsHardwareLandscapeEngine(SGfxRenderConfiguration *this)
+// Decompiled from bool __thiscall SGfxRenderConfiguration::IsHardwareLandscapeEngine(SGfxRenderConfiguration *this)
 bool  SGfxRenderConfiguration::IsHardwareLandscapeEngine(void)const {
   
-  return 1;
+  return true;
 }
 
 

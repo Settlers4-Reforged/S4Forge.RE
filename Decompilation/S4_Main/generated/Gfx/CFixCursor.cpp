@@ -1,3 +1,4 @@
+#if FALSE
 #include "CFixCursor.h"
 
 // Definitions for class CFixCursor
@@ -7,47 +8,47 @@
  CFixCursor::CFixCursor(void) {
   
   this->m_bVisible = 0;
-  this->? = 0;
-  this->m_sRect = 0;
-  this->? = 0;
-  this->? = 0;
-  this->? = 0;
-  this->m_sOffset = 0;
-  this->? = 0;
-  this->? = 0;
-  this->m_pSurface = 0;
+  this->m_sRect.right = 0;
+  this->m_sRect.left = 0;
+  this->m_sRect.top = 0;
+  this->m_sRect.bottom = 0;
+  this->m_sOffset.right = 0;
+  this->m_sOffset.left = 0;
+  this->m_sOffset.top = 0;
+  this->m_sOffset.bottom = 0;
+  this->m_pSurface = nullptr;
   return this;
 }
 
 
 // address=[0x2f624a0]
-// Decompiled from int __thiscall CFixCursor::SetSurfacePtr(CFixCursor *this, unsigned __int16 a2, CSurfaceV7 *a3, unsigned __int16 a4)
+// Decompiled from int __thiscall CFixCursor::SetSurfacePtr(CFixCursor *this, unsigned __int16 a2, CSurface *a3, WORD a4)
 void  CFixCursor::SetSurfacePtr(unsigned short a2, class CSurface * a3, unsigned short a4) {
   
-  unsigned int v5; // [esp+0h] [ebp-2Ch] BYREF
+  unsigned int iPitch; // [esp+0h] [ebp-2Ch] BYREF
   COLORREF Pixel; // [esp+4h] [ebp-28h]
   HGDIOBJ h; // [esp+8h] [ebp-24h]
-  int v8; // [esp+Ch] [ebp-20h] BYREF
+  WORD *pSurfaceData; // [esp+Ch] [ebp-20h] BYREF
   int y; // [esp+10h] [ebp-1Ch]
   int v10; // [esp+14h] [ebp-18h]
   int x; // [esp+1Ch] [ebp-10h]
   HGDIOBJ ho; // [esp+20h] [ebp-Ch]
   HDC hdc; // [esp+24h] [ebp-8h]
-  unsigned __int16 v15; // [esp+28h] [ebp-4h]
+  WORD v15; // [esp+28h] [ebp-4h]
 
   this->m_pSurface = a3;
   ho = LoadBitmapA(g_hInstance, (LPCSTR)a2);
-  if ( ho == 0 )
+  if ( ho == nullptr )
   {
     return BBSupportTracePrintF(1, "GFX ENGINE: Cannot open resource bitmap!");
   }
-  hdc = CreateCompatibleDC(0);
-  if ( hdc != 0 )
+  hdc = CreateCompatibleDC(nullptr);
+  if ( hdc != nullptr )
   {
     h = SelectObject(hdc, ho);
-    if ( h != 0 )
+    if ( h != nullptr )
     {
-      v10 = this->m_pSurface->Lock(this->m_pSurface, (int *)&v5, &v8, 1);
+      v10 = this->m_pSurface->Lock((CSurfaceV7 *)this->m_pSurface, &iPitch, (void **)&pSurfaceData, 1u);
       if ( v10 != 0 )
       {
         WriteError(v10, "LockCursorSurface");
@@ -75,11 +76,11 @@ void  CFixCursor::SetSurfacePtr(unsigned short a2, class CSurface * a3, unsigned
             {
               v15 = 0;
             }
-            *(_WORD *)(v8 + 2 * x) = v15;
+            pSurfaceData[x] = v15;
           }
-          v8 += 2 * (v5 >> 1);
+          pSurfaceData += iPitch >> 1;
         }
-        v10 = this->m_pSurface->Unlock(this->m_pSurface);
+        v10 = this->m_pSurface->Unlock((CSurfaceV7 *)this->m_pSurface);
         if ( v10 != 0 )
         {
           WriteError(v10, "UnlockCursorSurface");
@@ -122,15 +123,15 @@ void  CFixCursor::SetFixCursor(int a2, int a3, bool a4) {
   this->m_sOffset.top = 0;
   this->m_sOffset.right = 32;
   this->m_sOffset.bottom = 32;
-  if ( this->m_sRect.bottom > GfxEngineSetup.m_uHeight )
+  if ( this->m_sRect.bottom > GfxEngineSetup.sRenderSetup.m_uHeight )
   {
-    v5 = this->m_sRect.bottom - GfxEngineSetup.m_uHeight;
+    v5 = this->m_sRect.bottom - GfxEngineSetup.sRenderSetup.m_uHeight;
     this->m_sRect.bottom -= v5;
     this->m_sOffset.bottom -= v5;
   }
-  if ( this->m_sRect.right > GfxEngineSetup.m_uWidth )
+  if ( this->m_sRect.right > GfxEngineSetup.sRenderSetup.m_uWidth )
   {
-    v6 = this->m_sRect.right - GfxEngineSetup.m_uWidth;
+    v6 = this->m_sRect.right - GfxEngineSetup.sRenderSetup.m_uWidth;
     this->m_sRect.right -= v6;
     this->m_sOffset.right -= v6;
   }
@@ -150,16 +151,16 @@ void  CFixCursor::SetFixCursor(int a2, int a3, bool a4) {
 
 
 // address=[0x2f62800]
-// Decompiled from HRESULT __thiscall CFixCursor::Show(CFixCursor *this, CSurfaceV7 *a2)
+// Decompiled from HRESULT __thiscall CFixCursor::Show(CFixCursor *this, CSurface *a2)
 long  CFixCursor::Show(class CSurface * a2) {
   
   if ( CFixCursor::IsVisible(this) == 0 )
   {
     return 0;
   }
-  if ( this->m_pSurface != 0 && a2 != 0 )
+  if ( this->m_pSurface != nullptr && a2 != nullptr )
   {
-    return a2->Blt(a2, &this->m_sRect, this->m_pSurface, &this->m_sOffset, 0x8000u, 0);
+    return a2->Blt(a2, &this->m_sRect, this->m_pSurface, &this->m_sOffset, 0x8000u, nullptr);
   }
   return 0;
 }
@@ -173,3 +174,4 @@ bool  CFixCursor::IsVisible(void) {
 }
 
 
+#endif // Already implemented

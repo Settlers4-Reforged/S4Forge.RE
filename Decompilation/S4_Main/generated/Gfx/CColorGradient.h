@@ -13,7 +13,7 @@ public:
 
     // Type information members
 public:
-    char[8][64] m_vGradients;
+    unsigned __int16[8][32] m_vGradients;
     SGfxColor[64] m_vPlayerColors;
 
 };

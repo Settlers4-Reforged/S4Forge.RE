@@ -14,7 +14,7 @@ void  CColorGradient::SetupGradients(int a2, struct SGfxColor a3, int a4) {
 
   m_iG = a3.m_iG;
   m_iB = a3.m_iB;
-  if ( a6 )
+  if ( a6 != 0 )
   {
     if ( a6 == 1 )
     {
@@ -22,7 +22,7 @@ void  CColorGradient::SetupGradients(int a2, struct SGfxColor a3, int a4) {
             i >= 0;
             --i )
       {
-        *(_WORD *)&this->m_vGradients[a2][2 * i] = (int)(float)((float)m_iB * 0.12156863) + 32 * (int)(float)((float)m_iG * 0.12156863) + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.12156863) << 10);
+        this->m_vGradients[a2][i] = (int)(float)((float)m_iB * 0.12156863) + 32 * (int)(float)((float)m_iG * 0.12156863) + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.12156863) << 10);
         a3.m_iR -= 8;
         m_iB -= 8;
         m_iG -= 8;
@@ -46,7 +46,7 @@ void  CColorGradient::SetupGradients(int a2, struct SGfxColor a3, int a4) {
             j >= 0;
             --j )
       {
-        *(_WORD *)&this->m_vGradients[a2][2 * j] = (int)(float)((float)m_iB * 0.05882353) + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.05882353) << 8) + 16 * (int)(float)((float)m_iG * 0.05882353) - 4096;
+        this->m_vGradients[a2][j] = (int)(float)((float)m_iB * 0.05882353) + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.05882353) << 8) + 16 * (int)(float)((float)m_iG * 0.05882353) - 4096;
         a3.m_iR -= 8;
         m_iB -= 8;
         m_iG -= 8;
@@ -71,7 +71,7 @@ void  CColorGradient::SetupGradients(int a2, struct SGfxColor a3, int a4) {
           k >= 0;
           --k )
     {
-      *(_WORD *)&this->m_vGradients[a2][2 * k] = (int)(float)((float)m_iB * 0.12156863) + 32 * (int)(float)((float)m_iG * 0.24705882) + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.12156863) << 11);
+      this->m_vGradients[a2][k] = (int)(float)((float)m_iB * 0.12156863) + 32 * (int)(float)((float)m_iG * 0.24705882) + ((unsigned __int16)(int)(float)((float)a3.m_iR * 0.12156863) << 11);
       a3.m_iR -= 8;
       m_iB -= 8;
       m_iG -= 8;

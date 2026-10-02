@@ -47163,105 +47163,100 @@ bool __cdecl RenderObjectLayer(bool a1) {
   __int64 v22; // [esp-18h] [ebp-6860h]
   __int64 v23; // [esp-18h] [ebp-6860h]
   __int64 v24; // [esp-18h] [ebp-6860h]
-  __int64 v25; // [esp-Ch] [ebp-6854h]
-  __int64 v26; // [esp-Ch] [ebp-6854h]
-  __int64 v27; // [esp-8h] [ebp-6850h]
-  __int64 v28; // [esp-8h] [ebp-6850h]
+  __int64 v25; // [esp-8h] [ebp-6850h]
+  __int64 v26; // [esp-8h] [ebp-6850h]
+  __int64 v27; // [esp+0h] [ebp-6848h]
+  __int64 v28; // [esp+0h] [ebp-6848h]
   __int64 v29; // [esp+0h] [ebp-6848h]
-  __int64 v30; // [esp+0h] [ebp-6848h]
-  __int64 v31; // [esp+0h] [ebp-6848h]
-  __int64 v32; // [esp+0h] [ebp-6848h]
-  __int64 v33; // [esp+0h] [ebp-6848h]
-  int v34; // [esp+28h] [ebp-6820h]
-  int v35; // [esp+2Ch] [ebp-681Ch]
+  int v30; // [esp+28h] [ebp-6820h]
+  int v31; // [esp+2Ch] [ebp-681Ch]
   LONG top; // [esp+38h] [ebp-6810h]
   LONG left; // [esp+3Ch] [ebp-680Ch]
-  int v38; // [esp+40h] [ebp-6808h]
-  int v39; // [esp+44h] [ebp-6804h]
-  int v40; // [esp+48h] [ebp-6800h]
-  int v41; // [esp+50h] [ebp-67F8h]
-  int v42; // [esp+54h] [ebp-67F4h]
-  __int64 v43; // [esp+5Ch] [ebp-67ECh]
-  int v44; // [esp+64h] [ebp-67E4h] BYREF
-  int v45; // [esp+68h] [ebp-67E0h] BYREF
-  T_GFX_MAP_ELEMENT *v46; // [esp+6Ch] [ebp-67DCh]
-  int v47; // [esp+70h] [ebp-67D8h]
+  int v34; // [esp+40h] [ebp-6808h]
+  int v35; // [esp+44h] [ebp-6804h]
+  int v36; // [esp+48h] [ebp-6800h]
+  int v37; // [esp+50h] [ebp-67F8h]
+  int v38; // [esp+54h] [ebp-67F4h]
+  __int64 v39; // [esp+5Ch] [ebp-67ECh]
+  int v40; // [esp+64h] [ebp-67E4h] BYREF
+  int v41; // [esp+68h] [ebp-67E0h] BYREF
+  T_GFX_MAP_ELEMENT *v42; // [esp+6Ch] [ebp-67DCh]
+  int v43; // [esp+70h] [ebp-67D8h]
   unsigned int iDeco; // [esp+74h] [ebp-67D4h]
-  int v49; // [esp+78h] [ebp-67D0h]
-  int v50; // [esp+7Ch] [ebp-67CCh]
-  int v51; // [esp+80h] [ebp-67C8h]
-  int v52; // [esp+84h] [ebp-67C4h]
-  int v53; // [esp+88h] [ebp-67C0h]
-  int v54; // [esp+8Ch] [ebp-67BCh]
-  int v55; // [esp+90h] [ebp-67B8h]
-  int v56; // [esp+94h] [ebp-67B4h]
-  int v57; // [esp+98h] [ebp-67B0h]
-  int v58; // [esp+9Ch] [ebp-67ACh]
-  int v59; // [esp+A0h] [ebp-67A8h]
-  int v60; // [esp+A4h] [ebp-67A4h]
-  float v61; // [esp+A8h] [ebp-67A0h]
-  int v62; // [esp+ACh] [ebp-679Ch]
-  int v63; // [esp+B0h] [ebp-6798h]
-  void *v64; // [esp+B4h] [ebp-6794h] BYREF
-  int v65; // [esp+B8h] [ebp-6790h]
-  void *v66; // [esp+BCh] [ebp-678Ch] BYREF
-  int v67; // [esp+C0h] [ebp-6788h]
-  int v68; // [esp+C4h] [ebp-6784h] BYREF
+  int v45; // [esp+78h] [ebp-67D0h]
+  int v46; // [esp+7Ch] [ebp-67CCh]
+  int v47; // [esp+80h] [ebp-67C8h]
+  int v48; // [esp+84h] [ebp-67C4h]
+  int v49; // [esp+88h] [ebp-67C0h]
+  int v50; // [esp+8Ch] [ebp-67BCh]
+  int v51; // [esp+90h] [ebp-67B8h]
+  int v52; // [esp+94h] [ebp-67B4h]
+  int v53; // [esp+98h] [ebp-67B0h]
+  int v54; // [esp+9Ch] [ebp-67ACh]
+  int v55; // [esp+A0h] [ebp-67A8h]
+  int v56; // [esp+A4h] [ebp-67A4h]
+  float v57; // [esp+A8h] [ebp-67A0h]
+  int v58; // [esp+ACh] [ebp-679Ch]
+  int v59; // [esp+B0h] [ebp-6798h]
+  void *v60; // [esp+B4h] [ebp-6794h] BYREF
+  int v61; // [esp+B8h] [ebp-6790h]
+  void *v62; // [esp+BCh] [ebp-678Ch] BYREF
+  int v63; // [esp+C0h] [ebp-6788h]
+  int v64; // [esp+C4h] [ebp-6784h] BYREF
   T_GFX_MAP_ELEMENT *psMapElement; // [esp+C8h] [ebp-6780h]
-  int v70; // [esp+CCh] [ebp-677Ch]
-  int v71; // [esp+D0h] [ebp-6778h] BYREF
-  int v72; // [esp+D4h] [ebp-6774h]
-  unsigned __int8 *v73; // [esp+D8h] [ebp-6770h]
-  int v74; // [esp+DCh] [ebp-676Ch]
-  int v75; // [esp+E0h] [ebp-6768h]
+  int v66; // [esp+CCh] [ebp-677Ch]
+  int v67; // [esp+D0h] [ebp-6778h] BYREF
+  int v68; // [esp+D4h] [ebp-6774h]
+  unsigned __int8 *v69; // [esp+D8h] [ebp-6770h]
+  int v70; // [esp+DCh] [ebp-676Ch]
+  int v71; // [esp+E0h] [ebp-6768h]
   int m_iDirection; // [esp+E4h] [ebp-6764h]
   unsigned int iObject; // [esp+E8h] [ebp-6760h]
   int m_uType; // [esp+ECh] [ebp-675Ch]
-  int v79; // [esp+F0h] [ebp-6758h]
-  int v80; // [esp+F4h] [ebp-6754h]
-  unsigned __int16 *v81; // [esp+F8h] [ebp-6750h]
-  int v82; // [esp+FCh] [ebp-674Ch]
-  int v83; // [esp+100h] [ebp-6748h]
+  int v75; // [esp+F0h] [ebp-6758h]
+  int v76; // [esp+F4h] [ebp-6754h]
+  unsigned __int16 *v77; // [esp+F8h] [ebp-6750h]
+  int v78; // [esp+FCh] [ebp-674Ch]
+  int v79; // [esp+100h] [ebp-6748h]
   int iCurrentFog; // [esp+104h] [ebp-6744h]
-  int v85; // [esp+108h] [ebp-6740h]
-  unsigned __int16 *v86; // [esp+10Ch] [ebp-673Ch]
-  int v87; // [esp+110h] [ebp-6738h]
-  int v88; // [esp+114h] [ebp-6734h]
-  int v89; // [esp+118h] [ebp-6730h]
-  int v90; // [esp+11Ch] [ebp-672Ch]
-  int v91; // [esp+120h] [ebp-6728h]
-  int v92; // [esp+124h] [ebp-6724h]
-  int i; // [esp+128h] [ebp-6720h]
-  bool v94; // [esp+12Fh] [ebp-6719h]
+  int v81; // [esp+108h] [ebp-6740h]
+  unsigned __int16 *v82; // [esp+10Ch] [ebp-673Ch]
+  int v83; // [esp+110h] [ebp-6738h]
+  int v84; // [esp+114h] [ebp-6734h]
+  int v85; // [esp+118h] [ebp-6730h]
+  int v86; // [esp+11Ch] [ebp-672Ch]
+  int v87; // [esp+120h] [ebp-6728h]
+  int v88; // [esp+124h] [ebp-6724h]
+  SGfxObjectInfo *i; // [esp+128h] [ebp-6720h]
+  bool v90; // [esp+12Fh] [ebp-6719h]
   int m_uDistance; // [esp+130h] [ebp-6718h]
   int iSizeOfMap; // [esp+134h] [ebp-6714h]
-  int v97; // [esp+138h] [ebp-6710h] BYREF
+  int v93; // [esp+138h] [ebp-6710h]
   unsigned __int8 IconObjectByX; // [esp+13Fh] [ebp-6709h]
   int hResult; // [esp+140h] [ebp-6708h]
-  int v100; // [esp+144h] [ebp-6704h]
-  int v101; // [esp+148h] [ebp-6700h]
+  int v96; // [esp+144h] [ebp-6704h]
+  int v97; // [esp+148h] [ebp-6700h]
   int iVertexHeight; // [esp+14Ch] [ebp-66FCh]
-  int v103; // [esp+150h] [ebp-66F8h]
-  int v104; // [esp+154h] [ebp-66F4h]
-  struct T_GFX_MAP_ELEMENT *v105; // [esp+158h] [ebp-66F0h]
-  unsigned __int8 v106; // [esp+15Fh] [ebp-66E9h]
+  int v99; // [esp+150h] [ebp-66F8h]
+  int v100; // [esp+154h] [ebp-66F4h]
+  struct T_GFX_MAP_ELEMENT *v101; // [esp+158h] [ebp-66F0h]
+  unsigned __int8 v102; // [esp+15Fh] [ebp-66E9h]
   int iVertexSize; // [esp+160h] [ebp-66E8h]
   struct SGfxObjectInfo *GfxObjectInfo; // [esp+164h] [ebp-66E4h]
-  int v109; // [esp+168h] [ebp-66E0h]
-  int v110; // [esp+16Ch] [ebp-66DCh]
+  int v105; // [esp+168h] [ebp-66E0h]
+  int v106; // [esp+16Ch] [ebp-66DCh]
   int j; // [esp+170h] [ebp-66D8h]
-  _DWORD v112[5]; // [esp+174h] [ebp-66D4h] BYREF
-  char v113; // [esp+18Ah] [ebp-66BEh]
-  _QWORD v114[3072]; // [esp+444h] [ebp-6404h] BYREF
-  _BYTE v115[1024]; // [esp+6444h] [ebp-404h] BYREF
+  SGfxObjectInfo v108; // [esp+174h] [ebp-66D4h] BYREF
+  _QWORD v109[3072]; // [esp+444h] [ebp-6404h] BYREF
+  _BYTE v110[1024]; // [esp+6444h] [ebp-404h] BYREF
 
-  v89 = 0;
-  v97 = 0;
-  memset(v115, 255, GfxEngineSetup.iSizeOfMap);
+  v85 = 0;
+  v93 = 0;
+  memset(v110, 255, GfxEngineSetup.iSizeOfMap);
   g_iSettlerSelectionCounter = 0;
   g_iSettlerFitnessCounter = 0;
   g_iSettlerMagicCounter = 0;
-  v106 = 0;
+  v102 = 0;
   if ( g_pfGetGfxObjectInfo == nullptr || GfxEngineSetup.pObjectLayer == nullptr || GfxEngineSetup.pDecoLayer == nullptr || g_pfGetOwnerID == nullptr )
   {
     return 1;
@@ -47275,21 +47270,21 @@ bool __cdecl RenderObjectLayer(bool a1) {
   }
   iVertexSize = GfxEngineSetup.iVertexSize;
   iVertexHeight = GfxEngineSetup.iVertexHeight;
-  v63 = (((GfxEngineSetup.sRenderSetup.m_uWidth - GfxEngineSetup.iWidthOfBorder) << 16) + 4 * GfxEngineSetup.iVertexSize) / GfxEngineSetup.iVertexSize;
-  v54 = (GfxEngineSetup.iVertexHeight + (GfxEngineSetup.sRenderSetup.m_uHeight << 16)) / GfxEngineSetup.iVertexHeight;
-  v92 = v54 + GfxEngineSetup.iScrollOffsetY + 2;
-  if ( v92 < g_iMapSize && v92 > 0 )
+  v59 = (((GfxEngineSetup.sRenderSetup.m_uWidth - GfxEngineSetup.iWidthOfBorder) << 16) + 4 * GfxEngineSetup.iVertexSize) / GfxEngineSetup.iVertexSize;
+  v50 = (GfxEngineSetup.iVertexHeight + (GfxEngineSetup.sRenderSetup.m_uHeight << 16)) / GfxEngineSetup.iVertexHeight;
+  v88 = v50 + GfxEngineSetup.iScrollOffsetY + 2;
+  if ( v88 < g_iMapSize && v88 > 0 )
   {
-    v92 += (unsigned __int8)g_uMaxYTable[v92] / 8;
+    v88 += (unsigned __int8)g_uMaxYTable[v88] / 8;
   }
-  v92 += 11;
-  v109 = -8 * iVertexHeight - (GfxEngineSetup.iSoftOffsetY << 16);
-  v53 = -iVertexSize / 2;
-  v34 = iVertexSize / 2;
-  v100 = 0;
-  v61 = (float)iVertexSize / 65536.0;
-  v60 = (int)(float)((float)GfxEngineSetup.iScrollOffsetX * v61);
-  v47 = (int)(float)((float)GfxEngineSetup.iScrollOffsetY * (float)((float)iVertexHeight / 65536.0));
+  v88 += 11;
+  v105 = -8 * iVertexHeight - (GfxEngineSetup.iSoftOffsetY << 16);
+  v49 = -iVertexSize / 2;
+  v30 = iVertexSize / 2;
+  v96 = 0;
+  v57 = (float)iVertexSize / 65536.0;
+  v56 = (int)(float)((float)GfxEngineSetup.iScrollOffsetX * v57);
+  v43 = (int)(float)((float)GfxEngineSetup.iScrollOffsetY * (float)((float)iVertexHeight / 65536.0));
   if ( D3DObjectPtr->m_bHardwareRuns != 0 && GfxEngineSetup.bHardwareObjects != 0 )
   {
     hResult = CInterfaceD3D::BeginObjectScene(D3DObjectPtr);
@@ -47301,109 +47296,109 @@ bool __cdecl RenderObjectLayer(bool a1) {
   }
   else
   {
-    hResult = D3DObjectPtr->m_pFinalRenderSurface->Lock((CSurfaceV7 *)D3DObjectPtr->m_pFinalRenderSurface, (unsigned int *)&v71, (void **)&v68, 1u);
+    hResult = D3DObjectPtr->m_pFinalRenderSurface->Lock((CSurfaceV7 *)D3DObjectPtr->m_pFinalRenderSurface, (unsigned int *)&v67, (void **)&v64, 1u);
     if ( hResult != 0 )
     {
       WriteError(hResult, "LockObjectRenderSurfaceSW");
       return 0;
     }
-    g_pRenderAdress = v68 + v71 * GfxEngineSetup.iCamFollowY + 2 * GfxEngineSetup.iCamFollowX;
+    g_pRenderAdress = v64 + v67 * GfxEngineSetup.iCamFollowY + 2 * GfxEngineSetup.iCamFollowX;
     g_pBeginOfRenderBuffer = g_pRenderAdress;
-    g_iRenderPitch = v71;
+    g_iRenderPitch = v67;
     g_iScanlineLength = 2 * GfxEngineSetup.sRenderSetup.m_uWidth;
-    g_pEndOfRenderBuffer = 2 * GfxEngineSetup.sRenderSetup.m_uWidth + g_pRenderAdress + v71 * (GfxEngineSetup.sRenderSetup.m_uHeight - 1);
+    g_pEndOfRenderBuffer = 2 * GfxEngineSetup.sRenderSetup.m_uWidth + g_pRenderAdress + v67 * (GfxEngineSetup.sRenderSetup.m_uHeight - 1);
   }
   GfxObjectInfo = nullptr;
-  v105 = nullptr;
+  v101 = nullptr;
   if ( s_pEffectSystem != nullptr )
   {
-    v79 = GfxEngineSetup.iScrollOffsetY - 7;
-    v50 = GfxEngineSetup.iScrollOffsetX + (GfxEngineSetup.iScrollOffsetY - 7) / 2 - 30;
-    v52 = v92;
-    v51 = v50 + (v92 - (GfxEngineSetup.iScrollOffsetY - 7)) / 2;
-    ((void (__thiscall *)(struct IGfxEffects *, int, int, int, int, int))s_pEffectSystem->SetEffectsViewport)(s_pEffectSystem, v50, GfxEngineSetup.iScrollOffsetY - 7, v51, v92, v63 + GfxEngineSetup.iScrollOffsetX + v51 + (GfxEngineSetup.iScrollOffsetY - 7) / 2 + 9);
+    v75 = GfxEngineSetup.iScrollOffsetY - 7;
+    v46 = GfxEngineSetup.iScrollOffsetX + (GfxEngineSetup.iScrollOffsetY - 7) / 2 - 30;
+    v48 = v88;
+    v47 = v46 + (v88 - (GfxEngineSetup.iScrollOffsetY - 7)) / 2;
+    ((void (__thiscall *)(struct IGfxEffects *, int, int, int, int, int))s_pEffectSystem->SetEffectsViewport)(s_pEffectSystem, v46, GfxEngineSetup.iScrollOffsetY - 7, v47, v88, v59 + GfxEngineSetup.iScrollOffsetX + v47 + (GfxEngineSetup.iScrollOffsetY - 7) / 2 + 9);
   }
   j = GfxEngineSetup.iScrollOffsetY - 7;
-  while ( j < v92 )
+  while ( j < v88 )
   {
     if ( (j & 1) != 0 )
     {
-      v110 = (GfxEngineSetup.iWidthOfBorder - GfxEngineSetup.iSoftOffsetX - (iVertexSize >> 16) - ((30 * iVertexSize) >> 16)) << 16;
-      v100 = 1;
+      v106 = (GfxEngineSetup.iWidthOfBorder - GfxEngineSetup.iSoftOffsetX - (iVertexSize >> 16) - ((30 * iVertexSize) >> 16)) << 16;
+      v96 = 1;
     }
     else
     {
-      v110 = v53 + ((GfxEngineSetup.iWidthOfBorder - GfxEngineSetup.iSoftOffsetX - (iVertexSize >> 16) - ((30 * iVertexSize) >> 16)) << 16);
-      v100 = 0;
+      v106 = v49 + ((GfxEngineSetup.iWidthOfBorder - GfxEngineSetup.iSoftOffsetX - (iVertexSize >> 16) - ((30 * iVertexSize) >> 16)) << 16);
+      v96 = 0;
     }
     g_iUsedFogFadeStep = g_iFogFadeStep;
     if ( j < g_iFadeYBorder )
     {
       g_iUsedFogFadeStep = 0;
     }
-    v35 = v63 + GfxEngineSetup.iScrollOffsetX + j / 2 + 1;
-    v85 = GfxEngineSetup.iScrollOffsetX + iSizeOfMap * j + j / 2 - 30;
-    v41 = GfxEngineSetup.iScrollOffsetX + j / 2 - 30;
+    v31 = v59 + GfxEngineSetup.iScrollOffsetX + j / 2 + 1;
+    v81 = GfxEngineSetup.iScrollOffsetX + iSizeOfMap * j + j / 2 - 30;
+    v37 = GfxEngineSetup.iScrollOffsetX + j / 2 - 30;
     if ( FastIndexValidation(j) )
     {
-      v90 = v41;
-      while ( v90 < v35 + 8 )
+      v86 = v37;
+      while ( v86 < v31 + 8 )
       {
-        if ( FastIndexValidation(v100 + v90) )
+        if ( FastIndexValidation(v96 + v86) )
         {
-          v105 = &psMapElement[v100 + v85];
-          if ( (v105->iFlags & 0x80) != 0 )
+          v101 = &psMapElement[v96 + v81];
+          if ( (v101->iFlags & 0x80) != 0 )
           {
-            v101 = CalcFinalHeightOffset(v105->iHeight);
-            v49 = CalcCurrentFog(v105);
-            if ( v49 > 59 && (!SGfxRenderConfiguration::IsEditorMode(&GfxEngineSetup.sRenderSetup) || v105->iType > 8u) )
+            v97 = CalcFinalHeightOffset(v101->iHeight);
+            v45 = CalcCurrentFog(v101);
+            if ( v45 > 59 && (!SGfxRenderConfiguration::IsEditorMode(&GfxEngineSetup.sRenderSetup) || v101->iType > 8u) )
             {
-              OwnerID = g_pfGetOwnerID(v100 + v85);
-              g_pfBlitBorderstone(v49, v110, v109 - v101, OwnerID);
+              OwnerID = g_pfGetOwnerID(v96 + v81);
+              g_pfBlitBorderstone(v45, v106, v105 - v97, OwnerID);
             }
           }
-          v94 = (v105->iShading & 0x20) != 0;
-          sub_2F6F620(v110, v109, v100 + v90, j, v105->iType);
-          iObject = GfxEngineSetup.pObjectLayer[v100 + v85];
-          iDeco = GfxEngineSetup.pDecoLayer[v100 + v85];
+          v90 = (v101->iShading & 0x20) != 0;
+          sub_2F6F620(v106, v105, v96 + v86, j, v101->iType);
+          iObject = GfxEngineSetup.pObjectLayer[v96 + v81];
+          iDeco = GfxEngineSetup.pDecoLayer[v96 + v81];
           if ( iDeco != 0 )
           {
-            iCurrentFog = CalcCurrentFog(v105);
+            iCurrentFog = CalcCurrentFog(v101);
             if ( iCurrentFog > 17 )
             {
               GfxObjectInfo = g_pfGetGfxObjectInfo(iDeco, -1);
               if ( GfxObjectInfo != nullptr && GfxObjectInfo->m_bVisible != 0 )
               {
-                v101 = CalcFinalHeightOffset(v105->iHeight);
+                v97 = CalcFinalHeightOffset(v101->iHeight);
                 if ( GfxObjectInfo->m_uType == 8 )
                 {
                   if ( iCurrentFog > 59 )
                   {
-                    g_pfBlitBuilding(iCurrentFog, v110, v109 - v101, GfxObjectInfo, &v114[3 * v97 + 0x600], &v97);
+                    g_pfBlitBuilding(iCurrentFog, v106, v105 - v97, GfxObjectInfo);
                   }
                   memset(GfxObjectInfo, 0, sizeof(struct SGfxObjectInfo));
                 }
                 else if ( GfxObjectInfo->m_uType != 16 || iCurrentFog > 59 )
                 {
-                  g_pfBlitObject(iCurrentFog, v110, v109 - v101, GfxObjectInfo);
+                  g_pfBlitObject(iCurrentFog, v106, v105 - v97, GfxObjectInfo);
                 }
               }
             }
           }
           if ( iObject != 0 )
           {
-            v91 = CalcCurrentFog(v105);
-            if ( v91 > 59 )
+            v87 = CalcCurrentFog(v101);
+            if ( v87 > 59 )
             {
               GfxObjectInfo = g_pfGetGfxObjectInfo(iObject, -1);
               if ( GfxObjectInfo != nullptr && GfxObjectInfo->m_bVisible != 0 )
               {
-                v101 = CalcFinalHeightOffset(v105->iHeight);
-                v103 = 0;
-                v104 = 0;
+                v97 = CalcFinalHeightOffset(v101->iHeight);
+                v99 = 0;
+                v100 = 0;
                 m_uDistance = GfxObjectInfo->m_uDistance;
-                v87 = v110;
-                v88 = v109;
+                v83 = v106;
+                v84 = v105;
                 m_uType = GfxObjectInfo->m_uType;
                 switch ( --m_uType )
                 {
@@ -47413,36 +47408,36 @@ bool __cdecl RenderObjectLayer(bool a1) {
                     {
                       case 0:
                         m_uDistance = 0;
-                        v87 = v110 + ((GfxObjectInfo->m_iPreferedOffsetX * (iVertexSize >> 16) / 256) << 16);
-                        v88 = v109 + ((GfxObjectInfo->m_iPreferedOffsetY * (iVertexHeight >> 16) / 256) << 16);
+                        v83 = v106 + ((GfxObjectInfo->m_iPreferedOffsetX * (iVertexSize >> 16) / 256) << 16);
+                        v84 = v105 + ((GfxObjectInfo->m_iPreferedOffsetY * (iVertexHeight >> 16) / 256) << 16);
                         break;
                       case 1:
-                        v103 = v110 - iVertexSize;
-                        v104 = v109 - CalcFinalHeightOffset(v105[-1].iHeight);
+                        v99 = v106 - iVertexSize;
+                        v100 = v105 - CalcFinalHeightOffset(v101[-1].iHeight);
                         break;
                       case 2:
-                        v103 = v110 - iVertexSize / 2;
-                        v11 = v109 - iVertexHeight;
-                        v104 = v11 - CalcFinalHeightOffset(v105[-iSizeOfMap - 1].iHeight);
+                        v99 = v106 - iVertexSize / 2;
+                        v11 = v105 - iVertexHeight;
+                        v100 = v11 - CalcFinalHeightOffset(v101[-iSizeOfMap - 1].iHeight);
                         break;
                       case 3:
-                        v103 = v110 + iVertexSize / 2;
-                        v12 = v109 - iVertexHeight;
-                        v104 = v12 - CalcFinalHeightOffset(v105[-iSizeOfMap].iHeight);
+                        v99 = v106 + iVertexSize / 2;
+                        v12 = v105 - iVertexHeight;
+                        v100 = v12 - CalcFinalHeightOffset(v101[-iSizeOfMap].iHeight);
                         break;
                       case 4:
-                        v103 = iVertexSize + v110;
-                        v104 = v109 - CalcFinalHeightOffset(v105[1].iHeight);
+                        v99 = iVertexSize + v106;
+                        v100 = v105 - CalcFinalHeightOffset(v101[1].iHeight);
                         break;
                       case 5:
-                        v103 = v110 + iVertexSize / 2;
-                        v13 = iVertexHeight + v109;
-                        v104 = v13 - CalcFinalHeightOffset(v105[iSizeOfMap + 1].iHeight);
+                        v99 = v106 + iVertexSize / 2;
+                        v13 = iVertexHeight + v105;
+                        v100 = v13 - CalcFinalHeightOffset(v101[iSizeOfMap + 1].iHeight);
                         break;
                       case 6:
-                        v103 = v110 - iVertexSize / 2;
-                        v14 = iVertexHeight + v109;
-                        v104 = v14 - CalcFinalHeightOffset(v105[iSizeOfMap].iHeight);
+                        v99 = v106 - iVertexSize / 2;
+                        v14 = iVertexHeight + v105;
+                        v100 = v14 - CalcFinalHeightOffset(v101[iSizeOfMap].iHeight);
                         break;
                       default:
                         BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Illegal value in iDirection");
@@ -47450,45 +47445,45 @@ bool __cdecl RenderObjectLayer(bool a1) {
                     }
                     if ( m_uDistance != 0 )
                     {
-                      g_pfBlitSettler(v91, v110 - ((m_uDistance * (v110 - v103)) >> 8), v109 - v101 - ((m_uDistance * (v109 - v101 - v104)) >> 8), GfxObjectInfo);
+                      g_pfBlitSettler(v87, v106 - ((m_uDistance * (v106 - v99)) >> 8), v105 - v97 - ((m_uDistance * (v105 - v97 - v100)) >> 8), GfxObjectInfo);
                     }
                     else
                     {
-                      g_pfBlitSettler(v91, v87, v88 - v101, GfxObjectInfo);
+                      g_pfBlitSettler(v87, v83, v84 - v97, GfxObjectInfo);
                     }
                     break;
                   case 1:
                   case 3:
-                    v62 = GfxObjectInfo->m_iDirection;
-                    switch ( v62 )
+                    v58 = GfxObjectInfo->m_iDirection;
+                    switch ( v58 )
                     {
                       case 0:
-                        v103 = v110 - iVertexSize;
-                        v104 = v109 - CalcFinalHeightOffset(v105[-1].iHeight);
+                        v99 = v106 - iVertexSize;
+                        v100 = v105 - CalcFinalHeightOffset(v101[-1].iHeight);
                         break;
                       case 1:
-                        v103 = v110 - iVertexSize / 2;
-                        v3 = v109 - iVertexHeight;
-                        v104 = v3 - CalcFinalHeightOffset(v105[-iSizeOfMap - 1].iHeight);
+                        v99 = v106 - iVertexSize / 2;
+                        v3 = v105 - iVertexHeight;
+                        v100 = v3 - CalcFinalHeightOffset(v101[-iSizeOfMap - 1].iHeight);
                         break;
                       case 2:
-                        v103 = v110 + iVertexSize / 2;
-                        v4 = v109 - iVertexHeight;
-                        v104 = v4 - CalcFinalHeightOffset(v105[-iSizeOfMap].iHeight);
+                        v99 = v106 + iVertexSize / 2;
+                        v4 = v105 - iVertexHeight;
+                        v100 = v4 - CalcFinalHeightOffset(v101[-iSizeOfMap].iHeight);
                         break;
                       case 3:
-                        v103 = iVertexSize + v110;
-                        v104 = v109 - CalcFinalHeightOffset(v105[1].iHeight);
+                        v99 = iVertexSize + v106;
+                        v100 = v105 - CalcFinalHeightOffset(v101[1].iHeight);
                         break;
                       case 4:
-                        v103 = v110 + iVertexSize / 2;
-                        v5 = iVertexHeight + v109;
-                        v104 = v5 - CalcFinalHeightOffset(v105[iSizeOfMap + 1].iHeight);
+                        v99 = v106 + iVertexSize / 2;
+                        v5 = iVertexHeight + v105;
+                        v100 = v5 - CalcFinalHeightOffset(v101[iSizeOfMap + 1].iHeight);
                         break;
                       case 5:
-                        v103 = v110 - iVertexSize / 2;
-                        v6 = iVertexHeight + v109;
-                        v104 = v6 - CalcFinalHeightOffset(v105[iSizeOfMap].iHeight);
+                        v99 = v106 - iVertexSize / 2;
+                        v6 = iVertexHeight + v105;
+                        v100 = v6 - CalcFinalHeightOffset(v101[iSizeOfMap].iHeight);
                         break;
                       default:
                         BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Illegal value in iDirection");
@@ -47496,21 +47491,21 @@ bool __cdecl RenderObjectLayer(bool a1) {
                     }
                     if ( GfxObjectInfo->m_uType == 2 )
                     {
-                      if ( v97 < 512 )
+                      if ( v93 < 512 )
                       {
-                        LODWORD(v114[3 * v97 + 1536]) = iObject;
-                        HIDWORD(v114[3 * v97 + 1536]) = v110 - ((m_uDistance * (v110 - v103)) >> 8);
-                        LODWORD(v114[3 * v97 + 1537]) = v109 - v101 - ((m_uDistance * (v109 - v101 - v104)) >> 8);
-                        HIDWORD(v114[3 * v97++ + 1538]) = v91;
+                        LODWORD(v109[3 * v93 + 1536]) = iObject;
+                        HIDWORD(v109[3 * v93 + 1536]) = v106 - ((m_uDistance * (v106 - v99)) >> 8);
+                        LODWORD(v109[3 * v93 + 1537]) = v105 - v97 - ((m_uDistance * (v105 - v97 - v100)) >> 8);
+                        HIDWORD(v109[3 * v93++ + 1538]) = v87;
                       }
                     }
                     else
                     {
-                      v115[v100 + v90] = v106;
-                      LODWORD(v114[2 * v106]) = iObject;
-                      HIDWORD(v114[2 * v106]) = v110 - ((m_uDistance * (v110 - v103)) >> 8);
-                      LODWORD(v114[2 * v106 + 1]) = v109 - v101 - ((m_uDistance * (v109 - v101 - v104)) >> 8);
-                      HIDWORD(v114[2 * v106++ + 1]) = v91;
+                      v110[v96 + v86] = v102;
+                      LODWORD(v109[2 * v102]) = iObject;
+                      HIDWORD(v109[2 * v102]) = v106 - ((m_uDistance * (v106 - v99)) >> 8);
+                      LODWORD(v109[2 * v102 + 1]) = v105 - v97 - ((m_uDistance * (v105 - v97 - v100)) >> 8);
+                      HIDWORD(v109[2 * v102++ + 1]) = v87;
                     }
                     GfxObjectInfo->m_uConstructionProgress = 0;
                     GfxObjectInfo->m_pLayerBlock = nullptr;
@@ -47520,45 +47515,45 @@ bool __cdecl RenderObjectLayer(bool a1) {
                     GfxObjectInfo->m_uMagicBlockIndex = 0;
                     break;
                   case 7:
-                    g_pfBlitBuilding(v91, v87, v88 - v101, GfxObjectInfo, &v114[3 * v97 + 1536], &v97);
+                    g_pfBlitBuilding(v87, v83, v84 - v97, GfxObjectInfo);
                     memset(GfxObjectInfo, 0, sizeof(struct SGfxObjectInfo));
                     break;
                   case 127:
-                    v72 = GfxObjectInfo->m_iDirection;
-                    switch ( ++v72 )
+                    v68 = GfxObjectInfo->m_iDirection;
+                    switch ( ++v68 )
                     {
                       case 0:
                         m_uDistance = 0;
-                        v87 = v110 + ((GfxObjectInfo->m_iPreferedOffsetX * (iVertexSize >> 16) / 256) << 16);
-                        v88 = v109 + ((GfxObjectInfo->m_iPreferedOffsetY * (iVertexHeight >> 16) / 256) << 16);
+                        v83 = v106 + ((GfxObjectInfo->m_iPreferedOffsetX * (iVertexSize >> 16) / 256) << 16);
+                        v84 = v105 + ((GfxObjectInfo->m_iPreferedOffsetY * (iVertexHeight >> 16) / 256) << 16);
                         break;
                       case 1:
-                        v103 = v110 - iVertexSize;
-                        v104 = v109 - CalcFinalHeightOffset(v105[-1].iHeight);
+                        v99 = v106 - iVertexSize;
+                        v100 = v105 - CalcFinalHeightOffset(v101[-1].iHeight);
                         break;
                       case 2:
-                        v103 = v110 - iVertexSize / 2;
-                        v7 = v109 - iVertexHeight;
-                        v104 = v7 - CalcFinalHeightOffset(v105[-iSizeOfMap - 1].iHeight);
+                        v99 = v106 - iVertexSize / 2;
+                        v7 = v105 - iVertexHeight;
+                        v100 = v7 - CalcFinalHeightOffset(v101[-iSizeOfMap - 1].iHeight);
                         break;
                       case 3:
-                        v103 = v110 + iVertexSize / 2;
-                        v8 = v109 - iVertexHeight;
-                        v104 = v8 - CalcFinalHeightOffset(v105[-iSizeOfMap].iHeight);
+                        v99 = v106 + iVertexSize / 2;
+                        v8 = v105 - iVertexHeight;
+                        v100 = v8 - CalcFinalHeightOffset(v101[-iSizeOfMap].iHeight);
                         break;
                       case 4:
-                        v103 = iVertexSize + v110;
-                        v104 = v109 - CalcFinalHeightOffset(v105[1].iHeight);
+                        v99 = iVertexSize + v106;
+                        v100 = v105 - CalcFinalHeightOffset(v101[1].iHeight);
                         break;
                       case 5:
-                        v103 = v110 + iVertexSize / 2;
-                        v9 = iVertexHeight + v109;
-                        v104 = v9 - CalcFinalHeightOffset(v105[iSizeOfMap + 1].iHeight);
+                        v99 = v106 + iVertexSize / 2;
+                        v9 = iVertexHeight + v105;
+                        v100 = v9 - CalcFinalHeightOffset(v101[iSizeOfMap + 1].iHeight);
                         break;
                       case 6:
-                        v103 = v110 - iVertexSize / 2;
-                        v10 = iVertexHeight + v109;
-                        v104 = v10 - CalcFinalHeightOffset(v105[iSizeOfMap].iHeight);
+                        v99 = v106 - iVertexSize / 2;
+                        v10 = iVertexHeight + v105;
+                        v100 = v10 - CalcFinalHeightOffset(v101[iSizeOfMap].iHeight);
                         break;
                       default:
                         BBSupportTracePrintF(0, "GFX ENGINE: DATA ERROR: Illegal value in iDirection");
@@ -47568,130 +47563,122 @@ bool __cdecl RenderObjectLayer(bool a1) {
                     {
                       goto RenderObjectLayer___def_336D47A;
                     }
-                    g_pfBlitObject(v91, v110 - ((m_uDistance * (v110 - v103)) >> 8), v109 - v101 - ((m_uDistance * (v109 - v101 - v104)) >> 8), GfxObjectInfo);
+                    g_pfBlitObject(v87, v106 - ((m_uDistance * (v106 - v99)) >> 8), v105 - v97 - ((m_uDistance * (v105 - v97 - v100)) >> 8), GfxObjectInfo);
                     break;
                   default:
 RenderObjectLayer___def_336D47A:
-                    g_pfBlitObject(v91, v87, v88 - v101, GfxObjectInfo);
+                    g_pfBlitObject(v87, v83, v84 - v97, GfxObjectInfo);
                     break;
                 }
               }
             }
           }
-          if ( (unsigned __int8)v115[v100 + v90] != 255 )
+          if ( (unsigned __int8)v110[v96 + v86] != 255 )
           {
-            v75 = (unsigned __int8)v115[v100 + v90];
-            v115[v100 + v90] = -1;
-            GfxObjectInfo = g_pfGetGfxObjectInfo(v114[2 * v75], -1);
-            g_pfBlitVehicle(HIDWORD(v114[2 * v75 + 1]), HIDWORD(v114[2 * v75]), v114[2 * v75 + 1], GfxObjectInfo);
+            v71 = (unsigned __int8)v110[v96 + v86];
+            v110[v96 + v86] = -1;
+            GfxObjectInfo = g_pfGetGfxObjectInfo(v109[2 * v71], -1);
+            g_pfBlitVehicle(HIDWORD(v109[2 * v71 + 1]), HIDWORD(v109[2 * v71]), v109[2 * v71 + 1], GfxObjectInfo);
           }
         }
-        v110 += iVertexSize;
-        ++v90;
-        ++v85;
+        v106 += iVertexSize;
+        ++v86;
+        ++v81;
       }
       if ( s_pEffectSystem != nullptr )
       {
-        v46 = &GfxEngineSetup.psMapElement[GfxEngineSetup.iSizeOfMap * j];
-        for ( i = ((int (__thiscall *)(struct IGfxEffects *, int))s_pEffectSystem->FirstEffect)(s_pEffectSystem, j);
-              i != 0;
-              i = ((int (__thiscall *)(struct IGfxEffects *))s_pEffectSystem->NextEffect)(s_pEffectSystem) )
+        v42 = &GfxEngineSetup.psMapElement[GfxEngineSetup.iSizeOfMap * j];
+        for ( i = (SGfxObjectInfo *)((int (__thiscall *)(struct IGfxEffects *, int))s_pEffectSystem->FirstEffect)(s_pEffectSystem, j);
+              i != nullptr;
+              i = (SGfxObjectInfo *)((int (__thiscall *)(struct IGfxEffects *))s_pEffectSystem->NextEffect)(s_pEffectSystem) )
         {
-          v82 = (int)(float)((float)(*(float *)(i + 696) - 24.0) * GfxEngineSetup.fZoomFactor) + GfxEngineSetup.iWidthOfBorder - (v34 >> 16) - v60;
-          v83 = (int)(float)((float)(*(float *)(i + 700) - 12.0) * GfxEngineSetup.fZoomFactor) - v47 - GfxEngineSetup.iSoftOffsetY;
-          v82 -= GfxEngineSetup.iSoftOffsetX;
-          v74 = CalcCurrentFog(&v46[*(_DWORD *)(i + 704)]);
-          if ( v74 > 59 )
+          v78 = (int)(float)((float)(i->m_fWorldScreenX - 24.0) * GfxEngineSetup.fZoomFactor) + GfxEngineSetup.iWidthOfBorder - (v30 >> 16) - v56;
+          v79 = (int)(float)((float)(i->m_fWorldScreenY - 12.0) * GfxEngineSetup.fZoomFactor) - v43 - GfxEngineSetup.iSoftOffsetY;
+          v78 -= GfxEngineSetup.iSoftOffsetX;
+          v70 = CalcCurrentFog(&v42[i->m_iEffectX]);
+          if ( v70 > 59 )
           {
-            if ( *(_BYTE *)(i + 712) == 1 )
+            if ( i->m_uType == 1 )
             {
-              g_pfBlitSettler(v74, v82 << 16, v83 << 16, i);
+              g_pfBlitSettler(v70, v78 << 16, v79 << 16, i);
             }
-            else if ( *(unsigned __int8 *)(i + 713) < 0xC0u )
+            else if ( i->m_uRenderLayer < 0xC0u )
             {
-              g_pfBlitObject(v74, v82 << 16, v83 << 16, i);
+              g_pfBlitObject(v70, v78 << 16, v79 << 16, i);
             }
-            else if ( v89 < 512 )
+            else if ( v85 < 512 )
             {
-              LODWORD(v114[2 * v89 + 512]) = *(_DWORD *)i;
-              HIDWORD(v114[2 * v89 + 512]) = v82 + (v83 << 16);
-              LODWORD(v114[2 * v89 + 513]) = *(_DWORD *)(i + 4);
-              HIDWORD(v114[2 * v89++ + 513]) = v74;
+              LODWORD(v109[2 * v85 + 512]) = i->m_pLayerBlock;
+              HIDWORD(v109[2 * v85 + 512]) = v78 + (v79 << 16);
+              LODWORD(v109[2 * v85 + 513]) = i->m_pPaletteBlock;
+              HIDWORD(v109[2 * v85++ + 513]) = v70;
             }
           }
         }
       }
     }
     ++j;
-    v109 += iVertexHeight;
+    v105 += iVertexHeight;
   }
-  v60 = (int)(float)((float)(GfxEngineSetup.iScrollOffsetX + j / 2) * v61);
-  if ( g_sGfxObjectCursorBuilding.m_iId >= 0 && byte_3E2E664 != 0 && CFixCursor::IsVisible(&D3DObjectPtr->m_cMoveCursor) == 0 && CFixCursor::IsVisible(&D3DObjectPtr->m_cZoomCursor) == 0 )
+  v56 = (int)(float)((float)(GfxEngineSetup.iScrollOffsetX + j / 2) * v57);
+  if ( g_sGfxObjectCursorBuilding.m_iId >= 0 && byte_3E2E664 != 0 && CFixCursor::IsVisible(&D3DObjectPtr->m_cMoveCursor) == 0 && CFixCursor::IsVisible((CFixCursor *)((char *)&D3DObjectPtr->?.m_pSurface + 3)) == 0 )
   {
-    IGfxEngine::GetScreenOffsetsByMapIndices(g_sGfxObjectCursorBuilding.m_iX, g_sGfxObjectCursorBuilding.m_iY, &v44, &v45);
-    g_pfBlitBuilding(255, v44 << 16, v45 << 16, &g_sGfxObjectCursorBuilding.m_iInfo, &v114[3 * v97 + 1536], &v97);
+    IGfxEngine::GetScreenOffsetsByMapIndices(g_sGfxObjectCursorBuilding.m_iX, g_sGfxObjectCursorBuilding.m_iY, &v40, &v41);
+    g_pfBlitBuilding(255, v40 << 16, v41 << 16, &g_sGfxObjectCursorBuilding.m_iInfo);
   }
   for ( j = 0;
-        j < v97;
+        j < v93;
         ++j )
   {
-    if ( LODWORD(v114[3 * j + 1536]) == -1 )
+    if ( LODWORD(v109[3 * j + 1536]) == -1 )
     {
-      v66 = (void *)v114[3 * j + 1538];
+      v62 = (void *)v109[3 * j + 1538];
       if ( SGfxRenderConfiguration::IsHardwareObjectEngine(&GfxEngineSetup.sRenderSetup) != 0 )
       {
-        v67 = (unsigned __int8)HIDWORD(v114[3 * j + 1538]);
-        *((float *)&v29 + 1) = (float)SLODWORD(v114[3 * j + 1537]);
-        *(float *)&v29 = (float)SHIDWORD(v114[3 * j + 1536]);
-        HIDWORD(v25) = *(unsigned __int16 *)HIDWORD(v114[3 * j + 1537]);
-        LODWORD(v25) = HIDWORD(v114[3 * j + 1537]) + 12;
-        RenderGfx(j + 10000000, v66, v25, *(unsigned __int16 *)(HIDWORD(v114[3 * j + 1537]) + 2), v29, 65793 * v67, 0, 0, 0);
+        v63 = (unsigned __int8)HIDWORD(v109[3 * j + 1538]);
+        RenderGfx(j + 10000000, v62, (void *)(HIDWORD(v109[3 * j + 1537]) + 12), *(unsigned __int16 *)HIDWORD(v109[3 * j + 1537]), *(unsigned __int16 *)(HIDWORD(v109[3 * j + 1537]) + 2), (float)SHIDWORD(v109[3 * j + 1536]), (float)SLODWORD(v109[3 * j + 1537]), 65793 * v63, 0, 0, 0);
       }
       else
       {
-        sub_2F6FD80((int *)&v66, HIDWORD(v114[3 * j + 1538]));
-        ZoomBobNormal((int)v66, HIDWORD(v114[3 * j + 1537]) + 12, *(unsigned __int16 *)HIDWORD(v114[3 * j + 1537]), *(unsigned __int16 *)(HIDWORD(v114[3 * j + 1537]) + 2), SHIDWORD(v114[3 * j + 1536]) >> 16, SLODWORD(v114[3 * j + 1537]) >> 16, 0, g_pBeginOfRenderBuffer, 0);
+        sub_2F6FD80((int *)&v62, HIDWORD(v109[3 * j + 1538]));
+        ZoomBobNormal((int)v62, HIDWORD(v109[3 * j + 1537]) + 12, *(unsigned __int16 *)HIDWORD(v109[3 * j + 1537]), *(unsigned __int16 *)(HIDWORD(v109[3 * j + 1537]) + 2), SHIDWORD(v109[3 * j + 1536]) >> 16, SLODWORD(v109[3 * j + 1537]) >> 16, 0, g_pBeginOfRenderBuffer, 0);
       }
     }
-    else if ( LODWORD(v114[3 * j + 1536]) == -2 )
+    else if ( LODWORD(v109[3 * j + 1536]) == -2 )
     {
-      v73 = (unsigned __int8 *)HIDWORD(v114[3 * j + 1537]);
-      v59 = SHIDWORD(v114[3 * j + 1538]) >> 16;
-      memcpy(&g_uColorPalette, (const void *)v114[3 * j + 1538], 0x180u);
-      memcpy(&unk_468A760, g_cColorGradient.m_vGradients[v59], 0x40u);
-      memcpy(&unk_468A7A0, (const void *)(LODWORD(v114[3 * j + 1538]) + (v59 << 6) + 512), 0x40u);
-      v64 = &g_uColorPalette;
-      v57 = *v73++;
-      v58 = *v73;
+      v69 = (unsigned __int8 *)HIDWORD(v109[3 * j + 1537]);
+      v55 = SHIDWORD(v109[3 * j + 1538]) >> 16;
+      memcpy(&g_uColorPalette, (const void *)v109[3 * j + 1538], 0x180u);
+      memcpy(&unk_468A760, g_cColorGradient.m_vGradients[v55], 0x40u);
+      memcpy(&unk_468A7A0, (const void *)(LODWORD(v109[3 * j + 1538]) + (v55 << 6) + 512), 0x40u);
+      v60 = &g_uColorPalette;
+      v53 = *v69++;
+      v54 = *v69;
       if ( SGfxRenderConfiguration::IsHardwareObjectEngine(&GfxEngineSetup.sRenderSetup) != 0 )
       {
-        v65 = (unsigned __int8)HIDWORD(v114[3 * j + 1538]);
-        *((float *)&v30 + 1) = (float)SLODWORD(v114[3 * j + 1537]);
-        *(float *)&v30 = (float)SHIDWORD(v114[3 * j + 1536]);
-        HIDWORD(v26) = v57;
-        LODWORD(v26) = HIDWORD(v114[3 * j + 1537]) + 8;
-        RenderGfx(j + 11000000, v64, v26, v58, v30, 65793 * v65, 0, 0, 0);
+        v61 = (unsigned __int8)HIDWORD(v109[3 * j + 1538]);
+        RenderGfx(j + 11000000, v60, (void *)(HIDWORD(v109[3 * j + 1537]) + 8), v53, v54, (float)SHIDWORD(v109[3 * j + 1536]), (float)SLODWORD(v109[3 * j + 1537]), 65793 * v61, 0, 0, 0);
       }
       else
       {
-        sub_2F6FD80((int *)&v64, (unsigned __int8)HIDWORD(v114[3 * j + 1538]));
-        ZoomBobNormal((int)v64, HIDWORD(v114[3 * j + 1537]) + 8, v57, v58, HIDWORD(v114[3 * j + 1536]), v114[3 * j + 1537], 0, g_pBeginOfRenderBuffer, 0);
+        sub_2F6FD80((int *)&v60, (unsigned __int8)HIDWORD(v109[3 * j + 1538]));
+        ZoomBobNormal((int)v60, HIDWORD(v109[3 * j + 1537]) + 8, v53, v54, HIDWORD(v109[3 * j + 1536]), v109[3 * j + 1537], 0, g_pBeginOfRenderBuffer, 0);
       }
     }
     else
     {
-      GfxObjectInfo = g_pfGetGfxObjectInfo(v114[3 * j + 1536], -1);
-      g_pfBlitVehicle(HIDWORD(v114[3 * j + 1538]), HIDWORD(v114[3 * j + 1536]), v114[3 * j + 1537], GfxObjectInfo);
+      GfxObjectInfo = g_pfGetGfxObjectInfo(v109[3 * j + 1536], -1);
+      g_pfBlitVehicle(HIDWORD(v109[3 * j + 1538]), HIDWORD(v109[3 * j + 1536]), v109[3 * j + 1537], GfxObjectInfo);
     }
   }
   for ( j = 0;
-        j < v89;
+        j < v85;
         ++j )
   {
-    v112[0] = v114[2 * j + 512];
-    v112[1] = v114[2 * j + 513];
-    v113 = 0;
-    g_pfBlitObject(HIDWORD(v114[2 * j + 513]), (unsigned __int16)HIDWORD(v114[2 * j + 512]) << 16, HIDWORD(v114[2 * j + 512]) & 0xFFFF0000, v112);
+    v108.m_pLayerBlock = (UGfxData *)v109[2 * j + 512];
+    v108.m_pPaletteBlock = (char *)v109[2 * j + 513];
+    v108.m_uSelectionBlockIndex = 0;
+    g_pfBlitObject(HIDWORD(v109[2 * j + 513]), (unsigned __int16)HIDWORD(v109[2 * j + 512]) << 16, HIDWORD(v109[2 * j + 512]) & 0xFFFF0000, &v108);
   }
   if ( g_iSettlerSelectionCounter != 0 )
   {
@@ -47701,14 +47688,14 @@ RenderObjectLayer___def_336D47A:
             j < g_iSettlerSelectionCounter;
             ++j )
       {
-        v86 = (unsigned __int16 *)g_pIconGfx[g_iSettlerSelections[3 * j + 2]];
-        LODWORD(v43) = *v86++;
-        HIDWORD(v43) = *v86;
-        *((float *)&v31 + 1) = (float)g_iSettlerSelections[3 * j + 1];
-        *(float *)&v31 = (float)g_iSettlerSelections[3 * j];
-        HIDWORD(v22) = v86 + 5;
+        v82 = (unsigned __int16 *)g_pIconGfx[g_iSettlerSelections[3 * j + 2]];
+        LODWORD(v39) = *v82++;
+        HIDWORD(v39) = *v82;
+        *((float *)&v27 + 1) = (float)g_iSettlerSelections[3 * j + 1];
+        *(float *)&v27 = (float)g_iSettlerSelections[3 * j];
+        HIDWORD(v22) = v82 + 5;
         LODWORD(v22) = g_pIconPalette;
-        CacheRenderingStandard(v22, v86[4], 64, v43, v31, 0, (int)&dword_F29144[220078] + 3, 0, 0);
+        CacheRenderingStandard(v22, v82[4], 64, v39, v27, 0, (int)&dword_F29144[220078] + 3, 0, 0);
       }
     }
     else
@@ -47717,9 +47704,9 @@ RenderObjectLayer___def_336D47A:
             j < g_iSettlerSelectionCounter;
             ++j )
       {
-        v81 = (unsigned __int16 *)g_pIconGfx[g_iSettlerSelections[3 * j + 2]];
-        v42 = *v81++;
-        ZoomBobNormal(g_pIconPalette, (int)(v81 + 5), v42, *v81, g_iSettlerSelections[3 * j], g_iSettlerSelections[3 * j + 1], 0, g_pBeginOfRenderBuffer, 0);
+        v77 = (unsigned __int16 *)g_pIconGfx[g_iSettlerSelections[3 * j + 2]];
+        v38 = *v77++;
+        ZoomBobNormal(g_pIconPalette, (int)(v77 + 5), v38, *v77, g_iSettlerSelections[3 * j], g_iSettlerSelections[3 * j + 1], 0, g_pBeginOfRenderBuffer, 0);
       }
     }
   }
@@ -47731,14 +47718,14 @@ RenderObjectLayer___def_336D47A:
             j < g_iSettlerMagicCounter;
             ++j )
       {
-        v56 = g_iSettlerMagic[5 * j + 4];
-        *((float *)&v32 + 1) = (float)g_iSettlerMagic[5 * j + 1];
-        *(float *)&v32 = (float)g_iSettlerMagic[5 * j];
-        HIDWORD(v27) = g_iSettlerMagic[5 * j + 3];
-        LODWORD(v27) = g_iSettlerMagic[5 * j + 2];
-        HIDWORD(v23) = v56 + 6;
+        v52 = g_iSettlerMagic[5 * j + 4];
+        *((float *)&v28 + 1) = (float)g_iSettlerMagic[5 * j + 1];
+        *(float *)&v28 = (float)g_iSettlerMagic[5 * j];
+        HIDWORD(v25) = g_iSettlerMagic[5 * j + 3];
+        LODWORD(v25) = g_iSettlerMagic[5 * j + 2];
+        HIDWORD(v23) = v52 + 6;
         LODWORD(v23) = g_pIconPalette;
-        CacheRenderingStandard(v23, *(unsigned __int16 *)(v56 + 4), 64, v27, v32, 0, (int)&dword_F29144[220078] + 3, 0, 0);
+        CacheRenderingStandard(v23, *(unsigned __int16 *)(v52 + 4), 64, v25, v28, 0, (int)&dword_F29144[220078] + 3, 0, 0);
       }
     }
     else
@@ -47759,14 +47746,14 @@ RenderObjectLayer___def_336D47A:
             j < g_iSettlerFitnessCounter;
             ++j )
       {
-        v55 = g_iSettlerFitness[5 * j + 4];
-        *((float *)&v33 + 1) = (float)g_iSettlerFitness[5 * j + 1];
-        *(float *)&v33 = (float)g_iSettlerFitness[5 * j];
-        HIDWORD(v28) = g_iSettlerFitness[5 * j + 3];
-        LODWORD(v28) = g_iSettlerFitness[5 * j + 2];
-        HIDWORD(v24) = v55 + 6;
+        v51 = g_iSettlerFitness[5 * j + 4];
+        *((float *)&v29 + 1) = (float)g_iSettlerFitness[5 * j + 1];
+        *(float *)&v29 = (float)g_iSettlerFitness[5 * j];
+        HIDWORD(v26) = g_iSettlerFitness[5 * j + 3];
+        LODWORD(v26) = g_iSettlerFitness[5 * j + 2];
+        HIDWORD(v24) = v51 + 6;
         LODWORD(v24) = g_pIconPalette;
-        CacheRenderingStandard(v24, *(unsigned __int16 *)(v55 + 4), 64, v28, v33, 0, (int)&dword_F29144[220078] + 3, 0, 0);
+        CacheRenderingStandard(v24, *(unsigned __int16 *)(v51 + 4), 64, v26, v29, 0, (int)&dword_F29144[220078] + 3, 0, 0);
       }
     }
     else
@@ -47781,50 +47768,50 @@ RenderObjectLayer___def_336D47A:
   }
   if ( GfxEngineSetup.bShowIconLayer != 0 && g_pfSetNumberOfNextLine != nullptr && g_pfGetIconObjectByX != nullptr )
   {
-    v109 = -8 * iVertexHeight - (GfxEngineSetup.iSoftOffsetY << 16);
+    v105 = -8 * iVertexHeight - (GfxEngineSetup.iSoftOffsetY << 16);
     j = GfxEngineSetup.iScrollOffsetY - 7;
-    while ( j < v54 + GfxEngineSetup.iScrollOffsetY + 16 )
+    while ( j < v50 + GfxEngineSetup.iScrollOffsetY + 16 )
     {
       if ( (j & 1) != 0 )
       {
-        v110 = (GfxEngineSetup.iWidthOfBorder - GfxEngineSetup.iSoftOffsetX - (iVertexSize >> 16) - ((30 * iVertexSize) >> 16)) << 16;
-        v100 = 1;
+        v106 = (GfxEngineSetup.iWidthOfBorder - GfxEngineSetup.iSoftOffsetX - (iVertexSize >> 16) - ((30 * iVertexSize) >> 16)) << 16;
+        v96 = 1;
       }
       else
       {
-        v110 = v53 + ((GfxEngineSetup.iWidthOfBorder - GfxEngineSetup.iSoftOffsetX - (iVertexSize >> 16) - ((30 * iVertexSize) >> 16)) << 16);
-        v100 = 0;
+        v106 = v49 + ((GfxEngineSetup.iWidthOfBorder - GfxEngineSetup.iSoftOffsetX - (iVertexSize >> 16) - ((30 * iVertexSize) >> 16)) << 16);
+        v96 = 0;
       }
-      v39 = v63 + GfxEngineSetup.iScrollOffsetX + j / 2 + 1;
-      v70 = GfxEngineSetup.iScrollOffsetX + iSizeOfMap * j + j / 2 - 30;
-      v40 = GfxEngineSetup.iScrollOffsetX + j / 2 - 30;
+      v35 = v59 + GfxEngineSetup.iScrollOffsetX + j / 2 + 1;
+      v66 = GfxEngineSetup.iScrollOffsetX + iSizeOfMap * j + j / 2 - 30;
+      v36 = GfxEngineSetup.iScrollOffsetX + j / 2 - 30;
       if ( FastIndexValidation(j) )
       {
         g_pfSetNumberOfNextLine(j);
-        v80 = v40;
-        while ( v80 < v39 + 8 )
+        v76 = v36;
+        while ( v76 < v35 + 8 )
         {
-          if ( FastIndexValidation(v100 + v80) )
+          if ( FastIndexValidation(v96 + v76) )
           {
-            IconObjectByX = g_pfGetIconObjectByX(v100 + v80);
+            IconObjectByX = g_pfGetIconObjectByX(v96 + v76);
             if ( IconObjectByX == 255 )
             {
               break;
             }
             if ( IconObjectByX != 0 )
             {
-              v105 = &psMapElement[v100 + v70];
-              v38 = CalcFinalHeightOffset(v105->iHeight);
-              g_pfBlitAccessoryIcon(0, v110, v109 - v38, IconObjectByX);
+              v101 = &psMapElement[v96 + v66];
+              v34 = CalcFinalHeightOffset(v101->iHeight);
+              g_pfBlitAccessoryIcon(0, v106, v105 - v34, IconObjectByX);
             }
           }
-          v110 += iVertexSize;
-          ++v80;
-          ++v70;
+          v106 += iVertexSize;
+          ++v76;
+          ++v66;
         }
       }
       ++j;
-      v109 += iVertexHeight;
+      v105 += iVertexHeight;
     }
   }
   if ( D3DObjectPtr->m_bHardwareRuns != 0 && GfxEngineSetup.bHardwareObjects != 0 )
@@ -47835,15 +47822,15 @@ RenderObjectLayer___def_336D47A:
   {
     if ( D3DObjectPtr->m_bHardwareRuns != 0 && GfxEngineSetup.bHardwareObjects != 0 )
     {
-      hResult = D3DObjectPtr->m_pFinalRenderSurface->Lock((CSurfaceV7 *)D3DObjectPtr->m_pFinalRenderSurface, (unsigned int *)&v71, (void **)&v68, 1u);
+      hResult = D3DObjectPtr->m_pFinalRenderSurface->Lock((CSurfaceV7 *)D3DObjectPtr->m_pFinalRenderSurface, (unsigned int *)&v67, (void **)&v64, 1u);
       if ( hResult != 0 )
       {
         WriteError(hResult, "LockSoftwareObjectSurface");
         return 0;
       }
-      g_pRenderAdress = v68;
-      g_pBeginOfRenderBuffer = v68;
-      g_iRenderPitch = v71;
+      g_pRenderAdress = v64;
+      g_pBeginOfRenderBuffer = v64;
+      g_iRenderPitch = v67;
       g_iScanlineLength = 2 * GfxEngineSetup.sRenderSetup.m_uWidth;
     }
     sSelection = *GfxEngineSetup.psSelectionRect;
@@ -49432,8 +49419,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
   
   int v3; // [esp+8h] [ebp-180h]
   int v4; // [esp+Ch] [ebp-17Ch]
-  int v5; // [esp+10h] [ebp-178h]
-  int v6; // [esp+14h] [ebp-174h]
+  unsigned int v5; // [esp+10h] [ebp-178h]
+  unsigned int v6; // [esp+14h] [ebp-174h]
   int v7; // [esp+18h] [ebp-170h]
   int v8; // [esp+1Ch] [ebp-16Ch]
   int v9; // [esp+20h] [ebp-168h]
@@ -49488,19 +49475,19 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
   int OldFogging; // [esp+E4h] [ebp-A4h]
   int NewFogging; // [esp+E8h] [ebp-A0h]
   int v60; // [esp+ECh] [ebp-9Ch]
-  int v61; // [esp+F0h] [ebp-98h]
+  unsigned int v61; // [esp+F0h] [ebp-98h]
   int v62; // [esp+F4h] [ebp-94h]
   int v63; // [esp+F8h] [ebp-90h]
   int LightFog; // [esp+FCh] [ebp-8Ch]
-  int ShadowFog; // [esp+100h] [ebp-88h]
+  unsigned int ShadowFog; // [esp+100h] [ebp-88h]
   int v66; // [esp+104h] [ebp-84h]
   int v67; // [esp+108h] [ebp-80h]
-  int v68; // [esp+10Ch] [ebp-7Ch]
+  unsigned int v68; // [esp+10Ch] [ebp-7Ch]
   int v69; // [esp+110h] [ebp-78h]
   int v70; // [esp+114h] [ebp-74h]
   int v71; // [esp+118h] [ebp-70h]
   int v72; // [esp+11Ch] [ebp-6Ch]
-  int v73; // [esp+120h] [ebp-68h]
+  unsigned int v73; // [esp+120h] [ebp-68h]
   bool v74; // [esp+124h] [ebp-64h]
   unsigned __int8 v75; // [esp+125h] [ebp-63h]
   bool v76; // [esp+126h] [ebp-62h]
@@ -49516,8 +49503,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
   bool v86; // [esp+141h] [ebp-47h]
   bool v87; // [esp+142h] [ebp-46h]
   bool v88; // [esp+143h] [ebp-45h]
-  float *v89; // [esp+144h] [ebp-44h] BYREF
-  float *v90; // [esp+148h] [ebp-40h] BYREF
+  TRIANGLE_CROSSING *v89; // [esp+144h] [ebp-44h] BYREF
+  TRIANGLE_CROSSING *TripleTextureVertexPtr; // [esp+148h] [ebp-40h] BYREF
   bool v91; // [esp+14Fh] [ebp-39h]
   bool v92; // [esp+150h] [ebp-38h]
   bool v93; // [esp+151h] [ebp-37h]
@@ -49531,13 +49518,13 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
   unsigned __int8 v101; // [esp+15Fh] [ebp-29h]
   int v102; // [esp+160h] [ebp-28h] BYREF
   int Number; // [esp+164h] [ebp-24h]
-  int v104; // [esp+168h] [ebp-20h] BYREF
+  int Type2; // [esp+168h] [ebp-20h] BYREF
   unsigned __int8 v105; // [esp+16Eh] [ebp-1Ah]
   unsigned __int8 v106; // [esp+16Fh] [ebp-19h]
-  unsigned __int8 *v107; // [esp+170h] [ebp-18h]
-  unsigned __int8 *v108; // [esp+174h] [ebp-14h]
-  int v109; // [esp+178h] [ebp-10h] BYREF
-  int v110; // [esp+17Ch] [ebp-Ch] BYREF
+  CHeightAndTypeTable::FROM_TO_TABLE_ELEMENT *v107; // [esp+170h] [ebp-18h]
+  CHeightAndTypeTable::FROM_TO_TABLE_ELEMENT *v108; // [esp+174h] [ebp-14h]
+  int Type3; // [esp+178h] [ebp-10h] BYREF
+  int Type1; // [esp+17Ch] [ebp-Ch] BYREF
   T_GFX_MAP_ELEMENT *v111; // [esp+180h] [ebp-8h]
   char v112; // [esp+187h] [ebp-1h]
 
@@ -49557,7 +49544,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
   {
     flt_3E2E708 = 0.00390625;
   }
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup) != 0 )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup) )
   {
     if ( D3DObjectPtr == nullptr )
     {
@@ -49598,7 +49585,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
   v97 = -iVertexHeight - (GfxEngineSetup.iSoftOffsetY << 16);
   v33 = -iVertexSize / 2;
   v66 = iVertexSize / 2;
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup) != 0 )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup) )
   {
     v78 = CInterfaceD3D::BeginLandscapeScene(D3DObjectPtr);
     if ( v78 != 0 )
@@ -49685,23 +49672,23 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         OldFogging = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
         v44 = NewFogging != OldFogging;
         v105 = v44 | v111->iFlags & 0x40;
-        ShadowFog = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, OldFogging, NewFogging);
-        LightFog = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, OldFogging, NewFogging);
-        v110 = (unsigned __int8)byte_3ACD340[v111->iType];
+        ShadowFog = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, OldFogging, NewFogging);
+        LightFog = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, OldFogging, NewFogging);
+        Type1 = (unsigned __int8)byte_3ACD340[v111->iType];
         v85 = (v111->iShading & 0x40) != 0;
         v99 = v85;
-        if ( (v110 == 28 || v110 == 29) && CalcCurrentFog(v111) <= 59 )
+        if ( (Type1 == 28 || Type1 == 29) && CalcCurrentFog(v111) <= 59 )
         {
-          v110 = 16;
+          Type1 = 16;
         }
         v111->iFlags &= ~0x40u;
       }
       else
       {
         v79 = 0;
-        v110 = 7;
-        ShadowFog = unk_4697594;
-        LightFog = unk_46975D4;
+        Type1 = 7;
+        ShadowFog = g_cHeightAndTypeTable.uShadeColor[1];
+        LightFog = g_cHeightAndTypeTable.uLightColor[1];
         v105 = 0;
         v99 = false;
       }
@@ -49719,23 +49706,23 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         v56 = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
         v41 = v57 != v56;
         v98 = v41 | v111->iFlags & 0x40;
-        v61 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v40, v56, v57);
-        v60 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v40, v56, v57);
-        v104 = (unsigned __int8)byte_3ACD340[v111->iType];
+        v61 = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v40, v56, v57);
+        v60 = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v40, v56, v57);
+        Type2 = (unsigned __int8)byte_3ACD340[v111->iType];
         v84 = (v111->iShading & 0x40) != 0;
         v91 = v84;
-        if ( (v104 == 28 || v104 == 29) && CalcCurrentFog(v111) <= 59 )
+        if ( (Type2 == 28 || Type2 == 29) && CalcCurrentFog(v111) <= 59 )
         {
-          v104 = 16;
+          Type2 = 16;
         }
         v111->iFlags &= ~0x40u;
       }
       else
       {
         v62 = 0;
-        v104 = 7;
-        v61 = unk_4697594;
-        v60 = unk_46975D4;
+        Type2 = 7;
+        v61 = g_cHeightAndTypeTable.uShadeColor[1];
+        v60 = g_cHeightAndTypeTable.uLightColor[1];
         v98 = 0;
         v91 = false;
       }
@@ -49759,28 +49746,28 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
           v53 = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
           v38 = v54 != v53;
           v106 = v38 | v111->iFlags & 0x40;
-          v73 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v37, v53, v54);
-          v72 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v37, v53, v54);
-          v109 = (unsigned __int8)byte_3ACD340[v111->iType];
+          v73 = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v37, v53, v54);
+          v72 = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v37, v53, v54);
+          Type3 = (unsigned __int8)byte_3ACD340[v111->iType];
           v83 = (v111->iShading & 0x40) != 0;
           v100 = v83;
-          if ( (v109 == 28 || v109 == 29) && CalcCurrentFog(v111) <= 59 )
+          if ( (Type3 == 28 || Type3 == 29) && CalcCurrentFog(v111) <= 59 )
           {
-            v109 = 16;
+            Type3 = 16;
           }
           v111->iFlags &= ~0x40u;
         }
         else
         {
           v71 = 0;
-          v109 = 7;
-          v73 = unk_4697594;
-          v72 = unk_46975D4;
+          Type3 = 7;
+          v73 = g_cHeightAndTypeTable.uShadeColor[1];
+          v72 = g_cHeightAndTypeTable.uLightColor[1];
           v106 = 0;
           v100 = false;
         }
         v9 = v71;
-        v7 = v109;
+        v7 = Type3;
         v5 = v73;
         v3 = v72;
         v76 = v100;
@@ -49796,8 +49783,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
           v50 = T_GFX_MAP_ELEMENT::GetOldFogging(v111);
           v35 = v51 != v50;
           v101 = v35 | v111->iFlags & 0x40;
-          v68 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v34, v50, v51);
-          v67 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v34, v50, v51);
+          v68 = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v34, v50, v51);
+          v67 = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v34, v50, v51);
           v102 = (unsigned __int8)byte_3ACD340[v111->iType];
           v88 = (v111->iShading & 0x40) != 0;
           v92 = v88;
@@ -49811,8 +49798,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         {
           v70 = 0;
           v102 = 7;
-          v68 = unk_4697594;
-          v67 = unk_46975D4;
+          v68 = g_cHeightAndTypeTable.uShadeColor[1];
+          v67 = g_cHeightAndTypeTable.uLightColor[1];
           v101 = 0;
           v92 = false;
         }
@@ -49825,19 +49812,19 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         if ( (v96 != v33 || g_bHalfLine != 0) && (v97 >> 16) - v79 <= GfxEngineSetup.sRenderSetup.m_uHeight && (v106 | v98 | v105) != 0 )
         {
           s_iDarkTribeElement = 22 * (v100 || v91 || v99);
-          if ( v110 == v104 && v104 == v109 && TEXTURE_PAGE_MAP[v110] >= 0 )
+          if ( Type1 == Type2 && Type2 == Type3 && TEXTURE_PAGE_MAP[Type1] >= 0 )
           {
-            CInterfaceD3D::CalcTilingVerticesType1(D3DObjectPtr, v110);
+            CInterfaceD3D::CalcTilingVerticesType1(D3DObjectPtr, Type1);
           }
           else
           {
-            v32 = v110 == 28;
-            v31 = v104 == 28;
-            v30 = v109 == 28;
+            v32 = Type1 == 28;
+            v31 = Type2 == 28;
+            v30 = Type3 == 28;
             v26 = v30 + v31 + v32;
-            v29 = v110 == 29;
-            v28 = v104 == 29;
-            v27 = v109 == 29;
+            v29 = Type1 == 29;
+            v28 = Type2 == 29;
+            v27 = Type3 == 29;
             v25 = v27 + v28 + v29;
             if ( v25 + v26 == 3 )
             {
@@ -49847,53 +49834,53 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
             {
               if ( v26 > 0 && v25 > 0 )
               {
-                if ( v110 == 28 )
+                if ( Type1 == 28 )
                 {
-                  v110 = 29;
+                  Type1 = 29;
                 }
-                if ( v104 == 28 )
+                if ( Type2 == 28 )
                 {
-                  v104 = 29;
+                  Type2 = 29;
                 }
-                if ( v109 == 28 )
+                if ( Type3 == 28 )
                 {
-                  v109 = 29;
+                  Type3 = 29;
                 }
               }
-              if ( v104 == v109 )
+              if ( Type2 == Type3 )
               {
-                v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v104] + 4 * (unsigned __int8)byte_3ACD510[v110]];
-                v90 = &PatternTripleVertices[144 * *v107 + 36 * v107[1] + 36 * (unsigned __int8)(v112 & v107[3])];
+                v107 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type1]];
+                TripleTextureVertexPtr = &PatternTripleVertices[v107->x][v107->y][6 * (unsigned __int8)(v112 & v107->Flags)];
               }
-              else if ( v104 == v110 )
+              else if ( Type2 == Type1 )
               {
-                v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v104] + 4 * (unsigned __int8)byte_3ACD510[v109]];
-                v90 = &PatternTripleVertices[144 * *v107 + 12 + 36 * v107[1] + 36 * (unsigned __int8)(v112 & v107[3])];
+                v107 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type3]];
+                TripleTextureVertexPtr = &PatternTripleVertices[v107->x][(unsigned __int8)(v112 & v107->Flags)][6 * v107->y + 2];
               }
-              else if ( v110 == v109 )
+              else if ( Type1 == Type3 )
               {
-                v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v104]];
-                v90 = &PatternTripleVertices[144 * *v107 + 24 + 36 * v107[1] + 36 * (unsigned __int8)(v112 & v107[3])];
+                v107 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type2]];
+                TripleTextureVertexPtr = &PatternTripleVertices[v107->x][(unsigned __int8)(v112 & v107->Flags)][6 * v107->y + 4];
               }
               else
               {
-                sub_2F7C100(&v110, &v104, &v109, &g_bRiverMouth, 0, (int *)&v90);
+                ProcessThreePartCrossing(&Type1, &Type2, &Type3, &g_bRiverMouth, 0, &TripleTextureVertexPtr);
                 if ( g_bRiverMouth == 0 )
                 {
-                  if ( v104 == v109 )
+                  if ( Type2 == Type3 )
                   {
-                    v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v104] + 4 * (unsigned __int8)byte_3ACD510[v110]];
-                    v90 = &PatternTripleVertices[144 * *v107 + 36 * v107[1] + 36 * (unsigned __int8)(v112 & v107[3])];
+                    v107 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type1]];
+                    TripleTextureVertexPtr = &PatternTripleVertices[v107->x][v107->y][6 * (unsigned __int8)(v112 & v107->Flags)];
                   }
-                  else if ( v104 == v110 )
+                  else if ( Type2 == Type1 )
                   {
-                    v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v104] + 4 * (unsigned __int8)byte_3ACD510[v109]];
-                    v90 = &PatternTripleVertices[144 * *v107 + 12 + 36 * v107[1] + 36 * (unsigned __int8)(v112 & v107[3])];
+                    v107 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type3]];
+                    TripleTextureVertexPtr = &PatternTripleVertices[v107->x][(unsigned __int8)(v112 & v107->Flags)][6 * v107->y + 2];
                   }
                   else
                   {
-                    v107 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v104]];
-                    v90 = &PatternTripleVertices[144 * *v107 + 24 + 36 * v107[1] + 36 * (unsigned __int8)(v112 & v107[3])];
+                    v107 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type2]];
+                    TripleTextureVertexPtr = &PatternTripleVertices[v107->x][(unsigned __int8)(v112 & v107->Flags)][6 * v107->y + 4];
                   }
                 }
               }
@@ -49904,16 +49891,16 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
               }
               else
               {
-                CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v107[2]);
+                CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v107->Page);
               }
-              g_pVertex->tu = *v90;
-              g_pVertex->tv = v90[1];
+              g_pVertex->tu = TripleTextureVertexPtr->tu1;
+              g_pVertex->tv = TripleTextureVertexPtr->tv1;
               ++g_pVertex;
-              g_pVertex->tu = v90[2];
-              g_pVertex->tv = v90[3];
+              g_pVertex->tu = TripleTextureVertexPtr->tu2;
+              g_pVertex->tv = TripleTextureVertexPtr->tv2;
               ++g_pVertex;
-              g_pVertex->tu = v90[4];
-              g_pVertex->tv = v90[5];
+              g_pVertex->tu = TripleTextureVertexPtr->tu3;
+              g_pVertex->tv = TripleTextureVertexPtr->tv3;
               g_pVertex -= 2;
             }
           }
@@ -49935,8 +49922,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
           {
             g_bSplitTriangle = 0;
             g_pVertex -= 2;
-            g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, v61);
-            g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v72, v60);
+            g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v73, v61);
+            g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v72, v60);
             g_pVertex->sx = (float)(v96 >> 16);
             g_pVertex->sy = (float)((iVertexHeight + v97 - (v62 + v71) / 2) >> 16);
             qmemcpy(&g_pVertex[3], g_pVertex, sizeof(_D3DTLVERTEX));
@@ -49947,8 +49934,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
             g_pVertex->sx = (float)((v66 + v96) >> 16);
             g_pVertex->sy = (float)((iVertexHeight + v97 - v71) >> 16);
             ++g_pVertex;
-            g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, v61);
-            g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v72, v60);
+            g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v73, v61);
+            g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v72, v60);
             g_pVertex->sx = (float)(v96 >> 16);
             g_pVertex->sy = (float)((iVertexHeight + v97 - (v71 + v62) / 2) >> 16);
             --g_pVertex;
@@ -49967,19 +49954,19 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         if ( (v80 != v24 - 1 || g_bHalfLine == 0) && ((v97 >> 16) - v79 <= GfxEngineSetup.sRenderSetup.m_uHeight || (v97 >> 16) - v70 <= GfxEngineSetup.sRenderSetup.m_uHeight) && (v106 | v101 | v105) != 0 )
         {
           s_iDarkTribeElement = 22 * (v100 || v92 || v99);
-          if ( v110 == v102 && v102 == v109 && TEXTURE_PAGE_MAP[v110] >= 0 )
+          if ( Type1 == v102 && v102 == Type3 && TEXTURE_PAGE_MAP[Type1] >= 0 )
           {
-            CInterfaceD3D::CalcTilingVerticesType2(D3DObjectPtr, v110);
+            CInterfaceD3D::CalcTilingVerticesType2(D3DObjectPtr, Type1);
           }
           else
           {
-            v23 = v110 == 28;
+            v23 = Type1 == 28;
             v22 = v102 == 28;
-            v21 = v109 == 28;
+            v21 = Type3 == 28;
             v17 = v21 + v22 + v23;
-            v20 = v110 == 29;
+            v20 = Type1 == 29;
             v19 = v102 == 29;
-            v18 = v109 == 29;
+            v18 = Type3 == 29;
             v16 = v18 + v19 + v20;
             if ( v16 + v17 == 3 )
             {
@@ -49989,53 +49976,53 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
             {
               if ( v17 > 0 && v16 > 0 )
               {
-                if ( v110 == 28 )
+                if ( Type1 == 28 )
                 {
-                  v110 = 29;
+                  Type1 = 29;
                 }
                 if ( v102 == 28 )
                 {
                   v102 = 29;
                 }
-                if ( v109 == 28 )
+                if ( Type3 == 28 )
                 {
-                  v109 = 29;
+                  Type3 = 29;
                 }
               }
-              if ( v110 == v102 )
+              if ( Type1 == v102 )
               {
-                v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v109]];
-                v89 = &PatternTripleVertices[144 * *v108 + 18 + 36 * v108[1] + 36 * (unsigned __int8)(v112 & v108[3])];
+                v108 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type3]];
+                v89 = &PatternTripleVertices[v108->x][(unsigned __int8)(v112 & v108->Flags)][6 * v108->y + 3];
               }
-              else if ( v102 == v109 )
+              else if ( v102 == Type3 )
               {
-                v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v102] + 4 * (unsigned __int8)byte_3ACD510[v110]];
-                v89 = &PatternTripleVertices[144 * *v108 + 30 + 36 * v108[1] + 36 * (unsigned __int8)(v112 & v108[3])];
+                v108 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[v102]][LandTypeTranslation[Type1]];
+                v89 = &PatternTripleVertices[v108->x][(unsigned __int8)(v112 & v108->Flags)][6 * v108->y + 5];
               }
-              else if ( v110 == v109 )
+              else if ( Type1 == Type3 )
               {
-                v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v102]];
-                v89 = &PatternTripleVertices[144 * *v108 + 6 + 36 * v108[1] + 36 * (unsigned __int8)(v112 & v108[3])];
+                v108 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[v102]];
+                v89 = &PatternTripleVertices[v108->x][(unsigned __int8)(v112 & v108->Flags)][6 * v108->y + 1];
               }
               else
               {
-                sub_2F7C100(&v110, &v109, &v102, &g_bRiverMouth, 1u, (int *)&v89);
+                ProcessThreePartCrossing(&Type1, &Type3, &v102, &g_bRiverMouth, 1u, &v89);
                 if ( g_bRiverMouth == 0 )
                 {
-                  if ( v110 == v102 )
+                  if ( Type1 == v102 )
                   {
-                    v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v109]];
-                    v89 = &PatternTripleVertices[144 * *v108 + 18 + 36 * v108[1] + 36 * (unsigned __int8)(v112 & v108[3])];
+                    v108 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type3]];
+                    v89 = &PatternTripleVertices[v108->x][(unsigned __int8)(v112 & v108->Flags)][6 * v108->y + 3];
                   }
-                  else if ( v102 == v109 )
+                  else if ( v102 == Type3 )
                   {
-                    v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v102] + 4 * (unsigned __int8)byte_3ACD510[v110]];
-                    v89 = &PatternTripleVertices[144 * *v108 + 30 + 36 * v108[1] + 36 * (unsigned __int8)(v112 & v108[3])];
+                    v108 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[v102]][LandTypeTranslation[Type1]];
+                    v89 = &PatternTripleVertices[v108->x][(unsigned __int8)(v112 & v108->Flags)][6 * v108->y + 5];
                   }
                   else
                   {
-                    v108 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v102]];
-                    v89 = &PatternTripleVertices[144 * *v108 + 6 + 36 * v108[1] + 36 * (unsigned __int8)(v112 & v108[3])];
+                    v108 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[v102]];
+                    v89 = &PatternTripleVertices[v108->x][(unsigned __int8)(v112 & v108->Flags)][6 * v108->y + 1];
                   }
                 }
               }
@@ -50046,16 +50033,16 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
               }
               else
               {
-                CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v108[2]);
+                CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v108->Page);
               }
-              g_pVertex->tu = *v89;
-              g_pVertex->tv = v89[1];
+              g_pVertex->tu = v89->tu1;
+              g_pVertex->tv = v89->tv1;
               ++g_pVertex;
-              g_pVertex->tu = v89[2];
-              g_pVertex->tv = v89[3];
+              g_pVertex->tu = v89->tu2;
+              g_pVertex->tv = v89->tv2;
               ++g_pVertex;
-              g_pVertex->tu = v89[4];
-              g_pVertex->tv = v89[5];
+              g_pVertex->tu = v89->tu3;
+              g_pVertex->tv = v89->tv3;
               g_pVertex -= 2;
             }
           }
@@ -50077,8 +50064,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
           {
             g_bSplitTriangle = 0;
             g_pVertex -= 2;
-            g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v68, ShadowFog);
-            g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v67, LightFog);
+            g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v68, ShadowFog);
+            g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v67, LightFog);
             g_pVertex->sx = (float)((v66 + v96) >> 16);
             g_pVertex->sy = (float)((v97 - (v79 + v70) / 2) >> 16);
             qmemcpy(&g_pVertex[3], g_pVertex, sizeof(_D3DTLVERTEX));
@@ -50090,8 +50077,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
             g_pVertex->sx = (float)((iVertexSize + v96) >> 16);
             g_pVertex->sy = (float)((v97 - v70) >> 16);
             g_pVertex += 2;
-            g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v68, ShadowFog);
-            g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v67, LightFog);
+            g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v68, ShadowFog);
+            g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v67, LightFog);
             g_pVertex->sx = (float)((v66 + v96) >> 16);
             g_pVertex->sy = (float)((v97 - (v79 + v70) / 2) >> 16);
             g_pVertex->tu = 0.0;
@@ -50106,7 +50093,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
             ++g_pVertex;
           }
         }
-        if ( (unsigned int)g_pVertex > g_pVertexMax )
+        if ( g_pVertex > g_pVertexMax )
         {
           CInterfaceD3D::RenderScene(D3DObjectPtr, false);
         }
@@ -50121,8 +50108,8 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
         v111 += g_iMapSize;
         v79 = v10;
         v62 = v9;
-        v110 = v8;
-        v104 = v7;
+        Type1 = v8;
+        Type2 = v7;
         ShadowFog = v6;
         v61 = v5;
         LightFog = v4;
@@ -50142,7 +50129,7 @@ bool __cdecl DrawTexturedLandscapeDelta(int a1, int a2) {
     }
   }
   CInterfaceD3D::RenderScene(D3DObjectPtr, false);
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup) != 0 )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup) )
   {
     CInterfaceD3D::EndLandscapeScene(D3DObjectPtr);
   }
@@ -50168,8 +50155,8 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
   int v4; // [esp+8h] [ebp-1CCh]
   int v5; // [esp+10h] [ebp-1C4h]
   int v6; // [esp+14h] [ebp-1C0h]
-  int v7; // [esp+18h] [ebp-1BCh]
-  int v8; // [esp+1Ch] [ebp-1B8h]
+  unsigned int v7; // [esp+18h] [ebp-1BCh]
+  unsigned int v8; // [esp+1Ch] [ebp-1B8h]
   int v9; // [esp+20h] [ebp-1B4h] BYREF
   int v10; // [esp+24h] [ebp-1B0h]
   int v11; // [esp+28h] [ebp-1ACh]
@@ -50229,14 +50216,14 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
   int v65; // [esp+100h] [ebp-D4h]
   int v66; // [esp+104h] [ebp-D0h]
   int v67; // [esp+108h] [ebp-CCh]
-  int v68; // [esp+10Ch] [ebp-C8h]
+  unsigned int v68; // [esp+10Ch] [ebp-C8h]
   int v69; // [esp+110h] [ebp-C4h]
-  int ShadowFog; // [esp+114h] [ebp-C0h]
+  unsigned int ShadowFog; // [esp+114h] [ebp-C0h]
   int LightFog; // [esp+118h] [ebp-BCh]
   int v72; // [esp+11Ch] [ebp-B8h]
-  int v73; // [esp+120h] [ebp-B4h]
+  unsigned int v73; // [esp+120h] [ebp-B4h]
   int v74; // [esp+124h] [ebp-B0h]
-  int v75; // [esp+128h] [ebp-ACh]
+  unsigned int v75; // [esp+128h] [ebp-ACh]
   int v76; // [esp+12Ch] [ebp-A8h]
   int v77; // [esp+130h] [ebp-A4h]
   int v78; // [esp+134h] [ebp-A0h]
@@ -50256,8 +50243,8 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
   bool v92; // [esp+15Bh] [ebp-79h]
   int v93; // [esp+15Ch] [ebp-78h]
   int v94; // [esp+160h] [ebp-74h]
-  float *v95; // [esp+164h] [ebp-70h] BYREF
-  float *v96; // [esp+168h] [ebp-6Ch] BYREF
+  TRIANGLE_CROSSING *v95; // [esp+164h] [ebp-70h] BYREF
+  TRIANGLE_CROSSING *TripleTextureVertexPtr; // [esp+168h] [ebp-6Ch] BYREF
   int v97; // [esp+16Ch] [ebp-68h]
   int Number; // [esp+170h] [ebp-64h]
   int iVertexSize; // [esp+174h] [ebp-60h]
@@ -50272,13 +50259,13 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
   char v108; // [esp+186h] [ebp-4Eh]
   bool v109; // [esp+187h] [ebp-4Dh]
   int v110; // [esp+188h] [ebp-4Ch] BYREF
-  int v111; // [esp+18Ch] [ebp-48h] BYREF
+  int Type2; // [esp+18Ch] [ebp-48h] BYREF
   int v112; // [esp+190h] [ebp-44h]
-  unsigned __int8 *v113; // [esp+194h] [ebp-40h]
-  unsigned __int8 *v114; // [esp+198h] [ebp-3Ch]
-  int v115; // [esp+19Ch] [ebp-38h] BYREF
+  CHeightAndTypeTable::FROM_TO_TABLE_ELEMENT *v113; // [esp+194h] [ebp-40h]
+  CHeightAndTypeTable::FROM_TO_TABLE_ELEMENT *v114; // [esp+198h] [ebp-3Ch]
+  int Type3; // [esp+19Ch] [ebp-38h] BYREF
   int i; // [esp+1A0h] [ebp-34h]
-  int v117; // [esp+1A4h] [ebp-30h] BYREF
+  int Type1; // [esp+1A4h] [ebp-30h] BYREF
   T_GFX_MAP_ELEMENT *v118; // [esp+1A8h] [ebp-2Ch]
   char v119; // [esp+1AFh] [ebp-25h]
   int v120; // [esp+1B0h] [ebp-24h] BYREF
@@ -50606,22 +50593,22 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
       v47 = v50 ? 0 : v118->iShading & 0xF;
       NewFogging = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
       OldFogging = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
-      ShadowFog = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
-      LightFog = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
-      v117 = (unsigned __int8)byte_3ACD340[v118->iType];
+      ShadowFog = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
+      LightFog = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
+      Type1 = (unsigned __int8)byte_3ACD340[v118->iType];
       v91 = (v118->iShading & 0x40) != 0;
       v106 = v91;
-      if ( (v117 == 28 || v117 == 29) && CalcCurrentFog(v118) <= 59 )
+      if ( (Type1 == 28 || Type1 == 29) && CalcCurrentFog(v118) <= 59 )
       {
-        v117 = 16;
+        Type1 = 16;
       }
     }
     else
     {
       v82 = 0;
-      v117 = 7;
-      ShadowFog = unk_4697594;
-      LightFog = unk_46975D4;
+      Type1 = 7;
+      ShadowFog = g_cHeightAndTypeTable.uShadeColor[1];
+      LightFog = g_cHeightAndTypeTable.uLightColor[1];
       v106 = false;
     }
     if ( i == g_iFadeYBorder - 1 )
@@ -50636,22 +50623,22 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
       v43 = v46 ? 0 : v118->iShading & 0xF;
       v45 = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
       v44 = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
-      v68 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
-      v67 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
-      v111 = (unsigned __int8)byte_3ACD340[v118->iType];
+      v68 = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
+      v67 = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
+      Type2 = (unsigned __int8)byte_3ACD340[v118->iType];
       v89 = (v118->iShading & 0x40) != 0;
       v101 = v89;
-      if ( (v111 == 28 || v111 == 29) && CalcCurrentFog(v118) <= 59 )
+      if ( (Type2 == 28 || Type2 == 29) && CalcCurrentFog(v118) <= 59 )
       {
-        v111 = 16;
+        Type2 = 16;
       }
     }
     else
     {
       v69 = 0;
-      v111 = 7;
-      v68 = unk_4697594;
-      v67 = unk_46975D4;
+      Type2 = 7;
+      v68 = g_cHeightAndTypeTable.uShadeColor[1];
+      v67 = g_cHeightAndTypeTable.uLightColor[1];
       v101 = false;
     }
     v83 = v80;
@@ -50672,26 +50659,26 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
         v39 = v42 ? 0 : v118->iShading & 0xF;
         v41 = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
         v40 = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
-        v75 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
-        v78 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
-        v115 = (unsigned __int8)byte_3ACD340[v118->iType];
+        v75 = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
+        v78 = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
+        Type3 = (unsigned __int8)byte_3ACD340[v118->iType];
         v87 = (v118->iShading & 0x40) != 0;
         v107 = v87;
-        if ( (v115 == 28 || v115 == 29) && CalcCurrentFog(v118) <= 59 )
+        if ( (Type3 == 28 || Type3 == 29) && CalcCurrentFog(v118) <= 59 )
         {
-          v115 = 16;
+          Type3 = 16;
         }
       }
       else
       {
         v77 = 0;
-        v115 = 7;
-        v75 = unk_4697594;
-        v78 = unk_46975D4;
+        Type3 = 7;
+        v75 = g_cHeightAndTypeTable.uShadeColor[1];
+        v78 = g_cHeightAndTypeTable.uLightColor[1];
         v107 = false;
       }
       v11 = v77;
-      v4 = v115;
+      v4 = Type3;
       v7 = v75;
       v5 = v78;
       v81 = v107;
@@ -50704,8 +50691,8 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
         v35 = v38 ? 0 : v118->iShading & 0xF;
         v37 = T_GFX_MAP_ELEMENT::GetNewFogging(v118);
         v36 = T_GFX_MAP_ELEMENT::GetOldFogging(v118);
-        v73 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
-        v72 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
+        v73 = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
+        v72 = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
         v110 = (unsigned __int8)byte_3ACD340[v118->iType];
         v88 = (v118->iShading & 0x40) != 0;
         v102 = v88;
@@ -50718,8 +50705,8 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
       {
         v76 = 0;
         v110 = 7;
-        v73 = unk_4697594;
-        v72 = unk_46975D4;
+        v73 = g_cHeightAndTypeTable.uShadeColor[1];
+        v72 = g_cHeightAndTypeTable.uLightColor[1];
         v102 = false;
       }
       v12 = v76;
@@ -50730,19 +50717,19 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
       if ( (v105 != v60 + v34 || g_bHalfLine != 0) && (v112 >> 16) - v82 <= GfxEngineSetup.sRenderSetup.m_uHeight )
       {
         s_iDarkTribeElement = 22 * (v107 || v101 || v106);
-        if ( v117 == v111 && v111 == v115 && TEXTURE_PAGE_MAP[v117] >= 0 )
+        if ( Type1 == Type2 && Type2 == Type3 && TEXTURE_PAGE_MAP[Type1] >= 0 )
         {
-          CInterfaceD3D::CalcTilingVerticesType1(D3DObjectPtr, v117);
+          CInterfaceD3D::CalcTilingVerticesType1(D3DObjectPtr, Type1);
         }
         else
         {
-          v33 = v117 == 28;
-          v32 = v111 == 28;
-          v17 = v115 == 28;
+          v33 = Type1 == 28;
+          v32 = Type2 == 28;
+          v17 = Type3 == 28;
           v27 = v17 + v32 + v33;
-          v30 = v117 == 29;
-          v29 = v111 == 29;
-          v28 = v115 == 29;
+          v30 = Type1 == 29;
+          v29 = Type2 == 29;
+          v28 = Type3 == 29;
           v26 = v28 + v29 + v30;
           if ( v26 + v27 == 3 )
           {
@@ -50752,53 +50739,53 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
           {
             if ( v27 > 0 && v26 > 0 )
             {
-              if ( v117 == 28 )
+              if ( Type1 == 28 )
               {
-                v117 = 29;
+                Type1 = 29;
               }
-              if ( v111 == 28 )
+              if ( Type2 == 28 )
               {
-                v111 = 29;
+                Type2 = 29;
               }
-              if ( v115 == 28 )
+              if ( Type3 == 28 )
               {
-                v115 = 29;
+                Type3 = 29;
               }
             }
-            if ( v111 == v115 )
+            if ( Type2 == Type3 )
             {
-              v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111] + 4 * (unsigned __int8)byte_3ACD510[v117]];
-              v96 = &PatternTripleVertices[144 * *v114 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
+              v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type1]];
+              TripleTextureVertexPtr = &PatternTripleVertices[4 * v114->x][6 * v114->y + 6 * (unsigned __int8)(v119 & v114->Flags)];
             }
-            else if ( v111 == v117 )
+            else if ( Type2 == Type1 )
             {
-              v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111] + 4 * (unsigned __int8)byte_3ACD510[v115]];
-              v96 = &PatternTripleVertices[144 * *v114 + 12 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
+              v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type3]];
+              TripleTextureVertexPtr = &PatternTripleVertices[4 * v114->x][6 * v114->y + 2 + 6 * (unsigned __int8)(v119 & v114->Flags)];
             }
-            else if ( v117 == v115 )
+            else if ( Type1 == Type3 )
             {
-              v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v111]];
-              v96 = &PatternTripleVertices[144 * *v114 + 24 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
+              v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type2]];
+              TripleTextureVertexPtr = &PatternTripleVertices[4 * v114->x][6 * v114->y + 4 + 6 * (unsigned __int8)(v119 & v114->Flags)];
             }
             else
             {
-              sub_2F7C100(&v117, &v111, &v115, &g_bRiverMouth, 0, (int *)&v96);
+              ProcessThreePartCrossing(&Type1, &Type2, &Type3, &g_bRiverMouth, 0, &TripleTextureVertexPtr);
               if ( g_bRiverMouth == 0 )
               {
-                if ( v111 == v115 )
+                if ( Type2 == Type3 )
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111] + 4 * (unsigned __int8)byte_3ACD510[v117]];
-                  v96 = &PatternTripleVertices[144 * *v114 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
+                  v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type1]];
+                  TripleTextureVertexPtr = &PatternTripleVertices[4 * v114->x][6 * v114->y + 6 * (unsigned __int8)(v119 & v114->Flags)];
                 }
-                else if ( v111 == v117 )
+                else if ( Type2 == Type1 )
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111] + 4 * (unsigned __int8)byte_3ACD510[v115]];
-                  v96 = &PatternTripleVertices[144 * *v114 + 12 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
+                  v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type3]];
+                  TripleTextureVertexPtr = &PatternTripleVertices[4 * v114->x][6 * v114->y + 2 + 6 * (unsigned __int8)(v119 & v114->Flags)];
                 }
                 else
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v111]];
-                  v96 = &PatternTripleVertices[144 * *v114 + 24 + 36 * v114[1] + 36 * (unsigned __int8)(v119 & v114[3])];
+                  v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type2]];
+                  TripleTextureVertexPtr = &PatternTripleVertices[4 * v114->x][6 * v114->y + 4 + 6 * (unsigned __int8)(v119 & v114->Flags)];
                 }
               }
             }
@@ -50809,16 +50796,16 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
             }
             else
             {
-              CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v114[2]);
+              CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v114->Page);
             }
-            g_pVertex->tu = *v96;
-            g_pVertex->tv = v96[1];
+            g_pVertex->tu = TripleTextureVertexPtr->tu1;
+            g_pVertex->tv = TripleTextureVertexPtr->tv1;
             ++g_pVertex;
-            g_pVertex->tu = v96[2];
-            g_pVertex->tv = v96[3];
+            g_pVertex->tu = TripleTextureVertexPtr->tu2;
+            g_pVertex->tv = TripleTextureVertexPtr->tv2;
             ++g_pVertex;
-            g_pVertex->tu = v96[4];
-            g_pVertex->tv = v96[5];
+            g_pVertex->tu = TripleTextureVertexPtr->tu3;
+            g_pVertex->tv = TripleTextureVertexPtr->tv3;
             g_pVertex -= 2;
           }
         }
@@ -50840,8 +50827,8 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
         {
           g_bSplitTriangle = 0;
           g_pVertex -= 2;
-          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v75, v68);
-          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v78, v67);
+          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v75, v68);
+          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v78, v67);
           g_pVertex->sx = (float)(v105 >> 16);
           g_pVertex->sy = (float)((iVertexHeight + v112 - (v69 + v77) / 2) >> 16);
           qmemcpy(&g_pVertex[3], g_pVertex, sizeof(_D3DTLVERTEX));
@@ -50852,8 +50839,8 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
           g_pVertex->sx = (float)((v94 + v105) >> 16);
           g_pVertex->sy = (float)((iVertexHeight + v112 - v77) >> 16);
           ++g_pVertex;
-          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v75, v68);
-          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v78, v67);
+          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v75, v68);
+          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v78, v67);
           g_pVertex->sx = (float)(v105 >> 16);
           g_pVertex->sy = (float)((iVertexHeight + v112 - (v77 + v69) / 2) >> 16);
           --g_pVertex;
@@ -50872,19 +50859,19 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
       if ( (v83 != v66 - 1 || g_bHalfLine == 0) && ((v112 >> 16) - v82 <= GfxEngineSetup.sRenderSetup.m_uHeight || (v112 >> 16) - v76 <= GfxEngineSetup.sRenderSetup.m_uHeight) )
       {
         s_iDarkTribeElement = 22 * (v107 || v102 || v106);
-        if ( v117 == v110 && v110 == v115 && TEXTURE_PAGE_MAP[v117] >= 0 )
+        if ( Type1 == v110 && v110 == Type3 && TEXTURE_PAGE_MAP[Type1] >= 0 )
         {
-          CInterfaceD3D::CalcTilingVerticesType2(D3DObjectPtr, v117);
+          CInterfaceD3D::CalcTilingVerticesType2(D3DObjectPtr, Type1);
         }
         else
         {
-          v25 = v117 == 28;
+          v25 = Type1 == 28;
           v24 = v110 == 28;
-          v23 = v115 == 28;
+          v23 = Type3 == 28;
           v19 = v23 + v24 + v25;
-          v22 = v117 == 29;
+          v22 = Type1 == 29;
           v21 = v110 == 29;
-          v20 = v115 == 29;
+          v20 = Type3 == 29;
           v18 = v20 + v21 + v22;
           if ( v18 + v19 == 3 )
           {
@@ -50894,53 +50881,53 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
           {
             if ( v19 > 0 && v18 > 0 )
             {
-              if ( v117 == 28 )
+              if ( Type1 == 28 )
               {
-                v117 = 29;
+                Type1 = 29;
               }
               if ( v110 == 28 )
               {
                 v110 = 29;
               }
-              if ( v115 == 28 )
+              if ( Type3 == 28 )
               {
-                v115 = 29;
+                Type3 = 29;
               }
             }
-            if ( v117 == v110 )
+            if ( Type1 == v110 )
             {
-              v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v115]];
-              v95 = &PatternTripleVertices[144 * *v113 + 18 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
+              v113 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type3]];
+              v95 = &PatternTripleVertices[4 * v113->x][6 * v113->y + 3 + 6 * (unsigned __int8)(v119 & v113->Flags)];
             }
-            else if ( v110 == v115 )
+            else if ( v110 == Type3 )
             {
-              v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v117]];
-              v95 = &PatternTripleVertices[144 * *v113 + 30 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
+              v113 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[v110]][LandTypeTranslation[Type1]];
+              v95 = &PatternTripleVertices[4 * v113->x][6 * v113->y + 5 + 6 * (unsigned __int8)(v119 & v113->Flags)];
             }
-            else if ( v117 == v115 )
+            else if ( Type1 == Type3 )
             {
-              v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v110]];
-              v95 = &PatternTripleVertices[144 * *v113 + 6 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
+              v113 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[v110]];
+              v95 = &PatternTripleVertices[4 * v113->x][6 * v113->y + 1 + 6 * (unsigned __int8)(v119 & v113->Flags)];
             }
             else
             {
-              sub_2F7C100(&v117, &v115, &v110, &g_bRiverMouth, 1u, (int *)&v95);
+              ProcessThreePartCrossing(&Type1, &Type3, &v110, &g_bRiverMouth, 1u, &v95);
               if ( g_bRiverMouth == 0 )
               {
-                if ( v117 == v110 )
+                if ( Type1 == v110 )
                 {
-                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v115]];
-                  v95 = &PatternTripleVertices[144 * *v113 + 18 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
+                  v113 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type3]];
+                  v95 = &PatternTripleVertices[4 * v113->x][6 * v113->y + 3 + 6 * (unsigned __int8)(v119 & v113->Flags)];
                 }
-                else if ( v110 == v115 )
+                else if ( v110 == Type3 )
                 {
-                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v110] + 4 * (unsigned __int8)byte_3ACD510[v117]];
-                  v95 = &PatternTripleVertices[144 * *v113 + 30 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
+                  v113 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[v110]][LandTypeTranslation[Type1]];
+                  v95 = &PatternTripleVertices[4 * v113->x][6 * v113->y + 5 + 6 * (unsigned __int8)(v119 & v113->Flags)];
                 }
                 else
                 {
-                  v113 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v117] + 4 * (unsigned __int8)byte_3ACD510[v110]];
-                  v95 = &PatternTripleVertices[144 * *v113 + 6 + 36 * v113[1] + 36 * (unsigned __int8)(v119 & v113[3])];
+                  v113 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[v110]];
+                  v95 = &PatternTripleVertices[4 * v113->x][6 * v113->y + 1 + 6 * (unsigned __int8)(v119 & v113->Flags)];
                 }
               }
             }
@@ -50951,16 +50938,16 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
             }
             else
             {
-              CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v113[2]);
+              CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v113->Page);
             }
-            g_pVertex->tu = *v95;
-            g_pVertex->tv = v95[1];
+            g_pVertex->tu = v95->tu1;
+            g_pVertex->tv = v95->tv1;
             ++g_pVertex;
-            g_pVertex->tu = v95[2];
-            g_pVertex->tv = v95[3];
+            g_pVertex->tu = v95->tu2;
+            g_pVertex->tv = v95->tv2;
             ++g_pVertex;
-            g_pVertex->tu = v95[4];
-            g_pVertex->tv = v95[5];
+            g_pVertex->tu = v95->tu3;
+            g_pVertex->tv = v95->tv3;
             g_pVertex -= 2;
           }
         }
@@ -50982,8 +50969,8 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
         {
           g_bSplitTriangle = 0;
           g_pVertex -= 2;
-          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, ShadowFog);
-          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v72, LightFog);
+          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v73, ShadowFog);
+          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v72, LightFog);
           g_pVertex->sx = (float)((v94 + v105) >> 16);
           g_pVertex->sy = (float)((v112 - (v82 + v76) / 2) >> 16);
           qmemcpy(&g_pVertex[3], g_pVertex, sizeof(_D3DTLVERTEX));
@@ -50995,8 +50982,8 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
           g_pVertex->sx = (float)((iVertexSize + v105) >> 16);
           g_pVertex->sy = (float)((v112 - v76) >> 16);
           g_pVertex += 2;
-          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, ShadowFog);
-          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v72, LightFog);
+          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v73, ShadowFog);
+          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v72, LightFog);
           g_pVertex->sx = (float)((v94 + v105) >> 16);
           g_pVertex->sy = (float)((v112 - (v82 + v76) / 2) >> 16);
           g_pVertex->tu = 0.0;
@@ -51011,7 +50998,7 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
           ++g_pVertex;
         }
       }
-      if ( (unsigned int)g_pVertex >= g_pVertexMax )
+      if ( g_pVertex >= g_pVertexMax )
       {
         CInterfaceD3D::RenderScene(D3DObjectPtr, false);
       }
@@ -51026,8 +51013,8 @@ bool __cdecl DrawTexturedLandscape(int _iStartX, int _iStartY) {
       v118 += g_iMapSize;
       v82 = v12;
       v69 = v11;
-      v117 = v10;
-      v111 = v4;
+      Type1 = v10;
+      Type2 = v4;
       ShadowFog = v8;
       v68 = v7;
       LightFog = v6;
@@ -51145,7 +51132,7 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
   int v83; // [esp+144h] [ebp-90h]
   int v84; // [esp+148h] [ebp-8Ch]
   int v85; // [esp+14Ch] [ebp-88h]
-  unsigned __int16 *pDecoLayer; // [esp+150h] [ebp-84h]
+  int iCamVertexHeight; // [esp+150h] [ebp-84h]
   bool v87; // [esp+155h] [ebp-7Fh]
   bool v88; // [esp+156h] [ebp-7Eh]
   bool v89; // [esp+157h] [ebp-7Dh]
@@ -51155,11 +51142,11 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
   bool v93; // [esp+15Bh] [ebp-79h]
   int v94; // [esp+15Ch] [ebp-78h]
   int v95; // [esp+160h] [ebp-74h]
-  float *v96; // [esp+164h] [ebp-70h] BYREF
-  float *v97; // [esp+168h] [ebp-6Ch] BYREF
+  TRIANGLE_CROSSING *v96; // [esp+164h] [ebp-70h] BYREF
+  TRIANGLE_CROSSING *TripleTextureVertexPtr; // [esp+168h] [ebp-6Ch] BYREF
   int v98; // [esp+16Ch] [ebp-68h]
   int Number; // [esp+170h] [ebp-64h]
-  unsigned __int16 *pObjectLayer; // [esp+174h] [ebp-60h]
+  int iCamVertexSize; // [esp+174h] [ebp-60h]
   bool v101; // [esp+17Bh] [ebp-59h]
   bool v102; // [esp+17Ch] [ebp-58h]
   bool v103; // [esp+17Dh] [ebp-57h]
@@ -51171,19 +51158,19 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
   char v109; // [esp+186h] [ebp-4Eh]
   bool v110; // [esp+187h] [ebp-4Dh]
   int v111; // [esp+188h] [ebp-4Ch] BYREF
-  int v112; // [esp+18Ch] [ebp-48h] BYREF
+  int Type2; // [esp+18Ch] [ebp-48h] BYREF
   int v113; // [esp+190h] [ebp-44h]
-  unsigned __int8 *v114; // [esp+194h] [ebp-40h]
-  unsigned __int8 *v115; // [esp+198h] [ebp-3Ch]
-  int v116; // [esp+19Ch] [ebp-38h] BYREF
+  CHeightAndTypeTable::FROM_TO_TABLE_ELEMENT *v114; // [esp+194h] [ebp-40h]
+  CHeightAndTypeTable::FROM_TO_TABLE_ELEMENT *v115; // [esp+198h] [ebp-3Ch]
+  int Type3; // [esp+19Ch] [ebp-38h] BYREF
   int i; // [esp+1A0h] [ebp-34h]
-  int v118; // [esp+1A4h] [ebp-30h] BYREF
+  int Type1; // [esp+1A4h] [ebp-30h] BYREF
   T_GFX_MAP_ELEMENT *v119; // [esp+1A8h] [ebp-2Ch]
   char v120; // [esp+1AFh] [ebp-25h]
   int v121; // [esp+1B0h] [ebp-24h] BYREF
   int v122; // [esp+1B4h] [ebp-20h]
-  int v123; // [esp+1B8h] [ebp-1Ch]
-  int v124; // [esp+1BCh] [ebp-18h]
+  int iCamWidth; // [esp+1B8h] [ebp-1Ch]
+  int iCamHeigth; // [esp+1BCh] [ebp-18h]
   int v125; // [esp+1C0h] [ebp-14h] BYREF
   int v126; // [esp+1C4h] [ebp-10h]
   int v127; // [esp+1C8h] [ebp-Ch]
@@ -51230,14 +51217,14 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
     }
   }
   g_pVertex = D3DObjectPtr->D3DVertexPtr;
-  pObjectLayer = GfxEngineSetup.iCamVertexSize;
-  pDecoLayer = GfxEngineSetup.iCamVertexHeight;
-  v14 = ((MEMORY[0x3E2E2DC] << 16) + 4 * (int)GfxEngineSetup.iCamVertexSize) / (int)GfxEngineSetup.iCamVertexSize;
-  v10 = (int)&GfxEngineSetup.iCamVertexHeight[0x8000 * MEMORY[0x3E2E2E0]] / (int)GfxEngineSetup.iCamVertexHeight;
+  iCamVertexSize = GfxEngineSetup.iCamVertexSize;
+  iCamVertexHeight = GfxEngineSetup.iCamVertexHeight;
+  v14 = ((GfxEngineSetup.iCamWidth << 16) + 4 * GfxEngineSetup.iCamVertexSize) / GfxEngineSetup.iCamVertexSize;
+  v10 = (GfxEngineSetup.iCamVertexHeight + (GfxEngineSetup.iCamHeigth << 16)) / GfxEngineSetup.iCamVertexHeight;
   v75 = v10 + a2 + 2;
-  v113 = -(int)GfxEngineSetup.iCamVertexHeight - (*(_DWORD *)&GfxEngineSetup.iCamSoftOffsetY << 16);
-  v34 = -(int)GfxEngineSetup.iCamVertexSize / 2;
-  v95 = (int)GfxEngineSetup.iCamVertexSize / 2;
+  v113 = -GfxEngineSetup.iCamVertexHeight - (GfxEngineSetup.iCamSoftOffsetY << 16);
+  v34 = -GfxEngineSetup.iCamVertexSize / 2;
+  v95 = GfxEngineSetup.iCamVertexSize / 2;
   if ( v10 + a2 + 5 < g_iMapSize && v75 > 0 )
   {
     v75 += (unsigned __int8)byte_469717B[v75] / 5;
@@ -51248,25 +51235,25 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
   v128 = -1;
   v110 = false;
   v93 = false;
-  if ( MEMORY[0x3E2E2FE] != 0 )
+  if ( GfxEngineSetup.bUpdateCamLandscape != 0 )
   {
-    dword_46C167C = *(_DWORD *)&GfxEngineSetup.iCamScrollOffsetX;
+    dword_46C167C = GfxEngineSetup.iCamScrollOffsetX;
     dword_46C1680 = GfxEngineSetup.iCamSoftOffsetX;
     dword_46C1684 = GfxEngineSetup.iCamScrollOffsetY;
-    dword_46C1688 = *(_DWORD *)&GfxEngineSetup.iCamSoftOffsetY;
+    dword_46C1688 = GfxEngineSetup.iCamSoftOffsetY;
     dword_46C168C = 0;
     dword_46C1690 = 0;
   }
   else
   {
-    Number = (((int)pObjectLayer * (*(_DWORD *)&GfxEngineSetup.iCamScrollOffsetX - dword_46C166C)) >> 16) - (dword_46C1670 - GfxEngineSetup.iCamSoftOffsetX);
-    v98 = ((v95 * (GfxEngineSetup.iCamScrollOffsetY - dword_46C1674)) >> 16) - (dword_46C1678 - *(_DWORD *)&GfxEngineSetup.iCamSoftOffsetY);
-    v60 = *(_DWORD *)&GfxEngineSetup.iCamScrollOffsetX - dword_46C167C;
+    Number = ((iCamVertexSize * (GfxEngineSetup.iCamScrollOffsetX - dword_46C166C)) >> 16) - (dword_46C1670 - GfxEngineSetup.iCamSoftOffsetX);
+    v98 = ((v95 * (GfxEngineSetup.iCamScrollOffsetY - dword_46C1674)) >> 16) - (dword_46C1678 - GfxEngineSetup.iCamSoftOffsetY);
+    v60 = GfxEngineSetup.iCamScrollOffsetX - dword_46C167C;
     v66 = GfxEngineSetup.iCamScrollOffsetY - dword_46C1684;
     v59 = dword_46C1680 - GfxEngineSetup.iCamSoftOffsetX;
-    v65 = dword_46C1688 - *(_DWORD *)&GfxEngineSetup.iCamSoftOffsetY;
-    v15 = (((int)pObjectLayer * (*(_DWORD *)&GfxEngineSetup.iCamScrollOffsetX - dword_46C167C)) >> 16) - (dword_46C1680 - GfxEngineSetup.iCamSoftOffsetX);
-    v58 = ((v95 * (GfxEngineSetup.iCamScrollOffsetY - dword_46C1684)) >> 16) - (dword_46C1688 - *(_DWORD *)&GfxEngineSetup.iCamSoftOffsetY);
+    v65 = dword_46C1688 - GfxEngineSetup.iCamSoftOffsetY;
+    v15 = ((iCamVertexSize * (GfxEngineSetup.iCamScrollOffsetX - dword_46C167C)) >> 16) - (dword_46C1680 - GfxEngineSetup.iCamSoftOffsetX);
+    v58 = ((v95 * (GfxEngineSetup.iCamScrollOffsetY - dword_46C1684)) >> 16) - (dword_46C1688 - GfxEngineSetup.iCamSoftOffsetY);
     if ( Number + dword_46C168C != v15 )
     {
       Number = v15 - dword_46C168C;
@@ -51277,71 +51264,71 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
     }
     dword_46C168C += Number;
     dword_46C1690 += v98;
-    if ( j__abs(Number) >= MEMORY[0x3E2E2DC] )
+    if ( j__abs(Number) >= GfxEngineSetup.iCamWidth )
     {
-      MEMORY[0x3E2E2FE] = 1;
+      GfxEngineSetup.bUpdateCamLandscape = 1;
     }
-    if ( j__abs(v98) >= MEMORY[0x3E2E2DC] )
+    if ( j__abs(v98) >= GfxEngineSetup.iCamWidth )
     {
-      MEMORY[0x3E2E2FE] = 1;
+      GfxEngineSetup.bUpdateCamLandscape = 1;
     }
     if ( Number >= 0 )
     {
       if ( Number <= 0 )
       {
         v121 = 0;
-        v123 = MEMORY[0x3E2E2DC];
+        iCamWidth = GfxEngineSetup.iCamWidth;
         v125 = 0;
-        v127 = MEMORY[0x3E2E2DC];
+        v127 = GfxEngineSetup.iCamWidth;
       }
       else
       {
         v121 = j__abs(Number);
-        v123 = MEMORY[0x3E2E2DC];
+        iCamWidth = GfxEngineSetup.iCamWidth;
         v125 = 0;
-        v127 = MEMORY[0x3E2E2DC] - Number;
+        v127 = GfxEngineSetup.iCamWidth - Number;
       }
     }
     else
     {
       v121 = 0;
-      v123 = Number + MEMORY[0x3E2E2DC];
+      iCamWidth = Number + GfxEngineSetup.iCamWidth;
       v125 = j__abs(Number);
-      v127 = MEMORY[0x3E2E2DC];
+      v127 = GfxEngineSetup.iCamWidth;
     }
     if ( v98 >= 0 )
     {
       if ( v98 <= 0 )
       {
         v122 = 0;
-        v124 = MEMORY[0x3E2E2E0];
+        iCamHeigth = GfxEngineSetup.iCamHeigth;
         v126 = 0;
-        v128 = MEMORY[0x3E2E2E0];
+        v128 = GfxEngineSetup.iCamHeigth;
       }
       else
       {
         v122 = j__abs(v98);
-        v124 = MEMORY[0x3E2E2E0];
+        iCamHeigth = GfxEngineSetup.iCamHeigth;
         v126 = 0;
-        v128 = MEMORY[0x3E2E2E0] - v98;
+        v128 = GfxEngineSetup.iCamHeigth - v98;
       }
     }
     else
     {
       v122 = 0;
-      v124 = v98 + MEMORY[0x3E2E2E0];
+      iCamHeigth = v98 + GfxEngineSetup.iCamHeigth;
       v126 = j__abs(v98);
-      v128 = MEMORY[0x3E2E2E0];
+      v128 = GfxEngineSetup.iCamHeigth;
     }
-    v57 = v125 == 0 && v127 == MEMORY[0x3E2E2DC];
+    v57 = v125 == 0 && v127 == GfxEngineSetup.iCamWidth;
     v110 = v57;
-    v56 = v126 == 0 && v128 == MEMORY[0x3E2E2E0];
+    v56 = v126 == 0 && v128 == GfxEngineSetup.iCamHeigth;
     v93 = v56;
     if ( v110 && v93 )
     {
       return 1;
     }
-    if ( MEMORY[0x3E2E2FE] == 0 )
+    if ( GfxEngineSetup.bUpdateCamLandscape == 0 )
     {
       v55 = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
       v3 = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
@@ -51356,34 +51343,34 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       }
     }
   }
-  dword_46C166C = *(_DWORD *)&GfxEngineSetup.iCamScrollOffsetX;
+  dword_46C166C = GfxEngineSetup.iCamScrollOffsetX;
   dword_46C1670 = GfxEngineSetup.iCamSoftOffsetX;
   dword_46C1674 = GfxEngineSetup.iCamScrollOffsetY;
-  dword_46C1678 = *(_DWORD *)&GfxEngineSetup.iCamSoftOffsetY;
-  byte_4696877 = 1;
+  dword_46C1678 = GfxEngineSetup.iCamSoftOffsetY;
+  s_bDirtyVertexBuffer = 1;
   if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup) != 0 )
   {
     v94 = CInterfaceD3D::BeginLandscapeScene(D3DObjectPtr);
     if ( v94 != 0 )
     {
       WriteError(v94, "CamBeginLandscapeScene");
-      byte_4696877 = 0;
+      s_bDirtyVertexBuffer = 0;
       return 0;
     }
   }
   else
   {
     v54 = CInterfaceD3D::GetLandscapeRenderTargetSurface(D3DObjectPtr);
-    v94 = v54->Lock(v54, (unsigned int *)&v53, (unsigned int *)&v5, 1u);
+    v94 = v54->Lock(v54, (unsigned int *)&v53, (void **)&v5, 1u);
     if ( v94 != 0 )
     {
       WriteError(v94, "CamLockLandscapeSurfaceForSoftwareRendering");
-      byte_4696877 = 0;
+      s_bDirtyVertexBuffer = 0;
       return 0;
     }
-    j__TRI_set_window(v5 + 2 * MEMORY[0x3E2E2D4] + 2 * ((unsigned int)(v53 * MEMORY[0x3E2E2D8]) >> 1), MEMORY[0x3E2E2DC] + 1, MEMORY[0x3E2E2E0] + 1, v53);
+    j__TRI_set_window(v5 + 2 * GfxEngineSetup.iCamX + 2 * ((unsigned int)(v53 * GfxEngineSetup.iCamY) >> 1), GfxEngineSetup.iCamWidth + 1, GfxEngineSetup.iCamHeigth + 1, v53);
   }
-  v61 = (-GfxEngineSetup.iCamSoftOffsetX - ((int)pObjectLayer >> 16)) << 16;
+  v61 = (-GfxEngineSetup.iCamSoftOffsetX - (iCamVertexSize >> 16)) << 16;
   v85 = -1;
   for ( i = a2;
         i < v75;
@@ -51394,10 +51381,10 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
     {
       if ( v110 && v126 == 0 && (v95 + v113) >> 16 < v128 )
       {
-        v113 += (int)pDecoLayer;
+        v113 += iCamVertexHeight;
         continue;
       }
-      if ( v110 && v128 == MEMORY[0x3E2E2E0] && (v113 - 2 * v95) >> 16 > v126 )
+      if ( v110 && v128 == GfxEngineSetup.iCamHeigth && (v113 - 2 * v95) >> 16 > v126 )
       {
         if ( v85 == -1 )
         {
@@ -51415,7 +51402,7 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       }
       if ( v126 != 0 || (v95 + v113) >> 16 >= v128 )
       {
-        if ( v128 == MEMORY[0x3E2E2E0] && (v113 - 2 * v95) >> 16 > v126 )
+        if ( v128 == GfxEngineSetup.iCamHeigth && (v113 - 2 * v95) >> 16 > v126 )
         {
           if ( v85 == -1 )
           {
@@ -51468,16 +51455,16 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
     v81 = a1 + i / 2;
     if ( v109 == 0 )
     {
-      if ( v127 == MEMORY[0x3E2E2DC] )
+      if ( v127 == GfxEngineSetup.iCamWidth )
       {
-        v67 -= ((v127 - v125) << 16) / (int)pObjectLayer + 1;
+        v67 -= ((v127 - v125) << 16) / iCamVertexSize + 1;
       }
       else
       {
-        v64 = ((v127 - v125) << 16) / (int)pObjectLayer;
+        v64 = ((v127 - v125) << 16) / iCamVertexSize;
         v81 += v64;
         v119 += v64;
-        v106 += (_DWORD)pObjectLayer * v64;
+        v106 += iCamVertexSize * v64;
       }
     }
     v120 = g_bHalfLine ^ v81 & 1;
@@ -51509,22 +51496,22 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       v47 = v50 ? 0 : v119->iShading & 0xF;
       NewFogging = T_GFX_MAP_ELEMENT::GetNewFogging(v119);
       OldFogging = T_GFX_MAP_ELEMENT::GetOldFogging(v119);
-      ShadowFog = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
-      LightFog = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
-      v118 = (unsigned __int8)byte_3ACD340[v119->iType];
+      ShadowFog = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
+      LightFog = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v47, OldFogging, NewFogging);
+      Type1 = (unsigned __int8)byte_3ACD340[v119->iType];
       v92 = (v119->iShading & 0x40) != 0;
       v107 = v92;
-      if ( (v118 == 28 || v118 == 29) && CalcCurrentFog(v119) <= 59 )
+      if ( (Type1 == 28 || Type1 == 29) && CalcCurrentFog(v119) <= 59 )
       {
-        v118 = 16;
+        Type1 = 16;
       }
     }
     else
     {
       v83 = 0;
-      v118 = 7;
-      ShadowFog = unk_4697594;
-      LightFog = unk_46975D4;
+      Type1 = 7;
+      ShadowFog = g_cHeightAndTypeTable.uShadeColor[1];
+      LightFog = g_cHeightAndTypeTable.uLightColor[1];
       v107 = false;
     }
     if ( i == g_iFadeYBorder - 1 )
@@ -51539,22 +51526,22 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       v43 = v46 ? 0 : v119->iShading & 0xF;
       v45 = T_GFX_MAP_ELEMENT::GetNewFogging(v119);
       v44 = T_GFX_MAP_ELEMENT::GetOldFogging(v119);
-      v69 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
-      v68 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
-      v112 = (unsigned __int8)byte_3ACD340[v119->iType];
+      v69 = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
+      v68 = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v43, v44, v45);
+      Type2 = (unsigned __int8)byte_3ACD340[v119->iType];
       v90 = (v119->iShading & 0x40) != 0;
       v102 = v90;
-      if ( (v112 == 28 || v112 == 29) && CalcCurrentFog(v119) <= 59 )
+      if ( (Type2 == 28 || Type2 == 29) && CalcCurrentFog(v119) <= 59 )
       {
-        v112 = 16;
+        Type2 = 16;
       }
     }
     else
     {
       v70 = 0;
-      v112 = 7;
-      v69 = unk_4697594;
-      v68 = unk_46975D4;
+      Type2 = 7;
+      v69 = g_cHeightAndTypeTable.uShadeColor[1];
+      v68 = g_cHeightAndTypeTable.uLightColor[1];
       v102 = false;
     }
     v84 = v81;
@@ -51575,26 +51562,26 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
         v39 = v42 ? 0 : v119->iShading & 0xF;
         v41 = T_GFX_MAP_ELEMENT::GetNewFogging(v119);
         v40 = T_GFX_MAP_ELEMENT::GetOldFogging(v119);
-        v76 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
-        v79 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
-        v116 = (unsigned __int8)byte_3ACD340[v119->iType];
+        v76 = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
+        v79 = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v39, v40, v41);
+        Type3 = (unsigned __int8)byte_3ACD340[v119->iType];
         v88 = (v119->iShading & 0x40) != 0;
         v108 = v88;
-        if ( (v116 == 28 || v116 == 29) && CalcCurrentFog(v119) <= 59 )
+        if ( (Type3 == 28 || Type3 == 29) && CalcCurrentFog(v119) <= 59 )
         {
-          v116 = 16;
+          Type3 = 16;
         }
       }
       else
       {
         v78 = 0;
-        v116 = 7;
-        v76 = unk_4697594;
-        v79 = unk_46975D4;
+        Type3 = 7;
+        v76 = g_cHeightAndTypeTable.uShadeColor[1];
+        v79 = g_cHeightAndTypeTable.uLightColor[1];
         v108 = false;
       }
       v12 = v78;
-      v4 = v116;
+      v4 = Type3;
       v8 = v76;
       v6 = v79;
       v82 = v108;
@@ -51607,8 +51594,8 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
         v35 = v38 ? 0 : v119->iShading & 0xF;
         v37 = T_GFX_MAP_ELEMENT::GetNewFogging(v119);
         v36 = T_GFX_MAP_ELEMENT::GetOldFogging(v119);
-        v74 = CHeightAndTypeTable::GetShadowFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
-        v73 = CHeightAndTypeTable::GetLightFog((CHeightAndTypeTable *)g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
+        v74 = CHeightAndTypeTable::GetShadowFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
+        v73 = CHeightAndTypeTable::GetLightFog(&g_cHeightAndTypeTable, g_iUsedFogFadeStep, v35, v36, v37);
         v111 = (unsigned __int8)byte_3ACD340[v119->iType];
         v89 = (v119->iShading & 0x40) != 0;
         v103 = v89;
@@ -51621,8 +51608,8 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       {
         v77 = 0;
         v111 = 7;
-        v74 = unk_4697594;
-        v73 = unk_46975D4;
+        v74 = g_cHeightAndTypeTable.uShadeColor[1];
+        v73 = g_cHeightAndTypeTable.uLightColor[1];
         v103 = false;
       }
       v13 = v77;
@@ -51630,22 +51617,22 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       v9 = v74;
       v7 = v73;
       v80 = v103;
-      if ( (v106 != v61 + v34 || g_bHalfLine != 0) && (v113 >> 16) - v83 <= MEMORY[0x3E2E2E0] )
+      if ( (v106 != v61 + v34 || g_bHalfLine != 0) && (v113 >> 16) - v83 <= GfxEngineSetup.iCamHeigth )
       {
         s_iDarkTribeElement = 22 * (v108 || v102 || v107);
-        if ( v118 == v112 && v112 == v116 && TEXTURE_PAGE_MAP[v118] >= 0 )
+        if ( Type1 == Type2 && Type2 == Type3 && TEXTURE_PAGE_MAP[Type1] >= 0 )
         {
-          CInterfaceD3D::CalcTilingVerticesType1(D3DObjectPtr, v118);
+          CInterfaceD3D::CalcTilingVerticesType1(D3DObjectPtr, Type1);
         }
         else
         {
-          v33 = v118 == 28;
-          v18 = v112 == 28;
-          v31 = v116 == 28;
+          v33 = Type1 == 28;
+          v18 = Type2 == 28;
+          v31 = Type3 == 28;
           v27 = v31 + v18 + v33;
-          v30 = v118 == 29;
-          v29 = v112 == 29;
-          v28 = v116 == 29;
+          v30 = Type1 == 29;
+          v29 = Type2 == 29;
+          v28 = Type3 == 29;
           v26 = v28 + v29 + v30;
           if ( v26 + v27 == 3 )
           {
@@ -51655,53 +51642,53 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
           {
             if ( v27 > 0 && v26 > 0 )
             {
-              if ( v118 == 28 )
+              if ( Type1 == 28 )
               {
-                v118 = 29;
+                Type1 = 29;
               }
-              if ( v112 == 28 )
+              if ( Type2 == 28 )
               {
-                v112 = 29;
+                Type2 = 29;
               }
-              if ( v116 == 28 )
+              if ( Type3 == 28 )
               {
-                v116 = 29;
+                Type3 = 29;
               }
             }
-            if ( v112 == v116 )
+            if ( Type2 == Type3 )
             {
-              v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v112] + 4 * (unsigned __int8)byte_3ACD510[v118]];
-              v97 = &PatternTripleVertices[144 * *v115 + 36 * v115[1] + 36 * (unsigned __int8)(v120 & v115[3])];
+              v115 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type1]];
+              TripleTextureVertexPtr = &PatternTripleVertices[4 * v115->x][6 * v115->y + 6 * (unsigned __int8)(v120 & v115->Flags)];
             }
-            else if ( v112 == v118 )
+            else if ( Type2 == Type1 )
             {
-              v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v112] + 4 * (unsigned __int8)byte_3ACD510[v116]];
-              v97 = &PatternTripleVertices[144 * *v115 + 12 + 36 * v115[1] + 36 * (unsigned __int8)(v120 & v115[3])];
+              v115 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type3]];
+              TripleTextureVertexPtr = &PatternTripleVertices[4 * v115->x][6 * v115->y + 2 + 6 * (unsigned __int8)(v120 & v115->Flags)];
             }
-            else if ( v118 == v116 )
+            else if ( Type1 == Type3 )
             {
-              v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118] + 4 * (unsigned __int8)byte_3ACD510[v112]];
-              v97 = &PatternTripleVertices[144 * *v115 + 24 + 36 * v115[1] + 36 * (unsigned __int8)(v120 & v115[3])];
+              v115 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type2]];
+              TripleTextureVertexPtr = &PatternTripleVertices[4 * v115->x][6 * v115->y + 4 + 6 * (unsigned __int8)(v120 & v115->Flags)];
             }
             else
             {
-              sub_2F7C100(&v118, &v112, &v116, &g_bRiverMouth, 0, (int *)&v97);
+              ProcessThreePartCrossing(&Type1, &Type2, &Type3, &g_bRiverMouth, 0, &TripleTextureVertexPtr);
               if ( g_bRiverMouth == 0 )
               {
-                if ( v112 == v116 )
+                if ( Type2 == Type3 )
                 {
-                  v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v112] + 4 * (unsigned __int8)byte_3ACD510[v118]];
-                  v97 = &PatternTripleVertices[144 * *v115 + 36 * v115[1] + 36 * (unsigned __int8)(v120 & v115[3])];
+                  v115 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type1]];
+                  TripleTextureVertexPtr = &PatternTripleVertices[4 * v115->x][6 * v115->y + 6 * (unsigned __int8)(v120 & v115->Flags)];
                 }
-                else if ( v112 == v118 )
+                else if ( Type2 == Type1 )
                 {
-                  v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v112] + 4 * (unsigned __int8)byte_3ACD510[v116]];
-                  v97 = &PatternTripleVertices[144 * *v115 + 12 + 36 * v115[1] + 36 * (unsigned __int8)(v120 & v115[3])];
+                  v115 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type2]][LandTypeTranslation[Type3]];
+                  TripleTextureVertexPtr = &PatternTripleVertices[4 * v115->x][6 * v115->y + 2 + 6 * (unsigned __int8)(v120 & v115->Flags)];
                 }
                 else
                 {
-                  v115 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118] + 4 * (unsigned __int8)byte_3ACD510[v112]];
-                  v97 = &PatternTripleVertices[144 * *v115 + 24 + 36 * v115[1] + 36 * (unsigned __int8)(v120 & v115[3])];
+                  v115 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type2]];
+                  TripleTextureVertexPtr = &PatternTripleVertices[4 * v115->x][6 * v115->y + 4 + 6 * (unsigned __int8)(v120 & v115->Flags)];
                 }
               }
             }
@@ -51712,28 +51699,28 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
             }
             else
             {
-              CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v115[2]);
+              CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v115->Page);
             }
-            g_pVertex->tu = *v97;
-            g_pVertex->tv = v97[1];
+            g_pVertex->tu = TripleTextureVertexPtr->tu1;
+            g_pVertex->tv = TripleTextureVertexPtr->tv1;
             ++g_pVertex;
-            g_pVertex->tu = v97[2];
-            g_pVertex->tv = v97[3];
+            g_pVertex->tu = TripleTextureVertexPtr->tu2;
+            g_pVertex->tv = TripleTextureVertexPtr->tv2;
             ++g_pVertex;
-            g_pVertex->tu = v97[4];
-            g_pVertex->tv = v97[5];
+            g_pVertex->tu = TripleTextureVertexPtr->tu3;
+            g_pVertex->tv = TripleTextureVertexPtr->tv3;
             g_pVertex -= 2;
           }
         }
         g_pVertex->color = v76;
         g_pVertex->specular = v79;
         g_pVertex->sx = (float)((v95 + v106) >> 16);
-        g_pVertex->sy = (float)(((int)pDecoLayer + v113 - v78) >> 16);
+        g_pVertex->sy = (float)((iCamVertexHeight + v113 - v78) >> 16);
         ++g_pVertex;
         g_pVertex->color = v69;
         g_pVertex->specular = v68;
         g_pVertex->sx = (float)((v106 - v95) >> 16);
-        g_pVertex->sy = (float)(((int)pDecoLayer + v113 - v70) >> 16);
+        g_pVertex->sy = (float)((iCamVertexHeight + v113 - v70) >> 16);
         ++g_pVertex;
         g_pVertex->color = ShadowFog;
         g_pVertex->specular = LightFog;
@@ -51743,22 +51730,22 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
         {
           g_bSplitTriangle = 0;
           g_pVertex -= 2;
-          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v76, v69);
-          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v79, v68);
+          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v76, v69);
+          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v79, v68);
           g_pVertex->sx = (float)(v106 >> 16);
-          g_pVertex->sy = (float)(((int)pDecoLayer + v113 - (v70 + v78) / 2) >> 16);
+          g_pVertex->sy = (float)((iCamVertexHeight + v113 - (v70 + v78) / 2) >> 16);
           qmemcpy(&g_pVertex[3], g_pVertex, sizeof(_D3DTLVERTEX));
           qmemcpy(&g_pVertex[4], &g_pVertex[1], sizeof(_D3DTLVERTEX));
           qmemcpy(&g_pVertex[5], &g_pVertex[2], sizeof(_D3DTLVERTEX));
           g_pVertex->color = v76;
           g_pVertex->specular = v79;
           g_pVertex->sx = (float)((v95 + v106) >> 16);
-          g_pVertex->sy = (float)(((int)pDecoLayer + v113 - v78) >> 16);
+          g_pVertex->sy = (float)((iCamVertexHeight + v113 - v78) >> 16);
           ++g_pVertex;
-          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v76, v69);
-          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v79, v68);
+          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v76, v69);
+          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v79, v68);
           g_pVertex->sx = (float)(v106 >> 16);
-          g_pVertex->sy = (float)(((int)pDecoLayer + v113 - (v78 + v70) / 2) >> 16);
+          g_pVertex->sy = (float)((iCamVertexHeight + v113 - (v78 + v70) / 2) >> 16);
           --g_pVertex;
           g_pVertex->tu = 0.0625;
           ++g_pVertex;
@@ -51772,22 +51759,22 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
           ++g_pVertex;
         }
       }
-      if ( (v84 != v67 - 1 || g_bHalfLine == 0) && ((v113 >> 16) - v83 <= MEMORY[0x3E2E2E0] || (v113 >> 16) - v77 <= MEMORY[0x3E2E2E0]) )
+      if ( (v84 != v67 - 1 || g_bHalfLine == 0) && ((v113 >> 16) - v83 <= GfxEngineSetup.iCamHeigth || (v113 >> 16) - v77 <= GfxEngineSetup.iCamHeigth) )
       {
         s_iDarkTribeElement = 22 * (v108 || v103 || v107);
-        if ( v118 == v111 && v111 == v116 && TEXTURE_PAGE_MAP[v118] >= 0 )
+        if ( Type1 == v111 && v111 == Type3 && TEXTURE_PAGE_MAP[Type1] >= 0 )
         {
-          CInterfaceD3D::CalcTilingVerticesType2(D3DObjectPtr, v118);
+          CInterfaceD3D::CalcTilingVerticesType2(D3DObjectPtr, Type1);
         }
         else
         {
-          v25 = v118 == 28;
+          v25 = Type1 == 28;
           v24 = v111 == 28;
-          v23 = v116 == 28;
+          v23 = Type3 == 28;
           v19 = v23 + v24 + v25;
-          v22 = v118 == 29;
+          v22 = Type1 == 29;
           v21 = v111 == 29;
-          v20 = v116 == 29;
+          v20 = Type3 == 29;
           v16 = v20 + v21 + v22;
           if ( v16 + v19 == 3 )
           {
@@ -51797,53 +51784,53 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
           {
             if ( v19 > 0 && v16 > 0 )
             {
-              if ( v118 == 28 )
+              if ( Type1 == 28 )
               {
-                v118 = 29;
+                Type1 = 29;
               }
               if ( v111 == 28 )
               {
                 v111 = 29;
               }
-              if ( v116 == 28 )
+              if ( Type3 == 28 )
               {
-                v116 = 29;
+                Type3 = 29;
               }
             }
-            if ( v118 == v111 )
+            if ( Type1 == v111 )
             {
-              v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118] + 4 * (unsigned __int8)byte_3ACD510[v116]];
-              v96 = &PatternTripleVertices[144 * *v114 + 18 + 36 * v114[1] + 36 * (unsigned __int8)(v120 & v114[3])];
+              v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type3]];
+              v96 = &PatternTripleVertices[4 * v114->x][6 * v114->y + 3 + 6 * (unsigned __int8)(v120 & v114->Flags)];
             }
-            else if ( v111 == v116 )
+            else if ( v111 == Type3 )
             {
-              v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111] + 4 * (unsigned __int8)byte_3ACD510[v118]];
-              v96 = &PatternTripleVertices[144 * *v114 + 30 + 36 * v114[1] + 36 * (unsigned __int8)(v120 & v114[3])];
+              v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[v111]][LandTypeTranslation[Type1]];
+              v96 = &PatternTripleVertices[4 * v114->x][6 * v114->y + 5 + 6 * (unsigned __int8)(v120 & v114->Flags)];
             }
-            else if ( v118 == v116 )
+            else if ( Type1 == Type3 )
             {
-              v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118] + 4 * (unsigned __int8)byte_3ACD510[v111]];
-              v96 = &PatternTripleVertices[144 * *v114 + 6 + 36 * v114[1] + 36 * (unsigned __int8)(v120 & v114[3])];
+              v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[v111]];
+              v96 = &PatternTripleVertices[4 * v114->x][6 * v114->y + 1 + 6 * (unsigned __int8)(v120 & v114->Flags)];
             }
             else
             {
-              sub_2F7C100(&v118, &v116, &v111, &g_bRiverMouth, 1u, (int *)&v96);
+              ProcessThreePartCrossing(&Type1, &Type3, &v111, &g_bRiverMouth, 1u, &v96);
               if ( g_bRiverMouth == 0 )
               {
-                if ( v118 == v111 )
+                if ( Type1 == v111 )
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118] + 4 * (unsigned __int8)byte_3ACD510[v116]];
-                  v96 = &PatternTripleVertices[144 * *v114 + 18 + 36 * v114[1] + 36 * (unsigned __int8)(v120 & v114[3])];
+                  v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[Type3]];
+                  v96 = &PatternTripleVertices[4 * v114->x][6 * v114->y + 3 + 6 * (unsigned __int8)(v120 & v114->Flags)];
                 }
-                else if ( v111 == v116 )
+                else if ( v111 == Type3 )
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v111] + 4 * (unsigned __int8)byte_3ACD510[v118]];
-                  v96 = &PatternTripleVertices[144 * *v114 + 30 + 36 * v114[1] + 36 * (unsigned __int8)(v120 & v114[3])];
+                  v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[v111]][LandTypeTranslation[Type1]];
+                  v96 = &PatternTripleVertices[4 * v114->x][6 * v114->y + 5 + 6 * (unsigned __int8)(v120 & v114->Flags)];
                 }
                 else
                 {
-                  v114 = &byte_4697610[156 * (unsigned __int8)byte_3ACD510[v118] + 4 * (unsigned __int8)byte_3ACD510[v111]];
-                  v96 = &PatternTripleVertices[144 * *v114 + 6 + 36 * v114[1] + 36 * (unsigned __int8)(v120 & v114[3])];
+                  v114 = &g_cHeightAndTypeTable.FromToTable[LandTypeTranslation[Type1]][LandTypeTranslation[v111]];
+                  v96 = &PatternTripleVertices[4 * v114->x][6 * v114->y + 1 + 6 * (unsigned __int8)(v120 & v114->Flags)];
                 }
               }
             }
@@ -51854,28 +51841,28 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
             }
             else
             {
-              CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v114[2]);
+              CInterfaceD3D::ChangeCurrentTexturePage(D3DObjectPtr, s_iDarkTribeElement + v114->Page);
             }
-            g_pVertex->tu = *v96;
-            g_pVertex->tv = v96[1];
+            g_pVertex->tu = v96->tu1;
+            g_pVertex->tv = v96->tv1;
             ++g_pVertex;
-            g_pVertex->tu = v96[2];
-            g_pVertex->tv = v96[3];
+            g_pVertex->tu = v96->tu2;
+            g_pVertex->tv = v96->tv2;
             ++g_pVertex;
-            g_pVertex->tu = v96[4];
-            g_pVertex->tv = v96[5];
+            g_pVertex->tu = v96->tu3;
+            g_pVertex->tv = v96->tv3;
             g_pVertex -= 2;
           }
         }
         g_pVertex->color = v74;
         g_pVertex->specular = v73;
-        g_pVertex->sx = (float)(((int)pObjectLayer + v106) >> 16);
+        g_pVertex->sx = (float)((iCamVertexSize + v106) >> 16);
         g_pVertex->sy = (float)((v113 - v77) >> 16);
         ++g_pVertex;
         g_pVertex->color = v76;
         g_pVertex->specular = v79;
         g_pVertex->sx = (float)((v95 + v106) >> 16);
-        g_pVertex->sy = (float)(((int)pDecoLayer + v113 - v78) >> 16);
+        g_pVertex->sy = (float)((iCamVertexHeight + v113 - v78) >> 16);
         ++g_pVertex;
         g_pVertex->color = ShadowFog;
         g_pVertex->specular = LightFog;
@@ -51885,8 +51872,8 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
         {
           g_bSplitTriangle = 0;
           g_pVertex -= 2;
-          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v74, ShadowFog);
-          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, LightFog);
+          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v74, ShadowFog);
+          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v73, LightFog);
           g_pVertex->sx = (float)((v95 + v106) >> 16);
           g_pVertex->sy = (float)((v113 - (v83 + v77) / 2) >> 16);
           qmemcpy(&g_pVertex[3], g_pVertex, sizeof(_D3DTLVERTEX));
@@ -51895,11 +51882,11 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
           g_pVertex += 3;
           g_pVertex->color = v74;
           g_pVertex->specular = v73;
-          g_pVertex->sx = (float)(((int)pObjectLayer + v106) >> 16);
+          g_pVertex->sx = (float)((iCamVertexSize + v106) >> 16);
           g_pVertex->sy = (float)((v113 - v77) >> 16);
           g_pVertex += 2;
-          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v74, ShadowFog);
-          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue((CHeightAndTypeTable *)g_cHeightAndTypeTable, v73, LightFog);
+          g_pVertex->color = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v74, ShadowFog);
+          g_pVertex->specular = CHeightAndTypeTable::GetAverageShadingValue(&g_cHeightAndTypeTable, v73, LightFog);
           g_pVertex->sx = (float)((v95 + v106) >> 16);
           g_pVertex->sy = (float)((v113 - (v83 + v77) / 2) >> 16);
           g_pVertex->tu = 0.0;
@@ -51914,11 +51901,11 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
           ++g_pVertex;
         }
       }
-      if ( (unsigned int)g_pVertex >= g_pVertexMax )
+      if ( g_pVertex >= g_pVertexMax )
       {
         CInterfaceD3D::RenderScene(D3DObjectPtr, true);
       }
-      v106 += (int)pObjectLayer;
+      v106 += iCamVertexSize;
       v87 = v120 == 0;
       v120 = v120 == 0;
       g_fPatternSuboffsetX = g_fPatternSuboffsetX + 0.125;
@@ -51929,8 +51916,8 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       v119 += g_iMapSize;
       v83 = v13;
       v70 = v12;
-      v118 = v11;
-      v112 = v4;
+      Type1 = v11;
+      Type2 = v4;
       ShadowFog = v9;
       v69 = v8;
       LightFog = v7;
@@ -51940,10 +51927,10 @@ bool __cdecl DrawCameraLandscape(int a1, int a2) {
       ++v84;
       ++v63;
     }
-    v113 += (int)pDecoLayer;
+    v113 += iCamVertexHeight;
   }
   CInterfaceD3D::RenderScene(D3DObjectPtr, true);
-  byte_4696877 = 0;
+  s_bDirtyVertexBuffer = 0;
   if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup) != 0 )
   {
     CInterfaceD3D::EndLandscapeScene(D3DObjectPtr);
@@ -52011,7 +51998,19 @@ void __cdecl SetObjectMovement(int a1, int a2) {
 
 
 // address=[0x2f8be20]
-// [Decompilation failed for struct tagDDDEVICEIDENTIFIER2 * __cdecl GetDeviceInfoPtr(void *)]
+// Decompiled from DDDEVICEIDENTIFIER2 *GetDeviceInfoPtr()
+struct tagDDDEVICEIDENTIFIER2 * __cdecl GetDeviceInfoPtr(void *) {
+  
+  if ( s_bDeviceIdentified != 0 )
+  {
+    return &s_sDeviceIdentifier;
+  }
+  else
+  {
+    return nullptr;
+  }
+}
+
 
 // address=[0x2f8be90]
 // Decompiled from int __stdcall D3DEnumPixelFormatsCallback(struct _DDPIXELFORMAT *a1, STextureFormats *a2)

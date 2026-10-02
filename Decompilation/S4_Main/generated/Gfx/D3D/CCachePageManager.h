@@ -4,73 +4,73 @@
 #include "defines.h"
 
 class CCachePageManager {
-  public:
+public:
     // address=[0x2f5f420]
-    void SetCurrentZoomFactor(float a2);
+    void  SetCurrentZoomFactor(float a2);
 
     // address=[0x2f69960]
-    bool IsSourceSurfaceLocked(void);
+    bool  IsSourceSurfaceLocked(void);
 
     // address=[0x2f69980]
-    bool IsVideoSurfaceLocked(void);
+    bool  IsVideoSurfaceLocked(void);
 
     // address=[0x2f87760]
-    CCachePageManager(struct IDirectDrawSurface7 *a2, struct IDirectDrawSurface7 *a3, struct IDirect3DDevice7 *a4);
+     CCachePageManager(struct IDirectDrawSurface7 * a2, struct IDirectDrawSurface7 * a3, struct IDirect3DDevice7 * a4);
 
     // address=[0x2f878f0]
-    ~CCachePageManager(void);
+     ~CCachePageManager(void);
 
     // address=[0x2f87940]
-    bool GetPictureArea(float _iBlitX, float iBlitY, int iWidth, int iHeight, int iShading, int iShifting, int &iPosX, int &iPosY);
+    bool  GetPictureArea(float iBlitX, float iBlitY, int iWidth, int iHeight, int iShading, int iShifting, int & iPosX, int & iPosY);
 
     // address=[0x2f87b30]
-    long EraseExtensionAreas(int _iIndex, int a3, int a4, int a5, int a6, bool a7);
+    long  EraseExtensionAreas(int _iIndex, int a3, int a4, int a5, int a6, bool a7);
 
     // address=[0x2f87db0]
-    bool UploadData(long &hResult);
+    bool  UploadData(long & hResult);
 
     // address=[0x2f87ea0]
-    bool UploadDataAndRender(long &a2);
+    bool  UploadDataAndRender(long & a2);
 
     // address=[0x2f88440]
-    bool ShowPageContent(long &_rResult);
+    bool  ShowPageContent(long & a2);
 
     // address=[0x2f888b0]
-    void ReleaseData(void);
+    void  ReleaseData(void);
 
     // address=[0x2f888f0]
-    long RenderCacheObject(int _iIndex, float _fX, float _fY, int _iShading, int _iFlags, int _iShift, bool a8);
+    long  RenderCacheObject(int _iIndex, float _fX, float _fY, int _iShading, int _iFlags, int _iShift, bool a8);
 
     // address=[0x2f89350]
-    long LockSourceSurface(int &_rPitch, unsigned short *&_rRender);
+    long  LockSourceSurface(int & _rPitch, unsigned short * & _rRender);
 
     // address=[0x2f89400]
-    long LockVideoSurface(int &_rPitch, unsigned short *&a3);
+    long  LockVideoSurface(int & a2, unsigned short * & a3);
 
     // address=[0x2f894b0]
-    long UnlockSourceSurface(void);
+    long  UnlockSourceSurface(void);
 
     // address=[0x2f89500]
-    long UnlockVideoSurface(void);
+    long  UnlockVideoSurface(void);
 
     // address=[0x2f8a420]
-    bool IsData(void);
+    bool  IsData(void);
 
     // address=[0x2f99770]
-    int GetLastCacheObjectNr(void);
+    int  GetLastCacheObjectNr(void);
 
-  protected:
+protected:
     // address=[0x46c1698]
     static float sm_fZoomFactor;
 
     // address=[0x46c16a0]
-    static float *sm_fTextureCoordTable;
+    static float * sm_fTextureCoordTable;
 
     // Type information members
-  public:
-    IDirectDrawSurface7 *m_pSystemTexture;
-    IDirectDrawSurface7 *m_pVideoTexture;
-    IDirect3DDevice7 *m_pRenderDevice;
+public:
+    IDirectDrawSurface7 * m_pSystemTexture;
+    IDirectDrawSurface7 * m_pVideoTexture;
+    IDirect3DDevice7 * m_pRenderDevice;
     int m_iCurrentX;
     int m_iCurrentY;
     int m_iUploadWidth;
@@ -84,8 +84,10 @@ class CCachePageManager {
     tagRECT m_sUploadRectangle;
     unsigned __int8 m_bSoureSurfaceIsLocked;
     unsigned __int8 m_bVideoSurfaceIsLocked;
-    void *m_pRenderAdress;
+    void * m_pRenderAdress;
     int m_iPitch;
+
 };
+
 
 #endif // CCACHEPAGEMANAGER_H

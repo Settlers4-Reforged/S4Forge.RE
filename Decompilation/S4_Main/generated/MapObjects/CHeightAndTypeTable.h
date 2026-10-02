@@ -26,6 +26,13 @@ public:
     // address=[0x2f86130]
     int  GetShadowFog(int a2, int a3, int a4, int a5);
 
+    // Type information members
+public:
+    unsigned int[16] uShadeColor;
+    unsigned int[16] uLightColor;
+    CHeightAndTypeTable::FROM_TO_TABLE_ELEMENT[39][39] FromToTable;
+    CHeightAndTypeTable::FOG_ENTRY[16][16][8][8] uFogTable;
+
 };
 
 

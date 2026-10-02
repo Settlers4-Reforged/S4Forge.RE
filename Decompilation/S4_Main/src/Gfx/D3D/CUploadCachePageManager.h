@@ -4,7 +4,7 @@
 #include "CCachePageManager.h"
 #include "defines.h"
 
-class CUploadCachePageManager : CCachePageManager {
+class CUploadCachePageManager : public CCachePageManager {
   public:
     // address=[0x2f69830]
     CUploadCachePageManager(struct IDirectDrawSurface7 *a2, struct IDirectDrawSurface7 *a3, struct IDirect3DDevice7 *a4);

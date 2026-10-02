@@ -22,7 +22,7 @@ public:
 
     // Type information members
 public:
-    CSurfaceV7 * m_pSurface;
+    CSurface * m_pSurface;
     RECT m_sRect;
     RECT m_sOffset;
     _BYTE m_bVisible;

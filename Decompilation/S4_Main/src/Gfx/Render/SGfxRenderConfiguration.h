@@ -46,7 +46,7 @@ class SGfxRenderConfiguration {
     bool m_bHardwareEnabled;
     bool m_bGuiOnly;
     bool m_bUseDD3Interface;
-    int m_iRenderQuality;
+    int m_iFlags;
     HWND m_hWnd;
     int m_uWidth;
     int m_uHeight;

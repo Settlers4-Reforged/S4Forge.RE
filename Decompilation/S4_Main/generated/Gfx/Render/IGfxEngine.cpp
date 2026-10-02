@@ -880,7 +880,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
       CBlitFX::CBlitFX(&v6);
       v21 = GfxEngineSetup.iCurrentGfxMode == 1;
       CBlitFX::SetFillColor(&v6, 0, 0, 0, GfxEngineSetup.iCurrentGfxMode == 1);
-      v22 = D3DObjectPtr->m_pFinalRenderSurface->ClearSurface((CSurfaceV7 *)D3DObjectPtr->m_pFinalRenderSurface, (_BYTE *)&v6);
+      v22 = D3DObjectPtr->m_pFinalRenderSurface->ClearSurface(D3DObjectPtr->m_pFinalRenderSurface, (_BYTE *)&v6);
       if ( v22 >= 0 )
       {
         if ( (unsigned __int8)std::operator!=<SurfaceClipper,std::default_delete<SurfaceClipper>>(&this->m_pSurfaceClipper, 0) != 0 && (v4 = (struct SurfaceClipper *)std::unique_ptr<SurfaceClipper>::operator*(&this->m_pSurfaceClipper), (v22 = CInterfaceD3D::SetCustomClipper(D3DObjectPtr, v4)) < 0) )
@@ -955,7 +955,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     g_iFoggingRange = -1;
     if ( !SGfxRenderConfiguration::IsEditorMode(&GfxEngineSetup.sRenderSetup) || a3 != 0 )
     {
-      v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt((CSurfaceV7 *)D3DObjectPtr->m_pFinalRenderSurface, nullptr, (CSurfaceV7 *)D3DObjectPtr->m_pLandscapeSurface, nullptr, 0, nullptr);
+      v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt(D3DObjectPtr->m_pFinalRenderSurface, nullptr, D3DObjectPtr->m_pLandscapeSurface, nullptr, 0, nullptr);
       if ( v22 != 0 )
       {
         WriteError(v22, "BlitLandscapeSurfaceToFinal");
@@ -1021,7 +1021,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         v14 = iCamHeigth;
         v23[2] = GfxEngineSetup.iCamX + v13;
         v23[3] = GfxEngineSetup.iCamY + iCamHeigth;
-        v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt((CSurfaceV7 *)D3DObjectPtr->m_pFinalRenderSurface, (struct tagRECT *)v23, (CSurfaceV7 *)D3DObjectPtr->m_pCameraWindowSurface, nullptr, 0, nullptr);
+        v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt(D3DObjectPtr->m_pFinalRenderSurface, (tagRECT *)v23, D3DObjectPtr->m_pLandscapeCameraRenderSurface, nullptr, 0, nullptr);
         if ( v22 != 0 )
         {
           WriteError(v22, "BlitCameraSurfaceToBuffer");
@@ -1102,9 +1102,9 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     GetNextLayer();
     v28 = g_sMiniMapRect;
     v24 = g_sMiniMapSize;
-    v25 = dword_3E2E240;
-    v26 = dword_3E2E244;
-    v27 = dword_3E2E248;
+    v25 = MEMORY[0x3E2E240];
+    v26 = MEMORY[0x3E2E244];
+    v27 = MEMORY[0x3E2E248];
     if ( SGfxRenderConfiguration::IsEditorMode(&GfxEngineSetup.sRenderSetup) )
     {
       goto LABEL_106;
@@ -1123,10 +1123,10 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
         v28.right = GfxEngineSetup.sRenderSetup.m_uWidth;
         v26 -= v10;
       }
-      v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt((CSurfaceV7 *)D3DObjectPtr->m_pFinalRenderSurface, &v28, (CSurfaceV7 *)D3DObjectPtr->m_pMiniMapSurface, (struct tagRECT *)&v24, 0x8000, nullptr);
+      v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt(D3DObjectPtr->m_pFinalRenderSurface, &v28, D3DObjectPtr->m_pMiniMapSurface, (tagRECT *)&v24, 0x8000, nullptr);
       if ( v22 == 0 )
       {
-        v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt((CSurfaceV7 *)D3DObjectPtr->m_pFinalRenderSurface, &v28, (CSurfaceV7 *)D3DObjectPtr->m_pMiniMapAreaSurface, (struct tagRECT *)&v24, 0x8000, nullptr);
+        v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt(D3DObjectPtr->m_pFinalRenderSurface, &v28, D3DObjectPtr->m_pMiniMapAreaSurface, (tagRECT *)&v24, 0x8000, nullptr);
       }
     }
     if ( v22 != 0 )
