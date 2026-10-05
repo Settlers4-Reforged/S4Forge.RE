@@ -78,7 +78,7 @@ CCachePageManager::~CCachePageManager(void) {
 
 // address=[0x2f87940]
 // Decompiled from unsigned __int8 __thiscall CCachePageManager::GetPictureArea(CCachePageManager *this, int iBlitX, int iBlitY, int iWidth, int iHeight, int iShading, unsigned __int8 iShifting, int *iPosX, int *iPosY)
-bool CCachePageManager::GetPictureArea(float _iBlitX, float _iBlitY, int _iWidth, int _iHeight, int _iShading, int _iShifting, int &_iPosX, int &_iPosY) {
+bool CCachePageManager::GetPictureArea(float _fBlitX, float _fBlitY, int _iWidth, int _iHeight, int _iShading, int _iShifting, int &_iPosX, int &_iPosY) {
 
     int iUploadHeight; // [esp+0h] [ebp-Ch]
     int iCurrentX;     // [esp+4h] [ebp-8h]
@@ -118,8 +118,8 @@ bool CCachePageManager::GetPictureArea(float _iBlitX, float _iBlitY, int _iWidth
     this->m_sRectangleList[this->m_iNumberOfObjects].top = static_cast<WORD>(_iPosY);
     this->m_sRectangleList[this->m_iNumberOfObjects].right = _iWidth + _iPosX;
     this->m_sRectangleList[this->m_iNumberOfObjects].bottom = _iHeight + _iPosY;
-    this->m_sBlitPosition[this->m_iNumberOfObjects].x = _iBlitX;
-    this->m_sBlitPosition[this->m_iNumberOfObjects].y = _iBlitY;
+    this->m_sBlitPosition[this->m_iNumberOfObjects].x = _fBlitX;
+    this->m_sBlitPosition[this->m_iNumberOfObjects].y = _fBlitY;
     this->m_iShading[this->m_iNumberOfObjects] = _iShading;
     this->m_uShifting[this->m_iNumberOfObjects++] = _iShifting;
     return 1;
@@ -259,10 +259,10 @@ bool CCachePageManager::UploadDataAndRender(long &_rResult) {
         int v7 = this->m_sRectangleList[i].top + 1;
         int v6 = this->m_sRectangleList[i].right - v8 - 1;
         int v5 = this->m_sRectangleList[i].bottom - v7 - 1;
-        int v4 = (int)((float)v6 * CCachePageManager::sm_fZoomFactor) >> this->m_uShifting[i];
-        int v3 = (int)((float)v5 * CCachePageManager::sm_fZoomFactor) >> this->m_uShifting[i];
-        D3DVALUE v10 = (float)s_iObjectOffsetX + this->m_sBlitPosition[i].x + CCachePageManager::sm_fZoomFactor;
-        D3DVALUE v9 = (float)s_iObjectOffsetY + this->m_sBlitPosition[i].y + CCachePageManager::sm_fZoomFactor;
+        int v4 = static_cast<int>(v6 * CCachePageManager::sm_fZoomFactor) >> this->m_uShifting[i];
+        int v3 = static_cast<int>(v5 * CCachePageManager::sm_fZoomFactor) >> this->m_uShifting[i];
+        D3DVALUE v10 = s_iObjectOffsetX + this->m_sBlitPosition[i].x + CCachePageManager::sm_fZoomFactor;
+        D3DVALUE v9 = s_iObjectOffsetY + this->m_sBlitPosition[i].y + CCachePageManager::sm_fZoomFactor;
 
         int iVertexGroup = 6 * i;
 
@@ -271,13 +271,13 @@ bool CCachePageManager::UploadDataAndRender(long &_rResult) {
         CCachePageManager::sm_sVertexList[iVertexGroup].tu = CCachePageManager::sm_fTextureCoordTable[v8];
         CCachePageManager::sm_sVertexList[iVertexGroup].tv = CCachePageManager::sm_fTextureCoordTable[v7];
 
-        CCachePageManager::sm_sVertexList[iVertexGroup + 1].sx = (float)v4 + v10;
-        CCachePageManager::sm_sVertexList[iVertexGroup + 1].sy = (float)v3 + v9;
+        CCachePageManager::sm_sVertexList[iVertexGroup + 1].sx = v4 + v10;
+        CCachePageManager::sm_sVertexList[iVertexGroup + 1].sy = v3 + v9;
         CCachePageManager::sm_sVertexList[iVertexGroup + 1].tu = CCachePageManager::sm_fTextureCoordTable[v6 + v8];
         CCachePageManager::sm_sVertexList[iVertexGroup + 1].tv = CCachePageManager::sm_fTextureCoordTable[v5 + v7];
 
         CCachePageManager::sm_sVertexList[iVertexGroup + 2].sx = v10;
-        CCachePageManager::sm_sVertexList[iVertexGroup + 2].sy = (float)v3 + v9;
+        CCachePageManager::sm_sVertexList[iVertexGroup + 2].sy = v3 + v9;
         CCachePageManager::sm_sVertexList[iVertexGroup + 2].tu = CCachePageManager::sm_fTextureCoordTable[v8];
         CCachePageManager::sm_sVertexList[iVertexGroup + 2].tv = CCachePageManager::sm_fTextureCoordTable[v5 + v7];
 
@@ -286,13 +286,13 @@ bool CCachePageManager::UploadDataAndRender(long &_rResult) {
         CCachePageManager::sm_sVertexList[iVertexGroup + 3].tu = CCachePageManager::sm_fTextureCoordTable[v8];
         CCachePageManager::sm_sVertexList[iVertexGroup + 3].tv = CCachePageManager::sm_fTextureCoordTable[v7];
 
-        CCachePageManager::sm_sVertexList[iVertexGroup + 4].sx = (float)v4 + v10;
+        CCachePageManager::sm_sVertexList[iVertexGroup + 4].sx = v4 + v10;
         CCachePageManager::sm_sVertexList[iVertexGroup + 4].sy = v9;
         CCachePageManager::sm_sVertexList[iVertexGroup + 4].tu = CCachePageManager::sm_fTextureCoordTable[v6 + v8];
         CCachePageManager::sm_sVertexList[iVertexGroup + 4].tv = CCachePageManager::sm_fTextureCoordTable[v7];
 
-        CCachePageManager::sm_sVertexList[iVertexGroup + 5].sx = (float)v4 + v10;
-        CCachePageManager::sm_sVertexList[iVertexGroup + 5].sy = (float)v3 + v9;
+        CCachePageManager::sm_sVertexList[iVertexGroup + 5].sx = v4 + v10;
+        CCachePageManager::sm_sVertexList[iVertexGroup + 5].sy = v3 + v9;
         CCachePageManager::sm_sVertexList[iVertexGroup + 5].tu = CCachePageManager::sm_fTextureCoordTable[v6 + v8];
         CCachePageManager::sm_sVertexList[iVertexGroup + 5].tv = CCachePageManager::sm_fTextureCoordTable[v5 + v7];
 

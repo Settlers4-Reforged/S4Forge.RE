@@ -24,7 +24,7 @@ class CCachePageManager {
     ~CCachePageManager(void);
 
     // address=[0x2f87940]
-    bool GetPictureArea(float _iBlitX, float _iBlitY, int _iWidth, int _iHeight, int _iShading, int _iShifting, int &_iPosX, int &_iPosY);
+    bool GetPictureArea(float _fBlitX, float _fBlitY, int _iWidth, int _iHeight, int _iShading, int _iShifting, int &_iPosX, int &_iPosY);
 
     // address=[0x2f87b30]
     long EraseExtensionAreas(int _iIndex, int a3, int a4, int a5, int a6, bool a7);

@@ -54,7 +54,7 @@ public:
     void  SetupViewport(int a2, int a3, int a4, int a5);
 
     // address=[0x2f67250]
-    long  SetCustomClipper(class SurfaceClipper & a2);
+    long  SetCustomClipper(class SurfaceClipper & _rClipper);
 
     // address=[0x2f672a0]
     long  ClearCustomClipper(void);
@@ -123,7 +123,7 @@ public:
     int  IsInterface3Available(struct HWND__ * a2);
 
     // address=[0x2f8bba0]
-    bool  CanCreateEngine(bool a2);
+    bool  CanCreateEngine(bool _bUseV3);
 
     // address=[0x2f8bcc0]
     void  CleanUpCheckObjects(void);
