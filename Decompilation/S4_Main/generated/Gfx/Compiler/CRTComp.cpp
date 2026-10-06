@@ -6,9 +6,9 @@
 // Decompiled from CRTComp *__thiscall CRTComp::CRTComp(CRTComp *this)
  CRTComp::CRTComp(void) {
   
-  IRTComp::IRTComp(this);
-  *(_DWORD *)this = &CRTComp::_vftable_;
-  memset((char *)this + 4, 0, 0x4Cu);
+  IRTComp::IRTComp((IRTComp *)this);
+  this->__vftable = (CRTComp_vtbl *)&CRTComp::_vftable_;
+  memset(this + 1, 0, 0x4Cu);
   return this;
 }
 

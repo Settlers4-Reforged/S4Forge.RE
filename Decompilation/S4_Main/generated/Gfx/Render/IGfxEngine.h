@@ -18,7 +18,7 @@ public:
     void  SetTickCounterAdress(unsigned int * a2);
 
     // address=[0x2f5a540]
-    bool  SetTemporaryText(char * Str, int a2, int a3, int a4, int a5, int a6);
+    bool  SetTemporaryText(char * _pString, int _iPositionX, int _iPositionY, int _iTextWidth, int _iTextHeight, int _iColor);
 
     // address=[0x2f5a5e0]
     void  SetTriangleSize(int _iTriangleSize);
@@ -27,16 +27,16 @@ public:
     void  SetScrollOffsets(int _iOffsetX, int _iOffsetY);
 
     // address=[0x2f5a770]
-    void  SetCameraMode(int a2);
+    void  SetCameraMode(int _iCameraAnglePreset);
 
     // address=[0x2f5a7d0]
     void  SetGfxLayerAccess(int _iNewMapSize, struct T_GFX_MAP_ELEMENT * _pGfxLayer);
 
     // address=[0x2f5a860]
-    bool  SetPlayerColor(int a1, struct SGfxColor & a2);
+    bool  SetPlayerColor(int _iPlayer, struct SGfxColor & _rPlayerColor);
 
     // address=[0x2f5a8e0]
-    bool  GetPlayerColor(int a2, struct SGfxColor & a3);
+    bool  GetPlayerColor(int _iPlayer, struct SGfxColor & _rPlayerColor);
 
     // address=[0x2f5a930]
     void  SetObjectLayerAccess(struct SGfxObjectInfo * (__cdecl*)(unsigned int,int) a2, unsigned short * _pMapObjects, unsigned short * _pDecoObjects);
@@ -45,7 +45,7 @@ public:
     void  SetOwnerIDCallback(int (__cdecl*)(int) a2);
 
     // address=[0x2f5a980]
-    bool  PutLandscapeObject(int a2, void * a3, void * a4);
+    bool  PutLandscapeObject(int _iIndex, void * _pGfx, void * _pPalette);
 
     // address=[0x2f5ae60]
     void  SetReloadCallback(void * (__cdecl*)(int,bool,bool) a2);
@@ -135,7 +135,7 @@ public:
     bool  PutAccessoryIcon(int a2, void * a3, void * a4);
 
     // address=[0x2f5b570]
-    bool  InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMXMachine, int & a4, int & a5, int & a6);
+    bool  InitEngine(struct SGfxRenderConfiguration _sGfxRenderConfiguration, bool _bIsMMXMachine, int & a4, int & a5, int & a6);
 
     // address=[0x2f5b7c0]
     bool  RebuildRenderEnvironment(struct SGfxRenderConfiguration sConf);
@@ -159,7 +159,7 @@ public:
     void  EnableIconLayer(bool a2);
 
     // address=[0x2f5c480]
-    void  UpdateWorldPosition(int a2, int a3);
+    void  UpdateWorldPosition(int _iX, int _iY);
 
     // address=[0x2f5c540]
     void  UpdateWorldPosition(int a2);
@@ -261,22 +261,22 @@ public:
     bool  IsResolutionPossible(int a2);
 
     // address=[0x2f5fe60]
-    bool  CheckRenderConfiguration(struct SGfxRenderConfiguration a2);
+    bool  CheckRenderConfiguration(struct SGfxRenderConfiguration _sGfxRenderConfiguration);
 
     // address=[0x2f601f0]
     bool  ShowFrame(void);
 
     // address=[0x2f60260]
-    bool  SolidColorFillGuiSurface(int _iSurfaceType, unsigned char a3, unsigned char a4, unsigned char a5);
+    bool  SolidColorFillGuiSurface(int _iNumberOfGuiSurface, unsigned char _uRed, unsigned char _uGreen, unsigned char _uBlue);
 
     // address=[0x2f603b0]
-    bool  SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned char a4, unsigned char a5, struct tagRECT a6);
+    bool  SolidColorFillGuiSurface(int _iNumberOfGuiSurface, unsigned char _uRed, unsigned char _uGreen, unsigned char _uBlue, struct tagRECT _sArea);
 
     // address=[0x2f699c0]
-    bool  RenderObject(int a2, int a3, struct SGfxObjectInfo * a4, int a5, int a6);
+    bool  RenderObject(int _iX, int _iY, struct SGfxObjectInfo * _pGfxObjectInfo, int _iSize, int _iLockMode);
 
     // address=[0x2f69c10]
-    bool  RenderResource(int a2, int a3, void * a4, void * a5, void * a6, int a7);
+    bool  RenderResource(int _iX, int _iY, void * _pPalette, void * _pResourceGfx, void * _pCounterGfx, int _iLockMode);
 
     // address=[0x2f69ec0]
     void  SetEffectSystemInterfacePtr(class IGfxEffects * a2);
@@ -291,7 +291,7 @@ public:
     int  CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * _psGuiSurfaceDescription);
 
     // address=[0x2f73220]
-    int  CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a2);
+    int  CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * _psGuiSurfaceDescription);
 
     // address=[0x2f732a0]
     bool  DestroyGuiSurface(int a2);
@@ -303,7 +303,7 @@ public:
     bool  SetGuiSurfaceDestinationPosition(int a2, int a3, int a4);
 
     // address=[0x2f73480]
-    bool  SetGuiSurfaceDestinationRect(int a2, struct tagRECT const & a3);
+    bool  SetGuiSurfaceDestinationRect(int _iIndex, struct tagRECT const & _pDest);
 
     // address=[0x2f734f0]
     bool  GetGuiSurfaceDestinationRect(int a1, struct tagRECT & a2);
@@ -312,7 +312,7 @@ public:
     bool  GetGuiSurfaceDescription(int a2, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION & a3);
 
     // address=[0x2f735c0]
-    unsigned short *  BeginWriteToSurface(int a2, unsigned int & a3);
+    unsigned short *  BeginWriteToSurface(int a2, unsigned int & iPitch);
 
     // address=[0x2f73770]
     bool  EndWriteToSurface(int a2);

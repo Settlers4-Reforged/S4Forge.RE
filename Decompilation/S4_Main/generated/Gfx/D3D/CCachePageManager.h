@@ -21,7 +21,7 @@ public:
      ~CCachePageManager(void);
 
     // address=[0x2f87940]
-    bool  GetPictureArea(float iBlitX, float iBlitY, int iWidth, int iHeight, int iShading, int iShifting, int & iPosX, int & iPosY);
+    bool  GetPictureArea(float fBlitX, float fBlitY, int iWidth, int iHeight, int iShading, int iShifting, int & iPosX, int & iPosY);
 
     // address=[0x2f87b30]
     long  EraseExtensionAreas(int _iIndex, int a3, int a4, int a5, int a6, bool a7);
@@ -76,7 +76,7 @@ public:
     int m_iUploadWidth;
     int m_iUploadHeight;
     SSmallRectangle[96] m_sRectangleList;
-    tagPOINT[96] m_sBlitPosition;
+    POINTFLOAT[96] m_sBlitPosition;
     int[96] m_iShading;
     unsigned __int8[96] m_uShifting;
     int m_iNumberOfObjects;

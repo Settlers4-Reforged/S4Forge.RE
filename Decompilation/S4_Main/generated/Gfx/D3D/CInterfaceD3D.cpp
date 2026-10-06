@@ -2037,7 +2037,7 @@ long __stdcall CInterfaceD3D::EnumModesCallbackOld(struct _DDSURFACEDESC * a1, v
 bool  CInterfaceD3D::LoadTexturePageContents(void) {
   
   bool IsHardwareLandscapeEngine; // al
-  char m_bHiTextureQuality; // [esp-Ch] [ebp-18h]
+  unsigned __int8 m_bHiTextureQuality; // [esp-Ch] [ebp-18h]
   bool v4; // [esp-8h] [ebp-14h]
   int i; // [esp+4h] [ebp-8h]
 
@@ -2067,7 +2067,7 @@ bool  CInterfaceD3D::LoadTexturePageContents(void) {
         i < 44;
         ++i )
   {
-    j__TRI_calculate_LUT_from_palette(g_uColorPalettes[i], &g_pLuminanceTablesStart[2048 * i]);
+    j__TRI_calculate_LUT_from_palette(g_uColorPalettes[i], (__m64 *)&g_pLuminanceTablesStart[2048 * i]);
   }
   BBSupportTracePrintF(1, "GFX ENGINE: End set up luminance tables.");
   return 1;
@@ -2435,9 +2435,9 @@ void  CInterfaceD3D::CalcTilingVerticesType1(int _LandscapeType) {
   {
     g_pVertex->tu = g_fPatternSuboffsetX + 0.125;
   }
-  else if ( g_bHalfLine != 0 )
+  else if ( g_bHalfLine )
   {
-    g_pVertex->tu = flt_3E2E708 + 1.0;
+    g_pVertex->tu = g_fHalfLineOffset + 1.0;
     g_bSplitTriangle = 1;
   }
   else
@@ -2467,14 +2467,14 @@ void  CInterfaceD3D::CalcTilingVerticesType2(int _LandscapeType) {
   v2 = g_fPatternSuboffsetX;
   if ( (float)(g_fPatternSuboffsetX + 0.1875) > 1.0 )
   {
-    if ( g_bHalfLine != 0 )
+    if ( g_bHalfLine )
     {
       v3 = v3 - 1.0;
       v2 = g_fPatternSuboffsetX - 1.0;
     }
     else
     {
-      v3 = flt_3E2E708 + 1.0;
+      v3 = g_fHalfLineOffset + 1.0;
       g_bSplitTriangle = 1;
     }
   }
@@ -2533,7 +2533,7 @@ int  CInterfaceD3D::AllocateEngineData(int _iVertexCount) {
   {
     return 1;
   }
-  g_pLuminanceTablesMemory = (unsigned __int8 *)operator new[](0x16800u);
+  g_pLuminanceTablesMemory = (unsigned __int8 *)operator new[](92160u);
   if ( g_pLuminanceTablesMemory == nullptr )
   {
     BBSupportTracePrintF(0, "GFX ENGINE: Not enough memory to allocate luminance tables!");

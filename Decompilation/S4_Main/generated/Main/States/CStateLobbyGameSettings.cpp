@@ -827,11 +827,11 @@ int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
   wchar_t *v14; // eax
   wchar_t *v15; // [esp-8h] [ebp-3D0h]
   wchar_t *v16; // [esp-4h] [ebp-3CCh]
-  int v17; // [esp+8h] [ebp-3C0h]
-  int v18; // [esp+10h] [ebp-3B8h]
+  const std::basic_string<wchar_t, struct std::char_traits<wchar_t>, class std::allocator<wchar_t>> *v17; // [esp+8h] [ebp-3C0h]
+  const std::basic_string<wchar_t, struct std::char_traits<wchar_t>, class std::allocator<wchar_t>> *v18; // [esp+10h] [ebp-3B8h]
   int v19; // [esp+18h] [ebp-3B0h]
-  char v20; // [esp+1Eh] [ebp-3AAh]
-  char v21; // [esp+1Fh] [ebp-3A9h]
+  bool v20; // [esp+1Eh] [ebp-3AAh]
+  bool v21; // [esp+1Fh] [ebp-3A9h]
   signed int i; // [esp+20h] [ebp-3A8h]
   int j; // [esp+20h] [ebp-3A8h]
   int v24; // [esp+20h] [ebp-3A8h]
@@ -923,14 +923,14 @@ int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
             ;
             ++j )
       {
-        v18 = std::wstring::wstring(&v27, (wchar_t *)&word_37469DC);
-        v21 = std::operator!=<wchar_t>((int)&v35.m_u[7 * j], v18);
+        v18 = (const std::basic_string<wchar_t, struct std::char_traits<wchar_t>, class std::allocator<wchar_t>> *)std::wstring::wstring(&v27, (wchar_t *)&word_37469DC);
+        v21 = std::operator!=<wchar_t>((const std::basic_string<wchar_t, struct std::char_traits<wchar_t>, class std::allocator<wchar_t>> *)(&v35 + j), v18);
         std::wstring::~wstring(&v27);
-        if ( v21 == 0 )
+        if ( !v21 )
         {
           break;
         }
-        std::operator+<wchar_t>((int)&v32, &v30, &v35 + j);
+        std::operator+<wchar_t>(&v32, &v30, &v35 + j);
         LOBYTE(v48) = 15;
         v3 = std::wstring::c_str(&v32);
         if ( !SetFileAttributesW(v3, 0x80u) )
@@ -964,16 +964,16 @@ int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
       v24 = 0;
       while ( 1 )
       {
-        v17 = std::wstring::wstring(&v26, (wchar_t *)&word_3746A60);
-        v20 = std::operator!=<wchar_t>((int)&v35.m_u[7 * v24], v17);
+        v17 = (const std::basic_string<wchar_t, struct std::char_traits<wchar_t>, class std::allocator<wchar_t>> *)std::wstring::wstring(&v26, (wchar_t *)&word_3746A60);
+        v20 = std::operator!=<wchar_t>((const std::basic_string<wchar_t, struct std::char_traits<wchar_t>, class std::allocator<wchar_t>> *)(&v35 + v24), v17);
         std::wstring::~wstring(&v26);
-        if ( v20 == 0 )
+        if ( !v20 )
         {
           break;
         }
-        std::operator+<wchar_t>((int)&v33, &v30, &v35 + v24);
+        std::operator+<wchar_t>(&v33, &v30, &v35 + v24);
         LOBYTE(v48) = 16;
-        std::operator+<wchar_t>((int)&v31, &v29, &v35 + v24);
+        std::operator+<wchar_t>(&v31, &v29, &v35 + v24);
         LOBYTE(v48) = 17;
         v7 = std::wstring::c_str(&v31);
         if ( !SetFileAttributesW(v7, 0x80u) )
@@ -983,7 +983,7 @@ int __cdecl CStateLobbyGameSettings::CompileUserFlags(void) {
         }
         v15 = std::wstring::c_str(&v31);
         v9 = std::wstring::c_str(&v33);
-        if ( !CopyFileW(v9, v15, 0) )
+        if ( !CopyFileW(v9, v15, false) )
         {
           v16 = std::wstring::c_str(&v31);
           v10 = std::wstring::c_str(&v33);

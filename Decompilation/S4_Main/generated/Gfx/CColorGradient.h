@@ -14,7 +14,7 @@ public:
     // Type information members
 public:
     unsigned __int16[8][32] m_vGradients;
-    SGfxColor[64] m_vPlayerColors;
+    SGfxColor[9] m_vPlayerColors;
 
 };
 

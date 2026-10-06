@@ -1,3 +1,4 @@
+#if FALSE
 #include "CColorGradient.h"
 
 // Definitions for class CColorGradient
@@ -101,3 +102,4 @@ void  CColorGradient::SetupGradients(int a2, struct SGfxColor a3, int a4) {
 }
 
 
+#endif // Already implemented

@@ -86,8 +86,8 @@ bool  CCachePageManager::IsVideoSurfaceLocked(void) {
 
 
 // address=[0x2f87940]
-// Decompiled from unsigned __int8 __thiscall CCachePageManager::GetPictureArea(CCachePageManager *this, int iBlitX, int iBlitY, int iWidth, int iHeight, int iShading, unsigned __int8 iShifting, int *iPosX, int *iPosY)
-bool  CCachePageManager::GetPictureArea(float iBlitX, float iBlitY, int iWidth, int iHeight, int iShading, int iShifting, int & iPosX, int & iPosY) {
+// Decompiled from unsigned __int8 __thiscall CCachePageManager::GetPictureArea(CCachePageManager *this, float fBlitX, float fBlitY, int iWidth, int iHeight, int iShading, unsigned __int8 iShifting, int *iPosX, int *iPosY)
+bool  CCachePageManager::GetPictureArea(float fBlitX, float fBlitY, int iWidth, int iHeight, int iShading, int iShifting, int & iPosX, int & iPosY) {
   
   int m_iUploadHeight; // [esp+0h] [ebp-Ch]
   int m_iCurrentX; // [esp+4h] [ebp-8h]
@@ -138,8 +138,8 @@ bool  CCachePageManager::GetPictureArea(float iBlitX, float iBlitY, int iWidth, 
   this->m_sRectangleList[this->m_iNumberOfObjects].top = *(_WORD *)iPosY;
   this->m_sRectangleList[this->m_iNumberOfObjects].right = iWidth + *iPosX;
   this->m_sRectangleList[this->m_iNumberOfObjects].bottom = iHeight + *iPosY;
-  this->m_sBlitPosition[this->m_iNumberOfObjects].x = iBlitX;
-  this->m_sBlitPosition[this->m_iNumberOfObjects].y = iBlitY;
+  this->m_sBlitPosition[this->m_iNumberOfObjects].x = fBlitX;
+  this->m_sBlitPosition[this->m_iNumberOfObjects].y = fBlitY;
   this->m_iShading[this->m_iNumberOfObjects] = iShading;
   this->m_uShifting[this->m_iNumberOfObjects++] = iShifting;
   return 1;
@@ -590,7 +590,7 @@ long  CCachePageManager::RenderCacheObject(int _iIndex, float _fX, float _fY, in
   *(&CCachePageManager::sm_sVertexList[0].color + 8) = _iShading;
   CCachePageManager::sm_sVertexList[0].color = _iShading;
   v10 = 0;
-  if ( (_iFlags & 0x20) != 0 )
+  if ( (_iFlags & 32) != 0 )
   {
     BBSupportTracePrintF(0, "GFX ENGINE: ObjectTrace: %d ----------------------", _iIndex);
     BBSupportTracePrintF(0, "GFX ENGINE: X: %d Y: %d", iX, iY);

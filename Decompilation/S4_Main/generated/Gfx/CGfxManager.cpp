@@ -1017,23 +1017,23 @@ LABEL_52:
 
 
 // address=[0x1363b20]
-// Decompiled from char *__cdecl CGfxManager::Reload(int a1, BYTE a2, bool a3)
+// Decompiled from void *__cdecl CGfxManager::Reload(int a1, BYTE a2, bool a3)
 void * __cdecl CGfxManager::Reload(int a1, bool a2, bool a3) {
   
-  char *pPileGfx; // [esp+4h] [ebp-4h]
+  char *pFileGfx; // [esp+4h] [ebp-4h]
 
-  pPileGfx = 0;
-  if ( g_pGfxManager == 0 )
+  pFileGfx = nullptr;
+  if ( g_pGfxManager == nullptr )
   {
-    return 0;
+    return nullptr;
   }
   g_pGfxManager->m_bUse6Palette = !a3;
   g_pGfxManager->m_bUseHighPalette = a2;
-  if ( g_pGfxManager->m_sFileGfx[7].pFileGfx != 0 )
+  if ( g_pGfxManager->m_sFileGfx[7].pFileGfx != nullptr )
   {
     CGfxManager::MoveAccessoriesToGfxEngine(g_pGfxManager);
   }
-  if ( g_pGfxManager->m_sFileGfx[5].pFileGfx != 0 )
+  if ( g_pGfxManager->m_sFileGfx[5].pFileGfx != nullptr )
   {
     CGfxManager::MoveWavesToGfxEngine(g_pGfxManager);
   }
@@ -1045,8 +1045,8 @@ void * __cdecl CGfxManager::Reload(int a1, bool a2, bool a3) {
       {
         __debugbreak();
       }
-      pPileGfx = g_pGfxManager->m_sFileGfx[41].pFileGfx;
-      if ( pPileGfx == 0 && BBSupportDbgReport(1, "GfxManager.cpp", 2237, aCouldNotOpenAl_2) == 1 )
+      pFileGfx = g_pGfxManager->m_sFileGfx[41].pFileGfx;
+      if ( pFileGfx == nullptr && BBSupportDbgReport(1, "GfxManager.cpp", 2237, aCouldNotOpenAl_2) == 1 )
       {
         __debugbreak();
       }
@@ -1057,15 +1057,15 @@ void * __cdecl CGfxManager::Reload(int a1, bool a2, bool a3) {
       {
         __debugbreak();
       }
-      pPileGfx = g_pGfxManager->m_sFileGfx[2].pFileGfx;
-      if ( pPileGfx == 0 && BBSupportDbgReport(1, "GfxManager.cpp", 2245, aCouldNotOpenAl_0) == 1 )
+      pFileGfx = g_pGfxManager->m_sFileGfx[2].pFileGfx;
+      if ( pFileGfx == nullptr && BBSupportDbgReport(1, "GfxManager.cpp", 2245, aCouldNotOpenAl_0) == 1 )
       {
         __debugbreak();
       }
     }
-    if ( pPileGfx != 0 )
+    if ( pFileGfx != nullptr )
     {
-      pPileGfx += 20;
+      pFileGfx += 20;
     }
   }
   else if ( a1 == 0 )
@@ -1079,7 +1079,7 @@ void * __cdecl CGfxManager::Reload(int a1, bool a2, bool a3) {
       CGfxManager::DisableGfxFile(g_pGfxManager, 2);
     }
   }
-  return pPileGfx;
+  return pFileGfx;
 }
 
 

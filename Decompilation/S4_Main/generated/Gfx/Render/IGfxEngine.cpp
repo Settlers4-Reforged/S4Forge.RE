@@ -12,8 +12,8 @@
   this->m_iCameraVertexSize = -1;
   this->m_iBufferedTriangleSize = -1;
   this->m_uFixedCursorShape = 0;
-  g_bExclusive = 0;
-  g_pDirectDraw = 0;
+  g_bExclusive = false;
+  g_pDirectDraw = nullptr;
   this->m_bV7Available = 0;
   this->m_bV3Available = 0;
   this->m_bIsInitalized = 0;
@@ -30,11 +30,11 @@
  IGfxEngine::~IGfxEngine(void) {
   
   DeleteEngine();
-  if ( g_pDirectDraw != 0 )
+  if ( g_pDirectDraw != nullptr )
   {
-    g_pDirectDraw->lpVtbl->SetCooperativeLevel(g_pDirectDraw, GfxEngineSetup.m_hWnd, 8);
+    g_pDirectDraw->lpVtbl->SetCooperativeLevel(g_pDirectDraw, GfxEngineSetup.sRenderSetup.m_hWnd, 8);
     g_pDirectDraw->lpVtbl->Release(g_pDirectDraw);
-    g_pDirectDraw = 0;
+    g_pDirectDraw = nullptr;
   }
   BBSupportTracePrintF(1, "GFX ENGINE: Engine object successfully destroyed.");
   return std::unique_ptr<SurfaceClipper>::~unique_ptr<SurfaceClipper>(&this->m_pSurfaceClipper);
@@ -45,8 +45,8 @@
 // Decompiled from void __thiscall IGfxEngine::SetWindowPosition(IGfxEngine *this, int a2, int a3)
 void  IGfxEngine::SetWindowPosition(int a2, int a3) {
   
-  MEMORY[0x3E2E274] = a2;
-  MEMORY[0x3E2E278] = a3;
+  GfxEngineSetup.sRenderSetup.m_uX = a2;
+  GfxEngineSetup.sRenderSetup.m_uY = a3;
 }
 
 
@@ -54,26 +54,26 @@ void  IGfxEngine::SetWindowPosition(int a2, int a3) {
 // Decompiled from void __thiscall IGfxEngine::SetTickCounterAdress(IGfxEngine *this, unsigned int *a2)
 void  IGfxEngine::SetTickCounterAdress(unsigned int * a2) {
   
-  g_pTickCounter = (int)a2;
+  g_pTickCounter = a2;
 }
 
 
 // address=[0x2f5a540]
-// Decompiled from char __stdcall IGfxEngine::SetTemporaryText(char *Str, int a2, int a3, int a4, int a5, COLORREF a6)
-bool  IGfxEngine::SetTemporaryText(char * Str, int a2, int a3, int a4, int a5, int a6) {
+// Decompiled from char __stdcall IGfxEngine::SetTemporaryText(char *_pString, int _iPositionX, int _iPositionY, int _iTextWidth, int _iTextHeight, int _iColor)
+bool  IGfxEngine::SetTemporaryText(char * _pString, int _iPositionX, int _iPositionY, int _iTextWidth, int _iTextHeight, int _iColor) {
   
-  if ( Str != 0 )
+  if ( _pString != nullptr )
   {
-    if ( strlen(Str) > 0xFF )
+    if ( strlen(_pString) > 0xFF )
     {
       return 0;
     }
-    j__strcpy_0(g_cTextTmp, Str);
-    g_iTextTmpWidth = a4;
-    g_iTextTmpHeight = a5;
-    g_iTextTmpPosX = a2;
-    g_iTextTmpPosY = a3;
-    g_iTextTmpColor = a6;
+    j__strcpy_0(g_cTextTmp, _pString);
+    g_iTextTmpWidth = _iTextWidth;
+    g_iTextTmpHeight = _iTextHeight;
+    g_iTextTmpPosX = _iPositionX;
+    g_iTextTmpPosY = _iPositionY;
+    g_iTextTmpColor = _iColor;
   }
   else
   {
@@ -123,12 +123,12 @@ void  IGfxEngine::SetScrollOffsets(int _iOffsetX, int _iOffsetY) {
 
 
 // address=[0x2f5a770]
-// Decompiled from void __thiscall IGfxEngine::SetCameraMode(IGfxEngine *this, int a2)
-void  IGfxEngine::SetCameraMode(int a2) {
+// Decompiled from void __thiscall IGfxEngine::SetCameraMode(IGfxEngine *this, int _iCameraAnglePreset)
+void  IGfxEngine::SetCameraMode(int _iCameraAnglePreset) {
   
-  if ( a2 >= 0 )
+  if ( _iCameraAnglePreset >= 0 )
   {
-    g_iCameraMode = a2;
+    g_iCameraMode = _iCameraAnglePreset;
   }
   if ( g_iCameraMode == 1 )
   {
@@ -163,34 +163,35 @@ void  IGfxEngine::SetGfxLayerAccess(int _iNewMapSize, struct T_GFX_MAP_ELEMENT *
 
 
 // address=[0x2f5a860]
-// Decompiled from char __stdcall IGfxEngine::SetPlayerColor(unsigned int a1, struct SGfxColor *a2)
-bool  IGfxEngine::SetPlayerColor(int a1, struct SGfxColor & a2) {
+// Decompiled from char __stdcall IGfxEngine::SetPlayerColor(unsigned int _iPlayer, struct SGfxColor *_rPlayerColor)
+bool  IGfxEngine::SetPlayerColor(int _iPlayer, struct SGfxColor & _rPlayerColor) {
   
   int GradientFormat; // eax
 
-  if ( a1 >= 8 )
+  if ( _iPlayer >= 8 )
   {
     return 0;
   }
-  g_cColorGradient.m_vPlayerColors[a1 + 1] = *a2;
-  if ( D3DObjectPtr != 0 )
+  g_cColorGradient.m_vPlayerColors[_iPlayer + 1] = *_rPlayerColor;
+  if ( D3DObjectPtr == nullptr )
   {
-    GradientFormat = CInterfaceD3D::GetGradientFormat(D3DObjectPtr);
-    ((void (__thiscall *)(CColorGradient *, unsigned int, int, int, int, int))CColorGradient::SetupGradients)(&g_cColorGradient, a1, a2->m_iR, a2->m_iG, a2->m_iB, GradientFormat);
+    return 1;
   }
+  GradientFormat = CInterfaceD3D::GetGradientFormat(D3DObjectPtr);
+  CColorGradient::SetupGradients(&g_cColorGradient, _iPlayer, *_rPlayerColor, GradientFormat);
   return 1;
 }
 
 
 // address=[0x2f5a8e0]
-// Decompiled from char __thiscall IGfxEngine::GetPlayerColor(IGfxEngine *this, unsigned int a2, struct SGfxColor *a3)
-bool  IGfxEngine::GetPlayerColor(int a2, struct SGfxColor & a3) {
+// Decompiled from char __thiscall IGfxEngine::GetPlayerColor(IGfxEngine *this, unsigned int _iPlayer, struct SGfxColor *_rPlayerColor)
+bool  IGfxEngine::GetPlayerColor(int _iPlayer, struct SGfxColor & _rPlayerColor) {
   
-  if ( a2 >= 8 )
+  if ( _iPlayer >= 8 )
   {
     return 0;
   }
-  *a3 = MEMORY[0x468D2C8][a2 + 1];
+  *_rPlayerColor = g_cColorGradient.m_vPlayerColors[_iPlayer + 1];
   return 1;
 }
 
@@ -214,122 +215,122 @@ void  IGfxEngine::SetOwnerIDCallback(int (__cdecl*)(int) a2) {
 
 
 // address=[0x2f5a980]
-// Decompiled from char __thiscall IGfxEngine::PutLandscapeObject(IGfxEngine *this, int a2, int a3, int a4)
-bool  IGfxEngine::PutLandscapeObject(int a2, void * a3, void * a4) {
+// Decompiled from char __thiscall IGfxEngine::PutLandscapeObject(IGfxEngine *this, int _iIndex, void *_pGfx, void *_pPalette)
+bool  IGfxEngine::PutLandscapeObject(int _iIndex, void * _pGfx, void * _pPalette) {
   
   if ( this->m_iWaveIndex == -1 )
   {
-    if ( a2 == g_iWaveIndices[0] )
+    if ( _iIndex == g_iWaveIndices[0] )
     {
       this->m_iWaveIndex = 0;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[0];
+      this->m_uWaveFrame = g_uWaveFrames[0];
     }
-    else if ( a2 == g_iWaveIndices[1] )
+    else if ( _iIndex == g_iWaveIndices[1] )
     {
       this->m_iWaveIndex = 1;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[1];
+      this->m_uWaveFrame = g_uWaveFrames[1];
     }
-    else if ( a2 == g_iWaveIndices[2] )
+    else if ( _iIndex == g_iWaveIndices[2] )
     {
       this->m_iWaveIndex = 2;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[2];
+      this->m_uWaveFrame = g_uWaveFrames[2];
     }
-    else if ( a2 == g_iWaveIndices[3] )
+    else if ( _iIndex == g_iWaveIndices[3] )
     {
       this->m_iWaveIndex = 3;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[3];
+      this->m_uWaveFrame = g_uWaveFrames[3];
     }
-    else if ( a2 == g_iWaveIndices[4] )
+    else if ( _iIndex == g_iWaveIndices[4] )
     {
       this->m_iWaveIndex = 4;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[4];
+      this->m_uWaveFrame = g_uWaveFrames[4];
     }
-    else if ( a2 == g_iWaveIndices[5] )
+    else if ( _iIndex == g_iWaveIndices[5] )
     {
       this->m_iWaveIndex = 5;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[5];
+      this->m_uWaveFrame = g_uWaveFrames[5];
     }
-    else if ( a2 == g_iWaveIndices[6] )
+    else if ( _iIndex == g_iWaveIndices[6] )
     {
       this->m_iWaveIndex = 6;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[6];
+      this->m_uWaveFrame = g_uWaveFrames[6];
     }
-    else if ( a2 == g_iWaveIndices[7] )
+    else if ( _iIndex == g_iWaveIndices[7] )
     {
       this->m_iWaveIndex = 7;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[7];
+      this->m_uWaveFrame = g_uWaveFrames[7];
     }
-    else if ( a2 == g_iWaveIndices[8] )
+    else if ( _iIndex == g_iWaveIndices[8] )
     {
       this->m_iWaveIndex = 8;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[8];
+      this->m_uWaveFrame = g_uWaveFrames[8];
     }
-    else if ( a2 == g_iWaveIndices[9] )
+    else if ( _iIndex == g_iWaveIndices[9] )
     {
       this->m_iWaveIndex = 9;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[9];
+      this->m_uWaveFrame = g_uWaveFrames[9];
     }
-    else if ( a2 == g_iWaveIndices[10] )
+    else if ( _iIndex == g_iWaveIndices[10] )
     {
       this->m_iWaveIndex = 10;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[10];
+      this->m_uWaveFrame = g_uWaveFrames[10];
     }
-    else if ( a2 == g_iWaveIndices[11] )
+    else if ( _iIndex == g_iWaveIndices[11] )
     {
       this->m_iWaveIndex = 11;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[11];
+      this->m_uWaveFrame = g_uWaveFrames[11];
     }
-    else if ( a2 == g_iWaveIndices[12] )
+    else if ( _iIndex == g_iWaveIndices[12] )
     {
       this->m_iWaveIndex = 12;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[12];
+      this->m_uWaveFrame = g_uWaveFrames[12];
     }
-    else if ( a2 == g_iWaveIndices[13] )
+    else if ( _iIndex == g_iWaveIndices[13] )
     {
       this->m_iWaveIndex = 13;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[13];
+      this->m_uWaveFrame = g_uWaveFrames[13];
     }
-    else if ( a2 == g_iWaveIndices[14] )
+    else if ( _iIndex == g_iWaveIndices[14] )
     {
       this->m_iWaveIndex = 14;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[14];
+      this->m_uWaveFrame = g_uWaveFrames[14];
     }
-    else if ( a2 == g_iWaveIndices[15] )
+    else if ( _iIndex == g_iWaveIndices[15] )
     {
       this->m_iWaveIndex = 15;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[15];
+      this->m_uWaveFrame = g_uWaveFrames[15];
     }
-    else if ( a2 == g_iWaveIndices[16] )
+    else if ( _iIndex == g_iWaveIndices[16] )
     {
       this->m_iWaveIndex = 16;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[16];
+      this->m_uWaveFrame = g_uWaveFrames[16];
     }
-    else if ( a2 == g_iWaveIndices[17] )
+    else if ( _iIndex == g_iWaveIndices[17] )
     {
       this->m_iWaveIndex = 17;
-      this->m_uWaveFrame = (unsigned __int8)g_uWaveFrames[17];
+      this->m_uWaveFrame = g_uWaveFrames[17];
     }
-    else if ( a2 == g_iBorderstoneIndices )
+    else if ( _iIndex == g_iBorderstoneIndices )
     {
       this->m_iWaveIndex = 1000;
-      this->m_uWaveFrame = (unsigned __int8)g_uBorderstoneFrames;
+      this->m_uWaveFrame = g_uBorderstoneFrames;
     }
   }
   if ( this->m_iWaveIndex == 1000 )
   {
-    g_pBorderstonePalette = a4;
-    dword_468A1D4[(unsigned __int8)g_uBorderstoneFrames - this->m_uWaveFrame--] = a3;
-    g_pBorderstoneGfx[0] = a3;
-    if ( !this->m_uWaveFrame )
+    g_pBorderstonePalette = _pPalette;
+    dword_468A1D4[g_uBorderstoneFrames - this->m_uWaveFrame--] = (int)_pGfx;
+    g_pBorderstoneGfx[0] = _pGfx;
+    if ( this->m_uWaveFrame == 0 )
     {
       this->m_iWaveIndex = -1;
     }
   }
   else if ( this->m_iWaveIndex >= 0 )
   {
-    g_pWavePalettes[this->m_iWaveIndex] = a4;
-    g_pWaveGfx[(unsigned __int8)g_uWaveFrames[this->m_iWaveIndex] + 20 * this->m_iWaveIndex - this->m_uWaveFrame--] = a3;
-    if ( !this->m_uWaveFrame )
+    g_pWavePalettes[this->m_iWaveIndex] = (int)_pPalette;
+    g_pWaveGfx[g_uWaveFrames[this->m_iWaveIndex] + 20 * this->m_iWaveIndex - this->m_uWaveFrame--] = (int)_pGfx;
+    if ( this->m_uWaveFrame == 0 )
     {
       this->m_iWaveIndex = -1;
     }
@@ -542,7 +543,7 @@ bool  IGfxEngine::EnableMiniMap(bool _bVisible, int _iOffsetX, int _iOffsetY, st
   GfxEngineSetup.iMiniMapX = _iOffsetX;
   GfxEngineSetup.iMiniMapY = _iOffsetY;
   GfxEngineSetup.pMiniMapHwnd = _pHwnd;
-  if ( D3DObjectPtr != nullptr && SurfaceClipper::GetClipper(&D3DObjectPtr->m_sMinimapClipper) != 0 && (v6 = SurfaceClipper::SetClipWindow(&D3DObjectPtr->m_sMinimapClipper, _pHwnd)) != 0 )
+  if ( D3DObjectPtr != nullptr && SurfaceClipper::GetClipper(&D3DObjectPtr->m_sMinimapClipper) != nullptr && (v6 = SurfaceClipper::SetClipWindow(&D3DObjectPtr->m_sMinimapClipper, _pHwnd)) != 0 )
   {
     WriteError(v6, "AssignMinimapClipper");
     return 0;
@@ -604,19 +605,19 @@ void  IGfxEngine::SetCameraTriangleSize(int a2) {
   if ( this->m_iCameraVertexSize != a2 && a2 >= 0x20000 && a2 <= (int)&dword_B0F0F0[213956] )
   {
     this->m_iCameraVertexSize = a2;
-    MEMORY[0x3E2E294] = a2;
-    *(float *)&g_fCamVertexSize = (float)a2;
+    GfxEngineSetup.iCamVertexSize = a2;
+    g_fCamVertexSize = (float)a2;
     if ( g_iCameraMode == 1 )
     {
-      MEMORY[0x3E2E298] = MEMORY[0x3E2E294] / 2;
+      GfxEngineSetup.iCamVertexHeight = GfxEngineSetup.iCamVertexSize / 2;
     }
     else
     {
-      MEMORY[0x3E2E298] = MEMORY[0x3E2E294];
+      GfxEngineSetup.iCamVertexHeight = GfxEngineSetup.iCamVertexSize;
     }
-    MEMORY[0x3E2E2FE] = 1;
-    MEMORY[0x3E2E2F8] = (float)MEMORY[0x3E2E294] / 1572864.0;
-    g_iCamZoomGradient = MEMORY[0x3E2E294] / 24;
+    GfxEngineSetup.bUpdateCamLandscape = 1;
+    GfxEngineSetup.fCamZoomFactor = (float)GfxEngineSetup.iCamVertexSize / 1572864.0;
+    g_iCamZoomGradient = GfxEngineSetup.iCamVertexSize / 24;
     g_iZoomInit = -65536;
     InitCamGradientTable();
   }
@@ -627,7 +628,7 @@ void  IGfxEngine::SetCameraTriangleSize(int a2) {
 // Decompiled from int __thiscall IGfxEngine::GetRenderHeight(IGfxEngine *this, int a2)
 int  IGfxEngine::GetRenderHeight(int a2) {
   
-  return (int)(float)((float)((float)a2 * 0.051562499) * *(float *)&g_fCamVertexSize) >> 16;
+  return (int)(float)((float)((float)a2 * 0.051562499) * g_fCamVertexSize) >> 16;
 }
 
 
@@ -641,7 +642,7 @@ void  IGfxEngine::SetIconCallbacks(void (__cdecl*)(int) a2, unsigned char (__cde
 
 
 // address=[0x2f5b530]
-// Decompiled from char __thiscall IGfxEngine::PutAccessoryIcon(IGfxEngine *this, unsigned int a2, int a3, int a4)
+// Decompiled from char __thiscall IGfxEngine::PutAccessoryIcon(IGfxEngine *this, unsigned int a2, void *a3, int a4)
 bool  IGfxEngine::PutAccessoryIcon(int a2, void * a3, void * a4) {
   
   if ( a2 >= 0x100 )
@@ -655,14 +656,14 @@ bool  IGfxEngine::PutAccessoryIcon(int a2, void * a3, void * a4) {
 
 
 // address=[0x2f5b570]
-// Decompiled from char __thiscall IGfxEngine::InitEngine(IGfxEngine *this, struct SGfxRenderConfiguration a2, char _bIsMMXMachine, _DWORD *a4, _DWORD *a5, _DWORD *a6)
-bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMXMachine, int & a4, int & a5, int & a6) {
+// Decompiled from char __thiscall IGfxEngine::InitEngine(IGfxEngine *this, struct SGfxRenderConfiguration _sGfxRenderConfiguration, char _bIsMMXMachine, _DWORD *a4, _DWORD *a5, _DWORD *a6)
+bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration _sGfxRenderConfiguration, bool _bIsMMXMachine, int & a4, int & a5, int & a6) {
   
   this->m_bMMXIsPresent = _bIsMMXMachine;
   *a6 = 27;
-  CheckConfiguration(&a2);
-  GfxEngineSetup.sRenderSetup = a2;
-  if ( a2.m_bUseDD3Interface )
+  CheckConfiguration(&_sGfxRenderConfiguration);
+  GfxEngineSetup.sRenderSetup = _sGfxRenderConfiguration;
+  if ( _sGfxRenderConfiguration.m_bUseDD3Interface )
   {
     this->m_bV7Available = 0x17;
     *a5 = 23;
@@ -708,7 +709,7 @@ bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMXMach
   else
   {
     GfxEngineSetup.bLandscapeDeltaScroll = 1;
-    if ( SGfxRenderConfiguration::IsHardwareObjectEngine(&a2) != 0 && this->m_bHardwareObjectPossible != 0 )
+    if ( SGfxRenderConfiguration::IsHardwareObjectEngine(&_sGfxRenderConfiguration) != 0 && this->m_bHardwareObjectPossible != 0 )
     {
       GfxEngineSetup.bHardwareObjects = 1;
       BBSupportTracePrintF(1, "GFX ENGINE: Hardware object rendering enabled.");
@@ -735,7 +736,7 @@ bool  IGfxEngine::InitEngine(struct SGfxRenderConfiguration a2, bool _bIsMMXMach
       {
         this->m_bIsInitalized = 1;
       }
-      if ( (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) == 0 || this->m_bHardwareRenderingPossible != 0) && (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) != 0 || this->m_bSoftwareRenderingPossible != 0) )
+      if ( (!SGfxRenderConfiguration::IsHardwareLandscapeEngine(&_sGfxRenderConfiguration) || this->m_bHardwareRenderingPossible != 0) && (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&_sGfxRenderConfiguration) || this->m_bSoftwareRenderingPossible != 0) )
       {
         return IGfxEngine::SetRenderEnvironment(this);
       }
@@ -780,7 +781,7 @@ bool  IGfxEngine::RebuildRenderEnvironment(struct SGfxRenderConfiguration sConf)
     GfxEngineSetup.psSelectionRect = nullptr;
     SetCrossingSystemMapAccess(0, nullptr);
   }
-  if ( (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&sConf) == 0 || this->m_bHardwareRenderingPossible != 0) && (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&sConf) != 0 || this->m_bSoftwareRenderingPossible != 0) )
+  if ( (!SGfxRenderConfiguration::IsHardwareLandscapeEngine(&sConf) || this->m_bHardwareRenderingPossible != 0) && (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&sConf) || this->m_bSoftwareRenderingPossible != 0) )
   {
     GfxEngineSetup.sRenderSetup = sConf;
     GfxEngineSetup.bLandscapeDeltaScroll = 1;
@@ -796,7 +797,7 @@ bool  IGfxEngine::RebuildRenderEnvironment(struct SGfxRenderConfiguration sConf)
 
 
 // address=[0x2f5b8e0]
-// Decompiled from void *__thiscall IGfxEngine::GetCurrentRenderConfiguration(IGfxEngine *this)
+// Decompiled from GFX_ENGINE_SETUP *__thiscall IGfxEngine::GetCurrentRenderConfiguration(IGfxEngine *this)
 struct SGfxRenderConfiguration const &  IGfxEngine::GetCurrentRenderConfiguration(void)const {
   
   return &GfxEngineSetup;
@@ -825,12 +826,11 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
   bool v20; // [esp+C6h] [ebp-3Ah]
   bool v21; // [esp+C7h] [ebp-39h]
   int v22; // [esp+C8h] [ebp-38h] BYREF
-  _DWORD v23[4]; // [esp+CCh] [ebp-34h] BYREF
-  DWORD v24; // [esp+DCh] [ebp-24h] BYREF
-  int v25; // [esp+E0h] [ebp-20h]
-  int v26; // [esp+E4h] [ebp-1Ch]
-  int v27; // [esp+E8h] [ebp-18h]
-  tagRECT v28; // [esp+ECh] [ebp-14h] BYREF
+  tagRECT v23; // [esp+CCh] [ebp-34h] BYREF
+  DWORD v24; // [esp+DCh] [ebp-24h] OVERLAPPED BYREF
+  int v25; // [esp+E4h] [ebp-1Ch]
+  int v26; // [esp+E8h] [ebp-18h]
+  tagRECT v27; // [esp+ECh] [ebp-14h] BYREF
 
   v22 = 1;
   if ( IsIconic(GfxEngineSetup.sRenderSetup.m_hWnd) )
@@ -880,7 +880,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
       CBlitFX::CBlitFX(&v6);
       v21 = GfxEngineSetup.iCurrentGfxMode == 1;
       CBlitFX::SetFillColor(&v6, 0, 0, 0, GfxEngineSetup.iCurrentGfxMode == 1);
-      v22 = D3DObjectPtr->m_pFinalRenderSurface->ClearSurface(D3DObjectPtr->m_pFinalRenderSurface, (_BYTE *)&v6);
+      v22 = D3DObjectPtr->m_pFinalRenderSurface->ClearSurface(D3DObjectPtr->m_pFinalRenderSurface, &v6);
       if ( v22 >= 0 )
       {
         if ( (unsigned __int8)std::operator!=<SurfaceClipper,std::default_delete<SurfaceClipper>>(&this->m_pSurfaceClipper, 0) != 0 && (v4 = (struct SurfaceClipper *)std::unique_ptr<SurfaceClipper>::operator*(&this->m_pSurfaceClipper), (v22 = CInterfaceD3D::SetCustomClipper(D3DObjectPtr, v4)) < 0) )
@@ -982,7 +982,7 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
           return false;
         }
         v9 = g_fVertexSize;
-        LODWORD(g_fVertexSize) = g_fCamVertexSize;
+        g_fVertexSize = g_fCamVertexSize;
         v5 = DrawCameraLandscape(GfxEngineSetup.iCamScrollOffsetX, GfxEngineSetup.iCamScrollOffsetY);
         v22 = v5;
         g_fVertexSize = v9;
@@ -999,8 +999,8 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
           D3DObjectPtr->m_bDisableRendering = 1;
           return false;
         }
-        v23[0] = GfxEngineSetup.iCamX;
-        v23[1] = GfxEngineSetup.iCamY;
+        v23.left = GfxEngineSetup.iCamX;
+        v23.top = GfxEngineSetup.iCamY;
         if ( GfxEngineSetup.iCamWidth >= GfxEngineSetup.sRenderSetup.m_uWidth - GfxEngineSetup.iCamX )
         {
           iCamWidth = GfxEngineSetup.sRenderSetup.m_uWidth - GfxEngineSetup.iCamX;
@@ -1019,9 +1019,9 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
           iCamHeigth = GfxEngineSetup.iCamHeigth;
         }
         v14 = iCamHeigth;
-        v23[2] = GfxEngineSetup.iCamX + v13;
-        v23[3] = GfxEngineSetup.iCamY + iCamHeigth;
-        v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt(D3DObjectPtr->m_pFinalRenderSurface, (tagRECT *)v23, D3DObjectPtr->m_pLandscapeCameraRenderSurface, nullptr, 0, nullptr);
+        v23.right = GfxEngineSetup.iCamX + v13;
+        v23.bottom = GfxEngineSetup.iCamY + iCamHeigth;
+        v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt(D3DObjectPtr->m_pFinalRenderSurface, &v23, D3DObjectPtr->m_pLandscapeCameraRenderSurface, nullptr, 0, nullptr);
         if ( v22 != 0 )
         {
           WriteError(v22, "BlitCameraSurfaceToBuffer");
@@ -1100,33 +1100,30 @@ bool  IGfxEngine::RenderFrame(bool a2, bool a3) {
     DrawMiniMapObjectLayer();
     DrawMiniMapLandscapeLayer();
     GetNextLayer();
-    v28 = g_sMiniMapRect;
-    v24 = g_sMiniMapSize;
-    v25 = MEMORY[0x3E2E240];
-    v26 = MEMORY[0x3E2E244];
-    v27 = MEMORY[0x3E2E248];
+    v27 = g_sMiniMapRect;
+    *(tagRECT *)&v24 = g_sMiniMapSize;
     if ( SGfxRenderConfiguration::IsEditorMode(&GfxEngineSetup.sRenderSetup) )
     {
       goto LABEL_106;
     }
-    if ( v28.top <= GfxEngineSetup.sRenderSetup.m_uHeight || v28.left <= GfxEngineSetup.sRenderSetup.m_uWidth )
+    if ( v27.top <= GfxEngineSetup.sRenderSetup.m_uHeight || v27.left <= GfxEngineSetup.sRenderSetup.m_uWidth )
     {
-      if ( v28.bottom > GfxEngineSetup.sRenderSetup.m_uHeight )
+      if ( v27.bottom > GfxEngineSetup.sRenderSetup.m_uHeight )
       {
-        v11 = v28.bottom - GfxEngineSetup.sRenderSetup.m_uHeight;
-        v28.bottom = GfxEngineSetup.sRenderSetup.m_uHeight;
-        v27 -= v11;
+        v11 = v27.bottom - GfxEngineSetup.sRenderSetup.m_uHeight;
+        v27.bottom = GfxEngineSetup.sRenderSetup.m_uHeight;
+        v26 -= v11;
       }
-      if ( v28.right > GfxEngineSetup.sRenderSetup.m_uWidth )
+      if ( v27.right > GfxEngineSetup.sRenderSetup.m_uWidth )
       {
-        v10 = v28.right - GfxEngineSetup.sRenderSetup.m_uWidth;
-        v28.right = GfxEngineSetup.sRenderSetup.m_uWidth;
-        v26 -= v10;
+        v10 = v27.right - GfxEngineSetup.sRenderSetup.m_uWidth;
+        v27.right = GfxEngineSetup.sRenderSetup.m_uWidth;
+        v25 -= v10;
       }
-      v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt(D3DObjectPtr->m_pFinalRenderSurface, &v28, D3DObjectPtr->m_pMiniMapSurface, (tagRECT *)&v24, 0x8000, nullptr);
+      v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt(D3DObjectPtr->m_pFinalRenderSurface, &v27, D3DObjectPtr->m_pMiniMapSurface, (tagRECT *)&v24, 0x8000, nullptr);
       if ( v22 == 0 )
       {
-        v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt(D3DObjectPtr->m_pFinalRenderSurface, &v28, D3DObjectPtr->m_pMiniMapAreaSurface, (tagRECT *)&v24, 0x8000, nullptr);
+        v22 = D3DObjectPtr->m_pFinalRenderSurface->Blt(D3DObjectPtr->m_pFinalRenderSurface, &v27, D3DObjectPtr->m_pMiniMapAreaSurface, (tagRECT *)&v24, 0x8000, nullptr);
       }
     }
     if ( v22 != 0 )
@@ -1153,7 +1150,7 @@ LABEL_106:
 // Decompiled from char __stdcall IGfxEngine::BlitFrameToDIB(HGDIOBJ h)
 bool  IGfxEngine::BlitFrameToDIB(struct HBITMAP__ * h) {
   
-  return BlitRenderedSurfaceToDIB(GfxEngineSetup.m_hWnd, h);
+  return BlitRenderedSurfaceToDIB(GfxEngineSetup.sRenderSetup.m_hWnd, h);
 }
 
 
@@ -1183,26 +1180,26 @@ void  IGfxEngine::EnableIconLayer(bool a2) {
 
 
 // address=[0x2f5c480]
-// Decompiled from void __thiscall IGfxEngine::UpdateWorldPosition(IGfxEngine *this, int a2, int a3)
-void  IGfxEngine::UpdateWorldPosition(int a2, int a3) {
+// Decompiled from void __thiscall IGfxEngine::UpdateWorldPosition(IGfxEngine *this, int _iX, int _iY)
+void  IGfxEngine::UpdateWorldPosition(int _iX, int _iY) {
   
-  int v3; // [esp+4h] [ebp-4h]
+  int iIndex; // [esp+4h] [ebp-4h]
 
-  if ( GfxEngineSetup.psMapElement != nullptr && (a3 | a2) >= 0 && a2 < GfxEngineSetup.iSizeOfMap && a3 < GfxEngineSetup.iSizeOfMap )
+  if ( GfxEngineSetup.psMapElement != nullptr && (_iY | _iX) >= 0 && _iX < GfxEngineSetup.iSizeOfMap && _iY < GfxEngineSetup.iSizeOfMap )
   {
-    v3 = a2 + GfxEngineSetup.iSizeOfMap * a3;
-    RefreshShading(v3, false);
-    if ( GfxEngineSetup.psMapElement[v3].iHeight > (unsigned int)(unsigned __int8)g_uMaxYTable[a3] )
+    iIndex = _iX + GfxEngineSetup.iSizeOfMap * _iY;
+    RefreshShading(iIndex, false);
+    if ( GfxEngineSetup.psMapElement[iIndex].iHeight > (unsigned int)g_uMaxYTable[_iY] )
     {
-      g_uMaxYTable[a3] = GfxEngineSetup.psMapElement[v3].iHeight;
+      g_uMaxYTable[_iY] = GfxEngineSetup.psMapElement[iIndex].iHeight;
     }
-    if ( a3 < dword_3E2E314 )
+    if ( _iY < dword_3E2E314 )
     {
-      dword_3E2E314 = a3;
+      dword_3E2E314 = _iY;
     }
-    if ( a3 > g_iFoggingRange )
+    if ( _iY > g_iFoggingRange )
     {
-      g_iFoggingRange = a3;
+      g_iFoggingRange = _iY;
     }
     GfxEngineSetup.bUpdateLandscapeDelta = 1;
   }
@@ -1227,7 +1224,7 @@ void  IGfxEngine::UpdateWorldPosition(int a2) {
   }
   RefreshShading(a2, false);
   v3 = a2 / GfxEngineSetup.iSizeOfMap;
-  if ( GfxEngineSetup.psMapElement[a2].iHeight > (unsigned int)(unsigned __int8)g_uMaxYTable[a2 / GfxEngineSetup.iSizeOfMap] )
+  if ( GfxEngineSetup.psMapElement[a2].iHeight > (unsigned int)g_uMaxYTable[a2 / GfxEngineSetup.iSizeOfMap] )
   {
     g_uMaxYTable[v3] = GfxEngineSetup.psMapElement[a2].iHeight;
   }
@@ -1250,7 +1247,7 @@ void  IGfxEngine::UpdateWorldPosition(int a2) {
 // Decompiled from void IGfxEngine::RenderCursor()
 void  IGfxEngine::RenderCursor(void) {
   
-  if ( D3DObjectPtr != 0 )
+  if ( D3DObjectPtr != nullptr )
   {
     CInterfaceD3D::BlitCursor(D3DObjectPtr);
   }
@@ -1264,9 +1261,9 @@ void  IGfxEngine::ConvertMapPositionToWorldScreenOffsets(int a2, int a3, float &
   int v5; // [esp+8h] [ebp-4h]
 
   v5 = 0;
-  if ( (a3 | a2) >= 0 && a2 < (int)MEMORY[0x3E2E29C] && a3 < (int)MEMORY[0x3E2E29C] && MEMORY[0x3E2E2A0] != 0 )
+  if ( (a3 | a2) >= 0 && a2 < GfxEngineSetup.iSizeOfMap && a3 < GfxEngineSetup.iSizeOfMap && GfxEngineSetup.psMapElement != nullptr )
   {
-    v5 = CalcStaticHeightOffset(MEMORY[0x3E2E2A0][a2 + MEMORY[0x3E2E29C] * a3].iHeight);
+    v5 = CalcStaticHeightOffset(GfxEngineSetup.psMapElement[a2 + GfxEngineSetup.iSizeOfMap * a3].iHeight);
   }
   *a5 = (float)((float)a3 * (float)(24.0 / 2.0)) - (float)v5;
   *a4 = (float)((float)a2 - (float)((float)a3 / 2.0)) * 24.0;
@@ -1280,9 +1277,9 @@ void  IGfxEngine::ConvertMapPositionToWorldScreenOffsets(int a1, int a2, int & a
   int v4; // [esp+8h] [ebp-4h]
 
   v4 = 0;
-  if ( (a1_4 | a1) >= 0 && a1 < (int)MEMORY[0x3E2E29C] && a1_4 < (int)MEMORY[0x3E2E29C] && MEMORY[0x3E2E2A0] != 0 )
+  if ( (a1_4 | a1) >= 0 && a1 < GfxEngineSetup.iSizeOfMap && a1_4 < GfxEngineSetup.iSizeOfMap && GfxEngineSetup.psMapElement != nullptr )
   {
-    v4 = CalcStaticHeightOffsetInt(MEMORY[0x3E2E2A0][a1 + MEMORY[0x3E2E29C] * a1_4].iHeight);
+    v4 = CalcStaticHeightOffsetInt(GfxEngineSetup.psMapElement[a1 + GfxEngineSetup.iSizeOfMap * a1_4].iHeight);
   }
   *a3 = 12 * a1_4 - v4;
   *a2 = 24 * (a1 - a1_4 / 2);
@@ -1293,7 +1290,7 @@ void  IGfxEngine::ConvertMapPositionToWorldScreenOffsets(int a1, int a2, int & a
 // Decompiled from bool __thiscall IGfxEngine::CanChangeGround(IGfxEngine *this, int a2, int a3, int a4)
 bool  IGfxEngine::CanChangeGround(int a2, int a3, int a4) {
   
-  return MEMORY[0x3E2E2A0] != 0 && CheckField(a2, a3, a2 + MEMORY[0x3E2E29C] * a3, a4);
+  return GfxEngineSetup.psMapElement != nullptr && CheckField(a2, a3, a2 + GfxEngineSetup.iSizeOfMap * a3, a4);
 }
 
 
@@ -1406,7 +1403,7 @@ void  IGfxEngine::SetFoggingRange(int a2, int a3) {
 // Decompiled from bool __thiscall IGfxEngine::IsInitialized(IGfxEngine *this)
 bool  IGfxEngine::IsInitialized(void) {
   
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) != 0 )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup) )
   {
     return HardwareIsRunning();
   }
@@ -1418,27 +1415,20 @@ bool  IGfxEngine::IsInitialized(void) {
 
 
 // address=[0x2f5c980]
-// Decompiled from char __thiscall IGfxEngine::IsHardwareEngine(IGfxEngine *this)
+// Decompiled from bool __thiscall IGfxEngine::IsHardwareEngine(IGfxEngine *this)
 bool  IGfxEngine::IsHardwareEngine(void) {
   
-  if ( this->m_bIsInitalized != 0 )
-  {
-    return SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup);
-  }
-  else
-  {
-    return 0;
-  }
+  return this->m_bIsInitalized != 0 && SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup);
 }
 
 
 // address=[0x2f5c9b0]
-// Decompiled from char __thiscall IGfxEngine::Use4444Palettes(IGfxEngine *this)
+// Decompiled from unsigned __int8 __thiscall IGfxEngine::Use4444Palettes(IGfxEngine *this)
 bool  IGfxEngine::Use4444Palettes(void) {
   
-  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) != 0 )
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup) )
   {
-    return MEMORY[0x3E2E30E];
+    return GfxEngineSetup.bHardwareObjects;
   }
   else
   {
@@ -1451,7 +1441,7 @@ bool  IGfxEngine::Use4444Palettes(void) {
 // Decompiled from bool __thiscall IGfxEngine::IsGuiMode(IGfxEngine *this)
 bool  IGfxEngine::IsGuiMode(void) {
   
-  return GfxEngineSetup.m_bGuiOnly;
+  return GfxEngineSetup.sRenderSetup.m_bGuiOnly;
 }
 
 
@@ -1459,11 +1449,11 @@ bool  IGfxEngine::IsGuiMode(void) {
 // Decompiled from char __thiscall IGfxEngine::IsGfxEngineRebuilded(IGfxEngine *this)
 bool  IGfxEngine::IsGfxEngineRebuilded(void) {
   
-  if ( !D3DObjectPtr )
+  if ( D3DObjectPtr == nullptr )
   {
     return 1;
   }
-  if ( !D3DObjectPtr->m_bEngineWasRebuilded )
+  if ( D3DObjectPtr->m_bEngineWasRebuilded == 0 )
   {
     return 0;
   }
@@ -1476,7 +1466,7 @@ bool  IGfxEngine::IsGfxEngineRebuilded(void) {
 // Decompiled from int __thiscall IGfxEngine::GetGfxMode(IGfxEngine *this)
 int  IGfxEngine::GetGfxMode(void) {
   
-  return MEMORY[0x3E2E2B8];
+  return GfxEngineSetup.iCurrentGfxMode;
 }
 
 
@@ -1486,7 +1476,7 @@ unsigned short __cdecl IGfxEngine::ConvertRgbToHicol(int _uR, int _uG, int _uB) 
   
   __int16 v3; // ax
 
-  if ( MEMORY[0x3E2E2B8] == 1 )
+  if ( GfxEngineSetup.iCurrentGfxMode == 1 )
   {
     v3 = 32 * (int)(float)((float)_uG * 0.12156863) + ((unsigned __int16)(int)(float)((float)_uR * 0.12156863) << 10);
   }
@@ -1502,7 +1492,7 @@ unsigned short __cdecl IGfxEngine::ConvertRgbToHicol(int _uR, int _uG, int _uB) 
 // Decompiled from int __thiscall IGfxEngine::GetOutputWidth(IGfxEngine *this)
 int  IGfxEngine::GetOutputWidth(void) {
   
-  return GfxEngineSetup.m_uWidth;
+  return GfxEngineSetup.sRenderSetup.m_uWidth;
 }
 
 
@@ -1510,7 +1500,7 @@ int  IGfxEngine::GetOutputWidth(void) {
 // Decompiled from int __thiscall IGfxEngine::GetOutputHeight(IGfxEngine *this)
 int  IGfxEngine::GetOutputHeight(void) {
   
-  return GfxEngineSetup.m_uHeight;
+  return GfxEngineSetup.sRenderSetup.m_uHeight;
 }
 
 
@@ -1521,7 +1511,7 @@ int  IGfxEngine::GetClosestMapPoint(int a2, int a3) {
   int v4; // [esp+0h] [ebp-Ch] BYREF
   int v5; // [esp+4h] [ebp-8h] BYREF
 
-  return SearchMapPoint(a2, a3, &v4, &v5, 0);
+  return SearchMapPoint(a2, a3, &v4, &v5, false);
 }
 
 
@@ -1529,7 +1519,7 @@ int  IGfxEngine::GetClosestMapPoint(int a2, int a3) {
 // Decompiled from size_t __thiscall IGfxEngine::GetClosestMapPoint(IGfxEngine *this, int a2, int a3, int *a4, int *a5)
 int  IGfxEngine::GetClosestMapPoint(int a2, int a3, int & a4, int & a5) {
   
-  return SearchMapPoint(a2, a3, a4, a5, 0);
+  return SearchMapPoint(a2, a3, a4, a5, false);
 }
 
 
@@ -1537,7 +1527,7 @@ int  IGfxEngine::GetClosestMapPoint(int a2, int a3, int & a4, int & a5) {
 // Decompiled from size_t __stdcall IGfxEngine::GetClosestMapPointOutsideMap(int a1, int a2, int *a3, int *a4)
 int  IGfxEngine::GetClosestMapPointOutsideMap(int a1, int a2, int & a3, int & a4) {
   
-  return SearchMapPoint(a1, a2, a3, a4, 1);
+  return SearchMapPoint(a1, a2, a3, a4, true);
 }
 
 
@@ -1545,12 +1535,12 @@ int  IGfxEngine::GetClosestMapPointOutsideMap(int a1, int a2, int & a3, int & a4
 // Decompiled from int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices(int a1, int a2, int *a3, int *a4)
 int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices(int a1, int a2, int & a3, int & a4) {
   
-  if ( (a2 | a1) < 0 || a1 >= (int)MEMORY[0x3E2E29C] || a2 >= (int)MEMORY[0x3E2E29C] )
+  if ( (a2 | a1) < 0 || a1 >= GfxEngineSetup.iSizeOfMap || a2 >= GfxEngineSetup.iSizeOfMap )
   {
     return 0;
   }
   ConvertMapIndexToScreenPosition(a1, a2, a3, a4);
-  if ( (*a4 | *a3) < 0 || *a3 >= GfxEngineSetup.m_uWidth || *a4 >= GfxEngineSetup.m_uHeight )
+  if ( (*a4 | *a3) < 0 || *a3 >= GfxEngineSetup.sRenderSetup.m_uWidth || *a4 >= GfxEngineSetup.sRenderSetup.m_uHeight )
   {
     return 1;
   }
@@ -1565,12 +1555,12 @@ int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices(int a1, int a2, int & a3, i
 // Decompiled from int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices_0(int a1, int *a2, int *a3)
 int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices(int a1, int & a2, int & a3) {
   
-  if ( a1 < 0 || a1 >= (int)(MEMORY[0x3E2E29C] * MEMORY[0x3E2E29C]) )
+  if ( a1 < 0 || a1 >= GfxEngineSetup.iSizeOfMap * GfxEngineSetup.iSizeOfMap )
   {
     return 0;
   }
-  ConvertMapIndexToScreenPosition(a1 % (int)MEMORY[0x3E2E29C], a1 / (int)MEMORY[0x3E2E29C], a2, a3);
-  if ( (*a3 | *a2) < 0 || *a2 >= GfxEngineSetup.m_uWidth || *a3 >= GfxEngineSetup.m_uHeight )
+  ConvertMapIndexToScreenPosition(a1 % GfxEngineSetup.iSizeOfMap, a1 / GfxEngineSetup.iSizeOfMap, a2, a3);
+  if ( (*a3 | *a2) < 0 || *a2 >= GfxEngineSetup.sRenderSetup.m_uWidth || *a3 >= GfxEngineSetup.sRenderSetup.m_uHeight )
   {
     return 1;
   }
@@ -1585,7 +1575,7 @@ int __cdecl IGfxEngine::GetScreenOffsetsByMapIndices(int a1, int & a2, int & a3)
 // Decompiled from double __thiscall IGfxEngine::GetCurrentZoomFactor(IGfxEngine *this)
 float  IGfxEngine::GetCurrentZoomFactor(void) {
   
-  return MEMORY[0x3E2E2F4];
+  return GfxEngineSetup.fZoomFactor;
 }
 
 
@@ -1625,24 +1615,24 @@ void  IGfxEngine::SetCursorShape(bool a2, int a3) {
     {
       if ( s_bCursorIsVisible == 0 )
       {
-        ShowCursor(1);
+        ShowCursor(true);
         s_bCursorIsVisible = 1;
       }
     }
     else if ( s_bCursorIsVisible != 0 )
     {
-      ShowCursor(0);
+      ShowCursor(false);
       s_bCursorIsVisible = 0;
     }
-    if ( s_hCursor != 0 )
+    if ( s_hCursor != nullptr )
     {
       SetCursor(s_hCursorHandles[a3]);
     }
     else
     {
-      s_hCursor = (LONG)SetCursor(s_hCursorHandles[a3]);
+      s_hCursor = SetCursor(s_hCursorHandles[a3]);
     }
-    SetClassLongA(GfxEngineSetup.m_hWnd, GCL_HCURSOR, (LONG)s_hCursorHandles[a3]);
+    SetClassLongA(GfxEngineSetup.sRenderSetup.m_hWnd, GCL_HCURSOR, (LONG)s_hCursorHandles[a3]);
     s_iCurrentCursor = a3;
   }
 }
@@ -1654,33 +1644,31 @@ void  IGfxEngine::FixCursor(bool a2, bool a3) {
   
   int CursorShape; // eax
   struct tagPOINT Point; // [esp+0h] [ebp-Ch] BYREF
-  IGfxEngine *v5; // [esp+8h] [ebp-4h]
 
-  v5 = this;
-  if ( D3DObjectPtr != 0 && (s_bCursorIsFixed == 0 || !a2) && (s_bCursorIsFixed != 0 || a2) )
+  if ( D3DObjectPtr != nullptr && (s_bCursorIsFixed == 0 || !a2) && (s_bCursorIsFixed != 0 || a2) )
   {
     if ( a2 )
     {
       GetCursorPos(&Point);
-      ScreenToClient(GfxEngineSetup.m_hWnd, &Point);
+      ScreenToClient(GfxEngineSetup.sRenderSetup.m_hWnd, &Point);
       if ( a3 )
       {
-        CFixCursor::SetFixCursor((CFixCursor *)&D3DObjectPtr[1].m_sViewport.dwY, Point.x, Point.y, 1);
+        CFixCursor::SetFixCursor(&D3DObjectPtr->m_cZoomCursor, Point.x, Point.y, true);
       }
       else
       {
-        CFixCursor::SetFixCursor((CFixCursor *)&D3DObjectPtr[1].m_sClipper1.m_vChar.uC, Point.x, Point.y, 1);
+        CFixCursor::SetFixCursor(&D3DObjectPtr->m_cMoveCursor, Point.x, Point.y, true);
       }
-      CursorShape = IGfxEngine::GetCursorShape(v5);
-      v5->m_uFixedCursorShape = CursorShape;
-      IGfxEngine::SetCursorShape(v5, 0, v5->m_uFixedCursorShape);
+      CursorShape = IGfxEngine::GetCursorShape(this);
+      this->m_uFixedCursorShape = CursorShape;
+      IGfxEngine::SetCursorShape(this, false, this->m_uFixedCursorShape);
       s_bCursorIsFixed = 1;
     }
     else
     {
-      IGfxEngine::SetCursorShape(v5, 1, v5->m_uFixedCursorShape);
-      CFixCursor::SetFixCursor((CFixCursor *)&D3DObjectPtr[1].m_sClipper1.m_vChar.uC, 0, 0, 0);
-      CFixCursor::SetFixCursor((CFixCursor *)&D3DObjectPtr[1].m_sViewport.dwY, 0, 0, 0);
+      IGfxEngine::SetCursorShape(this, true, this->m_uFixedCursorShape);
+      CFixCursor::SetFixCursor(&D3DObjectPtr->m_cMoveCursor, 0, 0, false);
+      CFixCursor::SetFixCursor(&D3DObjectPtr->m_cZoomCursor, 0, 0, false);
       s_bCursorIsFixed = 0;
     }
   }
@@ -1716,226 +1704,209 @@ bool  IGfxEngine::IsCursorFixed(void) {
 
 
 // address=[0x2f5fac0]
-// Decompiled from char __thiscall IGfxEngine::IsResolutionPossible(IGfxEngine *this, unsigned int a2)
+// Decompiled from bool __thiscall IGfxEngine::IsResolutionPossible(IGfxEngine *this, unsigned int a2)
 bool  IGfxEngine::IsResolutionPossible(int a2) {
   
-  int v2; // eax
+  bool iResult; // al
   int v4; // [esp+4h] [ebp-1A0h] BYREF
   _DWORD v5[2]; // [esp+8h] [ebp-19Ch] BYREF
   int v6; // [esp+10h] [ebp-194h] BYREF
   int v7; // [esp+14h] [ebp-190h]
   int v8; // [esp+18h] [ebp-18Ch]
-  unsigned __int64 v9; // [esp+1Ch] [ebp-188h]
-  _DWORD v10[95]; // [esp+24h] [ebp-180h] BYREF
+  unsigned __int64 dwVidMemTotal; // [esp+1Ch] [ebp-188h]
+  DDCAPS sDDCaps; // [esp+24h] [ebp-180h] BYREF
 
-  if ( a2 <= 4 )
+  if ( a2 > 4 )
   {
-    if ( D3DObjectPtr != 0 )
-    {
-      if ( D3DObjectPtr->m_pDDraw != 0 || D3DObjectPtr->m_bHardwareRuns != 0 || D3DObjectPtr->m_bSoftwareRuns != 0 )
-      {
-        v10[0] = 380;
-        v8 = D3DObjectPtr->m_pDDraw->lpVtbl->GetCaps(D3DObjectPtr->m_pDDraw, (LPDDCAPS)v10, 0);
-        if ( v8 != 0 )
-        {
-          WriteError(v8, "GetCapabilities");
-          LOBYTE(v2) = 0;
-        }
-        else
-        {
-          v6 = 16;
-          v8 = D3DObjectPtr->m_pPrimarySurface->GetBitDepth(D3DObjectPtr->m_pPrimarySurface, &v6);
-          v9 = v10[15];
-          if ( v8 != 0 )
-          {
-            WriteError(v8, "GetBitDepthWhileResChecking");
-            LOBYTE(v2) = 0;
-          }
-          else
-          {
-            v8 = D3DObjectPtr->m_pPrimarySurface->GetSurfaceSize(D3DObjectPtr->m_pPrimarySurface, v5, &v4);
-            if ( v8 != 0 )
-            {
-              WriteError(v8, "GetSurfaceSizeWhileResChecking");
-              LOBYTE(v2) = 0;
-            }
-            else
-            {
-              v9 += v4 * v5[0] * (v6 / 8);
-              v9 -= 810000LL;
-              v9 -= 155000LL;
-              if ( D3DObjectPtr->m_bHardwareRuns != 0 )
-              {
-                if ( BYTE1(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
-                {
-                  v9 -= 6080000LL;
-                }
-                else
-                {
-                  v9 -= 1520000LL;
-                }
-              }
-              v5[1] = a2;
-              switch ( a2 )
-              {
-                case 0u:
-                  v7 = 1843200;
-                  break;
-                case 1u:
-                  v7 = 2880000;
-                  break;
-                case 2u:
-                  v7 = 4718592;
-                  break;
-                case 3u:
-                  v7 = 7864320;
-                  break;
-                default:
-                  v7 = 11520000;
-                  break;
-              }
-              v9 -= v7;
-              if ( v9 >= 0xC350 )
-              {
-                if ( GfxEngineSetup.m_bUseDD3Interface )
-                {
-                  WriteError(v8, "Cannot use DD3");
-                  LOBYTE(v2) = 0;
-                }
-                else
-                {
-                  v8 = D3DObjectPtr->m_pDDraw7->lpVtbl->EnumDisplayModes(D3DObjectPtr->m_pDDraw7, 2, 0, 0, CInterfaceD3D::EnumModesCallback);
-                  if ( v8 != 0 )
-                  {
-                    WriteError(v8, "EnumeratingDisplayModes");
-                    LOBYTE(v2) = 0;
-                  }
-                  else
-                  {
-                    return D3DObjectPtr->m_bAvailableResolutions[a2];
-                  }
-                }
-              }
-              else
-              {
-                BBSupportTracePrintF(1, "GFX ENGINE: Not enough video memory for requested mode!");
-                LOBYTE(v2) = 0;
-              }
-            }
-          }
-        }
-      }
-      else
-      {
-        LOBYTE(v2) = 0;
-      }
-    }
-    else
-    {
-      LOBYTE(v2) = 0;
-    }
+    return false;
+  }
+  if ( D3DObjectPtr == nullptr )
+  {
+    return false;
+  }
+  if ( D3DObjectPtr->m_pDDraw == nullptr && D3DObjectPtr->m_bHardwareRuns == 0 && D3DObjectPtr->m_bSoftwareRuns == 0 )
+  {
+    return false;
+  }
+  sDDCaps.dwSize = 380;
+  v8 = D3DObjectPtr->m_pDDraw->lpVtbl->GetCaps(D3DObjectPtr->m_pDDraw, &sDDCaps, nullptr);
+  if ( v8 != 0 )
+  {
+    WriteError(v8, "GetCapabilities");
+    return false;
   }
   else
   {
-    LOBYTE(v2) = 0;
+    v6 = 16;
+    v8 = D3DObjectPtr->m_pPrimarySurface->GetBitDepth(D3DObjectPtr->m_pPrimarySurface, &v6);
+    dwVidMemTotal = sDDCaps.dwVidMemTotal;
+    if ( v8 != 0 )
+    {
+      WriteError(v8, "GetBitDepthWhileResChecking");
+      return false;
+    }
+    else
+    {
+      v8 = D3DObjectPtr->m_pPrimarySurface->GetSurfaceSize(D3DObjectPtr->m_pPrimarySurface, v5, &v4);
+      if ( v8 != 0 )
+      {
+        WriteError(v8, "GetSurfaceSizeWhileResChecking");
+        return false;
+      }
+      else
+      {
+        dwVidMemTotal += v4 * v5[0] * (v6 / 8);
+        dwVidMemTotal -= 810000LL;
+        dwVidMemTotal -= 155000LL;
+        if ( D3DObjectPtr->m_bHardwareRuns != 0 )
+        {
+          if ( D3DObjectPtr->m_bHiTextureQuality != 0 )
+          {
+            dwVidMemTotal -= 6080000LL;
+          }
+          else
+          {
+            dwVidMemTotal -= 1520000LL;
+          }
+        }
+        v5[1] = a2;
+        switch ( a2 )
+        {
+          case 0u:
+            v7 = 1843200;
+            break;
+          case 1u:
+            v7 = 2880000;
+            break;
+          case 2u:
+            v7 = 4718592;
+            break;
+          case 3u:
+            v7 = 7864320;
+            break;
+          default:
+            v7 = 11520000;
+            break;
+        }
+        dwVidMemTotal -= v7;
+        if ( dwVidMemTotal < 0xC350 )
+        {
+          BBSupportTracePrintF(1, "GFX ENGINE: Not enough video memory for requested mode!");
+          return false;
+        }
+        else if ( GfxEngineSetup.sRenderSetup.m_bUseDD3Interface )
+        {
+          WriteError(v8, "Cannot use DD3");
+          return false;
+        }
+        else
+        {
+          v8 = D3DObjectPtr->m_pDDraw7->lpVtbl->EnumDisplayModes(D3DObjectPtr->m_pDDraw7, 2, nullptr, nullptr, CInterfaceD3D::EnumModesCallback);
+          if ( v8 != 0 )
+          {
+            WriteError(v8, "EnumeratingDisplayModes");
+            return false;
+          }
+          else
+          {
+            *(_DWORD *)&iResult = D3DObjectPtr->m_bAvailableResolutions[a2];// Not actually cast...
+          }
+        }
+      }
+    }
   }
-  return v2;
+  return iResult;
 }
 
 
 // address=[0x2f5fe60]
-// Decompiled from char __thiscall IGfxEngine::CheckRenderConfiguration(IGfxEngine *this, struct SGfxRenderConfiguration a2)
-bool  IGfxEngine::CheckRenderConfiguration(struct SGfxRenderConfiguration a2) {
+// Decompiled from char __thiscall IGfxEngine::CheckRenderConfiguration(IGfxEngine *this, struct SGfxRenderConfiguration _sGfxRenderConfiguration)
+bool  IGfxEngine::CheckRenderConfiguration(struct SGfxRenderConfiguration _sGfxRenderConfiguration) {
   
   int v3; // [esp+4h] [ebp-19Ch] BYREF
   int v4; // [esp+8h] [ebp-198h] BYREF
   int v5; // [esp+Ch] [ebp-194h] BYREF
   int v7; // [esp+14h] [ebp-18Ch]
-  unsigned __int64 v8; // [esp+18h] [ebp-188h]
-  _DWORD v9[95]; // [esp+20h] [ebp-180h] BYREF
+  unsigned __int64 dwVidMemTotal; // [esp+18h] [ebp-188h]
+  DDCAPS sDDCaps; // [esp+20h] [ebp-180h] BYREF
 
-  CheckConfiguration(&a2);
-  if ( (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) == 0 || this->m_bHardwareRenderingPossible != 0) && (SGfxRenderConfiguration::IsHardwareLandscapeEngine(&a2) != 0 || this->m_bSoftwareRenderingPossible != 0) )
+  CheckConfiguration(&_sGfxRenderConfiguration);
+  if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&_sGfxRenderConfiguration) && this->m_bHardwareRenderingPossible == 0 || !SGfxRenderConfiguration::IsHardwareLandscapeEngine(&_sGfxRenderConfiguration) && this->m_bSoftwareRenderingPossible == 0 )
   {
-    if ( D3DObjectPtr != 0 )
+    BBSupportTracePrintF(1, "GFX ENGINE: The requested renderer is not available!");
+    return 0;
+  }
+  else if ( D3DObjectPtr != nullptr )
+  {
+    if ( D3DObjectPtr->m_pDDraw != nullptr || D3DObjectPtr->m_bHardwareRuns != 0 || D3DObjectPtr->m_bSoftwareRuns != 0 )
     {
-      if ( D3DObjectPtr->m_pDDraw != 0 || D3DObjectPtr->m_bHardwareRuns != 0 || D3DObjectPtr->m_bSoftwareRuns != 0 )
+      sDDCaps.dwSize = 380;
+      v7 = D3DObjectPtr->m_pDDraw->lpVtbl->GetCaps(D3DObjectPtr->m_pDDraw, &sDDCaps, nullptr);
+      if ( v7 != 0 )
       {
-        v9[0] = 380;
-        v7 = D3DObjectPtr->m_pDDraw->lpVtbl->GetCaps(D3DObjectPtr->m_pDDraw, (LPDDCAPS)v9, 0);
+        WriteError(v7, "GetCapabilities");
+        return 0;
+      }
+      else
+      {
+        v5 = 16;
+        v7 = D3DObjectPtr->m_pPrimarySurface->GetBitDepth(D3DObjectPtr->m_pPrimarySurface, &v5);
+        dwVidMemTotal = sDDCaps.dwVidMemTotal;
         if ( v7 != 0 )
         {
-          WriteError(v7, "GetCapabilities");
+          WriteError(v7, "GetBitDepthWhileResChecking");
           return 0;
         }
         else
         {
-          v5 = 16;
-          v7 = D3DObjectPtr->m_pPrimarySurface->GetBitDepth(D3DObjectPtr->m_pPrimarySurface, &v5);
-          v8 = v9[15];
+          v7 = D3DObjectPtr->m_pPrimarySurface->GetSurfaceSize(D3DObjectPtr->m_pPrimarySurface, &v4, &v3);
           if ( v7 != 0 )
           {
-            WriteError(v7, "GetBitDepthWhileResChecking");
+            WriteError(v7, "GetSurfaceSizeWhileResChecking");
             return 0;
           }
           else
           {
-            v7 = D3DObjectPtr->m_pPrimarySurface->GetSurfaceSize(D3DObjectPtr->m_pPrimarySurface, &v4, &v3);
-            if ( v7 != 0 )
+            dwVidMemTotal += v3 * v4 * (v5 / 8);
+            dwVidMemTotal -= 810000LL;
+            dwVidMemTotal -= 155000LL;
+            if ( D3DObjectPtr->m_bHardwareRuns != 0 )
             {
-              WriteError(v7, "GetSurfaceSizeWhileResChecking");
+              if ( D3DObjectPtr->m_bHiTextureQuality != 0 )
+              {
+                dwVidMemTotal -= 6080000LL;
+              }
+              else
+              {
+                dwVidMemTotal -= 1520000LL;
+              }
+            }
+            dwVidMemTotal -= 6 * _sGfxRenderConfiguration.m_uHeight * _sGfxRenderConfiguration.m_uWidth;
+            if ( dwVidMemTotal < 0xC350 )
+            {
+              BBSupportTracePrintF(1, "GFX ENGINE: Not enough video memory for requested mode!");
+              return 0;
+            }
+            else if ( GfxEngineSetup.sRenderSetup.m_bUseDD3Interface )
+            {
+              WriteError(v7, "Cannot use DD3");
               return 0;
             }
             else
             {
-              v8 += v3 * v4 * (v5 / 8);
-              v8 -= 810000LL;
-              v8 -= 155000LL;
-              if ( D3DObjectPtr->m_bHardwareRuns != 0 )
+              v7 = D3DObjectPtr->m_pDDraw7->lpVtbl->EnumDisplayModes(D3DObjectPtr->m_pDDraw7, 2, nullptr, nullptr, CInterfaceD3D::EnumModesCallback);
+              if ( v7 != 0 )
               {
-                if ( BYTE1(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
-                {
-                  v8 -= 6080000LL;
-                }
-                else
-                {
-                  v8 -= 1520000LL;
-                }
-              }
-              v8 -= 6 * a2.m_uHeight * a2.m_uWidth;
-              if ( v8 >= 0xC350 )
-              {
-                if ( GfxEngineSetup.m_bUseDD3Interface )
-                {
-                  WriteError(v7, "Cannot use DD3");
-                  return 0;
-                }
-                else
-                {
-                  v7 = D3DObjectPtr->m_pDDraw7->lpVtbl->EnumDisplayModes(D3DObjectPtr->m_pDDraw7, 2, 0, 0, CInterfaceD3D::EnumModesCallback);
-                  if ( v7 != 0 )
-                  {
-                    WriteError(v7, "EnumeratingDisplayModes");
-                    return 0;
-                  }
-                  else
-                  {
-                    return 1;
-                  }
-                }
+                WriteError(v7, "EnumeratingDisplayModes");
+                return 0;
               }
               else
               {
-                BBSupportTracePrintF(1, "GFX ENGINE: Not enough video memory for requested mode!");
-                return 0;
+                return 1;
               }
             }
           }
         }
-      }
-      else
-      {
-        return 0;
       }
     }
     else
@@ -1945,7 +1916,6 @@ bool  IGfxEngine::CheckRenderConfiguration(struct SGfxRenderConfiguration a2) {
   }
   else
   {
-    BBSupportTracePrintF(1, "GFX ENGINE: The requested renderer is not available!");
     return 0;
   }
 }
@@ -1955,7 +1925,7 @@ bool  IGfxEngine::CheckRenderConfiguration(struct SGfxRenderConfiguration a2) {
 // Decompiled from char __thiscall IGfxEngine::ShowFrame(IGfxEngine *this)
 bool  IGfxEngine::ShowFrame(void) {
   
-  if ( IsIconic(GfxEngineSetup.m_hWnd) )
+  if ( IsIconic(GfxEngineSetup.sRenderSetup.m_hWnd) )
   {
     return 1;
   }
@@ -1963,9 +1933,9 @@ bool  IGfxEngine::ShowFrame(void) {
   {
     return 1;
   }
-  if ( D3DObjectPtr != 0 )
+  if ( D3DObjectPtr != nullptr )
   {
-    if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
+    if ( D3DObjectPtr->m_bDisableRendering != 0 )
     {
       return 0;
     }
@@ -1983,19 +1953,19 @@ bool  IGfxEngine::ShowFrame(void) {
 
 
 // address=[0x2f60260]
-// Decompiled from char __thiscall IGfxEngine::SolidColorFillGuiSurface(IGfxEngine *this, int _iSurfaceType, unsigned __int8 a3, unsigned __int8 a4, unsigned __int8 a5)
-bool  IGfxEngine::SolidColorFillGuiSurface(int _iSurfaceType, unsigned char a3, unsigned char a4, unsigned char a5) {
+// Decompiled from char __thiscall IGfxEngine::SolidColorFillGuiSurface(IGfxEngine *this, unsigned int _iNumberOfGuiSurface, unsigned __int8 _uRed, unsigned __int8 _uGreen, unsigned __int8 _uBlue)
+bool  IGfxEngine::SolidColorFillGuiSurface(int _iNumberOfGuiSurface, unsigned char _uRed, unsigned char _uGreen, unsigned char _uBlue) {
   
   int v6; // [esp+8h] [ebp-14h]
 
-  if ( D3DObjectPtr == 0 || (unsigned int)_iSurfaceType >= 0xE )
+  if ( D3DObjectPtr == nullptr || _iNumberOfGuiSurface >= 0xE )
   {
     return 0;
   }
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[_iSurfaceType] == 0 )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[_iNumberOfGuiSurface] == nullptr )
   {
     return 0;
-  }
+  }                                             // static init
   if ( dword_468A558 > *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + _tls_index) + 20296) )
   {
     j___Init_thread_header(&dword_468A558);
@@ -2005,8 +1975,8 @@ bool  IGfxEngine::SolidColorFillGuiSurface(int _iSurfaceType, unsigned char a3, 
       j___Init_thread_footer(&dword_468A558);
     }
   }
-  CBlitFX::SetFillColor(&s_cSolidFillFX, a3, a4, a5, MEMORY[0x3E2E2B8] == 1);
-  v6 = D3DObjectPtr->m_pDDGuiSurfaces[_iSurfaceType]->ClearSurface(D3DObjectPtr->m_pDDGuiSurfaces[_iSurfaceType], (_BYTE *)&s_cSolidFillFX);
+  CBlitFX::SetFillColor(&s_cSolidFillFX, _uRed, _uGreen, _uBlue, GfxEngineSetup.iCurrentGfxMode == 1);
+  v6 = D3DObjectPtr->m_pDDGuiSurfaces[_iNumberOfGuiSurface]->ClearSurface(D3DObjectPtr->m_pDDGuiSurfaces[_iNumberOfGuiSurface], &s_cSolidFillFX);
   if ( v6 == 0 )
   {
     return 1;
@@ -2017,16 +1987,16 @@ bool  IGfxEngine::SolidColorFillGuiSurface(int _iSurfaceType, unsigned char a3, 
 
 
 // address=[0x2f603b0]
-// Decompiled from char __thiscall IGfxEngine::SolidColorFillGuiSurface(IGfxEngine *this, unsigned int a2, unsigned __int8 a3, unsigned __int8 a4, unsigned __int8 a5, struct tagRECT a6)
-bool  IGfxEngine::SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned char a4, unsigned char a5, struct tagRECT a6) {
+// Decompiled from char __thiscall IGfxEngine::SolidColorFillGuiSurface(IGfxEngine *this, unsigned int _iNumberOfGuiSurface, unsigned __int8 _uRed, unsigned __int8 _uGreen, unsigned __int8 _uBlue, struct tagRECT _sArea)
+bool  IGfxEngine::SolidColorFillGuiSurface(int _iNumberOfGuiSurface, unsigned char _uRed, unsigned char _uGreen, unsigned char _uBlue, struct tagRECT _sArea) {
   
   int v7; // [esp+8h] [ebp-14h]
 
-  if ( D3DObjectPtr == 0 || a2 >= 0xE )
+  if ( D3DObjectPtr == nullptr || _iNumberOfGuiSurface >= 0xE )
   {
     return 0;
   }
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == 0 )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[_iNumberOfGuiSurface] == nullptr )
   {
     return 0;
   }
@@ -2039,8 +2009,8 @@ bool  IGfxEngine::SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned ch
       j___Init_thread_footer(&dword_468A5D8);
     }
   }
-  CBlitFX::SetFillColor(&s_cSolidRectFillFX, a3, a4, a5, MEMORY[0x3E2E2B8] == 1);
-  v7 = D3DObjectPtr->m_pDDGuiSurfaces[a2]->ClearSurface_(D3DObjectPtr->m_pDDGuiSurfaces[a2], a6.left, a6.top, a6.right, a6.bottom, &s_cSolidRectFillFX);
+  CBlitFX::SetFillColor(&s_cSolidRectFillFX, _uRed, _uGreen, _uBlue, GfxEngineSetup.iCurrentGfxMode == 1);
+  v7 = D3DObjectPtr->m_pDDGuiSurfaces[_iNumberOfGuiSurface]->ClearSurface_(D3DObjectPtr->m_pDDGuiSurfaces[_iNumberOfGuiSurface], _sArea.left, _sArea.top, _sArea.right, _sArea.bottom, &s_cSolidRectFillFX);
   if ( v7 == 0 )
   {
     return 1;
@@ -2051,187 +2021,184 @@ bool  IGfxEngine::SolidColorFillGuiSurface(int a2, unsigned char a3, unsigned ch
 
 
 // address=[0x2f699c0]
-// Decompiled from char __thiscall IGfxEngine::RenderObject(IGfxEngine *this, int a2, int a3, struct SGfxObjectInfo *a4, int a5, int a6)
-bool  IGfxEngine::RenderObject(int a2, int a3, struct SGfxObjectInfo * a4, int a5, int a6) {
+// Decompiled from bool __thiscall IGfxEngine::RenderObject(IGfxEngine *this, int _iX, int _iY, SGfxObjectInfo *_pGfxObjectInfo, int _iSize, int _iLockMode)
+bool  IGfxEngine::RenderObject(int _iX, int _iY, struct SGfxObjectInfo * _pGfxObjectInfo, int _iSize, int _iLockMode) {
   
-  float v7; // [esp+4h] [ebp-14h]
+  float fZoomFactor; // [esp+4h] [ebp-14h]
   int v8; // [esp+8h] [ebp-10h]
-  int v9; // [esp+Ch] [ebp-Ch] BYREF
-  int v10; // [esp+10h] [ebp-8h] BYREF
+  int iScreenX; // [esp+Ch] [ebp-Ch] BYREF
+  int iScreenY; // [esp+10h] [ebp-8h] BYREF
   int v11; // [esp+14h] [ebp-4h]
 
-  if ( D3DObjectPtr == 0 || D3DObjectPtr->m_pFinalRenderSurface == 0 )
+  if ( D3DObjectPtr == nullptr || D3DObjectPtr->m_pFinalRenderSurface == nullptr )
   {
-    return 0;
+    return false;
   }
-  if ( a6 == 1 )
+  if ( _iLockMode == 1 )
   {
-    if ( byte_468DD14 != 0 )
+    if ( s_bLockFlag != 0 )
     {
-      return 0;
+      return false;
     }
     else
     {
-      v11 = D3DObjectPtr->m_pFinalRenderSurface->Lock(D3DObjectPtr->m_pFinalRenderSurface, &dword_468DD10, &dword_468DD0C, 1);
+      v11 = D3DObjectPtr->m_pFinalRenderSurface->Lock(D3DObjectPtr->m_pFinalRenderSurface, &uPitch, &pRenderAdress_0, 1u);
       if ( v11 != 0 )
       {
         WriteError(v11, "LockRenderSurfaceForEditor");
-        return 0;
+        return false;
       }
       else
       {
-        byte_468DD14 = 1;
-        return 1;
+        s_bLockFlag = 1;
+        return true;
       }
     }
   }
-  else if ( a6 == 2 )
+  else if ( _iLockMode == 2 )
   {
-    if ( byte_468DD14 != 0 )
+    if ( s_bLockFlag != 0 )
     {
-      v11 = ((int (__thiscall *)(CSurfaceV7 *, IGfxEngine *))D3DObjectPtr->m_pFinalRenderSurface->Unlock)(D3DObjectPtr->m_pFinalRenderSurface, this);
+      v11 = D3DObjectPtr->m_pFinalRenderSurface->Unlock(D3DObjectPtr->m_pFinalRenderSurface);
       if ( v11 != 0 )
       {
         WriteError(v11, "UnlockRenderSurfaceForEditor");
-        return 0;
+        return false;
       }
       else
       {
-        byte_468DD14 = 0;
+        s_bLockFlag = 0;
         AddGuiPatches();
-        return 1;
+        return true;
       }
     }
     else
     {
-      return 0;
+      return false;
     }
   }
-  else if ( byte_468DD14 != 0 )
+  else if ( s_bLockFlag != 0 )
   {
     v8 = *g_pZoomGradient;
-    v7 = MEMORY[0x3E2E2F4];
-    if ( a5 != 256 )
+    fZoomFactor = GfxEngineSetup.fZoomFactor;
+    if ( _iSize != 256 )
     {
-      *g_pZoomGradient *= a5 / 256;
-      MEMORY[0x3E2E2F4] = (float)(a5 / 256) * MEMORY[0x3E2E2F4];
+      *g_pZoomGradient *= _iSize / 256;
+      GfxEngineSetup.fZoomFactor = (float)(_iSize / 256) * GfxEngineSetup.fZoomFactor;
     }
-    g_pRenderAdress = dword_468DD0C;
-    g_pBeginOfRenderBuffer = dword_468DD0C;
-    g_iRenderPitch = dword_468DD10;
-    g_iScanlineLength = 2 * GfxEngineSetup.m_uWidth;
-    g_pEndOfRenderBuffer = 2 * GfxEngineSetup.m_uWidth + dword_468DD0C + dword_468DD10 * (GfxEngineSetup.m_uHeight - 1);
-    IGfxEngine::GetScreenOffsetsByMapIndices(a2, a3, &v9, &v10);
-    if ( a4->m_pLayerBlock != 0 )
+    g_pRenderAdress = pRenderAdress_0;
+    g_pBeginOfRenderBuffer = pRenderAdress_0;
+    g_iRenderPitch = uPitch;
+    g_iScanlineLength = 2 * GfxEngineSetup.sRenderSetup.m_uWidth;
+    g_pEndOfRenderBuffer = (char *)pRenderAdress_0 + 2 * GfxEngineSetup.sRenderSetup.m_uWidth + uPitch * (GfxEngineSetup.sRenderSetup.m_uHeight - 1);
+    IGfxEngine::GetScreenOffsetsByMapIndices(_iX, _iY, &iScreenX, &iScreenY);
+    if ( _pGfxObjectInfo->m_pLayerBlock != nullptr )
     {
-      if ( a4->m_uType == 1 )
+      if ( _pGfxObjectInfo->m_uType == 1 )
       {
-        BlitSettler(255, v9 << 16, v10 << 16, a4);
+        BlitSettler(255, iScreenX << 16, iScreenY << 16, _pGfxObjectInfo);
       }
       else
       {
-        BlitObject(255, v9 << 16, v10 << 16, a4);
+        BlitObject(255, iScreenX << 16, iScreenY << 16, _pGfxObjectInfo);
       }
       *g_pZoomGradient = v8;
-      MEMORY[0x3E2E2F4] = v7;
-      return 1;
+      GfxEngineSetup.fZoomFactor = fZoomFactor;
+      return true;
     }
     else
     {
-      return 0;
+      return false;
     }
   }
   else
   {
-    return 0;
+    return false;
   }
 }
 
 
 // address=[0x2f69c10]
-// Decompiled from char __thiscall IGfxEngine::RenderResource(IGfxEngine *this, int a2, int a3, void *a4, void *a5, void *a6, int a7)
-bool  IGfxEngine::RenderResource(int a2, int a3, void * a4, void * a5, void * a6, int a7) {
+// Decompiled from bool __thiscall IGfxEngine::RenderResource(IGfxEngine *this, int _iX, int _iY, void *_pPalette, void *_pResourceGfx, void *_pCounterGfx, int _iLockMode)
+bool  IGfxEngine::RenderResource(int _iX, int _iY, void * _pPalette, void * _pResourceGfx, void * _pCounterGfx, int _iLockMode) {
   
-  float v8; // [esp+4h] [ebp-2E8h]
+  float fZoomFactor; // [esp+4h] [ebp-2E8h]
   int v9; // [esp+8h] [ebp-2E4h]
-  int v10; // [esp+Ch] [ebp-2E0h] BYREF
-  int v11; // [esp+10h] [ebp-2DCh] BYREF
+  int iScreenX; // [esp+Ch] [ebp-2E0h] BYREF
+  int iScreenY; // [esp+10h] [ebp-2DCh] BYREF
   int v12; // [esp+14h] [ebp-2D8h]
-  void *v13; // [esp+18h] [ebp-2D4h] BYREF
-  void *v14; // [esp+1Ch] [ebp-2D0h]
-  char v15; // [esp+2Eh] [ebp-2BEh]
-  char v16; // [esp+2E2h] [ebp-Ah]
+  SGfxObjectInfo v13; // [esp+18h] [ebp-2D4h] BYREF
 
-  if ( a7 == 1 )
+  if ( _iLockMode == 1 )
   {
-    if ( byte_468DD08 == 0 && D3DObjectPtr->m_pFinalRenderSurface != 0 )
+    if ( s_bLockFlag_0 == 0 && D3DObjectPtr->m_pFinalRenderSurface != nullptr )
     {
-      v12 = D3DObjectPtr->m_pFinalRenderSurface->Lock(D3DObjectPtr->m_pFinalRenderSurface, &dword_468DD04, &dword_468DD00, 1);
+      v12 = D3DObjectPtr->m_pFinalRenderSurface->Lock(D3DObjectPtr->m_pFinalRenderSurface, &uPitch_0, &pRenderAdress, 1u);
       if ( v12 != 0 )
       {
         WriteError(v12, "LockRenderSurfaceForResources");
-        return 0;
+        return false;
       }
       else
       {
-        byte_468DD08 = 1;
-        return 1;
+        s_bLockFlag_0 = 1;
+        return true;
       }
     }
     else
     {
-      return 0;
+      return false;
     }
   }
-  else if ( a7 == 2 )
+  else if ( _iLockMode == 2 )
   {
-    if ( byte_468DD08 != 0 )
+    if ( s_bLockFlag_0 != 0 )
     {
-      v12 = ((int (__thiscall *)(CSurfaceV7 *, IGfxEngine *))D3DObjectPtr->m_pFinalRenderSurface->Unlock)(D3DObjectPtr->m_pFinalRenderSurface, this);
+      v12 = D3DObjectPtr->m_pFinalRenderSurface->Unlock(D3DObjectPtr->m_pFinalRenderSurface);
       if ( v12 != 0 )
       {
         WriteError(v12, "UnlockRenderSurfaceForResources");
-        return 0;
+        return false;
       }
       else
       {
-        byte_468DD08 = 0;
+        s_bLockFlag_0 = 0;
         AddGuiPatches();
-        return 1;
+        return true;
       }
     }
     else
     {
-      return 0;
+      return false;
     }
   }
-  else if ( byte_468DD08 != 0 )
+  else if ( s_bLockFlag_0 != 0 )
   {
     v9 = *g_pZoomGradient;
-    v8 = MEMORY[0x3E2E2F4];
+    fZoomFactor = GfxEngineSetup.fZoomFactor;
     *g_pZoomGradient = (int)(float)((float)*g_pZoomGradient * 0.75);
-    MEMORY[0x3E2E2F4] = MEMORY[0x3E2E2F4] * 0.75;
-    g_pRenderAdress = dword_468DD00;
-    g_pBeginOfRenderBuffer = dword_468DD00;
-    g_iRenderPitch = dword_468DD04;
-    g_iScanlineLength = 2 * GfxEngineSetup.m_uWidth;
-    g_pEndOfRenderBuffer = 2 * GfxEngineSetup.m_uWidth + dword_468DD00 + dword_468DD04 * (GfxEngineSetup.m_uHeight - 1);
-    IGfxEngine::GetScreenOffsetsByMapIndices(a2, a3, &v10, &v11);
-    v16 = 1;
-    v14 = a4;
-    v13 = a5;
-    v15 = 0;
-    BlitObject(255, v10 << 16, v11 << 16, (struct SGfxObjectInfo *)&v13);
-    v14 = (void *)g_pIconPalette;
-    v13 = a6;
-    BlitObject(255, (v10 + (int)(float)(5.0 * MEMORY[0x3E2E2F4])) << 16, v11 << 16, (struct SGfxObjectInfo *)&v13);
+    GfxEngineSetup.fZoomFactor = GfxEngineSetup.fZoomFactor * 0.75;
+    g_pRenderAdress = pRenderAdress;
+    g_pBeginOfRenderBuffer = pRenderAdress;
+    g_iRenderPitch = uPitch_0;
+    g_iScanlineLength = 2 * GfxEngineSetup.sRenderSetup.m_uWidth;
+    g_pEndOfRenderBuffer = (char *)pRenderAdress + 2 * GfxEngineSetup.sRenderSetup.m_uWidth + uPitch_0 * (GfxEngineSetup.sRenderSetup.m_uHeight - 1);
+    IGfxEngine::GetScreenOffsetsByMapIndices(_iX, _iY, &iScreenX, &iScreenY);
+    v13.m_bVisible = 1;
+    v13.m_pPaletteBlock = (char *)_pPalette;
+    v13.m_pLayerBlock = (UGfxData *)_pResourceGfx;
+    v13.m_uSelectionBlockIndex = 0;
+    BlitObject(255, iScreenX << 16, iScreenY << 16, &v13);
+    v13.m_pPaletteBlock = (char *)g_pIconPalette;
+    v13.m_pLayerBlock = (UGfxData *)_pCounterGfx;
+    BlitObject(255, (iScreenX + (int)(float)(5.0 * GfxEngineSetup.fZoomFactor)) << 16, iScreenY << 16, &v13);
     *g_pZoomGradient = v9;
-    MEMORY[0x3E2E2F4] = v8;
-    return 1;
+    GfxEngineSetup.fZoomFactor = fZoomFactor;
+    return true;
   }
   else
   {
-    return 0;
+    return false;
   }
 }
 
@@ -2265,10 +2232,10 @@ void  IGfxEngine::EnableDebugStringCallback(char * (__cdecl*)(void) a2) {
 int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * _psGuiSurfaceDescription) {
   
   int v4; // eax
-  CSurfaceV7 *pSurface; // [esp+18h] [ebp-1Ch]
+  int pSurface; // [esp+18h] [ebp-1Ch]
   IDirectDraw7 *m_pDDraw; // [esp+1Ch] [ebp-18h]
   int v7; // [esp+24h] [ebp-10h]
-  CSurfaceV7 *v8; // [esp+28h] [ebp-Ch]
+  CSurface *v8; // [esp+28h] [ebp-Ch]
   int v9; // [esp+2Ch] [ebp-8h]
   unsigned int i; // [esp+30h] [ebp-4h]
 
@@ -2276,7 +2243,7 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
   {
     return -1;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
+  if ( D3DObjectPtr->m_bDisableRendering != 0 )
   {
     return -1;
   }
@@ -2308,9 +2275,9 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
     {
       m_pDDraw = D3DObjectPtr->m_pDDraw7;
     }
-    v4 = j__abs(GfxEngineSetup.iCurrentGfxMode == (tagRECT *)1);
+    v4 = j__abs(GfxEngineSetup.iCurrentGfxMode == 1);
     pSurface = D3DObjectPtr->m_pDDGuiSurfaces[_iIndex]->CreateSurface(D3DObjectPtr->m_pDDGuiSurfaces[_iIndex], m_pDDraw, _psGuiSurfaceDescription->m_iWidth, _psGuiSurfaceDescription->m_iHeight, 1, 0, 0, v4, 0, 0, 0);
-    if ( pSurface != nullptr )
+    if ( pSurface != 0 )
     {
       v8 = D3DObjectPtr->m_pDDGuiSurfaces[_iIndex];
       if ( v8 != nullptr )
@@ -2318,7 +2285,7 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
         v8->dtor(v8, 1);
       }
       D3DObjectPtr->m_pDDGuiSurfaces[_iIndex] = nullptr;
-      WriteError((int)pSurface, "CreateGuiSurface:");
+      WriteError(pSurface, "CreateGuiSurface:");
       return -1;
     }
     else
@@ -2335,7 +2302,7 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
         if ( D3DObjectPtr->m_pDDGuiSurfaces[i] != nullptr )
         {
           ++v7;
-          v9 += 2 * stru_468DFA4[i].m_iWidth * g_pGuiSurfaceDescriptors[i].m_iWidth;
+          v9 += 2 * g_pGuiSurfaceDescriptors[i].m_iHeight * g_pGuiSurfaceDescriptors[i].m_iWidth;
         }
       }
       if ( CInterfaceD3D::GetGuiMemorySize(D3DObjectPtr) >= v9 )
@@ -2351,13 +2318,13 @@ int  IGfxEngine::CreateGuiSurface(int _iIndex, struct GFX_ENGINE_GUI_SURFACE_DES
 
 
 // address=[0x2f73220]
-// Decompiled from unsigned int __thiscall IGfxEngine::CreateGuiSurface(IGfxEngine *this, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *a2)
-int  IGfxEngine::CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a2) {
+// Decompiled from unsigned int __thiscall IGfxEngine::CreateGuiSurface(IGfxEngine *this, struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION *_psGuiSurfaceDescription)
+int  IGfxEngine::CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * _psGuiSurfaceDescription) {
   
   signed int v3; // [esp+4h] [ebp-8h]
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  if ( D3DObjectPtr == 0 )
+  if ( D3DObjectPtr == nullptr )
   {
     return -1;
   }
@@ -2366,7 +2333,7 @@ int  IGfxEngine::CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a2
         i < 0xE;
         ++i )
   {
-    if ( D3DObjectPtr->m_pDDGuiSurfaces[i] == 0 )
+    if ( D3DObjectPtr->m_pDDGuiSurfaces[i] == nullptr )
     {
       v3 = i;
       break;
@@ -2374,7 +2341,7 @@ int  IGfxEngine::CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a2
   }
   if ( v3 >= 0 )
   {
-    return IGfxEngine::CreateGuiSurface(this, v3, a2);
+    return IGfxEngine::CreateGuiSurface(this, v3, _psGuiSurfaceDescription);
   }
   else
   {
@@ -2387,47 +2354,47 @@ int  IGfxEngine::CreateGuiSurface(struct GFX_ENGINE_GUI_SURFACE_DESCRIPTION * a2
 // Decompiled from char __thiscall IGfxEngine::DestroyGuiSurface(IGfxEngine *this, unsigned int a2)
 bool  IGfxEngine::DestroyGuiSurface(int a2) {
   
-  if ( D3DObjectPtr == 0 || a2 >= 0xE )
+  if ( D3DObjectPtr == nullptr || a2 >= 0xE )
   {
     return 0;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
+  if ( D3DObjectPtr->m_bDisableRendering != 0 )
   {
     return 0;
   }
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == 0 )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == nullptr )
   {
     return 0;
   }
-  D3DObjectPtr->m_pDDGuiSurfaces[a2]->Release(D3DObjectPtr->m_pDDGuiSurfaces[a2], this);
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] != 0 )
+  D3DObjectPtr->m_pDDGuiSurfaces[a2]->Release(D3DObjectPtr->m_pDDGuiSurfaces[a2]);
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] != nullptr )
   {
     D3DObjectPtr->m_pDDGuiSurfaces[a2]->dtor(D3DObjectPtr->m_pDDGuiSurfaces[a2], 1);
   }
-  D3DObjectPtr->m_pDDGuiSurfaces[a2] = 0;
+  D3DObjectPtr->m_pDDGuiSurfaces[a2] = nullptr;
   g_bGuiSurfaceVisible[a2] = 0;
   return 1;
 }
 
 
 // address=[0x2f73390]
-// Decompiled from char __thiscall IGfxEngine::SetVisibilityOfGuiSurface(IGfxEngine *this, unsigned int a2, char a3)
+// Decompiled from bool __thiscall IGfxEngine::SetVisibilityOfGuiSurface(IGfxEngine *this, unsigned int a2, char a3)
 bool  IGfxEngine::SetVisibilityOfGuiSurface(int a2, bool a3) {
   
-  if ( !D3DObjectPtr || a2 >= 0xE )
+  if ( D3DObjectPtr == nullptr || a2 >= 0xE )
   {
-    return 0;
+    return false;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+  if ( D3DObjectPtr->m_bDisableRendering != 0 )
   {
-    return 0;
+    return false;
   }
-  if ( !D3DObjectPtr->m_pDDGuiSurfaces[a2] )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == nullptr )
   {
-    return 0;
+    return false;
   }
   g_bGuiSurfaceVisible[a2] = a3;
-  return 1;
+  return true;
 }
 
 
@@ -2435,34 +2402,34 @@ bool  IGfxEngine::SetVisibilityOfGuiSurface(int a2, bool a3) {
 // Decompiled from char __thiscall IGfxEngine::SetGuiSurfaceDestinationPosition(IGfxEngine *this, unsigned int a2, int a3, int a4)
 bool  IGfxEngine::SetGuiSurfaceDestinationPosition(int a2, int a3, int a4) {
   
-  if ( D3DObjectPtr == 0 || a2 >= 0xE )
+  if ( D3DObjectPtr == nullptr || a2 >= 0xE )
   {
     return 0;
   }
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == 0 )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == nullptr )
   {
     return 0;
   }
-  OffsetRect((LPRECT)((char *)&g_pGuiSurfaceDescriptors[0].m_sDestinationRect + 28 * a2), a3 - *(&g_pGuiSurfaceDescriptors[0].m_sDestinationRect.left + 7 * a2), a4 - *(&g_pGuiSurfaceDescriptors[0].m_sDestinationRect.top + 7 * a2));
+  OffsetRect(&g_pGuiSurfaceDescriptors[a2].m_sDestinationRect, a3 - g_pGuiSurfaceDescriptors[a2].m_sDestinationRect.left, a4 - g_pGuiSurfaceDescriptors[a2].m_sDestinationRect.top);
   ClipGuiSurface(a2);
   return 1;
 }
 
 
 // address=[0x2f73480]
-// Decompiled from char __thiscall IGfxEngine::SetGuiSurfaceDestinationRect(IGfxEngine *this, unsigned int a2, const struct tagRECT *a3)
-bool  IGfxEngine::SetGuiSurfaceDestinationRect(int a2, struct tagRECT const & a3) {
+// Decompiled from char __thiscall IGfxEngine::SetGuiSurfaceDestinationRect(IGfxEngine *this, unsigned int _iIndex, const struct tagRECT *_pDest)
+bool  IGfxEngine::SetGuiSurfaceDestinationRect(int _iIndex, struct tagRECT const & _pDest) {
   
-  if ( D3DObjectPtr == 0 || a2 >= 0xE )
+  if ( D3DObjectPtr == nullptr || _iIndex >= 0xE )
   {
     return 0;
   }
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == 0 )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[_iIndex] == nullptr )
   {
     return 0;
   }
-  *(struct tagRECT *)(&stru_468DFA4[0].m_iHeight + 7 * a2) = *a3;
-  ClipGuiSurface(a2);
+  g_pGuiSurfaceDescriptors[_iIndex].m_sDestinationRect = *_pDest;
+  ClipGuiSurface(_iIndex);
   return 1;
 }
 
@@ -2471,20 +2438,20 @@ bool  IGfxEngine::SetGuiSurfaceDestinationRect(int a2, struct tagRECT const & a3
 // Decompiled from bool IGfxEngine::GetGuiSurfaceDestinationRect(int a1, struct tagRECT *a2)
 bool  IGfxEngine::GetGuiSurfaceDestinationRect(int a1, struct tagRECT & a2) {
   
-  if ( !D3DObjectPtr || (unsigned int)a1 >= 0xE )
+  if ( D3DObjectPtr == nullptr || (unsigned int)a1 >= 0xE )
   {
-    return 0;
+    return false;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) )
+  if ( D3DObjectPtr->m_bDisableRendering != 0 )
   {
-    return 0;
+    return false;
   }
-  if ( !D3DObjectPtr->m_pDDGuiSurfaces[a1] )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[a1] == nullptr )
   {
-    return 0;
+    return false;
   }
-  *a2 = *(struct tagRECT *)&stru_468DFA4[a1].m_iHeight;
-  return 1;
+  *a2 = g_pGuiSurfaceDescriptors[a1].m_sDestinationRect;
+  return true;
 }
 
 
@@ -2496,63 +2463,63 @@ bool  IGfxEngine::GetGuiSurfaceDescription(int a2, struct GFX_ENGINE_GUI_SURFACE
   {
     return 0;
   }
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == 0 )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == nullptr )
   {
     return 0;
   }
-  qmemcpy(a3, (char *)g_pGuiSurfaceDescriptors + 28 * a2, 0x1Cu);
+  *a3 = g_pGuiSurfaceDescriptors[a2];
   return 1;
 }
 
 
 // address=[0x2f735c0]
-// Decompiled from unsigned __int16 *__thiscall IGfxEngine::BeginWriteToSurface(IGfxEngine *this, unsigned int a2, unsigned int *a3)
-unsigned short *  IGfxEngine::BeginWriteToSurface(int a2, unsigned int & a3) {
+// Decompiled from unsigned __int16 *__thiscall IGfxEngine::BeginWriteToSurface(IGfxEngine *this, unsigned int a2, unsigned int *iPitch)
+unsigned short *  IGfxEngine::BeginWriteToSurface(int a2, unsigned int & iPitch) {
   
-  unsigned __int16 *v4; // [esp+8h] [ebp-Ch] BYREF
+  void *pSurfaceData; // [esp+8h] [ebp-Ch] BYREF
   int v5; // [esp+Ch] [ebp-8h]
   unsigned int i; // [esp+10h] [ebp-4h]
 
-  if ( D3DObjectPtr == 0 || a2 >= 0xE )
+  if ( D3DObjectPtr == nullptr || a2 >= 0xE )
   {
-    return 0;
+    return nullptr;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
+  if ( D3DObjectPtr->m_bDisableRendering != 0 )
   {
-    return 0;
+    return nullptr;
   }
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == 0 )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == nullptr )
   {
-    return 0;
+    return nullptr;
   }
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2]->IsLost(D3DObjectPtr->m_pDDGuiSurfaces[a2]) == -2005532222 )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2]->IsLost(D3DObjectPtr->m_pDDGuiSurfaces[a2]) == DDERR_SURFACELOST )
   {
     for ( i = 0;
           i < 0xE;
           ++i )
     {
-      if ( D3DObjectPtr->m_pDDGuiSurfaces[i] != 0 && D3DObjectPtr->m_pDDGuiSurfaces[i]->IsLost(D3DObjectPtr->m_pDDGuiSurfaces[i]) == -2005532222 )
+      if ( D3DObjectPtr->m_pDDGuiSurfaces[i] != nullptr && D3DObjectPtr->m_pDDGuiSurfaces[i]->IsLost(D3DObjectPtr->m_pDDGuiSurfaces[i]) == DDERR_SURFACELOST )
       {
-        v5 = D3DObjectPtr->m_pDDGuiSurfaces[i]->Restore(D3DObjectPtr->m_pDDGuiSurfaces[i]);
+        v5 = D3DObjectPtr->m_pDDGuiSurfaces[i]->Restore((CSurfaceV7 *)D3DObjectPtr->m_pDDGuiSurfaces[i]);
         if ( v5 != 0 )
         {
           WriteError(v5, "RestoreGuiSurface");
           BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
-          LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
-          return 0;
+          D3DObjectPtr->m_bDisableRendering = 1;
+          return nullptr;
         }
       }
     }
     D3DObjectPtr->m_bEngineWasRebuilded = 1;
   }
-  v5 = D3DObjectPtr->m_pDDGuiSurfaces[a2]->Lock(D3DObjectPtr->m_pDDGuiSurfaces[a2], (int *)a3, (int *)&v4, 1);
+  v5 = D3DObjectPtr->m_pDDGuiSurfaces[a2]->Lock(D3DObjectPtr->m_pDDGuiSurfaces[a2], iPitch, &pSurfaceData, 1u);
   if ( v5 != 0 )
   {
-    return 0;
+    return nullptr;
   }
   else
   {
-    return v4;
+    return (unsigned __int16 *)pSurfaceData;
   }
 }
 
@@ -2561,41 +2528,41 @@ unsigned short *  IGfxEngine::BeginWriteToSurface(int a2, unsigned int & a3) {
 // Decompiled from char __thiscall IGfxEngine::EndWriteToSurface(IGfxEngine *this, unsigned int a2)
 bool  IGfxEngine::EndWriteToSurface(int a2) {
   
-  if ( D3DObjectPtr == 0 || a2 >= 0xE )
+  if ( D3DObjectPtr == nullptr || a2 >= 0xE )
   {
     return 0;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
+  if ( D3DObjectPtr->m_bDisableRendering != 0 )
   {
     return 0;
   }
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == 0 )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == nullptr )
   {
     return 0;
   }
-  ((void (__thiscall *)(CSurfaceV7 *, IGfxEngine *))D3DObjectPtr->m_pDDGuiSurfaces[a2]->Unlock)(D3DObjectPtr->m_pDDGuiSurfaces[a2], this);
+  D3DObjectPtr->m_pDDGuiSurfaces[a2]->Unlock(D3DObjectPtr->m_pDDGuiSurfaces[a2]);
   return 1;
 }
 
 
 // address=[0x2f737f0]
-// Decompiled from char __thiscall IGfxEngine::GetGuiSurfaceDC(IGfxEngine *this, unsigned int a2, HDC *a3)
+// Decompiled from bool __thiscall IGfxEngine::GetGuiSurfaceDC(IGfxEngine *this, unsigned int a2, HDC *a3)
 bool  IGfxEngine::GetGuiSurfaceDC(int a2, struct HDC__ * * a3) {
   
   int v4; // [esp+4h] [ebp-8h]
   unsigned int i; // [esp+8h] [ebp-4h]
 
-  if ( D3DObjectPtr == 0 || a2 >= 0xE )
+  if ( D3DObjectPtr == nullptr || a2 >= 0xE )
   {
-    return 0;
+    return false;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
+  if ( D3DObjectPtr->m_bDisableRendering != 0 )
   {
-    return 0;
+    return false;
   }
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == 0 )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] == nullptr )
   {
-    return 0;
+    return false;
   }
   if ( D3DObjectPtr->m_pDDGuiSurfaces[a2]->IsLost(D3DObjectPtr->m_pDDGuiSurfaces[a2]) == -2005532222 )
   {
@@ -2603,22 +2570,22 @@ bool  IGfxEngine::GetGuiSurfaceDC(int a2, struct HDC__ * * a3) {
           i < 0xE;
           ++i )
     {
-      if ( D3DObjectPtr->m_pDDGuiSurfaces[i] != 0 && D3DObjectPtr->m_pDDGuiSurfaces[i]->IsLost(D3DObjectPtr->m_pDDGuiSurfaces[i]) == -2005532222 )
+      if ( D3DObjectPtr->m_pDDGuiSurfaces[i] != nullptr && D3DObjectPtr->m_pDDGuiSurfaces[i]->IsLost(D3DObjectPtr->m_pDDGuiSurfaces[i]) == -2005532222 )
       {
         v4 = D3DObjectPtr->m_pDDGuiSurfaces[i]->Restore(D3DObjectPtr->m_pDDGuiSurfaces[i]);
         if ( v4 != 0 )
         {
           WriteError(v4, "RestoreGuiSurface");
           BBSupportTracePrintF(0, "GFX ENGINE: Problem with gui surfaces! Stop rendering...");
-          LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) = 1;
-          return 0;
+          D3DObjectPtr->m_bDisableRendering = 1;
+          return false;
         }
       }
     }
     D3DObjectPtr->m_bEngineWasRebuilded = 1;
   }
   D3DObjectPtr->m_pDDGuiSurfaces[a2]->GetDC(D3DObjectPtr->m_pDDGuiSurfaces[a2], a3);
-  return 1;
+  return true;
 }
 
 
@@ -2626,19 +2593,19 @@ bool  IGfxEngine::GetGuiSurfaceDC(int a2, struct HDC__ * * a3) {
 // Decompiled from bool __thiscall IGfxEngine::ReleaseGuiSurfaceDC(IGfxEngine *this, unsigned int a2, HDC a3)
 bool  IGfxEngine::ReleaseGuiSurfaceDC(int a2, struct HDC__ * a3) {
   
-  if ( D3DObjectPtr == 0 || a2 >= 0xE )
+  if ( D3DObjectPtr == nullptr || a2 >= 0xE )
   {
-    return 0;
+    return false;
   }
-  if ( LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
+  if ( D3DObjectPtr->m_bDisableRendering != 0 )
   {
-    return 0;
+    return false;
   }
-  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] != 0 )
+  if ( D3DObjectPtr->m_pDDGuiSurfaces[a2] != nullptr )
   {
     return D3DObjectPtr->m_pDDGuiSurfaces[a2]->ReleaseDC(D3DObjectPtr->m_pDDGuiSurfaces[a2], a3) == 0;
   }
-  return 0;
+  return false;
 }
 
 
@@ -2651,17 +2618,17 @@ bool  IGfxEngine::SetGuiSurfaceClipRect(struct tagRECT const & _rRect) {
   SurfaceClipper *v5; // eax
   struct IDirectDraw7 *m_pDDraw; // [esp-4h] [ebp-14h]
   char v7[4]; // [esp+0h] [ebp-10h] BYREF
-  int v8; // [esp+4h] [ebp-Ch]
+  struct std::unique_ptr<class SurfaceClipper, struct std::default_delete<class SurfaceClipper>> *v8; // [esp+4h] [ebp-Ch]
   HRESULT inited; // [esp+Ch] [ebp-4h]
 
-  if ( D3DObjectPtr == 0 || LOBYTE(D3DObjectPtr[1].m_sClipper1.m_vChar.u8) != 0 )
+  if ( D3DObjectPtr == nullptr || D3DObjectPtr->m_bDisableRendering != 0 )
   {
     return 0;
   }
-  v8 = ((int (__cdecl *)(char *))std::make_unique<SurfaceClipper,>)(v7);
-  std::unique_ptr<SurfaceClipper>::operator=(v8);
+  v8 = (struct std::unique_ptr<class SurfaceClipper, struct std::default_delete<class SurfaceClipper>> *)std::make_unique<SurfaceClipper,>(v7);
+  std::unique_ptr<SurfaceClipper>::operator=((std::unique_ptr<class SurfaceClipper, struct std::default_delete<class SurfaceClipper>> *)&this->m_pSurfaceClipper, v8);
   std::unique_ptr<SurfaceClipper>::~unique_ptr<SurfaceClipper>(v7);
-  if ( GfxEngineSetup.m_bUseDD3Interface )
+  if ( GfxEngineSetup.sRenderSetup.m_bUseDD3Interface )
   {
     m_pDDraw = D3DObjectPtr->m_pDDraw;
   }
@@ -2771,11 +2738,9 @@ bool  IGfxEngine::IsSoftwareRenderingAvailable(void) {
   CInterfaceD3D *v7; // [esp+64h] [ebp-1Ch]
   CInterfaceD3D *v8; // [esp+68h] [ebp-18h]
   void *C; // [esp+6Ch] [ebp-14h]
-  IGfxEngine *v10; // [esp+70h] [ebp-10h]
   int v11; // [esp+7Ch] [ebp-4h]
   SGfxRenderConfiguration sRenderSetup; // 0:^14.36
 
-  v10 = this;
   if ( D3DObjectPtr != nullptr && (D3DObjectPtr->m_bHardwareRuns != 0 || D3DObjectPtr->m_bSoftwareRuns != 0) )
   {
     return false;
@@ -2794,12 +2759,12 @@ bool  IGfxEngine::IsSoftwareRenderingAvailable(void) {
   {
     if ( g_pDirectDraw != nullptr )
     {
-      v10->m_bV3Available = 0;
+      this->m_bV3Available = 0;
     }
     else
     {
       IsInterface3Available = CInterfaceD3D::IsInterface3Available(D3DObjectPtr, sRenderSetup.m_hWnd);
-      v10->m_bV3Available = IsInterface3Available;
+      this->m_bV3Available = IsInterface3Available;
     }
     v5 = D3DObjectPtr;
     v7 = D3DObjectPtr;
@@ -2813,7 +2778,7 @@ bool  IGfxEngine::IsSoftwareRenderingAvailable(void) {
     }
     D3DObjectPtr = nullptr;
     GfxEngineSetup.sRenderSetup = sRenderSetup;
-    return v10->m_bV3Available == 0;
+    return this->m_bV3Available == 0;
   }
   else
   {
@@ -2833,7 +2798,11 @@ bool  IGfxEngine::SetRenderEnvironment(void) {
   char inited; // [esp+23h] [ebp-Dh]
   char v6; // [esp+23h] [ebp-Dh]
 
-  if ( D3DObjectPtr != nullptr )
+  if ( D3DObjectPtr == nullptr )
+  {
+    BBSupportTracePrintF(1, "GFX ENGINE: Engine is not initialized!");
+  }
+  else
   {
     delete D3DObjectPtr;
     C = (CInterfaceD3D *)operator new(0x794u);
@@ -2851,7 +2820,7 @@ bool  IGfxEngine::SetRenderEnvironment(void) {
       BBSupportTracePrintF(1, "GFX ENGINE: Couldn't create gfx engine interface object!");
       return 0;
     }
-    if ( GfxEngineSetup.m_bUseDD3Interface )
+    if ( GfxEngineSetup.sRenderSetup.m_bUseDD3Interface )
     {
       inited = CInterfaceD3D::InitCommonV3(D3DObjectPtr);
     }
@@ -2864,11 +2833,11 @@ bool  IGfxEngine::SetRenderEnvironment(void) {
     {
       return 0;
     }
-    if ( GfxEngineSetup.m_bGuiOnly )
+    if ( GfxEngineSetup.sRenderSetup.m_bGuiOnly )
     {
       return 1;
     }
-    if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup) != 0 )
+    if ( SGfxRenderConfiguration::IsHardwareLandscapeEngine(&GfxEngineSetup.sRenderSetup) )
     {
       v6 = CInterfaceD3D::InitHardware(D3DObjectPtr);
     }
@@ -2884,10 +2853,6 @@ bool  IGfxEngine::SetRenderEnvironment(void) {
     {
       return 0;
     }
-  }
-  else
-  {
-    BBSupportTracePrintF(1, "GFX ENGINE: Engine is not initialized!");
   }
   InitGradientTable();
   IGfxEngine::SetCursorShape(this, true, 0);

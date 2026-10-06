@@ -34,33 +34,33 @@ class CGameState * __cdecl CStateCredits::DynamicCreateFunc(void * a1) {
 
 
 // address=[0x14a41e0]
-// Decompiled from void __thiscall CStateCredits::~CStateCredits(CGuiGameState *this)
+// Decompiled from CGameState *__thiscall CStateCredits::~CStateCredits(CGuiGameState *this)
  CStateCredits::~CStateCredits(void) {
   
   this->__vftable = (CGuiGameState_vtbl *)&CStateCredits::_vftable_;
-  IGuiEngine::EnableEventInput(g_pGUIEngine, 1);
-  if ( g_pSoundManager != 0 )
+  IGuiEngine::EnableEventInput(g_pGUIEngine, true);
+  if ( g_pSoundManager != nullptr )
   {
     CSoundManager::StopMusic(g_pSoundManager);
   }
-  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 15) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 90, "bRet") == 1 )
+  if ( IGuiEngine::CloseDialog(g_pGUIEngine, 15) == 0 && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 90, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 16) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 92, "bRet") == 1 )
+  if ( IGuiEngine::CloseDialog(g_pGUIEngine, 16) == 0 && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 92, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 17) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 94, "bRet") == 1 )
+  if ( IGuiEngine::CloseDialog(g_pGUIEngine, 17) == 0 && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 94, "bRet") == 1 )
   {
     __debugbreak();
   }
-  if ( !IGuiEngine::CloseDialog(g_pGUIEngine, 14) && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 96, "bRet") == 1 )
+  if ( IGuiEngine::CloseDialog(g_pGUIEngine, 14) == 0 && BBSupportDbgReport(2, "main\\states\\StateCredits.cpp", 96, "bRet") == 1 )
   {
     __debugbreak();
   }
   sub_14A45D0();
-  CGuiGameState::~CGuiGameState(this);
+  return CGuiGameState::~CGuiGameState(this);
 }
 
 
